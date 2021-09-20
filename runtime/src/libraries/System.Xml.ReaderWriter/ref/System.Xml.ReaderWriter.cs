@@ -208,13 +208,15 @@ namespace System.Xml
         public override System.Xml.XmlNode? InsertAfter(
             System.Xml.XmlNode newChild,
             System.Xml.XmlNode? refChild
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Xml.XmlNode? InsertBefore(
             System.Xml.XmlNode newChild,
             System.Xml.XmlNode? refChild
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Xml.XmlNode? PrependChild(System.Xml.XmlNode newChild)
@@ -228,7 +230,8 @@ namespace System.Xml
         public override System.Xml.XmlNode ReplaceChild(
             System.Xml.XmlNode newChild,
             System.Xml.XmlNode oldChild
-        ) {
+        )
+        {
             throw null;
         }
         public override void WriteContentTo(System.Xml.XmlWriter w) { }
@@ -275,13 +278,15 @@ namespace System.Xml
         public System.Xml.XmlAttribute InsertAfter(
             System.Xml.XmlAttribute newNode,
             System.Xml.XmlAttribute? refNode
-        ) {
+        )
+        {
             throw null;
         }
         public System.Xml.XmlAttribute InsertBefore(
             System.Xml.XmlAttribute newNode,
             System.Xml.XmlAttribute? refNode
-        ) {
+        )
+        {
             throw null;
         }
         public System.Xml.XmlAttribute Prepend(System.Xml.XmlAttribute node)
@@ -467,7 +472,8 @@ namespace System.Xml
         public static System.DateTime ToDateTime(
             string s,
             System.Xml.XmlDateTimeSerializationMode dateTimeOption
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DateTimeOffset ToDateTimeOffset(string s)
@@ -541,7 +547,8 @@ namespace System.Xml
         public static string ToString(
             System.DateTime value,
             System.Xml.XmlDateTimeSerializationMode dateTimeOption
-        ) {
+        )
+        {
             throw null;
         }
         public static string ToString(System.DateTimeOffset value)
@@ -836,7 +843,8 @@ namespace System.Xml
             string? prefix,
             string localName,
             string? namespaceURI
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Xml.XmlCDataSection CreateCDataSection(string? data)
@@ -851,7 +859,8 @@ namespace System.Xml
             string? prefix,
             string localName,
             string? namespaceURI
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Xml.XmlDocumentFragment CreateDocumentFragment()
@@ -863,7 +872,8 @@ namespace System.Xml
             string? publicId,
             string? systemId,
             string? internalSubset
-        ) {
+        )
+        {
             throw null;
         }
         public System.Xml.XmlElement CreateElement(string name)
@@ -878,7 +888,8 @@ namespace System.Xml
             string? prefix,
             string localName,
             string? namespaceURI
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Xml.XmlEntityReference CreateEntityReference(string name)
@@ -891,21 +902,24 @@ namespace System.Xml
         }
         protected internal virtual System.Xml.XPath.XPathNavigator? CreateNavigator(
             System.Xml.XmlNode node
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Xml.XmlNode CreateNode(
             string nodeTypeString,
             string name,
             string? namespaceURI
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Xml.XmlNode CreateNode(
             System.Xml.XmlNodeType type,
             string name,
             string? namespaceURI
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Xml.XmlNode CreateNode(
@@ -913,13 +927,15 @@ namespace System.Xml
             string? prefix,
             string name,
             string? namespaceURI
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Xml.XmlProcessingInstruction CreateProcessingInstruction(
             string target,
             string data
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Xml.XmlSignificantWhitespace CreateSignificantWhitespace(string? text)
@@ -938,7 +954,8 @@ namespace System.Xml
             string version,
             string? encoding,
             string? standalone
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Xml.XmlElement? GetElementById(string elementId)
@@ -952,7 +969,8 @@ namespace System.Xml
         public virtual System.Xml.XmlNodeList GetElementsByTagName(
             string localName,
             string namespaceURI
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Xml.XmlNode ImportNode(System.Xml.XmlNode node, bool deep)
@@ -1154,7 +1172,8 @@ namespace System.Xml
         public virtual System.Xml.XmlAttribute? GetAttributeNode(
             string localName,
             string? namespaceURI
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Xml.XmlNodeList GetElementsByTagName(string name)
@@ -1164,7 +1183,8 @@ namespace System.Xml
         public virtual System.Xml.XmlNodeList GetElementsByTagName(
             string localName,
             string namespaceURI
-        ) {
+        )
+        {
             throw null;
         }
         public virtual bool HasAttribute(string name)
@@ -1186,7 +1206,8 @@ namespace System.Xml
         public virtual System.Xml.XmlAttribute? RemoveAttributeNode(
             string localName,
             string? namespaceURI
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Xml.XmlAttribute? RemoveAttributeNode(System.Xml.XmlAttribute oldAttr)
@@ -1202,7 +1223,8 @@ namespace System.Xml
         public virtual System.Xml.XmlAttribute SetAttributeNode(
             string localName,
             string? namespaceURI
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Xml.XmlAttribute? SetAttributeNode(System.Xml.XmlAttribute newAttr)
@@ -1420,7 +1442,8 @@ namespace System.Xml
         }
         public virtual System.Collections.Generic.IDictionary<string, string> GetNamespacesInScope(
             System.Xml.XmlNamespaceScope scope
-        ) {
+        )
+        {
             throw null;
         }
         public virtual bool HasNamespace(string prefix)
@@ -1582,13 +1605,15 @@ namespace System.Xml
         public virtual System.Xml.XmlNode? InsertAfter(
             System.Xml.XmlNode newChild,
             System.Xml.XmlNode? refChild
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Xml.XmlNode? InsertBefore(
             System.Xml.XmlNode newChild,
             System.Xml.XmlNode? refChild
-        ) {
+        )
+        {
             throw null;
         }
         public virtual void Normalize() { }
@@ -1604,7 +1629,8 @@ namespace System.Xml
         public virtual System.Xml.XmlNode ReplaceChild(
             System.Xml.XmlNode newChild,
             System.Xml.XmlNode oldChild
-        ) {
+        )
+        {
             throw null;
         }
         public System.Xml.XmlNodeList? SelectNodes(string xpath)
@@ -1614,7 +1640,8 @@ namespace System.Xml
         public System.Xml.XmlNodeList? SelectNodes(
             string xpath,
             System.Xml.XmlNamespaceManager nsmgr
-        ) {
+        )
+        {
             throw null;
         }
         public System.Xml.XmlNode? SelectSingleNode(string xpath)
@@ -1624,7 +1651,8 @@ namespace System.Xml
         public System.Xml.XmlNode? SelectSingleNode(
             string xpath,
             System.Xml.XmlNamespaceManager nsmgr
-        ) {
+        )
+        {
             throw null;
         }
         public virtual bool Supports(string feature, string version)
@@ -1866,9 +1894,8 @@ namespace System.Xml
         System.Collections.Generic.IDictionary<
             string,
             string
-        > System.Xml.IXmlNamespaceResolver.GetNamespacesInScope(
-            System.Xml.XmlNamespaceScope scope
-        ) {
+        > System.Xml.IXmlNamespaceResolver.GetNamespacesInScope(System.Xml.XmlNamespaceScope scope)
+        {
             throw null;
         }
         string System.Xml.IXmlNamespaceResolver.LookupNamespace(string prefix)
@@ -2112,7 +2139,8 @@ namespace System.Xml
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? other
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -2122,13 +2150,15 @@ namespace System.Xml
         public static bool operator ==(
             System.Xml.XmlQualifiedName? a,
             System.Xml.XmlQualifiedName? b
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Xml.XmlQualifiedName? a,
             System.Xml.XmlQualifiedName? b
-        ) {
+        )
+        {
             throw null;
         }
         public override string ToString()
@@ -2229,21 +2259,24 @@ namespace System.Xml
         public static System.Xml.XmlReader Create(
             System.IO.Stream input,
             System.Xml.XmlReaderSettings? settings
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.XmlReader Create(
             System.IO.Stream input,
             System.Xml.XmlReaderSettings? settings,
             string? baseUri
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.XmlReader Create(
             System.IO.Stream input,
             System.Xml.XmlReaderSettings? settings,
             System.Xml.XmlParserContext? inputContext
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.XmlReader Create(System.IO.TextReader input)
@@ -2253,21 +2286,24 @@ namespace System.Xml
         public static System.Xml.XmlReader Create(
             System.IO.TextReader input,
             System.Xml.XmlReaderSettings? settings
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.XmlReader Create(
             System.IO.TextReader input,
             System.Xml.XmlReaderSettings? settings,
             string? baseUri
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.XmlReader Create(
             System.IO.TextReader input,
             System.Xml.XmlReaderSettings? settings,
             System.Xml.XmlParserContext? inputContext
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.XmlReader Create(string inputUri)
@@ -2277,20 +2313,23 @@ namespace System.Xml
         public static System.Xml.XmlReader Create(
             string inputUri,
             System.Xml.XmlReaderSettings? settings
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.XmlReader Create(
             string inputUri,
             System.Xml.XmlReaderSettings? settings,
             System.Xml.XmlParserContext? inputContext
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.XmlReader Create(
             System.Xml.XmlReader reader,
             System.Xml.XmlReaderSettings? settings
-        ) {
+        )
+        {
             throw null;
         }
         public void Dispose() { }
@@ -2347,14 +2386,16 @@ namespace System.Xml
         public virtual object ReadContentAs(
             System.Type returnType,
             System.Xml.IXmlNamespaceResolver? namespaceResolver
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.DebuggerStepThroughAttribute]
         public virtual System.Threading.Tasks.Task<object> ReadContentAsAsync(
             System.Type returnType,
             System.Xml.IXmlNamespaceResolver? namespaceResolver
-        ) {
+        )
+        {
             throw null;
         }
         public virtual int ReadContentAsBase64(byte[] buffer, int index, int count)
@@ -2365,7 +2406,8 @@ namespace System.Xml
             byte[] buffer,
             int index,
             int count
-        ) {
+        )
+        {
             throw null;
         }
         public virtual int ReadContentAsBinHex(byte[] buffer, int index, int count)
@@ -2376,7 +2418,8 @@ namespace System.Xml
             byte[] buffer,
             int index,
             int count
-        ) {
+        )
+        {
             throw null;
         }
         public virtual bool ReadContentAsBoolean()
@@ -2431,7 +2474,8 @@ namespace System.Xml
         public virtual object ReadElementContentAs(
             System.Type returnType,
             System.Xml.IXmlNamespaceResolver namespaceResolver
-        ) {
+        )
+        {
             throw null;
         }
         public virtual object ReadElementContentAs(
@@ -2439,14 +2483,16 @@ namespace System.Xml
             System.Xml.IXmlNamespaceResolver namespaceResolver,
             string localName,
             string namespaceURI
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.DebuggerStepThroughAttribute]
         public virtual System.Threading.Tasks.Task<object> ReadElementContentAsAsync(
             System.Type returnType,
             System.Xml.IXmlNamespaceResolver namespaceResolver
-        ) {
+        )
+        {
             throw null;
         }
         public virtual int ReadElementContentAsBase64(byte[] buffer, int index, int count)
@@ -2457,7 +2503,8 @@ namespace System.Xml
             byte[] buffer,
             int index,
             int count
-        ) {
+        )
+        {
             throw null;
         }
         public virtual int ReadElementContentAsBinHex(byte[] buffer, int index, int count)
@@ -2468,7 +2515,8 @@ namespace System.Xml
             byte[] buffer,
             int index,
             int count
-        ) {
+        )
+        {
             throw null;
         }
         public virtual bool ReadElementContentAsBoolean()
@@ -2486,7 +2534,8 @@ namespace System.Xml
         public virtual System.DateTime ReadElementContentAsDateTime(
             string localName,
             string namespaceURI
-        ) {
+        )
+        {
             throw null;
         }
         public virtual decimal ReadElementContentAsDecimal()
@@ -2641,7 +2690,8 @@ namespace System.Xml
             char[] buffer,
             int index,
             int count
-        ) {
+        )
+        {
             throw null;
         }
         public abstract void ResolveEntity();
@@ -2771,7 +2821,8 @@ namespace System.Xml
             System.Uri absoluteUri,
             string? role,
             System.Type? ofObjectToReturn
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Uri ResolveUri(System.Uri? baseUri, string? relativeUri)
@@ -2794,14 +2845,16 @@ namespace System.Xml
             System.Uri absoluteUri,
             string? role,
             System.Type? ofObjectToReturn
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Threading.Tasks.Task<object> GetEntityAsync(
             System.Uri absoluteUri,
             string? role,
             System.Type? ofObjectToReturn
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Uri ResolveUri(System.Uri? baseUri, string? relativeUri)
@@ -2811,10 +2864,8 @@ namespace System.Xml
     }
     public partial class XmlSignificantWhitespace : System.Xml.XmlCharacterData
     {
-        protected internal XmlSignificantWhitespace(
-            string? strData,
-            System.Xml.XmlDocument doc
-        ) : base(default(string), default(System.Xml.XmlDocument)) { }
+        protected internal XmlSignificantWhitespace(string? strData, System.Xml.XmlDocument doc)
+            : base(default(string), default(System.Xml.XmlDocument)) { }
         public override string LocalName
         {
             get { throw null; }
@@ -3069,7 +3120,8 @@ namespace System.Xml
         }
         public System.Collections.Generic.IDictionary<string, string> GetNamespacesInScope(
             System.Xml.XmlNamespaceScope scope
-        ) {
+        )
+        {
             throw null;
         }
         public System.IO.TextReader GetRemainder()
@@ -3151,9 +3203,8 @@ namespace System.Xml
         System.Collections.Generic.IDictionary<
             string,
             string
-        > System.Xml.IXmlNamespaceResolver.GetNamespacesInScope(
-            System.Xml.XmlNamespaceScope scope
-        ) {
+        > System.Xml.IXmlNamespaceResolver.GetNamespacesInScope(System.Xml.XmlNamespaceScope scope)
+        {
             throw null;
         }
         string? System.Xml.IXmlNamespaceResolver.LookupNamespace(string prefix)
@@ -3288,14 +3339,16 @@ namespace System.Xml
             System.Uri absoluteUri,
             string? role,
             System.Type? ofObjectToReturn
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Threading.Tasks.Task<object> GetEntityAsync(
             System.Uri absoluteUri,
             string? role,
             System.Type? ofObjectToReturn
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Uri ResolveUri(System.Uri? baseUri, string? relativeUri)
@@ -3528,9 +3581,8 @@ namespace System.Xml
         System.Collections.Generic.IDictionary<
             string,
             string
-        > System.Xml.IXmlNamespaceResolver.GetNamespacesInScope(
-            System.Xml.XmlNamespaceScope scope
-        ) {
+        > System.Xml.IXmlNamespaceResolver.GetNamespacesInScope(System.Xml.XmlNamespaceScope scope)
+        {
             throw null;
         }
         string System.Xml.IXmlNamespaceResolver.LookupNamespace(string prefix)
@@ -3602,7 +3654,8 @@ namespace System.Xml
         public static System.Xml.XmlWriter Create(
             System.IO.Stream output,
             System.Xml.XmlWriterSettings? settings
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.XmlWriter Create(System.IO.TextWriter output)
@@ -3612,7 +3665,8 @@ namespace System.Xml
         public static System.Xml.XmlWriter Create(
             System.IO.TextWriter output,
             System.Xml.XmlWriterSettings? settings
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.XmlWriter Create(string outputFileName)
@@ -3622,7 +3676,8 @@ namespace System.Xml
         public static System.Xml.XmlWriter Create(
             string outputFileName,
             System.Xml.XmlWriterSettings? settings
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.XmlWriter Create(System.Text.StringBuilder output)
@@ -3632,7 +3687,8 @@ namespace System.Xml
         public static System.Xml.XmlWriter Create(
             System.Text.StringBuilder output,
             System.Xml.XmlWriterSettings? settings
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.XmlWriter Create(System.Xml.XmlWriter output)
@@ -3642,7 +3698,8 @@ namespace System.Xml
         public static System.Xml.XmlWriter Create(
             System.Xml.XmlWriter output,
             System.Xml.XmlWriterSettings? settings
-        ) {
+        )
+        {
             throw null;
         }
         public void Dispose() { }
@@ -3658,7 +3715,8 @@ namespace System.Xml
         public virtual System.Threading.Tasks.Task WriteAttributesAsync(
             System.Xml.XmlReader reader,
             bool defattr
-        ) {
+        )
+        {
             throw null;
         }
         public void WriteAttributeString(string localName, string? value) { }
@@ -3674,7 +3732,8 @@ namespace System.Xml
             string localName,
             string? ns,
             string? value
-        ) {
+        )
+        {
             throw null;
         }
         public abstract void WriteBase64(byte[] buffer, int index, int count);
@@ -3682,7 +3741,8 @@ namespace System.Xml
             byte[] buffer,
             int index,
             int count
-        ) {
+        )
+        {
             throw null;
         }
         public virtual void WriteBinHex(byte[] buffer, int index, int count) { }
@@ -3690,7 +3750,8 @@ namespace System.Xml
             byte[] buffer,
             int index,
             int count
-        ) {
+        )
+        {
             throw null;
         }
         public abstract void WriteCData(string? text);
@@ -3708,7 +3769,8 @@ namespace System.Xml
             char[] buffer,
             int index,
             int count
-        ) {
+        )
+        {
             throw null;
         }
         public abstract void WriteComment(string? text);
@@ -3727,7 +3789,8 @@ namespace System.Xml
             string? pubid,
             string? sysid,
             string? subset
-        ) {
+        )
+        {
             throw null;
         }
         public void WriteElementString(string localName, string? value) { }
@@ -3744,7 +3807,8 @@ namespace System.Xml
             string localName,
             string? ns,
             string value
-        ) {
+        )
+        {
             throw null;
         }
         public abstract void WriteEndAttribute();
@@ -3787,21 +3851,24 @@ namespace System.Xml
         public virtual System.Threading.Tasks.Task WriteNodeAsync(
             System.Xml.XmlReader reader,
             bool defattr
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.DebuggerStepThroughAttribute]
         public virtual System.Threading.Tasks.Task WriteNodeAsync(
             System.Xml.XPath.XPathNavigator navigator,
             bool defattr
-        ) {
+        )
+        {
             throw null;
         }
         public abstract void WriteProcessingInstruction(string name, string? text);
         public virtual System.Threading.Tasks.Task WriteProcessingInstructionAsync(
             string name,
             string? text
-        ) {
+        )
+        {
             throw null;
         }
         public virtual void WriteQualifiedName(string localName, string? ns) { }
@@ -3809,7 +3876,8 @@ namespace System.Xml
         public virtual System.Threading.Tasks.Task WriteQualifiedNameAsync(
             string localName,
             string? ns
-        ) {
+        )
+        {
             throw null;
         }
         public abstract void WriteRaw(char[] buffer, int index, int count);
@@ -3818,7 +3886,8 @@ namespace System.Xml
             char[] buffer,
             int index,
             int count
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Threading.Tasks.Task WriteRawAsync(string data)
@@ -3832,7 +3901,8 @@ namespace System.Xml
             string? prefix,
             string localName,
             string? ns
-        ) {
+        )
+        {
             throw null;
         }
         public abstract void WriteStartDocument();
@@ -3852,7 +3922,8 @@ namespace System.Xml
             string? prefix,
             string localName,
             string? ns
-        ) {
+        )
+        {
             throw null;
         }
         public abstract void WriteString(string? text);
@@ -3864,7 +3935,8 @@ namespace System.Xml
         public virtual System.Threading.Tasks.Task WriteSurrogateCharEntityAsync(
             char lowChar,
             char highChar
-        ) {
+        )
+        {
             throw null;
         }
         public virtual void WriteValue(bool value) { }
@@ -4015,14 +4087,16 @@ namespace System.Xml.Resolvers
             System.Uri absoluteUri,
             string? role,
             System.Type? ofObjectToReturn
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Threading.Tasks.Task<object> GetEntityAsync(
             System.Uri absoluteUri,
             string? role,
             System.Type? ofObjectToReturn
-        ) {
+        )
+        {
             throw null;
         }
         public void Remove(System.Uri uri) { }
@@ -4126,7 +4200,8 @@ namespace System.Xml.Schema
         public override object ValueAs(
             System.Type type,
             System.Xml.IXmlNamespaceResolver? nsResolver
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -4296,19 +4371,22 @@ namespace System.Xml.Schema
         public static System.Xml.Schema.XmlSchema? Read(
             System.IO.Stream stream,
             System.Xml.Schema.ValidationEventHandler? validationEventHandler
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.Schema.XmlSchema? Read(
             System.IO.TextReader reader,
             System.Xml.Schema.ValidationEventHandler? validationEventHandler
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.Schema.XmlSchema? Read(
             System.Xml.XmlReader reader,
             System.Xml.Schema.ValidationEventHandler? validationEventHandler
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -4666,7 +4744,8 @@ namespace System.Xml.Schema
             string? ns,
             System.Xml.XmlReader reader,
             System.Xml.XmlResolver? resolver
-        ) {
+        )
+        {
             throw null;
         }
         public System.Xml.Schema.XmlSchema? Add(System.Xml.Schema.XmlSchema schema)
@@ -4676,7 +4755,8 @@ namespace System.Xml.Schema
         public System.Xml.Schema.XmlSchema? Add(
             System.Xml.Schema.XmlSchema schema,
             System.Xml.XmlResolver? resolver
-        ) {
+        )
+        {
             throw null;
         }
         public void Add(System.Xml.Schema.XmlSchemaCollection schema) { }
@@ -5003,7 +5083,8 @@ namespace System.Xml.Schema
             object value,
             System.Type targetType,
             System.Xml.IXmlNamespaceResolver namespaceResolver
-        ) {
+        )
+        {
             throw null;
         }
         public virtual bool IsDerivedFrom(System.Xml.Schema.XmlSchemaDatatype datatype)
@@ -5447,7 +5528,8 @@ namespace System.Xml.Schema
         public System.Xml.Schema.XmlSchemaSet InferSchema(
             System.Xml.XmlReader instanceDocument,
             System.Xml.Schema.XmlSchemaSet schemas
-        ) {
+        )
+        {
             throw null;
         }
         public enum InferenceOption
@@ -5857,7 +5939,8 @@ namespace System.Xml.Schema
         public System.Xml.Schema.XmlSchema? Add(
             string? targetNamespace,
             System.Xml.XmlReader schemaDocument
-        ) {
+        )
+        {
             throw null;
         }
         public System.Xml.Schema.XmlSchema? Add(System.Xml.Schema.XmlSchema schema)
@@ -6243,22 +6326,26 @@ namespace System.Xml.Schema
         }
         public static System.Xml.Schema.XmlSchemaComplexType? GetBuiltInComplexType(
             System.Xml.Schema.XmlTypeCode typeCode
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.Schema.XmlSchemaComplexType? GetBuiltInComplexType(
             System.Xml.XmlQualifiedName qualifiedName
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.Schema.XmlSchemaSimpleType GetBuiltInSimpleType(
             System.Xml.Schema.XmlTypeCode typeCode
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.Schema.XmlSchemaSimpleType? GetBuiltInSimpleType(
             System.Xml.XmlQualifiedName qualifiedName
-        ) {
+        )
+        {
             throw null;
         }
         public static bool IsDerivedFrom(
@@ -6267,7 +6354,8 @@ namespace System.Xml.Schema
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 System.Xml.Schema.XmlSchemaType? baseType,
             System.Xml.Schema.XmlSchemaDerivationMethod except
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -6376,7 +6464,8 @@ namespace System.Xml.Schema
             string namespaceUri,
             string attributeValue,
             System.Xml.Schema.XmlSchemaInfo? schemaInfo
-        ) {
+        )
+        {
             throw null;
         }
         public object? ValidateAttribute(
@@ -6384,7 +6473,8 @@ namespace System.Xml.Schema
             string namespaceUri,
             System.Xml.Schema.XmlValueGetter attributeValue,
             System.Xml.Schema.XmlSchemaInfo? schemaInfo
-        ) {
+        )
+        {
             throw null;
         }
         public void ValidateElement(
@@ -6408,7 +6498,8 @@ namespace System.Xml.Schema
         public object? ValidateEndElement(
             System.Xml.Schema.XmlSchemaInfo? schemaInfo,
             object typedValue
-        ) {
+        )
+        {
             throw null;
         }
         public void ValidateEndOfAttributes(System.Xml.Schema.XmlSchemaInfo? schemaInfo) { }
@@ -6810,7 +6901,8 @@ namespace System.Xml.XPath
         public static System.Xml.XPath.XPathExpression Compile(
             string xpath,
             System.Xml.IXmlNamespaceResolver? nsResolver
-        ) {
+        )
+        {
             throw null;
         }
         public abstract void SetContext(System.Xml.IXmlNamespaceResolver? nsResolver);
@@ -6949,7 +7041,8 @@ namespace System.Xml.XPath
         public virtual bool CheckValidity(
             System.Xml.Schema.XmlSchemaSet schemas,
             System.Xml.Schema.ValidationEventHandler validationEventHandler
-        ) {
+        )
+        {
             throw null;
         }
         public abstract System.Xml.XPath.XPathNavigator Clone();
@@ -6992,7 +7085,8 @@ namespace System.Xml.XPath
         public virtual object Evaluate(
             System.Xml.XPath.XPathExpression expr,
             System.Xml.XPath.XPathNodeIterator? context
-        ) {
+        )
+        {
             throw null;
         }
         public virtual string GetAttribute(string localName, string namespaceURI)
@@ -7005,7 +7099,8 @@ namespace System.Xml.XPath
         }
         public virtual System.Collections.Generic.IDictionary<string, string> GetNamespacesInScope(
             System.Xml.XmlNamespaceScope scope
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Xml.XmlWriter InsertAfter()
@@ -7037,7 +7132,8 @@ namespace System.Xml.XPath
         public virtual bool IsDescendant(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 System.Xml.XPath.XPathNavigator? nav
-        ) {
+        )
+        {
             throw null;
         }
         public abstract bool IsSamePosition(System.Xml.XPath.XPathNavigator other);
@@ -7091,7 +7187,8 @@ namespace System.Xml.XPath
             string localName,
             string namespaceURI,
             System.Xml.XPath.XPathNavigator? end
-        ) {
+        )
+        {
             throw null;
         }
         public virtual bool MoveToFollowing(System.Xml.XPath.XPathNodeType type)
@@ -7101,7 +7198,8 @@ namespace System.Xml.XPath
         public virtual bool MoveToFollowing(
             System.Xml.XPath.XPathNodeType type,
             System.Xml.XPath.XPathNavigator? end
-        ) {
+        )
+        {
             throw null;
         }
         public abstract bool MoveToId(string id);
@@ -7148,7 +7246,8 @@ namespace System.Xml.XPath
         }
         public virtual System.Xml.XmlWriter ReplaceRange(
             System.Xml.XPath.XPathNavigator lastSiblingToReplace
-        ) {
+        )
+        {
             throw null;
         }
         public virtual void ReplaceSelf(string newNode) { }
@@ -7161,49 +7260,57 @@ namespace System.Xml.XPath
         public virtual System.Xml.XPath.XPathNodeIterator Select(
             string xpath,
             System.Xml.IXmlNamespaceResolver? resolver
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Xml.XPath.XPathNodeIterator Select(
             System.Xml.XPath.XPathExpression expr
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Xml.XPath.XPathNodeIterator SelectAncestors(
             string name,
             string namespaceURI,
             bool matchSelf
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Xml.XPath.XPathNodeIterator SelectAncestors(
             System.Xml.XPath.XPathNodeType type,
             bool matchSelf
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Xml.XPath.XPathNodeIterator SelectChildren(
             string name,
             string namespaceURI
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Xml.XPath.XPathNodeIterator SelectChildren(
             System.Xml.XPath.XPathNodeType type
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Xml.XPath.XPathNodeIterator SelectDescendants(
             string name,
             string namespaceURI,
             bool matchSelf
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Xml.XPath.XPathNodeIterator SelectDescendants(
             System.Xml.XPath.XPathNodeType type,
             bool matchSelf
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Xml.XPath.XPathNavigator? SelectSingleNode(string xpath)
@@ -7213,12 +7320,14 @@ namespace System.Xml.XPath
         public virtual System.Xml.XPath.XPathNavigator? SelectSingleNode(
             string xpath,
             System.Xml.IXmlNamespaceResolver? resolver
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Xml.XPath.XPathNavigator? SelectSingleNode(
             System.Xml.XPath.XPathExpression expression
-        ) {
+        )
+        {
             throw null;
         }
         public virtual void SetTypedValue(object typedValue) { }
@@ -7234,7 +7343,8 @@ namespace System.Xml.XPath
         public override object ValueAs(
             System.Type returnType,
             System.Xml.IXmlNamespaceResolver? nsResolver
-        ) {
+        )
+        {
             throw null;
         }
         public virtual void WriteSubtree(System.Xml.XmlWriter writer) { }
@@ -7553,7 +7663,8 @@ namespace System.Xml.Xsl
         public System.Xml.XmlReader Transform(
             System.Xml.XPath.IXPathNavigable input,
             System.Xml.Xsl.XsltArgumentList? args
-        ) {
+        )
+        {
             throw null;
         }
         public void Transform(
@@ -7582,7 +7693,8 @@ namespace System.Xml.Xsl
             System.Xml.XPath.IXPathNavigable input,
             System.Xml.Xsl.XsltArgumentList? args,
             System.Xml.XmlResolver? resolver
-        ) {
+        )
+        {
             throw null;
         }
         public void Transform(
@@ -7599,7 +7711,8 @@ namespace System.Xml.Xsl
         public System.Xml.XmlReader Transform(
             System.Xml.XPath.XPathNavigator input,
             System.Xml.Xsl.XsltArgumentList? args
-        ) {
+        )
+        {
             throw null;
         }
         public void Transform(
@@ -7628,7 +7741,8 @@ namespace System.Xml.Xsl
             System.Xml.XPath.XPathNavigator input,
             System.Xml.Xsl.XsltArgumentList? args,
             System.Xml.XmlResolver? resolver
-        ) {
+        )
+        {
             throw null;
         }
         public void Transform(

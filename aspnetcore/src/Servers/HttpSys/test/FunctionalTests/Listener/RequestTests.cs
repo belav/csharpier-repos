@@ -150,7 +150,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
             string address,
             string path,
             string method = "GET"
-        ) {
+        )
+        {
             var uri = new Uri(address);
             StringBuilder builder = new StringBuilder();
             builder.AppendLine($"{method} {path} HTTP/1.1");

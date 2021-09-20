@@ -31,7 +31,8 @@ namespace Microsoft.AspNetCore.Mvc.Diagnostics
             IReadOnlyDictionary<string, object> arguments,
             HandlerMethodDescriptor handlerMethodDescriptor,
             object instance
-        ) {
+        )
+        {
             ActionContext = actionContext;
             Arguments = arguments;
             HandlerMethodDescriptor = handlerMethodDescriptor;
@@ -101,7 +102,8 @@ namespace Microsoft.AspNetCore.Mvc.Diagnostics
             HandlerMethodDescriptor handlerMethodDescriptor,
             object instance,
             IActionResult result
-        ) {
+        )
+        {
             ActionContext = actionContext;
             Arguments = arguments;
             HandlerMethodDescriptor = handlerMethodDescriptor;
@@ -174,7 +176,8 @@ namespace Microsoft.AspNetCore.Mvc.Diagnostics
             CompiledPageActionDescriptor actionDescriptor,
             PageHandlerExecutingContext handlerExecutionContext,
             IAsyncPageFilter filter
-        ) {
+        )
+        {
             ActionDescriptor = actionDescriptor;
             HandlerExecutionContext = handlerExecutionContext;
             Filter = filter;
@@ -233,7 +236,8 @@ namespace Microsoft.AspNetCore.Mvc.Diagnostics
             CompiledPageActionDescriptor actionDescriptor,
             PageHandlerExecutedContext handlerExecutedContext,
             IAsyncPageFilter filter
-        ) {
+        )
+        {
             ActionDescriptor = actionDescriptor;
             HandlerExecutedContext = handlerExecutedContext;
             Filter = filter;
@@ -292,7 +296,8 @@ namespace Microsoft.AspNetCore.Mvc.Diagnostics
             CompiledPageActionDescriptor actionDescriptor,
             PageHandlerExecutingContext handlerExecutingContext,
             IPageFilter filter
-        ) {
+        )
+        {
             ActionDescriptor = actionDescriptor;
             HandlerExecutingContext = handlerExecutingContext;
             Filter = filter;
@@ -351,7 +356,8 @@ namespace Microsoft.AspNetCore.Mvc.Diagnostics
             CompiledPageActionDescriptor actionDescriptor,
             PageHandlerExecutingContext handlerExecutingContext,
             IPageFilter filter
-        ) {
+        )
+        {
             ActionDescriptor = actionDescriptor;
             HandlerExecutingContext = handlerExecutingContext;
             Filter = filter;
@@ -411,7 +417,8 @@ namespace Microsoft.AspNetCore.Mvc.Diagnostics
             CompiledPageActionDescriptor actionDescriptor,
             PageHandlerExecutedContext handlerExecutedContext,
             IPageFilter filter
-        ) {
+        )
+        {
             ActionDescriptor = actionDescriptor;
             HandlerExecutedContext = handlerExecutedContext;
             Filter = filter;
@@ -470,7 +477,8 @@ namespace Microsoft.AspNetCore.Mvc.Diagnostics
             CompiledPageActionDescriptor actionDescriptor,
             PageHandlerExecutedContext handlerExecutedContext,
             IPageFilter filter
-        ) {
+        )
+        {
             ActionDescriptor = actionDescriptor;
             HandlerExecutedContext = handlerExecutedContext;
             Filter = filter;
@@ -529,7 +537,8 @@ namespace Microsoft.AspNetCore.Mvc.Diagnostics
             CompiledPageActionDescriptor actionDescriptor,
             PageHandlerSelectedContext handlerSelectedContext,
             IAsyncPageFilter filter
-        ) {
+        )
+        {
             ActionDescriptor = actionDescriptor;
             HandlerSelectedContext = handlerSelectedContext;
             Filter = filter;
@@ -588,7 +597,8 @@ namespace Microsoft.AspNetCore.Mvc.Diagnostics
             CompiledPageActionDescriptor actionDescriptor,
             PageHandlerSelectedContext handlerSelectedContext,
             IAsyncPageFilter filter
-        ) {
+        )
+        {
             ActionDescriptor = actionDescriptor;
             HandlerSelectedContext = handlerSelectedContext;
             Filter = filter;
@@ -647,7 +657,8 @@ namespace Microsoft.AspNetCore.Mvc.Diagnostics
             CompiledPageActionDescriptor actionDescriptor,
             PageHandlerSelectedContext handlerSelectedContext,
             IPageFilter filter
-        ) {
+        )
+        {
             ActionDescriptor = actionDescriptor;
             HandlerSelectedContext = handlerSelectedContext;
             Filter = filter;
@@ -707,7 +718,8 @@ namespace Microsoft.AspNetCore.Mvc.Diagnostics
             CompiledPageActionDescriptor actionDescriptor,
             PageHandlerSelectedContext handlerSelectedContext,
             IPageFilter filter
-        ) {
+        )
+        {
             ActionDescriptor = actionDescriptor;
             HandlerSelectedContext = handlerSelectedContext;
             Filter = filter;

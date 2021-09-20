@@ -51,7 +51,8 @@ namespace Microsoft.AspNetCore.WebUtilities
                     bufferSize: 1024,
                     leaveOpen: true
                 )
-            ) {
+            )
+            {
                 return await reader.ReadToEndAsync();
             }
         }

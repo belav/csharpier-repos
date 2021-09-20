@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
         public override void WriteUsingDirective(
             CodeRenderingContext context,
             UsingDirectiveIntermediateNode node
-        ) {
+        )
+        {
             if (node.Source.HasValue)
             {
                 using (context.CodeWriter.BuildLinePragma(node.Source.Value, context))
@@ -30,7 +31,8 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
         public override void WriteCSharpExpression(
             CodeRenderingContext context,
             CSharpExpressionIntermediateNode node
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -95,7 +97,8 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
         public override void WriteCSharpCode(
             CodeRenderingContext context,
             CSharpCodeIntermediateNode node
-        ) {
+        )
+        {
             IDisposable linePragmaScope = null;
             if (node.Source != null)
             {
@@ -131,21 +134,24 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
         public override void WriteHtmlAttribute(
             CodeRenderingContext context,
             HtmlAttributeIntermediateNode node
-        ) {
+        )
+        {
             context.RenderChildren(node);
         }
 
         public override void WriteHtmlAttributeValue(
             CodeRenderingContext context,
             HtmlAttributeValueIntermediateNode node
-        ) {
+        )
+        {
             context.RenderChildren(node);
         }
 
         public override void WriteCSharpExpressionAttributeValue(
             CodeRenderingContext context,
             CSharpExpressionAttributeValueIntermediateNode node
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -216,7 +222,8 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
         public override void WriteCSharpCodeAttributeValue(
             CodeRenderingContext context,
             CSharpCodeAttributeValueIntermediateNode node
-        ) {
+        )
+        {
             for (var i = 0; i < node.Children.Count; i++)
             {
                 if (node.Children[i] is IntermediateToken token && token.IsCSharp)
@@ -265,7 +272,8 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
         public override void WriteHtmlContent(
             CodeRenderingContext context,
             HtmlContentIntermediateNode node
-        ) {
+        )
+        {
             // Do nothing
         }
 

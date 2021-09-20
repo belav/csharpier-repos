@@ -80,7 +80,8 @@ namespace System.DirectoryServices.AccountManagement
                             principalType.IsSubclassOf(typeof(GroupPrincipal))
                             || principalType.IsSubclassOf(typeof(UserPrincipal))
                             || principalType.IsSubclassOf(typeof(ComputerPrincipal))
-                        ) {
+                        )
+                        {
                             DirectoryRdnPrefixAttribute[] MyAttribute =
                                 (DirectoryRdnPrefixAttribute[])Attribute.GetCustomAttributes(
                                     principalType.BaseType,
@@ -102,7 +103,8 @@ namespace System.DirectoryServices.AccountManagement
                                 if (
                                     (MyAttribute[i].Context == null && null == defaultRdn)
                                     || (p.ContextType == MyAttribute[i].Context)
-                                ) {
+                                )
+                                {
                                     defaultRdn = MyAttribute[i].RdnPrefix;
                                 }
                             }
@@ -322,7 +324,8 @@ namespace System.DirectoryServices.AccountManagement
                                 StringComparison.OrdinalIgnoreCase
                             )
                         )
-                    ) {
+                    )
+                    {
                         constructedContext = SDSCache.Domain.GetContext(
                             dnsDomainName,
                             this.Credentials,
@@ -541,7 +544,8 @@ namespace System.DirectoryServices.AccountManagement
             string urnScheme,
             string urnValue,
             DateTime referenceDate
-        ) {
+        )
+        {
             return FindPrincipalByIdentRefHelper(
                 principalType,
                 urnScheme,
@@ -557,7 +561,8 @@ namespace System.DirectoryServices.AccountManagement
             Type principalType,
             IdentityReference ir,
             bool useSidHistory
-        ) {
+        )
+        {
             return FindPrincipalByIdentRefHelper(
                 principalType,
                 ir.UrnScheme,
@@ -574,7 +579,8 @@ namespace System.DirectoryServices.AccountManagement
             string urnValue,
             DateTime referenceDate,
             bool useSidHistory
-        ) {
+        )
+        {
             GlobalDebug.WriteLineIf(
                 GlobalDebug.Info,
                 "ADStoreCtx",
@@ -602,7 +608,8 @@ namespace System.DirectoryServices.AccountManagement
                 if (
                     principalType == typeof(Principal)
                     || principalType == typeof(AuthenticablePrincipal)
-                ) {
+                )
+                {
                     BuildPropertySet(typeof(UserPrincipal), ds.PropertiesToLoad);
                     BuildPropertySet(typeof(GroupPrincipal), ds.PropertiesToLoad);
                     BuildPropertySet(typeof(ComputerPrincipal), ds.PropertiesToLoad);
@@ -636,7 +643,8 @@ namespace System.DirectoryServices.AccountManagement
                             || principalType == typeof(GroupPrincipal)
                             || principalType.IsSubclassOf(typeof(GroupPrincipal))
                         )
-                    ) {
+                    )
+                    {
                         SecurityIdentifier sid = new SecurityIdentifier(urnValue);
                         byte[] sidb = new byte[sid.BinaryLength];
                         sid.GetBinaryForm(sidb, 0);
@@ -654,7 +662,8 @@ namespace System.DirectoryServices.AccountManagement
                             if (
                                 UnsafeNativeMethods.IsValidSid(pSid)
                                 && (Utils.ClassifySID(pSid) == SidType.FakeObject)
-                            ) {
+                            )
+                            {
                                 GlobalDebug.WriteLineIf(
                                     GlobalDebug.Info,
                                     "ADStoreCtx",
@@ -697,7 +706,8 @@ namespace System.DirectoryServices.AccountManagement
                         principalType == typeof(Principal)
                         || principalType == typeof(GroupPrincipal)
                         || principalType.IsSubclassOf(typeof(GroupPrincipal))
-                    ) {
+                    )
+                    {
                         SecurityIdentifier sid = null;
                         byte[] sidb = null;
                         try
@@ -721,7 +731,8 @@ namespace System.DirectoryServices.AccountManagement
                                 if (
                                     UnsafeNativeMethods.IsValidSid(pSid)
                                     && (Utils.ClassifySID(pSid) == SidType.FakeObject)
-                                ) {
+                                )
+                                {
                                     GlobalDebug.WriteLineIf(
                                         GlobalDebug.Info,
                                         "ADStoreCtx",
@@ -1190,7 +1201,8 @@ namespace System.DirectoryServices.AccountManagement
             string suggestedAdProperty,
             Principal p,
             string propertyName
-        ) {
+        )
+        {
             if (properties["objectSid"].Count > 0)
             {
                 byte[] sid = (byte[])properties["objectSid"][0];
@@ -1210,7 +1222,8 @@ namespace System.DirectoryServices.AccountManagement
             string suggestedAdProperty,
             Principal p,
             string propertyName
-        ) {
+        )
+        {
             Debug.Assert(properties["objectGuid"].Count == 1);
 
             if (properties["objectGuid"].Count == 1)
@@ -1232,7 +1245,8 @@ namespace System.DirectoryServices.AccountManagement
             string suggestedAdProperty,
             Principal p,
             string propertyName
-        ) {
+        )
+        {
             SDSUtils.SingleScalarFromDirectoryEntry<string>(
                 properties,
                 suggestedAdProperty,
@@ -1246,7 +1260,8 @@ namespace System.DirectoryServices.AccountManagement
             string suggestedAdProperty,
             Principal p,
             string propertyName
-        ) {
+        )
+        {
             // ValueCollection<string> is Load'ed from a List<string>
             SDSUtils.MultiScalarFromDirectoryEntry<string>(
                 properties,
@@ -1261,7 +1276,8 @@ namespace System.DirectoryServices.AccountManagement
             string suggestedAdProperty,
             Principal p,
             string propertyName
-        ) {
+        )
+        {
             SDSUtils.SingleScalarFromDirectoryEntry<bool>(
                 properties,
                 suggestedAdProperty,
@@ -1277,7 +1293,8 @@ namespace System.DirectoryServices.AccountManagement
             string suggestedAdProperty,
             Principal p,
             string propertyName
-        ) {
+        )
+        {
             if (properties[suggestedAdProperty].Count > 0)
             {
                 // We're intended to handle single-valued scalar properties
@@ -1293,7 +1310,8 @@ namespace System.DirectoryServices.AccountManagement
             string suggestedAdProperty,
             Principal p,
             string propertyName
-        ) {
+        )
+        {
             Debug.Assert(
                 string.Equals(
                     suggestedAdProperty,
@@ -1332,7 +1350,8 @@ namespace System.DirectoryServices.AccountManagement
             string suggestedAdProperty,
             Principal p,
             string propertyName
-        ) {
+        )
+        {
             SDSUtils.SingleScalarFromDirectoryEntry<int>(
                 properties,
                 suggestedAdProperty,
@@ -1346,7 +1365,8 @@ namespace System.DirectoryServices.AccountManagement
             string suggestedAdProperty,
             Principal p,
             string propertyName
-        ) {
+        )
+        {
             SDSUtils.SingleScalarFromDirectoryEntry<byte[]>(
                 properties,
                 suggestedAdProperty,
@@ -1360,7 +1380,8 @@ namespace System.DirectoryServices.AccountManagement
             string suggestedAdProperty,
             Principal p,
             string propertyName
-        ) {
+        )
+        {
             // Cert collection is Load'ed via a list of byte[], each representing a cert
             SDSUtils.MultiScalarFromDirectoryEntry<byte[]>(
                 properties,
@@ -1375,7 +1396,8 @@ namespace System.DirectoryServices.AccountManagement
             string suggestedAdProperty,
             Principal p,
             string propertyName
-        ) {
+        )
+        {
             Debug.Assert(
                 string.Equals(
                     suggestedAdProperty,
@@ -1398,7 +1420,8 @@ namespace System.DirectoryServices.AccountManagement
             string suggestedAdProperty,
             Principal p,
             string propertyName
-        ) {
+        )
+        {
             DateTimeFromLdapConverter(properties, suggestedAdProperty, p, propertyName, false);
         }
 
@@ -1407,7 +1430,8 @@ namespace System.DirectoryServices.AccountManagement
             string suggestedAdProperty,
             Principal p,
             string propertyName
-        ) {
+        )
+        {
             dSPropertyValueCollection values = properties[suggestedAdProperty];
 
             if (values.Count > 0)
@@ -1423,7 +1447,8 @@ namespace System.DirectoryServices.AccountManagement
             string suggestedAdProperty,
             Principal p,
             string propertyName
-        ) {
+        )
+        {
             // W2k DCs support just "lastLogon".  W2k3 DCs also support "lastLogonTimestamp".  The latter is replicated, and
             // preferred over the former.
             if (string.Equals(suggestedAdProperty, "lastLogon", StringComparison.OrdinalIgnoreCase))
@@ -1454,7 +1479,8 @@ namespace System.DirectoryServices.AccountManagement
             string suggestedAdProperty,
             Principal p,
             string propertyName
-        ) {
+        )
+        {
             DateTimeFromLdapConverter(properties, suggestedAdProperty, p, propertyName, true);
         }
 
@@ -1464,7 +1490,8 @@ namespace System.DirectoryServices.AccountManagement
             Principal p,
             string propertyName,
             bool useAcctExpLogic
-        ) {
+        )
+        {
             dSPropertyValueCollection values = properties[suggestedAdProperty];
 
             if (values.Count != 0)
@@ -1500,7 +1527,8 @@ namespace System.DirectoryServices.AccountManagement
             string suggestedAdProperty,
             Principal p,
             string propertyName
-        ) {
+        )
+        {
             Debug.Assert(
                 string.Equals(suggestedAdProperty, "groupType", StringComparison.OrdinalIgnoreCase)
             );
@@ -1624,7 +1652,8 @@ namespace System.DirectoryServices.AccountManagement
             out bool denyWorldFound,
             out bool allowSelfFound,
             out bool allowWorldFound
-        ) {
+        )
+        {
             denySelfFound = false;
             denyWorldFound = false;
             allowSelfFound = false;
@@ -1638,7 +1667,8 @@ namespace System.DirectoryServices.AccountManagement
                     true,
                     typeof(MACLPrinc.SecurityIdentifier)
                 )
-            ) {
+            )
+            {
                 trustee = (MACLPrinc.SecurityIdentifier)rule.IdentityReference;
                 string sidSddl = trustee.Value;
 
@@ -1679,7 +1709,8 @@ namespace System.DirectoryServices.AccountManagement
             string propertyName,
             DirectoryEntry de,
             string suggestedAdProperty
-        ) {
+        )
+        {
             string value = (string)p.GetValueForProperty(propertyName);
 
             if (p.unpersisted && value == null)
@@ -1696,7 +1727,8 @@ namespace System.DirectoryServices.AccountManagement
             string propertyName,
             DirectoryEntry de,
             string suggestedAdProperty
-        ) {
+        )
+        {
             byte[] value = (byte[])p.GetValueForProperty(propertyName);
 
             if (p.unpersisted && value == null)
@@ -1713,7 +1745,8 @@ namespace System.DirectoryServices.AccountManagement
             string propertyName,
             DirectoryEntry de,
             string suggestedAdProperty
-        ) {
+        )
+        {
             SDSUtils.MultiStringToDirectoryEntryConverter(p, propertyName, de, suggestedAdProperty);
         }
 
@@ -1722,7 +1755,8 @@ namespace System.DirectoryServices.AccountManagement
             string propertyName,
             DirectoryEntry de,
             string suggestedAdProperty
-        ) {
+        )
+        {
             object value = (bool)p.GetValueForProperty(propertyName);
 
             if (p.unpersisted && value == null)
@@ -1741,7 +1775,8 @@ namespace System.DirectoryServices.AccountManagement
             string propertyName,
             DirectoryEntry de,
             string suggestedAdProperty
-        ) {
+        )
+        {
             // Only modify disabled property if we are talking to an already persisted user.
             // We need to set the password before we can enable the user on new objects.
             if (!p.unpersisted)
@@ -1759,7 +1794,8 @@ namespace System.DirectoryServices.AccountManagement
             string propertyName,
             DirectoryEntry de,
             string suggestedAdProperty
-        ) {
+        )
+        {
             PrincipalValueCollection<string> trackingList =
                 (PrincipalValueCollection<string>)p.GetValueForProperty(propertyName);
 
@@ -1790,7 +1826,8 @@ namespace System.DirectoryServices.AccountManagement
             string propertyName,
             DirectoryEntry de,
             string suggestedAdProperty
-        ) {
+        )
+        {
             X509Certificate2Collection certificates =
                 (X509Certificate2Collection)p.GetValueForProperty(propertyName);
 
@@ -1820,7 +1857,8 @@ namespace System.DirectoryServices.AccountManagement
             string propertyName,
             DirectoryEntry de,
             string suggestedAdProperty
-        ) {
+        )
+        {
             Debug.Assert(
                 string.Equals(
                     suggestedAdProperty,
@@ -1844,7 +1882,8 @@ namespace System.DirectoryServices.AccountManagement
             string propertyName,
             DirectoryEntry de,
             string suggestedAdProperty
-        ) {
+        )
+        {
             Nullable<DateTime> dt = (Nullable<DateTime>)p.GetValueForProperty(propertyName);
 
             if (p.unpersisted && dt == null)
@@ -1884,7 +1923,8 @@ namespace System.DirectoryServices.AccountManagement
             string propertyName,
             DirectoryEntry de,
             string suggestedAdProperty
-        ) {
+        )
+        {
             ExtensionCache cacheValues = (ExtensionCache)p.GetValueForProperty(propertyName);
             GlobalDebug.WriteLineIf(
                 GlobalDebug.Info,
@@ -1909,7 +1949,8 @@ namespace System.DirectoryServices.AccountManagement
                     if (
                         (kvp.Value.Value.Length == 1 && kvp.Value.Value[0] is ICollection)
                         || (kvp.Value.Value.Length > 1)
-                    ) {
+                    )
+                    {
                         if (kvp.Value.Value.Length > 1 && (kvp.Value.Value[0] is ICollection))
                             throw new ArgumentException(SR.InvalidExtensionCollectionType);
 
@@ -1926,7 +1967,8 @@ namespace System.DirectoryServices.AccountManagement
                             kvp.Value.Value.Length == 1
                             && kvp.Value.Value[0] is ICollection
                             && !(kvp.Value.Value[0] is byte[])
-                        ) {
+                        )
+                        {
                             valueCollection = (ICollection)kvp.Value.Value[0];
                         }
                         else
@@ -1991,7 +2033,8 @@ namespace System.DirectoryServices.AccountManagement
             string propertyName,
             DirectoryEntry de,
             string suggestedAdProperty
-        ) {
+        )
+        {
             Debug.Assert(
                 propertyName == PropertyNames.GroupIsSecurityGroup
                     || propertyName == PropertyNames.GroupGroupScope
@@ -2078,7 +2121,8 @@ namespace System.DirectoryServices.AccountManagement
             DirectoryEntry de,
             NetCred credentials,
             AuthenticationTypes authTypes
-        ) {
+        )
+        {
             Debug.Assert(group.fakePrincipal == false);
 
             PrincipalCollection members = (PrincipalCollection)group.GetValueForProperty(
@@ -2143,7 +2187,8 @@ namespace System.DirectoryServices.AccountManagement
                         && (memberType != typeof(GroupPrincipal))
                         && (!memberType.IsSubclassOf(typeof(GroupPrincipal)))
                         && (!memberType.IsSubclassOf(typeof(AuthenticablePrincipal)))
-                    ) {
+                    )
+                    {
                         throw new InvalidOperationException(
                             SR.Format(SR.StoreCtxUnsupportedPrincipalTypeForGroupInsert, memberType)
                         );
@@ -2333,7 +2378,8 @@ namespace System.DirectoryServices.AccountManagement
             string propertyName,
             DirectoryEntry de,
             string suggestedAdProperty
-        ) {
+        )
+        {
             Debug.Assert(propertyName == PropertyNames.PwdInfoCannotChangePassword);
 
             // Only modify disabled property if we are talking to an already persisted user.
@@ -2353,7 +2399,8 @@ namespace System.DirectoryServices.AccountManagement
             ref string filter,
             bool useSidHistory,
             bool throwOnFail
-        ) {
+        )
+        {
             // To build the filter, we'll use the same IdentityClaimConverter routine as the QBE mechanism.
             // This routine takes an IdentityClaimFilter as input, which in turn wraps an IdentityClaim.
             // So we'll build an IdentityClaim from the user's parameters.
@@ -2378,7 +2425,8 @@ namespace System.DirectoryServices.AccountManagement
                         sb,
                         throwOnFail
                     )
-                ) {
+                )
+                {
                     return false;
                 }
                 filter = sb.ToString();

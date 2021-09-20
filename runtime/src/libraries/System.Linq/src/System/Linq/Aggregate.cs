@@ -10,7 +10,8 @@ namespace System.Linq
         public static TSource Aggregate<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, TSource, TSource> func
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -42,7 +43,8 @@ namespace System.Linq
             this IEnumerable<TSource> source,
             TAccumulate seed,
             Func<TAccumulate, TSource, TAccumulate> func
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -67,7 +69,8 @@ namespace System.Linq
             TAccumulate seed,
             Func<TAccumulate, TSource, TAccumulate> func,
             Func<TAccumulate, TResult> resultSelector
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);

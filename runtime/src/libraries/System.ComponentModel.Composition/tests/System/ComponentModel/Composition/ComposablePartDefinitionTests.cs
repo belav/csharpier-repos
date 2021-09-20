@@ -20,7 +20,8 @@ namespace System.ComponentModel.Composition
         [ImportingConstructor]
         public MyEmptyClassWithFactoryConstructor(
             [Import] ExportFactory<IContract> myFactoryProperty
-        ) {
+        )
+        {
             this.MyFactoryProperty = myFactoryProperty;
         }
     }

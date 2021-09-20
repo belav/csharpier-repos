@@ -515,7 +515,8 @@ namespace Newtonsoft.Json.Utilities
 
             public DictionaryEnumerator(
                 IEnumerator<KeyValuePair<TEnumeratorKey, TEnumeratorValue>> e
-            ) {
+            )
+            {
                 ValidationUtils.ArgumentNotNull(e, nameof(e));
                 _e = e;
             }

@@ -15,9 +15,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
         public TopLevelSuppressionCodeAction(
             Diagnostic diagnostic,
             ImmutableArray<NestedSuppressionCodeAction> nestedActions
-        ) : base(
-            ImmutableArray<CodeAction>.CastUp(nestedActions),
-            string.Format(FeaturesResources.Suppress_0, diagnostic.Id)
-        ) { }
+        )
+            : base(
+                ImmutableArray<CodeAction>.CastUp(nestedActions),
+                string.Format(FeaturesResources.Suppress_0, diagnostic.Id)
+            ) { }
     }
 }

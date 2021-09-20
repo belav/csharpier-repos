@@ -55,7 +55,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
             ModelMetadata metadata,
             string key,
             object model
-        ) {
+        )
+        {
             var enumerator =
                 DefaultCollectionValidationStrategy.Instance.GetEnumeratorForElementType(
                     metadata,
@@ -78,7 +79,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
                 string key,
                 IEnumerable<string> elementKeys,
                 IEnumerator enumerator
-            ) {
+            )
+            {
                 _metadata = metadata;
                 _key = key;
 

@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.Debugging
             CustomDebugInfoKind kind,
             byte version,
             ImmutableArray<byte> data
-        ) {
+        )
+        {
             Kind = kind;
             Version = version;
             Data = data;

@@ -23,7 +23,8 @@ namespace System.Security.Cryptography
             PbeParameters pbeParameters,
             ReadOnlySpan<char> password,
             ReadOnlySpan<byte> passwordBytes
-        ) {
+        )
+        {
             // Leave the ArgumentNullException in the public entrypoints.
             Debug.Assert(pbeParameters != null);
 
@@ -79,7 +80,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> passwordBytes,
             ReadOnlySpan<byte> encryptedData,
             Span<byte> destination
-        ) {
+        )
+        {
             Debug.Assert(destination.Length >= encryptedData.Length);
 
             // Don't check that algorithmIdentifier.Parameters is set here.
@@ -244,7 +246,8 @@ namespace System.Security.Cryptography
             out string hmacOid,
             out string encryptionAlgorithmOid,
             out bool isPkcs12
-        ) {
+        )
+        {
             Debug.Assert(pbeParameters != null);
 
             isPkcs12 = false;
@@ -324,7 +327,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> salt,
             byte[] destination,
             Span<byte> ivDest
-        ) {
+        )
+        {
             byte[]? pwdTmpBytes = null;
             byte[] derivedKey;
             byte[] iv = cipher.IV;
@@ -399,7 +403,8 @@ namespace System.Security.Cryptography
                             iterationCount,
                             prf
                         )
-                    ) {
+                    )
+                    {
                         derivedKey = pbkdf2.GetBytes(keySizeBytes);
                     }
 
@@ -464,7 +469,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> passwordBytes,
             ReadOnlySpan<byte> encryptedData,
             Span<byte> destination
-        ) {
+        )
+        {
             Span<byte> buf = stackalloc byte[128];
             ReadOnlySpan<byte> effectivePasswordBytes = stackalloc byte[0];
             byte[]? rented = null;
@@ -525,7 +531,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> password,
             ReadOnlySpan<byte> encryptedData,
             Span<byte> destination
-        ) {
+        )
+        {
             if (!algorithmParameters.HasValue)
             {
                 throw new CryptographicException(SR.Cryptography_Der_Invalid_Encoding);
@@ -597,7 +604,8 @@ namespace System.Security.Cryptography
             AlgorithmIdentifierAsn encryptionScheme,
             int? requestedKeyLength,
             ref Span<byte> iv
-        ) {
+        )
+        {
             string? algId = encryptionScheme.Algorithm;
 
             if (algId == Oids.Aes128Cbc || algId == Oids.Aes192Cbc || algId == Oids.Aes256Cbc)
@@ -711,7 +719,8 @@ namespace System.Security.Cryptography
             ReadOnlyMemory<byte>? encryptionSchemeParameters,
             int length,
             ref Span<byte> iv
-        ) {
+        )
+        {
             if (encryptionSchemeParameters == null)
             {
                 throw new CryptographicException(SR.Cryptography_Der_Invalid_Encoding);
@@ -751,7 +760,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> password,
             ReadOnlyMemory<byte>? parameters,
             out int? requestedKeyLength
-        ) {
+        )
+        {
             if (!parameters.HasValue)
             {
                 throw new CryptographicException(SR.Cryptography_Der_Invalid_Encoding);
@@ -839,7 +849,8 @@ namespace System.Security.Cryptography
             SymmetricAlgorithm cipher,
             ReadOnlySpan<byte> encryptedData,
             Span<byte> destination
-        ) {
+        )
+        {
             // https://tools.ietf.org/html/rfc2898#section-6.1.2
 
             // 1. Obtain the eight-octet salt S and iteration count c.
@@ -895,7 +906,8 @@ namespace System.Security.Cryptography
             SymmetricAlgorithm cipher,
             ReadOnlySpan<byte> encryptedData,
             Span<byte> destination
-        ) {
+        )
+        {
             // https://tools.ietf.org/html/rfc7292#appendix-C
 
             if (!algorithmIdentifier.Parameters.HasValue)
@@ -949,7 +961,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> iv,
             ReadOnlySpan<byte> encryptedData,
             Span<byte> destination
-        ) {
+        )
+        {
             // When we define a Span-based decryption API this should be changed to use it.
             byte[] tmpKey = new byte[key.Length];
             byte[] tmpIv = new byte[iv.Length];
@@ -1012,7 +1025,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> salt,
             int iterationCount,
             Span<byte> dk
-        ) {
+        )
+        {
             // The only two hashes that will call into this implementation are
             // MD5 (16 bytes) and SHA-1 (20 bytes).
             Span<byte> t = stackalloc byte[20];
@@ -1056,7 +1070,8 @@ namespace System.Security.Cryptography
             int iterationCount,
             string hmacOid,
             Span<byte> iv
-        ) {
+        )
+        {
             writer.PushSequence();
 
             if (isPkcs12)
@@ -1126,7 +1141,8 @@ namespace System.Security.Cryptography
             if (
                 iterationCount <= 0
                 || (iterationLimit.HasValue && iterationCount > iterationLimit.Value)
-            ) {
+            )
+            {
                 throw new CryptographicException(SR.Argument_InvalidValue);
             }
 

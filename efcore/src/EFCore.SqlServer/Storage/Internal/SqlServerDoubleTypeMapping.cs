@@ -26,14 +26,15 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
             string storeType,
             DbType? dbType = null,
             StoreTypePostfix storeTypePostfix = StoreTypePostfix.Precision
-        ) : base(
-            new RelationalTypeMappingParameters(
-                new CoreTypeMappingParameters(typeof(double)),
-                storeType,
-                storeTypePostfix,
-                dbType
-            )
-        ) { }
+        )
+            : base(
+                new RelationalTypeMappingParameters(
+                    new CoreTypeMappingParameters(typeof(double)),
+                    storeType,
+                    storeTypePostfix,
+                    dbType
+                )
+            ) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

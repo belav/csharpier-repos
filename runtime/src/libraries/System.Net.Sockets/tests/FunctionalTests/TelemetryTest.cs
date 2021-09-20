@@ -67,7 +67,8 @@ namespace System.Net.Sockets.Tests
         private static async Task<EndPoint> GetRemoteEndPointAsync(
             string useDnsEndPointString,
             int port
-        ) {
+        )
+        {
             const string Address = "microsoft.com";
 
             if (bool.Parse(useDnsEndPointString))
@@ -101,7 +102,8 @@ namespace System.Net.Sockets.Tests
         public void EventSource_SocketConnectsLoopback_LogsConnectAcceptStartStop(
             string connectMethod,
             string acceptMethod
-        ) {
+        )
+        {
             RemoteExecutor.Invoke(
                     async (connectMethod, acceptMethod) =>
                     {
@@ -159,7 +161,8 @@ namespace System.Net.Sockets.Tests
         public void EventSource_SocketConnectsRemote_LogsConnectStartStop(
             string connectMethod,
             bool useDnsEndPoint
-        ) {
+        )
+        {
             RemoteExecutor.Invoke(
                     async (connectMethod, useDnsEndPointString) =>
                     {
@@ -215,7 +218,8 @@ namespace System.Net.Sockets.Tests
         public void EventSource_SocketConnectFailure_LogsConnectFailed(
             string connectMethod,
             bool useDnsEndPoint
-        ) {
+        )
+        {
             if (useDnsEndPoint)
             {
                 // [ActiveIssue("https://github.com/dotnet/runtime/issues/43931")]
@@ -370,7 +374,8 @@ namespace System.Net.Sockets.Tests
         public void EventSource_ConnectAsyncCanceled_LogsConnectFailed(
             string connectMethod,
             bool useDnsEndPoint
-        ) {
+        )
+        {
             if (useDnsEndPoint)
             {
                 // [ActiveIssue("https://github.com/dotnet/runtime/issues/46030")]
@@ -461,7 +466,8 @@ namespace System.Net.Sockets.Tests
 
         private static void VerifyConnectFailureEvents(
             ConcurrentQueue<(EventWrittenEventArgs Event, Guid ActivityId)> events
-        ) {
+        )
+        {
             Assert.DoesNotContain(events, ev => ev.Event.EventId == 0); // errors from the EventSource itself
 
             VerifyStartStopEvents(events, connect: true, expectedCount: 1);
@@ -496,7 +502,8 @@ namespace System.Net.Sockets.Tests
                                 EventLevel.Verbose,
                                 0.1
                             )
-                        ) {
+                        )
+                        {
                             listener.AddActivityTracking();
 
                             var events =
@@ -596,7 +603,8 @@ namespace System.Net.Sockets.Tests
             ConcurrentQueue<(EventWrittenEventArgs Event, Guid ActivityId)> events,
             bool connect,
             int expectedCount
-        ) {
+        )
+        {
             string startName = connect ? "ConnectStart" : "AcceptStart";
             (EventWrittenEventArgs Event, Guid ActivityId)[] starts = events.Where(
                     e => e.Event.EventName == startName
@@ -627,7 +635,8 @@ namespace System.Net.Sockets.Tests
         private static async Task WaitForEventAsync(
             ConcurrentQueue<(EventWrittenEventArgs Event, Guid ActivityId)> events,
             string name
-        ) {
+        )
+        {
             DateTime startTime = DateTime.UtcNow;
             while (!events.Any(e => e.Event.EventName == name))
             {
@@ -640,7 +649,8 @@ namespace System.Net.Sockets.Tests
 
         private static async Task WaitForEventCountersAsync(
             ConcurrentQueue<(EventWrittenEventArgs Event, Guid ActivityId)> events
-        ) {
+        )
+        {
             DateTime startTime = DateTime.UtcNow;
             int startCount = events.Count;
 
@@ -669,7 +679,8 @@ namespace System.Net.Sockets.Tests
             bool connectOnly = false,
             bool shouldHaveTransferedBytes = false,
             bool shouldHaveDatagrams = false
-        ) {
+        )
+        {
             Dictionary<string, double[]> eventCounters = events.Where(
                     e => e.Event.EventName == "EventCounters"
                 )

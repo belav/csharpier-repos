@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.Editor
             Solution oldSolution,
             Solution newSolution,
             SolutionChanges changes
-        ) {
+        )
+        {
             OldSolution = oldSolution;
             NewSolution = newSolution;
 
@@ -52,7 +53,8 @@ namespace Microsoft.CodeAnalysis.Editor
                     || p.GetRemovedProjectReferences().Any()
                     || p.GetAddedAnalyzerReferences().Any()
                     || p.GetRemovedAnalyzerReferences().Any()
-                ) {
+                )
+                {
                     TotalFilesAffected += 1; // The project file itself was affected too.
                 }
             }

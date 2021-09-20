@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
 
         public static NamingStylePreferences GetNamingStylesFromDictionary(
             IReadOnlyDictionary<string, string?> rawOptions
-        ) {
+        )
+        {
             if (_cache.TryGetValue(rawOptions, out var value))
             {
                 return value;
@@ -48,7 +49,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
 
         public static NamingStylePreferences ParseDictionary(
             IReadOnlyDictionary<string, string?> allRawConventions
-        ) {
+        )
+        {
             var symbolSpecifications = ArrayBuilder<SymbolSpecification>.GetInstance();
             var namingStyles = ArrayBuilder<NamingStyle>.GetInstance();
             var namingRules = ArrayBuilder<SerializableNamingRule>.GetInstance();
@@ -75,7 +77,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
                         trimmedDictionary,
                         out var serializableNamingRule
                     )
-                ) {
+                )
+                {
                     symbolSpecifications.Add(symbolSpec);
                     namingStyles.Add(namingStyle);
                     namingRules.Add(serializableNamingRule);
@@ -184,7 +187,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
 
         private static Dictionary<string, string?> TrimDictionary(
             IReadOnlyDictionary<string, string?> allRawConventions
-        ) {
+        )
+        {
             // Keys have been lowercased, but values have not. Because values here reference key
             // names we need any comparisons to ignore case.
             // For example, to make a naming style called "Pascal_Case_style" match up correctly
@@ -281,14 +285,16 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
                             == SymbolSpecification.ModifierKindEnum.IsStatic
                         || modifier.ModifierKindWrapper
                             == SymbolSpecification.ModifierKindEnum.IsReadOnly
-                    ) {
+                    )
+                    {
                         if (
                             x.SymbolSpecification.RequiredModifierList.Any(
                                 x =>
                                     x.ModifierKindWrapper
                                     == SymbolSpecification.ModifierKindEnum.IsConst
                             )
-                        ) {
+                        )
+                        {
                             // 'const' implies both 'readonly' and 'static'
                             continue;
                         }

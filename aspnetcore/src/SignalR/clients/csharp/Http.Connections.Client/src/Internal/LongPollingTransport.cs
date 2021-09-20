@@ -45,7 +45,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
             Uri url,
             TransferFormat transferFormat,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (transferFormat != TransferFormat.Binary && transferFormat != TransferFormat.Text)
             {
                 throw new ArgumentException(
@@ -190,7 +191,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
                     if (
                         response.StatusCode == HttpStatusCode.NoContent
                         || cancellationToken.IsCancellationRequested
-                    ) {
+                    )
+                    {
                         Log.ClosingConnection(_logger);
                         // Transport closed or polling stopped, we're done
                         break;

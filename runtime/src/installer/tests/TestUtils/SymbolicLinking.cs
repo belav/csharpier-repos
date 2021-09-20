@@ -39,7 +39,8 @@ namespace Microsoft.DotNet.CoreSetup.Test
             string symbolicLinkName,
             string targetFileName,
             out string errorMessage
-        ) {
+        )
+        {
             errorMessage = string.Empty;
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
@@ -49,7 +50,8 @@ namespace Microsoft.DotNet.CoreSetup.Test
                         targetFileName,
                         Kernel32.SymbolicLinkFlag.IsFile
                     )
-                ) {
+                )
+                {
                     int errno = Marshal.GetLastWin32Error();
                     errorMessage = $"CreateSymbolicLink failed with error number {errno}";
                     return false;

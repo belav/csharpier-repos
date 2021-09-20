@@ -28,7 +28,8 @@ namespace Wasm.Build.Tests
             bool aot = false,
             RunHost host = RunHost.All,
             params object?[] parameters
-        ) {
+        )
+        {
             this._aot = aot;
             this._host = host;
             this._parameters = parameters;

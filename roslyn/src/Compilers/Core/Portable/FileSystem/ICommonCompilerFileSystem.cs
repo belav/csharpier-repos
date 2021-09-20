@@ -39,7 +39,8 @@ namespace Roslyn.Utilities
             FileMode fileMode,
             FileAccess fileAccess,
             FileShare fileShare
-        ) {
+        )
+        {
             try
             {
                 return fileSystem.OpenFile(filePath, fileMode, fileAccess, fileShare);
@@ -86,7 +87,8 @@ namespace Roslyn.Utilities
             int bufferSize,
             FileOptions options,
             out string normalizedFilePath
-        ) {
+        )
+        {
             var fileStream = new FileStream(filePath, mode, access, share, bufferSize, options);
             normalizedFilePath = fileStream.Name;
             return fileStream;

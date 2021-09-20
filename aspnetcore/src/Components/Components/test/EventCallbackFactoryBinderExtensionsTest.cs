@@ -764,7 +764,8 @@ namespace Microsoft.AspNetCore.Components
                 ITypeDescriptorContext context,
                 CultureInfo culture,
                 object value
-            ) {
+            )
+            {
                 if (value is string message)
                 {
                     return new SecretMessage() { Message = message, };

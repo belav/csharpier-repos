@@ -265,7 +265,8 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
         public static void EncryptorReuse_LeadsToSameResults(
             CipherMode cipherMode,
             int feedbackSize
-        ) {
+        )
+        {
             // AppleCCCryptor does not allow calling Reset on CFB cipher.
             // this test validates that the behavior is taken into consideration.
             var input = "b72606c98d8e4fabf08839abf7a0ac61".HexToByteArray();
@@ -297,7 +298,8 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
         public static void DecryptorReuse_LeadsToSameResults(
             CipherMode cipherMode,
             int feedbackSize
-        ) {
+        )
+        {
             // AppleCCCryptor does not allow calling Reset on CFB cipher.
             // this test validates that the behavior is taken into consideration.
             var input = "896072ab28e5fdfc9e8b3610627bf27a".HexToByteArray();
@@ -466,7 +468,8 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
             byte[] key,
             byte[] iv,
             byte[] plainBytes
-        ) {
+        )
+        {
             using (MemoryStream output = new MemoryStream())
             using (
                 CryptoStream cryptoStream = new CryptoStream(
@@ -474,7 +477,8 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
                     tdes.CreateEncryptor(key, iv),
                     CryptoStreamMode.Write
                 )
-            ) {
+            )
+            {
                 cryptoStream.Write(plainBytes, 0, plainBytes.Length);
                 cryptoStream.FlushFinalBlock();
 
@@ -487,7 +491,8 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
             byte[] key,
             byte[] iv,
             byte[] cipherBytes
-        ) {
+        )
+        {
             using (MemoryStream output = new MemoryStream())
             using (
                 CryptoStream cryptoStream = new CryptoStream(
@@ -495,7 +500,8 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
                     tdes.CreateDecryptor(key, iv),
                     CryptoStreamMode.Write
                 )
-            ) {
+            )
+            {
                 cryptoStream.Write(cipherBytes, 0, cipherBytes.Length);
                 cryptoStream.FlushFinalBlock();
 
@@ -511,7 +517,8 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
             byte[] plainBytes,
             byte[] cipherBytes,
             int? feedbackSize = default
-        ) {
+        )
+        {
             byte[] liveEncryptBytes;
             byte[] liveDecryptBytes;
 
@@ -553,7 +560,8 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
             int keySize,
             string expectedCipherHex,
             string keyHex
-        ) {
+        )
+        {
             byte[] key = keyHex.HexToByteArray();
 
             using (TripleDES alg = TripleDESFactory.Create())
@@ -597,7 +605,8 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
             int keySize,
             string expectedCipherHex,
             string keyHex
-        ) {
+        )
+        {
             byte[] key = keyHex.HexToByteArray();
             byte[] iv = "5fbc5bc21b8597d8".HexToByteArray();
 
@@ -643,7 +652,8 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
             int keySize,
             string expectedCipherHex,
             string keyHex
-        ) {
+        )
+        {
             byte[] key = keyHex.HexToByteArray();
 
             using (TripleDES alg = TripleDESFactory.Create())
@@ -713,7 +723,8 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
             int keySize,
             string expectedCipherHex,
             string keyHex
-        ) {
+        )
+        {
             byte[] key = keyHex.HexToByteArray();
 
             using (TripleDES alg = TripleDESFactory.Create())
@@ -785,7 +796,8 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
             int keySize,
             string expectedCipherHex,
             string keyHex
-        ) {
+        )
+        {
             byte[] key = keyHex.HexToByteArray();
             byte[] iv = "95498b5bf570f4c8".HexToByteArray();
 
@@ -830,7 +842,8 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
             int keySize,
             string expectedCipherHex,
             string keyHex
-        ) {
+        )
+        {
             byte[] key = keyHex.HexToByteArray();
 
             using (TripleDES alg = TripleDESFactory.Create())
@@ -873,7 +886,8 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
             int keySize,
             string expectedCipherHex,
             string keyHex
-        ) {
+        )
+        {
             byte[] key = keyHex.HexToByteArray();
             byte[] iv = "8fc67ce5e7f28cde".HexToByteArray();
 

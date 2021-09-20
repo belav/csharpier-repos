@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             SyntaxToken endToken,
             TextSpan textSpan,
             IndentBlockOption option = IndentBlockOption.RelativePosition
-        ) {
+        )
+        {
             if (startToken.Kind() == SyntaxKind.None || endToken.Kind() == SyntaxKind.None)
             {
                 return;
@@ -42,7 +43,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             SyntaxToken endToken,
             bool includeTriviaAtEnd = false,
             IndentBlockOption option = IndentBlockOption.RelativePosition
-        ) {
+        )
+        {
             if (startToken.Kind() == SyntaxKind.None || endToken.Kind() == SyntaxKind.None)
             {
                 return;
@@ -81,7 +83,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             SyntaxToken startToken,
             SyntaxToken endToken,
             IndentBlockOption option = IndentBlockOption.AbsolutePosition
-        ) {
+        )
+        {
             if (startToken.Kind() == SyntaxKind.None || endToken.Kind() == SyntaxKind.None)
             {
                 return;
@@ -102,7 +105,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             SyntaxToken startToken,
             SyntaxToken endToken,
             IndentBlockOption option = IndentBlockOption.RelativePosition
-        ) {
+        )
+        {
             if (startToken.Kind() == SyntaxKind.None || endToken.Kind() == SyntaxKind.None)
             {
                 return;
@@ -124,7 +128,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             SyntaxToken endToken,
             TextSpan textSpan,
             IndentBlockOption option = IndentBlockOption.RelativePosition
-        ) {
+        )
+        {
             if (startToken.Kind() == SyntaxKind.None || endToken.Kind() == SyntaxKind.None)
             {
                 return;
@@ -147,7 +152,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             SyntaxToken startToken,
             SyntaxToken endToken,
             IndentBlockOption option = IndentBlockOption.RelativePosition
-        ) {
+        )
+        {
             list.Add(
                 FormattingOperations.CreateRelativeIndentBlockOperation(
                     baseToken,
@@ -165,7 +171,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             SyntaxToken startToken,
             SyntaxToken endToken,
             IndentBlockOption option = IndentBlockOption.RelativePosition
-        ) {
+        )
+        {
             list.Add(
                 FormattingOperations.CreateRelativeIndentBlockOperation(
                     baseToken,
@@ -208,7 +215,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             SyntaxToken startToken,
             SyntaxToken endToken,
             SuppressOption option
-        ) {
+        )
+        {
             if (startToken.Kind() == SyntaxKind.None || endToken.Kind() == SyntaxKind.None)
             {
                 return;
@@ -221,7 +229,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             List<AnchorIndentationOperation> list,
             SyntaxToken anchorToken,
             SyntaxToken endToken
-        ) {
+        )
+        {
             if (anchorToken.Kind() == SyntaxKind.None || endToken.Kind() == SyntaxKind.None)
             {
                 return;
@@ -236,7 +245,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             SyntaxToken baseNode,
             IEnumerable<SyntaxToken> tokens,
             AlignTokensOption option = AlignTokensOption.AlignIndentationOfTokensToBaseToken
-        ) {
+        )
+        {
             if (containingNode == null || tokens == null)
             {
                 return;
@@ -258,7 +268,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
         protected static void AddBraceSuppressOperations(
             List<SuppressOperation> list,
             SyntaxNode node
-        ) {
+        )
+        {
             var bracePair = node.GetBracePair();
             if (!bracePair.IsValidBracePair())
             {

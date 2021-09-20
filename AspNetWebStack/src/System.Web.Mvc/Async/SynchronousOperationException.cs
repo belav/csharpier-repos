@@ -13,10 +13,8 @@ namespace System.Web.Mvc.Async
     {
         public SynchronousOperationException() { }
 
-        private SynchronousOperationException(
-            SerializationInfo info,
-            StreamingContext context
-        ) : base(info, context) { }
+        private SynchronousOperationException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
 
         public SynchronousOperationException(string message) : base(message) { }
 

@@ -72,7 +72,8 @@ namespace System.Runtime.InteropServices.Tests
             object obj,
             VarEnum expectedVarType,
             object expectedRoundtripValue
-        ) {
+        )
+        {
             GetNativeVariantForObject_ValidObject_Success(
                 obj,
                 expectedVarType,
@@ -185,7 +186,8 @@ namespace System.Runtime.InteropServices.Tests
             object obj,
             object wrapped,
             VarEnum expectedVarType
-        ) {
+        )
+        {
             GetNativeVariantForObject_ValidObject_Success(
                 obj,
                 expectedVarType,
@@ -217,7 +219,8 @@ namespace System.Runtime.InteropServices.Tests
         [MemberData(nameof(GetNativeVariantForObject_InvalidArrayType_TestData))]
         public void GetNativeVariantForObject_InvalidArrayType_ThrowsInvalidCastException(
             object obj
-        ) {
+        )
+        {
             Variant v = new Variant();
             IntPtr pNative = Marshal.AllocHGlobal(Marshal.SizeOf(v));
             try

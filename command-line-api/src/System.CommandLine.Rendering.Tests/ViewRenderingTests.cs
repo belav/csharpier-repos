@@ -74,7 +74,8 @@ namespace System.CommandLine.Rendering.Tests
         [InlineData(OutputMode.Ansi)]
         public void ConsoleView_keeps_track_of_position_so_that_multiple_WriteLine_statements_do_not_overwrite_the_target_region(
             OutputMode outputMode
-        ) {
+        )
+        {
             var renderer = new ConsoleRenderer(_terminal, outputMode);
 
             var view = new StringsView(new[] { "1", "2", "3" });

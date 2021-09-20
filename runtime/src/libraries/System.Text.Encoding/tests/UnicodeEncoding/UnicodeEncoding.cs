@@ -63,7 +63,8 @@ namespace System.Text.Encodings.Tests
 
             fixed (byte* pBytesPtr = new byte[10])fixed (char* pCharsPtr = "some string")fixed (
                 char* pInvalidSurrogatePtr = "\uD800\uB800"
-            ) {
+            )
+            {
                 byte* pBytes = pBytesPtr;
                 char* pChars = pCharsPtr;
                 char* pInvalidSurrogate = pInvalidSurrogatePtr;
@@ -122,7 +123,8 @@ namespace System.Text.Encodings.Tests
 
             fixed (byte* pBytesPtr = bytes)fixed (byte* pInvalidPtr = invalid)fixed (
                 char* pCharsPtr = chars
-            ) {
+            )
+            {
                 byte* pBytes = pBytesPtr;
                 byte* pInvalid = pInvalidPtr;
                 char* pChars = pCharsPtr;

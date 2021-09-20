@@ -17,14 +17,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             SyntaxToken semicolonToken,
             bool createReturnStatementForExpression,
             out BlockSyntax block
-        ) {
+        )
+        {
             if (
                 !arrowExpression.TryConvertToStatement(
                     semicolonToken,
                     createReturnStatementForExpression,
                     out var statement
                 )
-            ) {
+            )
+            {
                 block = null;
                 return false;
             }
@@ -38,14 +40,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             SyntaxToken semicolonToken,
             bool createReturnStatementForExpression,
             out StatementSyntax statement
-        ) {
+        )
+        {
             if (
                 !arrowExpression.Expression.TryConvertToStatement(
                     semicolonToken,
                     createReturnStatementForExpression,
                     out statement
                 )
-            ) {
+            )
+            {
                 return false;
             }
 

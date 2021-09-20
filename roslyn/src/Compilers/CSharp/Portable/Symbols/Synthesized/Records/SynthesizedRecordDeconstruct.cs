@@ -24,13 +24,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ImmutableArray<PropertySymbol> properties,
             int memberOffset,
             BindingDiagnosticBag diagnostics
-        ) : base(
-            containingType,
-            WellKnownMemberNames.DeconstructMethodName,
-            hasBody: true,
-            memberOffset,
-            diagnostics
-        ) {
+        )
+            : base(
+                containingType,
+                WellKnownMemberNames.DeconstructMethodName,
+                hasBody: true,
+                memberOffset,
+                diagnostics
+            )
+        {
             Debug.Assert(properties.All(prop => prop.GetMethod is object));
             _ctor = ctor;
             _properties = properties;
@@ -39,7 +41,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         protected override DeclarationModifiers MakeDeclarationModifiers(
             DeclarationModifiers allowedModifiers,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             const DeclarationModifiers result = DeclarationModifiers.Public;
             Debug.Assert((result & ~allowedModifiers) == 0);
             return result;
@@ -47,7 +50,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         protected override (TypeWithAnnotations ReturnType, ImmutableArray<ParameterSymbol> Parameters, bool IsVararg, ImmutableArray<TypeParameterConstraintClause> DeclaredConstraintsForOverrideOrImplementation) MakeParametersAndBindReturnType(
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var compilation = DeclaringCompilation;
             var location = ReturnTypeLocation;
             return (
@@ -86,7 +90,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void GenerateMethodBody(
             TypeCompilationState compilationState,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var F = new SyntheticBoundNodeFactory(
                 this,
                 ContainingType.GetNonNullSyntaxNode(),

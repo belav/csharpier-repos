@@ -263,7 +263,8 @@ namespace System.Dynamic.Tests
                 InvokeMemberBinder binder,
                 object[] args,
                 out object result
-            ) {
+            )
+            {
                 if (
                     binder.Name.Equals(
                         "Power",
@@ -272,7 +273,8 @@ namespace System.Dynamic.Tests
                           : StringComparison.Ordinal
                     )
                     && args.Length == 2
-                ) {
+                )
+                {
                     int x;
                     int y;
                     try
@@ -326,7 +328,8 @@ namespace System.Dynamic.Tests
                 GetIndexBinder binder,
                 object[] indexes,
                 out object result
-            ) {
+            )
+            {
                 switch (indexes.Length)
                 {
                     case 1:
@@ -413,7 +416,8 @@ namespace System.Dynamic.Tests
                 BinaryOperationBinder binder,
                 object arg,
                 out object result
-            ) {
+            )
+            {
                 if (binder.Operation == ExpressionType.Add)
                 {
                     AddableNum addend = arg as AddableNum;
@@ -443,7 +447,8 @@ namespace System.Dynamic.Tests
                 BinaryOperationBinder binder,
                 object arg,
                 out object result
-            ) {
+            )
+            {
                 if (binder.Operation == ExpressionType.Add)
                 {
                     AddableNum addend = arg as AddableNum;

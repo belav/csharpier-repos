@@ -22,7 +22,8 @@ namespace System.Web.WebPages.Test
                                 "http://localhost/"
                             ),
                             __ = Utils.CreateHttpRuntime("/")
-                    ) {
+                    )
+                    {
                         // Arrange
                         var vpath = "~/";
                         var href = "~/world/test.aspx";
@@ -54,7 +55,8 @@ namespace System.Web.WebPages.Test
                                 "http://localhost/WebSite1/subfolder1/default.aspx"
                             ),
                             __ = Utils.CreateHttpRuntime("/WebSite1/")
-                    ) {
+                    )
+                    {
                         // Arrange
                         var vpath = "~/subfolder1/default.aspx";
                         var href = "~/world/test.aspx";
@@ -86,7 +88,8 @@ namespace System.Web.WebPages.Test
                                 "http://localhost/WebSite1/default.aspx"
                             ),
                             __ = Utils.CreateHttpRuntime("/WebSite1/")
-                    ) {
+                    )
+                    {
                         // Arrange
                         var vpath = "~/default.aspx";
                         var href = "~/world/test.aspx";
@@ -118,7 +121,8 @@ namespace System.Web.WebPages.Test
                                 "http://localhost/WebSite1/subfolder1/default.aspx"
                             ),
                             __ = Utils.CreateHttpRuntime("/WebSite1/")
-                    ) {
+                    )
+                    {
                         // Arrange
                         var vpath = "~/subfolder1/default.aspx";
                         var href = "world/test.aspx";
@@ -286,7 +290,8 @@ namespace System.Web.WebPages.Test
                                 "http://localhost/"
                             ),
                             __ = Utils.CreateHttpRuntime("/")
-                    ) {
+                    )
+                    {
                         Assert.Equal(
                             "/world/test.cshtml?Prop1=value1",
                             UrlUtil.GenerateClientUrl(

@@ -37,7 +37,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             VisualStudioWorkspace visualStudioWorkspace,
             IServiceProvider serviceProvider,
             ProjectCodeModelFactory projectCodeModelFactory
-        ) {
+        )
+        {
             _threadingContext = threadingContext;
             _projectId = projectId;
             _codeModelInstanceFactory = codeModelInstanceFactory;
@@ -90,7 +91,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         internal bool TryGetCachedFileCodeModel(
             string fileName,
             out ComHandle<EnvDTE80.FileCodeModel2, FileCodeModel> fileCodeModelHandle
-        ) {
+        )
+        {
             var handle = GetCodeModelCache()?.GetComHandleForFileCodeModel(fileName);
 
             fileCodeModelHandle = handle != null ? handle.Value : default;

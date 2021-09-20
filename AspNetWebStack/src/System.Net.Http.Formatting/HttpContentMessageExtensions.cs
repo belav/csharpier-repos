@@ -90,7 +90,8 @@ namespace System.Net.Http
         /// <returns>A task object representing reading the content as an <see cref="HttpRequestMessage"/>.</returns>
         public static Task<HttpRequestMessage> ReadAsHttpRequestMessageAsync(
             this HttpContent content
-        ) {
+        )
+        {
             return ReadAsHttpRequestMessageAsync(content, "http", DefaultBufferSize);
         }
 
@@ -103,7 +104,8 @@ namespace System.Net.Http
         public static Task<HttpRequestMessage> ReadAsHttpRequestMessageAsync(
             this HttpContent content,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return ReadAsHttpRequestMessageAsync(
                 content,
                 "http",
@@ -127,7 +129,8 @@ namespace System.Net.Http
         public static Task<HttpRequestMessage> ReadAsHttpRequestMessageAsync(
             this HttpContent content,
             string uriScheme
-        ) {
+        )
+        {
             return ReadAsHttpRequestMessageAsync(content, uriScheme, DefaultBufferSize);
         }
 
@@ -148,7 +151,8 @@ namespace System.Net.Http
             this HttpContent content,
             string uriScheme,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return ReadAsHttpRequestMessageAsync(
                 content,
                 uriScheme,
@@ -175,7 +179,8 @@ namespace System.Net.Http
             this HttpContent content,
             string uriScheme,
             int bufferSize
-        ) {
+        )
+        {
             return ReadAsHttpRequestMessageAsync(
                 content,
                 uriScheme,
@@ -204,7 +209,8 @@ namespace System.Net.Http
             string uriScheme,
             int bufferSize,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return ReadAsHttpRequestMessageAsync(
                 content,
                 uriScheme,
@@ -239,7 +245,8 @@ namespace System.Net.Http
             string uriScheme,
             int bufferSize,
             int maxHeaderSize
-        ) {
+        )
+        {
             return ReadAsHttpRequestMessageAsync(
                 content,
                 uriScheme,
@@ -276,7 +283,8 @@ namespace System.Net.Http
             int bufferSize,
             int maxHeaderSize,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (content == null)
             {
                 throw Error.ArgumentNull("content");
@@ -331,7 +339,8 @@ namespace System.Net.Http
             int bufferSize,
             int maxHeaderSize,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             Stream stream = await content.ReadAsStreamAsync();
 
@@ -400,7 +409,8 @@ namespace System.Net.Http
         /// <returns>A task object representing reading the content as an <see cref="HttpResponseMessage"/>.</returns>
         public static Task<HttpResponseMessage> ReadAsHttpResponseMessageAsync(
             this HttpContent content
-        ) {
+        )
+        {
             return ReadAsHttpResponseMessageAsync(content, DefaultBufferSize);
         }
 
@@ -413,7 +423,8 @@ namespace System.Net.Http
         public static Task<HttpResponseMessage> ReadAsHttpResponseMessageAsync(
             this HttpContent content,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return ReadAsHttpResponseMessageAsync(content, DefaultBufferSize, cancellationToken);
         }
 
@@ -426,7 +437,8 @@ namespace System.Net.Http
         public static Task<HttpResponseMessage> ReadAsHttpResponseMessageAsync(
             this HttpContent content,
             int bufferSize
-        ) {
+        )
+        {
             return ReadAsHttpResponseMessageAsync(
                 content,
                 bufferSize,
@@ -445,7 +457,8 @@ namespace System.Net.Http
             this HttpContent content,
             int bufferSize,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return ReadAsHttpResponseMessageAsync(
                 content,
                 bufferSize,
@@ -470,7 +483,8 @@ namespace System.Net.Http
             this HttpContent content,
             int bufferSize,
             int maxHeaderSize
-        ) {
+        )
+        {
             return ReadAsHttpResponseMessageAsync(
                 content,
                 bufferSize,
@@ -497,7 +511,8 @@ namespace System.Net.Http
             int bufferSize,
             int maxHeaderSize,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (content == null)
             {
                 throw Error.ArgumentNull("content");
@@ -535,7 +550,8 @@ namespace System.Net.Http
             int bufferSize,
             int maxHeaderSize,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             Stream stream = await content.ReadAsStreamAsync();
 
@@ -615,7 +631,8 @@ namespace System.Net.Http
                     FormattingUtilities.HttpHostHeader,
                     out hostValues
                 )
-            ) {
+            )
+            {
                 int hostCount = hostValues.Count();
                 if (hostCount != 1)
                 {
@@ -659,7 +676,8 @@ namespace System.Net.Http
             HttpHeaders destination,
             Stream contentStream,
             int rewind
-        ) {
+        )
+        {
             Contract.Assert(source != null, "source headers cannot be null");
             Contract.Assert(destination != null, "destination headers cannot be null");
             Contract.Assert(contentStream != null, "contentStream must be non null");
@@ -720,7 +738,8 @@ namespace System.Net.Http
             HttpUnsortedRequest httpRequest,
             Stream contentStream,
             int rewind
-        ) {
+        )
+        {
             Contract.Assert(uriScheme != null, "URI scheme must be non null");
             Contract.Assert(httpRequest != null, "httpRequest must be non null");
             Contract.Assert(contentStream != null, "contentStream must be non null");
@@ -759,7 +778,8 @@ namespace System.Net.Http
             HttpUnsortedResponse httpResponse,
             Stream contentStream,
             int rewind
-        ) {
+        )
+        {
             Contract.Assert(httpResponse != null, "httpResponse must be non null");
             Contract.Assert(contentStream != null, "contentStream must be non null");
 

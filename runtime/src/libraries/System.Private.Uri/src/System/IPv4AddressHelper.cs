@@ -16,7 +16,8 @@ namespace System
             int start,
             int end,
             ref bool isLoopback
-        ) {
+        )
+        {
             unsafe
             {
                 byte* numbers = stackalloc byte[NumberOfLabels];

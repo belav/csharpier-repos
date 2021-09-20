@@ -91,7 +91,8 @@ namespace Microsoft.Win32
                             (uint)sizeof(Interop.User32.USEROBJECTFLAGS),
                             ref dummy
                         )
-                    ) {
+                    )
+                    {
                         if ((flags.dwFlags & Interop.User32.WSF_VISIBLE) == 0)
                         {
                             s_isUserInteractive = false;
@@ -453,7 +454,8 @@ namespace Microsoft.Win32
                         if (
                             !UserInteractive
                             || Thread.CurrentThread.GetApartmentState() == ApartmentState.STA
-                        ) {
+                        )
+                        {
                             SystemEvents systemEvents = new SystemEvents();
                             systemEvents.Initialize();
 
@@ -514,7 +516,8 @@ namespace Microsoft.Win32
             int msg,
             IntPtr wParam,
             IntPtr lParam
-        ) {
+        )
+        {
             UserPreferenceCategory pref = UserPreferenceCategory.General;
 
             if (msg == Interop.User32.WM_SETTINGCHANGE)
@@ -1351,7 +1354,8 @@ namespace Microsoft.Win32
                                     0,
                                     Interop.User32.PM_REMOVE
                                 )
-                            ) {
+                            )
+                            {
                                 if (msg.message == Interop.User32.WM_QUIT)
                                 {
                                     keepRunning = false;

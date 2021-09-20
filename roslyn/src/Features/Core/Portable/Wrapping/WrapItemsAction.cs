@@ -53,7 +53,8 @@ namespace Microsoft.CodeAnalysis.Wrapping
 
         protected override Task<IEnumerable<CodeActionOperation>> ComputePreviewOperationsAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // For preview, we don't want to compute the normal operations.  Specifically, we don't
             // want to compute the stateful operation that tracks which code action was triggered.
             return base.ComputeOperationsAsync(cancellationToken);
@@ -61,7 +62,8 @@ namespace Microsoft.CodeAnalysis.Wrapping
 
         protected override async Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var operations = await base.ComputeOperationsAsync(cancellationToken)
                 .ConfigureAwait(false);
             var operationsList = operations.ToList();
@@ -78,7 +80,8 @@ namespace Microsoft.CodeAnalysis.Wrapping
             ImmutableArray<T> items,
             ImmutableArray<string> mostRecentlyUsedKeys,
             Func<T, string> getKey
-        ) {
+        )
+        {
             return items.Sort(
                 (d1, d2) =>
                 {

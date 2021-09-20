@@ -66,7 +66,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             IDiagnosticsLogger<DbLoggerCategory.Migrations> logger,
             IRelationalCommandDiagnosticsLogger commandLogger,
             IDatabaseProvider databaseProvider
-        ) {
+        )
+        {
             Check.NotNull(migrationsAssembly, nameof(migrationsAssembly));
             Check.NotNull(historyRepository, nameof(historyRepository));
             Check.NotNull(databaseCreator, nameof(databaseCreator));
@@ -145,7 +146,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
         public virtual async Task MigrateAsync(
             string? targetMigration = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             _logger.MigrateUsingConnection(this, _connection);
 
             if (!await _historyRepository.ExistsAsync(cancellationToken).ConfigureAwait(false))
@@ -190,7 +192,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
         private IEnumerable<Func<IReadOnlyList<MigrationCommand>>> GetMigrationCommandLists(
             IReadOnlyList<HistoryRow> appliedMigrationEntries,
             string? targetMigration = null
-        ) {
+        )
+        {
             PopulateMigrations(
                 appliedMigrationEntries.Select(t => t.MigrationId),
                 targetMigration,
@@ -245,7 +248,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             out IReadOnlyList<Migration> migrationsToApply,
             out IReadOnlyList<Migration> migrationsToRevert,
             out Migration? actualTargetMigration
-        ) {
+        )
+        {
             var appliedMigrations = new Dictionary<string, TypeInfo>();
             var unappliedMigrations = new Dictionary<string, TypeInfo>();
             var appliedMigrationEntrySet = new HashSet<string>(
@@ -333,7 +337,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             string? fromMigration = null,
             string? toMigration = null,
             MigrationsSqlGenerationOptions options = MigrationsSqlGenerationOptions.Default
-        ) {
+        )
+        {
             options |= MigrationsSqlGenerationOptions.Script;
 
             var idempotent = options.HasFlag(MigrationsSqlGenerationOptions.Idempotent);
@@ -508,7 +513,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
         protected virtual IReadOnlyList<MigrationCommand> GenerateUpSql(
             Migration migration,
             MigrationsSqlGenerationOptions options = MigrationsSqlGenerationOptions.Default
-        ) {
+        )
+        {
             Check.NotNull(migration, nameof(migration));
 
             var insertCommand = _rawSqlCommandBuilder.Build(
@@ -541,7 +547,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             Migration migration,
             Migration? previousMigration,
             MigrationsSqlGenerationOptions options = MigrationsSqlGenerationOptions.Default
-        ) {
+        )
+        {
             Check.NotNull(migration, nameof(migration));
 
             var deleteCommand = _rawSqlCommandBuilder.Build(

@@ -216,7 +216,8 @@ namespace Newtonsoft.Json.Tests.Serialization
                 string parameter1,
                 string parameter2,
                 string parameter3
-            ) {
+            )
+            {
                 Parameter1 = parameter1;
                 Parameter2 = parameter2;
                 Parameter3 = parameter3;
@@ -281,7 +282,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             protected override IList<JsonProperty> CreateProperties(
                 Type type,
                 MemberSerialization memberSerialization
-            ) {
+            )
+            {
                 var properties = base.CreateProperties(type, memberSerialization);
 
                 foreach (var property in properties.Where(p => p.PropertyType == typeof(string)))

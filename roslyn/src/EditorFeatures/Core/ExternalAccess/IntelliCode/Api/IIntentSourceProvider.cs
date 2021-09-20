@@ -64,7 +64,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.IntelliCode.Api
             ImmutableArray<TextChange> textEditsToPrior,
             TextSpan priorSelection,
             string? intentData
-        ) {
+        )
+        {
             IntentName = intentName ?? throw new ArgumentNullException(nameof(intentName));
             IntentData = intentData;
             CurrentSnapshotSpan = currentSnapshotSpan;

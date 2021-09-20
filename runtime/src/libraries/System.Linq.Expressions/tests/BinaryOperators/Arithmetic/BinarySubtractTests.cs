@@ -518,7 +518,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void Subtract_MultipleOverloads_CorrectlyResolvesOperator1(
             bool useInterpreter
-        ) {
+        )
+        {
             BinaryExpression subtract = Expression.Subtract(
                 Expression.Constant(new DateTime(100)),
                 Expression.Constant(new DateTime(10))
@@ -532,7 +533,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void Subtract_MultipleOverloads_CorrectlyResolvesOperator2(
             bool useInterpreter
-        ) {
+        )
+        {
             BinaryExpression subtract = Expression.Subtract(
                 Expression.Constant(new DateTime(100)),
                 Expression.Constant(new TimeSpan(10))

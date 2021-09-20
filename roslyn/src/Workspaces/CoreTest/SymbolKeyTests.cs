@@ -1261,7 +1261,8 @@ public class C
             IEnumerable<ISymbol> symbols,
             Compilation compilation,
             Func<ISymbol, object> fnId = null
-        ) {
+        )
+        {
             foreach (var symbol in symbols)
             {
                 TestRoundTrip(symbol, compilation, fnId: fnId);
@@ -1272,7 +1273,8 @@ public class C
             ISymbol symbol,
             Compilation compilation,
             Func<ISymbol, object> fnId = null
-        ) {
+        )
+        {
             var id = SymbolKey.CreateString(symbol);
             Assert.NotNull(id);
             var found = SymbolKey.ResolveString(id, compilation).GetAnySymbol();
@@ -1295,7 +1297,8 @@ public class C
             string language,
             string path = "",
             MetadataReference[] references = null
-        ) {
+        )
+        {
             references ??= new[]
             {
                 MetadataReference.CreateFromFile(typeof(object).Assembly.Location),
@@ -1327,7 +1330,8 @@ public class C
         private List<ISymbol> GetAllSymbols(
             SemanticModel model,
             Func<SyntaxNode, bool> predicate = null
-        ) {
+        )
+        {
             var list = new List<ISymbol>();
             GetAllSymbols(model, model.SyntaxTree.GetRoot(), list, predicate);
             return list;
@@ -1338,7 +1342,8 @@ public class C
             SyntaxNode node,
             List<ISymbol> list,
             Func<SyntaxNode, bool> predicate
-        ) {
+        )
+        {
             if (predicate == null || predicate(node))
             {
                 var symbol = model.GetDeclaredSymbol(node);
@@ -1386,7 +1391,8 @@ public class C
         private static IEnumerable<ISymbol> GetInteriorSymbols(
             ISymbol containingSymbol,
             Compilation compilation
-        ) {
+        )
+        {
             var results = new List<ISymbol>();
 
             foreach (var declaringLocation in containingSymbol.DeclaringSyntaxReferences)
@@ -1409,7 +1415,8 @@ public class C
             SemanticModel model,
             SyntaxNode root,
             List<ISymbol> symbols
-        ) {
+        )
+        {
             foreach (var token in root.DescendantNodes())
             {
                 var symbol = model.GetDeclaredSymbol(token);

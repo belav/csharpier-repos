@@ -449,7 +449,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             SyntaxTree syntaxTree,
             string oldText,
             string newText
-        ) {
+        )
+        {
             return WithReplace(syntaxTree, startIndex: 0, oldText: oldText, newText: newText);
         }
 
@@ -458,7 +459,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             int offset,
             int length,
             string newText
-        ) {
+        )
+        {
             var oldFullText = syntaxTree.GetText();
             var newFullText = oldFullText.WithChanges(
                 new TextChange(new TextSpan(offset, length), newText)
@@ -471,7 +473,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             int startIndex,
             string oldText,
             string newText
-        ) { // Use the offset to find the first element to replace at
+        )
+        { // Use the offset to find the first element to replace at
             return WithReplace(
                 syntaxTree,
                 offset: syntaxTree.GetText()

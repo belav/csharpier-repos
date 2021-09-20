@@ -160,7 +160,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
             string markup,
             string expectedText,
             OptionsCollection? options = null
-        ) {
+        )
+        {
             return VerifyExpectedTextAsync(markup, new string[] {  }, expectedText, options);
         }
 
@@ -169,7 +170,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
             string[] additionalDocuments,
             string expectedText,
             OptionsCollection? options = null
-        ) {
+        )
+        {
             var documentSet = additionalDocuments.Prepend(activeDocument).ToArray();
             using var workspace = TestWorkspace.CreateCSharp(
                 documentSet,

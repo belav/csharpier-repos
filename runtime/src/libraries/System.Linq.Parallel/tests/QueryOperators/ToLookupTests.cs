@@ -18,7 +18,8 @@ namespace System.Linq.Parallel.Tests
         public static void ILookup_MembersBehaveCorrectly(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             int NonExistentKey = count * 2;
             ILookup<int, int> lookup = labeled.Item.ToLookup(x => x);
 
@@ -387,7 +388,8 @@ namespace System.Linq.Parallel.Tests
         public static void ToLookup_AggregateException(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             _ = count;
 
             AssertThrows.Wrapped<DeliberateTestException>(

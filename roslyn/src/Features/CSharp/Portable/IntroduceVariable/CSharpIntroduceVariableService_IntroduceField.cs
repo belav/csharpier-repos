@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
             bool allOccurrences,
             bool isConstant,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var oldTypeDeclaration = expression.GetAncestorOrThis<TypeDeclarationSyntax>();
 
             var oldType =
@@ -137,7 +138,8 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
         protected static int DetermineConstantInsertPosition(
             SyntaxList<MemberDeclarationSyntax> oldMembers,
             SyntaxList<MemberDeclarationSyntax> newMembers
-        ) {
+        )
+        {
             // 1) Place the constant after the last constant.
             //
             // 2) If there is no constant, place it before the first field
@@ -181,7 +183,8 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
         protected static int DetermineFieldInsertPosition(
             SyntaxList<MemberDeclarationSyntax> oldMembers,
             SyntaxList<MemberDeclarationSyntax> newMembers
-        ) {
+        )
+        {
             // 1) Place the constant after the last field.
             //
             // 2) If there is no field, place it after the last constant
@@ -220,7 +223,8 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
         protected static int DetermineFirstChange(
             SyntaxList<MemberDeclarationSyntax> oldMembers,
             SyntaxList<MemberDeclarationSyntax> newMembers
-        ) {
+        )
+        {
             for (var i = 0; i < oldMembers.Count; i++)
             {
                 if (!SyntaxFactory.AreEquivalent(oldMembers[i], newMembers[i], topLevel: false))
@@ -236,7 +240,8 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
             TypeDeclarationSyntax typeDeclaration,
             MemberDeclarationSyntax memberDeclaration,
             int index
-        ) {
+        )
+        {
             return typeDeclaration.WithMembers(
                 typeDeclaration.Members.Insert(index, memberDeclaration)
             );

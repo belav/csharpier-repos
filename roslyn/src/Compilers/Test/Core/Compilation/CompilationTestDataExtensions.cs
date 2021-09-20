@@ -27,7 +27,8 @@ namespace Roslyn.Test.Utilities
             string expectedIL,
             [CallerLineNumber] int expectedValueSourceLine = 0,
             [CallerFilePath] string expectedValueSourcePath = null
-        ) {
+        )
+        {
             const string moduleNamePlaceholder = "{#Module#}";
             string actualIL = GetMethodIL(method);
             if (expectedIL.IndexOf(moduleNamePlaceholder) >= 0)
@@ -56,7 +57,8 @@ namespace Roslyn.Test.Utilities
         internal static CompilationTestData.MethodData GetMethodData(
             this CompilationTestData data,
             string qualifiedMethodName
-        ) {
+        )
+        {
             var map = data.GetMethodsByName();
 
             if (!map.TryGetValue(qualifiedMethodName, out var methodData))
@@ -105,7 +107,8 @@ namespace Roslyn.Test.Utilities
 
         internal static EditAndContinueMethodDebugInformation GetEncDebugInfo(
             this CompilationTestData.MethodData methodData
-        ) {
+        )
+        {
             // TODO:
             return new EditAndContinueMethodDebugInformation(
                 0,

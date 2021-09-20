@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis
             string? moduleName,
             string? entryPointName,
             MethodImportAttributes flags
-        ) {
+        )
+        {
             _moduleName = moduleName;
             _entryPointName = entryPointName;
             _flags = flags;
@@ -169,7 +170,8 @@ namespace Microsoft.CodeAnalysis
             CallingConvention callingConvention,
             bool? useBestFit,
             bool? throwOnUnmappable
-        ) {
+        )
+        {
             MethodImportAttributes result = 0;
             if (exactSpelling)
             {

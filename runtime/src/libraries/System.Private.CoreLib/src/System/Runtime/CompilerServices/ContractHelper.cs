@@ -34,7 +34,8 @@ namespace System.Runtime.CompilerServices
             string? userMessage,
             string? conditionText,
             Exception? innerException
-        ) {
+        )
+        {
             if (
                 failureKind < ContractFailureKind.Precondition
                 || failureKind > ContractFailureKind.Assume
@@ -63,7 +64,8 @@ namespace System.Runtime.CompilerServices
                     );
                     foreach (
                         EventHandler<ContractFailedEventArgs> handler in contractFailedEventLocal.GetInvocationList()
-                    ) {
+                    )
+                    {
                         try
                         {
                             handler(null, eventArgs);
@@ -114,7 +116,8 @@ namespace System.Runtime.CompilerServices
             string? userMessage,
             string? conditionText,
             Exception? innerException
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(displayMessage))
             {
                 displayMessage = GetDisplayMessage(kind, userMessage, conditionText);
@@ -130,7 +133,8 @@ namespace System.Runtime.CompilerServices
         private static string GetFailureMessage(
             ContractFailureKind failureKind,
             string? conditionText
-        ) {
+        )
+        {
             bool hasConditionText = !string.IsNullOrEmpty(conditionText);
             switch (failureKind)
             {
@@ -174,7 +178,8 @@ namespace System.Runtime.CompilerServices
             ContractFailureKind failureKind,
             string? userMessage,
             string? conditionText
-        ) {
+        )
+        {
             string failureMessage;
             // Well-formatted English messages will take one of four forms.  A sentence ending in
             // either a period or a colon, the condition string, then the message tacked

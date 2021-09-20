@@ -32,7 +32,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 Assert.Equal<int>(
                     0,
                     (int)socket.GetSocketOption(
@@ -52,7 +53,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.KeepAlive, true);
                 Assert.NotEqual<int>(
                     0,
@@ -73,7 +75,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 socket.SetSocketOption(
                     SocketOptionLevel.Tcp,
                     SocketOptionName.TcpKeepAliveRetryCount,
@@ -99,7 +102,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 Assert.Throws<SocketException>(
                     () =>
                         socket.SetSocketOption(
@@ -127,7 +131,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 socket.SetSocketOption(
                     SocketOptionLevel.Tcp,
                     SocketOptionName.TcpKeepAliveTime,
@@ -152,7 +157,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 socket.SetSocketOption(
                     SocketOptionLevel.Tcp,
                     SocketOptionName.TcpKeepAliveInterval,
@@ -178,7 +184,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 Assert.Equal<int>(
                     WindowsDefaultTime,
                     (int)socket.GetSocketOption(
@@ -246,7 +253,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 Assert.Equal<int>(
                     WindowsDefaultTime,
                     (int)socket.GetSocketOption(
@@ -313,7 +321,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 if (PlatformDetection.IsWindows)
                 {
                     Assert.Throws<SocketException>(
@@ -343,14 +352,16 @@ namespace System.Net.Sockets.Tests
         [InlineData(new byte[3] { 0, 0, 0 })]
         public void Socket_Get_KeepAlive_Time_AsByteArray_BufferNullOrTooSmall_Failure(
             byte[] buffer
-        ) {
+        )
+        {
             using (
                 Socket socket = new Socket(
                     AddressFamily.InterNetwork,
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 if (PlatformDetection.IsWindows)
                 {
                     Assert.Throws<SocketException>(
@@ -383,7 +394,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 byte[] bufferNull = null;
                 Assert.Throws<SocketException>(
                     () =>
@@ -405,7 +417,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 byte[] bufferLengthZero = new byte[0];
                 Assert.Throws<SocketException>(
                     () =>
@@ -427,7 +440,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 byte[] bufferShort = new byte[1];
                 Assert.Throws<SocketException>(
                     () =>
@@ -449,7 +463,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 socket.SetSocketOption(
                     SocketOptionLevel.Tcp,
                     SocketOptionName.TcpKeepAliveTime,

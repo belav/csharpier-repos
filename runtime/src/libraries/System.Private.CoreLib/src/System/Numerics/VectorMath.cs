@@ -15,7 +15,8 @@ namespace System.Numerics
             Vector128<float> selector,
             Vector128<float> ifTrue,
             Vector128<float> ifFalse
-        ) {
+        )
+        {
             // This implementation is based on the DirectX Math Library XMVector4NotEqual method
             // https://github.com/microsoft/DirectXMath/blob/master/Inc/DirectXMathVector.inl
 
@@ -39,7 +40,8 @@ namespace System.Numerics
             Vector128<double> selector,
             Vector128<double> ifTrue,
             Vector128<double> ifFalse
-        ) {
+        )
+        {
             // This implementation is based on the DirectX Math Library XMVector4NotEqual method
             // https://github.com/microsoft/DirectXMath/blob/master/Inc/DirectXMathVector.inl
 
@@ -96,7 +98,8 @@ namespace System.Numerics
             Vector128<float> a,
             Vector128<float> b,
             Vector128<float> t
-        ) {
+        )
+        {
             // This implementation is based on the DirectX Math Library XMVectorLerp method
             // https://github.com/microsoft/DirectXMath/blob/master/Inc/DirectXMathVector.inl
 

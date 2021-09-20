@@ -71,7 +71,8 @@ namespace System.Xml.Serialization
         public XmlReflectionImporter(
             XmlAttributeOverrides? attributeOverrides,
             string? defaultNamespace
-        ) {
+        )
+        {
             if (defaultNamespace == null)
                 defaultNamespace = string.Empty;
             if (attributeOverrides == null)
@@ -176,7 +177,8 @@ namespace System.Xml.Serialization
             Type type,
             XmlRootAttribute? root,
             string? defaultNamespace
-        ) {
+        )
+        {
             if (type == null)
                 throw new ArgumentNullException(nameof(type));
             XmlTypeMapping xmlMapping = new XmlTypeMapping(
@@ -202,7 +204,8 @@ namespace System.Xml.Serialization
             string? ns,
             XmlReflectionMember[] members,
             bool hasWrapperElement
-        ) {
+        )
+        {
             return ImportMembersMapping(elementName, ns, members, hasWrapperElement, false);
         }
 
@@ -216,7 +219,8 @@ namespace System.Xml.Serialization
             XmlReflectionMember[] members,
             bool hasWrapperElement,
             bool rpc
-        ) {
+        )
+        {
             return ImportMembersMapping(elementName, ns, members, hasWrapperElement, rpc, false);
         }
 
@@ -232,7 +236,8 @@ namespace System.Xml.Serialization
             bool hasWrapperElement,
             bool rpc,
             bool openModel
-        ) {
+        )
+        {
             return ImportMembersMapping(
                 elementName,
                 ns,
@@ -257,7 +262,8 @@ namespace System.Xml.Serialization
             bool rpc,
             bool openModel,
             XmlMappingAccess access
-        ) {
+        )
+        {
             ElementAccessor element = new ElementAccessor();
             element.Name =
                 elementName == null || elementName.Length == 0
@@ -324,7 +330,8 @@ namespace System.Xml.Serialization
             XmlRootAttribute? root,
             string? defaultNamespace,
             RecursionLimiter limiter
-        ) {
+        )
+        {
             XmlAttributes a = GetAttributes(model.Type, true);
 
             if (root == null)
@@ -418,7 +425,8 @@ namespace System.Xml.Serialization
                         && ((NullableMapping)accessor.Mapping).BaseMapping!.TypeDesc
                             == existing.Mapping.TypeDesc
                     )
-                ) {
+                )
+                {
                     // need to compare default values
                     string? value1 = Convert.ToString(
                         accessor.Default,
@@ -530,7 +538,8 @@ namespace System.Xml.Serialization
             string dataType,
             XmlAttributes? a,
             RecursionLimiter limiter
-        ) {
+        )
+        {
             return ImportTypeMapping(model, ns, context, dataType, a, false, false, limiter);
         }
 
@@ -544,7 +553,8 @@ namespace System.Xml.Serialization
             bool repeats,
             bool openModel,
             RecursionLimiter limiter
-        ) {
+        )
+        {
             try
             {
                 if (dataType.Length > 0)
@@ -710,7 +720,8 @@ namespace System.Xml.Serialization
         internal static MethodInfo? GetMethodFromSchemaProvider(
             XmlSchemaProviderAttribute provider,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] Type type
-        ) {
+        )
+        {
             if (provider.IsAny)
             {
                 // do not validate the schema provider method for wildcard types.
@@ -766,7 +777,8 @@ namespace System.Xml.Serialization
             string? ns,
             ImportContext context,
             RecursionLimiter limiter
-        ) {
+        )
+        {
             if (_specials == null)
                 _specials = new Hashtable();
             SpecialMapping? mapping = (SpecialMapping?)_specials[type];
@@ -926,7 +938,8 @@ namespace System.Xml.Serialization
         private NullableMapping CreateNullableMapping(
             TypeMapping baseMapping,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type
-        ) {
+        )
+        {
             TypeDesc typeDesc = baseMapping.TypeDesc!.GetNullableTypeDesc(type);
             TypeMapping? existingMapping;
             if (!baseMapping.IsAnonymousType)
@@ -1015,7 +1028,8 @@ namespace System.Xml.Serialization
             TypeDesc typeDesc,
             NameTable typeLib,
             Type? type
-        ) {
+        )
+        {
             TypeMapping? mapping;
             if (typeName == null || typeName.Length == 0)
                 mapping = type == null ? null : (TypeMapping?)_anonymous[type];
@@ -1044,7 +1058,8 @@ namespace System.Xml.Serialization
             bool openModel,
             XmlAttributes? a,
             RecursionLimiter limiter
-        ) {
+        )
+        {
             if (model.TypeDesc.Kind == TypeKind.Root)
                 return GetRootMapping();
             if (a == null)
@@ -1104,7 +1119,8 @@ namespace System.Xml.Serialization
                             typeName,
                             limiter
                         )
-                    ) {
+                    )
+                    {
                         //
                         // if InitializeStructMembers returns true, then there were *no* changes to the DeferredWorkItems
                         //
@@ -1141,7 +1157,8 @@ namespace System.Xml.Serialization
             bool openModel,
             string? typeName,
             RecursionLimiter limiter
-        ) {
+        )
+        {
             if (mapping.IsFullyInitialized)
                 return true;
 
@@ -1508,7 +1525,8 @@ namespace System.Xml.Serialization
             ArrayModel model,
             string? ns,
             RecursionLimiter limiter
-        ) {
+        )
+        {
             ArrayMapping mapping = new ArrayMapping();
             mapping.TypeDesc = model.TypeDesc;
 
@@ -1599,7 +1617,8 @@ namespace System.Xml.Serialization
             ImportContext context,
             string dataType,
             bool repeats
-        ) {
+        )
+        {
             PrimitiveMapping mapping = new PrimitiveMapping();
             if (dataType.Length > 0)
             {
@@ -1710,7 +1729,8 @@ namespace System.Xml.Serialization
             bool rpc,
             bool openModel,
             RecursionLimiter limiter
-        ) {
+        )
+        {
             MembersMapping members = new MembersMapping();
             members.TypeDesc = _typeScope.GetTypeDesc(typeof(object[]));
             MemberMapping[] mappings = new MemberMapping[xmlReflectionMembers.Length];
@@ -1808,7 +1828,8 @@ namespace System.Xml.Serialization
             bool rpc,
             bool openModel,
             RecursionLimiter limiter
-        ) {
+        )
+        {
             XmlSchemaForm form = rpc ? XmlSchemaForm.Unqualified : XmlSchemaForm.Qualified;
             XmlAttributes a = xmlReflectionMember.XmlAttributes;
             TypeDesc typeDesc = _typeScope.GetTypeDesc(xmlReflectionMember.MemberType!);
@@ -1905,7 +1926,8 @@ namespace System.Xml.Serialization
         internal static XmlReflectionMember? FindSpecifiedMember(
             string memberName,
             XmlReflectionMember[] reflectionMembers
-        ) {
+        )
+        {
             for (int i = 0; i < reflectionMembers.Length; i++)
                 if (
                     string.Equals(
@@ -1925,7 +1947,8 @@ namespace System.Xml.Serialization
             XmlAttributes a,
             string? ns,
             RecursionLimiter limiter
-        ) {
+        )
+        {
             MemberMapping member = new MemberMapping();
             member.Name = model.Name;
             member.CheckShouldPersist = model.CheckShouldPersist;
@@ -1962,7 +1985,8 @@ namespace System.Xml.Serialization
             bool isArrayLike,
             string identifierName,
             string memberName
-        ) {
+        )
+        {
             if (type.IsArray)
             {
                 if (!isArrayLike)
@@ -2007,7 +2031,8 @@ namespace System.Xml.Serialization
             XmlReflectionMember[] xmlReflectionMembers,
             bool isArrayLike,
             string accessorName
-        ) {
+        )
+        {
             for (int i = 0; i < xmlReflectionMembers.Length; i++)
             {
                 if (choice.MemberName == xmlReflectionMembers[i].MemberName)
@@ -2032,7 +2057,8 @@ namespace System.Xml.Serialization
             StructModel structModel,
             bool isArrayLike,
             string accessorName
-        ) {
+        )
+        {
             // check that the choice field exists
 
             MemberInfo[] infos = structModel.Type.GetMember(
@@ -2100,7 +2126,8 @@ namespace System.Xml.Serialization
             Type arrayElementType,
             string? arrayElementNs,
             RecursionLimiter limiter
-        ) {
+        )
+        {
             NameTable arrayItemElements = new NameTable(); // xmlelementname + xmlns -> ElementAccessor
 
             for (int i = 0; attributes != null && i < attributes.Count; i++)
@@ -2155,7 +2182,8 @@ namespace System.Xml.Serialization
             bool rpc,
             bool openModel,
             RecursionLimiter limiter
-        ) {
+        )
+        {
             XmlSchemaForm elementFormDefault = XmlSchemaForm.Qualified;
             int previousNestingLevel = _arrayNestingLevel;
             int sequenceId = -1;
@@ -2222,7 +2250,8 @@ namespace System.Xml.Serialization
                         a.XmlAttribute != null
                         && !accessor.TypeDesc.ArrayElementTypeDesc!.IsPrimitive
                         && !accessor.TypeDesc.ArrayElementTypeDesc.IsEnum
-                    ) {
+                    )
+                    {
                         if (accessor.TypeDesc.ArrayElementTypeDesc.Kind == TypeKind.Serializable)
                         {
                             throw new InvalidOperationException(
@@ -2968,7 +2997,8 @@ namespace System.Xml.Serialization
                                     && string.IsNullOrEmpty(choiceNs)
                                 )
                                 || element.Namespace == choiceNs
-                            ) {
+                            )
+                            {
                                 accessor.ChoiceIdentifier.MemberIds[i] =
                                     choiceMapping.Constants[j].Name;
                                 found = true;
@@ -3186,7 +3216,8 @@ namespace System.Xml.Serialization
         private static XmlArrayItemAttribute CreateArrayItemAttribute(
             TypeDesc typeDesc,
             int nestingLevel
-        ) {
+        )
+        {
             XmlArrayItemAttribute xmlArrayItem = new XmlArrayItemAttribute();
             xmlArrayItem.NestingLevel = nestingLevel;
             return xmlArrayItem;
@@ -3243,7 +3274,8 @@ namespace System.Xml.Serialization
             INameScope elements,
             INameScope attributes,
             bool isSequence
-        ) {
+        )
+        {
             if (member.Attribute != null)
             {
                 AddUniqueAccessor(attributes, member.Attribute);

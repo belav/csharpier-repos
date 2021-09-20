@@ -26,7 +26,8 @@ namespace System.Net
                 segment.Offset < 0
                 || segment.Count < 0
                 || segment.Count > (segment.Array.Length - segment.Offset)
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(nameof(segment));
             }
         }

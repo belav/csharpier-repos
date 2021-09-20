@@ -205,7 +205,8 @@ namespace System.Web.Routing
             string prefix,
             string template,
             string expected
-        ) {
+        )
+        {
             var result = DirectRouteFactoryContext.BuildRouteTemplate(areaPrefix, prefix, template);
 
             Assert.Equal(expected, result);
@@ -431,7 +432,8 @@ namespace System.Web.Routing
                 string parameterName,
                 RouteValueDictionary values,
                 RouteDirection routeDirection
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }

@@ -27,7 +27,8 @@ namespace Roslyn.Compilers.Extension
         protected override async Task InitializeAsync(
             CancellationToken cancellationToken,
             IProgress<ServiceProgressData> progress
-        ) {
+        )
+        {
             await base.InitializeAsync(cancellationToken, progress).ConfigureAwait(true);
 
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
@@ -76,7 +77,8 @@ namespace Roslyn.Compilers.Extension
             string packagePath,
             string hiveName,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // A map of the file name to the content we need to ensure exists in the file
             var filesToWrite = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
@@ -142,7 +144,8 @@ namespace Roslyn.Compilers.Extension
                         $"*Roslyn*{hiveName}*",
                         SearchOption.AllDirectories
                     )
-                ) {
+                )
+                {
                     if (!filesToWrite.ContainsKey(file.FullName))
                     {
                         file.Delete();
@@ -163,7 +166,8 @@ namespace Roslyn.Compilers.Extension
                     if (
                         File.Exists(fileAndContents.Key)
                         && File.ReadAllText(fileAndContents.Key) == fileAndContents.Value
-                    ) {
+                    )
+                    {
                         continue;
                     }
 
@@ -226,7 +230,8 @@ To reload the Roslyn compiler package, close Visual Studio and any MSBuild proce
         private async Task<string> GetMSBuildRelativePathAsync(
             string relativePath,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return Path.Combine(
                 await GetMSBuildPathAsync(cancellationToken).ConfigureAwait(true),
                 relativePath

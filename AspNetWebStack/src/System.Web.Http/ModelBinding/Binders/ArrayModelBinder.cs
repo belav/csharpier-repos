@@ -12,7 +12,8 @@ namespace System.Web.Http.ModelBinding.Binders
         public override bool BindModel(
             HttpActionContext actionContext,
             ModelBindingContext bindingContext
-        ) {
+        )
+        {
             if (bindingContext.ModelMetadata.IsReadOnly)
             {
                 return false;
@@ -25,7 +26,8 @@ namespace System.Web.Http.ModelBinding.Binders
             HttpActionContext actionContext,
             ModelBindingContext bindingContext,
             IList<TElement> newCollection
-        ) {
+        )
+        {
             bindingContext.Model = newCollection.ToArray();
             return true;
         }

@@ -52,19 +52,15 @@ namespace Microsoft.EntityFrameworkCore
         /// </summary>
         /// <param name="message"> The error message that explains the reason for the exception. </param>
         /// <param name="entries"> The entries that were involved in the concurrency violation. </param>
-        public DbUpdateConcurrencyException(
-            string message,
-            IReadOnlyList<IUpdateEntry> entries
-        ) : base(message, entries) { }
+        public DbUpdateConcurrencyException(string message, IReadOnlyList<IUpdateEntry> entries)
+            : base(message, entries) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="DbUpdateException" /> class from a serialized form.
         /// </summary>
         /// <param name="info"> The serialization info. </param>
         /// <param name="context"> The streaming context being used. </param>
-        public DbUpdateConcurrencyException(
-            SerializationInfo info,
-            StreamingContext context
-        ) : base(info, context) { }
+        public DbUpdateConcurrencyException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

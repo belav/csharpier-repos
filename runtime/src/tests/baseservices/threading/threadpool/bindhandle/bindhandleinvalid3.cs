@@ -39,7 +39,8 @@ class BindHandleInvalid3
                         CreateFile("test.txt", 0x40000000, 0, 0, 2, 0x80, 0),
                         true
                     )
-                ) {
+                )
+                {
                     ThreadPool.BindHandle(sfh);
                 }
             }

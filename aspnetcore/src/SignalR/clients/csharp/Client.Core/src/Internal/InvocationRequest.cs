@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Internal
             string invocationId,
             ILogger logger,
             HubConnection hubConnection
-        ) {
+        )
+        {
             _cancellationTokenRegistration = cancellationToken.Register(
                 self => ((InvocationRequest)self!).Cancel(),
                 this
@@ -49,7 +50,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Internal
             ILoggerFactory loggerFactory,
             HubConnection hubConnection,
             out Task<object?> result
-        ) {
+        )
+        {
             var req = new NonStreaming(
                 cancellationToken,
                 resultType,
@@ -68,7 +70,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Internal
             ILoggerFactory loggerFactory,
             HubConnection hubConnection,
             out ChannelReader<object?> result
-        ) {
+        )
+        {
             var req = new Streaming(
                 cancellationToken,
                 resultType,
@@ -106,13 +109,14 @@ namespace Microsoft.AspNetCore.SignalR.Client.Internal
                 string invocationId,
                 ILoggerFactory loggerFactory,
                 HubConnection hubConnection
-            ) : base(
-                cancellationToken,
-                resultType,
-                invocationId,
-                loggerFactory.CreateLogger<Streaming>(),
-                hubConnection
-            ) { }
+            )
+                : base(
+                    cancellationToken,
+                    resultType,
+                    invocationId,
+                    loggerFactory.CreateLogger<Streaming>(),
+                    hubConnection
+                ) { }
 
             public ChannelReader<object?> Result => _channel.Reader;
 
@@ -182,13 +186,14 @@ namespace Microsoft.AspNetCore.SignalR.Client.Internal
                 string invocationId,
                 ILoggerFactory loggerFactory,
                 HubConnection hubConnection
-            ) : base(
-                cancellationToken,
-                resultType,
-                invocationId,
-                loggerFactory.CreateLogger<NonStreaming>(),
-                hubConnection
-            ) { }
+            )
+                : base(
+                    cancellationToken,
+                    resultType,
+                    invocationId,
+                    loggerFactory.CreateLogger<NonStreaming>(),
+                    hubConnection
+                ) { }
 
             public Task<object?> Result => _completionSource.Task;
 
@@ -313,7 +318,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Internal
                 ILogger logger,
                 string invocationId,
                 Exception exception
-            ) {
+            )
+            {
                 _errorWritingStreamItem(logger, invocationId, exception);
             }
 

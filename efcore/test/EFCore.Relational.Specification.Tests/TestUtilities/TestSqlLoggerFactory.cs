@@ -143,14 +143,16 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 string message,
                 TState state,
                 Exception exception
-            ) {
+            )
+            {
                 if (
                     (
                         eventId.Id == RelationalEventId.CommandExecuted.Id
                         || eventId.Id == RelationalEventId.CommandError.Id
                         || eventId.Id == RelationalEventId.CommandExecuting.Id
                     )
-                ) {
+                )
+                {
                     if (_shouldLogCommands)
                     {
                         base.UnsafeLog(logLevel, eventId, message, state, exception);
@@ -160,7 +162,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                         !IsRecordingSuspended
                         && message != null
                         && eventId.Id != RelationalEventId.CommandExecuting.Id
-                    ) {
+                    )
+                    {
                         var structure = (IReadOnlyList<KeyValuePair<string, object>>)state;
 
                         var parameters = structure.Where(i => i.Key == "parameters")

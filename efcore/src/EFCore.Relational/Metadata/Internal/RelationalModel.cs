@@ -114,7 +114,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public static IModel Add(
             IModel model,
             IRelationalAnnotationProvider? relationalAnnotationProvider
-        ) {
+        )
+        {
             model.AddRuntimeAnnotation(
                 RelationalAnnotationNames.RelationalModel,
                 Create(model, relationalAnnotationProvider)
@@ -131,7 +132,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public static IRelationalModel Create(
             IModel model,
             IRelationalAnnotationProvider? relationalAnnotationProvider
-        ) {
+        )
+        {
             var databaseModel = new RelationalModel(model);
 
             foreach (var entityType in model.GetEntityTypes())
@@ -249,7 +251,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         private static void AddDefaultMappings(
             RelationalModel databaseModel,
             IEntityType entityType
-        ) {
+        )
+        {
             var rootType = entityType.GetRootType();
             var name = rootType.HasSharedClrType ? rootType.Name : rootType.ShortName();
             if (!databaseModel.DefaultTables.TryGetValue(name, out var defaultTable))
@@ -296,7 +299,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                         RelationalAnnotationNames.DefaultColumnMappings
                     )
                     is not SortedSet<ColumnMappingBase> columnMappings
-                ) {
+                )
+                {
                     columnMappings = new SortedSet<ColumnMappingBase>(
                         ColumnMappingBaseComparer.Instance
                     );
@@ -312,7 +316,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             if (
                 entityType.FindRuntimeAnnotationValue(RelationalAnnotationNames.DefaultMappings)
                 is not List<TableMappingBase> tableMappings
-            ) {
+            )
+            {
                 tableMappings = new List<TableMappingBase>();
                 entityType.AddRuntimeAnnotation(
                     RelationalAnnotationNames.DefaultMappings,
@@ -349,7 +354,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                             && mappedSchema == schema
                             && mappedType != entityType
                         )
-                    ) {
+                    )
+                    {
                         break;
                     }
 
@@ -359,7 +365,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                             (mappedTableName, mappedSchema),
                             out var table
                         )
-                    ) {
+                    )
+                    {
                         table = new Table(mappedTableName, mappedSchema, databaseModel);
                         databaseModel.Tables.Add((mappedTableName, mappedSchema), table);
                     }
@@ -412,7 +419,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                                 RelationalAnnotationNames.TableColumnMappings
                             )
                             is not SortedSet<ColumnMapping> columnMappings
-                        ) {
+                        )
+                        {
                             columnMappings = new SortedSet<ColumnMapping>(
                                 ColumnMappingBaseComparer.Instance
                             );
@@ -474,7 +482,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                         && mappedSchema == schema
                         && mappedType != entityType
                     )
-                ) {
+                )
+                {
                     break;
                 }
 
@@ -521,7 +530,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                             RelationalAnnotationNames.ViewColumnMappings
                         )
                         is not SortedSet<ViewColumnMapping> columnMappings
-                    ) {
+                    )
+                    {
                         columnMappings = new SortedSet<ViewColumnMapping>(
                             ColumnMappingBaseComparer.Instance
                         );
@@ -575,7 +585,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     definingTypeSqlQuery == null
                     || definingType.BaseType == null
                     || (definingTypeSqlQuery == entityTypeSqlQuery && definingType != entityType)
-                ) {
+                )
+                {
                     break;
                 }
 
@@ -594,7 +605,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 if (
                     mappedTypeSqlQuery == null
                     || (mappedTypeSqlQuery == entityTypeSqlQuery && mappedType != entityType)
-                ) {
+                )
+                {
                     break;
                 }
 
@@ -644,7 +656,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                             RelationalAnnotationNames.SqlQueryColumnMappings
                         )
                         is not SortedSet<SqlQueryColumnMapping> columnMappings
-                    ) {
+                    )
+                    {
                         columnMappings = new SortedSet<SqlQueryColumnMapping>(
                             ColumnMappingBaseComparer.Instance
                         );
@@ -685,7 +698,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         private static void AddMappedFunctions(
             RelationalModel databaseModel,
             IEntityType entityType
-        ) {
+        )
+        {
             var model = databaseModel.Model;
             var functionName = entityType.GetFunctionName();
             if (functionName == null)
@@ -701,7 +715,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 if (
                     mappedFunctionName == null
                     || (mappedFunctionName == functionName && mappedType != entityType)
-                ) {
+                )
+                {
                     break;
                 }
 
@@ -773,7 +788,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                         RelationalAnnotationNames.FunctionMappings
                     )
                     is not List<FunctionMapping> functionMappings
-                ) {
+                )
+                {
                     functionMappings = new List<FunctionMapping>();
                     entityType.AddRuntimeAnnotation(
                         RelationalAnnotationNames.FunctionMappings,
@@ -794,7 +810,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             IRuntimeDbFunction dbFunction,
             RelationalModel model,
             bool @default
-        ) {
+        )
+        {
             var storeFunction = GetOrCreateStoreFunction(dbFunction, model);
 
             var mappedFunction = StoreObjectIdentifier.DbFunction(dbFunction.Name);
@@ -839,7 +856,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                         RelationalAnnotationNames.FunctionColumnMappings
                     )
                     is not SortedSet<FunctionColumnMapping> columnMappings
-                ) {
+                )
+                {
                     columnMappings = new SortedSet<FunctionColumnMapping>(
                         ColumnMappingBaseComparer.Instance
                     );
@@ -858,7 +876,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         private static StoreFunction GetOrCreateStoreFunction(
             IRuntimeDbFunction dbFunction,
             RelationalModel model
-        ) {
+        )
+        {
             var storeFunction = (StoreFunction?)dbFunction.StoreFunction;
             if (storeFunction == null)
             {
@@ -902,7 +921,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     !entityTypeMapping.IncludesDerivedTypes
                     && entityTypeMapping.EntityType.GetTableMappings()
                         .Any(m => m.IncludesDerivedTypes)
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -913,12 +933,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     foreach (
                         var principalMapping in foreignKey.PrincipalEntityType.GetTableMappings()
                             .Reverse()
-                    ) {
+                    )
+                    {
                         if (
                             firstPrincipalMapping
                             && !principalMapping.IncludesDerivedTypes
                             && foreignKey.PrincipalEntityType.GetDirectlyDerivedTypes().Any()
-                        ) {
+                        )
+                        {
                             // Derived principal entity types are mapped to different tables, so the constraint is not enforceable
                             break;
                         }
@@ -964,7 +986,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                             if (
                                 principalTable.FindColumn(foreignKey.PrincipalKey.Properties[i])
                                 is Column principalColumn
-                            ) {
+                            )
+                            {
                                 principalColumns[i] = principalColumn;
                             }
                             else
@@ -985,7 +1008,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                             if (
                                 table.FindColumn(foreignKey.Properties[i])
                                 is Column foreignKeyColumn
-                            ) {
+                            )
+                            {
                                 columns[i] = foreignKeyColumn;
                             }
                             else
@@ -1011,7 +1035,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                             && foreignKey.DeclaringEntityType != entityType
                             && entityType.FindPrimaryKey() is IKey primaryKey
                             && foreignKey.Properties.SequenceEqual(primaryKey.Properties)
-                        ) {
+                        )
+                        {
                             // The identifying FK constraint is needed to be created only on the table that corresponds
                             // to the declaring entity type
                             break;
@@ -1060,7 +1085,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                         {
                             if (
                                 table.FindColumn(key.Properties[i]) is Column uniqueConstraintColumn
-                            ) {
+                            )
+                            {
                                 columns[i] = uniqueConstraintColumn;
                             }
                             else
@@ -1089,7 +1115,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                             RelationalAnnotationNames.UniqueConstraintMappings
                         )
                         is not SortedSet<UniqueConstraint> uniqueConstraints
-                    ) {
+                    )
+                    {
                         uniqueConstraints = new SortedSet<UniqueConstraint>(
                             UniqueConstraintComparer.Instance
                         );
@@ -1148,7 +1175,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                             RelationalAnnotationNames.TableIndexMappings
                         )
                         is not SortedSet<TableIndex> tableIndexes
-                    ) {
+                    )
+                    {
                         tableIndexes = new SortedSet<TableIndex>(TableIndexComparer.Instance);
                         index.AddRuntimeAnnotation(
                             RelationalAnnotationNames.TableIndexMappings,
@@ -1181,7 +1209,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     if (
                         mainMapping == null
                         || entityTypeMapping.EntityType.IsAssignableFrom(mainMapping.EntityType)
-                    ) {
+                    )
+                    {
                         mainMapping = entityTypeMapping;
                     }
                     continue;
@@ -1202,7 +1231,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                         && ((ITableBase)table).EntityTypeMappings.Any(
                             m => m.EntityType == foreignKey.PrincipalEntityType
                         )
-                    ) {
+                    )
+                    {
                         if (rowInternalForeignKeys == null)
                         {
                             rowInternalForeignKeys = new SortedSet<IForeignKey>(
@@ -1226,7 +1256,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                                 principalEntityType,
                                 out var internalReferencingForeignKeys
                             )
-                        ) {
+                        )
+                        {
                             internalReferencingForeignKeys = new SortedSet<IForeignKey>(
                                 ForeignKeyComparer.Instance
                             );
@@ -1258,7 +1289,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     if (
                         mainMapping == null
                         || entityTypeMapping.EntityType.IsAssignableFrom(mainMapping.EntityType)
-                    ) {
+                    )
+                    {
                         mainMapping = entityTypeMapping;
                     }
                 }
@@ -1297,7 +1329,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     if (
                         optionalTypes.TryGetValue(entityType, out var previouslyOptional)
                         && (!previouslyOptional || optional)
-                    ) {
+                    )
+                    {
                         continue;
                     }
 
@@ -1308,7 +1341,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                             entityType,
                             out var referencingInternalForeignKeys
                         )
-                    ) {
+                    )
+                    {
                         foreach (var referencingForeignKey in referencingInternalForeignKeys)
                         {
                             entityTypesToVisit.Enqueue(
@@ -1324,13 +1358,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                         table.EntityTypeMappings.Single(
                             etm => etm.EntityType == entityType
                         ).IncludesDerivedTypes
-                    ) {
+                    )
+                    {
                         foreach (var directlyDerivedEntityType in entityType.GetDerivedTypes())
                         {
                             if (
                                 mappedEntityTypes.Contains(directlyDerivedEntityType)
                                 && !optionalTypes.ContainsKey(directlyDerivedEntityType)
-                            ) {
+                            )
+                            {
                                 entityTypesToVisit.Enqueue((directlyDerivedEntityType, optional));
                             }
                         }

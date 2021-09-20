@@ -28,7 +28,8 @@ namespace System.Drawing.Printing
             Rectangle marginBounds,
             Rectangle pageBounds,
             PageSettings pageSettings
-        ) {
+        )
+        {
             _graphics = graphics; // may be null, see PrintController
             _marginBounds = marginBounds;
             _pageBounds = pageBounds;

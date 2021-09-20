@@ -8,7 +8,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
         [ProducesResponseType(404)]
         public ActionResult<DiagnosticsAreReturned_IfMethodWithAttribute_ReturnsDerivedTypeBaseModel> Method(
             int id
-        ) {
+        )
+        {
             if (id == 0)
             {
                 return NotFound();

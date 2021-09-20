@@ -173,7 +173,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public static IDisposable? ViewComponentScope(
             this ILogger logger,
             ViewComponentContext context
-        ) {
+        )
+        {
             return logger.BeginScope(new ViewComponentLogScope(context.ViewComponentDescriptor));
         }
 #nullable restore
@@ -182,7 +183,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             this ILogger logger,
             ViewComponentContext context,
             object[] arguments
-        ) {
+        )
+        {
             if (logger.IsEnabled(LogLevel.Debug))
             {
                 var formattedArguments = GetFormattedArguments(arguments);
@@ -219,7 +221,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             ViewComponentContext context,
             TimeSpan timespan,
             object result
-        ) {
+        )
+        {
             // Don't log if logging wasn't enabled at start of request as time will be wildly wrong.
             if (logger.IsEnabled(LogLevel.Debug))
             {
@@ -242,7 +245,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             this ILogger logger,
             string partialViewName,
             IEnumerable<string> searchedLocations
-        ) {
+        )
+        {
             _partialViewNotFound(logger, partialViewName, searchedLocations, null);
         }
 
@@ -255,7 +259,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             this ILogger logger,
             string partialViewName,
             TimeSpan timespan
-        ) {
+        )
+        {
             _partialViewResultExecuted(logger, partialViewName, timespan.TotalMilliseconds, null);
         }
 
@@ -263,14 +268,16 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             this ILogger logger,
             string message,
             Exception exception
-        ) {
+        )
+        {
             _antiforgeryTokenInvalid(logger, message, exception);
         }
 
         public static void ViewComponentResultExecuting(
             this ILogger logger,
             string viewComponentName
-        ) {
+        )
+        {
             if (logger.IsEnabled(LogLevel.Information))
             {
                 _viewComponentResultExecuting(logger, viewComponentName, null);
@@ -294,7 +301,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             this ILogger logger,
             string viewName,
             TimeSpan timespan
-        ) {
+        )
+        {
             _viewResultExecuted(logger, viewName, timespan.TotalMilliseconds, null);
         }
 
@@ -307,7 +315,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             this ILogger logger,
             string viewName,
             IEnumerable<string> searchedLocations
-        ) {
+        )
+        {
             _viewNotFound(logger, viewName, searchedLocations, null);
         }
 
@@ -325,7 +334,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             this ILogger logger,
             string cookieName,
             Exception exception
-        ) {
+        )
+        {
             _tempDataCookieLoadFailure(logger, cookieName, exception);
         }
 

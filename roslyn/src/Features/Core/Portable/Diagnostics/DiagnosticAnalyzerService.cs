@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public DiagnosticAnalyzerService(
             IDiagnosticUpdateSourceRegistrationService registrationService,
             IAsynchronousOperationListenerProvider listenerProvider
-        ) {
+        )
+        {
             AnalyzerInfoCache = new DiagnosticAnalyzerInfoCache();
             Listener = listenerProvider.GetListener(FeatureAttribute.DiagnosticService);
 
@@ -63,7 +64,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             IEnumerable<ProjectId>? projectIds = null,
             IEnumerable<DocumentId>? documentIds = null,
             bool highPriority = false
-        ) {
+        )
+        {
             var service = workspace.Services.GetService<ISolutionCrawlerService>();
             if (service != null && _map.TryGetValue(workspace, out var analyzer))
             {
@@ -77,7 +79,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             ArrayBuilder<DiagnosticData> diagnostics,
             bool includeSuppressedDiagnostics = false,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (_map.TryGetValue(document.Project.Solution.Workspace, out var analyzer))
             {
                 // always make sure that analyzer is called on background thread.
@@ -107,7 +110,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             bool includeSuppressedDiagnostics = false,
             Func<string, IDisposable?>? addOperationScope = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (_map.TryGetValue(document.Project.Solution.Workspace, out var analyzer))
             {
                 // always make sure that analyzer is called on background thread.
@@ -135,7 +139,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             DocumentId? documentId = null,
             bool includeSuppressedDiagnostics = false,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (_map.TryGetValue(workspace, out var analyzer))
             {
                 return analyzer.GetCachedDiagnosticsAsync(
@@ -155,7 +160,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             object id,
             bool includeSuppressedDiagnostics = false,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (_map.TryGetValue(workspace, out var analyzer))
             {
                 return analyzer.GetSpecificCachedDiagnosticsAsync(
@@ -175,7 +181,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             DocumentId? documentId = null,
             bool includeSuppressedDiagnostics = false,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (_map.TryGetValue(solution.Workspace, out var analyzer))
             {
                 return analyzer.GetDiagnosticsAsync(
@@ -195,7 +202,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Action<Project> onProjectAnalyzed,
             ProjectId? projectId = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (_map.TryGetValue(solution.Workspace, out var analyzer))
             {
                 if (projectId != null)
@@ -237,7 +245,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             ImmutableHashSet<string>? diagnosticIds = null,
             bool includeSuppressedDiagnostics = false,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (_map.TryGetValue(solution.Workspace, out var analyzer))
             {
                 return analyzer.GetDiagnosticsForIdsAsync(
@@ -259,7 +268,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             ImmutableHashSet<string>? diagnosticIds = null,
             bool includeSuppressedDiagnostics = false,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (_map.TryGetValue(solution.Workspace, out var analyzer))
             {
                 return analyzer.GetProjectDiagnosticsForIdsAsync(

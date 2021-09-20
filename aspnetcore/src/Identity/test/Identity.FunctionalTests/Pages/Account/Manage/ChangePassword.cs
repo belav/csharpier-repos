@@ -24,7 +24,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests.Account.Manage
         public async Task<ChangePassword> ChangePasswordAsync(
             string oldPassword,
             string newPassword
-        ) {
+        )
+        {
             await Client.SendAsync(
                 _changePasswordForm,
                 new Dictionary<string, string>

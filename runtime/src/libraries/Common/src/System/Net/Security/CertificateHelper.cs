@@ -15,7 +15,8 @@ namespace System.Net.Security
 
         internal static X509Certificate2? GetEligibleClientCertificate(
             X509CertificateCollection candidateCerts
-        ) {
+        )
+        {
             if (candidateCerts.Count == 0)
             {
                 return null;
@@ -29,7 +30,8 @@ namespace System.Net.Security
 
         internal static X509Certificate2? GetEligibleClientCertificate(
             X509Certificate2Collection candidateCerts
-        ) {
+        )
+        {
             if (candidateCerts.Count == 0)
             {
                 return null;
@@ -76,7 +78,8 @@ namespace System.Net.Security
                 if (
                     (extension is X509EnhancedKeyUsageExtension eku)
                     && !IsValidForClientAuthenticationEKU(eku)
-                ) {
+                )
+                {
                     if (NetEventSource.Log.IsEnabled())
                     {
                         NetEventSource.Info(
@@ -88,7 +91,8 @@ namespace System.Net.Security
                 }
                 else if (
                     (extension is X509KeyUsageExtension ku) && !IsValidForDigitalSignatureUsage(ku)
-                ) {
+                )
+                {
                     if (NetEventSource.Log.IsEnabled())
                     {
                         NetEventSource.Info(

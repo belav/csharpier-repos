@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
             SourceCodeKind sourceCodeKind,
             TextLoader textLoader,
             IRazorDocumentServiceProvider documentServiceProvider
-        ) {
+        )
+        {
             FilePath = filePath;
             SourceCodeKind = sourceCodeKind;
             TextLoader = textLoader;

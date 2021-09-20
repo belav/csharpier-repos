@@ -88,7 +88,8 @@ namespace System.Linq.Parallel
             IPartitionedStreamRecipient<TResult> recipient,
             bool preferStriping,
             QuerySettings settings
-        ) {
+        )
+        {
             Debug.Assert(
                 Child.OrdinalIndexState != OrdinalIndexState.Indexable,
                 "Don't take this code path if the child is indexable."
@@ -117,7 +118,8 @@ namespace System.Linq.Parallel
             PartitionedStream<TResult, TKey> inputStream,
             IPartitionedStreamRecipient<TResult> recipient,
             QuerySettings settings
-        ) {
+        )
+        {
             int partitionCount = inputStream.PartitionCount;
             FixedMaxHeap<TKey> sharedIndices = new FixedMaxHeap<TKey>(
                 _count,
@@ -202,7 +204,8 @@ namespace System.Linq.Parallel
                 CountdownEvent sharedBarrier,
                 CancellationToken cancellationToken,
                 IComparer<TKey> keyComparer
-            ) {
+            )
+            {
                 Debug.Assert(source != null);
                 Debug.Assert(sharedIndices != null);
                 Debug.Assert(sharedBarrier != null);
@@ -224,7 +227,8 @@ namespace System.Linq.Parallel
             internal override bool MoveNext(
                 [MaybeNullWhen(false), AllowNull] ref TResult currentElement,
                 [AllowNull] ref TKey currentKey
-            ) {
+            )
+            {
                 Debug.Assert(_sharedIndices != null);
 
                 // If the buffer has not been created, we will populate it lazily on demand.
@@ -316,13 +320,15 @@ namespace System.Linq.Parallel
                                 _bufferIndex.Value++;
                                 _bufferIndex.Value < _buffer.Count;
                                 _bufferIndex.Value++
-                            ) {
+                            )
+                            {
                                 // If the current buffered element's index is greater than the 'count'-th index,
                                 // we will yield it as a result.
                                 if (
                                     _keyComparer.Compare(_buffer[_bufferIndex.Value].Second, minKey)
                                     > 0
-                                ) {
+                                )
+                                {
                                     currentElement = _buffer[_bufferIndex.Value].First;
                                     currentKey = _buffer[_bufferIndex.Value].Second;
                                     return true;
@@ -384,7 +390,8 @@ namespace System.Linq.Parallel
                 TakeOrSkipQueryOperator<TResult> op,
                 QuerySettings settings,
                 bool preferStriping
-            ) {
+            )
+            {
                 if (childQueryResults.IsIndexible)
                 {
                     return new TakeOrSkipQueryOperatorResults(

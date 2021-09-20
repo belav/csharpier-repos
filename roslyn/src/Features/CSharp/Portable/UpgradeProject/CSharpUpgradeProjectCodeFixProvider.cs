@@ -77,7 +77,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UpgradeProject
                         DiagnosticPropertyConstants.RequiredLanguageVersion,
                         out var requiredVersion
                     ) && LanguageVersionFacts.TryParse(requiredVersion, out var required)
-                ) {
+                )
+                {
                     max = max > required ? max : required;
                 }
                 else if (diagnostic.Id == "CS8652")

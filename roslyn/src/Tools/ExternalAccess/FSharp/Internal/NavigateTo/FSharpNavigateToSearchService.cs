@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.NavigateTo
             Func<INavigateToSearchResult, Task> onResultFound,
             bool isFullyLoaded,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var results = await _service.SearchDocumentAsync(
                     document,
                     searchPattern,
@@ -60,7 +61,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.NavigateTo
             Func<INavigateToSearchResult, Task> onResultFound,
             bool isFullyLoaded,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var results = await _service.SearchProjectAsync(
                     project,
                     priorityDocuments,

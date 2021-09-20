@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
                 Lazy<AbstractRequestHandlerProvider, RequestHandlerProviderMetadataView>
             > requestHandlerProviders,
             string? languageName = null
-        ) {
+        )
+        {
             _requestHandlerProviders = requestHandlerProviders.ToImmutableArray();
             _languageName = languageName;
         }

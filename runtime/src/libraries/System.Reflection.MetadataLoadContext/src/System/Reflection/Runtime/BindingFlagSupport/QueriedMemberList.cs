@@ -39,7 +39,8 @@ namespace System.Reflection.Runtime.BindingFlagSupport
             M[] members,
             BindingFlags[] allFlagsThatMustMatch,
             RuntimeTypeInfo? typeThatBlockedBrowsing
-        ) {
+        )
+        {
             _totalCount = totalCount;
             _declaredOnlyCount = declaredOnlyCount;
             _members = members;
@@ -123,7 +124,8 @@ namespace System.Reflection.Runtime.BindingFlagSupport
             string? filter,
             bool ignoreCase,
             bool immediateTypeOnly
-        ) {
+        )
+        {
             RuntimeTypeInfo reflectedType = type;
 
             MemberPolicies<M> policies = MemberPolicies<M>.Default;
@@ -144,7 +146,8 @@ namespace System.Reflection.Runtime.BindingFlagSupport
 
                 foreach (
                     M member in policies.CoreGetDeclaredMembers(type, nameFilter, reflectedType)
-                ) {
+                )
+                {
                     policies.GetMemberAttributes(
                         member,
                         out MethodAttributes visibility,

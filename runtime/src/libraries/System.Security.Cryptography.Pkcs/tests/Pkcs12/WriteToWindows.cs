@@ -174,7 +174,8 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
             using (
                 X509Certificate2 cert =
                     Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey(true)
-            ) {
+            )
+            {
                 Pkcs12CertBag certBag = safe1.AddCertificate(cert);
                 certBag.Attributes.Add(localKeyId);
 

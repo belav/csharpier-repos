@@ -60,7 +60,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
             if (
                 operation is IBinaryOperation binaryOperation
                 && binaryOperation.OperatorKind == BinaryOperatorKind.Subtract
-            ) {
+            )
+            {
                 subtraction = binaryOperation;
                 return true;
             }

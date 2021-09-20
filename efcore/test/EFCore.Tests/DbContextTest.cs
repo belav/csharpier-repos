@@ -958,7 +958,8 @@ namespace Microsoft.EntityFrameworkCore
             TestAssembly assembly,
             TestClass testClass,
             Test test
-        ) {
+        )
+        {
             Assert.Equal(EntityState.Unchanged, context.Entry(assembly).State);
             Assert.Equal("Assembly1", assembly.Name);
             Assert.Same(testClass, test.Class);

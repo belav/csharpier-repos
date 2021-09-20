@@ -65,7 +65,8 @@ namespace System.ComponentModel
             ITypeDescriptorContext context,
             CultureInfo culture,
             object value
-        ) {
+        )
+        {
             // Only when GetCultureName returns culture.Name, we use CultureInfoMapper
             // (Since CultureInfoMapper will transfer Culture.DisplayName to Culture.Name).
             // Otherwise, we just keep the value unchanged.
@@ -87,7 +88,8 @@ namespace System.ComponentModel
                 if (
                     string.IsNullOrEmpty(text)
                     || string.Equals(text, defaultCultureString, StringComparison.Ordinal)
-                ) {
+                )
+                {
                     retVal = CultureInfo.InvariantCulture;
                 }
 
@@ -99,7 +101,8 @@ namespace System.ComponentModel
                         if (
                             info != null
                             && string.Equals(GetCultureName(info), text, StringComparison.Ordinal)
-                        ) {
+                        )
+                        {
                             retVal = info;
                             break;
                         }
@@ -125,7 +128,8 @@ namespace System.ComponentModel
                             info != null
                             && GetCultureName(info)
                                 .StartsWith(text, StringComparison.CurrentCulture)
-                        ) {
+                        )
+                        {
                             retVal = info;
                             break;
                         }
@@ -155,7 +159,8 @@ namespace System.ComponentModel
             CultureInfo culture,
             object value,
             Type destinationType
-        ) {
+        )
+        {
             if (destinationType == typeof(string))
             {
                 string defaultCultureString = DefaultCultureString;

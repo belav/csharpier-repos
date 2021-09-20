@@ -367,7 +367,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
             TestServer server,
             string url,
             string cookie
-        ) {
+        )
+        {
             var request = new HttpRequestMessage(HttpMethod.Get, url);
             request.Headers.Add("Cookie", cookie);
 
@@ -382,7 +383,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
             Func<HttpContext, Task> testpath = null,
             Uri baseAddress = null,
             bool testCore = false
-        ) {
+        )
+        {
             var host = new HostBuilder().ConfigureWebHost(
                     builder =>
                         builder.Configure(
@@ -443,7 +445,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
                                             }
                                             else if (
                                                 req.Path == new PathString("/signoutEverywhere")
-                                            ) {
+                                            )
+                                            {
                                                 var user = await userManager.FindByNameAsync("hao");
                                                 var result =
                                                     await userManager.UpdateSecurityStampAsync(
@@ -456,7 +459,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
                                                     new PathString("/pwdLogin"),
                                                     out remainder
                                                 )
-                                            ) {
+                                            )
+                                            {
                                                 var isPersistent = bool.Parse(
                                                     remainder.Value.Substring(1)
                                                 );
@@ -471,7 +475,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
                                             }
                                             else if (
                                                 req.Path == new PathString("/twofactorRememeber")
-                                            ) {
+                                            )
+                                            {
                                                 var user = await userManager.FindByNameAsync("hao");
                                                 await signInManager.RememberTwoFactorClientAsync(
                                                     user
@@ -481,7 +486,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
                                             else if (
                                                 req.Path
                                                 == new PathString("/isTwoFactorRememebered")
-                                            ) {
+                                            )
+                                            {
                                                 var user = await userManager.FindByNameAsync("hao");
                                                 var result =
                                                     await signInManager.IsTwoFactorClientRememberedAsync(
@@ -491,7 +497,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
                                             }
                                             else if (
                                                 req.Path == new PathString("/hasTwoFactorUserId")
-                                            ) {
+                                            )
+                                            {
                                                 var result = await context.AuthenticateAsync(
                                                     IdentityConstants.TwoFactorUserIdScheme
                                                 );
@@ -515,7 +522,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
                                                     new PathString("/me"),
                                                     out remainder
                                                 )
-                                            ) {
+                                            )
+                                            {
                                                 var auth = await context.AuthenticateAsync(
                                                     remainder.Value.Substring(1)
                                                 );
@@ -524,7 +532,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
                                             else if (
                                                 req.Path == new PathString("/testpath")
                                                 && testpath != null
-                                            ) {
+                                            )
+                                            {
                                                 await testpath(context);
                                             }
                                             else
@@ -607,7 +616,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
                         memory,
                         new XmlWriterSettings { Encoding = Encoding.UTF8 }
                     )
-                ) {
+                )
+                {
                     xml.WriteTo(writer);
                 }
                 await res.Body.WriteAsync(memory.ToArray(), 0, memory.ToArray().Length);
@@ -619,7 +629,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
             string uri,
             string cookieHeader = null,
             bool ajaxRequest = false
-        ) {
+        )
+        {
             var request = new HttpRequestMessage(HttpMethod.Get, uri);
             if (!string.IsNullOrEmpty(cookieHeader))
             {
@@ -649,7 +660,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
                 transaction.Response.Content != null
                 && transaction.Response.Content.Headers.ContentType != null
                 && transaction.Response.Content.Headers.ContentType.MediaType == "text/xml"
-            ) {
+            )
+            {
                 transaction.ResponseElement = XElement.Parse(transaction.ResponseText);
             }
             return transaction;

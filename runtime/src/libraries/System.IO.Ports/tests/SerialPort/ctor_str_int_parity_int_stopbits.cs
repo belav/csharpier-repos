@@ -641,7 +641,8 @@ namespace System.IO.Ports.Tests
             int parity,
             int dataBits,
             int stopBits
-        ) {
+        )
+        {
             VerifyCtor(portName, baudRate, parity, dataBits, stopBits, null, ThrowAt.Set);
         }
 
@@ -653,7 +654,8 @@ namespace System.IO.Ports.Tests
             int stopBits,
             Type expectedException,
             ThrowAt throwAt
-        ) {
+        )
+        {
             SerialPortProperties serPortProp = new SerialPortProperties();
 
             Debug.WriteLine(
@@ -674,7 +676,8 @@ namespace System.IO.Ports.Tests
                         dataBits,
                         (StopBits)stopBits
                     )
-                ) {
+                )
+                {
                     if (null != expectedException && throwAt == ThrowAt.Set)
                     {
                         Fail("Err_7212ahsdj Expected Ctor to throw {0}", expectedException);

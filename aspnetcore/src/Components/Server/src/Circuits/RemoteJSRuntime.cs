@@ -42,7 +42,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
         protected override void EndInvokeDotNet(
             DotNetInvocationInfo invocationInfo,
             in DotNetInvocationResult invocationResult
-        ) {
+        )
+        {
             if (!invocationResult.Success)
             {
                 Log.InvokeDotNetMethodException(
@@ -95,7 +96,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
             string argsJson,
             JSCallResultType resultType,
             long targetInstanceId
-        ) {
+        )
+        {
             if (_clientProxy is null)
             {
                 throw new InvalidOperationException(
@@ -184,7 +186,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
                 ILogger logger,
                 in DotNetInvocationInfo invocationInfo,
                 Exception exception
-            ) {
+            )
+            {
                 if (invocationInfo.AssemblyName != null)
                 {
                     _invokeStaticDotNetMethodException(
@@ -210,7 +213,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
             internal static void InvokeDotNetMethodSuccess(
                 ILogger<RemoteJSRuntime> logger,
                 in DotNetInvocationInfo invocationInfo
-            ) {
+            )
+            {
                 if (invocationInfo.AssemblyName != null)
                 {
                     _invokeStaticDotNetMethodSuccess(

@@ -136,7 +136,8 @@ namespace System.Globalization.Tests
         public void PredefinedCulturesOnlyEnvVarTest(
             string predefinedCulturesOnlyEnvVar,
             string cultureName
-        ) {
+        )
+        {
             var psi = new ProcessStartInfo();
             psi.Environment.Clear();
 

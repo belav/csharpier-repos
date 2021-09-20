@@ -41,17 +41,19 @@ namespace Microsoft.AspNetCore.Identity
             IdentityErrorDescriber errors,
             IServiceProvider services,
             ILogger<UserManager<TUser>> logger
-        ) : base(
-            store,
-            optionsAccessor,
-            passwordHasher,
-            userValidators,
-            passwordValidators,
-            keyNormalizer,
-            errors,
-            services,
-            logger
-        ) {
+        )
+            : base(
+                store,
+                optionsAccessor,
+                passwordHasher,
+                userValidators,
+                passwordValidators,
+                keyNormalizer,
+                errors,
+                services,
+                logger
+            )
+        {
             _cancel =
                 services?.GetService<IHttpContextAccessor>()?.HttpContext?.RequestAborted
                 ?? CancellationToken.None;

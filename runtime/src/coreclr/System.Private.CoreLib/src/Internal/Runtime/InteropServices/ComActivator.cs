@@ -130,7 +130,8 @@ namespace Internal.Runtime.InteropServices
             if (
                 cxt.InterfaceId != typeof(IClassFactory).GUID
                 && cxt.InterfaceId != typeof(IClassFactory2).GUID
-            ) {
+            )
+            {
                 throw new NotSupportedException();
             }
 
@@ -234,7 +235,8 @@ namespace Internal.Runtime.InteropServices
                             methParams[0].ParameterType != typeof(string)
                             && methParams[0].ParameterType != typeof(Type)
                         )
-                    ) {
+                    )
+                    {
                         string msg = register
                             ? SR.InvalidOperation_InvalidComRegFunctionSig
                             : SR.InvalidOperation_InvalidComUnRegFunctionSig;
@@ -283,7 +285,8 @@ namespace Internal.Runtime.InteropServices
         [UnmanagedCallersOnly]
         public static unsafe int GetClassFactoryForTypeInternal(
             ComActivationContextInternal* pCxtInt
-        ) {
+        )
+        {
 #if FEATURE_COMINTEROP_UNMANAGED_ACTIVATION
             ref ComActivationContextInternal cxtInt = ref *pCxtInt;
 
@@ -370,7 +373,8 @@ namespace Internal.Runtime.InteropServices
         [UnmanagedCallersOnly]
         public static unsafe int UnregisterClassForTypeInternal(
             ComActivationContextInternal* pCxtInt
-        ) {
+        )
+        {
 #if FEATURE_COMINTEROP_UNMANAGED_ACTIVATION
             ref ComActivationContextInternal cxtInt = ref *pCxtInt;
 
@@ -437,7 +441,8 @@ namespace Internal.Runtime.InteropServices
             string assemblyPath,
             string assemblyName,
             string typeName
-        ) {
+        )
+        {
 #if FEATURE_COMINTEROP_UNMANAGED_ACTIVATION
             try
             {
@@ -507,7 +512,8 @@ namespace Internal.Runtime.InteropServices
                 Type classType,
                 ref Guid riid,
                 object? outer
-            ) {
+            )
+            {
 #if FEATURE_COMINTEROP_UNMANAGED_ACTIVATION
                 Debug.Assert(classType != null);
                 if (riid == Marshal.IID_IUnknown)
@@ -599,7 +605,8 @@ namespace Internal.Runtime.InteropServices
                 [MarshalAs(UnmanagedType.Interface)] object? pUnkOuter,
                 ref Guid riid,
                 out IntPtr ppvObject
-            ) {
+            )
+            {
 #if FEATURE_COMINTEROP_UNMANAGED_ACTIVATION
                 Type interfaceType = BasicClassFactory.GetValidatedInterfaceType(
                     _classType,
@@ -652,7 +659,8 @@ namespace Internal.Runtime.InteropServices
                 [MarshalAs(UnmanagedType.Interface)] object? pUnkOuter,
                 ref Guid riid,
                 out IntPtr ppvObject
-            ) {
+            )
+            {
 #if FEATURE_COMINTEROP_UNMANAGED_ACTIVATION
                 CreateInstanceInner(
                     pUnkOuter,
@@ -697,7 +705,8 @@ namespace Internal.Runtime.InteropServices
             public void RequestLicKey(
                 int dwReserved,
                 [MarshalAs(UnmanagedType.BStr)] out string pBstrKey
-            ) {
+            )
+            {
 #if FEATURE_COMINTEROP_UNMANAGED_ACTIVATION
                 pBstrKey = _licenseProxy.RequestLicKey(_classType);
 #else
@@ -711,7 +720,8 @@ namespace Internal.Runtime.InteropServices
                 ref Guid riid,
                 [MarshalAs(UnmanagedType.BStr)] string bstrKey,
                 out IntPtr ppvObject
-            ) {
+            )
+            {
 #if FEATURE_COMINTEROP_UNMANAGED_ACTIVATION
                 Debug.Assert(pUnkReserved == null);
                 CreateInstanceInner(
@@ -732,7 +742,8 @@ namespace Internal.Runtime.InteropServices
                 string? key,
                 bool isDesignTime,
                 out IntPtr ppvObject
-            ) {
+            )
+            {
 #if FEATURE_COMINTEROP_UNMANAGED_ACTIVATION
                 Type interfaceType = BasicClassFactory.GetValidatedInterfaceType(
                     _classType,
@@ -1058,7 +1069,8 @@ namespace Internal.Runtime.InteropServices
             RuntimeTypeHandle rth,
             out bool isDesignTime,
             out IntPtr bstrKey
-        ) {
+        )
+        {
 #if FEATURE_COMINTEROP_UNMANAGED_ACTIVATION
             Type targetRcwTypeMaybe = Type.GetTypeFromHandle(rth);
 

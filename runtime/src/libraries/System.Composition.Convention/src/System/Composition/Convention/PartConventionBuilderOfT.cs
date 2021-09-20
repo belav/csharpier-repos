@@ -83,7 +83,8 @@ namespace System.Composition.Convention
                 Expression<Func<T, object>> propertySelector,
                 Action<ImportConventionBuilder> configureImport = null,
                 Action<ExportConventionBuilder> configureExport = null
-            ) {
+            )
+            {
                 _propertyInfo = SelectProperties(propertySelector);
                 _configureImport = configureImport;
                 _configureExport = configureExport;
@@ -97,20 +98,23 @@ namespace System.Composition.Convention
             public void ConfigureImport(
                 PropertyInfo propertyInfo,
                 ImportConventionBuilder importBuilder
-            ) {
+            )
+            {
                 _configureImport?.Invoke(importBuilder);
             }
 
             public void ConfigureExport(
                 PropertyInfo propertyInfo,
                 ExportConventionBuilder exportBuilder
-            ) {
+            )
+            {
                 _configureExport?.Invoke(exportBuilder);
             }
 
             private static PropertyInfo SelectProperties(
                 Expression<Func<T, object>> propertySelector
-            ) {
+            )
+            {
                 if (propertySelector == null)
                 {
                     throw new ArgumentNullException(nameof(propertySelector));
@@ -150,7 +154,8 @@ namespace System.Composition.Convention
 
             public ConstructorExpressionAdapter(
                 Expression<Func<ParameterImportConventionBuilder, T>> selectConstructor
-            ) {
+            )
+            {
                 ParseSelectConstructor(selectConstructor);
             }
 
@@ -162,7 +167,8 @@ namespace System.Composition.Convention
             public void ConfigureConstructorImports(
                 ParameterInfo parameterInfo,
                 ImportConventionBuilder importBuilder
-            ) {
+            )
+            {
                 if (_importBuilders != null)
                 {
                     if (
@@ -170,7 +176,8 @@ namespace System.Composition.Convention
                             parameterInfo,
                             out Action<ImportConventionBuilder> parameterImportBuilder
                         )
-                    ) {
+                    )
+                    {
                         parameterImportBuilder(importBuilder);
                     }
                 }
@@ -180,7 +187,8 @@ namespace System.Composition.Convention
 
             private void ParseSelectConstructor(
                 Expression<Func<ParameterImportConventionBuilder, T>> constructorSelector
-            ) {
+            )
+            {
                 if (constructorSelector == null)
                 {
                     throw new ArgumentNullException(nameof(constructorSelector));
@@ -232,7 +240,8 @@ namespace System.Composition.Convention
 
             private static Expression<Func<ParameterImportConventionBuilder, T>> Reduce(
                 Expression<Func<ParameterImportConventionBuilder, T>> expr
-            ) {
+            )
+            {
                 while (expr.CanReduce)
                 {
                     expr.Reduce();
@@ -250,7 +259,8 @@ namespace System.Composition.Convention
         /// <returns>A part builder allowing further configuration of the part.</returns>
         public PartConventionBuilder<T> SelectConstructor(
             Expression<Func<ParameterImportConventionBuilder, T>> constructorSelector
-        ) {
+        )
+        {
             if (constructorSelector == null)
             {
                 throw new ArgumentNullException(nameof(constructorSelector));
@@ -280,7 +290,8 @@ namespace System.Composition.Convention
         public PartConventionBuilder<T> ExportProperty(
             Expression<Func<T, object>> propertySelector,
             Action<ExportConventionBuilder> exportConfiguration
-        ) {
+        )
+        {
             if (propertySelector == null)
             {
                 throw new ArgumentNullException(nameof(propertySelector));
@@ -303,7 +314,8 @@ namespace System.Composition.Convention
         /// <returns>A part builder allowing further configuration of the part.</returns>
         public PartConventionBuilder<T> ExportProperty<TContract>(
             Expression<Func<T, object>> propertySelector
-        ) {
+        )
+        {
             return ExportProperty<TContract>(propertySelector, null);
         }
 
@@ -317,7 +329,8 @@ namespace System.Composition.Convention
         public PartConventionBuilder<T> ExportProperty<TContract>(
             Expression<Func<T, object>> propertySelector,
             Action<ExportConventionBuilder> exportConfiguration
-        ) {
+        )
+        {
             if (propertySelector == null)
             {
                 throw new ArgumentNullException(nameof(propertySelector));
@@ -351,7 +364,8 @@ namespace System.Composition.Convention
         public PartConventionBuilder<T> ImportProperty(
             Expression<Func<T, object>> propertySelector,
             Action<ImportConventionBuilder> importConfiguration
-        ) {
+        )
+        {
             if (propertySelector == null)
             {
                 throw new ArgumentNullException(nameof(propertySelector));
@@ -374,7 +388,8 @@ namespace System.Composition.Convention
         /// <returns>A part builder allowing further configuration of the part.</returns>
         public PartConventionBuilder<T> ImportProperty<TContract>(
             Expression<Func<T, object>> propertySelector
-        ) {
+        )
+        {
             return ImportProperty<TContract>(propertySelector, null);
         }
 
@@ -388,7 +403,8 @@ namespace System.Composition.Convention
         public PartConventionBuilder<T> ImportProperty<TContract>(
             Expression<Func<T, object>> propertySelector,
             Action<ImportConventionBuilder> importConfiguration
-        ) {
+        )
+        {
             if (propertySelector == null)
             {
                 throw new ArgumentNullException(nameof(propertySelector));

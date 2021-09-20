@@ -33,10 +33,8 @@ namespace System.Linq.Parallel
         //     child                - the child whose data we will reverse
         //
 
-        internal SingleQueryOperator(
-            IEnumerable<TSource> child,
-            Func<TSource, bool>? predicate
-        ) : base(child)
+        internal SingleQueryOperator(IEnumerable<TSource> child, Func<TSource, bool>? predicate)
+            : base(child)
         {
             Debug.Assert(child != null, "child data source cannot be null");
             _predicate = predicate;
@@ -58,7 +56,8 @@ namespace System.Linq.Parallel
             IPartitionedStreamRecipient<TSource> recipient,
             bool preferStriping,
             QuerySettings settings
-        ) {
+        )
+        {
             int partitionCount = inputStream.PartitionCount;
             PartitionedStream<TSource, int> outputStream = new PartitionedStream<TSource, int>(
                 partitionCount,
@@ -127,7 +126,8 @@ namespace System.Linq.Parallel
                 QueryOperatorEnumerator<TSource, TKey> source,
                 Func<TSource, bool>? predicate,
                 Shared<int> totalElementCount
-            ) {
+            )
+            {
                 Debug.Assert(source != null);
                 Debug.Assert(totalElementCount != null);
 
@@ -143,7 +143,8 @@ namespace System.Linq.Parallel
             internal override bool MoveNext(
                 [AllowNull] ref TSource currentElement,
                 ref int currentKey
-            ) {
+            )
+            {
                 Debug.Assert(_source != null);
 
                 if (_alreadySearched)

@@ -39,7 +39,8 @@ namespace Microsoft.TestCommon
             ITestFrameworkDiscoveryOptions discoveryOptions,
             ITestMethod testMethod,
             IAttributeInfo factAttribute
-        ) {
+        )
+        {
             var baseCases = base.Discover(discoveryOptions, testMethod, factAttribute);
             if (!String.IsNullOrEmpty(factAttribute.GetNamedArgument<string>("Skip")))
             {

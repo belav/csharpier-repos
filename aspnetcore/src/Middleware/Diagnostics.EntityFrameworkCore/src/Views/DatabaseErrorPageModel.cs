@@ -15,7 +15,8 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Views
             IEnumerable<DatabaseContextDetails> contextDetails,
             DatabaseErrorPageOptions options,
             PathString pathBase
-        ) {
+        )
+        {
             Exception = exception;
             ContextDetails = contextDetails;
             Options = options;

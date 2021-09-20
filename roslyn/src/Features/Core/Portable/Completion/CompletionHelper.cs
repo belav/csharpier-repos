@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.Completion
             string text,
             string pattern,
             CultureInfo culture
-        ) {
+        )
+        {
             var match = GetMatch(text, pattern, includeMatchSpans: true, culture: culture);
             return match == null ? ImmutableArray<TextSpan>.Empty : match.Value.MatchedSpans;
         }
@@ -54,7 +55,8 @@ namespace Microsoft.CodeAnalysis.Completion
             string pattern,
             bool includeMatchSpans,
             CultureInfo culture
-        ) {
+        )
+        {
             // If the item has a dot in it (i.e. for something like enum completion), then attempt
             // to match what the user wrote against the last portion of the name.  That way if they
             // write "Bl" and we have "Blub" and "Color.Black", we'll consider the latter to be a
@@ -93,7 +95,8 @@ namespace Microsoft.CodeAnalysis.Completion
             string pattern,
             CultureInfo culture,
             bool includeMatchSpans
-        ) {
+        )
+        {
             var patternMatcher = GetPatternMatcher(pattern, culture, includeMatchSpans);
             var match = patternMatcher.GetFirstMatch(completionItemText);
 
@@ -105,7 +108,8 @@ namespace Microsoft.CodeAnalysis.Completion
                 culture.ThreeLetterWindowsLanguageName.Equals(
                     EnUSCultureInfo.ThreeLetterWindowsLanguageName
                 )
-            ) {
+            )
+            {
                 return match;
             }
 
@@ -135,7 +139,8 @@ namespace Microsoft.CodeAnalysis.Completion
             CultureInfo culture,
             bool includeMatchedSpans,
             Dictionary<(string, CultureInfo, bool), PatternMatcher> map
-        ) {
+        )
+        {
             lock (_gate)
             {
                 var key = (pattern, culture, includeMatchedSpans);
@@ -169,7 +174,8 @@ namespace Microsoft.CodeAnalysis.Completion
             CompletionItem item2,
             string pattern,
             CultureInfo culture
-        ) {
+        )
+        {
             var match1 = GetMatch(item1.FilterText, pattern, includeMatchSpans: false, culture);
             var match2 = GetMatch(item2.FilterText, pattern, includeMatchSpans: false, culture);
 
@@ -181,7 +187,8 @@ namespace Microsoft.CodeAnalysis.Completion
             PatternMatch? match1,
             CompletionItem item2,
             PatternMatch? match2
-        ) {
+        )
+        {
             if (match1 != null && match2 != null)
             {
                 var result = CompareMatches(match1.Value, match2.Value, item1, item2);
@@ -228,7 +235,8 @@ namespace Microsoft.CodeAnalysis.Completion
             PatternMatch match2,
             CompletionItem item1,
             CompletionItem item2
-        ) {
+        )
+        {
             // *Almost* always prefer non-expanded item regardless of the pattern matching result.
             // Except when all non-expanded items are worse than prefix matching and there's
             // a complete match from expanded ones.
@@ -310,13 +318,15 @@ namespace Microsoft.CodeAnalysis.Completion
                 if (
                     item2.GetEntireDisplayText()
                         .StartsWith(item1.GetEntireDisplayText(), comparison)
-                ) {
+                )
+                {
                     return -1;
                 }
                 else if (
                     item1.GetEntireDisplayText()
                         .StartsWith(item2.GetEntireDisplayText(), comparison)
-                ) {
+                )
+                {
                     return 1;
                 }
             }
@@ -338,7 +348,8 @@ namespace Microsoft.CodeAnalysis.Completion
             PatternMatch match1,
             CompletionItem item2,
             PatternMatch match2
-        ) {
+        )
+        {
             var isItem1Expanded = item1.Flags.IsExpanded();
             var isItem2Expanded = item2.Flags.IsExpanded();
 

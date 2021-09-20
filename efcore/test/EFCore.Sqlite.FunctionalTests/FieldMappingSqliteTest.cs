@@ -49,7 +49,8 @@ namespace Microsoft.EntityFrameworkCore
                 protected override void OnModelCreating(
                     ModelBuilder modelBuilder,
                     DbContext context
-                ) {
+                )
+                {
                     modelBuilder.UsePropertyAccessMode(PropertyAccessMode.Field);
                     base.OnModelCreating(modelBuilder, context);
                 }
@@ -68,7 +69,8 @@ namespace Microsoft.EntityFrameworkCore
                 protected override void OnModelCreating(
                     ModelBuilder modelBuilder,
                     DbContext context
-                ) {
+                )
+                {
                     modelBuilder.UsePropertyAccessMode(PropertyAccessMode.FieldDuringConstruction);
                     base.OnModelCreating(modelBuilder, context);
                 }
@@ -250,7 +252,8 @@ namespace Microsoft.EntityFrameworkCore
                 protected override void OnModelCreating(
                     ModelBuilder modelBuilder,
                     DbContext context
-                ) {
+                )
+                {
                     modelBuilder.UsePropertyAccessMode(PropertyAccessMode.Property);
                     base.OnModelCreating(modelBuilder, context);
                 }

@@ -69,7 +69,8 @@ namespace Microsoft.CodeAnalysis.Rename
                 DocumentId,
                 ImmutableArray<RelatedLocation>
             > documentToRelatedLocationsMap
-        ) {
+        )
+        {
             ErrorMessage = null;
             OldSolution = oldSolution;
             _newSolutionWithoutRenamedDocument = newSolutionWithoutRenamedDocument;

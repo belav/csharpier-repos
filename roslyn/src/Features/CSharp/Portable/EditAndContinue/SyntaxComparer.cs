@@ -223,7 +223,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                 node != null
                 && node.Parent.IsKind(SyntaxKind.ForStatement)
                 && node is ExpressionSyntax
-            ) {
+            )
+            {
                 return Label.ForStatementPart;
             }
 
@@ -281,7 +282,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             SyntaxKind kind,
             SyntaxNode? node,
             out bool isLeaf
-        ) {
+        )
+        {
             isLeaf = false;
 
             // ************************************
@@ -720,7 +722,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             SyntaxNode leftNode,
             SyntaxNode rightNode,
             out double distance
-        ) {
+        )
+        {
             switch (leftNode.Kind())
             {
                 case SyntaxKind.VariableDeclarator:
@@ -913,7 +916,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
         private static double ComputeWeightedDistanceOfNestedFunctions(
             SyntaxNode leftNode,
             SyntaxNode rightNode
-        ) {
+        )
+        {
             GetNestedFunctionsParts(
                 leftNode,
                 out var leftParameters,
@@ -938,7 +942,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             if (
                 (leftAsync.Kind() == SyntaxKind.AsyncKeyword)
                 != (rightAsync.Kind() == SyntaxKind.AsyncKeyword)
-            ) {
+            )
+            {
                 return 1.0;
             }
 
@@ -966,7 +971,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             out TypeSyntax? returnType,
             out SyntaxToken identifier,
             out TypeParameterListSyntax? typeParameters
-        ) {
+        )
+        {
             switch (nestedFunction.Kind())
             {
                 case SyntaxKind.SimpleLambdaExpression:
@@ -1036,7 +1042,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             BlockSyntax leftBlock,
             BlockSyntax rightBlock,
             out double distance
-        ) {
+        )
+        {
             // No block can be matched with the root block.
             // Note that in constructors the root is the constructor declaration, since we need to include
             // the constructor initializer in the match.
@@ -1045,7 +1052,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                 || rightBlock.Parent == null
                 || leftBlock.Parent.IsKind(SyntaxKind.ConstructorDeclaration)
                 || rightBlock.Parent.IsKind(SyntaxKind.ConstructorDeclaration)
-            ) {
+            )
+            {
                 distance = 0.0;
                 return true;
             }
@@ -1084,7 +1092,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                         && leftCatch.Filter == null
                         && rightCatch.Declaration == null
                         && rightCatch.Filter == null
-                    ) {
+                    )
+                    {
                         var leftTry = (TryStatementSyntax)leftCatch.Parent!;
                         var rightTry = (TryStatementSyntax)rightCatch.Parent!;
 
@@ -1122,7 +1131,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
         private double ComputeWeightedDistance(
             SingleVariableDesignationSyntax leftNode,
             SingleVariableDesignationSyntax rightNode
-        ) {
+        )
+        {
             var distance = ComputeDistance(leftNode, rightNode);
             double parentDistance;
 
@@ -1130,7 +1140,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                 leftNode.Parent != null
                 && rightNode.Parent != null
                 && GetLabel(leftNode.Parent) == GetLabel(rightNode.Parent)
-            ) {
+            )
+            {
                 parentDistance = ComputeDistance(leftNode.Parent, rightNode.Parent);
             }
             else
@@ -1144,7 +1155,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
         private static double ComputeWeightedBlockDistance(
             BlockSyntax leftBlock,
             BlockSyntax rightBlock
-        ) {
+        )
+        {
             if (TryComputeLocalsDistance(leftBlock, rightBlock, out var distance))
             {
                 return distance;
@@ -1156,7 +1168,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
         private static double ComputeWeightedDistance(
             CatchClauseSyntax left,
             CatchClauseSyntax right
-        ) {
+        )
+        {
             var blockDistance = ComputeDistance(left.Block, right.Block);
             var distance = CombineOptional(
                 blockDistance,
@@ -1171,7 +1184,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
         private static double ComputeWeightedDistance(
             CommonForEachStatementSyntax leftCommonForEach,
             CommonForEachStatementSyntax rightCommonForEach
-        ) {
+        )
+        {
             var statementDistance = ComputeDistance(
                 leftCommonForEach.Statement,
                 rightCommonForEach.Statement
@@ -1201,7 +1215,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
         private static double ComputeWeightedDistance(
             ForStatementSyntax left,
             ForStatementSyntax right
-        ) {
+        )
+        {
             var statementDistance = ComputeDistance(left.Statement, right.Statement);
             var conditionDistance = ComputeDistance(left.Condition, right.Condition);
 
@@ -1217,7 +1232,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                     right.Declaration,
                     out var localsDistance
                 )
-            ) {
+            )
+            {
                 distance = distance * 0.4 + localsDistance * 0.6;
             }
 
@@ -1229,7 +1245,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             StatementSyntax leftStatement,
             VariableDeclarationSyntax rightVariables,
             StatementSyntax rightStatement
-        ) {
+        )
+        {
             var distance = ComputeDistance(leftStatement, rightStatement);
             // Put maximum weight behind the variables declared in the header of the statement.
             if (TryComputeLocalsDistance(leftVariables, rightVariables, out var localsDistance))
@@ -1252,7 +1269,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             StatementSyntax leftStatement,
             SyntaxNode? rightHeader,
             StatementSyntax rightStatement
-        ) {
+        )
+        {
             var headerDistance = ComputeDistance(leftHeader, rightHeader);
             var statementDistance = ComputeDistance(leftStatement, rightStatement);
             var distance = headerDistance * 0.6 + statementDistance * 0.4;
@@ -1270,20 +1288,23 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             StatementSyntax leftStatement,
             StatementSyntax rightStatement,
             double localsWeight
-        ) {
+        )
+        {
             // If the statement is a block that declares local variables,
             // weight them more than the rest of the statement.
             if (
                 leftStatement.Kind() == SyntaxKind.Block
                 && rightStatement.Kind() == SyntaxKind.Block
-            ) {
+            )
+            {
                 if (
                     TryComputeLocalsDistance(
                         (BlockSyntax)leftStatement,
                         (BlockSyntax)rightStatement,
                         out var localsDistance
                     )
-                ) {
+                )
+                {
                     return localsDistance * localsWeight + distance * (1 - localsWeight);
                 }
             }
@@ -1295,7 +1316,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             VariableDeclarationSyntax? left,
             VariableDeclarationSyntax? right,
             out double distance
-        ) {
+        )
+        {
             List<SyntaxToken>? leftLocals = null;
             List<SyntaxToken>? rightLocals = null;
 
@@ -1323,7 +1345,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             BlockSyntax left,
             BlockSyntax right,
             out double distance
-        ) {
+        )
+        {
             List<SyntaxToken>? leftLocals = null;
             List<SyntaxToken>? rightLocals = null;
 
@@ -1351,7 +1374,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                         SyntaxKind.LocalDeclarationStatement,
                         out LocalDeclarationStatementSyntax? localDecl
                     )
-                ) {
+                )
+                {
                     GetLocalNames(localDecl.Declaration, ref result);
                 }
             }
@@ -1362,7 +1386,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
         private static void GetLocalNames(
             VariableDeclarationSyntax localDeclaration,
             ref List<SyntaxToken>? result
-        ) {
+        )
+        {
             foreach (var local in localDeclaration.Variables)
             {
                 GetLocalNames(local.Identifier, ref result);
@@ -1372,7 +1397,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
         internal static void GetLocalNames(
             CommonForEachStatementSyntax commonForEach,
             ref List<SyntaxToken>? result
-        ) {
+        )
+        {
             switch (commonForEach.Kind())
             {
                 case SyntaxKind.ForEachStatement:
@@ -1392,7 +1418,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
         private static void GetLocalNames(
             ExpressionSyntax expression,
             ref List<SyntaxToken>? result
-        ) {
+        )
+        {
             switch (expression.Kind())
             {
                 case SyntaxKind.DeclarationExpression:
@@ -1418,7 +1445,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
         private static void GetLocalNames(
             VariableDesignationSyntax designation,
             ref List<SyntaxToken>? result
-        ) {
+        )
+        {
             switch (designation.Kind())
             {
                 case SyntaxKind.SingleVariableDesignation:
@@ -1448,7 +1476,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
         private static void GetLocalNames(
             SyntaxToken syntaxToken,
             [NotNull] ref List<SyntaxToken>? result
-        ) {
+        )
+        {
             result ??= new List<SyntaxToken>();
             result.Add(syntaxToken);
         }
@@ -1461,7 +1490,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             SyntaxNode? right2,
             double weight0 = 0.8,
             double weight1 = 0.5
-        ) {
+        )
+        {
             var one = left1 != null || right1 != null;
             var two = left2 != null || right2 != null;
 
@@ -1596,7 +1626,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                 if (
                     weightedDistance == ExactMatchDist
                     && !SyntaxFactory.AreEquivalent(oldNode, newNode)
-                ) {
+                )
+                {
                     weightedDistance = EpsilonDist;
                 }
 
@@ -1623,7 +1654,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
         internal static double ComputeDistance(
             SyntaxNodeOrToken oldNodeOrToken,
             SyntaxNodeOrToken newNodeOrToken
-        ) {
+        )
+        {
             Debug.Assert(newNodeOrToken.IsToken == oldNodeOrToken.IsToken);
 
             double distance;

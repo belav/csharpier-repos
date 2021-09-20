@@ -66,7 +66,8 @@ namespace System.Security.Cryptography.Asn1.Pkcs12
             Asn1Tag expectedTag,
             ReadOnlyMemory<byte> encoded,
             AsnEncodingRules ruleSet
-        ) {
+        )
+        {
             try
             {
                 AsnValueReader reader = new AsnValueReader(encoded.Span, ruleSet);
@@ -85,7 +86,8 @@ namespace System.Security.Cryptography.Asn1.Pkcs12
             ref AsnValueReader reader,
             ReadOnlyMemory<byte> rebind,
             out SafeBagAsn decoded
-        ) {
+        )
+        {
             Decode(ref reader, Asn1Tag.Sequence, rebind, out decoded);
         }
 
@@ -94,7 +96,8 @@ namespace System.Security.Cryptography.Asn1.Pkcs12
             Asn1Tag expectedTag,
             ReadOnlyMemory<byte> rebind,
             out SafeBagAsn decoded
-        ) {
+        )
+        {
             try
             {
                 DecodeCore(ref reader, expectedTag, rebind, out decoded);
@@ -110,7 +113,8 @@ namespace System.Security.Cryptography.Asn1.Pkcs12
             Asn1Tag expectedTag,
             ReadOnlyMemory<byte> rebind,
             out SafeBagAsn decoded
-        ) {
+        )
+        {
             decoded = default;
             AsnValueReader sequenceReader = reader.ReadSequence(expectedTag);
             AsnValueReader explicitReader;
@@ -131,7 +135,8 @@ namespace System.Security.Cryptography.Asn1.Pkcs12
             if (
                 sequenceReader.HasData
                 && sequenceReader.PeekTag().HasSameClassAndValue(Asn1Tag.SetOf)
-            ) {
+            )
+            {
                 // Decode SEQUENCE OF for BagAttributes
                 {
                     collectionReader = sequenceReader.ReadSetOf();

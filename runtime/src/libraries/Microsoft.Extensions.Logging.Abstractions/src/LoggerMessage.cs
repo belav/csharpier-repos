@@ -74,7 +74,8 @@ namespace Microsoft.Extensions.Logging
         /// <returns>A delegate which when invoked creates a log scope.</returns>
         public static Func<ILogger, T1, T2, T3, IDisposable> DefineScope<T1, T2, T3>(
             string formatString
-        ) {
+        )
+        {
             LogValuesFormatter formatter = CreateLogValuesFormatter(
                 formatString,
                 expectedNamedParameterCount: 3
@@ -95,7 +96,8 @@ namespace Microsoft.Extensions.Logging
         /// <returns>A delegate which when invoked creates a log scope.</returns>
         public static Func<ILogger, T1, T2, T3, T4, IDisposable> DefineScope<T1, T2, T3, T4>(
             string formatString
-        ) {
+        )
+        {
             LogValuesFormatter formatter = CreateLogValuesFormatter(
                 formatString,
                 expectedNamedParameterCount: 4
@@ -199,7 +201,8 @@ namespace Microsoft.Extensions.Logging
             EventId eventId,
             string formatString,
             bool skipEnabledCheck
-        ) {
+        )
+        {
             LogValuesFormatter formatter = CreateLogValuesFormatter(
                 formatString,
                 expectedNamedParameterCount: 0
@@ -258,7 +261,8 @@ namespace Microsoft.Extensions.Logging
             EventId eventId,
             string formatString,
             bool skipEnabledCheck
-        ) {
+        )
+        {
             LogValuesFormatter formatter = CreateLogValuesFormatter(
                 formatString,
                 expectedNamedParameterCount: 1
@@ -319,7 +323,8 @@ namespace Microsoft.Extensions.Logging
             EventId eventId,
             string formatString,
             bool skipEnabledCheck
-        ) {
+        )
+        {
             LogValuesFormatter formatter = CreateLogValuesFormatter(
                 formatString,
                 expectedNamedParameterCount: 2
@@ -382,7 +387,8 @@ namespace Microsoft.Extensions.Logging
             EventId eventId,
             string formatString,
             bool skipEnabledCheck
-        ) {
+        )
+        {
             LogValuesFormatter formatter = CreateLogValuesFormatter(
                 formatString,
                 expectedNamedParameterCount: 3
@@ -447,7 +453,8 @@ namespace Microsoft.Extensions.Logging
             EventId eventId,
             string formatString,
             bool skipEnabledCheck
-        ) {
+        )
+        {
             LogValuesFormatter formatter = CreateLogValuesFormatter(
                 formatString,
                 expectedNamedParameterCount: 4
@@ -514,7 +521,8 @@ namespace Microsoft.Extensions.Logging
             EventId eventId,
             string formatString,
             bool skipEnabledCheck
-        ) {
+        )
+        {
             LogValuesFormatter formatter = CreateLogValuesFormatter(
                 formatString,
                 expectedNamedParameterCount: 5
@@ -528,7 +536,8 @@ namespace Microsoft.Extensions.Logging
                 T4 arg4,
                 T5 arg5,
                 Exception? exception
-            ) {
+            )
+            {
                 logger.Log(
                     logLevel,
                     eventId,
@@ -617,7 +626,8 @@ namespace Microsoft.Extensions.Logging
                 T5 arg5,
                 T6 arg6,
                 Exception? exception
-            ) {
+            )
+            {
                 logger.Log(
                     logLevel,
                     eventId,
@@ -652,7 +662,8 @@ namespace Microsoft.Extensions.Logging
         private static LogValuesFormatter CreateLogValuesFormatter(
             string formatString,
             int expectedNamedParameterCount
-        ) {
+        )
+        {
             var logValuesFormatter = new LogValuesFormatter(formatString);
 
             int actualCount = logValuesFormatter.ValueNames.Count;
@@ -963,7 +974,8 @@ namespace Microsoft.Extensions.Logging
                 T1 value1,
                 T2 value2,
                 T3 value3
-            ) {
+            )
+            {
                 _formatter = formatter;
                 _value0 = value0;
                 _value1 = value1;
@@ -1056,7 +1068,8 @@ namespace Microsoft.Extensions.Logging
                 T2 value2,
                 T3 value3,
                 T4 value4
-            ) {
+            )
+            {
                 _formatter = formatter;
                 _value0 = value0;
                 _value1 = value1;
@@ -1158,7 +1171,8 @@ namespace Microsoft.Extensions.Logging
                 T3 value3,
                 T4 value4,
                 T5 value5
-            ) {
+            )
+            {
                 _formatter = formatter;
                 _value0 = value0;
                 _value1 = value1;

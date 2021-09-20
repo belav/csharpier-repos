@@ -32,7 +32,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
                 string response = await SendRequestAsync(address);
                 Assert.Equal(string.Empty, response);
             }
@@ -51,7 +52,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return httpContext.Response.Body.WriteAsync(body, 0, body.Length);
                     }
                 )
-            ) {
+            )
+            {
                 string response = await SendRequestAsync(address);
                 Assert.Equal("Hello World", response);
             }
@@ -74,7 +76,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         await httpContext.Response.Body.WriteAsync(body, 0, body.Length);
                     }
                 )
-            ) {
+            )
+            {
                 string response = await SendRequestAsync(address, "Hello World");
                 Assert.Equal("Hello World", response);
             }
@@ -95,7 +98,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         Assert.Null(tls.ClientCertificate);
                     }
                 )
-            ) {
+            )
+            {
                 string response = await SendRequestAsync(address);
                 Assert.Equal(string.Empty, response);
             }
@@ -116,7 +120,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         Assert.NotNull(tls.ClientCertificate);
                     }
                 )
-            ) {
+            )
+            {
                 X509Certificate2 cert = FindClientCert();
                 Assert.NotNull(cert);
                 string response = await SendRequestAsync(address, cert);
@@ -144,7 +149,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         }
                     }
                 )
-            ) {
+            )
+            {
                 string response = await SendRequestAsync(address);
                 Assert.Equal(string.Empty, response);
             }
@@ -164,7 +170,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return httpContext.Response.WriteAsJsonAsync(tlsFeature);
                     }
                 )
-            ) {
+            )
+            {
                 string response = await SendRequestAsync(address);
                 var result = System.Text.Json.JsonDocument.Parse(response).RootElement;
 
@@ -256,7 +263,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         }
                     }
                 )
-            ) {
+            )
+            {
                 string response = await SendRequestAsync(address);
                 Assert.Equal(string.Empty, response);
             }

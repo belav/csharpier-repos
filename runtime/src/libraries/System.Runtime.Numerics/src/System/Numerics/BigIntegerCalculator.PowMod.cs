@@ -75,7 +75,8 @@ namespace System.Numerics
             ref BitsBuffer value,
             ref BitsBuffer result,
             ref BitsBuffer temp
-        ) {
+        )
+        {
             // The basic pow algorithm using square-and-multiply.
 
             while (power != 0)
@@ -277,7 +278,8 @@ namespace System.Numerics
             ref BitsBuffer value,
             ref BitsBuffer result,
             ref BitsBuffer temp
-        ) {
+        )
+        {
             // The big modulus pow algorithm for all but
             // the last power limb using square-and-multiply.
 
@@ -309,7 +311,8 @@ namespace System.Numerics
             ref BitsBuffer value,
             ref BitsBuffer result,
             ref BitsBuffer temp
-        ) {
+        )
+        {
             // The big modulus pow algorithm for the last or
             // the only power limb using square-and-multiply.
 
@@ -338,7 +341,8 @@ namespace System.Numerics
             ref BitsBuffer value,
             ref BitsBuffer result,
             ref BitsBuffer temp
-        ) {
+        )
+        {
             // The big modulus pow algorithm for all but
             // the last power limb using square-and-multiply.
 
@@ -370,7 +374,8 @@ namespace System.Numerics
             ref BitsBuffer value,
             ref BitsBuffer result,
             ref BitsBuffer temp
-        ) {
+        )
+        {
             // The big modulus pow algorithm for the last or
             // the only power limb using square-and-multiply.
 

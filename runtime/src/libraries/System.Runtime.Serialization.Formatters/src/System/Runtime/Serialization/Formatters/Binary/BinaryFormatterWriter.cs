@@ -39,7 +39,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
             Stream outputStream,
             ObjectWriter objectWriter,
             FormatterTypeStyle formatterTypeStyle
-        ) {
+        )
+        {
             _outputStream = outputStream;
             _formatterTypeStyle = formatterTypeStyle;
             _objectWriter = objectWriter;
@@ -115,7 +116,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
             int headerId,
             int minorVersion,
             int majorVersion
-        ) {
+        )
+        {
             var record = new SerializationHeaderRecord(
                 BinaryHeaderEnum.SerializedStreamHeader,
                 topId,
@@ -133,7 +135,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
             string[] memberNames,
             Type[] memberTypes,
             WriteObjectInfo[] memberObjectInfos
-        ) {
+        )
+        {
             InternalWriteItemNull();
             int assemId;
             int objectId = (int)nameInfo._objectId;
@@ -154,7 +157,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
             if (
                 _objectMapTable.TryGetValue(objectName, out ObjectMapInfo? objectMapInfo)
                 && objectMapInfo.IsCompatible(numMembers, memberNames, memberTypes)
-            ) {
+            )
+            {
                 // Object
                 if (_binaryObject == null)
                 {
@@ -255,7 +259,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
             int length,
             int lowerBound,
             Array array
-        ) {
+        )
+        {
             InternalWriteItemNull();
             BinaryArrayTypeEnum binaryArrayTypeEnum;
             var lengthA = new int[1];
@@ -304,7 +309,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
             if (
                 Converter.IsWriteAsByteArray(arrayElemTypeNameInfo._primitiveTypeEnum)
                 && (lowerBound == 0)
-            ) {
+            )
+            {
                 //array is written out as an array of bytes
                 if (arrayElemTypeNameInfo._primitiveTypeEnum == InternalPrimitiveTypeE.Byte)
                 {
@@ -363,7 +369,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
             NameInfo arrayElemTypeNameInfo,
             int length,
             int lowerBound
-        ) {
+        )
+        {
             InternalWriteItemNull();
             BinaryArrayTypeEnum binaryArrayTypeEnum;
             var lengthA = new int[1];
@@ -418,7 +425,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
             int rank,
             int[] lengthA,
             int[] lowerBoundA
-        ) {
+        )
+        {
             InternalWriteItemNull();
 
             BinaryArrayTypeEnum binaryArrayTypeEnum = BinaryArrayTypeEnum.Rectangular;
@@ -468,7 +476,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
             int length,
             int lowerBound,
             byte[] byteA
-        ) {
+        )
+        {
             InternalWriteItemNull();
             WriteSingleArray(
                 memberNameInfo,
@@ -543,7 +552,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
             NameInfo memberNameInfo,
             NameInfo typeNameInfo,
             string? value
-        ) {
+        )
+        {
             InternalWriteItemNull();
             WriteObjectString((int)typeNameInfo._objectId, value);
         }
@@ -677,7 +687,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
                 int numMembers,
                 string[] memberNames,
                 Type[] memberTypes
-            ) {
+            )
+            {
                 _objectId = objectId;
                 _numMembers = numMembers;
                 _memberNames = memberNames;

@@ -51,7 +51,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Remote
             ObjectWriter writer,
             SolutionReplicationContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var wellKnownReferenceName = s_wellKnownReferenceNames.GetValueOrDefault(
                 reference,
                 null
@@ -71,7 +72,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Remote
         public override MetadataReference ReadMetadataReferenceFrom(
             ObjectReader reader,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (reader.ReadBoolean())
             {
                 // this is a well-known reference

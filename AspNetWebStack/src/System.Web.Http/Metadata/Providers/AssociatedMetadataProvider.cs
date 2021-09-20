@@ -22,7 +22,8 @@ namespace System.Web.Http.Metadata.Providers
         public sealed override IEnumerable<ModelMetadata> GetMetadataForProperties(
             object container,
             Type containerType
-        ) {
+        )
+        {
             if (containerType == null)
             {
                 throw Error.ArgumentNull("containerType");
@@ -34,7 +35,8 @@ namespace System.Web.Http.Metadata.Providers
         private IEnumerable<ModelMetadata> GetMetadataForPropertiesImpl(
             object container,
             Type containerType
-        ) {
+        )
+        {
             TypeInformation typeInfo = GetTypeInformation(containerType);
             foreach (KeyValuePair<string, PropertyInformation> kvp in typeInfo.Properties)
             {
@@ -53,7 +55,8 @@ namespace System.Web.Http.Metadata.Providers
             Func<object> modelAccessor,
             Type containerType,
             string propertyName
-        ) {
+        )
+        {
             if (containerType == null)
             {
                 throw Error.ArgumentNull("containerType");
@@ -81,7 +84,8 @@ namespace System.Web.Http.Metadata.Providers
         public sealed override ModelMetadata GetMetadataForType(
             Func<object> modelAccessor,
             Type modelType
-        ) {
+        )
+        {
             if (modelType == null)
             {
                 throw Error.ArgumentNull("modelType");
@@ -149,7 +153,8 @@ namespace System.Web.Http.Metadata.Providers
         private PropertyInformation CreatePropertyInformation(
             Type containerType,
             PropertyDescriptor property
-        ) {
+        )
+        {
             PropertyInformation info = new PropertyInformation();
             info.ValueAccessor = CreatePropertyValueAccessor(property);
             info.Prototype = CreateMetadataPrototype(
@@ -206,7 +211,8 @@ namespace System.Web.Http.Metadata.Providers
             MethodInfo getMethodInfo,
             Type declaringType,
             string propertyName
-        ) {
+        )
+        {
             Contract.Assert(
                 getMethodInfo != null && getMethodInfo.IsPublic && !getMethodInfo.IsStatic
             );

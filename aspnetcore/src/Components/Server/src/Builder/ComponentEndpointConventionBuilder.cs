@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.Builder
         internal ComponentEndpointConventionBuilder(
             IEndpointConventionBuilder hubEndpoint,
             IEndpointConventionBuilder disconnectEndpoint
-        ) {
+        )
+        {
             _hubEndpoint = hubEndpoint;
             _disconnectEndpoint = disconnectEndpoint;
         }

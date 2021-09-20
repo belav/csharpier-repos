@@ -88,7 +88,8 @@ namespace Microsoft.CodeAnalysis.Text
             char[] destination,
             int destinationIndex,
             int count
-        ) {
+        )
+        {
             this.Source.CopyTo(sourceIndex, destination, destinationIndex, count);
         }
 
@@ -96,7 +97,8 @@ namespace Microsoft.CodeAnalysis.Text
             TextWriter textWriter,
             TextSpan span,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             if (span.Start == 0 && span.End == this.Length)
             {
                 textWriter.Write(this.Source);

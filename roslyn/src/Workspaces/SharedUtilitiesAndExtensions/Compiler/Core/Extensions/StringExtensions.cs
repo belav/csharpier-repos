@@ -77,7 +77,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             int tabSize,
             int initialColumn,
             int endPosition
-        ) {
+        )
+        {
             Debug.Assert(tabSize > 0);
             Debug.Assert(endPosition >= 0 && endPosition <= textSnippet.Length);
 
@@ -193,7 +194,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static int GetColumnOfFirstNonWhitespaceCharacterOrEndOfLine(
             this string line,
             int tabSize
-        ) {
+        )
+        {
             var firstNonWhitespaceChar = line.GetFirstNonWhitespaceOffset();
 
             if (firstNonWhitespaceChar.HasValue)
@@ -248,7 +250,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static void AppendToAliasNameSet(
             this string? alias,
             ImmutableHashSet<string>.Builder builder
-        ) {
+        )
+        {
             if (RoslynString.IsNullOrWhiteSpace(alias))
             {
                 return;

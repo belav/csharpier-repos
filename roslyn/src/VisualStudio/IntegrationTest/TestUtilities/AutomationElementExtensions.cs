@@ -38,7 +38,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         public static IUIAutomationElement FindDescendantByAutomationId(
             this IUIAutomationElement parent,
             string automationId
-        ) {
+        )
+        {
             if (parent == null)
             {
                 throw new ArgumentNullException(nameof(parent));
@@ -71,7 +72,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         public static IUIAutomationElement FindDescendantByName(
             this IUIAutomationElement parent,
             string name
-        ) {
+        )
+        {
             if (parent == null)
             {
                 throw new ArgumentNullException(nameof(parent));
@@ -104,7 +106,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         public static IUIAutomationElement FindDescendantByClass(
             this IUIAutomationElement parent,
             string className
-        ) {
+        )
+        {
             if (parent == null)
             {
                 throw new ArgumentNullException(nameof(parent));
@@ -138,7 +141,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         public static IUIAutomationElementArray FindDescendantsByClass(
             this IUIAutomationElement parent,
             string className
-        ) {
+        )
+        {
             if (parent == null)
             {
                 throw new ArgumentNullException(nameof(parent));
@@ -298,7 +302,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         public static IUIAutomationElement FindDescendantByPath(
             this IUIAutomationElement element,
             string path
-        ) {
+        )
+        {
             var pathParts = path.Split(".".ToCharArray());
 
             // traverse the path

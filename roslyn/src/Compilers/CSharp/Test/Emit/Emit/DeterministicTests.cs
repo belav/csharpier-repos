@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Emit
             string assemblyName,
             bool debug,
             Platform platform = Platform.AnyCpu
-        ) {
+        )
+        {
             return CompiledGuid(
                 source,
                 assemblyName,
@@ -44,7 +45,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Emit
             CSharpCompilationOptions options,
             EmitOptions emitOptions = null,
             Platform platform = Platform.AnyCpu
-        ) {
+        )
+        {
             var compilation = CreateEmptyCompilation(
                 source,
                 assemblyName: assemblyName,
@@ -71,7 +73,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Emit
             Platform platform,
             DebugInformationFormat pdbFormat,
             bool optimize
-        ) {
+        )
+        {
             var options = (optimize ? TestOptions.ReleaseExe : TestOptions.DebugExe).WithPlatform(
                     platform
                 )

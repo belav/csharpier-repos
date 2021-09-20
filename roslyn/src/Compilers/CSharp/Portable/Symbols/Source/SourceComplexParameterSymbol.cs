@@ -145,7 +145,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         private static FlowAnalysisAnnotations DecodeFlowAnalysisAttributes(
             ParameterWellKnownAttributeData attributeData
-        ) {
+        )
+        {
             if (attributeData == null)
             {
                 return FlowAnalysisAnnotations.None;
@@ -249,7 +250,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             binder is not null
                             && GetDefaultValueSyntaxForIsNullableAnalysisEnabled(CSharpSyntaxNode)
                                 is { } valueSyntax
-                        ) {
+                        )
+                        {
                             NullableWalker.AnalyzeIfNeeded(
                                 binder,
                                 parameterEqualsValue,
@@ -319,7 +321,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (
                 attributes is null
                 || !NullableWalker.NeedsAnalysis(DeclaringCompilation, attributes)
-            ) {
+            )
+            {
                 return;
             }
 
@@ -365,7 +368,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             BindingDiagnosticBag diagnostics,
             out Binder? binder,
             out BoundParameterEqualsValue? parameterEqualsValue
-        ) {
+        )
+        {
             binder = null;
             parameterEqualsValue = null;
 
@@ -423,7 +427,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 && convertedExpression.Kind == BoundKind.Conversion
                 && ((BoundConversion)convertedExpression).ConversionKind
                     != ConversionKind.DefaultLiteral
-            ) {
+            )
+            {
                 if (parameterType.Type.IsNullableType())
                 {
                     convertedExpression = binder.GenerateConversionForAssignment(
@@ -479,7 +484,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     SynthesizedRecordPropertySymbol.HaveCorrespondingSynthesizedRecordPropertySymbol(
                         this
                     )
-                ) {
+                )
+                {
                     return AttributeLocation.Parameter
                         | AttributeLocation.Property
                         | AttributeLocation.Field;
@@ -602,7 +608,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             var attributesBag = _lazyCustomAttributesBag;
             if (
                 attributesBag == null || !attributesBag.IsEarlyDecodedWellKnownAttributeDataComputed
-            ) {
+            )
+            {
                 attributesBag = this.GetAttributesBag();
             }
 
@@ -658,7 +665,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void EarlyDecodeWellKnownAttributeType(
             NamedTypeSymbol attributeType,
             AttributeSyntax attributeSyntax
-        ) {
+        )
+        {
             Debug.Assert(!attributeType.IsErrorType());
 
             // NOTE: OptionalAttribute is decoded specially before any of the other attributes and stored in the parameter
@@ -669,7 +677,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     attributeSyntax,
                     AttributeDescription.OptionalAttribute
                 )
-            ) {
+            )
+            {
                 _lazyHasOptionalAttribute = ThreeState.True;
             }
         }
@@ -691,14 +700,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 AttributeSyntax,
                 AttributeLocation
             > arguments
-        ) {
+        )
+        {
             if (
                 CSharpAttributeData.IsTargetEarlyAttribute(
                     arguments.AttributeType,
                     arguments.AttributeSyntax,
                     AttributeDescription.DefaultParameterValueAttribute
                 )
-            ) {
+            )
+            {
                 return EarlyDecodeAttributeForDefaultParameterValue(
                     AttributeDescription.DefaultParameterValueAttribute,
                     ref arguments
@@ -710,7 +721,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     arguments.AttributeSyntax,
                     AttributeDescription.DecimalConstantAttribute
                 )
-            ) {
+            )
+            {
                 return EarlyDecodeAttributeForDefaultParameterValue(
                     AttributeDescription.DecimalConstantAttribute,
                     ref arguments
@@ -722,7 +734,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     arguments.AttributeSyntax,
                     AttributeDescription.DateTimeConstantAttribute
                 )
-            ) {
+            )
+            {
                 return EarlyDecodeAttributeForDefaultParameterValue(
                     AttributeDescription.DateTimeConstantAttribute,
                     ref arguments
@@ -736,7 +749,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         arguments.AttributeSyntax,
                         AttributeDescription.CallerLineNumberAttribute
                     )
-                ) {
+                )
+                {
                     arguments.GetOrCreateData<ParameterEarlyWellKnownAttributeData>().HasCallerLineNumberAttribute =
                         true;
                 }
@@ -746,7 +760,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         arguments.AttributeSyntax,
                         AttributeDescription.CallerFilePathAttribute
                     )
-                ) {
+                )
+                {
                     arguments.GetOrCreateData<ParameterEarlyWellKnownAttributeData>().HasCallerFilePathAttribute =
                         true;
                 }
@@ -756,7 +771,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         arguments.AttributeSyntax,
                         AttributeDescription.CallerMemberNameAttribute
                     )
-                ) {
+                )
+                {
                     arguments.GetOrCreateData<ParameterEarlyWellKnownAttributeData>().HasCallerMemberNameAttribute =
                         true;
                 }
@@ -773,7 +789,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 AttributeSyntax,
                 AttributeLocation
             > arguments
-        ) {
+        )
+        {
             Debug.Assert(
                 description.Equals(AttributeDescription.DefaultParameterValueAttribute)
                     || description.Equals(AttributeDescription.DecimalConstantAttribute)
@@ -818,7 +835,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 CSharpAttributeData,
                 AttributeLocation
             > arguments
-        ) {
+        )
+        {
             Debug.Assert((object)arguments.AttributeSyntaxOpt != null);
 
             var attribute = arguments.Attribute;
@@ -831,7 +849,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     this,
                     AttributeDescription.DefaultParameterValueAttribute
                 )
-            ) {
+            )
+            {
                 // Attribute decoded and constant value stored during EarlyDecodeWellKnownAttribute.
                 DecodeDefaultParameterValueAttribute(
                     AttributeDescription.DefaultParameterValueAttribute,
@@ -840,7 +859,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else if (
                 attribute.IsTargetAttribute(this, AttributeDescription.DecimalConstantAttribute)
-            ) {
+            )
+            {
                 // Attribute decoded and constant value stored during EarlyDecodeWellKnownAttribute.
                 DecodeDefaultParameterValueAttribute(
                     AttributeDescription.DecimalConstantAttribute,
@@ -849,7 +869,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else if (
                 attribute.IsTargetAttribute(this, AttributeDescription.DateTimeConstantAttribute)
-            ) {
+            )
+            {
                 // Attribute decoded and constant value stored during EarlyDecodeWellKnownAttribute.
                 DecodeDefaultParameterValueAttribute(
                     AttributeDescription.DateTimeConstantAttribute,
@@ -896,29 +917,34 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else if (
                 attribute.IsTargetAttribute(this, AttributeDescription.IDispatchConstantAttribute)
-            ) {
+            )
+            {
                 arguments.GetOrCreateData<ParameterWellKnownAttributeData>().HasIDispatchConstantAttribute =
                     true;
             }
             else if (
                 attribute.IsTargetAttribute(this, AttributeDescription.IUnknownConstantAttribute)
-            ) {
+            )
+            {
                 arguments.GetOrCreateData<ParameterWellKnownAttributeData>().HasIUnknownConstantAttribute =
                     true;
             }
             else if (
                 attribute.IsTargetAttribute(this, AttributeDescription.CallerLineNumberAttribute)
-            ) {
+            )
+            {
                 ValidateCallerLineNumberAttribute(arguments.AttributeSyntaxOpt, diagnostics);
             }
             else if (
                 attribute.IsTargetAttribute(this, AttributeDescription.CallerFilePathAttribute)
-            ) {
+            )
+            {
                 ValidateCallerFilePathAttribute(arguments.AttributeSyntaxOpt, diagnostics);
             }
             else if (
                 attribute.IsTargetAttribute(this, AttributeDescription.CallerMemberNameAttribute)
-            ) {
+            )
+            {
                 ValidateCallerMemberNameAttribute(arguments.AttributeSyntaxOpt, diagnostics);
             }
             else if (
@@ -971,7 +997,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else if (
                 attribute.IsTargetAttribute(this, AttributeDescription.DoesNotReturnIfAttribute)
-            ) {
+            )
+            {
                 arguments.GetOrCreateData<ParameterWellKnownAttributeData>().DoesNotReturnIfAttribute =
                     DecodeMaybeNullWhenOrNotNullWhenOrDoesNotReturnIfAttribute(
                         AttributeDescription.DoesNotReturnIfAttribute,
@@ -980,7 +1007,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else if (
                 attribute.IsTargetAttribute(this, AttributeDescription.NotNullIfNotNullAttribute)
-            ) {
+            )
+            {
                 arguments.GetOrCreateData<ParameterWellKnownAttributeData>()
                     .AddNotNullIfParameterNotNull(attribute.DecodeNotNullIfNotNullAttribute());
             }
@@ -989,7 +1017,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     this,
                     AttributeDescription.EnumeratorCancellationAttribute
                 )
-            ) {
+            )
+            {
                 arguments.GetOrCreateData<ParameterWellKnownAttributeData>().HasEnumeratorCancellationAttribute =
                     true;
                 ValidateCancellationTokenAttribute(
@@ -1002,7 +1031,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private static bool? DecodeMaybeNullWhenOrNotNullWhenOrDoesNotReturnIfAttribute(
             AttributeDescription description,
             CSharpAttributeData attribute
-        ) {
+        )
+        {
             var arguments = attribute.CommonConstructorArguments;
             return
                 arguments.Length == 1
@@ -1018,7 +1048,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 CSharpAttributeData,
                 AttributeLocation
             > arguments
-        ) {
+        )
+        {
             var attribute = arguments.Attribute;
             var syntax = arguments.AttributeSyntaxOpt;
             var diagnostics = (BindingDiagnosticBag)arguments.Diagnostics;
@@ -1048,7 +1079,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ConstantValue value,
             SyntaxNode syntax,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var data = GetEarlyDecodedWellKnownAttributeData();
             if (data != null)
             {
@@ -1070,7 +1102,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             AttributeSyntax node,
             bool diagnose,
             BindingDiagnosticBag diagnosticsOpt
-        ) {
+        )
+        {
             Debug.Assert(!attribute.HasErrors);
 
             if (description.Equals(AttributeDescription.DefaultParameterValueAttribute))
@@ -1098,7 +1131,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             AttributeSyntax node,
             bool diagnose,
             BindingDiagnosticBag diagnosticsOpt
-        ) {
+        )
+        {
             Debug.Assert(!diagnose || diagnosticsOpt != null);
 
             if (HasDefaultArgumentSyntax)
@@ -1180,7 +1214,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         ref useSiteInfo
                     )
                     .Kind.IsImplicitConversion()
-            ) {
+            )
+            {
                 // error CS1908: The type of the argument to the DefaultParameterValue attribute must match the parameter type
                 if (diagnose)
                 {
@@ -1239,7 +1274,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private void ValidateCallerLineNumberAttribute(
             AttributeSyntax node,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             CSharpCompilation compilation = this.DeclaringCompilation;
             var useSiteInfo = new CompoundUseSiteInfo<AssemblySymbol>(
                 diagnostics,
@@ -1261,7 +1297,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     TypeWithAnnotations.Type,
                     ref useSiteInfo
                 )
-            ) {
+            )
+            {
                 // CS4017: CallerLineNumberAttribute cannot be applied because there are no standard conversions from type '{0}' to type '{1}'
                 TypeSymbol intType = compilation.GetSpecialType(SpecialType.System_Int32);
                 diagnostics.Add(
@@ -1288,7 +1325,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private void ValidateCallerFilePathAttribute(
             AttributeSyntax node,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             CSharpCompilation compilation = this.DeclaringCompilation;
             var useSiteInfo = new CompoundUseSiteInfo<AssemblySymbol>(
                 diagnostics,
@@ -1310,7 +1348,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     TypeWithAnnotations.Type,
                     ref useSiteInfo
                 )
-            ) {
+            )
+            {
                 // CS4018: CallerFilePathAttribute cannot be applied because there are no standard conversions from type '{0}' to type '{1}'
                 TypeSymbol stringType = compilation.GetSpecialType(SpecialType.System_String);
                 diagnostics.Add(
@@ -1346,7 +1385,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private void ValidateCallerMemberNameAttribute(
             AttributeSyntax node,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             CSharpCompilation compilation = this.DeclaringCompilation;
             var useSiteInfo = new CompoundUseSiteInfo<AssemblySymbol>(
                 diagnostics,
@@ -1368,7 +1408,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     TypeWithAnnotations.Type,
                     ref useSiteInfo
                 )
-            ) {
+            )
+            {
                 // CS4019: CallerMemberNameAttribute cannot be applied because there are no standard conversions from type '{0}' to type '{1}'
                 TypeSymbol stringType = compilation.GetSpecialType(SpecialType.System_String);
                 diagnostics.Add(
@@ -1413,7 +1454,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private void ValidateCancellationTokenAttribute(
             AttributeSyntax node,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             if (needsReporting())
             {
                 diagnostics.Add(
@@ -1431,7 +1473,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             WellKnownType.System_Threading_CancellationToken
                         )
                     )
-                ) {
+                )
+                {
                     return true;
                 }
                 else if (
@@ -1442,7 +1485,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             WellKnownType.System_Collections_Generic_IAsyncEnumerable_T
                         )
                     )
-                ) {
+                )
+                {
                     // Note: async methods that return this type must be iterators. This is enforced elsewhere
                     return false;
                 }
@@ -1457,7 +1501,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             BindingDiagnosticBag diagnostics,
             AttributeLocation symbolPart,
             WellKnownAttributeData decodedData
-        ) {
+        )
+        {
             Debug.Assert(!boundAttributes.IsDefault);
             Debug.Assert(!allAttributeSyntaxNodes.IsDefault);
             Debug.Assert(boundAttributes.Length == allAttributeSyntaxNodes.Length);
@@ -1583,7 +1628,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void ForceComplete(
             SourceLocation locationOpt,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _ = this.GetAttributes();
             _ = this.ExplicitDefaultConstantValue;
             state.SpinWaitComplete(CompletionPart.ComplexParameterSymbolAll, cancellationToken);
@@ -1606,17 +1652,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             SyntaxReference syntaxRef,
             bool isParams,
             bool isExtensionMethodThis
-        ) : base(
-            owner,
-            ordinal,
-            parameterType,
-            refKind,
-            name,
-            locations,
-            syntaxRef,
-            isParams,
-            isExtensionMethodThis
-        ) {
+        )
+            : base(
+                owner,
+                ordinal,
+                parameterType,
+                refKind,
+                name,
+                locations,
+                syntaxRef,
+                isParams,
+                isExtensionMethodThis
+            )
+        {
             Debug.Assert(!refCustomModifiers.IsEmpty);
 
             _refCustomModifiers = refCustomModifiers;

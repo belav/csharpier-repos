@@ -20,7 +20,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddCertificateForwarding(
             this IServiceCollection services,
             Action<CertificateForwardingOptions> configure
-        ) {
+        )
+        {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));

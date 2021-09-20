@@ -17,7 +17,8 @@ namespace FunctionalTests
             if (
                 !context.WebSockets.IsWebSocketRequest
                 && !context.Request.Cookies.ContainsKey("testCookie")
-            ) {
+            )
+            {
                 return;
             }
 

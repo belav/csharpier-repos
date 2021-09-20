@@ -58,7 +58,8 @@ namespace System.Linq.Expressions
             Type delegateType,
             CallSiteBinder binder,
             ReadOnlyCollection<Expression> arguments
-        ) {
+        )
+        {
             if (returnType == typeof(object))
             {
                 return new DynamicExpressionN(delegateType, binder, arguments);
@@ -74,7 +75,8 @@ namespace System.Linq.Expressions
             Type delegateType,
             CallSiteBinder binder,
             Expression arg0
-        ) {
+        )
+        {
             if (returnType == typeof(object))
             {
                 return new DynamicExpression1(delegateType, binder, arg0);
@@ -91,7 +93,8 @@ namespace System.Linq.Expressions
             CallSiteBinder binder,
             Expression arg0,
             Expression arg1
-        ) {
+        )
+        {
             if (returnType == typeof(object))
             {
                 return new DynamicExpression2(delegateType, binder, arg0, arg1);
@@ -109,7 +112,8 @@ namespace System.Linq.Expressions
             Expression arg0,
             Expression arg1,
             Expression arg2
-        ) {
+        )
+        {
             if (returnType == typeof(object))
             {
                 return new DynamicExpression3(delegateType, binder, arg0, arg1, arg2);
@@ -135,7 +139,8 @@ namespace System.Linq.Expressions
             Expression arg1,
             Expression arg2,
             Expression arg3
-        ) {
+        )
+        {
             if (returnType == typeof(object))
             {
                 return new DynamicExpression4(delegateType, binder, arg0, arg1, arg2, arg3);
@@ -290,7 +295,8 @@ namespace System.Linq.Expressions
             CallSiteBinder binder,
             Type returnType,
             params Expression[] arguments
-        ) {
+        )
+        {
             return ExpressionExtension.Dynamic(binder, returnType, arguments);
         }
 
@@ -314,7 +320,8 @@ namespace System.Linq.Expressions
             CallSiteBinder binder,
             Type returnType,
             IEnumerable<Expression> arguments
-        ) {
+        )
+        {
             return ExpressionExtension.Dynamic(binder, returnType, arguments);
         }
 
@@ -338,7 +345,8 @@ namespace System.Linq.Expressions
             CallSiteBinder binder,
             Type returnType,
             Expression arg0
-        ) {
+        )
+        {
             return ExpressionExtension.Dynamic(binder, returnType, arg0);
         }
 
@@ -364,7 +372,8 @@ namespace System.Linq.Expressions
             Type returnType,
             Expression arg0,
             Expression arg1
-        ) {
+        )
+        {
             return ExpressionExtension.Dynamic(binder, returnType, arg0, arg1);
         }
 
@@ -392,7 +401,8 @@ namespace System.Linq.Expressions
             Expression arg0,
             Expression arg1,
             Expression arg2
-        ) {
+        )
+        {
             return ExpressionExtension.Dynamic(binder, returnType, arg0, arg1, arg2);
         }
 
@@ -422,7 +432,8 @@ namespace System.Linq.Expressions
             Expression arg1,
             Expression arg2,
             Expression arg3
-        ) {
+        )
+        {
             return ExpressionExtension.Dynamic(binder, returnType, arg0, arg1, arg2, arg3);
         }
 
@@ -443,7 +454,8 @@ namespace System.Linq.Expressions
             Type delegateType,
             CallSiteBinder binder,
             IEnumerable<Expression>? arguments
-        ) {
+        )
+        {
             return ExpressionExtension.MakeDynamic(delegateType, binder, arguments);
         }
 
@@ -464,7 +476,8 @@ namespace System.Linq.Expressions
             Type delegateType,
             CallSiteBinder binder,
             params Expression[]? arguments
-        ) {
+        )
+        {
             return ExpressionExtension.MakeDynamic(delegateType, binder, arguments);
         }
 
@@ -485,7 +498,8 @@ namespace System.Linq.Expressions
             Type delegateType,
             CallSiteBinder binder,
             Expression arg0
-        ) {
+        )
+        {
             return ExpressionExtension.MakeDynamic(delegateType, binder, arg0);
         }
 
@@ -508,7 +522,8 @@ namespace System.Linq.Expressions
             CallSiteBinder binder,
             Expression arg0,
             Expression arg1
-        ) {
+        )
+        {
             return ExpressionExtension.MakeDynamic(delegateType, binder, arg0, arg1);
         }
 
@@ -533,7 +548,8 @@ namespace System.Linq.Expressions
             Expression arg0,
             Expression arg1,
             Expression arg2
-        ) {
+        )
+        {
             return ExpressionExtension.MakeDynamic(delegateType, binder, arg0, arg1, arg2);
         }
 
@@ -560,7 +576,8 @@ namespace System.Linq.Expressions
             Expression arg1,
             Expression arg2,
             Expression arg3
-        ) {
+        )
+        {
             return ExpressionExtension.MakeDynamic(delegateType, binder, arg0, arg1, arg2, arg3);
         }
 
@@ -629,11 +646,8 @@ namespace System.Linq.Expressions
     {
         private object _arg0; // storage for the 1st argument or a read-only collection.  See IArgumentProvider for more info.
 
-        internal DynamicExpression1(
-            Type delegateType,
-            CallSiteBinder binder,
-            Expression arg0
-        ) : base(delegateType, binder)
+        internal DynamicExpression1(Type delegateType, CallSiteBinder binder, Expression arg0)
+            : base(delegateType, binder)
         {
             _arg0 = arg0;
         }
@@ -978,7 +992,8 @@ namespace System.Linq.Expressions
             Type delegateType,
             CallSiteBinder binder,
             params Expression[]? arguments
-        ) {
+        )
+        {
             return MakeDynamic(delegateType, binder, (IEnumerable<Expression>?)arguments);
         }
 
@@ -999,7 +1014,8 @@ namespace System.Linq.Expressions
             Type delegateType,
             CallSiteBinder binder,
             IEnumerable<Expression>? arguments
-        ) {
+        )
+        {
             IReadOnlyList<Expression> argumentList =
                 arguments as IReadOnlyList<Expression> ?? arguments.ToReadOnly();
             switch (argumentList.Count)
@@ -1062,7 +1078,8 @@ namespace System.Linq.Expressions
             Type delegateType,
             CallSiteBinder binder,
             Expression arg0
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(delegateType, nameof(delegateType));
             ContractUtils.RequiresNotNull(binder, nameof(binder));
             if (!delegateType.IsSubclassOf(typeof(MulticastDelegate)))
@@ -1104,7 +1121,8 @@ namespace System.Linq.Expressions
             CallSiteBinder binder,
             Expression arg0,
             Expression arg1
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(delegateType, nameof(delegateType));
             ContractUtils.RequiresNotNull(binder, nameof(binder));
             if (!delegateType.IsSubclassOf(typeof(MulticastDelegate)))
@@ -1157,7 +1175,8 @@ namespace System.Linq.Expressions
             Expression arg0,
             Expression arg1,
             Expression arg2
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(delegateType, nameof(delegateType));
             ContractUtils.RequiresNotNull(binder, nameof(binder));
             if (!delegateType.IsSubclassOf(typeof(MulticastDelegate)))
@@ -1228,7 +1247,8 @@ namespace System.Linq.Expressions
             Expression arg1,
             Expression arg2,
             Expression arg3
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(delegateType, nameof(delegateType));
             ContractUtils.RequiresNotNull(binder, nameof(binder));
             if (!delegateType.IsSubclassOf(typeof(MulticastDelegate)))
@@ -1315,7 +1335,8 @@ namespace System.Linq.Expressions
             CallSiteBinder binder,
             Type returnType,
             params Expression[] arguments
-        ) {
+        )
+        {
             return Dynamic(binder, returnType, (IEnumerable<Expression>)arguments);
         }
 
@@ -1339,7 +1360,8 @@ namespace System.Linq.Expressions
             CallSiteBinder binder,
             Type returnType,
             Expression arg0
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(binder, nameof(binder));
             ValidateDynamicArgument(arg0, nameof(arg0));
 
@@ -1378,7 +1400,8 @@ namespace System.Linq.Expressions
             Type returnType,
             Expression arg0,
             Expression arg1
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(binder, nameof(binder));
             ValidateDynamicArgument(arg0, nameof(arg0));
             ValidateDynamicArgument(arg1, nameof(arg1));
@@ -1423,7 +1446,8 @@ namespace System.Linq.Expressions
             Expression arg0,
             Expression arg1,
             Expression arg2
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(binder, nameof(binder));
             ValidateDynamicArgument(arg0, nameof(arg0));
             ValidateDynamicArgument(arg1, nameof(arg1));
@@ -1475,7 +1499,8 @@ namespace System.Linq.Expressions
             Expression arg1,
             Expression arg2,
             Expression arg3
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(binder, nameof(binder));
             ValidateDynamicArgument(arg0, nameof(arg0));
             ValidateDynamicArgument(arg1, nameof(arg1));
@@ -1525,7 +1550,8 @@ namespace System.Linq.Expressions
             CallSiteBinder binder,
             Type returnType,
             IEnumerable<Expression> arguments
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(arguments, nameof(arguments));
             ContractUtils.RequiresNotNull(returnType, nameof(returnType));
 
@@ -1538,7 +1564,8 @@ namespace System.Linq.Expressions
             CallSiteBinder binder,
             Type returnType,
             ReadOnlyCollection<Expression> arguments
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(binder, nameof(binder));
 
             int n = arguments.Count;

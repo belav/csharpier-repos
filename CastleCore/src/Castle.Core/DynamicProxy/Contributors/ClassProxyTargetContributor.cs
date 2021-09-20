@@ -59,7 +59,8 @@ namespace Castle.DynamicProxy.Contributors
             MetaMethod method,
             ClassEmitter @class,
             OverrideMethodDelegate overrideMethod
-        ) {
+        )
+        {
             if (method.Ignore)
             {
                 return null;
@@ -120,7 +121,8 @@ namespace Castle.DynamicProxy.Contributors
             ClassEmitter emitter,
             MethodInfo methodInfo,
             MethodInfo methodOnTarget
-        ) {
+        )
+        {
             var targetMethod = methodOnTarget ?? methodInfo;
             var callBackMethod = emitter.CreateMethod(
                 namingScope.GetUniqueName(methodInfo.Name + "_callback"),
@@ -158,7 +160,8 @@ namespace Castle.DynamicProxy.Contributors
             MetaMethod method,
             ClassEmitter @class,
             OverrideMethodDelegate overrideMethod
-        ) {
+        )
+        {
             var @delegate = GetDelegateType(method, @class);
             var contributor = GetContributor(@delegate, method);
             var invocation = new InheritanceInvocationTypeGenerator(

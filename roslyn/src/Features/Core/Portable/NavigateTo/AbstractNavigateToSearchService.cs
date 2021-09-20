@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.NavigateTo
             Solution solution,
             Func<INavigateToSearchResult, Task> onResultFound,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return async item =>
             {
                 var result = await item.TryCreateSearchResultAsync(solution, cancellationToken)
@@ -53,7 +54,8 @@ namespace Microsoft.CodeAnalysis.NavigateTo
             Func<INavigateToSearchResult, Task> onResultFound,
             bool isFullyLoaded,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (isFullyLoaded)
             {
                 await SearchFullyLoadedDocumentAsync(
@@ -87,7 +89,8 @@ namespace Microsoft.CodeAnalysis.NavigateTo
             IImmutableSet<string> kinds,
             Func<INavigateToSearchResult, Task> onResultFound,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var solution = document.Project.Solution;
             var onItemFound = GetOnItemFoundCallback(solution, onResultFound, cancellationToken);
             var client = await RemoteHostClient.TryGetClientAsync(
@@ -135,7 +138,8 @@ namespace Microsoft.CodeAnalysis.NavigateTo
             Func<INavigateToSearchResult, Task> onResultFound,
             bool isFullyLoaded,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (isFullyLoaded)
             {
                 await SearchFullyLoadedProjectAsync(
@@ -171,7 +175,8 @@ namespace Microsoft.CodeAnalysis.NavigateTo
             IImmutableSet<string> kinds,
             Func<INavigateToSearchResult, Task> onResultFound,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var solution = project.Solution;
             var client = await RemoteHostClient.TryGetClientAsync(project, cancellationToken)
                 .ConfigureAwait(false);
@@ -219,7 +224,8 @@ namespace Microsoft.CodeAnalysis.NavigateTo
             IImmutableSet<string> kinds,
             Func<INavigateToSearchResult, Task> onResultFound,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var document = documents.FirstOrDefault() ?? priorityDocuments.FirstOrDefault();
             if (document == null)
                 return;

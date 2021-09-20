@@ -10722,7 +10722,8 @@ namespace ClassLibrary9
         public async Task TestExtractMethodEventAccessorUnresolvedName(
             string testedAccessor,
             string untestedAccessor
-        ) {
+        )
+        {
             // This code intentionally omits a 'using System;'
             var code =
                 $@"namespace ClassLibrary9

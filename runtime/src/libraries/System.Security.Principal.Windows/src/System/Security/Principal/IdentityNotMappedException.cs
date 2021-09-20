@@ -34,7 +34,8 @@ namespace System.Security.Principal
         public override void GetObjectData(
             SerializationInfo serializationInfo,
             StreamingContext streamingContext
-        ) {
+        )
+        {
             base.GetObjectData(serializationInfo, streamingContext);
         }
 

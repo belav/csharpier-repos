@@ -26,7 +26,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         /// </summary>
         public CosmosValueConverterCompensatingExpressionVisitor(
             ISqlExpressionFactory sqlExpressionFactory
-        ) {
+        )
+        {
             _sqlExpressionFactory = sqlExpressionFactory;
         }
 
@@ -122,7 +123,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 sqlExpression is KeyAccessExpression keyAccessExpression
                 && keyAccessExpression.TypeMapping!.ClrType == typeof(bool)
                 && keyAccessExpression.TypeMapping!.Converter != null
-            ) {
+            )
+            {
                 return _sqlExpressionFactory.Equal(
                     sqlExpression,
                     _sqlExpressionFactory.Constant(true, sqlExpression.TypeMapping)
@@ -142,7 +144,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                     sqlBinaryExpression.OperatorType == ExpressionType.AndAlso
                     || sqlBinaryExpression.OperatorType == ExpressionType.OrElse
                 )
-            ) {
+            )
+            {
                 return sqlBinaryExpression.Update(
                     TryCompensateForBoolWithValueConverter(sqlBinaryExpression.Left),
                     TryCompensateForBoolWithValueConverter(sqlBinaryExpression.Right)

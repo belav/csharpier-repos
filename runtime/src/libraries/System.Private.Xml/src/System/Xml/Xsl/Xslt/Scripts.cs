@@ -35,7 +35,8 @@ namespace System.Xml.Xsl.Xslt
             string ns,
             int numArgs,
             IErrorHelper errorHelper
-        ) {
+        )
+        {
             Type? type;
             if (_nsToType.TryGetValue(ns, out type))
             {

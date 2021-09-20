@@ -115,7 +115,8 @@ namespace System.Web.WebPages.ApplicationParts
             ApplicationPart module,
             Type webPageType,
             Func<object> registerPageAction
-        ) {
+        )
+        {
             var virtualPathAttribute = webPageType.GetCustomAttributes(
                     typeof(PageVirtualPathAttribute),
                     false
@@ -150,7 +151,8 @@ namespace System.Web.WebPages.ApplicationParts
         internal static string GetRootRelativeVirtualPath(
             string rootVirtualPath,
             string pageVirtualPath
-        ) {
+        )
+        {
             string virtualPath = pageVirtualPath;
 
             // Trim the ~/ prefix, since we want it to be relative to the module base path

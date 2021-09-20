@@ -28,7 +28,8 @@ namespace Microsoft.AspNetCore.Http.Connections
             ReadOnlySequence<byte> payload,
             Stream output,
             CancellationToken token
-        ) {
+        )
+        {
             // Payload does not contain a line feed so write it directly to output
             if (payload.PositionOf(LineFeed) == null)
             {
@@ -61,7 +62,8 @@ namespace Microsoft.AspNetCore.Http.Connections
         private static ReadOnlyMemory<byte> GetLastSegment(
             in ReadOnlySequence<byte> source,
             out long offset
-        ) {
+        )
+        {
             offset = 0;
 
             var totalLength = source.Length;
@@ -83,7 +85,8 @@ namespace Microsoft.AspNetCore.Http.Connections
         private static async Task WriteMessageToMemory(
             Stream output,
             ReadOnlySequence<byte> payload
-        ) {
+        )
+        {
             var keepWriting = true;
             while (keepWriting)
             {

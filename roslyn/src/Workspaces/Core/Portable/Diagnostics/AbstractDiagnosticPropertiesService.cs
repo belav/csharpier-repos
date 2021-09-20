@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         private static ImmutableDictionary<string, string> GetAdditionalProperties(
             Diagnostic diagnostic,
             Compilation compilation
-        ) {
+        )
+        {
             var assemblyIds = compilation.GetUnreferencedAssemblyIdentities(diagnostic);
             var requiredVersion = Compilation.GetRequiredLanguageVersion(diagnostic);
             if (assemblyIds.IsDefaultOrEmpty && requiredVersion == null)

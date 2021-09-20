@@ -260,7 +260,8 @@ namespace System.Net.Mime
                     || _mediaType.Length == 0
                     || offset >= _type.Length
                     || _type[offset++] != '/'
-                ) {
+                )
+                {
                     throw new FormatException(SR.ContentTypeInvalid);
                 }
 

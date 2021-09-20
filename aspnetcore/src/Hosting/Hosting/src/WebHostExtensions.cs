@@ -48,7 +48,8 @@ namespace Microsoft.AspNetCore.Hosting
         public static async Task WaitForShutdownAsync(
             this IWebHost host,
             CancellationToken token = default
-        ) {
+        )
+        {
             var done = new ManualResetEventSlim(false);
             using (var cts = CancellationTokenSource.CreateLinkedTokenSource(token))
             {
@@ -101,7 +102,8 @@ namespace Microsoft.AspNetCore.Hosting
                         : "Application is shutting down...";
                 using (
                     var lifetime = new WebHostLifetime(cts, done, shutdownMessage: shutdownMessage)
-                ) {
+                )
+                {
                     try
                     {
                         await host.RunAsync(
@@ -123,7 +125,8 @@ namespace Microsoft.AspNetCore.Hosting
             this IWebHost host,
             CancellationToken token,
             string? startupMessage
-        ) {
+        )
+        {
             try
             {
                 await host.StartAsync(token);
@@ -173,7 +176,8 @@ namespace Microsoft.AspNetCore.Hosting
         private static async Task WaitForTokenShutdownAsync(
             this IWebHost host,
             CancellationToken token
-        ) {
+        )
+        {
             var applicationLifetime = host.Services.GetRequiredService<IHostApplicationLifetime>();
 
             token.Register(

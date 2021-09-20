@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
         public static SyntaxTokenList ToSyntaxTokenListAndFree(
             this ArrayBuilder<SyntaxToken> tokens
-        ) {
+        )
+        {
             var tokenList = new SyntaxTokenList(tokens);
             tokens.Free();
             return tokenList;

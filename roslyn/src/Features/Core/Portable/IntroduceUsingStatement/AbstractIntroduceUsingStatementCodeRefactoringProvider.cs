@@ -78,7 +78,8 @@ namespace Microsoft.CodeAnalysis.IntroduceUsingStatement
             Document document,
             TextSpan selection,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var declarationSyntax = await document.TryGetRelevantNodeAsync<TLocalDeclarationSyntax>(
                     selection,
                     cancellationToken
@@ -87,7 +88,8 @@ namespace Microsoft.CodeAnalysis.IntroduceUsingStatement
             if (
                 declarationSyntax is null
                 || !CanRefactorToContainBlockStatements(declarationSyntax.Parent)
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -148,7 +150,8 @@ namespace Microsoft.CodeAnalysis.IntroduceUsingStatement
             Compilation compilation,
             ITypeSymbol disposableType,
             ITypeSymbol type
-        ) {
+        )
+        {
             if (disposableType == null)
             {
                 return false;
@@ -162,7 +165,8 @@ namespace Microsoft.CodeAnalysis.IntroduceUsingStatement
             Document document,
             TLocalDeclarationSyntax declarationStatement,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
@@ -234,7 +238,8 @@ namespace Microsoft.CodeAnalysis.IntroduceUsingStatement
             SemanticModel semanticModel,
             ISyntaxFactsService syntaxFactsService,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Find the minimal number of statements to move into the using block
             // in order to not break existing references to the local.
             var lastUsageStatement = FindSiblingStatementContainingLastUsage(
@@ -265,7 +270,8 @@ namespace Microsoft.CodeAnalysis.IntroduceUsingStatement
         private static (SyntaxTriviaList sameLine, SyntaxTriviaList endOfLine) SplitTrailingTrivia(
             SyntaxNode node,
             ISyntaxFactsService syntaxFactsService
-        ) {
+        )
+        {
             var trailingTrivia = node.GetTrailingTrivia();
             var lastIndex = trailingTrivia.Count - 1;
 
@@ -283,7 +289,8 @@ namespace Microsoft.CodeAnalysis.IntroduceUsingStatement
             SemanticModel semanticModel,
             ISyntaxFactsService syntaxFactsService,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // We are going to step through the statements starting with the trigger variable's declaration.
             // We will track when new locals are declared and when they are used. To determine the last
             // statement that we should surround, we will walk through the locals in the order they are declared.
@@ -315,7 +322,8 @@ namespace Microsoft.CodeAnalysis.IntroduceUsingStatement
                 var statementIndex = 0;
                 statementIndex < statementsFromDeclarationToEnd.Length;
                 statementIndex++
-            ) {
+            )
+            {
                 var currentStatement = statementsFromDeclarationToEnd[statementIndex];
 
                 // Determine which local variables were referenced in this statement.
@@ -390,7 +398,8 @@ namespace Microsoft.CodeAnalysis.IntroduceUsingStatement
             SemanticModel semanticModel,
             ISyntaxFactsService syntaxFactsService,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // If this node matches one of our local variables, then we can say it has been referenced.
             if (syntaxFactsService.IsIdentifierName(node))
             {

@@ -90,7 +90,8 @@ namespace Microsoft.NET.HostModel.Bundle
             long size,
             long compressedSize,
             uint bundleMajorVersion
-        ) {
+        )
+        {
             FileEntry entry = new FileEntry(
                 type,
                 relativePath,

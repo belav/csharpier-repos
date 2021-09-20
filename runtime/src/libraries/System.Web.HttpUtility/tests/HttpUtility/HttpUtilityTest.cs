@@ -475,7 +475,8 @@ namespace System.Web.Tests
                         || c == 133
                         || c == 8232
                         || c == 8233
-                    ) {
+                    )
+                    {
                         yield return new object[] { c.ToString(), $"\\u{(int)c:x4}" };
                     }
                     else
@@ -999,7 +1000,8 @@ namespace System.Web.Tests
             string encoded,
             int offset,
             int count
-        ) {
+        )
+        {
             byte[] bytes = Encoding.UTF8.GetBytes(decoded);
             Assert.Equal(
                 encoded,
@@ -1015,7 +1017,8 @@ namespace System.Web.Tests
             string encoded,
             int offset,
             int count
-        ) {
+        )
+        {
             byte[] bytes = Encoding.UTF8.GetBytes(encoded);
             Assert.Equal(
                 decoded,

@@ -23,7 +23,8 @@ namespace System.Diagnostics
             object?[]? args,
             object? data1,
             object?[]? data
-        ) {
+        )
+        {
             return ((int)eventType & (int)_level) != 0;
         }
 

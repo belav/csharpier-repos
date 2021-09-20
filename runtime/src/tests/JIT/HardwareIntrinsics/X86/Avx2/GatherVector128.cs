@@ -55,7 +55,8 @@ namespace IntelHardwareIntrinsicTest
 
                 fixed (int* iptr = intIndexTable)fixed (long* lptr = longIndexTable)fixed (
                     long* l256ptr = vector256longIndexTable
-                ) {
+                )
+                {
                     indexi = Sse2.LoadVector128(iptr);
                     indexl = Sse2.LoadVector128(lptr);
                     indexl256 = Avx.LoadVector256(l256ptr);
@@ -67,7 +68,8 @@ namespace IntelHardwareIntrinsicTest
                         floatSourceTable,
                         new float[4]
                     )
-                ) {
+                )
+                {
                     var vf = Avx2.GatherVector128((float*)(floatTable.inArrayPtr), indexi, 4);
                     Unsafe.Write(floatTable.outArrayPtr, vf);
 
@@ -78,7 +80,8 @@ namespace IntelHardwareIntrinsicTest
                                 == BitConverter.SingleToInt32Bits(y),
                             intIndexTable
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("AVX2 GatherVector128 failed on float:");
                         foreach (var item in floatTable.outArray)
                         {
@@ -111,7 +114,8 @@ namespace IntelHardwareIntrinsicTest
                                 == BitConverter.SingleToInt32Bits(y),
                             intIndexTable
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("AVX2 GatherVector128 failed with reflection on float:");
                         foreach (var item in floatTable.outArray)
                         {
@@ -144,7 +148,8 @@ namespace IntelHardwareIntrinsicTest
                                 == BitConverter.SingleToInt32Bits(y),
                             intIndexTable
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "AVX2 GatherVector128 failed on float with non-const scale (IMM):"
                         );
@@ -176,7 +181,8 @@ namespace IntelHardwareIntrinsicTest
                         doubleSourceTable,
                         new double[2]
                     )
-                ) {
+                )
+                {
                     var vd = Avx2.GatherVector128((double*)(doubletTable.inArrayPtr), indexi, 8);
                     Unsafe.Write(doubletTable.outArrayPtr, vd);
 
@@ -187,7 +193,8 @@ namespace IntelHardwareIntrinsicTest
                                 == BitConverter.DoubleToInt64Bits(y),
                             intIndexTable
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("AVX2 GatherVector128 failed on double:");
                         foreach (var item in doubletTable.outArray)
                         {
@@ -220,7 +227,8 @@ namespace IntelHardwareIntrinsicTest
                                 == BitConverter.DoubleToInt64Bits(y),
                             intIndexTable
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("AVX2 GatherVector128 failed with reflection on double:");
                         foreach (var item in doubletTable.outArray)
                         {
@@ -253,7 +261,8 @@ namespace IntelHardwareIntrinsicTest
                                 == BitConverter.DoubleToInt64Bits(y),
                             intIndexTable
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "AVX2 GatherVector128 failed on double with non-const scale (IMM):"
                         );
@@ -289,7 +298,8 @@ namespace IntelHardwareIntrinsicTest
                         intSourceTable,
                         new int[4]
                     )
-                ) {
+                )
+                {
                     var vf = Avx2.GatherVector128((int*)(intTable.inArrayPtr), indexi, 4);
                     Unsafe.Write(intTable.outArrayPtr, vf);
 
@@ -380,7 +390,8 @@ namespace IntelHardwareIntrinsicTest
                         intSourceTable,
                         new int[4]
                     )
-                ) {
+                )
+                {
                     var vf = Avx2.GatherVector128((uint*)(intTable.inArrayPtr), indexi, 4);
                     Unsafe.Write(intTable.outArrayPtr, vf);
 
@@ -471,7 +482,8 @@ namespace IntelHardwareIntrinsicTest
                         longSourceTable,
                         new long[2]
                     )
-                ) {
+                )
+                {
                     var vf = Avx2.GatherVector128((long*)(longTable.inArrayPtr), indexi, 8);
                     Unsafe.Write(longTable.outArrayPtr, vf);
 
@@ -562,7 +574,8 @@ namespace IntelHardwareIntrinsicTest
                         longSourceTable,
                         new long[2]
                     )
-                ) {
+                )
+                {
                     var vf = Avx2.GatherVector128((ulong*)(longTable.inArrayPtr), indexi, 8);
                     Unsafe.Write(longTable.outArrayPtr, vf);
 
@@ -653,7 +666,8 @@ namespace IntelHardwareIntrinsicTest
                         intSourceTable,
                         new int[4]
                     )
-                ) {
+                )
+                {
                     var vf = Avx2.GatherVector128((int*)(intTable.inArrayPtr), indexl, 4);
                     Unsafe.Write(intTable.outArrayPtr, vf);
 
@@ -748,7 +762,8 @@ namespace IntelHardwareIntrinsicTest
                         intSourceTable,
                         new int[4]
                     )
-                ) {
+                )
+                {
                     var vf = Avx2.GatherVector128((uint*)(intTable.inArrayPtr), indexl, 4);
                     Unsafe.Write(intTable.outArrayPtr, vf);
 
@@ -843,7 +858,8 @@ namespace IntelHardwareIntrinsicTest
                         longSourceTable,
                         new long[2]
                     )
-                ) {
+                )
+                {
                     var vf = Avx2.GatherVector128((long*)(longTable.inArrayPtr), indexl, 8);
                     Unsafe.Write(longTable.outArrayPtr, vf);
 
@@ -938,7 +954,8 @@ namespace IntelHardwareIntrinsicTest
                         longSourceTable,
                         new long[2]
                     )
-                ) {
+                )
+                {
                     var vf = Avx2.GatherVector128((ulong*)(longTable.inArrayPtr), indexl, 8);
                     Unsafe.Write(longTable.outArrayPtr, vf);
 
@@ -1033,7 +1050,8 @@ namespace IntelHardwareIntrinsicTest
                         floatSourceTable,
                         new float[4]
                     )
-                ) {
+                )
+                {
                     var vf = Avx2.GatherVector128((float*)(floatTable.inArrayPtr), indexl, 4);
                     Unsafe.Write(floatTable.outArrayPtr, vf);
 
@@ -1044,7 +1062,8 @@ namespace IntelHardwareIntrinsicTest
                                 == BitConverter.SingleToInt32Bits(y),
                             longIndexTable
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "AVX2 GatherVector128 failed on float with Vector128 long index:"
                         );
@@ -1079,7 +1098,8 @@ namespace IntelHardwareIntrinsicTest
                                 == BitConverter.SingleToInt32Bits(y),
                             longIndexTable
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "AVX2 GatherVector128 failed with reflection on float with Vector128 long index:"
                         );
@@ -1114,7 +1134,8 @@ namespace IntelHardwareIntrinsicTest
                                 == BitConverter.SingleToInt32Bits(y),
                             longIndexTable
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "AVX2 GatherVector128 failed on float with non-const scale (IMM) and Vector128 long index:"
                         );
@@ -1146,7 +1167,8 @@ namespace IntelHardwareIntrinsicTest
                         doubleSourceTable,
                         new double[2]
                     )
-                ) {
+                )
+                {
                     var vd = Avx2.GatherVector128((double*)(doubletTable.inArrayPtr), indexl, 8);
                     Unsafe.Write(doubletTable.outArrayPtr, vd);
 
@@ -1157,7 +1179,8 @@ namespace IntelHardwareIntrinsicTest
                                 == BitConverter.DoubleToInt64Bits(y),
                             longIndexTable
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "AVX2 GatherVector128 failed on double with Vector128 long index:"
                         );
@@ -1197,7 +1220,8 @@ namespace IntelHardwareIntrinsicTest
                                 == BitConverter.DoubleToInt64Bits(y),
                             longIndexTable
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "AVX2 GatherVector128 failed with reflection on double with Vector128 long index:"
                         );
@@ -1232,7 +1256,8 @@ namespace IntelHardwareIntrinsicTest
                                 == BitConverter.DoubleToInt64Bits(y),
                             longIndexTable
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "AVX2 GatherVector128 failed on double with non-const scale (IMM) and Vector128 long index:"
                         );
@@ -1268,7 +1293,8 @@ namespace IntelHardwareIntrinsicTest
                         intSourceTable,
                         new int[4]
                     )
-                ) {
+                )
+                {
                     var vf = Avx2.GatherVector128((int*)(intTable.inArrayPtr), indexl256, 4);
                     Unsafe.Write(intTable.outArrayPtr, vf);
 
@@ -1363,7 +1389,8 @@ namespace IntelHardwareIntrinsicTest
                         intSourceTable,
                         new int[4]
                     )
-                ) {
+                )
+                {
                     var vf = Avx2.GatherVector128((uint*)(intTable.inArrayPtr), indexl256, 4);
                     Unsafe.Write(intTable.outArrayPtr, vf);
 
@@ -1456,7 +1483,8 @@ namespace IntelHardwareIntrinsicTest
                         floatSourceTable,
                         new float[4]
                     )
-                ) {
+                )
+                {
                     var vf = Avx2.GatherVector128((float*)(floatTable.inArrayPtr), indexl256, 4);
                     Unsafe.Write(floatTable.outArrayPtr, vf);
 
@@ -1467,7 +1495,8 @@ namespace IntelHardwareIntrinsicTest
                                 == BitConverter.SingleToInt32Bits(y),
                             vector256longIndexTable
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "AVX2 GatherVector128 failed on float with Vector256 long index:"
                         );
@@ -1502,7 +1531,8 @@ namespace IntelHardwareIntrinsicTest
                                 == BitConverter.SingleToInt32Bits(y),
                             vector256longIndexTable
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "AVX2 GatherVector128 failed with reflection on float with Vector256 long index:"
                         );
@@ -1537,7 +1567,8 @@ namespace IntelHardwareIntrinsicTest
                                 == BitConverter.SingleToInt32Bits(y),
                             vector256longIndexTable
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "AVX2 GatherVector128 failed on float with non-const scale (IMM) and Vector256 long index:"
                         );

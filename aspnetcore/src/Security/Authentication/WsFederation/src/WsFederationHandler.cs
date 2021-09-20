@@ -72,7 +72,8 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation
                     WsFederationConstants.WsFederationActions.SignOutCleanup,
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 // We've received a remote sign-out request
                 return HandleRemoteSignOutAsync();
             }
@@ -167,7 +168,8 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation
                     StringComparison.OrdinalIgnoreCase
                 )
                 && Request.Body.CanRead
-            ) {
+            )
+            {
                 var form = await Request.ReadFormAsync(Context.RequestAborted);
 
                 wsFederationMessage = new WsFederationMessage(
@@ -230,7 +232,8 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation
                 if (
                     properties.Items.TryGetValue(CorrelationProperty, out string? correlationId)
                     && !ValidateCorrelationId(properties)
-                ) {
+                )
+                {
                     return HandleRequestResult.Fail("Correlation failed.", properties);
                 }
 
@@ -353,7 +356,8 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation
                 if (
                     Options.RefreshOnIssuerKeyNotFound
                     && exception is SecurityTokenSignatureKeyNotFoundException
-                ) {
+                )
+                {
                     Options.ConfigurationManager.RequestRefresh();
                 }
 

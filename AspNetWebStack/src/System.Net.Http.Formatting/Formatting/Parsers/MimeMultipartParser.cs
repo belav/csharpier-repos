@@ -180,7 +180,8 @@ namespace System.Net.Http.Formatting.Parsers
             out ArraySegment<byte> remainingBodyPart,
             out ArraySegment<byte> bodyPart,
             out bool isFinalBodyPart
-        ) {
+        )
+        {
             if (buffer == null)
             {
                 throw Error.ArgumentNull("buffer");
@@ -236,7 +237,8 @@ namespace System.Net.Http.Formatting.Parsers
             long maximumMessageLength,
             ref long totalBytesConsumed,
             CurrentBodyPartStore currentBodyPart
-        ) {
+        )
+        {
             Contract.Assert(
                 (bytesReady - bytesConsumed) >= 0,
                 "ParseBodyPart()|(bytesReady - bytesConsumed) < 0"
@@ -254,7 +256,8 @@ namespace System.Net.Http.Formatting.Parsers
                 bytesReady == 0
                 && bodyPartState == BodyPartState.AfterBoundary
                 && currentBodyPart.IsFinal
-            ) {
+            )
+            {
                 // We've seen the end of the stream - the final body part has no trailing CRLF
                 return State.BodyPartCompleted;
             }
@@ -396,7 +399,8 @@ namespace System.Net.Http.Formatting.Parsers
                                     segmentStart,
                                     bytesConsumed - segmentStart
                                 )
-                            ) {
+                            )
+                            {
                                 if (currentBodyPart.IsBoundaryComplete())
                                 {
                                     // At this point we've seen the end of a boundary segment that is aligned at the end
@@ -422,7 +426,8 @@ namespace System.Net.Http.Formatting.Parsers
                                 segmentStart,
                                 bytesConsumed - segmentStart
                             )
-                        ) {
+                        )
+                        {
                             currentBodyPart.ResetBoundary();
                             bodyPartState = BodyPartState.BodyPart;
                             goto case BodyPartState.BodyPart;
@@ -439,7 +444,8 @@ namespace System.Net.Http.Formatting.Parsers
                     if (
                         buffer[bytesConsumed] == MimeMultipartParser.Dash
                         && !currentBodyPart.IsFinal
-                    ) {
+                    )
+                    {
                         currentBodyPart.AppendBoundary(MimeMultipartParser.Dash);
                         if (++bytesConsumed == effectiveMax)
                         {
@@ -462,7 +468,8 @@ namespace System.Net.Http.Formatting.Parsers
                                     segmentStart,
                                     bytesConsumed - segmentStart
                                 )
-                            ) {
+                            )
+                            {
                                 // It's an unexpected character
                                 currentBodyPart.ResetBoundary();
                                 bodyPartState = BodyPartState.BodyPart;
@@ -480,7 +487,8 @@ namespace System.Net.Http.Formatting.Parsers
                                 segmentStart,
                                 bytesConsumed - segmentStart
                             )
-                        ) {
+                        )
+                        {
                             currentBodyPart.ResetBoundary();
                             bodyPartState = BodyPartState.BodyPart;
                             goto case BodyPartState.BodyPart;
@@ -802,7 +810,8 @@ namespace System.Net.Http.Formatting.Parsers
                 if (
                     _boundary[count] == MimeMultipartParser.Dash
                     && _boundary[count + 1] == MimeMultipartParser.Dash
-                ) {
+                )
+                {
                     boundaryIsFinal = true;
                     count += 2;
                 }
@@ -813,7 +822,8 @@ namespace System.Net.Http.Formatting.Parsers
                     if (
                         _boundary[count] != MimeMultipartParser.SP
                         && _boundary[count] != MimeMultipartParser.HTAB
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }
@@ -840,7 +850,8 @@ namespace System.Net.Http.Formatting.Parsers
                 if (
                     _boundaryLength == _referenceBoundaryLength + 1
                     && _boundary[_referenceBoundaryLength] == MimeMultipartParser.Dash
-                ) {
+                )
+                {
                     return false;
                 }
 

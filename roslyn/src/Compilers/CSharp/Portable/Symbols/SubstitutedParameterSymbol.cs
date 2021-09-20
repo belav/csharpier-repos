@@ -67,7 +67,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     substituted.CustomModifiers.IsEmpty
                     && this._underlyingParameter.TypeWithAnnotations.CustomModifiers.IsEmpty
                     && this._underlyingParameter.RefCustomModifiers.IsEmpty
-                ) {
+                )
+                {
                     _mapOrType = substituted;
                 }
 

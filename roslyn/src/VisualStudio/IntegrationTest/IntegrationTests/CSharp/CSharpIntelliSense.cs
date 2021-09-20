@@ -88,7 +88,8 @@ class C
         [WpfTheory, CombinatorialData, Trait(Traits.Feature, Traits.Features.Completion)]
         public void VerifyCompletionListMembersOnStaticTypesAndCompleteThem(
             bool showCompletionInArgumentLists
-        ) {
+        )
+        {
             SetUpEditor(
                 @"
 public class Program
@@ -372,7 +373,8 @@ class Class1
         [WorkItem(33825, "https://github.com/dotnet/roslyn/issues/33825")]
         public void CompletionUsesTrackingPointsInTheFaceOfAutomaticBraceCompletion(
             bool showCompletionInArgumentLists
-        ) {
+        )
+        {
             SetUpEditor(
                 @"
 class Class1

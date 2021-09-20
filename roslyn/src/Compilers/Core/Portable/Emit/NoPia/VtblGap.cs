@@ -98,7 +98,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
 
         System.Reflection.MethodImplAttributes Cci.IMethodDefinition.GetImplementationAttributes(
             EmitContext context
-        ) {
+        )
+        {
             return System.Reflection.MethodImplAttributes.Managed
                 | System.Reflection.MethodImplAttributes.Runtime;
         }
@@ -120,7 +121,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
 
         IEnumerable<Cci.ICustomAttribute> Cci.IMethodDefinition.GetReturnValueAttributes(
             EmitContext context
-        ) {
+        )
+        {
             return SpecializedCollections.EmptyEnumerable<Cci.ICustomAttribute>();
         }
 
@@ -237,7 +239,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
 
         ImmutableArray<Cci.IParameterTypeInformation> Cci.ISignature.GetParameters(
             EmitContext context
-        ) {
+        )
+        {
             return ImmutableArray<Cci.IParameterTypeInformation>.Empty;
         }
 

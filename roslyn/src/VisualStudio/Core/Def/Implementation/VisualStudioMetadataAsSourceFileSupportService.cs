@@ -27,7 +27,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         public VisualStudioMetadataAsSourceFileSupportService(
             SVsServiceProvider serviceProvider,
             IMetadataAsSourceFileService metadataAsSourceFileService
-        ) {
+        )
+        {
             _metadataAsSourceFileService = metadataAsSourceFileService;
 
             var solution = (IVsSolution)serviceProvider.GetService(typeof(SVsSolution));

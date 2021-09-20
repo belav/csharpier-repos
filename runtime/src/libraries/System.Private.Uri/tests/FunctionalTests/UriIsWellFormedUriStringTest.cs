@@ -485,7 +485,8 @@ namespace System.PrivateUri.Tests
         public void UriIsWellFormed_AbsoluteUnicodeWithUnwise_Success(
             string uriString,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, Uri.IsWellFormedUriString(uriString, UriKind.Absolute));
         }
     }

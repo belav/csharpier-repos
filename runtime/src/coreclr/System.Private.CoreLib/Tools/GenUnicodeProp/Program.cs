@@ -257,7 +257,8 @@ namespace GenUnicodeProp
             Dictionary<T, byte> d,
             Func<T, byte[]> getBytesCallback,
             StreamWriter file
-        ) {
+        )
+        {
             Console.WriteLine("    ******************************** .");
 
             // Create reverse mapping of byte -> T,
@@ -305,7 +306,8 @@ namespace GenUnicodeProp
             string tableName,
             StreamWriter file,
             TableLevels expectedLevels
-        ) {
+        )
+        {
             file.Write("\n");
             file.Write("        [Conditional(\"DEBUG\")]\n");
             file.Write(

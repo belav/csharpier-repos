@@ -21,7 +21,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="dependencies"> Parameter object containing dependencies for this convention. </param>
         public ServicePropertyDiscoveryConvention(
             ProviderConventionSetBuilderDependencies dependencies
-        ) {
+        )
+        {
             Dependencies = dependencies;
         }
 
@@ -52,7 +53,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionEntityType? newBaseType,
             IConventionEntityType? oldBaseType,
             IConventionContext<IConventionEntityType> context
-        ) {
+        )
+        {
             if (entityTypeBuilder.Metadata.BaseType == newBaseType)
             {
                 Process(entityTypeBuilder);
@@ -76,7 +78,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         propertyInfo.IsCandidateProperty()
                         && Dependencies.TypeMappingSource.FindMapping(propertyInfo) != null
                     )
-                ) {
+                )
+                {
                     continue;
                 }
 

@@ -42,7 +42,8 @@ namespace Internal.Cryptography.Pal
                     SafeCFArrayHandle identities = Interop.AppleCrypto.KeychainEnumerateIdentities(
                         _keychainHandle
                     )
-                ) {
+                )
+                {
                     ReadCollection(identities, dedupedCerts);
                 }
 
@@ -50,7 +51,8 @@ namespace Internal.Cryptography.Pal
                     SafeCFArrayHandle certs = Interop.AppleCrypto.KeychainEnumerateCerts(
                         _keychainHandle
                     )
-                ) {
+                )
+                {
                     ReadCollection(certs, dedupedCerts);
                 }
 
@@ -100,7 +102,8 @@ namespace Internal.Cryptography.Pal
             public static AppleKeychainStore CreateOrOpenKeychain(
                 string keychainPath,
                 OpenFlags openFlags
-            ) {
+            )
+            {
                 return new AppleKeychainStore(
                     Interop.AppleCrypto.CreateOrOpenKeychain(
                         keychainPath,

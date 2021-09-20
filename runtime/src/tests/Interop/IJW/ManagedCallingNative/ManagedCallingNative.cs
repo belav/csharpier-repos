@@ -17,7 +17,8 @@ namespace ManagedCallingNative
             if (
                 Environment.OSVersion.Platform != PlatformID.Win32NT
                 || TestLibrary.Utilities.IsWindows7
-            ) {
+            )
+            {
                 return 100;
             }
 

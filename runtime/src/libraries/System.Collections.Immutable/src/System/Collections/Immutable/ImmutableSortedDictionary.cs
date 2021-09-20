@@ -308,10 +308,8 @@ namespace System.Collections.Immutable
         public static ImmutableSortedDictionary<TKey, TValue> ToImmutableSortedDictionary<
             TKey,
             TValue
-        >(
-            this IEnumerable<KeyValuePair<TKey, TValue>> source,
-            IComparer<TKey>? keyComparer
-        ) where TKey : notnull
+        >(this IEnumerable<KeyValuePair<TKey, TValue>> source, IComparer<TKey>? keyComparer)
+            where TKey : notnull
         {
             return ToImmutableSortedDictionary(source, keyComparer, null);
         }

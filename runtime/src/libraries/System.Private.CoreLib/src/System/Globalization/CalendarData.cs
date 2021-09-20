@@ -251,7 +251,8 @@ namespace System.Globalization
                         this.saEraNames == null
                         || this.saEraNames.Length == 0
                         || string.IsNullOrEmpty(this.saEraNames[0])
-                    ) {
+                    )
+                    {
                         this.saEraNames = new string[] { "A.D." };
                     }
                     break;
@@ -319,7 +320,8 @@ namespace System.Globalization
                         this.saEraNames == null
                         || this.saEraNames.Length == 0
                         || string.IsNullOrEmpty(this.saEraNames[0])
-                    ) {
+                    )
+                    {
                         this.saEraNames = new string[] { "\x0647\x002e\x0634" };
                     }
                     break;
@@ -343,7 +345,8 @@ namespace System.Globalization
                         this.saAbbrevEraNames == null
                         || this.saAbbrevEraNames.Length == 0
                         || string.IsNullOrEmpty(this.saAbbrevEraNames[0])
-                    ) {
+                    )
+                    {
                         this.saAbbrevEraNames = new string[] { "AD" };
                     }
                     break;
@@ -387,7 +390,8 @@ namespace System.Globalization
                         this.saAbbrevEraNames == null
                         || this.saAbbrevEraNames.Length == 0
                         || string.IsNullOrEmpty(this.saAbbrevEraNames[0])
-                    ) {
+                    )
+                    {
                         this.saAbbrevEraNames = this.saEraNames;
                     }
                     break;

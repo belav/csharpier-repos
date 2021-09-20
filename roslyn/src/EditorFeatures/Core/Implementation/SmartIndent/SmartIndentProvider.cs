@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.SmartIndent
                 !textView.TextBuffer.GetFeatureOnOffOption(
                     InternalFeatureOnOffOptions.SmartIndenter
                 )
-            ) {
+            )
+            {
                 return null;
             }
 

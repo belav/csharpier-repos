@@ -11,9 +11,8 @@ namespace Microsoft.EntityFrameworkCore
 {
     public abstract class ConnectionInterceptionSqliteTestBase : ConnectionInterceptionTestBase
     {
-        protected ConnectionInterceptionSqliteTestBase(
-            InterceptionSqliteFixtureBase fixture
-        ) : base(fixture) { }
+        protected ConnectionInterceptionSqliteTestBase(InterceptionSqliteFixtureBase fixture)
+            : base(fixture) { }
 
         protected override BadUniverseContext CreateBadUniverse(
             DbContextOptionsBuilder optionsBuilder

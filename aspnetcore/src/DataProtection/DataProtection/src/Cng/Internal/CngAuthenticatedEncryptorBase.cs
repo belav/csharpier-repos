@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.DataProtection.Cng.Internal
         public byte[] Decrypt(
             ArraySegment<byte> ciphertext,
             ArraySegment<byte> additionalAuthenticatedData
-        ) {
+        )
+        {
             // This wrapper simply converts ArraySegment<byte> to byte* and calls the impl method.
 
             // Input validation
@@ -66,7 +67,8 @@ namespace Microsoft.AspNetCore.DataProtection.Cng.Internal
         public byte[] Encrypt(
             ArraySegment<byte> plaintext,
             ArraySegment<byte> additionalAuthenticatedData
-        ) {
+        )
+        {
             return Encrypt(plaintext, additionalAuthenticatedData, 0, 0);
         }
 
@@ -75,7 +77,8 @@ namespace Microsoft.AspNetCore.DataProtection.Cng.Internal
             ArraySegment<byte> additionalAuthenticatedData,
             uint preBufferSize,
             uint postBufferSize
-        ) {
+        )
+        {
             // This wrapper simply converts ArraySegment<byte> to byte* and calls the impl method.
 
             // Input validation

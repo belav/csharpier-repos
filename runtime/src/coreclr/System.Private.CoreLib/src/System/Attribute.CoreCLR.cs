@@ -17,7 +17,8 @@ namespace System
             PropertyInfo element,
             Type type,
             bool inherit
-        ) {
+        )
+        {
             Debug.Assert(element != null);
             Debug.Assert(type != null);
             Debug.Assert(type.IsSubclassOf(typeof(Attribute)) || type == typeof(Attribute));
@@ -57,7 +58,8 @@ namespace System
             PropertyInfo element,
             Type attributeType,
             bool inherit
-        ) {
+        )
+        {
             // walk up the hierarchy chain
             if (element.IsDefined(attributeType, inherit))
                 return true;
@@ -95,7 +97,8 @@ namespace System
         private static PropertyInfo? GetParentDefinition(
             PropertyInfo property,
             Type[] propertyParameters
-        ) {
+        )
+        {
             Debug.Assert(property != null);
 
             // for the current property get the base class of the getter and the setter, they might be different
@@ -136,7 +139,8 @@ namespace System
             EventInfo element,
             Type type,
             bool inherit
-        ) {
+        )
+        {
             Debug.Assert(element != null);
             Debug.Assert(type != null);
             Debug.Assert(type.IsSubclassOf(typeof(Attribute)) || type == typeof(Attribute));
@@ -257,7 +261,8 @@ namespace System
             ParameterInfo param,
             Type? type,
             bool inherit
-        ) {
+        )
+        {
             Debug.Assert(param != null);
 
             // For ParameterInfo's we need to make sure that we chain through all the MethodInfo's in the inheritance chain that
@@ -390,7 +395,8 @@ namespace System
             List<Attribute> attributeList,
             Attribute[] attributes,
             Dictionary<Type, AttributeUsageAttribute> types
-        ) {
+        )
+        {
             for (int i = 0; i < attributes.Length; i++)
             {
                 attributeList.Add(attributes[i]);
@@ -423,7 +429,8 @@ namespace System
             List<Attribute> attributeList,
             Attribute[] attributes,
             Dictionary<Type, AttributeUsageAttribute> types
-        ) {
+        )
+        {
             for (int i = 0; i < attributes.Length; i++)
             {
                 Type attrType = attributes[i].GetType();
@@ -480,7 +487,8 @@ namespace System
             MemberInfo element,
             Type attributeType,
             bool inherit
-        ) {
+        )
+        {
             if (element == null)
                 throw new ArgumentNullException(nameof(element));
 
@@ -559,7 +567,8 @@ namespace System
             MemberInfo element,
             Type attributeType,
             bool inherit
-        ) {
+        )
+        {
             Attribute[] attrib = GetCustomAttributes(element, attributeType, inherit);
 
             if (attrib == null || attrib.Length == 0)
@@ -588,7 +597,8 @@ namespace System
             ParameterInfo element,
             Type attributeType,
             bool inherit
-        ) {
+        )
+        {
             if (element == null)
                 throw new ArgumentNullException(nameof(element));
 
@@ -672,7 +682,8 @@ namespace System
             ParameterInfo element,
             Type attributeType,
             bool inherit
-        ) {
+        )
+        {
             // Returns an Attribute of base class/inteface attributeType on the ParameterInfo or null if none exists.
             // throws an AmbiguousMatchException if there are more than one defined.
             Attribute[] attrib = GetCustomAttributes(element, attributeType, inherit);
@@ -714,7 +725,8 @@ namespace System
             Module element,
             Type attributeType,
             bool inherit
-        ) {
+        )
+        {
             if (element == null)
                 throw new ArgumentNullException(nameof(element));
 
@@ -760,7 +772,8 @@ namespace System
             Module element,
             Type attributeType,
             bool inherit
-        ) {
+        )
+        {
             // Returns an Attribute of base class/inteface attributeType on the Module or null if none exists.
             // throws an AmbiguousMatchException if there are more than one defined.
             Attribute[] attrib = GetCustomAttributes(element, attributeType, inherit);
@@ -786,7 +799,8 @@ namespace System
             Assembly element,
             Type attributeType,
             bool inherit
-        ) {
+        )
+        {
             if (element == null)
                 throw new ArgumentNullException(nameof(element));
 
@@ -845,7 +859,8 @@ namespace System
             Assembly element,
             Type attributeType,
             bool inherit
-        ) {
+        )
+        {
             // Returns an Attribute of base class/inteface attributeType on the Assembly or null if none exists.
             // throws an AmbiguousMatchException if there are more than one defined.
             Attribute[] attrib = GetCustomAttributes(element, attributeType, inherit);

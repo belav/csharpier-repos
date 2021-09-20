@@ -44,7 +44,8 @@ namespace AutoMapper.UnitTests.Bug
                 object dest,
                 object destMember,
                 ResolutionContext context
-            ) {
+            )
+            {
                 return -1;
             }
         }

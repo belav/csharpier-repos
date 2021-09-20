@@ -58,7 +58,8 @@ namespace Microsoft.AspNetCore.Analyzer.Testing
             string[] sources,
             DiagnosticAnalyzer analyzer,
             string[] additionalEnabledDiagnostics
-        ) {
+        )
+        {
             return GetDiagnosticsAsync(
                 GetDocuments(sources),
                 analyzer,
@@ -78,7 +79,8 @@ namespace Microsoft.AspNetCore.Analyzer.Testing
             Document[] documents,
             DiagnosticAnalyzer analyzer,
             string[] additionalEnabledDiagnostics
-        ) {
+        )
+        {
             var projects = new HashSet<Project>();
             foreach (var document in documents)
             {
@@ -190,12 +192,14 @@ namespace Microsoft.AspNetCore.Analyzer.Testing
                 var defaultCompileLibrary in DependencyContext.Load(
                     GetType().Assembly
                 ).CompileLibraries
-            ) {
+            )
+            {
                 foreach (
                     var resolveReferencePath in defaultCompileLibrary.ResolveReferencePaths(
                         new AppLocalResolver()
                     )
-                ) {
+                )
+                {
                     Solution = Solution.AddMetadataReference(
                         projectId,
                         MetadataReference.CreateFromFile(resolveReferencePath)

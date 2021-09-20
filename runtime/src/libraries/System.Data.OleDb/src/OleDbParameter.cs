@@ -48,12 +48,8 @@ namespace System.Data.OleDb
             Size = size;
         }
 
-        public OleDbParameter(
-            string? name,
-            OleDbType dataType,
-            int size,
-            string? srcColumn
-        ) : this()
+        public OleDbParameter(string? name, OleDbType dataType, int size, string? srcColumn)
+            : this()
         {
             ParameterName = name;
             OleDbType = dataType;
@@ -471,7 +467,8 @@ namespace System.Data.OleDb
                 (null != value)
                 && (DBNull.Value != value)
                 && (typeof(object) != destinationType.dataType)
-            ) {
+            )
+            {
                 Type currentType = value.GetType();
                 if (currentType != destinationType.dataType)
                 {
@@ -484,7 +481,8 @@ namespace System.Data.OleDb
                         else if (
                             (NativeDBType.CY == destinationType.dbType)
                             && (typeof(string) == currentType)
-                        ) {
+                        )
+                        {
                             value = decimal.Parse((string)value, NumberStyles.Currency, null);
                         }
                         else
@@ -570,7 +568,8 @@ namespace System.Data.OleDb
                     (NativeDBType.DECIMAL == _metaType.wType)
                     || (NativeDBType.NUMERIC == _metaType.wType)
                 )
-            ) {
+            )
+            {
                 throw ADP.PrepareParameterScale(
                     cmd,
                     _metaType.wType.ToString("G", CultureInfo.InvariantCulture)
@@ -646,7 +645,8 @@ namespace System.Data.OleDb
                 if (
                     typeof(System.ComponentModel.Design.Serialization.InstanceDescriptor)
                     == destinationType
-                ) {
+                )
+                {
                     return true;
                 }
                 return base.CanConvertTo(context, destinationType);
@@ -657,7 +657,8 @@ namespace System.Data.OleDb
                 CultureInfo culture,
                 object value,
                 Type destinationType
-            ) {
+            )
+            {
                 if (null == destinationType)
                 {
                     throw ADP.ArgumentNull("destinationType");
@@ -667,7 +668,8 @@ namespace System.Data.OleDb
                         typeof(System.ComponentModel.Design.Serialization.InstanceDescriptor)
                         == destinationType
                     ) && (value is OleDbParameter parameter)
-                ) {
+                )
+                {
                     return ConvertToInstanceDescriptor(parameter);
                 }
                 return base.ConvertTo(context, culture, value, destinationType);
@@ -675,7 +677,8 @@ namespace System.Data.OleDb
 
             private System.ComponentModel.Design.Serialization.InstanceDescriptor ConvertToInstanceDescriptor(
                 OleDbParameter p
-            ) {
+            )
+            {
                 int flags = 0;
 
                 if (p.ShouldSerializeOleDbType())
@@ -700,7 +703,8 @@ namespace System.Data.OleDb
                     || p.ShouldSerializePrecision()
                     || p.ShouldSerializeScale()
                     || (DataRowVersion.Current != p.SourceVersion)
-                ) {
+                )
+                {
                     flags |= 16; // V1.0 everything
                 }
                 if (p.SourceColumnNullMapping)

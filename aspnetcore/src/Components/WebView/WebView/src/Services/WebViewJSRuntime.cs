@@ -31,14 +31,16 @@ namespace Microsoft.AspNetCore.Components.WebView.Services
             string argsJson,
             JSCallResultType resultType,
             long targetInstanceId
-        ) {
+        )
+        {
             _ipcSender.BeginInvokeJS(taskId, identifier, argsJson, resultType, targetInstanceId);
         }
 
         protected override void EndInvokeDotNet(
             DotNetInvocationInfo invocationInfo,
             in DotNetInvocationResult invocationResult
-        ) {
+        )
+        {
             if (!invocationResult.Success)
             {
                 EndInvokeDotNetCore(

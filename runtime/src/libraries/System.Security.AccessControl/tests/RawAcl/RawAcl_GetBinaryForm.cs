@@ -40,7 +40,8 @@ namespace System.Security.AccessControl.Tests
                     (uint)rAcl.BinaryLength,
                     (uint)GenericAcl.AclRevision
                 )
-            ) {
+            )
+            {
                 errorCode = Marshal.GetLastWin32Error();
             }
             else if (
@@ -52,7 +53,8 @@ namespace System.Security.AccessControl.Tests
                     (uint)1,
                     sidBinaryForm
                 )
-            ) {
+            )
+            {
                 errorCode = Marshal.GetLastWin32Error();
             }
             else
@@ -80,7 +82,8 @@ namespace System.Security.AccessControl.Tests
                     (uint)rAcl.BinaryLength,
                     (uint)GenericAcl.AclRevision
                 )
-            ) {
+            )
+            {
                 errorCode = Marshal.GetLastWin32Error();
             }
             else if (
@@ -92,7 +95,8 @@ namespace System.Security.AccessControl.Tests
                     (uint)1,
                     sidBinaryForm
                 )
-            ) {
+            )
+            {
                 errorCode = Marshal.GetLastWin32Error();
             }
             else
@@ -120,7 +124,8 @@ namespace System.Security.AccessControl.Tests
                     (uint)rAcl.BinaryLength,
                     (uint)GenericAcl.AclRevision
                 )
-            ) {
+            )
+            {
                 errorCode = Marshal.GetLastWin32Error();
             }
             else if (
@@ -134,7 +139,8 @@ namespace System.Security.AccessControl.Tests
                     1,
                     1
                 )
-            ) {
+            )
+            {
                 errorCode = Marshal.GetLastWin32Error();
             }
             else
@@ -284,7 +290,8 @@ namespace System.Security.AccessControl.Tests
                     (uint)8,
                     (uint)GenericAcl.AclRevision
                 )
-            ) {
+            )
+            {
                 errorCode = Marshal.GetLastWin32Error();
             }
             else
@@ -340,7 +347,8 @@ namespace System.Security.AccessControl.Tests
                     (uint)rAcl.BinaryLength,
                     (uint)GenericAcl.AclRevision
                 )
-            ) {
+            )
+            {
                 errorCode = Marshal.GetLastWin32Error();
             }
             else
@@ -357,7 +365,8 @@ namespace System.Security.AccessControl.Tests
                             (uint)i,
                             sidBinaryForm
                         )
-                    ) {
+                    )
+                    {
                         errorCode = Marshal.GetLastWin32Error();
                         break;
                     }
@@ -372,7 +381,8 @@ namespace System.Security.AccessControl.Tests
                             1,
                             1
                         )
-                    ) {
+                    )
+                    {
                         errorCode = Marshal.GetLastWin32Error();
                         break;
                     }
@@ -385,7 +395,8 @@ namespace System.Security.AccessControl.Tests
                             (uint)(i + 2),
                             sidBinaryForm
                         )
-                    ) {
+                    )
+                    {
                         errorCode = Marshal.GetLastWin32Error();
                         break;
                     }

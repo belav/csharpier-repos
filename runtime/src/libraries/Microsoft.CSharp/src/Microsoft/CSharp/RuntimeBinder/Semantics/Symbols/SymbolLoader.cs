@@ -156,7 +156,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 && !aggDest.isPredefAgg(PredefinedType.PT_G_IENUMERABLE)
                 && !aggDest.isPredefAgg(PredefinedType.PT_G_IREADONLYCOLLECTION)
                 && !aggDest.isPredefAgg(PredefinedType.PT_G_IREADONLYLIST)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -245,7 +246,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                                     GetPredefindType(PredefinedType.PT_MULTIDEL),
                                     aggDest
                                 )
-                            ) {
+                            )
+                            {
                                 return true;
                             }
 
@@ -275,7 +277,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     if (
                         aggDest.IsPredefType(PredefinedType.PT_ARRAY)
                         || IsBaseInterface(GetPredefindType(PredefinedType.PT_ARRAY), aggDest)
-                    ) {
+                    )
+                    {
                         return true;
                     }
 

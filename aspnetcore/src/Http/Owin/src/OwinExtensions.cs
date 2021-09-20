@@ -78,7 +78,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IApplicationBuilder UseOwin(
             this IApplicationBuilder builder,
             Action<AddMiddleware> pipeline
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -111,7 +112,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IApplicationBuilder UseBuilder(
             this AddMiddleware app,
             IServiceProvider serviceProvider
-        ) {
+        )
+        {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));
@@ -144,7 +146,8 @@ namespace Microsoft.AspNetCore.Builder
         private static CreateMiddleware CreateMiddlewareFactory(
             Func<RequestDelegate, RequestDelegate> middleware,
             IServiceProvider services
-        ) {
+        )
+        {
             return next =>
             {
                 var app = middleware(
@@ -190,7 +193,8 @@ namespace Microsoft.AspNetCore.Builder
         public static AddMiddleware UseBuilder(
             this AddMiddleware app,
             Action<IApplicationBuilder> pipeline
-        ) {
+        )
+        {
             return app.UseBuilder(pipeline, serviceProvider: null);
         }
 
@@ -205,7 +209,8 @@ namespace Microsoft.AspNetCore.Builder
             this AddMiddleware app,
             Action<IApplicationBuilder> pipeline,
             IServiceProvider serviceProvider
-        ) {
+        )
+        {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));

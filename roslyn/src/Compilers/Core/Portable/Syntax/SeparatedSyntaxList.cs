@@ -300,14 +300,16 @@ namespace Microsoft.CodeAnalysis
         public static bool operator ==(
             SeparatedSyntaxList<TNode> left,
             SeparatedSyntaxList<TNode> right
-        ) {
+        )
+        {
             return left.Equals(right);
         }
 
         public static bool operator !=(
             SeparatedSyntaxList<TNode> left,
             SeparatedSyntaxList<TNode> right
-        ) {
+        )
+        {
             return !left.Equals(right);
         }
 
@@ -400,7 +402,8 @@ namespace Microsoft.CodeAnalysis
                     if (
                         nodesToInsertWithSeparators.Count > 0
                         || (insertionIndex > 0 && nodesWithSeps[insertionIndex - 1].IsNode)
-                    ) {
+                    )
+                    {
                         nodesToInsertWithSeparators.Add(item.Green.CreateSeparator<TNode>(item));
                     }
 
@@ -412,7 +415,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 insertionIndex < nodesWithSeps.Count
                 && nodesWithSeps[insertionIndex] is { IsNode: true } nodeOrToken
-            ) {
+            )
+            {
                 var node = nodesWithSeps[insertionIndex].AsNode();
                 Debug.Assert(node is object);
                 nodesToInsertWithSeparators.Add(node.Green.CreateSeparator<TNode>(node)); // separator
@@ -513,7 +517,8 @@ namespace Microsoft.CodeAnalysis
         public SeparatedSyntaxList<TNode> ReplaceRange(
             TNode nodeInList,
             IEnumerable<TNode> newNodes
-        ) {
+        )
+        {
             if (newNodes == null)
             {
                 throw new ArgumentNullException(nameof(newNodes));
@@ -550,7 +555,8 @@ namespace Microsoft.CodeAnalysis
         public SeparatedSyntaxList<TNode> ReplaceSeparator(
             SyntaxToken separatorToken,
             SyntaxToken newSeparator
-        ) {
+        )
+        {
             var nodesWithSeps = this.GetWithSeparators();
             var index = nodesWithSeps.IndexOf(separatorToken);
             if (index < 0)
@@ -561,7 +567,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 newSeparator.RawKind != nodesWithSeps[index].RawKind
                 || newSeparator.Language != nodesWithSeps[index].Language
-            ) {
+            )
+            {
                 throw new ArgumentException("newSeparator");
             }
 
@@ -610,13 +617,15 @@ namespace Microsoft.CodeAnalysis
 
         public static implicit operator SeparatedSyntaxList<SyntaxNode>(
             SeparatedSyntaxList<TNode> nodes
-        ) {
+        )
+        {
             return new SeparatedSyntaxList<SyntaxNode>(nodes._list);
         }
 
         public static implicit operator SeparatedSyntaxList<TNode>(
             SeparatedSyntaxList<SyntaxNode> nodes
-        ) {
+        )
+        {
             return new SeparatedSyntaxList<TNode>(nodes._list);
         }
     }

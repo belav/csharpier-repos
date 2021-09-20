@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.Builder
             string name,
             string areaName,
             string? template
-        ) {
+        )
+        {
             MapAreaRoute(
                 routeBuilder,
                 name,
@@ -60,7 +61,8 @@ namespace Microsoft.AspNetCore.Builder
             string areaName,
             string? template,
             object? defaults
-        ) {
+        )
+        {
             MapAreaRoute(
                 routeBuilder,
                 name,
@@ -98,7 +100,8 @@ namespace Microsoft.AspNetCore.Builder
             string? template,
             object? defaults,
             object? constraints
-        ) {
+        )
+        {
             MapAreaRoute(
                 routeBuilder,
                 name,
@@ -141,7 +144,8 @@ namespace Microsoft.AspNetCore.Builder
             object? defaults,
             object? constraints,
             object? dataTokens
-        ) {
+        )
+        {
             if (routeBuilder == null)
             {
                 throw new ArgumentNullException(nameof(routeBuilder));

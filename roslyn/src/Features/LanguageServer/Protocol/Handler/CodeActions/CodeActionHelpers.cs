@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
             ICodeFixService codeFixService,
             ICodeRefactoringService codeRefactoringService,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var actionSets = await GetActionSetsAsync(
                     document,
                     codeFixService,
@@ -116,7 +117,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
             int currentSetNumber,
             ref int currentHighestSetNumber,
             string currentTitle = ""
-        ) {
+        )
+        {
             if (!string.IsNullOrEmpty(currentTitle))
             {
                 // Adding a delimiter for nested code actions, e.g. 'Suppress or Configure issues|Suppress IDEXXXX|in Source'
@@ -160,11 +162,13 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
                 CodeActionKind codeActionKind,
                 ref int currentHighestSetNumber,
                 string currentTitle
-            ) {
+            )
+            {
                 if (
                     suggestedAction
                     is not UnifiedSuggestedActionWithNestedActions suggestedActionWithNestedActions
-                ) {
+                )
+                {
                     return Array.Empty<VSCodeAction>();
                 }
 
@@ -213,7 +217,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
             ICodeFixService codeFixService,
             ICodeRefactoringService codeRefactoringService,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var actionSets = await GetActionSetsAsync(
                     document,
                     codeFixService,
@@ -270,12 +275,14 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
         /// </summary>
         private static CodeAction GetNestedActionsFromActionSet(
             IUnifiedSuggestedAction suggestedAction
-        ) {
+        )
+        {
             var codeAction = suggestedAction.OriginalCodeAction;
             if (
                 suggestedAction
                 is not UnifiedSuggestedActionWithNestedActions suggestedActionWithNestedActions
-            ) {
+            )
+            {
                 return codeAction;
             }
 
@@ -302,7 +309,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
             ICodeRefactoringService codeRefactoringService,
             LSP.Range selection,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
             var textSpan = ProtocolConversions.RangeToTextSpan(selection, text);
 
@@ -367,7 +375,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
         public static CodeAction? GetCodeActionToResolve(
             string distinctTitle,
             ImmutableArray<CodeAction> codeActions
-        ) {
+        )
+        {
             // Searching for the matching code action. We compare against the unique identifier
             // (e.g. "Suppress or Configure issues|Configure IDExxxx|Warning") instead of the
             // code action's title (e.g. "Warning") since there's a chance that multiple code
@@ -390,7 +399,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
             CodeAction codeAction,
             string goalTitle,
             string currentTitle = ""
-        ) {
+        )
+        {
             // If the unique identifier of the current code action matches the unique identifier of the code action
             // we're looking for, return the code action. If not, check to see if one of the current code action's
             // nested actions may be a match.

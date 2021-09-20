@@ -40,7 +40,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             public InterceptionResult<DbCommand> CommandCreating(
                 CommandCorrelatedEventData eventData,
                 InterceptionResult<DbCommand> result
-            ) {
+            )
+            {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
                     result = _interceptors[i].CommandCreating(eventData, result);
@@ -63,7 +64,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 DbCommand command,
                 CommandEventData eventData,
                 InterceptionResult<DbDataReader> result
-            ) {
+            )
+            {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
                     result = _interceptors[i].ReaderExecuting(command, eventData, result);
@@ -76,7 +78,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 DbCommand command,
                 CommandEventData eventData,
                 InterceptionResult<object> result
-            ) {
+            )
+            {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
                     result = _interceptors[i].ScalarExecuting(command, eventData, result);
@@ -89,7 +92,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 DbCommand command,
                 CommandEventData eventData,
                 InterceptionResult<int> result
-            ) {
+            )
+            {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
                     result = _interceptors[i].NonQueryExecuting(command, eventData, result);
@@ -103,7 +107,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 CommandEventData eventData,
                 InterceptionResult<DbDataReader> result,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
                     result = await _interceptors[i].ReaderExecutingAsync(
@@ -123,7 +128,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 CommandEventData eventData,
                 InterceptionResult<object> result,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
                     result = await _interceptors[i].ScalarExecutingAsync(
@@ -143,7 +149,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 CommandEventData eventData,
                 InterceptionResult<int> result,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
                     result = await _interceptors[i].NonQueryExecutingAsync(
@@ -162,7 +169,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 DbCommand command,
                 CommandExecutedEventData eventData,
                 DbDataReader result
-            ) {
+            )
+            {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
                     result = _interceptors[i].ReaderExecuted(command, eventData, result);
@@ -175,7 +183,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 DbCommand command,
                 CommandExecutedEventData eventData,
                 object? result
-            ) {
+            )
+            {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
                     result = _interceptors[i].ScalarExecuted(command, eventData, result);
@@ -188,7 +197,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 DbCommand command,
                 CommandExecutedEventData eventData,
                 int result
-            ) {
+            )
+            {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
                     result = _interceptors[i].NonQueryExecuted(command, eventData, result);
@@ -202,7 +212,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 CommandExecutedEventData eventData,
                 DbDataReader result,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
                     result = await _interceptors[i].ReaderExecutedAsync(
@@ -222,7 +233,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 CommandExecutedEventData eventData,
                 object? result,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
                     result = await _interceptors[i].ScalarExecutedAsync(
@@ -242,7 +254,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 CommandExecutedEventData eventData,
                 int result,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
                     result = await _interceptors[i].NonQueryExecutedAsync(
@@ -269,7 +282,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 DbCommand command,
                 CommandErrorEventData eventData,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
                     await _interceptors[i].CommandFailedAsync(command, eventData, cancellationToken)
@@ -281,7 +295,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 DbCommand command,
                 DataReaderDisposingEventData eventData,
                 InterceptionResult result
-            ) {
+            )
+            {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
                     result = _interceptors[i].DataReaderDisposing(command, eventData, result);

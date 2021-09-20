@@ -242,7 +242,8 @@ namespace System.Security.Cryptography.Encoding.Tests
         [InlineData("\t")]
         public void Find_Success_WhiteSpaceAfterPpostebSeparatesFromSubsequentContent(
             string whiteSpace
-        ) {
+        )
+        {
             string content = $"-----BEGIN TEST-----\nZn9v\n-----END TEST-----{whiteSpace}blah";
             PemFields fields = AssertPemFound(
                 content,
@@ -472,7 +473,8 @@ MII
             Range expectedLocation,
             Range expectedBase64,
             Range expectedLabel
-        ) {
+        )
+        {
             PemFields fields = FindPem(input);
             Assert.Equal(expectedBase64, fields.Base64Data);
             Assert.Equal(expectedLocation, fields.Location);

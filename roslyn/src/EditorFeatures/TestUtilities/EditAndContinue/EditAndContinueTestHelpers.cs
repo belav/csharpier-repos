@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             ActiveStatement[] oldActiveStatements,
             TextSpan[] expectedNewActiveStatements,
             ImmutableArray<TextSpan>[] expectedNewExceptionRegions
-        ) {
+        )
+        {
             var text = SourceText.From(source);
             var tree = ParseText(source);
             var root = tree.GetRoot();
@@ -99,7 +100,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             SyntaxNode oldRoot,
             IReadOnlyList<ActiveStatement> actualNewActiveStatements,
             IReadOnlyList<ImmutableArray<LinePositionSpan>> actualNewExceptionRegions
-        ) {
+        )
+        {
             // check active statements:
             AssertSpansEqual(
                 description.NewSpans,
@@ -134,7 +136,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             IEnumerable<SourceLineUpdate> expectedLineEdits,
             IEnumerable<string> expectedNodeUpdates,
             RudeEditDiagnosticDescription[] expectedDiagnostics
-        ) {
+        )
+        {
             var newSource = editScript.Match.NewRoot.SyntaxTree.ToString();
             var oldSource = editScript.Match.OldRoot.SyntaxTree.ToString();
 
@@ -171,7 +174,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             EditScript<SyntaxNode>[] editScripts,
             TargetFramework targetFramework,
             DocumentAnalysisResultsDescription[] expectedResults
-        ) {
+        )
+        {
             Assert.True(editScripts.Length == expectedResults.Length);
             var documentCount = expectedResults.Length;
 
@@ -306,7 +310,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             Compilation newCompilation,
             SyntaxNode oldRoot,
             SyntaxNode newRoot
-        ) {
+        )
+        {
             // string comparison to simplify understanding why a test failed:
             AssertEx.Equal(
                 expectedSemanticEdits.Select(e => $"{e.Kind}: {e.SymbolProvider(newCompilation)}"),
@@ -381,7 +386,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             SyntaxNode newRoot,
             IEnumerable<KeyValuePair<TextSpan, TextSpan>> expectedSyntaxMap,
             Func<SyntaxNode, SyntaxNode?> actualSyntaxMap
-        ) {
+        )
+        {
             foreach (var expectedSpanMapping in expectedSyntaxMap)
             {
                 var newNode = FindNode(newRoot, expectedSpanMapping.Value);
@@ -398,7 +404,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             TargetFramework targetFramework,
             out Project oldProject,
             out Project newProject
-        ) {
+        )
+        {
             oldProject = workspace.AddProject("project", LanguageName)
                 .WithMetadataReferences(TargetFrameworkUtil.GetReferences(targetFramework));
             var documentIndex = 0;
@@ -431,7 +438,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             IEnumerable<TextSpan> expected,
             IEnumerable<LinePositionSpan> actual,
             SourceText newText
-        ) {
+        )
+        {
             AssertEx.Equal(
                 expected,
                 actual.Select(span => newText.Lines.GetTextSpan(span)),
@@ -446,7 +454,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
         internal static IEnumerable<KeyValuePair<SyntaxNode, SyntaxNode>> GetMethodMatches(
             AbstractEditAndContinueAnalyzer analyzer,
             Match<SyntaxNode> bodyMatch
-        ) {
+        )
+        {
             Dictionary<SyntaxNode, LambdaInfo>? lazyActiveOrMatchedLambdas = null;
             var map = analyzer.GetTestAccessor()
                 .ComputeMap(
@@ -476,7 +485,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 
         public static MatchingPairs ToMatchingPairs(
             IEnumerable<KeyValuePair<SyntaxNode, SyntaxNode>> matches
-        ) {
+        )
+        {
             return new MatchingPairs(
                 matches.OrderBy(partners => partners.Key.GetLocation().SourceSpan.Start)
                     .ThenByDescending(partners => partners.Key.Span.Length)

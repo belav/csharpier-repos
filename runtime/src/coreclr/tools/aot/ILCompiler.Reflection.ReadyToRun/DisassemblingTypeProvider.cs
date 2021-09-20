@@ -92,7 +92,8 @@ namespace ILCompiler.Reflection.ReadyToRun
             MetadataReader reader,
             TypeDefinitionHandle handle,
             byte rawTypeKind = 0
-        ) {
+        )
+        {
             return MetadataNameFormatter.FormatHandle(reader, handle);
         }
 
@@ -100,7 +101,8 @@ namespace ILCompiler.Reflection.ReadyToRun
             MetadataReader reader,
             TypeReferenceHandle handle,
             byte rawTypeKind = 0
-        ) {
+        )
+        {
             return MetadataNameFormatter.FormatHandle(reader, handle);
         }
 
@@ -127,7 +129,8 @@ namespace ILCompiler.Reflection.ReadyToRun
         public virtual string GetGenericInstantiation(
             string genericType,
             ImmutableArray<string> typeArguments
-        ) {
+        )
+        {
             return genericType + "<" + String.Join(",", typeArguments) + ">";
         }
 
@@ -170,7 +173,8 @@ namespace ILCompiler.Reflection.ReadyToRun
             string modifierType,
             string unmodifiedType,
             bool isRequired
-        ) {
+        )
+        {
             return unmodifiedType + (isRequired ? " modreq(" : " modopt(") + modifierType + ")";
         }
 
@@ -229,11 +233,13 @@ namespace ILCompiler.Reflection.ReadyToRun
         public override string GetGenericMethodParameter(
             DisassemblingGenericContext genericContext,
             int index
-        ) {
+        )
+        {
             if (
                 genericContext.MethodParameters == null
                 || index >= genericContext.MethodParameters.Length
-            ) {
+            )
+            {
                 return "!!" + index.ToString();
             }
             return genericContext.MethodParameters[index];
@@ -242,11 +248,13 @@ namespace ILCompiler.Reflection.ReadyToRun
         public override string GetGenericTypeParameter(
             DisassemblingGenericContext genericContext,
             int index
-        ) {
+        )
+        {
             if (
                 genericContext.TypeParameters == null
                 || index >= genericContext.TypeParameters.Length
-            ) {
+            )
+            {
                 return "!" + index.ToString();
             }
             return genericContext.TypeParameters[index];
@@ -257,7 +265,8 @@ namespace ILCompiler.Reflection.ReadyToRun
             DisassemblingGenericContext genericContext,
             TypeSpecificationHandle handle,
             byte rawTypeKind
-        ) {
+        )
+        {
             return MetadataNameFormatter.FormatHandle(reader, handle);
         }
 
@@ -265,7 +274,8 @@ namespace ILCompiler.Reflection.ReadyToRun
             MetadataReader reader,
             DisassemblingGenericContext genericContext,
             EntityHandle handle
-        ) {
+        )
+        {
             return MetadataNameFormatter.FormatHandle(reader, handle);
         }
     }

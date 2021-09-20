@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis
             public static SymbolKeyResolution Resolve(
                 SymbolKeyReader reader,
                 out string? failureReason
-            ) {
+            )
+            {
                 var assemblyName = reader.ReadString();
                 var compilation = reader.Compilation;
                 var ignoreAssemblyKey = reader.IgnoreAssemblyKey;

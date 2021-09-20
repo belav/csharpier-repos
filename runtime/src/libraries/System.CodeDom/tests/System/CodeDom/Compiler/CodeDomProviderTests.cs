@@ -150,7 +150,8 @@ namespace System.CodeDom.Compiler.Tests
             string language,
             Dictionary<string, string> providerOptions,
             string expectedFileExtension
-        ) {
+        )
+        {
             CodeDomProvider provider = CodeDomProvider.CreateProvider(language, providerOptions);
             Assert.Equal(expectedFileExtension, provider.FileExtension);
         }
@@ -187,7 +188,8 @@ namespace System.CodeDom.Compiler.Tests
         [InlineData("no-such-language")]
         public void CreateProvider_NoSuchLanguage_ThrowsConfigurationErrorsException(
             string language
-        ) {
+        )
+        {
             Exception ex1 = Assert.ThrowsAny<Exception>(
                 () => CodeDomProvider.CreateProvider(language)
             );
@@ -266,7 +268,8 @@ namespace System.CodeDom.Compiler.Tests
         [InlineData("no-such-extension")]
         public void GetLanguageFromExtension_NoSuchExtension_ThrowsConfigurationErrorsException(
             string extension
-        ) {
+        )
+        {
             Exception ex = Assert.ThrowsAny<Exception>(
                 () => CodeDomProvider.GetLanguageFromExtension(extension)
             );
@@ -673,7 +676,8 @@ namespace System.CodeDom.Compiler.Tests
             public CompilerResults CompileAssemblyFromDomBatch(
                 CompilerParameters options,
                 CodeCompileUnit[] compilationUnits
-            ) {
+            )
+            {
                 throw new ArgumentException("1");
             }
 
@@ -685,7 +689,8 @@ namespace System.CodeDom.Compiler.Tests
             public CompilerResults CompileAssemblyFromFileBatch(
                 CompilerParameters options,
                 string[] fileNames
-            ) {
+            )
+            {
                 throw new ArgumentNullException("2");
             }
 
@@ -697,7 +702,8 @@ namespace System.CodeDom.Compiler.Tests
             public CompilerResults CompileAssemblyFromSourceBatch(
                 CompilerParameters options,
                 string[] sources
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException("3");
             }
         }
@@ -718,7 +724,8 @@ namespace System.CodeDom.Compiler.Tests
                 CodeCompileUnit e,
                 TextWriter w,
                 CodeGeneratorOptions o
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException("3");
             }
 
@@ -726,7 +733,8 @@ namespace System.CodeDom.Compiler.Tests
                 CodeExpression e,
                 TextWriter w,
                 CodeGeneratorOptions o
-            ) {
+            )
+            {
                 throw new ArithmeticException("4");
             }
 
@@ -734,7 +742,8 @@ namespace System.CodeDom.Compiler.Tests
                 CodeNamespace e,
                 TextWriter w,
                 CodeGeneratorOptions o
-            ) {
+            )
+            {
                 throw new ArrayTypeMismatchException("5");
             }
 
@@ -742,7 +751,8 @@ namespace System.CodeDom.Compiler.Tests
                 CodeStatement e,
                 TextWriter w,
                 CodeGeneratorOptions o
-            ) {
+            )
+            {
                 throw new BadImageFormatException("6");
             }
 
@@ -750,7 +760,8 @@ namespace System.CodeDom.Compiler.Tests
                 CodeTypeDeclaration e,
                 TextWriter w,
                 CodeGeneratorOptions o
-            ) {
+            )
+            {
                 throw new CannotUnloadAppDomainException("7");
             }
 

@@ -41,7 +41,8 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
         public BatchExecutor(
             ICurrentDbContext currentContext,
             IDiagnosticsLogger<DbLoggerCategory.Update> updateLogger
-        ) {
+        )
+        {
             CurrentContext = currentContext;
             UpdateLogger = updateLogger;
         }
@@ -68,7 +69,8 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
         public virtual int Execute(
             IEnumerable<ModificationCommandBatch> commandBatches,
             IRelationalConnection connection
-        ) {
+        )
+        {
             var rowsAffected = 0;
             var transaction = connection.CurrentTransaction;
             var beganTransaction = false;
@@ -81,7 +83,8 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
                     && transactionEnlistManager?.EnlistedTransaction is null
                     && transactionEnlistManager?.CurrentAmbientTransaction is null
                     && CurrentContext.Context.Database.AutoTransactionsEnabled
-                ) {
+                )
+                {
                     transaction = connection.BeginTransaction();
                     beganTransaction = true;
                 }
@@ -92,7 +95,8 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
                     if (
                         transaction?.SupportsSavepoints == true
                         && CurrentContext.Context.Database.AutoSavepointsEnabled
-                    ) {
+                    )
+                    {
                         transaction.CreateSavepoint(SavepointName);
                         createdSavepoint = true;
                     }
@@ -171,7 +175,8 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
             IEnumerable<ModificationCommandBatch> commandBatches,
             IRelationalConnection connection,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var rowsAffected = 0;
             var transaction = connection.CurrentTransaction;
             var beganTransaction = false;
@@ -184,7 +189,8 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
                     && transactionEnlistManager?.EnlistedTransaction is null
                     && transactionEnlistManager?.CurrentAmbientTransaction is null
                     && CurrentContext.Context.Database.AutoTransactionsEnabled
-                ) {
+                )
+                {
                     transaction = await connection.BeginTransactionAsync(cancellationToken)
                         .ConfigureAwait(false);
                     beganTransaction = true;
@@ -196,7 +202,8 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
                     if (
                         transaction?.SupportsSavepoints == true
                         && CurrentContext.Context.Database.AutoSavepointsEnabled
-                    ) {
+                    )
+                    {
                         await transaction.CreateSavepointAsync(SavepointName, cancellationToken)
                             .ConfigureAwait(false);
                         createdSavepoint = true;

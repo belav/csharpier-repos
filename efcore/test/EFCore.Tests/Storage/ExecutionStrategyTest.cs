@@ -180,7 +180,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
         private void Execute_does_not_throw_when_invoked_twice(
             Action<ExecutionStrategy, Func<int>> execute
-        ) {
+        )
+        {
             var executed = false;
 
             var executionStrategyMock = new TestExecutionStrategy(
@@ -223,7 +224,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
         private void Execute_doesnt_retry_if_successful(
             Action<ExecutionStrategy, Func<int>> execute
-        ) {
+        )
+        {
             var executionCount = 0;
             execute(CreateFailOnRetryStrategy(), () => executionCount++);
 
@@ -314,7 +316,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
         private void Execute_retries_until_not_retriable_exception_is_thrown(
             Action<ExecutionStrategy, Func<int>> execute
-        ) {
+        )
+        {
             var executionStrategyMock = new TestExecutionStrategy(
                 Context,
                 shouldRetryOn: e => e is ArgumentOutOfRangeException,
@@ -356,7 +359,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
         private void Execute_retries_until_limit_is_reached(
             Action<ExecutionStrategy, Func<int>> execute
-        ) {
+        )
+        {
             var executionCount = 0;
 
             var executionStrategyMock = new TestExecutionStrategy(
@@ -406,7 +410,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
         private async Task ExecuteAsync_throws_for_an_existing_transaction(
             Func<ExecutionStrategy, Task> executeAsync
-        ) {
+        )
+        {
             var mockExecutionStrategy = new TestExecutionStrategy(Context);
             using (Context.Database.BeginTransaction())
             {
@@ -442,7 +447,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
         private async Task ExecuteAsync_throws_for_an_ambient_transaction(
             Func<ExecutionStrategy, Task> executeAsync
-        ) {
+        )
+        {
             var mockExecutionStrategy = new TestExecutionStrategy(Context);
             using (TestStore.CreateTransactionScope())
             {
@@ -478,7 +484,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
         private async Task ExecuteAsync_throws_for_an_enlisted_transaction(
             Func<ExecutionStrategy, Task> executeAsync
-        ) {
+        )
+        {
             var mockExecutionStrategy = new TestExecutionStrategy(Context);
             using var t = new CommittableTransaction();
             Context.Database.EnlistTransaction(t);
@@ -514,7 +521,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
         private async Task ExecuteAsync_does_not_throw_when_invoked_twice(
             Func<ExecutionStrategy, Func<CancellationToken, Task<int>>, Task> executeAsync
-        ) {
+        )
+        {
             var executed = false;
 
             var executionStrategyMock = new TestExecutionStrategy(
@@ -561,7 +569,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
         private async Task ExecuteAsync_doesnt_retry_if_successful(
             Func<ExecutionStrategy, Func<CancellationToken, Task<int>>, Task> executeAsync
-        ) {
+        )
+        {
             var executionCount = 0;
             await executeAsync(
                 CreateFailOnRetryStrategy(),
@@ -589,7 +598,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
         private async Task ExecuteAsync_doesnt_retry_if_suspended(
             Func<ExecutionStrategy, Func<CancellationToken, Task<int>>, Task> executeAsync
-        ) {
+        )
+        {
             TestExecutionStrategy.Suspended = true;
             var executionCount = 0;
             await Assert.ThrowsAsync<DbUpdateException>(
@@ -626,7 +636,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
         private async Task ExecuteAsync_retries_until_successful(
             Func<ExecutionStrategy, Func<CancellationToken, Task<int>>, Task> executeAsync
-        ) {
+        )
+        {
             var executionStrategyMock = new TestExecutionStrategy(
                 Context,
                 shouldRetryOn: e => e is ArgumentOutOfRangeException,
@@ -669,7 +680,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
         private async Task ExecuteAsync_retries_until_not_retrieable_exception_is_thrown(
             Func<ExecutionStrategy, Func<CancellationToken, Task<int>>, Task> executeAsync
-        ) {
+        )
+        {
             var executionStrategyMock = new TestExecutionStrategy(
                 Context,
                 shouldRetryOn: e => e is ArgumentOutOfRangeException,
@@ -715,7 +727,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
         private async Task ExecuteAsync_retries_until_limit_is_reached(
             Func<ExecutionStrategy, Func<CancellationToken, Task<int>>, Task> executeAsync
-        ) {
+        )
+        {
             var executionCount = 0;
 
             var executionStrategyMock = new TestExecutionStrategy(

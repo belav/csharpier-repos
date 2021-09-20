@@ -54,7 +54,8 @@ namespace System.Diagnostics.Tracing
             uint version,
             EventOpcode opcode,
             TraceLoggingEventTypes eventTypes
-        ) {
+        )
+        {
             TraceLoggingTypeInfo[] typeInfos = eventTypes.typeInfos;
             string[]? paramNames = eventTypes.paramNames;
             EventParameterInfo[] eventParams = new EventParameterInfo[typeInfos.Length];
@@ -87,7 +88,8 @@ namespace System.Diagnostics.Tracing
             uint version,
             EventOpcode opcode,
             EventParameterInfo[] parameters
-        ) {
+        )
+        {
             byte[]? metadata = null;
             bool hasV2ParameterTypes = false;
             try
@@ -107,7 +109,8 @@ namespace System.Diagnostics.Tracing
                 // type NullTypeInfo which is serialized as nothing.
                 if (
                     (parameters.Length == 1) && (parameters[0].ParameterType == typeof(EmptyStruct))
-                ) {
+                )
+                {
                     parameters = Array.Empty<EventParameterInfo>();
                 }
 
@@ -200,7 +203,8 @@ namespace System.Diagnostics.Tracing
                                     ref offset,
                                     totalMetadataLength
                                 )
-                            ) {
+                            )
+                            {
                                 // If we fail to generate metadata for any parameter, we should return the "default" metadata without any parameters
                                 return GenerateMetadata(
                                     eventId,
@@ -258,7 +262,8 @@ namespace System.Diagnostics.Tracing
                                     ref offset,
                                     totalMetadataLength
                                 )
-                            ) {
+                            )
+                            {
                                 // If we fail to generate metadata for any parameter, we should return the "default" metadata without any parameters
                                 return GenerateMetadata(
                                     eventId,
@@ -295,7 +300,8 @@ namespace System.Diagnostics.Tracing
             ref uint offset,
             byte* src,
             uint srcLength
-        ) {
+        )
+        {
             Debug.Assert(bufferLength >= (offset + srcLength));
             for (int i = 0; i < srcLength; i++)
             {
@@ -416,7 +422,8 @@ namespace System.Diagnostics.Tracing
             byte* pMetadataBlob,
             ref uint offset,
             uint blobSize
-        ) {
+        )
+        {
             Debug.Assert(property != null);
             Debug.Assert(pMetadataBlob != null);
 
@@ -533,7 +540,8 @@ namespace System.Diagnostics.Tracing
             byte* pMetadataBlob,
             ref uint offset,
             uint blobSize
-        ) {
+        )
+        {
             Debug.Assert(pMetadataBlob != null);
 
             if (!GetMetadataLengthForNamedTypeV2(name, typeInfo, out uint length))
@@ -563,7 +571,8 @@ namespace System.Diagnostics.Tracing
             byte* pMetadataBlob,
             ref uint offset,
             uint blobSize
-        ) {
+        )
+        {
             Debug.Assert(typeInfo != null);
             Debug.Assert(pMetadataBlob != null);
 
@@ -603,7 +612,8 @@ namespace System.Diagnostics.Tracing
                                 ref offset,
                                 blobSize
                             )
-                        ) {
+                        )
+                        {
                             return false;
                         }
                     }
@@ -653,7 +663,8 @@ namespace System.Diagnostics.Tracing
                         arrayTypeInfo.DataType.GetElementType(),
                         out elementTypeInfo
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -885,7 +896,8 @@ namespace System.Diagnostics.Tracing
         private static bool GetMetadataLengthForTypeV2(
             TraceLoggingTypeInfo? typeInfo,
             out uint size
-        ) {
+        )
+        {
             size = 0;
             if (typeInfo == null)
             {
@@ -914,7 +926,8 @@ namespace System.Diagnostics.Tracing
                                 prop.typeInfo,
                                 out uint typeSize
                             )
-                        ) {
+                        )
+                        {
                             return false;
                         }
 
@@ -944,7 +957,8 @@ namespace System.Diagnostics.Tracing
                         arrayTypeInfo.DataType.GetElementType(),
                         out elementTypeInfo
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -968,7 +982,8 @@ namespace System.Diagnostics.Tracing
             string name,
             TraceLoggingTypeInfo? typeInfo,
             out uint size
-        ) {
+        )
+        {
             // Named type is serialized
             //     SizeOfTypeDescription    : 4 bytes
             //     Name                     : NULL-terminated UTF16 string

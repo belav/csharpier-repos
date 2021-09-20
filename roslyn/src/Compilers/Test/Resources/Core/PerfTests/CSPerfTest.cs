@@ -2140,7 +2140,8 @@ namespace ns1
             [nested.FirstAttribute.Second(Value = 0, Value2 = 1)] int xx,
             UU yy,
             ref TT zz
-        ) {
+        )
+        {
             e = new ArgumentNullException();
             Console.WriteLine("    s0.method1<TT, UU>(int x, TT y, int xx, UU yy, ref TT zz)");
             throw (Exception)(ArgumentException)e ?? new Exception();
@@ -2213,7 +2214,8 @@ namespace ns1
         void i2.method1(
             [nested.First(Value = Value)] int x,
             [nested.FirstAttribute.SecondAttribute.Third(1, 1, Value3 = 0)] int y
-        ) {
+        )
+        {
             KeyNotFoundException ex = null;
             ex = ex ?? new KeyNotFoundException();
             Console.WriteLine("    s0.i2.method1(int x, int y)");
@@ -2315,7 +2317,8 @@ namespace ns1
         void i0<int>.method1<TT>(
             int x,
             [nested.FirstAttribute.Second(Value, Value, Value = Value, Value2 = Value)] TT y
-        ) {
+        )
+        {
             Console.WriteLine("    s0.i0<int>.method1<TT>(int x, TT y)");
         }
 
@@ -2518,7 +2521,8 @@ namespace ns1
         [nested.First()]
         public override bool Equals(
             [nested.FirstAttribute.SecondAttribute.Third(0, 1, Value2 = 1)] object obj
-        ) {
+        )
+        {
             if (this.ToString() == ((s1)obj).ToString())
             {
                 var s = (s1)(s1)obj;
@@ -2809,7 +2813,8 @@ namespace ns1
                 out U y,
                 out ArgumentException e,
                 out s2 s
-            ) {
+            )
+            {
                 Console.WriteLine(
                     "    s2.i3<string>.method<U>(ref List<string> x, out U y, out ArgumentException e, out s2 s)"
                 );
@@ -3039,7 +3044,8 @@ namespace ns1
             public static string ToString(
                 [FirstAttribute.SecondAttribute] this s2.s1 s,
                 [First(default(char), Value = (int)default(double))] out string ss
-            ) {
+            )
+            {
                 Console.WriteLine("    s2.ExtensionMethods.ToString(this s2.s1 s, string s2)");
                 ss = s.ToString() ?? string.Empty;
                 return s.ToString();
@@ -3203,7 +3209,8 @@ namespace ns1
                 Func<TT, UU, VV> x,
                 Func<UU, VV, TT> y,
                 Func<VV, TT, UU> z
-            ) {
+            )
+            {
                 Console.WriteLine(
                     "    c1<T, U>.goo<TT, UU, VV>(Func<TT, UU, VV> x, Func<UU, VV, TT> y, Func<VV, TT, UU> z)"
                 );
@@ -3226,7 +3233,8 @@ namespace ns1
                 Func<TT, List<TT>, UU, Dictionary<List<TT>, UU>> x,
                 Del<UU, VV> y,
                 Action<VV, List<VV>, Dictionary<List<VV>, TT>> z
-            ) {
+            )
+            {
                 Console.WriteLine(
                     "    c1<T, U>.goo<TT, UU, VV>(Func<TT, List<TT>, Dictionary<List<TT>, UU>> x, Del<UU, VV> y, Action<VV, List<VV>, Dictionary<List<VV>, TT>> z)"
                 );
@@ -3357,7 +3365,8 @@ namespace ns1
                 Func<UU, TT> a,
                 Func<VV, TT> b,
                 Func<VV, UU> c
-            ) {
+            )
+            {
                 Console.WriteLine(
                     "    c1<T, U>.goo<TT, UU, VV>(Func<TT, UU> x, Func<TT, VV> y, Func<UU, VV> z, Func<UU, TT> a, Func<VV, TT> b, Func<VV, UU> c)"
                 );

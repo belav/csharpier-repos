@@ -94,7 +94,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         );
                     }
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 using (
                     var sslStream = new SslStream(
@@ -102,7 +103,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         true,
                         (sender, certificate, chain, errors) => true
                     )
-                ) {
+                )
+                {
                     var ex = await Assert.ThrowsAnyAsync<Exception>(
                         () =>
                             sslStream.AuthenticateAsClientAsync(
@@ -208,7 +210,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         listenOptions.UseHttps(_x509Certificate2);
                     }
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     // Close socket immediately
@@ -244,7 +247,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         listenOptions.UseHttps(_x509Certificate2);
                     }
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     // Send null bytes and close socket
@@ -296,7 +300,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         listenOptions.UseHttps(_x509Certificate2);
                     }
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 using (
                     var sslStream = new SslStream(
@@ -304,7 +309,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         true,
                         (sender, certificate, chain, errors) => true
                     )
-                ) {
+                )
+                {
                     await sslStream.AuthenticateAsClientAsync(
                         "127.0.0.1",
                         clientCertificates: null,
@@ -352,7 +358,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         listenOptions.UseHttps(_x509Certificate2);
                     }
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 using (
                     var sslStream = new SslStream(
@@ -360,7 +367,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         true,
                         (sender, certificate, chain, errors) => true
                     )
-                ) {
+                )
+                {
                     await sslStream.AuthenticateAsClientAsync(
                         "127.0.0.1",
                         clientCertificates: null,
@@ -394,7 +402,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         listenOptions.UseHttps(_x509Certificate2);
                     }
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 using (
                     var sslStream = new SslStream(
@@ -402,7 +411,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         true,
                         (sender, certificate, chain, errors) => true
                     )
-                ) {
+                )
+                {
                     await sslStream.AuthenticateAsClientAsync(
                         "127.0.0.1",
                         clientCertificates: null,
@@ -431,7 +441,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         listenOptions.UseHttps(_x509Certificate2);
                     }
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     connection.Reset();
@@ -462,7 +473,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         );
                     }
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     Assert.Equal(
@@ -506,7 +518,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         );
                     }
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     Assert.Equal(
@@ -693,7 +706,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         );
                     }
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 using (
                     var sslStream = new SslStream(
@@ -701,7 +715,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         true,
                         (sender, certificate, chain, errors) => true
                     )
-                ) {
+                )
+                {
                     // SslProtocols.Tls is TLS 1.0 which isn't supported by Kestrel by default.
                     await Assert.ThrowsAnyAsync<Exception>(
                         () =>
@@ -748,7 +763,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         );
                     }
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 using (
                     var sslStream = new SslStream(
@@ -756,7 +772,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         true,
                         (sender, certificate, chain, errors) => true
                     )
-                ) {
+                )
+                {
                     await sslStream.AuthenticateAsClientAsync(
                         "127.0.0.1",
                         clientCertificates: null,
@@ -801,7 +818,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         );
                     }
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 using (
                     var sslStream = new SslStream(
@@ -809,7 +827,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         true,
                         (sender, certificate, chain, errors) => true
                     )
-                ) {
+                )
+                {
                     await sslStream.AuthenticateAsClientAsync(
                         "127.0.0.1",
                         clientCertificates: null,
@@ -833,7 +852,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                 if (
                     categoryName
                     == TypeNameHelper.GetTypeDisplayName(typeof(HttpsConnectionMiddleware))
-                ) {
+                )
+                {
                     return FilterLogger;
                 }
                 else
@@ -867,7 +887,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                 TState state,
                 Exception exception,
                 Func<TState, Exception, string> formatter
-            ) {
+            )
+            {
                 if (!_expectedEventId.HasValue || _expectedEventId.Value == eventId)
                 {
                     LastLogLevel = logLevel;
@@ -900,7 +921,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                 TState state,
                 Exception exception,
                 Func<TState, Exception, string> formatter
-            ) {
+            )
+            {
                 if (logLevel == LogLevel.Error)
                 {
                     var log =

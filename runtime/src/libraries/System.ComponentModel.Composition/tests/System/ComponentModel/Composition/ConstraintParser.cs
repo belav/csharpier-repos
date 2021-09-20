@@ -33,7 +33,8 @@ namespace System.ComponentModel.Composition
             Expression<Func<ExportDefinition, bool>> constraint,
             out string contractName,
             out IEnumerable<KeyValuePair<string, Type>> requiredMetadata
-        ) {
+        )
+        {
             contractName = null;
             requiredMetadata = null;
 
@@ -50,7 +51,8 @@ namespace System.ComponentModel.Composition
                         constraint.Parameters[0],
                         out contractName
                     )
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -64,7 +66,8 @@ namespace System.ComponentModel.Composition
                         out requiredMetadataItemName,
                         out requiredMetadataItemType
                     )
-                ) {
+                )
+                {
                     requiredMetadataList.Add(
                         new KeyValuePair<string, Type>(
                             requiredMetadataItemName,
@@ -111,7 +114,8 @@ namespace System.ComponentModel.Composition
             Expression expression,
             Expression parameter,
             out string contractName
-        ) {
+        )
+        {
             contractName = null;
 
             // The expression should be an '==' expression
@@ -130,7 +134,8 @@ namespace System.ComponentModel.Composition
                     parameter,
                     out contractName
                 )
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -142,7 +147,8 @@ namespace System.ComponentModel.Composition
                     parameter,
                     out contractName
                 )
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -154,7 +160,8 @@ namespace System.ComponentModel.Composition
             Expression right,
             Expression parameter,
             out string contractName
-        ) {
+        )
+        {
             contractName = null;
 
             // The left should be access to property "Contract" applied to the parameter
@@ -167,7 +174,8 @@ namespace System.ComponentModel.Composition
             if (
                 (targetMember.Member != _exportDefinitionContractNameProperty)
                 || (targetMember.Expression != parameter)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -191,7 +199,8 @@ namespace System.ComponentModel.Composition
             Expression parameter,
             out string requiredMetadataKey,
             out Type requiredMetadataType
-        ) {
+        )
+        {
             if (expression == null)
             {
                 throw new ArgumentNullException(nameof(expression));
@@ -251,7 +260,8 @@ namespace System.ComponentModel.Composition
             if (
                 (targetMember.Expression != parameter)
                 || (targetMember.Member != _exportDefinitionMetadataProperty)
-            ) {
+            )
+            {
                 return false;
             }
 

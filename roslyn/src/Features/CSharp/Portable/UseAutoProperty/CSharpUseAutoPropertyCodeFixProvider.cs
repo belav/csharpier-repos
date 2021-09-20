@@ -64,7 +64,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseAutoProperty
             PropertyDeclarationSyntax propertyDeclaration,
             bool isWrittenOutsideOfConstructor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var project = propertyDocument.Project;
             var trailingTrivia = propertyDeclaration.GetTrailingTrivia();
 
@@ -127,25 +128,29 @@ namespace Microsoft.CodeAnalysis.CSharp.UseAutoProperty
             private static bool ForceSingleSpace(
                 SyntaxToken previousToken,
                 SyntaxToken currentToken
-            ) {
+            )
+            {
                 if (
                     currentToken.IsKind(SyntaxKind.OpenBraceToken)
                     && currentToken.Parent.IsKind(SyntaxKind.AccessorList)
-                ) {
+                )
+                {
                     return true;
                 }
 
                 if (
                     previousToken.IsKind(SyntaxKind.OpenBraceToken)
                     && previousToken.Parent.IsKind(SyntaxKind.AccessorList)
-                ) {
+                )
+                {
                     return true;
                 }
 
                 if (
                     currentToken.IsKind(SyntaxKind.CloseBraceToken)
                     && currentToken.Parent.IsKind(SyntaxKind.AccessorList)
-                ) {
+                )
+                {
                     return true;
                 }
 
@@ -156,7 +161,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseAutoProperty
                 in SyntaxToken previousToken,
                 in SyntaxToken currentToken,
                 in NextGetAdjustNewLinesOperation nextOperation
-            ) {
+            )
+            {
                 if (ForceSingleSpace(previousToken, currentToken))
                 {
                     return null;
@@ -173,7 +179,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseAutoProperty
                 in SyntaxToken previousToken,
                 in SyntaxToken currentToken,
                 in NextGetAdjustSpacesOperation nextOperation
-            ) {
+            )
+            {
                 if (ForceSingleSpace(previousToken, currentToken))
                 {
                     return new AdjustSpacesOperation(1, AdjustSpacesOption.ForceSpaces);
@@ -190,7 +197,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseAutoProperty
         private static async Task<ExpressionSyntax> GetFieldInitializerAsync(
             IFieldSymbol fieldSymbol,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var variableDeclarator =
                 (VariableDeclaratorSyntax)await fieldSymbol.DeclaringSyntaxReferences[
                     0
@@ -202,11 +210,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UseAutoProperty
             Compilation compilation,
             PropertyDeclarationSyntax propertyDeclaration,
             bool isWrittenOutsideOfConstructor
-        ) {
+        )
+        {
             if (
                 propertyDeclaration.AccessorList?.Accessors.Any(SyntaxKind.SetAccessorDeclaration)
                 == true
-            ) {
+            )
+            {
                 // Already has a setter.
                 return false;
             }
@@ -241,7 +251,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseAutoProperty
 
         private static IEnumerable<AccessorDeclarationSyntax> GetAccessors(
             SyntaxList<AccessorDeclarationSyntax> accessors
-        ) {
+        )
+        {
             foreach (var accessor in accessors)
             {
                 yield return accessor.WithBody(null)

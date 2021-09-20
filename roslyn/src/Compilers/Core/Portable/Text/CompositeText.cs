@@ -133,7 +133,8 @@ namespace Microsoft.CodeAnalysis.Text
             char[] destination,
             int destinationIndex,
             int count
-        ) {
+        )
+        {
             if (destination == null)
                 throw new ArgumentNullException(nameof(destination));
 
@@ -158,7 +159,8 @@ namespace Microsoft.CodeAnalysis.Text
             char[] destination,
             int destinationIndex,
             int count
-        ) {
+        )
+        {
             if (!CheckCopyToArguments(sourceIndex, destination, destinationIndex, count))
                 return;
 
@@ -197,7 +199,8 @@ namespace Microsoft.CodeAnalysis.Text
             ArrayBuilder<SourceText> segments,
             SourceText original,
             bool adjustSegments
-        ) {
+        )
+        {
             if (adjustSegments)
             {
                 TrimInaccessibleText(segments);
@@ -258,11 +261,13 @@ namespace Microsoft.CodeAnalysis.Text
                 var segmentSize = INITIAL_SEGMENT_SIZE_FOR_COMBINING;
                 segmentSize <= MAXIMUM_SEGMENT_SIZE_FOR_COMBINING;
                 segmentSize *= 2
-            ) {
+            )
+            {
                 if (
                     GetSegmentCountIfCombined(segments, segmentSize)
                     <= TARGET_SEGMENT_COUNT_AFTER_REDUCTION
-                ) {
+                )
+                {
                     return segmentSize;
                 }
             }
@@ -277,7 +282,8 @@ namespace Microsoft.CodeAnalysis.Text
         private static int GetSegmentCountIfCombined(
             ArrayBuilder<SourceText> segments,
             int segmentSize
-        ) {
+        )
+        {
             int numberOfSegmentsReduced = 0;
 
             for (int i = 0; i < segments.Count - 1; i++)
@@ -361,7 +367,8 @@ namespace Microsoft.CodeAnalysis.Text
             IReadOnlyList<SourceText> segments,
             out int length,
             out int size
-        ) {
+        )
+        {
             var uniqueSources = s_uniqueSourcesPool.Allocate();
 
             length = 0;

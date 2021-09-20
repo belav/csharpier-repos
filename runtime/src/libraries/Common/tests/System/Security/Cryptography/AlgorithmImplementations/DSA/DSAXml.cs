@@ -913,7 +913,8 @@ S      9      R      /       j       6       9        C        v        C
             string expectedG,
             string expectedY,
             string expectedX
-        ) {
+        )
+        {
             IEnumerator<XElement> iter;
 
             using (DSA dsa = DSAFactory.Create(keyParameters))
@@ -940,7 +941,8 @@ S      9      R      /       j       6       9        C        v        C
         private static IEnumerator<XElement> VerifyRootAndGetChildren(
             DSA dsa,
             bool includePrivateParameters
-        ) {
+        )
+        {
             XDocument doc = XDocument.Parse(dsa.ToXmlString(includePrivateParameters));
             XElement root = doc.Root;
 
@@ -959,7 +961,8 @@ S      9      R      /       j       6       9        C        v        C
             IEnumerator<XElement> iter,
             string localName,
             string expectedValue
-        ) {
+        )
+        {
             Assert.True(iter.MoveNext(), $"Move to {localName}");
 
             XElement cur = iter.Current;

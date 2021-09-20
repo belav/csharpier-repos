@@ -62,7 +62,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                         if (
                             GeneratedNames.GetKind(displayString)
                             != GeneratedNameKind.LambdaDisplayClass
-                        ) {
+                        )
+                        {
                             builder.Append(displayString);
                         }
                         else
@@ -93,7 +94,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                                 kind == GeneratedNameKind.LambdaMethod
                                 || kind == GeneratedNameKind.LocalFunction
                             )
-                        ) {
+                        )
+                        {
                             builder.Append(
                                 displayString,
                                 openBracketOffset + 1,
@@ -126,7 +128,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         internal override void AppendParameterTypeName(
             StringBuilder builder,
             IParameterSymbol parameter
-        ) {
+        )
+        {
             // The old EE only displayed "ref" and "out" modifiers in C# and only when displaying parameter
             // types.  We will do the same here for compatibility with the old behavior.
             switch (parameter.RefKind)
@@ -146,7 +149,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             MethodSymbol method,
             ImmutableArray<TypeParameterSymbol> typeParameters,
             ImmutableArray<TypeSymbol> typeArguments
-        ) {
+        )
+        {
             var methodArity = method.Arity;
             var methodArgumentStartIndex = typeParameters.Length - methodArity;
             var typeMap = new TypeMap(
@@ -171,7 +175,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 
         internal override ImmutableArray<TypeParameterSymbol> GetAllTypeParameters(
             MethodSymbol method
-        ) {
+        )
+        {
             return method.GetAllTypeParameters();
         }
 
@@ -212,7 +217,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         internal override MethodSymbol GetMethod(
             CSharpCompilation compilation,
             DkmClrInstructionAddress instructionAddress
-        ) {
+        )
+        {
             var methodHandle = (MethodDefinitionHandle)MetadataTokens.Handle(
                 instructionAddress.MethodId.Token
             );
@@ -225,7 +231,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         internal override TypeNameDecoder<PEModuleSymbol, TypeSymbol> GetTypeNameDecoder(
             CSharpCompilation compilation,
             MethodSymbol method
-        ) {
+        )
+        {
             Debug.Assert(method is PEMethodSymbol);
             return new EETypeNameDecoder(compilation, (PEModuleSymbol)method.ContainingModule);
         }

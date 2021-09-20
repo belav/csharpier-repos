@@ -84,7 +84,8 @@ namespace System.Text.Json.Serialization.Samples
                 object value,
                 Type returnType,
                 out object result
-            ) {
+            )
+            {
                 TypeConverter converter = TypeDescriptor.GetConverter(value.GetType());
                 if (converter.CanConvertTo(returnType))
                 {
@@ -502,7 +503,8 @@ namespace System.Text.Json.Serialization.Samples
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 switch (reader.TokenType)
                 {
                     case JsonTokenType.String:
@@ -539,7 +541,8 @@ namespace System.Text.Json.Serialization.Samples
                 Utf8JsonWriter writer,
                 object value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 JsonDynamicType dynamicType = value as JsonDynamicType;
                 if (dynamicType != null)
                 {
@@ -553,7 +556,8 @@ namespace System.Text.Json.Serialization.Samples
                 JsonDynamicArray dynamicArray,
                 ref Utf8JsonReader reader,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 while (true)
                 {
                     reader.Read();
@@ -571,7 +575,8 @@ namespace System.Text.Json.Serialization.Samples
                 JsonDynamicObject dynamicObject,
                 ref Utf8JsonReader reader,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 while (true)
                 {
                     reader.Read();

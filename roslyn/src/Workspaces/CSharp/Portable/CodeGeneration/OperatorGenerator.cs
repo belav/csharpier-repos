@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IMethodSymbol method,
             CodeGenerationOptions options,
             IList<bool> availableIndices
-        ) {
+        )
+        {
             var methodDeclaration = GenerateOperatorDeclaration(
                 method,
                 options,
@@ -45,7 +46,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IMethodSymbol method,
             CodeGenerationOptions options,
             ParseOptions parseOptions
-        ) {
+        )
+        {
             var reusableSyntax = GetReuseableSyntaxNodeForSymbol<OperatorDeclarationSyntax>(
                 method,
                 options
@@ -68,7 +70,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             CodeGenerationOptions options,
             OperatorDeclarationSyntax declaration,
             ParseOptions parseOptions
-        ) {
+        )
+        {
             if (declaration.ExpressionBody == null)
             {
                 var expressionBodyPreference =
@@ -83,7 +86,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                         out var expressionBody,
                         out var semicolonToken
                     )
-                ) {
+                )
+                {
                     return declaration.WithBody(null)
                         .WithExpressionBody(expressionBody)
                         .WithSemicolonToken(semicolonToken);
@@ -97,7 +101,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IMethodSymbol method,
             CodeGenerationOptions options,
             ParseOptions parseOptions
-        ) {
+        )
+        {
             var hasNoBody = !options.GenerateMethodBodies || method.IsExtern;
 
             var operatorSyntaxKind = SyntaxFacts.GetOperatorKind(method.MetadataName);

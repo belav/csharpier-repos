@@ -26,7 +26,8 @@ namespace System.Web.Http
             this RouteCollection routes,
             string name,
             string routeTemplate
-        ) {
+        )
+        {
             return MapHttpRoute(
                 routes,
                 name,
@@ -50,7 +51,8 @@ namespace System.Web.Http
             string name,
             string routeTemplate,
             object defaults
-        ) {
+        )
+        {
             return MapHttpRoute(
                 routes,
                 name,
@@ -76,7 +78,8 @@ namespace System.Web.Http
             string routeTemplate,
             object defaults,
             object constraints
-        ) {
+        )
+        {
             return MapHttpRoute(routes, name, routeTemplate, defaults, constraints, handler: null);
         }
 
@@ -97,7 +100,8 @@ namespace System.Web.Http
             object defaults,
             object constraints,
             HttpMessageHandler handler
-        ) {
+        )
+        {
             if (routes == null)
             {
                 throw Error.ArgumentNull("routes");

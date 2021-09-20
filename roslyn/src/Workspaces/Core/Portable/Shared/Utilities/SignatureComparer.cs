@@ -80,12 +80,14 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             IPropertySymbol property1,
             IPropertySymbol property2,
             bool caseSensitive
-        ) {
+        )
+        {
             if (
                 !IdentifiersMatch(property1.Name, property2.Name, caseSensitive)
                 || property1.Parameters.Length != property2.Parameters.Length
                 || property1.IsIndexer != property2.IsIndexer
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -107,11 +109,13 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             bool caseSensitive,
             bool compareParameterName = false,
             bool isParameterCaseSensitive = false
-        ) {
+        )
+        {
             if (
                 (method1.MethodKind == MethodKind.AnonymousFunction)
                 != (method2.MethodKind == MethodKind.AnonymousFunction)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -140,7 +144,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             string identifier1,
             string identifier2,
             bool caseSensitive
-        ) {
+        )
+        {
             return caseSensitive
               ? identifier1 == identifier2
               : string.Equals(identifier1, identifier2, StringComparison.OrdinalIgnoreCase);
@@ -149,7 +154,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         public bool HaveSameSignature(
             IList<IParameterSymbol> parameters1,
             IList<IParameterSymbol> parameters2
-        ) {
+        )
+        {
             if (parameters1.Count != parameters2.Count)
             {
                 return false;
@@ -163,7 +169,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             IList<IParameterSymbol> parameters2,
             bool compareParameterName,
             bool isCaseSensitive
-        ) {
+        )
+        {
             if (parameters1.Count != parameters2.Count)
             {
                 return false;
@@ -178,7 +185,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                         compareParameterName,
                         isCaseSensitive
                     )
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -190,7 +198,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             ISymbol symbol1,
             ISymbol symbol2,
             bool caseSensitive
-        ) {
+        )
+        {
             // NOTE - we're deliberately using reference equality here for speed.
             if (symbol1 == symbol2)
             {
@@ -230,11 +239,13 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             if (
                 property1.ContainingType == null
                 || property1.ContainingType.TypeKind == TypeKind.Interface
-            ) {
+            )
+            {
                 if (
                     BadPropertyAccessor(property1.GetMethod, property2.GetMethod)
                     || BadPropertyAccessor(property1.SetMethod, property2.SetMethod)
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -242,11 +253,13 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             if (
                 property2.ContainingType == null
                 || property2.ContainingType.TypeKind == TypeKind.Interface
-            ) {
+            )
+            {
                 if (
                     BadPropertyAccessor(property2.GetMethod, property1.GetMethod)
                     || BadPropertyAccessor(property2.SetMethod, property1.SetMethod)
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -257,7 +270,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         private bool HaveSameSignatureAndConstraintsAndReturnType(
             IMethodSymbol method1,
             IMethodSymbol method2
-        ) {
+        )
+        {
             if (method1.ReturnsVoid != method2.ReturnsVoid)
             {
                 return false;
@@ -269,7 +283,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                     method1.ReturnType,
                     method2.ReturnType
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -290,13 +305,15 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         private bool HaveSameConstraints(
             ITypeParameterSymbol typeParameter1,
             ITypeParameterSymbol typeParameter2
-        ) {
+        )
+        {
             if (
                 typeParameter1.HasConstructorConstraint != typeParameter2.HasConstructorConstraint
                 || typeParameter1.HasReferenceTypeConstraint
                     != typeParameter2.HasReferenceTypeConstraint
                 || typeParameter1.HasValueTypeConstraint != typeParameter2.HasValueTypeConstraint
-            ) {
+            )
+            {
                 return false;
             }
 

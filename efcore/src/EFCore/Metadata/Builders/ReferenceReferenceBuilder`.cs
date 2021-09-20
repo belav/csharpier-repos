@@ -180,9 +180,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         public virtual ReferenceReferenceBuilder<
             TEntity,
             TRelatedEntity
-        > HasForeignKey<TDependentEntity>(
-            params string[] foreignKeyPropertyNames
-        ) where TDependentEntity : class =>
+        > HasForeignKey<TDependentEntity>(params string[] foreignKeyPropertyNames)
+            where TDependentEntity : class =>
             HasForeignKey(typeof(TDependentEntity), foreignKeyPropertyNames);
 
         /// <summary>
@@ -309,9 +308,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         public virtual ReferenceReferenceBuilder<
             TEntity,
             TRelatedEntity
-        > HasPrincipalKey<TPrincipalEntity>(
-            params string[] keyPropertyNames
-        ) where TPrincipalEntity : class =>
+        > HasPrincipalKey<TPrincipalEntity>(params string[] keyPropertyNames)
+            where TPrincipalEntity : class =>
             HasPrincipalKey(typeof(TPrincipalEntity), keyPropertyNames);
 
         /// <summary>

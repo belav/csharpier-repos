@@ -47,7 +47,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
         public IAuthenticatedEncryptor? GetAuthenticatedEncryptorByKeyId(
             Guid keyId,
             out bool isRevoked
-        ) {
+        )
+        {
             isRevoked = false;
             _keyIdToKeyHolderMap.TryGetValue(keyId, out var holder);
             return holder?.GetEncryptorInstance(out isRevoked);

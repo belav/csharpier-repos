@@ -35,7 +35,8 @@ namespace Microsoft.Extensions.DependencyInjection
         internal static IActionResult ProblemDetailsInvalidModelStateResponse(
             ProblemDetailsFactory problemDetailsFactory,
             ActionContext context
-        ) {
+        )
+        {
             var problemDetails = problemDetailsFactory.CreateValidationProblemDetails(
                 context.HttpContext,
                 context.ModelState

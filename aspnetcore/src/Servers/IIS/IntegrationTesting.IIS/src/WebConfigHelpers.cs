@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
         public static Action<XElement, string> AddOrModifyAspNetCoreSection(
             string key,
             string value
-        ) {
+        )
+        {
             return (element, _) =>
             {
                 element.Descendants("system.webServer")

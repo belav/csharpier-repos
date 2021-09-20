@@ -54,7 +54,8 @@ namespace System.Threading
                         if (
                             ThreadPool.EnableWorkerTracking
                             && NativeRuntimeEventSource.Log.IsEnabled()
-                        ) {
+                        )
+                        {
                             NativeRuntimeEventSource.Log.ThreadPoolWorkingThreadCount(
                                 (uint)threadPoolInstance.GetAndResetHighWatermarkCountOfThreadsProcessingUserCallbacks()
                             );
@@ -71,7 +72,8 @@ namespace System.Threading
                             !disableStarvationDetection
                             && threadPoolInstance._separated.numRequestedWorkers > 0
                             && SufficientDelaySinceLastDequeue(threadPoolInstance)
-                        ) {
+                        )
+                        {
                             try
                             {
                                 hillClimbingThreadAdjustmentLock.Acquire();
@@ -90,7 +92,8 @@ namespace System.Threading
                                 while (
                                     counts.NumExistingThreads < threadPoolInstance._maxThreads
                                     && counts.NumProcessingWork >= counts.NumThreadsGoal
-                                ) {
+                                )
+                                {
                                     if (debuggerBreakOnWorkStarvation)
                                     {
                                         Debugger.Break();
@@ -139,7 +142,8 @@ namespace System.Threading
             // in deciding "too long"
             private static bool SufficientDelaySinceLastDequeue(
                 PortableThreadPool threadPoolInstance
-            ) {
+            )
+            {
                 int delay =
                     Environment.TickCount
                     - Volatile.Read(ref threadPoolInstance._separated.lastDequeueTime);
@@ -167,7 +171,8 @@ namespace System.Threading
                 if (
                     threadPoolInstance._separated.gateThreadRunningState
                     != GetRunningStateForNumRuns(MaxRuns)
-                ) {
+                )
+                {
                     EnsureRunningSlow(threadPoolInstance);
                 }
             }

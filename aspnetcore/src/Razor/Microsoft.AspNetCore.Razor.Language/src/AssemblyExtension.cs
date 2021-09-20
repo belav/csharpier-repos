@@ -40,7 +40,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 // extensions/initializers for different configurations.
                 if (
                     !string.Equals(attribute.ExtensionName, ExtensionName, StringComparison.Ordinal)
-                ) {
+                )
+                {
                     continue;
                 }
 

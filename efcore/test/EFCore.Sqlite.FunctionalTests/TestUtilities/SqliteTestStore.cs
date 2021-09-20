@@ -84,7 +84,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Func<DbContext> createContext,
             Action<DbContext> seed,
             Action<DbContext> clean
-        ) {
+        )
+        {
             if (!_seed)
             {
                 return;

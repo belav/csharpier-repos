@@ -38,7 +38,8 @@ namespace System.Runtime.Serialization
             object?[] info,
             Type[] types,
             int numItems
-        ) {
+        )
+        {
             Debug.Assert(members != null, "[SerializationInfoEnumerator.ctor]members!=null");
             Debug.Assert(info != null, "[SerializationInfoEnumerator.ctor]info!=null");
             Debug.Assert(types != null, "[SerializationInfoEnumerator.ctor]types!=null");

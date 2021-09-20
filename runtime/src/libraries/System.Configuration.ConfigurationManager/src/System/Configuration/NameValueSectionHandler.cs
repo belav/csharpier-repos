@@ -28,7 +28,8 @@ namespace System.Configuration
             XmlNode section,
             string keyAttriuteName,
             string valueAttributeName
-        ) {
+        )
+        {
             ReadOnlyNameValueCollection result;
 
             // start result off as a shallow clone of the parent

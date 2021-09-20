@@ -27,7 +27,8 @@ namespace System.Security.Cryptography
         internal static SecKeyPair PublicPrivatePair(
             SafeSecKeyRefHandle publicKey,
             SafeSecKeyRefHandle privateKey
-        ) {
+        )
+        {
             if (publicKey == null || publicKey.IsInvalid)
                 throw new ArgumentException(SR.Cryptography_OpenInvalidHandle, nameof(publicKey));
             if (privateKey == null || privateKey.IsInvalid)

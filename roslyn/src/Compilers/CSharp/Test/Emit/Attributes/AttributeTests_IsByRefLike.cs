@@ -1354,7 +1354,8 @@ namespace System
 
         private static void AssertNotReferencedIsByRefLikeAttribute(
             ImmutableArray<CSharpAttributeData> attributes
-        ) {
+        )
+        {
             foreach (var attr in attributes)
             {
                 Assert.NotEqual("IsByRefLikeAttribute", attr.AttributeClass.Name);
@@ -1372,7 +1373,8 @@ namespace System
         private static void AssertGeneratedEmbeddedAttribute(
             AssemblySymbol assembly,
             string expectedTypeName
-        ) {
+        )
+        {
             var typeSymbol = assembly.GetTypeByMetadataName(expectedTypeName);
             Assert.NotNull(typeSymbol);
             Assert.Equal(Accessibility.Internal, typeSymbol.DeclaredAccessibility);

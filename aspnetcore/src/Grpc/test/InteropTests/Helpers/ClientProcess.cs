@@ -24,7 +24,8 @@ namespace InteropTests.Helpers
             string path,
             string serverPort,
             string testCase
-        ) {
+        )
+        {
             _output = new StringBuilder();
 
             _process = new Process();

@@ -22,7 +22,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 CType typeDest,
                 bool needsExprDest,
                 CONVERTTYPE flags
-            ) {
+            )
+            {
                 _binder = binder;
                 _exprSrc = exprSrc;
                 _typeSrc = typeSrc;
@@ -132,7 +133,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                             && !_typeSrc.IsPredefType(PredefinedType.PT_DOUBLE)
                         )
                     )
-                ) {
+                )
+                {
                     if (_needsExprDest)
                     {
                         _exprDest = _exprSrc;
@@ -213,7 +215,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         _typeDest,
                         _binder.Context.ContextForMemberLookup
                     )
-                ) {
+                )
+                {
                     if (_needsExprDest)
                     {
                         _binder.bindSimpleCast(
@@ -306,7 +309,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 if (
                     SymbolLoader.HasBaseConversion(nubDst.UnderlyingType, _typeSrc)
                     && !CConversions.FWrappingConv(_typeSrc, nubDst)
-                ) {
+                )
+                {
                     // These should be different! Fix the caller if typeSrc is an AggregateType of Nullable.
                     Debug.Assert(atsDst != _typeSrc);
 
@@ -371,7 +375,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                             out exprTmp,
                             _flags | CONVERTTYPE.NOUDC
                         )
-                    ) {
+                    )
+                    {
                         if (_needsExprDest)
                         {
                             ExprUserDefinedConversion exprUDC =
@@ -425,7 +430,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         out _exprDest,
                         _flags | CONVERTTYPE.NOUDC
                     )
-                ) {
+                )
+                {
                     // No builtin conversion. Maybe there is a user defined conversion....
                     return 0 == (_flags & CONVERTTYPE.NOUDC)
                         && _binder.bindUserDefinedConversion(
@@ -492,7 +498,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     &&
                     // null is convertible to System.Nullable<T>.
                     !_typeDest.IsPredefType(PredefinedType.PT_G_OPTIONAL)
-                ) {
+                )
+                {
                     return false;
                 }
                 if (_needsExprDest)
@@ -538,7 +545,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 if (
                     SymbolLoader.HasBaseConversion(nubSrc.UnderlyingType, _typeDest)
                     && !CConversions.FUnwrappingConv(nubSrc, _typeDest)
-                ) {
+                )
+                {
                     if (_needsExprDest)
                     {
                         _binder.bindSimpleCast(
@@ -619,7 +627,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         || TypeManager.TypeContainsTyVars(_typeSrc, null)
                         || TypeManager.TypeContainsTyVars(_typeDest, null)
                     )
-                ) {
+                )
+                {
                     grfex = EXPRFLAG.EXF_REFCHECK;
                 }
                 if (_needsExprDest)
@@ -702,14 +711,16 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 if (
                     !(_typeDest is AggregateType)
                     || !SymbolLoader.HasBaseConversion(pSource, _typeDest)
-                ) {
+                )
+                {
                     return false;
                 }
                 EXPRFLAG flags = 0x00;
                 if (
                     pSource.OwningAggregate.IsStruct()
                     && _typeDest.FundamentalType == FUNDTYPE.FT_REF
-                ) {
+                )
+                {
                     flags = EXPRFLAG.EXF_BOX | EXPRFLAG.EXF_CANTBENULL;
                 }
                 else if (_exprSrc != null)
@@ -737,7 +748,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 if (
                     _typeDest is AggregateType aggDest
                     && SymbolLoader.HasBaseConversion(aggTypeSrc, aggDest)
-                ) {
+                )
+                {
                     if (_needsExprDest)
                         _binder.bindSimpleCast(
                             _exprSrc,
@@ -781,7 +793,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     &&
                     /*(exprSrc.flags & EXF_LITERALCONST) &&*/
                     0 == (_flags & CONVERTTYPE.STANDARD)
-                ) {
+                )
+                {
                     // NOTE: This allows conversions from uint, long, ulong, float, double, and hexadecimal int
                     // NOTE: This is for backwards compatibility with Everett
 
@@ -832,7 +845,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         ) || (ptSrc == PredefinedType.PT_LONG && ptDest == PredefinedType.PT_ULONG)
                     )
                     && isConstantInRange(constant, _typeDest)
-                ) {
+                )
+                {
                     // Special case (CLR 6.1.6): if integral constant is in range, the conversion is a legal implicit conversion.
                     convertKind = ConvKind.Implicit;
                 }

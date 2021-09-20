@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Components.Rendering
             RenderTreeBuilder renderTreeBuilder,
             ulong eventHandlerId,
             object newFieldValue
-        ) {
+        )
+        {
             // We only allow the client to supply string or bool currently, since those are the only kinds of
             // values we output on attributes that go to the client
             if (!(newFieldValue is string || newFieldValue is bool))
@@ -37,7 +38,8 @@ namespace Microsoft.AspNetCore.Components.Rendering
                         {
                             if (
                                 !string.IsNullOrEmpty(frame.AttributeEventUpdatesAttributeNameField)
-                            ) {
+                            )
+                            {
                                 UpdateFrameToMatchClientState(
                                     renderTreeBuilder,
                                     framesArray,
@@ -62,7 +64,8 @@ namespace Microsoft.AspNetCore.Components.Rendering
             int elementFrameIndex,
             string attributeName,
             object attributeValue
-        ) {
+        )
+        {
             // Find the attribute frame
             ref var elementFrame = ref framesArray[elementFrameIndex];
             var elementSubtreeEndIndexExcl =
@@ -71,7 +74,8 @@ namespace Microsoft.AspNetCore.Components.Rendering
                 var attributeFrameIndex = elementFrameIndex + 1;
                 attributeFrameIndex < elementSubtreeEndIndexExcl;
                 attributeFrameIndex++
-            ) {
+            )
+            {
                 ref var attributeFrame = ref framesArray[attributeFrameIndex];
                 if (attributeFrame.FrameTypeField != RenderTreeFrameType.Attribute)
                 {

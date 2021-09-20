@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.Completion
             ImmutableArray<char> defaultCommitCharacters,
             EnterKeyRule defaultEnterKeyRule,
             SnippetsRule snippetsRule
-        ) {
+        )
+        {
             DismissIfEmpty = dismissIfEmpty;
             DismissIfLastCharacterDeleted = dismissIfLastCharacterDeleted;
             DefaultCommitCharacters = defaultCommitCharacters.NullToEmpty();
@@ -67,7 +68,8 @@ namespace Microsoft.CodeAnalysis.Completion
             bool dismissIfLastCharacterDeleted,
             ImmutableArray<char> defaultCommitCharacters,
             EnterKeyRule defaultEnterKeyRule
-        ) {
+        )
+        {
             return Create(
                 dismissIfEmpty,
                 dismissIfLastCharacterDeleted,
@@ -91,7 +93,8 @@ namespace Microsoft.CodeAnalysis.Completion
             ImmutableArray<char> defaultCommitCharacters = default,
             EnterKeyRule defaultEnterKeyRule = EnterKeyRule.Default,
             SnippetsRule snippetsRule = SnippetsRule.Default
-        ) {
+        )
+        {
             return new CompletionRules(
                 dismissIfEmpty: dismissIfEmpty,
                 dismissIfLastCharacterDeleted: dismissIfLastCharacterDeleted,
@@ -107,7 +110,8 @@ namespace Microsoft.CodeAnalysis.Completion
             Optional<ImmutableArray<char>> defaultCommitCharacters = default,
             Optional<EnterKeyRule> defaultEnterKeyRule = default,
             Optional<SnippetsRule> snippetsRule = default
-        ) {
+        )
+        {
             var newDismissIfEmpty = dismissIfEmpty.HasValue ? dismissIfEmpty.Value : DismissIfEmpty;
             var newDismissIfLastCharacterDeleted = dismissIfLastCharacterDeleted.HasValue
                 ? dismissIfLastCharacterDeleted.Value
@@ -126,7 +130,8 @@ namespace Microsoft.CodeAnalysis.Completion
                 && newDefaultCommitCharacters == DefaultCommitCharacters
                 && newDefaultEnterKeyRule == DefaultEnterKeyRule
                 && newSnippetsRule == SnippetsRule
-            ) {
+            )
+            {
                 return this;
             }
             else

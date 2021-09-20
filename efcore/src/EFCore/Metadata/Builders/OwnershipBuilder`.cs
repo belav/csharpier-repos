@@ -83,7 +83,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns> The same builder instance so that multiple configuration calls can be chained. </returns>
         public new virtual OwnershipBuilder<TEntity, TDependentEntity> HasForeignKey(
             params string[] foreignKeyPropertyNames
-        ) {
+        )
+        {
             Builder = Builder.HasForeignKey(
                 Check.NotNull(foreignKeyPropertyNames, nameof(foreignKeyPropertyNames)),
                 (EntityType)DependentEntityType,
@@ -127,7 +128,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns> The same builder instance so that multiple configuration calls can be chained. </returns>
         public virtual OwnershipBuilder<TEntity, TDependentEntity> HasForeignKey(
             Expression<Func<TDependentEntity, object?>> foreignKeyExpression
-        ) {
+        )
+        {
             Builder = Builder.HasForeignKey(
                 Check.NotNull(foreignKeyExpression, nameof(foreignKeyExpression))
                     .GetMemberAccessList(),
@@ -151,7 +153,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns> The same builder instance so that multiple configuration calls can be chained. </returns>
         public new virtual OwnershipBuilder<TEntity, TDependentEntity> HasPrincipalKey(
             params string[] keyPropertyNames
-        ) {
+        )
+        {
             Builder = Builder.HasPrincipalKey(
                 Check.NotNull(keyPropertyNames, nameof(keyPropertyNames)),
                 ConfigurationSource.Explicit
@@ -182,7 +185,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns> The same builder instance so that multiple configuration calls can be chained. </returns>
         public virtual OwnershipBuilder<TEntity, TDependentEntity> HasPrincipalKey(
             Expression<Func<TEntity, object?>> keyExpression
-        ) {
+        )
+        {
             Builder = Builder.HasPrincipalKey(
                 Check.NotNull(keyExpression, nameof(keyExpression)).GetMemberAccessList(),
                 ConfigurationSource.Explicit

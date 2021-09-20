@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             SnapshotSpan span,
             RenameSpanKind type,
             out TagSpan<IClassificationTag> tagSpan
-        ) {
+        )
+        {
             if (type == RenameSpanKind.Reference)
             {
                 tagSpan = new TagSpan<IClassificationTag>(

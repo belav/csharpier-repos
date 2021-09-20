@@ -121,7 +121,8 @@ namespace System.Net.Http.Formatting
             string content,
             string encoding,
             bool isDefaultEncoding
-        ) {
+        )
+        {
             // Arrange
             BsonMediaTypeFormatter formatter = new BsonMediaTypeFormatter();
 
@@ -149,7 +150,8 @@ namespace System.Net.Http.Formatting
             string content,
             string encoding,
             bool isDefaultEncoding
-        ) {
+        )
+        {
             // Arrange
             GC.KeepAlive(isDefaultEncoding); // Mark parameter as used. See xUnit1026, [Theory] method doesn't use all parameters.
             BsonMediaTypeFormatter formatter = new BsonMediaTypeFormatter();
@@ -469,7 +471,8 @@ namespace System.Net.Http.Formatting
         public async Task ReadFromStreamAsync_RoundTripsWriteToStreamAsync(
             Type variationType,
             object testData
-        ) {
+        )
+        {
             // Arrange
             BsonMediaTypeFormatter formatter = new BsonMediaTypeFormatter();
 
@@ -491,7 +494,8 @@ namespace System.Net.Http.Formatting
         public async Task ReadFromStreamAsync_RoundTripsWriteToStreamAsync_PerhapsJObject(
             Type variationType,
             object testData
-        ) {
+        )
+        {
             // Arrange
             BsonMediaTypeFormatter formatter = new BsonMediaTypeFormatter();
 
@@ -528,7 +532,8 @@ namespace System.Net.Http.Formatting
         public async Task ReadFromStreamAsync_RoundTripsWriteToStreamAsync_DBNullAsNull(
             Type variationType,
             object testData
-        ) {
+        )
+        {
             // Arrange
             TestBsonMediaTypeFormatter formatter = new TestBsonMediaTypeFormatter();
 
@@ -553,7 +558,8 @@ namespace System.Net.Http.Formatting
         public async Task ReadFromStreamAsync_RoundTripsWriteToStreamAsync_DBNullAsNull_Dictionary(
             Type variationType,
             object testData
-        ) {
+        )
+        {
             // Guard
             IDictionary<string, object> expectedDictionary = Assert.IsType<
                 Dictionary<string, object>
@@ -591,7 +597,8 @@ namespace System.Net.Http.Formatting
         public async Task ReadFromStreamAsync_RoundTripsWriteToStreamAsync_DBNullAsNull_Enumerable(
             Type variationType,
             object testData
-        ) {
+        )
+        {
             // Guard
             Assert.True((testData as IEnumerable<object>) != null);
 
@@ -627,7 +634,8 @@ namespace System.Net.Http.Formatting
         public async Task ReadFromStreamAsync_RoundTripsWriteToStreamAsync_DBNullAsNull_Holder(
             Type variationType,
             object testData
-        ) {
+        )
+        {
             // Guard
             Assert.IsType<TestDataHolder<object>>(testData);
 
@@ -704,7 +712,8 @@ namespace System.Net.Http.Formatting
                 Type type,
                 Stream readStream,
                 Encoding effectiveEncoding
-            ) {
+            )
+            {
                 WasCreateJsonReaderCalled = true;
                 if (ReturnNullOncreate)
                 {
@@ -725,7 +734,8 @@ namespace System.Net.Http.Formatting
                 Type type,
                 Stream writeStream,
                 Encoding effectiveEncoding
-            ) {
+            )
+            {
                 WasCreateJsonWriterCalled = true;
                 if (ReturnNullOncreate)
                 {

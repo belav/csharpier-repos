@@ -17,7 +17,8 @@ namespace System.Tests
         private static WeakReference MakeWeakReference(
             Func<object> valueFactory,
             bool trackResurrection = false
-        ) {
+        )
+        {
             return new WeakReference(valueFactory(), trackResurrection);
         }
 
@@ -25,7 +26,8 @@ namespace System.Tests
         private static WeakReference<object> MakeWeakReferenceOfObject(
             Func<object> valueFactory,
             bool trackResurrection = false
-        ) {
+        )
+        {
             return new WeakReference<object>(valueFactory(), trackResurrection);
         }
 

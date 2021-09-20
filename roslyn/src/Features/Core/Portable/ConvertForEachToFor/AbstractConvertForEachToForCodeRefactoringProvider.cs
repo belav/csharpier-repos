@@ -131,7 +131,8 @@ namespace Microsoft.CodeAnalysis.ConvertForEachToFor
             ForEachInfo foreachInfo,
             SyntaxNode foreachCollectionExpression,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (foreachInfo.RequireCollectionStatement)
             {
                 return generator.IdentifierName(
@@ -155,7 +156,8 @@ namespace Microsoft.CodeAnalysis.ConvertForEachToFor
             SyntaxNode type,
             SyntaxNode foreachCollectionExpression,
             SyntaxNode collectionVariable
-        ) {
+        )
+        {
             if (!foreachInfo.RequireCollectionStatement)
             {
                 return;
@@ -195,7 +197,8 @@ namespace Microsoft.CodeAnalysis.ConvertForEachToFor
             ITypeSymbol castType,
             SyntaxNode collectionVariable,
             SyntaxToken indexVariable
-        ) {
+        )
+        {
             var memberAccess = generator.ElementAccessExpression(
                 collectionVariable,
                 generator.IdentifierName(indexVariable)
@@ -220,14 +223,16 @@ namespace Microsoft.CodeAnalysis.ConvertForEachToFor
             SemanticModel model,
             TForEachStatement foreachStatement,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 !(
                     model.GetOperation(foreachStatement, cancellationToken)
                     is IForEachLoopOperation operation
                 )
                 || operation.Locals.Length != 1
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -288,7 +293,8 @@ namespace Microsoft.CodeAnalysis.ConvertForEachToFor
             out ITypeSymbol explicitCastInterface,
             out string collectionNameSuggestion,
             out string countName
-        ) {
+        )
+        {
             explicitCastInterface = null;
             collectionNameSuggestion = null;
             countName = null;
@@ -351,7 +357,8 @@ namespace Microsoft.CodeAnalysis.ConvertForEachToFor
                 collectionType.OriginalDefinition.Equals(
                     model.Compilation.GetTypeByMetadataName(typeof(ImmutableArray<>).FullName)
                 )
-            ) {
+            )
+            {
                 var indexer = GetInterfaceMember(collectionType, get_Item);
                 if (indexer != null)
                 {
@@ -380,12 +387,14 @@ namespace Microsoft.CodeAnalysis.ConvertForEachToFor
             if (
                 collectionType.TypeKind == TypeKind.Interface
                 && knownCollectionInterfaces.Contains(collectionType.OriginalDefinition)
-            ) {
+            )
+            {
                 var indexer = GetInterfaceMember(collectionType, get_Item);
                 if (
                     indexer != null
                     && IsExchangable(indexer.ReturnType, foreachType, model.Compilation)
-                ) {
+                )
+                {
                     explicitCastInterface = null;
                     countName = Count;
                     return;
@@ -418,7 +427,8 @@ namespace Microsoft.CodeAnalysis.ConvertForEachToFor
                         collectionType.FindImplementationForInterfaceMember(indexerSymbol)
                         is IMethodSymbol indexerImpl
                     )
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -431,7 +441,8 @@ namespace Microsoft.CodeAnalysis.ConvertForEachToFor
                 if (
                     countImpl.ExplicitInterfaceImplementations.IsEmpty
                     && indexerImpl.ExplicitInterfaceImplementations.IsEmpty
-                ) {
+                )
+                {
                     explicitCastInterface = null;
                     countName = Count;
                     return;
@@ -455,7 +466,8 @@ namespace Microsoft.CodeAnalysis.ConvertForEachToFor
             ITypeSymbol type1,
             ITypeSymbol type2,
             Compilation compilation
-        ) {
+        )
+        {
             return compilation.HasImplicitConversion(type1, type2)
                 || compilation.HasImplicitConversion(type2, type1);
         }
@@ -466,7 +478,8 @@ namespace Microsoft.CodeAnalysis.ConvertForEachToFor
         private static IMethodSymbol GetInterfaceMember(
             ITypeSymbol interfaceType,
             string memberName
-        ) {
+        )
+        {
             foreach (var current in interfaceType.GetAllInterfacesIncludingThis())
             {
                 var members = current.GetMembers(memberName);
@@ -516,7 +529,8 @@ namespace Microsoft.CodeAnalysis.ConvertForEachToFor
             SemanticModel semanticModel,
             ISymbol foreachVariable,
             TForEachStatement foreachStatement
-        ) {
+        )
+        {
             var (start, end) = GetForEachBody(foreachStatement);
             if (start == null || end == null)
             {
@@ -539,7 +553,8 @@ namespace Microsoft.CodeAnalysis.ConvertForEachToFor
             Document document,
             ForEachInfo foreachInfo,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var model = await document.GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
             var workspace = document.Project.Solution.Workspace;
@@ -561,7 +576,8 @@ namespace Microsoft.CodeAnalysis.ConvertForEachToFor
                 ITypeSymbol forEachElementType,
                 bool requireCollectionStatement,
                 TForEachStatement forEachStatement
-            ) {
+            )
+            {
                 SemanticFacts = semanticFacts;
 
                 RequireExplicitCastInterface = explicitCastInterface != null;

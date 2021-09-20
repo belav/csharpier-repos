@@ -25,7 +25,8 @@ namespace Microsoft.AspNetCore.Analyzers
                         SymbolNames.MvcOptions.EnableEndpointRoutingPropertyName,
                         StringComparison.Ordinal
                     )
-                ) {
+                )
+                {
                     return item.ConstantValue as bool? == false;
                 }
             }

@@ -67,7 +67,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
                     args.SubjectBuffer.AsTextContainer(),
                     out var workspace
                 )
-            ) {
+            )
+            {
                 return CommandState.Unspecified;
             }
 
@@ -82,13 +83,15 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
         protected override AbstractSnippetExpansionClient GetSnippetExpansionClient(
             ITextView textView,
             ITextBuffer subjectBuffer
-        ) {
+        )
+        {
             if (
                 !textView.Properties.TryGetProperty(
                     typeof(AbstractSnippetExpansionClient),
                     out AbstractSnippetExpansionClient expansionClient
                 )
-            ) {
+            )
+            {
                 expansionClient = new SnippetExpansionClient(
                     ThreadingContext,
                     subjectBuffer.ContentType,
@@ -109,7 +112,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
             ITextView textView,
             ITextBuffer subjectBuffer,
             bool surroundWith = false
-        ) {
+        )
+        {
             ExpansionServiceProvider.GetExpansionService(textView)
                 .InvokeInsertionUI(
                     GetSnippetExpansionClient(textView, subjectBuffer),
@@ -133,7 +137,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
             Document document,
             int startPosition,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxTree = document.GetRequiredSyntaxTreeSynchronously(cancellationToken);
             var token = syntaxTree.GetRoot(cancellationToken).FindToken(startPosition);
             var trivia = syntaxTree.GetRoot(cancellationToken).FindTrivia(startPosition);

@@ -63,7 +63,8 @@ namespace System.ServiceModel.Syndication
             XmlReader reader,
             SyndicationItem item,
             int maxExtensionSize
-        ) {
+        )
+        {
             SyndicationFeedFormatter.LoadElementExtensions(reader, item, maxExtensionSize);
         }
 
@@ -71,7 +72,8 @@ namespace System.ServiceModel.Syndication
             XmlReader reader,
             SyndicationCategory category,
             int maxExtensionSize
-        ) {
+        )
+        {
             SyndicationFeedFormatter.LoadElementExtensions(reader, category, maxExtensionSize);
         }
 
@@ -79,7 +81,8 @@ namespace System.ServiceModel.Syndication
             XmlReader reader,
             SyndicationLink link,
             int maxExtensionSize
-        ) {
+        )
+        {
             SyndicationFeedFormatter.LoadElementExtensions(reader, link, maxExtensionSize);
         }
 
@@ -87,7 +90,8 @@ namespace System.ServiceModel.Syndication
             XmlReader reader,
             SyndicationPerson person,
             int maxExtensionSize
-        ) {
+        )
+        {
             SyndicationFeedFormatter.LoadElementExtensions(reader, person, maxExtensionSize);
         }
 
@@ -97,7 +101,8 @@ namespace System.ServiceModel.Syndication
             string value,
             SyndicationItem item,
             string version
-        ) {
+        )
+        {
             return SyndicationFeedFormatter.TryParseAttribute(name, ns, value, item, version);
         }
 
@@ -107,7 +112,8 @@ namespace System.ServiceModel.Syndication
             string value,
             SyndicationCategory category,
             string version
-        ) {
+        )
+        {
             return SyndicationFeedFormatter.TryParseAttribute(name, ns, value, category, version);
         }
 
@@ -117,7 +123,8 @@ namespace System.ServiceModel.Syndication
             string value,
             SyndicationLink link,
             string version
-        ) {
+        )
+        {
             return SyndicationFeedFormatter.TryParseAttribute(name, ns, value, link, version);
         }
 
@@ -127,7 +134,8 @@ namespace System.ServiceModel.Syndication
             string value,
             SyndicationPerson person,
             string version
-        ) {
+        )
+        {
             return SyndicationFeedFormatter.TryParseAttribute(name, ns, value, person, version);
         }
 
@@ -137,7 +145,8 @@ namespace System.ServiceModel.Syndication
             string contentType,
             string version,
             out SyndicationContent content
-        ) {
+        )
+        {
             return SyndicationFeedFormatter.TryParseContent(
                 reader,
                 item,
@@ -151,7 +160,8 @@ namespace System.ServiceModel.Syndication
             XmlReader reader,
             SyndicationItem item,
             string version
-        ) {
+        )
+        {
             return SyndicationFeedFormatter.TryParseElement(reader, item, version);
         }
 
@@ -159,7 +169,8 @@ namespace System.ServiceModel.Syndication
             XmlReader reader,
             SyndicationCategory category,
             string version
-        ) {
+        )
+        {
             return SyndicationFeedFormatter.TryParseElement(reader, category, version);
         }
 
@@ -167,7 +178,8 @@ namespace System.ServiceModel.Syndication
             XmlReader reader,
             SyndicationLink link,
             string version
-        ) {
+        )
+        {
             return SyndicationFeedFormatter.TryParseElement(reader, link, version);
         }
 
@@ -175,7 +187,8 @@ namespace System.ServiceModel.Syndication
             XmlReader reader,
             SyndicationPerson person,
             string version
-        ) {
+        )
+        {
             return SyndicationFeedFormatter.TryParseElement(reader, person, version);
         }
 
@@ -183,7 +196,8 @@ namespace System.ServiceModel.Syndication
             XmlWriter writer,
             SyndicationItem item,
             string version
-        ) {
+        )
+        {
             SyndicationFeedFormatter.WriteAttributeExtensions(writer, item, version);
         }
 
@@ -191,7 +205,8 @@ namespace System.ServiceModel.Syndication
             XmlWriter writer,
             SyndicationCategory category,
             string version
-        ) {
+        )
+        {
             SyndicationFeedFormatter.WriteAttributeExtensions(writer, category, version);
         }
 
@@ -199,7 +214,8 @@ namespace System.ServiceModel.Syndication
             XmlWriter writer,
             SyndicationLink link,
             string version
-        ) {
+        )
+        {
             SyndicationFeedFormatter.WriteAttributeExtensions(writer, link, version);
         }
 
@@ -207,7 +223,8 @@ namespace System.ServiceModel.Syndication
             XmlWriter writer,
             SyndicationPerson person,
             string version
-        ) {
+        )
+        {
             SyndicationFeedFormatter.WriteAttributeExtensions(writer, person, version);
         }
 
@@ -215,7 +232,8 @@ namespace System.ServiceModel.Syndication
             XmlWriter writer,
             SyndicationItem item,
             string version
-        ) {
+        )
+        {
             SyndicationFeedFormatter.WriteElementExtensions(writer, item, version);
         }
 
@@ -225,7 +243,8 @@ namespace System.ServiceModel.Syndication
             XmlWriter writer,
             SyndicationCategory category,
             string version
-        ) {
+        )
+        {
             SyndicationFeedFormatter.WriteElementExtensions(writer, category, version);
         }
 
@@ -233,7 +252,8 @@ namespace System.ServiceModel.Syndication
             XmlWriter writer,
             SyndicationLink link,
             string version
-        ) {
+        )
+        {
             SyndicationFeedFormatter.WriteElementExtensions(writer, link, version);
         }
 
@@ -241,7 +261,8 @@ namespace System.ServiceModel.Syndication
             XmlWriter writer,
             SyndicationPerson person,
             string version
-        ) {
+        )
+        {
             SyndicationFeedFormatter.WriteElementExtensions(writer, person, version);
         }
     }

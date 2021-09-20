@@ -60,7 +60,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         public XmlDataContractSerializerOutputFormatter(
             XmlWriterSettings writerSettings,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             if (writerSettings == null)
             {
                 throw new ArgumentNullException(nameof(writerSettings));
@@ -191,7 +192,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         public virtual XmlWriter CreateXmlWriter(
             TextWriter writer,
             XmlWriterSettings xmlWriterSettings
-        ) {
+        )
+        {
             if (writer == null)
             {
                 throw new ArgumentNullException(nameof(writer));
@@ -224,7 +226,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             OutputFormatterWriteContext context,
             TextWriter writer,
             XmlWriterSettings xmlWriterSettings
-        ) {
+        )
+        {
             return CreateXmlWriter(writer, xmlWriterSettings);
         }
 
@@ -232,7 +235,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         public override async Task WriteResponseBodyAsync(
             OutputFormatterWriteContext context,
             Encoding selectedEncoding
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -281,7 +285,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             {
                 await using (
                     var textWriter = context.WriterFactory(responseStream, writerSettings.Encoding)
-                ) {
+                )
+                {
                     using (var xmlWriter = CreateXmlWriter(context, textWriter, writerSettings))
                     {
                         dataContractSerializer.WriteObject(xmlWriter, value);

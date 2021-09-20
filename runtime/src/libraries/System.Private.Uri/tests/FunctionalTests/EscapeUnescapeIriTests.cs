@@ -40,7 +40,8 @@ namespace System.PrivateUri.Tests
         public static void ReplacesStandaloneSurrogatesWithReplacementChar(
             string input,
             string expected
-        ) {
+        )
+        {
             const string Prefix = "scheme:";
             Uri uri = new Uri(Prefix + input);
             string actual = uri.AbsoluteUri.Substring(Prefix.Length);

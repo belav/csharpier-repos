@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
 
             protected override async Task<Document> GetChangedDocumentAsync(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var newTargetNode = _fixer.AddLocalSuppressMessageAttribute(
                     _targetNode,
                     _targetSymbol,

@@ -235,7 +235,8 @@ namespace System.Diagnostics
                 (logName == null || logName.Length == 0)
                 && sourceName != null
                 && sourceName.Length != 0
-            ) {
+            )
+            {
                 logName = EventLog._InternalLogNameFromSourceName(sourceName, currentMachineName);
             }
 
@@ -413,7 +414,8 @@ namespace System.Diagnostics
             EventLogInternal component,
             string compMachineName,
             string compLogName
-        ) {
+        )
+        {
             lock (InternalSyncObject)
             {
                 LogListeningInfo info = (LogListeningInfo)listenerInfos[compLogName];
@@ -662,7 +664,8 @@ namespace System.Diagnostics
             string dllNameList,
             uint messageNum,
             string[] insertionStrings
-        ) {
+        )
+        {
             if (dllNameList == null)
                 return null;
 
@@ -763,7 +766,8 @@ namespace System.Diagnostics
                     if (
                         error == Interop.Errors.ERROR_INSUFFICIENT_BUFFER
                         || error == Interop.Errors.ERROR_EVENTLOG_FILE_CHANGED
-                    ) {
+                    )
+                    {
                         if (error == Interop.Errors.ERROR_EVENTLOG_FILE_CHANGED)
                         {
                             Reset(currentMachineName);
@@ -822,7 +826,8 @@ namespace System.Diagnostics
                 || (boolFlags[Flag_forwards] && entryIndex < firstCachedEntry)
                 || (!boolFlags[Flag_forwards] && entryIndex > firstCachedEntry)
                 || firstCachedEntry == -1
-            ) {
+            )
+            {
                 // the index falls before anything we have in the cache, or the cache
                 // is not yet valid
                 return -1;
@@ -957,7 +962,8 @@ namespace System.Diagnostics
                 if (
                     error == Interop.Errors.ERROR_INSUFFICIENT_BUFFER
                     || error == Interop.Errors.ERROR_EVENTLOG_FILE_CHANGED
-                ) {
+                )
+                {
                     if (error == Interop.Errors.ERROR_EVENTLOG_FILE_CHANGED)
                     {
                         byte[] tempcache = cache;
@@ -1260,7 +1266,8 @@ namespace System.Diagnostics
                 !boolFlags[Flag_initializing]
                 && !boolFlags[Flag_monitoring]
                 && !parent.ComponentDesignMode
-            ) {
+            )
+            {
                 StartListening(currentMachineName, currentLogName);
             }
             boolFlags[Flag_monitoring] = true;
@@ -1300,7 +1307,8 @@ namespace System.Diagnostics
 
         private void StopListening( /*string currentMachineName,*/
             string currentLogName
-        ) {
+        )
+        {
             Debug.Assert(
                 boolFlags[Flag_registeredAsListener],
                 "StopListening called without StartListening."
@@ -1311,12 +1319,14 @@ namespace System.Diagnostics
 
         private void StopRaisingEvents( /*string currentMachineName,*/
             string currentLogName
-        ) {
+        )
+        {
             if (
                 !boolFlags[Flag_initializing]
                 && boolFlags[Flag_monitoring]
                 && !parent.ComponentDesignMode
-            ) {
+            )
+            {
                 StopListening(currentLogName);
             }
             boolFlags[Flag_monitoring] = false;
@@ -1443,7 +1453,8 @@ namespace System.Diagnostics
             int eventID,
             short category,
             byte[] rawData
-        ) {
+        )
+        {
             if (eventID < 0 || eventID > ushort.MaxValue)
 
                 throw new ArgumentException(
@@ -1526,7 +1537,8 @@ namespace System.Diagnostics
             string[] strings,
             byte[] rawData,
             string currentMachineName
-        ) {
+        )
+        {
             // check arguments
             if (strings == null)
                 strings = Array.Empty<string>();

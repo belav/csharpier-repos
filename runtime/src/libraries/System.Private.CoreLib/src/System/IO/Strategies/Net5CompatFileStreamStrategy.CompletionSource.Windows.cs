@@ -111,7 +111,8 @@ namespace System.IO.Strategies
                         (packedResult != TaskSourceCodes.NoResult)
                         && (packedResult != TaskSourceCodes.CompletedCallback)
                         && (packedResult != TaskSourceCodes.RegisteringCancellation)
-                    ) {
+                    )
+                    {
                         CompleteCallback((ulong)packedResult);
                     }
                 }
@@ -143,7 +144,8 @@ namespace System.IO.Strategies
                 uint errorCode,
                 uint numBytes,
                 NativeOverlapped* pOverlapped
-            ) {
+            )
+            {
                 // Extract the completion source from the overlapped.  The state in the overlapped
                 // will either be a FileStreamStrategy (in the case where the preallocated overlapped was used),
                 // in which case the operation being completed is its _currentOverlappedOwner, or it'll
@@ -168,7 +170,8 @@ namespace System.IO.Strategies
                     errorCode != 0
                     && errorCode != Interop.Errors.ERROR_BROKEN_PIPE
                     && errorCode != Interop.Errors.ERROR_NO_DATA
-                ) {
+                )
+                {
                     packedResult = ((ulong)TaskSourceCodes.ResultError | errorCode);
                 }
                 else
@@ -181,14 +184,16 @@ namespace System.IO.Strategies
                 if (
                     TaskSourceCodes.NoResult
                     == Interlocked.Exchange(ref completionSource._result, (long)packedResult)
-                ) {
+                )
+                {
                     // Successfully set the state, attempt to take back the callback
                     if (
                         Interlocked.Exchange(
                             ref completionSource._result,
                             TaskSourceCodes.CompletedCallback
                         ) != TaskSourceCodes.NoResult
-                    ) {
+                    )
+                    {
                         // Successfully got the callback, finish the callback
                         completionSource.CompleteCallback(packedResult);
                     }
@@ -248,7 +253,8 @@ namespace System.IO.Strategies
                         completionSource._strategy._fileHandle,
                         completionSource._overlapped
                     )
-                ) {
+                )
+                {
                     int errorCode = Marshal.GetLastWin32Error();
 
                     // ERROR_NOT_FOUND is returned if CancelIoEx cannot find the request to cancel.
@@ -265,7 +271,8 @@ namespace System.IO.Strategies
                 PreAllocatedOverlapped? preallocatedOverlapped,
                 int numBufferedBytesRead,
                 ReadOnlyMemory<byte> memory
-            ) {
+            )
+            {
                 // If the memory passed in is the strategy's internal buffer, we can use the base FileStreamCompletionSource,
                 // which has a PreAllocatedOverlapped with the memory already pinned.  Otherwise, we use the derived
                 // MemoryFileStreamCompletionSource, which Retains the memory, which will result in less pinning in the case

@@ -150,7 +150,8 @@ namespace System.Reflection.Emit.Tests
             Type[] parameterTypes,
             string expectedName,
             PropertyAttributes expectedPropertyAttributes
-        ) {
+        )
+        {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Class | TypeAttributes.Public);
             PropertyBuilder property = type.DefineProperty(
                 name,

@@ -50,7 +50,8 @@ namespace System.Xml
         public virtual async Task<object> ReadContentAsAsync(
             Type returnType,
             IXmlNamespaceResolver? namespaceResolver
-        ) {
+        )
+        {
             if (!CanReadContentAs())
             {
                 throw CreateReadContentAsException(nameof(ReadContentAs));
@@ -102,7 +103,8 @@ namespace System.Xml
             if (
                 await SetupReadElementContentAsXxxAsync("ReadElementContentAsObject")
                     .ConfigureAwait(false)
-            ) {
+            )
+            {
                 object value = await ReadContentAsObjectAsync().ConfigureAwait(false);
                 await FinishReadElementContentAsXxxAsync().ConfigureAwait(false);
                 return value;
@@ -116,7 +118,8 @@ namespace System.Xml
             if (
                 await SetupReadElementContentAsXxxAsync("ReadElementContentAsString")
                     .ConfigureAwait(false)
-            ) {
+            )
+            {
                 string value = await ReadContentAsStringAsync().ConfigureAwait(false);
                 await FinishReadElementContentAsXxxAsync().ConfigureAwait(false);
                 return value;
@@ -128,11 +131,13 @@ namespace System.Xml
         public virtual async Task<object> ReadElementContentAsAsync(
             Type returnType,
             IXmlNamespaceResolver namespaceResolver
-        ) {
+        )
+        {
             if (
                 await SetupReadElementContentAsXxxAsync("ReadElementContentAs")
                     .ConfigureAwait(false)
-            ) {
+            )
+            {
                 object value = await ReadContentAsAsync(returnType, namespaceResolver)
                     .ConfigureAwait(false);
                 await FinishReadElementContentAsXxxAsync().ConfigureAwait(false);
@@ -174,7 +179,8 @@ namespace System.Xml
             byte[] buffer,
             int index,
             int count
-        ) {
+        )
+        {
             throw new NotSupportedException(
                 SR.Format(SR.Xml_ReadBinaryContentNotSupported, "ReadElementContentAsBase64")
             );
@@ -193,7 +199,8 @@ namespace System.Xml
             byte[] buffer,
             int index,
             int count
-        ) {
+        )
+        {
             throw new NotSupportedException(
                 SR.Format(SR.Xml_ReadBinaryContentNotSupported, "ReadElementContentAsBinHex")
             );

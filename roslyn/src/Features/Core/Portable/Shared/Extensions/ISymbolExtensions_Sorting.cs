@@ -57,7 +57,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             string[] xTypeNames,
             ImmutableArray<IParameterSymbol> yParameters,
             string[] yTypeNames
-        ) {
+        )
+        {
             // * Order by the number of parameters
             // * If the same number of parameters...
             //   * Sort alphabetically by parameter type name
@@ -124,7 +125,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             string[] xTypeNames,
             IMethodSymbol yMethod,
             string[] yTypeNames
-        ) {
+        )
+        {
             // * Order by arity
             // * Order by parameters
 
@@ -158,7 +160,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         private static int CompareNamedTypes(
             INamedTypeSymbol xNamedType,
             INamedTypeSymbol yNamedType
-        ) {
+        )
+        {
             // For named types, we sort on arity.
             return xNamedType.Arity - yNamedType.Arity;
         }
@@ -167,7 +170,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             ISymbol symbol,
             SemanticModel semanticModel,
             int position
-        ) {
+        )
+        {
             return GetMethodOrIndexerOrEventParameters(symbol)
                 .Select(p => p.Type.ToMinimalDisplayString(semanticModel, position))
                 .ToArray();
@@ -175,7 +179,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
         private static ImmutableArray<IParameterSymbol> GetMethodOrIndexerOrEventParameters(
             ISymbol symbol
-        ) {
+        )
+        {
             if (symbol is IEventSymbol ev)
             {
                 var type = ev.Type as INamedTypeSymbol;

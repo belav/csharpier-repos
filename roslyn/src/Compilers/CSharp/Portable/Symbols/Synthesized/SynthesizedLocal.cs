@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             [CallerLineNumber] int createdAtLineNumber = 0,
             [CallerFilePath] string createdAtFilePath = null
 #endif
-        ) {
+        )
+        {
             Debug.Assert(!type.IsVoidType());
             Debug.Assert(!kind.IsLongLived() || syntaxOpt != null);
             Debug.Assert(refKind != RefKind.Out);
@@ -68,7 +69,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override LocalSymbol WithSynthesizedLocalKindAndSyntax(
             SynthesizedLocalKind kind,
             SyntaxNode syntax
-        ) {
+        )
+        {
             return new SynthesizedLocal(
                 _containingMethodOpt,
                 _type,
@@ -181,13 +183,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             SyntaxNode node,
             LocalSymbol inProgress,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             return null;
         }
 
         internal override ImmutableBindingDiagnostic<AssemblySymbol> GetConstantValueDiagnostics(
             BoundExpression boundInitValue
-        ) {
+        )
+        {
             return ImmutableBindingDiagnostic<AssemblySymbol>.Empty;
         }
 

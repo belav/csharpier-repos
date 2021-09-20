@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
 
         public RazorRemoteServiceCallbackDispatcherRegistry(
             IEnumerable<(Type serviceType, RazorRemoteServiceCallbackDispatcher dispatcher)> lazyDispatchers
-        ) {
+        )
+        {
             _lazyDispatchers = lazyDispatchers.ToImmutableDictionary(
                 e => e.serviceType,
                 e => e.dispatcher

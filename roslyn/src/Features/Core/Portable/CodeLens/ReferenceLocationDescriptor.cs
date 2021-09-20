@@ -129,7 +129,8 @@ namespace Microsoft.CodeAnalysis.CodeLens
             string beforeReferenceText2,
             string afterReferenceText1,
             string afterReferenceText2
-        ) {
+        )
+        {
             LongDescription = longDescription;
             Language = language;
             Glyph = glyph;

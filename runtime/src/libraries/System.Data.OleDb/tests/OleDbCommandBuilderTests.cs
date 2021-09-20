@@ -106,7 +106,8 @@ namespace System.Data.OleDb.Tests
                     using (
                         var builder =
                             (OleDbCommandBuilder)OleDbFactory.Instance.CreateCommandBuilder()
-                    ) {
+                    )
+                    {
                         if (PlatformDetection.IsNetFramework)
                         {
                             AssertExtensions.Throws<ArgumentNullException>(
@@ -194,7 +195,8 @@ namespace System.Data.OleDb.Tests
         private void RunTest(
             Action<OleDbCommand, string> testAction,
             [CallerMemberName] string memberName = null
-        ) {
+        )
+        {
             string tableName = Helpers.GetTableName(memberName);
             Assert.False(File.Exists(Path.Combine(TestDirectory, tableName)));
             command.CommandText =

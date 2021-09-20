@@ -78,7 +78,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             DiagnosticSeverity? defaultSeverityOpt = null,
             DiagnosticSeverity? effectiveSeverityOpt = null,
             bool isSuppressed = false
-        ) {
+        )
+        {
             _code = code;
             _isWarningAsError = isWarningAsError;
             _squiggledText = squiggledText;
@@ -103,7 +104,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             DiagnosticSeverity? defaultSeverityOpt = null,
             DiagnosticSeverity? effectiveSeverityOpt = null,
             bool isSuppressed = false
-        ) {
+        )
+        {
             _code = code;
             _isWarningAsError = false;
             _squiggledText = squiggledText;
@@ -122,7 +124,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             bool errorCodeOnly,
             bool includeDefaultSeverity = false,
             bool includeEffectiveSeverity = false
-        ) {
+        )
+        {
             _code = d.Code;
             _isWarningAsError = d.IsWarningAsError;
             _isSuppressed = d.IsSuppressed;
@@ -138,7 +141,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             if (
                 d.Code == 0
                 || d.Descriptor.CustomTags.Contains(WellKnownDiagnosticTags.CustomObsolete)
-            ) {
+            )
+            {
                 _code = d.Id;
                 _errorCodeType = typeof(string);
             }
@@ -369,7 +373,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                         d._location.SourceTree.GetRoot()
                             .FindToken(_location.SourceSpan.Start, true).Parent
                     )
-                ) {
+                )
+                {
                     _showPredicate = true;
                     return false;
                 }
@@ -386,7 +391,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                         _location.SourceTree.GetRoot()
                             .FindToken(_location.SourceSpan.Start, true).Parent
                     )
-                ) {
+                )
+                {
                     d._showPredicate = true;
                     return false;
                 }
@@ -427,7 +433,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             if (
                 _defaultSeverityOpt != d._defaultSeverityOpt
                 || _effectiveSeverityOpt != d._effectiveSeverityOpt
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -475,7 +482,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                     _squiggledText.Contains("\n")
                     || _squiggledText.Contains("\\")
                     || _squiggledText.Contains("\"")
-                ) {
+                )
+                {
                     sb.Append(", @\"");
                     sb.Append(_squiggledText.Replace("\"", "\"\""));
                 }
@@ -551,7 +559,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         public static string GetAssertText(
             DiagnosticDescription[] expected,
             IEnumerable<Diagnostic> actual
-        ) {
+        )
+        {
             const int CSharp = 1;
             const int VisualBasic = 2;
             var language = actual.Any() && actual.First() is CSDiagnostic ? CSharp : VisualBasic;
@@ -674,7 +683,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 if (
                     last != null
                     && comparer.Compare(last._startPosition, diagnostic._startPosition) > 0
-                ) {
+                )
+                {
                     return false;
                 }
                 last = diagnostic;

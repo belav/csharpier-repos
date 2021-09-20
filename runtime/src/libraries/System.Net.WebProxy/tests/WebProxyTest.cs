@@ -119,7 +119,8 @@ namespace System.Net.Tests
             bool bypassLocal,
             string[] bypassedAddresses,
             ICredentials creds
-        ) {
+        )
+        {
             Assert.Equal(address, p.Address);
             Assert.Equal(useDefaultCredentials, p.UseDefaultCredentials);
             Assert.Equal(bypassLocal, p.BypassProxyOnLocal);
@@ -240,7 +241,8 @@ namespace System.Net.Tests
                 IPAddress address in Dns.GetHostEntryAsync(Dns.GetHostName())
                     .GetAwaiter()
                     .GetResult().AddressList
-            ) {
+            )
+            {
                 if (address.AddressFamily == AddressFamily.InterNetwork)
                 {
                     Uri uri;

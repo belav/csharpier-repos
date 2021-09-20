@@ -95,7 +95,8 @@ namespace Newtonsoft.Json.Schema
             this JToken source,
             JsonSchema schema,
             out IList<string> errorMessages
-        ) {
+        )
+        {
             IList<string> errors = new List<string>();
 
             source.Validate(schema, (sender, args) => errors.Add(args.Message));
@@ -140,7 +141,8 @@ namespace Newtonsoft.Json.Schema
             this JToken source,
             JsonSchema schema,
             ValidationEventHandler validationEventHandler
-        ) {
+        )
+        {
             ValidationUtils.ArgumentNotNull(source, nameof(source));
             ValidationUtils.ArgumentNotNull(schema, nameof(schema));
 

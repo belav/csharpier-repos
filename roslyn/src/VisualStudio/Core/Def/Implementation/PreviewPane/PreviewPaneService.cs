@@ -80,7 +80,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PreviewPane
         object IPreviewPaneService.GetPreviewPane(
             DiagnosticData data,
             IReadOnlyList<object> previewContent
-        ) {
+        )
+        {
             var title = data?.Message;
 
             if (string.IsNullOrWhiteSpace(title))
@@ -147,7 +148,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PreviewPane
             else if (
                 optionName
                 == nameof(CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration)
-            ) {
+            )
+            {
                 if (optionLanguage == LanguageNames.CSharp)
                 {
                     return Guid.Parse(Guids.CSharpOptionPageCodeStyleIdString);

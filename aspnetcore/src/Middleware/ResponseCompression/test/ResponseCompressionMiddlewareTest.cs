@@ -116,7 +116,8 @@ namespace Microsoft.AspNetCore.ResponseCompression.Tests
         public async Task Request_AcceptMixed_ConfiguredOrder_CompressedGzip(
             string encoding1,
             string encoding2
-        ) {
+        )
+        {
             void Configure(ResponseCompressionOptions options)
             {
                 options.Providers.Add<GzipCompressionProvider>();
@@ -336,7 +337,8 @@ namespace Microsoft.AspNetCore.ResponseCompression.Tests
             string[] excludedMimeTypes,
             string contentType,
             bool compress
-        ) {
+        )
+        {
             var (response, logMessages) = await InvokeMiddleware(
                 uncompressedBodyLength: 100,
                 requestAcceptEncodings: new[] { "gzip" },
@@ -482,7 +484,8 @@ namespace Microsoft.AspNetCore.ResponseCompression.Tests
         public async Task Request_AcceptWithHigherCompressionQuality_Compressed(
             string[] acceptEncodings,
             int expectedBodyLength
-        ) {
+        )
+        {
             var (response, logMessages) = await InvokeMiddleware(
                 100,
                 requestAcceptEncodings: acceptEncodings,
@@ -502,7 +505,8 @@ namespace Microsoft.AspNetCore.ResponseCompression.Tests
         public async Task Request_AcceptWithhigherIdentityQuality_NotCompressed(
             string[] acceptEncodings,
             int expectedBodyLength
-        ) {
+        )
+        {
             var (response, logMessages) = await InvokeMiddleware(
                 100,
                 requestAcceptEncodings: acceptEncodings,
@@ -680,7 +684,8 @@ namespace Microsoft.AspNetCore.ResponseCompression.Tests
         public async Task Request_Https_CompressedIfOptIn(
             HttpsCompressionMode mode,
             int expectedLength
-        ) {
+        )
+        {
             var sink = new TestSink(
                 TestSink.EnableWithTypeName<ResponseCompressionProvider>,
                 TestSink.EnableWithTypeName<ResponseCompressionProvider>
@@ -762,7 +767,8 @@ namespace Microsoft.AspNetCore.ResponseCompression.Tests
         public async Task Request_Https_NotCompressedIfOptOut(
             HttpsCompressionMode mode,
             int expectedLength
-        ) {
+        )
+        {
             var sink = new TestSink(
                 TestSink.EnableWithTypeName<ResponseCompressionProvider>,
                 TestSink.EnableWithTypeName<ResponseCompressionProvider>
@@ -842,7 +848,8 @@ namespace Microsoft.AspNetCore.ResponseCompression.Tests
         public async Task FlushHeaders_SendsHeaders_Compresses(
             string encoding,
             int expectedBodyLength
-        ) {
+        )
+        {
             var responseReceived = new TaskCompletionSource<int>(
                 TaskCreationOptions.RunContinuationsAsynchronously
             );
@@ -905,7 +912,8 @@ namespace Microsoft.AspNetCore.ResponseCompression.Tests
         public async Task FlushAsyncHeaders_SendsHeaders_Compresses(
             string encoding,
             int expectedBodyLength
-        ) {
+        )
+        {
             var responseReceived = new TaskCompletionSource<int>(
                 TaskCreationOptions.RunContinuationsAsynchronously
             );
@@ -1562,7 +1570,8 @@ namespace Microsoft.AspNetCore.ResponseCompression.Tests
             Action<HttpResponse> addResponseAction = null,
             Action<ResponseCompressionOptions> configure = null,
             string httpMethod = "GET"
-        ) {
+        )
+        {
             var sink = new TestSink(
                 TestSink.EnableWithTypeName<ResponseCompressionProvider>,
                 TestSink.EnableWithTypeName<ResponseCompressionProvider>
@@ -1634,7 +1643,8 @@ namespace Microsoft.AspNetCore.ResponseCompression.Tests
             HttpResponseMessage response,
             long? expectedBodyLength,
             string expectedEncoding
-        ) {
+        )
+        {
             var containsVaryAcceptEncoding = false;
             foreach (var value in response.Headers.GetValues(HeaderNames.Vary))
             {
@@ -1654,7 +1664,8 @@ namespace Microsoft.AspNetCore.ResponseCompression.Tests
             HttpResponseMessage response,
             long? expectedBodyLength,
             bool sendVaryHeader
-        ) {
+        )
+        {
             if (sendVaryHeader)
             {
                 var containsVaryAcceptEncoding = false;
@@ -1723,7 +1734,8 @@ namespace Microsoft.AspNetCore.ResponseCompression.Tests
                 long offset,
                 long? count,
                 CancellationToken cancellation
-            ) {
+            )
+            {
                 // This implementation should only be delegated to if compression is disabled.
                 SendFileInvoked = true;
                 return InnerFeature.SendFileAsync(path, offset, count, cancellation);
@@ -1799,14 +1811,16 @@ namespace Microsoft.AspNetCore.ResponseCompression.Tests
                 int offset,
                 int count,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return _body.WriteAsync(buffer, offset, count, cancellationToken);
             }
 
             public override ValueTask WriteAsync(
                 ReadOnlyMemory<byte> buffer,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 return _body.WriteAsync(buffer, cancellationToken);
             }
 
@@ -1816,7 +1830,8 @@ namespace Microsoft.AspNetCore.ResponseCompression.Tests
                 int count,
                 AsyncCallback callback,
                 object state
-            ) {
+            )
+            {
                 return _body.BeginWrite(buffer, offset, count, callback, state);
             }
 

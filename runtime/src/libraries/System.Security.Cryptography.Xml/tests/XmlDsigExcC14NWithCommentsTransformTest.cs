@@ -26,9 +26,8 @@ namespace System.Security.Cryptography.Xml.Tests
     {
         public UnprotectedXmlDsigExcC14NWithCommentsTransform() { }
 
-        public UnprotectedXmlDsigExcC14NWithCommentsTransform(
-            string inclusiveNamespacesPrefixList
-        ) : base(inclusiveNamespacesPrefixList) { }
+        public UnprotectedXmlDsigExcC14NWithCommentsTransform(string inclusiveNamespacesPrefixList)
+            : base(inclusiveNamespacesPrefixList) { }
 
         public XmlNodeList UnprotectedGetInnerXml()
         {

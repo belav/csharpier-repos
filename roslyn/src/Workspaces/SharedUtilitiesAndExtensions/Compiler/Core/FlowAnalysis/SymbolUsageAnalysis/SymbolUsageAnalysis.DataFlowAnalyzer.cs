@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                 ControlFlowGraph cfg,
                 IMethodSymbol lambdaOrLocalFunction,
                 FlowGraphAnalysisData parentAnalysisData
-            ) {
+            )
+            {
                 _analysisData = FlowGraphAnalysisData.Create(
                     cfg,
                     lambdaOrLocalFunction,
@@ -51,7 +52,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                 ControlFlowGraph cfg,
                 ISymbol owningSymbol,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 cancellationToken.ThrowIfCancellationRequested();
                 using var analyzer = new DataFlowAnalyzer(cfg, owningSymbol);
                 _ = CustomDataFlowAnalysis<BasicBlockAnalysisData>.Run(
@@ -69,7 +71,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                 ControlFlowGraph cfg,
                 AnalysisData parentAnalysisData,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Debug.Assert(
                     localFunctionOrLambda.IsLocalFunction()
                         || localFunctionOrLambda.IsAnonymousFunction()
@@ -115,7 +118,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
             public override BasicBlockAnalysisData AnalyzeBlock(
                 BasicBlock basicBlock,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 BeforeBlockAnalysis();
                 Walker.AnalyzeOperationsAndUpdateData(
                     _analysisData.OwningSymbol,
@@ -145,7 +149,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                     if (
                         basicBlock.FallThroughSuccessor?.Destination == null
                         && basicBlock.ConditionalSuccessor?.Destination == null
-                    ) {
+                    )
+                    {
                         _analysisData.SetAnalysisDataOnMethodExit();
                     }
                 }
@@ -167,7 +172,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                 BasicBlock basicBlock,
                 BasicBlockAnalysisData currentAnalysisData,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // Ensure that we use distinct input BasicBlockAnalysisData instances with identical analysis data for both AnalyzeBranch invocations.
                 using var savedCurrentAnalysisData = BasicBlockAnalysisData.GetInstance();
                 savedCurrentAnalysisData.SetAnalysisDataFrom(currentAnalysisData);
@@ -201,7 +207,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                 BasicBlock basicBlock,
                 BasicBlockAnalysisData currentBlockAnalysisData,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // Initialize current analysis data
                 _analysisData.SetCurrentBlockAnalysisDataFrom(currentBlockAnalysisData);
 
@@ -227,7 +234,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                     if (
                         basicBlock.EnclosingRegion.Kind == ControlFlowRegionKind.Catch
                         && !branch.FinallyRegions.IsEmpty
-                    ) {
+                    )
+                    {
                         // Bail out for branches from the catch block
                         // as the locals are still accessible in the finally region.
                         return;

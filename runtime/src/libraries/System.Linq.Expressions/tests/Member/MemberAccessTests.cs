@@ -404,7 +404,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void CheckMemberAccessClassInstanceFieldAssignNullReferenceTest(
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<int>> e = Expression.Lambda<Func<int>>(
                 Expression.Assign(
                     Expression.Field(Expression.Constant(null, typeof(FC)), "II"),
@@ -421,7 +422,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void CheckMemberAccessClassInstancePropertyNullReferenceTest(
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<int>> e = Expression.Lambda<Func<int>>(
                 Expression.Property(Expression.Constant(null, typeof(PC)), "II"),
                 Enumerable.Empty<ParameterExpression>()
@@ -435,7 +437,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void CheckMemberAccessClassInstanceIndexerNullReferenceTest(
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<int>> e = Expression.Lambda<Func<int>>(
                 Expression.Property(
                     Expression.Constant(null, typeof(PC)),
@@ -453,7 +456,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void CheckMemberAccessClassInstanceIndexerAssignNullReferenceTest(
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<int>> e = Expression.Lambda<Func<int>>(
                 Expression.Assign(
                     Expression.Property(

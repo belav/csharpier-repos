@@ -108,12 +108,8 @@ namespace System.Net.Test.Common
         public byte PadLength;
         public ReadOnlyMemory<byte> Data;
 
-        public DataFrame(
-            ReadOnlyMemory<byte> data,
-            FrameFlags flags,
-            byte padLength,
-            int streamId
-        ) : base(0, FrameType.Data, flags, streamId)
+        public DataFrame(ReadOnlyMemory<byte> data, FrameFlags flags, byte padLength, int streamId)
+            : base(0, FrameType.Data, flags, streamId)
         {
             Length = (flags & FrameFlags.Padded) == 0 ? data.Length : data.Length + padLength + 1;
 
@@ -322,12 +318,8 @@ namespace System.Net.Test.Common
         public int StreamDependency = 0;
         public byte Weight = 0;
 
-        public PriorityFrame(
-            FrameFlags flags,
-            int streamDependency,
-            byte weight,
-            int streamId
-        ) : base(Frame.FrameHeaderLength + 5, FrameType.Priority, flags, streamId)
+        public PriorityFrame(FrameFlags flags, int streamDependency, byte weight, int streamId)
+            : base(Frame.FrameHeaderLength + 5, FrameType.Priority, flags, streamId)
         {
             StreamDependency = streamDependency;
             Weight = weight;

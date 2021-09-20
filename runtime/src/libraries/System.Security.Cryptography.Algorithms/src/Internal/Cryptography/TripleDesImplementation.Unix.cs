@@ -17,7 +17,8 @@ namespace Internal.Cryptography
             int paddingSize,
             int feedbackSize,
             bool encrypting
-        ) {
+        )
+        {
             // The algorithm pointer is a static pointer, so not having any cleanup code is correct.
             IntPtr algorithm;
             switch ((cipherMode, feedbackSize))

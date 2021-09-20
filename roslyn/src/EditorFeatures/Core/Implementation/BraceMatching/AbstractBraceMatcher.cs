@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.BraceMatching
         protected AbstractBraceMatcher(
             BraceCharacterAndKind openBrace,
             BraceCharacterAndKind closeBrace
-        ) {
+        )
+        {
             _openBrace = openBrace;
             _closeBrace = closeBrace;
         }
@@ -40,7 +41,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.BraceMatching
                 braceTokens.Count == 2
                 && braceTokens[0].RawKind == _openBrace.Kind
                 && braceTokens[1].RawKind == _closeBrace.Kind
-            ) {
+            )
+            {
                 if (braceTokens[0] == token)
                 {
                     match = braceTokens[1];
@@ -61,7 +63,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.BraceMatching
             Document document,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             var token = root.FindToken(position);
 

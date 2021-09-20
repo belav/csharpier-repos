@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Interactive
             IViewClassifierAggregatorService classifierAggregator,
             ITextView textView,
             ITextBuffer textBuffer
-        ) {
+        )
+        {
             // No need to do this more than once.
             if (textBuffer.Properties.ContainsProperty(s_classificationsKey))
             {

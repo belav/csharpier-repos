@@ -42,7 +42,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Scaffolding.Internal
         public SqliteDatabaseModelFactory(
             IDiagnosticsLogger<DbLoggerCategory.Scaffolding> logger,
             IRelationalTypeMappingSource typeMappingSource
-        ) {
+        )
+        {
             Check.NotNull(logger, nameof(logger));
             Check.NotNull(typeMappingSource, nameof(typeMappingSource));
 
@@ -59,7 +60,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Scaffolding.Internal
         public override DatabaseModel Create(
             string connectionString,
             DatabaseModelFactoryOptions options
-        ) {
+        )
+        {
             Check.NotNull(connectionString, nameof(connectionString));
             Check.NotNull(options, nameof(options));
 
@@ -76,7 +78,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Scaffolding.Internal
         public override DatabaseModel Create(
             DbConnection connection,
             DatabaseModelFactoryOptions options
-        ) {
+        )
+        {
             Check.NotNull(connection, nameof(connection));
             Check.NotNull(options, nameof(options));
 
@@ -148,7 +151,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Scaffolding.Internal
             DbConnection connection,
             DatabaseModel databaseModel,
             IEnumerable<string> tables
-        ) {
+        )
+        {
             var tablesToSelect = new HashSet<string>(
                 tables.ToList(),
                 StringComparer.OrdinalIgnoreCase
@@ -213,7 +217,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Scaffolding.Internal
 
             foreach (
                 var table in tablesToSelect.Except(selectedTables, StringComparer.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 _logger.MissingTableWarning(table);
             }
         }
@@ -222,7 +227,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Scaffolding.Internal
             HashSet<string> tables,
             HashSet<string> selectedTables,
             string name
-        ) {
+        )
+        {
             if (tables.Count == 0)
             {
                 return true;
@@ -312,7 +318,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Scaffolding.Internal
                 notNull
                 && defaultValue == "0"
                 && _typeMappingSource.FindMapping(dataType)?.ClrType.IsNumeric() == true
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -530,7 +537,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Scaffolding.Internal
             DbConnection connection,
             DatabaseTable table,
             IList<DatabaseTable> tables
-        ) {
+        )
+        {
             using var command1 = connection.CreateCommand();
             command1.CommandText = new StringBuilder().AppendLine(
                     "SELECT DISTINCT \"id\", \"table\", \"on_delete\""

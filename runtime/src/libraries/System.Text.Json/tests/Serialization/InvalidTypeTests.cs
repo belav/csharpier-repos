@@ -60,13 +60,15 @@ namespace System.Text.Json.Serialization.Tests
             Type classType,
             Type invalidMemberType,
             string invalidMemberName
-        ) {
+        )
+        {
             static void ValidateException(
                 InvalidOperationException ex,
                 Type classType,
                 Type invalidMemberType,
                 string invalidMemberName
-            ) {
+            )
+            {
                 string exAsStr = ex.ToString();
                 Assert.Contains(invalidMemberType.ToString(), exAsStr);
                 Assert.Contains(invalidMemberName, exAsStr);

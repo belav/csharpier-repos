@@ -62,20 +62,23 @@ namespace System.Net.Quic
         public System.Threading.Tasks.ValueTask<System.Net.Quic.QuicStream> AcceptStreamAsync(
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.ValueTask CloseAsync(
             long errorCode,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.ValueTask ConnectAsync(
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public void Dispose() { }
@@ -148,7 +151,8 @@ namespace System.Net.Quic
         public System.Threading.Tasks.ValueTask<System.Net.Quic.QuicConnection> AcceptConnectionAsync(
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public void Close() { }
@@ -233,7 +237,8 @@ namespace System.Net.Quic
             int count,
             System.AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public override System.IAsyncResult BeginWrite(
@@ -242,7 +247,8 @@ namespace System.Net.Quic
             int count,
             System.AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         protected override void Dispose(bool disposing) { }
@@ -254,7 +260,8 @@ namespace System.Net.Quic
         public override void Flush() { }
         public override System.Threading.Tasks.Task FlushAsync(
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public override int Read(byte[] buffer, int offset, int count)
@@ -270,14 +277,16 @@ namespace System.Net.Quic
             int offset,
             int count,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Threading.Tasks.ValueTask<int> ReadAsync(
             System.Memory<byte> buffer,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public override long Seek(long offset, System.IO.SeekOrigin origin)
@@ -289,7 +298,8 @@ namespace System.Net.Quic
         public System.Threading.Tasks.ValueTask ShutdownWriteCompleted(
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public override void Write(byte[] buffer, int offset, int count) { }
@@ -299,14 +309,16 @@ namespace System.Net.Quic
             bool endStream,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.ValueTask WriteAsync(
             System.Buffers.ReadOnlySequence<byte> buffers,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Threading.Tasks.Task WriteAsync(
@@ -314,7 +326,8 @@ namespace System.Net.Quic
             int offset,
             int count,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.ValueTask WriteAsync(
@@ -322,14 +335,16 @@ namespace System.Net.Quic
             bool endStream,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Threading.Tasks.ValueTask WriteAsync(
             System.ReadOnlyMemory<byte> buffer,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.ValueTask WriteAsync(
@@ -337,14 +352,16 @@ namespace System.Net.Quic
             bool endStream,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.ValueTask WriteAsync(
             System.ReadOnlyMemory<System.ReadOnlyMemory<byte>> buffers,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
     }

@@ -117,7 +117,8 @@ namespace System.Text.RegularExpressions
             int capsize,
             Hashtable capnames,
             RegexOptions roptions
-        ) {
+        )
+        {
             RegexReplacement? repl;
 
             if (!replRef.TryGetTarget(out repl) || !repl.Pattern.Equals(replacement))

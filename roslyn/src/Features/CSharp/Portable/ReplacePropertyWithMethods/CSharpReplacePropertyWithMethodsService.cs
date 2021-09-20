@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplacePropertyWithMethods
             string desiredGetMethodName,
             string desiredSetMethodName,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!(propertyDeclarationNode is PropertyDeclarationSyntax propertyDeclaration))
                 return ImmutableArray<SyntaxNode>.Empty;
 
@@ -81,7 +82,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplacePropertyWithMethods
             string desiredGetMethodName,
             string desiredSetMethodName,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<SyntaxNode>.GetInstance(out var result);
 
             if (propertyBackingField != null)
@@ -136,7 +138,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplacePropertyWithMethods
             IMethodSymbol setMethod,
             string desiredSetMethodName,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var methodDeclaration = GetSetMethodWorker(
                 generator,
                 propertyDeclaration,
@@ -169,7 +172,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplacePropertyWithMethods
             IMethodSymbol setMethod,
             string desiredSetMethodName,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var setAccessorDeclaration =
                 (AccessorDeclarationSyntax)setMethod.DeclaringSyntaxReferences[0].GetSyntax(
                     cancellationToken
@@ -183,7 +187,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplacePropertyWithMethods
             if (
                 propertyDeclaration.Modifiers.Any(SyntaxKind.UnsafeKeyword)
                 && !methodDeclaration.Modifiers.Any(SyntaxKind.UnsafeKeyword)
-            ) {
+            )
+            {
                 methodDeclaration = methodDeclaration.AddModifiers(
                     SyntaxFactory.Token(SyntaxKind.UnsafeKeyword)
                 );
@@ -226,7 +231,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplacePropertyWithMethods
             IMethodSymbol getMethod,
             string desiredGetMethodName,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var methodDeclaration = GetGetMethodWorker(
                 generator,
                 propertyDeclaration,
@@ -254,7 +260,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplacePropertyWithMethods
             PropertyDeclarationSyntax propertyDeclaration,
             MethodDeclarationSyntax methodDeclaration,
             CSharpSyntaxRewriter documentationCommentRewriter
-        ) {
+        )
+        {
             var leadingTrivia = propertyDeclaration.GetLeadingTrivia();
             return methodDeclaration.WithLeadingTrivia(
                 leadingTrivia.Select(trivia => ConvertTrivia(trivia, documentationCommentRewriter))
@@ -264,11 +271,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplacePropertyWithMethods
         private static SyntaxTrivia ConvertTrivia(
             SyntaxTrivia trivia,
             CSharpSyntaxRewriter rewriter
-        ) {
+        )
+        {
             if (
                 trivia.Kind() == SyntaxKind.MultiLineDocumentationCommentTrivia
                 || trivia.Kind() == SyntaxKind.SingleLineDocumentationCommentTrivia
-            ) {
+            )
+            {
                 return ConvertDocumentationComment(trivia, rewriter);
             }
 
@@ -278,7 +287,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplacePropertyWithMethods
         private static SyntaxTrivia ConvertDocumentationComment(
             SyntaxTrivia trivia,
             CSharpSyntaxRewriter rewriter
-        ) {
+        )
+        {
             var structure = trivia.GetStructure();
             var rewritten = rewriter.Visit(structure);
             Contract.ThrowIfNull(rewritten);
@@ -290,7 +300,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplacePropertyWithMethods
             ParseOptions parseOptions,
             MethodDeclarationSyntax methodDeclaration,
             bool createReturnStatementForExpression
-        ) {
+        )
+        {
             var expressionBodyPreference =
                 documentOptions.GetOption(
                     CSharpCodeStyleOptions.PreferExpressionBodiedMethods
@@ -298,7 +309,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplacePropertyWithMethods
             if (
                 methodDeclaration.Body != null
                 && expressionBodyPreference != ExpressionBodyPreference.Never
-            ) {
+            )
+            {
                 if (
                     methodDeclaration.Body.TryConvertToArrowExpressionBody(
                         methodDeclaration.Kind(),
@@ -307,7 +319,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplacePropertyWithMethods
                         out var arrowExpression,
                         out var semicolonToken
                     )
-                ) {
+                )
+                {
                     return methodDeclaration.WithBody(null)
                         .WithExpressionBody(arrowExpression)
                         .WithSemicolonToken(semicolonToken)
@@ -317,14 +330,16 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplacePropertyWithMethods
             else if (
                 methodDeclaration.ExpressionBody != null
                 && expressionBodyPreference == ExpressionBodyPreference.Never
-            ) {
+            )
+            {
                 if (
                     methodDeclaration.ExpressionBody.TryConvertToBlock(
                         methodDeclaration.SemicolonToken,
                         createReturnStatementForExpression,
                         out var block
                     )
-                ) {
+                )
+                {
                     return methodDeclaration.WithExpressionBody(null)
                         .WithSemicolonToken(default)
                         .WithBody(block)
@@ -342,7 +357,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplacePropertyWithMethods
             IMethodSymbol getMethod,
             string desiredGetMethodName,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var methodDeclaration = (MethodDeclarationSyntax)generator.MethodDeclaration(
                 getMethod,
                 desiredGetMethodName
@@ -352,7 +368,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplacePropertyWithMethods
             if (
                 propertyDeclaration.Modifiers.Any(SyntaxKind.UnsafeKeyword)
                 && !methodDeclaration.Modifiers.Any(SyntaxKind.UnsafeKeyword)
-            ) {
+            )
+            {
                 methodDeclaration = methodDeclaration.AddModifiers(
                     SyntaxFactory.Token(SyntaxKind.UnsafeKeyword)
                 );
@@ -415,7 +432,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplacePropertyWithMethods
             NameMemberCrefSyntax originalCref,
             SyntaxToken identifierToken,
             SyntaxNode? parameterType
-        ) {
+        )
+        {
             CrefParameterListSyntax parameterList;
             if (parameterType is TypeSyntax typeSyntax)
             {
@@ -442,7 +460,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplacePropertyWithMethods
         protected override ExpressionSyntax UnwrapCompoundAssignment(
             SyntaxNode compoundAssignment,
             ExpressionSyntax readExpression
-        ) {
+        )
+        {
             var parent = (AssignmentExpressionSyntax)compoundAssignment;
 
             var operatorKind = parent.IsKind(SyntaxKind.OrAssignmentExpression)

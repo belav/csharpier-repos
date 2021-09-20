@@ -125,7 +125,8 @@ bar",
             string expectedTerminator,
             bool autoComplete,
             bool keywordIsMetaCode
-        ) {
+        )
+        {
             EofBlockCore(
                 keyword,
                 expectedTerminator,
@@ -156,7 +157,8 @@ bar",
             BlockType blockType,
             bool keywordIsMetaCode,
             Func<UnclassifiedCodeSpanConstructor, SpanConstructor> classifier
-        ) {
+        )
+        {
             BlockBuilder expected = new BlockBuilder();
             expected.Type = blockType;
             if (keywordIsMetaCode)
@@ -223,7 +225,8 @@ bar",
             string keyword,
             string expectedTerminator,
             bool keywordIsMetaCode
-        ) {
+        )
+        {
             UnterminatedBlockCore(
                 keyword,
                 expectedTerminator,
@@ -251,7 +254,8 @@ bar",
             BlockType blockType,
             bool keywordIsMetaCode,
             Func<UnclassifiedCodeSpanConstructor, SpanConstructor> classifier
-        ) {
+        )
+        {
             const string blockBody =
                 @"
     ' This block is not correctly terminated!";

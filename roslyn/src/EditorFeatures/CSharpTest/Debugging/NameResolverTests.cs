@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
             string text,
             string searchText,
             params string[] expectedNames
-        ) {
+        )
+        {
             using var workspace = TestWorkspace.CreateCSharp(text);
 
             var nameResolver = new BreakpointResolver(workspace.CurrentSolution, searchText);

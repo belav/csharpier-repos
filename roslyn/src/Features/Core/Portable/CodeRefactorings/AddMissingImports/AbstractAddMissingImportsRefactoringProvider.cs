@@ -68,7 +68,8 @@ namespace Microsoft.CodeAnalysis.AddMissingImports
             IAddMissingImportsFeatureService addMissingImportsService,
             AddMissingImportsAnalysisResult analysis,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var modifiedDocument = await addMissingImportsService.AddMissingImportsAsync(
                     document,
                     analysis,

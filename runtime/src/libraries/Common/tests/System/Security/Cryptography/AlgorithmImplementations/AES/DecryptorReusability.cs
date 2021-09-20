@@ -125,7 +125,8 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
                     "Switch.System.Security.Cryptography.AesCryptoServiceProvider.DontCorrectlyResetDecryptor",
                     out doNotResetDecryptor
                 )
-            ) {
+            )
+            {
                 return !doNotResetDecryptor;
             }
 

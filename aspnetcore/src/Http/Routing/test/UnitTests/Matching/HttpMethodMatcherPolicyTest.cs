@@ -419,7 +419,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             string template,
             HttpMethodMetadata httpMethodMetadata,
             params object[] more
-        ) {
+        )
+        {
             var metadata = new List<object>();
             if (httpMethodMetadata != null)
             {

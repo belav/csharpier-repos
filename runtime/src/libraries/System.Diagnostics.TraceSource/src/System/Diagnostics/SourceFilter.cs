@@ -25,7 +25,8 @@ namespace System.Diagnostics
             object?[]? args,
             object? data1,
             object?[]? data
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
 

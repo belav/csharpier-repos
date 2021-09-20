@@ -24,7 +24,8 @@ namespace Castle.Components.DictionaryAdapter
             string key,
             ref object value,
             PropertyDescriptor property
-        ) {
+        )
+        {
             value = (value != null) ? value.ToString() : null;
             return true;
         }

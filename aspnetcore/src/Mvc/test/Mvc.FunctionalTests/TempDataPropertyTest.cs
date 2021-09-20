@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 
         public TempDataPropertyTest(
             MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting> fixture
-        ) {
+        )
+        {
             Client = fixture.CreateDefaultClient();
         }
 

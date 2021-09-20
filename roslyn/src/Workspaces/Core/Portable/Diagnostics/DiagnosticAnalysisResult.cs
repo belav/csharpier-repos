@@ -52,7 +52,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics
             ImmutableHashSet<DocumentId>? documentIds,
             bool isEmpty,
             bool fromBuild
-        ) {
+        )
+        {
             ProjectId = projectId;
             Version = version;
             DocumentIds = documentIds;
@@ -74,7 +75,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics
             ImmutableArray<DiagnosticData> others,
             ImmutableHashSet<DocumentId>? documentIds,
             bool fromBuild
-        ) {
+        )
+        {
             Debug.Assert(!others.IsDefault);
             Debug.Assert(!syntaxLocals.Values.Any(item => item.IsDefault));
             Debug.Assert(!semanticLocals.Values.Any(item => item.IsDefault));
@@ -96,7 +98,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics
         public static DiagnosticAnalysisResult CreateEmpty(
             ProjectId projectId,
             VersionStamp version
-        ) {
+        )
+        {
             return new DiagnosticAnalysisResult(
                 projectId,
                 version,
@@ -127,7 +130,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics
             Project project,
             ImmutableArray<DiagnosticData> diagnostics,
             IEnumerable<DocumentId> initialDocuments
-        ) {
+        )
+        {
             // we can't distinguish locals and non locals from build diagnostics nor determine right snapshot version for the build.
             // so we put everything in as semantic local with default version. this lets us to replace those to live diagnostics when needed easily.
             var version = VersionStamp.Default;
@@ -177,7 +181,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics
             ImmutableDictionary<DocumentId, ImmutableArray<DiagnosticData>> nonLocalMap,
             ImmutableArray<DiagnosticData> others,
             ImmutableHashSet<DocumentId>? documentIds
-        ) {
+        )
+        {
             VerifyDocumentMap(project, syntaxLocalMap);
             VerifyDocumentMap(project, semanticLocalMap);
             VerifyDocumentMap(project, nonLocalMap);
@@ -196,7 +201,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics
 
         public static DiagnosticAnalysisResult CreateFromBuilder(
             DiagnosticAnalysisResultBuilder builder
-        ) {
+        )
+        {
             return Create(
                 builder.Project,
                 builder.Version,
@@ -270,7 +276,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics
         public ImmutableArray<DiagnosticData> GetDocumentDiagnostics(
             DocumentId documentId,
             AnalysisKind kind
-        ) {
+        )
+        {
             if (IsAggregatedForm || IsEmpty)
             {
                 return ImmutableArray<DiagnosticData>.Empty;
@@ -338,7 +345,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics
             ImmutableDictionary<DocumentId, ImmutableArray<DiagnosticData>>? syntaxLocals,
             ImmutableDictionary<DocumentId, ImmutableArray<DiagnosticData>>? semanticLocals,
             ImmutableDictionary<DocumentId, ImmutableArray<DiagnosticData>>? nonLocals
-        ) {
+        )
+        {
             // quick bail out
             var allEmpty = syntaxLocals ?? semanticLocals ?? nonLocals;
             if (allEmpty == null)
@@ -369,7 +377,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics
         private static void VerifyDocumentMap(
             Project project,
             ImmutableDictionary<DocumentId, ImmutableArray<DiagnosticData>> map
-        ) {
+        )
+        {
             foreach (var documentId in map.Keys)
             {
                 Debug.Assert(project.GetTextDocument(documentId)?.SupportsDiagnostics() == true);

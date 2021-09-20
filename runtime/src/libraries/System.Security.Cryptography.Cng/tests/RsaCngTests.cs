@@ -33,7 +33,8 @@ namespace System.Security.Cryptography.Cng.Tests
             HashAlgorithmName hashAlgorithm,
             RSASignaturePadding paddingMode,
             int expectedSignatureLength
-        ) {
+        )
+        {
             using (RSA rsa = new RSACng())
             {
                 byte[] signature = rsa.SignHash(hash, hashAlgorithm, paddingMode);
@@ -64,7 +65,8 @@ namespace System.Security.Cryptography.Cng.Tests
             HashAlgorithmName hashAlgorithm,
             RSASignaturePadding paddingMode,
             int expectedSignatureLength
-        ) {
+        )
+        {
             using (RSA rsa = new RSACng())
             {
                 byte[] signature = rsa.SignData(message, hashAlgorithm, paddingMode);
@@ -162,7 +164,8 @@ namespace System.Security.Cryptography.Cng.Tests
             int expectedKeySize,
             byte[] keyBlob,
             RSAParameters expectedParameters
-        ) {
+        )
+        {
             // Pre-condition: Creating a key of this size will fail
             Assert.Throws<CryptographicException>(() => new RSACng(expectedKeySize));
 

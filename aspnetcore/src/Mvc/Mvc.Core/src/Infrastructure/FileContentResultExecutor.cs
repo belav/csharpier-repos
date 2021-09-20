@@ -69,7 +69,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             FileContentResult result,
             RangeItemHeaderValue? range,
             long rangeLength
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));

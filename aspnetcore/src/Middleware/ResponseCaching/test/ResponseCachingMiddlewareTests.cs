@@ -362,7 +362,8 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
         public void ContentIsNotModified_IfNoneMatch_ExplicitWithMatch_True(
             EntityTagHeaderValue responseETag,
             EntityTagHeaderValue requestETag
-        ) {
+        )
+        {
             var sink = new TestSink();
             var context = TestUtils.CreateTestContext(sink);
             context.CachedResponseHeaders = new HeaderDictionary();
@@ -658,7 +659,8 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
         [MemberData(nameof(NullOrEmptyVaryRules))]
         public void FinalizeCacheHeadersAsync_UpdateCachedVaryByRules_NullOrEmptyRules(
             StringValues vary
-        ) {
+        )
+        {
             var cache = new TestResponseCache();
             var sink = new TestSink();
             var middleware = TestUtils.CreateTestMiddleware(testSink: sink, cache: cache);
@@ -818,7 +820,8 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
         [InlineData(true)]
         public async Task FinalizeCacheBody_RequestHead_Cache_IfContentLengthPresent_AndBodyAbsentOrOfSameLength(
             bool includeBody
-        ) {
+        )
+        {
             var cache = new TestResponseCache();
             var sink = new TestSink();
             var middleware = TestUtils.CreateTestMiddleware(testSink: sink, cache: cache);
@@ -969,7 +972,8 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
             bool allowResponseCaching,
             bool allowCacheLookup,
             bool allowCacheStorage
-        ) {
+        )
+        {
             var responseCachingFeatureAdded = false;
             var middleware = TestUtils.CreateTestMiddleware(
                 next: httpContext =>

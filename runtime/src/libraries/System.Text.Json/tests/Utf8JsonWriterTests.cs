@@ -142,7 +142,8 @@ namespace System.Text.Json.Tests
                 char* buffer,
                 int bufferLength,
                 out int numberOfCharactersWritten
-            ) {
+            )
+            {
                 numberOfCharactersWritten = 0;
                 return false;
             }
@@ -207,7 +208,8 @@ namespace System.Text.Json.Tests
             char replacementChar,
             JavaScriptEncoder encoder,
             bool requiresEscaping
-        ) {
+        )
+        {
             var writerOptions = new JsonWriterOptions { Encoder = encoder };
 
             {
@@ -386,7 +388,8 @@ namespace System.Text.Json.Tests
             char replacementChar,
             JavaScriptEncoder encoder,
             bool requiresEscaping
-        ) {
+        )
+        {
             var writerOptions = new JsonWriterOptions { Encoder = encoder };
             var random = new Random(42);
             for (int dataLength = 1; dataLength < 50; dataLength++)
@@ -545,7 +548,8 @@ namespace System.Text.Json.Tests
         public unsafe void WriteStringInvalidCharacter(
             char replacementChar,
             JavaScriptEncoder encoder
-        ) {
+        )
+        {
             var writerOptions = new JsonWriterOptions { Encoder = encoder };
             var random = new Random(42);
             for (int dataLength = 0; dataLength < 47; dataLength++)
@@ -595,7 +599,8 @@ namespace System.Text.Json.Tests
                         && (span[3] == 'F' || span[3] == 'f')
                         && (span[4] == 'F' || span[4] == 'f')
                         && (span[5] == 'D' || span[5] == 'd')
-                    ) {
+                    )
+                    {
                         return true; // "\uFFFD" representation
                     }
                 }
@@ -624,7 +629,8 @@ namespace System.Text.Json.Tests
         private static ReadOnlyMemory<byte> WriteStringHelper(
             JsonWriterOptions writerOptions,
             string str
-        ) {
+        )
+        {
             var output = new ArrayBufferWriter<byte>();
             using (var writer = new Utf8JsonWriter(output, writerOptions))
             {
@@ -636,7 +642,8 @@ namespace System.Text.Json.Tests
         private static ReadOnlyMemory<byte> WriteUtf8StringHelper(
             JsonWriterOptions writerOptions,
             byte[] utf8str
-        ) {
+        )
+        {
             var output = new ArrayBufferWriter<byte>();
             using (var writer = new Utf8JsonWriter(output, writerOptions))
             {
@@ -1432,7 +1439,8 @@ namespace System.Text.Json.Tests
         public async Task FlushToStreamThrows_WriterRemainsInConsistentState(
             bool useAsync,
             bool throwFromDispose
-        ) {
+        )
+        {
             var stream = new ThrowingFromWriteMemoryStream();
             var jsonUtf8 = new Utf8JsonWriter(stream);
 
@@ -1494,7 +1502,8 @@ namespace System.Text.Json.Tests
                 int offset,
                 int count,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (ExceptionToThrow != null)
                     throw ExceptionToThrow;
                 await base.WriteAsync(buffer, offset, count, cancellationToken)
@@ -1904,7 +1913,8 @@ namespace System.Text.Json.Tests
             JsonValueKind kind,
             bool formatted,
             bool skipValidation
-        ) {
+        )
+        {
             var options = new JsonWriterOptions
             {
                 Indented = formatted,
@@ -2053,7 +2063,8 @@ namespace System.Text.Json.Tests
             JsonValueKind kind,
             bool formatted,
             bool skipValidation
-        ) {
+        )
+        {
             var options = new JsonWriterOptions
             {
                 Indented = formatted,
@@ -2173,7 +2184,8 @@ namespace System.Text.Json.Tests
             Utf8JsonWriter writer,
             JsonValueKind kind,
             bool addComments = false
-        ) {
+        )
+        {
             Debug.Assert(
                 writer.BytesCommitted == 0
                     && writer.BytesPending == 0
@@ -4716,7 +4728,8 @@ namespace System.Text.Json.Tests
             bool skipValidation,
             string key,
             string value
-        ) {
+        )
+        {
             string expectedStr = GetEscapedExpectedString(
                 prettyPrint: formatted,
                 key,
@@ -5137,7 +5150,8 @@ namespace System.Text.Json.Tests
         [InlineData(false)]
         public void Utf8SurrogatePairReplacement_InvalidPropertyName_InvalidValue(
             bool skipValidation
-        ) {
+        )
+        {
             // SkipValidation does not affect whether we write the replacement character or not (we always do, unless we add a new option to control).
             // Comment also applies to other Utf8SurrogatePairReplacement* tests below.
             var options = new JsonWriterOptions { SkipValidation = skipValidation };
@@ -5234,7 +5248,8 @@ namespace System.Text.Json.Tests
         [InlineData(false)]
         public void Utf16SurrogatePairReplacement_InvalidPropertyName_InvalidValue(
             bool skipValidation
-        ) {
+        )
+        {
             // SkipValidation does not affect whether we write the replacement character or not (we always do, unless we add a new option to control).
             // Comment also applies to other Utf16SurrogatePairReplacement* tests below.
             var options = new JsonWriterOptions { SkipValidation = skipValidation };
@@ -5258,7 +5273,8 @@ namespace System.Text.Json.Tests
         [InlineData(false)]
         public void Utf16SurrogatePairReplacement_InvalidPropertyName_ValidValue(
             bool skipValidation
-        ) {
+        )
+        {
             var options = new JsonWriterOptions { SkipValidation = skipValidation };
 
             var output = new ArrayBufferWriter<byte>(1024);
@@ -5280,7 +5296,8 @@ namespace System.Text.Json.Tests
         [InlineData(false)]
         public void Utf16SurrogatePairReplacement_ValidPropertyName_InvalidValue(
             bool skipValidation
-        ) {
+        )
+        {
             var options = new JsonWriterOptions { SkipValidation = skipValidation };
 
             var output = new ArrayBufferWriter<byte>(1024);
@@ -5564,7 +5581,8 @@ namespace System.Text.Json.Tests
             bool formatted,
             bool skipValidation,
             int keyLength
-        ) {
+        )
+        {
             var keyChars = new char[keyLength];
             for (int i = 0; i < keyChars.Length; i++)
             {
@@ -5670,7 +5688,8 @@ namespace System.Text.Json.Tests
             bool formatted,
             bool skipValidation,
             int keyLength
-        ) {
+        )
+        {
             var keyChars = new char[keyLength];
             for (int i = 0; i < keyChars.Length; i++)
             {
@@ -5791,7 +5810,8 @@ namespace System.Text.Json.Tests
             bool skipValidation,
             bool value,
             string keyString
-        ) {
+        )
+        {
             string expectedStr = GetBooleanExpectedString(
                 prettyPrint: formatted,
                 keyString,
@@ -6575,7 +6595,8 @@ namespace System.Text.Json.Tests
             bool skipValidation,
             string keyString,
             bool matchesRelaxedEscaping
-        ) {
+        )
+        {
             string expectedStr = GetExpectedString_RelaxedEscaping(
                 prettyPrint: formatted,
                 keyString
@@ -6603,7 +6624,8 @@ namespace System.Text.Json.Tests
             string keyString,
             string expectedStr,
             bool shouldMatch
-        ) {
+        )
+        {
             ReadOnlySpan<char> keyUtf16 = keyString.AsSpan();
             ReadOnlySpan<byte> keyUtf8 = Encoding.UTF8.GetBytes(keyString);
 
@@ -7083,7 +7105,8 @@ namespace System.Text.Json.Tests
             ReadOnlySpan<byte> key,
             ReadOnlySpan<byte> value,
             bool noThrow = false
-        ) {
+        )
+        {
             // Resizing is too slow, even for outerloop tests, so initialize to a large output size up front.
             var output = new ArrayBufferWriter<byte>(noThrow ? 40_000_000 : 1024);
             using var jsonUtf8 = new Utf8JsonWriter(output, options);
@@ -7201,7 +7224,8 @@ namespace System.Text.Json.Tests
         public static void WriteStartArrayObject_JsonEncodedText(
             string message,
             string expectedMessage
-        ) {
+        )
+        {
             JsonEncodedText text = JsonEncodedText.Encode(message);
             WriteArrayObjectHelper(text, expectedMessage);
         }
@@ -7384,7 +7408,8 @@ namespace System.Text.Json.Tests
         public static void WriteStringDateAndGuid_JsonEncodedText(
             string message,
             string expectedMessage
-        ) {
+        )
+        {
             JsonEncodedText text = JsonEncodedText.Encode(message);
             WriteStringHelper(text, expectedMessage);
         }
@@ -7910,7 +7935,8 @@ namespace System.Text.Json.Tests
             Action<Utf8JsonWriter, string, T> stringAction,
             WritePropertySpanAction<char, T> charSpanAction,
             WritePropertySpanAction<byte, T> byteSpanAction
-        ) {
+        )
+        {
             var output = new ArrayBufferWriter<byte>(1024);
             string nullString = null;
 
@@ -7952,7 +7978,8 @@ namespace System.Text.Json.Tests
             Action<Utf8JsonWriter, string> stringAction,
             WritePropertySpanAction<char> charSpanAction,
             WritePropertySpanAction<byte> byteSpanAction
-        ) {
+        )
+        {
             var output = new ArrayBufferWriter<byte>(1024);
             string nullString = null;
 
@@ -7996,7 +8023,8 @@ namespace System.Text.Json.Tests
             Action<Utf8JsonWriter, string> stringAction,
             WriteValueSpanAction<char> charSpanAction,
             WriteValueSpanAction<byte> byteSpanAction
-        ) {
+        )
+        {
             var output = new ArrayBufferWriter<byte>(1024);
             string nullString = null;
 
@@ -8024,7 +8052,8 @@ namespace System.Text.Json.Tests
             Action<Utf8JsonWriter, string> stringAction,
             WriteValueSpanAction<char> charSpanAction,
             WriteValueSpanAction<byte> byteSpanAction
-        ) {
+        )
+        {
             var output = new ArrayBufferWriter<byte>(1024);
             string nullString = null;
 
@@ -8050,7 +8079,8 @@ namespace System.Text.Json.Tests
             bool prettyPrint,
             string propertyName,
             string value
-        ) {
+        )
+        {
             var ms = new MemoryStream();
             TextWriter streamWriter = new StreamWriter(ms, new UTF8Encoding(false), 1024, true);
 
@@ -8076,7 +8106,8 @@ namespace System.Text.Json.Tests
             bool prettyPrint,
             string propertyName,
             byte[] value
-        ) {
+        )
+        {
             var ms = new MemoryStream();
             TextWriter streamWriter = new StreamWriter(ms, new UTF8Encoding(false), 1024, true);
 
@@ -8152,7 +8183,8 @@ namespace System.Text.Json.Tests
             string value,
             StringEscapeHandling escaping,
             bool escape = true
-        ) {
+        )
+        {
             using (TextWriter stringWriter = new StringWriter())
             using (
                 var json = new JsonTextWriter(stringWriter)
@@ -8160,7 +8192,8 @@ namespace System.Text.Json.Tests
                     Formatting = prettyPrint ? Formatting.Indented : Formatting.None,
                     StringEscapeHandling = escaping
                 }
-            ) {
+            )
+            {
                 json.WriteStartObject();
                 json.WritePropertyName(propertyName, escape);
                 json.WriteValue(value);
@@ -8239,7 +8272,8 @@ namespace System.Text.Json.Tests
             string key,
             bool prettyPrint,
             bool escape = false
-        ) {
+        )
+        {
             var ms = new MemoryStream();
             TextWriter streamWriter = new StreamWriter(ms, new UTF8Encoding(false), 1024, true);
 
@@ -8285,7 +8319,8 @@ namespace System.Text.Json.Tests
             string key,
             bool prettyPrint,
             bool escape = false
-        ) {
+        )
+        {
             var ms = new MemoryStream();
             TextWriter streamWriter = new StreamWriter(ms, new UTF8Encoding(false), 1024, true);
 
@@ -8331,7 +8366,8 @@ namespace System.Text.Json.Tests
             string keyString,
             bool value,
             bool escape = false
-        ) {
+        )
+        {
             var ms = new MemoryStream();
             TextWriter streamWriter = new StreamWriter(ms, new UTF8Encoding(false), 1024, true);
 
@@ -8364,7 +8400,8 @@ namespace System.Text.Json.Tests
             bool prettyPrint,
             string keyString,
             bool escape = false
-        ) {
+        )
+        {
             var ms = new MemoryStream();
             TextWriter streamWriter = new StreamWriter(ms, new UTF8Encoding(false), 1024, true);
 
@@ -8424,7 +8461,8 @@ namespace System.Text.Json.Tests
             double[] doubles,
             decimal[] decimals,
             bool escape = false
-        ) {
+        )
+        {
             var ms = new MemoryStream();
             TextWriter streamWriter = new StreamWriter(ms, new UTF8Encoding(false), 1024, true);
 
@@ -8522,7 +8560,8 @@ namespace System.Text.Json.Tests
             string keyString,
             Guid[] guids,
             bool escape = false
-        ) {
+        )
+        {
             var ms = new MemoryStream();
             TextWriter streamWriter = new StreamWriter(ms, new UTF8Encoding(false), 1024, true);
 
@@ -8557,7 +8596,8 @@ namespace System.Text.Json.Tests
             bool prettyPrint,
             int numberOfElements,
             T value
-        ) {
+        )
+        {
             var sb = new StringBuilder();
             StringWriter stringWriter = new StringWriter(sb);
 
@@ -8583,7 +8623,8 @@ namespace System.Text.Json.Tests
             string keyString,
             DateTime[] dates,
             bool escape = false
-        ) {
+        )
+        {
             var ms = new MemoryStream();
             TextWriter streamWriter = new StreamWriter(ms, new UTF8Encoding(false), 1024, true);
 
@@ -8619,7 +8660,8 @@ namespace System.Text.Json.Tests
             string keyString,
             DateTimeOffset[] dates,
             bool escape = false
-        ) {
+        )
+        {
             var ms = new MemoryStream();
             TextWriter streamWriter = new StreamWriter(ms, new UTF8Encoding(false), 1024, true);
 
@@ -8731,7 +8773,8 @@ namespace System.Text.Json.Tests
                             || json[i + 2] == ' '
                             || json[i + 2] == '\r'
                             || json[i + 2] == '\n'
-                        ) {
+                        )
+                        {
                             i += 2;
                         }
                         else

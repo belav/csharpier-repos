@@ -336,7 +336,8 @@ namespace Microsoft.AspNetCore.Routing
         void ICollection<KeyValuePair<string, object?>>.CopyTo(
             KeyValuePair<string, object?>[] array,
             int arrayIndex
-        ) {
+        )
+        {
             if (array == null)
             {
                 throw new ArgumentNullException(nameof(array));
@@ -346,7 +347,8 @@ namespace Microsoft.AspNetCore.Routing
                 arrayIndex < 0
                 || arrayIndex > array.Length
                 || array.Length - arrayIndex < this.Count
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(nameof(arrayIndex));
             }
 
@@ -398,7 +400,8 @@ namespace Microsoft.AspNetCore.Routing
             if (
                 index >= 0
                 && EqualityComparer<object>.Default.Equals(array[index].Value, item.Value)
-            ) {
+            )
+            {
                 Array.Copy(array, index + 1, array, index, _count - index);
                 _count--;
                 array[_count] = default;
@@ -533,7 +536,8 @@ namespace Microsoft.AspNetCore.Routing
                             key,
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         value = storage.Properties[i].GetValue(storage.Value);
                         return true;
                     }

@@ -278,7 +278,8 @@ class C{i}
                 var updatedDocument in testState.Workspace.Documents.Select(
                     d => result.UpdatedSolution.GetDocument(d.Id)
                 )
-            ) {
+            )
+            {
                 if (updatedDocument.Name == "C5.cs")
                 {
                     Assert.Contains(
@@ -385,7 +386,8 @@ class C{i}
                 var updatedDocument in testState.Workspace.Documents.Select(
                     d => result.UpdatedSolution.GetDocument(d.Id)
                 )
-            ) {
+            )
+            {
                 if (updatedDocument.Name == "C5.cs")
                 {
                     Assert.Contains(

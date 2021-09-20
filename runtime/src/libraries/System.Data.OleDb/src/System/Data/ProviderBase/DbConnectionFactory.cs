@@ -55,7 +55,8 @@ namespace System.Data.ProviderBase
                     DbConnectionPoolKey,
                     DbConnectionPoolGroup
                 > entry in connectionPoolGroups
-            ) {
+            )
+            {
                 DbConnectionPoolGroup poolGroup = entry.Value;
                 if (null != poolGroup)
                 {
@@ -67,7 +68,8 @@ namespace System.Data.ProviderBase
         protected virtual DbMetaDataFactory CreateMetaDataFactory(
             DbConnectionInternal internalConnection,
             out bool cacheMetaDataFactory
-        ) {
+        )
+        {
             // providers that support GetSchema must override this with a method that creates a meta data
             // factory appropriate for them.
             cacheMetaDataFactory = false;
@@ -78,7 +80,8 @@ namespace System.Data.ProviderBase
             DbConnection owningConnection,
             DbConnectionPoolGroup poolGroup,
             DbConnectionOptions? userOptions
-        ) {
+        )
+        {
             Debug.Assert(null != owningConnection, "null owningConnection?");
             Debug.Assert(null != poolGroup, "null poolGroup?");
 
@@ -108,7 +111,8 @@ namespace System.Data.ProviderBase
             DbConnectionOptions options,
             DbConnectionPoolKey poolKey,
             DbConnectionOptions? userOptions
-        ) {
+        )
+        {
             Debug.Assert(null != pool, "null pool?");
             DbConnectionPoolGroupProviderInfo poolGroupProviderInfo = pool.PoolGroup.ProviderInfo!;
 
@@ -130,7 +134,8 @@ namespace System.Data.ProviderBase
 
         internal virtual DbConnectionPoolGroupProviderInfo? CreateConnectionPoolGroupProviderInfo(
             DbConnectionOptions connectionOptions
-        ) {
+        )
+        {
             return null;
         }
 
@@ -159,7 +164,8 @@ namespace System.Data.ProviderBase
             DbConnectionOptions? userOptions,
             DbConnectionInternal? oldConnection,
             out DbConnectionInternal? connection
-        ) {
+        )
+        {
             Debug.Assert(null != owningConnection, "null owningConnection?");
 
             DbConnectionPoolGroup poolGroup;
@@ -242,7 +248,8 @@ namespace System.Data.ProviderBase
                                         if (
                                             (oldConnection != null)
                                             && (oldConnection.State == ConnectionState.Open)
-                                        ) {
+                                        )
+                                        {
                                             oldConnection.PrepareForReplaceConnection();
                                             oldConnection.Dispose();
                                         }
@@ -338,7 +345,8 @@ namespace System.Data.ProviderBase
                                 userOptions,
                                 out connection
                             )
-                        ) {
+                        )
+                        {
                             return false;
                         }
                     }
@@ -375,7 +383,8 @@ namespace System.Data.ProviderBase
         private DbConnectionPool? GetConnectionPool(
             DbConnection owningObject,
             DbConnectionPoolGroup connectionPoolGroup
-        ) {
+        )
+        {
             // if poolgroup is disabled, it will be replaced with a new entry
 
             Debug.Assert(null != owningObject, "null owningObject?");
@@ -415,7 +424,8 @@ namespace System.Data.ProviderBase
             DbConnectionPoolKey key,
             DbConnectionPoolGroupOptions? poolOptions,
             ref DbConnectionOptions? userConnectionOptions
-        ) {
+        )
+        {
             if (ADP.IsEmpty(key.ConnectionString))
             {
                 return null;
@@ -429,7 +439,8 @@ namespace System.Data.ProviderBase
                 || (
                     connectionPoolGroup.IsDisabled && (null != connectionPoolGroup.PoolGroupOptions)
                 )
-            ) {
+            )
+            {
                 // If we can't find an entry for the connection string in
                 // our collection of pool entries, then we need to create a
                 // new pool entry and add it to our collection.
@@ -501,7 +512,8 @@ namespace System.Data.ProviderBase
                                 DbConnectionPoolKey,
                                 DbConnectionPoolGroup
                             > entry in connectionPoolGroups
-                        ) {
+                        )
+                        {
                             newConnectionPoolGroups.Add(entry.Key, entry.Value);
                         }
 
@@ -535,7 +547,8 @@ namespace System.Data.ProviderBase
         internal DbMetaDataFactory GetMetaDataFactory(
             DbConnectionPoolGroup connectionPoolGroup,
             DbConnectionInternal internalConnection
-        ) {
+        )
+        {
             Debug.Assert(connectionPoolGroup != null, "connectionPoolGroup may not be null.");
 
             // get the matadatafactory from the pool entry. If it does not already have one
@@ -625,7 +638,8 @@ namespace System.Data.ProviderBase
                         DbConnectionPoolKey,
                         DbConnectionPoolGroup
                     > entry in connectionPoolGroups
-                ) {
+                )
+                {
                     if (null != entry.Value)
                     {
                         Debug.Assert(!entry.Value.IsDisabled, "Disabled pool entry discovered");
@@ -688,7 +702,8 @@ namespace System.Data.ProviderBase
             DbConnectionPool? pool,
             DbConnection? owningConnection,
             DbConnectionOptions? userOptions
-        ) {
+        )
+        {
             return CreateConnection(
                 options,
                 poolKey,

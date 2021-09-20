@@ -48,7 +48,8 @@ namespace System.Resources
             Dictionary<string, ResourceSet> localResourceSets,
             bool tryParents,
             bool createIfNotExists
-        ) {
+        )
+        {
             Debug.Assert(culture != null, "culture shouldn't be null; check caller");
             Debug.Assert(
                 localResourceSets != null,
@@ -66,7 +67,8 @@ namespace System.Resources
             if (
                 lookForCulture.HasInvariantCultureName
                 && _mediator.FallbackLoc == UltimateResourceFallbackLocation.MainAssembly
-            ) {
+            )
+            {
                 // don't bother looking in satellites in this case
                 satellite = _mediator.MainAssembly;
             }
@@ -136,13 +138,15 @@ namespace System.Resources
             if (
                 lookForCulture.Name == _mediator.NeutralResourcesCulture.Name
                 && _mediator.FallbackLoc == UltimateResourceFallbackLocation.MainAssembly
-            ) {
+            )
+            {
                 returnCulture = CultureInfo.InvariantCulture;
             }
             else if (
                 lookForCulture.HasInvariantCultureName
                 && _mediator.FallbackLoc == UltimateResourceFallbackLocation.Satellite
-            ) {
+            )
+            {
                 returnCulture = _mediator.NeutralResourcesCulture;
             }
 
@@ -152,7 +156,8 @@ namespace System.Resources
         internal static CultureInfo GetNeutralResourcesLanguage(
             Assembly a,
             out UltimateResourceFallbackLocation fallbackLocation
-        ) {
+        )
+        {
             Debug.Assert(a != null, "assembly != null");
 
             NeutralResourcesLanguageAttribute? attr =
@@ -167,7 +172,8 @@ namespace System.Resources
             if (
                 fallbackLocation < UltimateResourceFallbackLocation.MainAssembly
                 || fallbackLocation > UltimateResourceFallbackLocation.Satellite
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     SR.Format(SR.Arg_InvalidNeutralResourcesLanguage_FallbackLoc, fallbackLocation)
                 );
@@ -347,7 +353,8 @@ namespace System.Resources
             string readerTypeName,
             string? resSetTypeName,
             ResourceManager.ResourceManagerMediator mediator
-        ) {
+        )
+        {
             IResourceReader reader;
 
             // Permit deserialization as long as the default ResourceReader is used
@@ -429,7 +436,8 @@ namespace System.Resources
                         resourceName,
                         StringComparison.InvariantCultureIgnoreCase
                     )
-                ) {
+                )
+                {
                     if (canonicalName == null)
                     {
                         canonicalName = existingName;
@@ -585,7 +593,8 @@ namespace System.Resources
             if (
                 _mediator.MainAssembly == typeof(object).Assembly
                 && _mediator.BaseName.Equals(System.CoreLib.Name)
-            ) {
+            )
+            {
                 // This would break CultureInfo & all our exceptions.
                 Debug.Fail(
                     "Couldn't get "

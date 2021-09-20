@@ -45,7 +45,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                     Path.GetFileName(filePath),
                     StringComparison.Ordinal
                 )
-            ) {
+            )
+            {
                 return FileKinds.ComponentImport;
             }
             else
@@ -67,7 +68,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                     Path.GetFileName(filePath),
                     StringComparison.Ordinal
                 )
-            ) {
+            )
+            {
                 return FileKinds.ComponentImport;
             }
             else if (
@@ -76,7 +78,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                     Path.GetExtension(filePath),
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 return FileKinds.Component;
             }
             else

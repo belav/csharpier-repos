@@ -146,7 +146,8 @@ namespace System.Security.Cryptography.Xml.Tests
             using (MemoryStream memoryStream = new MemoryStream())
             using (
                 StreamWriter streamWriter = new StreamWriter(memoryStream, Text.Encoding.Unicode)
-            ) {
+            )
+            {
                 streamWriter.Write(xml);
                 streamWriter.Flush();
                 memoryStream.Position = 0;

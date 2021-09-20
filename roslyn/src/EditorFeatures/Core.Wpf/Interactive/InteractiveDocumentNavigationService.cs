@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Interactive
             OptionSet options,
             bool allowInvalidSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (workspace is not InteractiveWindowWorkspace interactiveWorkspace)
             {
                 Debug.Fail("InteractiveDocumentNavigationService called with incorrect workspace!");

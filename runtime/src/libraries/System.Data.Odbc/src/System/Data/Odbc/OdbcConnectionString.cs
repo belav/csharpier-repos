@@ -29,7 +29,8 @@ namespace System.Data.Odbc
                 if (
                     (null != connectionString)
                     && (ODBC32.MAX_CONNECTION_STRING_LENGTH < connectionString.Length)
-                ) { // MDAC 83536
+                )
+                { // MDAC 83536
                     throw ODBC.ConnectionStringTooLong();
                 }
             }

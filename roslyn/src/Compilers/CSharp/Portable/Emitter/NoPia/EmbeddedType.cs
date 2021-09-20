@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
         public void EmbedAllMembersOfImplementedInterface(
             SyntaxNode syntaxNodeOpt,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             Debug.Assert(UnderlyingNamedType.AdaptedNamedTypeSymbol.IsInterfaceType());
 
             if (_embeddedAllMembersOfImplementedInterface)
@@ -52,7 +53,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
             // Embed all members
             foreach (
                 MethodSymbol m in UnderlyingNamedType.AdaptedNamedTypeSymbol.GetMethodsToEmit()
-            ) {
+            )
+            {
                 if ((object)m != null)
                 {
                     TypeManager.EmbedMethod(this, m.GetCciAdapter(), syntaxNodeOpt, diagnostics);
@@ -65,7 +67,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
             // Do the same for implemented interfaces.
             foreach (
                 NamedTypeSymbol @interface in UnderlyingNamedType.AdaptedNamedTypeSymbol.GetInterfacesToEmit()
-            ) {
+            )
+            {
                 TypeManager.ModuleBeingBuilt.Translate(
                     @interface,
                     syntaxNodeOpt,
@@ -98,7 +101,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
             PEModuleBuilder moduleBuilder,
             SyntaxNode syntaxNodeOpt,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             NamedTypeSymbol baseType =
                 UnderlyingNamedType.AdaptedNamedTypeSymbol.BaseTypeNoUseSiteDiagnostics;
             return (object)baseType != null
@@ -144,14 +148,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
 
         protected override IEnumerable<Cci.TypeReferenceWithAttributes> GetInterfaces(
             EmitContext context
-        ) {
+        )
+        {
             Debug.Assert((object)TypeManager.ModuleBeingBuilt == context.Module);
 
             PEModuleBuilder moduleBeingBuilt = (PEModuleBuilder)context.Module;
 
             foreach (
                 NamedTypeSymbol @interface in UnderlyingNamedType.AdaptedNamedTypeSymbol.GetInterfacesToEmit()
-            ) {
+            )
+            {
                 var typeRef = moduleBeingBuilt.Translate(
                     @interface,
                     (CSharpSyntaxNode)context.SyntaxNodeOpt,
@@ -241,7 +247,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
 
         protected override IEnumerable<CSharpAttributeData> GetCustomAttributesToEmit(
             PEModuleBuilder moduleBuilder
-        ) {
+        )
+        {
             return UnderlyingNamedType.AdaptedNamedTypeSymbol.GetCustomAttributesToEmit(
                 moduleBuilder
             );
@@ -251,7 +258,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
             bool hasGuid,
             SyntaxNode syntaxNodeOpt,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             var member = hasGuid
                 ? WellKnownMember.System_Runtime_InteropServices_TypeIdentifierAttribute__ctor
                 : WellKnownMember.System_Runtime_InteropServices_TypeIdentifierAttribute__ctorStringString;
@@ -310,7 +318,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
             AttributeDescription description,
             SyntaxNode syntaxNodeOpt,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             EmbeddedTypesManager.Error(
                 diagnostics,
                 ErrorCode.ERR_InteropTypeMissingAttribute,
@@ -324,10 +333,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
             string defaultMember,
             SyntaxNode syntaxNodeOpt,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             foreach (
                 Symbol s in UnderlyingNamedType.AdaptedNamedTypeSymbol.GetMembers(defaultMember)
-            ) {
+            )
+            {
                 switch (s.Kind)
                 {
                     case SymbolKind.Field:

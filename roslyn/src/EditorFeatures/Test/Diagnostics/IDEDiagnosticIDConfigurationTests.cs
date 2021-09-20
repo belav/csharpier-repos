@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.ConfigureSeverityL
     {
         private static ImmutableArray<(string diagnosticId, ImmutableHashSet<IOption2> codeStyleOptions)> GetIDEDiagnosticIdsAndOptions(
             string languageName
-        ) {
+        )
+        {
             var diagnosticIdAndOptions =
                 new List<(string diagnosticId, ImmutableHashSet<IOption2> options)>();
             var uniqueDiagnosticIds = new HashSet<string>();
@@ -56,7 +57,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.ConfigureSeverityL
                                 languageName,
                                 out var options
                             )
-                        ) {
+                        )
+                        {
                             options = ImmutableHashSet<IOption2>.Empty;
                         }
 
@@ -108,7 +110,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.ConfigureSeverityL
             if (
                 helpLinkUri
                 != $"https://docs.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{diagnosticId.ToLowerInvariant()}"
-            ) {
+            )
+            {
                 Assert.True(false, $"Invalid help link for {diagnosticId}");
             }
         }
@@ -116,7 +119,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.ConfigureSeverityL
         private static Dictionary<string, string> GetExpectedMap(
             string expected,
             out string[] expectedLines
-        ) {
+        )
+        {
             expectedLines = expected.Split(
                 new[] { Environment.NewLine },
                 StringSplitOptions.RemoveEmptyEntries
@@ -645,7 +649,8 @@ dotnet_diagnostic.RE0001.severity = %value%
         private static void VerifyConfigureCodeStyleOptionsCore(
             string expected,
             string languageName
-        ) {
+        )
+        {
             using var workspace = new TestWorkspace();
             var optionSet = workspace.Options;
 
@@ -715,7 +720,8 @@ dotnet_diagnostic.RE0001.severity = %value%
                 string diagnosticId,
                 IOption optionOpt,
                 string editorConfigString
-            ) {
+            )
+            {
                 // Verify we have an entry for { diagnosticId, optionName }
                 var diagnosticIdString = $"# {diagnosticId}";
                 if (optionOpt != null)

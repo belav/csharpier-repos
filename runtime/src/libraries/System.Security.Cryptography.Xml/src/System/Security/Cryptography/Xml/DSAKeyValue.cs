@@ -179,7 +179,8 @@ namespace System.Security.Cryptography.Xml
             if (
                 value.Name != KeyValueElementName
                 || value.NamespaceURI != SignedXml.XmlDsigNamespaceUrl
-            ) {
+            )
+            {
                 throw new CryptographicException(
                     SR.Format(
                         SR.WrongRootElement,

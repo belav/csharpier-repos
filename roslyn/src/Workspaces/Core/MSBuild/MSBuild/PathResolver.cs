@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
             string baseDirectory,
             DiagnosticReportingMode reportingMode,
             [NotNullWhen(true)] out string? absolutePath
-        ) {
+        )
+        {
             try
             {
                 absolutePath = GetAbsolutePath(path, baseDirectory);
@@ -59,7 +60,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
             string baseDirectory,
             DiagnosticReportingMode reportingMode,
             [NotNullWhen(true)] out string? absolutePath
-        ) {
+        )
+        {
             try
             {
                 absolutePath = GetAbsolutePath(path, baseDirectory);

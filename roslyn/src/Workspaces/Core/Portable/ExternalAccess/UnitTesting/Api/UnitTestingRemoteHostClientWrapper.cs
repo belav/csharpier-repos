@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
         public static async Task<UnitTestingRemoteHostClientWrapper?> TryGetClientAsync(
             HostWorkspaceServices services,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var client = await RemoteHostClient.TryGetClientAsync(services, cancellationToken)
                 .ConfigureAwait(false);
             if (client is null)
@@ -43,7 +44,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
             IReadOnlyList<object?> arguments,
             object? callbackTarget,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfTrue(IsDefault);
             await UnderlyingObject.RunRemoteAsync(
                     (WellKnownServiceHubService)service,
@@ -64,7 +66,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
             IReadOnlyList<object?> arguments,
             object? callbackTarget,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfTrue(IsDefault);
             return await UnderlyingObject.RunRemoteAsync<T>(
                     (WellKnownServiceHubService)service,
@@ -81,7 +84,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
             UnitTestingServiceHubService service,
             object? callbackTarget,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfTrue(IsDefault);
             return new UnitTestingRemoteServiceConnectionWrapper(
                 await UnderlyingObject.CreateConnectionAsync(

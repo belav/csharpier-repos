@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis
             string filePath,
             TextSpan sourceSpan,
             LinePositionSpan lineSpan
-        ) {
+        )
+        {
             _sourceSpan = sourceSpan;
             _lineSpan = new FileLinePositionSpan(filePath, lineSpan);
         }

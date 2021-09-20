@@ -39,10 +39,8 @@ namespace System.Web.Http.Owin
         /// <summary>Initializes a new instance of the <see cref="HttpMessageHandlerAdapter"/> class.</summary>
         /// <param name="next">The next component in the pipeline.</param>
         /// <param name="options">The options to configure this adapter.</param>
-        public HttpMessageHandlerAdapter(
-            OwinMiddleware next,
-            HttpMessageHandlerOptions options
-        ) : base(next)
+        public HttpMessageHandlerAdapter(OwinMiddleware next, HttpMessageHandlerOptions options)
+            : base(next)
         {
             if (options == null)
             {
@@ -194,7 +192,8 @@ namespace System.Web.Http.Owin
             IOwinContext context,
             IOwinRequest owinRequest,
             IOwinResponse owinResponse
-        ) {
+        )
+        {
             CancellationToken cancellationToken = owinRequest.CallCancelled;
             HttpContent requestContent;
 
@@ -255,7 +254,8 @@ namespace System.Web.Http.Owin
                             owinResponse,
                             cancellationToken
                         )
-                    ) {
+                    )
+                    {
                         bool bufferOutput = _bufferPolicySelector.UseBufferedOutputStream(response);
 
                         if (!bufferOutput)
@@ -278,7 +278,8 @@ namespace System.Web.Http.Owin
                                 owinResponse,
                                 cancellationToken
                             )
-                        ) {
+                        )
+                        {
                             await SendResponseMessageAsync(
                                 request,
                                 response,
@@ -319,7 +320,8 @@ namespace System.Web.Http.Owin
         private static async Task<HttpContent> CreateBufferedRequestContentAsync(
             IOwinRequest owinRequest,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // We need to replace the request body with a buffered stream so that other components can read the stream.
             // For this stream to be useful, it must NOT be diposed along with the request. Streams created by
             // StreamContent do get disposed along with the request, so use MemoryStream to buffer separately.
@@ -353,7 +355,8 @@ namespace System.Web.Http.Owin
         private static HttpRequestMessage CreateRequestMessage(
             IOwinRequest owinRequest,
             HttpContent requestContent
-        ) {
+        )
+        {
             // Create the request
             HttpRequestMessage request = new HttpRequestMessage(
                 new HttpMethod(owinRequest.Method),
@@ -418,7 +421,8 @@ namespace System.Web.Http.Owin
                         HttpPropertyKeys.NoRouteMatched,
                         out routingFailure
                     ) && routingFailure
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -429,7 +433,8 @@ namespace System.Web.Http.Owin
             HttpRequestMessage request,
             HttpResponseMessage response,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ExceptionDispatchInfo exceptionInfo;
 
             cancellationToken.ThrowIfCancellationRequested();
@@ -519,7 +524,8 @@ namespace System.Web.Http.Owin
             HttpResponseMessage response,
             IOwinResponse owinResponse,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.Assert(response != null);
             HttpResponseHeaders responseHeaders = response.Headers;
             Contract.Assert(responseHeaders != null);
@@ -587,7 +593,8 @@ namespace System.Web.Http.Owin
             HttpResponseMessage response,
             IOwinResponse owinResponse,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.Assert(response != null);
             HttpResponseHeaders responseHeaders = response.Headers;
             Contract.Assert(responseHeaders != null);
@@ -624,7 +631,8 @@ namespace System.Web.Http.Owin
             HttpResponseMessage response,
             IOwinResponse owinResponse,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.Assert(owinResponse != null);
 
             ExceptionContext exceptionContext = new ExceptionContext(
@@ -646,7 +654,8 @@ namespace System.Web.Http.Owin
             HttpResponseMessage response,
             IOwinResponse owinResponse,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             owinResponse.StatusCode = (int)response.StatusCode;
             owinResponse.ReasonPhrase = response.ReasonPhrase;
 
@@ -671,7 +680,8 @@ namespace System.Web.Http.Owin
                         string,
                         IEnumerable<string>
                     > contentHeader in responseContent.Headers
-                ) {
+                )
+                {
                     responseHeaders[contentHeader.Key] = contentHeader.Value.AsArray();
                 }
 
@@ -691,7 +701,8 @@ namespace System.Web.Http.Owin
             HttpResponseMessage response,
             IOwinResponse owinResponse,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.Assert(response != null);
             Contract.Assert(response.Content != null);
 
@@ -736,7 +747,8 @@ namespace System.Web.Http.Owin
         private static HttpMessageHandlerOptions CreateOptions(
             HttpMessageHandler messageHandler,
             IHostBufferPolicySelector bufferPolicySelector
-        ) {
+        )
+        {
             if (messageHandler == null)
             {
                 throw new ArgumentNullException("messageHandler");

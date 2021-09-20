@@ -506,7 +506,8 @@ namespace System.ComponentModel.Composition
 
         private static ComposablePartException CreateComposablePartException(
             ICompositionElement element
-        ) {
+        )
+        {
             return CreateComposablePartException(
                 CompositionErrorId.Unknown,
                 (string)null,
@@ -517,7 +518,8 @@ namespace System.ComponentModel.Composition
 
         private static ComposablePartException CreateComposablePartException(
             Exception innerException
-        ) {
+        )
+        {
             return CreateComposablePartException(
                 CompositionErrorId.Unknown,
                 (string)null,
@@ -531,7 +533,8 @@ namespace System.ComponentModel.Composition
             string message,
             ICompositionElement element,
             Exception innerException
-        ) {
+        )
+        {
             return new ComposablePartException(message, element, innerException);
         }
     }

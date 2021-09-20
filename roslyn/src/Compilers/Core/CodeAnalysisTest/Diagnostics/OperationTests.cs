@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                 ImmutableArray<RefKind>,
                 HasDynamicArgumentsExpression
             > createDynamicExpression
-        ) {
+        )
+        {
             // Empty arguments and default argument names/refkinds
             ImmutableArray<IOperation> arguments = ImmutableArray<IOperation>.Empty;
             ImmutableArray<string> argumentNames = default;
@@ -225,7 +226,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
         private void TestGetFlowGraphInvalidArgumentCore(
             string argumentExceptionMessage,
             IOperation parent
-        ) {
+        )
+        {
             bool exceptionThrown = false;
             try
             {

@@ -26,7 +26,8 @@ namespace System.Web.Http.Tracing
         private static void CreateAllTracers(
             HttpConfiguration configuration,
             ITraceWriter traceWriter
-        ) {
+        )
+        {
             CreateActionInvokerTracer(configuration, traceWriter);
             CreateActionSelectorTracer(configuration, traceWriter);
             CreateActionValueBinderTracer(configuration, traceWriter);
@@ -47,7 +48,8 @@ namespace System.Web.Http.Tracing
         private static void CreateActionInvokerTracer(
             HttpConfiguration configuration,
             ITraceWriter traceWriter
-        ) {
+        )
+        {
             IHttpActionInvoker invoker = GetService<IHttpActionInvoker>(configuration.Services);
             if (invoker != null && !(invoker is HttpActionInvokerTracer))
             {
@@ -59,7 +61,8 @@ namespace System.Web.Http.Tracing
         private static void CreateActionSelectorTracer(
             HttpConfiguration configuration,
             ITraceWriter traceWriter
-        ) {
+        )
+        {
             IHttpActionSelector selector = GetService<IHttpActionSelector>(configuration.Services);
             if (selector != null && !(selector is HttpActionSelectorTracer))
             {
@@ -74,7 +77,8 @@ namespace System.Web.Http.Tracing
         private static void CreateActionValueBinderTracer(
             HttpConfiguration configuration,
             ITraceWriter traceWriter
-        ) {
+        )
+        {
             IActionValueBinder binder = GetService<IActionValueBinder>(configuration.Services);
             if (binder != null && !(binder is ActionValueBinderTracer))
             {
@@ -86,7 +90,8 @@ namespace System.Web.Http.Tracing
         private static void CreateContentNegotiatorTracer(
             HttpConfiguration configuration,
             ITraceWriter traceWriter
-        ) {
+        )
+        {
             IContentNegotiator negotiator = configuration.Services.GetContentNegotiator();
             if (negotiator != null && !(negotiator is ContentNegotiatorTracer))
             {
@@ -101,7 +106,8 @@ namespace System.Web.Http.Tracing
         private static void CreateControllerActivatorTracer(
             HttpConfiguration configuration,
             ITraceWriter traceWriter
-        ) {
+        )
+        {
             IHttpControllerActivator activator = GetService<IHttpControllerActivator>(
                 configuration.Services
             );
@@ -118,7 +124,8 @@ namespace System.Web.Http.Tracing
         private static void CreateControllerSelectorTracer(
             HttpConfiguration configuration,
             ITraceWriter traceWriter
-        ) {
+        )
+        {
             IHttpControllerSelector controllerSelector =
                 configuration.Services.GetHttpControllerSelector();
             if (controllerSelector != null && !(controllerSelector is HttpControllerSelectorTracer))
@@ -134,7 +141,8 @@ namespace System.Web.Http.Tracing
         private static void CreateHttpControllerTypeResolverTracer(
             HttpConfiguration configuration,
             ITraceWriter traceWriter
-        ) {
+        )
+        {
             DefaultHttpControllerTypeResolver resolver =
                 configuration.Services.GetHttpControllerTypeResolver()
                 as DefaultHttpControllerTypeResolver;
@@ -151,7 +159,8 @@ namespace System.Web.Http.Tracing
         private static void CreateMediaTypeFormatterTracers(
             HttpConfiguration configuration,
             ITraceWriter traceWriter
-        ) {
+        )
+        {
             for (int i = 0; i < configuration.Formatters.Count; i++)
             {
                 MediaTypeFormatter formatter = configuration.Formatters[i];
@@ -174,7 +183,8 @@ namespace System.Web.Http.Tracing
         private static void CreateMessageHandlerTracers(
             HttpConfiguration configuration,
             ITraceWriter traceWriter
-        ) {
+        )
+        {
             int handlerCount = configuration.MessageHandlers.Count;
 
             // If message handlers have already been wired into the pipeline,
@@ -205,7 +215,8 @@ namespace System.Web.Http.Tracing
                     if (
                         configuration.MessageHandlers[i] is RequestMessageHandlerTracer
                         || configuration.MessageHandlers[i] is MessageHandlerTracer
-                    ) {
+                    )
+                    {
                         configuration.MessageHandlers.RemoveAt(i);
                     }
                 }
@@ -231,7 +242,8 @@ namespace System.Web.Http.Tracing
 
         private static bool AreMessageHandlerTracersRegistered(
             Collection<DelegatingHandler> messageHandlers
-        ) {
+        )
+        {
             int handlerCount = messageHandlers.Count;
 
             // if the handler count is zero, exit early.

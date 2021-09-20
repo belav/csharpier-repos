@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         public static IDictionary<string, StringValues> GetValues(
             IEnumerable<KeyValuePair<string, StringValues>> originalValues,
             int valueCount
-        ) {
+        )
+        {
             var builder = new StringBuilder();
             var dictionary = new Dictionary<string, StringValues>(
                 valueCount,

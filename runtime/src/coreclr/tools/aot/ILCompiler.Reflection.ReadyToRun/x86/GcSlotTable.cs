@@ -43,7 +43,8 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
                 int varOffs,
                 int lowBits,
                 GcSlotFlags flags
-            ) {
+            )
+            {
                 Index = index;
                 Register = $"E{reg}P";
                 StackOffset = varOffs;
@@ -166,7 +167,8 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
                 if (
                     header.DoubleAlign
                     && (uint)stkOffs >= sizeof(int) * (header.FrameSize + calleeSavedRegs)
-                ) {
+                )
+                {
                     reg = 'B';
                     stkOffs -= sizeof(int) * (int)(header.FrameSize + calleeSavedRegs);
                 }
@@ -190,7 +192,8 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
             byte[] image,
             InfoHdrSmall header,
             ref int offset
-        ) {
+        )
+        {
             uint count = header.VarPtrTableSize;
             uint curOffs = 0;
             while (count-- > 0)

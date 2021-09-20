@@ -15,7 +15,8 @@ namespace System.Net.Security
                 X509Certificate2? cert = CertificateValidationPal.GetRemoteCertificate(
                     securityContext
                 )
-            ) {
+            )
+            {
                 if (cert == null)
                     return null;
 

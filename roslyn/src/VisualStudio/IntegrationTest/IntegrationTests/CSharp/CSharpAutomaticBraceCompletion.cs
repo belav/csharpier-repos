@@ -189,7 +189,8 @@ class C {
         [WpfTheory, CombinatorialData, Trait(Traits.Feature, Traits.Features.AutomaticCompletion)]
         public void Braces_OnReturnNoFormattingOnlyIndentationBeforeCloseBrace(
             bool showCompletionInArgumentLists
-        ) {
+        )
+        {
             SetUpEditor(
                 @"
 class C {
@@ -441,7 +442,8 @@ class C
         [WpfTheory, CombinatorialData, Trait(Traits.Feature, Traits.Features.AutomaticCompletion)]
         public void AngleBracket_PossibleGenerics_InsertionAndCompletion(
             bool showCompletionInArgumentLists
-        ) {
+        )
+        {
             SetUpEditor(
                 @"
 class C {
@@ -626,7 +628,8 @@ class C {
         [WpfTheory, CombinatorialData, Trait(Traits.Feature, Traits.Features.AutomaticCompletion)]
         public void Negative_NoCompletionStringVerbatimStringOrCharLiterals(
             bool showCompletionInArgumentLists
-        ) {
+        )
+        {
             SetUpEditor(
                 @"
 class C {
@@ -724,7 +727,8 @@ $$
         [WpfTheory, CombinatorialData, Trait(Traits.Feature, Traits.Features.AutomaticCompletion)]
         public void Negative_NoCompletionAfterEndregionPreprocesser(
             bool showCompletionInArgumentLists
-        ) {
+        )
+        {
             SetUpEditor(
                 @"
 #region
@@ -866,7 +870,8 @@ class C
         [WpfTheory, CombinatorialData, Trait(Traits.Feature, Traits.Features.AutomaticCompletion)]
         public void AutoBraceCompleteDoesNotFormatBracePairInInitializers(
             bool showCompletionInArgumentLists
-        ) {
+        )
+        {
             SetUpEditor(
                 @"
 class C 
@@ -894,7 +899,8 @@ class C
         [WpfTheory, CombinatorialData, Trait(Traits.Feature, Traits.Features.AutomaticCompletion)]
         public void AutoBraceCompleteDoesNotFormatBracePairInObjectCreationExpression(
             bool showCompletionInArgumentLists
-        ) {
+        )
+        {
             SetUpEditor(
                 @"
 class C 
@@ -922,7 +928,8 @@ class C
         [WpfTheory, CombinatorialData, Trait(Traits.Feature, Traits.Features.AutomaticCompletion)]
         public void AutoBraceCompleteFormatsBracePairInClassDeclarationAndAutoProperty(
             bool showCompletionInArgumentLists
-        ) {
+        )
+        {
             SetUpEditor(
                 @"
 class $$

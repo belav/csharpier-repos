@@ -30,7 +30,8 @@ namespace System.ComponentModel
             string displayMember,
             string valueMember,
             string lookupMember
-        ) {
+        )
+        {
             DataSource = dataSource;
             DisplayMember = displayMember;
             ValueMember = valueMember;

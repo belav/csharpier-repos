@@ -57,7 +57,8 @@ namespace System.Text.RegularExpressions
             int capsize,
             Hashtable? capnames,
             Span<int> optionSpan
-        ) {
+        )
+        {
             Debug.Assert(pattern != null, "Pattern must be set");
             Debug.Assert(culture != null, "Culture must be set");
 
@@ -128,7 +129,8 @@ namespace System.Text.RegularExpressions
             Hashtable caps,
             int capsize,
             Hashtable capnames
-        ) {
+        )
+        {
             CultureInfo culture =
                 (options & RegexOptions.CultureInvariant) != 0
                     ? CultureInfo.InvariantCulture
@@ -525,7 +527,8 @@ namespace System.Text.RegularExpressions
                                     startpos == Textpos()
                                     || CharsRight() == 0
                                     || RightCharMoveRight() != '}'
-                                ) {
+                                )
+                                {
                                     AddConcatenate();
                                     Textto(startpos - 1);
                                     goto ContinueOuterScan;
@@ -775,7 +778,8 @@ namespace System.Text.RegularExpressions
                             CharsRight() < 2
                             || RightCharMoveRight() != ':'
                             || RightCharMoveRight() != ']'
-                        ) {
+                        )
+                        {
                             Textto(savePos);
                         }
                     }
@@ -829,7 +833,8 @@ namespace System.Text.RegularExpressions
                     && !translatedChar
                     && RightChar() == '['
                     && !firstChar
-                ) {
+                )
+                {
                     // we aren't in a range, and now there is a subtraction.  Usually this happens
                     // only when a subtraction follows a range, like [a-z-[b]]
                     if (!scanOnly)
@@ -888,7 +893,8 @@ namespace System.Text.RegularExpressions
                 CharsRight() == 0
                 || RightChar() != '?'
                 || (RightChar() == '?' && CharsRight() > 1 && RightChar(1) == ')')
-            ) {
+            )
+            {
                 if (UseOptionN() || _ignoreNextParen)
                 {
                     _ignoreNextParen = false;
@@ -991,7 +997,8 @@ namespace System.Text.RegularExpressions
                                     if (
                                         CharsRight() > 0
                                         && !(RightChar() == close || RightChar() == '-')
-                                    ) {
+                                    )
+                                    {
                                         throw MakeException(
                                             RegexParseError.CaptureGroupNameInvalid,
                                             SR.CaptureGroupNameInvalid
@@ -1019,7 +1026,8 @@ namespace System.Text.RegularExpressions
                                     if (
                                         CharsRight() > 0
                                         && !(RightChar() == close || RightChar() == '-')
-                                    ) {
+                                    )
+                                    {
                                         throw MakeException(
                                             RegexParseError.CaptureGroupNameInvalid,
                                             SR.CaptureGroupNameInvalid
@@ -1045,7 +1053,8 @@ namespace System.Text.RegularExpressions
                                     (capnum != -1 || proceed == true)
                                     && CharsRight() > 1
                                     && RightChar() == '-'
-                                ) {
+                                )
+                                {
                                     MoveRight();
                                     ch = RightChar();
 
@@ -1111,7 +1120,8 @@ namespace System.Text.RegularExpressions
                                     (capnum != -1 || uncapnum != -1)
                                     && CharsRight() > 0
                                     && RightCharMoveRight() == close
-                                ) {
+                                )
+                                {
                                     return new RegexNode(
                                         RegexNode.Capture,
                                         _options,
@@ -1167,7 +1177,8 @@ namespace System.Text.RegularExpressions
                                     IsCaptureName(capname)
                                     && CharsRight() > 0
                                     && RightCharMoveRight() == ')'
-                                ) {
+                                )
+                                {
                                     return new RegexNode(
                                         RegexNode.Testref,
                                         _options,
@@ -1209,7 +1220,8 @@ namespace System.Text.RegularExpressions
                                 && rightchar2 == '<'
                                 && RightChar(3) != '!'
                                 && RightChar(3) != '='
-                            ) {
+                            )
+                            {
                                 throw MakeException(
                                     RegexParseError.AlternationHasNamedCapture,
                                     SR.AlternationHasNamedCapture
@@ -1289,7 +1301,8 @@ namespace System.Text.RegularExpressions
                         && RightChar(2) == '#'
                         && RightChar(1) == '?'
                         && RightChar() == '('
-                    ) {
+                    )
+                    {
                         while (CharsRight() > 0 && RightChar() != ')')
                         {
                             MoveRight();
@@ -1320,7 +1333,8 @@ namespace System.Text.RegularExpressions
                         || RightChar(2) != '#'
                         || RightChar(1) != '?'
                         || RightChar() != '('
-                    ) {
+                    )
+                    {
                         return;
                     }
 
@@ -1543,7 +1557,8 @@ namespace System.Text.RegularExpressions
                         if (
                             IsCaptureSlot(newcapnum)
                             && (_caps == null || (int)_caps[newcapnum]! < pos)
-                        ) {
+                        )
+                        {
                             capnum = newcapnum;
                         }
 
@@ -1665,7 +1680,8 @@ namespace System.Text.RegularExpressions
                         if (
                             newcapnum > MaxValueDiv10
                             || (newcapnum == MaxValueDiv10 && digit > MaxValueMod10)
-                        ) {
+                        )
+                        {
                             throw MakeException(
                                 RegexParseError.QuantifierOrCaptureGroupOutOfRange,
                                 SR.QuantifierOrCaptureGroupOutOfRange
@@ -2715,7 +2731,8 @@ namespace System.Text.RegularExpressions
                 if (
                     _group.Type == RegexNode.Testref && _group.ChildCount() > 2
                     || _group.ChildCount() > 3
-                ) {
+                )
+                {
                     throw MakeException(
                         RegexParseError.AlternationHasTooManyConditions,
                         SR.AlternationHasTooManyConditions

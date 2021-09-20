@@ -12,7 +12,8 @@ namespace System.Collections.Tests
     {
         protected PriorityQueue<string, int> CreateSmallPriorityQueue(
             out HashSet<(string, int)> items
-        ) {
+        )
+        {
             items = new HashSet<(string, int)> { ("one", 1), ("two", 2), ("three", 3) };
             var queue = new PriorityQueue<string, int>(items);
 
@@ -264,7 +265,8 @@ namespace System.Collections.Tests
 
         private static int GetUnderlyingBufferCapacity<TPriority, TElement>(
             PriorityQueue<TPriority, TElement> queue
-        ) {
+        )
+        {
             FieldInfo nodesField = queue.GetType()
                 .GetField("_nodes", BindingFlags.NonPublic | BindingFlags.Instance);
             Assert.NotNull(nodesField);
@@ -281,7 +283,8 @@ namespace System.Collections.Tests
         public void PriorityQueue_Enumeration_ValidOnNonModifyingOperation(
             Action<PriorityQueue<int, int>> nonModifyingOperation,
             int count
-        ) {
+        )
+        {
             PriorityQueue<int, int> queue = CreatePriorityQueue(
                 initialCapacity: count,
                 count: count
@@ -296,7 +299,8 @@ namespace System.Collections.Tests
         public void PriorityQueue_Enumeration_InvalidationOnModifyingOperation(
             Action<PriorityQueue<int, int>> modifyingOperation,
             int count
-        ) {
+        )
+        {
             PriorityQueue<int, int> queue = CreatePriorityQueue(
                 initialCapacity: count,
                 count: count

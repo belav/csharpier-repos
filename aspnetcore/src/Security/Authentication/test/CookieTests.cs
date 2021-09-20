@@ -34,7 +34,8 @@ namespace Microsoft.AspNetCore.Authentication.Cookies
         protected override void RegisterAuth(
             AuthenticationBuilder services,
             Action<CookieAuthenticationOptions> configure
-        ) {
+        )
+        {
             services.AddCookie(configure);
         }
 
@@ -290,7 +291,8 @@ namespace Microsoft.AspNetCore.Authentication.Cookies
             CookieSecurePolicy cookieSecurePolicy,
             string requestUri,
             bool shouldBeSecureOnly
-        ) {
+        )
+        {
             using var host = await CreateHost(
                 o =>
                 {
@@ -2185,7 +2187,8 @@ namespace Microsoft.AspNetCore.Authentication.Cookies
             TestServer server,
             string url,
             string cookie
-        ) {
+        )
+        {
             var request = new HttpRequestMessage(HttpMethod.Get, url);
             request.Headers.Add("Cookie", cookie);
 
@@ -2241,7 +2244,8 @@ namespace Microsoft.AspNetCore.Authentication.Cookies
             Action<IServiceCollection> configureServices,
             Func<HttpContext, Task> testpath = null,
             Uri baseAddress = null
-        ) {
+        )
+        {
             var host = new HostBuilder().ConfigureWebHost(
                     builder =>
                         builder.UseTestServer()
@@ -2287,7 +2291,8 @@ namespace Microsoft.AspNetCore.Authentication.Cookies
                                             else if (
                                                 req.Path
                                                 == new PathString("/protected/CustomRedirect")
-                                            ) {
+                                            )
+                                            {
                                                 await context.ChallengeAsync(
                                                     CookieAuthenticationDefaults.AuthenticationScheme,
                                                     new AuthenticationProperties()
@@ -2314,7 +2319,8 @@ namespace Microsoft.AspNetCore.Authentication.Cookies
                                                     new PathString("/me"),
                                                     out remainder
                                                 )
-                                            ) {
+                                            )
+                                            {
                                                 var ticket = await context.AuthenticateAsync(
                                                     remainder.Value.Substring(1)
                                                 );
@@ -2323,7 +2329,8 @@ namespace Microsoft.AspNetCore.Authentication.Cookies
                                             else if (
                                                 req.Path == new PathString("/testpath")
                                                 && testpath != null
-                                            ) {
+                                            )
+                                            {
                                                 await testpath(context);
                                             }
                                             else if (req.Path == new PathString("/checkforerrors"))
@@ -2398,7 +2405,8 @@ namespace Microsoft.AspNetCore.Authentication.Cookies
             TestServer server,
             string uri,
             string cookieHeader = null
-        ) {
+        )
+        {
             var request = new HttpRequestMessage(HttpMethod.Get, uri);
             if (!string.IsNullOrEmpty(cookieHeader))
             {
@@ -2424,7 +2432,8 @@ namespace Microsoft.AspNetCore.Authentication.Cookies
                 transaction.Response.Content != null
                 && transaction.Response.Content.Headers.ContentType != null
                 && transaction.Response.Content.Headers.ContentType.MediaType == "text/xml"
-            ) {
+            )
+            {
                 transaction.ResponseElement = XElement.Parse(transaction.ResponseText);
             }
             return transaction;

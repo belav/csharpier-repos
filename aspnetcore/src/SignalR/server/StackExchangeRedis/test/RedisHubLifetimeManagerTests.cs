@@ -26,7 +26,8 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Tests
             TestRedisServer server,
             MessagePackHubProtocolOptions messagePackOptions = null,
             NewtonsoftJsonHubProtocolOptions jsonOptions = null
-        ) {
+        )
+        {
             var options = new RedisOptions()
             {
                 ConnectionFactory = async (t) =>

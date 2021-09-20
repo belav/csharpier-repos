@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
 
         public RazorAsynchronousOperationListenerWrapper(
             IAsynchronousOperationListener implementation
-        ) {
+        )
+        {
             _implementation = implementation;
         }
 

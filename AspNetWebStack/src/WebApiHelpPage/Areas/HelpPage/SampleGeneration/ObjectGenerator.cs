@@ -82,7 +82,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
                     type == typeof(IList)
                     || type == typeof(IEnumerable)
                     || type == typeof(ICollection)
-                ) {
+                )
+                {
                     return GenerateCollection(
                         typeof(ArrayList),
                         DefaultCollectionSize,
@@ -123,7 +124,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
             Type type,
             int collectionSize,
             Dictionary<Type, object> createdObjectReferences
-        ) {
+        )
+        {
             Type genericTypeDefinition = type.GetGenericTypeDefinition();
             if (genericTypeDefinition == typeof(Nullable<>))
             {
@@ -147,7 +149,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
                     genericTypeDefinition == typeof(IList<>)
                     || genericTypeDefinition == typeof(IEnumerable<>)
                     || genericTypeDefinition == typeof(ICollection<>)
-                ) {
+                )
+                {
                     Type collectionType = typeof(List<>).MakeGenericType(genericArguments);
                     return GenerateCollection(
                         collectionType,
@@ -203,7 +206,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
         private static object GenerateTuple(
             Type type,
             Dictionary<Type, object> createdObjectReferences
-        ) {
+        )
+        {
             Type[] genericArgs = type.GetGenericArguments();
             object[] parameterValues = new object[genericArgs.Length];
             bool failedToCreateTuple = true;
@@ -239,7 +243,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
         private static object GenerateKeyValuePair(
             Type keyValuePairType,
             Dictionary<Type, object> createdObjectReferences
-        ) {
+        )
+        {
             Type[] genericArgs = keyValuePairType.GetGenericArguments();
             Type typeK = genericArgs[0];
             Type typeV = genericArgs[1];
@@ -259,7 +264,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
             Type arrayType,
             int size,
             Dictionary<Type, object> createdObjectReferences
-        ) {
+        )
+        {
             Type type = arrayType.GetElementType();
             Array result = Array.CreateInstance(type, size);
             bool areAllElementsNull = true;
@@ -283,7 +289,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
             Type dictionaryType,
             int size,
             Dictionary<Type, object> createdObjectReferences
-        ) {
+        )
+        {
             Type typeK = typeof(object);
             Type typeV = typeof(object);
             if (dictionaryType.IsGenericType)
@@ -336,7 +343,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
             Type queryableType,
             int size,
             Dictionary<Type, object> createdObjectReferences
-        ) {
+        )
+        {
             bool isGeneric = queryableType.IsGenericType;
             object list;
             if (isGeneric)
@@ -371,7 +379,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
             Type collectionType,
             int size,
             Dictionary<Type, object> createdObjectReferences
-        ) {
+        )
+        {
             Type type = collectionType.IsGenericType
                 ? collectionType.GetGenericArguments()[0]
                 : typeof(object);
@@ -397,7 +406,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
         private static object GenerateNullable(
             Type nullableType,
             Dictionary<Type, object> createdObjectReferences
-        ) {
+        )
+        {
             Type type = nullableType.GetGenericArguments()[0];
             ObjectGenerator objectGenerator = new ObjectGenerator();
             return objectGenerator.GenerateObject(type, createdObjectReferences);
@@ -406,7 +416,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
         private static object GenerateComplexObject(
             Type type,
             Dictionary<Type, object> createdObjectReferences
-        ) {
+        )
+        {
             object result = null;
 
             if (createdObjectReferences.TryGetValue(type, out result))
@@ -440,7 +451,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
             Type type,
             object obj,
             Dictionary<Type, object> createdObjectReferences
-        ) {
+        )
+        {
             PropertyInfo[] properties = type.GetProperties(
                 BindingFlags.Public | BindingFlags.Instance
             );
@@ -462,7 +474,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
             Type type,
             object obj,
             Dictionary<Type, object> createdObjectReferences
-        ) {
+        )
+        {
             FieldInfo[] fields = type.GetFields(BindingFlags.Public | BindingFlags.Instance);
             ObjectGenerator objectGenerator = new ObjectGenerator();
             foreach (FieldInfo field in fields)

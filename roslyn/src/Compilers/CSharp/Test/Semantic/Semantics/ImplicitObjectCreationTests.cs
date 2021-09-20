@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Semantics
             string source,
             CSharpCompilationOptions options = null,
             IEnumerable<MetadataReference> references = null
-        ) {
+        )
+        {
             return CSharpTestBase.CreateCompilation(
                 source,
                 options: options,
@@ -84,7 +85,8 @@ class C
                 string convertedType,
                 string symbol,
                 ConversionKind conversionKind
-            ) {
+            )
+            {
                 var @new = nodes[index];
                 Assert.Equal(type, model.GetTypeInfo(@new).Type.ToTestDisplayString());
                 Assert.Equal(
@@ -194,7 +196,8 @@ class C
                 string convertedType,
                 string symbol,
                 ConversionKind conversionKind
-            ) {
+            )
+            {
                 var @new = nodes[index];
                 Assert.Equal(type, model.GetTypeInfo(@new).Type.ToTestDisplayString());
                 Assert.Equal(
@@ -259,7 +262,8 @@ class C
                 string convertedType,
                 string symbol,
                 ConversionKind conversionKind
-            ) {
+            )
+            {
                 var @new = nodes[index];
                 Assert.Equal(type, model.GetTypeInfo(@new).Type.ToTestDisplayString());
                 Assert.Equal(
@@ -363,7 +367,8 @@ class C
                 string symbol,
                 string constant,
                 ConversionKind conversionKind
-            ) {
+            )
+            {
                 var @new = nodes[index];
                 Assert.Equal(type, model.GetTypeInfo(@new).Type.ToTestDisplayString());
                 Assert.Equal(
@@ -2082,7 +2087,8 @@ class C
                 string convertedType,
                 string symbol,
                 ConversionKind conversionKind
-            ) {
+            )
+            {
                 var invocation = nodes[index];
                 Assert.Equal(expression, invocation.ToString());
                 Assert.Equal(type, model.GetTypeInfo(invocation).Type.ToTestDisplayString());
@@ -3453,7 +3459,8 @@ class C
                 string convertedType,
                 string symbol,
                 ConversionKind conversionKind
-            ) {
+            )
+            {
                 var @new = nodes[index];
                 Assert.Equal(type, model.GetTypeInfo(@new).Type.ToTestDisplayString());
                 Assert.Equal(

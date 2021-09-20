@@ -39,14 +39,15 @@ namespace System.Security.Cryptography
             byte[] salt,
             int iterations,
             HashAlgorithmName hashAlgorithm
-        ) : this(
-            password,
-            salt,
-            iterations,
-            hashAlgorithm,
-            clearPassword: false,
-            requireMinimumSaltLength: true
-        ) { }
+        )
+            : this(
+                password,
+                salt,
+                iterations,
+                hashAlgorithm,
+                clearPassword: false,
+                requireMinimumSaltLength: true
+            ) { }
 
         public Rfc2898DeriveBytes(string password, byte[] salt) : this(password, salt, 1000) { }
 
@@ -58,14 +59,15 @@ namespace System.Security.Cryptography
             byte[] salt,
             int iterations,
             HashAlgorithmName hashAlgorithm
-        ) : this(
-            Encoding.UTF8.GetBytes(password),
-            salt,
-            iterations,
-            hashAlgorithm,
-            clearPassword: true,
-            requireMinimumSaltLength: true
-        ) { }
+        )
+            : this(
+                Encoding.UTF8.GetBytes(password),
+                salt,
+                iterations,
+                hashAlgorithm,
+                clearPassword: true,
+                requireMinimumSaltLength: true
+            ) { }
 
         public Rfc2898DeriveBytes(string password, int saltSize) : this(password, saltSize, 1000)
         { }
@@ -78,7 +80,8 @@ namespace System.Security.Cryptography
             int saltSize,
             int iterations,
             HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             if (saltSize < 0)
                 throw new ArgumentOutOfRangeException(
                     nameof(saltSize),
@@ -116,7 +119,8 @@ namespace System.Security.Cryptography
             HashAlgorithmName hashAlgorithm,
             bool clearPassword,
             bool requireMinimumSaltLength
-        ) {
+        )
+        {
             if (salt is null)
                 throw new ArgumentNullException(nameof(salt));
             if (requireMinimumSaltLength && salt.Length < MinimumSaltSize)
@@ -328,7 +332,8 @@ namespace System.Security.Cryptography
             if (
                 !_hmac.TryComputeHash(_salt, uiSpan, out int bytesWritten)
                 || bytesWritten != _blockSize
-            ) {
+            )
+            {
                 throw new CryptographicException();
             }
 
@@ -339,7 +344,8 @@ namespace System.Security.Cryptography
                 if (
                     !_hmac.TryComputeHash(uiSpan, uiSpan, out bytesWritten)
                     || bytesWritten != _blockSize
-                ) {
+                )
+                {
                     throw new CryptographicException();
                 }
 

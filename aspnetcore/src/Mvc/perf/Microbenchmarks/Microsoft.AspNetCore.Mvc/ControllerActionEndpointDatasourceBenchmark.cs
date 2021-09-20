@@ -114,7 +114,8 @@ namespace Microsoft.AspNetCore.Mvc.Microbenchmarks
 
         private ControllerActionEndpointDataSource CreateDataSource(
             IActionDescriptorCollectionProvider actionDescriptorCollectionProvider
-        ) {
+        )
+        {
             var dataSource = new ControllerActionEndpointDataSource(
                 new ControllerActionEndpointDataSourceIdProvider(),
                 actionDescriptorCollectionProvider,
@@ -133,7 +134,8 @@ namespace Microsoft.AspNetCore.Mvc.Microbenchmarks
             public override RoutePattern SubstituteRequiredValues(
                 RoutePattern original,
                 object requiredValues
-            ) {
+            )
+            {
                 return original;
             }
         }
@@ -153,14 +155,16 @@ namespace Microsoft.AspNetCore.Mvc.Microbenchmarks
             public override IParameterPolicy Create(
                 RoutePatternParameterPart parameter,
                 string inlineText
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             public override IParameterPolicy Create(
                 RoutePatternParameterPart parameter,
                 IParameterPolicy parameterPolicy
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }

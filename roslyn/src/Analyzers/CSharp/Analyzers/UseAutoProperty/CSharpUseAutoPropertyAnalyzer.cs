@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseAutoProperty
             SemanticModelAnalysisContext context,
             SyntaxList<MemberDeclarationSyntax> members,
             List<AnalysisResult> analysisResults
-        ) {
+        )
+        {
             foreach (var memberDeclaration in members)
             {
                 AnalyzeMemberDeclaration(context, memberDeclaration, analysisResults);
@@ -52,13 +53,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UseAutoProperty
             SemanticModelAnalysisContext context,
             MemberDeclarationSyntax member,
             List<AnalysisResult> analysisResults
-        ) {
+        )
+        {
             if (
                 member.IsKind(
                     SyntaxKind.NamespaceDeclaration,
                     out NamespaceDeclarationSyntax? namespaceDeclaration
                 )
-            ) {
+            )
+            {
                 AnalyzeMembers(context, namespaceDeclaration.Members, analysisResults);
             }
             else if (
@@ -68,7 +71,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseAutoProperty
                 )
                 || member.IsKind(SyntaxKind.StructDeclaration, out typeDeclaration)
                 || member.IsKind(SyntaxKind.RecordDeclaration, out typeDeclaration)
-            ) {
+            )
+            {
                 // If we have a class or struct, recurse inwards.
                 AnalyzeMembers(context, typeDeclaration.Members, analysisResults);
             }
@@ -77,7 +81,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseAutoProperty
                     SyntaxKind.PropertyDeclaration,
                     out PropertyDeclarationSyntax? propertyDeclaration
                 )
-            ) {
+            )
+            {
                 AnalyzeProperty(context, propertyDeclaration, analysisResults);
             }
         }
@@ -87,7 +92,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseAutoProperty
             HashSet<IFieldSymbol> ineligibleFields,
             Compilation compilation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var groups = analysisResults.Select(
                     r =>
                         (
@@ -105,7 +111,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseAutoProperty
                     foreach (
                         var argument in typeDeclaration.DescendantNodesAndSelf()
                             .OfType<ArgumentSyntax>()
-                    ) {
+                    )
+                    {
                         // An argument will disqualify a field if that field is used in a ref/out position.
                         // We can't change such field references to be property references in C#.
                         if (argument.RefKindKeyword.Kind() != SyntaxKind.None)
@@ -122,7 +129,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseAutoProperty
                     foreach (
                         var refExpression in typeDeclaration.DescendantNodesAndSelf()
                             .OfType<RefExpressionSyntax>()
-                    ) {
+                    )
+                    {
                         AddIneligibleFields(
                             semanticModel,
                             refExpression.Expression,
@@ -137,7 +145,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseAutoProperty
         protected override ExpressionSyntax? GetFieldInitializer(
             VariableDeclaratorSyntax variable,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return variable.Initializer?.Value;
         }
 
@@ -146,7 +155,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseAutoProperty
             ExpressionSyntax expression,
             HashSet<IFieldSymbol> ineligibleFields,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var symbolInfo = semanticModel.GetSymbolInfo(expression, cancellationToken);
             AddIneligibleField(symbolInfo.Symbol);
             foreach (var symbol in symbolInfo.CandidateSymbols)
@@ -170,7 +180,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseAutoProperty
                     SyntaxKind.SimpleMemberAccessExpression,
                     out MemberAccessExpressionSyntax? memberAccessExpression
                 )
-            ) {
+            )
+            {
                 return memberAccessExpression.Expression.Kind() == SyntaxKind.ThisExpression
                     && memberAccessExpression.Name.Kind() == SyntaxKind.IdentifierName;
             }
@@ -185,7 +196,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseAutoProperty
         protected override ExpressionSyntax? GetGetterExpression(
             IMethodSymbol getMethod,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Getter has to be of the form:
             // 1. Getter can be defined as accessor or expression bodied lambda
             //     get { return field; }
@@ -206,7 +218,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseAutoProperty
         private static ExpressionSyntax? GetGetterExpressionFromSymbol(
             IMethodSymbol getMethod,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var declaration = getMethod.DeclaringSyntaxReferences[0].GetSyntax(cancellationToken);
             switch (declaration)
             {
@@ -242,7 +255,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseAutoProperty
             IMethodSymbol setMethod,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Setter has to be of the form:
             //
             //     set { field = value; }
@@ -260,7 +274,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseAutoProperty
                     assignmentExpression.Right.Kind() == SyntaxKind.IdentifierName
                     && ((IdentifierNameSyntax)assignmentExpression.Right).Identifier.ValueText
                         == "value"
-                ) {
+                )
+                {
                     return CheckExpressionSyntactically(assignmentExpression.Left)
                       ? assignmentExpression.Left
                       : null;
@@ -279,7 +294,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseAutoProperty
         protected override SyntaxNode GetFieldNode(
             FieldDeclarationSyntax fieldDeclaration,
             VariableDeclaratorSyntax variableDeclarator
-        ) {
+        )
+        {
             return fieldDeclaration.Declaration.Variables.Count == 1
               ? fieldDeclaration
               : (SyntaxNode)variableDeclarator;

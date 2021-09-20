@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal override BoundStatement BindLockStatementParts(
             BindingDiagnosticBag diagnostics,
             Binder originalBinder
-        ) {
+        )
+        {
             // Allow method groups during binding and then rule them out when we check that the expression has
             // a reference type.
             ExpressionSyntax exprSyntax = TargetExpressionSyntax;
@@ -50,7 +51,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             else if (
                 !exprType.IsReferenceType
                 && (exprType.IsValueType || Compilation.FeatureStrictEnabled)
-            ) {
+            )
+            {
                 Error(diagnostics, ErrorCode.ERR_LockNeedsReference, exprSyntax, exprType);
                 hasErrors = true;
             }

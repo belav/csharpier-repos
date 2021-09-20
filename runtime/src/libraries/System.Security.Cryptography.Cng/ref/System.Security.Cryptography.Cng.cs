@@ -84,7 +84,8 @@ namespace System.Security.Cryptography
         public override System.Security.Cryptography.ICryptoTransform CreateDecryptor(
             byte[] rgbKey,
             byte[]? rgbIV
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Security.Cryptography.ICryptoTransform CreateEncryptor()
@@ -94,7 +95,8 @@ namespace System.Security.Cryptography
         public override System.Security.Cryptography.ICryptoTransform CreateEncryptor(
             byte[] rgbKey,
             byte[]? rgbIV
-        ) {
+        )
+        {
             throw null;
         }
         protected override void Dispose(bool disposing) { }
@@ -167,13 +169,15 @@ namespace System.Security.Cryptography
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 System.Security.Cryptography.CngAlgorithm? other
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -183,13 +187,15 @@ namespace System.Security.Cryptography
         public static bool operator ==(
             System.Security.Cryptography.CngAlgorithm? left,
             System.Security.Cryptography.CngAlgorithm? right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Security.Cryptography.CngAlgorithm? left,
             System.Security.Cryptography.CngAlgorithm? right
-        ) {
+        )
+        {
             throw null;
         }
         public override string ToString()
@@ -227,13 +233,15 @@ namespace System.Security.Cryptography
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 System.Security.Cryptography.CngAlgorithmGroup? other
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -243,13 +251,15 @@ namespace System.Security.Cryptography
         public static bool operator ==(
             System.Security.Cryptography.CngAlgorithmGroup? left,
             System.Security.Cryptography.CngAlgorithmGroup? right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Security.Cryptography.CngAlgorithmGroup? left,
             System.Security.Cryptography.CngAlgorithmGroup? right
-        ) {
+        )
+        {
             throw null;
         }
         public override string ToString()
@@ -328,20 +338,23 @@ namespace System.Security.Cryptography
         }
         public static System.Security.Cryptography.CngKey Create(
             System.Security.Cryptography.CngAlgorithm algorithm
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Security.Cryptography.CngKey Create(
             System.Security.Cryptography.CngAlgorithm algorithm,
             string? keyName
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Security.Cryptography.CngKey Create(
             System.Security.Cryptography.CngAlgorithm algorithm,
             string? keyName,
             System.Security.Cryptography.CngKeyCreationParameters? creationParameters
-        ) {
+        )
+        {
             throw null;
         }
         public void Delete() { }
@@ -358,7 +371,8 @@ namespace System.Security.Cryptography
             string keyName,
             System.Security.Cryptography.CngProvider provider,
             System.Security.Cryptography.CngKeyOpenOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public byte[] Export(System.Security.Cryptography.CngKeyBlobFormat format)
@@ -368,32 +382,37 @@ namespace System.Security.Cryptography
         public System.Security.Cryptography.CngProperty GetProperty(
             string name,
             System.Security.Cryptography.CngPropertyOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public bool HasProperty(
             string name,
             System.Security.Cryptography.CngPropertyOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Security.Cryptography.CngKey Import(
             byte[] keyBlob,
             System.Security.Cryptography.CngKeyBlobFormat format
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Security.Cryptography.CngKey Import(
             byte[] keyBlob,
             System.Security.Cryptography.CngKeyBlobFormat format,
             System.Security.Cryptography.CngProvider provider
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Security.Cryptography.CngKey Open(
             Microsoft.Win32.SafeHandles.SafeNCryptKeyHandle keyHandle,
             System.Security.Cryptography.CngKeyHandleOpenOptions keyHandleOpenOptions
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Security.Cryptography.CngKey Open(string keyName)
@@ -403,14 +422,16 @@ namespace System.Security.Cryptography
         public static System.Security.Cryptography.CngKey Open(
             string keyName,
             System.Security.Cryptography.CngProvider provider
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Security.Cryptography.CngKey Open(
             string keyName,
             System.Security.Cryptography.CngProvider provider,
             System.Security.Cryptography.CngKeyOpenOptions openOptions
-        ) {
+        )
+        {
             throw null;
         }
         public void SetProperty(System.Security.Cryptography.CngProperty property) { }
@@ -457,13 +478,15 @@ namespace System.Security.Cryptography
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 System.Security.Cryptography.CngKeyBlobFormat? other
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -473,13 +496,15 @@ namespace System.Security.Cryptography
         public static bool operator ==(
             System.Security.Cryptography.CngKeyBlobFormat? left,
             System.Security.Cryptography.CngKeyBlobFormat? right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Security.Cryptography.CngKeyBlobFormat? left,
             System.Security.Cryptography.CngKeyBlobFormat? right
-        ) {
+        )
+        {
             throw null;
         }
         public override string ToString()
@@ -563,7 +588,8 @@ namespace System.Security.Cryptography
             string name,
             byte[]? value,
             System.Security.Cryptography.CngPropertyOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public readonly string Name
@@ -576,7 +602,8 @@ namespace System.Security.Cryptography
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(System.Security.Cryptography.CngProperty other)
@@ -594,13 +621,15 @@ namespace System.Security.Cryptography
         public static bool operator ==(
             System.Security.Cryptography.CngProperty left,
             System.Security.Cryptography.CngProperty right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Security.Cryptography.CngProperty left,
             System.Security.Cryptography.CngProperty right
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -638,13 +667,15 @@ namespace System.Security.Cryptography
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 System.Security.Cryptography.CngProvider? other
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -654,13 +685,15 @@ namespace System.Security.Cryptography
         public static bool operator ==(
             System.Security.Cryptography.CngProvider? left,
             System.Security.Cryptography.CngProvider? right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Security.Cryptography.CngProvider? left,
             System.Security.Cryptography.CngProvider? right
-        ) {
+        )
+        {
             throw null;
         }
         public override string ToString()
@@ -749,7 +782,8 @@ namespace System.Security.Cryptography
         protected override void Dispose(bool disposing) { }
         public override System.Security.Cryptography.DSAParameters ExportParameters(
             bool includePrivateParameters
-        ) {
+        )
+        {
             throw null;
         }
 #if FEATURE_DSA_HASHDATA
@@ -758,13 +792,15 @@ namespace System.Security.Cryptography
             int offset,
             int count,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             throw null;
         }
         protected override byte[] HashData(
             System.IO.Stream data,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             throw null;
         }
 #endif
@@ -842,7 +878,8 @@ namespace System.Security.Cryptography
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             byte[]? secretPrepend,
             byte[]? secretAppend
-        ) {
+        )
+        {
             throw null;
         }
         public override byte[] DeriveKeyFromHmac(
@@ -851,7 +888,8 @@ namespace System.Security.Cryptography
             byte[]? hmacKey,
             byte[]? secretPrepend,
             byte[]? secretAppend
-        ) {
+        )
+        {
             throw null;
         }
 #endif
@@ -861,7 +899,8 @@ namespace System.Security.Cryptography
         }
         public override byte[] DeriveKeyMaterial(
             System.Security.Cryptography.ECDiffieHellmanPublicKey otherPartyPublicKey
-        ) {
+        )
+        {
             throw null;
         }
 #if FEATURE_ECDH_DERIVEFROM
@@ -869,30 +908,35 @@ namespace System.Security.Cryptography
             System.Security.Cryptography.ECDiffieHellmanPublicKey otherPartyPublicKey,
             byte[] prfLabel,
             byte[] prfSeed
-        ) {
+        )
+        {
             throw null;
         }
 #endif
         public Microsoft.Win32.SafeHandles.SafeNCryptSecretHandle DeriveSecretAgreementHandle(
             System.Security.Cryptography.CngKey otherPartyPublicKey
-        ) {
+        )
+        {
             throw null;
         }
         public Microsoft.Win32.SafeHandles.SafeNCryptSecretHandle DeriveSecretAgreementHandle(
             System.Security.Cryptography.ECDiffieHellmanPublicKey otherPartyPublicKey
-        ) {
+        )
+        {
             throw null;
         }
         protected override void Dispose(bool disposing) { }
 #if FEATURE_ECPARAMETERS
         public override System.Security.Cryptography.ECParameters ExportExplicitParameters(
             bool includePrivateParameters
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Security.Cryptography.ECParameters ExportParameters(
             bool includePrivateParameters
-        ) {
+        )
+        {
             throw null;
         }
 #endif
@@ -934,12 +978,14 @@ namespace System.Security.Cryptography
         public static System.Security.Cryptography.ECDiffieHellmanPublicKey FromByteArray(
             byte[] publicKeyBlob,
             System.Security.Cryptography.CngKeyBlobFormat format
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Security.Cryptography.ECDiffieHellmanCngPublicKey FromXmlString(
             string xml
-        ) {
+        )
+        {
             throw null;
         }
         public System.Security.Cryptography.CngKey Import()
@@ -987,12 +1033,14 @@ namespace System.Security.Cryptography
 #if FEATURE_ECPARAMETERS // types missing from .NET Framework and net462 targeting pack
         public override System.Security.Cryptography.ECParameters ExportExplicitParameters(
             bool includePrivateParameters
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Security.Cryptography.ECParameters ExportParameters(
             bool includePrivateParameters
-        ) {
+        )
+        {
             throw null;
         }
 #endif
@@ -1008,13 +1056,15 @@ namespace System.Security.Cryptography
             int offset,
             int count,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             throw null;
         }
         protected override byte[] HashData(
             System.IO.Stream data,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             throw null;
         }
 #if FEATURE_ECPARAMETERS // types missing from .NET Framework and net462 targeting pack
@@ -1079,19 +1129,22 @@ namespace System.Security.Cryptography
         public override byte[] Decrypt(
             byte[] data,
             System.Security.Cryptography.RSAEncryptionPadding padding
-        ) {
+        )
+        {
             throw null;
         }
         protected override void Dispose(bool disposing) { }
         public override byte[] Encrypt(
             byte[] data,
             System.Security.Cryptography.RSAEncryptionPadding padding
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Security.Cryptography.RSAParameters ExportParameters(
             bool includePrivateParameters
-        ) {
+        )
+        {
             throw null;
         }
         protected override byte[] HashData(
@@ -1099,13 +1152,15 @@ namespace System.Security.Cryptography
             int offset,
             int count,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             throw null;
         }
         protected override byte[] HashData(
             System.IO.Stream data,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             throw null;
         }
         public override void ImportParameters(
@@ -1115,7 +1170,8 @@ namespace System.Security.Cryptography
             byte[] hash,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             System.Security.Cryptography.RSASignaturePadding padding
-        ) {
+        )
+        {
             throw null;
         }
         public override bool VerifyHash(
@@ -1123,7 +1179,8 @@ namespace System.Security.Cryptography
             byte[] signature,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             System.Security.Cryptography.RSASignaturePadding padding
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1154,7 +1211,8 @@ namespace System.Security.Cryptography
         public override System.Security.Cryptography.ICryptoTransform CreateDecryptor(
             byte[] rgbKey,
             byte[]? rgbIV
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Security.Cryptography.ICryptoTransform CreateEncryptor()
@@ -1164,7 +1222,8 @@ namespace System.Security.Cryptography
         public override System.Security.Cryptography.ICryptoTransform CreateEncryptor(
             byte[] rgbKey,
             byte[]? rgbIV
-        ) {
+        )
+        {
             throw null;
         }
         protected override void Dispose(bool disposing) { }

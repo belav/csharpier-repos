@@ -59,7 +59,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                         var propertyIndex = 0;
                         propertyIndex < foreignKey.Properties.Count;
                         propertyIndex++
-                    ) {
+                    )
+                    {
                         if (currentProperty == foreignKey.Properties[propertyIndex])
                         {
                             var nextProperty = foreignKey.PrincipalKey.Properties[propertyIndex];

@@ -167,7 +167,8 @@ namespace System
             private static void SerializeSubstitute(
                 string text,
                 ref ValueStringBuilder serializedText
-            ) {
+            )
+            {
                 foreach (char c in text)
                 {
                     if (c == Esc || c == Lhs || c == Rhs || c == Sep)
@@ -184,7 +185,8 @@ namespace System
             private static void SerializeTransitionTime(
                 TransitionTime time,
                 ref ValueStringBuilder serializedText
-            ) {
+            )
+            {
                 serializedText.Append(Lhs);
                 serializedText.Append(time.IsFixedDateRule ? '1' : '0');
                 serializedText.Append(Sep);
@@ -247,10 +249,12 @@ namespace System
             /// </summary>
             private void SkipVersionNextDataFields(
                 int depth /* starting depth in the nested brackets ('[', ']')*/
-            ) {
+            )
+            {
                 if (
                     _currentTokenStartIndex < 0 || _currentTokenStartIndex >= _serializedText.Length
-                ) {
+                )
+                {
                     throw new SerializationException(SR.Serialization_InvalidData);
                 }
                 State tokenState = State.NotEscaped;
@@ -319,7 +323,8 @@ namespace System
                 }
                 if (
                     _currentTokenStartIndex < 0 || _currentTokenStartIndex >= _serializedText.Length
-                ) {
+                )
+                {
                     throw new SerializationException(SR.Serialization_InvalidData);
                 }
                 State tokenState = State.NotEscaped;
@@ -400,7 +405,8 @@ namespace System
                         DateTimeStyles.None,
                         out DateTime time
                     )
-                ) {
+                )
+                {
                     throw new SerializationException(SR.Serialization_InvalidData);
                 }
                 return time;
@@ -436,7 +442,8 @@ namespace System
                         CultureInfo.InvariantCulture,
                         out int value
                     )
-                ) {
+                )
+                {
                     throw new SerializationException(SR.Serialization_InvalidData);
                 }
                 return value;
@@ -467,7 +474,8 @@ namespace System
                 }
                 if (
                     _currentTokenStartIndex < 0 || _currentTokenStartIndex >= _serializedText.Length
-                ) {
+                )
+                {
                     throw new SerializationException(SR.Serialization_InvalidData);
                 }
 
@@ -487,7 +495,8 @@ namespace System
 
                 if (
                     _currentTokenStartIndex < 0 || _currentTokenStartIndex >= _serializedText.Length
-                ) {
+                )
+                {
                     throw new SerializationException(SR.Serialization_InvalidData);
                 }
 
@@ -527,7 +536,8 @@ namespace System
                     )
                     || _serializedText[_currentTokenStartIndex] == '-'
                     || _serializedText[_currentTokenStartIndex] == '+'
-                ) {
+                )
+                {
                     baseUtcOffsetDelta = GetNextTimeSpanValue();
                 }
 
@@ -535,7 +545,8 @@ namespace System
                 if (
                     _serializedText[_currentTokenStartIndex] >= '0'
                     && _serializedText[_currentTokenStartIndex] <= '1'
-                ) {
+                )
+                {
                     noDaylightTransitions = GetNextInt32Value();
                 }
 
@@ -603,7 +614,8 @@ namespace System
                         _currentTokenStartIndex < _serializedText.Length
                         && _serializedText[_currentTokenStartIndex] == Rhs
                     )
-                ) {
+                )
+                {
                     //
                     // we are at the end of the line or we are starting at a "]" character
                     //
@@ -612,7 +624,8 @@ namespace System
 
                 if (
                     _currentTokenStartIndex < 0 || _currentTokenStartIndex >= _serializedText.Length
-                ) {
+                )
+                {
                     throw new SerializationException(SR.Serialization_InvalidData);
                 }
 
@@ -705,7 +718,8 @@ namespace System
                 if (
                     _currentTokenStartIndex < _serializedText.Length
                     && _serializedText[_currentTokenStartIndex] == Sep
-                ) {
+                )
+                {
                     // handle the case where we ended on a ";"
                     _currentTokenStartIndex++;
                     sepFound = true;

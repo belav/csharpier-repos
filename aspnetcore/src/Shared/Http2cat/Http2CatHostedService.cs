@@ -33,7 +33,8 @@ namespace Microsoft.AspNetCore.Http2Cat
             ILogger<Http2CatHostedService> logger,
             IOptions<Http2CatOptions> options,
             IHostApplicationLifetime hostApplicationLifetime
-        ) {
+        )
+        {
             _connectionFactory = connectionFactory;
             _logger = logger;
             HostApplicationLifetime = hostApplicationLifetime;

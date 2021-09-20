@@ -27,7 +27,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             EventId eventId,
             LogLevel level,
             string eventIdCode
-        ) {
+        )
+        {
             Check.NotNull(loggingOptions, nameof(loggingOptions));
             Check.NotEmpty(eventIdCode, nameof(eventIdCode));
 
@@ -116,7 +117,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                 TState state,
                 Exception? exception,
                 Func<TState, Exception?, string> formatter
-            ) {
+            )
+            {
                 Message = formatter(state, exception);
             }
 

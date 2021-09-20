@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         public static bool IsTypeInferred(
             this VariableDeclaratorSyntax variable,
             SemanticModel semanticModel
-        ) {
+        )
+        {
             var variableTypeName = variable.GetVariableType();
             if (variableTypeName == null)
             {

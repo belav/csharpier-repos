@@ -66,17 +66,18 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             bool hasAllAnalyzers,
             bool concurrentAnalysis,
             bool categorizeDiagnostics
-        ) : this(
-            compilation.SyntaxTrees,
-            analyzerOptions?.AdditionalFiles ?? ImmutableArray<AdditionalText>.Empty,
-            analyzers,
-            isPartialAnalysis: !hasAllAnalyzers,
-            filterFile: null,
-            filterSpanOpt: null,
-            isSyntacticSingleFileAnalysis: false,
-            concurrentAnalysis: concurrentAnalysis,
-            categorizeDiagnostics: categorizeDiagnostics
-        ) { }
+        )
+            : this(
+                compilation.SyntaxTrees,
+                analyzerOptions?.AdditionalFiles ?? ImmutableArray<AdditionalText>.Empty,
+                analyzers,
+                isPartialAnalysis: !hasAllAnalyzers,
+                filterFile: null,
+                filterSpanOpt: null,
+                isSyntacticSingleFileAnalysis: false,
+                concurrentAnalysis: concurrentAnalysis,
+                categorizeDiagnostics: categorizeDiagnostics
+            ) { }
 
         public AnalysisScope(
             ImmutableArray<DiagnosticAnalyzer> analyzers,
@@ -85,21 +86,22 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             bool isSyntacticSingleFileAnalysis,
             bool concurrentAnalysis,
             bool categorizeDiagnostics
-        ) : this(
-            filterFile.SourceTree != null
-              ? SpecializedCollections.SingletonEnumerable(filterFile.SourceTree)
-              : SpecializedCollections.EmptyEnumerable<SyntaxTree>(),
-            filterFile.AdditionalFile != null
-              ? SpecializedCollections.SingletonEnumerable(filterFile.AdditionalFile)
-              : SpecializedCollections.EmptyEnumerable<AdditionalText>(),
-            analyzers,
-            isPartialAnalysis: true,
-            filterFile,
-            filterSpan,
-            isSyntacticSingleFileAnalysis,
-            concurrentAnalysis,
-            categorizeDiagnostics
-        ) { }
+        )
+            : this(
+                filterFile.SourceTree != null
+                  ? SpecializedCollections.SingletonEnumerable(filterFile.SourceTree)
+                  : SpecializedCollections.EmptyEnumerable<SyntaxTree>(),
+                filterFile.AdditionalFile != null
+                  ? SpecializedCollections.SingletonEnumerable(filterFile.AdditionalFile)
+                  : SpecializedCollections.EmptyEnumerable<AdditionalText>(),
+                analyzers,
+                isPartialAnalysis: true,
+                filterFile,
+                filterSpan,
+                isSyntacticSingleFileAnalysis,
+                concurrentAnalysis,
+                categorizeDiagnostics
+            ) { }
 
         private AnalysisScope(
             IEnumerable<SyntaxTree> trees,
@@ -111,7 +113,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             bool isSyntacticSingleFileAnalysis,
             bool concurrentAnalysis,
             bool categorizeDiagnostics
-        ) {
+        )
+        {
             Debug.Assert(isPartialAnalysis || FilterFileOpt == null);
             Debug.Assert(isPartialAnalysis || FilterSpanOpt == null);
             Debug.Assert(isPartialAnalysis || !isSyntacticSingleFileAnalysis);
@@ -146,7 +149,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public AnalysisScope WithAnalyzers(
             ImmutableArray<DiagnosticAnalyzer> analyzers,
             bool hasAllAnalyzers
-        ) {
+        )
+        {
             var isPartialAnalysis = IsSingleFileAnalysis || !hasAllAnalyzers;
             return new AnalysisScope(
                 SyntaxTrees,
@@ -207,7 +211,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 if (
                     FilterFileOpt.Value.SourceTree == location.SourceTree
                     && ShouldInclude(location.SourceSpan)
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -262,7 +267,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                         externalFileLocation.FilePath,
                         FilterFileOpt.Value.AdditionalFile.Path
                     )
-                ) {
+                )
+                {
                     return false;
                 }
             }

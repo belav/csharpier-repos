@@ -29,7 +29,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 Stopwatch stopwatch = new Stopwatch();
                 int count = 0;
                 int pinChangedCount = 0;
@@ -44,7 +45,8 @@ namespace System.IO.Ports.Tests
                 while (
                     count % 100 != 0
                     || stopwatch.ElapsedMilliseconds < s_testDuration.TotalMilliseconds
-                ) {
+                )
+                {
                     com1.Open();
 
                     for (int j = 0; j < 10; ++j)
@@ -73,7 +75,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 Stopwatch stopwatch = new Stopwatch();
                 int dataReceivedCount = 0;
                 int count = 0;
@@ -88,7 +91,8 @@ namespace System.IO.Ports.Tests
                 while (
                     count % 100 != 0
                     || stopwatch.ElapsedMilliseconds < s_testDuration.TotalMilliseconds
-                ) {
+                )
+                {
                     com1.Open();
 
                     for (int j = 0; j < 10; ++j)
@@ -120,7 +124,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 byte[] frameErrorBytes = new byte[1];
                 Stopwatch stopwatch = new Stopwatch();
                 int errorReceivedCount = 0;
@@ -142,7 +147,8 @@ namespace System.IO.Ports.Tests
                 while (
                     count % 100 != 0
                     || stopwatch.ElapsedMilliseconds < s_testDuration.TotalMilliseconds
-                ) {
+                )
+                {
                     com1.Open();
 
                     for (int j = 0; j < 10; ++j)

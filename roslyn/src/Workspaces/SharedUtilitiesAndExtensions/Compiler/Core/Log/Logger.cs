@@ -88,7 +88,8 @@ namespace Microsoft.CodeAnalysis.Internal.Log
             FunctionId functionId,
             Func<TArg, string> messageGetter,
             TArg arg
-        ) {
+        )
+        {
             var logger = GetLogger();
             if (logger == null)
             {
@@ -114,7 +115,8 @@ namespace Microsoft.CodeAnalysis.Internal.Log
             Func<TArg0, TArg1, string> messageGetter,
             TArg0 arg0,
             TArg1 arg1
-        ) {
+        )
+        {
             var logger = GetLogger();
             if (logger == null)
             {
@@ -141,7 +143,8 @@ namespace Microsoft.CodeAnalysis.Internal.Log
             TArg0 arg0,
             TArg1 arg1,
             TArg2 arg2
-        ) {
+        )
+        {
             var logger = GetLogger();
             if (logger == null)
             {
@@ -169,7 +172,8 @@ namespace Microsoft.CodeAnalysis.Internal.Log
             TArg1 arg1,
             TArg2 arg2,
             TArg3 arg3
-        ) {
+        )
+        {
             var logger = GetLogger();
             if (logger == null)
             {
@@ -224,7 +228,8 @@ namespace Microsoft.CodeAnalysis.Internal.Log
             FunctionId functionId,
             string? message,
             CancellationToken token
-        ) {
+        )
+        {
             var logger = GetLogger();
             if (logger == null)
             {
@@ -252,7 +257,8 @@ namespace Microsoft.CodeAnalysis.Internal.Log
             FunctionId functionId,
             Func<string> messageGetter,
             CancellationToken token
-        ) {
+        )
+        {
             var logger = GetLogger();
             if (logger == null)
             {
@@ -281,7 +287,8 @@ namespace Microsoft.CodeAnalysis.Internal.Log
             Func<TArg, string> messageGetter,
             TArg arg,
             CancellationToken token
-        ) {
+        )
+        {
             var logger = GetLogger();
             if (logger == null)
             {
@@ -311,7 +318,8 @@ namespace Microsoft.CodeAnalysis.Internal.Log
             TArg0 arg0,
             TArg1 arg1,
             CancellationToken token
-        ) {
+        )
+        {
             var logger = GetLogger();
             if (logger == null)
             {
@@ -342,7 +350,8 @@ namespace Microsoft.CodeAnalysis.Internal.Log
             TArg1 arg1,
             TArg2 arg2,
             CancellationToken token
-        ) {
+        )
+        {
             var logger = GetLogger();
             if (logger == null)
             {
@@ -374,7 +383,8 @@ namespace Microsoft.CodeAnalysis.Internal.Log
             TArg2 arg2,
             TArg3 arg3,
             CancellationToken token
-        ) {
+        )
+        {
             var logger = GetLogger();
             if (logger == null)
             {
@@ -401,7 +411,8 @@ namespace Microsoft.CodeAnalysis.Internal.Log
             FunctionId functionId,
             LogMessage logMessage,
             CancellationToken token
-        ) {
+        )
+        {
             var logger = GetLogger();
             if (logger == null)
             {

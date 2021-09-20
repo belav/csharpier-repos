@@ -324,7 +324,8 @@ namespace System.Collections.Tests
             int size,
             Func<int, int> keyValueSelector,
             Func<IDictionary<int, int>, IDictionary<int, int>> dictionarySelector
-        ) {
+        )
+        {
             TestCopyConstructor(size, keyValueSelector, dictionarySelector);
         }
 
@@ -339,7 +340,8 @@ namespace System.Collections.Tests
             int size,
             Func<int, string> keyValueSelector,
             Func<IDictionary<string, string>, IDictionary<string, string>> dictionarySelector
-        ) {
+        )
+        {
             TestCopyConstructor(size, keyValueSelector, dictionarySelector);
         }
 
@@ -352,7 +354,8 @@ namespace System.Collections.Tests
             int size,
             Func<int, T> keyValueSelector,
             Func<IDictionary<T, T>, IDictionary<T, T>> dictionarySelector
-        ) {
+        )
+        {
             IDictionary<T, T> expected = CreateDictionary(size, keyValueSelector);
             IDictionary<T, T> input = dictionarySelector(CreateDictionary(size, keyValueSelector));
 
@@ -366,7 +369,8 @@ namespace System.Collections.Tests
             Func<int, int> keyValueSelector,
             Func<IDictionary<int, int>, IDictionary<int, int>> dictionarySelector,
             IEqualityComparer<int> comparer
-        ) {
+        )
+        {
             TestCopyConstructor(size, keyValueSelector, dictionarySelector, comparer);
         }
 
@@ -391,7 +395,8 @@ namespace System.Collections.Tests
             Func<int, string> keyValueSelector,
             Func<IDictionary<string, string>, IDictionary<string, string>> dictionarySelector,
             IEqualityComparer<string> comparer
-        ) {
+        )
+        {
             TestCopyConstructor(size, keyValueSelector, dictionarySelector, comparer);
         }
 
@@ -445,7 +450,8 @@ namespace System.Collections.Tests
             Func<int, T> keyValueSelector,
             Func<IDictionary<T, T>, IDictionary<T, T>> dictionarySelector,
             IEqualityComparer<T> comparer
-        ) {
+        )
+        {
             IDictionary<T, T> expected = CreateDictionary(size, keyValueSelector, comparer);
             IDictionary<T, T> input = dictionarySelector(
                 CreateDictionary(size, keyValueSelector, comparer)
@@ -457,7 +463,8 @@ namespace System.Collections.Tests
         private static IEnumerable<object[]> GetCopyConstructorData<T>(
             Func<int, T> keyValueSelector,
             IEqualityComparer<T>[] comparers = null
-        ) {
+        )
+        {
             var dictionarySelectors = new Func<IDictionary<T, T>, IDictionary<T, T>>[]
             {
                 d => d,
@@ -469,7 +476,8 @@ namespace System.Collections.Tests
 
             foreach (
                 Func<IDictionary<T, T>, IDictionary<T, T>> dictionarySelector in dictionarySelectors
-            ) {
+            )
+            {
                 foreach (int size in sizes)
                 {
                     if (comparers != null)
@@ -497,7 +505,8 @@ namespace System.Collections.Tests
             int size,
             Func<int, T> keyValueSelector,
             IEqualityComparer<T> comparer = null
-        ) {
+        )
+        {
             Dictionary<T, T> dict = Enumerable.Range(0, size + 1)
                 .ToDictionary(keyValueSelector, keyValueSelector, comparer);
             // Remove first item to reduce Count to size and alter the contiguity of the dictionary
@@ -532,7 +541,8 @@ namespace System.Collections.Tests
         private static void TestComparerSerialization<T>(
             IEqualityComparer<T> equalityComparer,
             string internalTypeName = null
-        ) {
+        )
+        {
             var bf = new BinaryFormatter();
             var s = new MemoryStream();
 

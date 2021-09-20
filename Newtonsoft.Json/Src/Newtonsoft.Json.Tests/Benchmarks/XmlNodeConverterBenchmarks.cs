@@ -48,7 +48,8 @@ namespace Newtonsoft.Json.Tests.Benchmarks
                 FileStream file = System.IO.File.OpenRead(
                     TestFixtureBase.ResolvePath("large_sample.xml")
                 )
-            ) {
+            )
+            {
                 doc.Load(file);
             }
 
@@ -63,7 +64,8 @@ namespace Newtonsoft.Json.Tests.Benchmarks
                 FileStream file = System.IO.File.OpenRead(
                     TestFixtureBase.ResolvePath("large_sample.xml")
                 )
-            ) {
+            )
+            {
                 doc = XDocument.Load(file);
             }
 

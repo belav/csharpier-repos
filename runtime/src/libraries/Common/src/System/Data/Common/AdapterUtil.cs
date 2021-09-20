@@ -90,7 +90,8 @@ namespace System.Data.Common
         internal static ArgumentOutOfRangeException ArgumentOutOfRange(
             string message,
             string parameterName
-        ) {
+        )
+        {
             ArgumentOutOfRangeException e = new ArgumentOutOfRangeException(parameterName, message);
             TraceExceptionAsReturnValue(e);
             return e;
@@ -143,7 +144,8 @@ namespace System.Data.Common
             string? quoteSuffix,
             string? quotedString,
             out string? unquotedString
-        ) {
+        )
+        {
             int prefixLength = quotePrefix != null ? quotePrefix.Length : 0;
             int suffixLength = quoteSuffix != null ? quoteSuffix.Length : 0;
 
@@ -206,7 +208,8 @@ namespace System.Data.Common
             Type type,
             string value,
             string method
-        ) {
+        )
+        {
             return ArgumentOutOfRange(
                 SR.Format(SR.ADP_NotSupportedEnumerationValue, type.Name, value, method),
                 type.Name
@@ -235,7 +238,8 @@ namespace System.Data.Common
         internal static ArgumentException InvalidMultipartNameIncorrectUsageOfQuotes(
             string property,
             string value
-        ) {
+        )
+        {
             ArgumentException e = new ArgumentException(
                 SR.Format(SR.ADP_InvalidMultipartNameQuoteUsage, property, value)
             );
@@ -247,7 +251,8 @@ namespace System.Data.Common
             string property,
             string value,
             int limit
-        ) {
+        )
+        {
             ArgumentException e = new ArgumentException(
                 SR.Format(SR.ADP_InvalidMultipartNameToManyParts, property, value, limit)
             );
@@ -336,7 +341,8 @@ namespace System.Data.Common
             Type fromType,
             Type toType,
             Exception? innerException
-        ) {
+        )
+        {
             return ADP.Argument(
                 SR.Format(SR.SqlConvert_ConvertFailed, fromType.FullName, toType.FullName),
                 innerException
@@ -361,7 +367,8 @@ namespace System.Data.Common
         internal static ArgumentException CollectionRemoveInvalidObject(
             Type itemType,
             ICollection collection
-        ) {
+        )
+        {
             return Argument(
                 SR.Format(
                     SR.ADP_CollectionRemoveInvalidObject,
@@ -374,7 +381,8 @@ namespace System.Data.Common
             string parameter,
             Type collection,
             Type itemType
-        ) {
+        )
+        {
             return ArgumentNull(
                 parameter,
                 SR.Format(SR.ADP_CollectionNullValue, collection.Name, itemType.Name)
@@ -384,7 +392,8 @@ namespace System.Data.Common
             int index,
             Type collection,
             int count
-        ) {
+        )
+        {
             return IndexOutOfRange(
                 SR.Format(
                     SR.ADP_CollectionIndexInt32,
@@ -399,7 +408,8 @@ namespace System.Data.Common
             string propertyName,
             string propertyValue,
             Type collection
-        ) {
+        )
+        {
             return IndexOutOfRange(
                 SR.Format(
                     SR.ADP_CollectionIndexString,
@@ -414,7 +424,8 @@ namespace System.Data.Common
             Type collection,
             Type itemType,
             object invalidValue
-        ) {
+        )
+        {
             return InvalidCast(
                 SR.Format(
                     SR.ADP_CollectionInvalidType,
@@ -460,7 +471,8 @@ namespace System.Data.Common
             string quotePrefix,
             string quoteSuffix,
             string unQuotedString
-        ) {
+        )
+        {
             var resultString = new StringBuilder(
                 unQuotedString.Length + quoteSuffix.Length + quoteSuffix.Length
             );
@@ -473,7 +485,8 @@ namespace System.Data.Common
             string quotePrefix,
             string quoteSuffix,
             string unQuotedString
-        ) {
+        )
+        {
             if (!string.IsNullOrEmpty(quotePrefix))
             {
                 buffer.Append(quotePrefix);
@@ -506,7 +519,8 @@ namespace System.Data.Common
         internal static ArgumentException ParametersIsNotParent(
             Type parameterType,
             ICollection collection
-        ) {
+        )
+        {
             return Argument(
                 SR.Format(
                     SR.ADP_CollectionIsNotParent,
@@ -518,7 +532,8 @@ namespace System.Data.Common
         internal static ArgumentException ParametersIsParent(
             Type parameterType,
             ICollection collection
-        ) {
+        )
+        {
             return Argument(
                 SR.Format(
                     SR.ADP_CollectionIsNotParent,
@@ -579,7 +594,8 @@ namespace System.Data.Common
             int maxLen,
             long srcOffset,
             string parameterName
-        ) {
+        )
+        {
             return ArgumentOutOfRange(
                 SR.Format(
                     SR.ADP_InvalidSourceBufferIndex,
@@ -593,7 +609,8 @@ namespace System.Data.Common
             int maxLen,
             int dstOffset,
             string parameterName
-        ) {
+        )
+        {
             return ArgumentOutOfRange(
                 SR.Format(
                     SR.ADP_InvalidDestinationBufferIndex,
@@ -606,7 +623,8 @@ namespace System.Data.Common
         internal static IndexOutOfRangeException InvalidBufferSizeOrIndex(
             int numBytes,
             int bufferIndex
-        ) {
+        )
+        {
             return IndexOutOfRange(
                 SR.Format(
                     SR.SQL_InvalidBufferSizeOrIndex,

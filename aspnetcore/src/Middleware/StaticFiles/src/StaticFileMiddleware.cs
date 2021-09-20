@@ -37,7 +37,8 @@ namespace Microsoft.AspNetCore.StaticFiles
             IWebHostEnvironment hostingEnv,
             IOptions<StaticFileOptions> options,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             if (next == null)
             {
                 throw new ArgumentNullException(nameof(next));
@@ -88,7 +89,8 @@ namespace Microsoft.AspNetCore.StaticFiles
             }
             else if (
                 !LookupContentType(_contentTypeProvider, _options, subPath, out var contentType)
-            ) {
+            )
+            {
                 _logger.FileTypeNotSupported(subPath);
             }
             else
@@ -120,7 +122,8 @@ namespace Microsoft.AspNetCore.StaticFiles
             StaticFileOptions options,
             PathString subPath,
             out string? contentType
-        ) {
+        )
+        {
             if (contentTypeProvider.TryGetContentType(subPath.Value!, out contentType))
             {
                 return true;
@@ -139,7 +142,8 @@ namespace Microsoft.AspNetCore.StaticFiles
             HttpContext context,
             string? contentType,
             PathString subPath
-        ) {
+        )
+        {
             var fileContext = new StaticFileContext(
                 context,
                 _options,

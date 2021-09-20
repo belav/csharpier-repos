@@ -148,7 +148,8 @@ namespace System.Composition.Hosting.Core.Tests
         [MemberData(nameof(Oversupplied_TestData))]
         public void Oversupplied_Invoke_ReturnsExpected(
             IEnumerable<ExportDescriptorPromise> targets
-        ) {
+        )
+        {
             var contract = new CompositionContract(typeof(int));
 
             CompositionDependency dependency = CompositionDependency.Oversupplied(

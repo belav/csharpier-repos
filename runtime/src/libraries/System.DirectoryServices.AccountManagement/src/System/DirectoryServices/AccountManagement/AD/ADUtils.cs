@@ -357,7 +357,8 @@ namespace System.DirectoryServices.AccountManagement
                         || (secondChar >= 'A' && secondChar <= 'F')
                         || (secondChar >= 'a' && secondChar <= 'f')
                     )
-                ) {
+                )
+                {
                     sb.Append('\\');
                     sb.Append(firstChar);
                     sb.Append(secondChar);
@@ -416,7 +417,8 @@ namespace System.DirectoryServices.AccountManagement
                 ADUtils.IsOfObjectClass(de, "computer")
                 || ADUtils.IsOfObjectClass(de, "user")
                 || ADUtils.IsOfObjectClass(de, "group")
-            ) {
+            )
+            {
                 return storeCtx.GetAsPrincipal(de, null);
             }
             else if (ADUtils.IsOfObjectClass(de, "foreignSecurityPrincipal"))
@@ -433,12 +435,14 @@ namespace System.DirectoryServices.AccountManagement
             SearchResult sr,
             ADStoreCtx storeCtx,
             object discriminant
-        ) {
+        )
+        {
             if (
                 ADUtils.IsOfObjectClass(sr, "computer")
                 || ADUtils.IsOfObjectClass(sr, "user")
                 || ADUtils.IsOfObjectClass(sr, "group")
-            ) {
+            )
+            {
                 return storeCtx.GetAsPrincipal(sr, discriminant);
             }
             else if (ADUtils.IsOfObjectClass(sr, "foreignSecurityPrincipal"))
@@ -461,7 +465,8 @@ namespace System.DirectoryServices.AccountManagement
             string targetDomain,
             string username,
             string password
-        ) {
+        )
+        {
             Domain currentDom = null;
 
             try
@@ -494,7 +499,8 @@ namespace System.DirectoryServices.AccountManagement
                 if (
                     TrustDirection.Outbound == TRI.TrustDirection
                     || TrustDirection.Bidirectional == TRI.TrustDirection
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -516,7 +522,8 @@ namespace System.DirectoryServices.AccountManagement
                 if (
                     TrustDirection.Outbound == FTC.TrustDirection
                     || TrustDirection.Bidirectional == FTC.TrustDirection
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -530,7 +537,8 @@ namespace System.DirectoryServices.AccountManagement
             string defaultNamingContext,
             string serverName,
             byte[] wellKnownContainerGuid
-        ) {
+        )
+        {
             /*
                             bool w2k3Supported  = false;
                             if ( w2k3Supported )

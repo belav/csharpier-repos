@@ -241,7 +241,8 @@ namespace System.Reflection
             out string? marshalType,
             out string? marshalCookie,
             out int iidParamIndex
-        ) {
+        )
+        {
             _GetMarshalAs(
                 nativeType.Signature,
                 (int)nativeType.Length,
@@ -333,7 +334,8 @@ namespace System.Reflection
             out long value,
             out int length,
             out CorElementType corElementType
-        ) {
+        )
+        {
             string? stringVal = _GetDefaultValue(
                 m_metadataImport2,
                 mdToken,
@@ -391,7 +393,8 @@ namespace System.Reflection
             int mdToken,
             out void* name,
             out EventAttributes eventAttributes
-        ) {
+        )
+        {
             void* _name;
             _GetEventProps(m_metadataImport2, mdToken, &_name, out int _eventAttributes);
             name = _name;
@@ -423,7 +426,8 @@ namespace System.Reflection
             out void* name,
             out PropertyAttributes propertyAttributes,
             out ConstArray signature
-        ) {
+        )
+        {
             void* _name;
             _GetPropertyProps(
                 m_metadataImport2,
@@ -455,7 +459,8 @@ namespace System.Reflection
             int parameterToken,
             out int sequence,
             out ParameterAttributes attributes
-        ) {
+        )
+        {
             _GetParamDefProps(m_metadataImport2, parameterToken, out sequence, out int _attributes);
 
             attributes = (ParameterAttributes)_attributes;
@@ -471,7 +476,8 @@ namespace System.Reflection
         public void GetGenericParamProps(
             int genericParameter,
             out GenericParameterAttributes attributes
-        ) {
+        )
+        {
             _GetGenericParamProps(m_metadataImport2, genericParameter, out int _attributes);
             attributes = (GenericParameterAttributes)_attributes;
         }
@@ -550,7 +556,8 @@ namespace System.Reflection
             int customAttributeToken,
             out int constructorToken,
             out ConstArray signature
-        ) {
+        )
+        {
             _GetCustomAttributeProps(
                 m_metadataImport2,
                 customAttributeToken,
@@ -629,7 +636,8 @@ namespace System.Reflection
             out PInvokeAttributes attributes,
             out string importName,
             out string importDll
-        ) {
+        )
+        {
             void* _importName,
                 _importDll;
             _GetPInvokeMap(

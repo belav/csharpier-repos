@@ -488,7 +488,8 @@ namespace Microsoft.AspNetCore.Hosting.Tests
         [InlineData("CaSEiNSENsitiVE")]
         public void StartupClassAddsConfigureServicesToApplicationServicesCaseInsensitive(
             string environment
-        ) {
+        )
+        {
             var services = new ServiceCollection().AddSingleton<
                 IServiceProviderFactory<IServiceCollection>,
                 DefaultServiceProviderFactory

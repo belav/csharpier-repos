@@ -89,7 +89,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal virtual IEnumerable<CSharpAttributeData> GetCustomAttributesToEmit(
             PEModuleBuilder moduleBuilder
-        ) {
+        )
+        {
             CheckDefinitionInvariant();
 
             Debug.Assert(this.Kind != SymbolKind.Assembly);
@@ -102,7 +103,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal IEnumerable<CSharpAttributeData> GetCustomAttributesToEmit(
             PEModuleBuilder moduleBuilder,
             bool emittingAssemblyAttributesInNetModule
-        ) {
+        )
+        {
             CheckDefinitionInvariant();
             Debug.Assert(this.Kind != SymbolKind.Assembly);
 
@@ -130,7 +132,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ArrayBuilder<SynthesizedAttributeData> synthesized,
             bool isReturnType,
             bool emittingAssemblyAttributesInNetModule
-        ) {
+        )
+        {
             CheckDefinitionInvariant();
 
             //PERF: Avoid creating an iterator for the common case of no attributes.
@@ -152,7 +155,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ArrayBuilder<SynthesizedAttributeData> synthesized,
             bool isReturnType,
             bool emittingAssemblyAttributesInNetModule
-        ) {
+        )
+        {
             CheckDefinitionInvariant();
 
             if (synthesized != null)
@@ -193,7 +197,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         isReturnType,
                         emittingAssemblyAttributesInNetModule
                     )
-                ) {
+                )
+                {
                     yield return attribute;
                 }
             }

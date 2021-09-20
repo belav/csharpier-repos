@@ -78,7 +78,8 @@ namespace System.Net.Sockets
                 OSSupportsIPv6 ? AddressFamily.InterNetworkV6 : AddressFamily.InterNetwork,
                 socketType,
                 protocolType
-            ) {
+            )
+        {
             if (OSSupportsIPv6)
             {
                 DualMode = true;
@@ -163,7 +164,8 @@ namespace System.Net.Sockets
                         if (
                             SocketPal.GetSockName(handle, bufferPtr, &bufferLength)
                             != SocketError.Success
-                        ) {
+                        )
+                        {
                             return;
                         }
                     }
@@ -371,7 +373,8 @@ namespace System.Net.Sockets
                     {
                         fixed (byte* buffer = socketAddress.Buffer)fixed (
                             int* bufferSize = &socketAddress.InternalSize
-                        ) {
+                        )
+                        {
                             // This may throw ObjectDisposedException.
                             SocketError errorCode = SocketPal.GetSockName(
                                 _handle,
@@ -966,7 +969,8 @@ namespace System.Net.Sockets
                 if (
                     dnsEP.AddressFamily != AddressFamily.Unspecified
                     && !CanTryAddressFamily(dnsEP.AddressFamily)
-                ) {
+                )
+                {
                     throw new NotSupportedException(SR.net_invalidversion);
                 }
 
@@ -1032,7 +1036,8 @@ namespace System.Net.Sockets
             if (
                 _addressFamily != AddressFamily.InterNetwork
                 && _addressFamily != AddressFamily.InterNetworkV6
-            ) {
+            )
+            {
                 throw new NotSupportedException(SR.net_invalidversion);
             }
 
@@ -1073,7 +1078,8 @@ namespace System.Net.Sockets
             if (
                 _addressFamily != AddressFamily.InterNetwork
                 && _addressFamily != AddressFamily.InterNetworkV6
-            ) {
+            )
+            {
                 throw new NotSupportedException(SR.net_invalidversion);
             }
 
@@ -1281,7 +1287,8 @@ namespace System.Net.Sockets
             IList<ArraySegment<byte>> buffers,
             SocketFlags socketFlags,
             out SocketError errorCode
-        ) {
+        )
+        {
             ThrowIfDisposed();
 
             if (buffers == null)
@@ -1343,7 +1350,8 @@ namespace System.Net.Sockets
             int size,
             SocketFlags socketFlags,
             out SocketError errorCode
-        ) {
+        )
+        {
             ThrowIfDisposed();
 
             ValidateBufferArguments(buffer, offset, size);
@@ -1404,7 +1412,8 @@ namespace System.Net.Sockets
             ReadOnlySpan<byte> buffer,
             SocketFlags socketFlags,
             out SocketError errorCode
-        ) {
+        )
+        {
             ThrowIfDisposed();
             ValidateBlockingMode();
 
@@ -1466,7 +1475,8 @@ namespace System.Net.Sockets
             byte[]? preBuffer,
             byte[]? postBuffer,
             TransmitFileOptions flags
-        ) {
+        )
+        {
             SendFile(fileName, preBuffer.AsSpan(), postBuffer.AsSpan(), flags);
         }
 
@@ -1496,7 +1506,8 @@ namespace System.Net.Sockets
             ReadOnlySpan<byte> preBuffer,
             ReadOnlySpan<byte> postBuffer,
             TransmitFileOptions flags
-        ) {
+        )
+        {
             ThrowIfDisposed();
 
             if (!Connected)
@@ -1522,7 +1533,8 @@ namespace System.Net.Sockets
             int size,
             SocketFlags socketFlags,
             EndPoint remoteEP
-        ) {
+        )
+        {
             ThrowIfDisposed();
 
             ValidateBufferArguments(buffer, offset, size);
@@ -1630,7 +1642,8 @@ namespace System.Net.Sockets
             int size,
             SocketFlags socketFlags,
             out SocketError errorCode
-        ) {
+        )
+        {
             ThrowIfDisposed();
             ValidateBufferArguments(buffer, offset, size);
             ValidateBlockingMode();
@@ -1727,7 +1740,8 @@ namespace System.Net.Sockets
             IList<ArraySegment<byte>> buffers,
             SocketFlags socketFlags,
             out SocketError errorCode
-        ) {
+        )
+        {
             ThrowIfDisposed();
 
             if (buffers == null)
@@ -1779,7 +1793,8 @@ namespace System.Net.Sockets
             ref SocketFlags socketFlags,
             ref EndPoint remoteEP,
             out IPPacketInformation ipPacketInformation
-        ) {
+        )
+        {
             ThrowIfDisposed();
             ValidateBufferArguments(buffer, offset, size);
             ValidateReceiveFromEndpointAndState(remoteEP, nameof(remoteEP));
@@ -1879,7 +1894,8 @@ namespace System.Net.Sockets
             ref SocketFlags socketFlags,
             ref EndPoint remoteEP,
             out IPPacketInformation ipPacketInformation
-        ) {
+        )
+        {
             ThrowIfDisposed();
 
             if (remoteEP == null)
@@ -1971,7 +1987,8 @@ namespace System.Net.Sockets
             int size,
             SocketFlags socketFlags,
             ref EndPoint remoteEP
-        ) {
+        )
+        {
             ThrowIfDisposed();
             ValidateBufferArguments(buffer, offset, size);
             ValidateReceiveFromEndpointAndState(remoteEP, nameof(remoteEP));
@@ -2055,7 +2072,8 @@ namespace System.Net.Sockets
             int size,
             SocketFlags socketFlags,
             ref EndPoint remoteEP
-        ) {
+        )
+        {
             return ReceiveFrom(buffer, 0, size, socketFlags, ref remoteEP);
         }
 
@@ -2115,7 +2133,8 @@ namespace System.Net.Sockets
             IOControlCode ioControlCode,
             byte[]? optionInValue,
             byte[]? optionOutValue
-        ) {
+        )
+        {
             return IOControl(unchecked((int)ioControlCode), optionInValue, optionOutValue);
         }
 
@@ -2124,7 +2143,8 @@ namespace System.Net.Sockets
             SocketOptionLevel optionLevel,
             SocketOptionName optionName,
             int optionValue
-        ) {
+        )
+        {
             ThrowIfDisposed();
             if (NetEventSource.Log.IsEnabled())
                 NetEventSource.Info(
@@ -2139,7 +2159,8 @@ namespace System.Net.Sockets
             SocketOptionLevel optionLevel,
             SocketOptionName optionName,
             byte[] optionValue
-        ) {
+        )
+        {
             ThrowIfDisposed();
 
             if (NetEventSource.Log.IsEnabled())
@@ -2171,7 +2192,8 @@ namespace System.Net.Sockets
             SocketOptionLevel optionLevel,
             SocketOptionName optionName,
             bool optionValue
-        ) {
+        )
+        {
             SetSocketOption(optionLevel, optionName, (optionValue ? 1 : 0));
         }
 
@@ -2180,7 +2202,8 @@ namespace System.Net.Sockets
             SocketOptionLevel optionLevel,
             SocketOptionName optionName,
             object optionValue
-        ) {
+        )
+        {
             ThrowIfDisposed();
 
             // Validate input parameters.
@@ -2225,7 +2248,8 @@ namespace System.Net.Sockets
                     optionName == SocketOptionName.AddMembership
                     || optionName == SocketOptionName.DropMembership
                 )
-            ) {
+            )
+            {
                 MulticastOption? multicastOption = optionValue as MulticastOption;
                 if (multicastOption == null)
                 {
@@ -2242,7 +2266,8 @@ namespace System.Net.Sockets
                     optionName == SocketOptionName.AddMembership
                     || optionName == SocketOptionName.DropMembership
                 )
-            ) {
+            )
+            {
                 // IPv6 Changes: Handle IPv6 Multicast Add / Drop
                 IPv6MulticastOption? multicastOption = optionValue as IPv6MulticastOption;
                 if (multicastOption == null)
@@ -2278,7 +2303,8 @@ namespace System.Net.Sockets
             int optionLevel,
             int optionName,
             ReadOnlySpan<byte> optionValue
-        ) {
+        )
+        {
             ThrowIfDisposed();
 
             SocketError errorCode = SocketPal.SetRawSockOpt(
@@ -2314,7 +2340,8 @@ namespace System.Net.Sockets
                     optionName == SocketOptionName.AddMembership
                     || optionName == SocketOptionName.DropMembership
                 )
-            ) {
+            )
+            {
                 return GetMulticastOpt(optionName);
             }
             else if (
@@ -2323,7 +2350,8 @@ namespace System.Net.Sockets
                     optionName == SocketOptionName.AddMembership
                     || optionName == SocketOptionName.DropMembership
                 )
-            ) {
+            )
+            {
                 // Handle IPv6 case
                 return GetIPv6MulticastOpt(optionName);
             }
@@ -2354,7 +2382,8 @@ namespace System.Net.Sockets
             SocketOptionLevel optionLevel,
             SocketOptionName optionName,
             byte[] optionValue
-        ) {
+        )
+        {
             ThrowIfDisposed();
 
             int optionLength = optionValue != null ? optionValue.Length : 0;
@@ -2382,7 +2411,8 @@ namespace System.Net.Sockets
             SocketOptionLevel optionLevel,
             SocketOptionName optionName,
             int optionLength
-        ) {
+        )
+        {
             ThrowIfDisposed();
 
             byte[] optionValue = new byte[optionLength];
@@ -2502,13 +2532,15 @@ namespace System.Net.Sockets
             IList? checkWrite,
             IList? checkError,
             int microSeconds
-        ) {
+        )
+        {
             // Validate input parameters.
             if (
                 (checkRead == null || checkRead.Count == 0)
                 && (checkWrite == null || checkWrite.Count == 0)
                 && (checkError == null || checkError.Count == 0)
-            ) {
+            )
+            {
                 throw new ArgumentNullException(null, SR.net_sockets_empty_select);
             }
             const int MaxSelect = 65536;
@@ -2591,7 +2623,8 @@ namespace System.Net.Sockets
             bool reuseSocket,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             ThrowIfDisposed();
 
             // Start context-flowing op.  No need to lock - we don't use the context till the callback.
@@ -2613,7 +2646,8 @@ namespace System.Net.Sockets
         private void DoBeginDisconnect(
             bool reuseSocket,
             DisconnectOverlappedAsyncResult asyncResult
-        ) {
+        )
+        {
             SocketError errorCode = SocketError.Success;
 
             errorCode = SocketPal.DisconnectAsync(this, _handle, reuseSocket, asyncResult);
@@ -2717,7 +2751,8 @@ namespace System.Net.Sockets
             SocketFlags socketFlags,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             ThrowIfDisposed();
             ValidateBufferArguments(buffer, offset, size);
 
@@ -2737,7 +2772,8 @@ namespace System.Net.Sockets
             out SocketError errorCode,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             ThrowIfDisposed();
             ValidateBufferArguments(buffer, offset, size);
 
@@ -2762,7 +2798,8 @@ namespace System.Net.Sockets
             SocketFlags socketFlags,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             ThrowIfDisposed();
 
             return TaskToApm.Begin(SendAsync(buffers, socketFlags), callback, state);
@@ -2774,7 +2811,8 @@ namespace System.Net.Sockets
             out SocketError errorCode,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             ThrowIfDisposed();
 
             Task<int> t = SendAsync(buffers, socketFlags);
@@ -2817,7 +2855,8 @@ namespace System.Net.Sockets
             TransmitFileOptions flags,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             ThrowIfDisposed();
 
             if (!Connected)
@@ -2854,7 +2893,8 @@ namespace System.Net.Sockets
             EndPoint remoteEP,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             ThrowIfDisposed();
             ValidateBufferArguments(buffer, offset, size);
             if (remoteEP == null)
@@ -2880,7 +2920,8 @@ namespace System.Net.Sockets
             SocketFlags socketFlags,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             ThrowIfDisposed();
             ValidateBufferArguments(buffer, offset, size);
             return TaskToApm.Begin(
@@ -2904,7 +2945,8 @@ namespace System.Net.Sockets
             out SocketError errorCode,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             ThrowIfDisposed();
             ValidateBufferArguments(buffer, offset, size);
             Task<int> t = ReceiveAsync(
@@ -2930,7 +2972,8 @@ namespace System.Net.Sockets
             SocketFlags socketFlags,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             ThrowIfDisposed();
             return TaskToApm.Begin(ReceiveAsync(buffers, socketFlags), callback, state);
         }
@@ -2941,7 +2984,8 @@ namespace System.Net.Sockets
             out SocketError errorCode,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             ThrowIfDisposed();
             Task<int> t = ReceiveAsync(buffers, socketFlags);
 
@@ -2997,7 +3041,8 @@ namespace System.Net.Sockets
             ref EndPoint remoteEP,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             if (NetEventSource.Log.IsEnabled())
                 NetEventSource.Info(this, $"size:{size}");
 
@@ -3030,7 +3075,8 @@ namespace System.Net.Sockets
             ref SocketFlags socketFlags,
             ref EndPoint endPoint,
             out IPPacketInformation ipPacketInformation
-        ) {
+        )
+        {
             ThrowIfDisposed();
             if (endPoint == null)
             {
@@ -3068,7 +3114,8 @@ namespace System.Net.Sockets
             ref EndPoint remoteEP,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             ThrowIfDisposed();
             ValidateBufferArguments(buffer, offset, size);
             ValidateReceiveFromEndpointAndState(remoteEP, nameof(remoteEP));
@@ -3155,7 +3202,8 @@ namespace System.Net.Sockets
             int receiveSize,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             ThrowIfDisposed();
 
             // Validate input parameters.
@@ -3260,7 +3308,8 @@ namespace System.Net.Sockets
             out byte[]? buffer,
             out int bytesTransferred,
             IAsyncResult asyncResult
-        ) {
+        )
+        {
             if (Disposed)
             {
                 if (SocketsTelemetry.Log.IsEnabled())
@@ -3443,7 +3492,8 @@ namespace System.Net.Sockets
                 if (
                     dnsEP.AddressFamily != AddressFamily.Unspecified
                     && !CanTryAddressFamily(dnsEP.AddressFamily)
-                ) {
+                )
+                {
                     throw new NotSupportedException(SR.net_invalidversion);
                 }
 
@@ -3521,7 +3571,8 @@ namespace System.Net.Sockets
             SocketType socketType,
             ProtocolType protocolType,
             SocketAsyncEventArgs e
-        ) {
+        )
+        {
             bool pending;
 
             if (e == null)
@@ -3707,7 +3758,8 @@ namespace System.Net.Sockets
         private bool ReceiveMessageFromAsync(
             SocketAsyncEventArgs e,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ThrowIfDisposed();
 
             if (e == null)
@@ -3910,7 +3962,8 @@ namespace System.Net.Sockets
             Internals.SocketAddress socketAddress,
             out bool isIPv4,
             out bool isIPv6
-        ) {
+        )
+        {
             bool isIPv4MappedToIPv6 =
                 socketAddress.Family == AddressFamily.InterNetworkV6
                 && socketAddress.GetIPAddress().IsIPv4MappedToIPv6;
@@ -4222,14 +4275,16 @@ namespace System.Net.Sockets
                             || boundAddress.Equals(IPAddress.IPv6Any)
                         )
                     )
-                ) {
+                )
+                {
                     SocketPal.SetReceivingDualModeIPv4PacketInformation(this);
                 }
 
                 if (
                     _addressFamily == AddressFamily.InterNetworkV6
                     && (boundAddress == null || !boundAddress.IsIPv4MappedToIPv6)
-                ) {
+                )
+                {
                     SetSocketOption(
                         SocketOptionLevel.IPv6,
                         SocketOptionName.PacketInformation,
@@ -4246,7 +4301,8 @@ namespace System.Net.Sockets
             SocketOptionName optionName,
             int optionValue,
             bool silent
-        ) {
+        )
+        {
             if (silent && (Disposed || _handle.IsInvalid))
             {
                 if (NetEventSource.Log.IsEnabled())
@@ -4274,7 +4330,8 @@ namespace System.Net.Sockets
                 optionName == SocketOptionName.PacketInformation
                 && optionValue == 0
                 && errorCode == SocketError.Success
-            ) {
+            )
+            {
                 _receivingPacketInformation = false;
             }
 
@@ -4555,7 +4612,8 @@ namespace System.Net.Sockets
         private void UpdateStatusAfterSocketErrorAndThrowException(
             SocketError error,
             [CallerMemberName] string? callerName = null
-        ) {
+        )
+        {
             // Update the internal state of this socket according to the error before throwing.
             var socketException = new SocketException((int)error);
             UpdateStatusAfterSocketError(socketException);
@@ -4590,7 +4648,8 @@ namespace System.Net.Sockets
                         && errorCode != SocketError.TimedOut
                     )
                 )
-            ) {
+            )
+            {
                 // The socket is no longer a valid socket.
                 if (NetEventSource.Log.IsEnabled())
                     NetEventSource.Info(this, "Invalidating socket.");
@@ -4614,7 +4673,8 @@ namespace System.Net.Sockets
         private void ValidateReceiveFromEndpointAndState(
             EndPoint remoteEndPoint,
             string remoteEndPointArgumentName
-        ) {
+        )
+        {
             if (remoteEndPoint == null)
             {
                 throw new ArgumentNullException(remoteEndPointArgumentName);
@@ -4660,7 +4720,8 @@ namespace System.Net.Sockets
         private void UpdateReceiveSocketErrorForDisposed(
             ref SocketError socketError,
             int bytesTransferred
-        ) {
+        )
+        {
             // We use bytesTransferred for checking Disposed.
             // When there is a SocketError, bytesTransferred is zero.
             // An interrupted UDP receive on Linux returns SocketError.Success and bytesTransferred zero.

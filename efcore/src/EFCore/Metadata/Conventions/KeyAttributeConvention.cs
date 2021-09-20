@@ -39,7 +39,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             KeyAttribute attribute,
             MemberInfo clrMember,
             IConventionContext context
-        ) {
+        )
+        {
             var entityType = propertyBuilder.Metadata.DeclaringEntityType;
             if (entityType.IsKeyless)
             {
@@ -66,7 +67,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 entityType.IsKeyless
                 && entityType.GetIsKeylessConfigurationSource()
                     .Overrides(ConfigurationSource.DataAnnotation)
-            ) {
+            )
+            {
                 // TODO: Log a warning that KeyAttribute is being ignored. See issue#20014
                 // This code path will also be hit when entity is marked as Keyless explicitly
                 return;
@@ -80,7 +82,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 currentKey != null
                 && entityType.GetPrimaryKeyConfigurationSource()
                     == ConfigurationSource.DataAnnotation
-            ) {
+            )
+            {
                 properties.AddRange(
                     currentKey.Properties.Where(
                             p =>
@@ -108,7 +111,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessModelFinalizing(
             IConventionModelBuilder modelBuilder,
             IConventionContext<IConventionModelBuilder> context
-        ) {
+        )
+        {
             var entityTypes = modelBuilder.Metadata.GetEntityTypes();
             foreach (var entityType in entityTypes)
             {
@@ -119,7 +123,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         currentPrimaryKey?.Properties.Count > 1
                         && entityType.GetPrimaryKeyConfigurationSource()
                             == ConfigurationSource.DataAnnotation
-                    ) {
+                    )
+                    {
                         throw new InvalidOperationException(
                             CoreStrings.CompositePKWithDataAnnotation(entityType.DisplayName())
                         );
@@ -134,7 +139,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         if (
                             memberInfo != null
                             && Attribute.IsDefined(memberInfo, typeof(KeyAttribute), inherit: true)
-                        ) {
+                        )
+                        {
                             throw new InvalidOperationException(
                                 CoreStrings.KeyAttributeOnDerivedEntity(
                                     entityType.DisplayName(),

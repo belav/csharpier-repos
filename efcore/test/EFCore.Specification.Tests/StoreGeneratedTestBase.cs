@@ -118,7 +118,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Before_save_throw_ignores_value_if_not_set(
             string propertyName,
             string expectedValue
-        ) {
+        )
+        {
             var id = 0;
             ExecuteWithStrategyInTransaction(
                 context =>
@@ -189,7 +190,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Before_save_use_ignores_value_if_not_set(
             string propertyName,
             string expectedValue
-        ) {
+        )
+        {
             var id = 0;
             ExecuteWithStrategyInTransaction(
                 context =>
@@ -225,7 +227,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Before_save_ignore_ignores_value_if_not_set(
             string propertyName,
             string expectedValue
-        ) {
+        )
+        {
             var id = 0;
             ExecuteWithStrategyInTransaction(
                 context =>
@@ -261,7 +264,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Before_save_ignore_ignores_value_even_if_set(
             string propertyName,
             string expectedValue
-        ) {
+        )
+        {
             var id = 0;
             ExecuteWithStrategyInTransaction(
                 context =>
@@ -327,7 +331,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void After_save_throw_ignores_value_if_not_modified(
             string propertyName,
             string expectedValue
-        ) {
+        )
+        {
             var id = 0;
             ExecuteWithStrategyInTransaction(
                 context =>
@@ -373,7 +378,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void After_save_ignore_ignores_value_if_not_modified(
             string propertyName,
             string expectedValue
-        ) {
+        )
+        {
             var id = 0;
             ExecuteWithStrategyInTransaction(
                 context =>
@@ -419,7 +425,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void After_save_ignore_ignores_value_even_if_modified(
             string propertyName,
             string expectedValue
-        ) {
+        )
+        {
             var id = 0;
             ExecuteWithStrategyInTransaction(
                 context =>
@@ -467,7 +474,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void After_save_use_ignores_value_if_not_modified(
             string propertyName,
             string expectedValue
-        ) {
+        )
+        {
             var id = 0;
             ExecuteWithStrategyInTransaction(
                 context =>
@@ -513,7 +521,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void After_save_use_uses_value_if_modified(
             string propertyName,
             string expectedValue
-        ) {
+        )
+        {
             var id = 0;
             ExecuteWithStrategyInTransaction(
                 context =>

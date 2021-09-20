@@ -266,7 +266,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             string template,
             int order,
             params object[] metadata
-        ) {
+        )
+        {
             return new RouteEndpoint(
                 TestConstants.EmptyRequestDelegate,
                 RoutePatternFactory.Parse(template),

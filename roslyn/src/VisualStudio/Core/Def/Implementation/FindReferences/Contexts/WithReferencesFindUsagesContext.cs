@@ -35,18 +35,20 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 bool includeContainingTypeAndMemberColumns,
                 bool includeKindColumn,
                 CancellationToken cancellationToken
-            ) : base(
-                presenter,
-                findReferencesWindow,
-                customColumns,
-                includeContainingTypeAndMemberColumns,
-                includeKindColumn,
-                cancellationToken
-            ) { }
+            )
+                : base(
+                    presenter,
+                    findReferencesWindow,
+                    customColumns,
+                    includeContainingTypeAndMemberColumns,
+                    includeKindColumn,
+                    cancellationToken
+                ) { }
 
             protected override async ValueTask OnDefinitionFoundWorkerAsync(
                 DefinitionItem definition
-            ) {
+            )
+            {
                 // If this is a definition we always want to show, then create entries for all the declaration locations
                 // immediately.  Otherwise, we'll create them on demand when we hear about references for this
                 // definition.
@@ -58,7 +60,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             private async Task AddDeclarationEntriesAsync(
                 DefinitionItem definition,
                 bool expandedByDefault
-            ) {
+            )
+            {
                 CancellationToken.ThrowIfCancellationRequested();
 
                 // Don't do anything if we already have declaration entries for this definition
@@ -165,7 +168,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 bool addToEntriesWhenGroupingByDefinition,
                 bool addToEntriesWhenNotGroupingByDefinition,
                 bool expandedByDefault = true
-            ) {
+            )
+            {
                 Debug.Assert(
                     addToEntriesWhenGroupingByDefinition || addToEntriesWhenNotGroupingByDefinition
                 );
@@ -225,7 +229,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
 
             private async Task CreateMissingReferenceEntriesIfNecessaryAsync(
                 bool whenGroupingByDefinition
-            ) {
+            )
+            {
                 // Go through and add dummy entries for any definitions that
                 // that we didn't find any references for.
 
@@ -282,7 +287,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
 
             private ImmutableArray<DefinitionItem> GetDefinitionsToCreateMissingReferenceItemsFor(
                 bool whenGroupingByDefinition
-            ) {
+            )
+            {
                 lock (Gate)
                 {
                     var entries = whenGroupingByDefinition

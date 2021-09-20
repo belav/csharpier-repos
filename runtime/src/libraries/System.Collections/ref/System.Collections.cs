@@ -102,28 +102,32 @@ namespace System.Collections.Generic
         public static TValue? GetValueOrDefault<TKey, TValue>(
             this System.Collections.Generic.IReadOnlyDictionary<TKey, TValue> dictionary,
             TKey key
-        ) {
+        )
+        {
             throw null;
         }
         public static TValue GetValueOrDefault<TKey, TValue>(
             this System.Collections.Generic.IReadOnlyDictionary<TKey, TValue> dictionary,
             TKey key,
             TValue defaultValue
-        ) {
+        )
+        {
             throw null;
         }
         public static bool Remove<TKey, TValue>(
             this System.Collections.Generic.IDictionary<TKey, TValue> dictionary,
             TKey key,
             [System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute(false)] out TValue value
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryAdd<TKey, TValue>(
             this System.Collections.Generic.IDictionary<TKey, TValue> dictionary,
             TKey key,
             TValue value
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -311,7 +315,8 @@ namespace System.Collections.Generic
         public bool Remove(
             TKey key,
             [System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute(false)] out TValue value
-        ) {
+        )
+        {
             throw null;
         }
         void System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<
@@ -370,7 +375,8 @@ namespace System.Collections.Generic
         public bool TryGetValue(
             TKey key,
             [System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute(false)] out TValue value
-        ) {
+        )
+        {
             throw null;
         }
         public partial struct Enumerator
@@ -697,7 +703,8 @@ namespace System.Collections.Generic
         public bool TryGetValue(
             T equalValue,
             [System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute(false)] out T actualValue
-        ) {
+        )
+        {
             throw null;
         }
         public void UnionWith(System.Collections.Generic.IEnumerable<T> other) { }
@@ -796,7 +803,8 @@ namespace System.Collections.Generic
         public System.Collections.Generic.LinkedListNode<T> AddAfter(
             System.Collections.Generic.LinkedListNode<T> node,
             T value
-        ) {
+        )
+        {
             throw null;
         }
         public void AddBefore(
@@ -806,7 +814,8 @@ namespace System.Collections.Generic
         public System.Collections.Generic.LinkedListNode<T> AddBefore(
             System.Collections.Generic.LinkedListNode<T> node,
             T value
-        ) {
+        )
+        {
             throw null;
         }
         public void AddFirst(System.Collections.Generic.LinkedListNode<T> node) { }
@@ -955,7 +964,8 @@ namespace System.Collections.Generic
             int count,
             T item,
             System.Collections.Generic.IComparer<T>? comparer
-        ) {
+        )
+        {
             throw null;
         }
         public int BinarySearch(T item)
@@ -973,7 +983,8 @@ namespace System.Collections.Generic
         }
         public System.Collections.Generic.List<TOutput> ConvertAll<TOutput>(
             System.Converter<T, TOutput> converter
-        ) {
+        )
+        {
             throw null;
         }
         public void CopyTo(int index, T[] array, int arrayIndex, int count) { }
@@ -1195,13 +1206,15 @@ namespace System.Collections.Generic
         public bool TryDequeue(
             [System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute(false)] out TElement element,
             [System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute(false)] out TPriority priority
-        ) {
+        )
+        {
             throw null;
         }
         public bool TryPeek(
             [System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute(false)] out TElement element,
             [System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute(false)] out TPriority priority
-        ) {
+        )
+        {
             throw null;
         }
         public sealed partial class UnorderedItemsCollection
@@ -1326,12 +1339,14 @@ namespace System.Collections.Generic
         }
         public bool TryDequeue(
             [System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute(false)] out T result
-        ) {
+        )
+        {
             throw null;
         }
         public bool TryPeek(
             [System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute(false)] out T result
-        ) {
+        )
+        {
             throw null;
         }
         public partial struct Enumerator
@@ -1555,7 +1570,8 @@ namespace System.Collections.Generic
         public bool TryGetValue(
             TKey key,
             [System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute(false)] out TValue value
-        ) {
+        )
+        {
             throw null;
         }
         public partial struct Enumerator
@@ -1951,7 +1967,8 @@ namespace System.Collections.Generic
         public bool TryGetValue(
             TKey key,
             [System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute(false)] out TValue value
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -2023,7 +2040,8 @@ namespace System.Collections.Generic
         }
         public static System.Collections.Generic.IEqualityComparer<System.Collections.Generic.SortedSet<T>> CreateSetComparer(
             System.Collections.Generic.IEqualityComparer<T>? memberEqualityComparer
-        ) {
+        )
+        {
             throw null;
         }
         public void ExceptWith(System.Collections.Generic.IEnumerable<T> other) { }
@@ -2038,7 +2056,8 @@ namespace System.Collections.Generic
         public virtual System.Collections.Generic.SortedSet<T> GetViewBetween(
             T? lowerValue,
             T? upperValue
-        ) {
+        )
+        {
             throw null;
         }
         public virtual void IntersectWith(System.Collections.Generic.IEnumerable<T> other) { }
@@ -2100,7 +2119,8 @@ namespace System.Collections.Generic
         public bool TryGetValue(
             T equalValue,
             [System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute(false)] out T actualValue
-        ) {
+        )
+        {
             throw null;
         }
         public void UnionWith(System.Collections.Generic.IEnumerable<T> other) { }
@@ -2196,12 +2216,14 @@ namespace System.Collections.Generic
         public void TrimExcess() { }
         public bool TryPeek(
             [System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute(false)] out T result
-        ) {
+        )
+        {
             throw null;
         }
         public bool TryPop(
             [System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute(false)] out T result
-        ) {
+        )
+        {
             throw null;
         }
         public partial struct Enumerator

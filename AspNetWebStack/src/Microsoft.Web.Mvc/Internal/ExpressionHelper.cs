@@ -100,7 +100,8 @@ namespace Microsoft.Web.Mvc.Internal
         )]
         public static string GetInputName<TModel, TProperty>(
             Expression<Func<TModel, TProperty>> expression
-        ) {
+        )
+        {
             if (expression.Body.NodeType == ExpressionType.Call)
             {
                 MethodCallExpression methodCallExpression = (MethodCallExpression)expression.Body;
@@ -135,7 +136,8 @@ namespace Microsoft.Web.Mvc.Internal
                     typeof(NonActionAttribute),
                     true /* inherit */
                 )
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     String.Format(
                         CultureInfo.CurrentCulture,
@@ -183,7 +185,8 @@ namespace Microsoft.Web.Mvc.Internal
         private static void AddParameterValuesFromExpressionToDictionary(
             RouteValueDictionary rvd,
             MethodCallExpression call
-        ) {
+        )
+        {
             ParameterInfo[] parameters = call.Method.GetParameters();
 
             if (parameters.Length > 0)

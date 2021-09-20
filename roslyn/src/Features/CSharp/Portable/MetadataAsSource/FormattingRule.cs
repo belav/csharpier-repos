@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MetadataAsSource
             protected override AdjustNewLinesOperation GetAdjustNewLinesOperationBetweenMembersAndUsings(
                 SyntaxToken token1,
                 SyntaxToken token2
-            ) {
+            )
+            {
                 var previousToken = token1;
                 var currentToken = token2;
 
@@ -32,7 +33,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MetadataAsSource
                         && previousToken.Kind() != SyntaxKind.CloseBraceToken
                     )
                     || currentToken.Kind() == SyntaxKind.CloseBraceToken
-                ) {
+                )
+                {
                     return null;
                 }
 
@@ -44,7 +46,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MetadataAsSource
                 if (
                     previousToken.Kind() == SyntaxKind.SemicolonToken
                     && previousToken.Parent.Kind() == SyntaxKind.UsingDirective
-                ) {
+                )
+                {
                     previousMember = previousToken.Parent;
                 }
 
@@ -75,7 +78,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MetadataAsSource
                 List<AnchorIndentationOperation> list,
                 SyntaxNode node,
                 in NextAnchorIndentationOperationAction nextOperation
-            ) {
+            )
+            {
                 return;
             }
 

@@ -112,7 +112,8 @@ namespace Internal.TypeSystem
             StringBuilder sb,
             DefType nestedType,
             DefType containingType
-        ) {
+        )
+        {
             // NOTE: We're ignoring the containing type for compatiblity with SigFormat.cpp
             sb.Append(GetTypeName(nestedType));
         }

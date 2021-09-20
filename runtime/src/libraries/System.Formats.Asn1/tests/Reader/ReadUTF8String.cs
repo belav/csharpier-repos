@@ -110,7 +110,8 @@ namespace System.Formats.Asn1.Tests.Reader
             AsnEncodingRules ruleSet,
             string inputHex,
             string expectedValue
-        ) {
+        )
+        {
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
             string value = reader.ReadCharacterString(UniversalTagNumber.UTF8String);
@@ -124,7 +125,8 @@ namespace System.Formats.Asn1.Tests.Reader
             AsnEncodingRules ruleSet,
             string inputHex,
             string expectedValue
-        ) {
+        )
+        {
             byte[] inputData = inputHex.HexToByteArray();
             char[] output = new char[expectedValue.Length];
 
@@ -165,7 +167,8 @@ namespace System.Formats.Asn1.Tests.Reader
             AsnEncodingRules ruleSet,
             string inputHex,
             string expectedString
-        ) {
+        )
+        {
             byte[] inputData = inputHex.HexToByteArray();
             string expectedHex = Text.Encoding.UTF8.GetBytes(expectedString).ByteArrayToHex();
             byte[] output = new byte[expectedHex.Length / 2];
@@ -213,7 +216,8 @@ namespace System.Formats.Asn1.Tests.Reader
             AsnEncodingRules ruleSet,
             string inputHex,
             bool expectSuccess
-        ) {
+        )
+        {
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
 
@@ -255,7 +259,8 @@ namespace System.Formats.Asn1.Tests.Reader
             string description,
             AsnEncodingRules ruleSet,
             string inputHex
-        ) {
+        )
+        {
             _ = description;
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
@@ -336,7 +341,8 @@ namespace System.Formats.Asn1.Tests.Reader
             string description,
             AsnEncodingRules ruleSet,
             string inputHex
-        ) {
+        )
+        {
             _ = description;
             byte[] inputData = inputHex.HexToByteArray();
             byte[] outputData = new byte[inputData.Length + 1];
@@ -361,7 +367,8 @@ namespace System.Formats.Asn1.Tests.Reader
         private static void TryCopyUTF8String_Throws_Helper(
             AsnEncodingRules ruleSet,
             byte[] inputData
-        ) {
+        )
+        {
             char[] outputData = new char[inputData.Length + 1];
             outputData[0] = 'a';
 
@@ -390,7 +397,8 @@ namespace System.Formats.Asn1.Tests.Reader
             string description,
             AsnEncodingRules ruleSet,
             string inputHex
-        ) {
+        )
+        {
             _ = description;
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
@@ -468,7 +476,8 @@ namespace System.Formats.Asn1.Tests.Reader
             string description,
             AsnEncodingRules ruleSet,
             string inputHex
-        ) {
+        )
+        {
             _ = description;
             byte[] inputData = inputHex.HexToByteArray();
             TryCopyUTF8String_Throws_Helper(ruleSet, inputData);
@@ -749,7 +758,8 @@ namespace System.Formats.Asn1.Tests.Reader
             string inputHex,
             TagClass tagClass,
             int tagValue
-        ) {
+        )
+        {
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
 

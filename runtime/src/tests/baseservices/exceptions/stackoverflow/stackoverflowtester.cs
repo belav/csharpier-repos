@@ -17,7 +17,8 @@ namespace TestStackOverflow
             string testName,
             string testArgs,
             out List<string> stderrLines
-        ) {
+        )
+        {
             Console.WriteLine($"Running {testName} test({testArgs})");
             List<string> lines = new List<string>();
 
@@ -48,7 +49,8 @@ namespace TestStackOverflow
             if (
                 (Environment.OSVersion.Platform == PlatformID.Unix)
                 || (Environment.OSVersion.Platform == PlatformID.MacOSX)
-            ) {
+            )
+            {
                 expectedExitCode = 128 + 6;
             }
             else
@@ -82,7 +84,8 @@ namespace TestStackOverflow
                     !lines[lines.Count - 1].EndsWith(
                         "at TestStackOverflow.Program.Main(System.String[])"
                     )
-                ) {
+                )
+                {
                     Console.WriteLine("Missing \"Main\" method frame at the last line");
                     return false;
                 }
@@ -97,7 +100,8 @@ namespace TestStackOverflow
                     !lines.Exists(
                         elem => elem.EndsWith("at TestStackOverflow.Program.InfiniteRecursionA()")
                     )
-                ) {
+                )
+                {
                     Console.WriteLine("Missing \"InfiniteRecursionA\" method frame");
                     return false;
                 }
@@ -106,7 +110,8 @@ namespace TestStackOverflow
                     !lines.Exists(
                         elem => elem.EndsWith("at TestStackOverflow.Program.InfiniteRecursionB()")
                     )
-                ) {
+                )
+                {
                     Console.WriteLine("Missing \"InfiniteRecursionB\" method frame");
                     return false;
                 }
@@ -115,7 +120,8 @@ namespace TestStackOverflow
                     !lines.Exists(
                         elem => elem.EndsWith("at TestStackOverflow.Program.InfiniteRecursionC()")
                     )
-                ) {
+                )
+                {
                     Console.WriteLine("Missing \"InfiniteRecursionC\" method frame");
                     return false;
                 }
@@ -135,7 +141,8 @@ namespace TestStackOverflow
                     !lines[lines.Count - 1].EndsWith(
                         "at TestStackOverflow.Program.Main(System.String[])"
                     )
-                ) {
+                )
+                {
                     Console.WriteLine("Missing \"Main\" method frame at the last line");
                     return false;
                 }
@@ -150,7 +157,8 @@ namespace TestStackOverflow
                     !lines.Exists(
                         elem => elem.EndsWith("at TestStackOverflow.Program.InfiniteRecursionA2()")
                     )
-                ) {
+                )
+                {
                     Console.WriteLine("Missing \"InfiniteRecursionA2\" method frame");
                     return false;
                 }
@@ -159,7 +167,8 @@ namespace TestStackOverflow
                     !lines.Exists(
                         elem => elem.EndsWith("at TestStackOverflow.Program.InfiniteRecursionB2()")
                     )
-                ) {
+                )
+                {
                     Console.WriteLine("Missing \"InfiniteRecursionB2\" method frame");
                     return false;
                 }
@@ -168,7 +177,8 @@ namespace TestStackOverflow
                     !lines.Exists(
                         elem => elem.EndsWith("at TestStackOverflow.Program.InfiniteRecursionC2()")
                     )
-                ) {
+                )
+                {
                     Console.WriteLine("Missing \"InfiniteRecursionC2\" method frame");
                     return false;
                 }
@@ -188,7 +198,8 @@ namespace TestStackOverflow
                     !lines.Exists(
                         elem => elem.EndsWith("at TestStackOverflow.Program.Test(Boolean)")
                     )
-                ) {
+                )
+                {
                     Console.WriteLine("Missing \"TestStackOverflow.Program.Test\" method frame");
                     return false;
                 }
@@ -197,7 +208,8 @@ namespace TestStackOverflow
                     !lines.Exists(
                         elem => elem.EndsWith("at TestStackOverflow.Program.InfiniteRecursionA()")
                     )
-                ) {
+                )
+                {
                     Console.WriteLine("Missing \"InfiniteRecursionA\" method frame");
                     return false;
                 }
@@ -206,7 +218,8 @@ namespace TestStackOverflow
                     !lines.Exists(
                         elem => elem.EndsWith("at TestStackOverflow.Program.InfiniteRecursionB()")
                     )
-                ) {
+                )
+                {
                     Console.WriteLine("Missing \"InfiniteRecursionB\" method frame");
                     return false;
                 }
@@ -215,7 +228,8 @@ namespace TestStackOverflow
                     !lines.Exists(
                         elem => elem.EndsWith("at TestStackOverflow.Program.InfiniteRecursionC()")
                     )
-                ) {
+                )
+                {
                     Console.WriteLine("Missing \"InfiniteRecursionC\" method frame");
                     return false;
                 }
@@ -235,7 +249,8 @@ namespace TestStackOverflow
                     !lines.Exists(
                         elem => elem.EndsWith("at TestStackOverflow.Program.Test(Boolean)")
                     )
-                ) {
+                )
+                {
                     Console.WriteLine("Missing \"TestStackOverflow.Program.Test\" method frame");
                     return false;
                 }
@@ -244,7 +259,8 @@ namespace TestStackOverflow
                     !lines.Exists(
                         elem => elem.EndsWith("at TestStackOverflow.Program.InfiniteRecursionA2()")
                     )
-                ) {
+                )
+                {
                     Console.WriteLine("Missing \"InfiniteRecursionA2\" method frame");
                     return false;
                 }
@@ -253,7 +269,8 @@ namespace TestStackOverflow
                     !lines.Exists(
                         elem => elem.EndsWith("TestStackOverflow.Program.InfiniteRecursionB2()")
                     )
-                ) {
+                )
+                {
                     Console.WriteLine("Missing \"InfiniteRecursionB2\" method frame");
                     return false;
                 }
@@ -262,7 +279,8 @@ namespace TestStackOverflow
                     !lines.Exists(
                         elem => elem.EndsWith("TestStackOverflow.Program.InfiniteRecursionC2()")
                     )
-                ) {
+                )
+                {
                     Console.WriteLine("Missing \"InfiniteRecursionC2\" method frame");
                     return false;
                 }
@@ -289,7 +307,8 @@ namespace TestStackOverflow
                         elem =>
                             elem.EndsWith("at TestStackOverflow3.Program.Execute(System.String)")
                     )
-                ) {
+                )
+                {
                     Console.WriteLine("Missing \"Execute\" method frame");
                     return false;
                 }

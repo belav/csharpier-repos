@@ -99,7 +99,8 @@ namespace System.Web.WebPages
         internal static WebPageBase CreateInstanceFromVirtualPath(
             string virtualPath,
             IVirtualPathFactory virtualPathFactory
-        ) {
+        )
+        {
             // Get the compiled object
             try
             {
@@ -129,7 +130,8 @@ namespace System.Web.WebPages
             Func<string, bool> virtualPathExists,
             DisplayModeProvider displayModeProvider,
             IDisplayMode displayMode
-        ) {
+        )
+        {
             try
             {
                 DisplayInfo resolvedDisplayInfo = displayModeProvider.GetDisplayInfoForVirtualPath(
@@ -184,7 +186,8 @@ namespace System.Web.WebPages
         private WebPageContext CreatePageContextFromParameters(
             bool isLayoutPage,
             params object[] data
-        ) {
+        )
+        {
             object first = null;
             if (data != null && data.Length > 0)
             {
@@ -241,7 +244,8 @@ namespace System.Web.WebPages
             WebPageContext pageContext,
             TextWriter writer,
             WebPageRenderingBase startPage
-        ) {
+        )
+        {
             PushContext(pageContext, writer);
 
             if (startPage != null)
@@ -536,7 +540,8 @@ namespace System.Web.WebPages
                     SectionWritersStack.Count > 1
                     && PreviousSectionWriters != null
                     && PreviousSectionWriters.Count > 0
-                ) {
+                )
+                {
                     // There are sections defined. Check that all sections have been rendered.
                     StringBuilder sectionsNotRendered = new StringBuilder();
                     foreach (var name in PreviousSectionWriters.Keys)

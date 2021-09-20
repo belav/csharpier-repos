@@ -33,7 +33,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             MethodWithToken methodArgument,
             FieldDesc fieldArgument,
             GenericContext methodContext
-        ) {
+        )
+        {
             Debug.Assert(typeArgument != null || methodArgument != null || fieldArgument != null);
             _runtimeLookupKind = runtimeLookupKind;
             _fixupKind = fixupKind;

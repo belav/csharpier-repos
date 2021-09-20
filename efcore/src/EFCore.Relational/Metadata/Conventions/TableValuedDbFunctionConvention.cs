@@ -23,7 +23,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public TableValuedDbFunctionConvention(
             ProviderConventionSetBuilderDependencies dependencies,
             RelationalConventionSetBuilderDependencies relationalDependencies
-        ) {
+        )
+        {
             Dependencies = dependencies;
         }
 
@@ -36,7 +37,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessModelFinalizing(
             IConventionModelBuilder modelBuilder,
             IConventionContext<IConventionModelBuilder> context
-        ) {
+        )
+        {
             foreach (var function in modelBuilder.Metadata.GetDbFunctions())
             {
                 ProcessDbFunctionAdded(function.Builder, context);
@@ -51,7 +53,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         private void ProcessDbFunctionAdded(
             IConventionDbFunctionBuilder dbFunctionBuilder,
             IConventionContext context
-        ) {
+        )
+        {
             var function = dbFunctionBuilder.Metadata;
             if (function.IsScalar)
             {
@@ -75,7 +78,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 entityType?.IsOwned() == true
                 || model.IsOwned(elementType)
                 || (entityType == null && model.GetEntityTypes().Any(e => e.ClrType == elementType))
-            ) {
+            )
+            {
                 return;
             }
 

@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Structure
         private protected async Task VerifyBlockSpansAsync(
             string markupCode,
             params RegionData[] expectedRegionData
-        ) {
+        )
+        {
             using (
                 var workspace = TestWorkspace.Create(
                     WorkspaceKind,
@@ -49,7 +50,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Structure
                     parseOptions: null,
                     content: markupCode
                 )
-            ) {
+            )
+            {
                 workspace.TryApplyChanges(
                     workspace.CurrentSolution.WithOptions(UpdateOptions(workspace.Options))
                 );
@@ -88,7 +90,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Structure
                     parseOptions: null,
                     content: markupCode
                 )
-            ) {
+            )
+            {
                 workspace.TryApplyChanges(
                     workspace.CurrentSolution.WithOptions(UpdateOptions(workspace.Options))
                 );
@@ -139,7 +142,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Structure
         private static BlockSpan CreateBlockSpan(
             RegionData regionData,
             IDictionary<string, ImmutableArray<TextSpan>> spans
-        ) {
+        )
+        {
             var (textSpanName, hintSpanName, bannerText, autoCollapse, isDefaultCollapsed) =
                 regionData;
 
@@ -192,7 +196,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Structure
             string bannerText,
             bool autoCollapse,
             bool isDefaultCollapsed
-        ) {
+        )
+        {
             this.TextSpanName = textSpanName;
             this.HintSpanName = hintSpanName;
             this.BannerText = bannerText;
@@ -230,7 +235,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Structure
             out string bannerText,
             out bool autoCollapse,
             out bool isDefaultCollapsed
-        ) {
+        )
+        {
             textSpanName = this.TextSpanName;
             hintSpanName = this.HintSpanName;
             bannerText = this.BannerText;

@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
             ILogger<ErrorBoundary> logger,
             IJSRuntime jsRuntime,
             IOptions<CircuitOptions> options
-        ) {
+        )
+        {
             _logger = logger;
             _jsRuntime = jsRuntime;
             _options = options.Value;

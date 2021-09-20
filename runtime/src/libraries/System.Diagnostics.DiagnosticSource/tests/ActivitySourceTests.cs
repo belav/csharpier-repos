@@ -96,7 +96,8 @@ namespace System.Diagnostics.Tests
                     {
                         using (
                             ActivitySource aSource = new ActivitySource("SourceActivityListener")
-                        ) {
+                        )
+                        {
                             int counter = 0;
                             Assert.False(aSource.HasListeners());
 
@@ -120,7 +121,8 @@ namespace System.Diagnostics.Tests
                                 Activity activity = aSource.StartActivity(
                                     "AllDataRequestedActivity"
                                 )
-                            ) {
+                            )
+                            {
                                 Assert.NotNull(activity);
                                 Assert.True(activity.IsAllDataRequested);
                                 Assert.Equal(1, counter);
@@ -148,7 +150,8 @@ namespace System.Diagnostics.Tests
                                     Activity activity1 = aSource.StartActivity(
                                         "AllDataRequestedActivity1"
                                     )
-                                ) {
+                                )
+                                {
                                     Assert.NotNull(activity1);
                                     Assert.True(activity1.IsAllDataRequested);
                                     Assert.Equal(2, counter);
@@ -183,7 +186,8 @@ namespace System.Diagnostics.Tests
                             ActivitySource aSource = new ActivitySource(
                                 "SourceActivityTriggeringCallerMemberNameAttribute"
                             )
-                        ) {
+                        )
+                        {
                             using ActivityListener listener = new ActivityListener();
                             listener.ShouldListenTo = (activitySource) =>
                                 object.ReferenceEquals(aSource, activitySource);
@@ -251,7 +255,8 @@ namespace System.Diagnostics.Tests
                                         links,
                                         startTime
                                     )
-                                ) {
+                                )
+                                {
                                     Assert.NotNull(activity2);
                                     Assert.True(
                                         methodName.IndexOf(
@@ -601,7 +606,8 @@ namespace System.Diagnostics.Tests
                                 links,
                                 startTime
                             )
-                        ) {
+                        )
+                        {
                             Assert.NotNull(activity);
                             Assert.Equal("a1", activity.OperationName);
                             Assert.Equal("a1", activity.DisplayName);
@@ -1324,7 +1330,8 @@ namespace System.Diagnostics.Tests
                                         default
                                     )
                                 )
-                            ) {
+                            )
+                            {
                                 Assert.NotNull(Activity.Current);
                                 Assert.Equal("Child", Activity.Current.OperationName);
                             }
@@ -1424,7 +1431,8 @@ namespace System.Diagnostics.Tests
                                     tags,
                                     links
                                 )
-                            ) {
+                            )
+                            {
                                 Assert.NotNull(a3);
                                 Assert.Equal(tags, a3.TagObjects);
                                 Assert.Equal(links, a3.Links);
@@ -1450,7 +1458,8 @@ namespace System.Diagnostics.Tests
                                         tags,
                                         links
                                     )
-                                ) {
+                                )
+                                {
                                     Assert.NotNull(a4);
                                     Assert.Equal(tags, a4.TagObjects);
                                     Assert.Equal(links, a4.Links);
@@ -1531,7 +1540,8 @@ namespace System.Diagnostics.Tests
                                 default,
                                 linksToCheckAgainst
                             )
-                        ) {
+                        )
+                        {
                             Assert.NotNull(a);
                             a.AddTag("tag1", "value1");
                             a.AddBaggage("baggage1", "value1");

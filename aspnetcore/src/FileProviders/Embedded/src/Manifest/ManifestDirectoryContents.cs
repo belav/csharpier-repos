@@ -18,7 +18,8 @@ namespace Microsoft.Extensions.FileProviders.Embedded.Manifest
             Assembly assembly,
             ManifestDirectory directory,
             DateTimeOffset lastModified
-        ) {
+        )
+        {
             if (assembly == null)
             {
                 throw new ArgumentNullException(nameof(assembly));

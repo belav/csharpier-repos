@@ -46,32 +46,30 @@ namespace System.IO.Pipes
                 HandleInheritability.None
             ) { }
 
-        public NamedPipeClientStream(
-            string serverName,
-            string pipeName,
-            PipeDirection direction
-        ) : this(
-            serverName,
-            pipeName,
-            direction,
-            PipeOptions.None,
-            TokenImpersonationLevel.None,
-            HandleInheritability.None
-        ) { }
+        public NamedPipeClientStream(string serverName, string pipeName, PipeDirection direction)
+            : this(
+                serverName,
+                pipeName,
+                direction,
+                PipeOptions.None,
+                TokenImpersonationLevel.None,
+                HandleInheritability.None
+            ) { }
 
         public NamedPipeClientStream(
             string serverName,
             string pipeName,
             PipeDirection direction,
             PipeOptions options
-        ) : this(
-            serverName,
-            pipeName,
-            direction,
-            options,
-            TokenImpersonationLevel.None,
-            HandleInheritability.None
-        ) { }
+        )
+            : this(
+                serverName,
+                pipeName,
+                direction,
+                options,
+                TokenImpersonationLevel.None,
+                HandleInheritability.None
+            ) { }
 
         public NamedPipeClientStream(
             string serverName,
@@ -79,14 +77,15 @@ namespace System.IO.Pipes
             PipeDirection direction,
             PipeOptions options,
             TokenImpersonationLevel impersonationLevel
-        ) : this(
-            serverName,
-            pipeName,
-            direction,
-            options,
-            impersonationLevel,
-            HandleInheritability.None
-        ) { }
+        )
+            : this(
+                serverName,
+                pipeName,
+                direction,
+                options,
+                impersonationLevel,
+                HandleInheritability.None
+            ) { }
 
         public NamedPipeClientStream(
             string serverName,
@@ -122,7 +121,8 @@ namespace System.IO.Pipes
                         | PipeOptions.CurrentUserOnly
                     )
                 ) != 0
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(
                     nameof(options),
                     SR.ArgumentOutOfRange_OptionsInvalid
@@ -131,7 +131,8 @@ namespace System.IO.Pipes
             if (
                 impersonationLevel < TokenImpersonationLevel.None
                 || impersonationLevel > TokenImpersonationLevel.Delegation
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(
                     nameof(impersonationLevel),
                     SR.ArgumentOutOfRange_ImpersonationInvalid
@@ -140,7 +141,8 @@ namespace System.IO.Pipes
             if (
                 inheritability < HandleInheritability.None
                 || inheritability > HandleInheritability.Inheritable
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(
                     nameof(inheritability),
                     SR.ArgumentOutOfRange_HandleInheritabilityNoneOrInheritable
@@ -212,7 +214,8 @@ namespace System.IO.Pipes
             int timeout,
             CancellationToken cancellationToken,
             int startTime
-        ) {
+        )
+        {
             // This is the main connection loop. It will loop until the timeout expires.
             int elapsed = 0;
             SpinWait sw = default;

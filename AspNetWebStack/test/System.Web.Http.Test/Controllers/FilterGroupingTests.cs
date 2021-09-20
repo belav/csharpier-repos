@@ -390,14 +390,16 @@ namespace System.Web.Http.Controllers
                 HttpActionContext actionContext,
                 CancellationToken cancellationToken,
                 Func<Task<HttpResponseMessage>> continuation
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             public Task ExecuteExceptionFilterAsync(
                 HttpActionExecutedContext actionExecutedContext,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }

@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.Indentation
                 OptionSet optionSet,
                 TextLine lineToBeIndented,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Document = document;
 
                 _service = service;
@@ -73,7 +74,8 @@ namespace Microsoft.CodeAnalysis.Indentation
 
             public IndentationResult? GetDesiredIndentation(
                 FormattingOptions.IndentStyle indentStyle
-            ) {
+            )
+            {
                 // If the caller wants no indent, then we'll return an effective '0' indent.
                 if (indentStyle == FormattingOptions.IndentStyle.None)
                     return null;
@@ -87,7 +89,8 @@ namespace Microsoft.CodeAnalysis.Indentation
                         LineToBeIndented.Start,
                         this.CancellationToken
                     )
-                ) {
+                )
+                {
                     return GetDesiredBlockIndentation();
                 }
 
@@ -162,7 +165,8 @@ namespace Microsoft.CodeAnalysis.Indentation
                     var currentLine = this.LineToBeIndented.LineNumber - 1;
                     currentLine >= 0;
                     currentLine--
-                ) {
+                )
+                {
                     var line = this.Document.Text.Lines[currentLine];
                     var offset = line.GetFirstNonWhitespaceOffset();
                     if (offset == null)
@@ -254,7 +258,8 @@ namespace Microsoft.CodeAnalysis.Indentation
             {
                 if (
                     this.Tree.OverlapsHiddenPosition(GetNormalizedSpan(position), CancellationToken)
-                ) {
+                )
+                {
                     // Oops, the line we want to line up to is either hidden, or is in a different
                     // visible region.
                     var token = Root.FindTokenFromEnd(LineToBeIndented.Start);

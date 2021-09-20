@@ -147,7 +147,8 @@ namespace System.ComponentModel.Composition.Hosting
                     new TypeCatalog(typeof(SharedPartStuff)),
                     new TypeCatalog(typeof(SharedPartStuff))
                 )
-            ) {
+            )
+            {
                 Assert.True(catalog.Catalogs.Count() == 6);
                 Assert.True(catalog.Parts.Count() == 6);
             }
@@ -323,7 +324,8 @@ namespace System.ComponentModel.Composition.Hosting
                 catalog.Changed += delegate(
                     object source,
                     ComposablePartCatalogChangeEventArgs args
-                ) {
+                )
+                {
                     // Local code
                     ++changedNotification;
                 };
@@ -411,7 +413,8 @@ namespace System.ComponentModel.Composition.Hosting
             out AggregateCatalog[] mainChildren,
             out AggregateCatalog[] otherChildren,
             out TypeCatalog[] componentCatalogs
-        ) {
+        )
+        {
             componentCatalogs = new TypeCatalog[]
             {
                 new TypeCatalog(typeof(SharedPartStuff)),
@@ -544,7 +547,8 @@ namespace System.ComponentModel.Composition.Hosting
             public void VerifyAdd(
                 ComposablePartCatalog catalogToAdd,
                 params Type[] expectedTypesAdded
-            ) {
+            )
+            {
                 this._expectedAdds = GetDisplayNames(expectedTypesAdded);
 
                 this._modifiedCatalog.Catalogs.Add(catalogToAdd);
@@ -558,7 +562,8 @@ namespace System.ComponentModel.Composition.Hosting
             public void VerifyRemove(
                 ComposablePartCatalog catalogToRemove,
                 params Type[] expectedTypesRemoved
-            ) {
+            )
+            {
                 this._expectedAdds = null;
                 this._expectedRemoves = GetDisplayNames(expectedTypesRemoved);
 
@@ -689,7 +694,8 @@ namespace System.ComponentModel.Composition.Hosting
 
             private static string[] GetDisplayNames(
                 IEnumerable<ComposablePartDefinition> definitions
-            ) {
+            )
+            {
                 return definitions.OfType<ICompositionElement>()
                     .Select(p => p.DisplayName)
                     .ToArray();

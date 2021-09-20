@@ -17,11 +17,13 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
 
         public HasValidatorsValidationMetadataProvider(
             IList<IModelValidatorProvider> modelValidatorProviders
-        ) {
+        )
+        {
             if (
                 modelValidatorProviders.Count > 0
                 && modelValidatorProviders.All(p => p is IMetadataBasedModelValidatorProvider)
-            ) {
+            )
+            {
                 _hasOnlyMetadataBasedValidators = true;
                 _validatorProviders =
                     modelValidatorProviders.Cast<IMetadataBasedModelValidatorProvider>().ToArray();
@@ -48,7 +50,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
                         context.Key.ModelType,
                         context.ValidationMetadata.ValidatorMetadata
                     )
-                ) {
+                )
+                {
                     context.ValidationMetadata.HasValidators = true;
 
                     if (context.Key.MetadataKind == ModelMetadataKind.Property)

@@ -118,7 +118,8 @@ namespace System.Net.Http.Formatting
         public void ComparerReturnsZeroForEqualValues(
             string stringWithQuality1,
             string stringWithQuality2
-        ) {
+        )
+        {
             // Arrange
             StringWithQualityHeaderValueComparer comparer =
                 StringWithQualityHeaderValueComparer.QualityComparer;
@@ -145,7 +146,8 @@ namespace System.Net.Http.Formatting
         public void ComparerReturnsNonZeroForNonEqualValues(
             string stringWithQuality1,
             string stringWithQuality2
-        ) {
+        )
+        {
             // Arrange
             StringWithQualityHeaderValueComparer comparer =
                 StringWithQualityHeaderValueComparer.QualityComparer;

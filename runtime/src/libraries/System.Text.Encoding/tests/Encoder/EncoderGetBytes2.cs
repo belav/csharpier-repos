@@ -158,7 +158,8 @@ namespace System.Text.Tests
             char[] chars,
             int expectedPartial,
             int expectedComplete
-        ) {
+        )
+        {
             VerificationHelper(
                 encoder,
                 chars,
@@ -211,7 +212,8 @@ namespace System.Text.Tests
             int asciiSize,
             int unicodeSize0,
             int unicodeSize1
-        ) {
+        )
+        {
             static void encoderGetBytesMixedInput(
                 Encoder encoder,
                 char[] chars,
@@ -219,7 +221,8 @@ namespace System.Text.Tests
                 int asciiSize,
                 int unicodeSize0,
                 int unicodeSize1
-            ) {
+            )
+            {
                 int byteLength =
                     asciiSize
                     + Clamp(length - 1, 0, 1) * unicodeSize0
@@ -254,7 +257,8 @@ namespace System.Text.Tests
             int asciiSize,
             int unicodeSize0,
             int unicodeSize1
-        ) {
+        )
+        {
             // Bytes does not have enough capacity to accomodate result
             string s = "T\uD83D\uDE01est";
             char[] c = s.ToCharArray();
@@ -272,7 +276,8 @@ namespace System.Text.Tests
             int asciiSize,
             int unicodeSize0,
             int unicodeSize1
-        ) {
+        )
+        {
             int byteLength =
                 asciiSize
                 + Clamp(length - 1, 0, 1) * unicodeSize0
@@ -301,7 +306,8 @@ namespace System.Text.Tests
             int charCount,
             byte[] b,
             int byteCount
-        ) {
+        )
+        {
             fixed (char* pChar = c)fixed (byte* pByte = b)
             {
                 Assert.Equal(
@@ -320,7 +326,8 @@ namespace System.Text.Tests
             int byteIndex,
             bool flush,
             int expectedRetVal
-        ) {
+        )
+        {
             int actualRetVal = encoder.GetBytes(
                 chars,
                 charIndex,

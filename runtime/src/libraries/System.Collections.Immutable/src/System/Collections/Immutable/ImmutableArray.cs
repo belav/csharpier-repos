@@ -225,7 +225,8 @@ namespace System.Collections.Immutable
         public static ImmutableArray<TResult> CreateRange<TSource, TResult>(
             ImmutableArray<TSource> items,
             Func<TSource, TResult> selector
-        ) {
+        )
+        {
             Requires.NotNull(selector, nameof(selector));
 
             int length = items.Length;
@@ -261,7 +262,8 @@ namespace System.Collections.Immutable
             int start,
             int length,
             Func<TSource, TResult> selector
-        ) {
+        )
+        {
             int itemsLength = items.Length;
 
             Requires.Range(start >= 0 && start <= itemsLength, nameof(start));
@@ -297,7 +299,8 @@ namespace System.Collections.Immutable
             ImmutableArray<TSource> items,
             Func<TSource, TArg, TResult> selector,
             TArg arg
-        ) {
+        )
+        {
             Requires.NotNull(selector, nameof(selector));
 
             int length = items.Length;
@@ -335,7 +338,8 @@ namespace System.Collections.Immutable
             int length,
             Func<TSource, TArg, TResult> selector,
             TArg arg
-        ) {
+        )
+        {
             int itemsLength = items.Length;
 
             Requires.Range(start >= 0 && start <= itemsLength, nameof(start));
@@ -385,7 +389,8 @@ namespace System.Collections.Immutable
         /// <returns>An immutable array.</returns>
         public static ImmutableArray<TSource> ToImmutableArray<TSource>(
             this IEnumerable<TSource> items
-        ) {
+        )
+        {
             if (items is ImmutableArray<TSource>)
             {
                 return (ImmutableArray<TSource>)items;
@@ -401,7 +406,8 @@ namespace System.Collections.Immutable
         /// <returns>An immutable array.</returns>
         public static ImmutableArray<TSource> ToImmutableArray<TSource>(
             this ImmutableArray<TSource>.Builder builder
-        ) {
+        )
+        {
             Requires.NotNull(builder, nameof(builder));
 
             return builder.ToImmutable();
@@ -462,7 +468,8 @@ namespace System.Collections.Immutable
             this ImmutableArray<T> array,
             T value,
             IComparer<T>? comparer
-        ) {
+        )
+        {
             return Array.BinarySearch<T>(array.array!, value, comparer);
         }
 
@@ -500,7 +507,8 @@ namespace System.Collections.Immutable
             int index,
             int length,
             T value
-        ) {
+        )
+        {
             return Array.BinarySearch<T>(array.array!, index, length, value);
         }
 
@@ -545,7 +553,8 @@ namespace System.Collections.Immutable
             int length,
             T value,
             IComparer<T>? comparer
-        ) {
+        )
+        {
             return Array.BinarySearch<T>(array.array!, index, length, value, comparer);
         }
     }

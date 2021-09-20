@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis
                 string name,
                 ImmutableArray<byte> publicKeyToken,
                 AssemblyVersion version
-            ) {
+            )
+            {
                 Add(name, new Value(publicKeyToken, version));
             }
         }
@@ -95,7 +96,8 @@ namespace Microsoft.CodeAnalysis
                     ImmutableArray<byte> newPublicKeyToken,
                     AssemblyVersion newVersion,
                     bool isPortable
-                ) {
+                )
+                {
                     VersionLow = versionLow;
                     VersionHigh = versionHigh;
                     NewName = newName;
@@ -113,7 +115,8 @@ namespace Microsoft.CodeAnalysis
                 string newName,
                 ImmutableArray<byte> newPublicKeyToken,
                 AssemblyVersion newVersion
-            ) {
+            )
+            {
                 List<Value>? values;
                 var key = new Key(name, publicKeyToken);
                 if (!TryGetValue(key, out values))
@@ -142,7 +145,8 @@ namespace Microsoft.CodeAnalysis
                 ImmutableArray<byte> newPublicKeyToken,
                 AssemblyVersion newVersion,
                 bool isPortable
-            ) {
+            )
+            {
                 List<Value>? values;
                 var key = new Key(name, publicKeyToken);
                 if (!TryGetValue(key, out values))

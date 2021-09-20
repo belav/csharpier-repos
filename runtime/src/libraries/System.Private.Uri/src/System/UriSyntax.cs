@@ -301,7 +301,8 @@ namespace System
                 || type == typeof(NetPipeStyleUriParser)
                 || type == typeof(NetTcpStyleUriParser)
                 || type == typeof(LdapStyleUriParser)
-            ) {
+            )
+            {
                 _flags |= UriSyntaxFlags.SimpleUserSyntax;
             }
         }
@@ -339,7 +340,8 @@ namespace System
             Uri thisBaseUri,
             Uri uriLink,
             out UriFormatException? parsingError
-        ) {
+        )
+        {
             return Resolve(thisBaseUri, uriLink, out parsingError);
         }
 
@@ -352,7 +354,8 @@ namespace System
             Uri thisUri,
             UriComponents uriComponents,
             UriFormat uriFormat
-        ) {
+        )
+        {
             return GetComponents(thisUri, uriComponents, uriFormat);
         }
 

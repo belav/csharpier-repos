@@ -71,7 +71,8 @@ class HWIntrinsicsTests
             var method in typeof(SseTests).GetMethods()
                 .OrderBy(m => m.Name) // TODO: the default order is different in Mono
                 .Where(m => m.GetParameters().Length == 0 && m.DeclaringType == typeof(SseTests))
-        ) {
+        )
+        {
             try
             {
                 // clear test data each iteration

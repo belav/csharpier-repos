@@ -181,7 +181,8 @@ namespace System.IO.Ports.Tests
             Encoding encoding,
             int numberOfBytesToRead,
             ReadDataFromEnum readDataFrom
-        ) {
+        )
+        {
             using (SerialPort com1 = TCSupport.InitFirstSerialPort())
             using (SerialPort com2 = TCSupport.InitSecondSerialPort(com1))
             {
@@ -256,7 +257,8 @@ namespace System.IO.Ports.Tests
             SerialPort com1,
             SerialPort com2,
             byte[] bytesToWrite
-        ) {
+        )
+        {
             char[] expectedChars = new char[
                 com1.Encoding.GetCharCount(bytesToWrite, 0, bytesToWrite.Length) * 2
             ];
@@ -287,7 +289,8 @@ namespace System.IO.Ports.Tests
             SerialPort com2,
             byte[] bytesToWrite,
             char[] expectedChars
-        ) {
+        )
+        {
             com2.Write(bytesToWrite, 0, bytesToWrite.Length);
             com1.ReadTimeout = 500;
             Thread.Sleep((int)(((bytesToWrite.Length * 10.0) / com1.BaudRate) * 1000) + 250);
@@ -298,7 +301,8 @@ namespace System.IO.Ports.Tests
             SerialPort com1,
             SerialPort com2,
             char[] expectedChars
-        ) {
+        )
+        {
             string rcvString = com1.ReadExisting();
             char[] rcvBuffer = rcvString.ToCharArray();
 

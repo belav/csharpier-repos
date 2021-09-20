@@ -111,7 +111,8 @@ namespace Microsoft.EntityFrameworkCore
             int numberOfGenres,
             int numberOfAlbums,
             DbContext context
-        ) {
+        )
+        {
             var artist = new Artist { Name = "Artist1" };
 
             var genres = Enumerable.Range(1, numberOfGenres)
@@ -585,7 +586,8 @@ namespace Microsoft.EntityFrameworkCore
             string cartId,
             decimal itemPrice,
             int numberOfItems
-        ) {
+        )
+        {
             var albums = CreateTestAlbums(
                 itemPrice,
                 new Artist { Name = "Kung Fu Kenny" },
@@ -745,7 +747,8 @@ namespace Microsoft.EntityFrameworkCore
                 MusicStoreContext context,
                 string cartId,
                 Order order
-            ) {
+            )
+            {
                 try
                 {
                     if (
@@ -754,7 +757,8 @@ namespace Microsoft.EntityFrameworkCore
                             PromoCode,
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         return null;
                     }
 
@@ -823,7 +827,8 @@ namespace Microsoft.EntityFrameworkCore
             private Task<List<Album>> GetTopSellingAlbumsAsync(
                 MusicStoreContext dbContext,
                 int count
-            ) {
+            )
+            {
                 return dbContext.Albums.OrderByDescending(a => a.OrderDetails.Count)
                     .Take(count)
                     .ToListAsync();

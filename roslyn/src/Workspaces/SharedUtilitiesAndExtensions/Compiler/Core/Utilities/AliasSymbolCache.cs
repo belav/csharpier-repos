@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             int namespaceId,
             INamespaceOrTypeSymbol targetSymbol,
             out IAliasSymbol? aliasSymbol
-        ) {
+        )
+        {
             // TODO: given semantic model must be not speculative semantic model for now.
             // currently it can't be checked since it is not exposed to common layer yet.
             // once exposed, this method itself will make sure it use original semantic model
@@ -38,7 +39,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             if (
                 !s_treeAliasMap.TryGetValue(semanticModel.Compilation, out var treeMap)
                 || !treeMap.TryGetValue((semanticModel.SyntaxTree, namespaceId), out var symbolMap)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -50,7 +52,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             SemanticModel semanticModel,
             int namespaceId,
             IEnumerable<IAliasSymbol> aliasSymbols
-        ) {
+        )
+        {
             // given semantic model must be the original semantic model for now
             var treeMap = s_treeAliasMap.GetValue(semanticModel.Compilation, s_createTreeMap);
 

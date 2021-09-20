@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting
         public static ScriptOptions WithLanguageVersion(
             this ScriptOptions options,
             LanguageVersion languageVersion
-        ) {
+        )
+        {
             var parseOptions =
                 (options.ParseOptions is null)
                     ? CSharpScriptCompiler.DefaultParseOptions

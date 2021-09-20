@@ -52,15 +52,17 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
             IDocumentProvider documentProvider,
             IList<Lazy<ISignatureHelpProvider, OrderableLanguageMetadata>> allProviders,
             IAsyncCompletionBroker completionBroker
-        ) : base(
-            threadingContext,
-            textView,
-            subjectBuffer,
-            presenter,
-            asyncListener,
-            documentProvider,
-            "SignatureHelp"
-        ) {
+        )
+            : base(
+                threadingContext,
+                textView,
+                subjectBuffer,
+                presenter,
+                asyncListener,
+                documentProvider,
+                "SignatureHelp"
+            )
+        {
             _completionBroker = completionBroker;
             _allProviders = allProviders;
         }
@@ -75,15 +77,17 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
             IDocumentProvider documentProvider,
             IList<ISignatureHelpProvider> providers,
             IAsyncCompletionBroker completionBroker
-        ) : base(
-            threadingContext,
-            textView,
-            subjectBuffer,
-            presenter,
-            asyncListener,
-            documentProvider,
-            "SignatureHelp"
-        ) {
+        )
+            : base(
+                threadingContext,
+                textView,
+                subjectBuffer,
+                presenter,
+                asyncListener,
+                documentProvider,
+                "SignatureHelp"
+            )
+        {
             _providers = providers.ToImmutableArray();
             _completionBroker = completionBroker;
         }
@@ -142,7 +146,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
         private void StartSession(
             ImmutableArray<ISignatureHelpProvider> providers,
             SignatureHelpTriggerInfo triggerInfo
-        ) {
+        )
+        {
             AssertIsForeground();
             VerifySessionIsInactive();
 

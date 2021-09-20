@@ -144,7 +144,8 @@ namespace System.Net.Http.Functional.Tests
             HttpsTestServer.Options options,
             HttpsTestServer server,
             HttpClientHandler handler
-        ) {
+        )
+        {
             if (Capability.AreHostsFileNamesInstalled())
             {
                 string hostName = (
@@ -171,7 +172,8 @@ namespace System.Net.Http.Functional.Tests
             X509Certificate2 certificate,
             X509Chain chain,
             SslPolicyErrors errors
-        ) {
+        )
+        {
             if (errors == SslPolicyErrors.RemoteCertificateNameMismatch)
             {
                 return true;

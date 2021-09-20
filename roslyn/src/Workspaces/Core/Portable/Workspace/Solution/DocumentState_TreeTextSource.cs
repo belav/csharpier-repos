@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis
                 ValueSource<SourceText> text,
                 VersionStamp version,
                 string filePath
-            ) {
+            )
+            {
                 _lazyText = text;
                 _version = version;
                 _filePath = filePath;
@@ -34,7 +35,8 @@ namespace Microsoft.CodeAnalysis
 
             public override async Task<TextAndVersion> GetValueAsync(
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 var text = await _lazyText.GetValueAsync(cancellationToken).ConfigureAwait(false);
                 return TextAndVersion.Create(text, _version, _filePath);
             }

@@ -40,7 +40,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             string fileKind,
             IReadOnlyList<RazorSourceDocument> importSources,
             IReadOnlyList<TagHelperDescriptor> tagHelpers
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -54,7 +55,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             string fileKind,
             IReadOnlyList<RazorSourceDocument> importSources,
             IReadOnlyList<TagHelperDescriptor> tagHelpers
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -63,7 +65,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             string fileKind,
             IReadOnlyList<RazorSourceDocument> importSources,
             IReadOnlyList<TagHelperDescriptor> tagHelpers
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -89,7 +92,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         internal static RazorProjectEngine CreateEmpty(
             Action<RazorProjectEngineBuilder> configure = null
-        ) {
+        )
+        {
             var builder = new DefaultRazorProjectEngineBuilder(
                 RazorConfiguration.Default,
                 RazorProjectFileSystem.Empty
@@ -112,7 +116,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             RazorConfiguration configuration,
             RazorProjectFileSystem fileSystem,
             Action<RazorProjectEngineBuilder> configure
-        ) {
+        )
+        {
             if (fileSystem == null)
             {
                 throw new ArgumentNullException(nameof(fileSystem));
@@ -248,7 +253,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         private static void AddComponentFeatures(
             RazorProjectEngineBuilder builder,
             RazorLanguageVersion razorLanguageVersion
-        ) {
+        )
+        {
             // Project Engine Features
             builder.Features.Add(new ComponentImportProjectFeature());
 
@@ -295,7 +301,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         private static void LoadExtensions(
             RazorProjectEngineBuilder builder,
             IReadOnlyList<RazorExtension> extensions
-        ) {
+        )
+        {
             for (var i = 0; i < extensions.Count; i++)
             {
                 // For now we only handle AssemblyExtension - which is not user-constructable. We're keeping a tight

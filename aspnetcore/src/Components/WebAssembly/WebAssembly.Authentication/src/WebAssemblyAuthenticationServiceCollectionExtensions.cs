@@ -34,11 +34,10 @@ namespace Microsoft.Extensions.DependencyInjection
             TRemoteAuthenticationState,
             [DynamicallyAccessedMembers(JsonSerialized)] TAccount,
             TProviderOptions
-        >(
-            this IServiceCollection services
-        ) where TRemoteAuthenticationState : RemoteAuthenticationState
-          where TAccount : RemoteUserAccount
-          where TProviderOptions : class, new()
+        >(this IServiceCollection services)
+            where TRemoteAuthenticationState : RemoteAuthenticationState
+            where TAccount : RemoteUserAccount
+            where TProviderOptions : class, new()
         {
             services.AddOptions();
             services.AddAuthorizationCore();
@@ -95,9 +94,10 @@ namespace Microsoft.Extensions.DependencyInjection
         >(
             this IServiceCollection services,
             Action<RemoteAuthenticationOptions<TProviderOptions>> configure
-        ) where TRemoteAuthenticationState : RemoteAuthenticationState
-          where TAccount : RemoteUserAccount
-          where TProviderOptions : class, new()
+        )
+            where TRemoteAuthenticationState : RemoteAuthenticationState
+            where TAccount : RemoteUserAccount
+            where TProviderOptions : class, new()
         {
             services.AddRemoteAuthentication<
                 TRemoteAuthenticationState,
@@ -124,7 +124,8 @@ namespace Microsoft.Extensions.DependencyInjection
         > AddOidcAuthentication(
             this IServiceCollection services,
             Action<RemoteAuthenticationOptions<OidcProviderOptions>> configure
-        ) {
+        )
+        {
             return AddOidcAuthentication<RemoteAuthenticationState>(services, configure);
         }
 
@@ -166,8 +167,9 @@ namespace Microsoft.Extensions.DependencyInjection
         >(
             this IServiceCollection services,
             Action<RemoteAuthenticationOptions<OidcProviderOptions>> configure
-        ) where TRemoteAuthenticationState : RemoteAuthenticationState, new()
-          where TAccount : RemoteUserAccount
+        )
+            where TRemoteAuthenticationState : RemoteAuthenticationState, new()
+            where TAccount : RemoteUserAccount
         {
             services.TryAddEnumerable(
                 ServiceDescriptor.Scoped<
@@ -209,9 +211,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IRemoteAuthenticationBuilder<
             TRemoteAuthenticationState,
             RemoteUserAccount
-        > AddApiAuthorization<TRemoteAuthenticationState>(
-            this IServiceCollection services
-        ) where TRemoteAuthenticationState : RemoteAuthenticationState, new()
+        > AddApiAuthorization<TRemoteAuthenticationState>(this IServiceCollection services)
+            where TRemoteAuthenticationState : RemoteAuthenticationState, new()
         {
             return AddApiAuthorizationCore<TRemoteAuthenticationState, RemoteUserAccount>(
                 services,
@@ -233,10 +234,9 @@ namespace Microsoft.Extensions.DependencyInjection
         > AddApiAuthorization<
             TRemoteAuthenticationState,
             [DynamicallyAccessedMembers(JsonSerialized)] TAccount
-        >(
-            this IServiceCollection services
-        ) where TRemoteAuthenticationState : RemoteAuthenticationState, new()
-          where TAccount : RemoteUserAccount
+        >(this IServiceCollection services)
+            where TRemoteAuthenticationState : RemoteAuthenticationState, new()
+            where TAccount : RemoteUserAccount
         {
             return AddApiAuthorizationCore<TRemoteAuthenticationState, TAccount>(
                 services,
@@ -257,7 +257,8 @@ namespace Microsoft.Extensions.DependencyInjection
         > AddApiAuthorization(
             this IServiceCollection services,
             Action<RemoteAuthenticationOptions<ApiAuthorizationProviderOptions>> configure
-        ) {
+        )
+        {
             return AddApiAuthorizationCore<RemoteAuthenticationState, RemoteUserAccount>(
                 services,
                 configure,
@@ -304,8 +305,9 @@ namespace Microsoft.Extensions.DependencyInjection
         >(
             this IServiceCollection services,
             Action<RemoteAuthenticationOptions<ApiAuthorizationProviderOptions>> configure
-        ) where TRemoteAuthenticationState : RemoteAuthenticationState, new()
-          where TAccount : RemoteUserAccount
+        )
+            where TRemoteAuthenticationState : RemoteAuthenticationState, new()
+            where TAccount : RemoteUserAccount
         {
             return AddApiAuthorizationCore<TRemoteAuthenticationState, TAccount>(
                 services,
@@ -324,8 +326,9 @@ namespace Microsoft.Extensions.DependencyInjection
             IServiceCollection services,
             Action<RemoteAuthenticationOptions<ApiAuthorizationProviderOptions>> configure,
             string inferredClientId
-        ) where TRemoteAuthenticationState : RemoteAuthenticationState
-          where TAccount : RemoteUserAccount
+        )
+            where TRemoteAuthenticationState : RemoteAuthenticationState
+            where TAccount : RemoteUserAccount
         {
             services.TryAddEnumerable(
                 ServiceDescriptor.Scoped<

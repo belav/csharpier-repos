@@ -84,7 +84,8 @@ namespace System.Xml.Xsl.XsltOld
                         nodeType != XPathNodeType.Whitespace
                         && nodeType != XPathNodeType.Comment
                         && nodeType != XPathNodeType.ProcessingInstruction
-                    ) {
+                    )
+                    {
                         throw XsltException.Create(SR.Xslt_NotEmptyContents, elementName);
                     }
                 } while (compiler.Advance());

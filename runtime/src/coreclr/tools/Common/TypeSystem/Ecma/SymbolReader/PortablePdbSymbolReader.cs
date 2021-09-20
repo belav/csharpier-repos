@@ -22,7 +22,8 @@ namespace Internal.TypeSystem.Ecma
             string filePath,
             MetadataStringDecoder stringDecoder,
             out MemoryMappedViewAccessor mappedViewAccessor
-        ) {
+        )
+        {
             FileStream fileStream = null;
             MemoryMappedFile mappedFile = null;
             MemoryMappedViewAccessor accessor = null;
@@ -58,7 +59,8 @@ namespace Internal.TypeSystem.Ecma
                     safeBuffer.Read<byte>(1) != 'S'
                     || safeBuffer.Read<byte>(2) != 'J'
                     || safeBuffer.Read<byte>(3) != 'B'
-                ) {
+                )
+                {
                     mappedViewAccessor = null;
                     return null;
                 }
@@ -92,7 +94,8 @@ namespace Internal.TypeSystem.Ecma
         public static PdbSymbolReader TryOpen(
             string pdbFilename,
             MetadataStringDecoder stringDecoder
-        ) {
+        )
+        {
             MemoryMappedViewAccessor mappedViewAccessor;
             MetadataReader reader = TryOpenMetadataFile(
                 pdbFilename,
@@ -108,7 +111,8 @@ namespace Internal.TypeSystem.Ecma
         public static PdbSymbolReader TryOpenEmbedded(
             PEReader peReader,
             MetadataStringDecoder stringDecoder
-        ) {
+        )
+        {
             foreach (DebugDirectoryEntry debugEntry in peReader.ReadDebugDirectory())
             {
                 if (debugEntry.Type != DebugDirectoryEntryType.EmbeddedPortablePdb)
@@ -132,7 +136,8 @@ namespace Internal.TypeSystem.Ecma
         private PortablePdbSymbolReader(
             MetadataReader reader,
             MemoryMappedViewAccessor mappedViewAccessor
-        ) {
+        )
+        {
             _reader = reader;
             _mappedViewAccessor = mappedViewAccessor;
         }
@@ -186,7 +191,8 @@ namespace Internal.TypeSystem.Ecma
         private void ProbeScopeForLocals(
             List<ILLocalVariable> variables,
             LocalScopeHandle localScopeHandle
-        ) {
+        )
+        {
             var localScope = _reader.GetLocalScope(localScopeHandle);
 
             foreach (var localVariableHandle in localScope.GetLocalVariables())

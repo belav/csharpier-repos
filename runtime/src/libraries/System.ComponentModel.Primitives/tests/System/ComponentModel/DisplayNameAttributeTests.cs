@@ -91,13 +91,15 @@ namespace System.ComponentModel.Tests
             DisplayNameAttribute attribute,
             object other,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, attribute.Equals(other));
             if (
                 other is DisplayNameAttribute otherAttribute
                 && otherAttribute.DisplayName != null
                 && attribute.DisplayName != null
-            ) {
+            )
+            {
                 Assert.Equal(expected, attribute.GetHashCode().Equals(other.GetHashCode()));
             }
         }

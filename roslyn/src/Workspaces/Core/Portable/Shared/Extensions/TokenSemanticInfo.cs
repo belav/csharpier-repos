@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             ITypeSymbol type,
             ITypeSymbol convertedType,
             TextSpan span
-        ) {
+        )
+        {
             DeclaredSymbol = declaredSymbol;
             AliasSymbol = aliasSymbol;
             ReferencedSymbols = referencedSymbols;

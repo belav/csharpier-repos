@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Rewrite.PatternSegments
             RewriteContext context,
             BackReferenceCollection? ruleBackReferences,
             BackReferenceCollection? conditionBackReferences
-        ) {
+        )
+        {
             return _uriMatchPart == UriMatchPart.Full
               ? context.HttpContext.Request.GetEncodedUrl()
               : (string)context.HttpContext.Request.Path;

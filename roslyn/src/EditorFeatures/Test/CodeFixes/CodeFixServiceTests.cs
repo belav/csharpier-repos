@@ -273,7 +273,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
             DiagnosticAnalyzer diagnosticAnalyzer,
             bool exception = false,
             bool throwExceptionInFixerCreation = false
-        ) {
+        )
+        {
             var tuple = ServiceSetup(
                 codefix,
                 throwExceptionInFixerCreation: throwExceptionInFixerCreation
@@ -322,7 +323,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
 
         private static async Task GetFirstDiagnosticWithFixWithExceptionValidationAsync(
             CodeFixProvider codefix
-        ) {
+        )
+        {
             var tuple = ServiceSetup(codefix);
             using var workspace = tuple.workspace;
 
@@ -352,7 +354,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
             CodeFixProvider codefix,
             bool includeConfigurationFixProviders = false,
             bool throwExceptionInFixerCreation = false
-        ) {
+        )
+        {
             var fixers = SpecializedCollections.SingletonEnumerable(
                 new Lazy<CodeFixProvider, CodeChangeProviderMetadata>(
                     () => throwExceptionInFixerCreation ? throw new Exception() : codefix,
@@ -410,7 +413,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
             out Document document,
             out EditorLayerExtensionManager.ExtensionManager extensionManager,
             MockAnalyzerReference? analyzerReference = null
-        ) {
+        )
+        {
             var incrementalAnalyzer = (IIncrementalAnalyzerProvider)diagnosticService;
 
             // register diagnostic engine to solution crawler
@@ -465,7 +469,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
             public MockAnalyzerReference(
                 CodeFixProvider? fixer,
                 ImmutableArray<DiagnosticAnalyzer> analyzers
-            ) {
+            )
+            {
                 Fixer = fixer;
                 Analyzers = analyzers;
             }
@@ -520,7 +525,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
 
                 private static ImmutableArray<DiagnosticDescriptor> CreateSupportedDiagnostics(
                     ImmutableArray<(string id, string category)> reportedDiagnosticIdsWithCategories
-                ) {
+                )
+                {
                     var builder = ArrayBuilder<DiagnosticDescriptor>.GetInstance();
                     foreach (var (diagnosticId, category) in reportedDiagnosticIdsWithCategories)
                     {
@@ -618,7 +624,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
             VsixCodeFixProvider? vsixFixer,
             bool expectedVsixFixerCodeActionWasRegistered,
             MockAnalyzerReference.MockDiagnosticAnalyzer? diagnosticAnalyzer = null
-        ) {
+        )
+        {
             var fixes = await GetNuGetAndVsixCodeFixersCoreAsync(
                 nugetFixer,
                 vsixFixer,
@@ -714,7 +721,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
             VsixCodeFixProvider? vsixFixer,
             ImmutableArray<string> expectedDiagnosticIdsWithRegisteredCodeActionsByVsixFixer,
             MockAnalyzerReference.MockDiagnosticAnalyzer diagnosticAnalyzer
-        ) {
+        )
+        {
             var fixes = (
                 await GetNuGetAndVsixCodeFixersCoreAsync(nugetFixer, vsixFixer, diagnosticAnalyzer)
             ).SelectMany(fixCollection => fixCollection.Fixes);
@@ -748,7 +756,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
             NuGetCodeFixProvider? nugetFixer,
             VsixCodeFixProvider? vsixFixer,
             MockAnalyzerReference.MockDiagnosticAnalyzer? diagnosticAnalyzer = null
-        ) {
+        )
+        {
             var code = @"class C { }";
 
             var vsixFixers =
@@ -832,7 +841,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
             protected AbstractNuGetOrVsixCodeFixProvider(
                 ImmutableArray<string> fixableDiagnsoticIds,
                 string name
-            ) {
+            )
+            {
                 FixableDiagnosticIds = fixableDiagnsoticIds;
                 _name = name;
             }
@@ -882,7 +892,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
             public CodeFixProviderWithDuplicateEquivalenceKeyActions(
                 string diagnosticId,
                 string? equivalenceKey
-            ) {
+            )
+            {
                 _diagnosticId = diagnosticId;
                 _equivalenceKey = equivalenceKey;
             }

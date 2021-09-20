@@ -113,7 +113,8 @@ namespace Castle.DynamicProxy
                                     invokeMethod,
                                     MethodSignatureComparer.Instance
                                 )
-                            ) {
+                            )
+                            {
                                 throw new ArgumentException(
                                     "The list of mixins contains at least two delegate mixins for the same delegate signature.",
                                     nameof(mixinInstances)

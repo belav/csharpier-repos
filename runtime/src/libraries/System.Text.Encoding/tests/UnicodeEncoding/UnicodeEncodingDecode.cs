@@ -519,7 +519,8 @@ namespace System.Text.Tests
             int index,
             int count,
             string expected
-        ) {
+        )
+        {
             byte[] bigEndianBytes = GetBigEndianBytes(littleEndianBytes, index, count);
 
             EncodingHelpers.Decode(

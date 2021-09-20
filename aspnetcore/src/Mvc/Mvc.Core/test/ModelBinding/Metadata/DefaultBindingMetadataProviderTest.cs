@@ -702,7 +702,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
         [InlineData(false)]
         public void CreateBindingDetails_BindingBehaviorLeftAlone_ForAttributeOnPropertyType(
             bool initialValue
-        ) {
+        )
+        {
             // Arrange
             var typeAttributes = new object[]
             {
@@ -841,7 +842,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
         [InlineData(typeof(RecordTypeWithParameterlessConstructor))]
         public void GetBoundConstructor_ReturnsNull_ForRecordTypeWithParameterlessConstructor(
             Type type
-        ) {
+        )
+        {
             // Act
             var result = DefaultBindingMetadataProvider.GetBoundConstructor(type);
 

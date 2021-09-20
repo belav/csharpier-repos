@@ -19,7 +19,8 @@ namespace System.IO.MemoryMappedFiles
             MemoryMappedFileAccess access,
             long offset,
             long size
-        ) {
+        )
+        {
             // MapViewOfFile can only create views that start at a multiple of the system memory allocation
             // granularity. We decided to hide this restriction from the user by creating larger views than the
             // user requested and hiding the parts that the user did not request.  extraMemNeeded is the amount of
@@ -77,7 +78,8 @@ namespace System.IO.MemoryMappedFiles
             if (
                 ((viewInfo.State & Interop.Kernel32.MemOptions.MEM_RESERVE) != 0)
                 || ((ulong)viewSize < (ulong)nativeSize)
-            ) {
+            )
+            {
                 IntPtr tempHandle = Interop.VirtualAlloc(
                     viewHandle,
                     (UIntPtr)(nativeSize != MemoryMappedFile.DefaultSize ? nativeSize : viewSize),

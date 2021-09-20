@@ -19,17 +19,19 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             CodeGenerationNamedTypeSymbol constructedFrom,
             ImmutableArray<ITypeSymbol> typeArguments,
             ImmutableArray<CodeGenerationAbstractNamedTypeSymbol> typeMembers
-        ) : base(
-            constructedFrom.ContainingAssembly,
-            constructedFrom.ContainingType,
-            constructedFrom.GetAttributes(),
-            constructedFrom.DeclaredAccessibility,
-            constructedFrom.Modifiers,
-            constructedFrom.Name,
-            constructedFrom.SpecialType,
-            constructedFrom.NullableAnnotation,
-            typeMembers
-        ) {
+        )
+            : base(
+                constructedFrom.ContainingAssembly,
+                constructedFrom.ContainingType,
+                constructedFrom.GetAttributes(),
+                constructedFrom.DeclaredAccessibility,
+                constructedFrom.Modifiers,
+                constructedFrom.Name,
+                constructedFrom.SpecialType,
+                constructedFrom.NullableAnnotation,
+                typeMembers
+            )
+        {
             _constructedFrom = constructedFrom;
             this.OriginalDefinition = constructedFrom.OriginalDefinition;
             _typeArguments = typeArguments;
@@ -103,7 +105,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 
         protected override CodeGenerationTypeSymbol CloneWithNullableAnnotation(
             NullableAnnotation nullableAnnotation
-        ) {
+        )
+        {
             return new CodeGenerationConstructedNamedTypeSymbol(
                 (CodeGenerationNamedTypeSymbol)_constructedFrom.WithNullableAnnotation(
                     nullableAnnotation

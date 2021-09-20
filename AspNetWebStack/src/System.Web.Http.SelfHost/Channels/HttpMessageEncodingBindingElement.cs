@@ -58,7 +58,8 @@ namespace System.Web.Http.SelfHost.Channels
         /// <returns>ALways false.</returns>
         public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(
             BindingContext context
-        ) {
+        )
+        {
             throw Error.NotSupported(
                 SRResources.ChannelFactoryNotSupported,
                 typeof(HttpMessageEncodingBindingElement).Name,
@@ -93,7 +94,8 @@ namespace System.Web.Http.SelfHost.Channels
         /// <returns>The <see cref="IChannelListener{TChannel}"/> of type <see cref="IChannel"/> initialized from the context.</returns>
         public override IChannelListener<TChannel> BuildChannelListener<TChannel>(
             BindingContext context
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw Error.ArgumentNull("context");

@@ -29,9 +29,8 @@ namespace System.Net.Http
         /// HTTP request or response will be completed.
         /// </summary>
         /// <param name="onStreamAvailable">The action to call when an output stream is available.</param>
-        public PushStreamContent(
-            Action<Stream, HttpContent, TransportContext> onStreamAvailable
-        ) : this(Taskify(onStreamAvailable), (MediaTypeHeaderValue)null) { }
+        public PushStreamContent(Action<Stream, HttpContent, TransportContext> onStreamAvailable)
+            : this(Taskify(onStreamAvailable), (MediaTypeHeaderValue)null) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PushStreamContent"/> class. 
@@ -72,7 +71,8 @@ namespace System.Net.Http
         public PushStreamContent(
             Func<Stream, HttpContent, TransportContext, Task> onStreamAvailable,
             MediaTypeHeaderValue mediaType
-        ) {
+        )
+        {
             if (onStreamAvailable == null)
             {
                 throw Error.ArgumentNull("onStreamAvailable");
@@ -84,7 +84,8 @@ namespace System.Net.Http
 
         private static Func<Stream, HttpContent, TransportContext, Task> Taskify(
             Action<Stream, HttpContent, TransportContext> onStreamAvailable
-        ) {
+        )
+        {
             if (onStreamAvailable == null)
             {
                 throw Error.ArgumentNull("onStreamAvailable");
@@ -113,7 +114,8 @@ namespace System.Net.Http
         protected override async Task SerializeToStreamAsync(
             Stream stream,
             TransportContext context
-        ) {
+        )
+        {
             TaskCompletionSource<bool> serializeToStreamTask = new TaskCompletionSource<bool>();
 
             Stream wrappedStream = new CompleteTaskOnCloseStream(stream, serializeToStreamTask);

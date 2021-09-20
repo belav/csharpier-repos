@@ -25,7 +25,8 @@ namespace System.Xml
 
             IDictionary<string, string> IXmlNamespaceResolver.GetNamespacesInScope(
                 XmlNamespaceScope scope
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
             string? IXmlNamespaceResolver.LookupNamespace(string prefix)
@@ -439,7 +440,8 @@ namespace System.Xml
                             while (
                                 bufChunk.index < endIndex
                                 && XmlCharType.IsWhiteSpace(bufChunk.buffer[bufChunk.index])
-                            ) {
+                            )
+                            {
                                 bufChunk.index++;
                                 bufChunk.count--;
                             }
@@ -482,7 +484,8 @@ namespace System.Xml
                                 && XmlCharType.IsWhiteSpace(
                                     bufChunk.buffer[bufChunk.index + bufChunk.count - 1]
                                 )
-                            ) {
+                            )
+                            {
                                 bufChunk.count--;
                             }
 

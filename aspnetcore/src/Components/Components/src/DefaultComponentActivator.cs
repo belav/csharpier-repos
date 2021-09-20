@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.Components
         public IComponent CreateInstance(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
                 Type componentType
-        ) {
+        )
+        {
             if (!typeof(IComponent).IsAssignableFrom(componentType))
             {
                 throw new ArgumentException(

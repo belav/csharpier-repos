@@ -53,7 +53,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             bool standAloneStateManager,
             bool detailedErrorsEnabled,
             bool concurrencyDetectionEnabled
-        ) {
+        )
+        {
             _relationalQueryContext = relationalQueryContext;
             _relationalCommandCache = relationalCommandCache;
             _shaper = shaper;
@@ -72,7 +73,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         /// </summary>
         public virtual IAsyncEnumerator<T> GetAsyncEnumerator(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             _relationalQueryContext.CancellationToken = cancellationToken;
 
             return new AsyncEnumerator(this);
@@ -378,7 +380,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                                             _relationalQueryContext.CancellationToken
                                         )
                                         .ConfigureAwait(false)
-                                ) {
+                                )
+                                {
                                     _resultCoordinator.HasNext = false;
                                     // Enumeration has ended, materialize last element
                                     _resultCoordinator.ResultReady = true;
@@ -412,7 +415,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             private static async Task<bool> InitializeReaderAsync(
                 AsyncEnumerator enumerator,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 EntityFrameworkEventSource.Log.QueryExecuting();
 
                 var relationalCommandTemplate =

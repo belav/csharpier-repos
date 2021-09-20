@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IMethodSymbol constructor,
             CodeGenerationOptions options,
             IList<bool> availableIndices
-        ) {
+        )
+        {
             var constructorDeclaration = GenerateConstructorDeclaration(
                 constructor,
                 options,
@@ -54,7 +55,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IMethodSymbol constructor,
             CodeGenerationOptions options,
             ParseOptions parseOptions
-        ) {
+        )
+        {
             options ??= CodeGenerationOptions.Default;
 
             var reusableSyntax = GetReuseableSyntaxNodeForSymbol<ConstructorDeclarationSyntax>(
@@ -97,7 +99,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             CodeGenerationOptions options,
             ConstructorDeclarationSyntax declaration,
             ParseOptions parseOptions
-        ) {
+        )
+        {
             if (declaration.ExpressionBody == null)
             {
                 var expressionBodyPreference =
@@ -112,7 +115,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                         out var expressionBody,
                         out var semicolonToken
                     )
-                ) {
+                )
+                {
                     return declaration.WithBody(null)
                         .WithExpressionBody(expressionBody)
                         .WithSemicolonToken(semicolonToken);
@@ -124,7 +128,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
 
         private static ConstructorInitializerSyntax GenerateConstructorInitializer(
             IMethodSymbol constructor
-        ) {
+        )
+        {
             var thisArguments = CodeGenerationConstructorInfo.GetThisConstructorArgumentsOpt(
                 constructor
             );
@@ -165,7 +170,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         private static SyntaxTokenList GenerateModifiers(
             IMethodSymbol constructor,
             CodeGenerationOptions options
-        ) {
+        )
+        {
             var tokens = ArrayBuilder<SyntaxToken>.GetInstance();
 
             if (constructor.IsStatic)

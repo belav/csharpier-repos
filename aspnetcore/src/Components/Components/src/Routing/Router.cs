@@ -350,7 +350,8 @@ namespace Microsoft.AspNetCore.Components.Routing
                 Type componentType,
                 string path,
                 string baseUri
-            ) {
+            )
+            {
                 _navigatingToComponent(logger, componentType, path, baseUri, null);
             }
 
@@ -359,7 +360,8 @@ namespace Microsoft.AspNetCore.Components.Routing
                 string externalUri,
                 string path,
                 string baseUri
-            ) {
+            )
+            {
                 _navigatingToExternalUri(logger, externalUri, path, baseUri, null);
             }
         }

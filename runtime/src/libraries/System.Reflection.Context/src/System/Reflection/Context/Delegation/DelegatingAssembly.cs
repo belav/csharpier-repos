@@ -81,7 +81,8 @@ namespace System.Reflection.Context.Delegation
             object[] args,
             CultureInfo culture,
             object[] activationAttributes
-        ) {
+        )
+        {
             return UnderlyingAssembly.CreateInstance(
                 typeName,
                 ignoreCase,
@@ -222,7 +223,8 @@ namespace System.Reflection.Context.Delegation
             string moduleName,
             byte[] rawModule,
             byte[] rawSymbolStore
-        ) {
+        )
+        {
             return UnderlyingAssembly.LoadModule(moduleName, rawModule, rawSymbolStore);
         }
     }

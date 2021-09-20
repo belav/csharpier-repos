@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             string markup,
             ExportProvider exportProvider = null,
             string workspaceKind = null
-        ) {
+        )
+        {
             // If it looks like XML, we'll treat it as XML; any parse error would be rejected and will throw.
             // We'll do a case insensitive search here so if somebody has a lowercase W it'll be tried (and
             // rejected by the XML parser) rather than treated as regular text.
@@ -90,7 +91,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             string text,
             SourceCodeKind sourceCodeKind,
             bool cleanBeforeUpdate = true
-        ) {
+        )
+        {
             var hostDocument = _currentDocument ?? (GetWorkspace()).Documents.Single();
 
             // clear the document

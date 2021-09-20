@@ -33,7 +33,8 @@ namespace Microsoft.EntityFrameworkCore
         public static DbContextOptionsBuilder UseSqlite(
             this DbContextOptionsBuilder optionsBuilder,
             Action<SqliteDbContextOptionsBuilder>? sqliteOptionsAction = null
-        ) {
+        )
+        {
             Check.NotNull(optionsBuilder, nameof(optionsBuilder));
 
             ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
@@ -58,7 +59,8 @@ namespace Microsoft.EntityFrameworkCore
             this DbContextOptionsBuilder optionsBuilder,
             string connectionString,
             Action<SqliteDbContextOptionsBuilder>? sqliteOptionsAction = null
-        ) {
+        )
+        {
             Check.NotNull(optionsBuilder, nameof(optionsBuilder));
             Check.NotEmpty(connectionString, nameof(connectionString));
 
@@ -90,7 +92,8 @@ namespace Microsoft.EntityFrameworkCore
             this DbContextOptionsBuilder optionsBuilder,
             DbConnection connection,
             Action<SqliteDbContextOptionsBuilder>? sqliteOptionsAction = null
-        ) {
+        )
+        {
             Check.NotNull(optionsBuilder, nameof(optionsBuilder));
             Check.NotNull(connection, nameof(connection));
 

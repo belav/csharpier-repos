@@ -102,7 +102,8 @@ namespace Microsoft.VisualStudio.LanguageServices
             CancellationToken cancellationToken,
             [NotNullWhen(returnValue: true)] out ISymbol? resolvedSymbol,
             [NotNullWhen(returnValue: true)] out Project? resolvedProject
-        ) {
+        )
+        {
             resolvedSymbol = null;
             resolvedProject = null;
 
@@ -135,7 +136,8 @@ namespace Microsoft.VisualStudio.LanguageServices
             ISymbol symbol,
             Project project,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 !TryResolveSymbol(
                     symbol,
@@ -144,7 +146,8 @@ namespace Microsoft.VisualStudio.LanguageServices
                     out var searchSymbol,
                     out var searchProject
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -161,7 +164,8 @@ namespace Microsoft.VisualStudio.LanguageServices
             ISymbol symbol,
             Project project,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Legacy API.  Previously used by ObjectBrowser to support 'FindRefs' off of an
             // object browser item.  Now ObjectBrowser goes through the streaming-FindRefs system.
             return false;
@@ -170,7 +174,8 @@ namespace Microsoft.VisualStudio.LanguageServices
         public override void DisplayReferencedSymbols(
             Solution solution,
             IEnumerable<ReferencedSymbol> referencedSymbols
-        ) {
+        )
+        {
             // Legacy API.  Previously used by ObjectBrowser to support 'FindRefs' off of an
             // object browser item.  Now ObjectBrowser goes through the streaming-FindRefs system.
         }

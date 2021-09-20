@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Organizing
                 IEnumerable<ISyntaxOrganizer> organizers,
                 SemanticModel semanticModel,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 _nodeToOrganizersGetter = treeOrganizer.GetNodeToOrganizers(organizers.ToList());
                 _semanticModel = semanticModel;
                 _cancellationToken = cancellationToken;

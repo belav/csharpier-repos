@@ -26,7 +26,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library
             SYMBOL_DESCRIPTION_NODE[] rgSymbolNodes,
             uint ulcNodes,
             out IVsNavInfo ppNavInfo
-        ) {
+        )
+        {
             ppNavInfo = null;
 
             return VSConstants.E_NOTIMPL;
@@ -36,7 +37,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library
             VSCOMPONENTSELECTORDATA[] pcdComponent,
             ref uint pgrfOptions,
             out string pbstrComponentAdded
-        ) {
+        )
+        {
             pbstrComponentAdded = null;
             return VSConstants.E_NOTIMPL;
         }
@@ -71,7 +73,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library
             uint flags,
             VSOBSEARCHCRITERIA2[] pobSrch,
             out IVsSimpleObjectList2 ppIVsSimpleObjectList2
-        ) {
+        )
+        {
             ppIVsSimpleObjectList2 = GetList(listType, flags, pobSrch);
 
             return ppIVsSimpleObjectList2 != null ? VSConstants.S_OK : VSConstants.E_FAIL;

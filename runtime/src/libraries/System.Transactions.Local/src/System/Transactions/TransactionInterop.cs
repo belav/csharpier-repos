@@ -22,7 +22,8 @@ namespace System.Transactions
     {
         internal static DistributedTransaction ConvertToDistributedTransaction(
             Transaction transaction
-        ) {
+        )
+        {
             if (null == transaction)
             {
                 throw new ArgumentNullException(nameof(transaction));
@@ -198,7 +199,8 @@ namespace System.Transactions
 
         public static Transaction GetTransactionFromTransmitterPropagationToken(
             byte[] propagationToken
-        ) {
+        )
+        {
             if (null == propagationToken)
             {
                 throw new ArgumentNullException(nameof(propagationToken));
@@ -287,7 +289,8 @@ namespace System.Transactions
 
         public static Transaction GetTransactionFromDtcTransaction(
             IDtcTransaction transactionNative
-        ) {
+        )
+        {
             if (null == transactionNative)
             {
                 throw new ArgumentNullException(nameof(transactionNative));
@@ -341,7 +344,8 @@ namespace System.Transactions
 
         internal static DistributedTransaction GetDistributedTransactionFromTransmitterPropagationToken(
             byte[] propagationToken
-        ) {
+        )
+        {
             if (null == propagationToken)
             {
                 throw new ArgumentNullException(nameof(propagationToken));

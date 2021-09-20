@@ -266,7 +266,8 @@ namespace System.Net.Http.Tests
         private void CheckValidTryParse(
             string input,
             MediaTypeWithQualityHeaderValue expectedResult
-        ) {
+        )
+        {
             MediaTypeWithQualityHeaderValue result = null;
             Assert.True(MediaTypeWithQualityHeaderValue.TryParse(input, out result));
             Assert.Equal(expectedResult, result);

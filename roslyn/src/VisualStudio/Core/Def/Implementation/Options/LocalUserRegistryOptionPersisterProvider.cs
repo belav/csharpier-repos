@@ -25,14 +25,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
         public LocalUserRegistryOptionPersisterProvider(
             IThreadingContext threadingContext,
             [Import(typeof(SVsServiceProvider))] IServiceProvider serviceProvider
-        ) {
+        )
+        {
             _threadingContext = threadingContext;
             _serviceProvider = serviceProvider;
         }
 
         public async ValueTask<IOptionPersister> GetOrCreatePersisterAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (_lazyPersister is not null)
             {
                 return _lazyPersister;

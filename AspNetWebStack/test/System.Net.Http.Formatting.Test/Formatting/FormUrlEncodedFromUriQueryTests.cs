@@ -320,14 +320,16 @@ namespace System.Net.Http.Formatting
                     if (
                         jsonPrimitive.Type == JTokenType.String
                         && String.IsNullOrEmpty(jsonPrimitive.Value.ToString())
-                    ) {
+                    )
+                    {
                         results.Add(prefix + "=" + String.Empty);
                     }
                     else
                     {
                         if (
                             jsonPrimitive.Value is DateTime || jsonPrimitive.Value is DateTimeOffset
-                        ) {
+                        )
+                        {
                             string dateStr = jsonPrimitive.ToString();
                             if (!String.IsNullOrEmpty(dateStr) && dateStr.StartsWith("\""))
                             {

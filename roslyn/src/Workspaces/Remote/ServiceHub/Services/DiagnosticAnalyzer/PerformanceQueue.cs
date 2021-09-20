@@ -55,7 +55,8 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
 
         public void GetPerformanceData(
             Dictionary<string, (double average, double stddev)> aggregatedPerformanceDataPerAnalyzer
-        ) {
+        )
+        {
             if (_snapshots.Count < MinSampleSize)
             {
                 // we don't have enough data to report this
@@ -111,7 +112,8 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
 
         private static (double average, double stddev) GetAverageAndAdjustedStandardDeviation(
             List<double> data
-        ) {
+        )
+        {
             var average = data.Average();
             var stddev = Math.Sqrt(data.Select(ms => Math.Pow(ms - average, 2)).Average());
             var squareLength = Math.Sqrt(data.Count);
@@ -136,7 +138,8 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
             public Snapshot(
                 IEnumerable<(int assignedAnalyzerNumber, TimeSpan timeSpan)> rawData,
                 int unitCount
-            ) {
+            )
+            {
                 _performanceMap = new Dictionary<int, double>();
 
                 Reset(_performanceMap, rawData, unitCount);
@@ -164,7 +167,8 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
                 Dictionary<int, double> map,
                 IEnumerable<(int assignedAnalyzerNumber, TimeSpan timeSpan)> rawData,
                 int fileCount
-            ) {
+            )
+            {
                 // get smallest timespan in the snapshot
                 var minSpan = rawData.Select(kv => kv.timeSpan).Min();
 

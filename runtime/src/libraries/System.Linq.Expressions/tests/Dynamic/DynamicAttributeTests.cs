@@ -33,7 +33,8 @@ namespace System.Runtime.CompilerServices.Tests
             Dictionary<dynamic, object> dido,
             Dictionary<object, dynamic> diod,
             Dictionary<dynamic, List<Dictionary<dynamic, int>>> dolddi
-        ) {
+        )
+        {
             return null;
         }
 

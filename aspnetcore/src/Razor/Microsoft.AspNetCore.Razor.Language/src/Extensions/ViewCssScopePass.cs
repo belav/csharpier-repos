@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
         protected override void ExecuteCore(
             RazorCodeDocument codeDocument,
             DocumentIntermediateNode documentNode
-        ) {
+        )
+        {
             var cssScope = codeDocument.GetCssScope();
             if (string.IsNullOrEmpty(cssScope))
             {
@@ -28,7 +29,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                     "mvc.1.0.razor-page",
                     StringComparison.Ordinal
                 )
-            ) {
+            )
+            {
                 return;
             }
 

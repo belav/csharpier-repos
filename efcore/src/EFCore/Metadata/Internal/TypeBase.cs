@@ -63,7 +63,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Type type,
             Model model,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             Check.NotEmpty(name, nameof(name));
             Check.NotNull(type, nameof(type));
             Check.NotNull(model, nameof(model));

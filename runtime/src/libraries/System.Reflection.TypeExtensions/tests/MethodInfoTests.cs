@@ -107,7 +107,8 @@ namespace System.Reflection.Tests
             string name,
             Type[] typeArguments,
             Type declaringType
-        ) {
+        )
+        {
             MethodInfo method = TypeExtensions.GetMethod(type, name, typeArguments);
             MethodInfo baseDefinition = method.GetBaseDefinition();
 

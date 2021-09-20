@@ -107,7 +107,8 @@ namespace System.Xml.Xsl.XsltOld
                 InputScope? inputScope = _scopeStack;
                 inputScope != null;
                 inputScope = inputScope.Parent
-            ) {
+            )
+            {
                 string? nspace = inputScope.ResolveNonAtom(prefix);
                 if (nspace != null)
                 {
@@ -154,7 +155,8 @@ namespace System.Xml.Xsl.XsltOld
                 InputScope? inputScope = _scopeStack;
                 inputScope != null;
                 inputScope = inputScope.Parent
-            ) {
+            )
+            {
                 if (inputScope.IsExtensionNamespace(nspace))
                 {
                     return true;
@@ -180,7 +182,8 @@ namespace System.Xml.Xsl.XsltOld
                 InputScope? inputScope = _scopeStack;
                 inputScope != null;
                 inputScope = inputScope.Parent
-            ) {
+            )
+            {
                 if (inputScope.IsExcludedNamespace(nspace))
                 {
                     return true;

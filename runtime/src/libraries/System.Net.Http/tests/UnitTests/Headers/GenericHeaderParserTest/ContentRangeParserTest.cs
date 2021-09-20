@@ -47,7 +47,8 @@ namespace System.Net.Http.Tests
             int startIndex,
             ContentRangeHeaderValue expectedResult,
             int expectedIndex
-        ) {
+        )
+        {
             HttpHeaderParser parser = GenericHeaderParser.ContentRangeParser;
             object result = null;
             Assert.True(

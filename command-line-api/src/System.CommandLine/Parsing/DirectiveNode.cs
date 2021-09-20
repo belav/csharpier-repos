@@ -5,12 +5,8 @@ namespace System.CommandLine.Parsing
 {
     internal class DirectiveNode : SyntaxNode
     {
-        public DirectiveNode(
-            Token token,
-            RootCommandNode parent,
-            string name,
-            string? value
-        ) : base(token, parent)
+        public DirectiveNode(Token token, RootCommandNode parent, string name, string? value)
+            : base(token, parent)
         {
             if (token.Type != TokenType.Directive)
             {

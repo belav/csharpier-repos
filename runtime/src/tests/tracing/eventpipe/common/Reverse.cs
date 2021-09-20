@@ -190,7 +190,8 @@ namespace Tracing.Tests.Common
         // Creates the server, listens, and closes the server
         public static async Task<IpcAdvertise> CreateServerAndReceiveAdvertisement(
             string serverAddress
-        ) {
+        )
+        {
             var server = new ReverseServer(serverAddress);
             Logger.logger.Log("Waiting for connection");
             using Stream stream = await server.AcceptAsync();

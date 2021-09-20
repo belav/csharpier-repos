@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.HideBase
 
             protected override async Task<Document> GetChangedDocumentAsync(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var root = await _document.GetSyntaxRootAsync(cancellationToken)
                     .ConfigureAwait(false);
 
@@ -45,7 +46,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.HideBase
             private async Task<SyntaxNode> GetNewNodeAsync(
                 SyntaxNode node,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var syntaxFacts = CSharpSyntaxFacts.Instance;
                 var modifiers = syntaxFacts.GetModifiers(node);
                 var newModifiers = modifiers.Add(SyntaxFactory.Token(SyntaxKind.NewKeyword));
@@ -58,7 +60,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.HideBase
                         option.Value,
                         out var preferredOrder
                     ) || !AbstractOrderModifiersHelpers.IsOrdered(preferredOrder, modifiers)
-                ) {
+                )
+                {
                     return syntaxFacts.WithModifiers(node, newModifiers);
                 }
 

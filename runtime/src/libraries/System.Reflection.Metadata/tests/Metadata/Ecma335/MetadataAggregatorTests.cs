@@ -43,7 +43,8 @@ namespace System.Reflection.Metadata.Ecma335.Tests
             Handle aggregateHandle,
             Handle expectedHandle,
             int expectedGeneration
-        ) {
+        )
+        {
             int actualGeneration;
             var actualHandle = aggregator.GetGenerationHandle(
                 aggregateHandle,

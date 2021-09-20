@@ -36,9 +36,8 @@ namespace System.Net.Http.Functional.Tests
     [ConditionalClass(typeof(HttpClientHandlerTestBase), nameof(IsMsQuicSupported))]
     public sealed class SocketsHttpHandler_HttpClientMiniStress_Http3_MsQuic : HttpClientMiniStress
     {
-        public SocketsHttpHandler_HttpClientMiniStress_Http3_MsQuic(
-            ITestOutputHelper output
-        ) : base(output) { }
+        public SocketsHttpHandler_HttpClientMiniStress_Http3_MsQuic(ITestOutputHelper output)
+            : base(output) { }
         protected override Version UseVersion => HttpVersion.Version30;
         protected override QuicImplementationProvider UseQuicImplementationProvider =>
             QuicImplementationProviders.MsQuic;
@@ -92,7 +91,8 @@ namespace System.Net.Http.Functional.Tests
             int numBytes,
             List<HttpHeaderData> headers,
             string content
-        ) {
+        )
+        {
             string responseText =
                 "HTTP/1.1 200 OK\r\n"
                 + string.Join("\r\n", headers.Select(h => h.Name + ": " + h.Value))
@@ -157,7 +157,8 @@ namespace System.Net.Http.Functional.Tests
             int numRequests,
             int dop,
             HttpCompletionOption completionOption
-        ) {
+        )
+        {
             (List<HttpHeaderData> headers, string content) = CreateResponse("abcd");
             using (HttpClient client = CreateHttpClient())
             {
@@ -184,7 +185,8 @@ namespace System.Net.Http.Functional.Tests
             int numRequests,
             int dop,
             HttpCompletionOption completionOption
-        ) {
+        )
+        {
             (List<HttpHeaderData> headers, string content) = CreateResponse(
                 "abcdefghijklmnopqrstuvwxyz"
             );
@@ -205,7 +207,8 @@ namespace System.Net.Http.Functional.Tests
             int numRequests,
             int dop,
             HttpCompletionOption completionOption
-        ) {
+        )
+        {
             (List<HttpHeaderData> headers, string content) = CreateResponse(
                 "abcdefghijklmnopqrstuvwxyz"
             );
@@ -284,7 +287,8 @@ namespace System.Net.Http.Functional.Tests
             HttpCompletionOption completionOption,
             List<HttpHeaderData> headers,
             string content
-        ) {
+        )
+        {
             LoopbackServerFactory.CreateServerAsync(
                     (server, url) =>
                     {
@@ -309,7 +313,8 @@ namespace System.Net.Http.Functional.Tests
             HttpCompletionOption completionOption,
             List<HttpHeaderData> headers,
             string content
-        ) {
+        )
+        {
             await LoopbackServerFactory.CreateServerAsync(
                 async (server, url) =>
                 {
@@ -397,7 +402,8 @@ namespace System.Net.Http.Functional.Tests
                                                     Interlocked.Increment(ref nextAvailableIndex)
                                                     - 1
                                             ) < count
-                                        ) {
+                                        )
+                                        {
                                             try
                                             {
                                                 await bodyAsync(index);

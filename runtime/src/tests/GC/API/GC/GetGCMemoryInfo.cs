@@ -152,7 +152,8 @@ public class Test
         if (
             memoryInfo.GenerationInfo[0].SizeBeforeBytes
             < memoryInfo.GenerationInfo[0].SizeAfterBytes
-        ) {
+        )
+        {
             Console.WriteLine(
                 "Allocated only temp objects yet gen0 size didn't shrink! {0}->{1}",
                 memoryInfo.GenerationInfo[0].SizeBeforeBytes,

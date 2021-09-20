@@ -25,7 +25,8 @@ namespace Microsoft.Web.Mvc.Resources
             this RouteCollection routes,
             string controllerName,
             string routeSuffix
-        ) {
+        )
+        {
             routes.MapResourceRoute(controllerName, null, routeSuffix, null);
         }
 
@@ -46,7 +47,8 @@ namespace Microsoft.Web.Mvc.Resources
             string controllerName,
             string routeSuffix,
             object constraints
-        ) {
+        )
+        {
             routes.MapResourceRoute(controllerName, null, routeSuffix, constraints);
         }
 
@@ -67,7 +69,8 @@ namespace Microsoft.Web.Mvc.Resources
             string controllerName,
             string routePrefix,
             string routeSuffix
-        ) {
+        )
+        {
             routes.MapResourceRoute(controllerName, routePrefix, routeSuffix, null);
         }
 
@@ -90,7 +93,8 @@ namespace Microsoft.Web.Mvc.Resources
             string routePrefix,
             string routeSuffix,
             object constraints
-        ) {
+        )
+        {
             if (String.IsNullOrEmpty(routePrefix))
             {
                 routePrefix = controllerName;
@@ -144,7 +148,8 @@ namespace Microsoft.Web.Mvc.Resources
             this Controller controller,
             string controllerName,
             ActionType actionType
-        ) {
+        )
+        {
             switch (actionType)
             {
                 case ActionType.GetUpdateForm:

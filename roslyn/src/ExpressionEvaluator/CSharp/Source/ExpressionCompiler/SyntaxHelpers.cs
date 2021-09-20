@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             DiagnosticBag diagnostics,
             bool allowFormatSpecifiers,
             out ReadOnlyCollection<string>? formatSpecifiers
-        ) {
+        )
+        {
             // Remove trailing semi-colon if any. This is to support copy/paste
             // of (simple cases of) RHS of assignment in Watch window, not to
             // allow arbitrary syntax after the semi-colon, not even comments.
@@ -46,7 +47,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 if (
                     ParseFormatSpecifiers(builder, expr, syntax.FullWidth, diagnostics)
                     && builder.Count > 0
-                ) {
+                )
+                {
                     formatSpecifiers = new ReadOnlyCollection<string>(builder.ToArray());
                 }
 
@@ -59,7 +61,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             this string target,
             string expr,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             var text = SourceText.From(expr);
             var expression = ParseDebuggerExpressionInternal(text, consumeFullText: true);
             // We're creating a SyntaxTree for just the RHS so that the Diagnostic spans for parse errors
@@ -111,7 +114,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             string expr,
             int offset,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             bool expectingComma = true;
             int start = -1;
             int n = expr.Length;
@@ -211,7 +215,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         private static InternalSyntax.ExpressionSyntax ParseDebuggerExpressionInternal(
             SourceText source,
             bool consumeFullText
-        ) {
+        )
+        {
             using var lexer = new InternalSyntax.Lexer(
                 source,
                 ParseOptions,
@@ -249,7 +254,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         private static SyntaxTree CreateSyntaxTree(
             this InternalSyntax.CSharpSyntaxNode root,
             SourceText text
-        ) {
+        )
+        {
             return CSharpSyntaxTree.CreateForDebugger(
                 (CSharpSyntaxNode)root.CreateRed(),
                 text,
@@ -260,7 +266,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         private static ExpressionSyntax MakeDebuggerExpression(
             this InternalSyntax.ExpressionSyntax expression,
             SourceText text
-        ) {
+        )
+        {
             var syntaxTree = InternalSyntax.SyntaxFactory.ExpressionStatement(
                     attributeLists: default,
                     expression,
@@ -284,7 +291,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         internal static bool TryParseDottedName(
             string input,
             [NotNullWhen(true)] out NameSyntax? output
-        ) {
+        )
+        {
             var pooled = PooledStringBuilder.GetInstance();
             try
             {
@@ -350,7 +358,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         internal static NameSyntax PrependExternAlias(
             IdentifierNameSyntax externAliasSyntax,
             NameSyntax nameSyntax
-        ) {
+        )
+        {
             if (nameSyntax is QualifiedNameSyntax qualifiedNameSyntax)
             {
                 return SyntaxFactory.QualifiedName(

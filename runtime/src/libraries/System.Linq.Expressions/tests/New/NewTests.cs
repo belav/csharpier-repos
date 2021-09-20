@@ -186,7 +186,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void CheckNewGenericWithStructRestrictionWithStructWithStringAndFieldTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckNewGenericWithStructRestrictionHelper<Scs>(useInterpreter);
         }
 
@@ -194,7 +195,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void CheckNewNullableGenericWithStructRestrictionWithEnumTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckNewNullableGenericWithStructRestrictionHelper<E>(useInterpreter);
         }
 
@@ -202,7 +204,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void CheckNewNullableGenericWithStructRestrictionWithStructTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckNewNullableGenericWithStructRestrictionHelper<S>(useInterpreter);
         }
 
@@ -210,7 +213,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void CheckNewNullableGenericWithStructRestrictionWithStructWithStringAndFieldTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckNewNullableGenericWithStructRestrictionHelper<Scs>(useInterpreter);
         }
 
@@ -339,7 +343,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void Compile_AbstractCtor_ThrowsInvalidOperationException(
             bool useInterpretation
-        ) {
+        )
+        {
             ConstructorInfo ctor = typeof(AbstractCtor).GetTypeInfo().DeclaredConstructors.Single();
             Expression<Func<AbstractCtor>> f = Expression.Lambda<Func<AbstractCtor>>(
                 Expression.New(ctor)
@@ -405,7 +410,8 @@ namespace System.Linq.Expressions.Tests
         public static void ConstructorAndArguments_DifferentLengths_ThrowsArgumentException(
             ConstructorInfo constructor,
             Expression[] expressions
-        ) {
+        )
+        {
             if (expressions.Length == 0)
             {
                 AssertExtensions.Throws<ArgumentException>(null, () => Expression.New(constructor));
@@ -532,7 +538,8 @@ namespace System.Linq.Expressions.Tests
             ConstructorInfo constructor,
             Expression[] arguments,
             MemberInfo[] members
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentException>(
                 null,
                 () => Expression.New(constructor, arguments, members)
@@ -770,7 +777,8 @@ namespace System.Linq.Expressions.Tests
         public static void OpenGenericConstructorsInvalid(
             ConstructorInfo ctor,
             Expression[] arguments
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentException>(
                 "constructor",
                 () => Expression.New(ctor, arguments)

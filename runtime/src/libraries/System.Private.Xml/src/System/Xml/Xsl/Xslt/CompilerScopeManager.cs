@@ -375,7 +375,8 @@ namespace System.Xml.Xsl.Xslt
                             _lastRecord,
                             currentRecord + 1
                         ) != null
-                    ) {
+                    )
+                    {
                         continue;
                     }
                     // Its prefix has not been redefined later in [currentRecord + 1, lastRecord]
@@ -415,7 +416,8 @@ namespace System.Xml.Xsl.Xslt
                                 _lastRecord,
                                 _currentRecord + 1
                             ) == null
-                        ) {
+                        )
+                        {
                             // Its prefix has not been redefined later in [currentRecord + 1, lastRecord]
                             return true;
                         }

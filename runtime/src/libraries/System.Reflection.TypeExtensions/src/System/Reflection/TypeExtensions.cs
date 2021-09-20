@@ -11,7 +11,8 @@ namespace System.Reflection
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
                 this Type type,
             Type[] types
-        ) {
+        )
+        {
             Requires.NotNull(type, nameof(type));
             return type.GetConstructor(types);
         }
@@ -19,7 +20,8 @@ namespace System.Reflection
         public static ConstructorInfo[] GetConstructors(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
                 this Type type
-        ) {
+        )
+        {
             Requires.NotNull(type, nameof(type));
             return type.GetConstructors();
         }
@@ -31,7 +33,8 @@ namespace System.Reflection
             )]
                 this Type type,
             BindingFlags bindingAttr
-        ) {
+        )
+        {
             Requires.NotNull(type, nameof(type));
             return type.GetConstructors(bindingAttr);
         }
@@ -46,7 +49,8 @@ namespace System.Reflection
                     | DynamicallyAccessedMemberTypes.PublicNestedTypes
             )]
                 this Type type
-        ) {
+        )
+        {
             Requires.NotNull(type, nameof(type));
             return type.GetDefaultMembers();
         }
@@ -55,7 +59,8 @@ namespace System.Reflection
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
                 this Type type,
             string name
-        ) {
+        )
+        {
             Requires.NotNull(type, nameof(type));
             return type.GetEvent(name);
         }
@@ -68,14 +73,16 @@ namespace System.Reflection
                 this Type type,
             string name,
             BindingFlags bindingAttr
-        ) {
+        )
+        {
             Requires.NotNull(type, nameof(type));
             return type.GetEvent(name, bindingAttr);
         }
 
         public static EventInfo[] GetEvents(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)] this Type type
-        ) {
+        )
+        {
             Requires.NotNull(type, nameof(type));
             return type.GetEvents();
         }
@@ -87,7 +94,8 @@ namespace System.Reflection
             )]
                 this Type type,
             BindingFlags bindingAttr
-        ) {
+        )
+        {
             Requires.NotNull(type, nameof(type));
             return type.GetEvents(bindingAttr);
         }
@@ -96,7 +104,8 @@ namespace System.Reflection
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)]
                 this Type type,
             string name
-        ) {
+        )
+        {
             Requires.NotNull(type, nameof(type));
             return type.GetField(name);
         }
@@ -109,14 +118,16 @@ namespace System.Reflection
                 this Type type,
             string name,
             BindingFlags bindingAttr
-        ) {
+        )
+        {
             Requires.NotNull(type, nameof(type));
             return type.GetField(name, bindingAttr);
         }
 
         public static FieldInfo[] GetFields(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)] this Type type
-        ) {
+        )
+        {
             Requires.NotNull(type, nameof(type));
             return type.GetFields();
         }
@@ -128,7 +139,8 @@ namespace System.Reflection
             )]
                 this Type type,
             BindingFlags bindingAttr
-        ) {
+        )
+        {
             Requires.NotNull(type, nameof(type));
             return type.GetFields(bindingAttr);
         }
@@ -156,7 +168,8 @@ namespace System.Reflection
             )]
                 this Type type,
             string name
-        ) {
+        )
+        {
             Requires.NotNull(type, nameof(type));
             return type.GetMember(name);
         }
@@ -165,7 +178,8 @@ namespace System.Reflection
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] this Type type,
             string name,
             BindingFlags bindingAttr
-        ) {
+        )
+        {
             Requires.NotNull(type, nameof(type));
             return type.GetMember(name, bindingAttr);
         }
@@ -180,7 +194,8 @@ namespace System.Reflection
                     | DynamicallyAccessedMemberTypes.PublicNestedTypes
             )]
                 this Type type
-        ) {
+        )
+        {
             Requires.NotNull(type, nameof(type));
             return type.GetMembers();
         }
@@ -188,7 +203,8 @@ namespace System.Reflection
         public static MemberInfo[] GetMembers(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] this Type type,
             BindingFlags bindingAttr
-        ) {
+        )
+        {
             Requires.NotNull(type, nameof(type));
             return type.GetMembers(bindingAttr);
         }
@@ -197,7 +213,8 @@ namespace System.Reflection
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
                 this Type type,
             string name
-        ) {
+        )
+        {
             Requires.NotNull(type, nameof(type));
             return type.GetMethod(name);
         }
@@ -210,7 +227,8 @@ namespace System.Reflection
                 this Type type,
             string name,
             BindingFlags bindingAttr
-        ) {
+        )
+        {
             Requires.NotNull(type, nameof(type));
             return type.GetMethod(name, bindingAttr);
         }
@@ -220,7 +238,8 @@ namespace System.Reflection
                 this Type type,
             string name,
             Type[] types
-        ) {
+        )
+        {
             Requires.NotNull(type, nameof(type));
             return type.GetMethod(name, types);
         }
@@ -228,7 +247,8 @@ namespace System.Reflection
         public static MethodInfo[] GetMethods(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
                 this Type type
-        ) {
+        )
+        {
             Requires.NotNull(type, nameof(type));
             return type.GetMethods();
         }
@@ -240,7 +260,8 @@ namespace System.Reflection
             )]
                 this Type type,
             BindingFlags bindingAttr
-        ) {
+        )
+        {
             Requires.NotNull(type, nameof(type));
             return type.GetMethods(bindingAttr);
         }
@@ -253,7 +274,8 @@ namespace System.Reflection
                 this Type type,
             string name,
             BindingFlags bindingAttr
-        ) {
+        )
+        {
             Requires.NotNull(type, nameof(type));
             return type.GetNestedType(name, bindingAttr);
         }
@@ -265,7 +287,8 @@ namespace System.Reflection
             )]
                 this Type type,
             BindingFlags bindingAttr
-        ) {
+        )
+        {
             Requires.NotNull(type, nameof(type));
             return type.GetNestedTypes(bindingAttr);
         }
@@ -273,7 +296,8 @@ namespace System.Reflection
         public static PropertyInfo[] GetProperties(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]
                 this Type type
-        ) {
+        )
+        {
             Requires.NotNull(type, nameof(type));
             return type.GetProperties();
         }
@@ -285,7 +309,8 @@ namespace System.Reflection
             )]
                 this Type type,
             BindingFlags bindingAttr
-        ) {
+        )
+        {
             Requires.NotNull(type, nameof(type));
             return type.GetProperties(bindingAttr);
         }
@@ -294,7 +319,8 @@ namespace System.Reflection
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]
                 this Type type,
             string name
-        ) {
+        )
+        {
             Requires.NotNull(type, nameof(type));
             return type.GetProperty(name);
         }
@@ -307,7 +333,8 @@ namespace System.Reflection
                 this Type type,
             string name,
             BindingFlags bindingAttr
-        ) {
+        )
+        {
             Requires.NotNull(type, nameof(type));
             return type.GetProperty(name, bindingAttr);
         }
@@ -317,7 +344,8 @@ namespace System.Reflection
                 this Type type,
             string name,
             Type? returnType
-        ) {
+        )
+        {
             Requires.NotNull(type, nameof(type));
             return type.GetProperty(name, returnType);
         }
@@ -328,7 +356,8 @@ namespace System.Reflection
             string name,
             Type? returnType,
             Type[] types
-        ) {
+        )
+        {
             Requires.NotNull(type, nameof(type));
             return type.GetProperty(name, returnType, types);
         }
@@ -336,7 +365,8 @@ namespace System.Reflection
         public static bool IsAssignableFrom(
             this Type type,
             [System.Diagnostics.CodeAnalysis.NotNullWhen(true)] Type? c
-        ) {
+        )
+        {
             Requires.NotNull(type, nameof(type));
             return type.IsAssignableFrom(c);
         }
@@ -344,7 +374,8 @@ namespace System.Reflection
         public static bool IsInstanceOfType(
             this Type type,
             [System.Diagnostics.CodeAnalysis.NotNullWhen(true)] object? o
-        ) {
+        )
+        {
             Requires.NotNull(type, nameof(type));
             return type.IsInstanceOfType(o);
         }

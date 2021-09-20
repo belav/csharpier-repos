@@ -23,7 +23,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             Solution solution,
             IGraphContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var graphBuilder = await GraphBuilder.CreateForInputNodesAsync(
                     solution,
                     context.InputNodes,
@@ -69,7 +70,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                                         cancellationToken
                                     )
                                     .ConfigureAwait(false)
-                            ) {
+                            )
+                            {
                                 cancellationToken.ThrowIfCancellationRequested();
 
                                 var newNode = await graphBuilder.AddNodeAsync(

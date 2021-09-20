@@ -94,7 +94,8 @@ namespace System.Net.Security.Tests
             if (
                 (SslProtocolSupport.SupportedSslProtocols & SslProtocolSupport.NonTls13Protocols)
                 != 0
-            ) {
+            )
+            {
                 yield return new object[] { SslProtocolSupport.NonTls13Protocols, null };
                 yield return new object[] { null, SslProtocolSupport.NonTls13Protocols };
             }
@@ -105,7 +106,8 @@ namespace System.Net.Security.Tests
         public async Task ClientAndServer_OneOrBothUseDefault_Ok(
             SslProtocols? clientProtocols,
             SslProtocols? serverProtocols
-        ) {
+        )
+        {
             using (
                 X509Certificate2 serverCertificate =
                     Configuration.Certificates.GetServerCertificate()
@@ -113,7 +115,8 @@ namespace System.Net.Security.Tests
             using (
                 X509Certificate2 clientCertificate =
                     Configuration.Certificates.GetClientCertificate()
-            ) {
+            )
+            {
                 // Use a different SNI for each connection to prevent TLS 1.3 renegotiation issue: https://github.com/dotnet/runtime/issues/47378
                 string serverHost = TestHelper.GetTestSNIName(
                     nameof(ClientAndServer_OneOrBothUseDefault_Ok),
@@ -170,7 +173,8 @@ namespace System.Net.Security.Tests
         public async Task ClientAndServer_OneUsesDefault_OtherUsesLowerProtocol_Fails(
             SslProtocols? clientProtocols,
             SslProtocols? serverProtocols
-        ) {
+        )
+        {
             using (
                 X509Certificate2 serverCertificate =
                     Configuration.Certificates.GetServerCertificate()
@@ -178,7 +182,8 @@ namespace System.Net.Security.Tests
             using (
                 X509Certificate2 clientCertificate =
                     Configuration.Certificates.GetClientCertificate()
-            ) {
+            )
+            {
                 string serverHost = serverCertificate.GetNameInfo(X509NameType.SimpleName, false);
                 var clientCertificates = new X509CertificateCollection() { clientCertificate };
 
@@ -207,7 +212,8 @@ namespace System.Net.Security.Tests
             X509Certificate certificate,
             X509Chain chain,
             SslPolicyErrors sslPolicyErrors
-        ) {
+        )
+        {
             switch (sslPolicyErrors)
             {
                 case SslPolicyErrors.None:
@@ -227,7 +233,8 @@ namespace System.Net.Security.Tests
             X509Certificate certificate,
             X509Chain chain,
             SslPolicyErrors sslPolicyErrors
-        ) {
+        )
+        {
             switch (sslPolicyErrors)
             {
                 case SslPolicyErrors.None:

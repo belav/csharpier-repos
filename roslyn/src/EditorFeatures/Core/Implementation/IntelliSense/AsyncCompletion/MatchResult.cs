@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             PatternMatch? patternMatch,
             int index,
             ImmutableArray<Span> highlightedSpans
-        ) {
+        )
+        {
             RoslynCompletionItem = roslynCompletionItem;
             MatchedFilterText = matchedFilterText;
             PatternMatch = patternMatch;

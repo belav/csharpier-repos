@@ -1885,7 +1885,8 @@ public class Program
         public async Task TestPatterns_Is_ConstUnaryAndBinaryPattern(
             string isPattern,
             bool shouldOfferRed = true
-        ) {
+        )
+        {
             var markup =
                 @$"
 class C

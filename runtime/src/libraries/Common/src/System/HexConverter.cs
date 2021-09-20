@@ -72,7 +72,8 @@ namespace System
             Span<byte> buffer,
             int startingIndex = 0,
             Casing casing = Casing.Upper
-        ) {
+        )
+        {
             uint difference = (((uint)value & 0xF0U) << 4) + ((uint)value & 0x0FU) - 0x8989U;
             uint packedResult =
                 ((((uint)(-(int)difference) & 0x7070U) >> 4) + difference + 0xB9B9U) | (uint)casing;
@@ -90,7 +91,8 @@ namespace System
             Span<char> buffer,
             int startingIndex = 0,
             Casing casing = Casing.Upper
-        ) {
+        )
+        {
             uint difference = (((uint)value & 0xF0U) << 4) + ((uint)value & 0x0FU) - 0x8989U;
             uint packedResult =
                 ((((uint)(-(int)difference) & 0x7070U) >> 4) + difference + 0xB9B9U) | (uint)casing;
@@ -104,7 +106,8 @@ namespace System
             ReadOnlySpan<byte> bytes,
             Span<char> chars,
             Casing casing
-        ) {
+        )
+        {
             Debug.Assert(bytes.Length >= 4);
             nint pos = 0;
 
@@ -223,7 +226,8 @@ namespace System
             ReadOnlySpan<byte> bytes,
             Span<char> chars,
             Casing casing = Casing.Upper
-        ) {
+        )
+        {
             Debug.Assert(chars.Length >= bytes.Length * 2);
 
 #if SYSTEM_PRIVATE_CORELIB
@@ -316,7 +320,8 @@ namespace System
             ReadOnlySpan<char> chars,
             Span<byte> bytes,
             out int charsProcessed
-        ) {
+        )
+        {
             Debug.Assert(chars.Length % 2 == 0, "Un-even number of characters provided");
             Debug.Assert(
                 chars.Length / 2 == bytes.Length,

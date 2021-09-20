@@ -22,7 +22,8 @@ namespace System.Xml
             this Task task,
             Action<TArg> func,
             TArg arg
-        ) {
+        )
+        {
             if (task.IsSuccess())
             {
                 func(arg);
@@ -38,7 +39,8 @@ namespace System.Xml
             this Task task,
             Action<TArg> func,
             TArg arg
-        ) {
+        )
+        {
             await task.ConfigureAwait(false);
             func(arg);
         }
@@ -58,7 +60,8 @@ namespace System.Xml
             this Task task,
             Func<TArg, Task> func,
             TArg arg
-        ) {
+        )
+        {
             return task.IsSuccess() ? func(arg) : CallTaskFuncWhenFinishCoreAsync(task, func, arg);
         }
 
@@ -66,7 +69,8 @@ namespace System.Xml
             Task task,
             Func<TArg, Task> func,
             TArg arg
-        ) {
+        )
+        {
             await task.ConfigureAwait(false);
             await func(arg).ConfigureAwait(false);
         }
@@ -75,7 +79,8 @@ namespace System.Xml
             this Task task,
             Func<TArg, Task<bool>> func,
             TArg arg
-        ) {
+        )
+        {
             return task.IsSuccess()
               ? func(arg)
               : CallBoolTaskFuncWhenFinishCoreAsync(task, func, arg);
@@ -85,7 +90,8 @@ namespace System.Xml
             this Task task,
             Func<TArg, Task<bool>> func,
             TArg arg
-        ) {
+        )
+        {
             await task.ConfigureAwait(false);
             return await func(arg).ConfigureAwait(false);
         }
@@ -94,7 +100,8 @@ namespace System.Xml
             this Task<bool> task,
             Func<TArg, Task<bool>> func,
             TArg arg
-        ) {
+        )
+        {
             if (task.IsSuccess())
             {
                 return task.Result ? DoneTaskTrue : func(arg);
@@ -109,7 +116,8 @@ namespace System.Xml
             Task<bool> task,
             Func<TArg, Task<bool>> func,
             TArg arg
-        ) {
+        )
+        {
             if (await task.ConfigureAwait(false))
                 return true;
             else

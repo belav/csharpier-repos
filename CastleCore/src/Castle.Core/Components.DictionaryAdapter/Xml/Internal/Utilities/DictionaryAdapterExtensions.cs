@@ -24,7 +24,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             this IDictionaryAdapter parent,
             Type type,
             XmlAdapter adapter
-        ) {
+        )
+        {
             return CreateChildAdapter(parent, type, adapter, null);
         }
 
@@ -33,7 +34,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             Type type,
             XmlAdapter adapter,
             IDictionary dictionary
-        ) {
+        )
+        {
             if (null == dictionary)
                 dictionary = new Hashtable();
 

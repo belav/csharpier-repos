@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         internal static void GetAllScopes(
             this ISymUnmanagedMethod method,
             ArrayBuilder<ISymUnmanagedScope> builder
-        ) {
+        )
+        {
             var unused = ArrayBuilder<ISymUnmanagedScope>.GetInstance();
             GetAllScopes(method, builder, unused, offset: -1, isScopeEndInclusive: false);
             unused.Free();
@@ -29,7 +30,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             ArrayBuilder<ISymUnmanagedScope> containingScopes,
             int offset,
             bool isScopeEndInclusive
-        ) {
+        )
+        {
             GetAllScopes(
                 method.GetRootScope(),
                 allScopes,
@@ -45,7 +47,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             ArrayBuilder<ISymUnmanagedScope> containingScopes,
             int offset,
             bool isScopeEndInclusive
-        ) {
+        )
+        {
             var stack = ArrayBuilder<ISymUnmanagedScope>.GetInstance();
             stack.Push(root);
 

@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             string baseName,
             IEnumerable<string> reservedNames,
             bool isCaseSensitive = true
-        ) {
+        )
+        {
             using var namesDisposer = ArrayBuilder<string>.GetInstance(out var names);
             using var isFixedDisposer = ArrayBuilder<bool>.GetInstance(out var isFixed);
             using var nameSetDisposer = PooledHashSet<string>.GetInstance(out var nameSet);
@@ -45,7 +46,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             ImmutableArray<string> names,
             Func<string, bool>? canUse = null,
             bool isCaseSensitive = true
-        ) {
+        )
+        {
             using var isFixedDisposer = ArrayBuilder<bool>.GetInstance(
                 names.Length,
                 fillWithValue: false,
@@ -69,7 +71,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             ImmutableArray<bool> isFixed,
             Func<string, bool>? canUse = null,
             bool isCaseSensitive = true
-        ) {
+        )
+        {
             using var isFixedDisposer = ArrayBuilder<bool>.GetInstance(
                 names.Length,
                 out var isFixedBuilder
@@ -95,7 +98,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             ArrayBuilder<bool> isFixed,
             Func<string, bool>? canUse = null,
             bool isCaseSensitive = true
-        ) {
+        )
+        {
             canUse ??= Functions<string>.True;
 
             using var disposer = ArrayBuilder<int>.GetInstance(out var collisionIndices);
@@ -123,7 +127,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             Func<string, bool> canUse,
             bool isCaseSensitive,
             ArrayBuilder<int> collisionIndices
-        ) {
+        )
+        {
             var suffix = 1;
             var comparer = isCaseSensitive
                 ? StringComparer.Ordinal
@@ -155,7 +160,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             string name,
             bool isCaseSensitive,
             ArrayBuilder<int> collisionIndices
-        ) {
+        )
+        {
             collisionIndices.Clear();
 
             var comparer = isCaseSensitive
@@ -183,7 +189,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             string baseName,
             string extension,
             Func<string, bool> canUse
-        ) {
+        )
+        {
             if (!string.IsNullOrEmpty(extension) && extension[0] != '.')
             {
                 extension = "." + extension;

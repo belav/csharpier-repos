@@ -147,7 +147,8 @@ namespace System.Reflection.Emit.Tests
             Type fieldType,
             FieldAttributes attributes,
             FieldAttributes expectedAttributes
-        ) {
+        )
+        {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
             FieldBuilder field = type.DefineField(name, fieldType, attributes);
             Assert.Equal(name, field.Name);
@@ -260,7 +261,8 @@ namespace System.Reflection.Emit.Tests
         public void DefineField_InvalidFieldAttributes_ThrowsTypeLoadExceptionOnCreation(
             FieldAttributes attributes,
             FieldAttributes expected
-        ) {
+        )
+        {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
             FieldBuilder field = type.DefineField("Name", typeof(int), attributes);
             Assert.Equal(expected, field.Attributes);

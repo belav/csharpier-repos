@@ -57,7 +57,8 @@ namespace AutoMapper.UnitTests
                 ProductType source,
                 ProductTypeDto destination,
                 ResolutionContext context
-            ) {
+            )
+            {
                 if (source.Name == "A")
                     return new ProdTypeA();
                 if (source.Name == "B")

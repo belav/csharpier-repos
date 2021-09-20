@@ -501,7 +501,8 @@ namespace Microsoft.AspNetCore.Authorization.Test
         private AuthorizationMiddleware CreateMiddleware(
             RequestDelegate requestDelegate = null,
             IAuthorizationPolicyProvider policyProvider = null
-        ) {
+        )
+        {
             requestDelegate = requestDelegate ?? ((context) => Task.CompletedTask);
             return new AuthorizationMiddleware(requestDelegate, policyProvider);
         }
@@ -520,7 +521,8 @@ namespace Microsoft.AspNetCore.Authorization.Test
             Action<IServiceCollection> registerServices = null,
             Endpoint endpoint = null,
             IAuthenticationService authenticationService = null
-        ) {
+        )
+        {
             var basicPrincipal = new ClaimsPrincipal(
                 new ClaimsIdentity(
                     new Claim[]

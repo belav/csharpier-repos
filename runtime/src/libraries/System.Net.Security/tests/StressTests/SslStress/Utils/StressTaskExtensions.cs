@@ -22,7 +22,8 @@ namespace SslStress.Utils
         public static async Task WhenAllThrowOnFirstException(
             CancellationToken token,
             params Func<CancellationToken, Task>[] tasks
-        ) {
+        )
+        {
             using var cts = CancellationTokenSource.CreateLinkedTokenSource(token);
             Exception? firstException = null;
 

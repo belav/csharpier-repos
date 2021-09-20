@@ -264,7 +264,8 @@ namespace System.Web.Mvc.Html.Test
             Type type,
             Enum value,
             string expected
-        ) {
+        )
+        {
             // Arrange
             Mock<ModelMetadataProvider> provider = new Mock<ModelMetadataProvider>();
             ModelMetadata metadata = new ModelMetadata(provider.Object, null, null, type, null);

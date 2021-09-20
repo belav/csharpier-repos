@@ -70,7 +70,8 @@ namespace System.Xml.Tests
             object param3,
             object param4,
             object param5
-        ) {
+        )
+        {
             string ns1 = param0.ToString();
             string ns2 = param3.ToString();
 
@@ -152,7 +153,8 @@ namespace System.Xml.Tests
             object param4,
             object param5,
             object param6
-        ) {
+        )
+        {
             string ns1 = param0.ToString();
             string ns2 = param3.ToString();
             string e1 = param1.ToString();

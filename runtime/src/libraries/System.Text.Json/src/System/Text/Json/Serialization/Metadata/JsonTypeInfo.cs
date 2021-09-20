@@ -163,7 +163,8 @@ namespace System.Text.Json.Serialization.Metadata
             Type type,
             JsonSerializerOptions options,
             ConverterStrategy converterStrategy
-        ) {
+        )
+        {
             // Options setting for object class types is deferred till initialization.
             if (converterStrategy != ConverterStrategy.Object && options == null)
             {
@@ -222,7 +223,8 @@ namespace System.Text.Json.Serialization.Metadata
                             Type? currentType = type;
                             currentType != null;
                             currentType = currentType.BaseType
-                        ) {
+                        )
+                        {
                             const BindingFlags bindingFlags =
                                 BindingFlags.Instance
                                 | BindingFlags.Public
@@ -231,12 +233,14 @@ namespace System.Text.Json.Serialization.Metadata
 
                             foreach (
                                 PropertyInfo propertyInfo in currentType.GetProperties(bindingFlags)
-                            ) {
+                            )
+                            {
                                 // Ignore indexers and virtual properties that have overrides that were [JsonIgnore]d.
                                 if (
                                     propertyInfo.GetIndexParameters().Length > 0
                                     || PropertyIsOverridenAndIgnored(propertyInfo, ignoredMembers)
-                                ) {
+                                )
+                                {
                                     continue;
                                 }
 
@@ -244,7 +248,8 @@ namespace System.Text.Json.Serialization.Metadata
                                 if (
                                     propertyInfo.GetMethod?.IsPublic == true
                                     || propertyInfo.SetMethod?.IsPublic == true
-                                ) {
+                                )
+                                {
                                     CacheMember(
                                         currentType,
                                         propertyInfo.PropertyType,
@@ -260,7 +265,8 @@ namespace System.Text.Json.Serialization.Metadata
                                         JsonPropertyInfo.GetAttribute<JsonIncludeAttribute>(
                                             propertyInfo
                                         ) != null
-                                    ) {
+                                    )
+                                    {
                                         ThrowHelper.ThrowInvalidOperationException_JsonIncludeOnNonPublicInvalid(
                                             propertyInfo,
                                             currentType
@@ -387,7 +393,8 @@ namespace System.Text.Json.Serialization.Metadata
             JsonNumberHandling? typeNumberHandling,
             Dictionary<string, JsonPropertyInfo> cache,
             ref Dictionary<string, MemberInfo>? ignoredMembers
-        ) {
+        )
+        {
             JsonPropertyInfo jsonPropertyInfo = AddProperty(
                 memberInfo,
                 memberType,
@@ -420,7 +427,8 @@ namespace System.Text.Json.Serialization.Metadata
                     // Was a property with the same CLR name was ignored? That property hid the current property,
                     // thus, if it was ignored, the current property should be ignored too.
                     ignoredMembers?.ContainsKey(memberName) != true
-                ) {
+                )
+                {
                     // We throw if we have two public properties that have the same JSON property name, and neither have been ignored.
                     ThrowHelper.ThrowInvalidOperationException_SerializerPropertyNameConflict(
                         Type,
@@ -558,7 +566,8 @@ namespace System.Text.Json.Serialization.Metadata
             if (
                 DataExtensionProperty != null
                 && parameterCache.ContainsKey(DataExtensionProperty.NameAsString)
-            ) {
+            )
+            {
                 ThrowHelper.ThrowInvalidOperationException_ExtensionDataCannotBindToCtorParam(
                     DataExtensionProperty.MemberInfo!,
                     Type,
@@ -572,11 +581,13 @@ namespace System.Text.Json.Serialization.Metadata
         private static bool PropertyIsOverridenAndIgnored(
             MemberInfo currentMember,
             Dictionary<string, MemberInfo>? ignoredMembers
-        ) {
+        )
+        {
             if (
                 ignoredMembers == null
                 || !ignoredMembers.TryGetValue(currentMember.Name, out MemberInfo? ignoredProperty)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -623,7 +634,8 @@ namespace System.Text.Json.Serialization.Metadata
                     || typeof(IDictionary<string, JsonElement>).IsAssignableFrom(
                         declaredPropertyType
                     )
-                ) {
+                )
+                {
                     JsonConverter converter = Options.GetConverter(declaredPropertyType);
                     Debug.Assert(converter != null);
                 }
@@ -646,7 +658,8 @@ namespace System.Text.Json.Serialization.Metadata
             Type classType,
             Type attributeType,
             Dictionary<string, JsonPropertyInfo> cache
-        ) {
+        )
+        {
             JsonPropertyInfo? property = null;
 
             foreach (JsonPropertyInfo jsonPropertyInfo in cache.Values)
@@ -676,7 +689,8 @@ namespace System.Text.Json.Serialization.Metadata
             ParameterInfo parameterInfo,
             JsonPropertyInfo jsonPropertyInfo,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             if (jsonPropertyInfo.IsIgnored)
             {
                 return JsonParameterInfo.CreateIgnoredParameterPlaceholder(jsonPropertyInfo);
@@ -707,7 +721,8 @@ namespace System.Text.Json.Serialization.Metadata
             MemberInfo? memberInfo,
             out Type runtimeType,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             Debug.Assert(type != null);
             ValidateType(type, parentClassType, memberInfo, options);
 
@@ -744,7 +759,8 @@ namespace System.Text.Json.Serialization.Metadata
                     else if (
                         converterRuntimeType.IsAssignableFrom(type)
                         || converter.TypeToConvert.IsAssignableFrom(type)
-                    ) {
+                    )
+                    {
                         runtimeType = type;
                     }
                     else
@@ -765,7 +781,8 @@ namespace System.Text.Json.Serialization.Metadata
             Type? parentClassType,
             MemberInfo? memberInfo,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             if (!options.TypeIsCached(type) && IsInvalidForSerialization(type))
             {
                 ThrowHelper.ThrowInvalidOperationException_CannotSerializeInvalidType(
@@ -798,7 +815,8 @@ namespace System.Text.Json.Serialization.Metadata
                 if (
                     attributes[i].GetType().FullName
                     == "System.Runtime.CompilerServices.IsByRefLikeAttribute"
-                ) {
+                )
+                {
                     return true;
                 }
             }

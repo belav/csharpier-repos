@@ -21,7 +21,8 @@ namespace Microsoft.Extensions.Logging.Console.Test
             int numSegments,
             string message,
             string lastSegment
-        ) {
+        )
+        {
             // Arrange
             var segments = new List<ConsoleContext>();
             Action<string, int, int, ConsoleColor?, ConsoleColor?> onParseWrite = (
@@ -56,7 +57,8 @@ namespace Microsoft.Extensions.Logging.Console.Test
         public void Parse_SetBackgroundForegroundAndMessageThenReset_Success(
             ConsoleColor background,
             ConsoleColor foreground
-        ) {
+        )
+        {
             // Arrange
             var message =
                 AnsiParser.GetBackgroundColorEscapeCode(background)
@@ -229,7 +231,8 @@ namespace Microsoft.Extensions.Logging.Console.Test
         public void Parse_ValidSupportedOrUnsupportedCodesInMessage_MessageParsedSuccessfully(
             string messageWithUnsupportedCode,
             params string[] output
-        ) {
+        )
+        {
             // Arrange
             var message = messageWithUnsupportedCode;
             var segments = new List<ConsoleContext>();

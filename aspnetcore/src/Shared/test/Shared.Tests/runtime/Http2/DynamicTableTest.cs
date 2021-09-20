@@ -155,7 +155,8 @@ namespace System.Net.Http.Unit.Tests.HPack
             int initialMaxSize,
             int finalMaxSize,
             int insertSize
-        ) {
+        )
+        {
             // This is purely to make it simple to perfectly reach our initial max size to test growing a full but non-wrapping buffer.
             Debug.Assert(
                 (insertSize % 64) == 0,

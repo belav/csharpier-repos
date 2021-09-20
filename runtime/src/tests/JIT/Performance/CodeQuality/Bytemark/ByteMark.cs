@@ -1045,7 +1045,8 @@ public class ByteMark
         out double c_half_interval,
         out double smean,
         out double sdev
-    ) {
+    )
+    {
         double sdev_to_beat; /* Original sdev to be beaten */
         double temp; /* For doing a swap */
         int is_beaten; /* Indicates original was beaten */

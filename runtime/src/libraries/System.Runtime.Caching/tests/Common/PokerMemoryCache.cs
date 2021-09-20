@@ -78,7 +78,8 @@ namespace MonoTests.Common
             object value,
             CacheItemPolicy policy,
             string regionName = null
-        ) {
+        )
+        {
             Calls.Add(
                 "AddOrGetExisting (string key, object value, CacheItemPolicy policy, string regionName = null)"
             );
@@ -90,7 +91,8 @@ namespace MonoTests.Common
             object value,
             DateTimeOffset absoluteExpiration,
             string regionName = null
-        ) {
+        )
+        {
             Calls.Add(
                 "AddOrGetExisting (string key, object value, DateTimeOffset absoluteExpiration, string regionName = null)"
             );
@@ -124,7 +126,8 @@ namespace MonoTests.Common
         public override CacheEntryChangeMonitor CreateCacheEntryChangeMonitor(
             IEnumerable<string> keys,
             string regionName = null
-        ) {
+        )
+        {
             Calls.Add(
                 "CreateCacheEntryChangeMonitor (IEnumerable<string> keys, string regionName = null)"
             );
@@ -145,7 +148,8 @@ namespace MonoTests.Common
         public override IDictionary<string, object> GetValues(
             IEnumerable<string> keys,
             string regionName = null
-        ) {
+        )
+        {
             Calls.Add(
                 "IDictionary<string, object> GetValues (IEnumerable<string> keys, string regionName = null)"
             );
@@ -155,7 +159,8 @@ namespace MonoTests.Common
         public override IDictionary<string, object> GetValues(
             string regionName,
             params string[] keys
-        ) {
+        )
+        {
             Calls.Add(
                 "IDictionary<string, object> GetValues (string regionName, params string [] keys)"
             );
@@ -173,7 +178,8 @@ namespace MonoTests.Common
             object value,
             CacheItemPolicy policy,
             string regionName = null
-        ) {
+        )
+        {
             Calls.Add(
                 "Set (string key, object value, CacheItemPolicy policy, string regionName = null)"
             );
@@ -185,7 +191,8 @@ namespace MonoTests.Common
             object value,
             DateTimeOffset absoluteExpiration,
             string regionName = null
-        ) {
+        )
+        {
             Calls.Add(
                 "Set (string key, object value, DateTimeOffset absoluteExpiration, string regionName = null)"
             );

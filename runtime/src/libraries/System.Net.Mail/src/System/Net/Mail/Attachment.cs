@@ -372,7 +372,8 @@ namespace System.Net.Mail
                 && _name != null
                 && _name.Length != 0
                 && !MimeBasePart.IsAscii(_name, false)
-            ) {
+            )
+            {
                 Encoding encoding =
                     NameEncoding ?? Encoding.GetEncoding(MimeBasePart.DefaultCharSet);
                 MimePart.ContentType.Name = MimeBasePart.EncodeHeaderValue(
@@ -449,7 +450,8 @@ namespace System.Net.Mail
             string? name,
             Encoding? contentEncoding,
             string? mediaType
-        ) {
+        )
+        {
             Attachment a = new Attachment();
             a.SetContentFromString(content, contentEncoding, mediaType);
             a.Name = name;

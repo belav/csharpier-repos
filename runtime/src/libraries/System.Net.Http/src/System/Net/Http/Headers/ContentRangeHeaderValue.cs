@@ -195,7 +195,8 @@ namespace System.Net.Http.Headers
         public static bool TryParse(
             [NotNullWhen(true)] string? input,
             [NotNullWhen(true)] out ContentRangeHeaderValue? parsedValue
-        ) {
+        )
+        {
             int index = 0;
             parsedValue = null;
 
@@ -206,7 +207,8 @@ namespace System.Net.Http.Headers
                     ref index,
                     out object? output
                 )
-            ) {
+            )
+            {
                 parsedValue = (ContentRangeHeaderValue)output!;
                 return true;
             }
@@ -217,7 +219,8 @@ namespace System.Net.Http.Headers
             string? input,
             int startIndex,
             out object? parsedValue
-        ) {
+        )
+        {
             Debug.Assert(startIndex >= 0);
 
             parsedValue = null;
@@ -264,7 +267,8 @@ namespace System.Net.Http.Headers
                     out toStartIndex,
                     out toLength
                 )
-            ) {
+            )
+            {
                 return 0;
             }
 
@@ -302,7 +306,8 @@ namespace System.Net.Http.Headers
                     lengthLength,
                     out parsedValue
                 )
-            ) {
+            )
+            {
                 return 0;
             }
 
@@ -340,7 +345,8 @@ namespace System.Net.Http.Headers
             out int fromLength,
             out int toStartIndex,
             out int toLength
-        ) {
+        )
+        {
             fromLength = 0;
             toStartIndex = 0;
             toLength = 0;
@@ -405,14 +411,16 @@ namespace System.Net.Http.Headers
             int lengthStartIndex,
             int lengthLength,
             [NotNullWhen(true)] out object? parsedValue
-        ) {
+        )
+        {
             parsedValue = null;
 
             long from = 0;
             if (
                 (fromLength > 0)
                 && !HeaderUtilities.TryParseInt64(input, fromStartIndex, fromLength, out from)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -420,7 +428,8 @@ namespace System.Net.Http.Headers
             if (
                 (toLength > 0)
                 && !HeaderUtilities.TryParseInt64(input, toStartIndex, toLength, out to)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -434,7 +443,8 @@ namespace System.Net.Http.Headers
             if (
                 (lengthLength > 0)
                 && !HeaderUtilities.TryParseInt64(input, lengthStartIndex, lengthLength, out length)
-            ) {
+            )
+            {
                 return false;
             }
 

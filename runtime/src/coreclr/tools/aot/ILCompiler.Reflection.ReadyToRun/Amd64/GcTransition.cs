@@ -37,7 +37,8 @@ namespace ILCompiler.Reflection.ReadyToRun.Amd64
             int chunkId,
             GcSlotTable slotTable,
             Machine machine
-        ) {
+        )
+        {
             CodeOffset = codeOffset;
             SlotId = slotId;
             IsLive = isLive;

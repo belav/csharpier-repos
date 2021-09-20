@@ -68,7 +68,8 @@ namespace System.Net.Test.Common
                     if (
                         protocol != SslProtocols.None
                         && (protocol & SupportedSslProtocols) == protocol
-                    ) {
+                    )
+                    {
                         yield return new object[] { protocol };
                     }
                 }

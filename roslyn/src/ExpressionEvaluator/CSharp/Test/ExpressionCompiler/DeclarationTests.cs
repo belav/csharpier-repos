@@ -2187,7 +2187,8 @@ class C
             string declaration,
             out DkmClrCompilationResultFlags flags,
             out CompilationTestData testData
-        ) {
+        )
+        {
             string error;
             CompileDeclaration(context, declaration, out flags, out testData, out error);
             Assert.Null(error);
@@ -2199,7 +2200,8 @@ class C
             out DkmClrCompilationResultFlags flags,
             out CompilationTestData testData,
             out string error
-        ) {
+        )
+        {
             testData = new CompilationTestData();
 
             ResultProperties resultProperties;

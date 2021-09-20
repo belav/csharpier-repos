@@ -25,7 +25,8 @@ namespace EncodingDataGenerator
                     || edg.IanaMappings == null
                     || edg.PreferredIANANames == null
                     || edg.OutputDataTable == null
-                ) {
+                )
+                {
                     edg.Usage();
                     return;
                 }
@@ -220,7 +221,8 @@ namespace EncodingDataGenerator
             string source,
             IEnumerable<KeyValuePair<TKey, TValue>> data,
             Func<KeyValuePair<TKey, TValue>, object[]> translator
-        ) {
+        )
+        {
             string[] sourceData = source.Split('|');
             string format = sourceData[1];
 
@@ -237,7 +239,8 @@ namespace EncodingDataGenerator
         private bool ValidateMappings(
             Dictionary<string, ushort> nameMappings,
             Dictionary<ushort, KeyValuePair<string, string>> preferredNames
-        ) {
+        )
+        {
             bool ret = true;
 
             // There are multiple mapped names, and each must have a matching preferred name/English name.
@@ -253,7 +256,8 @@ namespace EncodingDataGenerator
             // Each preferred name must have a matching mapped name.
             foreach (
                 string name in preferredNames.Values.Select(kv => kv.Key).Except(nameMappings.Keys)
-            ) {
+            )
+            {
                 Console.WriteLine(
                     "Preferred name {0} exists, but isn't mapped to a codepage",
                     name
@@ -422,7 +426,8 @@ namespace EncodingDataGenerator
         private IEnumerable<KeyValuePair<int, string[]>> DelimitedFileRows(
             string path,
             int columns = 0
-        ) {
+        )
+        {
             using (var input = File.OpenText(path))
             {
                 int lineNumber = 1;

@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.AutomaticCompletion
         internal static void CheckStart(
             IBraceCompletionSession session,
             bool expectValidSession = true
-        ) {
+        )
+        {
             Type(session, session.OpeningBrace.ToString());
 
             session.Start();
@@ -89,7 +90,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.AutomaticCompletion
             IBraceCompletionSession session,
             int indentation,
             string result = null
-        ) {
+        )
+        {
             session.PreReturn(out var handled);
 
             Type(session, Environment.NewLine);
@@ -117,7 +119,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.AutomaticCompletion
         internal static void CheckReturnOnNonEmptyLine(
             IBraceCompletionSession session,
             int expectedVirtualSpace
-        ) {
+        )
+        {
             session.PreReturn(out var handled);
 
             Type(session, Environment.NewLine);
@@ -134,7 +137,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.AutomaticCompletion
         internal static void CheckOverType(
             IBraceCompletionSession session,
             bool allowOverType = true
-        ) {
+        )
+        {
             var preClosingPoint = session.ClosingPoint.GetPoint(
                 session.SubjectBuffer.CurrentSnapshot
             );
@@ -178,7 +182,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.AutomaticCompletion
             char opening,
             char closing,
             Dictionary<OptionKey2, object> changedOptionSet = null
-        ) {
+        )
+        {
             if (changedOptionSet != null)
             {
                 var options = workspace.Options;
@@ -207,7 +212,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.AutomaticCompletion
                     closing,
                     out var session
                 )
-            ) {
+            )
+            {
                 return new Holder(workspace, session);
             }
 

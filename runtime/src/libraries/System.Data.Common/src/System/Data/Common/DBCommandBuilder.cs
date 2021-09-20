@@ -75,7 +75,8 @@ namespace System.Data.Common
                                 _originalPrefix,
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             continue;
                         }
                     }
@@ -83,7 +84,8 @@ namespace System.Data.Common
                     {
                         if (
                             columnName.StartsWith(_isNullPrefix, StringComparison.OrdinalIgnoreCase)
-                        ) {
+                        )
+                        {
                             continue;
                         }
                     }
@@ -544,13 +546,15 @@ namespace System.Data.Common
             bool closeConnection,
             DataRow? dataRow,
             bool useColumnsForParameterNames
-        ) {
+        )
+        {
             // Don't bother building the cache if it's done already; wait for
             // the user to call RefreshSchema first.
             if (
                 (null != _dbSchemaTable)
                 && (!useColumnsForParameterNames || (null != _parameterNames))
-            ) {
+            )
+            {
                 return;
             }
             DataTable? schemaTable = null;
@@ -597,7 +601,8 @@ namespace System.Data.Common
                             0 == _parameterNameMaxLength
                             || null == _parameterNamePattern
                             || null == _parameterMarkerFormat
-                        ) {
+                        )
+                        {
                             useColumnsForParameterNames = false;
                         }
                     }
@@ -650,7 +655,8 @@ namespace System.Data.Common
                 IDataReader dataReader = sourceCommand.ExecuteReader(
                     CommandBehavior.SchemaOnly | CommandBehavior.KeyInfo
                 )
-            ) {
+            )
+            {
                 return dataReader.GetSchemaTable();
             }
         }
@@ -705,7 +711,8 @@ namespace System.Data.Common
                     || (0 != ADP.SrcCompare(baseSchemaName, schemaName))
                     || (0 != ADP.SrcCompare(baseCatalogName, catalogName))
                     || (0 != ADP.SrcCompare(baseServerName, serverName))
-                ) {
+                )
+                {
                     throw ADP.DynamicSQLJoinUnsupported();
                 }
             }
@@ -739,13 +746,15 @@ namespace System.Data.Common
             if (
                 !string.IsNullOrEmpty(quotePrefix)
                 && (-1 != baseTableName.IndexOf(quotePrefix, StringComparison.Ordinal))
-            ) {
+            )
+            {
                 throw ADP.DynamicSQLNestedQuote(baseTableName, quotePrefix);
             }
             if (
                 !string.IsNullOrEmpty(quoteSuffix)
                 && (-1 != baseTableName.IndexOf(quoteSuffix, StringComparison.Ordinal))
-            ) {
+            )
+            {
                 throw ADP.DynamicSQLNestedQuote(baseTableName, quoteSuffix);
             }
 
@@ -798,7 +807,8 @@ namespace System.Data.Common
                     && !row.IsLong
                     && !row.IsRowVersion
                     && row.IsHidden
-                ) {
+                )
+                {
                     _hasPartialPrimaryKey = true;
                     break;
                 }
@@ -985,7 +995,8 @@ namespace System.Data.Common
                         if (
                             (originalValue == currentValue)
                             || ((null != originalValue) && originalValue.Equals(currentValue))
-                        ) {
+                        )
+                        {
                             continue;
                         }
                     }
@@ -1038,7 +1049,8 @@ namespace System.Data.Common
             DbCommand command,
             int parameterCount,
             bool isUpdate
-        ) {
+        )
+        {
             string beginNewCondition = string.Empty;
             int whereCount = 0;
 
@@ -1054,7 +1066,8 @@ namespace System.Data.Common
                     (null == row)
                     || (0 == row.BaseColumnName.Length)
                     || !IncludeInWhereClause(row, isUpdate)
-                ) {
+                )
+                {
                     continue;
                 }
                 builder.Append(beginNewCondition);
@@ -1184,7 +1197,8 @@ namespace System.Data.Common
             DbSchemaRow row,
             StatementType statementType,
             bool whereClause
-        ) {
+        )
+        {
             DbParameter p = GetNextParameter(command, parameterCount);
 
             Debug.Assert(!string.IsNullOrEmpty(sourceColumn), "empty source column");
@@ -1248,7 +1262,8 @@ namespace System.Data.Common
             DbSchemaRow row,
             StatementType statementType,
             bool whereClause
-        ) {
+        )
+        {
             DbParameter p = GetNextParameter(command, parameterCount);
 
             if (null == parameterName)
@@ -1435,7 +1450,8 @@ namespace System.Data.Common
             string columnName,
             DataTableMapping mappings,
             DataRowVersion version
-        ) {
+        )
+        {
             return GetColumnValue(row, GetDataColumn(columnName, mappings, row), version);
         }
 
@@ -1454,7 +1470,8 @@ namespace System.Data.Common
             string columnName,
             DataTableMapping tablemapping,
             DataRow row
-        ) {
+        )
+        {
             DataColumn? column = null;
             if (!string.IsNullOrEmpty(columnName))
             {

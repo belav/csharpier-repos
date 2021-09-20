@@ -26,14 +26,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             TypeSymbol rightType,
             TypeSymbol returnType,
             bool isCheckedBuiltin
-        ) {
+        )
+        {
             if (
                 leftType.Equals(
                     rightType,
                     TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
                         | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
                 )
-            ) {
+            )
+            {
                 _containingType = leftType;
             }
             else if (
@@ -42,7 +44,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
                         | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
                 )
-            ) {
+            )
+            {
                 _containingType = rightType;
             }
             else
@@ -78,7 +81,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             string name,
             TypeSymbol returnType,
             bool isCheckedBuiltin
-        ) {
+        )
+        {
             _containingType = container;
             _name = name;
             _returnType = returnType;
@@ -366,7 +370,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 && string.Equals(_name, other._name, StringComparison.Ordinal)
                 && TypeSymbol.Equals(_containingType, other._containingType, compareKind)
                 && TypeSymbol.Equals(_returnType, other._returnType, compareKind)
-            ) {
+            )
+            {
                 for (int i = 0; i < _parameters.Length; i++)
                 {
                     if (
@@ -375,7 +380,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             other._parameters[i].Type,
                             compareKind
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }

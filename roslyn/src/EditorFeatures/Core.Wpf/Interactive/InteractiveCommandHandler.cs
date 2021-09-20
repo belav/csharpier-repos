@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
             IContentTypeRegistryService contentTypeRegistryService,
             IEditorOptionsFactoryService editorOptionsFactoryService,
             IEditorOperationsFactoryService editorOperationsFactoryService
-        ) {
+        )
+        {
             _contentTypeRegistryService = contentTypeRegistryService;
             _editorOptionsFactoryService = editorOptionsFactoryService;
             _editorOperationsFactoryService = editorOperationsFactoryService;
@@ -66,14 +67,16 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
         bool ICommandHandler<ExecuteInInteractiveCommandArgs>.ExecuteCommand(
             ExecuteInInteractiveCommandArgs args,
             CommandExecutionContext context
-        ) {
+        )
+        {
             var window = OpenInteractiveWindow(focus: false);
             using (
                 context.OperationContext.AddScope(
                     allowCancellation: true,
                     EditorFeaturesWpfResources.Executing_selection_in_Interactive_Window
                 )
-            ) {
+            )
+            {
                 var submission = GetSelectedText(
                     args,
                     context.OperationContext.UserCancellationToken
@@ -94,7 +97,8 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
         bool ICommandHandler<CopyToInteractiveCommandArgs>.ExecuteCommand(
             CopyToInteractiveCommandArgs args,
             CommandExecutionContext context
-        ) {
+        )
+        {
             var window = OpenInteractiveWindow(focus: true);
             var buffer = window.CurrentLanguageBuffer;
 
@@ -123,7 +127,8 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
             IInteractiveWindow window,
             CopyToInteractiveCommandArgs args,
             CommandExecutionContext context
-        ) {
+        )
+        {
             var buffer = window.CurrentLanguageBuffer;
             Debug.Assert(buffer != null);
 
@@ -133,7 +138,8 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
                     allowCancellation: true,
                     EditorFeaturesWpfResources.Copying_selection_to_Interactive_Window
                 )
-            ) {
+            )
+            {
                 var text = GetSelectedText(args, context.OperationContext.UserCancellationToken);
 
                 // If the last line isn't empty in the existing submission buffer, we will prepend a

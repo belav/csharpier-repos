@@ -67,7 +67,8 @@ namespace System.Data.Common
             DataTable dataTable,
             Type? dataType,
             MissingSchemaAction schemaAction
-        ) {
+        )
+        {
             return GetDataColumnBySchemaAction(
                 SourceColumn,
                 DataSetColumn,
@@ -84,7 +85,8 @@ namespace System.Data.Common
             DataTable dataTable,
             Type? dataType,
             MissingSchemaAction schemaAction
-        ) {
+        )
+        {
             if (null == dataTable)
             {
                 throw ADP.ArgumentNull(nameof(dataTable));
@@ -136,7 +138,8 @@ namespace System.Data.Common
             DataTable dataTable,
             Type? dataType,
             MissingSchemaAction schemaAction
-        ) {
+        )
+        {
             Debug.Assert(dataTable != null, "Should not call with a null DataTable");
             if (string.IsNullOrEmpty(dataSetColumn))
             {
@@ -183,7 +186,8 @@ namespace System.Data.Common
                 CultureInfo culture,
                 object value,
                 Type destinationType
-            ) {
+            )
+            {
                 if (null == destinationType)
                 {
                     throw ADP.ArgumentNull(nameof(destinationType));

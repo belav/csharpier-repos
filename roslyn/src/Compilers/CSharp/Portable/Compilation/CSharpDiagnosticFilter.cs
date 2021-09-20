@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             IDictionary<string, ReportDiagnostic> specificDiagnosticOptions,
             SyntaxTreeOptionsProvider? syntaxTreeOptions,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (d == null)
             {
                 return d;
@@ -80,7 +81,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 && specificDiagnosticOptions.Keys.Contains(
                     CSharp.MessageProvider.Instance.GetIdForErrorCode((int)ErrorCode.WRN_ALinkWarn)
                 )
-            ) {
+            )
+            {
                 reportAction = GetDiagnosticReport(
                     ErrorFacts.GetSeverity(ErrorCode.WRN_ALinkWarn),
                     d.IsEnabledByDefault,
@@ -152,7 +154,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxTreeOptionsProvider? syntaxTreeOptions,
             CancellationToken cancellationToken,
             out bool hasPragmaSuppression
-        ) {
+        )
+        {
             hasPragmaSuppression = false;
 
             Debug.Assert(location.SourceTree is null || location.SourceTree is CSharpSyntaxTree);
@@ -232,7 +235,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         && severity == DiagnosticSeverity.Warning
                         && reportFromSyntaxTreeOptions == ReportDiagnostic.Error
                     )
-                ) {
+                )
+                {
                     isSpecified = true;
                     report = reportFromSyntaxTreeOptions;
 
@@ -241,7 +245,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         !specifiedWarnAsErrorMinus
                         && report == ReportDiagnostic.Warn
                         && generalDiagnosticOption == ReportDiagnostic.Error
-                    ) {
+                    )
+                    {
                         report = ReportDiagnostic.Error;
                     }
                 }
@@ -319,7 +324,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         if (
                             severity == DiagnosticSeverity.Warning
                             || severity == DiagnosticSeverity.Info
-                        ) {
+                        )
+                        {
                             report = ReportDiagnostic.Suppress;
                             isSpecified = true;
                         }

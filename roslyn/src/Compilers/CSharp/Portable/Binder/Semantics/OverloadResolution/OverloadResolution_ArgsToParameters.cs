@@ -66,7 +66,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             AnalyzedArguments arguments,
             bool isMethodGroupConversion,
             bool expanded
-        ) {
+        )
+        {
             Debug.Assert((object)symbol != null);
             Debug.Assert(arguments != null);
 
@@ -234,7 +235,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             AnalyzedArguments arguments,
             ParameterMap argsToParameters,
             ImmutableArray<ParameterSymbol> parameters
-        ) {
+        )
+        {
             // Is there any named argument used out-of-position and followed by unnamed arguments?
 
             // If the map is trivial then clearly not.
@@ -281,7 +283,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             out bool isNamedArgument,
             ref bool seenNamedParams,
             ref bool seenOutOfPositionNamedArgument
-        ) {
+        )
+        {
             // Spec 7.5.1.1: Corresponding parameters:
             // For each argument in an argument list there has to be a corresponding parameter in
             // the function member or delegate being invoked. The parameter list used in the
@@ -385,7 +388,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             AnalyzedArguments arguments,
             bool isMethodGroupConversion,
             bool isVararg
-        ) {
+        )
+        {
             Debug.Assert(!parameters.IsDefault);
             Debug.Assert(arguments != null);
             Debug.Assert(arguments.Names.Count == 0);
@@ -407,11 +411,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                     int parameterPosition = argumentCount;
                     parameterPosition < parameterCount;
                     ++parameterPosition
-                ) {
+                )
+                {
                     if (
                         parameters.Length == parameterPosition
                         || !CanBeOptional(parameters[parameterPosition], isMethodGroupConversion)
-                    ) {
+                    )
+                    {
                         return ArgumentAnalysisResult.RequiredParameterMissing(parameterPosition);
                     }
                 }
@@ -445,7 +451,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static int? NameUsedForPositional(
             AnalyzedArguments arguments,
             ParameterMap argsToParameters
-        ) {
+        )
+        {
             // Was there a named argument used for a previously-supplied positional argument?
 
             // If the map is trivial then clearly not.
@@ -461,7 +468,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 int argumentPosition = 0;
                 argumentPosition < argsToParameters.Length;
                 ++argumentPosition
-            ) {
+            )
+            {
                 if (arguments.Name(argumentPosition) != null)
                 {
                     for (int i = 0; i < argumentPosition; ++i)
@@ -487,7 +495,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<ParameterSymbol> parameters,
             bool isMethodGroupConversion,
             bool expanded
-        ) {
+        )
+        {
             Debug.Assert(!(expanded && isMethodGroupConversion));
 
             // If we're in the expanded form then the final parameter is always optional,

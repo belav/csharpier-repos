@@ -88,7 +88,8 @@ namespace System.Drawing
             Graphics? targetGraphics,
             IntPtr targetDC,
             Rectangle targetRectangle
-        ) {
+        )
+        {
             BufferedGraphicsContext? tempContext = null;
             BufferedGraphics? tempBuffer = null;
 
@@ -104,7 +105,8 @@ namespace System.Drawing
                 if (
                     tempContext != null
                     && (tempBuffer == null || (tempBuffer != null && !tempBuffer.DisposeContext))
-                ) {
+                )
+                {
                     tempContext.Dispose();
                 }
             }

@@ -44,7 +44,8 @@ namespace System.Diagnostics.Tests
                                 Guid.Parse(typingCounterSetId),
                                 CounterSetInstanceType.Single
                             )
-                        ) {
+                        )
+                        {
                             // Add the counters to the counter set definition.
                             typingCounterSet.AddCounter(
                                 1,
@@ -78,7 +79,8 @@ namespace System.Diagnostics.Tests
                             using (
                                 CounterSetInstance typingCsInstance =
                                     typingCounterSet.CreateCounterSetInstance("Typing Instance")
-                            ) {
+                            )
+                            {
                                 typingCsInstance.Counters[1].Value = 0;
                                 typingCsInstance.Counters[2].Value = 0;
                                 typingCsInstance.Counters[3].Value = 0;
@@ -120,7 +122,8 @@ namespace System.Diagnostics.Tests
                                                     "Percent of Words Containing A"
                                                 )
                                         )
-                                ) {
+                                )
+                                {
                                     typingCsInstance.Counters[1].Increment();
                                     Assert.Equal(1, typingCsInstance.Counters[1].Value);
                                     Assert.Equal(1, typingCsInstance.Counters[1].RawValue);
@@ -195,7 +198,8 @@ namespace System.Diagnostics.Tests
                     _fixture._typingCounterSetId,
                     CounterSetInstanceType.Single
                 )
-            ) {
+            )
+            {
                 Assert.Throws<InvalidOperationException>(
                     () => typingCounterSet.CreateCounterSetInstance("Typing Instance")
                 );
@@ -211,13 +215,15 @@ namespace System.Diagnostics.Tests
                     _fixture._typingCounterSetId,
                     CounterSetInstanceType.Single
                 )
-            ) {
+            )
+            {
                 typingCounterSet.AddCounter(6, CounterType.SampleBase, "Percent Base");
                 using (
                     CounterSetInstance typingCsInstance = typingCounterSet.CreateCounterSetInstance(
                         "Typing Instance"
                     )
-                ) {
+                )
+                {
                     AssertExtensions.Throws<ArgumentException>(
                         "instanceName",
                         "InstanceName",
@@ -236,7 +242,8 @@ namespace System.Diagnostics.Tests
                     _fixture._typingCounterSetId,
                     CounterSetInstanceType.Single
                 )
-            ) {
+            )
+            {
                 AssertExtensions.Throws<ArgumentException>(
                     "counterSetGuid",
                     "CounterSetGuid",
@@ -256,14 +263,16 @@ namespace System.Diagnostics.Tests
         public void PerformanceCounter_PerformanceData_CounterSet_InvalidInstanceName(
             string instanceName,
             Type exceptionType
-        ) {
+        )
+        {
             using (
                 CounterSet typingCounterSet = new CounterSet(
                     _fixture._providerId,
                     _fixture._typingCounterSetId,
                     CounterSetInstanceType.Single
                 )
-            ) {
+            )
+            {
                 typingCounterSet.AddCounter(6, CounterType.SampleBase, "Percent Base");
                 ArgumentException argumentException = (ArgumentException)Assert.Throws(
                     exceptionType,
@@ -281,14 +290,16 @@ namespace System.Diagnostics.Tests
             string netCoreParameterName,
             string netfxParameterName,
             Type exceptionType
-        ) {
+        )
+        {
             using (
                 CounterSet typingCounterSet = new CounterSet(
                     _fixture._providerId,
                     _fixture._typingCounterSetId,
                     CounterSetInstanceType.Single
                 )
-            ) {
+            )
+            {
                 ArgumentException argumentException = (ArgumentException)Assert.Throws(
                     exceptionType,
                     () => typingCounterSet.AddCounter(8, CounterType.SampleBase, counterName)
@@ -305,20 +316,23 @@ namespace System.Diagnostics.Tests
         [InlineData(null)]
         public void PerformanceCounter_PerformanceData_InvalidCounterName_Indexer(
             string counterName
-        ) {
+        )
+        {
             using (
                 CounterSet typingCounterSet = new CounterSet(
                     _fixture._providerId,
                     _fixture._typingCounterSetId,
                     CounterSetInstanceType.Single
                 )
-            ) {
+            )
+            {
                 typingCounterSet.AddCounter(6, CounterType.SampleBase, "Percent Base");
                 using (
                     CounterSetInstance typingCsInstance = typingCounterSet.CreateCounterSetInstance(
                         "Typing Instance"
                     )
-                ) {
+                )
+                {
                     AssertExtensions.Throws<ArgumentNullException>(
                         "counterName",
                         "CounterName",
@@ -337,13 +351,15 @@ namespace System.Diagnostics.Tests
                     _fixture._typingCounterSetId,
                     CounterSetInstanceType.Single
                 )
-            ) {
+            )
+            {
                 typingCounterSet.AddCounter(6, CounterType.SampleBase, "Percent Base");
                 using (
                     CounterSetInstance typingCsInstance = typingCounterSet.CreateCounterSetInstance(
                         "Typing Instance"
                     )
-                ) {
+                )
+                {
                     Assert.Null(typingCsInstance.Counters["NotFound"]);
                     Assert.Null(typingCsInstance.Counters[1]);
                 }
@@ -359,7 +375,8 @@ namespace System.Diagnostics.Tests
                     _fixture._typingCounterSetId,
                     CounterSetInstanceType.Single
                 )
-            ) {
+            )
+            {
                 typingCounterSet.AddCounter(6, CounterType.SampleBase, "Percent Base");
                 Assert.Throws<ArgumentException>(
                     () => typingCounterSet.AddCounter(6, CounterType.SampleBase, "Percent Base")

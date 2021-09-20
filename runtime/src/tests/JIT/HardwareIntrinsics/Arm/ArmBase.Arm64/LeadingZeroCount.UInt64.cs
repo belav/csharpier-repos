@@ -215,7 +215,8 @@ namespace JIT.HardwareIntrinsics.Arm
             UInt64 data,
             Int32 result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             var isUnexpectedResult = false;
 
             int expectedResult = 0;

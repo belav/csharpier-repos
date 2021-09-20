@@ -78,7 +78,8 @@ namespace System.Configuration
             string resolutionAsString,
             long value,
             long resolution
-        ) {
+        )
+        {
             Debug.Assert(resolution > 0, "resolution > 0");
 
             if (value % resolution != 0)
@@ -93,7 +94,8 @@ namespace System.Configuration
             TimeSpan max,
             long resolutionInSeconds,
             bool exclusiveRange
-        ) {
+        )
+        {
             ValidateRangeImpl(value, min, max, exclusiveRange);
 
             // Validate the resolution

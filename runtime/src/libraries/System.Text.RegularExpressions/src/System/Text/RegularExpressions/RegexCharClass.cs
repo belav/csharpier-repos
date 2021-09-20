@@ -320,7 +320,8 @@ namespace System.Text.RegularExpressions
             List<SingleRange>? ranges,
             StringBuilder? categories,
             RegexCharClass? subtraction
-        ) {
+        )
+        {
             _rangelist = ranges;
             _categories = categories;
             _negate = negate;
@@ -405,11 +406,13 @@ namespace System.Text.RegularExpressions
             bool caseInsensitive,
             string pattern,
             int currentPos
-        ) {
+        )
+        {
             if (
                 s_definedCategories.TryGetValue(categoryName, out string? category)
                 && !categoryName.Equals(InternalRegexIgnoreCase)
-            ) {
+            )
+            {
                 if (
                     caseInsensitive
                     && (
@@ -417,7 +420,8 @@ namespace System.Text.RegularExpressions
                         || categoryName.Equals("Lu")
                         || categoryName.Equals("Lt")
                     )
-                ) {
+                )
+                {
                     // when RegexOptions.IgnoreCase is specified then {Ll}, {Lu}, and {Lt} cases should all match
                     category = s_definedCategories[InternalRegexIgnoreCase];
                 }
@@ -668,7 +672,8 @@ namespace System.Text.RegularExpressions
             string set,
             out UnicodeCategory category,
             out bool negated
-        ) {
+        )
+        {
             if (set[CategoryLengthIndex] == 1 && set[SetLengthIndex] == 0 && !IsSubtraction(set))
             {
                 short c = (short)set[SetStartIndex];
@@ -712,7 +717,8 @@ namespace System.Text.RegularExpressions
             string set,
             out char lowInclusive,
             out char highInclusive
-        ) {
+        )
+        {
             if (
                 set[CategoryLengthIndex] == 0
                 && // must not have any categories
@@ -1113,7 +1119,8 @@ namespace System.Text.RegularExpressions
             int start,
             int setLength,
             int categoryLength
-        ) {
+        )
+        {
             int min = start + SetStartIndex;
             int max = min + setLength;
 
@@ -1159,7 +1166,8 @@ namespace System.Text.RegularExpressions
             int start,
             int setLength,
             int categoryLength
-        ) {
+        )
+        {
             UnicodeCategory chcategory = char.GetUnicodeCategory(ch);
 
             int i = start + SetStartIndex + setLength;
@@ -1222,7 +1230,8 @@ namespace System.Text.RegularExpressions
             UnicodeCategory chcategory,
             string category,
             ref int i
-        ) {
+        )
+        {
             int pos = i + 1;
             int curcat = (short)category[pos];
 
@@ -1421,7 +1430,8 @@ namespace System.Text.RegularExpressions
                     !_negate
                     && _subtractor is null
                     && (_categories is null || _categories.Length == 0)
-                ) {
+                )
+                {
                     if (rangelist.Count == 2)
                     {
                         // There are two ranges in the list.  See if there's one missing element between them.
@@ -1429,7 +1439,8 @@ namespace System.Text.RegularExpressions
                             rangelist[0].First == 0
                             && rangelist[0].Last == (char)(rangelist[1].First - 2)
                             && rangelist[1].Last == LastChar
-                        ) {
+                        )
+                        {
                             char ch = (char)(rangelist[0].Last + 1);
                             rangelist.RemoveAt(1);
                             rangelist[0] = new SingleRange(ch, ch);
@@ -1466,7 +1477,8 @@ namespace System.Text.RegularExpressions
             bool invert,
             string pattern,
             int currentPos
-        ) {
+        )
+        {
             int min = 0;
             int max = s_propTable.Length;
             while (min != max)

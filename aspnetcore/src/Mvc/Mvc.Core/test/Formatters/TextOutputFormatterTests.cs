@@ -64,7 +64,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             string acceptCharsetHeaders,
             string[] supportedEncodings,
             string expectedEncoding
-        ) {
+        )
+        {
             // Arrange
             var httpContext = new Mock<HttpContext>();
             var httpRequest = new DefaultHttpContext().Request;
@@ -103,7 +104,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         public void WriteResponse_OverridesCharset_IfDifferentFromContentTypeCharset(
             string contentType,
             string expectedContentType
-        ) {
+        )
+        {
             // Arrange
             var formatter = new OverrideEncodingFormatter(Encoding.UTF32);
 
@@ -305,7 +307,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             public override Task WriteResponseBodyAsync(
                 OutputFormatterWriteContext context,
                 Encoding selectedEncoding
-            ) {
+            )
+            {
                 return Task.FromResult(true);
             }
         }
@@ -327,7 +330,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             public override Task WriteResponseBodyAsync(
                 OutputFormatterWriteContext context,
                 Encoding selectedEncoding
-            ) {
+            )
+            {
                 return Task.FromResult(true);
             }
         }

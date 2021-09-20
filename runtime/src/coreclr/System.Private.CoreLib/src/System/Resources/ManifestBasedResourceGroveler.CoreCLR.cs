@@ -13,7 +13,8 @@ namespace System.Resources
             Assembly mainAssembly,
             CultureInfo culture,
             Version? version
-        ) {
+        )
+        {
             return ((RuntimeAssembly)mainAssembly).InternalGetSatelliteAssembly(
                 culture,
                 version,

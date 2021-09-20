@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.Hosting
             object? instance,
             Action<IApplicationBuilder> configure,
             Func<IServiceCollection, IServiceProvider> configureServices
-        ) {
+        )
+        {
             Debug.Assert(configure != null);
             Debug.Assert(configureServices != null);
 

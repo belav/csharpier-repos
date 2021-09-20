@@ -242,7 +242,8 @@ namespace System.Reflection.Tests
         [InlineData("MyGenericMethod")]
         public void MemberInfoGeneric_IsCollectibleTrue_WhenUsingAssemblyLoadContext(
             string memberName
-        ) {
+        )
+        {
             RemoteExecutor.Invoke(
                     (marshalledName) =>
                     {

@@ -13,7 +13,8 @@ namespace System.Net.Http.Functional.Tests
             Stream stream,
             TransportContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw _exnFactory();
         }
     }

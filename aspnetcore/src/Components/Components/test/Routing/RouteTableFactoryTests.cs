@@ -332,7 +332,8 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
             string template,
             string contextUrl,
             object convertedValue
-        ) {
+        )
+        {
             // Arrange
             var routeTable = new TestRouteTableBuilder().AddRoute(template).Build();
             var context = new RouteContext(contextUrl);
@@ -427,7 +428,8 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
             string first,
             string second,
             Type handler
-        ) {
+        )
+        {
             // Arrange
 
             // Routes are added in reverse precedence order
@@ -590,7 +592,8 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
             string path,
             string parameterValue,
             string catchAllValue
-        ) {
+        )
+        {
             // Arrange
 
             // Routes are added in reverse precedence order
@@ -665,7 +668,8 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
             string template,
             string contextUrl,
             object convertedValue
-        ) {
+        )
+        {
             // Arrange
             var routeTable = new TestRouteTableBuilder().AddRoute(template).Build();
             var context = new RouteContext(contextUrl);
@@ -728,7 +732,8 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
             string template,
             string contextUrl,
             object convertedValue
-        ) {
+        )
+        {
             // Arrange
             var routeTable = new TestRouteTableBuilder().AddRoute(template).Build();
             var context = new RouteContext(contextUrl);

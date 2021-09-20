@@ -70,7 +70,8 @@ namespace System.Linq.Parallel
             CountdownEvent barrier,
             ListChunk<Pair<TInputOutput, THashKey>>[][] valueExchangeMatrix,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(source != null);
             Debug.Assert(
                 keySelector != null || typeof(THashKey) == typeof(NoKeyMemoizationRequired)
@@ -117,7 +118,8 @@ namespace System.Linq.Parallel
         internal override bool MoveNext(
             ref Pair<TInputOutput, THashKey> currentElement,
             ref int currentKey
-        ) {
+        )
+        {
             if (_partitionCount == 1)
             {
                 // If there's only one partition, no need to do any sort of exchanges.

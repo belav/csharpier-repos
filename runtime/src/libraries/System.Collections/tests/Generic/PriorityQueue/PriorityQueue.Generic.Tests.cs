@@ -32,7 +32,8 @@ namespace System.Collections.Tests
             int initialCapacity,
             int countOfItemsToGenerate,
             out List<(TElement element, TPriority priority)> generatedItems
-        ) {
+        )
+        {
             generatedItems = CreateItems(countOfItemsToGenerate).ToList();
             var queue = new PriorityQueue<TElement, TPriority>(
                 initialCapacity,
@@ -84,7 +85,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void PriorityQueue_CapacityConstructor_ComparerShouldEqualDefaultComparer(
             int initialCapacity
-        ) {
+        )
+        {
             var queue = new PriorityQueue<TElement, TPriority>(initialCapacity);
             Assert.Empty(queue.UnorderedItems);
             Assert.Same(Comparer<TPriority>.Default, queue.Comparer);

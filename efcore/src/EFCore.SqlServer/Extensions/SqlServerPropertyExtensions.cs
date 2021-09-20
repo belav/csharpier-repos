@@ -35,7 +35,8 @@ namespace Microsoft.EntityFrameworkCore
         public static string? GetHiLoSequenceName(
             this IReadOnlyProperty property,
             in StoreObjectIdentifier storeObject
-        ) {
+        )
+        {
             var annotation = property.FindAnnotation(SqlServerAnnotationNames.HiLoSequenceName);
             if (annotation != null)
             {
@@ -70,7 +71,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionProperty property,
             string? name,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             property.SetOrRemoveAnnotation(
                 SqlServerAnnotationNames.HiLoSequenceName,
                 Check.NullButNotEmpty(name, nameof(name)),
@@ -109,7 +111,8 @@ namespace Microsoft.EntityFrameworkCore
         public static string? GetHiLoSequenceSchema(
             this IReadOnlyProperty property,
             in StoreObjectIdentifier storeObject
-        ) {
+        )
+        {
             var annotation = property.FindAnnotation(SqlServerAnnotationNames.HiLoSequenceSchema);
             if (annotation != null)
             {
@@ -144,7 +147,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionProperty property,
             string? schema,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             property.SetOrRemoveAnnotation(
                 SqlServerAnnotationNames.HiLoSequenceSchema,
                 Check.NullButNotEmpty(schema, nameof(schema)),
@@ -191,7 +195,8 @@ namespace Microsoft.EntityFrameworkCore
         public static IReadOnlySequence? FindHiLoSequence(
             this IReadOnlyProperty property,
             in StoreObjectIdentifier storeObject
-        ) {
+        )
+        {
             var model = property.DeclaringEntityType.Model;
 
             var sequenceName =
@@ -239,7 +244,8 @@ namespace Microsoft.EntityFrameworkCore
         public static int? GetIdentitySeed(
             this IReadOnlyProperty property,
             in StoreObjectIdentifier storeObject
-        ) {
+        )
+        {
             var annotation = property.FindAnnotation(SqlServerAnnotationNames.IdentitySeed);
             if (annotation != null)
             {
@@ -271,7 +277,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionProperty property,
             int? seed,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             property.SetOrRemoveAnnotation(
                 SqlServerAnnotationNames.IdentitySeed,
                 seed,
@@ -310,7 +317,8 @@ namespace Microsoft.EntityFrameworkCore
         public static int? GetIdentityIncrement(
             this IReadOnlyProperty property,
             in StoreObjectIdentifier storeObject
-        ) {
+        )
+        {
             var annotation = property.FindAnnotation(SqlServerAnnotationNames.IdentityIncrement);
             if (annotation != null)
             {
@@ -342,7 +350,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionProperty property,
             int? increment,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             property.SetOrRemoveAnnotation(
                 SqlServerAnnotationNames.IdentityIncrement,
                 increment,
@@ -376,7 +385,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns> The strategy, or <see cref="SqlServerValueGenerationStrategy.None" /> if none was set. </returns>
         public static SqlServerValueGenerationStrategy GetValueGenerationStrategy(
             this IReadOnlyProperty property
-        ) {
+        )
+        {
             var annotation = property.FindAnnotation(
                 SqlServerAnnotationNames.ValueGenerationStrategy
             );
@@ -392,7 +402,8 @@ namespace Microsoft.EntityFrameworkCore
                 || property.GetDefaultValue() != null
                 || property.GetDefaultValueSql() != null
                 || property.GetComputedColumnSql() != null
-            ) {
+            )
+            {
                 return SqlServerValueGenerationStrategy.None;
             }
 
@@ -419,7 +430,8 @@ namespace Microsoft.EntityFrameworkCore
             this IReadOnlyProperty property,
             in StoreObjectIdentifier storeObject,
             ITypeMappingSource? typeMappingSource
-        ) {
+        )
+        {
             var annotation = property.FindAnnotation(
                 SqlServerAnnotationNames.ValueGenerationStrategy
             );
@@ -446,7 +458,8 @@ namespace Microsoft.EntityFrameworkCore
                 || property.GetDefaultValue(storeObject) != null
                 || property.GetDefaultValueSql(storeObject) != null
                 || property.GetComputedColumnSql(storeObject) != null
-            ) {
+            )
+            {
                 return SqlServerValueGenerationStrategy.None;
             }
 
@@ -455,13 +468,15 @@ namespace Microsoft.EntityFrameworkCore
 
         private static SqlServerValueGenerationStrategy GetDefaultValueGenerationStrategy(
             IReadOnlyProperty property
-        ) {
+        )
+        {
             var modelStrategy = property.DeclaringEntityType.Model.GetValueGenerationStrategy();
 
             if (
                 modelStrategy == SqlServerValueGenerationStrategy.SequenceHiLo
                 && IsCompatibleWithValueGeneration(property)
-            ) {
+            )
+            {
                 return SqlServerValueGenerationStrategy.SequenceHiLo;
             }
 
@@ -476,13 +491,15 @@ namespace Microsoft.EntityFrameworkCore
             IReadOnlyProperty property,
             in StoreObjectIdentifier storeObject,
             ITypeMappingSource? typeMappingSource
-        ) {
+        )
+        {
             var modelStrategy = property.DeclaringEntityType.Model.GetValueGenerationStrategy();
 
             if (
                 modelStrategy == SqlServerValueGenerationStrategy.SequenceHiLo
                 && IsCompatibleWithValueGeneration(property, storeObject, typeMappingSource)
-            ) {
+            )
+            {
                 return SqlServerValueGenerationStrategy.SequenceHiLo;
             }
 
@@ -501,7 +518,8 @@ namespace Microsoft.EntityFrameworkCore
         public static void SetValueGenerationStrategy(
             this IMutableProperty property,
             SqlServerValueGenerationStrategy? value
-        ) {
+        )
+        {
             CheckValueGenerationStrategy(property, value);
 
             property.SetOrRemoveAnnotation(SqlServerAnnotationNames.ValueGenerationStrategy, value);
@@ -518,7 +536,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionProperty property,
             SqlServerValueGenerationStrategy? value,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             CheckValueGenerationStrategy(property, value);
 
             property.SetOrRemoveAnnotation(
@@ -533,7 +552,8 @@ namespace Microsoft.EntityFrameworkCore
         private static void CheckValueGenerationStrategy(
             IReadOnlyProperty property,
             SqlServerValueGenerationStrategy? value
-        ) {
+        )
+        {
             if (value != null)
             {
                 var propertyType = property.ClrType;
@@ -541,7 +561,8 @@ namespace Microsoft.EntityFrameworkCore
                 if (
                     value == SqlServerValueGenerationStrategy.IdentityColumn
                     && !IsCompatibleWithValueGeneration(property)
-                ) {
+                )
+                {
                     throw new ArgumentException(
                         SqlServerStrings.IdentityBadType(
                             property.Name,
@@ -554,7 +575,8 @@ namespace Microsoft.EntityFrameworkCore
                 if (
                     value == SqlServerValueGenerationStrategy.SequenceHiLo
                     && !IsCompatibleWithValueGeneration(property)
-                ) {
+                )
+                {
                     throw new ArgumentException(
                         SqlServerStrings.SequenceBadType(
                             property.Name,
@@ -595,7 +617,8 @@ namespace Microsoft.EntityFrameworkCore
             IReadOnlyProperty property,
             in StoreObjectIdentifier storeObject,
             ITypeMappingSource? typeMappingSource
-        ) {
+        )
+        {
             var type = property.ClrType;
 
             return (type.IsInteger() || type == typeof(decimal))
@@ -635,7 +658,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionProperty property,
             bool? sparse,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             property.SetOrRemoveAnnotation(
                 SqlServerAnnotationNames.Sparse,
                 sparse,

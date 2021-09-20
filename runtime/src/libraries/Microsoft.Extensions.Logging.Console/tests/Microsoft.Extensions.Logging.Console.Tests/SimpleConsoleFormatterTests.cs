@@ -18,7 +18,8 @@ namespace Microsoft.Extensions.Logging.Console.Test
         [InlineData(LoggerColorBehavior.Disabled)]
         public void Log_WritingScopes_LogsWithCorrectColorsWhenColorEnabled(
             LoggerColorBehavior colorBehavior
-        ) {
+        )
+        {
             // Arrange
             var t = SetUp(
                 new ConsoleLoggerOptions { FormatterName = ConsoleFormatterNames.Simple },

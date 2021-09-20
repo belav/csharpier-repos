@@ -136,7 +136,8 @@ namespace Microsoft.AspNetCore.SignalR
         private bool TryGetCachedUnsynchronized(
             string protocolName,
             out ReadOnlyMemory<byte> result
-        ) {
+        )
+        {
             if (string.Equals(_cachedItem1.ProtocolName, protocolName, StringComparison.Ordinal))
             {
                 result = _cachedItem1.Serialized;
@@ -159,7 +160,8 @@ namespace Microsoft.AspNetCore.SignalR
                             protocolName,
                             StringComparison.Ordinal
                         )
-                    ) {
+                    )
+                    {
                         result = serializedMessage.Serialized;
                         return true;
                     }

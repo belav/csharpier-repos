@@ -119,7 +119,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                             SocketType.Stream,
                             ProtocolType.Unspecified
                         )
-                    ) {
+                    )
+                    {
                         await socket.ConnectAsync(new UnixDomainSocketEndPoint(path))
                             .DefaultTimeout();
 
@@ -211,7 +212,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                             SocketType.Stream,
                             ProtocolType.Unspecified
                         )
-                    ) {
+                    )
+                    {
                         await socket.ConnectAsync(new UnixDomainSocketEndPoint(path))
                             .DefaultTimeout();
 

@@ -284,7 +284,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         private static ViewContext GetViewContext<TModel>(
             TModel model,
             IModelMetadataProvider metadataProvider
-        ) {
+        )
+        {
             var actionContext = new ActionContext(
                 new DefaultHttpContext(),
                 new RouteData(),
@@ -309,7 +310,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
         private static ValidationHtmlAttributeProvider GetAttributeProvider(
             IModelMetadataProvider metadataProvider
-        ) {
+        )
+        {
             // Add validation properties for float, double and decimal properties. Ignore everything else.
             var mvcViewOptions = new MvcViewOptions();
             mvcViewOptions.ClientModelValidatorProviders.Add(

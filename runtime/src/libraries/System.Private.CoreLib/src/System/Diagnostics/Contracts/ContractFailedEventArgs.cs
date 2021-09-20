@@ -19,7 +19,8 @@ namespace System.Diagnostics.Contracts
             string? message,
             string? condition,
             Exception? originalException
-        ) {
+        )
+        {
             Debug.Assert(
                 originalException == null
                     || failureKind == ContractFailureKind.PostconditionOnException

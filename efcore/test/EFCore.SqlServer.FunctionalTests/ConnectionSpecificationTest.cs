@@ -434,7 +434,8 @@ namespace Microsoft.EntityFrameworkCore
         public void Can_use_AddDbContext_and_get_connection_string_from_config(
             string key,
             string connectionString
-        ) {
+        )
+        {
             var configBuilder = new ConfigurationBuilder().AddInMemoryCollection(
                 new Dictionary<string, string>
                 {

@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.CommentSelection
                     markup,
                     composition: EditorTestCompositions.EditorFeatures
                 )
-            ) {
+            )
+            {
                 var doc = workspace.Documents.First();
                 SetupSelection(
                     doc.GetTextView(),
@@ -70,13 +71,15 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.CommentSelection
             string surfaceBufferMarkup,
             string subjectBufferMarkup,
             string entireExpectedMarkup
-        ) {
+        )
+        {
             using (
                 var workspace = GetWorkspace(
                     subjectBufferMarkup,
                     composition: EditorTestCompositions.EditorFeatures
                 )
-            ) {
+            )
+            {
                 var document = workspace.CreateProjectionBufferDocument(
                     surfaceBufferMarkup,
                     workspace.Documents
@@ -114,7 +117,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.CommentSelection
             ITextBuffer textBuffer,
             IWpfTextView textView,
             string expectedText
-        ) {
+        )
+        {
             MarkupTestFile.GetSpans(
                 expectedText,
                 out var actualExpectedText,

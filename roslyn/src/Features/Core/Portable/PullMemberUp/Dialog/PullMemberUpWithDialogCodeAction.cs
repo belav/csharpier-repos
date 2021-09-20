@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
                 Document document,
                 ISymbol selectedMember,
                 IPullMemberUpOptionsService service
-            ) {
+            )
+            {
                 _document = document;
                 _selectedMember = selectedMember;
                 _service = service;
@@ -46,7 +47,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
             protected override async Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(
                 object options,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (options is PullMembersUpOptions pullMemberUpOptions)
                 {
                     var changedSolution = await MembersPuller.PullMembersUpAsync(

@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis
         internal static void AddToMap(
             IOperation root,
             Dictionary<SyntaxNode, IOperation> dictionary
-        ) {
+        )
+        {
             Debug.Assert(dictionary.Count == 0);
             Walker.Instance.Visit(root, dictionary);
         }
@@ -30,7 +31,8 @@ namespace Microsoft.CodeAnalysis
             public override object? DefaultVisit(
                 IOperation operation,
                 Dictionary<SyntaxNode, IOperation> argument
-            ) {
+            )
+            {
                 RecordOperation(operation, argument);
                 return base.DefaultVisit(operation, argument);
             }
@@ -38,7 +40,8 @@ namespace Microsoft.CodeAnalysis
             public override object? VisitBinaryOperator(
                 [DisallowNull] IBinaryOperation? operation,
                 Dictionary<SyntaxNode, IOperation> argument
-            ) {
+            )
+            {
                 // In order to handle very large nested operators, we implement manual iteration here. Our operations are not order sensitive,
                 // so we don't need to maintain a stack, just iterate through every level.
                 while (true)
@@ -62,7 +65,8 @@ namespace Microsoft.CodeAnalysis
             internal override object? VisitNoneOperation(
                 IOperation operation,
                 Dictionary<SyntaxNode, IOperation> argument
-            ) {
+            )
+            {
                 // OperationWalker skips these nodes by default, to avoid having public consumers deal with NoneOperation.
                 // we need to deal with it here, however, so delegate to DefaultVisit.
                 return DefaultVisit(operation, argument);
@@ -71,7 +75,8 @@ namespace Microsoft.CodeAnalysis
             private static void RecordOperation(
                 IOperation operation,
                 Dictionary<SyntaxNode, IOperation> argument
-            ) {
+            )
+            {
                 if (!operation.IsImplicit)
                 {
                     // IOperation invariant is that all there is at most 1 non-implicit node per syntax node.

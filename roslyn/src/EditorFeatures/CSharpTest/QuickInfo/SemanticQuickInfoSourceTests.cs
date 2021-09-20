@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QuickInfo
             CSharpParseOptions options,
             string markup,
             params Action<QuickInfoItem>[] expectedResults
-        ) {
+        )
+        {
             using var workspace = TestWorkspace.CreateCSharp(markup, options);
             await TestWithOptionsAsync(workspace, expectedResults);
         }
@@ -38,7 +39,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QuickInfo
             CSharpCompilationOptions options,
             string markup,
             params Action<QuickInfoItem>[] expectedResults
-        ) {
+        )
+        {
             using var workspace = TestWorkspace.CreateCSharp(markup, compilationOptions: options);
             await TestWithOptionsAsync(workspace, expectedResults);
         }
@@ -46,7 +48,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QuickInfo
         private static async Task TestWithOptionsAsync(
             TestWorkspace workspace,
             params Action<QuickInfoItem>[] expectedResults
-        ) {
+        )
+        {
             var testDocument = workspace.DocumentWithCursor;
             var position = testDocument.CursorPosition.GetValueOrDefault();
             var documentId = workspace.GetDocumentId(testDocument);
@@ -76,7 +79,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QuickInfo
             QuickInfoService service,
             int position,
             Action<QuickInfoItem>[] expectedResults
-        ) {
+        )
+        {
             var info = await service.GetQuickInfoAsync(
                 document,
                 position,
@@ -101,7 +105,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QuickInfo
         private static async Task VerifyWithMscorlib45Async(
             string markup,
             Action<QuickInfoItem>[] expectedResults
-        ) {
+        )
+        {
             var xmlString = string.Format(
                 @"
 <Workspace>
@@ -146,7 +151,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QuickInfo
         protected override async Task TestAsync(
             string markup,
             params Action<QuickInfoItem>[] expectedResults
-        ) {
+        )
+        {
             await TestWithOptionsAsync(Options.Regular, markup, expectedResults);
             await TestWithOptionsAsync(Options.Script, markup, expectedResults);
         }
@@ -154,7 +160,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QuickInfo
         private async Task TestWithUsingsAsync(
             string markup,
             params Action<QuickInfoItem>[] expectedResults
-        ) {
+        )
+        {
             var markupWithUsings =
                 @"using System;
 using System.Collections.Generic;
@@ -173,7 +180,8 @@ using System.Linq;
         private Task TestInMethodAsync(
             string markup,
             params Action<QuickInfoItem>[] expectedResults
-        ) {
+        )
+        {
             var markupInMethod = "class C { void M() { " + markup + " } }";
             return TestWithUsingsAsync(markupInMethod, expectedResults);
         }
@@ -184,7 +192,8 @@ using System.Linq;
             string sourceLanguage,
             string referencedLanguage,
             params Action<QuickInfoItem>[] expectedResults
-        ) {
+        )
+        {
             await TestWithMetadataReferenceHelperAsync(
                 sourceCode,
                 referencedCode,
@@ -218,7 +227,8 @@ using System.Linq;
             string sourceLanguage,
             string referencedLanguage,
             params Action<QuickInfoItem>[] expectedResults
-        ) {
+        )
+        {
             var xmlString = string.Format(
                 @"
 <Workspace>
@@ -248,7 +258,8 @@ using System.Linq;
             string sourceLanguage,
             string referencedLanguage,
             params Action<QuickInfoItem>[] expectedResults
-        ) {
+        )
+        {
             var xmlString = string.Format(
                 @"
 <Workspace>
@@ -279,7 +290,8 @@ using System.Linq;
             string referencedCode,
             string sourceLanguage,
             params Action<QuickInfoItem>[] expectedResults
-        ) {
+        )
+        {
             var xmlString = string.Format(
                 @"
 <Workspace>
@@ -303,7 +315,8 @@ using System.Linq;
         private static async Task VerifyWithReferenceWorkerAsync(
             string xmlString,
             params Action<QuickInfoItem>[] expectedResults
-        ) {
+        )
+        {
             using var workspace = TestWorkspace.Create(xmlString);
             var position =
                 workspace.Documents.First(d => d.Name == "SourceDocument").CursorPosition.Value;
@@ -2029,7 +2042,8 @@ private void M()
         public async Task EnumNonDefaultUnderlyingType_ShowForNonDefaultTypes(
             string displayTypeName,
             string underlyingTypeName
-        ) {
+        )
+        {
             await TestInClassAsync(
                 @$"
 enum E$$ : {underlyingTypeName}

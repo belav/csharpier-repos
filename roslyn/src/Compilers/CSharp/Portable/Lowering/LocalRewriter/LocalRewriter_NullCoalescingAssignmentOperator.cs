@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         public override BoundNode VisitNullCoalescingAssignmentOperator(
             BoundNullCoalescingAssignmentOperator node
-        ) {
+        )
+        {
             Debug.Assert(node.Type is { });
             SyntaxNode syntax = node.Syntax;
             var temps = ArrayBuilder<LocalSymbol>.GetInstance();
@@ -96,7 +97,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         SpecialMember.System_Nullable_T_GetValueOrDefault,
                         out var getValueOrDefault
                     )
-                ) {
+                )
+                {
                     return BadExpression(node);
                 }
 
@@ -107,7 +109,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         SpecialMember.System_Nullable_T_get_HasValue,
                         out var hasValue
                     )
-                ) {
+                )
+                {
                     return BadExpression(node);
                 }
 

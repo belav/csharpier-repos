@@ -111,7 +111,8 @@ namespace System.Speech.Recognition
                 ObjectTokenCategory category = ObjectTokenCategory.Create(
                     SAPICategories.Recognizers
                 )
-            ) {
+            )
+            {
                 if (category != null)
                 {
                     // For each element in list
@@ -376,7 +377,8 @@ namespace System.Speech.Recognition
         public RecognitionResult EmulateRecognize(
             RecognizedWordUnit[] wordUnits,
             CompareOptions compareOptions
-        ) {
+        )
+        {
             if (Grammars.Count == 0)
             {
                 throw new InvalidOperationException(SR.Get(SRID.RecognizerHasNoGrammar));
@@ -405,7 +407,8 @@ namespace System.Speech.Recognition
         public void EmulateRecognizeAsync(
             RecognizedWordUnit[] wordUnits,
             CompareOptions compareOptions
-        ) {
+        )
+        {
             if (Grammars.Count == 0)
             {
                 throw new InvalidOperationException(SR.Get(SRID.RecognizerHasNoGrammar));
@@ -426,7 +429,8 @@ namespace System.Speech.Recognition
         public void RequestRecognizerUpdate(
             object userToken,
             TimeSpan audioPositionAheadToRaiseUpdate
-        ) {
+        )
+        {
             RecoBase.RequestRecognizerUpdate(userToken, audioPositionAheadToRaiseUpdate);
         }
 
@@ -602,7 +606,8 @@ namespace System.Speech.Recognition
         private void EmulateRecognizeCompletedProxy(
             object sender,
             EmulateRecognizeCompletedEventArgs e
-        ) {
+        )
+        {
             EventHandler<EmulateRecognizeCompletedEventArgs> emulateRecognizeCompletedHandler =
                 EmulateRecognizeCompleted;
             if (emulateRecognizeCompletedHandler != null)
@@ -642,7 +647,8 @@ namespace System.Speech.Recognition
         private void SpeechRecognitionRejectedProxy(
             object sender,
             SpeechRecognitionRejectedEventArgs e
-        ) {
+        )
+        {
             EventHandler<SpeechRecognitionRejectedEventArgs> speechRecognitionRejectedHandler =
                 SpeechRecognitionRejected;
             if (speechRecognitionRejectedHandler != null)
@@ -674,7 +680,8 @@ namespace System.Speech.Recognition
         private void AudioSignalProblemOccurredProxy(
             object sender,
             AudioSignalProblemOccurredEventArgs e
-        ) {
+        )
+        {
             EventHandler<AudioSignalProblemOccurredEventArgs> audioSignalProblemOccurredHandler =
                 _audioSignalProblemOccurredDelegate;
             if (audioSignalProblemOccurredHandler != null)

@@ -14,7 +14,8 @@ namespace BasicWebSite
         protected override Task HandleRequirementAsync(
             AuthorizationHandlerContext context,
             OperationAuthorizationRequirement requirement
-        ) {
+        )
+        {
             if (context.User.HasClaim("Manager", "yes"))
             {
                 context.Succeed(requirement);

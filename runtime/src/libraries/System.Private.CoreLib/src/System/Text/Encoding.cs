@@ -147,7 +147,8 @@ namespace System.Text
             int codePage,
             EncoderFallback? encoderFallback,
             DecoderFallback? decoderFallback
-        ) {
+        )
+        {
             // Validate code page
             if (codePage < 0)
             {
@@ -196,7 +197,8 @@ namespace System.Text
             byte[] bytes,
             int index,
             int count
-        ) {
+        )
+        {
             if (srcEncoding == null || dstEncoding == null)
             {
                 throw new ArgumentNullException(
@@ -296,7 +298,8 @@ namespace System.Text
             int codepage,
             EncoderFallback encoderFallback,
             DecoderFallback decoderFallback
-        ) {
+        )
+        {
             Encoding? baseEncoding = FilterDisallowedEncodings(
                 EncodingProvider.GetEncodingFromProvider(codepage, encoderFallback, decoderFallback)
             );
@@ -333,7 +336,8 @@ namespace System.Text
             string name,
             EncoderFallback encoderFallback,
             DecoderFallback decoderFallback
-        ) {
+        )
+        {
             // NOTE: If you add a new encoding that can be requested by name, be sure to
             // add the corresponding item in EncodingTable.
             // Otherwise, the code below will throw exception when trying to call
@@ -767,7 +771,8 @@ namespace System.Text
             int charCount,
             byte[] bytes,
             int byteIndex
-        ) {
+        )
+        {
             if (s == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
@@ -841,7 +846,8 @@ namespace System.Text
         {
             fixed (char* charsPtr = &MemoryMarshal.GetNonNullPinnableReference(chars))fixed (
                 byte* bytesPtr = &MemoryMarshal.GetNonNullPinnableReference(bytes)
-            ) {
+            )
+            {
                 return GetBytes(charsPtr, chars.Length, bytesPtr, bytes.Length);
             }
         }
@@ -996,7 +1002,8 @@ namespace System.Text
         {
             fixed (byte* bytesPtr = &MemoryMarshal.GetNonNullPinnableReference(bytes))fixed (
                 char* charsPtr = &MemoryMarshal.GetNonNullPinnableReference(chars)
-            ) {
+            )
+            {
                 return GetChars(bytesPtr, bytes.Length, charsPtr, chars.Length);
             }
         }
@@ -1191,7 +1198,8 @@ namespace System.Text
             Encoding innerStreamEncoding,
             Encoding outerStreamEncoding,
             bool leaveOpen = false
-        ) {
+        )
+        {
             if (innerStream is null)
             {
                 throw new ArgumentNullException(nameof(innerStream));
@@ -1442,7 +1450,8 @@ namespace System.Text
                 int charCount,
                 byte* byteStart,
                 int byteCount
-            ) {
+            )
+            {
                 _enc = enc;
                 _decoder = decoder;
 
@@ -1600,7 +1609,8 @@ namespace System.Text
                 int inByteCount,
                 char* inCharStart,
                 int inCharCount
-            ) {
+            )
+            {
                 _enc = inEncoding;
                 _encoder = inEncoder;
 

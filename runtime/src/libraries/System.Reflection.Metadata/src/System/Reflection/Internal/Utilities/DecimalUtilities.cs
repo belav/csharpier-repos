@@ -23,7 +23,8 @@ namespace System.Reflection.Internal
             out uint low,
             out uint mid,
             out uint high
-        ) {
+        )
+        {
 #if NETCOREAPP
             Span<int> bits = stackalloc int[4];
             decimal.GetBits(value, bits);

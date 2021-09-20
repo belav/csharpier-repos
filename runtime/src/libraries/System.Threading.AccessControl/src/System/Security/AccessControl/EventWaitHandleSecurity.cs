@@ -46,27 +46,29 @@ namespace System.Security.AccessControl
             IdentityReference identity,
             EventWaitHandleRights eventRights,
             AccessControlType type
-        ) : this(
-            identity,
-            (int)eventRights,
-            false,
-            InheritanceFlags.None,
-            PropagationFlags.None,
-            type
-        ) { }
+        )
+            : this(
+                identity,
+                (int)eventRights,
+                false,
+                InheritanceFlags.None,
+                PropagationFlags.None,
+                type
+            ) { }
 
         public EventWaitHandleAccessRule(
             string identity,
             EventWaitHandleRights eventRights,
             AccessControlType type
-        ) : this(
-            new NTAccount(identity),
-            (int)eventRights,
-            false,
-            InheritanceFlags.None,
-            PropagationFlags.None,
-            type
-        ) { }
+        )
+            : this(
+                new NTAccount(identity),
+                (int)eventRights,
+                false,
+                InheritanceFlags.None,
+                PropagationFlags.None,
+                type
+            ) { }
 
         //
         // Internal constructor to be called by public constructors
@@ -93,14 +95,15 @@ namespace System.Security.AccessControl
             IdentityReference identity,
             EventWaitHandleRights eventRights,
             AuditFlags flags
-        ) : this(
-            identity,
-            (int)eventRights,
-            false,
-            InheritanceFlags.None,
-            PropagationFlags.None,
-            flags
-        ) { }
+        )
+            : this(
+                identity,
+                (int)eventRights,
+                false,
+                InheritanceFlags.None,
+                PropagationFlags.None,
+                flags
+            ) { }
 
         /* // Not in the spec
         public EventWaitHandleAuditRule(string identity, EventWaitHandleRights eventRights, AuditFlags flags)
@@ -147,7 +150,8 @@ namespace System.Security.AccessControl
             string? name,
             SafeHandle? handle,
             object? context
-        ) {
+        )
+        {
             System.Exception? exception = null;
 
             switch (errorCode)
@@ -174,7 +178,8 @@ namespace System.Security.AccessControl
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
             AccessControlType type
-        ) {
+        )
+        {
             return new EventWaitHandleAccessRule(
                 identityReference,
                 accessMask,
@@ -192,7 +197,8 @@ namespace System.Security.AccessControl
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
             AuditFlags flags
-        ) {
+        )
+        {
             return new EventWaitHandleAuditRule(
                 identityReference,
                 accessMask,

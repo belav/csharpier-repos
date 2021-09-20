@@ -14,7 +14,8 @@ namespace System.Runtime.Serialization
         internal MemberHolder(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type,
             StreamingContext ctx
-        ) {
+        )
+        {
             _memberType = type;
             _context = ctx;
         }

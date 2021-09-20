@@ -11,7 +11,8 @@ namespace System.Threading.Channels
         public static async Task<List<T>> ReadAndCollectAllAsync<T>(
             this ChannelReader<T> channel,
             bool suppressExceptions = false
-        ) {
+        )
+        {
             var list = new List<T>();
             try
             {

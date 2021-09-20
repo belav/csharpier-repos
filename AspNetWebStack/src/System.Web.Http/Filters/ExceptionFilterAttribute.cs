@@ -23,7 +23,8 @@ namespace System.Web.Http.Filters
         public virtual Task OnExceptionAsync(
             HttpActionExecutedContext actionExecutedContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 OnException(actionExecutedContext);
@@ -39,7 +40,8 @@ namespace System.Web.Http.Filters
         Task IExceptionFilter.ExecuteExceptionFilterAsync(
             HttpActionExecutedContext actionExecutedContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (actionExecutedContext == null)
             {
                 throw Error.ArgumentNull("actionExecutedContext");
@@ -51,7 +53,8 @@ namespace System.Web.Http.Filters
         private async Task ExecuteExceptionFilterAsyncCore(
             HttpActionExecutedContext actionExecutedContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             await OnExceptionAsync(actionExecutedContext, cancellationToken);
         }
     }

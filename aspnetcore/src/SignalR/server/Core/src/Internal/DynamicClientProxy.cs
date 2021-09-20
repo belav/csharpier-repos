@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
             InvokeMemberBinder binder,
             object?[]? args,
             out object? result
-        ) {
+        )
+        {
             result = _clientProxy.SendCoreAsync(binder.Name, args!);
             return true;
         }

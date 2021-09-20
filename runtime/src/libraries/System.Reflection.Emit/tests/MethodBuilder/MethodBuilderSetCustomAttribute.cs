@@ -59,7 +59,8 @@ namespace System.Reflection.Emit.Tests
             int testInt32,
             string getOnlyString,
             int getOnlyInt32
-        ) {
+        )
+        {
             TestStringField = testString;
             TestInt = testInt32;
             GetString = getOnlyString;

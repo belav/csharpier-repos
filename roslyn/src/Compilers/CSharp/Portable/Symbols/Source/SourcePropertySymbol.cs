@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Binder bodyBinder,
             PropertyDeclarationSyntax syntax,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var nameToken = syntax.Identifier;
             var location = nameToken.GetLocation();
             return Create(
@@ -36,7 +37,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Binder bodyBinder,
             IndexerDeclarationSyntax syntax,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var location = syntax.ThisKeyword.GetLocation();
             return Create(
                 containingType,
@@ -55,7 +57,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             string name,
             Location location,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             GetAccessorDeclarations(
                 syntax,
                 diagnostics,
@@ -128,25 +131,27 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             string memberName,
             Location location,
             BindingDiagnosticBag diagnostics
-        ) : base(
-            containingType,
-            syntax,
-            hasGetAccessor,
-            hasSetAccessor,
-            isExplicitInterfaceImplementation,
-            explicitInterfaceType,
-            aliasQualifierOpt,
-            modifiers,
-            hasInitializer: HasInitializer(syntax),
-            isAutoProperty: isAutoProperty,
-            isExpressionBodied: isExpressionBodied,
-            isInitOnly: isInitOnly,
-            syntax.Type.GetRefKind(),
-            memberName,
-            syntax.AttributeLists,
-            location,
-            diagnostics
-        ) {
+        )
+            : base(
+                containingType,
+                syntax,
+                hasGetAccessor,
+                hasSetAccessor,
+                isExplicitInterfaceImplementation,
+                explicitInterfaceType,
+                aliasQualifierOpt,
+                modifiers,
+                hasInitializer: HasInitializer(syntax),
+                isAutoProperty: isAutoProperty,
+                isExpressionBodied: isExpressionBodied,
+                isInitOnly: isInitOnly,
+                syntax.Type.GetRefKind(),
+                memberName,
+                syntax.AttributeLists,
+                location,
+                diagnostics
+            )
+        {
             if (IsAutoProperty)
             {
                 Binder.CheckFeatureAvailability(
@@ -200,7 +205,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             out bool isInitOnly,
             out CSharpSyntaxNode? getSyntax,
             out CSharpSyntaxNode? setSyntax
-        ) {
+        )
+        {
             var syntax = (BasePropertyDeclarationSyntax)syntaxNode;
             isAutoProperty = true;
             hasAccessorList = syntax.AccessorList != null;
@@ -277,7 +283,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         private static AccessorDeclarationSyntax GetGetAccessorDeclaration(
             BasePropertyDeclarationSyntax syntax
-        ) {
+        )
+        {
             foreach (var accessor in syntax.AccessorList!.Accessors)
             {
                 switch (accessor.Kind())
@@ -292,7 +299,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         private static AccessorDeclarationSyntax GetSetAccessorDeclaration(
             BasePropertyDeclarationSyntax syntax
-        ) {
+        )
+        {
             foreach (var accessor in syntax.AccessorList!.Accessors)
             {
                 switch (accessor.Kind())
@@ -315,7 +323,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Location location,
             BindingDiagnosticBag diagnostics,
             out bool modifierErrors
-        ) {
+        )
+        {
             bool isInterface = containingType.IsInterface;
             var defaultAccess =
                 isInterface && !isExplicitInterfaceImplementation
@@ -413,7 +422,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         protected override SourcePropertyAccessorSymbol CreateGetAccessorSymbol(
             bool isAutoPropertyAccessor,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var syntax = (BasePropertyDeclarationSyntax)CSharpSyntaxNode;
             ArrowExpressionClauseSyntax? arrowExpression = GetArrowExpression(syntax);
 
@@ -434,7 +444,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         protected override SourcePropertyAccessorSymbol CreateSetAccessorSymbol(
             bool isAutoPropertyAccessor,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var syntax = (BasePropertyDeclarationSyntax)CSharpSyntaxNode;
             Debug.Assert(!(syntax.AccessorList is null && GetArrowExpression(syntax) != null));
 
@@ -449,7 +460,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             AccessorDeclarationSyntax syntax,
             bool isAutoPropertyAccessor,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             return SourcePropertyAccessorSymbol.CreateAccessorSymbol(
                 ContainingType,
                 this,
@@ -463,7 +475,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private SourcePropertyAccessorSymbol CreateExpressionBodiedAccessor(
             ArrowExpressionClauseSyntax syntax,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             return SourcePropertyAccessorSymbol.CreateAccessorSymbol(
                 ContainingType,
                 this,
@@ -490,7 +503,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         protected override (TypeWithAnnotations Type, ImmutableArray<ParameterSymbol> Parameters) MakeParametersAndBindType(
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             Binder binder = CreateBinderForTypeAndParameters();
             var syntax = CSharpSyntaxNode;
 
@@ -504,7 +518,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Binder binder,
             SyntaxNode syntax,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             RefKind refKind;
             var typeSyntax = GetTypeSyntax(syntax).SkipRef(out refKind);
             var type = binder.BindType(typeSyntax, diagnostics);
@@ -515,7 +530,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (
                 GetExplicitInterfaceSpecifier() is null
                 && !this.IsNoMoreVisibleThan(type, ref useSiteInfo)
-            ) {
+            )
+            {
                 // "Inconsistent accessibility: indexer return type '{1}' is less accessible than indexer '{0}'"
                 // "Inconsistent accessibility: property type '{1}' is less accessible than property '{0}'"
                 diagnostics.Add(
@@ -549,7 +565,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             BaseParameterListSyntax? parameterSyntaxOpt,
             BindingDiagnosticBag diagnostics,
             bool addRefReadOnlyModifier
-        ) {
+        )
+        {
             if (parameterSyntaxOpt == null)
             {
                 return ImmutableArray<ParameterSymbol>.Empty;
@@ -603,7 +620,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Binder binder,
             CSharpSyntaxNode syntax,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var parameterSyntaxOpt = GetParameterListSyntax(syntax);
             var parameters = MakeParameters(
                 binder,
@@ -618,7 +636,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void AfterAddingTypeMembersChecks(
             ConversionsBase conversions,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             base.AfterAddingTypeMembersChecks(conversions, diagnostics);
 
             var useSiteInfo = new CompoundUseSiteInfo<AssemblySymbol>(
@@ -631,7 +650,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (
                     !IsExplicitInterfaceImplementation
                     && !this.IsNoMoreVisibleThan(param.Type, ref useSiteInfo)
-                ) {
+                )
+                {
                     diagnostics.Add(ErrorCode.ERR_BadVisIndexerParam, Location, this, param.Type);
                 }
                 else if (SetMethod is object && param.Name == ParameterSymbol.ValueParameterName)

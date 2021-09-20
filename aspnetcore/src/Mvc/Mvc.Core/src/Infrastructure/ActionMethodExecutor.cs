@@ -58,7 +58,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 ObjectMethodExecutor executor,
                 object controller,
                 object?[]? arguments
-            ) {
+            )
+            {
                 executor.Execute(controller, arguments);
                 return new ValueTask<IActionResult>(new EmptyResult());
             }
@@ -76,7 +77,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 ObjectMethodExecutor executor,
                 object controller,
                 object?[]? arguments
-            ) {
+            )
+            {
                 var actionResult = (IActionResult)executor.Execute(controller, arguments)!;
                 EnsureActionResultNotNull(executor, actionResult);
 
@@ -97,7 +99,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 ObjectMethodExecutor executor,
                 object controller,
                 object?[]? arguments
-            ) {
+            )
+            {
                 // Sync method returning arbitrary object
                 var returnValue = executor.Execute(controller, arguments);
                 var actionResult = ConvertToActionResult(
@@ -121,7 +124,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 ObjectMethodExecutor executor,
                 object controller,
                 object?[]? arguments
-            ) {
+            )
+            {
                 await (Task)executor.Execute(controller, arguments)!;
                 return new EmptyResult();
             }
@@ -139,7 +143,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 ObjectMethodExecutor executor,
                 object controller,
                 object?[]? arguments
-            ) {
+            )
+            {
                 await executor.ExecuteAsync(controller, arguments);
                 return new EmptyResult();
             }
@@ -159,7 +164,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 ObjectMethodExecutor executor,
                 object controller,
                 object?[]? arguments
-            ) {
+            )
+            {
                 // Async method returning Task<IActionResult>
                 // Avoid extra allocations by calling Execute rather than ExecuteAsync and casting to Task<IActionResult>.
                 var returnValue = executor.Execute(controller, arguments);
@@ -182,7 +188,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 ObjectMethodExecutor executor,
                 object controller,
                 object?[]? arguments
-            ) {
+            )
+            {
                 // Async method returning awaitable-of-IActionResult (e.g., Task<ViewResult>)
                 // We have to use ExecuteAsync because we don't know the awaitable's type at compile time.
                 var actionResult = (IActionResult)await executor.ExecuteAsync(
@@ -210,7 +217,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 ObjectMethodExecutor executor,
                 object controller,
                 object?[]? arguments
-            ) {
+            )
+            {
                 // Async method returning awaitable-of-nonvoid
                 var returnValue = await executor.ExecuteAsync(controller, arguments);
                 var actionResult = ConvertToActionResult(
@@ -227,7 +235,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         private static void EnsureActionResultNotNull(
             ObjectMethodExecutor executor,
             IActionResult actionResult
-        ) {
+        )
+        {
             if (actionResult == null)
             {
                 var type = executor.AsyncResultType ?? executor.MethodReturnType;
@@ -241,7 +250,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             IActionResultTypeMapper mapper,
             object? returnValue,
             Type declaredType
-        ) {
+        )
+        {
             var result =
                 (returnValue as IActionResult) ?? mapper.Convert(returnValue, declaredType);
             if (result == null)

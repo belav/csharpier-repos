@@ -1230,7 +1230,8 @@ namespace System.Linq.Tests
             int take,
             int first,
             int last
-        ) {
+        )
+        {
             var partition1 = ForceNotCollection(source).Skip(skip).Take(take);
 
             Assert.Equal(first, partition1.FirstOrDefault());
@@ -1303,7 +1304,8 @@ namespace System.Linq.Tests
             int take,
             int[] indices,
             int[] expectedValues
-        ) {
+        )
+        {
             var partition1 = ForceNotCollection(source).Skip(skip).Take(take);
 
             Assert.Equal(indices.Length, expectedValues.Length);

@@ -898,7 +898,8 @@ namespace System.CommandLine.Tests
             public void When_position_is_specified_in_string_command_line_then_it_returns_argument_at_cursor_position(
                 string commandLine,
                 string expected
-            ) {
+            )
+            {
                 var command = new Command("the-command")
                 {
                     new Argument { Arity = ArgumentArity.ZeroOrMore }

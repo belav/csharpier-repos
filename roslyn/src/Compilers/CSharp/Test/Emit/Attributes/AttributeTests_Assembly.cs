@@ -1707,7 +1707,8 @@ public class C {}
             byte[] blobData = null,
             Guid guidData = default(Guid),
             string uddData = null
-        ) {
+        )
+        {
             var stream = new MemoryStream();
             Assert.True(compilation.Emit(stream).Success);
             stream.Position = 0;
@@ -1774,7 +1775,8 @@ public class C {}
         private MetadataReference GetNetModuleWithAssemblyAttributesRef(
             string source = null,
             IEnumerable<MetadataReference> references = null
-        ) {
+        )
+        {
             string assemblyName = GetUniqueName();
             return GetNetModuleWithAssemblyAttributes(source, references, assemblyName)
                 .GetReference(display: assemblyName + ".netmodule");
@@ -1784,7 +1786,8 @@ public class C {}
             string source = null,
             IEnumerable<MetadataReference> references = null,
             string assemblyName = null
-        ) {
+        )
+        {
             source = source ?? s_defaultNetModuleSourceHeader + s_defaultNetModuleSourceBody;
             var netmoduleCompilation = CreateCompilationWithMscorlib40(
                 source,
@@ -1800,7 +1803,8 @@ public class C {}
             int expectedSrcAttrCount,
             int expectedDuplicateAttrCount,
             string attrTypeName
-        ) {
+        )
+        {
             // SOURCE ATTRIBUTES
 
             var sourceAttributes = compilation.Assembly.GetAttributes()
@@ -3336,7 +3340,8 @@ public class C { }
 
         private static IEnumerable<CSharpAttributeData> GetAssemblyDescriptionAttributes(
             AssemblySymbol assembly
-        ) {
+        )
+        {
             return assembly.GetAttributes()
                 .Where(
                     data =>

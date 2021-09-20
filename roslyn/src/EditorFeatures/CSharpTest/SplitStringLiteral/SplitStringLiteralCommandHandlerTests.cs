@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitStringLiteral
             bool verifyUndo = true,
             IndentStyle indentStyle = IndentStyle.Smart,
             bool useTabs = false
-        ) {
+        )
+        {
             using var workspace = TestWorkspace.CreateCSharp(inputMarkup);
             workspace.TryApplyChanges(
                 workspace.CurrentSolution.WithOptions(
@@ -84,7 +85,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitStringLiteral
                     new ReturnKeyCommandArgs(view, view.TextBuffer),
                     TestCommandExecutionContext.Create()
                 )
-            ) {
+            )
+            {
                 callback();
             }
 
@@ -130,7 +132,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitStringLiteral
             bool verifyUndo = true,
             IndentStyle indentStyle = IndentStyle.Smart,
             bool useTabs = false
-        ) {
+        )
+        {
             TestWorker(
                 inputMarkup,
                 expectedOutputMarkup,

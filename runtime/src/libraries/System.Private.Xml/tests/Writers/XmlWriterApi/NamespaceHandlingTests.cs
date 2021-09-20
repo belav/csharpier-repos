@@ -382,7 +382,8 @@ namespace System.Xml.Tests
             NamespaceHandling nsHandling,
             string xml,
             string exp
-        ) {
+        )
+        {
             XmlWriterSettings wSettings = new XmlWriterSettings();
             wSettings.NamespaceHandling = nsHandling;
 
@@ -423,7 +424,8 @@ namespace System.Xml.Tests
                         overrideAsync: true,
                         async: utils.Async
                     )
-                ) {
+                )
+                {
                     CError.Compare(w != null, "XmlWriter creation failed");
                     CError.Compare(
                         w.Settings.NamespaceHandling,
@@ -460,7 +462,8 @@ namespace System.Xml.Tests
                         overrideAsync: true,
                         async: utils.Async
                     )
-                ) {
+                )
+                {
                     CError.Compare(w != null, "XmlWriter creation failed");
                     CError.Compare(
                         w.Settings.NamespaceHandling,
@@ -1145,7 +1148,8 @@ namespace System.Xml.Tests
             string prefix,
             string name,
             bool isAttr
-        ) {
+        )
+        {
             XmlWriterSettings wSettings = new XmlWriterSettings();
             wSettings.NamespaceHandling = nsHandling;
             XmlWriter w = CreateMemWriter(utils, wSettings);

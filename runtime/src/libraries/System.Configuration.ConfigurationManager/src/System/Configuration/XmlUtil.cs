@@ -62,7 +62,8 @@ namespace System.Configuration
             string name,
             bool readToFirstElement,
             ConfigurationSchemaErrors schemaErrors
-        ) {
+        )
+        {
             try
             {
                 Filename = name;
@@ -268,7 +269,8 @@ namespace System.Configuration
             object requiredAttribute,
             string attrName,
             ExceptionAction action
-        ) {
+        )
+        {
             if (requiredAttribute == null)
             {
                 AddErrorRequiredAttribute(attrName, action);
@@ -323,7 +325,8 @@ namespace System.Configuration
         internal void VerifyAndGetNonEmptyStringAttribute(
             ExceptionAction action,
             out string newValue
-        ) {
+        )
+        {
             if (!string.IsNullOrEmpty(Reader.Value))
                 newValue = Reader.Value;
             else
@@ -347,7 +350,8 @@ namespace System.Configuration
             ExceptionAction action,
             bool defaultValue,
             out bool newValue
-        ) {
+        )
+        {
             switch (Reader.Value)
             {
                 case "true":
@@ -956,7 +960,8 @@ namespace System.Configuration
             bool needsChildren,
             int linePosition,
             int indent
-        ) {
+        )
+        {
             Debug.Assert(
                 Reader.NodeType == XmlNodeType.Element,
                 "_reader.NodeType == NodeType.Element"
@@ -1053,7 +1058,8 @@ namespace System.Configuration
             if (
                 (originalHandling == WhitespaceHandling.None)
                 && (Reader.NodeType == XmlNodeType.Whitespace)
-            ) {
+            )
+            {
                 // If we were previously suppose to skip whitespace, and now we
                 // are at it, then lets jump to the next item
                 Reader.Read();
@@ -1077,7 +1083,8 @@ namespace System.Configuration
             int linePosition,
             int indent,
             bool skipFirstIndent
-        ) {
+        )
+        {
             XmlParserContext context = new XmlParserContext(
                 null,
                 null,

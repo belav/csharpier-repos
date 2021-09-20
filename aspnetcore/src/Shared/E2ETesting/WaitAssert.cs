@@ -110,7 +110,8 @@ namespace Microsoft.AspNetCore.E2ETesting
             IWebDriver driver,
             Action assertion,
             TimeSpan timeout = default
-        ) {
+        )
+        {
             WaitAssertCore<object>(
                 driver,
                 () =>
@@ -126,7 +127,8 @@ namespace Microsoft.AspNetCore.E2ETesting
             IWebDriver driver,
             Func<TResult> assertion,
             TimeSpan timeout = default
-        ) {
+        )
+        {
             if (timeout == default)
             {
                 timeout = !TestRunFailed ? DefaultTimeout : FailureTimeout;
@@ -205,7 +207,8 @@ namespace Microsoft.AspNetCore.E2ETesting
             if (
                 driver is ITakesScreenshot takesScreenshot
                 && E2ETestOptions.Instance.ScreenShotsPath != null
-            ) {
+            )
+            {
                 try
                 {
                     Directory.CreateDirectory(E2ETestOptions.Instance.ScreenShotsPath);

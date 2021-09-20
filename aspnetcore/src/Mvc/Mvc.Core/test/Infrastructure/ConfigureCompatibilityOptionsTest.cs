@@ -71,7 +71,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         private static ConfigureCompatibilityOptions<TestOptions> Create(
             CompatibilityVersion version,
             IReadOnlyDictionary<string, object> defaultValues
-        ) {
+        )
+        {
             var compatibilityOptions = Options.Create(
                 new MvcCompatibilityOptions() { CompatibilityVersion = version }
             );

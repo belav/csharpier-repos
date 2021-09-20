@@ -99,7 +99,8 @@ namespace System.Net.Http
             if (
                 _failedProxies.Count > LargeProxyConfigBoundary
                 && Environment.TickCount64 >= Interlocked.Read(ref _nextFlushTicks)
-            ) {
+            )
+            {
                 CleanupHelper();
             }
         }

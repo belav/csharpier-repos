@@ -44,7 +44,8 @@ namespace System.Security.Cryptography
             internal RSASecurityTransforms(
                 SafeSecKeyRefHandle publicKey,
                 SafeSecKeyRefHandle privateKey
-            ) {
+            )
+            {
                 SetKey(SecKeyPair.PublicPrivatePair(publicKey, privateKey));
             }
 
@@ -193,7 +194,8 @@ namespace System.Security.Cryptography
             public override unsafe void ImportSubjectPublicKeyInfo(
                 ReadOnlySpan<byte> source,
                 out int bytesRead
-            ) {
+            )
+            {
                 ThrowIfDisposed();
 
                 fixed (byte* ptr = &MemoryMarshal.GetReference(source))
@@ -203,7 +205,8 @@ namespace System.Security.Cryptography
                             ptr,
                             source.Length
                         )
-                    ) {
+                    )
+                    {
                         // Validate the DER value and get the number of bytes.
                         RSAKeyFormatHelper.ReadSubjectPublicKeyInfo(
                             manager.Memory,
@@ -224,7 +227,8 @@ namespace System.Security.Cryptography
             public override unsafe void ImportRSAPublicKey(
                 ReadOnlySpan<byte> source,
                 out int bytesRead
-            ) {
+            )
+            {
                 ThrowIfDisposed();
 
                 fixed (byte* ptr = &MemoryMarshal.GetReference(source))
@@ -234,7 +238,8 @@ namespace System.Security.Cryptography
                             ptr,
                             source.Length
                         )
-                    ) {
+                    )
+                    {
                         AsnReader reader = new AsnReader(manager.Memory, AsnEncodingRules.BER);
                         ReadOnlyMemory<byte> firstElement = reader.PeekEncodedValue();
 
@@ -261,7 +266,8 @@ namespace System.Security.Cryptography
                 ReadOnlySpan<byte> passwordBytes,
                 ReadOnlySpan<byte> source,
                 out int bytesRead
-            ) {
+            )
+            {
                 ThrowIfDisposed();
                 base.ImportEncryptedPkcs8PrivateKey(passwordBytes, source, out bytesRead);
             }
@@ -270,7 +276,8 @@ namespace System.Security.Cryptography
                 ReadOnlySpan<char> password,
                 ReadOnlySpan<byte> source,
                 out int bytesRead
-            ) {
+            )
+            {
                 ThrowIfDisposed();
                 base.ImportEncryptedPkcs8PrivateKey(password, source, out bytesRead);
             }
@@ -307,7 +314,8 @@ namespace System.Security.Cryptography
                 Span<byte> destination,
                 RSAEncryptionPadding padding,
                 out int bytesWritten
-            ) {
+            )
+            {
                 if (padding == null)
                 {
                     throw new ArgumentNullException(nameof(padding));
@@ -445,7 +453,8 @@ namespace System.Security.Cryptography
                 Span<byte> destination,
                 RSAEncryptionPadding padding,
                 out int bytesWritten
-            ) {
+            )
+            {
                 if (padding == null)
                 {
                     throw new ArgumentNullException(nameof(padding));
@@ -467,13 +476,15 @@ namespace System.Security.Cryptography
                 Span<byte> destination,
                 RSAEncryptionPadding padding,
                 out int bytesWritten
-            ) {
+            )
+            {
                 Debug.Assert(privateKey != null);
 
                 if (
                     padding.Mode != RSAEncryptionPaddingMode.Pkcs1
                     && padding.Mode != RSAEncryptionPaddingMode.Oaep
-                ) {
+                )
+                {
                     throw new CryptographicException(SR.Cryptography_InvalidPaddingMode);
                 }
 
@@ -487,7 +498,8 @@ namespace System.Security.Cryptography
                 if (
                     padding.Mode == RSAEncryptionPaddingMode.Pkcs1
                     || padding == RSAEncryptionPadding.OaepSHA1
-                ) {
+                )
+                {
                     return Interop.AppleCrypto.TryRsaDecrypt(
                         privateKey,
                         data,
@@ -514,7 +526,8 @@ namespace System.Security.Cryptography
                             rented,
                             out int paddedSize
                         )
-                    ) {
+                    )
+                    {
                         Debug.Fail(
                             $"Raw decryption failed with KeySize={KeySize} and a buffer length {rented.Length}"
                         );
@@ -537,7 +550,8 @@ namespace System.Security.Cryptography
                 byte[] hash,
                 HashAlgorithmName hashAlgorithm,
                 RSASignaturePadding padding
-            ) {
+            )
+            {
                 if (hash == null)
                     throw new ArgumentNullException(nameof(hash));
                 if (string.IsNullOrEmpty(hashAlgorithm.Name))
@@ -599,7 +613,8 @@ namespace System.Security.Cryptography
                 HashAlgorithmName hashAlgorithm,
                 RSASignaturePadding padding,
                 out int bytesWritten
-            ) {
+            )
+            {
                 if (string.IsNullOrEmpty(hashAlgorithm.Name))
                 {
                     throw HashAlgorithmNameNullOrEmpty();
@@ -702,7 +717,8 @@ namespace System.Security.Cryptography
                 byte[] signature,
                 HashAlgorithmName hashAlgorithm,
                 RSASignaturePadding padding
-            ) {
+            )
+            {
                 if (hash == null)
                 {
                     throw new ArgumentNullException(nameof(hash));
@@ -725,7 +741,8 @@ namespace System.Security.Cryptography
                 ReadOnlySpan<byte> signature,
                 HashAlgorithmName hashAlgorithm,
                 RSASignaturePadding padding
-            ) {
+            )
+            {
                 if (string.IsNullOrEmpty(hashAlgorithm.Name))
                 {
                     throw HashAlgorithmNameNullOrEmpty();
@@ -782,7 +799,8 @@ namespace System.Security.Cryptography
                                 unwrapped,
                                 out int bytesWritten
                             )
-                        ) {
+                        )
+                        {
                             Debug.Fail($"TryRsaVerificationPrimitive with a pre-allocated buffer");
                             throw new CryptographicException();
                         }
@@ -841,7 +859,8 @@ namespace System.Security.Cryptography
             private static Interop.AppleCrypto.PAL_HashAlgorithm PalAlgorithmFromAlgorithmName(
                 HashAlgorithmName hashAlgorithmName,
                 out int hashSizeInBytes
-            ) {
+            )
+            {
                 if (hashAlgorithmName == HashAlgorithmName.MD5)
                 {
                     hashSizeInBytes = 128 >> 3;
@@ -978,7 +997,8 @@ namespace System.Security.Cryptography
                         || parameters.Q != null
                         || parameters.DQ != null
                         || parameters.InverseQ != null
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }
@@ -990,7 +1010,8 @@ namespace System.Security.Cryptography
                         || parameters.Q == null
                         || parameters.DQ == null
                         || parameters.InverseQ == null
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }

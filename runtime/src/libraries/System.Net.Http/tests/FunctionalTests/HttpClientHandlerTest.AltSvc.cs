@@ -135,7 +135,8 @@ namespace System.Net.Http.Functional.Tests
             GenericLoopbackServer firstServer,
             Http3LoopbackServer secondServer,
             HttpClient client
-        ) {
+        )
+        {
             Task<HttpResponseMessage> secondResponseTask = client.GetAsync(firstServer.Address);
             Task<HttpRequestData> secondRequestTask =
                 secondServer.AcceptConnectionSendResponseAndCloseAsync();

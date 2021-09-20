@@ -57,7 +57,8 @@ namespace System.Globalization.Tests
         public void MonthGenitiveNames_Get_ReturnsExpected(
             DateTimeFormatInfo format,
             string[] expected
-        ) {
+        )
+        {
             Assert.Equal(expected, format.MonthGenitiveNames);
         }
 

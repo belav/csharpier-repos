@@ -52,7 +52,8 @@ namespace Microsoft.CodeAnalysis
             /// </summary>
             private static ImmutableArray<string> GetContainingNamespaceNamesInReverse(
                 INamespaceSymbol namespaceSymbol
-            ) {
+            )
+            {
                 using var _ = ArrayBuilder<string>.GetInstance(out var builder);
                 while (namespaceSymbol != null && namespaceSymbol.Name != "")
                 {
@@ -66,7 +67,8 @@ namespace Microsoft.CodeAnalysis
             public static SymbolKeyResolution Resolve(
                 SymbolKeyReader reader,
                 out string? failureReason
-            ) {
+            )
+            {
                 var name = reader.ReadString()!;
                 var containingSymbolResolution = ResolveContainer(
                     reader,
@@ -105,7 +107,8 @@ namespace Microsoft.CodeAnalysis
                 var typeArgumentsArray = isConstructed ? typeArguments.Builder.ToArray() : null;
                 foreach (
                     var container in containingSymbolResolution.OfType<INamespaceOrTypeSymbol>()
-                ) {
+                )
+                {
                     var originalType = reader.Compilation.CreateErrorTypeSymbol(
                         container,
                         name,
@@ -134,7 +137,8 @@ namespace Microsoft.CodeAnalysis
             private static SymbolKeyResolution ResolveContainer(
                 SymbolKeyReader reader,
                 out string? failureReason
-            ) {
+            )
+            {
                 var type = reader.ReadInteger();
 
                 if (type == 0)

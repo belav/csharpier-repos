@@ -366,7 +366,8 @@ namespace AutoMapper.UnitTests
                     Dest destination,
                     int destMember,
                     ResolutionContext context
-                ) {
+                )
+                {
                     return source.Value + 5;
                 }
             }
@@ -421,7 +422,8 @@ namespace AutoMapper.UnitTests
                     int sourceMember,
                     int destMember,
                     ResolutionContext context
-                ) {
+                )
+                {
                     return sourceMember + 5;
                 }
             }
@@ -886,7 +888,8 @@ namespace AutoMapper.UnitTests
                     int source,
                     List<ChildDto> destination,
                     ResolutionContext resolutionContext
-                ) {
+                )
+                {
                     var childModels = _childModels.Where(x => x.Parent.Id == source).ToList();
                     return (List<ChildDto>)resolutionContext.Mapper.Map(
                         childModels,

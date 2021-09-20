@@ -52,7 +52,8 @@ namespace System.Text.RegularExpressions.Tests
             string fullnamespace,
             bool ispublic,
             TimeSpan matchTimeout
-        ) {
+        )
+        {
             RegexCompilationInfo regexCompilationInfo;
 
             regexCompilationInfo = new RegexCompilationInfo(

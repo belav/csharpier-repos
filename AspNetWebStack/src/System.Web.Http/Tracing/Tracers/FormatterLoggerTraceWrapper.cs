@@ -24,7 +24,8 @@ namespace System.Web.Http.Tracing.Tracers
             HttpRequestMessage request,
             string operatorName,
             string operationName
-        ) {
+        )
+        {
             Contract.Assert(formatterLogger != null);
             Contract.Assert(traceWriter != null);
 

@@ -50,7 +50,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.GenerateType
             INotificationService notificationService,
             IProjectManagementService projectManagementService,
             ISyntaxFactsService syntaxFactsService
-        ) {
+        )
+        {
             // Storing the actual values
             ClassName = className;
             GenerateTypeDialogOptions = generateTypeDialogOptions;
@@ -90,7 +91,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.GenerateType
             bool areFoldersValidIdentifiers = true,
             string defaultNamespace = null,
             bool isCancelled = false
-        ) {
+        )
+        {
             Accessibility = accessibility;
             TypeKind = typeKind;
             TypeName = typeName;

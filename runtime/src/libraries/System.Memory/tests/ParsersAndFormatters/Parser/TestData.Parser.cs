@@ -67,13 +67,15 @@ namespace System.Buffers.Text.Tests
 
         private static IEnumerable<ParserTestData<T>> ToParserTheoryDataCollection<T>(
             this IEnumerable<FormatterTestData<T>> formatterTestData
-        ) {
+        )
+        {
             HashSet<ReversedFormatTestDataKey> seen = new HashSet<ReversedFormatTestDataKey>();
             foreach (
                 FormatterTestData<T> testData in formatterTestData.Where(
                     f => f.Format.IsParsingImplemented<T>() && f.Format.ParseSynonymFor == default
                 )
-            ) {
+            )
+            {
                 // Formatters take precisions, Parsers do not. For many individual test cases, changing the precision doesn't change the formatted text output -
                 // if that's the case, there's no reason to test the same parse case twice.
                 if (
@@ -110,7 +112,8 @@ namespace System.Buffers.Text.Tests
             char formatSymbol,
             IEnumerable<string> texts,
             TryParseExactDelegate<T> tryParseExact
-        ) {
+        )
+        {
             foreach (string text in texts)
             {
                 bool expectedSuccess = tryParseExact(

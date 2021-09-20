@@ -85,7 +85,8 @@ namespace System.Security.Cryptography
             Span<byte> destination,
             RSAEncryptionPadding padding,
             out int bytesWritten
-        ) {
+        )
+        {
             byte[] result = Decrypt(data.ToArray(), padding);
 
             if (destination.Length >= result.Length)
@@ -104,7 +105,8 @@ namespace System.Security.Cryptography
             Span<byte> destination,
             RSAEncryptionPadding padding,
             out int bytesWritten
-        ) {
+        )
+        {
             byte[] result = Encrypt(data.ToArray(), padding);
 
             if (destination.Length >= result.Length)
@@ -123,7 +125,8 @@ namespace System.Security.Cryptography
             Span<byte> destination,
             HashAlgorithmName hashAlgorithm,
             out int bytesWritten
-        ) {
+        )
+        {
             byte[] result;
             // Use ArrayPool.Shared instead of CryptoPool because the array is passed out.
             byte[] array = ArrayPool<byte>.Shared.Rent(data.Length);
@@ -156,7 +159,8 @@ namespace System.Security.Cryptography
             HashAlgorithmName hashAlgorithm,
             RSASignaturePadding padding,
             out int bytesWritten
-        ) {
+        )
+        {
             byte[] result = SignHash(hash.ToArray(), hashAlgorithm, padding);
 
             if (destination.Length >= result.Length)
@@ -190,7 +194,8 @@ namespace System.Security.Cryptography
             byte[] data,
             HashAlgorithmName hashAlgorithm,
             RSASignaturePadding padding
-        ) {
+        )
+        {
             if (data == null)
             {
                 throw new ArgumentNullException(nameof(data));
@@ -205,7 +210,8 @@ namespace System.Security.Cryptography
             int count,
             HashAlgorithmName hashAlgorithm,
             RSASignaturePadding padding
-        ) {
+        )
+        {
             if (data == null)
                 throw new ArgumentNullException(nameof(data));
             if (offset < 0 || offset > data.Length)
@@ -225,7 +231,8 @@ namespace System.Security.Cryptography
             Stream data,
             HashAlgorithmName hashAlgorithm,
             RSASignaturePadding padding
-        ) {
+        )
+        {
             if (data == null)
                 throw new ArgumentNullException(nameof(data));
             if (string.IsNullOrEmpty(hashAlgorithm.Name))
@@ -243,7 +250,8 @@ namespace System.Security.Cryptography
             HashAlgorithmName hashAlgorithm,
             RSASignaturePadding padding,
             out int bytesWritten
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(hashAlgorithm.Name))
             {
                 throw HashAlgorithmNameNullOrEmpty();
@@ -262,7 +270,8 @@ namespace System.Security.Cryptography
                     padding,
                     out bytesWritten
                 )
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -275,7 +284,8 @@ namespace System.Security.Cryptography
             byte[] signature,
             HashAlgorithmName hashAlgorithm,
             RSASignaturePadding padding
-        ) {
+        )
+        {
             if (data == null)
                 throw new ArgumentNullException(nameof(data));
 
@@ -289,7 +299,8 @@ namespace System.Security.Cryptography
             byte[] signature,
             HashAlgorithmName hashAlgorithm,
             RSASignaturePadding padding
-        ) {
+        )
+        {
             if (data == null)
                 throw new ArgumentNullException(nameof(data));
             if (offset < 0 || offset > data.Length)
@@ -312,7 +323,8 @@ namespace System.Security.Cryptography
             byte[] signature,
             HashAlgorithmName hashAlgorithm,
             RSASignaturePadding padding
-        ) {
+        )
+        {
             if (data == null)
                 throw new ArgumentNullException(nameof(data));
             if (signature == null)
@@ -331,7 +343,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> signature,
             HashAlgorithmName hashAlgorithm,
             RSASignaturePadding padding
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(hashAlgorithm.Name))
             {
                 throw HashAlgorithmNameNullOrEmpty();
@@ -392,7 +405,8 @@ namespace System.Security.Cryptography
         public override unsafe bool TryExportSubjectPublicKeyInfo(
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             // The PKCS1 RSAPublicKey format is just the modulus (KeySize bits) and Exponent (usually 3 bytes),
             // with each field having up to 7 bytes of overhead and then up to 6 extra bytes of overhead for the
             // SEQUENCE tag.
@@ -480,7 +494,8 @@ namespace System.Security.Cryptography
             PbeParameters pbeParameters,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             if (pbeParameters == null)
                 throw new ArgumentNullException(nameof(pbeParameters));
 
@@ -506,7 +521,8 @@ namespace System.Security.Cryptography
             PbeParameters pbeParameters,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             if (pbeParameters == null)
                 throw new ArgumentNullException(nameof(pbeParameters));
 
@@ -541,7 +557,8 @@ namespace System.Security.Cryptography
                 byte* qPin = rsaParameters.Q
             )fixed (byte* dpPin = rsaParameters.DP)fixed (byte* dqPin = rsaParameters.DQ)fixed (
                 byte* qInvPin = rsaParameters.InverseQ
-            ) {
+            )
+            {
                 try
                 {
                     return RSAKeyFormatHelper.WritePkcs1PrivateKey(rsaParameters);
@@ -557,12 +574,14 @@ namespace System.Security.Cryptography
         public override unsafe void ImportSubjectPublicKeyInfo(
             ReadOnlySpan<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             fixed (byte* ptr = &MemoryMarshal.GetReference(source))
             {
                 using (
                     MemoryManager<byte> manager = new PointerMemoryManager<byte>(ptr, source.Length)
-                ) {
+                )
+                {
                     ReadOnlyMemory<byte> pkcs1 = RSAKeyFormatHelper.ReadSubjectPublicKeyInfo(
                         manager.Memory,
                         out int localRead
@@ -590,7 +609,8 @@ namespace System.Security.Cryptography
                 {
                     using (
                         MemoryManager<byte> manager = new PointerMemoryManager<byte>(ptr, localRead)
-                    ) {
+                    )
+                    {
                         AlgorithmIdentifierAsn ignored = default;
                         RSAKeyFormatHelper.ReadRsaPublicKey(
                             manager.Memory,
@@ -629,7 +649,8 @@ namespace System.Security.Cryptography
                             ptr,
                             firstValueLength
                         )
-                    ) {
+                    )
+                    {
                         ReadOnlyMemory<byte> firstValue = manager.Memory;
                         int localRead = firstValue.Length;
 
@@ -646,7 +667,8 @@ namespace System.Security.Cryptography
                             byte* dpPin = rsaParameters.DP
                         )fixed (byte* dqPin = rsaParameters.DQ)fixed (
                             byte* qInvPin = rsaParameters.InverseQ
-                        ) {
+                        )
+                        {
                             try
                             {
                                 ImportParameters(rsaParameters);
@@ -671,12 +693,14 @@ namespace System.Security.Cryptography
         public override unsafe void ImportPkcs8PrivateKey(
             ReadOnlySpan<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             fixed (byte* ptr = &MemoryMarshal.GetReference(source))
             {
                 using (
                     MemoryManager<byte> manager = new PointerMemoryManager<byte>(ptr, source.Length)
-                ) {
+                )
+                {
                     ReadOnlyMemory<byte> pkcs1 = RSAKeyFormatHelper.ReadPkcs8(
                         manager.Memory,
                         out int localRead
@@ -692,7 +716,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> passwordBytes,
             ReadOnlySpan<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             RSAKeyFormatHelper.ReadEncryptedPkcs8(
                 source,
                 passwordBytes,
@@ -722,7 +747,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<char> password,
             ReadOnlySpan<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             RSAKeyFormatHelper.ReadEncryptedPkcs8(
                 source,
                 password,
@@ -882,7 +908,8 @@ namespace System.Security.Cryptography
         public override void ImportFromEncryptedPem(
             ReadOnlySpan<char> input,
             ReadOnlySpan<char> password
-        ) {
+        )
+        {
             PemKeyImportHelpers.ImportEncryptedPem<char>(
                 input,
                 password,
@@ -958,7 +985,8 @@ namespace System.Security.Cryptography
         public override void ImportFromEncryptedPem(
             ReadOnlySpan<char> input,
             ReadOnlySpan<byte> passwordBytes
-        ) {
+        )
+        {
             PemKeyImportHelpers.ImportEncryptedPem<byte>(
                 input,
                 passwordBytes,

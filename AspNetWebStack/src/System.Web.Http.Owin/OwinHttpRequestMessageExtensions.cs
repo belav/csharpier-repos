@@ -40,7 +40,8 @@ namespace System.Net.Http
                         OwinEnvironmentKey,
                         out environment
                     )
-                ) {
+                )
+                {
                     context = new OwinContext(environment);
                     SetOwinContext(request, context);
                     request.Properties.Remove(OwinEnvironmentKey);
@@ -76,7 +77,8 @@ namespace System.Net.Http
         /// </returns>
         public static IDictionary<string, object> GetOwinEnvironment(
             this HttpRequestMessage request
-        ) {
+        )
+        {
             IOwinContext context = GetOwinContext(request);
 
             if (context == null)
@@ -93,13 +95,15 @@ namespace System.Net.Http
         public static void SetOwinEnvironment(
             this HttpRequestMessage request,
             IDictionary<string, object> environment
-        ) {
+        )
+        {
             SetOwinContext(request, new OwinContext(environment));
         }
 
         internal static IAuthenticationManager GetAuthenticationManager(
             this HttpRequestMessage request
-        ) {
+        )
+        {
             IOwinContext context = GetOwinContext(request);
 
             if (context == null)

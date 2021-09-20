@@ -30,21 +30,24 @@ namespace System.Web.Http
         public static HttpControllerContext CreateControllerContext(
             HttpConfiguration configuration,
             IHttpRouteData routeData
-        ) {
+        )
+        {
             return CreateControllerContext(configuration, routeData, null);
         }
 
         public static HttpControllerContext CreateControllerContext(
             IHttpRouteData routeData,
             HttpRequestMessage request
-        ) {
+        )
+        {
             return CreateControllerContext(null, routeData, request);
         }
 
         public static HttpControllerContext CreateControllerContext(
             HttpConfiguration configuration,
             HttpRequestMessage request
-        ) {
+        )
+        {
             return CreateControllerContext(configuration, null, request);
         }
 
@@ -52,7 +55,8 @@ namespace System.Web.Http
             HttpConfiguration configuration,
             IHttpRouteData routeData,
             HttpRequestMessage request
-        ) {
+        )
+        {
             HttpConfiguration config = configuration ?? new HttpConfiguration();
             IHttpRouteData route = routeData ?? new HttpRouteData(new HttpRoute());
             HttpRequestMessage req = request ?? new HttpRequestMessage();
@@ -67,7 +71,8 @@ namespace System.Web.Http
         public static HttpActionContext CreateActionContext(
             HttpControllerContext controllerContext = null,
             HttpActionDescriptor actionDescriptor = null
-        ) {
+        )
+        {
             HttpControllerContext context =
                 controllerContext ?? ContextUtil.CreateControllerContext();
             HttpActionDescriptor descriptor =

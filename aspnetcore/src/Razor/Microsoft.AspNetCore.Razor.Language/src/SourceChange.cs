@@ -88,7 +88,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 || start > node.EndPosition
                 || end < node.Position
                 || end > node.EndPosition
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     Resources.FormatInvalidOperation_SpanIsNotChangeOwner(node, this)
                 );

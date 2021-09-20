@@ -39,7 +39,8 @@ namespace System.Collections.Immutable
             private HashBucket(
                 KeyValuePair<TKey, TValue> firstElement,
                 ImmutableList<KeyValuePair<TKey, TValue>>.Node? additionalElements = null
-            ) {
+            )
+            {
                 _firstValue = firstElement;
                 _additionalElements =
                     additionalElements ?? ImmutableList<KeyValuePair<TKey, TValue>>.Node.EmptyNode;
@@ -147,7 +148,8 @@ namespace System.Collections.Immutable
                 IEqualityComparer<TValue> valueComparer,
                 KeyCollisionBehavior behavior,
                 out OperationResult result
-            ) {
+            )
+            {
                 var kv = new KeyValuePair<TKey, TValue>(key, value);
                 if (this.IsEmpty)
                 {
@@ -233,7 +235,8 @@ namespace System.Collections.Immutable
                 TKey key,
                 IEqualityComparer<KeyValuePair<TKey, TValue>> keyOnlyComparer,
                 out OperationResult result
-            ) {
+            )
+            {
                 if (this.IsEmpty)
                 {
                     result = OperationResult.NoChangeRequired;
@@ -285,7 +288,8 @@ namespace System.Collections.Immutable
                 TKey key,
                 Comparers comparers,
                 [MaybeNullWhen(false)] out TValue value
-            ) {
+            )
+            {
                 if (this.IsEmpty)
                 {
                     value = default;

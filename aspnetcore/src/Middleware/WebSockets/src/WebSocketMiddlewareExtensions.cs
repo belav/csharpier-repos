@@ -46,7 +46,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IApplicationBuilder UseWebSockets(
             this IApplicationBuilder app,
             WebSocketOptions options
-        ) {
+        )
+        {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));

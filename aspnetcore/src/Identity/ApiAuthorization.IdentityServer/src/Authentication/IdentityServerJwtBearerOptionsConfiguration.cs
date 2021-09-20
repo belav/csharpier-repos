@@ -25,7 +25,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
             string scheme,
             string apiName,
             IIdentityServerJwtDescriptor localApiDescriptor
-        ) {
+        )
+        {
             _scheme = scheme;
             _apiName = apiName;
             _localApiDescriptor = localApiDescriptor;
@@ -60,12 +61,14 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
 
         internal static async Task ResolveAuthorityAndKeysAsync(
             MessageReceivedContext messageReceivedContext
-        ) {
+        )
+        {
             var options = messageReceivedContext.Options;
             if (
                 options.TokenValidationParameters.ValidIssuer == null
                 || options.TokenValidationParameters.IssuerSigningKey == null
-            ) {
+            )
+            {
                 var store =
                     messageReceivedContext.HttpContext.RequestServices.GetRequiredService<ISigningCredentialStore>();
                 var credential = await store.GetSigningCredentialsAsync();

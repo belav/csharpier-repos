@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis
             this ArrayBuilder<T> builder,
             Func<T, A, bool> predicate,
             A arg
-        ) {
+        )
+        {
             foreach (var item in builder)
             {
                 if (predicate(item, arg))
@@ -54,7 +55,8 @@ namespace Microsoft.CodeAnalysis
             this ArrayBuilder<T> builder,
             Func<T, A, bool> predicate,
             A arg
-        ) {
+        )
+        {
             foreach (var item in builder)
             {
                 if (!predicate(item, arg))
@@ -76,7 +78,8 @@ namespace Microsoft.CodeAnalysis
         public static ImmutableArray<TResult> SelectAsArray<TItem, TResult>(
             this ArrayBuilder<TItem> items,
             Func<TItem, TResult> map
-        ) {
+        )
+        {
             switch (items.Count)
             {
                 case 0:
@@ -124,7 +127,8 @@ namespace Microsoft.CodeAnalysis
             this ArrayBuilder<TItem> items,
             Func<TItem, TArg, TResult> map,
             TArg arg
-        ) {
+        )
+        {
             switch (items.Count)
             {
                 case 0:
@@ -188,7 +192,8 @@ namespace Microsoft.CodeAnalysis
         public static bool TryPop<T>(
             this ArrayBuilder<T> builder,
             [MaybeNullWhen(false)] out T result
-        ) {
+        )
+        {
             if (builder.Count > 0)
             {
                 result = builder.Pop();
@@ -229,7 +234,8 @@ namespace Microsoft.CodeAnalysis
         public static void FreeAll<T>(
             this ArrayBuilder<T> builder,
             Func<T, ArrayBuilder<T>> getNested
-        ) {
+        )
+        {
             foreach (var item in builder)
             {
                 getNested(item)?.FreeAll(getNested);

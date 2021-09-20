@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         public PageApplicationModelProviderContext(
             PageActionDescriptor descriptor,
             TypeInfo pageTypeInfo
-        ) {
+        )
+        {
             ActionDescriptor = descriptor;
             PageType = pageTypeInfo;
         }

@@ -52,7 +52,8 @@ namespace AppHost.Bundle.Tests
             BundleOptions options = BundleOptions.None,
             Version targetFrameworkVersion = null,
             bool disableCompression = false
-        ) {
+        )
+        {
             string singleFile;
             BundleSelfContainedApp(testFixture, out singleFile, options, targetFrameworkVersion);
             return singleFile;
@@ -64,7 +65,8 @@ namespace AppHost.Bundle.Tests
             BundleOptions options = BundleOptions.None,
             Version targetFrameworkVersion = null,
             bool disableCompression = false
-        ) {
+        )
+        {
             UseSingleFileSelfContainedHost(testFixture);
             if (targetFrameworkVersion == null || targetFrameworkVersion >= new Version(6, 0))
             {
@@ -91,7 +93,8 @@ namespace AppHost.Bundle.Tests
             public TestProjectFixture PreparePublishedSelfContainedTestProject(
                 string projectName,
                 params string[] extraArgs
-            ) {
+            )
+            {
                 var testFixture = new TestProjectFixture(projectName, RepoDirectories);
                 testFixture.EnsureRestoredForRid(testFixture.CurrentRid)
                     .PublishProject(

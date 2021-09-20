@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.TestHost.Tests
         public async Task ConnectAsync_ShouldSetRequestProperties(
             string requestUri,
             string expectedHost
-        ) {
+        )
+        {
             string capturedScheme = null;
             string capturedHost = null;
             string capturedPath = null;
@@ -43,7 +44,8 @@ namespace Microsoft.AspNetCore.TestHost.Tests
                         }
                     )
                 )
-            ) {
+            )
+            {
                 var client = testServer.CreateWebSocketClient();
 
                 try

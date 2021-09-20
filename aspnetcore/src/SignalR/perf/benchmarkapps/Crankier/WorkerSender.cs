@@ -28,7 +28,8 @@ namespace Microsoft.AspNetCore.SignalR.Crankier
             string targetAddress,
             HttpTransportType transportType,
             int numberOfConnections
-        ) {
+        )
+        {
             await Send(
                 "connect",
                 JToken.FromObject(

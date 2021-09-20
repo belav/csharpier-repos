@@ -77,7 +77,8 @@ namespace System.Data.Odbc
             OdbcType odbcType,
             int size,
             string? sourceColumn
-        ) {
+        )
+        {
             return Add(new OdbcParameter(parameterName, odbcType, size, sourceColumn));
         }
 
@@ -93,7 +94,8 @@ namespace System.Data.Odbc
             OdbcCommand command,
             CMDWrapper cmdWrapper,
             CNativeBuffer parameterBuffer
-        ) {
+        )
+        {
             for (int i = 0; i < Count; ++i)
             {
                 this[i].Bind(

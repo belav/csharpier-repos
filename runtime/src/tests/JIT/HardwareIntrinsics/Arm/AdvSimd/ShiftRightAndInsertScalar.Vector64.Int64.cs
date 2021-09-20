@@ -133,7 +133,8 @@ namespace JIT.HardwareIntrinsics.Arm
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfinArray2
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -212,7 +213,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario(
                 ImmBinaryOpTest__ShiftRightAndInsertScalar_Vector64_Int64 testClass
-            ) {
+            )
+            {
                 var result = AdvSimd.ShiftRightAndInsertScalar(_fld1, _fld2, 32);
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
@@ -221,7 +223,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario_Load(
                 ImmBinaryOpTest__ShiftRightAndInsertScalar_Vector64_Int64 testClass
-            ) {
+            )
+            {
                 fixed (Vector64<Int64>* pFld1 = &_fld1)fixed (Vector64<Int64>* pFld2 = &_fld2)
                 {
                     var result = AdvSimd.ShiftRightAndInsertScalar(
@@ -410,7 +413,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             fixed (Vector64<Int64>* pClsVar1 = &_clsVar1)fixed (
                 Vector64<Int64>* pClsVar2 = &_clsVar2
-            ) {
+            )
+            {
                 var result = AdvSimd.ShiftRightAndInsertScalar(
                     AdvSimd.LoadVector64((Int64*)(pClsVar1)),
                     AdvSimd.LoadVector64((Int64*)(pClsVar2)),
@@ -570,7 +574,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Vector64<Int64> secondOp,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Int64[] inArray1 = new Int64[Op1ElementCount];
             Int64[] inArray2 = new Int64[Op2ElementCount];
             Int64[] outArray = new Int64[RetElementCount];
@@ -591,7 +596,8 @@ namespace JIT.HardwareIntrinsics.Arm
             void* secondOp,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Int64[] inArray1 = new Int64[Op1ElementCount];
             Int64[] inArray2 = new Int64[Op2ElementCount];
             Int64[] outArray = new Int64[RetElementCount];
@@ -620,7 +626,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Int64[] secondOp,
             Int64[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (Helpers.ShiftRightAndInsert(firstOp[0], secondOp[0], Imm) != result[0])

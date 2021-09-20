@@ -63,7 +63,8 @@ namespace System.IO.Pipes
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ValidateBufferArguments(buffer, offset, count);
             if (!CanRead)
             {
@@ -90,7 +91,8 @@ namespace System.IO.Pipes
         public override ValueTask<int> ReadAsync(
             Memory<byte> buffer,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             if (!CanRead)
             {
                 throw Error.GetReadNotSupported();
@@ -155,7 +157,8 @@ namespace System.IO.Pipes
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ValidateBufferArguments(buffer, offset, count);
             if (!CanWrite)
             {
@@ -183,7 +186,8 @@ namespace System.IO.Pipes
         public override ValueTask WriteAsync(
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             if (!CanWrite)
             {
                 throw Error.GetWriteNotSupported();
@@ -285,7 +289,8 @@ namespace System.IO.Pipes
                     (status.Mode & Interop.Sys.FileTypes.S_IFMT) != Interop.Sys.FileTypes.S_IFIFO
                     && (status.Mode & Interop.Sys.FileTypes.S_IFMT)
                         != Interop.Sys.FileTypes.S_IFSOCK
-                ) {
+                )
+                {
                     throw new IOException(SR.IO_InvalidPipeHandle);
                 }
             }
@@ -350,7 +355,8 @@ namespace System.IO.Pipes
         private async ValueTask<int> ReadAsyncCore(
             Memory<byte> destination,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 return await InternalHandle!.PipeSocket.ReceiveAsync(
@@ -369,7 +375,8 @@ namespace System.IO.Pipes
         private async Task WriteAsyncCore(
             ReadOnlyMemory<byte> source,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 while (source.Length > 0)
@@ -526,7 +533,8 @@ namespace System.IO.Pipes
         internal static unsafe void CreateAnonymousPipe(
             out SafePipeHandle reader,
             out SafePipeHandle writer
-        ) {
+        )
+        {
             // Allocate the safe handle objects prior to calling pipe/pipe2, in order to help slightly in low-mem situations
             reader = new SafePipeHandle();
             writer = new SafePipeHandle();
@@ -579,7 +587,8 @@ namespace System.IO.Pipes
             int inBufferSize,
             int outBufferSize,
             HandleInheritability inheritability
-        ) {
+        )
+        {
             if (inBufferSize > 0)
             {
                 s.ReceiveBufferSize = inBufferSize;
@@ -594,7 +603,8 @@ namespace System.IO.Pipes
             if (
                 inheritability == HandleInheritability.Inheritable
                 && Interop.Sys.Fcntl.SetFD(s.SafeHandle, 0) == -1
-            ) {
+            )
+            {
                 throw Interop.GetExceptionForIoErrno(Interop.Sys.GetLastErrorInfo());
             }
 

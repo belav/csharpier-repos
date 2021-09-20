@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void GenerateMethodBody(
             TypeCompilationState compilationState,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             SyntheticBoundNodeFactory F = new SyntheticBoundNodeFactory(
                 this,
                 this.GetNonNullSyntaxNode(),
@@ -179,7 +180,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void GenerateMethodBody(
             TypeCompilationState compilationState,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             SyntheticBoundNodeFactory F = new SyntheticBoundNodeFactory(
                 this,
                 this.GetNonNullSyntaxNode(),
@@ -232,7 +234,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void GenerateMethodBody(
             TypeCompilationState compilationState,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             SyntheticBoundNodeFactory F = new SyntheticBoundNodeFactory(
                 this,
                 this.GetNonNullSyntaxNode(),
@@ -280,7 +283,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             internal override void GenerateMethodBody(
                 TypeCompilationState compilationState,
                 BindingDiagnosticBag diagnostics
-            ) {
+            )
+            {
                 SyntheticBoundNodeFactory F = new SyntheticBoundNodeFactory(
                     this,
                     this.GetNonNullSyntaxNode(),
@@ -333,7 +337,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ref BoundLiteral? boundHashFactor,
             BoundExpression valueToHash,
             SyntheticBoundNodeFactory F
-        ) {
+        )
+        {
             TypeSymbol system_Int32 = currentHashValue.Type!;
             Debug.Assert(system_Int32.SpecialType == SpecialType.System_Int32);
 
@@ -368,7 +373,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             MethodSymbol system_Collections_Generic_EqualityComparer_T__get_Default,
             BoundExpression valueToHash,
             SyntheticBoundNodeFactory F
-        ) {
+        )
+        {
             // Prepare constructed symbols
             NamedTypeSymbol equalityComparerType =
                 system_Collections_Generic_EqualityComparer_T__GetHashCode.ContainingType;
@@ -400,7 +406,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             BoundExpression otherReceiver,
             ArrayBuilder<FieldSymbol> fields,
             SyntheticBoundNodeFactory F
-        ) {
+        )
+        {
             Debug.Assert(fields.Count > 0);
 
             //  Expression:
@@ -461,7 +468,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             SyntheticBoundNodeFactory F,
             MethodSymbol methodToInvoke,
             bool useBaseReference
-        ) {
+        )
+        {
             var argBuilder = ArrayBuilder<BoundExpression>.GetInstance();
 
             RoslynDebug.AssertNotNull(F.CurrentFunction);

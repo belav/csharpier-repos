@@ -57,7 +57,8 @@ namespace System.IO.Enumeration
                     if (
                         (error == Interop.Errors.ERROR_ACCESS_DENIED && _options.IgnoreInaccessible)
                         || ContinueOnError(error)
-                    ) {
+                    )
+                    {
                         DirectoryFinished();
                         return false;
                     }
@@ -68,7 +69,8 @@ namespace System.IO.Enumeration
         private unsafe IntPtr CreateRelativeDirectoryHandle(
             ReadOnlySpan<char> relativePath,
             string fullPath
-        ) {
+        )
+        {
             (int status, IntPtr handle) = Interop.NtDll.CreateFile(
                 relativePath,
                 _directoryHandle,

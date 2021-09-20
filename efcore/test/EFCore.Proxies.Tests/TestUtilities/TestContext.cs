@@ -24,7 +24,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             bool useChangeDetection = false,
             bool checkEquality = true,
             ChangeTrackingStrategy? changeTrackingStrategy = null
-        ) {
+        )
+        {
             _internalServiceProvider = new ServiceCollection().AddEntityFrameworkInMemoryDatabase()
                 .AddEntityFrameworkProxies()
                 .BuildServiceProvider();

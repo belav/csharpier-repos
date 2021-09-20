@@ -64,7 +64,8 @@ namespace System.Net.Sockets.Tests
                                 int remaining = BytesToSend, sent = 0;
                                 remaining > 0;
                                 remaining -= sent
-                            ) {
+                            )
+                            {
                                 random.NextBytes(sendBuffer);
 
                                 sent = Math.Min(sendBuffer.Length, remaining);

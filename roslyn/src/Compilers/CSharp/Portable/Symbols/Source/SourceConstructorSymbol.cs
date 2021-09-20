@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ConstructorDeclarationSyntax syntax,
             bool isNullableAnalysisEnabled,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var methodKind = syntax.Modifiers.Any(SyntaxKind.StaticKeyword)
                 ? MethodKind.StaticConstructor
                 : MethodKind.Constructor;
@@ -132,7 +133,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Location location,
             BindingDiagnosticBag diagnostics,
             out bool modifierErrors
-        ) {
+        )
+        {
             var defaultAccess =
                 (methodKind == MethodKind.StaticConstructor)
                     ? DeclarationModifiers.None
@@ -165,7 +167,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     (mods & DeclarationModifiers.AccessibilityMask) != 0
                     && ContainingType.Name
                         == ((ConstructorDeclarationSyntax)this.SyntaxNode).Identifier.ValueText
-                ) {
+                )
+                {
                     diagnostics.Add(
                         ErrorCode.ERR_StaticConstructorWithAccessModifiers,
                         location,
@@ -197,7 +200,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             bool hasBody,
             Location location,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             if (!hasBody && !IsExtern)
             {
                 diagnostics.Add(ErrorCode.ERR_ConcreteMissingBody, location, this);
@@ -206,7 +210,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 ContainingType.IsSealed
                 && this.DeclaredAccessibility.HasProtected()
                 && !this.IsOverride
-            ) {
+            )
+            {
                 diagnostics.Add(
                     AccessCheck.GetProtectedMemberInSealedTypeError(ContainingType),
                     location,

@@ -149,7 +149,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
         private async Task ReceiveResponse(
             InMemoryConnection connection,
             TestServiceContext testContext
-        ) {
+        )
+        {
             await connection.Receive(
                 "HTTP/1.1 200 OK",
                 $"Date: {testContext.DateHeaderValue}",
@@ -166,7 +167,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
         private async Task ReceiveTimeoutResponse(
             InMemoryConnection connection,
             TestServiceContext testContext
-        ) {
+        )
+        {
             await connection.Receive(
                 "HTTP/1.1 408 Request Timeout",
                 "Connection: close",

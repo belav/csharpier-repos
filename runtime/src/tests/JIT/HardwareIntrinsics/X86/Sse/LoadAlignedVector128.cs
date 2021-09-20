@@ -33,7 +33,8 @@ namespace IntelHardwareIntrinsicTest
                     if (
                         BitConverter.SingleToInt32Bits(inArray[i])
                         != BitConverter.SingleToInt32Bits(outArray[i])
-                    ) {
+                    )
+                    {
                         Console.WriteLine("SSE LoadAlignedVector128 failed on float:");
                         for (var n = 0; n < 4; n++)
                         {

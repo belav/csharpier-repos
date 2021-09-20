@@ -51,7 +51,8 @@ namespace Internal.Runtime.InteropServices
             IntPtr delegateTypeNative,
             IntPtr reserved,
             IntPtr functionHandle
-        ) {
+        )
+        {
             try
             {
                 // Validate all parameters first.
@@ -108,7 +109,8 @@ namespace Internal.Runtime.InteropServices
             IntPtr loadContext,
             IntPtr reserved,
             IntPtr functionHandle
-        ) {
+        )
+        {
             try
             {
                 // Validate all parameters first.
@@ -148,7 +150,8 @@ namespace Internal.Runtime.InteropServices
 
         private static IsolatedComponentLoadContext GetIsolatedComponentLoadContext(
             string assemblyPath
-        ) {
+        )
+        {
             IsolatedComponentLoadContext? alc;
 
             lock (s_assemblyLoadContexts)
@@ -168,7 +171,8 @@ namespace Internal.Runtime.InteropServices
             string typeName,
             string methodName,
             IntPtr delegateTypeNative
-        ) {
+        )
+        {
             // Create a resolver callback for types.
             Func<AssemblyName, Assembly> resolver = name => alc.LoadFromAssemblyName(name);
 

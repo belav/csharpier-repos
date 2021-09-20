@@ -30,7 +30,8 @@ namespace System.Net.Http
         public DecompressionHandler(
             DecompressionMethods decompressionMethods,
             HttpMessageHandlerStage innerHandler
-        ) {
+        )
+        {
             Debug.Assert(decompressionMethods != DecompressionMethods.None);
             Debug.Assert(innerHandler != null);
 
@@ -45,7 +46,8 @@ namespace System.Net.Http
         private static bool EncodingExists(
             HttpHeaderValueCollection<StringWithQualityHeaderValue> acceptEncodingHeader,
             string encoding
-        ) {
+        )
+        {
             foreach (StringWithQualityHeaderValue existingEncoding in acceptEncodingHeader)
             {
                 if (
@@ -54,7 +56,8 @@ namespace System.Net.Http
                         encoding,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -66,7 +69,8 @@ namespace System.Net.Http
             HttpRequestMessage request,
             bool async,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (GZipEnabled && !EncodingExists(request.Headers.AcceptEncoding, Gzip))
             {
                 request.Headers.AcceptEncoding.Add(s_gzipHeaderValue);
@@ -159,7 +163,8 @@ namespace System.Net.Http
                 Stream stream,
                 TransportContext? context,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 using Stream decompressedStream = CreateContentReadStream(cancellationToken);
                 decompressedStream.CopyTo(stream);
             }
@@ -173,13 +178,15 @@ namespace System.Net.Http
                 Stream stream,
                 TransportContext? context,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 using (
                     Stream decompressedStream =
                         TryCreateContentReadStream()
                         ?? await CreateContentReadStreamAsync(cancellationToken)
                             .ConfigureAwait(false)
-                ) {
+                )
+                {
                     await decompressedStream.CopyToAsync(stream, cancellationToken)
                         .ConfigureAwait(false);
                 }
@@ -202,7 +209,8 @@ namespace System.Net.Http
             private async ValueTask<Stream> CreateContentReadStreamAsyncCore(
                 bool async,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (_contentConsumed)
                 {
                     throw new InvalidOperationException(SR.net_http_content_stream_already_read);

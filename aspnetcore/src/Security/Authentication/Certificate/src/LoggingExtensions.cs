@@ -56,7 +56,8 @@ namespace Microsoft.Extensions.Logging
             this ILogger logger,
             string certificateType,
             string subject
-        ) {
+        )
+        {
             _certRejected(logger, certificateType, subject, null);
         }
 
@@ -64,7 +65,8 @@ namespace Microsoft.Extensions.Logging
             this ILogger logger,
             string subject,
             IEnumerable<string> chainedErrors
-        ) {
+        )
+        {
             _certFailedValidation(
                 logger,
                 subject,

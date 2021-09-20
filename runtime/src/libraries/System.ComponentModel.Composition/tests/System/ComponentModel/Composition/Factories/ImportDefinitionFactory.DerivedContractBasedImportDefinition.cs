@@ -22,7 +22,8 @@ namespace System.ComponentModel.Composition.Factories
                 ImportCardinality cardinality,
                 bool isRecomposable,
                 bool isPrerequisite
-            ) {
+            )
+            {
                 _contractName = contractName;
                 _cardinality = cardinality;
                 _isRecomposable = isRecomposable;

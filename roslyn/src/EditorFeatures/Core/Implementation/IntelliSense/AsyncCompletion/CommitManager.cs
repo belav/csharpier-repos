@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                         CompletionSource.PotentialCommitCharacters,
                         out ImmutableArray<char> potentialCommitCharacters
                     )
-                ) {
+                )
+                {
                     return potentialCommitCharacters;
                 }
                 else
@@ -76,7 +77,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             SnapshotPoint location,
             char typedChar,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!PotentialCommitCharacters.Contains(typedChar))
             {
                 return false;
@@ -96,7 +98,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             VSCompletionItem item,
             char typeChar,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // We can make changes to buffers. We would like to be sure nobody can change them at the same time.
             AssertIsForeground();
 
@@ -118,7 +121,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                     CompletionSource.RoslynItem,
                     out RoslynCompletionItem roslynItem
                 )
-            ) {
+            )
+            {
                 // Roslyn should not be called if the item committing was not provided by Roslyn.
                 return CommitResultUnhandled;
             }
@@ -144,7 +148,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             if (
                 !Helpers.IsStandardCommitCharacter(typeChar)
                 && !IsCommitCharacter(serviceRules, roslynItem, typeChar)
-            ) {
+            )
+            {
                 // Returning None means we complete the current session with a void commit.
                 // The Editor then will try to trigger a new completion session for the character.
                 return new AsyncCompletionData.CommitResult(
@@ -165,7 +170,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                     CompletionSource.CompletionListSpan,
                     out TextSpan completionListSpan
                 )
-            ) {
+            )
+            {
                 return CommitResultUnhandled;
             }
 
@@ -182,7 +188,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                     CompletionSource.TypeImportCompletionEnabled,
                     out bool isTyperImportCompletionEnabled
                 ) && isTyperImportCompletionEnabled
-            ) {
+            )
+            {
                 AsyncCompletionLogger.LogCommitWithTypeImportCompletionEnabled();
             }
 
@@ -191,7 +198,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                     CompletionSource.TargetTypeFilterExperimentEnabled,
                     out bool isExperimentEnabled
                 ) && isExperimentEnabled
-            ) {
+            )
+            {
                 // Capture the % of committed completion items that would have appeared in the "Target type matches" filter
                 // (regardless of whether that filter button was active at the time of commit).
                 AsyncCompletionLogger.LogCommitWithTargetTypeCompletionExperimentEnabled();
@@ -230,7 +238,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             CompletionRules rules,
             string filterText,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             AssertIsForeground();
 
             bool includesCommitCharacter;
@@ -291,7 +300,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             if (
                 GetCompletionProvider(completionService, roslynItem)
                 is ICustomCommitCompletionProvider provider
-            ) {
+            )
+            {
                 provider.Commit(roslynItem, view, subjectBuffer, triggerSnapshot, commitCharacter);
                 return new AsyncCompletionData.CommitResult(
                     isHandled: true,
@@ -312,7 +322,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                     reiteratedVersionNumber: null,
                     editTag: null
                 )
-            ) {
+            )
+            {
                 edit.Replace(mappedSpan.Span, change.TextChange.NewText);
 
                 // edit.Apply() may trigger changes made by extensions.
@@ -341,7 +352,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                     if (
                         caretPositionInBuffer.HasValue
                         && mappedSpan.IntersectsWith(caretPositionInBuffer.Value)
-                    ) {
+                    )
+                    {
                         view.TryMoveCaretToAndEnsureVisible(
                             new SnapshotPoint(
                                 subjectBuffer.CurrentSnapshot,
@@ -416,7 +428,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             CompletionRules completionRules,
             CompletionItem item,
             char ch
-        ) {
+        )
+        {
             // First see if the item has any specifc commit rules it wants followed.
             foreach (var rule in item.Rules.CommitCharacterRules)
             {
@@ -449,7 +462,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             CompletionRules rules,
             RoslynCompletionItem item,
             string textTypedSoFar
-        ) {
+        )
+        {
             var rule = item.Rules.EnterKeyRule;
             if (rule == EnterKeyRule.Default)
             {
@@ -480,7 +494,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
         private static CompletionProvider? GetCompletionProvider(
             CompletionService completionService,
             CompletionItem item
-        ) {
+        )
+        {
             if (completionService is CompletionServiceWithProviders completionServiceWithProviders)
             {
                 return completionServiceWithProviders.GetProvider(item);

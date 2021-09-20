@@ -78,7 +78,8 @@ namespace System.Text.Unicode
                     value,
                     out GraphemeClusterBreakProperty graphemeProperty
                 )
-            ) {
+            )
+            {
                 GraphemeClusterBreakProperty = graphemeProperty;
             }
         }

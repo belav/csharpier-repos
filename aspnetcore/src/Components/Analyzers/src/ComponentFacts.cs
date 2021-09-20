@@ -63,7 +63,8 @@ namespace Microsoft.AspNetCore.Components.Analyzers
         public static bool IsParameterWithCaptureUnmatchedValues(
             ComponentSymbols symbols,
             IPropertySymbol property
-        ) {
+        )
+        {
             if (symbols == null)
             {
                 throw new ArgumentNullException(nameof(symbols));
@@ -95,7 +96,8 @@ namespace Microsoft.AspNetCore.Components.Analyzers
                         ComponentsApi.ParameterAttribute.CaptureUnmatchedValues,
                         StringComparison.Ordinal
                     )
-                ) {
+                )
+                {
                     return kvp.Value.Value as bool? ?? false;
                 }
             }
@@ -129,7 +131,8 @@ namespace Microsoft.AspNetCore.Components.Analyzers
             ComponentSymbols symbols,
             Compilation compilation,
             INamedTypeSymbol type
-        ) {
+        )
+        {
             if (symbols is null)
             {
                 throw new ArgumentNullException(nameof(symbols));

@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             int position,
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // We need to at least be in a type declaration context.  This prevents us from showing
             // calls to 'base' in things like top level repl statements and whatnot.
             if (context.ContainingTypeDeclaration != null)
@@ -57,7 +58,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                     SyntaxKind.ClassDeclaration,
                     SyntaxKind.RecordDeclaration
                 )
-            ) {
+            )
+            {
                 var constructor = token.GetAncestor<ConstructorDeclarationSyntax>();
                 if (constructor.Modifiers.Any(SyntaxKind.StaticKeyword))
                 {

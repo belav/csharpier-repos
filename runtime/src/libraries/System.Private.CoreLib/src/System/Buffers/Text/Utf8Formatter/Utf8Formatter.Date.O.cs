@@ -19,7 +19,8 @@ namespace System.Buffers.Text
             TimeSpan offset,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             const int MinimumBytesNeeded = 27;
 
             int bytesRequired = MinimumBytesNeeded;

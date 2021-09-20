@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             NamespaceOrTypeSymbol namespaceOrType,
             UsingDirectiveSyntax usingDirective,
             ImmutableArray<AssemblySymbol> dependencies
-        ) {
+        )
+        {
             this.NamespaceOrType = namespaceOrType;
             this.UsingDirective = usingDirective;
             this.Dependencies = dependencies.NullToEmpty();

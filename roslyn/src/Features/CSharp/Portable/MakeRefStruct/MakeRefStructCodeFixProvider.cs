@@ -83,7 +83,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeRefStruct
             Document document,
             StructDeclarationSyntax structDeclaration,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             var generator = SyntaxGenerator.GetGenerator(document);
 
@@ -106,13 +107,12 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeRefStruct
 
         private class MyCodeAction : CodeAction.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                CSharpFeaturesResources.Make_ref_struct,
-                createChangedDocument,
-                CSharpFeaturesResources.Make_ref_struct
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    CSharpFeaturesResources.Make_ref_struct,
+                    createChangedDocument,
+                    CSharpFeaturesResources.Make_ref_struct
+                ) { }
         }
     }
 }

@@ -26,7 +26,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             CodeRenderingContext context,
             string name,
             string parameterName
-        ) {
+        )
+        {
             var scope = new ScopeEntry(name, ScopeKind.Component);
             _stack.Push(scope);
 

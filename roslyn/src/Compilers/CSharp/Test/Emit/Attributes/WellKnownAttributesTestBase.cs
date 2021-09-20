@@ -34,14 +34,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         internal NamespaceSymbol Get_System_Runtime_InteropServices_WindowsRuntime_NamespaceSymbol(
             ModuleSymbol m
-        ) {
+        )
+        {
             NamespaceSymbol interopNS = Get_System_Runtime_InteropServices_NamespaceSymbol(m);
             return interopNS.GetMember<NamespaceSymbol>("WindowsRuntime");
         }
 
         internal NamespaceSymbol Get_System_Runtime_InteropServices_NamespaceSymbol(
             NamespaceSymbol systemNamespace
-        ) {
+        )
+        {
             var runtimeNS = systemNamespace.GetMember<NamespaceSymbol>("Runtime");
             return runtimeNS.GetMember<NamespaceSymbol>("InteropServices");
         }
@@ -54,7 +56,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         internal NamespaceSymbol Get_System_Runtime_CompilerServices_NamespaceSymbol(
             NamespaceSymbol systemNamespace
-        ) {
+        )
+        {
             var runtimeNS = systemNamespace.GetMember<NamespaceSymbol>("Runtime");
             return runtimeNS.GetMember<NamespaceSymbol>("CompilerServices");
         }
@@ -91,7 +94,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         internal static void VerifyParamArrayAttribute(
             ParameterSymbol parameter,
             bool expected = true
-        ) {
+        )
+        {
             Assert.Equal(expected, parameter.IsParams);
 
             var peParameter = (PEParameterSymbol)parameter;

@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.AddImport
             public InstallWithPackageManagerCodeAction(
                 IPackageInstallerService installerService,
                 string packageName
-            ) {
+            )
+            {
                 _installerService = installerService;
                 _packageName = packageName;
             }
@@ -32,7 +33,8 @@ namespace Microsoft.CodeAnalysis.AddImport
 
             protected override Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return Task.FromResult(
                     SpecializedCollections.SingletonEnumerable<CodeActionOperation>(
                         new InstallWithPackageManagerCodeActionOperation(
@@ -51,7 +53,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                 public InstallWithPackageManagerCodeActionOperation(
                     IPackageInstallerService installerService,
                     string packageName
-                ) {
+                )
+                {
                     _installerService = installerService;
                     _packageName = packageName;
                 }

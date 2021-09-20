@@ -34,7 +34,8 @@ namespace System.Web.WebPages.Administration.PackageManager
             HttpRequestBase request,
             string cookieName,
             string key
-        ) {
+        )
+        {
             var value = request.QueryString[key];
             if (String.IsNullOrEmpty(value))
             {
@@ -51,7 +52,8 @@ namespace System.Web.WebPages.Administration.PackageManager
             HttpResponseBase response,
             string cookieName,
             IDictionary<string, string> filterItems
-        ) {
+        )
+        {
             var cookie = response.Cookies[cookieName];
             if (cookie == null)
             {

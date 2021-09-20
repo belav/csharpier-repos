@@ -266,7 +266,8 @@ namespace System.Runtime.Versioning.Tests
             string expectedIdentifier,
             Version expectedVersion,
             string expectedProfile
-        ) {
+        )
+        {
             Assert.Equal(expectedName, name.FullName);
             Assert.Equal(expectedName, name.ToString());
             Assert.Equal(expectedIdentifier, name.Identifier);

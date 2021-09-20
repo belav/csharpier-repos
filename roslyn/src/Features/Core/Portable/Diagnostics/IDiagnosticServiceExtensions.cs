@@ -53,7 +53,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             bool includeSuppressedDiagnostics,
             Option2<DiagnosticMode> diagnosticMode,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return GetDiagnosticsAsync(
                 service,
                 document,
@@ -70,7 +71,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             bool includeSuppressedDiagnostics,
             Option2<DiagnosticMode> diagnosticMode,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return GetDiagnosticsAsync(
                 service,
                 document,
@@ -88,7 +90,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             bool forPullDiagnostics,
             Option2<DiagnosticMode> diagnosticMode,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var project = document.Project;
             var workspace = project.Solution.Workspace;
 

@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         public static async Task<Dictionary<ISymbol, List<Location>>> FindReferencingSymbolsAsync(
             this IEnumerable<ReferenceLocation> referenceLocations,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var documentGroups = referenceLocations.GroupBy(loc => loc.Document);
             var projectGroups = documentGroups.GroupBy(g => g.Key.Project);
             var result = new Dictionary<ISymbol, List<Location>>();
@@ -53,7 +54,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             SemanticModel semanticModel,
             IEnumerable<ReferenceLocation> references,
             Dictionary<ISymbol, List<Location>> result
-        ) {
+        )
+        {
             foreach (var reference in references)
             {
                 var containingSymbol = GetEnclosingMethodOrPropertyOrField(
@@ -76,7 +78,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         private static ISymbol GetEnclosingMethodOrPropertyOrField(
             SemanticModel semanticModel,
             ReferenceLocation reference
-        ) {
+        )
+        {
             var enclosingSymbol = semanticModel.GetEnclosingSymbol(
                 reference.Location.SourceSpan.Start
             );

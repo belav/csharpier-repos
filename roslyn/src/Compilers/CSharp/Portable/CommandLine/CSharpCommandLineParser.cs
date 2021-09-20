@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string baseDirectory,
             string? sdkDirectory,
             string? additionalReferenceDirectories
-        ) {
+        )
+        {
             return Parse(args, baseDirectory, sdkDirectory, additionalReferenceDirectories);
         }
 
@@ -60,7 +61,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string? baseDirectory,
             string? sdkDirectory,
             string? additionalReferenceDirectories = null
-        ) {
+        )
+        {
             Debug.Assert(baseDirectory == null || PathUtilities.IsAbsolute(baseDirectory));
 
             List<Diagnostic> diagnostics = new List<Diagnostic>();
@@ -558,7 +560,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                         value,
                                         diagnostics
                                     )
-                                ) {
+                                )
+                                {
                                     if (!instrumentationKinds.Contains(instrumentationKind))
                                     {
                                         instrumentationKinds.Add(instrumentationKind);
@@ -618,7 +621,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 if (
                                     (preferredUILang.CultureTypes & CultureTypes.UserCustomCulture)
                                     != 0
-                                ) {
+                                )
+                                {
                                     // Do not use user custom cultures.
                                     preferredUILang = null;
                                 }
@@ -1146,7 +1150,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                     CultureInfo.InvariantCulture,
                                     out newWarningLevel
                                 )
-                            ) {
+                            )
+                            {
                                 AddDiagnostic(diagnostics, ErrorCode.ERR_SwitchNeedsNumber, name);
                             }
                             else if (newWarningLevel < 0)
@@ -1305,7 +1310,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             if (
                                 string.IsNullOrEmpty(value)
                                 || !TryParseUInt64(value, out newBaseAddress)
-                            ) {
+                            )
+                            {
                                 if (RoslynString.IsNullOrEmpty(value))
                                 {
                                     AddDiagnostic(
@@ -1597,7 +1603,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                     baseDirectory,
                                     diagnostics
                                 )
-                            ) {
+                            )
+                            {
                                 additionalFiles.Add(ToCommandLineSourceFile(path));
                             }
                             continue;
@@ -1632,7 +1639,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                     baseDirectory,
                                     diagnostics
                                 )
-                            ) {
+                            )
+                            {
                                 embeddedFiles.Add(ToCommandLineSourceFile(path));
                             }
                             continue;
@@ -1692,7 +1700,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 !IsScriptCommandLineParser
                 && !sourceFilesSpecified
                 && (outputKind.IsNetModule() || !resourcesOrModulesSpecified)
-            ) {
+            )
+            {
                 AddDiagnostic(diagnostics, diagnosticOptions, ErrorCode.WRN_NoSources);
             }
 
@@ -1865,7 +1874,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 nullableContextOptions != NullableContextOptions.Disable
                 && parseOptions.LanguageVersion
                     < MessageID.IDS_FeatureNullableReferenceTypes.RequiredVersion()
-            ) {
+            )
+            {
                 diagnostics.Add(
                     new CSDiagnostic(
                         new CSDiagnosticInfo(
@@ -1945,7 +1955,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             List<string> builder,
             MessageID origin,
             List<Diagnostic> diagnostics
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(switchValue))
             {
                 RoslynDebug.Assert(!RoslynString.IsNullOrEmpty(switchName));
@@ -1992,7 +2003,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string arg,
             string? value,
             List<Diagnostic> diagnostics
-        ) {
+        )
+        {
             if (value == null)
             {
                 AddDiagnostic(diagnostics, ErrorCode.ERR_NoFileSpec, arg);
@@ -2022,7 +2034,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ref string? outputFileName,
             ref string? moduleName,
             out string? compilationName
-        ) {
+        )
+        {
             string? simpleName;
             if (outputFileName == null)
             {
@@ -2094,7 +2107,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string? sdkDirectoryOpt,
             List<string> libPaths,
             List<string>? responsePathsOpt
-        ) {
+        )
+        {
             var builder = ArrayBuilder<string>.GetInstance();
 
             // Match how Dev11 builds the list of search paths
@@ -2125,7 +2139,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static IEnumerable<string> ParseConditionalCompilationSymbols(
             string value,
             out IEnumerable<Diagnostic> diagnostics
-        ) {
+        )
+        {
             DiagnosticBag outputDiagnostics = DiagnosticBag.GetInstance();
 
             value = value.TrimEnd(null);
@@ -2219,7 +2234,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string arg,
             string? value,
             IList<Diagnostic> diagnostics
-        ) {
+        )
+        {
             if (RoslynString.IsNullOrEmpty(value))
             {
                 AddDiagnostic(
@@ -2241,7 +2257,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string arg,
             string? value,
             List<Diagnostic> diagnostics
-        ) {
+        )
+        {
             if (value == null)
             {
                 AddDiagnostic(
@@ -2273,7 +2290,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string? value,
             IList<Diagnostic> diagnostics,
             bool embedInteropTypes
-        ) {
+        )
+        {
             if (value == null)
             {
                 AddDiagnostic(
@@ -2360,7 +2378,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string? win32ManifestFile,
             OutputKind outputKind,
             IList<Diagnostic> diagnostics
-        ) {
+        )
+        {
             if (win32ResourceFile != null)
             {
                 if (win32IconResourceFile != null)
@@ -2383,7 +2402,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static IEnumerable<InstrumentationKind> ParseInstrumentationKinds(
             string value,
             IList<Diagnostic> diagnostics
-        ) {
+        )
+        {
             string[] kinds = value.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
             foreach (var kind in kinds)
             {
@@ -2406,7 +2426,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string? baseDirectory,
             IList<Diagnostic> diagnostics,
             bool embedded
-        ) {
+        )
+        {
             string? filePath;
             string? fullPath;
             string? fileName;
@@ -2509,7 +2530,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         CultureInfo.InvariantCulture,
                         out ushort number
                     ) && ErrorFacts.IsWarning((ErrorCode)number)
-                ) {
+                )
+                {
                     // The id refers to a compiler warning.
                     yield return CSharp.MessageProvider.Instance.GetIdForErrorCode(number);
                 }
@@ -2528,7 +2550,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Dictionary<string, ReportDiagnostic> d,
             ReportDiagnostic kind,
             IEnumerable<string> items
-        ) {
+        )
+        {
             foreach (var id in items)
             {
                 ReportDiagnostic existing;
@@ -2557,7 +2580,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal override void GenerateErrorForNoFilesFoundInRecurse(
             string path,
             IList<Diagnostic> diagnostics
-        ) {
+        )
+        {
             //  no error in csc.exe
         }
 
@@ -2570,7 +2594,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             IList<Diagnostic> diagnostics,
             ErrorCode errorCode,
             params object[] arguments
-        ) {
+        )
+        {
             diagnostics.Add(
                 Diagnostic.Create(CSharp.MessageProvider.Instance, (int)errorCode, arguments)
             );
@@ -2584,7 +2609,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Dictionary<string, ReportDiagnostic> warningOptions,
             ErrorCode errorCode,
             params object[] arguments
-        ) {
+        )
+        {
             int code = (int)errorCode;
             ReportDiagnostic value;
             warningOptions.TryGetValue(

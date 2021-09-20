@@ -28,7 +28,8 @@ namespace Microsoft.AspNetCore.Testing
             TestContext context,
             Exception exception,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (exception != null)
             {
                 var path = Path.Combine(

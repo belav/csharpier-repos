@@ -130,7 +130,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
                             if (
                                 !token.Parent.IsParentKind(SyntaxKind.TryStatement)
                                 && !token.Parent.IsParentKind(SyntaxKind.DoStatement)
-                            ) {
+                            )
+                            {
                                 return true;
                             }
                         }
@@ -139,7 +140,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
                             || token.Parent.IsParentKind(SyntaxKind.FinallyClause)
                             || token.Parent.IsParentKind(SyntaxKind.CatchClause)
                             || token.Parent.IsParentKind(SyntaxKind.SwitchSection)
-                        ) {
+                        )
+                        {
                             return true;
                         }
                     }
@@ -216,7 +218,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
                     memberDeclaration != null
                     && memberDeclaration.GetLastToken(includeZeroWidth: true) == token
                     && memberDeclaration.IsParentKind(SyntaxKind.CompilationUnit)
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -227,7 +230,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
                 if (
                     globalStatement != null
                     && globalStatement.GetLastToken(includeZeroWidth: true) == token
-                ) {
+                )
+                {
                     return true;
                 }
 
@@ -236,7 +240,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
                     memberDeclaration != null
                     && memberDeclaration.GetLastToken(includeZeroWidth: true) == token
                     && memberDeclaration.IsParentKind(SyntaxKind.CompilationUnit)
-                ) {
+                )
+                {
                     return true;
                 }
 
@@ -246,14 +251,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
                     if (
                         compUnit.Usings.Count > 0
                         && compUnit.Usings.Last().GetLastToken(includeZeroWidth: true) == token
-                    ) {
+                    )
+                    {
                         return true;
                     }
 
                     if (
                         compUnit.Externs.Count > 0
                         && compUnit.Externs.Last().GetLastToken(includeZeroWidth: true) == token
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }
@@ -268,7 +275,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
                         compUnit.AttributeLists.Count > 0
                         && compUnit.AttributeLists.Last().GetLastToken(includeZeroWidth: true)
                             == token
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }
@@ -291,7 +299,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
                         SyntaxKind.ParenthesizedExpression,
                         out ParenthesizedExpressionSyntax? parenExpr
                     )
-                ) {
+                )
+                {
                     var expr = parenExpr.Expression;
 
                     if (expr is TypeSyntax)
@@ -314,7 +323,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
             if (
                 token.Kind() == SyntaxKind.IdentifierToken
                 && token.GetPreviousToken(includeSkipped: true).Kind() == SyntaxKind.IntoKeyword
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -341,7 +351,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
             if (
                 targetToken.Kind() == SyntaxKind.IfKeyword
                 || targetToken.Kind() == SyntaxKind.ElifKeyword
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -349,7 +360,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
             if (
                 targetToken.Kind() == SyntaxKind.OpenParenToken
                 && targetToken.Parent.IsKind(SyntaxKind.ParenthesizedExpression)
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -383,7 +395,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
                     SyntaxKind.CloseParenToken,
                     SyntaxKind.CloseBracketToken
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -417,7 +430,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
             if (
                 targetToken.Kind() == SyntaxKind.OpenBraceToken
                 && targetToken.Parent.IsKind(SyntaxKind.SwitchStatement)
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -429,7 +443,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
                         SyntaxKind.DefaultSwitchLabel,
                         SyntaxKind.CasePatternSwitchLabel
                     )
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -437,7 +452,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
             if (
                 targetToken.Kind() == SyntaxKind.SemicolonToken
                 || targetToken.Kind() == SyntaxKind.CloseBraceToken
-            ) {
+            )
+            {
                 var section = targetToken.GetAncestor<SwitchSectionSyntax>();
                 if (section != null)
                 {
@@ -465,7 +481,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
 
         public static bool IsConstructorOrMethodParameterArgumentContext(
             this SyntaxToken targetToken
-        ) {
+        )
+        {
             // cases:
             //   Goo( |
             //   Goo(expr, |
@@ -484,14 +501,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
                 && targetToken.Parent.IsKind(SyntaxKind.NameColon)
                 && targetToken.Parent.Parent.IsKind(SyntaxKind.Argument)
                 && targetToken.Parent.Parent.Parent.IsKind(SyntaxKind.ArgumentList)
-            ) {
+            )
+            {
                 var owner = targetToken.Parent.Parent.Parent.Parent;
                 if (
                     owner.IsKind(SyntaxKind.InvocationExpression)
                     || owner.IsKind(SyntaxKind.ObjectCreationExpression)
                     || owner.IsKind(SyntaxKind.BaseConstructorInitializer)
                     || owner.IsKind(SyntaxKind.ThisConstructorInitializer)
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -499,14 +518,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
             if (
                 targetToken.Kind() == SyntaxKind.OpenParenToken
                 || targetToken.Kind() == SyntaxKind.CommaToken
-            ) {
+            )
+            {
                 if (targetToken.Parent.IsKind(SyntaxKind.ArgumentList))
                 {
                     if (
                         targetToken.Parent.IsParentKind(SyntaxKind.ObjectCreationExpression)
                         || targetToken.Parent.IsParentKind(SyntaxKind.BaseConstructorInitializer)
                         || targetToken.Parent.IsParentKind(SyntaxKind.ThisConstructorInitializer)
-                    ) {
+                    )
+                    {
                         return true;
                     }
 
@@ -516,7 +537,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
                     if (
                         targetToken.Parent.IsParentKind(SyntaxKind.InvocationExpression)
                         && !targetToken.IsInvocationOfVarExpression()
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }
@@ -531,7 +553,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
                 targetToken.Kind() == SyntaxKind.OperatorKeyword
                 && targetToken.GetPreviousToken(includeSkipped: true)
                     .IsLastTokenOfNode<TypeSyntax>()
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -558,7 +581,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
             this SyntaxToken targetToken,
             int position,
             SyntaxKind kind = SyntaxKind.None
-        ) {
+        )
+        {
             return targetToken.IsAccessorDeclarationContext<EventDeclarationSyntax>(position, kind)
                 || targetToken.IsAccessorDeclarationContext<PropertyDeclarationSyntax>(
                     position,
@@ -622,7 +646,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
                 || targetToken.Kind() == SyntaxKind.ProtectedKeyword
                 || targetToken.Kind() == SyntaxKind.PrivateKeyword
                 || targetToken.Kind() == SyntaxKind.ReadOnlyKeyword
-            ) {
+            )
+            {
                 targetToken = targetToken.GetPreviousToken(includeSkipped: true);
             }
 
@@ -631,7 +656,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
             if (
                 targetToken.Kind() == SyntaxKind.OpenBraceToken
                 && targetToken.Parent.IsKind(SyntaxKind.AccessorList)
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -641,7 +667,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
                 targetToken.Kind() == SyntaxKind.CloseBraceToken
                 && targetToken.Parent.IsKind(SyntaxKind.Block)
                 && targetToken.Parent.Parent is AccessorDeclarationSyntax
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -649,7 +676,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
             if (
                 targetToken.Kind() == SyntaxKind.SemicolonToken
                 && targetToken.Parent is AccessorDeclarationSyntax
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -658,7 +686,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
                 targetToken.Kind() == SyntaxKind.CloseBracketToken
                 && targetToken.Parent.IsKind(SyntaxKind.AttributeList)
                 && targetToken.Parent.Parent is AccessorDeclarationSyntax
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -667,7 +696,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
 
         private static bool IsGenericInterfaceOrDelegateTypeParameterList(
             [NotNullWhen(true)] SyntaxNode? node
-        ) {
+        )
+        {
             if (node.IsKind(SyntaxKind.TypeParameterList))
             {
                 if (
@@ -702,14 +732,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
             if (
                 targetToken.Kind() == SyntaxKind.LessThanToken
                 && IsGenericInterfaceOrDelegateTypeParameterList(targetToken.Parent!)
-            ) {
+            )
+            {
                 return true;
             }
 
             if (
                 targetToken.Kind() == SyntaxKind.CommaToken
                 && IsGenericInterfaceOrDelegateTypeParameterList(targetToken.Parent!)
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -718,7 +750,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
                 && targetToken.Parent.IsKind(SyntaxKind.AttributeList)
                 && targetToken.Parent.Parent.IsKind(SyntaxKind.TypeParameter)
                 && IsGenericInterfaceOrDelegateTypeParameterList(targetToken.Parent.Parent.Parent)
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -755,7 +788,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
             this SyntaxToken token,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!(token.Parent is MemberAccessExpressionSyntax memberAccessExpression))
             {
                 return false;

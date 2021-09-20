@@ -211,7 +211,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             RazorSyntaxTree syntaxTree,
             bool verifySyntaxTree = true,
             bool ensureFullFidelity = true
-        ) {
+        )
+        {
             if (verifySyntaxTree)
             {
                 SyntaxTreeVerifier.Verify(syntaxTree, ensureFullFidelity);
@@ -226,7 +227,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             IEnumerable<DirectiveDescriptor> directives = null,
             RazorParserFeatureFlags featureFlags = null,
             string fileKind = null
-        ) {
+        )
+        {
             return ParseDocument(
                 RazorLanguageVersion.Latest,
                 document,
@@ -244,7 +246,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             bool designTime = false,
             RazorParserFeatureFlags featureFlags = null,
             string fileKind = null
-        ) {
+        )
+        {
             directives = directives ?? Array.Empty<DirectiveDescriptor>();
 
             var source = TestRazorSourceDocument.Create(
@@ -297,7 +300,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         internal virtual void ParseDocumentTest(
             string document,
             IEnumerable<DirectiveDescriptor> directives
-        ) {
+        )
+        {
             ParseDocumentTest(document, directives, false);
         }
 
@@ -311,7 +315,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             IEnumerable<DirectiveDescriptor> directives,
             bool designTime,
             string fileKind = null
-        ) {
+        )
+        {
             ParseDocumentTest(
                 RazorLanguageVersion.Latest,
                 document,
@@ -327,7 +332,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             IEnumerable<DirectiveDescriptor> directives,
             bool designTime,
             string fileKind = null
-        ) {
+        )
+        {
             var result = ParseDocument(
                 version,
                 document,
@@ -345,7 +351,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             bool designTime,
             RazorParserFeatureFlags featureFlags = null,
             string fileKind = null
-        ) {
+        )
+        {
             return new TestRazorParserOptions(
                 directives.ToArray(),
                 designTime,
@@ -365,7 +372,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 RazorLanguageVersion version,
                 string fileKind,
                 RazorParserFeatureFlags featureFlags = null
-            ) {
+            )
+            {
                 if (directives == null)
                 {
                     throw new ArgumentNullException(nameof(directives));

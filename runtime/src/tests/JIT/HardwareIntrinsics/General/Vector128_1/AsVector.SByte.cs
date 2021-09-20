@@ -100,7 +100,8 @@ namespace JIT.HardwareIntrinsics.General
             Vector<SByte> result,
             Vector128<SByte> value,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             SByte[] resultElements = new SByte[NumericsElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<SByte, byte>(ref resultElements[0]), result);
 
@@ -114,7 +115,8 @@ namespace JIT.HardwareIntrinsics.General
             Vector128<SByte> result,
             Vector<SByte> value,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             SByte[] resultElements = new SByte[VectorElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<SByte, byte>(ref resultElements[0]), result);
 
@@ -128,7 +130,8 @@ namespace JIT.HardwareIntrinsics.General
             SByte[] resultElements,
             SByte[] valueElements,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (resultElements.Length <= valueElements.Length)

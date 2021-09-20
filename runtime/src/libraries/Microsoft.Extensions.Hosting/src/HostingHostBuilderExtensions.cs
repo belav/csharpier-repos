@@ -86,7 +86,8 @@ namespace Microsoft.Extensions.Hosting
         public static IHostBuilder UseDefaultServiceProvider(
             this IHostBuilder hostBuilder,
             Action<HostBuilderContext, ServiceProviderOptions> configure
-        ) {
+        )
+        {
             return hostBuilder.UseServiceProviderFactory(
                 context =>
                 {
@@ -106,7 +107,8 @@ namespace Microsoft.Extensions.Hosting
         public static IHostBuilder ConfigureLogging(
             this IHostBuilder hostBuilder,
             Action<HostBuilderContext, ILoggingBuilder> configureLogging
-        ) {
+        )
+        {
             return hostBuilder.ConfigureServices(
                 (context, collection) =>
                     collection.AddLogging(builder => configureLogging(context, builder))
@@ -122,7 +124,8 @@ namespace Microsoft.Extensions.Hosting
         public static IHostBuilder ConfigureLogging(
             this IHostBuilder hostBuilder,
             Action<ILoggingBuilder> configureLogging
-        ) {
+        )
+        {
             return hostBuilder.ConfigureServices(
                 (context, collection) => collection.AddLogging(builder => configureLogging(builder))
             );
@@ -139,7 +142,8 @@ namespace Microsoft.Extensions.Hosting
         public static IHostBuilder ConfigureAppConfiguration(
             this IHostBuilder hostBuilder,
             Action<IConfigurationBuilder> configureDelegate
-        ) {
+        )
+        {
             return hostBuilder.ConfigureAppConfiguration(
                 (context, builder) => configureDelegate(builder)
             );
@@ -154,7 +158,8 @@ namespace Microsoft.Extensions.Hosting
         public static IHostBuilder ConfigureServices(
             this IHostBuilder hostBuilder,
             Action<IServiceCollection> configureDelegate
-        ) {
+        )
+        {
             return hostBuilder.ConfigureServices(
                 (context, collection) => configureDelegate(collection)
             );
@@ -171,7 +176,8 @@ namespace Microsoft.Extensions.Hosting
         public static IHostBuilder ConfigureContainer<TContainerBuilder>(
             this IHostBuilder hostBuilder,
             Action<TContainerBuilder> configureDelegate
-        ) {
+        )
+        {
             return hostBuilder.ConfigureContainer<TContainerBuilder>(
                 (context, builder) => configureDelegate(builder)
             );
@@ -327,7 +333,8 @@ namespace Microsoft.Extensions.Hosting
         public static IHostBuilder UseConsoleLifetime(
             this IHostBuilder hostBuilder,
             Action<ConsoleLifetimeOptions> configureOptions
-        ) {
+        )
+        {
             return hostBuilder.ConfigureServices(
                 (context, collection) =>
                 {
@@ -346,7 +353,8 @@ namespace Microsoft.Extensions.Hosting
         public static Task RunConsoleAsync(
             this IHostBuilder hostBuilder,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return hostBuilder.UseConsoleLifetime().Build().RunAsync(cancellationToken);
         }
 
@@ -361,7 +369,8 @@ namespace Microsoft.Extensions.Hosting
             this IHostBuilder hostBuilder,
             Action<ConsoleLifetimeOptions> configureOptions,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return hostBuilder.UseConsoleLifetime(configureOptions)
                 .Build()
                 .RunAsync(cancellationToken);

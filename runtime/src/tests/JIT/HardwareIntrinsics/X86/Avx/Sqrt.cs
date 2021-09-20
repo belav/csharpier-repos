@@ -32,7 +32,8 @@ namespace IntelHardwareIntrinsicTest
                         new double[4] { 1, -5, 100, 0 },
                         new double[4]
                     )
-                ) {
+                )
+                {
                     var vf1 = Unsafe.Read<Vector256<float>>(floatTable.inArrayPtr);
                     var vf2 = Avx.Sqrt(vf1);
                     Unsafe.Write(floatTable.outArrayPtr, vf2);
@@ -49,7 +50,8 @@ namespace IntelHardwareIntrinsicTest
                                 return (expected == y) || (float.IsNaN(expected) && float.IsNaN(y));
                             }
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("Avx Sqrt failed on float:");
                         foreach (var item in floatTable.outArray)
                         {
@@ -68,7 +70,8 @@ namespace IntelHardwareIntrinsicTest
                                     || (double.IsNaN(expected) && double.IsNaN(y));
                             }
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("Avx Sqrt failed on double:");
                         foreach (var item in doubleTable.outArray)
                         {

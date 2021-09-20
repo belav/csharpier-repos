@@ -120,7 +120,8 @@ namespace System.Reflection.Tests
             string name,
             int index,
             bool expected
-        ) {
+        )
+        {
             ParameterInfo parameterInfo = GetParameterInfo(type, name, index);
             Assert.Equal(expected, parameterInfo.HasDefaultValue);
         }
@@ -373,7 +374,8 @@ namespace System.Reflection.Tests
             MemberInfo pretendMember,
             int pretendPosition,
             string expectedParameterName
-        ) {
+        )
+        {
             // Regression test for https://github.com/dotnet/runtime/issues/22081
             //
             // It's easy to forget that ParameterInfo's and runtime-implemented ParameterInfo's are different objects and just because the
@@ -486,7 +488,8 @@ namespace System.Reflection.Tests
             }
             public int MethodWithOptionalDefaultOutInMarshalParam(
                 [MarshalAs(UnmanagedType.LPWStr)] [Out] [In] string str = ""
-            ) {
+            )
+            {
                 return 1;
             }
         }

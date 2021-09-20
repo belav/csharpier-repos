@@ -10,7 +10,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
     {
         public static bool IsImplicitValueParameter(
             [NotNullWhen(returnValue: true)] this ISymbol? symbol
-        ) {
+        )
+        {
             if (symbol is IParameterSymbol && symbol.IsImplicitlyDeclared)
             {
                 if (symbol.ContainingSymbol is IMethodSymbol method)
@@ -19,7 +20,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                         method.MethodKind == MethodKind.EventAdd
                         || method.MethodKind == MethodKind.EventRemove
                         || method.MethodKind == MethodKind.PropertySet
-                    ) {
+                    )
+                    {
                         // the name is value in C#, and Value in VB
                         return symbol.Name == "value" || symbol.Name == "Value";
                     }

@@ -562,7 +562,8 @@ namespace System.Globalization
                             m_eraNames[i],
                             CompareOptions.IgnoreCase
                         ) == 0
-                    ) {
+                    )
+                    {
                         return i + 1;
                     }
                 }
@@ -576,7 +577,8 @@ namespace System.Globalization
                         m_abbrevEraNames![i],
                         CompareOptions.IgnoreCase
                     ) == 0
-                ) {
+                )
+                {
                     return i + 1;
                 }
             }
@@ -590,7 +592,8 @@ namespace System.Globalization
                         m_abbrevEnglishEraNames![i],
                         CompareOptions.IgnoreCase
                     ) == 0
-                ) {
+                )
+                {
                     return i + 1;
                 }
             }
@@ -1456,7 +1459,8 @@ namespace System.Globalization
             string[] patterns1,
             string[] patterns2,
             string connectString
-        ) {
+        )
+        {
             Debug.Assert(patterns1 != null);
             Debug.Assert(patterns2 != null);
 
@@ -2034,7 +2038,8 @@ namespace System.Globalization
                         | DateTimeStyles.AdjustToUniversal
                     )
                 ) > DateTimeStyles.RoundtripKind
-            ) {
+            )
+            {
                 ThrowInvalid(style, styles);
             }
 
@@ -2139,7 +2144,8 @@ namespace System.Globalization
                 if (
                     year < Calendar.GetYear(Calendar.MinSupportedDateTime)
                     || year > Calendar.GetYear(Calendar.MaxSupportedDateTime)
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -2315,7 +2321,8 @@ namespace System.Globalization
                 if (
                     !LocalAppContextSwitches.EnforceLegacyJapaneseDateParsing
                     && Calendar.ID == CalendarId.JAPAN
-                ) {
+                )
+                {
                     // We need to support parsing the dates has the start of era symbol which means it is year 1 in the era.
                     // The start of era symbol has to be followed by the year symbol suffix, otherwise it would be invalid date.
                     InsertHash(temp, JapaneseEraStart, TokenType.YearNumberToken, 1);
@@ -2590,7 +2597,8 @@ namespace System.Globalization
             ref __DTString str,
             out bool badFormat,
             out int number
-        ) {
+        )
+        {
             number = -1;
             badFormat = false;
 
@@ -2662,7 +2670,8 @@ namespace System.Globalization
                     // JapaneseEraStart followed by year suffix "\u5143"
                     (tokenString == JapaneseEraStart && nextCh == CJKYearSuff[0])
                 )
-            ) {
+            )
+            {
                 return true;
             }
             return false;
@@ -2673,7 +2682,8 @@ namespace System.Globalization
             out TokenType tokenType,
             out int tokenValue,
             ref __DTString str
-        ) {
+        )
+        {
             tokenType = TokenType.UnknownToken;
             tokenValue = 0;
 
@@ -2723,7 +2733,8 @@ namespace System.Globalization
                 if (
                     ((int)value.tokenType & (int)TokenMask) > 0
                     && value.tokenString.Length <= remaining
-                ) {
+                )
+                {
                     bool compareStrings = true;
                     if (isLetter)
                     {
@@ -2760,7 +2771,8 @@ namespace System.Globalization
                                 CompareOptions.IgnoreCase
                             ) == 0
                         )
-                    ) {
+                    )
+                    {
                         tokenType = value.tokenType & TokenMask;
                         tokenValue = value.tokenValue;
                         str.Advance(value.tokenString.Length);
@@ -2769,7 +2781,8 @@ namespace System.Globalization
                     else if (
                         (value.tokenType == TokenType.MonthToken && HasSpacesInMonthNames)
                         || (value.tokenType == TokenType.DayOfWeekToken && HasSpacesInDayNames)
-                    ) {
+                    )
+                    {
                         // For month or day token, we will match the names which have spaces.
                         int matchStrLen = 0;
                         if (str.MatchSpecifiedWords(value.tokenString, true, ref matchStrLen))
@@ -2799,7 +2812,8 @@ namespace System.Globalization
             int pos,
             int hashcode,
             int hashProbe
-        ) {
+        )
+        {
             // Remember the current slot.
             TokenHashValue previousNode = hashTable[hashcode];
 
@@ -2835,7 +2849,8 @@ namespace System.Globalization
             string str,
             TokenType tokenType,
             int tokenValue
-        ) {
+        )
+        {
             // The month of the 13th month is allowed to be null, so make sure that we ignore null value here.
             if (string.IsNullOrEmpty(str))
             {
@@ -2883,7 +2898,8 @@ namespace System.Globalization
                                 0,
                                 value.tokenString.Length
                             )
-                        ) {
+                        )
+                        {
                             if (str.Length > value.tokenString.Length)
                             {
                                 // The str to be inserted has the same prefix as the current token, and str is longer.
@@ -2924,7 +2940,8 @@ namespace System.Globalization
                                             & (int)TokenType.SeparatorTokenMask
                                         ) == 0
                                     ) && ((nTokenType & (int)TokenType.SeparatorTokenMask) != 0)
-                                ) {
+                                )
+                                {
                                     value.tokenType |= tokenType;
                                     if (tokenValue != 0)
                                     {
@@ -2952,7 +2969,8 @@ namespace System.Globalization
             string string2,
             int offset2,
             int length2
-        ) {
+        )
+        {
             // Optimize for one character cases which are common due to date and time separators (/ and :)
             if (length1 == 1 && length2 == 1 && string1[offset1] == string2[offset2])
             {

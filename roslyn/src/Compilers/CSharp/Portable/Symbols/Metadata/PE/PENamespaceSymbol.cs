@@ -136,7 +136,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         public sealed override ImmutableArray<NamedTypeSymbol> GetTypeMembers(
             string name,
             int arity
-        ) {
+        )
+        {
             return GetTypeMembers(name).WhereAsArray((type, arity) => type.Arity == arity, arity);
         }
 
@@ -173,7 +174,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         /// </param>
         protected void LoadAllMembers(
             IEnumerable<IGrouping<string, TypeDefinitionHandle>> typesByNS
-        ) {
+        )
+        {
             Debug.Assert(typesByNS != null);
 
             // A sequence of groups of TypeDef row ids for types immediately contained within this namespace.
@@ -225,7 +227,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             IEnumerable<
                 KeyValuePair<string, IEnumerable<IGrouping<string, TypeDefinitionHandle>>>
             > childNamespaces
-        ) {
+        )
+        {
             if (this.lazyNamespaces == null)
             {
                 var namespaces = new Dictionary<string, PENestedNamespaceSymbol>(
@@ -247,7 +250,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         /// </summary>
         private void LazyInitializeTypes(
             IEnumerable<IGrouping<string, TypeDefinitionHandle>> typeGroups
-        ) {
+        )
+        {
             if (this.lazyTypes == null)
             {
                 var moduleSymbol = ContainingPEModule;
@@ -306,7 +310,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         internal NamedTypeSymbol LookupMetadataType(
             ref MetadataTypeName emittedTypeName,
             out bool isNoPiaLocalType
-        ) {
+        )
+        {
             NamedTypeSymbol result = LookupMetadataType(ref emittedTypeName);
             isNoPiaLocalType = false;
 
@@ -320,7 +325,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 if (
                     _lazyNoPiaLocalTypes != null
                     && _lazyNoPiaLocalTypes.TryGetValue(emittedTypeName.TypeName, out typeDef)
-                ) {
+                )
+                {
                     result = (NamedTypeSymbol)new MetadataDecoder(
                         ContainingPEModule
                     ).GetTypeOfToken(typeDef, out isNoPiaLocalType);

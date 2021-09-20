@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         public override BoundNode? VisitMultipleLocalDeclarations(
             BoundMultipleLocalDeclarations node
-        ) {
+        )
+        {
             return VisitMultipleLocalDeclarationsBase(node);
         }
 
@@ -24,7 +25,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private BoundNode? VisitMultipleLocalDeclarationsBase(
             BoundMultipleLocalDeclarationsBase node
-        ) {
+        )
+        {
             ArrayBuilder<BoundStatement>? inits = null;
 
             foreach (var decl in node.LocalDeclarations)

@@ -165,7 +165,8 @@ namespace System.Security.Cryptography.Xml.Tests
             string mimeTypeValue,
             string encodingValue,
             int childs
-        ) {
+        )
+        {
             var doc = new XmlDocument();
             XmlElement element = doc.CreateElement(name, SignedXml.XmlDsigNamespaceUrl);
             XmlAttribute idAttribute = doc.CreateAttribute(

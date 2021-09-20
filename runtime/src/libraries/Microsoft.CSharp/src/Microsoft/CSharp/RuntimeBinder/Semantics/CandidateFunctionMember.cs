@@ -11,7 +11,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             TypeArray @params,
             byte ctypeLift,
             bool fExpanded
-        ) {
+        )
+        {
             this.mpwi = mpwi;
             this.@params = @params;
             this.ctypeLift = ctypeLift;

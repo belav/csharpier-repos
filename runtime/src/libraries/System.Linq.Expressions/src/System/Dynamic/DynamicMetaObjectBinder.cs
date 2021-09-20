@@ -47,7 +47,8 @@ namespace System.Dynamic
             object[] args,
             ReadOnlyCollection<ParameterExpression> parameters,
             LabelTarget returnLabel
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(args, nameof(args));
             ContractUtils.RequiresNotNull(parameters, nameof(parameters));
             ContractUtils.RequiresNotNull(returnLabel, nameof(returnLabel));
@@ -75,7 +76,8 @@ namespace System.Dynamic
                 if (
                     returnLabel.Type != typeof(void)
                     && !TypeUtils.AreReferenceAssignable(returnLabel.Type, expectedResult)
-                ) {
+                )
+                {
                     throw System.Linq.Expressions.Error.BinderNotCompatibleWithCallSite(
                         expectedResult,
                         this,
@@ -107,7 +109,8 @@ namespace System.Dynamic
             if (
                 expectedResult != typeof(void)
                 && !TypeUtils.AreReferenceAssignable(expectedResult, body.Type)
-            ) {
+            )
+            {
                 //
                 // Blame the last person that handled the result: assume it's
                 // the dynamic object (if any), otherwise blame the language.
@@ -163,7 +166,8 @@ namespace System.Dynamic
         private static DynamicMetaObject[] CreateArgumentMetaObjects(
             object[] args,
             ReadOnlyCollection<ParameterExpression> parameters
-        ) {
+        )
+        {
             DynamicMetaObject[] mos;
             if (args.Length != 1)
             {
@@ -237,7 +241,8 @@ namespace System.Dynamic
         private DynamicMetaObject MakeDeferred(
             BindingRestrictions rs,
             params DynamicMetaObject[] args
-        ) {
+        )
+        {
             var exprs = DynamicMetaObject.GetExpressions(args);
 
             Type delegateType = DelegateHelpers.MakeDeferredSiteDelegate(args, ReturnType);

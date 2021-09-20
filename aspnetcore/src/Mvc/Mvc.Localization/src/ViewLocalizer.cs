@@ -31,7 +31,8 @@ namespace Microsoft.AspNetCore.Mvc.Localization
         public ViewLocalizer(
             IHtmlLocalizerFactory localizerFactory,
             IWebHostEnvironment hostingEnvironment
-        ) {
+        )
+        {
             if (localizerFactory == null)
             {
                 throw new ArgumentNullException(nameof(localizerFactory));

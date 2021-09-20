@@ -11,11 +11,8 @@ namespace System.IO.Pipes
         //
         // Constructor for creating access rules for pipe objects
         //
-        public PipeAccessRule(
-            string identity,
-            PipeAccessRights rights,
-            AccessControlType type
-        ) : this(new NTAccount(identity), AccessMaskFromRights(rights, type), false, type) { }
+        public PipeAccessRule(string identity, PipeAccessRights rights, AccessControlType type)
+            : this(new NTAccount(identity), AccessMaskFromRights(rights, type), false, type) { }
 
         public PipeAccessRule(
             IdentityReference identity,
@@ -32,14 +29,15 @@ namespace System.IO.Pipes
             int accessMask,
             bool isInherited,
             AccessControlType type
-        ) : base(
-            identity,
-            accessMask,
-            isInherited,
-            InheritanceFlags.None,
-            PropagationFlags.None,
-            type
-        ) { }
+        )
+            : base(
+                identity,
+                accessMask,
+                isInherited,
+                InheritanceFlags.None,
+                PropagationFlags.None,
+                type
+            ) { }
 
         public PipeAccessRights PipeAccessRights
         {
@@ -54,7 +52,8 @@ namespace System.IO.Pipes
         internal static int AccessMaskFromRights(
             PipeAccessRights rights,
             AccessControlType controlType
-        ) {
+        )
+        {
             if (
                 rights < (PipeAccessRights)0
                 || rights > (PipeAccessRights.FullControl | PipeAccessRights.AccessSystemSecurity)

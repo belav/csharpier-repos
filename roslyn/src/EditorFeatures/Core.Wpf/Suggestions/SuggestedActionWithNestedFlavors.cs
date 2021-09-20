@@ -57,7 +57,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
 
         public sealed override async Task<IEnumerable<SuggestedActionSet>> GetActionSetsAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             // Light bulb will always invoke this property on the UI thread.
@@ -82,7 +83,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
 
         private async Task<ImmutableArray<SuggestedActionSet>> CreateAllFlavorsAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var builder = ArrayBuilder<SuggestedActionSet>.GetInstance();
 
             // We use ConfigureAwait(true) to stay on the UI thread.
@@ -105,7 +107,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
 
         private async Task<SuggestedActionSet> GetPreviewChangesFlavorAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // We use ConfigureAwait(true) to stay on the UI thread.
             var previewChangesAction = await PreviewChangesSuggestedAction.CreateAsync(
                     this,

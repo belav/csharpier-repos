@@ -76,7 +76,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
 
             private async Task<RenameTrackingSolutionSet> RenameSymbolWorkerAsync(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var document = _snapshotSpan.Snapshot.GetOpenDocumentInCurrentContextWithChanges();
                 var newName = _snapshotSpan.GetText();
 
@@ -187,7 +188,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                         newName,
                         throwOnFailure: false
                     )
-                ) {
+                )
+                {
                     var notificationService = workspace.Services.GetService<INotificationService>();
                     notificationService.SendNotification(
                         EditorFeaturesResources.Rename_operation_was_cancelled_or_is_not_valid,
@@ -228,7 +230,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
             private Solution CreateSolutionWithOriginalName(
                 Document document,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var syntaxTree = document.GetSyntaxTreeSynchronously(cancellationToken);
                 var fullText = syntaxTree.GetText(cancellationToken);
                 var textChange = new TextChange(
@@ -264,7 +267,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                 Solution solutionWithOriginalName,
                 DocumentId documentId,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var documentWithOriginalName = solutionWithOriginalName.GetDocument(documentId);
                 var syntaxTreeWithOriginalName = await documentWithOriginalName.GetSyntaxTreeAsync(
                         cancellationToken
@@ -300,7 +304,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                 Workspace workspace,
                 Solution newSolution,
                 int trackingSessionId
-            ) {
+            )
+            {
                 AssertIsForeground();
 
                 // Update document in an ITextUndoTransaction with custom behaviors on undo/redo to
@@ -342,7 +347,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                 ISymbol symbol,
                 string newName,
                 int trackingSessionId
-            ) {
+            )
+            {
                 AssertIsForeground();
 
                 // Perform rename in a workspace undo action so that undo will revert all
@@ -373,7 +379,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                         newName,
                         throwOnFailure: false
                     )
-                ) {
+                )
+                {
                     var notificationService = workspace.Services.GetService<INotificationService>();
                     notificationService.SendNotification(
                         EditorFeaturesResources.Rename_operation_was_not_properly_completed_Some_file_might_not_have_been_updated,

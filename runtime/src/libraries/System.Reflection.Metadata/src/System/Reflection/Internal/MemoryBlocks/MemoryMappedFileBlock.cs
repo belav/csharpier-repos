@@ -67,7 +67,8 @@ namespace System.Reflection.Internal
             SafeBuffer safeBuffer,
             long offset,
             int size
-        ) {
+        )
+        {
             _data = new DisposableData(accessor, safeBuffer, offset);
             _size = size;
         }

@@ -123,11 +123,8 @@ namespace System.DirectoryServices
         /// Initializes a new instance of the <see cref='System.DirectoryServices.DirectorySearcher'/> class with <see cref='System.DirectoryServices.DirectorySearcher.SearchRoot'/> set to its default
         /// value, and <see cref='System.DirectoryServices.DirectorySearcher.Filter'/>, <see cref='System.DirectoryServices.DirectorySearcher.PropertiesToLoad'/>, and <see cref='System.DirectoryServices.DirectorySearcher.SearchScope'/> set to the respective given values.
         /// </devdoc>
-        public DirectorySearcher(
-            string? filter,
-            string[]? propertiesToLoad,
-            SearchScope scope
-        ) : this(null, filter, propertiesToLoad, scope) { }
+        public DirectorySearcher(string? filter, string[]? propertiesToLoad, SearchScope scope)
+            : this(null, filter, propertiesToLoad, scope) { }
 
         /// <devdoc>
         /// Initializes a new instance of the <see cref='System.DirectoryServices.DirectorySearcher'/> class with the <see cref='System.DirectoryServices.DirectorySearcher.SearchRoot'/>, <see cref='System.DirectoryServices.DirectorySearcher.Filter'/>, <see cref='System.DirectoryServices.DirectorySearcher.PropertiesToLoad'/>, and <see cref='System.DirectoryServices.DirectorySearcher.SearchScope'/> properties set to the given
@@ -138,7 +135,8 @@ namespace System.DirectoryServices
             string? filter,
             string[]? propertiesToLoad,
             SearchScope scope
-        ) {
+        )
+        {
             _searchRoot = searchRoot;
             _filter = filter;
             if (propertiesToLoad != null)
@@ -732,7 +730,8 @@ namespace System.DirectoryServices
         private unsafe void SetSearchPreferences(
             UnsafeNativeMethods.IDirectorySearch adsSearch,
             bool findMoreThanOne
-        ) {
+        )
+        {
             ArrayList prefList = new ArrayList();
             AdsSearchPreferenceInfo info;
 
@@ -997,7 +996,8 @@ namespace System.DirectoryServices
         private static void DoSetSearchPrefs(
             UnsafeNativeMethods.IDirectorySearch adsSearch,
             AdsSearchPreferenceInfo[] prefs
-        ) {
+        )
+        {
             int structSize = Marshal.SizeOf(typeof(AdsSearchPreferenceInfo));
             IntPtr ptr = Marshal.AllocHGlobal((IntPtr)(structSize * prefs.Length));
             try

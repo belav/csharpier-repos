@@ -67,7 +67,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
             HttpContext context,
             HttpConnectionDispatcherOptions options,
             ConnectionDelegate connectionDelegate
-        ) {
+        )
+        {
             // Create the log scope and attempt to pass the Connection ID to it so as many logs as possible contain
             // the Connection ID metadata. If this is the negotiate request then the Connection ID for the scope will
             // be set a little later.
@@ -108,7 +109,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
         public async Task ExecuteNegotiateAsync(
             HttpContext context,
             HttpConnectionDispatcherOptions options
-        ) {
+        )
+        {
             // Create the log scope and the scope connectionId param will be set when the connection is created.
             var logScope = new ConnectionLogScope(connectionId: string.Empty);
             using (_logger.BeginScope(logScope))
@@ -131,7 +133,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
             ConnectionDelegate connectionDelegate,
             HttpConnectionDispatcherOptions options,
             ConnectionLogScope logScope
-        ) {
+        )
+        {
             var supportedTransports = options.Transports;
 
             // Server sent events transport
@@ -142,7 +145,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
                 headers.Accept?.Contains(
                     new Net.Http.Headers.MediaTypeHeaderValue("text/event-stream")
                 ) == true
-            ) {
+            )
+            {
                 // Connection must already exist
                 var connection = await GetConnectionAsync(context);
                 if (connection == null)
@@ -160,7 +164,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
                         logScope,
                         options
                     )
-                ) {
+                )
+                {
                     // Bad connection state. It's already set the response status code.
                     return;
                 }
@@ -199,7 +204,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
                         logScope,
                         options
                     )
-                ) {
+                )
+                {
                     // Bad connection state. It's already set the response status code.
                     return;
                 }
@@ -239,7 +245,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
                         logScope,
                         options
                     )
-                ) {
+                )
+                {
                     // Bad connection state. It's already set the response status code.
                     return;
                 }
@@ -264,7 +271,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
                         _loggerFactory,
                         _logger
                     )
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -334,7 +342,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
             IHttpTransport transport,
             HttpContext context,
             HttpConnectionContext connection
-        ) {
+        )
+        {
             if (
                 connection.TryActivatePersistentConnection(
                     connectionDelegate,
@@ -342,7 +351,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
                     context,
                     _logger
                 )
-            ) {
+            )
+            {
                 // Wait for any of them to end
                 await Task.WhenAny(connection.ApplicationTask!, connection.TransportTask!);
 
@@ -354,7 +364,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
             HttpContext context,
             HttpConnectionDispatcherOptions options,
             ConnectionLogScope logScope
-        ) {
+        )
+        {
             context.Response.ContentType = "application/json";
             string? error = null;
             int clientProtocolVersion = 0;
@@ -435,7 +446,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
             HttpConnectionDispatcherOptions options,
             int clientProtocolVersion,
             string? error
-        ) {
+        )
+        {
             var response = new NegotiationResponse();
 
             if (!string.IsNullOrEmpty(error))
@@ -453,7 +465,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
             if (
                 (options.Transports & HttpTransportType.WebSockets) != 0
                 && ServerHasWebSockets(context.Features)
-            ) {
+            )
+            {
                 response.AvailableTransports.Add(_webSocketAvailableTransport);
             }
 
@@ -622,7 +635,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
             HttpTransportType supportedTransports,
             ConnectionLogScope logScope,
             HttpConnectionDispatcherOptions options
-        ) {
+        )
+        {
             if ((supportedTransports & transportType) == 0)
             {
                 context.Response.ContentType = "text/plain";
@@ -827,7 +841,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
         private async Task<HttpConnectionContext?> GetOrCreateConnectionAsync(
             HttpContext context,
             HttpConnectionDispatcherOptions options
-        ) {
+        )
+        {
             var connectionToken = GetConnectionToken(context);
             HttpConnectionContext? connection;
 
@@ -850,7 +865,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
         private HttpConnectionContext CreateConnection(
             HttpConnectionDispatcherOptions options,
             int clientProtocolVersion = 0
-        ) {
+        )
+        {
             var transportPipeOptions = options.TransportPipeOptions;
             var appPipeOptions = options.AppPipeOptions;
 

@@ -19,7 +19,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             Solution solution,
             IGraphContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var graphBuilder = await GraphBuilder.CreateForInputNodesAsync(
                     solution,
                     context.InputNodes,

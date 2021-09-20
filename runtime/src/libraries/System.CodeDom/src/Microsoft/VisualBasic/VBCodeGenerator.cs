@@ -372,7 +372,8 @@ namespace Microsoft.VisualBasic
                         char.IsHighSurrogate(value[i])
                         && (i < value.Length - 1)
                         && char.IsLowSurrogate(value[i + 1])
-                    ) {
+                    )
+                    {
                         b.Append(value[++i]);
                     }
 
@@ -435,7 +436,8 @@ namespace Microsoft.VisualBasic
             bool inLine,
             string prefix,
             bool closingLine
-        ) {
+        )
+        {
             if (attributes.Count == 0)
                 return;
             bool firstAttr = true;
@@ -680,13 +682,15 @@ namespace Microsoft.VisualBasic
             if (
                 e.Right is CodePrimitiveExpression
                 && ((CodePrimitiveExpression)e.Right).Value == null
-            ) {
+            )
+            {
                 GenerateNotIsNullExpression(e.Left);
                 return;
             }
             if (
                 e.Left is CodePrimitiveExpression && ((CodePrimitiveExpression)e.Left).Value == null
-            ) {
+            )
+            {
                 GenerateNotIsNullExpression(e.Right);
                 return;
             }
@@ -1037,13 +1041,15 @@ namespace Microsoft.VisualBasic
 
         protected override void GenerateArgumentReferenceExpression(
             CodeArgumentReferenceExpression e
-        ) {
+        )
+        {
             OutputIdentifier(e.ParameterName);
         }
 
         protected override void GenerateVariableReferenceExpression(
             CodeVariableReferenceExpression e
-        ) {
+        )
+        {
             OutputIdentifier(e.VariableName);
         }
 
@@ -1204,7 +1210,8 @@ namespace Microsoft.VisualBasic
 
         protected override void GenerateParameterDeclarationExpression(
             CodeParameterDeclarationExpression e
-        ) {
+        )
+        {
             if (e.CustomAttributes.Count > 0)
             {
                 OutputAttributes(e.CustomAttributes, true);
@@ -1215,7 +1222,8 @@ namespace Microsoft.VisualBasic
 
         protected override void GeneratePropertySetValueReferenceExpression(
             CodePropertySetValueReferenceExpression e
-        ) {
+        )
+        {
             Output.Write("value");
         }
 
@@ -1404,7 +1412,8 @@ namespace Microsoft.VisualBasic
 
         protected override void GenerateVariableDeclarationStatement(
             CodeVariableDeclarationStatement e
-        ) {
+        )
+        {
             bool doInit = true;
 
             Output.Write("Dim ");
@@ -1588,7 +1597,8 @@ namespace Microsoft.VisualBasic
                     && meth != e
                     && meth.Name.Equals(e.Name, StringComparison.OrdinalIgnoreCase)
                     && meth.PrivateImplementationType == null
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -1648,7 +1658,8 @@ namespace Microsoft.VisualBasic
                     typeof(void).FullName,
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 sub = true;
             }
 
@@ -1709,7 +1720,8 @@ namespace Microsoft.VisualBasic
             if (
                 !IsCurrentInterface
                 && (e.Attributes & MemberAttributes.ScopeMask) != MemberAttributes.Abstract
-            ) {
+            )
+            {
                 Indent++;
 
                 GenerateVBStatements(e.Statements);
@@ -1731,7 +1743,8 @@ namespace Microsoft.VisualBasic
         protected override void GenerateEntryPointMethod(
             CodeEntryPointMethod e,
             CodeTypeDeclaration c
-        ) {
+        )
+        {
             if (e.CustomAttributes.Count > 0)
             {
                 OutputAttributes(e.CustomAttributes, false);
@@ -1761,7 +1774,8 @@ namespace Microsoft.VisualBasic
                     prop != e
                     && prop.Name.Equals(e.Name, StringComparison.OrdinalIgnoreCase)
                     && prop.PrivateImplementationType == null
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -1810,7 +1824,8 @@ namespace Microsoft.VisualBasic
             if (
                 e.Parameters.Count > 0
                 && string.Equals(e.Name, "Item", StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 Output.Write("Default ");
             }
             if (e.HasGet)
@@ -1868,7 +1883,8 @@ namespace Microsoft.VisualBasic
             if (
                 !c.IsInterface
                 && (e.Attributes & MemberAttributes.ScopeMask) != MemberAttributes.Abstract
-            ) {
+            )
+            {
                 Indent++;
 
                 if (e.HasGet)
@@ -1905,7 +1921,8 @@ namespace Microsoft.VisualBasic
 
         protected override void GeneratePropertyReferenceExpression(
             CodePropertyReferenceExpression e
-        ) {
+        )
+        {
             if (e.TargetObject != null)
             {
                 GenerateExpression(e.TargetObject);
@@ -2028,7 +2045,8 @@ namespace Microsoft.VisualBasic
                         "System.Void",
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     Output.Write(" As ");
                     OutputType(del.ReturnType);
                     OutputArrayPostfix(del.ReturnType);
@@ -2424,13 +2442,15 @@ namespace Microsoft.VisualBasic
 
         protected override void GenerateAttributeDeclarationsStart(
             CodeAttributeDeclarationCollection attributes
-        ) {
+        )
+        {
             Output.Write('<');
         }
 
         protected override void GenerateAttributeDeclarationsEnd(
             CodeAttributeDeclarationCollection attributes
-        ) {
+        )
+        {
             Output.Write('>');
         }
 
@@ -2633,7 +2653,8 @@ namespace Microsoft.VisualBasic
             int start,
             int length,
             StringBuilder sb
-        ) {
+        )
+        {
             sb.Append("(Of ");
             bool first = true;
             for (int i = start; i < start + length; i++)

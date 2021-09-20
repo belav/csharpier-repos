@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             int indentationSize,
             TokenStream? tokenStream,
             ISyntaxFacts syntaxFacts
-        ) {
+        )
+        {
             Contract.ThrowIfNull(formattingRules);
 
             _formattingRules = formattingRules;
@@ -45,7 +46,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             SyntaxToken token,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // we use operation service to see whether it is a starting point of new indentation.
             // ex)
             //  if (true)
@@ -63,7 +65,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                     token.Span.End <= operation.TextSpan.Start
                     && operation.TextSpan.IntersectsWith(position)
                     && position <= token.GetNextToken(includeZeroWidth: true).SpanStart
-                ) {
+                )
+                {
                     return GetIndentationOfCurrentPosition(
                         tree,
                         token,
@@ -99,7 +102,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             SyntaxToken token,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return GetIndentationOfCurrentPosition(
                 tree,
                 token,
@@ -115,7 +119,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             int position,
             int extraSpaces,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // gather all indent operations
             var list = GetParentIndentBlockOperations(token);
 
@@ -134,7 +139,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             IndentBlockOperation startingOperation,
             Func<SyntaxToken, int> tokenColumnGetter,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var token = startingOperation.StartToken;
 
             // gather all indent operations
@@ -146,7 +152,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 if (
                     CommonFormattingHelpers.IndentBlockOperationComparer(startingOperation, list[i])
                     < 0
-                ) {
+                )
+                {
                     list.RemoveAt(i);
                 }
                 else
@@ -172,7 +179,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             int extraSpaces,
             Func<SyntaxToken, int> tokenColumnGetter,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var tuple = GetIndentationRuleOfCurrentPosition(root, list, position);
             var indentationLevel = tuple.indentation;
             var operation = tuple.operation;
@@ -220,7 +228,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             SyntaxNode root,
             List<IndentBlockOperation> list,
             int position
-        ) {
+        )
+        {
             var indentationLevel = 0;
             var operations = GetIndentBlockOperationsFromSmallestSpan(root, list, position);
             foreach (var operation in operations)
@@ -319,7 +328,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             SyntaxNode root,
             SyntaxToken token,
             int position
-        ) {
+        )
+        {
             var startNode = token.Parent;
 
             // starting from given token, move up to the root until it finds the first set of appropriate operations
@@ -355,7 +365,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             SyntaxNode root,
             List<IndentBlockOperation> list,
             int position
-        ) {
+        )
+        {
             var lastVisibleToken = default(SyntaxToken);
             var map = new HashSet<TextSpan>();
 

@@ -152,7 +152,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             MethodSymbol pParent,
             int index,
             int indexTotal
-        ) {
+        )
+        {
             TypeParameterSymbol pResult = (TypeParameterSymbol)NewBasicSymbol(
                 SYMKIND.SK_TypeParameterSymbol,
                 pName,
@@ -172,7 +173,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             AggregateSymbol pParent,
             int index,
             int indexTotal
-        ) {
+        )
+        {
             TypeParameterSymbol pResult = (TypeParameterSymbol)NewBasicSymbol(
                 SYMKIND.SK_TypeParameterSymbol,
                 pName,

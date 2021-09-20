@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             int ordinal,
             bool isReachable,
             ControlFlowRegion region
-        ) {
+        )
+        {
             Kind = kind;
             Operations = operations;
             BranchValue = branchValue;
@@ -134,7 +135,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         internal void SetSuccessors(
             ControlFlowBranch? successor,
             ControlFlowBranch? conditionalSuccessor
-        ) {
+        )
+        {
 #if DEBUG
             Debug.Assert(!_successorsAreSealed);
             Debug.Assert(_lazySuccessor == null);

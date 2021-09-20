@@ -319,7 +319,8 @@ namespace System.Collections.Immutable
         /// </summary>
         public ImmutableDictionary<TKey, TValue> AddRange(
             IEnumerable<KeyValuePair<TKey, TValue>> pairs
-        ) {
+        )
+        {
             Requires.NotNull(pairs, nameof(pairs));
 
             return this.AddRange(pairs, false);
@@ -343,7 +344,8 @@ namespace System.Collections.Immutable
         /// <returns>An immutable dictionary.</returns>
         public ImmutableDictionary<TKey, TValue> SetItems(
             IEnumerable<KeyValuePair<TKey, TValue>> items
-        ) {
+        )
+        {
             Requires.NotNull(items, nameof(items));
 
             var result = AddRange(items, this.Origin, KeyCollisionBehavior.SetValue);
@@ -443,7 +445,8 @@ namespace System.Collections.Immutable
         public ImmutableDictionary<TKey, TValue> WithComparers(
             IEqualityComparer<TKey>? keyComparer,
             IEqualityComparer<TValue>? valueComparer
-        ) {
+        )
+        {
             if (keyComparer == null)
             {
                 keyComparer = EqualityComparer<TKey>.Default;
@@ -531,7 +534,8 @@ namespace System.Collections.Immutable
         IImmutableDictionary<TKey, TValue> IImmutableDictionary<TKey, TValue>.Add(
             TKey key,
             TValue value
-        ) {
+        )
+        {
             return this.Add(key, value);
         }
 
@@ -541,7 +545,8 @@ namespace System.Collections.Immutable
         IImmutableDictionary<TKey, TValue> IImmutableDictionary<TKey, TValue>.SetItem(
             TKey key,
             TValue value
-        ) {
+        )
+        {
             return this.SetItem(key, value);
         }
 
@@ -552,7 +557,8 @@ namespace System.Collections.Immutable
         /// <returns>An immutable dictionary.</returns>
         IImmutableDictionary<TKey, TValue> IImmutableDictionary<TKey, TValue>.SetItems(
             IEnumerable<KeyValuePair<TKey, TValue>> items
-        ) {
+        )
+        {
             return this.SetItems(items);
         }
 
@@ -561,7 +567,8 @@ namespace System.Collections.Immutable
         /// </summary>
         IImmutableDictionary<TKey, TValue> IImmutableDictionary<TKey, TValue>.AddRange(
             IEnumerable<KeyValuePair<TKey, TValue>> pairs
-        ) {
+        )
+        {
             return this.AddRange(pairs);
         }
 
@@ -570,7 +577,8 @@ namespace System.Collections.Immutable
         /// </summary>
         IImmutableDictionary<TKey, TValue> IImmutableDictionary<TKey, TValue>.RemoveRange(
             IEnumerable<TKey> keys
-        ) {
+        )
+        {
             return this.RemoveRange(keys);
         }
 
@@ -643,7 +651,8 @@ namespace System.Collections.Immutable
         void ICollection<KeyValuePair<TKey, TValue>>.CopyTo(
             KeyValuePair<TKey, TValue>[] array,
             int arrayIndex
-        ) {
+        )
+        {
             Requires.NotNull(array, nameof(array));
             Requires.Range(arrayIndex >= 0, nameof(arrayIndex));
             Requires.Range(array.Length >= arrayIndex + this.Count, nameof(arrayIndex));
@@ -882,7 +891,8 @@ namespace System.Collections.Immutable
         private static bool TryCastToImmutableMap(
             IEnumerable<KeyValuePair<TKey, TValue>> sequence,
             [NotNullWhen(true)] out ImmutableDictionary<TKey, TValue>? other
-        ) {
+        )
+        {
             other = sequence as ImmutableDictionary<TKey, TValue>;
             if (other != null)
             {
@@ -940,7 +950,8 @@ namespace System.Collections.Immutable
             TKey key,
             MutationInput origin,
             [MaybeNullWhen(false)] out TValue value
-        ) {
+        )
+        {
             int hashCode = origin.KeyComparer.GetHashCode(key);
             HashBucket bucket;
             if (origin.Root.TryGetValue(hashCode, out bucket))
@@ -976,7 +987,8 @@ namespace System.Collections.Immutable
             TValue value,
             KeyCollisionBehavior behavior,
             MutationInput origin
-        ) {
+        )
+        {
             Requires.NotNullAllowStructs(key, nameof(key));
 
             OperationResult result;
@@ -1006,7 +1018,8 @@ namespace System.Collections.Immutable
             IEnumerable<KeyValuePair<TKey, TValue>> items,
             MutationInput origin,
             KeyCollisionBehavior collisionBehavior = KeyCollisionBehavior.ThrowIfValueDifferent
-        ) {
+        )
+        {
             Requires.NotNull(items, nameof(items));
 
             int countAdjustment = 0;
@@ -1064,7 +1077,8 @@ namespace System.Collections.Immutable
             int hashCode,
             HashBucket newBucket,
             IEqualityComparer<HashBucket> hashBucketComparer
-        ) {
+        )
+        {
             bool mutated;
             if (newBucket.IsEmpty)
             {
@@ -1098,7 +1112,8 @@ namespace System.Collections.Immutable
             SortedInt32KeyNode<HashBucket> root,
             Comparers comparers,
             int count
-        ) {
+        )
+        {
             Requires.NotNull(root, nameof(root));
             Requires.NotNull(comparers, nameof(comparers));
             Requires.Range(count >= 0, nameof(count));
@@ -1114,7 +1129,8 @@ namespace System.Collections.Immutable
         private ImmutableDictionary<TKey, TValue> Wrap(
             SortedInt32KeyNode<HashBucket>? root,
             int adjustedCountIfDifferentRoot
-        ) {
+        )
+        {
             if (root == null)
             {
                 return this.Clear();
@@ -1142,7 +1158,8 @@ namespace System.Collections.Immutable
         private ImmutableDictionary<TKey, TValue> AddRange(
             IEnumerable<KeyValuePair<TKey, TValue>> pairs,
             bool avoidToHashMap
-        ) {
+        )
+        {
             Requires.NotNull(pairs, nameof(pairs));
 
             // Some optimizations may apply if we're an empty list.

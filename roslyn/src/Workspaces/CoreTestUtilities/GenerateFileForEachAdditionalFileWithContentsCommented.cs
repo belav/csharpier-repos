@@ -28,7 +28,8 @@ namespace Roslyn.Test.Utilities
         private static void AddSourceForAdditionalFile(
             GeneratorExecutionContext context,
             AdditionalText file
-        ) {
+        )
+        {
             // We're going to "comment" out the contents of the file when generating this
             var sourceText = file.GetText(context.CancellationToken);
             Contract.ThrowIfNull(sourceText, "Failed to fetch the text of an additional file.");

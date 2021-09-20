@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.HeaderPropagation
         public HeaderPropagationMessageHandlerEntry(
             string capturedHeaderName,
             string outboundHeaderName
-        ) {
+        )
+        {
             if (capturedHeaderName == null)
             {
                 throw new ArgumentNullException(nameof(capturedHeaderName));

@@ -235,7 +235,8 @@ namespace System.Windows.Forms
         /// <param name="logicalBitmap">The image to scale from logical units to device units</param>
         public static void ScaleBitmapLogicalToDevice(
             [NotNullIfNotNull("logicalBitmap")] ref Bitmap? logicalBitmap
-        ) {
+        )
+        {
             if (logicalBitmap == null)
             {
                 return;

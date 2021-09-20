@@ -37,7 +37,8 @@ namespace Microsoft.AspNetCore.Http
         public static ValueTask<TValue?> ReadFromJsonAsync<TValue>(
             this HttpRequest request,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return request.ReadFromJsonAsync<TValue>(options: null, cancellationToken);
         }
 
@@ -59,7 +60,8 @@ namespace Microsoft.AspNetCore.Http
             this HttpRequest request,
             JsonSerializerOptions? options,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (request == null)
             {
                 throw new ArgumentNullException(nameof(request));
@@ -113,7 +115,8 @@ namespace Microsoft.AspNetCore.Http
             this HttpRequest request,
             Type type,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return request.ReadFromJsonAsync(type, options: null, cancellationToken);
         }
 
@@ -136,7 +139,8 @@ namespace Microsoft.AspNetCore.Http
             Type type,
             JsonSerializerOptions? options,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (request == null)
             {
                 throw new ArgumentNullException(nameof(request));
@@ -206,7 +210,8 @@ namespace Microsoft.AspNetCore.Http
                     JsonConstants.JsonContentType,
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 charset = mt.Charset;
                 return true;
             }
@@ -240,7 +245,8 @@ namespace Microsoft.AspNetCore.Http
         private static (Stream inputStream, bool usesTranscodingStream) GetInputStream(
             HttpContext httpContext,
             Encoding? encoding
-        ) {
+        )
+        {
             if (encoding == null || encoding.CodePage == Encoding.UTF8.CodePage)
             {
                 return (httpContext.Request.Body, false);

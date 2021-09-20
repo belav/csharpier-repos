@@ -98,7 +98,8 @@ namespace System
             byte* pbNativeBuffer,
             int cbNativeBuffer,
             Encoding encoding
-        ) {
+        )
+        {
             // encoding == Encoding.UTF8
             fixed (char* pwzChar = &_firstChar)
             {

@@ -31,7 +31,8 @@ namespace Microsoft.AspNetCore.Testing
             TState state,
             Exception exception,
             Func<TState, Exception, string> formatter
-        ) {
+        )
+        {
             _trace1.Log(logLevel, eventId, state, exception, formatter);
             _trace2.Log(logLevel, eventId, state, exception, formatter);
         }
@@ -115,7 +116,8 @@ namespace Microsoft.AspNetCore.Testing
         public void ConnectionBadRequest(
             string connectionId,
             Microsoft.AspNetCore.Http.BadHttpRequestException ex
-        ) {
+        )
+        {
             _trace1.ConnectionBadRequest(connectionId, ex);
             _trace2.ConnectionBadRequest(connectionId, ex);
         }
@@ -172,7 +174,8 @@ namespace Microsoft.AspNetCore.Testing
             string connectionId,
             string traceIdentifier,
             double rate
-        ) {
+        )
+        {
             _trace1.RequestBodyMinimumDataRateNotSatisfied(connectionId, traceIdentifier, rate);
             _trace2.RequestBodyMinimumDataRateNotSatisfied(connectionId, traceIdentifier, rate);
         }
@@ -217,7 +220,8 @@ namespace Microsoft.AspNetCore.Testing
             string traceIdentifier,
             Http2ErrorCode error,
             ConnectionAbortedException abortReason
-        ) {
+        )
+        {
             _trace1.Http2StreamResetAbort(traceIdentifier, error, abortReason);
             _trace2.Http2StreamResetAbort(traceIdentifier, error, abortReason);
         }
@@ -280,7 +284,8 @@ namespace Microsoft.AspNetCore.Testing
             string traceIdentifier,
             Http3ErrorCode error,
             ConnectionAbortedException abortReason
-        ) {
+        )
+        {
             _trace1.Http3StreamAbort(traceIdentifier, error, abortReason);
             _trace2.Http3StreamAbort(traceIdentifier, error, abortReason);
         }

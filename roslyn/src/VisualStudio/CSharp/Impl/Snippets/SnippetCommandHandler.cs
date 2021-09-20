@@ -61,13 +61,15 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
             SVsServiceProvider serviceProvider,
             [ImportMany]
                 IEnumerable<Lazy<ArgumentProvider, OrderableLanguageMetadata>> argumentProviders
-        ) : base(
-            threadingContext,
-            signatureHelpControllerProvider,
-            editorCommandHandlerServiceFactory,
-            editorAdaptersFactoryService,
-            serviceProvider
-        ) {
+        )
+            : base(
+                threadingContext,
+                signatureHelpControllerProvider,
+                editorCommandHandlerServiceFactory,
+                editorAdaptersFactoryService,
+                serviceProvider
+            )
+        {
             _argumentProviders = argumentProviders.ToImmutableArray();
         }
 
@@ -108,7 +110,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
         public CommandState GetCommandState(
             TypeCharCommandArgs args,
             Func<CommandState> nextCommandHandler
-        ) {
+        )
+        {
             return nextCommandHandler();
         }
 
@@ -116,7 +119,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
             TypeCharCommandArgs args,
             Action nextCommandHandler,
             CommandExecutionContext executionContext
-        ) {
+        )
+        {
             AssertIsForeground();
             if (
                 args.TypedChar == ';'
@@ -126,7 +130,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
                     out AbstractSnippetExpansionClient snippetExpansionClient
                 )
                 && snippetExpansionClient.IsFullMethodCallSnippet
-            ) {
+            )
+            {
                 // Commit the snippet. Leave the caret in place, but clear the selection. Subsequent handlers in the
                 // chain will handle the remaining Complete Statement (';' insertion) operations only if there is no
                 // active selection.
@@ -140,13 +145,15 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
         protected override AbstractSnippetExpansionClient GetSnippetExpansionClient(
             ITextView textView,
             ITextBuffer subjectBuffer
-        ) {
+        )
+        {
             if (
                 !textView.Properties.TryGetProperty(
                     typeof(AbstractSnippetExpansionClient),
                     out AbstractSnippetExpansionClient expansionClient
                 )
-            ) {
+            )
+            {
                 expansionClient = new SnippetExpansionClient(
                     ThreadingContext,
                     Guids.CSharpLanguageServiceId,
@@ -170,7 +177,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
             ITextView textView,
             ITextBuffer subjectBuffer,
             bool surroundWith = false
-        ) {
+        )
+        {
             if (!TryGetExpansionManager(out var expansionManager))
             {
                 return false;
@@ -201,7 +209,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
             Document document,
             int startPosition,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxTree = document.GetSyntaxTreeSynchronously(cancellationToken);
 
             return !syntaxTree.IsEntirelyWithinStringOrCharLiteral(startPosition, cancellationToken)

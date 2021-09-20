@@ -21,7 +21,8 @@ namespace Microsoft.Extensions.Logging.Testing
             string key,
             object value,
             IEnumerable<KeyValuePair<string, object>> actualValues
-        ) {
+        )
+        {
             Contains(new[] { new KeyValuePair<string, object>(key, value) }, actualValues);
         }
 
@@ -34,7 +35,8 @@ namespace Microsoft.Extensions.Logging.Testing
         public static void Contains(
             IEnumerable<KeyValuePair<string, object>> expectedValues,
             IEnumerable<KeyValuePair<string, object>> actualValues
-        ) {
+        )
+        {
             if (expectedValues == null)
             {
                 throw new ArgumentNullException(nameof(expectedValues));

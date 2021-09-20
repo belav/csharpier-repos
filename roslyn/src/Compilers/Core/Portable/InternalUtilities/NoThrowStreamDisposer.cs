@@ -43,7 +43,8 @@ namespace Roslyn.Utilities
             string filePath,
             DiagnosticBag diagnostics,
             CommonMessageProvider messageProvider
-        ) {
+        )
+        {
             Stream = stream;
             _failed = null;
             _filePath = filePath;

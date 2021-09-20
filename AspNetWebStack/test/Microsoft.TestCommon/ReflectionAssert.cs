@@ -17,7 +17,8 @@ namespace Microsoft.TestCommon
             }
             else if (
                 property.Body is UnaryExpression && property.Body.NodeType == ExpressionType.Convert
-            ) {
+            )
+            {
                 return (PropertyInfo)(
                     (MemberExpression)((UnaryExpression)property.Body).Operand
                 ).Member;
@@ -36,7 +37,8 @@ namespace Microsoft.TestCommon
             Action<TInstance, TValue> setFunc,
             TValue valueToSet,
             TValue valueToCheck
-        ) {
+        )
+        {
             setFunc(instance, valueToSet);
             TValue newValue = getFunc(instance);
             Assert.Equal(valueToCheck, newValue);
@@ -47,7 +49,8 @@ namespace Microsoft.TestCommon
             Func<TInstance, TValue> getFunc,
             Action<TInstance, TValue> setFunc,
             TValue value
-        ) {
+        )
+        {
             TestPropertyValue(instance, getFunc, setFunc, value, value);
         }
 
@@ -205,7 +208,8 @@ namespace Microsoft.TestCommon
             T instance,
             Expression<Func<T, bool>> propertyGetter,
             bool expectedDefaultValue
-        ) {
+        )
+        {
             PropertyInfo property = GetPropertyInfo(propertyGetter);
             Func<T, bool> getFunc = (obj) => (bool)property.GetValue(obj, index: null);
             Action<T, bool> setFunc = (obj, value) => property.SetValue(obj, value, index: null);
@@ -264,7 +268,8 @@ namespace Microsoft.TestCommon
             string expectedDefaultValue,
             bool allowNullAndEmpty = true,
             bool treatNullAsEmpty = true
-        ) {
+        )
+        {
             PropertyInfo property = GetPropertyInfo(propertyGetter);
             Func<T, string> getFunc = (obj) => (string)property.GetValue(obj, index: null);
             Action<T, string> setFunc = (obj, value) => property.SetValue(obj, value, index: null);

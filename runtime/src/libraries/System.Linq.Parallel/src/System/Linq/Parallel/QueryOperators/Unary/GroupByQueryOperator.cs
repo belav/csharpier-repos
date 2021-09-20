@@ -73,7 +73,8 @@ namespace System.Linq.Parallel
             IPartitionedStreamRecipient<IGrouping<TGroupKey, TElement>> recipient,
             bool preferStriping,
             QuerySettings settings
-        ) {
+        )
+        {
             // Hash-repartition the source stream
             if (Child.OutputOrdered)
             {
@@ -114,7 +115,8 @@ namespace System.Linq.Parallel
             PartitionedStream<Pair<TSource, TGroupKey>, TKey> hashStream,
             IPartitionedStreamRecipient<IGrouping<TGroupKey, TElement>> recipient,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             int partitionCount = hashStream.PartitionCount;
             PartitionedStream<IGrouping<TGroupKey, TElement>, TKey> outputStream =
                 new PartitionedStream<IGrouping<TGroupKey, TElement>, TKey>(
@@ -167,7 +169,8 @@ namespace System.Linq.Parallel
             PartitionedStream<Pair<TSource, TGroupKey>, TKey> hashStream,
             IPartitionedStreamRecipient<IGrouping<TGroupKey, TElement>> recipient,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             int partitionCount = hashStream.PartitionCount;
             PartitionedStream<IGrouping<TGroupKey, TElement>, TKey> outputStream =
                 new PartitionedStream<IGrouping<TGroupKey, TElement>, TKey>(
@@ -225,7 +228,8 @@ namespace System.Linq.Parallel
         internal override QueryResults<IGrouping<TGroupKey, TElement>> Open(
             QuerySettings settings,
             bool preferStriping
-        ) {
+        )
+        {
             // We just open our child operator. Do not propagate the preferStriping value, but instead explicitly
             // set it to false. Regardless of whether the parent prefers striping or range partitioning, the output
             // will be hash-partitioned.
@@ -238,7 +242,8 @@ namespace System.Linq.Parallel
         //
         internal override IEnumerable<IGrouping<TGroupKey, TElement>> AsSequentialQuery(
             CancellationToken token
-        ) {
+        )
+        {
             IEnumerable<TSource> wrappedChild = CancellableEnumerable.Wrap(
                 Child.AsSequentialQuery(token),
                 token
@@ -297,7 +302,8 @@ namespace System.Linq.Parallel
             QueryOperatorEnumerator<Pair<TSource, TGroupKey>, TOrderKey> source,
             IEqualityComparer<TGroupKey>? keyComparer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(source != null);
 
             _source = source;
@@ -314,7 +320,8 @@ namespace System.Linq.Parallel
         internal override bool MoveNext(
             [MaybeNullWhen(false), AllowNull] ref IGrouping<TGroupKey, TElement> currentElement,
             [AllowNull] ref TOrderKey currentKey
-        ) {
+        )
+        {
             Debug.Assert(_source != null);
 
             // Lazy-init the mutable state. This also means we haven't yet built our lookup of
@@ -518,7 +525,8 @@ namespace System.Linq.Parallel
             IEqualityComparer<TGroupKey>? keyComparer,
             IComparer<TOrderKey> orderComparer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(source != null);
             Debug.Assert(keySelector != null);
 
@@ -538,7 +546,8 @@ namespace System.Linq.Parallel
         internal override bool MoveNext(
             [MaybeNullWhen(false), AllowNull] ref IGrouping<TGroupKey, TElement> currentElement,
             [AllowNull] ref TOrderKey currentKey
-        ) {
+        )
+        {
             Debug.Assert(_source != null);
             Debug.Assert(_keySelector != null);
 
@@ -596,7 +605,8 @@ namespace System.Linq.Parallel
                 TOrderKey orderKey,
                 TGroupKey hashKey,
                 IComparer<TOrderKey> orderComparer
-            ) {
+            )
+            {
                 _orderKey = orderKey;
                 _grouping = new OrderedGroupByGrouping<TGroupKey, TOrderKey, TElement>(
                     hashKey,

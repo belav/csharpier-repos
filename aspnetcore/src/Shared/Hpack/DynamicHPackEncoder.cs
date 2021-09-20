@@ -25,7 +25,8 @@ namespace System.Net.Http.HPack
         public DynamicHPackEncoder(
             bool allowDynamicCompression = true,
             uint maxHeaderTableSize = DefaultHeaderTableSize
-        ) {
+        )
+        {
             _allowDynamicCompression = allowDynamicCompression;
             _maxHeaderTableSize = maxHeaderTableSize;
             Head = new EncoderHeaderEntry();
@@ -76,7 +77,8 @@ namespace System.Net.Http.HPack
             string name,
             string value,
             out int bytesWritten
-        ) {
+        )
+        {
             Debug.Assert(
                 !_pendingTableSizeUpdate,
                 "Dynamic table size update should be encoded before headers."
@@ -107,7 +109,8 @@ namespace System.Net.Http.HPack
                 !_allowDynamicCompression
                 || _maxHeaderTableSize == 0
                 || encodingHint == HeaderEncodingHint.IgnoreIndex
-            ) {
+            )
+            {
                 return staticTableIndex == -1
                   ? HPackEncoder.EncodeLiteralHeaderFieldWithoutIndexingNewName(
                         name,
@@ -164,7 +167,8 @@ namespace System.Net.Http.HPack
             string name,
             string value,
             out int bytesWritten
-        ) {
+        )
+        {
             EncoderHeaderEntry? headerField = GetEntry(name, value);
             if (headerField != null)
             {
@@ -240,7 +244,8 @@ namespace System.Net.Http.HPack
                     e.Hash == hash
                     && string.Equals(value, e.Value, StringComparison.Ordinal)
                     && string.Equals(name, e.Name, StringComparison.Ordinal)
-                ) {
+                )
+                {
                     return e;
                 }
             }

@@ -24,7 +24,8 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.UrlMatches
             bool ignoreCase,
             string input,
             bool expectedResult
-        ) {
+        )
+        {
             var context = new RewriteContext { HttpContext = new DefaultHttpContext() };
             var stringMatch = new StringMatch(value, (StringOperationType)operation, ignoreCase);
             var matchResult = stringMatch.Evaluate(input, context);

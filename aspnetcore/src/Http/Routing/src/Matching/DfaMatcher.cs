@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             EndpointSelector selector,
             DfaState[] states,
             int maxSegmentCount
-        ) {
+        )
+        {
             _logger = logger;
             _selector = selector;
             _states = states;
@@ -158,7 +159,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
                             segments,
                             state.Values
                         )
-                    ) {
+                    )
+                    {
                         CandidateSet.SetValidity(ref state, false);
                         isMatch = false;
                     }
@@ -174,7 +176,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
                             httpContext,
                             state.Values
                         )
-                    ) {
+                    )
+                    {
                         CandidateSet.SetValidity(ref state, false);
                         isMatch = false;
                     }
@@ -220,7 +223,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             HttpContext httpContext,
             string path,
             ReadOnlySpan<PathSegment> segments
-        ) {
+        )
+        {
             var states = _states;
 
             // Process each path segment
@@ -246,7 +250,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             (string parameterName, int segmentIndex, int slotIndex)[] captures,
             string path,
             ReadOnlySpan<PathSegment> segments
-        ) {
+        )
+        {
             for (var i = 0; i < captures.Length; i++)
             {
                 (var parameterName, var segmentIndex, var slotIndex) = captures[i];
@@ -270,7 +275,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             in (string parameterName, int segmentIndex, int slotIndex) catchAll,
             string path,
             ReadOnlySpan<PathSegment> segments
-        ) {
+        )
+        {
             // Read segmentIndex to local both to skip double read from stack value
             // and to use the same in-bounds validated variable to access the array.
             var segmentIndex = catchAll.segmentIndex;
@@ -290,7 +296,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             string path,
             ReadOnlySpan<PathSegment> segments,
             RouteValueDictionary values
-        ) {
+        )
+        {
             for (var i = 0; i < complexSegments.Length; i++)
             {
                 (var complexSegment, var segmentIndex) = complexSegments[i];
@@ -316,7 +323,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             KeyValuePair<string, IRouteConstraint>[] constraints,
             HttpContext httpContext,
             RouteValueDictionary values
-        ) {
+        )
+        {
             for (var i = 0; i < constraints.Length; i++)
             {
                 var constraint = constraints[i];
@@ -328,7 +336,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
                         values,
                         RouteDirection.IncomingRequest
                     )
-                ) {
+                )
+                {
                     Logger.CandidateRejectedByConstraint(
                         _logger,
                         httpContext.Request.Path,
@@ -348,7 +357,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             HttpContext httpContext,
             IEndpointSelectorPolicy[] policies,
             CandidateSet candidateSet
-        ) {
+        )
+        {
             for (var i = 0; i < policies.Length; i++)
             {
                 var policy = policies[i];
@@ -489,7 +499,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
                 string path,
                 Endpoint endpoint,
                 RoutePatternPathSegment segment
-            ) {
+            )
+            {
                 // This should return a real pattern since we're processing complex segments.... but just in case.
                 if (logger.IsEnabled(LogLevel.Debug))
                 {
@@ -512,7 +523,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
                 string constraintName,
                 IRouteConstraint constraint,
                 object value
-            ) {
+            )
+            {
                 // This should return a real pattern since we're processing constraints.... but just in case.
                 if (logger.IsEnabled(LogLevel.Debug))
                 {

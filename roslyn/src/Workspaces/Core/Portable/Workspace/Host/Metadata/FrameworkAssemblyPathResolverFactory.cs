@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Host
                 ProjectId projectId,
                 string assemblyName,
                 string? fullyQualifiedTypeName
-            ) {
+            )
+            {
                 // Assembly path resolution not supported at the default workspace level.
                 return null;
             }

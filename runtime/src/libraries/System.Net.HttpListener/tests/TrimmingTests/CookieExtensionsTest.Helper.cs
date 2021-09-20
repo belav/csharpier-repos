@@ -140,7 +140,8 @@ namespace CookieExtensionsTest
                         if (
                             listenerException.ErrorCode == ERROR_ACCESS_DENIED
                             && (_hostname == "*" || _hostname == "+")
-                        ) {
+                        )
+                        {
                             throw new InvalidOperationException(
                                 $"Access denied for host {_hostname}"
                             );
@@ -238,7 +239,8 @@ namespace CookieExtensionsTest
             string text,
             IEnumerable<string> headers,
             bool headerOnly
-        ) {
+        )
+        {
             headers ??= Enumerable.Empty<string>();
 
             Uri listeningUri = new Uri(ListeningUrl);
@@ -256,7 +258,8 @@ namespace CookieExtensionsTest
             if (
                 text != null
                 && !headers.Any(header => header.ToLower().StartsWith("content-length:"))
-            ) {
+            )
+            {
                 content += $"Content-Length: {text.Length}\r\n";
             }
             foreach (string header in headers)

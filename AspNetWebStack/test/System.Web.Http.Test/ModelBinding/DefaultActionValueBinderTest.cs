@@ -482,7 +482,8 @@ namespace System.Web.Http.ModelBinding
                     Metadata.ModelMetadataProvider metadataProvider,
                     HttpActionContext actionContext,
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     throw new NotImplementedException();
                 }
             }
@@ -600,7 +601,8 @@ namespace System.Web.Http.ModelBinding
                 ITypeDescriptorContext context,
                 System.Globalization.CultureInfo culture,
                 object value
-            ) {
+            )
+            {
                 if (value is string)
                 {
                     return new ComplexTypeWithStringConverter((string)value);
@@ -623,7 +625,8 @@ namespace System.Web.Http.ModelBinding
             public bool BindModel(
                 HttpActionContext actionContext,
                 ModelBindingContext bindingContext
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }

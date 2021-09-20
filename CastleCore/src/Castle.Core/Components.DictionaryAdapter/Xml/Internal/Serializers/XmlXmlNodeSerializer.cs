@@ -32,7 +32,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             IXmlNode node,
             IDictionaryAdapter parent,
             IXmlAccessor accessor
-        ) {
+        )
+        {
             var source = node.AsRealizable<XmlNode>();
 
             return (source != null && source.IsReal) ? source.Value : null;
@@ -44,7 +45,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             IXmlAccessor accessor,
             object oldValue,
             ref object value
-        ) {
+        )
+        {
             var newNode = (XmlNode)value;
 
             using (var writer = new XmlSubtreeWriter(node))

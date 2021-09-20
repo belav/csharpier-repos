@@ -35,7 +35,8 @@ namespace Roslyn.Test.Utilities
             T value,
             ReadOnlyCollection<T> equalValues,
             ReadOnlyCollection<T> notEqualValues
-        ) {
+        )
+        {
             Value = value;
             EqualValues = equalValues;
             NotEqualValues = notEqualValues;

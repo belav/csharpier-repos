@@ -230,7 +230,8 @@ namespace System.ComponentModel
                                 _defaultValue != null
                                 && PropertyType.IsEnum
                                 && PropertyType.GetEnumUnderlyingType() == _defaultValue.GetType()
-                            ) {
+                            )
+                            {
                                 _defaultValue = Enum.ToObject(PropertyType, _defaultValue);
                             }
 
@@ -477,7 +478,8 @@ namespace System.ComponentModel
                             Type t = _componentClass.BaseType;
                             t != null && t != typeof(object);
                             t = t.BaseType
-                        ) {
+                        )
+                        {
                             BindingFlags bindingFlags =
                                 BindingFlags.DeclaredOnly
                                 | BindingFlags.Public
@@ -662,7 +664,8 @@ namespace System.ComponentModel
             IExtenderProvider provider,
             object component,
             PropertyDescriptor notifyDesc
-        ) {
+        )
+        {
             if (DefaultValue != s_noValue)
             {
                 ExtenderSetValue(provider, component, DefaultValue, notifyDesc);
@@ -724,7 +727,8 @@ namespace System.ComponentModel
             object component,
             object value,
             PropertyDescriptor notifyDesc
-        ) {
+        )
+        {
             if (provider != null)
             {
                 ISite site = GetSite(component);
@@ -1105,7 +1109,8 @@ namespace System.ComponentModel
             if (
                 string.IsNullOrEmpty(e.PropertyName)
                 || string.Compare(e.PropertyName, Name, true, CultureInfo.InvariantCulture) == 0
-            ) {
+            )
+            {
                 OnValueChanged(component, e);
             }
         }

@@ -34,7 +34,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             TState state,
             Exception exception,
             Func<TState, Exception, string> formatter
-        ) {
+        )
+        {
             var record = new LogRecord(
                 DateTime.Now,
                 new WriteContext
@@ -79,7 +80,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 TState state,
                 Exception exception,
                 Func<TState, Exception, string> formatter
-            ) {
+            )
+            {
                 _logSinkProvider.Log(_categoryName, logLevel, eventId, state, exception, formatter);
             }
         }

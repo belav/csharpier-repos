@@ -49,7 +49,8 @@ namespace Microsoft.AspNetCore.DataProtection
             {
                 if (
                     descriptor.ServiceType.Assembly.GetName().Name == "Microsoft.Extensions.Options"
-                ) {
+                )
+                {
                     // ignore any descriptors added by the call to .AddOptions()
                     continue;
                 }

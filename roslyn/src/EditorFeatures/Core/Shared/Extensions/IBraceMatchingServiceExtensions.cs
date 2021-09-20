@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             Document document,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // These are the matching spans when checking the token to the right of the position.
             var braces1 = await service.GetMatchingBracesAsync(
                     document,
@@ -46,7 +47,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                 braces1.HasValue
                 && position >= braces1.Value.LeftSpan.Start
                 && position < braces1.Value.LeftSpan.End
-            ) {
+            )
+            {
                 // ^{ } -- return right span
                 return braces1.Value.RightSpan;
             }
@@ -54,7 +56,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                 braces2.HasValue
                 && position > braces2.Value.RightSpan.Start
                 && position <= braces2.Value.RightSpan.End
-            ) {
+            )
+            {
                 // { }^ -- return left span
                 return braces2.Value.LeftSpan;
             }
@@ -62,7 +65,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                 braces2.HasValue
                 && position > braces2.Value.LeftSpan.Start
                 && position <= braces2.Value.LeftSpan.End
-            ) {
+            )
+            {
                 // {^ } -- return right span
                 return braces2.Value.RightSpan;
             }
@@ -70,7 +74,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                 braces1.HasValue
                 && position >= braces1.Value.RightSpan.Start
                 && position < braces1.Value.RightSpan.End
-            ) {
+            )
+            {
                 // { ^} - return left span
                 return braces1.Value.LeftSpan;
             }

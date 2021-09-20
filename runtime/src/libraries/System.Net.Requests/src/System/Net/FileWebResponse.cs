@@ -69,14 +69,16 @@ namespace System.Net
         void ISerializable.GetObjectData(
             SerializationInfo serializationInfo,
             StreamingContext streamingContext
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
         protected override void GetObjectData(
             SerializationInfo serializationInfo,
             StreamingContext streamingContext
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 

@@ -51,7 +51,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal static ImmutableArray<CustomModifier> Convert(
             ImmutableArray<ModifierInfo<TypeSymbol>> customModifiers
-        ) {
+        )
+        {
             if (customModifiers.IsDefault)
             {
                 return ImmutableArray<CustomModifier>.Empty;

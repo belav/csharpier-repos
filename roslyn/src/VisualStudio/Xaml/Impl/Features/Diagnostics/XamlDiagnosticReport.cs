@@ -14,7 +14,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Features.Diagnostics
         public XamlDiagnosticReport(
             string? resultId = null,
             ImmutableArray<XamlDiagnostic>? diagnostics = null
-        ) {
+        )
+        {
             this.ResultId = resultId;
             this.Diagnostics = diagnostics;
         }

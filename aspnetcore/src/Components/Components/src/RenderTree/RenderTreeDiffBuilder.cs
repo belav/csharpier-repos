@@ -29,7 +29,8 @@ namespace Microsoft.AspNetCore.Components.RenderTree
             int componentId,
             ArrayRange<RenderTreeFrame> oldTree,
             ArrayRange<RenderTreeFrame> newTree
-        ) {
+        )
+        {
             var editsBuffer = batchBuilder.EditsBuffer;
             var editsBufferStartLength = editsBuffer.Count;
 
@@ -58,7 +59,8 @@ namespace Microsoft.AspNetCore.Components.RenderTree
             int oldEndIndexExcl,
             int newStartIndex,
             int newEndIndexExcl
-        ) {
+        )
+        {
             // This is deliberately a very large method. Parts of it could be factored out
             // into other private methods, but doing so comes at a consequential perf cost,
             // because it involves so much parameter passing. You can think of the code here
@@ -224,7 +226,8 @@ namespace Microsoft.AspNetCore.Components.RenderTree
                                     var testIndex = newStartIndex + 1;
                                     testIndex < newEndIndexExcl;
                                     testIndex++
-                                ) {
+                                )
+                                {
                                     if (newTree[testIndex].SequenceField < newSeq)
                                     {
                                         newLoopsBackLater = true;
@@ -250,7 +253,8 @@ namespace Microsoft.AspNetCore.Components.RenderTree
                                     var testIndex = oldStartIndex + 1;
                                     testIndex < oldEndIndexExcl;
                                     testIndex++
-                                ) {
+                                )
+                                {
                                     if (oldTree[testIndex].SequenceField < oldSeq)
                                     {
                                         oldLoopsBackLater = true;
@@ -346,7 +350,8 @@ namespace Microsoft.AspNetCore.Components.RenderTree
             int oldEndIndexExcl,
             int newStartIndex,
             int newEndIndexExcl
-        ) {
+        )
+        {
             var result = diffContext.KeyedItemInfoDictionaryPool.Get();
             var oldTree = diffContext.OldTree;
             var newTree = diffContext.NewTree;
@@ -441,7 +446,8 @@ namespace Microsoft.AspNetCore.Components.RenderTree
             int oldEndIndexExcl,
             int newStartIndex,
             int newEndIndexExcl
-        ) {
+        )
+        {
             // The overhead of the dictionary used by AppendAttributeDiffEntriesForRangeSlow is
             // significant, so we want to try and do a merge-join if possible, but fall back to
             // a hash-join if not. We'll do a merge join until we hit a case we can't handle and
@@ -468,7 +474,8 @@ namespace Microsoft.AspNetCore.Components.RenderTree
                 if (
                     oldSeq == newSeq
                     && string.Equals(oldAttributeName, newAttributeName, StringComparison.Ordinal)
-                ) {
+                )
+                {
                     // These two attributes have the same sequence and name. Keep merging.
                     AppendDiffEntriesForAttributeFrame(
                         ref diffContext,
@@ -537,7 +544,8 @@ namespace Microsoft.AspNetCore.Components.RenderTree
             int oldEndIndexExcl,
             int newStartIndex,
             int newEndIndexExcl
-        ) {
+        )
+        {
             var oldTree = diffContext.OldTree;
             var newTree = diffContext.NewTree;
 
@@ -582,7 +590,8 @@ namespace Microsoft.AspNetCore.Components.RenderTree
             ref DiffContext diffContext,
             int oldComponentIndex,
             int newComponentIndex
-        ) {
+        )
+        {
             var oldTree = diffContext.OldTree;
             var newTree = diffContext.NewTree;
             ref var oldComponentFrame = ref oldTree[oldComponentIndex];
@@ -622,7 +631,8 @@ namespace Microsoft.AspNetCore.Components.RenderTree
             if (
                 !newParameters.DefinitelyEquals(oldParameters)
                 || diffContext.Renderer.IsHotReloading
-            ) {
+            )
+            {
                 componentState.SetDirectParameters(newParameters);
             }
         }
@@ -646,7 +656,8 @@ namespace Microsoft.AspNetCore.Components.RenderTree
             ref DiffContext diffContext,
             int oldFrameIndex,
             int newFrameIndex
-        ) {
+        )
+        {
             var oldTree = diffContext.OldTree;
             var newTree = diffContext.NewTree;
             ref var oldFrame = ref oldTree[oldFrameIndex];
@@ -817,7 +828,8 @@ namespace Microsoft.AspNetCore.Components.RenderTree
             ref DiffContext diffContext,
             int oldFrameIndex,
             int newFrameIndex
-        ) {
+        )
+        {
             var oldTree = diffContext.OldTree;
             var newTree = diffContext.NewTree;
             ref var oldFrame = ref oldTree[oldFrameIndex];
@@ -1012,7 +1024,8 @@ namespace Microsoft.AspNetCore.Components.RenderTree
             if (
                 previousIndex >= 0
                 && diffContext.Edits.Buffer[previousIndex].Type == RenderTreeEditType.StepIn
-            ) {
+            )
+            {
                 diffContext.Edits.RemoveLast();
             }
             else
@@ -1075,7 +1088,8 @@ namespace Microsoft.AspNetCore.Components.RenderTree
         private static void InitializeNewAttributeFrame(
             ref DiffContext diffContext,
             ref RenderTreeFrame newFrame
-        ) {
+        )
+        {
             // Any attribute with an event handler id will be callable via DOM events
             //
             // We're following a simple heuristic here that's reflected in the ts runtime
@@ -1087,7 +1101,8 @@ namespace Microsoft.AspNetCore.Components.RenderTree
                 )
                 && newFrame.AttributeNameField.Length >= 3
                 && newFrame.AttributeNameField.StartsWith("on", StringComparison.Ordinal)
-            ) {
+            )
+            {
                 diffContext.Renderer.AssignEventHandlerId(ref newFrame);
             }
         }
@@ -1095,7 +1110,8 @@ namespace Microsoft.AspNetCore.Components.RenderTree
         private static void InitializeNewElementReferenceCaptureFrame(
             ref DiffContext diffContext,
             ref RenderTreeFrame newFrame
-        ) {
+        )
+        {
             var newElementReference = ElementReference.CreateWithUniqueId(
                 diffContext.Renderer.ElementReferenceContext
             );
@@ -1106,7 +1122,8 @@ namespace Microsoft.AspNetCore.Components.RenderTree
         private static void InitializeNewComponentReferenceCaptureFrame(
             ref DiffContext diffContext,
             ref RenderTreeFrame newFrame
-        ) {
+        )
+        {
             ref var parentFrame = ref diffContext.NewTree[
                 newFrame.ComponentReferenceCaptureParentFrameIndexField
             ];
@@ -1135,20 +1152,23 @@ namespace Microsoft.AspNetCore.Components.RenderTree
             RenderTreeFrame[] frames,
             int startIndex,
             int endIndexExcl
-        ) {
+        )
+        {
             for (var i = startIndex; i < endIndexExcl; i++)
             {
                 ref var frame = ref frames[i];
                 if (
                     frame.FrameTypeField == RenderTreeFrameType.Component
                     && frame.ComponentStateField != null
-                ) {
+                )
+                {
                     batchBuilder.ComponentDisposalQueue.Enqueue(frame.ComponentIdField);
                 }
                 else if (
                     frame.FrameTypeField == RenderTreeFrameType.Attribute
                     && frame.AttributeEventHandlerIdField > 0
-                ) {
+                )
+                {
                     batchBuilder.DisposedEventHandlerIds.Append(frame.AttributeEventHandlerIdField);
                 }
             }
@@ -1182,7 +1202,8 @@ namespace Microsoft.AspNetCore.Components.RenderTree
                 int componentId,
                 RenderTreeFrame[] oldTree,
                 RenderTreeFrame[] newTree
-            ) {
+            )
+            {
                 Renderer = renderer;
                 BatchBuilder = batchBuilder;
                 ComponentId = componentId;

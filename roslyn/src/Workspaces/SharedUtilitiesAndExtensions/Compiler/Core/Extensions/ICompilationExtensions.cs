@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
     {
         public static ImmutableArray<Compilation> GetReferencedCompilations(
             this Compilation compilation
-        ) {
+        )
+        {
             var builder = ArrayBuilder<Compilation>.GetInstance();
 
             foreach (var reference in compilation.References.OfType<CompilationReference>())
@@ -42,7 +43,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static ImmutableArray<IAssemblySymbol> GetReferencedAssemblySymbols(
             this Compilation compilation,
             bool excludePreviousSubmissions = false
-        ) {
+        )
+        {
             // The first module of every assembly is its source module and the source
             // module always has the list of all referenced assemblies.
             var referencedAssemblySymbols =

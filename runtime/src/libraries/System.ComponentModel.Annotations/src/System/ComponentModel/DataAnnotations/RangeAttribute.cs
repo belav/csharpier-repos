@@ -100,7 +100,8 @@ namespace System.ComponentModel.DataAnnotations
             IComparable minimum,
             IComparable maximum,
             Func<object, object?> conversion
-        ) {
+        )
+        {
             if (minimum.CompareTo(maximum) > 0)
             {
                 throw new InvalidOperationException(

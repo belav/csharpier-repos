@@ -18,7 +18,8 @@ namespace System.Tests
             string source = null,
             string stackTrace = null,
             bool validateMessage = true
-        ) {
+        )
+        {
             Assert.Equal(dataCount, e.Data.Count);
             Assert.Equal(helpLink, e.HelpLink);
             Assert.Equal(hResult, e.HResult);

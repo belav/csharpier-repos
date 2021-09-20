@@ -21,7 +21,8 @@ class X
         bool expression,
         [CallerLineNumber] int line = 0,
         [CallerFilePath] string file = ""
-    ) {
+    )
+    {
         if (!expression)
         {
             Console.WriteLine($"{file}:L{line} test failed (expected: true).");
@@ -33,7 +34,8 @@ class X
         bool expression,
         [CallerLineNumber] int line = 0,
         [CallerFilePath] string file = ""
-    ) {
+    )
+    {
         if (expression)
         {
             Console.WriteLine($"{file}:L{line} test failed (expected: false).");

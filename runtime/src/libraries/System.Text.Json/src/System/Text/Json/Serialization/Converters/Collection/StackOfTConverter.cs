@@ -17,7 +17,8 @@ namespace System.Text.Json.Serialization.Converters
             ref Utf8JsonReader reader,
             ref ReadStack state,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             if (state.Current.JsonTypeInfo.CreateObject == null)
             {
                 ThrowHelper.ThrowNotSupportedException_SerializationNotSupported(
@@ -33,7 +34,8 @@ namespace System.Text.Json.Serialization.Converters
             TCollection value,
             JsonSerializerOptions options,
             ref WriteStack state
-        ) {
+        )
+        {
             IEnumerator<TElement> enumerator;
             if (state.Current.CollectionEnumerator == null)
             {

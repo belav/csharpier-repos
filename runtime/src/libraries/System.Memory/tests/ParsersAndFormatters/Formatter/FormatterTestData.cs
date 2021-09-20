@@ -10,7 +10,8 @@ namespace System.Buffers.Text.Tests
             SupportedFormat format,
             byte precision,
             string expectedOutput
-        ) {
+        )
+        {
             Value = value;
             Format = format;
             Precision = precision;

@@ -86,11 +86,8 @@ namespace System.Drawing.Imaging
         /// Initializes a new instance of the <see cref='Metafile'/> class from the specified device context, bounded
         /// by the specified rectangle.
         /// </summary>
-        public Metafile(
-            IntPtr referenceHdc,
-            RectangleF frameRect,
-            MetafileFrameUnit frameUnit
-        ) : this(referenceHdc, frameRect, frameUnit, EmfType.EmfPlusDual) { }
+        public Metafile(IntPtr referenceHdc, RectangleF frameRect, MetafileFrameUnit frameUnit)
+            : this(referenceHdc, frameRect, frameUnit, EmfType.EmfPlusDual) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='Metafile'/> class from the specified device context, bounded
@@ -113,7 +110,8 @@ namespace System.Drawing.Imaging
             MetafileFrameUnit frameUnit,
             EmfType type,
             string? description
-        ) {
+        )
+        {
             Gdip.CheckStatus(
                 Gdip.GdipRecordMetafile(
                     referenceHdc,
@@ -132,11 +130,8 @@ namespace System.Drawing.Imaging
         /// Initializes a new instance of the <see cref='Metafile'/> class from the specified device context, bounded
         /// by the specified rectangle.
         /// </summary>
-        public Metafile(
-            IntPtr referenceHdc,
-            Rectangle frameRect,
-            MetafileFrameUnit frameUnit
-        ) : this(referenceHdc, frameRect, frameUnit, EmfType.EmfPlusDual) { }
+        public Metafile(IntPtr referenceHdc, Rectangle frameRect, MetafileFrameUnit frameUnit)
+            : this(referenceHdc, frameRect, frameUnit, EmfType.EmfPlusDual) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='Metafile'/> class from the specified device context, bounded
@@ -209,7 +204,8 @@ namespace System.Drawing.Imaging
             MetafileFrameUnit frameUnit,
             EmfType type,
             string? description
-        ) {
+        )
+        {
             // Called in order to emulate exception behavior from .NET Framework related to invalid file paths.
             Path.GetFullPath(fileName);
             if (fileName.Length > MaxPath)

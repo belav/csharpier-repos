@@ -20,10 +20,11 @@ namespace System.Web.Mvc
         internal FormValueProvider(
             ControllerContext controllerContext,
             IUnvalidatedRequestValues unvalidatedValues
-        ) : base(
-            controllerContext.HttpContext.Request.Form,
-            unvalidatedValues.Form,
-            CultureInfo.CurrentCulture
-        ) { }
+        )
+            : base(
+                controllerContext.HttpContext.Request.Form,
+                unvalidatedValues.Form,
+                CultureInfo.CurrentCulture
+            ) { }
     }
 }

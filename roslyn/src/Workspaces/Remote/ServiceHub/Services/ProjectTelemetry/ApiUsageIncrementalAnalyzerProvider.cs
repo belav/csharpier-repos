@@ -75,7 +75,8 @@ namespace Microsoft.CodeAnalysis.Remote.Telemetry
                 bool semanticsChanged,
                 InvocationReasons reasons,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var telemetryService = _services.GetRequiredService<IWorkspaceTelemetryService>();
                 if (!telemetryService.HasActiveSession)
                 {
@@ -93,7 +94,8 @@ namespace Microsoft.CodeAnalysis.Remote.Telemetry
                     if (
                         reasons.Contains(PredefinedInvocationReasons.DocumentAdded)
                         || !_reported.Add(project.Id)
-                    ) {
+                    )
+                    {
                         return;
                     }
                 }
@@ -151,7 +153,8 @@ namespace Microsoft.CodeAnalysis.Remote.Telemetry
                     Solution solutionOpt,
                     HashSet<ISymbol> metadataSymbolUsed,
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     switch (operation)
                     {
                         case IMemberReferenceOperation memberOperation:
@@ -186,7 +189,8 @@ namespace Microsoft.CodeAnalysis.Remote.Telemetry
                     ISymbol symbol,
                     HashSet<ISymbol> metadataSymbolUsed,
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     // get symbol as it is defined in metadata
                     symbol = symbol.OriginalDefinition;
 
@@ -199,7 +203,8 @@ namespace Microsoft.CodeAnalysis.Remote.Telemetry
                         symbol.Locations.All(l => l.Kind == LocationKind.MetadataFile)
                         && solutionOpt?.GetProject(symbol.ContainingAssembly, cancellationToken)
                             == null
-                    ) {
+                    )
+                    {
                         metadataSymbolUsed.Add(symbol);
                     }
                 }
@@ -207,7 +212,8 @@ namespace Microsoft.CodeAnalysis.Remote.Telemetry
                 static IEnumerable<IOperation> GetOperations(
                     SemanticModel model,
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     // root is already there
                     var root = model.SyntaxTree.GetRoot(cancellationToken);
 
@@ -218,7 +224,8 @@ namespace Microsoft.CodeAnalysis.Remote.Telemetry
                             )
                             .Select(n => model.GetOperation(n, cancellationToken))
                             .Where(o => o != null)
-                    ) {
+                    )
+                    {
                         foreach (var operation in rootOperation.DescendantsAndSelf())
                         {
                             yield return operation;

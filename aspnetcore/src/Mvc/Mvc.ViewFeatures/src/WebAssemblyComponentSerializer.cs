@@ -15,7 +15,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             Type type,
             ParameterView parameters,
             bool prerendered
-        ) {
+        )
+        {
             var assembly = type.Assembly.GetName().Name;
             var typeFullName = type.FullName;
             var (definitions, values) = ComponentParameter.FromParameterView(parameters);

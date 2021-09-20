@@ -45,13 +45,14 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
             ILoggerFactory loggerFactory,
             DeploymentParameters deploymentParameters,
             string applicationBaseUri
-        ) : this(
-            loggerFactory,
-            deploymentParameters: deploymentParameters,
-            applicationBaseUri: applicationBaseUri,
-            contentRoot: string.Empty,
-            hostShutdownToken: CancellationToken.None
-        ) { }
+        )
+            : this(
+                loggerFactory,
+                deploymentParameters: deploymentParameters,
+                applicationBaseUri: applicationBaseUri,
+                contentRoot: string.Empty,
+                hostShutdownToken: CancellationToken.None
+            ) { }
 
         public DeploymentResult(
             ILoggerFactory loggerFactory,
@@ -59,7 +60,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
             string applicationBaseUri,
             string contentRoot,
             CancellationToken hostShutdownToken
-        ) {
+        )
+        {
             _loggerFactory = loggerFactory;
 
             ApplicationBaseUri = applicationBaseUri;

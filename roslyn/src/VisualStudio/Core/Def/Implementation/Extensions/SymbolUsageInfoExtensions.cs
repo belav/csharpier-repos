@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public static SymbolReferenceKinds ToSymbolReferenceKinds(
             this SymbolUsageInfo symbolUsageInfo
-        ) {
+        )
+        {
             var kinds = SymbolReferenceKinds.None;
 
             if (symbolUsageInfo.ValueUsageInfoOpt.HasValue)

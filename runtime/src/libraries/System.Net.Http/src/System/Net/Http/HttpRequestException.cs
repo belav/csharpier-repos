@@ -28,11 +28,8 @@ namespace System.Net.Http
         /// <param name="message">A message that describes the current exception.</param>
         /// <param name="inner">The inner exception.</param>
         /// <param name="statusCode">The HTTP status code.</param>
-        public HttpRequestException(
-            string? message,
-            Exception? inner,
-            HttpStatusCode? statusCode
-        ) : this(message, inner)
+        public HttpRequestException(string? message, Exception? inner, HttpStatusCode? statusCode)
+            : this(message, inner)
         {
             StatusCode = statusCode;
         }

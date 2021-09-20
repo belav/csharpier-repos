@@ -80,7 +80,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.Patterns
             int startSegmentsCount,
             int containSegmentCount,
             int endSegmentCount
-        ) {
+        )
+        {
             var builder = new PatternBuilder();
             var pattern = builder.Build(sample) as IRaggedPattern;
 

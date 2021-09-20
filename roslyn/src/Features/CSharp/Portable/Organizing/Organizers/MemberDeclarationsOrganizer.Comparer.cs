@@ -78,7 +78,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Organizing.Organizers
 
                 if (
                     xOuterOrdering == OuterOrdering.Fields || yOuterOrdering == OuterOrdering.Fields
-                ) {
+                )
+                {
                     // Fields with initializers can't be reordered relative to
                     // themselves due to ordering issues.
                     var xHasInitializer = ((FieldDeclarationSyntax)x).Declaration.Variables.Any(
@@ -131,7 +132,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Organizing.Organizers
                 else if (
                     xModifiers.Any(t => t.Kind() == SyntaxKind.ProtectedKeyword)
                     && xModifiers.Any(t => t.Kind() == SyntaxKind.InternalKeyword)
-                ) {
+                )
+                {
                     return Accessibility.ProtectedOrInternal;
                 }
                 else if (xModifiers.Any(t => t.Kind() == SyntaxKind.InternalKeyword))

@@ -45,7 +45,8 @@ namespace System.Reflection.Metadata
             int requiredParameterCount,
             int genericParameterCount,
             ImmutableArray<TType> parameterTypes
-        ) {
+        )
+        {
             Header = header;
             ReturnType = returnType;
             GenericParameterCount = genericParameterCount;

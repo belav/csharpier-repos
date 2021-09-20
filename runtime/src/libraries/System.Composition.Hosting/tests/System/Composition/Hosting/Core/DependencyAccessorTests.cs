@@ -189,7 +189,8 @@ namespace System.Composition.Hosting.Core.Tests
 
             protected override IEnumerable<ExportDescriptorPromise> GetPromises(
                 CompositionContract exportKey
-            ) {
+            )
+            {
                 Contract = exportKey;
                 return Result;
             }

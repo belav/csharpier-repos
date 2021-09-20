@@ -48,7 +48,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             IModelMetadataProvider modelMetadataProvider,
             ITempDataDictionaryFactory tempDataDictionaryFactory,
             IHttpResponseStreamWriterFactory writerFactory
-        ) {
+        )
+        {
             if (mvcHelperOptions == null)
             {
                 throw new ArgumentNullException(nameof(mvcHelperOptions));
@@ -164,7 +165,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                         bufferingStream,
                         resolvedContentTypeEncoding
                     )
-                ) {
+                )
+                {
                     viewComponentResult.WriteTo(intermediateWriter, _htmlEncoder);
                 }
 
@@ -186,7 +188,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             IViewComponentHelper viewComponentHelper,
             ILogger logger,
             ViewComponentResult result
-        ) {
+        )
+        {
             if (result.ViewComponentType == null && result.ViewComponentName == null)
             {
                 throw new InvalidOperationException(

@@ -52,7 +52,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
             ProjectUtils.Project projectName,
             string projectTemplate,
             string languageName
-        ) {
+        )
+        {
             _inProc.AddProject(projectName.Name, projectTemplate, languageName);
             _instance.Workspace.WaitForAsyncOperations(
                 Helper.HangMitigatingTimeout,
@@ -64,7 +65,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
             ProjectUtils.Project projectName,
             string projectFileExtension,
             string projectFileContent
-        ) {
+        )
+        {
             _inProc.AddCustomProject(projectName.Name, projectFileExtension, projectFileContent);
             _instance.Workspace.WaitForAsyncOperations(
                 Helper.HangMitigatingTimeout,
@@ -75,7 +77,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
         public void AddProjectReference(
             ProjectUtils.Project fromProjectName,
             ProjectUtils.ProjectReference toProjectName
-        ) {
+        )
+        {
             _inProc.AddProjectReference(fromProjectName.Name, toProjectName.Name);
             _instance.Workspace.WaitForAsyncOperations(
                 Helper.HangMitigatingTimeout,
@@ -86,7 +89,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
         public void RemoveProjectReference(
             ProjectUtils.Project projectName,
             ProjectUtils.ProjectReference projectReferenceName
-        ) {
+        )
+        {
             _inProc.RemoveProjectReference(projectName.Name, projectReferenceName.Name);
             _instance.Workspace.WaitForAsyncOperations(
                 Helper.HangMitigatingTimeout,
@@ -97,7 +101,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
         public void AddMetadataReference(
             ProjectUtils.AssemblyReference fullyQualifiedAssemblyName,
             ProjectUtils.Project projectName
-        ) {
+        )
+        {
             _inProc.AddMetadataReference(fullyQualifiedAssemblyName.Name, projectName.Name);
             _instance.Workspace.WaitForAsyncOperations(
                 Helper.HangMitigatingTimeout,
@@ -108,7 +113,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
         public void RemoveMetadataReference(
             ProjectUtils.AssemblyReference assemblyName,
             ProjectUtils.Project projectName
-        ) {
+        )
+        {
             _inProc.RemoveMetadataReference(assemblyName.Name, projectName.Name);
             _instance.Workspace.WaitForAsyncOperations(
                 Helper.HangMitigatingTimeout,
@@ -215,7 +221,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
             ProjectUtils.Project project,
             string oldFileName,
             string newFileName
-        ) {
+        )
+        {
             // Wireup to open files can happen asynchronously in the case we're being notified of changes on background threads.
             _inProc.RenameFileViaDTE(project.Name, oldFileName, newFileName);
             _instance.Workspace.WaitForAsyncOperations(

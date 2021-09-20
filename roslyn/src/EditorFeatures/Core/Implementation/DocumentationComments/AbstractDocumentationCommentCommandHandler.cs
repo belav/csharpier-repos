@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.DocumentationComments
             IWaitIndicator waitIndicator,
             ITextUndoHistoryRegistry undoHistoryRegistry,
             IEditorOperationsFactoryService editorOperationsFactoryService
-        ) {
+        )
+        {
             Contract.ThrowIfNull(waitIndicator);
             Contract.ThrowIfNull(undoHistoryRegistry);
             Contract.ThrowIfNull(editorOperationsFactoryService);
@@ -111,7 +112,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.DocumentationComments
             DocumentationCommentSnippet snippet,
             ITextBuffer subjectBuffer,
             ITextView textView
-        ) {
+        )
+        {
             var replaceSpan = snippet.SpanToReplace.ToSpan();
             subjectBuffer.Replace(replaceSpan, snippet.SnippetText);
             textView.TryMoveCaretToAndEnsureVisible(
@@ -132,7 +134,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.DocumentationComments
                 DocumentationCommentSnippet?
             > getSnippetAction,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var caretPosition = textView.GetCaretPoint(subjectBuffer) ?? -1;
             if (caretPosition < 0)
             {
@@ -179,7 +182,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.DocumentationComments
             TypeCharCommandArgs args,
             Action nextHandler,
             CommandExecutionContext context
-        ) {
+        )
+        {
             // Ensure the character is actually typed in the editor
             nextHandler();
 
@@ -250,7 +254,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.DocumentationComments
             using (
                 var transaction = _undoHistoryRegistry.GetHistory(args.TextView.TextBuffer)
                     .CreateTransaction(EditorFeaturesResources.Insert_new_line)
-            ) {
+            )
+            {
                 var editorOperations = _editorOperationsFactoryService.GetEditorOperations(
                     args.TextView
                 );
@@ -318,7 +323,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.DocumentationComments
                     allowCancellation: true,
                     EditorFeaturesResources.Inserting_documentation_comment
                 )
-            ) {
+            )
+            {
                 return CompleteComment(
                     args.SubjectBuffer,
                     args.TextView,
@@ -337,7 +343,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.DocumentationComments
             OpenLineAboveCommandArgs args,
             Action nextHandler,
             CommandExecutionContext context
-        ) {
+        )
+        {
             // Check to see if the current line starts with exterior trivia. If so, we'll take over.
             // If not, let the nextHandler run.
 
@@ -380,7 +387,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.DocumentationComments
             OpenLineBelowCommandArgs args,
             Action nextHandler,
             CommandExecutionContext context
-        ) {
+        )
+        {
             // Check to see if the current line starts with exterior trivia. If so, we'll take over.
             // If not, let the nextHandler run.
 
@@ -418,7 +426,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.DocumentationComments
             IDocumentationCommentSnippetService service,
             ITextView textView,
             ITextBuffer subjectBuffer
-        ) {
+        )
+        {
             var caretPosition = textView.GetCaretPoint(subjectBuffer) ?? -1;
             if (caretPosition < 0)
             {
@@ -449,7 +458,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.DocumentationComments
             if (
                 LineStartsWithExteriorTrivia(currentLine)
                 || !LineStartsWithExteriorTrivia(previousLine)
-            ) {
+            )
+            {
                 return;
             }
 

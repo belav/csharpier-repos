@@ -35,7 +35,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             IHttpResponseStreamWriterFactory writerFactory,
             ILoggerFactory loggerFactory,
             IOptions<MvcOptions> mvcOptions
-        ) {
+        )
+        {
             if (formatterSelector == null)
             {
                 throw new ArgumentNullException(nameof(formatterSelector));
@@ -107,7 +108,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             if (
                 value != null
                 && _asyncEnumerableReaderFactory.TryGetReader(value.GetType(), out var reader)
-            ) {
+            )
+            {
                 return ExecuteAsyncEnumerable(context, result, value, reader);
             }
 
@@ -119,7 +121,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             ObjectResult result,
             object asyncEnumerable,
             Func<object, Task<ICollection>> reader
-        ) {
+        )
+        {
             Log.BufferingAsyncEnumerable(Logger, asyncEnumerable);
 
             var enumerated = await reader(asyncEnumerable);
@@ -131,7 +134,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             ObjectResult result,
             Type? objectType,
             object? value
-        ) {
+        )
+        {
             var formatterContext = new OutputFormatterWriteContext(
                 context.HttpContext,
                 WriterFactory,

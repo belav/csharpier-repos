@@ -223,7 +223,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Multi_level_include_one_to_many_optional_and_one_to_many_optional_produces_valid_sql(
             bool async
-        ) {
+        )
+        {
             var expectedIncludes = new IExpectedInclude[]
             {
                 new ExpectedInclude<Level1>(l1 => l1.OneToMany_Optional1),
@@ -244,7 +245,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Multi_level_include_correct_PK_is_chosen_as_the_join_predicate_for_queries_that_join_same_table_multiple_times(
             bool async
-        ) {
+        )
+        {
             var expectedIncludes = new IExpectedInclude[]
             {
                 new ExpectedInclude<Level1>(l1 => l1.OneToMany_Optional1),
@@ -496,7 +498,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Optional_navigation_inside_property_method_translated_to_join(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -514,7 +517,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Optional_navigation_inside_nested_method_call_translated_to_join(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -534,7 +538,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Method_call_on_optional_navigation_translates_to_null_conditional_properly_for_arguments(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -548,7 +553,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Optional_navigation_inside_method_call_translated_to_join_keeps_original_nullability(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -568,7 +574,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Optional_navigation_inside_nested_method_call_translated_to_join_keeps_original_nullability(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -591,7 +598,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Optional_navigation_inside_nested_method_call_translated_to_join_keeps_original_nullability_also_for_arguments(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -627,7 +635,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Join_navigation_in_outer_selector_translated_to_extra_join_nested(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -643,7 +652,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Join_navigation_in_outer_selector_translated_to_extra_join_nested2(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -673,7 +683,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Join_navigations_in_inner_selector_translated_without_collision(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -1145,7 +1156,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Where_multiple_nav_prop_reference_optional_member_compared_to_value(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -1159,7 +1171,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Where_multiple_nav_prop_reference_optional_member_compared_to_null(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -1415,7 +1428,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Complex_navigations_with_predicate_projected_into_anonymous_type(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -1442,7 +1456,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Complex_navigations_with_predicate_projected_into_anonymous_type2(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -1602,7 +1617,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Result_operator_nav_prop_reference_optional_Average_with_identity_selector(
             bool async
-        ) {
+        )
+        {
             return AssertAverage(
                 async,
                 ss =>
@@ -1615,7 +1631,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Result_operator_nav_prop_reference_optional_Average_without_selector(
             bool async
-        ) {
+        )
+        {
             return AssertAverage(
                 async,
                 ss => ss.Set<Level1>().Select(e => (int?)e.OneToOne_Optional_FK1.Level1_Required_Id)
@@ -1626,7 +1643,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Result_operator_nav_prop_reference_optional_via_DefaultIfEmpty(
             bool async
-        ) {
+        )
+        {
             return AssertSum(
                 async,
                 ss =>
@@ -1785,7 +1803,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task SelectMany_nested_navigation_property_optional_and_projection(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -1818,7 +1837,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task SelectMany_navigation_property_with_another_navigation_in_subquery(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -1875,7 +1895,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Where_navigation_property_to_collection_of_original_entity_type(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -1924,7 +1945,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Complex_multi_include_with_order_by_and_paging_joins_on_correct_key(
             bool async
-        ) {
+        )
+        {
             var expectedIncludes = new IExpectedInclude[]
             {
                 new ExpectedInclude<Level1>(l1 => l1.OneToOne_Optional_FK1),
@@ -1952,7 +1974,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Complex_multi_include_with_order_by_and_paging_joins_on_correct_key2(
             bool async
-        ) {
+        )
+        {
             var expectedIncludes = new IExpectedInclude[]
             {
                 new ExpectedInclude<Level1>(l1 => l1.OneToOne_Optional_FK1),
@@ -2016,7 +2039,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Correlated_subquery_doesnt_project_unnecessary_columns_in_top_level(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2032,7 +2056,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Correlated_subquery_doesnt_project_unnecessary_columns_in_top_level_join(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2048,7 +2073,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Correlated_nested_subquery_doesnt_project_unnecessary_columns_in_top_level(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2064,7 +2090,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Correlated_nested_two_levels_up_subquery_doesnt_project_unnecessary_columns_in_top_level(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2093,7 +2120,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Order_by_key_of_projected_navigation_doesnt_get_optimized_into_FK_access1(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2109,7 +2137,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Order_by_key_of_projected_navigation_doesnt_get_optimized_into_FK_access2(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2125,7 +2154,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Order_by_key_of_projected_navigation_doesnt_get_optimized_into_FK_access3(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2141,7 +2171,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Order_by_key_of_navigation_similar_to_projected_gets_optimized_into_FK_access(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2157,7 +2188,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Order_by_key_of_projected_navigation_doesnt_get_optimized_into_FK_access_subquery(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2174,7 +2206,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Order_by_key_of_anonymous_type_projected_navigation_doesnt_get_optimized_into_FK_access_subquery(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2207,7 +2240,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Projection_select_correct_table_from_subquery_when_materialization_is_not_required(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2223,7 +2257,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Projection_select_correct_table_with_anonymous_projection_in_subquery(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2242,7 +2277,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Projection_select_correct_table_in_subquery_when_materialization_is_not_required_in_multiple_joins(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2476,7 +2512,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Multiple_required_navigation_using_multiple_selects_with_Include(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2510,7 +2547,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Multiple_required_navigation_using_multiple_selects_with_string_based_Include(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2692,7 +2730,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task SelectMany_with_navigation_and_Distinct_projecting_columns_including_join_key(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2717,7 +2756,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task SelectMany_with_navigation_filter_and_explicit_DefaultIfEmpty(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2732,7 +2772,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task SelectMany_with_nested_navigation_and_explicit_DefaultIfEmpty(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2753,7 +2794,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task SelectMany_with_nested_navigation_filter_and_explicit_DefaultIfEmpty(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2775,7 +2817,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task SelectMany_with_nested_required_navigation_filter_and_explicit_DefaultIfEmpty(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2797,7 +2840,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task SelectMany_with_nested_navigations_and_additional_joins_outside_of_SelectMany(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2832,7 +2876,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task SelectMany_with_nested_navigations_explicit_DefaultIfEmpty_and_additional_joins_outside_of_SelectMany(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2857,7 +2902,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task SelectMany_with_nested_navigations_explicit_DefaultIfEmpty_and_additional_joins_outside_of_SelectMany2(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2881,7 +2927,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task SelectMany_with_nested_navigations_explicit_DefaultIfEmpty_and_additional_joins_outside_of_SelectMany3(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2905,7 +2952,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task SelectMany_with_nested_navigations_explicit_DefaultIfEmpty_and_additional_joins_outside_of_SelectMany4(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2930,7 +2978,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Multiple_SelectMany_with_nested_navigations_and_explicit_DefaultIfEmpty_joined_together(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2959,7 +3008,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task SelectMany_with_nested_navigations_and_explicit_DefaultIfEmpty_followed_by_Select_required_navigation_using_same_navs(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2976,7 +3026,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task SelectMany_with_nested_navigations_and_explicit_DefaultIfEmpty_followed_by_Select_required_navigation_using_different_navs(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2992,7 +3043,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Complex_SelectMany_with_nested_navigations_and_explicit_DefaultIfEmpty_with_other_query_operators_composed_on_top(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -3065,7 +3117,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Multiple_SelectMany_with_navigation_and_explicit_DefaultIfEmpty(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -3081,7 +3134,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task SelectMany_with_navigation_filter_paging_and_explicit_DefaultIfEmpty(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -3167,7 +3221,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Contains_with_subquery_optional_navigation_scalar_distinct_and_constant_item(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -3195,7 +3250,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Complex_query_with_optional_navigations_and_client_side_evaluation(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -3246,7 +3302,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Required_navigation_on_a_subquery_with_complex_projection_and_First(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -3286,7 +3343,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Manually_created_left_join_propagates_nullability_to_navigations(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -3304,7 +3362,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Optional_navigation_propagates_nullability_to_manually_created_left_join1(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -3322,7 +3381,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Optional_navigation_propagates_nullability_to_manually_created_left_join2(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -3414,7 +3474,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task GroupJoin_with_complex_subquery_with_joins_does_not_get_flattened(
             bool async
-        ) {
+        )
+        {
             return AssertQueryScalar(
                 async,
                 ss =>
@@ -3434,7 +3495,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task GroupJoin_with_complex_subquery_with_joins_does_not_get_flattened2(
             bool async
-        ) {
+        )
+        {
             return AssertQueryScalar(
                 async,
                 ss =>
@@ -3454,7 +3516,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task GroupJoin_with_complex_subquery_with_joins_does_not_get_flattened3(
             bool async
-        ) {
+        )
+        {
             return AssertQueryScalar(
                 async,
                 ss =>
@@ -3476,7 +3539,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task GroupJoin_on_a_subquery_containing_another_GroupJoin_projecting_outer(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -3501,7 +3565,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task GroupJoin_on_a_subquery_containing_another_GroupJoin_projecting_outer_with_client_method(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -3546,7 +3611,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task GroupJoin_on_a_subquery_containing_another_GroupJoin_projecting_inner(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -3571,7 +3637,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task GroupJoin_on_a_subquery_containing_another_GroupJoin_with_orderby_on_inner_sequence_projecting_inner(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -3955,7 +4022,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Explicit_GroupJoin_in_subquery_with_multiple_result_operator_distinct_count_materializes_main_clause(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -3977,7 +4045,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Where_on_multilevel_reference_in_subquery_with_outer_projection(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -3998,7 +4067,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Join_condition_optimizations_applied_correctly_when_anonymous_type_with_single_property(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -4016,7 +4086,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Join_condition_optimizations_applied_correctly_when_anonymous_type_with_multiple_properties(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -4235,7 +4306,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Comparing_collection_navigation_on_optional_reference_to_null(
             bool async
-        ) {
+        )
+        {
             return AssertQueryScalar(
                 async,
                 ss =>
@@ -4300,7 +4372,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Member_doesnt_get_pushed_down_into_subquery_with_result_operator(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -4649,7 +4722,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Include_collection_with_multiple_orderbys_complex_repeated_checked(
             bool async
-        ) {
+        )
+        {
             checked
             {
                 return AssertQuery(
@@ -4747,7 +4821,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Include_collection_with_groupby_in_subquery_and_filter_before_groupby(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -4765,7 +4840,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Include_collection_with_groupby_in_subquery_and_filter_after_groupby(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -4783,7 +4859,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task String_include_multiple_derived_navigation_with_same_name_and_same_type(
             bool async
-        ) {
+        )
+        {
             var expectedIncludes = new IExpectedInclude[]
             {
                 new ExpectedInclude<InheritanceDerived1>(e => e.ReferenceSameType),
@@ -4801,7 +4878,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task String_include_multiple_derived_navigation_with_same_name_and_different_type(
             bool async
-        ) {
+        )
+        {
             var expectedIncludes = new IExpectedInclude[]
             {
                 new ExpectedInclude<InheritanceDerived1>(e => e.ReferenceDifferentType),
@@ -4819,7 +4897,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task String_include_multiple_derived_navigation_with_same_name_and_different_type_nested_also_includes_partially_matching_navigation_chains(
             bool async
-        ) {
+        )
+        {
             var expectedIncludes = new IExpectedInclude[]
             {
                 new ExpectedInclude<InheritanceDerived1>(e => e.ReferenceDifferentType),
@@ -4841,7 +4920,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task String_include_multiple_derived_collection_navigation_with_same_name_and_same_type(
             bool async
-        ) {
+        )
+        {
             var expectedIncludes = new IExpectedInclude[]
             {
                 new ExpectedInclude<InheritanceDerived1>(e => e.CollectionSameType),
@@ -4859,7 +4939,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task String_include_multiple_derived_collection_navigation_with_same_name_and_different_type(
             bool async
-        ) {
+        )
+        {
             var expectedIncludes = new IExpectedInclude[]
             {
                 new ExpectedInclude<InheritanceDerived1>(e => e.CollectionDifferentType),
@@ -4877,7 +4958,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task String_include_multiple_derived_collection_navigation_with_same_name_and_different_type_nested_also_includes_partially_matching_navigation_chains(
             bool async
-        ) {
+        )
+        {
             var expectedIncludes = new IExpectedInclude[]
             {
                 new ExpectedInclude<InheritanceDerived1>(e => e.CollectionDifferentType),
@@ -4953,7 +5035,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Nav_rewrite_doesnt_apply_null_protection_for_function_arguments(
             bool async
-        ) {
+        )
+        {
             return AssertQueryScalar(
                 async,
                 ss =>
@@ -5038,7 +5121,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Include_after_SelectMany_and_reference_navigation_with_another_SelectMany_with_Distinct(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -5080,7 +5164,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Null_check_in_anonymous_type_projection_should_not_be_removed(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -5157,7 +5242,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task SelectMany_navigation_property_followed_by_select_collection_navigation(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -5177,7 +5263,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Multiple_SelectMany_navigation_property_followed_by_select_collection_navigation(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -5198,7 +5285,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task SelectMany_navigation_property_with_include_and_followed_by_select_collection_navigation(
             bool async
-        ) {
+        )
+        {
             // can't use AssertQuery here, see #18191
             return AssertQuery(
                 async,
@@ -6230,7 +6318,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Including_reference_navigation_and_projecting_collection_navigation(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -6253,7 +6342,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Including_reference_navigation_and_projecting_collection_navigation_2(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -6299,7 +6389,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Null_conditional_is_not_applied_explicitly_for_optional_navigation(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -6316,7 +6407,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task LeftJoin_with_Any_on_outer_source_and_projecting_collection_from_inner(
             bool async
-        ) {
+        )
+        {
             var validIds = new List<string> { "L1 01", "L1 02" };
 
             return AssertQuery(
@@ -6475,7 +6567,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task SelectMany_with_outside_reference_to_joined_table_correctly_translated_to_apply(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -6494,7 +6587,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Nested_SelectMany_correlated_with_join_table_correctly_translated_to_apply(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -6876,7 +6970,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Filtered_include_after_different_filtered_include_different_level(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -6920,7 +7015,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Filtered_include_different_filter_set_on_same_navigation_twice(
             bool async
-        ) {
+        )
+        {
             var message =
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(
@@ -6950,7 +7046,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Filtered_include_different_filter_set_on_same_navigation_twice_multi_level(
             bool async
-        ) {
+        )
+        {
             var message =
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(
@@ -7010,7 +7107,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Filtered_include_same_filter_set_on_same_navigation_twice_followed_by_ThenIncludes(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -7049,7 +7147,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Filtered_include_multiple_multi_level_includes_with_first_level_using_filter_include_on_one_of_the_chains_only(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -7089,7 +7188,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Filtered_include_and_non_filtered_include_on_same_navigation1(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -7119,7 +7219,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Filtered_include_and_non_filtered_include_on_same_navigation2(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -7149,7 +7250,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Filtered_include_and_non_filtered_include_followed_by_then_include_on_same_navigation(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -7191,7 +7293,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Filtered_include_complex_three_level_with_middle_having_filter1(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -7240,7 +7343,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Filtered_include_complex_three_level_with_middle_having_filter2(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -7321,7 +7425,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Filtered_include_include_parameter_used_inside_filter_throws(
             bool async
-        ) {
+        )
+        {
             await Assert.ThrowsAsync<InvalidOperationException>(
                 () =>
                     AssertQuery(
@@ -7420,7 +7525,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Filtered_include_calling_methods_directly_on_parameter_throws(
             bool async
-        ) {
+        )
+        {
             var message =
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(
@@ -7742,7 +7848,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Composite_key_join_on_groupby_aggregate_projecting_only_grouping_key(
             bool async
-        ) {
+        )
+        {
             return AssertQueryScalar(
                 async,
                 ss =>
@@ -7809,7 +7916,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Collection_FirstOrDefault_entity_reference_accesses_in_projection(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -7833,7 +7941,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Collection_FirstOrDefault_entity_collection_accesses_in_projection(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -7856,7 +7965,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Multiple_collection_FirstOrDefault_followed_by_member_access_in_projection(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -7880,7 +7990,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Projecting_columns_with_same_name_from_different_entities_making_sure_aliasing_works_after_Distinct(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -7930,7 +8041,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Complex_query_with_let_collection_projection_FirstOrDefault_with_ToList_on_inner_and_outer(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -8203,7 +8315,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task SelectMany_DefaultIfEmpty_multiple_times_with_joins_projecting_a_collection(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>

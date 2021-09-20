@@ -29,7 +29,8 @@ namespace ILCompiler
             CompilerTypeSystemContext context,
             CompilationModuleGroup compilationGroup,
             NameMangler nameMangler
-        ) {
+        )
+        {
             _context = context;
             _compilationGroup = compilationGroup;
             _nameMangler = nameMangler;
@@ -59,7 +60,8 @@ namespace ILCompiler
 
         public CompilationBuilder UseCompilationRoots(
             IEnumerable<ICompilationRootProvider> compilationRoots
-        ) {
+        )
+        {
             _compilationRoots = compilationRoots;
             return this;
         }
@@ -79,7 +81,8 @@ namespace ILCompiler
         protected DependencyAnalyzerBase<NodeFactory> CreateDependencyGraph(
             NodeFactory factory,
             IComparer<DependencyNodeCore<NodeFactory>> comparer = null
-        ) {
+        )
+        {
             return _dependencyTrackingLevel.CreateDependencyGraph(factory, comparer);
         }
 

@@ -91,7 +91,8 @@ namespace System.ComponentModel.Tests
             InstallerTypeAttribute attribute,
             object other,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, attribute.Equals(other));
             if (other is InstallerTypeAttribute)
             {

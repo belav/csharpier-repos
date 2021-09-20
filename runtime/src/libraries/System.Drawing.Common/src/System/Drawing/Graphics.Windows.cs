@@ -249,7 +249,8 @@ namespace System.Drawing
             int destinationY,
             Size blockRegionSize,
             CopyPixelOperation copyPixelOperation
-        ) {
+        )
+        {
             switch (copyPixelOperation)
             {
                 case CopyPixelOperation.Blackness:
@@ -493,7 +494,8 @@ namespace System.Drawing
             EnumerateMetafileProc callback,
             IntPtr callbackData,
             ImageAttributes? imageAttr
-        ) {
+        )
+        {
             Gdip.CheckStatus(
                 Gdip.GdipEnumerateMetafileDestPoint(
                     new HandleRef(this, NativeGraphics),
@@ -511,7 +513,8 @@ namespace System.Drawing
             EnumerateMetafileProc callback,
             IntPtr callbackData,
             ImageAttributes? imageAttr
-        ) {
+        )
+        {
             Gdip.CheckStatus(
                 Gdip.GdipEnumerateMetafileDestPointI(
                     new HandleRef(this, NativeGraphics),
@@ -530,7 +533,8 @@ namespace System.Drawing
             EnumerateMetafileProc callback,
             IntPtr callbackData,
             ImageAttributes? imageAttr
-        ) {
+        )
+        {
             Gdip.CheckStatus(
                 Gdip.GdipEnumerateMetafileDestRect(
                     new HandleRef(this, NativeGraphics),
@@ -549,7 +553,8 @@ namespace System.Drawing
             EnumerateMetafileProc callback,
             IntPtr callbackData,
             ImageAttributes? imageAttr
-        ) {
+        )
+        {
             Gdip.CheckStatus(
                 Gdip.GdipEnumerateMetafileDestRectI(
                     new HandleRef(this, NativeGraphics),
@@ -568,7 +573,8 @@ namespace System.Drawing
             EnumerateMetafileProc callback,
             IntPtr callbackData,
             ImageAttributes? imageAttr
-        ) {
+        )
+        {
             if (destPoints == null)
                 throw new ArgumentNullException(nameof(destPoints));
             if (destPoints.Length != 3)
@@ -596,7 +602,8 @@ namespace System.Drawing
             EnumerateMetafileProc callback,
             IntPtr callbackData,
             ImageAttributes? imageAttr
-        ) {
+        )
+        {
             if (destPoints == null)
                 throw new ArgumentNullException(nameof(destPoints));
             if (destPoints.Length != 3)
@@ -626,7 +633,8 @@ namespace System.Drawing
             EnumerateMetafileProc callback,
             IntPtr callbackData,
             ImageAttributes? imageAttr
-        ) {
+        )
+        {
             Gdip.CheckStatus(
                 Gdip.GdipEnumerateMetafileSrcRectDestPoint(
                     new HandleRef(this, NativeGraphics),
@@ -649,7 +657,8 @@ namespace System.Drawing
             EnumerateMetafileProc callback,
             IntPtr callbackData,
             ImageAttributes? imageAttr
-        ) {
+        )
+        {
             Gdip.CheckStatus(
                 Gdip.GdipEnumerateMetafileSrcRectDestPointI(
                     new HandleRef(this, NativeGraphics),
@@ -672,7 +681,8 @@ namespace System.Drawing
             EnumerateMetafileProc callback,
             IntPtr callbackData,
             ImageAttributes? imageAttr
-        ) {
+        )
+        {
             Gdip.CheckStatus(
                 Gdip.GdipEnumerateMetafileSrcRectDestRect(
                     new HandleRef(this, NativeGraphics),
@@ -695,7 +705,8 @@ namespace System.Drawing
             EnumerateMetafileProc callback,
             IntPtr callbackData,
             ImageAttributes? imageAttr
-        ) {
+        )
+        {
             Gdip.CheckStatus(
                 Gdip.GdipEnumerateMetafileSrcRectDestRectI(
                     new HandleRef(this, NativeGraphics),
@@ -718,7 +729,8 @@ namespace System.Drawing
             EnumerateMetafileProc callback,
             IntPtr callbackData,
             ImageAttributes? imageAttr
-        ) {
+        )
+        {
             if (destPoints == null)
                 throw new ArgumentNullException(nameof(destPoints));
             if (destPoints.Length != 3)
@@ -750,7 +762,8 @@ namespace System.Drawing
             EnumerateMetafileProc callback,
             IntPtr callbackData,
             ImageAttributes? imageAttr
-        ) {
+        )
+        {
             if (destPoints == null)
                 throw new ArgumentNullException(nameof(destPoints));
             if (destPoints.Length != 3)
@@ -806,7 +819,8 @@ namespace System.Drawing
             out Matrix3x2 cumulativeTransform,
             bool calculateClip,
             out Region? cumulativeClip
-        ) {
+        )
+        {
             cumulativeClip = calculateClip ? GetRegionIfNotInfinite() : null; // Current context clip.
             cumulativeTransform = TransformElements; // Current context transform.
             Vector2 currentOffset = default; // Offset of current context.
@@ -997,7 +1011,8 @@ namespace System.Drawing
             RectangleF dstrect,
             RectangleF srcrect,
             GraphicsUnit unit
-        ) {
+        )
+        {
             GraphicsContext context = new GraphicsContext(this);
 
             int status = Gdip.GdipBeginContainer(
@@ -1058,7 +1073,8 @@ namespace System.Drawing
             Rectangle dstrect,
             Rectangle srcrect,
             GraphicsUnit unit
-        ) {
+        )
+        {
             GraphicsContext context = new GraphicsContext(this);
 
             int status = Gdip.GdipBeginContainerI(
@@ -1154,7 +1170,8 @@ namespace System.Drawing
                             ) != 0
                         ) && (error == 0)
                     )
-                ) {
+                )
+                {
                     return;
                 }
             }

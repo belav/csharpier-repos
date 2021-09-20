@@ -63,7 +63,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedParametersAndValues
         protected override SyntaxNode TryUpdateNameForFlaggedNode(
             SyntaxNode node,
             SyntaxToken newName
-        ) {
+        )
+        {
             switch (node.Kind())
             {
                 case SyntaxKind.IdentifierName:
@@ -108,7 +109,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedParametersAndValues
             SyntaxNode newNameNode,
             SyntaxEditor editor,
             ISyntaxFacts syntaxFacts
-        ) {
+        )
+        {
             if (
                 newNameNode.IsKind(SyntaxKind.DiscardDesignation)
                 && parent.IsKind(
@@ -118,7 +120,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedParametersAndValues
                 && (
                     (CSharpParseOptions)parent.SyntaxTree.Options
                 ).LanguageVersion.IsCSharp9OrAbove()
-            ) {
+            )
+            {
                 var trailingTrivia = declarationPattern.Type.GetTrailingTrivia()
                     .AddRange(newNameNode.GetLeadingTrivia())
                     .AddRange(newNameNode.GetTrailingTrivia());
@@ -134,7 +137,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedParametersAndValues
             SwitchSectionSyntax switchCaseBlock,
             SyntaxEditor editor,
             LocalDeclarationStatementSyntax declarationStatement
-        ) {
+        )
+        {
             var firstStatement = switchCaseBlock.Statements.FirstOrDefault();
             if (firstStatement != null)
             {
@@ -153,7 +157,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedParametersAndValues
             SyntaxNode newAssignmentTarget,
             SyntaxEditor editor,
             ISyntaxFactsService syntaxFacts
-        ) {
+        )
+        {
             // 1. Compound assignment is changed to simple assignment.
             // For example, "x += MethodCall();", where assignment to 'x' is redundant
             // is replaced with "_ = MethodCall();" or "var unused = MethodCall();

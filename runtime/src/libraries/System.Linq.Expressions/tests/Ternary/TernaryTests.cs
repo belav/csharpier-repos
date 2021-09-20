@@ -595,42 +595,48 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckTernaryGenericWithClassRestrictionWithCustomTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckTernaryGenericWithClassRestrictionHelper<C>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckTernaryGenericWithClassRestrictionWithObjectTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckTernaryGenericWithClassRestrictionHelper<object>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckTernaryGenericWithSubClassRestrictionWithCustomTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckTernaryGenericWithSubClassRestrictionHelper<C>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckTernaryGenericWithClassAndNewRestrictionWithCustomTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckTernaryGenericWithClassAndNewRestrictionHelper<C>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckTernaryGenericWithClassAndNewRestrictionWithObjectTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckTernaryGenericWithClassAndNewRestrictionHelper<object>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckTernaryGenericWithSubClassAndNewRestrictionWithCustomTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckTernaryGenericWithSubClassAndNewRestrictionHelper<C>(useInterpreter);
         }
 
@@ -643,14 +649,16 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckTernaryGenericWithStructRestrictionWithStructTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckTernaryGenericWithStructRestrictionHelper<S>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckTernaryGenericWithStructRestrictionWithStructWithStringAndFieldTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckTernaryGenericWithStructRestrictionHelper<Scs>(useInterpreter);
         }
 
@@ -886,7 +894,8 @@ namespace System.Linq.Expressions.Tests
             Delegate a,
             Delegate b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<Delegate>> e = Expression.Lambda<Func<Delegate>>(
                 Expression.Condition(
                     Expression.Constant(condition, typeof(bool)),
@@ -965,7 +974,8 @@ namespace System.Linq.Expressions.Tests
             Func<object> a,
             Func<object> b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<Func<object>>> e = Expression.Lambda<Func<Func<object>>>(
                 Expression.Condition(
                     Expression.Constant(condition, typeof(bool)),
@@ -999,7 +1009,8 @@ namespace System.Linq.Expressions.Tests
             IEquatable<C> a,
             IEquatable<C> b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<IEquatable<C>>> e = Expression.Lambda<Func<IEquatable<C>>>(
                 Expression.Condition(
                     Expression.Constant(condition, typeof(bool)),
@@ -1018,7 +1029,8 @@ namespace System.Linq.Expressions.Tests
             IEquatable<D> a,
             IEquatable<D> b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<IEquatable<D>>> e = Expression.Lambda<Func<IEquatable<D>>>(
                 Expression.Condition(
                     Expression.Constant(condition, typeof(bool)),
@@ -1127,7 +1139,8 @@ namespace System.Linq.Expressions.Tests
             Scs a,
             Scs b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<Scs>> e = Expression.Lambda<Func<Scs>>(
                 Expression.Condition(
                     Expression.Constant(condition, typeof(bool)),
@@ -1161,7 +1174,8 @@ namespace System.Linq.Expressions.Tests
             Sp a,
             Sp b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<Sp>> e = Expression.Lambda<Func<Sp>>(
                 Expression.Condition(
                     Expression.Constant(condition, typeof(bool)),
@@ -1353,7 +1367,8 @@ namespace System.Linq.Expressions.Tests
             Ts a,
             Ts b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<Ts>> e = Expression.Lambda<Func<Ts>>(
                 Expression.Condition(
                     Expression.Constant(condition, typeof(bool)),

@@ -16,11 +16,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this SyntaxToken genericIdentifier,
             CancellationToken cancellationToken,
             [NotNullWhen(true)] out GenericNameSyntax? genericName
-        ) {
+        )
+        {
             if (
                 genericIdentifier.GetNextToken(includeSkipped: true).Kind()
                 == SyntaxKind.LessThanToken
-            ) {
+            )
+            {
                 var lastToken = genericIdentifier.FindLastTokenOfPartialGenericName();
 
                 var syntaxTree = genericIdentifier.SyntaxTree!;
@@ -48,7 +50,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         /// <remarks>This is related to the code in <see cref="SyntaxTreeExtensions.IsInPartiallyWrittenGeneric(SyntaxTree, int, CancellationToken)"/></remarks>
         public static SyntaxToken FindLastTokenOfPartialGenericName(
             this SyntaxToken genericIdentifier
-        ) {
+        )
+        {
             Contract.ThrowIfFalse(genericIdentifier.Kind() == SyntaxKind.IdentifierToken);
 
             // advance to the "<" token

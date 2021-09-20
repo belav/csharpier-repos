@@ -58,7 +58,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             string name,
             IEnumerable<Type> typeArguments,
             Type callingType
-        ) {
+        )
+        {
             // The first argument is the object that we're calling off of.
             if (callingType.IsGenericType)
             {
@@ -104,7 +105,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             MemberLookup mem,
             bool allowSpecialNames,
             bool requireInvocable
-        ) {
+        )
+        {
             CType type = callingObject.Type;
 
             if (type is ArrayType)
@@ -128,7 +130,8 @@ namespace Microsoft.CSharp.RuntimeBinder
                         | (name == SpecialNames.Constructor ? MemLookFlags.Ctor : 0)
                         | (requireInvocable ? MemLookFlags.MustBeInvocable : 0)
                 )
-            ) {
+            )
+            {
                 return null;
             }
             return mem.SwtFirst();
@@ -405,13 +408,15 @@ namespace Microsoft.CSharp.RuntimeBinder
                     typeParam =
                             typeParam.LookupNext(symbmask_t.MASK_TypeParameterSymbol)
                             as TypeParameterSymbol
-                ) {
+                )
+                {
                     if (
                         AreTypeParametersEquivalent(
                             typeParam.GetTypeParameterType().AssociatedSystemType,
                             t
                         )
-                    ) {
+                    )
+                    {
                         return typeParam.GetTypeParameterType();
                     }
                 }
@@ -488,7 +493,8 @@ namespace Microsoft.CSharp.RuntimeBinder
                 if (
                     parentType.GetGenericArguments() == null
                     || pos >= parentType.GetGenericArguments().Length
-                ) {
+                )
+                {
                     return t;
                 }
             }
@@ -541,7 +547,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             MethodSymbol meth,
             Type t,
             bool bIsAggregate
-        ) {
+        )
+        {
             Debug.Assert((agg != null && bIsAggregate) || (meth != null && !bIsAggregate));
 
             TypeParameterSymbol typeParam;
@@ -580,13 +587,15 @@ namespace Microsoft.CSharp.RuntimeBinder
                     t.GenericParameterAttributes
                     & GenericParameterAttributes.DefaultConstructorConstraint
                 ) != 0
-            ) {
+            )
+            {
                 cons |= SpecCons.New;
             }
             if (
                 (t.GenericParameterAttributes & GenericParameterAttributes.ReferenceTypeConstraint)
                 != 0
-            ) {
+            )
+            {
                 cons |= SpecCons.Ref;
             }
             if (
@@ -594,7 +603,8 @@ namespace Microsoft.CSharp.RuntimeBinder
                     t.GenericParameterAttributes
                     & GenericParameterAttributes.NotNullableValueTypeConstraint
                 ) != 0
-            ) {
+            )
+            {
                 cons |= SpecCons.Val;
             }
 
@@ -688,7 +698,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             MethodInfo methinfo,
             Type t,
             AggregateSymbol parent
-        ) {
+        )
+        {
             MethodSymbol meth = FindMatchingMethod(methinfo, parent);
             if (meth == null)
             {
@@ -791,11 +802,13 @@ namespace Microsoft.CSharp.RuntimeBinder
                     bool bAdded = false;
                     foreach (
                         MethodInfo methinfo in t.DeclaringType.GetMethods(EverythingBindingFlags)
-                    ) {
+                    )
+                    {
                         if (
                             !methinfo.HasSameMetadataDefinitionAs(methodBase)
                             || !methinfo.IsGenericMethod
-                        ) {
+                        )
+                        {
                             continue;
                         }
 
@@ -834,7 +847,8 @@ namespace Microsoft.CSharp.RuntimeBinder
                         agg.AssociatedSystemType.IsEquivalentTo(
                             t.IsGenericType ? t.GetGenericTypeDefinition() : t
                         )
-                    ) {
+                    )
+                    {
                         return agg;
                     }
 
@@ -847,7 +861,8 @@ namespace Microsoft.CSharp.RuntimeBinder
         private static NamespaceSymbol AddNamespaceToSymbolTable(
             NamespaceOrAggregateSymbol parent,
             string sz
-        ) {
+        )
+        {
             Name name = GetName(sz);
             return SymbolStore.LookupSym(name, parent, symbmask_t.MASK_NamespaceSymbol)
                     as NamespaceSymbol
@@ -899,7 +914,8 @@ namespace Microsoft.CSharp.RuntimeBinder
         private static AggregateSymbol AddAggregateToSymbolTable(
             NamespaceOrAggregateSymbol parent,
             Type type
-        ) {
+        )
+        {
             AggregateSymbol agg = SymFactory.CreateAggregate(GetName(type), parent);
             agg.AssociatedSystemType = type.IsGenericType ? type.GetGenericTypeDefinition() : type;
             agg.AssociatedAssembly = type.Assembly;
@@ -934,7 +950,8 @@ namespace Microsoft.CSharp.RuntimeBinder
                         || type.BaseType.FullName == "System.Delegate"
                     )
                     && type.FullName != "System.MulticastDelegate"
-                ) {
+                )
+                {
                     kind = AggKindEnum.Delegate;
                 }
                 else
@@ -1088,7 +1105,8 @@ namespace Microsoft.CSharp.RuntimeBinder
         private static FieldSymbol AddFieldToSymbolTable(
             FieldInfo fieldInfo,
             AggregateSymbol aggregate
-        ) {
+        )
+        {
             FieldSymbol field =
                 SymbolStore.LookupSym(
                     GetName(fieldInfo.Name),
@@ -1148,7 +1166,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             EventInfo eventInfo,
             AggregateSymbol aggregate,
             FieldSymbol addedField
-        ) {
+        )
+        {
             EventSymbol ev =
                 SymbolStore.LookupSym(
                     GetName(eventInfo.Name),
@@ -1235,7 +1254,8 @@ namespace Microsoft.CSharp.RuntimeBinder
         private static void AddPropertyToSymbolTable(
             PropertyInfo property,
             AggregateSymbol aggregate
-        ) {
+        )
+        {
             Name name;
             bool isIndexer =
                 property.GetIndexParameters().Length != 0
@@ -1437,7 +1457,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             MethodBase member,
             AggregateSymbol callingAggregate,
             MethodKindEnum kind
-        ) {
+        )
+        {
             MethodInfo method = member as MethodInfo;
 
             Debug.Assert(method != null || member is ConstructorInfo);
@@ -1551,7 +1572,8 @@ namespace Microsoft.CSharp.RuntimeBinder
         private static void SetParameterDataForMethProp(
             MethodOrPropertySymbol methProp,
             ParameterInfo[] parameters
-        ) {
+        )
+        {
             if (parameters.Length > 0)
             {
                 // See if we have a param array.
@@ -1560,7 +1582,8 @@ namespace Microsoft.CSharp.RuntimeBinder
                         typeof(ParamArrayAttribute),
                         false
                     ) != null
-                ) {
+                )
+                {
                     methProp.isParamArray = true;
                 }
 
@@ -1582,12 +1605,14 @@ namespace Microsoft.CSharp.RuntimeBinder
             MethodOrPropertySymbol methProp,
             ParameterInfo[] parameters,
             int i
-        ) {
+        )
+        {
             ParameterInfo parameter = parameters[i];
             if (
                 (parameter.Attributes & ParameterAttributes.Optional) != 0
                 && !parameter.ParameterType.IsByRef
-            ) {
+            )
+            {
                 methProp.SetOptionalParameter(i);
                 PopulateSymbolTableWithName(
                     "Value",
@@ -1630,7 +1655,8 @@ namespace Microsoft.CSharp.RuntimeBinder
                 else if (
                     (parameter.Attributes & ParameterAttributes.HasDefault) != 0
                     && !parameter.ParameterType.IsByRef
-                ) {
+                )
+                {
                     // Only set a default value if we have one, and the type that we're
                     // looking at isn't a by ref type or a type parameter.
 
@@ -1723,7 +1749,8 @@ namespace Microsoft.CSharp.RuntimeBinder
         private static MethodSymbol FindMatchingMethod(
             MemberInfo method,
             AggregateSymbol callingAggregate
-        ) {
+        )
+        {
             MethodSymbol meth =
                 SymbolStore.LookupSym(
                     GetName(method.Name),
@@ -1747,7 +1774,8 @@ namespace Microsoft.CSharp.RuntimeBinder
         private static TypeArray CreateParameterArray(
             MemberInfo associatedInfo,
             ParameterInfo[] parameters
-        ) {
+        )
+        {
             bool isVarArg =
                 associatedInfo is MethodBase mb
                 && (mb.CallingConvention & CallingConventions.VarArgs) != 0;
@@ -1940,12 +1968,14 @@ namespace Microsoft.CSharp.RuntimeBinder
             // Now find all the conversions and make them.
             foreach (
                 MethodInfo conversion in type.GetMethods(BindingFlags.Public | BindingFlags.Static)
-            ) {
+            )
+            {
                 if (
                     conversion.DeclaringType == type
                     && conversion.IsSpecialName
                     && !conversion.IsGenericMethod
-                ) {
+                )
+                {
                     MethodKindEnum methodKind;
                     switch (conversion.Name)
                     {

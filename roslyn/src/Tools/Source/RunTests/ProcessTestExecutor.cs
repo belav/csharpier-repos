@@ -92,7 +92,8 @@ namespace RunTests
         public async Task<TestResult> RunTestAsync(
             AssemblyInfo assemblyInfo,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var result = await RunTestAsyncInternal(assemblyInfo, retry: false, cancellationToken);
 
             // For integration tests (TestVsi), we make one more attempt to re-run failed tests.
@@ -108,7 +109,8 @@ namespace RunTests
             AssemblyInfo assemblyInfo,
             bool retry,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 var commandLineArguments = GetCommandLineArguments(
@@ -142,7 +144,8 @@ namespace RunTests
                             var test in doc.XPathSelectElements(
                                 "/assemblies/assembly/collection/test[@result='Fail']"
                             )
-                        ) {
+                        )
+                        {
                             ConsoleUtil.WriteLine(
                                 $"  {test.Attribute("name").Value}: {test.Attribute("result").Value}"
                             );

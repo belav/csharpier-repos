@@ -40,7 +40,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public ErrorPageTests(
             MvcTestFixture<ErrorPageMiddlewareWebSite.Startup> fixture,
             ITestOutputHelper testOutputHelper
-        ) {
+        )
+        {
             _assemblyTestLog = AssemblyTestLog.ForAssembly(GetType().Assembly);
 
             var loggerProvider = _assemblyTestLog.CreateLoggerFactory(
@@ -111,7 +112,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 
             static void ConfigureRuntimeCompilationOptions(
                 MvcRazorRuntimeCompilationOptions options
-            ) {
+            )
+            {
                 options.AdditionalReferencePaths.Add(typeof(string).Assembly.Location);
 
                 // Workaround for incorrectly generated deps file. The build output has all of the binaries required to compile. We'll grab these and

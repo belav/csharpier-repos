@@ -36,7 +36,8 @@ namespace System.Drawing
                         _printPageEventArgs.PageSettings.PrinterSettings.CreateDeviceContext(
                             hdevMode
                         )
-                ) {
+                )
+                {
                     using (Graphics graphics = Graphics.FromHdcInternal(dc.Hdc))
                     {
                         if (_printDocument.OriginAtMargins)

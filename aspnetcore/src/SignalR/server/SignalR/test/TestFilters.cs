@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         public async Task OnConnectedAsync(
             HubLifetimeContext context,
             Func<HubLifetimeContext, Task> next
-        ) {
+        )
+        {
             _service.StartedMethod.TrySetResult(null);
             await next(context);
             _service.EndMethod.TrySetResult(null);
@@ -28,7 +29,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         public async ValueTask<object> InvokeMethodAsync(
             HubInvocationContext invocationContext,
             Func<HubInvocationContext, ValueTask<object>> next
-        ) {
+        )
+        {
             _service.StartedMethod.TrySetResult(null);
             var result = await next(invocationContext);
             _service.EndMethod.TrySetResult(null);
@@ -40,7 +42,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             HubLifetimeContext context,
             Exception exception,
             Func<HubLifetimeContext, Exception, Task> next
-        ) {
+        )
+        {
             _service.StartedMethod.TrySetResult(null);
             await next(context, exception);
             _service.EndMethod.TrySetResult(null);
@@ -59,7 +62,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         public async Task OnConnectedAsync(
             HubLifetimeContext context,
             Func<HubLifetimeContext, Task> next
-        ) {
+        )
+        {
             await _syncPoint[0].WaitToContinue();
             await next(context);
         }
@@ -67,7 +71,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         public async ValueTask<object> InvokeMethodAsync(
             HubInvocationContext invocationContext,
             Func<HubInvocationContext, ValueTask<object>> next
-        ) {
+        )
+        {
             await _syncPoint[1].WaitToContinue();
             var result = await next(invocationContext);
 
@@ -78,7 +83,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             HubLifetimeContext context,
             Exception exception,
             Func<HubLifetimeContext, Exception, Task> next
-        ) {
+        )
+        {
             await _syncPoint[2].WaitToContinue();
             await next(context, exception);
         }
@@ -105,7 +111,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         public Task OnConnectedAsync(
             HubLifetimeContext context,
             Func<HubLifetimeContext, Task> next
-        ) {
+        )
+        {
             _counter.OnConnectedAsyncCount++;
             return next(context);
         }
@@ -114,7 +121,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             HubLifetimeContext context,
             Exception exception,
             Func<HubLifetimeContext, Exception, Task> next
-        ) {
+        )
+        {
             _counter.OnDisconnectedAsyncCount++;
             return next(context, exception);
         }
@@ -122,7 +130,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         public ValueTask<object> InvokeMethodAsync(
             HubInvocationContext invocationContext,
             Func<HubInvocationContext, ValueTask<object>> next
-        ) {
+        )
+        {
             _counter.InvokeMethodAsyncCount++;
             return next(invocationContext);
         }
@@ -133,7 +142,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         public async Task OnConnectedAsync(
             HubLifetimeContext context,
             Func<HubLifetimeContext, Task> next
-        ) {
+        )
+        {
             try
             {
                 await next(context);
@@ -145,7 +155,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             HubLifetimeContext context,
             Exception exception,
             Func<HubLifetimeContext, Exception, Task> next
-        ) {
+        )
+        {
             try
             {
                 await next(context, exception);
@@ -156,7 +167,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         public async ValueTask<object> InvokeMethodAsync(
             HubInvocationContext invocationContext,
             Func<HubInvocationContext, ValueTask<object>> next
-        ) {
+        )
+        {
             try
             {
                 return await next(invocationContext);
@@ -177,7 +189,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             bool skipOnConnected = false,
             bool skipInvoke = false,
             bool skipOnDisconnected = false
-        ) {
+        )
+        {
             _skipOnConnected = skipOnConnected;
             _skipInvoke = skipInvoke;
             _skipOnDisconnected = skipOnDisconnected;
@@ -186,7 +199,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         public Task OnConnectedAsync(
             HubLifetimeContext context,
             Func<HubLifetimeContext, Task> next
-        ) {
+        )
+        {
             if (_skipOnConnected)
             {
                 return Task.CompletedTask;
@@ -199,7 +213,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             HubLifetimeContext context,
             Exception exception,
             Func<HubLifetimeContext, Exception, Task> next
-        ) {
+        )
+        {
             if (_skipOnDisconnected)
             {
                 return Task.CompletedTask;
@@ -211,7 +226,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         public ValueTask<object> InvokeMethodAsync(
             HubInvocationContext invocationContext,
             Func<HubInvocationContext, ValueTask<object>> next
-        ) {
+        )
+        {
             if (_skipInvoke)
             {
                 return new ValueTask<object>();
@@ -238,7 +254,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         public ValueTask<object> InvokeMethodAsync(
             HubInvocationContext invocationContext,
             Func<HubInvocationContext, ValueTask<object>> next
-        ) {
+        )
+        {
             return next(invocationContext);
         }
     }
@@ -261,7 +278,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         public ValueTask<object> InvokeMethodAsync(
             HubInvocationContext invocationContext,
             Func<HubInvocationContext, ValueTask<object>> next
-        ) {
+        )
+        {
             return next(invocationContext);
         }
     }
@@ -271,7 +289,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         public ValueTask<object> InvokeMethodAsync(
             HubInvocationContext invocationContext,
             Func<HubInvocationContext, ValueTask<object>> next
-        ) {
+        )
+        {
             var methodInfo = typeof(BaseHub).GetMethod(nameof(BaseHub.BaseMethod));
             var context = new HubInvocationContext(
                 invocationContext.Context,

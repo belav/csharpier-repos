@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<Symbol> symbols,
             LookupResultKind resultKind,
             bool isDynamic
-        ) {
+        )
+        {
             if (isDynamic)
             {
                 if (symbols.Length == 1)

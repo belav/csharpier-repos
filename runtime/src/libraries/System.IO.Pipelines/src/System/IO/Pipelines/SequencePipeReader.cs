@@ -61,7 +61,8 @@ namespace System.IO.Pipelines
         /// <inheritdoc />
         public override ValueTask<ReadResult> ReadAsync(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (TryRead(out ReadResult result))
             {
                 return new ValueTask<ReadResult>(result);

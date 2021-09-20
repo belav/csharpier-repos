@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
         public ImmutableArray<SyntaxNode> GetUnnecessaryImports(
             SemanticModel model,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = model.SyntaxTree.GetRoot(cancellationToken);
             return GetUnnecessaryImports(
                 model,

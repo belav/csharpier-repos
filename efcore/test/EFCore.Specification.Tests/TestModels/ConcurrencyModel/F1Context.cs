@@ -34,7 +34,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ConcurrencyModel
                     new() { Name = "Ferrari" },
                     new() { Name = "Cosworth" }
                 }
-            ) {
+            )
+            {
                 context.Add(engineSupplier);
             }
 
@@ -76,7 +77,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ConcurrencyModel
                     ferrariEngine,
                     cosworthEngine
                 }
-            ) {
+            )
+            {
                 context.Engines.Add(engine);
             }
 
@@ -276,7 +278,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ConcurrencyModel
                         FastestLaps = 0
                     }
                 }
-            ) {
+            )
+            {
                 context.Teams.Add(team);
             }
 
@@ -830,7 +833,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ConcurrencyModel
                         FastestLaps = 0
                     }
                 }
-            ) {
+            )
+            {
                 context.Drivers.Add(driver);
             }
 

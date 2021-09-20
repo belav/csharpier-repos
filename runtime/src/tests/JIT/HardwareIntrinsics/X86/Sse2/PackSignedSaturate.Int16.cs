@@ -142,7 +142,8 @@ namespace JIT.HardwareIntrinsics.X86
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfinArray2
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -229,7 +230,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             public void RunStructFldScenario_Load(
                 SimpleBinaryOpTest__PackSignedSaturateInt16 testClass
-            ) {
+            )
+            {
                 fixed (Vector128<Int32>* pFld1 = &_fld1)fixed (Vector128<Int32>* pFld2 = &_fld2)
                 {
                     var result = Sse2.PackSignedSaturate(
@@ -446,7 +448,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             fixed (Vector128<Int32>* pClsVar1 = &_clsVar1)fixed (
                 Vector128<Int32>* pClsVar2 = &_clsVar2
-            ) {
+            )
+            {
                 var result = Sse2.PackSignedSaturate(
                     Sse2.LoadVector128((Int32*)(pClsVar1)),
                     Sse2.LoadVector128((Int32*)(pClsVar2))
@@ -512,7 +515,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             fixed (Vector128<Int32>* pFld1 = &test._fld1)fixed (
                 Vector128<Int32>* pFld2 = &test._fld2
-            ) {
+            )
+            {
                 var result = Sse2.PackSignedSaturate(
                     Sse2.LoadVector128((Int32*)(pFld1)),
                     Sse2.LoadVector128((Int32*)(pFld2))
@@ -616,7 +620,8 @@ namespace JIT.HardwareIntrinsics.X86
             Vector128<Int32> op2,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Int32[] inArray1 = new Int32[Op1ElementCount];
             Int32[] inArray2 = new Int32[Op2ElementCount];
             Int16[] outArray = new Int16[RetElementCount];
@@ -637,7 +642,8 @@ namespace JIT.HardwareIntrinsics.X86
             void* op2,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Int32[] inArray1 = new Int32[Op1ElementCount];
             Int32[] inArray2 = new Int32[Op2ElementCount];
             Int16[] outArray = new Int16[RetElementCount];
@@ -666,7 +672,8 @@ namespace JIT.HardwareIntrinsics.X86
             Int32[] right,
             Int16[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (result[0] != (short)Math.Min(Math.Max(left[0], short.MinValue), short.MaxValue))
@@ -687,7 +694,8 @@ namespace JIT.HardwareIntrinsics.X86
                                       short.MaxValue
                                   )
                         )
-                    ) {
+                    )
+                    {
                         succeeded = false;
                         break;
                     }

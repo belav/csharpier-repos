@@ -208,7 +208,8 @@ namespace Repro
             int b97,
             int b98,
             int b99
-        ) {
+        )
+        {
             int result = a00 + a30 + a60 + a90 + b20 + b50 + b80;
             // We will make one recursive call to Test()
             if (a00 == 1)

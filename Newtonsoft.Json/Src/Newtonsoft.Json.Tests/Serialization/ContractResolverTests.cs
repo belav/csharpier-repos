@@ -65,7 +65,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         protected override IList<JsonProperty> CreateProperties(
             Type type,
             MemberSerialization memberSerialization
-        ) {
+        )
+        {
             IList<JsonProperty> properties = base.CreateProperties(type, memberSerialization);
 
             // only serializer properties that start with the specified character

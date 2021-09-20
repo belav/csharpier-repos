@@ -41,7 +41,8 @@ namespace System.ComponentModel.DataAnnotations
         protected override ValidationResult? IsValid(
             object? value,
             ValidationContext validationContext
-        ) {
+        )
+        {
             var otherPropertyInfo = validationContext.ObjectType.GetRuntimeProperty(OtherProperty);
             if (otherPropertyInfo == null)
             {

@@ -1055,7 +1055,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyUpdateDifferentParamsReturnsDifferent<TDelegate>(
             Expression<TDelegate> lamda,
             ParameterExpression[] pars
-        ) {
+        )
+        {
             // Should try to create new lambda, but should fail as should have wrong number of arguments.
             AssertExtensions.Throws<ArgumentException>(
                 null,

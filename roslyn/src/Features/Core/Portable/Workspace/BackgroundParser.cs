@@ -89,7 +89,8 @@ namespace Microsoft.CodeAnalysis.Host
                     if (
                         oldProject.SupportsCompilation
                         && !object.Equals(oldProject.ParseOptions, newProject.ParseOptions)
-                    ) {
+                    )
+                    {
                         foreach (var doc in newProject.Documents)
                         {
                             ParseIfOpen(doc);
@@ -169,7 +170,8 @@ namespace Microsoft.CodeAnalysis.Host
                         SolutionCrawlerOptions.GetBackgroundAnalysisScope(document.Project)
                             == BackgroundAnalysisScope.ActiveFile
                         && _documentTrackingService?.TryGetActiveDocument() != document.Id
-                    ) {
+                    )
+                    {
                         // Avoid performing any background parsing for non-active files
                         // if the user has explicitly set the background analysis scope
                         // to only analyze active files.
@@ -231,7 +233,8 @@ namespace Microsoft.CodeAnalysis.Host
                         if (
                             _workMap.TryGetValue(document.Id, out var sourceInMap)
                             && sourceInMap == cancellationTokenSource
-                        ) {
+                        )
+                        {
                             _workMap = _workMap.Remove(document.Id);
                         }
                     }

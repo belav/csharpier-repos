@@ -63,7 +63,8 @@ namespace Microsoft.AspNetCore.DataProtection
                 TState state,
                 Exception exception,
                 Func<TState, Exception, string> formatter
-            ) {
+            )
+            {
                 string message = string.Format(
                     CultureInfo.InvariantCulture,
                     "Provider: {0}"

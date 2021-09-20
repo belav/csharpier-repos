@@ -235,14 +235,16 @@ namespace Internal.TypeSystem.Ecma
 
                 foreach (
                     CustomAttributeHandle attributeHandle in _typeDefinition.GetCustomAttributes()
-                ) {
+                )
+                {
                     if (
                         MetadataReader.GetAttributeNamespaceAndName(
                             attributeHandle,
                             out StringHandle namespaceHandle,
                             out StringHandle nameHandle
                         )
-                    ) {
+                    )
+                    {
                         if (
                             isValueType
                             && stringComparer.Equals(nameHandle, "IsByRefLikeAttribute")
@@ -314,7 +316,8 @@ namespace Internal.TypeSystem.Ecma
             string name,
             MethodSignature signature,
             Instantiation substitution
-        ) {
+        )
+        {
             var metadataReader = this.MetadataReader;
             var stringComparer = metadataReader.StringComparer;
 
@@ -345,7 +348,8 @@ namespace Internal.TypeSystem.Ecma
                 if (
                     methodDefinition.Attributes.IsRuntimeSpecialName()
                     && stringComparer.Equals(methodDefinition.Name, ".cctor")
-                ) {
+                )
+                {
                     MethodDesc method = (MethodDesc)_module.GetObject(handle);
                     return method;
                 }
@@ -370,7 +374,8 @@ namespace Internal.TypeSystem.Ecma
                     attributes.IsRuntimeSpecialName()
                     && attributes.IsPublic()
                     && stringComparer.Equals(methodDefinition.Name, ".ctor")
-                ) {
+                )
+                {
                     MethodDesc method = (MethodDesc)_module.GetObject(handle);
                     if (method.Signature.Length != 0)
                         continue;

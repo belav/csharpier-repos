@@ -57,7 +57,8 @@ namespace System.Web.Mvc
         IEnumerable<Filter> IFilterProvider.GetFilters(
             ControllerContext controllerContext,
             ActionDescriptor actionDescriptor
-        ) {
+        )
+        {
             return this;
         }
 
@@ -77,7 +78,8 @@ namespace System.Web.Mvc
                     || instance is IResultFilter
                     || instance is IAuthenticationFilter
                 )
-            ) {
+            )
+            {
                 throw Error.InvalidOperation(
                     MvcResources.GlobalFilterCollection_UnsupportedFilterInstance,
                     typeof(IAuthorizationFilter).FullName,

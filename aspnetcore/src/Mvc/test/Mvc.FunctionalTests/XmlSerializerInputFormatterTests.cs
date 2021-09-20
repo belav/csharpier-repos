@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
     {
         public XmlSerializerInputFormatterTests(
             MvcTestFixture<XmlFormattersWebSite.Startup> fixture
-        ) {
+        )
+        {
             Client = fixture.CreateDefaultClient();
         }
 

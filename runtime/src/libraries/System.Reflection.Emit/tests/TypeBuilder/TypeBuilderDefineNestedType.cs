@@ -179,7 +179,8 @@ namespace System.Reflection.Emit.Tests
             PackingSize packingSize,
             int typesize,
             Type[] implementedInterfaces
-        ) {
+        )
+        {
             bool isDefaultImplementedInterfaces = implementedInterfaces?.Length == 0;
             bool isDefaultPackingSize = packingSize == PackingSize.Unspecified;
             bool isDefaultSize = typesize == 0;
@@ -362,7 +363,8 @@ namespace System.Reflection.Emit.Tests
         public void DefineNestedType_InvalidAttributes_ThrowsArgumentException(
             TypeAttributes attributes,
             string paramName
-        ) {
+        )
+        {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
             AssertExtensions.Throws<ArgumentException>(
                 paramName,
@@ -403,7 +405,8 @@ namespace System.Reflection.Emit.Tests
         [InlineData(typeof(SealedClass))]
         public void DefineNestedType_ParentNotInheritable_ThrowsTypeLoadExceptionOnCreation(
             Type parentType
-        ) {
+        )
+        {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
             TypeBuilder nestedType = type.DefineNestedType(
                 "NestedType",
@@ -421,7 +424,8 @@ namespace System.Reflection.Emit.Tests
         [InlineData(typeof(EmptyNonGenericClass[]))]
         public void DefineNestedType_ParentHasNoDefaultConstructor_ThrowsNotSupportedExceptionOnCreation(
             Type parentType
-        ) {
+        )
+        {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
             TypeBuilder nestedType = type.DefineNestedType(
                 "NestedType",
@@ -483,7 +487,8 @@ namespace System.Reflection.Emit.Tests
         [MemberData(nameof(InvalidInterfaceType_TestData))]
         public void DefineNestedType_InvalidInterfaceType_ThrowsTypeLoadExceptionOnCreation(
             Type interfaceType
-        ) {
+        )
+        {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
             TypeBuilder nestedType = type.DefineNestedType(
                 "Name",
@@ -500,7 +505,8 @@ namespace System.Reflection.Emit.Tests
         [InlineData(typeof(EmptyGenericInterface<>))]
         public void DefineNestedType_OpenGenericInterfaceType_ThrowsBadImageFormatExceptionOnCreation(
             Type interfaceType
-        ) {
+        )
+        {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
             TypeBuilder nestedType = type.DefineNestedType(
                 "Name",

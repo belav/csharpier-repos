@@ -133,7 +133,8 @@ namespace System.Linq.Expressions.Tests
             Decrementable operand,
             Decrementable expected,
             bool useInterpreter
-        ) {
+        )
+        {
             Func<Decrementable> func = Expression.Lambda<Func<Decrementable>>(
                     Expression.Decrement(Expression.Constant(operand))
                 )
@@ -146,7 +147,8 @@ namespace System.Linq.Expressions.Tests
             Decrementable operand,
             Decrementable expected,
             bool useInterpreter
-        ) {
+        )
+        {
             MethodInfo method = typeof(IncrementDecrementTests).GetMethod(nameof(DoublyDecrement));
             Func<Decrementable> func = Expression.Lambda<Func<Decrementable>>(
                     Expression.Decrement(Expression.Constant(operand), method)
@@ -160,7 +162,8 @@ namespace System.Linq.Expressions.Tests
             int operand,
             int expected,
             bool useInterpreter
-        ) {
+        )
+        {
             MethodInfo method = typeof(IncrementDecrementTests).GetMethod(
                 nameof(DoublyDecrementInt32)
             );

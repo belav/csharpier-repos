@@ -12,7 +12,8 @@ class Helpers
         Action<TextWriter> setHelper,
         Func<TextWriter> getHelper,
         Func<StreamReader, string> readHelper
-    ) {
+    )
+    {
         const string TestString = "Test";
 
         TextWriter oldWriterToRestore = getHelper();

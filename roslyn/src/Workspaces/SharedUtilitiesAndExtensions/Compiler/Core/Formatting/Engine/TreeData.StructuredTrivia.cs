@@ -59,7 +59,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                     parent != null
                     && parent.SyntaxTree != null
                     && parent.SyntaxTree.GetText() != null
-                ) {
+                )
+                {
                     return parent.SyntaxTree.GetText();
                 }
 

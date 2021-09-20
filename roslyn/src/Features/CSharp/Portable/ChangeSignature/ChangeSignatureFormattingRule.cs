@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
             List<IndentBlockOperation> list,
             SyntaxNode node,
             in NextIndentBlockOperationAction nextOperation
-        ) {
+        )
+        {
             nextOperation.Invoke();
 
             if (s_allowableKinds.Contains(node.Kind()))
@@ -40,7 +41,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
         private static void AddChangeSignatureIndentOperation(
             List<IndentBlockOperation> list,
             SyntaxNode node
-        ) {
+        )
+        {
             if (node.Parent != null)
             {
                 var baseToken = node.Parent.GetFirstToken();
@@ -70,11 +72,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
             in SyntaxToken previousToken,
             in SyntaxToken currentToken,
             in NextGetAdjustNewLinesOperation nextOperation
-        ) {
+        )
+        {
             if (
                 previousToken.Kind() == SyntaxKind.CommaToken
                 && s_allowableKinds.Contains(previousToken.Parent.Kind())
-            ) {
+            )
+            {
                 return FormattingOperations.CreateAdjustNewLinesOperation(
                     0,
                     AdjustNewLinesOption.PreserveLines

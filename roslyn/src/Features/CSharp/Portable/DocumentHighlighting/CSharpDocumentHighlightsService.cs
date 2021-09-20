@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentHighlighting
             Document document,
             ISymbol symbol,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // The FindRefs engine won't find references through 'var' for performance reasons.
             // Also, they are not needed for things like rename/sig change, and the normal find refs
             // feature.  However, we would like the results to be highlighted to get a good experience

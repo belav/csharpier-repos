@@ -76,7 +76,8 @@ namespace System.Web.Mvc
         public IEnumerable<ModelValidator> GetValidators(
             ModelMetadata metadata,
             ControllerContext context
-        ) {
+        )
+        {
             ModelValidatorProvider[] combined = CombinedItems;
             for (int i = 0; i < combined.Length; i++)
             {

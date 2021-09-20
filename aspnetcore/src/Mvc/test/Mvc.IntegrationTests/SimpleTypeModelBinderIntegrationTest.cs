@@ -531,7 +531,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         [InlineData(typeof(bool))]
         public async Task BindParameter_WithEmptyData_AndPerTypeMessage_AddsGivenMessage(
             Type parameterType
-        ) {
+        )
+        {
             // Arrange
             var metadataProvider = new TestModelMetadataProvider();
             metadataProvider.ForType(parameterType)
@@ -591,7 +592,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         [InlineData(typeof(string))]
         public async Task BindParameter_WithEmptyData_BindsReferenceAndNullableObjects(
             Type parameterType
-        ) {
+        )
+        {
             // Arrange
             var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
             var parameter = new ParameterDescriptor
@@ -684,7 +686,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         [MemberData(nameof(PersonStoreData))]
         public async Task BindParameter_FromFormData_BindsCorrectly(
             Dictionary<string, StringValues> personStore
-        ) {
+        )
+        {
             // Arrange
             var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
             var parameter = new ParameterDescriptor()

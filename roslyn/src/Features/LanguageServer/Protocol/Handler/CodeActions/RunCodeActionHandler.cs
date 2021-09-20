@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             ICodeFixService codeFixService,
             ICodeRefactoringService codeRefactoringService,
             IThreadingContext threadingContext
-        ) {
+        )
+        {
             _codeActionsCache = codeActionsCache;
             _codeFixService = codeFixService;
             _codeRefactoringService = codeRefactoringService;
@@ -50,7 +51,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 
         public override LSP.TextDocumentIdentifier? GetTextDocumentIdentifier(
             LSP.ExecuteCommandParams request
-        ) {
+        )
+        {
             var runRequest = ((JToken)request.Arguments.Single()).ToObject<CodeActionResolveData>();
             return runRequest.TextDocument;
         }
@@ -59,7 +61,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             LSP.ExecuteCommandParams request,
             RequestContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var runRequest = ((JToken)request.Arguments.Single()).ToObject<CodeActionResolveData>();
             var document = context.Document;
 

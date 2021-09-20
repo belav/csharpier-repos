@@ -128,7 +128,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
 
         private bool IsOnSingleLine(
             Stack<(SyntaxNodeOrToken nodeOrToken, bool leading, bool trailing)> stack
-        ) {
+        )
+        {
             while (stack.Count > 0)
             {
                 var (currentNodeOrToken, currentLeading, currentTrailing) = stack.Pop();
@@ -142,7 +143,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
                             currentLeading,
                             currentTrailing
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }
@@ -186,7 +188,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             if (
                 !IsOnSingleLine(token.LeadingTrivia, leading)
                 || !IsOnSingleLine(token.TrailingTrivia, trailing)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -194,7 +197,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             if (
                 this.SyntaxKinds.StringLiteralToken == token.RawKind
                 || this.SyntaxKinds.InterpolatedStringTextToken == token.RawKind
-            ) {
+            )
+            {
                 // This allocated.  But we only do it in the string case. For all other tokens
                 // we don't need any allocations.
                 if (!IsOnSingleLine(token.ToString()))
@@ -372,7 +376,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         public bool ContainsInterleavedDirective(
             ImmutableArray<SyntaxNode> nodes,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (nodes.Length > 0)
             {
                 var span = TextSpan.FromBounds(nodes.First().Span.Start, nodes.Last().Span.End);
@@ -400,7 +405,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             TextSpan span,
             SyntaxNode node,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             foreach (var token in node.DescendantTokens())
             {
                 if (ContainsInterleavedDirective(span, token, cancellationToken))
@@ -474,7 +480,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
                     if (
                         SpansPreprocessorDirective(token.LeadingTrivia)
                         || SpansPreprocessorDirective(previousToken.TrailingTrivia)
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }
@@ -552,7 +559,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             if (
                 tokenToRightOrIn.FullSpan.Start != position
                 && tokenToRightOrIn.RawKind != SyntaxKinds.EndOfFileToken
-            ) {
+            )
+            {
                 return null;
             }
 

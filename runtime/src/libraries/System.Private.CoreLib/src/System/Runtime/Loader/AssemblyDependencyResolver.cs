@@ -144,7 +144,8 @@ namespace System.Runtime.Loader
                     NeutralCultureName,
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 // Load satellite assembly
                 // Search resource search paths by appending the culture name and the expected assembly file name.
                 // Copies the logic in BindSatelliteResourceByResourceRoots in CoreCLR.
@@ -207,7 +208,8 @@ namespace System.Runtime.Loader
                     unmanagedDllName,
                     isRelativePath
                 )
-            ) {
+            )
+            {
                 string libraryName =
                     libraryNameVariation.Prefix + unmanagedDllName + libraryNameVariation.Suffix;
                 foreach (string searchPath in searchPaths)

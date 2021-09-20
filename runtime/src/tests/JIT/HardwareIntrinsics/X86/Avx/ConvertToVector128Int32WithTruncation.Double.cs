@@ -287,7 +287,8 @@ namespace JIT.HardwareIntrinsics.X86
             Vector256<Double> firstOp,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Double[] inArray = new Double[Op1ElementCount];
             Int32[] outArray = new Int32[RetElementCount];
 
@@ -305,7 +306,8 @@ namespace JIT.HardwareIntrinsics.X86
             void* firstOp,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Double[] inArray = new Double[Op1ElementCount];
             Int32[] outArray = new Int32[RetElementCount];
 
@@ -327,7 +329,8 @@ namespace JIT.HardwareIntrinsics.X86
             Double[] firstOp,
             Int32[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             for (var i = 0; i < Op1ElementCount; i++)
             {
                 if (result[i] != (Int32)(firstOp[i]))

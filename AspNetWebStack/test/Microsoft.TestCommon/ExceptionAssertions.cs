@@ -103,7 +103,8 @@ namespace Microsoft.TestCommon
             if (
                 typedException == null
                 || (!allowDerivedExceptions && typedException.GetType() != typeof(TException))
-            ) {
+            )
+            {
                 throw new ThrowsException(exceptionType, exception);
             }
 
@@ -192,7 +193,8 @@ namespace Microsoft.TestCommon
             Action testCode,
             string paramName,
             bool allowDerivedExceptions = false
-        ) {
+        )
+        {
             var ex = Throws<ArgumentException>(testCode, allowDerivedExceptions);
 
             if (paramName != null)
@@ -212,7 +214,8 @@ namespace Microsoft.TestCommon
         public static async Task<ArgumentException> ThrowsArgumentAsync(
             Func<Task> testCode,
             string paramName
-        ) {
+        )
+        {
             var ex = await ThrowsAsync<ArgumentException>(testCode);
             if (paramName != null)
             {
@@ -236,7 +239,8 @@ namespace Microsoft.TestCommon
             string paramName,
             string exceptionMessage,
             bool allowDerivedExceptions = false
-        ) {
+        )
+        {
             var ex = Throws<ArgumentException>(testCode, allowDerivedExceptions);
 
             if (paramName != null)
@@ -260,7 +264,8 @@ namespace Microsoft.TestCommon
             Func<Task> testCode,
             string paramName,
             string exceptionMessage
-        ) {
+        )
+        {
             var ex = await ThrowsArgumentAsync(testCode, paramName);
             VerifyExceptionMessage(ex, exceptionMessage, partialMatch: true);
 
@@ -279,7 +284,8 @@ namespace Microsoft.TestCommon
             Func<object> testCode,
             string paramName,
             bool allowDerivedExceptions = false
-        ) {
+        )
+        {
             var ex = Throws<ArgumentException>(testCode, allowDerivedExceptions);
 
             if (paramName != null)
@@ -318,7 +324,8 @@ namespace Microsoft.TestCommon
         public static async Task<ArgumentNullException> ThrowsArgumentNullAsync(
             Func<Task> testCode,
             string paramName
-        ) {
+        )
+        {
             var ex = await ThrowsAsync<ArgumentNullException>(testCode);
             if (paramName != null)
             {
@@ -356,7 +363,8 @@ namespace Microsoft.TestCommon
         public static ArgumentException ThrowsArgumentNullOrEmptyString(
             Action testCode,
             string paramName
-        ) {
+        )
+        {
             return ThrowsArgument(
                 testCode,
                 paramName,
@@ -381,7 +389,8 @@ namespace Microsoft.TestCommon
             string exceptionMessage,
             bool allowDerivedExceptions = false,
             object actualValue = null
-        ) {
+        )
+        {
             if (exceptionMessage != null)
             {
                 exceptionMessage = exceptionMessage + "\r\nParameter name: " + paramName;
@@ -422,7 +431,8 @@ namespace Microsoft.TestCommon
             string paramName,
             string exceptionMessage,
             object actualValue = null
-        ) {
+        )
+        {
             if (exceptionMessage != null)
             {
                 exceptionMessage = exceptionMessage + "\r\nParameter name: " + paramName;
@@ -464,7 +474,8 @@ namespace Microsoft.TestCommon
             string paramName,
             string value,
             object actualValue = null
-        ) {
+        )
+        {
             return ThrowsArgumentOutOfRange(
                 testCode,
                 paramName,
@@ -492,7 +503,8 @@ namespace Microsoft.TestCommon
             string paramName,
             string value,
             object actualValue = null
-        ) {
+        )
+        {
             return ThrowsArgumentOutOfRange(
                 testCode,
                 paramName,
@@ -519,7 +531,8 @@ namespace Microsoft.TestCommon
             string paramName,
             string value,
             object actualValue = null
-        ) {
+        )
+        {
             return ThrowsArgumentOutOfRangeAsync(
                 testCode,
                 paramName,
@@ -547,7 +560,8 @@ namespace Microsoft.TestCommon
             string paramName,
             string maxValue,
             object actualValue = null
-        ) {
+        )
+        {
             return ThrowsArgumentOutOfRange(
                 testCode,
                 paramName,
@@ -576,7 +590,8 @@ namespace Microsoft.TestCommon
             string paramName,
             string maxValue,
             object actualValue = null
-        ) {
+        )
+        {
             return ThrowsArgumentOutOfRange(
                 testCode,
                 paramName,
@@ -604,7 +619,8 @@ namespace Microsoft.TestCommon
             string exceptionMessage,
             int httpCode,
             bool allowDerivedExceptions = false
-        ) {
+        )
+        {
             var ex = Throws<HttpException>(testCode, exceptionMessage, allowDerivedExceptions);
             Equal(httpCode, ex.GetHttpCode());
             return ex;
@@ -626,7 +642,8 @@ namespace Microsoft.TestCommon
             int invalidValue,
             Type enumType,
             bool allowDerivedExceptions = false
-        ) {
+        )
+        {
             string message = String.Format(
                 CultureReplacer.DefaultCulture,
                 "The value of argument '{0}' ({1}) is invalid for Enum type '{2}'.{3}Parameter name: {0}",
@@ -650,7 +667,8 @@ namespace Microsoft.TestCommon
             Action testCode,
             string objectName,
             bool allowDerivedExceptions = false
-        ) {
+        )
+        {
             var ex = Throws<ObjectDisposedException>(testCode, allowDerivedExceptions);
 
             if (objectName != null)
@@ -762,7 +780,8 @@ namespace Microsoft.TestCommon
             Exception exception,
             string expectedMessage,
             bool partialMatch = false
-        ) {
+        )
+        {
             if (expectedMessage != null)
             {
                 if (!partialMatch)

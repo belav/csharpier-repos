@@ -51,7 +51,8 @@ namespace Microsoft.AspNetCore.Components.Server
             CircuitIdFactory circuitIdFactory,
             CircuitRegistry circuitRegistry,
             ILogger<ComponentHub> logger
-        ) {
+        )
+        {
             _serverComponentSerializer = serializer;
             _dataProtectionProvider = dataProtectionProvider;
             _circuitFactory = circuitFactory;
@@ -83,7 +84,8 @@ namespace Microsoft.AspNetCore.Components.Server
             string uri,
             string serializedComponentRecords,
             string applicationState
-        ) {
+        )
+        {
             var circuitHost = GetCircuit();
             if (circuitHost != null)
             {
@@ -103,7 +105,8 @@ namespace Microsoft.AspNetCore.Components.Server
                 || uri == null
                 || !Uri.TryCreate(baseUri, UriKind.Absolute, out _)
                 || !Uri.TryCreate(uri, UriKind.Absolute, out _)
-            ) {
+            )
+            {
                 // We do some really minimal validation here to prevent obviously wrong data from getting in
                 // without duplicating too much logic.
                 //
@@ -120,7 +123,8 @@ namespace Microsoft.AspNetCore.Components.Server
                     serializedComponentRecords,
                     out var components
                 )
-            ) {
+            )
+            {
                 Log.InvalidInputData(_logger);
                 await NotifyClientError(
                     Clients.Caller,
@@ -218,7 +222,8 @@ namespace Microsoft.AspNetCore.Components.Server
             string methodIdentifier,
             long dotNetObjectId,
             string argsJson
-        ) {
+        )
+        {
             var circuitHost = await GetActiveCircuitAsync();
             if (circuitHost == null)
             {
@@ -238,7 +243,8 @@ namespace Microsoft.AspNetCore.Components.Server
             long asyncHandle,
             bool succeeded,
             string arguments
-        ) {
+        )
+        {
             var circuitHost = await GetActiveCircuitAsync();
             if (circuitHost == null)
             {
@@ -290,7 +296,8 @@ namespace Microsoft.AspNetCore.Components.Server
         // See comment on error handling on the class definition.
         private async ValueTask<CircuitHost> GetActiveCircuitAsync(
             [CallerMemberName] string callSite = ""
-        ) {
+        )
+        {
             var handle = (CircuitHandle)Context.Items[CircuitKey];
             var circuitHost = handle?.CircuitHost;
             if (handle != null && circuitHost == null)
@@ -423,7 +430,8 @@ namespace Microsoft.AspNetCore.Components.Server
                 CircuitId circuitId,
                 string circuitSecret,
                 string connectionId
-            ) {
+            )
+            {
                 // Redact the secret unless tracing is on.
                 if (!logger.IsEnabled(LogLevel.Trace))
                 {

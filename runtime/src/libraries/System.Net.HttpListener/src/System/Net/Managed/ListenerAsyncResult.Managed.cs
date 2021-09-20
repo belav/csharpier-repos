@@ -138,7 +138,8 @@ namespace System.Net
                         != AuthenticationSchemes.Anonymous
                     && (context.AuthenticationSchemes & AuthenticationSchemes.Basic)
                         != AuthenticationSchemes.Basic
-                ) {
+                )
+                {
                     authFailure = true;
                     context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
                 }
@@ -156,7 +157,8 @@ namespace System.Net
                             out _,
                             out _
                         )
-                    ) {
+                    )
+                    {
                         authFailure = true;
                         context.Response.StatusCode = (int)errorCode;
                         if (errorCode == HttpStatusCode.Unauthorized)

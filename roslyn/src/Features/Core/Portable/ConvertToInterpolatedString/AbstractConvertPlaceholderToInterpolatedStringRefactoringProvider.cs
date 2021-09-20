@@ -84,7 +84,8 @@ namespace Microsoft.CodeAnalysis.ConvertToInterpolatedString
                     syntaxFactsService,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 context.RegisterRefactoring(
                     new ConvertToInterpolatedStringCodeAction(
                         FeaturesResources.Convert_to_interpolated_string,
@@ -108,7 +109,8 @@ namespace Microsoft.CodeAnalysis.ConvertToInterpolatedString
             ImmutableArray<IMethodSymbol> formatMethods,
             ISyntaxFactsService syntaxFactsService,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // If selection is empty there can be multiple matching invocations (we can be deep in), need to go through all of them
             var possibleInvocations =
                 await document.GetRelevantNodesAsync<TInvocationExpressionSyntax>(
@@ -154,7 +156,8 @@ namespace Microsoft.CodeAnalysis.ConvertToInterpolatedString
                     this,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 return (
                     invocation,
                     semanticModel.GetSymbolInfo(invocation, cancellationToken).Symbol
@@ -179,7 +182,8 @@ namespace Microsoft.CodeAnalysis.ConvertToInterpolatedString
                     this,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 return (
                     invocation,
                     semanticModel.GetSymbolInfo(invocation, cancellationToken).Symbol
@@ -201,7 +205,8 @@ namespace Microsoft.CodeAnalysis.ConvertToInterpolatedString
                     TArgumentListExpressionSyntax
                 > thisInstance,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var arguments = syntaxFactsService.GetArgumentsOfInvocationExpression(invocation);
                 if (arguments.Count >= 2)
                 {
@@ -213,7 +218,8 @@ namespace Microsoft.CodeAnalysis.ConvertToInterpolatedString
                         && syntaxFactsService.IsStringLiteral(
                             firstArgumentExpression.GetFirstToken()
                         )
-                    ) {
+                    )
+                    {
                         var invocationSymbol =
                             semanticModel.GetSymbolInfo(invocation, cancellationToken).Symbol;
                         if (formatMethods.Contains(invocationSymbol))
@@ -234,7 +240,8 @@ namespace Microsoft.CodeAnalysis.ConvertToInterpolatedString
             SemanticModel semanticModel,
             ISyntaxFactsService syntaxFactsService,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var arguments = nullableArguments.Value;
             if (
                 arguments.Count >= 2
@@ -243,7 +250,8 @@ namespace Microsoft.CodeAnalysis.ConvertToInterpolatedString
                 )
                     is TLiteralExpressionSyntax firstExpression
                 && syntaxFactsService.IsStringLiteral(firstExpression.GetFirstToken())
-            ) {
+            )
+            {
                 // We do not want to substitute the expression if it is being passed to params array argument
                 // Example:
                 // string[] args;
@@ -267,7 +275,8 @@ namespace Microsoft.CodeAnalysis.ConvertToInterpolatedString
             Document document,
             ISyntaxFactsService syntaxFactsService,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
             var arguments = syntaxFactsService.GetArgumentsOfInvocationExpression(invocation);
@@ -330,7 +339,8 @@ namespace Microsoft.CodeAnalysis.ConvertToInterpolatedString
             SeparatedSyntaxList<TArgumentSyntax> arguments,
             int index,
             ISyntaxFacts syntaxFacts
-        ) {
+        )
+        {
             if (arguments.Count > 4)
             {
                 return arguments[index];
@@ -351,7 +361,8 @@ namespace Microsoft.CodeAnalysis.ConvertToInterpolatedString
             SeparatedSyntaxList<TArgumentSyntax> arguments,
             SyntaxGenerator syntaxGenerator,
             ISyntaxFacts syntaxFacts
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<TExpressionSyntax>.GetInstance(out var builder);
             for (var i = 1; i < arguments.Count; i++)
             {
@@ -383,7 +394,8 @@ namespace Microsoft.CodeAnalysis.ConvertToInterpolatedString
             ImmutableArray<TExpressionSyntax> expandedArguments,
             SyntaxNode interpolatedString,
             ISyntaxFactsService syntaxFactsService
-        ) {
+        )
+        {
             return interpolatedString.ReplaceNodes(
                 syntaxFactsService.GetContentsOfInterpolatedString(interpolatedString),
                 (oldNode, newNode) =>
@@ -395,13 +407,15 @@ namespace Microsoft.CodeAnalysis.ConvertToInterpolatedString
                             syntaxFactsService.GetExpressionOfInterpolation(interpolationSyntaxNode)
                                 is TLiteralExpressionSyntax literalExpression
                             && syntaxFactsService.IsNumericLiteralExpression(literalExpression)
-                        ) {
+                        )
+                        {
                             if (
                                 int.TryParse(
                                     literalExpression.GetFirstToken().ValueText,
                                     out var index
                                 )
-                            ) {
+                            )
+                            {
                                 if (index >= 0 && index < expandedArguments.Length)
                                 {
                                     return interpolationSyntaxNode.ReplaceNode(
@@ -451,7 +465,8 @@ namespace Microsoft.CodeAnalysis.ConvertToInterpolatedString
             ImmutableArray<IMethodSymbol> formatMethods,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var formatMethodsAcceptingParamsArray = formatMethods.Where(
                 x => x.Parameters.Length > 1 && x.Parameters[1].Type.Kind == SymbolKind.ArrayType
             );

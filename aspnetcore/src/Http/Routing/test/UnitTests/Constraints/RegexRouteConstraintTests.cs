@@ -26,7 +26,8 @@ namespace Microsoft.AspNetCore.Routing.Tests
             string routeValue,
             string constraintValue,
             bool shouldMatch
-        ) {
+        )
+        {
             // Arrange
             var constraint = new RegexRouteConstraint(constraintValue);
             var values = new RouteValueDictionary(new { controller = routeValue });

@@ -228,12 +228,14 @@ namespace System.Data
             string newSort,
             DataViewRowState newRowStates,
             IFilter? newRowFilter
-        ) {
+        )
+        {
             // Throw only if expressions (filter or sort) are used and rowstate is not current rows
             if (
                 (base.SortComparison != null || base.RowPredicate != null)
                 && newRowStates != DataViewRowState.CurrentRows
-            ) {
+            )
+            {
                 throw DataSetUtil.Argument(SR.LDVRowStateError);
             }
             else

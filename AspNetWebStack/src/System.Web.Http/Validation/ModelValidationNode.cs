@@ -23,7 +23,8 @@ namespace System.Web.Http.Validation
             ModelMetadata modelMetadata,
             string modelStateKey,
             IEnumerable<ModelValidationNode> childNodes
-        ) {
+        )
+        {
             if (modelMetadata == null)
             {
                 throw Error.ArgumentNull("modelMetadata");
@@ -193,13 +194,15 @@ namespace System.Web.Http.Validation
                         ModelValidator propertyValidator in actionContext.GetValidators(
                             propertyMetadata
                         )
-                    ) {
+                    )
+                    {
                         foreach (
                             ModelValidationResult propertyResult in propertyValidator.Validate(
                                 propertyMetadata,
                                 model
                             )
-                        ) {
+                        )
+                        {
                             string thisErrorKey = ModelBindingHelper.CreatePropertyModelName(
                                 propertyKeyRoot,
                                 propertyResult.MemberName
@@ -245,7 +248,8 @@ namespace System.Web.Http.Validation
                         ModelMetadata,
                         container
                     )
-                ) {
+                )
+                {
                     string trueModelStateKey = ModelBindingHelper.CreatePropertyModelName(
                         ModelStateKey,
                         validationResult.MemberName

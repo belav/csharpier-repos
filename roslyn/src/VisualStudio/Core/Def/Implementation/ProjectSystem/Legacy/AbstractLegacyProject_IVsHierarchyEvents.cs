@@ -26,7 +26,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
                 ErrorHandler.Failed(
                     Hierarchy.AdviseHierarchyEvents(this, out _hierarchyEventsCookie)
                 )
-            ) {
+            )
+            {
                 Debug.Fail("Failed to connect IVsHierarchyEvents");
                 _hierarchyEventsCookie = 0;
             }
@@ -68,7 +69,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
                     || propid == (int)__VSHPROPID.VSHPROPID_Name
                 )
                 && itemid == (uint)VSConstants.VSITEMID.Root
-            ) {
+            )
+            {
                 var filePath = Hierarchy.TryGetProjectFilePath();
 
                 if (filePath != null && File.Exists(filePath))

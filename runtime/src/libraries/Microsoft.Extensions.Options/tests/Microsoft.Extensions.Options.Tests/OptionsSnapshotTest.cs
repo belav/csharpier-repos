@@ -217,7 +217,8 @@ namespace Microsoft.Extensions.Options.Tests
             IServiceCollection services,
             Type serviceType,
             ServiceLifetime lifetime
-        ) {
+        )
+        {
             Assert.NotNull(
                 services.Where(s => s.ServiceType == serviceType && s.Lifetime == lifetime)
                     .SingleOrDefault()

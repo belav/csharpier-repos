@@ -48,7 +48,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         public VisualStudioProjectOptionsProcessor(
             VisualStudioProject project,
             HostWorkspaceServices workspaceServices
-        ) {
+        )
+        {
             _project = project ?? throw new ArgumentNullException(nameof(project));
             _workspaceServices = workspaceServices;
             _commandLineParserService = workspaceServices.GetLanguageServices(project.Language)

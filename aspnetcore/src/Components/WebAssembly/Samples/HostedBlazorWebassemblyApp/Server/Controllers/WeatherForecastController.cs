@@ -29,7 +29,8 @@ namespace HostedBlazorWebassemblyApp.Server.Controllers
         public WeatherForecastController(
             ILogger<WeatherForecastController> logger,
             IWeatherForecastService forecastService
-        ) {
+        )
+        {
             _forecastService = forecastService;
             _logger = logger;
         }

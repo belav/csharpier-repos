@@ -65,7 +65,8 @@ namespace MonoTests.System.Runtime.Caching
                         ".NET Core",
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     return true;
                 }
 

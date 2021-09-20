@@ -407,7 +407,8 @@ namespace System
             ParameterModifier[]? modifiers,
             CultureInfo? culture,
             string[]? namedParams
-        ) {
+        )
+        {
             const BindingFlags MemberBindingMask = (BindingFlags)0x000000FF;
             const BindingFlags InvocationMask = (BindingFlags)0x0000FF00;
             const BindingFlags BinderGetSetField = BindingFlags.GetField | BindingFlags.SetField;
@@ -620,7 +621,8 @@ namespace System
                     // Invocation on a field
                     if (
                         selFld.FieldType.IsArray || ReferenceEquals(selFld.FieldType, typeof(Array))
-                    ) {
+                    )
+                    {
                         // Invocation of an array Field
                         int idxCnt;
                         if ((bindingFlags & BindingFlags.GetField) != 0)
@@ -816,7 +818,8 @@ namespace System
                     && argCnt == 0
                     && finalist.GetParametersNoCopy().Length == 0
                     && (bindingFlags & BindingFlags.OptionalParamBinding) == 0
-                ) {
+                )
+                {
                     return finalist.Invoke(target, bindingFlags, binder, providedArgs, culture);
                 }
 
@@ -918,7 +921,8 @@ namespace System
         internal static void SanityCheckGenericArguments(
             RuntimeType[] genericArguments,
             RuntimeType[] genericParameters
-        ) {
+        )
+        {
             if (genericArguments == null)
                 throw new ArgumentNullException();
 

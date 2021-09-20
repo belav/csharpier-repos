@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis
         internal CommandLineParser(
             CommonMessageProvider messageProvider,
             bool isScriptCommandLineParser
-        ) {
+        )
+        {
             RoslynDebug.Assert(messageProvider != null);
             _messageProvider = messageProvider;
             IsScriptCommandLineParser = isScriptCommandLineParser;
@@ -71,7 +72,8 @@ namespace Microsoft.CodeAnalysis
             string? directory,
             string fileNamePattern,
             SearchOption searchOption
-        ) {
+        )
+        {
             if (directory is null)
             {
                 return SpecializedCollections.EmptyEnumerable<string>();
@@ -101,7 +103,8 @@ namespace Microsoft.CodeAnalysis
             string baseDirectory,
             string? sdkDirectory,
             string? additionalReferenceDirectories
-        ) {
+        )
+        {
             return CommonParse(args, baseDirectory, sdkDirectory, additionalReferenceDirectories);
         }
 
@@ -114,7 +117,8 @@ namespace Microsoft.CodeAnalysis
             string arg,
             [NotNullWhen(true)] out string? name,
             out string? value
-        ) {
+        )
+        {
             if (!IsOption(arg))
             {
                 name = null;
@@ -169,7 +173,8 @@ namespace Microsoft.CodeAnalysis
             IList<Diagnostic> diagnostics,
             string? baseDirectory,
             out bool diagnosticAlreadyReported
-        ) {
+        )
+        {
             diagnosticAlreadyReported = false;
 
             IEnumerator<string> partsEnumerator = ParseSeparatedStrings(
@@ -216,7 +221,8 @@ namespace Microsoft.CodeAnalysis
                             out sarifVersion
                         )
                     )
-                ) {
+                )
+                {
                     return null;
                 }
             }
@@ -235,7 +241,8 @@ namespace Microsoft.CodeAnalysis
             out string? outputFileName,
             out string? outputDirectory,
             out string invalidPath
-        ) {
+        )
+        {
             outputFileName = null;
             outputDirectory = null;
             invalidPath = unquoted;
@@ -272,7 +279,8 @@ namespace Microsoft.CodeAnalysis
                 // NUL-terminated, non-empty, valid Unicode strings
                 !MetadataHelpers.IsValidMetadataIdentifier(outputDirectory)
                 || !MetadataHelpers.IsValidMetadataIdentifier(outputFileName)
-            ) {
+            )
+            {
                 outputFileName = null;
             }
         }
@@ -304,7 +312,8 @@ namespace Microsoft.CodeAnalysis
         protected ImmutableArray<KeyValuePair<string, string>> ParsePathMap(
             string pathMap,
             IList<Diagnostic> errors
-        ) {
+        )
+        {
             if (pathMap.IsEmpty())
             {
                 return ImmutableArray<KeyValuePair<string, string>>.Empty;
@@ -405,7 +414,8 @@ namespace Microsoft.CodeAnalysis
             string? baseDirectory,
             out string? outputFileName,
             out string? outputDirectory
-        ) {
+        )
+        {
             string unquoted = RemoveQuotesAndSlashes(value);
             ParseAndNormalizeFile(
                 unquoted,
@@ -417,7 +427,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 outputFileName == null
                 || !MetadataHelpers.IsValidAssemblyOrModuleName(outputFileName)
-            ) {
+            )
+            {
                 errors.Add(
                     Diagnostic.Create(
                         _messageProvider,
@@ -445,7 +456,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 outputFileName == null
                 || PathUtilities.ChangeExtension(outputFileName, extension: null).Length == 0
-            ) {
+            )
+            {
                 errors.Add(
                     Diagnostic.Create(
                         _messageProvider,
@@ -472,7 +484,8 @@ namespace Microsoft.CodeAnalysis
             IList<Diagnostic> errors,
             string? baseDirectory,
             bool generateDiagnostic = true
-        ) {
+        )
+        {
             string? genericPath = null;
 
             ParseAndNormalizeFile(
@@ -511,7 +524,8 @@ namespace Microsoft.CodeAnalysis
             List<string>? scriptArgsOpt,
             string? baseDirectory,
             List<string>? responsePaths = null
-        ) {
+        )
+        {
             bool parsingScriptArgs = false;
             bool sourceFileSeen = false;
             bool optionsEnded = false;
@@ -565,7 +579,8 @@ namespace Microsoft.CodeAnalysis
                     {
                         foreach (
                             string newArg in ParseResponseFile(resolvedPath, diagnostics).Reverse()
-                        ) {
+                        )
+                        {
                             // Ignores /noconfig option specified in a response file
                             if (
                                 !string.Equals(
@@ -578,7 +593,8 @@ namespace Microsoft.CodeAnalysis
                                     "-noconfig",
                                     StringComparison.OrdinalIgnoreCase
                                 )
-                            ) {
+                            )
+                            {
                                 args.Push(newArg);
                             }
                             else
@@ -662,7 +678,8 @@ namespace Microsoft.CodeAnalysis
             out string? keepAliveValue,
             out string? pipeName,
             out string? errorMessage
-        ) {
+        )
+        {
             containsShared = false;
             keepAliveValue = null;
             errorMessage = null;
@@ -732,7 +749,8 @@ namespace Microsoft.CodeAnalysis
                 string optionName,
                 out bool hasValue,
                 out string? optionValue
-            ) {
+            )
+            {
                 hasValue = false;
                 optionValue = null;
 
@@ -823,7 +841,8 @@ namespace Microsoft.CodeAnalysis
             out string? fileName,
             out string resourceName,
             out string? accessibility
-        ) {
+        )
+        {
             filePath = null;
             fullPath = null;
             fileName = null;
@@ -882,7 +901,8 @@ namespace Microsoft.CodeAnalysis
         public static IEnumerable<string> SplitCommandLineIntoArguments(
             string commandLine,
             bool removeHashComments
-        ) {
+        )
+        {
             return CommandLineUtilities.SplitCommandLineIntoArguments(
                 commandLine,
                 removeHashComments
@@ -1023,7 +1043,8 @@ namespace Microsoft.CodeAnalysis
             string? str,
             char[] separators,
             StringSplitOptions options = StringSplitOptions.None
-        ) {
+        )
+        {
             bool inQuotes = false;
 
             var result = Split(
@@ -1050,7 +1071,8 @@ namespace Microsoft.CodeAnalysis
             IEnumerable<string> paths,
             string baseDirectory,
             IList<Diagnostic> errors
-        ) {
+        )
+        {
             foreach (var path in paths)
             {
                 string? resolvedPath = FileUtilities.ResolveRelativePath(path, baseDirectory);
@@ -1074,7 +1096,8 @@ namespace Microsoft.CodeAnalysis
         private protected CommandLineSourceFile ToCommandLineSourceFile(
             string resolvedPath,
             bool isInputRedirected = false
-        ) {
+        )
+        {
             string extension = PathUtilities.GetExtension(resolvedPath);
 
             bool isScriptFile;
@@ -1100,7 +1123,8 @@ namespace Microsoft.CodeAnalysis
             string arg,
             string? baseDirectory,
             IList<Diagnostic> errors
-        ) {
+        )
+        {
             Debug.Assert(
                 IsScriptCommandLineParser
                     || !arg.StartsWith("-", StringComparison.Ordinal)
@@ -1124,7 +1148,8 @@ namespace Microsoft.CodeAnalysis
                         SearchOption.TopDirectoryOnly,
                         errors
                     )
-                ) {
+                )
+                {
                     yield return file;
                 }
             }
@@ -1152,11 +1177,13 @@ namespace Microsoft.CodeAnalysis
             string value,
             string? baseDirectory,
             IList<Diagnostic> errors
-        ) {
+        )
+        {
             foreach (
                 string path in ParseSeparatedPaths(value)
                     .Where((path) => !string.IsNullOrWhiteSpace(path))
-            ) {
+            )
+            {
                 foreach (var file in ParseFileArgument(path, baseDirectory, errors))
                 {
                     yield return file;
@@ -1168,7 +1195,8 @@ namespace Microsoft.CodeAnalysis
             string arg,
             string? baseDirectory,
             IList<Diagnostic> errors
-        ) {
+        )
+        {
             foreach (
                 var path in ExpandFileNamePattern(
                     arg,
@@ -1176,7 +1204,8 @@ namespace Microsoft.CodeAnalysis
                     SearchOption.AllDirectories,
                     errors
                 )
-            ) {
+            )
+            {
                 yield return ToCommandLineSourceFile(path);
             }
         }
@@ -1192,7 +1221,8 @@ namespace Microsoft.CodeAnalysis
                     out long codepage
                 )
                 && (codepage > 0)
-            ) {
+            )
+            {
                 try
                 {
                     return Encoding.GetEncoding((int)codepage);
@@ -1228,7 +1258,8 @@ namespace Microsoft.CodeAnalysis
             string? baseDirectory,
             SearchOption searchOption,
             IList<Diagnostic> errors
-        ) {
+        )
+        {
             string? directory = PathUtilities.GetDirectoryName(path);
             string pattern = PathUtilities.GetFileName(path);
 
@@ -1342,7 +1373,8 @@ namespace Microsoft.CodeAnalysis
             string? fullPath,
             out Dictionary<string, ReportDiagnostic> diagnosticOptions,
             IList<Diagnostic> diagnostics
-        ) {
+        )
+        {
             return RuleSet.GetDiagnosticOptionsFromRulesetFile(
                 fullPath,
                 out diagnosticOptions,

@@ -32,7 +32,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddLogging(
             this IServiceCollection services,
             Action<ILoggingBuilder> configure
-        ) {
+        )
+        {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));

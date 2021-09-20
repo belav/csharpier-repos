@@ -147,7 +147,8 @@ namespace System.ComponentModel.Tests
         [InlineData(false)]
         public void Dispose_DisposingSiteEventHandler_InvokesEventHandlerAndRemovesSiteFromComponent(
             bool disposing
-        ) {
+        )
+        {
             bool calledDisposed = false;
             var site = new Site();
             var component = new SubMarshalByValueComponent() { Site = site };

@@ -32,7 +32,8 @@ namespace System.Speech.Internal.ObjectTokens
             if (
                 !string.IsNullOrEmpty(tokenName)
                 && tokenName.IndexOf("HKEY_", StringComparison.Ordinal) != 0
-            ) {
+            )
+            {
                 tokenName = string.Format(
                     CultureInfo.InvariantCulture,
                     @"{0}\Tokens\{1}",
@@ -47,7 +48,8 @@ namespace System.Speech.Internal.ObjectTokens
         internal IList<ObjectToken> FindMatchingTokens(
             string requiredAttributes,
             string optionalAttributes
-        ) {
+        )
+        {
             IList<ObjectToken> objectTokenList = new List<ObjectToken>();
             ISpObjectTokenCategory category = null;
             IEnumSpObjectTokens enumTokens = null;

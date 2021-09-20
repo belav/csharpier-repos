@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             VariableSlotAllocator slotAllocatorOpt,
             TypeCompilationState compilationState,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             Debug.Assert(body != null);
             Debug.Assert(method != null);
             Debug.Assert((object)stateMachineType != null);
@@ -167,7 +168,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             IEnumerable<Symbol> variablesToHoist,
             out IReadOnlyDictionary<Symbol, CapturedSymbolReplacement> proxies,
             out int nextFreeHoistedLocalSlot
-        ) {
+        )
+        {
             var proxiesBuilder = new Dictionary<Symbol, CapturedSymbolReplacement>();
 
             var typeMap = stateMachineType.TypeMap;
@@ -251,7 +253,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                     diagnostics.DiagnosticBag,
                                     out previousSlotIndex
                                 )
-                            ) {
+                            )
+                            {
                                 slotIndex = previousSlotIndex;
                             }
                         }
@@ -373,7 +376,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 optimizationLevel == OptimizationLevel.Release
                 && synthesizedKind == SynthesizedLocalKind.UserDefined
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -407,7 +411,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         protected BoundStatement GenerateParameterStorage(
             LocalSymbol stateMachineVariable,
             IReadOnlyDictionary<Symbol, CapturedSymbolReplacement> proxies
-        ) {
+        )
+        {
             var bodyBuilder = ArrayBuilder<BoundStatement>.GetInstance();
 
             // starting with the "this" proxy
@@ -454,7 +459,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             MethodSymbol methodToImplement,
             string methodName = null,
             bool hasMethodBodyDependency = false
-        ) {
+        )
+        {
             var result = new SynthesizedStateMachineDebuggerHiddenMethod(
                 methodName,
                 methodToImplement,
@@ -484,7 +490,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         protected SynthesizedImplementationMethod OpenMoveNextMethodImplementation(
             MethodSymbol methodToImplement
-        ) {
+        )
+        {
             var result = new SynthesizedStateMachineMoveNextMethod(
                 methodToImplement,
                 (StateMachineTypeSymbol)F.CurrentType
@@ -531,7 +538,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             MethodSymbol getEnumeratorMethod,
             ref BoundExpression managedThreadId,
             int initialState
-        ) {
+        )
+        {
             // Produces:
             //    {StateMachineType} result;
             //    if (this.initialThreadId == {managedThreadId} && this.state == -2)
@@ -667,7 +675,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         protected virtual void GenerateResetInstance(
             ArrayBuilder<BoundStatement> builder,
             int initialState
-        ) {
+        )
+        {
             builder.Add(
                 // this.state = {initialState};
                 F.Assignment(F.Field(F.This(), stateField), F.Literal(initialState))
@@ -679,7 +688,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ParameterSymbol parameter,
             BoundExpression resultParameter,
             BoundExpression parameterProxy
-        ) {
+        )
+        {
             Debug.Assert(!method.IsIterator || !method.IsAsync); // an override handles async-iterators
 
             // result.parameter = this.parameterProxy;

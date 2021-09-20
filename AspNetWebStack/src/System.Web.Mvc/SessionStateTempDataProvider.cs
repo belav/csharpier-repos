@@ -33,7 +33,8 @@ namespace System.Web.Mvc
         public virtual void SaveTempData(
             ControllerContext controllerContext,
             IDictionary<string, object> values
-        ) {
+        )
+        {
             if (controllerContext == null)
             {
                 throw new ArgumentNullException("controllerContext");

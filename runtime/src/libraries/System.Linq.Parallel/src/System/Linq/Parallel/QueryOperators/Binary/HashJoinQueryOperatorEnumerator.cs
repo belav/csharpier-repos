@@ -76,7 +76,8 @@ namespace System.Linq.Parallel
             Func<TLeftInput, TRightInput, TOutput> resultSelector,
             HashJoinOutputKeyBuilder<TLeftKey, TRightKey, TOutputKey> outputKeyBuilder,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(leftSource != null);
             Debug.Assert(rightLookupBuilder != null);
             Debug.Assert(resultSelector != null);
@@ -104,7 +105,8 @@ namespace System.Linq.Parallel
         internal override bool MoveNext(
             [MaybeNullWhen(false), AllowNull] ref TOutput currentElement,
             [AllowNull] ref TOutputKey currentKey
-        ) {
+        )
+        {
             Debug.Assert(_resultSelector != null, "expected a compiled result selector");
             Debug.Assert(_leftSource != null);
             Debug.Assert(_rightLookupBuilder != null);
@@ -123,7 +125,8 @@ namespace System.Linq.Parallel
             if (
                 currentRightChunk != null
                 && mutables._currentRightMatchesIndex == currentRightChunk.Count
-            ) {
+            )
+            {
                 mutables._currentRightMatches = currentRightChunk.Next;
                 mutables._currentRightMatchesIndex = 0;
             }

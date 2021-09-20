@@ -257,7 +257,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
             string sourceDirName,
             string destDirName,
             bool copySubDirs
-        ) {
+        )
+        {
             // Get the subdirectories for the specified directory.
             DirectoryInfo dir = new DirectoryInfo(sourceDirName);
 

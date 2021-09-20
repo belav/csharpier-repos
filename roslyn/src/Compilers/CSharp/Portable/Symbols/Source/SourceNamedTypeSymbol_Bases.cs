@@ -56,7 +56,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             ),
                             ErrorTypeSymbol.UnknownResultType
                         )
-                    ) {
+                    )
+                    {
                         AddDeclarationDiagnostics(diagnostics);
                     }
                     diagnostics.Free();
@@ -72,13 +73,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         internal sealed override ImmutableArray<NamedTypeSymbol> InterfacesNoUseSiteDiagnostics(
             ConsList<TypeSymbol> basesBeingResolved
-        ) {
+        )
+        {
             if (_lazyInterfaces.IsDefault)
             {
                 if (
                     basesBeingResolved != null
                     && basesBeingResolved.ContainsReference(this.OriginalDefinition)
-                ) {
+                )
+                {
                     return ImmutableArray<NamedTypeSymbol>.Empty;
                 }
 
@@ -90,7 +93,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         acyclicInterfaces,
                         default(ImmutableArray<NamedTypeSymbol>)
                     ).IsDefault
-                ) {
+                )
+                {
                     AddDeclarationDiagnostics(diagnostics);
                 }
                 diagnostics.Free();
@@ -125,7 +129,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 this.IsGenericType
                 && !baseContainsErrorTypes
                 && this.DeclaringCompilation.IsAttributeType(localBase)
-            ) {
+            )
+            {
                 // A generic type cannot derive from '{0}' because it is an attribute class
                 diagnostics.Add(
                     ErrorCode.ERR_GenericDerivingFromAttribute,
@@ -168,14 +173,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             DeclaringCompilation
                         )
                             is null
-                    ) {
+                    )
+                    {
                         diagnostics.Add(ErrorCode.ERR_BadRecordBase, baseLocation);
                     }
                 }
                 else if (
                     SynthesizedRecordClone.FindValidCloneMethod(localBase, ref useSiteInfo)
                     is object
-                ) {
+                )
+                {
                     diagnostics.Add(ErrorCode.ERR_BadInheritanceFromRecord, baseLocation);
                 }
 
@@ -242,13 +249,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                     @interface,
                                     TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
                                 )
-                            ) {
+                            )
+                            {
                                 if (
                                     !other.Equals(
                                         @interface,
                                         TypeCompareKind.ObliviousNullableModifierMatchesAny
                                     )
-                                ) {
+                                )
+                                {
                                     diagnostics.Add(
                                         ErrorCode.WRN_DuplicateInterfaceWithNullabilityMismatchInBaseList,
                                         location,
@@ -263,7 +272,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                     TypeCompareKind.IgnoreTupleNames
                                         | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
                                 )
-                            ) {
+                            )
+                            {
                                 diagnostics.Add(
                                     ErrorCode.ERR_DuplicateInterfaceWithTupleNamesInBaseList,
                                     location,
@@ -339,7 +349,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal Tuple<NamedTypeSymbol, ImmutableArray<NamedTypeSymbol>> GetDeclaredBases(
             ConsList<TypeSymbol> basesBeingResolved
-        ) {
+        )
+        {
             if (ReferenceEquals(_lazyDeclaredBases, null))
             {
                 var diagnostics = BindingDiagnosticBag.GetInstance();
@@ -349,7 +360,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         MakeDeclaredBases(basesBeingResolved, diagnostics),
                         null
                     ) == null
-                ) {
+                )
+                {
                     AddDeclarationDiagnostics(diagnostics);
                 }
                 diagnostics.Free();
@@ -360,20 +372,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override NamedTypeSymbol GetDeclaredBaseType(
             ConsList<TypeSymbol> basesBeingResolved
-        ) {
+        )
+        {
             return GetDeclaredBases(basesBeingResolved).Item1;
         }
 
         internal override ImmutableArray<NamedTypeSymbol> GetDeclaredInterfaces(
             ConsList<TypeSymbol> basesBeingResolved
-        ) {
+        )
+        {
             return GetDeclaredBases(basesBeingResolved).Item2;
         }
 
         private Tuple<NamedTypeSymbol, ImmutableArray<NamedTypeSymbol>> MakeDeclaredBases(
             ConsList<TypeSymbol> basesBeingResolved,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             if (this.TypeKind == TypeKind.Enum)
             {
                 // Handled by GetEnumUnderlyingType().
@@ -433,7 +448,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             TypeCompareKind.ConsiderEverything2
                         )
                         && partBase.TypeKind != TypeKind.Error
-                    ) {
+                    )
+                    {
                         // the parts do not agree
                         var info = diagnostics.Add(
                             ErrorCode.ERR_PartialMultipleBases,
@@ -544,7 +560,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ConsList<TypeSymbol> newBasesBeingResolved,
             SingleTypeDeclaration decl,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             BaseListSyntax bases = GetBaseListOpt(decl);
             if (bases == null)
             {
@@ -571,7 +588,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (
                     typeSyntax.Kind() != SyntaxKind.PredefinedType
                     && !SyntaxFacts.IsName(typeSyntax.Kind())
-                ) {
+                )
+                {
                     diagnostics.Add(ErrorCode.ERR_BadBaseType, typeSyntax.GetLocation());
                 }
 
@@ -593,13 +611,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 && baseSpecialType == SpecialType.System_ValueType
                             || this.SpecialType == SpecialType.System_MulticastDelegate
                                 && baseSpecialType == SpecialType.System_Delegate
-                        ) {
+                        )
+                        {
                             // allowed
                         }
                         else if (
                             baseSpecialType == SpecialType.System_Array
                             && this.ContainingAssembly.CorLibrary == this.ContainingAssembly
-                        ) {
+                        )
+                        {
                             // Specific exception for System.ArrayContracts, which is only built when CONTRACTS_FULL is defined.
                             // (See InheritanceResolver::CheckForBaseClassErrors).
                         }
@@ -653,7 +673,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             || baseType.TypeKind == TypeKind.Struct
                             || baseTypeIsErrorWithoutInterfaceGuess
                         ) && ((object)localBase == null)
-                    ) {
+                    )
+                    {
                         localBase = (NamedTypeSymbol)baseType;
                         Debug.Assert((object)localBase != null);
                         if (this.IsStatic && localBase.SpecialType != SpecialType.System_Object)
@@ -698,7 +719,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                     baseType,
                                     TypeCompareKind.ObliviousNullableModifierMatchesAny
                                 )
-                            ) {
+                            )
+                            {
                                 // duplicates with ?/! differences are reported later, we report local differences between oblivious and ?/! here
                                 diagnostics.Add(
                                     ErrorCode.WRN_DuplicateInterfaceWithNullabilityMismatchInBaseList,
@@ -800,7 +822,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (
                 this.SpecialType == SpecialType.System_Object
                 && ((object)localBase != null || localInterfaces.Count != 0)
-            ) {
+            )
+            {
                 var name = GetName(bases.Parent);
                 diagnostics.Add(ErrorCode.ERR_ObjectCantHaveBases, new SourceLocation(name));
             }
@@ -832,7 +855,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private ImmutableArray<NamedTypeSymbol> MakeAcyclicInterfaces(
             ConsList<TypeSymbol> basesBeingResolved,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var typeKind = this.TypeKind;
 
             if (typeKind == TypeKind.Enum)

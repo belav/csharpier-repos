@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             SyntaxReference syntaxRef,
             SourceNamedTypeSymbol owner,
             Location location
-        ) {
+        )
+        {
             _syntaxRef = syntaxRef;
             Debug.Assert(syntaxRef.GetSyntax().IsKind(SyntaxKind.TypeParameter));
             _owner = owner;
@@ -38,7 +39,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             int ordinal,
             IList<TypeParameterBuilder> builders,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var syntaxNode = (TypeParameterSyntax)_syntaxRef.GetSyntax();
             var result = new SourceTypeParameterSymbol(
                 _owner,
@@ -75,7 +77,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         private static ImmutableArray<SyntaxReference> ToSyntaxRefs(
             IList<TypeParameterBuilder> builders
-        ) {
+        )
+        {
             var arrayBuilder = ArrayBuilder<SyntaxReference>.GetInstance(builders.Count);
             foreach (var builder in builders)
             {

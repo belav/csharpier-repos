@@ -72,7 +72,8 @@ namespace System.ComponentModel
             )]
                 string tabClassName,
             PropertyTabScope tabScope
-        ) {
+        )
+        {
             _tabClassNames = new string[] { tabClassName };
             if (tabScope < PropertyTabScope.Document)
             {
@@ -175,7 +176,8 @@ namespace System.ComponentModel
             if (
                 other.TabClasses.Length != TabClasses.Length
                 || other.TabScopes.Length != TabScopes.Length
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -215,7 +217,8 @@ namespace System.ComponentModel
             string[] tabClassNames,
             Type[] tabClasses,
             PropertyTabScope[] tabScopes
-        ) {
+        )
+        {
             if (tabClasses != null)
             {
                 if (tabScopes != null && tabClasses.Length != tabScopes.Length)

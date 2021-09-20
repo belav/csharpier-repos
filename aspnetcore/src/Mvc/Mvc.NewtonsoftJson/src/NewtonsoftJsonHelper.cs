@@ -32,7 +32,8 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
         public NewtonsoftJsonHelper(
             IOptions<MvcNewtonsoftJsonOptions> options,
             ArrayPool<char> charPool
-        ) {
+        )
+        {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -82,7 +83,8 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
 
         private static JsonSerializer CreateHtmlSafeSerializer(
             JsonSerializerSettings serializerSettings
-        ) {
+        )
+        {
             var jsonSerializer = JsonSerializer.Create(serializerSettings);
             // Ignore the user configured StringEscapeHandling and always escape it.
             jsonSerializer.StringEscapeHandling = StringEscapeHandling.EscapeHtml;

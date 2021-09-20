@@ -77,7 +77,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal override BoundForStatement BindForParts(
             BindingDiagnosticBag diagnostics,
             Binder originalBinder
-        ) {
+        )
+        {
             BoundForStatement result = BindForParts(_syntax, originalBinder, diagnostics);
             return result;
         }
@@ -86,7 +87,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ForStatementSyntax node,
             Binder originalBinder,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             BoundStatement initializer;
             // Declaration and Initializers are mutually exclusive.
             if (_syntax.Declaration != null)
@@ -173,7 +175,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal override ImmutableArray<LocalSymbol> GetDeclaredLocalsForScope(
             SyntaxNode scopeDesignator
-        ) {
+        )
+        {
             if (_syntax == scopeDesignator)
             {
                 return this.Locals;
@@ -184,7 +187,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal override ImmutableArray<LocalFunctionSymbol> GetDeclaredLocalFunctionsForScope(
             CSharpSyntaxNode scopeDesignator
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
 

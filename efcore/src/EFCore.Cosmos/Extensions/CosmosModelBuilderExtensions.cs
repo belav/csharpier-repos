@@ -45,7 +45,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionModelBuilder modelBuilder,
             string? name,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             if (!modelBuilder.CanSetDefaultContainer(name, fromDataAnnotation))
             {
                 return null;
@@ -67,7 +68,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionModelBuilder modelBuilder,
             string? name,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             Check.NotNull(modelBuilder, nameof(modelBuilder));
             Check.NullButNotEmpty(name, nameof(name));
 

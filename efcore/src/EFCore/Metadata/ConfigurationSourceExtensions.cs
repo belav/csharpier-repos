@@ -20,7 +20,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         public static bool Overrides(
             this ConfigurationSource newConfigurationSource,
             ConfigurationSource? oldConfigurationSource
-        ) {
+        )
+        {
             if (oldConfigurationSource == null)
             {
                 return true;

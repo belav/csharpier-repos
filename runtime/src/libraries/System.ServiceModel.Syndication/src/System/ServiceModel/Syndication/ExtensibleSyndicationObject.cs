@@ -55,7 +55,8 @@ namespace System.ServiceModel.Syndication
         private static XmlBuffer CreateXmlBuffer(
             XmlDictionaryReader unparsedExtensionsReader,
             int maxExtensionSize
-        ) {
+        )
+        {
             XmlBuffer buffer = new XmlBuffer(maxExtensionSize);
             using (XmlDictionaryWriter writer = buffer.OpenSection(unparsedExtensionsReader.Quotas))
             {
@@ -74,7 +75,8 @@ namespace System.ServiceModel.Syndication
         internal void LoadElementExtensions(
             XmlReader readerOverUnparsedExtensions,
             int maxExtensionSize
-        ) {
+        )
+        {
             if (readerOverUnparsedExtensions == null)
             {
                 throw new ArgumentNullException(nameof(readerOverUnparsedExtensions));
@@ -117,7 +119,8 @@ namespace System.ServiceModel.Syndication
         internal void WriteElementExtensions(
             XmlWriter writer,
             Func<string, string, bool> shouldSkipElement = null
-        ) {
+        )
+        {
             if (writer == null)
             {
                 throw new ArgumentNullException(nameof(writer));

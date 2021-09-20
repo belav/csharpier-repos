@@ -242,7 +242,8 @@ namespace Microsoft.CodeAnalysis.Tools.Tests
                 bool includeGenerated,
                 string binaryLogPath,
                 IConsole console = null
-            ) {
+            )
+            {
                 Assert.Equal("./src", workspace);
                 Assert.True(noRestore);
                 Assert.False(folder);

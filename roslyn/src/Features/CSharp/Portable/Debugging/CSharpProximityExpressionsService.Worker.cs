@@ -67,7 +67,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
                             SyntaxKind.AddAccessorDeclaration,
                             SyntaxKind.RemoveAccessorDeclaration
                         )
-                ) {
+                )
+                {
                     _expressions.Add("value");
                 }
             }
@@ -93,7 +94,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
                     && block.IsParentKind(SyntaxKind.CatchClause, out CatchClauseSyntax catchClause)
                     && catchClause.Declaration != null
                     && catchClause.Declaration.Identifier.Kind() != SyntaxKind.None
-                ) {
+                )
+                {
                     _expressions.Add(catchClause.Declaration.Identifier.ValueText);
                 }
             }
@@ -148,7 +150,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
                     && block.Parent is AccessorDeclarationSyntax
                     && block.Parent.Parent is AccessorListSyntax
                     && block.Parent.Parent.Parent is IndexerDeclarationSyntax
-                ) {
+                )
+                {
                     var parameterList =
                         ((IndexerDeclarationSyntax)block.Parent.Parent.Parent).ParameterList;
                     AddParameters(parameterList);
@@ -178,7 +181,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
                         && _syntaxTree.GetText(cancellationToken)
                             .Lines.IndexOf(nextStatement.SpanStart) == line;
                     nextStatement = nextStatement.GetNextStatement()
-                ) {
+                )
+                {
                     AddRelevantExpressions(nextStatement, _expressions, includeDeclarations: false);
                 }
             }

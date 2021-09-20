@@ -23,7 +23,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Utilities
             Microsoft.CodeAnalysis.Workspace workspace,
             DocumentId contextDocumentId,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // https://github.com/dotnet/roslyn/issues/17898
             // We have a report of a null ref occurring in this method. The only place we believe
             // this could be would be if 'document' was null. Try to catch a reasonable
@@ -52,7 +53,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Utilities
         public static IOleUndoManager TryGetUndoManager(
             this IVsEditorAdaptersFactoryService editorAdaptersFactoryService,
             ITextBuffer subjectBuffer
-        ) {
+        )
+        {
             if (subjectBuffer != null)
             {
                 var adapter = editorAdaptersFactoryService?.GetBufferAdapter(subjectBuffer);

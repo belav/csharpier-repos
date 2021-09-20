@@ -56,7 +56,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Telemetry
             int operationBlockEndActionsCount,
             int operationBlockActionsCount,
             bool concurrent
-        ) {
+        )
+        {
             CompilationStartActionsCount = compilationStartActionsCount;
             CompilationEndActionsCount = compilationEndActionsCount;
             CompilationActionsCount = compilationActionsCount;

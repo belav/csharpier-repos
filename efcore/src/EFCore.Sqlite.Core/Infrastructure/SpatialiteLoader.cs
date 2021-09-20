@@ -144,7 +144,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                                     "mod_spatialite" + _sharedLibraryExtension,
                                     StringComparison.OrdinalIgnoreCase
                                 )
-                            ) {
+                            )
+                            {
                                 var fallbacks = rids.IndexOf(group.Runtime);
                                 if (fallbacks != -1)
                                 {
@@ -222,7 +223,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                                         StringComparison.OrdinalIgnoreCase
                                     )
                             )
-                    ) {
+                    )
+                    {
                         Environment.SetEnvironmentVariable(
                             _pathVariableName!,
                             assetDirectory + Path.PathSeparator + currentPath

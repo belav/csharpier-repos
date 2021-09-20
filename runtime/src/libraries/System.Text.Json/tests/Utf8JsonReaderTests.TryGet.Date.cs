@@ -16,7 +16,8 @@ namespace System.Text.Json.Tests
         public static void TestingStringsConversionToDateTime(
             string jsonString,
             string expectedString
-        ) {
+        )
+        {
             byte[] dataUtf8 = Encoding.UTF8.GetBytes(jsonString);
 
             var json = new Utf8JsonReader(dataUtf8, isFinalBlock: true, state: default);
@@ -44,7 +45,8 @@ namespace System.Text.Json.Tests
         public static void TestingStringsConversionToDateTimeOffset(
             string jsonString,
             string expectedString
-        ) {
+        )
+        {
             byte[] dataUtf8 = Encoding.UTF8.GetBytes(jsonString);
 
             var json = new Utf8JsonReader(dataUtf8, isFinalBlock: true, state: default);
@@ -72,7 +74,8 @@ namespace System.Text.Json.Tests
         public static void TestingStringsWithUTCOffsetToDateTime(
             string jsonString,
             string expectedString
-        ) {
+        )
+        {
             byte[] dataUtf8 = Encoding.UTF8.GetBytes(jsonString);
 
             var json = new Utf8JsonReader(dataUtf8, isFinalBlock: true, state: default);
@@ -105,7 +108,8 @@ namespace System.Text.Json.Tests
         public static void TestingStringsWithUTCOffsetToDateTimeOffset(
             string jsonString,
             string expectedString
-        ) {
+        )
+        {
             byte[] dataUtf8 = Encoding.UTF8.GetBytes(jsonString);
 
             var json = new Utf8JsonReader(dataUtf8, isFinalBlock: true, state: default);

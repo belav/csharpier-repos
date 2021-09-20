@@ -273,7 +273,8 @@ namespace System.Web.Http.SelfHost
         protected override Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request,
             Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             Task<HttpResponseMessage> t = base.SendAsync(request, cancellationToken);
 
             if (!ReturnNull)

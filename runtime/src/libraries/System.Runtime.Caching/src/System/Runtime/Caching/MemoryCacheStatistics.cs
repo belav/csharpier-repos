@@ -59,7 +59,8 @@ namespace System.Runtime.Caching
                 if (
                     _physicalMemoryMonitor.IsAboveHighPressure()
                     || _cacheMemoryMonitor.IsAboveHighPressure()
-                ) {
+                )
+                {
                     if (_pollingInterval > MEMORYSTATUS_INTERVAL_5_SECONDS)
                     {
                         _pollingInterval = MEMORYSTATUS_INTERVAL_5_SECONDS;
@@ -74,7 +75,8 @@ namespace System.Runtime.Caching
                     || (
                         _physicalMemoryMonitor.PressureLast > _physicalMemoryMonitor.PressureLow / 2
                     )
-                ) {
+                )
+                {
                     // allow interval to fall back down when memory pressure goes away
                     int newPollingInterval = Math.Min(
                         _configPollingInterval,
@@ -180,7 +182,8 @@ namespace System.Runtime.Caching
             if (
                 !RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
                 && _configPhysicalMemoryLimitPercentage > 0
-            ) {
+            )
+            {
                 throw new PlatformNotSupportedException(
                     SR.PlatformNotSupported_PhysicalMemoryLimitPercentage
                 );
@@ -377,7 +380,8 @@ namespace System.Runtime.Caching
                         timerHandleRef != null
                         && Interlocked.CompareExchange(ref _timerHandleRef, null, timerHandleRef)
                             == timerHandleRef
-                    ) {
+                    )
+                    {
                         timerHandleRef.Dispose();
                         Dbg.Trace("MemoryCacheStats", "Stopped CacheMemoryTimers");
                     }
@@ -427,7 +431,8 @@ namespace System.Runtime.Caching
             if (
                 cacheMemoryLimitMegabytes == _configCacheMemoryLimitMegabytes
                 && physicalMemoryLimitPercentage == _configPhysicalMemoryLimitPercentage
-            ) {
+            )
+            {
                 return;
             }
 

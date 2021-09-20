@@ -190,7 +190,8 @@ public void $$Run()
             string code,
             string expectedBufferText,
             string submissionBuffer = null
-        ) {
+        )
+        {
             using var workspace = InteractiveWindowCommandHandlerTestState.CreateTestState(code);
             PrepareSubmissionBuffer(submissionBuffer, workspace);
             workspace.SendCopyToInteractive();
@@ -204,7 +205,8 @@ public void $$Run()
             string code,
             string expectedSubmission,
             string submissionBuffer = null
-        ) {
+        )
+        {
             AssertExecuteInInteractive(code, new string[] { expectedSubmission }, submissionBuffer);
         }
 
@@ -212,7 +214,8 @@ public void $$Run()
             string code,
             string[] expectedSubmissions,
             string submissionBuffer = null
-        ) {
+        )
+        {
             var submissions = new List<string>();
             void appendSubmission(object _, string item)
             {
@@ -231,7 +234,8 @@ public void $$Run()
         private static void PrepareSubmissionBuffer(
             string submissionBuffer,
             InteractiveWindowCommandHandlerTestState workspace
-        ) {
+        )
+        {
             if (!string.IsNullOrEmpty(submissionBuffer))
             {
                 workspace.WindowCurrentLanguageBuffer.Insert(0, submissionBuffer);

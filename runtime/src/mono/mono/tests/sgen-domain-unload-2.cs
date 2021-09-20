@@ -41,7 +41,8 @@ class Driver
             );
             timeout.HaveTimeLeft;
 
-        ) {
+        )
+        {
             var ad = AppDomain.CreateDomain("domain_" + iterations);
             ad.DoCallBack(new CrossAppDomainDelegate(AllocStuff));
             AppDomain.Unload(ad);

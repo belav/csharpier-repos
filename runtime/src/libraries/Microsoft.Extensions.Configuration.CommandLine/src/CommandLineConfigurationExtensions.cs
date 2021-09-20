@@ -66,7 +66,8 @@ namespace Microsoft.Extensions.Configuration
         public static IConfigurationBuilder AddCommandLine(
             this IConfigurationBuilder configurationBuilder,
             string[] args
-        ) {
+        )
+        {
             return configurationBuilder.AddCommandLine(args, switchMappings: null);
         }
 
@@ -155,7 +156,8 @@ namespace Microsoft.Extensions.Configuration
             this IConfigurationBuilder configurationBuilder,
             string[] args,
             IDictionary<string, string> switchMappings
-        ) {
+        )
+        {
             configurationBuilder.Add(
                 new CommandLineConfigurationSource { Args = args, SwitchMappings = switchMappings }
             );

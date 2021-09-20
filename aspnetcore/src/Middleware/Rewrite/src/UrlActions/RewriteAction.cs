@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Rewrite.UrlActions
             bool queryStringAppend,
             bool queryStringDelete,
             bool escapeBackReferences
-        ) {
+        )
+        {
             // For the replacement, we must have at least
             // one segment (cannot have an empty replacement)
             Result = result;
@@ -43,7 +44,8 @@ namespace Microsoft.AspNetCore.Rewrite.UrlActions
             RewriteContext context,
             BackReferenceCollection? ruleBackReferences,
             BackReferenceCollection? conditionBackReferences
-        ) {
+        )
+        {
             var pattern = Url!.Evaluate(context, ruleBackReferences, conditionBackReferences);
             var request = context.HttpContext.Request;
 

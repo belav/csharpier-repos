@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
             SymbolKind symbolKind,
             MethodKind methodKind,
             bool returnsVoid
-        ) {
+        )
+        {
             return base.IsOnCodeBlockSupported(symbolKind, methodKind, returnsVoid)
                 && methodKind != MethodKind.EventRaise;
         }

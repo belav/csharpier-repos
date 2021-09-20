@@ -33,7 +33,8 @@ namespace ILCompiler.Reflection.ReadyToRun
                 long section,
                 uint signatureRVA,
                 ReadyToRunSignature signature
-            ) {
+            )
+            {
                 Index = index;
                 StartOffset = startOffset;
                 StartRVA = startRVA;
@@ -93,7 +94,8 @@ namespace ILCompiler.Reflection.ReadyToRun
             int auxDataOffset,
             Machine machine,
             ushort majorVersion
-        ) {
+        )
+        {
             Index = index;
             SectionRVA = rva;
             SectionSize = size;

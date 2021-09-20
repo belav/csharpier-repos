@@ -2369,7 +2369,8 @@ namespace System.Net.Http.Tests
                 object storeValue,
                 ref int index,
                 out object parsedValue
-            ) {
+            )
+            {
                 TryParseValueCallCount++;
                 return TryParseValueCore(value, ref index, out parsedValue);
             }
@@ -2482,7 +2483,8 @@ namespace System.Net.Http.Tests
                 object storeValue,
                 ref int index,
                 out object parsedValue
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }
@@ -2515,7 +2517,8 @@ namespace System.Net.Http.Tests
                 object storeValue,
                 ref int index,
                 out object parsedValue
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }

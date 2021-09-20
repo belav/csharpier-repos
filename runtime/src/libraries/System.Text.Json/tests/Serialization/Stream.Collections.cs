@@ -68,7 +68,8 @@ namespace System.Text.Json.Serialization.Tests
             object obj,
             Type type,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             string expectedjson = JsonSerializer.Serialize(obj, options);
 
             using var memoryStream = new MemoryStream();
@@ -81,7 +82,8 @@ namespace System.Text.Json.Serialization.Tests
             if (
                 options.ReferenceHandler == null
                 || !GetTypesNonRoundtrippableWithReferenceHandler().Contains(type)
-            ) {
+            )
+            {
                 await TestDeserialization<TElement>(memoryStream, expectedjson, type, options);
 
                 // Deserialize with extra whitespace
@@ -103,7 +105,8 @@ namespace System.Text.Json.Serialization.Tests
             string expectedJson,
             Type type,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             try
             {
                 object deserialized = await JsonSerializer.DeserializeAsync(
@@ -127,7 +130,8 @@ namespace System.Text.Json.Serialization.Tests
                         CollectionTestTypes.DictionaryTypes<TElement>().Contains(type)
                         && options.ReferenceHandler == ReferenceHandler.Preserve
                     )
-                ) {
+                )
+                {
                     JsonTestHelper.AssertJsonEqual(expectedJson, serialized);
                 }
             }
@@ -167,7 +171,8 @@ namespace System.Text.Json.Serialization.Tests
                 typeof(IDictionary<string, TElement>).IsAssignableFrom(type)
                 || typeof(IReadOnlyDictionary<string, TElement>).IsAssignableFrom(type)
                 || typeof(IDictionary).IsAssignableFrom(type)
-            ) {
+            )
+            {
                 return Activator.CreateInstance(
                     type,
                     new object[] { GetDict_TypedElements<TElement>(stringLength) }
@@ -256,7 +261,8 @@ namespace System.Text.Json.Serialization.Tests
 
         private static Dictionary<string, TElement> GetDict_TypedElements<TElement>(
             int stringLength
-        ) {
+        )
+        {
             Debug.Assert(NumElements > 2);
 
             TElement item = GetCollectionElement<TElement>(stringLength);

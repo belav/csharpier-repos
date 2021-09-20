@@ -32,9 +32,8 @@ namespace Microsoft.CodeAnalysis.Remote
             ) => new RemoteSemanticClassificationCacheService(arguments);
         }
 
-        public RemoteSemanticClassificationCacheService(
-            in ServiceConstructionArguments arguments
-        ) : base(arguments) { }
+        public RemoteSemanticClassificationCacheService(in ServiceConstructionArguments arguments)
+            : base(arguments) { }
 
         /// <summary>
         /// Key we use to look this up in the persistence store for a particular document.
@@ -63,7 +62,8 @@ namespace Microsoft.CodeAnalysis.Remote
         private static async Task<Checksum> GetChecksumAsync(
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // We only checksum off of the contents of the file.  During load, we can't really compute any other
             // information since we don't necessarily know about other files, metadata, or dependencies.  So during
             // load, we allow for the previous semantic classifications to be used as long as the file contents match.
@@ -77,7 +77,8 @@ namespace Microsoft.CodeAnalysis.Remote
             PinnedSolutionInfo solutionInfo,
             DocumentId documentId,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 async cancellationToken =>
                 {
@@ -100,7 +101,8 @@ namespace Microsoft.CodeAnalysis.Remote
         private static async Task CacheSemanticClassificationsAsync(
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var solution = document.Project.Solution;
             var workspace = solution.Workspace;
             var persistenceService =
@@ -228,7 +230,8 @@ namespace Microsoft.CodeAnalysis.Remote
             TextSpan textSpan,
             Checksum checksum,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 async cancellationToken =>
                 {
@@ -255,7 +258,8 @@ namespace Microsoft.CodeAnalysis.Remote
             DocumentKey documentKey,
             Checksum checksum,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // See if we've loaded this into memory first.
             if (TryGetFromInMemoryCache(documentKey, checksum, out var classifiedSpans))
                 return classifiedSpans;
@@ -278,7 +282,8 @@ namespace Microsoft.CodeAnalysis.Remote
             DocumentKey documentKey,
             Checksum checksum,
             out ImmutableArray<ClassifiedSpan> classifiedSpans
-        ) {
+        )
+        {
             lock (_cachedData)
             {
                 var data = _cachedData.FirstOrNull(
@@ -299,7 +304,8 @@ namespace Microsoft.CodeAnalysis.Remote
             DocumentKey documentKey,
             Checksum checksum,
             ImmutableArray<ClassifiedSpan> classifiedSpans
-        ) {
+        )
+        {
             lock (_cachedData)
             {
                 // First, remove any existing info for this doc.
@@ -307,7 +313,8 @@ namespace Microsoft.CodeAnalysis.Remote
                     var currentNode = _cachedData.First;
                     currentNode != null;
                     currentNode = currentNode.Next
-                ) {
+                )
+                {
                     if (currentNode.Value.id == documentKey.Id)
                     {
                         _cachedData.Remove(currentNode);
@@ -330,7 +337,8 @@ namespace Microsoft.CodeAnalysis.Remote
             DocumentKey documentKey,
             Checksum checksum,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var workspace = GetWorkspace();
             var persistenceService =
                 workspace.Services.GetService<IPersistentStorageService>()

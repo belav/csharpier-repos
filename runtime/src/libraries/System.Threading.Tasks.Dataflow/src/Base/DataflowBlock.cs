@@ -37,7 +37,8 @@ namespace System.Threading.Tasks.Dataflow
         public static IDisposable LinkTo<TOutput>(
             this ISourceBlock<TOutput> source,
             ITargetBlock<TOutput> target
-        ) {
+        )
+        {
             // Validate arguments
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
@@ -61,7 +62,8 @@ namespace System.Threading.Tasks.Dataflow
             this ISourceBlock<TOutput> source,
             ITargetBlock<TOutput> target,
             Predicate<TOutput> predicate
-        ) {
+        )
+        {
             // All argument validation handled by delegated method.
             return LinkTo(source, target, DataflowLinkOptions.Default, predicate);
         }
@@ -81,7 +83,8 @@ namespace System.Threading.Tasks.Dataflow
             ITargetBlock<TOutput> target,
             DataflowLinkOptions linkOptions,
             Predicate<TOutput> predicate
-        ) {
+        )
+        {
             // Validate arguments
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
@@ -119,7 +122,8 @@ namespace System.Threading.Tasks.Dataflow
                 ISourceBlock<T> source,
                 ITargetBlock<T> target,
                 Predicate<T> predicate
-            ) {
+            )
+            {
                 Debug.Assert(source != null, "Filtered link requires a source to filter on.");
                 Debug.Assert(target != null, "Filtered link requires a target to filter to.");
                 Debug.Assert(
@@ -184,7 +188,8 @@ namespace System.Threading.Tasks.Dataflow
                 DataflowMessageHeader messageHeader,
                 ITargetBlock<T> target,
                 out bool messageConsumed
-            ) {
+            )
+            {
                 // This message should have only made it to the target if it passes the filter, so we shouldn't need to check again.
                 // The real source will also be doing verifications, so we don't need to validate args here.
                 Debug.Assert(messageHeader.IsValid, "Only valid messages may be consumed.");
@@ -195,7 +200,8 @@ namespace System.Threading.Tasks.Dataflow
             bool ISourceBlock<T>.ReserveMessage(
                 DataflowMessageHeader messageHeader,
                 ITargetBlock<T> target
-            ) {
+            )
+            {
                 // This message should have only made it to the target if it passes the filter, so we shouldn't need to check again.
                 // The real source will also be doing verifications, so we don't need to validate args here.
                 Debug.Assert(messageHeader.IsValid, "Only valid messages may be consumed.");
@@ -206,7 +212,8 @@ namespace System.Threading.Tasks.Dataflow
             void ISourceBlock<T>.ReleaseReservation(
                 DataflowMessageHeader messageHeader,
                 ITargetBlock<T> target
-            ) {
+            )
+            {
                 // This message should have only made it to the target if it passes the filter, so we shouldn't need to check again.
                 // The real source will also be doing verifications, so we don't need to validate args here.
                 Debug.Assert(messageHeader.IsValid, "Only valid messages may be consumed.");
@@ -233,7 +240,8 @@ namespace System.Threading.Tasks.Dataflow
             IDisposable ISourceBlock<T>.LinkTo(
                 ITargetBlock<T> target,
                 DataflowLinkOptions linkOptions
-            ) {
+            )
+            {
                 throw new NotSupportedException(SR.NotSupported_MemberNotNeeded);
             }
 
@@ -354,7 +362,8 @@ namespace System.Threading.Tasks.Dataflow
             this ITargetBlock<TInput> target,
             TInput item,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Validate arguments.  No validation necessary for item.
             if (target == null)
                 throw new ArgumentNullException(nameof(target));
@@ -478,7 +487,8 @@ namespace System.Threading.Tasks.Dataflow
                 ITargetBlock<TOutput> target,
                 TOutput messageValue,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Debug.Assert(target != null, "A valid target to send to is required.");
                 _target = target;
                 _messageValue = messageValue;
@@ -611,7 +621,8 @@ namespace System.Threading.Tasks.Dataflow
                 Action<object?> completionAction,
                 object completionActionState,
                 bool runAsync
-            ) {
+            )
+            {
                 Debug.Assert(completionAction != null, "Completion action to run is required.");
 
                 // Suppress finalization.  Finalization is only required if the target drops a reference
@@ -689,7 +700,8 @@ namespace System.Threading.Tasks.Dataflow
                             CANCELLATION_STATE_COMPLETING,
                             CANCELLATION_STATE_REGISTERED
                         ) == CANCELLATION_STATE_REGISTERED
-                    ) {
+                    )
+                    {
                         // We've reserved completion, so proceed to cancel the task.
                         source.CompleteAsCanceled(true);
                     }
@@ -770,7 +782,8 @@ namespace System.Threading.Tasks.Dataflow
                 DataflowMessageHeader messageHeader,
                 ITargetBlock<TOutput> target,
                 out bool messageConsumed
-            ) {
+            )
+            {
                 // Validate arguments
                 if (!messageHeader.IsValid)
                     throw new ArgumentException(
@@ -818,7 +831,8 @@ namespace System.Threading.Tasks.Dataflow
                                 curState
                             ) == curState
                         )
-                    ) {
+                    )
+                    {
                         CompleteAsAccepted(runAsync: true);
                         messageConsumed = true;
                         return _messageValue;
@@ -834,7 +848,8 @@ namespace System.Threading.Tasks.Dataflow
             bool ISourceBlock<TOutput>.ReserveMessage(
                 DataflowMessageHeader messageHeader,
                 ITargetBlock<TOutput> target
-            ) {
+            )
+            {
                 // Validate arguments
                 if (!messageHeader.IsValid)
                     throw new ArgumentException(
@@ -866,7 +881,8 @@ namespace System.Threading.Tasks.Dataflow
             void ISourceBlock<TOutput>.ReleaseReservation(
                 DataflowMessageHeader messageHeader,
                 ITargetBlock<TOutput> target
-            ) {
+            )
+            {
                 // Validate arguments
                 if (!messageHeader.IsValid)
                     throw new ArgumentException(
@@ -919,7 +935,8 @@ namespace System.Threading.Tasks.Dataflow
             IDisposable ISourceBlock<TOutput>.LinkTo(
                 ITargetBlock<TOutput> target,
                 DataflowLinkOptions linkOptions
-            ) {
+            )
+            {
                 throw new NotSupportedException(SR.NotSupported_MemberNotNeeded);
             }
             /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Blocks/Member[@name="Complete"]/*' />
@@ -999,7 +1016,8 @@ namespace System.Threading.Tasks.Dataflow
         public static bool TryReceive<TOutput>(
             this IReceivableSourceBlock<TOutput> source,
             [MaybeNullWhen(false)] out TOutput item
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
 
@@ -1036,7 +1054,8 @@ namespace System.Threading.Tasks.Dataflow
         public static Task<TOutput> ReceiveAsync<TOutput>(
             this ISourceBlock<TOutput> source,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Argument validation handled by target method
             return ReceiveAsync(source, Common.InfiniteTimeSpan, cancellationToken);
         }
@@ -1057,7 +1076,8 @@ namespace System.Threading.Tasks.Dataflow
         public static Task<TOutput> ReceiveAsync<TOutput>(
             this ISourceBlock<TOutput> source,
             TimeSpan timeout
-        ) {
+        )
+        {
             // Argument validation handled by target method
             return ReceiveAsync(source, timeout, CancellationToken.None);
         }
@@ -1080,7 +1100,8 @@ namespace System.Threading.Tasks.Dataflow
             this ISourceBlock<TOutput> source,
             TimeSpan timeout,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Validate arguments
 
 
@@ -1124,7 +1145,8 @@ namespace System.Threading.Tasks.Dataflow
         public static TOutput Receive<TOutput>(
             this ISourceBlock<TOutput> source,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Argument validation handled by target method
             return Receive(source, Common.InfiniteTimeSpan, cancellationToken);
         }
@@ -1169,7 +1191,8 @@ namespace System.Threading.Tasks.Dataflow
             this ISourceBlock<TOutput> source,
             TimeSpan timeout,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Validate arguments
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
@@ -1224,7 +1247,8 @@ namespace System.Threading.Tasks.Dataflow
             bool attemptTryReceive,
             TimeSpan timeout,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(source != null, "Need a source from which to receive.");
 
             // If cancellation has been requested, we're done before we've even started, cancel this receive.
@@ -1295,7 +1319,8 @@ namespace System.Threading.Tasks.Dataflow
             ISourceBlock<TOutput> source,
             int millisecondsTimeout,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Create a target to link from the source
             var target = new ReceiveTarget<TOutput>();
 
@@ -1430,7 +1455,8 @@ namespace System.Threading.Tasks.Dataflow
                 T messageValue,
                 ISourceBlock<T>? source,
                 bool consumeToAccept
-            ) {
+            )
+            {
                 // Validate arguments
                 if (!messageHeader.IsValid)
                     throw new ArgumentException(
@@ -1583,7 +1609,8 @@ namespace System.Threading.Tasks.Dataflow
                             _externalCancellationToken.IsCancellationRequested
                             || _cts.IsCancellationRequested
                         )
-                    ) {
+                    )
+                    {
                         reason = ReceiveCoreByLinkingCleanupReason.Cancellation;
                     }
                     _cts.Cancel();
@@ -1765,7 +1792,8 @@ namespace System.Threading.Tasks.Dataflow
         public static Task<bool> OutputAvailableAsync<TOutput>(
             this ISourceBlock<TOutput> source,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Validate arguments
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
@@ -1898,7 +1926,8 @@ namespace System.Threading.Tasks.Dataflow
                     cachedUnlinker != null
                     && Interlocked.CompareExchange(ref _unlinker, null, cachedUnlinker)
                         == cachedUnlinker
-                ) {
+                )
+                {
                     cachedUnlinker.Dispose();
                 }
             }
@@ -1914,7 +1943,8 @@ namespace System.Threading.Tasks.Dataflow
                 T messageValue,
                 ISourceBlock<T>? source,
                 bool consumeToAccept
-            ) {
+            )
+            {
                 if (!messageHeader.IsValid)
                     throw new ArgumentException(
                         SR.Argument_InvalidMessageHeader,
@@ -1976,7 +2006,8 @@ namespace System.Threading.Tasks.Dataflow
         public static IPropagatorBlock<TInput, TOutput> Encapsulate<TInput, TOutput>(
             ITargetBlock<TInput> target,
             ISourceBlock<TOutput> source
-        ) {
+        )
+        {
             if (target == null)
                 throw new ArgumentNullException(nameof(target));
             if (source == null)
@@ -2000,7 +2031,8 @@ namespace System.Threading.Tasks.Dataflow
             public EncapsulatingPropagator(
                 ITargetBlock<TInput> target,
                 ISourceBlock<TOutput> source
-            ) {
+            )
+            {
                 Debug.Assert(
                     target != null,
                     "The target should never be null; this should be checked by all internal usage."
@@ -2033,7 +2065,8 @@ namespace System.Threading.Tasks.Dataflow
                 TInput messageValue,
                 ISourceBlock<TInput>? source,
                 bool consumeToAccept
-            ) {
+            )
+            {
                 return _target.OfferMessage(messageHeader, messageValue, source, consumeToAccept);
             }
 
@@ -2053,7 +2086,8 @@ namespace System.Threading.Tasks.Dataflow
             public bool TryReceive(
                 Predicate<TOutput>? filter,
                 [MaybeNullWhen(false)] out TOutput item
-            ) {
+            )
+            {
                 var receivableSource = _source as IReceivableSourceBlock<TOutput>;
                 if (receivableSource != null)
                     return receivableSource.TryReceive(filter, out item);
@@ -2078,7 +2112,8 @@ namespace System.Threading.Tasks.Dataflow
                 DataflowMessageHeader messageHeader,
                 ITargetBlock<TOutput> target,
                 out bool messageConsumed
-            ) {
+            )
+            {
                 return _source.ConsumeMessage(messageHeader, target, out messageConsumed);
             }
 
@@ -2086,7 +2121,8 @@ namespace System.Threading.Tasks.Dataflow
             public bool ReserveMessage(
                 DataflowMessageHeader messageHeader,
                 ITargetBlock<TOutput> target
-            ) {
+            )
+            {
                 return _source.ReserveMessage(messageHeader, target);
             }
 
@@ -2094,7 +2130,8 @@ namespace System.Threading.Tasks.Dataflow
             public void ReleaseReservation(
                 DataflowMessageHeader messageHeader,
                 ITargetBlock<TOutput> target
-            ) {
+            )
+            {
                 _source.ReleaseReservation(messageHeader, target);
             }
 
@@ -2177,7 +2214,8 @@ namespace System.Threading.Tasks.Dataflow
             Action<T1> action1,
             ISourceBlock<T2> source2,
             Action<T2> action2
-        ) {
+        )
+        {
             // All argument validation is handled by the delegated method
             return Choose(source1, action1, source2, action2, DataflowBlockOptions.Default);
         }
@@ -2218,7 +2256,8 @@ namespace System.Threading.Tasks.Dataflow
             ISourceBlock<T2> source2,
             Action<T2> action2,
             DataflowBlockOptions dataflowBlockOptions
-        ) {
+        )
+        {
             // Validate arguments
             if (source1 == null)
                 throw new ArgumentNullException(nameof(source1));
@@ -2281,7 +2320,8 @@ namespace System.Threading.Tasks.Dataflow
             Action<T2> action2,
             ISourceBlock<T3> source3,
             Action<T3> action3
-        ) {
+        )
+        {
             // All argument validation is handled by the delegated method
             return Choose(
                 source1,
@@ -2336,7 +2376,8 @@ namespace System.Threading.Tasks.Dataflow
             ISourceBlock<T3> source3,
             Action<T3> action3,
             DataflowBlockOptions dataflowBlockOptions
-        ) {
+        )
+        {
             // Validate arguments
             if (source1 == null)
                 throw new ArgumentNullException(nameof(source1));
@@ -2386,7 +2427,8 @@ namespace System.Threading.Tasks.Dataflow
             ISourceBlock<T3>? source3,
             Action<T3>? action3,
             DataflowBlockOptions dataflowBlockOptions
-        ) {
+        )
+        {
             Debug.Assert(
                 source1 != null && action1 != null,
                 "The first source and action should not be null."
@@ -2420,7 +2462,8 @@ namespace System.Threading.Tasks.Dataflow
                         hasThirdSource
                         && TryChooseFromSource(source3!, action3!, 2, scheduler, out resultTask)
                     )
-                ) {
+                )
+                {
                     return resultTask;
                 }
             }
@@ -2458,7 +2501,8 @@ namespace System.Threading.Tasks.Dataflow
             int branchId,
             TaskScheduler scheduler,
             [NotNullWhen(true)] out Task<int>? task
-        ) {
+        )
+        {
             // Validate arguments
             Debug.Assert(source != null, "Expected a non-null source");
             Debug.Assert(action != null, "Expected a non-null action");
@@ -2504,7 +2548,8 @@ namespace System.Threading.Tasks.Dataflow
             ISourceBlock<T3>? source3,
             Action<T3>? action3,
             DataflowBlockOptions dataflowBlockOptions
-        ) {
+        )
+        {
             Debug.Assert(
                 source1 != null && action1 != null,
                 "The first source and action should not be null."
@@ -2654,7 +2699,8 @@ namespace System.Threading.Tasks.Dataflow
             int branchId,
             ISourceBlock<T> source,
             Action<T> action
-        ) {
+        )
+        {
             // If the cancellation token is already canceled, there is no need to create and link a target.
             // Instead, directly return a canceled task.
             if (cts.IsCancellationRequested)
@@ -2772,7 +2818,8 @@ namespace System.Threading.Tasks.Dataflow
                 T messageValue,
                 ISourceBlock<T>? source,
                 bool consumeToAccept
-            ) {
+            )
+            {
                 // Validate arguments
                 if (!messageHeader.IsValid)
                     throw new ArgumentException(
@@ -2942,7 +2989,8 @@ namespace System.Threading.Tasks.Dataflow
                         sourceCompletionTask != null
                         && sourceCompletionTask.IsCompleted
                         && _observersState.Target.Completion.IsCompleted
-                    ) {
+                    )
+                    {
                         error = GetCompletionError();
                     }
                     // Otherwise, we need to subscribe this observer.
@@ -3382,7 +3430,8 @@ namespace System.Threading.Tasks.Dataflow
                 TInput messageValue,
                 ISourceBlock<TInput>? source,
                 bool consumeToAccept
-            ) {
+            )
+            {
                 if (!messageHeader.IsValid)
                     throw new ArgumentException(
                         SR.Argument_InvalidMessageHeader,

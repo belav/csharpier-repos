@@ -753,7 +753,8 @@ public static partial class XmlSerializerTests
 
     private static System.Reflection.ConstructorInfo FindDefaultConstructor(
         System.Reflection.TypeInfo ti
-    ) {
+    )
+    {
         foreach (System.Reflection.ConstructorInfo ci in ti.DeclaredConstructors)
         {
             if (!ci.IsStatic && ci.GetParameters().Length == 0)
@@ -2282,7 +2283,8 @@ public static partial class XmlSerializerTests
         string baseline,
         bool skipStringCompare = false,
         string wrapperName = null
-    ) {
+    )
+    {
         string ns = s_defaultNs;
         object[] value = new object[] { requestBodyValue };
         XmlReflectionMember member = GetReflectionMember<T>(memberName, ns);
@@ -2306,7 +2308,8 @@ public static partial class XmlSerializerTests
         string ns = null,
         string wrapperName = null,
         bool rpc = false
-    ) {
+    )
+    {
         ns = ns ?? s_defaultNs;
         var importer = new XmlReflectionImporter(null, ns);
         var membersMapping = importer.ImportMembersMapping(
@@ -2354,7 +2357,8 @@ public static partial class XmlSerializerTests
         bool skipStringCompare = false,
         string wrapperName = null,
         bool validate = false
-    ) {
+    )
+    {
         string ns = s_defaultNs;
         object[] value = new object[] { item };
         XmlReflectionMember member = GetReflectionMember<T>(memberName, ns);
@@ -2380,7 +2384,8 @@ public static partial class XmlSerializerTests
         string wrapperName = null,
         bool writeAccessors = false,
         bool validate = false
-    ) {
+    )
+    {
         ns = ns ?? s_defaultNs;
         var importer = new SoapReflectionImporter(null, ns);
         var membersMapping = importer.ImportMembersMapping(
@@ -2443,7 +2448,8 @@ public static partial class XmlSerializerTests
     private static XmlReflectionMember GetReflectionMemberNoXmlElement<T>(
         string memberName,
         string ns = null
-    ) {
+    )
+    {
         ns = ns ?? s_defaultNs;
         var member = new XmlReflectionMember();
         member.MemberName = memberName;
@@ -2468,7 +2474,8 @@ public static partial class XmlSerializerTests
         Func<XmlSerializer> serializerFactory = null,
         bool skipStringCompare = false,
         XmlSerializerNamespaces xns = null
-    ) {
+    )
+    {
         XmlSerializer serializer = new XmlSerializer(typeof(T));
         if (serializerFactory != null)
         {
@@ -2517,7 +2524,8 @@ public static partial class XmlSerializerTests
         T value,
         XmlSerializer serializer,
         string baseline
-    ) {
+    )
+    {
         T actual;
         using (var ms = new MemoryStream())
         {

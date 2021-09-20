@@ -82,7 +82,8 @@ namespace System.Threading
                         _nativeRegisteredWaitHandle,
                         waitObject?.SafeWaitHandle
                     )
-                ) {
+                )
+                {
                     return false;
                 }
                 _nativeRegisteredWaitHandle = InvalidHandleValue;
@@ -381,7 +382,8 @@ namespace System.Threading
             uint millisecondsTimeOutInterval,
             bool executeOnlyOnce,
             bool flowExecutionContext
-        ) {
+        )
+        {
             if (waitObject == null)
                 throw new ArgumentNullException(nameof(waitObject));
 
@@ -418,7 +420,8 @@ namespace System.Threading
 
         internal static void UnsafeQueueWaitCompletion(
             CompleteWaitThreadPoolWorkItem completeWaitWorkItem
-        ) {
+        )
+        {
             Debug.Assert(UsePortableThreadPool);
 
 #if TARGET_WINDOWS // the IO completion thread pool is currently only available on Windows
@@ -524,7 +527,8 @@ namespace System.Threading
         internal static bool NotifyWorkItemComplete(
             object? threadLocalCompletionCountObject,
             int currentTimeMs
-        ) {
+        )
+        {
             if (UsePortableThreadPool)
             {
                 return PortableThreadPool.ThreadPoolInstance.NotifyWorkItemComplete(

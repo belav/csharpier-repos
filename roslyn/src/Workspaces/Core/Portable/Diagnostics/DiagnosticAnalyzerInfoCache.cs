@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             public DiagnosticDescriptorsInfo(
                 ImmutableArray<DiagnosticDescriptor> supportedDescriptors,
                 bool telemetryAllowed
-            ) {
+            )
+            {
                 SupportedDescriptors = supportedDescriptors;
                 TelemetryAllowed = telemetryAllowed;
                 HasCompilationEndDescriptor = supportedDescriptors.Any(
@@ -74,7 +75,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// </summary>
         public ImmutableArray<DiagnosticDescriptor> GetNonCompilationEndDiagnosticDescriptors(
             DiagnosticAnalyzer analyzer
-        ) {
+        )
+        {
             var descriptorInfo = GetOrCreateDescriptorsInfo(analyzer);
             return !descriptorInfo.HasCompilationEndDescriptor
               ? descriptorInfo.SupportedDescriptors
@@ -136,7 +138,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 options == null
                 || analyzer == FileContentLoadAnalyzer.Instance
                 || analyzer.IsCompilerAnalyzer()
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -146,7 +149,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 !project.State.RunAnalyzers
                 && GetDiagnosticDescriptors(analyzer)
                     .All(d => d.Category != DiagnosticCategory.Compiler)
-            ) {
+            )
+            {
                 return true;
             }
 

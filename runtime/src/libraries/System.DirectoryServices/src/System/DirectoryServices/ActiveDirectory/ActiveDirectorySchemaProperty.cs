@@ -137,7 +137,8 @@ namespace System.DirectoryServices.ActiveDirectory
                         || (context.isADAMConfigSet())
                         || (context.isServer())
                     )
-                ) {
+                )
+                {
                     throw new ArgumentException(SR.NotADOrADAM, nameof(context));
                 }
             }
@@ -175,7 +176,8 @@ namespace System.DirectoryServices.ActiveDirectory
             string ldapDisplayName,
             DirectoryEntry? propertyEntry,
             DirectoryEntry? schemaEntry
-        ) {
+        )
+        {
             _context = context;
             _ldapDisplayName = ldapDisplayName;
 
@@ -235,7 +237,8 @@ namespace System.DirectoryServices.ActiveDirectory
             string commonName,
             SearchResult propertyValuesFromServer,
             DirectoryEntry schemaEntry
-        ) {
+        )
+        {
             _context = context;
             _schemaEntry = schemaEntry;
 
@@ -263,7 +266,8 @@ namespace System.DirectoryServices.ActiveDirectory
             string ldapDisplayName,
             DirectoryEntry propertyEntry,
             DirectoryEntry schemaEntry
-        ) {
+        )
+        {
             _context = context;
             _schemaEntry = schemaEntry;
             _propertyEntry = propertyEntry;
@@ -332,7 +336,8 @@ namespace System.DirectoryServices.ActiveDirectory
         public static ActiveDirectorySchemaProperty FindByName(
             DirectoryContext context,
             string ldapDisplayName
-        ) {
+        )
+        {
             ActiveDirectorySchemaProperty? schemaProperty = null;
 
             if (context == null)
@@ -354,7 +359,8 @@ namespace System.DirectoryServices.ActiveDirectory
                         || (context.isADAMConfigSet())
                         || (context.isServer())
                     )
-                ) {
+                )
+                {
                     throw new ArgumentException(SR.NotADOrADAM, nameof(context));
                 }
             }
@@ -696,7 +702,8 @@ namespace System.DirectoryServices.ActiveDirectory
                 if (
                     value < ActiveDirectorySyntax.CaseExactString
                     || value > ActiveDirectorySyntax.ReplicaLink
-                ) {
+                )
+                {
                     throw new InvalidEnumArgumentException(
                         nameof(value),
                         (int)value,
@@ -1329,7 +1336,8 @@ namespace System.DirectoryServices.ActiveDirectory
             DirectoryEntry schemaEntry,
             string name,
             bool isDefunctOnServer
-        ) {
+        )
+        {
             SearchResult? propertyValuesFromServer = null;
 
             //
@@ -1570,7 +1578,8 @@ namespace System.DirectoryServices.ActiveDirectory
             string syntaxId,
             int oMID,
             OMObjectClass? oMObjectClass
-        ) {
+        )
+        {
             for (int i = 0; i < s_syntaxes.Length; i++)
             {
                 if (s_syntaxes[i].Equals(new Syntax(syntaxId, oMID, oMObjectClass)))

@@ -1262,7 +1262,8 @@ dotnet_diagnostic.cs000.severity = none",
         private AnalyzerConfigOptionsResult[] GetAnalyzerConfigOptions(
             string[] filePaths,
             ArrayBuilder<AnalyzerConfig> configs
-        ) {
+        )
+        {
             var set = AnalyzerConfigSet.Create(configs);
             return filePaths.Select(f => set.GetOptionsForSourcePath(f)).ToArray();
         }
@@ -1270,7 +1271,8 @@ dotnet_diagnostic.cs000.severity = none",
         private static void VerifyAnalyzerOptions(
             (string key, string val)[][] expected,
             AnalyzerConfigOptionsResult[] options
-        ) {
+        )
+        {
             Assert.Equal(expected.Length, options.Length);
 
             for (int i = 0; i < expected.Length; i++)
@@ -1292,7 +1294,8 @@ dotnet_diagnostic.cs000.severity = none",
         private static void VerifyTreeOptions(
             (string diagId, ReportDiagnostic severity)[][] expected,
             AnalyzerConfigOptionsResult[] options
-        ) {
+        )
+        {
             Assert.Equal(expected.Length, options.Length);
 
             for (int i = 0; i < expected.Length; i++)
@@ -2606,7 +2609,8 @@ option2 = config3
         public void GlobalConfigIssuesWarningWithInvalidSectionNames(
             string sectionName,
             bool isValid
-        ) {
+        )
+        {
             var configs = ArrayBuilder<AnalyzerConfig>.GetInstance();
             configs.Add(
                 Parse(
@@ -2674,7 +2678,8 @@ is_global = true
         public void FileNameCausesConfigToBeReportedAsGlobal(
             string fileName,
             bool shouldBeTreatedAsGlobal
-        ) {
+        )
+        {
             var config = Parse("", fileName);
             Assert.Equal(shouldBeTreatedAsGlobal, config.IsGlobal);
         }
@@ -2843,7 +2848,8 @@ option1 = value2",
             int level2,
             int level3,
             string expectedValue
-        ) {
+        )
+        {
             var configs = ArrayBuilder<AnalyzerConfig>.GetInstance();
             configs.Add(
                 Parse(

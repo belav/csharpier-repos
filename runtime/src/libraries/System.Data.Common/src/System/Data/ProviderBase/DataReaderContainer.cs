@@ -14,7 +14,8 @@ namespace System.Data.ProviderBase
         internal static DataReaderContainer Create(
             IDataReader dataReader,
             bool returnProviderSpecificTypes
-        ) {
+        )
+        {
             if (returnProviderSpecificTypes)
             {
                 DbDataReader? providerSpecificDataReader = (dataReader as DbDataReader);
@@ -73,10 +74,8 @@ namespace System.Data.ProviderBase
         {
             private readonly DbDataReader _providerSpecificDataReader;
 
-            internal ProviderSpecificDataReader(
-                IDataReader dataReader,
-                DbDataReader dbDataReader
-            ) : base(dataReader)
+            internal ProviderSpecificDataReader(IDataReader dataReader, DbDataReader dbDataReader)
+                : base(dataReader)
             {
                 Debug.Assert(null != dataReader, "null dbDataReader");
                 _providerSpecificDataReader = dbDataReader;

@@ -22,13 +22,15 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
                 string.Empty,
                 SpecialType.None,
                 NullableAnnotation.None
-            ) {
+            )
+        {
             this.PointedAtType = pointedAtType;
         }
 
         protected override CodeGenerationTypeSymbol CloneWithNullableAnnotation(
             NullableAnnotation nullableAnnotation
-        ) {
+        )
+        {
             // We ignore the nullableAnnotation parameter because pointer types can't be nullable.
             return new CodeGenerationPointerTypeSymbol(this.PointedAtType);
         }

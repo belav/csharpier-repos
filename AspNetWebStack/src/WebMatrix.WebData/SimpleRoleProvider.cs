@@ -91,7 +91,8 @@ namespace WebMatrix.WebData
                 if (
                     value < SimpleMembershipProviderCasingBehavior.NormalizeCasing
                     || value > SimpleMembershipProviderCasingBehavior.RelyOnDatabaseCollation
-                ) {
+                )
+                {
                     throw new InvalidEnumArgumentException(
                         "value",
                         (int)value,

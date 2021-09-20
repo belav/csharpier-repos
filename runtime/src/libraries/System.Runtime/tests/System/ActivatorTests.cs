@@ -357,7 +357,8 @@ namespace System.Tests
         [InlineData(typeof(SubMarshalByRefObject))]
         public void CreateInstance_MarshalByRefObjectNetCore_ThrowsPlatformNotSupportedException(
             Type type
-        ) {
+        )
+        {
             // Activation Attributes are not supported in .NET Core.
             Assert.Throws<PlatformNotSupportedException>(
                 () => Activator.CreateInstance(type, null, new object[] { 1 })
@@ -1101,7 +1102,8 @@ namespace System.Tests
             string type,
             string returnedFullNameType,
             Type exceptionType
-        ) {
+        )
+        {
             ObjectHandle oh = null;
 
             if (exceptionType != null)
@@ -1199,7 +1201,8 @@ namespace System.Tests
             string returnedFullNameType,
             Type exceptionType,
             bool returnNull
-        ) {
+        )
+        {
             ObjectHandle oh = null;
 
             if (exceptionType != null)
@@ -1311,7 +1314,8 @@ namespace System.Tests
             CultureInfo culture,
             object[] activationAttributes,
             string returnedFullNameType
-        ) {
+        )
+        {
             ObjectHandle oh = Activator.CreateInstanceFrom(
                 assemblyFile: assemblyFile,
                 typeName: type,
@@ -1449,7 +1453,8 @@ namespace System.Tests
             object[] activationAttributes,
             string returnedFullNameType,
             bool returnNull
-        ) {
+        )
+        {
             ObjectHandle oh = Activator.CreateInstance(
                 assemblyName: assemblyName,
                 typeName: type,

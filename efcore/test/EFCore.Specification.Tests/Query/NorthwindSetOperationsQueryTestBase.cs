@@ -594,13 +594,15 @@ namespace Microsoft.EntityFrameworkCore.Query
             bool async,
             string leftType,
             string rightType
-        ) {
+        )
+        {
             var (left, right) = (ExpressionGenerator(leftType), ExpressionGenerator(rightType));
             return AssertQuery(async, ss => left(ss.Set<Order>()).Union(right(ss.Set<Order>())));
 
             static Func<IQueryable<Order>, IQueryable<object>> ExpressionGenerator(
                 string expressionType
-            ) {
+            )
+            {
                 switch (expressionType)
                 {
                     case "Column":

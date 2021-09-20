@@ -60,7 +60,8 @@ namespace System.Net.NetworkInformation
                         netInterface.OperationalStatus == OperationalStatus.Up
                         && netInterface.NetworkInterfaceType != NetworkInterfaceType.Tunnel
                         && netInterface.NetworkInterfaceType != NetworkInterfaceType.Loopback
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }
@@ -138,7 +139,8 @@ namespace System.Net.NetworkInformation
             if (
                 result == Interop.IpHlpApi.ERROR_NO_DATA
                 || result == Interop.IpHlpApi.ERROR_INVALID_PARAMETER
-            ) {
+            )
+            {
                 return Array.Empty<SystemNetworkInterface>();
             }
 
@@ -154,7 +156,8 @@ namespace System.Net.NetworkInformation
         internal SystemNetworkInterface(
             in Interop.IpHlpApi.FIXED_INFO fixedInfo,
             in Interop.IpHlpApi.IpAdapterAddresses ipAdapterAddresses
-        ) {
+        )
+        {
             // Store the common API information.
             _id = ipAdapterAddresses.AdapterName;
             _name = ipAdapterAddresses.friendlyName;
@@ -225,14 +228,16 @@ namespace System.Net.NetworkInformation
             if (
                 networkInterfaceComponent == NetworkInterfaceComponent.IPv6
                 && ((_adapterFlags & Interop.IpHlpApi.AdapterFlags.IPv6Enabled) != 0)
-            ) {
+            )
+            {
                 return true;
             }
 
             if (
                 networkInterfaceComponent == NetworkInterfaceComponent.IPv4
                 && ((_adapterFlags & Interop.IpHlpApi.AdapterFlags.IPv4Enabled) != 0)
-            ) {
+            )
+            {
                 return true;
             }
 

@@ -143,7 +143,8 @@ namespace System.Web.WebPages
             IDictionary<object, dynamic> pageData,
             TModel model,
             bool isLayoutPage
-        ) {
+        )
+        {
             var nestedContext = new WebPageContext
             {
                 HttpContext = parentContext.HttpContext,

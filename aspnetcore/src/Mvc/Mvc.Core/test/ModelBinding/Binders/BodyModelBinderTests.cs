@@ -173,7 +173,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         [InlineData(false)]
         public async Task BindModel_PassesAllowEmptyInputOptionViaContext(
             bool treatEmptyInputAsDefaultValueOption
-        ) {
+        )
+        {
             // Arrange
             var mockInputFormatter = new Mock<IInputFormatter>();
             mockInputFormatter.Setup(f => f.CanRead(It.IsAny<InputFormatterContext>()))
@@ -265,7 +266,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         [MemberData(nameof(BuiltInFormattersThrowingInputFormatterException))]
         public async Task BindModel_BuiltInXmlInputFormatters_ThrowingInputFormatterException_AddsErrorToModelState(
             IInputFormatter formatter
-        ) {
+        )
+        {
             // Arrange
             var httpContext = new DefaultHttpContext();
             httpContext.Request.Body = new MemoryStream(Encoding.UTF8.GetBytes("Bad data!"));
@@ -348,7 +350,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         [MemberData(nameof(DerivedFormattersThrowingInputFormatterException))]
         public async Task BindModel_DerivedXmlInputFormatters_AddsErrorToModelState(
             IInputFormatter formatter
-        ) {
+        )
+        {
             // Arrange
             var httpContext = new DefaultHttpContext();
             httpContext.Request.Body = new MemoryStream(Encoding.UTF8.GetBytes("Bad data!"));
@@ -443,7 +446,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         public async Task BindModel_BuiltInInputFormatters_ThrowingNonInputFormatterException_Throws(
             IInputFormatter formatter,
             string contentType
-        ) {
+        )
+        {
             // Arrange
             var httpContext = new DefaultHttpContext();
             httpContext.Request.Body = new MemoryStream(Encoding.UTF8.GetBytes("valid data!"));
@@ -497,7 +501,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         public async Task BindModel_DerivedXmlInputFormatters_ThrowingNonInputFormattingException_AddsErrorToModelState(
             IInputFormatter formatter,
             string contentType
-        ) {
+        )
+        {
             // Arrange
             var httpContext = new DefaultHttpContext();
             httpContext.Request.Body = new MemoryStream(Encoding.UTF8.GetBytes("valid data!"));
@@ -741,7 +746,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             Type modelType,
             HttpContext httpContext = null,
             IModelMetadataProvider metadataProvider = null
-        ) {
+        )
+        {
             if (httpContext == null)
             {
                 httpContext = new DefaultHttpContext();
@@ -770,7 +776,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         private static BodyModelBinder CreateBinder(
             IList<IInputFormatter> formatters,
             bool treatEmptyInputAsDefaultValueOption = false
-        ) {
+        )
+        {
             var options = new MvcOptions();
             var binder = CreateBinder(formatters, options);
             binder.AllowEmptyBody = treatEmptyInputAsDefaultValueOption;
@@ -781,7 +788,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         private static BodyModelBinder CreateBinder(
             IList<IInputFormatter> formatters,
             MvcOptions mvcOptions
-        ) {
+        )
+        {
             var sink = new TestSink();
             var loggerFactory = new TestLoggerFactory(sink, enabled: true);
             return new BodyModelBinder(
@@ -806,7 +814,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                     Encoding,
                     Task<InputFormatterResult>
                 > readRequestBodyAsync
-            ) {
+            )
+            {
                 SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/xyz"));
                 SupportedEncodings.Add(Encoding.UTF8);
                 _readRequestBodyAsync = readRequestBodyAsync;
@@ -820,7 +829,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             public override Task<InputFormatterResult> ReadRequestBodyAsync(
                 InputFormatterContext context,
                 Encoding effectiveEncoding
-            ) {
+            )
+            {
                 return _readRequestBodyAsync(context, effectiveEncoding);
             }
         }
@@ -861,7 +871,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                         // The tests that use this class rely on the 2.1 behavior of this formatter.
                         AllowInputFormatterExceptionMessages = true,
                     }
-                ) {
+                )
+            {
                 _throwNonInputFormatterException = throwNonInputFormatterException;
             }
 
@@ -871,7 +882,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             public override Task<InputFormatterResult> ReadRequestBodyAsync(
                 InputFormatterContext context,
                 Encoding encoding
-            ) {
+            )
+            {
                 if (_throwNonInputFormatterException)
                 {
                     throw new IOException("Unable to read input stream!!");
@@ -896,7 +908,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             public override Task<InputFormatterResult> ReadRequestBodyAsync(
                 InputFormatterContext context,
                 Encoding encoding
-            ) {
+            )
+            {
                 if (_throwNonInputFormatterException)
                 {
                     throw new IOException("Unable to read input stream!!");
@@ -923,7 +936,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             public override Task<InputFormatterResult> ReadRequestBodyAsync(
                 InputFormatterContext context,
                 Encoding encoding
-            ) {
+            )
+            {
                 if (_throwNonInputFormatterException)
                 {
                     throw new IOException("Unable to read input stream!!");
@@ -948,7 +962,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                         // The tests that use this class rely on the 2.1 behavior of this formatter.
                         AllowInputFormatterExceptionMessages = true,
                     }
-                ) {
+                )
+            {
                 _throwNonInputFormatterException = throwNonInputFormatterException;
             }
 
@@ -958,7 +973,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             public override Task<InputFormatterResult> ReadRequestBodyAsync(
                 InputFormatterContext context,
                 Encoding encoding
-            ) {
+            )
+            {
                 if (_throwNonInputFormatterException)
                 {
                     throw new IOException("Unable to read input stream!!");
@@ -983,7 +999,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             public override Task<InputFormatterResult> ReadRequestBodyAsync(
                 InputFormatterContext context,
                 Encoding encoding
-            ) {
+            )
+            {
                 if (_throwNonInputFormatterException)
                 {
                     throw new IOException("Unable to read input stream!!");
@@ -1007,7 +1024,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             public override Task<InputFormatterResult> ReadRequestBodyAsync(
                 InputFormatterContext context,
                 Encoding encoding
-            ) {
+            )
+            {
                 if (_throwNonInputFormatterException)
                 {
                     throw new IOException("Unable to read input stream!!");

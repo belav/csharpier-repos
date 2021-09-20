@@ -329,7 +329,8 @@ namespace System.Text.Json
             Span<byte> destination,
             JavaScriptEncoder encoder,
             ref int written
-        ) {
+        )
+        {
             Debug.Assert(encoder != null);
 
             OperationStatus result = encoder.EncodeUtf8(
@@ -358,7 +359,8 @@ namespace System.Text.Json
             int indexOfFirstByteToEscape,
             JavaScriptEncoder? encoder,
             out int written
-        ) {
+        )
+        {
             Debug.Assert(indexOfFirstByteToEscape >= 0 && indexOfFirstByteToEscape < value.Length);
 
             value.Slice(0, indexOfFirstByteToEscape).CopyTo(destination);
@@ -459,7 +461,8 @@ namespace System.Text.Json
             Span<char> destination,
             JavaScriptEncoder encoder,
             ref int written
-        ) {
+        )
+        {
             Debug.Assert(encoder != null);
 
             OperationStatus result = encoder.Encode(
@@ -488,7 +491,8 @@ namespace System.Text.Json
             int indexOfFirstByteToEscape,
             JavaScriptEncoder? encoder,
             out int written
-        ) {
+        )
+        {
             Debug.Assert(indexOfFirstByteToEscape >= 0 && indexOfFirstByteToEscape < value.Length);
 
             value.Slice(0, indexOfFirstByteToEscape).CopyTo(destination);

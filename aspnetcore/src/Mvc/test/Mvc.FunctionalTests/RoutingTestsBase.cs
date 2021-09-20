@@ -49,7 +49,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             string controller,
             string action,
             string expectedUrl
-        ) {
+        )
+        {
             // Arrange & Act
             var response = await Client.GetAsync(requestUrl);
 
@@ -385,7 +386,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public virtual async Task ConventionalRoutedController_WithOptionalSegment(
             string optionalSegment,
             string expected
-        ) {
+        )
+        {
             // Arrange & Act
             var response = await Client.GetAsync(
                 "http://localhost/Home/OptionalPath/" + optionalSegment
@@ -434,7 +436,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task AttributeRoutedAction_AcceptRequestsWithValidMethods_InRoutesWithoutExtraTemplateSegmentsOnTheAction(
             string method,
             string url
-        ) {
+        )
+        {
             // Arrange
             var request = new HttpRequestMessage(new HttpMethod(method), $"http://localhost{url}");
 
@@ -494,7 +497,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public virtual async Task AttributeRoutedAction_RejectsRequestsWithWrongMethods_InRoutesWithoutExtraTemplateSegmentsOnTheAction(
             string method,
             string url
-        ) {
+        )
+        {
             // Arrange
             var request = new HttpRequestMessage(new HttpMethod(method), $"http://localhost{url}");
 
@@ -510,7 +514,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [InlineData("http://localhost/api/v2/Maps")]
         public virtual async Task AttributeRoutedAction_MultipleRouteAttributes_WorksWithNameAndOrder(
             string url
-        ) {
+        )
+        {
             // Arrange & Act
             var response = await Client.GetAsync(url);
 
@@ -573,7 +578,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public virtual async Task AttributeRoutedAction_MultipleRouteAttributes_CombinesWithMultipleHttpAttributes(
             string url,
             string method
-        ) {
+        )
+        {
             // Arrange & Act
             var response = await Client.SendAsync(
                 new HttpRequestMessage(new HttpMethod(method), url)
@@ -599,7 +605,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [InlineData("http://localhost/Bank/Get/5")]
         public virtual async Task AttributeRoutedAction_MultipleHttpAttributesAndTokenReplacement(
             string url
-        ) {
+        )
+        {
             // Arrange
             var expectedUrl = new Uri(url).AbsolutePath;
 
@@ -644,7 +651,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public virtual async Task AttributeRoutedAction_MultipleRouteAttributes_WithMultipleHttpAttributes_RespectsConstraints(
             string url,
             string method
-        ) {
+        )
+        {
             // Arrange
             var expectedUrl = new Uri(url).AbsolutePath;
 
@@ -769,7 +777,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [InlineData("DELETE")]
         public async Task AttributeRoutedAction_RouteAttributeOnActionAndController_IsReachable(
             string method
-        ) {
+        )
+        {
             // Arrange
             var message = new HttpRequestMessage(
                 new HttpMethod(method),
@@ -819,7 +828,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [InlineData("PATCH")]
         public async Task AttributeRoutedAction_ControllerLevelRoute_WithAcceptVerbs_IsReachable(
             string verb
-        ) {
+        )
+        {
             // Arrange
             var message = new HttpRequestMessage(
                 new HttpMethod(verb),
@@ -845,7 +855,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [InlineData("PATCH")]
         public async Task AttributeRoutedAction_ControllerLevelRoute_WithAcceptVerbsAndRouteTemplate_IsReachable(
             string verb
-        ) {
+        )
+        {
             // Arrange
             var message = new HttpRequestMessage(
                 new HttpMethod(verb),
@@ -874,7 +885,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public virtual async Task AttributeRoutedAction_AcceptVerbsAndRouteTemplate_IsReachable(
             string verb,
             string path
-        ) {
+        )
+        {
             // Arrange
             var expectedUrl = "/Bank/Update";
             var message = new HttpRequestMessage(new HttpMethod(verb), "http://localhost/" + path);
@@ -923,7 +935,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task AttributeRoutedAction_ControllerLevelRoute_CombinedWithActionRoute_IsReachable(
             string verb,
             string action
-        ) {
+        )
+        {
             // Arrange
             var message = new HttpRequestMessage(
                 new HttpMethod(verb),
@@ -1029,7 +1042,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public virtual async Task AttributeRoutedAction_PreservesDefaultValue_IfRouteValueIsNull(
             string teamName,
             string expected
-        ) {
+        )
+        {
             // Arrange & Act
             var body = await Client.GetStringAsync("http://localhost/TeamName/" + teamName);
 
@@ -1127,7 +1141,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public virtual async Task AttributeRoutedAction_LinkWithName_WithNameInheritedFromControllerRoute(
             string method,
             string actionName
-        ) {
+        )
+        {
             // Arrange
             var message = new HttpRequestMessage(
                 new HttpMethod(method),
@@ -1564,7 +1579,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             string path,
             string verb,
             string actionName
-        ) {
+        )
+        {
             // Arrange
             var request = new HttpRequestMessage(new HttpMethod(verb), "http://localhost" + path);
 
@@ -1604,7 +1620,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public virtual async Task AttributeRouting_MixedAcceptVerbsAndRoute_Unreachable(
             string path,
             string verb
-        ) {
+        )
+        {
             // Arrange
             var request = new HttpRequestMessage(new HttpMethod(verb), "http://localhost" + path);
 
@@ -1624,7 +1641,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             string path,
             string verb,
             string actionName
-        ) {
+        )
+        {
             // Arrange
             var request = new HttpRequestMessage(new HttpMethod(verb), "http://localhost" + path);
 

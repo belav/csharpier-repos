@@ -10,7 +10,8 @@ namespace CustomAuthorizationFailureResponse.Authorization.Handlers
         protected override Task HandleRequirementAsync(
             AuthorizationHandlerContext context,
             SampleWithCustomMessageRequirement requirement
-        ) {
+        )
+        {
             // assuming the requirement was not met
             return Task.CompletedTask;
         }

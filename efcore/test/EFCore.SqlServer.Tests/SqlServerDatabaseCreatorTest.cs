@@ -87,7 +87,8 @@ namespace Microsoft.EntityFrameworkCore
         private async Task Create_checks_for_existence_and_retries_until_it_passes(
             int errorNumber,
             bool async
-        ) {
+        )
+        {
             var customServices = new ServiceCollection().AddScoped<
                 ISqlServerConnection,
                 FakeSqlServerConnection
@@ -137,7 +138,8 @@ namespace Microsoft.EntityFrameworkCore
 
         private async Task Create_checks_for_existence_and_ultimately_gives_up_waiting_test(
             bool async
-        ) {
+        )
+        {
             var customServices = new ServiceCollection().AddScoped<
                 ISqlServerConnection,
                 FakeSqlServerConnection
@@ -203,7 +205,8 @@ namespace Microsoft.EntityFrameworkCore
             public override async Task<bool> OpenAsync(
                 CancellationToken cancellationToken,
                 bool errorsExpected = false
-            ) {
+            )
+            {
                 if (++OpenCount < FailureCount)
                 {
                     await Task.Delay(FailDelay, cancellationToken);

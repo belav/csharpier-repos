@@ -60,7 +60,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 JsonWriter writer,
                 object value,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 JToken t = JToken.FromObject(value);
 
                 if (t.Type != JTokenType.Object)
@@ -83,7 +84,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 Type objectType,
                 object existingValue,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 throw new NotImplementedException(
                     "Unnecessary because CanRead is false. The type will skip the converter."
                 );

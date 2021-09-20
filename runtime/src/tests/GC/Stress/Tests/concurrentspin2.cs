@@ -28,7 +28,8 @@ internal class PriorityTest
         int meanAllocSize,
         int medTime,
         int youngTime
-    ) {
+    )
+    {
         _rand = new Random(314159);
         _oldDataSize = oldDataSize;
         _medDataSize = medDataSize;
@@ -64,7 +65,8 @@ internal class PriorityTest
         int meanAllocSize,
         int medTime,
         int youngTime
-    ) {
+    )
+    {
         for (int i = 0; i < iterCount; i++)
         {
             byte[] newarray = new byte[meanAllocSize];

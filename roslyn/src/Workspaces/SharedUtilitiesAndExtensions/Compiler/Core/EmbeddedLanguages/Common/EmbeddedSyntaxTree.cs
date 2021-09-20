@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.Common
             VirtualCharSequence text,
             TCompilationUnitSyntax root,
             ImmutableArray<EmbeddedDiagnostic> diagnostics
-        ) {
+        )
+        {
             Text = text;
             Root = root;
             Diagnostics = diagnostics;

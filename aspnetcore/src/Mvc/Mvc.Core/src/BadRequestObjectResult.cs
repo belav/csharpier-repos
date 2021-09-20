@@ -29,9 +29,8 @@ namespace Microsoft.AspNetCore.Mvc
         /// Creates a new <see cref="BadRequestObjectResult"/> instance.
         /// </summary>
         /// <param name="modelState"><see cref="ModelStateDictionary"/> containing the validation errors.</param>
-        public BadRequestObjectResult(
-            [ActionResultObjectValue] ModelStateDictionary modelState
-        ) : base(new SerializableError(modelState))
+        public BadRequestObjectResult([ActionResultObjectValue] ModelStateDictionary modelState)
+            : base(new SerializableError(modelState))
         {
             if (modelState == null)
             {

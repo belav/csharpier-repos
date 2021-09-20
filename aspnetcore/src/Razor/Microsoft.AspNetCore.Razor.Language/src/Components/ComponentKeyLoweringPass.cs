@@ -15,7 +15,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         protected override void ExecuteCore(
             RazorCodeDocument codeDocument,
             DocumentIntermediateNode documentNode
-        ) {
+        )
+        {
             if (!IsComponentDocument(documentNode))
             {
                 return;
@@ -46,7 +47,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         private IntermediateNode RewriteUsage(
             IntermediateNode parent,
             TagHelperDirectiveAttributeIntermediateNode node
-        ) {
+        )
+        {
             // If we can't get a nonempty attribute value, do nothing because there will
             // already be a diagnostic for empty values
             var keyValueToken = DetermineKeyValueToken(node);
@@ -60,7 +62,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
 
         private IntermediateToken DetermineKeyValueToken(
             TagHelperDirectiveAttributeIntermediateNode attributeNode
-        ) {
+        )
+        {
             IntermediateToken foundToken = null;
 
             if (attributeNode.Children.Count == 1)

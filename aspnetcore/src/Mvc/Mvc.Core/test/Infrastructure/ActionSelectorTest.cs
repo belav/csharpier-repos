@@ -877,7 +877,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         [InlineData("PATCH")]
         public void HttpMethodAttribute_ActionWithMultipleHttpMethodAttributeViaAcceptVerbs_ORsMultipleHttpMethods(
             string verb
-        ) {
+        )
+        {
             // Arrange
             var routeContext = new RouteContext(GetHttpContext(verb));
             routeContext.RouteData.Values.Add("controller", "HttpMethodAttributeTests_RestOnly");
@@ -899,7 +900,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         [InlineData("HEAD")]
         public void HttpMethodAttribute_ActionWithMultipleHttpMethodAttributes_ORsMultipleHttpMethods(
             string verb
-        ) {
+        )
+        {
             // Arrange
             var routeContext = new RouteContext(GetHttpContext(verb));
             routeContext.RouteData.Values.Add("controller", "HttpMethodAttributeTests_RestOnly");
@@ -917,7 +919,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         [InlineData("PUT")]
         public void HttpMethodAttribute_ActionDecoratedWithHttpMethodAttribute_OverridesConvention(
             string verb
-        ) {
+        )
+        {
             // Arrange
             // Note no action name is passed, hence should return a null action descriptor.
             var routeContext = new RouteContext(GetHttpContext(verb));
@@ -955,7 +958,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         [InlineData("PATCH")]
         public void ActionNameAttribute_ActionGetsExposedViaActionName_UnreachableByConvention(
             string verb
-        ) {
+        )
+        {
             // Arrange
             var routeContext = new RouteContext(GetHttpContext(verb));
             routeContext.RouteData.Values.Add("controller", "ActionName");
@@ -987,7 +991,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         public void ActionNameAttribute_DifferentActionName_UsesActionNameFromActionNameAttribute(
             string verb,
             string actionName
-        ) {
+        )
+        {
             // Arrange
             var routeContext = new RouteContext(GetHttpContext(verb));
             routeContext.RouteData.Values.Add("controller", "ActionName");
@@ -1082,7 +1087,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             string area,
             string controller,
             string action
-        ) {
+        )
+        {
             var comparer = new RouteValueEqualityComparer();
 
             return actions.Where(
@@ -1108,7 +1114,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         private static ActionSelector CreateSelector(
             IReadOnlyList<ActionDescriptor> actions,
             ILoggerFactory loggerFactory = null
-        ) {
+        )
+        {
             loggerFactory = loggerFactory ?? NullLoggerFactory.Instance;
 
             var actionProvider = new Mock<IActionDescriptorCollectionProvider>(MockBehavior.Strict);
@@ -1185,7 +1192,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
         private static ActionConstraintCache GetActionConstraintCache(
             IActionConstraintProvider[] actionConstraintProviders = null
-        ) {
+        )
+        {
             var descriptorProvider = new DefaultActionDescriptorCollectionProvider(
                 Enumerable.Empty<IActionDescriptorProvider>(),
                 Enumerable.Empty<IActionDescriptorChangeProvider>()

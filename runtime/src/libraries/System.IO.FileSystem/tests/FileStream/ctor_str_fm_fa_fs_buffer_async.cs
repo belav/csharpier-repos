@@ -21,7 +21,8 @@ namespace System.IO.Tests
             FileAccess access,
             FileShare share,
             int bufferSize
-        ) {
+        )
+        {
             return CreateFileStream(path, mode, access, share, bufferSize, false);
         }
 
@@ -32,7 +33,8 @@ namespace System.IO.Tests
             FileShare share,
             int bufferSize,
             bool useAsync
-        ) {
+        )
+        {
             return new FileStream(path, mode, access, share, bufferSize, useAsync);
         }
 

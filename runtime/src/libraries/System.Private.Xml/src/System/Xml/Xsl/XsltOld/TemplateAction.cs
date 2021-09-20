@@ -189,7 +189,8 @@ namespace System.Xml.Xsl.XsltOld
                         if (
                             Ref.Equal(input.NamespaceURI, input.Atoms.UriXsl)
                             && Ref.Equal(input.LocalName, input.Atoms.Param)
-                        ) {
+                        )
+                        {
                             compiler.PushNamespaceScope();
                             AddAction(compiler.CreateVariableAction(VariableType.LocalParameter));
                             compiler.PopScope();

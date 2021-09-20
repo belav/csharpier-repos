@@ -38,7 +38,8 @@ namespace System.Speech.Internal.GrammarBuilding
             IElement parent,
             IRule rule,
             IdentifierCollection ruleIds
-        ) {
+        )
+        {
             // Return a ruleref to Garbage
             IRuleRef ruleRef = elementFactory.Garbage;
 

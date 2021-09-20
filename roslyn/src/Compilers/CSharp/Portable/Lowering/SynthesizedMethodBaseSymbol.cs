@@ -58,7 +58,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         protected void AssignTypeMapAndTypeParameters(
             TypeMap typeMap,
             ImmutableArray<TypeParameterSymbol> typeParameters
-        ) {
+        )
+        {
             Debug.Assert(typeMap != null);
             Debug.Assert(this.TypeMap == null);
             Debug.Assert(!typeParameters.IsDefault);
@@ -75,14 +76,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void AddSynthesizedAttributes(
             PEModuleBuilder moduleBuilder,
             ref ArrayBuilder<SynthesizedAttributeData> attributes
-        ) {
+        )
+        {
             base.AddSynthesizedAttributes(moduleBuilder, ref attributes);
 
             // do not generate attributes for members of compiler-generated types:
             if (
                 ContainingType.IsImplicitlyDeclared
                 || ContainingType is SimpleProgramNamedTypeSymbol
-            ) {
+            )
+            {
                 return;
             }
 

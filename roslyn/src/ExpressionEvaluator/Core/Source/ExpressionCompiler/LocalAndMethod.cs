@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             string localDisplayName,
             string methodName,
             DkmClrCompilationResultFlags flags
-        ) {
+        )
+        {
             this.LocalName = localName;
             this.LocalDisplayName = localDisplayName;
             this.MethodName = methodName;

@@ -42,7 +42,8 @@ public class TermInfo
 
             foreach (
                 string term in Directory.EnumerateFiles(location, "*", SearchOption.AllDirectories)
-            ) {
+            )
+            {
                 if (term.ToUpper().Contains("README"))
                     continue;
                 foundAtLeastOne = true;
@@ -110,7 +111,8 @@ public class TermInfo
         string expectedForeground,
         string expectedBackground,
         int colorValue
-    ) {
+    )
+    {
         object db = ReadTermInfoDatabase(termToTest);
         if (db != null)
         {

@@ -26,7 +26,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
             Func<T, Task> next,
             ResourceCounter concurrentConnectionCounter,
             IKestrelTrace trace
-        ) {
+        )
+        {
             _next = next;
             _concurrentConnectionCounter = concurrentConnectionCounter;
             _trace = trace;

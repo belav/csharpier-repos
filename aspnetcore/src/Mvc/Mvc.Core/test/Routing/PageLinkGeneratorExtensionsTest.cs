@@ -198,7 +198,8 @@ namespace Microsoft.AspNetCore.Routing
             object requiredValues = null,
             int order = 0,
             object[] metadata = null
-        ) {
+        )
+        {
             return new RouteEndpoint(
                 (httpContext) => Task.CompletedTask,
                 RoutePatternFactory.Parse(

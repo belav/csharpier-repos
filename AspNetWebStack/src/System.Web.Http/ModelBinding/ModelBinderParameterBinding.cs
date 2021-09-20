@@ -54,7 +54,8 @@ namespace System.Web.Http.ModelBinding
             ModelMetadataProvider metadataProvider,
             HttpActionContext actionContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ModelBindingContext ctx = GetModelBindingContext(metadataProvider, actionContext);
 
             bool haveResult = _binder.BindModel(actionContext, ctx);
@@ -67,7 +68,8 @@ namespace System.Web.Http.ModelBinding
         private ModelBindingContext GetModelBindingContext(
             ModelMetadataProvider metadataProvider,
             HttpActionContext actionContext
-        ) {
+        )
+        {
             string name = Descriptor.ParameterName;
             Type type = Descriptor.ParameterType;
 

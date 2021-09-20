@@ -101,7 +101,8 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
             IInvocation invocation,
             IPropertyBase property,
             IEqualityComparer? comparer
-        ) {
+        )
+        {
             if (_checkEquality)
             {
                 var oldValue = property.GetGetter().GetClrValue(invocation.Proxy);

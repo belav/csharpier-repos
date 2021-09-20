@@ -89,7 +89,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             AsyncCompletionData.CompletionTrigger trigger,
             SnapshotPoint triggerLocation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // We take sourceText from document to get a snapshot span.
             // We would like to be sure that nobody changes buffers at the same time.
             AssertIsForeground();
@@ -180,13 +181,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             SourceText sourceText,
             Document document,
             CompletionService completionService
-        ) {
+        )
+        {
             // The trigger reason guarantees that user wants a completion.
             if (
                 trigger.Reason == AsyncCompletionData.CompletionTriggerReason.Invoke
                 || trigger.Reason
                     == AsyncCompletionData.CompletionTriggerReason.InvokeAndCommitIfUnique
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -194,7 +197,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             if (
                 trigger.Reason == AsyncCompletionData.CompletionTriggerReason.Insertion
                 && trigger.Character == '\n'
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -204,7 +208,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             if (
                 trigger.Reason == AsyncCompletionData.CompletionTriggerReason.Insertion
                 && trigger.Character == '\t'
-            ) {
+            )
+            {
                 return TryInvokeSnippetCompletion(
                     completionService,
                     document,
@@ -223,7 +228,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                     triggerLocation.Position,
                     roslynTrigger
                 )
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -235,7 +241,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             Document document,
             SourceText text,
             int caretPoint
-        ) {
+        )
+        {
             var rules = completionService.GetRules();
             // Do not invoke snippet if the corresponding rule is not set in options.
             if (rules.SnippetsRule != SnippetsRule.IncludeAfterTypingIdentifierQuestionTab)
@@ -255,7 +262,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                     caretPoint - 2,
                     syntaxFactsOpt
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -281,7 +289,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             SnapshotPoint triggerLocation,
             SnapshotSpan applicableToSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (session is null)
                 throw new ArgumentNullException(nameof(session));
 
@@ -301,7 +310,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             AsyncCompletionData.CompletionTrigger intialTrigger,
             SnapshotSpan applicableToSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // We only want to provide expanded items for Roslyn's expander.
             if ((object)expander == FilterSet.Expander)
             {
@@ -327,7 +337,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             SnapshotPoint triggerLocation,
             bool isExpanded,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var document = triggerLocation.Snapshot.GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {
@@ -425,7 +436,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                         HasSuggestionItemOptions,
                         out bool hasSuggestionItemOptionsBefore
                     ) || !hasSuggestionItemOptionsBefore
-                ) {
+                )
+                {
                     session.Properties[HasSuggestionItemOptions] = suggestionItemOptions != null;
                 }
 
@@ -437,7 +449,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                             ExcludedCommitCharacters,
                             out ImmutableArray<char> excludedCommitCharactersBefore
                         )
-                    ) {
+                    )
+                    {
                         excludedCommitCharacters = excludedCommitCharacters.Union(
                                 excludedCommitCharactersBefore
                             )
@@ -463,7 +476,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             IAsyncCompletionSession session,
             VSCompletionItem item,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (session is null)
                 throw new ArgumentNullException(nameof(session));
             if (item is null)
@@ -472,7 +486,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             if (
                 !item.Properties.TryGetProperty(RoslynItem, out RoslynCompletionItem roslynItem)
                 || !Helpers.TryGetInitialTriggerLocation(session, out var triggerLocation)
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -534,7 +549,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 int filterSetData,
                 ImmutableArray<ImageElement> attributeIcons,
                 string insertionText
-            ) {
+            )
+            {
                 DisplayText = displayText;
                 Icon = icon;
                 Filters = filters;
@@ -563,13 +579,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             Document document,
             RoslynCompletionItem roslynItem,
             FilterSet filterSet
-        ) {
+        )
+        {
             VSCompletionItemData itemData;
 
             if (
                 roslynItem.Flags.IsCached()
                 && s_roslynItemToVsItemData.TryGetValue(roslynItem, out var boxedItemData)
-            ) {
+            )
+            {
                 itemData = boxedItemData.Value;
                 filterSet.CombineData(itemData.FilterSetData);
             }
@@ -638,7 +656,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
 
         private static ImmutableArray<char> GetExcludedCommitCharacters(
             ImmutableArray<RoslynCompletionItem> roslynItems
-        ) {
+        )
+        {
             var hashSet = new HashSet<char>();
             foreach (var roslynItem in roslynItems)
             {
@@ -661,7 +680,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             SourceText text,
             int questionPosition,
             ISyntaxFactsService syntaxFacts
-        ) {
+        )
+        {
             var startOfLine = text.Lines.GetLineFromPosition(questionPosition).Start;
 
             // First, skip all the whitespace.
@@ -682,7 +702,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
 
             while (
                 current < questionPosition && syntaxFacts.IsIdentifierPartCharacter(text[current])
-            ) {
+            )
+            {
                 current++;
             }
 

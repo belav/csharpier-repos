@@ -46,7 +46,8 @@ namespace System.Collections.Tests
             int enumerableLength,
             int numberOfMatchingElements,
             int numberOfDuplicateElements
-        ) {
+        )
+        {
             _ = setLength;
             _ = numberOfMatchingElements;
             IEnumerable<T> enumerable = CreateEnumerable(
@@ -77,7 +78,8 @@ namespace System.Collections.Tests
             int enumerableLength,
             int numberOfMatchingElements,
             int numberOfDuplicateElements
-        ) {
+        )
+        {
             _ = setLength;
             _ = numberOfMatchingElements;
             _ = numberOfDuplicateElements;
@@ -100,7 +102,8 @@ namespace System.Collections.Tests
             int enumerableLength,
             int numberOfMatchingElements,
             int numberOfDuplicateElements
-        ) {
+        )
+        {
             _ = setLength;
             _ = numberOfMatchingElements;
             _ = numberOfDuplicateElements;
@@ -186,7 +189,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void SortedSet_Generic_GetViewBetween_LowerValueGreaterThanUpperValue_ThrowsArgumentException(
             int setLength
-        ) {
+        )
+        {
             if (setLength >= 2)
             {
                 IComparer<T> comparer = GetIComparer() ?? Comparer<T>.Default;
@@ -206,7 +210,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void SortedSet_Generic_GetViewBetween_SubsequentOutOfRangeCall_ThrowsArgumentOutOfRangeException(
             int setLength
-        ) {
+        )
+        {
             if (setLength >= 3)
             {
                 SortedSet<T> set = (SortedSet<T>)GenericISetFactory(setLength);
@@ -217,7 +222,8 @@ namespace System.Collections.Tests
                 if (
                     (comparer.Compare(firstElement, middleElement) < 0)
                     && (comparer.Compare(middleElement, lastElement) < 0)
-                ) {
+                )
+                {
                     SortedSet<T> view = set.GetViewBetween(firstElement, middleElement);
                     Assert.Throws<ArgumentOutOfRangeException>(
                         () => view.GetViewBetween(middleElement, lastElement)
@@ -373,7 +379,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void SortedSet_Generic_CopyTo_NegativeCount_ThrowsArgumentOutOfRangeException(
             int setLength
-        ) {
+        )
+        {
             SortedSet<T> set = (SortedSet<T>)GenericISetFactory(setLength);
             T[] actual = new T[setLength];
             Assert.Throws<ArgumentOutOfRangeException>(() => set.CopyTo(actual, 0, -1));

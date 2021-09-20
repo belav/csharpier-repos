@@ -43,7 +43,8 @@ namespace System.Linq.Parallel
         internal InlinedAggregationOperatorEnumerator(
             int partitionIndex,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _partitionIndex = partitionIndex;
             _cancellationToken = cancellationToken;
         }
@@ -57,7 +58,8 @@ namespace System.Linq.Parallel
         internal sealed override bool MoveNext(
             [MaybeNullWhen(false), AllowNull] ref TIntermediate currentElement,
             ref int currentKey
-        ) {
+        )
+        {
             if (!_done && MoveNextCore(ref currentElement))
             {
                 // A reduction's "index" is the same as its partition number.

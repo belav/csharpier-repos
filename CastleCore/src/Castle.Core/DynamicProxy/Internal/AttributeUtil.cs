@@ -66,7 +66,8 @@ namespace Castle.DynamicProxy.Internal
             IList<CustomAttributeTypedArgument> constructorArguments,
             out Type[] constructorArgTypes,
             out object[] constructorArgs
-        ) {
+        )
+        {
             constructorArgTypes = new Type[constructorArguments.Count];
             constructorArgs = new object[constructorArguments.Count];
             for (var i = 0; i < constructorArguments.Count; i++)
@@ -78,7 +79,8 @@ namespace Castle.DynamicProxy.Internal
 
         private static object[] GetArguments(
             IList<CustomAttributeTypedArgument> constructorArguments
-        ) {
+        )
+        {
             var arguments = new object[constructorArguments.Count];
             for (var i = 0; i < constructorArguments.Count; i++)
             {
@@ -109,7 +111,8 @@ namespace Castle.DynamicProxy.Internal
             out object[] propertyValues,
             out FieldInfo[] fields,
             out object[] fieldValues
-        ) {
+        )
+        {
             var propertyList = new List<PropertyInfo>();
             var propertyValuesList = new List<object>();
             var fieldList = new List<FieldInfo>();
@@ -136,7 +139,8 @@ namespace Castle.DynamicProxy.Internal
 
         public static IEnumerable<CustomAttributeInfo> GetNonInheritableAttributes(
             this MemberInfo member
-        ) {
+        )
+        {
             Debug.Assert(member != null, "member != null");
             var attributes = member.CustomAttributes;
 
@@ -174,7 +178,8 @@ namespace Castle.DynamicProxy.Internal
 
         public static IEnumerable<CustomAttributeInfo> GetNonInheritableAttributes(
             this ParameterInfo parameter
-        ) {
+        )
+        {
             Debug.Assert(parameter != null, "parameter != null");
 
             var attributes = parameter.CustomAttributes;

@@ -484,7 +484,8 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
                     (PropertyNames.TargetFramework, ""),
                     (PropertyNames.TargetFrameworks, "netcoreapp2.1;net461")
                 )
-            ) {
+            )
+            {
                 await workspace.OpenProjectAsync(projectFilePath);
 
                 // Assert that two projects have been loaded, one for each TFM.

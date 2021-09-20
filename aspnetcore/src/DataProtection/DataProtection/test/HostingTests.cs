@@ -140,7 +140,8 @@ namespace Microsoft.AspNetCore.DataProtection.Test
             public Task StartAsync<TContext>(
                 IHttpApplication<TContext> application,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 _onStart();
                 return Task.CompletedTask;
             }

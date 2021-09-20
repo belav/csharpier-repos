@@ -250,7 +250,8 @@ namespace System.Speech.Internal.SrgsParser
             string pronunciation,
             string display,
             float reqConfidence
-        ) {
+        )
+        {
             System.Diagnostics.Debug.Assert((parent != null) && (!string.IsNullOrEmpty(sChars)));
 
             XmlParser.ParseText(
@@ -297,7 +298,8 @@ namespace System.Speech.Internal.SrgsParser
         private ISemanticTag ParseSemanticTag(
             SrgsSemanticInterpretationTag srgsTag,
             IElement parent
-        ) {
+        )
+        {
             ISemanticTag tag = _parser.CreateSemanticTag(parent);
 
             tag.Content(parent, srgsTag.Script, 0);

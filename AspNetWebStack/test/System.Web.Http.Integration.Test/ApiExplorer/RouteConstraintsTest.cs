@@ -115,7 +115,8 @@ namespace System.Web.Http.ApiExplorer
         public void HttpMethodConstraints_LimitsTheDescriptions(
             Type controllerType,
             List<object> expectedResults
-        ) {
+        )
+        {
             HttpConfiguration config = new HttpConfiguration();
             config.Routes.MapHttpRoute(
                 "Default",
@@ -185,7 +186,8 @@ namespace System.Web.Http.ApiExplorer
         public void RegexConstraint_LimitsTheController(
             Type[] controllerTypes,
             List<object> expectedResults
-        ) {
+        )
+        {
             HttpConfiguration config = new HttpConfiguration();
             config.Routes.MapHttpRoute(
                 "Default",
@@ -271,7 +273,8 @@ namespace System.Web.Http.ApiExplorer
         public void RegexConstraint_LimitsTheAction(
             Type[] controllerTypes,
             List<object> expectedResults
-        ) {
+        )
+        {
             HttpConfiguration config = new HttpConfiguration();
             config.Routes.MapHttpRoute(
                 "Default",

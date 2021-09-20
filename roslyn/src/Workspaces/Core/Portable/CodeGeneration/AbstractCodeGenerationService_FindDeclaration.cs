@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             ISymbol destination,
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var declarations = _symbolDeclarationService.GetDeclarations(destination);
             return declarations.Any(
                 r => CanAddTo(r.GetSyntax(cancellationToken), solution, cancellationToken)
@@ -77,7 +78,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             CancellationToken cancellationToken,
             out IList<bool>? availableIndices,
             bool checkGeneratedCode = false
-        ) {
+        )
+        {
             availableIndices = null;
             if (destination == null)
             {
@@ -147,7 +149,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             INamespaceOrTypeSymbol namespaceOrType,
             CodeGenerationOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var option = options ?? CodeGenerationOptions.Default;
             var (declaration, _) = await FindMostRelevantDeclarationAsync(
                     solution,
@@ -164,7 +167,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             INamespaceOrTypeSymbol namespaceOrType,
             CodeGenerationOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var declaration = (SyntaxNode?)null;
             IList<bool>? availableIndices = null;
 
@@ -242,7 +246,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
                         out availableIndices,
                         checkGeneratedCode: true
                     )
-                ) {
+                )
+                {
                     return (declaration, availableIndices);
                 }
             }
@@ -261,7 +266,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             IEnumerable<SyntaxReference> references,
             Func<SyntaxNode, bool> predicate,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             foreach (var r in references)
             {
                 var node = await r.GetSyntaxAsync(cancellationToken).ConfigureAwait(false);

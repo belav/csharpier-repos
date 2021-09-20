@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.BraceHighlighting
                 Document document,
                 int position,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 var text = (await document.GetTextAsync(cancellationToken)).ToString();
                 var braces = GetMatchingBraces(text, position);
                 if (braces.HasValue)

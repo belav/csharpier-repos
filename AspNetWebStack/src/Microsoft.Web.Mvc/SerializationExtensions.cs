@@ -18,7 +18,8 @@ namespace Microsoft.Web.Mvc
             this HtmlHelper htmlHelper,
             string name,
             MvcSerializer serializer
-        ) {
+        )
+        {
             return SerializeInternal(
                 htmlHelper,
                 name,
@@ -38,7 +39,8 @@ namespace Microsoft.Web.Mvc
             string name,
             object data,
             MvcSerializer serializer
-        ) {
+        )
+        {
             return SerializeInternal(
                 htmlHelper,
                 name,
@@ -53,7 +55,8 @@ namespace Microsoft.Web.Mvc
             string name,
             object data,
             bool useViewData
-        ) {
+        )
+        {
             return SerializeInternal(htmlHelper, name, data, useViewData, null);
         }
 
@@ -63,7 +66,8 @@ namespace Microsoft.Web.Mvc
             object data,
             bool useViewData,
             MvcSerializer serializer
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException("htmlHelper");

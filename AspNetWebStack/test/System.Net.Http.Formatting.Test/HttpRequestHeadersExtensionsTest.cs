@@ -144,7 +144,8 @@ namespace System.Net.Http
             IEnumerable<string> cookies,
             string name,
             IEnumerable<string> expectedCookies
-        ) {
+        )
+        {
             // Arrange
             HttpRequestHeaders headers = CreateHttpRequestHeaders();
             foreach (string cookie in cookies)

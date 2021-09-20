@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         public static BasePropertyDeclarationSyntax? TryWithSemicolonToken(
             this BasePropertyDeclarationSyntax? node,
             SyntaxToken semicolonToken
-        ) {
+        )
+        {
             if (node != null)
             {
                 switch (node.Kind())
@@ -57,7 +58,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         public static BasePropertyDeclarationSyntax? TryWithExpressionBody(
             this BasePropertyDeclarationSyntax? node,
             ArrowExpressionClauseSyntax expressionBody
-        ) {
+        )
+        {
             if (node != null)
             {
                 switch (node.Kind())

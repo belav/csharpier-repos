@@ -22,7 +22,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 string fromName,
                 string toName,
                 string filePath
-            ) {
+            )
+            {
                 _workspace = workspace;
                 _fromName = fromName;
                 _toName = toName;

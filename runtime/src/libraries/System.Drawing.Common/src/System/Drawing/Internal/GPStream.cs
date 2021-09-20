@@ -61,7 +61,8 @@ namespace System.Drawing.Internal
             ulong cb,
             ulong* pcbRead,
             ulong* pcbWritten
-        ) {
+        )
+        {
             byte[] buffer = ArrayPool<byte>.Shared.Rent(4096);
 
             ulong remaining = cb;

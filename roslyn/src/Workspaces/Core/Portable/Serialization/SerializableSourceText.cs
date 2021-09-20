@@ -63,7 +63,8 @@ namespace Microsoft.CodeAnalysis.Serialization
         public static async ValueTask<SerializableSourceText> FromTextDocumentStateAsync(
             TextDocumentState state,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (state.Storage is ITemporaryTextStorageWithName storage)
             {
                 return new SerializableSourceText(storage);

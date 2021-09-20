@@ -130,7 +130,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task GetAsync_NtAuthServer_ExpectedStatusCode(
             bool ntlm,
             HttpStatusCode expectedStatusCode
-        ) {
+        )
+        {
             NtAuthServer server = ntlm ? _servers.NtlmServer : _servers.NegotiateServer;
 
             var handler = new HttpClientHandler();
@@ -161,7 +162,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task PostAsync_NtAuthServer_UseExpect100Header_Success(
             bool ntlm,
             int contentSize
-        ) {
+        )
+        {
             NtAuthServer server = ntlm ? _servers.NtlmServer : _servers.NegotiateServer;
 
             var handler = new HttpClientHandler() { UseDefaultCredentials = true };
@@ -171,7 +173,8 @@ namespace System.Net.Http.Functional.Tests
                 var content = new StringContent(new string('A', contentSize));
                 using (
                     HttpResponseMessage response = await client.PostAsync(server.BaseUrl, content)
-                ) {
+                )
+                {
                     Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                 }
             }

@@ -48,7 +48,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionModel model,
             string? value,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             model.SetOrRemoveAnnotation(
                 RelationalAnnotationNames.DefaultSchema,
                 Check.NullButNotEmpty(value, nameof(value)),
@@ -115,7 +116,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionModel model,
             int? length,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             model.SetOrRemoveAnnotation(
                 RelationalAnnotationNames.MaxIdentifierLength,
                 length,
@@ -589,7 +591,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionModel model,
             string? value,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             model.SetOrRemoveAnnotation(
                 RelationalAnnotationNames.Collation,
                 Check.NullButNotEmpty(value, nameof(value)),

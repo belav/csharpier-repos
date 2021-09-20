@@ -42,7 +42,8 @@ namespace System.Web.WebPages.Test
             string match,
             string pathInfo,
             bool mobileDevice = false
-        ) {
+        )
+        {
             var objectFactory = new HashyBuildManager(validFiles);
             var mockContext = new Mock<HttpContextBase>();
             mockContext.Setup(context => context.Items).Returns(new Hashtable());
@@ -166,7 +167,8 @@ namespace System.Web.WebPages.Test
         public void DirectoriesWithLeadingUnderscoresAreServed(
             string requestPath,
             string expectedPath
-        ) {
+        )
+        {
             // Arramge
             var files = new[] { "~/_foo/default.cshtml", "~/_bar/_baz/index.cshtml" };
             var extensions = new[] { "cshtml" };

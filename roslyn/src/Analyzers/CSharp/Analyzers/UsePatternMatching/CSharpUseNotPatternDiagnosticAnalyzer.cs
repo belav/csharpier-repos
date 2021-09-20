@@ -83,7 +83,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                         },
                     } notExpression
                 )
-            ) {
+            )
+            {
                 return;
             }
 

@@ -33,7 +33,8 @@ namespace Internal.TypeSystem
         public RuntimeDeterminedType(
             DefType rawCanonType,
             GenericParameterDesc runtimeDeterminedDetailsType
-        ) {
+        )
+        {
             _rawCanonType = rawCanonType;
             _runtimeDeterminedDetailsType = runtimeDeterminedDetailsType;
         }
@@ -106,7 +107,8 @@ namespace Internal.TypeSystem
             string name,
             MethodSignature signature,
             Instantiation substitution
-        ) {
+        )
+        {
             MethodDesc method = _rawCanonType.GetMethod(name, signature, substitution);
             if (method == null)
                 return null;
@@ -172,7 +174,8 @@ namespace Internal.TypeSystem
         public override TypeDesc GetNonRuntimeDeterminedTypeFromRuntimeDeterminedSubtypeViaSubstitution(
             Instantiation typeInstantiation,
             Instantiation methodInstantiation
-        ) {
+        )
+        {
             if (_runtimeDeterminedDetailsType.Kind == GenericParameterKind.Type)
             {
                 return typeInstantiation[_runtimeDeterminedDetailsType.Index];

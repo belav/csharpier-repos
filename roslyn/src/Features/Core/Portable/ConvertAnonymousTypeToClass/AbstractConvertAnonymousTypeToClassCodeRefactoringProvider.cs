@@ -91,7 +91,8 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousTypeToClass
             Document document,
             TextSpan span,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Gets a `TAnonymousObjectCreationExpressionSyntax` for current selection.
             // Due to the way `TryGetSelectedNodeAsync` works and how `TAnonymousObjectCreationExpressionSyntax` is e.g. for C# constructed
             // it matches even when caret is next to some tokens within the anonymous object creation node.
@@ -119,7 +120,8 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousTypeToClass
             TextSpan span,
             bool isRecord,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var (anonymousObject, anonymousType) = await TryGetAnonymousObjectAsync(
                     document,
                     span,
@@ -240,7 +242,8 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousTypeToClass
             SyntaxNode containingMember,
             ImmutableDictionary<IPropertySymbol, string> propertyMap,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
             var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
@@ -251,7 +254,8 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousTypeToClass
                 if (
                     !syntaxFacts.IsNameOfSimpleMemberAccessExpression(identifier)
                     && !syntaxFacts.IsNameOfMemberBindingExpression(identifier)
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -279,7 +283,8 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousTypeToClass
             TAnonymousObjectCreationExpressionSyntax creationNode,
             INamedTypeSymbol anonymousType,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // When invoked we want to fixup all creations of the "same" anonymous type within the
             // containing method.  We define same-ness as meaning "they have the type symbol".  this
             // means both have the same member names, in the same order, with the same member types.
@@ -319,7 +324,8 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousTypeToClass
             INamedTypeSymbol classSymbol,
             TAnonymousObjectCreationExpressionSyntax startingCreationNode,
             TAnonymousObjectCreationExpressionSyntax childCreation
-        ) {
+        )
+        {
             // Use the callback form as anonymous types may be nested, and we want to
             // properly replace them even in that case.
             editor.ReplaceNode(
@@ -357,7 +363,8 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousTypeToClass
             bool isRecord,
             ImmutableArray<IPropertySymbol> properties,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var generator = SyntaxGenerator.GetGenerator(document);
             var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
@@ -458,7 +465,8 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousTypeToClass
             bool isRecord,
             ImmutableArray<ITypeParameterSymbol> capturedTypeParameters,
             ImmutableArray<ISymbol> members
-        ) {
+        )
+        {
             return CodeGenerationSymbolFactory.CreateNamedTypeSymbol(
                 attributes: default,
                 Accessibility.Internal,
@@ -553,7 +561,8 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousTypeToClass
             string className,
             ImmutableArray<IPropertySymbol> properties,
             SyntaxGenerator generator
-        ) {
+        )
+        {
             // For every property, create a corresponding parameter, as well as an assignment
             // statement from that parameter to the property.
             var parameterToPropMap = new Dictionary<string, ISymbol>();

@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             BasicBlock? destination,
             ControlFlowBranchSemantics semantics,
             bool isConditionalSuccessor
-        ) {
+        )
+        {
             Source = source;
             Destination = destination;
             Semantics = semantics;
@@ -83,7 +84,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         private static ArrayBuilder<ControlFlowRegion> CollectRegions(
             int destinationOrdinal,
             ControlFlowRegion source
-        ) {
+        )
+        {
             var builder = ArrayBuilder<ControlFlowRegion>.GetInstance();
 
             while (!source.ContainsBlock(destinationOrdinal))
@@ -148,7 +150,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                         if (
                             leavingRegions[i].Kind == ControlFlowRegionKind.Try
                             && leavingRegions[i + 1].Kind == ControlFlowRegionKind.TryAndFinally
-                        ) {
+                        )
+                        {
                             if (builder == null)
                             {
                                 builder = ArrayBuilder<ControlFlowRegion>.GetInstance();

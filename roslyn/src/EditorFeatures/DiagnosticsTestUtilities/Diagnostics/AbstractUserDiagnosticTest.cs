@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             string initialMarkup,
             TestParameters parameters = default,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             using var workspace = CreateWorkspaceFromOptions(initialMarkup, parameters);
 
             var diagnostics = await GetDiagnosticsAsync(workspace, parameters)
@@ -80,7 +81,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
         protected override async Task<(ImmutableArray<CodeAction>, CodeAction actionToInvoke)> GetCodeActionsAsync(
             TestWorkspace workspace,
             TestParameters parameters
-        ) {
+        )
+        {
             var (_, actions, actionToInvoke) = await GetDiagnosticAndFixesAsync(
                 workspace,
                 parameters
@@ -91,7 +93,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
         protected override async Task<ImmutableArray<Diagnostic>> GetDiagnosticsWorkerAsync(
             TestWorkspace workspace,
             TestParameters parameters
-        ) {
+        )
+        {
             var (dxs, _, _) = await GetDiagnosticAndFixesAsync(workspace, parameters);
             return dxs;
         }
@@ -100,7 +103,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             Workspace workspace,
             DiagnosticAnalyzer analyzer,
             TestParameters parameters
-        ) {
+        )
+        {
             AnalyzerReference[] analyzeReferences;
             if (analyzer != null)
             {
@@ -142,7 +146,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
         protected static Document GetDocumentAndSelectSpan(
             TestWorkspace workspace,
             out TextSpan span
-        ) {
+        )
+        {
             var hostDocument = workspace.Documents.Single(d => d.SelectedSpans.Any());
             span = hostDocument.SelectedSpans.Single();
             return workspace.CurrentSolution.GetDocument(hostDocument.Id);
@@ -152,7 +157,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             TestWorkspace workspace,
             out Document document,
             out TextSpan span
-        ) {
+        )
+        {
             var hostDocument = workspace.Documents.FirstOrDefault(d => d.SelectedSpans.Any());
             if (hostDocument == null)
             {
@@ -180,7 +186,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             TestWorkspace workspace,
             out string annotation,
             out TextSpan span
-        ) {
+        )
+        {
             var annotatedDocuments = workspace.Documents.Where(d => d.AnnotatedSpans.Any());
             Debug.Assert(!annotatedDocuments.IsEmpty(), "No annotated span found");
             var hostDocument = annotatedDocuments.Single();
@@ -215,7 +222,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             TextSpan span,
             string annotation,
             int index
-        ) {
+        )
+        {
             if (diagnostics.IsEmpty())
             {
                 return (ImmutableArray<Diagnostic>.Empty, ImmutableArray<CodeAction>.Empty, null);
@@ -241,7 +249,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             TextSpan span,
             FixAllScope? scope,
             int index
-        ) {
+        )
+        {
             Assert.NotEmpty(diagnostics);
 
             var intersectingDiagnostics = diagnostics.Where(
@@ -316,7 +325,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             Document document,
             FixAllScope scope,
             string equivalenceKey
-        ) {
+        )
+        {
             Assert.NotEmpty(diagnostics);
 
             if (scope == FixAllScope.Custom)
@@ -362,7 +372,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             CompilationOptions compilationOptions = null,
             OptionsCollection options = null,
             object fixProviderData = null
-        ) {
+        )
+        {
             return TestActionCountInAllFixesAsync(
                 initialMarkup,
                 new TestParameters(parseOptions, compilationOptions, options, fixProviderData),
@@ -374,7 +385,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             string initialMarkup,
             TestParameters parameters,
             int count
-        ) {
+        )
+        {
             using var workspace = CreateWorkspaceFromOptions(initialMarkup, parameters);
 
             var (_, actions, _) = await GetDiagnosticAndFixesAsync(workspace, parameters);
@@ -385,7 +397,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             string initialMarkup,
             string diagnosticId = null,
             TestParameters parameters = default
-        ) {
+        )
+        {
             MarkupTestFile.GetSpans(
                 initialMarkup,
                 out var unused,

@@ -59,7 +59,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         private static void AssertEntryPointParameter(
             SynthesizedSimpleProgramEntryPointSymbol entryPoint
-        ) {
+        )
+        {
             Assert.Equal(1, entryPoint.ParameterCount);
             ParameterSymbol parameter = entryPoint.Parameters.Single();
             Assert.Equal(
@@ -242,7 +243,8 @@ void local() => System.Console.WriteLine(2);
                 CSharpCompilation comp,
                 SyntaxTree tree1,
                 bool nullableEnabled = false
-            ) {
+            )
+            {
                 Assert.Equal(nullableEnabled, IsNullableAnalysisEnabled(comp)); // To make sure we test incremental binding for SemanticModel
                 var model1 = comp.GetSemanticModel(tree1);
 
@@ -333,7 +335,8 @@ IMethodBodyOperation (OperationKind.MethodBody, Type: null) (Syntax: 'local(); .
                         var globalStatement in tree1.GetRoot()
                             .DescendantNodes()
                             .OfType<GlobalStatementSyntax>()
-                    ) {
+                    )
+                    {
                         symbolInfo = model1.GetSymbolInfo(globalStatement);
                         Assert.Null(model1.GetOperation(globalStatement));
                         Assert.Null(symbolInfo.Symbol);
@@ -415,7 +418,8 @@ IMethodBodyOperation (OperationKind.MethodBody, Type: null) (Syntax: 'local(); .
                 SyntaxTree tree1,
                 SyntaxTree tree2,
                 bool nullableEnabled = false
-            ) {
+            )
+            {
                 Assert.Equal(nullableEnabled, IsNullableAnalysisEnabled(comp)); // To make sure we test incremental binding for SemanticModel
                 var model1 = comp.GetSemanticModel(tree1);
 
@@ -538,7 +542,8 @@ IMethodBodyOperation (OperationKind.MethodBody, Type: null"
                         var globalStatement in tree1.GetRoot()
                             .DescendantNodes()
                             .OfType<GlobalStatementSyntax>()
-                    ) {
+                    )
+                    {
                         symbolInfo = model1.GetSymbolInfo(globalStatement);
                         Assert.Null(model1.GetOperation(globalStatement));
                         Assert.Null(symbolInfo.Symbol);
@@ -8363,7 +8368,8 @@ extern static void internalCallStatic();
             void checkImplAttributes(
                 LocalFunctionStatementSyntax localFunctionStatement,
                 MethodImplAttributes expectedFlags
-            ) {
+            )
+            {
                 var localFunction = semanticModel.GetDeclaredSymbol(localFunctionStatement)
                     .GetSymbol<LocalFunctionSymbol>();
                 Assert.Equal(expectedFlags, localFunction.ImplementationAttributes);

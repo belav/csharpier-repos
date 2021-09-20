@@ -527,7 +527,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             PropertyChangingEventArgs eventArgs,
             int expectedCount,
             ref int changingCount
-        ) {
+        )
+        {
             Assert.Same(hashSet, sender);
             Assert.Equal("Count", eventArgs.PropertyName);
             Assert.Equal(expectedCount, hashSet.Count);
@@ -541,7 +542,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             ref int expectedCount,
             int countDelta,
             ref int changedCount
-        ) {
+        )
+        {
             Assert.Same(hashSet, sender);
             Assert.Equal("Count", eventArgs.PropertyName);
             Assert.Equal(expectedCount + countDelta, hashSet.Count);

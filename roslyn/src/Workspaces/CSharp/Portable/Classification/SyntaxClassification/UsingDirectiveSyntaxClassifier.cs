@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification.Classifiers
             SemanticModel semanticModel,
             ArrayBuilder<ClassifiedSpan> result,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (syntax is UsingDirectiveSyntax usingDirective)
             {
                 ClassifyUsingDirectiveSyntax(
@@ -40,7 +41,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification.Classifiers
             SemanticModel semanticModel,
             ArrayBuilder<ClassifiedSpan> result,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // For using aliases, we bind the target on the right of the equals and use that
             // binding to classify the alias.
             if (usingDirective.Alias != null)

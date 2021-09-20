@@ -153,7 +153,8 @@ namespace System.Net.NetworkInformation
             Dictionary<string, BsdNetworkInterface> interfaces,
             string name,
             int index
-        ) {
+        )
+        {
             BsdNetworkInterface? oni;
             if (!interfaces.TryGetValue(name, out oni))
             {

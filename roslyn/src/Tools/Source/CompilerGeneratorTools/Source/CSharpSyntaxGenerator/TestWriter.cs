@@ -294,7 +294,8 @@ namespace CSharpSyntaxGenerator
                             field.Type == "SyntaxTokenList"
                             || field.Type.StartsWith("SyntaxList<")
                             || field.Type.StartsWith("SeparatedSyntaxList<")
-                        ) {
+                        )
+                        {
                             WriteLine($"Assert.Equal(default, node.{field.Name});");
                         }
                         else

@@ -129,7 +129,8 @@ namespace JIT.HardwareIntrinsics.Arm
                     (alignment != 16 && alignment != 8)
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -188,7 +189,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario(
                 SimpleUnaryOpTest__AddPairwiseWidening_Vector64_Byte testClass
-            ) {
+            )
+            {
                 var result = AdvSimd.AddPairwiseWidening(_fld1);
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
@@ -197,7 +199,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario_Load(
                 SimpleUnaryOpTest__AddPairwiseWidening_Vector64_Byte testClass
-            ) {
+            )
+            {
                 fixed (Vector64<Byte>* pFld1 = &_fld1)
                 {
                     var result = AdvSimd.AddPairwiseWidening(AdvSimd.LoadVector64((Byte*)(pFld1)));
@@ -473,7 +476,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Vector64<Byte> op1,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Byte[] inArray1 = new Byte[Op1ElementCount];
             UInt16[] outArray = new UInt16[RetElementCount];
 
@@ -510,7 +514,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Byte[] firstOp,
             UInt16[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             for (var i = 0; i < RetElementCount; i++)

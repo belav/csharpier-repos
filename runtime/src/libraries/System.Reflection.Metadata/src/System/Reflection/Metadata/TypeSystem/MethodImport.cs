@@ -13,7 +13,8 @@ namespace System.Reflection.Metadata
             MethodImportAttributes attributes,
             StringHandle name,
             ModuleReferenceHandle module
-        ) {
+        )
+        {
             _attributes = attributes;
             _name = name;
             _module = module;

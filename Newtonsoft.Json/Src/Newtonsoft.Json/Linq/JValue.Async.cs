@@ -49,7 +49,8 @@ namespace Newtonsoft.Json.Linq
             JsonWriter writer,
             CancellationToken cancellationToken,
             params JsonConverter[] converters
-        ) {
+        )
+        {
             if (converters != null && converters.Length > 0 && _value != null)
             {
                 JsonConverter? matchingConverter = JsonSerializer.GetMatchingConverter(

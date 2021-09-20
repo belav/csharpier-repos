@@ -172,7 +172,8 @@ namespace System.ComponentModel.Composition.Hosting
             IEnumerable<Type> types,
             ReflectionContext reflectionContext,
             ICompositionElement definitionOrigin
-        ) {
+        )
+        {
             Requires.NotNull(types, nameof(types));
             Requires.NotNull(reflectionContext, nameof(reflectionContext));
             Requires.NotNull(definitionOrigin, nameof(definitionOrigin));
@@ -189,7 +190,8 @@ namespace System.ComponentModel.Composition.Hosting
         private void InitializeTypeCatalog(
             IEnumerable<Type> types,
             ReflectionContext reflectionContext
-        ) {
+        )
+        {
             var typesList = new List<Type>();
             foreach (var type in types)
             {
@@ -317,7 +319,8 @@ namespace System.ComponentModel.Composition.Hosting
 
         internal override IEnumerable<ComposablePartDefinition>? GetCandidateParts(
             ImportDefinition definition
-        ) {
+        )
+        {
             if (definition == null)
             {
                 throw new ArgumentNullException(nameof(definition));
@@ -367,7 +370,8 @@ namespace System.ComponentModel.Composition.Hosting
                             export => export.ContractName
                         )
                         .Distinct()
-                ) {
+                )
+                {
                     List<ComposablePartDefinition>? contractParts = null;
                     if (!index.TryGetValue(contractName, out contractParts))
                     {
@@ -418,7 +422,8 @@ namespace System.ComponentModel.Composition.Hosting
             StringBuilder builder = new StringBuilder();
             foreach (
                 ReflectionComposablePartDefinition definition in PartsInternal.Take(displayCount)
-            ) {
+            )
+            {
                 if (builder.Length > 0)
                 {
                     builder.Append(CultureInfo.CurrentCulture.TextInfo.ListSeparator);

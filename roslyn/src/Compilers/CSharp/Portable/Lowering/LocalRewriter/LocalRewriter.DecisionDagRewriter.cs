@@ -164,7 +164,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 private static bool MethodMayMutateReceiver(
                     BoundExpression receiver,
                     MethodSymbol method
-                ) {
+                )
+                {
                     return method != null
                         && !method.IsStatic
                         && !method.IsEffectivelyReadOnly
@@ -196,7 +197,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 public override BoundNode VisitCompoundAssignmentOperator(
                     BoundCompoundAssignmentOperator node
-                ) {
+                )
+                {
                     _mightAssignSomething = true;
                     return null;
                 }
@@ -235,7 +237,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 public override BoundNode VisitDelegateCreationExpression(
                     BoundDelegateCreationExpression node
-                ) {
+                )
+                {
                     bool mightMutate = node.MethodOpt?.MethodKind == MethodKind.LocalFunction;
 
                     if (mightMutate)
@@ -254,7 +257,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 public override BoundNode VisitDeconstructionAssignmentOperator(
                     BoundDeconstructionAssignmentOperator node
-                ) {
+                )
+                {
                     _mightAssignSomething = true;
                     return null;
                 }
@@ -278,7 +282,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 public override BoundNode VisitObjectCreationExpression(
                     BoundObjectCreationExpression node
-                ) {
+                )
+                {
                     // perhaps we are passing a variable by ref and mutating it that way
                     if (!node.ArgumentRefKindsOpt.IsDefault)
                         _mightAssignSomething = true;
@@ -290,7 +295,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 public override BoundNode VisitDynamicObjectCreationExpression(
                     BoundDynamicObjectCreationExpression node
-                ) {
+                )
+                {
                     if (!node.ArgumentRefKindsOpt.IsDefault)
                         _mightAssignSomething = true;
                     else
@@ -301,7 +307,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 public override BoundNode VisitObjectInitializerMember(
                     BoundObjectInitializerMember node
-                ) {
+                )
+                {
                     // Although ref indexers are not declarable in C#, they may be usable
                     if (!node.ArgumentRefKindsOpt.IsDefault)
                         _mightAssignSomething = true;
@@ -343,7 +350,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 BoundExpression loweredSwitchGoverningExpression,
                 ArrayBuilder<BoundStatement> result,
                 out BoundExpression savedInputExpression
-            ) {
+            )
+            {
                 // Note that a when-clause can contain an assignment to a
                 // pattern variable declared in a different when-clause (e.g. in the same section, or
                 // in a different section via the use of a local function), so we need to analyze all
@@ -381,7 +389,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             protected ImmutableArray<BoundStatement> LowerDecisionDagCore(
                 BoundDecisionDag decisionDag
-            ) {
+            )
+            {
                 _loweredDecisionDag = ArrayBuilder<BoundStatement>.GetInstance();
                 ComputeLabelSet(decisionDag);
                 ImmutableArray<BoundDecisionDagNode> sortedNodes =
@@ -465,7 +474,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 HashSet<BoundDecisionDagNode> loweredNodes,
                 ImmutableArray<BoundDecisionDagNode> nodesToLower,
                 int indexOfNode
-            ) {
+            )
+            {
                 Debug.Assert(node == nodesToLower[indexOfNode]);
                 if (
                     node is BoundTestDecisionDagNode testNode
@@ -476,7 +486,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         out BoundExpression sideEffect,
                         out BoundExpression test
                     )
-                ) {
+                )
+                {
                     var whenTrue = evaluationNode.Next;
                     var whenFalse = testNode.WhenFalse;
                     bool canEliminateEvaluationNode = !this._dagNodeLabels.ContainsKey(
@@ -507,7 +518,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 BoundDecisionDagNode whenTrue,
                 BoundDecisionDagNode whenFalse,
                 BoundDecisionDagNode nextNode
-            ) {
+            )
+            {
                 // Because we have already "optimized" away tests for a constant switch expression, the test should be nontrivial.
                 _factory.Syntax = test.Syntax;
                 Debug.Assert(test != null);
@@ -546,7 +558,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             private bool GenerateSwitchDispatch(
                 BoundDecisionDagNode node,
                 HashSet<BoundDecisionDagNode> loweredNodes
-            ) {
+            )
+            {
                 Debug.Assert(!loweredNodes.Contains(node));
                 if (!canGenerateSwitchDispatch(node))
                     return false;
@@ -599,7 +612,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 BoundDecisionDagNode node,
                 HashSet<BoundDecisionDagNode> loweredNodes,
                 BoundDagTemp input
-            ) {
+            )
+            {
                 IValueSetFactory fac = ValueSetFactory.ForType(input.Type);
                 return GatherValueDispatchNodes(node, loweredNodes, input, fac);
             }
@@ -609,7 +623,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 HashSet<BoundDecisionDagNode> loweredNodes,
                 BoundDagTemp input,
                 IValueSetFactory fac
-            ) {
+            )
+            {
                 if (loweredNodes.Contains(node))
                 {
                     bool foundLabel = this._dagNodeLabels.TryGetValue(node, out LabelSymbol label);
@@ -621,7 +636,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         node is BoundTestDecisionDagNode testNode
                         && testNode.Test.Input.Equals(input)
                     )
-                ) {
+                )
+                {
                     var label = GetDagNodeLabel(node);
                     return new ValueDispatchNode.LeafDispatchNode(node.Syntax, label);
                 }
@@ -665,7 +681,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             && vd.Input.Equals(input)
                             && !this._dagNodeLabels.ContainsKey(p)
                             && !loweredNodes.Contains(p)
-                        ) {
+                        )
+                        {
                             cases.Add((value: vd.Value, label: GetDagNodeLabel(p.WhenTrue)));
                             loweredNodes.Add(p);
                             previous = p;
@@ -700,7 +717,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ValueDispatchNode otherwise,
                 ImmutableArray<(ConstantValue value, LabelSymbol label)> cases,
                 IValueSetFactory fac
-            ) {
+            )
+            {
                 if (cases.IsEmpty)
                     return otherwise;
 
@@ -743,7 +761,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ImmutableArray<(ConstantValue value, LabelSymbol label)> cases,
                     BinaryOperatorKind op,
                     ConstantValue value
-                ) {
+                )
+                {
                     var whenTrueBuilder =
                         ArrayBuilder<(ConstantValue value, LabelSymbol label)>.GetInstance();
                     var whenFalseBuilder =
@@ -784,7 +803,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             private void LowerRelationalDispatchNode(
                 ValueDispatchNode.RelationalDispatch rel,
                 BoundExpression input
-            ) {
+            )
+            {
                 var test = MakeRelationalTest(rel.Syntax, input, rel.Operator, rel.Value);
                 if (rel.WhenTrue is ValueDispatchNode.LeafDispatchNode whenTrue)
                 {
@@ -829,7 +849,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 int IComparer<(ConstantValue value, LabelSymbol label)>.Compare(
                     (ConstantValue value, LabelSymbol label) left,
                     (ConstantValue value, LabelSymbol label) right
-                ) {
+                )
+                {
                     var x = left.value;
                     var y = right.value;
                     Debug.Assert(
@@ -865,7 +886,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             private void LowerSwitchDispatchNode(
                 ValueDispatchNode.SwitchDispatch node,
                 BoundExpression input
-            ) {
+            )
+            {
                 LabelSymbol defaultLabel = node.Otherwise;
 
                 if (input.Type.IsValidV6SwitchGoverningType())
@@ -1013,7 +1035,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         module,
                         labelsCount
                     )
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -1036,7 +1059,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     privateImplClass.GetMethod(
                         CodeAnalysis.CodeGen.PrivateImplementationDetails.SynthesizedStringHashFunctionName
                     ) != null
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -1092,7 +1116,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     whenClause.WhenExpression != null
                     && whenClause.WhenExpression.ConstantValue != ConstantValue.True
-                ) {
+                )
+                {
                     _factory.Syntax = whenClause.Syntax;
                     BoundStatement conditionalGoto = _factory.ConditionalGoto(
                         _localRewriter.VisitExpression(whenClause.WhenExpression),
@@ -1133,7 +1158,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             private void LowerDecisionDagNode(
                 BoundDecisionDagNode node,
                 BoundDecisionDagNode nextNode
-            ) {
+            )
+            {
                 _factory.Syntax = node.Syntax;
                 switch (node)
                 {

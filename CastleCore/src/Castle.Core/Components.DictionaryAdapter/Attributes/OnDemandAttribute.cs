@@ -56,7 +56,8 @@ namespace Castle.Components.DictionaryAdapter
             object storedValue,
             PropertyDescriptor property,
             bool ifExists
-        ) {
+        )
+        {
             if (storedValue == null && ifExists == false)
             {
                 IValueInitializer initializer = null;
@@ -160,7 +161,8 @@ namespace Castle.Components.DictionaryAdapter
             IDictionaryAdapter dictionaryAdapter,
             PropertyDescriptor property,
             out IValueInitializer initializer
-        ) {
+        )
+        {
             Type type = null;
             initializer = null;
 

@@ -34,7 +34,8 @@ namespace RazorWebSite
             if (
                 string.Equals(context.TagName, "body", StringComparison.Ordinal)
                 && output.Attributes.ContainsName("inject")
-            ) {
+            )
+            {
                 output.PostContent.AppendHtml(_html);
                 ViewContext.ViewData["TestData"] = "NewValue";
             }

@@ -8,9 +8,8 @@ namespace Microsoft.EntityFrameworkCore
     public class PersistedGrantDbContextSqlServerTest
         : PersistedGrantDbContextTestBase<PersistedGrantDbContextSqlServerTest.PersistedGrantDbContextSqlServerFixture>
     {
-        public PersistedGrantDbContextSqlServerTest(
-            PersistedGrantDbContextSqlServerFixture fixture
-        ) : base(fixture) { }
+        public PersistedGrantDbContextSqlServerTest(PersistedGrantDbContextSqlServerFixture fixture)
+            : base(fixture) { }
 
         public class PersistedGrantDbContextSqlServerFixture : PersistedGrantDbContextFixtureBase
         {

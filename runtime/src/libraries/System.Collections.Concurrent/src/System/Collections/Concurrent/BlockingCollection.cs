@@ -218,7 +218,8 @@ namespace System.Collections.Concurrent
             IProducerConsumerCollection<T> collection,
             int boundedCapacity,
             int collectionCount
-        ) {
+        )
+        {
             Debug.Assert(boundedCapacity > 0 || boundedCapacity == NON_BOUNDED);
 
             _collection = collection;
@@ -407,7 +408,8 @@ namespace System.Collections.Concurrent
             T item,
             int millisecondsTimeout,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             CheckDisposed();
 
             cancellationToken.ThrowIfCancellationRequested();
@@ -484,7 +486,8 @@ namespace System.Collections.Concurrent
                             observedAdders + 1,
                             observedAdders
                         ) == observedAdders
-                    ) {
+                    )
+                    {
                         Debug.Assert(
                             (observedAdders + 1) <= (~COMPLETE_ADDING_ON_MASK),
                             "The number of concurrent adders thread exceeded the maximum limit."
@@ -686,7 +689,8 @@ namespace System.Collections.Concurrent
             [MaybeNullWhen(false)] out T item,
             int millisecondsTimeout,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ValidateMillisecondsTimeout(millisecondsTimeout);
             return TryTakeWithNoTimeValidation(
                 out item,
@@ -717,7 +721,8 @@ namespace System.Collections.Concurrent
             int millisecondsTimeout,
             CancellationToken cancellationToken,
             CancellationTokenSource? combinedTokenSource
-        ) {
+        )
+        {
             CheckDisposed();
             item = default(T)!;
 
@@ -891,7 +896,8 @@ namespace System.Collections.Concurrent
             BlockingCollection<T>[] collections,
             T item,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
 #if DEBUG
             int tryAddAnyReturnValue =
 #else
@@ -990,7 +996,8 @@ namespace System.Collections.Concurrent
             BlockingCollection<T>[] collections,
             T item,
             int millisecondsTimeout
-        ) {
+        )
+        {
             ValidateMillisecondsTimeout(millisecondsTimeout);
             return TryAddToAnyCore(collections, item, millisecondsTimeout, CancellationToken.None);
         }
@@ -1026,7 +1033,8 @@ namespace System.Collections.Concurrent
             T item,
             int millisecondsTimeout,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ValidateMillisecondsTimeout(millisecondsTimeout);
             return TryAddToAnyCore(collections, item, millisecondsTimeout, cancellationToken);
         }
@@ -1052,7 +1060,8 @@ namespace System.Collections.Concurrent
             T item,
             int millisecondsTimeout,
             CancellationToken externalCancellationToken
-        ) {
+        )
+        {
             ValidateCollectionsArray(collections, true);
             const int OPERATION_FAILED = -1;
 
@@ -1097,7 +1106,8 @@ namespace System.Collections.Concurrent
                 using (
                     CancellationTokenSource linkedTokenSource =
                         CancellationTokenSource.CreateLinkedTokenSource(collatedCancellationTokens)
-                ) {
+                )
+                {
                     handles.Add(linkedTokenSource.Token.WaitHandle); // add the combined token to the handles list
 
                     //Wait for any collection to become available.
@@ -1172,7 +1182,8 @@ namespace System.Collections.Concurrent
             CancellationToken externalCancellationToken,
             bool isAddOperation,
             out CancellationToken[] cancellationTokens
-        ) {
+        )
+        {
             Debug.Assert(collections != null);
             List<WaitHandle> handlesList = new List<WaitHandle>(collections.Length + 1); // + 1 for the external token handle to be added
             List<CancellationToken> tokensList = new List<CancellationToken>(
@@ -1294,7 +1305,8 @@ namespace System.Collections.Concurrent
             BlockingCollection<T>[] collections,
             out T? item,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             int returnValue = TryTakeFromAnyCore(
                 collections,
                 out item,
@@ -1364,7 +1376,8 @@ namespace System.Collections.Concurrent
             BlockingCollection<T>[] collections,
             out T? item,
             TimeSpan timeout
-        ) {
+        )
+        {
             ValidateTimeout(timeout);
             return TryTakeFromAnyCore(
                 collections,
@@ -1403,7 +1416,8 @@ namespace System.Collections.Concurrent
             BlockingCollection<T>[] collections,
             out T? item,
             int millisecondsTimeout
-        ) {
+        )
+        {
             ValidateMillisecondsTimeout(millisecondsTimeout);
             return TryTakeFromAnyCore(
                 collections,
@@ -1447,7 +1461,8 @@ namespace System.Collections.Concurrent
             out T? item,
             int millisecondsTimeout,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ValidateMillisecondsTimeout(millisecondsTimeout);
             return TryTakeFromAnyCore(
                 collections,
@@ -1481,7 +1496,8 @@ namespace System.Collections.Concurrent
             int millisecondsTimeout,
             bool isTakeOperation,
             CancellationToken externalCancellationToken
-        ) {
+        )
+        {
             ValidateCollectionsArray(collections, false);
 
             //try the fast path first
@@ -1529,7 +1545,8 @@ namespace System.Collections.Concurrent
             int millisecondsTimeout,
             bool isTakeOperation,
             CancellationToken externalCancellationToken
-        ) {
+        )
+        {
             const int OPERATION_FAILED = -1;
 
             // Copy the wait time to another local variable to update it
@@ -1577,7 +1594,8 @@ namespace System.Collections.Concurrent
                 using (
                     CancellationTokenSource linkedTokenSource =
                         CancellationTokenSource.CreateLinkedTokenSource(collatedCancellationTokens)
-                ) {
+                )
+                {
                     handles.Add(linkedTokenSource.Token.WaitHandle); // add the combined token to the handles list
                     int index = WaitHandle.WaitAny(handles.ToArray(), timeout);
 
@@ -1603,7 +1621,8 @@ namespace System.Collections.Concurrent
                                 if (
                                     collections[i]._occupiedNodes.AvailableWaitHandle
                                     == handles[index]
-                                ) {
+                                )
+                                {
                                     index = i;
                                     break;
                                 }
@@ -1660,7 +1679,8 @@ namespace System.Collections.Concurrent
                         observedAdders | COMPLETE_ADDING_ON_MASK,
                         observedAdders
                     ) == observedAdders
-                ) {
+                )
+                {
                     spinner.Reset();
                     while (_currentAdders != COMPLETE_ADDING_ON_MASK)
                         spinner.SpinOnce();
@@ -1848,7 +1868,8 @@ namespace System.Collections.Concurrent
                             cancellationToken,
                             linkedTokenSource
                         )
-                    ) {
+                    )
+                    {
                         yield return item;
                     }
                 }
@@ -1893,7 +1914,8 @@ namespace System.Collections.Concurrent
         private static void ValidateCollectionsArray(
             BlockingCollection<T>[] collections,
             bool isAddOperation
-        ) {
+        )
+        {
             if (collections == null)
             {
                 throw new ArgumentNullException(nameof(collections));
@@ -1911,7 +1933,8 @@ namespace System.Collections.Concurrent
                     (collections.Length == 63)
                     && (Thread.CurrentThread.GetApartmentState() == ApartmentState.STA)
                 )
-            ) {
+            )
+            {
                 //The number of WaitHandles must be <= 64 for MTA, and <=63 for STA, as we reserve one for CancellationToken
                 throw new ArgumentOutOfRangeException(
                     nameof(collections),
@@ -1957,7 +1980,8 @@ namespace System.Collections.Concurrent
             if (
                 (totalMilliseconds < 0 || totalMilliseconds > int.MaxValue)
                 && (totalMilliseconds != Timeout.Infinite)
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(
                     nameof(timeout),
                     timeout,

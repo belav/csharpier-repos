@@ -62,7 +62,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.Patterns
                         pattern[beginSegment] == '*'
                         && pattern[beginSegment + 1] == '.'
                         && pattern[beginSegment + 2] == '*'
-                    ) {
+                    )
+                    {
                         // turn *.* into *
                         beginSegment += 2;
                     }
@@ -104,7 +105,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.Patterns
                         pattern[beginSegment] == '*'
                         && pattern[beginSegment + 1] == '*'
                         && pattern[beginSegment + 2] == '.'
-                    ) {
+                    )
+                    {
                         // recognize **.
                         // swallow the first *, add the recursive path segment and
                         // the remaining part will be treat as wild card in next loop.
@@ -262,7 +264,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.Patterns
                 IList<IPathSegment> segmentsPatternStartsWith,
                 IList<IPathSegment> segmentsPatternEndsWith,
                 IList<IList<IPathSegment>> segmentsPatternContains
-            ) {
+            )
+            {
                 Segments = allSegments;
                 StartsWith = segmentsPatternStartsWith;
                 Contains = segmentsPatternContains;

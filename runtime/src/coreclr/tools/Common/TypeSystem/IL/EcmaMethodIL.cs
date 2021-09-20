@@ -130,7 +130,8 @@ namespace Internal.IL
         public override object GetObject(
             int token,
             NotFoundBehavior notFoundBehavior = NotFoundBehavior.Throw
-        ) {
+        )
+        {
             // UserStrings cannot be wrapped in EntityHandle
             if ((token & 0xFF000000) == 0x70000000)
                 return _module.GetUserString(MetadataTokens.UserStringHandle(token));

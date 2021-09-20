@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis
             string? name,
             IEnumerable<string>? after = null,
             IEnumerable<string>? before = null
-        ) {
+        )
+        {
             this.AfterTyped = after ?? SpecializedCollections.EmptyEnumerable<string>();
             this.BeforeTyped = before ?? SpecializedCollections.EmptyEnumerable<string>();
             this.Name = name;

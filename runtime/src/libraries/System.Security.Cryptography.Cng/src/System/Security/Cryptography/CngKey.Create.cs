@@ -32,7 +32,8 @@ namespace System.Security.Cryptography
             CngAlgorithm algorithm,
             string? keyName,
             CngKeyCreationParameters? creationParameters
-        ) {
+        )
+        {
             if (algorithm == null)
                 throw new ArgumentNullException(nameof(algorithm));
 
@@ -82,7 +83,8 @@ namespace System.Security.Cryptography
         private static void InitializeKeyProperties(
             SafeNCryptKeyHandle keyHandle,
             CngKeyCreationParameters creationParameters
-        ) {
+        )
+        {
             unsafe
             {
                 if (creationParameters.ExportPolicy.HasValue)
@@ -152,14 +154,16 @@ namespace System.Security.Cryptography
         private static void InitializeKeyUiPolicyProperties(
             SafeNCryptKeyHandle keyHandle,
             CngUIPolicy uiPolicy
-        ) {
+        )
+        {
             unsafe
             {
                 fixed (
                     char* pinnedCreationTitle = uiPolicy.CreationTitle,
                         pinnedFriendlyName = uiPolicy.FriendlyName,
                         pinnedDescription = uiPolicy.Description
-                ) {
+                )
+                {
                     NCRYPT_UI_POLICY ncryptUiPolicy = new NCRYPT_UI_POLICY()
                     {
                         dwVersion = 1,

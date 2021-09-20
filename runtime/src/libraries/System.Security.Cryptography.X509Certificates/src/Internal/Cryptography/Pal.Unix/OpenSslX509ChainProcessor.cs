@@ -62,7 +62,8 @@ namespace Internal.Cryptography.Pal
             SafeX509StoreCtxHandle storeCtx,
             DateTime verificationTime,
             TimeSpan downloadTimeout
-        ) {
+        )
+        {
             _leafHandle = leafHandle;
             _store = store;
             _untrustedLookup = untrusted;
@@ -102,7 +103,8 @@ namespace Internal.Cryptography.Pal
             X509ChainTrustMode trustMode,
             DateTime verificationTime,
             TimeSpan remainingDownloadTime
-        ) {
+        )
+        {
             CachedSystemStoreProvider.GetNativeCollections(
                 out SafeX509StackHandle systemTrust,
                 out SafeX509StackHandle systemIntermediate
@@ -159,7 +161,8 @@ namespace Internal.Cryptography.Pal
             X509Certificate2Collection customTrustStore,
             SafeX509StackHandle untrusted,
             SafeX509StackHandle systemTrust
-        ) {
+        )
+        {
             if (trustMode == X509ChainTrustMode.CustomRootTrust)
             {
                 using (SafeX509StackHandle customTrust = Interop.Crypto.NewX509Stack())
@@ -189,7 +192,8 @@ namespace Internal.Cryptography.Pal
 
         internal Interop.Crypto.X509VerifyStatusCode FindFirstChain(
             X509Certificate2Collection? extraCerts
-        ) {
+        )
+        {
             SafeX509StoreCtxHandle storeCtx = _storeCtx;
 
             // While this returns true/false, at this stage we care more about the detailed error code.
@@ -236,7 +240,8 @@ namespace Internal.Cryptography.Pal
 
         internal Interop.Crypto.X509VerifyStatusCode FindChainViaAia(
             ref List<X509Certificate2>? downloadedCerts
-        ) {
+        )
+        {
             IntPtr lastCert = IntPtr.Zero;
             SafeX509StoreCtxHandle storeCtx = _storeCtx;
 
@@ -247,7 +252,8 @@ namespace Internal.Cryptography.Pal
             {
                 using (
                     SafeX509Handle currentCert = Interop.Crypto.X509StoreCtxGetCurrentCert(storeCtx)
-                ) {
+                )
+                {
                     IntPtr currentHandle = currentCert.DangerousGetHandle();
 
                     // No progress was made, give up.
@@ -298,10 +304,12 @@ namespace Internal.Cryptography.Pal
             if (
                 statusCode == Interop.Crypto.X509VerifyStatusCode.X509_V_OK
                 && downloadedCerts != null
-            ) {
+            )
+            {
                 using (
                     SafeX509StackHandle chainStack = Interop.Crypto.X509StoreCtxGetChain(_storeCtx)
-                ) {
+                )
+                {
                     int chainSize = Interop.Crypto.GetX509StackFieldCount(chainStack);
                     Span<IntPtr> tempChain = stackalloc IntPtr[DefaultChainCapacity];
                     byte[]? tempChainRent = null;
@@ -377,7 +385,8 @@ namespace Internal.Cryptography.Pal
         internal void ProcessRevocation(
             X509RevocationMode revocationMode,
             X509RevocationFlag revocationFlag
-        ) {
+        )
+        {
             if (revocationMode == X509RevocationMode.NoCheck)
             {
                 return;
@@ -410,7 +419,8 @@ namespace Internal.Cryptography.Pal
                         SafeX509Handle cert = Interop.Crypto.X509UpRef(
                             Interop.Crypto.GetX509StackField(chainStack, i)
                         )
-                    ) {
+                    )
+                    {
                         CrlCache.AddCrlForCertificate(
                             cert,
                             _store,
@@ -430,7 +440,8 @@ namespace Internal.Cryptography.Pal
             if (
                 Interop.Crypto.X509StoreCtxGetError(_storeCtx)
                 != Interop.Crypto.X509VerifyStatusCode.X509_V_OK
-            ) {
+            )
+            {
                 FinishRevocation(revocationMode, revocationFlag, chainSize);
             }
         }
@@ -439,7 +450,8 @@ namespace Internal.Cryptography.Pal
             X509RevocationMode revocationMode,
             X509RevocationFlag revocationFlag,
             int chainSize
-        ) {
+        )
+        {
             WorkingChain workingChain = BuildWorkingChain();
 
             // If the chain built and the only error was something we ignore (probably X509_V_ERR_CRL_NOT_YET_VALID)
@@ -519,7 +531,8 @@ namespace Internal.Cryptography.Pal
                     else if (
                         refErrors.HasRevocationUnknown()
                         && revocationFlag != X509RevocationFlag.ExcludeRoot
-                    ) {
+                    )
+                    {
                         // If the chain size is 1 we need to copy the root cert into untrusted so
                         // OCSP_basic_verify can find it.
                         if (chainSize == 1)
@@ -669,7 +682,8 @@ namespace Internal.Cryptography.Pal
             if (
                 Interop.Crypto.X509StoreCtxGetError(_storeCtx)
                 != Interop.Crypto.X509VerifyStatusCode.X509_V_OK
-            ) {
+            )
+            {
                 workingChain ??= BuildWorkingChain();
             }
 
@@ -708,7 +722,8 @@ namespace Internal.Cryptography.Pal
             int chainDepth,
             SafeX509Handle certHandle,
             X509RevocationMode revocationMode
-        ) {
+        )
+        {
             string ocspCache = CrlCache.GetCachedOcspResponseDirectory();
             Interop.Crypto.X509VerifyStatusCode status =
                 Interop.Crypto.X509ChainGetCachedOcspStatus(_storeCtx, ocspCache, chainDepth);
@@ -735,7 +750,8 @@ namespace Internal.Cryptography.Pal
                     _storeCtx,
                     chainDepth
                 )
-            ) {
+            )
+            {
                 ArraySegment<byte> encoded = Interop.Crypto.OpenSslRentEncode(
                     handle => Interop.Crypto.GetOcspRequestDerSize(handle),
                     (handle, buf) => Interop.Crypto.EncodeOcspRequest(handle, buf),
@@ -850,7 +866,8 @@ namespace Internal.Cryptography.Pal
                     (cur >= 'A' && cur <= 'Z')
                     || (cur >= 'a' && cur <= 'z')
                     || (cur >= '0' && cur <= '9')
-                ) {
+                )
+                {
                     urlEncoded[writeIdx++] = cur;
                 }
                 else if (cur == '+')
@@ -885,7 +902,8 @@ namespace Internal.Cryptography.Pal
         private X509ChainElement[] BuildChainElements(
             WorkingChain? workingChain,
             out List<X509ChainStatus>? overallStatus
-        ) {
+        )
+        {
             X509ChainElement[] elements;
             overallStatus = null;
 
@@ -933,7 +951,8 @@ namespace Internal.Cryptography.Pal
             ref List<X509ChainStatus>? overallStatus,
             OidCollection? applicationPolicy,
             OidCollection certificatePolicy
-        ) {
+        )
+        {
             List<X509Certificate2> certsToRead = new List<X509Certificate2>();
 
             foreach (X509ChainElement element in elements)
@@ -1001,7 +1020,8 @@ namespace Internal.Cryptography.Pal
             ErrorCollection errorCodes,
             List<X509ChainStatus> elementStatus,
             List<X509ChainStatus> overallStatus
-        ) {
+        )
+        {
             foreach (var errorCode in errorCodes)
             {
                 AddElementStatus(errorCode, elementStatus, overallStatus);
@@ -1030,7 +1050,8 @@ namespace Internal.Cryptography.Pal
             Interop.Crypto.X509VerifyStatusCode errorCode,
             List<X509ChainStatus> elementStatus,
             List<X509ChainStatus> overallStatus
-        ) {
+        )
+        {
             X509ChainStatusFlags statusFlag = MapVerifyErrorToChainStatus(errorCode);
 
             Debug.Assert(
@@ -1076,7 +1097,8 @@ namespace Internal.Cryptography.Pal
 
         private static X509ChainStatusFlags MapVerifyErrorToChainStatus(
             Interop.Crypto.X509VerifyStatusCode code
-        ) {
+        )
+        {
             switch (code.UniversalCode)
             {
                 case X509VerifyStatusCodeUniversal.X509_V_OK:
@@ -1166,7 +1188,8 @@ namespace Internal.Cryptography.Pal
 
         private static X509ChainStatusFlags MapOpenSsl30Code(
             Interop.Crypto.X509VerifyStatusCode code
-        ) {
+        )
+        {
             switch (code.Code30)
             {
                 case Interop.Crypto.X509VerifyStatusCode30.X509_V_ERR_INVALID_CA:
@@ -1179,7 +1202,8 @@ namespace Internal.Cryptography.Pal
 
         private static X509ChainStatusFlags MapOpenSsl102Code(
             Interop.Crypto.X509VerifyStatusCode code
-        ) {
+        )
+        {
             switch (code.Code102)
             {
                 case Interop.Crypto.X509VerifyStatusCode102.X509_V_ERR_INVALID_CA:
@@ -1192,7 +1216,8 @@ namespace Internal.Cryptography.Pal
 
         private static X509ChainStatusFlags MapOpenSsl111Code(
             Interop.Crypto.X509VerifyStatusCode code
-        ) {
+        )
+        {
             switch (code.Code111)
             {
                 case Interop.Crypto.X509VerifyStatusCode111.X509_V_ERR_INVALID_CA:
@@ -1206,7 +1231,8 @@ namespace Internal.Cryptography.Pal
         private static X509Certificate2? DownloadCertificate(
             ReadOnlyMemory<byte> authorityInformationAccess,
             TimeSpan downloadTimeout
-        ) {
+        )
+        {
             string? uri = FindHttpAiaRecord(
                 authorityInformationAccess,
                 Oids.CertificateAuthorityIssuers
@@ -1241,7 +1267,8 @@ namespace Internal.Cryptography.Pal
         private static string? FindHttpAiaRecord(
             ReadOnlyMemory<byte> authorityInformationAccess,
             string recordTypeOid
-        ) {
+        )
+        {
             try
             {
                 AsnValueReader reader = new AsnValueReader(
@@ -1265,7 +1292,8 @@ namespace Internal.Cryptography.Pal
                             name.Uri != null
                             && Uri.TryCreate(name.Uri, UriKind.Absolute, out Uri? uri)
                             && uri.Scheme == "http"
-                        ) {
+                        )
+                        {
                             return name.Uri;
                         }
                     }
@@ -1375,7 +1403,8 @@ namespace Internal.Cryptography.Pal
                             AbortOnSignatureError
                             && errorCode
                                 == X509VerifyStatusCodeUniversal.X509_V_ERR_CERT_SIGNATURE_FAILURE
-                        ) {
+                        )
+                        {
                             AbortedForSignatureError = true;
                             return 0;
                         }
@@ -1390,7 +1419,8 @@ namespace Internal.Cryptography.Pal
                                 != X509VerifyStatusCodeUniversal.X509_V_ERR_CRL_NOT_YET_VALID
                             && errorCode
                                 != X509VerifyStatusCodeUniversal.X509_V_ERR_DIFFERENT_CRL_SCOPE
-                        ) {
+                        )
+                        {
                             if (_errors == null)
                             {
                                 int size = Math.Max(DefaultChainCapacity, errorDepth + 1);
@@ -1583,7 +1613,8 @@ namespace Internal.Cryptography.Pal
             private static int FindBucket(
                 Interop.Crypto.X509VerifyStatusCode statusCode,
                 out int bitValue
-            ) {
+            )
+            {
                 int val = statusCode.Code;
 
                 int bucket;

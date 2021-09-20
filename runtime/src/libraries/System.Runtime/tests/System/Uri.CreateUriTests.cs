@@ -414,7 +414,8 @@ namespace System.Tests
             string uriString2,
             UriKind uriKind,
             string expectedUriString
-        ) {
+        )
+        {
             Uri baseUri = new Uri(uriString1, UriKind.Absolute);
             Uri relativeUri = new Uri(uriString2, uriKind);
 
@@ -463,7 +464,8 @@ namespace System.Tests
             string relativeUri,
             Type exceptionType,
             bool createUri
-        ) {
+        )
+        {
             Assert.Throws(exceptionType, () => new Uri(baseUri, relativeUri));
             if (createUri)
             {

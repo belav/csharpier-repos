@@ -623,7 +623,8 @@ namespace System.IO
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ValidateBufferArguments(buffer, offset, count);
 
             // Fast path check for cancellation already requested
@@ -684,7 +685,8 @@ namespace System.IO
         public override ValueTask<int> ReadAsync(
             Memory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (cancellationToken.IsCancellationRequested)
             {
                 return ValueTask.FromCanceled<int>(cancellationToken);
@@ -737,7 +739,8 @@ namespace System.IO
             CancellationToken cancellationToken,
             int bytesAlreadySatisfied,
             Task semaphoreLockTask
-        ) {
+        )
+        {
             // Same conditions validated with exceptions in ReadAsync:
             Debug.Assert(_stream != null);
             Debug.Assert(_stream.CanRead);
@@ -985,7 +988,8 @@ namespace System.IO
                     if (
                         totalUserbytes <= (_bufferSize + _bufferSize)
                         && totalUserbytes <= MaxShadowBufferSize
-                    ) {
+                    )
+                    {
                         EnsureShadowBufferAllocated();
                         Buffer.BlockCopy(buffer, offset, _buffer, _writePos, count);
                         _stream.Write(_buffer, 0, totalUserbytes);
@@ -1060,7 +1064,8 @@ namespace System.IO
                     if (
                         totalUserbytes <= (_bufferSize + _bufferSize)
                         && totalUserbytes <= MaxShadowBufferSize
-                    ) {
+                    )
+                    {
                         EnsureShadowBufferAllocated();
                         buffer.CopyTo(new Span<byte>(_buffer, _writePos, buffer.Length));
                         _stream.Write(_buffer, 0, totalUserbytes);
@@ -1082,7 +1087,8 @@ namespace System.IO
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ValidateBufferArguments(buffer, offset, count);
 
             return WriteAsync(new ReadOnlyMemory<byte>(buffer, offset, count), cancellationToken)
@@ -1092,7 +1098,8 @@ namespace System.IO
         public override ValueTask WriteAsync(
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             // Fast path check for cancellation already requested
             if (cancellationToken.IsCancellationRequested)
             {
@@ -1147,7 +1154,8 @@ namespace System.IO
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken,
             Task semaphoreLockTask
-        ) {
+        )
+        {
             Debug.Assert(_stream != null);
             Debug.Assert(_stream.CanWrite);
             Debug.Assert(_bufferSize > 0);
@@ -1212,7 +1220,8 @@ namespace System.IO
                         if (
                             totalUserBytes <= (_bufferSize + _bufferSize)
                             && totalUserBytes <= MaxShadowBufferSize
-                        ) {
+                        )
+                        {
                             EnsureShadowBufferAllocated();
                             buffer.Span.CopyTo(new Span<byte>(_buffer, _writePos, buffer.Length));
 
@@ -1398,7 +1407,8 @@ namespace System.IO
             Stream destination,
             int bufferSize,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ValidateCopyToArguments(destination, bufferSize);
             EnsureNotClosed();
             EnsureCanRead();
@@ -1412,7 +1422,8 @@ namespace System.IO
             Stream destination,
             int bufferSize,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(_stream != null);
 
             // Synchronize async operations as does Read/WriteAsync.

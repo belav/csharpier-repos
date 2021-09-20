@@ -75,7 +75,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             IEnumerable<SyntaxNode> nodes,
             Func<SyntaxNode, SyntaxNode, SyntaxNode> computeReplacementNode,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
             var newRoot = root.ReplaceNodes(nodes, computeReplacementNode);
@@ -88,7 +89,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this Document document,
             IEqualityComparer<T> comparer,
             Func<Document, Task<ImmutableArray<T>>> getItemsWorker
-        ) {
+        )
+        {
             var totalItems = new HashSet<T>(comparer);
 
             var values = await getItemsWorker(document).ConfigureAwait(false);
@@ -110,7 +112,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this Document document,
             Func<Document, CancellationToken, Task<bool>> contextChecker,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (await contextChecker(document, cancellationToken).ConfigureAwait(false))
             {
                 return true;
@@ -146,7 +149,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this Document document,
             ImmutableArray<NamingRule> defaultRules,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var options = await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
             var namingStyleOptions = options.GetOption(NamingStyleOptions.NamingPreferences);
             var rules = namingStyleOptions.CreateRules().NamingRules;
@@ -158,7 +162,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this Document document,
             ISymbol symbol,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var rules = await document.GetNamingRulesAsync(cancellationToken).ConfigureAwait(false);
             foreach (var rule in rules)
             {
@@ -174,7 +179,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             SymbolKind symbolKind,
             Accessibility accessibility,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var rules = await document.GetNamingRulesAsync(cancellationToken).ConfigureAwait(false);
             foreach (var rule in rules)
             {
@@ -191,7 +197,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             DeclarationModifiers modifiers,
             Accessibility? accessibility,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var rules = await document.GetNamingRulesAsync(cancellationToken).ConfigureAwait(false);
             foreach (var rule in rules)
             {
@@ -206,7 +213,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this Document document,
             TextSpan span,
             IEnumerable<AbstractFormattingRule>? additionalRules
-        ) {
+        )
+        {
             var workspace = document.Project.Solution.Workspace;
             var formattingRuleFactory =
                 workspace.Services.GetRequiredService<IHostDependentFormattingRuleFactoryService>();

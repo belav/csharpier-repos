@@ -170,7 +170,8 @@ class BaseBinder : Binder
         CultureInfo culture,
         string[] names,
         out object state
-    ) {
+    )
+    {
         state = null;
         return match[0];
     }
@@ -186,7 +187,8 @@ class BaseBinder : Binder
         System.Reflection.FieldInfo[] b,
         object c,
         System.Globalization.CultureInfo d
-    ) {
+    )
+    {
         return null;
     }
 
@@ -197,7 +199,8 @@ class BaseBinder : Binder
         System.Reflection.MethodBase[] b,
         System.Type[] c,
         System.Reflection.ParameterModifier[] d
-    ) {
+    )
+    {
         return null;
     }
 
@@ -207,7 +210,8 @@ class BaseBinder : Binder
         System.Type c,
         System.Type[] d,
         System.Reflection.ParameterModifier[] e
-    ) {
+    )
+    {
         return null;
     }
 }

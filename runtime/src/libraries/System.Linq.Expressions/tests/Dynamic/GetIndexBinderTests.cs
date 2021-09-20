@@ -18,7 +18,8 @@ namespace System.Dynamic.Tests
                 DynamicMetaObject target,
                 DynamicMetaObject[] indexes,
                 DynamicMetaObject errorSuggestion
-            ) {
+            )
+            {
                 throw new NotSupportedException();
             }
         }

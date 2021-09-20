@@ -14,7 +14,8 @@ namespace System.Net.Security
             X509Certificate2 target,
             X509Certificate2Collection? additionalCertificates,
             bool offline = false
-        ) {
+        )
+        {
             if (!target.HasPrivateKey)
             {
                 throw new NotSupportedException(SR.net_ssl_io_no_server_cert);

@@ -60,7 +60,8 @@ namespace Microsoft.AspNetCore.Identity.Test
             bool supportClaims,
             bool supportRoleClaims,
             bool supportsUserEmail
-        ) {
+        )
+        {
             // Setup
             var userManager = MockHelpers.MockUserManager<PocoUser>();
             var roleManager = MockHelpers.MockRoleManager<PocoRole>();

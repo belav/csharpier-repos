@@ -61,7 +61,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Formatting
         public void TestParseParenthesesSpaceOptionsFalse(
             string value,
             int parenthesesSpacingOption
-        ) {
+        )
+        {
             Assert.False(
                 DetermineIfSpaceOptionIsSet(
                     value,
@@ -80,7 +81,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Formatting
         public void TestParseEditorConfigSpacingAroundBinaryOperatorTrue(
             string value,
             BinaryOperatorSpacingOptions expectedResult
-        ) {
+        )
+        {
             Assert.True(
                 ParseEditorConfigSpacingAroundBinaryOperator(value) == expectedResult,
                 $"Expected option {value} to be parsed as set."
@@ -106,7 +108,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Formatting
         public void TestParseEditorConfigLabelPositioningTrue(
             string value,
             LabelPositionOptions expectedValue
-        ) {
+        )
+        {
             Assert.True(
                 ParseEditorConfigLabelPositioning(value) == expectedValue,
                 $"Expected option {value} to be parsed as set."

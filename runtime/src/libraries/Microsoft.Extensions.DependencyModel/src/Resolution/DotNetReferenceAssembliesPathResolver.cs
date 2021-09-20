@@ -38,7 +38,8 @@ namespace Microsoft.Extensions.DependencyModel.Resolution
                 && fileSystem.Directory.Exists(
                     "/Library/Frameworks/Mono.framework/Versions/Current/lib/mono/xbuild-frameworks"
                 )
-            ) {
+            )
+            {
                 return "/Library/Frameworks/Mono.framework/Versions/Current/lib/mono/xbuild-frameworks";
             }
 

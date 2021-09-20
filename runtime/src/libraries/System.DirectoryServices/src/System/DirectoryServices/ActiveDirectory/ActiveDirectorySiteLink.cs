@@ -39,7 +39,8 @@ namespace System.DirectoryServices.ActiveDirectory
             string siteLinkName,
             ActiveDirectoryTransportType transport,
             ActiveDirectorySchedule? schedule
-        ) {
+        )
+        {
             ValidateArgument(context, siteLinkName, transport);
 
             //  work with copy of the context
@@ -104,7 +105,8 @@ namespace System.DirectoryServices.ActiveDirectory
                     if (
                         Utils.CheckCapability(tmpDE, Capability.ActiveDirectoryApplicationMode)
                         && transport == ActiveDirectoryTransportType.Smtp
-                    ) {
+                    )
+                    {
                         throw new NotSupportedException(SR.NotSupportTransportSMTP);
                     }
                 }
@@ -123,7 +125,8 @@ namespace System.DirectoryServices.ActiveDirectory
             ActiveDirectoryTransportType transport,
             bool existing,
             DirectoryEntry entry
-        ) {
+        )
+        {
             this.context = context;
             _name = siteLinkName;
             _transport = transport;
@@ -134,7 +137,8 @@ namespace System.DirectoryServices.ActiveDirectory
         public static ActiveDirectorySiteLink FindByName(
             DirectoryContext context,
             string siteLinkName
-        ) {
+        )
+        {
             return FindByName(context, siteLinkName, ActiveDirectoryTransportType.Rpc);
         }
 
@@ -142,7 +146,8 @@ namespace System.DirectoryServices.ActiveDirectory
             DirectoryContext context,
             string siteLinkName,
             ActiveDirectoryTransportType transport
-        ) {
+        )
+        {
             ValidateArgument(context, siteLinkName, transport);
 
             //  work with copy of the context
@@ -227,7 +232,8 @@ namespace System.DirectoryServices.ActiveDirectory
                     if (
                         Utils.CheckCapability(tmpDE, Capability.ActiveDirectoryApplicationMode)
                         && transport == ActiveDirectoryTransportType.Smtp
-                    ) {
+                    )
+                    {
                         throw new NotSupportedException(SR.NotSupportTransportSMTP);
                     }
                     else
@@ -722,7 +728,8 @@ namespace System.DirectoryServices.ActiveDirectory
             DirectoryContext context,
             string siteLinkName,
             ActiveDirectoryTransportType transport
-        ) {
+        )
+        {
             // basic validation first
             if (context == null)
                 throw new ArgumentNullException(nameof(context));

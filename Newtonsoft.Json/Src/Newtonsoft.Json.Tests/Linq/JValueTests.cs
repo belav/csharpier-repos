@@ -887,7 +887,8 @@ namespace Newtonsoft.Json.Tests.Linq
                 JsonWriter writer,
                 object value,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 throw new NotSupportedException();
             }
 
@@ -896,7 +897,8 @@ namespace Newtonsoft.Json.Tests.Linq
                 Type objectType,
                 object existingValue,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 return reader.Value + "!";
             }
 

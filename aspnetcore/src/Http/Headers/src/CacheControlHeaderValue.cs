@@ -437,7 +437,8 @@ namespace Microsoft.Net.Http.Headers
                 || (_private != other._private)
                 || (_mustRevalidate != other._mustRevalidate)
                 || (_proxyRevalidate != other._proxyRevalidate)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -447,7 +448,8 @@ namespace Microsoft.Net.Http.Headers
                     other._noCacheHeaders,
                     StringSegmentComparer.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -457,7 +459,8 @@ namespace Microsoft.Net.Http.Headers
                     other._privateHeaders,
                     StringSegmentComparer.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -554,7 +557,8 @@ namespace Microsoft.Net.Http.Headers
         public static bool TryParse(
             StringSegment input,
             [NotNullWhen(true)] out CacheControlHeaderValue? parsedValue
-        ) {
+        )
+        {
             var index = 0;
             // Cache-Control is unusual because there are no required values so the parser will succeed for an empty string, but still return null.
             if (Parser.TryParseValue(input, ref index, out parsedValue) && parsedValue != null)
@@ -569,7 +573,8 @@ namespace Microsoft.Net.Http.Headers
             StringSegment input,
             int startIndex,
             out CacheControlHeaderValue? parsedValue
-        ) {
+        )
+        {
             Contract.Requires(startIndex >= 0);
 
             parsedValue = null;
@@ -591,7 +596,8 @@ namespace Microsoft.Net.Http.Headers
                         ref current,
                         out var nameValue
                     )
-                ) {
+                )
+                {
                     return 0;
                 }
 
@@ -622,7 +628,8 @@ namespace Microsoft.Net.Http.Headers
         private static bool TrySetCacheControlValues(
             CacheControlHeaderValue cc,
             List<NameValueHeaderValue> nameValueList
-        ) {
+        )
+        {
             for (var i = 0; i < nameValueList.Count; i++)
             {
                 var nameValue = nameValueList[i];
@@ -638,7 +645,8 @@ namespace Microsoft.Net.Http.Headers
                                 name,
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             success = TrySetTokenOnlyValue(nameValue, ref cc._public);
                         }
                         else
@@ -654,7 +662,8 @@ namespace Microsoft.Net.Http.Headers
                                 name,
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             success = TrySetTimeSpan(nameValue, ref cc._maxAge);
                         }
                         else if (
@@ -663,7 +672,8 @@ namespace Microsoft.Net.Http.Headers
                                 name,
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             success = TrySetOptionalTokenList(
                                 nameValue,
                                 ref cc._private,
@@ -683,7 +693,8 @@ namespace Microsoft.Net.Http.Headers
                                 name,
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             success = TrySetOptionalTokenList(
                                 nameValue,
                                 ref cc._noCache,
@@ -696,7 +707,8 @@ namespace Microsoft.Net.Http.Headers
                                 name,
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             success = TrySetTokenOnlyValue(nameValue, ref cc._noStore);
                         }
                         else if (
@@ -705,7 +717,8 @@ namespace Microsoft.Net.Http.Headers
                                 name,
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             success = TrySetTimeSpan(nameValue, ref cc._sharedMaxAge);
                         }
                         else
@@ -721,7 +734,8 @@ namespace Microsoft.Net.Http.Headers
                                 name,
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             success = (
                                 (nameValue.Value == null)
                                 || TrySetTimeSpan(nameValue, ref cc._maxStaleLimit)
@@ -737,7 +751,8 @@ namespace Microsoft.Net.Http.Headers
                                 name,
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             success = TrySetTimeSpan(nameValue, ref cc._minFresh);
                         }
                         else
@@ -753,7 +768,8 @@ namespace Microsoft.Net.Http.Headers
                                 name,
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             success = TrySetTokenOnlyValue(nameValue, ref cc._noTransform);
                         }
                         else
@@ -769,7 +785,8 @@ namespace Microsoft.Net.Http.Headers
                                 name,
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             success = TrySetTokenOnlyValue(nameValue, ref cc._onlyIfCached);
                         }
                         else
@@ -785,7 +802,8 @@ namespace Microsoft.Net.Http.Headers
                                 name,
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             success = TrySetTokenOnlyValue(nameValue, ref cc._mustRevalidate);
                         }
                         else
@@ -801,7 +819,8 @@ namespace Microsoft.Net.Http.Headers
                                 name,
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             success = TrySetTokenOnlyValue(nameValue, ref cc._proxyRevalidate);
                         }
                         else
@@ -839,7 +858,8 @@ namespace Microsoft.Net.Http.Headers
             NameValueHeaderValue nameValue,
             ref bool boolField,
             ref ICollection<StringSegment>? destination
-        ) {
+        )
+        {
             if (nameValue.Value == null)
             {
                 boolField = true;
@@ -853,7 +873,8 @@ namespace Microsoft.Net.Http.Headers
                 (valueString.Length < 3)
                 || (valueString[0] != '\"')
                 || (valueString[valueString.Length - 1] != '\"')
-            ) {
+            )
+            {
                 return false;
             }
 

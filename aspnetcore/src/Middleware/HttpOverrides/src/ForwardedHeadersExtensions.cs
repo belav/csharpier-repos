@@ -54,7 +54,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IApplicationBuilder UseForwardedHeaders(
             this IApplicationBuilder builder,
             ForwardedHeadersOptions options
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));

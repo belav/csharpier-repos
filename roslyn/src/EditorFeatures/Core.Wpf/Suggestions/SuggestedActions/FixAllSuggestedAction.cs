@@ -47,14 +47,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
             FixAllState fixAllState,
             Diagnostic originalFixedDiagnostic,
             CodeAction originalCodeAction
-        ) : base(
-            threadingContext,
-            sourceProvider,
-            workspace,
-            subjectBuffer,
-            fixAllState.FixAllProvider,
-            new FixAllCodeAction(fixAllState)
-        ) {
+        )
+            : base(
+                threadingContext,
+                sourceProvider,
+                workspace,
+                subjectBuffer,
+                fixAllState.FixAllProvider,
+                new FixAllCodeAction(fixAllState)
+            )
+        {
             Diagnostic = originalFixedDiagnostic;
             OriginalCodeAction = originalCodeAction;
             FixAllState = fixAllState;
@@ -75,7 +77,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
         protected override void InnerInvoke(
             IProgressTracker progressTracker,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             this.AssertIsForeground();
 
             using (
@@ -84,7 +87,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                     FixAllLogger.CreateCorrelationLogMessage(FixAllState.CorrelationId),
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 base.InnerInvoke(progressTracker, cancellationToken);
             }
         }

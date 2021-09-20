@@ -14955,7 +14955,8 @@ B"
             string propertyDescription,
             string? getterName,
             string? setterName
-        ) {
+        )
+        {
             var property = (PropertySymbol)symbol;
             Assert.Equal(propertyDescription, symbol.ToTestDisplayString());
             VerifyAccessor(property.GetMethod, getterName);
@@ -15105,7 +15106,8 @@ B"
             static void verifyReturnType(
                 MethodSymbol method,
                 params CustomModifier[] expectedModifiers
-            ) {
+            )
+            {
                 var returnType = method.ReturnTypeWithAnnotations;
                 Assert.True(
                     method.OverriddenMethod.ReturnTypeWithAnnotations.Equals(
@@ -15119,7 +15121,8 @@ B"
             static void verifyParameterType(
                 MethodSymbol method,
                 params CustomModifier[] expectedModifiers
-            ) {
+            )
+            {
                 var parameterType = method.Parameters[0].TypeWithAnnotations;
                 Assert.True(
                     method.OverriddenMethod.Parameters[0].TypeWithAnnotations.Equals(
@@ -28122,7 +28125,8 @@ True"
         private static void VerifyVirtualMethods(
             ImmutableArray<Symbol> members,
             params (string displayString, bool isOverride)[] values
-        ) {
+        )
+        {
             Assert.Equal(members.Length, values.Length);
             for (int i = 0; i < members.Length; i++)
             {

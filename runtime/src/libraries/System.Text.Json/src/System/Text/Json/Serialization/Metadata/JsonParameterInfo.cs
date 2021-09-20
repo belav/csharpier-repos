@@ -55,7 +55,8 @@ namespace System.Text.Json.Serialization.Metadata
             ParameterInfo parameterInfo,
             JsonPropertyInfo matchingProperty,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             RuntimePropertyType = runtimePropertyType;
             Position = parameterInfo.Position;
             NameAsUtf8Bytes = matchingProperty.NameAsUtf8Bytes!;
@@ -70,7 +71,8 @@ namespace System.Text.Json.Serialization.Metadata
         // prevent issues with unsupported types and helps ensure we don't accidently (de)serialize it.
         public static JsonParameterInfo CreateIgnoredParameterPlaceholder(
             JsonPropertyInfo matchingProperty
-        ) {
+        )
+        {
             return new JsonParameterInfo<sbyte>
             {
                 RuntimePropertyType = typeof(sbyte),

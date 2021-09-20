@@ -313,7 +313,8 @@ namespace System.Web.Http.SelfHost
             if (
                 _clientCredentialType != HttpClientCredentialType.Basic
                 && _credentials.UserNameAuthentication.CustomUserNamePasswordValidator != null
-            ) {
+            )
+            {
                 throw Error.InvalidOperation(
                     SRResources.CannotUseOtherClientCredentialTypeWithUserNamePasswordValidator
                 );
@@ -322,7 +323,8 @@ namespace System.Web.Http.SelfHost
             if (
                 _clientCredentialType != HttpClientCredentialType.Certificate
                 && _credentials.ClientCertificate.Authentication.CustomCertificateValidator != null
-            ) {
+            )
+            {
                 throw Error.InvalidOperation(
                     SRResources.CannotUseOtherClientCredentialTypeWithX509CertificateValidator
                 );
@@ -350,7 +352,8 @@ namespace System.Web.Http.SelfHost
                 if (
                     httpBinding.Security == null
                     || httpBinding.Security.Mode == HttpBindingSecurityMode.None
-                ) {
+                )
+                {
                     // Basic over HTTP case
                     httpBinding.Security = new HttpBindingSecurity()
                     {
@@ -404,14 +407,16 @@ namespace System.Web.Http.SelfHost
             if (
                 !String.IsNullOrEmpty(baseAddress.Query)
                 || !String.IsNullOrEmpty(baseAddress.Fragment)
-            ) {
+            )
+            {
                 throw Error.ArgumentUriHasQueryOrFragment("baseAddress", baseAddress);
             }
 
             if (
                 !ReferenceEquals(baseAddress.Scheme, Uri.UriSchemeHttp)
                 && !ReferenceEquals(baseAddress.Scheme, Uri.UriSchemeHttps)
-            ) {
+            )
+            {
                 throw Error.ArgumentUriNotHttpOrHttpsScheme("baseAddress", baseAddress);
             }
 

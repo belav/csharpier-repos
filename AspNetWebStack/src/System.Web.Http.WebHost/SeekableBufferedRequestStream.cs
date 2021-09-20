@@ -78,7 +78,8 @@ namespace System.Web.Http.WebHost
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ThrowIfDisposed();
 
             int bytesRead = await InnerStream.ReadAsync(buffer, offset, count, cancellationToken);

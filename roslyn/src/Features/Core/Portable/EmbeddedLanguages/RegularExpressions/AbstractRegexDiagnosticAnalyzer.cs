@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
                     FeaturesResources.ResourceManager,
                     typeof(FeaturesResources)
                 )
-            ) {
+            )
+        {
             _info = info;
         }
 
@@ -99,7 +100,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
             RegexPatternDetector detector,
             SyntaxToken token,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (token.RawKind == _info.StringLiteralTokenKind)
             {
                 var tree = detector.TryParseRegexPattern(

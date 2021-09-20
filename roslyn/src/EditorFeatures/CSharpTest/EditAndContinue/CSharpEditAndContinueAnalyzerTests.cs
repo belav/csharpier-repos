@@ -84,7 +84,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
             var unhandledKinds = new List<SyntaxKind>();
             foreach (
                 var kind in Enum.GetValues(typeof(SyntaxKind)).Cast<SyntaxKind>().Where(hasLabel)
-            ) {
+            )
+            {
                 TextSpan? span;
                 try
                 {

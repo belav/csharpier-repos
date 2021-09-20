@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Interactive
                         s_classificationsKey,
                         out var classifications
                     )
-                ) {
+                )
+                {
                     return classifications.Where(c => c.Span.IntersectsWith(span)).ToList();
                 }
 

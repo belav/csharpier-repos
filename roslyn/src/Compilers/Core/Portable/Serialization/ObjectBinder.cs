@@ -62,7 +62,8 @@ namespace Roslyn.Utilities
         public static void RegisterTypeReader(
             Type type,
             Func<ObjectReader, IObjectWritable> typeReader
-        ) {
+        )
+        {
             lock (s_gate)
             {
                 if (s_typeToIndex.ContainsKey(type))

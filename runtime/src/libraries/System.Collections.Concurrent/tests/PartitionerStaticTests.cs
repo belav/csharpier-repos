@@ -278,7 +278,8 @@ namespace System.Collections.Concurrent.Tests
             int[] data,
             bool staticPartitioning,
             IEnumerator<KeyValuePair<long, int>>[] partitions
-        ) {
+        )
+        {
             bool[] boolarray = new bool[dataSize];
             bool keysOrderedWithinPartition = true,
                 keysOrderedAcrossPartitions = true;

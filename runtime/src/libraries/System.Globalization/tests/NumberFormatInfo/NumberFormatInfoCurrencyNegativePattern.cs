@@ -24,7 +24,8 @@ namespace System.Globalization.Tests
         public void CurrencyNegativePattern_Get_ReturnsExpected(
             NumberFormatInfo format,
             int[] acceptablePatterns
-        ) {
+        )
+        {
             Assert.Contains(format.CurrencyNegativePattern, acceptablePatterns);
         }
 

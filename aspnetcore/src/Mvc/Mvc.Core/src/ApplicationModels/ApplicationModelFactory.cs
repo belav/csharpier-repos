@@ -25,7 +25,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         public ApplicationModelFactory(
             IEnumerable<IApplicationModelProvider> applicationModelProviders,
             IOptions<MvcOptions> options
-        ) {
+        )
+        {
             if (applicationModelProviders == null)
             {
                 throw new ArgumentNullException(nameof(applicationModelProviders));
@@ -67,7 +68,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         public static List<TResult> Flatten<TResult>(
             ApplicationModel application,
             Func<ApplicationModel, ControllerModel, ActionModel, SelectorModel, TResult> flattener
-        ) {
+        )
+        {
             var results = new List<TResult>();
             var errors = new Dictionary<MethodInfo, IList<string>>();
 
@@ -144,7 +146,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             ActionModel action,
             SelectorModel selector,
             List<string> errors
-        ) {
+        )
+        {
             if (selector.AttributeRouteModel == null)
             {
                 return;
@@ -202,7 +205,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             Dictionary<MethodInfo, List<(ActionModel, SelectorModel)>> actionsByMethod,
             ActionModel action,
             SelectorModel selector
-        ) {
+        )
+        {
             if (!actionsByMethod.TryGetValue(action.ActionMethod, out var actions))
             {
                 actions = new List<(ActionModel, SelectorModel)>();
@@ -219,7 +223,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             > actionsByRouteName,
             ActionModel action,
             SelectorModel selector
-        ) {
+        )
+        {
             var routeName = selector.AttributeRouteModel?.Name;
             if (routeName == null)
             {
@@ -253,7 +258,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                 string,
                 List<(ActionModel action, SelectorModel selector)>
             > actionsByRouteName
-        ) {
+        )
+        {
             var namedRouteErrors = new List<string>();
 
             foreach (var (routeName, actions) in actionsByRouteName)
@@ -301,7 +307,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             MethodInfo method,
             List<(ActionModel action, SelectorModel selector)> actions,
             IDictionary<MethodInfo, string> routingConfigurationErrors
-        ) {
+        )
+        {
             var hasAttributeRoutedActions = false;
             var hasConventionallyRoutedActions = false;
 
@@ -335,7 +342,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         private static string CreateMixedRoutedActionDescriptorsErrorMessage(
             MethodInfo method,
             List<(ActionModel action, SelectorModel selector)> actions
-        ) {
+        )
+        {
             // Text to show as the attribute route template for conventionally routed actions.
             var nullTemplate = Resources.AttributeRoute_NullTemplateRepresentation;
 
@@ -389,7 +397,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
         private static string CreateAttributeRoutingAggregateErrorMessage(
             IEnumerable<string> individualErrors
-        ) {
+        )
+        {
             var errorMessages = AddErrorNumbers(individualErrors);
 
             var message = Resources.FormatAttributeRoute_AggregateErrorMessage(

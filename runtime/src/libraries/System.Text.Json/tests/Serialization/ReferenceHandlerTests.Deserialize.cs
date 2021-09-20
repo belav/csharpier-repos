@@ -750,7 +750,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 int startObjectCount = 0;
                 int endObjectCount = 0;
 
@@ -781,7 +782,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 List<Employee> value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }
@@ -1071,7 +1073,8 @@ namespace System.Text.Json.Serialization.Tests
         public static void InvalidMetadataPropertyNameWithSameLengthIsNotRecognized(
             string json,
             string expectedPath
-        ) {
+        )
+        {
             JsonException ex = Assert.Throws<JsonException>(
                 () => JsonSerializer.Deserialize<Employee>(json, s_deserializerOptionsPreserve)
             );
@@ -1263,7 +1266,8 @@ namespace System.Text.Json.Serialization.Tests
         public static void MetadataId_StartsWithInvalidToken(
             string json,
             JsonTokenType incorrectToken
-        ) {
+        )
+        {
             JsonException ex = Assert.Throws<JsonException>(
                 () => JsonSerializer.Deserialize<Employee>(json, s_deserializerOptionsPreserve)
             );
@@ -1306,7 +1310,8 @@ namespace System.Text.Json.Serialization.Tests
         public static void MetadataRef_StartsWithInvalidToken(
             string json,
             JsonTokenType incorrectToken
-        ) {
+        )
+        {
             JsonException ex = Assert.Throws<JsonException>(
                 () => JsonSerializer.Deserialize<Employee>(json, s_deserializerOptionsPreserve)
             );
@@ -1349,7 +1354,8 @@ namespace System.Text.Json.Serialization.Tests
         public static void MetadataValues_StartsWithInvalidToken(
             string json,
             JsonTokenType incorrectToken
-        ) {
+        )
+        {
             JsonException ex = Assert.Throws<JsonException>(
                 () => JsonSerializer.Deserialize<List<int>>(json, s_deserializerOptionsPreserve)
             );

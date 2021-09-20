@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Remote
             bool transitive,
             DependentTypesKind kind,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 async cancellationToken =>
                 {

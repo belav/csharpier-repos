@@ -56,7 +56,8 @@ namespace System.Diagnostics.TraceSourceTests
             bool warning,
             bool info,
             bool verbose
-        ) {
+        )
+        {
             var item = new TraceSwitch("SwitchName", "Description");
             item.Level = level;
             Assert.Equal(error, item.TraceError);

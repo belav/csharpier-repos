@@ -63,7 +63,8 @@ namespace System.Xml.Tests
                 && _Expbyte_BaseChar[i / 2] != "_x0EB4_"
                 && _Expbyte_BaseChar[i / 2] != "_x0EBC_"
                 && _Expbyte_BaseChar[i / 2] != "_x0F3F_"
-            ) {
+            )
+            {
                 CError.Compare(strEnVal, _Expbyte_BaseChar[i / 2], "Comparison failed at " + i);
             }
             return TEST_PASS;

@@ -213,7 +213,8 @@ namespace Microsoft.AspNetCore.Components
             object receiver,
             Action<TValue> callback,
             TValue value
-        ) {
+        )
+        {
             return Create(receiver, callback);
         }
 
@@ -230,7 +231,8 @@ namespace Microsoft.AspNetCore.Components
             object receiver,
             Func<TValue, Task> callback,
             TValue value
-        ) {
+        )
+        {
             return Create(receiver, callback);
         }
 
@@ -245,7 +247,8 @@ namespace Microsoft.AspNetCore.Components
         private EventCallback<TValue> CreateCore<TValue>(
             object receiver,
             MulticastDelegate callback
-        ) {
+        )
+        {
             return new EventCallback<TValue>(
                 callback?.Target as IHandleEvent ?? receiver as IHandleEvent,
                 callback

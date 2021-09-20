@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             ISymbol symbol,
             IImmutableSet<Project>? projects,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (symbol.Kind == SymbolKind.Namespace)
             {
                 // namespaces are visible in all projects.
@@ -64,7 +65,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             Solution solution,
             ISymbol symbol,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             var symbolOrigination = GetSymbolOrigination(solution, symbol, cancellationToken);
@@ -101,7 +103,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             Solution solution,
             ISymbol symbol,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var assembly = symbol.OriginalDefinition.ContainingAssembly;
             return assembly == null
               ? default
@@ -115,7 +118,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             (IAssemblySymbol assembly, Project? sourceProject) symbolOrigination,
             SymbolVisibility visibility,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             var dependentProjects = new HashSet<(Project, bool hasInternalsAccess)>();
@@ -152,7 +156,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             Project? sourceProject,
             HashSet<(Project project, bool hasInternalsAccess)> dependentProjects,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (sourceProject?.IsSubmission != true)
                 return;
 
@@ -185,7 +190,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                                     referencedProject.Id,
                                     out var referencingSubmissions
                                 )
-                            ) {
+                            )
+                            {
                                 referencingSubmissions = new List<ProjectId>();
                                 projectIdsToReferencingSubmissionIds.Add(
                                     referencedProject.Id,
@@ -217,7 +223,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                         toProcess,
                         out var submissionIds
                     )
-                ) {
+                )
+                {
                     foreach (var pId in submissionIds)
                     {
                         if (!dependentProjects.Any(dp => dp.project.Id == pId))
@@ -249,7 +256,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             (IAssemblySymbol assembly, Project? sourceProject) symbolOrigination,
             HashSet<(Project project, bool hasInternalsAccess)> dependentProjects,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (symbolOrigination.sourceProject?.IsSubmission == true)
                 return;
 
@@ -260,7 +268,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 if (
                     !project.SupportsCompilation
                     || !HasReferenceTo(symbolOrigination, project, cancellationToken)
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -282,7 +291,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     typeNameConstant.Type == null
                     || typeNameConstant.Type.SpecialType != SpecialType.System_String
                     || !(typeNameConstant.Value is string value)
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -299,7 +309,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             (IAssemblySymbol assembly, Project? sourceProject) symbolOrigination,
             Project project,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(symbolOrigination.assembly);
             Contract.ThrowIfNull(project);
             Contract.ThrowIfFalse(project.SupportsCompilation);
@@ -322,7 +333,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             Project project,
             string assemblyName,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfFalse(project.SupportsCompilation);
 
             if (!project.TryGetCompilation(out var compilation))
@@ -344,7 +356,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 if (
                     compilation.GetAssemblyOrModuleSymbol(reference) is IAssemblySymbol symbol
                     && symbol.Name == assemblyName
-                ) {
+                )
+                {
                     return true;
                 }
             }

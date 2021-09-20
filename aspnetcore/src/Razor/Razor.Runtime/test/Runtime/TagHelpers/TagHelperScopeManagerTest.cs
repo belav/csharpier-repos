@@ -247,7 +247,8 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
             TagHelperScopeManager scopeManager,
             string tagName,
             TagMode tagMode = TagMode.StartTagAndEndTag
-        ) {
+        )
+        {
             return scopeManager.Begin(
                 tagName,
                 tagMode,

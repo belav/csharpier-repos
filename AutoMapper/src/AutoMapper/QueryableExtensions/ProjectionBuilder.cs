@@ -69,7 +69,8 @@ namespace AutoMapper.QueryableExtensions.Impl
         public ProjectionBuilder(
             IGlobalConfiguration configurationProvider,
             IProjectionMapper[] projectionMappers
-        ) {
+        )
+        {
             _configurationProvider = configurationProvider;
             _projectionMappers = projectionMappers;
             _projectionCache = new LockingConcurrentDictionary<ProjectionRequest, QueryExpressions>(
@@ -81,7 +82,8 @@ namespace AutoMapper.QueryableExtensions.Impl
             Type destinationType,
             object parameters,
             MemberPath[] membersToExpand
-        ) {
+        )
+        {
             var projectionRequest = new ProjectionRequest(
                 sourceType,
                 destinationType,
@@ -110,7 +112,8 @@ namespace AutoMapper.QueryableExtensions.Impl
         public QueryExpressions CreateProjection(
             in ProjectionRequest request,
             LetPropertyMaps letPropertyMaps
-        ) {
+        )
+        {
             var instanceParameter = Parameter(request.SourceType, "dto" + request.SourceType.Name);
             var projection = CreateProjectionCore(
                 request,
@@ -138,7 +141,8 @@ namespace AutoMapper.QueryableExtensions.Impl
             Expression instanceParameter,
             LetPropertyMaps letPropertyMaps,
             out TypeMap typeMap
-        ) {
+        )
+        {
             typeMap =
                 _configurationProvider.ResolveTypeMap(request.SourceType, request.DestinationType)
                 ?? throw QueryMapperHelper.MissingMapException(
@@ -152,7 +156,8 @@ namespace AutoMapper.QueryableExtensions.Impl
             Expression instanceParameter,
             TypeMap typeMap,
             LetPropertyMaps letPropertyMaps
-        ) {
+        )
+        {
             if (typeMap.CustomMapExpression != null)
             {
                 return typeMap.CustomMapExpression.ReplaceParameters(instanceParameter);
@@ -185,7 +190,8 @@ namespace AutoMapper.QueryableExtensions.Impl
                             pm => pm.CanResolveValue && pm.DestinationMember.CanBeSet()
                         )
                         .OrderBy(pm => pm.DestinationName)
-                ) {
+                )
+                {
                     var propertyProjection = TryProjectMember(
                         propertyMap,
                         propertyMap.ExplicitExpansion
@@ -225,7 +231,8 @@ namespace AutoMapper.QueryableExtensions.Impl
                     if (
                         memberRequest.AlreadyExists
                         && depth >= _configurationProvider.RecursiveQueriesMaxDepth
-                    ) {
+                    )
+                    {
                         return null;
                     }
                     var projectionMapper = GetProjectionMapper();
@@ -262,7 +269,8 @@ namespace AutoMapper.QueryableExtensions.Impl
                                 memberTypeMap == null
                                 || mapFrom.IsMemberPath(out _)
                                 || mapFrom.Body is ParameterExpression
-                            ) {
+                            )
+                            {
                                 return mapFrom.ReplaceParameters(CheckCustomSource());
                             }
                             if (customSource == null)
@@ -373,7 +381,8 @@ namespace AutoMapper.QueryableExtensions.Impl
                 TypeMap typeMap,
                 in ProjectionRequest request,
                 ParameterExpression instanceParameter
-            ) {
+            )
+            {
                 var letMapInfos = _savedPaths.Select(
                         path =>
                             new
@@ -478,7 +487,8 @@ namespace AutoMapper.QueryableExtensions.Impl
                 public static IEnumerable<PropertyDescription> Retrieve(
                     Expression expression,
                     Expression target
-                ) {
+                )
+                {
                     var visitor = new GetMemberAccessesVisitor(target);
                     visitor.Visit(expression);
                     return visitor.Members.Select(
@@ -512,7 +522,8 @@ namespace AutoMapper.QueryableExtensions.Impl
         protected LetPropertyMaps(
             IGlobalConfiguration configurationProvider,
             TypePairCount builtProjections
-        ) {
+        )
+        {
             ConfigurationProvider = configurationProvider;
             BuiltProjections = builtProjections;
         }
@@ -562,7 +573,8 @@ namespace AutoMapper.QueryableExtensions.Impl
         internal QueryExpressions Prepare(
             bool enableNullPropagationForQueryMapping,
             object parameters
-        ) {
+        )
+        {
             return new QueryExpressions(Prepare(Projection), Prepare(LetClause));
             LambdaExpression Prepare(Expression cachedExpression)
             {
@@ -621,7 +633,8 @@ namespace AutoMapper.QueryableExtensions.Impl
                 if (
                     !parameterName.StartsWith(VbPrefix, StringComparison.Ordinal)
                     || (parameterValue = GetValue(parameterName.Substring(VbPrefix.Length))) == null
-                ) {
+                )
+                {
                     return base.VisitMember(node);
                 }
             }
@@ -664,7 +677,8 @@ namespace AutoMapper.QueryableExtensions.Impl
             Type destinationType,
             MemberPath[] membersToExpand,
             ICollection<ProjectionRequest> previousRequests
-        ) {
+        )
+        {
             SourceType = sourceType;
             DestinationType = destinationType;
             MembersToExpand = membersToExpand;

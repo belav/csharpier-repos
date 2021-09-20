@@ -109,7 +109,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
                                 (descriptor.ServiceType, descriptor.ImplementationType),
                                 out var replacementType
                             )
-                        ) {
+                        )
+                        {
                             ((IList<ServiceDescriptor>)updatedServices).Add(
                                 new ServiceDescriptor(
                                     descriptor.ServiceType,
@@ -123,7 +124,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
                                 (descriptor.ServiceType, null),
                                 out replacementType
                             )
-                        ) {
+                        )
+                        {
                             ((IList<ServiceDescriptor>)updatedServices).Add(
                                 new ServiceDescriptor(
                                     descriptor.ServiceType,

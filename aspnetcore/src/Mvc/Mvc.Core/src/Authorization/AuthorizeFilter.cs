@@ -124,7 +124,8 @@ namespace Microsoft.AspNetCore.Mvc.Authorization
 
         internal async Task<AuthorizationPolicy> GetEffectivePolicyAsync(
             AuthorizationFilterContext context
-        ) {
+        )
+        {
             // Combine all authorize filters into single effective policy that's only run on the closest filter
             var builder = new AuthorizationPolicyBuilder(await ComputePolicyAsync());
             for (var i = 0; i < context.Filters.Count; i++)

@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis
             this SemanticModel semanticModel,
             SyntaxNode node,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return semanticModel.GetSymbolInfo(node, cancellationToken);
         }
 
@@ -48,7 +49,8 @@ namespace Microsoft.CodeAnalysis
             int position,
             SyntaxNode expression,
             SpeculativeBindingOption bindingOption
-        ) {
+        )
+        {
             return semanticModel.GetSpeculativeSymbolInfo(position, expression, bindingOption);
         }
 
@@ -63,7 +65,8 @@ namespace Microsoft.CodeAnalysis
             this SemanticModel semanticModel,
             SyntaxNode node,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return semanticModel.GetTypeInfo(node, cancellationToken);
         }
 
@@ -79,7 +82,8 @@ namespace Microsoft.CodeAnalysis
             this SemanticModel semanticModel,
             SyntaxNode nameSyntax,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return semanticModel.GetAliasInfo(nameSyntax, cancellationToken);
         }
 
@@ -105,7 +109,8 @@ namespace Microsoft.CodeAnalysis
             int position,
             SyntaxNode nameSyntax,
             SpeculativeBindingOption bindingOption
-        ) {
+        )
+        {
             return semanticModel.GetSpeculativeAliasInfo(position, nameSyntax, bindingOption);
         }
 
@@ -133,7 +138,8 @@ namespace Microsoft.CodeAnalysis
             int position,
             SyntaxNode expression,
             SpeculativeBindingOption bindingOption
-        ) {
+        )
+        {
             return semanticModel.GetSpeculativeTypeInfo(position, expression, bindingOption);
         }
 
@@ -151,7 +157,8 @@ namespace Microsoft.CodeAnalysis
             this SemanticModel semanticModel,
             SyntaxNode declaration,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return semanticModel.GetDeclaredSymbolForNode(declaration, cancellationToken);
         }
 
@@ -165,7 +172,8 @@ namespace Microsoft.CodeAnalysis
             this SemanticModel semanticModel,
             SyntaxNode node,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return semanticModel.GetMemberGroup(node, cancellationToken);
         }
 
@@ -176,7 +184,8 @@ namespace Microsoft.CodeAnalysis
             this SemanticModel semanticModel,
             SyntaxNode firstStatement,
             SyntaxNode lastStatement
-        ) {
+        )
+        {
             return semanticModel.AnalyzeControlFlow(firstStatement, lastStatement);
         }
 
@@ -186,7 +195,8 @@ namespace Microsoft.CodeAnalysis
         public static ControlFlowAnalysis AnalyzeControlFlow(
             this SemanticModel semanticModel,
             SyntaxNode statement
-        ) {
+        )
+        {
             return semanticModel.AnalyzeControlFlow(statement);
         }
 
@@ -197,7 +207,8 @@ namespace Microsoft.CodeAnalysis
             this SemanticModel semanticModel,
             SyntaxNode firstStatement,
             SyntaxNode lastStatement
-        ) {
+        )
+        {
             return semanticModel.AnalyzeDataFlow(firstStatement, lastStatement);
         }
 
@@ -207,7 +218,8 @@ namespace Microsoft.CodeAnalysis
         public static DataFlowAnalysis AnalyzeDataFlow(
             this SemanticModel semanticModel,
             SyntaxNode statementOrExpression
-        ) {
+        )
+        {
             return semanticModel.AnalyzeDataFlow(statementOrExpression);
         }
     }

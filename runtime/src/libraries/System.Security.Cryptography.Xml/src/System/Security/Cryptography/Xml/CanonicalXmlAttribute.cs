@@ -32,7 +32,8 @@ namespace System.Security.Cryptography.Xml
             StringBuilder strBuilder,
             DocPosition docPos,
             AncestralNamespaceContextManager anc
-        ) {
+        )
+        {
             strBuilder.Append(" " + Name + "=\"");
             strBuilder.Append(Utils.EscapeAttributeValue(Value));
             strBuilder.Append('"');
@@ -42,7 +43,8 @@ namespace System.Security.Cryptography.Xml
             HashAlgorithm hash,
             DocPosition docPos,
             AncestralNamespaceContextManager anc
-        ) {
+        )
+        {
             UTF8Encoding utf8 = new UTF8Encoding(false);
             byte[] rgbData = utf8.GetBytes(" " + Name + "=\"");
             hash.TransformBlock(rgbData, 0, rgbData.Length, rgbData, 0);

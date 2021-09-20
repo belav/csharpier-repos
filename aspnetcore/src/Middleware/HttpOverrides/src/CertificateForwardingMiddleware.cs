@@ -30,7 +30,8 @@ namespace Microsoft.AspNetCore.HttpOverrides
             RequestDelegate next,
             ILoggerFactory loggerFactory,
             IOptions<CertificateForwardingOptions> options
-        ) {
+        )
+        {
             _next = next ?? throw new ArgumentNullException(nameof(next));
 
             if (loggerFactory == null)

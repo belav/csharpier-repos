@@ -42,7 +42,8 @@ namespace System.Text.Encodings.Web.Tests
                     || i == '+'
                     || i == '\''
                     || i == '`'
-                ) {
+                )
+                {
                     string input = new string((char)i, 1);
                     Assert.NotEqual(controlEncoder.Encode(input), testEncoder.Encode(input));
                     continue;
@@ -76,7 +77,8 @@ namespace System.Text.Encodings.Web.Tests
         public void JavaScriptEncode_Relaxed_StillEncodesForbiddenChars_Simple(
             string input,
             string expected
-        ) {
+        )
+        {
             // Arrange
             JavaScriptEncoder encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
 
@@ -315,7 +317,8 @@ namespace System.Text.Encodings.Web.Tests
         public void JavaScriptEncode_DoesOutputHtmlSensitiveCharacters_Relaxed(
             string input,
             string expected
-        ) {
+        )
+        {
             // Arrange
             JavaScriptEncoder encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
 

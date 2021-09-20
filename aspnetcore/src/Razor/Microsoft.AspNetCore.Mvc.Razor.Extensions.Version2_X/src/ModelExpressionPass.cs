@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
         protected override void ExecuteCore(
             RazorCodeDocument codeDocument,
             DocumentIntermediateNode documentNode
-        ) {
+        )
+        {
             var visitor = new Visitor();
             visitor.Visit(documentNode);
         }
@@ -43,7 +44,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
                             StringComparison.Ordinal
                         )
                     )
-                ) {
+                )
+                {
                     var expression = new CSharpExpressionIntermediateNode();
 
                     expression.Children.Add(
@@ -59,7 +61,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
                         node.Children.Count == 1
                         && node.Children[0] is IntermediateToken token
                         && token.IsCSharp
-                    ) {
+                    )
+                    {
                         // A 'simple' expression will look like __model => __model.Foo
 
                         expression.Children.Add(
@@ -79,14 +82,16 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
                             if (
                                 node.Children[i]
                                 is CSharpExpressionIntermediateNode nestedExpression
-                            ) {
+                            )
+                            {
                                 for (var j = 0; j < nestedExpression.Children.Count; j++)
                                 {
                                     if (
                                         nestedExpression.Children[j]
                                             is IntermediateToken cSharpToken
                                         && cSharpToken.IsCSharp
-                                    ) {
+                                    )
+                                    {
                                         expression.Children.Add(cSharpToken);
                                     }
                                 }

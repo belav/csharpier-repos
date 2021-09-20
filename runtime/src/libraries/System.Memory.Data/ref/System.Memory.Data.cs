@@ -35,7 +35,8 @@ namespace System
         public static System.BinaryData FromObjectAsJson<T>(
             T jsonSerializable,
             System.Text.Json.JsonSerializerOptions? options = null
-        ) {
+        )
+        {
             throw null;
         }
         public static System.BinaryData FromStream(System.IO.Stream stream)
@@ -46,7 +47,8 @@ namespace System
             System.IO.Stream stream,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public static System.BinaryData FromString(string data)

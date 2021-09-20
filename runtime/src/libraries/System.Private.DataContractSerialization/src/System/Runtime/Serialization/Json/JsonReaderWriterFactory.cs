@@ -18,14 +18,16 @@ namespace System.Runtime.Serialization.Json
         public static XmlDictionaryReader CreateJsonReader(
             Stream stream,
             XmlDictionaryReaderQuotas quotas
-        ) {
+        )
+        {
             return CreateJsonReader(stream, null, quotas, null);
         }
 
         public static XmlDictionaryReader CreateJsonReader(
             byte[] buffer,
             XmlDictionaryReaderQuotas quotas
-        ) {
+        )
+        {
             if (buffer == null)
             {
                 throw new ArgumentNullException(nameof(buffer));
@@ -39,7 +41,8 @@ namespace System.Runtime.Serialization.Json
             Encoding? encoding,
             XmlDictionaryReaderQuotas quotas,
             OnXmlDictionaryReaderClose? onClose
-        ) {
+        )
+        {
             XmlJsonReader reader = new XmlJsonReader();
             reader.SetInput(stream, encoding, quotas, onClose);
             return reader;
@@ -50,7 +53,8 @@ namespace System.Runtime.Serialization.Json
             int offset,
             int count,
             XmlDictionaryReaderQuotas quotas
-        ) {
+        )
+        {
             return CreateJsonReader(buffer, offset, count, null, quotas, null);
         }
 
@@ -61,7 +65,8 @@ namespace System.Runtime.Serialization.Json
             Encoding? encoding,
             XmlDictionaryReaderQuotas quotas,
             OnXmlDictionaryReaderClose? onClose
-        ) {
+        )
+        {
             XmlJsonReader reader = new XmlJsonReader();
             reader.SetInput(buffer, offset, count, encoding, quotas, onClose);
             return reader;
@@ -81,7 +86,8 @@ namespace System.Runtime.Serialization.Json
             Stream stream,
             Encoding encoding,
             bool ownsStream
-        ) {
+        )
+        {
             return CreateJsonWriter(stream, encoding, ownsStream, false);
         }
 
@@ -90,7 +96,8 @@ namespace System.Runtime.Serialization.Json
             Encoding encoding,
             bool ownsStream,
             bool indent
-        ) {
+        )
+        {
             return CreateJsonWriter(
                 stream,
                 encoding,
@@ -106,7 +113,8 @@ namespace System.Runtime.Serialization.Json
             bool ownsStream,
             bool indent,
             string? indentChars
-        ) {
+        )
+        {
             XmlJsonWriter writer = new XmlJsonWriter(indent, indentChars);
             writer.SetOutput(stream, encoding, ownsStream);
             return writer;

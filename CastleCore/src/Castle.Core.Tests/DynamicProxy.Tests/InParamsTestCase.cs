@@ -104,7 +104,8 @@ namespace Castle.DynamicProxy.Tests
         [TestCase(typeof(IOut))]
         public void Parameter_other_than_by_reference_In_does_not_have_ParameterAttributes_In_set(
             Type type
-        ) {
+        )
+        {
             var parameter = type.GetMethod("Method").GetParameters()[0];
 
             Assert.False(parameter.Attributes.HasFlag(ParameterAttributes.In));
@@ -132,7 +133,8 @@ namespace Castle.DynamicProxy.Tests
         [TestCase(typeof(IOut))]
         public void Parameter_other_than_by_reference_In_does_not_have_IsReadOnlyAttribute(
             Type type
-        ) {
+        )
+        {
             var parameter = type.GetMethod("Method").GetParameters()[0];
 
             Assert.False(

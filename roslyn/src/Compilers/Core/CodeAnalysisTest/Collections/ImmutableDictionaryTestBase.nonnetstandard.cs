@@ -167,7 +167,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
         protected static void AddAscendingTestHelper(
             IImmutableDictionary<int, GenericParameterHelper> map
-        ) {
+        )
+        {
             Assert.NotNull(map);
 
             for (int i = 0; i < 10; i++)
@@ -184,7 +185,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
         protected static void AddDescendingTestHelper(
             IImmutableDictionary<int, GenericParameterHelper> map
-        ) {
+        )
+        {
             for (int i = 10; i > 0; i--)
             {
                 map = AddTestHelper(map, i, new GenericParameterHelper(i));
@@ -199,7 +201,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
         protected static void AddRemoveRandomDataTestHelper(
             IImmutableDictionary<double, GenericParameterHelper> map
-        ) {
+        )
+        {
             Assert.NotNull(map);
 
             double[] inputs = GenerateDummyFillData();
@@ -256,7 +259,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         protected static void ValuesTestHelper<TKey, TValue>(
             IImmutableDictionary<TKey, TValue?> map,
             TKey key
-        ) {
+        )
+        {
             Assert.Equal(0, map.Values.Count());
             Assert.Equal(0, map.ToReadOnlyDictionary().Values.Count());
 
@@ -268,7 +272,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
         protected static void EnumeratorTestHelper(
             IImmutableDictionary<int, GenericParameterHelper> map
-        ) {
+        )
+        {
             for (int i = 0; i < 10; i++)
             {
                 map = AddTestHelper(map, i, new GenericParameterHelper(i));

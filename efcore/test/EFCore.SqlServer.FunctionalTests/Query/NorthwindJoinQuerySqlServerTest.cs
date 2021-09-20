@@ -144,7 +144,8 @@ WHERE [t].[CustomerID] = N'ALFKI'"
 
         public override async Task Join_customers_orders_with_subquery_anonymous_property_method(
             bool async
-        ) {
+        )
+        {
             await base.Join_customers_orders_with_subquery_anonymous_property_method(async);
 
             AssertSql(
@@ -160,7 +161,8 @@ WHERE [t].[CustomerID] = N'ALFKI'"
 
         public override async Task Join_customers_orders_with_subquery_anonymous_property_method_with_take(
             bool async
-        ) {
+        )
+        {
             await base.Join_customers_orders_with_subquery_anonymous_property_method_with_take(
                 async
             );
@@ -197,7 +199,8 @@ WHERE [t].[CustomerID] = N'ALFKI'"
 
         public override async Task Join_customers_orders_with_subquery_predicate_with_take(
             bool async
-        ) {
+        )
+        {
             await base.Join_customers_orders_with_subquery_predicate_with_take(async);
 
             AssertSql(
@@ -479,7 +482,8 @@ ORDER BY [c].[CustomerID]"
 
         public override async Task GroupJoin_SelectMany_subquery_with_filter_and_DefaultIfEmpty(
             bool async
-        ) {
+        )
+        {
             await base.GroupJoin_SelectMany_subquery_with_filter_and_DefaultIfEmpty(async);
 
             AssertSql(
@@ -496,7 +500,8 @@ WHERE [c].[CustomerID] LIKE N'F%'"
 
         public override async Task GroupJoin_SelectMany_subquery_with_filter_orderby_and_DefaultIfEmpty(
             bool async
-        ) {
+        )
+        {
             await base.GroupJoin_SelectMany_subquery_with_filter_orderby_and_DefaultIfEmpty(async);
 
             AssertSql(
@@ -530,7 +535,8 @@ INNER JOIN (
 
         public override async Task Inner_join_with_tautology_predicate_converts_to_cross_join(
             bool async
-        ) {
+        )
+        {
             await base.Inner_join_with_tautology_predicate_converts_to_cross_join(async);
 
             AssertSql(
@@ -553,7 +559,8 @@ ORDER BY [t].[CustomerID]"
 
         public override async Task Left_join_with_tautology_predicate_doesnt_convert_to_cross_join(
             bool async
-        ) {
+        )
+        {
             await base.Left_join_with_tautology_predicate_doesnt_convert_to_cross_join(async);
 
             AssertSql(
@@ -610,7 +617,8 @@ ORDER BY [c].[CustomerID], [t].[OrderID], [o0].[OrderID], [o0].[ProductID]"
 
         public override async Task SelectMany_with_client_eval_with_collection_shaper_ignored(
             bool async
-        ) {
+        )
+        {
             await base.SelectMany_with_client_eval_with_collection_shaper_ignored(async);
 
             AssertSql(
@@ -678,7 +686,8 @@ CROSS APPLY (
 
         public override async Task SelectMany_with_selecting_outer_entity_column_and_inner_column(
             bool async
-        ) {
+        )
+        {
             await base.SelectMany_with_selecting_outer_entity_column_and_inner_column(async);
 
             AssertSql(

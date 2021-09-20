@@ -14,7 +14,8 @@ namespace System.Text.Json.Serialization.Converters
             ref Utf8JsonReader reader,
             Type typeToConvert,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             return JsonElement.ParseValue(ref reader);
         }
 
@@ -22,7 +23,8 @@ namespace System.Text.Json.Serialization.Converters
             Utf8JsonWriter writer,
             object value,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             throw new InvalidOperationException();
         }
 
@@ -40,7 +42,8 @@ namespace System.Text.Json.Serialization.Converters
             object value,
             JsonSerializerOptions options,
             ref WriteStack state
-        ) {
+        )
+        {
             Type runtimeType = value.GetType();
             JsonConverter runtimeConverter = options.GetConverter(runtimeType);
             if (runtimeConverter == this)
@@ -57,7 +60,8 @@ namespace System.Text.Json.Serialization.Converters
         internal override object ReadNumberWithCustomHandling(
             ref Utf8JsonReader reader,
             JsonNumberHandling handling
-        ) {
+        )
+        {
             return JsonElement.ParseValue(ref reader);
         }
     }

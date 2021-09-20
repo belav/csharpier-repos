@@ -142,7 +142,8 @@ namespace JIT.HardwareIntrinsics.X86
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfinArray2
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -229,7 +230,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             public void RunStructFldScenario_Load(
                 SimpleBinaryOpTest__CompareOrderedSingle testClass
-            ) {
+            )
+            {
                 fixed (Vector128<Single>* pFld1 = &_fld1)fixed (Vector128<Single>* pFld2 = &_fld2)
                 {
                     var result = Sse.CompareOrdered(
@@ -446,7 +448,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             fixed (Vector128<Single>* pClsVar1 = &_clsVar1)fixed (
                 Vector128<Single>* pClsVar2 = &_clsVar2
-            ) {
+            )
+            {
                 var result = Sse.CompareOrdered(
                     Sse.LoadVector128((Single*)(pClsVar1)),
                     Sse.LoadVector128((Single*)(pClsVar2))
@@ -512,7 +515,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             fixed (Vector128<Single>* pFld1 = &test._fld1)fixed (
                 Vector128<Single>* pFld2 = &test._fld2
-            ) {
+            )
+            {
                 var result = Sse.CompareOrdered(
                     Sse.LoadVector128((Single*)(pFld1)),
                     Sse.LoadVector128((Single*)(pFld2))
@@ -616,7 +620,8 @@ namespace JIT.HardwareIntrinsics.X86
             Vector128<Single> op2,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Single[] inArray1 = new Single[Op1ElementCount];
             Single[] inArray2 = new Single[Op2ElementCount];
             Single[] outArray = new Single[RetElementCount];
@@ -637,7 +642,8 @@ namespace JIT.HardwareIntrinsics.X86
             void* op2,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Single[] inArray1 = new Single[Op1ElementCount];
             Single[] inArray2 = new Single[Op2ElementCount];
             Single[] outArray = new Single[RetElementCount];
@@ -666,13 +672,15 @@ namespace JIT.HardwareIntrinsics.X86
             Single[] right,
             Single[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (
                 BitConverter.SingleToInt32Bits(result[0])
                 != ((!float.IsNaN(left[0]) && !float.IsNaN(right[0])) ? -1 : 0)
-            ) {
+            )
+            {
                 succeeded = false;
             }
             else
@@ -682,7 +690,8 @@ namespace JIT.HardwareIntrinsics.X86
                     if (
                         BitConverter.SingleToInt32Bits(result[i])
                         != ((!float.IsNaN(left[i]) && !float.IsNaN(right[i])) ? -1 : 0)
-                    ) {
+                    )
+                    {
                         succeeded = false;
                         break;
                     }

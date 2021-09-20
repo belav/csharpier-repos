@@ -41,7 +41,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             AbstractOptionPreviewViewModel info,
             bool isChecked,
             string group
-        ) {
+        )
+        {
             Description = description;
             this.Preview = preview;
             _info = info;

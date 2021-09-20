@@ -1111,7 +1111,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             string tagName = "cache",
             TagHelperAttributeList attributes = null,
             string childContent = "some child content"
-        ) {
+        )
+        {
             attributes = attributes ?? new TagHelperAttributeList { { "attr", "value" } };
 
             return new TagHelperOutput(

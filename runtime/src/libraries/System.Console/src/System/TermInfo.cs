@@ -152,7 +152,8 @@ namespace System
                     || _numberSectionNumInts < 0
                     || _stringSectionNumOffsets < 0
                     || _stringTableNumBytes < 0
-                ) {
+                )
+                {
                     throw new InvalidOperationException(SR.IO_TermInfoInvalid);
                 }
 
@@ -208,7 +209,8 @@ namespace System
                 if (
                     !string.IsNullOrWhiteSpace(terminfo)
                     && (db = ReadDatabase(term, terminfo)) != null
-                ) {
+                )
+                {
                     return db;
                 }
 
@@ -217,7 +219,8 @@ namespace System
                 if (
                     !string.IsNullOrWhiteSpace(home)
                     && (db = ReadDatabase(term, home + "/.terminfo")) != null
-                ) {
+                )
+                {
                     return db;
                 }
 
@@ -399,7 +402,8 @@ namespace System
                 byte[] data,
                 int extendedBeginning,
                 bool readAs32Bit
-            ) {
+            )
+            {
                 const int ExtendedHeaderSize = 10;
                 int sizeOfIntValuesInBytes = (readAs32Bit) ? 4 : 2;
                 if (extendedBeginning + ExtendedHeaderSize >= data.Length)
@@ -420,7 +424,8 @@ namespace System
                     || extendedStringCount < 0
                     || extendedStringNumOffsets < 0
                     || extendedStringTableByteSize < 0
-                ) {
+                )
+                {
                     // The extended header contained invalid data.  Bail.
                     return null;
                 }
@@ -498,7 +503,8 @@ namespace System
                     int iName = extendedBoolCount + extendedNumberCount, iValue = 0;
                     iName < names.Count && iValue < values.Count;
                     iName++, iValue++
-                ) {
+                )
+                {
                     extendedStrings.Add(names[iName], values[iValue]);
                 }
 
@@ -671,7 +677,8 @@ namespace System
                 Stack<FormatParam> stack,
                 ref FormatParam[]? dynamicVars,
                 ref FormatParam[]? staticVars
-            ) {
+            )
+            {
                 // Create a StringBuilder to store the output of this processing.  We use the format's length as an
                 // approximation of an upper-bound for how large the output will be, though with parameter processing,
                 // this is just an estimate, sometimes way over, sometimes under.
@@ -1027,7 +1034,8 @@ namespace System
                 ref FormatParam[]? dynamicVars,
                 ref FormatParam[]? staticVars,
                 out int index
-            ) {
+            )
+            {
                 if (c >= 'A' && c <= 'Z')
                 {
                     index = c - 'A';

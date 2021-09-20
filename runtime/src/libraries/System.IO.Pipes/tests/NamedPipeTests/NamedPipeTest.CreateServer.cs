@@ -111,7 +111,8 @@ namespace System.IO.Pipes.Tests
         [PlatformSpecific(TestPlatforms.Windows)] // "anonymous" only reserved on Windows
         public static void ReservedPipeName_Throws_ArgumentOutOfRangeException(
             PipeDirection direction
-        ) {
+        )
+        {
             const string reservedName = "anonymous";
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "pipeName",
@@ -257,7 +258,8 @@ namespace System.IO.Pipes.Tests
         [InlineData(-2)]
         public static void InvalidServerInstances_Throws_ArgumentOutOfRangeException(
             int numberOfServerInstances
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "maxNumberOfServerInstances",
                 () => new NamedPipeServerStream("temp3", PipeDirection.In, numberOfServerInstances)
@@ -304,7 +306,8 @@ namespace System.IO.Pipes.Tests
         [InlineData(PipeDirection.Out)]
         public static void ServerInstancesOver254_Throws_ArgumentOutOfRangeException(
             PipeDirection direction
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "maxNumberOfServerInstances",
                 () => new NamedPipeServerStream("temp3", direction, 255)
@@ -345,7 +348,8 @@ namespace System.IO.Pipes.Tests
         [InlineData(PipeDirection.Out)]
         public static void InvalidTransmissionMode_Throws_ArgumentOutOfRangeException(
             PipeDirection direction
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "transmissionMode",
                 () => new NamedPipeServerStream("temp1", direction, 1, (PipeTransmissionMode)123)
@@ -382,7 +386,8 @@ namespace System.IO.Pipes.Tests
         [InlineData(PipeDirection.Out)]
         public static void InvalidPipeOptions_Throws_ArgumentOutOfRangeException(
             PipeDirection direction
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "options",
                 () =>
@@ -415,7 +420,8 @@ namespace System.IO.Pipes.Tests
         [InlineData(PipeDirection.Out)]
         public static void InvalidBufferSize_Throws_ArgumentOutOfRangeException(
             PipeDirection direction
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "inBufferSize",
                 () =>
@@ -487,7 +493,8 @@ namespace System.IO.Pipes.Tests
                     8,
                     FileOptions.DeleteOnClose
                 )
-            ) {
+            )
+            {
                 SafeFileHandle safeHandle = fs.SafeFileHandle;
 
                 bool gotRef = false;
@@ -517,7 +524,8 @@ namespace System.IO.Pipes.Tests
         [PlatformSpecific(TestPlatforms.Windows)] // accessing SafePipeHandle on Unix fails for a non-connected stream
         public static void Windows_CreateFromDisposedServerHandle_Throws_ObjectDisposedException(
             PipeDirection direction
-        ) {
+        )
+        {
             // The pipe is closed when we try to make a new Stream with it
             var pipe = new NamedPipeServerStream(
                 PipeStreamConformanceTests.GetUniquePipeName(),
@@ -545,7 +553,8 @@ namespace System.IO.Pipes.Tests
                     1,
                     PipeTransmissionMode.Byte
                 )
-            ) {
+            )
+            {
                 Assert.Throws<InvalidOperationException>(() => pipe.SafePipeHandle);
             }
         }
@@ -557,7 +566,8 @@ namespace System.IO.Pipes.Tests
         [PlatformSpecific(TestPlatforms.Windows)] // accessing SafePipeHandle on Unix fails for a non-connected stream
         public static void Windows_CreateFromAlreadyBoundHandle_Throws_ArgumentException(
             PipeDirection direction
-        ) {
+        )
+        {
             // The pipe is already bound
             using (
                 var pipe = new NamedPipeServerStream(
@@ -567,7 +577,8 @@ namespace System.IO.Pipes.Tests
                     PipeTransmissionMode.Byte,
                     PipeOptions.Asynchronous
                 )
-            ) {
+            )
+            {
                 AssertExtensions.Throws<ArgumentException>(
                     "handle",
                     () => new NamedPipeServerStream(direction, true, true, pipe.SafePipeHandle)
@@ -588,7 +599,8 @@ namespace System.IO.Pipes.Tests
                     PipeTransmissionMode.Byte,
                     PipeOptions.Asynchronous
                 )
-            ) {
+            )
+            {
                 Assert.Throws<IOException>(() => new NamedPipeServerStream(uniqueServerName));
             }
         }
@@ -606,7 +618,8 @@ namespace System.IO.Pipes.Tests
                     PipeTransmissionMode.Byte,
                     PipeOptions.Asynchronous
                 )
-            ) {
+            )
+            {
                 Assert.Throws<UnauthorizedAccessException>(
                     () => new NamedPipeServerStream(uniqueServerName, PipeDirection.Out)
                 );

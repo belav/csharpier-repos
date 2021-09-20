@@ -44,7 +44,8 @@ internal static partial class Interop
             RSAEncryptionPaddingMode paddingMode,
             IntPtr digestAlgorithm,
             Span<byte> destination
-        ) {
+        )
+        {
             int written = CryptoNative_RsaDecrypt(
                 pkey,
                 ref MemoryMarshal.GetReference(source),
@@ -81,7 +82,8 @@ internal static partial class Interop
             IntPtr digestAlgorithm,
             ReadOnlySpan<byte> hash,
             Span<byte> destination
-        ) {
+        )
+        {
             int written = CryptoNative_RsaSignHash(
                 pkey,
                 paddingMode,

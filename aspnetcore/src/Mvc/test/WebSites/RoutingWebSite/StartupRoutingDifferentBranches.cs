@@ -138,7 +138,8 @@ namespace RoutingWebSite
         public override ValueTask<RouteValueDictionary> TransformAsync(
             HttpContext httpContext,
             RouteValueDictionary values
-        ) {
+        )
+        {
             return new ValueTask<RouteValueDictionary>(
                 new RouteValueDictionary(new { controller = "Branches", action = "Index" })
             );

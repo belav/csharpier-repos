@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         protected override void ExecuteCore(
             RazorCodeDocument codeDocument,
             DocumentIntermediateNode documentNode
-        ) {
+        )
+        {
             if (!IsComponentDocument(documentNode))
             {
                 return;
@@ -100,7 +101,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                             (parent, node.AttributeNameWithoutParameter),
                             out var entry
                         )
-                    ) {
+                    )
+                    {
                         // There is no corresponding bind node. Add a diagnostic and move on.
                         parameterReference.Parent.Diagnostics.Add(
                             ComponentDiagnosticFactory.CreateBindAttributeParameter_MissingBind(
@@ -168,7 +170,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 else if (
                     attribute
                     is TagHelperDirectiveAttributeParameterIntermediateNode parameterAttribute
-                ) {
+                )
+                {
                     attributeName = parameterAttribute.AttributeName;
                     tagHelper = parameterAttribute.TagHelper;
                 }
@@ -182,14 +185,16 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                         if (
                             duplicate
                             is TagHelperDirectiveAttributeIntermediateNode duplicateDirectiveAttribute
-                        ) {
+                        )
+                        {
                             duplicateAttributeName = duplicateDirectiveAttribute.AttributeName;
                             duplicateTagHelper = duplicateDirectiveAttribute.TagHelper;
                         }
                         else if (
                             duplicate
                             is TagHelperDirectiveAttributeParameterIntermediateNode duplicateParameterAttribute
-                        ) {
+                        )
+                        {
                             duplicateAttributeName = duplicateParameterAttribute.AttributeName;
                             duplicateTagHelper = duplicateParameterAttribute.TagHelper;
                         }
@@ -199,7 +204,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                             && duplicateTagHelper.IsBindTagHelper()
                             && duplicateAttributeName == attributeName
                             && !object.ReferenceEquals(attribute, duplicate)
-                        ) {
+                        )
+                        {
                             // Found a duplicate - remove the 'fallback' in favor of the
                             // more specific tag helper.
                             node.Children.RemoveAt(i);
@@ -215,7 +221,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                     attribute != null
                     && tagHelper != null
                     && tagHelper.IsInputElementFallbackBindTagHelper()
-                ) {
+                )
+                {
                     for (var j = 0; j < node.Children.Count; j++)
                     {
                         TagHelperDescriptor duplicateTagHelper = null;
@@ -224,14 +231,16 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                         if (
                             duplicate
                             is TagHelperDirectiveAttributeIntermediateNode duplicateDirectiveAttribute
-                        ) {
+                        )
+                        {
                             duplicateAttributeName = duplicateDirectiveAttribute.AttributeName;
                             duplicateTagHelper = duplicateDirectiveAttribute.TagHelper;
                         }
                         else if (
                             duplicate
                             is TagHelperDirectiveAttributeParameterIntermediateNode duplicateParameterAttribute
-                        ) {
+                        )
+                        {
                             duplicateAttributeName = duplicateParameterAttribute.AttributeName;
                             duplicateTagHelper = duplicateParameterAttribute.TagHelper;
                         }
@@ -241,7 +250,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                             && duplicateTagHelper.IsInputElementBindTagHelper()
                             && duplicateAttributeName == attributeName
                             && !object.ReferenceEquals(attribute, duplicate)
-                        ) {
+                        )
+                        {
                             // Found a duplicate - remove the 'fallback' input tag helper in favor of the
                             // more specific tag helper.
                             node.Children.RemoveAt(i);
@@ -309,7 +319,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                     out var changeAttribute,
                     out var expressionAttribute
                 )
-            ) {
+            )
+            {
                 // Skip anything we can't understand. It's important that we don't crash, that will bring down
                 // the build.
                 node.Diagnostics.Add(
@@ -375,7 +386,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 parent is ComponentIntermediateNode
                 && changeAttribute != null
                 && changeAttribute.IsDelegateProperty()
-            ) {
+            )
+            {
                 RewriteNodesForComponentDelegateBind(
                     original,
                     valueExpressionTokens,
@@ -564,7 +576,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             out BoundAttributeDescriptor valueAttribute,
             out BoundAttributeDescriptor changeAttribute,
             out BoundAttributeDescriptor expressionAttribute
-        ) {
+        )
+        {
             valueAttributeName = null;
             changeAttributeName = null;
             expressionAttributeName = null;
@@ -664,7 +677,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             static bool TryExtractEventNodeStaticText(
                 TagHelperDirectiveAttributeParameterIntermediateNode node,
                 out string text
-            ) {
+            )
+            {
                 if (node.Children[0] is HtmlContentIntermediateNode html)
                 {
                     text = GetAttributeContent(html).Content;
@@ -677,7 +691,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
 
             static CSharpExpressionIntermediateNode ExtractEventNodeExpression(
                 TagHelperDirectiveAttributeParameterIntermediateNode node
-            ) {
+            )
+            {
                 if (node.Children[0] is CSharpExpressionIntermediateNode expression)
                 {
                     return expression;
@@ -691,7 +706,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             IntermediateToken original,
             List<IntermediateToken> valueExpressionTokens,
             List<IntermediateToken> changeExpressionTokens
-        ) {
+        )
+        {
             // For a component using @bind we want to:
             //  - use the value as-is
             //  - create a delegate to handle changes
@@ -714,7 +730,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             IntermediateToken original,
             List<IntermediateToken> valueExpressionTokens,
             List<IntermediateToken> changeExpressionTokens
-        ) {
+        )
+        {
             // For a component using @bind we want to:
             //  - use the value as-is
             //  - create a delegate to handle changes
@@ -736,7 +753,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             IntermediateToken culture,
             List<IntermediateToken> valueExpressionTokens,
             List<IntermediateToken> changeExpressionTokens
-        ) {
+        )
+        {
             // This is bind on a markup element. We use FormatValue to transform the value in the correct way
             // according to format and culture.
             //

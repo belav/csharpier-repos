@@ -90,7 +90,8 @@ namespace Microsoft.AspNetCore.Http
             int sourcePort,
             string expectedHost,
             int expectedPort
-        ) {
+        )
+        {
             // Arrange
             var hostString = new HostString(sourceHost, sourcePort);
 

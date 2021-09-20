@@ -138,7 +138,8 @@ namespace System.IO.Pipelines.Tests
             int bufferSize,
             int minimumReadSize,
             int[] readBufferSizes
-        ) {
+        )
+        {
             var options = new StreamPipeReaderOptions(
                 bufferSize: bufferSize,
                 minimumReadSize: minimumReadSize,
@@ -691,7 +692,8 @@ namespace System.IO.Pipelines.Tests
             int bufferSize,
             int minimumReadSize,
             int[] readSizes
-        ) {
+        )
+        {
             return new object[] { bytesInBuffer, bufferSize, minimumReadSize, readSizes };
         }
 
@@ -707,14 +709,16 @@ namespace System.IO.Pipelines.Tests
                 int offset,
                 int count,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 throw new OperationCanceledException();
             }
 #if NETCOREAPP
             public override ValueTask<int> ReadAsync(
                 Memory<byte> buffer,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 throw new OperationCanceledException();
             }
 #endif
@@ -732,7 +736,8 @@ namespace System.IO.Pipelines.Tests
                 int offset,
                 int count,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (_throwOnNextCallToRead)
                 {
                     throw new Exception();
@@ -749,7 +754,8 @@ namespace System.IO.Pipelines.Tests
             public override async ValueTask<int> ReadAsync(
                 Memory<byte> destination,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 if (_throwOnNextCallToRead)
                 {
                     throw new Exception();

@@ -13,7 +13,8 @@ namespace Templates.Test.Helpers
             string certificatePath,
             string certificatePassword,
             string certificateThumbprint
-        ) {
+        )
+        {
             CertificatePath = certificatePath;
             CertificatePassword = certificatePassword;
             CertificateThumbprint = certificateThumbprint;
@@ -42,7 +43,8 @@ namespace Templates.Test.Helpers
         private static string EnsureDevelopmentCertificates(
             string certificatePath,
             string certificatePassword
-        ) {
+        )
+        {
             var now = DateTimeOffset.Now;
             var manager = CertificateManager.Instance;
             var certificate = manager.CreateAspNetCoreHttpsDevelopmentCertificate(

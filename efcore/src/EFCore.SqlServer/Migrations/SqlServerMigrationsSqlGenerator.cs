@@ -59,7 +59,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             IReadOnlyList<MigrationOperation> operations,
             IModel? model = null,
             MigrationsSqlGenerationOptions options = MigrationsSqlGenerationOptions.Default
-        ) {
+        )
+        {
             _operations = operations;
             try
             {
@@ -91,7 +92,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             MigrationOperation operation,
             IModel? model,
             MigrationCommandListBuilder builder
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
@@ -129,7 +131,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             IModel? model,
             MigrationCommandListBuilder builder,
             bool terminate
-        ) {
+        )
+        {
             if (!terminate && operation.Comment != null)
             {
                 throw new ArgumentException(
@@ -206,7 +209,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             IModel? model,
             MigrationCommandListBuilder builder,
             bool terminate = true
-        ) {
+        )
+        {
             base.Generate(operation, model, builder, terminate: false);
 
             if (terminate)
@@ -236,7 +240,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             IModel? model,
             MigrationCommandListBuilder builder,
             bool terminate = true
-        ) {
+        )
+        {
             base.Generate(operation, model, builder, terminate: false);
 
             if (terminate)
@@ -264,7 +269,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             AlterColumnOperation operation,
             IModel? model,
             MigrationCommandListBuilder builder
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
@@ -392,7 +398,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                 alterStatementNeeded
                 || !Equals(operation.DefaultValue, oldDefaultValue)
                 || operation.DefaultValueSql != oldDefaultValueSql
-            ) {
+            )
+            {
                 DropDefaultConstraint(operation.Schema, operation.Table, operation.Name, builder);
                 (oldDefaultValue, oldDefaultValueSql) = (null, null);
             }
@@ -451,7 +458,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             if (
                 !Equals(operation.DefaultValue, oldDefaultValue)
                 || operation.DefaultValueSql != oldDefaultValueSql
-            ) {
+            )
+            {
                 builder.Append("ALTER TABLE ")
                     .Append(
                         Dependencies.SqlGenerationHelper.DelimitIdentifier(
@@ -518,7 +526,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             RenameIndexOperation operation,
             IModel? model,
             MigrationCommandListBuilder builder
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
@@ -559,7 +568,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             RenameSequenceOperation operation,
             IModel? model,
             MigrationCommandListBuilder builder
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
@@ -581,7 +591,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             if (
                 operation.NewSchema != operation.Schema
                 && (operation.NewSchema != null || !HasLegacyRenameOperations(model))
-            ) {
+            )
+            {
                 Transfer(operation.NewSchema, operation.Schema, name, builder);
             }
 
@@ -599,7 +610,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             RestartSequenceOperation operation,
             IModel? model,
             MigrationCommandListBuilder builder
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
@@ -630,7 +642,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             IModel? model,
             MigrationCommandListBuilder builder,
             bool terminate = true
-        ) {
+        )
+        {
             if (!terminate && operation.Comment != null)
             {
                 throw new ArgumentException(
@@ -694,7 +707,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             RenameTableOperation operation,
             IModel? model,
             MigrationCommandListBuilder builder
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
@@ -716,7 +730,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             if (
                 operation.NewSchema != operation.Schema
                 && (operation.NewSchema != null || !HasLegacyRenameOperations(model))
-            ) {
+            )
+            {
                 Transfer(operation.NewSchema, operation.Schema, name, builder);
             }
 
@@ -736,7 +751,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             IModel? model,
             MigrationCommandListBuilder builder,
             bool terminate = true
-        ) {
+        )
+        {
             base.Generate(operation, model, builder, terminate: false);
 
             if (terminate)
@@ -766,7 +782,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             IModel? model,
             MigrationCommandListBuilder builder,
             bool terminate = true
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
@@ -850,7 +867,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             IModel? model,
             MigrationCommandListBuilder builder,
             bool terminate = true
-        ) {
+        )
+        {
             base.Generate(operation, model, builder, terminate: false);
 
             if (terminate)
@@ -878,7 +896,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             EnsureSchemaOperation operation,
             IModel? model,
             MigrationCommandListBuilder builder
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
@@ -915,7 +934,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             CreateSequenceOperation operation,
             IModel? model,
             MigrationCommandListBuilder builder
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
@@ -954,7 +974,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             SqlServerCreateDatabaseOperation operation,
             IModel? model,
             MigrationCommandListBuilder builder
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
@@ -1043,7 +1064,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             SqlServerDropDatabaseOperation operation,
             IModel? model,
             MigrationCommandListBuilder builder
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
@@ -1077,7 +1099,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             AlterDatabaseOperation operation,
             IModel? model,
             MigrationCommandListBuilder builder
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
@@ -1217,7 +1240,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             AlterTableOperation operation,
             IModel? model,
             MigrationCommandListBuilder builder
-        ) {
+        )
+        {
             if (IsMemoryOptimized(operation) ^ IsMemoryOptimized(operation.OldTable))
             {
                 throw new InvalidOperationException(SqlServerStrings.AlterMemoryOptimizedTable);
@@ -1266,7 +1290,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             IModel? model,
             MigrationCommandListBuilder builder,
             bool terminate = true
-        ) {
+        )
+        {
             base.Generate(operation, model, builder, terminate: false);
 
             if (terminate)
@@ -1296,7 +1321,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             IModel? model,
             MigrationCommandListBuilder builder,
             bool terminate
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
@@ -1356,7 +1382,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             IModel? model,
             MigrationCommandListBuilder builder,
             bool terminate = true
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
@@ -1388,7 +1415,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             RenameColumnOperation operation,
             IModel? model,
             MigrationCommandListBuilder builder
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
@@ -1417,7 +1445,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             SqlOperation operation,
             IModel? model,
             MigrationCommandListBuilder builder
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
@@ -1438,7 +1467,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                 if (
                     batches[i].StartsWith("GO", StringComparison.OrdinalIgnoreCase)
                     || string.IsNullOrWhiteSpace(batches[i])
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -1446,7 +1476,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                 if (
                     i != batches.Length - 1
                     && batches[i + 1].StartsWith("GO", StringComparison.OrdinalIgnoreCase)
-                ) {
+                )
+                {
                     var match = Regex.Match(
                         batches[i + 1],
                         "([0-9]+)",
@@ -1486,7 +1517,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             IModel? model,
             MigrationCommandListBuilder builder,
             bool terminate = true
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
@@ -1525,7 +1557,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             MigrationCommandListBuilder builder,
             InsertDataOperation operation,
             bool on
-        ) {
+        )
+        {
             var stringTypeMapping = Dependencies.TypeMappingSource.GetMapping(typeof(string));
 
             builder.Append("IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE")
@@ -1589,7 +1622,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             SequenceOperation operation,
             IModel? model,
             MigrationCommandListBuilder builder
-        ) {
+        )
+        {
             Check.NotEmpty(name, nameof(name));
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
@@ -1633,7 +1667,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             ColumnOperation operation,
             IModel? model,
             MigrationCommandListBuilder builder
-        ) {
+        )
+        {
             Check.NotEmpty(name, nameof(name));
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
@@ -1671,7 +1706,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                 || operation[SqlServerAnnotationNames.ValueGenerationStrategy]
                     as SqlServerValueGenerationStrategy?
                     == SqlServerValueGenerationStrategy.IdentityColumn
-            ) {
+            )
+            {
                 builder.Append(" IDENTITY");
 
                 if (!string.IsNullOrEmpty(identity) && identity != "1, 1")
@@ -1697,7 +1733,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             ColumnOperation operation,
             IModel? model,
             MigrationCommandListBuilder builder
-        ) {
+        )
+        {
             Check.NotEmpty(name, nameof(name));
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
@@ -1747,7 +1784,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string newName,
             string? type,
             MigrationCommandListBuilder builder
-        ) {
+        )
+        {
             Check.NotEmpty(name, nameof(name));
             Check.NotEmpty(newName, nameof(newName));
             Check.NotNull(builder, nameof(builder));
@@ -1779,7 +1817,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string? schema,
             string name,
             MigrationCommandListBuilder builder
-        ) {
+        )
+        {
             Check.NotEmpty(name, nameof(name));
             Check.NotNull(builder, nameof(builder));
 
@@ -1820,7 +1859,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             MigrationOperation operation,
             IModel? model,
             MigrationCommandListBuilder builder
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
@@ -1841,11 +1881,13 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             CreateIndexOperation operation,
             IModel? model,
             MigrationCommandListBuilder builder
-        ) {
+        )
+        {
             if (
                 operation[SqlServerAnnotationNames.Include] is IReadOnlyList<string> includeColumns
                 && includeColumns.Count > 0
-            ) {
+            )
+            {
                 builder.Append(" INCLUDE (");
                 for (var i = 0; i < includeColumns.Count; i++)
                 {
@@ -1896,7 +1938,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         private void IndexWithOptions(
             CreateIndexOperation operation,
             MigrationCommandListBuilder builder
-        ) {
+        )
+        {
             var options = new List<string>();
 
             if (operation[SqlServerAnnotationNames.FillFactor] is int fillFactor)
@@ -1923,7 +1966,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         protected override void ForeignKeyAction(
             ReferentialAction referentialAction,
             MigrationCommandListBuilder builder
-        ) {
+        )
+        {
             Check.NotNull(builder, nameof(builder));
 
             if (referentialAction == ReferentialAction.Restrict)
@@ -1948,7 +1992,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string tableName,
             string columnName,
             MigrationCommandListBuilder builder
-        ) {
+        )
+        {
             Check.NotEmpty(tableName, nameof(tableName));
             Check.NotEmpty(columnName, nameof(columnName));
             Check.NotNull(builder, nameof(builder));
@@ -2003,7 +2048,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         protected virtual IEnumerable<ITableIndex> GetIndexesToRebuild(
             IColumn? column,
             MigrationOperation currentOperation
-        ) {
+        )
+        {
             Check.NotNull(currentOperation, nameof(currentOperation));
 
             if (column == null)
@@ -2032,7 +2078,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                 else if (
                     index[SqlServerAnnotationNames.Include] is IReadOnlyList<string> includeColumns
                     && includeColumns.Contains(column.Name)
-                ) {
+                )
+                {
                     yield return index;
                 }
             }
@@ -2046,7 +2093,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         protected virtual void DropIndexes(
             IEnumerable<ITableIndex> indexes,
             MigrationCommandListBuilder builder
-        ) {
+        )
+        {
             Check.NotNull(indexes, nameof(indexes));
             Check.NotNull(builder, nameof(builder));
 
@@ -2074,7 +2122,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         protected virtual void CreateIndexes(
             IEnumerable<ITableIndex> indexes,
             MigrationCommandListBuilder builder
-        ) {
+        )
+        {
             Check.NotNull(indexes, nameof(indexes));
             Check.NotNull(builder, nameof(builder));
 
@@ -2110,7 +2159,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string table,
             string? column = null,
             bool omitVariableDeclarations = false
-        ) {
+        )
+        {
             var stringTypeMapping = Dependencies.TypeMappingSource.GetMapping(typeof(string));
 
             string schemaLiteral;
@@ -2175,7 +2225,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string table,
             string? column = null,
             bool omitVariableDeclarations = false
-        ) {
+        )
+        {
             var stringTypeMapping = Dependencies.TypeMappingSource.GetMapping(typeof(string));
 
             string schemaLiteral;
@@ -2275,7 +2326,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         private void GenerateExecWhenIdempotent(
             MigrationCommandListBuilder builder,
             Action<MigrationCommandListBuilder> generate
-        ) {
+        )
+        {
             if (Options.HasFlag(MigrationsSqlGenerationOptions.Idempotent))
             {
                 var subBuilder = new MigrationCommandListBuilder(Dependencies);
@@ -2297,7 +2349,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         private static bool HasDifferences(
             IEnumerable<IAnnotation> source,
             IEnumerable<IAnnotation> target
-        ) {
+        )
+        {
             var targetAnnotations = target.ToDictionary(a => a.Name);
 
             var count = 0;
@@ -2306,7 +2359,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                 if (
                     !targetAnnotations.TryGetValue(sourceAnnotation.Name, out var targetAnnotation)
                     || !Equals(sourceAnnotation.Value, targetAnnotation.Value)
-                ) {
+                )
+                {
                     return true;
                 }
 

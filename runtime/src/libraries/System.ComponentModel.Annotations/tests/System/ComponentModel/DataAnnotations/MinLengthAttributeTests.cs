@@ -134,7 +134,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         public void Validate_ICollection_NetFx_ThrowsInvalidCastException(
             MinLengthAttribute attribute,
             object value
-        ) {
+        )
+        {
             Assert.Throws<InvalidCastException>(
                 () => attribute.Validate(value, new ValidationContext(new object()))
             );

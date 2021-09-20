@@ -44,7 +44,8 @@ namespace Microsoft.AspNetCore.SignalR
         private bool TryGetConverter(
             string streamId,
             [NotNullWhen(true)] out IStreamConverter? converter
-        ) {
+        )
+        {
             if (_lookup.TryGetValue(streamId, out converter))
             {
                 return true;

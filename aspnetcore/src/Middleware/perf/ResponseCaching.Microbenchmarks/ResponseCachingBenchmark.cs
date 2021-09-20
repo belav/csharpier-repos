@@ -137,7 +137,8 @@ namespace Microsoft.AspNetCore.WebSockets.Microbenchmarks
                 long offset,
                 long? count,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 

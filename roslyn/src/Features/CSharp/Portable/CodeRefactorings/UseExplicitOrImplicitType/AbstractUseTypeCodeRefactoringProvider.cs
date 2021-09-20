@@ -149,7 +149,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.UseType
                         && !syntaxFacts.IsExpressionOfForeach(typeNode)
                     )
                 )
-            ) {
+            )
+            {
                 return typeNodeParent;
             }
 
@@ -160,7 +161,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.UseType
             Document document,
             TypeSyntax type,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             var editor = new SyntaxEditor(root, document.Project.Solution.Workspace);
 

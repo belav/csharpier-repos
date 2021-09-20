@@ -28,7 +28,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             object defaults = null,
             object requiredValues = null,
             object policies = null
-        ) {
+        )
+        {
             return EndpointFactory.CreateRouteEndpoint(
                 template,
                 defaults,
@@ -44,7 +45,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             MatcherPolicy[] policies = null,
             EndpointSelector endpointSelector = null,
             ILoggerFactory loggerFactory = null
-        ) {
+        )
+        {
             var serviceCollection = new ServiceCollection().AddLogging()
                 .AddOptions()
                 .AddRouting(

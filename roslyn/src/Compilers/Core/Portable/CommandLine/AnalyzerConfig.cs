@@ -136,7 +136,8 @@ namespace Microsoft.CodeAnalysis
                 if (
                     GlobalSection.Properties.TryGetValue(GlobalLevelKey, out string? val)
                     && int.TryParse(val, out int level)
-                ) {
+                )
+                {
                     return level;
                 }
                 else if (_hasGlobalFileName)
@@ -156,7 +157,8 @@ namespace Microsoft.CodeAnalysis
             Section globalSection,
             ImmutableArray<Section> namedSections,
             string pathToFile
-        ) {
+        )
+        {
             GlobalSection = globalSection;
             NamedSections = namedSections;
             PathToFile = pathToFile;
@@ -187,7 +189,8 @@ namespace Microsoft.CodeAnalysis
                 pathToFile is null
                 || !Path.IsPathRooted(pathToFile)
                 || string.IsNullOrEmpty(Path.GetFileName(pathToFile))
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     "Must be an absolute path to an editorconfig file",
                     nameof(pathToFile)

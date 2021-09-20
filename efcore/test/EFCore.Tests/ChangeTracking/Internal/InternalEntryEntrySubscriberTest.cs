@@ -26,7 +26,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(ChangeTrackingStrategy.ChangedNotifications)]
         public void Original_and_relationship_values_recorded_when_no_changing_notifications(
             ChangeTrackingStrategy changeTrackingStrategy
-        ) {
+        )
+        {
             var entry = InMemoryTestHelpers.Instance.CreateInternalEntry<FullNotificationEntity>(
                 BuildModel(changeTrackingStrategy)
             );
@@ -42,7 +43,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues)]
         public void Original_and_relationship_values_not_recorded_when_full_notifications(
             ChangeTrackingStrategy changeTrackingStrategy
-        ) {
+        )
+        {
             var entry = InMemoryTestHelpers.Instance.CreateInternalEntry<FullNotificationEntity>(
                 BuildModel(changeTrackingStrategy)
             );
@@ -71,7 +73,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues)]
         public void Notifying_collections_are_created_when_notification_tracking(
             ChangeTrackingStrategy changeTrackingStrategy
-        ) {
+        )
+        {
             var entry = InMemoryTestHelpers.Instance.CreateInternalEntry<FullNotificationEntity>(
                 BuildModel(changeTrackingStrategy)
             );
@@ -104,7 +107,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues)]
         public void Non_notifying_collections_not_acceptable_when_notification_tracking(
             ChangeTrackingStrategy changeTrackingStrategy
-        ) {
+        )
+        {
             var entry = InMemoryTestHelpers.Instance.CreateInternalEntry<FullNotificationEntity>(
                 BuildModel(changeTrackingStrategy)
             );
@@ -238,7 +242,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
         private static TestNavigationListener SetupTestCollectionListener(
             ICollection<ChangedOnlyNotificationEntity> collection
-        ) {
+        )
+        {
             var contextServices = InMemoryTestHelpers.Instance.CreateContextServices(
                 new ServiceCollection().AddScoped<INavigationFixer, TestNavigationListener>(),
                 BuildModel()
@@ -611,7 +616,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         private static IModel BuildModel(
             ChangeTrackingStrategy changeTrackingStrategy =
                 ChangeTrackingStrategy.ChangingAndChangedNotifications
-        ) {
+        )
+        {
             var builder = InMemoryTestHelpers.Instance.CreateConventionBuilder();
 
             builder.Entity<FullNotificationEntity>(
@@ -663,7 +669,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 T value,
                 ref T field,
                 [CallerMemberName] string propertyName = ""
-            ) {
+            )
+            {
                 if (!StructuralComparisons.StructuralEqualityComparer.Equals(field, value))
                 {
                     NotifyChanging(propertyName);
@@ -717,7 +724,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 T value,
                 ref T field,
                 [CallerMemberName] string propertyName = ""
-            ) {
+            )
+            {
                 if (!StructuralComparisons.StructuralEqualityComparer.Equals(field, value))
                 {
                     field = value;

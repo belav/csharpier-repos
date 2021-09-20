@@ -57,7 +57,8 @@ namespace System.Reflection.Metadata.Ecma335
             MetadataBuilder tablesAndHeaps,
             string? metadataVersion = null,
             bool suppressValidation = false
-        ) {
+        )
+        {
             if (tablesAndHeaps == null)
             {
                 Throw.ArgumentNull(nameof(tablesAndHeaps));
@@ -113,7 +114,8 @@ namespace System.Reflection.Metadata.Ecma335
             BlobBuilder builder,
             int methodBodyStreamRva,
             int mappedFieldDataStreamRva
-        ) {
+        )
+        {
             if (builder == null)
             {
                 Throw.ArgumentNull(nameof(builder));

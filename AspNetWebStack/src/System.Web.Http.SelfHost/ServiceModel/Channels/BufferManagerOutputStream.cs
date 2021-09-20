@@ -30,7 +30,8 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
             int maxSizeQuota,
             int effectiveMaxSize,
             BufferManager bufferManager
-        ) {
+        )
+        {
             Reinitialize(initialSize, maxSizeQuota, effectiveMaxSize, bufferManager);
         }
 

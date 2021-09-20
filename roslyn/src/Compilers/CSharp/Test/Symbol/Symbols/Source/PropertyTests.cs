@@ -694,7 +694,8 @@ class C : B<string>
             NamedTypeSymbol type,
             PropertySymbol property,
             MethodSymbol accessor
-        ) {
+        )
+        {
             Assert.NotNull(accessor);
             Assert.Equal(type, accessor.ContainingType);
             Assert.Equal(type, accessor.ContainingSymbol);
@@ -896,7 +897,8 @@ class Program
             MethodSymbol accessor,
             PEPropertySymbol associatedProperty,
             MethodKind methodKind
-        ) {
+        )
+        {
             Assert.NotNull(accessor);
             Assert.Equal(accessor.AssociatedSymbol, associatedProperty);
             Assert.Equal(accessor.MethodKind, methodKind);
@@ -2926,7 +2928,8 @@ End Class";
             NamedTypeSymbol @class,
             PropertySymbol classProperty,
             PropertySymbol interfaceProperty
-        ) {
+        )
+        {
             var interfacePropertyGetter = interfaceProperty.GetMethod;
             Assert.NotNull(interfacePropertyGetter);
             var interfacePropertySetter = interfaceProperty.SetMethod;
@@ -3005,7 +3008,8 @@ End Class";
             NamedTypeSymbol @class,
             PropertySymbol classProperty,
             PropertySymbol interfaceProperty
-        ) {
+        )
+        {
             var interfacePropertyGetter = interfaceProperty.GetMethod;
             Assert.NotNull(interfacePropertyGetter);
             var interfacePropertySetter = interfaceProperty.SetMethod;
@@ -3069,7 +3073,8 @@ End Class";
             Accessibility propertyAccessibility,
             Accessibility getAccessibility,
             Accessibility setAccessibility
-        ) {
+        )
+        {
             Assert.Equal(property.DeclaredAccessibility, propertyAccessibility);
             Assert.False(property.MustCallMethodsDirectly);
             VerifyAccessorAccessibility(property.GetMethod, getAccessibility);
@@ -3079,7 +3084,8 @@ End Class";
         private static void VerifyAccessorAccessibility(
             MethodSymbol accessor,
             Accessibility accessorAccessibility
-        ) {
+        )
+        {
             if (accessorAccessibility == Accessibility.NotApplicable)
             {
                 Assert.Null(accessor);
@@ -3094,7 +3100,8 @@ End Class";
         private CSharpCompilation CompileWithCustomPropertiesAssembly(
             string source,
             CSharpCompilationOptions options = null
-        ) {
+        )
+        {
             return CreateCompilation(
                 source,
                 new[] { s_propertiesDll },

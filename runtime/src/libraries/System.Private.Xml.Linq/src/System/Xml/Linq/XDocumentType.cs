@@ -25,7 +25,8 @@ namespace System.Xml.Linq
             string? publicId,
             string? systemId,
             string? internalSubset
-        ) {
+        )
+        {
             _name = XmlConvert.VerifyName(name);
             _publicId = publicId;
             _systemId = systemId;

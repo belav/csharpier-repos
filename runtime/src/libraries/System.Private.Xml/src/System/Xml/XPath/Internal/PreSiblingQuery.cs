@@ -22,12 +22,8 @@ namespace MS.Internal.Xml.XPath
 
     internal sealed class PreSiblingQuery : CacheAxisQuery
     {
-        public PreSiblingQuery(
-            Query qyInput,
-            string name,
-            string prefix,
-            XPathNodeType typeTest
-        ) : base(qyInput, name, prefix, typeTest) { }
+        public PreSiblingQuery(Query qyInput, string name, string prefix, XPathNodeType typeTest)
+            : base(qyInput, name, prefix, typeTest) { }
         private PreSiblingQuery(PreSiblingQuery other) : base(other) { }
 
         private static bool NotVisited(XPathNavigator nav, List<XPathNavigator> parentStk)
@@ -62,7 +58,8 @@ namespace MS.Internal.Xml.XPath
                 if (
                     input.NodeType == XPathNodeType.Attribute
                     || input.NodeType == XPathNodeType.Namespace
-                ) {
+                )
+                {
                     continue;
                 }
                 if (NotVisited(input, parentStk))

@@ -1661,7 +1661,8 @@ namespace System.Web.Http.Tracing
         [InlineData(false)]
         public async Task TraceBeginEndAsync_Traces_And_Throws_AggregateException(
             bool isExThrownAtExecution
-        ) {
+        )
+        {
             // Arrange
             TestTraceWriter traceWriter = new TestTraceWriter();
             HttpRequestMessage request = new HttpRequestMessage();
@@ -1961,7 +1962,8 @@ namespace System.Web.Http.Tracing
         [InlineData(false)]
         public async Task TraceBeginEndAsyncGeneric_Traces_And_Throws_AggregateException(
             bool isExThrownAtExecution
-        ) {
+        )
+        {
             // Arrange
             TestTraceWriter traceWriter = new TestTraceWriter();
             HttpRequestMessage request = new HttpRequestMessage();

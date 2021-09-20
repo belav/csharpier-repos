@@ -36,7 +36,8 @@ namespace Microsoft.AspNetCore.BrowserTesting
         public static async Task<BrowserManager> CreateAsync(
             IConfiguration configuration,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             var manager = new BrowserManager(configuration, loggerFactory);
             await manager.InitializeAsync();
 
@@ -100,7 +101,8 @@ namespace Microsoft.AspNetCore.BrowserTesting
         public Task<IBrowserContext> GetBrowserInstance(
             string browserInstance,
             ContextInformation contextInfo
-        ) {
+        )
+        {
             if (!_launchBrowsers.TryGetValue(browserInstance, out var browser))
             {
                 throw new InvalidOperationException("Invalid browser instance.");
@@ -126,7 +128,8 @@ namespace Microsoft.AspNetCore.BrowserTesting
             string browserInstance,
             string contextName,
             ContextInformation contextInfo
-        ) {
+        )
+        {
             if (_launchBrowsers.TryGetValue(browserInstance, out var browser))
             {
                 throw new InvalidOperationException("Invalid browser instance.");
@@ -154,7 +157,8 @@ namespace Microsoft.AspNetCore.BrowserTesting
             string contextName,
             BrowserContextOptions options,
             ContextInformation contextInfo
-        ) {
+        )
+        {
             if (_launchBrowsers.TryGetValue(browserInstance, out var browser))
             {
                 throw new InvalidOperationException("Invalid browser instance.");
@@ -177,7 +181,8 @@ namespace Microsoft.AspNetCore.BrowserTesting
         private async Task<IBrowserContext> AttachContextInfo(
             Task<IBrowserContext> browserContextTask,
             ContextInformation contextInfo
-        ) {
+        )
+        {
             var context = await browserContextTask;
             context.DefaultTimeout = HasFailedTests
                 ? _browserManagerConfiguration.TimeoutAfterFirstFailureInMilliseconds
@@ -212,7 +217,8 @@ namespace Microsoft.AspNetCore.BrowserTesting
         public static IEnumerable<object[]> WithBrowsers<T>(
             IEnumerable<BrowserKind> browsers,
             IEnumerable<T[]> data
-        ) {
+        )
+        {
             var result = new List<object[]>();
             foreach (var browser in browsers)
             {
@@ -228,7 +234,8 @@ namespace Microsoft.AspNetCore.BrowserTesting
         public static IEnumerable<object[]> WithBrowsers(
             IEnumerable<BrowserKind> browsers,
             params object[] data
-        ) {
+        )
+        {
             var result = new List<object[]>();
             foreach (var browser in browsers)
             {

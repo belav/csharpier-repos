@@ -415,7 +415,8 @@ namespace System.Drawing.Tests
         public void CompositingMode_Set_GetReturnsExpected(
             CompositingMode mode,
             Color expectedOverlap
-        ) {
+        )
+        {
             Color transparentBlack = Color.FromArgb(160, 0, 0, 0);
             Color transparentWhite = Color.FromArgb(160, 255, 255, 255);
 
@@ -450,7 +451,8 @@ namespace System.Drawing.Tests
         [InlineData(CompositingMode.SourceCopy + 1)]
         public void CompositingMode_SetInvalid_ThrowsInvalidEnumArgumentException(
             CompositingMode compositingMode
-        ) {
+        )
+        {
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
             {
@@ -552,7 +554,8 @@ namespace System.Drawing.Tests
         public void CompositingQuality_Set_GetReturnsExpected(
             CompositingQuality quality,
             Color[][] expectedIntersectionColor
-        ) {
+        )
+        {
             Color transparentBlack = Color.FromArgb(160, 0, 0, 0);
             Color transparentWhite = Color.FromArgb(160, 255, 255, 255);
 
@@ -576,7 +579,8 @@ namespace System.Drawing.Tests
         [InlineData(CompositingQuality.AssumeLinear + 1)]
         public void CompositingQuality_SetInvalid_ThrowsInvalidEnumArgumentException(
             CompositingQuality compositingQuality
-        ) {
+        )
+        {
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
             {
@@ -792,7 +796,8 @@ namespace System.Drawing.Tests
         public void InterpolationMode_SetValid_GetReturnsExpected(
             InterpolationMode interpolationMode,
             InterpolationMode expectedInterpolationMode
-        ) {
+        )
+        {
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
             {
@@ -806,7 +811,8 @@ namespace System.Drawing.Tests
         [InlineData(InterpolationMode.HighQualityBicubic + 1)]
         public void InterpolationMode_SetInvalid_ThrowsInvalidEnumArgumentException(
             InterpolationMode interpolationMode
-        ) {
+        )
+        {
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
             {
@@ -1040,7 +1046,8 @@ namespace System.Drawing.Tests
         [InlineData(PixelOffsetMode.Half + 1)]
         public void PixelOffsetMode_SetInvalid_ThrowsInvalidEnumArgumentException(
             PixelOffsetMode pixelOffsetMode
-        ) {
+        )
+        {
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
             {
@@ -1147,7 +1154,8 @@ namespace System.Drawing.Tests
         public void RenderingOrigin_SetToCustom_RendersExpected(
             Point renderingOrigin,
             Color[][] expectedRendering
-        ) {
+        )
+        {
             Color red = Color.FromArgb(Color.Red.ToArgb());
 
             using (var image = new Bitmap(3, 3))
@@ -1210,7 +1218,8 @@ namespace System.Drawing.Tests
         public void SmoothingMode_SetValid_GetReturnsExpected(
             SmoothingMode smoothingMode,
             SmoothingMode expectedSmoothingMode
-        ) {
+        )
+        {
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
             {
@@ -1224,7 +1233,8 @@ namespace System.Drawing.Tests
         [InlineData(SmoothingMode.AntiAlias + 1)]
         public void SmoothingMode_SetInvalid_ThrowsInvalidEnumArgumentException(
             SmoothingMode smoothingMode
-        ) {
+        )
+        {
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
             {
@@ -1359,7 +1369,8 @@ namespace System.Drawing.Tests
         [InlineData(TextRenderingHint.SystemDefault)]
         public void TextRenderingHint_SetValid_GetReturnsExpected(
             TextRenderingHint textRenderingHint
-        ) {
+        )
+        {
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
             {
@@ -1373,7 +1384,8 @@ namespace System.Drawing.Tests
         [InlineData(TextRenderingHint.ClearTypeGridFit + 1)]
         public void TextRenderingHint_SetInvalid_ThrowsInvalidEnumArgumentException(
             TextRenderingHint textRenderingHint
-        ) {
+        )
+        {
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
             {
@@ -2056,7 +2068,8 @@ namespace System.Drawing.Tests
             int destinationX,
             int destinationY,
             Size size
-        ) {
+        )
+        {
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
             {
@@ -2086,7 +2099,8 @@ namespace System.Drawing.Tests
             int destinationY,
             int width,
             int height
-        ) {
+        )
+        {
             Color color = Color.FromArgb(2, 3, 4);
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
@@ -2149,7 +2163,8 @@ namespace System.Drawing.Tests
         [MemberData(nameof(CopyPixelOperation_TestData))]
         public void CopyFromScreen_IntsAndValidCopyPixelOperation_Success(
             CopyPixelOperation copyPixelOperation
-        ) {
+        )
+        {
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
             {
@@ -2165,7 +2180,8 @@ namespace System.Drawing.Tests
         [MemberData(nameof(CopyPixelOperation_TestData))]
         public void CopyFromScreen_PointsAndValidCopyPixelOperation_Success(
             CopyPixelOperation copyPixelOperation
-        ) {
+        )
+        {
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
             {
@@ -2203,7 +2219,8 @@ namespace System.Drawing.Tests
         [InlineData(CopyPixelOperation.CaptureBlt + 1)]
         public void CopyFromScreen_InvalidCopyPixelOperation_ThrowsInvalidEnumArgumentException(
             CopyPixelOperation copyPixelOperation
-        ) {
+        )
+        {
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
             {
@@ -2361,7 +2378,8 @@ namespace System.Drawing.Tests
             CoordinateSpace srcSpace,
             Point[] points,
             Point[] expected
-        ) {
+        )
+        {
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
             using (var transform = new Matrix(1, 2, 3, 4, 5, 6))
@@ -2433,7 +2451,8 @@ namespace System.Drawing.Tests
             CoordinateSpace srcSpace,
             PointF[] points,
             PointF[] expected
-        ) {
+        )
+        {
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
             using (var transform = new Matrix(1, 2, 3, 4, 5, 6))
@@ -2490,7 +2509,8 @@ namespace System.Drawing.Tests
         [InlineData(CoordinateSpace.Device + 1)]
         public void TransformPoints_InvalidDestSpace_ThrowsArgumentException(
             CoordinateSpace destSpace
-        ) {
+        )
+        {
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
             {
@@ -2521,7 +2541,8 @@ namespace System.Drawing.Tests
         [InlineData(CoordinateSpace.Device + 1)]
         public void TransformPoints_InvalidSourceSpace_ThrowsArgumentException(
             CoordinateSpace srcSpace
-        ) {
+        )
+        {
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
             {
@@ -2689,7 +2710,8 @@ namespace System.Drawing.Tests
             PixelFormat pixelFormat,
             Color color,
             Color expected
-        ) {
+        )
+        {
             using (var image = new Bitmap(10, 10, pixelFormat))
             using (Graphics graphics = Graphics.FromImage(image))
             {
@@ -3792,7 +3814,8 @@ namespace System.Drawing.Tests
             int length,
             int offset,
             int numberOfSegments
-        ) {
+        )
+        {
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
             using (var pen = new Pen(Color.Red))

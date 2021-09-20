@@ -14,7 +14,8 @@ namespace System.Runtime.Serialization
         internal static Type GetDataContractType(
             ISerializationSurrogateProvider surrogateProvider,
             Type type
-        ) {
+        )
+        {
             if (DataContract.GetBuiltInDataContract(type) != null)
                 return type;
             return surrogateProvider.GetSurrogateType(type) ?? type;
@@ -26,7 +27,8 @@ namespace System.Runtime.Serialization
             object? obj,
             Type objType,
             Type membertype
-        ) {
+        )
+        {
             if (obj == null)
                 return null;
             if (DataContract.GetBuiltInDataContract(objType) != null)
@@ -40,7 +42,8 @@ namespace System.Runtime.Serialization
             object? obj,
             Type objType,
             Type memberType
-        ) {
+        )
+        {
             if (obj == null)
                 return null;
             if (DataContract.GetBuiltInDataContract(objType) != null)

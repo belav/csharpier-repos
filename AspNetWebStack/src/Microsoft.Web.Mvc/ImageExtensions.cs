@@ -32,7 +32,8 @@ namespace Microsoft.Web.Mvc
             this HtmlHelper helper,
             string imageRelativeUrl,
             string alt
-        ) {
+        )
+        {
             return Image(helper, imageRelativeUrl, alt, null);
         }
 
@@ -47,7 +48,8 @@ namespace Microsoft.Web.Mvc
             string imageRelativeUrl,
             string alt,
             object htmlAttributes
-        ) {
+        )
+        {
             return Image(
                 helper,
                 imageRelativeUrl,
@@ -66,7 +68,8 @@ namespace Microsoft.Web.Mvc
             this HtmlHelper helper,
             string imageRelativeUrl,
             object htmlAttributes
-        ) {
+        )
+        {
             return Image(
                 helper,
                 imageRelativeUrl,
@@ -85,7 +88,8 @@ namespace Microsoft.Web.Mvc
             this HtmlHelper helper,
             string imageRelativeUrl,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             return Image(helper, imageRelativeUrl, null, htmlAttributes);
         }
 
@@ -100,7 +104,8 @@ namespace Microsoft.Web.Mvc
             string imageRelativeUrl,
             string alt,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             if (String.IsNullOrEmpty(imageRelativeUrl))
             {
                 throw new ArgumentException(MvcResources.Common_NullOrEmpty, "imageRelativeUrl");
@@ -125,7 +130,8 @@ namespace Microsoft.Web.Mvc
             string imageUrl,
             string alt,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             if (String.IsNullOrEmpty(imageUrl))
             {
                 throw new ArgumentException(MvcResources.Common_NullOrEmpty, "imageUrl");

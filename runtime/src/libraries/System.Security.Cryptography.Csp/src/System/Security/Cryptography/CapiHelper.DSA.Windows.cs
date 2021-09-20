@@ -40,7 +40,8 @@ namespace Internal.NativeCrypto
                         dwProvType,
                         (uint)Interop.Advapi32.CryptAcquireContextFlags.CRYPT_VERIFYCONTEXT
                     )
-                ) {
+                )
+                {
                     wszUpgrade = MS_ENH_DSS_DH_PROV;
                 }
                 safeProvHandle.Dispose();

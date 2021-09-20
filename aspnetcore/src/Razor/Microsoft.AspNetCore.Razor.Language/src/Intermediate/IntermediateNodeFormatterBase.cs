@@ -105,7 +105,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
             if (
                 _content != null
                 && (_properties.Count == 0 || ContentMode == FormatterContentMode.PreferContent)
-            ) {
+            )
+            {
                 Writer.Write(" ");
                 Writer.Write("\"");
                 Writer.Write(EscapeNewlines(_content));
@@ -115,7 +116,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
             if (
                 _properties.Count > 0
                 && (_content == null || ContentMode == FormatterContentMode.PreferProperties)
-            ) {
+            )
+            {
                 Writer.Write(" ");
                 Writer.Write("{ ");
                 Writer.Write(

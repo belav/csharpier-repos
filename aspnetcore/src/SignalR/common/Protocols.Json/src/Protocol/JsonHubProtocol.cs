@@ -105,7 +105,8 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
             ref ReadOnlySequence<byte> input,
             IInvocationBinder binder,
             [NotNullWhen(true)] out HubMessage? message
-        ) {
+        )
+        {
             if (!TextMessageParser.TryParseMessage(ref input, out var payload))
             {
                 message = null;
@@ -187,12 +188,14 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
                                 reader.ValueTextEquals(
                                     InvocationIdPropertyNameBytes.EncodedUtf8Bytes
                                 )
-                            ) {
+                            )
+                            {
                                 invocationId = reader.ReadAsString(InvocationIdPropertyName);
                             }
                             else if (
                                 reader.ValueTextEquals(StreamIdsPropertyNameBytes.EncodedUtf8Bytes)
-                            ) {
+                            )
+                            {
                                 reader.CheckRead();
 
                                 if (reader.TokenType != JsonTokenType.StartArray)
@@ -219,24 +222,28 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
                             }
                             else if (
                                 reader.ValueTextEquals(TargetPropertyNameBytes.EncodedUtf8Bytes)
-                            ) {
+                            )
+                            {
                                 target = reader.ReadAsString(TargetPropertyName);
                             }
                             else if (
                                 reader.ValueTextEquals(ErrorPropertyNameBytes.EncodedUtf8Bytes)
-                            ) {
+                            )
+                            {
                                 error = reader.ReadAsString(ErrorPropertyName);
                             }
                             else if (
                                 reader.ValueTextEquals(
                                     AllowReconnectPropertyNameBytes.EncodedUtf8Bytes
                                 )
-                            ) {
+                            )
+                            {
                                 allowReconnect = reader.ReadAsBoolean(AllowReconnectPropertyName);
                             }
                             else if (
                                 reader.ValueTextEquals(ResultPropertyNameBytes.EncodedUtf8Bytes)
-                            ) {
+                            )
+                            {
                                 hasResult = true;
 
                                 reader.CheckRead();
@@ -290,7 +297,8 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
                             }
                             else if (
                                 reader.ValueTextEquals(ArgumentsPropertyNameBytes.EncodedUtf8Bytes)
-                            ) {
+                            )
+                            {
                                 reader.CheckRead();
 
                                 int initialDepth = reader.CurrentDepth;
@@ -329,7 +337,8 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
                                             reader.CurrentDepth == initialDepth
                                                 && reader.TokenType == JsonTokenType.StartArray
                                             || reader.CurrentDepth > initialDepth
-                                        ) {
+                                        )
+                                        {
                                             reader.CheckRead();
                                         }
                                     }
@@ -337,7 +346,8 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
                             }
                             else if (
                                 reader.ValueTextEquals(HeadersPropertyNameBytes.EncodedUtf8Bytes)
-                            ) {
+                            )
+                            {
                                 reader.CheckRead();
                                 headers = ReadHeaders(ref reader);
                             }
@@ -649,7 +659,8 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
         private void WriteCancelInvocationMessage(
             CancelInvocationMessage message,
             Utf8JsonWriter writer
-        ) {
+        )
+        {
             WriteInvocationId(message, writer);
         }
 
@@ -686,7 +697,8 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
         private void WriteStreamInvocationMessage(
             StreamInvocationMessage message,
             Utf8JsonWriter writer
-        ) {
+        )
+        {
             WriteInvocationId(message, writer);
             writer.WriteString(TargetPropertyNameBytes, message.Target);
 
@@ -776,7 +788,8 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
             object? result,
             bool hasResult,
             IInvocationBinder binder
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(invocationId))
             {
                 throw new InvalidDataException(
@@ -804,7 +817,8 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
             object? item,
             bool hasItem,
             IInvocationBinder binder
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(invocationId))
             {
                 throw new InvalidDataException(
@@ -826,7 +840,8 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
             object?[]? arguments,
             bool hasArguments,
             string[]? streamIds
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(invocationId))
             {
                 throw new InvalidDataException(
@@ -859,7 +874,8 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
             object?[]? arguments,
             bool hasArguments,
             string[]? streamIds
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(target))
             {
                 throw new InvalidDataException(

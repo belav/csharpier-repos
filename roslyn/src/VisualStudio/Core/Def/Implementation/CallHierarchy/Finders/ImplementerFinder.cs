@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy.Finders
             ICallHierarchySearchCallback callback,
             IImmutableSet<Document> documents,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var implementations = await SymbolFinder.FindImplementationsAsync(
                     symbol,
                     project.Solution,

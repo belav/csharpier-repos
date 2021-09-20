@@ -60,7 +60,8 @@ namespace System.IO.Tests.Enumeration
                     testDirectory.FullName,
                     new EnumerationOptions()
                 )
-            ) {
+            )
+            {
                 Assert.True(enumerator.MoveNext());
                 Assert.Equal(fileOne.Name, enumerator.Current);
                 Assert.False(enumerator.MoveNext());
@@ -113,7 +114,8 @@ namespace System.IO.Tests.Enumeration
                     testDirectory.FullName,
                     new EnumerationOptions()
                 )
-            ) {
+            )
+            {
                 Assert.True(enumerator.MoveNext());
                 Assert.Equal(subDirectory.Name, enumerator.Current);
                 Assert.False(enumerator.MoveNext());

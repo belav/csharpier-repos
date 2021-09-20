@@ -64,7 +64,8 @@ namespace Microsoft.AspNetCore.WebSockets.ConformanceTest
                                 TestTimeout.TotalMinutes
                             )
                     )
-                ) {
+                )
+                {
                     AutobahnResult result;
                     using (var tester = new AutobahnTester(loggerFactory, spec))
                     {

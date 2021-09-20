@@ -42,7 +42,8 @@ namespace System.Net.Mime
                             CultureInfo.InvariantCulture,
                             out longValue
                         )
-                    ) {
+                    )
+                    {
                         throw new FormatException(SR.ContentDispositionInvalid);
                     }
                     return longValue;

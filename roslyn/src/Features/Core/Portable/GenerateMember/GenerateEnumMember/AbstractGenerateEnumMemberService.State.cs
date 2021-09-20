@@ -35,12 +35,14 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateEnumMember
                 SemanticDocument document,
                 SyntaxNode node,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var state = new State();
                 if (
                     !await state.TryInitializeAsync(service, document, node, cancellationToken)
                         .ConfigureAwait(false)
-                ) {
+                )
+                {
                     return null;
                 }
 
@@ -52,7 +54,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateEnumMember
                 SemanticDocument document,
                 SyntaxNode node,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (service.IsIdentifierNameGeneration(node))
                 {
                     if (
@@ -62,7 +65,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateEnumMember
                             (TSimpleNameSyntax)node,
                             cancellationToken
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }
@@ -109,7 +113,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateEnumMember
                 SemanticDocument semanticDocument,
                 TSimpleNameSyntax identifierName,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 SimpleName = identifierName;
                 if (
                     !service.TryInitializeIdentifierNameState(
@@ -119,7 +124,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateEnumMember
                         out var identifierToken,
                         out var simpleNameOrMemberAccessExpression
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -137,7 +143,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateEnumMember
                         SimpleNameOrMemberAccessExpression,
                         cancellationToken
                     ) || syntaxFacts.IsInNamespaceOrTypeContext(SimpleNameOrMemberAccessExpression)
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -178,7 +185,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateEnumMember
                         out var typeToGenerateIn,
                         out var isStatic
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 

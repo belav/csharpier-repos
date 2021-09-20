@@ -24,7 +24,8 @@ namespace System.Reflection
         public virtual void GetPEKind(
             out PortableExecutableKinds peKind,
             out ImageFileMachine machine
-        ) {
+        )
+        {
             throw NotImplemented.ByDesign;
         }
         public virtual bool IsResource()
@@ -78,7 +79,8 @@ namespace System.Reflection
             CallingConventions callConvention,
             Type[] types,
             ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             if (name == null)
                 throw new ArgumentNullException(nameof(name));
             if (types == null)
@@ -99,7 +101,8 @@ namespace System.Reflection
             CallingConventions callConvention,
             Type[]? types,
             ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             throw NotImplemented.ByDesign;
         }
 
@@ -180,7 +183,8 @@ namespace System.Reflection
             int metadataToken,
             Type[]? genericTypeArguments,
             Type[]? genericMethodArguments
-        ) {
+        )
+        {
             throw NotImplemented.ByDesign;
         }
 
@@ -192,7 +196,8 @@ namespace System.Reflection
             int metadataToken,
             Type[]? genericTypeArguments,
             Type[]? genericMethodArguments
-        ) {
+        )
+        {
             throw NotImplemented.ByDesign;
         }
 
@@ -204,7 +209,8 @@ namespace System.Reflection
             int metadataToken,
             Type[]? genericTypeArguments,
             Type[]? genericMethodArguments
-        ) {
+        )
+        {
             throw NotImplemented.ByDesign;
         }
 
@@ -226,7 +232,8 @@ namespace System.Reflection
             int metadataToken,
             Type[]? genericTypeArguments,
             Type[]? genericMethodArguments
-        ) {
+        )
+        {
             throw NotImplemented.ByDesign;
         }
 
@@ -277,7 +284,8 @@ namespace System.Reflection
             Type cls,
             object filterCriteria,
             StringComparison comparison
-        ) {
+        )
+        {
             // Check that the criteria object is a String object
             if (!(filterCriteria is string str))
             {

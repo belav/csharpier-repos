@@ -31,7 +31,8 @@ namespace System.DirectoryServices.AccountManagement
             string category,
             string message,
             params object[] args
-        ) {
+        )
+        {
             message =
                 "["
                 + SafeNativeMethods.GetCurrentThreadId().ToString("x", CultureInfo.InvariantCulture)

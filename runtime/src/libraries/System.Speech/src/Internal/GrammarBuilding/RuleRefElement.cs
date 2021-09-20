@@ -63,7 +63,8 @@ namespace System.Speech.Internal.GrammarBuilding
             IElement parent,
             IRule rule,
             IdentifierCollection ruleIds
-        ) {
+        )
+        {
             // Create the new rule and add the reference to the item
             return elementFactory.CreateRuleRef(
                 parent,

@@ -32,7 +32,8 @@ namespace Microsoft.AspNetCore.Mvc.Diagnostics
             ViewContext viewContext,
             ActionDescriptor actionDescriptor,
             HttpContext httpContext
-        ) {
+        )
+        {
             Page = page;
             ViewContext = viewContext;
             ActionDescriptor = actionDescriptor;
@@ -96,7 +97,8 @@ namespace Microsoft.AspNetCore.Mvc.Diagnostics
             ViewContext viewContext,
             ActionDescriptor actionDescriptor,
             HttpContext httpContext
-        ) {
+        )
+        {
             Page = page;
             ViewContext = viewContext;
             ActionDescriptor = actionDescriptor;

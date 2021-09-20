@@ -53,7 +53,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             SyntaxNode syntaxNode,
             DiagnosticBag diagnostics,
             bool encodeAsRawToken = false
-        ) {
+        )
+        {
             uint token = module?.GetFakeSymbolTokenForIL(value, syntaxNode, diagnostics) ?? 0xFFFF;
             // Setting the high bit indicates that the token value is to be interpreted literally rather than as a handle.
             if (encodeAsRawToken)
@@ -67,7 +68,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             Cci.ISignature value,
             SyntaxNode syntaxNode,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             uint token = module?.GetFakeSymbolTokenForIL(value, syntaxNode, diagnostics) ?? 0xFFFF;
             this.GetCurrentWriter().WriteUInt32(token);
         }
@@ -98,7 +100,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             ImmutableArray<byte> data,
             SyntaxNode syntaxNode,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             // get helpers
             var initializeArray = module.GetInitArrayHelper();
 
@@ -118,7 +121,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             SyntaxNode syntaxNode,
             bool emitInitBlock,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             if (emitInitBlock)
             {
                 // All bytes are the same, no need for metadata blob
@@ -144,7 +148,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             ImmutableArray<byte> data,
             SyntaxNode syntaxNode,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             // map a field to the block (that makes it addressable)
             var field = module.GetFieldForData(data, syntaxNode, diagnostics);
 
@@ -281,7 +286,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             LocalDefinition? keyHash,
             SwitchStringJumpTableEmitter.EmitStringCompareAndBranch emitStringCondBranchDelegate,
             SwitchStringJumpTableEmitter.GetStringHashCode computeStringHashcodeDelegate
-        ) {
+        )
+        {
             Debug.Assert(caseLabels.Length > 0);
 
             var emitter = new SwitchStringJumpTableEmitter(
@@ -311,7 +317,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             object fallThroughLabel,
             LocalOrParameter key,
             Cci.PrimitiveTypeCode keyTypeCode
-        ) {
+        )
+        {
             Debug.Assert(caseLabels.Length > 0);
             Debug.Assert(keyTypeCode != Cci.PrimitiveTypeCode.String);
 
@@ -422,7 +429,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             Microsoft.Cci.IArrayTypeReference arrayType,
             SyntaxNode syntaxNode,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             Debug.Assert(!arrayType.IsSZArray, "should be used only with multidimensional arrays");
 
             var ctor = module.ArrayMethods.GetArrayConstructor(arrayType);
@@ -439,7 +447,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             Microsoft.Cci.IArrayTypeReference arrayType,
             SyntaxNode syntaxNode,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             Debug.Assert(!arrayType.IsSZArray, "should be used only with multidimensional arrays");
 
             var load = module.ArrayMethods.GetArrayGet(arrayType);
@@ -456,7 +465,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             Microsoft.Cci.IArrayTypeReference arrayType,
             SyntaxNode syntaxNode,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             Debug.Assert(!arrayType.IsSZArray, "should be used only with multidimensional arrays");
 
             var address = module.ArrayMethods.GetArrayAddress(arrayType);
@@ -473,7 +483,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             Cci.IArrayTypeReference arrayType,
             SyntaxNode syntaxNode,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             Debug.Assert(!arrayType.IsSZArray, "should be used only with multidimensional arrays");
 
             var store = module.ArrayMethods.GetArraySet(arrayType);

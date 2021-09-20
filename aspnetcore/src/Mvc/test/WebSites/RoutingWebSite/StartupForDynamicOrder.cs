@@ -137,7 +137,8 @@ namespace RoutingWebSite
             public override ValueTask<RouteValueDictionary> TransformAsync(
                 HttpContext httpContext,
                 RouteValueDictionary values
-            ) {
+            )
+            {
                 var kvps =
                     ((string)values?["slug"])?.Split("/")?.LastOrDefault()?.Split(",")
                     ?? Array.Empty<string>();

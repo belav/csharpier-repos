@@ -119,7 +119,8 @@ namespace CoreXml.Test.XLinq
                     FilePathUtil.getStream(strSource),
                     preserveWhitespace ? _rsx : _rsxNoWs
                 )
-            ) {
+            )
+            {
                 XDocument doc = XDocument.Load(
                     r,
                     preserveWhitespace ? LoadOptions.PreserveWhitespace : LoadOptions.None
@@ -295,7 +296,8 @@ namespace CoreXml.Test.XLinq
             byte[] srcBuff,
             int srcStart,
             int count
-        ) {
+        )
+        {
             EnsureSpace(ref destBuff, destStart + count - 1);
             for (int i = srcStart; i < srcStart + count; i++)
             {
@@ -307,7 +309,8 @@ namespace CoreXml.Test.XLinq
             ref byte[] destBuffer,
             ref int destBuffLen,
             string strValue
-        ) {
+        )
+        {
             for (int i = 0; i < strValue.Length; i++)
             {
                 WriteToBuffer(
@@ -340,7 +343,8 @@ namespace CoreXml.Test.XLinq
             int iIndex,
             int iCount,
             Type exceptionType
-        ) {
+        )
+        {
             byte[] byteBuffer = new byte[iBufferSize];
             for (int i = 0; i < iBufferSize; i++)
                 byteBuffer[i] = (byte)(i + '0');
@@ -409,7 +413,8 @@ namespace CoreXml.Test.XLinq
             XmlNodeType eExpNodeType,
             string strExpName,
             string strExpValue
-        ) {
+        )
+        {
             bool bPassed = true;
 
             if (r.NodeType != eExpNodeType)
@@ -443,7 +448,8 @@ namespace CoreXml.Test.XLinq
             XmlNodeType eExpNodeType,
             string strExpName,
             string strExpValue
-        ) {
+        )
+        {
             bool bNode = VerifyNode(r, eExpNodeType, strExpName, strExpValue);
             TestLog.Compare(bNode, "VerifyNode failed");
         }
@@ -453,7 +459,8 @@ namespace CoreXml.Test.XLinq
             XmlException e,
             int expectedLine,
             int expectedPosition
-        ) {
+        )
+        {
             TestLog.Compare(e.LineNumber, expectedLine, "CheckXmlException:LineNumber");
             TestLog.Compare(e.LinePosition, expectedPosition, "CheckXmlException:LinePosition");
         }
@@ -473,7 +480,8 @@ namespace CoreXml.Test.XLinq
                 if (
                     nodeType == XmlNodeType.ProcessingInstruction
                     && r.NodeType == XmlNodeType.XmlDeclaration
-                ) {
+                )
+                {
                     if (string.Compare(Name, 0, ST_XML, 0, 3) != 0)
                         return;
                 }
@@ -1443,7 +1451,8 @@ namespace CoreXml.Test.XLinq
                 if (
                     r.NodeType == XmlNodeType.ProcessingInstruction
                     && r.NodeType == XmlNodeType.XmlDeclaration
-                ) {
+                )
+                {
                     if (string.Compare(r.Name, 0, ST_XML, 0, 3) != 0)
                         return true;
                 }

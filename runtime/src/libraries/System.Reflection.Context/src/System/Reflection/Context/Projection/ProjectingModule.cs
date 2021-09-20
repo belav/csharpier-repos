@@ -63,7 +63,8 @@ namespace System.Reflection.Context.Projection
             CallingConventions callConvention,
             Type[] types,
             ParameterModifier[] modifiers
-        ) {
+        )
+        {
             types = Projector.Unproject(types);
             return Projector.ProjectMethod(
                 base.GetMethodImpl(name, bindingAttr, binder, callConvention, types, modifiers)
@@ -89,7 +90,8 @@ namespace System.Reflection.Context.Projection
             int metadataToken,
             Type[] genericTypeArguments,
             Type[] genericMethodArguments
-        ) {
+        )
+        {
             genericTypeArguments = Projector.Unproject(genericTypeArguments);
             genericMethodArguments = Projector.Unproject(genericMethodArguments);
 
@@ -102,7 +104,8 @@ namespace System.Reflection.Context.Projection
             int metadataToken,
             Type[] genericTypeArguments,
             Type[] genericMethodArguments
-        ) {
+        )
+        {
             genericTypeArguments = Projector.Unproject(genericTypeArguments);
             genericMethodArguments = Projector.Unproject(genericMethodArguments);
 
@@ -115,7 +118,8 @@ namespace System.Reflection.Context.Projection
             int metadataToken,
             Type[] genericTypeArguments,
             Type[] genericMethodArguments
-        ) {
+        )
+        {
             genericTypeArguments = Projector.Unproject(genericTypeArguments);
             genericMethodArguments = Projector.Unproject(genericMethodArguments);
 
@@ -128,7 +132,8 @@ namespace System.Reflection.Context.Projection
             int metadataToken,
             Type[] genericTypeArguments,
             Type[] genericMethodArguments
-        ) {
+        )
+        {
             genericTypeArguments = Projector.Unproject(genericTypeArguments);
             genericMethodArguments = Projector.Unproject(genericMethodArguments);
 

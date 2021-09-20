@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Highlighting
             int position,
             List<TextSpan> highlights,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (s_textSpanListPool.GetPooledObject(out var tempHighlights))
             using (s_tokenListPool.GetPooledObject(out var touchingTokens))
             {
@@ -96,7 +97,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Highlighting
             SyntaxNode root,
             int position,
             List<SyntaxToken> tokens
-        ) {
+        )
+        {
             AddTouchingTokens(root, position, tokens, findInsideTrivia: true);
             AddTouchingTokens(root, position, tokens, findInsideTrivia: false);
         }
@@ -106,7 +108,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Highlighting
             int position,
             List<SyntaxToken> tokens,
             bool findInsideTrivia
-        ) {
+        )
+        {
             var token = root.FindToken(position, findInsideTrivia);
             if (!tokens.Contains(token))
                 tokens.Add(token);

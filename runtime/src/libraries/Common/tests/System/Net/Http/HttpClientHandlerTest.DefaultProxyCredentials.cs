@@ -137,7 +137,8 @@ namespace System.Net.Http.Functional.Tests
                                                 handler,
                                                 useVersionString
                                             )
-                                        ) {
+                                        )
+                                        {
                                             var creds = new NetworkCredential(
                                                 ExpectedUsername,
                                                 ExpectedPassword

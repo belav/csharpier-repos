@@ -34,12 +34,14 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.LanguageServices
             SemanticModel semanticModel,
             ArrayBuilder<ClassifiedSpan> result,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 _info.CharLiteralTokenKind != token.RawKind
                 && _info.StringLiteralTokenKind != token.RawKind
                 && _info.InterpolatedTextTokenKind != token.RawKind
-            ) {
+            )
+            {
                 return;
             }
 

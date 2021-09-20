@@ -27,9 +27,7 @@ namespace System
             HResult = HResults.COR_E_APPDOMAINUNLOADED;
         }
 
-        protected AppDomainUnloadedException(
-            SerializationInfo info,
-            StreamingContext context
-        ) : base(info, context) { }
+        protected AppDomainUnloadedException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

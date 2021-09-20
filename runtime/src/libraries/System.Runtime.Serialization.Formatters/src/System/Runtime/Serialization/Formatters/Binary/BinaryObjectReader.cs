@@ -71,7 +71,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
             StreamingContext context,
             InternalFE formatterEnums,
             SerializationBinder? binder
-        ) {
+        )
+        {
             if (stream == null)
             {
                 throw new ArgumentNullException(nameof(stream));
@@ -186,7 +187,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
 
         internal ReadObjectInfo CreateReadObjectInfo(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type objectType
-        ) {
+        )
+        {
             return ReadObjectInfo.Create(
                 objectType,
                 _surrogates,
@@ -202,7 +204,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type? objectType,
             string[] memberNames,
             Type[]? memberTypes
-        ) {
+        )
+        {
             return ReadObjectInfo.Create(
                 objectType,
                 memberNames,
@@ -472,7 +475,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
             else if (
                 (pr._arrayTypeEnum == InternalArrayTypeE.Jagged)
                 || (pr._arrayTypeEnum == InternalArrayTypeE.Single)
-            ) {
+            )
+            {
                 Debug.Assert(pr._lengthA != null);
                 // Multidimensional jagged array or single array
                 bool couldBeValueType = true;
@@ -514,7 +518,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
                     if (
                         !pr._isLowerBound
                         && (Converter.IsWriteAsByteArray(pr._arrayElementTypeCode))
-                    ) {
+                    )
+                    {
                         Debug.Assert(pr._newObj != null);
                         pr._primitiveArray = new PrimitiveArray(
                             pr._arrayElementTypeCode,
@@ -694,7 +699,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
                     if (
                         (objectPr._arrayElementType.IsValueType)
                         && (pr._arrayElementTypeCode == InternalPrimitiveTypeE.Invalid)
-                    ) {
+                    )
+                    {
                         pr._isValueTypeFixup = true; //Valuefixup
                         ValueFixupStack.Push(
                             new ValueFixup((Array)objectPr._newObj, objectPr._indexMap)
@@ -718,7 +724,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
                 if (
                     (ReferenceEquals(objectPr._arrayElementType, Converter.s_typeofString))
                     || (ReferenceEquals(pr._dtType, Converter.s_typeofString))
-                ) {
+                )
+                {
                     // String in either a string array, or a string element of an object array
                     ParseString(pr, objectPr);
                     if (objectPr._objectA != null)
@@ -859,7 +866,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
                     (pr._objectInfo != null)
                     && pr._objectInfo._objectType != null
                     && (pr._objectInfo._objectType.IsValueType)
-                ) {
+                )
+                {
                     pr._isValueTypeFixup = true; //Valuefixup
                     ValueFixupStack.Push(
                         new ValueFixup(objectPr._newObj, pr._name, objectPr._objectInfo)
@@ -1026,7 +1034,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
             ParseRecord pr,
             ParseRecord? objectPr,
             bool bIsString
-        ) {
+        )
+        {
             if (!pr._isRegistered)
             {
                 pr._isRegistered = true;
@@ -1229,7 +1238,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
             Assembly assm,
             string typeName,
             ref Type? type
-        ) {
+        )
+        {
             // Catching any exceptions that could be thrown from a failure on assembly load
             // This is necessary, for example, if there are generic parameters that are qualified with a version of the assembly that predates the one available
             try
@@ -1272,7 +1282,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
                     && (_previousAssemblyString.Length == assemblyInfo._assemblyString.Length)
                     && (_previousAssemblyString.Equals(assemblyInfo._assemblyString))
                 )
-            ) {
+            )
+            {
                 objectType = _previousType;
             }
             else
@@ -1309,7 +1320,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
             Assembly sourceAssembly,
             Assembly destAssembly,
             Type resolvedType
-        ) {
+        )
+        {
             // nop on core
         }
 

@@ -132,7 +132,8 @@ namespace System.Net.Http
             HttpContent content,
             bool isRequest,
             bool throwOnError
-        ) {
+        )
+        {
             if (content == null)
             {
                 throw Error.ArgumentNull("content");
@@ -146,7 +147,8 @@ namespace System.Net.Http
                         DefaultMediaType,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     if (throwOnError)
                     {
                         throw Error.Argument(
@@ -172,7 +174,8 @@ namespace System.Net.Http
                                 isRequest ? DefaultRequestMsgType : DefaultResponseMsgType,
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             if (throwOnError)
                             {
                                 throw Error.Argument(
@@ -217,7 +220,8 @@ namespace System.Net.Http
         protected override async Task SerializeToStreamAsync(
             Stream stream,
             TransportContext context
-        ) {
+        )
+        {
             if (stream == null)
             {
                 throw Error.ArgumentNull("stream");
@@ -316,7 +320,8 @@ namespace System.Net.Http
         private static void SerializeRequestLine(
             StringBuilder message,
             HttpRequestMessage httpRequest
-        ) {
+        )
+        {
             Contract.Assert(message != null, "message cannot be null");
             message.Append(httpRequest.Method + SP);
             message.Append(httpRequest.RequestUri.PathAndQuery + SP);
@@ -347,7 +352,8 @@ namespace System.Net.Http
         private static void SerializeStatusLine(
             StringBuilder message,
             HttpResponseMessage httpResponse
-        ) {
+        )
+        {
             Contract.Assert(message != null, "message cannot be null");
             message.Append(
                 FormattingUtilities.HttpVersionToken

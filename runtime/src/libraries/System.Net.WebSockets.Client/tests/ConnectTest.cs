@@ -26,7 +26,8 @@ namespace System.Net.WebSockets.Client.Tests
             Uri server,
             string exceptionMessage,
             WebSocketError errorCode
-        ) {
+        )
+        {
             using (var cws = new ClientWebSocket())
             {
                 var cts = new CancellationTokenSource(TimeOutMilliseconds);
@@ -233,7 +234,8 @@ namespace System.Net.WebSockets.Client.Tests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/45583", TestPlatforms.Browser)]
         public async Task ConnectAsync_PassNoSubProtocol_ServerRequires_ThrowsWebSocketException(
             Uri server
-        ) {
+        )
+        {
             const string AcceptedProtocol = "CustomProtocol";
 
             using (var cws = new ClientWebSocket())
@@ -262,7 +264,8 @@ namespace System.Net.WebSockets.Client.Tests
         [ConditionalTheory(nameof(WebSocketsSupported)), MemberData(nameof(EchoServers))]
         public async Task ConnectAsync_PassMultipleSubProtocols_ServerRequires_ConnectionUsesAgreedSubProtocol(
             Uri server
-        ) {
+        )
+        {
             const string AcceptedProtocol = "AcceptedProtocol";
             const string OtherProtocol = "OtherProtocol";
 

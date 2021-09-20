@@ -500,7 +500,8 @@ namespace XLinqTests
             XElement orig,
             IEnumerable<object> newNodes,
             string stringOnlyContent
-        ) {
+        )
+        {
             foreach (object o in orig.Attributes())
             {
                 yield return new ExpectedValue(true, o);
@@ -516,7 +517,8 @@ namespace XLinqTests
             XContainer orig,
             IEnumerable<object> newNodes,
             string stringOnlyContent
-        ) {
+        )
+        {
             if (stringOnlyContent == null)
             {
                 foreach (object o in orig.Nodes())

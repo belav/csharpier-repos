@@ -20,7 +20,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             FileCodeModel fileCodeModel,
             SyntaxNodeKey nodeKey,
             int? nodeKind
-        ) {
+        )
+        {
             var element = new CodeStruct(state, fileCodeModel, nodeKey, nodeKind);
             var result = (EnvDTE.CodeStruct)ComAggregate.CreateAggregatedObject(element);
 
@@ -34,7 +35,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             FileCodeModel fileCodeModel,
             int nodeKind,
             string name
-        ) {
+        )
+        {
             var element = new CodeStruct(state, fileCodeModel, nodeKind, name);
             return (EnvDTE.CodeStruct)ComAggregate.CreateAggregatedObject(element);
         }
@@ -84,7 +86,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             object bases,
             object implementedInterfaces,
             EnvDTE.vsCMAccess access
-        ) {
+        )
+        {
             return FileCodeModel.EnsureEditor(
                 () =>
                 {
@@ -105,7 +108,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             object type,
             object position,
             EnvDTE.vsCMAccess access
-        ) {
+        )
+        {
             return FileCodeModel.EnsureEditor(
                 () =>
                 {
@@ -119,7 +123,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             object position,
             object bases,
             EnvDTE.vsCMAccess access
-        ) {
+        )
+        {
             return FileCodeModel.EnsureEditor(
                 () =>
                 {
@@ -134,7 +139,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             bool createPropertyStyleEvent,
             object position,
             EnvDTE.vsCMAccess access
-        ) {
+        )
+        {
             return FileCodeModel.EnsureEditor(
                 () =>
                 {
@@ -157,7 +163,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             object position,
             EnvDTE.vsCMAccess access,
             object location
-        ) {
+        )
+        {
             return FileCodeModel.EnsureEditor(
                 () =>
                 {
@@ -180,7 +187,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             object position,
             EnvDTE.vsCMAccess access,
             object location
-        ) {
+        )
+        {
             return FileCodeModel.EnsureEditor(
                 () =>
                 {
@@ -202,7 +210,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             object bases,
             object implementedInterfaces,
             EnvDTE.vsCMAccess access
-        ) {
+        )
+        {
             return FileCodeModel.EnsureEditor(
                 () =>
                 {
@@ -224,7 +233,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             object position,
             EnvDTE.vsCMAccess access,
             object location
-        ) {
+        )
+        {
             return FileCodeModel.EnsureEditor(
                 () =>
                 {

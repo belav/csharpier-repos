@@ -19,7 +19,8 @@ namespace System.Buffers
             out ReadOnlySpan<T> span,
             T delimiter,
             bool advancePastDelimiter = true
-        ) {
+        )
+        {
             ReadOnlySpan<T> remaining = UnreadSpan;
             int index = remaining.IndexOf(delimiter);
 
@@ -42,7 +43,8 @@ namespace System.Buffers
                     advancePastDelimiter,
                     CurrentSpan.Length - CurrentSpanIndex
                 )
-            ) {
+            )
+            {
                 span = default;
                 return false;
             }
@@ -65,7 +67,8 @@ namespace System.Buffers
             T delimiter,
             T delimiterEscape,
             bool advancePastDelimiter = true
-        ) {
+        )
+        {
             ReadOnlySpan<T> remaining = UnreadSpan;
             int index = remaining.IndexOf(delimiter);
 
@@ -86,7 +89,8 @@ namespace System.Buffers
             T delimiterEscape,
             int index,
             bool advancePastDelimiter
-        ) {
+        )
+        {
             if (
                 !TryReadToSlow(
                     out ReadOnlySequence<T> sequence,
@@ -95,7 +99,8 @@ namespace System.Buffers
                     index,
                     advancePastDelimiter
                 )
-            ) {
+            )
+            {
                 span = default;
                 return false;
             }
@@ -111,7 +116,8 @@ namespace System.Buffers
             T delimiterEscape,
             int index,
             bool advancePastDelimiter
-        ) {
+        )
+        {
             SequenceReader<T> copy = this;
 
             ReadOnlySpan<T> remaining = UnreadSpan;
@@ -175,7 +181,8 @@ namespace System.Buffers
                     if (
                         remaining.Length > 0
                         && remaining[remaining.Length - 1].Equals(delimiterEscape)
-                    ) {
+                    )
+                    {
                         int escapeCount = 1;
                         int i = remaining.Length - 2;
                         for (; i >= 0; i--)
@@ -221,7 +228,8 @@ namespace System.Buffers
             out ReadOnlySequence<T> sequence,
             T delimiter,
             bool advancePastDelimiter = true
-        ) {
+        )
+        {
             return TryReadToInternal(out sequence, delimiter, advancePastDelimiter);
         }
 
@@ -230,7 +238,8 @@ namespace System.Buffers
             T delimiter,
             bool advancePastDelimiter,
             int skip = 0
-        ) {
+        )
+        {
             Debug.Assert(skip >= 0);
             SequenceReader<T> copy = this;
             if (skip > 0)
@@ -280,7 +289,8 @@ namespace System.Buffers
             T delimiter,
             T delimiterEscape,
             bool advancePastDelimiter = true
-        ) {
+        )
+        {
             SequenceReader<T> copy = this;
 
             ReadOnlySpan<T> remaining = UnreadSpan;
@@ -380,7 +390,8 @@ namespace System.Buffers
             out ReadOnlySpan<T> span,
             ReadOnlySpan<T> delimiters,
             bool advancePastDelimiter = true
-        ) {
+        )
+        {
             ReadOnlySpan<T> remaining = UnreadSpan;
             int index =
                 delimiters.Length == 2
@@ -401,7 +412,8 @@ namespace System.Buffers
             out ReadOnlySpan<T> span,
             ReadOnlySpan<T> delimiters,
             bool advancePastDelimiter
-        ) {
+        )
+        {
             if (
                 !TryReadToAnyInternal(
                     out ReadOnlySequence<T> sequence,
@@ -409,7 +421,8 @@ namespace System.Buffers
                     advancePastDelimiter,
                     CurrentSpan.Length - CurrentSpanIndex
                 )
-            ) {
+            )
+            {
                 span = default;
                 return false;
             }
@@ -429,7 +442,8 @@ namespace System.Buffers
             out ReadOnlySequence<T> sequence,
             ReadOnlySpan<T> delimiters,
             bool advancePastDelimiter = true
-        ) {
+        )
+        {
             return TryReadToAnyInternal(out sequence, delimiters, advancePastDelimiter);
         }
 
@@ -438,7 +452,8 @@ namespace System.Buffers
             ReadOnlySpan<T> delimiters,
             bool advancePastDelimiter,
             int skip = 0
-        ) {
+        )
+        {
             SequenceReader<T> copy = this;
             if (skip > 0)
                 Advance(skip);
@@ -488,7 +503,8 @@ namespace System.Buffers
             out ReadOnlySpan<T> span,
             ReadOnlySpan<T> delimiter,
             bool advancePastDelimiter = true
-        ) {
+        )
+        {
             ReadOnlySpan<T> remaining = UnreadSpan;
             int index = remaining.IndexOf(delimiter);
 
@@ -507,7 +523,8 @@ namespace System.Buffers
             out ReadOnlySpan<T> span,
             ReadOnlySpan<T> delimiter,
             bool advancePastDelimiter
-        ) {
+        )
+        {
             if (!TryReadTo(out ReadOnlySequence<T> sequence, delimiter, advancePastDelimiter))
             {
                 span = default;
@@ -530,7 +547,8 @@ namespace System.Buffers
             out ReadOnlySequence<T> sequence,
             ReadOnlySpan<T> delimiter,
             bool advancePastDelimiter = true
-        ) {
+        )
+        {
             if (delimiter.Length == 0)
             {
                 sequence = default;
@@ -707,7 +725,8 @@ namespace System.Buffers
                         && !value.Equals(value1)
                         && !value.Equals(value2)
                         && !value.Equals(value3)
-                    ) {
+                    )
+                    {
                         break;
                     }
                 }
@@ -890,7 +909,8 @@ namespace System.Buffers
                             out ReadOnlyMemory<T> nextSegment,
                             advance: true
                         )
-                    ) {
+                    )
+                    {
                         // Nothing left
                         return false;
                     }

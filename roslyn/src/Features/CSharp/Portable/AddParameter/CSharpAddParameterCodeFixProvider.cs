@@ -72,14 +72,16 @@ namespace Microsoft.CodeAnalysis.CSharp.AddParameter
             SemanticModel semanticModel,
             SyntaxNode node,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (node is ConstructorInitializerSyntax constructorInitializer)
             {
                 var constructorDeclaration = constructorInitializer.Parent;
                 if (
                     semanticModel.GetDeclaredSymbol(constructorDeclaration, cancellationToken)
                     is IMethodSymbol constructorSymbol
-                ) {
+                )
+                {
                     var type = constructorSymbol.ContainingType;
                     if (constructorInitializer.IsKind(SyntaxKind.BaseConstructorInitializer))
                     {

@@ -26,7 +26,8 @@ namespace System.CodeDom
             string localName,
             CodeTypeReference catchExceptionType,
             params CodeStatement[] statements
-        ) {
+        )
+        {
             _localName = localName;
             _catchExceptionType = catchExceptionType;
             Statements.AddRange(statements);

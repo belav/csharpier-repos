@@ -100,16 +100,17 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             SymbolUsageInfo symbolUsageInfo,
             ImmutableDictionary<string, string> additionalProperties,
             CandidateReason candidateReason
-        ) : this(
-            document,
-            alias,
-            location,
-            isImplicit,
-            symbolUsageInfo,
-            additionalProperties,
-            candidateReason,
-            containingStringLocation: Location.None
-        ) { }
+        )
+            : this(
+                document,
+                alias,
+                location,
+                isImplicit,
+                symbolUsageInfo,
+                additionalProperties,
+                candidateReason,
+                containingStringLocation: Location.None
+            ) { }
 
         /// <summary>
         /// Creates a reference location within a string literal.
@@ -119,16 +120,17 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             Document document,
             Location location,
             Location containingStringLocation
-        ) : this(
-            document,
-            alias: null,
-            location,
-            isImplicit: false,
-            SymbolUsageInfo.None,
-            additionalProperties: ImmutableDictionary<string, string>.Empty,
-            CandidateReason.None,
-            containingStringLocation
-        ) { }
+        )
+            : this(
+                document,
+                alias: null,
+                location,
+                isImplicit: false,
+                SymbolUsageInfo.None,
+                additionalProperties: ImmutableDictionary<string, string>.Empty,
+                CandidateReason.None,
+                containingStringLocation
+            ) { }
 
         /// <summary>
         /// Indicates if this was not an exact reference to a location, but was instead a possible
@@ -182,7 +184,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             if (
                 (compare = StringComparer.OrdinalIgnoreCase.Compare(thisPath, otherPath)) != 0
                 || (compare = this.Location.SourceSpan.CompareTo(other.Location.SourceSpan)) != 0
-            ) {
+            )
+            {
                 return compare;
             }
 

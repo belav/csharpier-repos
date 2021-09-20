@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.Options
             ImmutableArray<(string feature, ImmutableArray<IOption> options)> groupedOptions,
             OptionSet optionSet,
             string language
-        ) {
+        )
+        {
             var editorconfig = new StringBuilder();
 
             editorconfig.AppendLine(
@@ -63,7 +64,8 @@ namespace Microsoft.CodeAnalysis.Options
             ImmutableArray<IOption> options,
             string language,
             StringBuilder editorconfig
-        ) {
+        )
+        {
             editorconfig.AppendLine($"#### {feature} ####");
             editorconfig.AppendLine();
 
@@ -73,7 +75,8 @@ namespace Microsoft.CodeAnalysis.Options
                     )
                     .GroupBy(o => (o as IOptionWithGroup)?.Group ?? OptionGroup.Default)
                     .OrderBy(g => g.Key.Priority)
-            ) {
+            )
+            {
                 editorconfig.AppendLine($"# {optionGrouping.Key.Description}");
 
                 var optionsAndEditorConfigLocations = optionGrouping.Select(
@@ -97,7 +100,8 @@ namespace Microsoft.CodeAnalysis.Options
             string GetEditorConfigString(
                 IOption option,
                 IEditorConfigStorageLocation2 editorConfigLocation
-            ) {
+            )
+            {
                 var optionKey = new OptionKey(option, option.IsPerLanguage ? language : null);
                 var value = optionSet.GetOption(optionKey);
                 var editorConfigString = editorConfigLocation.GetEditorConfigString(

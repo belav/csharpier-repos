@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.Structure
                 ImmutableArray<AbstractSyntaxStructureProvider>
             > triviaOutlinerMap,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _optionProvider = optionProvider;
             _nodeProviderMap = nodeOutlinerMap;
             _triviaProviderMap = triviaOutlinerMap;
@@ -53,7 +54,8 @@ namespace Microsoft.CodeAnalysis.Structure
             > triviaOutlinerMap,
             ref TemporaryArray<BlockSpan> spans,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var collector = new BlockSpanCollector(
                 optionProvider,
                 nodeOutlinerMap,
@@ -69,7 +71,8 @@ namespace Microsoft.CodeAnalysis.Structure
 
             foreach (
                 var nodeOrToken in root.DescendantNodesAndTokensAndSelf(descendIntoTrivia: true)
-            ) {
+            )
+            {
                 if (nodeOrToken.IsNode)
                 {
                     GetBlockSpans(nodeOrToken.AsNode()!, ref spans);
@@ -108,7 +111,8 @@ namespace Microsoft.CodeAnalysis.Structure
         private void GetOutliningSpans(
             SyntaxTriviaList triviaList,
             ref TemporaryArray<BlockSpan> spans
-        ) {
+        )
+        {
             foreach (var trivia in triviaList)
             {
                 _cancellationToken.ThrowIfCancellationRequested();

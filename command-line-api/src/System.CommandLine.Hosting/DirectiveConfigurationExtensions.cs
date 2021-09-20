@@ -12,7 +12,8 @@ namespace System.CommandLine.Hosting
             this IConfigurationBuilder config,
             ParseResult commandline,
             string name
-        ) {
+        )
+        {
             if (commandline is null)
                 throw new ArgumentNullException(nameof(commandline));
             if (name is null)

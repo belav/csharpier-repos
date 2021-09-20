@@ -58,7 +58,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
             string connectionId,
             MemoryPool<byte> memoryPool,
             ServiceContext serviceContext
-        ) {
+        )
+        {
             // Allow appending more data to the PipeWriter when a flush is pending.
             _outputWriter = new ConcurrentPipeWriter(outputPipeWriter, memoryPool, _writeLock);
             _connectionContext = connectionContext;
@@ -131,7 +132,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
         public ValueTask<FlushResult> FlushAsync(
             IHttpOutputAborter? outputAborter,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             lock (_writeLock)
             {
                 if (_completed)
@@ -187,7 +189,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
             int statusCode,
             Http2HeadersFrameFlags headerFrameFlags,
             HttpResponseHeaders headers
-        ) {
+        )
+        {
             lock (_writeLock)
             {
                 if (_completed)
@@ -221,7 +224,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
         public ValueTask<FlushResult> WriteResponseTrailersAsync(
             int streamId,
             HttpResponseTrailers headers
-        ) {
+        )
+        {
             lock (_writeLock)
             {
                 if (_completed)
@@ -293,7 +297,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
             bool endStream,
             bool firstWrite,
             bool forceFlush
-        ) {
+        )
+        {
             // Logic in this method is replicated in WriteDataAndTrailersAsync.
             // Changes here may need to be mirrored in WriteDataAndTrailersAsync.
 
@@ -340,7 +345,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
             in ReadOnlySequence<byte> data,
             bool firstWrite,
             HttpResponseTrailers headers
-        ) {
+        )
+        {
             // This method combines WriteDataAsync and WriteResponseTrailers.
             // Changes here may need to be mirrored in WriteDataAsync.
 
@@ -384,7 +390,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
                 long dataLength,
                 bool firstWrite,
                 HttpResponseTrailers headers
-            ) {
+            )
+            {
                 await writer.WriteDataAsync(
                     streamId,
                     flowControl,
@@ -412,7 +419,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
             in ReadOnlySequence<byte> data,
             long dataLength,
             bool endStream
-        ) {
+        )
+        {
             Debug.Assert(dataLength == data.Length);
 
             // Note padding is not implemented
@@ -442,7 +450,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
                 in ReadOnlySequence<byte> data,
                 long dataLength,
                 bool endStream
-            ) {
+            )
+            {
                 Debug.Assert(dataLength == data.Length);
 
                 var dataPayloadLength = (int)_maxFrameSize; // Minus padding
@@ -491,7 +500,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
             long dataLength,
             bool endStream,
             bool firstWrite
-        ) {
+        )
+        {
             FlushResult flushResult = default;
 
             while (dataLength > 0)
@@ -710,7 +720,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
         public ValueTask<FlushResult> WritePingAsync(
             Http2PingFrameFlags flags,
             in ReadOnlySequence<byte> payload
-        ) {
+        )
+        {
             lock (_writeLock)
             {
                 if (_completed)

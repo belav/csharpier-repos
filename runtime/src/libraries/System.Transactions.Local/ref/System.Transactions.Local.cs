@@ -33,7 +33,8 @@ namespace System.Transactions
         public System.IAsyncResult BeginCommit(
             System.AsyncCallback? asyncCallback,
             object? asyncState
-        ) {
+        )
+        {
             throw null;
         }
         public void Commit() { }
@@ -172,7 +173,8 @@ namespace System.Transactions
         }
         public System.Transactions.DependentTransaction DependentClone(
             System.Transactions.DependentCloneOption cloneOption
-        ) {
+        )
+        {
             throw null;
         }
         public void Dispose() { }
@@ -180,42 +182,49 @@ namespace System.Transactions
             System.Guid resourceManagerIdentifier,
             System.Transactions.IEnlistmentNotification enlistmentNotification,
             System.Transactions.EnlistmentOptions enlistmentOptions
-        ) {
+        )
+        {
             throw null;
         }
         public System.Transactions.Enlistment EnlistDurable(
             System.Guid resourceManagerIdentifier,
             System.Transactions.ISinglePhaseNotification singlePhaseNotification,
             System.Transactions.EnlistmentOptions enlistmentOptions
-        ) {
+        )
+        {
             throw null;
         }
         public bool EnlistPromotableSinglePhase(
             System.Transactions.IPromotableSinglePhaseNotification promotableSinglePhaseNotification
-        ) {
+        )
+        {
             throw null;
         }
         public bool EnlistPromotableSinglePhase(
             System.Transactions.IPromotableSinglePhaseNotification promotableSinglePhaseNotification,
             System.Guid promoterType
-        ) {
+        )
+        {
             throw null;
         }
         public System.Transactions.Enlistment EnlistVolatile(
             System.Transactions.IEnlistmentNotification enlistmentNotification,
             System.Transactions.EnlistmentOptions enlistmentOptions
-        ) {
+        )
+        {
             throw null;
         }
         public System.Transactions.Enlistment EnlistVolatile(
             System.Transactions.ISinglePhaseNotification singlePhaseNotification,
             System.Transactions.EnlistmentOptions enlistmentOptions
-        ) {
+        )
+        {
             throw null;
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -229,13 +238,15 @@ namespace System.Transactions
         public static bool operator ==(
             System.Transactions.Transaction? x,
             System.Transactions.Transaction? y
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Transactions.Transaction? x,
             System.Transactions.Transaction? y
-        ) {
+        )
+        {
             throw null;
         }
         public System.Transactions.Enlistment PromoteAndEnlistDurable(
@@ -243,7 +254,8 @@ namespace System.Transactions
             System.Transactions.IPromotableSinglePhaseNotification promotableNotification,
             System.Transactions.ISinglePhaseNotification enlistmentNotification,
             System.Transactions.EnlistmentOptions enlistmentOptions
-        ) {
+        )
+        {
             throw null;
         }
         public void Rollback() { }
@@ -324,18 +336,21 @@ namespace System.Transactions
         public static readonly System.Guid PromoterTypeDtc;
         public static System.Transactions.IDtcTransaction GetDtcTransaction(
             System.Transactions.Transaction transaction
-        ) {
+        )
+        {
             throw null;
         }
         public static byte[] GetExportCookie(
             System.Transactions.Transaction transaction,
             byte[] whereabouts
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Transactions.Transaction GetTransactionFromDtcTransaction(
             System.Transactions.IDtcTransaction transactionNative
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Transactions.Transaction GetTransactionFromExportCookie(byte[] cookie)
@@ -344,12 +359,14 @@ namespace System.Transactions
         }
         public static System.Transactions.Transaction GetTransactionFromTransmitterPropagationToken(
             byte[] propagationToken
-        ) {
+        )
+        {
             throw null;
         }
         public static byte[] GetTransmitterPropagationToken(
             System.Transactions.Transaction transaction
-        ) {
+        )
+        {
             throw null;
         }
         public static byte[] GetWhereabouts()
@@ -383,7 +400,8 @@ namespace System.Transactions
             System.Guid resourceManagerIdentifier,
             byte[] recoveryInformation,
             System.Transactions.IEnlistmentNotification enlistmentNotification
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -416,7 +434,8 @@ namespace System.Transactions
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -426,13 +445,15 @@ namespace System.Transactions
         public static bool operator ==(
             System.Transactions.TransactionOptions x,
             System.Transactions.TransactionOptions y
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Transactions.TransactionOptions x,
             System.Transactions.TransactionOptions y
-        ) {
+        )
+        {
             throw null;
         }
     }

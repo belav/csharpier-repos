@@ -52,7 +52,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
 
         private string GetDocumentationCommentPrefix(
             TDocumentationCommentTriviaSyntax documentationComment
-        ) {
+        )
+        {
             Contract.ThrowIfNull(documentationComment);
 
             var leadingTrivia = documentationComment.GetLeadingTrivia();
@@ -68,7 +69,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             TDocumentationCommentTriviaSyntax documentationComment,
             int maxBannerLength,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // TODO: Consider unifying code to extract text from an Xml Documentation Comment (https://github.com/dotnet/roslyn/issues/2290)
             var summaryElement = documentationComment.ChildNodes()
                 .OfType<TXmlElementSyntax>()

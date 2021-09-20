@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             SyntaxNode node1,
             SyntaxNode node2,
             Func<SyntaxNode, bool> predicate = null
-        ) {
+        )
+        {
             // First check for syntactic equivalency.  If two nodes aren't structurally equivalent,
             // then they're not semantically equivalent.
             if (node1 == null && node2 == null)
@@ -60,7 +61,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             SyntaxNode node1,
             SyntaxNode node2,
             Func<SyntaxNode, bool> predicate
-        ) {
+        )
+        {
             if (node1 == node2)
             {
                 return true;
@@ -105,7 +107,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                             c2.AsNode(),
                             predicate
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }
@@ -117,7 +120,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             SemanticModel semanticModel2,
             SymbolInfo info1,
             SymbolInfo info2
-        ) {
+        )
+        {
             if (semanticModel1 == semanticModel2)
             {
                 return EqualityComparer<ISymbol>.Default.Equals(info1.Symbol, info2.Symbol);

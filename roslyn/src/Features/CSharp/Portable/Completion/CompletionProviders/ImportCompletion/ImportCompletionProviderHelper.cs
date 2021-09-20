@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             int position,
             bool usePartialSemantic,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Need regular semantic model because we will use it to get imported namespace symbols. Otherwise we will try to
             // reach outside of the span and ended up with "node not within syntax tree" error from the speculative model.
             // Also we use partial model unless full model is explictly request (e.g. in tests) so that we don't have to wait for all semantics to be computed.

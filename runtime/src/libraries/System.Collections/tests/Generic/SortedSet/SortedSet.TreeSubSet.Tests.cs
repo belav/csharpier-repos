@@ -40,7 +40,8 @@ namespace System.Collections.Tests
                 && !AddRemoveClear_ThrowsNotSupported
                 && DefaultValueAllowed
                 && !Enumerable.Contains(InvalidValues, default(string))
-            ) {
+            )
+            {
                 int seed = count * 21;
                 ICollection<string> collection = GenericICollectionFactory(count);
                 Assert.False(collection.Remove(default(string)));
@@ -49,7 +50,8 @@ namespace System.Collections.Tests
 
         public override void ICollection_Generic_Contains_DefaultValueOnCollectionContainingDefaultValue(
             int count
-        ) {
+        )
+        {
             if (DefaultValueAllowed && !IsReadOnly && !AddRemoveClear_ThrowsNotSupported)
             {
                 ICollection<string> collection = GenericICollectionFactory(count);
@@ -84,7 +86,8 @@ namespace System.Collections.Tests
                 && !IsReadOnly
                 && !AddRemoveClear_ThrowsNotSupported
                 && CanAddDefaultValue
-            ) {
+            )
+            {
                 ICollection<T> collection = GenericICollectionFactory(count);
                 collection.Add(default(T));
                 Assert.Equal(count + 1, collection.Count); // collection is also updated.

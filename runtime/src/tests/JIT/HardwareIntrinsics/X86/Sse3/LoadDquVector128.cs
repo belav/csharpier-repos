@@ -26,7 +26,8 @@ namespace IntelHardwareIntrinsicTest
                         new int[4] { 1, -5, 100, 0 },
                         new int[4]
                     )
-                ) {
+                )
+                {
                     var vf = Sse3.LoadDquVector128((int*)(intTable.inArrayPtr));
                     Unsafe.Write(intTable.outArrayPtr, vf);
 
@@ -47,7 +48,8 @@ namespace IntelHardwareIntrinsicTest
                         new uint[4] { 1, 5, 100, 0 },
                         new uint[4]
                     )
-                ) {
+                )
+                {
                     var vf = Sse3.LoadDquVector128((uint*)(intTable.inArrayPtr));
                     Unsafe.Write(intTable.outArrayPtr, vf);
 
@@ -68,7 +70,8 @@ namespace IntelHardwareIntrinsicTest
                         new long[2] { 1, -5 },
                         new long[2]
                     )
-                ) {
+                )
+                {
                     var vf = Sse3.LoadDquVector128((long*)(intTable.inArrayPtr));
                     Unsafe.Write(intTable.outArrayPtr, vf);
 
@@ -89,7 +92,8 @@ namespace IntelHardwareIntrinsicTest
                         new ulong[2] { 1, 5 },
                         new ulong[2]
                     )
-                ) {
+                )
+                {
                     var vf = Sse3.LoadDquVector128((ulong*)(intTable.inArrayPtr));
                     Unsafe.Write(intTable.outArrayPtr, vf);
 
@@ -110,7 +114,8 @@ namespace IntelHardwareIntrinsicTest
                         new short[8] { 1, -5, 100, 0, 1, 2, 3, 4 },
                         new short[8]
                     )
-                ) {
+                )
+                {
                     var vf = Sse3.LoadDquVector128((short*)(intTable.inArrayPtr));
                     Unsafe.Write(intTable.outArrayPtr, vf);
 
@@ -131,7 +136,8 @@ namespace IntelHardwareIntrinsicTest
                         new ushort[8] { 1, 5, 100, 0, 1, 2, 3, 4 },
                         new ushort[8]
                     )
-                ) {
+                )
+                {
                     var vf = Sse3.LoadDquVector128((ushort*)(intTable.inArrayPtr));
                     Unsafe.Write(intTable.outArrayPtr, vf);
 
@@ -152,7 +158,8 @@ namespace IntelHardwareIntrinsicTest
                         new byte[16] { 1, 5, 100, 0, 1, 2, 3, 4, 1, 5, 100, 0, 1, 2, 3, 4 },
                         new byte[16]
                     )
-                ) {
+                )
+                {
                     var vf = Sse3.LoadDquVector128((byte*)(intTable.inArrayPtr));
                     Unsafe.Write(intTable.outArrayPtr, vf);
 
@@ -173,7 +180,8 @@ namespace IntelHardwareIntrinsicTest
                         new sbyte[16] { 1, -5, 100, 0, 1, 2, 3, 4, 1, -5, 100, 0, 1, 2, 3, 4 },
                         new sbyte[16]
                     )
-                ) {
+                )
+                {
                     var vf = Sse3.LoadDquVector128((sbyte*)(intTable.inArrayPtr));
                     Unsafe.Write(intTable.outArrayPtr, vf);
 

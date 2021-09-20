@@ -32,7 +32,8 @@ namespace System.CodeDom
             CodeTypeReference type,
             string name,
             CodeExpression initExpression
-        ) {
+        )
+        {
             Type = type;
             Name = name;
             InitExpression = initExpression;
@@ -42,7 +43,8 @@ namespace System.CodeDom
             string type,
             string name,
             CodeExpression initExpression
-        ) {
+        )
+        {
             Type = new CodeTypeReference(type);
             Name = name;
             InitExpression = initExpression;
@@ -52,7 +54,8 @@ namespace System.CodeDom
             Type type,
             string name,
             CodeExpression initExpression
-        ) {
+        )
+        {
             Type = new CodeTypeReference(type);
             Name = name;
             InitExpression = initExpression;

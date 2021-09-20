@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MetadataAsSource
             Compilation symbolCompilation,
             ISymbol symbol,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var assemblyInfo = MetadataAsSourceHelpers.GetAssemblyInfo(symbol.ContainingAssembly);
             var assemblyPath = MetadataAsSourceHelpers.GetAssemblyDisplay(
                 symbolCompilation,
@@ -74,7 +75,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MetadataAsSource
             Document document,
             IDocumentationCommentFormattingService docCommentFormattingService,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxRoot = await document.GetSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
 
@@ -121,7 +123,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MetadataAsSource
         protected override async Task<Document> AddNullableRegionsAsync(
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var tree = await document.GetSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
             var options = (CSharpParseOptions)tree.Options;
 
@@ -145,7 +148,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MetadataAsSource
 
         private static (bool oblivious, bool annotatedOrNotAnnotated) GetNullableAnnotations(
             SyntaxNode node
-        ) {
+        )
+        {
             return (
                 HasAnnotation(node, NullableSyntaxAnnotation.Oblivious),
                 HasAnnotation(node, NullableSyntaxAnnotation.AnnotatedOrNotAnnotated)
@@ -200,7 +204,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MetadataAsSource
         private SyntaxList<MemberDeclarationSyntax> AddNullableRegions(
             SyntaxList<MemberDeclarationSyntax> members,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<MemberDeclarationSyntax>.GetInstance(out var builder);
 
             foreach (var member in members)
@@ -212,7 +217,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MetadataAsSource
         private TypeDeclarationSyntax AddNullableRegionsAroundTypeMembers(
             TypeDeclarationSyntax type,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<MemberDeclarationSyntax>.GetInstance(out var builder);
 
             var currentlyEnabled = true;
@@ -274,7 +280,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MetadataAsSource
             MemberDeclarationSyntax member,
             bool enabled,
             ref bool currentlyEnabled
-        ) {
+        )
+        {
             if (enabled == currentlyEnabled)
             {
                 // already in the right state.  don't start a #nullable region

@@ -133,7 +133,8 @@ namespace System.Xml.Xsl.XsltOld
             bool empty,
             object? htmlProps,
             bool search
-        ) {
+        )
+        {
             if (!CanOutput(state))
             {
                 return Processor.OutputResult.Overflow;
@@ -188,7 +189,8 @@ namespace System.Xml.Xsl.XsltOld
             int state,
             string? text,
             bool disableOutputEscaping
-        ) {
+        )
+        {
             if (!CanOutput(state))
             {
                 return Processor.OutputResult.Overflow;
@@ -334,7 +336,8 @@ namespace System.Xml.Xsl.XsltOld
             string nspace,
             object? htmlAttrProps,
             bool search
-        ) {
+        )
+        {
             int attrib = FindAttribute(name, nspace, ref prefix);
 
             if (attrib == -1)

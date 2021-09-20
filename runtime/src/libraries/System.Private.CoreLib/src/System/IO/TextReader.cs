@@ -344,7 +344,8 @@ namespace System.IO
         internal async ValueTask<int> ReadBlockAsyncInternal(
             Memory<char> buffer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             int n = 0,
                 i;
             do

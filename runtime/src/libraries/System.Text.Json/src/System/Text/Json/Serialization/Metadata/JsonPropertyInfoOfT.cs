@@ -41,7 +41,8 @@ namespace System.Text.Json.Serialization.Metadata
             JsonIgnoreCondition? ignoreCondition,
             JsonNumberHandling? parentTypeNumberHandling,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             base.Initialize(
                 parentClassType,
                 declaredPropertyType,
@@ -125,7 +126,8 @@ namespace System.Text.Json.Serialization.Metadata
             JsonNumberHandling numberHandling,
             string propertyName,
             JsonEncodedText jsonPropertyName
-        ) {
+        )
+        {
             Options = options;
             ClrName = propertyName;
 
@@ -137,7 +139,8 @@ namespace System.Text.Json.Serialization.Metadata
                 encodedName != null
                 && options.PropertyNamingPolicy == null
                 && options.Encoder == null
-            ) {
+            )
+            {
                 NameAsString = encodedNameAsStr;
                 NameAsUtf8Bytes = encodedName;
 
@@ -222,7 +225,8 @@ namespace System.Text.Json.Serialization.Metadata
             JsonTypeInfo runtimeTypeInfo,
             JsonConverter converter,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             JsonPropertyInfo<T> jsonPropertyInfo = new JsonPropertyInfo<T>();
             jsonPropertyInfo.DeclaredPropertyType = declaredPropertyType;
             jsonPropertyInfo.RuntimePropertyType = declaredPropertyType;
@@ -266,7 +270,8 @@ namespace System.Text.Json.Serialization.Metadata
             object obj,
             ref WriteStack state,
             Utf8JsonWriter writer
-        ) {
+        )
+        {
             T value = Get!(obj);
 
             if (
@@ -274,7 +279,8 @@ namespace System.Text.Json.Serialization.Metadata
                 && !Converter.IsValueType
                 && value != null
                 && state.ReferenceResolver.ContainsReferenceForCycleDetection(value)
-            ) {
+            )
+            {
                 // If a reference cycle is detected, treat value as null.
                 value = default!;
                 Debug.Assert(value == null);
@@ -356,7 +362,8 @@ namespace System.Text.Json.Serialization.Metadata
             object obj,
             ref WriteStack state,
             Utf8JsonWriter writer
-        ) {
+        )
+        {
             bool success;
             T value = Get!(obj);
 
@@ -381,7 +388,8 @@ namespace System.Text.Json.Serialization.Metadata
             object obj,
             ref ReadStack state,
             ref Utf8JsonReader reader
-        ) {
+        )
+        {
             bool success;
 
             bool isNullToken = reader.TokenType == JsonTokenType.Null;
@@ -426,7 +434,8 @@ namespace System.Text.Json.Serialization.Metadata
                     || !IgnoreDefaultValuesOnRead
                     || !PropertyTypeCanBeNull
                     || state.IsContinuation
-                ) {
+                )
+                {
                     success = Converter.TryRead(
                         ref reader,
                         RuntimePropertyType!,
@@ -471,7 +480,8 @@ namespace System.Text.Json.Serialization.Metadata
             ref ReadStack state,
             ref Utf8JsonReader reader,
             out object? value
-        ) {
+        )
+        {
             bool success;
             bool isNullToken = reader.TokenType == JsonTokenType.Null;
             if (isNullToken && !Converter.HandleNullOnRead && !state.IsContinuation)

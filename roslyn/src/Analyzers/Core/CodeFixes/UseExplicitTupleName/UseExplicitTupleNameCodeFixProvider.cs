@@ -55,7 +55,8 @@ namespace Microsoft.CodeAnalysis.UseExplicitTupleName
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var generator = editor.Generator;
 
             foreach (var diagnostic in diagnostics)
@@ -79,13 +80,12 @@ namespace Microsoft.CodeAnalysis.UseExplicitTupleName
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                AnalyzersResources.Use_explicitly_provided_tuple_name,
-                createChangedDocument,
-                AnalyzersResources.Use_explicitly_provided_tuple_name
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    AnalyzersResources.Use_explicitly_provided_tuple_name,
+                    createChangedDocument,
+                    AnalyzersResources.Use_explicitly_provided_tuple_name
+                ) { }
         }
     }
 }

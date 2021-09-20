@@ -260,7 +260,8 @@ namespace System.Threading.Tasks.Tests
                 Task task,
                 bool shouldBeCompleted,
                 string message
-            ) {
+            )
+            {
                 if (task.IsCompleted != shouldBeCompleted)
                 {
                     Assert.True(
@@ -748,7 +749,8 @@ namespace System.Threading.Tasks.Tests
         private static void RunContinueWithTaskTask_State_Helper(
             TaskContinuationOptions options,
             bool runNegativeCases = false
-        ) {
+        )
+        {
             bool ran = false;
 
             string stateParam = "test"; //used as a state parameter for the continuation if the useStateParam is true
@@ -813,7 +815,8 @@ namespace System.Threading.Tasks.Tests
         private static void RunContinueWithTaskFuture_State_Helper(
             TaskContinuationOptions options,
             bool runNegativeCases = false
-        ) {
+        )
+        {
             bool ran = false;
 
             Debug.WriteLine("* RunContinueWithTaskFuture_StateA(Object, options={0})", options);
@@ -879,7 +882,8 @@ namespace System.Threading.Tasks.Tests
         private static void RunContinueWithFutureTask_State_Helper(
             TaskContinuationOptions options,
             bool runNegativeCases = false
-        ) {
+        )
+        {
             bool ran = false;
 
             Debug.WriteLine("* RunContinueWithFutureTask_State(Object, options={0})", options);
@@ -943,7 +947,8 @@ namespace System.Threading.Tasks.Tests
         private static void RunContinueWithFutureFuture_State_Helper(
             TaskContinuationOptions options,
             bool runNegativeCases = false
-        ) {
+        )
+        {
             bool ran = false;
 
             Debug.WriteLine("* RunContinueWithFutureFuture_StateA(Object, options={0})", options);
@@ -1011,7 +1016,8 @@ namespace System.Threading.Tasks.Tests
             Func<Task, Task> continuationMaker,
             Func<bool> ranValue,
             bool taskIsFuture
-        ) {
+        )
+        {
             Debug.WriteLine("    >> (1) ContinueWith after task finishes Successfully.");
             {
                 bool expect = (options & TaskContinuationOptions.NotOnRanToCompletion) == 0;
@@ -1107,7 +1113,8 @@ namespace System.Threading.Tasks.Tests
             Func<Task, Task> continuationMaker,
             Func<bool> ranValue,
             bool taskIsFuture
-        ) {
+        )
+        {
             Debug.WriteLine("    >> (3) ContinueWith after task finishes Exceptionally.");
             {
                 bool expect = (options & TaskContinuationOptions.NotOnFaulted) == 0;
@@ -1343,7 +1350,8 @@ namespace System.Threading.Tasks.Tests
             else if (
                 ((AggregateException)exception).InnerException.GetType()
                 != typeof(TaskCanceledException)
-            ) {
+            )
+            {
                 exception = ((AggregateException)exception).InnerException;
                 Assert.True(
                     false,

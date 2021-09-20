@@ -58,7 +58,8 @@ namespace Microsoft.AspNetCore.Components.WebView.Services
             Type componentType,
             string selector,
             ParameterView parameters
-        ) {
+        )
+        {
             if (_componentIdBySelector.ContainsKey(selector))
             {
                 throw new InvalidOperationException(

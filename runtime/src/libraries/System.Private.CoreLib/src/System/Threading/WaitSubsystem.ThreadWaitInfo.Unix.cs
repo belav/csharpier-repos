@@ -415,7 +415,8 @@ namespace System.Threading
                     if (
                         interruptible
                         && Thread.CurrentThread.WaitInfo.CheckAndResetPendingInterrupt_NotLocked
-                    ) {
+                    )
+                    {
                         throw new ThreadInterruptedException();
                     }
 
@@ -434,7 +435,8 @@ namespace System.Threading
             public bool TrySignalToSatisfyWait(
                 WaitedListNode registeredListNode,
                 bool isAbandonedMutex
-            ) {
+            )
+            {
                 s_lock.VerifyIsLocked();
                 Debug.Assert(_thread != Thread.CurrentThread);
 
@@ -460,7 +462,8 @@ namespace System.Threading
                             ref wouldAnyMutexReacquireCountOverflow,
                             ref isAbandonedMutex
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }

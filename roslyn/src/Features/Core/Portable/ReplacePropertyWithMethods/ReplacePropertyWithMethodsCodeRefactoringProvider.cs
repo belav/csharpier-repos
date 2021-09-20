@@ -88,7 +88,8 @@ namespace Microsoft.CodeAnalysis.ReplacePropertyWithMethods
             Document document,
             IPropertySymbol propertySymbol,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var desiredMethodSuffix = NameGenerator.GenerateUniqueName(
                 propertySymbol.Name,
                 n => !HasAnyMatchingGetOrSetMethods(propertySymbol, n)
@@ -251,7 +252,8 @@ namespace Microsoft.CodeAnalysis.ReplacePropertyWithMethods
             string desiredGetMethodName,
             string desiredSetMethodName,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             foreach (var group in referencesByDocument)
             {
                 cancellationToken.ThrowIfCancellationRequested();
@@ -278,7 +280,8 @@ namespace Microsoft.CodeAnalysis.ReplacePropertyWithMethods
             string desiredGetMethodName,
             string desiredSetMethodName,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await originalDocument.GetRequiredSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
 
@@ -317,7 +320,8 @@ namespace Microsoft.CodeAnalysis.ReplacePropertyWithMethods
             string desiredGetMethodName,
             string desiredSetMethodName,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (references != null)
             {
                 var syntaxFacts =
@@ -385,7 +389,8 @@ namespace Microsoft.CodeAnalysis.ReplacePropertyWithMethods
             string desiredGetMethodName,
             string desiredSetMethodName,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var definitionsByDocumentId = await GetDefinitionsByDocumentIdAsync(
                     originalSolution,
                     references,
@@ -418,7 +423,8 @@ namespace Microsoft.CodeAnalysis.ReplacePropertyWithMethods
             Solution originalSolution,
             IEnumerable<ReferencedSymbol> referencedSymbols,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var result = new MultiDictionary<DocumentId, IPropertySymbol>();
             foreach (var referencedSymbol in referencedSymbols)
             {
@@ -453,7 +459,8 @@ namespace Microsoft.CodeAnalysis.ReplacePropertyWithMethods
             string desiredGetMethodName,
             string desiredSetMethodName,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var updatedDocument = updatedSolution.GetRequiredDocument(documentId);
             var semanticModel = await updatedDocument.GetRequiredSemanticModelAsync(
                     cancellationToken
@@ -520,7 +527,8 @@ namespace Microsoft.CodeAnalysis.ReplacePropertyWithMethods
             DocumentId documentId,
             MultiDictionary<DocumentId, IPropertySymbol>.ValueSet originalDefinitions,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var _ =
                 ArrayBuilder<(IPropertySymbol property, SyntaxNode declaration)>.GetInstance(
                     out var result
@@ -551,7 +559,8 @@ namespace Microsoft.CodeAnalysis.ReplacePropertyWithMethods
         private static async Task<SyntaxNode?> GetPropertyDeclarationAsync(
             IPropertySymbol? property,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (property == null)
                 return null;
 

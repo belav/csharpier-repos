@@ -29,7 +29,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Features.QuickInfo
             TextSpan span,
             IEnumerable<TaggedText> description,
             ISymbol symbol = null
-        ) {
+        )
+        {
             return new XamlQuickInfo(span, description, symbol);
         }
     }

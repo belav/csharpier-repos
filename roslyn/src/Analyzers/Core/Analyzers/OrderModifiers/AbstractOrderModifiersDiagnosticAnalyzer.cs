@@ -25,22 +25,24 @@ namespace Microsoft.CodeAnalysis.OrderModifiers
             Option2<CodeStyleOption2<string>> option,
             AbstractOrderModifiersHelpers helpers,
             string language
-        ) : base(
-            IDEDiagnosticIds.OrderModifiersDiagnosticId,
-            EnforceOnBuildValues.OrderModifiers,
-            option,
-            language,
-            new LocalizableResourceString(
-                nameof(AnalyzersResources.Order_modifiers),
-                AnalyzersResources.ResourceManager,
-                typeof(AnalyzersResources)
-            ),
-            new LocalizableResourceString(
-                nameof(AnalyzersResources.Modifiers_are_not_ordered),
-                AnalyzersResources.ResourceManager,
-                typeof(AnalyzersResources)
+        )
+            : base(
+                IDEDiagnosticIds.OrderModifiersDiagnosticId,
+                EnforceOnBuildValues.OrderModifiers,
+                option,
+                language,
+                new LocalizableResourceString(
+                    nameof(AnalyzersResources.Order_modifiers),
+                    AnalyzersResources.ResourceManager,
+                    typeof(AnalyzersResources)
+                ),
+                new LocalizableResourceString(
+                    nameof(AnalyzersResources.Modifiers_are_not_ordered),
+                    AnalyzersResources.ResourceManager,
+                    typeof(AnalyzersResources)
+                )
             )
-        ) {
+        {
             _syntaxFacts = syntaxFacts;
             _option = option;
             _helpers = helpers;
@@ -76,14 +78,16 @@ namespace Microsoft.CodeAnalysis.OrderModifiers
             Dictionary<int, int> preferredOrder,
             ReportDiagnostic severity,
             SyntaxNode memberDeclaration
-        ) {
+        )
+        {
             var modifiers = _syntaxFacts.GetModifiers(memberDeclaration);
             if (!AbstractOrderModifiersHelpers.IsOrdered(preferredOrder, modifiers))
             {
                 if (
                     severity.WithDefaultSeverity(DiagnosticSeverity.Hidden)
                     == ReportDiagnostic.Hidden
-                ) {
+                )
+                {
                     // If the severity is hidden, put the marker on all the modifiers so that the
                     // user can bring up the fix anywhere in the modifier list.
                     context.ReportDiagnostic(

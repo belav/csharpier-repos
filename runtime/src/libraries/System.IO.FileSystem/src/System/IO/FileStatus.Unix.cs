@@ -159,7 +159,8 @@ namespace System.IO
                     if (
                         (_fileStatus.UserFlags & (uint)Interop.Sys.UserFlags.UF_HIDDEN)
                         == (uint)Interop.Sys.UserFlags.UF_HIDDEN
-                    ) {
+                    )
+                    {
                         // If Hidden flag is not set and cached file status does have the flag set then remove it
                         Interop.CheckIo(
                             Interop.Sys.LChflags(
@@ -211,7 +212,8 @@ namespace System.IO
         internal DateTimeOffset GetCreationTime(
             ReadOnlySpan<char> path,
             bool continueOnError = false
-        ) {
+        )
+        {
             EnsureStatInitialized(path, continueOnError);
             if (!_exists)
                 return DateTimeOffset.FromFileTime(0);
@@ -249,7 +251,8 @@ namespace System.IO
         internal DateTimeOffset GetLastAccessTime(
             ReadOnlySpan<char> path,
             bool continueOnError = false
-        ) {
+        )
+        {
             EnsureStatInitialized(path, continueOnError);
             if (!_exists)
                 return DateTimeOffset.FromFileTime(0);
@@ -262,7 +265,8 @@ namespace System.IO
         internal DateTimeOffset GetLastWriteTime(
             ReadOnlySpan<char> path,
             bool continueOnError = false
-        ) {
+        )
+        {
             EnsureStatInitialized(path, continueOnError);
             if (!_exists)
                 return DateTimeOffset.FromFileTime(0);
@@ -283,7 +287,8 @@ namespace System.IO
             string path,
             DateTimeOffset time,
             bool isAccessTime
-        ) {
+        )
+        {
             // force a refresh so that we have an up-to-date times for values not being overwritten
             _fileStatusInitialized = -1;
             EnsureStatInitialized(path);
@@ -352,7 +357,8 @@ namespace System.IO
                 if (
                     errorInfo.Error == Interop.Error.ENOENT
                     || errorInfo.Error == Interop.Error.ENOTDIR
-                ) {
+                )
+                {
                     _fileStatusInitialized = 0;
                     _exists = false;
                 }
@@ -373,7 +379,8 @@ namespace System.IO
             if (
                 (_fileStatus.Mode & Interop.Sys.FileTypes.S_IFMT) == Interop.Sys.FileTypes.S_IFLNK
                 && Interop.Sys.Stat(path, out Interop.Sys.FileStatus targetStatus) >= 0
-            ) {
+            )
+            {
                 _isDirectory =
                     (targetStatus.Mode & Interop.Sys.FileTypes.S_IFMT)
                     == Interop.Sys.FileTypes.S_IFDIR;

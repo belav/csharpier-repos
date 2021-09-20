@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 ISymbolInternal,
                 ImmutableArray<ISymbolInternal>
             > otherSynthesizedMembersOpt
-        ) {
+        )
+        {
             _defs = new MatchDefsToSource(sourceContext, otherContext);
             _symbols = new MatchSymbols(
                 anonymousTypeMap,
@@ -50,7 +51,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             SourceAssemblySymbol sourceAssembly,
             EmitContext sourceContext,
             PEAssemblySymbol otherAssembly
-        ) {
+        )
+        {
             _defs = new MatchDefsToMetadata(sourceContext, otherAssembly);
 
             _symbols = new MatchSymbols(
@@ -176,7 +178,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
             private Cci.INamespaceTypeDefinition? VisitNamespaceType(
                 Cci.INamespaceTypeDefinition def
-            ) {
+            )
+            {
                 // All generated top-level types are assumed to be in the global namespace.
                 // However, this may be an embedded NoPIA type within a namespace.
                 // Since we do not support edits that include references to NoPIA types
@@ -238,10 +241,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
         {
             private readonly PEAssemblySymbol _otherAssembly;
 
-            public MatchDefsToMetadata(
-                EmitContext sourceContext,
-                PEAssemblySymbol otherAssembly
-            ) : base(sourceContext)
+            public MatchDefsToMetadata(EmitContext sourceContext, PEAssemblySymbol otherAssembly)
+                : base(sourceContext)
             {
                 _otherAssembly = otherAssembly;
             }
@@ -255,7 +256,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
             protected override IEnumerable<Cci.INestedTypeDefinition> GetNestedTypes(
                 Cci.ITypeDefinition def
-            ) {
+            )
+            {
                 var type = (PENamedTypeSymbol)def;
                 return type.GetTypeMembers().Cast<Cci.INestedTypeDefinition>();
             }
@@ -269,7 +271,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             private static void GetTopLevelTypes(
                 ArrayBuilder<Cci.INamespaceTypeDefinition> builder,
                 NamespaceSymbol @namespace
-            ) {
+            )
+            {
                 foreach (var member in @namespace.GetMembers())
                 {
                     if (member.Kind == SymbolKind.Namespace)
@@ -301,7 +304,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
             protected override IEnumerable<Cci.INestedTypeDefinition> GetNestedTypes(
                 Cci.ITypeDefinition def
-            ) {
+            )
+            {
                 return def.GetNestedTypes(_otherContext);
             }
 
@@ -355,7 +359,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                     ImmutableArray<ISymbolInternal>
                 >? otherSynthesizedMembers,
                 DeepTranslator? deepTranslator
-            ) {
+            )
+            {
                 _anonymousTypeMap = anonymousTypeMap;
                 _sourceAssembly = sourceAssembly;
                 _otherAssembly = otherAssembly;
@@ -367,7 +372,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 AnonymousTypeManager.AnonymousTypeTemplateSymbol type,
                 [NotNullWhen(true)] out string? name,
                 out int index
-            ) {
+            )
+            {
                 if (TryFindAnonymousType(type, out var otherType))
                 {
                     name = otherType.Name;
@@ -494,7 +500,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                     var otherReferencedAssembly in _otherAssembly.Modules[
                         0
                     ].ReferencedAssemblySymbols
-                ) {
+                )
+                {
                     if (IdentityEqualIgnoringVersionWildcard(assembly, otherReferencedAssembly))
                     {
                         return otherReferencedAssembly;
@@ -507,7 +514,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             private static bool IdentityEqualIgnoringVersionWildcard(
                 AssemblySymbol left,
                 AssemblySymbol right
-            ) {
+            )
+            {
                 var leftIdentity = left.Identity;
                 var rightIdentity = right.Identity;
 
@@ -753,7 +761,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
             private ImmutableArray<CustomModifier> VisitCustomModifiers(
                 ImmutableArray<CustomModifier> modifiers
-            ) {
+            )
+            {
                 return modifiers.SelectAsArray(VisitCustomModifier);
             }
 
@@ -770,7 +779,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             internal bool TryFindAnonymousType(
                 AnonymousTypeManager.AnonymousTypeTemplateSymbol type,
                 out AnonymousTypeValue otherType
-            ) {
+            )
+            {
                 Debug.Assert(
                     (object)type.ContainingSymbol == (object)_sourceAssembly.GlobalNamespace
                 );
@@ -921,7 +931,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             private bool AreFunctionPointerTypesEqual(
                 FunctionPointerTypeSymbol type,
                 FunctionPointerTypeSymbol other
-            ) {
+            )
+            {
                 var sig = type.Signature;
                 var otherSig = other.Signature;
 
@@ -943,7 +954,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                         sig.ReturnTypeWithAnnotations,
                         otherSig.ReturnTypeWithAnnotations
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -956,7 +968,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             private bool AreFunctionPointerParametersEqual(
                 ParameterSymbol param,
                 ParameterSymbol otherParam
-            ) {
+            )
+            {
                 ValidateFunctionPointerParamOrReturn(
                     param.TypeWithAnnotations,
                     param.RefKind,
@@ -980,7 +993,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 RefKind refKind,
                 ImmutableArray<CustomModifier> refCustomModifiers,
                 bool allowOut
-            ) {
+            )
+            {
                 Debug.Assert(type.CustomModifiers.IsEmpty);
                 Debug.Assert(verifyRefModifiers(refCustomModifiers, refKind, allowOut));
 
@@ -988,7 +1002,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                     ImmutableArray<CustomModifier> modifiers,
                     RefKind refKind,
                     bool allowOut
-                ) {
+                )
+                {
                     Debug.Assert(RefKind.RefReadOnly == RefKind.In);
                     switch (refKind)
                     {
@@ -1014,7 +1029,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             private static bool AreTypeParametersEqual(
                 TypeParameterSymbol type,
                 TypeParameterSymbol other
-            ) {
+            )
+            {
                 Debug.Assert(type.Ordinal == other.Ordinal);
                 Debug.Assert(StringOrdinalComparer.Equals(type.Name, other.Name));
                 // Comparing constraints is unnecessary: two methods cannot differ by
@@ -1101,7 +1117,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 if (
                     _otherSynthesizedMembers != null
                     && _otherSynthesizedMembers.TryGetValue(symbol, out var synthesizedMembers)
-                ) {
+                )
+                {
                     members.AddRange(synthesizedMembers);
                 }
 
@@ -1308,7 +1325,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
             private ImmutableArray<CustomModifier> VisitCustomModifiers(
                 ImmutableArray<CustomModifier> modifiers
-            ) {
+            )
+            {
                 return modifiers.SelectAsArray(VisitCustomModifier);
             }
 

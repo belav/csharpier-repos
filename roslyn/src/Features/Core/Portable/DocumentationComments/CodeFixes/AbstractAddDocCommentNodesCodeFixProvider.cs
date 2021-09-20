@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.DiagnosticComments.CodeFixes
             if (
                 parentMethod != null
                 && TryGetDocCommentNode(parentMethod.GetLeadingTrivia()) != null
-            ) {
+            )
+            {
                 context.RegisterCodeFix(
                     new MyCodeAction(c => AddParamTagAsync(context.Document, context.Span, c)),
                     context.Diagnostics
@@ -64,7 +65,8 @@ namespace Microsoft.CodeAnalysis.DiagnosticComments.CodeFixes
             Document document,
             TextSpan span,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             var parentMethod = root.FindNode(span).FirstAncestorOrSelf<TMemberDeclarationSyntax>();
             var docCommentNode = TryGetDocCommentNode(parentMethod.GetLeadingTrivia());
@@ -185,7 +187,8 @@ namespace Microsoft.CodeAnalysis.DiagnosticComments.CodeFixes
         protected TXmlElementSyntax GetParamNodeForParamName(
             IEnumerable<TXmlElementSyntax> paramNodeList,
             string name
-        ) {
+        )
+        {
             foreach (var paramNode in paramNodeList)
             {
                 var paramNameAttributesForNode = GetNameAttributes(paramNode);
@@ -207,9 +210,8 @@ namespace Microsoft.CodeAnalysis.DiagnosticComments.CodeFixes
 
         private class MyCodeAction : CodeAction.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(FeaturesResources.Add_missing_param_nodes, createChangedDocument) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(FeaturesResources.Add_missing_param_nodes, createChangedDocument) { }
         }
     }
 }

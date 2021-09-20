@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Collections
 
                 internal KeyCollection(
                     ImmutableSegmentedDictionary<TKey, TValue>.Builder dictionary
-                ) {
+                )
+                {
                     Debug.Assert(dictionary is not null);
                     _dictionary = dictionary!;
                 }

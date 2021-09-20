@@ -53,7 +53,8 @@ namespace System.Collections.ObjectModel.Tests
         public void Ctor_IEqualityComparer_Int(
             IEqualityComparer<string> comparer,
             int dictionaryCreationThreshold
-        ) {
+        )
+        {
             var collection = new StringKeyedCollection<int>(comparer, dictionaryCreationThreshold);
             Assert.Empty(collection);
             Assert.Same(comparer ?? EqualityComparer<string>.Default, collection.Comparer);
@@ -220,7 +221,8 @@ namespace System.Collections.ObjectModel.Tests
             IEqualityComparer<string> comparer,
             int dictionaryCreationThreshold,
             string key
-        ) {
+        )
+        {
             var collection = new StringKeyedCollection<string>(
                 comparer,
                 dictionaryCreationThreshold
@@ -250,7 +252,8 @@ namespace System.Collections.ObjectModel.Tests
             IEqualityComparer<string> comparer,
             string key,
             bool expected
-        ) {
+        )
+        {
             var collection = new StringKeyedCollection<string>(comparer, 3);
             collection.GetKeyForItemHandler = item => item + "_key";
 
@@ -271,7 +274,8 @@ namespace System.Collections.ObjectModel.Tests
         public void Contains_NullKeyForItemResult_Success(
             int dictionaryCreationThreshold,
             bool expected
-        ) {
+        )
+        {
             var collection = new StringKeyedCollection<int>(null, dictionaryCreationThreshold);
             collection.GetKeyForItemHandler = i => i.ToString();
             collection.Add(1);
@@ -295,7 +299,8 @@ namespace System.Collections.ObjectModel.Tests
         public void Contains_DifferentKeyForItemResult_Success(
             int dictionaryCreationThreshold,
             bool expected
-        ) {
+        )
+        {
             var collection = new StringKeyedCollection<int>(null, dictionaryCreationThreshold);
             collection.GetKeyForItemHandler = i => i.ToString();
             collection.Add(1);
@@ -386,7 +391,8 @@ namespace System.Collections.ObjectModel.Tests
             string key,
             bool expected,
             string[] expectedItems
-        ) {
+        )
+        {
             var collection = new StringKeyedCollection<string>(comparer, 3);
             collection.GetKeyForItemHandler = i => i + "_key";
             collection.Add("first");
@@ -470,7 +476,8 @@ namespace System.Collections.ObjectModel.Tests
             bool expected,
             string[] expectedItems,
             Dictionary<string, string> expectedDictionary
-        ) {
+        )
+        {
             var collection = new StringKeyedCollection<string>(comparer, 3);
             collection.GetKeyForItemHandler = i => i + "_key";
             collection.Add("first");
@@ -881,7 +888,8 @@ namespace System.Collections.ObjectModel.Tests
             string item,
             string newKey,
             Dictionary<string, string> expectedDictionary
-        ) {
+        )
+        {
             var collection = new StringKeyedCollection<string>(
                 comparer,
                 dictionaryCreationThreshold
@@ -954,7 +962,8 @@ namespace System.Collections.ObjectModel.Tests
         public void ChangeItemKey_DuplicateKey_ThrowsArgumentException(
             IEqualityComparer<string> comparer,
             string newKey
-        ) {
+        )
+        {
             var collection = new StringKeyedCollection<string>(comparer, 3);
             collection.GetKeyForItemHandler = item => item + "_key";
             collection.Add("first");
@@ -1182,7 +1191,8 @@ namespace System.Collections.ObjectModel.Tests
             int dictionaryCreationThreshold,
             string value,
             Dictionary<string, string> expectedDictionary
-        ) {
+        )
+        {
             var collection = new StringKeyedCollection<string>(
                 comparer,
                 dictionaryCreationThreshold
@@ -1299,7 +1309,8 @@ namespace System.Collections.ObjectModel.Tests
             string key,
             bool expected,
             string expectedItem
-        ) {
+        )
+        {
             var collection = new StringKeyedCollection<string>(comparer, 3);
             collection.GetKeyForItemHandler = i => i + "_key";
 
@@ -1323,7 +1334,8 @@ namespace System.Collections.ObjectModel.Tests
             int dictionaryCreationThreshold,
             bool expected,
             int expectedItem
-        ) {
+        )
+        {
             var collection = new StringKeyedCollection<int>(null, dictionaryCreationThreshold);
             collection.GetKeyForItemHandler = i => i.ToString();
             collection.Add(1);
@@ -1350,7 +1362,8 @@ namespace System.Collections.ObjectModel.Tests
             int dictionaryCreationThreshold,
             bool expected,
             int expectedItem
-        ) {
+        )
+        {
             var collection = new StringKeyedCollection<int>(null, dictionaryCreationThreshold);
             collection.GetKeyForItemHandler = i => i.ToString();
             collection.Add(1);

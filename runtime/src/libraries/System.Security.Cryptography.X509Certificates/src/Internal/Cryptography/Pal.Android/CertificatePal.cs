@@ -27,7 +27,8 @@ namespace Internal.Cryptography.Pal
             ReadOnlySpan<byte> rawData,
             SafePasswordHandle password,
             X509KeyStorageFlags keyStorageFlags
-        ) {
+        )
+        {
             return AndroidCertificatePal.FromBlob(rawData, password, keyStorageFlags);
         }
 
@@ -35,7 +36,8 @@ namespace Internal.Cryptography.Pal
             string fileName,
             SafePasswordHandle password,
             X509KeyStorageFlags keyStorageFlags
-        ) {
+        )
+        {
             return AndroidCertificatePal.FromFile(fileName, password, keyStorageFlags);
         }
     }

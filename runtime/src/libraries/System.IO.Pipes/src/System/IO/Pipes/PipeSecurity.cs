@@ -13,10 +13,8 @@ namespace System.IO.Pipes
         public PipeSecurity() : base(false, ResourceType.KernelObject) { }
 
         // Used by PipeStream.GetAccessControl
-        internal PipeSecurity(
-            SafePipeHandle safeHandle,
-            AccessControlSections includeSections
-        ) : base(false, ResourceType.KernelObject, safeHandle, includeSections) { }
+        internal PipeSecurity(SafePipeHandle safeHandle, AccessControlSections includeSections)
+            : base(false, ResourceType.KernelObject, safeHandle, includeSections) { }
 
         public void AddAccessRule(PipeAccessRule rule)
         {
@@ -66,7 +64,8 @@ namespace System.IO.Pipes
                     && (fsrule.PipeAccessRights == rule.PipeAccessRights)
                     && (fsrule.IdentityReference == rule.IdentityReference)
                     && (fsrule.AccessControlType == rule.AccessControlType)
-                ) {
+                )
+                {
                     return base.RemoveAccessRule(rule);
                 }
             }
@@ -119,7 +118,8 @@ namespace System.IO.Pipes
                     && (fsrule.PipeAccessRights == rule.PipeAccessRights)
                     && (fsrule.IdentityReference == rule.IdentityReference)
                     && (fsrule.AccessControlType == rule.AccessControlType)
-                ) {
+                )
+                {
                     base.RemoveAccessRuleSpecific(rule);
                     return;
                 }
@@ -181,7 +181,8 @@ namespace System.IO.Pipes
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
             AccessControlType type
-        ) {
+        )
+        {
             // Throw if inheritance flags or propagation flags set. Have to include in signature
             // since this is an override
             if (inheritanceFlags != InheritanceFlags.None)
@@ -209,7 +210,8 @@ namespace System.IO.Pipes
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
             AuditFlags flags
-        ) {
+        )
+        {
             // Throw if inheritance flags or propagation flags set. Have to include in signature
             // since this is an override
             if (inheritanceFlags != InheritanceFlags.None)

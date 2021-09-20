@@ -35,7 +35,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             if (
                 (eventType & CodeModelEventType.Add) == 0
                 && (eventType & CodeModelEventType.Remove) == 0
-            ) {
+            )
+            {
                 // Check that one or more of the change flags are set
                 var allChanges =
                     CodeModelEventType.Rename

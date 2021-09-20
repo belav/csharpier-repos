@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
         CommandState IChainedCommandHandler<TypeCharCommandArgs>.GetCommandState(
             TypeCharCommandArgs args,
             Func<CommandState> nextHandler
-        ) {
+        )
+        {
             AssertIsForeground();
 
             // We just defer to the editor here.  We do not interfere with typing normal characters.
@@ -31,7 +32,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
             TypeCharCommandArgs args,
             Action nextHandler,
             CommandExecutionContext context
-        ) {
+        )
+        {
             AssertIsForeground();
 
             var allProviders = GetProviders();
@@ -155,7 +157,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
         private (ImmutableArray<ISignatureHelpProvider> matched, ImmutableArray<ISignatureHelpProvider> unmatched) FilterProviders(
             ImmutableArray<ISignatureHelpProvider> providers,
             char ch
-        ) {
+        )
+        {
             AssertIsForeground();
 
             using var matchedProvidersDisposer = ArrayBuilder<ISignatureHelpProvider>.GetInstance(

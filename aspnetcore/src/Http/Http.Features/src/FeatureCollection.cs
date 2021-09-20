@@ -122,7 +122,8 @@ namespace Microsoft.AspNetCore.Http.Features
                     var pair in _features == null
                         ? _defaults
                         : _defaults.Except(_features, FeatureKeyComparer)
-                ) {
+                )
+                {
                     yield return pair;
                 }
             }

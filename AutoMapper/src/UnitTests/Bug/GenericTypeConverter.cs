@@ -36,7 +36,8 @@ namespace AutoMapper.UnitTests.Bug
                 List<TSource> source,
                 List<TDestination> destination,
                 ResolutionContext context
-            ) {
+            )
+            {
                 return Result;
             }
         }
@@ -91,7 +92,8 @@ namespace AutoMapper.UnitTests.Bug
                 Source<T> source,
                 Destination<T> dest,
                 ResolutionContext context
-            ) {
+            )
+            {
                 return SomeDestination;
             }
 
@@ -99,7 +101,8 @@ namespace AutoMapper.UnitTests.Bug
                 OtherSource<T> source,
                 OtherDestination<T> dest,
                 ResolutionContext context
-            ) {
+            )
+            {
                 return SomeOtherDestination;
             }
 
@@ -107,7 +110,8 @@ namespace AutoMapper.UnitTests.Bug
                 Source<T> source,
                 int dest,
                 ResolutionContext context
-            ) {
+            )
+            {
                 return NongenericDestination;
             }
 
@@ -115,7 +119,8 @@ namespace AutoMapper.UnitTests.Bug
                 int source,
                 Destination<T> dest,
                 ResolutionContext context
-            ) {
+            )
+            {
                 return SomeDestination;
             }
 
@@ -123,7 +128,8 @@ namespace AutoMapper.UnitTests.Bug
                 OtherSource<T> source,
                 Destination<object> dest,
                 ResolutionContext context
-            ) {
+            )
+            {
                 return ClosedDestinationViaOpenSource;
             }
 
@@ -131,7 +137,8 @@ namespace AutoMapper.UnitTests.Bug
                 Source<object> source,
                 OtherDestination<T> dest,
                 ResolutionContext context
-            ) {
+            )
+            {
                 return OpenDestinationViaClosedSource;
             }
         }
@@ -145,7 +152,8 @@ namespace AutoMapper.UnitTests.Bug
                 Hashtable source,
                 IReadOnlyDictionary<T1, T2> dest,
                 ResolutionContext context
-            ) {
+            )
+            {
                 return ReadOnlyDictionaryDestination;
             }
         }

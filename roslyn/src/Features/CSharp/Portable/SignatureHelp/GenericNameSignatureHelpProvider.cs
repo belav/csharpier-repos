@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             CancellationToken cancellationToken,
             out SyntaxToken genericIdentifier,
             out SyntaxToken lessThanToken
-        ) {
+        )
+        {
             if (
                 CommonSignatureHelpUtilities.TryGetSyntax(
                     root,
@@ -53,7 +54,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                     cancellationToken,
                     out GenericNameSyntax name
                 )
-            ) {
+            )
+            {
                 genericIdentifier = name.Identifier;
                 lessThanToken = name.TypeArgumentList.LessThanToken;
                 return true;
@@ -85,7 +87,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             int position,
             SignatureHelpTriggerInfo triggerInfo,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
             if (
@@ -98,7 +101,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                     out var genericIdentifier,
                     out var lessThanToken
                 )
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -190,7 +194,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             ISyntaxFactsService syntaxFacts,
             TextSpan currentSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 !TryGetGenericIdentifier(
                     root,
@@ -201,7 +206,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                     out var genericIdentifier,
                     out _
                 )
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -224,7 +230,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
         protected virtual TextSpan GetTextSpan(
             SyntaxToken genericIdentifier,
             SyntaxToken lessThanToken
-        ) {
+        )
+        {
             Contract.ThrowIfFalse(
                 lessThanToken.Parent is TypeArgumentListSyntax
                     && lessThanToken.Parent.Parent is GenericNameSyntax
@@ -240,7 +247,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             SemanticModel semanticModel,
             IAnonymousTypeDisplayService anonymousTypeDisplayService,
             IDocumentationCommentFormattingService documentationCommentFormattingService
-        ) {
+        )
+        {
             var position = lessThanToken.SpanStart;
 
             SignatureHelpItem item;
@@ -318,7 +326,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             SemanticModel semanticModel,
             int position,
             IDocumentationCommentFormattingService formatter
-        ) {
+        )
+        {
             return new SignatureHelpSymbolParameter(
                 parameter.Name,
                 isOptional: false,
@@ -340,7 +349,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             ITypeParameterSymbol typeParam,
             SemanticModel semanticModel,
             int position
-        ) {
+        )
+        {
             var parts = new List<SymbolDisplayPart>();
 
             if (TypeParameterHasConstraints(typeParam))

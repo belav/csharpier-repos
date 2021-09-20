@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
         public RegexEmbeddedLanguage(
             AbstractEmbeddedLanguageFeaturesProvider provider,
             EmbeddedLanguageInfo info
-        ) {
+        )
+        {
             Info = info;
             Classifier = new RegexSyntaxClassifier(info);
 
@@ -44,7 +45,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
             Document document,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             var token = root.FindToken(position);
             var syntaxFacts = document.GetLanguageService<ISyntaxFactsService>();
@@ -65,7 +67,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
             Document document,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var (tree, _) = await TryGetTreeAndTokenAtPositionAsync(
                     document,
                     position,

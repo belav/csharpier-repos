@@ -1076,7 +1076,8 @@ namespace System.Data.Tests
                     decimal UnitPrice,
                     short Quantity,
                     string Discount
-                ) {
+                )
+                {
                     OrderDetailsRow rowOrderDetailsRow = ((OrderDetailsRow)(NewRow()));
                     rowOrderDetailsRow.ItemArray = new object[]
                     {
@@ -1422,7 +1423,8 @@ namespace System.Data.Tests
                     string ShipRegion,
                     string ShipPostalCode,
                     string ShipCountry
-                ) {
+                )
+                {
                     OrdersRow rowOrdersRow = ((OrdersRow)(NewRow()));
                     rowOrdersRow.ItemArray = new object[]
                     {

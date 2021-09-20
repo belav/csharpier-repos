@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
             Compilation symbolCompilation,
             ISymbol symbol,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (document == null)
             {
                 throw new ArgumentNullException(nameof(document));
@@ -131,7 +132,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
         private static INamespaceOrTypeSymbol CreateCodeGenerationSymbol(
             Document document,
             ISymbol symbol
-        ) {
+        )
+        {
             symbol = symbol.GetOriginalUnreducedDefinition();
             var topLevelNamespaceSymbol = symbol.ContainingNamespace;
             var topLevelNamedType = MetadataAsSourceHelpers.GetTopLevelContainingNamedType(symbol);
@@ -159,7 +161,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
         private static CodeGenerationOptions CreateCodeGenerationOptions(
             Location contextLocation,
             OptionSet options
-        ) {
+        )
+        {
             return new CodeGenerationOptions(
                 contextLocation: contextLocation,
                 generateMethodBodies: false,

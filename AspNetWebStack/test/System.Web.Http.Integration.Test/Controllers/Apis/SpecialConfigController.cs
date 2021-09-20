@@ -53,7 +53,8 @@ namespace System.Web.Http
             public void Initialize(
                 HttpControllerSettings controllerSettings,
                 HttpControllerDescriptor controllerDescriptor
-            ) {
+            )
+            {
                 controllerSettings.Formatters.Clear();
                 controllerSettings.Formatters.Add(new XmlMediaTypeFormatter());
 

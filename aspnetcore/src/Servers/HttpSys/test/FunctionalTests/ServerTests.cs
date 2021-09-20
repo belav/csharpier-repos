@@ -34,7 +34,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
                 string response = await SendRequestAsync(address);
                 Assert.Equal(string.Empty, response);
             }
@@ -72,7 +73,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         options.RequestQueueMode = RequestQueueMode.Attach;
                     }
                 )
-            ) {
+            )
+            {
                 var psi = new ProcessStartInfo("netsh", "http show servicestate view=requestq")
                 {
                     RedirectStandardOutput = true
@@ -101,7 +103,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         options.RequestQueueName = queueName;
                     }
                 )
-            ) {
+            )
+            {
                 var psi = new ProcessStartInfo("netsh", "http show servicestate view=requestq")
                 {
                     RedirectStandardOutput = true
@@ -126,7 +129,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return httpContext.Response.WriteAsync("Hello World");
                     }
                 )
-            ) {
+            )
+            {
                 string response = await SendRequestAsync(address);
                 Assert.Equal("Hello World", response);
             }
@@ -149,7 +153,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         await httpContext.Response.WriteAsync("Hello World");
                     }
                 )
-            ) {
+            )
+            {
                 string response = await SendRequestAsync(address, "Hello World");
                 Assert.Equal("Hello World", response);
             }
@@ -172,7 +177,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return httpContext.Response.WriteAsync("Hello World");
                     }
                 )
-            ) {
+            )
+            {
                 responseTask = SendRequestAsync(address);
                 await received.Task.TimeoutAfter(TimeSpan.FromSeconds(10));
                 await server.StopAsync(new CancellationTokenSource(TimeSpan.FromSeconds(5)).Token);
@@ -202,7 +208,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         await httpContext.Response.WriteAsync("Hello World");
                     }
                 )
-            ) {
+            )
+            {
                 responseTask = SendRequestAsync(address);
                 await received.Task.TimeoutAfter(TimeSpan.FromSeconds(10));
             }
@@ -231,7 +238,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         await httpContext.Response.WriteAsync("Hello World");
                     }
                 )
-            ) {
+            )
+            {
                 responseTask = SendRequestAsync(address);
                 await received.Task.TimeoutAfter(TimeSpan.FromSeconds(10));
                 await server.StopAsync(new CancellationTokenSource(TimeSpan.FromSeconds(5)).Token);
@@ -252,7 +260,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         throw new InvalidOperationException();
                     }
                 )
-            ) {
+            )
+            {
                 Task<string> requestTask = SendRequestAsync(address);
                 var ex = await Assert.ThrowsAsync<HttpRequestException>(
                     async () => await requestTask
@@ -281,7 +290,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         );
                     }
                 )
-            ) {
+            )
+            {
                 Task<string> requestTask = SendRequestAsync(address);
                 var ex = await Assert.ThrowsAsync<HttpRequestException>(
                     async () => await requestTask
@@ -318,7 +328,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         }
                     }
                 )
-            ) {
+            )
+            {
                 List<Task> requestTasks = new List<Task>();
                 for (int i = 0; i < requestLimit; i++)
                 {
@@ -361,7 +372,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         Assert.True(ct.IsCancellationRequested, "IsCancellationRequested");
                     }
                 )
-            ) {
+            )
+            {
                 // Note: System.Net.Sockets does not RST the connection by default, it just FINs.
                 // Http.Sys's disconnect notice requires a RST.
                 using (var client = await SendHungRequestAsync("GET", address))
@@ -402,7 +414,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         Assert.True(ct.IsCancellationRequested, "IsCancellationRequested");
                     }
                 )
-            ) {
+            )
+            {
                 using (var client = await SendHungRequestAsync("GET", address))
                 {
                     await received.Task.TimeoutAfter(interval);
@@ -446,7 +459,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     },
                     httpContext => Task.FromResult(0)
                 )
-            ) {
+            )
+            {
                 using (var client1 = await SendHungRequestAsync("GET", address))
                 using (var client2 = await SendHungRequestAsync("GET", address))
                 {
@@ -494,7 +508,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     },
                     httpContext => Task.FromResult(0)
                 )
-            ) {
+            )
+            {
                 using (var client1 = await SendHungRequestAsync("GET", address))
                 using (var client2 = await SendHungRequestAsync("GET", address))
                 using (var client3 = await SendHungRequestAsync("GET", address))
@@ -528,7 +543,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     },
                     httpContext => Task.FromResult(0)
                 )
-            ) {
+            )
+            {
                 using (var client1 = await SendHungRequestAsync("GET", address))
                 using (var client2 = await SendHungRequestAsync("GET", address))
                 using (var client3 = await SendHungRequestAsync("GET", address))
@@ -561,7 +577,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         await httpContext.Response.WriteAsync("Hello World");
                     }
                 )
-            ) {
+            )
+            {
                 responseTask = SendRequestAsync(address);
                 await received.Task.TimeoutAfter(TimeSpan.FromSeconds(10));
 
@@ -604,7 +621,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         await httpContext.Response.WriteAsync("Hello World");
                     }
                 )
-            ) {
+            )
+            {
                 responseTask = SendRequestAsync(address);
                 await received.Task.TimeoutAfter(TimeSpan.FromSeconds(10));
 
@@ -650,7 +668,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         await httpContext.Response.WriteAsync("Hello World");
                     }
                 )
-            ) {
+            )
+            {
                 responseTask = SendRequestAsync(address);
                 await received.Task.TimeoutAfter(TimeSpan.FromSeconds(10));
 
@@ -696,7 +715,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         await httpContext.Response.WriteAsync("Hello World");
                     }
                 )
-            ) {
+            )
+            {
                 responseTask = SendRequestAsync(address);
                 await received.Task.TimeoutAfter(TimeSpan.FromSeconds(10));
 
@@ -744,7 +764,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         await httpContext.Response.WriteAsync("Hello World");
                     }
                 )
-            ) {
+            )
+            {
                 responseTask = SendRequestAsync(address);
                 await received.Task.TimeoutAfter(TimeSpan.FromSeconds(10));
 
@@ -764,7 +785,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
         {
             using (
                 var server = Utilities.CreateHttpServer(out _, httpContext => Task.CompletedTask)
-            ) {
+            )
+            {
                 await server.StopAsync(default(CancellationToken))
                     .TimeoutAfter(TimeSpan.FromSeconds(10));
             }

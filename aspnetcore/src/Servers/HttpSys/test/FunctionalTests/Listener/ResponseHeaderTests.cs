@@ -322,7 +322,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
             string uri,
             bool usehttp11 = true,
             bool sendKeepAlive = false
-        ) {
+        )
+        {
             var request = new HttpRequestMessage(HttpMethod.Get, uri);
             if (!usehttp11)
             {
@@ -338,7 +339,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
         private async Task<HttpResponseMessage> SendHeadRequestAsync(
             string uri,
             bool usehttp11 = true
-        ) {
+        )
+        {
             var request = new HttpRequestMessage(HttpMethod.Head, uri);
             if (!usehttp11)
             {

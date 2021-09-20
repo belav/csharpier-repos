@@ -37,7 +37,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
         public Task<IList<Claim>> GetClaimsAsync(
             TUser user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             var claims = user.Claims.Select(c => new Claim(c.ClaimType, c.ClaimValue)).ToList();
             return Task.FromResult<IList<Claim>>(claims);
         }
@@ -46,7 +47,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
             TUser user,
             IEnumerable<Claim> claims,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             foreach (var claim in claims)
             {
                 user.Claims.Add(
@@ -66,7 +68,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
             Claim claim,
             Claim newClaim,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             var matchedClaims = user.Claims.Where(
                     uc => uc.ClaimValue == claim.Value && uc.ClaimType == claim.Type
                 )
@@ -83,7 +86,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
             TUser user,
             IEnumerable<Claim> claims,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             foreach (var claim in claims)
             {
                 var entity = user.Claims.FirstOrDefault(
@@ -104,7 +108,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
             TUser user,
             string email,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             user.Email = email;
             return Task.FromResult(0);
         }
@@ -112,14 +117,16 @@ namespace Microsoft.AspNetCore.Identity.InMemory
         public Task<string> GetEmailAsync(
             TUser user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return Task.FromResult(user.Email);
         }
 
         public Task<string> GetNormalizedEmailAsync(
             TUser user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return Task.FromResult(user.NormalizedEmail);
         }
 
@@ -127,7 +134,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
             TUser user,
             string normalizedEmail,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             user.NormalizedEmail = normalizedEmail;
             return Task.FromResult(0);
         }
@@ -135,7 +143,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
         public Task<bool> GetEmailConfirmedAsync(
             TUser user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return Task.FromResult(user.EmailConfirmed);
         }
 
@@ -143,7 +152,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
             TUser user,
             bool confirmed,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             user.EmailConfirmed = confirmed;
             return Task.FromResult(0);
         }
@@ -151,14 +161,16 @@ namespace Microsoft.AspNetCore.Identity.InMemory
         public Task<TUser> FindByEmailAsync(
             string email,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return Task.FromResult(Users.FirstOrDefault(u => u.NormalizedEmail == email));
         }
 
         public Task<DateTimeOffset?> GetLockoutEndDateAsync(
             TUser user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return Task.FromResult(user.LockoutEnd);
         }
 
@@ -166,7 +178,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
             TUser user,
             DateTimeOffset? lockoutEnd,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             user.LockoutEnd = lockoutEnd;
             return Task.FromResult(0);
         }
@@ -174,7 +187,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
         public Task<int> IncrementAccessFailedCountAsync(
             TUser user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             user.AccessFailedCount++;
             return Task.FromResult(user.AccessFailedCount);
         }
@@ -182,7 +196,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
         public Task ResetAccessFailedCountAsync(
             TUser user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             user.AccessFailedCount = 0;
             return Task.FromResult(0);
         }
@@ -190,14 +205,16 @@ namespace Microsoft.AspNetCore.Identity.InMemory
         public Task<int> GetAccessFailedCountAsync(
             TUser user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return Task.FromResult(user.AccessFailedCount);
         }
 
         public Task<bool> GetLockoutEnabledAsync(
             TUser user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return Task.FromResult(user.LockoutEnabled);
         }
 
@@ -205,7 +222,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
             TUser user,
             bool enabled,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             user.LockoutEnabled = enabled;
             return Task.FromResult(0);
         }
@@ -219,7 +237,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
             TUser user,
             UserLoginInfo login,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             user.Logins.Add(
                 new PocoUserLogin
                 {
@@ -238,7 +257,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
             string loginProvider,
             string providerKey,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             var loginEntity = user.Logins.SingleOrDefault(
                 l =>
                     l.ProviderKey == providerKey
@@ -256,7 +276,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
         public Task<IList<UserLoginInfo>> GetLoginsAsync(
             TUser user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             IList<UserLoginInfo> result = user.Logins.Select(
                     l => new UserLoginInfo(l.LoginProvider, l.ProviderKey, l.ProviderDisplayName)
                 )
@@ -268,7 +289,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
             string loginProvider,
             string providerKey,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             string key = GetLoginKey(loginProvider, providerKey);
             if (_logins.ContainsKey(key))
             {
@@ -280,14 +302,16 @@ namespace Microsoft.AspNetCore.Identity.InMemory
         public Task<string> GetUserIdAsync(
             TUser user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return Task.FromResult(user.Id);
         }
 
         public Task<string> GetUserNameAsync(
             TUser user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return Task.FromResult(user.UserName);
         }
 
@@ -295,7 +319,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
             TUser user,
             string userName,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             user.UserName = userName;
             return Task.FromResult(0);
         }
@@ -303,7 +328,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
         public Task<IdentityResult> CreateAsync(
             TUser user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             _users[user.Id] = user;
             return Task.FromResult(IdentityResult.Success);
         }
@@ -311,7 +337,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
         public Task<IdentityResult> UpdateAsync(
             TUser user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             _users[user.Id] = user;
             return Task.FromResult(IdentityResult.Success);
         }
@@ -319,7 +346,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
         public Task<TUser> FindByIdAsync(
             string userId,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             if (_users.ContainsKey(userId))
             {
                 return Task.FromResult(_users[userId]);
@@ -332,14 +360,16 @@ namespace Microsoft.AspNetCore.Identity.InMemory
         public Task<TUser> FindByNameAsync(
             string userName,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return Task.FromResult(Users.FirstOrDefault(u => u.NormalizedUserName == userName));
         }
 
         public Task<IdentityResult> DeleteAsync(
             TUser user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             if (user == null || !_users.ContainsKey(user.Id))
             {
                 throw new InvalidOperationException("Unknown user");
@@ -352,7 +382,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
             TUser user,
             string passwordHash,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             user.PasswordHash = passwordHash;
             return Task.FromResult(0);
         }
@@ -360,14 +391,16 @@ namespace Microsoft.AspNetCore.Identity.InMemory
         public Task<string> GetPasswordHashAsync(
             TUser user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return Task.FromResult(user.PasswordHash);
         }
 
         public Task<bool> HasPasswordAsync(
             TUser user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return Task.FromResult(user.PasswordHash != null);
         }
 
@@ -375,7 +408,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
             TUser user,
             string phoneNumber,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             user.PhoneNumber = phoneNumber;
             return Task.FromResult(0);
         }
@@ -383,14 +417,16 @@ namespace Microsoft.AspNetCore.Identity.InMemory
         public Task<string> GetPhoneNumberAsync(
             TUser user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return Task.FromResult(user.PhoneNumber);
         }
 
         public Task<bool> GetPhoneNumberConfirmedAsync(
             TUser user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return Task.FromResult(user.PhoneNumberConfirmed);
         }
 
@@ -398,7 +434,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
             TUser user,
             bool confirmed,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             user.PhoneNumberConfirmed = confirmed;
             return Task.FromResult(0);
         }
@@ -407,7 +444,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
             TUser user,
             string stamp,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             user.SecurityStamp = stamp;
             return Task.FromResult(0);
         }
@@ -415,7 +453,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
         public Task<string> GetSecurityStampAsync(
             TUser user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return Task.FromResult(user.SecurityStamp);
         }
 
@@ -423,7 +462,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
             TUser user,
             bool enabled,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             user.TwoFactorEnabled = enabled;
             return Task.FromResult(0);
         }
@@ -431,14 +471,16 @@ namespace Microsoft.AspNetCore.Identity.InMemory
         public Task<bool> GetTwoFactorEnabledAsync(
             TUser user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return Task.FromResult(user.TwoFactorEnabled);
         }
 
         public Task<string> GetNormalizedUserNameAsync(
             TUser user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return Task.FromResult(user.NormalizedUserName);
         }
 
@@ -446,7 +488,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
             TUser user,
             string userName,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             user.NormalizedUserName = userName;
             return Task.FromResult(0);
         }
@@ -454,7 +497,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
         public Task<IList<TUser>> GetUsersForClaimAsync(
             Claim claim,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             if (claim == null)
             {
                 throw new ArgumentNullException(nameof(claim));
@@ -476,7 +520,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
             string name,
             string value,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var tokenEntity = user.Tokens.SingleOrDefault(
                 l => l.TokenName == name && l.LoginProvider == loginProvider && l.UserId == user.Id
             );
@@ -504,7 +549,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
             string loginProvider,
             string name,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var tokenEntity = user.Tokens.SingleOrDefault(
                 l => l.TokenName == name && l.LoginProvider == loginProvider && l.UserId == user.Id
             );
@@ -520,7 +566,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
             string loginProvider,
             string name,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var tokenEntity = user.Tokens.SingleOrDefault(
                 l => l.TokenName == name && l.LoginProvider == loginProvider && l.UserId == user.Id
             );
@@ -535,7 +582,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
             TUser user,
             string key,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return SetTokenAsync(
                 user,
                 AuthenticatorStoreLoginProvider,
@@ -548,7 +596,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
         public Task<string> GetAuthenticatorKeyAsync(
             TUser user,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return GetTokenAsync(
                 user,
                 AuthenticatorStoreLoginProvider,
@@ -561,7 +610,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
             TUser user,
             IEnumerable<string> recoveryCodes,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var mergedCodes = string.Join(";", recoveryCodes);
             return SetTokenAsync(
                 user,
@@ -576,7 +626,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
             TUser user,
             string code,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var mergedCodes =
                 await GetTokenAsync(
                     user,

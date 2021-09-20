@@ -13,7 +13,8 @@ namespace Microsoft.Extensions.StackTrace.Sources
             string? filePath,
             StackFrame? stackFrame,
             MethodDisplayInfo? methodDisplayInfo
-        ) {
+        )
+        {
             LineNumber = lineNumber;
             FilePath = filePath;
             StackFrame = stackFrame;

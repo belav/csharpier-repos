@@ -66,7 +66,8 @@ namespace System.Security.Cryptography.Xml
                             e.LocalName.Equals("InclusiveNamespaces")
                             && e.NamespaceURI.Equals(SignedXml.XmlDsigExcC14NTransformUrl)
                             && Utils.HasAttribute(e, "PrefixList", SignedXml.XmlDsigNamespaceUrl)
-                        ) {
+                        )
+                        {
                             if (!Utils.VerifyAttributes(e, "PrefixList"))
                             {
                                 throw new CryptographicException(

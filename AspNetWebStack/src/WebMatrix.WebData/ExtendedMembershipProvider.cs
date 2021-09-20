@@ -31,7 +31,8 @@ namespace WebMatrix.WebData
             string provider,
             string providerUserId,
             string userName
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -98,7 +99,8 @@ namespace WebMatrix.WebData
             string requestToken,
             string accessToken,
             string accessTokenSecret
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -132,7 +134,8 @@ namespace WebMatrix.WebData
             string userName,
             string password,
             bool requireConfirmation
-        ) {
+        )
+        {
             return CreateUserAndAccount(userName, password, requireConfirmation, values: null);
         }
 
@@ -140,7 +143,8 @@ namespace WebMatrix.WebData
             string userName,
             string password,
             IDictionary<string, object> values
-        ) {
+        )
+        {
             return CreateUserAndAccount(
                 userName,
                 password,

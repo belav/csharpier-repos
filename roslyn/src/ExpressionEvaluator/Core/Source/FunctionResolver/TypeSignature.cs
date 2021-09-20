@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         internal GenericTypeSignature(
             QualifiedTypeSignature qualifiedName,
             ImmutableArray<TypeSignature> typeArguments
-        ) {
+        )
+        {
             Debug.Assert(qualifiedName != null);
             Debug.Assert(!typeArguments.IsDefault);
             QualifiedName = qualifiedName;

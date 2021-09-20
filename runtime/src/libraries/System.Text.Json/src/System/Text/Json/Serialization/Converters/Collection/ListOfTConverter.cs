@@ -18,7 +18,8 @@ namespace System.Text.Json.Serialization.Converters
             ref Utf8JsonReader reader,
             ref ReadStack state,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             if (state.Current.JsonTypeInfo.CreateObject == null)
             {
                 ThrowHelper.ThrowNotSupportedException_SerializationNotSupported(
@@ -34,7 +35,8 @@ namespace System.Text.Json.Serialization.Converters
             TCollection value,
             JsonSerializerOptions options,
             ref WriteStack state
-        ) {
+        )
+        {
             List<TElement> list = value;
 
             // Using an index is 2x faster than using an enumerator.

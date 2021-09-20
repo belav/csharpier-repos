@@ -87,7 +87,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
             string root,
             string includePattern,
             string[] expectedFiles
-        ) {
+        )
+        {
             var matcher = new Matcher(StringComparison.OrdinalIgnoreCase);
             matcher.AddInclude(includePattern);
 
@@ -238,7 +239,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
             string root,
             string excludePattern,
             string[] expectedFiles
-        ) {
+        )
+        {
             var matcher = new Matcher(StringComparison.OrdinalIgnoreCase);
             matcher.AddInclude("**/*.*");
             matcher.AddExclude(excludePattern);
@@ -584,7 +586,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
             string root,
             string includePattern,
             string expectedPath
-        ) {
+        )
+        {
             var fileToFind = @"root/test.0";
 
             var matcher = new Matcher();
@@ -617,7 +620,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
             string root,
             string includePattern,
             string expectedPath
-        ) {
+        )
+        {
             var fileToFind = @"root/dir1/test.1";
 
             var matcher = new Matcher();
@@ -660,7 +664,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
             string root,
             string includePattern,
             string expectedPath
-        ) {
+        )
+        {
             var fileToFind = @"root/dir1/dir2/test.2";
 
             var matcher = new Matcher();
@@ -688,7 +693,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
             string root,
             string includePattern,
             string expectedStem
-        ) {
+        )
+        {
             var fileToFind = @"root/test.0";
 
             var matcher = new Matcher();
@@ -721,7 +727,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
             string root,
             string includePattern,
             string expectedStem
-        ) {
+        )
+        {
             var fileToFind = @"root/dir1/test.1";
 
             var matcher = new Matcher();
@@ -764,7 +771,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
             string root,
             string includePattern,
             string expectedStem
-        ) {
+        )
+        {
             var fileToFind = @"root/dir1/dir2/test.2";
 
             var matcher = new Matcher();
@@ -899,7 +907,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
         private static IEnumerable<string> GetFileList(
             string rootDir = "",
             char directorySeparator = '/'
-        ) {
+        )
+        {
             var files = new List<string>
             {
                 "root/test.0",
@@ -972,7 +981,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
             Matcher matcher,
             string directoryPath,
             params string[] expectFiles
-        ) {
+        )
+        {
             directoryPath = Path.Combine(_context.RootPath, directoryPath);
             var results = matcher.Execute(
                 new DirectoryInfoWrapper(new DirectoryInfo(directoryPath))

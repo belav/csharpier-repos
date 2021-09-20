@@ -51,7 +51,8 @@ namespace System.Net.Http
             public override ValueTask WriteAsync(
                 ReadOnlyMemory<byte> buffer,
                 CancellationToken ignored
-            ) {
+            )
+            {
                 BytesWritten += buffer.Length;
 
                 HttpConnection connection = GetConnectionOrThrow();
@@ -74,7 +75,8 @@ namespace System.Net.Http
                 static async ValueTask WriteChunkAsync(
                     HttpConnection connection,
                     ReadOnlyMemory<byte> buffer
-                ) {
+                )
+                {
                     // Write chunk length in hex followed by \r\n
                     await connection.WriteHexInt32Async(buffer.Length, async: true)
                         .ConfigureAwait(false);

@@ -50,7 +50,8 @@ namespace System.Linq.Expressions.Interpreter
             object? cookie,
             Func<int, int> labelIndexer,
             IReadOnlyList<object>? objects
-        ) {
+        )
+        {
             return string.Format(
                 CultureInfo.InvariantCulture,
                 "LoadCached({0}: {1})",

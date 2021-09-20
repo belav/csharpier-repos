@@ -21,16 +21,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
             ImmutableArray<KeyValuePair<string, TypedConstant>> namedArguments,
             bool hasErrors,
             bool isConditionallyOmitted
-        ) : base(
-            applicationNode,
-            attributeClass,
-            attributeConstructor,
-            constructorArguments,
-            constructorArgumentsSourceIndices,
-            namedArguments,
-            hasErrors,
-            isConditionallyOmitted
-        ) { }
+        )
+            : base(
+                applicationNode,
+                attributeClass,
+                attributeConstructor,
+                constructorArguments,
+                constructorArgumentsSourceIndices,
+                namedArguments,
+                hasErrors,
+                isConditionallyOmitted
+            ) { }
 
         /// <summary>
         /// Gets the retargeted System.Type type symbol.

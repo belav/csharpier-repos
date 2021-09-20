@@ -33,7 +33,8 @@ namespace HttpStress
             Random random,
             CancellationToken globalToken,
             int taskNum
-        ) {
+        )
+        {
             Debug.Assert(httpClient.BaseAddress != null);
 
             _random = random;
@@ -61,7 +62,8 @@ namespace HttpStress
             HttpRequestMessage request,
             HttpCompletionOption httpCompletion = HttpCompletionOption.ResponseContentRead,
             CancellationToken? token = null
-        ) {
+        )
+        {
             request.Version = HttpVersion;
 
             if (token != null)
@@ -195,7 +197,8 @@ namespace HttpStress
         public int SetExpectedResponseContentLengthHeader(
             HttpRequestHeaders headers,
             int minLength = 0
-        ) {
+        )
+        {
             int expectedResponseContentLength = _random.Next(
                 minLength,
                 Math.Max(minLength, MaxContentLength)
@@ -285,7 +288,8 @@ namespace HttpStress
                                     reqHeader.Key,
                                     out IEnumerable<string>? values
                                 )
-                            ) {
+                            )
+                            {
                                 throw new Exception(
                                     $"Expected response header name {reqHeader.Key} missing. {failureDetails}"
                                 );
@@ -303,13 +307,15 @@ namespace HttpStress
                         {
                             foreach (
                                 KeyValuePair<string, IEnumerable<string>> reqHeader in req.Headers
-                            ) {
+                            )
+                            {
                                 if (
                                     !m.TrailingHeaders.TryGetValues(
                                         reqHeader.Key + "-trailer",
                                         out IEnumerable<string>? values
                                     )
-                                ) {
+                                )
+                                {
                                     throw new Exception(
                                         $"Expected trailing header name {reqHeader.Key}-trailer missing. {failureDetails}"
                                     );
@@ -660,7 +666,8 @@ namespace HttpStress
         private static void ValidateStatusCode(
             HttpResponseMessage m,
             HttpStatusCode expectedStatus = HttpStatusCode.OK
-        ) {
+        )
+        {
             if (m.StatusCode != expectedStatus)
             {
                 throw new Exception($"Expected status code {expectedStatus}, got {m.StatusCode}");
@@ -671,7 +678,8 @@ namespace HttpStress
             string expectedContent,
             string actualContent,
             string? details = null
-        ) {
+        )
+        {
             if (actualContent != expectedContent)
             {
                 int divergentIndex = Enumerable.Zip(actualContent, expectedContent)
@@ -707,7 +715,8 @@ namespace HttpStress
             int maxRequestUriSize,
             RequestContext clientContext,
             int numParameters
-        ) {
+        )
+        {
             if (maxRequestUriSize < uri.Length)
             {
                 throw new ArgumentOutOfRangeException(nameof(maxRequestUriSize));
@@ -751,7 +760,8 @@ namespace HttpStress
         private static (string, MultipartContent) GetMultipartContent(
             RequestContext clientContext,
             int numFormFields
-        ) {
+        )
+        {
             var multipartContent = new MultipartContent(
                 "prefix" + clientContext.GetRandomString(0, clientContext.MaxContentLength),
                 "test_boundary"
@@ -777,11 +787,13 @@ namespace HttpStress
             HttpResponseHeaders headers,
             ulong expectedChecksum,
             bool required = true
-        ) {
+        )
+        {
             if (
                 headers.TryGetValues("crc32", out IEnumerable<string>? values)
                 && uint.TryParse(values.First(), out uint serverChecksum)
-            ) {
+            )
+            {
                 return serverChecksum == expectedChecksum;
             }
             else if (required)
@@ -823,7 +835,8 @@ namespace HttpStress
             protected override async Task SerializeToStreamAsync(
                 Stream stream,
                 TransportContext? context
-            ) {
+            )
+            {
                 for (int i = 0; i < _buffer.Length; i++)
                 {
                     await stream.WriteAsync(_buffer.AsMemory(i, 1));

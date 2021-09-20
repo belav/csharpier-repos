@@ -40,7 +40,8 @@ namespace System.ComponentModel
             ITypeDescriptorContext context,
             CultureInfo culture,
             object value
-        ) {
+        )
+        {
             if (value is string text)
             {
                 text = text.Trim();
@@ -95,7 +96,8 @@ namespace System.ComponentModel
             CultureInfo culture,
             object value,
             Type destinationType
-        ) {
+        )
+        {
             // logic is exactly as in DateTimeConverter, only the offset pattern ' zzz' is added to the default
             // ConvertToString pattern.
             if (destinationType == typeof(string) && value is DateTimeOffset)

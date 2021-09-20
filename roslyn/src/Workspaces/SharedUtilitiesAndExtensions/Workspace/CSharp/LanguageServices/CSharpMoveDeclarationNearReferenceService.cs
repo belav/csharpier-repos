@@ -60,7 +60,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MoveDeclarationNearReference
             LocalDeclarationStatementSyntax declarationStatement,
             SyntaxNode right,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var type = declarationStatement.Declaration.Type;
             if (type.IsVar)
             {

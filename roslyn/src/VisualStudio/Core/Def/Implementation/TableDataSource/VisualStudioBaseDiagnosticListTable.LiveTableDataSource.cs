@@ -76,7 +76,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 
             private void ConnectToBuildUpdateSource(
                 ExternalErrorDiagnosticUpdateSource? buildUpdateSource
-            ) {
+            )
+            {
                 if (buildUpdateSource == null)
                 {
                     // it can be null in unit test
@@ -108,7 +109,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 int version,
                 ImmutableArray<DiagnosticTableItem> items,
                 ImmutableArray<ITrackingPoint> trackingPoints
-            ) {
+            )
+            {
                 var diagnosticSource = (DiagnosticTableEntriesSource)source;
                 var snapshot = new TableEntriesSnapshot(
                     diagnosticSource,
@@ -182,7 +184,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             private void PopulateInitialData(
                 Workspace workspace,
                 IDiagnosticService diagnosticService
-            ) {
+            )
+            {
                 var diagnostics = diagnosticService.GetPushDiagnosticBuckets(
                     workspace,
                     projectId: null,
@@ -218,7 +221,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                         e,
                         CancellationToken.None
                     )
-                ) {
+                )
+                {
                     if (_workspace != e.Workspace)
                     {
                         return;
@@ -247,7 +251,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 
             public override AbstractTableEntriesSource<DiagnosticTableItem> CreateTableEntriesSource(
                 object data
-            ) {
+            )
+            {
                 var item = (UpdatedEventArgs)data;
                 return new TableEntriesSource(
                     this,
@@ -261,7 +266,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             private void ConnectToDiagnosticService(
                 Workspace workspace,
                 IDiagnosticService diagnosticService
-            ) {
+            )
+            {
                 if (diagnosticService == null)
                 {
                     // it can be null in unit test
@@ -287,7 +293,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                     diagnostic.Properties.ContainsKey(
                         nameof(DocumentPropertiesService.DiagnosticsLspClientName)
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -308,7 +315,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 
             public override IEnumerable<DiagnosticTableItem> Order(
                 IEnumerable<DiagnosticTableItem> groupedItems
-            ) {
+            )
+            {
                 // this should make order of result always deterministic. we only need these 6 values since data with
                 // all these same will merged to one.
                 return groupedItems.OrderBy(d => d.Data.DataLocation?.OriginalStartLine ?? 0)
@@ -334,7 +342,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                     ProjectId? projectId,
                     DocumentId? documentId,
                     object id
-                ) {
+                )
+                {
                     _source = source;
                     _workspace = workspace;
                     _projectId = projectId;
@@ -394,7 +403,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                     int index,
                     string columnName,
                     [NotNullWhen(returnValue: true)] out object? content
-                ) {
+                )
+                {
                     // REVIEW: this method is too-chatty to make async, but otherwise, how one can implement it async?
                     //         also, what is cancellation mechanism?
                     var item = GetItem(index);
@@ -500,7 +510,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                             WellKnownDiagnosticPropertyNames.Origin,
                             out var value
                         )
-                    ) {
+                    )
+                    {
                         return ErrorRank.Other;
                     }
 
@@ -564,7 +575,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 public bool TryCreateDetailsContent(
                     int index,
                     [NotNullWhen(returnValue: true)] out FrameworkElement? expandedContent
-                ) {
+                )
+                {
                     var item = GetItem(index)?.Data;
                     if (item == null)
                     {
@@ -585,7 +597,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 public bool TryCreateDetailsStringContent(
                     int index,
                     [NotNullWhen(returnValue: true)] out string? content
-                ) {
+                )
+                {
                     var item = GetItem(index)?.Data;
                     if (item == null)
                     {
@@ -620,7 +633,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                     int index,
                     DiagnosticData item,
                     Func<DiagnosticData, FrameworkElement> elementCreator
-                ) {
+                )
+                {
                     if (caches == null)
                     {
                         caches = new FrameworkElement[count];
@@ -640,7 +654,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                     string columnName,
                     bool singleColumnView,
                     [NotNullWhen(returnValue: true)] out FrameworkElement? content
-                ) {
+                )
+                {
                     content = null;
                     return false;
                 }
@@ -650,7 +665,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                     string columnName,
                     bool singleColumnView,
                     out ImageMoniker content
-                ) {
+                )
+                {
                     content = default;
                     return false;
                 }
@@ -661,7 +677,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                     bool truncatedText,
                     bool singleColumnView,
                     [NotNullWhen(returnValue: true)] out string? content
-                ) {
+                )
+                {
                     content = null;
                     return false;
                 }
@@ -670,7 +687,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                     int index,
                     string columnName,
                     [NotNullWhen(returnValue: true)] out object? toolTip
-                ) {
+                )
+                {
                     toolTip = null;
                     return false;
                 }
@@ -693,7 +711,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             private static string GetDiagnosticUpdatedMessage(
                 Workspace workspace,
                 DiagnosticsUpdatedArgs e
-            ) {
+            )
+            {
                 var id = e.Id.ToString();
                 if (e.Id is LiveDiagnosticUpdateArgsId live)
                 {

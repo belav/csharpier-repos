@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.GoToAdjacentMember
             string code,
             bool next,
             SourceCodeKind? sourceCodeKind = null
-        ) {
+        )
+        {
             var kinds =
                 sourceCodeKind != null
                     ? SpecializedCollections.SingletonEnumerable(sourceCodeKind.Value)
@@ -40,7 +41,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.GoToAdjacentMember
                         parseOptions: DefaultParseOptions.WithKind(kind),
                         content: code
                     )
-                ) {
+                )
+                {
                     var hostDocument = workspace.DocumentWithCursor;
                     var document = workspace.CurrentSolution.GetDocument(hostDocument.Id);
                     Assert.Empty((await document.GetSyntaxTreeAsync()).GetDiagnostics());
@@ -67,7 +69,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.GoToAdjacentMember
                     parseOptions: DefaultParseOptions,
                     content: code
                 )
-            ) {
+            )
+            {
                 var hostDocument = workspace.DocumentWithCursor;
                 var document = workspace.CurrentSolution.GetDocument(hostDocument.Id);
                 Assert.Empty((await document.GetSyntaxTreeAsync()).GetDiagnostics());

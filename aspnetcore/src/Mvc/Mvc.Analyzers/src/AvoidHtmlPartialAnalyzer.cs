@@ -33,7 +33,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
                             method.Name,
                             StringComparison.Ordinal
                         )
-                    ) {
+                    )
+                    {
                         context.ReportDiagnostic(
                             Diagnostic.Create(
                                 SupportedDiagnostic,
@@ -48,7 +49,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
                             method.Name,
                             StringComparison.Ordinal
                         )
-                    ) {
+                    )
+                    {
                         context.ReportDiagnostic(
                             Diagnostic.Create(
                                 SupportedDiagnostic,

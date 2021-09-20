@@ -170,7 +170,8 @@ namespace System.Net.Http.Tests
         private void CheckValidParse(
             string input,
             TransferCodingWithQualityHeaderValue expectedResult
-        ) {
+        )
+        {
             TransferCodingWithQualityHeaderValue result =
                 TransferCodingWithQualityHeaderValue.Parse(input);
             Assert.Equal(expectedResult, result);
@@ -189,7 +190,8 @@ namespace System.Net.Http.Tests
         private void CheckValidTryParse(
             string input,
             TransferCodingWithQualityHeaderValue expectedResult
-        ) {
+        )
+        {
             TransferCodingWithQualityHeaderValue result = null;
             Assert.True(TransferCodingWithQualityHeaderValue.TryParse(input, out result));
             Assert.Equal(expectedResult, result);

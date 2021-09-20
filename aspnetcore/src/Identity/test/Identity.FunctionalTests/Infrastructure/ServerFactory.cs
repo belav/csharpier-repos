@@ -76,7 +76,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
                     if (
                         ctx.HostingEnvironment.WebRootFileProvider
                         is CompositeFileProvider composite
-                    ) {
+                    )
+                    {
                         var originalWebRoot = composite.FileProviders.First();
                         ctx.HostingEnvironment.WebRootFileProvider = originalWebRoot;
                     }

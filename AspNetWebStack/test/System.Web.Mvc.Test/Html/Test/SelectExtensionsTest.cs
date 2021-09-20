@@ -1121,7 +1121,8 @@ namespace System.Web.Mvc.Html.Test
         public void DropDownList_AttributeEncodes_AddedHtmlAttributes(
             string text,
             string encodedText
-        ) {
+        )
+        {
             // Arrange
             var selectList = new List<SelectListItem> { new SelectListItem { Text = "text", }, };
             var helper = MvcHelper.GetHtmlHelper();
@@ -4658,7 +4659,8 @@ namespace System.Web.Mvc.Html.Test
         // Value and Text is constant name in all returned SelectListItem objects.
         private static IEnumerable<SelectListItem> GetSelectListWithNamedValuesForEnumWithDisplay(
             bool includeEmpty
-        ) {
+        )
+        {
             IList<SelectListItem> selectList = new List<SelectListItem>();
             if (includeEmpty)
             {
@@ -4677,7 +4679,8 @@ namespace System.Web.Mvc.Html.Test
         // Value is numeric value while Text is constant name in all returned SelectListItem objects.
         private static IEnumerable<SelectListItem> GetSelectListWithNumericValuesForEnumWithDisplay(
             bool includeEmpty
-        ) {
+        )
+        {
             IList<SelectListItem> selectList = new List<SelectListItem>();
             if (includeEmpty)
             {
@@ -4692,7 +4695,8 @@ namespace System.Web.Mvc.Html.Test
                         | BindingFlags.Public
                         | BindingFlags.Static
                 )
-            ) {
+            )
+            {
                 string name = field.Name;
                 object value = field.GetRawConstantValue();
                 selectList.Add(new SelectListItem { Text = name, Value = value.ToString(), });

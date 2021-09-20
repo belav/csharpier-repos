@@ -385,7 +385,8 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
             TestSink testSink,
             string headerName,
             string headerValue
-        ) {
+        )
+        {
             // Arrange
             var loggerFactory = new Mock<ILoggerFactory>();
             loggerFactory.Setup(lf => lf.CreateLogger(typeof(DefaultAntiforgery).FullName!))
@@ -416,7 +417,8 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
         public void GetAndStoreTokens_DoesNotOverwriteCacheControlHeader(
             string headerName,
             string headerValue
-        ) {
+        )
+        {
             var testSink = new TestSink();
             var actualHeaderValue = GetAndStoreTokens_CacheHeadersArrangeAct(
                 testSink,
@@ -439,7 +441,8 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
         public void GetAndStoreTokens_OverwritesCacheControlHeader_IfNoStoreIsNotSet(
             string headerName,
             string headerValue
-        ) {
+        )
+        {
             var testSink = new TestSink();
             var actualHeaderValue = GetAndStoreTokens_CacheHeadersArrangeAct(
                 testSink,
@@ -462,7 +465,8 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
         public void GetAndStoreTokens_OverwritesCacheControlHeader_IfNoCacheIsNotSet(
             string headerName,
             string headerValue
-        ) {
+        )
+        {
             var testSink = new TestSink();
             var actualHeaderValue = GetAndStoreTokens_CacheHeadersArrangeAct(
                 testSink,
@@ -485,7 +489,8 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
         public void GetAndStoreTokens_DoesNotOverwritePragmaHeader(
             string headerName,
             string headerValue
-        ) {
+        )
+        {
             var testSink = new TestSink();
             var actualHeaderValue = GetAndStoreTokens_CacheHeadersArrangeAct(
                 testSink,
@@ -860,7 +865,8 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
         [InlineData("Custom")]
         public async Task IsRequestValidAsync_ValidatesAntiforgery_ForNonSafeHttpMethods(
             string httpMethod
-        ) {
+        )
+        {
             // Arrange
             var context = CreateMockContext(new AntiforgeryOptions());
             context.HttpContext.Request.Method = httpMethod;
@@ -1255,7 +1261,8 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
         public void SetCookieTokenAndHeader_AddsXFrameOptionsHeader(
             bool suppressXFrameOptions,
             string expectedHeaderValue
-        ) {
+        )
+        {
             // Arrange
             var options = new AntiforgeryOptions()
             {
@@ -1497,7 +1504,8 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
         public void GetAndStoreTokens_LogsWarning_NonNoCacheHeadersAlreadyPresent(
             string headerName,
             string headerValue
-        ) {
+        )
+        {
             // Arrange
             var testSink = new TestSink();
             var loggerFactory = new Mock<ILoggerFactory>();
@@ -1532,7 +1540,8 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
         public void GetAndStoreTokens_DoesNotLogsWarning_ForNoCacheHeaders_AlreadyPresent(
             string headerName,
             string headerValue
-        ) {
+        )
+        {
             // Arrange
             var testSink = new TestSink();
             var loggerFactory = new Mock<ILoggerFactory>();
@@ -1567,7 +1576,8 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
             IAntiforgeryTokenGenerator? tokenGenerator = null,
             IAntiforgeryTokenSerializer? tokenSerializer = null,
             IAntiforgeryTokenStore? tokenStore = null
-        ) {
+        )
+        {
             var optionsManager = new TestOptionsManager();
             if (options != null)
             {
@@ -1618,7 +1628,8 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
             HttpContext context,
             TestTokenSet testTokenSet,
             bool saveNewCookie = true
-        ) {
+        )
+        {
             var oldCookieToken = testTokenSet.OldCookieTokenString;
             var formToken = testTokenSet.FormTokenString;
             var mockTokenStore = new Mock<IAntiforgeryTokenStore>(MockBehavior.Strict);
@@ -1664,7 +1675,8 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
             bool useOldCookie = false,
             bool isOldCookieValid = true,
             IAntiforgeryFeature? antiforgeryFeature = null
-        ) {
+        )
+        {
             // Arrange
             var httpContext = GetHttpContext(antiforgeryFeature);
             var testTokenSet = GetTokenSet();

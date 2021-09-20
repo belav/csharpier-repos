@@ -246,7 +246,8 @@ namespace Microsoft.AspNetCore.Server.IIS
         public static void HttpSetCompletionStatus(
             NativeSafeHandle pInProcessHandler,
             REQUEST_NOTIFICATION_STATUS rquestNotificationStatus
-        ) {
+        )
+        {
             Validate(http_set_completion_status(pInProcessHandler, rquestNotificationStatus));
         }
 
@@ -259,7 +260,8 @@ namespace Microsoft.AspNetCore.Server.IIS
             delegate* unmanaged<IntPtr, void> requestsDrainedHandler,
             IntPtr pvRequestContext,
             IntPtr pvShutdownContext
-        ) {
+        )
+        {
             Validate(
                 register_callbacks(
                     pInProcessApplication,
@@ -279,7 +281,8 @@ namespace Microsoft.AspNetCore.Server.IIS
             HttpApiTypes.HTTP_DATA_CHUNK* pDataChunks,
             int nChunks,
             out bool fCompletionExpected
-        ) {
+        )
+        {
             return http_write_response_bytes(
                 pInProcessHandler,
                 pDataChunks,
@@ -292,13 +295,15 @@ namespace Microsoft.AspNetCore.Server.IIS
             NativeSafeHandle pInProcessHandler,
             bool fMoreData,
             out bool fCompletionExpected
-        ) {
+        )
+        {
             return http_flush_response_bytes(pInProcessHandler, fMoreData, out fCompletionExpected);
         }
 
         internal static unsafe HttpApiTypes.HTTP_REQUEST_V2* HttpGetRawRequest(
             NativeSafeHandle pInProcessHandler
-        ) {
+        )
+        {
             return http_get_raw_request(pInProcessHandler);
         }
 
@@ -321,7 +326,8 @@ namespace Microsoft.AspNetCore.Server.IIS
             NativeSafeHandle pInProcessHandler,
             ushort statusCode,
             string pszReason
-        ) {
+        )
+        {
             Validate(http_set_response_status_code(pInProcessHandler, statusCode, pszReason));
         }
 
@@ -331,7 +337,8 @@ namespace Microsoft.AspNetCore.Server.IIS
             int cbBuffer,
             out int dwBytesReceived,
             out bool fCompletionExpected
-        ) {
+        )
+        {
             return http_read_request_bytes(
                 pInProcessHandler,
                 pvBuffer,
@@ -345,14 +352,16 @@ namespace Microsoft.AspNetCore.Server.IIS
             IntPtr pCompletionInfo,
             out int cbBytes,
             out int hr
-        ) {
+        )
+        {
             http_get_completion_info(pCompletionInfo, out cbBytes, out hr);
         }
 
         public static void HttpSetManagedContext(
             NativeSafeHandle pInProcessHandler,
             IntPtr pvManagedContext
-        ) {
+        )
+        {
             Validate(http_set_managed_context(pInProcessHandler, pvManagedContext));
         }
 
@@ -367,7 +376,8 @@ namespace Microsoft.AspNetCore.Server.IIS
             NativeSafeHandle pInProcessHandler,
             string variableName,
             out string value
-        ) {
+        )
+        {
             return http_get_server_variable(pInProcessHandler, variableName, out value) == 0;
         }
 
@@ -375,7 +385,8 @@ namespace Microsoft.AspNetCore.Server.IIS
             NativeSafeHandle pInProcessHandler,
             string variableName,
             string value
-        ) {
+        )
+        {
             Validate(http_set_server_variable(pInProcessHandler, variableName, value));
         }
 
@@ -391,7 +402,8 @@ namespace Microsoft.AspNetCore.Server.IIS
             IntPtr pvCompletionContext,
             out int dwBytesReceived,
             out bool fCompletionExpected
-        ) {
+        )
+        {
             return http_websockets_read_bytes(
                 pInProcessHandler,
                 pvBuffer,
@@ -414,7 +426,8 @@ namespace Microsoft.AspNetCore.Server.IIS
                 REQUEST_NOTIFICATION_STATUS> pfnCompletionCallback,
             IntPtr pvCompletionContext,
             out bool fCompletionExpected
-        ) {
+        )
+        {
             return http_websockets_write_bytes(
                 pInProcessHandler,
                 pDataChunks,
@@ -455,7 +468,8 @@ namespace Microsoft.AspNetCore.Server.IIS
             byte* pszHeaderValue,
             ushort usHeaderValueLength,
             bool fReplace
-        ) {
+        )
+        {
             Validate(
                 http_response_set_unknown_header(
                     pInProcessHandler,
@@ -473,7 +487,8 @@ namespace Microsoft.AspNetCore.Server.IIS
             byte* pHeaderValue,
             ushort length,
             bool fReplace
-        ) {
+        )
+        {
             Validate(
                 http_response_set_known_header(
                     pInProcessHandler,
@@ -489,7 +504,8 @@ namespace Microsoft.AspNetCore.Server.IIS
             NativeSafeHandle pInProcessHandler,
             out string authType,
             out IntPtr token
-        ) {
+        )
+        {
             Validate(
                 http_get_authentication_information(pInProcessHandler, out authType, out token)
             );
@@ -509,7 +525,8 @@ namespace Microsoft.AspNetCore.Server.IIS
             byte* pHeaderValue,
             ushort length,
             bool replace
-        ) {
+        )
+        {
             Validate(
                 http_response_set_trailer(
                     pInProcessHandler,
@@ -524,7 +541,8 @@ namespace Microsoft.AspNetCore.Server.IIS
         internal static unsafe void HttpResetStream(
             NativeSafeHandle pInProcessHandler,
             ulong errorCode
-        ) {
+        )
+        {
             Validate(http_reset_stream(pInProcessHandler, errorCode));
         }
 

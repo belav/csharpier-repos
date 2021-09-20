@@ -363,7 +363,8 @@ namespace Microsoft.AspNetCore.Rewrite.ApacheModRewrite
                         CultureInfo.InvariantCulture,
                         out res
                     )
-                ) {
+                )
+                {
                     return false;
                 }
             }

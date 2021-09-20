@@ -26,7 +26,8 @@ namespace System.Reflection.Metadata.Ecma335
             int blobHeapRefSize,
             MemoryBlock containingBlock,
             int containingBlockOffset
-        ) {
+        )
+        {
             NumberOfRows = numberOfRows;
             _isGuidHeapRefSizeSmall = guidHeapRefSize == 2;
             _isBlobHeapRefSizeSmall = blobHeapRefSize == 2;
@@ -91,7 +92,8 @@ namespace System.Reflection.Metadata.Ecma335
             int blobHeapRefSize,
             MemoryBlock containingBlock,
             int containingBlockOffset
-        ) {
+        )
+        {
             NumberOfRows = numberOfRows;
             _isDocumentRefSmall = documentRefSize == 2;
             _isBlobHeapRefSizeSmall = blobHeapRefSize == 2;
@@ -147,7 +149,8 @@ namespace System.Reflection.Metadata.Ecma335
             int localConstantRefSize,
             MemoryBlock containingBlock,
             int containingBlockOffset
-        ) {
+        )
+        {
             NumberOfRows = numberOfRows;
             _isMethodRefSmall = methodRefSize == 2;
             _isImportScopeRefSmall = importScopeRefSize == 2;
@@ -229,7 +232,8 @@ namespace System.Reflection.Metadata.Ecma335
             int methodDefRid,
             out int firstScopeRowId,
             out int lastScopeRowId
-        ) {
+        )
+        {
             int startRowNumber,
                 endRowNumber;
             Block.BinarySearchReferenceRange(
@@ -270,7 +274,8 @@ namespace System.Reflection.Metadata.Ecma335
             int stringHeapRefSize,
             MemoryBlock containingBlock,
             int containingBlockOffset
-        ) {
+        )
+        {
             NumberOfRows = numberOfRows;
             _isStringHeapRefSizeSmall = stringHeapRefSize == 2;
 
@@ -321,7 +326,8 @@ namespace System.Reflection.Metadata.Ecma335
             int blobHeapRefSize,
             MemoryBlock containingBlock,
             int containingBlockOffset
-        ) {
+        )
+        {
             NumberOfRows = numberOfRows;
             _isStringHeapRefSizeSmall = stringHeapRefSize == 2;
             _isBlobHeapRefSizeSmall = blobHeapRefSize == 2;
@@ -367,7 +373,8 @@ namespace System.Reflection.Metadata.Ecma335
             int methodRefSize,
             MemoryBlock containingBlock,
             int containingBlockOffset
-        ) {
+        )
+        {
             NumberOfRows = numberOfRows;
             _isMethodRefSizeSmall = methodRefSize == 2;
 
@@ -428,7 +435,8 @@ namespace System.Reflection.Metadata.Ecma335
             int blobHeapRefSize,
             MemoryBlock containingBlock,
             int containingBlockOffset
-        ) {
+        )
+        {
             NumberOfRows = numberOfRows;
             _isImportScopeRefSizeSmall = importScopeRefSize == 2;
             _isBlobHeapRefSizeSmall = blobHeapRefSize == 2;
@@ -479,7 +487,8 @@ namespace System.Reflection.Metadata.Ecma335
             int blobHeapRefSize,
             MemoryBlock containingBlock,
             int containingBlockOffset
-        ) {
+        )
+        {
             NumberOfRows = numberOfRows;
             _isHasCustomDebugInformationRefSizeSmall = hasCustomDebugInformationRefSize == 2;
             _isGuidHeapRefSizeSmall = guidHeapRefSize == 2;
@@ -528,7 +537,8 @@ namespace System.Reflection.Metadata.Ecma335
             EntityHandle parentHandle,
             out int firstImplRowId,
             out int lastImplRowId
-        ) {
+        )
+        {
             int startRowNumber,
                 endRowNumber;
 

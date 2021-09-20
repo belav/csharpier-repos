@@ -112,7 +112,8 @@ namespace CrossBoundaryLayout
                     != (
                         (ByteStruct)typeof(AGeneric<ByteStruct>).GetField("_aVal").GetValue(a3)
                     )._dVal
-                ) {
+                )
+                {
                     ATest.ReportTestFailure("B a3_aVal", a3, ref failure);
                 }
             }
@@ -207,7 +208,8 @@ namespace CrossBoundaryLayout
                     != (
                         (ByteStruct)typeof(B_A_Generic<ByteStruct>).GetField("_bVal").GetValue(b7)
                     )._dVal
-                ) {
+                )
+                {
                     ATest.ReportTestFailure("B b7_bVal", b7, ref failure);
                 }
             }
@@ -224,7 +226,8 @@ namespace CrossBoundaryLayout
                         (ByteStruct)typeof(B_A_byte_Generic<ByteStruct>).GetField("_bVal")
                             .GetValue(b8)
                     )._dVal
-                ) {
+                )
+                {
                     ATest.ReportTestFailure("B b8_bVal", b8, ref failure);
                 }
             }
@@ -240,7 +243,8 @@ namespace CrossBoundaryLayout
                     != (
                         (ByteStruct)typeof(B_A_D_Generic<ByteStruct>).GetField("_bVal").GetValue(b9)
                     )._dVal
-                ) {
+                )
+                {
                     ATest.ReportTestFailure("B b9_bVal", b9, ref failure);
                 }
             }

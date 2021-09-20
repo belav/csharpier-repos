@@ -37,18 +37,19 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             bool isPinned,
             bool isCompilerGenerated,
             bool canScheduleToStack
-        ) : this(
-            method,
-            locations,
-            nameOpt,
-            ordinal,
-            declarationKind,
-            TypeWithAnnotations.Create(type),
-            refKind,
-            isPinned,
-            isCompilerGenerated,
-            canScheduleToStack
-        ) { }
+        )
+            : this(
+                method,
+                locations,
+                nameOpt,
+                ordinal,
+                declarationKind,
+                TypeWithAnnotations.Create(type),
+                refKind,
+                isPinned,
+                isCompilerGenerated,
+                canScheduleToStack
+            ) { }
 
         public EELocalSymbol(
             MethodSymbol method,
@@ -61,7 +62,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             bool isPinned,
             bool isCompilerGenerated,
             bool canScheduleToStack
-        ) {
+        )
+        {
             Debug.Assert(method != null);
             Debug.Assert(ordinal >= -1);
             Debug.Assert(!locations.IsDefault);

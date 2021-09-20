@@ -24,7 +24,8 @@ namespace System.Reflection.Tests
                     MetadataLoadContext lc = new MetadataLoadContext(
                         new EmptyCoreMetadataAssemblyResolver()
                     )
-                ) {
+                )
+                {
                     Assembly a = lc.LoadFromAssemblyPath(assemblyPath);
                     Module m = a.GetModule("Bob.netmodule");
                     Assert.Equal(a, m.Assembly);
@@ -51,7 +52,8 @@ namespace System.Reflection.Tests
                     MetadataLoadContext lc = new MetadataLoadContext(
                         new EmptyCoreMetadataAssemblyResolver()
                     )
-                ) {
+                )
+                {
                     Assembly a = lc.LoadFromAssemblyPath(assemblyPath);
                     Module m = a.GetModule("bOB.nEtmODule");
                     Assert.Equal(a, m.Assembly);
@@ -78,7 +80,8 @@ namespace System.Reflection.Tests
                     MetadataLoadContext lc = new MetadataLoadContext(
                         new EmptyCoreMetadataAssemblyResolver()
                     )
-                ) {
+                )
+                {
                     Assembly a = lc.LoadFromAssemblyPath(assemblyPath);
                     Module m = a.GetModule("NotThere.netmodule");
                     Assert.Null(m);
@@ -98,7 +101,8 @@ namespace System.Reflection.Tests
                     MetadataLoadContext lc = new MetadataLoadContext(
                         new EmptyCoreMetadataAssemblyResolver()
                     )
-                ) {
+                )
+                {
                     Assembly a = lc.LoadFromAssemblyPath(assemblyPath);
                     Assert.Throws<FileNotFoundException>(() => a.GetModule("Bob.netmodule"));
                 }
@@ -120,7 +124,8 @@ namespace System.Reflection.Tests
                     MetadataLoadContext lc = new MetadataLoadContext(
                         new EmptyCoreMetadataAssemblyResolver()
                     )
-                ) {
+                )
+                {
                     Assembly a = lc.LoadFromAssemblyPath(assemblyPath);
                     Module m1 = a.GetModule("Bob.netmodule");
                     Module m2 = a.GetModule("bob.netmodule");
@@ -144,7 +149,8 @@ namespace System.Reflection.Tests
                     MetadataLoadContext lc = new MetadataLoadContext(
                         new EmptyCoreMetadataAssemblyResolver()
                     )
-                ) {
+                )
+                {
                     Assembly a = lc.LoadFromAssemblyPath(assemblyPath);
                     Module m = a.GetModule("Main.dll");
                     Assert.Equal(a.ManifestModule, m);
@@ -167,7 +173,8 @@ namespace System.Reflection.Tests
                     MetadataLoadContext lc = new MetadataLoadContext(
                         new EmptyCoreMetadataAssemblyResolver()
                     )
-                ) {
+                )
+                {
                     Assembly a = lc.LoadFromAssemblyPath(assemblyPath);
                     Assert.Throws<ArgumentNullException>(() => a.GetModule(null));
                 }
@@ -181,7 +188,8 @@ namespace System.Reflection.Tests
                 MetadataLoadContext lc = new MetadataLoadContext(
                     new EmptyCoreMetadataAssemblyResolver()
                 )
-            ) {
+            )
+            {
                 Assembly a = lc.LoadFromByteArray(TestData.s_MultiModuleDllImage);
                 Assert.Throws<FileNotFoundException>(() => a.GetModule("Bob.netmodule"));
             }
@@ -204,7 +212,8 @@ namespace System.Reflection.Tests
                     MetadataLoadContext lc = new MetadataLoadContext(
                         new EmptyCoreMetadataAssemblyResolver()
                     )
-                ) {
+                )
+                {
                     Assembly a = lc.LoadFromAssemblyPath(assemblyPath);
                     Module[] ms = a.GetModules(getResourceModules: getResourceModules);
                     Assert.Equal(2, ms.Length);
@@ -223,7 +232,8 @@ namespace System.Reflection.Tests
                 MetadataLoadContext lc = new MetadataLoadContext(
                     new EmptyCoreMetadataAssemblyResolver()
                 )
-            ) {
+            )
+            {
                 Assembly a = lc.LoadFromByteArray(TestData.s_MultiModuleDllImage);
                 Assert.Throws<ArgumentNullException>(
                     () => a.LoadModule(null, TestData.s_JoeNetModuleImage)
@@ -239,7 +249,8 @@ namespace System.Reflection.Tests
                 MetadataLoadContext lc = new MetadataLoadContext(
                     new EmptyCoreMetadataAssemblyResolver()
                 )
-            ) {
+            )
+            {
                 Assembly a = lc.LoadFromByteArray(TestData.s_MultiModuleDllImage);
                 Assert.Throws<ArgumentException>(
                     () => a.LoadModule("Main.dll", TestData.s_JoeNetModuleImage)
@@ -254,7 +265,8 @@ namespace System.Reflection.Tests
                 MetadataLoadContext lc = new MetadataLoadContext(
                     new EmptyCoreMetadataAssemblyResolver()
                 )
-            ) {
+            )
+            {
                 Assembly a = lc.LoadFromByteArray(TestData.s_MultiModuleDllImage);
                 Assert.Throws<ArgumentException>(
                     () => a.LoadModule("NotInManifest.dll", TestData.s_JoeNetModuleImage)
@@ -271,7 +283,8 @@ namespace System.Reflection.Tests
                 MetadataLoadContext lc = new MetadataLoadContext(
                     new EmptyCoreMetadataAssemblyResolver()
                 )
-            ) {
+            )
+            {
                 Assembly a = lc.LoadFromByteArray(TestData.s_MultiModuleDllImage);
                 Module m = a.LoadModule(moduleName, TestData.s_JoeNetModuleImage);
                 Module m1 = a.GetModule(moduleName);
@@ -293,7 +306,8 @@ namespace System.Reflection.Tests
                 MetadataLoadContext lc = new MetadataLoadContext(
                     new EmptyCoreMetadataAssemblyResolver()
                 )
-            ) {
+            )
+            {
                 Assembly a = lc.LoadFromByteArray(TestData.s_MultiModuleDllImage);
                 Module m1 = a.LoadModule("Bob.netmodule", TestData.s_JoeNetModuleImage);
                 Module m2 = a.LoadModule("Bob.netmodule", TestData.s_JoeNetModuleImage);
@@ -315,7 +329,8 @@ namespace System.Reflection.Tests
                 MetadataLoadContext lc = new MetadataLoadContext(
                     new EmptyCoreMetadataAssemblyResolver()
                 )
-            ) {
+            )
+            {
                 Module moduleReturnedFromEventHandler = null;
 
                 Assembly a = lc.LoadFromByteArray(TestData.s_MultiModuleDllImage);
@@ -355,7 +370,8 @@ namespace System.Reflection.Tests
                     MetadataLoadContext lc = new MetadataLoadContext(
                         new EmptyCoreMetadataAssemblyResolver()
                     )
-                ) {
+                )
+                {
                     Assembly a = lc.LoadFromAssemblyPath(assemblyPath);
                     Type[] types = a.GetTypes();
                     AssertContentsOfMultiModule(types, a);
@@ -378,7 +394,8 @@ namespace System.Reflection.Tests
                     MetadataLoadContext lc = new MetadataLoadContext(
                         new EmptyCoreMetadataAssemblyResolver()
                     )
-                ) {
+                )
+                {
                     Assembly a = lc.LoadFromAssemblyPath(assemblyPath);
                     Type[] types = a.DefinedTypes.ToArray();
                     AssertContentsOfMultiModule(types, a);
@@ -401,7 +418,8 @@ namespace System.Reflection.Tests
                     MetadataLoadContext lc = new MetadataLoadContext(
                         new EmptyCoreMetadataAssemblyResolver()
                     )
-                ) {
+                )
+                {
                     Assembly a = lc.LoadFromAssemblyPath(assemblyPath);
                     TestUtils.AssertNewObjectReturnedEachTime(() => a.GetTypes());
                 }
@@ -423,7 +441,8 @@ namespace System.Reflection.Tests
                     MetadataLoadContext lc = new MetadataLoadContext(
                         new EmptyCoreMetadataAssemblyResolver()
                     )
-                ) {
+                )
+                {
                     Assembly a = lc.LoadFromAssemblyPath(assemblyPath);
                     TestUtils.AssertNewObjectReturnedEachTime(() => a.DefinedTypes);
                 }
@@ -445,7 +464,8 @@ namespace System.Reflection.Tests
                     MetadataLoadContext lc = new MetadataLoadContext(
                         new EmptyCoreMetadataAssemblyResolver()
                     )
-                ) {
+                )
+                {
                     Assembly a = lc.LoadFromAssemblyPath(assemblyPath);
                     Type[] types = a.ManifestModule.GetTypes();
                     Assert.Equal(2, types.Length);
@@ -475,7 +495,8 @@ namespace System.Reflection.Tests
                     MetadataLoadContext lc = new MetadataLoadContext(
                         new EmptyCoreMetadataAssemblyResolver()
                     )
-                ) {
+                )
+                {
                     Assembly a = lc.LoadFromAssemblyPath(assemblyPath);
                     TestUtils.AssertNewObjectReturnedEachTime(() => a.ManifestModule.GetTypes());
                 }
@@ -497,7 +518,8 @@ namespace System.Reflection.Tests
                     MetadataLoadContext lc = new MetadataLoadContext(
                         new EmptyCoreMetadataAssemblyResolver()
                     )
-                ) {
+                )
+                {
                     Assembly a = lc.LoadFromAssemblyPath(assemblyPath);
                     Module bob = a.GetModule("Bob.netmodule");
                     Type mainType1 = a.ManifestModule.GetType(
@@ -561,7 +583,8 @@ namespace System.Reflection.Tests
                     MetadataLoadContext lc = new MetadataLoadContext(
                         new EmptyCoreMetadataAssemblyResolver()
                     )
-                ) {
+                )
+                {
                     Assembly a = lc.LoadFromAssemblyPath(assemblyPath);
                     Module[] modules1 = a.GetModules(getResourceModules: false);
                     Assert.Equal<Module>(new Module[] { a.ManifestModule }, modules1);
@@ -604,7 +627,8 @@ namespace System.Reflection.Tests
                 MetadataLoadContext lc = new MetadataLoadContext(
                     new EmptyCoreMetadataAssemblyResolver()
                 )
-            ) {
+            )
+            {
                 Assembly a = lc.LoadFromByteArray(TestData.s_MultiModuleDllImage);
 
                 {
@@ -657,7 +681,8 @@ namespace System.Reflection.Tests
                     MetadataLoadContext lc = new MetadataLoadContext(
                         new EmptyCoreMetadataAssemblyResolver()
                     )
-                ) {
+                )
+                {
                     Assembly a = lc.LoadFromAssemblyPath(assemblyPath);
                     Module res1 = a.GetModule("MyRes1");
                     Module res2 = a.GetModule("MyRes2");
@@ -686,7 +711,8 @@ namespace System.Reflection.Tests
                 MetadataLoadContext lc = new MetadataLoadContext(
                     new EmptyCoreMetadataAssemblyResolver()
                 )
-            ) {
+            )
+            {
                 Assembly a = lc.LoadFromByteArray(TestData.s_MultiModuleDllImage);
                 Module m1 = a.LoadModule("Bob.netmodule", TestData.s_JoeNetModuleImage);
                 TestUtils.AssertNewObjectReturnedEachTime(

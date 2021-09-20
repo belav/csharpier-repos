@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             int ilOffset,
             EESymbolProvider<TTypeSymbol, TLocalSymbol>? symbolProvider,
             bool isVisualBasicMethod
-        ) {
+        )
+        {
             ImmutableDictionary<int, ImmutableArray<bool>>? dynamicLocalMap;
             ImmutableDictionary<int, ImmutableArray<string?>>? tupleLocalMap;
             ImmutableArray<ImmutableArray<ImportRecord>> importGroups;
@@ -91,7 +92,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         private static MethodDefinitionHandle GetDeltaRelativeMethodDefinitionHandle(
             MetadataReader reader,
             int methodToken
-        ) {
+        )
+        {
             var globalHandle = (MethodDefinitionHandle)MetadataTokens.EntityHandle(methodToken);
 
             if (reader.GetTableRowCount(TableIndex.EncMap) == 0)
@@ -132,7 +134,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             out ImmutableDictionary<int, ImmutableArray<string?>>? tupleLocalMap,
             out ImmutableArray<TLocalSymbol> localConstants,
             out ILSpan reuseSpan
-        ) {
+        )
+        {
             var localVariableNamesBuilder = ArrayBuilder<string>.GetInstance();
             var localConstantsBuilder = ArrayBuilder<TLocalSymbol>.GetInstance();
 
@@ -312,7 +315,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             bool isVisualBasicMethod,
             ArrayBuilder<ImmutableArray<ImportRecord>> importGroupsBuilder,
             ArrayBuilder<ExternAliasRecord> externAliasesBuilder
-        ) {
+        )
+        {
             var importGroupBuilder = ArrayBuilder<ImportRecord>.GetInstance();
 
             while (!handle.IsNil)
@@ -362,7 +366,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             EESymbolProvider<TTypeSymbol, TLocalSymbol> symbolProvider,
             ArrayBuilder<ImportRecord> importGroupBuilder,
             ArrayBuilder<ExternAliasRecord> externAliasesBuilder
-        ) {
+        )
+        {
             foreach (ImportDefinition import in importScope.GetImports())
             {
                 switch (import.Kind)
@@ -469,7 +474,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             MethodDefinitionHandle methodHandle,
             out ImmutableArray<HoistedLocalScopeRecord> hoistedLocalScopes,
             out string defaultNamespace
-        ) {
+        )
+        {
             hoistedLocalScopes = TryGetCustomDebugInformation(
                 reader,
                 methodHandle,
@@ -494,7 +500,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         private static ImmutableArray<bool> ReadDynamicCustomDebugInformation(
             MetadataReader reader,
             EntityHandle variableOrConstantHandle
-        ) {
+        )
+        {
             if (
                 TryGetCustomDebugInformation(
                     reader,
@@ -502,7 +509,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                     PortableCustomDebugInfoKinds.DynamicLocalVariables,
                     out var info
                 )
-            ) {
+            )
+            {
                 return DecodeDynamicFlags(reader.GetBlobReader(info.Value));
             }
 
@@ -513,7 +521,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         private static ImmutableArray<string?> ReadTupleCustomDebugInformation(
             MetadataReader reader,
             EntityHandle variableOrConstantHandle
-        ) {
+        )
+        {
             if (
                 TryGetCustomDebugInformation(
                     reader,
@@ -521,7 +530,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                     PortableCustomDebugInfoKinds.TupleElementNames,
                     out var info
                 )
-            ) {
+            )
+            {
                 return DecodeTupleElementNames(reader.GetBlobReader(info.Value));
             }
 
@@ -534,7 +544,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             EntityHandle handle,
             Guid kind,
             out CustomDebugInformation customDebugInfo
-        ) {
+        )
+        {
             bool foundAny = false;
             customDebugInfo = default;
             foreach (var infoHandle in reader.GetCustomDebugInformation(handle))
@@ -586,7 +597,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         /// <exception cref="BadImageFormatException">Invalid data format.</exception>
         private static ImmutableArray<HoistedLocalScopeRecord> DecodeHoistedLocalScopes(
             BlobReader reader
-        ) {
+        )
+        {
             var result = ArrayBuilder<HoistedLocalScopeRecord>.GetInstance();
 
             do

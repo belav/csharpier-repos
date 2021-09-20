@@ -82,7 +82,8 @@ namespace PinStress
                         System.Globalization.CultureInfo.InvariantCulture,
                         out percentDelete
                     )
-                ) {
+                )
+                {
                     Console.WriteLine("Invalid percentDelete");
                     return 0;
                 }
@@ -99,7 +100,8 @@ namespace PinStress
                         System.Globalization.CultureInfo.InvariantCulture,
                         out percentFree
                     )
-                ) {
+                )
+                {
                     Console.WriteLine("Invalid percentFree");
                     return 0;
                 }

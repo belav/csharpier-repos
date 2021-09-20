@@ -964,7 +964,8 @@ class C
             VisualStudio.Debugger.Evaluation.ClrCompilation.DkmClrValue getMemberValue(
                 VisualStudio.Debugger.Evaluation.ClrCompilation.DkmClrValue v,
                 string m
-            ) {
+            )
+            {
                 switch (m)
                 {
                     case "P":

@@ -22,14 +22,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             Solution solution,
             IGraphContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (
                 Logger.LogBlock(
                     FunctionId.GraphQuery_IsUsedBy,
                     KeyValueLogMessage.Create(LogType.UserAction),
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 var graphBuilder = await GraphBuilder.CreateForInputNodesAsync(
                         solution,
                         context.InputNodes,
@@ -83,7 +85,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             IGraphContext context,
             ProjectId projectId,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var span = location.GetLineSpan();
             var lineText = location.SourceTree.GetText(cancellationToken).Lines[
                 span.StartLinePosition.Line

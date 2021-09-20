@@ -25,7 +25,8 @@ namespace Microsoft.AspNetCore.Http
             this HttpRequest request,
             FormOptions options,
             CancellationToken cancellationToken = new CancellationToken()
-        ) {
+        )
+        {
             if (request == null)
             {
                 throw new ArgumentNullException(nameof(request));

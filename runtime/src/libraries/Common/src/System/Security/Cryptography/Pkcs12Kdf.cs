@@ -30,7 +30,8 @@ namespace System.Security.Cryptography.Pkcs
             int iterationCount,
             ReadOnlySpan<byte> salt,
             Span<byte> destination
-        ) {
+        )
+        {
             Derive(password, hashAlgorithm, iterationCount, CipherKeyId, salt, destination);
         }
 
@@ -40,7 +41,8 @@ namespace System.Security.Cryptography.Pkcs
             int iterationCount,
             ReadOnlySpan<byte> salt,
             Span<byte> destination
-        ) {
+        )
+        {
             Derive(password, hashAlgorithm, iterationCount, IvId, salt, destination);
         }
 
@@ -50,7 +52,8 @@ namespace System.Security.Cryptography.Pkcs
             int iterationCount,
             ReadOnlySpan<byte> salt,
             Span<byte> destination
-        ) {
+        )
+        {
             Derive(password, hashAlgorithm, iterationCount, MacKeyId, salt, destination);
         }
 
@@ -61,7 +64,8 @@ namespace System.Security.Cryptography.Pkcs
             byte id,
             ReadOnlySpan<byte> salt,
             Span<byte> destination
-        ) {
+        )
+        {
             // https://tools.ietf.org/html/rfc7292#appendix-B.2
             Debug.Assert(iterationCount >= 1);
 
@@ -161,7 +165,8 @@ namespace System.Security.Cryptography.Pkcs
                         if (
                             !hash.TryGetHashAndReset(hashBuf, out int bytesWritten)
                             || bytesWritten != hashBuf.Length
-                        ) {
+                        )
+                        {
                             Debug.Fail(
                                 $"Hash output wrote {bytesWritten} bytes when {hashBuf.Length} was expected"
                             );

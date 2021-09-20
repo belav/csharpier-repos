@@ -26,7 +26,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Formattin
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public FormattingValueColumnDefinition(
             [ImportMany] IEnumerable<IEnumSettingViewModelFactory> factories
-        ) {
+        )
+        {
             _factories = factories;
         }
 
@@ -42,7 +43,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Formattin
             ITableEntryHandle entry,
             bool singleColumnView,
             out FrameworkElement? content
-        ) {
+        )
+        {
             if (!entry.TryGetValue(Value, out FormattingSetting setting))
             {
                 content = null;

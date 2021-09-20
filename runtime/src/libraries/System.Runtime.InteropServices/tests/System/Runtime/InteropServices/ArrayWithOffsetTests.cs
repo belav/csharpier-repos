@@ -115,7 +115,8 @@ namespace System.Runtime.InteropServices.Tests
             ArrayWithOffset arrayWithOffset,
             object other,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, arrayWithOffset.Equals(other));
             if (other is ArrayWithOffset otherArrayWithOffset)
             {

@@ -10,7 +10,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
     {
         public static CosmosDbContextOptionsBuilder ApplyConfiguration(
             this CosmosDbContextOptionsBuilder optionsBuilder
-        ) {
+        )
+        {
             optionsBuilder.ExecutionStrategy(d => new TestCosmosExecutionStrategy(d));
             optionsBuilder.RequestTimeout(TimeSpan.FromMinutes(1));
 

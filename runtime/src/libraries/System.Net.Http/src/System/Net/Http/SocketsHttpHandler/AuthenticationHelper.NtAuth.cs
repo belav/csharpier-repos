@@ -20,7 +20,8 @@ namespace System.Net.Http
             HttpConnectionPool pool,
             HttpConnection connection,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return isProxyAuth
               ? connection.SendAsyncCore(request, async, cancellationToken)
               : pool.SendWithNtProxyAuthAsync(connection, request, async, cancellationToken);
@@ -33,7 +34,8 @@ namespace System.Net.Http
                     KnownHeaders.ProxySupport.Descriptor,
                     out IEnumerable<string>? values
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -57,7 +59,8 @@ namespace System.Net.Http
             HttpConnection connection,
             HttpConnectionPool connectionPool,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             HttpResponseMessage response = await InnerSendAsync(
                     request,
                     async,
@@ -71,7 +74,8 @@ namespace System.Net.Http
                 !isProxyAuth
                 && connection.Kind == HttpConnectionKind.Proxy
                 && !ProxySupportsConnectionAuth(response)
-            ) {
+            )
+            {
                 // Proxy didn't indicate that it supports connection-based auth, so we can't proceed.
                 if (NetEventSource.Log.IsEnabled())
                 {
@@ -91,11 +95,13 @@ namespace System.Net.Http
                     credentials,
                     out AuthenticationChallenge challenge
                 )
-            ) {
+            )
+            {
                 if (
                     challenge.AuthenticationType == AuthenticationType.Negotiate
                     || challenge.AuthenticationType == AuthenticationType.Ntlm
-                ) {
+                )
+                {
                     bool isNewConnection = false;
                     bool needDrain = true;
                     try
@@ -237,7 +243,8 @@ namespace System.Net.Http
                                         isProxyAuth,
                                         out challengeData
                                     )
-                                ) {
+                                )
+                                {
                                     break;
                                 }
 
@@ -272,7 +279,8 @@ namespace System.Net.Http
             HttpConnection connection,
             HttpConnectionPool connectionPool,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return SendWithNtAuthAsync(
                 request,
                 proxyUri,
@@ -292,7 +300,8 @@ namespace System.Net.Http
             HttpConnection connection,
             HttpConnectionPool connectionPool,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(request.RequestUri != null);
             return SendWithNtAuthAsync(
                 request,

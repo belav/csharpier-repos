@@ -88,7 +88,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
             Project project,
             bool addNewEntryIfNoExistingEntryFound,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(
                 configurationKind != ConfigurationKind.OptionValue
                     || !string.IsNullOrEmpty(newOptionValueOpt)
@@ -123,7 +124,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
             Diagnostic diagnostic,
             Project project,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (severity == ReportDiagnostic.Default)
             {
                 severity = diagnostic.DefaultSeverity.ToReportDiagnostic();
@@ -147,7 +149,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
             Diagnostic diagnostic,
             Project project,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // For option based code style diagnostic, try to find the .editorconfig key-value pair for the
             // option setting.
             var codeStyleOptionValues = GetCodeStyleOptionValuesForDiagnostic(diagnostic, project);
@@ -194,7 +197,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
             string category,
             Project project,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfFalse(!string.IsNullOrEmpty(category));
             return BulkConfigureSeverityCoreAsync(
                 editorConfigSeverity,
@@ -213,7 +217,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
             string editorConfigSeverity,
             Project project,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return BulkConfigureSeverityCoreAsync(
                 editorConfigSeverity,
                 category: AllAnalyzerDiagnosticsCategory,
@@ -227,7 +232,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
             string category,
             Project project,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(category);
             var updater = new ConfigurationUpdater(
                 optionNameOpt: null,
@@ -274,7 +280,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
             Project project,
             ConfigurationKind configurationKind,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(!codeStyleOptionValues.IsEmpty());
 
             // For severity configuration for IDE code style diagnostics, we want to ensure the following:
@@ -414,7 +421,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
         private static ImmutableArray<(string optionName, string currentOptionValue, bool isPerLanguage)> GetCodeStyleOptionValuesForDiagnostic(
             Diagnostic diagnostic,
             Project project
-        ) {
+        )
+        {
             // For option based code style diagnostic, try to find the .editorconfig key-value pair for the
             // option setting.
             // For example, IDE diagnostics which are configurable with following code style option based .editorconfig entry:
@@ -436,7 +444,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
                             editorConfigLocation,
                             isPerLanguage
                         ) in codeStyleOptions
-                    ) {
+                    )
+                    {
                         if (
                             !TryGetEditorConfigStringParts(
                                 codeStyleOption,
@@ -444,7 +453,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
                                 optionSet,
                                 out var parts
                             )
-                        ) {
+                        )
+                        {
                             // Did not find a match, bail out.
                             return ImmutableArray<(string optionName, string currentOptionValue, bool isPerLanguage)>.Empty;
                         }
@@ -469,7 +479,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
             IEditorConfigStorageLocation2 editorConfigLocation,
             OptionSet optionSet,
             out (string optionName, string optionValue) parts
-        ) {
+        )
+        {
             var editorConfigString = editorConfigLocation.GetEditorConfigString(
                 codeStyleOption,
                 optionSet
@@ -494,14 +505,16 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
         internal static ImmutableArray<(OptionKey optionKey, ICodeStyleOption codeStyleOptionValue, IEditorConfigStorageLocation2 location, bool isPerLanguage)> GetCodeStyleOptionsForDiagnostic(
             Diagnostic diagnostic,
             Project project
-        ) {
+        )
+        {
             if (
                 IDEDiagnosticIdToOptionMappingHelper.TryGetMappedOptions(
                     diagnostic.Id,
                     project.Language,
                     out var options
                 )
-            ) {
+            )
+            {
                 var optionSet = project.Solution.Workspace.Options;
                 using var _ =
                     ArrayBuilder<(OptionKey, ICodeStyleOption, IEditorConfigStorageLocation2, bool)>.GetInstance(
@@ -546,7 +559,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
         private SourceText? GetNewAnalyzerConfigDocumentText(
             SourceText originalText,
             AnalyzerConfigDocument editorConfigDocument
-        ) {
+        )
+        {
             // Check if an entry to configure the rule severity already exists in the .editorconfig file.
             // If it does, we update the existing entry with the new severity.
             var (newText, lastValidHeaderSpanEnd, lastValidSpecificHeaderSpanEnd) =
@@ -573,7 +587,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
         private (SourceText? newText, TextLine? lastValidHeaderSpanEnd, TextLine? lastValidSpecificHeaderSpanEnd) CheckIfRuleExistsAndReplaceInFile(
             SourceText result,
             AnalyzerConfigDocument editorConfigDocument
-        ) {
+        )
+        {
             // If there's an error finding the editorconfig directory, bail out.
             var editorConfigDirectory = PathUtilities.GetDirectoryName(
                 editorConfigDocument.FilePath
@@ -632,7 +647,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
                         mostRecentHeader != null
                         && lastValidHeader != null
                         && mostRecentHeader.Equals(lastValidHeader)
-                    ) {
+                    )
+                    {
                         // We found the rule in the file -- replace it with updated option value/severity.
                         if (key.Equals(_optionNameOpt))
                         {
@@ -663,7 +679,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
                                 && _optionNameOpt == null
                                 && severitySuffixInValue.Length == 0
                                 && key.EndsWith(SeveritySuffix)
-                            ) {
+                            )
+                            {
                                 // We found a rule configuration entry of severity based form:
                                 //      "dotnet_diagnostic.<%DiagnosticId%>.severity = %severity%
                                 //              OR
@@ -681,7 +698,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
                                                 DiagnosticOptionPrefix,
                                                 StringComparison.Ordinal
                                             )
-                                        ) {
+                                        )
+                                        {
                                             var diagIdLength =
                                                 key.Length
                                                 - (
@@ -708,7 +726,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
                                         if (
                                             _categoryToBulkConfigure
                                             == AllAnalyzerDiagnosticsCategory
-                                        ) {
+                                        )
+                                        {
                                             foundMatch =
                                                 key == BulkConfigureAllAnalyzerDiagnosticsOptionKey;
                                         }
@@ -719,7 +738,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
                                                     BulkConfigureAnalyzerDiagnosticsByCategoryOptionPrefix,
                                                     StringComparison.Ordinal
                                                 )
-                                            ) {
+                                            )
+                                            {
                                                 var categoryLength =
                                                     key.Length
                                                     - (
@@ -803,7 +823,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
                                 matchWithoutExtension.Contains(
                                     PathUtilities.GetFileName(diagnosticFilePath, false)
                                 )
-                            ) {
+                            )
+                            {
                                 // If the diagnostic's isPerLanguage = true, the rule is valid for both C# and VB.
                                 // For the purpose of adding missing rules later, we want to keep track of whether there is a
                                 // valid header that contains both [*.cs] and [*.vb].
@@ -825,7 +846,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
                                         )
                                         && splicedFileExtensions.Contains("cs")
                                         && splicedFileExtensions.Contains("vb")
-                                    ) {
+                                    )
+                                    {
                                         lastValidSpecificHeader = mostRecentHeader;
                                     }
                                 }
@@ -834,13 +856,15 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
                                     if (
                                         _language.Equals(LanguageNames.CSharp)
                                         && splicedFileExtensions.Contains("cs")
-                                    ) {
+                                    )
+                                    {
                                         lastValidSpecificHeader = mostRecentHeader;
                                     }
                                     else if (
                                         _language.Equals(LanguageNames.VisualBasic)
                                         && splicedFileExtensions.Contains("vb")
-                                    ) {
+                                    )
+                                    {
                                         lastValidSpecificHeader = mostRecentHeader;
                                     }
                                 }
@@ -851,7 +875,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
                         // Location.None special case.
                         else if (
                             relativePath.IsEmpty() && new Regex(fileName).IsMatch(relativePath)
-                        ) {
+                        )
+                        {
                             if (
                                 (
                                     _language.Equals(LanguageNames.CSharp)
@@ -861,7 +886,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
                                     _language.Equals(LanguageNames.VisualBasic)
                                     && splicedFileExtensions.Contains("vb")
                                 )
-                            ) {
+                            )
+                            {
                                 lastValidHeader = mostRecentHeader;
                             }
                         }
@@ -873,12 +899,14 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
                     mostRecentHeader != null
                     && lastValidHeader != null
                     && mostRecentHeader.Equals(lastValidHeader)
-                ) {
+                )
+                {
                     lastValidHeaderSpanEnd = curLine;
                     if (
                         lastValidSpecificHeader != null
                         && mostRecentHeader.Equals(lastValidSpecificHeader)
-                    ) {
+                    )
+                    {
                         lastValidSpecificHeaderSpanEnd = curLine;
                     }
                 }
@@ -902,7 +930,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
             SourceText result,
             TextLine? lastValidHeaderSpanEnd,
             TextLine? lastValidSpecificHeaderSpanEnd
-        ) {
+        )
+        {
             // Create a new rule configuration entry for the given diagnostic ID or bulk configuration category.
             // If optionNameOpt and optionValueOpt are non-null, it indicates an option based diagnostic ID
             // which can be configured by a new entry such as: "%option_name% = %option_value%:%severity%

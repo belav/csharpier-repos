@@ -87,7 +87,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnreachableCode
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             foreach (var diagnostic in diagnostics)
             {
                 var firstUnreachableStatementLocation = diagnostic.AdditionalLocations.First();
@@ -116,7 +117,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnreachableCode
                 if (
                     !statement.IsParentKind(SyntaxKind.Block)
                     && !statement.IsParentKind(SyntaxKind.SwitchSection)
-                ) {
+                )
+                {
                     editor.ReplaceNode(statement, SyntaxFactory.Block());
                 }
                 else

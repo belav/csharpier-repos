@@ -31,7 +31,8 @@ namespace Microsoft.VisualBasic.Tests
             object[] args,
             Func<object, object> getResult,
             object expected
-        ) {
+        )
+        {
             Assert.Equal(
                 getResult is null ? expected : null,
                 Interaction.CallByName(instance, methodName, useCallType, args)
@@ -49,7 +50,8 @@ namespace Microsoft.VisualBasic.Tests
             string methodName,
             CallType useCallType,
             object[] args
-        ) {
+        )
+        {
             Assert.Throws<ArgumentException>(
                 () => Interaction.CallByName(instance, methodName, useCallType, args)
             );
@@ -62,7 +64,8 @@ namespace Microsoft.VisualBasic.Tests
             string methodName,
             CallType useCallType,
             object[] args
-        ) {
+        )
+        {
             Assert.Throws<MissingMemberException>(
                 () => Interaction.CallByName(instance, methodName, useCallType, args)
             );

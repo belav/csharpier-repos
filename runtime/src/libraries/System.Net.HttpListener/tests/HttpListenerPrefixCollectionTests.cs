@@ -230,7 +230,8 @@ namespace System.Net.Tests
         [MemberData(nameof(Hosts_TestData))]
         public void Add_PrefixAlreadyRegisteredAndNotStarted_ThrowsHttpListenerException(
             string hostname
-        ) {
+        )
+        {
             using (var factory = new HttpListenerFactory(hostname))
             {
                 string uriPrefix = Assert.Single(factory.GetListener().Prefixes);
@@ -263,7 +264,8 @@ namespace System.Net.Tests
         [MemberData(nameof(Hosts_TestData))]
         public void Add_PrefixAlreadyRegisteredAndStarted_ThrowsHttpListenerException(
             string hostname
-        ) {
+        )
+        {
             using (var factory = new HttpListenerFactory(hostname))
             {
                 HttpListener listener = factory.GetListener();
@@ -407,7 +409,8 @@ namespace System.Net.Tests
         [MemberData(nameof(InvalidPrefix_TestData))]
         public void Add_InvalidPrefixAlreadyStarted_ThrowsHttpListenerExceptionOnAdd(
             string uriPrefix
-        ) {
+        )
+        {
             using (var factory = new HttpListenerFactory())
             {
                 HttpListener listener = factory.GetListener();

@@ -241,7 +241,8 @@ internal static partial class Interop
         internal static void SslSetMinProtocolVersion(
             SafeSslHandle sslHandle,
             SslProtocols minProtocolId
-        ) {
+        )
+        {
             int osStatus = AppleCryptoNative_SslSetMinProtocolVersion(sslHandle, minProtocolId);
 
             if (osStatus != 0)
@@ -253,7 +254,8 @@ internal static partial class Interop
         internal static void SslSetMaxProtocolVersion(
             SafeSslHandle sslHandle,
             SslProtocols maxProtocolId
-        ) {
+        )
+        {
             int osStatus = AppleCryptoNative_SslSetMaxProtocolVersion(sslHandle, maxProtocolId);
 
             if (osStatus != 0)
@@ -367,7 +369,8 @@ internal static partial class Interop
                     certChainPtrs,
                     (UIntPtr)certChainPtrs.Length
                 )
-            ) {
+            )
+            {
                 int osStatus = AppleCryptoNative_SslSetCertificate(sslHandle, cfCertRefs);
 
                 if (osStatus != 0)
@@ -408,7 +411,8 @@ internal static partial class Interop
         internal static unsafe void SslCtxSetAlpnProtos(
             SafeSslHandle ctx,
             List<SslApplicationProtocol> protocols
-        ) {
+        )
+        {
             SafeCreateHandle? cfProtocolsRefs = null;
             SafeCreateHandle[]? cfProtocolsArrayRef = null;
             try
@@ -425,7 +429,8 @@ internal static partial class Interop
                     protocols.Count == 2
                     && protocols[0] == SslApplicationProtocol.Http2
                     && protocols[1] == SslApplicationProtocol.Http11
-                ) {
+                )
+                {
                     cfProtocolsRefs = s_cfAlpnHttp211Protocols;
                 }
                 else
@@ -496,7 +501,8 @@ internal static partial class Interop
             string hostName,
             DateTime notBefore,
             out int osStatus
-        ) {
+        )
+        {
             int result;
             // The IdnMapping converts Unicode input into the IDNA punycode sequence.
             // It also does host case normalization.  The bypass logic would be something
@@ -514,7 +520,8 @@ internal static partial class Interop
             using (SafeCFDateHandle cfNotBefore = CoreFoundation.CFDateCreate(notBefore))
             using (
                 SafeCreateHandle cfHostname = CoreFoundation.CFStringCreateWithCString(matchName)
-            ) {
+            )
+            {
                 result = AppleCryptoNative_SslIsHostnameMatch(
                     handle,
                     cfHostname,

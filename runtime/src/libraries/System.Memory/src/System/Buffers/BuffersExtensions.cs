@@ -82,7 +82,8 @@ namespace System.Buffers
         private static void CopyToMultiSegment<T>(
             in ReadOnlySequence<T> sequence,
             Span<T> destination
-        ) {
+        )
+        {
             if (sequence.Length > destination.Length)
                 ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.destination);
 
@@ -139,7 +140,8 @@ namespace System.Buffers
             IBufferWriter<T> writer,
             in ReadOnlySpan<T> source,
             Span<T> destination
-        ) {
+        )
+        {
             ReadOnlySpan<T> input = source;
             while (true)
             {

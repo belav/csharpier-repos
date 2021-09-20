@@ -90,7 +90,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             ChangeTrackingStrategy changeTrackingStrategy,
             PropertyInfo? indexerPropertyInfo,
             bool propertyBag
-        ) {
+        )
+        {
             Name = name;
             _clrType = type;
             _hasSharedClrType = sharedClrType;
@@ -238,7 +239,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             bool required = false,
             bool requiredDependent = false,
             bool ownership = false
-        ) {
+        )
+        {
             var foreignKey = new SlimForeignKey(
                 properties,
                 principalKey,
@@ -342,7 +344,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             IReadOnlyList<IReadOnlyProperty> properties,
             IReadOnlyKey principalKey,
             IReadOnlyEntityType principalEntityType
-        ) {
+        )
+        {
             if (_foreignKeys.Count == 0)
             {
                 return null;
@@ -356,7 +359,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                         principalKey.Properties
                     )
                     && fk.PrincipalEntityType == principalEntityType
-                ) {
+                )
+                {
                     return fk;
                 }
             }
@@ -400,7 +404,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             bool onDependent,
             PropertyAccessMode propertyAccessMode = Internal.Model.DefaultPropertyAccessMode,
             bool eagerLoaded = false
-        ) {
+        )
+        {
             var navigation = new SlimNavigation(
                 name,
                 clrType,
@@ -465,7 +470,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             bool onDependent,
             PropertyAccessMode propertyAccessMode = Internal.Model.DefaultPropertyAccessMode,
             bool eagerLoaded = false
-        ) {
+        )
+        {
             var skipNavigation = new SlimSkipNavigation(
                 name,
                 clrType,
@@ -525,7 +531,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             IReadOnlyList<SlimProperty> properties,
             string? name = null,
             bool unique = false
-        ) {
+        )
+        {
             var index = new SlimIndex(properties, this, name, unique);
             if (name != null)
             {
@@ -642,7 +649,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             ValueComparer? valueComparer = null,
             ValueComparer? keyValueComparer = null,
             CoreTypeMapping? typeMapping = null
-        ) {
+        )
+        {
             var property = new SlimProperty(
                 name,
                 propertyType,
@@ -708,7 +716,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <returns> The properties, or <see langword="null" /> if any property is not found. </returns>
         public virtual IReadOnlyList<SlimProperty>? FindProperties(
             IEnumerable<string> propertyNames
-        ) {
+        )
+        {
             var properties = new List<SlimProperty>();
             foreach (var propertyName in propertyNames)
             {
@@ -742,7 +751,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             PropertyInfo? propertyInfo,
             FieldInfo? fieldInfo,
             PropertyAccessMode propertyAccessMode = Internal.Model.DefaultPropertyAccessMode
-        ) {
+        )
+        {
             var serviceProperty = new SlimServiceProperty(
                 name,
                 propertyInfo,

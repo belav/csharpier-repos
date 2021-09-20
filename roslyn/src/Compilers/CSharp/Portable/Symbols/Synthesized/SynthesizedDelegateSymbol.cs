@@ -136,7 +136,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 SynthesizedDelegateSymbol containingType,
                 BitVector byRefParameters,
                 TypeSymbol voidReturnTypeOpt
-            ) {
+            )
+            {
                 var typeParams = containingType.TypeParameters;
 
                 _containingType = containingType;
@@ -171,13 +172,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             internal override bool IsMetadataNewSlot(
                 bool ignoreInterfaceImplementationChanges = false
-            ) {
+            )
+            {
                 return true;
             }
 
             internal override bool IsMetadataVirtual(
                 bool ignoreInterfaceImplementationChanges = false
-            ) {
+            )
+            {
                 return true;
             }
 

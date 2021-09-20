@@ -31,7 +31,8 @@ namespace System.Net
             string challenge,
             System.Net.WebRequest request,
             System.Net.ICredentials credentials
-        ) {
+        )
+        {
             throw null;
         }
         [System.ObsoleteAttribute(
@@ -42,7 +43,8 @@ namespace System.Net
         public static System.Net.Authorization? PreAuthenticate(
             System.Net.WebRequest request,
             System.Net.ICredentials credentials
-        ) {
+        )
+        {
             throw null;
         }
         public static void Register(System.Net.IAuthenticationModule authenticationModule) { }
@@ -145,13 +147,15 @@ namespace System.Net
         public override System.IAsyncResult BeginGetRequestStream(
             System.AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public override System.IAsyncResult BeginGetResponse(
             System.AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public override System.IO.Stream EndGetRequestStream(System.IAsyncResult asyncResult)
@@ -386,13 +390,15 @@ namespace System.Net
         public override System.IAsyncResult BeginGetRequestStream(
             System.AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public override System.IAsyncResult BeginGetResponse(
             System.AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public override System.IO.Stream EndGetRequestStream(System.IAsyncResult asyncResult)
@@ -727,13 +733,15 @@ namespace System.Net
         public override System.IAsyncResult BeginGetRequestStream(
             System.AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public override System.IAsyncResult BeginGetResponse(
             System.AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public override System.IO.Stream EndGetRequestStream(System.IAsyncResult asyncResult)
@@ -743,7 +751,8 @@ namespace System.Net
         public System.IO.Stream EndGetRequestStream(
             System.IAsyncResult asyncResult,
             out System.Net.TransportContext? context
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Net.WebResponse EndGetResponse(System.IAsyncResult asyncResult)
@@ -1090,13 +1099,15 @@ namespace System.Net
         public virtual System.IAsyncResult BeginGetRequestStream(
             System.AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.IAsyncResult BeginGetResponse(
             System.AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         [System.ObsoleteAttribute(

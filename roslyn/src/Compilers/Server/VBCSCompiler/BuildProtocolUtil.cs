@@ -52,7 +52,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer
             out string? currentDirectory,
             out string? tempDirectory,
             out string? libDirectory
-        ) {
+        )
+        {
             currentDirectory = null;
             libDirectory = null;
             tempDirectory = null;

@@ -36,7 +36,8 @@ namespace System.Net.Mime.Tests
             string expectedOutput,
             string encodingName,
             bool encodeCRLF
-        ) {
+        )
+        {
             Encoding encoding =
                 encodingName == "ASCII"
                     ? Encoding.ASCII

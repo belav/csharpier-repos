@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression operand,
             UnaryOperatorOverloadResolutionResult result,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             Debug.Assert(operand != null);
             Debug.Assert(result.Results.Count == 0);
 
@@ -74,7 +75,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression operand,
             UnaryOperatorOverloadResolutionResult result,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             // SPEC: Given the set of applicable candidate function members, the best function member in that set is located.
             // SPEC: If the set contains only one function member, then that function member is the best function member.
 
@@ -100,7 +102,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (
                         candidates[index].Kind != OperatorAnalysisResultKind.Inapplicable
                         && index != bestIndex
-                    ) {
+                    )
+                    {
                         candidates[index] = candidates[index].Worse();
                     }
                 }
@@ -145,7 +148,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression operand,
             ArrayBuilder<UnaryOperatorAnalysisResult> candidates,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             int currentBestIndex = -1;
             for (int index = 0; index < candidates.Count; index++)
             {
@@ -209,7 +213,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             UnaryOperatorSignature op2,
             BoundExpression operand,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             // First we see if the conversion from the operand to one operand type is better than
             // the conversion to the other.
 
@@ -276,7 +281,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression operand,
             ArrayBuilder<UnaryOperatorAnalysisResult> results,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             // The spec states that overload resolution is performed upon the infinite set of
             // operators defined on enumerated types, pointers and delegates. Clearly we cannot
             // construct the infinite set; we have to pare it down. Previous implementations of C#
@@ -315,7 +321,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression operand,
             ArrayBuilder<UnaryOperatorAnalysisResult> results,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             bool anyApplicable = false;
             foreach (var op in operators)
             {
@@ -342,7 +349,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             UnaryOperatorKind kind,
             BoundExpression operand,
             ArrayBuilder<UnaryOperatorSignature> operators
-        ) {
+        )
+        {
             Debug.Assert(operand != null);
 
             var enumType = operand.Type;
@@ -387,7 +395,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static UnaryOperatorSignature? GetPointerOperation(
             UnaryOperatorKind kind,
             BoundExpression operand
-        ) {
+        )
+        {
             Debug.Assert(operand != null);
 
             var pointerType = operand.Type as PointerTypeSymbol;
@@ -419,7 +428,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression operand,
             ArrayBuilder<UnaryOperatorAnalysisResult> results,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             Debug.Assert(operand != null);
 
             if ((object)operand.Type == null)
@@ -477,7 +487,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ;
                 (object)current != null;
                 current = current.BaseTypeWithDefinitionUseSiteDiagnostics(ref useSiteInfo)
-            ) {
+            )
+            {
                 operators.Clear();
                 GetUserDefinedUnaryOperatorsFromType(current, kind, name, operators);
                 results.Clear();
@@ -536,7 +547,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 resultsFromInterface,
                                 ref useSiteInfo
                             )
-                        ) {
+                        )
+                        {
                             hadApplicableCandidates = true;
                             results.AddRange(resultsFromInterface);
 
@@ -564,7 +576,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             UnaryOperatorKind kind,
             string name,
             ArrayBuilder<UnaryOperatorSignature> operators
-        ) {
+        )
+        {
             foreach (MethodSymbol op in type.GetOperators(name))
             {
                 // If we're in error recovery, we might have bad operators. Just ignore it.
@@ -604,7 +617,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             && !operandType.IsNullableType()
                             && resultType.IsValueType
                             && !resultType.IsNullableType()
-                        ) {
+                        )
+                        {
                             operators.Add(
                                 new UnaryOperatorSignature(
                                     UnaryOperatorKind.Lifted | UnaryOperatorKind.UserDefined | kind,

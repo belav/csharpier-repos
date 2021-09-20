@@ -269,7 +269,8 @@ namespace System.IO.MemoryMappedFiles.Tests
             MemoryMappedFileAccess access,
             MemoryMappedFileOptions options,
             HandleInheritability inheritability
-        ) {
+        )
+        {
             // Map doesn't exist
             using (MemoryMappedFile mmf = MemoryMappedFile.CreateOrOpen(mapName, capacity))
             {
@@ -287,7 +288,8 @@ namespace System.IO.MemoryMappedFiles.Tests
                     options,
                     inheritability
                 )
-            ) {
+            )
+            {
                 ValidateMemoryMappedFile(mmf, capacity, access, inheritability);
             }
 
@@ -319,7 +321,8 @@ namespace System.IO.MemoryMappedFiles.Tests
                     options,
                     inheritability
                 )
-            ) {
+            )
+            {
                 ValidateMemoryMappedFile(mmf2, capacity, access, inheritability);
             }
 
@@ -391,7 +394,8 @@ namespace System.IO.MemoryMappedFiles.Tests
             MemoryMappedFileAccess access,
             MemoryMappedFileOptions options,
             HandleInheritability inheritability
-        ) {
+        )
+        {
             // Map doesn't exist
             using (MemoryMappedFile mmf = MemoryMappedFile.CreateOrOpen(mapName, capacity, access))
             {
@@ -406,7 +410,8 @@ namespace System.IO.MemoryMappedFiles.Tests
                     options,
                     inheritability
                 )
-            ) {
+            )
+            {
                 ValidateMemoryMappedFile(mmf, capacity, access, inheritability);
             }
 
@@ -434,7 +439,8 @@ namespace System.IO.MemoryMappedFiles.Tests
                     options,
                     inheritability
                 )
-            ) {
+            )
+            {
                 ValidateMemoryMappedFile(mmf2, capacity, access, inheritability);
             }
             // (Avoid testing with CreateFromFile when using execute permissions.)
@@ -461,7 +467,8 @@ namespace System.IO.MemoryMappedFiles.Tests
             MemoryMappedFileAccess[] accesses,
             MemoryMappedFileOptions[] options,
             HandleInheritability[] inheritabilities
-        ) {
+        )
+        {
             foreach (string tmpMapName in mapNames)
             {
                 if (tmpMapName != null && !MapNamesSupported)
@@ -537,7 +544,8 @@ namespace System.IO.MemoryMappedFiles.Tests
                     Capacity,
                     MemoryMappedFileAccess.Write
                 )
-            ) {
+            )
+            {
                 ValidateMemoryMappedFile(mmf, Capacity, MemoryMappedFileAccess.Write);
             }
         }
@@ -631,7 +639,8 @@ namespace System.IO.MemoryMappedFiles.Tests
                     Capacity,
                     MemoryMappedFileAccess.ReadWrite
                 )
-            ) {
+            )
+            {
                 // Even though we passed ReadWrite to CreateOrOpen, trying to open a view accessor with ReadWrite should fail
                 Assert.Throws<IOException>(() => opened.CreateViewAccessor());
                 Assert.Throws<IOException>(
@@ -664,7 +673,8 @@ namespace System.IO.MemoryMappedFiles.Tests
                     Capacity,
                     MemoryMappedFileAccess.Read
                 )
-            ) {
+            )
+            {
                 // Even though we passed ReadWrite to CreateNew, trying to open a view accessor with ReadWrite should fail
                 Assert.Throws<UnauthorizedAccessException>(() => opened.CreateViewAccessor());
                 Assert.Throws<UnauthorizedAccessException>(

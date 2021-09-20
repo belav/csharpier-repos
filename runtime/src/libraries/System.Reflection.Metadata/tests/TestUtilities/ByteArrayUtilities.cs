@@ -38,7 +38,8 @@ namespace System.Reflection.Metadata.Tests
             this ImmutableArray<byte> bytes,
             int start,
             int end
-        ) {
+        )
+        {
             if (end < 0)
             {
                 end = bytes.Length + end;

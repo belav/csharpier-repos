@@ -208,7 +208,8 @@ namespace System.Management
             ManagementScope scope,
             ObjectQuery query,
             EnumerationOptions options
-        ) {
+        )
+        {
             this.scope = ManagementScope._Clone(scope);
 
             if (null != query)
@@ -332,7 +333,8 @@ namespace System.Management
                     && (((SelectQuery)query).Condition == null)
                     && (((SelectQuery)query).SelectedProperties == null)
                     && (options.EnumerateDeep == true)
-                ) {
+                )
+                {
                     //Need to make sure that we're not passing invalid flags to enumeration APIs.
                     //The only flags not valid for enumerations are EnsureLocatable & PrototypeOnly.
                     enumOptions.EnsureLocatable = false;
@@ -433,7 +435,8 @@ namespace System.Management
                     && (((SelectQuery)query).Condition == null)
                     && (((SelectQuery)query).SelectedProperties == null)
                     && (options.EnumerateDeep == true)
-                ) {
+                )
+                {
                     //Need to make sure that we're not passing invalid flags to enumeration APIs.
                     //The only flags not valid for enumerations are EnsureLocatable & PrototypeOnly.
                     enumOptions.EnsureLocatable = false;

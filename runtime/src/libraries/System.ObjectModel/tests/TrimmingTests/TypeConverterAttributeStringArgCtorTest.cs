@@ -36,7 +36,8 @@ namespace TypeConverterAttributeTest
             ITypeDescriptorContext context,
             CultureInfo culture,
             object value
-        ) {
+        )
+        {
             if (value is string str)
             {
                 return str + "trivia";

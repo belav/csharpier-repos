@@ -71,7 +71,8 @@ namespace Microsoft.CodeAnalysis
                 ImmutableHashSet<ProjectId>
             >? existingReverseReferencesMap,
             ProjectId removedProjectId
-        ) {
+        )
+        {
             var builder = existingForwardReferencesMap.ToBuilder();
 
             if (existingReverseReferencesMap is object)
@@ -83,7 +84,8 @@ namespace Microsoft.CodeAnalysis
                         removedProjectId,
                         out var referencingProjects
                     )
-                ) {
+                )
+                {
                     foreach (var id in referencingProjects)
                     {
                         builder.MultiRemove(id, removedProjectId);
@@ -123,7 +125,8 @@ namespace Microsoft.CodeAnalysis
                 ImmutableHashSet<ProjectId>
             >? existingReverseReferencesMap,
             ProjectId removedProjectId
-        ) {
+        )
+        {
             if (existingReverseReferencesMap is null)
             {
                 // The map was never calculated for the previous graph, so there is nothing to update.
@@ -135,7 +138,8 @@ namespace Microsoft.CodeAnalysis
                     removedProjectId,
                     out var forwardReferences
                 )
-            ) {
+            )
+            {
                 // The removed project did not reference any other projects, so we simply remove it.
                 return existingReverseReferencesMap.Remove(removedProjectId);
             }
@@ -167,7 +171,8 @@ namespace Microsoft.CodeAnalysis
                 ImmutableHashSet<ProjectId>
             > existingTransitiveReferencesMap,
             ProjectId removedProjectId
-        ) {
+        )
+        {
             var builder = existingTransitiveReferencesMap.ToBuilder();
 
             // Iterate over each project and invalidate the transitive references for the project if the project has an
@@ -201,7 +206,8 @@ namespace Microsoft.CodeAnalysis
                 ImmutableHashSet<ProjectId>
             > existingReverseTransitiveReferencesMap,
             ProjectId removedProjectId
-        ) {
+        )
+        {
             var builder = existingReverseTransitiveReferencesMap.ToBuilder();
 
             // Iterate over each project and invalidate the transitive reverse references for the project if the project

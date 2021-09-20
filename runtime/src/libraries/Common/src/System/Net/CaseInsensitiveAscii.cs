@@ -356,7 +356,8 @@ namespace System.Net
                             if (
                                 AsciiToLower[firstString[index]]
                                 != AsciiToLower[secondString[index]]
-                            ) {
+                            )
+                            {
                                 return false;
                             }
                         }

@@ -212,7 +212,8 @@ namespace System.Security.AccessControl.Tests
             bool isDS,
             bool wasCanonicalInitially,
             RawAcl rawAcl
-        ) {
+        )
+        {
             bool result = true;
             byte[] sAclBinaryForm = null;
             byte[] rAclBinaryForm = null;
@@ -223,7 +224,8 @@ namespace System.Security.AccessControl.Tests
                 && systemAcl.Count == rawAcl.Count
                 && systemAcl.BinaryLength == rawAcl.BinaryLength
                 && systemAcl.IsCanonical == wasCanonicalInitially
-            ) {
+            )
+            {
                 sAclBinaryForm = new byte[systemAcl.BinaryLength];
                 rAclBinaryForm = new byte[rawAcl.BinaryLength];
                 systemAcl.GetBinaryForm(sAclBinaryForm, 0);
@@ -255,7 +257,8 @@ namespace System.Security.AccessControl.Tests
             string initialRawAclStr,
             string verifierRawAclStr,
             bool wasCanonicalInitially
-        ) {
+        )
+        {
             RawAcl rawAcl = null;
             SystemAcl systemAcl = null;
 

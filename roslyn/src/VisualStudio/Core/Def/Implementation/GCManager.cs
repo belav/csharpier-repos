@@ -38,7 +38,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                         var root = VSRegistry.RegistryRoot(
                             __VsLocalRegistryType.RegType_UserSettings
                         )
-                    ) {
+                    )
+                    {
                         if (root != null)
                         {
                             using var key = root.OpenSubKey("Performance");
@@ -47,7 +48,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                                 key != null
                                 && key.GetValue(name) != null
                                 && key.GetValueKind(name) == Microsoft.Win32.RegistryValueKind.DWord
-                            ) {
+                            )
+                            {
                                 s_delayMilliseconds = (int)key.GetValue(name, s_delayMilliseconds);
                                 return;
                             }

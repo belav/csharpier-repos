@@ -111,7 +111,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.AddBraces
                 option.Value == PreferBracesPreference.WhenMultiline
                 && !IsConsideredMultiLine(statement, embeddedStatement)
                 && !RequiresBracesToMatchContext(statement)
-            ) {
+            )
+            {
                 return;
             }
 
@@ -141,7 +142,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.AddBraces
             SyntaxNode statement,
             StatementSyntax embeddedStatement,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (statement.IsKind(SyntaxKind.IfStatement, out IfStatementSyntax ifStatementNode))
             {
                 var elseNode = ifStatementNode.Else;
@@ -177,7 +179,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.AddBraces
         private static bool IsConsideredMultiLine(
             SyntaxNode statement,
             SyntaxNode embeddedStatement
-        ) {
+        )
+        {
             // Early return if syntax errors prevent analysis
             if (embeddedStatement.IsMissing)
             {
@@ -191,7 +194,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.AddBraces
                     statement.GetFirstToken(),
                     statement.GetLastToken()
                 )
-            ) {
+            )
+            {
                 // The entire statement fits on one line. Examples:
                 //
                 //   if (something) return;
@@ -208,7 +212,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.AddBraces
                     statement.GetFirstToken(),
                     lastTokenBeforeEmbeddedStatement
                 )
-            ) {
+            )
+            {
                 // The part of the statement preceding the embedded statement does not fit on one line. Examples:
                 //
                 //   for (int i = 0; // <-- The initializer/condition/increment are on separate lines
@@ -224,7 +229,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.AddBraces
                     embeddedStatement.GetFirstToken(),
                     embeddedStatement.GetLastToken()
                 )
-            ) {
+            )
+            {
                 // The embedded statement does not fit on one line. Examples:
                 //
                 //   if (something)
@@ -240,7 +246,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.AddBraces
                 if (
                     statement is IfStatementSyntax ifStatement
                     && ifStatement.Statement == embeddedStatement
-                ) {
+                )
+                {
                     // The embedded statement is followed by an 'else' clause, which may span multiple lines without
                     // triggering a braces requirement, such as this:
                     //
@@ -261,7 +268,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.AddBraces
                             firstTokenAfterEmbeddedStatement,
                             statement.GetLastToken()
                         )
-                    ) {
+                    )
+                    {
                         // The part of the statement following the embedded statement does not fit on one line. Examples:
                         //
                         //   do
@@ -311,7 +319,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.AddBraces
         /// </remarks>
         private static IfStatementSyntax GetOutermostIfStatementOfSequence(
             SyntaxNode ifStatementOrElseClause
-        ) {
+        )
+        {
             IfStatementSyntax result;
             if (ifStatementOrElseClause.IsKind(SyntaxKind.ElseClause))
             {

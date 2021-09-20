@@ -229,7 +229,8 @@ namespace JIT.HardwareIntrinsics.X86
             UInt16 right,
             UInt32 result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             var isUnexpectedResult = false;
 
             uint expectedResult = 15;

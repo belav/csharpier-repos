@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         public SystemTextJsonInputFormatter(
             JsonOptions options,
             ILogger<SystemTextJsonInputFormatter> logger
-        ) {
+        )
+        {
             SerializerOptions = options.JsonSerializerOptions;
             _jsonOptions = options;
             _logger = logger;
@@ -57,7 +58,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         public sealed override async Task<InputFormatterResult> ReadRequestBodyAsync(
             InputFormatterContext context,
             Encoding encoding
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -142,7 +144,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         private (Stream inputStream, bool usesTranscodingStream) GetInputStream(
             HttpContext httpContext,
             Encoding encoding
-        ) {
+        )
+        {
             if (encoding.CodePage == Encoding.UTF8.CodePage)
             {
                 return (httpContext.Request.Body, false);

@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis
             ImmutableArray<ISourceGenerator> generators,
             AnalyzerConfigOptionsProvider optionsProvider,
             ImmutableArray<AdditionalText> additionalTexts
-        ) {
+        )
+        {
             _state = new GeneratorDriverState(
                 parseOptions,
                 optionsProvider,
@@ -63,7 +64,8 @@ namespace Microsoft.CodeAnalysis
         public GeneratorDriver RunGenerators(
             Compilation compilation,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var state = RunGeneratorsCore(compilation, diagnosticsBag: null, cancellationToken); //don't directly collect diagnostics on this path
             return FromState(state);
         }
@@ -73,7 +75,8 @@ namespace Microsoft.CodeAnalysis
             out Compilation outputCompilation,
             out ImmutableArray<Diagnostic> diagnostics,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var diagnosticsBag = DiagnosticBag.GetInstance();
             var state = RunGeneratorsCore(compilation, diagnosticsBag, cancellationToken);
 
@@ -92,7 +95,8 @@ namespace Microsoft.CodeAnalysis
             out Compilation outputCompilation,
             out bool success,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             // if we can't apply any partial edits, just instantly return
             if (_state.EditsFailed || _state.Edits.Length == 0)
             {
@@ -188,7 +192,8 @@ namespace Microsoft.CodeAnalysis
 
             static ImmutableArray<GeneratedSourceResult> getGeneratorSources(
                 GeneratorState generatorState
-            ) {
+            )
+            {
                 ArrayBuilder<GeneratedSourceResult> sources =
                     ArrayBuilder<GeneratedSourceResult>.GetInstance(
                         generatorState.PostInitTrees.Length + generatorState.GeneratedTrees.Length
@@ -209,7 +214,8 @@ namespace Microsoft.CodeAnalysis
             Compilation compilation,
             DiagnosticBag? diagnosticsBag,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             // with no generators, there is no work to do
             if (_state.Generators.IsEmpty)
             {
@@ -297,7 +303,8 @@ namespace Microsoft.CodeAnalysis
                 if (
                     generatorState.Info.SyntaxContextReceiverCreator is object
                     && generatorState.Exception is null
-                ) {
+                )
+                {
                     ISyntaxContextReceiver? rx = null;
                     try
                     {
@@ -445,7 +452,8 @@ namespace Microsoft.CodeAnalysis
             GeneratorDriverState state,
             PendingEdit edit,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var initialState = state;
 
             // see if any generators accept this particular edit
@@ -508,7 +516,8 @@ namespace Microsoft.CodeAnalysis
         private static Compilation RemoveGeneratedSyntaxTrees(
             GeneratorDriverState state,
             Compilation compilation
-        ) {
+        )
+        {
             ArrayBuilder<SyntaxTree> trees = ArrayBuilder<SyntaxTree>.GetInstance();
             foreach (var generatorState in state.GeneratorStates)
             {
@@ -517,7 +526,8 @@ namespace Microsoft.CodeAnalysis
                     if (
                         generatedTree.Tree is object
                         && compilation.ContainsSyntaxTree(generatedTree.Tree)
-                    ) {
+                    )
+                    {
                         trees.Add(generatedTree.Tree);
                     }
                 }
@@ -532,7 +542,8 @@ namespace Microsoft.CodeAnalysis
             ISourceGenerator generator,
             ImmutableArray<GeneratedSourceText> generatedSources,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var trees = ArrayBuilder<GeneratedSyntaxTree>.GetInstance(generatedSources.Length);
             var type = generator.GetType();
             var prefix = GetFilePathPrefixForGenerator(generator);
@@ -553,7 +564,8 @@ namespace Microsoft.CodeAnalysis
             out Compilation outputCompilation,
             GeneratorDriverState state,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ArrayBuilder<SyntaxTree> trees = ArrayBuilder<SyntaxTree>.GetInstance();
             foreach (var generatorState in state.GeneratorStates)
             {
@@ -574,7 +586,8 @@ namespace Microsoft.CodeAnalysis
             Exception e,
             DiagnosticBag? diagnosticBag,
             bool isInit = false
-        ) {
+        )
+        {
             var errorCode = isInit
                 ? provider.WRN_GeneratorFailedDuringInitialization
                 : provider.WRN_GeneratorFailedDuringGeneration;
@@ -616,7 +629,8 @@ namespace Microsoft.CodeAnalysis
             ImmutableArray<Diagnostic> generatorDiagnostics,
             DiagnosticBag? driverDiagnostics,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ArrayBuilder<Diagnostic> filteredDiagnostics = ArrayBuilder<Diagnostic>.GetInstance();
             foreach (var diag in generatorDiagnostics)
             {

@@ -208,7 +208,8 @@ namespace Microsoft.AspNetCore.WebUtilities
         public void AddQueryStringWithEnumerableOfKeysAndStringValues(
             string uri,
             string expectedUri
-        ) {
+        )
+        {
             var queryStrings = new Dictionary<string, StringValues>()
             {
                 { "param1", new StringValues(new[] { "value1", string.Empty, "value3" }) },

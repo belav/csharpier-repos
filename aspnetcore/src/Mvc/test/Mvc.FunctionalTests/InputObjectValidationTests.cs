@@ -197,7 +197,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             string requestContent,
             int expectedStatusCode,
             string expectedModelStateErrorMessage
-        ) {
+        )
+        {
             // Arrange
             var content = new StringContent(requestContent, Encoding.UTF8, "application/json");
 

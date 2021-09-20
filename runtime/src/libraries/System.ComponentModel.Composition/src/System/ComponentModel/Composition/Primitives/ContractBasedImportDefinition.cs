@@ -105,16 +105,17 @@ namespace System.ComponentModel.Composition.Primitives
             bool isRecomposable,
             bool isPrerequisite,
             CreationPolicy requiredCreationPolicy
-        ) : this(
-            contractName,
-            requiredTypeIdentity,
-            requiredMetadata,
-            cardinality,
-            isRecomposable,
-            isPrerequisite,
-            requiredCreationPolicy,
-            MetadataServices.EmptyMetadata
-        ) { }
+        )
+            : this(
+                contractName,
+                requiredTypeIdentity,
+                requiredMetadata,
+                cardinality,
+                isRecomposable,
+                isPrerequisite,
+                requiredCreationPolicy,
+                MetadataServices.EmptyMetadata
+            ) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ContractBasedImportDefinition"/> class

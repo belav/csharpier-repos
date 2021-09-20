@@ -15,7 +15,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
             : base(
                 new ApplicationPartManager(),
                 Options.Create(new MvcRazorRuntimeCompilationOptions())
-            ) {
+            )
+        {
             CompilationReferences = Array.Empty<MetadataReference>();
         }
 

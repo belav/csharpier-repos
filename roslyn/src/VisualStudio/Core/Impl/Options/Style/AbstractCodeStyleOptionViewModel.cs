@@ -53,7 +53,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             string groupName,
             List<CodeStylePreference> preferences = null,
             List<NotificationOptionViewModel> notificationPreferences = null
-        ) {
+        )
+        {
             Info = info;
             Option = option;
             Description = description;

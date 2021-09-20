@@ -45,10 +45,8 @@ namespace System.IO.Pipes
             Init(direction, safePipeHandle);
         }
 
-        public AnonymousPipeClientStream(
-            PipeDirection direction,
-            SafePipeHandle safePipeHandle
-        ) : base(direction, 0)
+        public AnonymousPipeClientStream(PipeDirection direction, SafePipeHandle safePipeHandle)
+            : base(direction, 0)
         {
             if (direction == PipeDirection.InOut)
             {

@@ -235,7 +235,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         [InlineData("")]
         public void LocalRedirectPermanentPreserveMethod_WithParameter_NullOrEmptyUrl_Throws(
             string url
-        ) {
+        )
+        {
             // Arrange
             var pageModel = new TestPageModel();
 
@@ -350,7 +351,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         [InlineData("SampleController")]
         public void RedirectToAction_WithParameterActionAndControllerName_SetsEqualNames(
             string controllerName
-        ) {
+        )
+        {
             // Arrange
             var pageModel = new TestPageModel();
 
@@ -371,7 +373,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         [InlineData("SampleController")]
         public void RedirectToActionPreserveMethod_WithParameterActionAndControllerName_SetsEqualNames(
             string controllerName
-        ) {
+        )
+        {
             // Arrange
             var pageModel = new TestPageModel();
 
@@ -395,7 +398,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         [InlineData("SampleController")]
         public void RedirectToActionPermanent_WithParameterActionAndControllerName_SetsEqualNames(
             string controllerName
-        ) {
+        )
+        {
             // Arrange
             var pageModel = new TestPageModel();
 
@@ -419,7 +423,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         [InlineData("SampleController")]
         public void RedirectToActionPermanentPreserveMethod_WithParameterActionAndControllerName_SetsEqualNames(
             string controllerName
-        ) {
+        )
+        {
             // Arrange
             var pageModel = new TestPageModel();
 
@@ -442,7 +447,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         public void RedirectToAction_WithParameterActionControllerRouteValues_SetsResultProperties(
             object routeValues,
             IEnumerable<KeyValuePair<string, object>> expected
-        ) {
+        )
+        {
             // Arrange
             var pageModel = new TestPageModel();
 
@@ -467,7 +473,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         public void RedirectToActionPreserveMethod_WithParameterActionControllerRouteValues_SetsResultProperties(
             object routeValues,
             IEnumerable<KeyValuePair<string, object>> expected
-        ) {
+        )
+        {
             // Arrange
             var pageModel = new TestPageModel();
 
@@ -492,7 +499,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         public void RedirectToActionPermanent_WithParameterActionControllerRouteValues_SetsResultProperties(
             object routeValues,
             IEnumerable<KeyValuePair<string, object>> expected
-        ) {
+        )
+        {
             // Arrange
             var pageModel = new TestPageModel();
 
@@ -517,7 +525,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         public void RedirectToActionPermanentPreserveMethod_WithParameterActionControllerRouteValues_SetsResultProperties(
             object routeValues,
             IEnumerable<KeyValuePair<string, object>> expected
-        ) {
+        )
+        {
             // Arrange
             var pageModel = new TestPageModel();
 
@@ -542,7 +551,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         public void RedirectToAction_WithParameterActionAndRouteValues_SetsResultProperties(
             object routeValues,
             IEnumerable<KeyValuePair<string, object>> expected
-        ) {
+        )
+        {
             // Arrange
             var pageModel = new TestPageModel();
 
@@ -565,7 +575,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         public void RedirectToActionPreserveMethod_WithParameterActionAndRouteValues_SetsResultProperties(
             object routeValues,
             IEnumerable<KeyValuePair<string, object>> expected
-        ) {
+        )
+        {
             // Arrange
             var pageModel = new TestPageModel();
 
@@ -588,7 +599,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         public void RedirectToAction_WithParameterActionAndControllerAndRouteValuesAndFragment_SetsResultProperties(
             object routeValues,
             IEnumerable<KeyValuePair<string, object>> expectedRouteValues
-        ) {
+        )
+        {
             // Arrange
             var pageModel = new TestPageModel();
             var expectedAction = "Action";
@@ -613,7 +625,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         public void RedirectToActionPreserveMethod_WithParameterActionAndControllerAndRouteValuesAndFragment_SetsResultProperties(
             object routeValues,
             IEnumerable<KeyValuePair<string, object>> expectedRouteValues
-        ) {
+        )
+        {
             // Arrange
             var pageModel = new TestPageModel();
             var expectedAction = "Action";
@@ -643,7 +656,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         public void RedirectToActionPermanent_WithParameterActionAndRouteValues_SetsResultProperties(
             object routeValues,
             IEnumerable<KeyValuePair<string, object>> expected
-        ) {
+        )
+        {
             // Arrange
             var pageModel = new TestPageModel();
 
@@ -663,7 +677,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         public void RedirectToActionPermanentPreserveMethod_WithParameterActionAndRouteValues_SetsResultProperties(
             object routeValues,
             IEnumerable<KeyValuePair<string, object>> expected
-        ) {
+        )
+        {
             // Arrange
             var pageModel = new TestPageModel();
 
@@ -686,7 +701,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         public void RedirectToActionPermanent_WithParameterActionAndControllerAndRouteValuesAndFragment_SetsResultProperties(
             object routeValues,
             IEnumerable<KeyValuePair<string, object>> expectedRouteValues
-        ) {
+        )
+        {
             // Arrange
             var pageModel = new TestPageModel();
             var expectedAction = "Action";
@@ -716,7 +732,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         public void RedirectToActionPermanentPreserveMethod_WithParameterActionAndControllerAndRouteValuesAndFragment_SetsResultProperties(
             object routeValues,
             IEnumerable<KeyValuePair<string, object>> expectedRouteValues
-        ) {
+        )
+        {
             // Arrange
             var pageModel = new TestPageModel();
             var expectedAction = "Action";
@@ -746,7 +763,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         public void RedirectToRoute_WithParameterRouteValues_SetsResultEqualRouteValues(
             object routeValues,
             IEnumerable<KeyValuePair<string, object>> expected
-        ) {
+        )
+        {
             // Arrange
             var pageModel = new TestPageModel();
 
@@ -765,7 +783,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         public void RedirectToRoutePreserveMethod_WithParameterRouteValues_SetsResultEqualRouteValues(
             object routeValues,
             IEnumerable<KeyValuePair<string, object>> expected
-        ) {
+        )
+        {
             // Arrange
             var pageModel = new TestPageModel();
 
@@ -784,7 +803,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         public void RedirectToRoute_WithParameterRouteNameAndRouteValuesAndFragment_SetsResultProperties(
             object routeValues,
             IEnumerable<KeyValuePair<string, object>> expectedRouteValues
-        ) {
+        )
+        {
             // Arrange
             var pageModel = new TestPageModel();
             var expectedRoute = "TestRoute";
@@ -807,7 +827,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         public void RedirectToRoutePreserveMethod_WithParameterRouteNameAndRouteValuesAndFragment_SetsResultProperties(
             object routeValues,
             IEnumerable<KeyValuePair<string, object>> expectedRouteValues
-        ) {
+        )
+        {
             // Arrange
             var pageModel = new TestPageModel();
             var expectedRoute = "TestRoute";
@@ -834,7 +855,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         public void RedirectToRoutePermanent_WithParameterRouteValues_SetsResultEqualRouteValuesAndPermanent(
             object routeValues,
             IEnumerable<KeyValuePair<string, object>> expected
-        ) {
+        )
+        {
             // Arrange
             var pageModel = new TestPageModel();
 
@@ -853,7 +875,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         public void RedirectToRoutePermanentPreserveMethod_WithParameterRouteValues_SetsResultEqualRouteValuesAndPermanent(
             object routeValues,
             IEnumerable<KeyValuePair<string, object>> expected
-        ) {
+        )
+        {
             // Arrange
             var pageModel = new TestPageModel();
 
@@ -874,7 +897,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         public void RedirectToRoutePermanent_WithParameterRouteNameAndRouteValuesAndFragment_SetsResultProperties(
             object routeValues,
             IEnumerable<KeyValuePair<string, object>> expectedRouteValues
-        ) {
+        )
+        {
             // Arrange
             var pageModel = new TestPageModel();
             var expectedRoute = "TestRoute";
@@ -897,7 +921,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         public void RedirectToRoutePermanentPreserveMethod_WithParameterRouteNameAndRouteValuesAndFragment_SetsResultProperties(
             object routeValues,
             IEnumerable<KeyValuePair<string, object>> expectedRouteValues
-        ) {
+        )
+        {
             // Arrange
             var pageModel = new TestPageModel();
             var expectedRoute = "TestRoute";
@@ -1317,7 +1342,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         public void RedirectToPagePreserveMethod_SetsResultProperties(
             object routeValues,
             IEnumerable<KeyValuePair<string, object>> expected
-        ) {
+        )
+        {
             // Arrange
             var pageModel = new TestPageModel();
             var pageName = "CustomRouteName";
@@ -1341,7 +1367,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         public void RedirectToPagePermanentPreserveMethod_SetsResultProperties(
             object routeValues,
             IEnumerable<KeyValuePair<string, object>> expected
-        ) {
+        )
+        {
             // Arrange
             var pageModel = new TestPageModel();
             var routeName = "CustomRouteName";
@@ -1365,7 +1392,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         public void RedirectToRoute_WithParameterRouteNameAndRouteValues_SetsResultSameRouteNameAndRouteValues(
             object routeValues,
             IEnumerable<KeyValuePair<string, object>> expected
-        ) {
+        )
+        {
             // Arrange
             var pageModel = new TestPageModel();
             var routeName = "CustomRouteName";
@@ -1386,7 +1414,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         public void RedirectToRoutePreserveMethod_WithParameterRouteNameAndRouteValues_SetsResultSameRouteNameAndRouteValues(
             object routeValues,
             IEnumerable<KeyValuePair<string, object>> expected
-        ) {
+        )
+        {
             // Arrange
             var pageModel = new TestPageModel();
             var routeName = "CustomRouteName";
@@ -1410,7 +1439,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         public void RedirectToRoutePermanent_WithParameterRouteNameAndRouteValues_SetsResultProperties(
             object routeValues,
             IEnumerable<KeyValuePair<string, object>> expected
-        ) {
+        )
+        {
             // Arrange
             var pageModel = new TestPageModel();
             var routeName = "CustomRouteName";
@@ -1431,7 +1461,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         public void RedirectToRoutePermanentPreserveMethod_WithParameterRouteNameAndRouteValues_SetsResultProperties(
             object routeValues,
             IEnumerable<KeyValuePair<string, object>> expected
-        ) {
+        )
+        {
             // Arrange
             var pageModel = new TestPageModel();
             var routeName = "CustomRouteName";

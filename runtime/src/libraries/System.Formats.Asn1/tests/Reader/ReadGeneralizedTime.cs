@@ -412,7 +412,8 @@ namespace System.Formats.Asn1.Tests.Reader
             int millisecond,
             int? offsetHour,
             int offsetMinute
-        ) {
+        )
+        {
             byte[] inputData = inputHex.HexToByteArray();
 
             AsnReader reader = new AsnReader(inputData, ruleSet);
@@ -883,7 +884,8 @@ namespace System.Formats.Asn1.Tests.Reader
             string inputHex,
             TagClass tagClass,
             int tagValue
-        ) {
+        )
+        {
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
 

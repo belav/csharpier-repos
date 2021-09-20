@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 Document document,
                 Diagnostic diagnostic,
                 AbstractSuppressionCodeFixProvider fixer
-            ) {
+            )
+            {
                 // We need to normalize the leading trivia on start token to account for
                 // the trailing trivia on its previous token (and similarly normalize trailing trivia for end token).
                 PragmaHelpers.NormalizeTriviaOnTokens(
@@ -82,7 +83,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 bool includeStartTokenChange,
                 bool includeEndTokenChange,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return await PragmaHelpers.GetChangeDocumentWithPragmaAdjustedAsync(
                         _document,
                         _diagnostic.Location.SourceSpan,

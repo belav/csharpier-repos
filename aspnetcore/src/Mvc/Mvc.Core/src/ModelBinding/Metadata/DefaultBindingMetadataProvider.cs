@@ -26,7 +26,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
             // BinderModelName
             foreach (
                 var binderModelNameAttribute in context.Attributes.OfType<IModelNameProvider>()
-            ) {
+            )
+            {
                 if (binderModelNameAttribute.Name != null)
                 {
                     context.BindingMetadata.BinderModelName = binderModelNameAttribute.Name;
@@ -37,7 +38,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
             // BinderType
             foreach (
                 var binderTypeAttribute in context.Attributes.OfType<IBinderTypeProviderMetadata>()
-            ) {
+            )
+            {
                 if (binderTypeAttribute.BinderType != null)
                 {
                     context.BindingMetadata.BinderType = binderTypeAttribute.BinderType;
@@ -48,7 +50,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
             // BindingSource
             foreach (
                 var bindingSourceAttribute in context.Attributes.OfType<IBindingSourceMetadata>()
-            ) {
+            )
+            {
                 if (bindingSourceAttribute.BindingSource != null)
                 {
                     context.BindingMetadata.BindingSource = bindingSourceAttribute.BindingSource;
@@ -107,7 +110,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
         private static ConstructorInfo? GetRecordTypeConstructor(
             Type type,
             ConstructorInfo[] constructors
-        ) {
+        )
+        {
             if (!IsRecordType(type))
             {
                 return null;
@@ -165,7 +169,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
 
         private static BindingBehaviorAttribute? FindBindingBehavior(
             BindingMetadataProviderContext context
-        ) {
+        )
+        {
             switch (context.Key.MetadataKind)
             {
                 case ModelMetadataKind.Property:

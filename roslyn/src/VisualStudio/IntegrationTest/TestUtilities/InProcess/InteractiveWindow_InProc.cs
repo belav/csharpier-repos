@@ -199,7 +199,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                                 out var windowFrame
                             )
                         )
-                    ) {
+                    )
+                    {
                         ErrorHandler.ThrowOnFailure(
                             windowFrame.CloseFrame((uint)__FRAMECLOSE.FRAMECLOSE_NoSave)
                         );
@@ -249,7 +250,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             string expectedValue,
             Func<string, string, bool> valueComparer,
             string verb
-        ) {
+        )
+        {
             var beginTime = DateTime.UtcNow;
 
             while (true)

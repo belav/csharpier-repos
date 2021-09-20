@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
             protected CommonEmbeddedParameter(
                 CommonEmbeddedMember containingPropertyOrMethod,
                 TParameterSymbol underlyingParameter
-            ) {
+            )
+            {
                 this.ContainingPropertyOrMethod = containingPropertyOrMethod;
                 this.UnderlyingParameter = underlyingParameter;
             }
@@ -74,7 +75,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
             private bool IsTargetAttribute(
                 TAttributeData attrData,
                 AttributeDescription description
-            ) {
+            )
+            {
                 return TypeManager.IsTargetAttribute(UnderlyingParameter, attrData, description);
             }
 
@@ -82,7 +84,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
                 TPEModuleBuilder moduleBuilder,
                 TSyntaxNode syntaxNodeOpt,
                 DiagnosticBag diagnostics
-            ) {
+            )
+            {
                 var builder = ArrayBuilder<TAttributeData>.GetInstance();
 
                 // Copy some of the attributes.
@@ -109,7 +112,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
                     }
                     else if (
                         IsTargetAttribute(attrData, AttributeDescription.DateTimeConstantAttribute)
-                    ) {
+                    )
+                    {
                         if (attrData.CommonConstructorArguments.Length == 1)
                         {
                             builder.AddOptional(
@@ -152,7 +156,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
                                 attrData,
                                 AttributeDescription.DefaultParameterValueAttribute
                             )
-                        ) {
+                        )
+                        {
                             if (attrData.CommonConstructorArguments.Length == 1)
                             {
                                 builder.AddOptional(

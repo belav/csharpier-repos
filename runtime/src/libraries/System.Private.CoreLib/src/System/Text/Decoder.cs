@@ -159,7 +159,8 @@ namespace System.Text
             char[] chars,
             int charIndex,
             bool flush
-        ) {
+        )
+        {
             return GetChars(bytes, byteIndex, byteCount, chars, charIndex);
         }
 
@@ -186,7 +187,8 @@ namespace System.Text
             char* chars,
             int charCount,
             bool flush
-        ) {
+        )
+        {
             // Validate input parameters
             if (chars == null || bytes == null)
                 throw new ArgumentNullException(
@@ -235,7 +237,8 @@ namespace System.Text
         {
             fixed (byte* bytesPtr = &MemoryMarshal.GetNonNullPinnableReference(bytes))fixed (
                 char* charsPtr = &MemoryMarshal.GetNonNullPinnableReference(chars)
-            ) {
+            )
+            {
                 return GetChars(bytesPtr, bytes.Length, charsPtr, chars.Length, flush);
             }
         }
@@ -264,7 +267,8 @@ namespace System.Text
             out int bytesUsed,
             out int charsUsed,
             out bool completed
-        ) {
+        )
+        {
             // Validate parameters
             if (bytes == null || chars == null)
                 throw new ArgumentNullException(
@@ -338,7 +342,8 @@ namespace System.Text
             out int bytesUsed,
             out int charsUsed,
             out bool completed
-        ) {
+        )
+        {
             // Validate input parameters
             if (chars == null || bytes == null)
                 throw new ArgumentNullException(
@@ -384,10 +389,12 @@ namespace System.Text
             out int bytesUsed,
             out int charsUsed,
             out bool completed
-        ) {
+        )
+        {
             fixed (byte* bytesPtr = &MemoryMarshal.GetNonNullPinnableReference(bytes))fixed (
                 char* charsPtr = &MemoryMarshal.GetNonNullPinnableReference(chars)
-            ) {
+            )
+            {
                 Convert(
                     bytesPtr,
                     bytes.Length,

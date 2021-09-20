@@ -42,7 +42,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             using (
                 X509Certificate2 privateCert =
                     Certificates.RSA2048Sha256KeyTransfer1.TryGetCertificateWithPrivateKey()
-            ) {
+            )
+            {
                 if (privateCert == null)
                     return; // CertLoader can't load the private certificate.
 
@@ -67,7 +68,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             using (
                 X509Certificate2 explicitSkiCert =
                     Certificates.RSAKeyTransfer_ExplicitSki.GetCertificate()
-            ) {
+            )
+            {
                 // CmsRecipients have different identifiers to test multiple identifier encryption.
                 recipients.Add(
                     new CmsRecipient(
@@ -94,7 +96,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             using (
                 X509Certificate2 privateIssuerSerialCert =
                     Certificates.RSAKeyTransfer1.TryGetCertificateWithPrivateKey()
-            ) {
+            )
+            {
                 if (privateIssuerSerialCert != null)
                     return; // CertLoader can't load the private certificate.
 
@@ -104,7 +107,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             using (
                 X509Certificate2 privateExplicitSkiCert =
                     Certificates.RSAKeyTransfer_ExplicitSki.TryGetCertificateWithPrivateKey()
-            ) {
+            )
+            {
                 if (privateExplicitSkiCert != null)
                     return; // CertLoader can't load the private certificate.
 

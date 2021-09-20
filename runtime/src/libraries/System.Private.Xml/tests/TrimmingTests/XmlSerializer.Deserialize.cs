@@ -35,7 +35,8 @@ namespace System.Xml.Serialization.TrimmingTests
                 && obj.DataUpdates.DataUpdateInfo.All(
                     i => i.DataDate.Year == 2009 && i.LastUpdatedDate.Year == 2010
                 )
-            ) {
+            )
+            {
                 return 100;
             }
 

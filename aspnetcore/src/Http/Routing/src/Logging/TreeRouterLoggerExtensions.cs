@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.Routing.Logging
             this ILogger logger,
             string routeName,
             string routeTemplate
-        ) {
+        )
+        {
             _requestMatchedRoute(logger, routeName, routeTemplate, null);
         }
     }

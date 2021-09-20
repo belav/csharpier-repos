@@ -301,7 +301,8 @@ namespace System.Net.Http.Tests
             int startIndex,
             int expectedLength,
             out ProductInfoHeaderValue result
-        ) {
+        )
+        {
             Assert.Equal(
                 expectedLength,
                 ProductInfoHeaderValue.GetProductInfoLength(input, startIndex, out result)

@@ -36,7 +36,8 @@ namespace System.Xml.Xsl.XsltOld
                             string.Empty,
                             false
                         ) == false
-                    ) {
+                    )
+                    {
                         // Come back later
                         break;
                     }

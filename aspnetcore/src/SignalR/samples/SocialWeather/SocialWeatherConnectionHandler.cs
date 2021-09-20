@@ -19,7 +19,8 @@ namespace SocialWeather
             PersistentConnectionLifeTimeManager lifetimeManager,
             FormatterResolver formatterResolver,
             ILogger<SocialWeatherConnectionHandler> logger
-        ) {
+        )
+        {
             _lifetimeManager = lifetimeManager;
             _formatterResolver = formatterResolver;
             _logger = logger;

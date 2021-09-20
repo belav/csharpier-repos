@@ -1412,7 +1412,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Func<TElement, object> elementSorter = null,
             Action<TKey, TKey> keyAsserter = null,
             Action<TElement, TElement> elementAsserter = null
-        ) {
+        )
+        {
             keyAsserter ??= Assert.Equal;
             keyAsserter(expected.Key, actual.Key);
             AssertCollection(expected, actual, ordered, elementSorter, elementAsserter);

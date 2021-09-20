@@ -15,14 +15,16 @@ namespace Internal.TypeSystem.Ecma
             MetadataReader metadataReader,
             PdbSymbolReader pdbReader,
             IModuleResolver customModuleResolver
-        ) : base(
-            context,
-            peReader,
-            metadataReader,
-            containingAssembly: null,
-            pdbReader,
-            customModuleResolver
-        ) {
+        )
+            : base(
+                context,
+                peReader,
+                metadataReader,
+                containingAssembly: null,
+                pdbReader,
+                customModuleResolver
+            )
+        {
             _assemblyDefinition = metadataReader.GetAssemblyDefinition();
         }
     }

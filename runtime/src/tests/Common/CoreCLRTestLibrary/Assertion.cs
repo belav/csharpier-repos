@@ -42,7 +42,8 @@ namespace TestLibrary
             string parameterName,
             Action action,
             string message = null
-        ) {
+        )
+        {
             return ThrowsArgumentException<ArgumentNullException>(parameterName, action, message);
         }
 
@@ -72,7 +73,8 @@ namespace TestLibrary
             string parameterName,
             Action action,
             string message = null
-        ) {
+        )
+        {
             return ThrowsArgumentException<ArgumentException>(parameterName, action, message);
         }
 
@@ -295,8 +297,9 @@ namespace TestLibrary
             Action action,
             string message = "",
             AssertThrowsOptions options = AssertThrowsOptions.None
-        ) where T : Exception
-          where TInner : Exception
+        )
+            where T : Exception
+            where TInner : Exception
         {
             T outerException = Throws<T>(action, message, options);
 
@@ -523,7 +526,8 @@ namespace TestLibrary
             T actual,
             string format,
             params Object[] args
-        ) {
+        )
+        {
             AreNotEqual<T>(notExpected, actual, String.Format(format, args));
         }
 
@@ -554,7 +558,8 @@ namespace TestLibrary
             T[] actual,
             string format,
             params Object[] args
-        ) {
+        )
+        {
             AreAllEqual<T>(expected, actual, String.Format(format, args));
         }
 
@@ -583,7 +588,8 @@ namespace TestLibrary
                         if (
                             (item1 == null && item2 == null)
                             || (item1 != null && item1.Equals(item2))
-                        ) {
+                        )
+                        {
                             foundMatch = true;
                             removedFromActual[j] = true;
                             break;
@@ -610,7 +616,8 @@ namespace TestLibrary
             IEnumerable<T> expected,
             IEnumerable<T> actual,
             string message = ""
-        ) {
+        )
+        {
             AreAllEqual(CopyToArray(expected), CopyToArray(actual), message);
         }
 
@@ -625,7 +632,8 @@ namespace TestLibrary
             IEnumerable<T> expected,
             IEnumerable<T> actual,
             string message = ""
-        ) {
+        )
+        {
             AreAllEqualUnordered(CopyToArray(expected), CopyToArray(actual), message);
         }
 

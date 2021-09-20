@@ -73,7 +73,8 @@ namespace Newtonsoft.Json.Converters
             Type objectType,
             object existingValue,
             JsonSerializer serializer
-        ) {
+        )
+        {
             if (reader.TokenType != JsonToken.Bytes)
             {
                 throw new JsonSerializationException(

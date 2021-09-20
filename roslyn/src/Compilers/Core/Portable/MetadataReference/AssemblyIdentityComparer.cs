@@ -56,7 +56,8 @@ namespace Microsoft.CodeAnalysis
         public bool ReferenceMatchesDefinition(
             string referenceDisplayName,
             AssemblyIdentity definition
-        ) {
+        )
+        {
             return Compare(
                     reference: null,
                     referenceDisplayName,
@@ -75,7 +76,8 @@ namespace Microsoft.CodeAnalysis
         public bool ReferenceMatchesDefinition(
             AssemblyIdentity reference,
             AssemblyIdentity definition
-        ) {
+        )
+        {
             return Compare(
                     reference,
                     referenceDisplayName: null,
@@ -108,7 +110,8 @@ namespace Microsoft.CodeAnalysis
             AssemblyIdentity definition,
             out bool unificationApplied,
             bool ignoreVersion
-        ) {
+        )
+        {
             Debug.Assert((reference is not null) ^ (referenceDisplayName != null));
             unificationApplied = false;
             AssemblyIdentityParts parts;
@@ -139,7 +142,8 @@ namespace Microsoft.CodeAnalysis
                         out parts
                     )
                     || reference.ContentType != definition.ContentType
-                ) {
+                )
+                {
                     return ComparisonResult.NotEquivalent;
                 }
             }
@@ -154,7 +158,8 @@ namespace Microsoft.CodeAnalysis
                     parts,
                     out isDefinitionFxAssembly
                 )
-            ) {
+            )
+            {
                 return ComparisonResult.NotEquivalent;
             }
 
@@ -183,7 +188,8 @@ namespace Microsoft.CodeAnalysis
                     if (
                         compareCulture
                         && !CultureComparer.Equals(reference.CultureName, definition.CultureName)
-                    ) {
+                    )
+                    {
                         return ComparisonResult.NotEquivalent;
                     }
 
@@ -203,7 +209,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 compareCulture
                 && !CultureComparer.Equals(reference.CultureName, definition.CultureName)
-            ) {
+            )
+            {
                 return ComparisonResult.NotEquivalent;
             }
 
@@ -221,7 +228,8 @@ namespace Microsoft.CodeAnalysis
                 definition.IsStrongName
                 && hasSomeVersionParts
                 && (hasPartialVersion || reference.Version != definition.Version)
-            ) {
+            )
+            {
                 // Note:
                 // System.Numerics.Vectors, Version=4.0 is an FX assembly
                 // System.Numerics.Vectors, Version=4.1+ is not an FX assembly
@@ -270,7 +278,8 @@ namespace Microsoft.CodeAnalysis
             ref AssemblyIdentity definition,
             AssemblyIdentityParts referenceParts,
             out bool isDefinitionFxAssembly
-        ) {
+        )
+        {
             isDefinitionFxAssembly = false;
             return true;
         }

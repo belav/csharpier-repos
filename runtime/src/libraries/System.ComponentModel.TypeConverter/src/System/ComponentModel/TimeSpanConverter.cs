@@ -41,7 +41,8 @@ namespace System.ComponentModel
             ITypeDescriptorContext context,
             CultureInfo culture,
             object value
-        ) {
+        )
+        {
             if (value is string text)
             {
                 text = text.Trim();
@@ -73,7 +74,8 @@ namespace System.ComponentModel
             CultureInfo culture,
             object value,
             Type destinationType
-        ) {
+        )
+        {
             if (destinationType == typeof(InstanceDescriptor) && value is TimeSpan)
             {
                 return new InstanceDescriptor(

@@ -55,7 +55,8 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
 
@@ -122,7 +123,8 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
             IOperation falseValue,
             bool isRef,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var generator = SyntaxGenerator.GetGenerator(document);
             var generatorInternal = document.GetRequiredLanguageService<SyntaxGeneratorInternal>();
             var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
@@ -214,7 +216,8 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
             SyntaxNode trueSyntax,
             SyntaxNode falseSyntax,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var sourceText = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
             if (
                 !sourceText.AreOnSameLine(condition.GetFirstToken(), condition.GetLastToken())
@@ -223,7 +226,8 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
                     falseSyntax.GetFirstToken(),
                     falseSyntax.GetLastToken()
                 )
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -246,7 +250,8 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
             if (
                 condition.Span.Length + trueSyntax.Span.Length + falseSyntax.Span.Length
                 > wrappingLength
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -257,7 +262,8 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
             SyntaxGenerator generator,
             IOperation statement,
             IOperation value
-        ) {
+        )
+        {
             if (statement is IThrowOperation throwOperation)
                 return ConvertToExpression(throwOperation);
 
@@ -273,13 +279,15 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
                 && conversion.IsImplicit
                 && conversion.Type != null
                 && conversion.Type.TypeKind != TypeKind.Error
-            ) {
+            )
+            {
                 // Note we only add the cast if the source had no type (like the null literal), or a
                 // non-error type itself.  We don't want to insert lots of casts in error code.
                 if (
                     conversion.Operand.Type == null
                     || conversion.Operand.Type.TypeKind != TypeKind.Error
-                ) {
+                )
+                {
                     return (TExpressionSyntax)generator.CastExpression(
                         conversion.Type,
                         sourceSyntax

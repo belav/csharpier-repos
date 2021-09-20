@@ -187,7 +187,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             public Context(
                 FileChangeWatcher fileChangeWatcher,
                 ImmutableArray<WatchedDirectory> watchedDirectories
-            ) {
+            )
+            {
                 _fileChangeWatcher = fileChangeWatcher;
                 _watchedDirectories = watchedDirectories;
                 _noOpFileWatchingToken = new FileWatchingToken();
@@ -270,7 +271,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                         if (
                             watchedDirectory.ExtensionFilter == null
                             || filePath.EndsWith(watchedDirectory.ExtensionFilter)
-                        ) {
+                        )
+                        {
                             return _noOpFileWatchingToken;
                         }
                     }
@@ -338,7 +340,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 uint cChanges,
                 string[] rgpszFile,
                 uint[] rggrfChange
-            ) {
+            )
+            {
                 for (var i = 0; i < cChanges; i++)
                 {
                     FileChanged?.Invoke(this, rgpszFile[i]);
@@ -366,7 +369,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             int IVsFreeThreadedFileChangeEvents2.DirectoryChangedEx(
                 string pszDirectory,
                 string pszFile
-            ) {
+            )
+            {
                 Debug.Fail(
                     "Since we're implementing IVsFreeThreadedFileChangeEvents2.DirectoryChangedEx2, this should not be called."
                 );
@@ -378,7 +382,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 uint cChanges,
                 string[] rgpszFile,
                 uint[] rggrfChange
-            ) {
+            )
+            {
                 for (var i = 0; i < cChanges; i++)
                 {
                     FileChanged?.Invoke(this, rgpszFile[i]);
@@ -391,7 +396,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 uint cChanges,
                 string[] rgpszFile,
                 uint[] rggrfChange
-            ) {
+            )
+            {
                 Debug.Fail(
                     "Since we're implementing IVsFreeThreadedFileChangeEvents2.FilesChanged, this should not be called."
                 );
@@ -416,7 +422,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 uint cChanges,
                 string[] rgpszFile,
                 uint[] rggrfChange
-            ) {
+            )
+            {
                 for (var i = 0; i < cChanges; i++)
                 {
                     FileChanged?.Invoke(this, rgpszFile[i]);
@@ -428,7 +435,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             int IVsFreeThreadedFileChangeEvents.DirectoryChangedEx(
                 string pszDirectory,
                 string pszFile
-            ) {
+            )
+            {
                 Debug.Fail(
                     "Since we're implementing IVsFreeThreadedFileChangeEvents2.DirectoryChangedEx2, this should not be called."
                 );

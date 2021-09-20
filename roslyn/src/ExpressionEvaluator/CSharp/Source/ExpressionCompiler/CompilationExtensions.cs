@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         private static PENamedTypeSymbol GetType(
             PEModuleSymbol module,
             TypeDefinitionHandle typeHandle
-        ) {
+        )
+        {
             var metadataDecoder = new MetadataDecoder(module);
             return (PENamedTypeSymbol)metadataDecoder.GetTypeOfToken(typeHandle);
         }
@@ -30,7 +31,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             this CSharpCompilation compilation,
             Guid moduleVersionId,
             int typeToken
-        ) {
+        )
+        {
             return GetType(
                 compilation.GetModule(moduleVersionId),
                 (TypeDefinitionHandle)MetadataTokens.Handle(typeToken)
@@ -41,7 +43,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             this CSharpCompilation compilation,
             Guid moduleVersionId,
             MethodDefinitionHandle methodHandle
-        ) {
+        )
+        {
             var method = GetMethod(compilation, moduleVersionId, methodHandle);
             var metadataDecoder = new MetadataDecoder((PEModuleSymbol)method.ContainingModule);
             var containingType = method.ContainingType;
@@ -52,7 +55,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                     GeneratedNameKind.StateMachineType,
                     out sourceMethodName
                 )
-            ) {
+            )
+            {
                 foreach (var member in containingType.ContainingType.GetMembers(sourceMethodName))
                 {
                     if (member is PEMethodSymbol candidateMethod)
@@ -71,11 +75,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                                 AttributeDescription.IteratorStateMachineAttribute,
                                 out stateMachineTypeName
                             )
-                        ) {
+                        )
+                        {
                             if (
                                 metadataDecoder.GetTypeSymbolForSerializedType(stateMachineTypeName)
                                     .OriginalDefinition.Equals(containingType)
-                            ) {
+                            )
+                            {
                                 return candidateMethod;
                             }
                         }
@@ -89,7 +95,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             this CSharpCompilation compilation,
             Guid moduleVersionId,
             MethodDefinitionHandle methodHandle
-        ) {
+        )
+        {
             var module = compilation.GetModule(moduleVersionId);
             var reader = module.Module.MetadataReader;
             var typeHandle = reader.GetMethodDefinition(methodHandle).GetDeclaringType();
@@ -104,7 +111,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         internal static PEModuleSymbol GetModule(
             this CSharpCompilation compilation,
             Guid moduleVersionId
-        ) {
+        )
+        {
             foreach (var pair in compilation.GetBoundReferenceManager().GetReferencedAssemblies())
             {
                 var assembly = (AssemblySymbol)pair.Value;
@@ -128,7 +136,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         internal static CSharpCompilation ToCompilationReferencedModulesOnly(
             this ImmutableArray<MetadataBlock> metadataBlocks,
             Guid moduleVersionId
-        ) {
+        )
+        {
             return ToCompilation(
                 metadataBlocks,
                 moduleVersionId,
@@ -140,7 +149,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             this ImmutableArray<MetadataBlock> metadataBlocks,
             Guid moduleVersionId,
             MakeAssemblyReferencesKind kind
-        ) {
+        )
+        {
             var references = metadataBlocks.MakeAssemblyReferences(
                 moduleVersionId,
                 IdentityComparer,
@@ -169,7 +179,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             TypeSymbol type,
             int customModifiersCount,
             RefKind refKind
-        ) {
+        )
+        {
             return CustomTypeInfo.Encode(
                 GetDynamicTransforms(compilation, type, customModifiersCount, refKind),
                 GetTupleElementNames(compilation, type)
@@ -181,7 +192,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             TypeSymbol type,
             int customModifiersCount,
             RefKind refKind
-        ) {
+        )
+        {
             var builder = ArrayBuilder<bool>.GetInstance();
             CSharpCompilation.DynamicTransformsEncoder.Encode(
                 type,
@@ -205,7 +217,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         private static ReadOnlyCollection<string?>? GetTupleElementNames(
             this CSharpCompilation compilation,
             TypeSymbol type
-        ) {
+        )
+        {
             var builder = ArrayBuilder<string?>.GetInstance();
             var names =
                 CSharpCompilation.TupleNamesEncoder.TryGetNames(type, builder)

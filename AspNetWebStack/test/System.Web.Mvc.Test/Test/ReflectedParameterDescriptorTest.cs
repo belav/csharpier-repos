@@ -160,7 +160,8 @@ namespace System.Web.Mvc.Test
 
         private static ReflectedParameterDescriptor GetParameterDescriptor(
             ParameterInfo parameterInfo
-        ) {
+        )
+        {
             return new ReflectedParameterDescriptor(
                 parameterInfo,
                 new Mock<ActionDescriptor>().Object

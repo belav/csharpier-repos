@@ -62,7 +62,8 @@ EndGlobal
 
         public static IEnumerable<(string fileName, object fileContent)> GetSolutionFiles(
             params IBuilder[] inputs
-        ) {
+        )
+        {
             var list = new List<(string, object)>();
             var projectBuilders = inputs.OfType<ProjectBuilder>();
             var files = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
@@ -167,7 +168,8 @@ EndGlobal
             object content = null,
             string filePath = null,
             string itemType = "Compile"
-        ) {
+        )
+        {
             return new DocumentBuilder
             {
                 FilePath = filePath,
@@ -315,7 +317,8 @@ EndGlobal
                 IEnumerable<T> items,
                 Func<T, string> attributeValueGetter,
                 Action<T, XElement> elementModifier = null
-            ) {
+            )
+            {
                 var itemGroup = CreateXElement("ItemGroup");
                 addBefore.AddBeforeSelf(itemGroup);
 
@@ -338,7 +341,8 @@ EndGlobal
                 XElement element,
                 string elementName,
                 string elementValue
-            ) {
+            )
+            {
                 element.Add(new XElement(XName.Get(elementName, NS), elementValue));
             }
         }

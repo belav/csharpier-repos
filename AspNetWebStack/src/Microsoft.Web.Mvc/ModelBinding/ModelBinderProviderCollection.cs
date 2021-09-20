@@ -33,7 +33,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
         public IExtensibleModelBinder GetBinder(
             ControllerContext controllerContext,
             ExtensibleModelBindingContext bindingContext
-        ) {
+        )
+        {
             if (controllerContext == null)
             {
                 throw new ArgumentNullException("controllerContext");
@@ -62,7 +63,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
         internal IExtensibleModelBinder GetRequiredBinder(
             ControllerContext controllerContext,
             ExtensibleModelBindingContext bindingContext
-        ) {
+        )
+        {
             IExtensibleModelBinder binder = GetBinder(controllerContext, bindingContext);
             if (binder == null)
             {
@@ -108,7 +110,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
         public void RegisterBinderForGenericType(
             Type modelType,
             Func<Type[], IExtensibleModelBinder> modelBinderFactory
-        ) {
+        )
+        {
             InsertSimpleProviderAtFront(
                 new GenericModelBinderProvider(modelType, modelBinderFactory)
             );
@@ -132,7 +135,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
             Type modelType,
             IExtensibleModelBinder modelBinder,
             bool suppressPrefixCheck
-        ) {
+        )
+        {
             SimpleModelBinderProvider provider = new SimpleModelBinderProvider(
                 modelType,
                 modelBinder
@@ -145,7 +149,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
         public void RegisterBinderForType(
             Type modelType,
             Func<IExtensibleModelBinder> modelBinderFactory
-        ) {
+        )
+        {
             InsertSimpleProviderAtFront(
                 new SimpleModelBinderProvider(modelType, modelBinderFactory)
             );
@@ -177,7 +182,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
         private static bool TryGetProviderFromAttributes(
             Type modelType,
             out ModelBinderProvider provider
-        ) {
+        )
+        {
             ExtensibleModelBinderAttribute attr = TypeDescriptorHelper.Get(modelType)
                 .GetAttributes()
                 .OfType<ExtensibleModelBinderAttribute>()

@@ -23,7 +23,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             IVsTextLines pBuffer,
             Microsoft.VisualStudio.TextManager.Interop.TextSpan[] ptsSelection,
             object pUC
-        ) {
+        )
+        {
             var textBuffer = EditorAdaptersFactoryService.GetDataBuffer(pBuffer);
             var context = (IVsUserContext)pUC;
 

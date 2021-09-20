@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertBetweenRegularAndVerbatimString
         protected override void AddSubStringTokens(
             InterpolatedStringExpressionSyntax literalExpression,
             ArrayBuilder<SyntaxToken> subStringTokens
-        ) {
+        )
+        {
             foreach (var content in literalExpression.Contents)
             {
                 if (content is InterpolatedStringTextSyntax textSyntax)
@@ -59,7 +60,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertBetweenRegularAndVerbatimString
             InterpolatedStringExpressionSyntax stringExpression,
             SyntaxKind newStartKind,
             Action<IVirtualCharService, StringBuilder, SyntaxToken> addStringText
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<InterpolatedStringContentSyntax>.GetInstance(
                 out var newContents
             );

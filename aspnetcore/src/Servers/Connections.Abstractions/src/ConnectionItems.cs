@@ -92,7 +92,8 @@ namespace Microsoft.AspNetCore.Connections
         void ICollection<KeyValuePair<object, object?>>.CopyTo(
             KeyValuePair<object, object?>[] array,
             int arrayIndex
-        ) {
+        )
+        {
             Items.CopyTo(array, arrayIndex);
         }
 

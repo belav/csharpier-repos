@@ -59,7 +59,8 @@ namespace Castle.DynamicProxy.Serialization
         internal static void ApplyTo(
             AssemblyBuilder assemblyBuilder,
             Dictionary<CacheKey, string> mappings
-        ) {
+        )
+        {
             using (var stream = new MemoryStream())
             {
                 var formatter = new BinaryFormatter();

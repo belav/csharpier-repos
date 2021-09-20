@@ -25,7 +25,8 @@ namespace System.Data.Common
             IDbCommand? command,
             StatementType statementType,
             DataTableMapping tableMapping
-        ) {
+        )
+        {
             switch (statementType)
             {
                 case StatementType.Select:

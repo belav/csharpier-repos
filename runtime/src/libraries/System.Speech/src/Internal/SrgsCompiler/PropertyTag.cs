@@ -23,7 +23,8 @@ namespace System.Speech.Internal.SrgsCompiler
             if (
                 string.IsNullOrEmpty(name)
                 && (value == null || (sValue != null && string.IsNullOrEmpty((sValue).Trim())))
-            ) {
+            )
+            {
                 return;
             }
 

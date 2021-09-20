@@ -152,7 +152,8 @@ namespace System.Reflection.Emit.Tests
         [InlineData(MethodAttributes.PrivateScope)]
         public void DefineDefaultConstructor_PrivateDefaultConstructor_ThrowsNotSupportedException(
             MethodAttributes attributes
-        ) {
+        )
+        {
             TypeBuilder baseType = Helpers.DynamicType(
                 TypeAttributes.Public | TypeAttributes.Class
             );

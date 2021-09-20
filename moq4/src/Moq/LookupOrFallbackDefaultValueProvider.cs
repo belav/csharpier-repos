@@ -96,7 +96,8 @@ namespace Moq
         protected internal sealed override object GetDefaultParameterValue(
             ParameterInfo parameter,
             Mock mock
-        ) {
+        )
+        {
             Debug.Assert(parameter != null);
             Debug.Assert(parameter.ParameterType != typeof(void));
             Debug.Assert(mock != null);
@@ -108,7 +109,8 @@ namespace Moq
         protected internal sealed override object GetDefaultReturnValue(
             MethodInfo method,
             Mock mock
-        ) {
+        )
+        {
             Debug.Assert(method != null);
             Debug.Assert(method.ReturnType != typeof(void));
             Debug.Assert(mock != null);
@@ -131,7 +133,8 @@ namespace Moq
             if (
                 this.factories.TryGetValue(handlerKey, out factory)
                 || this.factories.TryGetValue(handlerKey.FullName, out factory)
-            ) {
+            )
+            {
                 if (factory != null) // This prevents delegation to an `IAwaitableFactory` for deregistered awaitable types; see note above.
                 {
                     return factory.Invoke(type, mock);

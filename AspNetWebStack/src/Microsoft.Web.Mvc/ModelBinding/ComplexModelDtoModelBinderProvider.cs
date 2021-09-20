@@ -15,7 +15,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
         public override IExtensibleModelBinder GetBinder(
             ControllerContext controllerContext,
             ExtensibleModelBindingContext bindingContext
-        ) {
+        )
+        {
             return _underlyingProvider.GetBinder(controllerContext, bindingContext);
         }
 

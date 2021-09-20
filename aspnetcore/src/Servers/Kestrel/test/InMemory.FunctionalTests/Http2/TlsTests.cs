@@ -68,7 +68,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.Http2
                         );
                     }
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     var sslStream = new SslStream(connection.Stream);
@@ -108,7 +109,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.Http2
             bool ignoreNonGoAwayFrames,
             int expectedLastStreamId,
             Http2ErrorCode expectedErrorCode
-        ) {
+        )
+        {
             var frame = await ReceiveFrameAsync(reader);
 
             if (ignoreNonGoAwayFrames)
@@ -147,7 +149,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.Http2
                             16_384,
                             out var framePayload
                         )
-                    ) {
+                    )
+                    {
                         consumed = examined = framePayload.End;
                         return frame;
                     }

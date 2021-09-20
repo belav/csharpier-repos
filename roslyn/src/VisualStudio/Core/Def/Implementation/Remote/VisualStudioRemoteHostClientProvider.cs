@@ -47,7 +47,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Remote
                         RemoteServiceCallbackDispatcherRegistry.ExportMetadata
                     >
                 > callbackDispatchers
-            ) {
+            )
+            {
                 _vsServiceProvider = (IAsyncServiceProvider)vsServiceProvider;
                 _listenerProvider = listenerProvider;
                 _threadingContext = threadingContext;
@@ -66,7 +67,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Remote
                     || workspaceServices.Workspace is not VisualStudioWorkspace
                     || workspaceServices.GetRequiredService<IWorkspaceContextService>()
                         .IsCloudEnvironmentClient()
-                ) {
+                )
+                {
                     // Run code in the current process
                     return new DefaultRemoteHostClientProvider();
                 }
@@ -93,7 +95,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Remote
             IThreadingContext threadingContext,
             AsynchronousOperationListenerProvider listenerProvider,
             RemoteServiceCallbackDispatcherRegistry callbackDispatchers
-        ) {
+        )
+        {
             _services = services;
             _vsServiceProvider = vsServiceProvider;
             _listenerProvider = listenerProvider;

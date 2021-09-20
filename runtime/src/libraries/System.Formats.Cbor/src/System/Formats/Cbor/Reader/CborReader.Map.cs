@@ -44,7 +44,8 @@ namespace System.Formats.Cbor
                 if (
                     _isConformanceModeCheckEnabled
                     && CborConformanceModeHelpers.RequiresDefiniteLengthItems(ConformanceMode)
-                ) {
+                )
+                {
                     throw new CborContentException(
                         SR.Format(
                             SR.Cbor_ConformanceMode_RequiresDefiniteLengthItems,
@@ -216,7 +217,8 @@ namespace System.Formats.Cbor
                 && _pooledKeyEncodingRangeAllocations.TryPop(
                     out HashSet<(int Offset, int Length)>? result
                 )
-            ) {
+            )
+            {
                 result.Clear();
                 return _keyEncodingRanges = result;
             }

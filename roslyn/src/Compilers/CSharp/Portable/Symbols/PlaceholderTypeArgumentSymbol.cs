@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public static ImmutableArray<TypeWithAnnotations> CreateTypeArguments(
             ImmutableArray<TypeParameterSymbol> typeParameters
-        ) {
+        )
+        {
             return typeParameters.SelectAsArray(_ => s_instance);
         }
 

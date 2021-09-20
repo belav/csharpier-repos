@@ -21,18 +21,19 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ConcurrencyModel
             int poles,
             int fastestLaps,
             int teamId
-        ) : base(
-            loader,
-            id,
-            name,
-            carNumber,
-            championships,
-            races,
-            wins,
-            podiums,
-            poles,
-            fastestLaps,
-            teamId
-        ) { }
+        )
+            : base(
+                loader,
+                id,
+                name,
+                carNumber,
+                championships,
+                races,
+                wins,
+                podiums,
+                poles,
+                fastestLaps,
+                teamId
+            ) { }
     }
 }

@@ -284,7 +284,8 @@ namespace System.IO.Pipes.Tests
         [InlineData(PipeAccessRights.Delete)]
         public void Create_WindowsNotAcceptedAdditionalAccessRights(
             PipeAccessRights additionalAccessRights
-        ) {
+        )
+        {
             // Exception message: "The parameter is incorrect."
             // Neither CreateNewInstance (0x4) nor Delete (0x10000) collide with any of the dwOpenMode values that get into the bitwise combination:
             // PipeOptions, PipeDirection, Interop.Kernel32.FileOperations.FILE_FLAG_FIRST_PIPE_INSTANCE
@@ -333,7 +334,8 @@ namespace System.IO.Pipes.Tests
 
         private NamedPipeServerStream Create_AdditionalAccessRights(
             PipeAccessRights additionalAccessRights
-        ) {
+        )
+        {
             // GetBasicPipeSecurity returns an object created with PipeAccessRights.ReadWrite as default
             PipeSecurity initialPipeSecurity = GetBasicPipeSecurity();
             return CreateNamedPipe(
@@ -391,11 +393,13 @@ namespace System.IO.Pipes.Tests
             int maxNumberOfServerInstances,
             PipeAccessRights rights,
             AccessControlType controlType
-        ) {
+        )
+        {
             if (
                 controlType != AccessControlType.Deny
                 && (rights & ~PipeAccessRights.Synchronize) != 0
-            ) {
+            )
+            {
                 PipeSecurity security = GetPipeSecurity(
                     WellKnownSidType.BuiltinUsersSid,
                     rights,
@@ -428,7 +432,8 @@ namespace System.IO.Pipes.Tests
             int outBufferSize = DefaultBufferSize,
             HandleInheritability inheritability = DefaultInheritability,
             PipeAccessRights additionalAccessRights = 0
-        ) {
+        )
+        {
             NamedPipeServerStream pipe = CreateNamedPipe(
                 pipeName,
                 expectedSecurity,
@@ -461,7 +466,8 @@ namespace System.IO.Pipes.Tests
             int outBufferSize = DefaultBufferSize,
             HandleInheritability inheritability = DefaultInheritability,
             PipeAccessRights additionalAccessRights = 0
-        ) {
+        )
+        {
             NamedPipeServerStream pipe = NamedPipeServerStreamAcl.Create(
                 pipeName,
                 direction,

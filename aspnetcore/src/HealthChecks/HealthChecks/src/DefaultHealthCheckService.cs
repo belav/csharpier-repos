@@ -25,7 +25,8 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks
             IServiceScopeFactory scopeFactory,
             IOptions<HealthCheckServiceOptions> options,
             ILogger<DefaultHealthCheckService> logger
-        ) {
+        )
+        {
             _scopeFactory = scopeFactory ?? throw new ArgumentNullException(nameof(scopeFactory));
             _options = options ?? throw new ArgumentNullException(nameof(options));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
@@ -38,7 +39,8 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks
         public override async Task<HealthReport> CheckHealthAsync(
             Func<HealthCheckRegistration, bool>? predicate,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var registrations = _options.Value.Registrations;
             if (predicate != null)
             {
@@ -79,7 +81,8 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks
         private async Task<HealthReportEntry> RunCheckAsync(
             HealthCheckRegistration registration,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             using (var scope = _scopeFactory.CreateScope())
@@ -169,7 +172,8 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks
 
         private static void ValidateRegistrations(
             IEnumerable<HealthCheckRegistration> registrations
-        ) {
+        )
+        {
             // Scan the list for duplicate names to provide a better error if there are duplicates.
 
             StringBuilder? builder = null;
@@ -313,14 +317,16 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks
                 ILogger logger,
                 HealthStatus status,
                 TimeSpan duration
-            ) {
+            )
+            {
                 _healthCheckProcessingEnd(logger, duration.TotalMilliseconds, status, null);
             }
 
             public static void HealthCheckBegin(
                 ILogger logger,
                 HealthCheckRegistration registration
-            ) {
+            )
+            {
                 _healthCheckBegin(logger, registration.Name, null);
             }
 
@@ -329,7 +335,8 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks
                 HealthCheckRegistration registration,
                 HealthReportEntry entry,
                 TimeSpan duration
-            ) {
+            )
+            {
                 switch (entry.Status)
                 {
                     case HealthStatus.Healthy:
@@ -372,7 +379,8 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks
                 HealthCheckRegistration registration,
                 Exception exception,
                 TimeSpan duration
-            ) {
+            )
+            {
                 _healthCheckError(logger, registration.Name, duration.TotalMilliseconds, exception);
             }
 
@@ -380,7 +388,8 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks
                 ILogger logger,
                 HealthCheckRegistration registration,
                 HealthReportEntry entry
-            ) {
+            )
+            {
                 if (entry.Data.Count > 0 && logger.IsEnabled(LogLevel.Debug))
                 {
                     logger.Log(

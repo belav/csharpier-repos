@@ -261,7 +261,8 @@ namespace System.Collections.Immutable
                 IOrderedCollection<T> items,
                 int start,
                 int length
-            ) {
+            )
+            {
                 Requires.NotNull(items, nameof(items));
                 Requires.Range(start >= 0, nameof(start));
                 Requires.Range(length >= 0, nameof(length));
@@ -760,7 +761,8 @@ namespace System.Collections.Immutable
                 int index,
                 int count,
                 IEqualityComparer<T>? equalityComparer
-            ) {
+            )
+            {
                 Requires.Range(index >= 0, nameof(index));
                 Requires.Range(count >= 0, nameof(count));
                 Requires.Range(count <= this.Count, nameof(count));
@@ -806,7 +808,8 @@ namespace System.Collections.Immutable
                 int index,
                 int count,
                 IEqualityComparer<T>? equalityComparer
-            ) {
+            )
+            {
                 Requires.Range(index >= 0, nameof(index));
                 Requires.Range(count >= 0 && count <= this.Count, nameof(count));
                 Requires.Argument(index - count + 1 >= 0);
@@ -819,7 +822,8 @@ namespace System.Collections.Immutable
                         count: count,
                         reversed: true
                     )
-                ) {
+                )
+                {
                     while (enumerator.MoveNext())
                     {
                         if (equalityComparer.Equals(item, enumerator.Current))
@@ -1257,7 +1261,8 @@ namespace System.Collections.Immutable
                         count: count,
                         reversed: true
                     )
-                ) {
+                )
+                {
                     int index = startIndex;
                     while (enumerator.MoveNext())
                     {

@@ -88,7 +88,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
         public static IDbContextOptions CreateOptions(
             FakeRelationalOptionsExtension optionsExtension = null
-        ) {
+        )
+        {
             var optionsBuilder = new DbContextOptionsBuilder();
 
             ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(

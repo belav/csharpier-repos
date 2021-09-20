@@ -25,7 +25,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="dependencies"> Parameter object containing dependencies for this convention. </param>
         protected PropertyAttributeConventionBase(
             ProviderConventionSetBuilderDependencies dependencies
-        ) {
+        )
+        {
             Dependencies = dependencies;
         }
 
@@ -42,7 +43,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessPropertyAdded(
             IConventionPropertyBuilder propertyBuilder,
             IConventionContext<IConventionPropertyBuilder> context
-        ) {
+        )
+        {
             Check.NotNull(propertyBuilder, nameof(propertyBuilder));
 
             var memberInfo = propertyBuilder.Metadata.GetIdentifyingMemberInfo();
@@ -66,7 +68,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             FieldInfo? newFieldInfo,
             FieldInfo? oldFieldInfo,
             IConventionContext<FieldInfo> context
-        ) {
+        )
+        {
             if (newFieldInfo != null && propertyBuilder.Metadata.PropertyInfo == null)
             {
                 Process(propertyBuilder, newFieldInfo, (IReadableConventionContext)context);
@@ -77,7 +80,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionPropertyBuilder propertyBuilder,
             MemberInfo memberInfo,
             IReadableConventionContext context
-        ) {
+        )
+        {
             if (!Attribute.IsDefined(memberInfo, typeof(TAttribute), inherit: true))
             {
                 return;

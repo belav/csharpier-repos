@@ -178,7 +178,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ImplementInterface
 
         private static async Task<(SyntaxNode?, ExplicitInterfaceSpecifierSyntax?, SyntaxToken)> GetContainerAsync(
             CodeRefactoringContext context
-        ) {
+        )
+        {
             var (document, span, cancellationToken) = context;
 
             var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
@@ -208,7 +209,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ImplementInterface
 
         private static (SyntaxNode?, ExplicitInterfaceSpecifierSyntax?, SyntaxToken) GetContainer(
             SyntaxToken token
-        ) {
+        )
+        {
             for (var node = token.Parent; node != null; node = node.Parent)
             {
                 var result = node switch
@@ -247,7 +249,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ImplementInterface
         private MemberImplementationMap GetImplementedMembers(
             INamedTypeSymbol containingType,
             ImmutableArray<INamedTypeSymbol> interfaceTypes
-        ) {
+        )
+        {
             var result = new MemberImplementationMap();
             foreach (var interfaceType in interfaceTypes)
             {
@@ -259,7 +262,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ImplementInterface
                         && containingType.Equals(impl.ContainingType)
                         && CheckMemberCanBeConverted(impl)
                         && !impl.IsAccessor()
-                    ) {
+                    )
+                    {
                         result.Add(impl, interfaceMember);
                     }
                 }
@@ -272,7 +276,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ImplementInterface
             Project project,
             MemberImplementationMap implMemberToInterfaceMembers,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var solution = project.Solution;
             var solutionEditor = new SolutionEditor(solution);
 

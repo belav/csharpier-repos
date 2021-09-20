@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.SpaServices.StaticFiles
         public DefaultSpaStaticFileProvider(
             IServiceProvider serviceProvider,
             SpaStaticFilesOptions options
-        ) {
+        )
+        {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));

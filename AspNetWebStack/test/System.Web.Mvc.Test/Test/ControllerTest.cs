@@ -2240,7 +2240,8 @@ namespace System.Web.Mvc.Test
         private static ControllerContext GetControllerContext(
             string actionName,
             string controllerName
-        ) {
+        )
+        {
             RouteData rd = new RouteData();
             rd.Values["action"] = actionName;
             rd.Values["controller"] = controllerName;
@@ -2399,7 +2400,8 @@ namespace System.Web.Mvc.Test
             public object BindModel(
                 ControllerContext controllerContext,
                 ModelBindingContext bindingContext
-            ) {
+            )
+            {
                 MyModel myModel = (MyModel)bindingContext.Model;
                 myModel.ControllerContext = controllerContext;
                 myModel.BindingContext = bindingContext;

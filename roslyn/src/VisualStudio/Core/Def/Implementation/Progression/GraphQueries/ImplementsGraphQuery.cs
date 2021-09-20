@@ -22,14 +22,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             Solution solution,
             IGraphContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (
                 Logger.LogBlock(
                     FunctionId.GraphQuery_Implements,
                     KeyValueLogMessage.Create(LogType.UserAction),
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 var graphBuilder = await GraphBuilder.CreateForInputNodesAsync(
                         solution,
                         context.InputNodes,
@@ -53,7 +55,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                         symbol is IMethodSymbol
                         || symbol is IPropertySymbol
                         || symbol is IEventSymbol
-                    ) {
+                    )
+                    {
                         var implements =
                             await SymbolFinder.FindImplementedInterfaceMembersArrayAsync(
                                     symbol,
@@ -74,7 +77,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             GraphBuilder graphBuilder,
             GraphNode node,
             ImmutableArray<ISymbol> implementedSymbols
-        ) {
+        )
+        {
             foreach (var interfaceType in implementedSymbols)
             {
                 var interfaceTypeNode = await graphBuilder.AddNodeAsync(

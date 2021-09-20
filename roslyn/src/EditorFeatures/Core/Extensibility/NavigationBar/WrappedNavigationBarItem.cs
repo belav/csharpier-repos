@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.Editor
                 underlyingItem.Indent,
                 underlyingItem.Bolded,
                 underlyingItem.Grayed
-            ) {
+            )
+        {
             UnderlyingItem = underlyingItem;
         }
     }

@@ -36,7 +36,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers.Test
         public void ShowsContentWhenCurrentEnvironmentIsSpecified(
             string namesAttribute,
             string environmentName
-        ) {
+        )
+        {
             ShouldShowContent(namesAttribute, environmentName);
         }
 
@@ -54,7 +55,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers.Test
         public void ShowsContentWhenNoEnvironmentIsSpecified(
             string namesAttribute,
             string environmentName
-        ) {
+        )
+        {
             ShouldShowContent(namesAttribute, environmentName);
         }
 
@@ -68,7 +70,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers.Test
         public void ShowsContentWhenCurrentEnvironmentIsNotSet(
             string namesAttribute,
             string environmentName
-        ) {
+        )
+        {
             ShouldShowContent(namesAttribute, environmentName);
         }
 
@@ -89,7 +92,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers.Test
             string namesAttribute,
             string includeAttribute,
             string excludeAttribute
-        ) {
+        )
+        {
             // Arrange
             var content = "content";
             var context = MakeTagHelperContext(
@@ -138,7 +142,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers.Test
             string namesAttribute,
             string includeAttribute,
             string excludeAttribute
-        ) {
+        )
+        {
             // Arrange
             var content = "content";
             var context = MakeTagHelperContext(
@@ -180,7 +185,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers.Test
         public void DoesNotShowContentWhenCurrentEnvironmentIsNotSpecified(
             string namesAttribute,
             string environmentName
-        ) {
+        )
+        {
             // Arrange
             var content = "content";
             var context = MakeTagHelperContext(
@@ -244,7 +250,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers.Test
             string tagName,
             TagHelperAttributeList attributes = null,
             string childContent = null
-        ) {
+        )
+        {
             attributes = attributes ?? new TagHelperAttributeList();
 
             return new TagHelperOutput(

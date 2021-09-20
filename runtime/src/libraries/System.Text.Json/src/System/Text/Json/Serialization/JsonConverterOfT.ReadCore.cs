@@ -11,7 +11,8 @@ namespace System.Text.Json.Serialization
             ref Utf8JsonReader reader,
             JsonSerializerOptions options,
             ref ReadStack state
-        ) {
+        )
+        {
             return ReadCore(ref reader, options, ref state);
         }
 
@@ -19,7 +20,8 @@ namespace System.Text.Json.Serialization
             ref Utf8JsonReader reader,
             JsonSerializerOptions options,
             ref ReadStack state
-        ) {
+        )
+        {
             try
             {
                 if (!state.IsContinuation)
@@ -57,7 +59,8 @@ namespace System.Text.Json.Serialization
                             ref reader,
                             ref state
                         )
-                    ) {
+                    )
+                    {
                         state.BytesConsumed += reader.BytesConsumed;
                         return default;
                     }

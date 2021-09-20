@@ -32,15 +32,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundNode lastInRegion,
             HashSet<Symbol> unassignedVariables,
             HashSet<PrefixUnaryExpressionSyntax> unassignedVariableAddressOfSyntaxes
-        ) : base(
-            compilation,
-            member,
-            node,
-            firstInRegion,
-            lastInRegion,
-            unassignedVariables,
-            unassignedVariableAddressOfSyntaxes
-        ) { }
+        )
+            : base(
+                compilation,
+                member,
+                node,
+                firstInRegion,
+                lastInRegion,
+                unassignedVariables,
+                unassignedVariableAddressOfSyntaxes
+            ) { }
 
         internal static HashSet<Symbol> Analyze(
             CSharpCompilation compilation,
@@ -51,7 +52,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             HashSet<Symbol> unassignedVariables,
             HashSet<PrefixUnaryExpressionSyntax> unassignedVariableAddressOfSyntaxes,
             out bool? succeeded
-        ) {
+        )
+        {
             var walker = new DataFlowsInWalker(
                 compilation,
                 member,
@@ -103,14 +105,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             PendingBranch pending,
             BoundNode gotoStmt,
             BoundStatement targetStmt
-        ) {
+        )
+        {
             targetStmt.AssertIsLabeledStatement();
             if (
                 !gotoStmt.WasCompilerGenerated
                 && !targetStmt.WasCompilerGenerated
                 && !RegionContains(gotoStmt.Syntax.Span)
                 && RegionContains(targetStmt.Syntax.Span)
-            ) {
+            )
+            {
                 pending.State = ResetState(pending.State);
             }
 
@@ -132,7 +136,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxNode node,
             int slot,
             bool skipIfUseBeforeDeclaration
-        ) {
+        )
+        {
             // TODO: how to handle fields of structs?
             if (RegionContains(node.Span))
             {
@@ -150,7 +155,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ParameterSymbol parameter,
             SyntaxNode node,
             Location location
-        ) {
+        )
+        {
             if (node != null && node is ReturnStatementSyntax && RegionContains(node.Span))
             {
                 _dataFlowsIn.Add(parameter);

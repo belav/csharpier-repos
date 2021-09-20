@@ -181,7 +181,8 @@ internal static partial class Interop
             Span<byte> destination,
             out int bytesWritten,
             SecKeyTransform transform
-        ) {
+        )
+        {
             SafeCFDataHandle outputHandle;
             SafeCFErrorHandle errorHandle;
 
@@ -221,7 +222,8 @@ internal static partial class Interop
         internal static SafeSecKeyRefHandle ImportEphemeralKey(
             ReadOnlySpan<byte> keyBlob,
             bool hasPrivateKey
-        ) {
+        )
+        {
             Debug.Assert(keyBlob != null);
 
             SafeSecKeyRefHandle keyHandle;
@@ -251,7 +253,8 @@ internal static partial class Interop
         internal static byte[] GenerateSignature(
             SafeSecKeyRefHandle privateKey,
             ReadOnlySpan<byte> dataHash
-        ) {
+        )
+        {
             Debug.Assert(privateKey != null, "privateKey != null");
 
             return ExecuteTransform(
@@ -274,7 +277,8 @@ internal static partial class Interop
             SafeSecKeyRefHandle privateKey,
             ReadOnlySpan<byte> dataHash,
             PAL_HashAlgorithm hashAlgorithm
-        ) {
+        )
+        {
             Debug.Assert(privateKey != null, "privateKey != null");
             Debug.Assert(
                 hashAlgorithm != PAL_HashAlgorithm.Unknown,
@@ -304,7 +308,8 @@ internal static partial class Interop
             Span<byte> destination,
             PAL_HashAlgorithm hashAlgorithm,
             out int bytesWritten
-        ) {
+        )
+        {
             Debug.Assert(privateKey != null, "privateKey != null");
             Debug.Assert(
                 hashAlgorithm != PAL_HashAlgorithm.Unknown,
@@ -319,7 +324,8 @@ internal static partial class Interop
                     ReadOnlySpan<byte> innerSource,
                     out SafeCFDataHandle outputHandle,
                     out SafeCFErrorHandle errorHandle
-                ) {
+                )
+                {
                     return AppleCryptoNative_GenerateSignatureWithHashAlgorithm(
                         privateKey,
                         innerSource,
@@ -335,7 +341,8 @@ internal static partial class Interop
             SafeSecKeyRefHandle publicKey,
             ReadOnlySpan<byte> dataHash,
             ReadOnlySpan<byte> signature
-        ) {
+        )
+        {
             Debug.Assert(publicKey != null, "publicKey != null");
 
             SafeCFErrorHandle error;
@@ -368,7 +375,8 @@ internal static partial class Interop
             ReadOnlySpan<byte> dataHash,
             ReadOnlySpan<byte> signature,
             PAL_HashAlgorithm hashAlgorithm
-        ) {
+        )
+        {
             Debug.Assert(publicKey != null, "publicKey != null");
             Debug.Assert(hashAlgorithm != PAL_HashAlgorithm.Unknown);
 

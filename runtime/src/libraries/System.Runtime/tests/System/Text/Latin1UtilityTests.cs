@@ -109,7 +109,8 @@ namespace System.Text.Tests
                 BoundedMemory<char> mem = BoundedMemory.Allocate<char>(
                     5 * Vector<byte>.Count / sizeof(char)
                 )
-            ) {
+            )
+            {
                 Span<char> chars = mem.Span;
 
                 for (int i = 0; i < chars.Length; i++)
@@ -146,7 +147,8 @@ namespace System.Text.Tests
 
             fixed (byte* pLatin1 = &MemoryMarshal.GetReference(latin1Mem.Span))fixed (
                 char* pUtf16 = &MemoryMarshal.GetReference(utf16Mem.Span)
-            ) {
+            )
+            {
                 _fnWidenLatin1ToUtf16.Delegate(pLatin1, pUtf16, UIntPtr.Zero); // just want to make sure it doesn't AV
             }
         }
@@ -224,7 +226,8 @@ namespace System.Text.Tests
 
             fixed (char* pUtf16 = &MemoryMarshal.GetReference(utf16Mem.Span))fixed (
                 byte* pLatin1 = &MemoryMarshal.GetReference(latin1Mem.Span)
-            ) {
+            )
+            {
                 Assert.Equal(
                     UIntPtr.Zero,
                     _fnNarrowUtf16ToLatin1.Delegate(pUtf16, pLatin1, UIntPtr.Zero)
@@ -337,7 +340,8 @@ namespace System.Text.Tests
 
             fixed (char* pUtf16 = &MemoryMarshal.GetReference(utf16))fixed (
                 byte* pLatin1 = &MemoryMarshal.GetReference(latin1)
-            ) {
+            )
+            {
                 // Conversions between UIntPtr <-> int are not checked by default.
                 return checked(
                     (int)_fnNarrowUtf16ToLatin1.Delegate(pUtf16, pLatin1, (UIntPtr)utf16.Length)
@@ -351,7 +355,8 @@ namespace System.Text.Tests
 
             fixed (byte* pLatin1 = &MemoryMarshal.GetReference(latin1))fixed (
                 char* pUtf16 = &MemoryMarshal.GetReference(utf16)
-            ) {
+            )
+            {
                 // Conversions between UIntPtr <-> int are not checked by default.
                 // Unlike other APIs on Latin1Utility, the "widen to UTF-16" API returns void.
                 _fnWidenLatin1ToUtf16.Delegate(pLatin1, pUtf16, checked((UIntPtr)latin1.Length));

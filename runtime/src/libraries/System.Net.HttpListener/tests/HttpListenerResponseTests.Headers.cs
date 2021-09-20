@@ -181,7 +181,8 @@ namespace System.Net.Tests
         public async Task ContentType_SetAndSend_Success(
             string contentType,
             int expectedNumberOfBytes
-        ) {
+        )
+        {
             using (HttpListenerResponse response = await GetResponse())
             {
                 response.ContentType = contentType;
@@ -200,7 +201,8 @@ namespace System.Net.Tests
         public async Task ContentType_SetNullEmptyOrWhitespace_ResetsContentType(
             string contentType,
             string expectedContentType
-        ) {
+        )
+        {
             using (HttpListenerResponse response = await GetResponse())
             {
                 response.ContentType = "application/json";
@@ -258,7 +260,8 @@ namespace System.Net.Tests
         public async Task RedirectLocation_SetAndSend_Success(
             string redirectLocation,
             int expectedNumberOfBytes
-        ) {
+        )
+        {
             using (HttpListenerResponse response = await GetResponse())
             {
                 response.RedirectLocation = redirectLocation;
@@ -280,7 +283,8 @@ namespace System.Net.Tests
         public async Task RedirectLocation_SetNullOrEmpty_ResetsRedirectLocation(
             string redirectLocation,
             string expectedRedirectLocation
-        ) {
+        )
+        {
             using (HttpListenerResponse response = await GetResponse())
             {
                 response.RedirectLocation = "http://microsoft.com";
@@ -338,7 +342,8 @@ namespace System.Net.Tests
             int statusCode,
             string startLine,
             int expectedNumberOfBytes
-        ) {
+        )
+        {
             using (HttpListenerResponse response = await GetResponse())
             {
                 Assert.Equal(200, response.StatusCode);
@@ -441,7 +446,8 @@ namespace System.Net.Tests
         public async Task StatusDescription_GetWithCustomStatusCode_ReturnsExpected(
             int statusCode,
             string expectedDescription
-        ) {
+        )
+        {
             using (HttpListenerResponse response = await GetResponse())
             {
                 response.StatusCode = statusCode;
@@ -465,7 +471,8 @@ namespace System.Net.Tests
             string statusDescription,
             string expectedStatusDescription,
             int expectedNumberOfBytes
-        ) {
+        )
+        {
             using (HttpListenerResponse response = await GetResponse())
             {
                 response.StatusDescription = statusDescription;
@@ -496,7 +503,8 @@ namespace System.Net.Tests
         [InlineData("\n")]
         public async Task StatusDescription_SetInvalid_ThrowsArgumentException(
             string statusDescription
-        ) {
+        )
+        {
             using (HttpListenerResponse response = await GetResponse())
             {
                 AssertExtensions.Throws<ArgumentException>(
@@ -539,7 +547,8 @@ namespace System.Net.Tests
         public async Task SendChunked_GetSet_ReturnsExpected(
             bool sendChunked,
             int expectedNumberOfBytes
-        ) {
+        )
+        {
             HttpListenerResponse response = await GetResponse();
             try
             {
@@ -625,7 +634,8 @@ namespace System.Net.Tests
         public async Task KeepAlive_GetSet_ReturnsExpected(
             bool keepAlive,
             int expectedNumberOfBytes
-        ) {
+        )
+        {
             HttpListenerResponse response = await GetResponse();
             try
             {
@@ -733,7 +743,8 @@ namespace System.Net.Tests
         public async Task ContentLength64_GetSet_ReturnsExpected(
             int contentLength64,
             int expectedNumberOfBytes
-        ) {
+        )
+        {
             HttpListenerResponse response = await GetResponse();
             try
             {
@@ -774,7 +785,8 @@ namespace System.Net.Tests
             int statusCode,
             int expectedContentLength64,
             int expectedNumberOfBytes
-        ) {
+        )
+        {
             HttpListenerResponse response = await GetResponse();
             response.StatusCode = statusCode;
             response.Close();
@@ -887,7 +899,8 @@ namespace System.Net.Tests
         public async Task ProtocolVersion_SetInvalid_ThrowsArgumentNullException(
             int major,
             int minor
-        ) {
+        )
+        {
             using (HttpListenerResponse response = await GetResponse())
             {
                 AssertExtensions.Throws<ArgumentException>(

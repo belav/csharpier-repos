@@ -93,7 +93,8 @@ namespace System.IO
             Stream destination,
             int bufferSize,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ValidateCopyToArguments(destination, bufferSize);
             if (!CanRead)
             {
@@ -112,7 +113,8 @@ namespace System.IO
                 Stream destination,
                 int bufferSize,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 byte[] buffer = ArrayPool<byte>.Shared.Rent(bufferSize);
                 try
                 {
@@ -125,7 +127,8 @@ namespace System.IO
                                 )
                                 .ConfigureAwait(false)
                         ) != 0
-                    ) {
+                    )
+                    {
                         await destination.WriteAsync(
                                 new ReadOnlyMemory<byte>(buffer, 0, bytesRead),
                                 cancellationToken
@@ -253,7 +256,8 @@ namespace System.IO
             object? state,
             bool serializeAsynchronously,
             bool apm
-        ) {
+        )
+        {
             ValidateBufferArguments(buffer, offset, count);
             if (!CanRead)
             {
@@ -388,7 +392,8 @@ namespace System.IO
         public virtual ValueTask<int> ReadAsync(
             Memory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (MemoryMarshal.TryGetArray(buffer, out ArraySegment<byte> array))
             {
                 return new ValueTask<int>(
@@ -407,7 +412,8 @@ namespace System.IO
                 Task<int> readTask,
                 byte[] localBuffer,
                 Memory<byte> localDestination
-            ) {
+            )
+            {
                 try
                 {
                     int result = await readTask.ConfigureAwait(false);
@@ -481,7 +487,8 @@ namespace System.IO
             object? state,
             bool serializeAsynchronously,
             bool apm
-        ) {
+        )
+        {
             ValidateBufferArguments(buffer, offset, count);
             if (!CanWrite)
             {
@@ -788,7 +795,8 @@ namespace System.IO
         public virtual ValueTask WriteAsync(
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (MemoryMarshal.TryGetArray(buffer, out ArraySegment<byte> array))
             {
                 return new ValueTask(
@@ -1230,7 +1238,8 @@ namespace System.IO
                 int count,
                 AsyncCallback? callback,
                 object? state
-            ) {
+            )
+            {
 #if CORERT
                 throw new NotImplementedException(); // TODO: https://github.com/dotnet/corert/issues/3251
 #else
@@ -1318,7 +1327,8 @@ namespace System.IO
                 int count,
                 AsyncCallback? callback,
                 object? state
-            ) {
+            )
+            {
 #if CORERT
                 throw new NotImplementedException(); // TODO: https://github.com/dotnet/corert/issues/3251
 #else

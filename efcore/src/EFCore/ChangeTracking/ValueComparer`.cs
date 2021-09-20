@@ -114,7 +114,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 || unwrappedType == typeof(bool)
                 || unwrappedType == typeof(decimal)
                 || unwrappedType == typeof(object)
-            ) {
+            )
+            {
                 return Expression.Lambda<Func<T?, T?, bool>>(
                     Expression.Equal(param1, param2),
                     param1,
@@ -169,7 +170,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         /// <returns> The snapshot expression. </returns>
         protected static Expression<Func<T?, T?>> CreateDefaultSnapshotExpression(
             bool favorStructuralComparisons
-        ) {
+        )
+        {
             if (!favorStructuralComparisons || !typeof(T).IsArray)
             {
                 return v => v;
@@ -219,7 +221,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         /// <returns> The hash code expression. </returns>
         protected static Expression<Func<T, int>> CreateDefaultHashCodeExpression(
             bool favorStructuralComparisons
-        ) {
+        )
+        {
             var type = typeof(T);
             var unwrappedType = type.UnwrapNullableType();
             var param = Expression.Parameter(type, "v");

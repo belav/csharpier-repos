@@ -16,17 +16,18 @@ namespace Microsoft.CodeAnalysis.UseIsNullCheck
     {
         protected AbstractUseIsNullCheckForReferenceEqualsDiagnosticAnalyzer(
             LocalizableString title
-        ) : base(
-            IDEDiagnosticIds.UseIsNullCheckDiagnosticId,
-            EnforceOnBuildValues.UseIsNullCheck,
-            CodeStyleOptions2.PreferIsNullCheckOverReferenceEqualityMethod,
-            title,
-            new LocalizableResourceString(
-                nameof(AnalyzersResources.Null_check_can_be_simplified),
-                AnalyzersResources.ResourceManager,
-                typeof(AnalyzersResources)
-            )
-        ) { }
+        )
+            : base(
+                IDEDiagnosticIds.UseIsNullCheckDiagnosticId,
+                EnforceOnBuildValues.UseIsNullCheck,
+                CodeStyleOptions2.PreferIsNullCheckOverReferenceEqualityMethod,
+                title,
+                new LocalizableResourceString(
+                    nameof(AnalyzersResources.Null_check_can_be_simplified),
+                    AnalyzersResources.ResourceManager,
+                    typeof(AnalyzersResources)
+                )
+            ) { }
 
         public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
             DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
@@ -68,7 +69,8 @@ namespace Microsoft.CodeAnalysis.UseIsNullCheck
         private void AnalyzeSyntax(
             SyntaxNodeAnalysisContext context,
             IMethodSymbol referenceEqualsMethod
-        ) {
+        )
+        {
             var cancellationToken = context.CancellationToken;
 
             var semanticModel = context.SemanticModel;
@@ -117,7 +119,8 @@ namespace Microsoft.CodeAnalysis.UseIsNullCheck
             if (
                 !MatchesPattern(syntaxFacts, arguments[0], arguments[1])
                 && !MatchesPattern(syntaxFacts, arguments[1], arguments[0])
-            ) {
+            )
+            {
                 return;
             }
 
@@ -155,7 +158,8 @@ namespace Microsoft.CodeAnalysis.UseIsNullCheck
                 if (
                     !genericParameterSymbol.IsReferenceType
                     && !IsUnconstrainedGenericSupported(syntaxTree.Options)
-                ) {
+                )
+                {
                     // Needs special casing for C# as long as
                     // 'is null' over unconstrained generic is implemented in C# 8.
                     properties = properties.Add(UseIsNullConstants.UnconstrainedGeneric, "");
@@ -188,7 +192,8 @@ namespace Microsoft.CodeAnalysis.UseIsNullCheck
             SyntaxNode node1,
             SyntaxNode node2,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var valueNode = syntaxFacts.IsNullLiteralExpression(
                 syntaxFacts.GetExpressionOfArgument(node1)
             )

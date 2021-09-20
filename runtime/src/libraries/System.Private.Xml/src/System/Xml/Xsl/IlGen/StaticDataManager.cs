@@ -181,7 +181,8 @@ namespace System.Xml.Xsl.IlGen
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
             )]
                 Type ebType
-        ) {
+        )
+        {
             if (_earlyInfo == null)
                 _earlyInfo = new UniqueList<EarlyBoundInfo>();
 

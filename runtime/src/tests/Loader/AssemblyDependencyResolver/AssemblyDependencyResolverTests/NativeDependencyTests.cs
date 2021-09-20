@@ -250,7 +250,8 @@ namespace AssemblyDependencyResolverTests
             string fileNamePattern,
             string lookupNamePattern,
             OS resolvesOnOSes
-        ) {
+        )
+        {
             string newDirectory = Guid.NewGuid().ToString().Substring(0, 8);
             string nativeLibraryPath = CreateMockFile(
                 Path.Combine(newDirectory, string.Format(fileNamePattern, "NativeLibrary"))
@@ -267,7 +268,8 @@ namespace AssemblyDependencyResolverTests
             string fileNamePattern,
             string lookupNamePattern,
             OS resolvesOnOSes
-        ) {
+        )
+        {
             string newDirectory = Guid.NewGuid().ToString().Substring(0, 8);
             string nativeLibraryPath = CreateMockFile(
                 Path.Combine(newDirectory, string.Format(fileNamePattern, "NativeLibrary"))
@@ -284,7 +286,8 @@ namespace AssemblyDependencyResolverTests
             string fileNamePattern,
             string lookupNamePattern,
             OS resolvesOnOSes
-        ) {
+        )
+        {
             string newDirectory = Guid.NewGuid().ToString().Substring(0, 8);
             string nativeLibraryPath = CreateMockFile(
                 Path.Combine(newDirectory, string.Format(fileNamePattern, "NativeLibrary"))
@@ -305,7 +308,8 @@ namespace AssemblyDependencyResolverTests
             string otherFileNamePattern,
             string lookupNamePattern,
             OS resolvesOnOSes
-        ) {
+        )
+        {
             string newDirectory = Guid.NewGuid().ToString().Substring(0, 8);
             string nativeLibraryPath = CreateMockFile(
                 Path.Combine(newDirectory, string.Format(fileNameToResolvePattern, "NativeLibrary"))
@@ -326,7 +330,8 @@ namespace AssemblyDependencyResolverTests
             string expectedResolvedFilePath,
             string lookupName,
             OS resolvesOnOSes
-        ) {
+        )
+        {
             using (
                 HostPolicyMock.Mock_corehost_resolve_component_dependencies(
                     0,
@@ -334,7 +339,8 @@ namespace AssemblyDependencyResolverTests
                     $"{nativeLibraryPaths}",
                     ""
                 )
-            ) {
+            )
+            {
                 AssemblyDependencyResolver resolver = new AssemblyDependencyResolver(
                     Path.Combine(TestBasePath, _componentAssemblyPath)
                 );

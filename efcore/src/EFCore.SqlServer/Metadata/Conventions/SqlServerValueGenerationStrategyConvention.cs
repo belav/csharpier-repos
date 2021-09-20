@@ -24,7 +24,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public SqlServerValueGenerationStrategyConvention(
             ProviderConventionSetBuilderDependencies dependencies,
             RelationalConventionSetBuilderDependencies relationalDependencies
-        ) {
+        )
+        {
             Dependencies = dependencies;
         }
 
@@ -38,7 +39,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessModelInitialized(
             IConventionModelBuilder modelBuilder,
             IConventionContext<IConventionModelBuilder> context
-        ) {
+        )
+        {
             modelBuilder.HasValueGenerationStrategy(
                 SqlServerValueGenerationStrategy.IdentityColumn
             );
@@ -48,7 +50,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessModelFinalizing(
             IConventionModelBuilder modelBuilder,
             IConventionContext<IConventionModelBuilder> context
-        ) {
+        )
+        {
             foreach (var entityType in modelBuilder.Metadata.GetEntityTypes())
             {
                 foreach (var property in entityType.GetDeclaredProperties())
@@ -68,7 +71,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         if (
                             strategy == SqlServerValueGenerationStrategy.None
                             && !IsStrategyNoneNeeded(property, storeObject)
-                        ) {
+                        )
+                        {
                             strategy = null;
                         }
                     }
@@ -88,7 +92,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                             if (
                                 strategy == SqlServerValueGenerationStrategy.None
                                 && !IsStrategyNoneNeeded(property, storeObject)
-                            ) {
+                            )
+                            {
                                 strategy = null;
                             }
                         }
@@ -111,7 +116,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     && property.GetComputedColumnSql(storeObject) == null
                     && property.DeclaringEntityType.Model.GetValueGenerationStrategy()
                         == SqlServerValueGenerationStrategy.IdentityColumn
-                ) {
+                )
+                {
                     var providerClrType = (
                         property.GetValueConverter()
                         ?? (

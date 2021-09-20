@@ -13,7 +13,8 @@ namespace Microsoft.AspNetCore.Components.E2ETest
             Uri baseUri,
             string relativeUrl,
             bool noReload
-        ) {
+        )
+        {
             var absoluteUrl = new Uri(baseUri, relativeUrl);
 
             if (noReload)

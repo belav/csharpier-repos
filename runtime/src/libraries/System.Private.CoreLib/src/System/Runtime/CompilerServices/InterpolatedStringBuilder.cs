@@ -426,7 +426,8 @@ namespace System.Runtime.CompilerServices
             ReadOnlySpan<char> value,
             int alignment = 0,
             string? format = null
-        ) {
+        )
+        {
             bool leftAlign = false;
             if (alignment < 0)
             {
@@ -561,7 +562,8 @@ namespace System.Runtime.CompilerServices
             if (
                 formatter is not null
                 && formatter.Format(format, value, _provider) is string customFormatted
-            ) {
+            )
+            {
                 AppendLiteral(customFormatted);
             }
         }

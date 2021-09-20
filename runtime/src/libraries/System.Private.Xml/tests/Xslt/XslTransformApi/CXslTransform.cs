@@ -462,7 +462,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             using (new AllowDefaultResolverContext())
             {
                 string expected =
@@ -573,7 +574,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result></result>";
 
             // "xmlResolver_document_function.xsl" contains
@@ -677,7 +679,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             // "xmlResolver_document_function.xsl" contains
             // <xsl:for-each select="document('xmlResolver_document_function.xml')//elem">
             // with XmlUrlResolver it should be able to open referenced file
@@ -766,7 +769,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             TestUsingTemporaryCopyOfResolverDocument(
                 () =>
                 {
@@ -906,7 +910,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             if (LoadXSL("showParam.xsl", inputType, readerType) == 1)
             {
                 try
@@ -1018,7 +1023,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.No Value Specified
@@ -1037,7 +1043,8 @@ namespace System.Xml.Tests
                 if (
                     (LoadXSL("showParam.xsl", inputType, readerType) == 1)
                     && (Transform("fruits.xml", transformType, docType) == 1)
-                ) {
+                )
+                {
                     VerifyResult(expected);
                     return;
                 }
@@ -1125,7 +1132,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.No Value Specified
@@ -1160,7 +1168,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", inputType, readerType) == 1)
                 && (Transform("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -1247,7 +1256,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.No Value Specified
@@ -1271,7 +1281,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", inputType, readerType) == 1)
                 && (Transform("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -1376,7 +1387,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             using (new AllowDefaultResolverContext())
             {
                 string expected =
@@ -1490,7 +1502,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             using (new AllowDefaultResolverContext())
             {
                 string expected =
@@ -1603,7 +1616,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><Book>
 			Name
@@ -1622,7 +1636,8 @@ namespace System.Xml.Tests
                 if (
                     (LoadXSL("books_entity_ref.xsl", inputType, readerType) == 1)
                     && (Transform("books_entity_ref.xml", transformType, docType) == 1)
-                ) {
+                )
+                {
                     VerifyResult(expected);
                     return;
                 }
@@ -1844,7 +1859,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.No Value Specified
@@ -1975,7 +1991,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.No Value Specified
@@ -2069,7 +2086,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             CustomNullResolver myResolver = new CustomNullResolver(_output);
             if (inputType == InputType.URI)
             {
@@ -2124,7 +2142,8 @@ namespace System.Xml.Tests
         public void TC_No_Explicit_Resolver_Prohibits_External_Url(
             InputType inputType,
             ReaderType readerType
-        ) {
+        )
+        {
             AppContext.TryGetSwitch("Switch.System.Xml.AllowDefaultResolver", out bool isEnabled);
             Assert.False(isEnabled);
             var e = Assert.Throws<XsltCompileException>(
@@ -2218,7 +2237,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             using (new AllowDefaultResolverContext())
             {
                 string expected =
@@ -2233,11 +2253,13 @@ namespace System.Xml.Tests
                             readerType
                         ) == 1
                     )
-                ) {
+                )
+                {
                     if (
                         (LoadXSL("XmlResolver_Main.xsl", inputType, readerType) == 1)
                         && (Transform("fruits.xml", transformType, docType) == 1)
-                    ) {
+                    )
+                    {
                         VerifyResult(expected);
                         return;
                     }
@@ -2330,7 +2352,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.No Value Specified
@@ -2354,7 +2377,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL_Resolver("showParam.xsl", null, inputType, readerType) == 1)
                 && (Transform("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -2459,7 +2483,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             if (LoadXSL_Resolver("showParam.xsl", null, inputType, readerType) == 1)
             {
                 try
@@ -2542,7 +2567,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><out>Red50Orange25</out>";
 
             // XsltResolverTestMain.xsl is placed in IIS virtual directory
@@ -2556,7 +2582,8 @@ namespace System.Xml.Tests
                         readerType
                     ) == 1
                 ) && (Transform("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -3181,7 +3208,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.No Value Specified
@@ -3194,7 +3222,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", inputType, readerType) == 1)
                 && (Transform("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -3281,7 +3310,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.No Value Specified
@@ -3382,7 +3412,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.No Value Specified
@@ -3513,13 +3544,15 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             FileStream s2;
 
             if (
                 (LoadXSL("showParam.xsl", inputType, readerType) == 1)
                 && (Transform("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 s2 = new FileStream(FullFilePath("showParam.xsl"), FileMode.Open, FileAccess.Read);
                 s2.Dispose();
 
@@ -3613,7 +3646,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             try
             {
                 LoadXSL("ForwardComp2.xsl", inputType, readerType);
@@ -3733,7 +3767,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             using (new AllowDefaultResolverContext())
             {
                 string expected =
@@ -3840,7 +3875,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result></result>";
 
             // "xmlResolver_document_function.xsl" contains
@@ -3941,7 +3977,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             // "xmlResolver_document_function.xsl" contains
             // <xsl:for-each select="document('xmlResolver_document_function.xml')//elem">
             // with XmlUrlResolver it should be able to open referenced file
@@ -4029,7 +4066,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             TestUsingTemporaryCopyOfResolverDocument(
                 () =>
                 {
@@ -4524,7 +4562,8 @@ namespace System.Xml.Tests
         public void TC_Xslt_Document_Function_Use_XmlUrlResolver(
             InputType inputType,
             ReaderType readerType
-        ) {
+        )
+        {
             // "xmlResolver_document_function.xsl" contains
             // <xsl:for-each select="document('xmlResolver_document_function.xml')//elem">
             // with XmlUrlResolver it should be able to open referenced file
@@ -4564,7 +4603,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><out>
 param1 (correct answer is 'local-param1-arg'): local-param1-arg
@@ -4577,7 +4617,8 @@ param2 (correct answer is 'local-param2-arg'): local-param2-arg
             if (
                 (LoadXSL("paramScope.xsl", inputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -4604,7 +4645,8 @@ param2 (correct answer is 'local-param2-arg'): local-param2-arg
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><out>
 param1 (correct answer is 'local-param1-arg'): local-param1-arg
@@ -4617,7 +4659,8 @@ param2 (correct answer is 'local-param2-arg'): local-param2-arg
             if (
                 (LoadXSL("varScope.xsl", inputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -4644,7 +4687,8 @@ param2 (correct answer is 'local-param2-arg'): local-param2-arg
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             m_xsltArg = new XsltArgumentList();
             m_xsltArg.AddExtensionObject("http://foo.com", new MyXsltExtension());
             LoadXSL("Bug111075.xsl", inputType, readerType);
@@ -4674,7 +4718,8 @@ param2 (correct answer is 'local-param2-arg'): local-param2-arg
             ReaderType readerType,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?>
 		Node Count: {3}
@@ -4686,7 +4731,8 @@ param2 (correct answer is 'local-param2-arg'): local-param2-arg
             if (
                 (LoadXSL("Bug109644.xsl", inputType, readerType) == 1)
                 && (Transform("foo.xml", transformType, docType) == 1)
-            ) {
+            )
+            {
                 Assert.Equal(expected, File.ReadAllText(_strOutFile));
                 return;
             }

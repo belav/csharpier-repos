@@ -168,7 +168,8 @@ namespace System.Configuration.Internal
                 && (duration < SavingTimeout)
                 && File.Exists(target)
                 && !FileIsWriteLocked(target)
-            ) {
+            )
+            {
                 Thread.Sleep(SavingRetryInterval);
                 duration += SavingRetryInterval;
                 writeSucceeded = AttemptMove(source, target);

@@ -168,7 +168,8 @@ namespace System.Linq.Expressions.Tests
             decimal? a,
             decimal? b,
             bool useInterpreter
-        ) {
+        )
+        {
             bool overflows;
             decimal? expected;
             try

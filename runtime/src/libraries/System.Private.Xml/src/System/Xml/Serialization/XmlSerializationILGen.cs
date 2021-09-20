@@ -132,7 +132,8 @@ namespace System.Xml.Serialization
             MethodAttributes attributes,
             Type? returnType,
             Type[] parameterTypes
-        ) {
+        )
+        {
             MethodBuilderInfo? methodBuilderInfo;
             if (!_methodBuilders.TryGetValue(methodName, out methodBuilderInfo))
             {
@@ -207,7 +208,8 @@ namespace System.Xml.Serialization
             string privateName,
             string publicName,
             TypeBuilder serializerContractTypeBuilder
-        ) {
+        )
+        {
             FieldBuilder fieldBuilder = serializerContractTypeBuilder.DefineField(
                 privateName,
                 typeof(Hashtable),
@@ -282,7 +284,8 @@ namespace System.Xml.Serialization
             string[] methods,
             XmlMapping[] xmlMappings,
             TypeBuilder serializerContractTypeBuilder
-        ) {
+        )
+        {
             FieldBuilder fieldBuilder = GenerateHashtableGetBegin(
                 privateName,
                 publicName,
@@ -293,7 +296,8 @@ namespace System.Xml.Serialization
                 && methods.Length != 0
                 && xmlMappings != null
                 && xmlMappings.Length == methods.Length
-            ) {
+            )
+            {
                 MethodInfo Hashtable_set_Item = typeof(Hashtable).GetMethod(
                     "set_Item",
                     new Type[] { typeof(object), typeof(object) }
@@ -315,7 +319,8 @@ namespace System.Xml.Serialization
         internal void GenerateSupportedTypes(
             Type[] types,
             TypeBuilder serializerContractTypeBuilder
-        ) {
+        )
+        {
             ilg = new CodeGenerator(serializerContractTypeBuilder);
             ilg.BeginMethod(
                 typeof(bool),
@@ -358,7 +363,8 @@ namespace System.Xml.Serialization
             string readerClass,
             string writerClass,
             CodeIdentifiers classes
-        ) {
+        )
+        {
             baseSerializer = CodeIdentifier.MakeValid(baseSerializer);
             baseSerializer = classes.AddUnique(baseSerializer, baseSerializer);
 
@@ -420,7 +426,8 @@ namespace System.Xml.Serialization
             string baseSerializer,
             string readerClass,
             string writerClass
-        ) {
+        )
+        {
             string serializerName = CodeIdentifier.MakeValid(
                 Accessor.UnescapeName(mapping.Accessor.Mapping!.TypeDesc!.Name)
             );
@@ -528,7 +535,8 @@ namespace System.Xml.Serialization
         private FieldBuilder GenerateTypedSerializers(
             Dictionary<string, string> serializers,
             TypeBuilder serializerContractTypeBuilder
-        ) {
+        )
+        {
             string privateName = "typedSerializers";
             FieldBuilder fieldBuilder = GenerateHashtableGetBegin(
                 privateName,
@@ -562,7 +570,8 @@ namespace System.Xml.Serialization
             Dictionary<string, string> serializers,
             XmlMapping[] xmlMappings,
             TypeBuilder serializerContractTypeBuilder
-        ) {
+        )
+        {
             ilg = new CodeGenerator(serializerContractTypeBuilder);
             ilg.BeginMethod(
                 typeof(XmlSerializer),
@@ -616,7 +625,8 @@ namespace System.Xml.Serialization
             string writerType,
             string[] writerMethods,
             Dictionary<string, string> serializers
-        ) {
+        )
+        {
             TypeBuilder serializerContractTypeBuilder = CodeGenerator.CreateTypeBuilder(
                 _moduleBuilder!,
                 "XmlSerializerContract",

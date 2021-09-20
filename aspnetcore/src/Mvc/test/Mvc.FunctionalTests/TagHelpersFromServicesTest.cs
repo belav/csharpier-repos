@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
     {
         public TagHelpersFromServicesTest(
             MvcTestFixture<ControllersFromServicesWebSite.Startup> fixture
-        ) {
+        )
+        {
             Client = fixture.CreateDefaultClient();
         }
 

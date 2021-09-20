@@ -71,7 +71,8 @@ namespace System.Net.Http.Functional.Tests
             int maxConnections,
             int numRequests,
             bool secure
-        ) {
+        )
+        {
             using (HttpClientHandler handler = CreateHttpClientHandler())
             using (HttpClient client = CreateHttpClient(handler))
             {

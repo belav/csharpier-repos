@@ -218,7 +218,8 @@ namespace System.Web.Http.Results
                             expectedBuilder,
                             CultureInfo.InvariantCulture
                         )
-                    ) {
+                    )
+                    {
                         JsonSerializer serializer = JsonSerializer.Create(serializerSettings);
 
                         using (JsonWriter jsonWriter = new JsonTextWriter(textWriter))
@@ -302,7 +303,8 @@ namespace System.Web.Http.Results
                             expectedBuilder,
                             CultureInfo.InvariantCulture
                         )
-                    ) {
+                    )
+                    {
                         JsonSerializer serializer = JsonSerializer.Create(serializerSettings);
 
                         using (JsonWriter jsonWriter = new JsonTextWriter(textWriter))
@@ -522,7 +524,8 @@ namespace System.Web.Http.Results
             JsonSerializerSettings serializerSettings,
             Encoding encoding,
             HttpRequestMessage request
-        ) {
+        )
+        {
             return new JsonResult<T>(content, serializerSettings, encoding, request);
         }
 
@@ -531,7 +534,8 @@ namespace System.Web.Http.Results
             JsonSerializerSettings serializerSettings,
             Encoding encoding,
             ApiController controller
-        ) {
+        )
+        {
             return new JsonResult<T>(content, serializerSettings, encoding, controller);
         }
 

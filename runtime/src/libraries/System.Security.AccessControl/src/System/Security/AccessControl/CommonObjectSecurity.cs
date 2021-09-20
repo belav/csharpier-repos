@@ -52,7 +52,8 @@ namespace System.Security.AccessControl
             bool includeExplicit,
             bool includeInherited,
             System.Type targetType
-        ) {
+        )
+        {
             ReadLock();
 
             try
@@ -74,7 +75,8 @@ namespace System.Security.AccessControl
                     if (
                         (_securityDescriptor.ControlFlags & ControlFlags.DiscretionaryAclPresent)
                         != 0
-                    ) {
+                    )
+                    {
                         acl = _securityDescriptor.DiscretionaryAcl;
                     }
                 }
@@ -198,7 +200,8 @@ namespace System.Security.AccessControl
             bool isAccessAce,
             bool includeExplicit,
             bool includeInherited
-        ) {
+        )
+        {
             if (ace == null)
             {
                 //
@@ -213,7 +216,8 @@ namespace System.Security.AccessControl
                 if (
                     ace.AceQualifier != AceQualifier.AccessAllowed
                     && ace.AceQualifier != AceQualifier.AccessDenied
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -228,7 +232,8 @@ namespace System.Security.AccessControl
             if (
                 (includeExplicit && ((ace.AceFlags & AceFlags.Inherited) == 0))
                 || (includeInherited && ((ace.AceFlags & AceFlags.Inherited) != 0))
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -242,7 +247,8 @@ namespace System.Security.AccessControl
             AccessControlModification modification,
             AccessRule rule,
             out bool modified
-        ) {
+        )
+        {
             if (rule == null)
             {
                 throw new ArgumentNullException(nameof(rule));
@@ -259,7 +265,8 @@ namespace System.Security.AccessControl
                         modification == AccessControlModification.Remove
                         || modification == AccessControlModification.RemoveAll
                         || modification == AccessControlModification.RemoveSpecific
-                    ) {
+                    )
+                    {
                         modified = false;
                         return result;
                     }
@@ -471,7 +478,8 @@ namespace System.Security.AccessControl
             AccessControlModification modification,
             AuditRule rule,
             out bool modified
-        ) {
+        )
+        {
             if (rule == null)
             {
                 throw new ArgumentNullException(nameof(rule));
@@ -488,7 +496,8 @@ namespace System.Security.AccessControl
                         modification == AccessControlModification.Remove
                         || modification == AccessControlModification.RemoveAll
                         || modification == AccessControlModification.RemoveSpecific
-                    ) {
+                    )
+                    {
                         modified = false;
                         return result;
                     }
@@ -852,7 +861,8 @@ namespace System.Security.AccessControl
             bool includeExplicit,
             bool includeInherited,
             System.Type targetType
-        ) {
+        )
+        {
             return GetRules(true, includeExplicit, includeInherited, targetType);
         }
 
@@ -860,7 +870,8 @@ namespace System.Security.AccessControl
             bool includeExplicit,
             bool includeInherited,
             System.Type targetType
-        ) {
+        )
+        {
             return GetRules(false, includeExplicit, includeInherited, targetType);
         }
         #endregion

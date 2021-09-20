@@ -117,7 +117,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 JsonWriter writer,
                 DocumentId documentId,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 writer.WriteStartObject();
 
                 writer.WritePropertyName("projectId");

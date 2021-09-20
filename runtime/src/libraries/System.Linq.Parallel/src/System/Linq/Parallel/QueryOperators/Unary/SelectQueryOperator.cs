@@ -36,10 +36,8 @@ namespace System.Linq.Parallel
         //    selector must be non null.
         //
 
-        internal SelectQueryOperator(
-            IEnumerable<TInput> child,
-            Func<TInput, TOutput> selector
-        ) : base(child)
+        internal SelectQueryOperator(IEnumerable<TInput> child, Func<TInput, TOutput> selector)
+            : base(child)
         {
             Debug.Assert(child != null, "child data source cannot be null");
             Debug.Assert(selector != null, "need a selector function");
@@ -53,7 +51,8 @@ namespace System.Linq.Parallel
             IPartitionedStreamRecipient<TOutput> recipient,
             bool preferStriping,
             QuerySettings settings
-        ) {
+        )
+        {
             PartitionedStream<TOutput, TKey> outputStream = new PartitionedStream<TOutput, TKey>(
                 inputStream.PartitionCount,
                 inputStream.KeyComparer,
@@ -118,7 +117,8 @@ namespace System.Linq.Parallel
             internal SelectQueryOperatorEnumerator(
                 QueryOperatorEnumerator<TInput, TKey> source,
                 Func<TInput, TOutput> selector
-            ) {
+            )
+            {
                 Debug.Assert(source != null);
                 Debug.Assert(selector != null);
                 _source = source;
@@ -132,7 +132,8 @@ namespace System.Linq.Parallel
             internal override bool MoveNext(
                 [MaybeNullWhen(false), AllowNull] ref TOutput currentElement,
                 [AllowNull] ref TKey currentKey
-            ) {
+            )
+            {
                 // So long as the source has a next element, we have an element.
                 TInput element = default(TInput)!;
                 if (_source.MoveNext(ref element!, ref currentKey))
@@ -166,7 +167,8 @@ namespace System.Linq.Parallel
                 SelectQueryOperator<TInput, TOutput> op,
                 QuerySettings settings,
                 bool preferStriping
-            ) {
+            )
+            {
                 if (childQueryResults.IsIndexible)
                 {
                     return new SelectQueryOperatorResults(

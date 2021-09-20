@@ -89,7 +89,8 @@ namespace System.Security.Cryptography.Pkcs.Asn1
         internal static Rfc3161TimeStampReq Decode(
             ReadOnlyMemory<byte> encoded,
             AsnEncodingRules ruleSet
-        ) {
+        )
+        {
             return Decode(Asn1Tag.Sequence, encoded, ruleSet);
         }
 
@@ -97,7 +98,8 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             Asn1Tag expectedTag,
             ReadOnlyMemory<byte> encoded,
             AsnEncodingRules ruleSet
-        ) {
+        )
+        {
             try
             {
                 AsnValueReader reader = new AsnValueReader(encoded.Span, ruleSet);
@@ -116,7 +118,8 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             ref AsnValueReader reader,
             ReadOnlyMemory<byte> rebind,
             out Rfc3161TimeStampReq decoded
-        ) {
+        )
+        {
             Decode(ref reader, Asn1Tag.Sequence, rebind, out decoded);
         }
 
@@ -125,7 +128,8 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             Asn1Tag expectedTag,
             ReadOnlyMemory<byte> rebind,
             out Rfc3161TimeStampReq decoded
-        ) {
+        )
+        {
             try
             {
                 DecodeCore(ref reader, expectedTag, rebind, out decoded);
@@ -141,7 +145,8 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             Asn1Tag expectedTag,
             ReadOnlyMemory<byte> rebind,
             out Rfc3161TimeStampReq decoded
-        ) {
+        )
+        {
             decoded = default;
             AsnValueReader sequenceReader = reader.ReadSequence(expectedTag);
             AsnValueReader defaultReader;
@@ -164,14 +169,16 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             if (
                 sequenceReader.HasData
                 && sequenceReader.PeekTag().HasSameClassAndValue(Asn1Tag.ObjectIdentifier)
-            ) {
+            )
+            {
                 decoded.ReqPolicy = sequenceReader.ReadObjectIdentifier();
             }
 
             if (
                 sequenceReader.HasData
                 && sequenceReader.PeekTag().HasSameClassAndValue(Asn1Tag.Integer)
-            ) {
+            )
+            {
                 tmpSpan = sequenceReader.ReadIntegerBytes();
                 decoded.Nonce = rebindSpan.Overlaps(tmpSpan, out offset)
                     ? rebind.Slice(offset, tmpSpan.Length)
@@ -181,7 +188,8 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             if (
                 sequenceReader.HasData
                 && sequenceReader.PeekTag().HasSameClassAndValue(Asn1Tag.Boolean)
-            ) {
+            )
+            {
                 decoded.CertReq = sequenceReader.ReadBoolean();
             }
             else
@@ -194,7 +202,8 @@ namespace System.Security.Cryptography.Pkcs.Asn1
                 sequenceReader.HasData
                 && sequenceReader.PeekTag()
                     .HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 0))
-            ) {
+            )
+            {
                 // Decode SEQUENCE OF for Extensions
                 {
                     collectionReader = sequenceReader.ReadSequence(

@@ -21,7 +21,8 @@ namespace System.Net.Http.Json
             System.IO.Stream stream,
             System.Net.TransportContext? context,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
     }

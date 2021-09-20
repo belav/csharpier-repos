@@ -35,7 +35,8 @@ namespace Microsoft.AspNetCore.Http
             this HttpResponse response,
             TValue value,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return response.WriteAsJsonAsync<TValue>(
                 value,
                 options: null,
@@ -64,7 +65,8 @@ namespace Microsoft.AspNetCore.Http
             TValue value,
             JsonSerializerOptions? options,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return response.WriteAsJsonAsync<TValue>(
                 value,
                 options,
@@ -95,7 +97,8 @@ namespace Microsoft.AspNetCore.Http
             JsonSerializerOptions? options,
             string? contentType,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (response == null)
             {
                 throw new ArgumentNullException(nameof(response));
@@ -131,7 +134,8 @@ namespace Microsoft.AspNetCore.Http
             object? value,
             Type type,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return response.WriteAsJsonAsync(
                 value,
                 type,
@@ -162,7 +166,8 @@ namespace Microsoft.AspNetCore.Http
             Type type,
             JsonSerializerOptions? options,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return response.WriteAsJsonAsync(
                 value,
                 type,
@@ -195,7 +200,8 @@ namespace Microsoft.AspNetCore.Http
             JsonSerializerOptions? options,
             string? contentType,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (response == null)
             {
                 throw new ArgumentNullException(nameof(response));

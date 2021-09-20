@@ -64,7 +64,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                 else if (
                     descriptor.ImplementationInstance == null
                     && descriptor.ImplementationFactory == null
-                ) {
+                )
+                {
                     Debug.Assert(descriptor.ImplementationType != null);
                     Type implementationType = descriptor.ImplementationType;
 
@@ -72,7 +73,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                         implementationType.IsGenericTypeDefinition
                         || implementationType.IsAbstract
                         || implementationType.IsInterface
-                    ) {
+                    )
+                    {
                         throw new ArgumentException(
                             SR.Format(
                                 SR.TypeCannotBeActivated,
@@ -97,13 +99,15 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         internal ServiceCallSite GetCallSite(
             ServiceDescriptor serviceDescriptor,
             CallSiteChain callSiteChain
-        ) {
+        )
+        {
             if (
                 _descriptorLookup.TryGetValue(
                     serviceDescriptor.ServiceType,
                     out ServiceDescriptorCacheItem descriptor
                 )
-            ) {
+            )
+            {
                 return TryCreateExact(
                     serviceDescriptor,
                     serviceDescriptor.ServiceType,
@@ -146,7 +150,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                     serviceType,
                     out ServiceDescriptorCacheItem descriptor
                 )
-            ) {
+            )
+            {
                 return TryCreateExact(descriptor.Last, serviceType, callSiteChain, DefaultSlot);
             }
 
@@ -161,7 +166,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                     serviceType.GetGenericTypeDefinition(),
                     out ServiceDescriptorCacheItem descriptor
                 )
-            ) {
+            )
+            {
                 return TryCreateOpenGeneric(
                     descriptor.Last,
                     serviceType,
@@ -183,7 +189,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                 if (
                     serviceType.IsConstructedGenericType
                     && serviceType.GetGenericTypeDefinition() == typeof(IEnumerable<>)
-                ) {
+                )
+                {
                     Type itemType = serviceType.GenericTypeArguments[0];
                     CallSiteResultCacheLocation cacheLocation = CallSiteResultCacheLocation.Root;
 
@@ -196,7 +203,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                             itemType,
                             out ServiceDescriptorCacheItem descriptors
                         )
-                    ) {
+                    )
+                    {
                         for (int i = 0; i < descriptors.Count; i++)
                         {
                             ServiceDescriptor descriptor = descriptors[i];
@@ -255,7 +263,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                     if (
                         cacheLocation == CallSiteResultCacheLocation.Scope
                         || cacheLocation == CallSiteResultCacheLocation.Root
-                    ) {
+                    )
+                    {
                         resultCache = new ResultCache(
                             cacheLocation,
                             new ServiceCacheKey(serviceType, DefaultSlot)
@@ -277,7 +286,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         private CallSiteResultCacheLocation GetCommonCacheLocation(
             CallSiteResultCacheLocation locationA,
             CallSiteResultCacheLocation locationB
-        ) {
+        )
+        {
             return (CallSiteResultCacheLocation)Math.Max((int)locationA, (int)locationB);
         }
 
@@ -286,7 +296,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             Type serviceType,
             CallSiteChain callSiteChain,
             int slot
-        ) {
+        )
+        {
             if (serviceType == descriptor.ServiceType)
             {
                 ServiceCallSite callSite;
@@ -332,11 +343,13 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             CallSiteChain callSiteChain,
             int slot,
             bool throwOnConstraintViolation
-        ) {
+        )
+        {
             if (
                 serviceType.IsConstructedGenericType
                 && serviceType.GetGenericTypeDefinition() == descriptor.ServiceType
-            ) {
+            )
+            {
                 Debug.Assert(
                     descriptor.ImplementationType != null,
                     "descriptor.ImplementationType != null"
@@ -371,7 +384,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
                 Type implementationType,
             CallSiteChain callSiteChain
-        ) {
+        )
+        {
             try
             {
                 callSiteChain.Add(serviceType, implementationType);
@@ -499,7 +513,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             CallSiteChain callSiteChain,
             ParameterInfo[] parameters,
             bool throwIfCallSiteNotFound
-        ) {
+        )
+        {
             var parameterCallSites = new ServiceCallSite[parameters.Length];
             for (int index = 0; index < parameters.Length; index++)
             {
@@ -512,7 +527,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                         parameters[index],
                         out object defaultValue
                     )
-                ) {
+                )
+                {
                     callSite = new ConstantCallSite(parameterType, defaultValue);
                 }
 

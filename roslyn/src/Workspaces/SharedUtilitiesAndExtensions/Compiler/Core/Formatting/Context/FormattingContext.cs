@@ -122,7 +122,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             SyntaxToken startToken,
             SyntaxToken endToken,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var rootNode = this.TreeData.Root;
             if (_tokenStream.IsFormattingWholeDocument)
             {
@@ -177,7 +178,8 @@ namespace Microsoft.CodeAnalysis.Formatting
         public void AddIndentBlockOperations(
             List<IndentBlockOperation> operations,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(operations);
 
             // if there is no initial block operations
@@ -364,7 +366,8 @@ namespace Microsoft.CodeAnalysis.Formatting
         public void AddSuppressOperations(
             List<SuppressOperation> operations,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var valuePairs =
                 new SegmentedArray<(SuppressOperation operation, bool shouldSuppress, bool onSameLine)>(
                     operations.Count
@@ -382,7 +385,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 if (
                     operation.ContainsElasticTrivia(_tokenStream)
                     && !operation.Option.IsOn(SuppressOption.IgnoreElasticWrapping)
-                ) {
+                )
+                {
                     // don't bother to calculate line alignment between tokens
                     valuePairs[i] = (operation, shouldSuppress: false, onSameLine: false);
                     continue;
@@ -416,7 +420,8 @@ namespace Microsoft.CodeAnalysis.Formatting
         private void AddSpacingSuppressOperation(
             SuppressOperation operation,
             bool twoTokensOnSameLine
-        ) {
+        )
+        {
             // don't add stuff if it is empty
             if (operation == null || operation.TextSpan.IsEmpty)
             {
@@ -428,14 +433,16 @@ namespace Microsoft.CodeAnalysis.Formatting
             if (
                 !option.IsMaskOn(SuppressOption.NoSpacing)
                 || _suppressSpacingMap.Contains(operation.TextSpan)
-            ) {
+            )
+            {
                 return;
             }
 
             if (
                 !(option.IsOn(SuppressOption.NoSpacingIfOnSingleLine) && twoTokensOnSameLine)
                 && !(option.IsOn(SuppressOption.NoSpacingIfOnMultipleLine) && !twoTokensOnSameLine)
-            ) {
+            )
+            {
                 return;
             }
 
@@ -458,7 +465,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             if (
                 !option.IsOn(SuppressOption.DisableFormatting)
                 || _suppressFormattingMap.Contains(operation.TextSpan)
-            ) {
+            )
+            {
                 return;
             }
 
@@ -471,7 +479,8 @@ namespace Microsoft.CodeAnalysis.Formatting
         private void AddWrappingSuppressOperation(
             SuppressOperation operation,
             bool twoTokensOnSameLine
-        ) {
+        )
+        {
             // don't add stuff if it is empty
             if (operation == null || operation.TextSpan.IsEmpty)
             {
@@ -482,14 +491,16 @@ namespace Microsoft.CodeAnalysis.Formatting
             if (
                 !option.IsMaskOn(SuppressOption.NoWrapping)
                 || _suppressWrappingMap.Contains(operation.TextSpan)
-            ) {
+            )
+            {
                 return;
             }
 
             if (
                 !(option.IsOn(SuppressOption.NoWrappingIfOnSingleLine) && twoTokensOnSameLine)
                 && !(option.IsOn(SuppressOption.NoWrappingIfOnMultipleLine) && !twoTokensOnSameLine)
-            ) {
+            )
+            {
                 return;
             }
 
@@ -510,7 +521,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 operation.TextSpan.IsEmpty
                 || _anchorMap.Contains(operation.TextSpan)
                 || _anchorBaseTokenMap.ContainsKey(operation.AnchorToken)
-            ) {
+            )
+            {
                 return;
             }
 
@@ -560,7 +572,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             int maxChainDepth,
             out SyntaxToken endToken,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             endToken = default;
 
             var depth = 0;
@@ -636,7 +649,8 @@ namespace Microsoft.CodeAnalysis.Formatting
         public int GetDeltaFromPreviousChangesMap(
             SyntaxToken token,
             Dictionary<SyntaxToken, int> previousChangesMap
-        ) {
+        )
+        {
             // no changes
             if (!previousChangesMap.ContainsKey(token))
             {
@@ -716,7 +730,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 if (
                     _tokenStream.TokenCount - 1 <= tokenPairIndex
                     || _tokenStream.GetTriviaData(tokenPairIndex).SecondTokenIsFirstTokenOnLine
-                ) {
+                )
+                {
                     return lastBaseAnchorData;
                 }
 

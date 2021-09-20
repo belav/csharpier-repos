@@ -780,7 +780,8 @@ namespace Amd64InstructionTableGenerator
                 if (
                     (sample.opCodeExt != samples[0].opCodeExt)
                     || (regEnc && (sample.modrm_reg != samples[0].modrm_reg))
-                ) {
+                )
+                {
                     SummarizeSamples(regEnc);
                     if (regEnc && ((sample.opCodeExt >> 4) != (samples[0].opCodeExt >> 4)))
                     {
@@ -1029,7 +1030,8 @@ namespace Amd64InstructionTableGenerator
             Func<EncodingFlags, SuffixFlags> hypothesis,
             SuffixFlags sometimes,
             Dictionary<SuffixFlags, List<Amd64InstructionSample>> samples
-        ) {
+        )
+        {
             foreach ((SuffixFlags e, List<Amd64InstructionSample> l) in samples)
             {
                 foreach (var sample in l)
@@ -1070,7 +1072,8 @@ namespace Amd64InstructionTableGenerator
             int modrmReg,
             string rule,
             HashSet<string> mnemonics
-        ) {
+        )
+        {
             rules.Add(rule);
 
             if (reg)

@@ -31,7 +31,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Func<DbContext> createContext,
             Action<DbContext> seed = null,
             Action<DbContext> clean = null
-        ) {
+        )
+        {
             base.Initialize(serviceProvider, createContext, seed, clean);
 
             if (ConnectionState != ConnectionState.Open)

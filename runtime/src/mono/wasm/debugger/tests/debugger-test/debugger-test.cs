@@ -303,7 +303,8 @@ public partial class Math
         Math.DelegateForSignatureTest[] dst_arr,
         Func<char[], bool> fn_func,
         Action<GenericStruct<int>[]> fn_action
-    ) {
+    )
+    {
         Console.WriteLine($"Placeholder for breakpoint");
         OuterMethod();
     }

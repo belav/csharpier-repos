@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         private List<ExpressionSyntax> GetExprSyntaxList(
             SyntaxNode node,
             List<ExpressionSyntax> exprSynList
-        ) {
+        )
+        {
             if (exprSynList == null)
                 exprSynList = new List<ExpressionSyntax>();
 
@@ -59,7 +60,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         protected ExpressionSyntax GetExprSyntaxForBinding(
             List<ExpressionSyntax> exprSynList,
             int index = 0
-        ) {
+        )
+        {
             var tagName = string.Format("bind{0}", index == 0 ? String.Empty : index.ToString());
             var startComment = string.Format("/*<{0}>*/", tagName);
             var endComment = string.Format("/*</{0}>*/", tagName);
@@ -159,7 +161,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         internal PreprocessingSymbolInfo GetPreprocessingSymbolInfoForTest(
             string testSrc,
             string subStrForPreprocessNameIndex
-        ) {
+        )
+        {
             var compilation = CreateCompilation(testSrc);
             var tree = compilation.SyntaxTrees[0];
             var model = compilation.GetSemanticModel(tree);

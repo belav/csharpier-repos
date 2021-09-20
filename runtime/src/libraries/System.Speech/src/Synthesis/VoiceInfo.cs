@@ -89,7 +89,8 @@ namespace System.Speech.Synthesis
             if (
                 token.Attributes != null
                 && token.Attributes.TryGetString("AudioFormats", out audioFormats)
-            ) {
+            )
+            {
                 _audioFormats = new ReadOnlyCollection<SpeechAudioFormatInfo>(
                     SapiAttributeParser.GetAudioFormatsFromString(audioFormats)
                 );

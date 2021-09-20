@@ -45,16 +45,18 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EditAndContinue
             IThreadingContext threadingContext,
             IForegroundNotificationService notificationService,
             IAsynchronousOperationListenerProvider listenerProvider
-        ) : base(
-            threadingContext,
-            listenerProvider.GetListener(FeatureAttribute.Classification),
-            notificationService
-        ) { }
+        )
+            : base(
+                threadingContext,
+                listenerProvider.GetListener(FeatureAttribute.Classification),
+                notificationService
+            ) { }
 
         protected override ITaggerEventSource CreateEventSource(
             ITextView textView,
             ITextBuffer subjectBuffer
-        ) {
+        )
+        {
             AssertIsForeground();
 
             return TaggerEventSources.Compose(

@@ -103,7 +103,8 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
                     textSpan.Start,
                     out typeDeclaration
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -116,7 +117,8 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
             if (
                 containingType?.TypeKind != TypeKind.Class
                 && containingType?.TypeKind != TypeKind.Struct
-            ) {
+            )
+            {
                 return;
             }
 
@@ -175,7 +177,8 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
             SemanticModel semanticModel,
             INamedTypeSymbol containingType,
             [NotNullWhen(true)] out INamedTypeSymbol? constructedType
-        ) {
+        )
+        {
             // A ref struct can never implement an interface, therefore never add IEquatable to the selection
             // options if the type is a ref struct.
             if (!containingType.IsRefLikeType)
@@ -201,7 +204,8 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
             INamedTypeSymbol containingType,
             out bool hasEquals,
             out bool hasGetHashCode
-        ) {
+        )
+        {
             hasEquals = containingType.GetMembers(EqualsName)
                 .OfType<IMethodSymbol>()
                 .Any(m => m.Parameters.Length == 1 && !m.IsStatic);
@@ -215,13 +219,15 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
             Document document,
             TextSpan textSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (
                 Logger.LogBlock(
                     FunctionId.Refactoring_GenerateFromMembers_GenerateEqualsAndGetHashCode,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 var info = await GetSelectedMemberInfoAsync(
                         document,
                         textSpan,
@@ -234,7 +240,8 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
                     if (
                         info.ContainingType != null
                         && info.ContainingType.TypeKind != TypeKind.Interface
-                    ) {
+                    )
+                    {
                         GetExistingMemberInfo(
                             info.ContainingType,
                             out var hasEquals,
@@ -278,7 +285,8 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
             bool hasGetHashCode,
             bool withDialog,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<Task<CodeAction>>.GetInstance(out var tasks);
 
             if (!hasEquals && !hasGetHashCode)
@@ -359,7 +367,8 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
             bool generateGetHashCode,
             bool withDialog,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return withDialog
               ? CreateCodeActionWithDialogAsync(
                     document,
@@ -389,7 +398,8 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
             bool generateEquals,
             bool generateGetHashCode,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
             var options = await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
@@ -452,7 +462,8 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
             bool generateEquals,
             bool generateGetHashCode,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var implementIEquatable = false;
             var generateOperators = false;
 

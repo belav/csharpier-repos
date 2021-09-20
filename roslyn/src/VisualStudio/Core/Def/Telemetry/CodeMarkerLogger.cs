@@ -284,7 +284,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
             int uniquePairId,
             int delta,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             FireCodeMarkers(s_map, functionId, s_getter);
             FireCodeMarkers(s_blockMap, functionId, s_endGetter);
         }
@@ -296,7 +297,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
             Dictionary<FunctionId, List<T>> map,
             FunctionId functionId,
             Func<T, int> getter
-        ) {
+        )
+        {
             if (!map.TryGetValue(functionId, out var items))
             {
                 return;

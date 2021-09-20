@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AssignOutParameters
             Document document,
             SyntaxNode container,
             SyntaxNode location
-        ) {
+        )
+        {
             // Don't offer if we're already the starting statement of the container. This case will
             // be handled by the AssignOutParametersAboveReturnCodeFixProvider class.
             if (location is ExpressionSyntax)
@@ -55,7 +56,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AssignOutParameters
                 && statement.Parent is BlockSyntax block
                 && block.Statements[0] == statement
                 && block.Parent == container
-            ) {
+            )
+            {
                 return;
             }
 
@@ -76,7 +78,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AssignOutParameters
                 (SyntaxNode exprOrStatement, ImmutableArray<IParameterSymbol> unassignedParameters)
             >.ValueSet values,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var generator = editor.Generator;
             var unassignedParameters = values.SelectMany(t => t.unassignedParameters)
                 .Distinct()

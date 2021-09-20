@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     if (
                         _documentWorkQueue.TryGetValue(key.ProjectId, out var documentMap)
                         && documentMap.TryGetValue(key, out workInfo)
-                    ) {
+                    )
+                    {
                         documentMap.Remove(key);
 
                         if (documentMap.Count == 0)
@@ -55,7 +56,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     ProjectDependencyGraph dependencyGraph,
                     IDiagnosticAnalyzerService? service,
                     out WorkItem workItem
-                ) {
+                )
+                {
                     // there must be at least one item in the map when this is called unless host is shutting down.
                     if (_documentWorkQueue.Count == 0)
                     {
@@ -80,7 +82,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     ProjectId? preferableProjectId,
                     ProjectDependencyGraph dependencyGraph,
                     IDiagnosticAnalyzerService? analyzerService
-                ) {
+                )
+                {
                     var projectId = GetBestProjectId_NoLock(
                         _documentWorkQueue,
                         preferableProjectId,
@@ -123,7 +126,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     if (
                         _documentWorkQueue.TryGetValue(key.ProjectId, out var documentMap)
                         && documentMap.TryGetValue(key, out var existingWorkItem)
-                    ) {
+                    )
+                    {
                         // TODO: should I care about language when replace it?
                         Debug.Assert(existingWorkItem.Language == item.Language);
 

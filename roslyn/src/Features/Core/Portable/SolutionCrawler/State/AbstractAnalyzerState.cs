@@ -62,7 +62,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler.State
         public async Task<TData> TryGetExistingDataAsync(
             TValue value,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!DataCache.TryGetValue(GetCacheKey(value), out var entry))
             {
                 // we don't have data
@@ -102,7 +103,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler.State
             TValue value,
             TData data,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var succeeded = await WriteToStreamAsync(value, data, cancellationToken)
                 .ConfigureAwait(false);
 
@@ -127,7 +129,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler.State
             TValue value,
             TData data,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var stream = SerializableBytes.CreateWritableStream();
             WriteTo(stream, data, cancellationToken);
 

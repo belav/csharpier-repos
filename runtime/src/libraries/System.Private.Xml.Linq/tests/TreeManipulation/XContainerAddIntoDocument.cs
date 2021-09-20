@@ -331,7 +331,8 @@ namespace XLinqTests
             XContainer orig,
             IEnumerable<object> newNodes,
             string stringOnlyContent
-        ) {
+        )
+        {
             if (stringOnlyContent == null)
             {
                 foreach (object o in orig.Nodes())

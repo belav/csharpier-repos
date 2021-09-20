@@ -48,7 +48,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IMvcCoreBuilder AddRazorRuntimeCompilation(
             this IMvcCoreBuilder builder,
             Action<MvcRazorRuntimeCompilationOptions> setupAction
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));

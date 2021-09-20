@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmEvaluationResultAccessType accessType,
             DkmEvaluationResultStorageType storageType,
             DkmEvaluationResultTypeModifierFlags modifierFlags
-        ) {
+        )
+        {
             Flags = flags;
             Category = category;
             AccessType = accessType;

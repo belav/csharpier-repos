@@ -18,11 +18,8 @@ namespace Internal.CommandLine
             DefaultValue = defaultValue;
         }
 
-        internal ArgumentList(
-            ArgumentCommand command,
-            string name,
-            IReadOnlyList<T> defaultValue
-        ) : base(command, new[] { name }, false, true)
+        internal ArgumentList(ArgumentCommand command, string name, IReadOnlyList<T> defaultValue)
+            : base(command, new[] { name }, false, true)
         {
             Value = defaultValue;
             DefaultValue = defaultValue;

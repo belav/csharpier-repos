@@ -15,7 +15,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             string id,
             Func<string> messageFormat,
             RazorDiagnosticSeverity severity
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(id))
             {
                 throw new ArgumentException(Resources.ArgumentCannotBeNullOrEmpty, nameof(id));

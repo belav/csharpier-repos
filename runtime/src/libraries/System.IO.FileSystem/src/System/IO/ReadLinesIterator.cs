@@ -99,7 +99,8 @@ namespace System.IO
             string path,
             Encoding encoding,
             StreamReader? reader
-        ) {
+        )
+        {
             return new ReadLinesIterator(
                 path,
                 encoding,

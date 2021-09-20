@@ -191,7 +191,8 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
         public async Task RequestAfterAuth_ReauthenticatesWhenNotPersisted(
             Version first,
             Version second
-        ) {
+        )
+        {
             using var host = await CreateHostAsync(
                 options => options.PersistNtlmCredentials = false
             );
@@ -450,7 +451,8 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
         private static HttpClient CreateSocketHttpClient(
             IHost host,
             bool useDefaultCredentials = false
-        ) {
+        )
+        {
             var address = host.Services.GetRequiredService<IServer>()
                 .Features.Get<IServerAddressesFeature>()
                 .Addresses.First();

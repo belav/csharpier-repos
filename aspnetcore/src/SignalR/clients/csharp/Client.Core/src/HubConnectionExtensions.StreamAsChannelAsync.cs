@@ -34,7 +34,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
             this HubConnection hubConnection,
             string methodName,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return hubConnection.StreamAsChannelCoreAsync<TResult>(
                 methodName,
                 Array.Empty<object>(),
@@ -64,7 +65,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
             string methodName,
             object? arg1,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return hubConnection.StreamAsChannelCoreAsync<TResult>(
                 methodName,
                 new[] { arg1 },
@@ -96,7 +98,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
             object? arg1,
             object? arg2,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return hubConnection.StreamAsChannelCoreAsync<TResult>(
                 methodName,
                 new[] { arg1, arg2 },
@@ -130,7 +133,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
             object? arg2,
             object? arg3,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return hubConnection.StreamAsChannelCoreAsync<TResult>(
                 methodName,
                 new[] { arg1, arg2, arg3 },
@@ -166,7 +170,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
             object? arg3,
             object? arg4,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return hubConnection.StreamAsChannelCoreAsync<TResult>(
                 methodName,
                 new[] { arg1, arg2, arg3, arg4 },
@@ -204,7 +209,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
             object? arg4,
             object? arg5,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return hubConnection.StreamAsChannelCoreAsync<TResult>(
                 methodName,
                 new[] { arg1, arg2, arg3, arg4, arg5 },
@@ -244,7 +250,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
             object? arg5,
             object? arg6,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return hubConnection.StreamAsChannelCoreAsync<TResult>(
                 methodName,
                 new[] { arg1, arg2, arg3, arg4, arg5, arg6 },
@@ -286,7 +293,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
             object? arg6,
             object? arg7,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return hubConnection.StreamAsChannelCoreAsync<TResult>(
                 methodName,
                 new[] { arg1, arg2, arg3, arg4, arg5, arg6, arg7 },
@@ -330,7 +338,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
             object? arg7,
             object? arg8,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return hubConnection.StreamAsChannelCoreAsync<TResult>(
                 methodName,
                 new[] { arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8 },
@@ -376,7 +385,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
             object? arg8,
             object? arg9,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return hubConnection.StreamAsChannelCoreAsync<TResult>(
                 methodName,
                 new[] { arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9 },
@@ -424,7 +434,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
             object? arg9,
             object? arg10,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return hubConnection.StreamAsChannelCoreAsync<TResult>(
                 methodName,
                 new[] { arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10 },
@@ -449,7 +460,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
             string methodName,
             object?[] args,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (hubConnection == null)
             {
                 throw new ArgumentNullException(nameof(hubConnection));

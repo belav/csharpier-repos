@@ -63,7 +63,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
             Document document,
             TextSpan textSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var state = await CreateStateAsync(document, textSpan, cancellationToken)
                 .ConfigureAwait(false);
 
@@ -81,7 +82,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
             TextSpan textSpan,
             MoveTypeOperationKind operationKind,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var state = await CreateStateAsync(document, textSpan, cancellationToken)
                 .ConfigureAwait(false);
 
@@ -120,7 +122,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
             Document document,
             TextSpan textSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var nodeToAnalyze = await GetRelevantNodeAsync(document, textSpan, cancellationToken)
                 .ConfigureAwait(false);
             if (nodeToAnalyze == null)
@@ -136,7 +139,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
         private ImmutableArray<CodeAction> CreateActions(
             State state,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var typeMatchesDocumentName = TypeMatchesDocumentName(
                 state.TypeNode,
                 state.TypeName,
@@ -248,7 +252,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
         private static bool AnyTopLevelTypeMatchesDocumentName(
             State state,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = state.SemanticDocument.Root;
             var semanticModel = state.SemanticDocument.SemanticModel;
 
@@ -285,7 +290,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
             string documentNameWithoutExtension,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // If it is not a nested type, we compare the unqualified type name with the document name.
             // If it is a nested type, the type name `Outer.Inner` matches file names `Inner.cs` and `Outer.Inner.cs`
             var namesMatch = typeName.Equals(
@@ -315,7 +321,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
             string documentNameWithExtension,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var fileExtension = Path.GetExtension(documentNameWithExtension);
 
             var standaloneName = typeName + fileExtension;

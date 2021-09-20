@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             int? minimumLength,
             int maximumLength,
             string field
-        ) {
+        )
+        {
             var attr = new StringLengthAttribute(maximumLength);
             if (minimumLength != null)
             {

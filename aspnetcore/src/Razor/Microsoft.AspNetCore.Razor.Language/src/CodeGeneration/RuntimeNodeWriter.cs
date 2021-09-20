@@ -32,7 +32,8 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
         public override void WriteUsingDirective(
             CodeRenderingContext context,
             UsingDirectiveIntermediateNode node
-        ) {
+        )
+        {
             if (node.Source.HasValue)
             {
                 using (context.CodeWriter.BuildLinePragma(node.Source.Value, context))
@@ -49,7 +50,8 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
         public override void WriteCSharpExpression(
             CodeRenderingContext context,
             CSharpExpressionIntermediateNode node
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -94,7 +96,8 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
         public override void WriteCSharpCode(
             CodeRenderingContext context,
             CSharpCodeIntermediateNode node
-        ) {
+        )
+        {
             var isWhitespaceStatement = true;
             for (var i = 0; i < node.Children.Count; i++)
             {
@@ -142,7 +145,8 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
         public override void WriteHtmlAttribute(
             CodeRenderingContext context,
             HtmlAttributeIntermediateNode node
-        ) {
+        )
+        {
             var valuePieceCount = node.Children.Count(
                 child =>
                     child is HtmlAttributeValueIntermediateNode
@@ -177,7 +181,8 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
         public override void WriteHtmlAttributeValue(
             CodeRenderingContext context,
             HtmlAttributeValueIntermediateNode node
-        ) {
+        )
+        {
             var prefixLocation = node.Source.Value.AbsoluteIndex;
             var valueLocation = node.Source.Value.AbsoluteIndex + node.Prefix.Length;
             var valueLength = node.Source.Value.Length;
@@ -213,7 +218,8 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
         public override void WriteCSharpExpressionAttributeValue(
             CodeRenderingContext context,
             CSharpExpressionAttributeValueIntermediateNode node
-        ) {
+        )
+        {
             using (context.CodeWriter.BuildLinePragma(node.Source.Value, context))
             {
                 var prefixLocation = node.Source.Value.AbsoluteIndex;
@@ -251,7 +257,8 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
         public override void WriteCSharpCodeAttributeValue(
             CodeRenderingContext context,
             CSharpCodeAttributeValueIntermediateNode node
-        ) {
+        )
+        {
             const string ValueWriterName = "__razor_attribute_value_writer";
 
             var prefixLocation = node.Source.Value.AbsoluteIndex;
@@ -328,7 +335,8 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
         public override void WriteHtmlContent(
             CodeRenderingContext context,
             HtmlContentIntermediateNode node
-        ) {
+        )
+        {
             const int MaxStringLiteralLength = 1024;
 
             var builder = new StringBuilder();
@@ -350,7 +358,8 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
             CodeRenderingContext context,
             int maxStringLiteralLength,
             string literal
-        ) {
+        )
+        {
             if (literal.Length <= maxStringLiteralLength)
             {
                 WriteLiteral(literal);

@@ -9,7 +9,8 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
             uint status,
             string? message = null,
             Exception? innerException = null
-        ) {
+        )
+        {
             if (!MsQuicStatusHelper.SuccessfulStatusCode(status))
             {
                 throw CreateExceptionForHResult(status, message, innerException);
@@ -20,7 +21,8 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
             uint status,
             string? message = null,
             Exception? innerException = null
-        ) {
+        )
+        {
             return new QuicException(
                 $"{message} Error Code: {MsQuicStatusCodes.GetError(status)}",
                 innerException

@@ -139,7 +139,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
         private void TestMissingTypeReferencesHelper2(
             AssemblySymbol[] assemblies,
             bool reflectionOnly = false
-        ) {
+        )
+        {
             var module1 = assemblies[0].Modules[0];
             var module2 = assemblies[1].Modules[0];
 

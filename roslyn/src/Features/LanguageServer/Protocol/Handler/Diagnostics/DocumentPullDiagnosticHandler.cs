@@ -93,7 +93,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
             Document document,
             Option2<DiagnosticMode> diagnosticMode,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // For open documents, directly use the IDiagnosticAnalyzerService.  This will use the actual snapshots
             // we're passing in.  If information is already cached for that snapshot, it will be returned.  Otherwise,
             // it will be computed on demand.  Because it is always accurate as per this snapshot, all spans are correct

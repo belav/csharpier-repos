@@ -17,7 +17,8 @@ internal static partial class Interop
             IntPtr icuin,
             ReadOnlySpan<char> version,
             ReadOnlySpan<char> suffix
-        ) {
+        )
+        {
             Debug.Assert(icuuc != IntPtr.Zero);
             Debug.Assert(icuin != IntPtr.Zero);
 

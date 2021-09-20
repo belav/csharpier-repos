@@ -85,7 +85,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 listen.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listen.Listen(1);
 
@@ -140,7 +141,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 listen.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listen.Listen(1);
 
@@ -194,7 +196,8 @@ namespace System.Net.Sockets.Tests
         [InlineData(false)]
         public async Task ExecutionContext_SocketAsyncEventArgs_Ctor_UnsafeSuppressExecutionContextFlow(
             bool suppressed
-        ) {
+        )
+        {
             await ExecutionContext_SocketAsyncEventArgs_Ctors(
                 () => new SocketAsyncEventArgs(suppressed),
                 suppressed
@@ -204,7 +207,8 @@ namespace System.Net.Sockets.Tests
         private async Task ExecutionContext_SocketAsyncEventArgs_Ctors(
             Func<SocketAsyncEventArgs> saeaFactory,
             bool suppressed
-        ) {
+        )
+        {
             using (
                 var listen = new Socket(
                     AddressFamily.InterNetwork,
@@ -218,7 +222,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 listen.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listen.Listen(1);
 
@@ -451,7 +456,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 listen.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listen.Listen(1);
 
@@ -513,7 +519,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 listen.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 using (var connectSaea = new SocketAsyncEventArgs())
                 {
@@ -547,7 +554,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 listen.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 using (var connectSaea = new SocketAsyncEventArgs())
                 {
@@ -591,7 +599,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 listen.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listen.Listen(1);
 
@@ -651,7 +660,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 listen.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listen.Listen(1);
 
@@ -735,7 +745,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 int port = server.BindToAnonymousPort(IPAddress.Loopback);
                 server.Listen(1);
 
@@ -759,7 +770,8 @@ namespace System.Net.Sockets.Tests
                         SocketType.Stream,
                         ProtocolType.Tcp
                     )
-                ) {
+                )
+                {
                     client.Connect(IPAddress.Loopback, port);
                     client.Send(sendBuffer);
                     client.Shutdown(SocketShutdown.Both);
@@ -792,7 +804,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 int port = server.BindToAnonymousPort(IPAddress.Loopback);
                 server.Listen(1);
 
@@ -823,7 +836,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 int port = server.BindToAnonymousPort(IPAddress.Loopback);
                 server.Listen(1);
 
@@ -849,7 +863,8 @@ namespace System.Net.Sockets.Tests
                     new DnsEndPoint("::0", 80),
                     new DnsEndPoint("0.0.0.0", 80)
                 }
-            ) {
+            )
+            {
                 e.RemoteEndPoint = dns;
 
                 AssertExtensions.Throws<ArgumentException>(
@@ -862,7 +877,8 @@ namespace System.Net.Sockets.Tests
                         SocketType.Stream,
                         ProtocolType.Tcp
                     )
-                ) {
+                )
+                {
                     AssertExtensions.Throws<ArgumentException>(
                         "hostName",
                         () => client.ConnectAsync(e)
@@ -876,7 +892,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listener.Listen(1);
                 e.RemoteEndPoint = listener.LocalEndPoint;
@@ -1118,7 +1135,8 @@ namespace System.Net.Sockets.Tests
                                 SocketType.Stream,
                                 ProtocolType.Tcp
                             )
-                        ) {
+                        )
+                        {
                             listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                             listener.Listen(1);
 
@@ -1128,7 +1146,8 @@ namespace System.Net.Sockets.Tests
                                     SocketType.Stream,
                                     ProtocolType.Tcp
                                 )
-                            ) {
+                            )
+                            {
                                 saea.RemoteEndPoint = listener.LocalEndPoint;
                                 using (var mres = new ManualResetEventSlim())
                                 {

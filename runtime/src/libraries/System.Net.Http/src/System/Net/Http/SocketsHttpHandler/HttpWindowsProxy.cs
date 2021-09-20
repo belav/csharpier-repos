@@ -101,7 +101,8 @@ namespace System.Net.Http
                         while (
                             idx < proxyHelper.ProxyBypass.Length
                             && proxyHelper.ProxyBypass[idx] == ' '
-                        ) {
+                        )
+                        {
                             idx += 1;
                         }
                         ;
@@ -114,7 +115,8 @@ namespace System.Net.Http
                                 7,
                                 StringComparison.OrdinalIgnoreCase
                             ) == 0
-                        ) {
+                        )
+                        {
                             idx += 7;
                         }
                         else if (
@@ -126,14 +128,16 @@ namespace System.Net.Http
                                 8,
                                 StringComparison.OrdinalIgnoreCase
                             ) == 0
-                        ) {
+                        )
+                        {
                             idx += 8;
                         }
 
                         if (
                             idx < proxyHelper.ProxyBypass.Length
                             && proxyHelper.ProxyBypass[idx] == '['
-                        ) {
+                        )
+                        {
                             // Strip [] from IPv6 so we can use IdnHost laster for matching.
                             idx += 1;
                         }
@@ -144,7 +148,8 @@ namespace System.Net.Http
                             && proxyHelper.ProxyBypass[idx] != ' '
                             && proxyHelper.ProxyBypass[idx] != ';'
                             && proxyHelper.ProxyBypass[idx] != ']'
-                        ) {
+                        )
+                        {
                             idx += 1;
                         }
                         ;
@@ -163,7 +168,8 @@ namespace System.Net.Http
                                 7,
                                 StringComparison.OrdinalIgnoreCase
                             ) == 0
-                        ) {
+                        )
+                        {
                             _bypassLocal = true;
                             tmp = null;
                         }
@@ -176,12 +182,14 @@ namespace System.Net.Http
                         if (
                             idx < proxyHelper.ProxyBypass.Length
                             && proxyHelper.ProxyBypass[idx] != ';'
-                        ) {
+                        )
+                        {
                             // Got stopped at space or ']'. Strip until next ';' or end.
                             while (
                                 idx < proxyHelper.ProxyBypass.Length
                                 && proxyHelper.ProxyBypass[idx] != ';'
-                            ) {
+                            )
+                            {
                                 idx += 1;
                             }
                             ;
@@ -189,7 +197,8 @@ namespace System.Net.Http
                         if (
                             idx < proxyHelper.ProxyBypass.Length
                             && proxyHelper.ProxyBypass[idx] == ';'
-                        ) {
+                        )
+                        {
                             idx++;
                         }
                         if (tmp == null)
@@ -211,7 +220,8 @@ namespace System.Net.Http
                     _localIp = new List<IPAddress>();
                     foreach (
                         NetworkInterface netInterface in NetworkInterface.GetAllNetworkInterfaces()
-                    ) {
+                    )
+                    {
                         IPInterfaceProperties ipProps = netInterface.GetIPProperties();
                         foreach (UnicastIPAddressInformation addr in ipProps.UnicastAddresses)
                         {
@@ -320,7 +330,8 @@ namespace System.Net.Http
                     if (
                         uri.HostNameType == UriHostNameType.IPv6
                         || uri.HostNameType == UriHostNameType.IPv4
-                    ) {
+                    )
+                    {
                         // RFC1123 allows labels to start with number.
                         // Leading number may or may not be IP address.
                         // IPv6 [::1] notation. '[' is not valid character in names.

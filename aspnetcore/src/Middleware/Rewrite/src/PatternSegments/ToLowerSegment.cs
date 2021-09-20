@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.Rewrite.PatternSegments
             RewriteContext context,
             BackReferenceCollection? ruleBackReferences,
             BackReferenceCollection? conditionBackReferences
-        ) {
+        )
+        {
             // PERF as we share the string builder across the context, we need to make a new one here to evaluate
             // lowercase segments.
             var tempBuilder = context.Builder;

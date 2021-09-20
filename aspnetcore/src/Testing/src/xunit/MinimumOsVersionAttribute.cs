@@ -22,11 +22,13 @@ namespace Microsoft.AspNetCore.Testing
         private readonly Version _currentVersion;
         private readonly bool _skip;
 
-        public MinimumOSVersionAttribute(
-            OperatingSystems operatingSystem,
-            string minVersion
-        ) : this(operatingSystem, Version.Parse(minVersion), GetCurrentOS(), GetCurrentOSVersion())
-        { }
+        public MinimumOSVersionAttribute(OperatingSystems operatingSystem, string minVersion)
+            : this(
+                operatingSystem,
+                Version.Parse(minVersion),
+                GetCurrentOS(),
+                GetCurrentOSVersion()
+            ) { }
 
         // to enable unit testing
         internal MinimumOSVersionAttribute(
@@ -34,7 +36,8 @@ namespace Microsoft.AspNetCore.Testing
             Version minVersion,
             OperatingSystems currentOS,
             Version currentVersion
-        ) {
+        )
+        {
             if (targetOS != OperatingSystems.Windows)
             {
                 throw new NotImplementedException(

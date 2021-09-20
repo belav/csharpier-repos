@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.Authentication.AzureAD.UI
         public AzureADOpenIdConnectOptionsConfiguration(
             IOptions<AzureADSchemeOptions> schemeOptions,
             IOptionsMonitor<AzureADOptions> azureADOptions
-        ) {
+        )
+        {
             _schemeOptions = schemeOptions;
             _azureADOptions = azureADOptions;
         }

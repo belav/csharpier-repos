@@ -137,7 +137,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 string message,
                 TState state,
                 Exception exception
-            ) {
+            )
+            {
                 if (eventId.Id == CosmosEventId.ExecutingSqlQuery)
                 {
                     if (_shouldLogCommands)

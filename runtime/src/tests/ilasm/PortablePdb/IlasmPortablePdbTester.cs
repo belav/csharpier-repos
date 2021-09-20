@@ -67,7 +67,8 @@ namespace IlasmPortablePdbTests
                                 peReader,
                                 false
                             )
-                    ) {
+                    )
+                    {
                         var portablePdbMdReader = pdbReaderProvider.GetMetadataReader();
                         Assert.NotNull(portablePdbMdReader);
                         // check pdb stream
@@ -128,7 +129,8 @@ namespace IlasmPortablePdbTests
                                 peReader,
                                 false
                             )
-                    ) {
+                    )
+                    {
                         var portablePdbMdReader = pdbReaderProvider.GetMetadataReader();
                         Assert.NotNull(portablePdbMdReader);
                         Assert.Equal(expected.Count, portablePdbMdReader.Documents.Count);
@@ -177,7 +179,8 @@ namespace IlasmPortablePdbTests
                                 peReader,
                                 false
                             )
-                    ) {
+                    )
+                    {
                         var portablePdbMdReader = pdbReaderProvider.GetMetadataReader();
                         Assert.NotNull(portablePdbMdReader);
                         Assert.Equal(
@@ -224,7 +227,8 @@ namespace IlasmPortablePdbTests
                                 peReader,
                                 false
                             )
-                    ) {
+                    )
+                    {
                         var portablePdbMdReader = pdbReaderProvider.GetMetadataReader();
                         Assert.NotNull(portablePdbMdReader);
 
@@ -255,7 +259,8 @@ namespace IlasmPortablePdbTests
                             int i = 0;
                             foreach (
                                 var sequencePoint in methodDebugInformation.GetSequencePoints()
-                            ) {
+                            )
+                            {
                                 var sequencePointDocument = portablePdbMdReader.GetDocument(
                                     sequencePoint.Document
                                 );
@@ -333,7 +338,8 @@ namespace IlasmPortablePdbTests
                                 peReader,
                                 false
                             )
-                    ) {
+                    )
+                    {
                         var portablePdbMdReader = pdbReaderProvider.GetMetadataReader();
                         Assert.NotNull(portablePdbMdReader);
 

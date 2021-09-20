@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             bool hideAdvancedMembers,
             Compilation compilation,
             EditorBrowsableInfo editorBrowsableInfo = default
-        ) {
+        )
+        {
             return IsEditorBrowsableWithState(
                 symbol,
                 hideAdvancedMembers,
@@ -64,7 +65,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             bool hideAdvancedMembers,
             Compilation compilation,
             EditorBrowsableInfo editorBrowsableInfo = default
-        ) {
+        )
+        {
             // Namespaces can't have attributes, so just return true here.  This also saves us a
             // costly check if this namespace has any locations in source (since a merged namespace
             // needs to go collect all the locations).
@@ -114,7 +116,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             ISymbol symbol,
             bool hideAdvancedMembers,
             EditorBrowsableInfo editorBrowsableInfo
-        ) {
+        )
+        {
             var attributes = symbol.GetAttributes();
             if (attributes.Length == 0)
             {
@@ -157,7 +160,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             ISymbol symbol,
             INamedTypeSymbol? hideModuleNameAttribute,
             ImmutableArray<AttributeData> attributes = default
-        ) {
+        )
+        {
             if (hideModuleNameAttribute == null || !symbol.IsModuleType())
             {
                 return false;
@@ -180,7 +184,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             ImmutableArray<AttributeData> attributes,
             bool hideAdvancedMembers,
             IMethodSymbol? constructor
-        ) {
+        )
+        {
             if (constructor == null)
             {
                 return (isProhibited: false, isEditorBrowsableStateAdvanced: false);
@@ -192,7 +197,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     Equals(attribute.AttributeConstructor, constructor)
                     && attribute.ConstructorArguments.Length == 1
                     && attribute.ConstructorArguments.First().Value is int
-                ) {
+                )
+                {
 #nullable disable // Should use unboxed value from previous 'is int' https://github.com/dotnet/roslyn/issues/39166
                     var state = (EditorBrowsableState)attribute.ConstructorArguments.First().Value;
 #nullable enable
@@ -218,7 +224,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         private static bool IsBrowsingProhibitedByTypeLibTypeAttribute(
             ImmutableArray<AttributeData> attributes,
             ImmutableArray<IMethodSymbol> constructors
-        ) {
+        )
+        {
             return IsBrowsingProhibitedByTypeLibAttributeWorker(
                 attributes,
                 constructors,
@@ -229,7 +236,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         private static bool IsBrowsingProhibitedByTypeLibFuncAttribute(
             ImmutableArray<AttributeData> attributes,
             ImmutableArray<IMethodSymbol> constructors
-        ) {
+        )
+        {
             return IsBrowsingProhibitedByTypeLibAttributeWorker(
                 attributes,
                 constructors,
@@ -240,7 +248,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         private static bool IsBrowsingProhibitedByTypeLibVarAttribute(
             ImmutableArray<AttributeData> attributes,
             ImmutableArray<IMethodSymbol> constructors
-        ) {
+        )
+        {
             return IsBrowsingProhibitedByTypeLibAttributeWorker(
                 attributes,
                 constructors,
@@ -256,7 +265,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             ImmutableArray<AttributeData> attributes,
             ImmutableArray<IMethodSymbol> attributeConstructors,
             int hiddenFlag
-        ) {
+        )
+        {
             foreach (var attribute in attributes)
             {
                 if (attribute.ConstructorArguments.Length == 1)
@@ -320,7 +330,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             bool expandIncludes,
             bool expandInheritdoc,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var xmlText = symbol.GetDocumentationCommentXml(
                 preferredCulture,
                 expandIncludes,
@@ -403,7 +414,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             Compilation compilation,
             XNode node,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (node.NodeType == XmlNodeType.Element)
             {
                 var element = (XElement)node;
@@ -457,7 +469,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             Compilation compilation,
             XNode[] nodes,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var result = new List<XNode>();
             foreach (var child in nodes)
             {
@@ -481,7 +494,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             Compilation compilation,
             XElement element,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var crefAttribute = element.Attribute(
                 XName.Get(DocumentationCommentXmlNames.CrefAttributeName)
             );
@@ -613,7 +627,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     if (
                         methodSymbol.MethodKind == MethodKind.Constructor
                         || methodSymbol.MethodKind == MethodKind.StaticConstructor
-                    ) {
+                    )
+                    {
                         var baseType = memberSymbol.ContainingType.BaseType;
 #nullable disable // Can 'baseType' be null here? https://github.com/dotnet/roslyn/issues/39166
                         return baseType.Constructors.Where(c => IsSameSignature(methodSymbol, c))

@@ -2231,7 +2231,8 @@ namespace System.Security.Cryptography.Rsa.Tests
                         TestData.RSA1024Params,
                         TestData.RSA2048Params
                     }
-                ) {
+                )
+                {
                     yield return new object[] { nameof(HashAlgorithmName.MD5), rsaParameters };
                     yield return new object[] { nameof(HashAlgorithmName.SHA1), rsaParameters };
                     yield return new object[] { nameof(HashAlgorithmName.SHA256), rsaParameters };
@@ -3959,7 +3960,8 @@ namespace System.Security.Cryptography.Rsa.Tests
             byte[] data,
             byte[] signature,
             [System.Runtime.CompilerServices.CallerMemberName] string callerName = null
-        ) {
+        )
+        {
             RSAParameters publicParameters = new RSAParameters
             {
                 Modulus = keyParameters.Modulus,
@@ -4122,7 +4124,8 @@ namespace System.Security.Cryptography.Rsa.Tests
             byte[] data,
             string hashAlgorithmName,
             RSAParameters rsaParameters
-        ) {
+        )
+        {
             // RSA signatures use PKCS 1.5 EMSA encoding (encoding method, signature algorithm).
             // EMSA specifies a fixed filler type of { 0x01, 0xFF, 0xFF ... 0xFF, 0x00 } whose length
             // is as long as it needs to be to match the block size.  Since the filler is deterministic,
@@ -4148,7 +4151,8 @@ namespace System.Security.Cryptography.Rsa.Tests
             byte[] dataHash,
             string hashAlgorithmName,
             RSAParameters rsaParameters
-        ) {
+        )
+        {
             // RSA signatures use PKCS 1.5 EMSA encoding (encoding method, signature algorithm).
             // EMSA specifies a fixed filler type of { 0x01, 0xFF, 0xFF ... 0xFF, 0x00 } whose length
             // is as long as it needs to be to match the block size.  Since the filler is deterministic,
@@ -4174,7 +4178,8 @@ namespace System.Security.Cryptography.Rsa.Tests
             byte[] data,
             string hashAlgorithmName,
             RSAParameters rsaParameters
-        ) {
+        )
+        {
             RSAParameters publicOnly = new RSAParameters
             {
                 Modulus = rsaParameters.Modulus,
@@ -4203,7 +4208,8 @@ namespace System.Security.Cryptography.Rsa.Tests
             byte[] dataHash,
             string hashAlgorithmName,
             RSAParameters rsaParameters
-        ) {
+        )
+        {
             RSAParameters publicOnly = new RSAParameters
             {
                 Modulus = rsaParameters.Modulus,
@@ -4231,7 +4237,8 @@ namespace System.Security.Cryptography.Rsa.Tests
             byte[] data,
             string hashAlgorithmName,
             RSAParameters rsaParameters
-        ) {
+        )
+        {
             using (RSA rsa = RSAFactory.Create())
             {
                 rsa.ImportParameters(rsaParameters);

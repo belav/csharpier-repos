@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
         public LoggingMultiplexedConnectionMiddleware(
             MultiplexedConnectionDelegate multiplexedNext,
             ILogger logger
-        ) {
+        )
+        {
             _multiplexedNext =
                 multiplexedNext ?? throw new ArgumentNullException(nameof(multiplexedNext));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
@@ -46,7 +47,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
             public LoggingMultiplexedConnectionContext(
                 MultiplexedConnectionContext inner,
                 ILogger logger
-            ) {
+            )
+            {
                 _inner = inner;
                 _logger = logger;
             }
@@ -75,7 +77,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
 
             public override async ValueTask<ConnectionContext?> AcceptAsync(
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 var context = await _inner.AcceptAsync(cancellationToken);
                 if (context != null)
                 {
@@ -87,7 +90,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
             public override async ValueTask<ConnectionContext> ConnectAsync(
                 IFeatureCollection? features = null,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 var context = await _inner.ConnectAsync(features, cancellationToken);
                 context = new LoggingConnectionContext(context, _logger);
                 return context;

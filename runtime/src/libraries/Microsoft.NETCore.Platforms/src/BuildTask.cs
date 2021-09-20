@@ -52,7 +52,8 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
             LogImportance importance,
             string message,
             params object[] messageArgs
-        ) {
+        )
+        {
             _logger.LogMessage((MessageImportance)importance, message, messageArgs);
         }
 

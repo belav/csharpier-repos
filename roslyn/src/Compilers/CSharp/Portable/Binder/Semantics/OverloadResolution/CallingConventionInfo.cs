@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public CallingConventionInfo(
             Cci.CallingConvention callKind,
             ImmutableHashSet<CustomModifier> unmanagedCallingConventionTypes
-        ) {
+        )
+        {
             Debug.Assert(
                 unmanagedCallingConventionTypes.IsEmpty
                     || callKind == Cci.CallingConvention.Unmanaged

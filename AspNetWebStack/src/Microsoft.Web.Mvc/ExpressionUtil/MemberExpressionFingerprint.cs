@@ -20,11 +20,8 @@ namespace Microsoft.Web.Mvc.ExpressionUtil
     )]
     internal sealed class MemberExpressionFingerprint : ExpressionFingerprint
     {
-        public MemberExpressionFingerprint(
-            ExpressionType nodeType,
-            Type type,
-            MemberInfo member
-        ) : base(nodeType, type)
+        public MemberExpressionFingerprint(ExpressionType nodeType, Type type, MemberInfo member)
+            : base(nodeType, type)
         {
             Member = member;
         }

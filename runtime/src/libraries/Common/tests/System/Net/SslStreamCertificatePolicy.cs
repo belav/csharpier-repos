@@ -13,7 +13,8 @@ namespace System.Net.Security.Tests
 
         public SslStreamCertificatePolicy(
             SslPolicyErrors ignoredPolicyErrors = (SslPolicyErrors)0xFFFF
-        ) {
+        )
+        {
             _ignoredPolicyErrors = ignoredPolicyErrors;
         }
 
@@ -22,7 +23,8 @@ namespace System.Net.Security.Tests
             X509Certificate certificate,
             X509Chain chain,
             SslPolicyErrors sslPolicyErrors
-        ) {
+        )
+        {
             if ((sslPolicyErrors | _ignoredPolicyErrors) == _ignoredPolicyErrors)
             {
                 return true;

@@ -37,7 +37,8 @@ namespace System.IO.Tests
         public static (AutoResetEvent EventOccured, FileSystemEventHandler Handler) WatchChanged(
             FileSystemWatcher watcher,
             string[] expectedPaths = null
-        ) {
+        )
+        {
             AutoResetEvent eventOccurred = new AutoResetEvent(false);
 
             FileSystemEventHandler changeHandler = (o, e) =>
@@ -62,7 +63,8 @@ namespace System.IO.Tests
             FileSystemWatcher watcher,
             string[] expectedPaths = null,
             ITestOutputHelper _output = null
-        ) {
+        )
+        {
             AutoResetEvent eventOccurred = new AutoResetEvent(false);
 
             FileSystemEventHandler handler = (o, e) =>
@@ -106,7 +108,8 @@ namespace System.IO.Tests
             FileSystemWatcher watcher,
             string[] expectedPaths = null,
             ITestOutputHelper _output = null
-        ) {
+        )
+        {
             AutoResetEvent eventOccurred = new AutoResetEvent(false);
             FileSystemEventHandler handler = (o, e) =>
             {
@@ -147,7 +150,8 @@ namespace System.IO.Tests
             FileSystemWatcher watcher,
             string[] expectedPaths = null,
             ITestOutputHelper _output = null
-        ) {
+        )
+        {
             AutoResetEvent eventOccurred = new AutoResetEvent(false);
 
             RenamedEventHandler handler = (o, e) =>
@@ -207,7 +211,8 @@ namespace System.IO.Tests
             WatcherChangeTypes expectedEvents,
             Action action,
             Action cleanup = null
-        ) {
+        )
+        {
             ExpectEvent(watcher, expectedEvents, action, cleanup, (string[])null);
         }
 
@@ -229,7 +234,8 @@ namespace System.IO.Tests
             string expectedPath = null,
             int attempts = DefaultAttemptsForExpectedEvent,
             int timeout = WaitForExpectedEventTimeout
-        ) {
+        )
+        {
             ExpectEvent(
                 watcher,
                 expectedEvents,
@@ -259,7 +265,8 @@ namespace System.IO.Tests
             string[] expectedPaths = null,
             int attempts = DefaultAttemptsForExpectedEvent,
             int timeout = WaitForExpectedEventTimeout
-        ) {
+        )
+        {
             int attemptsCompleted = 0;
             bool result = false;
             FileSystemWatcher newWatcher = watcher;
@@ -295,7 +302,8 @@ namespace System.IO.Tests
         public static void ExecuteWithRetry(
             Action action,
             int maxAttempts = DefaultAttemptsForExpectedEvent
-        ) {
+        )
+        {
             for (int retry = 0; retry < maxAttempts; retry++)
             {
                 try
@@ -326,7 +334,8 @@ namespace System.IO.Tests
             Action cleanup = null,
             string expectedPath = null,
             int timeout = WaitForExpectedEventTimeout
-        ) {
+        )
+        {
             bool result = ExecuteAndVerifyEvents(
                 watcher,
                 unExpectedEvents,
@@ -357,7 +366,8 @@ namespace System.IO.Tests
             bool assertExpected,
             string[] expectedPaths,
             int timeout
-        ) {
+        )
+        {
             bool result = true,
                 verifyChanged = true,
                 verifyCreated = true,
@@ -460,7 +470,8 @@ namespace System.IO.Tests
             Action action,
             Action cleanup,
             int attempts = DefaultAttemptsForExpectedEvent
-        ) {
+        )
+        {
             string message = string.Format(
                 "Did not observe an error event within {0}ms and {1} attempts.",
                 WaitForExpectedEventTimeout,
@@ -481,7 +492,8 @@ namespace System.IO.Tests
             Action action,
             Action cleanup,
             int attempts = DefaultAttemptsForUnExpectedEvent
-        ) {
+        )
+        {
             string message = string.Format(
                 "Should not observe an error event within {0}ms. Attempted {1} times and received the event each time.",
                 WaitForExpectedEventTimeout,
@@ -508,7 +520,8 @@ namespace System.IO.Tests
             Action cleanup,
             int attempts,
             bool expected
-        ) {
+        )
+        {
             int attemptsCompleted = 0;
             bool result = !expected;
             while (result != expected && attemptsCompleted++ < attempts)
@@ -715,7 +728,8 @@ namespace System.IO.Tests
             FileSystemWatcher watcher,
             int expectedEvents,
             Action action
-        ) {
+        )
+        {
             using var eventsOccured = new AutoResetEvent(false);
             var eventsOrrures = 0;
 

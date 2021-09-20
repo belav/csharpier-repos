@@ -28,7 +28,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
             [InlineData("Not Json")]
             public Task StartThrowsFormatExceptionIfNegotiationResponseIsInvalid(
                 string negotiatePayload
-            ) {
+            )
+            {
                 return RunInvalidNegotiateResponseTest<InvalidDataException>(
                     negotiatePayload,
                     "Invalid negotiation response received."
@@ -101,7 +102,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
             public async Task CorrectlyHandlesQueryStringWhenAppendingNegotiateToUrl(
                 string requestedUrl,
                 string expectedNegotiate
-            ) {
+            )
+            {
                 var testHttpHandler = new TestHttpMessageHandler(autoNegotiate: false);
 
                 var negotiateUrlTcs = new TaskCompletionSource<string>();
@@ -870,7 +872,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
 
                 using (
                     var noErrorScope = new VerifyNoErrorsScope(expectedErrorsFilter: ExpectedError)
-                ) {
+                )
+                {
                     await WithConnectionAsync(
                         CreateConnection(
                             testHttpHandler,

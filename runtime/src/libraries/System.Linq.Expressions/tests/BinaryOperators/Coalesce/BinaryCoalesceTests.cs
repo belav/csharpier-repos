@@ -637,7 +637,8 @@ namespace System.Linq.Expressions.Tests
             Array array1,
             Array array2,
             bool useInterpreter
-        ) {
+        )
+        {
             Type type1 = array1.GetType().GetElementType();
             for (int i = 0; i < array1.Length; i++)
             {
@@ -679,28 +680,32 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckGenericCustomWithSubClassRestrictionCoalesceTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckGenericWithSubClassRestrictionCoalesceHelper<C>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckGenericCustomWithClassAndNewRestrictionCoalesceTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckGenericWithClassAndNewRestrictionCoalesceHelper<C>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckGenericObjectWithClassAndNewRestrictionCoalesceTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckGenericWithClassAndNewRestrictionCoalesceHelper<object>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckGenericCustomWithSubClassAndNewRestrictionCoalesceTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckGenericWithSubClassAndNewRestrictionCoalesceHelper<C>(useInterpreter);
         }
 
@@ -719,7 +724,8 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckGenericStructWithStringAndFieldWithStructRestrictionCoalesceTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckGenericWithStructRestrictionCoalesceHelper<Scs>(useInterpreter);
         }
 
@@ -800,21 +806,24 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckGenericEnumWithStructRestrictionCoalesce_NullableTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckGenericWithStructRestrictionCoalesce_NullableHelper<E>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckGenericStructWithStructRestrictionCoalesce_NullableTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckGenericWithStructRestrictionCoalesce_NullableHelper<S>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckGenericStructWithStringAndFieldWithStructRestrictionCoalesce_NullableTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckGenericWithStructRestrictionCoalesce_NullableHelper<Scs>(useInterpreter);
         }
 
@@ -839,7 +848,8 @@ namespace System.Linq.Expressions.Tests
             Type type2,
             bool useInterpreter,
             object expected = null
-        ) {
+        )
+        {
             BinaryExpression expression = Expression.Coalesce(
                 Expression.Constant(obj1, type1),
                 Expression.Constant(obj2, type2)
@@ -957,7 +967,8 @@ namespace System.Linq.Expressions.Tests
             int? parameter,
             int? expected,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<int?, int?>> conversion = x => x * 2;
             ParameterExpression parameterExpression = Expression.Parameter(typeof(int?));
             BinaryExpression coalescion = Expression.Coalesce(

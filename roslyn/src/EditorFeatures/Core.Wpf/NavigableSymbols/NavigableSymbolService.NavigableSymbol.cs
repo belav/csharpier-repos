@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.Editor.NavigableSymbols
                 IThreadingContext threadingContext,
                 IStreamingFindUsagesPresenter streamingPresenter,
                 IWaitIndicator waitIndicator
-            ) {
+            )
+            {
                 Contract.ThrowIfFalse(definitions.Length > 0);
 
                 _definitions = definitions;

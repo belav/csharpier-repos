@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.Testing
             TState state,
             Exception exception,
             Func<TState, Exception, string> formatter
-        ) {
+        )
+        {
             _messages.Add(formatter(state, exception));
         }
 

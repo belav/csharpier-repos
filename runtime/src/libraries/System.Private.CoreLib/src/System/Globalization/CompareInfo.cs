@@ -343,7 +343,8 @@ namespace System.Globalization
             string? string2,
             int offset2,
             int length2
-        ) {
+        )
+        {
             return Compare(
                 string1,
                 offset1,
@@ -361,7 +362,8 @@ namespace System.Globalization
             string? string2,
             int offset2,
             CompareOptions options
-        ) {
+        )
+        {
             return Compare(
                 string1,
                 offset1,
@@ -386,7 +388,8 @@ namespace System.Globalization
             int offset2,
             int length2,
             CompareOptions options
-        ) {
+        )
+        {
             ReadOnlySpan<char> span1 = default;
             ReadOnlySpan<char> span2 = default;
 
@@ -502,7 +505,8 @@ namespace System.Globalization
             ReadOnlySpan<char> string1,
             ReadOnlySpan<char> string2,
             CompareOptions options = CompareOptions.None
-        ) {
+        )
+        {
             if (string1 == string2) // referential equality + length
             {
                 CheckCompareOptionsForCompare(options);
@@ -571,7 +575,8 @@ namespace System.Globalization
             {
                 if (
                     options != CompareOptions.Ordinal && options != CompareOptions.OrdinalIgnoreCase
-                ) {
+                )
+                {
                     ThrowCompareOptionsCheckFailed(options);
                 }
             }
@@ -633,7 +638,8 @@ namespace System.Globalization
             ReadOnlySpan<char> source,
             ReadOnlySpan<char> prefix,
             CompareOptions options = CompareOptions.None
-        ) {
+        )
+        {
             // The empty string is trivially a prefix of every other string. For compat with
             // earlier versions of the Framework we'll early-exit here before validating the
             // 'options' argument.
@@ -709,14 +715,16 @@ namespace System.Globalization
             ReadOnlySpan<char> prefix,
             CompareOptions options,
             out int matchLength
-        ) {
+        )
+        {
             bool matched;
 
             if (
                 GlobalizationMode.Invariant
                 || prefix.IsEmpty
                 || (options & ValidIndexMaskOffFlags) != 0
-            ) {
+            )
+            {
                 // Non-linguistic (ordinal) comparison requested, or options are invalid.
                 // Delegate to other overload, which validates options and throws on failure.
                 // If success, non-linguistic matches will always preserve prefix length.
@@ -786,7 +794,8 @@ namespace System.Globalization
             ReadOnlySpan<char> source,
             ReadOnlySpan<char> suffix,
             CompareOptions options = CompareOptions.None
-        ) {
+        )
+        {
             // The empty string is trivially a suffix of every other string. For compat with
             // earlier versions of the Framework we'll early-exit here before validating the
             // 'options' argument.
@@ -862,14 +871,16 @@ namespace System.Globalization
             ReadOnlySpan<char> suffix,
             CompareOptions options,
             out int matchLength
-        ) {
+        )
+        {
             bool matched;
 
             if (
                 GlobalizationMode.Invariant
                 || suffix.IsEmpty
                 || (options & ValidIndexMaskOffFlags) != 0
-            ) {
+            )
+            {
                 // Non-linguistic (ordinal) comparison requested, or options are invalid.
                 // Delegate to other overload, which validates options and throws on failure.
                 // If success, non-linguistic matches will always preserve prefix length.
@@ -992,7 +1003,8 @@ namespace System.Globalization
             int startIndex,
             int count,
             CompareOptions options
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -1037,7 +1049,8 @@ namespace System.Globalization
             int startIndex,
             int count,
             CompareOptions options
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -1093,7 +1106,8 @@ namespace System.Globalization
             ReadOnlySpan<char> source,
             ReadOnlySpan<char> value,
             CompareOptions options = CompareOptions.None
-        ) {
+        )
+        {
             if ((options & ValidIndexMaskOffFlags) == 0)
             {
                 // Common case: caller is attempting to perform a linguistic search.
@@ -1176,7 +1190,8 @@ namespace System.Globalization
             ReadOnlySpan<char> value,
             CompareOptions options,
             out int matchLength
-        ) {
+        )
+        {
             int tempMatchLength;
             int retVal = IndexOf(source, value, &tempMatchLength, options, fromBeginning: true);
             matchLength = tempMatchLength;
@@ -1200,7 +1215,8 @@ namespace System.Globalization
             ReadOnlySpan<char> source,
             Rune value,
             CompareOptions options = CompareOptions.None
-        ) {
+        )
+        {
             Span<char> valueAsUtf16 = stackalloc char[Rune.MaxUtf16CharsPerRune];
             int charCount = value.EncodeToUtf16(valueAsUtf16);
             return IndexOf(source, valueAsUtf16.Slice(0, charCount), options);
@@ -1217,7 +1233,8 @@ namespace System.Globalization
             int* matchLengthPtr,
             CompareOptions options,
             bool fromBeginning
-        ) {
+        )
+        {
             Debug.Assert(matchLengthPtr != null);
             *matchLengthPtr = 0;
 
@@ -1377,7 +1394,8 @@ namespace System.Globalization
             int startIndex,
             int count,
             CompareOptions options
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -1445,7 +1463,8 @@ namespace System.Globalization
             int startIndex,
             int count,
             CompareOptions options
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -1524,7 +1543,8 @@ namespace System.Globalization
             ReadOnlySpan<char> source,
             ReadOnlySpan<char> value,
             CompareOptions options = CompareOptions.None
-        ) {
+        )
+        {
             if ((options & ValidIndexMaskOffFlags) == 0)
             {
                 // Common case: caller is attempting to perform a linguistic search.
@@ -1605,7 +1625,8 @@ namespace System.Globalization
             ReadOnlySpan<char> value,
             CompareOptions options,
             out int matchLength
-        ) {
+        )
+        {
             int tempMatchLength;
             int retVal = IndexOf(source, value, &tempMatchLength, options, fromBeginning: false);
             matchLength = tempMatchLength;
@@ -1629,7 +1650,8 @@ namespace System.Globalization
             ReadOnlySpan<char> source,
             Rune value,
             CompareOptions options = CompareOptions.None
-        ) {
+        )
+        {
             Span<char> valueAsUtf16 = stackalloc char[Rune.MaxUtf16CharsPerRune];
             int charCount = value.EncodeToUtf16(valueAsUtf16);
             return LastIndexOf(source, valueAsUtf16.Slice(0, charCount), options);
@@ -1684,7 +1706,8 @@ namespace System.Globalization
             ReadOnlySpan<char> source,
             Span<byte> destination,
             CompareOptions options = CompareOptions.None
-        ) {
+        )
+        {
             if ((options & ValidCompareMaskOffFlags) != 0)
             {
                 ThrowHelper.ThrowArgumentException(
@@ -1726,7 +1749,8 @@ namespace System.Globalization
         public int GetSortKeyLength(
             ReadOnlySpan<char> source,
             CompareOptions options = CompareOptions.None
-        ) {
+        )
+        {
             if ((options & ValidCompareMaskOffFlags) != 0)
             {
                 ThrowHelper.ThrowArgumentException(

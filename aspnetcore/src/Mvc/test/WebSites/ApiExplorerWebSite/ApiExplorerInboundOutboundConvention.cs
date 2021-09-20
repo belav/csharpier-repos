@@ -33,7 +33,8 @@ namespace ApiExplorerWebSite
                             == nameof(
                                 ApiExplorerInboundOutBoundController.SuppressedForPathMatching
                             )
-                        ) {
+                        )
+                        {
                             action.Selectors[0].AttributeRouteModel.SuppressPathMatching = true;
                         }
                         else if (
@@ -41,7 +42,8 @@ namespace ApiExplorerWebSite
                             == nameof(
                                 ApiExplorerInboundOutBoundController.SuppressedForLinkGeneration
                             )
-                        ) {
+                        )
+                        {
                             action.Selectors[0].AttributeRouteModel.SuppressLinkGeneration = true;
                         }
                     }

@@ -77,7 +77,8 @@ namespace System.Drawing.Drawing2D.Tests
             float dy,
             bool isIdentity,
             bool isInvertible
-        ) {
+        )
+        {
             using (var matrix = new Matrix(m11, m12, m21, m22, dx, dy))
             {
                 Assert.Equal(new float[] { m11, m12, m21, m22, dx, dy }, matrix.Elements);
@@ -160,7 +161,8 @@ namespace System.Drawing.Drawing2D.Tests
             float[] expectedElements,
             bool isIdentity,
             bool isInvertible
-        ) {
+        )
+        {
             using (var matrix = new Matrix(rect, plgpnts))
             {
                 Assert.Equal(expectedElements, matrix.Elements);
@@ -179,7 +181,8 @@ namespace System.Drawing.Drawing2D.Tests
             float[] expectedElements,
             bool isIdentity,
             bool isInvertible
-        ) {
+        )
+        {
             using (var matrix = new Matrix(rect, plgpnts.Select(p => (PointF)p).ToArray()))
             {
                 Assert.Equal(expectedElements, matrix.Elements);
@@ -642,7 +645,8 @@ namespace System.Drawing.Drawing2D.Tests
             Matrix multiple,
             MatrixOrder order,
             float[] expected
-        ) {
+        )
+        {
             using (matrix)
             using (multiple)
             {
@@ -995,7 +999,8 @@ namespace System.Drawing.Drawing2D.Tests
             float[] expectedElements,
             float[] expectedElementsRotateAt,
             bool isIdentity
-        ) {
+        )
+        {
             using (matrix)
             {
                 if (order == MatrixOrder.Prepend)
@@ -1304,7 +1309,8 @@ namespace System.Drawing.Drawing2D.Tests
             float scaleY,
             MatrixOrder order,
             float[] expectedElements
-        ) {
+        )
+        {
             using (matrix)
             {
                 if (PlatformDetection.IsArmOrArm64Process)
@@ -1562,7 +1568,8 @@ namespace System.Drawing.Drawing2D.Tests
             float shearY,
             MatrixOrder order,
             float[] expectedElements
-        ) {
+        )
+        {
             using (matrix)
             {
                 if (PlatformDetection.IsArmOrArm64Process)
@@ -1721,7 +1728,8 @@ namespace System.Drawing.Drawing2D.Tests
             float offsetY,
             MatrixOrder order,
             float[] expectedElements
-        ) {
+        )
+        {
             using (matrix)
             {
                 if (PlatformDetection.IsArmOrArm64Process)
@@ -1798,7 +1806,8 @@ namespace System.Drawing.Drawing2D.Tests
             Matrix matrix,
             Point[] points,
             Point[] expectedPoints
-        ) {
+        )
+        {
             using (matrix)
             {
                 matrix.TransformPoints(points);
@@ -1812,7 +1821,8 @@ namespace System.Drawing.Drawing2D.Tests
             Matrix matrix,
             Point[] points,
             Point[] expectedPoints
-        ) {
+        )
+        {
             using (matrix)
             {
                 PointF[] pointFs = points.Select(p => (PointF)p).ToArray();
@@ -1896,7 +1906,8 @@ namespace System.Drawing.Drawing2D.Tests
             Matrix matrix,
             Point[] points,
             Point[] expectedPoints
-        ) {
+        )
+        {
             using (matrix)
             {
                 matrix.TransformVectors(points);
@@ -1910,7 +1921,8 @@ namespace System.Drawing.Drawing2D.Tests
             Matrix matrix,
             Point[] points,
             Point[] expectedPoints
-        ) {
+        )
+        {
             using (matrix)
             {
                 PointF[] pointFs = points.Select(p => (PointF)p).ToArray();
@@ -1925,7 +1937,8 @@ namespace System.Drawing.Drawing2D.Tests
             Matrix matrix,
             Point[] points,
             Point[] expectedPoints
-        ) {
+        )
+        {
             using (matrix)
             {
                 matrix.VectorTransformPoints(points);

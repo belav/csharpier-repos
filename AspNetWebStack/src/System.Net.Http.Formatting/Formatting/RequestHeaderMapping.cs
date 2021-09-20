@@ -116,7 +116,8 @@ namespace System.Net.Http.Formatting
             string headerValue,
             StringComparison valueComparison,
             bool isValueSubstring
-        ) {
+        )
+        {
             Contract.Assert(request != null, "request should not be null");
             Contract.Assert(headerName != null, "header name should not be null");
             Contract.Assert(headerValue != null, "header value should not be null");
@@ -151,7 +152,8 @@ namespace System.Net.Http.Formatting
             string headerValue,
             StringComparison valueComparison,
             bool isValueSubstring
-        ) {
+        )
+        {
             if (String.IsNullOrWhiteSpace(headerName))
             {
                 throw Error.ArgumentNull("headerName");

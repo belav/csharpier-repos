@@ -119,7 +119,8 @@ namespace Microsoft.Win32.RegistryTests
             string testValue,
             string expectedValue,
             RegistryValueOptions getOptions
-        ) {
+        )
+        {
             const string valueName = "MyTestKey";
             TestRegistryKey.SetValue(valueName, testValue, RegistryValueKind.ExpandString);
             Assert.Equal(
@@ -185,7 +186,8 @@ namespace Microsoft.Win32.RegistryTests
             string valueName,
             string envVariableName,
             string expectedVariableValue
-        ) {
+        )
+        {
             _ = envVariableName;
             TestRegistryKey.SetValue(
                 valueName,

@@ -81,7 +81,8 @@ namespace System.Net.Http.Headers
             HttpHeaders store,
             T? specialValue,
             Action<HttpHeaderValueCollection<T>, T>? validator
-        ) {
+        )
+        {
             Debug.Assert(descriptor.Name != null);
             Debug.Assert(store != null);
 

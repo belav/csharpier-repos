@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 TokenStream tokenStream,
                 ChainedFormattingRules formattingRules,
                 SyntaxNode rootNode
-            ) {
+            )
+            {
                 Contract.ThrowIfNull(tokenStream);
                 Contract.ThrowIfNull(formattingRules);
                 Contract.ThrowIfNull(rootNode);
@@ -41,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             public (List<IndentBlockOperation> indentOperations, List<SuppressOperation>? suppressOperations) Do(
                 SyntaxToken startToken,
                 SyntaxToken endToken
-            ) {
+            )
+            {
                 // we are formatting part of document, try to find initial context that formatting will be based on such as
                 // initial indentation and etc.
                 using (
@@ -49,7 +51,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                         FunctionId.Formatting_ContextInitialization,
                         CancellationToken.None
                     )
-                ) {
+                )
+                {
                     // first try to set initial indentation information
                     var initialIndentationOperations = this.GetInitialIndentBlockOperations(
                         startToken,
@@ -80,7 +83,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             private List<IndentBlockOperation> GetInitialIndentBlockOperations(
                 SyntaxToken startToken,
                 SyntaxToken endToken
-            ) {
+            )
+            {
                 var span = TextSpan.FromBounds(startToken.SpanStart, endToken.Span.End);
                 var node = startToken.GetCommonRoot(endToken)!.GetParentWithBiggerSpan();
                 var previous = (SyntaxNode?)null;
@@ -150,7 +154,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             private List<SuppressOperation>? GetInitialSuppressOperations(
                 SyntaxToken startToken,
                 SyntaxToken endToken
-            ) {
+            )
+            {
                 var noWrapList = this.GetInitialSuppressOperations(
                     startToken,
                     endToken,
@@ -176,7 +181,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 SyntaxToken startToken,
                 SyntaxToken endToken,
                 SuppressOption mask
-            ) {
+            )
+            {
                 var startList = this.GetInitialSuppressOperations(startToken, mask);
                 var endList = this.GetInitialSuppressOperations(endToken, mask);
 
@@ -186,7 +192,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             private List<SuppressOperation>? GetInitialSuppressOperations(
                 SyntaxToken token,
                 SuppressOption mask
-            ) {
+            )
+            {
                 var startNode = token.Parent;
                 var startPosition = token.SpanStart;
 
@@ -209,7 +216,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                     if (
                         o.ContainsElasticTrivia(_tokenStream)
                         && !o.Option.IsOn(SuppressOption.IgnoreElasticWrapping)
-                    ) {
+                    )
+                    {
                         return true;
                     }
 

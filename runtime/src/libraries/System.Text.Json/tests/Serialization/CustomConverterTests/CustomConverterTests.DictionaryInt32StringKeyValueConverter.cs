@@ -38,7 +38,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 if (reader.TokenType != JsonTokenType.StartArray)
                 {
                     throw new JsonException();
@@ -69,7 +70,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 Dictionary<int, string> value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 writer.WriteStartArray();
 
                 foreach (KeyValuePair<int, string> item in value)

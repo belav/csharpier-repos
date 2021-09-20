@@ -49,7 +49,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IPolicyRegistry<string> AddPolicyRegistry(
             this IServiceCollection services,
             IPolicyRegistry<string> registry
-        ) {
+        )
+        {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));
@@ -82,7 +83,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddPolicyRegistry(
             this IServiceCollection services,
             Action<IServiceProvider, IPolicyRegistry<string>> configureRegistry
-        ) {
+        )
+        {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));

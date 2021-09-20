@@ -83,7 +83,8 @@ namespace System.Net.Mail.Tests
             string displayName,
             string expectedDisplayName,
             string expectedToString
-        ) {
+        )
+        {
             var mailAddress = new MailAddress(address, displayName);
 
             Assert.Equal(address, mailAddress.Address);
@@ -98,7 +99,8 @@ namespace System.Net.Mail.Tests
             string displayName,
             string expectedDisplayName,
             string expectedToString
-        ) {
+        )
+        {
             var mailAddress = new MailAddress($"{displayName} <{Address}>");
 
             Assert.Equal(address, mailAddress.Address);

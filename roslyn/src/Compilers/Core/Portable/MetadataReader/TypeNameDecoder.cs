@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis
         internal TypeNameDecoder(
             SymbolFactory<ModuleSymbol, TypeSymbol> factory,
             ModuleSymbol moduleSymbol
-        ) {
+        )
+        {
             _factory = factory;
             this.moduleSymbol = moduleSymbol;
         }
@@ -70,14 +71,16 @@ namespace Microsoft.CodeAnalysis
 
         protected TypeSymbol GetUnsupportedMetadataTypeSymbol(
             BadImageFormatException exception = null
-        ) {
+        )
+        {
             return _factory.GetUnsupportedMetadataTypeSymbol(this.moduleSymbol, exception);
         }
 
         protected TypeSymbol GetSZArrayTypeSymbol(
             TypeSymbol elementType,
             ImmutableArray<ModifierInfo<TypeSymbol>> customModifiers
-        ) {
+        )
+        {
             return _factory.GetSZArrayTypeSymbol(this.moduleSymbol, elementType, customModifiers);
         }
 
@@ -87,7 +90,8 @@ namespace Microsoft.CodeAnalysis
             ImmutableArray<ModifierInfo<TypeSymbol>> customModifiers,
             ImmutableArray<int> sizes,
             ImmutableArray<int> lowerBounds
-        ) {
+        )
+        {
             return _factory.GetMDArrayTypeSymbol(
                 this.moduleSymbol,
                 rank,
@@ -101,14 +105,16 @@ namespace Microsoft.CodeAnalysis
         protected TypeSymbol MakePointerTypeSymbol(
             TypeSymbol type,
             ImmutableArray<ModifierInfo<TypeSymbol>> customModifiers
-        ) {
+        )
+        {
             return _factory.MakePointerTypeSymbol(this.moduleSymbol, type, customModifiers);
         }
 
         protected TypeSymbol MakeFunctionPointerTypeSymbol(
             Cci.CallingConvention callingConvention,
             ImmutableArray<ParamInfo<TypeSymbol>> retAndParamInfos
-        ) {
+        )
+        {
             return _factory.MakeFunctionPointerTypeSymbol(callingConvention, retAndParamInfos);
         }
 
@@ -143,7 +149,8 @@ namespace Microsoft.CodeAnalysis
                 KeyValuePair<TypeSymbol, ImmutableArray<ModifierInfo<TypeSymbol>>>
             > arguments,
             ImmutableArray<bool> refersToNoPiaLocalType
-        ) {
+        )
+        {
             return _factory.SubstituteTypeParameters(
                 this.moduleSymbol,
                 genericType,
@@ -155,7 +162,8 @@ namespace Microsoft.CodeAnalysis
         internal TypeSymbol GetTypeSymbol(
             MetadataHelpers.AssemblyQualifiedTypeName fullName,
             out bool refersToNoPiaLocalType
-        ) {
+        )
+        {
             //
             // Section 23.3 (Custom Attributes) of CLI Spec Partition II:
             //
@@ -291,7 +299,8 @@ namespace Microsoft.CodeAnalysis
         > ResolveTypeArguments(
             MetadataHelpers.AssemblyQualifiedTypeName[] arguments,
             out ImmutableArray<bool> refersToNoPiaLocalType
-        ) {
+        )
+        {
             int count = arguments.Length;
             var typeArgumentsBuilder = ArrayBuilder<
                 KeyValuePair<TypeSymbol, ImmutableArray<ModifierInfo<TypeSymbol>>>
@@ -318,7 +327,8 @@ namespace Microsoft.CodeAnalysis
             ref MetadataTypeName emittedName,
             int referencedAssemblyIndex,
             out bool isNoPiaLocalType
-        ) {
+        )
+        {
             TypeSymbol container;
 
             if (referencedAssemblyIndex >= 0)

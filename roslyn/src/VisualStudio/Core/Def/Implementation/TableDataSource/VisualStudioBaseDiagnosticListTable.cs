@@ -71,7 +71,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 ImmutableArray<DocumentId> documentIds,
                 DiagnosticAnalyzer analyzer,
                 int kind
-            ) {
+            )
+            {
                 DocumentIds = documentIds;
                 Analyzer = analyzer;
                 Kind = kind;

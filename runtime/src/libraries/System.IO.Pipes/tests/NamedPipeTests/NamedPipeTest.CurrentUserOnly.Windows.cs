@@ -40,7 +40,8 @@ namespace System.IO.Pipes.Tests
                         principalCtx,
                         TestAccountName
                     )
-                ) {
+                )
+                {
                     if (foundUserPrincipal == null)
                     {
                         needToCreate = true;
@@ -80,7 +81,8 @@ namespace System.IO.Pipes.Tests
                     LOGON32_PROVIDER_DEFAULT,
                     out _testAccountTokenHandle
                 )
-            ) {
+            )
+            {
                 _testAccountTokenHandle = null;
                 throw new Exception(
                     $"Failed to get SafeAccessTokenHandle for test account {TestAccountName}",
@@ -160,7 +162,8 @@ namespace System.IO.Pipes.Tests
 
         public NamedPipeTest_CurrentUserOnly_Windows(
             TestAccountImpersonator testAccountImpersonator
-        ) {
+        )
+        {
             _testAccountImpersonator = testAccountImpersonator;
         }
 
@@ -173,7 +176,8 @@ namespace System.IO.Pipes.Tests
         public void Connection_UnderDifferentUsers_BehavesAsExpected(
             PipeOptions serverPipeOptions,
             PipeOptions clientPipeOptions
-        ) {
+        )
+        {
             string name = PipeStreamConformanceTests.GetUniquePipeName();
             using (var cts = new CancellationTokenSource())
             using (
@@ -184,7 +188,8 @@ namespace System.IO.Pipes.Tests
                     PipeTransmissionMode.Byte,
                     serverPipeOptions | PipeOptions.Asynchronous
                 )
-            ) {
+            )
+            {
                 Task serverTask = server.WaitForConnectionAsync(cts.Token);
 
                 _testAccountImpersonator.RunImpersonated(
@@ -197,7 +202,8 @@ namespace System.IO.Pipes.Tests
                                 PipeDirection.InOut,
                                 clientPipeOptions
                             )
-                        ) {
+                        )
+                        {
                             Assert.Throws<UnauthorizedAccessException>(() => client.Connect());
                         }
                     }
@@ -225,7 +231,8 @@ namespace System.IO.Pipes.Tests
                     PipeTransmissionMode.Byte,
                     PipeOptions.Asynchronous
                 )
-            ) {
+            )
+            {
                 Task serverTask = server.WaitForConnectionAsync(CancellationToken.None);
 
                 _testAccountImpersonator.RunImpersonated(

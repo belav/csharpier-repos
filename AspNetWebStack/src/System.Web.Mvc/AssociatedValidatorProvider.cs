@@ -19,7 +19,8 @@ namespace System.Web.Mvc
         public sealed override IEnumerable<ModelValidator> GetValidators(
             ModelMetadata metadata,
             ControllerContext context
-        ) {
+        )
+        {
             if (metadata == null)
             {
                 throw new ArgumentNullException("metadata");
@@ -46,7 +47,8 @@ namespace System.Web.Mvc
         private IEnumerable<ModelValidator> GetValidatorsForProperty(
             ModelMetadata metadata,
             ControllerContext context
-        ) {
+        )
+        {
             ICustomTypeDescriptor typeDescriptor = GetTypeDescriptor(metadata.ContainerType);
             PropertyDescriptor property = typeDescriptor.GetProperties()
                 .Find(metadata.PropertyName, true);
@@ -68,7 +70,8 @@ namespace System.Web.Mvc
         private IEnumerable<ModelValidator> GetValidatorsForType(
             ModelMetadata metadata,
             ControllerContext context
-        ) {
+        )
+        {
             return GetValidators(
                 metadata,
                 context,

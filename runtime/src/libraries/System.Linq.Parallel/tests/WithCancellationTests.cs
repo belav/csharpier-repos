@@ -64,7 +64,8 @@ namespace System.Linq.Parallel.Tests
         public static void WithCancellation_DisposedEnumerator(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             // Disposing an enumerator should throw ODE and not OCE.
             _ = count;
             ParallelQuery<int> query = labeled.Item;
@@ -105,7 +106,8 @@ namespace System.Linq.Parallel.Tests
         public static void WithCancellation_DisposedEnumerator_ChannelCancellation_ProducerBlocked(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             // Larger size, delay may cause enumerator.Dispose() to hang
             _ = count;
             ParallelQuery<int> query = labeled.Item;
@@ -185,7 +187,8 @@ namespace System.Linq.Parallel.Tests
         public static void WithCancellation_CancelThenDispose(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             _ = count;
             CancellationTokenSource cancel = new CancellationTokenSource();
             IEnumerator<int> enumerator = labeled.Item.WithCancellation(cancel.Token)

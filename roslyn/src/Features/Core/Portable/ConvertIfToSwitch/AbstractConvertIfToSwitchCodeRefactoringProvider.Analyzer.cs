@@ -74,7 +74,8 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
 
             public (ImmutableArray<AnalyzedSwitchSection>, SyntaxNode TargetExpression) AnalyzeIfStatementSequence(
                 ReadOnlySpan<IOperation> operations
-            ) {
+            )
+            {
                 using var _ = ArrayBuilder<AnalyzedSwitchSection>.GetInstance(out var sections);
                 if (!ParseIfStatementSequence(operations, sections, out var defaultBodyOpt))
                 {
@@ -107,12 +108,14 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
                 ReadOnlySpan<IOperation> operations,
                 ArrayBuilder<AnalyzedSwitchSection> sections,
                 out IOperation? defaultBodyOpt
-            ) {
+            )
+            {
                 if (
                     operations.Length > 1
                     && operations[0] is IConditionalOperation { WhenFalse: null } op
                     && HasUnreachableEndPoint(op.WhenTrue)
-                ) {
+                )
+                {
                     if (!ParseIfStatement(op, sections, out defaultBodyOpt))
                     {
                         return false;
@@ -124,7 +127,8 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
                         if (
                             nextStatement is IReturnOperation { ReturnedValue: { } }
                             || nextStatement is IThrowOperation { Exception: { } }
-                        ) {
+                        )
+                        {
                             defaultBodyOpt = nextStatement;
                         }
                     }
@@ -153,7 +157,8 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
                 IOperation operation,
                 ArrayBuilder<AnalyzedSwitchSection> sections,
                 out IOperation? defaultBodyOpt
-            ) {
+            )
+            {
                 switch (operation)
                 {
                     case IConditionalOperation op when CanConvert(op):
@@ -171,7 +176,8 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
                         }
                         else if (
                             !ParseIfStatementOrBlock(op.WhenFalse, sections, out defaultBodyOpt)
-                        ) {
+                        )
+                        {
                             defaultBodyOpt = op.WhenFalse;
                         }
 
@@ -186,7 +192,8 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
                 IOperation op,
                 ArrayBuilder<AnalyzedSwitchSection> sections,
                 out IOperation? defaultBodyOpt
-            ) {
+            )
+            {
                 return op is IBlockOperation block
                   ? ParseIfStatementSequence(
                         block.Operations.AsSpan(),
@@ -220,7 +227,8 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
             private bool ParseSwitchLabels(
                 IOperation operation,
                 ArrayBuilder<AnalyzedSwitchLabel> labels
-            ) {
+            )
+            {
                 if (operation is IBinaryOperation { OperatorKind: ConditionalOr } op)
                 {
                     if (!ParseSwitchLabels(op.LeftOperand, labels))
@@ -295,7 +303,8 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
             private AnalyzedPattern? ParsePattern(
                 IOperation operation,
                 ArrayBuilder<TExpressionSyntax> guards
-            ) {
+            )
+            {
                 switch (operation)
                 {
                     case IBinaryOperation { OperatorKind: ConditionalAnd } op
@@ -348,7 +357,8 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
                         if (
                             Supports(Feature.CaseGuard)
                             && op.RightOperand.Syntax is TExpressionSyntax node
-                        ) {
+                        )
+                        {
                             guards.Add(node);
                             return leftPattern;
                         }
@@ -410,7 +420,8 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
                         op is
                         { LeftOperand: IBinaryOperation left, RightOperand: IBinaryOperation right }
                     )
-                ) {
+                )
+                {
                     return default;
                 }
 
@@ -432,7 +443,8 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
 
             private static (BoundKind Kind, IOperation Expression, IOperation Value) GetRangeBound(
                 IBinaryOperation op
-            ) {
+            )
+            {
                 return op.OperatorKind switch
                 {
                     // 5 <= i

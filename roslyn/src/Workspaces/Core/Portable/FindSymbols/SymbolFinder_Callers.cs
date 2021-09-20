@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             ISymbol symbol,
             Solution solution,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return FindCallersAsync(
                 symbol,
                 solution,
@@ -43,7 +44,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             Solution solution,
             IImmutableSet<Document> documents,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             symbol = symbol.OriginalDefinition;
             var foundSymbol = await FindSourceDefinitionAsync(symbol, solution, cancellationToken)
                 .ConfigureAwait(false);
@@ -104,14 +106,16 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             ISymbol symbol,
             IImmutableSet<Document> documents,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (symbol != null)
             {
                 if (
                     symbol.Kind == SymbolKind.Event
                     || symbol.Kind == SymbolKind.Method
                     || symbol.Kind == SymbolKind.Property
-                ) {
+                )
+                {
                     var collector = new StreamingProgressCollector();
                     await FindReferencesAsync(
                             symbol,

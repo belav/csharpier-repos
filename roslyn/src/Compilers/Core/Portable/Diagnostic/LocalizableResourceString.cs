@@ -54,7 +54,8 @@ namespace Microsoft.CodeAnalysis
             ResourceManager resourceManager,
             Type resourceSource,
             params string[] formatArguments
-        ) {
+        )
+        {
             if (nameOfLocalizableResource == null)
             {
                 throw new ArgumentNullException(nameof(nameOfLocalizableResource));

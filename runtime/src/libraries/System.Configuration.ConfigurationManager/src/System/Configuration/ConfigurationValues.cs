@@ -91,7 +91,8 @@ namespace System.Configuration
             object value,
             ConfigurationValueFlags valueFlags,
             PropertySourceInfo sourceInfo
-        ) {
+        )
+        {
             if (value != null)
             {
                 if (value is ConfigurationElement)
@@ -115,7 +116,8 @@ namespace System.Configuration
             object value,
             ConfigurationValueFlags valueFlags,
             PropertySourceInfo sourceInfo
-        ) {
+        )
+        {
             ConfigurationValue configValue = CreateConfigValue(value, valueFlags, sourceInfo);
             BaseSet(key, configValue);
         }

@@ -22,7 +22,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DesignerAttribu
 
         public InProcDesignerAttributeIncrementalAnalyzerProvider(
             IDesignerAttributeListener listener
-        ) {
+        )
+        {
             _listener = listener;
         }
 

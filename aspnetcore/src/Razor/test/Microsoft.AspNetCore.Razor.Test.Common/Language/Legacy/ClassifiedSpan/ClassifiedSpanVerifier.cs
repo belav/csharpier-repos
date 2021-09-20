@@ -28,11 +28,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
             private int _index;
 
-            public Walker(
-                StringWriter writer,
-                RazorSyntaxTree syntaxTree,
-                string[] baseline
-            ) : base(writer, syntaxTree)
+            public Walker(StringWriter writer, RazorSyntaxTree syntaxTree, string[] baseline)
+                : base(writer, syntaxTree)
             {
                 _writer = writer;
                 _baseline = baseline;
@@ -101,7 +98,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                     string expected,
                     string actual,
                     string userMessage
-                ) {
+                )
+                {
                     var builder = new StringBuilder();
                     builder.AppendLine(userMessage);
                     builder.AppendLine();

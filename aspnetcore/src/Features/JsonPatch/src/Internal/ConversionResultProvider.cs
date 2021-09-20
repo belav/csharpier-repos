@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             object value,
             Type typeToConvertTo,
             IContractResolver contractResolver
-        ) {
+        )
+        {
             if (value == null)
             {
                 return new ConversionResult(IsNullableType(typeToConvertTo), null);

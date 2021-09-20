@@ -80,7 +80,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
             string name,
             IConventionAnnotation? annotation,
             IConventionAnnotation? oldAnnotation
-        ) {
+        )
+        {
             if (CoreAnnotationNames.AllNames.Contains(name))
             {
                 return annotation;
@@ -156,7 +157,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
             string name,
             IConventionAnnotation? annotation,
             IConventionAnnotation? oldAnnotation
-        ) {
+        )
+        {
             if (CoreAnnotationNames.AllNames.Contains(name))
             {
                 return annotation;
@@ -269,7 +271,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
             string name,
             IConventionAnnotation? annotation,
             IConventionAnnotation? oldAnnotation
-        ) {
+        )
+        {
             if (CoreAnnotationNames.AllNames.Contains(name))
             {
                 return annotation;
@@ -324,7 +327,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
             string name,
             IConventionAnnotation? annotation,
             IConventionAnnotation? oldAnnotation
-        ) {
+        )
+        {
             if (CoreAnnotationNames.AllNames.Contains(name))
             {
                 return annotation;
@@ -395,7 +399,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
             string name,
             IConventionAnnotation? annotation,
             IConventionAnnotation? oldAnnotation
-        ) {
+        )
+        {
             if (CoreAnnotationNames.AllNames.Contains(name))
             {
                 return annotation;
@@ -440,7 +445,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
             string name,
             IConventionAnnotation? annotation,
             IConventionAnnotation? oldAnnotation
-        ) {
+        )
+        {
             if (CoreAnnotationNames.AllNames.Contains(name))
             {
                 return annotation;
@@ -507,7 +513,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
             string name,
             IConventionAnnotation? annotation,
             IConventionAnnotation? oldAnnotation
-        ) {
+        )
+        {
             if (CoreAnnotationNames.AllNames.Contains(name))
             {
                 return annotation;
@@ -570,7 +577,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
             string name,
             IConventionAnnotation? annotation,
             IConventionAnnotation? oldAnnotation
-        ) {
+        )
+        {
             if (CoreAnnotationNames.AllNames.Contains(name))
             {
                 return annotation;
@@ -601,7 +609,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
         public virtual T Track<T>(
             Func<T> func,
             [DisallowNull] ref IConventionForeignKey? foreignKey
-        ) {
+        )
+        {
             var batch = DelayConventions();
             using var foreignKeyReference = Tracker.Track(foreignKey);
             var result = func();
@@ -673,7 +682,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                     if (
                         currentScope.Parent != _dispatcher._immediateConventionScope
                         || currentScope.GetLeafCount() == 0
-                    ) {
+                    )
+                    {
                         return;
                     }
 

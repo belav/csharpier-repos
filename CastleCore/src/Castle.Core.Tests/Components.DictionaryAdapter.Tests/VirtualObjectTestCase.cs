@@ -162,7 +162,8 @@ namespace Castle.Components.DictionaryAdapter.Tests
                 Node node,
                 IVirtualTarget<Node, Member> target,
                 Member member
-            ) {
+            )
+            {
                 var site = new VirtualSite<Node, Member>(target, member);
 
                 return new MockVirtual(site) { PendingNode = node };

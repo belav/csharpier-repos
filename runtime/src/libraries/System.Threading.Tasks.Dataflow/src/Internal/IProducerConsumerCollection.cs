@@ -92,7 +92,8 @@ namespace System.Threading.Tasks.Dataflow.Internal.Collections
         /// <param name="collection">A collection to browse in the debugger.</param>
         public SystemCollectionsConcurrent_ProducerConsumerCollectionDebugView(
             IProducerConsumerCollection<T> collection
-        ) {
+        )
+        {
             if (collection == null)
             {
                 throw new ArgumentNullException(nameof(collection));

@@ -950,7 +950,8 @@ namespace System.Globalization.Tests
             CompareOptions options,
             int expected,
             int expectedMatchLength
-        ) {
+        )
+        {
             if (value.Length == 1)
             {
                 LastIndexOf_Char(
@@ -1023,7 +1024,8 @@ namespace System.Globalization.Tests
             if (
                 (compareInfo == s_invariantCompare)
                 && ((options == CompareOptions.None) || (options == CompareOptions.IgnoreCase))
-            ) {
+            )
+            {
                 StringComparison stringComparison =
                     (options == CompareOptions.IgnoreCase)
                         ? StringComparison.InvariantCultureIgnoreCase
@@ -1060,7 +1062,8 @@ namespace System.Globalization.Tests
                 CompareOptions options,
                 int expected,
                 int expectedMatchLength
-            ) {
+            )
+            {
                 using BoundedMemory<char> sourceBoundedMemory =
                     BoundedMemory.AllocateFromExistingData(source);
                 sourceBoundedMemory.MakeReadonly();
@@ -1106,7 +1109,8 @@ namespace System.Globalization.Tests
             int count,
             CompareOptions options,
             int expected
-        ) {
+        )
+        {
             if (options == CompareOptions.None)
             {
                 // Use LastIndexOf(string, char, int, int) or LastIndexOf(string, char)
@@ -1147,7 +1151,8 @@ namespace System.Globalization.Tests
             CompareOptions options,
             int expected,
             int expectedMatchLength
-        ) {
+        )
+        {
             LastIndexOf_String(
                 compareInfo,
                 source,

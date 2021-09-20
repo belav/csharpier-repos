@@ -136,7 +136,8 @@ namespace System.Data.OleDb
             object chapteredRowset,
             RowBinding binding,
             int valueOffset
-        ) {
+        )
+        {
             if ((null == chapteredRowset) || (IntPtr.Zero == binding.ReadIntPtr(valueOffset)))
             {
                 return ChapterHandle.DB_NULL_HCHAPTER;
@@ -687,7 +688,8 @@ namespace System.Data.OleDb
         internal static unsafe OleDbHResult IChapteredRowsetReleaseChapter(
             System.IntPtr ptr,
             System.IntPtr chapter
-        ) {
+        )
+        {
             OleDbHResult hr = OleDbHResult.E_UNEXPECTED;
             IntPtr hchapter = chapter;
             System.Data.Common.UnsafeNativeMethods.IChapteredRowset? chapteredRowset = null;

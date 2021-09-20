@@ -53,14 +53,16 @@ namespace System.Net
         void ISerializable.GetObjectData(
             SerializationInfo serializationInfo,
             StreamingContext streamingContext
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
         protected virtual void GetObjectData(
             SerializationInfo serializationInfo,
             StreamingContext streamingContext
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -127,7 +129,8 @@ namespace System.Net
                             Current.Prefix.Length,
                             StringComparison.OrdinalIgnoreCase
                         ) == 0
-                    ) {
+                    )
+                    {
                         // These match. Remember that we found it and break
                         // out.
                         Found = true;
@@ -312,7 +315,8 @@ namespace System.Net
                                 UriFormat.UriEscaped
                             )
                             .Equals("/")
-                    ) {
+                    )
+                    {
                         cookedUri = cookedUri.Substring(0, cookedUri.Length - 1);
                     }
 
@@ -346,7 +350,8 @@ namespace System.Net
                                 prefix,
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             // ...and the strings are identical. This is an error.
                             Error = true;
                             break;

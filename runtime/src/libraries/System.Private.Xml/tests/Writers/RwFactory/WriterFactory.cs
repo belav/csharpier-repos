@@ -177,7 +177,8 @@ namespace System.Xml.Tests
                     _factoryWriter != null
                     && _factoryWriter.WriteState != WriteState.Closed
                     && _factoryWriter.WriteState != WriteState.Error
-                ) {
+                )
+                {
                     if (_textWriter == null)
                     {
                         CError.WriteLineIgnore(_factoryWriter.WriteState.ToString());
@@ -194,7 +195,8 @@ namespace System.Xml.Tests
                     _underlyingWriter != null
                     && _underlyingWriter.WriteState != WriteState.Closed
                     && _underlyingWriter.WriteState != WriteState.Error
-                ) {
+                )
+                {
                     _underlyingWriter.Flush();
                     _underlyingWriter.Dispose();
                 }

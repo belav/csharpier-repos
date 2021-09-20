@@ -548,7 +548,8 @@ namespace System.Net.Http.Formatting
         public async Task ReadFromStreamAsync_RoundTripsWriteToStreamAsyncUsingXmlSerializer(
             Type variationType,
             object testData
-        ) {
+        )
+        {
             // Guard
             bool canSerialize =
                 IsSerializableWithXmlSerializer(variationType, testData)
@@ -578,7 +579,8 @@ namespace System.Net.Http.Formatting
         public async Task ReadFromStreamAsync_RoundTripsWriteToStreamAsyncUsingXmlSerializer_ExtraTypes(
             Type variationType,
             object testData
-        ) {
+        )
+        {
             // Guard
             bool canSerialize =
                 IsSerializableWithXmlSerializer(variationType, testData)
@@ -630,7 +632,8 @@ namespace System.Net.Http.Formatting
         public async Task ReadFromStream_AsyncRoundTripsWriteToStreamUsingDataContractSerializer(
             Type variationType,
             object testData
-        ) {
+        )
+        {
             // Guard
             bool canSerialize =
                 IsSerializableWithDataContractSerializer(variationType, testData)
@@ -660,7 +663,8 @@ namespace System.Net.Http.Formatting
         public async Task ReadFromStream_AsyncRoundTripsWriteToStreamUsingDataContractSerializer_KnownTypes(
             Type variationType,
             object testData
-        ) {
+        )
+        {
             // Guard
             bool canSerialize =
                 IsSerializableWithDataContractSerializer(variationType, testData)
@@ -733,7 +737,8 @@ namespace System.Net.Http.Formatting
             string content,
             string encoding,
             bool isDefaultEncoding
-        ) {
+        )
+        {
             if (!isDefaultEncoding)
             {
                 // XmlDictionaryReader/Writer only supports utf-8 and 16
@@ -836,7 +841,8 @@ namespace System.Net.Http.Formatting
             string content,
             string encoding,
             bool isDefaultEncoding
-        ) {
+        )
+        {
             if (!isDefaultEncoding)
             {
                 // XmlDictionaryReader/Writer only supports utf-8 and 16

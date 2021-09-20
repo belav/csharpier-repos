@@ -94,7 +94,8 @@ namespace System.Net.Http.Headers
                             CultureInfo.InvariantCulture,
                             out value
                         )
-                    ) {
+                    )
+                    {
                         return (long)value;
                     }
                 }
@@ -208,7 +209,8 @@ namespace System.Net.Http.Headers
         public static bool TryParse(
             [NotNullWhen(true)] string? input,
             [NotNullWhen(true)] out ContentDispositionHeaderValue? parsedValue
-        ) {
+        )
+        {
             int index = 0;
             parsedValue = null;
 
@@ -219,7 +221,8 @@ namespace System.Net.Http.Headers
                     ref index,
                     out object? output
                 )
-            ) {
+            )
+            {
                 parsedValue = (ContentDispositionHeaderValue)output!;
                 return true;
             }
@@ -230,7 +233,8 @@ namespace System.Net.Http.Headers
             string? input,
             int startIndex,
             out object? parsedValue
-        ) {
+        )
+        {
             Debug.Assert(startIndex >= 0);
 
             parsedValue = null;
@@ -288,7 +292,8 @@ namespace System.Net.Http.Headers
             string input,
             int startIndex,
             out string? dispositionType
-        ) {
+        )
+        {
             Debug.Assert((input != null) && (input.Length > 0) && (startIndex < input.Length));
 
             // This method just parses the disposition type string, it does not parse parameters.
@@ -323,7 +328,8 @@ namespace System.Net.Http.Headers
             if (
                 (dispositionTypeLength == 0)
                 || (tempDispositionType!.Length != dispositionType.Length)
-            ) {
+            )
+            {
                 throw new FormatException(
                     SR.Format(
                         System.Globalization.CultureInfo.InvariantCulture,
@@ -527,7 +533,8 @@ namespace System.Net.Http.Headers
                 || parts[0] != "\"="
                 || parts[4] != "=\""
                 || parts[2].ToLowerInvariant() != "b"
-            ) {
+            )
+            {
                 // Not encoded.
                 // This does not support multi-line encoding.
                 // Only base64 encoding is supported, not quoted printable.
@@ -568,7 +575,8 @@ namespace System.Net.Http.Headers
             if (
                 quoteIndex == lastQuoteIndex
                 || input.IndexOf('\'', quoteIndex + 1) != lastQuoteIndex
-            ) {
+            )
+            {
                 return false;
             }
 

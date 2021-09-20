@@ -11,7 +11,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         internal static ImmutableArray<BoundExpression> GetChildInitializers(
             BoundExpression? objectOrCollectionInitializer
-        ) {
+        )
+        {
             var objectInitializerExpression =
                 objectOrCollectionInitializer as BoundObjectInitializerExpression;
             if (objectInitializerExpression != null)
@@ -171,7 +172,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         internal static ImmutableArray<BoundExpression> GetChildInitializers(
             BoundArrayInitialization? arrayInitializer
-        ) {
+        )
+        {
             return arrayInitializer?.Initializers ?? ImmutableArray<BoundExpression>.Empty;
         }
     }

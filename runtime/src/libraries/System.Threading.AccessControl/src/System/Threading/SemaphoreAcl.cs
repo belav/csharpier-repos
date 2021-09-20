@@ -30,7 +30,8 @@ namespace System.Threading
             string? name,
             out bool createdNew,
             SemaphoreSecurity? semaphoreSecurity
-        ) {
+        )
+        {
             if (semaphoreSecurity == null)
             {
                 return new Semaphore(initialCount, maximumCount, name, out createdNew);
@@ -81,7 +82,8 @@ namespace System.Threading
                     if (
                         !string.IsNullOrEmpty(name)
                         && errorCode == Interop.Errors.ERROR_INVALID_HANDLE
-                    ) {
+                    )
+                    {
                         throw new WaitHandleCannotBeOpenedException(
                             SR.Format(
                                 SR.Threading_WaitHandleCannotBeOpenedException_InvalidHandle,
@@ -158,7 +160,8 @@ namespace System.Threading
             string name,
             SemaphoreRights rights,
             out Semaphore? result
-        ) {
+        )
+        {
             if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));

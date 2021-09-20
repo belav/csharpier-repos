@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 
         public sealed override async Task ProvideCompletionsAsync(
             CompletionContext completionContext
-        ) {
+        )
+        {
             try
             {
                 var document = completionContext.Document;
@@ -46,7 +47,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                     if (
                         semanticModel.GetDeclaredSymbol(node, cancellationToken)
                         is INamedTypeSymbol declaredSymbol
-                    ) {
+                    )
+                    {
                         var syntaxContextService =
                             document.GetRequiredLanguageService<ISyntaxContextService>();
                         var syntaxContext = (TSyntaxContext)syntaxContextService.CreateContext(
@@ -113,7 +115,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             TSyntaxContext context,
             INamedTypeSymbol declaredSymbol,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (declaredSymbol == null)
             {
                 throw new ArgumentNullException(nameof(declaredSymbol));
@@ -164,7 +167,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             CompletionItem selectedItem,
             char? ch,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var insertionText = SymbolCompletionItem.GetInsertionText(selectedItem);
             return Task.FromResult<TextChange?>(new TextChange(selectedItem.Span, insertionText));
         }

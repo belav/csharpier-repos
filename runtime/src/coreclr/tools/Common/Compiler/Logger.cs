@@ -41,7 +41,8 @@ namespace ILCompiler
             int code,
             MessageOrigin origin,
             string subcategory = MessageSubCategory.None
-        ) {
+        )
+        {
             MessageContainer? warning = MessageContainer.CreateWarningMessage(
                 this,
                 text,
@@ -58,7 +59,8 @@ namespace ILCompiler
             int code,
             TypeSystemEntity origin,
             string subcategory = MessageSubCategory.None
-        ) {
+        )
+        {
             MessageOrigin messageOrigin = new MessageOrigin(origin);
             MessageContainer? warning = MessageContainer.CreateWarningMessage(
                 this,
@@ -77,7 +79,8 @@ namespace ILCompiler
             MethodIL origin,
             int ilOffset,
             string subcategory = MessageSubCategory.None
-        ) {
+        )
+        {
             string document = null;
             int? lineNumber = null;
 
@@ -134,7 +137,8 @@ namespace ILCompiler
                         || !warningId.StartsWith("IL")
                         || (warningId.Length > 6 && warningId[6] != ':')
                         || !int.TryParse(warningId.Substring(2, 4), out int suppressedCode)
-                    ) {
+                    )
+                    {
                         continue;
                     }
 

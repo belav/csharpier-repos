@@ -370,7 +370,8 @@ namespace System.Xml
             string? pubid,
             string? sysid,
             string? subset
-        ) {
+        )
+        {
             CheckAsync();
             var task = _coreWriter.WriteDocTypeAsync(name, pubid, sysid, subset);
             _lastTask = task;
@@ -405,7 +406,8 @@ namespace System.Xml
             string? prefix,
             string localName,
             string? ns
-        ) {
+        )
+        {
             CheckAsync();
             var task = _coreWriter.WriteStartAttributeAsync(prefix, localName, ns);
             _lastTask = task;

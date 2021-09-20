@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
         public static string GetAssemblyDisplay(
             Compilation compilation,
             IAssemblySymbol assemblySymbol
-        ) {
+        )
+        {
             // This method is only used to generate a comment at the top of Metadata-as-Source documents and
             // previous submissions are never viewed as metadata (i.e. we always have compilations) so there's no
             // need to consume compilation.ScriptCompilationInfo.PreviousScriptCompilation.
@@ -56,7 +57,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
             while (
                 topLevelNamedType.ContainingSymbol != symbol.ContainingNamespace
                 || topLevelNamedType.Kind != SymbolKind.NamedType
-            ) {
+            )
+            {
                 topLevelNamedType = topLevelNamedType.ContainingSymbol;
             }
 
@@ -67,7 +69,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
             SymbolKey symbolId,
             Document generatedDocument,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var resolution = symbolId.Resolve(
                 await generatedDocument.Project.GetCompilationAsync(cancellationToken)
                     .ConfigureAwait(false),

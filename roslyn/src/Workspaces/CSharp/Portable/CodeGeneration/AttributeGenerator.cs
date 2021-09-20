@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             ImmutableArray<AttributeData> attributes,
             CodeGenerationOptions options,
             SyntaxToken? target = null
-        ) {
+        )
+        {
             if (options.MergeAttributes)
             {
                 var attributeNodes = attributes.OrderBy(a => a.AttributeClass?.Name)
@@ -54,7 +55,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             AttributeData attribute,
             SyntaxToken? target,
             CodeGenerationOptions options
-        ) {
+        )
+        {
             var attributeSyntax = TryGenerateAttribute(attribute, options);
             return attributeSyntax == null
               ? null
@@ -67,7 +69,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         private static AttributeSyntax? TryGenerateAttribute(
             AttributeData attribute,
             CodeGenerationOptions options
-        ) {
+        )
+        {
             if (IsCompilerInternalAttribute(attribute))
                 return null;
 
@@ -106,7 +109,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 && name != "NullableContextAttribute"
                 && name != "NativeIntegerAttribute"
                 && name != "DynamicAttribute"
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -120,7 +124,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
 
         private static AttributeArgumentListSyntax? GenerateAttributeArgumentList(
             AttributeData attribute
-        ) {
+        )
+        {
             if (attribute.ConstructorArguments.Length == 0 && attribute.NamedArguments.Length == 0)
                 return null;
 

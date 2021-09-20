@@ -64,11 +64,13 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             double falsePositiveProbability,
             ICollection<string> stringValues,
             ICollection<long> longValues
-        ) : this(
-            stringValues.Count + longValues.Count,
-            falsePositiveProbability,
-            isCaseSensitive: false
-        ) {
+        )
+            : this(
+                stringValues.Count + longValues.Count,
+                falsePositiveProbability,
+                isCaseSensitive: false
+            )
+        {
             AddRange(stringValues);
             AddRange(longValues);
         }

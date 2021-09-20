@@ -19,7 +19,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding
         public DatabaseModelFactoryOptions(
             IEnumerable<string>? tables = null,
             IEnumerable<string>? schemas = null
-        ) {
+        )
+        {
             Tables = tables ?? Enumerable.Empty<string>();
             Schemas = schemas ?? Enumerable.Empty<string>();
         }

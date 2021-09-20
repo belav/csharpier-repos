@@ -241,13 +241,15 @@ namespace System.Runtime.Caching
         public override bool Add(
             System.Runtime.Caching.CacheItem item,
             System.Runtime.Caching.CacheItemPolicy policy
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Runtime.Caching.CacheItem AddOrGetExisting(
             System.Runtime.Caching.CacheItem item,
             System.Runtime.Caching.CacheItemPolicy policy
-        ) {
+        )
+        {
             throw null;
         }
         public override object AddOrGetExisting(
@@ -255,7 +257,8 @@ namespace System.Runtime.Caching
             object value,
             System.DateTimeOffset absoluteExpiration,
             string regionName = null
-        ) {
+        )
+        {
             throw null;
         }
         public override object AddOrGetExisting(
@@ -263,7 +266,8 @@ namespace System.Runtime.Caching
             object value,
             System.Runtime.Caching.CacheItemPolicy policy,
             string regionName = null
-        ) {
+        )
+        {
             throw null;
         }
         public override bool Contains(string key, string regionName = null)
@@ -273,7 +277,8 @@ namespace System.Runtime.Caching
         public override System.Runtime.Caching.CacheEntryChangeMonitor CreateCacheEntryChangeMonitor(
             System.Collections.Generic.IEnumerable<string> keys,
             string regionName = null
-        ) {
+        )
+        {
             throw null;
         }
         public void Dispose() { }
@@ -284,7 +289,8 @@ namespace System.Runtime.Caching
         public override System.Runtime.Caching.CacheItem GetCacheItem(
             string key,
             string regionName = null
-        ) {
+        )
+        {
             throw null;
         }
         public override long GetCount(string regionName = null)
@@ -305,14 +311,16 @@ namespace System.Runtime.Caching
         public override System.Collections.Generic.IDictionary<string, object> GetValues(
             System.Collections.Generic.IEnumerable<string> keys,
             string regionName = null
-        ) {
+        )
+        {
             throw null;
         }
         public object Remove(
             string key,
             System.Runtime.Caching.CacheEntryRemovedReason reason,
             string regionName = null
-        ) {
+        )
+        {
             throw null;
         }
         public override object Remove(string key, string regionName = null)
@@ -365,7 +373,8 @@ namespace System.Runtime.Caching
         public virtual bool Add(
             System.Runtime.Caching.CacheItem item,
             System.Runtime.Caching.CacheItemPolicy policy
-        ) {
+        )
+        {
             throw null;
         }
         public virtual bool Add(
@@ -373,7 +382,8 @@ namespace System.Runtime.Caching
             object value,
             System.DateTimeOffset absoluteExpiration,
             string regionName = null
-        ) {
+        )
+        {
             throw null;
         }
         public virtual bool Add(
@@ -381,7 +391,8 @@ namespace System.Runtime.Caching
             object value,
             System.Runtime.Caching.CacheItemPolicy policy,
             string regionName = null
-        ) {
+        )
+        {
             throw null;
         }
         public abstract System.Runtime.Caching.CacheItem AddOrGetExisting(
@@ -422,7 +433,8 @@ namespace System.Runtime.Caching
         public virtual System.Collections.Generic.IDictionary<string, object> GetValues(
             string regionName,
             params string[] keys
-        ) {
+        )
+        {
             throw null;
         }
         public abstract object Remove(string key, string regionName = null);

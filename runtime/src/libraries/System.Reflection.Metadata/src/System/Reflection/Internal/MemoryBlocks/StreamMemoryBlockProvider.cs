@@ -42,7 +42,8 @@ namespace System.Reflection.Internal
             int imageSize,
             bool isFileStream,
             bool leaveOpen
-        ) {
+        )
+        {
             Debug.Assert(stream.CanSeek && stream.CanRead);
             _stream = stream;
             _streamGuard = new object();
@@ -75,7 +76,8 @@ namespace System.Reflection.Internal
             bool isFileStream,
             long start,
             int size
-        ) {
+        )
+        {
             var block = new NativeHeapMemoryBlock(size);
             bool fault = true;
             try
@@ -88,7 +90,8 @@ namespace System.Reflection.Internal
                     !isFileStream
                     || (bytesRead = FileStreamReadLightUp.ReadFile(stream, block.Pointer, size))
                         != size
-                ) {
+                )
+                {
                     stream.CopyTo(block.Pointer + bytesRead, size - bytesRead);
                 }
 
@@ -119,7 +122,8 @@ namespace System.Reflection.Internal
                         size,
                         out MemoryMappedFileBlock? block
                     )
-                ) {
+                )
+                {
                     return block;
                 }
 
@@ -143,7 +147,8 @@ namespace System.Reflection.Internal
             long start,
             int size,
             [NotNullWhen(true)] out MemoryMappedFileBlock? block
-        ) {
+        )
+        {
             if (_lazyMemoryMap == null)
             {
                 // leave the underlying stream open. It will be closed by the Dispose method.
@@ -180,7 +185,8 @@ namespace System.Reflection.Internal
                     out var safeBuffer,
                     out long offset
                 )
-            ) {
+            )
+            {
                 block = null;
                 return false;
             }

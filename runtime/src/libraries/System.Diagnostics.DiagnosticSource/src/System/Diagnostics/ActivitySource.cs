@@ -233,7 +233,8 @@ namespace System.Diagnostics
             DateTimeOffset startTime,
             bool startIt = true,
             ActivityIdFormat idFormat = ActivityIdFormat.Unknown
-        ) {
+        )
+        {
             // _listeners can get assigned to null in Dispose.
             SynchronizedList<ActivityListener>? listeners = _listeners;
             if (listeners == null || listeners.Count == 0)
@@ -565,7 +566,8 @@ namespace System.Diagnostics
             ref ActivityCreationOptions<TParent> data,
             ref ActivitySamplingResult samplingResult,
             ref ActivityCreationOptions<ActivityContext> dataWithContext
-        ) {
+        )
+        {
             uint version = _version;
             int index = 0;
 

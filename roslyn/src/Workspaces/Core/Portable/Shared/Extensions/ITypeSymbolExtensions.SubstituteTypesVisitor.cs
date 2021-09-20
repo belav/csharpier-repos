@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             internal SubstituteTypesVisitor(
                 IDictionary<TType1, TType2> map,
                 ITypeGenerator typeGenerator
-            ) {
+            )
+            {
                 _map = map;
                 _typeGenerator = typeGenerator;
             }

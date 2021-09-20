@@ -179,7 +179,8 @@ namespace System.Xml.Schema
                 SchemaNames.Token a,
                 XmlTokenizedType ttype,
                 XdrBuildFunction build
-            ) {
+            )
+            {
                 _Attribute = a;
                 _Datatype = XmlSchemaDatatype.FromXmlTokenizedType(ttype);
                 _SchemaFlags = 0;
@@ -190,7 +191,8 @@ namespace System.Xml.Schema
                 XmlTokenizedType ttype,
                 int schemaFlags,
                 XdrBuildFunction build
-            ) {
+            )
+            {
                 _Attribute = a;
                 _Datatype = XmlSchemaDatatype.FromXmlTokenizedType(ttype);
                 _SchemaFlags = schemaFlags;
@@ -220,7 +222,8 @@ namespace System.Xml.Schema
                 XdrBeginChildFunction? begin,
                 XdrEndChildFunction? end,
                 bool fText
-            ) {
+            )
+            {
                 _Name = n;
                 _NextStates = states;
                 _Attributes = attributes;
@@ -587,7 +590,8 @@ namespace System.Xml.Schema
             XmlNameTable nameTable,
             SchemaNames schemaNames,
             ValidationEventHandler? eventhandler
-        ) {
+        )
+        {
             _SchemaInfo = sinfo;
             _TargetNamespace = targetNamspace;
             _reader = reader;
@@ -975,7 +979,8 @@ namespace System.Xml.Schema
             XdrBuilder builder,
             object obj,
             string prefix
-        ) {
+        )
+        {
             builder._ElementDef._ContentAttr = builder.GetContent((XmlQualifiedName)obj);
         }
 
@@ -983,7 +988,8 @@ namespace System.Xml.Schema
             XdrBuilder builder,
             object obj,
             string prefix
-        ) {
+        )
+        {
             builder._contentValidator!.IsOpen = builder.GetModel((XmlQualifiedName)obj);
         }
 
@@ -991,7 +997,8 @@ namespace System.Xml.Schema
             XdrBuilder builder,
             object obj,
             string prefix
-        ) {
+        )
+        {
             builder._ElementDef._OrderAttr = builder._GroupDef._Order = builder.GetOrder(
                 (XmlQualifiedName)obj
             );
@@ -1001,7 +1008,8 @@ namespace System.Xml.Schema
             XdrBuilder builder,
             object obj,
             string prefix
-        ) {
+        )
+        {
             builder._ElementDef._HasDataType = true;
             string s = ((string)obj).Trim();
             if (s.Length == 0)
@@ -1024,7 +1032,8 @@ namespace System.Xml.Schema
             XdrBuilder builder,
             object obj,
             string prefix
-        ) {
+        )
+        {
             builder._ElementDef._EnumerationRequired = true;
             builder._ElementDef._ElementDecl!.Values = new List<string>((string[])obj);
         }
@@ -1033,7 +1042,8 @@ namespace System.Xml.Schema
             XdrBuilder builder,
             object obj,
             string prefix
-        ) {
+        )
+        {
             ParseDtMaxLength(ref builder._ElementDef._MaxLength, obj, builder);
         }
 
@@ -1041,7 +1051,8 @@ namespace System.Xml.Schema
             XdrBuilder builder,
             object obj,
             string prefix
-        ) {
+        )
+        {
             ParseDtMinLength(ref builder._ElementDef._MinLength, obj, builder);
         }
 
@@ -1229,14 +1240,16 @@ namespace System.Xml.Schema
                 if (
                     ttype == XmlTokenizedType.ENUMERATION
                     && !builder._ElementDef._EnumerationRequired
-                ) {
+                )
+                {
                     builder.SendValidationEvent(SR.Sch_MissDtvaluesAttribute);
                 }
 
                 if (
                     ttype != XmlTokenizedType.ENUMERATION
                     && builder._ElementDef._EnumerationRequired
-                ) {
+                )
+                {
                     builder.SendValidationEvent(SR.Sch_RequireEnumeration);
                 }
             }
@@ -1289,7 +1302,8 @@ namespace System.Xml.Schema
             XdrBuilder builder,
             object obj,
             string prefix
-        ) {
+        )
+        {
             XmlQualifiedName qname = (XmlQualifiedName)obj;
 
             builder._AttributeDef._Name = qname;
@@ -1333,7 +1347,8 @@ namespace System.Xml.Schema
             XdrBuilder builder,
             object obj,
             string prefix
-        ) {
+        )
+        {
             builder._AttributeDef._Required = IsYes(obj, builder);
         }
 
@@ -1341,7 +1356,8 @@ namespace System.Xml.Schema
             XdrBuilder builder,
             object obj,
             string prefix
-        ) {
+        )
+        {
             builder._AttributeDef._Default = obj;
         }
 
@@ -1349,7 +1365,8 @@ namespace System.Xml.Schema
             XdrBuilder builder,
             object obj,
             string prefix
-        ) {
+        )
+        {
             XmlQualifiedName qname = (XmlQualifiedName)obj;
             builder._AttributeDef._HasDataType = true;
             builder._AttributeDef._AttDef!.Datatype = builder.CheckDatatype(qname.Name)!;
@@ -1359,7 +1376,8 @@ namespace System.Xml.Schema
             XdrBuilder builder,
             object obj,
             string prefix
-        ) {
+        )
+        {
             builder._AttributeDef._EnumerationRequired = true;
             builder._AttributeDef._AttDef!.Values = new List<string>((string[])obj);
         }
@@ -1368,7 +1386,8 @@ namespace System.Xml.Schema
             XdrBuilder builder,
             object obj,
             string prefix
-        ) {
+        )
+        {
             ParseDtMaxLength(ref builder._AttributeDef._MaxLength, obj, builder);
         }
 
@@ -1376,7 +1395,8 @@ namespace System.Xml.Schema
             XdrBuilder builder,
             object obj,
             string prefix
-        ) {
+        )
+        {
             ParseDtMinLength(ref builder._AttributeDef._MinLength, obj, builder);
         }
 
@@ -1394,13 +1414,15 @@ namespace System.Xml.Schema
             if (
                 builder._AttributeDef._HasDataType
                 && builder._AttributeDef._AttDef!.Datatype != null
-            ) {
+            )
+            {
                 XmlTokenizedType ttype = builder._AttributeDef._AttDef.Datatype.TokenizedType;
 
                 if (
                     ttype == XmlTokenizedType.ENUMERATION
                     && !builder._AttributeDef._EnumerationRequired
-                ) {
+                )
+                {
                     code = SR.Sch_MissDtvaluesAttribute;
                     goto cleanup;
                 }
@@ -1408,7 +1430,8 @@ namespace System.Xml.Schema
                 if (
                     ttype != XmlTokenizedType.ENUMERATION
                     && builder._AttributeDef._EnumerationRequired
-                ) {
+                )
+                {
                     code = SR.Sch_RequireEnumeration;
                     goto cleanup;
                 }
@@ -1471,7 +1494,8 @@ namespace System.Xml.Schema
                 builder._ElementDef._HasDataType
                 || (builder._ElementDef._ContentAttr == SchemaContentEmpty)
                 || (builder._ElementDef._ContentAttr == SchemaContentText)
-            ) {
+            )
+            {
                 builder.SendValidationEvent(SR.Sch_ElementNotAllowed);
             }
 
@@ -1509,7 +1533,8 @@ namespace System.Xml.Schema
             XdrBuilder builder,
             object obj,
             string prefix
-        ) {
+        )
+        {
             builder._ElementDef._MinVal = ParseMinOccurs(obj, builder);
         }
 
@@ -1517,7 +1542,8 @@ namespace System.Xml.Schema
             XdrBuilder builder,
             object obj,
             string prefix
-        ) {
+        )
+        {
             builder._ElementDef._MaxVal = ParseMaxOccurs(obj, builder);
         }
 
@@ -1564,7 +1590,8 @@ namespace System.Xml.Schema
             XdrBuilder builder,
             object obj,
             string prefix
-        ) {
+        )
+        {
             if (IsYes(obj, builder))
             {
                 builder._BaseDecl!._MinOccurs = 1;
@@ -1575,7 +1602,8 @@ namespace System.Xml.Schema
             XdrBuilder builder,
             object obj,
             string prefix
-        ) {
+        )
+        {
             builder._BaseDecl!._Default = obj;
         }
 
@@ -1658,7 +1686,8 @@ namespace System.Xml.Schema
             if (
                 builder._ElementDef._ContentAttr == SchemaContentEmpty
                 || builder._ElementDef._ContentAttr == SchemaContentText
-            ) {
+            )
+            {
                 builder.SendValidationEvent(SR.Sch_GroupDisabled);
             }
 
@@ -1684,7 +1713,8 @@ namespace System.Xml.Schema
             if (
                 builder._ElementDef._ContentAttr == SchemaContentMixed
                 && builder._GroupDef._Order != SchemaOrderMany
-            ) {
+            )
+            {
                 builder.SendValidationEvent(SR.Sch_MixedMany);
             }
         }
@@ -1725,7 +1755,8 @@ namespace System.Xml.Schema
                 SchemaOrderMany == builder._GroupDef._Order
                 && builder._GroupDef._HasMaxAttr
                 && builder._GroupDef._MaxVal != uint.MaxValue
-            ) {
+            )
+            {
                 builder.SendValidationEvent(SR.Sch_ManyMaxOccurs);
             }
 
@@ -1792,13 +1823,15 @@ namespace System.Xml.Schema
                     if (
                         ttype == XmlTokenizedType.ENUMERATION
                         && !builder._AttributeDef._EnumerationRequired
-                    ) {
+                    )
+                    {
                         code = SR.Sch_MissDtvaluesAttribute;
                     }
                     else if (
                         ttype != XmlTokenizedType.ENUMERATION
                         && builder._AttributeDef._EnumerationRequired
-                    ) {
+                    )
+                    {
                         code = SR.Sch_RequireEnumeration;
                     }
                 }
@@ -1823,7 +1856,8 @@ namespace System.Xml.Schema
                         _SchemaNames.TokenToQName[
                             (int)s_schemaEntries[_CurState._NextStates[i]]._Name
                         ].Equals(qname)
-                    ) {
+                    )
+                    {
                         _NextState = s_schemaEntries[_CurState._NextStates[i]];
                         return true;
                     }
@@ -1856,7 +1890,8 @@ namespace System.Xml.Schema
                 ns.Length != 0
                 && !Ref.Equal(ns, _SchemaNames.NsXdr)
                 && !Ref.Equal(ns, _SchemaNames.NsDataType)
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -1869,7 +1904,8 @@ namespace System.Xml.Schema
                     || _SchemaNames.QnDtMaxExclusive.Equals(qname)
                     || _SchemaNames.QnDtMinExclusive.Equals(qname)
                 )
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -1953,7 +1989,8 @@ namespace System.Xml.Schema
             if (
                 !s.Equals("*")
                 && (!ParseInteger(s, ref cVal) || (cVal != uint.MaxValue && cVal != 1))
-            ) {
+            )
+            {
                 builder.SendValidationEvent(SR.Sch_MaxOccursInvalid);
             }
             return cVal;
@@ -2068,7 +2105,8 @@ namespace System.Xml.Schema
             }
             else if (
                 _SchemaNames.TokenToQName[(int)SchemaNames.Token.SchemaElementOnly].Equals(qname)
-            ) {
+            )
+            {
                 content = SchemaContentElement;
                 _ElementDef._AllowDataType = false;
             }

@@ -26,7 +26,8 @@ namespace NegotiateAuthSample
                                 webBuilder.GetSetting("server"),
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             webBuilder.UseHttpSys(
                                 options =>
                                 {

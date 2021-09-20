@@ -209,7 +209,8 @@ namespace System.Collections.Immutable.Tests
         public void CreateRangeWithSelector<TResult>(
             IEnumerable<int> source,
             Func<int, TResult> selector
-        ) {
+        )
+        {
             Assert.Equal(
                 source.Select(selector),
                 ImmutableArray.CreateRange(source.ToImmutableArray(), selector)
@@ -248,7 +249,8 @@ namespace System.Collections.Immutable.Tests
             IEnumerable<int> source,
             Func<int, TArg, TResult> selector,
             TArg arg
-        ) {
+        )
+        {
             var expected = source.Zip(Enumerable.Repeat(arg, source.Count()), selector);
             Assert.Equal(
                 expected,
@@ -315,7 +317,8 @@ namespace System.Collections.Immutable.Tests
             int start,
             int length,
             Func<int, TResult> selector
-        ) {
+        )
+        {
             var expected = source.Skip(start).Take(length).Select(selector);
             Assert.Equal(
                 expected,
@@ -411,7 +414,8 @@ namespace System.Collections.Immutable.Tests
             int length,
             Func<int, TArg, TResult> selector,
             TArg arg
-        ) {
+        )
+        {
             var expected = source.Skip(start)
                 .Take(length)
                 .Zip(Enumerable.Repeat(arg, length), selector);
@@ -1674,7 +1678,8 @@ namespace System.Collections.Immutable.Tests
             IEnumerable<int> source,
             IEnumerable<int> items,
             IEqualityComparer<int> comparer
-        ) {
+        )
+        {
             var array = source.ToImmutableArray();
             IEnumerable<int> expected = items.Aggregate(
                 seed: source.ToImmutableArray(),
@@ -1936,7 +1941,8 @@ namespace System.Collections.Immutable.Tests
             T oldValue,
             T newValue,
             IEqualityComparer<T> comparer
-        ) {
+        )
+        {
             var array = source.ToImmutableArray();
 
             var comparerOrDefault = comparer ?? EqualityComparer<T>.Default;
@@ -2098,7 +2104,8 @@ namespace System.Collections.Immutable.Tests
             IEnumerable<int> destination,
             int destinationIndex,
             int length
-        ) {
+        )
+        {
             var array = source.ToImmutableArray();
 
             // Take a snapshot of the destination array before calling CopyTo.
@@ -2475,7 +2482,8 @@ namespace System.Collections.Immutable.Tests
             int index,
             int count,
             IComparer<int> comparer
-        ) {
+        )
+        {
             // If ImmutableArray<T>.Sort is called when the array is already sorted,
             // it should just return the original array rather than allocating a new one.
 
@@ -2590,7 +2598,8 @@ namespace System.Collections.Immutable.Tests
             object second,
             IEqualityComparer comparer,
             bool expected
-        ) {
+        )
+        {
             ImmutableArray<int> first = source.ToImmutableArray();
 
             Assert.Equal(expected, ((IStructuralEquatable)first).Equals(second, comparer));
@@ -2732,7 +2741,8 @@ namespace System.Collections.Immutable.Tests
         public void IStructuralEquatableGetHashCode(
             IEnumerable<int> source,
             IEqualityComparer comparer
-        ) {
+        )
+        {
             var array = source.ToImmutableArray();
             int expected = ((IStructuralEquatable)source.ToArray()).GetHashCode(comparer);
             Assert.Equal(expected, ((IStructuralEquatable)array).GetHashCode(comparer));
@@ -2771,7 +2781,8 @@ namespace System.Collections.Immutable.Tests
         [MemberData(nameof(Int32EnumerableData))]
         public void IStructuralEquatableGetHashCodeNullComparerNonNullUnderlyingArrayInvalid(
             IEnumerable<int> source
-        ) {
+        )
+        {
             var array = source.ToImmutableArray();
             AssertExtensions.Throws<ArgumentNullException>(
                 "comparer",
@@ -2800,7 +2811,8 @@ namespace System.Collections.Immutable.Tests
         [MemberData(nameof(Int32EnumerableData))]
         public void IStructuralComparableCompareToDefaultAndNonDefaultInvalid(
             IEnumerable<int> source
-        ) {
+        )
+        {
             object other = source.ToImmutableArray();
             var comparers = SharedComparers<int>()
                 .OfType<IComparer>()
@@ -2857,7 +2869,8 @@ namespace System.Collections.Immutable.Tests
         public void IStructuralComparableCompareToNullComparerArgumentInvalid(
             IEnumerable<int> source,
             object other
-        ) {
+        )
+        {
             var array = source.ToImmutableArray();
             AssertExtensions.Throws<ArgumentException>(
                 "other",
@@ -2889,7 +2902,8 @@ namespace System.Collections.Immutable.Tests
         public void IStructuralComparableCompareToNullComparerNullReferenceInvalid(
             IEnumerable<int> source,
             object other
-        ) {
+        )
+        {
             var array = source.ToImmutableArray();
             Assert.Throws<NullReferenceException>(
                 () => ((IStructuralComparable)array).CompareTo(other, comparer: null)
@@ -2920,7 +2934,8 @@ namespace System.Collections.Immutable.Tests
             object other,
             IComparer comparer,
             int expected
-        ) {
+        )
+        {
             var array = source?.ToImmutableArray() ?? s_emptyDefault;
             Assert.Equal(
                 expected,
@@ -2986,7 +3001,8 @@ namespace System.Collections.Immutable.Tests
             IEnumerable<int> source,
             object other,
             IComparer comparer
-        ) {
+        )
+        {
             var array = source.ToImmutableArray();
 
             AssertExtensions.Throws<ArgumentException>(
@@ -3371,7 +3387,8 @@ namespace System.Collections.Immutable.Tests
                 int seventh,
                 int eighth,
                 int ninth
-            ) {
+            )
+            {
                 this.Field1 = (byte)first;
                 this.Field2 = (byte)second;
                 this.Field3 = (byte)third;

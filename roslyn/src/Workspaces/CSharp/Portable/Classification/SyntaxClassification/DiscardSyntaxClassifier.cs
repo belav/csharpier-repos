@@ -28,11 +28,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification.Classifiers
             SemanticModel semanticModel,
             ArrayBuilder<ClassifiedSpan> result,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 syntax.IsKind(SyntaxKind.DiscardDesignation)
                 || syntax.IsKind(SyntaxKind.DiscardPattern)
-            ) {
+            )
+            {
                 result.Add(new ClassifiedSpan(syntax.Span, ClassificationTypeNames.Keyword));
                 return;
             }

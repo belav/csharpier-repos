@@ -911,7 +911,8 @@ namespace System.Xml.Linq
             XmlReader r,
             LoadOptions o,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if ((o & (LoadOptions.SetBaseUri | LoadOptions.SetLineInfo)) == 0)
             {
                 await ReadContentFromAsync(r, cancellationToken).ConfigureAwait(false);
@@ -1199,7 +1200,8 @@ namespace System.Xml.Linq
                         if (
                             (_baseUri != null && _baseUri != baseUri)
                             || (_lineInfo != null && _lineInfo.HasLineInfo())
-                        ) {
+                        )
+                        {
                             newNode = new XText(r.Value);
                         }
                         else
@@ -1262,7 +1264,8 @@ namespace System.Xml.Linq
                 XContainer rootContainer,
                 XmlReader r,
                 LoadOptions o
-            ) {
+            )
+            {
                 XNode? newNode = null;
                 string baseUri = r.BaseURI!;
 
@@ -1341,7 +1344,8 @@ namespace System.Xml.Linq
                         if (
                             (_baseUri != null && _baseUri != baseUri)
                             || (_lineInfo != null && _lineInfo.HasLineInfo())
-                        ) {
+                        )
+                        {
                             newNode = new XText(await r.GetValueAsync().ConfigureAwait(false));
                         }
                         else
@@ -1485,7 +1489,8 @@ namespace System.Xml.Linq
         internal async Task WriteContentToAsync(
             XmlWriter writer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (content != null)
             {
                 string? stringContent = content as string;

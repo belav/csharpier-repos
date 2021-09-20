@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             AnalyzerLoadFailureEventArgs.FailureErrorCode errorCode,
             [CombinatorialValues(LanguageNames.CSharp, LanguageNames.VisualBasic, null)]
                 string? languageName
-        ) {
+        )
+        {
             // One potential value is None, which isn't actually a valid enum value to test.
             if (errorCode == AnalyzerLoadFailureEventArgs.FailureErrorCode.None)
             {

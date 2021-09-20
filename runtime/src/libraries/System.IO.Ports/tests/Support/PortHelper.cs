@@ -47,7 +47,8 @@ namespace Legacy.Support
                 RegistryKey serialKey = Registry.LocalMachine.OpenSubKey(
                     @"HARDWARE\DEVICEMAP\SERIALCOMM"
                 )
-            ) {
+            )
+            {
                 if (serialKey != null)
                 {
                     string[] result = serialKey.GetValueNames();

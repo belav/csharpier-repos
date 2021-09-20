@@ -400,7 +400,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             SByteEnum? enumVal,
             sbyte? integralVal,
             SByteEnum expected
-        ) {
+        )
+        {
             dynamic d = enumVal;
             object result = unchecked(d + integralVal);
             Assert.Equal(expected, result);
@@ -422,7 +423,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             Int16Enum? enumVal,
             short? integralVal,
             Int16Enum expected
-        ) {
+        )
+        {
             dynamic d = enumVal;
             object result = unchecked(d + integralVal);
             Assert.Equal(expected, result);
@@ -444,7 +446,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             UInt16Enum? enumVal,
             ushort? integralVal,
             UInt16Enum expected
-        ) {
+        )
+        {
             dynamic d = enumVal;
             object result = unchecked(d + integralVal);
             Assert.Equal(expected, result);
@@ -466,7 +469,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             Int32Enum? enumVal,
             int? integralVal,
             Int32Enum expected
-        ) {
+        )
+        {
             dynamic d = enumVal;
             object result = unchecked(d + integralVal);
             Assert.Equal(expected, result);
@@ -488,7 +492,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             UInt32Enum? enumVal,
             uint? integralVal,
             UInt32Enum expected
-        ) {
+        )
+        {
             dynamic d = enumVal;
             object result = unchecked(d + integralVal);
             Assert.Equal(expected, result);
@@ -510,7 +515,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             Int64Enum? enumVal,
             long? integralVal,
             Int64Enum expected
-        ) {
+        )
+        {
             dynamic d = enumVal;
             object result = unchecked(d + integralVal);
             Assert.Equal(expected, result);
@@ -532,7 +538,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             UInt64Enum? enumVal,
             ulong? integralVal,
             UInt64Enum expected
-        ) {
+        )
+        {
             dynamic d = enumVal;
             object result = unchecked(d + integralVal);
             Assert.Equal(expected, result);
@@ -563,7 +570,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             dynamic integralVal,
             object expected,
             bool shouldThrow
-        ) {
+        )
+        {
             if (shouldThrow)
             {
                 Assert.Throws<OverflowException>(() => checked(enumVal + integralVal));
@@ -598,7 +606,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             dynamic integralVal,
             object enMinusIn,
             object inMinusEn
-        ) {
+        )
+        {
             object result = unchecked(enumVal - integralVal);
             Assert.Equal(enMinusIn, result);
             Assert.IsType(enumVal.GetType(), result);
@@ -617,7 +626,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             byte? integralVal,
             ByteEnum? enMinusIn,
             ByteEnum? inMinusEn
-        ) {
+        )
+        {
             dynamic d = enumVal;
             object result = unchecked(d - integralVal);
             Assert.Equal(enMinusIn, result);
@@ -644,7 +654,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             sbyte? integralVal,
             SByteEnum? enMinusIn,
             SByteEnum? inMinusEn
-        ) {
+        )
+        {
             dynamic d = enumVal;
             object result = unchecked(d - integralVal);
             Assert.Equal(enMinusIn, result);
@@ -667,7 +678,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             short? integralVal,
             Int16Enum? enMinusIn,
             Int16Enum? inMinusEn
-        ) {
+        )
+        {
             dynamic d = enumVal;
             object result = unchecked(d - integralVal);
             Assert.Equal(enMinusIn, result);
@@ -690,7 +702,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             ushort? integralVal,
             UInt16Enum? enMinusIn,
             UInt16Enum? inMinusEn
-        ) {
+        )
+        {
             dynamic d = enumVal;
             object result = unchecked(d - integralVal);
             Assert.Equal(enMinusIn, result);
@@ -713,7 +726,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             int? integralVal,
             Int32Enum? enMinusIn,
             Int32Enum? inMinusEn
-        ) {
+        )
+        {
             dynamic d = enumVal;
             object result = unchecked(d - integralVal);
             Assert.Equal(enMinusIn, result);
@@ -736,7 +750,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             uint? integralVal,
             UInt32Enum? enMinusIn,
             UInt32Enum? inMinusEn
-        ) {
+        )
+        {
             dynamic d = enumVal;
             object result = unchecked(d - integralVal);
             Assert.Equal(enMinusIn, result);
@@ -759,7 +774,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             long? integralVal,
             Int64Enum? enMinusIn,
             Int64Enum? inMinusEn
-        ) {
+        )
+        {
             dynamic d = enumVal;
             object result = unchecked(d - integralVal);
             Assert.Equal(enMinusIn, result);
@@ -782,7 +798,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             ulong? integralVal,
             UInt64Enum? enMinusIn,
             UInt64Enum? inMinusEn
-        ) {
+        )
+        {
             dynamic d = enumVal;
             object result = unchecked(d - integralVal);
             Assert.Equal(enMinusIn, result);
@@ -870,7 +887,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             UInt16Enum? y,
             ushort expected,
             bool overflows
-        ) {
+        )
+        {
             dynamic d = x;
             object result = unchecked(d - y);
             Assert.Equal(expected, result);
@@ -912,7 +930,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             UInt32Enum? y,
             uint expected,
             bool overflows
-        ) {
+        )
+        {
             dynamic d = x;
             object result = unchecked(d - y);
             Assert.Equal(expected, result);
@@ -954,7 +973,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             UInt64Enum? y,
             ulong expected,
             bool overflows
-        ) {
+        )
+        {
             dynamic d = x;
             object result = unchecked(d - y);
             Assert.Equal(expected, result);

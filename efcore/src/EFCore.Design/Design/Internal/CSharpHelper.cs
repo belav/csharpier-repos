@@ -227,7 +227,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             if (
                 type.IsConstructedGenericType
                 && type.GetGenericTypeDefinition() == typeof(Nullable<>)
-            ) {
+            )
+            {
                 return Reference(type.UnwrapNullableType()) + "?";
             }
 
@@ -326,7 +327,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             foreach (
                 var piece in name.Where(p => !string.IsNullOrEmpty(p))
                     .SelectMany(p => p.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries))
-            ) {
+            )
+            {
                 var identifier = Identifier(piece);
                 if (!string.IsNullOrEmpty(identifier))
                 {
@@ -837,7 +839,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             Expression expression,
             StringBuilder builder,
             bool simple = false
-        ) {
+        )
+        {
             // Only handle trivially simple cases for `new` and factory methods
             switch (expression.NodeType)
             {
@@ -939,7 +942,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         private bool HandleArguments(
             IEnumerable<Expression> argumentExpressions,
             StringBuilder builder
-        ) {
+        )
+        {
             builder.Append('(');
 
             if (!HandleList(argumentExpressions, builder))
@@ -956,7 +960,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             IEnumerable<Expression> argumentExpressions,
             StringBuilder builder,
             bool simple = false
-        ) {
+        )
+        {
             var separator = string.Empty;
             foreach (var expression in argumentExpressions)
             {

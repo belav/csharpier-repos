@@ -132,7 +132,8 @@ namespace Microsoft.AspNetCore.Identity.Test
             Mock<HttpContext> httpContext,
             bool shouldStampValidate,
             Func<Task> testCode
-        ) {
+        )
+        {
             var userManager = MockHelpers.MockUserManager<PocoUser>();
             var claimsManager = new Mock<IUserClaimsPrincipalFactory<PocoUser>>();
             var identityOptions = new Mock<IOptions<IdentityOptions>>();
@@ -426,7 +427,8 @@ namespace Microsoft.AspNetCore.Identity.Test
         private async Task RunRememberClientCookieTest(
             bool shouldStampValidate,
             bool validationSuccess
-        ) {
+        )
+        {
             var user = new PocoUser("test");
             var httpContext = new Mock<HttpContext>();
             var userManager = MockHelpers.MockUserManager<PocoUser>();

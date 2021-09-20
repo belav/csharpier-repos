@@ -20,7 +20,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             TypeDesc delegateType,
             IMethodNode targetMethod,
             MethodWithToken methodToken
-        ) {
+        )
+        {
             _delegateType = delegateType;
             _targetMethod = targetMethod;
             _methodToken = methodToken;

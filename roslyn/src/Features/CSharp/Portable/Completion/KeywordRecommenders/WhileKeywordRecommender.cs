@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             int position,
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (context.IsStatementContext || context.IsGlobalStatementContext)
             {
                 return true;
@@ -42,7 +43,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                 token.Kind() == SyntaxKind.CloseBraceToken
                 && token.Parent.IsKind(SyntaxKind.Block)
                 && token.Parent.IsParentKind(SyntaxKind.DoStatement)
-            ) {
+            )
+            {
                 return true;
             }
 

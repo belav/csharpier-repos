@@ -50,7 +50,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             GeneratedLabelSymbol breakLabel,
             GeneratedLabelSymbol continueLabel,
             bool hasErrors
-        ) {
+        )
+        {
             Debug.Assert(
                 loop.Kind == BoundKind.WhileStatement || loop.Kind == BoundKind.ForEachStatement
             );
@@ -129,7 +130,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             GeneratedLabelSymbol breakLabel,
             GeneratedLabelSymbol continueLabel,
             bool hasErrors
-        ) {
+        )
+        {
             if (locals.IsEmpty)
             {
                 return RewriteWhileStatement(

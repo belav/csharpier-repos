@@ -68,7 +68,8 @@ namespace System.ComponentModel.Composition.Factories
         public static ImportingComposablePart CreateImporterExporter(
             string exportContractName,
             string importContractName
-        ) {
+        )
+        {
             return new ImportingComposablePart(
                 exportContractName,
                 ImportCardinality.ExactlyOne,
@@ -85,7 +86,8 @@ namespace System.ComponentModel.Composition.Factories
         public static ImportingComposablePart CreateImporter(
             bool isRecomposable,
             params string[] contractNames
-        ) {
+        )
+        {
             return new ImportingComposablePart(
                 ImportCardinality.ZeroOrMore,
                 isRecomposable,
@@ -101,14 +103,16 @@ namespace System.ComponentModel.Composition.Factories
         public static ImportingComposablePart CreateImporter(
             string contractName,
             bool isRecomposable
-        ) {
+        )
+        {
             return CreateImporter(contractName, ImportCardinality.ZeroOrMore, isRecomposable);
         }
 
         public static ImportingComposablePart CreateImporter(
             string contractName,
             ImportCardinality cardinality
-        ) {
+        )
+        {
             return CreateImporter(contractName, cardinality, false);
         }
 
@@ -116,13 +120,15 @@ namespace System.ComponentModel.Composition.Factories
             string contractName,
             ImportCardinality cardinality,
             bool isRecomposable
-        ) {
+        )
+        {
             return new ImportingComposablePart(cardinality, isRecomposable, contractName);
         }
 
         public static ImportingComposablePart CreateImporter(
             params ImportDefinition[] importDefinitions
-        ) {
+        )
+        {
             return new ImportingComposablePart(importDefinitions);
         }
 

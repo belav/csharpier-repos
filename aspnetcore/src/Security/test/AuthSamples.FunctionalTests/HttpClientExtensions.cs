@@ -17,7 +17,8 @@ namespace AuthSamples.FunctionalTests
             this HttpClient client,
             IHtmlFormElement form,
             IEnumerable<KeyValuePair<string, string>> formValues
-        ) {
+        )
+        {
             var submitElement = Assert.Single(form.QuerySelectorAll("[type=submit]"));
             var submitButton = Assert.IsAssignableFrom<IHtmlElement>(submitElement);
 
@@ -30,7 +31,8 @@ namespace AuthSamples.FunctionalTests
             IHtmlFormElement form,
             IHtmlElement submitButton,
             IEnumerable<KeyValuePair<string, string>> formValues
-        ) {
+        )
+        {
             foreach (var kvp in formValues)
             {
                 var element = Assert.IsAssignableFrom<IHtmlInputElement>(form[kvp.Key]);

@@ -243,7 +243,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeCompilationState compilationState,
             BindingDiagnosticBag diagnostics,
             HashSet<LocalSymbol> assignLocals
-        ) {
+        )
+        {
             Debug.Assert((object)thisType != null);
             Debug.Assert(
                 ((object)thisParameter == null)
@@ -398,7 +399,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SynthesizedClosureEnvironment MakeFrame(
                 Analysis.Scope scope,
                 Analysis.ClosureEnvironment env
-            ) {
+            )
+            {
                 var scopeBoundNode = scope.BoundNode;
 
                 var syntax = scopeBoundNode.Syntax;
@@ -495,7 +497,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         // definitely be the case. If we are in a variant interface, we always force
                         // creation of a display class.
                         VarianceSafety.GetEnclosingVariantInterface(_topLevelMethod) is object
-                    ) {
+                    )
+                    {
                         translatedLambdaContainer = containerAsFrame = GetStaticFrame(
                             Diagnostics,
                             syntax
@@ -537,7 +540,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             static ImmutableArray<SynthesizedClosureEnvironment> getStructEnvironments(
                 Analysis.NestedFunction function
-            ) {
+            )
+            {
                 var environments = ArrayBuilder<SynthesizedClosureEnvironment>.GetInstance();
 
                 foreach (var env in function.CapturedEnvironments)
@@ -564,7 +568,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private SynthesizedClosureEnvironment GetStaticFrame(
             BindingDiagnosticBag diagnostics,
             SyntaxNode syntax
-        ) {
+        )
+        {
             if ((object)_lazyStaticLambdaFrame == null)
             {
                 var isNonGeneric = !_topLevelMethod.IsGenericMethod;
@@ -675,7 +680,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         protected override BoundExpression FramePointer(
             SyntaxNode syntax,
             NamedTypeSymbol frameClass
-        ) {
+        )
+        {
             Debug.Assert(frameClass.IsDefinition);
 
             // If in an instance method of the right type, we can just return the "this" pointer.
@@ -686,7 +692,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     frameClass,
                     TypeCompareKind.ConsiderEverything2
                 )
-            ) {
+            )
+            {
                 return new BoundThisReference(syntax, frameClass);
             }
 
@@ -704,7 +711,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             frameClass,
                             TypeCompareKind.ConsiderEverything2
                         )
-                    ) {
+                    )
+                    {
                         return new BoundParameter(syntax, potentialParameter);
                     }
                 }
@@ -758,7 +766,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundNode node,
             Analysis.ClosureEnvironment env,
             Func<ArrayBuilder<BoundExpression>, ArrayBuilder<LocalSymbol>, BoundNode> F
-        ) {
+        )
+        {
             var frame = env.SynthesizedEnvironment;
             var frameTypeParameters = ImmutableArray.Create(
                 _currentTypeParameters.SelectAsArray(t => TypeWithAnnotations.Create(t)),
@@ -889,7 +898,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Symbol symbol,
             LocalSymbol framePointer,
             ArrayBuilder<BoundExpression> prologue
-        ) {
+        )
+        {
             CapturedSymbolReplacement proxy;
             if (proxies.TryGetValue(symbol, out proxy))
             {
@@ -936,7 +946,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     _currentMethod.MethodKind == MethodKind.Constructor
                     && symbol == _currentMethod.ThisParameter
                     && !_seenBaseCall
-                ) {
+                )
+                {
                     // Containing method is a constructor
                     // Initialization statement for the "this" proxy must be inserted
                     // after the constructor initializer statement block
@@ -1007,7 +1018,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             out MethodSymbol method,
             ref ImmutableArray<BoundExpression> arguments,
             ref ImmutableArray<RefKind> argRefKinds
-        ) {
+        )
+        {
             Debug.Assert(localFunc.MethodKind == MethodKind.LocalFunction);
 
             var function = Analysis.GetNestedFunctionInTree(
@@ -1106,7 +1118,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </example>
         private ImmutableArray<TypeWithAnnotations> SubstituteTypeArguments(
             ImmutableArray<TypeWithAnnotations> typeArguments
-        ) {
+        )
+        {
             Debug.Assert(!typeArguments.IsDefault);
 
             if (typeArguments.IsEmpty)
@@ -1168,7 +1181,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ref MethodSymbol synthesizedMethod,
             out BoundExpression receiver,
             out NamedTypeSymbol constructedFrame
-        ) {
+        )
+        {
             var translatedLambdaContainer = synthesizedMethod.ContainingType;
             var containerAsFrame = translatedLambdaContainer as SynthesizedClosureEnvironment;
 
@@ -1308,7 +1322,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundSequence node,
             ArrayBuilder<BoundExpression> prologue,
             ArrayBuilder<LocalSymbol> newLocals
-        ) {
+        )
+        {
             RewriteLocals(node.Locals, newLocals);
 
             foreach (var effect in node.SideEffects)
@@ -1355,7 +1370,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundBlock node,
             ArrayBuilder<BoundExpression> prologue,
             ArrayBuilder<LocalSymbol> newLocals
-        ) {
+        )
+        {
             RewriteLocals(node.Locals, newLocals);
 
             var newStatements = ArrayBuilder<BoundStatement>.GetInstance();
@@ -1428,7 +1444,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundCatchBlock node,
             ArrayBuilder<BoundExpression> prologue,
             ArrayBuilder<LocalSymbol> newLocals
-        ) {
+        )
+        {
             RewriteLocals(node.Locals, newLocals);
             var rewrittenCatchLocals = newLocals.ToImmutableAndFree();
 
@@ -1554,7 +1571,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override BoundNode VisitDelegateCreationExpression(
             BoundDelegateCreationExpression node
-        ) {
+        )
+        {
             // A delegate creation expression of the form "new Action( ()=>{} )" is treated exactly like
             // (Action)(()=>{})
             if (node.Argument.Kind == BoundKind.Lambda)
@@ -1727,7 +1745,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     isLambdaBody,
                     out previousLambdaId
                 )
-            ) {
+            )
+            {
                 lambdaId = previousLambdaId;
             }
             else
@@ -1756,7 +1775,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             out BoundNode lambdaScope,
             out DebugId topLevelMethodId,
             out DebugId lambdaId
-        ) {
+        )
+        {
             Analysis.NestedFunction function = Analysis.GetNestedFunctionInTree(
                 _analysis.ScopeTree,
                 node.Symbol
@@ -1974,7 +1994,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (
                         shouldCacheForStaticMethod
                         || shouldCacheInLoop && (object)containerAsFrame != null
-                    ) {
+                    )
+                    {
                         // Since the cache variable will be in a container with possibly alpha-rewritten generic parameters, we need to
                         // substitute the original type according to the type map for that container. That substituted type may be
                         // different from the local variable `type`, which has the node's type substituted for the current container.

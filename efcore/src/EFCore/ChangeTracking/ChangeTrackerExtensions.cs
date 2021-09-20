@@ -35,14 +35,16 @@ namespace Microsoft.EntityFrameworkCore
             this ChangeTracker changeTracker,
             ChangeTrackerDebugStringOptions options = ChangeTrackerDebugStringOptions.LongDefault,
             int indent = 0
-        ) {
+        )
+        {
             var builder = new StringBuilder();
             var indentString = new string(' ', indent);
 
             var stateManager = changeTracker.Context.GetService<IStateManager>();
             foreach (
                 var entry in stateManager.Entries.OrderBy(e => e, EntityEntryComparer.Instance)
-            ) {
+            )
+            {
                 builder.Append(indentString).AppendLine(entry.ToDebugString(options, indent));
             }
 

@@ -609,7 +609,8 @@ class C
         private async Task TestInRegularAndScriptWhenDiagnosticNotAppliedAsync(
             string initialMarkup,
             string expectedMarkup
-        ) {
+        )
+        {
             // Enabled because the diagnostic is disabled
             await TestInRegularAndScriptAsync(
                 initialMarkup,

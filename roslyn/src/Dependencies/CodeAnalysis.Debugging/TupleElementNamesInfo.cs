@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.Debugging
             string localName,
             int scopeStart,
             int scopeEnd
-        ) {
+        )
+        {
             Debug.Assert(!elementNames.IsDefault);
 
             ElementNames = elementNames;

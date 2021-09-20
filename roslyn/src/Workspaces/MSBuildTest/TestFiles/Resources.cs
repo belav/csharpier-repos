@@ -54,7 +54,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.TestFiles
             string name,
             Func<string, TResult> loader,
             ref Dictionary<string, TResult> cache
-        ) {
+        )
+        {
             if (cache != null && cache.TryGetValue(name, out var result))
             {
                 return result;

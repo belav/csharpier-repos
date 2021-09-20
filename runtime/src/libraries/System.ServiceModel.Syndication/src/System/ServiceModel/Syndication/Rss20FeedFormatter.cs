@@ -66,10 +66,8 @@ namespace System.ServiceModel.Syndication
 
         public Rss20FeedFormatter(SyndicationFeed feedToWrite) : this(feedToWrite, true) { }
 
-        public Rss20FeedFormatter(
-            SyndicationFeed feedToWrite,
-            bool serializeExtensionsAsAtom
-        ) : base(feedToWrite)
+        public Rss20FeedFormatter(SyndicationFeed feedToWrite, bool serializeExtensionsAsAtom)
+            : base(feedToWrite)
         {
             // No need to check that the parameter passed is valid - it is checked by the c'tor of the base class
             SerializeExtensionsAsAtom = serializeExtensionsAsAtom;
@@ -185,7 +183,8 @@ namespace System.ServiceModel.Syndication
             XmlReader reader,
             SyndicationFeed feed,
             out bool areAllItemsRead
-        ) {
+        )
+        {
             if (feed == null)
             {
                 throw new ArgumentNullException(nameof(feed));
@@ -216,7 +215,8 @@ namespace System.ServiceModel.Syndication
             XmlWriter writer,
             IEnumerable<SyndicationItem> items,
             Uri feedBaseUri
-        ) {
+        )
+        {
             if (items == null)
             {
                 return;
@@ -251,7 +251,8 @@ namespace System.ServiceModel.Syndication
             Uri baseUri,
             TryParseUriCallback uriParser,
             bool preserveAttributeExtensions
-        ) {
+        )
+        {
             var link = new SyndicationLink
             {
                 BaseUri = baseUri,
@@ -264,7 +265,8 @@ namespace System.ServiceModel.Syndication
                     if (
                         reader.LocalName == "base"
                         && reader.NamespaceURI == Atom10FeedFormatter.XmlNs
-                    ) {
+                    )
+                    {
                         link.BaseUri = FeedUtils.CombineXmlBase(link.BaseUri, reader.Value);
                     }
                     else if (!FeedUtils.IsXmlns(reader.LocalName, reader.NamespaceURI))
@@ -398,7 +400,8 @@ namespace System.ServiceModel.Syndication
                                     Rss20Constants.TitleTag,
                                     Rss20Constants.Rss20Namespace
                                 )
-                            ) {
+                            )
+                            {
                                 result.Title = new TextSyndicationContent(
                                     reader.ReadElementString()
                                 );
@@ -408,7 +411,8 @@ namespace System.ServiceModel.Syndication
                                     Rss20Constants.LinkTag,
                                     Rss20Constants.Rss20Namespace
                                 )
-                            ) {
+                            )
+                            {
                                 result.Links.Add(
                                     ReadAlternateLink(
                                         reader,
@@ -424,7 +428,8 @@ namespace System.ServiceModel.Syndication
                                     Rss20Constants.DescriptionTag,
                                     Rss20Constants.Rss20Namespace
                                 )
-                            ) {
+                            )
+                            {
                                 result.Summary = new TextSyndicationContent(
                                     reader.ReadElementString()
                                 );
@@ -434,7 +439,8 @@ namespace System.ServiceModel.Syndication
                                     Rss20Constants.AuthorTag,
                                     Rss20Constants.Rss20Namespace
                                 )
-                            ) {
+                            )
+                            {
                                 result.Authors.Add(ReadPerson(reader, result));
                             }
                             else if (
@@ -442,7 +448,8 @@ namespace System.ServiceModel.Syndication
                                     Rss20Constants.CategoryTag,
                                     Rss20Constants.Rss20Namespace
                                 )
-                            ) {
+                            )
+                            {
                                 result.Categories.Add(ReadCategory(reader, result));
                             }
                             else if (
@@ -450,7 +457,8 @@ namespace System.ServiceModel.Syndication
                                     Rss20Constants.EnclosureTag,
                                     Rss20Constants.Rss20Namespace
                                 )
-                            ) {
+                            )
+                            {
                                 result.Links.Add(ReadMediaEnclosure(reader, result.BaseUri));
                             }
                             else if (
@@ -458,7 +466,8 @@ namespace System.ServiceModel.Syndication
                                     Rss20Constants.GuidTag,
                                     Rss20Constants.Rss20Namespace
                                 )
-                            ) {
+                            )
+                            {
                                 bool isPermalink = true;
                                 string permalinkString = reader.GetAttribute(
                                     Rss20Constants.IsPermaLinkTag,
@@ -467,7 +476,8 @@ namespace System.ServiceModel.Syndication
                                 if (
                                     (permalinkString != null)
                                     && (permalinkString.ToUpperInvariant() == "FALSE")
-                                ) {
+                                )
+                                {
                                     isPermalink = false;
                                 }
 
@@ -484,7 +494,8 @@ namespace System.ServiceModel.Syndication
                                     Rss20Constants.PubDateTag,
                                     Rss20Constants.Rss20Namespace
                                 )
-                            ) {
+                            )
+                            {
                                 bool canReadContent = !reader.IsEmptyElement;
                                 reader.ReadStartElement();
                                 if (canReadContent)
@@ -509,7 +520,8 @@ namespace System.ServiceModel.Syndication
                                     Rss20Constants.SourceTag,
                                     Rss20Constants.Rss20Namespace
                                 )
-                            ) {
+                            )
+                            {
                                 SyndicationFeed feed = new SyndicationFeed();
                                 if (reader.HasAttributes)
                                 {
@@ -525,7 +537,8 @@ namespace System.ServiceModel.Syndication
                                         if (
                                             name == Rss20Constants.UrlTag
                                             && ns == Rss20Constants.Rss20Namespace
-                                        ) {
+                                        )
+                                        {
                                             feed.Links.Add(
                                                 SyndicationLink.CreateSelfLink(
                                                     UriFromString(
@@ -665,7 +678,8 @@ namespace System.ServiceModel.Syndication
                     }
                     else if (
                         name == Rss20Constants.LengthTag && ns == Rss20Constants.Rss20Namespace
-                    ) {
+                    )
+                    {
                         link.Length = !string.IsNullOrEmpty(val)
                             ? Convert.ToInt64(val, CultureInfo.InvariantCulture.NumberFormat)
                             : 0;
@@ -825,7 +839,8 @@ namespace System.ServiceModel.Syndication
                                 Rss20Constants.TitleTag,
                                 Rss20Constants.Rss20Namespace
                             )
-                        ) {
+                        )
+                        {
                             result.Title = new TextSyndicationContent(reader.ReadElementString());
                         }
                         else if (
@@ -833,7 +848,8 @@ namespace System.ServiceModel.Syndication
                                 Rss20Constants.LinkTag,
                                 Rss20Constants.Rss20Namespace
                             )
-                        ) {
+                        )
+                        {
                             result.Links.Add(
                                 ReadAlternateLink(
                                     reader,
@@ -848,7 +864,8 @@ namespace System.ServiceModel.Syndication
                                 Rss20Constants.DescriptionTag,
                                 Rss20Constants.Rss20Namespace
                             )
-                        ) {
+                        )
+                        {
                             result.Description = new TextSyndicationContent(
                                 reader.ReadElementString()
                             );
@@ -858,7 +875,8 @@ namespace System.ServiceModel.Syndication
                                 Rss20Constants.LanguageTag,
                                 Rss20Constants.Rss20Namespace
                             )
-                        ) {
+                        )
+                        {
                             result.Language = reader.ReadElementString();
                         }
                         else if (
@@ -866,7 +884,8 @@ namespace System.ServiceModel.Syndication
                                 Rss20Constants.CopyrightTag,
                                 Rss20Constants.Rss20Namespace
                             )
-                        ) {
+                        )
+                        {
                             result.Copyright = new TextSyndicationContent(
                                 reader.ReadElementString()
                             );
@@ -876,7 +895,8 @@ namespace System.ServiceModel.Syndication
                                 Rss20Constants.ManagingEditorTag,
                                 Rss20Constants.Rss20Namespace
                             )
-                        ) {
+                        )
+                        {
                             result.Authors.Add(ReadPerson(reader, result));
                         }
                         else if (
@@ -884,7 +904,8 @@ namespace System.ServiceModel.Syndication
                                 Rss20Constants.LastBuildDateTag,
                                 Rss20Constants.Rss20Namespace
                             )
-                        ) {
+                        )
+                        {
                             bool canReadContent = !reader.IsEmptyElement;
                             reader.ReadStartElement();
                             if (canReadContent)
@@ -909,7 +930,8 @@ namespace System.ServiceModel.Syndication
                                 Rss20Constants.CategoryTag,
                                 Rss20Constants.Rss20Namespace
                             )
-                        ) {
+                        )
+                        {
                             result.Categories.Add(ReadCategory(reader, result));
                         }
                         else if (
@@ -917,7 +939,8 @@ namespace System.ServiceModel.Syndication
                                 Rss20Constants.GeneratorTag,
                                 Rss20Constants.Rss20Namespace
                             )
-                        ) {
+                        )
+                        {
                             result.Generator = reader.ReadElementString();
                         }
                         else if (
@@ -925,7 +948,8 @@ namespace System.ServiceModel.Syndication
                                 Rss20Constants.ImageTag,
                                 Rss20Constants.Rss20Namespace
                             )
-                        ) {
+                        )
+                        {
                             reader.ReadStartElement();
                             while (reader.IsStartElement())
                             {
@@ -934,7 +958,8 @@ namespace System.ServiceModel.Syndication
                                         Rss20Constants.UrlTag,
                                         Rss20Constants.Rss20Namespace
                                     )
-                                ) {
+                                )
+                                {
                                     result.ImageUrl = UriFromString(
                                         reader.ReadElementString(),
                                         UriKind.RelativeOrAbsolute,
@@ -956,7 +981,8 @@ namespace System.ServiceModel.Syndication
                                 Rss20Constants.ItemTag,
                                 Rss20Constants.Rss20Namespace
                             )
-                        ) {
+                        )
+                        {
                             feedItems =
                                 feedItems ?? new NullNotAllowedCollection<SyndicationItem>();
                             IEnumerable<SyndicationItem> items = ReadItems(
@@ -1060,7 +1086,8 @@ namespace System.ServiceModel.Syndication
             if (
                 !string.IsNullOrEmpty(category.Scheme)
                 && !category.AttributeExtensions.ContainsKey(s_rss20Domain)
-            ) {
+            )
+            {
                 writer.WriteAttributeString(
                     Rss20Constants.DomainTag,
                     Rss20Constants.Rss20Namespace,
@@ -1271,7 +1298,8 @@ namespace System.ServiceModel.Syndication
                     if (
                         Feed.Links[i].RelationshipType == Atom10Constants.AlternateTag
                         && isFirstAlternateLink
-                    ) {
+                    )
+                    {
                         isFirstAlternateLink = false;
                         continue;
                     }
@@ -1394,7 +1422,8 @@ namespace System.ServiceModel.Syndication
                 }
                 if (
                     selfLink != null && !item.SourceFeed.AttributeExtensions.ContainsKey(s_rss20Url)
-                ) {
+                )
+                {
                     writer.WriteAttributeString(
                         Rss20Constants.UrlTag,
                         Rss20Constants.Rss20Namespace,
@@ -1538,10 +1567,8 @@ namespace System.ServiceModel.Syndication
 
         public Rss20FeedFormatter(TSyndicationFeed feedToWrite) : base(feedToWrite) { }
 
-        public Rss20FeedFormatter(
-            TSyndicationFeed feedToWrite,
-            bool serializeExtensionsAsAtom
-        ) : base(feedToWrite, serializeExtensionsAsAtom) { }
+        public Rss20FeedFormatter(TSyndicationFeed feedToWrite, bool serializeExtensionsAsAtom)
+            : base(feedToWrite, serializeExtensionsAsAtom) { }
 
         protected override SyndicationFeed CreateFeedInstance() => new TSyndicationFeed();
     }

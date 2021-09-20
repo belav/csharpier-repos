@@ -145,7 +145,8 @@ namespace System.Diagnostics.Tests
             EventLogEntryType expectedType,
             int id,
             int expectedId
-        ) {
+        )
+        {
             string log = "TraceEvent";
             string source = "Source" + nameof(TraceEventTest);
             try
@@ -421,7 +422,8 @@ namespace System.Diagnostics.Tests
             EventLogTraceListener listener,
             string message,
             string source
-        ) {
+        )
+        {
             EventLogEntry eventLogEntry = listener.EventLog.Entries.LastOrDefault();
             if (eventLogEntry != null)
             {

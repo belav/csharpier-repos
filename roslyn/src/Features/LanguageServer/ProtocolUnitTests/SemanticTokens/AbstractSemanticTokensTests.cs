@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.SemanticTokens
         private protected static async Task<LSP.SemanticTokens> RunGetSemanticTokensAsync(
             TestLspServer testLspServer,
             LSP.Location caret
-        ) {
+        )
+        {
             return await testLspServer.ExecuteRequestAsync<
                 LSP.SemanticTokensParams,
                 LSP.SemanticTokens
@@ -44,7 +45,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.SemanticTokens
             TestLspServer testLspServer,
             LSP.Location caret,
             LSP.Range range
-        ) {
+        )
+        {
             return await testLspServer.ExecuteRequestAsync<
                 LSP.SemanticTokensRangeParams,
                 LSP.SemanticTokens
@@ -73,7 +75,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.SemanticTokens
             TestLspServer testLspServer,
             LSP.Location caret,
             string previousResultId
-        ) {
+        )
+        {
             return await testLspServer.ExecuteRequestAsync<
                 LSP.SemanticTokensEditsParams,
                 SumType<LSP.SemanticTokens, LSP.SemanticTokensEdits>
@@ -107,7 +110,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.SemanticTokens
         protected static async Task VerifyNoMultiLineTokens(
             TestLspServer testLspServer,
             int[] tokens
-        ) {
+        )
+        {
             var document = testLspServer.GetCurrentSolution().Projects.First().Documents.First();
             var text = await document.GetTextAsync().ConfigureAwait(false);
 

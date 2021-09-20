@@ -354,7 +354,8 @@ namespace System
         private void ExecutionAndPublication(
             LazyHelper executionAndPublication,
             bool useDefaultConstructor
-        ) {
+        )
+        {
             lock (executionAndPublication)
             {
                 // it's possible for multiple calls to have piled up behind the lock, so we need to check

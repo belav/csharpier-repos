@@ -106,7 +106,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Setup
         protected override async Task InitializeAsync(
             CancellationToken cancellationToken,
             IProgress<ServiceProgressData> progress
-        ) {
+        )
+        {
             await base.InitializeAsync(cancellationToken, progress).ConfigureAwait(true);
 
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
@@ -120,7 +121,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Setup
             foreach (
                 var provider in await GetOptionPersistersAsync(_componentModel, cancellationToken)
                     .ConfigureAwait(true)
-            ) {
+            )
+            {
                 _ = await provider.GetOrCreatePersisterAsync(cancellationToken)
                     .ConfigureAwait(true);
             }
@@ -162,7 +164,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Setup
             static async Task<ImmutableArray<IOptionPersisterProvider>> GetOptionPersistersAsync(
                 IComponentModel componentModel,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // Switch to a background thread to ensure assembly loads don't show up as UI delays attributed to
                 // InitializeAsync.
                 await TaskScheduler.Default;

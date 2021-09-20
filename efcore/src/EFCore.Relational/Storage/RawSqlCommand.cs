@@ -25,7 +25,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         public RawSqlCommand(
             IRelationalCommand relationalCommand,
             IReadOnlyDictionary<string, object?> parameterValues
-        ) {
+        )
+        {
             Check.NotNull(relationalCommand, nameof(relationalCommand));
             Check.NotNull(parameterValues, nameof(parameterValues));
 

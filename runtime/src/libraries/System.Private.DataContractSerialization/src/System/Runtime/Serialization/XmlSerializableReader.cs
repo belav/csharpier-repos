@@ -65,7 +65,8 @@ namespace System.Runtime.Serialization
                 if (
                     reader.NodeType == XmlNodeType.EndElement
                     || (reader.NodeType == XmlNodeType.Element && reader.IsEmptyElement)
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -282,7 +283,8 @@ namespace System.Runtime.Serialization
         public override object ReadContentAs(
             Type returnType,
             IXmlNamespaceResolver? namespaceResolver
-        ) {
+        )
+        {
             return InnerReader.ReadContentAs(returnType, namespaceResolver);
         }
         public override int ReadContentAsBase64(byte[] buffer, int index, int count)

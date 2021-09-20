@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             bool quoteStringsAndCharacters,
             bool escapeNonPrintableCharacters,
             CultureInfo cultureInfo
-        ) {
+        )
+        {
             NumberRadix = numberRadix;
             IncludeCharacterCodePoints = includeCodePoints;
             QuoteStringsAndCharacters = quoteStringsAndCharacters;

@@ -145,7 +145,8 @@ namespace Microsoft.AspNetCore.Routing.Constraints
             string routeValue,
             string constraintValue,
             bool expected
-        ) {
+        )
+        {
             // Arrange
             var constraint = new StringRouteConstraint(constraintValue);
 

@@ -87,7 +87,8 @@ namespace Microsoft.Extensions.Hosting
         public static async Task WaitForShutdownAsync(
             this IHost host,
             CancellationToken token = default
-        ) {
+        )
+        {
             IHostApplicationLifetime applicationLifetime =
                 host.Services.GetService<IHostApplicationLifetime>();
 

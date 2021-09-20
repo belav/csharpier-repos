@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Rebuild
             ILogger logger,
             string optionName,
             [NotNullWhen(true)] out string? value
-        ) {
+        )
+        {
             var result = TryGetUniqueOption(optionName, out value);
             logger.LogInformation($"{optionName} - {value}");
             return result;

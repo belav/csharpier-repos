@@ -28,11 +28,8 @@ namespace System.Net.WebSockets
         public WebSocketException(WebSocketError error, Exception? innerException)
             : this(error, GetErrorMessage(error), innerException) { }
 
-        public WebSocketException(
-            WebSocketError error,
-            string? message,
-            Exception? innerException
-        ) : base(message, innerException)
+        public WebSocketException(WebSocketError error, string? message, Exception? innerException)
+            : base(message, innerException)
         {
             _webSocketErrorCode = error;
         }
@@ -72,11 +69,8 @@ namespace System.Net.WebSockets
             SetErrorCodeOnError(nativeError);
         }
 
-        public WebSocketException(
-            WebSocketError error,
-            int nativeError,
-            Exception? innerException
-        ) : this(error, nativeError, GetErrorMessage(error), innerException) { }
+        public WebSocketException(WebSocketError error, int nativeError, Exception? innerException)
+            : this(error, nativeError, GetErrorMessage(error), innerException) { }
 
         public WebSocketException(
             WebSocketError error,

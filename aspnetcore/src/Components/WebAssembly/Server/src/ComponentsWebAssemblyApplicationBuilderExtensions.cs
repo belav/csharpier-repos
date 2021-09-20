@@ -31,7 +31,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IApplicationBuilder UseBlazorFrameworkFiles(
             this IApplicationBuilder builder,
             PathString pathPrefix
-        ) {
+        )
+        {
             if (builder is null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -67,7 +68,8 @@ namespace Microsoft.AspNetCore.Builder
                                     "DOTNET_MODIFIABLE_ASSEMBLIES"
                                 )
                                     is not null
-                            ) {
+                            )
+                            {
                                 context.Response.Headers.Append(
                                     "DOTNET-MODIFIABLE-ASSEMBLIES",
                                     Environment.GetEnvironmentVariable(
@@ -139,7 +141,8 @@ namespace Microsoft.AspNetCore.Builder
                             originalPath,
                             out var originalContentType
                         )
-                    ) {
+                    )
+                    {
                         fileContext.Context.Response.ContentType = originalContentType;
                     }
                 }
@@ -152,7 +155,8 @@ namespace Microsoft.AspNetCore.Builder
             FileExtensionContentTypeProvider provider,
             string name,
             string mimeType
-        ) {
+        )
+        {
             if (!provider.Mappings.ContainsKey(name))
             {
                 provider.Mappings.Add(name, mimeType);

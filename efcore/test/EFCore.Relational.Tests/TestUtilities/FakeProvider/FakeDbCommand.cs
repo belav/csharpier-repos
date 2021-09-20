@@ -87,7 +87,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider
         protected override Task<DbDataReader> ExecuteDbDataReaderAsync(
             CommandBehavior behavior,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             AssertTransaction();
 
             return _commandExecutor.ExecuteReaderAsync(this, behavior, cancellationToken);

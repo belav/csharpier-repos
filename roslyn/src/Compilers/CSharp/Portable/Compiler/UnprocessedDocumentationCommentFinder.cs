@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TextSpan? filterSpanWithinTree,
             DiagnosticBag diagnostics,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (tree.ReportDocumentationCommentDiagnostics())
             {
                 UnprocessedDocumentationCommentFinder finder =

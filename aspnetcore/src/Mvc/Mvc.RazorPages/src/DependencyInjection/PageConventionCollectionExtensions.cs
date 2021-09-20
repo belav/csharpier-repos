@@ -24,7 +24,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IPageApplicationModelConvention ConfigureFilter(
             this PageConventionCollection conventions,
             Func<PageApplicationModel, IFilterMetadata> factory
-        ) {
+        )
+        {
             if (conventions == null)
             {
                 throw new ArgumentNullException(nameof(conventions));
@@ -50,7 +51,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static PageConventionCollection ConfigureFilter(
             this PageConventionCollection conventions,
             IFilterMetadata filter
-        ) {
+        )
+        {
             if (conventions == null)
             {
                 throw new ArgumentNullException(nameof(conventions));
@@ -78,7 +80,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static PageConventionCollection Add(
             this PageConventionCollection conventions,
             IParameterModelBaseConvention convention
-        ) {
+        )
+        {
             if (conventions == null)
             {
                 throw new ArgumentNullException(nameof(conventions));
@@ -103,7 +106,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static PageConventionCollection AllowAnonymousToPage(
             this PageConventionCollection conventions,
             string pageName
-        ) {
+        )
+        {
             if (conventions == null)
             {
                 throw new ArgumentNullException(nameof(conventions));
@@ -151,7 +155,8 @@ namespace Microsoft.Extensions.DependencyInjection
             this PageConventionCollection conventions,
             string areaName,
             string pageName
-        ) {
+        )
+        {
             if (conventions == null)
             {
                 throw new ArgumentNullException(nameof(conventions));
@@ -200,7 +205,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static PageConventionCollection AllowAnonymousToFolder(
             this PageConventionCollection conventions,
             string folderPath
-        ) {
+        )
+        {
             if (conventions == null)
             {
                 throw new ArgumentNullException(nameof(conventions));
@@ -248,7 +254,8 @@ namespace Microsoft.Extensions.DependencyInjection
             this PageConventionCollection conventions,
             string areaName,
             string folderPath
-        ) {
+        )
+        {
             if (conventions == null)
             {
                 throw new ArgumentNullException(nameof(conventions));
@@ -299,7 +306,8 @@ namespace Microsoft.Extensions.DependencyInjection
             this PageConventionCollection conventions,
             string pageName,
             string policy
-        ) {
+        )
+        {
             if (conventions == null)
             {
                 throw new ArgumentNullException(nameof(conventions));
@@ -379,7 +387,8 @@ namespace Microsoft.Extensions.DependencyInjection
             string areaName,
             string pageName,
             string policy
-        ) {
+        )
+        {
             if (conventions == null)
             {
                 throw new ArgumentNullException(nameof(conventions));
@@ -430,7 +439,8 @@ namespace Microsoft.Extensions.DependencyInjection
             this PageConventionCollection conventions,
             string folderPath,
             string policy
-        ) {
+        )
+        {
             if (conventions == null)
             {
                 throw new ArgumentNullException(nameof(conventions));
@@ -510,7 +520,8 @@ namespace Microsoft.Extensions.DependencyInjection
             string areaName,
             string folderPath,
             string policy
-        ) {
+        )
+        {
             if (conventions == null)
             {
                 throw new ArgumentNullException(nameof(conventions));
@@ -565,7 +576,8 @@ namespace Microsoft.Extensions.DependencyInjection
             this PageConventionCollection conventions,
             string pageName,
             string route
-        ) {
+        )
+        {
             if (conventions == null)
             {
                 throw new ArgumentNullException(nameof(conventions));
@@ -613,7 +625,8 @@ namespace Microsoft.Extensions.DependencyInjection
             string areaName,
             string pageName,
             string route
-        ) {
+        )
+        {
             if (conventions == null)
             {
                 throw new ArgumentNullException(nameof(conventions));

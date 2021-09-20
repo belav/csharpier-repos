@@ -60,7 +60,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 Compilation compilation,
                 TargetScope scope,
                 string fullyQualifiedName
-            ) {
+            )
+            {
                 _compilation = compilation;
                 _scope = scope;
                 _name = fullyQualifiedName;
@@ -163,7 +164,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     if (
                         !isIndexerProperty && nextChar == '('
                         || isIndexerProperty && nextChar == '['
-                    ) {
+                    )
+                    {
                         parameters = ParseParameterList();
                         if (parameters == null)
                         {
@@ -223,7 +225,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                                 parameters,
                                 returnType
                             )
-                        ) {
+                        )
+                        {
                             results.Add(method);
                         }
                         break;
@@ -299,7 +302,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                             if (
                                 callingConvention
                                 == _name.Substring(_index, callingConvention.Length)
-                            ) {
+                            )
+                            {
                                 _index += callingConvention.Length;
                                 break;
                             }
@@ -610,7 +614,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     var containingType = bindingContext.ContainingType;
                     containingType != null;
                     containingType = containingType.ContainingType
-                ) {
+                )
+                {
                     for (int i = 0; i < containingType.TypeParameters.Length; ++i)
                     {
                         if (containingType.TypeParameters[i].Name == typeParameterName)
@@ -780,14 +785,16 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             private ISymbol GetFirstMatchingIndexer(
                 ImmutableArray<ISymbol> candidateMembers,
                 ParameterInfo[] parameters
-            ) {
+            )
+            {
                 foreach (var symbol in candidateMembers)
                 {
                     var propertySymbol = symbol as IPropertySymbol;
                     if (
                         propertySymbol != null
                         && AllParametersMatch(propertySymbol.Parameters, parameters)
-                    ) {
+                    )
+                    {
                         return propertySymbol;
                     }
                 }
@@ -800,7 +807,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 int? arity,
                 ParameterInfo[] parameters,
                 TypeInfo? returnType
-            ) {
+            )
+            {
                 var builder = new ArrayBuilder<IMethodSymbol>();
 
                 foreach (var symbol in candidateMembers)
@@ -831,7 +839,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                         if (
                             boundReturnType != null
                             && methodSymbol.ReturnType.Equals(boundReturnType)
-                        ) {
+                        )
+                        {
                             builder.Add(methodSymbol);
                         }
                     }
@@ -843,7 +852,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             private bool AllParametersMatch(
                 ImmutableArray<IParameterSymbol> symbolParameters,
                 ParameterInfo[] expectedParameters
-            ) {
+            )
+            {
                 if (symbolParameters.Length != expectedParameters.Length)
                 {
                     return false;
@@ -894,7 +904,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             private static INamedTypeSymbol GetFirstMatchingNamedType(
                 ImmutableArray<ISymbol> candidateMembers,
                 int arity
-            ) {
+            )
+            {
                 return (INamedTypeSymbol)candidateMembers.FirstOrDefault(
                     s => s.Kind == SymbolKind.NamedType && ((INamedTypeSymbol)s).Arity == arity
                 );
@@ -902,7 +913,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
             private static INamespaceOrTypeSymbol GetFirstMatchingNamespaceOrType(
                 ImmutableArray<ISymbol> candidateMembers
-            ) {
+            )
+            {
                 return (INamespaceOrTypeSymbol)candidateMembers.FirstOrDefault(
                     s => s.Kind == SymbolKind.Namespace || s.Kind == SymbolKind.NamedType
                 );
@@ -911,7 +923,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             private static ITypeParameterSymbol GetNthTypeParameter(
                 INamedTypeSymbol typeSymbol,
                 int n
-            ) {
+            )
+            {
                 var containingTypeParameterCount = GetTypeParameterCount(typeSymbol.ContainingType);
                 if (n < containingTypeParameterCount)
                 {

@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.GeneratedCodeRecognition
         public async Task<bool> IsGeneratedCodeAsync(
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxTree = await document.GetSyntaxTreeAsync(cancellationToken)
                 .ConfigureAwait(false);
             return IsGeneratedCode(syntaxTree, document, cancellationToken);
@@ -36,7 +37,8 @@ namespace Microsoft.CodeAnalysis.GeneratedCodeRecognition
             SyntaxTree syntaxTree,
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxFacts = document.GetLanguageService<ISyntaxFactsService>();
             return syntaxTree.IsGeneratedCode(
                 document.Project.AnalyzerOptions,

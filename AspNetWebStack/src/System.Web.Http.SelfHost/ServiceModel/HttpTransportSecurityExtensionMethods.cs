@@ -14,7 +14,8 @@ namespace System.Web.Http.SelfHost.ServiceModel
         internal static void ConfigureTransportProtectionAndAuthentication(
             this HttpTransportSecurity httpTransportSecurity,
             HttpsTransportBindingElement httpsTransportBindingElement
-        ) {
+        )
+        {
             Contract.Assert(httpTransportSecurity != null);
             Contract.Assert(httpsTransportBindingElement != null);
 
@@ -26,7 +27,8 @@ namespace System.Web.Http.SelfHost.ServiceModel
         internal static void ConfigureTransportAuthentication(
             this HttpTransportSecurity httpTransportSecurity,
             HttpTransportBindingElement httpTransportBindingElement
-        ) {
+        )
+        {
             Contract.Assert(httpTransportSecurity != null);
             Contract.Assert(httpTransportBindingElement != null);
 
@@ -43,7 +45,8 @@ namespace System.Web.Http.SelfHost.ServiceModel
         internal static void DisableTransportAuthentication(
             this HttpTransportSecurity httpTransportSecurity,
             HttpTransportBindingElement httpTransportBindingElement
-        ) {
+        )
+        {
             Contract.Assert(httpTransportSecurity != null);
             Contract.Assert(httpTransportBindingElement != null);
 
@@ -57,7 +60,8 @@ namespace System.Web.Http.SelfHost.ServiceModel
         private static void ConfigureAuthentication(
             this HttpTransportSecurity httpTransportSecurity,
             HttpTransportBindingElement httpTransportBindingElement
-        ) {
+        )
+        {
             Contract.Assert(httpTransportSecurity != null);
             Contract.Assert(httpTransportBindingElement != null);
 

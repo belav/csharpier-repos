@@ -149,14 +149,16 @@ namespace System.Net.Quic.Implementations.MsQuic
         internal override ValueTask WriteAsync(
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return WriteAsync(buffer, endStream: false, cancellationToken);
         }
 
         internal override ValueTask WriteAsync(
             ReadOnlySequence<byte> buffers,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return WriteAsync(buffers, endStream: false, cancellationToken);
         }
 
@@ -164,7 +166,8 @@ namespace System.Net.Quic.Implementations.MsQuic
             ReadOnlySequence<byte> buffers,
             bool endStream,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             ThrowIfDisposed();
 
             using CancellationTokenRegistration registration = await HandleWriteStartState(
@@ -184,7 +187,8 @@ namespace System.Net.Quic.Implementations.MsQuic
         internal override ValueTask WriteAsync(
             ReadOnlyMemory<ReadOnlyMemory<byte>> buffers,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return WriteAsync(buffers, endStream: false, cancellationToken);
         }
 
@@ -192,7 +196,8 @@ namespace System.Net.Quic.Implementations.MsQuic
             ReadOnlyMemory<ReadOnlyMemory<byte>> buffers,
             bool endStream,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             ThrowIfDisposed();
 
             using CancellationTokenRegistration registration = await HandleWriteStartState(
@@ -212,7 +217,8 @@ namespace System.Net.Quic.Implementations.MsQuic
             ReadOnlyMemory<byte> buffer,
             bool endStream,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             ThrowIfDisposed();
 
             using CancellationTokenRegistration registration = await HandleWriteStartState(
@@ -231,7 +237,8 @@ namespace System.Net.Quic.Implementations.MsQuic
 
         private async ValueTask<CancellationTokenRegistration> HandleWriteStartState(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!_canWrite)
             {
                 throw new InvalidOperationException(SR.net_quic_writing_notallowed);
@@ -292,7 +299,8 @@ namespace System.Net.Quic.Implementations.MsQuic
         internal override async ValueTask<int> ReadAsync(
             Memory<byte> destination,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             ThrowIfDisposed();
 
             if (!_canRead)
@@ -358,7 +366,8 @@ namespace System.Net.Quic.Implementations.MsQuic
             static unsafe void CopyToBuffer(
                 Span<byte> destinationBuffer,
                 List<QuicBuffer> sourceBuffers
-            ) {
+            )
+            {
                 Span<byte> slicedBuffer = destinationBuffer;
                 for (int i = 0; i < sourceBuffers.Count; i++)
                 {
@@ -437,7 +446,8 @@ namespace System.Net.Quic.Implementations.MsQuic
 
         internal override async ValueTask ShutdownWriteCompleted(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             ThrowIfDisposed();
 
             // TODO do anything to stop writes?
@@ -548,7 +558,8 @@ namespace System.Net.Quic.Implementations.MsQuic
             IntPtr stream,
             IntPtr context,
             ref StreamEvent streamEvent
-        ) {
+        )
+        {
             var state = (State)GCHandle.FromIntPtr(context).Target!;
             return HandleEvent(state, ref streamEvent);
         }
@@ -817,7 +828,8 @@ namespace System.Net.Quic.Implementations.MsQuic
         private unsafe ValueTask SendReadOnlyMemoryAsync(
             ReadOnlyMemory<byte> buffer,
             QUIC_SEND_FLAGS flags
-        ) {
+        )
+        {
             if (buffer.IsEmpty)
             {
                 if ((flags & QUIC_SEND_FLAGS.FIN) == QUIC_SEND_FLAGS.FIN)
@@ -863,7 +875,8 @@ namespace System.Net.Quic.Implementations.MsQuic
         private unsafe ValueTask SendReadOnlySequenceAsync(
             ReadOnlySequence<byte> buffers,
             QUIC_SEND_FLAGS flags
-        ) {
+        )
+        {
             if (buffers.IsEmpty)
             {
                 if ((flags & QUIC_SEND_FLAGS.FIN) == QUIC_SEND_FLAGS.FIN)
@@ -927,7 +940,8 @@ namespace System.Net.Quic.Implementations.MsQuic
         private unsafe ValueTask SendReadOnlyMemoryListAsync(
             ReadOnlyMemory<ReadOnlyMemory<byte>> buffers,
             QUIC_SEND_FLAGS flags
-        ) {
+        )
+        {
             if (buffers.IsEmpty)
             {
                 if ((flags & QUIC_SEND_FLAGS.FIN) == QUIC_SEND_FLAGS.FIN)

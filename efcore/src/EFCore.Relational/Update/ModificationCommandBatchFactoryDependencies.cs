@@ -61,7 +61,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             IRelationalValueBufferFactoryFactory valueBufferFactoryFactory,
             ICurrentDbContext currentContext,
             IRelationalCommandDiagnosticsLogger logger
-        ) {
+        )
+        {
             Check.NotNull(commandBuilderFactory, nameof(commandBuilderFactory));
             Check.NotNull(sqlGenerationHelper, nameof(sqlGenerationHelper));
             Check.NotNull(updateSqlGenerator, nameof(updateSqlGenerator));

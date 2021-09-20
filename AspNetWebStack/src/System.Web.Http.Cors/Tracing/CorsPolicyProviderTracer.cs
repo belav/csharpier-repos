@@ -21,7 +21,8 @@ namespace System.Web.Http.Cors.Tracing
         public CorsPolicyProviderTracer(
             ICorsPolicyProvider innerPolicyProvider,
             ITraceWriter traceWriter
-        ) {
+        )
+        {
             Contract.Assert(innerPolicyProvider != null);
             Contract.Assert(traceWriter != null);
 
@@ -32,7 +33,8 @@ namespace System.Web.Http.Cors.Tracing
         public Task<CorsPolicy> GetCorsPolicyAsync(
             HttpRequestMessage request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _traceWriter.TraceBeginEndAsync<CorsPolicy>(
                 request,
                 TraceCategories.CorsCategory,

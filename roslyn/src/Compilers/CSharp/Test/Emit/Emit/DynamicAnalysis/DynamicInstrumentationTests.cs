@@ -2476,7 +2476,8 @@ public class Program
                     diagnostic.Code == (int)ErrorCode.ERR_MissingPredefinedMember
                     && diagnostic.Arguments[0].Equals("System.Guid")
                     && diagnostic.Arguments[1].Equals(".ctor")
-                ) {
+                )
+                {
                     return;
                 }
             }
@@ -3666,7 +3667,8 @@ static void Test()
             CompilationVerifier verifier,
             string qualifiedMethodName,
             bool expected = true
-        ) {
+        )
+        {
             string il = verifier.VisualizeIL(qualifiedMethodName);
 
             // Tests using this helper are constructed such that instrumented methods contain a call to CreatePayload,
@@ -3685,7 +3687,8 @@ static void Test()
             CSharpCompilationOptions options = null,
             CSharpParseOptions parseOptions = null,
             Verification verify = Verification.Passes
-        ) {
+        )
+        {
             return base.CompileAndVerify(
                 source,
                 expectedOutput: expectedOutput,
@@ -3702,7 +3705,8 @@ static void Test()
             (string Path, string Content)[] sources,
             string expectedOutput = null,
             CSharpCompilationOptions options = null
-        ) {
+        )
+        {
             var trees = ArrayBuilder<SyntaxTree>.GetInstance();
             foreach (var source in sources)
             {

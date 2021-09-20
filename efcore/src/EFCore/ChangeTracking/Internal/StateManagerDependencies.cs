@@ -80,7 +80,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             IDiagnosticsLogger<DbLoggerCategory.Update> updateLogger,
             IDiagnosticsLogger<DbLoggerCategory.ChangeTracking> changeTrackingLogger,
             INavigationFixer navigationFixer
-        ) {
+        )
+        {
             InternalEntityEntryFactory = internalEntityEntryFactory;
             InternalEntityEntrySubscriber = internalEntityEntrySubscriber;
             InternalEntityEntryNotifier = internalEntityEntryNotifier;

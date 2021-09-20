@@ -286,7 +286,8 @@ namespace System
             out int charsWritten,
             ReadOnlySpan<char> format = default,
             IFormatProvider? provider = null
-        ) {
+        )
+        {
             return Number.TryFormatSingle(
                 m_value,
                 format,
@@ -346,7 +347,8 @@ namespace System
             ReadOnlySpan<char> s,
             NumberStyles style = NumberStyles.Float | NumberStyles.AllowThousands,
             IFormatProvider? provider = null
-        ) {
+        )
+        {
             NumberFormatInfo.ValidateParseStyleFloatingPoint(style);
             return Number.ParseSingle(s, style, NumberFormatInfo.GetInstance(provider));
         }
@@ -382,7 +384,8 @@ namespace System
             NumberStyles style,
             IFormatProvider? provider,
             out float result
-        ) {
+        )
+        {
             NumberFormatInfo.ValidateParseStyleFloatingPoint(style);
 
             if (s == null)
@@ -404,7 +407,8 @@ namespace System
             NumberStyles style,
             IFormatProvider? provider,
             out float result
-        ) {
+        )
+        {
             NumberFormatInfo.ValidateParseStyleFloatingPoint(style);
             return TryParse(s, style, NumberFormatInfo.GetInstance(provider), out result);
         }
@@ -414,7 +418,8 @@ namespace System
             NumberStyles style,
             NumberFormatInfo info,
             out float result
-        ) {
+        )
+        {
             return Number.TryParseSingle(s, style, info, out result);
         }
 

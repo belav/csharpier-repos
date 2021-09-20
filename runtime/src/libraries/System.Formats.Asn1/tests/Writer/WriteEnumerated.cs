@@ -21,7 +21,8 @@ namespace System.Formats.Asn1.Tests.Writer
             ReadEnumerated.SByteBacked value,
             bool customTag,
             string expectedHex
-        ) {
+        )
+        {
             AsnWriter writer = new AsnWriter(ruleSet);
 
             if (customTag)
@@ -47,7 +48,8 @@ namespace System.Formats.Asn1.Tests.Writer
             ReadEnumerated.ByteBacked value,
             bool customTag,
             string expectedHex
-        ) {
+        )
+        {
             AsnWriter writer = new AsnWriter(ruleSet);
 
             if (customTag)
@@ -75,7 +77,8 @@ namespace System.Formats.Asn1.Tests.Writer
             ReadEnumerated.ShortBacked value,
             bool customTag,
             string expectedHex
-        ) {
+        )
+        {
             AsnWriter writer = new AsnWriter(ruleSet);
 
             if (customTag)
@@ -113,7 +116,8 @@ namespace System.Formats.Asn1.Tests.Writer
             ReadEnumerated.UShortBacked value,
             bool customTag,
             string expectedHex
-        ) {
+        )
+        {
             AsnWriter writer = new AsnWriter(ruleSet);
 
             if (customTag)
@@ -158,7 +162,8 @@ namespace System.Formats.Asn1.Tests.Writer
             ReadEnumerated.IntBacked value,
             bool customTag,
             string expectedHex
-        ) {
+        )
+        {
             AsnWriter writer = new AsnWriter(ruleSet);
 
             if (customTag)
@@ -204,7 +209,8 @@ namespace System.Formats.Asn1.Tests.Writer
             ReadEnumerated.UIntBacked value,
             bool customTag,
             string expectedHex
-        ) {
+        )
+        {
             AsnWriter writer = new AsnWriter(ruleSet);
 
             if (customTag)
@@ -256,7 +262,8 @@ namespace System.Formats.Asn1.Tests.Writer
             ReadEnumerated.LongBacked value,
             bool customTag,
             string expectedHex
-        ) {
+        )
+        {
             AsnWriter writer = new AsnWriter(ruleSet);
 
             if (customTag)
@@ -316,7 +323,8 @@ namespace System.Formats.Asn1.Tests.Writer
             ReadEnumerated.ULongBacked value,
             bool customTag,
             string expectedHex
-        ) {
+        )
+        {
             AsnWriter writer = new AsnWriter(ruleSet);
 
             if (customTag)

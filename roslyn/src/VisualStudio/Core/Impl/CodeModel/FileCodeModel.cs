@@ -43,7 +43,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             object parent,
             DocumentId documentId,
             ITextManagerAdapter textManagerAdapter
-        ) {
+        )
+        {
             return new FileCodeModel(state, parent, documentId, textManagerAdapter).GetComHandle<
                 EnvDTE80.FileCodeModel2,
                 FileCodeModel
@@ -210,7 +211,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             AbstractKeyedCodeElement keyedElement,
             SyntaxNodeKey oldNodeKey,
             SyntaxNodeKey newNodeKey
-        ) {
+        )
+        {
             if (!_codeElementTable.TryGetValue(oldNodeKey, out var codeElement))
             {
                 throw new InvalidOperationException(
@@ -516,7 +518,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             object bases,
             object implementedInterfaces,
             EnvDTE.vsCMAccess access
-        ) {
+        )
+        {
             return EnsureEditor(
                 () =>
                 {
@@ -537,7 +540,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             object type,
             object position,
             EnvDTE.vsCMAccess access
-        ) {
+        )
+        {
             return EnsureEditor(
                 () =>
                 {
@@ -551,7 +555,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             object position,
             object bases,
             EnvDTE.vsCMAccess access
-        ) {
+        )
+        {
             return EnsureEditor(
                 () =>
                 {
@@ -583,7 +588,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             object position,
             object bases,
             EnvDTE.vsCMAccess access
-        ) {
+        )
+        {
             return EnsureEditor(
                 () =>
                 {
@@ -608,7 +614,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             object bases,
             object implementedInterfaces,
             EnvDTE.vsCMAccess access
-        ) {
+        )
+        {
             return EnsureEditor(
                 () =>
                 {
@@ -634,7 +641,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         public EnvDTE.CodeElement CodeElementFromPoint(
             EnvDTE.TextPoint point,
             EnvDTE.vsCMElement scope
-        ) {
+        )
+        {
             // Can't use point.AbsoluteCharOffset because it's calculated by the native
             // implementation in GetAbsoluteOffset (in env\msenv\textmgr\autoutil.cpp)
             // to only count each newline as a single character. We need to ask for line and
@@ -678,7 +686,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                     if (
                         SyntaxFactsService.IsReservedOrContextualKeyword(rightToken)
                         || SyntaxFactsService.IsIdentifier(rightToken)
-                    ) {
+                    )
+                    {
                         token = rightToken;
                     }
                 }
@@ -728,7 +737,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                     scope == EnvDTE.vsCMElement.vsCMElementFunction
                     && CodeModelService.IsAccessorNode(node)
                 )
-            ) {
+            )
+            {
                 // Attributes, imports, parameters, Option, Inherits and Implements
                 // don't have node keys of their own and won't be included in our
                 // collection of elements. Delegate to the service to create these.
@@ -847,7 +857,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                                     elementAndPath.Item1.NodeKey,
                                     out var existingElement
                                 )
-                            ) {
+                            )
+                            {
                                 elementAndPath.Item1.ReacquireNodeKey(
                                     elementAndPath.Item2,
                                     CancellationToken.None

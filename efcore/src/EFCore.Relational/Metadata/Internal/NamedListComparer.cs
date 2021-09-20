@@ -36,7 +36,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public int Compare(
             (string, string?, IReadOnlyList<string>) x,
             (string, string?, IReadOnlyList<string>) y
-        ) {
+        )
+        {
             var result = StringComparer.Ordinal.Compare(x.Item1, y.Item1);
             if (result != 0)
             {

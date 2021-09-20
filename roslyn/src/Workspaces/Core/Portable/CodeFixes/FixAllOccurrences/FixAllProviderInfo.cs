@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         private FixAllProviderInfo(
             FixAllProvider fixAllProvider,
             ImmutableArray<FixAllScope> supportedScopes
-        ) {
+        )
+        {
             FixAllProvider = fixAllProvider;
             SupportedScopes = supportedScopes;
         }
@@ -69,7 +70,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         /// </summary>
         private static FixAllProviderInfo? CreateWithSuppressionFixer(
             IConfigurationFixProvider provider
-        ) {
+        )
+        {
             var fixAllProvider = provider.GetFixAllProvider();
             if (fixAllProvider == null)
             {

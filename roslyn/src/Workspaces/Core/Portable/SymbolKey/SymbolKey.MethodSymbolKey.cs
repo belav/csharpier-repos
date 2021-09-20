@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis
             public static SymbolKeyResolution Resolve(
                 SymbolKeyReader reader,
                 out string? failureReason
-            ) {
+            )
+            {
                 var reducedFromResolution = reader.ReadSymbolKey(out var reducedFromFailureReason);
                 if (reducedFromFailureReason != null)
                 {
@@ -71,7 +72,8 @@ namespace Microsoft.CodeAnalysis
             public static SymbolKeyResolution Resolve(
                 SymbolKeyReader reader,
                 out string? failureReason
-            ) {
+            )
+            {
                 var constructedFrom = reader.ReadSymbolKey(out var constructedFromFailureReason);
                 if (constructedFromFailureReason != null)
                 {
@@ -156,7 +158,8 @@ namespace Microsoft.CodeAnalysis
             public static SymbolKeyResolution Resolve(
                 SymbolKeyReader reader,
                 out string? failureReason
-            ) {
+            )
+            {
                 var metadataName = reader.ReadString()!;
 
                 var containingType = reader.ReadSymbolKey(out var containingTypeFailureReason);
@@ -244,12 +247,14 @@ namespace Microsoft.CodeAnalysis
                 PooledArrayBuilder<RefKind> parameterRefKinds,
                 int beforeParametersPosition,
                 IMethodSymbol method
-            ) {
+            )
+            {
                 if (
                     method.Arity == arity
                     && method.MetadataName == metadataName
                     && ParameterRefKindsMatch(method.Parameters, parameterRefKinds)
-                ) {
+                )
+                {
                     // Method looks like a potential match.  It has the right arity, name and
                     // refkinds match.  We now need to do the more complicated work of checking
                     // the parameters (and possibly the return type).  This is more complicated
@@ -280,7 +285,8 @@ namespace Microsoft.CodeAnalysis
                 SymbolKeyReader reader,
                 bool isPartialMethodImplementationPart,
                 IMethodSymbol method
-            ) {
+            )
+            {
                 using var originalParameterTypes = reader.ReadSymbolKeyArray<ITypeSymbol>(out _);
                 var returnType = (ITypeSymbol?)reader.ReadSymbolKey(out _).GetAnySymbol();
 
@@ -289,7 +295,8 @@ namespace Microsoft.CodeAnalysis
                         method.OriginalDefinition.Parameters,
                         originalParameterTypes
                     )
-                ) {
+                )
+                {
                     if (returnType == null || reader.Comparer.Equals(returnType, method.ReturnType))
                     {
                         if (isPartialMethodImplementationPart)

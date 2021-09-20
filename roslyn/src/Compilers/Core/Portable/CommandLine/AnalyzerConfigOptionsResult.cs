@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis
             TreeOptions treeOptions,
             AnalyzerOptions analyzerOptions,
             ImmutableArray<Diagnostic> diagnostics
-        ) {
+        )
+        {
             Debug.Assert(treeOptions != null);
             Debug.Assert(analyzerOptions != null);
 

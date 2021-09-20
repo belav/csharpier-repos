@@ -34,7 +34,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessModelInitialized(
             IConventionModelBuilder modelBuilder,
             IConventionContext<IConventionModelBuilder> context
-        ) {
+        )
+        {
             Check.NotNull(modelBuilder, nameof(modelBuilder));
             Check.NotNull(context, nameof(context));
 

@@ -36,7 +36,8 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal
             GroupAction action,
             string groupName,
             string connectionId
-        ) {
+        )
+        {
             Id = id;
             ServerName = serverName;
             Action = action;

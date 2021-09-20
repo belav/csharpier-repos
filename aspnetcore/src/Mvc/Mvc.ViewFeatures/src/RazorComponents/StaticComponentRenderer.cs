@@ -30,7 +30,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             ParameterView parameters,
             HttpContext httpContext,
             Type componentType
-        ) {
+        )
+        {
             await InitializeStandardComponentServicesAsync(httpContext);
 
             ComponentRenderedText result = default;

@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                 PooledHashSet<ISymbol> symbolsRead,
                 PooledHashSet<IMethodSymbol> lambdaOrLocalFunctionsBeingAnalyzed,
                 Func<IMethodSymbol, BasicBlockAnalysisData> analyzeLocalFunction
-            ) {
+            )
+            {
                 _analyzeLocalFunction = analyzeLocalFunction;
                 SymbolsWriteBuilder = symbolsWriteMap;
                 SymbolsReadBuilder = symbolsRead;
@@ -44,7 +45,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
             public static OperationTreeAnalysisData Create(
                 ISymbol owningSymbol,
                 Func<IMethodSymbol, BasicBlockAnalysisData> analyzeLocalFunction
-            ) {
+            )
+            {
                 return new OperationTreeAnalysisData(
                     symbolsWriteMap: CreateSymbolsWriteMap(owningSymbol.GetParameters()),
                     symbolsRead: PooledHashSet<ISymbol>.GetInstance(),
@@ -56,7 +58,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
             protected override BasicBlockAnalysisData AnalyzeLocalFunctionInvocationCore(
                 IMethodSymbol localFunction,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 _ = UpdateSymbolsWriteMap(SymbolsWriteBuilder, localFunction.Parameters);
                 return _analyzeLocalFunction(localFunction);
             }

@@ -29,7 +29,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
             ILoggerFactory loggerFactory,
             CircuitIdFactory circuitIdFactory,
             IOptions<CircuitOptions> options
-        ) {
+        )
+        {
             _scopeFactory = scopeFactory;
             _loggerFactory = loggerFactory;
             _circuitIdFactory = circuitIdFactory;
@@ -44,7 +45,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
             string uri,
             ClaimsPrincipal user,
             IComponentApplicationStateStore store
-        ) {
+        )
+        {
             var scope = _scopeFactory.CreateScope();
             var jsRuntime = (RemoteJSRuntime)scope.ServiceProvider.GetRequiredService<IJSRuntime>();
             jsRuntime.Initialize(client);

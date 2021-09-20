@@ -74,7 +74,8 @@ namespace System.Security.Cryptography.Encoding.Tests
         public static void Oid_StringString_NullFriendlyName(
             string oidValue,
             string expectedFriendlyName
-        ) {
+        )
+        {
             // Can omit friendly-name - FriendlyName property demand-computes it.
             Oid oid = new Oid(oidValue, null);
 
@@ -201,7 +202,8 @@ namespace System.Security.Cryptography.Encoding.Tests
         public static void LookupOidByValue_Method_HashAlgorithm(
             string oidValue,
             string friendlyName
-        ) {
+        )
+        {
             Oid oid = Oid.FromOidValue(oidValue, OidGroup.HashAlgorithm);
 
             Assert.Equal(oidValue, oid.Value);
@@ -213,7 +215,8 @@ namespace System.Security.Cryptography.Encoding.Tests
         public static void LookupOidByValue_Method_EncryptionAlgorithm(
             string oidValue,
             string friendlyName
-        ) {
+        )
+        {
             Oid oid = Oid.FromOidValue(oidValue, OidGroup.EncryptionAlgorithm);
 
             Assert.Equal(oidValue, oid.Value);
@@ -255,7 +258,8 @@ namespace System.Security.Cryptography.Encoding.Tests
         public static void LookupOidByFriendlyName_Method_HashAlgorithm(
             string oidValue,
             string friendlyName
-        ) {
+        )
+        {
             Oid oid = Oid.FromFriendlyName(friendlyName, OidGroup.HashAlgorithm);
 
             Assert.Equal(oidValue, oid.Value);
@@ -267,7 +271,8 @@ namespace System.Security.Cryptography.Encoding.Tests
         public static void LookupOidByFriendlyName_Method_EncryptionAlgorithm(
             string oidValue,
             string friendlyName
-        ) {
+        )
+        {
             Oid oid = Oid.FromFriendlyName(friendlyName, OidGroup.EncryptionAlgorithm);
 
             Assert.Equal(oidValue, oid.Value);
@@ -280,7 +285,8 @@ namespace System.Security.Cryptography.Encoding.Tests
         public static void LookupOidByFriendlyName_Method_InverseCase(
             string oidValue,
             string friendlyName
-        ) {
+        )
+        {
             // Note that oid lookup is case-insensitive, and we store the name in the form it was
             // input to the constructor (rather than "normalizing" it to the official casing.)
             string inverseCasedName = InvertCase(friendlyName);
@@ -296,7 +302,8 @@ namespace System.Security.Cryptography.Encoding.Tests
         public static void LookupOidByFriendlyName_Method_WrongGroup(
             string oidValue,
             string friendlyName
-        ) {
+        )
+        {
             // Oid group is implemented strictly - no fallback to OidGroup.All as with many other parts of Crypto.
             _ = oidValue;
             Assert.Throws<CryptographicException>(
@@ -359,7 +366,8 @@ namespace System.Security.Cryptography.Encoding.Tests
         public static void LookupOidByFriendlyName_AdditionalNames(
             string friendlyName,
             string expectedOid
-        ) {
+        )
+        {
             Oid oid = Oid.FromFriendlyName(friendlyName, OidGroup.All);
             Assert.Equal(friendlyName, oid.FriendlyName);
             Assert.Equal(expectedOid, oid.Value);

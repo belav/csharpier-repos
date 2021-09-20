@@ -18,7 +18,8 @@ namespace Identity.ExternalClaims.Controllers
         public AccountController(
             SignInManager<ApplicationUser> signInManager,
             ILogger<AccountController> logger
-        ) {
+        )
+        {
             _signInManager = signInManager;
             _logger = logger;
         }

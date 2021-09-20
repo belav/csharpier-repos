@@ -53,7 +53,8 @@ namespace System.Net.NetworkInformation.Tests
         public void NetworkAvailabilityChanged_NetworkAddressChanged_AddAndRemove_Success(
             bool addAddressFirst,
             bool removeAddressFirst
-        ) {
+        )
+        {
             if (addAddressFirst)
             {
                 NetworkChange.NetworkAddressChanged += _addressHandler;

@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CrefSyntax syntax,
             out Symbol? ambiguityWinner,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             ImmutableArray<Symbol> symbols = BindCrefInternal(
                 syntax,
                 out ambiguityWinner,
@@ -37,7 +38,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CrefSyntax syntax,
             out Symbol? ambiguityWinner,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             switch (syntax.Kind())
             {
                 case SyntaxKind.TypeCref:
@@ -67,7 +69,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeCrefSyntax syntax,
             out Symbol? ambiguityWinner,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             NamespaceOrTypeSymbol result = BindNamespaceOrTypeSymbolInCref(syntax.Type);
 
             // NOTE: we don't have to worry about the case where a non-error type is constructed
@@ -89,7 +92,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             QualifiedCrefSyntax syntax,
             out Symbol? ambiguityWinner,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             // NOTE: we won't check whether container is an error type - we'll just let BindMemberCref fail
             // and report a blanket diagnostic.
             NamespaceOrTypeSymbol container = BindNamespaceOrTypeSymbolInCref(syntax.Container);
@@ -133,7 +137,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             NamespaceOrTypeSymbol? containerOpt,
             out Symbol? ambiguityWinner,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             if ((object?)containerOpt != null && containerOpt.Kind == SymbolKind.TypeParameter)
             {
                 // As in normal lookup (see CreateErrorIfLookupOnTypeParameter), you can't dot into a type parameter
@@ -208,7 +213,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             NamespaceOrTypeSymbol? containerOpt,
             out Symbol? ambiguityWinner,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             SimpleNameSyntax? nameSyntax = syntax.Name as SimpleNameSyntax;
 
             int arity;
@@ -271,7 +277,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             NamespaceOrTypeSymbol? containerOpt,
             out Symbol? ambiguityWinner,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             const int arity = 0;
 
             ImmutableArray<Symbol> sortedSymbols = ComputeSortedCrefMembers(
@@ -311,7 +318,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             NamespaceOrTypeSymbol? containerOpt,
             out Symbol? ambiguityWinner,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             const int arity = 0;
 
             CrefParameterListSyntax? parameterListSyntax = syntax.Parameters;
@@ -365,7 +373,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             NamespaceOrTypeSymbol? containerOpt,
             out Symbol? ambiguityWinner,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             const int arity = 0;
 
             string memberName =
@@ -434,7 +443,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             int arity,
             bool hasParameterList,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
                 diagnostics
             );
@@ -455,7 +465,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             int arity,
             bool hasParameterList,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             // Since we may find symbols without going through the lookup API,
             // expose the symbols via an ArrayBuilder.
             ArrayBuilder<Symbol> builder;
@@ -538,7 +549,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                         TypeCompareKind.ConsiderEverything2
                                     )
                                 )
-                            ) {
+                            )
+                            {
                                 constructorType = containerType;
                             }
                         }
@@ -552,7 +564,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             if (
                                 (object?)binderContainingType != null
                                 && memberName == binderContainingType.Name
-                            ) {
+                            )
+                            {
                                 constructorType = binderContainingType;
                             }
                         }
@@ -603,7 +616,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BaseCrefParameterListSyntax? parameterListSyntax,
             out Symbol? ambiguityWinner,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             Debug.Assert(!symbols.IsEmpty);
 
             if (parameterListSyntax == null)
@@ -733,7 +747,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     foreach (
                         TypeWithAnnotations typeArgument in namedType.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
-                    ) {
+                    )
+                    {
                         if (ContainsNestedTypeOfUnconstructedGenericType(typeArgument.Type))
                         {
                             return true;
@@ -778,7 +793,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeArgumentListSyntax? typeArgumentListSyntax,
             out Symbol? ambiguityWinner,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             // If the syntax indicates arity zero, then we match methods of any arity.
             // However, if there are both generic and non-generic methods, then the
             // generic methods should be ignored.
@@ -906,7 +922,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             int arity,
             TypeArgumentListSyntax? typeArgumentListSyntax,
             ArrayBuilder<Symbol> candidates
-        ) {
+        )
+        {
             foreach (Symbol candidate in symbols)
             {
                 Symbol constructedCandidate = ConstructWithCrefTypeParameters(
@@ -942,7 +959,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             MemberCrefSyntax memberSyntax,
             out Symbol? ambiguityWinner,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             ArrayBuilder<Symbol>? viable = null;
 
             foreach (Symbol candidate in candidates)
@@ -1084,7 +1102,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             int arity,
             TypeArgumentListSyntax? typeArgumentListSyntax,
             Symbol symbol
-        ) {
+        )
+        {
             if (arity > 0)
             {
                 Debug.Assert(typeArgumentListSyntax is object);
@@ -1146,7 +1165,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private ImmutableArray<ParameterSymbol> BindCrefParameters(
             BaseCrefParameterListSyntax parameterListSyntax,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             ArrayBuilder<ParameterSymbol> parameterBuilder =
                 ArrayBuilder<ParameterSymbol>.GetInstance(parameterListSyntax.Parameters.Count);
 
@@ -1181,7 +1201,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSyntax typeSyntax,
             MemberCrefSyntax memberCrefSyntax,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             // After much deliberation, we eventually decided to suppress lookup of inherited members within
             // crefs, in order to match dev11's behavior (Changeset #829014).  Unfortunately, it turns out
             // that dev11 does not suppress these members when performing lookup within parameter and return

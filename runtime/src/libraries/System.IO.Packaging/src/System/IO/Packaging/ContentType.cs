@@ -297,7 +297,8 @@ namespace System.IO.Packaging
                 if (
                     contentType[index - 1] == s_linearWhiteSpaceChars[1]
                     || contentType[index + 1] == s_linearWhiteSpaceChars[1]
-                ) {
+                )
+                {
                     index = contentType.IndexOf(s_linearWhiteSpaceChars[2], ++index);
                 }
                 else

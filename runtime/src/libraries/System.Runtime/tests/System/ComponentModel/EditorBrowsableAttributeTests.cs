@@ -28,7 +28,8 @@ namespace System.ComponentModel.Tests
             EditorBrowsableState state1,
             EditorBrowsableState state2,
             bool equal
-        ) {
+        )
+        {
             var attr1 = new EditorBrowsableAttribute(state1);
             var attr2 = new EditorBrowsableAttribute(state2);
 

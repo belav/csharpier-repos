@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Completion
     {
         public static CompletionProvider Create(
             IFSharpCommonCompletionProvider fsharpCommonCompletionProvider
-        ) {
+        )
+        {
             return new FSharpInternalCommonCompletionProvider(fsharpCommonCompletionProvider);
         }
     }

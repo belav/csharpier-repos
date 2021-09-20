@@ -64,7 +64,8 @@ namespace Newtonsoft.Json.Tests.Issues
                 Type objectType,
                 object existingValue,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 if (reader.Value is string s)
                 {
                     return new DirectoryInfo(s);
@@ -77,7 +78,8 @@ namespace Newtonsoft.Json.Tests.Issues
                 JsonWriter writer,
                 object value,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 if (!(value is DirectoryInfo directoryInfo))
                 {
                     throw new ArgumentOutOfRangeException(nameof(value));

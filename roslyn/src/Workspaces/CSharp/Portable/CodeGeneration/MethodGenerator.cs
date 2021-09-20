@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IMethodSymbol method,
             CodeGenerationOptions options,
             IList<bool> availableIndices
-        ) {
+        )
+        {
             var declaration = GenerateMethodDeclaration(
                 method,
                 CodeGenerationDestination.Namespace,
@@ -46,7 +47,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IMethodSymbol method,
             CodeGenerationOptions options,
             IList<bool> availableIndices
-        ) {
+        )
+        {
             var declaration = GenerateMethodDeclaration(
                 method,
                 CodeGenerationDestination.CompilationUnit,
@@ -68,7 +70,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IMethodSymbol method,
             CodeGenerationOptions options,
             IList<bool> availableIndices
-        ) {
+        )
+        {
             var methodDeclaration = GenerateMethodDeclaration(
                 method,
                 GetDestination(destination),
@@ -93,7 +96,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             CodeGenerationDestination destination,
             CodeGenerationOptions options,
             ParseOptions parseOptions
-        ) {
+        )
+        {
             options ??= CodeGenerationOptions.Default;
 
             var reusableSyntax = GetReuseableSyntaxNodeForSymbol<MethodDeclarationSyntax>(
@@ -123,7 +127,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             CodeGenerationDestination destination,
             CodeGenerationOptions options,
             ParseOptions parseOptions
-        ) {
+        )
+        {
             options ??= CodeGenerationOptions.Default;
 
             var reusableSyntax = GetReuseableSyntaxNodeForSymbol<LocalFunctionStatementSyntax>(
@@ -153,7 +158,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             CodeGenerationDestination destination,
             CodeGenerationOptions options,
             ParseOptions parseOptions
-        ) {
+        )
+        {
             // Don't rely on destination to decide if method body should be generated.
             // Users of this service need to express their intention explicitly, either by
             // setting `CodeGenerationOptions.GenerateMethodBodies` to true, or making
@@ -199,7 +205,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             CodeGenerationDestination destination,
             CodeGenerationOptions options,
             ParseOptions parseOptions
-        ) {
+        )
+        {
             var localFunctionDeclaration = SyntaxFactory.LocalFunctionStatement(
                 modifiers: GenerateModifiers(method, destination, options),
                 returnType: method.GenerateReturnTypeSyntax(),
@@ -228,7 +235,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             CodeGenerationOptions options,
             MethodDeclarationSyntax methodDeclaration,
             ParseOptions parseOptions
-        ) {
+        )
+        {
             if (methodDeclaration.ExpressionBody == null)
             {
                 var expressionBodyPreference =
@@ -243,7 +251,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                         out var expressionBody,
                         out var semicolonToken
                     )
-                ) {
+                )
+                {
                     return methodDeclaration.WithBody(null)
                         .WithExpressionBody(expressionBody)
                         .WithSemicolonToken(semicolonToken);
@@ -257,7 +266,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             CodeGenerationOptions options,
             LocalFunctionStatementSyntax localFunctionDeclaration,
             ParseOptions parseOptions
-        ) {
+        )
+        {
             if (localFunctionDeclaration.ExpressionBody == null)
             {
                 var expressionBodyPreference =
@@ -272,7 +282,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                         out var expressionBody,
                         out var semicolonToken
                     )
-                ) {
+                )
+                {
                     return localFunctionDeclaration.WithBody(null)
                         .WithExpressionBody(expressionBody)
                         .WithSemicolonToken(semicolonToken);
@@ -286,7 +297,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IMethodSymbol method,
             CodeGenerationOptions options,
             bool isExplicit
-        ) {
+        )
+        {
             var attributes = new List<AttributeListSyntax>();
 
             if (!isExplicit)
@@ -308,7 +320,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
 
         private static SyntaxList<TypeParameterConstraintClauseSyntax> GenerateConstraintClauses(
             IMethodSymbol method
-        ) {
+        )
+        {
             return !method.ExplicitInterfaceImplementations.Any() && !method.IsOverride
               ? method.TypeParameters.GenerateConstraintClauses()
               : default;
@@ -317,7 +330,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         private static TypeParameterListSyntax GenerateTypeParameterList(
             IMethodSymbol method,
             CodeGenerationOptions options
-        ) {
+        )
+        {
             return TypeParameterGenerator.GenerateTypeParameterList(method.TypeParameters, options);
         }
 
@@ -325,7 +339,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IMethodSymbol method,
             CodeGenerationDestination destination,
             CodeGenerationOptions options
-        ) {
+        )
+        {
             var tokens = ArrayBuilder<SyntaxToken>.GetInstance();
 
             // Only "unsafe" modifier allowed if we're an explicit impl.
@@ -343,7 +358,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                     destination != CodeGenerationDestination.CompilationUnit
                     && destination != CodeGenerationDestination.Namespace
                     && destination != CodeGenerationDestination.InterfaceType
-                ) {
+                )
+                {
                     AddAccessibilityModifiers(
                         method.DeclaredAccessibility,
                         tokens,
@@ -371,7 +387,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                     if (
                         method.IsReadOnly
                         && (method.ContainingSymbol as INamedTypeSymbol)?.IsReadOnly != true
-                    ) {
+                    )
+                    {
                         tokens.Add(SyntaxFactory.Token(SyntaxKind.ReadOnlyKeyword));
                     }
 

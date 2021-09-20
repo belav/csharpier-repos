@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
         public DefaultPageApplicationModelPartsProvider(
             IModelMetadataProvider modelMetadataProvider
-        ) {
+        )
+        {
             _modelMetadataProvider = modelMetadataProvider;
 
             _supportsAllRequests = _ => true;
@@ -210,7 +211,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                 declaringType == typeof(Page)
                 || declaringType == typeof(PageBase)
                 || declaringType == typeof(RazorPageBase)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -227,7 +229,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             string methodName,
             out string httpMethod,
             out string handler
-        ) {
+        )
+        {
             httpMethod = null;
             handler = null;
 
@@ -235,7 +238,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             if (
                 !methodName.StartsWith("On", StringComparison.Ordinal)
                 || methodName.Length <= "On".Length
-            ) {
+            )
+            {
                 return false;
             }
 

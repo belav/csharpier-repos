@@ -53,7 +53,8 @@ namespace Microsoft.Extensions.DependencyInjection
             IServiceCollection services,
             Type serviceType,
             Type implementationType
-        ) {
+        )
+        {
             var matches = services.Where(
                     sd =>
                         sd.ServiceType == serviceType && sd.ImplementationType == implementationType

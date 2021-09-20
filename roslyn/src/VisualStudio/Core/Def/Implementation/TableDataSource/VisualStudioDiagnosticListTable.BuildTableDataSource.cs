@@ -48,7 +48,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 
                 private void ConnectToBuildUpdateSource(
                     ExternalErrorDiagnosticUpdateSource errorSource
-                ) {
+                )
+                {
                     if (errorSource == null)
                     {
                         // it can be null in unit test
@@ -63,7 +64,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 private void OnBuildProgressChanged(
                     object sender,
                     ExternalErrorDiagnosticUpdateSource.BuildProgress progress
-                ) {
+                )
+                {
                     SetStableState(
                         progress == ExternalErrorDiagnosticUpdateSource.BuildProgress.Done
                     );
@@ -98,7 +100,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                     int version,
                     ImmutableArray<DiagnosticTableItem> items,
                     ImmutableArray<ITrackingPoint> trackingPoints
-                ) {
+                )
+                {
                     // Build doesn't support tracking point.
                     return new TableEntriesSnapshot(
                         (DiagnosticTableEntriesSource)source,
@@ -112,7 +115,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 
                 public override IEnumerable<DiagnosticTableItem> Order(
                     IEnumerable<DiagnosticTableItem> groupedItems
-                ) {
+                )
+                {
                     // errors are already given in order. use it as it is.
                     return groupedItems;
                 }
@@ -164,7 +168,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                         int index,
                         string columnName,
                         out object content
-                    ) {
+                    )
+                    {
                         // REVIEW: this method is too-chatty to make async, but otherwise, how one can implement it async?
                         //         also, what is cancellation mechanism?
                         var item = GetItem(index);
@@ -249,7 +254,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                         bool previewTab,
                         bool activate,
                         CancellationToken cancellationToken
-                    ) {
+                    )
+                    {
                         var item = GetItem(index);
                         if (item?.DocumentId == null)
                         {

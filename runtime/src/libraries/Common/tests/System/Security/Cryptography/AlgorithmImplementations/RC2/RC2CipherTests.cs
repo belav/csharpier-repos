@@ -153,7 +153,8 @@ namespace System.Security.Cryptography.Encryption.RC2.Tests
             string textHex,
             string expectedDecrypted,
             string expectedEncrypted
-        ) {
+        )
+        {
             byte[] expectedDecryptedBytes =
                 expectedDecrypted == null
                     ? textHex.HexToByteArray()
@@ -183,7 +184,8 @@ namespace System.Security.Cryptography.Encryption.RC2.Tests
         public static void EncryptorReuse_LeadsToSameResults(
             CipherMode cipherMode,
             int feedbackSize
-        ) {
+        )
+        {
             // AppleCCCryptor does not allow calling Reset on CFB cipher.
             // this test validates that the behavior is taken into consideration.
             var input = "b72606c98d8e4fabf08839abf7a0ac61".HexToByteArray();
@@ -213,7 +215,8 @@ namespace System.Security.Cryptography.Encryption.RC2.Tests
         public static void DecryptorReuse_LeadsToSameResults(
             CipherMode cipherMode,
             int feedbackSize
-        ) {
+        )
+        {
             // AppleCCCryptor does not allow calling Reset on CFB cipher.
             // this test validates that the behavior is taken into consideration.
             var input = "896072ab28e5fdfc".HexToByteArray();
@@ -297,7 +300,8 @@ namespace System.Security.Cryptography.Encryption.RC2.Tests
                         s_randomKey_64.HexToByteArray(),
                         s_randomIv_64.HexToByteArray()
                     )
-                ) {
+                )
+                {
                     byte[] plainText1 = s_multiBlockString.HexToByteArray();
                     byte[] cipher1 = encryptor.Transform(plainText1);
                     byte[] expectedCipher1 = (
@@ -321,7 +325,8 @@ namespace System.Security.Cryptography.Encryption.RC2.Tests
                         s_randomKey_64.HexToByteArray(),
                         null
                     )
-                ) {
+                )
+                {
                     byte[] plainText1 = s_multiBlockString.HexToByteArray();
                     byte[] cipher1 = encryptor.Transform(plainText1);
                     byte[] expectedCipher1 = (

@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Rewrite.PatternSegments
             RewriteContext context,
             BackReferenceCollection? ruleBackReferences,
             BackReferenceCollection? conditionBackReferences
-        ) {
+        )
+        {
             return context.HttpContext.GetServerVariable(_variableName)
                 ?? _fallbackThunk().Evaluate(context, ruleBackReferences, conditionBackReferences);
         }

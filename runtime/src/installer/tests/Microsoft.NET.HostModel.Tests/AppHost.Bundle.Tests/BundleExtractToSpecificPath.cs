@@ -80,7 +80,8 @@ namespace AppHost.Bundle.Tests
         private void Bundle_Extraction_To_Relative_Path_Succeeds(
             string relativePath,
             BundleOptions bundleOptions
-        ) {
+        )
+        {
             // As we don't modify user defined environment variables, we will not convert
             // any forward slashes to the standard Windows dir separator ('\'), thus
             // failing to create directory trees for bundle extraction that use Unix

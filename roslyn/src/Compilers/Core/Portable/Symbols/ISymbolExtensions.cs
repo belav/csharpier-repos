@@ -93,7 +93,8 @@ namespace Microsoft.CodeAnalysis
         internal static INamespaceSymbol? GetNestedNamespace(
             this INamespaceSymbol container,
             string name
-        ) {
+        )
+        {
             foreach (var sym in container.GetMembers(name))
             {
                 if (sym.Kind == SymbolKind.Namespace)

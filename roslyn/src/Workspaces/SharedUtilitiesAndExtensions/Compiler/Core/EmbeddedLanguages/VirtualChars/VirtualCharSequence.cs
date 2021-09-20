@@ -139,7 +139,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars
         public static VirtualCharSequence FromBounds(
             VirtualCharSequence chars1,
             VirtualCharSequence chars2
-        ) {
+        )
+        {
             Debug.Assert(chars1._leafCharacters == chars2._leafCharacters);
             return new VirtualCharSequence(
                 chars1._leafCharacters,

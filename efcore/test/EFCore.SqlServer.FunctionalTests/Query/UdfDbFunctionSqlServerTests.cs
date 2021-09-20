@@ -11,10 +11,8 @@ namespace Microsoft.EntityFrameworkCore.Query
     public class UdfDbFunctionSqlServerTests
         : UdfDbFunctionTestBase<UdfDbFunctionSqlServerTests.SqlServer>
     {
-        public UdfDbFunctionSqlServerTests(
-            SqlServer fixture,
-            ITestOutputHelper testOutputHelper
-        ) : base(fixture)
+        public UdfDbFunctionSqlServerTests(SqlServer fixture, ITestOutputHelper testOutputHelper)
+            : base(fixture)
         {
             Fixture.TestSqlLoggerFactory.Clear();
             //Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);

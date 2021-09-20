@@ -38,7 +38,8 @@ namespace Microsoft.VisualStudio.Debugger.Contracts.HotReload
         public ManagedHotReloadUpdates(
             ImmutableArray<ManagedHotReloadUpdate> updates,
             ImmutableArray<ManagedHotReloadDiagnostic> diagnostics
-        ) {
+        )
+        {
             Updates = updates;
             Diagnostics = diagnostics;
         }
@@ -54,7 +55,8 @@ namespace Microsoft.VisualStudio.Debugger.Contracts.HotReload
             Guid module,
             ImmutableArray<byte> ilDelta,
             ImmutableArray<byte> metadataDelta
-        ) {
+        )
+        {
             Module = module;
             ILDelta = ilDelta;
             MetadataDelta = metadataDelta;
@@ -75,7 +77,8 @@ namespace Microsoft.VisualStudio.Debugger.Contracts.HotReload
             ManagedHotReloadDiagnosticSeverity severity,
             string filePath,
             SourceSpan span
-        ) {
+        )
+        {
             Id = id;
             Message = message;
             Severity = severity;

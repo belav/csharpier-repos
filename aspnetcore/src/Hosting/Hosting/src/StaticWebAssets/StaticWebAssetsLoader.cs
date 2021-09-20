@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.Hosting.StaticWebAssets
         public static void UseStaticWebAssets(
             IWebHostEnvironment environment,
             IConfiguration configuration
-        ) {
+        )
+        {
             using var manifest = ResolveManifest(environment, configuration);
             if (manifest != null)
             {
@@ -38,7 +39,8 @@ namespace Microsoft.AspNetCore.Hosting.StaticWebAssets
         internal static void UseStaticWebAssetsCore(
             IWebHostEnvironment environment,
             Stream manifest
-        ) {
+        )
+        {
             var webRootFileProvider = environment.WebRootFileProvider;
 
             var additionalFiles = StaticWebAssetsReader.Parse(manifest)
@@ -60,7 +62,8 @@ namespace Microsoft.AspNetCore.Hosting.StaticWebAssets
         internal static Stream? ResolveManifest(
             IWebHostEnvironment environment,
             IConfiguration configuration
-        ) {
+        )
+        {
             try
             {
                 var manifestPath = configuration.GetValue<string>(

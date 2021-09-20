@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             internal override void GenerateMethodBody(
                 TypeCompilationState compilationState,
                 BindingDiagnosticBag diagnostics
-            ) {
+            )
+            {
                 //  Method body:
                 //
                 //  {
@@ -91,7 +92,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             internal override void GenerateMethodBody(
                 TypeCompilationState compilationState,
                 BindingDiagnosticBag diagnostics
-            ) {
+            )
+            {
                 //  Method body:
                 //
                 //  {
@@ -116,7 +118,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             internal override void GenerateMethodBody(
                 TypeCompilationState compilationState,
                 BindingDiagnosticBag diagnostics
-            ) {
+            )
+            {
                 AnonymousTypeManager manager =
                     ((AnonymousTypeTemplateSymbol)this.ContainingType).Manager;
                 SyntheticBoundNodeFactory F = this.CreateBoundNodeFactory(
@@ -203,7 +206,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             internal override void GenerateMethodBody(
                 TypeCompilationState compilationState,
                 BindingDiagnosticBag diagnostics
-            ) {
+            )
+            {
                 AnonymousTypeManager manager =
                     ((AnonymousTypeTemplateSymbol)this.ContainingType).Manager;
                 SyntheticBoundNodeFactory F = this.CreateBoundNodeFactory(
@@ -283,7 +287,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             internal override void GenerateMethodBody(
                 TypeCompilationState compilationState,
                 BindingDiagnosticBag diagnostics
-            ) {
+            )
+            {
                 AnonymousTypeManager manager =
                     ((AnonymousTypeTemplateSymbol)this.ContainingType).Manager;
                 SyntheticBoundNodeFactory F = this.CreateBoundNodeFactory(

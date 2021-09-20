@@ -1124,7 +1124,8 @@ namespace System
             this ReadOnlySpan<T> span,
             ReadOnlySpan<T> other,
             IEqualityComparer<T>? comparer = null
-        ) {
+        )
+        {
             // If the spans differ in length, they're not equal.
             if (span.Length != other.Length)
             {
@@ -1750,7 +1751,8 @@ namespace System
             this Span<T> span,
             ReadOnlySpan<T> other,
             out int elementOffset
-        ) {
+        )
+        {
             return Overlaps((ReadOnlySpan<T>)span, other, out elementOffset);
         }
 
@@ -1788,7 +1790,8 @@ namespace System
             this ReadOnlySpan<T> span,
             ReadOnlySpan<T> other,
             out int elementOffset
-        ) {
+        )
+        {
             if (span.IsEmpty || other.IsEmpty)
             {
                 elementOffset = 0;
@@ -1805,7 +1808,8 @@ namespace System
                 if (
                     (uint)byteOffset < (uint)(span.Length * Unsafe.SizeOf<T>())
                     || (uint)byteOffset > (uint)-(other.Length * Unsafe.SizeOf<T>())
-                ) {
+                )
+                {
                     if ((int)byteOffset % Unsafe.SizeOf<T>() != 0)
                         ThrowHelper.ThrowArgumentException_OverlapAlignmentMismatch();
 
@@ -1823,7 +1827,8 @@ namespace System
                 if (
                     (ulong)byteOffset < (ulong)((long)span.Length * Unsafe.SizeOf<T>())
                     || (ulong)byteOffset > (ulong)-((long)other.Length * Unsafe.SizeOf<T>())
-                ) {
+                )
+                {
                     if ((long)byteOffset % Unsafe.SizeOf<T>() != 0)
                         ThrowHelper.ThrowArgumentException_OverlapAlignmentMismatch();
 
@@ -2116,7 +2121,8 @@ namespace System
             this Span<TKey> keys,
             Span<TValue> items,
             Comparison<TKey> comparison
-        ) {
+        )
+        {
             if (comparison == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.comparison);
             if (keys.Length != items.Length)

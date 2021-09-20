@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             int offset,
             int length,
             string newText
-        ) {
+        )
+        {
             var oldFullText = text.ToString();
             var span = new TextSpan(offset, length);
             var newFullText =
@@ -36,7 +37,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             this SourceText text,
             string oldText,
             string newText
-        ) {
+        )
+        {
             var oldFullText = text.ToString();
             int offset = oldFullText.IndexOf(oldText, StringComparison.Ordinal);
             int length = oldText.Length;
@@ -51,7 +53,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             int startIndex,
             string oldText,
             string newText
-        ) {
+        )
+        {
             var oldFullText = text.ToString();
             int offset = oldFullText.IndexOf(oldText, startIndex, StringComparison.Ordinal); // Use an offset to find the first element to replace at
             int length = oldText.Length;
@@ -70,7 +73,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             this SourceText text,
             string existingText,
             string newText
-        ) {
+        )
+        {
             var oldFullText = text.ToString();
             int offset = oldFullText.IndexOf(existingText, StringComparison.Ordinal);
             var span = new TextSpan(offset, 0);

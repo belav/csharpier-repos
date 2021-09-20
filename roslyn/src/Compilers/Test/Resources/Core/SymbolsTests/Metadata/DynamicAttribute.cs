@@ -88,7 +88,8 @@ public class Derived<T>
             Outer<dynamic>.Inner<T[], dynamic>.InnerInner<int>[],
             dynamic
         >.InnerInner<dynamic>[][] x
-    ) {
+    )
+    {
         return x;
     }
 

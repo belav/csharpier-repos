@@ -126,7 +126,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             bool isUnnecessary,
             bool isConfigurable,
             EnforceOnBuild enforceOnBuild
-        ) {
+        )
+        {
             Debug.Assert(isConfigurable || enforceOnBuild == EnforceOnBuild.Never);
 
             var customTagsBuilder = ImmutableArray.CreateBuilder<string>();

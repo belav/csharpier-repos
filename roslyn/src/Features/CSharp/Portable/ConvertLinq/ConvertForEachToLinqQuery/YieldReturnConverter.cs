@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
             SyntaxEditor editor,
             bool convertToQuery,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var queryOrLinqInvocationExpression = CreateQueryExpressionOrLinqInvocation(
                 selectExpression: _yieldReturnStatement.Expression,
                 leadingTokensForSelect: new[]

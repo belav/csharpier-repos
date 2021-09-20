@@ -52,7 +52,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         protected ShapedQueryCompilingExpressionVisitor(
             ShapedQueryCompilingExpressionVisitorDependencies dependencies,
             QueryCompilationContext queryCompilationContext
-        ) {
+        )
+        {
             Check.NotNull(dependencies, nameof(dependencies));
             Check.NotNull(queryCompilationContext, nameof(queryCompilationContext));
 
@@ -155,7 +156,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         private static async Task<TSource> SingleAsync<TSource>(
             IAsyncEnumerable<TSource> asyncEnumerable,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             await using var enumerator = asyncEnumerable.GetAsyncEnumerator(cancellationToken);
             if (!await enumerator.MoveNextAsync().ConfigureAwait(false))
             {
@@ -175,7 +177,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         private static async Task<TSource> SingleOrDefaultAsync<TSource>(
             IAsyncEnumerable<TSource> asyncEnumerable,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             await using var enumerator = asyncEnumerable.GetAsyncEnumerator(cancellationToken);
             if (!(await enumerator.MoveNextAsync().ConfigureAwait(false)))
             {
@@ -267,7 +270,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     RemoveConvert(methodCallExpression.Object)
                         is ConstantExpression constantInstance
                     && !ValidConstant(constantInstance)
-                ) {
+                )
+                {
                     throw new InvalidOperationException(
                         CoreStrings.ClientProjectionCapturingConstantInMethodInstance(
                             constantInstance.Type.DisplayName(),
@@ -281,7 +285,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     if (
                         RemoveConvert(argument) is ConstantExpression constantArgument
                         && !ValidConstant(constantArgument)
-                    ) {
+                    )
+                    {
                         throw new InvalidOperationException(
                             CoreStrings.ClientProjectionCapturingConstantInMethodArgument(
                                 constantArgument.Type.DisplayName(),
@@ -313,7 +318,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         expression.NodeType == ExpressionType.Convert
                         || expression.NodeType == ExpressionType.ConvertChecked
                     )
-                ) {
+                )
+                {
                     expression = RemoveConvert(((UnaryExpression)expression).Operand);
                 }
 
@@ -362,7 +368,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             public EntityMaterializerInjectingExpressionVisitor(
                 IEntityMaterializerSource entityMaterializerSource,
                 QueryTrackingBehavior queryTrackingBehavior
-            ) {
+            )
+            {
                 _entityMaterializerSource = entityMaterializerSource;
                 _queryTrackingBehavior = queryTrackingBehavior;
                 _queryStateMananger =
@@ -381,7 +388,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         if (
                             entityType.FindOwnership() is IForeignKey ownership
                             && !ContainsOwner(ownership.PrincipalEntityType)
-                        ) {
+                        )
+                        {
                             throw new InvalidOperationException(
                                 CoreStrings.OwnedEntitiesCannotBeTrackedWithoutTheirOwner
                             );
@@ -585,7 +593,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 ParameterExpression concreteEntityTypeVariable,
                 ParameterExpression instanceVariable,
                 ParameterExpression? entryVariable
-            ) {
+            )
+            {
                 var entityType = entityShaperExpression.EntityType;
 
                 var expressions = new List<Expression>();
@@ -647,7 +656,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     foreach (
                         var et in entityType.GetAllBaseTypes()
                             .Concat(entityType.GetDerivedTypesInclusive())
-                    ) {
+                    )
+                    {
                         _visitedEntityTypes.Add(et);
                     }
 
@@ -680,7 +690,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             private BlockExpression CreateFullMaterializeExpression(
                 IEntityType concreteEntityType,
                 in (Type ReturnType, ParameterExpression MaterializationContextVariable, ParameterExpression ConcreteEntityTypeVariable, ParameterExpression ShadowValuesVariable) materializeExpressionContext
-            ) {
+            )
+            {
                 var (
                     returnType,
                     materializationContextVariable,

@@ -21,7 +21,8 @@ namespace System.Formats.Cbor.Tests
         public static void ReadTextString_SingleValue_HappyPath(
             string expectedValue,
             string hexEncoding
-        ) {
+        )
+        {
             byte[] data = hexEncoding.HexToByteArray();
             var reader = new CborReader(data);
             string actualResult = reader.ReadTextString();
@@ -41,7 +42,8 @@ namespace System.Formats.Cbor.Tests
         public static void TryReadTextString_SingleValue_HappyPath(
             string expectedValue,
             string hexEncoding
-        ) {
+        )
+        {
             char[] buffer = new char[32];
             byte[] data = hexEncoding.HexToByteArray();
             var reader = new CborReader(data);
@@ -60,7 +62,8 @@ namespace System.Formats.Cbor.Tests
         public static void ReadTextString_IndefiniteLength_SingleValue_HappyPath(
             string[] expectedValues,
             string hexEncoding
-        ) {
+        )
+        {
             byte[] data = hexEncoding.HexToByteArray();
             var reader = new CborReader(data);
             Helpers.VerifyValue(reader, expectedValues);
@@ -74,7 +77,8 @@ namespace System.Formats.Cbor.Tests
         public static void ReadTextString_IndefiniteLengthConcatenated_SingleValue_HappyPath(
             string expectedValue,
             string hexEncoding
-        ) {
+        )
+        {
             byte[] data = hexEncoding.HexToByteArray();
             var reader = new CborReader(data);
             Assert.Equal(CborReaderState.StartIndefiniteLengthTextString, reader.PeekState());
@@ -104,7 +108,8 @@ namespace System.Formats.Cbor.Tests
         public static void TryReadTextString_IndefiniteLengthConcatenated_SingleValue__HappyPath(
             string expectedValue,
             string hexEncoding
-        ) {
+        )
+        {
             byte[] data = hexEncoding.HexToByteArray();
             var reader = new CborReader(data);
             Assert.Equal(CborReaderState.StartIndefiniteLengthTextString, reader.PeekState());
@@ -129,7 +134,8 @@ namespace System.Formats.Cbor.Tests
         public static void TryReadTextString_BufferTooSmall_ShouldReturnFalse(
             string actualValue,
             string hexEncoding
-        ) {
+        )
+        {
             char[] buffer = new char[actualValue.Length];
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
@@ -151,7 +157,8 @@ namespace System.Formats.Cbor.Tests
         public static void TryReadTextString_IndefiniteLengthConcatenated_BufferTooSmall_ShouldReturnFalse(
             string expectedValue,
             string hexEncoding
-        ) {
+        )
+        {
             byte[] data = hexEncoding.HexToByteArray();
             var reader = new CborReader(data);
 
@@ -181,7 +188,8 @@ namespace System.Formats.Cbor.Tests
         public static void ReadDefiniteLengthTextStringBytes_SingleValue_HappyPath(
             string expectedValue,
             string hexEncoding
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
 
@@ -196,7 +204,8 @@ namespace System.Formats.Cbor.Tests
         [InlineData("7f60ff")]
         public static void ReadDefiniteLengthTextStringBytes_IndefiniteLengthInput_ShouldThrowInvalidOperationException(
             string hexEncoding
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
 
@@ -223,7 +232,8 @@ namespace System.Formats.Cbor.Tests
         [InlineData(CborConformanceMode.Ctap2Canonical)]
         public static void ReadDefiniteLengthTextStringBytes_InvalidUtf8_StrictConformance_ShouldThrowCborContentException(
             CborConformanceMode mode
-        ) {
+        )
+        {
             byte[] encoding = "62f090".HexToByteArray();
             var reader = new CborReader(encoding, mode);
 
@@ -246,7 +256,8 @@ namespace System.Formats.Cbor.Tests
         public static void ReadTextString_NonCanonicalLengths_SupportedConformanceMode_ShouldSucceed(
             CborConformanceMode mode,
             string hexEncoding
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding, mode);
             string value = reader.ReadTextString();
@@ -266,7 +277,8 @@ namespace System.Formats.Cbor.Tests
         public static void ReadTextString_NonCanonicalLengths_UnSupportedConformanceMode_ShouldThrowCborContentException(
             CborConformanceMode mode,
             string hexEncoding
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding, mode);
             Assert.Throws<CborContentException>(() => reader.ReadTextString());
@@ -279,7 +291,8 @@ namespace System.Formats.Cbor.Tests
         public static void ReadTextString_IndefiniteLength_SupportedConformanceMode_ShouldSucceed(
             CborConformanceMode mode,
             string hexEncoding
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding, mode);
             reader.ReadStartIndefiniteLengthTextString();
@@ -293,7 +306,8 @@ namespace System.Formats.Cbor.Tests
         public static void ReadTextString_IndefiniteLength_AsSingleItem_SupportedConformanceMode_ShouldSucceed(
             CborConformanceMode mode,
             string hexEncoding
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding, mode);
             reader.ReadTextString();
@@ -305,7 +319,8 @@ namespace System.Formats.Cbor.Tests
         public static void ReadTextString_IndefiniteLength_UnSupportedConformanceMode_ShouldThrowFormatExceptoin(
             CborConformanceMode mode,
             string hexEncoding
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding, mode);
             Assert.Throws<CborContentException>(() => reader.ReadStartIndefiniteLengthTextString());
@@ -318,7 +333,8 @@ namespace System.Formats.Cbor.Tests
         public static void ReadTextString_IndefiniteLength_AsSingleItem_UnSupportedConformanceMode_ShouldThrowCborContentException(
             CborConformanceMode mode,
             string hexEncoding
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding, mode);
             Assert.Throws<CborContentException>(() => reader.ReadTextString());
@@ -336,7 +352,8 @@ namespace System.Formats.Cbor.Tests
         [InlineData("fb3ff199999999999a")] // 1.1
         public static void ReadTextString_InvalidType_ShouldThrowInvalidOperationException(
             string hexEncoding
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
 
@@ -355,7 +372,8 @@ namespace System.Formats.Cbor.Tests
         [InlineData("fb3ff199999999999a")] // 1.1
         public static void TryReadTextString_InvalidType_ShouldThrowInvalidOperationException(
             string hexEncoding
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             char[] buffer = new char[32];
             var reader = new CborReader(encoding);
@@ -384,7 +402,8 @@ namespace System.Formats.Cbor.Tests
         [InlineData("7a00010000ff")]
         public static void ReadTextString_InvalidData_ShouldThrowCborContentException(
             string hexEncoding
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
             Assert.Throws<CborContentException>(() => reader.ReadTextString());
@@ -409,7 +428,8 @@ namespace System.Formats.Cbor.Tests
         [InlineData("7a00010000ff")]
         public static void TryReadTextString_InvalidData_ShouldThrowCborContentException(
             string hexEncoding
-        ) {
+        )
+        {
             byte[] data = hexEncoding.HexToByteArray();
             char[] buffer = new char[32];
             var reader = new CborReader(data);
@@ -422,7 +442,8 @@ namespace System.Formats.Cbor.Tests
         [InlineData("7bffffffffffffffff")]
         public static void ReadTextString_StringLengthTooLarge_ShouldThrowCborContentException(
             string hexEncoding
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
             Assert.Throws<CborContentException>(() => reader.ReadTextString());
@@ -433,7 +454,8 @@ namespace System.Formats.Cbor.Tests
         [InlineData(CborConformanceMode.Lax)]
         public static void ReadTextString_InvalidUtf8_LaxConformance_ShouldSucceed(
             CborConformanceMode conformanceMode
-        ) {
+        )
+        {
             byte[] encoding = "62f090".HexToByteArray();
             string expected = "\ufffd"; // unicode replacement character
 
@@ -449,7 +471,8 @@ namespace System.Formats.Cbor.Tests
         [InlineData(CborConformanceMode.Ctap2Canonical)]
         public static void ReadTextString_InvalidUtf8_StrictConformance_ShouldThrowCborContentException(
             CborConformanceMode conformanceMode
-        ) {
+        )
+        {
             byte[] encoding = "62f090".HexToByteArray();
             var reader = new CborReader(encoding, conformanceMode);
             CborContentException exn = Assert.Throws<CborContentException>(
@@ -464,7 +487,8 @@ namespace System.Formats.Cbor.Tests
         [InlineData(CborConformanceMode.Lax)]
         public static void TryReadTextString_InvalidUtf8_LaxConformance_ShouldSucceed(
             CborConformanceMode conformanceMode
-        ) {
+        )
+        {
             byte[] encoding = "62f090".HexToByteArray();
             string expected = "\ufffd"; // unicode replacement character
 
@@ -484,7 +508,8 @@ namespace System.Formats.Cbor.Tests
         [InlineData(CborConformanceMode.Ctap2Canonical)]
         public static void TryReadTextString_InvalidUtf8_StrictConformance_ShouldThrowCborContentException(
             CborConformanceMode conformanceMode
-        ) {
+        )
+        {
             byte[] encoding = "62f090".HexToByteArray();
             char[] buffer = new char[32];
             var reader = new CborReader(encoding, conformanceMode);
@@ -561,7 +586,8 @@ namespace System.Formats.Cbor.Tests
         [InlineData(CborConformanceMode.Lax)]
         public static void ReadTextString_IndefiniteLengthConcatenated_InvalidUtf8Chunks_LaxConformance_ShouldSucceed(
             CborConformanceMode conformanceMode
-        ) {
+        )
+        {
             // while the concatenated string is valid utf8, the individual chunks are not,
             // which is in violation of the CBOR format.
 
@@ -579,7 +605,8 @@ namespace System.Formats.Cbor.Tests
         [InlineData(CborConformanceMode.Ctap2Canonical)]
         public static void ReadTextString_IndefiniteLengthConcatenated_InvalidUtf8Chunks_StrictConformance_ShouldThrowCborContentException(
             CborConformanceMode conformanceMode
-        ) {
+        )
+        {
             // while the concatenated string is valid utf8, the individual chunks are not,
             // which is in violation of the CBOR format.
 

@@ -33,7 +33,8 @@ namespace System.Diagnostics.Tests
                     false,
                     PerformanceCounterCategoryType.SingleInstance
                 )
-            ) {
+            )
+            {
                 counterSample.RawValue = 0;
 
                 Assert.Equal(0, counterSample.RawValue);
@@ -51,7 +52,8 @@ namespace System.Diagnostics.Tests
                     "0",
                     "."
                 )
-            ) {
+            )
+            {
                 Assert.Equal(0, Helpers.RetryOnAllPlatforms(() => counterSample.NextValue()));
 
                 Assert.True(counterSample.RawValue > 0);
@@ -76,7 +78,8 @@ namespace System.Diagnostics.Tests
                 PerformanceCounter counterSample = Helpers.RetryOnAllPlatforms(
                     () => new PerformanceCounter(category, name, instance)
                 )
-            ) {
+            )
+            {
                 Assert.Equal(name, counterSample.CounterName);
                 Assert.Equal(category, counterSample.CategoryName);
                 Assert.Equal(instance, counterSample.InstanceName);
@@ -106,7 +109,8 @@ namespace System.Diagnostics.Tests
                 PerformanceCounter counterSample = Helpers.RetryOnAllPlatforms(
                     () => new PerformanceCounter(category, name)
                 )
-            ) {
+            )
+            {
                 counterSample.ReadOnly = false;
 
                 Assert.False(counterSample.ReadOnly);
@@ -186,7 +190,8 @@ namespace System.Diagnostics.Tests
                     "0",
                     "."
                 )
-            ) {
+            )
+            {
                 Helpers.RetryOnAllPlatforms(() => counterSample.NextValue());
                 System.Threading.Thread.Sleep(30);
 
@@ -204,7 +209,8 @@ namespace System.Diagnostics.Tests
                     "0",
                     "."
                 )
-            ) {
+            )
+            {
                 counterSample.BeginInit();
 
                 Assert.NotNull(counterSample);
@@ -221,7 +227,8 @@ namespace System.Diagnostics.Tests
                     "0",
                     "."
                 )
-            ) {
+            )
+            {
                 counterSample.BeginInit();
                 counterSample.EndInit();
 
@@ -242,7 +249,8 @@ namespace System.Diagnostics.Tests
                     false,
                     PerformanceCounterCategoryType.SingleInstance
                 )
-            ) {
+            )
+            {
                 counterSample.RawValue = 10;
                 Helpers.RetryOnAllPlatforms(() => counterSample.Decrement());
 
@@ -264,7 +272,8 @@ namespace System.Diagnostics.Tests
                     false,
                     PerformanceCounterCategoryType.SingleInstance
                 )
-            ) {
+            )
+            {
                 counterSample.RawValue = 10;
                 Helpers.RetryOnAllPlatforms(() => counterSample.Increment());
 
@@ -289,7 +298,8 @@ namespace System.Diagnostics.Tests
                     false,
                     PerformanceCounterCategoryType.SingleInstance
                 )
-            ) {
+            )
+            {
                 counterSample.RawValue = 10;
                 Helpers.RetryOnAllPlatforms(() => counterSample.IncrementBy(2));
 
@@ -311,7 +321,8 @@ namespace System.Diagnostics.Tests
                     true,
                     PerformanceCounterCategoryType.SingleInstance
                 )
-            ) {
+            )
+            {
                 Assert.Throws<InvalidOperationException>(() => counterSample.IncrementBy(2));
                 Helpers.DeleteCategory(name);
             }
@@ -330,7 +341,8 @@ namespace System.Diagnostics.Tests
                     true,
                     PerformanceCounterCategoryType.SingleInstance
                 )
-            ) {
+            )
+            {
                 Assert.Throws<InvalidOperationException>(() => counterSample.Increment());
                 Helpers.DeleteCategory(name);
             }
@@ -349,7 +361,8 @@ namespace System.Diagnostics.Tests
                     true,
                     PerformanceCounterCategoryType.SingleInstance
                 )
-            ) {
+            )
+            {
                 Assert.Throws<InvalidOperationException>(() => counterSample.Decrement());
                 Helpers.DeleteCategory(name);
             }
@@ -365,7 +378,8 @@ namespace System.Diagnostics.Tests
                     false,
                     PerformanceCounterCategoryType.SingleInstance
                 )
-            ) {
+            )
+            {
                 counterSample.RawValue = 100;
                 counterSample.RemoveInstance();
                 counterSample.Close();
@@ -396,7 +410,8 @@ namespace System.Diagnostics.Tests
                     instance,
                     false
                 )
-            ) {
+            )
+            {
                 counterSample.RawValue = 10;
                 Helpers.RetryOnAllPlatforms(() => counterSample.Decrement());
 
@@ -409,7 +424,8 @@ namespace System.Diagnostics.Tests
             string name,
             bool readOnly,
             PerformanceCounterCategoryType categoryType
-        ) {
+        )
+        {
             var category = Helpers.CreateCategory(name, categoryType);
 
             PerformanceCounter counterSample = Helpers.RetryOnAllPlatforms(

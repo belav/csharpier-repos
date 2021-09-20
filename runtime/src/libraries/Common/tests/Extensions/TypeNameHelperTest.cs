@@ -243,7 +243,8 @@ namespace Microsoft.Extensions.Internal
         public void GetTypeDisplayName_IncludesGenericParameterNamesWhenOptionIsSet(
             Type type,
             string expected
-        ) {
+        )
+        {
             // Arrange & Act
             var actual = TypeNameHelper.GetTypeDisplayName(
                 type,
@@ -273,7 +274,8 @@ namespace Microsoft.Extensions.Internal
         public void GetTypeDisplayName_WithoutFullName_IncludesGenericParameterNamesWhenOptionIsSet(
             Type type,
             string expected
-        ) {
+        )
+        {
             // Arrange & Act
             var actual = TypeNameHelper.GetTypeDisplayName(
                 type,
@@ -342,7 +344,8 @@ namespace Microsoft.Extensions.Internal
         public void Can_PrettyPrint_FullTypeName_WithoutGenericParametersAndNestedTypeDelimiter(
             Type type,
             string expectedTypeName
-        ) {
+        )
+        {
             // Arrange & Act
             var displayName = TypeNameHelper.GetTypeDisplayName(
                 type,

@@ -94,7 +94,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.ArgumentProv
                         !orderedCSharpArgumentProviders[i].Metadata.AfterTyped.Contains(
                             orderedCSharpArgumentProviders[i - 1].Metadata.Name
                         )
-                    ) {
+                    )
+                    {
                         // Make sure the last built-in provider comes before the marker
                         Assert.Contains(
                             orderedCSharpArgumentProviders[i].Metadata.Name,

@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public EvaluatedConstant(
             ConstantValue value,
             ImmutableBindingDiagnostic<AssemblySymbol> diagnostics
-        ) {
+        )
+        {
             this.Value = value;
             this.Diagnostics = diagnostics.NullToEmpty();
         }
@@ -34,7 +35,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             HashSet<SourceFieldSymbolWithSyntaxReference> dependencies,
             bool earlyDecodingWellKnownAttributes,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var compilation = symbol.DeclaringCompilation;
             var binderFactory = compilation.GetBinderFactory(
                 (SyntaxTree)symbol.Locations[0].SourceTree
@@ -73,7 +75,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             FieldSymbol fieldSymbol,
             EqualsValueClauseSyntax initializer,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var enumConstant = fieldSymbol as SourceEnumConstantSymbol;
             Binder collisionDetector = new LocalScopeBinder(binder);
             collisionDetector = new ExecutableCodeBinder(
@@ -126,7 +129,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             TypeSymbol typeSymbol,
             Location initValueNodeLocation,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var value = ConstantValue.Bad;
             CheckLangVersionForConstantValue(boundValue, diagnostics);
             if (!boundValue.HasAnyErrors)
@@ -162,7 +166,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         && !unconvertedConstantValue.IsNull
                         && typeSymbol.IsReferenceType
                         && typeSymbol.SpecialType != SpecialType.System_String
-                    ) {
+                    )
+                    {
                         // Suppose we are in this case:
                         //
                         // const object x = "some_string"
@@ -229,7 +234,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal static void CheckLangVersionForConstantValue(
             BoundExpression expression,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             if (!(expression.Type is null) && expression.Type.IsStringType())
             {
                 var visitor = new CheckConstantInterpolatedStringValidity(diagnostics);

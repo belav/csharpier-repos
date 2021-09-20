@@ -69,7 +69,8 @@ namespace Microsoft.AspNetCore.Hosting
                 !string.IsNullOrEmpty(port)
                 && !string.IsNullOrEmpty(path)
                 && !string.IsNullOrEmpty(pairingToken)
-            ) {
+            )
+            {
                 // Set flag to prevent double service configuration
                 hostBuilder.UseSetting(nameof(UseIISIntegration), true.ToString());
 
@@ -87,14 +88,16 @@ namespace Microsoft.AspNetCore.Hosting
                             new[] { ';' },
                             StringSplitOptions.RemoveEmptyEntries
                         )
-                    ) {
+                    )
+                    {
                         if (
                             !string.Equals(
                                 authType,
                                 "anonymous",
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             enableAuth = true;
                             break;
                         }

@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this SemanticModel semanticModel,
             SyntaxNode declaration,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return semanticModel.GetDeclaredSymbol(declaration, cancellationToken)
                 ?? throw new InvalidOperationException();
         }
@@ -39,7 +40,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this SemanticModel semanticModel,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return semanticModel.GetEnclosingSymbol(position, cancellationToken)
                 ?? throw new InvalidOperationException();
         }
@@ -54,7 +56,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 var symbol = semanticModel.GetEnclosingSymbol(position, cancellationToken);
                 symbol != null;
                 symbol = symbol.ContainingSymbol
-            ) {
+            )
+            {
                 if (symbol is TSymbol tSymbol)
                 {
                     return tSymbol;
@@ -68,7 +71,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this SemanticModel semanticModel,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return semanticModel.GetEnclosingSymbol<INamedTypeSymbol>(position, cancellationToken)
                 ?? (ISymbol)semanticModel.Compilation.Assembly;
         }
@@ -90,7 +94,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             SyntaxNode? container,
             CancellationToken cancellationToken,
             Func<SyntaxNode, bool>? descendInto = null
-        ) {
+        )
+        {
             // Ignore an anonymous type property or tuple field.  It's ok if they have a name that
             // matches the name of the local we're introducing.
             return semanticModel.GetAllDeclaredSymbols(container, cancellationToken, descendInto)
@@ -115,7 +120,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             SyntaxNode? container,
             CancellationToken cancellationToken,
             Func<SyntaxNode, bool>? filter = null
-        ) {
+        )
+        {
             var symbols = new HashSet<ISymbol>();
             if (container != null)
             {
@@ -131,7 +137,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             HashSet<ISymbol> symbols,
             CancellationToken cancellationToken,
             Func<SyntaxNode, bool>? descendInto = null
-        ) {
+        )
+        {
             var symbol = semanticModel.GetDeclaredSymbol(node, cancellationToken);
 
             if (symbol != null)

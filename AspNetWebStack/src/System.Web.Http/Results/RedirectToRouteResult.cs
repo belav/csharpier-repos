@@ -52,7 +52,8 @@ namespace System.Web.Http.Results
             string routeName,
             IDictionary<string, object> routeValues,
             IDependencyProvider dependencies
-        ) {
+        )
+        {
             if (routeName == null)
             {
                 throw new ArgumentNullException("routeName");

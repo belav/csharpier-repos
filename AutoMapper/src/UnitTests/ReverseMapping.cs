@@ -105,7 +105,8 @@ namespace AutoMapper.UnitTests
                 Destination destination,
                 int member,
                 ResolutionContext context
-            ) {
+            )
+            {
                 return Int32.MaxValue;
             }
         }

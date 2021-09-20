@@ -34,11 +34,18 @@ namespace Microsoft.CodeAnalysis.AddPackage
             string packageName,
             bool includePrerelease,
             Document document
-        ) : base(
-            string.Format(FeaturesResources.Install_package_0, packageName),
-            CreateNestedActions(installerService, source, packageName, includePrerelease, document),
-            isInlinable: false
-        ) { }
+        )
+            : base(
+                string.Format(FeaturesResources.Install_package_0, packageName),
+                CreateNestedActions(
+                    installerService,
+                    source,
+                    packageName,
+                    includePrerelease,
+                    document
+                ),
+                isInlinable: false
+            ) { }
 
         private static ImmutableArray<CodeAction> CreateNestedActions(
             IPackageInstallerService installerService,
@@ -46,7 +53,8 @@ namespace Microsoft.CodeAnalysis.AddPackage
             string packageName,
             bool includePrerelease,
             Document document
-        ) {
+        )
+        {
             // Determine what versions of this package are already installed in some project
             // in this solution.  We'll offer to add those specific versions to this project,
             // followed by an option to "Find and install latest version."
@@ -95,7 +103,8 @@ namespace Microsoft.CodeAnalysis.AddPackage
             string versionOpt,
             bool includePrerelease,
             bool isLocal
-        ) {
+        )
+        {
             return new InstallPackageDirectlyCodeAction(
                 installerService,
                 document,

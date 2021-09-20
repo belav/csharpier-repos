@@ -497,7 +497,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
 
         private void BuildDfaTree_MultipleEndpoint_ParameterAndCatchAll_OnSameNode_Order1_Core(
             DfaMatcherBuilder builder
-        ) {
+        )
+        {
             // Arrange
             var endpoint1 = CreateEndpoint("a/{b}", order: 0);
             builder.AddEndpoint(endpoint1);
@@ -568,7 +569,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
 
         private void BuildDfaTree_MultipleEndpoint_ParameterAndCatchAll_OnSameNode_Order2_CorrectBehavior_Core(
             DfaMatcherBuilder builder
-        ) {
+        )
+        {
             // Arrange
             var endpoint1 = CreateEndpoint("a/{*b}", order: 0);
             builder.AddEndpoint(endpoint1);
@@ -609,7 +611,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
 
         private void BuildDfaTree_MultipleEndpoint_ParameterAndCatchAll_OnSameNode_Order2_LegacyBehavior_Core(
             DfaMatcherBuilder builder
-        ) {
+        )
+        {
             // Arrange
             var endpoint1 = CreateEndpoint("a/{*b}", order: 0);
             builder.AddEndpoint(endpoint1);
@@ -658,7 +661,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
 
         private void BuildDfaTree_MultipleEndpoint_CatchAllWithHigherPrecedenceThanParameter_Order1_CorrectBehavior_Core(
             DfaMatcherBuilder builder
-        ) {
+        )
+        {
             var endpoint1 = CreateEndpoint("{a}/{b}", order: 0);
             builder.AddEndpoint(endpoint1);
 
@@ -718,7 +722,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
 
         private void BuildDfaTree_MultipleEndpoint_CatchAllWithHigherPrecedenceThanParameter_Order2_CorrectBehavior_Core(
             DfaMatcherBuilder builder
-        ) {
+        )
+        {
             // Arrange
             var endpoint1 = CreateEndpoint("a/{*b}", order: 0);
             builder.AddEndpoint(endpoint1);
@@ -789,7 +794,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
 
         private void BuildDfaTree_MultipleEndpoint_CatchAllWithHigherPrecedenceThanParameter_Order1_Legacy30Behavior_Core(
             DfaMatcherBuilder builder
-        ) {
+        )
+        {
             // Arrange
             var endpoint1 = CreateEndpoint("{a}/{b}", order: 0);
             builder.AddEndpoint(endpoint1);
@@ -851,7 +857,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
 
         private void BuildDfaTree_MultipleEndpoint_CatchAllWithHigherPrecedenceThanParameter_Order2_Legacy30Behavior_Core(
             DfaMatcherBuilder builder
-        ) {
+        )
+        {
             // Arrange
             var endpoint1 = CreateEndpoint("a/{*b}", order: 0);
             builder.AddEndpoint(endpoint1);
@@ -1815,7 +1822,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             object constraints = null,
             object requiredValues = null,
             params object[] metadata
-        ) {
+        )
+        {
             var routePattern = RoutePatternFactory.Parse(template, defaults, constraints);
 
             var policyFactory = CreateParameterPolicyFactory();
@@ -1832,7 +1840,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
         public static RoutePattern CreateRoutePattern(
             RoutePattern routePattern,
             object requiredValues
-        ) {
+        )
+        {
             if (requiredValues != null)
             {
                 var policyFactory = CreateParameterPolicyFactory();
@@ -1876,7 +1885,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             object requiredValues = null,
             int order = 0,
             params object[] metadata
-        ) {
+        )
+        {
             return EndpointFactory.CreateRouteEndpoint(
                 template,
                 defaults,
@@ -1918,7 +1928,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             public PolicyJumpTable BuildJumpTable(
                 int exitDestination,
                 IReadOnlyList<PolicyJumpTableEdge> edges
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -1962,7 +1973,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             public PolicyJumpTable BuildJumpTable(
                 int exitDestination,
                 IReadOnlyList<PolicyJumpTableEdge> edges
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -1992,7 +2004,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             public PolicyJumpTable BuildJumpTable(
                 int exitDestination,
                 IReadOnlyList<PolicyJumpTableEdge> edges
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 

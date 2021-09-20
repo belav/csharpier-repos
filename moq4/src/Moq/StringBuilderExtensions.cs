@@ -18,7 +18,8 @@ namespace Moq
             this StringBuilder stringBuilder,
             string str,
             int startIndex
-        ) {
+        )
+        {
             return stringBuilder.Append(str, startIndex, str.Length - startIndex);
         }
 
@@ -28,7 +29,8 @@ namespace Moq
             IEnumerable<T> source,
             Func<StringBuilder, T, StringBuilder> append,
             string suffix
-        ) {
+        )
+        {
             return stringBuilder.Append(prefix).AppendCommaSeparated(source, append).Append(suffix);
         }
 
@@ -36,7 +38,8 @@ namespace Moq
             this StringBuilder stringBuilder,
             IEnumerable<T> source,
             Func<StringBuilder, T, StringBuilder> append
-        ) {
+        )
+        {
             bool appendComma = false;
             foreach (var item in source)
             {
@@ -56,7 +59,8 @@ namespace Moq
             string str,
             int count = 1,
             char indentChar = ' '
-        ) {
+        )
+        {
             var i = 0;
             while (i < str.Length)
             {
@@ -80,7 +84,8 @@ namespace Moq
             this StringBuilder stringBuilder,
             MethodBase method,
             bool includeGenericArgumentList
-        ) {
+        )
+        {
             stringBuilder.Append(method.Name);
 
             if (includeGenericArgumentList && method.IsGenericMethod)
@@ -106,7 +111,8 @@ namespace Moq
         public static StringBuilder AppendParameterType(
             this StringBuilder stringBuilder,
             ParameterInfo parameter
-        ) {
+        )
+        {
             var parameterType = parameter.ParameterType;
 
             if (parameterType.IsByRef)
@@ -161,7 +167,8 @@ namespace Moq
                     obj.GetType().IsConstructedGenericType
                     && obj.GetType().GetGenericTypeDefinition() == typeof(List<>)
                 )
-            ) {
+            )
+            {
                 stringBuilder.Append('[');
                 const int maxCount = 10;
                 var enumerator = ((IEnumerable)obj).GetEnumerator();

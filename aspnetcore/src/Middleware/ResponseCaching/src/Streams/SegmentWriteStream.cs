@@ -180,7 +180,8 @@ namespace Microsoft.AspNetCore.ResponseCaching
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Write(buffer, offset, count);
             return Task.CompletedTask;
         }

@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeCompilationState compilationState,
             PooledDictionary<LocalSymbol, LocalSymbol> tempSubstitution,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             _F = new SyntheticBoundNodeFactory(method, syntaxNode, compilationState, diagnostics);
             _F.CurrentFunction = method;
             _tempSubstitution = tempSubstitution;
@@ -44,10 +45,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             private ArrayBuilder<LocalSymbol> _locals;
             private ArrayBuilder<BoundStatement> _statements;
 
-            public BoundSpillSequenceBuilder(
-                SyntaxNode syntax,
-                BoundExpression value = null
-            ) : base(SpillSequenceBuilderKind, syntax, value?.Type)
+            public BoundSpillSequenceBuilder(SyntaxNode syntax, BoundExpression value = null)
+                : base(SpillSequenceBuilderKind, syntax, value?.Type)
             {
                 Debug.Assert(value?.Kind != SpillSequenceBuilderKind);
                 this.Value = value;
@@ -108,7 +107,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             private static void IncludeAndFree<T>(
                 ref ArrayBuilder<T> left,
                 ref ArrayBuilder<T> right
-            ) {
+            )
+            {
                 if (right == null)
                 {
                     return;
@@ -220,7 +220,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             public static BoundNode Rewrite(
                 PooledDictionary<LocalSymbol, LocalSymbol> tempSubstitution,
                 BoundNode node
-            ) {
+            )
+            {
                 if (tempSubstitution.Count == 0)
                 {
                     return node;
@@ -250,7 +251,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             MethodSymbol method,
             TypeCompilationState compilationState,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var tempSubstitution = PooledDictionary<LocalSymbol, LocalSymbol>.GetInstance();
             var spiller = new SpillSequenceSpiller(
                 method,
@@ -268,7 +270,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private BoundExpression VisitExpression(
             ref BoundSpillSequenceBuilder builder,
             BoundExpression expression
-        ) {
+        )
+        {
             var e = (BoundExpression)this.Visit(expression);
             if (e == null || e.Kind != SpillSequenceBuilderKind)
             {
@@ -291,7 +294,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static BoundExpression UpdateExpression(
             BoundSpillSequenceBuilder builder,
             BoundExpression expression
-        ) {
+        )
+        {
             if (builder == null)
             {
                 return expression;
@@ -310,7 +314,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private BoundStatement UpdateStatement(
             BoundSpillSequenceBuilder builder,
             BoundStatement statement
-        ) {
+        )
+        {
             if (builder == null)
             {
                 Debug.Assert(statement != null);
@@ -334,7 +339,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression expression,
             RefKind refKind = RefKind.None,
             bool sideEffectsOnly = false
-        ) {
+        )
+        {
             Debug.Assert(builder != null);
             if (builder.Syntax != null)
                 _F.Syntax = builder.Syntax;
@@ -408,7 +414,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         if (
                             local.LocalSymbol.SynthesizedKind == SynthesizedLocalKind.Spill
                             || refKind != RefKind.None
-                        ) {
+                        )
+                        {
                             return local;
                         }
 
@@ -484,7 +491,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<RefKind> refKinds = default(ImmutableArray<RefKind>),
             bool forceSpill = false,
             bool sideEffectsOnly = false
-        ) {
+        )
+        {
             Debug.Assert(!sideEffectsOnly || refKinds.IsDefault);
             Debug.Assert(refKinds.IsDefault || refKinds.Length == args.Length);
 
@@ -753,7 +761,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override BoundNode VisitConvertedStackAllocExpression(
             BoundConvertedStackAllocExpression node
-        ) {
+        )
+        {
             BoundSpillSequenceBuilder builder = null;
             BoundExpression count = VisitExpression(ref builder, node.Count);
             var initializerOpt = (BoundArrayInitialization)VisitExpression(
@@ -860,7 +869,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 BoundFieldAccess field,
                 ref BoundSpillSequenceBuilder leftBuilder,
                 bool isAssignmentTarget
-            ) {
+            )
+            {
                 var generateDummyFieldAccess = false;
                 if (!field.FieldSymbol.IsStatic)
                 {
@@ -940,7 +950,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override BoundNode VisitUserDefinedConditionalLogicalOperator(
             BoundUserDefinedConditionalLogicalOperator node
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
 
@@ -961,7 +972,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     node.OperatorKind == BinaryOperatorKind.LogicalBoolOr
                     || node.OperatorKind == BinaryOperatorKind.LogicalBoolAnd
-                ) {
+                )
+                {
                     var tmp = _F.SynthesizedLocal(
                         node.Type,
                         kind: SynthesizedLocalKind.Spill,
@@ -1128,7 +1140,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 node.ConversionKind == ConversionKind.AnonymousFunction
                 && node.Type.IsExpressionTree()
-            ) {
+            )
+            {
                 // Expression trees do not contain any code that requires spilling.
                 return node;
             }
@@ -1152,7 +1165,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override BoundNode VisitDelegateCreationExpression(
             BoundDelegateCreationExpression node
-        ) {
+        )
+        {
             BoundSpillSequenceBuilder builder = null;
             var argument = VisitExpression(ref builder, node.Argument);
             return UpdateExpression(
@@ -1272,7 +1286,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 receiver.Type.IsReferenceType
                 || receiver.Type.IsValueType
                 || receiverRefKind == RefKind.None
-            ) {
+            )
+            {
                 // spill to a clone
                 receiver = Spill(receiverBuilder, receiver, RefKind.None);
                 var hasValueOpt = node.HasValueMethodOpt;
@@ -1406,7 +1421,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 BoundExpression receiver,
                 int receiverID,
                 int recursionDepth
-            ) {
+            )
+            {
                 var replacer = new ConditionalReceiverReplacer(
                     receiver,
                     receiverID,
@@ -1504,7 +1520,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override BoundNode VisitPointerIndirectionOperator(
             BoundPointerIndirectionOperator node
-        ) {
+        )
+        {
             BoundSpillSequenceBuilder builder = null;
             var operand = VisitExpression(ref builder, node.Operand);
             return UpdateExpression(builder, node.Update(operand, node.Type));
@@ -1557,7 +1574,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private void PromoteAndAddLocals(
             BoundSpillSequenceBuilder builder,
             ImmutableArray<LocalSymbol> locals
-        ) {
+        )
+        {
             foreach (var local in locals)
             {
                 if (local.SynthesizedKind.IsLongLived())

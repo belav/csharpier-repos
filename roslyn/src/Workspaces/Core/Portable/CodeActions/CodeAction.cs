@@ -89,7 +89,8 @@ namespace Microsoft.CodeAnalysis.CodeActions
         internal Task<ImmutableArray<CodeActionOperation>> GetOperationsAsync(
             IProgressTracker progressTracker,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return GetOperationsCoreAsync(progressTracker, cancellationToken);
         }
 
@@ -99,7 +100,8 @@ namespace Microsoft.CodeAnalysis.CodeActions
         internal virtual async Task<ImmutableArray<CodeActionOperation>> GetOperationsCoreAsync(
             IProgressTracker progressTracker,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var operations = await this.ComputeOperationsAsync(progressTracker, cancellationToken)
                 .ConfigureAwait(false);
 
@@ -117,7 +119,8 @@ namespace Microsoft.CodeAnalysis.CodeActions
         /// </summary>
         public async Task<ImmutableArray<CodeActionOperation>> GetPreviewOperationsAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var operations = await this.ComputePreviewOperationsAsync(cancellationToken)
                 .ConfigureAwait(false);
 
@@ -135,7 +138,8 @@ namespace Microsoft.CodeAnalysis.CodeActions
         /// </summary>
         protected virtual async Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var changedSolution = await GetChangedSolutionAsync(cancellationToken)
                 .ConfigureAwait(false);
             if (changedSolution == null)
@@ -149,7 +153,8 @@ namespace Microsoft.CodeAnalysis.CodeActions
         internal virtual async Task<ImmutableArray<CodeActionOperation>> ComputeOperationsAsync(
             IProgressTracker progressTracker,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var operations = await ComputeOperationsAsync(cancellationToken).ConfigureAwait(false);
             return operations.ToImmutableArrayOrEmpty();
         }
@@ -168,7 +173,8 @@ namespace Microsoft.CodeAnalysis.CodeActions
         /// </summary>
         protected virtual async Task<Solution?> GetChangedSolutionAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var changedDocument = await GetChangedDocumentAsync(cancellationToken)
                 .ConfigureAwait(false);
             if (changedDocument == null)
@@ -182,7 +188,8 @@ namespace Microsoft.CodeAnalysis.CodeActions
         internal virtual Task<Solution?> GetChangedSolutionAsync(
             IProgressTracker progressTracker,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return GetChangedSolutionAsync(cancellationToken);
         }
 
@@ -206,7 +213,8 @@ namespace Microsoft.CodeAnalysis.CodeActions
         internal async Task<Solution?> GetChangedSolutionInternalAsync(
             bool postProcessChanges = true,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var solution = await GetChangedSolutionAsync(new ProgressTracker(), cancellationToken)
                 .ConfigureAwait(false);
             if (solution == null || !postProcessChanges)
@@ -230,7 +238,8 @@ namespace Microsoft.CodeAnalysis.CodeActions
         protected async Task<ImmutableArray<CodeActionOperation>> PostProcessAsync(
             IEnumerable<CodeActionOperation> operations,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var arrayBuilder = new ArrayBuilder<CodeActionOperation>();
 
             foreach (var op in operations)
@@ -264,7 +273,8 @@ namespace Microsoft.CodeAnalysis.CodeActions
         protected async Task<Solution> PostProcessChangesAsync(
             Solution changedSolution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var solutionChanges = changedSolution.GetChanges(
                 changedSolution.Workspace.CurrentSolution
             );
@@ -327,7 +337,8 @@ namespace Microsoft.CodeAnalysis.CodeActions
         internal static async Task<Document> CleanupDocumentAsync(
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (document.SupportsSyntaxTree)
             {
                 document = await ImportAdder.AddImportsFromSymbolAnnotationAsync(
@@ -389,7 +400,8 @@ namespace Microsoft.CodeAnalysis.CodeActions
             string title,
             Func<CancellationToken, Task<Document>> createChangedDocument,
             string? equivalenceKey = null
-        ) {
+        )
+        {
             if (title == null)
             {
                 throw new ArgumentNullException(nameof(title));
@@ -419,7 +431,8 @@ namespace Microsoft.CodeAnalysis.CodeActions
             string title,
             Func<CancellationToken, Task<Solution>> createChangedSolution,
             string? equivalenceKey = null
-        ) {
+        )
+        {
             if (title == null)
             {
                 throw new ArgumentNullException(nameof(title));
@@ -444,7 +457,8 @@ namespace Microsoft.CodeAnalysis.CodeActions
             string title,
             ImmutableArray<CodeAction> nestedActions,
             bool isInlinable
-        ) {
+        )
+        {
             if (title is null)
             {
                 throw new ArgumentNullException(nameof(title));
@@ -464,7 +478,8 @@ namespace Microsoft.CodeAnalysis.CodeActions
                 string title,
                 string? equivalenceKey,
                 IEnumerable<string>? customTags = null
-            ) {
+            )
+            {
                 Title = title;
                 EquivalenceKey = equivalenceKey;
 

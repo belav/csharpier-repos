@@ -42,7 +42,8 @@ namespace System.Web.Http.Dispatcher
                     expectedExceptionLogger,
                     exceptionHandler
                 )
-            ) {
+            )
+            {
                 // Act
                 IExceptionLogger exceptionLogger = product.ExceptionLogger;
 
@@ -65,7 +66,8 @@ namespace System.Web.Http.Dispatcher
                     exceptionLogger,
                     expectedExceptionHandler
                 )
-            ) {
+            )
+            {
                 // Act
                 IExceptionHandler exceptionHandler = product.ExceptionHandler;
 
@@ -226,7 +228,8 @@ namespace System.Web.Http.Dispatcher
                     exceptionLogger,
                     exceptionHandler
                 )
-            ) {
+            )
+            {
                 configuration.Services.Replace(
                     typeof(IHttpControllerSelector),
                     CreateThrowingControllerSelector(expectedException)
@@ -306,7 +309,8 @@ namespace System.Web.Http.Dispatcher
                     exceptionLogger,
                     exceptionHandler
                 )
-            ) {
+            )
+            {
                 var controllerSelector = new Mock<IHttpControllerSelector>(MockBehavior.Strict);
                 controllerSelector.Setup(
                         selector => selector.SelectController(It.IsAny<HttpRequestMessage>())
@@ -393,7 +397,8 @@ namespace System.Web.Http.Dispatcher
                     exceptionLogger,
                     exceptionHandler
                 )
-            ) {
+            )
+            {
                 configuration.Services.Replace(
                     typeof(IHttpControllerSelector),
                     CreateThrowingControllerSelector(expectedException)
@@ -439,7 +444,8 @@ namespace System.Web.Http.Dispatcher
                     exceptionLogger,
                     exceptionHandler
                 )
-            ) {
+            )
+            {
                 configuration.Services.Replace(
                     typeof(IHttpControllerSelector),
                     CreateThrowingControllerSelector(exceptionInfo)
@@ -490,7 +496,8 @@ namespace System.Web.Http.Dispatcher
                         exceptionLogger,
                         exceptionHandler
                     )
-                ) {
+                )
+                {
                     configuration.Services.Replace(
                         typeof(IHttpControllerSelector),
                         CreateThrowingControllerSelector(CreateException())
@@ -746,7 +753,8 @@ namespace System.Web.Http.Dispatcher
 
         private static HttpControllerDispatcher CreateProductUnderTest(
             HttpConfiguration configuration
-        ) {
+        )
+        {
             return new HttpControllerDispatcher(configuration);
         }
 
@@ -754,7 +762,8 @@ namespace System.Web.Http.Dispatcher
             HttpConfiguration configuration,
             IExceptionLogger exceptionLogger,
             IExceptionHandler exceptionHandler
-        ) {
+        )
+        {
             return new HttpControllerDispatcher(configuration)
             {
                 ExceptionLogger = exceptionLogger,
@@ -831,7 +840,8 @@ namespace System.Web.Http.Dispatcher
 
         private static IHttpControllerSelector CreateThrowingControllerSelector(
             ExceptionDispatchInfo exceptionInfo
-        ) {
+        )
+        {
             return new ThrowingControllerSelector(exceptionInfo);
         }
 
@@ -842,7 +852,8 @@ namespace System.Web.Http.Dispatcher
             public override Task<HttpResponseMessage> ExecuteAsync(
                 HttpControllerContext controllerContext,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // Empty. Skip all the logic of execcuting a controller.
                 HttpResponseMessage response = new HttpResponseMessage();
                 return Task.FromResult(response);
@@ -885,7 +896,8 @@ namespace System.Web.Http.Dispatcher
         public override Task<HttpResponseMessage> ExecuteAsync(
             HttpControllerContext controllerContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ControllerContext = controllerContext;
             throw _exception;
         }

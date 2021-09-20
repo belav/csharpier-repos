@@ -77,7 +77,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
         public RetargetingModuleSymbol(
             RetargetingAssemblySymbol retargetingAssembly,
             SourceModuleSymbol underlyingModule
-        ) {
+        )
+        {
             Debug.Assert((object)retargetingAssembly != null);
             Debug.Assert((object)underlyingModule != null);
 
@@ -140,7 +141,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
             CultureInfo preferredCulture = null,
             bool expandIncludes = false,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return _underlyingModule.GetDocumentationCommentXml(
                 preferredCulture,
                 expandIncludes,
@@ -170,7 +172,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
         internal override void SetReferences(
             ModuleReferences<AssemblySymbol> moduleReferences,
             SourceAssemblySymbol originatingSourceAssemblyDebugOnly
-        ) {
+        )
+        {
             base.SetReferences(moduleReferences, originatingSourceAssemblyDebugOnly);
 
             // Build the retargeting map
@@ -224,7 +227,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                             underlyingBoundReferences[j],
                             out destinationData
                         )
-                    ) {
+                    )
+                    {
                         _retargetingAssemblyMap.Add(
                             underlyingBoundReferences[j],
                             new DestinationData { To = referencedAssemblySymbols[i] }

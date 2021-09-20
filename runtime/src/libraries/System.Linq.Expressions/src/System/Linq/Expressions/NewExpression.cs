@@ -23,7 +23,8 @@ namespace System.Linq.Expressions
             ConstructorInfo? constructor,
             IReadOnlyList<Expression> arguments,
             ReadOnlyCollection<MemberInfo>? members
-        ) {
+        )
+        {
             Constructor = constructor;
             _arguments = arguments;
             Members = members;
@@ -148,7 +149,8 @@ namespace System.Linq.Expressions
         public static NewExpression New(
             ConstructorInfo constructor,
             IEnumerable<Expression>? arguments
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(constructor, nameof(constructor));
             ContractUtils.RequiresNotNull(
                 constructor.DeclaringType!,
@@ -184,7 +186,8 @@ namespace System.Linq.Expressions
             ConstructorInfo constructor,
             IEnumerable<Expression>? arguments,
             IEnumerable<MemberInfo>? members
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(constructor, nameof(constructor));
             ContractUtils.RequiresNotNull(
                 constructor.DeclaringType!,
@@ -215,7 +218,8 @@ namespace System.Linq.Expressions
             ConstructorInfo constructor,
             IEnumerable<Expression>? arguments,
             params MemberInfo[]? members
-        ) {
+        )
+        {
             return New(constructor, arguments, (IEnumerable<MemberInfo>?)members);
         }
 
@@ -230,7 +234,8 @@ namespace System.Linq.Expressions
                     | DynamicallyAccessedMemberTypes.NonPublicConstructors
             )]
                 Type type
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(type, nameof(type));
             if (type == typeof(void))
             {
@@ -262,7 +267,8 @@ namespace System.Linq.Expressions
             ConstructorInfo constructor,
             ref ReadOnlyCollection<Expression> arguments,
             ref ReadOnlyCollection<MemberInfo> members
-        ) {
+        )
+        {
             ParameterInfo[] pis;
             if ((pis = constructor.GetParametersCached()).Length > 0)
             {
@@ -374,7 +380,8 @@ namespace System.Linq.Expressions
             out Type memberType,
             string paramName,
             int index
-        ) {
+        )
+        {
             if (member is FieldInfo field)
             {
                 if (field.IsStatic)

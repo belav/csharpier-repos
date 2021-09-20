@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Routing.Template
         public DefaultTemplateBinderFactory(
             ParameterPolicyFactory policyFactory,
             ObjectPool<UriBuildingContext> pool
-        ) {
+        )
+        {
             if (policyFactory == null)
             {
                 throw new ArgumentNullException(nameof(policyFactory));
@@ -71,7 +72,8 @@ namespace Microsoft.AspNetCore.Routing.Template
                     if (
                         !foundTransformer
                         && parameterPolicy is IOutboundParameterTransformer parameterTransformer
-                    ) {
+                    )
+                    {
                         policies.Add((parameterName, parameterTransformer));
                         foundTransformer = true;
                     }

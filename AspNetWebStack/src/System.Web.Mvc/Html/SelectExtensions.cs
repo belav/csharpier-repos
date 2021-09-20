@@ -33,7 +33,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper htmlHelper,
             string name,
             string optionLabel
-        ) {
+        )
+        {
             return DropDownList(
                 htmlHelper,
                 name,
@@ -48,7 +49,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper htmlHelper,
             string name,
             IEnumerable<SelectListItem> selectList
-        ) {
+        )
+        {
             return DropDownList(
                 htmlHelper,
                 name,
@@ -64,7 +66,8 @@ namespace System.Web.Mvc.Html
             string name,
             IEnumerable<SelectListItem> selectList,
             object htmlAttributes
-        ) {
+        )
+        {
             return DropDownList(
                 htmlHelper,
                 name,
@@ -80,7 +83,8 @@ namespace System.Web.Mvc.Html
             string name,
             IEnumerable<SelectListItem> selectList,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             return DropDownList(
                 htmlHelper,
                 name,
@@ -96,7 +100,8 @@ namespace System.Web.Mvc.Html
             string name,
             IEnumerable<SelectListItem> selectList,
             string optionLabel
-        ) {
+        )
+        {
             return DropDownList(
                 htmlHelper,
                 name,
@@ -112,7 +117,8 @@ namespace System.Web.Mvc.Html
             IEnumerable<SelectListItem> selectList,
             string optionLabel,
             object htmlAttributes
-        ) {
+        )
+        {
             return DropDownList(
                 htmlHelper,
                 name,
@@ -128,7 +134,8 @@ namespace System.Web.Mvc.Html
             IEnumerable<SelectListItem> selectList,
             string optionLabel,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             return DropDownListHelper(
                 htmlHelper,
                 metadata: null,
@@ -148,7 +155,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TProperty>> expression,
             IEnumerable<SelectListItem> selectList
-        ) {
+        )
+        {
             return DropDownListFor(
                 htmlHelper,
                 expression,
@@ -169,7 +177,8 @@ namespace System.Web.Mvc.Html
             Expression<Func<TModel, TProperty>> expression,
             IEnumerable<SelectListItem> selectList,
             object htmlAttributes
-        ) {
+        )
+        {
             return DropDownListFor(
                 htmlHelper,
                 expression,
@@ -190,7 +199,8 @@ namespace System.Web.Mvc.Html
             Expression<Func<TModel, TProperty>> expression,
             IEnumerable<SelectListItem> selectList,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             return DropDownListFor(
                 htmlHelper,
                 expression,
@@ -211,7 +221,8 @@ namespace System.Web.Mvc.Html
             Expression<Func<TModel, TProperty>> expression,
             IEnumerable<SelectListItem> selectList,
             string optionLabel
-        ) {
+        )
+        {
             return DropDownListFor(
                 htmlHelper,
                 expression,
@@ -232,7 +243,8 @@ namespace System.Web.Mvc.Html
             IEnumerable<SelectListItem> selectList,
             string optionLabel,
             object htmlAttributes
-        ) {
+        )
+        {
             return DropDownListFor(
                 htmlHelper,
                 expression,
@@ -258,7 +270,8 @@ namespace System.Web.Mvc.Html
             IEnumerable<SelectListItem> selectList,
             string optionLabel,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             if (expression == null)
             {
                 throw new ArgumentNullException("expression");
@@ -287,7 +300,8 @@ namespace System.Web.Mvc.Html
         public static MvcHtmlString EnumDropDownListFor<TModel, TEnum>(
             this HtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TEnum>> expression
-        ) {
+        )
+        {
             return EnumDropDownListFor(htmlHelper, expression, optionLabel: null);
         }
 
@@ -300,7 +314,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TEnum>> expression,
             object htmlAttributes
-        ) {
+        )
+        {
             return EnumDropDownListFor(
                 htmlHelper,
                 expression,
@@ -318,7 +333,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TEnum>> expression,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             return EnumDropDownListFor(
                 htmlHelper,
                 expression,
@@ -336,7 +352,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TEnum>> expression,
             string optionLabel
-        ) {
+        )
+        {
             return EnumDropDownListFor(
                 htmlHelper,
                 expression,
@@ -355,7 +372,8 @@ namespace System.Web.Mvc.Html
             Expression<Func<TModel, TEnum>> expression,
             string optionLabel,
             object htmlAttributes
-        ) {
+        )
+        {
             return EnumDropDownListFor(
                 htmlHelper,
                 expression,
@@ -378,7 +396,8 @@ namespace System.Web.Mvc.Html
             Expression<Func<TModel, TEnum>> expression,
             string optionLabel,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             if (expression == null)
             {
                 throw Error.ArgumentNull("expression");
@@ -458,7 +477,8 @@ namespace System.Web.Mvc.Html
                 !String.IsNullOrEmpty(optionLabel)
                 && selectList.Count != 0
                 && String.IsNullOrEmpty(selectList[0].Text)
-            ) {
+            )
+            {
                 // Were given an optionLabel and the select list has a blank initial slot.  Combine.
                 selectList[0].Text = optionLabel;
 
@@ -483,7 +503,8 @@ namespace System.Web.Mvc.Html
             IEnumerable<SelectListItem> selectList,
             string optionLabel,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             return SelectInternal(
                 htmlHelper,
                 metadata,
@@ -512,7 +533,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper htmlHelper,
             string name,
             IEnumerable<SelectListItem> selectList
-        ) {
+        )
+        {
             return ListBox(htmlHelper, name, selectList, (IDictionary<string, object>)null);
         }
 
@@ -521,7 +543,8 @@ namespace System.Web.Mvc.Html
             string name,
             IEnumerable<SelectListItem> selectList,
             object htmlAttributes
-        ) {
+        )
+        {
             return ListBox(
                 htmlHelper,
                 name,
@@ -535,7 +558,8 @@ namespace System.Web.Mvc.Html
             string name,
             IEnumerable<SelectListItem> selectList,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             return ListBoxHelper(
                 htmlHelper,
                 metadata: null,
@@ -554,7 +578,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TProperty>> expression,
             IEnumerable<SelectListItem> selectList
-        ) {
+        )
+        {
             return ListBoxFor(
                 htmlHelper,
                 expression,
@@ -573,7 +598,8 @@ namespace System.Web.Mvc.Html
             Expression<Func<TModel, TProperty>> expression,
             IEnumerable<SelectListItem> selectList,
             object htmlAttributes
-        ) {
+        )
+        {
             return ListBoxFor(
                 htmlHelper,
                 expression,
@@ -597,7 +623,8 @@ namespace System.Web.Mvc.Html
             Expression<Func<TModel, TProperty>> expression,
             IEnumerable<SelectListItem> selectList,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             if (expression == null)
             {
                 throw new ArgumentNullException("expression");
@@ -623,7 +650,8 @@ namespace System.Web.Mvc.Html
             string name,
             IEnumerable<SelectListItem> selectList,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             return SelectInternal(
                 htmlHelper,
                 metadata,
@@ -640,7 +668,8 @@ namespace System.Web.Mvc.Html
         private static IEnumerable<SelectListItem> GetSelectData(
             this HtmlHelper htmlHelper,
             string name
-        ) {
+        )
+        {
             object o = null;
             if (htmlHelper.ViewData != null && !String.IsNullOrEmpty(name))
             {
@@ -698,7 +727,8 @@ namespace System.Web.Mvc.Html
             IEnumerable<SelectListItem> selectList,
             object defaultValue,
             bool allowMultiple
-        ) {
+        )
+        {
             IEnumerable defaultValues;
 
             if (allowMultiple)
@@ -755,7 +785,8 @@ namespace System.Web.Mvc.Html
             IEnumerable<SelectListItem> selectList,
             bool allowMultiple,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             string fullName = htmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(
                 name
             );
@@ -836,7 +867,8 @@ namespace System.Web.Mvc.Html
         private static StringBuilder BuildItems(
             string optionLabel,
             IEnumerable<SelectListItem> selectList
-        ) {
+        )
+        {
             StringBuilder listItemBuilder = new StringBuilder();
 
             // Make optionLabel the first item that gets rendered.

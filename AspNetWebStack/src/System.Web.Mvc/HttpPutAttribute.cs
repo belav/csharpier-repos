@@ -15,7 +15,8 @@ namespace System.Web.Mvc
         public override bool IsValidForRequest(
             ControllerContext controllerContext,
             MethodInfo methodInfo
-        ) {
+        )
+        {
             return _innerAttribute.IsValidForRequest(controllerContext, methodInfo);
         }
     }

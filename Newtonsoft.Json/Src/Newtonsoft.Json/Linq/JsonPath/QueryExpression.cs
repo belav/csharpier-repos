@@ -148,7 +148,8 @@ namespace Newtonsoft.Json.Linq.JsonPath
             JToken leftResult,
             JToken rightResult,
             JsonSelectSettings? settings
-        ) {
+        )
+        {
             if (leftResult is JValue leftValue && rightResult is JValue rightValue)
             {
                 switch (Operator)
@@ -268,7 +269,8 @@ namespace Newtonsoft.Json.Linq.JsonPath
             if (
                 (value.Type == JTokenType.Integer && queryValue.Type == JTokenType.Float)
                 || (value.Type == JTokenType.Float && queryValue.Type == JTokenType.Integer)
-            ) {
+            )
+            {
                 return JValue.Compare(value.Type, value.Value, queryValue.Value) == 0;
             }
 
@@ -340,7 +342,8 @@ namespace Newtonsoft.Json.Linq.JsonPath
             if (
                 (value.Type == JTokenType.Integer && queryValue.Type == JTokenType.Float)
                 || (value.Type == JTokenType.Float && queryValue.Type == JTokenType.Integer)
-            ) {
+            )
+            {
                 return JValue.Compare(value.Type, value.Value, queryValue.Value) == 0;
             }
 

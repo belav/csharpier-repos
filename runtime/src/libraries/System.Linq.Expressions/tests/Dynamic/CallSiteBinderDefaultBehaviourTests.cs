@@ -18,7 +18,8 @@ namespace System.Runtime.CompilerServices.Tests
                 object[] args,
                 ReadOnlyCollection<ParameterExpression> parameters,
                 LabelTarget returnLabel
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }

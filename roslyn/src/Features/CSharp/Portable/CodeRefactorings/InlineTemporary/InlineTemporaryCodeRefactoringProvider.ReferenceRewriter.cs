@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
                 VariableDeclaratorSyntax variableDeclarator,
                 ExpressionSyntax expressionToInline,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 _semanticModel = semanticModel;
                 _localSymbol = (ILocalSymbol)semanticModel.GetDeclaredSymbol(
                     variableDeclarator,
@@ -71,7 +72,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
 
             public override SyntaxNode VisitAnonymousObjectMemberDeclarator(
                 AnonymousObjectMemberDeclaratorSyntax node
-            ) {
+            )
+            {
                 var nameEquals = node.NameEquals;
                 var expression = node.Expression;
                 var identifier = expression as IdentifierNameSyntax;
@@ -81,7 +83,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
                     || identifier == null
                     || !IsReference(identifier)
                     || HasConflict(identifier, _variableDeclarator)
-                ) {
+                )
+                {
                     return base.VisitAnonymousObjectMemberDeclarator(node);
                 }
 
@@ -105,7 +108,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
                 VariableDeclaratorSyntax variableDeclarator,
                 ExpressionSyntax expressionToInline,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var rewriter = new ReferenceRewriter(
                     semanticModel,
                     variableDeclarator,

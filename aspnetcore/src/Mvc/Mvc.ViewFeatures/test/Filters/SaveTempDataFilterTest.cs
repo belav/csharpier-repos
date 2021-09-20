@@ -139,7 +139,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
         [MemberData(nameof(ActionResultsData))]
         public async Task OnResultExecuting_SavesTempData_WhenTempData_NotSavedAlready(
             IActionResult result
-        ) {
+        )
+        {
             // Arrange
             var tempDataDictionary = GetTempDataDictionary();
             var filter = GetFilter(tempDataDictionary.Object);
@@ -275,7 +276,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
 
         private Mock<ITempDataDictionaryFactory> GetTempDataDictionaryFactory(
             ITempDataDictionary tempDataDictionary
-        ) {
+        )
+        {
             var tempDataFactory = new Mock<ITempDataDictionaryFactory>(MockBehavior.Strict);
             tempDataFactory.Setup(f => f.GetTempData(It.IsAny<HttpContext>()))
                 .Returns(tempDataDictionary);
@@ -312,7 +314,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
         private ResultExecutedContext GetResultExecutedContext(
             HttpContext httpContext = null,
             IActionResult actionResult = null
-        ) {
+        )
+        {
             if (httpContext == null)
             {
                 httpContext = GetHttpContext();
@@ -332,7 +335,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
         private ResultExecutingContext GetResultExecutingContext(
             ActionContext actionContext,
             IActionResult actionResult = null
-        ) {
+        )
+        {
             if (actionResult == null)
             {
                 actionResult = new TestActionResult();
@@ -348,7 +352,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
         private ResultExecutingContext GetResultExecutingContext(
             HttpContext httpContext = null,
             IActionResult actionResult = null
-        ) {
+        )
+        {
             if (httpContext == null)
             {
                 httpContext = new DefaultHttpContext();

@@ -80,7 +80,8 @@ namespace Microsoft.CodeAnalysis.Wrapping.ChainedExpression
             int position,
             SyntaxNode node,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // We have to be on a chain part.  If not, there's nothing to do here at all.
             if (!IsDecomposableChainPart(node))
             {
@@ -164,7 +165,8 @@ namespace Microsoft.CodeAnalysis.Wrapping.ChainedExpression
         private void BreakPiecesIntoChunks(
             ArrayBuilder<SyntaxNodeOrToken> pieces,
             ArrayBuilder<ImmutableArray<SyntaxNodeOrToken>> chunks
-        ) {
+        )
+        {
             // Have to look for the first chunk after the first piece.  i.e. if the pieces
             // starts with <c>.Foo().Bar().Baz()</c> then the chunks would be <c>.Bar()</c>
             // and <c>.Baz()</c>.
@@ -228,14 +230,16 @@ namespace Microsoft.CodeAnalysis.Wrapping.ChainedExpression
             ArrayBuilder<SyntaxNodeOrToken> pieces,
             bool firstChunk,
             int index
-        ) {
+        )
+        {
             for (var i = index; i < pieces.Count; i++)
             {
                 if (
                     IsToken(_dotToken, pieces, i)
                     && IsNode<TNameSyntax>(pieces, i + 1)
                     && IsNode<TBaseArgumentListSyntax>(pieces, i + 2)
-                ) {
+                )
+                {
                     if (firstChunk || !IsToken(_questionToken, pieces, i - 1))
                     {
                         return i;
@@ -267,7 +271,8 @@ namespace Microsoft.CodeAnalysis.Wrapping.ChainedExpression
             ArrayBuilder<SyntaxNodeOrToken> pieces,
             int start,
             int end
-        ) {
+        )
+        {
             using var resultDisposer = ArrayBuilder<SyntaxNodeOrToken>.GetInstance(
                 end - start,
                 out var result

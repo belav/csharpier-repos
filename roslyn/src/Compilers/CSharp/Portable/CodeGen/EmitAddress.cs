@@ -125,7 +125,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                     if (
                         methodRefKind == RefKind.Ref
                         || (IsAnyReadOnly(addressKind) && methodRefKind == RefKind.RefReadOnly)
-                    ) {
+                    )
+                    {
                         EmitCallExpression(call, UseKind.UsedAsAddress);
                         break;
                     }
@@ -138,7 +139,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                     if (
                         funcPtrRefKind == RefKind.Ref
                         || (IsAnyReadOnly(addressKind) && funcPtrRefKind == RefKind.RefReadOnly)
-                    ) {
+                    )
+                    {
                         EmitCalli(funcPtrInvocation, UseKind.UsedAsAddress);
                         break;
                     }
@@ -195,7 +197,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         private LocalDefinition EmitPassByCopyAddress(
             BoundPassByCopy passByCopyExpr,
             AddressKind addressKind
-        ) {
+        )
+        {
             // Normally we can just defer PassByCopy to the `default`,
             // but in some cases the value inside is already a temp that is local to that node.
             // In such case we can skip extra store/reload
@@ -226,7 +229,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         private void EmitConditionalOperatorAddress(
             BoundConditionalOperator expr,
             AddressKind addressKind
-        ) {
+        )
+        {
             Debug.Assert(
                 expr.ConstantValue == null,
                 "Constant value should have been emitted directly"
@@ -251,7 +255,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
 
         private void EmitComplexConditionalReceiverAddress(
             BoundComplexConditionalReceiver expression
-        ) {
+        )
+        {
             Debug.Assert(!expression.Type.IsReferenceType);
             Debug.Assert(!expression.Type.IsValueType);
 
@@ -461,7 +466,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         private LocalDefinition EmitFieldAddress(
             BoundFieldAccess fieldAccess,
             AddressKind addressKind
-        ) {
+        )
+        {
             FieldSymbol field = fieldAccess.FieldSymbol;
 
             if (!HasHome(fieldAccess, addressKind))
@@ -502,7 +508,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         private LocalDefinition EmitParameterAddress(
             BoundParameter parameter,
             AddressKind addressKind
-        ) {
+        )
+        {
             ParameterSymbol parameterSymbol = parameter.ParameterSymbol;
 
             if (!HasHome(parameter, addressKind))
@@ -578,7 +585,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         private LocalDefinition EmitInstanceFieldAddress(
             BoundFieldAccess fieldAccess,
             AddressKind addressKind
-        ) {
+        )
+        {
             var field = fieldAccess.FieldSymbol;
 
             //NOTE: we are not propagating AddressKind.Constrained here.

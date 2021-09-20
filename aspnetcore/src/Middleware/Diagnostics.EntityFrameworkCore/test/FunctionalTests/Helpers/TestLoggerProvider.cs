@@ -46,7 +46,8 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.FunctionalTests.H
                 TState state,
                 Exception exception,
                 Func<TState, Exception, string> formatter
-            ) {
+            )
+            {
                 lock (_sync)
                 {
                     _messages.Add(formatter(state, exception));

@@ -87,20 +87,21 @@ namespace System.Security.AccessControl
             AccessControlSections includeSections,
             ExceptionFromErrorCode? exceptionFromErrorCode,
             object? exceptionContext
-        ) : this(
-            resourceType,
-            CreateInternal(
+        )
+            : this(
                 resourceType,
-                isContainer,
-                name,
-                null,
-                includeSections,
-                true,
-                exceptionFromErrorCode,
-                exceptionContext
-            ),
-            exceptionFromErrorCode
-        ) { }
+                CreateInternal(
+                    resourceType,
+                    isContainer,
+                    name,
+                    null,
+                    includeSections,
+                    true,
+                    exceptionFromErrorCode,
+                    exceptionContext
+                ),
+                exceptionFromErrorCode
+            ) { }
 
         protected NativeObjectSecurity(
             bool isContainer,
@@ -116,20 +117,21 @@ namespace System.Security.AccessControl
             AccessControlSections includeSections,
             ExceptionFromErrorCode? exceptionFromErrorCode,
             object? exceptionContext
-        ) : this(
-            resourceType,
-            CreateInternal(
+        )
+            : this(
                 resourceType,
-                isContainer,
-                null,
-                handle,
-                includeSections,
-                false,
-                exceptionFromErrorCode,
-                exceptionContext
-            ),
-            exceptionFromErrorCode
-        ) { }
+                CreateInternal(
+                    resourceType,
+                    isContainer,
+                    null,
+                    handle,
+                    includeSections,
+                    false,
+                    exceptionFromErrorCode,
+                    exceptionContext
+                ),
+                exceptionFromErrorCode
+            ) { }
 
         protected NativeObjectSecurity(
             bool isContainer,
@@ -151,7 +153,8 @@ namespace System.Security.AccessControl
             bool createByName,
             ExceptionFromErrorCode? exceptionFromErrorCode,
             object? exceptionContext
-        ) {
+        )
+        {
             int error;
             RawSecurityDescriptor? rawSD;
 
@@ -255,7 +258,8 @@ namespace System.Security.AccessControl
             SafeHandle? handle,
             AccessControlSections includeSections,
             object? exceptionContext
-        ) {
+        )
+        {
             WriteLock();
 
             try
@@ -271,7 +275,8 @@ namespace System.Security.AccessControl
                 if (
                     (includeSections & AccessControlSections.Owner) != 0
                     && _securityDescriptor.Owner != null
-                ) {
+                )
+                {
                     securityInfo |= SecurityInfos.Owner;
                     owner = _securityDescriptor.Owner;
                 }
@@ -279,7 +284,8 @@ namespace System.Security.AccessControl
                 if (
                     (includeSections & AccessControlSections.Group) != 0
                     && _securityDescriptor.Group != null
-                ) {
+                )
+                {
                     securityInfo |= SecurityInfos.Group;
                     group = _securityDescriptor.Group;
                 }
@@ -291,7 +297,8 @@ namespace System.Security.AccessControl
                         _securityDescriptor.IsSystemAclPresent
                         && _securityDescriptor.SystemAcl != null
                         && _securityDescriptor.SystemAcl.Count > 0
-                    ) {
+                    )
+                    {
                         sacl = _securityDescriptor.SystemAcl;
                     }
                     else
@@ -312,7 +319,8 @@ namespace System.Security.AccessControl
                 if (
                     (includeSections & AccessControlSections.Access) != 0
                     && _securityDescriptor.IsDiscretionaryAclPresent
-                ) {
+                )
+                {
                     securityInfo |= SecurityInfos.DiscretionaryAcl;
 
                     // if the DACL is in fact a crafted replaced for NULL replacement, then we will persist it as NULL
@@ -328,7 +336,8 @@ namespace System.Security.AccessControl
                     if (
                         (_securityDescriptor.ControlFlags & ControlFlags.DiscretionaryAclProtected)
                         != 0
-                    ) {
+                    )
+                    {
                         securityInfo = unchecked(
                             (SecurityInfos)((uint)securityInfo | ProtectedDiscretionaryAcl)
                         );
@@ -458,7 +467,8 @@ namespace System.Security.AccessControl
             string name,
             AccessControlSections includeSections,
             object? exceptionContext
-        ) {
+        )
+        {
             if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));
@@ -476,7 +486,8 @@ namespace System.Security.AccessControl
         protected sealed override void Persist(
             SafeHandle handle,
             AccessControlSections includeSections
-        ) {
+        )
+        {
             Persist(handle, includeSections, _exceptionContext);
         }
 
@@ -484,7 +495,8 @@ namespace System.Security.AccessControl
             SafeHandle handle,
             AccessControlSections includeSections,
             object? exceptionContext
-        ) {
+        )
+        {
             if (handle == null)
             {
                 throw new ArgumentNullException(nameof(handle));

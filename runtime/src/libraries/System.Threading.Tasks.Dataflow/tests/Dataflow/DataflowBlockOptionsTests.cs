@@ -145,7 +145,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
                     new ConcurrentExclusiveSchedulerPair().ConcurrentScheduler,
                     TaskScheduler.Default
                 }
-            ) {
+            )
+            {
                 SetAndTest(dbo, (o, v) => o.TaskScheduler = v, o => o.TaskScheduler, value);
             }
 
@@ -156,13 +157,15 @@ namespace System.Threading.Tasks.Dataflow.Tests
                     new CancellationToken(true),
                     new CancellationTokenSource().Token
                 }
-            ) {
+            )
+            {
                 SetAndTest(dbo, (o, v) => o.CancellationToken = v, o => o.CancellationToken, value);
             }
 
             foreach (
                 string value in new[] { "none", "foo {0}", "foo {0} bar {1}", "kaboom {0} {1} {2}" }
-            ) {
+            )
+            {
                 SetAndTest(dbo, (o, v) => o.NameFormat = v, o => o.NameFormat, value);
             }
 
@@ -182,7 +185,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
             Action<T, TValue> setter,
             Func<T, TValue> getter,
             TValue value
-        ) {
+        )
+        {
             setter(source, value);
             Assert.Equal(expected: value, actual: getter(source));
         }

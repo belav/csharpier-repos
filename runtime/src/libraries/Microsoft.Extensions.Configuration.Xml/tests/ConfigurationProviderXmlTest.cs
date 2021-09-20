@@ -55,7 +55,8 @@ Section3:
 
         protected override (IConfigurationProvider Provider, Action Initializer) LoadThroughProvider(
             TestSection testConfig
-        ) {
+        )
+        {
             var xmlBuilder = new StringBuilder();
             SectionToXml(xmlBuilder, "settings", testConfig);
 

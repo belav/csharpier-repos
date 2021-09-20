@@ -84,7 +84,8 @@ namespace System.Net
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ValidateBufferArguments(buffer, offset, count);
             return _buffer.WriteAsync(buffer, offset, count, cancellationToken);
         }
@@ -92,7 +93,8 @@ namespace System.Net
         public override ValueTask WriteAsync(
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return _buffer.WriteAsync(buffer, cancellationToken);
         }
 
@@ -102,7 +104,8 @@ namespace System.Net
             int count,
             AsyncCallback? asyncCallback,
             object? asyncState
-        ) {
+        )
+        {
             ValidateBufferArguments(buffer, offset, count);
             return _buffer.BeginWrite(buffer, offset, count, asyncCallback, asyncState);
         }

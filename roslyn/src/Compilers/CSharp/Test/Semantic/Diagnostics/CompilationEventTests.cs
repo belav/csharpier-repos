@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         internal static void VerifyEvents(
             AsyncQueue<CompilationEvent> queue,
             params string[] expectedEvents
-        ) {
+        )
+        {
             var expected = new HashSet<string>();
             foreach (var s in expectedEvents)
             {

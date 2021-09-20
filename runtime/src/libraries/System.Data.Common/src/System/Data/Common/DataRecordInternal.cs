@@ -21,7 +21,8 @@ namespace System.Data.Common
             object[] values,
             PropertyDescriptorCollection descriptors,
             FieldNameLookup fieldNameLookup
-        ) {
+        )
+        {
             Debug.Assert(
                 null != schemaInfo,
                 "invalid attempt to instantiate DataRecordInternal with null schema information"
@@ -107,7 +108,8 @@ namespace System.Data.Common
             byte[]? buffer,
             int bufferIndex,
             int length
-        ) {
+        )
+        {
             int cbytes = 0;
             int ndataIndex;
 
@@ -186,7 +188,8 @@ namespace System.Data.Common
             char[]? buffer,
             int bufferIndex,
             int length
-        ) {
+        )
+        {
             // if the object doesn't contain a char[] then the user will get an exception
             string s = (string)_values[i];
 

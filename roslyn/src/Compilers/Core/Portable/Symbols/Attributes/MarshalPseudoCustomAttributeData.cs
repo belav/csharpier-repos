@@ -54,7 +54,8 @@ namespace Microsoft.CodeAnalysis
             UnmanagedType? elementType,
             int? elementCount,
             short? parameterIndex
-        ) {
+        )
+        {
             Debug.Assert(
                 elementCount == null || elementCount >= 0 && elementCount <= MaxMarshalInteger
             );
@@ -83,7 +84,8 @@ namespace Microsoft.CodeAnalysis
         internal void SetMarshalAsSafeArray(
             Cci.VarEnum? elementType,
             ITypeSymbolInternal elementTypeSymbol
-        ) {
+        )
+        {
             Debug.Assert(
                 elementType == null || elementType >= 0 && (int)elementType <= MaxMarshalInteger
             );
@@ -207,7 +209,8 @@ namespace Microsoft.CodeAnalysis
 
         Cci.ITypeReference Cci.IMarshallingInformation.GetSafeArrayElementUserDefinedSubtype(
             EmitContext context
-        ) {
+        )
+        {
             Debug.Assert(_marshalType == Cci.Constants.UnmanagedType_SafeArray);
 
             if (_marshalTypeNameOrSymbol == null)
@@ -234,7 +237,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 _marshalType != Cci.Constants.UnmanagedType_SafeArray
                 || _marshalTypeNameOrSymbol == null
-            ) {
+            )
+            {
                 return this;
             }
 

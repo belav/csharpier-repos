@@ -19,7 +19,8 @@ namespace Microsoft.VisualBasic.Tests
             object[] args,
             Func<object, object> getResult,
             object expected
-        ) {
+        )
+        {
             Assert.Equal(
                 getResult is null ? expected : null,
                 Versioned.CallByName(instance, methodName, useCallType, args)
@@ -37,7 +38,8 @@ namespace Microsoft.VisualBasic.Tests
             string methodName,
             CallType useCallType,
             object[] args
-        ) {
+        )
+        {
             Assert.Throws<ArgumentException>(
                 () => Versioned.CallByName(instance, methodName, useCallType, args)
             );
@@ -50,7 +52,8 @@ namespace Microsoft.VisualBasic.Tests
             string methodName,
             CallType useCallType,
             object[] args
-        ) {
+        )
+        {
             Assert.Throws<MissingMemberException>(
                 () => Versioned.CallByName(instance, methodName, useCallType, args)
             );

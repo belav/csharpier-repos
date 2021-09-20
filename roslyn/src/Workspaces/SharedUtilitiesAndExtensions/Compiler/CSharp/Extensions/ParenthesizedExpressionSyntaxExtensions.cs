@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         public static bool CanRemoveParentheses(
             this ParenthesizedExpressionSyntax node,
             SemanticModel semanticModel
-        ) {
+        )
+        {
             if (node.OpenParenToken.IsMissing || node.CloseParenToken.IsMissing)
             {
                 // int x = (3;
@@ -46,7 +47,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
             if (
                 (previousChar == '+' && nextChar == '+') || (previousChar == '-' && nextChar == '-')
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -55,14 +57,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             if (
                 expression.IsKind(SyntaxKind.ParenthesizedExpression)
                 || parentExpression.IsKind(SyntaxKind.ParenthesizedExpression)
-            ) {
+            )
+            {
                 return true;
             }
 
             if (
                 expression is StackAllocArrayCreationExpressionSyntax
                 || expression is ImplicitStackAllocArrayCreationExpressionSyntax
-            ) {
+            )
+            {
                 // var span = (stackalloc byte[8]);
                 // https://github.com/dotnet/roslyn/issues/44629
                 // The code semantics changes if the parenthesis removed.
@@ -91,7 +95,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             if (
                 node.IsParentKind(SyntaxKind.CheckedExpression)
                 || node.IsParentKind(SyntaxKind.UncheckedExpression)
-            ) {
+            )
+            {
                 return true;
             }
             // ((x, y)) -> (x, y)
@@ -104,7 +109,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             if (
                 node.Parent is ArrowExpressionClauseSyntax arrowExpressionClause
                 && arrowExpressionClause.Expression == node
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -206,7 +212,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     )
                     && catchFilter.FilterExpression == node
                 )
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -215,7 +222,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 RemovalMayIntroduceCastAmbiguity(node)
                 || RemovalMayIntroduceCommaListAmbiguity(node)
                 || RemovalMayIntroduceInterpolationAmbiguity(node)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -224,7 +232,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             if (
                 node.IsParentKind(SyntaxKind.CastExpression)
                 && expression.IsKind(SyntaxKind.ThisExpression)
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -233,7 +242,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             if (
                 node.IsParentKind(SyntaxKind.Argument, out ArgumentSyntax argument)
                 && argument.Expression == node
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -321,7 +331,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     out BinaryExpressionSyntax binary
                 )
                 && binary.Right == node
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -335,7 +346,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             if (
                 node.IsParentKind(SyntaxKind.ConstantPattern)
                 && node.Parent.IsParentKind(SyntaxKind.CasePatternSwitchLabel)
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -365,7 +377,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 if (
                     expression.IsKind(SyntaxKind.PreIncrementExpression)
                     || expression.IsKind(SyntaxKind.PreDecrementExpression)
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -375,7 +388,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             if (
                 expression.IsKind(SyntaxKind.ConditionalExpression)
                 && node.IsLeftSideOfAnyAssignExpression()
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -402,7 +416,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
         private static bool RemovalMayIntroduceInterpolationAmbiguity(
             ParenthesizedExpressionSyntax node
-        ) {
+        )
+        {
             // First, find the parenting interpolation. If we find a parenthesize expression first,
             // we can bail out early.
             InterpolationSyntax interpolation = null;
@@ -444,7 +459,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                         if (
                             nodeOrToken.IsNode
                             && !nodeOrToken.IsKind(SyntaxKind.ParenthesizedExpression)
-                        ) {
+                        )
+                        {
                             stack.Push(nodeOrToken.AsNode());
                         }
                         else if (nodeOrToken.IsToken)
@@ -452,7 +468,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                             if (
                                 nodeOrToken.IsKind(SyntaxKind.ColonToken)
                                 || nodeOrToken.IsKind(SyntaxKind.ColonColonToken)
-                            ) {
+                            )
+                            {
                                 return true;
                             }
                         }
@@ -472,13 +489,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             ParenthesizedExpressionSyntax node,
             ExpressionSyntax parentExpression,
             SemanticModel semanticModel
-        ) {
+        )
+        {
             var expression = node.Expression;
             var precedence = expression.GetOperatorPrecedence();
             var parentPrecedence = parentExpression.GetOperatorPrecedence();
             if (
                 precedence == OperatorPrecedence.None || parentPrecedence == OperatorPrecedence.None
-            ) {
+            )
+            {
                 // Be conservative if the expression or its parent has no precedence.
                 return true;
             }
@@ -503,7 +522,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                         expression is BinaryExpressionSyntax
                         || expression is AssignmentExpressionSyntax
                     )
-                ) {
+                )
+                {
                     // If the expression is not a binary expression, association never changes.
                     return false;
                 }
@@ -528,7 +548,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                         IsAssociative(parentBinaryExpression.Kind())
                         && node.Expression.Kind() == parentBinaryExpression.Kind()
                         && parentBinaryExpression.Right == node
-                    ) {
+                    )
+                    {
                         return !node.IsSafeToChangeAssociativity(
                             node.Expression,
                             parentBinaryExpression.Left,
@@ -603,7 +624,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     SyntaxKind.CastExpression,
                     out CastExpressionSyntax castExpression
                 )
-            ) {
+            )
+            {
                 if (
                     castExpression.Type.IsKind(
                         SyntaxKind.PredefinedType,
@@ -611,7 +633,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                         SyntaxKind.PointerType,
                         SyntaxKind.NullableType
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -629,7 +652,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                         SyntaxKind.PointerIndirectionExpression,
                         SyntaxKind.AddressOfExpression
                     )
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -654,7 +678,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
         private static bool RemovalMayIntroduceCommaListAmbiguity(
             ParenthesizedExpressionSyntax node
-        ) {
+        )
+        {
             if (IsSimpleOrDottedName(node.Expression))
             {
                 // We can't remove parentheses from an identifier name in the following cases:
@@ -675,7 +700,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                         binaryExpression.IsParentKind(SyntaxKind.Argument)
                         || binaryExpression.Parent is InitializerExpressionSyntax
                     )
-                ) {
+                )
+                {
                     if (binaryExpression.IsKind(SyntaxKind.LessThanExpression))
                     {
                         if (
@@ -687,7 +713,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                                 binaryExpression.Right == node
                                 && IsSimpleOrDottedName(binaryExpression.Left)
                             )
-                        ) {
+                        )
+                        {
                             if (IsNextExpressionPotentiallyAmbiguous(binaryExpression))
                             {
                                 return true;
@@ -704,7 +731,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                                 SyntaxKind.ParenthesizedExpression,
                                 SyntaxKind.CastExpression
                             )
-                        ) {
+                        )
+                        {
                             if (IsPreviousExpressionPotentiallyAmbiguous(binaryExpression))
                             {
                                 return true;
@@ -763,7 +791,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     SyntaxKind.LessThanExpression,
                     out BinaryExpressionSyntax lessThanExpression
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -803,7 +832,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     SyntaxKind.GreaterThanExpression,
                     out BinaryExpressionSyntax greaterThanExpression
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -881,13 +911,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         private static bool RemovalChangesAssociation(
             ParenthesizedPatternSyntax node,
             PatternSyntax parentPattern
-        ) {
+        )
+        {
             var pattern = node.Pattern;
             var precedence = pattern.GetOperatorPrecedence();
             var parentPrecedence = parentPattern.GetOperatorPrecedence();
             if (
                 precedence == OperatorPrecedence.None || parentPrecedence == OperatorPrecedence.None
-            ) {
+            )
+            {
                 // Be conservative if the expression or its parent has no precedence.
                 return true;
             }

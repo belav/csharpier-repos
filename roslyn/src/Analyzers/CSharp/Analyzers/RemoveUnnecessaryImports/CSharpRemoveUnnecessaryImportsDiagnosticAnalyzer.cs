@@ -50,7 +50,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryImports
             IEnumerable<SyntaxNode> nodes,
             SyntaxTree tree,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfFalse(nodes.Any());
 
             var nodesContainingUnnecessaryUsings = new HashSet<SyntaxNode>();

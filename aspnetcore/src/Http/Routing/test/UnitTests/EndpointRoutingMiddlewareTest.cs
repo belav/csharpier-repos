@@ -186,7 +186,8 @@ namespace Microsoft.AspNetCore.Routing
             MatcherFactory matcherFactory = null,
             DiagnosticListener listener = null,
             RequestDelegate next = null
-        ) {
+        )
+        {
             next ??= c => Task.CompletedTask;
             logger ??= new Logger<EndpointRoutingMiddleware>(NullLoggerFactory.Instance);
             matcherFactory ??= new TestMatcherFactory(true);

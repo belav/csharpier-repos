@@ -72,7 +72,8 @@ namespace Microsoft.CodeAnalysis.Simplification
         internal static ISymbol GetOriginalSymbolInfo(
             SemanticModel semanticModel,
             SyntaxNode expression
-        ) {
+        )
+        {
             Contract.ThrowIfNull(expression);
             var annotation1 = expression.GetAnnotations(SymbolAnnotation.Kind).FirstOrDefault();
             if (annotation1 != null)
@@ -118,7 +119,8 @@ namespace Microsoft.CodeAnalysis.Simplification
             SemanticModel semanticModel,
             OptionSet optionSet,
             ISymbol symbol
-        ) {
+        )
+        {
             // If we're accessing a static member off of this/me then we should always consider this
             // simplifiable.  Note: in C# this isn't even legal to access a static off of `this`,
             // but in VB it is legal to access a static off of `me`.
@@ -154,7 +156,8 @@ namespace Microsoft.CodeAnalysis.Simplification
                         ).Value
                     )
                 )
-            ) {
+            )
+            {
                 return false;
             }
 

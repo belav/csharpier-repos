@@ -75,7 +75,8 @@ namespace Microsoft.AspNetCore.Identity
             IdentityErrorDescriber errors,
             IServiceProvider services,
             ILogger<UserManager<TUser>> logger
-        ) {
+        )
+        {
             if (store == null)
             {
                 throw new ArgumentNullException(nameof(store));
@@ -798,7 +799,8 @@ namespace Microsoft.AspNetCore.Identity
             TUser user,
             string currentPassword,
             string newPassword
-        ) {
+        )
+        {
             ThrowIfDisposed();
             var passwordStore = GetPasswordStore();
             if (user == null)
@@ -809,7 +811,8 @@ namespace Microsoft.AspNetCore.Identity
             if (
                 await VerifyPasswordAsync(passwordStore, user, currentPassword)
                 != PasswordVerificationResult.Failed
-            ) {
+            )
+            {
                 var result = await UpdatePasswordHash(passwordStore, user, newPassword);
                 if (!result.Succeeded)
                 {
@@ -859,7 +862,8 @@ namespace Microsoft.AspNetCore.Identity
             IUserPasswordStore<TUser> store,
             TUser user,
             string password
-        ) {
+        )
+        {
             var hash = await store.GetPasswordHashAsync(user, CancellationToken);
             if (hash == null)
             {
@@ -949,7 +953,8 @@ namespace Microsoft.AspNetCore.Identity
             TUser user,
             string token,
             string newPassword
-        ) {
+        )
+        {
             ThrowIfDisposed();
             if (user == null)
             {
@@ -964,7 +969,8 @@ namespace Microsoft.AspNetCore.Identity
                     ResetPasswordTokenPurpose,
                     token
                 )
-            ) {
+            )
+            {
                 return IdentityResult.Failed(ErrorDescriber.InvalidToken());
             }
             var result = await UpdatePasswordHash(user, newPassword, validatePassword: true);
@@ -1013,7 +1019,8 @@ namespace Microsoft.AspNetCore.Identity
             TUser user,
             string loginProvider,
             string providerKey
-        ) {
+        )
+        {
             ThrowIfDisposed();
             var loginStore = GetLoginStore();
             if (loginProvider == null)
@@ -1123,7 +1130,8 @@ namespace Microsoft.AspNetCore.Identity
         public virtual async Task<IdentityResult> AddClaimsAsync(
             TUser user,
             IEnumerable<Claim> claims
-        ) {
+        )
+        {
             ThrowIfDisposed();
             var claimStore = GetClaimStore();
             if (claims == null)
@@ -1153,7 +1161,8 @@ namespace Microsoft.AspNetCore.Identity
             TUser user,
             Claim claim,
             Claim newClaim
-        ) {
+        )
+        {
             ThrowIfDisposed();
             var claimStore = GetClaimStore();
             if (claim == null)
@@ -1209,7 +1218,8 @@ namespace Microsoft.AspNetCore.Identity
         public virtual async Task<IdentityResult> RemoveClaimsAsync(
             TUser user,
             IEnumerable<Claim> claims
-        ) {
+        )
+        {
             ThrowIfDisposed();
             var claimStore = GetClaimStore();
             if (user == null)
@@ -1282,7 +1292,8 @@ namespace Microsoft.AspNetCore.Identity
         public virtual async Task<IdentityResult> AddToRolesAsync(
             TUser user,
             IEnumerable<string> roles
-        ) {
+        )
+        {
             ThrowIfDisposed();
             var userRoleStore = GetUserRoleStore();
             if (user == null)
@@ -1361,7 +1372,8 @@ namespace Microsoft.AspNetCore.Identity
         public virtual async Task<IdentityResult> RemoveFromRolesAsync(
             TUser user,
             IEnumerable<string> roles
-        ) {
+        )
+        {
             ThrowIfDisposed();
             var userRoleStore = GetUserRoleStore();
             if (user == null)
@@ -1564,7 +1576,8 @@ namespace Microsoft.AspNetCore.Identity
                     ConfirmEmailTokenPurpose,
                     token
                 )
-            ) {
+            )
+            {
                 return IdentityResult.Failed(ErrorDescriber.InvalidToken());
             }
             await store.SetEmailConfirmedAsync(user, true, CancellationToken);
@@ -1623,7 +1636,8 @@ namespace Microsoft.AspNetCore.Identity
             TUser user,
             string newEmail,
             string token
-        ) {
+        )
+        {
             ThrowIfDisposed();
             if (user == null)
             {
@@ -1638,7 +1652,8 @@ namespace Microsoft.AspNetCore.Identity
                     GetChangeEmailTokenPurpose(newEmail),
                     token
                 )
-            ) {
+            )
+            {
                 return IdentityResult.Failed(ErrorDescriber.InvalidToken());
             }
             var store = GetEmailStore();
@@ -1676,7 +1691,8 @@ namespace Microsoft.AspNetCore.Identity
         public virtual async Task<IdentityResult> SetPhoneNumberAsync(
             TUser user,
             string phoneNumber
-        ) {
+        )
+        {
             ThrowIfDisposed();
             var store = GetPhoneNumberStore();
             if (user == null)
@@ -1705,7 +1721,8 @@ namespace Microsoft.AspNetCore.Identity
             TUser user,
             string phoneNumber,
             string token
-        ) {
+        )
+        {
             ThrowIfDisposed();
             var store = GetPhoneNumberStore();
             if (user == null)
@@ -1757,7 +1774,8 @@ namespace Microsoft.AspNetCore.Identity
         public virtual Task<string> GenerateChangePhoneNumberTokenAsync(
             TUser user,
             string phoneNumber
-        ) {
+        )
+        {
             ThrowIfDisposed();
             return GenerateUserTokenAsync(
                 user,
@@ -1781,7 +1799,8 @@ namespace Microsoft.AspNetCore.Identity
             TUser user,
             string token,
             string phoneNumber
-        ) {
+        )
+        {
             ThrowIfDisposed();
             if (user == null)
             {
@@ -1814,7 +1833,8 @@ namespace Microsoft.AspNetCore.Identity
             string tokenProvider,
             string purpose,
             string token
-        ) {
+        )
+        {
             ThrowIfDisposed();
             if (user == null)
             {
@@ -1864,7 +1884,8 @@ namespace Microsoft.AspNetCore.Identity
             TUser user,
             string tokenProvider,
             string purpose
-        ) {
+        )
+        {
             ThrowIfDisposed();
             if (user == null)
             {
@@ -1892,7 +1913,8 @@ namespace Microsoft.AspNetCore.Identity
         public virtual void RegisterTokenProvider(
             string providerName,
             IUserTwoFactorTokenProvider<TUser> provider
-        ) {
+        )
+        {
             ThrowIfDisposed();
             if (provider == null)
             {
@@ -1942,7 +1964,8 @@ namespace Microsoft.AspNetCore.Identity
             TUser user,
             string tokenProvider,
             string token
-        ) {
+        )
+        {
             ThrowIfDisposed();
             if (user == null)
             {
@@ -2134,7 +2157,8 @@ namespace Microsoft.AspNetCore.Identity
         public virtual async Task<IdentityResult> SetLockoutEndDateAsync(
             TUser user,
             DateTimeOffset? lockoutEnd
-        ) {
+        )
+        {
             ThrowIfDisposed();
             var store = GetUserLockoutStore();
             if (user == null)
@@ -2275,7 +2299,8 @@ namespace Microsoft.AspNetCore.Identity
             TUser user,
             string loginProvider,
             string tokenName
-        ) {
+        )
+        {
             ThrowIfDisposed();
             var store = GetAuthenticationTokenStore();
             if (user == null)
@@ -2307,7 +2332,8 @@ namespace Microsoft.AspNetCore.Identity
             string loginProvider,
             string tokenName,
             string tokenValue
-        ) {
+        )
+        {
             ThrowIfDisposed();
             var store = GetAuthenticationTokenStore();
             if (user == null)
@@ -2345,7 +2371,8 @@ namespace Microsoft.AspNetCore.Identity
             TUser user,
             string loginProvider,
             string tokenName
-        ) {
+        )
+        {
             ThrowIfDisposed();
             var store = GetAuthenticationTokenStore();
             if (user == null)
@@ -2418,7 +2445,8 @@ namespace Microsoft.AspNetCore.Identity
         public virtual async Task<IEnumerable<string>> GenerateNewTwoFactorRecoveryCodesAsync(
             TUser user,
             int number
-        ) {
+        )
+        {
             ThrowIfDisposed();
             var store = GetRecoveryCodeStore();
             if (user == null)
@@ -2458,7 +2486,8 @@ namespace Microsoft.AspNetCore.Identity
         public virtual async Task<IdentityResult> RedeemTwoFactorRecoveryCodeAsync(
             TUser user,
             string code
-        ) {
+        )
+        {
             ThrowIfDisposed();
             var store = GetRecoveryCodeStore();
             if (user == null)
@@ -2582,7 +2611,8 @@ namespace Microsoft.AspNetCore.Identity
             TUser user,
             string newPassword,
             bool validatePassword = true
-        ) {
+        )
+        {
             if (validatePassword)
             {
                 var validate = await ValidatePasswordAsync(user, newPassword);

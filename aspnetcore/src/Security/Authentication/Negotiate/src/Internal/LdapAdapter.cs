@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
             LdapSettings settings,
             ClaimsIdentity identity,
             ILogger logger
-        ) {
+        )
+        {
             var user = identity.Name!;
             var userAccountNameIndex = user.IndexOf('@');
             var userAccountName =
@@ -129,7 +130,8 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
             string groupCN,
             ILogger logger,
             IList<string> retrievedClaims
-        ) {
+        )
+        {
             var filter = $"(&(objectClass=group)(sAMAccountName={groupCN}))"; // This is using ldap search query language, it is looking on the server for someUser
             var searchRequest = new SearchRequest(
                 distinguishedName,

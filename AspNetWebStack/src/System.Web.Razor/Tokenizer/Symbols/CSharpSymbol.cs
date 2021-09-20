@@ -11,18 +11,13 @@ namespace System.Web.Razor.Tokenizer.Symbols
     public class CSharpSymbol : SymbolBase<CSharpSymbolType>
     {
         // Helper constructor
-        public CSharpSymbol(
-            int offset,
-            int line,
-            int column,
-            string content,
-            CSharpSymbolType type
-        ) : this(
-            new SourceLocation(offset, line, column),
-            content,
-            type,
-            Enumerable.Empty<RazorError>()
-        ) { }
+        public CSharpSymbol(int offset, int line, int column, string content, CSharpSymbolType type)
+            : this(
+                new SourceLocation(offset, line, column),
+                content,
+                type,
+                Enumerable.Empty<RazorError>()
+            ) { }
 
         public CSharpSymbol(SourceLocation start, string content, CSharpSymbolType type)
             : this(start, content, type, Enumerable.Empty<RazorError>()) { }

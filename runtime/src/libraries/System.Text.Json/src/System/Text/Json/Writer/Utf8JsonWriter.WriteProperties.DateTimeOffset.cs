@@ -141,7 +141,8 @@ namespace System.Text.Json
             ReadOnlySpan<char> propertyName,
             DateTimeOffset value,
             int firstEscapeIndexProp
-        ) {
+        )
+        {
             Debug.Assert(
                 int.MaxValue / JsonConstants.MaxExpansionFactorWhileEscaping >= propertyName.Length
             );
@@ -179,7 +180,8 @@ namespace System.Text.Json
             ReadOnlySpan<byte> utf8PropertyName,
             DateTimeOffset value,
             int firstEscapeIndexProp
-        ) {
+        )
+        {
             Debug.Assert(
                 int.MaxValue / JsonConstants.MaxExpansionFactorWhileEscaping
                     >= utf8PropertyName.Length
@@ -245,7 +247,8 @@ namespace System.Text.Json
         private void WriteStringMinimized(
             ReadOnlySpan<char> escapedPropertyName,
             DateTimeOffset value
-        ) {
+        )
+        {
             Debug.Assert(
                 escapedPropertyName.Length
                     < (int.MaxValue / JsonConstants.MaxExpansionFactorWhileTranscoding)
@@ -293,7 +296,8 @@ namespace System.Text.Json
         private void WriteStringMinimized(
             ReadOnlySpan<byte> escapedPropertyName,
             DateTimeOffset value
-        ) {
+        )
+        {
             Debug.Assert(
                 escapedPropertyName.Length
                     < int.MaxValue - JsonConstants.MaximumFormatDateTimeOffsetLength - 6
@@ -337,7 +341,8 @@ namespace System.Text.Json
         private void WriteStringIndented(
             ReadOnlySpan<char> escapedPropertyName,
             DateTimeOffset value
-        ) {
+        )
+        {
             int indent = Indentation;
             Debug.Assert(indent <= 2 * JsonConstants.MaxWriterDepth);
 
@@ -404,7 +409,8 @@ namespace System.Text.Json
         private void WriteStringIndented(
             ReadOnlySpan<byte> escapedPropertyName,
             DateTimeOffset value
-        ) {
+        )
+        {
             int indent = Indentation;
             Debug.Assert(indent <= 2 * JsonConstants.MaxWriterDepth);
 

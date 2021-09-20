@@ -61,7 +61,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             int enumerableLength,
             int numberOfMatchingElements,
             int numberOfDuplicateElements
-        ) {
+        )
+        {
             _ = listLength;
             _ = numberOfMatchingElements;
             IEnumerable<T> enumerable = CreateEnumerable(

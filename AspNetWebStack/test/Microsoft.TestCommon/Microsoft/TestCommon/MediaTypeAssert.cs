@@ -19,7 +19,8 @@ namespace Microsoft.TestCommon
             MediaTypeHeaderValue expected,
             MediaTypeHeaderValue actual,
             string errorMessage
-        ) {
+        )
+        {
             if (expected != null || actual != null)
             {
                 Assert.NotNull(expected);

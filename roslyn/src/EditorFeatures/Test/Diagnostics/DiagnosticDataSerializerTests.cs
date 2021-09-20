@@ -338,7 +338,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
         private static void AssertDiagnostics(
             ImmutableArray<DiagnosticData> items1,
             ImmutableArray<DiagnosticData> items2
-        ) {
+        )
+        {
             Assert.Equal(items1.Length, items2.Length);
 
             for (var i = 0; i < items1.Length; i++)
@@ -438,7 +439,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                     public Task<Stream> ReadStreamAsync(
                         string name,
                         CancellationToken cancellationToken = default
-                    ) {
+                    )
+                    {
                         var stream = _map[name];
                         stream.Position = 0;
 
@@ -449,7 +451,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                         Project project,
                         string name,
                         CancellationToken cancellationToken = default
-                    ) {
+                    )
+                    {
                         var stream = _map[Tuple.Create(project, name)];
                         stream.Position = 0;
 
@@ -460,7 +463,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                         Document document,
                         string name,
                         CancellationToken cancellationToken = default
-                    ) {
+                    )
+                    {
                         var stream = _map[Tuple.Create(document, name)];
                         stream.Position = 0;
 
@@ -471,7 +475,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                         string name,
                         Stream stream,
                         CancellationToken cancellationToken = default
-                    ) {
+                    )
+                    {
                         _map[name] = new MemoryStream();
                         stream.CopyTo(_map[name]);
 
@@ -483,7 +488,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                         string name,
                         Stream stream,
                         CancellationToken cancellationToken = default
-                    ) {
+                    )
+                    {
                         _map[Tuple.Create(project, name)] = new MemoryStream();
                         stream.CopyTo(_map[Tuple.Create(project, name)]);
 
@@ -495,7 +501,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                         string name,
                         Stream stream,
                         CancellationToken cancellationToken = default
-                    ) {
+                    )
+                    {
                         _map[Tuple.Create(document, name)] = new MemoryStream();
                         stream.CopyTo(_map[Tuple.Create(document, name)]);
 

@@ -36,7 +36,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessForeignKeyAdded(
             IConventionForeignKeyBuilder relationshipBuilder,
             IConventionContext<IConventionForeignKeyBuilder> context
-        ) {
+        )
+        {
             var newRelationshipBuilder = relationshipBuilder.OnDelete(
                 GetTargetDeleteBehavior(relationshipBuilder.Metadata)
             );
@@ -54,7 +55,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessForeignKeyRequirednessChanged(
             IConventionForeignKeyBuilder relationshipBuilder,
             IConventionContext<bool?> context
-        ) {
+        )
+        {
             var newRelationshipBuilder = relationshipBuilder.OnDelete(
                 GetTargetDeleteBehavior(relationshipBuilder.Metadata)
             );

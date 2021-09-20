@@ -118,7 +118,8 @@ public class CallbackTests
             string libraryName,
             Assembly asm,
             DllImportSearchPath? dllImportSearchPath
-        ) {
+        )
+        {
             invocations.Add(libraryName);
 
             if (string.Equals(libraryName, NativeLibraryToLoad.InvalidName))

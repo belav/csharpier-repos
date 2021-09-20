@@ -55,7 +55,8 @@ namespace Internal.TypeSystem.Ecma
                                 ).Name,
                                 declName
                             )
-                        ) {
+                        )
+                        {
                             foundRecord = true;
                         }
                         break;
@@ -68,7 +69,8 @@ namespace Internal.TypeSystem.Ecma
                                 ).Name,
                                 declName
                             )
-                        ) {
+                        )
+                        {
                             foundRecord = true;
                         }
                         break;

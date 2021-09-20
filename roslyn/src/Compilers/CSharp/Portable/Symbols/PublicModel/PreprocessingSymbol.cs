@@ -95,7 +95,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
             SemanticModel semanticModel,
             int position,
             SymbolDisplayFormat format
-        ) {
+        )
+        {
             return SymbolDisplay.ToMinimalDisplayString(
                 this,
                 Symbol.GetCSharpSemanticModel(semanticModel),
@@ -108,7 +109,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
             SemanticModel semanticModel,
             int position,
             SymbolDisplayFormat format
-        ) {
+        )
+        {
             return SymbolDisplay.ToMinimalDisplayParts(
                 this,
                 Symbol.GetCSharpSemanticModel(semanticModel),

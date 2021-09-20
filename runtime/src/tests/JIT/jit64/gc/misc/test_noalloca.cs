@@ -42,7 +42,8 @@ class Test
         String s8,
         String s9,
         String s10
-    ) {
+    )
+    {
         Console.WriteLine(s10);
     }
 }

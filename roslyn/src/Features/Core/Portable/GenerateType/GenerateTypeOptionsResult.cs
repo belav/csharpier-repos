@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
             bool areFoldersValidIdentifiers,
             string defaultNamespace,
             bool isCancelled = false
-        ) {
+        )
+        {
             Accessibility = accessibility;
             TypeKind = typeKind;
             TypeName = typeName;

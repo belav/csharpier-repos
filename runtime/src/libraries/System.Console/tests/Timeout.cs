@@ -18,7 +18,8 @@ public class TimeOut
             Stream standardOut = Console.OpenStandardOutput(),
                 standardIn = Console.OpenStandardInput(),
                 standardError = Console.OpenStandardError()
-        ) {
+        )
+        {
             Assert.Throws<InvalidOperationException>(() => standardOut.WriteTimeout);
             Assert.Throws<InvalidOperationException>(() => standardIn.WriteTimeout);
             Assert.Throws<InvalidOperationException>(() => standardError.WriteTimeout);
@@ -37,7 +38,8 @@ public class TimeOut
             Stream standardOut = Console.OpenStandardOutput(),
                 standardIn = Console.OpenStandardInput(),
                 standardError = Console.OpenStandardError()
-        ) {
+        )
+        {
             Assert.Throws<InvalidOperationException>(() => standardOut.ReadTimeout);
             Assert.Throws<InvalidOperationException>(() => standardIn.ReadTimeout);
             Assert.Throws<InvalidOperationException>(() => standardError.ReadTimeout);
@@ -56,7 +58,8 @@ public class TimeOut
             Stream standardOut = Console.OpenStandardOutput(),
                 standardIn = Console.OpenStandardInput(),
                 standardError = Console.OpenStandardError()
-        ) {
+        )
+        {
             Assert.False(standardOut.CanTimeout);
             Assert.False(standardIn.CanTimeout);
             Assert.False(standardError.CanTimeout);

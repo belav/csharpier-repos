@@ -3678,7 +3678,8 @@ class Program
                 var isExpression in tree.GetRoot()
                     .DescendantNodes()
                     .OfType<IsPatternExpressionSyntax>()
-            ) {
+            )
+            {
                 var symbolInfo = model.GetSymbolInfo(isExpression.Expression);
                 Assert.Null(symbolInfo.Symbol);
                 Assert.True(symbolInfo.CandidateSymbols.IsDefaultOrEmpty);

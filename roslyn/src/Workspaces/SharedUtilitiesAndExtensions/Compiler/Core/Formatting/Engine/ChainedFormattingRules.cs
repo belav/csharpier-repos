@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Formatting
         public ChainedFormattingRules(
             IEnumerable<AbstractFormattingRule> formattingRules,
             AnalyzerConfigOptions options
-        ) {
+        )
+        {
             Contract.ThrowIfNull(formattingRules);
             Contract.ThrowIfNull(options);
 
@@ -82,7 +83,8 @@ namespace Microsoft.CodeAnalysis.Formatting
         public void AddAnchorIndentationOperations(
             List<AnchorIndentationOperation> list,
             SyntaxNode currentNode
-        ) {
+        )
+        {
             var action = new NextAnchorIndentationOperationAction(
                 _addAnchorIndentationOperationsRules,
                 index: 0,
@@ -95,7 +97,8 @@ namespace Microsoft.CodeAnalysis.Formatting
         public void AddIndentBlockOperations(
             List<IndentBlockOperation> list,
             SyntaxNode currentNode
-        ) {
+        )
+        {
             var action = new NextIndentBlockOperationAction(
                 _addIndentBlockOperationsRules,
                 index: 0,
@@ -108,7 +111,8 @@ namespace Microsoft.CodeAnalysis.Formatting
         public void AddAlignTokensOperations(
             List<AlignTokensOperation> list,
             SyntaxNode currentNode
-        ) {
+        )
+        {
             var action = new NextAlignTokensOperationAction(
                 _addAlignTokensOperationsRules,
                 index: 0,
@@ -121,7 +125,8 @@ namespace Microsoft.CodeAnalysis.Formatting
         public AdjustNewLinesOperation? GetAdjustNewLinesOperation(
             SyntaxToken previousToken,
             SyntaxToken currentToken
-        ) {
+        )
+        {
             var action = new NextGetAdjustNewLinesOperation(
                 _getAdjustNewLinesOperationRules,
                 index: 0
@@ -132,7 +137,8 @@ namespace Microsoft.CodeAnalysis.Formatting
         public AdjustSpacesOperation? GetAdjustSpacesOperation(
             SyntaxToken previousToken,
             SyntaxToken currentToken
-        ) {
+        )
+        {
             var action = new NextGetAdjustSpacesOperation(_getAdjustSpacesOperationRules, index: 0);
             return action.Invoke(in previousToken, in currentToken);
         }
@@ -140,7 +146,8 @@ namespace Microsoft.CodeAnalysis.Formatting
         private static ImmutableArray<AbstractFormattingRule> FilterToRulesImplementingMethod(
             ImmutableArray<AbstractFormattingRule> rules,
             string name
-        ) {
+        )
+        {
             return rules.Where(
                     rule =>
                     {

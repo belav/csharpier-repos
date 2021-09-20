@@ -57,16 +57,16 @@ namespace Microsoft.CodeAnalysis.Editor.Xaml.CodeFixes.RemoveUnusedUsings
         private Task<Document> RemoveUnnecessaryImportsAsync(
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var service = document.GetLanguageService<IRemoveUnnecessaryImportsService>();
             return service.RemoveUnnecessaryImportsAsync(document, cancellationToken);
         }
 
         private class MyCodeAction : CodeAction.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(Resources.RemoveUnnecessaryNamespaces, createChangedDocument) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(Resources.RemoveUnnecessaryNamespaces, createChangedDocument) { }
         }
     }
 }

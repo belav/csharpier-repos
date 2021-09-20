@@ -24,7 +24,8 @@ namespace Microsoft.AspNetCore.SpaServices.Extensions.Util
             this Task<T> task,
             TimeSpan timeoutDelay,
             string message
-        ) {
+        )
+        {
             if (task == await Task.WhenAny(task, Task.Delay(timeoutDelay)))
             {
                 return task.Result;

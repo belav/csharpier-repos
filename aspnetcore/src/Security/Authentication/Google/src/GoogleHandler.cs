@@ -38,7 +38,8 @@ namespace Microsoft.AspNetCore.Authentication.Google
             ClaimsIdentity identity,
             AuthenticationProperties properties,
             OAuthTokenResponse tokens
-        ) {
+        )
+        {
             // Get the Google user
             var request = new HttpRequestMessage(HttpMethod.Get, Options.UserInformationEndpoint);
             request.Headers.Authorization = new AuthenticationHeaderValue(
@@ -58,7 +59,8 @@ namespace Microsoft.AspNetCore.Authentication.Google
                 var payload = JsonDocument.Parse(
                     await response.Content.ReadAsStringAsync(Context.RequestAborted)
                 )
-            ) {
+            )
+            {
                 var context = new OAuthCreatingTicketContext(
                     new ClaimsPrincipal(identity),
                     properties,
@@ -83,7 +85,8 @@ namespace Microsoft.AspNetCore.Authentication.Google
         protected override string BuildChallengeUrl(
             AuthenticationProperties properties,
             string redirectUri
-        ) {
+        )
+        {
             // Google Identity Platform Manual:
             // https://developers.google.com/identity/protocols/OAuth2WebServer
 
@@ -132,7 +135,8 @@ namespace Microsoft.AspNetCore.Authentication.Google
             string name,
             Func<T, string?> formatter,
             T defaultValue
-        ) {
+        )
+        {
             string? value;
             var parameterValue = properties.GetParameter<T>(name);
             if (parameterValue != null)

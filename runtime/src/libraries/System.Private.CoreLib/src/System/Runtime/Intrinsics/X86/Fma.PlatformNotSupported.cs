@@ -40,7 +40,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<float> a,
             Vector128<float> b,
             Vector128<float> c
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -51,7 +52,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<double> a,
             Vector128<double> b,
             Vector128<double> c
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -62,7 +64,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<float> a,
             Vector256<float> b,
             Vector256<float> c
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -73,7 +76,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<double> a,
             Vector256<double> b,
             Vector256<double> c
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -85,7 +89,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<float> a,
             Vector128<float> b,
             Vector128<float> c
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -96,7 +101,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<double> a,
             Vector128<double> b,
             Vector128<double> c
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -108,7 +114,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<float> a,
             Vector128<float> b,
             Vector128<float> c
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -119,7 +126,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<double> a,
             Vector128<double> b,
             Vector128<double> c
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -130,7 +138,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<float> a,
             Vector256<float> b,
             Vector256<float> c
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -141,7 +150,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<double> a,
             Vector256<double> b,
             Vector256<double> c
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -153,7 +163,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<float> a,
             Vector128<float> b,
             Vector128<float> c
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -164,7 +175,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<double> a,
             Vector128<double> b,
             Vector128<double> c
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -175,7 +187,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<float> a,
             Vector256<float> b,
             Vector256<float> c
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -186,7 +199,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<double> a,
             Vector256<double> b,
             Vector256<double> c
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -198,7 +212,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<float> a,
             Vector128<float> b,
             Vector128<float> c
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -209,7 +224,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<double> a,
             Vector128<double> b,
             Vector128<double> c
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -221,7 +237,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<float> a,
             Vector128<float> b,
             Vector128<float> c
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -232,7 +249,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<double> a,
             Vector128<double> b,
             Vector128<double> c
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -243,7 +261,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<float> a,
             Vector256<float> b,
             Vector256<float> c
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -254,7 +273,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<double> a,
             Vector256<double> b,
             Vector256<double> c
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -266,7 +286,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<float> a,
             Vector128<float> b,
             Vector128<float> c
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -277,7 +298,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<double> a,
             Vector128<double> b,
             Vector128<double> c
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -288,7 +310,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<float> a,
             Vector256<float> b,
             Vector256<float> c
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -299,7 +322,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<double> a,
             Vector256<double> b,
             Vector256<double> c
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -311,7 +335,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<float> a,
             Vector128<float> b,
             Vector128<float> c
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -322,7 +347,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<double> a,
             Vector128<double> b,
             Vector128<double> c
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -334,7 +360,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<float> a,
             Vector128<float> b,
             Vector128<float> c
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -345,7 +372,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<double> a,
             Vector128<double> b,
             Vector128<double> c
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -356,7 +384,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<float> a,
             Vector256<float> b,
             Vector256<float> c
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -367,7 +396,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<double> a,
             Vector256<double> b,
             Vector256<double> c
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -379,7 +409,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<float> a,
             Vector128<float> b,
             Vector128<float> c
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -390,7 +421,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<double> a,
             Vector128<double> b,
             Vector128<double> c
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
     }

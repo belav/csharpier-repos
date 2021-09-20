@@ -608,7 +608,8 @@ public class TestRunner
         List<ProcessData> passed,
         List<ProcessData> failed,
         List<ProcessData> timedout
-    ) {
+    )
+    {
         XmlWriterSettings xmlWriterSettings = new XmlWriterSettings();
         xmlWriterSettings.NewLineOnAttributes = true;
         xmlWriterSettings.Indent = true;
@@ -774,7 +775,8 @@ public class TestRunner
         List<ProcessData> passed,
         List<ProcessData> failed,
         List<ProcessData> timedout
-    ) {
+    )
+    {
         XmlWriterSettings xmlWriterSettings = new XmlWriterSettings();
         xmlWriterSettings.Indent = true;
 
@@ -929,7 +931,8 @@ public class TestRunner
             StreamWriter sw = new StreamWriter(
                 new FileStream(filename, FileMode.Open, FileAccess.Write)
             )
-        ) {
+        )
+        {
             sw.WriteLine("process attach --pid " + pid);
             sw.WriteLine("thread list");
             sw.WriteLine("thread backtrace all");
@@ -983,7 +986,8 @@ public class TestRunner
             StreamWriter sw = new StreamWriter(
                 new FileStream(filename, FileMode.Open, FileAccess.Write)
             )
-        ) {
+        )
+        {
             sw.WriteLine("attach " + pid);
             sw.WriteLine("info threads");
             sw.WriteLine("thread apply all p mono_print_thread_dump(0)");

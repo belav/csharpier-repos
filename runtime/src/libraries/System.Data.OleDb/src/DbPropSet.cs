@@ -163,7 +163,8 @@ namespace System.Data.OleDb
                             int k = 0;
                             k < cProperties;
                             ++k, vptr = ADP.IntPtrOffset(vptr, ODB.SizeOf_tagDBPROP)
-                        ) {
+                        )
+                        {
                             SafeNativeMethods.VariantClear(vptr);
                         }
                         SafeNativeMethods.CoTaskMemFree(rgProperties);
@@ -325,7 +326,8 @@ namespace System.Data.OleDb
             int propertyId,
             bool required,
             object value
-        ) {
+        )
+        {
             ItagDBPROP dbprop = OleDbStructHelpers.CreateTagDbProp(propertyId, required, value);
             DBPropSet propertyset = new DBPropSet(1);
             propertyset.SetPropertySet(0, propertySet, new ItagDBPROP[1] { dbprop });

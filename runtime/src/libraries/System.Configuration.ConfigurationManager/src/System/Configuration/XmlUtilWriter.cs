@@ -246,7 +246,8 @@ namespace System.Configuration
             int fromLinePosition,
             int toLineNumber,
             int toLinePosition
-        ) {
+        )
+        {
             int charactersWritten = AppendWhiteSpace(
                 fromLineNumber,
                 fromLinePosition,
@@ -264,7 +265,8 @@ namespace System.Configuration
             int fromLinePosition,
             int toLineNumber,
             int toLinePosition
-        ) {
+        )
+        {
             int charactersWritten = 0;
             while (fromLineNumber++ < toLineNumber)
             {

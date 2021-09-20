@@ -152,7 +152,8 @@ namespace System.Linq.Expressions.Tests
             Expression e,
             object o,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<object>> f = Expression.Lambda<Func<object>>(
                 Expression.Convert(e, typeof(object))
             );

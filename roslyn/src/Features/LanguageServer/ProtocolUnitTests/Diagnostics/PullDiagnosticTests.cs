@@ -250,7 +250,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Diagnostics
             Document document,
             int position,
             string text
-        ) {
+        )
+        {
             var sourceText = await document.GetTextAsync();
             var lineInfo = sourceText.Lines.GetLinePositionSpan(new TextSpan(position, 0));
 
@@ -430,7 +431,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Diagnostics
 
         private static DiagnosticParams[] CreateDiagnosticParamsFromPreviousReports(
             WorkspaceDiagnosticReport[] results
-        ) {
+        )
+        {
             return results.Select(
                     r =>
                         new DiagnosticParams
@@ -582,7 +584,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Diagnostics
             Document document,
             string? previousResultId = null,
             IProgress<DiagnosticReport[]>? progress = null
-        ) {
+        )
+        {
             await WaitForDiagnosticsAsync(testLspServer.TestWorkspace);
 
             var result = await testLspServer.ExecuteRequestAsync<
@@ -603,7 +606,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Diagnostics
             TestLspServer testLspServer,
             DiagnosticParams[]? previousResults = null,
             IProgress<WorkspaceDiagnosticReport[]>? progress = null
-        ) {
+        )
+        {
             await WaitForDiagnosticsAsync(testLspServer.TestWorkspace);
 
             var result = await testLspServer.ExecuteRequestAsync<
@@ -634,7 +638,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Diagnostics
             Document document,
             string? previousResultId = null,
             IProgress<DiagnosticReport[]>? progress = null
-        ) {
+        )
+        {
             return new DocumentDiagnosticsParams
             {
                 TextDocument = ProtocolConversions.DocumentToTextDocumentIdentifier(document),
@@ -646,7 +651,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Diagnostics
         private static WorkspaceDocumentDiagnosticsParams CreateWorkspaceDiagnosticParams(
             DiagnosticParams[]? previousResults = null,
             IProgress<WorkspaceDiagnosticReport[]>? progress = null
-        ) {
+        )
+        {
             return new WorkspaceDocumentDiagnosticsParams
             {
                 PreviousResults = previousResults,
@@ -658,7 +664,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Diagnostics
             string markup,
             BackgroundAnalysisScope scope,
             bool pullDiagnostics = true
-        ) {
+        )
+        {
             var testLspServer = CreateTestLspServer(markup, out _);
             InitializeDiagnostics(scope, testLspServer.TestWorkspace, pullDiagnostics);
             return testLspServer;
@@ -668,7 +675,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Diagnostics
             string[] markups,
             BackgroundAnalysisScope scope,
             bool pullDiagnostics = true
-        ) {
+        )
+        {
             var testLspServer = CreateTestLspServer(markups, out _);
             InitializeDiagnostics(scope, testLspServer.TestWorkspace, pullDiagnostics);
             return testLspServer;
@@ -678,7 +686,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Diagnostics
             BackgroundAnalysisScope scope,
             TestWorkspace workspace,
             bool pullDiagnostics
-        ) {
+        )
+        {
             workspace.TryApplyChanges(
                 workspace.CurrentSolution.WithOptions(
                     workspace.Options.WithChangedOption(

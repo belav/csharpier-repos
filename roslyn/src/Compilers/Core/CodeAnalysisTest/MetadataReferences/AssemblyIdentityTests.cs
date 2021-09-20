@@ -435,7 +435,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     new Version(0, 0, int.MaxValue, 0),
                     new Version(0, 0, 0, int.MaxValue),
                 }
-            ) {
+            )
+            {
                 Assert.Throws<ArgumentOutOfRangeException>(() => new AssemblyIdentity("Goo", v));
             }
 

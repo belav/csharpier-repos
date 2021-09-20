@@ -58,7 +58,8 @@ namespace System.Xml.Xsl.XPath
             int startIndex,
             int count,
             TrimType trimType
-        ) {
+        )
+        {
             const int TrimSize = 32;
             const string TrimMarker = "...";
 

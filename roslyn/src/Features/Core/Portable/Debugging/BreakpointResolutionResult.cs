@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.Debugging
             TextSpan textSpan,
             string? locationNameOpt,
             bool isLineBreakpoint
-        ) {
+        )
+        {
             Document = document;
             TextSpan = textSpan;
             LocationNameOpt = locationNameOpt;

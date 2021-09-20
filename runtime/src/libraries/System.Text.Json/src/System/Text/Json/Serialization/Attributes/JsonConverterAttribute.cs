@@ -34,7 +34,8 @@ namespace System.Text.Json.Serialization
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
             )]
                 Type converterType
-        ) {
+        )
+        {
             ConverterType = converterType;
         }
 

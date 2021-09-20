@@ -38,7 +38,8 @@ namespace System.Xml.Xsl.XsltOld
             if (
                 !XmlComplianceUtil.IsValidLanguageID(value.ToCharArray(), 0, value.Length)
                 && (value.Length == 0 || cultInfo == null)
-            ) {
+            )
+            {
                 if (_forwardCompatibility)
                 {
                     return null;
@@ -137,7 +138,8 @@ namespace System.Xml.Xsl.XsltOld
                 && _dataTypeAvt == null
                 && _orderAvt == null
                 && _caseOrderAvt == null
-            ) {
+            )
+            {
                 _sort = new Sort(_selectKey, _lang, _dataType, _order, _caseOrder);
             }
         }

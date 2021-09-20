@@ -24,7 +24,8 @@ namespace System.Configuration
             CultureInfo ci,
             object value,
             Type type
-        ) {
+        )
+        {
             return value.ToString();
         }
 
@@ -40,7 +41,8 @@ namespace System.Configuration
                     && (value[0] != '+')
                     && (!char.IsWhiteSpace(value[0]))
                     && (!char.IsWhiteSpace(value[value.Length - 1]))
-                ) {
+                )
+                {
                     try
                     {
                         return Enum.Parse(_enumType, value);

@@ -85,7 +85,8 @@ namespace Roslyn.Utilities
             this IEnumerable<T> source1,
             IEnumerable<T> source2,
             IEqualityComparer<T>? comparer
-        ) {
+        )
+        {
             if (source1 == null)
             {
                 throw new ArgumentNullException(nameof(source1));
@@ -264,7 +265,8 @@ namespace Roslyn.Utilities
         public static ImmutableArray<TResult> SelectAsArray<TSource, TResult>(
             this IEnumerable<TSource>? source,
             Func<TSource, TResult> selector
-        ) {
+        )
+        {
             if (source == null)
             {
                 return ImmutableArray<TResult>.Empty;
@@ -309,7 +311,8 @@ namespace Roslyn.Utilities
             this IEnumerable<T> sequence,
             T value,
             IEqualityComparer<T> comparer
-        ) {
+        )
+        {
             return sequence switch
             {
                 IReadOnlyList<T> readOnlyList => IndexOf(readOnlyList, value, comparer),
@@ -321,7 +324,8 @@ namespace Roslyn.Utilities
             this IEnumerable<T> sequence,
             T value,
             IEqualityComparer<T> comparer
-        ) {
+        )
+        {
             int i = 0;
             foreach (var item in sequence)
             {
@@ -340,7 +344,8 @@ namespace Roslyn.Utilities
             this IReadOnlyList<T> list,
             T value,
             IEqualityComparer<T> comparer
-        ) {
+        )
+        {
             for (int i = 0, length = list.Count; i < length; i++)
             {
                 if (comparer.Equals(list[i], value))
@@ -365,28 +370,32 @@ namespace Roslyn.Utilities
         public static IOrderedEnumerable<T> OrderBy<T>(
             this IEnumerable<T> source,
             IComparer<T>? comparer
-        ) {
+        )
+        {
             return source.OrderBy(Functions<T>.Identity, comparer);
         }
 
         public static IOrderedEnumerable<T> OrderByDescending<T>(
             this IEnumerable<T> source,
             IComparer<T>? comparer
-        ) {
+        )
+        {
             return source.OrderByDescending(Functions<T>.Identity, comparer);
         }
 
         public static IOrderedEnumerable<T> OrderBy<T>(
             this IEnumerable<T> source,
             Comparison<T> compare
-        ) {
+        )
+        {
             return source.OrderBy(Comparer<T>.Create(compare));
         }
 
         public static IOrderedEnumerable<T> OrderByDescending<T>(
             this IEnumerable<T> source,
             Comparison<T> compare
-        ) {
+        )
+        {
             return source.OrderByDescending(Comparer<T>.Create(compare));
         }
 
@@ -399,14 +408,16 @@ namespace Roslyn.Utilities
         public static IOrderedEnumerable<T> ThenBy<T>(
             this IOrderedEnumerable<T> source,
             IComparer<T>? comparer
-        ) {
+        )
+        {
             return source.ThenBy(Functions<T>.Identity, comparer);
         }
 
         public static IOrderedEnumerable<T> ThenBy<T>(
             this IOrderedEnumerable<T> source,
             Comparison<T> compare
-        ) {
+        )
+        {
             return source.ThenBy(Comparer<T>.Create(compare));
         }
 
@@ -505,7 +516,8 @@ namespace Roslyn.Utilities
 
         private static IEnumerable<IList<T>> TransposeInternal<T>(
             this IEnumerable<IEnumerable<T>> data
-        ) {
+        )
+        {
             List<IEnumerator<T>> enumerators = new List<IEnumerator<T>>();
 
             var width = 0;
@@ -632,7 +644,8 @@ namespace System.Linq
             this IEnumerable<T>? first,
             IEnumerable<T>? second,
             Func<T, T, bool> comparer
-        ) {
+        )
+        {
             RoslynDebug.Assert(comparer != null);
 
             if (first == second)
@@ -653,7 +666,8 @@ namespace System.Linq
                     if (
                         !enumerator2.MoveNext()
                         || !comparer(enumerator.Current, enumerator2.Current)
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }

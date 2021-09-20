@@ -215,7 +215,8 @@ namespace Microsoft.AspNetCore.Http
         public static RequestDelegate Create(
             MethodInfo methodInfo,
             Func<HttpContext, object> targetFactory
-        ) {
+        )
+        {
             if (methodInfo is null)
             {
                 throw new ArgumentNullException(nameof(methodInfo));
@@ -248,7 +249,8 @@ namespace Microsoft.AspNetCore.Http
         private static Func<object?, HttpContext, Task> CreateTargetableRequestDelegate(
             MethodInfo methodInfo,
             Expression? targetExpression
-        ) {
+        )
+        {
             // Non void return type
 
             // Task Invoke(HttpContext httpContext)
@@ -296,7 +298,8 @@ namespace Microsoft.AspNetCore.Http
         private static Expression[] CreateArguments(
             ParameterInfo[]? parameters,
             FactoryContext factoryContext
-        ) {
+        )
+        {
             if (parameters is null || parameters.Length == 0)
             {
                 return Array.Empty<Expression>();
@@ -315,7 +318,8 @@ namespace Microsoft.AspNetCore.Http
         private static Expression CreateArgument(
             ParameterInfo parameter,
             FactoryContext factoryContext
-        ) {
+        )
+        {
             if (parameter.Name is null)
             {
                 throw new InvalidOperationException(
@@ -328,7 +332,8 @@ namespace Microsoft.AspNetCore.Http
             if (
                 parameterCustomAttributes.OfType<IFromRouteMetadata>().FirstOrDefault() is
                 { } routeAttribute
-            ) {
+            )
+            {
                 return BindParameterFromProperty(
                     parameter,
                     RouteValuesExpr,
@@ -339,7 +344,8 @@ namespace Microsoft.AspNetCore.Http
             else if (
                 parameterCustomAttributes.OfType<IFromQueryMetadata>().FirstOrDefault() is
                 { } queryAttribute
-            ) {
+            )
+            {
                 return BindParameterFromProperty(
                     parameter,
                     QueryExpr,
@@ -350,7 +356,8 @@ namespace Microsoft.AspNetCore.Http
             else if (
                 parameterCustomAttributes.OfType<IFromHeaderMetadata>().FirstOrDefault() is
                 { } headerAttribute
-            ) {
+            )
+            {
                 return BindParameterFromProperty(
                     parameter,
                     HeadersExpr,
@@ -361,7 +368,8 @@ namespace Microsoft.AspNetCore.Http
             else if (
                 parameterCustomAttributes.OfType<IFromBodyMetadata>().FirstOrDefault() is
                 { } bodyAttribute
-            ) {
+            )
+            {
                 return BindParameterFromBody(
                     parameter.ParameterType,
                     bodyAttribute.AllowEmpty,
@@ -372,7 +380,8 @@ namespace Microsoft.AspNetCore.Http
                 parameter.CustomAttributes.Any(
                     a => typeof(IFromServiceMetadata).IsAssignableFrom(a.AttributeType)
                 )
-            ) {
+            )
+            {
                 return Expression.Call(
                     GetRequiredServiceMethod.MakeGenericMethod(parameter.ParameterType),
                     RequestServicesExpr
@@ -424,7 +433,8 @@ namespace Microsoft.AspNetCore.Http
             MethodInfo methodInfo,
             Expression? target,
             Expression[] arguments
-        ) {
+        )
+        {
             var callMethod = CreateMethodCall(methodInfo, target, arguments);
             return AddResponseWritingToMethodCall(callMethod, methodInfo.ReturnType);
         }
@@ -435,7 +445,8 @@ namespace Microsoft.AspNetCore.Http
             Expression? target,
             Expression[] arguments,
             FactoryContext factoryContext
-        ) {
+        )
+        {
             // {
             //     string tempSourceString;
             //     bool wasTryParseFailure = false;
@@ -500,7 +511,8 @@ namespace Microsoft.AspNetCore.Http
         private static Expression AddResponseWritingToMethodCall(
             Expression methodCall,
             Type returnType
-        ) {
+        )
+        {
             // Exact request delegate match
             if (returnType == typeof(void))
             {
@@ -519,7 +531,8 @@ namespace Microsoft.AspNetCore.Http
                 else if (
                     returnType.IsGenericType
                     && returnType.GetGenericTypeDefinition() == typeof(Task<>)
-                ) {
+                )
+                {
                     var typeArg = returnType.GetGenericArguments()[0];
 
                     if (typeof(IResult).IsAssignableFrom(typeArg))
@@ -551,7 +564,8 @@ namespace Microsoft.AspNetCore.Http
                 else if (
                     returnType.IsGenericType
                     && returnType.GetGenericTypeDefinition() == typeof(ValueTask<>)
-                ) {
+                )
+                {
                     var typeArg = returnType.GetGenericArguments()[0];
 
                     if (typeof(IResult).IsAssignableFrom(typeArg))
@@ -623,7 +637,8 @@ namespace Microsoft.AspNetCore.Http
         private static Func<object?, HttpContext, Task> HandleRequestBodyAndCompileRequestDelegate(
             Expression responseWritingMethodCall,
             FactoryContext factoryContext
-        ) {
+        )
+        {
             if (factoryContext.JsonRequestBodyType is null)
             {
                 return Expression.Lambda<Func<object?, HttpContext, Task>>(
@@ -694,7 +709,8 @@ namespace Microsoft.AspNetCore.Http
                     !method.IsGenericMethod
                     || method.Name != "TryParse"
                     || method.ReturnType != typeof(bool)
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -704,7 +720,8 @@ namespace Microsoft.AspNetCore.Http
                     tryParseParameters.Length == 2
                     && tryParseParameters[0].ParameterType == typeof(string)
                     && tryParseParameters[1].IsOut
-                ) {
+                )
+                {
                     return method;
                 }
             }
@@ -740,7 +757,8 @@ namespace Microsoft.AspNetCore.Http
                         && tryParseParameters[0].ParameterType == typeof(string)
                         && tryParseParameters[1].IsOut
                         && tryParseParameters[1].ParameterType == type.MakeByRefType()
-                    ) {
+                    )
+                    {
                         return method;
                     }
                 }
@@ -774,7 +792,8 @@ namespace Microsoft.AspNetCore.Http
             ParameterInfo parameter,
             Expression valueExpression,
             FactoryContext factoryContext
-        ) {
+        )
+        {
             if (parameter.ParameterType == typeof(string))
             {
                 if (!parameter.HasDefaultValue)
@@ -914,7 +933,8 @@ namespace Microsoft.AspNetCore.Http
             ParameterInfo parameter,
             string key,
             FactoryContext factoryContext
-        ) {
+        )
+        {
             var routeValue = GetValueFromProperty(RouteValuesExpr, key);
             var queryValue = GetValueFromProperty(QueryExpr, key);
             return BindParameterFromValue(
@@ -928,7 +948,8 @@ namespace Microsoft.AspNetCore.Http
             Type parameterType,
             bool allowEmpty,
             FactoryContext factoryContext
-        ) {
+        )
+        {
             if (factoryContext.JsonRequestBodyType is not null)
             {
                 throw new InvalidOperationException(
@@ -1017,7 +1038,8 @@ namespace Microsoft.AspNetCore.Http
         private static Task ExecuteValueTaskOfString(
             ValueTask<string> task,
             HttpContext httpContext
-        ) {
+        )
+        {
             static async Task ExecuteAwaited(ValueTask<string> task, HttpContext httpContext)
             {
                 await httpContext.Response.WriteAsync(await task);
@@ -1093,14 +1115,16 @@ namespace Microsoft.AspNetCore.Http
             public static void RequestBodyIOException(
                 HttpContext httpContext,
                 IOException exception
-            ) {
+            )
+            {
                 _requestBodyIOException(GetLogger(httpContext), exception);
             }
 
             public static void RequestBodyInvalidDataException(
                 HttpContext httpContext,
                 InvalidDataException exception
-            ) {
+            )
+            {
                 _requestBodyInvalidDataException(GetLogger(httpContext), exception);
             }
 
@@ -1109,7 +1133,8 @@ namespace Microsoft.AspNetCore.Http
                 string parameterTypeName,
                 string parameterName,
                 string sourceValue
-            ) {
+            )
+            {
                 _parameterBindingFailed(
                     GetLogger(httpContext),
                     parameterTypeName,

@@ -90,7 +90,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
                     typeof(AbstractSnippetExpansionClient),
                     out AbstractSnippetExpansionClient snippetExpansionClient
                 ) && snippetExpansionClient.TryHandleTab()
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -103,7 +104,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
                         args.SubjectBuffer,
                         context.OperationContext.UserCancellationToken
                     )
-                ) {
+                )
+                {
                     return true;
                 }
 
@@ -136,7 +138,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
         public CommandState GetCommandState(
             AutomaticLineEnderCommandArgs args,
             Func<CommandState> nextCommandHandler
-        ) {
+        )
+        {
             return nextCommandHandler();
         }
 
@@ -144,7 +147,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             AutomaticLineEnderCommandArgs args,
             Action nextCommandHandler,
             CommandExecutionContext executionContext
-        ) {
+        )
+        {
             AssertIsForeground();
             if (
                 AreSnippetsEnabled(args)
@@ -153,7 +157,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
                     out AbstractSnippetExpansionClient snippetExpansionClient
                 )
                 && snippetExpansionClient.IsFullMethodCallSnippet
-            ) {
+            )
+            {
                 // Commit the snippet. Leave the caret in place, but clear the selection. Subsequent handlers in the
                 // chain will handle the remaining Smart Break Line operations.
                 snippetExpansionClient.CommitSnippet(leaveCaret: true);
@@ -176,7 +181,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
                     typeof(AbstractSnippetExpansionClient),
                     out AbstractSnippetExpansionClient snippetExpansionClient
                 ) && snippetExpansionClient.TryHandleReturn()
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -213,7 +219,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
                     typeof(AbstractSnippetExpansionClient),
                     out AbstractSnippetExpansionClient snippetExpansionClient
                 ) && snippetExpansionClient.TryHandleEscape()
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -250,7 +257,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
                     typeof(AbstractSnippetExpansionClient),
                     out AbstractSnippetExpansionClient snippetExpansionClient
                 ) && snippetExpansionClient.TryHandleBackTab()
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -312,7 +320,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             ITextView textView,
             ITextBuffer subjectBuffer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             AssertIsForeground();
 
             var document =

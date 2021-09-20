@@ -103,7 +103,8 @@ namespace Microsoft.CSharp.RuntimeBinder
                 Operation != otherBinder.Operation
                 || IsChecked != otherBinder.IsChecked
                 || _callingContext != otherBinder._callingContext
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -124,7 +125,8 @@ namespace Microsoft.CSharp.RuntimeBinder
         public override DynamicMetaObject FallbackUnaryOperation(
             DynamicMetaObject target,
             DynamicMetaObject errorSuggestion
-        ) {
+        )
+        {
             BinderHelper.ValidateBindArgument(target, nameof(target));
             return BinderHelper.Bind(
                 this,

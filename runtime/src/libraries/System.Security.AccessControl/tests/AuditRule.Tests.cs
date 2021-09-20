@@ -141,7 +141,8 @@ namespace System.Security.AccessControl.Tests
             int inheritanceFlags,
             int propagationFlags,
             int AuditFlags
-        ) {
+        )
+        {
             IdentityReference identityReference = new SecurityIdentifier(sid);
             AuditRule AuditRule = Constructor(
                 identityReference,
@@ -168,7 +169,8 @@ namespace System.Security.AccessControl.Tests
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
             AuditFlags AuditFlags
-        ) {
+        )
+        {
             return new FileSystemAuditRule(
                 identityReference,
                 FileSystemRights.Read,

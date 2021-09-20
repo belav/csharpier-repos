@@ -32,7 +32,8 @@ namespace Microsoft.Web.Mvc
             this HtmlHelper helper,
             string name,
             string buttonText
-        ) {
+        )
+        {
             return SubmitButton(helper, name, buttonText, null);
         }
 
@@ -58,7 +59,8 @@ namespace Microsoft.Web.Mvc
             string name,
             string buttonText,
             object htmlAttributes
-        ) {
+        )
+        {
             return helper.SubmitButton(
                 name,
                 buttonText,
@@ -85,7 +87,8 @@ namespace Microsoft.Web.Mvc
             string name,
             string buttonText,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             return MvcHtmlString.Create(
                 ButtonBuilder.SubmitButton(name, buttonText, htmlAttributes)
                     .ToString(TagRenderMode.SelfClosing)
@@ -103,7 +106,8 @@ namespace Microsoft.Web.Mvc
             this HtmlHelper helper,
             string name,
             string imageSrc
-        ) {
+        )
+        {
             return helper.SubmitImage(name, imageSrc, null);
         }
 
@@ -120,7 +124,8 @@ namespace Microsoft.Web.Mvc
             string name,
             string imageSrc,
             object htmlAttributes
-        ) {
+        )
+        {
             return helper.SubmitImage(
                 name,
                 imageSrc,
@@ -141,7 +146,8 @@ namespace Microsoft.Web.Mvc
             string name,
             string imageSrc,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             if (imageSrc == null)
             {
                 throw new ArgumentNullException("imageSrc");
@@ -170,7 +176,8 @@ namespace Microsoft.Web.Mvc
             string name,
             string buttonText,
             HtmlButtonType buttonType
-        ) {
+        )
+        {
             return helper.Button(
                 name,
                 buttonText,
@@ -195,7 +202,8 @@ namespace Microsoft.Web.Mvc
             string buttonText,
             HtmlButtonType buttonType,
             string onClickMethod
-        ) {
+        )
+        {
             return helper.Button(
                 name,
                 buttonText,
@@ -222,7 +230,8 @@ namespace Microsoft.Web.Mvc
             HtmlButtonType buttonType,
             string onClickMethod,
             object htmlAttributes
-        ) {
+        )
+        {
             return helper.Button(
                 name,
                 buttonText,
@@ -255,7 +264,8 @@ namespace Microsoft.Web.Mvc
             HtmlButtonType buttonType,
             string onClickMethod,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             return MvcHtmlString.Create(
                 ButtonBuilder.Button(name, buttonText, buttonType, onClickMethod, htmlAttributes)
                     .ToString(TagRenderMode.Normal)

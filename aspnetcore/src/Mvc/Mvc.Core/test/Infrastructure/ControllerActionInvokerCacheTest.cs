@@ -88,7 +88,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         {
             public CustomActionDescriptorCollectionProvider(
                 ControllerActionDescriptor[] actionDescriptors
-            ) {
+            )
+            {
                 ActionDescriptors = new ActionDescriptorCollection(actionDescriptors, version: 1);
             }
 
@@ -97,7 +98,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
         private static ControllerActionInvokerCache CreateControllerActionInvokerCache(
             IFilterProvider[] filterProviders
-        ) {
+        )
+        {
             var modelMetadataProvider = new EmptyModelMetadataProvider();
             var modelBinderFactory = TestModelBinderFactory.CreateDefault();
             var mvcOptions = Options.Create(new MvcOptions());
@@ -120,7 +122,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
         private static ControllerContext CreateControllerContext(
             FilterDescriptor[] filterDescriptors
-        ) {
+        )
+        {
             var actionDescriptor = new ControllerActionDescriptor()
             {
                 FilterDescriptors = filterDescriptors,

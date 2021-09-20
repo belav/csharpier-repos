@@ -25,7 +25,8 @@ namespace System.DirectoryServices.ActiveDirectory
             if (
                 role < ActiveDirectoryRole.SchemaRole
                 || role > ActiveDirectoryRole.InfrastructureRole
-            ) {
+            )
+            {
                 throw new InvalidEnumArgumentException(
                     nameof(role),
                     (int)role,
@@ -49,7 +50,8 @@ namespace System.DirectoryServices.ActiveDirectory
             if (
                 role < ActiveDirectoryRole.SchemaRole
                 || role > ActiveDirectoryRole.InfrastructureRole
-            ) {
+            )
+            {
                 throw new InvalidEnumArgumentException(
                     nameof(role),
                     (int)role,

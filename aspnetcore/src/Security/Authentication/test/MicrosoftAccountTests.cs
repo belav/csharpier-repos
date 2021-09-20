@@ -39,7 +39,8 @@ namespace Microsoft.AspNetCore.Authentication.Tests.MicrosoftAccount
         protected override void RegisterAuth(
             AuthenticationBuilder services,
             Action<MicrosoftAccountOptions> configure
-        ) {
+        )
+        {
             services.AddMicrosoftAccount(
                 o =>
                 {
@@ -237,7 +238,8 @@ namespace Microsoft.AspNetCore.Authentication.Tests.MicrosoftAccount
                             if (
                                 req.RequestUri.AbsoluteUri
                                 == "https://login.microsoftonline.com/common/oauth2/v2.0/token"
-                            ) {
+                            )
+                            {
                                 return ReturnJsonResponse(
                                     new
                                     {
@@ -253,7 +255,8 @@ namespace Microsoft.AspNetCore.Authentication.Tests.MicrosoftAccount
                                     UriComponents.SchemeAndServer | UriComponents.Path,
                                     UriFormat.UriEscaped
                                 ) == "https://graph.microsoft.com/v1.0/me"
-                            ) {
+                            )
+                            {
                                 return ReturnJsonResponse(
                                     new
                                     {
@@ -375,7 +378,8 @@ namespace Microsoft.AspNetCore.Authentication.Tests.MicrosoftAccount
                             if (
                                 req.RequestUri.AbsoluteUri
                                 == "https://login.microsoftonline.com/common/oauth2/v2.0/token"
-                            ) {
+                            )
+                            {
                                 var body = req.Content.ReadAsStringAsync().Result;
                                 var form = new FormReader(body);
                                 var entries = form.ReadForm();
@@ -403,7 +407,8 @@ namespace Microsoft.AspNetCore.Authentication.Tests.MicrosoftAccount
                                     UriComponents.SchemeAndServer | UriComponents.Path,
                                     UriFormat.UriEscaped
                                 ) == "https://graph.microsoft.com/v1.0/me"
-                            ) {
+                            )
+                            {
                                 return ReturnJsonResponse(
                                     new
                                     {
@@ -453,7 +458,8 @@ namespace Microsoft.AspNetCore.Authentication.Tests.MicrosoftAccount
 
         private static async Task<IHost> CreateHost(
             Action<MicrosoftAccountOptions> configureOptions
-        ) {
+        )
+        {
             var host = new HostBuilder().ConfigureWebHost(
                     builder =>
                         builder.UseTestServer()
@@ -485,7 +491,8 @@ namespace Microsoft.AspNetCore.Authentication.Tests.MicrosoftAccount
                                             else if (
                                                 req.Path
                                                 == new PathString("/challengeWithOtherScope")
-                                            ) {
+                                            )
+                                            {
                                                 var properties = new OAuthChallengeProperties();
                                                 properties.SetScope("baz", "qux");
                                                 await context.ChallengeAsync(
@@ -498,7 +505,8 @@ namespace Microsoft.AspNetCore.Authentication.Tests.MicrosoftAccount
                                                 == new PathString(
                                                     "/challengeWithOtherScopeWithBaseAuthenticationProperties"
                                                 )
-                                            ) {
+                                            )
+                                            {
                                                 var properties = new AuthenticationProperties();
                                                 properties.SetParameter(
                                                     OAuthChallengeProperties.ScopeKey,

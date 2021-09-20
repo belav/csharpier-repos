@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
                 State state,
                 bool intoNamespace,
                 bool inNewFile
-            ) {
+            )
+            {
                 _service = service;
                 _document = document;
                 _state = state;
@@ -71,7 +72,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
 
             protected override async Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var semanticDocument = await SemanticDocument.CreateAsync(
                         _document,
                         cancellationToken
@@ -108,7 +110,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
                 TService service,
                 Document document,
                 State state
-            ) {
+            )
+            {
                 _service = service;
                 _document = document;
                 _state = state;
@@ -191,7 +194,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
             private bool GetPredefinedTypeKindOption(
                 State state,
                 out TypeKindOptions typeKindValueFinal
-            ) {
+            )
+            {
                 if (state.IsAttribute)
                 {
                     typeKindValueFinal = TypeKindOptions.Attribute;
@@ -203,7 +207,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
                         state.NameOrMemberAccessExpression,
                         out var typeKindValue
                     ) || _service.TryGetBaseList(state.SimpleName, out typeKindValue)
-                ) {
+                )
+                {
                     typeKindValueFinal = typeKindValue;
                     return true;
                 }
@@ -244,13 +249,15 @@ namespace Microsoft.CodeAnalysis.GenerateType
             protected override async Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(
                 object options,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var operations = SpecializedCollections.EmptyEnumerable<CodeActionOperation>();
 
                 if (
                     options is GenerateTypeOptionsResult generateTypeOptions
                     && !generateTypeOptions.IsCancelled
-                ) {
+                )
+                {
                     var semanticDocument = await SemanticDocument.CreateAsync(
                             _document,
                             cancellationToken

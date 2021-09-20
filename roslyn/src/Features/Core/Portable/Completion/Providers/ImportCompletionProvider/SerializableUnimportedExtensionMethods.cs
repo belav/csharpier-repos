@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             bool isPartialResult,
             int getSymbolsTicks,
             int createItemsTicks
-        ) {
+        )
+        {
             CompletionItems = completionItems;
             IsPartialResult = isPartialResult;
             GetSymbolsTicks = getSymbolsTicks;

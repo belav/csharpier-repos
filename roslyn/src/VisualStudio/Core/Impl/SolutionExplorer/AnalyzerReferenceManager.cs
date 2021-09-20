@@ -30,7 +30,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         public AnalyzerReferenceManager(
             [Import(typeof(SVsServiceProvider))] IServiceProvider serviceProvider,
             AnalyzerItemsTracker analyzerItemsTracker
-        ) {
+        )
+        {
             _serviceProvider = serviceProvider;
             _tracker = analyzerItemsTracker;
         }

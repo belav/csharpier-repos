@@ -50,7 +50,8 @@ namespace Microsoft.CodeAnalysis.Remote
             IServiceProvider serviceProvider,
             Stream stream,
             IEnumerable<JsonConverter>? jsonConverters = null
-        ) {
+        )
+        {
             InstanceId = Interlocked.Add(ref s_instanceId, 1);
 
             TestData = (RemoteHostTestData?)serviceProvider.GetService(typeof(RemoteHostTestData));
@@ -93,7 +94,8 @@ namespace Microsoft.CodeAnalysis.Remote
         protected Task<Solution> GetSolutionAsync(
             PinnedSolutionInfo solutionInfo,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var workspace = GetWorkspace();
             var assetProvider = workspace.CreateAssetProvider(
                 solutionInfo,
@@ -113,7 +115,8 @@ namespace Microsoft.CodeAnalysis.Remote
         internal Task<Solution> GetSolutionImplAsync(
             JObject solutionInfo,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var reader = solutionInfo.CreateReader();
             var serializer = JsonSerializer.Create(
                 new JsonSerializerSettings()
@@ -130,7 +133,8 @@ namespace Microsoft.CodeAnalysis.Remote
         protected async Task<T> RunServiceAsync<T>(
             Func<Task<T>> callAsync,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             WorkspaceManager.SolutionAssetCache.UpdateLastActivityTime();
 
             try
@@ -147,7 +151,8 @@ namespace Microsoft.CodeAnalysis.Remote
         protected async Task RunServiceAsync(
             Func<Task> callAsync,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             WorkspaceManager.SolutionAssetCache.UpdateLastActivityTime();
 
             try

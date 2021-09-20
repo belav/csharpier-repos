@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.ModRewrite
             int operation,
             string variable,
             int conditionType
-        ) {
+        )
+        {
             var results = new ConditionPatternParser().ParseActionCondition(condition);
 
             var expected = new ParsedModRewriteInput
@@ -62,7 +63,8 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.ModRewrite
             string condition,
             int operation,
             int cond
-        ) {
+        )
+        {
             var results = new ConditionPatternParser().ParseActionCondition(condition);
 
             var expected = new ParsedModRewriteInput
@@ -88,7 +90,8 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.ModRewrite
             string condition,
             int operation,
             int cond
-        ) {
+        )
+        {
             var results = new ConditionPatternParser().ParseActionCondition(condition);
 
             var expected = new ParsedModRewriteInput
@@ -112,7 +115,8 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.ModRewrite
             int operation,
             string variable,
             int cond
-        ) {
+        )
+        {
             var results = new ConditionPatternParser().ParseActionCondition(condition);
 
             var expected = new ParsedModRewriteInput
@@ -141,7 +145,8 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.ModRewrite
         public void ConditionPatternParser_AssertBadInputThrowsFormatException(
             string input,
             string expected
-        ) {
+        )
+        {
             var ex = Assert.Throws<FormatException>(
                 () => new ConditionPatternParser().ParseActionCondition(input)
             );
@@ -155,7 +160,8 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.ModRewrite
                 || i1.ConditionType != i2.ConditionType
                 || i1.Operand != i2.Operand
                 || i1.Invert != i2.Invert
-            ) {
+            )
+            {
                 return false;
             }
             return true;

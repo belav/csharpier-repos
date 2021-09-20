@@ -65,7 +65,8 @@ namespace System.Linq.Parallel
             IPartitionedStreamRecipient<TSource> recipient,
             bool preferStriping,
             QuerySettings settings
-        ) {
+        )
+        {
             // If the child OOP index is not correct, reindex.
             int partitionCount = inputStream.PartitionCount;
 
@@ -149,7 +150,8 @@ namespace System.Linq.Parallel
                 LimitsParallelism
                 && SpecifiedQuerySettings.WithDefaults().ExecutionMode!.Value
                     != ParallelExecutionMode.ForceParallelism
-            ) {
+            )
+            {
                 CancellationState cancelState = SpecifiedQuerySettings.CancellationState;
                 if (withDefaultValue)
                 {
@@ -214,7 +216,8 @@ namespace System.Linq.Parallel
                 int index,
                 Shared<bool> resultFoundFlag,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Debug.Assert(source != null);
                 Debug.Assert(index >= 0);
                 Debug.Assert(resultFoundFlag != null);
@@ -233,7 +236,8 @@ namespace System.Linq.Parallel
             internal override bool MoveNext(
                 [MaybeNullWhen(false), AllowNull] ref TSource currentElement,
                 ref int currentKey
-            ) {
+            )
+            {
                 // Just walk the enumerator until we've found the element.
                 int i = 0;
                 while (_source.MoveNext(ref currentElement!, ref currentKey))

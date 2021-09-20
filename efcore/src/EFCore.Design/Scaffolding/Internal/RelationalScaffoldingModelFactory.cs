@@ -60,7 +60,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             IScaffoldingTypeMapper scaffoldingTypeMapper,
             LoggingDefinitions loggingDefinitions,
             IModelRuntimeInitializer modelRuntimeInitializer
-        ) {
+        )
+        {
             Check.NotNull(reporter, nameof(reporter));
             Check.NotNull(candidateNamingService, nameof(candidateNamingService));
             Check.NotNull(pluralizer, nameof(pluralizer));
@@ -87,7 +88,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         public virtual IModel Create(
             DatabaseModel databaseModel,
             ModelReverseEngineerOptions options
-        ) {
+        )
+        {
             Check.NotNull(databaseModel, nameof(databaseModel));
             Check.NotNull(options, nameof(options));
 
@@ -194,7 +196,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         protected virtual ModelBuilder VisitDatabaseModel(
             ModelBuilder modelBuilder,
             DatabaseModel databaseModel
-        ) {
+        )
+        {
             Check.NotNull(modelBuilder, nameof(modelBuilder));
             Check.NotNull(databaseModel, nameof(databaseModel));
 
@@ -234,7 +237,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         protected virtual ModelBuilder VisitSequences(
             ModelBuilder modelBuilder,
             ICollection<DatabaseSequence> sequences
-        ) {
+        )
+        {
             Check.NotNull(modelBuilder, nameof(modelBuilder));
             Check.NotNull(sequences, nameof(sequences));
 
@@ -255,7 +259,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         protected virtual SequenceBuilder? VisitSequence(
             ModelBuilder modelBuilder,
             DatabaseSequence sequence
-        ) {
+        )
+        {
             Check.NotNull(modelBuilder, nameof(modelBuilder));
             Check.NotNull(sequence, nameof(sequence));
 
@@ -325,7 +330,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         protected virtual ModelBuilder VisitTables(
             ModelBuilder modelBuilder,
             ICollection<DatabaseTable> tables
-        ) {
+        )
+        {
             Check.NotNull(modelBuilder, nameof(modelBuilder));
             Check.NotNull(tables, nameof(tables));
 
@@ -346,7 +352,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         protected virtual EntityTypeBuilder? VisitTable(
             ModelBuilder modelBuilder,
             DatabaseTable table
-        ) {
+        )
+        {
             Check.NotNull(modelBuilder, nameof(modelBuilder));
             Check.NotNull(table, nameof(table));
 
@@ -412,7 +419,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         protected virtual EntityTypeBuilder VisitColumns(
             EntityTypeBuilder builder,
             ICollection<DatabaseColumn> columns
-        ) {
+        )
+        {
             Check.NotNull(builder, nameof(builder));
             Check.NotNull(columns, nameof(columns));
 
@@ -433,7 +441,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         protected virtual PropertyBuilder? VisitColumn(
             EntityTypeBuilder builder,
             DatabaseColumn column
-        ) {
+        )
+        {
             Check.NotNull(builder, nameof(builder));
             Check.NotNull(column, nameof(column));
 
@@ -571,7 +580,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         protected virtual KeyBuilder? VisitPrimaryKey(
             EntityTypeBuilder builder,
             DatabaseTable table
-        ) {
+        )
+        {
             Check.NotNull(builder, nameof(builder));
             Check.NotNull(table, nameof(table));
 
@@ -600,7 +610,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 primaryKey.Columns.Count == 1
                 && primaryKey.Columns[0].ValueGenerated == null
                 && primaryKey.Columns[0].DefaultValueSql == null
-            ) {
+            )
+            {
                 var property = builder.Metadata.FindProperty(
                     GetPropertyName(primaryKey.Columns[0])
                 );
@@ -619,7 +630,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             if (
                 !string.IsNullOrEmpty(primaryKey.Name)
                 && primaryKey.Name != keyBuilder.Metadata.GetDefaultName()
-            ) {
+            )
+            {
                 keyBuilder.HasName(primaryKey.Name);
             }
 
@@ -637,7 +649,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         protected virtual EntityTypeBuilder VisitUniqueConstraints(
             EntityTypeBuilder builder,
             ICollection<DatabaseUniqueConstraint> uniqueConstraints
-        ) {
+        )
+        {
             Check.NotNull(builder, nameof(builder));
             Check.NotNull(uniqueConstraints, nameof(uniqueConstraints));
 
@@ -658,7 +671,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         protected virtual IndexBuilder? VisitUniqueConstraint(
             EntityTypeBuilder builder,
             DatabaseUniqueConstraint uniqueConstraint
-        ) {
+        )
+        {
             Check.NotNull(builder, nameof(builder));
             Check.NotNull(uniqueConstraint, nameof(uniqueConstraint));
 
@@ -698,7 +712,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         protected virtual EntityTypeBuilder VisitIndexes(
             EntityTypeBuilder builder,
             ICollection<DatabaseIndex> indexes
-        ) {
+        )
+        {
             Check.NotNull(builder, nameof(builder));
             Check.NotNull(indexes, nameof(indexes));
 
@@ -764,7 +779,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         protected virtual ModelBuilder VisitForeignKeys(
             ModelBuilder modelBuilder,
             IList<DatabaseForeignKey> foreignKeys
-        ) {
+        )
+        {
             Check.NotNull(modelBuilder, nameof(modelBuilder));
             Check.NotNull(foreignKeys, nameof(foreignKeys));
 
@@ -779,7 +795,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             foreach (
                 var foreignKey in modelBuilder.Model.GetEntityTypes()
                     .SelectMany(et => et.GetForeignKeys())
-            ) {
+            )
+            {
                 AddNavigationProperties(foreignKey);
             }
 
@@ -795,7 +812,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         protected virtual IMutableForeignKey? VisitForeignKey(
             ModelBuilder modelBuilder,
             DatabaseForeignKey foreignKey
-        ) {
+        )
+        {
             Check.NotNull(modelBuilder, nameof(modelBuilder));
             Check.NotNull(foreignKey, nameof(foreignKey));
 
@@ -975,7 +993,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             if (
                 !string.IsNullOrEmpty(foreignKey.Name)
                 && foreignKey.Name != newForeignKey.GetDefaultName()
-            ) {
+            )
+            {
                 newForeignKey.SetConstraintName(foreignKey.Name);
             }
 
@@ -1067,7 +1086,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                     entityType,
                     out var existingIdentifiers
                 )
-            ) {
+            )
+            {
                 existingIdentifiers = new List<string> { entityType.Name };
                 existingIdentifiers.AddRange(entityType.GetProperties().Select(p => p.Name));
                 _entityTypeAndPropertyIdentifiers[entityType] = existingIdentifiers;
@@ -1100,7 +1120,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         private static void AssignOnDeleteAction(
             DatabaseForeignKey databaseForeignKey,
             IMutableForeignKey foreignKey
-        ) {
+        )
+        {
             Check.NotNull(databaseForeignKey, nameof(databaseForeignKey));
             Check.NotNull(foreignKey, nameof(foreignKey));
 
@@ -1124,7 +1145,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         private static string NavigationUniquifier(
             string proposedIdentifier,
             ICollection<string>? existingIdentifiers
-        ) {
+        )
+        {
             if (existingIdentifiers?.Contains(proposedIdentifier) != true)
             {
                 return proposedIdentifier;

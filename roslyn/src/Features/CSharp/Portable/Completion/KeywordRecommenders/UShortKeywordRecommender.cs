@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             int position,
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxTree = context.SyntaxTree;
             return context.IsAnyExpressionContext
                 || context.IsDefiniteCastTypeContext

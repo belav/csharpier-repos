@@ -128,7 +128,8 @@ internal static partial class Interop
 
         public static System.Runtime.InteropServices.JavaScript.Function? CompileFunction(
             string snippet
-        ) {
+        )
+        {
             object res = CompileFunction(snippet, out int exception);
             if (exception != 0)
                 throw new JSException((string)res);

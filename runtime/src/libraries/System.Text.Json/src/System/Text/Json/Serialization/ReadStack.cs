@@ -294,7 +294,8 @@ namespace System.Text.Json
                         frame.ObjectState == StackFrameObjectState.None
                         || frame.ObjectState == StackFrameObjectState.CreatedObject
                         || frame.ObjectState == StackFrameObjectState.ReadElements
-                    ) {
+                    )
+                    {
                         sb.Append('[');
                         sb.Append(GetCount(enumerable));
                         sb.Append(']');

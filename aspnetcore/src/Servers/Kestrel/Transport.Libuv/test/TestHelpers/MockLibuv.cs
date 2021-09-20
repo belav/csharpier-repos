@@ -155,7 +155,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests.TestHelpers
             UvStreamHandle handle,
             uv_alloc_cb allocCallback,
             uv_read_cb readCallback
-        ) {
+        )
+        {
             AllocCallback = allocCallback;
             ReadCallback = readCallback;
             return 0;
@@ -167,7 +168,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests.TestHelpers
             uv_buf_t* bufs,
             int nbufs,
             uv_write_cb cb
-        ) {
+        )
+        {
             return OnWrite(handle, nbufs, status => cb(req.InternalGetHandle(), status));
         }
     }

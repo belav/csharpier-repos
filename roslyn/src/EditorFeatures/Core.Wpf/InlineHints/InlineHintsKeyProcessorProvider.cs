@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
             public InlineHintsKeyProcessor(
                 IGlobalOptionService globalOptionService,
                 IWpfTextView view
-            ) {
+            )
+            {
                 _globalOptionService = globalOptionService;
                 _view = view;
                 _view.Closed += OnViewClosed;

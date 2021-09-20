@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Rewrite.PatternSegments
             RewriteContext context,
             BackReferenceCollection? ruleBackReferences,
             BackReferenceCollection? conditionBackReferences
-        ) {
+        )
+        {
             return context.HttpContext.Request.IsHttps ? "ON" : "OFF";
         }
     }

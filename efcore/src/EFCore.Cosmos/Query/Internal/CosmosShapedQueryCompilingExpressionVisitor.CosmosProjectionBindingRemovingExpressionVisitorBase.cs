@@ -80,7 +80,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             public CosmosProjectionBindingRemovingExpressionVisitorBase(
                 ParameterExpression jObjectParameter,
                 bool trackQueryResults
-            ) {
+            )
+            {
                 _jObjectParameter = jObjectParameter;
                 _trackQueryResults = trackQueryResults;
             }
@@ -96,7 +97,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                         if (
                             parameterExpression.Type == typeof(JObject)
                             || parameterExpression.Type == typeof(JArray)
-                        ) {
+                        )
+                        {
                             string storeName = null;
 
                             // Values injected by JObjectInjectingExpressionVisitor
@@ -105,7 +107,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                             if (
                                 projectionExpression
                                 is ProjectionBindingExpression projectionBindingExpression
-                            ) {
+                            )
+                            {
                                 var projection = GetProjection(projectionBindingExpression);
                                 projectionExpression = projection.Expression;
                                 storeName = projection.Alias;
@@ -113,7 +116,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                             else if (
                                 projectionExpression is UnaryExpression convertExpression
                                 && convertExpression.NodeType == ExpressionType.Convert
-                            ) {
+                            )
+                            {
                                 // Unwrap EntityProjectionExpression when the root entity is not projected
                                 projectionExpression =
                                     ((UnaryExpression)convertExpression.Operand).Operand;
@@ -123,7 +127,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                             if (
                                 projectionExpression
                                 is ObjectArrayProjectionExpression objectArrayProjectionExpression
-                            ) {
+                            )
+                            {
                                 innerAccessExpression =
                                     objectArrayProjectionExpression.AccessExpression;
                                 _projectionBindings[objectArrayProjectionExpression] =
@@ -179,7 +184,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                             if (
                                 newExpression.Arguments[0]
                                 is ProjectionBindingExpression projectionBindingExpression
-                            ) {
+                            )
+                            {
                                 var projection = GetProjection(projectionBindingExpression);
                                 entityProjectionExpression =
                                     (EntityProjectionExpression)projection.Expression;
@@ -216,7 +222,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                         binaryExpression.Left is MemberExpression memberExpression
                         && memberExpression.Member is FieldInfo fieldInfo
                         && fieldInfo.IsInitOnly
-                    ) {
+                    )
+                    {
                         return memberExpression.Assign(Visit(binaryExpression.Right));
                     }
                 }
@@ -235,13 +242,15 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 if (
                     genericMethod
                     == EntityFrameworkCore.Infrastructure.ExpressionExtensions.ValueBufferTryReadValueMethod
-                ) {
+                )
+                {
                     var property = methodCallExpression.Arguments[2].GetConstantValue<IProperty>();
                     Expression innerExpression;
                     if (
                         methodCallExpression.Arguments[0]
                         is ProjectionBindingExpression projectionBindingExpression
-                    ) {
+                    )
+                    {
                         var projection = GetProjection(projectionBindingExpression);
 
                         innerExpression = Expression.Convert(
@@ -269,7 +278,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                     method.DeclaringType == typeof(Enumerable)
                     && method.Name == nameof(Enumerable.Select)
                     && genericMethod == EnumerableMethods.Select
-                ) {
+                )
+                {
                     var lambda = (LambdaExpression)methodCallExpression.Arguments[1];
                     if (lambda.Body is IncludeExpression includeExpression)
                     {
@@ -277,7 +287,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                             !(includeExpression.Navigation is INavigation navigation)
                             || navigation.IsOnDependent
                             || navigation.ForeignKey.DeclaringEntityType.IsDocumentRoot()
-                        ) {
+                        )
+                        {
                             throw new InvalidOperationException(
                                 CosmosStrings.NonEmbeddedIncludeNotSupported(
                                     includeExpression.Navigation
@@ -391,7 +402,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                             !(includeExpression.Navigation is INavigation navigation)
                             || navigation.IsOnDependent
                             || navigation.ForeignKey.DeclaringEntityType.IsDocumentRoot()
-                        ) {
+                        )
+                        {
                             throw new InvalidOperationException(
                                 CosmosStrings.NonEmbeddedIncludeNotSupported(
                                     includeExpression.Navigation
@@ -468,7 +480,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 IncludeExpression includeExpression,
                 BlockExpression shaperBlock,
                 Expression instanceVariable
-            ) {
+            )
+            {
                 // Cosmos does not support Includes for ISkipNavigation
                 var navigation = (INavigation)includeExpression.Navigation;
                 var includeMethod = navigation.IsCollection
@@ -533,7 +546,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 Action<TIncludingEntity, TIncludedEntity> fixup,
                 Action<TIncludingEntity> _,
                 bool __
-            ) {
+            )
+            {
                 if (entity == null || !navigation.DeclaringEntityType.IsAssignableFrom(entityType))
                 {
                     return;
@@ -577,7 +591,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 Action<TIncludingEntity, TIncludedEntity> fixup,
                 Action<TIncludingEntity> initialize,
                 bool setLoaded
-            ) {
+            )
+            {
                 if (entity == null || !navigation.DeclaringEntityType.IsAssignableFrom(entityType))
                 {
                     return;
@@ -630,7 +645,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 Type relatedEntityType,
                 INavigation navigation,
                 INavigation inverseNavigation
-            ) {
+            )
+            {
                 var entityParameter = Expression.Parameter(entityType);
                 var relatedEntityParameter = Expression.Parameter(relatedEntityType);
                 var expressions = new List<Expression>
@@ -726,7 +742,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             private static TCollection PopulateCollection<TEntity, TCollection>(
                 IClrCollectionAccessor accessor,
                 IEnumerable<TEntity> entities
-            ) {
+            )
+            {
                 // TODO: throw a better exception for non ICollection navigations
                 var collection = (ICollection<TEntity>)accessor.Create();
                 foreach (var entity in entities)
@@ -755,7 +772,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 Expression jObjectExpression,
                 IProperty property,
                 Type type
-            ) {
+            )
+            {
                 if (property.Name == StoreKeyConvention.JObjectPropertyName)
                 {
                     return _projectionBindings[jObjectExpression];
@@ -798,12 +816,14 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                             }
                             else if (
                                 jObjectExpression is RootReferenceExpression rootReferenceExpression
-                            ) {
+                            )
+                            {
                                 ownerJObjectExpression = rootReferenceExpression;
                             }
                             else if (
                                 jObjectExpression is ObjectAccessExpression objectAccessExpression
-                            ) {
+                            )
+                            {
                                 ownerJObjectExpression = objectAccessExpression.AccessExpression;
                             }
 
@@ -837,7 +857,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 string storeName,
                 Type type,
                 CoreTypeMapping typeMapping = null
-            ) {
+            )
+            {
                 Check.DebugAssert(type.IsNullableType(), "Must read nullable type from JObject.");
 
                 var innerExpression = jObjectExpression;

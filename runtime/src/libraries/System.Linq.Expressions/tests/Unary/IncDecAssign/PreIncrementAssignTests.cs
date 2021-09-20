@@ -32,7 +32,8 @@ namespace System.Linq.Expressions.Tests
             object value,
             object result,
             bool useInterpreter
-        ) {
+        )
+        {
             ParameterExpression variable = Expression.Variable(type);
             BlockExpression block = Expression.Block(
                 new[] { variable },
@@ -71,7 +72,8 @@ namespace System.Linq.Expressions.Tests
             object value,
             object result,
             bool useInterpreter
-        ) {
+        )
+        {
             ParameterExpression variable = Expression.Variable(type);
             LabelTarget target = Expression.Label(type);
             BlockExpression block = Expression.Block(

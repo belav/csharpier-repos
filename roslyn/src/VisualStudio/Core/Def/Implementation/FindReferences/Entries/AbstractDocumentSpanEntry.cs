@@ -60,7 +60,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 DocumentSpan documentSpan,
                 SourceText sourceText,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var service = documentSpan.Document.Services.GetService<ISpanMappingService>();
                 if (service == null)
                 {

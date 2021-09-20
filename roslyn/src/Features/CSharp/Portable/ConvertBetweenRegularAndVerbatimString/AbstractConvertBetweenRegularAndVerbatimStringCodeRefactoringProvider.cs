@@ -96,7 +96,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertBetweenRegularAndVerbatimString
             Document document,
             TStringExpressionSyntax stringExpression,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var _ = PooledStringBuilder.GetInstance(out var sb);
 
             var charService = document.GetRequiredLanguageService<IVirtualCharLanguageService>();
@@ -136,7 +137,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertBetweenRegularAndVerbatimString
             IVirtualCharService charService,
             StringBuilder sb,
             SyntaxToken stringToken
-        ) {
+        )
+        {
             var isInterpolation = IsInterpolation;
             var chars = charService.TryConvertToVirtualChars(stringToken);
 
@@ -170,7 +172,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertBetweenRegularAndVerbatimString
             IVirtualCharService charService,
             StringBuilder sb,
             SyntaxToken stringToken
-        ) {
+        )
+        {
             var isInterpolation = IsInterpolation;
             var chars = charService.TryConvertToVirtualChars(stringToken);
 
@@ -195,7 +198,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertBetweenRegularAndVerbatimString
         private static bool ContainsSimpleEscape(
             IVirtualCharService charService,
             ArrayBuilder<SyntaxToken> subTokens
-        ) {
+        )
+        {
             foreach (var subToken in subTokens)
             {
                 var chars = charService.TryConvertToVirtualChars(subToken);

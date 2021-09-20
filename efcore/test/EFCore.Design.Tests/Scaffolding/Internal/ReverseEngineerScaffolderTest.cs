@@ -257,7 +257,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             public DatabaseModel Create(
                 string connectionString,
                 DatabaseModelFactoryOptions options
-            ) {
+            )
+            {
                 ConnectionString = connectionString;
                 var databaseModel = new DatabaseModel();
                 if (ScaffoldedConnectionString != null)

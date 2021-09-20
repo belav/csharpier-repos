@@ -35,7 +35,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
             string message,
             bool allowCancel,
             bool showProgress
-        ) {
+        )
+        {
             _title = title;
             _message = message;
             _allowCancel = allowCancel;
@@ -52,7 +53,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
         private IVsThreadedWaitDialog3 CreateDialog(
             IVsThreadedWaitDialogFactory dialogFactory,
             bool showProgress
-        ) {
+        )
+        {
             Marshal.ThrowExceptionForHR(dialogFactory.CreateInstance(out var dialog2));
             Contract.ThrowIfNull(dialog2);
 

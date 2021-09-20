@@ -27,7 +27,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             AbstractCodeElement parent,
             string name,
             int ordinal
-        ) {
+        )
+        {
             var newElement = new CodeAttribute(state, fileCodeModel, parent, name, ordinal);
             return (EnvDTE.CodeAttribute)ComAggregate.CreateAggregatedObject(newElement);
         }
@@ -74,7 +75,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
                     _ordinal,
                     out var attributeNode
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -124,7 +126,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             string value,
             object nameObj,
             object position
-        ) {
+        )
+        {
             string name;
 
             if (nameObj == Type.Missing || nameObj == null)

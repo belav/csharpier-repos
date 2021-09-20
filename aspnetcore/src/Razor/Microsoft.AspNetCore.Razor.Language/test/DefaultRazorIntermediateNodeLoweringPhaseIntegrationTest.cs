@@ -556,7 +556,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             Action<RazorProjectEngineBuilder> builder = null,
             IEnumerable<TagHelperDescriptor> tagHelpers = null,
             bool designTime = false
-        ) {
+        )
+        {
             tagHelpers = tagHelpers ?? new TagHelperDescriptor[0];
 
             Action<RazorProjectEngineBuilder> configureEngine = b =>
@@ -593,7 +594,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             string typeName,
             string assemblyName,
             IEnumerable<Action<BoundAttributeDescriptorBuilder>> attributes = null
-        ) {
+        )
+        {
             var builder = TagHelperDescriptorBuilder.Create(typeName, assemblyName);
             builder.TypeName(typeName);
 

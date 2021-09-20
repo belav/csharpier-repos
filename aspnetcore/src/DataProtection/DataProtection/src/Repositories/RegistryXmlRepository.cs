@@ -93,7 +93,8 @@ namespace Microsoft.AspNetCore.DataProtection.Repositories
                         RegistryHive.LocalMachine,
                         registryView
                     )
-                ) {
+                )
+                {
                     // Even though this is in HKLM, WAS ensures that applications hosted in IIS are properly isolated.
                     // See APP_POOL::EnsureSharedMachineKeyStorage in WAS source for more info.
                     // The version number will need to change if IIS hosts Core CLR directly.

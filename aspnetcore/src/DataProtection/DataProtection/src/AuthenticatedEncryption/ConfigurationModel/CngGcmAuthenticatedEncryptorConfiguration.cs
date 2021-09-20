@@ -62,7 +62,8 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.Configurat
 
         IAuthenticatedEncryptorDescriptor IInternalAlgorithmConfiguration.CreateDescriptorFromSecret(
             ISecret secret
-        ) {
+        )
+        {
             return new CngGcmAuthenticatedEncryptorDescriptor(this, secret);
         }
 
@@ -80,7 +81,8 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.Configurat
                     Secret.Random(512 / 8),
                     this
                 )
-            ) {
+            )
+            {
                 encryptor.PerformSelfTest();
             }
         }

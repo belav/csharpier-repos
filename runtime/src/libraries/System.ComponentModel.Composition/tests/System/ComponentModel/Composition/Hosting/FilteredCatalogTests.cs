@@ -62,7 +62,8 @@ namespace System.ComponentModel.Composition.Hosting
                     originalCatalog,
                     p => p.Exports<IContract1>()
                 )
-            ) {
+            )
+            {
                 var parts = catalog.Parts;
                 Assert.Equal(2, parts.Count());
             }
@@ -96,7 +97,8 @@ namespace System.ComponentModel.Composition.Hosting
                     originalCatalog,
                     p => p.Exports<IContract1>()
                 )
-            ) {
+            )
+            {
                 var parts1 = catalog.GetExports<IContract1>();
                 Assert.Equal(2, parts1.Count());
 
@@ -118,7 +120,8 @@ namespace System.ComponentModel.Composition.Hosting
                     originalCatalog,
                     p => p.Exports<IContract1>()
                 ).IncludeDependents()
-            ) {
+            )
+            {
                 var parts1 = catalog.GetExports<IContract1>();
                 Assert.Equal(1, parts1.Count());
 
@@ -158,7 +161,8 @@ namespace System.ComponentModel.Composition.Hosting
                     originalCatalog,
                     p => p.Exports<IContract1>()
                 )
-            ) {
+            )
+            {
                 var c = catalog.Complement;
                 Assert.NotNull(c);
 
@@ -179,7 +183,8 @@ namespace System.ComponentModel.Composition.Hosting
                     originalCatalog,
                     p => p.Exports<IContract1>()
                 )
-            ) {
+            )
+            {
                 var c1 = catalog.Complement;
                 var c2 = catalog.Complement;
 
@@ -196,7 +201,8 @@ namespace System.ComponentModel.Composition.Hosting
                     originalCatalog,
                     p => p.Exports<IContract1>()
                 )
-            ) {
+            )
+            {
                 var c1 = catalog.Complement;
                 var c2 = c1.Complement;
 

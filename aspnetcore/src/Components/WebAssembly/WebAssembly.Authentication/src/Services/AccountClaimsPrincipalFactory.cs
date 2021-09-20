@@ -37,7 +37,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
         public virtual ValueTask<ClaimsPrincipal> CreateUserAsync(
             TAccount account,
             RemoteAuthenticationUserOptions options
-        ) {
+        )
+        {
             var identity =
                 account != null
                     ? new ClaimsIdentity(
@@ -60,7 +61,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
                             && element.ValueKind != JsonValueKind.Undefined
                             && element.ValueKind != JsonValueKind.Null
                         )
-                    ) {
+                    )
+                    {
                         identity.AddClaim(new Claim(name, value.ToString()));
                     }
                 }

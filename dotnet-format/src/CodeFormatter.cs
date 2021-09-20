@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.Tools
             ILogger logger,
             CancellationToken cancellationToken,
             string? binaryLogPath = null
-        ) {
+        )
+        {
             var logWorkspaceWarnings = formatOptions.LogLevel == LogLevel.Trace;
 
             logger.LogInformation(
@@ -168,7 +169,8 @@ namespace Microsoft.CodeAnalysis.Tools
         private static Workspace OpenFolderWorkspace(
             string workspacePath,
             SourceFileMatcher fileMatcher
-        ) {
+        )
+        {
             var folderWorkspace = FolderWorkspace.Create();
             folderWorkspace.OpenFolder(workspacePath, fileMatcher);
             return folderWorkspace;
@@ -183,12 +185,14 @@ namespace Microsoft.CodeAnalysis.Tools
             bool logWorkspaceWarnings,
             ILogger logger,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 requiresSemantics
                 && !noRestore
                 && await DotNetHelper.PerformRestoreAsync(solutionOrProjectPath, logger) != 0
-            ) {
+            )
+            {
                 throw new Exception("Restore operation failed.");
             }
 
@@ -209,7 +213,8 @@ namespace Microsoft.CodeAnalysis.Tools
             ILogger logger,
             List<FormattedFile> formattedFiles,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var formattedSolution = solution;
 
             for (var index = 0; index < s_codeFormatters.Length; index++)
@@ -240,7 +245,8 @@ namespace Microsoft.CodeAnalysis.Tools
             FormatOptions formatOptions,
             ILogger logger,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var totalFileCount = solution.Projects.Sum(project => project.DocumentIds.Count);
             var projectFileCount = 0;
 
@@ -264,7 +270,8 @@ namespace Microsoft.CodeAnalysis.Tools
                 if (
                     !string.IsNullOrEmpty(projectPath)
                     && !project.FilePath.Equals(projectPath, StringComparison.OrdinalIgnoreCase)
-                ) {
+                )
+                {
                     logger.LogDebug(Resources.Skipping_referenced_project_0, project.Name);
                     continue;
                 }
@@ -273,7 +280,8 @@ namespace Microsoft.CodeAnalysis.Tools
                 if (
                     project.Language != LanguageNames.CSharp
                     && project.Language != LanguageNames.VisualBasic
-                ) {
+                )
+                {
                     logger.LogWarning(
                         Resources.Could_not_format_0_Format_currently_supports_only_CSharp_and_Visual_Basic_projects,
                         project.FilePath
@@ -318,7 +326,8 @@ namespace Microsoft.CodeAnalysis.Tools
                                 cancellationToken
                             )
                             .ConfigureAwait(false)
-                    ) {
+                    )
+                    {
                         continue;
                     }
 
@@ -334,7 +343,8 @@ namespace Microsoft.CodeAnalysis.Tools
                             || GeneratedCodeUtilities.GetIsGeneratedCodeFromOptions(
                                 analyzerConfigOptions
                             ) != true
-                        ) {
+                        )
+                        {
                             documentsCoveredByEditorConfig.Add(document.Id);
                         }
                     }

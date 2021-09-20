@@ -38,11 +38,8 @@ namespace System.Xml.Tests
         private string _role;
         private Type _ofObjectToReturn;
 
-        internal CalledGetEntityEventArgs(
-            Uri absoluteUri,
-            string role,
-            Type ofObjectToReturn
-        ) : base()
+        internal CalledGetEntityEventArgs(Uri absoluteUri, string role, Type ofObjectToReturn)
+            : base()
         {
             _absoluteUri = absoluteUri;
             _role = role;

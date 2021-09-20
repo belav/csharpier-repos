@@ -102,7 +102,8 @@ namespace BuildBoss
             string configuration,
             string primarySolution,
             List<string> solutionFileNames
-        ) {
+        )
+        {
             var allGood = true;
             foreach (var solutionFileName in solutionFileNames)
             {
@@ -171,7 +172,8 @@ namespace BuildBoss
             string repositoryDirectory,
             string artifactsDirectory,
             string configuration
-        ) {
+        )
+        {
             var util = new PackageContentsChecker(
                 repositoryDirectory,
                 artifactsDirectory,
@@ -184,7 +186,8 @@ namespace BuildBoss
             string repositoryDirectory,
             string artifactsDirectory,
             string configuration
-        ) {
+        )
+        {
             var util = new OptProfCheckerUtil(
                 repositoryDirectory,
                 artifactsDirectory,

@@ -189,13 +189,11 @@ namespace Moq
 		/// <example>
 		/// <code>var mock = new Mock&lt;MyProvider&gt;(() => new MyProvider(someArgument, 25), MockBehavior.Loose);</code>
 		/// </example>
-        public Mock(
-            Expression<Func<T>> newExpression,
-            MockBehavior behavior = MockBehavior.Default
-        ) : this(
-            behavior,
-            Expressions.Visitors.ConstructorCallVisitor.ExtractArgumentValues(newExpression)
-        ) { }
+        public Mock(Expression<Func<T>> newExpression, MockBehavior behavior = MockBehavior.Default)
+            : this(
+                behavior,
+                Expressions.Visitors.ConstructorCallVisitor.ExtractArgumentValues(newExpression)
+            ) { }
 
         private static string CreateUniqueDefaultMockName()
         {
@@ -473,7 +471,8 @@ namespace Moq
 		/// </example>
         public ISetupGetter<T, TProperty> SetupGet<TProperty>(
             Expression<Func<T, TProperty>> expression
-        ) {
+        )
+        {
             var setup = Mock.SetupGet(this, expression, null);
             return new NonVoidSetupPhrase<T, TProperty>(setup);
         }
@@ -645,7 +644,8 @@ namespace Moq
         public Mock<T> SetupProperty<TProperty>(
             Expression<Func<T, TProperty>> property,
             TProperty initialValue
-        ) {
+        )
+        {
             Guard.NotNull(property, nameof(property));
 
             var pi = property.ToPropertyInfo();
@@ -681,7 +681,8 @@ namespace Moq
 		/// </summary>
         public ISetupSequentialResult<TResult> SetupSequence<TResult>(
             Expression<Func<T, TResult>> expression
-        ) {
+        )
+        {
             var setup = Mock.SetupSequence(this, expression);
             return new SetupSequencePhrase<TResult>(setup);
         }
@@ -909,7 +910,8 @@ namespace Moq
             Expression<Func<T, TResult>> expression,
             Times times,
             string failMessage
-        ) {
+        )
+        {
             Mock.Verify(this, expression, times, failMessage);
         }
 
@@ -968,7 +970,8 @@ namespace Moq
         public void VerifyGet<TProperty>(
             Expression<Func<T, TProperty>> expression,
             Func<Times> times
-        ) {
+        )
+        {
             VerifyGet(this, expression, times(), null);
         }
 
@@ -984,7 +987,8 @@ namespace Moq
         public void VerifyGet<TProperty>(
             Expression<Func<T, TProperty>> expression,
             string failMessage
-        ) {
+        )
+        {
             Mock.VerifyGet(this, expression, Times.AtLeastOnce(), failMessage);
         }
 
@@ -1004,7 +1008,8 @@ namespace Moq
             Expression<Func<T, TProperty>> expression,
             Times times,
             string failMessage
-        ) {
+        )
+        {
             Mock.VerifyGet(this, expression, times, failMessage);
         }
 
@@ -1024,7 +1029,8 @@ namespace Moq
             Expression<Func<T, TProperty>> expression,
             Func<Times> times,
             string failMessage
-        ) {
+        )
+        {
             VerifyGet(this, expression, times(), failMessage);
         }
 

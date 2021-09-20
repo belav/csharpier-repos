@@ -61,7 +61,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal ImmutableArray<TypeWithAnnotations> TypeArgumentsWithDefinitionUseSiteDiagnostics(
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             var result = TypeArgumentsWithAnnotationsNoUseSiteDiagnostics;
 
             foreach (var typeArgument in result)
@@ -75,7 +76,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal TypeWithAnnotations TypeArgumentWithDefinitionUseSiteDiagnostics(
             int index,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             var result = TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[index];
             result.Type.OriginalDefinition.AddUseSiteInfo(ref useSiteInfo);
             return result;
@@ -202,7 +204,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (
                     candidate.MethodKind == MethodKind.UserDefinedOperator
                     || candidate.MethodKind == MethodKind.Conversion
-                ) {
+                )
+                {
                     operators.Add(candidate);
                 }
             }
@@ -237,7 +240,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private ImmutableArray<MethodSymbol> GetConstructors(
             bool includeInstance,
             bool includeStatic
-        ) {
+        )
+        {
             Debug.Assert(includeInstance || includeStatic);
 
             ImmutableArray<Symbol> instanceCandidates = includeInstance
@@ -320,7 +324,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             string nameOpt,
             int arity,
             LookupOptions options
-        ) {
+        )
+        {
             if (this.MightContainExtensionMethods)
             {
                 DoGetExtensionMethods(methods, nameOpt, arity, options);
@@ -332,7 +337,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             string nameOpt,
             int arity,
             LookupOptions options
-        ) {
+        )
+        {
             var members =
                 nameOpt == null
                     ? this.GetMembersUnordered()
@@ -349,7 +355,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             (options & LookupOptions.AllMethodsOnArityZero) != 0
                             || arity == method.Arity
                         )
-                    ) {
+                    )
+                    {
                         var thisParam = method.Parameters.First();
 
                         if (
@@ -358,7 +365,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 thisParam.RefKind == RefKind.In
                                 && thisParam.Type.TypeKind != TypeKind.Struct
                             )
-                        ) {
+                        )
+                        {
                             // For ref and ref-readonly extension methods, receivers need to be of the correct types to be considered in lookup
                             continue;
                         }
@@ -403,7 +411,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override ManagedKind GetManagedKind(
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             // CONSIDER: we could cache this, but it's only expensive for non-special struct types
             // that are pointed to.  For now, only cache on SourceMemberContainerSymbol since it fits
             // nicely into the flags variable.
@@ -585,7 +594,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override TResult Accept<TArgument, TResult>(
             CSharpSymbolVisitor<TArgument, TResult> visitor,
             TArgument argument
-        ) {
+        )
+        {
             return visitor.VisitNamedType(this, argument);
         }
 
@@ -698,7 +708,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         | TypeCompareKind.IgnoreTupleNames
                     )
                 ) == 0
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -724,7 +735,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (
                 (object)this.ContainingType != null
                 && !this.ContainingType.Equals(other.ContainingType, comparison)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -756,7 +768,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         | TypeCompareKind.IgnoreTupleNames
                     )
                 ) == 0
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -807,7 +820,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             foreach (
                 TypeWithAnnotations arg in this.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
-            ) {
+            )
+            {
                 arg.AddNullableTransforms(transforms);
             }
         }
@@ -817,7 +831,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ImmutableArray<byte> transforms,
             ref int position,
             out TypeSymbol result
-        ) {
+        )
+        {
             if (!IsGenericType)
             {
                 result = this;
@@ -839,7 +854,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         ref position,
                         out newTypeArgument
                     )
-                ) {
+                )
+                {
                     allTypeArguments.Free();
                     result = this;
                     return false;
@@ -858,7 +874,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override TypeSymbol SetNullabilityForReferenceTypes(
             Func<TypeWithAnnotations, TypeWithAnnotations> transform
-        ) {
+        )
+        {
             if (!IsGenericType)
             {
                 return this;
@@ -888,7 +905,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal NamedTypeSymbol WithTypeArguments(
             ImmutableArray<TypeWithAnnotations> allTypeArguments
-        ) {
+        )
+        {
             var definition = this.OriginalDefinition;
             TypeMap substitution = new TypeMap(definition.GetAllTypeParameters(), allTypeArguments);
             return substitution.SubstituteNamedType(definition).WithTupleDataFrom(this);
@@ -951,7 +969,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             VarianceKind variance,
             ArrayBuilder<TypeParameterSymbol> allTypeParameters,
             ArrayBuilder<TypeWithAnnotations> allTypeArguments
-        ) {
+        )
+        {
             Debug.Assert(typeA.IsGenericType);
             Debug.Assert(
                 typeA.Equals(
@@ -1010,7 +1029,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private static VarianceKind GetTypeArgumentVariance(
             VarianceKind typeVariance,
             VarianceKind typeParameterVariance
-        ) {
+        )
+        {
             switch (typeVariance)
             {
                 case VarianceKind.In:
@@ -1094,7 +1114,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private NamedTypeSymbol ConstructWithoutModifiers(
             ImmutableArray<TypeSymbol> typeArguments,
             bool unbound
-        ) {
+        )
+        {
             ImmutableArray<TypeWithAnnotations> modifiedArguments;
 
             if (typeArguments.IsDefault)
@@ -1117,7 +1138,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal NamedTypeSymbol Construct(
             ImmutableArray<TypeWithAnnotations> typeArguments,
             bool unbound
-        ) {
+        )
+        {
             if (!ReferenceEquals(this, ConstructedFrom))
             {
                 throw new InvalidOperationException(
@@ -1160,7 +1182,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     this.TypeParameters,
                     typeArguments
                 )
-            ) {
+            )
+            {
                 return this;
             }
 
@@ -1170,7 +1193,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         protected virtual NamedTypeSymbol ConstructCore(
             ImmutableArray<TypeWithAnnotations> typeArguments,
             bool unbound
-        ) {
+        )
+        {
             return new ConstructedNamedTypeSymbol(this, typeArguments, unbound);
         }
 
@@ -1185,7 +1209,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     var current = this;
                     !ReferenceEquals(current, null);
                     current = current.ContainingType
-                ) {
+                )
+                {
                     if (current.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics.Length != 0)
                     {
                         return true;
@@ -1213,7 +1238,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal void GetAllTypeArguments(
             ArrayBuilder<TypeSymbol> builder,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             var outer = ContainingType;
             if (!ReferenceEquals(outer, null))
             {
@@ -1228,7 +1254,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal ImmutableArray<TypeWithAnnotations> GetAllTypeArguments(
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             ArrayBuilder<TypeWithAnnotations> builder =
                 ArrayBuilder<TypeWithAnnotations>.GetInstance();
             GetAllTypeArguments(builder, ref useSiteInfo);
@@ -1238,7 +1265,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal void GetAllTypeArguments(
             ArrayBuilder<TypeWithAnnotations> builder,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             var outer = ContainingType;
             if (!ReferenceEquals(outer, null))
             {
@@ -1250,7 +1278,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal void GetAllTypeArgumentsNoUseSiteDiagnostics(
             ArrayBuilder<TypeWithAnnotations> builder
-        ) {
+        )
+        {
             ContainingType?.GetAllTypeArgumentsNoUseSiteDiagnostics(builder);
             builder.AddRange(TypeArgumentsWithAnnotationsNoUseSiteDiagnostics);
         }
@@ -1334,17 +1363,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         private bool DeriveUseSiteDiagnosticFromTypeArguments(
             ref UseSiteInfo<AssemblySymbol> result
-        ) {
+        )
+        {
             NamedTypeSymbol currentType = this;
 
             do
             {
                 foreach (
                     TypeWithAnnotations arg in currentType.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
-                ) {
+                )
+                {
                     if (
                         DeriveUseSiteInfoFromType(ref result, arg, AllowedRequiredModifierType.None)
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }
@@ -1376,7 +1408,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         this,
                         ref unificationCheckedTypes
                     )
-                ) {
+                )
+                {
                     return result;
                 }
             }
@@ -1405,7 +1438,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ref DiagnosticInfo result,
             Symbol owner,
             ref HashSet<TypeSymbol> checkedTypes
-        ) {
+        )
+        {
             if (!this.MarkCheckedIfNecessary(ref checkedTypes))
             {
                 return false;
@@ -1434,7 +1468,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     owner,
                     ref checkedTypes
                 )
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -1613,7 +1648,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 && ContainingNamespace.ContainingNamespace?.IsGlobalNamespace == true
                 && Name == ValueTupleTypeName
                 && ContainingNamespace.Name == MetadataHelpers.SystemString
-            ) {
+            )
+            {
                 int arity = Arity;
 
                 if (arity >= 0 && arity < ValueTupleRestPosition)
@@ -1652,7 +1688,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         && ((NamedTypeSymbol)typeToCheck).IsTupleTypeOfCardinality(
                             out tupleCardinality
                         )
-                    ) {
+                    )
+                    {
                         Debug.Assert(tupleCardinality < ValueTupleRestPosition);
                         tupleCardinality += (ValueTupleRestPosition - 1) * levelsOfNesting;
                         return true;
@@ -1685,7 +1722,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         protected override ITypeSymbol CreateITypeSymbol(
             CodeAnalysis.NullableAnnotation nullableAnnotation
-        ) {
+        )
+        {
             Debug.Assert(nullableAnnotation != DefaultNullableAnnotation);
             return new PublicModel.NonErrorNamedTypeSymbol(this, nullableAnnotation);
         }

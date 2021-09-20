@@ -295,7 +295,8 @@ namespace System.Web.Http.Results
         private static RedirectResult CreateProductUnderTest(
             Uri location,
             HttpRequestMessage request
-        ) {
+        )
+        {
             return new RedirectResult(location, request);
         }
 

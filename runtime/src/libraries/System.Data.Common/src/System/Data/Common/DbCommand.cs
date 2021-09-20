@@ -165,7 +165,8 @@ namespace System.Data.Common
         protected virtual Task<DbDataReader> ExecuteDbDataReaderAsync(
             CommandBehavior behavior,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (cancellationToken.IsCancellationRequested)
             {
                 return ADP.CreatedTaskWithCancellation<DbDataReader>();

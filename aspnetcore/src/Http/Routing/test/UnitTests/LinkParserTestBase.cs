@@ -31,7 +31,8 @@ namespace Microsoft.AspNetCore.Routing
         private protected DefaultLinkParser CreateLinkParser(
             Action<IServiceCollection> configureServices,
             params Endpoint[] endpoints
-        ) {
+        )
+        {
             return CreateLinkParser(
                 configureServices,
                 new[] { new DefaultEndpointDataSource(endpoints ?? Array.Empty<Endpoint>()) }
@@ -46,7 +47,8 @@ namespace Microsoft.AspNetCore.Routing
         private protected DefaultLinkParser CreateLinkParser(
             Action<IServiceCollection> configureServices,
             EndpointDataSource[] dataSources
-        ) {
+        )
+        {
             var services = GetBasicServices();
             AddAdditionalServices(services);
             configureServices?.Invoke(services);

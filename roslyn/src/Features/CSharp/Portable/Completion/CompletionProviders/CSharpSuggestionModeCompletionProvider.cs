@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             TextSpan itemSpan,
             CompletionTrigger trigger,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (trigger.Kind != CompletionTriggerKind.Snippets)
             {
                 var tree = await document.GetRequiredSyntaxTreeAsync(cancellationToken)
@@ -63,7 +64,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                         typeInferrer,
                         cancellationToken
                     )
-                ) {
+                )
+                {
                     return CreateSuggestionModeItem(
                         CSharpFeaturesResources.lambda_expression,
                         CSharpFeaturesResources.Autoselect_disabled_due_to_potential_lambda_declaration
@@ -80,7 +82,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     IsPotentialPatternVariableDeclaration(
                         tree.FindTokenOnLeftOfPosition(position, cancellationToken)
                     )
-                ) {
+                )
+                {
                     return CreateSuggestionModeItem(
                         CSharpFeaturesResources.pattern_variable,
                         CSharpFeaturesResources.Autoselect_disabled_due_to_potential_pattern_variable_declaration
@@ -93,7 +96,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 else if (
                     token.IsKindOrHasMatchingText(SyntaxKind.FromKeyword)
                     || token.IsKindOrHasMatchingText(SyntaxKind.JoinKeyword)
-                ) {
+                )
+                {
                     return CreateSuggestionModeItem(
                         CSharpFeaturesResources.range_variable,
                         CSharpFeaturesResources.Autoselect_disabled_due_to_potential_range_variable_declaration
@@ -112,7 +116,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                         cancellationToken,
                         out var typeDeclaration
                     )
-                ) {
+                )
+                {
                     switch (typeDeclaration.Keyword.Kind())
                     {
                         case SyntaxKind.ClassKeyword:
@@ -166,12 +171,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             SyntaxToken token,
             ITypeInferenceService typeInferrer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Not after `new`
             if (
                 token.IsKind(SyntaxKind.NewKeyword)
                 && token.Parent.IsKind(SyntaxKind.ObjectCreationExpression)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -203,7 +210,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     out TupleExpressionSyntax? tupleExpression
                 )
                 && !tupleExpression.HasNames()
-            ) {
+            )
+            {
                 position = token.Parent.SpanStart;
             }
 
@@ -212,7 +220,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             if (
                 token.Kind() == SyntaxKind.OpenParenToken
                 && token.GetRequiredParent().Kind() == SyntaxKind.ParenthesizedExpression
-            ) {
+            )
+            {
                 position = token.GetRequiredParent().SpanStart;
             }
 
@@ -221,7 +230,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             if (
                 token.Kind() == SyntaxKind.OpenParenToken
                 && token.GetRequiredParent().Kind() == SyntaxKind.CastExpression
-            ) {
+            )
+            {
                 position = token.GetRequiredParent().SpanStart;
             }
 
@@ -232,7 +242,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             if (
                 previousToken.IsKind(SyntaxKind.DotToken)
                 && previousToken.Parent.IsKind(SyntaxKind.SimpleMemberAccessExpression)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -244,7 +255,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 && token.Parent.IsKind(SyntaxKind.ArgumentList)
                 && token.Parent.Parent is InvocationExpressionSyntax invocation
                 && invocation.Expression is IdentifierNameSyntax identifier
-            ) {
+            )
+            {
                 if (identifier.Identifier.IsKindOrHasMatchingText(SyntaxKind.AsyncKeyword))
                 {
                     return true;
@@ -266,7 +278,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
         private static ITypeSymbol? GetDelegateType(
             TypeInferenceInfo typeInferenceInfo,
             Compilation compilation
-        ) {
+        )
+        {
             var typeSymbol = typeInferenceInfo.InferredType;
             if (typeInferenceInfo.IsParams && typeInferenceInfo.InferredType.IsArrayType())
             {
@@ -288,7 +301,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 var current = patternSyntax;
                 current != null;
                 current = current.Parent as PatternSyntax
-            ) {
+            )
+            {
                 // Patterns containing 'or' cannot contain valid variable declarations, e.g. 'e is 1 or int $$'
                 if (current.IsKind(SyntaxKind.OrPattern))
                 {
@@ -309,7 +323,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 lastTokenInPattern.Parent
                     is SingleVariableDesignationSyntax variableDesignationSyntax
                 && token.Parent == variableDesignationSyntax
-            ) {
+            )
+            {
                 return patternSyntax is DeclarationPatternSyntax
                     || patternSyntax is RecursivePatternSyntax;
             }

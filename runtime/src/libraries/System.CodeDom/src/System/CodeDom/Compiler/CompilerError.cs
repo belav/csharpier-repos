@@ -15,7 +15,8 @@ namespace System.CodeDom.Compiler
             int column,
             string errorNumber,
             string errorText
-        ) {
+        )
+        {
             Line = line;
             Column = column;
             ErrorNumber = errorNumber;

@@ -61,11 +61,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public CosmosExecutionStrategy(
-            DbContext context,
-            int maxRetryCount,
-            TimeSpan maxRetryDelay
-        ) : base(context, maxRetryCount, maxRetryDelay) { }
+        public CosmosExecutionStrategy(DbContext context, int maxRetryCount, TimeSpan maxRetryDelay)
+            : base(context, maxRetryCount, maxRetryDelay) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -129,14 +126,16 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
                             "x-ms-retry-after-ms",
                             out var values
                         ) && TryParseMsRetryAfter(values.FirstOrDefault(), out var delay)
-                    ) {
+                    )
+                    {
                         return delay;
                     }
 
                     if (
                         httpException.Response.Headers.TryGetValues("Retry-After", out values)
                         && TryParseRetryAfter(values.FirstOrDefault(), out delay)
-                    ) {
+                    )
+                    {
                         return delay;
                     }
 
@@ -206,7 +205,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
                         DateTimeStyles.None,
                         out var retryDate
                     )
-                ) {
+                )
+                {
                     delay = retryDate.Subtract(DateTimeOffset.Now);
                     delay = delay <= TimeSpan.Zero ? TimeSpan.FromMilliseconds(1) : delay;
                     return true;

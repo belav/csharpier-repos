@@ -21,7 +21,8 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client.ExternalAcces
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public VSTypeScriptRemoteLanguageServiceWorkspaceAccessor(
             RemoteLanguageServiceWorkspace remoteLanguageServiceWorkspace
-        ) {
+        )
+        {
             _remoteLanguageServiceWorkspace = remoteLanguageServiceWorkspace;
         }
 

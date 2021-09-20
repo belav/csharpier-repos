@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Editor
             int indent = 0,
             bool bolded = false,
             bool grayed = false
-        ) {
+        )
+        {
             this.Text = text;
             this.Glyph = glyph;
             this.Spans = spans;

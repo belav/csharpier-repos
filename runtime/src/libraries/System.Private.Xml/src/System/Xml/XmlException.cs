@@ -135,14 +135,15 @@ namespace System.Xml
             string? arg,
             Exception? innerException,
             IXmlLineInfo? lineInfo
-        ) : this(
-            res,
-            new string?[] { arg },
-            innerException,
-            (lineInfo == null ? 0 : lineInfo.LineNumber),
-            (lineInfo == null ? 0 : lineInfo.LinePosition),
-            null
-        ) { }
+        )
+            : this(
+                res,
+                new string?[] { arg },
+                innerException,
+                (lineInfo == null ? 0 : lineInfo.LineNumber),
+                (lineInfo == null ? 0 : lineInfo.LinePosition),
+                null
+            ) { }
 
         internal XmlException(string res, string?[]? args, IXmlLineInfo? lineInfo)
             : this(res, args, lineInfo, null) { }
@@ -152,14 +153,15 @@ namespace System.Xml
             string?[]? args,
             IXmlLineInfo? lineInfo,
             string? sourceUri
-        ) : this(
-            res,
-            args,
-            null,
-            (lineInfo == null ? 0 : lineInfo.LineNumber),
-            (lineInfo == null ? 0 : lineInfo.LinePosition),
-            sourceUri
-        ) { }
+        )
+            : this(
+                res,
+                args,
+                null,
+                (lineInfo == null ? 0 : lineInfo.LineNumber),
+                (lineInfo == null ? 0 : lineInfo.LinePosition),
+                sourceUri
+            ) { }
 
         internal XmlException(string res, string? arg, int lineNumber, int linePosition)
             : this(res, new string?[] { arg }, null, lineNumber, linePosition, null) { }
@@ -239,7 +241,8 @@ namespace System.Xml
             string?[]? args,
             int lineNumber,
             int linePosition
-        ) {
+        )
+        {
             try
             {
                 string message = (args == null) ? res : string.Format(res, args);

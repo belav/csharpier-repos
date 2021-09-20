@@ -82,7 +82,8 @@ namespace Microsoft.AspNetCore.DataProtection.StackExchangeRedis
                 using (
                     var redis = await ConnectionMultiplexer.ConnectAsync(connStr)
                         .TimeoutAfter(TimeSpan.FromMinutes(1))
-                ) {
+                )
+                {
                     var repo = new RedisXmlRepository(() => redis.GetDatabase(), key);
                     var element = new XElement("HelloRedis", guid);
                     repo.StoreElement(element, guid);
@@ -91,7 +92,8 @@ namespace Microsoft.AspNetCore.DataProtection.StackExchangeRedis
                 using (
                     var redis = await ConnectionMultiplexer.ConnectAsync(connStr)
                         .TimeoutAfter(TimeSpan.FromMinutes(1))
-                ) {
+                )
+                {
                     var repo = new RedisXmlRepository(() => redis.GetDatabase(), key);
                     var elements = repo.GetAllElements();
 
@@ -105,7 +107,8 @@ namespace Microsoft.AspNetCore.DataProtection.StackExchangeRedis
                 using (
                     var redis = await ConnectionMultiplexer.ConnectAsync(connStr)
                         .TimeoutAfter(TimeSpan.FromMinutes(1))
-                ) {
+                )
+                {
                     await redis.GetDatabase().KeyDeleteAsync(key);
                 }
             }

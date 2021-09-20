@@ -173,11 +173,8 @@ namespace System.DirectoryServices.ActiveDirectory
             }
         }
 
-        public ActiveDirectorySubnet(
-            DirectoryContext context,
-            string subnetName,
-            string siteName
-        ) : this(context, subnetName)
+        public ActiveDirectorySubnet(DirectoryContext context, string subnetName, string siteName)
+            : this(context, subnetName)
         {
             if (siteName == null)
                 throw new ArgumentNullException(nameof(siteName));
@@ -201,7 +198,8 @@ namespace System.DirectoryServices.ActiveDirectory
             string subnetName,
             string? siteName,
             bool existing
-        ) {
+        )
+        {
             Debug.Assert(existing == true);
 
             this.context = context;

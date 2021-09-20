@@ -397,7 +397,8 @@ namespace Moq.Tests
             private void AssertIncorrectlyReconstructsAs(
                 Expression<Action<IX>> expected,
                 Action<IX> action
-            ) {
+            )
+            {
                 Expression actual = ActionObserver.Instance.ReconstructExpression(action);
                 expected = (Expression<Action<IX>>)PrepareForComparison.Instance.Visit(expected);
                 actual = PrepareForComparison.Instance.Visit(actual);

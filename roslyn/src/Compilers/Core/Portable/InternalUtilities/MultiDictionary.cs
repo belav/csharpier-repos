@@ -232,7 +232,8 @@ namespace Roslyn.Utilities
             int capacity,
             IEqualityComparer<K> comparer,
             IEqualityComparer<V>? valueComparer = null
-        ) {
+        )
+        {
             _dictionary = new Dictionary<K, ValueSet>(capacity, comparer);
             _valueComparer = valueComparer;
         }

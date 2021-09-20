@@ -534,7 +534,8 @@ namespace Microsoft.AspNetCore.Mvc.Authorization
         [MemberData(nameof(AuthorizeFiltersCreatedWithoutPolicyOrPolicyProvider))]
         public void CreateInstance_ReturnsNewFilterIfPolicyAndPolicyProviderAreNotSet(
             AuthorizeFilter authorizeFilter
-        ) {
+        )
+        {
             // Arrange
             var factory = (IFilterFactory)authorizeFilter;
             var serviceProvider = new ServiceCollection().AddOptions()
@@ -561,7 +562,8 @@ namespace Microsoft.AspNetCore.Mvc.Authorization
         [MemberData(nameof(AuthorizeFiltersCreatedWithoutPolicyOrPolicyProvider))]
         public void CreateInstance_ReturnsNewFilterIfPolicyAndPolicyProviderAreNotSetAndCustomProviderIsUsed(
             AuthorizeFilter authorizeFilter
-        ) {
+        )
+        {
             // Arrange
             var factory = (IFilterFactory)authorizeFilter;
             var policyProvider = Mock.Of<IAuthorizationPolicyProvider>();
@@ -644,7 +646,8 @@ namespace Microsoft.AspNetCore.Mvc.Authorization
         private AuthorizationFilterContext GetAuthorizationContext(
             bool anonymous = false,
             Action<IServiceCollection> registerServices = null
-        ) {
+        )
+        {
             var basicPrincipal = new ClaimsPrincipal(
                 new ClaimsIdentity(
                     new Claim[]

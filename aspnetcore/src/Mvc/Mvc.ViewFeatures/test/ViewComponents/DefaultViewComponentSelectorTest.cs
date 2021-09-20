@@ -296,11 +296,13 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
                 public void PopulateFeature(
                     IEnumerable<ApplicationPart> parts,
                     ViewComponentFeature feature
-                ) {
+                )
+                {
                     foreach (
                         var type in parts.OfType<IApplicationPartTypeProvider>()
                             .SelectMany(p => p.Types)
-                    ) {
+                    )
+                    {
                         feature.ViewComponents.Add(type);
                     }
                 }

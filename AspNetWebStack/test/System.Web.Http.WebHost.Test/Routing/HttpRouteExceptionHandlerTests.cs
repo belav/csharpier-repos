@@ -624,7 +624,8 @@ namespace System.Web.Http.WebHost.Routing
 
         private static HttpRouteExceptionHandler CreateProductUnderTest(
             ExceptionDispatchInfo exceptionInfo
-        ) {
+        )
+        {
             return new HttpRouteExceptionHandler(exceptionInfo);
         }
 
@@ -632,7 +633,8 @@ namespace System.Web.Http.WebHost.Routing
             ExceptionDispatchInfo exceptionInfo,
             IExceptionLogger exceptionLogger,
             IExceptionHandler exceptionHandler
-        ) {
+        )
+        {
             return new HttpRouteExceptionHandler(exceptionInfo, exceptionLogger, exceptionHandler);
         }
 
@@ -659,7 +661,8 @@ namespace System.Web.Http.WebHost.Routing
         private static HttpContextBase CreateStubContextBase(
             HttpRequestBase request,
             HttpResponseBase response
-        ) {
+        )
+        {
             Mock<HttpContextBase> mock = new Mock<HttpContextBase>();
             mock.SetupGet(m => m.Request).Returns(request);
             mock.SetupGet(m => m.Response).Returns(response);

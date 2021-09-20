@@ -32,7 +32,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionEntityTypeBuilder entityTypeBuilder,
             CommentAttribute attribute,
             IConventionContext<IConventionEntityTypeBuilder> context
-        ) {
+        )
+        {
             if (!string.IsNullOrWhiteSpace(attribute.Comment))
             {
                 entityTypeBuilder.HasComment(attribute.Comment);

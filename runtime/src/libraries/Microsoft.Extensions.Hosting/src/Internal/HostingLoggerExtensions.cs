@@ -14,7 +14,8 @@ namespace Microsoft.Extensions.Hosting.Internal
             EventId eventId,
             string message,
             Exception exception
-        ) {
+        )
+        {
             if (exception is ReflectionTypeLoadException reflectionTypeLoadException)
             {
                 foreach (Exception ex in reflectionTypeLoadException.LoaderExceptions)

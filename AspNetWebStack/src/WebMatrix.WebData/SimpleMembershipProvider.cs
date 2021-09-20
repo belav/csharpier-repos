@@ -225,7 +225,8 @@ namespace WebMatrix.WebData
                 if (
                     value < SimpleMembershipProviderCasingBehavior.NormalizeCasing
                     || value > SimpleMembershipProviderCasingBehavior.RelyOnDatabaseCollation
-                ) {
+                )
+                {
                     throw new InvalidEnumArgumentException(
                         "value",
                         (int)value,
@@ -401,7 +402,8 @@ namespace WebMatrix.WebData
             string userIdColumn,
             SimpleMembershipProviderCasingBehavior casingBehavior,
             string userName
-        ) {
+        )
+        {
             dynamic result;
             if (casingBehavior == SimpleMembershipProviderCasingBehavior.NormalizeCasing)
             {
@@ -420,7 +422,8 @@ namespace WebMatrix.WebData
             }
             else if (
                 casingBehavior == SimpleMembershipProviderCasingBehavior.RelyOnDatabaseCollation
-            ) {
+            )
+            {
                 // When this option is supplied we assume the database has been configured with an appropriate casing, and don't normalize
                 // the user name. This is performant but requires appropriate configuration on the database.
                 result = db.QueryValue(
@@ -473,7 +476,8 @@ namespace WebMatrix.WebData
             string password,
             string newPasswordQuestion,
             string newPasswordAnswer
-        ) {
+        )
+        {
             if (!InitializeCalled)
             {
                 return PreviousProvider.ChangePasswordQuestionAndAnswer(
@@ -522,7 +526,8 @@ namespace WebMatrix.WebData
 
                 if (
                     String.Equals(accountConfirmationToken, expectedToken, StringComparison.Ordinal)
-                ) {
+                )
+                {
                     int affectedRows = db.Execute(
                         "UPDATE "
                             + MembershipTableName
@@ -592,7 +597,8 @@ namespace WebMatrix.WebData
             string userName,
             string password,
             bool requireConfirmationToken
-        ) {
+        )
+        {
             VerifyInitialized();
 
             if (password.IsEmpty())
@@ -682,7 +688,8 @@ namespace WebMatrix.WebData
             bool isApproved,
             object providerUserKey,
             out MembershipCreateStatus status
-        ) {
+        )
+        {
             if (!InitializeCalled)
             {
                 return PreviousProvider.CreateUser(
@@ -703,7 +710,8 @@ namespace WebMatrix.WebData
             IDatabase db,
             string userName,
             IDictionary<string, object> values
-        ) {
+        )
+        {
             // Make sure user doesn't exist
             int userId = GetUserId(db, userName);
             if (userId != -1)
@@ -760,7 +768,8 @@ namespace WebMatrix.WebData
             string password,
             bool requireConfirmation,
             IDictionary<string, object> values
-        ) {
+        )
+        {
             VerifyInitialized();
 
             using (var db = ConnectToDatabase())
@@ -976,7 +985,8 @@ namespace WebMatrix.WebData
             int pageIndex,
             int pageSize,
             out int totalRecords
-        ) {
+        )
+        {
             if (!InitializeCalled)
             {
                 return PreviousProvider.GetAllUsers(pageIndex, pageSize, out totalRecords);
@@ -1000,7 +1010,8 @@ namespace WebMatrix.WebData
             int pageIndex,
             int pageSize,
             out int totalRecords
-        ) {
+        )
+        {
             if (!InitializeCalled)
             {
                 return PreviousProvider.FindUsersByName(
@@ -1019,7 +1030,8 @@ namespace WebMatrix.WebData
             int pageIndex,
             int pageSize,
             out int totalRecords
-        ) {
+        )
+        {
             if (!InitializeCalled)
             {
                 return PreviousProvider.FindUsersByEmail(
@@ -1221,7 +1233,8 @@ namespace WebMatrix.WebData
             IDatabase db,
             string username,
             bool throwException
-        ) {
+        )
+        {
             int userId = GetUserId(db, username);
             if (userId == -1)
             {
@@ -1286,7 +1299,8 @@ namespace WebMatrix.WebData
         public override string GeneratePasswordResetToken(
             string userName,
             int tokenExpirationInMinutesFromNow
-        ) {
+        )
+        {
             VerifyInitialized();
             if (userName.IsEmpty())
             {
@@ -1502,7 +1516,8 @@ namespace WebMatrix.WebData
             string provider,
             string providerUserId,
             string userName
-        ) {
+        )
+        {
             VerifyInitialized();
 
             if (userName.IsEmpty())
@@ -1675,7 +1690,8 @@ namespace WebMatrix.WebData
             string requestToken,
             string accessToken,
             string accessTokenSecret
-        ) {
+        )
+        {
             VerifyInitialized();
 
             using (var db = ConnectToDatabase())

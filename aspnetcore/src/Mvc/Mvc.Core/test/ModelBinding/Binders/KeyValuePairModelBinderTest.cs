@@ -131,7 +131,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         public async Task TryBindStrongModel_InnerBinderReturnsAResult_ReturnsInnerBinderResult(
             object model,
             bool isSuccess
-        ) {
+        )
+        {
             // Arrange
             ModelBindingResult innerResult;
             if (isSuccess)
@@ -213,7 +214,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         [InlineData("param")]
         public async Task KeyValuePairModelBinder_DoesNotCreateCollection_IfNotIsTopLevelObject(
             string prefix
-        ) {
+        )
+        {
             // Arrange
             var binder = new KeyValuePairModelBinder<string, string>(
                 new SimpleTypeModelBinder(typeof(string), NullLoggerFactory.Instance),
@@ -256,7 +258,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         private static DefaultModelBindingContext GetBindingContext(
             IValueProvider valueProvider,
             Type keyValuePairType
-        ) {
+        )
+        {
             var metadataProvider = new TestModelMetadataProvider();
             var bindingContext = new DefaultModelBindingContext
             {

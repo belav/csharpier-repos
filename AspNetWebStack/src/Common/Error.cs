@@ -37,7 +37,8 @@ namespace System.Web.Http
         internal static ArgumentException Argument(
             string messageFormat,
             params object[] messageArgs
-        ) {
+        )
+        {
             return new ArgumentException(Error.Format(messageFormat, messageArgs));
         }
 
@@ -52,7 +53,8 @@ namespace System.Web.Http
             string parameterName,
             string messageFormat,
             params object[] messageArgs
-        ) {
+        )
+        {
             return new ArgumentException(Error.Format(messageFormat, messageArgs), parameterName);
         }
 
@@ -65,7 +67,8 @@ namespace System.Web.Http
         internal static ArgumentException ArgumentUriNotHttpOrHttpsScheme(
             string parameterName,
             Uri actualValue
-        ) {
+        )
+        {
             return new ArgumentException(
                 Error.Format(
                     CommonWebApiResources.ArgumentInvalidHttpUriScheme,
@@ -86,7 +89,8 @@ namespace System.Web.Http
         internal static ArgumentException ArgumentUriNotAbsolute(
             string parameterName,
             Uri actualValue
-        ) {
+        )
+        {
             return new ArgumentException(
                 Error.Format(CommonWebApiResources.ArgumentInvalidAbsoluteUri, actualValue),
                 parameterName
@@ -103,7 +107,8 @@ namespace System.Web.Http
         internal static ArgumentException ArgumentUriHasQueryOrFragment(
             string parameterName,
             Uri actualValue
-        ) {
+        )
+        {
             return new ArgumentException(
                 Error.Format(CommonWebApiResources.ArgumentUriHasQueryOrFragment, actualValue),
                 parameterName
@@ -145,7 +150,8 @@ namespace System.Web.Http
             string parameterName,
             string messageFormat,
             params object[] messageArgs
-        ) {
+        )
+        {
             return new ArgumentNullException(
                 parameterName,
                 Error.Format(messageFormat, messageArgs)
@@ -179,7 +185,8 @@ namespace System.Web.Http
             object actualValue,
             string messageFormat,
             params object[] messageArgs
-        ) {
+        )
+        {
             return new ArgumentOutOfRangeException(
                 parameterName,
                 actualValue,
@@ -198,7 +205,8 @@ namespace System.Web.Http
             string parameterName,
             object actualValue,
             object minValue
-        ) {
+        )
+        {
             return new ArgumentOutOfRangeException(
                 parameterName,
                 actualValue,
@@ -217,7 +225,8 @@ namespace System.Web.Http
             string parameterName,
             object actualValue,
             object maxValue
-        ) {
+        )
+        {
             return new ArgumentOutOfRangeException(
                 parameterName,
                 actualValue,
@@ -243,7 +252,8 @@ namespace System.Web.Http
         internal static KeyNotFoundException KeyNotFound(
             string messageFormat,
             params object[] messageArgs
-        ) {
+        )
+        {
             return new KeyNotFoundException(Error.Format(messageFormat, messageArgs));
         }
 
@@ -256,7 +266,8 @@ namespace System.Web.Http
         internal static ObjectDisposedException ObjectDisposed(
             string messageFormat,
             params object[] messageArgs
-        ) {
+        )
+        {
             // Pass in null, not disposedObject.GetType().FullName as per the above guideline
             return new ObjectDisposedException(null, Error.Format(messageFormat, messageArgs));
         }
@@ -279,7 +290,8 @@ namespace System.Web.Http
         internal static OperationCanceledException OperationCanceled(
             string messageFormat,
             params object[] messageArgs
-        ) {
+        )
+        {
             return new OperationCanceledException(Error.Format(messageFormat, messageArgs));
         }
 
@@ -294,7 +306,8 @@ namespace System.Web.Http
             string parameterName,
             int invalidValue,
             Type enumClass
-        ) {
+        )
+        {
 #if NETFX_CORE
             return new ArgumentException(
                 Error.Format(
@@ -319,7 +332,8 @@ namespace System.Web.Http
         internal static InvalidOperationException InvalidOperation(
             string messageFormat,
             params object[] messageArgs
-        ) {
+        )
+        {
             return new InvalidOperationException(Error.Format(messageFormat, messageArgs));
         }
 
@@ -334,7 +348,8 @@ namespace System.Web.Http
             Exception innerException,
             string messageFormat,
             params object[] messageArgs
-        ) {
+        )
+        {
             return new InvalidOperationException(
                 Error.Format(messageFormat, messageArgs),
                 innerException
@@ -350,7 +365,8 @@ namespace System.Web.Http
         internal static NotSupportedException NotSupported(
             string messageFormat,
             params object[] messageArgs
-        ) {
+        )
+        {
             return new NotSupportedException(Error.Format(messageFormat, messageArgs));
         }
     }

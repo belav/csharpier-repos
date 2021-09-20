@@ -47,7 +47,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             int count,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             return _innerStream.BeginRead(buffer, offset, count, callback, state);
         }
 
@@ -78,7 +79,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             await _onStart();
             await _innerStream.WriteAsync(buffer, offset, count, cancellationToken);
         }

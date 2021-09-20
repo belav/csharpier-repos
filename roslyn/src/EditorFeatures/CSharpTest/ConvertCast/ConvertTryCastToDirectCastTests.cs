@@ -130,7 +130,8 @@ class Program
         public async Task ConvertFromAsToExplicit_OtherBinaryExpressions(
             string asExpression,
             string cast
-        ) {
+        )
+        {
             var initialMarkup =
                 @$"
 class Program

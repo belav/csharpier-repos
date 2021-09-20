@@ -69,7 +69,8 @@ namespace Microsoft.AspNetCore.Mvc
 
             foreach (
                 var method in conventionType.GetMethods(BindingFlags.Public | BindingFlags.Static)
-            ) {
+            )
+            {
                 var unsupportedAttributes = method.GetCustomAttributes(inherit: true)
                     .Where(attribute => !IsAllowedAttribute(attribute))
                     .ToArray();

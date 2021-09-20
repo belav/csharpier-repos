@@ -79,7 +79,8 @@ namespace Microsoft.CodeAnalysis.Interactive
             string workingDirectory,
             int millisecondsTimeout = 5000,
             bool joinOutputWritingThreadsOnDisposal = false
-        ) {
+        )
+        {
             _millisecondsTimeout = millisecondsTimeout;
             _joinOutputWritingThreadsOnDisposal = joinOutputWritingThreadsOnDisposal;
             _output = TextWriter.Null;
@@ -172,7 +173,8 @@ namespace Microsoft.CodeAnalysis.Interactive
             bool isError,
             string firstLine,
             string? secondLine = null
-        ) {
+        )
+        {
             var writer = isError ? _errorOutput : _output;
             var guard = isError ? _errorOutputGuard : _outputGuard;
 
@@ -198,7 +200,8 @@ namespace Microsoft.CodeAnalysis.Interactive
         private LazyRemoteService CreateRemoteService(
             InteractiveHostOptions options,
             bool skipInitialization
-        ) {
+        )
+        {
             return new LazyRemoteService(
                 this,
                 options,
@@ -256,7 +259,8 @@ namespace Microsoft.CodeAnalysis.Interactive
                     if (
                         initializedService.Service != null
                         && initializedService.Service.Process.IsAlive()
-                    ) {
+                    )
+                    {
                         return initializedService;
                     }
 
@@ -315,7 +319,8 @@ namespace Microsoft.CodeAnalysis.Interactive
         private async Task<TResult> InvokeRemoteAsync<TResult>(
             string targetName,
             params object?[] arguments
-        ) {
+        )
+        {
             var initializedRemoteService = await TryGetOrCreateRemoteServiceAsync()
                 .ConfigureAwait(false);
             if (initializedRemoteService.Service == null)
@@ -349,7 +354,8 @@ namespace Microsoft.CodeAnalysis.Interactive
             RemoteService remoteService,
             string targetName,
             params object?[] arguments
-        ) {
+        )
+        {
             try
             {
                 return await remoteService.JsonRpc.InvokeAsync<TResult>(targetName, arguments)
@@ -470,7 +476,8 @@ namespace Microsoft.CodeAnalysis.Interactive
             ImmutableArray<string> referenceSearchPaths,
             ImmutableArray<string> sourceSearchPaths,
             string baseDirectory
-        ) {
+        )
+        {
             Contract.ThrowIfNull(referenceSearchPaths);
             Contract.ThrowIfNull(sourceSearchPaths);
             Contract.ThrowIfNull(baseDirectory);

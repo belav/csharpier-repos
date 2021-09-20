@@ -67,7 +67,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task SetDelegate_ConnectionSucceeds(
             SslProtocols acceptedProtocol,
             bool requestOnlyThisProtocol
-        ) {
+        )
+        {
             // Overriding flag for the same reason we skip tests on Catalina
             // On OSX 10.13-10.14 we can override this flag to enable the scenario
             requestOnlyThisProtocol |=
@@ -131,7 +132,8 @@ namespace System.Net.Http.Functional.Tests
         [MemberData(nameof(InvalidCertificateServers))]
         public async Task InvalidCertificateServers_CertificateValidationDisabled_Succeeds(
             string url
-        ) {
+        )
+        {
             using (HttpClientHandler handler = CreateHttpClientHandler())
             using (HttpClient client = CreateHttpClient(handler))
             {

@@ -167,7 +167,8 @@ namespace System
                         IsCharBitSet(charMap, (byte)thisChar)
                         && IsCharBitSet(charMap, (byte)(thisChar >> 8))
                         && ArrayContains((char)thisChar, anyOf)
-                    ) {
+                    )
+                    {
                         return (int)(pCh - pChars);
                     }
 
@@ -196,7 +197,8 @@ namespace System
         private static unsafe void InitializeProbabilisticMap(
             uint* charMap,
             ReadOnlySpan<char> anyOf
-        ) {
+        )
+        {
             bool hasAscii = false;
             uint* charMapLocal = charMap; // https://github.com/dotnet/runtime/issues/9040
 
@@ -515,7 +517,8 @@ namespace System
                         IsCharBitSet(charMap, (byte)thisChar)
                         && IsCharBitSet(charMap, (byte)(thisChar >> 8))
                         && ArrayContains((char)thisChar, anyOf)
-                    ) {
+                    )
+                    {
                         return (int)(pCh - pChars);
                     }
 
@@ -567,7 +570,8 @@ namespace System
             int startIndex,
             int count,
             StringComparison comparisonType
-        ) {
+        )
+        {
             // Parameter checking will be done by CompareInfo.LastIndexOf.
 
             switch (comparisonType)

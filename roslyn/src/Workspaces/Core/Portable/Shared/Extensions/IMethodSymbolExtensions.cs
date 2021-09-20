@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static bool CompatibleSignatureToDelegate(
             this IMethodSymbol method,
             INamedTypeSymbol delegateType
-        ) {
+        )
+        {
             Contract.ThrowIfFalse(delegateType.TypeKind == TypeKind.Delegate);
 
             var invoke = delegateType.DelegateInvokeMethod;
@@ -62,7 +63,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         /// </summary>
         public static ImmutableArray<IMethodSymbol> GetAllMethodSymbolsOfPartialParts(
             this IMethodSymbol method
-        ) {
+        )
+        {
             if (method.PartialDefinitionPart != null)
             {
                 Debug.Assert(
@@ -85,7 +87,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static IMethodSymbol RenameTypeParameters(
             this IMethodSymbol method,
             ImmutableArray<string> newNames
-        ) {
+        )
+        {
             if (method.TypeParameters.Select(t => t.Name).SequenceEqual(newNames))
             {
                 return method;
@@ -133,7 +136,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static IMethodSymbol RenameParameters(
             this IMethodSymbol method,
             ImmutableArray<string> parameterNames
-        ) {
+        )
+        {
             var parameterList = method.Parameters;
             if (parameterList.Select(p => p.Name).SequenceEqual(parameterNames))
             {
@@ -160,7 +164,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             ImmutableArray<ITypeParameterSymbol> typeParameters,
             ImmutableArray<string> newNames,
             ITypeGenerator typeGenerator
-        ) {
+        )
+        {
             // We generate the type parameter in two passes.  The first creates the new type
             // parameter.  The second updates the constraints to point at this new type parameter.
             var newTypeParameters = new List<CodeGenerationTypeParameterSymbol>();
@@ -205,7 +210,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this IMethodSymbol method,
             INamedTypeSymbol containingType,
             ISyntaxFactsService syntaxFacts
-        ) {
+        )
+        {
             // The method's type parameters may conflict with the type parameters in the type
             // we're generating into.  In that case, rename them.
             var parameterNames = NameGenerator.EnsureUniqueness(
@@ -238,7 +244,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this IMethodSymbol method,
             ISymbol accessibleWithin,
             params INamedTypeSymbol[] removeAttributeTypes
-        ) {
+        )
+        {
             var methodHasAttribute = method.GetAttributes().Any(shouldRemoveAttribute);
 
             var someParameterHasAttribute = method.Parameters.Any(
@@ -301,7 +308,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 )
                 || !method1.Parameters.Select(p => p.Name)
                     .SequenceEqual(method2.Parameters.Select(p => p.Name))
-            ) {
+            )
+            {
                 return null;
             }
 

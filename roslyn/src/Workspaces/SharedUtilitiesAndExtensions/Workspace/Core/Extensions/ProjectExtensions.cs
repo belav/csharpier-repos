@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static string? TryGetAnalyzerConfigPathForDiagnosticConfiguration(
             this Project project,
             Diagnostic diagnostic
-        ) {
+        )
+        {
             Debug.Assert(diagnostic != null);
             return TryGetAnalyzerConfigPathForProjectOrDiagnosticConfiguration(project, diagnostic);
         }
@@ -47,7 +48,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         private static string? TryGetAnalyzerConfigPathForProjectOrDiagnosticConfiguration(
             Project project,
             Diagnostic? diagnostic
-        ) {
+        )
+        {
             if (project.AnalyzerConfigDocuments.Any())
             {
                 var diagnosticFilePath = PathUtilities.GetDirectoryName(
@@ -74,7 +76,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     if (
                         diagnosticFilePath.StartsWith(analyzerConfigDirectory)
                         && analyzerConfigDirectory.Length > bestPath.Length
-                    ) {
+                    )
+                    {
                         bestPath = analyzerConfigDirectory;
                         bestAnalyzerConfigDocument = analyzerConfigDocument;
                     }
@@ -107,7 +110,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static AnalyzerConfigDocument? TryGetExistingAnalyzerConfigDocumentAtPath(
             this Project project,
             string analyzerConfigPath
-        ) {
+        )
+        {
             Debug.Assert(analyzerConfigPath != null);
             Debug.Assert(PathUtilities.IsAbsolute(analyzerConfigPath));
 
@@ -119,7 +123,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static AnalyzerConfigDocument? GetOrCreateAnalyzerConfigDocument(
             this Project project,
             string analyzerConfigPath
-        ) {
+        )
+        {
             var existingAnalyzerConfigDocument = project.TryGetExistingAnalyzerConfigDocumentAtPath(
                 analyzerConfigPath
             );
@@ -143,7 +148,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static async Task<Compilation> GetRequiredCompilationAsync(
             this Project project,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var compilation = await project.GetCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
             if (compilation == null)

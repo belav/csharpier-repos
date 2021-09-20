@@ -118,7 +118,8 @@ namespace CoreXml.Test.XLinq
                         if (
                             (DataReader.NodeType == XmlNodeType.Element)
                             && (DataReader.LocalName == "check")
-                        ) {
+                        )
+                        {
                             TestLog.Compare(DataReader.NamespaceURI, "1", "Compare Namespace");
                             TestLog.Compare(DataReader.Name, "bar:check", "Compare Name");
                             TestLog.Compare(DataReader.LocalName, "check", "Compare LocalName");
@@ -181,7 +182,8 @@ namespace CoreXml.Test.XLinq
                         if (
                             (DataReader.NodeType == XmlNodeType.Element)
                             && (DataReader.LocalName == "check")
-                        ) {
+                        )
+                        {
                             TestLog.Compare(DataReader.NamespaceURI, "2", "Compare Namespace");
                             TestLog.Compare(DataReader.Name, "bar:check", "Compare Name");
                             TestLog.Compare(DataReader.LocalName, "check", "Compare LocalName");
@@ -386,7 +388,8 @@ namespace CoreXml.Test.XLinq
                         if (
                             DataReader.Name == "NAMESPACE1"
                             && DataReader.NodeType == XmlNodeType.EndElement
-                        ) {
+                        )
+                        {
                             DataReader.Read();
                             break;
                         }
@@ -440,7 +443,8 @@ namespace CoreXml.Test.XLinq
                         if (
                             DataReader.Name == "NAMESPACE2"
                             && DataReader.NodeType == XmlNodeType.EndElement
-                        ) {
+                        )
+                        {
                             TestLog.Compare(
                                 DataReader.LookupNamespace("bar"),
                                 strValue,
@@ -463,7 +467,8 @@ namespace CoreXml.Test.XLinq
                     string strF,
                     string strG,
                     string strH
-                ) {
+                )
+                {
                     TestLog.Compare(
                         DataReader.LookupNamespace(string.Empty),
                         strDef,
@@ -711,7 +716,8 @@ namespace CoreXml.Test.XLinq
                         if (
                             DataReader.Name == "NAMESPACE3"
                             && DataReader.NodeType == XmlNodeType.EndElement
-                        ) {
+                        )
+                        {
                             CompareAllNS(
                                 DataReader,
                                 strDef,
@@ -1331,7 +1337,8 @@ namespace CoreXml.Test.XLinq
                                 if (
                                     DataReader.Name == "XMLSPACE4"
                                     && DataReader.NodeType == XmlNodeType.EndElement
-                                ) {
+                                )
+                                {
                                     DataReader.Read();
                                     break;
                                 }
@@ -1347,7 +1354,8 @@ namespace CoreXml.Test.XLinq
                         if (
                             DataReader.Name == "XMLSPACE3"
                             && DataReader.NodeType == XmlNodeType.EndElement
-                        ) {
+                        )
+                        {
                             DataReader.Read();
                             break;
                         }
@@ -1363,7 +1371,8 @@ namespace CoreXml.Test.XLinq
                         if (
                             DataReader.Name == "XMLSPACE2A"
                             && DataReader.NodeType == XmlNodeType.EndElement
-                        ) {
+                        )
+                        {
                             DataReader.Read();
                             break;
                         }
@@ -1432,7 +1441,8 @@ namespace CoreXml.Test.XLinq
                                 while (
                                     DataReader.Read()
                                     && DataReader.NodeType != XmlNodeType.EndEntity
-                                ) {
+                                )
+                                {
                                     TestLog.Compare(
                                         DataReader.XmlLang,
                                         "en-US",
@@ -1514,7 +1524,8 @@ namespace CoreXml.Test.XLinq
                                 if (
                                     DataReader.Name == "XMLLANG0"
                                     && DataReader.NodeType == XmlNodeType.EndElement
-                                ) {
+                                )
+                                {
                                     DataReader.Read();
                                     break;
                                 }
@@ -1526,7 +1537,8 @@ namespace CoreXml.Test.XLinq
                         if (
                             DataReader.Name == "XMLLANG1"
                             && DataReader.NodeType == XmlNodeType.EndElement
-                        ) {
+                        )
+                        {
                             DataReader.Read();
                             break;
                         }
@@ -1538,7 +1550,8 @@ namespace CoreXml.Test.XLinq
                         if (
                             DataReader.Name == "XMLLANG2"
                             && DataReader.NodeType == XmlNodeType.EndElement
-                        ) {
+                        )
+                        {
                             DataReader.Read();
                             break;
                         }

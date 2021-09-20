@@ -35,7 +35,8 @@ namespace System.Xml.Xsl.XsltOld
             XmlDataType datatype,
             XmlSortOrder xmlorder,
             XmlCaseOrder xmlcaseorder
-        ) {
+        )
+        {
             select = sortkey;
             lang = xmllang;
             dataType = datatype;
@@ -830,14 +831,16 @@ namespace System.Xml.Xsl.XsltOld
             string ns,
             string fileName,
             int lineNumber
-        ) {
+        )
+        {
             ValidateExtensionNamespace(ns);
 
             for (
                 ScriptingLanguage langTmp = ScriptingLanguage.JScript;
                 langTmp <= ScriptingLanguage.CSharp;
                 langTmp++
-            ) {
+            )
+            {
                 Hashtable typeDecls = _typeDeclsByLang[(int)langTmp];
                 if (lang == langTmp)
                 {
@@ -984,7 +987,8 @@ namespace System.Xml.Xsl.XsltOld
             ref int start,
             StringBuilder lex,
             out bool isAvt
-        ) {
+        )
+        {
             Debug.Assert(start <= avt.Length);
 #if DEBUG
             int saveStart = start;

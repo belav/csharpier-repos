@@ -102,7 +102,8 @@ namespace System.Web.Http.Routing
             public IHttpVirtualPathData GetVirtualPath(
                 HttpRequestMessage request,
                 Collections.Generic.IDictionary<string, object> values
-            ) {
+            )
+            {
                 return _virtualPathData;
             }
         }

@@ -1542,7 +1542,8 @@ namespace System.CodeDom.Compiler.Tests
                     "System.ParamArrayAttribute",
                     "system.paramsarrayattribute"
                 }
-            ) {
+            )
+            {
                 var paramsParameterDeclarationExpression = new CodeParameterDeclarationExpression(
                     new CodeTypeReference("type"),
                     "name"
@@ -2430,7 +2431,8 @@ namespace System.CodeDom.Compiler.Tests
             CodeExpression e,
             CodeGeneratorOptions o,
             string expected
-        ) {
+        )
+        {
             ICodeGenerator generator = GetGenerator();
             var writer = new StringWriter();
             generator.GenerateCodeFromExpression(e, writer, o);
@@ -3740,7 +3742,8 @@ namespace System.CodeDom.Compiler.Tests
             CodeStatement e,
             CodeGeneratorOptions o,
             string expected
-        ) {
+        )
+        {
             ICodeGenerator generator = GetGenerator();
             var writer = new StringWriter();
             generator.GenerateCodeFromStatement(e, writer, o);
@@ -4132,7 +4135,8 @@ namespace System.CodeDom.Compiler.Tests
                     "System.ParamArrayAttribute",
                     "system.paramsarrayattribute"
                 }
-            ) {
+            )
+            {
                 var paramsParameter = new CodeParameterDeclarationExpression(
                     new CodeTypeReference("type"),
                     "name"
@@ -7552,7 +7556,8 @@ public class name<, name, [attribute()]  name, name, name, [()] [name1()] [name2
             CodeTypeDeclaration e,
             CodeGeneratorOptions o,
             string expected
-        ) {
+        )
+        {
             ICodeGenerator generator = GetGenerator();
             var writer = new StringWriter();
             generator.GenerateCodeFromType(e, writer, o);

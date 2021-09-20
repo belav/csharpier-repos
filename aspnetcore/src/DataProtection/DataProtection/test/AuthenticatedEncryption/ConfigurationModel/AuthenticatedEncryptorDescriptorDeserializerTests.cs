@@ -58,7 +58,8 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.Configurat
 
         private static IAuthenticatedEncryptor CreateEncryptorInstanceFromDescriptor(
             AuthenticatedEncryptorDescriptor descriptor
-        ) {
+        )
+        {
             var encryptorFactory = new AuthenticatedEncryptorFactory(NullLoggerFactory.Instance);
             var key = new Key(
                 Guid.NewGuid(),

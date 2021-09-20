@@ -252,7 +252,8 @@ namespace IntelHardwareIntrinsicTest
                         new ulong[4] { 22, 1, 50, 0 },
                         new ulong[4]
                     )
-                ) {
+                )
+                {
                     var vb1 = Unsafe.Read<Vector256<byte>>(byteTable.inArray1Ptr);
                     var vb2 = Unsafe.Read<Vector256<byte>>(byteTable.inArray2Ptr);
                     var vb3 = Avx2.UnpackHigh(vb1, vb2);
@@ -326,7 +327,8 @@ namespace IntelHardwareIntrinsicTest
                         || (byteTable.inArray2[30] != byteTable.outArray[29])
                         || (byteTable.inArray1[31] != byteTable.outArray[30])
                         || (byteTable.inArray2[31] != byteTable.outArray[31])
-                    ) {
+                    )
+                    {
                         Console.WriteLine("AVX2 UnpackHigh failed on byte:");
                         Console.WriteLine($"    left: ({string.Join(", ", byteTable.inArray1)})");
                         Console.WriteLine($"   right: ({string.Join(", ", byteTable.inArray2)})");
@@ -369,7 +371,8 @@ namespace IntelHardwareIntrinsicTest
                         || (sbyteTable.inArray2[30] != sbyteTable.outArray[29])
                         || (sbyteTable.inArray1[31] != sbyteTable.outArray[30])
                         || (sbyteTable.inArray2[31] != sbyteTable.outArray[31])
-                    ) {
+                    )
+                    {
                         Console.WriteLine("AVX2 UnpackHigh failed on sbyte:");
                         Console.WriteLine($"    left: ({string.Join(", ", byteTable.inArray1)})");
                         Console.WriteLine($"   right: ({string.Join(", ", byteTable.inArray2)})");
@@ -396,7 +399,8 @@ namespace IntelHardwareIntrinsicTest
                         || (shortTable.inArray2[14] != shortTable.outArray[13])
                         || (shortTable.inArray1[15] != shortTable.outArray[14])
                         || (shortTable.inArray2[15] != shortTable.outArray[15])
-                    ) {
+                    )
+                    {
                         Console.WriteLine("AVX2 UnpackHigh failed on short:");
                         Console.WriteLine($"    left: ({string.Join(", ", byteTable.inArray1)})");
                         Console.WriteLine($"   right: ({string.Join(", ", byteTable.inArray2)})");
@@ -423,7 +427,8 @@ namespace IntelHardwareIntrinsicTest
                         || (ushortTable.inArray2[14] != ushortTable.outArray[13])
                         || (ushortTable.inArray1[15] != ushortTable.outArray[14])
                         || (ushortTable.inArray2[15] != ushortTable.outArray[15])
-                    ) {
+                    )
+                    {
                         Console.WriteLine("AVX2 UnpackHigh failed on ushort:");
                         Console.WriteLine($"    left: ({string.Join(", ", byteTable.inArray1)})");
                         Console.WriteLine($"   right: ({string.Join(", ", byteTable.inArray2)})");
@@ -442,7 +447,8 @@ namespace IntelHardwareIntrinsicTest
                         || (intTable.inArray2[6] != intTable.outArray[5])
                         || (intTable.inArray1[7] != intTable.outArray[6])
                         || (intTable.inArray2[7] != intTable.outArray[7])
-                    ) {
+                    )
+                    {
                         Console.WriteLine("AVX2 UnpackHigh failed on int:");
                         Console.WriteLine($"    left: ({string.Join(", ", byteTable.inArray1)})");
                         Console.WriteLine($"   right: ({string.Join(", ", byteTable.inArray2)})");
@@ -461,7 +467,8 @@ namespace IntelHardwareIntrinsicTest
                         || (uintTable.inArray2[6] != uintTable.outArray[5])
                         || (uintTable.inArray1[7] != uintTable.outArray[6])
                         || (uintTable.inArray2[7] != uintTable.outArray[7])
-                    ) {
+                    )
+                    {
                         Console.WriteLine("AVX2 UnpackHigh failed on uint:");
                         Console.WriteLine($"    left: ({string.Join(", ", byteTable.inArray1)})");
                         Console.WriteLine($"   right: ({string.Join(", ", byteTable.inArray2)})");
@@ -476,7 +483,8 @@ namespace IntelHardwareIntrinsicTest
                         || (longTable.inArray2[1] != longTable.outArray[1])
                         || (longTable.inArray1[3] != longTable.outArray[2])
                         || (longTable.inArray2[3] != longTable.outArray[3])
-                    ) {
+                    )
+                    {
                         Console.WriteLine("AVX2 UnpackHigh failed on long:");
                         Console.WriteLine($"    left: ({string.Join(", ", byteTable.inArray1)})");
                         Console.WriteLine($"   right: ({string.Join(", ", byteTable.inArray2)})");
@@ -491,7 +499,8 @@ namespace IntelHardwareIntrinsicTest
                         || (ulongTable.inArray2[1] != ulongTable.outArray[1])
                         || (ulongTable.inArray1[3] != ulongTable.outArray[2])
                         || (ulongTable.inArray2[3] != ulongTable.outArray[3])
-                    ) {
+                    )
+                    {
                         Console.WriteLine("AVX2 UnpackHigh failed on ulong:");
                         Console.WriteLine($"    left: ({string.Join(", ", byteTable.inArray1)})");
                         Console.WriteLine($"   right: ({string.Join(", ", byteTable.inArray2)})");

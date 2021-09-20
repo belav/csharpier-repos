@@ -96,7 +96,8 @@ namespace System.Web.Http
                 settings.IsServiceCollectionInitialized
                 && !settings.Services.GetModelValidatorProviders()
                     .SequenceEqual(configuration.Services.GetModelValidatorProviders())
-            ) {
+            )
+            {
                 ModelValidatorCache validatorCache = new ModelValidatorCache(
                     new Lazy<IEnumerable<ModelValidatorProvider>>(
                         () => Services.GetModelValidatorProviders()
@@ -246,12 +247,14 @@ namespace System.Web.Http
         internal static HttpConfiguration ApplyControllerSettings(
             HttpControllerSettings settings,
             HttpConfiguration configuration
-        ) {
+        )
+        {
             if (
                 !settings.IsFormatterCollectionInitialized
                 && !settings.IsParameterBindingRuleCollectionInitialized
                 && !settings.IsServiceCollectionInitialized
-            ) {
+            )
+            {
                 return configuration;
             }
 

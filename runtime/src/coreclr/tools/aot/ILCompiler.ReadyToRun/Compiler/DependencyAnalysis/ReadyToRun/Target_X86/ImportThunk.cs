@@ -19,7 +19,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             NodeFactory factory,
             ref X86Emitter instructionEncoder,
             bool relocsOnly
-        ) {
+        )
+        {
             switch (_thunkKind)
             {
                 case Kind.Eager:

@@ -44,7 +44,8 @@ namespace System.Text.Json
             ref Utf8JsonReader reader,
             ref ReadStack state,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             JsonConverter converter =
                 state.Current.JsonTypeInfo.PropertyInfoForTypeInfo.ConverterBase;
 
@@ -57,7 +58,8 @@ namespace System.Text.Json
                         ref state,
                         StackFrameObjectState.ReadNameOrEndObject
                     )
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -128,7 +130,8 @@ namespace System.Text.Json
                         ref state,
                         StackFrameObjectState.ReadRefValue
                     )
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -140,7 +143,8 @@ namespace System.Text.Json
                         ref state,
                         StackFrameObjectState.ReadIdValue
                     )
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -186,7 +190,8 @@ namespace System.Text.Json
                         ref state,
                         StackFrameObjectState.ReadRefEndObject
                     )
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -217,7 +222,8 @@ namespace System.Text.Json
             ref Utf8JsonReader reader,
             ref ReadStack state,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             JsonConverter converter =
                 state.Current.JsonTypeInfo.PropertyInfoForTypeInfo.ConverterBase;
 
@@ -230,7 +236,8 @@ namespace System.Text.Json
                         ref state,
                         StackFrameObjectState.ReadNameOrEndObject
                     )
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -305,7 +312,8 @@ namespace System.Text.Json
                         ref state,
                         StackFrameObjectState.ReadRefValue
                     )
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -317,7 +325,8 @@ namespace System.Text.Json
                         ref state,
                         StackFrameObjectState.ReadIdValue
                     )
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -363,7 +372,8 @@ namespace System.Text.Json
                         ref state,
                         StackFrameObjectState.ReadRefEndObject
                     )
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -392,7 +402,8 @@ namespace System.Text.Json
                         ref state,
                         StackFrameObjectState.ReadValuesName
                     )
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -432,7 +443,8 @@ namespace System.Text.Json
                         ref state,
                         StackFrameObjectState.ReadValuesStartArray
                     )
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -455,7 +467,8 @@ namespace System.Text.Json
             ref Utf8JsonReader reader,
             ref ReadStack state,
             StackFrameObjectState nextState
-        ) {
+        )
+        {
             // If we can't read here, the read will be completed at the root API by asking the stream for more data.
             // Set the state so we know where to resume on re-entry.
             state.Current.ObjectState = nextState;
@@ -464,7 +477,8 @@ namespace System.Text.Json
 
         internal static MetadataPropertyName GetMetadataPropertyName(
             ReadOnlySpan<byte> propertyName
-        ) {
+        )
+        {
             if (propertyName.Length > 0 && propertyName[0] == '$')
             {
                 switch (propertyName.Length)
@@ -481,7 +495,8 @@ namespace System.Text.Json
                             propertyName[1] == 'r'
                             && propertyName[2] == 'e'
                             && propertyName[3] == 'f'
-                        ) {
+                        )
+                        {
                             return MetadataPropertyName.Ref;
                         }
                         break;
@@ -494,7 +509,8 @@ namespace System.Text.Json
                             && propertyName[4] == 'u'
                             && propertyName[5] == 'e'
                             && propertyName[6] == 's'
-                        ) {
+                        )
+                        {
                             return MetadataPropertyName.Values;
                         }
                         break;
@@ -508,7 +524,8 @@ namespace System.Text.Json
             ref ReadStack state,
             JsonElement element,
             out object? referenceValue
-        ) {
+        )
+        {
             bool refMetadataFound = false;
             referenceValue = default;
 

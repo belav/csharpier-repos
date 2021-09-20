@@ -403,7 +403,8 @@ namespace Internal.TypeSystem
                 if (
                     Interlocked.CompareExchange(ref _entryInProcessOfWritingSentinel, value, null)
                     == null
-                ) {
+                )
+                {
                     // First value was added as the sentinel
                     addedValue = true;
                     return value;
@@ -546,7 +547,8 @@ namespace Internal.TypeSystem
                     _entryInProcessOfWritingSentinel,
                     null
                 ) == null
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -725,13 +727,15 @@ namespace Internal.TypeSystem
                     if (
                         (_hashtableContentsToEnumerate != null)
                         && (_index < _hashtableContentsToEnumerate.Length)
-                    ) {
+                    )
+                    {
                         for (; _index < _hashtableContentsToEnumerate.Length; _index++)
                         {
                             if (
                                 (_hashtableContentsToEnumerate[_index] != null)
                                 && (_hashtableContentsToEnumerate[_index] != _sentinel)
-                            ) {
+                            )
+                            {
                                 _current = _hashtableContentsToEnumerate[_index];
                                 _index++;
                                 return true;

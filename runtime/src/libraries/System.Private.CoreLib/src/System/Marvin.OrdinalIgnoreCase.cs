@@ -95,7 +95,8 @@ namespace System
             int count,
             uint p0,
             uint p1
-        ) {
+        )
+        {
             Debug.Assert(count > 0);
 
             char[]? borrowedArr = null;

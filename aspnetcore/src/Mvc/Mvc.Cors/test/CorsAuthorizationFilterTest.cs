@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.Mvc.Cors
         [InlineData("OPTIONS")]
         public async Task CaseInsensitive_PreFlightRequest_SuccessfulMatch_WritesHeaders(
             string preflightRequestMethod
-        ) {
+        )
+        {
             // Arrange
             var mockEngine = GetPassingEngine(supportsCredentials: true);
             var filter = GetFilter(mockEngine);
@@ -157,7 +158,8 @@ namespace Microsoft.AspNetCore.Mvc.Cors
             FilterDescriptor[] filterDescriptors,
             RequestHeaders headers = null,
             bool isPreflight = false
-        ) {
+        )
+        {
             // HttpContext
             var httpContext = new DefaultHttpContext();
             if (headers != null)
@@ -278,7 +280,8 @@ namespace Microsoft.AspNetCore.Mvc.Cors
             IList<string> exposedHeaders = null,
             long? preFlightMaxAge = null,
             bool? supportsCredentials = null
-        ) {
+        )
+        {
             var result = new CorsResult();
 
             if (origin != null)

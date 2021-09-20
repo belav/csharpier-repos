@@ -37,7 +37,8 @@ namespace System.Net
         public override void GetObjectData(
             SerializationInfo serializationInfo,
             StreamingContext streamingContext
-        ) {
+        )
+        {
             base.GetObjectData(serializationInfo, streamingContext);
             serializationInfo.AddValue("NetworkError", (int)NetworkError);
         }

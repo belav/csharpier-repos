@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
         protected override void ExecuteCore(
             RazorCodeDocument codeDocument,
             DocumentIntermediateNode documentNode
-        ) {
+        )
+        {
             // There's no value in executing this pass at design time, it just prevents some allocations.
             if (documentNode.Options.DesignTime)
             {
@@ -53,7 +54,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                 if (
                     node.Children.Count != 1
                     || !(node.Children.First() is HtmlContentIntermediateNode)
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -69,7 +71,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                     if (
                         current
                         is PreallocatedTagHelperHtmlAttributeValueIntermediateNode existingDeclaration
-                    ) {
+                    )
+                    {
                         if (
                             string.Equals(
                                 existingDeclaration.AttributeName,
@@ -82,7 +85,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                                 StringComparison.Ordinal
                             )
                             && existingDeclaration.AttributeStructure == node.AttributeStructure
-                        ) {
+                        )
+                        {
                             declaration = existingDeclaration;
                             break;
                         }
@@ -123,7 +127,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                     )
                     || node.Children.Count != 1
                     || !(node.Children.First() is HtmlContentIntermediateNode)
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -139,7 +144,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                     if (
                         current
                         is PreallocatedTagHelperPropertyValueIntermediateNode existingDeclaration
-                    ) {
+                    )
+                    {
                         if (
                             string.Equals(
                                 existingDeclaration.AttributeName,
@@ -152,7 +158,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                                 StringComparison.Ordinal
                             )
                             && existingDeclaration.AttributeStructure == node.AttributeStructure
-                        ) {
+                        )
+                        {
                             declaration = existingDeclaration;
                             break;
                         }

@@ -1214,7 +1214,8 @@ namespace Microsoft.EntityFrameworkCore
 
             public async Task<IEnumerable<LazyAsyncPsPost>> LoadPostsAsync(
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 await LazyLoader(this, cancellationToken, nameof(LazyAsyncPsPosts));
 
                 return LazyAsyncPsPosts;
@@ -1232,7 +1233,8 @@ namespace Microsoft.EntityFrameworkCore
 
             public async Task<LazyAsyncPsBlog> LoadBlogAsync(
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 await LazyLoader(this, cancellationToken, nameof(LazyAsyncPsBlog));
 
                 return LazyAsyncPsBlog;
@@ -1454,7 +1456,8 @@ namespace Microsoft.EntityFrameworkCore
 
             public async Task<IEnumerable<LazyAsyncPocoPost>> LoadPostsAsync(
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 await _loader(this, cancellationToken, nameof(LazyAsyncPocoPosts));
 
                 return LazyAsyncPocoPosts;
@@ -1480,7 +1483,8 @@ namespace Microsoft.EntityFrameworkCore
 
             public async Task<LazyAsyncPocoBlog> LoadBlogAsync(
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 await _loader(this, cancellationToken, nameof(LazyAsyncPocoBlog));
 
                 return LazyAsyncPocoBlog;
@@ -1509,7 +1513,8 @@ namespace Microsoft.EntityFrameworkCore
 
             public async Task<IEnumerable<LazyAsyncPost>> LoadPostsAsync(
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 await _loader.LoadAsync(this, cancellationToken, nameof(LazyAsyncPosts));
 
                 return LazyAsyncPosts;
@@ -1535,7 +1540,8 @@ namespace Microsoft.EntityFrameworkCore
 
             public async Task<LazyAsyncBlog> LoadBlogAsync(
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 await _loader.LoadAsync(this, cancellationToken, nameof(LazyAsyncBlog));
 
                 return LazyAsyncBlog;

@@ -773,7 +773,8 @@ namespace System.Xml
                     if (
                         charCount >= encoding.GetMaxCharCount(byteCount)
                         || charCount >= encoding.GetCharCount(bytes, byteOffset, byteCount)
-                    ) {
+                    )
+                    {
                         actualCharCount = encoding.GetChars(
                             bytes,
                             byteOffset,

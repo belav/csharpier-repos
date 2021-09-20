@@ -59,7 +59,8 @@ namespace Microsoft.CodeAnalysis.Completion
             CompletionRules rules,
             CompletionItem suggestionModeItem,
             bool isExclusive
-        ) {
+        )
+        {
             Span = defaultSpan;
 
             Items = items.NullToEmpty();
@@ -86,7 +87,8 @@ namespace Microsoft.CodeAnalysis.Completion
             ImmutableArray<CompletionItem> items,
             CompletionRules rules = null,
             CompletionItem suggestionModeItem = null
-        ) {
+        )
+        {
             return Create(defaultSpan, items, rules, suggestionModeItem, isExclusive: false);
         }
 
@@ -96,7 +98,8 @@ namespace Microsoft.CodeAnalysis.Completion
             CompletionRules rules,
             CompletionItem suggestionModeItem,
             bool isExclusive
-        ) {
+        )
+        {
             return new CompletionList(defaultSpan, items, rules, suggestionModeItem, isExclusive);
         }
 
@@ -105,7 +108,8 @@ namespace Microsoft.CodeAnalysis.Completion
             Optional<ImmutableArray<CompletionItem>> items = default,
             Optional<CompletionRules> rules = default,
             Optional<CompletionItem> suggestionModeItem = default
-        ) {
+        )
+        {
             var newSpan = span.HasValue ? span.Value : Span;
             var newItems = items.HasValue ? items.Value : Items;
             var newRules = rules.HasValue ? rules.Value : Rules;
@@ -118,7 +122,8 @@ namespace Microsoft.CodeAnalysis.Completion
                 && newItems == Items
                 && newRules == Rules
                 && newSuggestionModeItem == SuggestionModeItem
-            ) {
+            )
+            {
                 return this;
             }
             else

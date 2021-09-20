@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
             ServiceHubRemoteHostClient client,
             UnitTestingServiceDescriptorsWrapper serviceDescriptors,
             UnitTestingRemoteServiceCallbackDispatcherRegistry callbackDispatchers
-        ) {
+        )
+        {
             _client = client;
             _serviceDescriptors = serviceDescriptors;
             _callbackDispatchers = callbackDispatchers;
@@ -34,7 +35,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
             UnitTestingServiceDescriptorsWrapper serviceDescriptors,
             UnitTestingRemoteServiceCallbackDispatcherRegistry callbackDispatchers,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var client = await RemoteHostClient.TryGetClientAsync(services, cancellationToken)
                 .ConfigureAwait(false);
             if (client is null)

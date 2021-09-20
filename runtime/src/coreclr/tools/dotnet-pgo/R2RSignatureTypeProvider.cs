@@ -28,7 +28,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
         TypeDesc IConstructedTypeProvider<TypeDesc>.GetArrayType(
             TypeDesc elementType,
             ArrayShape shape
-        ) {
+        )
+        {
             if (elementType == null)
                 return null;
             return elementType.MakeArrayType(shape.Rank);
@@ -62,7 +63,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
 
         TypeDesc ISignatureTypeProvider<TypeDesc, R2RSigProviderContext>.GetFunctionPointerType(
             MethodSignature<TypeDesc> signature
-        ) {
+        )
+        {
             // Cannot exist in entrypoint definition
             throw new System.NotImplementedException();
         }
@@ -70,7 +72,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
         TypeDesc IConstructedTypeProvider<TypeDesc>.GetGenericInstantiation(
             TypeDesc genericType,
             ImmutableArray<TypeDesc> typeArguments
-        ) {
+        )
+        {
             if (genericType == null)
                 return null;
 
@@ -88,7 +91,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
         TypeDesc ISignatureTypeProvider<TypeDesc, R2RSigProviderContext>.GetGenericMethodParameter(
             R2RSigProviderContext genericContext,
             int index
-        ) {
+        )
+        {
             // Cannot exist in entrypoint definition
             throw new System.NotImplementedException();
         }
@@ -96,7 +100,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
         TypeDesc ISignatureTypeProvider<TypeDesc, R2RSigProviderContext>.GetGenericTypeParameter(
             R2RSigProviderContext genericContext,
             int index
-        ) {
+        )
+        {
             // Cannot exist in entrypoint definition
             throw new System.NotImplementedException();
         }
@@ -108,7 +113,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
         >.GetInstantiatedMethod(
             MethodDesc uninstantiatedMethod,
             ImmutableArray<TypeDesc> instantiation
-        ) {
+        )
+        {
             if (uninstantiatedMethod == null)
                 return null;
 
@@ -128,7 +134,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             MetadataReader reader,
             MemberReferenceHandle handle,
             TypeDesc owningTypeOverride
-        ) {
+        )
+        {
             var ecmaModule = (EcmaModule)_tsc.GetModuleForSimpleName(
                 reader.GetString(reader.GetAssemblyDefinition().Name)
             );
@@ -155,7 +162,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             MetadataReader reader,
             MethodDefinitionHandle handle,
             TypeDesc owningTypeOverride
-        ) {
+        )
+        {
             var ecmaModule = (EcmaModule)_tsc.GetModuleForSimpleName(
                 reader.GetString(reader.GetAssemblyDefinition().Name)
             );
@@ -187,14 +195,16 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             TypeDesc modifier,
             TypeDesc unmodifiedType,
             bool isRequired
-        ) {
+        )
+        {
             // Cannot exist in entrypoint definition
             throw new System.NotImplementedException();
         }
 
         TypeDesc ISignatureTypeProvider<TypeDesc, R2RSigProviderContext>.GetPinnedType(
             TypeDesc elementType
-        ) {
+        )
+        {
             // Cannot exist in entrypoint definition
             throw new System.NotImplementedException();
         }
@@ -281,7 +291,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             MetadataReader reader,
             TypeDefinitionHandle handle,
             byte rawTypeKind
-        ) {
+        )
+        {
             var ecmaModule = (EcmaModule)_tsc.GetModuleForSimpleName(
                 reader.GetString(reader.GetAssemblyDefinition().Name)
             );
@@ -292,7 +303,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             MetadataReader reader,
             TypeReferenceHandle handle,
             byte rawTypeKind
-        ) {
+        )
+        {
             var ecmaModule = (EcmaModule)_tsc.GetModuleForSimpleName(
                 reader.GetString(reader.GetAssemblyDefinition().Name)
             );
@@ -304,7 +316,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             R2RSigProviderContext genericContext,
             TypeSpecificationHandle handle,
             byte rawTypeKind
-        ) {
+        )
+        {
             var ecmaModule = (EcmaModule)_tsc.GetModuleForSimpleName(
                 reader.GetString(reader.GetAssemblyDefinition().Name)
             );

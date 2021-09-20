@@ -207,7 +207,8 @@ namespace System.Runtime
                     now > LastTimeCheckingAddressSpace + CheckThreshold
                     || now < LastTimeCheckingAddressSpace
                     || LastKnownFreeAddressSpace < (long)segmentSize
-                ) {
+                )
+                {
                     CheckForFreeAddressSpace(segmentSize, false);
                 }
                 bool needContiguousVASpace = (ulong)LastKnownFreeAddressSpace < segmentSize;
@@ -396,7 +397,8 @@ namespace System.Runtime
                 ulong totalFreeAddressSpace,
                 long lastKnownFreeAddressSpace,
                 ulong reservedMem
-            ) {
+            )
+            {
                 _allocationSizeInMB = allocationSizeInMB;
                 _segmentSize = segmentSize;
                 _needPageFile = needPageFile;

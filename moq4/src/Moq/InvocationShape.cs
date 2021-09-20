@@ -89,7 +89,8 @@ namespace Moq
             bool exactGenericTypeArguments = false,
             bool skipMatcherInitialization = false,
             bool allowNonOverridable = false
-        ) {
+        )
+        {
             Debug.Assert(expression != null);
             Debug.Assert(method != null);
 
@@ -132,7 +133,8 @@ namespace Moq
             out LambdaExpression expression,
             out MethodInfo method,
             out IReadOnlyList<Expression> arguments
-        ) {
+        )
+        {
             expression = this.Expression;
             method = this.Method;
             arguments = this.Arguments;
@@ -215,7 +217,8 @@ namespace Moq
                             exact: this.exactGenericTypeArguments,
                             considerTypeMatchers: true
                         )
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -266,7 +269,8 @@ namespace Moq
                         this.Arguments[li] is NewArrayExpression e1
                         && other.Arguments[li] is NewArrayExpression e2
                         && e1.Expressions.Count == e2.Expressions.Count
-                    ) {
+                    )
+                    {
                         for (int j = 0, nj = e1.Expressions.Count; j < nj; ++j)
                         {
                             if (
@@ -274,7 +278,8 @@ namespace Moq
                                     e1.Expressions[j],
                                     e2.Expressions[j]
                                 )
-                            ) {
+                            )
+                            {
                                 return false;
                             }
                         }
@@ -287,7 +292,8 @@ namespace Moq
                         this.partiallyEvaluatedArguments[i],
                         other.partiallyEvaluatedArguments[i]
                     )
-                ) {
+                )
+                {
                     return false;
                 }
             }

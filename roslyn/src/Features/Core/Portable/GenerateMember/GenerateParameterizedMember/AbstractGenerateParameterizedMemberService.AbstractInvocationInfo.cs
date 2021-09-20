@@ -38,14 +38,16 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
 
             protected override ImmutableArray<ITypeParameterSymbol> DetermineTypeParametersWorker(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var typeParameters = ComputeTypeParameters(cancellationToken);
                 return typeParameters.SelectAsArray(tp => MassageTypeParameter(tp));
             }
 
             private ImmutableArray<ITypeParameterSymbol> ComputeTypeParameters(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (IsIdentifierName())
                 {
                     // If the user wrote something like Goo(x) then we still might want to generate

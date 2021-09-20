@@ -126,7 +126,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public async Task<VersionStamp> GetSyntaxVersionAsync(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var textVersion = await this.GetTextVersionAsync(cancellationToken)
                 .ConfigureAwait(false);
             var projectVersion = this.Project.Version;
@@ -227,7 +228,8 @@ namespace Microsoft.CodeAnalysis
         /// </returns>
         public async Task<SyntaxNode?> GetSyntaxRootAsync(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (!this.SupportsSyntaxTree)
             {
                 return null;
@@ -260,7 +262,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public bool TryGetSemanticModel(
             [NotNullWhen(returnValue: true)] out SemanticModel? semanticModel
-        ) {
+        )
+        {
             semanticModel = null;
             return _model != null && _model.TryGetTarget(out semanticModel);
         }
@@ -275,7 +278,8 @@ namespace Microsoft.CodeAnalysis
         /// </returns>
         public async Task<SemanticModel?> GetSemanticModelAsync(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             try
             {
                 if (!this.SupportsSemanticModel)
@@ -383,7 +387,8 @@ namespace Microsoft.CodeAnalysis
         public async Task<IEnumerable<TextChange>> GetTextChangesAsync(
             Document oldDocument,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             try
             {
                 using (
@@ -392,7 +397,8 @@ namespace Microsoft.CodeAnalysis
                         this.Name,
                         cancellationToken
                     )
-                ) {
+                )
+                {
                     if (oldDocument == this)
                     {
                         // no changes
@@ -426,7 +432,8 @@ namespace Microsoft.CodeAnalysis
                                     textChanges.Count == 1
                                     && textChanges[0].Span != new TextSpan(0, oldText.Length)
                                 )
-                            ) {
+                            )
+                            {
                                 return textChanges;
                             }
                         }
@@ -498,7 +505,8 @@ namespace Microsoft.CodeAnalysis
                 solution.BranchId == workspace.PrimaryBranchId
                 && workspace.PartialSemanticsEnabled
                 && this.Project.SupportsCompilation
-            ) {
+            )
+            {
                 var newSolution =
                     this.Project.Solution.WithFrozenPartialCompilationIncludingSpecificDocument(
                         this.Id,
@@ -534,7 +542,8 @@ namespace Microsoft.CodeAnalysis
         internal Task<DocumentOptionSet> GetOptionsAsync(
             OptionSet solutionOptions,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // TODO: we have this workaround since Solution.Options is not actually snapshot but just return Workspace.Options which violate snapshot model.
             //       this doesn't validate whether same optionset is given to invalidate the cache or not. this is not new since existing implementation
             //       also didn't check whether Workspace.Option is same as before or not. all weird-ness come from the root cause of Solution.Options violating
@@ -572,7 +581,8 @@ namespace Microsoft.CodeAnalysis
 
         internal Task<ImmutableDictionary<string, string>> GetAnalyzerOptionsAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var projectFilePath = Project.FilePath;
             // We need to work out path to this document. Documents may not have a "real" file path if they're something created
             // as a part of a code action, but haven't been written to disk yet.
@@ -589,7 +599,8 @@ namespace Microsoft.CodeAnalysis
                 if (
                     !RoslynString.IsNullOrEmpty(projectPath)
                     && PathUtilities.GetDirectoryName(projectFilePath) is string directory
-                ) {
+                )
+                {
                     effectiveFilePath = PathUtilities.CombinePathsUnchecked(directory, Name);
                 }
             }

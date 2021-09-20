@@ -127,7 +127,8 @@ namespace Microsoft.AspNetCore.Components.WebView.WindowsForms
             if (
                 !IsAncestorSiteInDesignMode
                 && (!RequiredStartupPropertiesSet || _webviewManager != null)
-            ) {
+            )
+            {
                 return;
             }
 
@@ -155,7 +156,8 @@ namespace Microsoft.AspNetCore.Components.WebView.WindowsForms
         private void HandleRootComponentsCollectionChanged(
             object sender,
             NotifyCollectionChangedEventArgs eventArgs
-        ) {
+        )
+        {
             // If we haven't initialized yet, this is a no-op
             if (_webviewManager != null)
             {

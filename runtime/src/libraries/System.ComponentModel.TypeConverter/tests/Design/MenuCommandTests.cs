@@ -42,7 +42,8 @@ namespace System.ComponentModel.Design.Tests
             bool value,
             int expectedOleStatus1,
             int expectedOleStatus2
-        ) {
+        )
+        {
             var command = new MenuCommand(null, null) { Checked = value };
             Assert.Equal(value, command.Checked);
             Assert.Equal(expectedOleStatus1, command.OleStatus);
@@ -100,7 +101,8 @@ namespace System.ComponentModel.Design.Tests
             bool value,
             int expectedOleStatus1,
             int expectedOleStatus2
-        ) {
+        )
+        {
             var command = new MenuCommand(null, null) { Enabled = value };
             Assert.Equal(value, command.Enabled);
             Assert.Equal(expectedOleStatus1, command.OleStatus);
@@ -158,7 +160,8 @@ namespace System.ComponentModel.Design.Tests
             bool value,
             int expectedOleStatus1,
             int expectedOleStatus2
-        ) {
+        )
+        {
             var command = new MenuCommand(null, null) { Supported = value };
             Assert.Equal(value, command.Supported);
             Assert.Equal(expectedOleStatus1, command.OleStatus);
@@ -216,7 +219,8 @@ namespace System.ComponentModel.Design.Tests
             bool value,
             int expectedOleStatus1,
             int expectedOleStatus2
-        ) {
+        )
+        {
             var command = new MenuCommand(null, null) { Visible = value };
             Assert.Equal(value, command.Visible);
             Assert.Equal(expectedOleStatus1, command.OleStatus);

@@ -118,7 +118,8 @@ namespace System.Globalization.Tests
             DateTimeFormatInfo dtfi,
             Calendar calendar,
             string nativeCalendarName
-        ) {
+        )
+        {
             try
             {
                 dtfi.Calendar = calendar;

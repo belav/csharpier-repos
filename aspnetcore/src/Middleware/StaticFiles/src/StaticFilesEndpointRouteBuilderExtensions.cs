@@ -39,7 +39,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IEndpointConventionBuilder MapFallbackToFile(
             this IEndpointRouteBuilder endpoints,
             string filePath
-        ) {
+        )
+        {
             if (endpoints == null)
             {
                 throw new ArgumentNullException(nameof(endpoints));
@@ -78,7 +79,8 @@ namespace Microsoft.AspNetCore.Builder
             this IEndpointRouteBuilder endpoints,
             string filePath,
             StaticFileOptions options
-        ) {
+        )
+        {
             if (endpoints == null)
             {
                 throw new ArgumentNullException(nameof(endpoints));
@@ -123,7 +125,8 @@ namespace Microsoft.AspNetCore.Builder
             this IEndpointRouteBuilder endpoints,
             string pattern,
             string filePath
-        ) {
+        )
+        {
             if (endpoints == null)
             {
                 throw new ArgumentNullException(nameof(endpoints));
@@ -172,7 +175,8 @@ namespace Microsoft.AspNetCore.Builder
             string pattern,
             string filePath,
             StaticFileOptions options
-        ) {
+        )
+        {
             if (endpoints == null)
             {
                 throw new ArgumentNullException(nameof(endpoints));
@@ -198,7 +202,8 @@ namespace Microsoft.AspNetCore.Builder
             IEndpointRouteBuilder endpoints,
             string filePath,
             StaticFileOptions? options = null
-        ) {
+        )
+        {
             var app = endpoints.CreateApplicationBuilder();
             app.Use(
                 next =>

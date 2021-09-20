@@ -77,7 +77,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private void AddTypeParameters(
             TypeSyntax typeSyntax,
             MultiDictionary<string, TypeParameterSymbol> map
-        ) {
+        )
+        {
             switch (typeSyntax.Kind())
             {
                 case SyntaxKind.AliasQualifiedName:
@@ -104,7 +105,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private void AddTypeParameters(
             MemberCrefSyntax memberSyntax,
             MultiDictionary<string, TypeParameterSymbol> map
-        ) {
+        )
+        {
             // Other members have arity 0.
             if (memberSyntax.Kind() == SyntaxKind.NameMemberCref)
             {
@@ -115,7 +117,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static void AddTypeParameters(
             GenericNameSyntax genericNameSyntax,
             MultiDictionary<string, TypeParameterSymbol> map
-        ) {
+        )
+        {
             // NOTE: Dev11 does not warn about duplication, it just matches parameter types to the
             // *last* type parameter with the same name.  That's why we're iterating backwards and
             // skipping subsequent symbols with the same name.  This can result in some surprising
@@ -152,7 +155,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             LookupSymbolsInfo result,
             LookupOptions options,
             Binder originalBinder
-        ) {
+        )
+        {
             if (CanConsiderTypeParameters(options))
             {
                 foreach (var kvp in TypeParameterMap)

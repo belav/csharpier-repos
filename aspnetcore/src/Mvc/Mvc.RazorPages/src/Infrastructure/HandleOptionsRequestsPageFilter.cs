@@ -42,7 +42,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 context.HandlerMethod == null
                 && context.Result == null
                 && HttpMethods.IsOptions(context.HttpContext.Request.Method)
-            ) {
+            )
+            {
                 context.Result = new OkResult();
             }
         }

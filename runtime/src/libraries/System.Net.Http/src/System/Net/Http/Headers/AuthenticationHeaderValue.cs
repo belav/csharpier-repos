@@ -102,7 +102,8 @@ namespace System.Net.Http.Headers
         public static bool TryParse(
             [NotNullWhen(true)] string? input,
             [NotNullWhen(true)] out AuthenticationHeaderValue? parsedValue
-        ) {
+        )
+        {
             int index = 0;
             parsedValue = null;
 
@@ -113,7 +114,8 @@ namespace System.Net.Http.Headers
                     ref index,
                     out object? output
                 )
-            ) {
+            )
+            {
                 parsedValue = (AuthenticationHeaderValue)output!;
                 return true;
             }
@@ -124,7 +126,8 @@ namespace System.Net.Http.Headers
             string? input,
             int startIndex,
             out object? parsedValue
-        ) {
+        )
+        {
             Debug.Assert(startIndex >= 0);
 
             parsedValue = null;
@@ -217,7 +220,8 @@ namespace System.Net.Http.Headers
             string input,
             ref int current,
             ref int parameterEndIndex
-        ) {
+        )
+        {
             // Find the delimiter: Note that <blob> in "<scheme> <blob>" may be a token, quoted string, name/value
             // pair or a Base64 encoded string. So make sure that we don't consider ',' characters within a quoted
             // string as delimiter.
@@ -229,7 +233,8 @@ namespace System.Net.Http.Headers
                     if (
                         HttpRuleParser.GetQuotedStringLength(input, current, out quotedStringLength)
                         != HttpParseResult.Parsed
-                    ) {
+                    )
+                    {
                         // We have a quote but an invalid quoted-string.
                         return false;
                     }
@@ -262,7 +267,8 @@ namespace System.Net.Http.Headers
             string input,
             ref int parseEndIndex,
             ref int parameterEndIndex
-        ) {
+        )
+        {
             Debug.Assert(parseEndIndex < input.Length, "Expected string to have at least 1 char");
             Debug.Assert(input[parseEndIndex] == ',');
 

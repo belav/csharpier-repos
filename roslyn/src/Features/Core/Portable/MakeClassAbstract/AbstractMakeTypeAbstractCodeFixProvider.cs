@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.MakeTypeAbstract
                     context.Diagnostics[0].Location?.FindNode(context.CancellationToken),
                     out _
                 )
-            ) {
+            )
+            {
                 context.RegisterCodeFix(
                     new MyCodeAction(c => FixAsync(context.Document, context.Diagnostics[0], c)),
                     context.Diagnostics
@@ -46,7 +47,8 @@ namespace Microsoft.CodeAnalysis.MakeTypeAbstract
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             for (var i = 0; i < diagnostics.Length; i++)
             {
                 if (
@@ -54,7 +56,8 @@ namespace Microsoft.CodeAnalysis.MakeTypeAbstract
                         diagnostics[i].Location?.FindNode(cancellationToken),
                         out var typeDeclaration
                     )
-                ) {
+                )
+                {
                     editor.ReplaceNode(
                         typeDeclaration,
                         (currentTypeDeclaration, generator) =>
@@ -71,13 +74,12 @@ namespace Microsoft.CodeAnalysis.MakeTypeAbstract
 
         private class MyCodeAction : CodeAction.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                FeaturesResources.Make_class_abstract,
-                createChangedDocument,
-                FeaturesResources.Make_class_abstract
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    FeaturesResources.Make_class_abstract,
+                    createChangedDocument,
+                    FeaturesResources.Make_class_abstract
+                ) { }
         }
     }
 }

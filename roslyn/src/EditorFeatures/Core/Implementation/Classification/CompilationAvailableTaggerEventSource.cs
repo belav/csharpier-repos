@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             IThreadingContext threadingContext,
             IAsynchronousOperationListener asyncListener,
             params ITaggerEventSource[] eventSources
-        ) {
+        )
+        {
             _subjectBuffer = subjectBuffer;
             _delay = delay;
             _asyncListener = asyncListener;

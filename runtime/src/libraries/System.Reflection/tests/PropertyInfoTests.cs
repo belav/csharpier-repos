@@ -19,7 +19,8 @@ namespace System.Reflection.Tests
         public void GetConstantValue_NotConstant_ThrowsInvalidOperationException(
             Type type,
             string name
-        ) {
+        )
+        {
             PropertyInfo propertyInfo = GetProperty(type, name);
             Assert.Throws<InvalidOperationException>(() => propertyInfo.GetConstantValue());
             Assert.Throws<InvalidOperationException>(() => propertyInfo.GetRawConstantValue());
@@ -166,7 +167,8 @@ namespace System.Reflection.Tests
             object obj,
             object[] index,
             Type exceptionType
-        ) {
+        )
+        {
             PropertyInfo propertyInfo = GetProperty(type, name);
             Assert.Throws(exceptionType, () => propertyInfo.GetValue(obj, index));
         }
@@ -256,7 +258,8 @@ namespace System.Reflection.Tests
             object value,
             object[] index,
             object expected
-        ) {
+        )
+        {
             PropertyInfo PropertyInfo = GetProperty(type, name);
             object originalValue;
             if (index == null)
@@ -371,7 +374,8 @@ namespace System.Reflection.Tests
             object value,
             object[] index,
             Type exceptionType
-        ) {
+        )
+        {
             PropertyInfo PropertyInfo = GetProperty(type, name);
             Assert.Throws(exceptionType, () => PropertyInfo.SetValue(obj, value, index));
         }
@@ -408,7 +412,8 @@ namespace System.Reflection.Tests
             string name,
             int accessorPublicCount,
             int accessorPublicAndNonPublicCount
-        ) {
+        )
+        {
             PropertyInfo pi = typeof(PropertyInfoMembers).GetTypeInfo()
                 .GetProperty(
                     name,
@@ -445,7 +450,8 @@ namespace System.Reflection.Tests
             bool nonPublicGet,
             bool publicSet,
             bool nonPublicSet
-        ) {
+        )
+        {
             PropertyInfo pi = typeof(PropertyInfoMembers).GetTypeInfo()
                 .GetProperty(
                     name,

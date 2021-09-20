@@ -1358,7 +1358,8 @@ namespace System.Web.Mvc.Test
             HtmlHelper htmlHelper,
             string expectedMessage,
             params ModelClientValidationRule[] rules
-        ) {
+        )
+        {
             htmlHelper.ClientValidationRuleFactory = delegate
             {
                 return rules;
@@ -1372,7 +1373,8 @@ namespace System.Web.Mvc.Test
         internal static ValueProviderResult GetValueProviderResult(
             object rawValue,
             string attemptedValue
-        ) {
+        )
+        {
             return new ValueProviderResult(rawValue, attemptedValue, CultureInfo.InvariantCulture);
         }
 
@@ -1405,7 +1407,8 @@ namespace System.Web.Mvc.Test
                 object model,
                 TextWriter writer,
                 params IViewEngine[] engines
-            ) {
+            )
+            {
                 base.RenderPartialInternal(
                     partialViewName,
                     viewData,

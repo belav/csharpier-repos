@@ -34,7 +34,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             ConcurrencyCheckAttribute attribute,
             MemberInfo clrMember,
             IConventionContext context
-        ) {
+        )
+        {
             propertyBuilder.IsConcurrencyToken(true, fromDataAnnotation: true);
         }
     }

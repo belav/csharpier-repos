@@ -55,7 +55,8 @@ namespace System.ComponentModel.Design.Serialization
         public DesignerSerializerAttribute(
             string? serializerTypeName,
             string? baseSerializerTypeName
-        ) {
+        )
+        {
             SerializerTypeName = serializerTypeName;
             SerializerBaseTypeName = baseSerializerTypeName;
         }

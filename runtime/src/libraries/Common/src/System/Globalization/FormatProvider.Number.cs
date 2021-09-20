@@ -359,7 +359,8 @@ namespace System.Globalization
                 char* pEnd,
                 string negativeSign,
                 bool allowHyphenDuringParsing
-            ) {
+            )
+            {
                 char* ret = MatchChars(p, pEnd, negativeSign);
                 if (ret == null && allowHyphenDuringParsing && p < pEnd && *p == '-')
                 {
@@ -377,7 +378,8 @@ namespace System.Globalization
                 StringBuilder? sb,
                 NumberFormatInfo numfmt,
                 bool parseDecimal
-            ) {
+            )
+            {
                 Debug.Assert(str != null);
                 Debug.Assert(strEnd != null);
                 Debug.Assert(str <= strEnd);
@@ -434,7 +436,8 @@ namespace System.Globalization
                             (state & StateSign) != 0
                             && ((state & StateCurrency) == 0 && numfmt.NumberNegativePattern != 2)
                         )
-                    ) {
+                    )
+                    {
                         if (
                             (
                                 ((options & NumberStyles.AllowLeadingSign) != 0)
@@ -454,7 +457,8 @@ namespace System.Globalization
                                     && (number.sign = true)
                                 )
                             )
-                        ) {
+                        )
+                        {
                             state |= StateSign;
                             p = next - 1;
                         }
@@ -462,13 +466,15 @@ namespace System.Globalization
                             ch == '('
                             && ((options & NumberStyles.AllowParentheses) != 0)
                             && ((state & StateSign) == 0)
-                        ) {
+                        )
+                        {
                             state |= StateSign | StateParens;
                             number.sign = true;
                         }
                         else if (
                             currSymbol != null && (next = MatchChars(p, strEnd, currSymbol)) != null
-                        ) {
+                        )
+                        {
                             state |= StateCurrency;
                             currSymbol = null;
 
@@ -494,14 +500,16 @@ namespace System.Globalization
                             ((options & NumberStyles.AllowHexSpecifier) != 0)
                             && ((ch >= 'a' && ch <= 'f') || (ch >= 'A' && ch <= 'F'))
                         )
-                    ) {
+                    )
+                    {
                         state |= StateDigits;
 
                         if (
                             ch != '0'
                             || (state & StateNonZero) != 0
                             || (bigNumber && ((options & NumberStyles.AllowHexSpecifier) != 0))
-                        ) {
+                        )
+                        {
                             if (digCount < maxParseDigits)
                             {
                                 if (bigNumber)
@@ -538,7 +546,8 @@ namespace System.Globalization
                                 && (next = MatchChars(p, strEnd, numfmt.NumberDecimalSeparator))
                                     != null
                         )
-                    ) {
+                    )
+                    {
                         state |= StateDecimal;
                         p = next - 1;
                     }
@@ -552,7 +561,8 @@ namespace System.Globalization
                                 && (next = MatchChars(p, strEnd, numfmt.NumberGroupSeparator))
                                     != null
                         )
-                    ) {
+                    )
+                    {
                         p = next - 1;
                     }
                     else
@@ -587,7 +597,8 @@ namespace System.Globalization
                                     allowHyphenDuringParsing
                                 )
                             ) != null
-                        ) {
+                        )
+                        {
                             ch = (p = next) < strEnd ? *p : '\0';
                             negExp = true;
                         }
@@ -643,7 +654,8 @@ namespace System.Globalization
                                         ) && (number.sign = true)
                                     )
                                 )
-                            ) {
+                            )
+                            {
                                 state |= StateSign;
                                 p = next - 1;
                             }
@@ -654,7 +666,8 @@ namespace System.Globalization
                             else if (
                                 currSymbol != null
                                 && (next = MatchChars(p, strEnd, currSymbol)) != null
-                            ) {
+                            )
+                            {
                                 currSymbol = null;
                                 p = next - 1;
                             }
@@ -706,7 +719,8 @@ namespace System.Globalization
                 StringBuilder sb,
                 NumberFormatInfo numfmt,
                 bool parseDecimal
-            ) {
+            )
+            {
                 Debug.Assert(numfmt != null);
 
                 fixed (char* stringPointer = &MemoryMarshal.GetReference(str))
@@ -726,7 +740,8 @@ namespace System.Globalization
                             p - stringPointer < str.Length
                             && !TrailingZeros(str, (int)(p - stringPointer))
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }
@@ -803,7 +818,8 @@ namespace System.Globalization
                 ref int index,
                 uint value,
                 int digits
-            ) {
+            )
+            {
                 while (--digits >= 0 || value != 0)
                 {
                     buffer[--index] = (char)(value % 10 + '0');
@@ -890,7 +906,8 @@ namespace System.Globalization
                 int nMaxDigits,
                 NumberFormatInfo info,
                 bool isDecimal
-            ) {
+            )
+            {
                 int nMinDigits = -1;
 
                 switch (format)
@@ -1066,7 +1083,8 @@ namespace System.Globalization
                 int nMinDigits,
                 int nMaxDigits,
                 NumberFormatInfo info
-            ) {
+            )
+            {
                 string fmt = number.sign
                     ? s_negCurrencyFormats[info.CurrencyNegativePattern]
                     : s_posCurrencyFormats[info.CurrencyPositivePattern];
@@ -1109,7 +1127,8 @@ namespace System.Globalization
                 int[]? groupDigits,
                 string sDecimal,
                 string? sGroup
-            ) {
+            )
+            {
                 Debug.Assert(sGroup != null || groupDigits == null);
 
                 int digPos = number.scale;
@@ -1235,7 +1254,8 @@ namespace System.Globalization
                 int nMinDigits,
                 int nMaxDigits,
                 NumberFormatInfo info
-            ) {
+            )
+            {
                 string fmt = number.sign
                     ? s_negNumberFormats[info.NumberNegativePattern]
                     : PosNumberFormat;
@@ -1273,7 +1293,8 @@ namespace System.Globalization
                 int nMaxDigits,
                 NumberFormatInfo info,
                 char expChar
-            ) {
+            )
+            {
                 char* dig = number.digits;
 
                 sb.Append((*dig != 0) ? *dig++ : '0');
@@ -1299,7 +1320,8 @@ namespace System.Globalization
                 char expChar,
                 int minDigits,
                 bool positiveSign
-            ) {
+            )
+            {
                 sb.Append(expChar);
 
                 if (value < 0)
@@ -1333,7 +1355,8 @@ namespace System.Globalization
                 NumberFormatInfo info,
                 char expChar,
                 bool bSuppressScientific
-            ) {
+            )
+            {
                 int digPos = number.scale;
                 bool scientific = false;
 
@@ -1389,7 +1412,8 @@ namespace System.Globalization
                 int nMinDigits,
                 int nMaxDigits,
                 NumberFormatInfo info
-            ) {
+            )
+            {
                 string fmt = number.sign
                     ? s_negPercentFormats[info.PercentNegativePattern]
                     : s_posPercentFormats[info.PercentPositivePattern];
@@ -1524,7 +1548,8 @@ namespace System.Globalization
                 ref NumberBuffer number,
                 ReadOnlySpan<char> format,
                 NumberFormatInfo info
-            ) {
+            )
+            {
                 int digitCount;
                 int decimalPos;
                 int firstDigit;
@@ -1625,7 +1650,8 @@ namespace System.Globalization
                                             && (pFormat[src] == '+' || pFormat[src] == '-')
                                             && pFormat[src + 1] == '0'
                                         )
-                                    ) {
+                                    )
+                                    {
                                         while (++src < format.Length && pFormat[src] == '0')
                                             ;
                                         scientific = true;
@@ -1844,7 +1870,8 @@ namespace System.Globalization
                             case '"':
                                 while (
                                     src < format.Length && pFormat[src] != 0 && pFormat[src] != ch
-                                ) {
+                                )
+                                {
                                     sb.Append(pFormat[src++]);
                                 }
 
@@ -1875,7 +1902,8 @@ namespace System.Globalization
                                         src + 1 < format.Length
                                         && pFormat[src] == '+'
                                         && pFormat[src + 1] == '0'
-                                    ) {
+                                    )
+                                    {
                                         // Handles E+0
                                         positiveSign = true;
                                     }
@@ -1883,7 +1911,8 @@ namespace System.Globalization
                                         src + 1 < format.Length
                                         && pFormat[src] == '-'
                                         && pFormat[src + 1] == '0'
-                                    ) {
+                                    )
+                                    {
                                         // Handles E-0
                                         // Do nothing, this is just a place holder s.t. we don't break out of the loop.
                                     }

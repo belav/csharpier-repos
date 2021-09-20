@@ -13,11 +13,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// </summary>
     internal sealed class CSDiagnostic : DiagnosticWithInfo
     {
-        internal CSDiagnostic(
-            DiagnosticInfo info,
-            Location location,
-            bool isSuppressed = false
-        ) : base(info, location, isSuppressed) { }
+        internal CSDiagnostic(DiagnosticInfo info, Location location, bool isSuppressed = false)
+            : base(info, location, isSuppressed) { }
 
         public override string ToString()
         {

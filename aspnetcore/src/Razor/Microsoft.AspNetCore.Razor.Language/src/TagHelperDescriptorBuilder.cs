@@ -30,7 +30,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             string kind,
             string name,
             string assemblyName
-        ) {
+        )
+        {
             if (kind == null)
             {
                 throw new ArgumentNullException(nameof(kind));

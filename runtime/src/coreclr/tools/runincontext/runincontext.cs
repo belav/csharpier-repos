@@ -173,7 +173,8 @@ class TestAssemblyLoadContext : TestAssemblyLoadContextBase
         string assemblyDirectory,
         string referencesDirectory,
         List<WeakReference> assemblyReferences
-    ) {
+    )
+    {
         _assemblyDirectory = assemblyDirectory;
         _referencesDirectory = referencesDirectory;
         _assemblyReferences = assemblyReferences;
@@ -232,9 +233,7 @@ class TestAssemblyLoadContextDelegating : TestAssemblyLoadContextBase
     }
 }
 
-public class UnloadFailedException : Exception
-{
-}
+public class UnloadFailedException : Exception { }
 
 public class TestRunner
 {
@@ -284,7 +283,8 @@ public class TestRunner
             if (
                 !_input.MonitorMode
                 && (((i * 1.0) / _input.StressModeCount) * 100 > lastProgressReport)
-            ) {
+            )
+            {
                 Console.WriteLine("Completed: {0}%...", lastProgressReport);
                 lastProgressReport += 10;
             }
@@ -436,7 +436,8 @@ public class TestRunner
         List<WeakReference> assemblyReferences,
         out WeakReference testAlcWeakRef,
         out WeakReference testAlcWeakRefInner
-    ) {
+    )
+    {
         int result;
         TestAssemblyLoadContextBase testAlc = new TestAssemblyLoadContext(
             _input.AssemblyPath,

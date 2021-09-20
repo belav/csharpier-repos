@@ -26,7 +26,8 @@ namespace System.ComponentModel
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
             )]
                 string designerTypeName
-        ) {
+        )
+        {
             DesignerTypeName =
                 designerTypeName ?? throw new ArgumentNullException(nameof(designerTypeName));
             DesignerBaseTypeName =
@@ -42,7 +43,8 @@ namespace System.ComponentModel
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
             )]
                 Type designerType
-        ) {
+        )
+        {
             if (designerType == null)
             {
                 throw new ArgumentNullException(nameof(designerType));
@@ -66,7 +68,8 @@ namespace System.ComponentModel
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
             )]
                 string designerBaseTypeName
-        ) {
+        )
+        {
             DesignerTypeName =
                 designerTypeName ?? throw new ArgumentNullException(nameof(designerTypeName));
             DesignerBaseTypeName = designerBaseTypeName;
@@ -85,7 +88,8 @@ namespace System.ComponentModel
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
             )]
                 Type designerBaseType
-        ) {
+        )
+        {
             if (designerTypeName == null)
             {
                 throw new ArgumentNullException(nameof(designerTypeName));
@@ -112,7 +116,8 @@ namespace System.ComponentModel
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
             )]
                 Type designerBaseType
-        ) {
+        )
+        {
             if (designerType == null)
             {
                 throw new ArgumentNullException(nameof(designerType));

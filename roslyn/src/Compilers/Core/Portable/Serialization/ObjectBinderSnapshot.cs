@@ -20,7 +20,8 @@ namespace Roslyn.Utilities
             Dictionary<Type, int> typeToIndex,
             List<Type> types,
             List<Func<ObjectReader, IObjectWritable>> typeReaders
-        ) {
+        )
+        {
             _typeToIndex = new Dictionary<Type, int>(typeToIndex);
             _types = types.ToImmutableArray();
             _typeReaders = typeReaders.ToImmutableArray();

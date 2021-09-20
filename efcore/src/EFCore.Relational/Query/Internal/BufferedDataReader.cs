@@ -201,7 +201,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         public virtual async Task<BufferedDataReader> InitializeAsync(
             IReadOnlyList<ReaderColumn> columns,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (_underlyingReader == null)
             {
                 return this;
@@ -333,7 +334,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             byte[]? buffer,
             int bufferOffset,
             int length
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
 
@@ -361,7 +363,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             char[]? buffer,
             int bufferOffset,
             int length
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
 
@@ -494,7 +497,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         public override Task<T> GetFieldValueAsync<T>(
             int ordinal,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             AssertFieldIsReady(ordinal);
             return _currentResultSet.GetFieldValueAsync<T>(ordinal, cancellationToken);
         }
@@ -912,7 +916,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             public BufferedDataRecord Initialize(
                 DbDataReader reader,
                 IReadOnlyList<ReaderColumn> columns
-            ) {
+            )
+            {
                 _underlyingReader = reader;
                 _columns = columns;
 
@@ -940,7 +945,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 DbDataReader reader,
                 IReadOnlyList<ReaderColumn> columns,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 _underlyingReader = reader;
                 _columns = columns;
 
@@ -987,7 +993,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                                         _tempNulls[_currentRowNumber * _nullCount + nullIndex] =
                                             _underlyingReader.IsDBNull(i)
                                     )
-                                ) {
+                                )
+                                {
                                     ReadBool(_underlyingReader, i, column);
                                 }
                             }
@@ -1004,7 +1011,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                                         _tempNulls[_currentRowNumber * _nullCount + nullIndex] =
                                             _underlyingReader.IsDBNull(i)
                                     )
-                                ) {
+                                )
+                                {
                                     ReadByte(_underlyingReader, i, column);
                                 }
                             }
@@ -1021,7 +1029,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                                         _tempNulls[_currentRowNumber * _nullCount + nullIndex] =
                                             _underlyingReader.IsDBNull(i)
                                     )
-                                ) {
+                                )
+                                {
                                     ReadChar(_underlyingReader, i, column);
                                 }
                             }
@@ -1038,7 +1047,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                                         _tempNulls[_currentRowNumber * _nullCount + nullIndex] =
                                             _underlyingReader.IsDBNull(i)
                                     )
-                                ) {
+                                )
+                                {
                                     ReadDateTime(_underlyingReader, i, column);
                                 }
                             }
@@ -1055,7 +1065,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                                         _tempNulls[_currentRowNumber * _nullCount + nullIndex] =
                                             _underlyingReader.IsDBNull(i)
                                     )
-                                ) {
+                                )
+                                {
                                     ReadDateTimeOffset(_underlyingReader, i, column);
                                 }
                             }
@@ -1072,7 +1083,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                                         _tempNulls[_currentRowNumber * _nullCount + nullIndex] =
                                             _underlyingReader.IsDBNull(i)
                                     )
-                                ) {
+                                )
+                                {
                                     ReadDecimal(_underlyingReader, i, column);
                                 }
                             }
@@ -1089,7 +1101,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                                         _tempNulls[_currentRowNumber * _nullCount + nullIndex] =
                                             _underlyingReader.IsDBNull(i)
                                     )
-                                ) {
+                                )
+                                {
                                     ReadDouble(_underlyingReader, i, column);
                                 }
                             }
@@ -1106,7 +1119,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                                         _tempNulls[_currentRowNumber * _nullCount + nullIndex] =
                                             _underlyingReader.IsDBNull(i)
                                     )
-                                ) {
+                                )
+                                {
                                     ReadFloat(_underlyingReader, i, column);
                                 }
                             }
@@ -1123,7 +1137,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                                         _tempNulls[_currentRowNumber * _nullCount + nullIndex] =
                                             _underlyingReader.IsDBNull(i)
                                     )
-                                ) {
+                                )
+                                {
                                     ReadGuid(_underlyingReader, i, column);
                                 }
                             }
@@ -1140,7 +1155,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                                         _tempNulls[_currentRowNumber * _nullCount + nullIndex] =
                                             _underlyingReader.IsDBNull(i)
                                     )
-                                ) {
+                                )
+                                {
                                     ReadShort(_underlyingReader, i, column);
                                 }
                             }
@@ -1157,7 +1173,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                                         _tempNulls[_currentRowNumber * _nullCount + nullIndex] =
                                             _underlyingReader.IsDBNull(i)
                                     )
-                                ) {
+                                )
+                                {
                                     ReadInt(_underlyingReader, i, column);
                                 }
                             }
@@ -1174,7 +1191,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                                         _tempNulls[_currentRowNumber * _nullCount + nullIndex] =
                                             _underlyingReader.IsDBNull(i)
                                     )
-                                ) {
+                                )
+                                {
                                     ReadLong(_underlyingReader, i, column);
                                 }
                             }
@@ -1191,7 +1209,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                                         _tempNulls[_currentRowNumber * _nullCount + nullIndex] =
                                             _underlyingReader.IsDBNull(i)
                                     )
-                                ) {
+                                )
+                                {
                                     ReadSByte(_underlyingReader, i, column);
                                 }
                             }
@@ -1208,7 +1227,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                                         _tempNulls[_currentRowNumber * _nullCount + nullIndex] =
                                             _underlyingReader.IsDBNull(i)
                                     )
-                                ) {
+                                )
+                                {
                                     ReadUShort(_underlyingReader, i, column);
                                 }
                             }
@@ -1225,7 +1245,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                                         _tempNulls[_currentRowNumber * _nullCount + nullIndex] =
                                             _underlyingReader.IsDBNull(i)
                                     )
-                                ) {
+                                )
+                                {
                                     ReadUInt(_underlyingReader, i, column);
                                 }
                             }
@@ -1242,7 +1263,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                                         _tempNulls[_currentRowNumber * _nullCount + nullIndex] =
                                             _underlyingReader.IsDBNull(i)
                                     )
-                                ) {
+                                )
+                                {
                                     ReadULong(_underlyingReader, i, column);
                                 }
                             }
@@ -1261,7 +1283,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                                         _tempNulls[_currentRowNumber * _nullCount + nullIndex] =
                                             _underlyingReader.IsDBNull(i)
                                     )
-                                ) {
+                                )
+                                {
                                     ReadObject(_underlyingReader, i, column);
                                 }
                             }
@@ -2003,7 +2026,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 DbDataReader reader,
                 int ordinal,
                 ReaderColumn column
-            ) {
+            )
+            {
                 var value = reader.GetFieldValue<object>(ordinal);
                 var property = column.Property;
                 var expectedType = column.Type.MakeNullable(column.IsNullable);

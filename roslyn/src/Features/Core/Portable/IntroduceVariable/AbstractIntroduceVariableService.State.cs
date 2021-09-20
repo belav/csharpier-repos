@@ -55,12 +55,14 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                 SemanticDocument document,
                 TextSpan textSpan,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var state = new State(service, document);
                 if (
                     !await state.TryInitializeAsync(document, textSpan, cancellationToken)
                         .ConfigureAwait(false)
-                ) {
+                )
+                {
                     return null;
                 }
 
@@ -71,7 +73,8 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                 SemanticDocument document,
                 TextSpan textSpan,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (cancellationToken.IsCancellationRequested)
                 {
                     return false;
@@ -85,7 +88,8 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                 if (
                     Expression == null
                     || CodeRefactoringHelpers.IsNodeUnderselected(Expression, textSpan)
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -212,17 +216,20 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                     TExpressionSyntax expression,
                     TService service,
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     if (
                         document.SemanticModel.GetConstantValue(expression, cancellationToken) is
                         { HasValue: true, Value: var value }
-                    ) {
+                    )
+                    {
                         var syntaxKindsService =
                             document.Document.GetRequiredLanguageService<ISyntaxKindsService>();
                         if (
                             syntaxKindsService.InterpolatedStringExpression == expression.RawKind
                             && value is string
-                        ) {
+                        )
+                        {
                             // Interpolated strings can have constant values, but if it's being converted to a FormattableString
                             // or IFormattable then we cannot treat it as one
                             var typeInfo = document.SemanticModel.GetTypeInfo(

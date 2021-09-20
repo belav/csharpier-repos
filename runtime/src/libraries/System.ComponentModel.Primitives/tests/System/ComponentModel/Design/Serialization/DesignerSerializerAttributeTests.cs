@@ -17,7 +17,8 @@ namespace System.ComponentModel.Design.Serialization.Tests
         public void Ctor_SerializerType_BaseSerializerType(
             Type serializerType,
             Type baseSerializerType
-        ) {
+        )
+        {
             var attribute = new DesignerSerializerAttribute(serializerType, baseSerializerType);
             Assert.Equal(serializerType.AssemblyQualifiedName, attribute.SerializerTypeName);
             Assert.Equal(
@@ -53,7 +54,8 @@ namespace System.ComponentModel.Design.Serialization.Tests
         public void Ctor_SerializerTypeName_BaseSerializerType(
             string serializerTypeName,
             Type baseSerializerType
-        ) {
+        )
+        {
             var attribute = new DesignerSerializerAttribute(serializerTypeName, baseSerializerType);
             Assert.Equal(serializerTypeName, attribute.SerializerTypeName);
             Assert.Equal(
@@ -68,7 +70,8 @@ namespace System.ComponentModel.Design.Serialization.Tests
         public void Ctor_SerializerTypeName_BaseSerializerTypeName(
             string serializerTypeName,
             string baseSerializerTypeName
-        ) {
+        )
+        {
             var attribute = new DesignerSerializerAttribute(
                 serializerTypeName,
                 baseSerializerTypeName

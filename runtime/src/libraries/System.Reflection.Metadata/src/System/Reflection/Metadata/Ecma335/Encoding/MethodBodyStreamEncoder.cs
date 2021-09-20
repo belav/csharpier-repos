@@ -82,7 +82,8 @@ namespace System.Reflection.Metadata.Ecma335
             StandaloneSignatureHandle localVariablesSignature = default,
             MethodBodyAttributes attributes = MethodBodyAttributes.InitLocals,
             bool hasDynamicStackAllocation = false
-        ) {
+        )
+        {
             if (codeSize < 0)
             {
                 Throw.ArgumentOutOfRange(nameof(codeSize));
@@ -141,7 +142,8 @@ namespace System.Reflection.Metadata.Ecma335
                 int bodyOffset,
                 Blob instructions,
                 ExceptionRegionEncoder exceptionRegions
-            ) {
+            )
+            {
                 Offset = bodyOffset;
                 Instructions = instructions;
                 ExceptionRegions = exceptionRegions;
@@ -198,7 +200,8 @@ namespace System.Reflection.Metadata.Ecma335
             StandaloneSignatureHandle localVariablesSignature = default,
             MethodBodyAttributes attributes = MethodBodyAttributes.InitLocals,
             bool hasDynamicStackAllocation = false
-        ) {
+        )
+        {
             if (unchecked((uint)maxStack) > ushort.MaxValue)
             {
                 Throw.ArgumentOutOfRange(nameof(maxStack));
@@ -264,7 +267,8 @@ namespace System.Reflection.Metadata.Ecma335
             MethodBodyAttributes attributes,
             StandaloneSignatureHandle localVariablesSignature,
             bool hasDynamicStackAllocation
-        ) {
+        )
+        {
             const int TinyFormat = 2;
             const int FatFormat = 3;
             const int MoreSections = 8;

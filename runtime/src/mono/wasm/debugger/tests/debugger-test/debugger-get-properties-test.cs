@@ -237,7 +237,8 @@ namespace DebuggerTests.GetPropertiesTests
             string str2,
             int num3,
             string str3
-        ) {
+        )
+        {
             var mi = typeof(CloneableStruct).GetMethod("SimpleStaticMethod");
             var dt = new DateTime(4210, 3, 4, 5, 6, 7);
             int i = 4;

@@ -45,7 +45,8 @@ namespace System.Globalization
             ReadOnlySpan<char> string1,
             ReadOnlySpan<char> string2,
             CompareOptions options
-        ) {
+        )
+        {
             Debug.Assert(!GlobalizationMode.Invariant);
             Debug.Assert(!GlobalizationMode.UseNls);
             Debug.Assert(
@@ -57,7 +58,8 @@ namespace System.Globalization
 
             fixed (char* pString1 = &MemoryMarshal.GetReference(string1))fixed (
                 char* pString2 = &MemoryMarshal.GetReference(string2)
-            ) {
+            )
+            {
                 return Interop.Globalization.CompareString(
                     _sortHandle,
                     pString1,
@@ -75,7 +77,8 @@ namespace System.Globalization
             CompareOptions options,
             int* matchLengthPtr,
             bool fromBeginning
-        ) {
+        )
+        {
             Debug.Assert(!GlobalizationMode.Invariant);
             Debug.Assert(!GlobalizationMode.UseNls);
             Debug.Assert(target.Length != 0);
@@ -106,7 +109,8 @@ namespace System.Globalization
 
                 fixed (char* pSource = &MemoryMarshal.GetReference(source))fixed (
                     char* pTarget = &MemoryMarshal.GetReference(target)
-                ) {
+                )
+                {
                     if (fromBeginning)
                         return Interop.Globalization.IndexOf(
                             _sortHandle,
@@ -142,7 +146,8 @@ namespace System.Globalization
             CompareOptions options,
             int* matchLengthPtr,
             bool fromBeginning
-        ) {
+        )
+        {
             Debug.Assert(!GlobalizationMode.Invariant);
 
             Debug.Assert(!target.IsEmpty);
@@ -150,7 +155,8 @@ namespace System.Globalization
 
             fixed (char* ap = &MemoryMarshal.GetReference(source))fixed (
                 char* bp = &MemoryMarshal.GetReference(target)
-            ) {
+            )
+            {
                 char* a = ap;
                 char* b = bp;
 
@@ -270,7 +276,8 @@ namespace System.Globalization
             CompareOptions options,
             int* matchLengthPtr,
             bool fromBeginning
-        ) {
+        )
+        {
             Debug.Assert(!GlobalizationMode.Invariant);
 
             Debug.Assert(!target.IsEmpty);
@@ -278,7 +285,8 @@ namespace System.Globalization
 
             fixed (char* ap = &MemoryMarshal.GetReference(source))fixed (
                 char* bp = &MemoryMarshal.GetReference(target)
-            ) {
+            )
+            {
                 char* a = ap;
                 char* b = bp;
 
@@ -387,7 +395,8 @@ namespace System.Globalization
             ReadOnlySpan<char> prefix,
             CompareOptions options,
             int* matchLengthPtr
-        ) {
+        )
+        {
             Debug.Assert(!GlobalizationMode.Invariant);
             Debug.Assert(!GlobalizationMode.UseNls);
 
@@ -433,7 +442,8 @@ namespace System.Globalization
             ReadOnlySpan<char> prefix,
             CompareOptions options,
             int* matchLengthPtr
-        ) {
+        )
+        {
             Debug.Assert(!GlobalizationMode.Invariant);
 
             Debug.Assert(!prefix.IsEmpty);
@@ -531,7 +541,8 @@ namespace System.Globalization
             ReadOnlySpan<char> prefix,
             CompareOptions options,
             int* matchLengthPtr
-        ) {
+        )
+        {
             Debug.Assert(!GlobalizationMode.Invariant);
 
             Debug.Assert(!prefix.IsEmpty);
@@ -616,7 +627,8 @@ namespace System.Globalization
             ReadOnlySpan<char> suffix,
             CompareOptions options,
             int* matchLengthPtr
-        ) {
+        )
+        {
             Debug.Assert(!GlobalizationMode.Invariant);
             Debug.Assert(!GlobalizationMode.UseNls);
 
@@ -657,7 +669,8 @@ namespace System.Globalization
             ReadOnlySpan<char> suffix,
             CompareOptions options,
             int* matchLengthPtr
-        ) {
+        )
+        {
             Debug.Assert(!GlobalizationMode.Invariant);
 
             Debug.Assert(!suffix.IsEmpty);
@@ -755,7 +768,8 @@ namespace System.Globalization
             ReadOnlySpan<char> suffix,
             CompareOptions options,
             int* matchLengthPtr
-        ) {
+        )
+        {
             Debug.Assert(!GlobalizationMode.Invariant);
 
             Debug.Assert(!suffix.IsEmpty);
@@ -873,7 +887,8 @@ namespace System.Globalization
                             sortKeyLength,
                             options
                         ) != sortKeyLength
-                    ) {
+                    )
+                    {
                         throw new ArgumentException(SR.Arg_ExternalException);
                     }
                 }
@@ -886,7 +901,8 @@ namespace System.Globalization
             ReadOnlySpan<char> source,
             Span<byte> destination,
             CompareOptions options
-        ) {
+        )
+        {
             Debug.Assert(!GlobalizationMode.Invariant);
             Debug.Assert(!GlobalizationMode.UseNls);
             Debug.Assert((options & ValidCompareMaskOffFlags) == 0);
@@ -897,7 +913,8 @@ namespace System.Globalization
 
             fixed (char* pSource = &MemoryMarshal.GetReference(source))fixed (
                 byte* pDest = &MemoryMarshal.GetReference(destination)
-            ) {
+            )
+            {
                 actualSortKeyLength = Interop.Globalization.GetSortKey(
                     _sortHandle,
                     pSource,
@@ -957,7 +974,8 @@ namespace System.Globalization
                 if (
                     Rune.DecodeFromUtf16(text, out Rune result, out int charsConsumed)
                     != OperationStatus.Done
-                ) {
+                )
+                {
                     return false; // found an unpaired surrogate somewhere in the text
                 }
 
@@ -965,7 +983,8 @@ namespace System.Globalization
                 if (
                     category == UnicodeCategory.PrivateUse
                     || category == UnicodeCategory.OtherNotAssigned
-                ) {
+                )
+                {
                     return false; // can't sort private use or unassigned code points
                 }
 

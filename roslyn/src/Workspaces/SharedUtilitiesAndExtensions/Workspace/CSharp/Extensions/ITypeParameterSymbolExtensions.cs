@@ -14,13 +14,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
     {
         public static SyntaxList<TypeParameterConstraintClauseSyntax> GenerateConstraintClauses(
             this ImmutableArray<ITypeParameterSymbol> typeParameters
-        ) {
+        )
+        {
             return typeParameters.AsEnumerable().GenerateConstraintClauses();
         }
 
         public static SyntaxList<TypeParameterConstraintClauseSyntax> GenerateConstraintClauses(
             this IEnumerable<ITypeParameterSymbol> typeParameters
-        ) {
+        )
+        {
             var clauses = new List<TypeParameterConstraintClauseSyntax>();
 
             foreach (var typeParameter in typeParameters)
@@ -34,7 +36,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         private static void AddConstraintClauses(
             List<TypeParameterConstraintClauseSyntax> clauses,
             ITypeParameterSymbol typeParameter
-        ) {
+        )
+        {
             var constraints = new List<TypeParameterConstraintSyntax>();
 
             if (typeParameter.HasReferenceTypeConstraint)

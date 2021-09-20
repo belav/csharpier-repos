@@ -32,7 +32,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
             IEndSessionRequestValidator requestValidator,
             IOptions<IdentityServerOptions> identityServerOptions,
             IUserSession session
-        ) {
+        )
+        {
             _logger = logger;
             _session = session;
             _identityServerOptions = identityServerOptions;
@@ -67,7 +68,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
                     ApplicationProfilesPropertyNames.Profile,
                     out var type
                 )
-            ) {
+            )
+            {
                 var signInScheme =
                     _identityServerOptions.Value.Authentication.CookieAuthenticationScheme;
                 if (signInScheme != null)
@@ -124,7 +126,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
                     "application/x-www-form-urlencoded",
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 return new StatusCodeResult(HttpStatusCode.BadRequest);
             }
 

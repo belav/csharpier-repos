@@ -120,7 +120,8 @@ namespace Microsoft.CodeAnalysis.UseCoalesceExpression
                     conditionRightIsNull ? conditionLeftLow : conditionRightLow,
                     isEquals ? whenFalseNodeLow : whenTrueNodeLow
                 )
-            ) {
+            )
+            {
                 return;
             }
 

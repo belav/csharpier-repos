@@ -33,7 +33,8 @@ namespace System.Web.Http.Metadata
             Func<object> modelAccessor,
             Type modelType,
             string propertyName
-        ) {
+        )
+        {
             if (provider == null)
             {
                 throw Error.ArgumentNull("provider");
@@ -197,7 +198,8 @@ namespace System.Web.Http.Metadata
 
         public virtual IEnumerable<ModelValidator> GetValidators(
             IEnumerable<ModelValidatorProvider> validatorProviders
-        ) {
+        )
+        {
             if (validatorProviders == null)
             {
                 throw Error.ArgumentNull("validatorProviders");
@@ -212,7 +214,8 @@ namespace System.Web.Http.Metadata
             Type containerType,
             Type modelType,
             string propertyName
-        ) {
+        )
+        {
             // If metadata is for a property then containerType != null && propertyName != null
             // If metadata is for a type then containerType == null && propertyName == null, so we have to use modelType for the cache key.
             return new EfficientTypePropertyKey<Type, string>(

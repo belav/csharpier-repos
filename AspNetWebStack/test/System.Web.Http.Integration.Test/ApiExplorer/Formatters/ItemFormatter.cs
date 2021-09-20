@@ -22,7 +22,8 @@ namespace System.Web.Http.ApiExplorer
             IO.Stream stream,
             Net.Http.HttpContent content,
             IFormatterLogger formatterLogger
-        ) {
+        )
+        {
             return base.ReadFromStream(type, stream, content, formatterLogger);
         }
 
@@ -31,7 +32,8 @@ namespace System.Web.Http.ApiExplorer
             object value,
             IO.Stream stream,
             Net.Http.HttpContent content
-        ) {
+        )
+        {
             base.WriteToStream(type, value, stream, content);
         }
     }

@@ -44,7 +44,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.FindUsages
         public IErrorListFilterHandler ReplaceFilter(
             IWpfTableControl tableControl,
             string filterIdentifier
-        ) {
+        )
+        {
             if (filterIdentifier == PredefinedScopeFilterNames.AllItemsScopeFilter)
             {
                 return new LoadedSolutionFilterHandler(ServicesVSResources.Loaded_items);

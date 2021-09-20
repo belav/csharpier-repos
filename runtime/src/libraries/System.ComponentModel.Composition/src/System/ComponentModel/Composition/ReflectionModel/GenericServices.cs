@@ -86,7 +86,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
             string originalGenericName,
             int[] genericParametersOrder,
             int genericArity
-        ) {
+        )
+        {
             string[] genericFormatArgs = new string[genericArity];
             for (int i = 0; i < genericParametersOrder.Length; i++)
             {
@@ -117,7 +118,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
         public static IEnumerable<Type>? CreateTypeSpecializations(
             this Type[]? types,
             Type[] specializationTypes
-        ) {
+        )
+        {
             if (types == null)
             {
                 return null;
@@ -163,7 +165,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
             Type? type,
             IEnumerable<Type>? constraints,
             GenericParameterAttributes attributes
-        ) {
+        )
+        {
             return CanSpecialize(type, constraints) && CanSpecialize(type!, attributes);
         }
 

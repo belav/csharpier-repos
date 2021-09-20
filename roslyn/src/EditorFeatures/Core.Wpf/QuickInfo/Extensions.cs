@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.Editor.QuickInfo
         public static ITextBuffer CreateTextBufferWithRoslynContentType(
             this SourceText sourceText,
             Workspace workspace
-        ) {
+        )
+        {
             var cloneService = workspace.Services.GetService<ITextBufferCloneService>();
             return cloneService.CloneWithRoslynContentType(sourceText);
         }
@@ -46,7 +47,8 @@ namespace Microsoft.CodeAnalysis.Editor.QuickInfo
         public static async Task<ITextBuffer> CloneTextBufferAsync(
             this Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var sourceText = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
             return CloneTextBuffer(document, sourceText);
         }

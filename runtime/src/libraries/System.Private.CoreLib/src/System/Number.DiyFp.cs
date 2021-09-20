@@ -37,7 +37,8 @@ namespace System
                 double value,
                 out DiyFp mMinus,
                 out DiyFp mPlus
-            ) {
+            )
+            {
                 var result = new DiyFp(value);
                 result.GetBoundaries(DoubleImplicitBitIndex, out mMinus, out mPlus);
                 return result;
@@ -54,7 +55,8 @@ namespace System
                 float value,
                 out DiyFp mMinus,
                 out DiyFp mPlus
-            ) {
+            )
+            {
                 var result = new DiyFp(value);
                 result.GetBoundaries(SingleImplicitBitIndex, out mMinus, out mPlus);
                 return result;
@@ -71,7 +73,8 @@ namespace System
                 Half value,
                 out DiyFp mMinus,
                 out DiyFp mPlus
-            ) {
+            )
+            {
                 var result = new DiyFp(value);
                 result.GetBoundaries(HalfImplicitBitIndex, out mMinus, out mPlus);
                 return result;

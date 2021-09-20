@@ -29,7 +29,8 @@ namespace System.Text.Json
         internal void WriteNumber(
             ReadOnlySpan<char> propertyName,
             ReadOnlySpan<byte> utf8FormattedNumber
-        ) {
+        )
+        {
             JsonWriterHelper.ValidateProperty(propertyName);
             JsonWriterHelper.ValidateValue(utf8FormattedNumber);
             JsonWriterHelper.ValidateNumber(utf8FormattedNumber);
@@ -61,7 +62,8 @@ namespace System.Text.Json
         internal void WriteNumber(
             ReadOnlySpan<byte> utf8PropertyName,
             ReadOnlySpan<byte> utf8FormattedNumber
-        ) {
+        )
+        {
             JsonWriterHelper.ValidateProperty(utf8PropertyName);
             JsonWriterHelper.ValidateValue(utf8FormattedNumber);
             JsonWriterHelper.ValidateNumber(utf8FormattedNumber);
@@ -75,7 +77,8 @@ namespace System.Text.Json
         internal void WriteNumber(
             JsonEncodedText propertyName,
             ReadOnlySpan<byte> utf8FormattedNumber
-        ) {
+        )
+        {
             JsonWriterHelper.ValidateValue(utf8FormattedNumber);
             JsonWriterHelper.ValidateNumber(utf8FormattedNumber);
 
@@ -104,7 +107,8 @@ namespace System.Text.Json
         private void WriteNumberEscape(
             ReadOnlySpan<byte> utf8PropertyName,
             ReadOnlySpan<byte> value
-        ) {
+        )
+        {
             int propertyIdx = JsonWriterHelper.NeedsEscaping(utf8PropertyName, _options.Encoder);
 
             Debug.Assert(propertyIdx >= -1 && propertyIdx < utf8PropertyName.Length);
@@ -123,7 +127,8 @@ namespace System.Text.Json
             ReadOnlySpan<char> propertyName,
             ReadOnlySpan<byte> value,
             int firstEscapeIndexProp
-        ) {
+        )
+        {
             Debug.Assert(
                 int.MaxValue / JsonConstants.MaxExpansionFactorWhileEscaping >= propertyName.Length
             );
@@ -161,7 +166,8 @@ namespace System.Text.Json
             ReadOnlySpan<byte> utf8PropertyName,
             ReadOnlySpan<byte> value,
             int firstEscapeIndexProp
-        ) {
+        )
+        {
             Debug.Assert(
                 int.MaxValue / JsonConstants.MaxExpansionFactorWhileEscaping
                     >= utf8PropertyName.Length
@@ -214,7 +220,8 @@ namespace System.Text.Json
         private void WriteNumberByOptions(
             ReadOnlySpan<byte> utf8PropertyName,
             ReadOnlySpan<byte> value
-        ) {
+        )
+        {
             ValidateWritingProperty();
             if (_options.Indented)
             {

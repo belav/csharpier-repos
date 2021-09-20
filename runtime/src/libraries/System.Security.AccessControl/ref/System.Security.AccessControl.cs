@@ -46,13 +46,14 @@ namespace System.Security.AccessControl
             System.Security.AccessControl.InheritanceFlags inheritanceFlags,
             System.Security.AccessControl.PropagationFlags propagationFlags,
             System.Security.AccessControl.AccessControlType type
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(int),
-            default(bool),
-            default(System.Security.AccessControl.InheritanceFlags),
-            default(System.Security.AccessControl.PropagationFlags)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(int),
+                default(bool),
+                default(System.Security.AccessControl.InheritanceFlags),
+                default(System.Security.AccessControl.PropagationFlags)
+            ) { }
         public System.Security.AccessControl.AccessControlType AccessControlType
         {
             get { throw null; }
@@ -64,54 +65,58 @@ namespace System.Security.AccessControl
             System.Security.Principal.IdentityReference identity,
             T rights,
             System.Security.AccessControl.AccessControlType type
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(int),
-            default(bool),
-            default(System.Security.AccessControl.InheritanceFlags),
-            default(System.Security.AccessControl.PropagationFlags),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(int),
+                default(bool),
+                default(System.Security.AccessControl.InheritanceFlags),
+                default(System.Security.AccessControl.PropagationFlags),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
         public AccessRule(
             System.Security.Principal.IdentityReference identity,
             T rights,
             System.Security.AccessControl.InheritanceFlags inheritanceFlags,
             System.Security.AccessControl.PropagationFlags propagationFlags,
             System.Security.AccessControl.AccessControlType type
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(int),
-            default(bool),
-            default(System.Security.AccessControl.InheritanceFlags),
-            default(System.Security.AccessControl.PropagationFlags),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(int),
+                default(bool),
+                default(System.Security.AccessControl.InheritanceFlags),
+                default(System.Security.AccessControl.PropagationFlags),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
         public AccessRule(
             string identity,
             T rights,
             System.Security.AccessControl.AccessControlType type
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(int),
-            default(bool),
-            default(System.Security.AccessControl.InheritanceFlags),
-            default(System.Security.AccessControl.PropagationFlags),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(int),
+                default(bool),
+                default(System.Security.AccessControl.InheritanceFlags),
+                default(System.Security.AccessControl.PropagationFlags),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
         public AccessRule(
             string identity,
             T rights,
             System.Security.AccessControl.InheritanceFlags inheritanceFlags,
             System.Security.AccessControl.PropagationFlags propagationFlags,
             System.Security.AccessControl.AccessControlType type
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(int),
-            default(bool),
-            default(System.Security.AccessControl.InheritanceFlags),
-            default(System.Security.AccessControl.PropagationFlags),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(int),
+                default(bool),
+                default(System.Security.AccessControl.InheritanceFlags),
+                default(System.Security.AccessControl.PropagationFlags),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
         public T Rights
         {
             get { throw null; }
@@ -192,13 +197,14 @@ namespace System.Security.AccessControl
             System.Security.AccessControl.InheritanceFlags inheritanceFlags,
             System.Security.AccessControl.PropagationFlags propagationFlags,
             System.Security.AccessControl.AuditFlags auditFlags
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(int),
-            default(bool),
-            default(System.Security.AccessControl.InheritanceFlags),
-            default(System.Security.AccessControl.PropagationFlags)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(int),
+                default(bool),
+                default(System.Security.AccessControl.InheritanceFlags),
+                default(System.Security.AccessControl.PropagationFlags)
+            ) { }
         public System.Security.AccessControl.AuditFlags AuditFlags
         {
             get { throw null; }
@@ -210,54 +216,54 @@ namespace System.Security.AccessControl
             System.Security.Principal.IdentityReference identity,
             T rights,
             System.Security.AccessControl.AuditFlags flags
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(int),
-            default(bool),
-            default(System.Security.AccessControl.InheritanceFlags),
-            default(System.Security.AccessControl.PropagationFlags),
-            default(System.Security.AccessControl.AuditFlags)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(int),
+                default(bool),
+                default(System.Security.AccessControl.InheritanceFlags),
+                default(System.Security.AccessControl.PropagationFlags),
+                default(System.Security.AccessControl.AuditFlags)
+            ) { }
         public AuditRule(
             System.Security.Principal.IdentityReference identity,
             T rights,
             System.Security.AccessControl.InheritanceFlags inheritanceFlags,
             System.Security.AccessControl.PropagationFlags propagationFlags,
             System.Security.AccessControl.AuditFlags flags
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(int),
-            default(bool),
-            default(System.Security.AccessControl.InheritanceFlags),
-            default(System.Security.AccessControl.PropagationFlags),
-            default(System.Security.AccessControl.AuditFlags)
-        ) { }
-        public AuditRule(
-            string identity,
-            T rights,
-            System.Security.AccessControl.AuditFlags flags
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(int),
-            default(bool),
-            default(System.Security.AccessControl.InheritanceFlags),
-            default(System.Security.AccessControl.PropagationFlags),
-            default(System.Security.AccessControl.AuditFlags)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(int),
+                default(bool),
+                default(System.Security.AccessControl.InheritanceFlags),
+                default(System.Security.AccessControl.PropagationFlags),
+                default(System.Security.AccessControl.AuditFlags)
+            ) { }
+        public AuditRule(string identity, T rights, System.Security.AccessControl.AuditFlags flags)
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(int),
+                default(bool),
+                default(System.Security.AccessControl.InheritanceFlags),
+                default(System.Security.AccessControl.PropagationFlags),
+                default(System.Security.AccessControl.AuditFlags)
+            ) { }
         public AuditRule(
             string identity,
             T rights,
             System.Security.AccessControl.InheritanceFlags inheritanceFlags,
             System.Security.AccessControl.PropagationFlags propagationFlags,
             System.Security.AccessControl.AuditFlags flags
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(int),
-            default(bool),
-            default(System.Security.AccessControl.InheritanceFlags),
-            default(System.Security.AccessControl.PropagationFlags),
-            default(System.Security.AccessControl.AuditFlags)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(int),
+                default(bool),
+                default(System.Security.AccessControl.InheritanceFlags),
+                default(System.Security.AccessControl.PropagationFlags),
+                default(System.Security.AccessControl.AuditFlags)
+            ) { }
         public T Rights
         {
             get { throw null; }
@@ -370,28 +376,32 @@ namespace System.Security.AccessControl
             bool includeExplicit,
             bool includeInherited,
             System.Type targetType
-        ) {
+        )
+        {
             throw null;
         }
         public System.Security.AccessControl.AuthorizationRuleCollection GetAuditRules(
             bool includeExplicit,
             bool includeInherited,
             System.Type targetType
-        ) {
+        )
+        {
             throw null;
         }
         protected override bool ModifyAccess(
             System.Security.AccessControl.AccessControlModification modification,
             System.Security.AccessControl.AccessRule rule,
             out bool modified
-        ) {
+        )
+        {
             throw null;
         }
         protected override bool ModifyAudit(
             System.Security.AccessControl.AccessControlModification modification,
             System.Security.AccessControl.AuditRule rule,
             out bool modified
-        ) {
+        )
+        {
             throw null;
         }
         protected bool RemoveAccessRule(System.Security.AccessControl.AccessRule rule)
@@ -581,7 +591,8 @@ namespace System.Security.AccessControl
             int accessMask,
             System.Security.AccessControl.InheritanceFlags inheritanceFlags,
             System.Security.AccessControl.PropagationFlags propagationFlags
-        ) {
+        )
+        {
             throw null;
         }
         public bool RemoveAccess(
@@ -593,14 +604,16 @@ namespace System.Security.AccessControl
             System.Security.AccessControl.ObjectAceFlags objectFlags,
             System.Guid objectType,
             System.Guid inheritedObjectType
-        ) {
+        )
+        {
             throw null;
         }
         public bool RemoveAccess(
             System.Security.AccessControl.AccessControlType accessType,
             System.Security.Principal.SecurityIdentifier sid,
             System.Security.AccessControl.ObjectAccessRule rule
-        ) {
+        )
+        {
             throw null;
         }
         public void RemoveAccessSpecific(
@@ -684,12 +697,14 @@ namespace System.Security.AccessControl
         public static System.Security.AccessControl.GenericAce CreateFromBinaryForm(
             byte[] binaryForm,
             int offset
-        ) {
+        )
+        {
             throw null;
         }
         public sealed override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? o
-        ) {
+        )
+        {
             throw null;
         }
         public abstract void GetBinaryForm(byte[] binaryForm, int offset);
@@ -700,13 +715,15 @@ namespace System.Security.AccessControl
         public static bool operator ==(
             System.Security.AccessControl.GenericAce? left,
             System.Security.AccessControl.GenericAce? right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Security.AccessControl.GenericAce? left,
             System.Security.AccessControl.GenericAce? right
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -759,7 +776,8 @@ namespace System.Security.AccessControl
         public void GetBinaryForm(byte[] binaryForm, int offset) { }
         public string GetSddlForm(
             System.Security.AccessControl.AccessControlSections includeSections
-        ) {
+        )
+        {
             throw null;
         }
         public static bool IsSddlConversionSupported()
@@ -865,14 +883,15 @@ namespace System.Security.AccessControl
             System.Guid objectType,
             System.Guid inheritedObjectType,
             System.Security.AccessControl.AccessControlType type
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(int),
-            default(bool),
-            default(System.Security.AccessControl.InheritanceFlags),
-            default(System.Security.AccessControl.PropagationFlags),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(int),
+                default(bool),
+                default(System.Security.AccessControl.InheritanceFlags),
+                default(System.Security.AccessControl.PropagationFlags),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
         public System.Guid InheritedObjectType
         {
             get { throw null; }
@@ -942,14 +961,15 @@ namespace System.Security.AccessControl
             System.Guid objectType,
             System.Guid inheritedObjectType,
             System.Security.AccessControl.AuditFlags auditFlags
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(int),
-            default(bool),
-            default(System.Security.AccessControl.InheritanceFlags),
-            default(System.Security.AccessControl.PropagationFlags),
-            default(System.Security.AccessControl.AuditFlags)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(int),
+                default(bool),
+                default(System.Security.AccessControl.InheritanceFlags),
+                default(System.Security.AccessControl.PropagationFlags),
+                default(System.Security.AccessControl.AuditFlags)
+            ) { }
         public System.Guid InheritedObjectType
         {
             get { throw null; }
@@ -1051,7 +1071,8 @@ namespace System.Security.AccessControl
         }
         public string GetSecurityDescriptorSddlForm(
             System.Security.AccessControl.AccessControlSections includeSections
-        ) {
+        )
+        {
             throw null;
         }
         public static bool IsSddlConversionSupported()
@@ -1067,7 +1088,8 @@ namespace System.Security.AccessControl
             System.Security.AccessControl.AccessControlModification modification,
             System.Security.AccessControl.AccessRule rule,
             out bool modified
-        ) {
+        )
+        {
             throw null;
         }
         protected abstract bool ModifyAudit(
@@ -1079,7 +1101,8 @@ namespace System.Security.AccessControl
             System.Security.AccessControl.AccessControlModification modification,
             System.Security.AccessControl.AuditRule rule,
             out bool modified
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual void Persist(
@@ -1174,7 +1197,8 @@ namespace System.Security.AccessControl
             System.Security.AccessControl.InheritanceFlags inheritanceFlags,
             System.Security.AccessControl.PropagationFlags propagationFlags,
             System.Security.AccessControl.AccessControlType type
-        ) {
+        )
+        {
             throw null;
         }
         public virtual void AddAccessRule(System.Security.AccessControl.AccessRule<T> rule) { }
@@ -1186,7 +1210,8 @@ namespace System.Security.AccessControl
             System.Security.AccessControl.InheritanceFlags inheritanceFlags,
             System.Security.AccessControl.PropagationFlags propagationFlags,
             System.Security.AccessControl.AuditFlags flags
-        ) {
+        )
+        {
             throw null;
         }
         protected internal void Persist(System.Runtime.InteropServices.SafeHandle handle) { }
@@ -1382,7 +1407,8 @@ namespace System.Security.AccessControl
             int accessMask,
             System.Security.AccessControl.InheritanceFlags inheritanceFlags,
             System.Security.AccessControl.PropagationFlags propagationFlags
-        ) {
+        )
+        {
             throw null;
         }
         public bool RemoveAudit(
@@ -1394,13 +1420,15 @@ namespace System.Security.AccessControl
             System.Security.AccessControl.ObjectAceFlags objectFlags,
             System.Guid objectType,
             System.Guid inheritedObjectType
-        ) {
+        )
+        {
             throw null;
         }
         public bool RemoveAudit(
             System.Security.Principal.SecurityIdentifier sid,
             System.Security.AccessControl.ObjectAuditRule rule
-        ) {
+        )
+        {
             throw null;
         }
         public void RemoveAuditSpecific(

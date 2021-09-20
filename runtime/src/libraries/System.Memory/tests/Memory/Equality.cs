@@ -249,7 +249,8 @@ namespace System.MemoryTests
             byte[] bytes,
             int start,
             int length
-        ) {
+        )
+        {
             var memory = new Memory<byte>(bytes, start, length);
             var pointingToSameMemory = new Memory<byte>(bytes, start, length);
             Memory<byte> structCopy = memory;
@@ -309,7 +310,8 @@ namespace System.MemoryTests
             byte[] bytes,
             int start,
             int length
-        ) {
+        )
+        {
             var memory = new Memory<byte>(bytes, start, length);
             var readOnlyMemory = new ReadOnlyMemory<byte>(bytes, start, length);
             ReadOnlyMemory<byte> implicitReadOnlyMemory = memory;

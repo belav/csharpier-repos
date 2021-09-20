@@ -56,7 +56,8 @@ namespace Moq.Tests
             Type type,
             Type other,
             Type expected
-        ) {
+        )
+        {
             Assert.Equal(expected, actual: type.SubstituteTypeMatchers(other));
         }
 
@@ -71,7 +72,8 @@ namespace Moq.Tests
             Type type,
             Type other,
             Type expected
-        ) {
+        )
+        {
             Assert.Equal(expected, actual: type.SubstituteTypeMatchers(other));
         }
 
@@ -82,7 +84,8 @@ namespace Moq.Tests
             Type type,
             Type other,
             Type expected
-        ) {
+        )
+        {
             Assert.Equal(expected, actual: type.SubstituteTypeMatchers(other));
         }
 
@@ -96,7 +99,8 @@ namespace Moq.Tests
             Type type,
             Type other,
             Type expected
-        ) {
+        )
+        {
             Assert.Equal(expected, actual: type.SubstituteTypeMatchers(other));
         }
 

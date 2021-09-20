@@ -425,7 +425,8 @@ namespace MS.Internal.Xml.XPath
             AstNode? qyInput,
             Axis.AxisType axisType,
             XPathNodeType nodeType
-        ) {
+        )
+        {
             string nodeName,
                 nodePrefix;
 
@@ -607,7 +608,8 @@ namespace MS.Internal.Xml.XPath
                             if (
                                 pi.ArgTypes[i] != XPathResultType.Any
                                 && pi.ArgTypes[i] != arg.ReturnType
-                            ) {
+                            )
+                            {
                                 switch (pi.ArgTypes[i])
                                 {
                                     case XPathResultType.NodeSet:
@@ -617,7 +619,8 @@ namespace MS.Internal.Xml.XPath
                                                 arg is Function
                                                 && arg.ReturnType == XPathResultType.Any
                                             )
-                                        ) {
+                                        )
+                                        {
                                             throw XPathException.Create(
                                                 SR.Xp_InvalidArgumentType,
                                                 name,
@@ -676,7 +679,8 @@ namespace MS.Internal.Xml.XPath
                     if (
                         _scanner.Kind == XPathScanner.LexKind.Eof
                         || _scanner.Kind == XPathScanner.LexKind.Union
-                    ) {
+                    )
+                    {
                         return opnd;
                     }
                     break;
@@ -892,7 +896,8 @@ namespace MS.Internal.Xml.XPath
                 int minargs,
                 int maxargs,
                 XPathResultType[] argTypes
-            ) {
+            )
+            {
                 _ftype = ftype;
                 _minargs = minargs;
                 _maxargs = maxargs;

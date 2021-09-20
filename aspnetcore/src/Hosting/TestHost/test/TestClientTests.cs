@@ -747,7 +747,8 @@ namespace Microsoft.AspNetCore.TestHost
                     if (
                         ctx.WebSockets.WebSocketRequestedProtocols.Contains("alpha")
                         && ctx.WebSockets.WebSocketRequestedProtocols.Contains("bravo")
-                    ) {
+                    )
+                    {
                         // according to rfc6455, the "server needs to include the same field and one of the selected subprotocol values"
                         // however, this isn't enforced by either our server or client so it's possible to accept an arbitrary protocol.
                         // Done here to demonstrate not "correct" behaviour, simply to show it's possible. Other clients may not allow this.

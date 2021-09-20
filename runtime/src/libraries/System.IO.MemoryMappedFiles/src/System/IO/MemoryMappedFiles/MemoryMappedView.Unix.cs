@@ -13,7 +13,8 @@ namespace System.IO.MemoryMappedFiles
             MemoryMappedFileAccess access,
             long requestedOffset,
             long requestedSize
-        ) {
+        )
+        {
             if (requestedOffset > memMappedFileHandle._capacity)
             {
                 throw new ArgumentOutOfRangeException("offset");
@@ -210,7 +211,8 @@ namespace System.IO.MemoryMappedFiles
         internal static Interop.Sys.MemoryMappedProtections GetProtections(
             MemoryMappedFileAccess access,
             bool forVerification
-        ) {
+        )
+        {
             switch (access)
             {
                 default:

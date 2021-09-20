@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     writable: false,
                     publiclyVisible: true
                 )
-            ) {
+            )
+            {
                 return EncodedStringText.Create(stream);
             }
         }

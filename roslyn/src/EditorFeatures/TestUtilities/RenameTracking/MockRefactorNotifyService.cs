@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.RenameTracking
             ISymbol symbol,
             string newName,
             bool throwOnFailure
-        ) {
+        )
+        {
             _onBeforeSymbolRenamedCount++;
 
             if (throwOnFailure && !OnBeforeSymbolRenamedReturnValue)
@@ -49,7 +50,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.RenameTracking
             ISymbol symbol,
             string newName,
             bool throwOnFailure
-        ) {
+        )
+        {
             _onAfterSymbolRenamedCount++;
 
             if (throwOnFailure && !OnAfterSymbolRenamedReturnValue)

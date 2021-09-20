@@ -257,7 +257,8 @@ namespace System.IO.Ports
                         Interop.Termios.Signals.SignalDtr,
                         value ? 1 : 0
                     ) != 0
-                ) {
+                )
+                {
                     throw GetLastIOError();
                 }
             }
@@ -307,7 +308,8 @@ namespace System.IO.Ports
                         Interop.Termios.Signals.SignalRts,
                         value ? 1 : 0
                     ) != 0
-                ) {
+                )
+                {
                     throw GetLastIOError();
                 }
             }
@@ -333,7 +335,8 @@ namespace System.IO.Ports
                             _parity,
                             value
                         ) != 0
-                    ) {
+                    )
+                    {
                         throw new ArgumentException();
                     }
 
@@ -361,7 +364,8 @@ namespace System.IO.Ports
                             _parity,
                             _handshake
                         ) != 0
-                    ) {
+                    )
+                    {
                         throw new ArgumentException();
                     }
 
@@ -390,7 +394,8 @@ namespace System.IO.Ports
                             value,
                             _handshake
                         ) != 0
-                    ) {
+                    )
+                    {
                         throw new ArgumentException();
                     }
 
@@ -418,7 +423,8 @@ namespace System.IO.Ports
                             _parity,
                             _handshake
                         ) != 0
-                    ) {
+                    )
+                    {
                         throw new ArgumentException();
                     }
 
@@ -521,7 +527,8 @@ namespace System.IO.Ports
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             CheckReadWriteArguments(array, offset, count);
 
             if (count == 0)
@@ -541,7 +548,8 @@ namespace System.IO.Ports
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             CheckWriteArguments(array, offset, count);
 
             if (count == 0)
@@ -562,7 +570,8 @@ namespace System.IO.Ports
             int numBytes,
             AsyncCallback userCallback,
             object stateObject
-        ) {
+        )
+        {
             return TaskToApm.Begin(ReadAsync(array, offset, numBytes), userCallback, stateObject);
         }
 
@@ -574,7 +583,8 @@ namespace System.IO.Ports
             bool pollReadEvents,
             bool pollWriteEvents,
             out Interop.ErrorInfo? error
-        ) {
+        )
+        {
             if (!pollReadEvents && !pollWriteEvents)
             {
                 Debug.Fail("This should not happen");
@@ -626,7 +636,8 @@ namespace System.IO.Ports
             int count,
             AsyncCallback userCallback,
             object stateObject
-        ) {
+        )
+        {
             return TaskToApm.Begin(WriteAsync(array, offset, count), userCallback, stateObject);
         }
 
@@ -658,7 +669,8 @@ namespace System.IO.Ports
             bool rtsEnable,
             bool discardNull,
             byte parityReplace
-        ) {
+        )
+        {
             if (portName == null)
             {
                 throw new ArgumentNullException(nameof(portName));
@@ -692,7 +704,8 @@ namespace System.IO.Ports
                         _parity,
                         _handshake
                     ) != 0
-                ) {
+                )
+                {
                     throw new ArgumentException();
                 }
 
@@ -707,7 +720,8 @@ namespace System.IO.Ports
                         handshake != Handshake.RequestToSend
                         && handshake != Handshake.RequestToSendXOnXOff
                     )
-                ) {
+                )
+                {
                     // query and cache the initial RtsEnable value
                     // so that set_RtsEnable can do the (value != rtsEnable) optimization
                     _rtsEnable = RtsEnabledNative();
@@ -900,7 +914,8 @@ namespace System.IO.Ports
                     if (
                         lastError.Error != Interop.Error.SUCCESS
                         && lastError.Error != Interop.Error.EWOULDBLOCK
-                    ) {
+                    )
+                    {
                         r.Complete(Interop.GetIOException(lastError));
                     }
                 }
@@ -924,7 +939,8 @@ namespace System.IO.Ports
         private static int DoIORequest(
             ConcurrentQueue<SerialStreamIORequest> q,
             RequestProcessor op
-        ) {
+        )
+        {
             // assumes dequeue-ing happens on a single thread
             while (q.TryPeek(out SerialStreamIORequest r))
             {
@@ -991,7 +1007,8 @@ namespace System.IO.Ports
                                     IsNoEventRegistered()
                                     && _readQueue.IsEmpty
                                     && _writeQueue.IsEmpty
-                                ) {
+                                )
+                                {
                                     _ioLoop = null;
                                     break;
                                 }
@@ -1025,7 +1042,8 @@ namespace System.IO.Ports
                     if (
                         events.HasFlag(Interop.PollEvents.POLLNVAL)
                         || events.HasFlag(Interop.PollEvents.POLLERR)
-                    ) {
+                    )
+                    {
                         // bad descriptor or some other error we can't handle
                         FinishPendingIORequests();
                         break;

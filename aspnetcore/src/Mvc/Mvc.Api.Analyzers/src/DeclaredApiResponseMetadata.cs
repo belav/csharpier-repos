@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             int statusCode,
             AttributeData attributeData,
             IMethodSymbol attributeSource
-        ) {
+        )
+        {
             return new DeclaredApiResponseMetadata(
                 statusCode,
                 attributeData,
@@ -34,7 +35,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
         public static DeclaredApiResponseMetadata ForProducesDefaultResponse(
             AttributeData attributeData,
             IMethodSymbol attributeSource
-        ) {
+        )
+        {
             return new DeclaredApiResponseMetadata(
                 statusCode: 0,
                 attributeData,
@@ -50,7 +52,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             IMethodSymbol? attributeSource,
             bool @implicit,
             bool @default
-        ) {
+        )
+        {
             StatusCode = statusCode;
             Attribute = attributeData;
             AttributeSource = attributeSource;
@@ -79,7 +82,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
         internal static bool Contains(
             IList<DeclaredApiResponseMetadata> declaredApiResponseMetadata,
             ActualApiResponseMetadata actualMetadata
-        ) {
+        )
+        {
             return TryGetDeclaredMetadata(declaredApiResponseMetadata, actualMetadata, out _);
         }
 
@@ -87,7 +91,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             IList<DeclaredApiResponseMetadata> declaredApiResponseMetadata,
             ActualApiResponseMetadata actualMetadata,
             out DeclaredApiResponseMetadata result
-        ) {
+        )
+        {
             for (var i = 0; i < declaredApiResponseMetadata.Count; i++)
             {
                 var declaredMetadata = declaredApiResponseMetadata[i];

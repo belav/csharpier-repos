@@ -517,7 +517,8 @@ namespace System.Collections.Immutable
                 int startIndex,
                 int count,
                 IEqualityComparer<T>? equalityComparer
-            ) {
+            )
+            {
                 if (count == 0 && startIndex == 0)
                 {
                     return -1;
@@ -613,7 +614,8 @@ namespace System.Collections.Immutable
                 int startIndex,
                 int count,
                 IEqualityComparer<T>? equalityComparer
-            ) {
+            )
+            {
                 if (count == 0 && startIndex == 0)
                 {
                     return -1;

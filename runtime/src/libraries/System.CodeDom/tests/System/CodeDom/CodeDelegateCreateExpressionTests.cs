@@ -42,7 +42,8 @@ namespace System.CodeDom.Tests
             CodeTypeReference delegateType,
             CodeExpression targetObject,
             string methodName
-        ) {
+        )
+        {
             var delegateCreate = new CodeDelegateCreateExpression(
                 delegateType,
                 targetObject,

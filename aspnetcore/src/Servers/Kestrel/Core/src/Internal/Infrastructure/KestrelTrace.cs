@@ -414,7 +414,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
             string connectionId,
             string traceIdentifier,
             Exception ex
-        ) {
+        )
+        {
             _applicationError(_logger, connectionId, traceIdentifier, ex);
         }
 
@@ -431,7 +432,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
         public virtual void ConnectionBadRequest(
             string connectionId,
             Microsoft.AspNetCore.Http.BadHttpRequestException ex
-        ) {
+        )
+        {
             _connectionBadRequest(_logger, connectionId, ex.Message, ex);
         }
 
@@ -449,7 +451,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
             TimeSpan heartbeatDuration,
             TimeSpan interval,
             DateTimeOffset now
-        ) {
+        )
+        {
             _heartbeatSlow(_logger, now, heartbeatDuration, interval, null);
         }
 
@@ -472,7 +475,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
             string connectionId,
             string? traceIdentifier,
             double rate
-        ) {
+        )
+        {
             _requestBodyMinimumDataRateNotSatisfied(
                 _logger,
                 connectionId,
@@ -495,21 +499,24 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
         public virtual void ResponseMinimumDataRateNotSatisfied(
             string connectionId,
             string? traceIdentifier
-        ) {
+        )
+        {
             _responseMinimumDataRateNotSatisfied(_logger, connectionId, traceIdentifier, null);
         }
 
         public virtual void ApplicationAbortedConnection(
             string connectionId,
             string traceIdentifier
-        ) {
+        )
+        {
             _applicationAbortedConnection(_logger, connectionId, traceIdentifier, null);
         }
 
         public virtual void Http2ConnectionError(
             string connectionId,
             Http2ConnectionErrorException ex
-        ) {
+        )
+        {
             _http2ConnectionError(_logger, connectionId, ex);
         }
 
@@ -532,7 +539,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
             string traceIdentifier,
             Http2ErrorCode error,
             ConnectionAbortedException abortReason
-        ) {
+        )
+        {
             _http2StreamResetAbort(_logger, traceIdentifier, error, abortReason);
         }
 
@@ -540,7 +548,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
             string connectionId,
             int streamId,
             HPackDecodingException ex
-        ) {
+        )
+        {
             _hpackDecodingError(_logger, connectionId, streamId, ex);
         }
 
@@ -548,7 +557,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
             string connectionId,
             int streamId,
             HPackEncodingException ex
-        ) {
+        )
+        {
             _hpackEncodingError(_logger, connectionId, streamId, ex);
         }
 
@@ -613,7 +623,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
             string traceIdentifier,
             Http3ErrorCode error,
             ConnectionAbortedException abortReason
-        ) {
+        )
+        {
             if (_logger.IsEnabled(LogLevel.Debug))
             {
                 _http3StreamAbort(

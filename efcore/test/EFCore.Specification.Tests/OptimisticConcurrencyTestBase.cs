@@ -531,7 +531,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true)]
         public virtual async Task Calling_Reload_on_an_Added_entity_that_is_not_in_database_is_no_op(
             bool async
-        ) {
+        )
+        {
             using var c = CreateF1Context();
             await c.Database.CreateExecutionStrategy()
                 .ExecuteAsync(

@@ -108,7 +108,8 @@ namespace Microsoft.CodeAnalysis
                 int initialExponent,
                 bool hasZeroTail,
                 out ulong result
-            ) {
+            )
+            {
                 // number of bits by which we must adjust the mantissa to shift it into the
                 // correct position, and compute the resulting base two exponent for the
                 // normalized mantissa:
@@ -363,7 +364,8 @@ namespace Microsoft.CodeAnalysis
                             out exponentMagnitude
                         )
                         && exponentMagnitude <= MAX_EXP
-                    ) {
+                    )
+                    {
                         if (exponentSign == '-')
                         {
                             exponent -= exponentMagnitude;
@@ -398,7 +400,8 @@ namespace Microsoft.CodeAnalysis
             DecimalFloatingPointString data,
             FloatingPointType type,
             out ulong result
-        ) {
+        )
+        {
             if (data.Mantissa.Length == 0)
             {
                 result = type.Zero;
@@ -482,7 +485,8 @@ namespace Microsoft.CodeAnalysis
                 integerBitsOfPrecision == 0
                 && (fractionalDenominatorExponent - (int)data.MantissaCount)
                     > type.OverflowDecimalExponent
-            ) {
+            )
+            {
                 // If there were any digits in the integer part, it is impossible to
                 // underflow (because the exponent cannot possibly be small enough),
                 // so if we underflow here it is a true underflow and we return zero.
@@ -629,7 +633,8 @@ namespace Microsoft.CodeAnalysis
             bool hasNonzeroFractionalPart,
             FloatingPointType type,
             out ulong result
-        ) {
+        )
+        {
             int baseExponent = type.DenormalMantissaBits;
             int exponent;
             ulong mantissa;
@@ -669,7 +674,8 @@ namespace Microsoft.CodeAnalysis
             DecimalFloatingPointString data,
             uint integer_first_index,
             uint integer_last_index
-        ) {
+        )
+        {
             if (integer_first_index == integer_last_index)
                 return s_bigZero;
             var valueString = data.Mantissa.Substring(

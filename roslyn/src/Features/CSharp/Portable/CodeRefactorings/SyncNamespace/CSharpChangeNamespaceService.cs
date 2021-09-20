@@ -41,11 +41,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeNamespace
             Document document,
             SyntaxNode container,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 document.Project.Solution.Workspace.Kind == WorkspaceKind.MiscellaneousFiles
                 || document.IsGeneratedCode(cancellationToken)
-            ) {
+            )
+            {
                 return default;
             }
 
@@ -96,7 +98,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeNamespace
 
         protected override SyntaxList<MemberDeclarationSyntax> GetMemberDeclarationsInContainer(
             SyntaxNode container
-        ) {
+        )
+        {
             if (container is NamespaceDeclarationSyntax namespaceDecl)
             {
                 return namespaceDecl.Members;
@@ -127,7 +130,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeNamespace
             ISyntaxFactsService syntaxFacts,
             [NotNullWhen(returnValue: true)] out SyntaxNode? oldNode,
             [NotNullWhen(returnValue: true)] out SyntaxNode? newNode
-        ) {
+        )
+        {
             if (!(reference is SimpleNameSyntax nameRef))
             {
                 oldNode = newNode = null;
@@ -164,7 +168,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeNamespace
                         aliasQualifier,
                         out newNode
                     )
-                ) {
+                )
+                {
                     var qualifiedNamespaceName = CreateNamespaceAsQualifiedName(
                         newNamespaceParts,
                         aliasQualifier,
@@ -183,7 +188,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeNamespace
             else if (
                 syntaxFacts.IsNameOfSimpleMemberAccessExpression(nameRef)
                 || syntaxFacts.IsNameOfMemberBindingExpression(nameRef)
-            ) {
+            )
+            {
                 RoslynDebug.Assert(nameRef.Parent is object);
                 oldNode = nameRef.Parent;
                 var aliasQualifier = GetAliasQualifier(oldNode);
@@ -195,7 +201,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeNamespace
                         aliasQualifier,
                         out newNode
                     )
-                ) {
+                )
+                {
                     var memberAccessNamespaceName = CreateNamespaceAsMemberAccess(
                         newNamespaceParts,
                         aliasQualifier,
@@ -215,7 +222,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeNamespace
             else if (
                 nameRef.Parent is NameMemberCrefSyntax crefName
                 && crefName.Parent is QualifiedCrefSyntax qualifiedCref
-            ) {
+            )
+            {
                 // This is the case where the reference is the right most part of a qualified name in `cref`.
                 // for example, `<see cref="Foo.Baz.Bar"/>` and `<see cref="SomeAlias::Foo.Baz.Bar"/>`.
                 // This is the form of `cref` we need to handle as a spacial case when changing namespace name or
@@ -232,7 +240,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeNamespace
                         aliasQualifier,
                         out newNode
                     )
-                ) {
+                )
+                {
                     // We will replace entire `QualifiedCrefSyntax` with a `TypeCrefSyntax`,
                     // which is a alias qualified simple name, similar to the regular case above.
                     oldNode = qualifiedCref;
@@ -264,7 +273,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeNamespace
             SimpleNameSyntax nameNode,
             string? aliasQualifier,
             [NotNullWhen(returnValue: true)] out SyntaxNode? newNode
-        ) {
+        )
+        {
             if (IsGlobalNamespace(newNamespaceParts))
             {
                 // If new namespace is "", then name will be declared in global namespace.
@@ -293,7 +303,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeNamespace
             CompilationUnitSyntax root,
             ImmutableArray<string> declaredNamespaceParts,
             ImmutableArray<string> targetNamespaceParts
-        ) {
+        )
+        {
             Debug.Assert(!declaredNamespaceParts.IsDefault && !targetNamespaceParts.IsDefault);
             var container = root.GetAnnotatedNodes(ContainerAnnotation).Single();
 
@@ -334,7 +345,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeNamespace
         private static CompilationUnitSyntax MoveMembersFromNamespaceToGlobal(
             CompilationUnitSyntax root,
             NamespaceDeclarationSyntax namespaceDecl
-        ) {
+        )
+        {
             var (namespaceOpeningTrivia, namespaceClosingTrivia) =
                 GetOpeningAndClosingTriviaOfNamespaceDeclaration(namespaceDecl);
             var members = namespaceDecl.Members;
@@ -383,7 +395,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeNamespace
         private static CompilationUnitSyntax MoveMembersFromGlobalToNamespace(
             CompilationUnitSyntax compilationUnit,
             ImmutableArray<string> targetNamespaceParts
-        ) {
+        )
+        {
             Debug.Assert(!compilationUnit.Members.Any(m => m is NamespaceDeclarationSyntax));
 
             var targetNamespaceDecl = SyntaxFactory.NamespaceDeclaration(
@@ -419,7 +432,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeNamespace
             Document document,
             TextSpan span,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxRoot = await document.GetSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
             Contract.ThrowIfNull(syntaxRoot);
@@ -460,7 +474,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeNamespace
                 if (
                     namespaceDecl.Name.GetDiagnostics()
                         .Any(diag => diag.DefaultSeverity == DiagnosticSeverity.Error)
-                ) {
+                )
+                {
                     return null;
                 }
 
@@ -518,7 +533,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeNamespace
             ImmutableArray<string> namespaceParts,
             string? aliasQualifier,
             int index
-        ) {
+        )
+        {
             var part = namespaceParts[index].EscapeIdentifier();
             Debug.Assert(part.Length > 0);
 
@@ -541,7 +557,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeNamespace
             ImmutableArray<string> namespaceParts,
             string? aliasQualifier,
             int index
-        ) {
+        )
+        {
             var part = namespaceParts[index].EscapeIdentifier();
             Debug.Assert(part.Length > 0);
 
@@ -568,7 +585,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeNamespace
         /// </summary>
         private static (ImmutableArray<SyntaxTrivia> openingTrivia, ImmutableArray<SyntaxTrivia> closingTrivia) GetOpeningAndClosingTriviaOfNamespaceDeclaration(
             NamespaceDeclarationSyntax namespaceDeclaration
-        ) {
+        )
+        {
             var openingBuilder = ArrayBuilder<SyntaxTrivia>.GetInstance();
             openingBuilder.AddRange(namespaceDeclaration.GetLeadingTrivia());
             openingBuilder.AddRange(namespaceDeclaration.OpenBraceToken.LeadingTrivia);

@@ -24,7 +24,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_many_FK_set_both_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_and_dependent_one_to_many(
                 entityState,
                 principalFirst: false,
@@ -40,7 +41,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_many_FK_not_set_both_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_and_dependent_one_to_many(
                 entityState,
                 principalFirst: false,
@@ -56,7 +58,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_many_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_and_dependent_one_to_many(
                 entityState,
                 principalFirst: false,
@@ -72,7 +75,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_many_FK_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_and_dependent_one_to_many(
                 entityState,
                 principalFirst: false,
@@ -88,7 +92,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_many_FK_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_and_dependent_one_to_many(
                 entityState,
                 principalFirst: false,
@@ -104,7 +109,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_many_FK_not_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_and_dependent_one_to_many(
                 entityState,
                 principalFirst: false,
@@ -120,7 +126,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_many_FK_not_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_and_dependent_one_to_many(
                 entityState,
                 principalFirst: false,
@@ -136,7 +143,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_many_FK_set_both_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_and_dependent_one_to_many(
                 entityState,
                 principalFirst: true,
@@ -152,7 +160,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_many_FK_not_set_both_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_and_dependent_one_to_many(
                 entityState,
                 principalFirst: true,
@@ -168,7 +177,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_many_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_and_dependent_one_to_many(
                 entityState,
                 principalFirst: true,
@@ -184,7 +194,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_many_FK_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_and_dependent_one_to_many(
                 entityState,
                 principalFirst: true,
@@ -200,7 +211,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_many_FK_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_and_dependent_one_to_many(
                 entityState,
                 principalFirst: true,
@@ -216,7 +228,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_many_FK_not_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_and_dependent_one_to_many(
                 entityState,
                 principalFirst: true,
@@ -232,7 +245,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_many_FK_not_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_and_dependent_one_to_many(
                 entityState,
                 principalFirst: true,
@@ -248,7 +262,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             bool setFk,
             bool setToPrincipal,
             bool setToDependent
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Category(77);
             var dependent = new Product(78, 0);
@@ -297,7 +312,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_many_prin_uni_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_and_dependent_one_to_many_prin_uni(
                 entityState,
                 principalFirst: false,
@@ -312,7 +328,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_many_prin_uni_FK_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_and_dependent_one_to_many_prin_uni(
                 entityState,
                 principalFirst: false,
@@ -327,7 +344,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_many_prin_uni_FK_not_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_and_dependent_one_to_many_prin_uni(
                 entityState,
                 principalFirst: false,
@@ -342,7 +360,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_many_prin_uni_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_and_dependent_one_to_many_prin_uni(
                 entityState,
                 principalFirst: true,
@@ -357,7 +376,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_many_prin_uni_FK_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_and_dependent_one_to_many_prin_uni(
                 entityState,
                 principalFirst: true,
@@ -372,7 +392,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_many_prin_uni_FK_not_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_and_dependent_one_to_many_prin_uni(
                 entityState,
                 principalFirst: true,
@@ -386,7 +407,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             bool principalFirst,
             bool setFk,
             bool setToDependent
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new CategoryPN { Id = 77 };
             var dependent = new ProductPN { Id = 78 };
@@ -429,7 +451,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_many_dep_uni_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_and_dependent_one_to_many_dep_uni(
                 entityState,
                 principalFirst: false,
@@ -444,7 +467,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_many_dep_uni_FK_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_and_dependent_one_to_many_dep_uni(
                 entityState,
                 principalFirst: false,
@@ -459,7 +483,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_many_dep_uni_FK_not_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_and_dependent_one_to_many_dep_uni(
                 entityState,
                 principalFirst: false,
@@ -474,7 +499,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_many_dep_uni_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_and_dependent_one_to_many_dep_uni(
                 entityState,
                 principalFirst: true,
@@ -489,7 +515,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_many_dep_uni_FK_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_and_dependent_one_to_many_dep_uni(
                 entityState,
                 principalFirst: true,
@@ -504,7 +531,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_many_dep_uni_FK_not_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_and_dependent_one_to_many_dep_uni(
                 entityState,
                 principalFirst: true,
@@ -518,7 +546,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             bool principalFirst,
             bool setFk,
             bool setToPrincipal
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new CategoryDN { Id = 77 };
             var dependent = new ProductDN { Id = 78 };
@@ -609,7 +638,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_one_FK_set_both_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_and_dependent_one_to_one(
                 entityState,
                 principalFirst: false,
@@ -625,7 +655,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_one_FK_not_set_both_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_and_dependent_one_to_one(
                 entityState,
                 principalFirst: false,
@@ -641,7 +672,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_one_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_and_dependent_one_to_one(
                 entityState,
                 principalFirst: false,
@@ -657,7 +689,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_one_FK_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_and_dependent_one_to_one(
                 entityState,
                 principalFirst: false,
@@ -673,7 +706,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_one_FK_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_and_dependent_one_to_one(
                 entityState,
                 principalFirst: false,
@@ -689,7 +723,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_one_FK_not_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_and_dependent_one_to_one(
                 entityState,
                 principalFirst: false,
@@ -705,7 +740,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_one_FK_not_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_and_dependent_one_to_one(
                 entityState,
                 principalFirst: false,
@@ -721,7 +757,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_one_FK_set_both_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_and_dependent_one_to_one(
                 entityState,
                 principalFirst: true,
@@ -737,7 +774,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_one_FK_not_set_both_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_and_dependent_one_to_one(
                 entityState,
                 principalFirst: true,
@@ -753,7 +791,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_one_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_and_dependent_one_to_one(
                 entityState,
                 principalFirst: true,
@@ -769,7 +808,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_one_FK_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_and_dependent_one_to_one(
                 entityState,
                 principalFirst: true,
@@ -785,7 +825,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_one_FK_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_and_dependent_one_to_one(
                 entityState,
                 principalFirst: true,
@@ -801,7 +842,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_one_FK_not_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_and_dependent_one_to_one(
                 entityState,
                 principalFirst: true,
@@ -817,7 +859,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_one_FK_not_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_and_dependent_one_to_one(
                 entityState,
                 principalFirst: true,
@@ -833,7 +876,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             bool setFk,
             bool setToPrincipal,
             bool setToDependent
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Parent(77);
             var dependent = new Child(78, 0);
@@ -882,7 +926,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_one_prin_uni_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_and_dependent_one_to_one_prin_uni(
                 entityState,
                 principalFirst: false,
@@ -897,7 +942,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_one_prin_uni_FK_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_and_dependent_one_to_one_prin_uni(
                 entityState,
                 principalFirst: false,
@@ -912,7 +958,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_one_prin_uni_FK_not_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_and_dependent_one_to_one_prin_uni(
                 entityState,
                 principalFirst: false,
@@ -927,7 +974,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_one_prin_uni_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_and_dependent_one_to_one_prin_uni(
                 entityState,
                 principalFirst: true,
@@ -942,7 +990,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_one_prin_uni_FK_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_and_dependent_one_to_one_prin_uni(
                 entityState,
                 principalFirst: true,
@@ -957,7 +1006,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_one_prin_uni_FK_not_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_and_dependent_one_to_one_prin_uni(
                 entityState,
                 principalFirst: true,
@@ -971,7 +1021,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             bool principalFirst,
             bool setFk,
             bool setToDependent
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new ParentPN { Id = 77 };
             var dependent = new ChildPN { Id = 78 };
@@ -1016,7 +1067,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_one_dep_uni_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_and_dependent_one_to_one_dep_uni(
                 entityState,
                 principalFirst: false,
@@ -1031,7 +1083,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_one_dep_uni_FK_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_and_dependent_one_to_one_dep_uni(
                 entityState,
                 principalFirst: false,
@@ -1046,7 +1099,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_one_dep_uni_FK_not_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_and_dependent_one_to_one_dep_uni(
                 entityState,
                 principalFirst: false,
@@ -1061,7 +1115,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_one_dep_uni_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_and_dependent_one_to_one_dep_uni(
                 entityState,
                 principalFirst: true,
@@ -1076,7 +1131,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_one_dep_uni_FK_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_and_dependent_one_to_one_dep_uni(
                 entityState,
                 principalFirst: true,
@@ -1091,7 +1147,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_one_dep_uni_FK_not_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_and_dependent_one_to_one_dep_uni(
                 entityState,
                 principalFirst: true,
@@ -1105,7 +1162,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             bool principalFirst,
             bool setFk,
             bool setToPrincipal
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new ParentDN { Id = 77 };
             var dependent = new ChildDN { Id = 78 };
@@ -1198,7 +1256,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_many_FK_set_both_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_dependent_but_not_principal_one_to_many(
                 entityState,
                 setFk: true,
@@ -1213,7 +1272,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_many_FK_not_set_both_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_dependent_but_not_principal_one_to_many(
                 entityState,
                 setFk: false,
@@ -1228,7 +1288,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_many_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_dependent_but_not_principal_one_to_many(
                 entityState,
                 setFk: true,
@@ -1243,7 +1304,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_many_FK_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_dependent_but_not_principal_one_to_many(
                 entityState,
                 setFk: true,
@@ -1258,7 +1320,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_many_FK_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_dependent_but_not_principal_one_to_many(
                 entityState,
                 setFk: true,
@@ -1273,7 +1336,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_many_FK_not_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_dependent_but_not_principal_one_to_many(
                 entityState,
                 setFk: false,
@@ -1288,7 +1352,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_many_FK_not_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_dependent_but_not_principal_one_to_many(
                 entityState,
                 setFk: false,
@@ -1302,7 +1367,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             bool setFk,
             bool setToPrincipal,
             bool setToDependent
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Category(77);
             var dependent = new Product(77, 0);
@@ -1356,7 +1422,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_many_FK_set_both_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_but_not_dependent_one_to_many(
                 entityState,
                 setFk: true,
@@ -1371,7 +1438,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_many_FK_not_set_both_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_but_not_dependent_one_to_many(
                 entityState,
                 setFk: false,
@@ -1386,7 +1454,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_many_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_but_not_dependent_one_to_many(
                 entityState,
                 setFk: true,
@@ -1401,7 +1470,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_many_FK_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_but_not_dependent_one_to_many(
                 entityState,
                 setFk: true,
@@ -1416,7 +1486,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_many_FK_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_but_not_dependent_one_to_many(
                 entityState,
                 setFk: true,
@@ -1431,7 +1502,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_many_FK_not_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_but_not_dependent_one_to_many(
                 entityState,
                 setFk: false,
@@ -1446,7 +1518,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_many_FK_not_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_but_not_dependent_one_to_many(
                 entityState,
                 setFk: false,
@@ -1460,7 +1533,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             bool setFk,
             bool setToPrincipal,
             bool setToDependent
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Category(77);
             var dependent = new Product(77, 0);
@@ -1509,7 +1583,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_many_prin_uni_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_dependent_but_not_principal_one_to_many_prin_uni(
                 entityState,
                 setFk: true,
@@ -1523,7 +1598,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_many_prin_uni_FK_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_dependent_but_not_principal_one_to_many_prin_uni(
                 entityState,
                 setFk: true,
@@ -1537,7 +1613,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_many_prin_uni_FK_not_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_dependent_but_not_principal_one_to_many_prin_uni(
                 entityState,
                 setFk: false,
@@ -1549,7 +1626,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             EntityState entityState,
             bool setFk,
             bool setToDependent
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new CategoryPN { Id = 77 };
             var dependent = new ProductPN { Id = 78 };
@@ -1594,7 +1672,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_many_prin_uni_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_but_not_dependent_one_to_many_prin_uni(
                 entityState,
                 setFk: true,
@@ -1608,7 +1687,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_many_prin_uni_FK_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_but_not_dependent_one_to_many_prin_uni(
                 entityState,
                 setFk: true,
@@ -1622,7 +1702,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_many_prin_uni_FK_not_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_but_not_dependent_one_to_many_prin_uni(
                 entityState,
                 setFk: false,
@@ -1634,7 +1715,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             EntityState entityState,
             bool setFk,
             bool setToDependent
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new CategoryPN { Id = 77 };
             var dependent = new ProductPN { Id = 78 };
@@ -1677,7 +1759,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_many_dep_uni_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_dependent_but_not_principal_one_to_many_dep_uni(
                 entityState,
                 setFk: true,
@@ -1691,7 +1774,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_many_dep_uni_FK_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_dependent_but_not_principal_one_to_many_dep_uni(
                 entityState,
                 setFk: true,
@@ -1705,7 +1789,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_many_dep_uni_FK_not_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_dependent_but_not_principal_one_to_many_dep_uni(
                 entityState,
                 setFk: false,
@@ -1717,7 +1802,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             EntityState entityState,
             bool setFk,
             bool setToPrincipal
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new CategoryDN { Id = 77 };
             var dependent = new ProductDN { Id = 78 };
@@ -1760,7 +1846,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_many_dep_uni_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_but_not_dependent_one_to_many_dep_uni(
                 entityState,
                 setFk: true,
@@ -1774,7 +1861,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_many_dep_uni_FK_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_but_not_dependent_one_to_many_dep_uni(
                 entityState,
                 setFk: true,
@@ -1788,7 +1876,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_many_dep_uni_FK_not_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_but_not_dependent_one_to_many_dep_uni(
                 entityState,
                 setFk: false,
@@ -1800,7 +1889,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             EntityState entityState,
             bool setFk,
             bool setToPrincipal
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new CategoryDN { Id = 77 };
             var dependent = new ProductDN { Id = 78 };
@@ -1837,7 +1927,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_many_no_navs_FK_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new CategoryNN { Id = 77 };
             var dependent = new ProductNN { Id = 78 };
@@ -1868,7 +1959,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_many_no_navs_FK_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new CategoryNN { Id = 77 };
             var dependent = new ProductNN { Id = 78 };
@@ -1896,7 +1988,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_one_FK_set_both_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_dependent_but_not_principal_one_to_one(
                 entityState,
                 setFk: true,
@@ -1911,7 +2004,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_one_FK_not_set_both_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_dependent_but_not_principal_one_to_one(
                 entityState,
                 setFk: false,
@@ -1926,7 +2020,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_one_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_dependent_but_not_principal_one_to_one(
                 entityState,
                 setFk: true,
@@ -1941,7 +2036,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_one_FK_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_dependent_but_not_principal_one_to_one(
                 entityState,
                 setFk: true,
@@ -1956,7 +2052,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_one_FK_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_dependent_but_not_principal_one_to_one(
                 entityState,
                 setFk: true,
@@ -1971,7 +2068,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_one_FK_not_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_dependent_but_not_principal_one_to_one(
                 entityState,
                 setFk: false,
@@ -1986,7 +2084,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_one_FK_not_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_dependent_but_not_principal_one_to_one(
                 entityState,
                 setFk: false,
@@ -2000,7 +2099,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             bool setFk,
             bool setToPrincipal,
             bool setToDependent
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Parent(77);
             var dependent = new Child(78, 0);
@@ -2054,7 +2154,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_one_FK_set_both_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_but_not_dependent_one_to_one(
                 entityState,
                 setFk: true,
@@ -2069,7 +2170,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_one_FK_not_set_both_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_but_not_dependent_one_to_one(
                 entityState,
                 setFk: false,
@@ -2084,7 +2186,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_one_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_but_not_dependent_one_to_one(
                 entityState,
                 setFk: true,
@@ -2099,7 +2202,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_one_FK_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_but_not_dependent_one_to_one(
                 entityState,
                 setFk: true,
@@ -2114,7 +2218,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_one_FK_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_but_not_dependent_one_to_one(
                 entityState,
                 setFk: true,
@@ -2129,7 +2234,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_one_FK_not_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_but_not_dependent_one_to_one(
                 entityState,
                 setFk: false,
@@ -2144,7 +2250,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_one_FK_not_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_but_not_dependent_one_to_one(
                 entityState,
                 setFk: false,
@@ -2158,7 +2265,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             bool setFk,
             bool setToPrincipal,
             bool setToDependent
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Parent(77);
             var dependent = new Child(78, 0);
@@ -2207,7 +2315,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_one_prin_uni_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_dependent_but_not_principal_one_to_one_prin_uni(
                 entityState,
                 setFk: true,
@@ -2221,7 +2330,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_one_prin_uni_FK_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_dependent_but_not_principal_one_to_one_prin_uni(
                 entityState,
                 setFk: true,
@@ -2235,7 +2345,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_one_prin_uni_FK_not_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_dependent_but_not_principal_one_to_one_prin_uni(
                 entityState,
                 setFk: false,
@@ -2247,7 +2358,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             EntityState entityState,
             bool setFk,
             bool setToDependent
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new ParentPN { Id = 77 };
             var dependent = new ChildPN { Id = 78 };
@@ -2289,7 +2401,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_one_prin_uni_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_but_not_dependent_one_to_one_prin_uni(
                 entityState,
                 setFk: true,
@@ -2303,7 +2416,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_one_prin_uni_FK_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_but_not_dependent_one_to_one_prin_uni(
                 entityState,
                 setFk: true,
@@ -2317,7 +2431,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_one_prin_uni_FK_not_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_but_not_dependent_one_to_one_prin_uni(
                 entityState,
                 setFk: false,
@@ -2329,7 +2444,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             EntityState entityState,
             bool setFk,
             bool setToDependent
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new ParentPN { Id = 77 };
             var dependent = new ChildPN { Id = 78 };
@@ -2369,7 +2485,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_one_dep_uni_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_dependent_but_not_principal_one_to_one_dep_uni(
                 entityState,
                 setFk: true,
@@ -2383,7 +2500,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_one_dep_uni_FK_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_dependent_but_not_principal_one_to_one_dep_uni(
                 entityState,
                 setFk: true,
@@ -2397,7 +2515,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_one_dep_uni_FK_not_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_dependent_but_not_principal_one_to_one_dep_uni(
                 entityState,
                 setFk: false,
@@ -2409,7 +2528,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             EntityState entityState,
             bool setFk,
             bool setToPrincipal
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new ParentDN { Id = 77 };
             var dependent = new ChildDN { Id = 78 };
@@ -2452,7 +2572,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_one_dep_uni_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_but_not_dependent_one_to_one_dep_uni(
                 entityState,
                 setFk: true,
@@ -2466,7 +2587,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_one_dep_uni_FK_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_but_not_dependent_one_to_one_dep_uni(
                 entityState,
                 setFk: true,
@@ -2480,7 +2602,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_one_dep_uni_FK_not_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             Add_principal_but_not_dependent_one_to_one_dep_uni(
                 entityState,
                 setFk: false,
@@ -2492,7 +2615,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             EntityState entityState,
             bool setFk,
             bool setToPrincipal
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new ParentDN { Id = 77 };
             var dependent = new ChildDN { Id = 78 };
@@ -2529,7 +2653,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_one_no_navs_FK_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new ParentNN { Id = 77 };
             var dependent = new ChildNN { Id = 78 };
@@ -2560,7 +2685,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_one_no_navs_FK_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new ParentNN { Id = 77 };
             var dependent = new ChildNN { Id = 78 };
@@ -2594,7 +2720,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public void Replace_dependent_one_to_one_FK_set_both_navs_set(
             EntityState oldEntityState,
             EntityState newEntityState
-        ) {
+        )
+        {
             Replace_dependent_one_to_one(
                 oldEntityState,
                 newEntityState,
@@ -2616,7 +2743,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public void Replace_dependent_one_to_one_FK_not_set_both_navs_set(
             EntityState oldEntityState,
             EntityState newEntityState
-        ) {
+        )
+        {
             Replace_dependent_one_to_one(
                 oldEntityState,
                 newEntityState,
@@ -2638,7 +2766,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public void Replace_dependent_one_to_one_FK_set_no_navs_set(
             EntityState oldEntityState,
             EntityState newEntityState
-        ) {
+        )
+        {
             Replace_dependent_one_to_one(
                 oldEntityState,
                 newEntityState,
@@ -2660,7 +2789,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public void Replace_dependent_one_to_one_FK_set_principal_nav_set(
             EntityState oldEntityState,
             EntityState newEntityState
-        ) {
+        )
+        {
             Replace_dependent_one_to_one(
                 oldEntityState,
                 newEntityState,
@@ -2682,7 +2812,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public void Replace_dependent_one_to_one_FK_set_dependent_nav_set(
             EntityState oldEntityState,
             EntityState newEntityState
-        ) {
+        )
+        {
             Replace_dependent_one_to_one(
                 oldEntityState,
                 newEntityState,
@@ -2702,7 +2833,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public void Replace_dependent_one_to_one_FK_not_set_principal_nav_set(
             EntityState oldEntityState,
             EntityState newEntityState
-        ) {
+        )
+        {
             Replace_dependent_one_to_one(
                 oldEntityState,
                 newEntityState,
@@ -2723,7 +2855,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public void Replace_dependent_one_to_one_FK_not_set_dependent_nav_set(
             EntityState oldEntityState,
             EntityState newEntityState
-        ) {
+        )
+        {
             Replace_dependent_one_to_one(
                 oldEntityState,
                 newEntityState,
@@ -2740,7 +2873,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             bool setToPrincipal,
             bool setToDependent,
             bool detectChanges = false
-        ) {
+        )
+        {
             using var context = new FixupContext();
             context.ChangeTracker.DeleteOrphansTiming = CascadeTiming.OnSaveChanges;
 
@@ -2808,7 +2942,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public void Replace_dependent_one_to_one_prin_uni_FK_set_no_navs_set(
             EntityState oldEntityState,
             EntityState newEntityState
-        ) {
+        )
+        {
             Replace_dependent_one_to_one_prin_uni(
                 oldEntityState,
                 newEntityState,
@@ -2829,7 +2964,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public void Replace_dependent_one_to_one_prin_uni_FK_set_principal_nav_set(
             EntityState oldEntityState,
             EntityState newEntityState
-        ) {
+        )
+        {
             Replace_dependent_one_to_one_prin_uni(
                 oldEntityState,
                 newEntityState,
@@ -2848,7 +2984,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public void Replace_dependent_one_to_one_prin_uni_FK_not_set_principal_nav_set(
             EntityState oldEntityState,
             EntityState newEntityState
-        ) {
+        )
+        {
             Replace_dependent_one_to_one_prin_uni(
                 oldEntityState,
                 newEntityState,
@@ -2864,7 +3001,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             bool setFk,
             bool setToDependent,
             bool detectChanges = false
-        ) {
+        )
+        {
             using var context = new FixupContext();
             context.ChangeTracker.DeleteOrphansTiming = CascadeTiming.OnSaveChanges;
 
@@ -2924,7 +3062,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public void Replace_dependent_one_to_one_dep_uni_FK_set_no_navs_set(
             EntityState oldEntityState,
             EntityState newEntityState
-        ) {
+        )
+        {
             Replace_dependent_one_to_one_dep_uni(
                 oldEntityState,
                 newEntityState,
@@ -2945,7 +3084,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public void Replace_dependent_one_to_one_dep_uni_FK_set_dependent_nav_set(
             EntityState oldEntityState,
             EntityState newEntityState
-        ) {
+        )
+        {
             Replace_dependent_one_to_one_dep_uni(
                 oldEntityState,
                 newEntityState,
@@ -2964,7 +3104,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public void Replace_dependent_one_to_one_dep_uni_FK_not_set_dependent_nav_set(
             EntityState oldEntityState,
             EntityState newEntityState
-        ) {
+        )
+        {
             Replace_dependent_one_to_one_dep_uni(
                 oldEntityState,
                 newEntityState,
@@ -2978,7 +3119,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             EntityState newEntityState,
             bool setFk,
             bool setToPrincipal
-        ) {
+        )
+        {
             using var context = new FixupContext();
             context.ChangeTracker.DeleteOrphansTiming = CascadeTiming.OnSaveChanges;
 
@@ -3033,7 +3175,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public void Replace_dependent_one_to_one_no_navs_FK_set(
             EntityState oldEntityState,
             EntityState newEntityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             context.ChangeTracker.DeleteOrphansTiming = CascadeTiming.OnSaveChanges;
 

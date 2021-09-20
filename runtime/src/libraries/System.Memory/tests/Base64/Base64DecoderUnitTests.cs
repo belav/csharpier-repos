@@ -433,7 +433,8 @@ namespace System.Buffers.Text.Tests
         public void BasicDecodingWithFinalBlockTrueKnownInputDone(
             string inputString,
             int expectedWritten
-        ) {
+        )
+        {
             Span<byte> source = Encoding.ASCII.GetBytes(inputString);
             Span<byte> decodedBytes = new byte[Base64.GetMaxDecodedFromUtf8Length(source.Length)];
 
@@ -469,7 +470,8 @@ namespace System.Buffers.Text.Tests
             string inputString,
             int expectedConsumed,
             int expectedWritten
-        ) {
+        )
+        {
             Span<byte> source = Encoding.ASCII.GetBytes(inputString);
             Span<byte> decodedBytes = new byte[Base64.GetMaxDecodedFromUtf8Length(source.Length)];
 
@@ -500,7 +502,8 @@ namespace System.Buffers.Text.Tests
         public void BasicDecodingWithFinalBlockFalseKnownInputDone(
             string inputString,
             int expectedWritten
-        ) {
+        )
+        {
             Span<byte> source = Encoding.ASCII.GetBytes(inputString);
             Span<byte> decodedBytes = new byte[Base64.GetMaxDecodedFromUtf8Length(source.Length)];
 
@@ -538,7 +541,8 @@ namespace System.Buffers.Text.Tests
             string inputString,
             int expectedConsumed,
             int expectedWritten
-        ) {
+        )
+        {
             Span<byte> source = Encoding.ASCII.GetBytes(inputString);
             Span<byte> decodedBytes = new byte[Base64.GetMaxDecodedFromUtf8Length(source.Length)];
 
@@ -573,7 +577,8 @@ namespace System.Buffers.Text.Tests
             string inputString,
             int expectedConsumed,
             int expectedWritten
-        ) {
+        )
+        {
             Span<byte> source = Encoding.ASCII.GetBytes(inputString);
             Span<byte> decodedBytes = new byte[Base64.GetMaxDecodedFromUtf8Length(source.Length)];
 
@@ -908,7 +913,8 @@ namespace System.Buffers.Text.Tests
                 int numberOfBytesToTest = 0;
                 numberOfBytesToTest <= numberOfBytes;
                 numberOfBytesToTest += 4
-            ) {
+            )
+            {
                 Span<byte> testBytes = new byte[numberOfBytes];
                 Base64TestHelper.InitalizeDecodableBytes(testBytes);
                 string sourceString = Encoding.ASCII.GetString(

@@ -22,7 +22,8 @@ namespace Microsoft.Extensions.Logging
         public static ILoggingBuilder AddConfiguration(
             this ILoggingBuilder builder,
             IConfiguration configuration
-        ) {
+        )
+        {
             builder.AddConfiguration();
 
             builder.Services.AddSingleton<IConfigureOptions<LoggerFilterOptions>>(

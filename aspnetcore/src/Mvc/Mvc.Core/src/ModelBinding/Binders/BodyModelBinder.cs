@@ -70,7 +70,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             IHttpRequestStreamReaderFactory readerFactory,
             ILoggerFactory? loggerFactory,
             MvcOptions? options
-        ) {
+        )
+        {
             if (formatters == null)
             {
                 throw new ArgumentNullException(nameof(formatters));

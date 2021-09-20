@@ -25,7 +25,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             IEnumerable<IPageApplicationModelProvider> applicationModelProviders,
             MvcOptions mvcOptions,
             RazorPagesOptions pageOptions
-        ) {
+        )
+        {
             _applicationModelProviders = applicationModelProviders.OrderBy(a => a.Order).ToArray();
             _conventions = pageOptions.Conventions;
             _globalFilters = mvcOptions.Filters;
@@ -34,7 +35,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         public CompiledPageActionDescriptor CreateCompiledDescriptor(
             PageActionDescriptor actionDescriptor,
             CompiledViewDescriptor viewDescriptor
-        ) {
+        )
+        {
             var context = new PageApplicationModelProviderContext(
                 actionDescriptor,
                 viewDescriptor.Type!.GetTypeInfo()
@@ -63,7 +65,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         internal static void ApplyConventions(
             PageConventionCollection conventions,
             PageApplicationModel pageApplicationModel
-        ) {
+        )
+        {
             var applicationModelConventions = GetConventions<IPageApplicationModelConvention>(
                 pageApplicationModel.HandlerTypeAttributes
             );

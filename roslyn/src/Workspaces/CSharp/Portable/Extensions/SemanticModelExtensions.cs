@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this SemanticModel semanticModel,
             ArgumentListSyntax argumentList,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return semanticModel.GenerateParameterNames(
                 argumentList.Arguments,
                 reservedNames: null,
@@ -38,7 +39,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this SemanticModel semanticModel,
             AttributeArgumentListSyntax argumentList,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return semanticModel.GenerateParameterNames(
                 argumentList.Arguments,
                 reservedNames: null,
@@ -51,7 +53,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             IEnumerable<ArgumentSyntax> arguments,
             IList<string> reservedNames,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             reservedNames ??= SpecializedCollections.EmptyList<string>();
 
             // We can't change the names of named parameters.  Any other names we're flexible on.
@@ -84,7 +87,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             IEnumerable<AttributeArgumentSyntax> arguments,
             IList<string> reservedNames,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             reservedNames ??= SpecializedCollections.EmptyList<string>();
 
             // We can't change the names of named parameters.  Any other names we're flexible on.
@@ -110,7 +114,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this SemanticModel semanticModel,
             ArgumentSyntax argument,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // If it named argument then we use the name provided.
             if (argument.NameColon != null)
             {
@@ -128,7 +133,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this SemanticModel semanticModel,
             AttributeArgumentSyntax argument,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // If it named argument then we use the name provided.
             if (argument.NameEquals != null)
             {
@@ -151,7 +157,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             ExpressionSyntax expression,
             bool capitalize,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Try to find a usable name node that we can use to name the
             // parameter.  If we have an expression that has a name as part of it
             // then we try to use that part.
@@ -192,7 +199,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 else if (
                     current.Parent is ForEachStatementSyntax foreachStatement
                     && foreachStatement.Expression == expression
-                ) {
+                )
+                {
                     return foreachStatement.Identifier.ValueText.ToCamelCase().Pluralize();
                 }
                 else
@@ -232,7 +240,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             SemanticModel semanticModel,
             ExpressionSyntax expression,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var topExpression = expression.WalkUpParentheses();
             if (topExpression.IsParentKind(SyntaxKind.Argument, out ArgumentSyntax argument))
             {
@@ -248,7 +257,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                         semanticModel.GetSymbolInfo(argumentList.Parent, cancellationToken).Symbol
                             is IMethodSymbol member
                         && index < member.Parameters.Length
-                    ) {
+                    )
+                    {
                         var parameter = member.Parameters[index];
                         if (parameter.Type.OriginalDefinition.TypeKind != TypeKind.TypeParameter)
                         {

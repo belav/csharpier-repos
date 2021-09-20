@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigateTo
             public NavigateToItemProviderCallback(
                 INavigateToItemDisplayFactory displayFactory,
                 INavigateToCallback callback
-            ) {
+            )
+            {
                 _displayFactory = displayFactory;
                 _callback = callback;
             }
@@ -43,7 +44,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigateTo
                 Project project,
                 INavigateToSearchResult result,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 ReportMatchResult(project, result);
                 return Task.CompletedTask;
             }

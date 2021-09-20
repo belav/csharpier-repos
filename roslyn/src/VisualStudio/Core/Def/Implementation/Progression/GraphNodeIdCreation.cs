@@ -44,7 +44,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             INamespaceSymbol symbol,
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var builder = new CodeQualifiedIdentifierBuilder();
 
             var assembly = await GetAssemblyFullPathAsync(symbol, solution, cancellationToken)
@@ -63,7 +64,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             ITypeSymbol symbol,
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var nodes = await GetPartialsForNamespaceAndTypeAsync(
                     symbol,
                     true,
@@ -89,7 +91,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             Solution solution,
             CancellationToken cancellationToken,
             bool isInGenericArguments = false
-        ) {
+        )
+        {
             var items = new List<GraphNodeId>();
 
             Uri assembly = null;
@@ -156,7 +159,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                 else if (
                     underlyingType.ContainingNamespace != null
                     && !underlyingType.ContainingNamespace.IsGlobalNamespace
-                ) {
+                )
+                {
                     items.Add(
                         GraphNodeId.GetPartial(
                             CodeGraphNodeIdName.Namespace,
@@ -186,7 +190,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             Solution solution,
             CancellationToken cancellationToken,
             bool isInGenericArguments = false
-        ) {
+        )
+        {
             if (symbol is IArrayTypeSymbol arrayType)
             {
                 return await GetPartialForArrayTypeAsync(
@@ -248,13 +253,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             Solution solution,
             CancellationToken cancellationToken,
             bool isInGenericArguments = false
-        ) {
+        )
+        {
             // If this is a simple type, then we don't have much to do
             if (
                 namedType.ContainingType == null
                 && Equals(namedType.ConstructedFrom, namedType)
                 && namedType.Arity == 0
-            ) {
+            )
+            {
                 return GraphNodeId.GetPartial(nodeName, namedType.Name);
             }
             else
@@ -343,7 +350,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             GraphNodeIdName nodeName,
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var indirection = 1;
 
             while (pointerType.PointedAtType.TypeKind == TypeKind.Pointer)
@@ -382,7 +390,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             GraphNodeIdName nodeName,
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var partials = new List<GraphNodeId>();
 
             var underlyingType = ChaseToUnderlyingType(arrayType);
@@ -417,7 +426,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             GraphNodeIdName nodeName,
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (typeParameterSymbol.TypeParameterKind == TypeParameterKind.Method)
             {
                 return GraphNodeId.GetPartial(
@@ -466,7 +476,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             ISymbol member,
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var partials = new List<GraphNodeId>();
 
             partials.AddRange(
@@ -524,7 +535,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                     if (
                         member is IMethodSymbol methodSymbol
                         && methodSymbol.MethodKind == MethodKind.Conversion
-                    ) {
+                    )
+                    {
                         // For explicit/implicit conversion operators, we need to include the return type in the method Id,
                         // because there can be several conversion operators with same parameters and only differ by return type.
                         // For example,
@@ -616,7 +628,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             ISymbol symbol,
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var containingAssembly = GetContainingAssembly(symbol);
             return await GetAssemblyFullPathAsync(containingAssembly, solution, cancellationToken)
                 .ConfigureAwait(false);
@@ -626,7 +639,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             IAssemblySymbol containingAssembly,
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (containingAssembly == null)
             {
                 return null;
@@ -660,7 +674,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                             compilation.GetMetadataReference(containingAssembly)
                                 is PortableExecutableReference reference
                             && !string.IsNullOrEmpty(reference.FilePath)
-                        ) {
+                        )
+                        {
                             return new Uri(reference.FilePath, UriKind.RelativeOrAbsolute);
                         }
                     }
@@ -681,7 +696,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             IAssemblySymbol assemblySymbol,
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var assembly = await GetAssemblyFullPathAsync(
                     assemblySymbol,
                     solution,
@@ -702,14 +718,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             IParameterSymbol symbol,
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 symbol.ContainingSymbol == null
                 || (
                     symbol.ContainingSymbol.Kind != SymbolKind.Method
                     && symbol.ContainingSymbol.Kind != SymbolKind.Property
                 )
-            ) {
+            )
+            {
                 // We are only support parameters inside methods or properties.
                 throw new ArgumentException("symbol");
             }
@@ -719,7 +737,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                 containingSymbol is IMethodSymbol method
                 && method.AssociatedSymbol != null
                 && method.AssociatedSymbol.Kind == SymbolKind.Property
-            ) {
+            )
+            {
                 var property = (IPropertySymbol)method.AssociatedSymbol;
                 if (property.Parameters.Any(p => p.Name == symbol.Name))
                 {
@@ -742,14 +761,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             ISymbol symbol,
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 symbol.ContainingSymbol == null
                 || (
                     symbol.ContainingSymbol.Kind != SymbolKind.Method
                     && symbol.ContainingSymbol.Kind != SymbolKind.Property
                 )
-            ) {
+            )
+            {
                 // We are only support local variables inside methods or properties.
                 throw new ArgumentException("symbol");
             }
@@ -789,7 +810,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             ISymbol symbol,
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var pos = 0;
 
             foreach (var reference in symbol.ContainingSymbol.DeclaringSyntaxReferences)
@@ -824,7 +846,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                                 current.Kind == SymbolKind.Local
                                 || current.Kind == SymbolKind.RangeVariable
                             )
-                        ) {
+                        )
+                        {
                             if (!current.Equals(symbol))
                             {
                                 pos++;

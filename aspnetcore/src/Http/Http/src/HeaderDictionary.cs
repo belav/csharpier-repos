@@ -125,7 +125,8 @@ namespace Microsoft.AspNetCore.Http
                         new StringSegment(rawValue[0]).Trim(),
                         out value
                     )
-                ) {
+                )
+                {
                     return value;
                 }
 
@@ -240,7 +241,8 @@ namespace Microsoft.AspNetCore.Http
                 Store == null
                 || !Store.TryGetValue(item.Key, out StringValues value)
                 || !StringValues.Equals(value, item.Value)
-            ) {
+            )
+            {
                 return false;
             }
             return true;
@@ -294,7 +296,8 @@ namespace Microsoft.AspNetCore.Http
 
             if (
                 Store.TryGetValue(item.Key, out var value) && StringValues.Equals(item.Value, value)
-            ) {
+            )
+            {
                 return Store.Remove(item.Key);
             }
             return false;

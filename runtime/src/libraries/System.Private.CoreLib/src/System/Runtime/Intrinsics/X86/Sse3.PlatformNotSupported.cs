@@ -64,7 +64,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<double> HorizontalAdd(
             Vector128<double> left,
             Vector128<double> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -75,7 +76,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<float> HorizontalSubtract(
             Vector128<float> left,
             Vector128<float> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -85,7 +87,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<double> HorizontalSubtract(
             Vector128<double> left,
             Vector128<double> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 

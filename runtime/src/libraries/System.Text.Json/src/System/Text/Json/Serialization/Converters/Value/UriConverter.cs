@@ -9,7 +9,8 @@ namespace System.Text.Json.Serialization.Converters
             ref Utf8JsonReader reader,
             Type typeToConvert,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             string? uriString = reader.GetString();
             if (Uri.TryCreate(uriString, UriKind.RelativeOrAbsolute, out Uri? value))
             {

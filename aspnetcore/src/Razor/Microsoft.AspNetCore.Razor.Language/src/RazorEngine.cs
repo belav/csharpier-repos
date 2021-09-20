@@ -117,7 +117,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         private static void AddDefaultRuntimeFeatures(
             RazorConfiguration configuration,
             ICollection<IRazorEngineFeature> features
-        ) {
+        )
+        {
             // Configure options
             features.Add(
                 new DefaultRazorParserOptionsFeature(
@@ -142,7 +143,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         private static void AddDefaultDesignTimeFeatures(
             RazorConfiguration configuration,
             ICollection<IRazorEngineFeature> features
-        ) {
+        )
+        {
             // Configure options
             features.Add(
                 new DefaultRazorParserOptionsFeature(

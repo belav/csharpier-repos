@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.Emit
             ImmutableArray<LocalSlotDebugInfo> localSlots,
             ImmutableArray<ClosureDebugInfo> closures,
             ImmutableArray<LambdaDebugInfo> lambdas
-        ) {
+        )
+        {
             Debug.Assert(methodOrdinal >= -1);
 
             MethodOrdinal = methodOrdinal;
@@ -46,7 +47,8 @@ namespace Microsoft.CodeAnalysis.Emit
         public static EditAndContinueMethodDebugInformation Create(
             ImmutableArray<byte> compressedSlotMap,
             ImmutableArray<byte> compressedLambdaMap
-        ) {
+        )
+        {
             UncompressLambdaMap(
                 compressedLambdaMap,
                 out var methodOrdinal,
@@ -64,7 +66,8 @@ namespace Microsoft.CodeAnalysis.Emit
         private static InvalidDataException CreateInvalidDataException(
             ImmutableArray<byte> data,
             int offset
-        ) {
+        )
+        {
             const int maxReportedLength = 1024;
 
             int start = Math.Max(0, offset - maxReportedLength / 2);
@@ -95,7 +98,8 @@ namespace Microsoft.CodeAnalysis.Emit
         /// <exception cref="InvalidDataException">Invalid data.</exception>
         private static unsafe ImmutableArray<LocalSlotDebugInfo> UncompressSlotMap(
             ImmutableArray<byte> compressedSlotMap
-        ) {
+        )
+        {
             if (compressedSlotMap.IsDefaultOrEmpty)
             {
                 return default;
@@ -212,7 +216,8 @@ namespace Microsoft.CodeAnalysis.Emit
             out int methodOrdinal,
             out ImmutableArray<ClosureDebugInfo> closures,
             out ImmutableArray<LambdaDebugInfo> lambdas
-        ) {
+        )
+        {
             methodOrdinal = DebugId.UndefinedOrdinal;
             closures = default;
             lambdas = default;

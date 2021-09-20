@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Host
                 ValueSource<TextAndVersion> textSource,
                 Encoding encoding,
                 int length
-            ) {
+            )
+            {
                 FilePath = filePath ?? string.Empty;
                 Options = options;
                 TextSource = textSource;
@@ -99,7 +100,8 @@ namespace Microsoft.CodeAnalysis.Host
 
             public RecoverableSyntaxRoot<TRoot> WithSyntaxTree(
                 IRecoverableSyntaxTree<TRoot> containingTree
-            ) {
+            )
+            {
                 // at this point, we should either have strongly held root or _storage should not be null
                 if (TryGetValue(out var root))
                 {
@@ -138,7 +140,8 @@ namespace Microsoft.CodeAnalysis.Host
                         _containingTree.FilePath,
                         cancellationToken
                     )
-                ) {
+                )
+                {
                     using var stream = await _storage.ReadStreamAsync(cancellationToken)
                         .ConfigureAwait(false);
                     return RecoverRoot(stream, cancellationToken);
@@ -155,7 +158,8 @@ namespace Microsoft.CodeAnalysis.Host
                         _containingTree.FilePath,
                         cancellationToken
                     )
-                ) {
+                )
+                {
                     using var stream = _storage.ReadStream(cancellationToken);
                     return RecoverRoot(stream, cancellationToken);
                 }

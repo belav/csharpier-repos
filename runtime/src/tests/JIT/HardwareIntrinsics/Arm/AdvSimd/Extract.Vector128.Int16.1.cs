@@ -458,7 +458,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Vector128<Int16> op1,
             Int16 result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Int16[] inArray1 = new Int16[Op1ElementCount];
 
             Unsafe.WriteUnaligned(ref Unsafe.As<Int16, byte>(ref inArray1[0]), op1);
@@ -483,7 +484,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Int16[] firstOp,
             Int16 result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (firstOp[ElementIndex] != result)

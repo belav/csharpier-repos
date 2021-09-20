@@ -50,9 +50,8 @@ namespace System.Net.Http.Functional.Tests
     public sealed class SyncHttpHandler_HttpClientHandler_Decompression_Tests
         : HttpClientHandler_Decompression_Test
     {
-        public SyncHttpHandler_HttpClientHandler_Decompression_Tests(
-            ITestOutputHelper output
-        ) : base(output) { }
+        public SyncHttpHandler_HttpClientHandler_Decompression_Tests(ITestOutputHelper output)
+            : base(output) { }
         protected override bool TestAsync => false;
     }
 
@@ -98,9 +97,8 @@ namespace System.Net.Http.Functional.Tests
     public sealed class SyncHttpHandler_HttpClientHandler_Authentication_Test
         : HttpClientHandler_Authentication_Test
     {
-        public SyncHttpHandler_HttpClientHandler_Authentication_Test(
-            ITestOutputHelper output
-        ) : base(output) { }
+        public SyncHttpHandler_HttpClientHandler_Authentication_Test(ITestOutputHelper output)
+            : base(output) { }
         protected override bool TestAsync => false;
     }
 

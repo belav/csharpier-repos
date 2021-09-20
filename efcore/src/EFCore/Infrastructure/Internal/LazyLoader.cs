@@ -41,7 +41,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure.Internal
         public LazyLoader(
             ICurrentDbContext currentContext,
             IDiagnosticsLogger<DbLoggerCategory.Infrastructure> logger
-        ) {
+        )
+        {
             Check.NotNull(currentContext, nameof(currentContext));
             Check.NotNull(logger, nameof(logger));
 
@@ -59,7 +60,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure.Internal
             object entity,
             [CallerMemberName] string navigationName = "",
             bool loaded = true
-        ) {
+        )
+        {
             if (_loadedStates == null)
             {
                 _loadedStates = new Dictionary<string, bool>();
@@ -112,7 +114,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure.Internal
             object entity,
             CancellationToken cancellationToken = default,
             [CallerMemberName] string navigationName = ""
-        ) {
+        )
+        {
             Check.NotNull(entity, nameof(entity));
             Check.NotEmpty(navigationName, nameof(navigationName));
 
@@ -125,12 +128,14 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure.Internal
             object entity,
             string navigationName,
             [NotNullWhen(true)] out NavigationEntry? navigationEntry
-        ) {
+        )
+        {
             if (
                 _loadedStates != null
                 && _loadedStates.TryGetValue(navigationName, out var loaded)
                 && loaded
-            ) {
+            )
+            {
                 navigationEntry = null;
                 return false;
             }

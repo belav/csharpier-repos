@@ -25,7 +25,8 @@ namespace System.Net.WebSockets.Client.Tests
             WebSocketMessageType type,
             int timeOutMilliseconds,
             ITestOutputHelper output
-        ) {
+        )
+        {
             var cts = new CancellationTokenSource(timeOutMilliseconds);
             string message = "Hello WebSockets!";
             string closeMessage = "Good bye!";
@@ -38,7 +39,8 @@ namespace System.Net.WebSockets.Client.Tests
                     timeOutMilliseconds,
                     output
                 )
-            ) {
+            )
+            {
                 output.WriteLine("TestEcho: SendAsync starting.");
                 await cws.SendAsync(
                     WebSocketData.GetBufferFromText(message),

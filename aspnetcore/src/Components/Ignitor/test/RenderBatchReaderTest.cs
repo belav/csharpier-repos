@@ -365,7 +365,8 @@ namespace Ignitor
                 var entryPosition = stringTableStartPosition;
                 entryPosition < stringTableEndPositionExcl;
                 entryPosition += 4
-            ) {
+            )
+            {
                 // The string table entries are all length-prefixed UTF8 blobs
                 var tableEntryPos = BitConverter.ToInt32(bytes, entryPosition);
                 var length = (int)ReadUnsignedLEB128(bytes, tableEntryPos, out var numLEB128Bytes);

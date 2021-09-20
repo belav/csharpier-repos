@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
         public async Task<ImmutableArray<CodeActionOperation>> GetFixAllOperationsAsync(
             FixAllContext fixAllContext,
             bool showPreviewChangesDialog
-        ) {
+        )
+        {
             var codeAction = await GetFixAllCodeActionAsync(fixAllContext).ConfigureAwait(false);
             if (codeAction == null)
             {
@@ -78,7 +79,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                     ),
                     fixAllContext.CancellationToken
                 )
-            ) {
+            )
+            {
                 CodeAction action = null;
                 try
                 {
@@ -120,7 +122,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
             bool showPreviewChangesDialog,
             FixAllState fixAllState,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // We have computed the fix all occurrences code fix.
             // Now fetch the new solution with applied fix and bring up the Preview changes dialog.
 
@@ -171,7 +174,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
             Workspace workspace,
             int? correlationId = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             using (
                 Logger.LogBlock(
@@ -190,7 +194,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                     ),
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 var glyph =
                     languageOpt == null
                         ? Glyph.Assembly
@@ -243,7 +248,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
             ImmutableArray<CodeActionOperation> operations,
             Solution newSolution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var result = ArrayBuilder<CodeActionOperation>.GetInstance();
             var foundApplyChanges = false;
             foreach (var operation in operations)

@@ -93,7 +93,8 @@ namespace System.IO.Packaging
             Uri partUri,
             string? contentType,
             CompressionOption compressionOption
-        ) {
+        )
+        {
             if (package == null)
                 throw new ArgumentNullException(nameof(package));
 
@@ -371,7 +372,8 @@ namespace System.IO.Packaging
             Uri targetUri,
             TargetMode targetMode,
             string relationshipType
-        ) {
+        )
+        {
             return CreateRelationship(targetUri, targetMode, relationshipType, null);
         }
 
@@ -401,7 +403,8 @@ namespace System.IO.Packaging
             TargetMode targetMode,
             string relationshipType,
             string? id
-        ) {
+        )
+        {
             CheckInvalidState();
             _container.ThrowIfReadOnly();
             EnsureRelationships();

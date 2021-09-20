@@ -186,7 +186,8 @@ namespace Internal.TypeSystem.Ecma
                             namespaceHandle,
                             "System.Runtime.CompilerServices"
                         )
-                    ) {
+                    )
+                    {
                         if (metadataReader.StringComparer.Equals(nameHandle, "IntrinsicAttribute"))
                         {
                             flags |= MethodFlags.Intrinsic;
@@ -197,25 +198,29 @@ namespace Internal.TypeSystem.Ecma
                             namespaceHandle,
                             "System.Runtime.InteropServices"
                         )
-                    ) {
+                    )
+                    {
                         if (
                             metadataReader.StringComparer.Equals(
                                 nameHandle,
                                 "UnmanagedCallersOnlyAttribute"
                             )
-                        ) {
+                        )
+                        {
                             flags |= MethodFlags.UnmanagedCallersOnly;
                         }
                     }
                     else if (
                         metadataReader.StringComparer.Equals(namespaceHandle, "System.Runtime")
-                    ) {
+                    )
+                    {
                         if (
                             metadataReader.StringComparer.Equals(
                                 nameHandle,
                                 "RuntimeExportAttribute"
                             )
-                        ) {
+                        )
+                        {
                             flags |= MethodFlags.RuntimeExport;
                         }
                     }
@@ -523,7 +528,8 @@ namespace Internal.TypeSystem.Ecma
             if (
                 (importAttributes & MethodImportAttributes.BestFitMappingMask) == 0
                 || (importAttributes & MethodImportAttributes.ThrowOnUnmappableCharMask) == 0
-            ) {
+            )
+            {
                 TypeDefinition declaringType = metadataReader.GetTypeDefinition(
                     methodDef.GetDeclaringType()
                 );
@@ -541,7 +547,8 @@ namespace Internal.TypeSystem.Ecma
                 if (
                     (importAttributes & MethodImportAttributes.BestFitMappingMask) == 0
                     || (importAttributes & MethodImportAttributes.ThrowOnUnmappableCharMask) == 0
-                ) {
+                )
+                {
                     fromCA = GetImportAttributesFromBestFitMappingAttribute(
                         metadataReader.GetAssemblyDefinition().GetCustomAttributes()
                     );
@@ -578,7 +585,8 @@ namespace Internal.TypeSystem.Ecma
 
         private MethodImportAttributes GetImportAttributesFromBestFitMappingAttribute(
             CustomAttributeHandleCollection attributeHandles
-        ) {
+        )
+        {
             // Look for the [BestFitMapping(BestFitMapping: x, ThrowOnUnmappableChar = y)] attribute and
             // translate that to MethodImportAttributes
 
@@ -667,7 +675,8 @@ namespace Internal.TypeSystem.Ecma
             if (
                 (parameter.Attributes & ParameterAttributes.HasFieldMarshal)
                 == ParameterAttributes.HasFieldMarshal
-            ) {
+            )
+            {
                 MetadataReader metadataReader = MetadataReader;
                 BlobReader marshalAsReader = metadataReader.GetBlobReader(
                     parameter.GetMarshallingDescriptor()

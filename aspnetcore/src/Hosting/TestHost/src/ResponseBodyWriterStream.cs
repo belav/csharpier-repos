@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.TestHost
         public ResponseBodyWriterStream(
             ResponseBodyPipeWriter responseWriter,
             Func<bool> allowSynchronousIO
-        ) {
+        )
+        {
             _responseWriter = responseWriter;
             _allowSynchronousIO = allowSynchronousIO;
         }
@@ -85,7 +86,8 @@ namespace Microsoft.AspNetCore.TestHost
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             await _responseWriter.WriteAsync(
                 new ReadOnlyMemory<byte>(buffer, offset, count),
                 cancellationToken

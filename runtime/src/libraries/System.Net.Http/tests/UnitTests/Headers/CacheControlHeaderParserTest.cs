@@ -51,7 +51,8 @@ namespace System.Net.Http.Tests
             int startIndex,
             CacheControlHeaderValue expectedResult,
             int expectedIndex
-        ) {
+        )
+        {
             HttpHeaderParser parser = CacheControlHeaderParser.Parser;
             object result = null;
             Assert.True(parser.TryParseValue(input, null, ref startIndex, out result));

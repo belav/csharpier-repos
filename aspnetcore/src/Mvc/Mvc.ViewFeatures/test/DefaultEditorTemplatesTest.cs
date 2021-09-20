@@ -283,7 +283,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public void ObjectTemplate_ChecksWriteTo_NotToString(
             IHtmlContent labelContent,
             string expectedLabel
-        ) {
+        )
+        {
             // Arrange
             var expected =
                 expectedLabel
@@ -372,7 +373,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string simpleDisplayText,
             bool htmlEncode,
             string expectedResult
-        ) {
+        )
+        {
             // Arrange
             var model = new DefaultTemplatesUtilities.ObjectTemplateModel()
             {
@@ -760,7 +762,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public void Editor_CallsExpectedHtmlHelper_DataTypeName(
             string templateName,
             string expectedResult
-        ) {
+        )
+        {
             // Arrange
             var model = new DefaultTemplatesUtilities.ObjectTemplateModel { Property1 = "True" };
             var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
@@ -822,7 +825,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public void EditorFor_CallsExpectedHtmlHelper_DataTypeName(
             string templateName,
             string expectedResult
-        ) {
+        )
+        {
             // Arrange
             var model = new DefaultTemplatesUtilities.ObjectTemplateModel { Property1 = "True" };
             var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
@@ -883,7 +887,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public void Editor_CallsExpectedHtmlHelper_TemplateHint(
             string templateName,
             string expectedResult
-        ) {
+        )
+        {
             // Arrange
             var model = new DefaultTemplatesUtilities.ObjectTemplateModel { Property1 = "True" };
             var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
@@ -945,7 +950,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public void EditorFor_CallsExpectedHtmlHelper_TemplateHint(
             string templateName,
             string expectedResult
-        ) {
+        )
+        {
             // Arrange
             var model = new DefaultTemplatesUtilities.ObjectTemplateModel { Property1 = "True" };
             var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
@@ -1123,7 +1129,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string editFormatString,
             string expectedValue,
             string expectedType
-        ) {
+        )
+        {
             // Arrange
             var requiredMessage = ValidationAttributeUtil.GetRequiredErrorMessage("DateTimeOffset");
             var expectedInput =
@@ -1213,7 +1220,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string editFormatString,
             string expectedValue,
             string expectedType
-        ) {
+        )
+        {
             // Arrange
             var requiredMessage = ValidationAttributeUtil.GetRequiredErrorMessage("DateTimeOffset");
             var expectedInput =
@@ -1304,7 +1312,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string editFormatString,
             string expectedValue,
             string expectedType
-        ) {
+        )
+        {
             // Arrange
             var requiredMessage = ValidationAttributeUtil.GetRequiredErrorMessage("DateTime");
             var expectedInput =
@@ -1392,7 +1401,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string editFormatString,
             string expectedValue,
             string expectedType
-        ) {
+        )
+        {
             // Arrange
             var requiredMessage = ValidationAttributeUtil.GetRequiredErrorMessage("DateTime");
             var expectedInput =
@@ -1480,7 +1490,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string dataTypeName,
             Html5DateRenderingMode renderingMode,
             string expectedType
-        ) {
+        )
+        {
             // Arrange
             var requiredMessage = ValidationAttributeUtil.GetRequiredErrorMessage("DateTimeOffset");
             var expectedInput =
@@ -1836,7 +1847,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 string fragment,
                 object routeValues,
                 object htmlAttributes
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -1852,7 +1864,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 FormMethod method,
                 bool? antiforgery,
                 object htmlAttributes
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -1862,7 +1875,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 FormMethod method,
                 bool? antiforgery,
                 object htmlAttributes
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -1876,7 +1890,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 string templateName,
                 string htmlFieldName,
                 object additionalViewData
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -1895,7 +1910,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 IEnumerable<SelectListItem> selectList,
                 string optionLabel,
                 object htmlAttributes
-            ) {
+            )
+            {
                 return HelperName("__DropDownList__", htmlAttributes);
             }
 
@@ -1904,7 +1920,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 string templateName,
                 string htmlFieldName,
                 object additionalViewData
-            ) {
+            )
+            {
                 return _innerHelper.Editor(
                     expression,
                     templateName,
@@ -1967,7 +1984,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 string name,
                 IEnumerable<SelectListItem> selectList,
                 object htmlAttributes
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -1980,7 +1998,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 string partialViewName,
                 object model,
                 ViewDataDictionary viewData
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -1994,7 +2013,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 object value,
                 bool? isChecked,
                 object htmlAttributes
-            ) {
+            )
+            {
                 return HelperName("__RadioButton__", htmlAttributes);
             }
 
@@ -2012,7 +2032,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 string partialViewName,
                 object model,
                 ViewDataDictionary viewData
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -2024,7 +2045,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 string fragment,
                 object routeValues,
                 object htmlAttributes
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -2034,7 +2056,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 int rows,
                 int columns,
                 object htmlAttributes
-            ) {
+            )
+            {
                 return HelperName("__TextArea__", htmlAttributes);
             }
 
@@ -2043,7 +2066,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 object value,
                 string format,
                 object htmlAttributes
-            ) {
+            )
+            {
                 return HelperName("__TextBox__", htmlAttributes);
             }
 
@@ -2052,7 +2076,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 string message,
                 object htmlAttributes,
                 string tag
-            ) {
+            )
+            {
                 return HelperName("__ValidationMessage__", htmlAttributes);
             }
 
@@ -2061,7 +2086,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 string message,
                 object htmlAttributes,
                 string tag
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 

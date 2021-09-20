@@ -69,7 +69,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax
                 && e.Token != null
                 && e.Token.Kind == kind
                 && e.Token.Content == content
-            ) {
+            )
+            {
                 return e.Token;
             }
 

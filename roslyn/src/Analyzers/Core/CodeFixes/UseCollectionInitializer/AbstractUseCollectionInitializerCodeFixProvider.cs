@@ -62,7 +62,8 @@ namespace Microsoft.CodeAnalysis.UseCollectionInitializer
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Fix-All for this feature is somewhat complicated.  As Collection-Initializers
             // could be arbitrarily nested, we have to make sure that any edits we make
             // to one Collection-Initializer are seen by any higher ones.  In order to do this
@@ -145,12 +146,11 @@ namespace Microsoft.CodeAnalysis.UseCollectionInitializer
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                AnalyzersResources.Collection_initialization_can_be_simplified,
-                createChangedDocument
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    AnalyzersResources.Collection_initialization_can_be_simplified,
+                    createChangedDocument
+                ) { }
         }
     }
 }

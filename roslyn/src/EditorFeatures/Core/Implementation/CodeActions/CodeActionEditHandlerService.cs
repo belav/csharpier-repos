@@ -52,7 +52,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CodeActions
             Workspace workspace,
             ImmutableArray<CodeActionOperation> operations,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (operations.IsDefaultOrEmpty)
             {
                 return null;
@@ -126,7 +127,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CodeActions
             string title,
             IProgressTracker progressTracker,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             this.AssertIsForeground();
 
             if (operations.IsDefaultOrEmpty)
@@ -178,7 +180,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CodeActions
                 using (
                     workspace.Services.GetService<ISourceTextUndoService>()
                         .RegisterUndoTransaction(text, title)
-                ) {
+                )
+                {
                     applied = operations.Single()
                         .TryApply(workspace, progressTracker, cancellationToken);
                 }
@@ -222,7 +225,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CodeActions
         private static TextDocument TryGetSingleChangedText(
             Solution oldSolution,
             ImmutableArray<CodeActionOperation> operationsList
-        ) {
+        )
+        {
             Debug.Assert(operationsList.Length > 0);
             if (operationsList.Length > 1)
             {
@@ -262,7 +266,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CodeActions
                 || projectChange.GetRemovedAnalyzerConfigDocuments().Any()
                 || projectChange.GetRemovedMetadataReferences().Any()
                 || projectChange.GetRemovedProjectReferences().Any()
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -280,7 +285,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CodeActions
                     + changedDocuments.Length
                     + changedAnalyzerConfigDocuments.Length
                 != 1
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -298,7 +304,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CodeActions
                         newSolution.GetAnalyzerConfigDocument(id)
                             .HasInfoChanged(oldSolution.GetAnalyzerConfigDocument(id))
                 )
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -323,7 +330,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CodeActions
             ImmutableArray<CodeActionOperation> operations,
             IProgressTracker progressTracker,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var applied = true;
             var seenApplyChanges = false;
             foreach (var operation in operations)
@@ -350,7 +358,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CodeActions
             Solution oldSolution,
             Solution newSolution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var changedDocuments = newSolution.GetChangedDocuments(oldSolution);
             foreach (var documentId in changedDocuments)
             {
@@ -393,7 +402,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CodeActions
                     if (
                         pathToRenameToken.TryResolve(latestRoot, out var resolvedRenameToken)
                         && resolvedRenameToken.IsToken
-                    ) {
+                    )
+                    {
                         var editorWorkspace = workspace;
                         var navigationService =
                             editorWorkspace.Services.GetService<IDocumentNavigationService>();
@@ -404,7 +414,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CodeActions
                                 resolvedRenameToken.Span,
                                 cancellationToken
                             )
-                        ) {
+                        )
+                        {
                             var openDocument = workspace.CurrentSolution.GetDocument(documentId);
                             var openRoot = openDocument.GetSyntaxRootSynchronously(
                                 cancellationToken
@@ -419,7 +430,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CodeActions
                             if (
                                 pathToRenameToken.TryResolve(openRoot, out resolvedRenameToken)
                                 && resolvedRenameToken.IsToken
-                            ) {
+                            )
+                            {
                                 var snapshot = openDocument.GetTextSynchronously(cancellationToken)
                                     .FindCorrespondingEditorTextSnapshot();
                                 if (snapshot != null)

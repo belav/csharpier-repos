@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.TodoComments
             Document document,
             SourceText text,
             SyntaxTree? tree
-        ) {
+        )
+        {
             // make sure given position is within valid text range.
             var textSpan = new TextSpan(Math.Min(text.Length, Math.Max(0, Position)), 0);
 
@@ -66,7 +67,8 @@ namespace Microsoft.CodeAnalysis.TodoComments
             ImmutableArray<TodoComment> todoComments,
             ArrayBuilder<TodoCommentData> converted,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var sourceText = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
             var syntaxTree = await document.GetSyntaxTreeAsync(cancellationToken)
                 .ConfigureAwait(false);

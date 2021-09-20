@@ -290,7 +290,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -298,7 +299,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 MyPoco value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 if (value == null)
                 {
                     throw new InvalidOperationException(

@@ -29,14 +29,16 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineHints
             bool forLambdaParameterTypes,
             bool forImplicitObjectCreation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (forImplicitVariableTypes || displayAllOverride)
             {
                 if (
                     node is VariableDeclarationSyntax { Type: { IsVar: true } } variableDeclaration
                     && variableDeclaration.Variables.Count == 1
                     && !variableDeclaration.Variables[0].Identifier.IsMissing
-                ) {
+                )
+                {
                     var type =
                         semanticModel.GetTypeInfo(variableDeclaration.Type, cancellationToken).Type;
                     if (IsValidType(type))
@@ -53,7 +55,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineHints
                     {
                         Type: { IsVar: true }
                     } declarationExpression
-                ) {
+                )
+                {
                     var type =
                         semanticModel.GetTypeInfo(
                             declarationExpression.Type,
@@ -73,7 +76,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineHints
                     {
                         Parent: not DeclarationPatternSyntax and not DeclarationExpressionSyntax
                     } variableDesignation
-                ) {
+                )
+                {
                     var local =
                         semanticModel.GetDeclaredSymbol(variableDesignation, cancellationToken)
                         as ILocalSymbol;
@@ -122,7 +126,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineHints
                         parameter?.ContainingSymbol
                             is IMethodSymbol { MethodKind: MethodKind.AnonymousFunction }
                         && IsValidType(parameter?.Type)
-                    ) {
+                    )
+                    {
                         return new(
                             parameter.Type,
                             new TextSpan(parameterNode.Identifier.SpanStart, 0),
@@ -157,7 +162,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineHints
             bool normalOption,
             SyntaxNodeOrToken displayAllSpan,
             SyntaxNodeOrToken normalSpan
-        ) {
+        )
+        {
             var span = GetSpan(displayAllOverride, normalOption, displayAllSpan, normalSpan);
             // if this is a hint that is placed in-situ (i.e. it's not overwriting text like 'var'), then place
             // a space after it to make things feel less cramped.
@@ -170,7 +176,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineHints
             bool normalOption,
             SyntaxNodeOrToken displayAllSpan,
             SyntaxNodeOrToken normalSpan
-        ) {
+        )
+        {
             // If we're showing this because the normal option is on, then place the hint prior to the node being marked.
             if (normalOption)
                 return new TextSpan(normalSpan.SpanStart, 0);

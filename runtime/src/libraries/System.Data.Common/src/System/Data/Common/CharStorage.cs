@@ -155,7 +155,8 @@ namespace System.Data.Common
                 if (
                     (ch >= (char)0xd800 && ch <= (char)0xdfff)
                     || (ch < (char)0x21 && (ch == (char)0x9 || ch == (char)0xa || ch == (char)0xd))
-                ) {
+                )
+                {
                     throw ExceptionBuilder.ProblematicChars(ch);
                 }
                 _values[record] = ch;
@@ -194,7 +195,8 @@ namespace System.Data.Common
             object store,
             BitArray nullbits,
             int storeIndex
-        ) {
+        )
+        {
             char[] typedStore = (char[])store;
             typedStore[storeIndex] = _values[record];
             nullbits.Set(storeIndex, IsNull(record));

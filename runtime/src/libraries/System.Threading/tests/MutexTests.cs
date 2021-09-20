@@ -232,7 +232,8 @@ namespace System.Threading.Tests
                         int notAbandonedWaitIndex = 0;
                         notAbandonedWaitIndex < waitCount;
                         ++notAbandonedWaitIndex
-                    ) {
+                    )
+                    {
                         foreach (bool abandonDuringWait in new bool[] { false, true })
                         {
                             var args = new object[]
@@ -296,7 +297,8 @@ namespace System.Threading.Tests
             int notAbandonedWaitIndex,
             bool isNotAbandonedWaitObjectSignaled,
             bool abandonDuringWait
-        ) {
+        )
+        {
             ThreadTestHelpers.RunTestInBackgroundThread(
                 () =>
                 {
@@ -322,7 +324,8 @@ namespace System.Threading.Tests
                         ManualResetEvent abandonSoon = abandonDuringWait
                             ? new ManualResetEvent(false)
                             : null
-                    ) {
+                    )
+                    {
                         WaitHandle[] waitHandles = null;
                         if (waitType != WaitHandleWaitType.WaitOne)
                         {
@@ -387,7 +390,8 @@ namespace System.Threading.Tests
                                     waitCount != 1
                                     && isNotAbandonedWaitObjectSignaled
                                     && notAbandonedWaitIndex == 0
-                                ) {
+                                )
+                                {
                                     Assert.Equal(0, WaitHandle.WaitAny(waitHandles, 0));
                                     AssertExtensions.Throws<AbandonedMutexException, bool>(
                                         () =>
@@ -408,7 +412,8 @@ namespace System.Threading.Tests
                                     waitCount != 1
                                     && isNotAbandonedWaitObjectSignaled
                                     && notAbandonedWaitIndex != 0
-                                ) {
+                                )
+                                {
                                     ame = Assert.Throws<AbandonedMutexException>(
                                         () =>
                                         {
@@ -563,7 +568,8 @@ namespace System.Threading.Tests
                         using (var mutex = new Mutex(false, mutexName))
                         using (
                             var remote = RemoteExecutor.Invoke(otherProcess, mutexName, fileName)
-                        ) {
+                        )
+                        {
                             SpinWait.SpinUntil(
                                 () =>
                                 {

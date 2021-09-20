@@ -142,7 +142,8 @@ namespace System.IO.Compression.Tests
             string archiveFile,
             string directory,
             ZipArchiveMode mode
-        ) {
+        )
+        {
             await IsZipSameAsDirAsync(
                 archiveFile,
                 directory,
@@ -158,7 +159,8 @@ namespace System.IO.Compression.Tests
             ZipArchiveMode mode,
             bool requireExplicit,
             bool checkTimes
-        ) {
+        )
+        {
             var s = await StreamHelpers.CreateTempCopyStream(archiveFile);
             IsZipSameAsDir(s, directory, mode, requireExplicit, checkTimes);
         }
@@ -177,7 +179,8 @@ namespace System.IO.Compression.Tests
             ZipArchiveMode mode,
             bool requireExplicit,
             bool checkTimes
-        ) {
+        )
+        {
             int count = 0;
 
             using (ZipArchive archive = new ZipArchive(archiveFile, mode))
@@ -382,7 +385,8 @@ namespace System.IO.Compression.Tests
             ZipArchiveMode mode,
             bool useSpansForWriting = false,
             bool writeInChunks = false
-        ) {
+        )
+        {
             var files = FileData.InPath(directory);
             using (ZipArchive archive = new ZipArchive(archiveStream, mode, true))
             {
@@ -420,7 +424,8 @@ namespace System.IO.Compression.Tests
                                     while (
                                         (bytesRead = installStream.Read(new Span<byte>(buffer)))
                                         != 0
-                                    ) {
+                                    )
+                                    {
                                         entryStream.Write(
                                             new ReadOnlySpan<byte>(buffer, 0, bytesRead)
                                         );
@@ -431,7 +436,8 @@ namespace System.IO.Compression.Tests
                                     while (
                                         (bytesRead = installStream.Read(buffer, 0, buffer.Length))
                                         != 0
-                                    ) {
+                                    )
+                                    {
                                         for (int k = 0; k < bytesRead; k += 5)
                                             entryStream.Write(
                                                 buffer,
@@ -445,7 +451,8 @@ namespace System.IO.Compression.Tests
                                     while (
                                         (bytesRead = installStream.Read(buffer, 0, buffer.Length))
                                         != 0
-                                    ) {
+                                    )
+                                    {
                                         entryStream.Write(buffer, 0, bytesRead);
                                     }
                                 }
@@ -461,7 +468,8 @@ namespace System.IO.Compression.Tests
             string name,
             string contents,
             DateTimeOffset lastWrite
-        ) {
+        )
+        {
             ZipArchiveEntry e = archive.CreateEntry(name);
             e.LastWriteTime = lastWrite;
             using (StreamWriter w = new StreamWriter(e.Open()))

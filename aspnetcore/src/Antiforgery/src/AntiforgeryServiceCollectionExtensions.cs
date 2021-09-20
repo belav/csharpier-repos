@@ -74,7 +74,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddAntiforgery(
             this IServiceCollection services,
             Action<AntiforgeryOptions> setupAction
-        ) {
+        )
+        {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));

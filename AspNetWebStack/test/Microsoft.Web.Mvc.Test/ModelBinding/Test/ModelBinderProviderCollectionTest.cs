@@ -597,7 +597,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             public override IExtensibleModelBinder GetBinder(
                 ControllerContext controllerContext,
                 ExtensibleModelBindingContext bindingContext
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }
@@ -642,7 +643,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             public override IExtensibleModelBinder GetBinder(
                 ControllerContext controllerContext,
                 ExtensibleModelBindingContext bindingContext
-            ) {
+            )
+            {
                 return new CustomBinder();
             }
         }
@@ -652,7 +654,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             public bool BindModel(
                 ControllerContext controllerContext,
                 ExtensibleModelBindingContext bindingContext
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }
@@ -662,7 +665,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             public bool BindModel(
                 ControllerContext controllerContext,
                 ExtensibleModelBindingContext bindingContext
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }
@@ -674,7 +678,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             public override IExtensibleModelBinder GetBinder(
                 ControllerContext controllerContext,
                 ExtensibleModelBindingContext bindingContext
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }
@@ -686,7 +691,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             public bool BindModel(
                 ControllerContext controllerContext,
                 ExtensibleModelBindingContext bindingContext
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }

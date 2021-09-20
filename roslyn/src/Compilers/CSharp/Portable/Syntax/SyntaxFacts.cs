@@ -447,14 +447,16 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal static bool IsIdentifierVarOrPredefinedType(
             this Syntax.InternalSyntax.SyntaxToken node
-        ) {
+        )
+        {
             return node.IsIdentifierVar() || IsPredefinedType(node.Kind);
         }
 
         internal static bool IsDeclarationExpressionType(
             SyntaxNode node,
             [NotNullWhen(true)] out DeclarationExpressionSyntax? parent
-        ) {
+        )
+        {
             parent = node.Parent as DeclarationExpressionSyntax;
             return node == parent?.Type;
         }
@@ -478,7 +480,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (
                         designationKind == SyntaxKind.ParenthesizedVariableDesignation
                         || designationKind == SyntaxKind.DiscardDesignation
-                    ) {
+                    )
+                    {
                         return null;
                     }
 

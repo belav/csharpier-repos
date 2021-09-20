@@ -36,7 +36,8 @@ namespace Internal.TypeSystem
             StringBuilder sb,
             ArrayType type,
             bool assemblyQualify
-        ) {
+        )
+        {
             IAssemblyDesc homeAssembly = AppendName(sb, type.ElementType, false);
 
             if (type.IsSzArray)
@@ -64,7 +65,8 @@ namespace Internal.TypeSystem
             StringBuilder sb,
             ByRefType type,
             bool assemblyQualify
-        ) {
+        )
+        {
             IAssemblyDesc homeAssembly = AppendName(sb, type.ParameterType, false);
 
             sb.Append('&');
@@ -79,7 +81,8 @@ namespace Internal.TypeSystem
             StringBuilder sb,
             PointerType type,
             bool assemblyQualify
-        ) {
+        )
+        {
             IAssemblyDesc homeAssembly = AppendName(sb, type.ParameterType, false);
 
             sb.Append('*');
@@ -94,7 +97,8 @@ namespace Internal.TypeSystem
             StringBuilder sb,
             FunctionPointerType type,
             bool assemblyQualify
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
 
@@ -102,7 +106,8 @@ namespace Internal.TypeSystem
             StringBuilder sb,
             GenericParameterDesc type,
             bool assemblyQualify
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
 
@@ -110,7 +115,8 @@ namespace Internal.TypeSystem
             StringBuilder sb,
             SignatureMethodVariable type,
             bool assemblyQualify
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
 
@@ -118,7 +124,8 @@ namespace Internal.TypeSystem
             StringBuilder sb,
             SignatureTypeVariable type,
             bool assemblyQualify
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
 
@@ -126,7 +133,8 @@ namespace Internal.TypeSystem
             StringBuilder sb,
             DefType type,
             bool assemblyQualify
-        ) {
+        )
+        {
             IAssemblyDesc homeAssembly = AppendName(sb, type.GetTypeDefinition(), false);
 
             sb.Append('[');
@@ -153,7 +161,8 @@ namespace Internal.TypeSystem
             StringBuilder sb,
             DefType type,
             bool assemblyQualify
-        ) {
+        )
+        {
             string ns = type.Namespace;
             if (ns.Length > 0)
             {
@@ -180,7 +189,8 @@ namespace Internal.TypeSystem
             DefType nestedType,
             DefType containingType,
             bool assemblyQualify
-        ) {
+        )
+        {
             IAssemblyDesc homeAssembly = AppendName(sb, containingType, false);
 
             sb.Append('+');

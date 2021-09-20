@@ -21,7 +21,8 @@ namespace FormatterWebSite
                 Type objectType,
                 object existingValue,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 return new RecursiveIdentifier(reader.Value.ToString());
             }
 
@@ -29,7 +30,8 @@ namespace FormatterWebSite
                 JsonWriter writer,
                 object value,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }

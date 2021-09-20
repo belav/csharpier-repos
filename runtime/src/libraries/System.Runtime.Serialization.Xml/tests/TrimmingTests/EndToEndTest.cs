@@ -22,7 +22,8 @@ class Program
             s.GivenName != "Admin User"
             || s.Name != "admin@fmdevsql.onmicrosoft.com"
             || !s.IsAuthenticated
-        ) {
+        )
+        {
             return -1;
         }
 

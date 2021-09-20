@@ -21,7 +21,8 @@ namespace System.Composition.Hosting.Core
         public bool TryGetSingleForExport(
             CompositionContract exportKey,
             out ExportDescriptor defaultForExport
-        ) {
+        )
+        {
             ExportDescriptor[] allForExport;
             if (!_partDefinitions.TryGetValue(exportKey, out allForExport))
             {

@@ -59,7 +59,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
                 TAttributeData attrData,
                 TSyntaxNode syntaxNodeOpt,
                 DiagnosticBag diagnostics
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -67,7 +68,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
                 TPEModuleBuilder moduleBuilder,
                 TSyntaxNode syntaxNodeOpt,
                 DiagnosticBag diagnostics
-            ) {
+            )
+            {
                 var builder = ArrayBuilder<TAttributeData>.GetInstance();
 
                 // Copy some of the attributes.
@@ -84,7 +86,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
                             attrData,
                             AttributeDescription.DispIdAttribute
                         )
-                    ) {
+                    )
+                    {
                         if (attrData.CommonConstructorArguments.Length == 1)
                         {
                             builder.AddOptional(

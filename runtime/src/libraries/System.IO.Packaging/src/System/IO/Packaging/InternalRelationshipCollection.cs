@@ -81,7 +81,8 @@ namespace System.IO.Packaging
             TargetMode targetMode,
             string relationshipType,
             string? id
-        ) {
+        )
+        {
             return Add(targetUri, targetMode, relationshipType, id, parsing: false);
         }
 
@@ -189,7 +190,8 @@ namespace System.IO.Packaging
                     package.FileOpenAccess == FileAccess.Read
                     || package.FileOpenAccess == FileAccess.ReadWrite
                 ) && package.PartExists(_uri)
-            ) {
+            )
+            {
                 _relationshipPart = package.GetPart(_uri);
                 ThrowIfIncorrectContentType(_relationshipPart.ValidatedContentType);
                 ParseRelationshipPart(_relationshipPart);
@@ -241,7 +243,8 @@ namespace System.IO.Packaging
                             baseReader,
                             s_relationshipKnownNamespaces
                         )
-                    ) {
+                    )
+                    {
                         //This method expects the reader to be in ReadState.Initial.
                         //It will make the first read call.
                         PackagingUtilities.PerformInitialReadAndVerifyEncoding(baseReader);
@@ -263,7 +266,8 @@ namespace System.IO.Packaging
                                     reader.NamespaceURI
                                 ) == 0
                             )
-                        ) {
+                        )
+                        {
                             ThrowIfXmlBaseAttributeIsPresent(reader);
 
                             //There should be a namespace Attribute present at this level.
@@ -301,7 +305,8 @@ namespace System.IO.Packaging
                                             reader.NamespaceURI
                                         ) == 0
                                     )
-                                ) {
+                                )
+                                {
                                     ThrowIfXmlBaseAttributeIsPresent(reader);
 
                                     int expectedAttributesCount = 3;
@@ -317,7 +322,8 @@ namespace System.IO.Packaging
                                     if (
                                         PackagingUtilities.GetNonXmlnsAttributeCount(reader)
                                         == expectedAttributesCount
-                                    ) {
+                                    )
+                                    {
                                         ProcessRelationshipAttributes(reader);
 
                                         //Skip the EndElement for Relationship
@@ -479,7 +485,8 @@ namespace System.IO.Packaging
             string relationshipType,
             string? id,
             bool parsing
-        ) {
+        )
+        {
             if (targetUri == null)
                 throw new ArgumentNullException(nameof(targetUri));
 
@@ -505,7 +512,8 @@ namespace System.IO.Packaging
             if (
                 (!targetUri.IsAbsoluteUri && targetMode != TargetMode.External)
                 || (targetUri.IsAbsoluteUri && targetUri.Scheme == PackUriHelper.UriSchemePack)
-            ) {
+            )
+            {
                 Uri resolvedUri = GetResolvedTargetUri(targetUri, targetMode);
                 //GetResolvedTargetUri returns a null if the target mode is external and the
                 //target Uri is a packUri with no "part" component, so in that case we know that
@@ -564,7 +572,8 @@ namespace System.IO.Packaging
                         s,
                         new XmlWriterSettings { Encoding = System.Text.Encoding.UTF8 }
                     )
-                ) {
+                )
+                {
                     writer.WriteStartDocument();
 
                     // start outer Relationships tag
@@ -597,7 +606,8 @@ namespace System.IO.Packaging
             XmlWriter writer,
             IEnumerable<PackageRelationship> relationships,
             bool alwaysWriteTargetModeAttribute
-        ) {
+        )
+        {
             foreach (PackageRelationship relationship in relationships)
             {
                 writer.WriteStartElement(RelationshipTagName);
@@ -710,7 +720,8 @@ namespace System.IO.Packaging
             XmlCompatibilityReader reader,
             string attributeName,
             Exception ex
-        ) {
+        )
+        {
             throw new XmlException(
                 SR.Format(SR.InvalidValueForTheAttribute, attributeName),
                 ex,

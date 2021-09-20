@@ -30,7 +30,8 @@ namespace System.UnitTesting
         public static void AreEqual<T, TMetadataView>(
             IEnumerable<Lazy<T, TMetadataView>> actual,
             params T[] expected
-        ) {
+        )
+        {
             Assert.Equal(
                 (IEnumerable<T>)expected,
                 (IEnumerable<T>)actual.Select(export => export.Value)

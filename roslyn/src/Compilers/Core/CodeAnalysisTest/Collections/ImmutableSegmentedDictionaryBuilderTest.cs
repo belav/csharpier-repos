@@ -335,7 +335,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
         protected override IImmutableDictionary<string, TValue> Empty<TValue>(
             StringComparer comparer
-        ) {
+        )
+        {
             return ImmutableSegmentedDictionary.Create<string, TValue>(comparer);
         }
 
@@ -343,7 +344,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             IDictionary<TKey, TValue> dictionary,
             TKey equalKey,
             out TKey actualKey
-        ) {
+        )
+        {
             return ((ImmutableSegmentedDictionary<TKey, TValue>.Builder)dictionary).TryGetKey(
                 equalKey,
                 out actualKey
@@ -352,7 +354,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
         protected override IDictionary<TKey, TValue> GetBuilder<TKey, TValue>(
             IImmutableDictionary<TKey, TValue>? basis
-        ) {
+        )
+        {
             return (
                 (ImmutableSegmentedDictionary<TKey, TValue>)(
                     basis ?? GetEmptyImmutableDictionary<TKey, TValue>()

@@ -60,7 +60,8 @@ public class Burgers
         double dt,
         double nu,
         double[] initial
-    ) {
+    )
+    {
         double[] u = new double[nx];
         Array.Copy(initial, u, u.Length);
 
@@ -99,7 +100,8 @@ public class Burgers
         double dt,
         double nu,
         double[] initial
-    ) {
+    )
+    {
         double[] u = new double[nx];
         double[] un = new double[nx];
         Array.Copy(initial, un, un.Length);
@@ -140,7 +142,8 @@ public class Burgers
         double dt,
         double nu,
         double[] initial
-    ) {
+    )
+    {
         double[] u = new double[nx];
         double[] un = new double[nx];
         Array.Copy(initial, un, un.Length);
@@ -183,7 +186,8 @@ public class Burgers
         double dt,
         double nu,
         double[] initial
-    ) {
+    )
+    {
         var nx2 = nx + (Vector<double>.Count - (nx % Vector<double>.Count));
 
         double[] u = new double[nx2];

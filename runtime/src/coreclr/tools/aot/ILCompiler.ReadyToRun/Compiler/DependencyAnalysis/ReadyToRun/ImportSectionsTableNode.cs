@@ -18,7 +18,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 "ImportSectionsTableStart",
                 "ImportSectionsTableEnd",
                 new EmbeddedObjectNodeComparer(new CompilerComparer())
-            ) {
+            )
+        {
             _r2rFactory = r2rFactory;
             _r2rFactory.ManifestMetadataTable.RegisterEmitter(this);
         }
@@ -39,7 +40,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             ref ObjectDataBuilder builder,
             NodeFactory factory,
             bool relocsOnly
-        ) {
+        )
+        {
             builder.RequireInitialPointerAlignment();
             int index = 0;
             foreach (ImportSectionNode node in NodesList)

@@ -30,7 +30,8 @@ namespace System.Security
                     (uint)_buffer.ByteLength,
                     Interop.Crypt32.CRYPTPROTECTMEMORY_SAME_PROCESS
                 )
-            ) {
+            )
+            {
                 throw new CryptographicException(Marshal.GetLastWin32Error());
             }
 
@@ -50,7 +51,8 @@ namespace System.Security
                     (uint)_buffer.ByteLength,
                     Interop.Crypt32.CRYPTPROTECTMEMORY_SAME_PROCESS
                 )
-            ) {
+            )
+            {
                 throw new CryptographicException(Marshal.GetLastWin32Error());
             }
 

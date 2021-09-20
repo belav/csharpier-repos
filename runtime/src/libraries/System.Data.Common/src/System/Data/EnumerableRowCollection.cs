@@ -62,7 +62,8 @@ namespace System.Data
             IEnumerable<TRow> enumerableRows,
             bool isDataViewable,
             DataTable? table
-        ) {
+        )
+        {
             Debug.Assert(!isDataViewable || table != null, "isDataViewable bug table is null");
 
             _enumerableRows = enumerableRows;
@@ -93,7 +94,8 @@ namespace System.Data
             EnumerableRowCollection<TRow>? source,
             IEnumerable<TRow> enumerableRows,
             Func<TRow, TRow>? selector
-        ) {
+        )
+        {
             Debug.Assert(null != enumerableRows, "null enumerableRows");
 
             _enumerableRows = enumerableRows;
@@ -285,7 +287,8 @@ namespace System.Data
             Func<TRow, TKey> keySelector,
             bool isDescending,
             bool isOrderBy
-        ) {
+        )
+        {
             AddSortExpression<TKey>(keySelector, Comparer<TKey>.Default, isDescending, isOrderBy);
         }
 
@@ -297,7 +300,8 @@ namespace System.Data
             IComparer<TKey> comparer,
             bool isDescending,
             bool isOrderBy
-        ) {
+        )
+        {
             DataSetUtil.CheckArgumentNull(keySelector, nameof(keySelector));
             DataSetUtil.CheckArgumentNull(comparer, nameof(comparer));
 

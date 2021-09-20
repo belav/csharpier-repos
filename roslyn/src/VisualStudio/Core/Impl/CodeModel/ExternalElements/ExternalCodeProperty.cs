@@ -24,7 +24,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
             CodeModelState state,
             ProjectId projectId,
             IPropertySymbol symbol
-        ) {
+        )
+        {
             var element = new ExternalCodeProperty(state, projectId, symbol);
             return (EnvDTE.CodeProperty)ComAggregate.CreateAggregatedObject(element);
         }

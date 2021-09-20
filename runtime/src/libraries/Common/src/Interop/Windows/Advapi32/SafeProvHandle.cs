@@ -82,7 +82,8 @@ namespace System.Security.Cryptography
                     == (
                         _flags & (uint)Interop.Advapi32.CryptAcquireContextFlags.CRYPT_VERIFYCONTEXT
                     )
-            ) {
+            )
+            {
                 // Delete the key container.
 
                 uint flags =

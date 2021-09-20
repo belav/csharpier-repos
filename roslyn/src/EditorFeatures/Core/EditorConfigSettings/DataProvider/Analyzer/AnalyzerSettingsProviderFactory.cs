@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider.Analyz
         public AnalyzerSettingsProviderFactory(
             Workspace workspace,
             IDiagnosticAnalyzerService analyzerService
-        ) {
+        )
+        {
             _workspace = workspace;
             _analyzerService = analyzerService;
         }

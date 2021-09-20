@@ -30,7 +30,8 @@ namespace Castle.Components.DictionaryAdapter
             object storedValue,
             PropertyDescriptor property,
             bool ifExists
-        ) {
+        )
+        {
             if (storedValue == null || storedValue.Equals(UnassignedGuid))
             {
                 storedValue = Guid.NewGuid();

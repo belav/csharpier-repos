@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                 bool isConstant,
                 bool isLocal,
                 bool isQueryLocal
-            ) {
+            )
+            {
                 _service = service;
                 _semanticDocument = document;
                 _expression = expression;
@@ -55,7 +56,8 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
 
             protected override async Task<Document> GetChangedDocumentAsync(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var changedDocument = await GetChangedDocumentCoreAsync(cancellationToken)
                     .ConfigureAwait(false);
                 return await Simplifier.ReduceAsync(
@@ -67,7 +69,8 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
 
             private async Task<Document> GetChangedDocumentCoreAsync(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (_isQueryLocal)
                 {
                     return await _service.IntroduceQueryLocalAsync(

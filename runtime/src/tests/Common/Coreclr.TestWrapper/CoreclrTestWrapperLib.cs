@@ -225,7 +225,8 @@ namespace CoreclrTestLib
             else if (
                 RuntimeInformation.IsOSPlatform(OSPlatform.Linux)
                 || RuntimeInformation.IsOSPlatform(OSPlatform.OSX)
-            ) {
+            )
+            {
                 createdump.StartInfo.FileName = "sudo";
                 createdump.StartInfo.Arguments = $"{createdumpPath} " + arguments;
                 createdump.StartInfo.EnvironmentVariables.Add(
@@ -271,7 +272,8 @@ namespace CoreclrTestLib
         static unsafe IEnumerable<Process> FindChildProcessesByName(
             Process process,
             string childName
-        ) {
+        )
+        {
             var children = new Stack<Process>();
             Queue<Process> childrenToCheck = new Queue<Process>();
             HashSet<int> seen = new HashSet<int>();
@@ -306,7 +308,8 @@ namespace CoreclrTestLib
             string errorFile,
             string category,
             string testBinaryBase
-        ) {
+        )
+        {
             Debug.Assert(outputFile != errorFile);
 
             int exitCode = -100;

@@ -37,7 +37,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
         public RuntimeConventionSetBuilder(
             IProviderConventionSetBuilder providerConventionSetBuilder,
             IEnumerable<IConventionSetPlugin> plugins
-        ) {
+        )
+        {
             _conventionSetBuilder = providerConventionSetBuilder;
             _plugins = plugins.ToList();
         }

@@ -264,7 +264,8 @@ namespace System.Data.Common
             object store,
             BitArray nullbits,
             int storeIndex
-        ) {
+        )
+        {
             decimal[] typedStore = (decimal[])store;
             typedStore[storeIndex] = _values[record];
             nullbits.Set(storeIndex, !HasValue(record));

@@ -442,7 +442,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         public static EntityTypeBuilder EntityBuilderExtension(
             this EntityTypeBuilder builder,
             string value
-        ) {
+        )
+        {
             builder.HasAnnotation("Annotation", value + ".Annotation");
             builder.Metadata["Metadata"] = value + ".Metadata";
 
@@ -471,7 +472,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         public static PropertyBuilder PropertyBuilderExtension(
             this PropertyBuilder builder,
             string value
-        ) {
+        )
+        {
             builder.HasAnnotation("Annotation", value + ".Annotation");
             builder.Metadata["Metadata"] = value + ".Metadata";
 
@@ -489,7 +491,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         public static ReferenceCollectionBuilder OneToManyBuilderExtension(
             this ReferenceCollectionBuilder builder,
             string value
-        ) {
+        )
+        {
             builder.HasAnnotation("Annotation", value + ".Annotation");
             builder.Metadata["Metadata"] = value + ".Metadata";
 
@@ -499,7 +502,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         public static ReferenceCollectionBuilder ManyToOneBuilderExtension(
             this ReferenceCollectionBuilder builder,
             string value
-        ) {
+        )
+        {
             builder.HasAnnotation("Annotation", value + ".Annotation");
             builder.Metadata["Metadata"] = value + ".Metadata";
 
@@ -509,7 +513,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         public static ReferenceReferenceBuilder OneToOneBuilderExtension(
             this ReferenceReferenceBuilder builder,
             string value
-        ) {
+        )
+        {
             builder.HasAnnotation("Annotation", value + ".Annotation");
             builder.Metadata["Metadata"] = value + ".Metadata";
 
@@ -528,7 +533,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         public static EntityTypeBuilder SharedNameExtension(
             this EntityTypeBuilder builder,
             string value
-        ) {
+        )
+        {
             builder.HasAnnotation("Annotation", value + ".Annotation");
             builder.Metadata["Metadata"] = value + ".Metadata";
 
@@ -557,7 +563,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         public static PropertyBuilder SharedNameExtension(
             this PropertyBuilder builder,
             string value
-        ) {
+        )
+        {
             builder.HasAnnotation("Annotation", value + ".Annotation");
             builder.Metadata["Metadata"] = value + ".Metadata";
 
@@ -575,7 +582,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         public static ReferenceCollectionBuilder SharedNameExtension(
             this ReferenceCollectionBuilder builder,
             string value
-        ) {
+        )
+        {
             builder.HasAnnotation("Annotation", value + ".Annotation");
             builder.Metadata["Metadata"] = value + ".Metadata";
 
@@ -585,7 +593,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         public static ReferenceReferenceBuilder SharedNameExtension(
             this ReferenceReferenceBuilder builder,
             string value
-        ) {
+        )
+        {
             builder.HasAnnotation("Annotation", value + ".Annotation");
             builder.Metadata["Metadata"] = value + ".Metadata";
 

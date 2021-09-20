@@ -49,7 +49,8 @@ namespace System.Drawing.Drawing2D
             Color color1,
             Color color2,
             LinearGradientMode linearGradientMode
-        ) {
+        )
+        {
             if (
                 linearGradientMode < LinearGradientMode.Horizontal
                 || linearGradientMode > LinearGradientMode.BackwardDiagonal
@@ -82,7 +83,8 @@ namespace System.Drawing.Drawing2D
             Color color1,
             Color color2,
             LinearGradientMode linearGradientMode
-        ) {
+        )
+        {
             if (
                 linearGradientMode < LinearGradientMode.Horizontal
                 || linearGradientMode > LinearGradientMode.BackwardDiagonal
@@ -118,7 +120,8 @@ namespace System.Drawing.Drawing2D
             Color color2,
             float angle,
             bool isAngleScaleable
-        ) {
+        )
+        {
             if (rect.Width == 0.0 || rect.Height == 0.0)
                 throw new ArgumentException(SR.Format(SR.GdiplusInvalidRectangle, rect.ToString()));
 
@@ -146,7 +149,8 @@ namespace System.Drawing.Drawing2D
             Color color2,
             float angle,
             bool isAngleScaleable
-        ) {
+        )
+        {
             if (rect.Width == 0 || rect.Height == 0)
                 throw new ArgumentException(SR.Format(SR.GdiplusInvalidRectangle, rect.ToString()));
 

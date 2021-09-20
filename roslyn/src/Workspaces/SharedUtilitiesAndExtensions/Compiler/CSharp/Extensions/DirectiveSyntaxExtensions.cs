@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         private static DirectiveInfo GetDirectiveInfo(
             SyntaxNode node,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = node.GetAbsoluteRoot();
             var info = s_rootToDirectiveInfo.GetValue(
                 root,
@@ -75,7 +76,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         internal static DirectiveTriviaSyntax GetMatchingDirective(
             this DirectiveTriviaSyntax directive,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (directive == null)
             {
                 throw new ArgumentNullException(nameof(directive));
@@ -90,7 +92,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         internal static IReadOnlyList<DirectiveTriviaSyntax> GetMatchingConditionalDirectives(
             this DirectiveTriviaSyntax directive,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (directive == null)
             {
                 throw new ArgumentNullException(nameof(directive));

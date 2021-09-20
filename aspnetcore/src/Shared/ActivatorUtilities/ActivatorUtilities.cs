@@ -45,7 +45,8 @@ namespace Microsoft.Extensions.Internal
             IServiceProvider provider,
             Type instanceType,
             params object[] parameters
-        ) {
+        )
+        {
             int bestLength = -1;
             var seenPreferred = false;
 
@@ -180,7 +181,8 @@ namespace Microsoft.Extensions.Internal
             Type type,
             Type requiredBy,
             bool isDefaultParameterRequired
-        ) {
+        )
+        {
             var service = sp.GetService(type);
             if (service == null && !isDefaultParameterRequired)
             {
@@ -196,7 +198,8 @@ namespace Microsoft.Extensions.Internal
             int?[] parameterMap,
             Expression serviceProvider,
             Expression factoryArgumentArray
-        ) {
+        )
+        {
             var constructorParameters = constructor.GetParameters();
             var constructorArguments = new Expression[constructorParameters.Length];
 
@@ -256,7 +259,8 @@ namespace Microsoft.Extensions.Internal
             Type[] argumentTypes,
             out ConstructorInfo matchingConstructor,
             out int?[] parameterMap
-        ) {
+        )
+        {
             matchingConstructor = null!;
             parameterMap = null!;
 
@@ -273,7 +277,8 @@ namespace Microsoft.Extensions.Internal
                     ref matchingConstructor!,
                     ref parameterMap!
                 )
-            ) {
+            )
+            {
                 var message =
                     $"A suitable constructor for type '{instanceType}' could not be located. Ensure the type is concrete and services are registered for all parameters of a public constructor.";
                 throw new InvalidOperationException(message);
@@ -286,7 +291,8 @@ namespace Microsoft.Extensions.Internal
             Type[] argumentTypes,
             ref ConstructorInfo matchingConstructor,
             ref int?[] parameterMap
-        ) {
+        )
+        {
             foreach (var constructor in instanceType.GetConstructors())
             {
                 if (
@@ -295,7 +301,8 @@ namespace Microsoft.Extensions.Internal
                         argumentTypes,
                         out int?[] tempParameterMap
                     )
-                ) {
+                )
+                {
                     if (matchingConstructor != null)
                     {
                         throw new InvalidOperationException(
@@ -317,7 +324,8 @@ namespace Microsoft.Extensions.Internal
             Type[] argumentTypes,
             ref ConstructorInfo matchingConstructor,
             ref int?[] parameterMap
-        ) {
+        )
+        {
             var seenPreferred = false;
             foreach (var constructor in instanceType.GetConstructors())
             {
@@ -334,7 +342,8 @@ namespace Microsoft.Extensions.Internal
                             argumentTypes,
                             out int?[] tempParameterMap
                         )
-                    ) {
+                    )
+                    {
                         ThrowMarkedCtorDoesNotTakeAllProvidedArguments();
                     }
 
@@ -353,7 +362,8 @@ namespace Microsoft.Extensions.Internal
             ParameterInfo[] constructorParameters,
             Type[] argumentTypes,
             out int?[] parameterMap
-        ) {
+        )
+        {
             parameterMap = new int?[constructorParameters.Length];
 
             for (var i = 0; i < argumentTypes.Length; i++)
@@ -412,11 +422,13 @@ namespace Microsoft.Extensions.Internal
                         var applyIndex = applyIndexStart;
                         givenMatched == false && applyIndex != _parameters.Length;
                         ++applyIndex
-                    ) {
+                    )
+                    {
                         if (
                             _parameterValues[applyIndex] == null
                             && _parameters[applyIndex].ParameterType.IsAssignableFrom(givenType)
-                        ) {
+                        )
+                        {
                             givenMatched = true;
                             _parameterValues[applyIndex] = givenParameters[givenIndex];
                             if (applyIndexStart == applyIndex)
@@ -452,7 +464,8 @@ namespace Microsoft.Extensions.Internal
                                     _parameters[index],
                                     out var defaultValue
                                 )
-                            ) {
+                            )
+                            {
                                 throw new InvalidOperationException(
                                     $"Unable to resolve service for type '{_parameters[index].ParameterType}' while attempting to activate '{_constructor.DeclaringType}'."
                                 );

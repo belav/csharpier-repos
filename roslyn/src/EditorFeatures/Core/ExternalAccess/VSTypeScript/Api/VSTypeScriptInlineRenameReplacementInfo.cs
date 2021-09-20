@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
 
         public VSTypeScriptInlineRenameReplacementInfo(
             IVSTypeScriptInlineRenameReplacementInfo info
-        ) {
+        )
+        {
             Contract.ThrowIfNull(info);
             _info = info;
         }

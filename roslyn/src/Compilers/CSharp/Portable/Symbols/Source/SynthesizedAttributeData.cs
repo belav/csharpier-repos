@@ -17,16 +17,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             MethodSymbol wellKnownMember,
             ImmutableArray<TypedConstant> arguments,
             ImmutableArray<KeyValuePair<string, TypedConstant>> namedArguments
-        ) : base(
-            applicationNode: null,
-            attributeClass: wellKnownMember.ContainingType,
-            attributeConstructor: wellKnownMember,
-            constructorArguments: arguments,
-            constructorArgumentsSourceIndices: default,
-            namedArguments: namedArguments,
-            hasErrors: false,
-            isConditionallyOmitted: false
-        ) {
+        )
+            : base(
+                applicationNode: null,
+                attributeClass: wellKnownMember.ContainingType,
+                attributeConstructor: wellKnownMember,
+                constructorArguments: arguments,
+                constructorArgumentsSourceIndices: default,
+                namedArguments: namedArguments,
+                hasErrors: false,
+                isConditionallyOmitted: false
+            )
+        {
             Debug.Assert((object)wellKnownMember != null);
             Debug.Assert(!arguments.IsDefault);
             Debug.Assert(!namedArguments.IsDefault); // Frequently empty though.

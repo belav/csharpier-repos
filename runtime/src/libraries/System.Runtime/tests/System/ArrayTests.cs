@@ -392,7 +392,8 @@ namespace System.Tests
             object value,
             IComparer comparer,
             int expected
-        ) {
+        )
+        {
             bool isDefaultComparer = comparer == null || comparer == Comparer.Default;
             if (index == array.GetLowerBound(0) && length == array.Length)
             {
@@ -423,7 +424,8 @@ namespace System.Tests
             T value,
             IComparer<T> comparer,
             int expected
-        ) {
+        )
+        {
             // Forward to the non-generic overload if we can.
             bool isDefaultComparer = comparer == null || comparer == Comparer<T>.Default;
             if (isDefaultComparer || comparer is IComparer)
@@ -550,7 +552,8 @@ namespace System.Tests
         public static void BinarySearch_TypesNotIComparable_ThrowsInvalidOperationException<T>(
             T[] array,
             object value
-        ) {
+        )
+        {
             Assert.Throws<InvalidOperationException>(() => Array.BinarySearch(array, value));
             Assert.Throws<InvalidOperationException>(() => Array.BinarySearch(array, value, null));
             Assert.Throws<InvalidOperationException>(
@@ -624,7 +627,8 @@ namespace System.Tests
             int count,
             int index,
             int length
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentException>(
                 null,
                 () => Array.BinarySearch(new int[count], index, length, "")
@@ -655,7 +659,8 @@ namespace System.Tests
         public static void BinarySearch_CountZero_ValueInvalidType_DoesNotThrow(
             Type elementType,
             int length
-        ) {
+        )
+        {
             Array array = Array.CreateInstance(elementType, length);
             Assert.Equal(-1, Array.BinarySearch(array, 0, 0, new object()));
         }
@@ -2755,7 +2760,8 @@ namespace System.Tests
             int destinationIndex,
             int length,
             Array expected
-        ) {
+        )
+        {
             // Basic: forward SZArray
             Copy(sourceArray, sourceIndex, destinationArray, destinationIndex, length, expected);
 
@@ -2810,12 +2816,14 @@ namespace System.Tests
             int destinationIndex,
             int length,
             Array expected
-        ) {
+        )
+        {
             bool overlaps = sourceArray == destinationArray;
             if (
                 sourceIndex == sourceArray.GetLowerBound(0)
                 && destinationIndex == destinationArray.GetLowerBound(0)
-            ) {
+            )
+            {
                 // Use Copy(Array, Array, int)
                 Array sourceArrayClone1 = (Array)sourceArray.Clone();
                 Array destinationArrayClone1 = overlaps
@@ -2871,7 +2879,8 @@ namespace System.Tests
             int destinationIndex,
             int length,
             Array expected
-        ) {
+        )
+        {
             Array sourceArrayClone = (Array)sourceArray.Clone();
             Array destinationArrayClone =
                 sourceArray == destinationArray
@@ -3161,7 +3170,8 @@ namespace System.Tests
         public static void Copy_SourceAndDestinationNeverConvertible_ThrowsArrayTypeMismatchException(
             Array sourceArray,
             Array destinationArray
-        ) {
+        )
+        {
             Assert.Throws<ArrayTypeMismatchException>(
                 () => Array.Copy(sourceArray, destinationArray, 0)
             );
@@ -3288,7 +3298,8 @@ namespace System.Tests
         public static void Copy_UnreliableConverson_CantPerform_ThrowsInvalidCastException(
             Array sourceArray,
             Array destinationArray
-        ) {
+        )
+        {
             int length = Math.Min(sourceArray.Length, destinationArray.Length);
             Assert.Throws<InvalidCastException>(
                 () => Array.Copy(sourceArray, destinationArray, length)
@@ -3340,7 +3351,8 @@ namespace System.Tests
         public static void ConstrainedCopy_UnreliableConversion_CantPerform_ThrowsArrayTypeMismatchException(
             Array sourceArray,
             Array destinationArray
-        ) {
+        )
+        {
             int length = Math.Min(sourceArray.Length, destinationArray.Length);
             ConstrainedCopy_UnreliableConversion_ThrowsArrayTypeMismatchException(
                 sourceArray,
@@ -3363,7 +3375,8 @@ namespace System.Tests
             int destinationIndex,
             int length,
             Array ignored
-        ) {
+        )
+        {
             _ = ignored;
             Assert.Throws<ArrayTypeMismatchException>(
                 () =>
@@ -3429,7 +3442,8 @@ namespace System.Tests
             int destinationCount,
             int destinationIndex,
             int count
-        ) {
+        )
+        {
             if (sourceIndex == 0 && destinationIndex == 0)
             {
                 AssertExtensions.Throws<ArgumentException>(
@@ -3498,7 +3512,8 @@ namespace System.Tests
             int destinationCount,
             int destinationIndex,
             int count
-        ) {
+        )
+        {
             if (sourceIndex == 0 && destinationIndex == 0)
             {
                 AssertExtensions.Throws<ArgumentException>(
@@ -3621,7 +3636,8 @@ namespace System.Tests
         [InlineData((long)int.MaxValue + 1)]
         public void Copy_LongDestinationIndexNotValidInt_ThrowsArgumentOutOfRangeException(
             long destinationIndex
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "destinationIndex",
                 () => Array.Copy(new string[10], 0, new string[10], destinationIndex, 0)
@@ -3751,7 +3767,8 @@ namespace System.Tests
             int[] lengths,
             int[] lowerBounds,
             object repeatedValue
-        ) {
+        )
+        {
             bool lowerBoundsAreAllZero = lowerBounds.All(lowerBound => lowerBound == 0);
             if ((!lowerBoundsAreAllZero) && !PlatformDetection.IsNonZeroLowerBoundArraySupported)
                 return;
@@ -3999,7 +4016,8 @@ namespace System.Tests
         [InlineData((long)int.MinValue - 1)]
         public void CreateInstance_InvalidLengthInLongLength_ThrowsArgumentOutOfRangeException(
             long length
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "len",
                 () => Array.CreateInstance(typeof(int), new long[] { length })
@@ -4011,7 +4029,8 @@ namespace System.Tests
         [InlineData(2)]
         public void CreateInstance_LengthsAndLowerBoundsHaveDifferentLengths_ThrowsArgumentException(
             int length
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentException>(
                 null,
                 () => Array.CreateInstance(typeof(int), new int[1], new int[length])
@@ -4968,7 +4987,8 @@ namespace System.Tests
             int startIndex,
             int count,
             int expected
-        ) {
+        )
+        {
             if (startIndex + count == array.Length)
             {
                 if (startIndex == 0)
@@ -5011,7 +5031,8 @@ namespace System.Tests
             int startIndex,
             int count,
             int expected
-        ) {
+        )
+        {
             if (startIndex + count == array.GetLowerBound(0) + array.Length)
             {
                 if (startIndex == array.GetLowerBound(0))
@@ -5081,7 +5102,8 @@ namespace System.Tests
         [InlineData(1)]
         public static void IndexOf_InvalidStartIndex_ThrowsArgumentOutOfRangeException(
             int startIndex
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "startIndex",
                 () => Array.IndexOf(new int[0], "", startIndex)
@@ -5109,7 +5131,8 @@ namespace System.Tests
             int length,
             int startIndex,
             int count
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "count",
                 () => Array.IndexOf(new int[length], "", startIndex, count)
@@ -5617,7 +5640,8 @@ namespace System.Tests
             int startIndex,
             int count,
             int expected
-        ) {
+        )
+        {
             if (count - startIndex - 1 == 0 || array.Length == 0)
             {
                 if (count == array.Length)
@@ -5657,7 +5681,8 @@ namespace System.Tests
             int startIndex,
             int count,
             int expected
-        ) {
+        )
+        {
             if (count - startIndex - 1 == 0 || array.Length == 0)
             {
                 if (count == array.Length)
@@ -5787,7 +5812,8 @@ namespace System.Tests
             int length,
             int startIndex,
             int count
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "endIndex",
                 () => Array.LastIndexOf(new int[length], "", startIndex, count)
@@ -5879,7 +5905,8 @@ namespace System.Tests
             object other,
             IComparer comparer,
             int expected
-        ) {
+        )
+        {
             IStructuralComparable comparable = array;
             Assert.Equal(expected, Math.Sign(comparable.CompareTo(other, comparer)));
         }
@@ -6007,7 +6034,8 @@ namespace System.Tests
             IEqualityComparer comparer,
             bool expected,
             bool expectHashEquality
-        ) {
+        )
+        {
             IStructuralEquatable equatable = array;
             Assert.Equal(expected, equatable.Equals(other, comparer));
             if (other is IStructuralEquatable)
@@ -6634,7 +6662,8 @@ namespace System.Tests
         [InlineData(-1)]
         public static void Reverse_IndexLessThanLowerBound_ThrowsArgumentOutOfRangeException(
             int lowerBound
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "index",
                 () =>
@@ -6672,7 +6701,8 @@ namespace System.Tests
         public static void Reverse_InvalidIndexPlusLength_ThrowsArgumentException(
             int index,
             int length
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentException>(
                 null,
                 () => Array.Reverse((Array)new int[10], index, length)
@@ -7561,7 +7591,8 @@ namespace System.Tests
             int length,
             IComparer comparer,
             Array expected
-        ) {
+        )
+        {
             Array sortedArray;
             if (index == 0 && length == array.Length)
             {
@@ -7599,7 +7630,8 @@ namespace System.Tests
             int length,
             IComparer<T> comparer,
             T[] expected
-        ) {
+        )
+        {
             T[] sortedArray;
             if (index == 0 && length == array.Length)
             {
@@ -9155,7 +9187,8 @@ namespace System.Tests
             IComparer comparer,
             Array expectedKeys,
             Array expectedItems
-        ) {
+        )
+        {
             Array sortedKeysArray = null;
             Array sortedItemsArray = null;
             if (index == 0 && length == keys.Length)
@@ -9216,7 +9249,8 @@ namespace System.Tests
             IComparer<T> comparer,
             T[] expectedKeys,
             T[] expectedItems
-        ) {
+        )
+        {
             T[] sortedKeysArray = null;
             T[] sortedItemsArray = null;
             if (index == 0 && length == keys.Length)
@@ -9485,7 +9519,8 @@ namespace System.Tests
             Array destinationArray,
             int index,
             Array expected
-        ) {
+        )
+        {
             IList iList = array;
             iList.CopyTo(destinationArray, index);
             Assert.Equal(expected, destinationArray);
@@ -9606,7 +9641,8 @@ namespace System.Tests
             IEnumerable<TSource> source,
             TSource seed,
             Func<TSource, TResult> transform
-        ) {
+        )
+        {
             int count = source.Count();
             TResult repeatedValue = transform(seed);
             // Force evaluation so neither `source` or `transform` are re-run if the sequence is enumerated more than once.
@@ -9626,7 +9662,8 @@ namespace System.Tests
             T value,
             int startIndex,
             int count
-        ) {
+        )
+        {
             if (startIndex == 0 && count == source.Count())
             {
                 T[] array = source.ToArray();
@@ -9683,7 +9720,8 @@ namespace System.Tests
             int arrayLength,
             int startIndex,
             int count
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "count",
                 () => Array.Fill(new string[arrayLength], "", startIndex, count)
@@ -9762,7 +9800,8 @@ namespace System.Tests
             int arrayLength,
             int index,
             int length
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentException>(
                 null,
                 () => Array.Reverse(new string[arrayLength], index, length)
@@ -9794,7 +9833,8 @@ namespace System.Tests
             int[] lengths,
             int[] lowerBounds,
             object repeatedValue
-        ) {
+        )
+        {
             VerifyArray(array, elementType, lengths, lowerBounds);
 
             // Pointer arrays don't support enumeration
@@ -9812,7 +9852,8 @@ namespace System.Tests
             Type elementType,
             int[] lengths,
             int[] lowerBounds
-        ) {
+        )
+        {
             Assert.Equal(elementType, array.GetType().GetElementType());
             Assert.Equal(array.Rank, array.GetType().GetArrayRank());
 

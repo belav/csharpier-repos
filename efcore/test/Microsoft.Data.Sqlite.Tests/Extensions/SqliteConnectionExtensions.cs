@@ -9,7 +9,8 @@ namespace Microsoft.Data.Sqlite
             this SqliteConnection connection,
             string commandText,
             params SqliteParameter[] parameters
-        ) {
+        )
+        {
             var command = connection.CreateCommand();
             command.CommandText = commandText;
             command.Parameters.AddRange(parameters);

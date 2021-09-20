@@ -61,7 +61,8 @@ namespace Microsoft.CodeAnalysis
             ReportDiagnostic generalOption,
             ImmutableDictionary<string, ReportDiagnostic> specificOptions,
             ImmutableArray<RuleSetInclude> includes
-        ) {
+        )
+        {
             _filePath = filePath;
             _generalDiagnosticOption = generalOption;
             _specificDiagnosticOptions =
@@ -103,7 +104,8 @@ namespace Microsoft.CodeAnalysis
                         if (
                             item.Value != ReportDiagnostic.Suppress
                             && item.Value != ReportDiagnostic.Default
-                        ) {
+                        )
+                        {
                             specificOptions[item.Key] = action;
                         }
                     }
@@ -167,7 +169,8 @@ namespace Microsoft.CodeAnalysis
                 // If the included ruleset's global option is stricter, then make that the effective option.
                 if (
                     IsStricterThan(effectiveRuleset.GeneralDiagnosticOption, effectiveGeneralOption)
-                ) {
+                )
+                {
                     effectiveGeneralOption = effectiveRuleset.GeneralDiagnosticOption;
                 }
 
@@ -314,7 +317,8 @@ namespace Microsoft.CodeAnalysis
         public static ReportDiagnostic GetDiagnosticOptionsFromRulesetFile(
             string? rulesetFileFullPath,
             out Dictionary<string, ReportDiagnostic> specificDiagnosticOptions
-        ) {
+        )
+        {
             return GetDiagnosticOptionsFromRulesetFile(
                 rulesetFileFullPath,
                 out specificDiagnosticOptions,
@@ -328,7 +332,8 @@ namespace Microsoft.CodeAnalysis
             out Dictionary<string, ReportDiagnostic> diagnosticOptions,
             IList<Diagnostic>? diagnosticsOpt,
             CommonMessageProvider? messageProviderOpt
-        ) {
+        )
+        {
             diagnosticOptions = new Dictionary<string, ReportDiagnostic>();
             if (rulesetFileFullPath == null)
             {
@@ -348,7 +353,8 @@ namespace Microsoft.CodeAnalysis
             string resolvedPath,
             IList<Diagnostic>? diagnosticsOpt,
             CommonMessageProvider? messageProviderOpt
-        ) {
+        )
+        {
             Debug.Assert(resolvedPath != null);
 
             var generalDiagnosticOption = ReportDiagnostic.Default;

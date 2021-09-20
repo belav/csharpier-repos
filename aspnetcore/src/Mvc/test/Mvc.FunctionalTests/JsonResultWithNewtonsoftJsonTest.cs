@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 
         public JsonResultWithNewtonsoftJsonTest(
             MvcTestFixture<BasicWebSite.StartupWithNewtonsoftJson> fixture
-        ) {
+        )
+        {
             var factory =
                 fixture.Factories.FirstOrDefault()
                 ?? fixture.WithWebHostBuilder(

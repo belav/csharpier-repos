@@ -33,7 +33,8 @@ namespace System.DirectoryServices.ActiveDirectory
                     if (
                         (Utils.Compare(Components[i].Name, dn.Components[i].Name) != 0)
                         || (Utils.Compare(Components[i].Value, dn.Components[i].Value) != 0)
-                    ) {
+                    )
+                    {
                         result = false;
                         break;
                     }
@@ -114,7 +115,8 @@ namespace System.DirectoryServices.ActiveDirectory
             if (
                 (!string.Equals(distinguishedName, "rootdse", StringComparison.OrdinalIgnoreCase))
                 && (!string.Equals(distinguishedName, "schema", StringComparison.OrdinalIgnoreCase))
-            ) {
+            )
+            {
                 dn = new DistinguishedName(distinguishedName);
             }
 
@@ -294,7 +296,8 @@ namespace System.DirectoryServices.ActiveDirectory
         internal static DirectoryEntry GetDirectoryEntryInternal(
             DirectoryContext context,
             string path
-        ) {
+        )
+        {
             return Bind(path, context.UserName, context.Password, context.useServerBind());
         }
 
@@ -303,7 +306,8 @@ namespace System.DirectoryServices.ActiveDirectory
             string? username,
             string? password,
             bool useServerBind
-        ) {
+        )
+        {
             DirectoryEntry? de = null;
             AuthenticationTypes authType = Utils.DefaultAuthType;
 

@@ -15,7 +15,8 @@ namespace Microsoft.AspNetCore.Components
 
         public static (IList<ComponentParameter> parameterDefinitions, IList<object?> parameterValues) FromParameterView(
             ParameterView parameters
-        ) {
+        )
+        {
             var parameterDefinitions = new List<ComponentParameter>();
             var parameterValues = new List<object?>();
             foreach (var kvp in parameters)

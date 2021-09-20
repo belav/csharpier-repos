@@ -36,11 +36,8 @@ namespace Newtonsoft.Json.Utilities
     {
         private readonly DynamicProxy<T> _proxy;
 
-        internal DynamicProxyMetaObject(
-            Expression expression,
-            T value,
-            DynamicProxy<T> proxy
-        ) : base(expression, BindingRestrictions.Empty, value)
+        internal DynamicProxyMetaObject(Expression expression, T value, DynamicProxy<T> proxy)
+            : base(expression, BindingRestrictions.Empty, value)
         {
             _proxy = proxy;
         }
@@ -69,7 +66,8 @@ namespace Newtonsoft.Json.Utilities
         public override DynamicMetaObject BindSetMember(
             SetMemberBinder binder,
             DynamicMetaObject value
-        ) {
+        )
+        {
             return IsOverridden(nameof(DynamicProxy<T>.TrySetMember))
               ? CallMethodReturnLast(
                     nameof(DynamicProxy<T>.TrySetMember),
@@ -107,7 +105,8 @@ namespace Newtonsoft.Json.Utilities
         public override DynamicMetaObject BindInvokeMember(
             InvokeMemberBinder binder,
             DynamicMetaObject[] args
-        ) {
+        )
+        {
             if (!IsOverridden(nameof(DynamicProxy<T>.TryInvokeMember)))
             {
                 return base.BindInvokeMember(binder, args);
@@ -149,7 +148,8 @@ namespace Newtonsoft.Json.Utilities
         public override DynamicMetaObject BindCreateInstance(
             CreateInstanceBinder binder,
             DynamicMetaObject[] args
-        ) {
+        )
+        {
             return IsOverridden(nameof(DynamicProxy<T>.TryCreateInstance))
               ? CallMethodWithResult(
                     nameof(DynamicProxy<T>.TryCreateInstance),
@@ -175,7 +175,8 @@ namespace Newtonsoft.Json.Utilities
         public override DynamicMetaObject BindBinaryOperation(
             BinaryOperationBinder binder,
             DynamicMetaObject arg
-        ) {
+        )
+        {
             return IsOverridden(nameof(DynamicProxy<T>.TryBinaryOperation))
               ? CallMethodWithResult(
                     nameof(DynamicProxy<T>.TryBinaryOperation),
@@ -201,7 +202,8 @@ namespace Newtonsoft.Json.Utilities
         public override DynamicMetaObject BindGetIndex(
             GetIndexBinder binder,
             DynamicMetaObject[] indexes
-        ) {
+        )
+        {
             return IsOverridden(nameof(DynamicProxy<T>.TryGetIndex))
               ? CallMethodWithResult(
                     nameof(DynamicProxy<T>.TryGetIndex),
@@ -216,7 +218,8 @@ namespace Newtonsoft.Json.Utilities
             SetIndexBinder binder,
             DynamicMetaObject[] indexes,
             DynamicMetaObject value
-        ) {
+        )
+        {
             return IsOverridden(nameof(DynamicProxy<T>.TrySetIndex))
               ? CallMethodReturnLast(
                     nameof(DynamicProxy<T>.TrySetIndex),
@@ -230,7 +233,8 @@ namespace Newtonsoft.Json.Utilities
         public override DynamicMetaObject BindDeleteIndex(
             DeleteIndexBinder binder,
             DynamicMetaObject[] indexes
-        ) {
+        )
+        {
             return IsOverridden(nameof(DynamicProxy<T>.TryDeleteIndex))
               ? CallMethodNoResult(
                     nameof(DynamicProxy<T>.TryDeleteIndex),
@@ -291,7 +295,8 @@ namespace Newtonsoft.Json.Utilities
             IEnumerable<Expression> args,
             Fallback fallback,
             Fallback? fallbackInvoke = null
-        ) {
+        )
+        {
             //
             // First, call fallback to do default binding
             // This produces either an error or a call to a .NET member
@@ -313,7 +318,8 @@ namespace Newtonsoft.Json.Utilities
             IEnumerable<Expression> args,
             DynamicMetaObject fallbackResult,
             Fallback? fallbackInvoke
-        ) {
+        )
+        {
             //
             // Build a new expression like:
             // {
@@ -383,7 +389,8 @@ namespace Newtonsoft.Json.Utilities
             DynamicMetaObjectBinder binder,
             IEnumerable<Expression> args,
             Fallback fallback
-        ) {
+        )
+        {
             //
             // First, call fallback to do default binding
             // This produces either an error or a call to a .NET member
@@ -433,7 +440,8 @@ namespace Newtonsoft.Json.Utilities
             DynamicMetaObjectBinder binder,
             Expression[] args,
             Fallback fallback
-        ) {
+        )
+        {
             //
             // First, call fallback to do default binding
             // This produces either an error or a call to a .NET member
@@ -492,7 +500,8 @@ namespace Newtonsoft.Json.Utilities
             public override DynamicMetaObject FallbackGetMember(
                 DynamicMetaObject target,
                 DynamicMetaObject errorSuggestion
-            ) {
+            )
+            {
                 throw new NotSupportedException();
             }
         }

@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             string fullNameWithoutFormatSpecifiers,
             string childFullNamePrefixOpt,
             ReadOnlyCollection<string> formatSpecifiers
-        ) {
+        )
+        {
             this.Name = name;
             this.DeclaredTypeAndInfo = declaredTypeAndInfo;
             this.Value = value;
@@ -124,28 +125,25 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             }
         }
 
-        public EvalResult(
-            string name,
-            string errorMessage,
-            DkmInspectionContext inspectionContext
-        ) : this(
-            ExpansionKind.Error,
-            name: name,
-            typeDeclaringMemberAndInfo: default(TypeAndCustomInfo),
-            declaredTypeAndInfo: default(TypeAndCustomInfo),
-            useDebuggerDisplay: false,
-            value: null,
-            displayValue: errorMessage,
-            expansion: null,
-            childShouldParenthesize: false,
-            fullName: null,
-            childFullNamePrefixOpt: null,
-            formatSpecifiers: Formatter.NoFormatSpecifiers,
-            category: DkmEvaluationResultCategory.Other,
-            flags: DkmEvaluationResultFlags.None,
-            editableValue: null,
-            inspectionContext: inspectionContext
-        ) { }
+        public EvalResult(string name, string errorMessage, DkmInspectionContext inspectionContext)
+            : this(
+                ExpansionKind.Error,
+                name: name,
+                typeDeclaringMemberAndInfo: default(TypeAndCustomInfo),
+                declaredTypeAndInfo: default(TypeAndCustomInfo),
+                useDebuggerDisplay: false,
+                value: null,
+                displayValue: errorMessage,
+                expansion: null,
+                childShouldParenthesize: false,
+                fullName: null,
+                childFullNamePrefixOpt: null,
+                formatSpecifiers: Formatter.NoFormatSpecifiers,
+                category: DkmEvaluationResultCategory.Other,
+                flags: DkmEvaluationResultFlags.None,
+                editableValue: null,
+                inspectionContext: inspectionContext
+            ) { }
 
         public EvalResult(
             ExpansionKind kind,
@@ -168,7 +166,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             string displayType = null,
             bool canFavorite = false,
             bool isFavorite = false
-        ) {
+        )
+        {
             Debug.Assert(name != null);
             Debug.Assert(formatSpecifiers != null);
             Debug.Assert((flags & DkmEvaluationResultFlags.Expandable) == 0);
@@ -244,7 +243,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             Expansion expansion,
             bool canFavorite,
             bool isFavorite
-        ) {
+        )
+        {
             if (value == null)
             {
                 return DkmEvaluationResultFlags.None;

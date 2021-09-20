@@ -310,7 +310,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             string childContent,
             string outputContent,
             string expectedOutputContent
-        ) {
+        )
+        {
             // Arrange
             var tagBuilder = new TagBuilder("span2");
             tagBuilder.InnerHtml.SetHtmlContent("New HTML");
@@ -377,7 +378,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             string childContent,
             string expectedMessage,
             string expectedOutputContent
-        ) {
+        )
+        {
             // Arrange
             var tagBuilder = new TagBuilder("span2");
             tagBuilder.InnerHtml.SetHtmlContent("New HTML");

@@ -9,7 +9,8 @@ namespace System.Buffers.Text
             ReadOnlySpan<byte> source,
             out TimeSpan value,
             out int bytesConsumed
-        ) {
+        )
+        {
             TimeSpanSplitter s = default;
             if (!s.TrySplitTimeSpan(source, periodUsedToSeparateDay: true, out bytesConsumed))
             {

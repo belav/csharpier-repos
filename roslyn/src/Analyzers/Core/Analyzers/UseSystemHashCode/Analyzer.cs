@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.UseSystemHashCode
             IMethodSymbol objectGetHashCodeMethod,
             INamedTypeSymbol? equalityComparerType,
             INamedTypeSymbol systemHashCodeType
-        ) {
+        )
+        {
             _compilation = compilation;
             _objectGetHashCodeMethod = objectGetHashCodeMethod;
             _equalityComparerType = equalityComparerType;
@@ -38,7 +39,8 @@ namespace Microsoft.CodeAnalysis.UseSystemHashCode
         public static bool TryGetAnalyzer(
             Compilation compilation,
             [NotNullWhen(true)] out Analyzer analyzer
-        ) {
+        )
+        {
             var objectType = compilation.GetSpecialType(SpecialType.System_Object);
             // This may not find anything.  However, CanAnalyze checks for this. So
             // we represent the value as non-nullable for all future code.
@@ -71,7 +73,8 @@ namespace Microsoft.CodeAnalysis.UseSystemHashCode
         public (bool accessesBase, ImmutableArray<ISymbol> members, ImmutableArray<IOperation> statements) GetHashedMembers(
             ISymbol? owningSymbol,
             IOperation? operation
-        ) {
+        )
+        {
             if (!(operation is IBlockOperation blockOperation))
                 return default;
 
@@ -92,7 +95,8 @@ namespace Microsoft.CodeAnalysis.UseSystemHashCode
             while (
                 blockOperation.Operations.Length == 1
                 && blockOperation.Operations[0] is IBlockOperation childBlock
-            ) {
+            )
+            {
                 blockOperation = childBlock;
             }
 
@@ -108,7 +112,8 @@ namespace Microsoft.CodeAnalysis.UseSystemHashCode
         private (bool accessesBase, ImmutableArray<ISymbol> members)? MatchTuplePattern(
             IMethodSymbol method,
             ImmutableArray<IOperation> statements
-        ) {
+        )
+        {
             // look for code of the form `return (a, b, c).GetHashCode()`.
             if (statements.Length != 1)
             {
@@ -132,7 +137,8 @@ namespace Microsoft.CodeAnalysis.UseSystemHashCode
         private (bool accessesBase, ImmutableArray<ISymbol> members)? MatchAccumulatorPattern(
             IMethodSymbol method,
             ImmutableArray<IOperation> statements
-        ) {
+        )
+        {
             // Needs to be of the form:
             //
             //      // accumulator
@@ -153,7 +159,8 @@ namespace Microsoft.CodeAnalysis.UseSystemHashCode
             if (
                 !(statements.First() is IVariableDeclarationGroupOperation varDeclStatement)
                 || !(statements.Last() is IReturnOperation { ReturnedValue: { } returnedValue })
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -200,7 +207,8 @@ namespace Microsoft.CodeAnalysis.UseSystemHashCode
             if (
                 !IsLiteralNumber(initializerValue)
                 && !valueAnalyzer.TryAddHashedSymbol(initializerValue, seenHash: true)
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -225,7 +233,8 @@ namespace Microsoft.CodeAnalysis.UseSystemHashCode
                     )
                     || !IsLocalReference(simpleAssignment.Target, hashCodeVariable)
                     || !valueAnalyzer.TryAddHashedSymbol(simpleAssignment.Value, seenHash: false)
-                ) {
+                )
+                {
                     return null;
                 }
             }

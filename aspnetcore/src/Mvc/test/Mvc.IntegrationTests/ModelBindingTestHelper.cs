@@ -28,7 +28,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             ControllerActionDescriptor actionDescriptor = null,
             IModelMetadataProvider metadataProvider = null,
             MvcOptions mvcOptions = null
-        ) {
+        )
+        {
             var httpContext = GetHttpContext(
                 metadataProvider,
                 updateRequest,
@@ -58,7 +59,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         public static ParameterBinder GetParameterBinder(
             MvcOptions options = null,
             IModelBinderProvider binderProvider = null
-        ) {
+        )
+        {
             if (options == null)
             {
                 var metadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
@@ -103,7 +105,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             IModelMetadataProvider metadataProvider,
             IModelBinderProvider binderProvider = null,
             MvcOptions mvcOptions = null
-        ) {
+        )
+        {
             var services = GetServices(metadataProvider, mvcOptions: mvcOptions);
             var options = services.GetRequiredService<IOptions<MvcOptions>>();
 
@@ -131,7 +134,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         public static IModelBinderFactory GetModelBinderFactory(
             IModelMetadataProvider metadataProvider,
             IServiceProvider services = null
-        ) {
+        )
+        {
             if (services == null)
             {
                 services = GetServices(metadataProvider);
@@ -145,7 +149,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         public static IObjectModelValidator GetObjectValidator(
             IModelMetadataProvider metadataProvider,
             IOptions<MvcOptions> options = null
-        ) {
+        )
+        {
             return new DefaultObjectValidator(
                 metadataProvider,
                 GetModelValidatorProviders(options),
@@ -155,7 +160,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
 
         private static IList<IModelValidatorProvider> GetModelValidatorProviders(
             IOptions<MvcOptions> options
-        ) {
+        )
+        {
             if (options == null)
             {
                 return TestModelValidatorProvider.CreateDefaultProvider().ValidatorProviders;
@@ -171,7 +177,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             Action<HttpRequest> updateRequest = null,
             Action<MvcOptions> updateOptions = null,
             MvcOptions mvcOptions = null
-        ) {
+        )
+        {
             var httpContext = new DefaultHttpContext();
             httpContext.Features.Set<IHttpRequestLifetimeFeature>(
                 new CancellableRequestLifetimeFeature()
@@ -187,7 +194,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             IModelMetadataProvider metadataProvider,
             Action<MvcOptions> updateOptions = null,
             MvcOptions mvcOptions = null
-        ) {
+        )
+        {
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddSingleton(new ApplicationPartManager());
             if (metadataProvider != null)

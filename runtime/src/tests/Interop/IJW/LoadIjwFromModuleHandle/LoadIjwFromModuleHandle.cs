@@ -23,7 +23,8 @@ namespace LoadIjwFromModuleHandle
                     Environment.OSVersion.Version.Major == 6
                     && Environment.OSVersion.Version.Minor == 1
                 )
-            ) {
+            )
+            {
                 return 100;
             }
 

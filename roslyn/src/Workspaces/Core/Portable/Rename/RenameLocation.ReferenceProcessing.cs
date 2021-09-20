@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.Rename
                 Document document,
                 int position,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var symbol = await SymbolFinder.FindSymbolAtPositionAsync(
                         document,
                         position,
@@ -64,7 +65,8 @@ namespace Microsoft.CodeAnalysis.Rename
                 ISymbol symbol,
                 Solution solution,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Contract.ThrowIfNull(symbol);
                 Contract.ThrowIfNull(solution);
 
@@ -109,7 +111,8 @@ namespace Microsoft.CodeAnalysis.Rename
                         typeSymbol.IsImplicitlyDeclared
                         && typeSymbol.IsDelegateType()
                         && typeSymbol.AssociatedSymbol != null
-                    ) {
+                    )
+                    {
                         return typeSymbol.AssociatedSymbol;
                     }
                 }
@@ -122,7 +125,8 @@ namespace Microsoft.CodeAnalysis.Rename
                         methodSymbol.MethodKind == MethodKind.Constructor
                         || methodSymbol.MethodKind == MethodKind.StaticConstructor
                         || methodSymbol.MethodKind == MethodKind.Destructor
-                    ) {
+                    )
+                    {
                         return methodSymbol.ContainingType;
                     }
                 }
@@ -134,7 +138,8 @@ namespace Microsoft.CodeAnalysis.Rename
                     if (
                         fieldSymbol.IsImplicitlyDeclared
                         && fieldSymbol.AssociatedSymbol.IsKind(SymbolKind.Property)
-                    ) {
+                    )
+                    {
                         return fieldSymbol.AssociatedSymbol;
                     }
                 }
@@ -156,7 +161,8 @@ namespace Microsoft.CodeAnalysis.Rename
                 Solution solution,
                 bool considerSymbolReferences,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (referencedSymbol.IsPropertyAccessor())
                 {
                     return considerSymbolReferences;
@@ -172,7 +178,8 @@ namespace Microsoft.CodeAnalysis.Rename
                 if (
                     originalSymbol.Kind == SymbolKind.Parameter
                     && referencedSymbol.Kind == SymbolKind.Parameter
-                ) {
+                )
+                {
                     return true;
                 }
 
@@ -180,7 +187,8 @@ namespace Microsoft.CodeAnalysis.Rename
                 if (
                     referencedSymbol.Kind == SymbolKind.Field
                     && originalSymbol.Equals(((IFieldSymbol)referencedSymbol).AssociatedSymbol)
-                ) {
+                )
+                {
                     return true;
                 }
 
@@ -202,7 +210,8 @@ namespace Microsoft.CodeAnalysis.Rename
                         StringComparison.OrdinalIgnoreCase
                     ) == 0
                     && referencedSymbol.Locations.Any(loc => loc.IsInSource)
-                ) {
+                )
+                {
                     return true;
                 }
 
@@ -243,7 +252,8 @@ namespace Microsoft.CodeAnalysis.Rename
                             cancellationToken
                         )
                         .ConfigureAwait(false)
-                ) {
+                )
+                {
                     return true;
                 }
 
@@ -253,7 +263,8 @@ namespace Microsoft.CodeAnalysis.Rename
                         possibleConstructor: referencedSymbol,
                         possibleType: originalSymbol
                     )
-                ) {
+                )
+                {
                     return true;
                 }
 
@@ -264,7 +275,8 @@ namespace Microsoft.CodeAnalysis.Rename
                         == TypeKind.Interface
                     && !originalSymbol.ExplicitInterfaceImplementations()
                         .Any(s => s.Equals(referencedSymbol))
-                ) {
+                )
+                {
                     return true;
                 }
 
@@ -286,7 +298,8 @@ namespace Microsoft.CodeAnalysis.Rename
                 ISymbol symbol,
                 Solution solution,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (symbol.IsPropertyAccessor())
                 {
                     return ((IMethodSymbol)symbol).AssociatedSymbol;
@@ -315,7 +328,8 @@ namespace Microsoft.CodeAnalysis.Rename
                 if (
                     symbol.Kind == SymbolKind.Method
                     && symbol.ContainingType.TypeKind == TypeKind.Interface
-                ) {
+                )
+                {
                     var methodImplementors = await SymbolFinder.FindImplementationsAsync(
                             symbol,
                             solution,
@@ -346,7 +360,8 @@ namespace Microsoft.CodeAnalysis.Rename
                 ISymbol symbol,
                 Solution solution,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var result = await TryGetPropertyFromAccessorOrAnOverrideAsync(
                         symbol,
                         solution,
@@ -380,7 +395,8 @@ namespace Microsoft.CodeAnalysis.Rename
                 ISymbol originalSymbol,
                 Solution solution,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var shouldIncludeSymbol = await ShouldIncludeSymbolAsync(
                         referencedSymbol,
                         originalSymbol,
@@ -444,7 +460,8 @@ namespace Microsoft.CodeAnalysis.Rename
                 if (
                     referencedSymbol.Kind == SymbolKind.NamedType
                     && referencedSymbol.Locations.All(l => l.IsInSource)
-                ) {
+                )
+                {
                     var firstLocation = referencedSymbol.Locations[0];
                     Contract.ThrowIfNull(firstLocation.SourceTree);
                     var syntaxFacts = solution.GetRequiredDocument(firstLocation.SourceTree)
@@ -460,7 +477,8 @@ namespace Microsoft.CodeAnalysis.Rename
                                 || method.MethodKind == MethodKind.StaticConstructor
                                 || method.MethodKind == MethodKind.Destructor
                             )
-                        ) {
+                        )
+                        {
                             foreach (var location in method.Locations)
                             {
                                 if (location.IsInSource)
@@ -469,7 +487,8 @@ namespace Microsoft.CodeAnalysis.Rename
                                     if (
                                         !syntaxFacts.IsReservedOrContextualKeyword(token)
                                         && token.ValueText == referencedSymbol.Name
-                                    ) {
+                                    )
+                                    {
                                         Contract.ThrowIfNull(location.SourceTree);
                                         results.Add(
                                             new RenameLocation(
@@ -495,7 +514,8 @@ namespace Microsoft.CodeAnalysis.Rename
                 ReferenceLocation location,
                 Solution solution,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var shouldIncludeSymbol = await ShouldIncludeSymbolAsync(
                         referencedSymbol,
                         originalSymbol,
@@ -610,7 +630,8 @@ namespace Microsoft.CodeAnalysis.Rename
                 bool renameInStrings,
                 bool renameInComments,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (!renameInStrings && !renameInComments)
                     return default;
 
@@ -626,7 +647,8 @@ namespace Microsoft.CodeAnalysis.Rename
                             renameLocations
                         )
                         .GroupBy(d => d.Project.Language)
-                ) {
+                )
+                {
                     var syntaxFactsLanguageService =
                         solution.Workspace.Services.GetLanguageServices(
                                 documentsGroupedByLanguage.Key
@@ -675,7 +697,8 @@ namespace Microsoft.CodeAnalysis.Rename
                 ISyntaxFactsService syntaxFactsService,
                 ArrayBuilder<RenameLocation> renameLocations,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
                     .ConfigureAwait(false);
                 var renameTextLength = renameText.Length;
@@ -705,7 +728,8 @@ namespace Microsoft.CodeAnalysis.Rename
                 string renameText,
                 ArrayBuilder<RenameLocation> renameLocations,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
                     .ConfigureAwait(false);
                 var renameTextLength = renameText.Length;
@@ -732,7 +756,8 @@ namespace Microsoft.CodeAnalysis.Rename
                 string renameText,
                 IEnumerable<Tuple<string, int, TextSpan>> renameStringsAndPositions,
                 ArrayBuilder<RenameLocation> renameLocations
-            ) {
+            )
+            {
                 var regex = GetRegexForMatch(renameText);
                 foreach (var renameStringAndPosition in renameStringsAndPositions)
                 {
@@ -772,7 +797,8 @@ namespace Microsoft.CodeAnalysis.Rename
                 string matchText,
                 string replacementText,
                 ImmutableSortedSet<TextSpan>? subSpansToReplace = null
-            ) {
+            )
+            {
                 if (subSpansToReplace == null)
                 {
                     // We do not have already computed sub-spans to replace inside the string.

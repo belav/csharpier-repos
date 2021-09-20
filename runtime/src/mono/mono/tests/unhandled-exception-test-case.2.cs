@@ -226,7 +226,8 @@ namespace UnhandledExceptionTest
             string caller,
             object sender,
             UnhandledExceptionEventArgs e
-        ) {
+        )
+        {
             Exception ex = (Exception)e.ExceptionObject;
 
             Console.WriteLine("Running {0}", caller);
@@ -237,14 +238,16 @@ namespace UnhandledExceptionTest
         public static void RootDomainUnhandledExceptionHandler(
             object sender,
             UnhandledExceptionEventArgs e
-        ) {
+        )
+        {
             Console.WriteLine("MARKER-RDUE");
             PrintUnhandledException("RootDomainUnhandledExceptionHandler", sender, e);
         }
         public static void DifferentDomainUnhandledExceptionHandler(
             object sender,
             UnhandledExceptionEventArgs e
-        ) {
+        )
+        {
             Console.WriteLine("MARKER-DDUE");
             PrintUnhandledException("DifferentDomainUnhandledExceptionHandler", sender, e);
         }

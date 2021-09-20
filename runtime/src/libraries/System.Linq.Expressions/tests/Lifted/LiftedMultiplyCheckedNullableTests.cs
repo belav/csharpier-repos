@@ -341,7 +341,8 @@ namespace System.Linq.Expressions.Tests
             decimal? a,
             decimal? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
                 Expression.MultiplyChecked(
                     Expression.Constant(a, typeof(decimal?)),
@@ -370,7 +371,8 @@ namespace System.Linq.Expressions.Tests
             double? a,
             double? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
                 Expression.MultiplyChecked(
                     Expression.Constant(a, typeof(double?)),
@@ -388,7 +390,8 @@ namespace System.Linq.Expressions.Tests
             float? a,
             float? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<float?>> e = Expression.Lambda<Func<float?>>(
                 Expression.MultiplyChecked(
                     Expression.Constant(a, typeof(float?)),
@@ -458,7 +461,8 @@ namespace System.Linq.Expressions.Tests
             sbyte? a,
             sbyte? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
                 Expression.MultiplyChecked(
                     Expression.Constant(a, typeof(sbyte?)),
@@ -487,7 +491,8 @@ namespace System.Linq.Expressions.Tests
             short? a,
             short? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
                 Expression.MultiplyChecked(
                     Expression.Constant(a, typeof(short?)),
@@ -542,7 +547,8 @@ namespace System.Linq.Expressions.Tests
             ulong? a,
             ulong? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
                 Expression.MultiplyChecked(
                     Expression.Constant(a, typeof(ulong?)),
@@ -571,7 +577,8 @@ namespace System.Linq.Expressions.Tests
             ushort? a,
             ushort? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
                 Expression.MultiplyChecked(
                     Expression.Constant(a, typeof(ushort?)),
@@ -600,7 +607,8 @@ namespace System.Linq.Expressions.Tests
             Number? a,
             Number? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<Number?>> e = Expression.Lambda<Func<Number?>>(
                 Expression.MultiplyChecked(
                     Expression.Constant(a, typeof(Number?)),

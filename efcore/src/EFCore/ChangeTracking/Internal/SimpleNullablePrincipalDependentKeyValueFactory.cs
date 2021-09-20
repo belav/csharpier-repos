@@ -33,7 +33,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public SimpleNullablePrincipalDependentKeyValueFactory(
             IProperty property,
             PropertyAccessors propertyAccessors
-        ) {
+        )
+        {
             _propertyAccessors = propertyAccessors;
             EqualityComparer = property.CreateKeyEqualityComparer<TKey>();
         }
@@ -55,7 +56,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public virtual bool TryCreateFromBuffer(
             in ValueBuffer valueBuffer,
             [NotNullWhen(true)] out TKey? key
-        ) {
+        )
+        {
             var value = _propertyAccessors.ValueBufferGetter!(valueBuffer);
             if (value == null)
             {
@@ -76,7 +78,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public virtual bool TryCreateFromCurrentValues(
             IUpdateEntry entry,
             [NotNullWhen(true)] out TKey? key
-        ) {
+        )
+        {
             key = (TKey)(object)(
                 (Func<IUpdateEntry, TNonNullableKey>)_propertyAccessors.CurrentValueGetter
             )(entry);
@@ -92,7 +95,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public virtual bool TryCreateFromPreStoreGeneratedCurrentValues(
             IUpdateEntry entry,
             [NotNullWhen(true)] out TKey? key
-        ) {
+        )
+        {
             key = (TKey)(object)(
                 (Func<
                     IUpdateEntry,
@@ -111,7 +115,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public virtual bool TryCreateFromOriginalValues(
             IUpdateEntry entry,
             [NotNullWhen(true)] out TKey? key
-        ) {
+        )
+        {
             key = (TKey)(object)(
                 (Func<IUpdateEntry, TNonNullableKey>)_propertyAccessors.OriginalValueGetter!
             )(entry);
@@ -127,7 +132,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public virtual bool TryCreateFromRelationshipSnapshot(
             IUpdateEntry entry,
             [NotNullWhen(true)] out TKey? key
-        ) {
+        )
+        {
             key = (TKey)(object)(
                 (Func<IUpdateEntry, TNonNullableKey>)_propertyAccessors.RelationshipSnapshotGetter
             )(entry);

@@ -46,7 +46,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 if (
                     !method.IsGenericMethodDefinition
                     && context.CompilationModuleGroup.ContainsMethodBody(method, false)
-                ) {
+                )
+                {
                     dependencies.Add(
                         context.CompiledMethodNode(method),
                         $"Method on type {Type.ToString()}"

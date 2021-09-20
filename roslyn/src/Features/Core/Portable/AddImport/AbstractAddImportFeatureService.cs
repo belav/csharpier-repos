@@ -130,7 +130,8 @@ namespace Microsoft.CodeAnalysis.AddImport
             bool searchReferenceAssemblies,
             ImmutableArray<PackageSource> packageSources,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var client = await RemoteHostClient.TryGetClientAsync(
                     document.Project,
                     cancellationToken
@@ -191,7 +192,8 @@ namespace Microsoft.CodeAnalysis.AddImport
             bool searchReferenceAssemblies,
             ImmutableArray<PackageSource> packageSources,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
             var node = root.FindToken(span.Start, findInsideTrivia: true)
@@ -256,7 +258,8 @@ namespace Microsoft.CodeAnalysis.AddImport
             bool searchReferenceAssemblies,
             ImmutableArray<PackageSource> packageSources,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Caches so we don't produce the same data multiple times while searching
             // all over the solution.
             var project = document.Project;
@@ -338,7 +341,8 @@ namespace Microsoft.CodeAnalysis.AddImport
             SymbolReferenceFinder finder,
             bool exact,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<Reference>.GetInstance(out var allReferences);
 
             // First search the current project to see if any symbols (source or metadata) match the
@@ -403,7 +407,8 @@ namespace Microsoft.CodeAnalysis.AddImport
             SymbolReferenceFinder finder,
             bool exact,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var references = await finder.FindInAllSymbolsInStartingProjectAsync(
                     exact,
                     cancellationToken
@@ -420,7 +425,8 @@ namespace Microsoft.CodeAnalysis.AddImport
             SymbolReferenceFinder finder,
             bool exact,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // If we didn't find enough hits searching just in the project, then check
             // in any unreferenced projects.
             if (allSymbolReferences.Count >= maxResults)
@@ -475,7 +481,8 @@ namespace Microsoft.CodeAnalysis.AddImport
             SymbolReferenceFinder finder,
             bool exact,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (allSymbolReferences.Count > 0)
             {
                 // Only do this if none of the project searches produced any results. We may have a
@@ -543,7 +550,8 @@ namespace Microsoft.CodeAnalysis.AddImport
         private static ImmutableArray<(ProjectId, PortableExecutableReference)> GetUnreferencedMetadataReferences(
             Project project,
             HashSet<PortableExecutableReference> seenReferences
-        ) {
+        )
+        {
             var result = ArrayBuilder<(ProjectId, PortableExecutableReference)>.GetInstance();
 
             var solution = project.Solution;
@@ -560,7 +568,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                         reference is PortableExecutableReference peReference
                         && !IsInPackagesDirectory(peReference)
                         && seenReferences.Add(peReference)
-                    ) {
+                    )
+                    {
                         result.Add((p.Id, peReference));
                     }
                 }
@@ -575,7 +584,8 @@ namespace Microsoft.CodeAnalysis.AddImport
             HashSet<Task<ImmutableArray<SymbolReference>>> findTasks,
             CancellationTokenSource nestedTokenSource,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 while (findTasks.Count > 0)
@@ -640,7 +650,8 @@ namespace Microsoft.CodeAnalysis.AddImport
             static bool ContainsPathComponent(
                 PortableExecutableReference reference,
                 string pathComponent
-            ) {
+            )
+            {
                 return PathUtilities.ContainsPathComponent(
                     reference.FilePath,
                     pathComponent,
@@ -661,7 +672,8 @@ namespace Microsoft.CodeAnalysis.AddImport
         private static Compilation CreateCompilation(
             Project project,
             PortableExecutableReference reference
-        ) {
+        )
+        {
             var compilationService =
                 project.LanguageServices.GetRequiredService<ICompilationFactoryService>();
             var compilation = compilationService.CreateCompilation(
@@ -682,7 +694,8 @@ namespace Microsoft.CodeAnalysis.AddImport
 
         int IEqualityComparer<PortableExecutableReference>.GetHashCode(
             PortableExecutableReference obj
-        ) {
+        )
+        {
             var identifier = obj.FilePath ?? obj.Display;
             Contract.ThrowIfNull(identifier, "Either FilePath or Display must be non-null");
 
@@ -772,7 +785,8 @@ namespace Microsoft.CodeAnalysis.AddImport
             bool searchReferenceAssemblies,
             ImmutableArray<PackageSource> packageSources,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // We might have multiple different diagnostics covering the same span.  Have to
             // process them all as we might produce different fixes for each diagnostic.
 
@@ -817,7 +831,8 @@ namespace Microsoft.CodeAnalysis.AddImport
             ImmutableArray<AddImportFixData> fixes,
             IPackageInstallerService? installerService,
             int maxResults
-        ) {
+        )
+        {
             var codeActionsBuilder = ArrayBuilder<CodeAction>.GetInstance();
 
             foreach (var fix in fixes)
@@ -863,7 +878,8 @@ namespace Microsoft.CodeAnalysis.AddImport
             SemanticModel semanticModel,
             ISyntaxFacts syntaxFactsService,
             SyntaxNode node
-        ) {
+        )
+        {
             var awaitExpression = FirstAwaitExpressionAncestor(syntaxFactsService, node);
             if (awaitExpression is null)
                 return null;
@@ -880,7 +896,8 @@ namespace Microsoft.CodeAnalysis.AddImport
             SemanticModel semanticModel,
             ISyntaxFacts syntaxFactsService,
             SyntaxNode node
-        ) {
+        )
+        {
             var collectionExpression = FirstForeachCollectionExpressionAncestor(
                 syntaxFactsService,
                 node

@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal
             string id,
             HubConnectionContext connection,
             Func<string, HubConnectionStore, Task> subscribeMethod
-        ) {
+        )
+        {
             await _lock.WaitAsync();
 
             try
@@ -44,7 +45,8 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal
             string id,
             HubConnectionContext connection,
             Func<string, Task> unsubscribeMethod
-        ) {
+        )
+        {
             await _lock.WaitAsync();
 
             try

@@ -539,7 +539,8 @@ namespace System.Web.Mvc.Routing
 
         private static DirectRouteFactoryContext CreateContext(
             Func<string, IDirectRouteBuilder> createBuilder
-        ) {
+        )
+        {
             return new LambdaDirectRouteFactoryContext(createBuilder);
         }
 

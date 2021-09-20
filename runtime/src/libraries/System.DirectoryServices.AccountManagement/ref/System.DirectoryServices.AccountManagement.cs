@@ -152,70 +152,80 @@ namespace System.DirectoryServices.AccountManagement
             System.DirectoryServices.AccountManagement.PrincipalContext context,
             System.DateTime time,
             System.DirectoryServices.AccountManagement.MatchType type
-        ) {
+        )
+        {
             throw null;
         }
         protected static System.DirectoryServices.AccountManagement.PrincipalSearchResult<T> FindByBadPasswordAttempt<T>(
             System.DirectoryServices.AccountManagement.PrincipalContext context,
             System.DateTime time,
             System.DirectoryServices.AccountManagement.MatchType type
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DirectoryServices.AccountManagement.PrincipalSearchResult<System.DirectoryServices.AccountManagement.AuthenticablePrincipal> FindByExpirationTime(
             System.DirectoryServices.AccountManagement.PrincipalContext context,
             System.DateTime time,
             System.DirectoryServices.AccountManagement.MatchType type
-        ) {
+        )
+        {
             throw null;
         }
         protected static System.DirectoryServices.AccountManagement.PrincipalSearchResult<T> FindByExpirationTime<T>(
             System.DirectoryServices.AccountManagement.PrincipalContext context,
             System.DateTime time,
             System.DirectoryServices.AccountManagement.MatchType type
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DirectoryServices.AccountManagement.PrincipalSearchResult<System.DirectoryServices.AccountManagement.AuthenticablePrincipal> FindByLockoutTime(
             System.DirectoryServices.AccountManagement.PrincipalContext context,
             System.DateTime time,
             System.DirectoryServices.AccountManagement.MatchType type
-        ) {
+        )
+        {
             throw null;
         }
         protected static System.DirectoryServices.AccountManagement.PrincipalSearchResult<T> FindByLockoutTime<T>(
             System.DirectoryServices.AccountManagement.PrincipalContext context,
             System.DateTime time,
             System.DirectoryServices.AccountManagement.MatchType type
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DirectoryServices.AccountManagement.PrincipalSearchResult<System.DirectoryServices.AccountManagement.AuthenticablePrincipal> FindByLogonTime(
             System.DirectoryServices.AccountManagement.PrincipalContext context,
             System.DateTime time,
             System.DirectoryServices.AccountManagement.MatchType type
-        ) {
+        )
+        {
             throw null;
         }
         protected static System.DirectoryServices.AccountManagement.PrincipalSearchResult<T> FindByLogonTime<T>(
             System.DirectoryServices.AccountManagement.PrincipalContext context,
             System.DateTime time,
             System.DirectoryServices.AccountManagement.MatchType type
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DirectoryServices.AccountManagement.PrincipalSearchResult<System.DirectoryServices.AccountManagement.AuthenticablePrincipal> FindByPasswordSetTime(
             System.DirectoryServices.AccountManagement.PrincipalContext context,
             System.DateTime time,
             System.DirectoryServices.AccountManagement.MatchType type
-        ) {
+        )
+        {
             throw null;
         }
         protected static System.DirectoryServices.AccountManagement.PrincipalSearchResult<T> FindByPasswordSetTime<T>(
             System.DirectoryServices.AccountManagement.PrincipalContext context,
             System.DateTime time,
             System.DirectoryServices.AccountManagement.MatchType type
-        ) {
+        )
+        {
             throw null;
         }
         public bool IsAccountLockedOut()
@@ -247,48 +257,55 @@ namespace System.DirectoryServices.AccountManagement
             System.DirectoryServices.AccountManagement.PrincipalContext context,
             System.DateTime time,
             System.DirectoryServices.AccountManagement.MatchType type
-        ) {
+        )
+        {
             throw null;
         }
         public static new System.DirectoryServices.AccountManagement.PrincipalSearchResult<System.DirectoryServices.AccountManagement.ComputerPrincipal> FindByExpirationTime(
             System.DirectoryServices.AccountManagement.PrincipalContext context,
             System.DateTime time,
             System.DirectoryServices.AccountManagement.MatchType type
-        ) {
+        )
+        {
             throw null;
         }
         public static new System.DirectoryServices.AccountManagement.ComputerPrincipal FindByIdentity(
             System.DirectoryServices.AccountManagement.PrincipalContext context,
             System.DirectoryServices.AccountManagement.IdentityType identityType,
             string identityValue
-        ) {
+        )
+        {
             throw null;
         }
         public static new System.DirectoryServices.AccountManagement.ComputerPrincipal FindByIdentity(
             System.DirectoryServices.AccountManagement.PrincipalContext context,
             string identityValue
-        ) {
+        )
+        {
             throw null;
         }
         public static new System.DirectoryServices.AccountManagement.PrincipalSearchResult<System.DirectoryServices.AccountManagement.ComputerPrincipal> FindByLockoutTime(
             System.DirectoryServices.AccountManagement.PrincipalContext context,
             System.DateTime time,
             System.DirectoryServices.AccountManagement.MatchType type
-        ) {
+        )
+        {
             throw null;
         }
         public static new System.DirectoryServices.AccountManagement.PrincipalSearchResult<System.DirectoryServices.AccountManagement.ComputerPrincipal> FindByLogonTime(
             System.DirectoryServices.AccountManagement.PrincipalContext context,
             System.DateTime time,
             System.DirectoryServices.AccountManagement.MatchType type
-        ) {
+        )
+        {
             throw null;
         }
         public static new System.DirectoryServices.AccountManagement.PrincipalSearchResult<System.DirectoryServices.AccountManagement.ComputerPrincipal> FindByPasswordSetTime(
             System.DirectoryServices.AccountManagement.PrincipalContext context,
             System.DateTime time,
             System.DirectoryServices.AccountManagement.MatchType type
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -376,13 +393,15 @@ namespace System.DirectoryServices.AccountManagement
             System.DirectoryServices.AccountManagement.PrincipalContext context,
             System.DirectoryServices.AccountManagement.IdentityType identityType,
             string identityValue
-        ) {
+        )
+        {
             throw null;
         }
         public static new System.DirectoryServices.AccountManagement.GroupPrincipal FindByIdentity(
             System.DirectoryServices.AccountManagement.PrincipalContext context,
             string identityValue
-        ) {
+        )
+        {
             throw null;
         }
         public System.DirectoryServices.AccountManagement.PrincipalSearchResult<System.DirectoryServices.AccountManagement.Principal> GetMembers()
@@ -391,7 +410,8 @@ namespace System.DirectoryServices.AccountManagement
         }
         public System.DirectoryServices.AccountManagement.PrincipalSearchResult<System.DirectoryServices.AccountManagement.Principal> GetMembers(
             bool recursive
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -430,10 +450,11 @@ namespace System.DirectoryServices.AccountManagement
         protected MultipleMatchesException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) : base(
-            default(System.Runtime.Serialization.SerializationInfo),
-            default(System.Runtime.Serialization.StreamingContext)
-        ) { }
+        )
+            : base(
+                default(System.Runtime.Serialization.SerializationInfo),
+                default(System.Runtime.Serialization.StreamingContext)
+            ) { }
         public MultipleMatchesException(string message)
             : base(
                 default(System.Runtime.Serialization.SerializationInfo),
@@ -456,10 +477,11 @@ namespace System.DirectoryServices.AccountManagement
         protected NoMatchingPrincipalException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) : base(
-            default(System.Runtime.Serialization.SerializationInfo),
-            default(System.Runtime.Serialization.StreamingContext)
-        ) { }
+        )
+            : base(
+                default(System.Runtime.Serialization.SerializationInfo),
+                default(System.Runtime.Serialization.StreamingContext)
+            ) { }
         public NoMatchingPrincipalException(string message)
             : base(
                 default(System.Runtime.Serialization.SerializationInfo),
@@ -482,10 +504,11 @@ namespace System.DirectoryServices.AccountManagement
         protected PasswordException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) : base(
-            default(System.Runtime.Serialization.SerializationInfo),
-            default(System.Runtime.Serialization.StreamingContext)
-        ) { }
+        )
+            : base(
+                default(System.Runtime.Serialization.SerializationInfo),
+                default(System.Runtime.Serialization.StreamingContext)
+            ) { }
         public PasswordException(string message)
             : base(
                 default(System.Runtime.Serialization.SerializationInfo),
@@ -574,13 +597,15 @@ namespace System.DirectoryServices.AccountManagement
             System.DirectoryServices.AccountManagement.PrincipalContext context,
             System.DirectoryServices.AccountManagement.IdentityType identityType,
             string identityValue
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DirectoryServices.AccountManagement.Principal FindByIdentity(
             System.DirectoryServices.AccountManagement.PrincipalContext context,
             string identityValue
-        ) {
+        )
+        {
             throw null;
         }
         protected static System.DirectoryServices.AccountManagement.Principal FindByIdentityWithType(
@@ -588,14 +613,16 @@ namespace System.DirectoryServices.AccountManagement
             System.Type principalType,
             System.DirectoryServices.AccountManagement.IdentityType identityType,
             string identityValue
-        ) {
+        )
+        {
             throw null;
         }
         protected static System.DirectoryServices.AccountManagement.Principal FindByIdentityWithType(
             System.DirectoryServices.AccountManagement.PrincipalContext context,
             System.Type principalType,
             string identityValue
-        ) {
+        )
+        {
             throw null;
         }
         public System.DirectoryServices.AccountManagement.PrincipalSearchResult<System.DirectoryServices.AccountManagement.Principal> GetGroups()
@@ -604,7 +631,8 @@ namespace System.DirectoryServices.AccountManagement
         }
         public System.DirectoryServices.AccountManagement.PrincipalSearchResult<System.DirectoryServices.AccountManagement.Principal> GetGroups(
             System.DirectoryServices.AccountManagement.PrincipalContext contextToQuery
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -627,7 +655,8 @@ namespace System.DirectoryServices.AccountManagement
             System.DirectoryServices.AccountManagement.PrincipalContext context,
             System.DirectoryServices.AccountManagement.IdentityType identityType,
             string identityValue
-        ) {
+        )
+        {
             throw null;
         }
         public void Save() { }
@@ -698,7 +727,8 @@ namespace System.DirectoryServices.AccountManagement
             System.DirectoryServices.AccountManagement.PrincipalContext context,
             System.DirectoryServices.AccountManagement.IdentityType identityType,
             string identityValue
-        ) {
+        )
+        {
             throw null;
         }
         public bool Contains(System.DirectoryServices.AccountManagement.UserPrincipal user)
@@ -729,7 +759,8 @@ namespace System.DirectoryServices.AccountManagement
             System.DirectoryServices.AccountManagement.PrincipalContext context,
             System.DirectoryServices.AccountManagement.IdentityType identityType,
             string identityValue
-        ) {
+        )
+        {
             throw null;
         }
         public bool Remove(System.DirectoryServices.AccountManagement.UserPrincipal user)
@@ -815,7 +846,8 @@ namespace System.DirectoryServices.AccountManagement
             string userName,
             string password,
             System.DirectoryServices.AccountManagement.ContextOptions options
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -837,10 +869,11 @@ namespace System.DirectoryServices.AccountManagement
         protected PrincipalExistsException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) : base(
-            default(System.Runtime.Serialization.SerializationInfo),
-            default(System.Runtime.Serialization.StreamingContext)
-        ) { }
+        )
+            : base(
+                default(System.Runtime.Serialization.SerializationInfo),
+                default(System.Runtime.Serialization.StreamingContext)
+            ) { }
         public PrincipalExistsException(string message)
             : base(
                 default(System.Runtime.Serialization.SerializationInfo),
@@ -863,10 +896,11 @@ namespace System.DirectoryServices.AccountManagement
         protected PrincipalOperationException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) : base(
-            default(System.Runtime.Serialization.SerializationInfo),
-            default(System.Runtime.Serialization.StreamingContext)
-        ) { }
+        )
+            : base(
+                default(System.Runtime.Serialization.SerializationInfo),
+                default(System.Runtime.Serialization.StreamingContext)
+            ) { }
         public PrincipalOperationException(string message)
             : base(
                 default(System.Runtime.Serialization.SerializationInfo),
@@ -881,10 +915,11 @@ namespace System.DirectoryServices.AccountManagement
             string message,
             System.Exception innerException,
             int errorCode
-        ) : base(
-            default(System.Runtime.Serialization.SerializationInfo),
-            default(System.Runtime.Serialization.StreamingContext)
-        ) { }
+        )
+            : base(
+                default(System.Runtime.Serialization.SerializationInfo),
+                default(System.Runtime.Serialization.StreamingContext)
+            ) { }
         public PrincipalOperationException(string message, int errorCode)
             : base(
                 default(System.Runtime.Serialization.SerializationInfo),
@@ -958,10 +993,11 @@ namespace System.DirectoryServices.AccountManagement
         protected PrincipalServerDownException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) : base(
-            default(System.Runtime.Serialization.SerializationInfo),
-            default(System.Runtime.Serialization.StreamingContext)
-        ) { }
+        )
+            : base(
+                default(System.Runtime.Serialization.SerializationInfo),
+                default(System.Runtime.Serialization.StreamingContext)
+            ) { }
         public PrincipalServerDownException(string message)
             : base(
                 default(System.Runtime.Serialization.SerializationInfo),
@@ -976,19 +1012,21 @@ namespace System.DirectoryServices.AccountManagement
             string message,
             System.Exception innerException,
             int errorCode
-        ) : base(
-            default(System.Runtime.Serialization.SerializationInfo),
-            default(System.Runtime.Serialization.StreamingContext)
-        ) { }
+        )
+            : base(
+                default(System.Runtime.Serialization.SerializationInfo),
+                default(System.Runtime.Serialization.StreamingContext)
+            ) { }
         public PrincipalServerDownException(
             string message,
             System.Exception innerException,
             int errorCode,
             string serverName
-        ) : base(
-            default(System.Runtime.Serialization.SerializationInfo),
-            default(System.Runtime.Serialization.StreamingContext)
-        ) { }
+        )
+            : base(
+                default(System.Runtime.Serialization.SerializationInfo),
+                default(System.Runtime.Serialization.StreamingContext)
+            ) { }
         public PrincipalServerDownException(string message, int errorCode)
             : base(
                 default(System.Runtime.Serialization.SerializationInfo),
@@ -1105,9 +1143,8 @@ namespace System.DirectoryServices.AccountManagement
     public partial class UserPrincipal
         : System.DirectoryServices.AccountManagement.AuthenticablePrincipal
     {
-        public UserPrincipal(
-            System.DirectoryServices.AccountManagement.PrincipalContext context
-        ) : base(default(System.DirectoryServices.AccountManagement.PrincipalContext)) { }
+        public UserPrincipal(System.DirectoryServices.AccountManagement.PrincipalContext context)
+            : base(default(System.DirectoryServices.AccountManagement.PrincipalContext)) { }
         public UserPrincipal(
             System.DirectoryServices.AccountManagement.PrincipalContext context,
             string samAccountName,
@@ -1156,48 +1193,55 @@ namespace System.DirectoryServices.AccountManagement
             System.DirectoryServices.AccountManagement.PrincipalContext context,
             System.DateTime time,
             System.DirectoryServices.AccountManagement.MatchType type
-        ) {
+        )
+        {
             throw null;
         }
         public static new System.DirectoryServices.AccountManagement.PrincipalSearchResult<System.DirectoryServices.AccountManagement.UserPrincipal> FindByExpirationTime(
             System.DirectoryServices.AccountManagement.PrincipalContext context,
             System.DateTime time,
             System.DirectoryServices.AccountManagement.MatchType type
-        ) {
+        )
+        {
             throw null;
         }
         public static new System.DirectoryServices.AccountManagement.UserPrincipal FindByIdentity(
             System.DirectoryServices.AccountManagement.PrincipalContext context,
             System.DirectoryServices.AccountManagement.IdentityType identityType,
             string identityValue
-        ) {
+        )
+        {
             throw null;
         }
         public static new System.DirectoryServices.AccountManagement.UserPrincipal FindByIdentity(
             System.DirectoryServices.AccountManagement.PrincipalContext context,
             string identityValue
-        ) {
+        )
+        {
             throw null;
         }
         public static new System.DirectoryServices.AccountManagement.PrincipalSearchResult<System.DirectoryServices.AccountManagement.UserPrincipal> FindByLockoutTime(
             System.DirectoryServices.AccountManagement.PrincipalContext context,
             System.DateTime time,
             System.DirectoryServices.AccountManagement.MatchType type
-        ) {
+        )
+        {
             throw null;
         }
         public static new System.DirectoryServices.AccountManagement.PrincipalSearchResult<System.DirectoryServices.AccountManagement.UserPrincipal> FindByLogonTime(
             System.DirectoryServices.AccountManagement.PrincipalContext context,
             System.DateTime time,
             System.DirectoryServices.AccountManagement.MatchType type
-        ) {
+        )
+        {
             throw null;
         }
         public static new System.DirectoryServices.AccountManagement.PrincipalSearchResult<System.DirectoryServices.AccountManagement.UserPrincipal> FindByPasswordSetTime(
             System.DirectoryServices.AccountManagement.PrincipalContext context,
             System.DateTime time,
             System.DirectoryServices.AccountManagement.MatchType type
-        ) {
+        )
+        {
             throw null;
         }
         public System.DirectoryServices.AccountManagement.PrincipalSearchResult<System.DirectoryServices.AccountManagement.Principal> GetAuthorizationGroups()

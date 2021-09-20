@@ -82,7 +82,8 @@ namespace JIT.HardwareIntrinsics.General
             Vector128<Single> result,
             Single[] expectedValues,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Single[] resultElements = new Single[ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<Single, byte>(ref resultElements[0]), result);
             ValidateResult(resultElements, expectedValues, method);
@@ -92,7 +93,8 @@ namespace JIT.HardwareIntrinsics.General
             Single[] resultElements,
             Single[] expectedValues,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             for (var i = 0; i < ElementCount; i++)

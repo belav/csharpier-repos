@@ -74,7 +74,8 @@ namespace System.DirectoryServices.AccountManagement.Tests
             ContextType contextType,
             string name,
             string container
-        ) {
+        )
+        {
             var context = new PrincipalContext(contextType, name, container);
             Assert.Equal(contextType, context.ContextType);
             Assert.Equal(name, context.Name);
@@ -107,7 +108,8 @@ namespace System.DirectoryServices.AccountManagement.Tests
             string name,
             string container,
             ContextOptions options
-        ) {
+        )
+        {
             var context = new PrincipalContext(contextType, name, container, options);
             Assert.Equal(contextType, context.ContextType);
             Assert.Equal(name, context.Name);
@@ -141,7 +143,8 @@ namespace System.DirectoryServices.AccountManagement.Tests
             string name,
             string userName,
             string password
-        ) {
+        )
+        {
             var context = new PrincipalContext(contextType, name, userName, password);
             Assert.Equal(contextType, context.ContextType);
             Assert.Equal(name, context.Name);
@@ -175,7 +178,8 @@ namespace System.DirectoryServices.AccountManagement.Tests
             string container,
             string userName,
             string password
-        ) {
+        )
+        {
             var context = new PrincipalContext(contextType, name, container, userName, password);
             Assert.Equal(contextType, context.ContextType);
             Assert.Equal(name, context.Name);
@@ -198,7 +202,8 @@ namespace System.DirectoryServices.AccountManagement.Tests
         [InlineData(ContextType.ApplicationDirectory + 1)]
         public void Ctor_InvalidContexType_ThrowsInvalidEnumArgumentException(
             ContextType contextType
-        ) {
+        )
+        {
             AssertExtensions.Throws<InvalidEnumArgumentException>(
                 "contextType",
                 () => new PrincipalContext(contextType)
@@ -378,7 +383,8 @@ namespace System.DirectoryServices.AccountManagement.Tests
         public void Ctor_MachineAndNonNegotiateContextOptions_ThrowsArgumentException(
             ContextType contextType,
             ContextOptions options
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentException>(
                 null,
                 () => new PrincipalContext(contextType, "name", null, options)
@@ -428,7 +434,8 @@ namespace System.DirectoryServices.AccountManagement.Tests
         public void Ctor_InconsistentUserNameAndPassword_ThrowsArgumentException(
             string userName,
             string password
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentException>(
                 null,
                 () => new PrincipalContext(ContextType.Machine, "name", userName, password)
@@ -522,7 +529,8 @@ namespace System.DirectoryServices.AccountManagement.Tests
             string userName,
             string password,
             bool expected
-        ) {
+        )
+        {
             var context = new PrincipalContext(ContextType.Machine);
             Assert.Equal(expected, context.ValidateCredentials(userName, password));
             Assert.Equal(
@@ -561,7 +569,8 @@ namespace System.DirectoryServices.AccountManagement.Tests
         public void ValidateCredentials_InvalidUsernamePasswordCombo_ThrowsArgumentException(
             string userName,
             string password
-        ) {
+        )
+        {
             var context = new PrincipalContext(ContextType.Machine);
             AssertExtensions.Throws<ArgumentException>(
                 null,
@@ -581,7 +590,8 @@ namespace System.DirectoryServices.AccountManagement.Tests
         [InlineData(ContextOptions.SimpleBind)]
         public void ValidateCredentials_InvalidOptions_ThrowsArgumentException(
             ContextOptions options
-        ) {
+        )
+        {
             var context = new PrincipalContext(ContextType.Machine);
             AssertExtensions.Throws<ArgumentException>(
                 null,

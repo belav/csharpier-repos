@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
             string assemblyFileName,
             IRebuildArtifactResolver rebuildArtifactResolver,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             using var peReader = new PEReader(peStream);
             var embeddedPdbReader = peReader.GetEmbeddedPdbMetadataReader();
             var portablePdbReader = pdbStream is not null
@@ -66,7 +67,8 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
             PEReader PEReader,
             ImmutableArray<byte> PdbBytes,
             MetadataReader PdbReader
-        ) : IDisposable {
+        ) : IDisposable
+        {
             public void Dispose() => PEReader.Dispose();
         }
 
@@ -267,13 +269,15 @@ Actual:
         public static void VerifyCompilationOptions(
             CompilationOptions originalOptions,
             CompilationOptions rebuildOptions
-        ) {
+        )
+        {
             var type = originalOptions.GetType();
             foreach (
                 var propertyInfo in type.GetProperties(
                     BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
                 )
-            ) {
+            )
+            {
                 switch (propertyInfo.Name)
                 {
                     case nameof(CompilationOptions.GeneralDiagnosticOption):
@@ -317,13 +321,15 @@ Actual:
         private static void VerifyParseOptions(
             ParseOptions originalOptions,
             ParseOptions rebuildOptions
-        ) {
+        )
+        {
             var type = originalOptions.GetType();
             foreach (
                 var propertyInfo in type.GetProperties(
                     BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
                 )
-            ) {
+            )
+            {
                 // Several options are expected to be different and they are special cased here.
                 if (propertyInfo.Name == nameof(VisualBasicParseOptions.SpecifiedLanguageVersion))
                 {

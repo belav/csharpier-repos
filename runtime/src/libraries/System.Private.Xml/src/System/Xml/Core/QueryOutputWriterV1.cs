@@ -71,7 +71,8 @@ namespace System.Xml
 
                 if (
                     settings.CDataSectionElements != null && settings.CDataSectionElements.Count > 0
-                ) {
+                )
+                {
                     _bitsCData = new BitStack();
                     _lookupCDataElems = new Dictionary<XmlQualifiedName, XmlQualifiedName?>();
                     _qnameCData = new XmlQualifiedName();

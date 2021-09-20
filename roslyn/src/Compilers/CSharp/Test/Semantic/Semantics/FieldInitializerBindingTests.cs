@@ -292,7 +292,8 @@ class C
             string source,
             IEnumerable<ExpectedInitializer> expectedInstanceInitializers,
             IEnumerable<ExpectedInitializer> expectedStaticInitializers
-        ) {
+        )
+        {
             var compilation = CreateCompilation(source);
             var syntaxTree = compilation.SyntaxTrees.First();
             var typeSymbol = (SourceNamedTypeSymbol)compilation.GlobalNamespace.GetMembers("C")
@@ -326,7 +327,8 @@ class C
             SyntaxTree syntaxTree,
             ImmutableArray<BoundInitializer> boundInitializers,
             bool isStatic
-        ) {
+        )
+        {
             if (expectedInitializers == null)
             {
                 Assert.Equal(0, boundInitializers.Length);
@@ -366,7 +368,8 @@ class C
         private static ImmutableArray<BoundInitializer> BindInitializersWithoutDiagnostics(
             SourceNamedTypeSymbol typeSymbol,
             ImmutableArray<ImmutableArray<FieldOrPropertyInitializer>> initializers
-        ) {
+        )
+        {
             DiagnosticBag diagnostics = DiagnosticBag.GetInstance();
             ImportChain unused;
             var boundInitializers = ArrayBuilder<BoundInitializer>.GetInstance();

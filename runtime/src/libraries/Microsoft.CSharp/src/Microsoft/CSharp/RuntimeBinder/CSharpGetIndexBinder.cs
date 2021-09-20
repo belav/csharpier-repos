@@ -25,7 +25,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             RuntimeBinder runtimeBinder,
             ArgumentObject[] arguments,
             LocalVariableSymbol[] locals
-        ) {
+        )
+        {
             Expr indexerArguments = runtimeBinder.CreateArgumentListEXPR(
                 arguments,
                 locals,
@@ -84,7 +85,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             if (
                 _callingContext != otherBinder._callingContext
                 || _argumentInfo.Length != otherBinder._argumentInfo.Length
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -107,7 +109,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             DynamicMetaObject target,
             DynamicMetaObject[] indexes,
             DynamicMetaObject errorSuggestion
-        ) {
+        )
+        {
 #if ENABLECOMBINDER
             DynamicMetaObject com;
             if (ComInterop.ComBinder.TryBindGetIndex(this, target, indexes, out com))

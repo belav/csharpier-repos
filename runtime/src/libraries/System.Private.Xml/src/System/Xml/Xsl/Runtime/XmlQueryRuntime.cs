@@ -73,7 +73,8 @@ namespace System.Xml.Xsl.Runtime
             XmlResolver dataSources,
             XsltArgumentList argList,
             XmlSequenceWriter seqWrt
-        ) {
+        )
+        {
             Debug.Assert(data != null);
             string[] names = data.Names;
             Int32Pair[] filters = data.Filters;
@@ -447,7 +448,8 @@ namespace System.Xml.Xsl.Runtime
             out string prefix,
             out string localName,
             out string ns
-        ) {
+        )
+        {
             Debug.Assert(_prefixMappingsList != null);
 
             // Parse the tagName as a prefix, localName pair
@@ -502,7 +504,8 @@ namespace System.Xml.Xsl.Runtime
             XPathNavigator navigator,
             int indexLocalName,
             int indexNamespaceUri
-        ) {
+        )
+        {
             if ((object)navigator.NameTable == (object)_nameTableQuery)
             {
                 // Use atomized comparison
@@ -542,7 +545,8 @@ namespace System.Xml.Xsl.Runtime
             XmlQueryType xmlType,
             object value,
             Type destinationType
-        ) {
+        )
+        {
             Debug.Assert(
                 XmlILTypeHelper.GetStorageType(xmlType).IsAssignableFrom(value.GetType()),
                 "Values passed to ChangeTypeXsltArgument should be in ILGen's default Clr representation."
@@ -1210,7 +1214,8 @@ namespace System.Xml.Xsl.Runtime
         internal static XPathNavigator SyncToNavigator(
             XPathNavigator navigatorThis,
             XPathNavigator navigatorThat
-        ) {
+        )
+        {
             if (navigatorThis == null || !navigatorThis.MoveTo(navigatorThat))
                 return navigatorThat.Clone();
 
@@ -1231,7 +1236,8 @@ namespace System.Xml.Xsl.Runtime
                     currentNode.NodeType == XPathNodeType.Namespace
                     && IsInheritedNamespace(currentNode)
                 )
-            ) {
+            )
+            {
                 OnCurrentNodeChanged2(
                     currentNode.BaseURI,
                     lineInfo.LineNumber,

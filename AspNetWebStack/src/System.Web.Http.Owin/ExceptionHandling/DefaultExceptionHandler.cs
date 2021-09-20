@@ -18,7 +18,8 @@ namespace System.Web.Http.Owin.ExceptionHandling
         public Task HandleAsync(
             ExceptionHandlerContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Handle(context);
             return TaskHelpers.Completed();
         }

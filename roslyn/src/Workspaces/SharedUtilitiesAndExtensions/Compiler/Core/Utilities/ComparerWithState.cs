@@ -14,7 +14,8 @@ namespace Roslyn.Utilities
             T second,
             S state,
             ImmutableArray<Func<T, S, IComparable>> comparableMethods
-        ) {
+        )
+        {
             foreach (var comparableMethod in comparableMethods)
             {
                 var comparison = comparableMethod(first, state)
@@ -32,7 +33,8 @@ namespace Roslyn.Utilities
             T first,
             T second,
             ImmutableArray<Func<T, IComparable>> comparableMethods
-        ) {
+        )
+        {
             foreach (var comparableMethod in comparableMethods)
             {
                 var comparison = comparableMethod(first).CompareTo(comparableMethod(second));

@@ -38,7 +38,8 @@ namespace System.Text.Unicode.Tests
             string unprocessedInput,
             int expectedRuneCount,
             int expectedUtf8ByteCount
-        ) {
+        )
+        {
             GetIndexOfFirstInvalidUtf16Sequence_Test_Core(
                 unprocessedInput,
                 -1 /* expectedIdxOfFirstInvalidChar */
@@ -66,7 +67,8 @@ namespace System.Text.Unicode.Tests
             int idxOfFirstInvalidChar,
             int expectedRuneCount,
             int expectedUtf8ByteCount
-        ) {
+        )
+        {
             GetIndexOfFirstInvalidUtf16Sequence_Test_Core(
                 unprocessedInput,
                 idxOfFirstInvalidChar,
@@ -86,7 +88,8 @@ namespace System.Text.Unicode.Tests
             int idxOfFirstInvalidChar,
             int expectedRuneCount,
             int expectedUtf8ByteCount
-        ) {
+        )
+        {
             GetIndexOfFirstInvalidUtf16Sequence_Test_Core(
                 unprocessedInput,
                 idxOfFirstInvalidChar,
@@ -226,7 +229,8 @@ namespace System.Text.Unicode.Tests
             int expectedIdxOfFirstInvalidChar,
             int expectedRuneCount,
             long expectedUtf8ByteCount
-        ) {
+        )
+        {
             char[] processedInput = ProcessInput(unprocessedInput).ToCharArray();
 
             // Run the test normally
@@ -321,7 +325,8 @@ namespace System.Text.Unicode.Tests
             int expectedRetVal,
             int expectedRuneCount,
             long expectedUtf8ByteCount
-        ) {
+        )
+        {
             // Arrange
 
             using BoundedMemory<char> boundedMemory = BoundedMemory.AllocateFromExistingData(input);

@@ -87,14 +87,16 @@ namespace System.Diagnostics.Tracing
             string eventSourceName,
             EventSourceSettings config,
             params string[]? traits
-        ) : this(
-            eventSourceName == null
-              ? default
-              : GenerateGuidFromName(eventSourceName.ToUpperInvariant()),
-            eventSourceName!,
-            config,
-            traits
-        ) {
+        )
+            : this(
+                eventSourceName == null
+                  ? default
+                  : GenerateGuidFromName(eventSourceName.ToUpperInvariant()),
+                eventSourceName!,
+                config,
+                traits
+            )
+        {
             if (eventSourceName == null)
             {
                 throw new ArgumentNullException(nameof(eventSourceName));
@@ -193,7 +195,8 @@ namespace System.Diagnostics.Tracing
 #endif
             string? eventName,
             T data
-        ) {
+        )
+        {
             if (!this.IsEnabled())
             {
                 return;
@@ -237,7 +240,8 @@ namespace System.Diagnostics.Tracing
             string? eventName,
             EventSourceOptions options,
             T data
-        ) {
+        )
+        {
             if (!this.IsEnabled())
             {
                 return;
@@ -282,7 +286,8 @@ namespace System.Diagnostics.Tracing
             string? eventName,
             ref EventSourceOptions options,
             ref T data
-        ) {
+        )
+        {
             if (!this.IsEnabled())
             {
                 return;
@@ -336,7 +341,8 @@ namespace System.Diagnostics.Tracing
             ref Guid activityId,
             ref Guid relatedActivityId,
             ref T data
-        ) {
+        )
+        {
             if (!this.IsEnabled())
             {
                 return;
@@ -345,7 +351,8 @@ namespace System.Diagnostics.Tracing
             fixed (
                 Guid* pActivity = &activityId,
                     pRelated = &relatedActivityId
-            ) {
+            )
+            {
                 this.WriteImpl(
                     eventName,
                     ref options,
@@ -396,7 +403,8 @@ namespace System.Diagnostics.Tracing
             Guid* activityID,
             Guid* childActivityID,
             params object?[] values
-        ) {
+        )
+        {
             if (!this.IsEnabled())
             {
                 return;
@@ -465,7 +473,8 @@ namespace System.Diagnostics.Tracing
             Guid* activityID,
             Guid* childActivityID,
             params object?[] values
-        ) {
+        )
+        {
 #if FEATURE_MANAGED_ETW
             int identity = 0;
             byte level =
@@ -520,7 +529,8 @@ namespace System.Diagnostics.Tracing
                 byte* pMetadata0 = providerMetadata,
                     pMetadata1 = nameInfo.nameMetadata,
                     pMetadata2 = eventTypes.typeMetadata
-            ) {
+            )
+            {
                 descriptors[0].SetMetadata(pMetadata0, providerMetadata.Length, 2);
                 descriptors[1].SetMetadata(pMetadata1, nameInfo.nameMetadata.Length, 1);
                 descriptors[2].SetMetadata(pMetadata2, eventTypes.typeMetadata.Length, 1);
@@ -601,7 +611,8 @@ namespace System.Diagnostics.Tracing
             Guid* activityID,
             Guid* childActivityID,
             EventData* data
-        ) {
+        )
+        {
 #if FEATURE_MANAGED_ETW
             if (!this.IsEnabled())
             {
@@ -640,7 +651,8 @@ namespace System.Diagnostics.Tracing
                     byte* pMetadata0 = providerMetadata,
                         pMetadata1 = nameInfo.nameMetadata,
                         pMetadata2 = eventTypes.typeMetadata
-                ) {
+                )
+                {
                     descriptors[0].SetMetadata(pMetadata0, providerMetadata.Length, 2);
                     descriptors[1].SetMetadata(pMetadata1, nameInfo.nameMetadata.Length, 1);
                     descriptors[2].SetMetadata(pMetadata2, eventTypes.typeMetadata.Length, 1);
@@ -679,7 +691,8 @@ namespace System.Diagnostics.Tracing
             Guid* pActivityId,
             Guid* pRelatedActivityId,
             TraceLoggingEventTypes eventTypes
-        ) {
+        )
+        {
             try
             {
                 fixed (EventSourceOptions* pOptions = &options)
@@ -726,7 +739,8 @@ namespace System.Diagnostics.Tracing
                         byte* pMetadata0 = providerMetadata,
                             pMetadata1 = nameInfo.nameMetadata,
                             pMetadata2 = eventTypes.typeMetadata
-                    ) {
+                    )
+                    {
                         descriptors[0].SetMetadata(pMetadata0, providerMetadata.Length, 2);
                         descriptors[1].SetMetadata(pMetadata1, nameInfo.nameMetadata.Length, 1);
                         descriptors[2].SetMetadata(pMetadata2, eventTypes.typeMetadata.Length, 1);
@@ -743,7 +757,8 @@ namespace System.Diagnostics.Tracing
                         pActivityId == null
                         && pRelatedActivityId == null
                         && ((options.ActivityOptions & EventActivityOptions.Disable) == 0)
-                    ) {
+                    )
+                    {
                         if (opcode == EventOpcode.Start)
                         {
                             Debug.Assert(
@@ -845,7 +860,8 @@ namespace System.Diagnostics.Tracing
             Guid* pActivityId,
             Guid* pChildActivityId,
             EventPayload? payload
-        ) {
+        )
+        {
             EventWrittenEventArgs eventCallbackArgs = new EventWrittenEventArgs(this);
             eventCallbackArgs.EventName = eventName;
             eventCallbackArgs.m_level = (EventLevel)eventDescriptor.Level;
@@ -1032,7 +1048,8 @@ namespace System.Diagnostics.Tracing
             TraceLoggingEventTypes eventInfo,
             ref EventSourceOptions options,
             out EventDescriptor descriptor
-        ) {
+        )
+        {
             NameInfo? nameInfo = null;
             int identity = 0;
             byte level =

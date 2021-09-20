@@ -299,7 +299,8 @@ namespace Microsoft.Extensions.DependencyInjection
         [InlineData((HttpStatusCode)503)]
         public async Task AddTransientHttpErrorPolicy_AddsPolicyHandler_HandlesStatusCode(
             HttpStatusCode statusCode
-        ) {
+        )
+        {
             // Arrange
             using var handler = new SequenceMessageHandler()
             {
@@ -603,7 +604,8 @@ namespace Microsoft.Extensions.DependencyInjection
             protected override Task<HttpResponseMessage> SendAsync(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (CallCount++ % 2 == 0)
                 {
                     throw CreateException();
@@ -625,7 +627,8 @@ namespace Microsoft.Extensions.DependencyInjection
             protected override Task<HttpResponseMessage> SendAsync(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var func = Responses[CallCount++ % Responses.Count];
                 return Task.FromResult(func(request));
             }

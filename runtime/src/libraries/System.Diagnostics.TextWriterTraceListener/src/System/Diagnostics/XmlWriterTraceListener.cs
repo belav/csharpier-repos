@@ -84,7 +84,8 @@ namespace System.Diagnostics
             int id,
             string? format,
             params object?[]? args
-        ) {
+        )
+        {
             if (
                 Filter != null
                 && !Filter.ShouldTrace(eventCache, source, eventType, id, format, args, null, null)
@@ -106,7 +107,8 @@ namespace System.Diagnostics
             TraceEventType eventType,
             int id,
             string? message
-        ) {
+        )
+        {
             if (
                 Filter != null
                 && !Filter.ShouldTrace(eventCache, source, eventType, id, message, null, null, null)
@@ -124,7 +126,8 @@ namespace System.Diagnostics
             TraceEventType eventType,
             int id,
             object? data
-        ) {
+        )
+        {
             if (
                 Filter != null
                 && !Filter.ShouldTrace(eventCache, source, eventType, id, null, null, data, null)
@@ -151,7 +154,8 @@ namespace System.Diagnostics
             TraceEventType eventType,
             int id,
             params object?[]? data
-        ) {
+        )
+        {
             if (
                 Filter != null
                 && !Filter.ShouldTrace(eventCache, source, eventType, id, null, null, null, data)
@@ -224,7 +228,8 @@ namespace System.Diagnostics
             int id,
             string? message,
             Guid relatedActivityId
-        ) {
+        )
+        {
             if (
                 Filter != null
                 && !Filter.ShouldTrace(
@@ -251,7 +256,8 @@ namespace System.Diagnostics
             int id,
             TraceEventCache? eventCache,
             Guid relatedActivityId
-        ) {
+        )
+        {
             WriteStartHeader(source, eventType, id, eventCache);
             InternalWrite("\" RelatedActivityID=\"");
             InternalWrite(relatedActivityId.ToString("B"));
@@ -263,7 +269,8 @@ namespace System.Diagnostics
             TraceEventType eventType,
             int id,
             TraceEventCache? eventCache
-        ) {
+        )
+        {
             WriteStartHeader(source, eventType, id, eventCache);
             WriteEndHeader();
         }
@@ -273,7 +280,8 @@ namespace System.Diagnostics
             TraceEventType eventType,
             int id,
             TraceEventCache? eventCache
-        ) {
+        )
+        {
             InternalWrite(FixedHeader);
 
             InternalWrite("<EventID>");

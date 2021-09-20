@@ -17,12 +17,14 @@ namespace Microsoft.CodeAnalysis.NavigationBar
                 string containerName,
                 SymbolKey eventSymbolKey,
                 SymbolKey destinationTypeSymbolKey
-            ) : base(
-                RoslynNavigationBarItemKind.GenerateEventHandler,
-                text,
-                glyph,
-                destinationTypeSymbolKey
-            ) {
+            )
+                : base(
+                    RoslynNavigationBarItemKind.GenerateEventHandler,
+                    text,
+                    glyph,
+                    destinationTypeSymbolKey
+                )
+            {
                 ContainerName = containerName;
                 EventSymbolKey = eventSymbolKey;
             }

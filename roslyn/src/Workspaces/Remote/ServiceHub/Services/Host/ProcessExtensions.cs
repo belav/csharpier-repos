@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public static bool TrySetPriorityClass(
             this Process process,
             ProcessPriorityClass priorityClass
-        ) {
+        )
+        {
             if (!s_settingPrioritySupported)
             {
                 return false;

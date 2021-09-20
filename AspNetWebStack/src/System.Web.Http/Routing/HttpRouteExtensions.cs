@@ -30,7 +30,8 @@ namespace System.Web.Http.Routing
                     RouteDataTokenKeys.Actions,
                     out possibleDirectRouteActions
                 )
-            ) {
+            )
+            {
                 if (possibleDirectRouteActions != null && possibleDirectRouteActions.Length > 0)
                 {
                     directRouteActions = possibleDirectRouteActions;
@@ -57,7 +58,8 @@ namespace System.Web.Http.Routing
                     RouteDataTokenKeys.Precedence,
                     out possiblePrecedence
                 )
-            ) {
+            )
+            {
                 precedence = possiblePrecedence;
             }
 
@@ -93,7 +95,8 @@ namespace System.Web.Http.Routing
                     RouteDataTokenKeys.Actions,
                     out actions
                 )
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -117,7 +120,8 @@ namespace System.Web.Http.Routing
                     RouteDataTokenKeys.Controller,
                     out controller
                 )
-            ) {
+            )
+            {
                 return null;
             }
 

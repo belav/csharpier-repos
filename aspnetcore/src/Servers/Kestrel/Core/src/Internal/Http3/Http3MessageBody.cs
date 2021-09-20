@@ -66,7 +66,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
 
         public override async ValueTask<ReadResult> ReadAsync(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             await TryStartAsync();
 
             try

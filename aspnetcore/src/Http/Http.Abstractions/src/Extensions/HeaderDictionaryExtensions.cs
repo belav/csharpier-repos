@@ -31,7 +31,8 @@ namespace Microsoft.AspNetCore.Http
             this IHeaderDictionary headers,
             string key,
             params string[] values
-        ) {
+        )
+        {
             ParsingHelpers.AppendHeaderJoined(headers, key, values);
         }
 
@@ -57,7 +58,8 @@ namespace Microsoft.AspNetCore.Http
             this IHeaderDictionary headers,
             string key,
             params string[] values
-        ) {
+        )
+        {
             ParsingHelpers.SetHeaderJoined(headers, key, values);
         }
     }

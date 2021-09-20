@@ -153,7 +153,8 @@ internal sealed class RayTracer
         Vector norm,
         Vector rd,
         Scene scene
-    ) {
+    )
+    {
         Color ret = new Color(0, 0, 0);
         foreach (Light light in scene.Lights)
         {
@@ -189,7 +190,8 @@ internal sealed class RayTracer
         Vector rd,
         Scene scene,
         int depth
-    ) {
+    )
+    {
         return Color.Times(
             thing.Surface.Reflect(pos),
             TraceRay(new Ray(pos, rd), scene, depth + 1)

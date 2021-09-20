@@ -22,7 +22,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
             object parent,
             ProjectId projectId,
             ImmutableArray<INamedTypeSymbol> typeSymbols
-        ) {
+        )
+        {
             var collection = new ExternalTypeCollection(state, parent, projectId, typeSymbols);
             return (EnvDTE.CodeElements)ComAggregate.CreateAggregatedObject(collection);
         }

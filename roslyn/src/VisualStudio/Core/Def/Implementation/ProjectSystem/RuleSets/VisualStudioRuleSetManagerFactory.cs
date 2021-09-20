@@ -30,7 +30,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             FileChangeWatcherProvider fileChangeWatcherProvider,
             IForegroundNotificationService foregroundNotificationService,
             IAsynchronousOperationListenerProvider listenerProvider
-        ) {
+        )
+        {
             _fileChangeWatcherProvider = fileChangeWatcherProvider;
             _foregroundNotificationService = foregroundNotificationService;
             _listener = listenerProvider.GetListener(FeatureAttribute.RuleSetEditor);

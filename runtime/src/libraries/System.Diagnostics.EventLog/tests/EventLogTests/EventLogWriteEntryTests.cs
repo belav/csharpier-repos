@@ -21,7 +21,8 @@ namespace System.Diagnostics.Tests
             bool instance = false,
             bool category = false,
             bool data = false
-        ) {
+        )
+        {
             using (EventLog eventLog = new EventLog())
             {
                 eventLog.Source = source;
@@ -87,7 +88,8 @@ namespace System.Diagnostics.Tests
             bool instance = false,
             bool category = false,
             bool data = false
-        ) {
+        )
+        {
             using (EventLog eventLog = new EventLog())
             {
                 eventLog.Source = source;

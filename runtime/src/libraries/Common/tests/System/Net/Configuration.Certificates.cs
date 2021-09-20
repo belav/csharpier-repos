@@ -170,7 +170,8 @@ namespace System.Net.Test.Common
                     if (
                         Interlocked.CompareExchange(ref s_selfSigned13ServerCertificate, cert, null)
                         != null
-                    ) {
+                    )
+                    {
                         // Lost a race to create.
                         cert.Dispose();
                     }

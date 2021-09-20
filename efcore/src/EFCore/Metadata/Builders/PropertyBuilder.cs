@@ -237,7 +237,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns> The same builder instance so that multiple configuration calls can be chained. </returns>
         public virtual PropertyBuilder HasValueGenerator(
             Func<IProperty, IEntityType, ValueGenerator> factory
-        ) {
+        )
+        {
             Check.NotNull(factory, nameof(factory));
 
             Builder.HasValueGenerator(factory, ConfigurationSource.Explicit);
@@ -430,7 +431,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         public virtual PropertyBuilder HasConversion(
             Type? providerClrType,
             ValueComparer? valueComparer
-        ) {
+        )
+        {
             Builder.HasConversion(providerClrType, ConfigurationSource.Explicit);
             Builder.HasValueComparer(valueComparer, ConfigurationSource.Explicit);
 
@@ -447,7 +449,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         public virtual PropertyBuilder HasConversion(
             ValueConverter? converter,
             ValueComparer? valueComparer
-        ) {
+        )
+        {
             Builder.HasConversion(converter, ConfigurationSource.Explicit);
             Builder.HasValueComparer(valueComparer, ConfigurationSource.Explicit);
 

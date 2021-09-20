@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             IImmutableSet<Project>? projects,
             bool transitive,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Only an interface can be implemented.
             if (s_isInterface(type))
             {

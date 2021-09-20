@@ -61,13 +61,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ChangeSignature
             ITextView textView,
             ITextBuffer subjectBuffer,
             CommandExecutionContext context
-        ) {
+        )
+        {
             using (
                 context.OperationContext.AddScope(
                     allowCancellation: true,
                     FeaturesResources.Change_signature
                 )
-            ) {
+            )
+            {
                 if (!IsAvailable(subjectBuffer, out var workspace))
                 {
                     return false;
@@ -129,7 +131,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ChangeSignature
             Solution oldSolution,
             Workspace workspace,
             CommandExecutionContext context
-        ) {
+        )
+        {
             var notificationService = workspace.Services.GetRequiredService<INotificationService>();
             if (!result.Succeeded)
             {
@@ -151,7 +154,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ChangeSignature
                     result.ConfirmationMessage,
                     severity: NotificationSeverity.Warning
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -198,7 +202,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ChangeSignature
             ChangeSignatureFailureKind reason,
             IUIThreadOperationContext operationContext,
             INotificationService notificationService
-        ) {
+        )
+        {
             switch (reason)
             {
                 case ChangeSignatureFailureKind.DefinedInMetadata:
@@ -224,7 +229,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ChangeSignature
                 NotificationSeverity severity,
                 IUIThreadOperationContext operationContext,
                 INotificationService notificationService
-            ) {
+            )
+            {
                 operationContext.TakeOwnership();
                 notificationService.SendNotification(errorMessage, severity: severity);
             }

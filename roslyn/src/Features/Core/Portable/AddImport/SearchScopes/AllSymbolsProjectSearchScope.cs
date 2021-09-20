@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.AddImport
             protected override async Task<ImmutableArray<ISymbol>> FindDeclarationsAsync(
                 SymbolFilter filter,
                 SearchQuery searchQuery
-            ) {
+            )
+            {
                 var declarations = await DeclarationFinder.FindAllDeclarationsWithNormalQueryAsync(
                         _project,
                         searchQuery,

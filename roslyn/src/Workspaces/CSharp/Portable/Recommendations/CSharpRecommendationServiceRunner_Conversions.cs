@@ -163,7 +163,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Recommendations
             ITypeSymbol container,
             INamedTypeSymbol containerWithoutNullable,
             ArrayBuilder<ISymbol> symbols
-        ) {
+        )
+        {
             var compilation = _context.SemanticModel.Compilation;
             var containerIsNullable = container.IsNullable();
 
@@ -217,7 +218,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Recommendations
             ITypeSymbol container,
             INamedTypeSymbol containerWithoutNullable,
             ArrayBuilder<ISymbol> symbols
-        ) {
+        )
+        {
             var conversions = GetPredefinedNumericConversions(containerWithoutNullable);
             if (!conversions.HasValue)
                 return;
@@ -255,7 +257,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Recommendations
             INamedTypeSymbol containerWithoutNullable,
             ArrayBuilder<ISymbol> symbols,
             ImmutableArray<SpecialType> specialTypes
-        ) {
+        )
+        {
             var compilation = _context.SemanticModel.Compilation;
 
             foreach (var specialType in specialTypes)
@@ -283,7 +286,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Recommendations
             static string CreateConversionDocumentationCommentXml(
                 ITypeSymbol fromType,
                 ITypeSymbol toType
-            ) {
+            )
+            {
                 var summary = string.Format(
                     WorkspacesResources.Predefined_conversion_from_0_to_1,
                     SeeTag(fromType.GetDocumentationCommentId()),
@@ -313,7 +317,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Recommendations
             ITypeSymbol container,
             INamedTypeSymbol containerWithoutNullable,
             ArrayBuilder<ISymbol> symbols
-        ) {
+        )
+        {
             // https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/conversions#explicit-enumeration-conversions
             // Three kinds of conversions are defined in the spec.
             // Suggestion are made for one kind:

@@ -158,7 +158,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
             if (
                 (udata & SignMask.FOURBYTE) == 0 || (udata & SignMask.FOURBYTE) == SignMask.FOURBYTE
-            ) {
+            )
+            {
                 udata = ((udata & ~SignMask.FOURBYTE) << 1 | isSigned);
                 Debug.Assert(udata <= 0x1FFFFFFF);
                 EmitByte((byte)((udata >> 24) | 0xC0));
@@ -399,7 +400,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             bool enforceOwningType,
             SignatureContext context,
             bool isInstantiatingStub
-        ) {
+        )
+        {
             uint flags = 0;
             if (method.Unboxing)
             {
@@ -443,7 +445,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             uint flags,
             bool enforceDefEncoding,
             SignatureContext context
-        ) {
+        )
+        {
             ModuleToken methodToken = method.Token;
             if (method.Method.HasInstantiation && !method.Method.IsGenericMethodDefinition)
             {
@@ -489,7 +492,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             if (
                 (flags & (uint)ReadyToRunMethodSigFlags.READYTORUN_METHOD_SIG_MethodInstantiation)
                 != 0
-            ) {
+            )
+            {
                 Instantiation instantiation = method.Method.Instantiation;
                 EmitUInt((uint)instantiation.Length);
                 SignatureContext outerContext = context.OuterContext;
@@ -497,7 +501,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     int typeParamIndex = 0;
                     typeParamIndex < instantiation.Length;
                     typeParamIndex++
-                ) {
+                )
+                {
                     EmitTypeSignature(instantiation[typeParamIndex], outerContext);
                 }
             }
@@ -582,7 +587,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             ReadyToRunFixupKind fixupKind,
             EcmaModule targetModule,
             SignatureContext outerContext
-        ) {
+        )
+        {
             if (targetModule == outerContext.LocalContext)
             {
                 EmitByte((byte)fixupKind);

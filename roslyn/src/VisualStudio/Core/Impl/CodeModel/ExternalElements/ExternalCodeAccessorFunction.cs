@@ -24,7 +24,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
             ProjectId projectId,
             IMethodSymbol symbol,
             AbstractExternalCodeMember parent
-        ) {
+        )
+        {
             var element = new ExternalCodeAccessorFunction(state, projectId, symbol, parent);
             return (EnvDTE.CodeFunction)ComAggregate.CreateAggregatedObject(element);
         }

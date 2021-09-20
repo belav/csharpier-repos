@@ -349,7 +349,8 @@ namespace Internal.TypeSystem
                     !_fieldLayoutFlags.HasFlags(
                         FieldLayoutFlags.ComputedValueTypeShapeCharacteristics
                     )
-                ) {
+                )
+                {
                     ComputeValueTypeShapeCharacteristics();
                 }
                 return _valueTypeShapeCharacteristics;
@@ -445,7 +446,8 @@ namespace Internal.TypeSystem
                 || (computedStaticLayout.GcStatics.Size != LayoutInt.Zero)
                 || (computedStaticLayout.ThreadNonGcStatics.Size != LayoutInt.Zero)
                 || (computedStaticLayout.ThreadGcStatics.Size != LayoutInt.Zero)
-            ) {
+            )
+            {
                 var staticBlockInfo = new StaticBlockInfo
                 {
                     NonGcStatics = computedStaticLayout.NonGcStatics,

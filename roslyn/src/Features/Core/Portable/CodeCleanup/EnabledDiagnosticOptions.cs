@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
             bool formatDocument,
             ImmutableArray<DiagnosticSet> diagnostics,
             OrganizeUsingsSet organizeUsings
-        ) {
+        )
+        {
             FormatDocument = formatDocument;
             Diagnostics = diagnostics;
             OrganizeUsings = organizeUsings;

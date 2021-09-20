@@ -17,7 +17,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             CORINFO_METHOD_STRUCT_* ftn
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -35,7 +36,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             CORINFO_METHOD_STRUCT_* ftn
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -54,7 +56,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             CORINFO_METHOD_STRUCT_* ftn,
             CorInfoMethodRuntimeFlags attribs
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -73,7 +76,8 @@ namespace Internal.JitInterface
             CORINFO_METHOD_STRUCT_* ftn,
             CORINFO_SIG_INFO* sig,
             CORINFO_CLASS_STRUCT_* memberParent
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -91,7 +95,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             CORINFO_METHOD_STRUCT_* ftn,
             CORINFO_METHOD_INFO* info
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -111,7 +116,8 @@ namespace Internal.JitInterface
             CORINFO_METHOD_STRUCT_* callerHnd,
             CORINFO_METHOD_STRUCT_* calleeHnd,
             uint* pRestrictions
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -132,7 +138,8 @@ namespace Internal.JitInterface
             CORINFO_METHOD_STRUCT_* inlineeHnd,
             CorInfoInline inlineResult,
             byte* reason
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -152,7 +159,8 @@ namespace Internal.JitInterface
             CORINFO_METHOD_STRUCT_* declaredCalleeHnd,
             CORINFO_METHOD_STRUCT_* exactCalleeHnd,
             byte fIsTailPrefix
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -181,7 +189,8 @@ namespace Internal.JitInterface
             byte fIsTailPrefix,
             CorInfoTailCall tailCallResult,
             byte* reason
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -206,7 +215,8 @@ namespace Internal.JitInterface
             CORINFO_METHOD_STRUCT_* ftn,
             uint EHnumber,
             CORINFO_EH_CLAUSE* clause
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -223,7 +233,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             CORINFO_METHOD_STRUCT_* method
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -241,7 +252,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             CORINFO_METHOD_STRUCT_* method
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -262,7 +274,8 @@ namespace Internal.JitInterface
             uint* offsetOfIndirection,
             uint* offsetAfterIndirection,
             bool* isRelative
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -284,7 +297,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             CORINFO_DEVIRTUALIZATION_INFO* info
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -303,7 +317,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             CORINFO_METHOD_STRUCT_* ftn,
             bool* requiresInstMethodTableArg
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -321,7 +336,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             CORINFO_CLASS_STRUCT_* elemType
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -339,7 +355,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             CORINFO_CLASS_STRUCT_* elemType
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -358,7 +375,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             CORINFO_RESOLVED_TOKEN* pResolvedToken,
             CORINFO_GENERICHANDLE_RESULT* pResult
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -376,7 +394,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             CORINFO_METHOD_STRUCT_* method,
             byte* pMustExpand
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -394,7 +413,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             CORINFO_CLASS_STRUCT_* classHnd
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -414,7 +434,8 @@ namespace Internal.JitInterface
             CORINFO_METHOD_STRUCT_* method,
             CORINFO_SIG_INFO* callSiteSig,
             bool* pSuppressGCTransition
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -433,7 +454,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             CORINFO_METHOD_STRUCT_* method,
             CORINFO_SIG_INFO* callSiteSig
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -452,7 +474,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             CORINFO_CLASS_STRUCT_* parent,
             CORINFO_METHOD_STRUCT_* method
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -474,7 +497,8 @@ namespace Internal.JitInterface
             CORINFO_METHOD_STRUCT_* method,
             CORINFO_CLASS_STRUCT_* delegateCls,
             bool* pfIsOpenDelegate
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -500,7 +524,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             CORINFO_METHOD_STRUCT_* method
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -517,7 +542,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             CORINFO_METHOD_STRUCT_* method
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -536,7 +562,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             IntPtr* pCookieVal,
             IntPtr** ppCookieVal
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -553,7 +580,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             PatchpointInfo* patchpointInfo
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -585,7 +613,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             CORINFO_RESOLVED_TOKEN* pResolvedToken
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -602,7 +631,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             CORINFO_RESOLVED_TOKEN* pResolvedToken
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -623,7 +653,8 @@ namespace Internal.JitInterface
             uint sigTOK,
             CORINFO_CONTEXT_STRUCT* context,
             CORINFO_SIG_INFO* sig
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -643,7 +674,8 @@ namespace Internal.JitInterface
             uint methTOK,
             CORINFO_CONTEXT_STRUCT* context,
             CORINFO_SIG_INFO* sig
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -660,7 +692,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             CORINFO_RESOLVED_TOKEN* pResolvedToken
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -679,7 +712,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             CORINFO_MODULE_STRUCT_* module,
             uint metaTOK
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -698,7 +732,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             CORINFO_MODULE_STRUCT_* module,
             uint metaTOK
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -718,7 +753,8 @@ namespace Internal.JitInterface
             CORINFO_MODULE_STRUCT_* module,
             uint metaTOK,
             int* length
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -736,7 +772,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             CORINFO_CLASS_STRUCT_* cls
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -754,7 +791,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             CORINFO_CLASS_STRUCT_* cls
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -773,7 +811,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             CORINFO_CLASS_STRUCT_* cls,
             byte** namespaceName
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -792,7 +831,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             CORINFO_CLASS_STRUCT_* cls,
             uint index
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -815,7 +855,8 @@ namespace Internal.JitInterface
             byte fNamespace,
             byte fFullInst,
             byte fAssembly
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -840,7 +881,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             CORINFO_CLASS_STRUCT_* cls
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -859,7 +901,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             CORINFO_CLASS_STRUCT_* cls,
             CorInfoInlineTypeCheckSource source
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -877,7 +920,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             CORINFO_CLASS_STRUCT_* cls
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -895,7 +939,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             CORINFO_CLASS_STRUCT_* cls
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -913,7 +958,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             CORINFO_CLASS_STRUCT_* cls
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -931,7 +977,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             CORINFO_MODULE_STRUCT_* mod
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -949,7 +996,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             CORINFO_ASSEMBLY_STRUCT_* assem
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -998,7 +1046,8 @@ namespace Internal.JitInterface
             CORINFO_CLASS_STRUCT_* cls,
             CORINFO_MODULE_STRUCT_** pModule,
             void** ppIndirection
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -1016,7 +1065,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             CORINFO_CLASS_STRUCT_* cls
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -1034,7 +1084,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             CORINFO_CLASS_STRUCT_* cls
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -1052,7 +1103,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             CORINFO_CLASS_STRUCT_* cls
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -1071,7 +1123,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             CORINFO_CLASS_STRUCT_* cls,
             byte fDoubleAlignHint
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -1090,7 +1143,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             CORINFO_CLASS_STRUCT_* cls,
             byte* gcPtrs
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -1108,7 +1162,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             CORINFO_CLASS_STRUCT_* cls
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -1127,7 +1182,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             CORINFO_CLASS_STRUCT_* clsHnd,
             int num
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -1147,7 +1203,8 @@ namespace Internal.JitInterface
             CORINFO_METHOD_STRUCT_* hMethod,
             byte* modifier,
             byte fOptional
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -1169,7 +1226,8 @@ namespace Internal.JitInterface
             CORINFO_RESOLVED_TOKEN* pResolvedToken,
             CORINFO_METHOD_STRUCT_* callerHandle,
             bool* pHasSideEffects
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -1187,7 +1245,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             CORINFO_CLASS_STRUCT_* arrayCls
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -1206,7 +1265,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             CORINFO_RESOLVED_TOKEN* pResolvedToken,
             byte fThrowing
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -1224,7 +1284,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             CORINFO_CLASS_STRUCT_* clsHnd
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -1242,7 +1303,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             CORINFO_CLASS_STRUCT_* cls
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -1260,7 +1322,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             CORINFO_CLASS_STRUCT_* cls
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -1278,7 +1341,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             CORINFO_CLASS_STRUCT_* cls
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -1299,7 +1363,8 @@ namespace Internal.JitInterface
             CORINFO_LOOKUP_KIND* pGenericLookupKind,
             CorInfoHelpFunc id,
             CORINFO_CONST_LOOKUP* pLookup
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -1326,7 +1391,8 @@ namespace Internal.JitInterface
             CORINFO_RESOLVED_TOKEN* pTargetMethod,
             CORINFO_CLASS_STRUCT_* delegateType,
             CORINFO_LOOKUP* pLookup
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -1347,7 +1413,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             CorInfoHelpFunc helpFunc
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -1367,7 +1434,8 @@ namespace Internal.JitInterface
             CORINFO_FIELD_STRUCT_* field,
             CORINFO_METHOD_STRUCT_* method,
             CORINFO_CONTEXT_STRUCT* context
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -1385,7 +1453,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             CORINFO_CLASS_STRUCT_* cls
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -1402,7 +1471,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             CorInfoClassId classId
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -1420,7 +1490,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             CORINFO_CLASS_STRUCT_* cls
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -1438,7 +1509,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             CORINFO_CLASS_STRUCT_* cls
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -1457,7 +1529,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             CORINFO_CLASS_STRUCT_* child,
             CORINFO_CLASS_STRUCT_* parent
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -1476,7 +1549,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             CORINFO_CLASS_STRUCT_* cls1,
             CORINFO_CLASS_STRUCT_* cls2
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -1495,7 +1569,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             CORINFO_CLASS_STRUCT_* fromClass,
             CORINFO_CLASS_STRUCT_* toClass
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -1514,7 +1589,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             CORINFO_CLASS_STRUCT_* cls1,
             CORINFO_CLASS_STRUCT_* cls2
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -1533,7 +1609,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             CORINFO_CLASS_STRUCT_* cls1,
             CORINFO_CLASS_STRUCT_* cls2
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -1552,7 +1629,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             CORINFO_CLASS_STRUCT_* cls1,
             CORINFO_CLASS_STRUCT_* cls2
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -1570,7 +1648,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             CORINFO_CLASS_STRUCT_* cls
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -1589,7 +1668,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             CORINFO_CLASS_STRUCT_* clsHnd,
             CORINFO_CLASS_STRUCT_** clsRet
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -1607,7 +1687,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             CORINFO_CLASS_STRUCT_* cls
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -1640,7 +1721,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             CORINFO_CLASS_STRUCT_* cls
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -1659,7 +1741,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             CORINFO_FIELD_STRUCT_* field,
             uint size
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -1679,7 +1762,8 @@ namespace Internal.JitInterface
             CORINFO_RESOLVED_TOKEN* pResolvedToken,
             CORINFO_METHOD_STRUCT_* callerHandle,
             CORINFO_HELPER_DESC* pAccessHelper
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -1698,7 +1782,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             CORINFO_FIELD_STRUCT_* ftn,
             byte** moduleName
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -1716,7 +1801,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             CORINFO_FIELD_STRUCT_* field
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -1736,7 +1822,8 @@ namespace Internal.JitInterface
             CORINFO_FIELD_STRUCT_* field,
             CORINFO_CLASS_STRUCT_** structType,
             CORINFO_CLASS_STRUCT_* memberParent
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -1754,7 +1841,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             CORINFO_FIELD_STRUCT_* field
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -1775,7 +1863,8 @@ namespace Internal.JitInterface
             CORINFO_METHOD_STRUCT_* callerHandle,
             CORINFO_ACCESS_FLAGS flags,
             CORINFO_FIELD_INFO* pResult
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -1792,7 +1881,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             CORINFO_FIELD_STRUCT_* fldHnd
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -1813,7 +1903,8 @@ namespace Internal.JitInterface
             uint* cILOffsets,
             uint** pILOffsets,
             BoundaryTypes* implictBoundaries
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -1832,7 +1923,8 @@ namespace Internal.JitInterface
             CORINFO_METHOD_STRUCT_* ftn,
             uint cMap,
             OffsetMapping* pMap
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -1852,7 +1944,8 @@ namespace Internal.JitInterface
             uint* cVars,
             ILVarInfo** vars,
             bool* extendOthers
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -1871,7 +1964,8 @@ namespace Internal.JitInterface
             CORINFO_METHOD_STRUCT_* ftn,
             uint cVars,
             NativeVarInfo* vars
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -1917,7 +2011,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             CORINFO_ARG_LIST_STRUCT_* args
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -1937,7 +2032,8 @@ namespace Internal.JitInterface
             CORINFO_SIG_INFO* sig,
             CORINFO_ARG_LIST_STRUCT_* args,
             CORINFO_CLASS_STRUCT_** vcTypeRet
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -1956,7 +2052,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             CORINFO_SIG_INFO* sig,
             CORINFO_ARG_LIST_STRUCT_* args
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -1974,7 +2071,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             CORINFO_CLASS_STRUCT_* hClass
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -1992,7 +2090,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             _EXCEPTION_POINTERS* pExceptionPointers
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -2011,7 +2110,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             char* buffer,
             uint bufferLength
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -2029,7 +2129,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             _EXCEPTION_POINTERS* pExceptionPointers
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -2047,7 +2148,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             _EXCEPTION_POINTERS* pExceptionPointers
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -2064,7 +2166,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             HRESULT result
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -2081,7 +2184,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             CORINFO_HELPER_DESC* throwHelper
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -2099,7 +2203,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             void* function,
             void* parameter
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -2146,7 +2251,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             CORINFO_METHOD_STRUCT_* hMethod
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -2165,7 +2271,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             CORINFO_METHOD_STRUCT_* ftn,
             byte** moduleName
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -2186,7 +2293,8 @@ namespace Internal.JitInterface
             byte** className,
             byte** namespaceName,
             byte** enclosingClassName
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -2209,7 +2317,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             CORINFO_METHOD_STRUCT_* ftn
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -2230,7 +2339,8 @@ namespace Internal.JitInterface
             mdToken token,
             byte* szFQName,
             UIntPtr FQNameCapacity
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -2249,7 +2359,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             CORINFO_CLASS_STRUCT_* structHnd,
             SYSTEMV_AMD64_CORINFO_STRUCT_REG_PASSING_DESCRIPTOR* structPassInRegDescPtr
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -2287,7 +2398,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             void** ppIndirection
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -2305,7 +2417,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             void** ppIndirection
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -2324,7 +2437,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             CorInfoHelpFunc ftnNum,
             void** ppIndirection
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -2344,7 +2458,8 @@ namespace Internal.JitInterface
             CORINFO_METHOD_STRUCT_* ftn,
             CORINFO_CONST_LOOKUP* pResult,
             CORINFO_ACCESS_FLAGS accessFlags
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -2362,7 +2477,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             CORINFO_METHOD_STRUCT_* ftn,
             CORINFO_CONST_LOOKUP* pResult
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -2380,7 +2496,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             CORINFO_METHOD_STRUCT_* ftn,
             void** ppIndirection
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -2398,7 +2515,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             CORINFO_MODULE_STRUCT_* handle
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -2417,7 +2535,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             CORINFO_MODULE_STRUCT_* handle,
             void** ppIndirection
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -2436,7 +2555,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             CORINFO_CLASS_STRUCT_* handle,
             void** ppIndirection
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -2455,7 +2575,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             CORINFO_METHOD_STRUCT_* handle,
             void** ppIndirection
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -2474,7 +2595,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             CORINFO_FIELD_STRUCT_* handle,
             void** ppIndirection
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -2494,7 +2616,8 @@ namespace Internal.JitInterface
             CORINFO_RESOLVED_TOKEN* pResolvedToken,
             byte fEmbedParent,
             CORINFO_GENERICHANDLE_RESULT* pResult
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -2512,7 +2635,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             CORINFO_METHOD_STRUCT_* context,
             CORINFO_LOOKUP_KIND* pLookupKind
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -2530,7 +2654,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             CORINFO_METHOD_STRUCT_* method,
             CORINFO_CONST_LOOKUP* pLookup
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -2548,7 +2673,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             CORINFO_SIG_INFO* szMetaSig,
             void** ppIndirection
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -2566,7 +2692,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             CORINFO_SIG_INFO* szMetaSig
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -2585,7 +2712,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             CORINFO_METHOD_STRUCT_* method,
             CORINFO_JUST_MY_CODE_HANDLE_** ppIndirection
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -2605,7 +2733,8 @@ namespace Internal.JitInterface
             bool* pbHookFunction,
             void** pProfilerHandle,
             bool* pbIndirectedHandles
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -2630,7 +2759,8 @@ namespace Internal.JitInterface
             CORINFO_METHOD_STRUCT_* callerHandle,
             CORINFO_CALLINFO_FLAGS flags,
             CORINFO_CALL_INFO* pResult
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -2654,7 +2784,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             CORINFO_METHOD_STRUCT_* hCaller,
             CORINFO_CLASS_STRUCT_* hInstanceType
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -2672,7 +2803,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             CORINFO_CLASS_STRUCT_* cls
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -2691,7 +2823,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             CORINFO_CLASS_STRUCT_* cls,
             void** ppIndirection
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -2710,7 +2843,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             CORINFO_FIELD_STRUCT_* field,
             void** ppIndirection
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -2729,7 +2863,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             CORINFO_FIELD_STRUCT_* field,
             byte* pIsSpeculative
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -2748,7 +2883,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             CORINFO_SIG_INFO* pSig,
             void** ppIndirection
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -2766,7 +2902,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             CORINFO_SIG_INFO* pSig
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -2786,7 +2923,8 @@ namespace Internal.JitInterface
             CORINFO_MODULE_STRUCT_* module,
             mdToken metaTok,
             void** ppValue
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -2804,7 +2942,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             void** ppValue
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -2823,7 +2962,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             CORINFO_FIELD_STRUCT_* field,
             void** ppIndirection
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -2842,7 +2982,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             IntPtr pOverride,
             CORINFO_METHOD_STRUCT_* currentMethod
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -2860,7 +3001,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             CORINFO_MODULE_STRUCT_* moduleFrom,
             CORINFO_MODULE_STRUCT_* moduleTo
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -2880,7 +3022,8 @@ namespace Internal.JitInterface
             CORINFO_CLASS_STRUCT_* clsHnd,
             CORINFO_METHOD_STRUCT_* targetMethodHnd,
             DelegateCtorArgs* pCtorData
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -2898,7 +3041,8 @@ namespace Internal.JitInterface
             IntPtr thisHandle,
             IntPtr* ppException,
             CORINFO_METHOD_STRUCT_* methHnd
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -2918,7 +3062,8 @@ namespace Internal.JitInterface
             CORINFO_SIG_INFO* sig,
             CORINFO_GET_TAILCALL_HELPERS_FLAGS flags,
             CORINFO_TAILCALL_HELPERS* pResult
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -2939,7 +3084,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             CORINFO_RESOLVED_TOKEN* pResolvedToken,
             byte mustConvert
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -2960,7 +3106,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             InstructionSet instructionSet,
             byte supportEnabled
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -2987,7 +3134,8 @@ namespace Internal.JitInterface
             void** hotCodeBlock,
             void** coldCodeBlock,
             void** roDataBlock
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -3015,7 +3163,8 @@ namespace Internal.JitInterface
             byte isFunclet,
             byte isColdCode,
             uint unwindSize
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -3038,7 +3187,8 @@ namespace Internal.JitInterface
             uint unwindSize,
             byte* pUnwindBlock,
             CorJitFuncKind funcKind
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -3093,7 +3243,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             uint EHnumber,
             CORINFO_EH_CLAUSE* clause
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -3112,7 +3263,8 @@ namespace Internal.JitInterface
             uint level,
             byte* fmt,
             IntPtr args
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -3132,7 +3284,8 @@ namespace Internal.JitInterface
             byte* szFile,
             int iLine,
             byte* szExpr
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -3167,7 +3320,8 @@ namespace Internal.JitInterface
             PgoInstrumentationSchema** pSchema,
             uint* pCountSchemaItems,
             byte** pInstrumentationData
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -3193,7 +3347,8 @@ namespace Internal.JitInterface
             PgoInstrumentationSchema* pSchema,
             uint countSchemaItems,
             byte** pInstrumentationData
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -3218,7 +3373,8 @@ namespace Internal.JitInterface
             uint instrOffset,
             CORINFO_SIG_INFO* callSig,
             CORINFO_METHOD_STRUCT_* methodHandle
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -3239,7 +3395,8 @@ namespace Internal.JitInterface
             ushort fRelocType,
             ushort slotNum,
             int addlDelta
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {
@@ -3287,7 +3444,8 @@ namespace Internal.JitInterface
             IntPtr* ppException,
             CORJIT_FLAGS* flags,
             uint sizeInBytes
-        ) {
+        )
+        {
             var _this = GetThis(thisHandle);
             try
             {

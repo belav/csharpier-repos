@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ChangeSignature
             int positionForTypeBinding,
             ISymbol symbol,
             ParameterConfiguration parameters
-        ) {
+        )
+        {
             var list = parameters.ToListOfParameters();
             var updateParameters =
                 UpdatedSignature != null

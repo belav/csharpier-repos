@@ -21,7 +21,8 @@ namespace NS.Module.CS01
             short p1,
             EventArgs p2 = null,
             string p3 = "Optional.String.Constant"
-        ) {
+        )
+        {
             return null;
         }
     }
@@ -57,7 +58,8 @@ namespace NS.Module.CS01
             short p1,
             EventArgs p2 = default(EventArgs),
             string p3 = "Override Optional.String"
-        ) {
+        )
+        {
             return null;
         }
     }

@@ -159,7 +159,8 @@ namespace Newtonsoft.Json.Serialization
                                 property.Required != Required.Default
                                 || (property.DefaultValueHandling & DefaultValueHandling.Populate)
                                     == DefaultValueHandling.Populate
-                            ) {
+                            )
+                            {
                                 _hasRequiredOrDefaultValueProperties = true;
                                 break;
                             }

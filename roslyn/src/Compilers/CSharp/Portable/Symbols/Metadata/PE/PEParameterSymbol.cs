@@ -174,7 +174,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             Symbol nullableContext,
             bool isReturn,
             out bool isBad
-        ) {
+        )
+        {
             return Create(
                 moduleSymbol,
                 containingSymbol,
@@ -211,7 +212,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             ParamInfo<TypeSymbol> parameterInfo,
             Symbol nullableContext,
             out bool isBad
-        ) {
+        )
+        {
             return Create(
                 moduleSymbol,
                 containingSymbol,
@@ -238,7 +240,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             Symbol nullableContext,
             int countOfCustomModifiers,
             out bool isBad
-        ) {
+        )
+        {
             Debug.Assert((object)moduleSymbol != null);
             Debug.Assert((object)containingSymbol != null);
             Debug.Assert(ordinal >= 0);
@@ -376,7 +379,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             ImmutableArray<ModifierInfo<TypeSymbol>> customModifiers,
             bool isReturn,
             out bool isBad
-        ) {
+        )
+        {
             // We start without annotation (they will be decoded below)
             var typeWithModifiers = TypeWithAnnotations.Create(
                 type,
@@ -443,17 +447,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 ParameterHandle handle,
                 Symbol nullableContext,
                 out bool isBad
-            ) : base(
-                moduleSymbol,
-                containingSymbol,
-                ordinal,
-                isByRef,
-                type,
-                handle,
-                nullableContext,
-                refCustomModifiers.NullToEmpty().Length + type.CustomModifiers.Length,
-                out isBad
-            ) {
+            )
+                : base(
+                    moduleSymbol,
+                    containingSymbol,
+                    ordinal,
+                    isByRef,
+                    type,
+                    handle,
+                    nullableContext,
+                    refCustomModifiers.NullToEmpty().Length + type.CustomModifiers.Length,
+                    out isBad
+                )
+            {
                 _refCustomModifiers = CSharpCustomModifier.Convert(refCustomModifiers);
 
                 Debug.Assert(_refCustomModifiers.IsEmpty || isByRef);
@@ -782,7 +788,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         private static FlowAnalysisAnnotations DecodeFlowAnalysisAttributes(
             PEModule module,
             ParameterHandle handle
-        ) {
+        )
+        {
             FlowAnalysisAnnotations annotations = FlowAnalysisAnnotations.None;
             if (module.HasAttribute(handle, AttributeDescription.AllowNullAttribute))
                 annotations |= FlowAnalysisAnnotations.AllowNull;
@@ -799,7 +806,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     AttributeDescription.MaybeNullWhenAttribute,
                     out bool when
                 )
-            ) {
+            )
+            {
                 annotations |= (
                     when
                         ? FlowAnalysisAnnotations.MaybeNullWhenTrue
@@ -817,7 +825,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     AttributeDescription.NotNullWhenAttribute,
                     out bool when
                 )
-            ) {
+            )
+            {
                 annotations |= (
                     when
                         ? FlowAnalysisAnnotations.NotNullWhenTrue
@@ -831,7 +840,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     AttributeDescription.DoesNotReturnIfAttribute,
                     out bool condition
                 )
-            ) {
+            )
+            {
                 annotations |= (
                     condition
                         ? FlowAnalysisAnnotations.DoesNotReturnIfTrue
@@ -971,7 +981,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     filterOutParamArrayAttribute
                     || filterOutConstantAttributeDescription.Signatures != null
                     || filterIsReadOnlyAttribute
-                ) {
+                )
+                {
                     CustomAttributeHandle paramArrayAttribute;
                     CustomAttributeHandle constantAttribute;
                     CustomAttributeHandle isReadOnlyAttribute;
@@ -1054,7 +1065,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
         internal override IEnumerable<CSharpAttributeData> GetCustomAttributesToEmit(
             PEModuleBuilder moduleBuilder
-        ) {
+        )
+        {
             foreach (CSharpAttributeData attribute in GetAttributes())
             {
                 yield return attribute;

@@ -42,7 +42,8 @@ namespace System.Globalization.Tests
             int minute,
             int second,
             int millisecond
-        ) {
+        )
+        {
             KoreanCalendar calendar = new KoreanCalendar();
             DateTime expected = new GregorianCalendar().ToDateTime(
                 year,

@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.AddImport
         protected AbstractAddImportCodeFixProvider(
             IPackageInstallerService packageInstallerService = null,
             ISymbolSearchService symbolSearchService = null
-        ) {
+        )
+        {
             _packageInstallerService = packageInstallerService;
             _symbolSearchService = symbolSearchService;
         }

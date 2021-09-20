@@ -55,7 +55,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                 && src.IsArray
                 && dest.GetArrayRank() == src.GetArrayRank()
                 && AreReferenceAssignable(dest.GetElementType(), src.GetElementType())
-            ) {
+            )
+            {
                 return true;
             }
             if (
@@ -69,7 +70,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                         == typeof(System.Collections.Generic.ICollection<>)
                 )
                 && dest.GetGenericArguments()[0] == src.GetElementType()
-            ) {
+            )
+            {
                 return true;
             }
             return false;
@@ -89,7 +91,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             Type source,
             Type destination,
             bool considerUserDefined
-        ) {
+        )
+        {
             return IsImplicitlyConvertible(source, destination)
                 || (
                     considerUserDefined
@@ -103,7 +106,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             Type convertFrom,
             Type convertToType,
             bool implicitOnly
-        ) {
+        )
+        {
             // check for implicit coercions first
             Type nnExprType = TypeUtils.GetNonNullableType(convertFrom);
             Type nnConvType = TypeUtils.GetNonNullableType(convertToType);
@@ -151,7 +155,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             Type typeFrom,
             Type typeTo,
             bool implicitOnly
-        ) {
+        )
+        {
             foreach (MethodInfo mi in methods)
             {
                 if (mi.Name != "op_Implicit" && (implicitOnly || mi.Name != "op_Explicit"))

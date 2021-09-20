@@ -17,7 +17,8 @@ namespace System.Composition.TypedParts.ActivationFeatures
             CompositeActivator activator,
             IDictionary<string, object> partMetadata,
             IEnumerable<CompositionDependency> dependencies
-        ) {
+        )
+        {
             if (!typeof(IDisposable).GetTypeInfo().IsAssignableFrom(partType))
                 return activator;
 

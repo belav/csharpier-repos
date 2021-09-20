@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.InlineTemporary
             Document document,
             TVariableDeclaratorSyntax variableDeclarator,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
             var local = semanticModel.GetDeclaredSymbol(variableDeclarator, cancellationToken);

@@ -36,7 +36,8 @@ public class Helper
         InnerSequential s1,
         InnerSequential s2,
         string methodName
-    ) {
+    )
+    {
         if (s1.f1 != s2.f1 || s1.f2 != s2.f2 || s1.f3 != s2.f3)
         {
             Console.WriteLine("\tFAILED! " + methodName + "did not receive result as expected.");
@@ -119,7 +120,8 @@ public class Helper
         InnerExplicit inner1,
         InnerExplicit inner2,
         string methodName
-    ) {
+    )
+    {
         if (inner1.f1 != inner2.f1 || inner1.f2 != inner2.f2 || inner1.f3 != inner2.f3)
         {
             Console.WriteLine("\tFAILED! " + methodName + "did not receive result as expected.");
@@ -171,14 +173,16 @@ public class Helper
         InnerArraySequential outer1,
         InnerArraySequential outer2,
         string methodName
-    ) {
+    )
+    {
         for (int i = 0; i < Common.NumArrElements; i++)
         {
             if (
                 outer1.arr[i].f1 != outer2.arr[i].f1
                 || outer1.arr[i].f2 != outer2.arr[i].f2
                 || outer1.arr[i].f3 != outer2.arr[i].f3
-            ) {
+            )
+            {
                 Console.WriteLine(
                     "\tFAILED! " + methodName + "did not receive result as expected."
                 );
@@ -264,7 +268,8 @@ public class Helper
         InnerArrayExplicit outer1,
         InnerArrayExplicit InnerArrayExplicit,
         string methodName
-    ) {
+    )
+    {
         for (int i = 0; i < Common.NumArrElements; i++)
         {
             if (outer1.arr[i].f1 != InnerArrayExplicit.arr[i].f1)
@@ -347,7 +352,8 @@ public class Helper
                 outer1.arr[i].f1 != InnerArrayExplicit.arr[i].f1
                 || outer1.arr[i].f2 != InnerArrayExplicit.arr[i].f2
                 || outer1.arr[i].f3 != InnerArrayExplicit.arr[i].f3
-            ) {
+            )
+            {
                 Console.WriteLine(
                     "\tFAILED! " + methodName + "did not receive result as expected."
                 );
@@ -434,7 +440,8 @@ public class Helper
         CharSetAnsiSequential str1,
         CharSetAnsiSequential str2,
         string methodName
-    ) {
+    )
+    {
         if (str1.f1 != str2.f1 || str1.f2 != str2.f2)
         {
             Console.WriteLine("\tFAILED! " + methodName + "did not receive result as expected.");
@@ -476,7 +483,8 @@ public class Helper
         CharSetUnicodeSequential str1,
         CharSetUnicodeSequential str2,
         string methodName
-    ) {
+    )
+    {
         if (str1.f1 != str2.f1 || str1.f2 != str2.f2)
         {
             Console.WriteLine("\tFAILED! " + methodName + "did not receive result as expected.");
@@ -510,7 +518,8 @@ public class Helper
         UInt64 ui64,
         Single sgl,
         Double d
-    ) {
+    )
+    {
         NumberSequential str1 = new NumberSequential();
         str1.i32 = i32;
         str1.ui32 = ui32;
@@ -547,7 +556,8 @@ public class Helper
         NumberSequential str1,
         NumberSequential str2,
         string methodName
-    ) {
+    )
+    {
         if (
             str1.i32 != str2.i32
             || str1.ui32 != str2.ui32
@@ -561,7 +571,8 @@ public class Helper
             || str1.ui64 != str2.ui64
             || str1.sgl != str2.sgl
             || str1.d != str2.d
-        ) {
+        )
+        {
             Console.WriteLine("\tFAILED! " + methodName + "did not receive result as expected.");
             Console.WriteLine("\tThe Actual is...");
             PrintNumberSequential(str1, str1.ToString());
@@ -705,7 +716,8 @@ public class Helper
     public static StringStructSequentialAnsi NewStringStructSequentialAnsi(
         string first,
         string last
-    ) {
+    )
+    {
         StringStructSequentialAnsi s6 = new StringStructSequentialAnsi();
         s6.first = first;
         s6.last = last;
@@ -723,7 +735,8 @@ public class Helper
         StringStructSequentialAnsi str1,
         StringStructSequentialAnsi str2,
         string methodName
-    ) {
+    )
+    {
         if (str1.first != str2.first || str1.last != str2.last)
         {
             Console.WriteLine("\tFAILED! " + methodName + "did not receive result as expected.");
@@ -747,7 +760,8 @@ public class Helper
     public static StringStructSequentialUnicode NewStringStructSequentialUnicode(
         string first,
         string last
-    ) {
+    )
+    {
         StringStructSequentialUnicode s7 = new StringStructSequentialUnicode();
         s7.first = first;
         s7.last = last;
@@ -758,7 +772,8 @@ public class Helper
     public static void PrintStringStructSequentialUnicode(
         StringStructSequentialUnicode str1,
         string name
-    ) {
+    )
+    {
         Console.WriteLine("\t{0}.first = {1}", name, str1.first);
         Console.WriteLine("\t{0}.last = {1}", name, str1.last);
     }
@@ -767,7 +782,8 @@ public class Helper
         StringStructSequentialUnicode str1,
         StringStructSequentialUnicode str2,
         string methodName
-    ) {
+    )
+    {
         if (str1.first != str2.first || str1.last != str2.last)
         {
             Console.WriteLine("\tFAILED! " + methodName + "did not receive result as expected.");
@@ -795,7 +811,8 @@ public class Helper
         int i32,
         uint ui32,
         sbyte mySByte
-    ) {
+    )
+    {
         S8 s8 = new S8();
         s8.name = name;
         s8.gender = gender;
@@ -825,7 +842,8 @@ public class Helper
             || str1.i32 != str2.i32
             || str1.ui32 != str2.ui32
             || str1.mySByte != str2.mySByte
-        ) {
+        )
+        {
             Console.WriteLine("\tFAILED! " + methodName + "did not receive result as expected.");
             Console.WriteLine("\tThe Actual is...");
             PrintS8(str1, str1.ToString());
@@ -873,7 +891,8 @@ public class Helper
     public static IncludeOuterIntergerStructSequential NewIncludeOuterIntergerStructSequential(
         int i321,
         int i322
-    ) {
+    )
+    {
         IncludeOuterIntergerStructSequential s10 = new IncludeOuterIntergerStructSequential();
         s10.s.s_int.i = i321;
         s10.s.i = i322;
@@ -883,7 +902,8 @@ public class Helper
     public static void PrintIncludeOuterIntergerStructSequential(
         IncludeOuterIntergerStructSequential str1,
         string name
-    ) {
+    )
+    {
         Console.WriteLine("\t{0}.s.s_int.i = {1}", name, str1.s.s_int.i);
         Console.WriteLine("\t{0}.s.i = {1}", name, str1.s.i);
     }
@@ -892,7 +912,8 @@ public class Helper
         IncludeOuterIntergerStructSequential str1,
         IncludeOuterIntergerStructSequential str2,
         string methodName
-    ) {
+    )
+    {
         if (str1.s.s_int.i != str2.s.s_int.i || str1.s.i != str2.s.i)
         {
             Console.WriteLine("\tFAILED! " + methodName + "did not receive result as expected.");
@@ -959,7 +980,8 @@ public class Helper
         ulong ul,
         float f,
         double d
-    ) {
+    )
+    {
         U u = new U();
         u.i32 = i32;
         u.ui32 = ui32;
@@ -1008,7 +1030,8 @@ public class Helper
             || str1.ul != str2.ul
             || str1.f != str2.f
             || str1.d != str2.d
-        ) {
+        )
+        {
             Console.WriteLine("\tFAILED! " + methodName + "did not receive result as expected.");
             Console.WriteLine("\tThe Actual is...");
             PrintU(str1, str1.ToString());
@@ -1043,7 +1066,8 @@ public class Helper
         ByteStructPack2Explicit str1,
         ByteStructPack2Explicit str2,
         string methodName
-    ) {
+    )
+    {
         if (str1.b1 != str2.b1 || str1.b2 != str2.b2)
         {
             Console.WriteLine("\tFAILED! " + methodName + "did not receive result as expected.");
@@ -1083,7 +1107,8 @@ public class Helper
         ShortStructPack4Explicit str1,
         ShortStructPack4Explicit str2,
         string methodName
-    ) {
+    )
+    {
         if (str1.s1 != str2.s1 || str1.s2 != str2.s2)
         {
             Console.WriteLine("\tFAILED! " + methodName + "did not receive result as expected.");
@@ -1123,7 +1148,8 @@ public class Helper
         IntStructPack8Explicit str1,
         IntStructPack8Explicit str2,
         string methodName
-    ) {
+    )
+    {
         if (str1.i1 != str2.i1 || str1.i2 != str2.i2)
         {
             Console.WriteLine("\tFAILED! " + methodName + "did not receive result as expected.");
@@ -1163,7 +1189,8 @@ public class Helper
         LongStructPack16Explicit str1,
         LongStructPack16Explicit str2,
         string methodName
-    ) {
+    )
+    {
         if (str1.l1 != str2.l1 || str1.l2 != str2.l2)
         {
             Console.WriteLine("\tFAILED! " + methodName + "did not receive result as expected.");
@@ -1202,7 +1229,8 @@ public class Helper
         ByteStruct3Byte str1,
         ByteStruct3Byte str2,
         string methodName
-    ) {
+    )
+    {
         if (str1.b1 != str2.b1 || str1.b2 != str2.b2)
         {
             Console.WriteLine("\tFAILED! " + methodName + "did not receive result as expected.");
@@ -1236,7 +1264,8 @@ public class Helper
         IntergerStructSequential str1,
         IntergerStructSequential str2,
         string methodName
-    ) {
+    )
+    {
         if (str1.i != str2.i)
         {
             Console.WriteLine("\tFAILED! " + methodName + "did not receive result as expected.");

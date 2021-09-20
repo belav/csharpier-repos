@@ -16,7 +16,8 @@ internal class MyResolver : DataContractResolver
         string typeNamespace,
         Type declaredType,
         DataContractResolver knownTypeResolver
-    ) {
+    )
+    {
         ResolveNameInvoked = true;
         DeclaredTypeIsNotNull = declaredType != null;
         return knownTypeResolver.ResolveName(typeName, typeNamespace, declaredType, null);
@@ -28,7 +29,8 @@ internal class MyResolver : DataContractResolver
         DataContractResolver knownTypeResolver,
         out XmlDictionaryString typeName,
         out XmlDictionaryString typeNamespace
-    ) {
+    )
+    {
         TryResolveTypeInvoked = true;
         return knownTypeResolver.TryResolveType(
             type,

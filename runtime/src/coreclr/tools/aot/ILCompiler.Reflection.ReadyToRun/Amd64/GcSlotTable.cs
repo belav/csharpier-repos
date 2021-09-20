@@ -26,7 +26,8 @@ namespace ILCompiler.Reflection.ReadyToRun.Amd64
                 GcStackSlot stack,
                 GcSlotFlags flags,
                 bool isUntracked = false
-            ) {
+            )
+            {
                 Index = index;
                 RegisterNumber = registerNumber;
                 StackSlot = stack;
@@ -41,7 +42,8 @@ namespace ILCompiler.Reflection.ReadyToRun.Amd64
                 StringBuilder sb,
                 Machine machine,
                 GcSlotFlags prevFlags
-            ) {
+            )
+            {
                 if (prevFlags != Flags)
                 {
                     sb.Append(Flags.ToString());
@@ -110,7 +112,8 @@ namespace ILCompiler.Reflection.ReadyToRun.Amd64
             Machine machine,
             GcInfoTypes gcInfoTypes,
             ref int bitOffset
-        ) {
+        )
+        {
             _machine = machine;
 
             if (NativeReader.ReadBits(image, 1, ref bitOffset) != 0)
@@ -212,7 +215,8 @@ namespace ILCompiler.Reflection.ReadyToRun.Amd64
             uint nSlots,
             bool isUntracked,
             ref int bitOffset
-        ) {
+        )
+        {
             // We have stack slots left and more room to predecode
             GcStackSlotBase spBase = (GcStackSlotBase)NativeReader.ReadBits(
                 image,

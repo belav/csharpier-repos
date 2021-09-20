@@ -52,7 +52,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             SemanticModel semanticModel,
             int position,
             IDocumentationCommentFormattingService formatter
-        ) {
+        )
+        {
             return new SignatureHelpSymbolParameter(
                 parameter.Name,
                 parameter.IsOptional,

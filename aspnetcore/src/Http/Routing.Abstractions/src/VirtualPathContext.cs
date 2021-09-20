@@ -34,7 +34,8 @@ namespace Microsoft.AspNetCore.Routing
             RouteValueDictionary ambientValues,
             RouteValueDictionary values,
             string? routeName
-        ) {
+        )
+        {
             HttpContext = httpContext;
             AmbientValues = ambientValues;
             Values = values;

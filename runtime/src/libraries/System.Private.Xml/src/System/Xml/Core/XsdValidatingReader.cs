@@ -132,7 +132,8 @@ namespace System.Xml
             XmlResolver? xmlResolver,
             XmlReaderSettings readerSettings,
             XmlSchemaObject? partialValidationType
-        ) {
+        )
+        {
             _coreReader = reader;
             _coreReaderNSResolver = reader as IXmlNamespaceResolver;
             _lineInfo = reader as IXmlLineInfo;
@@ -182,7 +183,8 @@ namespace System.Xml
             XmlReaderSettings readerSettings,
             XmlReader reader,
             XmlSchemaObject? partialValidationType
-        ) {
+        )
+        {
             _validator = new XmlSchemaValidator(
                 _coreReaderNameTable,
                 readerSettings.Schemas,
@@ -249,7 +251,8 @@ namespace System.Xml
                             _validator.CurrentContentType == XmlSchemaContentType.TextOnly
                             || _validator.CurrentContentType == XmlSchemaContentType.Mixed
                         )
-                    ) {
+                    )
+                    {
                         return XmlNodeType.SignificantWhitespace;
                     }
 
@@ -439,7 +442,8 @@ namespace System.Xml
                         if (
                             _attributePSVI != null
                             && AttributeSchemaInfo.ContentType == XmlSchemaContentType.TextOnly
-                        ) {
+                        )
+                        {
                             Debug.Assert(AttributeSchemaInfo.SchemaType!.Datatype != null);
                             return AttributeSchemaInfo.SchemaType.Datatype.ValueType;
                         }
@@ -867,7 +871,8 @@ namespace System.Xml
         public override object ReadContentAs(
             Type returnType,
             IXmlNamespaceResolver? namespaceResolver
-        ) {
+        )
+        {
             if (!CanReadContentAs(this.NodeType))
             {
                 throw CreateReadContentAsException(nameof(ReadContentAs));
@@ -886,7 +891,8 @@ namespace System.Xml
                     if (
                         returnType == typeof(DateTimeOffset)
                         && xmlType.Datatype is Datatype_dateTimeBase
-                    ) {
+                    )
+                    {
                         typedValue = originalStringValue!;
                     }
 
@@ -1344,7 +1350,8 @@ namespace System.Xml
         public override object ReadElementContentAs(
             Type returnType,
             IXmlNamespaceResolver namespaceResolver
-        ) {
+        )
+        {
             if (this.NodeType != XmlNodeType.Element)
             {
                 throw CreateReadElementContentAsException(nameof(ReadElementContentAs));
@@ -1367,7 +1374,8 @@ namespace System.Xml
                     if (
                         returnType == typeof(DateTimeOffset)
                         && xmlType.Datatype is Datatype_dateTimeBase
-                    ) {
+                    )
+                    {
                         typedValue = originalStringValue;
                     }
 
@@ -1840,7 +1848,8 @@ namespace System.Xml
                     if (
                         (_xmlSchemaInfo.IsUnionType || _xmlSchemaInfo.IsDefault)
                         && _coreReader is XsdCachingReader
-                    ) {
+                    )
+                    {
                         callSkipToEndElem = false;
                     }
 
@@ -2242,7 +2251,8 @@ namespace System.Xml
         //
         IDictionary<string, string> IXmlNamespaceResolver.GetNamespacesInScope(
             XmlNamespaceScope scope
-        ) {
+        )
+        {
             if (_coreReaderNSResolver != null)
             {
                 return _coreReaderNSResolver.GetNamespacesInScope(scope);
@@ -2368,7 +2378,8 @@ namespace System.Xml
                 _processInlineSchema
                 && IsXSDRoot(_coreReader.LocalName, _coreReader.NamespaceURI)
                 && _coreReader.Depth > 0
-            ) {
+            )
+            {
                 _xmlSchemaInfo.Clear();
                 _attributeCount = _coreReaderAttributeCount = _coreReader.AttributeCount;
                 if (!_coreReader.IsEmptyElement)
@@ -2601,7 +2612,8 @@ namespace System.Xml
                     if (
                         Ref.Equal(localName, attInfo.localName)
                         && Ref.Equal(ns, attInfo.namespaceUri)
-                    ) {
+                    )
+                    {
                         _currentAttrIndex = i;
                         return attInfo;
                     }
@@ -2637,7 +2649,8 @@ namespace System.Xml
             string attrLocalName,
             string ns,
             bool updatePosition
-        ) {
+        )
+        {
             Debug.Assert(_coreReaderNameTable.Get(attrLocalName) != null);
             Debug.Assert(_coreReaderNameTable.Get(ns) != null);
             ValidatingReaderNodeData? defaultNode = null;
@@ -2648,7 +2661,8 @@ namespace System.Xml
                 if (
                     Ref.Equal(defaultNode.LocalName, attrLocalName)
                     && Ref.Equal(defaultNode.Namespace, ns)
-                ) {
+                )
+                {
                     if (updatePosition)
                     {
                         _currentAttrIndex = _coreReader.AttributeCount + i;
@@ -2735,7 +2749,8 @@ namespace System.Xml
         private object InternalReadContentAsObject(
             bool unwrapTypedValue,
             out string originalStringValue
-        ) {
+        )
+        {
             XmlNodeType nodeType = this.NodeType;
             if (nodeType == XmlNodeType.Attribute)
             {
@@ -2818,7 +2833,8 @@ namespace System.Xml
         private object? InternalReadElementContentAsObject(
             out XmlSchemaType? xmlType,
             bool unwrapTypedValue
-        ) {
+        )
+        {
             return InternalReadElementContentAsObject(out xmlType, unwrapTypedValue, out _);
         }
 
@@ -2826,7 +2842,8 @@ namespace System.Xml
             out XmlSchemaType? xmlType,
             bool unwrapTypedValue,
             out string? originalString
-        ) {
+        )
+        {
             Debug.Assert(this.NodeType == XmlNodeType.Element);
             object? typedValue = null;
             xmlType = null;

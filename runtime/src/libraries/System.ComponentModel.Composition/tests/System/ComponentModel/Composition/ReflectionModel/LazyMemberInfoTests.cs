@@ -17,7 +17,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
         {
             foreach (
                 var memberAndAccessorsInfo in GetMembersAndAccessors(typeof(LazyMemberTestClass))
-            ) {
+            )
+            {
                 MemberInfo member = memberAndAccessorsInfo.Item1;
                 MemberTypes memberType = memberAndAccessorsInfo.Item2.Item1;
                 MemberInfo[] accessors = memberAndAccessorsInfo.Item2.Item2;
@@ -46,7 +47,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
         {
             foreach (
                 var memberAndAccessorsInfo in GetMembersAndAccessors(typeof(LazyMemberTestClass))
-            ) {
+            )
+            {
                 MemberInfo member = memberAndAccessorsInfo.Item1;
                 MemberTypes memberType = memberAndAccessorsInfo.Item2.Item1;
                 MemberInfo[] accessors = memberAndAccessorsInfo.Item2.Item2;
@@ -63,7 +65,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
         {
             foreach (
                 var memberAndAccessorsInfo in GetMembersAndAccessors(typeof(LazyMemberTestClass))
-            ) {
+            )
+            {
                 MemberInfo member = memberAndAccessorsInfo.Item1;
                 MemberTypes memberType = memberAndAccessorsInfo.Item2.Item1;
                 MemberInfo[] accessors = memberAndAccessorsInfo.Item2.Item2;
@@ -139,7 +142,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
         {
             foreach (
                 var memberAndAccessorsInfo in GetMembersAndAccessors(typeof(LazyMemberTestClass))
-            ) {
+            )
+            {
                 MemberInfo member = memberAndAccessorsInfo.Item1;
                 MemberTypes memberType = memberAndAccessorsInfo.Item2.Item1;
                 MemberInfo[] accessors = memberAndAccessorsInfo.Item2.Item2;
@@ -156,7 +160,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
         {
             foreach (
                 var memberAndAccessorsInfo in GetMembersAndAccessors(typeof(LazyMemberTestClass))
-            ) {
+            )
+            {
                 MemberInfo member = memberAndAccessorsInfo.Item1;
                 MemberTypes memberType = memberAndAccessorsInfo.Item2.Item1;
                 MemberInfo[] accessors = memberAndAccessorsInfo.Item2.Item2;

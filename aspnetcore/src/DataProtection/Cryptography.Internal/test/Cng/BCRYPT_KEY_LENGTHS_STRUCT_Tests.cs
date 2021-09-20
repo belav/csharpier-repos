@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Cryptography.Cng
             int maxLength,
             int increment,
             int testValue
-        ) {
+        )
+        {
             // Arrange
             var keyLengthsStruct = new BCRYPT_KEY_LENGTHS_STRUCT
             {
@@ -46,7 +47,8 @@ namespace Microsoft.AspNetCore.Cryptography.Cng
             int maxLength,
             int increment,
             int testValue
-        ) {
+        )
+        {
             // Arrange
             var keyLengthsStruct = new BCRYPT_KEY_LENGTHS_STRUCT
             {

@@ -85,7 +85,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             int indentation,
             bool useTriviaAsItIs,
             bool elastic
-        ) {
+        )
+        {
             Contract.ThrowIfFalse(lineBreaks >= 0);
             Contract.ThrowIfFalse(indentation >= 0);
 

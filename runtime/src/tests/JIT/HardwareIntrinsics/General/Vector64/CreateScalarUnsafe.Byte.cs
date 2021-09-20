@@ -70,7 +70,8 @@ namespace JIT.HardwareIntrinsics.General
             Vector64<Byte> result,
             Byte expectedValue,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Byte[] resultElements = new Byte[ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<Byte, byte>(ref resultElements[0]), result);
             ValidateResult(resultElements, expectedValue, method);
@@ -80,7 +81,8 @@ namespace JIT.HardwareIntrinsics.General
             Byte[] resultElements,
             Byte expectedValue,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (resultElements[0] != expectedValue)
@@ -93,7 +95,8 @@ namespace JIT.HardwareIntrinsics.General
                 {
                     if (
                         false /* value is uninitialized */
-                    ) {
+                    )
+                    {
                         succeeded = false;
                         break;
                     }

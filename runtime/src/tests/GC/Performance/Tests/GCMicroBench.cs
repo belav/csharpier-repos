@@ -155,7 +155,8 @@ namespace GC_Microbenchmarks
                     if (
                         (!Int64.TryParse(args[i].Substring(AmountParam.Length), out m_amount))
                         || (m_amount <= 0)
-                    ) {
+                    )
+                    {
                         Console.WriteLine("amount must be greater than 0");
                         return false;
                     }
@@ -163,7 +164,8 @@ namespace GC_Microbenchmarks
                     if (
                         (m_allocCondition == AllocationCondition.HeapSize)
                         && (m_amount <= GC.GetTotalMemory(false))
-                    ) {
+                    )
+                    {
                         Console.WriteLine("amount must be greater than current heap size");
                         return false;
                     }

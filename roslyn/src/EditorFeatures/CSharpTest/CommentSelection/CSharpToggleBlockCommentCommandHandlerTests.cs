@@ -228,7 +228,8 @@ class C
 
         internal override AbstractCommentSelectionBase<ValueTuple> GetToggleCommentCommandHandler(
             TestWorkspace workspace
-        ) {
+        )
+        {
             return (AbstractCommentSelectionBase<ValueTuple>)workspace.ExportProvider.GetExportedValues<ICommandHandler>()
                 .First(
                     export =>

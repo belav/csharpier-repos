@@ -72,7 +72,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     out var memberInfo,
                     out var errorMessage
                 )
-            ) {
+            )
+            {
                 return memberInfo!;
             }
 

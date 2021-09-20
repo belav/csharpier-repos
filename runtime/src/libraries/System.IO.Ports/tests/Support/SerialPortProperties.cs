@@ -193,7 +193,8 @@ namespace Legacy.Support
                                     == Handshake.RequestToSendXOnXOff
                             )
                         )
-                    ) {
+                    )
+                    {
                         continue;
                     }
 

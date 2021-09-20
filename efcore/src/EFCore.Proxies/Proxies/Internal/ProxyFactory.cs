@@ -39,7 +39,8 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
             DbContext context,
             Type type,
             params object[] constructorArguments
-        ) {
+        )
+        {
             var entityType = context.Model.FindRuntimeEntityType(type);
             if (entityType == null)
             {
@@ -85,7 +86,8 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
             IEntityType entityType,
             ILazyLoader loader,
             object[] constructorArguments
-        ) {
+        )
+        {
             var options = context.GetService<IDbContextOptions>()
                 .FindExtension<ProxiesOptionsExtension>();
             if (options == null)
@@ -129,7 +131,8 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
             DbContext context,
             IEntityType entityType,
             object[] constructorArguments
-        ) {
+        )
+        {
             var options = context.GetService<IDbContextOptions>()
                 .FindExtension<ProxiesOptionsExtension>();
             if (options == null)
@@ -192,7 +195,8 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
             ProxiesOptionsExtension options,
             IEntityType entityType,
             LazyLoadingInterceptor? lazyLoadingInterceptor = null
-        ) {
+        )
+        {
             var interceptors = new List<IInterceptor>();
 
             if (lazyLoadingInterceptor != null)

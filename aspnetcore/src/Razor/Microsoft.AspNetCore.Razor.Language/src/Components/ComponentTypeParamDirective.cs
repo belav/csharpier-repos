@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public static RazorProjectEngineBuilder Register(
             RazorProjectEngineBuilder builder,
             bool supportConstraints
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));

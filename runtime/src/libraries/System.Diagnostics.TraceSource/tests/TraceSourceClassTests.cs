@@ -117,7 +117,8 @@ namespace System.Diagnostics.TraceSourceTests
             SourceLevels sourceLevel,
             TraceEventType messageLevel,
             int expected
-        ) {
+        )
+        {
             var trace = new TraceSource("TestTraceSource");
             var listener = new TestTraceListener();
             trace.Listeners.Add(listener);

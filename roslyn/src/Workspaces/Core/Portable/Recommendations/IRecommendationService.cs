@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.Recommendations
         public RecommendedSymbols(
             ImmutableArray<ISymbol> namedSymbols,
             ImmutableArray<ISymbol> unnamedSymbols = default
-        ) {
+        )
+        {
             _namedSymbols = namedSymbols;
             _unnamedSymbols = unnamedSymbols;
         }

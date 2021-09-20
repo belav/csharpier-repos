@@ -59,7 +59,8 @@ namespace Microsoft.EntityFrameworkCore
                 protected override void OnModelCreating(
                     ModelBuilder modelBuilder,
                     DbContext context
-                ) {
+                )
+                {
                     modelBuilder.UseIdentityColumns();
 
                     base.OnModelCreating(modelBuilder, context);
@@ -70,9 +71,8 @@ namespace Microsoft.EntityFrameworkCore
         public class ChangeTracking
             : ProxyGraphUpdatesSqlServerTestBase<ChangeTracking.ProxyGraphUpdatesWithChangeTrackingSqlServerFixture>
         {
-            public ChangeTracking(
-                ProxyGraphUpdatesWithChangeTrackingSqlServerFixture fixture
-            ) : base(fixture) { }
+            public ChangeTracking(ProxyGraphUpdatesWithChangeTrackingSqlServerFixture fixture)
+                : base(fixture) { }
 
             protected override bool DoesLazyLoading => false;
 
@@ -95,7 +95,8 @@ namespace Microsoft.EntityFrameworkCore
                 protected override void OnModelCreating(
                     ModelBuilder modelBuilder,
                     DbContext context
-                ) {
+                )
+                {
                     modelBuilder.UseIdentityColumns();
 
                     base.OnModelCreating(modelBuilder, context);
@@ -131,7 +132,8 @@ namespace Microsoft.EntityFrameworkCore
                 protected override void OnModelCreating(
                     ModelBuilder modelBuilder,
                     DbContext context
-                ) {
+                )
+                {
                     modelBuilder.UseIdentityColumns();
 
                     base.OnModelCreating(modelBuilder, context);

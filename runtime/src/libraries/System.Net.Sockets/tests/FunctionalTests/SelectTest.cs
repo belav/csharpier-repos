@@ -96,7 +96,8 @@ namespace System.Net.Sockets.Tests
         public void Select_SocketAlreadyClosed_AllSocketsClosableAfterException(
             int socketsPerType,
             int indexToDispose
-        ) {
+        )
+        {
             KeyValuePair<Socket, Socket>[] socketPairs = Enumerable.Range(0, socketsPerType * 3)
                 .Select(_ => CreateConnectedSockets())
                 .ToArray();
@@ -301,7 +302,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 listener.LingerState = new LingerOption(true, 0);
                 listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listener.Listen(1);
@@ -343,7 +345,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 int port = listenSocket.BindToAnonymousPort(IPAddress.Loopback);
 
                 listenSocket.Blocking = false;
@@ -367,7 +370,8 @@ namespace System.Net.Sockets.Tests
                             SocketType.Stream,
                             ProtocolType.Tcp
                         )
-                    ) {
+                    )
+                    {
                         connectSocket.Connect(listenSocket.LocalEndPoint);
                     }
                 }

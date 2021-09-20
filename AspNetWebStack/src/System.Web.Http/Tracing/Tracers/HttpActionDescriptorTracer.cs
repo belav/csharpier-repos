@@ -81,7 +81,8 @@ namespace System.Web.Http.Tracing.Tracers
             HttpControllerContext controllerContext,
             IDictionary<string, object> arguments,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _traceWriter.TraceBeginEndAsync<object>(
                 controllerContext.Request,
                 TraceCategories.ActionCategory,

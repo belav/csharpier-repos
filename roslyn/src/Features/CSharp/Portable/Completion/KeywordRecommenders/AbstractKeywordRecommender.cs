@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             int position,
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return context.IsGlobalStatementContext
                 || context.IsMemberDeclarationContext(
                     validModifiers: s_validMemberModifiers,

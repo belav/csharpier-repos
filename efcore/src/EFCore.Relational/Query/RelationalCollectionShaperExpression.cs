@@ -41,18 +41,19 @@ namespace Microsoft.EntityFrameworkCore.Query
             Expression innerShaper,
             INavigation? navigation,
             Type elementType
-        ) : this(
-            collectionId,
-            parentIdentifier,
-            outerIdentifier,
-            selfIdentifier,
-            null,
-            null,
-            null,
-            innerShaper,
-            navigation,
-            elementType
-        ) { }
+        )
+            : this(
+                collectionId,
+                parentIdentifier,
+                outerIdentifier,
+                selfIdentifier,
+                null,
+                null,
+                null,
+                innerShaper,
+                navigation,
+                elementType
+            ) { }
 
         /// <summary>
         ///     Creates a new instance of the <see cref="RelationalCollectionShaperExpression" /> class.
@@ -78,7 +79,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Expression innerShaper,
             INavigationBase? navigation,
             Type elementType
-        ) {
+        )
+        {
             Check.NotNull(parentIdentifier, nameof(parentIdentifier));
             Check.NotNull(outerIdentifier, nameof(outerIdentifier));
             Check.NotNull(selfIdentifier, nameof(selfIdentifier));
@@ -181,7 +183,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Expression outerIdentifier,
             Expression selfIdentifier,
             Expression innerShaper
-        ) {
+        )
+        {
             Check.NotNull(parentIdentifier, nameof(parentIdentifier));
             Check.NotNull(outerIdentifier, nameof(outerIdentifier));
             Check.NotNull(selfIdentifier, nameof(selfIdentifier));

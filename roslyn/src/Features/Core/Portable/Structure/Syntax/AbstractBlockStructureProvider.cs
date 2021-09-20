@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.Structure
                 int,
                 ImmutableArray<AbstractSyntaxStructureProvider>
             > defaultTriviaOutlinerMap
-        ) {
+        )
+        {
             _nodeProviderMap = defaultNodeOutlinerMap;
             _triviaProviderMap = defaultTriviaOutlinerMap;
         }
@@ -80,7 +81,8 @@ namespace Microsoft.CodeAnalysis.Structure
         private void ProvideBlockStructureWorker(
             BlockStructureContext context,
             SyntaxNode syntaxRoot
-        ) {
+        )
+        {
             using var spans = TemporaryArray<BlockSpan>.Empty;
             BlockSpanCollector.CollectBlockSpans(
                 syntaxRoot,

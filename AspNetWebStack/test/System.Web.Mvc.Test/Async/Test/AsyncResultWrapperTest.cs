@@ -604,7 +604,8 @@ namespace System.Web.Mvc.Async.Test
                 ManualResetEvent waitHandle = new ManualResetEvent(
                     false /* initialState */
                 )
-            ) {
+            )
+            {
                 AsyncCallback callback = ar =>
                 {
                     waitHandle.Set();

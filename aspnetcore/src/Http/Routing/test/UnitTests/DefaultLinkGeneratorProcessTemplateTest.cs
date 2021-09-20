@@ -46,7 +46,8 @@ namespace Microsoft.AspNetCore.Routing
         public void TryProcessTemplate_EncodesValue_OfSingleAsteriskCatchAllParameter(
             string routeValue,
             string expected
-        ) {
+        )
+        {
             // Arrange
             var endpoint = EndpointFactory.CreateRouteEndpoint("{controller}/{action}/{*path}");
             var linkGenerator = CreateLinkGenerator(endpoint);
@@ -83,7 +84,8 @@ namespace Microsoft.AspNetCore.Routing
         public void TryProcessTemplate_DoesNotEncodeSlashes_OfDoubleAsteriskCatchAllParameter(
             string routeValue,
             string expected
-        ) {
+        )
+        {
             // Arrange
             var endpoint = EndpointFactory.CreateRouteEndpoint("{controller}/{action}/{**path}");
             var linkGenerator = CreateLinkGenerator(endpoint);
@@ -1077,7 +1079,8 @@ namespace Microsoft.AspNetCore.Routing
         [InlineData(false)]
         public void TryProcessTemplate_InlineConstraints_OptionalParameter_ValuePresent(
             bool hasHttpContext
-        ) {
+        )
+        {
             // Arrange
             var endpoint = EndpointFactory.CreateRouteEndpoint(
                 template: "Home/Index/{id:int?}",
@@ -1166,7 +1169,8 @@ namespace Microsoft.AspNetCore.Routing
         [InlineData(false)]
         public void TryProcessTemplate_InlineConstraints_MultipleInlineConstraints(
             bool hasHttpContext
-        ) {
+        )
+        {
             // Arrange
             var endpoint = EndpointFactory.CreateRouteEndpoint(
                 template: "Home/Index/{id:int:range(1,20)}",
@@ -1199,7 +1203,8 @@ namespace Microsoft.AspNetCore.Routing
         [InlineData(false)]
         public void TryProcessTemplate_InlineConstraints_CompositeInlineConstraint_Fails(
             bool hasHttpContext
-        ) {
+        )
+        {
             // Arrange
             var endpoint = EndpointFactory.CreateRouteEndpoint(
                 template: "Home/Index/{id:int:range(1,20)}",
@@ -1700,7 +1705,8 @@ namespace Microsoft.AspNetCore.Routing
             object explicitValues,
             object requiredValues,
             object defaults
-        ) {
+        )
+        {
             // Arrange
             var endpoint = EndpointFactory.CreateRouteEndpoint(
                 "Products/Edit/{id}",
@@ -1967,7 +1973,8 @@ namespace Microsoft.AspNetCore.Routing
             object explicitValues,
             object requiredValues,
             object defaults
-        ) {
+        )
+        {
             // Linking to a different action on the same controller
 
             // Arrange

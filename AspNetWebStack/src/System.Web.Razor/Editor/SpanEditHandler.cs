@@ -30,7 +30,8 @@ namespace System.Web.Razor.Editor
         public SpanEditHandler(
             Func<string, IEnumerable<ISymbol>> tokenizer,
             AcceptedCharacters accepted
-        ) {
+        )
+        {
             AcceptedCharacters = accepted;
             Tokenizer = tokenizer;
         }
@@ -100,7 +101,8 @@ namespace System.Web.Razor.Editor
         protected virtual PartialParseResult CanAcceptChange(
             Span target,
             TextChange normalizedChange
-        ) {
+        )
+        {
             return PartialParseResult.Rejected;
         }
 

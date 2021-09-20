@@ -60,7 +60,8 @@ namespace Microsoft.CodeAnalysis.GenerateOverrides
                     textSpan.Start,
                     out typeDeclaration
                 )
-            ) {
+            )
+            {
                 return;
             }
 

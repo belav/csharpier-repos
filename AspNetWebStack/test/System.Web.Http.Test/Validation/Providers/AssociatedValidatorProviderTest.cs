@@ -179,7 +179,8 @@ namespace System.Web.Http.Validation.Providers
                 ModelMetadata metadata,
                 IEnumerable<ModelValidatorProvider> validatorProviders,
                 IEnumerable<Attribute> attributes
-            ) {
+            )
+            {
                 return AbstractGetValidators(metadata, validatorProviders, attributes);
             }
 

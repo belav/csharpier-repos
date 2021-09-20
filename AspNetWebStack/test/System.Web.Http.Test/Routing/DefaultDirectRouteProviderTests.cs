@@ -316,7 +316,8 @@ namespace System.Web.Http.Routing
         {
             public new IReadOnlyCollection<IDirectRouteFactory> GetActionRouteFactories(
                 HttpActionDescriptor actionDescriptor
-            ) {
+            )
+            {
                 return base.GetActionRouteFactories(actionDescriptor);
             }
 
@@ -325,7 +326,8 @@ namespace System.Web.Http.Routing
                 IReadOnlyList<HttpActionDescriptor> actionDescriptors,
                 IReadOnlyList<IDirectRouteFactory> factories,
                 IInlineConstraintResolver constraintResolver
-            ) {
+            )
+            {
                 return base.GetControllerDirectRoutes(
                     controllerDescriptor,
                     actionDescriptors,
@@ -338,13 +340,15 @@ namespace System.Web.Http.Routing
                 HttpActionDescriptor actionDescriptor,
                 IReadOnlyList<IDirectRouteFactory> factories,
                 IInlineConstraintResolver constraintResolver
-            ) {
+            )
+            {
                 return base.GetActionDirectRoutes(actionDescriptor, factories, constraintResolver);
             }
 
             public new IReadOnlyCollection<IDirectRouteFactory> GetControllerRouteFactories(
                 HttpControllerDescriptor controllerDescriptor
-            ) {
+            )
+            {
                 return base.GetControllerRouteFactories(controllerDescriptor);
             }
 

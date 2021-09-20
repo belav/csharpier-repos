@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Highlighting
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public HighlightingService(
             [ImportMany] IEnumerable<Lazy<IHighlighter, LanguageMetadata>> highlighters
-        ) {
+        )
+        {
             _highlighters = highlighters.ToList();
         }
 
@@ -35,14 +36,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Highlighting
             int position,
             List<TextSpan> highlights,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (s_listPool.GetPooledObject(out var tempHighlights))
             {
                 foreach (
                     var highlighter in _highlighters.Where(
                         h => h.Metadata.Language == root.Language
                     )
-                ) {
+                )
+                {
                     cancellationToken.ThrowIfCancellationRequested();
                     highlighter.Value.AddHighlights(
                         root,

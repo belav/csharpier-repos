@@ -493,7 +493,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 // Set up a server socket to which to connect
                 server.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 server.Listen(1);
@@ -538,7 +539,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 // Set up a server socket to which to connect
                 server.Bind(new IPEndPoint(IPAddress.IPv6Loopback, 0));
                 server.Listen(1);
@@ -551,7 +553,8 @@ namespace System.Net.Sockets.Tests
                     if (
                         client.Client.AddressFamily == AddressFamily.InterNetworkV6
                         && client.Client.DualMode
-                    ) {
+                    )
+                    {
                         client.Connect(endpoint);
                     }
                 }
@@ -578,7 +581,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 // Set up a server socket to which to connect
                 server.Bind(new IPEndPoint(serverAddress, 0));
                 server.Listen(1);

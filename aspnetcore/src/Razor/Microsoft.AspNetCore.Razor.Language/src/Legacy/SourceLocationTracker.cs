@@ -75,7 +75,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 Environment.NewLine.Length == 1 && characterRead == Environment.NewLine[0]
                 || ParserHelpers.IsNewLine(characterRead)
                     && (characterRead != '\r' || nextCharacter != '\n')
-            ) {
+            )
+            {
                 _lineIndex++;
                 _characterIndex = 0;
             }
@@ -105,7 +106,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         public static SourceLocation CalculateNewLocation(
             SourceLocation lastPosition,
             string newContent
-        ) {
+        )
+        {
             return new SourceLocationTracker(lastPosition).UpdateLocation(
                 newContent
             ).CurrentLocation;

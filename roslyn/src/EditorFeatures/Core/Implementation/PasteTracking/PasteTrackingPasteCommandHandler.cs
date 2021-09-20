@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.PasteTracking
             PasteCommandArgs args,
             Action nextCommandHandler,
             CommandExecutionContext executionContext
-        ) {
+        )
+        {
             // Capture the pre-paste caret position
             var caretPosition = args.TextView.GetCaretPoint(args.SubjectBuffer);
             if (!caretPosition.HasValue)

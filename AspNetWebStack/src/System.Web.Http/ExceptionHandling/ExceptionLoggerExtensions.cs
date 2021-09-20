@@ -18,7 +18,8 @@ namespace System.Web.Http.ExceptionHandling
             this IExceptionLogger logger,
             ExceptionContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (logger == null)
             {
                 throw new ArgumentNullException("logger");

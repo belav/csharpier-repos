@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             LookupResultKind resultKind,
             TypeSymbol type,
             BoundFieldAccess? oldNodeOpt = null
-        ) {
+        )
+        {
             if (fieldSymbol.ContainingType.IsTupleType)
             {
                 return MakeTupleFieldAccess(syntax, fieldSymbol, rewrittenReceiver);
@@ -73,7 +74,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxNode syntax,
             FieldSymbol tupleField,
             BoundExpression? rewrittenReceiver
-        ) {
+        )
+        {
             var tupleType = tupleField.ContainingType;
 
             NamedTypeSymbol currentLinkType = tupleType;
@@ -97,7 +99,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     currentLinkType,
                     TypeCompareKind.ConsiderEverything2
                 )
-            ) {
+            )
+            {
                 WellKnownMember wellKnownTupleRest = NamedTypeSymbol.GetTupleTypeMember(
                     NamedTypeSymbol.ValueTupleRestPosition,
                     NamedTypeSymbol.ValueTupleRestPosition
@@ -142,7 +145,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression tuple,
             SyntaxNode syntax,
             FieldSymbol field
-        ) {
+        )
+        {
             // Use default field rather than implicitly named fields since
             // fields from inferred names are not usable in C# 7.0.
             field = field.CorrespondingTupleField ?? field;

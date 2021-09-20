@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.Host
             string workingFolderPath,
             string solutionFilePath,
             string databaseFile
-        ) {
+        )
+        {
             this.WorkingFolderPath = workingFolderPath;
             this.SolutionFilePath = solutionFilePath;
             this.DatabaseFile = databaseFile;

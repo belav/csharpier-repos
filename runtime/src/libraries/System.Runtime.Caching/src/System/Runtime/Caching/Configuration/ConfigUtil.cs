@@ -23,7 +23,8 @@ namespace System.Runtime.Caching.Configuration
             int defaultValue,
             bool zeroAllowed,
             int maxValueAllowed
-        ) {
+        )
+        {
             string sValue = config[valueName];
 
             if (sValue == null)
@@ -68,7 +69,8 @@ namespace System.Runtime.Caching.Configuration
             NameValueCollection config,
             string valueName,
             int defaultValue
-        ) {
+        )
+        {
             string sValue = config[valueName];
 
             if (sValue == null)
@@ -99,7 +101,8 @@ namespace System.Runtime.Caching.Configuration
             NameValueCollection config,
             string valueName,
             bool defaultValue
-        ) {
+        )
+        {
             string sValue = config[valueName];
 
             if (sValue == null)

@@ -82,12 +82,14 @@ namespace Microsoft.CodeAnalysis
             ref AssemblyIdentity definition,
             AssemblyIdentityParts referenceParts,
             out bool isDefinitionFxAssembly
-        ) {
+        )
+        {
             if (
                 reference.ContentType == AssemblyContentType.Default
                 && SimpleNameComparer.Equals(reference.Name, definition.Name)
                 && SimpleNameComparer.Equals(reference.Name, "mscorlib")
-            ) {
+            )
+            {
                 isDefinitionFxAssembly = true;
                 reference = definition;
                 return true;
@@ -170,7 +172,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 !s_arFxPolicy.TryGetValue(identity.Name, out value)
                 || !value.PublicKeyToken.SequenceEqual(identity.PublicKeyToken)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -214,7 +217,8 @@ namespace Microsoft.CodeAnalysis
             AssemblyIdentity identity,
             out bool retargetable,
             out bool portable
-        ) {
+        )
+        {
             retargetable = portable = false;
 
             if (IsTriviallyNonRetargetable(identity))
@@ -257,7 +261,8 @@ namespace Microsoft.CodeAnalysis
                 identity.IsRetargetable
                 || !identity.IsStrongName
                 || identity.ContentType != AssemblyContentType.Default
-            ) {
+            )
+            {
                 return identity;
             }
 
@@ -268,7 +273,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 version >= new AssemblyVersion(2, 0, 0, 0)
                 && version <= new AssemblyVersion(5, 9, 0, 0)
-            ) {
+            )
+            {
                 if (identity.PublicKeyToken.SequenceEqual(s_SILVERLIGHT_PLATFORM_PUBLICKEY_STR_L))
                 {
                     if (!policy.SuppressSilverlightPlatformAssembliesPortability)
@@ -276,7 +282,8 @@ namespace Microsoft.CodeAnalysis
                         if (
                             SimpleNameComparer.Equals(identity.Name, "System")
                             || SimpleNameComparer.Equals(identity.Name, "System.Core")
-                        ) {
+                        )
+                        {
                             newVersion = (Version)s_VER_ASSEMBLYVERSION_STR_L;
                             newPublicKeyToken = s_ECMA_PUBLICKEY_STR_L;
                         }
@@ -297,7 +304,8 @@ namespace Microsoft.CodeAnalysis
                                 identity.Name,
                                 "System.ComponentModel.Composition"
                             )
-                        ) {
+                        )
+                        {
                             newVersion = (Version)s_VER_ASSEMBLYVERSION_STR_L;
                             newPublicKeyToken = s_ECMA_PUBLICKEY_STR_L;
                         }

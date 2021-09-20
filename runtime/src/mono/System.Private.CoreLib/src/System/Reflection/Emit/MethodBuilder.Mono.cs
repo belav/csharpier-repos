@@ -86,7 +86,8 @@ namespace System.Reflection.Emit
             Type[]? parameterTypes,
             Type[][]? paramModReq,
             Type[][]? paramModOpt
-        ) {
+        )
+        {
             this.name = name;
             this.attrs = attributes;
             this.call_conv = callingConvention;
@@ -132,18 +133,20 @@ namespace System.Reflection.Emit
             string entryName,
             CallingConvention nativeCConv,
             CharSet nativeCharset
-        ) : this(
-            tb,
-            name,
-            attributes,
-            callingConvention,
-            returnType,
-            returnModReq,
-            returnModOpt,
-            parameterTypes,
-            paramModReq,
-            paramModOpt
-        ) {
+        )
+            : this(
+                tb,
+                name,
+                attributes,
+                callingConvention,
+                returnType,
+                returnModReq,
+                returnModOpt,
+                parameterTypes,
+                paramModReq,
+                paramModOpt
+            )
+        {
             pi_dll = dllName;
             pi_entry = entryName;
             native_cc = nativeCConv;
@@ -303,7 +306,8 @@ namespace System.Reflection.Emit
             Binder? binder,
             object?[]? parameters,
             CultureInfo? culture
-        ) {
+        )
+        {
             throw NotSupported();
         }
 
@@ -359,7 +363,8 @@ namespace System.Reflection.Emit
             int position,
             ParameterAttributes attributes,
             string strParamName
-        ) {
+        )
+        {
             RejectIfCreated();
 
             //
@@ -401,7 +406,8 @@ namespace System.Reflection.Emit
                     (iattrs & (MethodImplAttributes.Runtime | MethodImplAttributes.InternalCall))
                     == 0
                 )
-            ) {
+            )
+            {
                 // do not allow zero length method body on MS.NET 2.0 (and higher)
                 if (
                     ((ilgen == null) || (ilgen.ILOffset == 0)) && (code == null || code.Length == 0)
@@ -699,7 +705,8 @@ namespace System.Reflection.Emit
             Type[]? parameterTypes,
             Type[][]? parameterTypeRequiredCustomModifiers,
             Type[][]? parameterTypeOptionalCustomModifiers
-        ) {
+        )
+        {
             SetReturnType(returnType);
             SetParameters(parameterTypes);
             this.returnModReq = returnTypeRequiredCustomModifiers;
@@ -779,7 +786,8 @@ namespace System.Reflection.Emit
             int handlerEndOffset,
             int kind,
             int exceptionTypeToken
-        ) {
+        )
+        {
             m_tryStartOffset = tryStartOffset;
             m_tryEndOffset = tryEndOffset;
             m_filterOffset = filterOffset;

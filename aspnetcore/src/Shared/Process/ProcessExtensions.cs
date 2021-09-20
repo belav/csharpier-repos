@@ -85,7 +85,8 @@ namespace Microsoft.Extensions.Internal
             string arguments,
             TimeSpan timeout,
             out string stdout
-        ) {
+        )
+        {
             var startInfo = new ProcessStartInfo
             {
                 FileName = fileName,

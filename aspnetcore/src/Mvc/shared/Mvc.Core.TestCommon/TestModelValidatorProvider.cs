@@ -13,7 +13,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
         // Creates a provider with all the defaults - includes data annotations
         public static CompositeModelValidatorProvider CreateDefaultProvider(
             IStringLocalizerFactory stringLocalizerFactory = null
-        ) {
+        )
+        {
             var options = Options.Create(new MvcDataAnnotationsLocalizationOptions());
             options.Value.DataAnnotationLocalizerProvider = (modelType, localizerFactory) =>
                 localizerFactory.Create(modelType);

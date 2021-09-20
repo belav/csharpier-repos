@@ -157,7 +157,8 @@ namespace System.Security.Cryptography
                             curve.IsNamed
                                 && errorCode == Interop.NCrypt.ErrorCode.NTE_INVALID_PARAMETER
                             || errorCode == Interop.NCrypt.ErrorCode.NTE_NOT_SUPPORTED
-                        ) {
+                        )
+                        {
                             throw new PlatformNotSupportedException(
                                 SR.Format(
                                     SR.Cryptography_CurveNotSupported,

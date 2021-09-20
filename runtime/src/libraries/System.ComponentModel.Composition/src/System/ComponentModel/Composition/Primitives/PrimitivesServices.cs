@@ -29,7 +29,8 @@ namespace System.ComponentModel.Composition.Primitives
         internal static IEnumerable<string> GetCandidateContractNames(
             this ImportDefinition import,
             ComposablePartDefinition part
-        ) {
+        )
+        {
             import = import.GetProductImportDefinition();
             string contractName = import.ContractName;
             string? genericContractName = import.Metadata.GetValue<string>(
@@ -65,7 +66,8 @@ namespace System.ComponentModel.Composition.Primitives
             ComposablePartDefinition part,
             ExportDefinition export,
             bool expandGenerics
-        ) {
+        )
+        {
             import = import.GetProductImportDefinition();
             if (expandGenerics)
             {
@@ -86,7 +88,8 @@ namespace System.ComponentModel.Composition.Primitives
         private static ImportDefinition TranslateImport(
             ImportDefinition import,
             ComposablePartDefinition part
-        ) {
+        )
+        {
             ContractBasedImportDefinition? contractBasedImport =
                 import as ContractBasedImportDefinition;
             if (contractBasedImport == null)

@@ -175,7 +175,8 @@ namespace System.Security.Cryptography
                 ReadOnlySpan<byte> passwordBytes,
                 ReadOnlySpan<byte> source,
                 out int bytesRead
-            ) {
+            )
+            {
                 ThrowIfDisposed();
 
                 CngPkcs8.Pkcs8Response response = CngPkcs8.ImportEncryptedPkcs8PrivateKey(
@@ -192,7 +193,8 @@ namespace System.Security.Cryptography
                 ReadOnlySpan<char> password,
                 ReadOnlySpan<byte> source,
                 out int bytesRead
-            ) {
+            )
+            {
                 ThrowIfDisposed();
 
                 CngPkcs8.Pkcs8Response response = CngPkcs8.ImportEncryptedPkcs8PrivateKey(
@@ -224,7 +226,8 @@ namespace System.Security.Cryptography
             public override byte[] ExportEncryptedPkcs8PrivateKey(
                 ReadOnlySpan<byte> passwordBytes,
                 PbeParameters pbeParameters
-            ) {
+            )
+            {
                 if (pbeParameters == null)
                     throw new ArgumentNullException(nameof(pbeParameters));
 
@@ -234,7 +237,8 @@ namespace System.Security.Cryptography
             public override byte[] ExportEncryptedPkcs8PrivateKey(
                 ReadOnlySpan<char> password,
                 PbeParameters pbeParameters
-            ) {
+            )
+            {
                 if (pbeParameters == null)
                 {
                     throw new ArgumentNullException(nameof(pbeParameters));
@@ -259,7 +263,8 @@ namespace System.Security.Cryptography
                 PbeParameters pbeParameters,
                 Span<byte> destination,
                 out int bytesWritten
-            ) {
+            )
+            {
                 if (pbeParameters == null)
                     throw new ArgumentNullException(nameof(pbeParameters));
 
@@ -283,7 +288,8 @@ namespace System.Security.Cryptography
                 PbeParameters pbeParameters,
                 Span<byte> destination,
                 out int bytesWritten
-            ) {
+            )
+            {
                 if (pbeParameters == null)
                     throw new ArgumentNullException(nameof(pbeParameters));
 

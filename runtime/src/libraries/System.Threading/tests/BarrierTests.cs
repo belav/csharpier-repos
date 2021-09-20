@@ -83,7 +83,8 @@ namespace System.Threading.Tests
             TimeSpan timeout,
             bool result,
             Type exceptionType
-        ) {
+        )
+        {
             Barrier b = new Barrier(initialCount);
             try
             {
@@ -202,7 +203,8 @@ namespace System.Threading.Tests
             int initialCount,
             int participantsToAdd,
             Type exceptionType
-        ) {
+        )
+        {
             Barrier b = new Barrier(initialCount);
             try
             {
@@ -242,7 +244,8 @@ namespace System.Threading.Tests
             int initialCount,
             int participantsToRemove,
             Type exceptionType
-        ) {
+        )
+        {
             Barrier b = new Barrier(initialCount);
             try
             {

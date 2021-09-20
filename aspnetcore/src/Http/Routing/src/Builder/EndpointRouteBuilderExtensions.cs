@@ -34,7 +34,8 @@ namespace Microsoft.AspNetCore.Builder
             this IEndpointRouteBuilder endpoints,
             string pattern,
             RequestDelegate requestDelegate
-        ) {
+        )
+        {
             return MapMethods(endpoints, pattern, GetVerb, requestDelegate);
         }
 
@@ -50,7 +51,8 @@ namespace Microsoft.AspNetCore.Builder
             this IEndpointRouteBuilder endpoints,
             string pattern,
             RequestDelegate requestDelegate
-        ) {
+        )
+        {
             return MapMethods(endpoints, pattern, PostVerb, requestDelegate);
         }
 
@@ -66,7 +68,8 @@ namespace Microsoft.AspNetCore.Builder
             this IEndpointRouteBuilder endpoints,
             string pattern,
             RequestDelegate requestDelegate
-        ) {
+        )
+        {
             return MapMethods(endpoints, pattern, PutVerb, requestDelegate);
         }
 
@@ -82,7 +85,8 @@ namespace Microsoft.AspNetCore.Builder
             this IEndpointRouteBuilder endpoints,
             string pattern,
             RequestDelegate requestDelegate
-        ) {
+        )
+        {
             return MapMethods(endpoints, pattern, DeleteVerb, requestDelegate);
         }
 
@@ -100,7 +104,8 @@ namespace Microsoft.AspNetCore.Builder
             string pattern,
             IEnumerable<string> httpMethods,
             RequestDelegate requestDelegate
-        ) {
+        )
+        {
             if (httpMethods == null)
             {
                 throw new ArgumentNullException(nameof(httpMethods));
@@ -124,7 +129,8 @@ namespace Microsoft.AspNetCore.Builder
             this IEndpointRouteBuilder endpoints,
             string pattern,
             RequestDelegate requestDelegate
-        ) {
+        )
+        {
             return Map(endpoints, RoutePatternFactory.Parse(pattern), requestDelegate);
         }
 
@@ -140,7 +146,8 @@ namespace Microsoft.AspNetCore.Builder
             this IEndpointRouteBuilder endpoints,
             RoutePattern pattern,
             RequestDelegate requestDelegate
-        ) {
+        )
+        {
             if (endpoints == null)
             {
                 throw new ArgumentNullException(nameof(endpoints));

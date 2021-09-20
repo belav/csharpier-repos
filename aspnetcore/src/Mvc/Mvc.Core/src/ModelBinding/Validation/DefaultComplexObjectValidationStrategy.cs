@@ -28,7 +28,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
             ModelMetadata metadata,
             string key,
             object model
-        ) {
+        )
+        {
             return new Enumerator(metadata, key, model);
         }
 
@@ -96,7 +97,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
                                 parameter,
                                 out var property
                             )
-                        ) {
+                        )
+                        {
                             throw new InvalidOperationException(
                                 Resources.FormatValidationStrategy_MappedPropertyNotFound(
                                     parameter,

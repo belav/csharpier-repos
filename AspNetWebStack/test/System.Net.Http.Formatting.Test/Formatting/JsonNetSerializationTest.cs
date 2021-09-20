@@ -229,7 +229,8 @@ namespace System.Net.Http.Formatting
             object o,
             string expectedJson,
             Type type
-        ) {
+        )
+        {
             Assert.Equal(expectedJson, await SerializeAsync(o, type));
         }
 
@@ -239,7 +240,8 @@ namespace System.Net.Http.Formatting
             object expectedObject,
             string json,
             Type type
-        ) {
+        )
+        {
             if (expectedObject == null)
             {
                 Assert.Null(await DeserializeAsync(json, type));
@@ -357,7 +359,8 @@ namespace System.Net.Http.Formatting
             object o,
             Type type,
             MediaTypeFormatter formatter = null
-        ) {
+        )
+        {
             formatter = formatter ?? new JsonMediaTypeFormatter();
             MemoryStream ms = new MemoryStream();
             await formatter.WriteToStreamAsync(type, o, ms, null, null);
@@ -371,7 +374,8 @@ namespace System.Net.Http.Formatting
             Type type,
             MediaTypeFormatter formatter = null,
             IFormatterLogger formatterLogger = null
-        ) {
+        )
+        {
             formatter = formatter ?? new JsonMediaTypeFormatter();
             MemoryStream ms = new MemoryStream();
             byte[] bytes = Encoding.Default.GetBytes(json);
@@ -400,7 +404,8 @@ namespace System.Net.Http.Formatting
                     typeof(JToken).IsAssignableFrom(xType)
                     || xType == typeof(ArgumentNullException)
                     || xType == typeof(KeyValuePair<JToken, JToken>)
-                ) {
+                )
+                {
                     return x.ToString() == y.ToString();
                 }
                 if (xType == typeof(DataContractType))

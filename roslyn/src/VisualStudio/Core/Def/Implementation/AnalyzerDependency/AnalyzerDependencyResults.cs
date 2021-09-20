@@ -20,7 +20,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         public AnalyzerDependencyResults(
             ImmutableArray<AnalyzerDependencyConflict> conflicts,
             ImmutableArray<MissingAnalyzerDependency> missingDependencies
-        ) {
+        )
+        {
             Debug.Assert(conflicts != default);
             Debug.Assert(missingDependencies != default);
 

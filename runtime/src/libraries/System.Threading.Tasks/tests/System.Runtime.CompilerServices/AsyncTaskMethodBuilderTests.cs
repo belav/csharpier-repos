@@ -481,7 +481,8 @@ namespace System.Threading.Tasks.Tests
         public static void TaskMethodBuilderInt32_UsesCompletedCache(
             int result,
             bool shouldBeCached
-        ) {
+        )
+        {
             TaskMethodBuilderT_UsesCompletedCache(result, shouldBeCached);
         }
 
@@ -499,7 +500,8 @@ namespace System.Threading.Tasks.Tests
         public static void TaskMethodBuilderRef_UsesCompletedCache(
             string result,
             bool shouldBeCached
-        ) {
+        )
+        {
             TaskMethodBuilderT_UsesCompletedCache(result, shouldBeCached);
         }
 
@@ -842,7 +844,8 @@ namespace System.Threading.Tasks.Tests
                                 "System.Threading.Tasks.TplEventSource",
                                 EventLevel.Verbose
                             )
-                        ) {
+                        )
+                        {
                             var events = new ConcurrentQueue<EventWrittenEventArgs>();
                             listener.RunWithCallback(
                                 events.Enqueue,

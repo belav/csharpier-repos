@@ -189,7 +189,8 @@ namespace Microsoft.Extensions.Logging.Testing.Tests
             MethodInfo methodInfo,
             object[] testMethodArguments,
             ITestOutputHelper testOutputHelper
-        ) {
+        )
+        {
             base.Initialize(context, methodInfo, testMethodArguments, testOutputHelper);
 
             try

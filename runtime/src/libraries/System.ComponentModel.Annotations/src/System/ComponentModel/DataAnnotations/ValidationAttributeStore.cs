@@ -40,7 +40,8 @@ namespace System.ComponentModel.DataAnnotations
         )]
         internal IEnumerable<ValidationAttribute> GetTypeValidationAttributes(
             ValidationContext validationContext
-        ) {
+        )
+        {
             EnsureValidationContext(validationContext);
             var item = GetTypeStoreItem(validationContext.ObjectType);
             return item.ValidationAttributes;
@@ -71,7 +72,8 @@ namespace System.ComponentModel.DataAnnotations
         )]
         internal IEnumerable<ValidationAttribute> GetPropertyValidationAttributes(
             ValidationContext validationContext
-        ) {
+        )
+        {
             EnsureValidationContext(validationContext);
             var typeItem = GetTypeStoreItem(validationContext.ObjectType);
             var item = typeItem.GetPropertyStoreItem(validationContext.MemberName!);
@@ -135,7 +137,8 @@ namespace System.ComponentModel.DataAnnotations
         /// <returns>The type store item.  It will not be null.</returns>
         private TypeStoreItem GetTypeStoreItem(
             [DynamicallyAccessedMembers(TypeStoreItem.DynamicallyAccessedTypes)] Type type
-        ) {
+        )
+        {
             Debug.Assert(type != null);
 
             lock (_typeStoreItems)
@@ -222,7 +225,8 @@ namespace System.ComponentModel.DataAnnotations
             internal bool TryGetPropertyStoreItem(
                 string propertyName,
                 [NotNullWhen(true)] out PropertyStoreItem? item
-            ) {
+            )
+            {
                 if (string.IsNullOrEmpty(propertyName))
                 {
                     throw new ArgumentNullException(nameof(propertyName));

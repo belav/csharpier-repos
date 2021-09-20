@@ -36,7 +36,8 @@ namespace System.Diagnostics.Eventing.Reader
             EventLogHandle handle,
             EventLogSession session,
             ProviderMetadataCachedInformation cachedMetadataInfo
-        ) {
+        )
+        {
             _cachedMetadataInformation = cachedMetadataInfo;
             Handle = handle;
             _session = session;

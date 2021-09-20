@@ -55,7 +55,8 @@ namespace NetPrimitivesUnitTests
         public void CookieParserGetServer_SetCookieHeaderValue_Success(
             string cookieString,
             string[] expectedStrings
-        ) {
+        )
+        {
             int index = 0;
             int cookieCount = 0;
             var parser = new CookieParser(cookieString);

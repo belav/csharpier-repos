@@ -47,7 +47,8 @@ namespace System.Web.WebPages
             HttpApplication application,
             EventHandler onApplicationPostResolveRequestCache,
             EventHandler initialize
-        ) {
+        )
+        {
             if (initialize != null)
             {
                 initialize(application, EventArgs.Empty);
@@ -70,7 +71,8 @@ namespace System.Web.WebPages
             HttpApplication application,
             Action<HttpApplication> executeStartPage,
             EventHandler applicationStart
-        ) {
+        )
+        {
             // Application start events should happen only once per application life time.
             lock (_appStartExecutedLock)
             {

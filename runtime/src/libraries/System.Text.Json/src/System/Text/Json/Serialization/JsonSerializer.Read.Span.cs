@@ -60,7 +60,8 @@ namespace System.Text.Json
             ReadOnlySpan<byte> utf8Json,
             [DynamicallyAccessedMembers(JsonHelpers.MembersAccessedOnRead)] Type returnType,
             JsonSerializerOptions? options = null
-        ) {
+        )
+        {
             if (returnType == null)
             {
                 throw new ArgumentNullException(nameof(returnType));

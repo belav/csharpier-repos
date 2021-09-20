@@ -26,7 +26,8 @@ namespace OpenQA.Selenium
             IReadOnlyCollection<string> logs,
             string screenShotPath,
             string innerHTML
-        ) {
+        )
+        {
             var builder = new StringBuilder();
             builder.AppendLine(exception.ToString());
 

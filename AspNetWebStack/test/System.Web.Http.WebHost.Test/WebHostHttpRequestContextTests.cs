@@ -314,7 +314,8 @@ namespace System.Web.Http.WebHost
         [InlineData(false)]
         public void IncludeErrorDetailGet_ReturnsNoCustomErrorEnabled_WhenUnconfigured(
             bool expectedIncludeErrorDetail
-        ) {
+        )
+        {
             // Arrange
             Mock<HttpContextBase> webContextMock = new Mock<HttpContextBase>(MockBehavior.Strict);
             webContextMock.Setup(r => r.IsCustomErrorEnabled).Returns(!expectedIncludeErrorDetail);
@@ -343,7 +344,8 @@ namespace System.Web.Http.WebHost
         [InlineData(false)]
         public void IncludeErrorDetailGet_ReturnsNoCustomErrorEnabled_ForDefaultPolicy(
             bool expectedIncludeErrorDetail
-        ) {
+        )
+        {
             // Arrange
             Mock<HttpContextBase> webContextMock = new Mock<HttpContextBase>(MockBehavior.Strict);
             webContextMock.Setup(r => r.IsCustomErrorEnabled).Returns(!expectedIncludeErrorDetail);
@@ -374,7 +376,8 @@ namespace System.Web.Http.WebHost
         [InlineData(false)]
         public void IncludeErrorDetailGet_ReturnsIsLocal_ForLocalOnlyPolicy(
             bool expectedIncludeErrorDetail
-        ) {
+        )
+        {
             // Arrange
             HttpContextBase webContext = CreateDummyWebContext();
             HttpRequestBase webRequest = CreateDummyWebRequest();
@@ -483,7 +486,8 @@ namespace System.Web.Http.WebHost
         public void IncludeErrorDetailSet_OverridesPolicy(
             bool expected,
             IncludeErrorDetailPolicy policy
-        ) {
+        )
+        {
             // Arrange
             HttpContextBase webContext = CreateDummyWebContext();
             HttpRequestBase webRequest = CreateDummyWebRequest();
@@ -910,7 +914,8 @@ namespace System.Web.Http.WebHost
         [InlineData("/a%20b")]
         public void VirtualPathRootGet_ReturnsUnescapedConfigurationVirtualPathRoot(
             string configurationVirtualPathRoot
-        ) {
+        )
+        {
             // Arrange
             var expectedVirtualPathRoot = "/a b";
             var webContext = CreateDummyWebContext();
@@ -1059,7 +1064,8 @@ namespace System.Web.Http.WebHost
             HttpContextBase contextBase,
             HttpRequestBase requestBase,
             HttpRequestMessage request
-        ) {
+        )
+        {
             return new WebHostHttpRequestContext(contextBase, requestBase, request);
         }
 

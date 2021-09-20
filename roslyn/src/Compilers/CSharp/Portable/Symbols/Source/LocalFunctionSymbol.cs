@@ -152,7 +152,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 && !IsGenericMethod
                 && ContainingSymbol is SynthesizedSimpleProgramEntryPointSymbol
                 && DeclaringCompilation.HasEntryPointSignature(this, diagnostics).IsCandidate
-            ) {
+            )
+            {
                 addTo.Add(ErrorCode.WRN_MainIgnored, Syntax.Identifier.GetLocation(), this);
             }
 
@@ -298,7 +299,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (
                     compilation.ShouldEmitNullableAttributes(this)
                     && returnType.NeedsNullableAttribute()
-                ) {
+                )
+                {
                     compilation.EnsureNullableAttributeExists(
                         diagnostics,
                         location,
@@ -471,7 +473,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private void ReportAttributesDisallowed(
             SyntaxList<AttributeListSyntax> attributes,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var diagnosticInfo =
                 MessageID.IDS_FeatureLocalFunctionAttributes.GetFeatureAvailabilityDiagnosticInfo(
                     (CSharpParseOptions)syntaxReferenceOpt.SyntaxTree.Options
@@ -487,7 +490,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         private ImmutableArray<SourceMethodTypeParameterSymbol> MakeTypeParameters(
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var result = ArrayBuilder<SourceMethodTypeParameterSymbol>.GetInstance();
             var typeParameters = Syntax.TypeParameterList?.Parameters ?? default;
             for (int ordinal = 0; ordinal < typeParameters.Count; ordinal++)

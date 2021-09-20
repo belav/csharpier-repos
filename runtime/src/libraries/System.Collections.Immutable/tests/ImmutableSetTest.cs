@@ -290,7 +290,8 @@ namespace System.Collections.Immutable.Tests
             bool matchOrder,
             T[] injectedValues,
             T[] expectedValues
-        ) {
+        )
+        {
             Assert.NotNull(emptySet);
             Assert.NotNull(injectedValues);
             Assert.NotNull(expectedValues);
@@ -395,7 +396,8 @@ namespace System.Collections.Immutable.Tests
             Func<IImmutableSet<T>, Func<IEnumerable<T>, bool>> operation,
             Func<ISet<T>, Func<IEnumerable<T>, bool>> baselineOperation,
             IEnumerable<Tuple<IEnumerable<T>, IEnumerable<T>, bool>> scenarios
-        ) {
+        )
+        {
             //const string message = "Scenario #{0}: Set 1: {1}, Set 2: {2}";
 
             int iteration = 0;
@@ -424,7 +426,8 @@ namespace System.Collections.Immutable.Tests
 
         private static Tuple<IEnumerable<T>, IEnumerable<T>, bool> Flip<T>(
             Tuple<IEnumerable<T>, IEnumerable<T>, bool> scenario
-        ) {
+        )
+        {
             return new Tuple<IEnumerable<T>, IEnumerable<T>, bool>(
                 scenario.Item2,
                 scenario.Item1,
@@ -485,7 +488,8 @@ namespace System.Collections.Immutable.Tests
             IImmutableSet<T> emptySet,
             IComparer<T> comparer,
             params T[] values
-        ) {
+        )
+        {
             var set = emptySet;
             foreach (T value in values)
             {

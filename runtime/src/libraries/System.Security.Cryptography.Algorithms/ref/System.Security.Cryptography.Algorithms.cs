@@ -165,7 +165,8 @@ namespace System.Security.Cryptography
         public override System.Security.Cryptography.ICryptoTransform CreateDecryptor(
             byte[] rgbKey,
             byte[]? rgbIV
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Security.Cryptography.ICryptoTransform CreateEncryptor()
@@ -175,7 +176,8 @@ namespace System.Security.Cryptography
         public override System.Security.Cryptography.ICryptoTransform CreateEncryptor(
             byte[] rgbKey,
             byte[]? rgbIV
-        ) {
+        )
+        {
             throw null;
         }
         protected override void Dispose(bool disposing) { }
@@ -209,7 +211,8 @@ namespace System.Security.Cryptography
         public virtual bool VerifySignature(
             System.Security.Cryptography.HashAlgorithm hash,
             byte[] rgbSignature
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -312,7 +315,8 @@ namespace System.Security.Cryptography
         }
         public static System.Security.Cryptography.DSA Create(
             System.Security.Cryptography.DSAParameters parameters
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -326,13 +330,15 @@ namespace System.Security.Cryptography
         public byte[] CreateSignature(
             byte[] rgbHash,
             System.Security.Cryptography.DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual byte[] CreateSignatureCore(
             System.ReadOnlySpan<byte> hash,
             System.Security.Cryptography.DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             throw null;
         }
         public abstract System.Security.Cryptography.DSAParameters ExportParameters(
@@ -341,7 +347,8 @@ namespace System.Security.Cryptography
         public override void FromXmlString(string xmlString) { }
         public int GetMaxSignatureSize(
             System.Security.Cryptography.DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual byte[] HashData(
@@ -349,27 +356,31 @@ namespace System.Security.Cryptography
             int offset,
             int count,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual byte[] HashData(
             System.IO.Stream data,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             throw null;
         }
         public override void ImportEncryptedPkcs8PrivateKey(
             System.ReadOnlySpan<byte> passwordBytes,
             System.ReadOnlySpan<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             throw null;
         }
         public override void ImportEncryptedPkcs8PrivateKey(
             System.ReadOnlySpan<char> password,
             System.ReadOnlySpan<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             throw null;
         }
         public override void ImportFromEncryptedPem(
@@ -387,13 +398,15 @@ namespace System.Security.Cryptography
         public override void ImportPkcs8PrivateKey(
             System.ReadOnlySpan<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             throw null;
         }
         public override void ImportSubjectPublicKeyInfo(
             System.ReadOnlySpan<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             throw null;
         }
         public virtual byte[] SignData(
@@ -401,7 +414,8 @@ namespace System.Security.Cryptography
             int offset,
             int count,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             throw null;
         }
         public byte[] SignData(
@@ -410,47 +424,54 @@ namespace System.Security.Cryptography
             int count,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             System.Security.Cryptography.DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             throw null;
         }
         public byte[] SignData(
             byte[] data,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             throw null;
         }
         public byte[] SignData(
             byte[] data,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             System.Security.Cryptography.DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             throw null;
         }
         public virtual byte[] SignData(
             System.IO.Stream data,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             throw null;
         }
         public byte[] SignData(
             System.IO.Stream data,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             System.Security.Cryptography.DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual byte[] SignDataCore(
             System.IO.Stream data,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             System.Security.Cryptography.DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual byte[] SignDataCore(
             System.ReadOnlySpan<byte> data,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             System.Security.Cryptography.DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             throw null;
         }
         public override string ToXmlString(bool includePrivateParameters)
@@ -461,7 +482,8 @@ namespace System.Security.Cryptography
             System.ReadOnlySpan<byte> hash,
             System.Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
         public bool TryCreateSignature(
@@ -469,7 +491,8 @@ namespace System.Security.Cryptography
             System.Span<byte> destination,
             System.Security.Cryptography.DSASignatureFormat signatureFormat,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual bool TryCreateSignatureCore(
@@ -477,7 +500,8 @@ namespace System.Security.Cryptography
             System.Span<byte> destination,
             System.Security.Cryptography.DSASignatureFormat signatureFormat,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
         public override bool TryExportEncryptedPkcs8PrivateKey(
@@ -485,7 +509,8 @@ namespace System.Security.Cryptography
             System.Security.Cryptography.PbeParameters pbeParameters,
             System.Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
         public override bool TryExportEncryptedPkcs8PrivateKey(
@@ -493,19 +518,22 @@ namespace System.Security.Cryptography
             System.Security.Cryptography.PbeParameters pbeParameters,
             System.Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
         public override bool TryExportPkcs8PrivateKey(
             System.Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
         public override bool TryExportSubjectPublicKeyInfo(
             System.Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual bool TryHashData(
@@ -513,7 +541,8 @@ namespace System.Security.Cryptography
             System.Span<byte> destination,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
         public virtual bool TrySignData(
@@ -521,7 +550,8 @@ namespace System.Security.Cryptography
             System.Span<byte> destination,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
         public bool TrySignData(
@@ -530,7 +560,8 @@ namespace System.Security.Cryptography
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             System.Security.Cryptography.DSASignatureFormat signatureFormat,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual bool TrySignDataCore(
@@ -539,14 +570,16 @@ namespace System.Security.Cryptography
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             System.Security.Cryptography.DSASignatureFormat signatureFormat,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
         public bool VerifyData(
             byte[] data,
             byte[] signature,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             throw null;
         }
         public bool VerifyData(
@@ -554,7 +587,8 @@ namespace System.Security.Cryptography
             byte[] signature,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             System.Security.Cryptography.DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             throw null;
         }
         public virtual bool VerifyData(
@@ -563,7 +597,8 @@ namespace System.Security.Cryptography
             int count,
             byte[] signature,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             throw null;
         }
         public bool VerifyData(
@@ -573,14 +608,16 @@ namespace System.Security.Cryptography
             byte[] signature,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             System.Security.Cryptography.DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             throw null;
         }
         public virtual bool VerifyData(
             System.IO.Stream data,
             byte[] signature,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             throw null;
         }
         public bool VerifyData(
@@ -588,14 +625,16 @@ namespace System.Security.Cryptography
             byte[] signature,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             System.Security.Cryptography.DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             throw null;
         }
         public virtual bool VerifyData(
             System.ReadOnlySpan<byte> data,
             System.ReadOnlySpan<byte> signature,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             throw null;
         }
         public bool VerifyData(
@@ -603,7 +642,8 @@ namespace System.Security.Cryptography
             System.ReadOnlySpan<byte> signature,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             System.Security.Cryptography.DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual bool VerifyDataCore(
@@ -611,7 +651,8 @@ namespace System.Security.Cryptography
             System.ReadOnlySpan<byte> signature,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             System.Security.Cryptography.DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual bool VerifyDataCore(
@@ -619,7 +660,8 @@ namespace System.Security.Cryptography
             System.ReadOnlySpan<byte> signature,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             System.Security.Cryptography.DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             throw null;
         }
         public abstract bool VerifySignature(byte[] rgbHash, byte[] rgbSignature);
@@ -627,27 +669,31 @@ namespace System.Security.Cryptography
             byte[] rgbHash,
             byte[] rgbSignature,
             System.Security.Cryptography.DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             throw null;
         }
         public virtual bool VerifySignature(
             System.ReadOnlySpan<byte> hash,
             System.ReadOnlySpan<byte> signature
-        ) {
+        )
+        {
             throw null;
         }
         public bool VerifySignature(
             System.ReadOnlySpan<byte> hash,
             System.ReadOnlySpan<byte> signature,
             System.Security.Cryptography.DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual bool VerifySignatureCore(
             System.ReadOnlySpan<byte> hash,
             System.ReadOnlySpan<byte> signature,
             System.Security.Cryptography.DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -730,12 +776,14 @@ namespace System.Security.Cryptography
         }
         public static System.Security.Cryptography.ECCurve CreateFromFriendlyName(
             string oidFriendlyName
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Security.Cryptography.ECCurve CreateFromOid(
             System.Security.Cryptography.Oid curveOid
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Security.Cryptography.ECCurve CreateFromValue(string oidValue)
@@ -843,12 +891,14 @@ namespace System.Security.Cryptography
         }
         public static System.Security.Cryptography.ECDiffieHellman Create(
             System.Security.Cryptography.ECCurve curve
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Security.Cryptography.ECDiffieHellman Create(
             System.Security.Cryptography.ECParameters parameters
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -861,7 +911,8 @@ namespace System.Security.Cryptography
         public byte[] DeriveKeyFromHash(
             System.Security.Cryptography.ECDiffieHellmanPublicKey otherPartyPublicKey,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             throw null;
         }
         public virtual byte[] DeriveKeyFromHash(
@@ -869,14 +920,16 @@ namespace System.Security.Cryptography
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             byte[]? secretPrepend,
             byte[]? secretAppend
-        ) {
+        )
+        {
             throw null;
         }
         public byte[] DeriveKeyFromHmac(
             System.Security.Cryptography.ECDiffieHellmanPublicKey otherPartyPublicKey,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             byte[]? hmacKey
-        ) {
+        )
+        {
             throw null;
         }
         public virtual byte[] DeriveKeyFromHmac(
@@ -885,19 +938,22 @@ namespace System.Security.Cryptography
             byte[]? hmacKey,
             byte[]? secretPrepend,
             byte[]? secretAppend
-        ) {
+        )
+        {
             throw null;
         }
         public virtual byte[] DeriveKeyMaterial(
             System.Security.Cryptography.ECDiffieHellmanPublicKey otherPartyPublicKey
-        ) {
+        )
+        {
             throw null;
         }
         public virtual byte[] DeriveKeyTls(
             System.Security.Cryptography.ECDiffieHellmanPublicKey otherPartyPublicKey,
             byte[] prfLabel,
             byte[] prfSeed
-        ) {
+        )
+        {
             throw null;
         }
         public virtual byte[] ExportECPrivateKey()
@@ -906,12 +962,14 @@ namespace System.Security.Cryptography
         }
         public virtual System.Security.Cryptography.ECParameters ExportExplicitParameters(
             bool includePrivateParameters
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Security.Cryptography.ECParameters ExportParameters(
             bool includePrivateParameters
-        ) {
+        )
+        {
             throw null;
         }
         public override void FromXmlString(string xmlString) { }
@@ -924,14 +982,16 @@ namespace System.Security.Cryptography
             System.ReadOnlySpan<byte> passwordBytes,
             System.ReadOnlySpan<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             throw null;
         }
         public override void ImportEncryptedPkcs8PrivateKey(
             System.ReadOnlySpan<char> password,
             System.ReadOnlySpan<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             throw null;
         }
         public override void ImportFromEncryptedPem(
@@ -949,13 +1009,15 @@ namespace System.Security.Cryptography
         public override void ImportPkcs8PrivateKey(
             System.ReadOnlySpan<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             throw null;
         }
         public override void ImportSubjectPublicKeyInfo(
             System.ReadOnlySpan<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             throw null;
         }
         public override string ToXmlString(bool includePrivateParameters)
@@ -965,7 +1027,8 @@ namespace System.Security.Cryptography
         public virtual bool TryExportECPrivateKey(
             System.Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
         public override bool TryExportEncryptedPkcs8PrivateKey(
@@ -973,7 +1036,8 @@ namespace System.Security.Cryptography
             System.Security.Cryptography.PbeParameters pbeParameters,
             System.Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
         public override bool TryExportEncryptedPkcs8PrivateKey(
@@ -981,19 +1045,22 @@ namespace System.Security.Cryptography
             System.Security.Cryptography.PbeParameters pbeParameters,
             System.Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
         public override bool TryExportPkcs8PrivateKey(
             System.Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
         public override bool TryExportSubjectPublicKeyInfo(
             System.Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1026,7 +1093,8 @@ namespace System.Security.Cryptography
         public virtual bool TryExportSubjectPublicKeyInfo(
             System.Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1048,12 +1116,14 @@ namespace System.Security.Cryptography
         }
         public static System.Security.Cryptography.ECDsa Create(
             System.Security.Cryptography.ECCurve curve
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Security.Cryptography.ECDsa Create(
             System.Security.Cryptography.ECParameters parameters
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -1069,19 +1139,22 @@ namespace System.Security.Cryptography
         }
         public virtual System.Security.Cryptography.ECParameters ExportExplicitParameters(
             bool includePrivateParameters
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Security.Cryptography.ECParameters ExportParameters(
             bool includePrivateParameters
-        ) {
+        )
+        {
             throw null;
         }
         public override void FromXmlString(string xmlString) { }
         public virtual void GenerateKey(System.Security.Cryptography.ECCurve curve) { }
         public int GetMaxSignatureSize(
             System.Security.Cryptography.DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual byte[] HashData(
@@ -1089,13 +1162,15 @@ namespace System.Security.Cryptography
             int offset,
             int count,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual byte[] HashData(
             System.IO.Stream data,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             throw null;
         }
         public virtual void ImportECPrivateKey(System.ReadOnlySpan<byte> source, out int bytesRead)
@@ -1106,14 +1181,16 @@ namespace System.Security.Cryptography
             System.ReadOnlySpan<byte> passwordBytes,
             System.ReadOnlySpan<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             throw null;
         }
         public override void ImportEncryptedPkcs8PrivateKey(
             System.ReadOnlySpan<char> password,
             System.ReadOnlySpan<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             throw null;
         }
         public override void ImportFromEncryptedPem(
@@ -1131,13 +1208,15 @@ namespace System.Security.Cryptography
         public override void ImportPkcs8PrivateKey(
             System.ReadOnlySpan<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             throw null;
         }
         public override void ImportSubjectPublicKeyInfo(
             System.ReadOnlySpan<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             throw null;
         }
         public virtual byte[] SignData(
@@ -1145,7 +1224,8 @@ namespace System.Security.Cryptography
             int offset,
             int count,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             throw null;
         }
         public byte[] SignData(
@@ -1154,60 +1234,69 @@ namespace System.Security.Cryptography
             int count,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             System.Security.Cryptography.DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             throw null;
         }
         public virtual byte[] SignData(
             byte[] data,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             throw null;
         }
         public byte[] SignData(
             byte[] data,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             System.Security.Cryptography.DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             throw null;
         }
         public virtual byte[] SignData(
             System.IO.Stream data,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             throw null;
         }
         public byte[] SignData(
             System.IO.Stream data,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             System.Security.Cryptography.DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual byte[] SignDataCore(
             System.IO.Stream data,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             System.Security.Cryptography.DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual byte[] SignDataCore(
             System.ReadOnlySpan<byte> data,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             System.Security.Cryptography.DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             throw null;
         }
         public abstract byte[] SignHash(byte[] hash);
         public byte[] SignHash(
             byte[] hash,
             System.Security.Cryptography.DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual byte[] SignHashCore(
             System.ReadOnlySpan<byte> hash,
             System.Security.Cryptography.DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             throw null;
         }
         public override string ToXmlString(bool includePrivateParameters)
@@ -1217,7 +1306,8 @@ namespace System.Security.Cryptography
         public virtual bool TryExportECPrivateKey(
             System.Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
         public override bool TryExportEncryptedPkcs8PrivateKey(
@@ -1225,7 +1315,8 @@ namespace System.Security.Cryptography
             System.Security.Cryptography.PbeParameters pbeParameters,
             System.Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
         public override bool TryExportEncryptedPkcs8PrivateKey(
@@ -1233,19 +1324,22 @@ namespace System.Security.Cryptography
             System.Security.Cryptography.PbeParameters pbeParameters,
             System.Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
         public override bool TryExportPkcs8PrivateKey(
             System.Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
         public override bool TryExportSubjectPublicKeyInfo(
             System.Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual bool TryHashData(
@@ -1253,7 +1347,8 @@ namespace System.Security.Cryptography
             System.Span<byte> destination,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
         public virtual bool TrySignData(
@@ -1261,7 +1356,8 @@ namespace System.Security.Cryptography
             System.Span<byte> destination,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
         public bool TrySignData(
@@ -1270,7 +1366,8 @@ namespace System.Security.Cryptography
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             System.Security.Cryptography.DSASignatureFormat signatureFormat,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual bool TrySignDataCore(
@@ -1279,14 +1376,16 @@ namespace System.Security.Cryptography
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             System.Security.Cryptography.DSASignatureFormat signatureFormat,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
         public virtual bool TrySignHash(
             System.ReadOnlySpan<byte> hash,
             System.Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
         public bool TrySignHash(
@@ -1294,7 +1393,8 @@ namespace System.Security.Cryptography
             System.Span<byte> destination,
             System.Security.Cryptography.DSASignatureFormat signatureFormat,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual bool TrySignHashCore(
@@ -1302,14 +1402,16 @@ namespace System.Security.Cryptography
             System.Span<byte> destination,
             System.Security.Cryptography.DSASignatureFormat signatureFormat,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
         public bool VerifyData(
             byte[] data,
             byte[] signature,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             throw null;
         }
         public bool VerifyData(
@@ -1317,7 +1419,8 @@ namespace System.Security.Cryptography
             byte[] signature,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             System.Security.Cryptography.DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             throw null;
         }
         public virtual bool VerifyData(
@@ -1326,7 +1429,8 @@ namespace System.Security.Cryptography
             int count,
             byte[] signature,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             throw null;
         }
         public bool VerifyData(
@@ -1336,14 +1440,16 @@ namespace System.Security.Cryptography
             byte[] signature,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             System.Security.Cryptography.DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             throw null;
         }
         public bool VerifyData(
             System.IO.Stream data,
             byte[] signature,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             throw null;
         }
         public bool VerifyData(
@@ -1351,14 +1457,16 @@ namespace System.Security.Cryptography
             byte[] signature,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             System.Security.Cryptography.DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             throw null;
         }
         public virtual bool VerifyData(
             System.ReadOnlySpan<byte> data,
             System.ReadOnlySpan<byte> signature,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             throw null;
         }
         public bool VerifyData(
@@ -1366,7 +1474,8 @@ namespace System.Security.Cryptography
             System.ReadOnlySpan<byte> signature,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             System.Security.Cryptography.DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual bool VerifyDataCore(
@@ -1374,7 +1483,8 @@ namespace System.Security.Cryptography
             System.ReadOnlySpan<byte> signature,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             System.Security.Cryptography.DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual bool VerifyDataCore(
@@ -1382,7 +1492,8 @@ namespace System.Security.Cryptography
             System.ReadOnlySpan<byte> signature,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             System.Security.Cryptography.DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             throw null;
         }
         public abstract bool VerifyHash(byte[] hash, byte[] signature);
@@ -1390,27 +1501,31 @@ namespace System.Security.Cryptography
             byte[] hash,
             byte[] signature,
             System.Security.Cryptography.DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             throw null;
         }
         public virtual bool VerifyHash(
             System.ReadOnlySpan<byte> hash,
             System.ReadOnlySpan<byte> signature
-        ) {
+        )
+        {
             throw null;
         }
         public bool VerifyHash(
             System.ReadOnlySpan<byte> hash,
             System.ReadOnlySpan<byte> signature,
             System.Security.Cryptography.DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual bool VerifyHashCore(
             System.ReadOnlySpan<byte> hash,
             System.ReadOnlySpan<byte> signature,
             System.Security.Cryptography.DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1436,7 +1551,8 @@ namespace System.Security.Cryptography
             int outputLength,
             byte[]? salt = null,
             byte[]? info = null
-        ) {
+        )
+        {
             throw null;
         }
         public static void DeriveKey(
@@ -1451,7 +1567,8 @@ namespace System.Security.Cryptography
             byte[] prk,
             int outputLength,
             byte[]? info = null
-        ) {
+        )
+        {
             throw null;
         }
         public static void Expand(
@@ -1464,7 +1581,8 @@ namespace System.Security.Cryptography
             System.Security.Cryptography.HashAlgorithmName hashAlgorithmName,
             byte[] ikm,
             byte[]? salt = null
-        ) {
+        )
+        {
             throw null;
         }
         public static int Extract(
@@ -1472,7 +1590,8 @@ namespace System.Security.Cryptography
             System.ReadOnlySpan<byte> ikm,
             System.ReadOnlySpan<byte> salt,
             System.Span<byte> prk
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1621,21 +1740,24 @@ namespace System.Security.Cryptography
         public void AppendData(System.ReadOnlySpan<byte> data) { }
         public static System.Security.Cryptography.IncrementalHash CreateHash(
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             throw null;
         }
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         public static System.Security.Cryptography.IncrementalHash CreateHMAC(
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             byte[] key
-        ) {
+        )
+        {
             throw null;
         }
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         public static System.Security.Cryptography.IncrementalHash CreateHMAC(
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             System.ReadOnlySpan<byte> key
-        ) {
+        )
+        {
             throw null;
         }
         public void Dispose() { }
@@ -1701,7 +1823,8 @@ namespace System.Security.Cryptography
             System.ReadOnlySpan<byte> source,
             System.Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1844,7 +1967,8 @@ namespace System.Security.Cryptography
             int iterations,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             int outputLength
-        ) {
+        )
+        {
             throw null;
         }
         public static byte[] Pbkdf2(
@@ -1853,7 +1977,8 @@ namespace System.Security.Cryptography
             int iterations,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             int outputLength
-        ) {
+        )
+        {
             throw null;
         }
         public static void Pbkdf2(
@@ -1869,7 +1994,8 @@ namespace System.Security.Cryptography
             int iterations,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             int outputLength
-        ) {
+        )
+        {
             throw null;
         }
         public static void Pbkdf2(
@@ -1885,7 +2011,8 @@ namespace System.Security.Cryptography
             int iterations,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             int outputLength
-        ) {
+        )
+        {
             throw null;
         }
         public override void Reset() { }
@@ -1962,7 +2089,8 @@ namespace System.Security.Cryptography
         public override System.Security.Cryptography.ICryptoTransform CreateDecryptor(
             byte[] rgbKey,
             byte[]? rgbIV
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Security.Cryptography.ICryptoTransform CreateEncryptor()
@@ -1972,7 +2100,8 @@ namespace System.Security.Cryptography
         public override System.Security.Cryptography.ICryptoTransform CreateEncryptor(
             byte[] rgbKey,
             byte[]? rgbIV
-        ) {
+        )
+        {
             throw null;
         }
         protected override void Dispose(bool disposing) { }
@@ -2001,7 +2130,8 @@ namespace System.Security.Cryptography
         }
         public static System.Security.Cryptography.RSA Create(
             System.Security.Cryptography.RSAParameters parameters
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -2014,7 +2144,8 @@ namespace System.Security.Cryptography
         public virtual byte[] Decrypt(
             byte[] data,
             System.Security.Cryptography.RSAEncryptionPadding padding
-        ) {
+        )
+        {
             throw null;
         }
         public virtual byte[] DecryptValue(byte[] rgb)
@@ -2024,7 +2155,8 @@ namespace System.Security.Cryptography
         public virtual byte[] Encrypt(
             byte[] data,
             System.Security.Cryptography.RSAEncryptionPadding padding
-        ) {
+        )
+        {
             throw null;
         }
         public virtual byte[] EncryptValue(byte[] rgb)
@@ -2048,27 +2180,31 @@ namespace System.Security.Cryptography
             int offset,
             int count,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual byte[] HashData(
             System.IO.Stream data,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             throw null;
         }
         public override void ImportEncryptedPkcs8PrivateKey(
             System.ReadOnlySpan<byte> passwordBytes,
             System.ReadOnlySpan<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             throw null;
         }
         public override void ImportEncryptedPkcs8PrivateKey(
             System.ReadOnlySpan<char> password,
             System.ReadOnlySpan<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             throw null;
         }
         public override void ImportFromEncryptedPem(
@@ -2086,7 +2222,8 @@ namespace System.Security.Cryptography
         public override void ImportPkcs8PrivateKey(
             System.ReadOnlySpan<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             throw null;
         }
         public virtual void ImportRSAPrivateKey(System.ReadOnlySpan<byte> source, out int bytesRead)
@@ -2100,7 +2237,8 @@ namespace System.Security.Cryptography
         public override void ImportSubjectPublicKeyInfo(
             System.ReadOnlySpan<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             throw null;
         }
         public virtual byte[] SignData(
@@ -2109,28 +2247,32 @@ namespace System.Security.Cryptography
             int count,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             System.Security.Cryptography.RSASignaturePadding padding
-        ) {
+        )
+        {
             throw null;
         }
         public byte[] SignData(
             byte[] data,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             System.Security.Cryptography.RSASignaturePadding padding
-        ) {
+        )
+        {
             throw null;
         }
         public virtual byte[] SignData(
             System.IO.Stream data,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             System.Security.Cryptography.RSASignaturePadding padding
-        ) {
+        )
+        {
             throw null;
         }
         public virtual byte[] SignHash(
             byte[] hash,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             System.Security.Cryptography.RSASignaturePadding padding
-        ) {
+        )
+        {
             throw null;
         }
         public override string ToXmlString(bool includePrivateParameters)
@@ -2142,7 +2284,8 @@ namespace System.Security.Cryptography
             System.Span<byte> destination,
             System.Security.Cryptography.RSAEncryptionPadding padding,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
         public virtual bool TryEncrypt(
@@ -2150,7 +2293,8 @@ namespace System.Security.Cryptography
             System.Span<byte> destination,
             System.Security.Cryptography.RSAEncryptionPadding padding,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
         public override bool TryExportEncryptedPkcs8PrivateKey(
@@ -2158,7 +2302,8 @@ namespace System.Security.Cryptography
             System.Security.Cryptography.PbeParameters pbeParameters,
             System.Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
         public override bool TryExportEncryptedPkcs8PrivateKey(
@@ -2166,31 +2311,36 @@ namespace System.Security.Cryptography
             System.Security.Cryptography.PbeParameters pbeParameters,
             System.Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
         public override bool TryExportPkcs8PrivateKey(
             System.Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
         public virtual bool TryExportRSAPrivateKey(
             System.Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
         public virtual bool TryExportRSAPublicKey(
             System.Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
         public override bool TryExportSubjectPublicKeyInfo(
             System.Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual bool TryHashData(
@@ -2198,7 +2348,8 @@ namespace System.Security.Cryptography
             System.Span<byte> destination,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
         public virtual bool TrySignData(
@@ -2207,7 +2358,8 @@ namespace System.Security.Cryptography
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             System.Security.Cryptography.RSASignaturePadding padding,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
         public virtual bool TrySignHash(
@@ -2216,7 +2368,8 @@ namespace System.Security.Cryptography
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             System.Security.Cryptography.RSASignaturePadding padding,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
         public bool VerifyData(
@@ -2224,7 +2377,8 @@ namespace System.Security.Cryptography
             byte[] signature,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             System.Security.Cryptography.RSASignaturePadding padding
-        ) {
+        )
+        {
             throw null;
         }
         public virtual bool VerifyData(
@@ -2234,7 +2388,8 @@ namespace System.Security.Cryptography
             byte[] signature,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             System.Security.Cryptography.RSASignaturePadding padding
-        ) {
+        )
+        {
             throw null;
         }
         public bool VerifyData(
@@ -2242,7 +2397,8 @@ namespace System.Security.Cryptography
             byte[] signature,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             System.Security.Cryptography.RSASignaturePadding padding
-        ) {
+        )
+        {
             throw null;
         }
         public virtual bool VerifyData(
@@ -2250,7 +2406,8 @@ namespace System.Security.Cryptography
             System.ReadOnlySpan<byte> signature,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             System.Security.Cryptography.RSASignaturePadding padding
-        ) {
+        )
+        {
             throw null;
         }
         public virtual bool VerifyHash(
@@ -2258,7 +2415,8 @@ namespace System.Security.Cryptography
             byte[] signature,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             System.Security.Cryptography.RSASignaturePadding padding
-        ) {
+        )
+        {
             throw null;
         }
         public virtual bool VerifyHash(
@@ -2266,7 +2424,8 @@ namespace System.Security.Cryptography
             System.ReadOnlySpan<byte> signature,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
             System.Security.Cryptography.RSASignaturePadding padding
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -2305,18 +2464,21 @@ namespace System.Security.Cryptography
         }
         public static System.Security.Cryptography.RSAEncryptionPadding CreateOaep(
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             throw null;
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 System.Security.Cryptography.RSAEncryptionPadding? other
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -2326,13 +2488,15 @@ namespace System.Security.Cryptography
         public static bool operator ==(
             System.Security.Cryptography.RSAEncryptionPadding? left,
             System.Security.Cryptography.RSAEncryptionPadding? right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Security.Cryptography.RSAEncryptionPadding? left,
             System.Security.Cryptography.RSAEncryptionPadding? right
-        ) {
+        )
+        {
             throw null;
         }
         public override string ToString()
@@ -2499,13 +2663,15 @@ namespace System.Security.Cryptography
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 System.Security.Cryptography.RSASignaturePadding? other
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -2515,13 +2681,15 @@ namespace System.Security.Cryptography
         public static bool operator ==(
             System.Security.Cryptography.RSASignaturePadding? left,
             System.Security.Cryptography.RSASignaturePadding? right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Security.Cryptography.RSASignaturePadding? left,
             System.Security.Cryptography.RSASignaturePadding? right
-        ) {
+        )
+        {
             throw null;
         }
         public override string ToString()
@@ -2564,7 +2732,8 @@ namespace System.Security.Cryptography
             System.ReadOnlySpan<byte> source,
             System.Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -2585,7 +2754,8 @@ namespace System.Security.Cryptography
         protected sealed override bool TryHashFinal(
             System.Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -2619,7 +2789,8 @@ namespace System.Security.Cryptography
             System.ReadOnlySpan<byte> source,
             System.Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -2640,7 +2811,8 @@ namespace System.Security.Cryptography
         protected sealed override bool TryHashFinal(
             System.Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -2674,7 +2846,8 @@ namespace System.Security.Cryptography
             System.ReadOnlySpan<byte> source,
             System.Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -2695,7 +2868,8 @@ namespace System.Security.Cryptography
         protected sealed override bool TryHashFinal(
             System.Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -2729,7 +2903,8 @@ namespace System.Security.Cryptography
             System.ReadOnlySpan<byte> source,
             System.Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -2750,7 +2925,8 @@ namespace System.Security.Cryptography
         protected sealed override bool TryHashFinal(
             System.Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -2784,7 +2960,8 @@ namespace System.Security.Cryptography
         )]
         public virtual System.Security.Cryptography.AsymmetricSignatureDeformatter CreateDeformatter(
             System.Security.Cryptography.AsymmetricAlgorithm key
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -2799,7 +2976,8 @@ namespace System.Security.Cryptography
         )]
         public virtual System.Security.Cryptography.AsymmetricSignatureFormatter CreateFormatter(
             System.Security.Cryptography.AsymmetricAlgorithm key
-        ) {
+        )
+        {
             throw null;
         }
     }

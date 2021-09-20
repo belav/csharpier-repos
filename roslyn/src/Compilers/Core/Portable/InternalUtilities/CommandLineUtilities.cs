@@ -48,7 +48,8 @@ namespace Roslyn.Utilities
         public static IEnumerable<string> SplitCommandLineIntoArguments(
             string commandLine,
             bool removeHashComments
-        ) {
+        )
+        {
             return SplitCommandLineIntoArguments(commandLine, removeHashComments, out _);
         }
 
@@ -56,7 +57,8 @@ namespace Roslyn.Utilities
             string commandLine,
             bool removeHashComments,
             out char? illegalChar
-        ) {
+        )
+        {
             var builder = new StringBuilder(commandLine.Length);
             var list = new List<string>();
             var i = 0;
@@ -84,7 +86,8 @@ namespace Roslyn.Utilities
                 while (
                     i < commandLine.Length
                     && (!char.IsWhiteSpace(commandLine[i]) || (quoteCount % 2 != 0))
-                ) {
+                )
+                {
                     var current = commandLine[i];
                     switch (current)
                     {

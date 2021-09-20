@@ -607,7 +607,8 @@ namespace System.Collections.Concurrent.Tests
             int threads,
             int addsPerThread,
             bool isAdd
-        ) {
+        )
+        {
             ConcurrentDictionary<int, int> dict = new ConcurrentDictionary<int, int>(cLevel, 1);
 
             int count = threads;

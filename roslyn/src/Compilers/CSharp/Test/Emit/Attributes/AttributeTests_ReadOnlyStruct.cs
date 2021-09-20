@@ -854,7 +854,8 @@ public class Test
 
         private static void AssertNotReferencedIsReadOnlyAttribute(
             ImmutableArray<CSharpAttributeData> attributes
-        ) {
+        )
+        {
             foreach (var attr in attributes)
             {
                 Assert.NotEqual("IsReadOnlyAttribute", attr.AttributeClass.Name);
@@ -872,7 +873,8 @@ public class Test
         private static void AssertGeneratedEmbeddedAttribute(
             AssemblySymbol assembly,
             string expectedTypeName
-        ) {
+        )
+        {
             var typeSymbol = assembly.GetTypeByMetadataName(expectedTypeName);
             Assert.NotNull(typeSymbol);
             Assert.Equal(Accessibility.Internal, typeSymbol.DeclaredAccessibility);

@@ -39,7 +39,8 @@ namespace Test
                 && (s1.Field2 == s2.Field2)
                 && (s1.Field3 == s2.Field3)
                 && (s1.Field4 == s2.Field4)
-            ) {
+            )
+            {
                 return true;
             }
             else
@@ -55,7 +56,8 @@ namespace Test
             string kind,
             string value,
             string expected
-        ) {
+        )
+        {
             throw new Exception(
                 String.Format(
                     "FAILED: {0} verification failed.\r\n"

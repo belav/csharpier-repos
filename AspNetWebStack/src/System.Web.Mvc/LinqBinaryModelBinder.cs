@@ -10,7 +10,8 @@ namespace System.Web.Mvc
         public override object BindModel(
             ControllerContext controllerContext,
             ModelBindingContext bindingContext
-        ) {
+        )
+        {
             byte[] byteValue = (byte[])base.BindModel(controllerContext, bindingContext);
             if (byteValue == null)
             {

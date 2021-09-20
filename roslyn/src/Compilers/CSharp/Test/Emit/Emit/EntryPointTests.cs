@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Emit
             string source,
             CSharpParseOptions parseOptions = null,
             string mainTypeName = null
-        ) {
+        )
+        {
             return CreateCompilation(
                 source,
                 options: TestOptions.ReleaseExe.WithWarningLevel(5).WithMainTypeName(mainTypeName),

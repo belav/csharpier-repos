@@ -657,7 +657,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             MyObject obj = new MyObject(1, _output);
             m_xsltArg = new XsltArgumentList();
 
@@ -676,7 +677,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("myObjectDef.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expXml);
                 return;
             }
@@ -719,7 +721,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string Baseline = Path.Combine("baseline", (string)param);
             m_xsltArg = new XsltArgumentList();
 
@@ -736,7 +739,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(Baseline, _strOutFile);
                 return;
             }
@@ -757,7 +761,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             m_xsltArg = new XsltArgumentList();
 
             retObj = m_xsltArg.GetExtensionObject(szDefaultNS);
@@ -793,7 +798,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             m_xsltArg = new XsltArgumentList();
             MyObject obj = new MyObject(5, _output);
 
@@ -811,7 +817,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("myObjectLongNS.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expXml);
                 return;
             }
@@ -920,7 +927,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             MyObject obj = new MyObject(8, _output);
             m_xsltArg = new XsltArgumentList();
 
@@ -965,7 +973,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("myObjectDef.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expXml);
                 return;
             }
@@ -986,7 +995,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             int i = 1;
             m_xsltArg = new XsltArgumentList();
 
@@ -1030,7 +1040,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             MyObject obj = new MyObject(10, _output);
             m_xsltArg = new XsltArgumentList();
 
@@ -1072,7 +1083,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             MyObject obj = new MyObject(11, _output);
             m_xsltArg = new XsltArgumentList();
 
@@ -1095,7 +1107,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("myObjectDef.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expXml);
                 return;
             }
@@ -1214,7 +1227,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string Baseline = Path.Combine("baseline", (string)param);
             m_xsltArg = new XsltArgumentList();
 
@@ -1227,7 +1241,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(Baseline, _strOutFile);
                 return;
             }
@@ -1344,7 +1359,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string Baseline = Path.Combine("baseline", (string)param);
             m_xsltArg = new XsltArgumentList();
 
@@ -1357,7 +1373,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParamLongName.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(Baseline, _strOutFile);
                 return;
             }
@@ -1474,7 +1491,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string Baseline = Path.Combine("baseline", (string)param);
             m_xsltArg = new XsltArgumentList();
 
@@ -1488,7 +1506,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(Baseline, _strOutFile);
                 return;
             }
@@ -1567,7 +1586,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string Baseline = Path.Combine("baseline", (string)param);
             m_xsltArg = new XsltArgumentList();
 
@@ -1580,7 +1600,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(Baseline, _strOutFile);
                 return;
             }
@@ -1690,7 +1711,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string Baseline = Path.Combine("baseline", (string)param);
 
             m_xsltArg = new XsltArgumentList();
@@ -1721,7 +1743,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(Baseline, _strOutFile);
                 return;
             }
@@ -1800,7 +1823,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string Baseline = Path.Combine("baseline", (string)param);
             m_xsltArg = new XsltArgumentList();
 
@@ -1830,7 +1854,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(Baseline, _strOutFile);
                 return;
             }
@@ -1909,7 +1934,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string Baseline = Path.Combine("baseline", (string)param);
             m_xsltArg = new XsltArgumentList();
 
@@ -1940,7 +1966,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(Baseline, _strOutFile);
                 return;
             }
@@ -2037,7 +2064,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string Baseline = Path.Combine("baseline", (string)param);
             m_xsltArg = new XsltArgumentList();
             string obj = "Test";
@@ -2078,7 +2106,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(Baseline, _strOutFile);
                 return;
             }
@@ -2157,7 +2186,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string Baseline = Path.Combine("baseline", (string)param);
             int i = 1;
             int errCount = 0;
@@ -2202,7 +2232,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(Baseline, _strOutFile);
                 return;
             }
@@ -2281,7 +2312,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string Baseline = Path.Combine("baseline", (string)param);
             m_xsltArg = new XsltArgumentList();
             string obj = "Test";
@@ -2297,7 +2329,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(Baseline, _strOutFile);
                 return;
             }
@@ -2376,7 +2409,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string Baseline = Path.Combine("baseline", (string)param);
             m_xsltArg = new XsltArgumentList();
             string obj = "Test";
@@ -2400,7 +2434,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(Baseline, _strOutFile);
                 return;
             }
@@ -2479,7 +2514,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string Baseline = Path.Combine("baseline", (string)param);
 
             m_xsltArg = new XsltArgumentList();
@@ -2511,7 +2547,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParamNS.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(Baseline, _strOutFile);
                 return;
             }
@@ -2591,7 +2628,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string expected1 = @"<?xml version=""1.0"" encoding=""utf-8""?><out>Param: first</out>";
             string expected2 =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><out>Param: second</out>";
@@ -4701,7 +4739,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             m_xsltArg = new XsltArgumentList();
             string xslFile = param0.ToString();
             string expected = "<result>" + param1.ToString() + "</result>";
@@ -4709,7 +4748,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL(xslFile, xslInputType, readerType) == 1)
                 && (Transform_ArgList("AddParameter.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -6775,7 +6815,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string xslFile = param0.ToString();
             string expected = "<result>" + param1.ToString() + "</result>";
 
@@ -6785,7 +6826,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL(xslFile, xslInputType, readerType) == 1)
                 && (Transform_ArgList("AddParameter.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -7314,7 +7356,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string xslFile = param0.ToString();
             string expected = "<result>" + param1.ToString() + "</result>";
 
@@ -7324,7 +7367,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL(xslFile, xslInputType, readerType) == 1)
                 && (Transform_ArgList("AddParameter.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -7428,7 +7472,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             MyObject obj = new MyObject(1, _output);
             m_xsltArg = new XsltArgumentList();
             string Baseline = Path.Combine("baseline", (string)param);
@@ -7438,7 +7483,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("myObjectDef.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(Baseline, _strOutFile);
                 return;
             }
@@ -7550,7 +7596,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             m_xsltArg = new XsltArgumentList();
             MyObject obj = new MyObject(4, _output);
             string Baseline = Path.Combine("baseline", (string)param);
@@ -7560,7 +7607,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("myObjectLongNS.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(Baseline, _strOutFile);
                 return;
             }
@@ -7673,7 +7721,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             MyObject obj = new MyObject(1, _output);
             m_xsltArg = new XsltArgumentList();
             string Baseline = Path.Combine("baseline", (string)param);
@@ -7693,7 +7742,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("myObjectDef.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(Baseline, _strOutFile);
                 return;
             }
@@ -7783,7 +7833,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result xmlns:myObj=""urn:my-object"">
 
@@ -7798,7 +7849,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("MyObject_Null.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -7877,7 +7929,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string Baseline = Path.Combine("baseline", (string)param);
             m_xsltArg = new XsltArgumentList();
 
@@ -7894,7 +7947,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("myObjectDef.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(Baseline, _strOutFile);
                 return;
             }
@@ -7963,7 +8017,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             int i = 1;
             m_xsltArg = new XsltArgumentList();
 
@@ -8080,7 +8135,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string Baseline = Path.Combine("baseline", (string)param);
             MyObject obj = new MyObject(14, _output);
             m_xsltArg = new XsltArgumentList();
@@ -8095,7 +8151,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("myObjectDef.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(Baseline, _strOutFile);
                 return;
             }
@@ -8164,7 +8221,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             MyObject obj = new MyObject(15, _output);
             m_xsltArg = new XsltArgumentList();
 
@@ -8244,7 +8302,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             MyObject obj = new MyObject(1, _output);
             m_xsltArg = new XsltArgumentList();
 
@@ -8339,7 +8398,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result xmlns:myObj=""urn:my-object"">
 		Here:End
@@ -8353,7 +8413,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("MyObject_ConsoleWrite.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -8432,7 +8493,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             MyObject obj = new MyObject(18, _output);
             m_xsltArg = new XsltArgumentList();
             string Baseline = Path.Combine("baseline", (string)param);
@@ -8442,7 +8504,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("MyObject_Recursion.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(Baseline, _strOutFile);
                 return;
             }
@@ -8521,7 +8584,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string Baseline = Path.Combine("baseline", (string)param);
             MyObject obj = new MyObject(20, _output);
             m_xsltArg = new XsltArgumentList();
@@ -8531,7 +8595,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("MyObject_FnExists.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(Baseline, _strOutFile);
                 return;
             }
@@ -8610,7 +8675,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string Baseline = Path.Combine("baseline", (string)param);
             MyObject obj = new MyObject(1, _output);
             m_xsltArg = new XsltArgumentList();
@@ -8620,7 +8686,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("MyObject_Arguments.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(Baseline, _strOutFile);
                 return;
             }
@@ -8711,7 +8778,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             MyObject obj = new MyObject(25, _output);
             m_xsltArg = new XsltArgumentList();
 
@@ -8792,7 +8860,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             MyObject obj = new MyObject(26, _output);
             m_xsltArg = new XsltArgumentList();
 
@@ -8884,7 +8953,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             MyObject obj = new MyObject(27, _output);
             m_xsltArg = new XsltArgumentList();
             string Baseline = Path.Combine("baseline", (string)param);
@@ -8894,7 +8964,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("MyObject_KeepingState.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(Baseline, _strOutFile);
                 return;
             }
@@ -8973,7 +9044,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             MyObject obj = new MyObject(28, _output);
             m_xsltArg = new XsltArgumentList();
             string Baseline = Path.Combine("baseline", (string)param);
@@ -8983,7 +9055,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("MyObject_KillerStrings.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 if (outputType == OutputType.Writer)
                     /* writer output is slighlty different which causes a mismatch so we won't compare */
                     return;
@@ -9055,7 +9128,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             MyObject obj = new MyObject(29, _output);
             m_xsltArg = new XsltArgumentList();
 
@@ -9160,7 +9234,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string Baseline1 = Path.Combine("baseline", (string)param) + "a.txt";
             string Baseline2 = Path.Combine("baseline", (string)param) + "b.txt";
 
@@ -9781,7 +9856,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             ExObj obj = new ExObj(0, _output);
             m_xsltArg = new XsltArgumentList();
             string xslFile = param0.ToString();
@@ -9792,7 +9868,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL(xslFile, xslInputType, readerType) == 1)
                 && (Transform_ArgList("ExtData.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(Baseline, _strOutFile);
                 return;
             }
@@ -10246,7 +10323,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             /*
              * In these variations, the XSLT calls the extension function Increment from XSLT.
              * In some cases, the variable is never used in the XSLT (Bug 357711)
@@ -10262,7 +10340,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL(xslFile, xslInputType, readerType) == 1)
                 && (Transform_ArgList("ExtData.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(Baseline, _strOutFile);
                 return;
             }
@@ -10354,7 +10433,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             m_xsltArg = new XsltArgumentList();
 
             m_xsltArg.AddParam("myArg1", szEmpty, "Test2");
@@ -10379,7 +10459,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(_baseline, "out.xml");
                 return;
             }
@@ -10437,7 +10518,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string Baseline = Path.Combine("baseline", (string)param);
             m_xsltArg = new XsltArgumentList();
             m_xsltArg.RemoveParam(szEmpty, szEmpty);
@@ -10445,7 +10527,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(Baseline, _strOutFile);
                 return;
             }
@@ -10489,7 +10572,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string Baseline = Path.Combine("baseline", (string)param);
             m_xsltArg = new XsltArgumentList();
             m_xsltArg.RemoveParam(szSimple, szEmpty);
@@ -10497,7 +10581,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(Baseline, _strOutFile);
                 return;
             }
@@ -10541,7 +10626,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string Baseline = Path.Combine("baseline", (string)param);
             m_xsltArg = new XsltArgumentList();
             m_xsltArg.RemoveParam(szInvalid, szEmpty);
@@ -10549,7 +10635,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(Baseline, _strOutFile);
                 return;
             }
@@ -10593,7 +10680,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string Baseline = Path.Combine("baseline", (string)param);
             m_xsltArg = new XsltArgumentList();
 
@@ -10603,7 +10691,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParamLongName.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(Baseline, _strOutFile);
                 return;
             }
@@ -10662,7 +10751,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string Baseline = Path.Combine("baseline", (string)param);
             m_xsltArg = new XsltArgumentList();
 
@@ -10672,7 +10762,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(Baseline, _strOutFile);
                 return;
             }
@@ -10716,7 +10807,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string Baseline = Path.Combine("baseline", (string)param);
             m_xsltArg = new XsltArgumentList();
 
@@ -10726,7 +10818,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(Baseline, _strOutFile);
                 return;
             }
@@ -10770,7 +10863,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string Baseline = Path.Combine("baseline", (string)param);
             m_xsltArg = new XsltArgumentList();
 
@@ -10780,7 +10874,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(Baseline, _strOutFile);
                 return;
             }
@@ -10824,7 +10919,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string Baseline = Path.Combine("baseline", (string)param);
 
             double d1 = double.PositiveInfinity;
@@ -11019,7 +11115,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(Baseline, _strOutFile);
                 return;
             }
@@ -11063,7 +11160,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string Baseline = Path.Combine("baseline", (string)param);
             m_xsltArg = new XsltArgumentList();
 
@@ -11076,7 +11174,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(Baseline, _strOutFile);
                 return;
             }
@@ -11120,7 +11219,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string Baseline = Path.Combine("baseline", (string)param);
             int i = 1;
             m_xsltArg = new XsltArgumentList();
@@ -11159,7 +11259,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(Baseline, _strOutFile);
                 return;
             }
@@ -11203,7 +11304,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string Baseline = Path.Combine("baseline", (string)param);
             m_xsltArg = new XsltArgumentList();
 
@@ -11215,7 +11317,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(Baseline, _strOutFile);
                 return;
             }
@@ -11281,7 +11384,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             MyObject obj = new MyObject(1, _output);
             m_xsltArg = new XsltArgumentList();
 
@@ -11356,7 +11460,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string Baseline = Path.Combine("baseline", (string)param);
             MyObject obj = new MyObject(10, _output);
             m_xsltArg = new XsltArgumentList();
@@ -11368,7 +11473,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(Baseline, _strOutFile);
                 return;
             }
@@ -11412,7 +11518,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string Baseline = Path.Combine("baseline", (string)param);
             MyObject obj = new MyObject(4, _output);
             m_xsltArg = new XsltArgumentList();
@@ -11423,7 +11530,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("myObjectDef.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(Baseline, _strOutFile);
                 return;
             }
@@ -11462,7 +11570,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             m_xsltArg = new XsltArgumentList();
             MyObject obj = new MyObject(5, _output);
 
@@ -11518,7 +11627,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string Baseline = Path.Combine("baseline", (string)param);
             MyObject obj = new MyObject(6, _output);
             m_xsltArg = new XsltArgumentList();
@@ -11544,7 +11654,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(Baseline, _strOutFile);
                 return;
             }
@@ -11588,7 +11699,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             MyObject obj = new MyObject(7, _output);
             m_xsltArg = new XsltArgumentList();
             string Baseline = Path.Combine("baseline", (string)param);
@@ -11603,7 +11715,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("myObjectDef.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(Baseline, _strOutFile);
                 return;
             }
@@ -11642,7 +11755,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             int i = 1;
             m_xsltArg = new XsltArgumentList();
 
@@ -11710,7 +11824,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string Baseline = Path.Combine("baseline", (string)param);
             MyObject obj = new MyObject(10, _output);
             m_xsltArg = new XsltArgumentList();
@@ -11721,7 +11836,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(Baseline, _strOutFile);
                 return;
             }
@@ -11758,7 +11874,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string Baseline = Path.Combine("baseline", (string)param);
             m_xsltArg = new XsltArgumentList();
 
@@ -11775,7 +11892,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(Baseline, _strOutFile);
                 return;
             }
@@ -11798,7 +11916,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string Baseline = Path.Combine("baseline", (string)param);
             m_xsltArg = new XsltArgumentList();
 
@@ -11806,7 +11925,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(Baseline, _strOutFile);
                 return;
             }
@@ -11829,7 +11949,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string Baseline = Path.Combine("baseline", (string)param);
             m_xsltArg = new XsltArgumentList();
 
@@ -11846,7 +11967,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(Baseline, _strOutFile);
                 return;
             }
@@ -11867,7 +11989,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             MyObject obj = new MyObject(26, _output);
             m_xsltArg = new XsltArgumentList();
 
@@ -11910,7 +12033,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string Baseline = Path.Combine("baseline", (string)param);
             m_xsltArg = new XsltArgumentList();
             string obj = "Test";
@@ -11945,7 +12069,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(Baseline, _strOutFile);
                 return;
             }
@@ -11968,7 +12093,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string Baseline = Path.Combine("baseline", (string)param);
             m_xsltArg = new XsltArgumentList();
 
@@ -11986,7 +12112,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(Baseline, _strOutFile);
                 return;
             }
@@ -12009,7 +12136,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string Baseline = Path.Combine("baseline", (string)param);
             m_xsltArg = new XsltArgumentList();
             XsltArgumentList m_2 = new XsltArgumentList();
@@ -12024,7 +12152,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(Baseline, _strOutFile);
                 return;
             }
@@ -12047,7 +12176,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string Baseline = Path.Combine("baseline", (string)param);
             m_xsltArg = new XsltArgumentList();
 
@@ -12112,7 +12242,8 @@ namespace System.Xml.Tests
         private void argList_XsltMessageEncountered(
             object sender,
             XsltMessageEncounteredEventArgs e
-        ) {
+        )
+        {
             EventRaised = true;
             _output.WriteLine("---- OnMessageEvent Raised ----");
             _output.WriteLine(e.Message);

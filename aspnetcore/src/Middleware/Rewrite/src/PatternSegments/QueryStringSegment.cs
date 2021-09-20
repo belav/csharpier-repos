@@ -9,7 +9,8 @@ namespace Microsoft.AspNetCore.Rewrite.PatternSegments
             RewriteContext context,
             BackReferenceCollection? ruleBackRefernces,
             BackReferenceCollection? conditionBackReferences
-        ) {
+        )
+        {
             var queryString = context.HttpContext.Request.QueryString.ToString();
 
             if (!string.IsNullOrEmpty(queryString))

@@ -59,7 +59,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration.ConfigureCodeStyle
                 diagnostic.IsSuppressed
                 || SuppressionHelpers.IsNotConfigurableDiagnostic(diagnostic)
                 || diagnostic.Location.SourceTree == null
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -94,7 +95,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration.ConfigureCodeStyle
             Project project,
             IEnumerable<Diagnostic> diagnostics,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var result = ArrayBuilder<CodeFix>.GetInstance();
             foreach (var diagnostic in diagnostics)
             {
@@ -121,7 +123,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration.ConfigureCodeStyle
                         editorConfigLocation,
                         perLanguageOption
                     ) in codeStyleOptions.OrderBy(t => t.optionKey.Option.Name)
-                ) {
+                )
+                {
                     var topLevelAction = GetCodeActionForCodeStyleOption(
                         optionKey,
                         codeStyleOption,
@@ -163,7 +166,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration.ConfigureCodeStyle
                 bool isPerLanguage,
                 OptionSet optionSet,
                 bool hasMultipleOptions
-            ) {
+            )
+            {
                 // Add a code action for every valid value of the given code style option.
                 // We only support light-bulb configuration of code style options with boolean or enum values.
 
@@ -217,7 +221,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration.ConfigureCodeStyle
                             optionSet,
                             out var parts
                         )
-                    ) {
+                    )
+                    {
                         // We expect all code style values for same code style option to have the same editorconfig option name.
                         Debug.Assert(optionName == null || optionName == parts.optionName);
                         optionName ??= parts.optionName;

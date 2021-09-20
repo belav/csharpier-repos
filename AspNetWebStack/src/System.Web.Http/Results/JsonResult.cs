@@ -38,12 +38,13 @@ namespace System.Web.Http.Results
             JsonSerializerSettings serializerSettings,
             Encoding encoding,
             HttpRequestMessage request
-        ) : this(
-            content,
-            serializerSettings,
-            encoding,
-            new StatusCodeResult.DirectDependencyProvider(request)
-        ) { }
+        )
+            : this(
+                content,
+                serializerSettings,
+                encoding,
+                new StatusCodeResult.DirectDependencyProvider(request)
+            ) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonResult{T}"/> class with the values provided.
@@ -57,19 +58,21 @@ namespace System.Web.Http.Results
             JsonSerializerSettings serializerSettings,
             Encoding encoding,
             ApiController controller
-        ) : this(
-            content,
-            serializerSettings,
-            encoding,
-            new StatusCodeResult.ApiControllerDependencyProvider(controller)
-        ) { }
+        )
+            : this(
+                content,
+                serializerSettings,
+                encoding,
+                new StatusCodeResult.ApiControllerDependencyProvider(controller)
+            ) { }
 
         private JsonResult(
             T content,
             JsonSerializerSettings serializerSettings,
             Encoding encoding,
             StatusCodeResult.IDependencyProvider dependencies
-        ) {
+        )
+        {
             if (serializerSettings == null)
             {
                 throw new ArgumentNullException("serializerSettings");
@@ -163,13 +166,15 @@ namespace System.Web.Http.Results
                         bufferSize: DefaultStreamWriterBufferSize,
                         leaveOpen: true
                     )
-                ) {
+                )
+                {
                     using (
                         JsonWriter jsonWriter = new JsonTextWriter(textWriter)
                         {
                             CloseOutput = false
                         }
-                    ) {
+                    )
+                    {
                         serializer.Serialize(jsonWriter, _content);
                         jsonWriter.Flush();
                     }

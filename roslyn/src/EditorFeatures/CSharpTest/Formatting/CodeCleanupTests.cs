@@ -573,7 +573,8 @@ namespace A
             CodeStyleOption2<AddImportPlacement> preferredImportPlacement,
             bool systemUsingsFirst = true,
             bool separateUsingGroups = false
-        ) {
+        )
+        {
             using var workspace = TestWorkspace.CreateCSharp(
                 code,
                 composition: EditorTestCompositions.EditorFeaturesWpf

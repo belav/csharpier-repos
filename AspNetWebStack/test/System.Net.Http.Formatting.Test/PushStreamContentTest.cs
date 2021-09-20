@@ -198,7 +198,8 @@ namespace System.Net.Http
                 // the body content we give it.
                 using (
                     var request = new HttpRequestMessage(HttpMethod.Post, "http://localhost:30000/")
-                ) {
+                )
+                {
                     request.Content = new PushStreamContent(
                         (stream, content, context) =>
                         {
@@ -277,7 +278,8 @@ namespace System.Net.Http
             public override async Task<HttpResponseMessage> SendAsync(
                 HttpRequestMessage request,
                 Threading.CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var stream = new MemoryStream();
                 await request.Content.CopyToAsync(stream);
                 stream.Position = 0;

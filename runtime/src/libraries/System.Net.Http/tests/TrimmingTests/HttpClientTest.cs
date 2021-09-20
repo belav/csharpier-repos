@@ -23,7 +23,8 @@ class Program
             (OperatingSystem.IsLinux() && !OperatingSystem.IsAndroid())
             || OperatingSystem.IsWindows()
             || OperatingSystem.IsMacOS()
-        ) {
+        )
+        {
             Console.WriteLine(
                 $"Expected {quicDll} is {(quicDllExists ? "present - OK" : "missing - BAD")}."
             );

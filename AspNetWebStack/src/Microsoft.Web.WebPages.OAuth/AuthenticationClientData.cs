@@ -22,7 +22,8 @@ namespace Microsoft.Web.WebPages.OAuth
             IAuthenticationClient authenticationClient,
             string displayName,
             IDictionary<string, object> extraData
-        ) {
+        )
+        {
             if (authenticationClient == null)
             {
                 throw new ArgumentNullException("authenticationClient");

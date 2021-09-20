@@ -36,13 +36,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ExtractInterface
         public bool ExecuteCommand(
             ExtractInterfaceCommandArgs args,
             CommandExecutionContext context
-        ) {
+        )
+        {
             using (
                 context.OperationContext.AddScope(
                     allowCancellation: true,
                     EditorFeaturesResources.Extract_Interface
                 )
-            ) {
+            )
+            {
                 var subjectBuffer = args.SubjectBuffer;
                 if (!IsAvailable(subjectBuffer, out var workspace))
                 {

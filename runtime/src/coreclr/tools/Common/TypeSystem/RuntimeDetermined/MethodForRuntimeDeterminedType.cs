@@ -14,7 +14,8 @@ namespace Internal.TypeSystem
         internal MethodForRuntimeDeterminedType(
             MethodDesc typicalMethodDef,
             RuntimeDeterminedType rdType
-        ) {
+        )
+        {
             Debug.Assert(typicalMethodDef.IsTypicalMethodDefinition);
 
             _typicalMethodDef = typicalMethodDef;

@@ -68,7 +68,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
         [InlineData(RemoteAuthenticationStatus.OperationCompleted)]
         public async Task RemoteAuthenticationService_SignIn_DoesNotUpdateUserOnOtherResult(
             RemoteAuthenticationStatus value
-        ) {
+        )
+        {
             // Arrange
             var testJsRuntime = new TestJsRuntime();
             var options = CreateOptions();
@@ -157,7 +158,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
         [InlineData(RemoteAuthenticationStatus.OperationCompleted)]
         public async Task RemoteAuthenticationService_CompleteSignInAsync_DoesNotUpdateUserOnOtherResult(
             RemoteAuthenticationStatus value
-        ) {
+        )
+        {
             // Arrange
             var testJsRuntime = new TestJsRuntime();
             var options = CreateOptions();
@@ -246,7 +248,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
         [InlineData(RemoteAuthenticationStatus.OperationCompleted)]
         public async Task RemoteAuthenticationService_SignOut_DoesNotUpdateUserOnOtherResult(
             RemoteAuthenticationStatus value
-        ) {
+        )
+        {
             // Arrange
             var testJsRuntime = new TestJsRuntime();
             var options = CreateOptions();
@@ -335,7 +338,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
         [InlineData(RemoteAuthenticationStatus.OperationCompleted)]
         public async Task RemoteAuthenticationService_CompleteSignOutAsync_DoesNotUpdateUserOnOtherResult(
             RemoteAuthenticationStatus value
-        ) {
+        )
+        {
             // Arrange
             var testJsRuntime = new TestJsRuntime();
             var options = CreateOptions();
@@ -736,7 +740,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
                 string identifier,
                 CancellationToken cancellationToken,
                 object[] args
-            ) {
+            )
+            {
                 PastInvocations.Add((identifier, args));
                 return new ValueTask<TValue>((TValue)GetInvocationResult(identifier));
             }
@@ -777,7 +782,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
         public override async ValueTask<ClaimsPrincipal> CreateUserAsync(
             CoolRoleAccount account,
             RemoteAuthenticationUserOptions options
-        ) {
+        )
+        {
             var user = await base.CreateUserAsync(account, options);
 
             if (account.CoolRole != null)

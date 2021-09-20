@@ -929,7 +929,8 @@ namespace System.Runtime.Caching
                         !checkDelta
                         || utcNow - _utcLastFlush >= MIN_FLUSH_INTERVAL
                         || utcNow < _utcLastFlush
-                    ) {
+                    )
+                    {
                         _utcLastFlush = utcNow;
                         foreach (ExpiresBucket bucket in _buckets)
                         {
@@ -1010,7 +1011,8 @@ namespace System.Runtime.Caching
                     timerHandleRef != null
                     && Interlocked.CompareExchange(ref _timerHandleRef, null, timerHandleRef)
                         == timerHandleRef
-                ) {
+                )
+                {
                     timerHandleRef.Dispose();
 
                     Dbg.Trace("Cache", "Cache expiration timer disposed.");

@@ -182,7 +182,8 @@ namespace Microsoft.Extensions.DependencyInjection
             Type service,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
                 Type implementationType
-        ) {
+        )
+        {
             if (service == null)
             {
                 throw new ArgumentNullException(nameof(service));
@@ -208,8 +209,9 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns>A new instance of <see cref="ServiceDescriptor"/>.</returns>
         public static ServiceDescriptor Transient<TService, TImplementation>(
             Func<IServiceProvider, TImplementation> implementationFactory
-        ) where TService : class
-          where TImplementation : class, TService
+        )
+            where TService : class
+            where TImplementation : class, TService
         {
             if (implementationFactory == null)
             {
@@ -250,7 +252,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static ServiceDescriptor Transient(
             Type service,
             Func<IServiceProvider, object> implementationFactory
-        ) {
+        )
+        {
             if (service == null)
             {
                 throw new ArgumentNullException(nameof(service));
@@ -295,7 +298,8 @@ namespace Microsoft.Extensions.DependencyInjection
             Type service,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
                 Type implementationType
-        ) {
+        )
+        {
             return Describe(service, implementationType, ServiceLifetime.Scoped);
         }
 
@@ -311,8 +315,9 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns>A new instance of <see cref="ServiceDescriptor"/>.</returns>
         public static ServiceDescriptor Scoped<TService, TImplementation>(
             Func<IServiceProvider, TImplementation> implementationFactory
-        ) where TService : class
-          where TImplementation : class, TService
+        )
+            where TService : class
+            where TImplementation : class, TService
         {
             if (implementationFactory == null)
             {
@@ -353,7 +358,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static ServiceDescriptor Scoped(
             Type service,
             Func<IServiceProvider, object> implementationFactory
-        ) {
+        )
+        {
             if (service == null)
             {
                 throw new ArgumentNullException(nameof(service));
@@ -398,7 +404,8 @@ namespace Microsoft.Extensions.DependencyInjection
             Type service,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
                 Type implementationType
-        ) {
+        )
+        {
             if (service == null)
             {
                 throw new ArgumentNullException(nameof(service));
@@ -424,8 +431,9 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns>A new instance of <see cref="ServiceDescriptor"/>.</returns>
         public static ServiceDescriptor Singleton<TService, TImplementation>(
             Func<IServiceProvider, TImplementation> implementationFactory
-        ) where TService : class
-          where TImplementation : class, TService
+        )
+            where TService : class
+            where TImplementation : class, TService
         {
             if (implementationFactory == null)
             {
@@ -466,7 +474,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static ServiceDescriptor Singleton(
             Type serviceType,
             Func<IServiceProvider, object> implementationFactory
-        ) {
+        )
+        {
             if (serviceType == null)
             {
                 throw new ArgumentNullException(nameof(serviceType));
@@ -547,7 +556,8 @@ namespace Microsoft.Extensions.DependencyInjection
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
                 Type implementationType,
             ServiceLifetime lifetime
-        ) {
+        )
+        {
             return new ServiceDescriptor(serviceType, implementationType, lifetime);
         }
 
@@ -564,7 +574,8 @@ namespace Microsoft.Extensions.DependencyInjection
             Type serviceType,
             Func<IServiceProvider, object> implementationFactory,
             ServiceLifetime lifetime
-        ) {
+        )
+        {
             return new ServiceDescriptor(serviceType, implementationFactory, lifetime);
         }
     }

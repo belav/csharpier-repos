@@ -297,7 +297,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
         private TestControllerActionInvoker CreateInvoker(
             IFilterMetadata[] filters,
             bool actionThrows = false
-        ) {
+        )
+        {
             var actionDescriptor = new ControllerActionDescriptor()
             {
                 FilterDescriptors = new List<FilterDescriptor>(),
@@ -328,7 +329,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             IFilterMetadata[] filters,
             ControllerActionDescriptor actionDescriptor,
             object controller
-        ) {
+        )
+        {
             var httpContext = GetHttpContext();
             httpContext.Response.Body = new MemoryStream();
 
@@ -467,22 +469,24 @@ namespace Microsoft.AspNetCore.Mvc.Filters
                 ActionContext actionContext,
                 IReadOnlyList<IValueProviderFactory> valueProviderFactories,
                 int maxAllowedErrorsInModelState
-            ) : base(
-                logger,
-                diagnosticListener,
-                ActionContextAccessor.Null,
-                mapper,
-                CreateControllerContext(
-                    actionContext,
-                    valueProviderFactories,
-                    maxAllowedErrorsInModelState
-                ),
-                CreateCacheEntry(
-                    (ControllerActionDescriptor)actionContext.ActionDescriptor,
-                    controllerFactory
-                ),
-                filters
-            ) {
+            )
+                : base(
+                    logger,
+                    diagnosticListener,
+                    ActionContextAccessor.Null,
+                    mapper,
+                    CreateControllerContext(
+                        actionContext,
+                        valueProviderFactories,
+                        maxAllowedErrorsInModelState
+                    ),
+                    CreateCacheEntry(
+                        (ControllerActionDescriptor)actionContext.ActionDescriptor,
+                        controllerFactory
+                    ),
+                    filters
+                )
+            {
                 ControllerFactory = controllerFactory;
             }
 
@@ -498,7 +502,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
 
             private static ObjectMethodExecutor CreateExecutor(
                 ControllerActionDescriptor actionDescriptor
-            ) {
+            )
+            {
                 return ObjectMethodExecutor.Create(
                     actionDescriptor.MethodInfo,
                     actionDescriptor.ControllerTypeInfo
@@ -509,7 +514,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
                 ActionContext actionContext,
                 IReadOnlyList<IValueProviderFactory> valueProviderFactories,
                 int maxAllowedErrorsInModelState
-            ) {
+            )
+            {
                 var controllerContext = new ControllerContext(actionContext)
                 {
                     ValueProviderFactories = valueProviderFactories.ToList()
@@ -522,7 +528,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             private static ControllerActionInvokerCacheEntry CreateCacheEntry(
                 ControllerActionDescriptor actionDescriptor,
                 MockControllerFactory controllerFactory
-            ) {
+            )
+            {
                 var objectMethodExecutor = CreateExecutor(actionDescriptor);
                 return new ControllerActionInvokerCacheEntry(
                     new FilterItem[0],
@@ -559,7 +566,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             public async Task OnResourceExecutionAsync(
                 ResourceExecutingContext context,
                 ResourceExecutionDelegate next
-            ) {
+            )
+            {
                 if (_action == TestResourceFilterAction.ThrowException)
                 {
                     throw new NotImplementedException("This filter should not have been run!");

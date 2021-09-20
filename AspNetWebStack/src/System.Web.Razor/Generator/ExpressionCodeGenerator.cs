@@ -13,7 +13,8 @@ namespace System.Web.Razor.Generator
             if (
                 context.Host.EnableInstrumentation
                 && context.ExpressionRenderingMode == ExpressionRenderingMode.WriteToOutput
-            ) {
+            )
+            {
                 Span contentSpan = target.Children.OfType<Span>()
                     .Where(s => s.Kind == SpanKind.Code || s.Kind == SpanKind.Markup)
                     .FirstOrDefault();
@@ -38,7 +39,8 @@ namespace System.Web.Razor.Generator
                     }
                     else if (
                         context.ExpressionRenderingMode == ExpressionRenderingMode.WriteToOutput
-                    ) {
+                    )
+                    {
                         if (!String.IsNullOrEmpty(context.TargetWriterName))
                         {
                             cw.WriteStartMethodInvoke(
@@ -88,7 +90,8 @@ namespace System.Web.Razor.Generator
             if (
                 context.Host.EnableInstrumentation
                 && context.ExpressionRenderingMode == ExpressionRenderingMode.WriteToOutput
-            ) {
+            )
+            {
                 Span contentSpan = target.Children.OfType<Span>()
                     .Where(s => s.Kind == SpanKind.Code || s.Kind == SpanKind.Markup)
                     .FirstOrDefault();
@@ -110,7 +113,8 @@ namespace System.Web.Razor.Generator
             if (
                 context.CreateCodeWriter().SupportsMidStatementLinePragmas
                 || context.ExpressionRenderingMode == ExpressionRenderingMode.WriteToOutput
-            ) {
+            )
+            {
                 sourceSpan = target;
             }
             context.BufferStatementFragment(target.Content, sourceSpan);

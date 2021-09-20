@@ -74,7 +74,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxNode syntax,
             Binder enclosing,
             Action<Binder, SyntaxNode> binderUpdatedHandler = null
-        ) {
+        )
+        {
             var builder = new LocalBinderFactory(containingMemberOrLambda, syntax, enclosing);
 
             StatementSyntax statement;
@@ -93,7 +94,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             else if (
                 syntax.Kind() != SyntaxKind.Block && (statement = syntax as StatementSyntax) != null
-            ) {
+            )
+            {
                 CSharpSyntaxNode embeddedScopeDesignator;
                 enclosing = builder.GetBinderForPossibleEmbeddedStatement(
                     statement,
@@ -141,7 +143,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Symbol containingMemberOrLambda,
             SyntaxNode root,
             Binder enclosing
-        ) {
+        )
+        {
             Debug.Assert((object)containingMemberOrLambda != null);
             Debug.Assert(
                 containingMemberOrLambda.Kind != SymbolKind.Local
@@ -203,7 +206,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override void VisitConversionOperatorDeclaration(
             ConversionOperatorDeclarationSyntax node
-        ) {
+        )
+        {
             Visit(node.Body);
             Visit(node.ExpressionBody);
         }
@@ -242,7 +246,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override void VisitParenthesizedLambdaExpression(
             ParenthesizedLambdaExpressionSyntax node
-        ) {
+        )
+        {
             VisitLambdaExpression(node);
         }
 
@@ -282,7 +287,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static LocalFunctionSymbol FindLocalFunction(
             LocalFunctionStatementSyntax node,
             Binder enclosing
-        ) {
+        )
+        {
             LocalFunctionSymbol match = null;
             // Don't use LookupLocalFunction because it recurses up the tree, as it
             // should be defined in the directly enclosing block (see note below)
@@ -346,7 +352,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CSharpSyntaxNode node,
             ArgumentListSyntax argumentList,
             Binder binder
-        ) {
+        )
+        {
             if (argumentList != null)
             {
                 if (_root == node)
@@ -840,7 +847,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             StatementSyntax statement,
             Binder enclosing,
             out CSharpSyntaxNode embeddedScopeDesignator
-        ) {
+        )
+        {
             switch (statement.Kind())
             {
                 case SyntaxKind.LocalDeclarationStatement:

@@ -138,10 +138,12 @@ namespace System.Diagnostics.PerformanceData
 
         internal static bool ValidateCounterSetInstanceType(
             CounterSetInstanceType inCounterSetInstanceType
-        ) {
+        )
+        {
             foreach (
                 CounterSetInstanceType DefinedCounterSetInstanceType in s_counterSetInstanceTypes
-            ) {
+            )
+            {
                 if (DefinedCounterSetInstanceType == inCounterSetInstanceType)
                 {
                     return true;

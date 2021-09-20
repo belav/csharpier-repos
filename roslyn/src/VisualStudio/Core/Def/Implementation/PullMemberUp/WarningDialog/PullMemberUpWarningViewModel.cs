@@ -29,7 +29,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PullMemberUp.Wa
                 && options.MemberAnalysisResults.Any(
                     result => result.ChangeDestinationTypeToAbstract
                 )
-            ) {
+            )
+            {
                 Logger.Log(FunctionId.PullMembersUpWarning_ChangeTargetToAbstract);
                 warningMessagesBuilder.Add(
                     string.Format(

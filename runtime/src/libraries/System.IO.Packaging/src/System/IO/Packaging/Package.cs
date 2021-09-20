@@ -213,7 +213,8 @@ namespace System.IO.Packaging
             Uri partUri,
             string contentType,
             CompressionOption compressionOption
-        ) {
+        )
+        {
             ThrowIfObjectDisposed();
             ThrowIfReadOnly();
 
@@ -369,7 +370,8 @@ namespace System.IO.Packaging
                         UriFormat.UriEscaped,
                         StringComparison.Ordinal
                     ) == 0
-                ) {
+                )
+                {
                     //Clear any data in memory
                     this.ClearRelationships();
                 }
@@ -568,7 +570,8 @@ namespace System.IO.Packaging
             Uri targetUri,
             TargetMode targetMode,
             string relationshipType
-        ) {
+        )
+        {
             return CreateRelationship(targetUri, targetMode, relationshipType, null);
         }
 
@@ -596,7 +599,8 @@ namespace System.IO.Packaging
             TargetMode targetMode,
             string relationshipType,
             string? id
-        ) {
+        )
+        {
             ThrowIfObjectDisposed();
             ThrowIfReadOnly();
             EnsureRelationships();
@@ -857,7 +861,8 @@ namespace System.IO.Packaging
             FileMode packageMode,
             FileAccess packageAccess,
             FileShare packageShare
-        ) {
+        )
+        {
             Package? package = null;
             if (path == null)
                 throw new ArgumentNullException(nameof(path));
@@ -996,7 +1001,8 @@ namespace System.IO.Packaging
         private void AddIfNoPrefixCollisionDetected(
             PackUriHelper.ValidatedPartUri partUri,
             PackagePart? part
-        ) {
+        )
+        {
             //Add the Normalized Uri to the sorted _partList tentatively to see where it will get inserted
             _partList.Add(partUri, part!);
 
@@ -1034,7 +1040,8 @@ namespace System.IO.Packaging
                     && followingPartName[normalizedPartName.Length]
                         == PackUriHelper.ForwardSlashChar
                 )
-            ) {
+            )
+            {
                 //Removing the invalid entry from the _partList.
                 _partList.Remove(partUri);
 
@@ -1134,7 +1141,8 @@ namespace System.IO.Packaging
                         p.Uri,
                         PackageRelationship.ContainerRelationshipPartName
                     ) != 0
-                ) {
+                )
+                {
                     //First we close the source part.
                     //Note - we can safely do this as DoClose is being called on all parts. So ultimately we will end up
                     //closing the source part as well.

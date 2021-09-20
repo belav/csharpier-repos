@@ -95,7 +95,8 @@ namespace System.IO.Tests
                 FileStream stream = Create(
                     Path.Combine(TestDirectory, "DoesntExists", "..", testFile)
                 )
-            ) {
+            )
+            {
                 Assert.True(File.Exists(Path.Combine(TestDirectory, testFile)));
             }
         }

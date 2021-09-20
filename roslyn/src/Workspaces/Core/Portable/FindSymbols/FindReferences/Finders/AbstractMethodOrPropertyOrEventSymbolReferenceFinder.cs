@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             FindReferencesSearchOptions options,
             FindReferencesCascadeDirection cascadeDirection,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Static methods can't cascade.
             if (symbol.IsStatic)
                 return ImmutableArray<(ISymbol symbol, FindReferencesCascadeDirection cascadeDirection)>.Empty;
@@ -104,7 +105,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             IPropertySymbol property,
             SyntaxNode node,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (syntaxFacts.IsForEachStatement(node))
             {
                 var symbols = semanticFacts.GetForEachSymbols(model, node);

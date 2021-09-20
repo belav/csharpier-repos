@@ -54,7 +54,8 @@ namespace System.Web.Http.WebHost
             string cacheName,
             Predicate<Type> predicate,
             HttpControllerTypeCacheSerializer serializer
-        ) {
+        )
+        {
             try
             {
                 Stream stream = BuildManager.ReadCachedFile(cacheName);
@@ -66,7 +67,8 @@ namespace System.Web.Http.WebHost
                         if (
                             deserializedTypes != null
                             && deserializedTypes.All(type => predicate(type))
-                        ) {
+                        )
+                        {
                             // If all read types still match the predicate, success!
                             return deserializedTypes.ToList();
                         }
@@ -95,7 +97,8 @@ namespace System.Web.Http.WebHost
             string cacheName,
             IEnumerable<Type> matchingTypes,
             HttpControllerTypeCacheSerializer serializer
-        ) {
+        )
+        {
             try
             {
                 Stream stream = BuildManager.CreateCachedFile(cacheName);

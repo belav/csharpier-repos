@@ -94,7 +94,8 @@ namespace System.Text
             byte[] bytes,
             int byteIndex,
             bool flush
-        ) {
+        )
+        {
             // Validate parameters
             if (chars == null || bytes == null)
                 throw new ArgumentNullException(
@@ -136,7 +137,8 @@ namespace System.Text
             byte* bytes,
             int byteCount,
             bool flush
-        ) {
+        )
+        {
             // Validate parameters
             if (chars == null || bytes == null)
                 throw new ArgumentNullException(
@@ -169,7 +171,8 @@ namespace System.Text
             out int charsUsed,
             out int bytesUsed,
             out bool completed
-        ) {
+        )
+        {
             // Validate parameters
             if (chars == null || bytes == null)
                 throw new ArgumentNullException(
@@ -231,7 +234,8 @@ namespace System.Text
             out int charsUsed,
             out int bytesUsed,
             out bool completed
-        ) {
+        )
+        {
             // Validate input parameters
             if (bytes == null || chars == null)
                 throw new ArgumentNullException(
@@ -320,7 +324,8 @@ namespace System.Text
         internal int DrainLeftoverDataForGetByteCount(
             ReadOnlySpan<char> chars,
             out int charsConsumed
-        ) {
+        )
+        {
             // Quick check: we _should not_ have leftover fallback data from a previous invocation,
             // as we'd end up consuming any such data and would corrupt whatever Convert call happens
             // to be in progress.
@@ -413,7 +418,8 @@ namespace System.Text
             Span<byte> bytes,
             out int charsConsumed,
             out int bytesWritten
-        ) {
+        )
+        {
             // We may have a leftover high surrogate data from a previous invocation, or we may have leftover
             // data in the fallback buffer, or we may have neither, but we will never have both. Check for these
             // conditions and handle them now.

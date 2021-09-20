@@ -209,7 +209,8 @@ class C
                 using (
                     var embeddedMetadataProvider =
                         peReader.ReadEmbeddedPortablePdbDebugDirectoryData(embedded)
-                ) {
+                )
+                {
                     var mdReader = embeddedMetadataProvider.GetMetadataReader();
                     AssertEx.Equal(
                         new[] { "goo.cs" },
@@ -291,7 +292,8 @@ class C
                 using (
                     var embeddedMetadataProvider =
                         peReader.ReadEmbeddedPortablePdbDebugDirectoryData(embedded)
-                ) {
+                )
+                {
                     var mdReader = embeddedMetadataProvider.GetMetadataReader();
                     AssertEx.Equal(
                         new[] { "goo.cs" },
@@ -421,7 +423,8 @@ class C
                 using (
                     var embeddedMetadataProvider =
                         peReader.ReadEmbeddedPortablePdbDebugDirectoryData(embeddedEntry)
-                ) {
+                )
+                {
                     var pdbReader = embeddedMetadataProvider.GetMetadataReader();
 
                     var actualBlob = (

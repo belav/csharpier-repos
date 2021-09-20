@@ -135,7 +135,8 @@ namespace Microsoft.AspNetCore.Builder
 
             public TestEndpointConventionBuilder(
                 DefaultEndpointConventionBuilder endpointConventionBuilder
-            ) {
+            )
+            {
                 _endpointConventionBuilder = endpointConventionBuilder;
             }
 

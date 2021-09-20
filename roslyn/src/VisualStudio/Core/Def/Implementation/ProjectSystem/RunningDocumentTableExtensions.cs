@@ -21,7 +21,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             IVsEditorAdaptersFactoryService editorAdaptersFactoryService,
             string moniker,
             [NotNullWhen(true)] out ITextBuffer? textBuffer
-        ) {
+        )
+        {
             textBuffer = null;
             if (!runningDocumentTable.IsFileOpen(moniker))
             {
@@ -52,7 +53,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             IVsEditorAdaptersFactoryService editorAdaptersFactoryService,
             uint docCookie,
             [NotNullWhen(true)] out ITextBuffer? textBuffer
-        ) {
+        )
+        {
             textBuffer = null;
 
             // The cast from dynamic to object doesn't change semantics, but avoids loading the dynamic binder
@@ -60,7 +62,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             if (
                 (object)runningDocumentTable.GetDocumentData(docCookie)
                 is IVsTextBuffer bufferAdapter
-            ) {
+            )
+            {
                 textBuffer = editorAdaptersFactoryService.GetDocumentBuffer(bufferAdapter);
                 return textBuffer != null;
             }

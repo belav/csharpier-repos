@@ -73,7 +73,8 @@ namespace System
             ref int returnedEnd,
             ref bool notCanonical,
             bool notImplicitFile
-        ) {
+        )
+        {
             char* curPos = name + pos;
             char* newPos = curPos;
             char* end = name + returnedEnd;
@@ -88,7 +89,8 @@ namespace System
                         ch == '/'
                         || ch == '\\'
                         || (notImplicitFile && (ch == ':' || ch == '?' || ch == '#'))
-                    ) {
+                    )
+                    {
                         end = newPos;
                         break;
                     }
@@ -123,7 +125,8 @@ namespace System
                     curPos == newPos
                     || newPos - curPos > 63
                     || !IsASCIILetterOrDigit(*curPos++, ref notCanonical)
-                ) {
+                )
+                {
                     return false;
                 }
                 //check the label content
@@ -152,7 +155,8 @@ namespace System
             ref int returnedEnd,
             ref bool notCanonical,
             bool notImplicitFile
-        ) {
+        )
+        {
             char* curPos = name + pos;
             char* newPos = curPos;
             char* end = name + returnedEnd;
@@ -165,7 +169,8 @@ namespace System
                     ch == '/'
                     || ch == '\\'
                     || (notImplicitFile && (ch == ':' || ch == '?' || ch == '#'))
-                ) {
+                )
+                {
                     end = newPos;
                     break;
                 }
@@ -216,7 +221,8 @@ namespace System
                     || (
                         (*curPos++ < 0xA0) && !IsASCIILetterOrDigit(*(curPos - 1), ref notCanonical)
                     )
-                ) {
+                )
+                {
                     return false;
                 }
                 //check the label content
@@ -225,7 +231,8 @@ namespace System
                     if (
                         (*curPos++ < 0xA0)
                         && !IsValidDomainLabelCharacter(*(curPos - 1), ref notCanonical)
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }
@@ -352,7 +359,8 @@ namespace System
                         && hostname[curPos + 1] == 'n'
                         && hostname[curPos + 2] == '-'
                         && hostname[curPos + 3] == '-'
-                    ) {
+                    )
+                    {
                         // check ace validity
                         try
                         {
@@ -414,7 +422,8 @@ namespace System
                 || (uint)(character - '0') <= '9' - '0'
                 || character == '-'
                 || character == '_'
-            ) {
+            )
+            {
                 return true;
             }
 

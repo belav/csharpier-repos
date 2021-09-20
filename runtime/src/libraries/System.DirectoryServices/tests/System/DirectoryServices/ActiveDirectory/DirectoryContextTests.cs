@@ -30,7 +30,8 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
             DirectoryContextType contextType,
             string userName,
             string password
-        ) {
+        )
+        {
             var context = new DirectoryContext(contextType, userName, password);
             Assert.Equal(contextType, context.ContextType);
             Assert.Null(context.Name);
@@ -43,7 +44,8 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         [InlineData(DirectoryContextType.DirectoryServer)]
         public void Ctor_NotSupportedContextType_ThrowsArgumentException(
             DirectoryContextType contextType
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentException>(
                 "contextType",
                 () => new DirectoryContext(contextType)
@@ -79,7 +81,8 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
             string name,
             string userName,
             string password
-        ) {
+        )
+        {
             var context = new DirectoryContext(contextType, name, userName, password);
             Assert.Equal(contextType, context.ContextType);
             Assert.Equal(name, context.Name);
@@ -91,7 +94,8 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         [InlineData(DirectoryContextType.ApplicationPartition + 1)]
         public void Ctor_InvalidContextType_ThrowsInvalidEnumArgumentException(
             DirectoryContextType contextType
-        ) {
+        )
+        {
             AssertExtensions.Throws<InvalidEnumArgumentException>(
                 "contextType",
                 () => new DirectoryContext(contextType, "name")

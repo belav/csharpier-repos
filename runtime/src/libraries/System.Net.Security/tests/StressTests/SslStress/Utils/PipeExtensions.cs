@@ -18,7 +18,8 @@ namespace SslStress.Utils
             Func<ReadOnlySequence<byte>, Task> callback,
             CancellationToken token = default,
             char separator = '\n'
-        ) {
+        )
+        {
             var pipe = new Pipe();
 
             try

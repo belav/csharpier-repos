@@ -325,7 +325,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             ProjectId projectId,
             DocumentId documentId,
             object id
-        ) {
+        )
+        {
             set.Reset();
 
             var diagnostic = CreateDiagnosticData(projectId, documentId);
@@ -349,7 +350,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
         private static DiagnosticData CreateDiagnosticData(
             ProjectId projectId,
             DocumentId documentId
-        ) {
+        )
+        {
             return new DiagnosticData(
                 id: "test1",
                 category: "Test",

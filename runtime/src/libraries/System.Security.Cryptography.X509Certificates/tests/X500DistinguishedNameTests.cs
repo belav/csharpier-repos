@@ -127,7 +127,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             string quoted,
             string notQuoted,
             string hexEncoded
-        ) {
+        )
+        {
             byte[] encoded = hexEncoded.HexToByteArray();
             X500DistinguishedName dn = new X500DistinguishedName(encoded);
 

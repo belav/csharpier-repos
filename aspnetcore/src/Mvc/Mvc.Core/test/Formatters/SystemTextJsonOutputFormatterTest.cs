@@ -116,7 +116,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -124,7 +125,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 Utf8JsonWriter writer,
                 ThrowingFormatterModel value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 throw new TimeZoneNotFoundException();
             }
         }

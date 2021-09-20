@@ -142,7 +142,8 @@ namespace System.PrivateUri.Tests
             string original,
             string baseString,
             out string errors
-        ) {
+        )
+        {
             string fileSchemePrefix = s_isWindowsSystem ? "file:///" : "file://";
             Uri implicitTestUri = new Uri(original);
             Uri implicitBaseUri = new Uri(baseString);
@@ -164,7 +165,8 @@ namespace System.PrivateUri.Tests
                         implicitValue.Equals(explicitValue)
                         || (fileSchemePrefix + implicitValue).Equals(explicitValue)
                     )
-                ) {
+                )
+                {
                     errorCount++;
                     testResults.Append(
                         "Property mismatch: "
@@ -345,7 +347,8 @@ namespace System.PrivateUri.Tests
             string original,
             string baseString,
             out string errors
-        ) {
+        )
+        {
             Uri startUri = new Uri(original);
             Uri baseUri = new Uri(baseString);
 

@@ -91,7 +91,8 @@ namespace System.IO.Tests
                 long offset,
                 long capacity,
                 FileAccess access
-            ) {
+            )
+            {
                 base.Initialize(buffer, offset, capacity, access);
             }
 

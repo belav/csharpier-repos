@@ -68,7 +68,8 @@ namespace RoutingWebSite
                                         e => e.RoutePattern.RawText,
                                         StringComparer.OrdinalIgnoreCase
                                     )
-                            ) {
+                            )
+                            {
                                 sb.AppendLine($"- {endpoint.RoutePattern.RawText}");
                             }
 
@@ -191,7 +192,8 @@ namespace RoutingWebSite
         private IEndpointConventionBuilder MapHostEndpoint(
             IEndpointRouteBuilder endpoints,
             params string[] hosts
-        ) {
+        )
+        {
             var hostsDisplay =
                 (hosts == null || hosts.Length == 0)
                     ? "*:*"

@@ -30,7 +30,8 @@ namespace SampleSynthesisTests
                 PlatformDetection.IsMonoRuntime
                 || PlatformDetection.IsWindowsNanoServer
                 || PlatformDetection.IsWindowsServerCore
-            ) {
+            )
+            {
                 return false;
             }
 

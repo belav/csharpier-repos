@@ -87,7 +87,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         otherFields[i].TypeWithAnnotations,
                         comparison
                     )
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -115,7 +116,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         internal AnonymousTypeDescriptor WithNewFieldsTypes(
             ImmutableArray<TypeWithAnnotations> newFieldTypes
-        ) {
+        )
+        {
             Debug.Assert(!newFieldTypes.IsDefault);
             Debug.Assert(newFieldTypes.Length == this.Fields.Length);
 

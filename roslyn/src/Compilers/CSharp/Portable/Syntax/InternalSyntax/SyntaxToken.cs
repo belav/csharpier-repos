@@ -139,7 +139,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             if (
                 leading == SyntaxFactory.ElasticZeroSpace
                 && trailing == SyntaxFactory.ElasticZeroSpace
-            ) {
+            )
+            {
                 return s_tokensWithElasticTrivia[(int)kind].Value;
             }
 
@@ -150,7 +151,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             SyntaxKind kind,
             GreenNode leading,
             GreenNode trailing
-        ) {
+        )
+        {
             return new MissingTokenWithTrivia(kind, leading, trailing);
         }
 
@@ -261,7 +263,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             string text,
             string valueText,
             GreenNode trailing
-        ) {
+        )
+        {
             if (contextualKind == SyntaxKind.IdentifierToken && valueText == text)
             {
                 return Identifier(leading, text, trailing);
@@ -287,7 +290,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             string text,
             T value,
             GreenNode trailing
-        ) {
+        )
+        {
             return new SyntaxTokenWithValueAndTrivia<T>(kind, text, value, leading, trailing);
         }
 
@@ -300,7 +304,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             CSharpSyntaxNode leading,
             string text,
             CSharpSyntaxNode trailing
-        ) {
+        )
+        {
             return new SyntaxTokenWithValueAndTrivia<string>(
                 SyntaxKind.StringLiteralToken,
                 text,
@@ -453,7 +458,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         private static DirectiveStack ApplyDirectivesToTrivia(
             GreenNode triviaList,
             DirectiveStack stack
-        ) {
+        )
+        {
             if (triviaList != null && triviaList.ContainsDirectives)
             {
                 return ApplyDirectivesToListOrNode(triviaList, stack);
@@ -476,7 +482,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             System.IO.TextWriter writer,
             bool leading,
             bool trailing
-        ) {
+        )
+        {
             if (leading)
             {
                 var trivia = this.GetLeadingTrivia();

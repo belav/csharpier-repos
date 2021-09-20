@@ -20,14 +20,16 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
         public static HostLanguageServices? GetLanguageServices(
             this HostWorkspaceServices workspaceServices,
             ITextBuffer textBuffer
-        ) {
+        )
+        {
             return workspaceServices.GetLanguageServices(textBuffer.ContentType);
         }
 
         public static HostLanguageServices? GetLanguageServices(
             this HostWorkspaceServices workspaceServices,
             IContentType contentType
-        ) {
+        )
+        {
             foreach (var language in workspaceServices.SupportedLanguages)
             {
                 if (LanguageMatches(language, contentType, workspaceServices))
@@ -50,13 +52,15 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
         private static string? GetDefaultContentTypeName(
             HostWorkspaceServices workspaceServices,
             string language
-        ) {
+        )
+        {
             if (
                 !s_hostServicesToContentTypeMap.TryGetValue(
                     workspaceServices,
                     out var contentTypeMap
                 )
-            ) {
+            )
+            {
                 contentTypeMap = s_hostServicesToContentTypeMap.GetValue(
                     workspaceServices,
                     CreateContentTypeMap
@@ -69,7 +73,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
 
         private static Dictionary<string, string> CreateContentTypeMap(
             HostWorkspaceServices hostWorkspaceServices
-        ) {
+        )
+        {
             // Are we being hosted in a MEF host? If so, we can get content type information directly from the
             // metadata and avoid actually loading the assemblies
             var mefHostServices = (IMefHostExportProvider)hostWorkspaceServices.HostServices;
@@ -123,7 +128,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             IEnumerable<Lazy<T, OrderableLanguageAndRoleMetadata>> items,
             IContentType contentType,
             ITextViewRoleSet roleSet
-        ) {
+        )
+        {
             if (items == null)
             {
                 return SpecializedCollections.EmptyList<T>();
@@ -145,7 +151,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             string language,
             IContentType contentType,
             HostWorkspaceServices workspaceServices
-        ) {
+        )
+        {
             var defaultContentType = GetDefaultContentTypeName(workspaceServices, language);
             return (defaultContentType != null) ? contentType.IsOfType(defaultContentType) : false;
         }

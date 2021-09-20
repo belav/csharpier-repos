@@ -255,10 +255,8 @@ namespace System.Text.Json
         ///     This assumes that the entire JSON payload is passed in (equivalent to <see cref="IsFinalBlock"/> = true)
         ///   </para>
         /// </remarks>
-        public Utf8JsonReader(
-            ReadOnlySpan<byte> jsonData,
-            JsonReaderOptions options = default
-        ) : this(jsonData, isFinalBlock: true, new JsonReaderState(options)) { }
+        public Utf8JsonReader(ReadOnlySpan<byte> jsonData, JsonReaderOptions options = default)
+            : this(jsonData, isFinalBlock: true, new JsonReaderState(options)) { }
 
         /// <summary>
         /// Read the next JSON token from input source.
@@ -604,7 +602,8 @@ namespace System.Text.Json
             if (
                 localSpan.Length < other.Length
                 || localSpan.Length / JsonConstants.MaxExpansionFactorWhileEscaping > other.Length
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -632,7 +631,8 @@ namespace System.Text.Json
             if (
                 sequenceLength < other.Length
                 || sequenceLength / JsonConstants.MaxExpansionFactorWhileEscaping > other.Length
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -720,7 +720,8 @@ namespace System.Text.Json
                             : JsonConstants.MaxExpansionFactorWhileTranscoding
                     )
                     > charTextLength
-            ) {
+            )
+            {
                 return true;
             }
             return false;
@@ -740,7 +741,8 @@ namespace System.Text.Json
                             : JsonConstants.MaxExpansionFactorWhileTranscoding
                     )
                     > charTextLength
-            ) {
+            )
+            {
                 return true;
             }
             return false;
@@ -964,14 +966,16 @@ namespace System.Text.Json
                     if (
                         _readerOptions.CommentHandling == JsonCommentHandling.Allow
                         && _tokenType == JsonTokenType.Comment
-                    ) {
+                    )
+                    {
                         return false;
                     }
 
                     if (
                         _tokenType != JsonTokenType.EndArray
                         && _tokenType != JsonTokenType.EndObject
-                    ) {
+                    )
+                    {
                         ThrowHelper.ThrowJsonReaderException(
                             ref this,
                             ExceptionResource.InvalidEndOfJsonNonPrimitive
@@ -1045,7 +1049,8 @@ namespace System.Text.Json
                 if (
                     _tokenType == JsonTokenType.StartObject
                     || _tokenType == JsonTokenType.StartArray
-                ) {
+                )
+                {
                     _isNotPrimitive = true;
                 }
                 // Intentionally fall out of the if-block to return true
@@ -1067,7 +1072,8 @@ namespace System.Text.Json
                     && val != JsonConstants.CarriageReturn
                     && val != JsonConstants.LineFeed
                     && val != JsonConstants.Tab
-                ) {
+                )
+                {
                     break;
                 }
 
@@ -1158,7 +1164,8 @@ namespace System.Text.Json
                                             && IsLastSpan
                                             && _tokenType != JsonTokenType.EndArray
                                             && _tokenType != JsonTokenType.EndObject
-                                        ) {
+                                        )
+                                        {
                                             ThrowHelper.ThrowJsonReaderException(
                                                 ref this,
                                                 ExceptionResource.InvalidEndOfJsonNonPrimitive
@@ -1927,7 +1934,8 @@ namespace System.Text.Json
                 if (
                     _readerOptions.CommentHandling == JsonCommentHandling.Allow
                     && first == JsonConstants.Slash
-                ) {
+                )
+                {
                     _trailingCommaBeforeComment = true;
                     return ConsumeComment()
                       ? ConsumeTokenResult.Success
@@ -2052,7 +2060,8 @@ namespace System.Text.Json
                     _previousTokenType <= JsonTokenType.StartObject
                     || _previousTokenType == JsonTokenType.StartArray
                     || _trailingCommaBeforeComment
-                ) {
+                )
+                {
                     ThrowHelper.ThrowJsonReaderException(
                         ref this,
                         ExceptionResource.ExpectedStartOfPropertyOrValueAfterComment,
@@ -2453,7 +2462,8 @@ namespace System.Text.Json
                         ref marker,
                         ExceptionResource.ExpectedStartOfPropertyOrValueNotFound
                     )
-                ) {
+                )
+                {
                     goto IncompleteRollback;
                 }
 

@@ -45,7 +45,8 @@ namespace Microsoft.Cci
             bool emitTestCoverageData,
             bool hasPdbStream,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var builder = new MetadataBuilder();
             MetadataBuilder? debugBuilderOpt;
             switch (context.Module.DebugInformationFormat)
@@ -93,17 +94,19 @@ namespace Microsoft.Cci
             bool deterministic,
             bool emitTestCoverageData,
             CancellationToken cancellationToken
-        ) : base(
-            builder,
-            debugBuilderOpt,
-            dynamicAnalysisDataWriterOpt,
-            context,
-            messageProvider,
-            metadataOnly,
-            deterministic,
-            emitTestCoverageData,
-            cancellationToken
-        ) {
+        )
+            : base(
+                builder,
+                debugBuilderOpt,
+                dynamicAnalysisDataWriterOpt,
+                context,
+                messageProvider,
+                metadataOnly,
+                deterministic,
+                emitTestCoverageData,
+                cancellationToken
+            )
+        {
             // EDMAURER make some intelligent guesses for the initial sizes of these things.
             int numMethods = this.module.HintNumberOfMethodDefinitions;
             int numTypeDefsGuess = numMethods / 6;
@@ -168,7 +171,8 @@ namespace Microsoft.Cci
         protected override bool TryGetTypeDefinitionHandle(
             ITypeDefinition def,
             out TypeDefinitionHandle handle
-        ) {
+        )
+        {
             int index;
             bool result = _typeDefs.TryGetValue(def, out index);
             handle = MetadataTokens.TypeDefinitionHandle(index);
@@ -213,7 +217,8 @@ namespace Microsoft.Cci
         protected override bool TryGetMethodDefinitionHandle(
             IMethodDefinition def,
             out MethodDefinitionHandle handle
-        ) {
+        )
+        {
             int index;
             bool result = _methodDefs.TryGetValue(def, out index);
             handle = MetadataTokens.MethodDefinitionHandle(index);
@@ -262,13 +267,15 @@ namespace Microsoft.Cci
 
         protected override FieldDefinitionHandle GetFirstFieldDefinitionHandle(
             INamedTypeDefinition typeDef
-        ) {
+        )
+        {
             return MetadataTokens.FieldDefinitionHandle(_fieldDefIndex[typeDef]);
         }
 
         protected override MethodDefinitionHandle GetFirstMethodDefinitionHandle(
             INamedTypeDefinition typeDef
-        ) {
+        )
+        {
             return MetadataTokens.MethodDefinitionHandle(_methodDefIndex[typeDef]);
         }
 
@@ -279,7 +286,8 @@ namespace Microsoft.Cci
 
         protected override AssemblyReferenceHandle GetOrAddAssemblyReferenceHandle(
             IAssemblyReference reference
-        ) {
+        )
+        {
             return MetadataTokens.AssemblyReferenceHandle(
                 _assemblyRefIndex.GetOrAdd(reference.Identity)
             );
@@ -302,7 +310,8 @@ namespace Microsoft.Cci
 
         protected override MemberReferenceHandle GetOrAddMemberReferenceHandle(
             ITypeMemberReference reference
-        ) {
+        )
+        {
             return MetadataTokens.MemberReferenceHandle(_memberRefIndex.GetOrAdd(reference));
         }
 
@@ -313,7 +322,8 @@ namespace Microsoft.Cci
 
         protected override MethodSpecificationHandle GetOrAddMethodSpecificationHandle(
             IGenericMethodInstanceReference reference
-        ) {
+        )
+        {
             return MetadataTokens.MethodSpecificationHandle(_methodSpecIndex.GetOrAdd(reference));
         }
 
@@ -327,7 +337,8 @@ namespace Microsoft.Cci
         protected override bool TryGetTypeReferenceHandle(
             ITypeReference reference,
             out TypeReferenceHandle handle
-        ) {
+        )
+        {
             int index;
             bool result = _typeRefIndex.TryGetValue(reference, out index);
             handle = MetadataTokens.TypeReferenceHandle(index);
@@ -346,7 +357,8 @@ namespace Microsoft.Cci
 
         protected override TypeSpecificationHandle GetOrAddTypeSpecificationHandle(
             ITypeReference reference
-        ) {
+        )
+        {
             return MetadataTokens.TypeSpecificationHandle(_typeSpecIndex.GetOrAdd(reference));
         }
 
@@ -357,7 +369,8 @@ namespace Microsoft.Cci
 
         protected override StandaloneSignatureHandle GetOrAddStandaloneSignatureHandle(
             BlobHandle blobIndex
-        ) {
+        )
+        {
             return MetadataTokens.StandaloneSignatureHandle(
                 _standAloneSignatureIndex.GetOrAdd(blobIndex)
             );
@@ -444,7 +457,8 @@ namespace Microsoft.Cci
                 MethodImplementation methodImplementation in typeDef.GetExplicitImplementationOverrides(
                     Context
                 )
-            ) {
+            )
+            {
                 this.methodImplList.Add(methodImplementation);
             }
 

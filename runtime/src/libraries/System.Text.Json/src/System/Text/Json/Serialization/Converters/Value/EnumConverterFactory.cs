@@ -21,7 +21,8 @@ namespace System.Text.Json.Serialization.Converters
             Type enumType,
             EnumConverterOptions converterOptions,
             JsonSerializerOptions serializerOptions
-        ) {
+        )
+        {
             return (JsonConverter)Activator.CreateInstance(
                 GetEnumConverterType(enumType),
                 new object[] { converterOptions, serializerOptions }
@@ -33,7 +34,8 @@ namespace System.Text.Json.Serialization.Converters
             EnumConverterOptions converterOptions,
             JsonNamingPolicy? namingPolicy,
             JsonSerializerOptions serializerOptions
-        ) {
+        )
+        {
             return (JsonConverter)Activator.CreateInstance(
                 GetEnumConverterType(enumType),
                 new object?[] { converterOptions, namingPolicy, serializerOptions }

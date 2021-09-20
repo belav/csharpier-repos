@@ -35,7 +35,8 @@ namespace Microsoft.AspNetCore.Testing
             IEnvironmentVariable environmentVariable,
             string variableName,
             params string[] values
-        ) {
+        )
+        {
             if (environmentVariable == null)
             {
                 throw new ArgumentNullException(nameof(environmentVariable));

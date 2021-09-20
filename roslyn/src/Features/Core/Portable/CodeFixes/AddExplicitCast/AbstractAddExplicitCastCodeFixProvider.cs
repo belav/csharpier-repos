@@ -123,7 +123,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
                 var i = 0;
                 i < Math.Min(MaximumConversionOptions, potentialConversionTypes.Length);
                 i++
-            ) {
+            )
+            {
                 var targetNode = potentialConversionTypes[i].node;
                 var conversionType = potentialConversionTypes[i].type;
                 actions.Add(
@@ -153,7 +154,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
             SemanticModel semanticModel,
             int position,
             ITypeSymbol conversionType
-        ) {
+        )
+        {
             return string.Format(
                 FeaturesResources.Convert_type_to_0,
                 conversionType.ToMinimalDisplayString(semanticModel, position)
@@ -162,7 +164,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
 
         private static void ReportTelemetryIfNecessary(
             ImmutableArray<(TExpressionSyntax node, ITypeSymbol type)> potentialConversionTypes
-        ) {
+        )
+        {
             if (potentialConversionTypes.Length > MaximumConversionOptions)
             {
                 // If the number of potential conversion types is larger than options we could show, report telemetry
@@ -181,7 +184,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
         protected ImmutableArray<(TExpressionSyntax, ITypeSymbol)> FilterValidPotentialConversionTypes(
             SemanticModel semanticModel,
             ArrayBuilder<(TExpressionSyntax node, ITypeSymbol type)> mutablePotentialConversionTypes
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<(TExpressionSyntax, ITypeSymbol)>.GetInstance(
                 out var validPotentialConversionTypes
             );
@@ -200,7 +204,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
                         targetNode,
                         targetNodeConversionType
                     ).IsUserDefined
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -214,7 +219,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
             string argumentName,
             ImmutableArray<IParameterSymbol> parameters,
             ref int parameterIndex
-        ) {
+        )
+        {
             for (var j = 0; j < parameters.Length; j++)
             {
                 if (argumentName.Equals(parameters[j].Name))
@@ -232,7 +238,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
             var spanNodes = diagnostics.SelectAsArray(
@@ -260,7 +267,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
                                 out var potentialConversionTypes
                             )
                             && potentialConversionTypes.Length == 1
-                        ) {
+                        )
+                        {
                             return ApplyFix(
                                 currentRoot,
                                 potentialConversionTypes[0].node,

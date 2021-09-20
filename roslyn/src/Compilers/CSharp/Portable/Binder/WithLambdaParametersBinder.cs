@@ -83,7 +83,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         protected override void ValidateYield(
             YieldStatementSyntax node,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             if (node != null)
             {
                 diagnostics.Add(ErrorCode.ERR_YieldInAnonMeth, node.YieldKeyword.GetLocation());
@@ -99,7 +100,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Binder originalBinder,
             bool diagnose,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             Debug.Assert(result.IsClear);
 
             if ((options & LookupOptions.NamespaceAliasesOnly) != 0)
@@ -126,7 +128,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             LookupSymbolsInfo result,
             LookupOptions options,
             Binder originalBinder
-        ) {
+        )
+        {
             if (options.CanConsiderMembers())
             {
                 foreach (var parameter in lambdaSymbol.Parameters)
@@ -145,7 +148,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string name,
             Location newLocation,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var oldLocation = parameter.Locations[0];
             if (oldLocation == newLocation)
             {
@@ -192,7 +196,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string name,
             Location location,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             ParameterSymbol existingDeclaration;
             var map = _definitionMap;
             if (map != null && map.TryGetValue(name, out existingDeclaration))
@@ -211,13 +216,15 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal override ImmutableArray<LocalSymbol> GetDeclaredLocalsForScope(
             SyntaxNode scopeDesignator
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
 
         internal override ImmutableArray<LocalFunctionSymbol> GetDeclaredLocalFunctionsForScope(
             CSharpSyntaxNode scopeDesignator
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
 

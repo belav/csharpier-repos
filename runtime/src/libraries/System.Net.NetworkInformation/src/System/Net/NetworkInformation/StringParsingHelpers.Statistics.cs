@@ -331,7 +331,8 @@ namespace System.Net.NetworkInformation
 
         internal static IPGlobalStatisticsTable ParseIPv6GlobalStatisticsFromSnmp6File(
             string filePath
-        ) {
+        )
+        {
             // Read the remainder of statistics from snmp6.
             string fileContents = File.ReadAllText(filePath);
             RowConfigReader reader = new RowConfigReader(fileContents);
@@ -360,7 +361,8 @@ namespace System.Net.NetworkInformation
 
         internal static TcpGlobalStatisticsTable ParseTcpGlobalStatisticsFromSnmpFile(
             string filePath
-        ) {
+        )
+        {
             // NOTE: There is no information in the snmp6 file regarding TCP statistics,
             // so the statistics are always pulled from /proc/net/snmp.
             string fileContents = File.ReadAllText(filePath);
@@ -410,7 +412,8 @@ namespace System.Net.NetworkInformation
 
         internal static UdpGlobalStatisticsTable ParseUdpv4GlobalStatisticsFromSnmpFile(
             string filePath
-        ) {
+        )
+        {
             string fileContents = File.ReadAllText(filePath);
             int firstUdpHeader = fileContents.IndexOf("Udp:", StringComparison.Ordinal);
             int secondUdpHeader = fileContents.IndexOf(
@@ -450,7 +453,8 @@ namespace System.Net.NetworkInformation
 
         internal static UdpGlobalStatisticsTable ParseUdpv6GlobalStatisticsFromSnmp6File(
             string filePath
-        ) {
+        )
+        {
             string fileContents = File.ReadAllText(filePath);
             RowConfigReader reader = new RowConfigReader(fileContents);
             bool hasUdp6Errors = fileContents.Contains("Udp6SndbufErrors");
@@ -470,7 +474,8 @@ namespace System.Net.NetworkInformation
         internal static IPInterfaceStatisticsTable ParseInterfaceStatisticsTableFromFile(
             string filePath,
             string name
-        ) {
+        )
+        {
             using (
                 StreamReader sr = new StreamReader(
                     new FileStream(
@@ -482,7 +487,8 @@ namespace System.Net.NetworkInformation
                         useAsync: false
                     )
                 )
-            ) {
+            )
+            {
                 sr.ReadLine();
                 sr.ReadLine();
                 int index = 0;

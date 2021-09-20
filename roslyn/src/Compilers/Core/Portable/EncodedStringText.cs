@@ -76,7 +76,8 @@ namespace Microsoft.CodeAnalysis.Text
             Encoding? defaultEncoding = null,
             SourceHashAlgorithm checksumAlgorithm = SourceHashAlgorithm.Sha1,
             bool canBeEmbedded = false
-        ) {
+        )
+        {
             return Create(
                 stream,
                 s_fallbackEncoding,
@@ -92,7 +93,8 @@ namespace Microsoft.CodeAnalysis.Text
             Encoding? defaultEncoding = null,
             SourceHashAlgorithm checksumAlgorithm = SourceHashAlgorithm.Sha1,
             bool canBeEmbedded = false
-        ) {
+        )
+        {
             RoslynDebug.Assert(stream != null);
             RoslynDebug.Assert(stream.CanRead);
 
@@ -148,7 +150,8 @@ namespace Microsoft.CodeAnalysis.Text
             SourceHashAlgorithm checksumAlgorithm,
             bool throwIfBinaryDetected = false,
             bool canBeEmbedded = false
-        ) {
+        )
+        {
             RoslynDebug.Assert(data != null);
             RoslynDebug.Assert(encoding != null);
 
@@ -163,7 +166,8 @@ namespace Microsoft.CodeAnalysis.Text
                         TryGetBytesFromStream(data, out ArraySegment<byte> bytes)
                         && bytes.Offset == 0
                         && bytes.Array is object
-                    ) {
+                    )
+                    {
                         return SourceText.From(
                             bytes.Array,
                             (int)data.Length,
@@ -222,7 +226,8 @@ namespace Microsoft.CodeAnalysis.Text
         private static bool TryGetBytesFromFileStream(
             FileStream stream,
             out ArraySegment<byte> bytes
-        ) {
+        )
+        {
             RoslynDebug.Assert(stream != null);
             RoslynDebug.Assert(stream.Position == 0);
 

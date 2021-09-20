@@ -172,7 +172,8 @@ namespace DebuggerTests
             Action<JToken> test_fn = null,
             Func<JObject, Task> wait_for_event_fn = null,
             bool use_cfo = false
-        ) {
+        )
+        {
             UseCallFunctionOnBeforeGetProperties = use_cfo;
 
             var bp = await SetBreakpoint(url_key, line, column);
@@ -220,7 +221,8 @@ namespace DebuggerTests
             bool use_cfo = false,
             string assembly = "debugger-test.dll",
             int col = 0
-        ) {
+        )
+        {
             UseCallFunctionOnBeforeGetProperties = use_cfo;
 
             var bp = await SetBreakpointInMethod(assembly, type, method, line_offset, col);
@@ -270,7 +272,8 @@ namespace DebuggerTests
             int column,
             Dictionary<string, string> scripts,
             JToken location
-        ) {
+        )
+        {
             var loc_str =
                 $"{scripts[location["scriptId"].Value<string>()]}"
                 + $"#{location["lineNumber"].Value<int>()}"
@@ -328,7 +331,8 @@ namespace DebuggerTests
             string class_name,
             string subtype = null,
             bool is_null = false
-        ) {
+        )
+        {
             var l = GetAndAssertObjectWithName(locals, name);
             var val = l["value"];
             CheckValue(val, TObject(class_name, is_null: is_null), name).Wait();
@@ -342,7 +346,8 @@ namespace DebuggerTests
             string name,
             JToken expected,
             string label = null
-        ) {
+        )
+        {
             var l = GetAndAssertObjectWithName(locals, name);
             await CheckValue(l["value"], expected, $"{label ?? String.Empty}-{name}");
             return l;
@@ -359,7 +364,8 @@ namespace DebuggerTests
             string name,
             DateTime expected,
             string label = ""
-        ) {
+        )
+        {
             var obj = GetAndAssertObjectWithName(locals, name, label);
             await CheckDateTimeValue(obj["value"], expected, label);
         }
@@ -485,7 +491,8 @@ namespace DebuggerTests
             string fn = "function(e){return this[e]}",
             bool expect_ok = true,
             bool? returnByValue = null
-        ) {
+        )
+        {
             var req = JObject.FromObject(
                 new
                 {
@@ -509,7 +516,8 @@ namespace DebuggerTests
             string newvalue,
             string fn = "function(a, b) { this[a] = b; }",
             bool expect_ok = true
-        ) {
+        )
+        {
             var req = JObject.FromObject(
                 new
                 {
@@ -534,7 +542,8 @@ namespace DebuggerTests
             Func<JObject, Task> wait_for_event_fn = null,
             Action<JToken> locals_fn = null,
             int times = 1
-        ) {
+        )
+        {
             string method = (kind == StepKind.Resume ? "Debugger.resume" : $"Debugger.step{kind}");
             for (int i = 0; i < times - 1; i++)
             {
@@ -584,7 +593,8 @@ namespace DebuggerTests
             Func<JObject, Task> wait_for_event_fn = null,
             Action<JToken> locals_fn = null,
             string waitForEvent = Inspector.PAUSE
-        ) {
+        )
+        {
             var res = await cli.SendCommand(method, args, token);
             if (!res.IsOk)
             {
@@ -627,7 +637,8 @@ namespace DebuggerTests
             string name,
             string className,
             string target
-        ) {
+        )
+        {
             var l = GetAndAssertObjectWithName(locals, name);
             var val = l["value"];
 
@@ -804,7 +815,8 @@ namespace DebuggerTests
             object exp_o,
             string label,
             int num_fields = -1
-        ) {
+        )
+        {
             if (exp_o.GetType().IsArray || exp_o is JArray)
             {
                 if (!(actual is JArray actual_arr))
@@ -874,7 +886,8 @@ namespace DebuggerTests
                 else if (
                     exp_val["__custom_type"] != null
                     && exp_val["__custom_type"]?.Value<string>() == "getter"
-                ) {
+                )
+                {
                     // hack: for getters, actual won't have a .value
                     await CheckCustomType(actual_obj, exp_val, $"{label}#{exp_name}");
                 }
@@ -953,7 +966,8 @@ namespace DebuggerTests
             int line,
             int column,
             string function_name
-        ) {
+        )
+        {
             CheckLocation(script_loc, line, column, scripts, frame["location"]);
             Assert.Equal(function_name, frame["functionName"].Value<string>());
 
@@ -973,7 +987,8 @@ namespace DebuggerTests
             object o,
             string label = null,
             int num_fields = -1
-        ) {
+        )
+        {
             if (label == null)
                 label = name;
             var props = await GetObjectOnLocals(locals, name);
@@ -1005,7 +1020,8 @@ namespace DebuggerTests
             bool? own_properties = null,
             bool? accessors_only = null,
             bool expect_ok = true
-        ) {
+        )
+        {
             if (UseCallFunctionOnBeforeGetProperties && !id.StartsWith("dotnet:scope:"))
             {
                 var fn_decl = "function () { return this; }";
@@ -1055,7 +1071,8 @@ namespace DebuggerTests
                     if (
                         p["name"]?.Value<string>() == "length"
                         && p["enumerable"]?.Value<bool>() != true
-                    ) {
+                    )
+                    {
                         p.Remove();
                         break;
                     }
@@ -1069,7 +1086,8 @@ namespace DebuggerTests
             string id,
             string expression,
             bool expect_ok = true
-        ) {
+        )
+        {
             var evaluate_req = JObject.FromObject(
                 new { callFrameId = id, expression = expression }
             );
@@ -1089,7 +1107,8 @@ namespace DebuggerTests
         internal async Task<(JToken, Result)> SetVariableValueOnCallFrame(
             JObject parms,
             bool expect_ok = true
-        ) {
+        )
+        {
             var res = await cli.SendCommand("Debugger.setVariableValue", parms, token);
             AssertEqual(
                 expect_ok,
@@ -1119,7 +1138,8 @@ namespace DebuggerTests
             bool expect_ok = true,
             bool use_regex = false,
             string condition = ""
-        ) {
+        )
+        {
             var bp1_req = !use_regex
                 ? JObject.FromObject(
                       new
@@ -1163,7 +1183,8 @@ namespace DebuggerTests
             int lineOffset = 0,
             int col = 0,
             string condition = ""
-        ) {
+        )
+        {
             var req = JObject.FromObject(
                 new
                 {

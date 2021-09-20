@@ -86,7 +86,8 @@ namespace System.Xml.Serialization
             if (
                 !LocalAppContextSwitches.IgnoreKindInUtcTimeSerialization
                 && value.Kind == DateTimeKind.Utc
-            ) {
+            )
+            {
                 return XmlConvert.ToString(
                     DateTime.MinValue + value.TimeOfDay,
                     "HH:mm:ss.fffffffZ"

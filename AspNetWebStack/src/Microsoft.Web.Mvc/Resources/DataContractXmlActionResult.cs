@@ -74,7 +74,8 @@ namespace Microsoft.Web.Mvc.Resources
                     context.HttpContext.Response.OutputStream,
                     settings
                 )
-            ) {
+            )
+            {
                 dcs.WriteObject(writer, this.Data);
                 writer.Flush();
             }

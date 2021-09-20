@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AutomaticCompletion
             int openingPosition,
             char openingBrace,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             foreach (var service in _braceCompletionServices)
             {
                 if (
@@ -41,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AutomaticCompletion
                             cancellationToken
                         )
                         .ConfigureAwait(false)
-                ) {
+                )
+                {
                     return service;
                 }
             }

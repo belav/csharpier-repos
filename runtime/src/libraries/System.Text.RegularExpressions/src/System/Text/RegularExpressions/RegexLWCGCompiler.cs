@@ -39,7 +39,8 @@ namespace System.Text.RegularExpressions
             RegexCode code,
             RegexOptions options,
             bool hasTimeout
-        ) {
+        )
+        {
             _code = code;
             _codes = code.Codes;
             _strings = code.Strings;

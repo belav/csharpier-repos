@@ -99,7 +99,8 @@ namespace Roslyn.Test.Utilities
                 Document document,
                 IEnumerable<TextSpan> spans,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 ImmutableArray<MappedSpanResult> mappedResult = default;
                 if (document.Name == GeneratedFileName)
                 {
@@ -152,7 +153,8 @@ namespace Roslyn.Test.Utilities
         protected static void AssertLocationsEqual(
             IEnumerable<LSP.Location> expectedLocations,
             IEnumerable<LSP.Location> actualLocations
-        ) {
+        )
+        {
             var orderedActualLocations = actualLocations.OrderBy(CompareLocations);
             var orderedExpectedLocations = expectedLocations.OrderBy(CompareLocations);
 
@@ -194,7 +196,8 @@ namespace Roslyn.Test.Utilities
             LSP.Location location,
             Glyph glyph,
             string? containerName = null
-        ) {
+        )
+        {
             var info = new LSP.VSSymbolInformation()
             {
                 Kind = kind,
@@ -214,7 +217,8 @@ namespace Roslyn.Test.Utilities
         protected static LSP.TextDocumentIdentifier CreateTextDocumentIdentifier(
             Uri uri,
             ProjectId? projectContext = null
-        ) {
+        )
+        {
             var documentIdentifier = new LSP.VSTextDocumentIdentifier { Uri = uri };
 
             if (projectContext != null)
@@ -272,7 +276,8 @@ namespace Roslyn.Test.Utilities
             string? sortText = null,
             string? filterText = null,
             long resultId = 0
-        ) {
+        )
+        {
             var position = await document.GetPositionFromLinePositionAsync(
                     ProtocolConversions.PositionToLinePosition(request.Position),
                     CancellationToken.None
@@ -362,7 +367,8 @@ namespace Roslyn.Test.Utilities
             string[] markups,
             out Dictionary<string, IList<LSP.Location>> locations,
             string languageName
-        ) {
+        )
+        {
             var workspace = languageName switch
             {
                 LanguageNames.CSharp
@@ -396,7 +402,8 @@ namespace Roslyn.Test.Utilities
         protected TestLspServer CreateXmlTestLspServer(
             string xmlContent,
             out Dictionary<string, IList<LSP.Location>> locations
-        ) {
+        )
+        {
             var workspace = TestWorkspace.Create(xmlContent, composition: Composition);
             RegisterWorkspaceForLsp(workspace);
             locations = GetAnnotatedLocations(workspace, workspace.CurrentSolution);
@@ -441,7 +448,8 @@ namespace Roslyn.Test.Utilities
         public static Dictionary<string, IList<LSP.Location>> GetAnnotatedLocations(
             TestWorkspace workspace,
             Solution solution
-        ) {
+        )
+        {
             var locations = new Dictionary<string, IList<LSP.Location>>();
             foreach (var testDocument in workspace.Documents)
             {
@@ -476,7 +484,8 @@ namespace Roslyn.Test.Utilities
                 TextSpan span,
                 SourceText text,
                 Uri documentUri
-            ) {
+            )
+            {
                 var location = new LSP.Location
                 {
                     Uri = documentUri,

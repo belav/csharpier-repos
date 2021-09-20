@@ -54,7 +54,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     new TestServiceContext(LoggerFactory),
                     ConfigureListenOptions
                 )
-            ) {
+            )
+            {
                 var result = await server.HttpClientSlim.PostAsync(
                     $"https://localhost:{server.Port}/",
                     new FormUrlEncodedContent(
@@ -122,7 +123,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     new TestServiceContext(LoggerFactory),
                     ConfigureListenOptions
                 )
-            ) {
+            )
+            {
                 var result = await server.HttpClientSlim.PostAsync(
                     $"https://localhost:{server.Port}/",
                     new FormUrlEncodedContent(
@@ -174,7 +176,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     new TestServiceContext(LoggerFactory),
                     ConfigureListenOptions
                 )
-            ) {
+            )
+            {
                 var result = await server.HttpClientSlim.GetStringAsync(
                     $"https://localhost:{server.Port}/",
                     validateCertificate: false
@@ -230,7 +233,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     new TestServiceContext(LoggerFactory),
                     ConfigureListenOptions
                 )
-            ) {
+            )
+            {
                 var result = await server.HttpClientSlim.GetStringAsync(
                     $"https://localhost:{server.Port}/",
                     validateCertificate: false
@@ -257,7 +261,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     new TestServiceContext(LoggerFactory),
                     listenOptions
                 )
-            ) {
+            )
+            {
                 await Assert.ThrowsAnyAsync<Exception>(
                     () => server.HttpClientSlim.GetStringAsync($"https://localhost:{server.Port}/")
                 );
@@ -290,7 +295,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     new TestServiceContext(LoggerFactory),
                     ConfigureListenOptions
                 )
-            ) {
+            )
+            {
                 var result = await server.HttpClientSlim.GetStringAsync(
                     $"https://localhost:{server.Port}/",
                     validateCertificate: false
@@ -336,7 +342,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     new TestServiceContext(LoggerFactory),
                     ConfigureListenOptions
                 )
-            ) {
+            )
+            {
                 var result = await server.HttpClientSlim.GetStringAsync(
                     $"https://localhost:{server.Port}/",
                     validateCertificate: false
@@ -374,7 +381,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     new TestServiceContext(LoggerFactory),
                     ConfigureListenOptions
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     var stream = OpenSslStream(connection.Stream);
@@ -411,7 +419,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     new TestServiceContext(LoggerFactory),
                     ConfigureListenOptions
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     var stream = OpenSslStream(connection.Stream);
@@ -452,7 +461,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     new TestServiceContext(LoggerFactory),
                     ConfigureListenOptions
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     var stream = OpenSslStream(connection.Stream);
@@ -494,7 +504,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     new TestServiceContext(LoggerFactory),
                     ConfigureListenOptions
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     var stream = OpenSslStream(connection.Stream);
@@ -536,7 +547,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     new TestServiceContext(LoggerFactory),
                     ConfigureListenOptions
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     var stream = OpenSslStream(connection.Stream);
@@ -582,7 +594,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     new TestServiceContext(LoggerFactory),
                     ConfigureListenOptions
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     var stream = OpenSslStream(connection.Stream);
@@ -617,7 +630,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     new TestServiceContext(LoggerFactory),
                     ConfigureListenOptions
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     var stream = OpenSslStream(connection.Stream);
@@ -666,7 +680,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     new TestServiceContext(LoggerFactory),
                     ConfigureListenOptions
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     // SslStream is used to ensure the certificate is actually passed to the server
@@ -695,7 +710,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     new TestServiceContext(LoggerFactory),
                     ConfigureListenOptions
                 )
-            ) {
+            )
+            {
                 var result = await server.HttpClientSlim.GetStringAsync(
                     $"https://localhost:{server.Port}/",
                     validateCertificate: false
@@ -726,7 +742,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     new TestServiceContext(LoggerFactory),
                     ConfigureListenOptions
                 )
-            ) {
+            )
+            {
                 // SslStream is used to ensure the certificate is actually passed to the server
                 // HttpClient might not send the certificate because it is invalid or it doesn't match any
                 // of the certificate authorities sent by the server in the SSL handshake.
@@ -751,7 +768,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
         [InlineData(ClientCertificateMode.RequireCertificate)]
         public async Task ClientCertificateValidationGetsCalledWithNotNullParameters(
             ClientCertificateMode mode
-        ) {
+        )
+        {
             var clientCertificateValidationCalled = false;
             void ConfigureListenOptions(ListenOptions listenOptions)
             {
@@ -777,7 +795,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     new TestServiceContext(LoggerFactory),
                     ConfigureListenOptions
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     var stream = OpenSslStreamWithCert(connection.Stream);
@@ -811,7 +830,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     new TestServiceContext(LoggerFactory),
                     ConfigureListenOptions
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     var stream = OpenSslStreamWithCert(connection.Stream);
@@ -826,7 +846,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
         [InlineData(ClientCertificateMode.RequireCertificate)]
         public async Task RejectsConnectionOnSslPolicyErrorsWhenNoValidation(
             ClientCertificateMode mode
-        ) {
+        )
+        {
             void ConfigureListenOptions(ListenOptions listenOptions)
             {
                 listenOptions.UseHttps(
@@ -844,7 +865,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     new TestServiceContext(LoggerFactory),
                     ConfigureListenOptions
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     var stream = OpenSslStreamWithCert(connection.Stream);
@@ -880,7 +902,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     new TestServiceContext(LoggerFactory),
                     ConfigureListenOptions
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     var stream = OpenSslStreamWithCert(connection.Stream);
@@ -921,7 +944,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     new TestServiceContext(LoggerFactory),
                     ConfigureListenOptions
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     var stream = OpenSslStreamWithCert(connection.Stream);
@@ -1151,7 +1175,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
         private static SslStream OpenSslStreamWithCert(
             Stream rawStream,
             X509Certificate2 clientCertificate = null
-        ) {
+        )
+        {
             return new SslStream(
                 rawStream,
                 false,

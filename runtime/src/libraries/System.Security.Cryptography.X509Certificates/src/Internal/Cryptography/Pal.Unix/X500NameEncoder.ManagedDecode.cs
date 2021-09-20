@@ -19,7 +19,8 @@ namespace Internal.Cryptography.Pal
             string dnSeparator,
             string multiValueSeparator,
             bool addTrailingDelimiter
-        ) {
+        )
+        {
             try
             {
                 AsnReader x500NameReader = new AsnReader(encodedName, AsnEncodingRules.DER);

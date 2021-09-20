@@ -109,7 +109,8 @@ namespace Microsoft.AspNetCore.Components.Forms
             string format,
             int maxWidth,
             int maxHeight
-        ) {
+        )
+        {
             var imageFile = await JSRuntime.InvokeAsync<BrowserFile>(
                 InputFileInterop.ToImageFile,
                 _inputFileElement,

@@ -47,15 +47,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
             object provider,
             CodeAction codeAction,
             SuggestedActionSet nestedActionSet
-        ) : this(
-            threadingContext,
-            sourceProvider,
-            workspace,
-            subjectBuffer,
-            provider,
-            codeAction,
-            ImmutableArray.Create(nestedActionSet)
-        ) { }
+        )
+            : this(
+                threadingContext,
+                sourceProvider,
+                workspace,
+                subjectBuffer,
+                provider,
+                codeAction,
+                ImmutableArray.Create(nestedActionSet)
+            ) { }
 
         public override bool HasActionSets => true;
 
@@ -66,7 +67,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
         protected override void InnerInvoke(
             IProgressTracker progressTracker,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // A code action with nested actions is itself never invokable.  So just do nothing if this ever gets asked.
             // Report a message in debug and log a watson exception so that if this is hit we can try to narrow down how
             // this happened.

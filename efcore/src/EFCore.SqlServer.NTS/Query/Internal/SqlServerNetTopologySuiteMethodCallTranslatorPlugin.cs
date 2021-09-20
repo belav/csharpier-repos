@@ -33,7 +33,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         public SqlServerNetTopologySuiteMethodCallTranslatorPlugin(
             IRelationalTypeMappingSource typeMappingSource,
             ISqlExpressionFactory sqlExpressionFactory
-        ) {
+        )
+        {
             Translators = new IMethodCallTranslator[]
             {
                 new SqlServerGeometryMethodTranslator(typeMappingSource, sqlExpressionFactory),

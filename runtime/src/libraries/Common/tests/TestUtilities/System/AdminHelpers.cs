@@ -47,7 +47,8 @@ namespace System
                     TokenAccessLevels.Read,
                     out token
                 )
-            ) {
+            )
+            {
                 throw new Win32Exception(Marshal.GetLastWin32Error(), "Open process token failed");
             }
 
@@ -63,7 +64,8 @@ namespace System
                         (uint)sizeof(Interop.Advapi32.TOKEN_ELEVATION),
                         out ignore
                     )
-                ) {
+                )
+                {
                     throw new Win32Exception(
                         Marshal.GetLastWin32Error(),
                         "Get token information failed"

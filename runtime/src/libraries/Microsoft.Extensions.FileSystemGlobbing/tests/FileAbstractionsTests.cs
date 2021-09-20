@@ -62,7 +62,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
             using (
                 var scenario = new DisposableFileSystem().CreateFolder("beta")
                     .CreateFile(Path.Combine("beta", "alpha.txt"))
-            ) {
+            )
+            {
                 var contents1 = new DirectoryInfoWrapper(
                     scenario.DirectoryInfo
                 ).EnumerateFileSystemInfos();
@@ -84,7 +85,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
                 var scenario = new DisposableFileSystem().CreateFolder("gamma")
                     .CreateFolder("beta")
                     .CreateFile(Path.Combine("beta", "alpha.txt"))
-            ) {
+            )
+            {
                 var directoryInfoBase = new DirectoryInfoWrapper(scenario.DirectoryInfo);
                 var gamma = directoryInfoBase.GetDirectory("gamma");
                 var dotdot = gamma.GetDirectory("..");

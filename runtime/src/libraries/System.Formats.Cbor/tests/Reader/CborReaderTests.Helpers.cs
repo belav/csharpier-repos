@@ -16,7 +16,8 @@ namespace System.Formats.Cbor.Tests
                 CborReader reader,
                 object expectedValue,
                 bool expectDefiniteLengthCollections = true
-            ) {
+            )
+            {
                 switch (expectedValue)
                 {
                     case null:
@@ -180,7 +181,8 @@ namespace System.Formats.Cbor.Tests
                 CborReader reader,
                 object[] expectedValues,
                 bool expectDefiniteLengthCollections = true
-            ) {
+            )
+            {
                 Assert.Equal(CborReaderState.StartArray, reader.PeekState());
 
                 int? length = reader.ReadStartArray();
@@ -208,7 +210,8 @@ namespace System.Formats.Cbor.Tests
                 CborReader reader,
                 object[] expectedValues,
                 bool expectDefiniteLengthCollections = true
-            ) {
+            )
+            {
                 if (!CborWriterTests.Helpers.IsCborMapRepresentation(expectedValues))
                 {
                     throw new ArgumentException(

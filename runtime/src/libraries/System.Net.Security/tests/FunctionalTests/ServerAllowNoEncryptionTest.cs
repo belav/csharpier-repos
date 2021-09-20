@@ -27,7 +27,8 @@ namespace System.Net.Security.Tests
             X509Certificate certificate,
             X509Chain chain,
             SslPolicyErrors sslPolicyErrors
-        ) {
+        )
+        {
             return true; // allow everything
         }
 
@@ -55,7 +56,8 @@ namespace System.Net.Security.Tests
                         null,
                         EncryptionPolicy.RequireEncryption
                     )
-                ) {
+                )
+                {
                     await sslStream.AuthenticateAsClientAsync(
                         "localhost",
                         null,
@@ -98,7 +100,8 @@ namespace System.Net.Security.Tests
                         null,
                         EncryptionPolicy.AllowNoEncryption
                     )
-                ) {
+                )
+                {
                     await sslStream.AuthenticateAsClientAsync(
                         "localhost",
                         null,
@@ -144,7 +147,8 @@ namespace System.Net.Security.Tests
                         null,
                         EncryptionPolicy.NoEncryption
                     )
-                ) {
+                )
+                {
                     // null encryption is not permitted with Tls13
                     await sslStream.AuthenticateAsClientAsync(
                         "localhost",

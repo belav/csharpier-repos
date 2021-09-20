@@ -27,7 +27,8 @@ namespace System.Linq.Expressions
             Expression? @finally,
             Expression? fault,
             ReadOnlyCollection<CatchBlock> handlers
-        ) {
+        )
+        {
             Type = type;
             Body = body;
             Handlers = handlers;
@@ -90,7 +91,8 @@ namespace System.Linq.Expressions
             IEnumerable<CatchBlock>? handlers,
             Expression? @finally,
             Expression? fault
-        ) {
+        )
+        {
             if (body == Body & @finally == Finally & fault == Fault)
             {
                 if (ExpressionUtils.SameElements(ref handlers!, Handlers))
@@ -149,7 +151,8 @@ namespace System.Linq.Expressions
             Expression body,
             Expression? @finally,
             params CatchBlock[]? handlers
-        ) {
+        )
+        {
             return MakeTry(null, body, @finally, null, handlers);
         }
 
@@ -168,7 +171,8 @@ namespace System.Linq.Expressions
             Expression? @finally,
             Expression? fault,
             IEnumerable<CatchBlock>? handlers
-        ) {
+        )
+        {
             ExpressionUtils.RequiresCanRead(body, nameof(body));
 
             ReadOnlyCollection<CatchBlock> @catch = handlers.ToReadOnly();
@@ -200,7 +204,8 @@ namespace System.Linq.Expressions
             Type? type,
             Expression tryBody,
             ReadOnlyCollection<CatchBlock> handlers
-        ) {
+        )
+        {
             Debug.Assert(tryBody != null);
             // Type unification ... all parts must be reference assignable to "type"
             if (type != null)

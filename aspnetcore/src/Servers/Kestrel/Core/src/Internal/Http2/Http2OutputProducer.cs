@@ -78,7 +78,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
             Http2Stream stream,
             Http2StreamContext context,
             StreamOutputFlowControl flowControl
-        ) {
+        )
+        {
             _stream = stream;
             _frameWriter = context.FrameWriter;
             _flowControl = flowControl;
@@ -216,7 +217,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
             HttpResponseHeaders responseHeaders,
             bool autoChunk,
             bool appCompleted
-        ) {
+        )
+        {
             lock (_dataWriterLock)
             {
                 // The HPACK header compressor is stateful, if we compress headers for an aborted stream we must send them.
@@ -239,7 +241,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
                     appCompleted
                     && !_startedWritingDataFrames
                     && (_stream.ResponseTrailers == null || _stream.ResponseTrailers.Count == 0)
-                ) {
+                )
+                {
                     _streamEnded = true;
                     _stream.DecrementActiveClientStreamCount();
                     http2HeadersFrame = Http2HeadersFrameFlags.END_STREAM;
@@ -374,7 +377,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
         public ValueTask<FlushResult> WriteDataToPipeAsync(
             ReadOnlySpan<byte> data,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (cancellationToken.IsCancellationRequested)
             {
                 return new ValueTask<FlushResult>(
@@ -407,7 +411,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
             bool autoChunk,
             ReadOnlySpan<byte> data,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             lock (_dataWriterLock)
             {
                 WriteResponseHeaders(
@@ -425,7 +430,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
         ValueTask<FlushResult> IHttpOutputProducer.WriteChunkAsync(
             ReadOnlySpan<byte> data,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -436,7 +442,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
             bool autoChunk,
             ReadOnlySpan<byte> data,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 

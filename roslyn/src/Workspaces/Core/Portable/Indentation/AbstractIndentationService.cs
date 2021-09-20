@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Indentation
             Document document,
             int position,
             FormattingOptions.IndentStyle indentStyle
-        ) {
+        )
+        {
             var workspace = document.Project.Solution.Workspace;
             var formattingRuleFactory =
                 workspace.Services.GetRequiredService<IHostDependentFormattingRuleFactoryService>();
@@ -41,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Indentation
             int lineNumber,
             FormattingOptions.IndentStyle indentStyle,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var indenter = GetIndenter(document, lineNumber, indentStyle, cancellationToken);
 
             if (indentStyle == FormattingOptions.IndentStyle.None)
@@ -53,7 +55,8 @@ namespace Microsoft.CodeAnalysis.Indentation
             if (
                 indentStyle == FormattingOptions.IndentStyle.Smart
                 && indenter.TryGetSmartTokenIndentation(out var indentationResult)
-            ) {
+            )
+            {
                 return indentationResult;
             }
 
@@ -66,7 +69,8 @@ namespace Microsoft.CodeAnalysis.Indentation
             int lineNumber,
             FormattingOptions.IndentStyle indentStyle,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var documentOptions = document.GetOptionsAsync(cancellationToken)
                 .WaitAndGetResult_CanCallOnBackground(cancellationToken);
             var syntacticDoc = SyntacticDocument.CreateAsync(document, cancellationToken)

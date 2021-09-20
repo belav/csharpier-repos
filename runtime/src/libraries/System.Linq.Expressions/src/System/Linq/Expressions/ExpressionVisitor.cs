@@ -89,7 +89,8 @@ namespace System.Linq.Expressions
         public static ReadOnlyCollection<T> Visit<T>(
             ReadOnlyCollection<T> nodes,
             Func<T, T> elementVisitor
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(nodes, nameof(nodes));
             ContractUtils.RequiresNotNull(elementVisitor, nameof(elementVisitor));
             T[]? newNodes = null;
@@ -671,7 +672,8 @@ namespace System.Linq.Expressions
         private static BinaryExpression ValidateBinary(
             BinaryExpression before,
             BinaryExpression after
-        ) {
+        )
+        {
             if (before != after && before.Method == null)
             {
                 if (after.Method != null)
@@ -689,7 +691,8 @@ namespace System.Linq.Expressions
         private static SwitchExpression ValidateSwitch(
             SwitchExpression before,
             SwitchExpression after
-        ) {
+        )
+        {
             // If we did not have a method, we don't want to bind to one,
             // it might not be the right thing.
             if (before.Comparison == null && after.Comparison != null)

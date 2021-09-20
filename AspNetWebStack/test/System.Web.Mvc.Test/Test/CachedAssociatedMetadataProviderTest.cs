@@ -320,14 +320,16 @@ namespace System.Web.Mvc.Test
                 Type containerType,
                 Type modelType,
                 string propertyName
-            ) {
+            )
+            {
                 return PrototypeMetadata;
             }
 
             public virtual ModelMetadata CreateMetadataFromPrototypeImpl(
                 ModelMetadata prototype,
                 Func<object> modelAccessor
-            ) {
+            )
+            {
                 return RealMetadata;
             }
 
@@ -336,7 +338,8 @@ namespace System.Web.Mvc.Test
                 Type containerType,
                 Type modelType,
                 string propertyName
-            ) {
+            )
+            {
                 return CreateMetadataPrototypeImpl(
                     attributes,
                     containerType,
@@ -348,7 +351,8 @@ namespace System.Web.Mvc.Test
             protected override ModelMetadata CreateMetadataFromPrototype(
                 ModelMetadata prototype,
                 Func<object> modelAccessor
-            ) {
+            )
+            {
                 return CreateMetadataFromPrototypeImpl(prototype, modelAccessor);
             }
         }

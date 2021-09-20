@@ -235,13 +235,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal sealed override bool IsMetadataNewSlot(
             bool ignoreInterfaceImplementationChanges = false
-        ) {
+        )
+        {
             return false;
         }
 
         internal sealed override bool IsMetadataVirtual(
             bool ignoreInterfaceImplementationChanges = false
-        ) {
+        )
+        {
             return false;
         }
 
@@ -323,7 +325,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         private bool CalculateShouldEmit(
             ImmutableArray<BoundInitializer> boundInitializersOpt = default
-        ) {
+        )
+        {
             if (boundInitializersOpt.IsDefault)
             {
                 if (!(ContainingType is SourceMemberContainerTypeSymbol sourceType))

@@ -24,8 +24,9 @@ namespace Microsoft.Internal
         public static void NullOrNotNullElements<TKey, TValue>(
             IEnumerable<KeyValuePair<TKey, TValue>>? values,
             string parameterName
-        ) where TKey : class
-          where TValue : class
+        )
+            where TKey : class
+            where TValue : class
         {
             NotNullElements(values, parameterName);
         }
@@ -79,8 +80,9 @@ namespace Microsoft.Internal
         private static void NotNullElements<TKey, TValue>(
             IEnumerable<KeyValuePair<TKey, TValue>>? values,
             string parameterName
-        ) where TKey : class
-          where TValue : class
+        )
+            where TKey : class
+            where TValue : class
         {
             if (values != null)
             {
@@ -99,7 +101,8 @@ namespace Microsoft.Internal
             MemberTypes value,
             string parameterName,
             MemberTypes enumFlagSet
-        ) {
+        )
+        {
             if (
                 (value & enumFlagSet) != value
                 || // Ensure the member is in the set

@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.Options
             {
                 if (
                     !(thisOption is IOption2 thisOption2) || !(otherOption is IOption2 otherOption2)
-                ) {
+                )
+                {
                     // Third party definition of 'IOption'.
                     return thisOption.Equals(otherOption);
                 }

@@ -82,7 +82,8 @@ namespace JIT.HardwareIntrinsics.General
             SByte expectedLowerValue,
             SByte expectedUpperValue,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             SByte[] resultElements = new SByte[ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<SByte, byte>(ref resultElements[0]), result);
             ValidateResult(resultElements, expectedLowerValue, expectedUpperValue, method);
@@ -93,7 +94,8 @@ namespace JIT.HardwareIntrinsics.General
             SByte expectedLowerValue,
             SByte expectedUpperValue,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             for (var i = 0; i < ElementCount / 2; i++)

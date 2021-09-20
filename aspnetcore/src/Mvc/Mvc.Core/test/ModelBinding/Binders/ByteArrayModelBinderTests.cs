@@ -94,7 +94,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         private static DefaultModelBindingContext GetBindingContext(
             IValueProvider valueProvider,
             Type modelType
-        ) {
+        )
+        {
             var metadataProvider = new EmptyModelMetadataProvider();
             var bindingContext = new DefaultModelBindingContext
             {

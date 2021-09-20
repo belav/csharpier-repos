@@ -192,7 +192,8 @@ namespace System.Web.Routing
             Type derivedController,
             string path,
             string expectedAction
-        ) {
+        )
+        {
             // Arrange
             var controllerTypes = new[] { derivedController, derivedController.BaseType };
             var routes = new RouteCollection();
@@ -223,7 +224,8 @@ namespace System.Web.Routing
         public void AttributeRouting_WithInheritance_InvalidPaths(
             Type derivedController,
             string path
-        ) {
+        )
+        {
             // Arrange
             var controllerTypes = new[] { derivedController, derivedController.BaseType };
             var routes = new RouteCollection();
@@ -244,7 +246,8 @@ namespace System.Web.Routing
             Type controllerType,
             string path,
             string expectedAction
-        ) {
+        )
+        {
             // Arrange
             var controllerTypes = new[] { controllerType };
             var routes = new RouteCollection();
@@ -269,7 +272,8 @@ namespace System.Web.Routing
         public void AttributeRouting_AmbiguousActions_ThrowsAmbiguousException(
             Type controllerType,
             string path
-        ) {
+        )
+        {
             // Arrange
             var controllerTypes = new[] { controllerType };
             var routes = new RouteCollection();
@@ -315,7 +319,8 @@ namespace System.Web.Routing
             Type controllerType,
             string path,
             string expectedAction
-        ) {
+        )
+        {
             // Arrange
             var controllerTypes = new[] { controllerType };
             var routes = new RouteCollection();
@@ -355,7 +360,8 @@ namespace System.Web.Routing
             Type controllerType,
             string path,
             string expectedAction
-        ) {
+        )
+        {
             // Arrange
             var controllerTypes = new[] { controllerType };
             var routes = new RouteCollection();
@@ -390,7 +396,8 @@ namespace System.Web.Routing
             Type controllerType,
             string path,
             string expectedAction
-        ) {
+        )
+        {
             // Arrange
             var controllerTypes = new[] { controllerType };
             var routes = new RouteCollection();
@@ -480,7 +487,8 @@ namespace System.Web.Routing
         public void AttributeRouting_WithCustomizedRoutePrefixAttribute(
             string path,
             string expectedAction
-        ) {
+        )
+        {
             // Arrange
             var controllerTypes = new[]
             {
@@ -992,7 +1000,8 @@ namespace System.Web.Routing
         public override bool IsValidForRequest(
             ControllerContext controllerContext,
             MethodInfo methodInfo
-        ) {
+        )
+        {
             return Value;
         }
     }
@@ -1038,7 +1047,8 @@ namespace System.Web.Routing
             ControllerContext controllerContext,
             string actionName,
             MethodInfo methodInfo
-        ) {
+        )
+        {
             return String.Equals(actionName, ActionName, StringComparison.OrdinalIgnoreCase);
         }
     }
@@ -1093,14 +1103,16 @@ namespace System.Web.Routing
                 controller.Equals(
                     typeof(ControllersWithCustomizedRoutePrefixAttribute.NS1.HomeController)
                 )
-            ) {
+            )
+            {
                 Prefix = "NS1Home";
             }
             else if (
                 controller.Equals(
                     typeof(ControllersWithCustomizedRoutePrefixAttribute.NS2.AccountController)
                 )
-            ) {
+            )
+            {
                 Prefix = "NS2Account";
             }
             else

@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 
         internal IList<ReferenceDirectiveTriviaSyntax> GetReferenceDirectives(
             Func<ReferenceDirectiveTriviaSyntax, bool>? filter
-        ) {
+        )
+        {
             // #r directives are always on the first token of the compilation unit.
             var firstToken = (SyntaxNodeOrToken)this.GetFirstToken(includeZeroWidth: true);
             return firstToken.GetDirectives<ReferenceDirectiveTriviaSyntax>(filter);

@@ -361,7 +361,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
         public void CompatibilityCheck_Frameworks(
             string scenario,
             FrameworkCompatibilityTestData testData
-        ) {
+        )
+        {
             if (
                 scenario != Scenario.ConfigMultiple
                 && scenario != Scenario.Mixed
@@ -537,7 +538,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             string scenario,
             bool hasMultipleProperties,
             PropertyTestData[] properties
-        ) {
+        )
+        {
             if (
                 scenario != Scenario.ConfigMultiple
                 && scenario != Scenario.Mixed
@@ -688,7 +690,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 string logPrefix,
                 string propertyName,
                 string propertyValue
-            ) {
+            )
+            {
                 this.checkProperties = checkProperties;
                 this.logPrefix = logPrefix;
                 this.PropertyName = propertyName;
@@ -759,7 +762,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 CommandResult result,
                 string secondaryPropertyName,
                 string secondaryPropertyValue
-            ) {
+            )
+            {
                 switch (checkProperties)
                 {
                     case CheckProperties.None:
@@ -1001,7 +1005,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 out string appPath,
                 out string hostFxrPath,
                 out string configPath
-            ) {
+            )
+            {
                 string selfContainedDir = Path.Combine(BaseDirectory, name);
                 Directory.CreateDirectory(selfContainedDir);
                 appPath = Path.Combine(selfContainedDir, name + ".dll");

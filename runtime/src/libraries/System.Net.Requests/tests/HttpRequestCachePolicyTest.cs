@@ -159,7 +159,8 @@ namespace System.Net.Tests
             TimeSpan maxStale,
             TimeSpan minFresh,
             DateTime cacheSyncDate
-        ) {
+        )
+        {
             Assert.Equal(level, p.Level);
             Assert.Equal(maxAge, p.MaxAge);
             Assert.Equal(maxStale, p.MaxStale);

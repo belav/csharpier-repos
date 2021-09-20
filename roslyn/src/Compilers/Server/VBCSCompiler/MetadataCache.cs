@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer
         private ImmutableArray<ModuleMetadata> GetAllModules(
             ModuleMetadata manifestModule,
             string assemblyDir
-        ) {
+        )
+        {
             ArrayBuilder<ModuleMetadata>? moduleBuilder = null;
 
             foreach (string moduleName in manifestModule.GetModuleNames())
@@ -70,7 +71,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer
                 fileKey.HasValue
                 && _metadataCache.TryGetValue(fileKey.Value, out metadata)
                 && metadata != null
-            ) {
+            )
+            {
                 return metadata;
             }
 
@@ -125,10 +127,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer
 
         public new string FilePath { get; }
 
-        public CachingMetadataReference(
-            string fullPath,
-            MetadataReferenceProperties properties
-        ) : base(properties, fullPath)
+        public CachingMetadataReference(string fullPath, MetadataReferenceProperties properties)
+            : base(properties, fullPath)
         {
             FilePath = fullPath;
         }
@@ -145,7 +145,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer
 
         protected override PortableExecutableReference WithPropertiesImpl(
             MetadataReferenceProperties properties
-        ) {
+        )
+        {
             return new CachingMetadataReference(this.FilePath, properties);
         }
     }

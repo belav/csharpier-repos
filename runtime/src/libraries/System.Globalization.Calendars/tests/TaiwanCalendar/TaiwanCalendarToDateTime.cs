@@ -36,7 +36,8 @@ namespace System.Globalization.Tests
             int minute,
             int second,
             int millisecond
-        ) {
+        )
+        {
             TaiwanCalendar calendar = new TaiwanCalendar();
             DateTime expected = new DateTime(
                 year + 1911,

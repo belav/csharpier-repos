@@ -13,7 +13,8 @@ namespace System.Configuration
             CultureInfo ci,
             object value,
             Type type
-        ) {
+        )
+        {
             // Make the check here since for some reason value.GetType is not System.Type but RuntimeType
             if (!(value is Type))
                 ValidateType(value, typeof(Type));

@@ -150,7 +150,8 @@ namespace RunTests
                                 || entry.Name.EndsWith(".json", StringComparison.OrdinalIgnoreCase)
                                 || entry.Name.EndsWith(".dll", StringComparison.OrdinalIgnoreCase)
                                 || entry.Name.EndsWith(".xml", StringComparison.OrdinalIgnoreCase)
-                            ) {
+                            )
+                            {
                                 entry.ExtractToFile(
                                     Path.Combine(appRuntimePath, entry.Name),
                                     overwrite: true
@@ -409,7 +410,8 @@ namespace RunTests
                         "*.log",
                         SearchOption.AllDirectories
                     )
-                ) {
+                )
+                {
                     // Combine the directory name + log name for the copied log file name to avoid overwriting duplicate test names in different test projects
                     var logName =
                         $"{Path.GetFileName(Path.GetDirectoryName(file))}_{Path.GetFileName(file)}";
@@ -432,7 +434,8 @@ namespace RunTests
                         "*.dmp",
                         SearchOption.AllDirectories
                     )
-                ) {
+                )
+                {
                     var fileName = Path.GetFileName(file);
                     Console.WriteLine(
                         $"Copying: {file} to {Path.Combine(HELIX_WORKITEM_UPLOAD_ROOT, fileName)}"

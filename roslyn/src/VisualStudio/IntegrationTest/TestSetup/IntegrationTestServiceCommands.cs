@@ -58,7 +58,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Setup
             if (
                 ServiceProvider.GetService(typeof(IMenuCommandService))
                 is OleMenuCommandService menuCommandService
-            ) {
+            )
+            {
                 var startMenuCmdId = new CommandID(
                     guidTestWindowCmdSet,
                     cmdidStartIntegrationTestService
@@ -168,7 +169,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Setup
         private void SwapAvailableCommands(
             MenuCommand commandToDisable,
             MenuCommand commandToEnable
-        ) {
+        )
+        {
             commandToDisable.Enabled = false;
             commandToDisable.Visible = false;
 

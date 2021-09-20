@@ -22,7 +22,8 @@ namespace System.Text.Tests
                 int index,
                 int count,
                 byte[] expected
-            ) {
+            )
+            {
                 if (index == 0 && count == bytes.Length)
                 {
                     Assert.Equal(expected, Encoding.Convert(srcEncoding, dstEncoding, bytes));

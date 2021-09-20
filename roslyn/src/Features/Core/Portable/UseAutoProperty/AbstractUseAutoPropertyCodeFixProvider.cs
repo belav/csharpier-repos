@@ -86,7 +86,8 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
             CodeFixContext context,
             Diagnostic diagnostic,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var locations = diagnostic.AdditionalLocations;
             var propertyLocation = locations[0];
             var declaratorLocation = locations[1];
@@ -259,7 +260,8 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
                         nodeToRemove
                     )
                     && syntaxFacts.GetLeadingBlankLines(nodeToRemove).Length == 0
-                ) {
+                )
+                {
                     updatedProperty = syntaxFacts.GetNodeWithoutLeadingBlankLines(updatedProperty);
                 }
             }
@@ -345,11 +347,13 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
             ISyntaxFactsService syntaxFacts,
             TPropertyDeclaration property,
             SyntaxNode fieldToRemove
-        ) {
+        )
+        {
             if (
                 fieldToRemove.Parent == property.Parent
                 && fieldToRemove.Parent is TTypeDeclarationSyntax typeDeclaration
-            ) {
+            )
+            {
                 var members = syntaxFacts.GetMembersOfTypeDeclaration(typeDeclaration);
                 return members[0] == fieldToRemove && members[1] == property;
             }
@@ -362,7 +366,8 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
             SyntaxTree sourceTree,
             HashSet<DocumentId> linkedDocuments,
             Dictionary<SyntaxTree, bool> canEdit
-        ) {
+        )
+        {
             if (!canEdit.ContainsKey(sourceTree))
             {
                 var document = solution.GetDocument(sourceTree);
@@ -376,7 +381,8 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
             SyntaxNode newRoot,
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var formattingRules = GetFormattingRules(document);
             if (formattingRules == null)
             {
@@ -399,7 +405,8 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
             RenameLocations renameLocations,
             TPropertyDeclaration propertyDeclaration,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var constructorNodes = field.ContainingType.GetMembers()
                 .Where(m => m.IsConstructor())
                 .SelectMany(c => c.DeclaringSyntaxReferences)
@@ -425,7 +432,8 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
             TPropertyDeclaration propertyDeclaration,
             ISet<TConstructorDeclaration> constructorNodes,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             if (!location.IsWrittenTo)

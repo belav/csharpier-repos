@@ -76,7 +76,8 @@ namespace System.CommandLine.Rendering.Tests
         public void FormattableString_parsing_handles_escapes(
             FormattableString fs,
             int expectedCount
-        ) {
+        )
+        {
             var formatter = new TextSpanFormatter();
 
             var span = formatter.ParseToSpan(fs);
@@ -111,7 +112,8 @@ namespace System.CommandLine.Rendering.Tests
         public void FormattableString_parsing_handles_format_strings(
             FormattableString fs,
             int expectedCount
-        ) {
+        )
+        {
             var formatter = new TextSpanFormatter();
 
             var span = formatter.ParseToSpan(fs);

@@ -1331,7 +1331,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
             {
                 if (
                     ErrorVerifier.Verify(ErrorMessageId.NoExplicitConv, ex.Message, "string", "int")
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }

@@ -80,7 +80,8 @@ namespace System.Runtime.Loader
             bool representsTPALoadContext,
             bool isCollectible,
             string? name
-        ) {
+        )
+        {
             // Initialize the VM side of AssemblyLoadContext if not already done.
             _isCollectible = isCollectible;
 
@@ -275,7 +276,8 @@ namespace System.Runtime.Loader
                     int pos = 0;
                     foreach (
                         KeyValuePair<long, WeakReference<AssemblyLoadContext>> item in allContexts
-                    ) {
+                    )
+                    {
                         alcSnapshot[pos++] = item.Value;
                     }
                 }
@@ -493,7 +495,8 @@ namespace System.Runtime.Loader
             {
                 foreach (
                     KeyValuePair<long, WeakReference<AssemblyLoadContext>> alcAlive in allContexts
-                ) {
+                )
+                {
                     if (alcAlive.Value.TryGetTarget(out AssemblyLoadContext? alc))
                     {
                         alc.RaiseUnloadEvent();
@@ -631,7 +634,8 @@ namespace System.Runtime.Loader
         private static Assembly? Resolve(
             IntPtr gchManagedAssemblyLoadContext,
             AssemblyName assemblyName
-        ) {
+        )
+        {
             AssemblyLoadContext context = (AssemblyLoadContext)(
                 GCHandle.FromIntPtr(gchManagedAssemblyLoadContext).Target
             )!;
@@ -654,7 +658,8 @@ namespace System.Runtime.Loader
                         AssemblyName,
                         Assembly
                     > handler in resolvingHandler.GetInvocationList()
-                ) {
+                )
+                {
                     resolvedAssembly = handler(this, assemblyName);
 #if CORECLR
                     if (AssemblyLoadContext.IsTracingEnabled())
@@ -683,7 +688,8 @@ namespace System.Runtime.Loader
         private static Assembly ValidateAssemblyNameWithSimpleName(
             Assembly assembly,
             string? requestedSimpleName
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(requestedSimpleName))
             {
                 throw new ArgumentException(SR.ArgumentNull_AssemblyNameName);
@@ -708,7 +714,8 @@ namespace System.Runtime.Loader
                     loadedSimpleName,
                     StringComparison.InvariantCultureIgnoreCase
                 )
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     SR.Argument_CustomAssemblyLoadContextRequestedNameMismatch
                 );
@@ -754,7 +761,8 @@ namespace System.Runtime.Loader
         private static RuntimeAssembly? OnResourceResolve(
             RuntimeAssembly assembly,
             string resourceName
-        ) {
+        )
+        {
             return InvokeResolveEvent(ResourceResolve, assembly, resourceName);
         }
 
@@ -768,7 +776,8 @@ namespace System.Runtime.Loader
         private static RuntimeAssembly? OnAssemblyResolve(
             RuntimeAssembly assembly,
             string assemblyFullName
-        ) {
+        )
+        {
             return InvokeResolveEvent(AssemblyResolve, assembly, assemblyFullName);
         }
 
@@ -776,7 +785,8 @@ namespace System.Runtime.Loader
             ResolveEventHandler? eventHandler,
             RuntimeAssembly assembly,
             string name
-        ) {
+        )
+        {
             if (eventHandler == null)
                 return null;
 
@@ -887,7 +897,8 @@ namespace System.Runtime.Loader
                 // Loop through the event subscribers and return the first non-null native library handle
                 foreach (
                     Func<Assembly, string, IntPtr> handler in dllResolveHandler.GetInvocationList()
-                ) {
+                )
+                {
                     resolvedDll = handler(assembly, unmanagedDllName);
                     if (resolvedDll != IntPtr.Zero)
                     {

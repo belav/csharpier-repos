@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.HeaderPropagation
             HttpContext httpContext,
             string headerName,
             StringValues headerValue
-        ) {
+        )
+        {
             if (httpContext == null)
             {
                 throw new ArgumentNullException(nameof(httpContext));

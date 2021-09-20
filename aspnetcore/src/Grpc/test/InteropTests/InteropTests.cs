@@ -116,7 +116,8 @@ Server process output:
                         serverProcess.ServerPort,
                         name
                     )
-                ) {
+                )
+                {
                     try
                     {
                         await clientProcess.WaitForReadyAsync().TimeoutAfter(DefaultTimeout);

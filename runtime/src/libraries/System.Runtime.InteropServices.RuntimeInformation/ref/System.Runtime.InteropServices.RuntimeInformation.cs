@@ -41,7 +41,8 @@ namespace System.Runtime.InteropServices
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(System.Runtime.InteropServices.OSPlatform other)
@@ -55,13 +56,15 @@ namespace System.Runtime.InteropServices
         public static bool operator ==(
             System.Runtime.InteropServices.OSPlatform left,
             System.Runtime.InteropServices.OSPlatform right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Runtime.InteropServices.OSPlatform left,
             System.Runtime.InteropServices.OSPlatform right
-        ) {
+        )
+        {
             throw null;
         }
         public override string ToString()

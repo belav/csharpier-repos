@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis
             public static SymbolKeyResolution Resolve(
                 SymbolKeyReader reader,
                 out string? failureReason
-            ) {
+            )
+            {
                 var pointedAtTypeResolution = reader.ReadSymbolKey(
                     out var pointedAtTypeFailureReason
                 );

@@ -138,7 +138,8 @@ namespace System.ServiceModel.Syndication.Tests
             string ns,
             string value,
             string version
-        ) {
+        )
+        {
             var person = new SyndicationPersonSubclass();
             Assert.False(person.TryParseAttributeEntryPoint(name, ns, value, version));
         }

@@ -35,7 +35,8 @@ namespace Microsoft.AspNetCore.E2ETesting
                 if (
                     !metadataAttributes.TryGetValue("CI", out var value)
                     || string.IsNullOrEmpty(value)
-                ) {
+                )
+                {
                     builder.AddJsonFile("e2eTestSettings.json", optional: true);
                 }
                 else

@@ -261,7 +261,8 @@ namespace Moq.Tests
         [InlineData((DefaultValue)(-1))]
         public void DefaultValue_cannot_be_set_to_anything_other_than_Empty_or_Mock(
             DefaultValue defaultValue
-        ) {
+        )
+        {
             var mockRepository = new MockRepository(MockBehavior.Default);
 
             Assert.Throws<ArgumentOutOfRangeException>(

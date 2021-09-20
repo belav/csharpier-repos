@@ -247,7 +247,8 @@ namespace Microsoft.CodeAnalysis.Differencing
             int oldLength,
             TSequence newSequence,
             int newLength
-        ) {
+        )
+        {
             var stack = ComputeEditPaths(oldSequence, oldLength, newSequence, newLength);
 
             var x = oldLength;
@@ -299,7 +300,8 @@ namespace Microsoft.CodeAnalysis.Differencing
             int oldLength,
             TSequence newSequence,
             int newLength
-        ) {
+        )
+        {
             var stack = ComputeEditPaths(oldSequence, oldLength, newSequence, newLength);
 
             var x = oldLength;
@@ -374,7 +376,8 @@ namespace Microsoft.CodeAnalysis.Differencing
             int oldLength,
             TSequence newSequence,
             int newLength
-        ) {
+        )
+        {
             Debug.Assert(oldLength >= 0 && newLength >= 0);
 
             if (oldLength == 0 || newLength == 0)
@@ -442,7 +445,8 @@ namespace Microsoft.CodeAnalysis.Differencing
             int oldLength,
             TSequence newSequence,
             int newLength
-        ) {
+        )
+        {
             var reachedEnd = false;
             VArray currentV = default;
 
@@ -486,7 +490,8 @@ namespace Microsoft.CodeAnalysis.Differencing
                         xEnd < oldLength
                         && yEnd < newLength
                         && ItemsEqual(oldSequence, xEnd, newSequence, yEnd)
-                    ) {
+                    )
+                    {
                         xEnd++;
                         yEnd++;
                     }

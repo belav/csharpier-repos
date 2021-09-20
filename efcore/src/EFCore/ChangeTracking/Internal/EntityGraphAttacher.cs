@@ -46,7 +46,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             EntityState targetState,
             EntityState storeGeneratedWithKeySetTargetState,
             bool forceStateWhenUnknownKey
-        ) {
+        )
+        {
             try
             {
                 rootEntry.StateManager.BeginAttachGraph();
@@ -86,7 +87,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             EntityState storeGeneratedWithKeySetTargetState,
             bool forceStateWhenUnknownKey,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             try
             {
                 rootEntry.StateManager.BeginAttachGraph();
@@ -117,7 +119,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
         private static bool PaintAction(
             EntityEntryGraphNode<(EntityState TargetState, EntityState StoreGenTargetState, bool Force)> node
-        ) {
+        )
+        {
             SetReferenceLoaded(node);
 
             var internalEntityEntry = node.GetInfrastructure();
@@ -142,7 +145,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         private static async Task<bool> PaintActionAsync(
             EntityEntryGraphNode<(EntityState TargetState, EntityState StoreGenTargetState, bool Force)> node,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             SetReferenceLoaded(node);
 
             var internalEntityEntry = node.GetInfrastructure();
@@ -168,7 +172,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
         private static void SetReferenceLoaded(
             EntityEntryGraphNode<(EntityState TargetState, EntityState StoreGenTargetState, bool Force)> node
-        ) {
+        )
+        {
             var inboundNavigation = node.InboundNavigation;
             if (inboundNavigation != null && !inboundNavigation.IsCollection)
             {

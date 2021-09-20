@@ -59,7 +59,8 @@ namespace Microsoft.CodeAnalysis.Tools
             bool includeGenerated,
             string? binarylog,
             IConsole console = null!
-        ) {
+        )
+        {
             if (s_parseResult == null)
             {
                 return 1;
@@ -248,7 +249,8 @@ namespace Microsoft.CodeAnalysis.Tools
             ILogger logger,
             ref string[] include,
             ref string[] exclude
-        ) {
+        )
+        {
             var isStandardMarkerUsed = false;
             if (include.Length == 1 && s_standardInputKeywords.Contains(include[0]))
             {
@@ -343,7 +345,8 @@ namespace Microsoft.CodeAnalysis.Tools
             IConsole console,
             LogLevel minimalLogLevel,
             LogLevel minimalErrorLevel
-        ) {
+        )
+        {
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddSingleton(
                 new LoggerFactory().AddSimpleConsole(console, minimalLogLevel, minimalErrorLevel)
@@ -364,7 +367,8 @@ namespace Microsoft.CodeAnalysis.Tools
 
         private static bool TryGetDotNetCliVersion(
             [NotNullWhen(returnValue: true)] out string? dotnetVersion
-        ) {
+        )
+        {
             try
             {
                 var processInfo = ProcessRunner.CreateProcess(

@@ -102,7 +102,8 @@ namespace System.Globalization.Tests
             string expected,
             int length,
             string expectedWithLength
-        ) {
+        )
+        {
             StringInfo si = new StringInfo(source);
             Assert.Equal(expected, si.SubstringByTextElements(index));
             Assert.Equal(expectedWithLength, si.SubstringByTextElements(index, length));

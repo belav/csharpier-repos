@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         public override BoundNode? VisitDeconstructionAssignmentOperator(
             BoundDeconstructionAssignmentOperator node
-        ) {
+        )
+        {
             var right = node.Right;
             Debug.Assert(right.Conversion.Kind == ConversionKind.Deconstruction);
 
@@ -40,7 +41,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Conversion conversion,
             BoundExpression right,
             bool isUsed
-        ) {
+        )
+        {
             var lhsTemps = ArrayBuilder<LocalSymbol>.GetInstance();
             var lhsEffects = ArrayBuilder<BoundExpression>.GetInstance();
             ArrayBuilder<Binder.DeconstructionVariable> lhsTargets =
@@ -74,7 +76,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol leftType,
             BoundExpression right,
             bool isUsed
-        ) {
+        )
+        {
             if (right.Kind == BoundKind.ConditionalOperator)
             {
                 var conditional = (BoundConditionalOperator)right;
@@ -166,7 +169,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             DeconstructionSideEffects effects,
             bool isUsed,
             bool inInit
-        ) {
+        )
+        {
             Debug.Assert(conversion.Kind == ConversionKind.Deconstruction);
             ImmutableArray<BoundExpression> rightParts = GetRightParts(
                 right,
@@ -281,7 +285,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ArrayBuilder<LocalSymbol> temps,
             DeconstructionSideEffects effects,
             ref bool inInit
-        ) {
+        )
+        {
             // Example:
             // var (x, y) = new Point(1, 2);
             var deconstructionInfo = conversion.DeconstructionInfo;
@@ -322,7 +327,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         tupleConversion.Conversion.Kind == ConversionKind.ImplicitTupleLiteral
                         || tupleConversion.Conversion.Kind == ConversionKind.Identity
                     ) && IsTupleExpression(tupleConversion.Operand.Kind)
-                ) {
+                )
+                {
                     return ((BoundTupleExpression)tupleConversion.Operand).Arguments;
                 }
             }
@@ -351,7 +357,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression expression,
             ArrayBuilder<LocalSymbol> temps,
             ArrayBuilder<BoundExpression> effects
-        ) {
+        )
+        {
             Debug.Assert(expression.Type is { });
             Debug.Assert(expression.Type.IsTupleType);
             var tupleType = expression.Type;
@@ -395,7 +402,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol destinationType,
             ArrayBuilder<LocalSymbol> temps,
             ArrayBuilder<BoundExpression> effects
-        ) {
+        )
+        {
             if (conversion.IsIdentity)
             {
                 return expression;
@@ -415,7 +423,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression target,
             ArrayBuilder<BoundExpression> effects,
             ArrayBuilder<LocalSymbol> temps
-        ) {
+        )
+        {
             AddPlaceholderReplacement(deconstruction.InputPlaceholder, target);
 
             var outputPlaceholders = deconstruction.OutputPlaceholders;
@@ -464,7 +473,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression arg,
             ArrayBuilder<BoundExpression> effects,
             ArrayBuilder<LocalSymbol> temps
-        ) {
+        )
+        {
             var loweredArg = VisitExpression(arg);
             if (
                 CanChangeValueBetweenReads(
@@ -472,7 +482,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     localsMayBeAssignedOrCaptured: true,
                     structThisCanChangeValueBetweenReads: true
                 )
-            ) {
+            )
+            {
                 BoundAssignmentOperator store;
                 var temp = _factory.StoreToTemp(loweredArg, out store);
                 temps.Add(temp.LocalSymbol);
@@ -494,7 +505,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundTupleExpression variables,
             ArrayBuilder<LocalSymbol> temps,
             ArrayBuilder<BoundExpression> effects
-        ) {
+        )
+        {
             var assignmentTargets = ArrayBuilder<Binder.DeconstructionVariable>.GetInstance(
                 variables.Arguments.Length
             );

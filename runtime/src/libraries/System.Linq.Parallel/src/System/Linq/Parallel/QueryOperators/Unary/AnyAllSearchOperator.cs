@@ -77,7 +77,8 @@ namespace System.Linq.Parallel
                     ParallelMergeOptions.FullyBuffered,
                     true
                 )
-            ) {
+            )
+            {
                 // Any value equal to our qualification means that we've found an element matching
                 // the condition, and so we return the qualification without looking in subsequent
                 // partitions.
@@ -110,7 +111,8 @@ namespace System.Linq.Parallel
             IPartitionedStreamRecipient<bool> recipient,
             bool preferStriping,
             QuerySettings settings
-        ) {
+        )
+        {
             // Create a shared cancellation variable and then return a possibly wrapped new enumerator.
             Shared<bool> resultFoundFlag = new Shared<bool>(false);
 
@@ -188,7 +190,8 @@ namespace System.Linq.Parallel
                 int partitionIndex,
                 Shared<bool> resultFoundFlag,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Debug.Assert(source != null);
                 Debug.Assert(predicate != null);
                 Debug.Assert(resultFoundFlag != null);

@@ -67,7 +67,8 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
             var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
@@ -157,7 +158,8 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
             SyntaxNode whenPart,
             SyntaxNode match,
             SyntaxNode currentConditional
-        ) {
+        )
+        {
             if (whenPartIsNullable)
             {
                 if (match.Parent is TMemberAccessExpression memberAccess)
@@ -201,7 +203,8 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
             SyntaxNode match,
             SyntaxNode matchParent,
             SyntaxNode currentConditional
-        ) {
+        )
+        {
             if (matchParent is TMemberAccessExpression memberAccess)
             {
                 return whenPart.ReplaceNode(
@@ -236,9 +239,8 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(AnalyzersResources.Use_null_propagation, createChangedDocument) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(AnalyzersResources.Use_null_propagation, createChangedDocument) { }
         }
     }
 }

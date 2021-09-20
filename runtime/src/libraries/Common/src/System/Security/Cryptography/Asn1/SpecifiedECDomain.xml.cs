@@ -57,7 +57,8 @@ namespace System.Security.Cryptography.Asn1
         internal static SpecifiedECDomain Decode(
             ReadOnlyMemory<byte> encoded,
             AsnEncodingRules ruleSet
-        ) {
+        )
+        {
             return Decode(Asn1Tag.Sequence, encoded, ruleSet);
         }
 
@@ -65,7 +66,8 @@ namespace System.Security.Cryptography.Asn1
             Asn1Tag expectedTag,
             ReadOnlyMemory<byte> encoded,
             AsnEncodingRules ruleSet
-        ) {
+        )
+        {
             try
             {
                 AsnValueReader reader = new AsnValueReader(encoded.Span, ruleSet);
@@ -84,7 +86,8 @@ namespace System.Security.Cryptography.Asn1
             ref AsnValueReader reader,
             ReadOnlyMemory<byte> rebind,
             out SpecifiedECDomain decoded
-        ) {
+        )
+        {
             Decode(ref reader, Asn1Tag.Sequence, rebind, out decoded);
         }
 
@@ -93,7 +96,8 @@ namespace System.Security.Cryptography.Asn1
             Asn1Tag expectedTag,
             ReadOnlyMemory<byte> rebind,
             out SpecifiedECDomain decoded
-        ) {
+        )
+        {
             try
             {
                 DecodeCore(ref reader, expectedTag, rebind, out decoded);
@@ -109,7 +113,8 @@ namespace System.Security.Cryptography.Asn1
             Asn1Tag expectedTag,
             ReadOnlyMemory<byte> rebind,
             out SpecifiedECDomain decoded
-        ) {
+        )
+        {
             decoded = default;
             AsnValueReader sequenceReader = reader.ReadSequence(expectedTag);
             ReadOnlySpan<byte> rebindSpan = rebind.Span;
@@ -151,7 +156,8 @@ namespace System.Security.Cryptography.Asn1
             if (
                 sequenceReader.HasData
                 && sequenceReader.PeekTag().HasSameClassAndValue(Asn1Tag.Integer)
-            ) {
+            )
+            {
                 tmpSpan = sequenceReader.ReadIntegerBytes();
                 decoded.Cofactor = rebindSpan.Overlaps(tmpSpan, out offset)
                     ? rebind.Slice(offset, tmpSpan.Length)
@@ -161,7 +167,8 @@ namespace System.Security.Cryptography.Asn1
             if (
                 sequenceReader.HasData
                 && sequenceReader.PeekTag().HasSameClassAndValue(Asn1Tag.ObjectIdentifier)
-            ) {
+            )
+            {
                 decoded.Hash = sequenceReader.ReadObjectIdentifier();
             }
 

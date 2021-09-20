@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public RemoteDesignerAttributeIncrementalAnalyzerProvider(
             RemoteCallback<IRemoteDesignerAttributeDiscoveryService.ICallback> callback,
             RemoteServiceCallbackId callbackId
-        ) {
+        )
+        {
             _callback = callback;
             _callbackId = callbackId;
         }

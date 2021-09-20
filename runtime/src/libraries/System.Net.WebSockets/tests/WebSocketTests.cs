@@ -205,7 +205,8 @@ namespace System.Net.WebSockets.Tests
         public static void ThrowOnInvalidState_ThrowsIfNotInValidList(
             WebSocketState state,
             WebSocketState[] validStates
-        ) {
+        )
+        {
             WebSocketException wse = Assert.Throws<WebSocketException>(
                 () => ExposeProtectedWebSocket.ThrowOnInvalidState(state, validStates)
             );
@@ -247,7 +248,8 @@ namespace System.Net.WebSockets.Tests
         public static void ThrowOnInvalidState_SuccessIfInList(
             WebSocketState state,
             WebSocketState[] validStates
-        ) {
+        )
+        {
             ExposeProtectedWebSocket.ThrowOnInvalidState(state, validStates);
         }
 
@@ -291,7 +293,8 @@ namespace System.Net.WebSockets.Tests
             int count,
             WebSocketMessageType messageType,
             bool endOfMessage
-        ) {
+        )
+        {
             ValueWebSocketReceiveResult r = new ValueWebSocketReceiveResult(
                 count,
                 messageType,

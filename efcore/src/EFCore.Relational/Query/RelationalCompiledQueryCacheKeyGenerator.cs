@@ -109,7 +109,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 bool useRelationalNulls,
                 QuerySplittingBehavior? querySplittingBehavior,
                 bool shouldBuffer
-            ) {
+            )
+            {
                 _compiledQueryCacheKey = compiledQueryCacheKey;
                 _useRelationalNulls = useRelationalNulls;
                 _querySplittingBehavior = querySplittingBehavior;

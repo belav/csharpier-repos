@@ -21,7 +21,8 @@ namespace CoreXml.Test.XLinq
                     int iIndex,
                     int iCount,
                     Type exceptionType
-                ) {
+                )
+                {
                     bool bPassed = false;
                     char[] buffer = new char[iBufferSize];
 

@@ -48,7 +48,8 @@ namespace System.Diagnostics
             Exception? exception,
             int skipFrames,
             bool fNeedFileInfo
-        ) {
+        )
+        {
             CaptureStackTrace(skipFrames, fNeedFileInfo, exception);
         }
 

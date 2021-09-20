@@ -218,7 +218,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             ModelMetadata metadata,
             BindingInfo? bindingInfo,
             string modelName
-        ) {
+        )
+        {
             if (actionContext == null)
             {
                 throw new ArgumentNullException(nameof(actionContext));
@@ -281,7 +282,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             string fieldName,
             string modelName,
             object? model
-        ) {
+        )
+        {
             if (modelMetadata == null)
             {
                 throw new ArgumentNullException(nameof(modelMetadata));
@@ -359,7 +361,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         private static IValueProvider FilterValueProvider(
             IValueProvider valueProvider,
             BindingSource? bindingSource
-        ) {
+        )
+        {
             if (bindingSource == null || bindingSource.IsGreedy)
             {
                 return valueProvider;

@@ -50,7 +50,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             if (
                 !createFileCollection
                 && !ModelBindingHelper.CanGetCompatibleCollection<IFormFile>(bindingContext)
-            ) {
+            )
+            {
                 // Silently fail if unable to create an instance or use the current instance.
                 return;
             }
@@ -93,7 +94,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                     bindingContext.OriginalModelName + ".",
                     StringComparison.Ordinal
                 )
-            ) {
+            )
+            {
                 modelName = ModelNames.CreatePropertyModelName(
                     bindingContext.OriginalModelName,
                     modelName
@@ -162,7 +164,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             string modelName,
             ModelBindingContext bindingContext,
             ICollection<IFormFile> postedFiles
-        ) {
+        )
+        {
             var request = bindingContext.HttpContext.Request;
             if (request.HasFormContentType)
             {

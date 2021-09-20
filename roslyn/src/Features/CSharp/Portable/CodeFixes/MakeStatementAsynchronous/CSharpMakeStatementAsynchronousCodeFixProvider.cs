@@ -69,7 +69,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.MakeStatementAsynchronous
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             foreach (var diagnostic in diagnostics)
             {
                 var node = diagnostic.Location.FindNode(
@@ -89,7 +90,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.MakeStatementAsynchronous
         private static void MakeStatementAsynchronous(
             SyntaxEditor editor,
             SyntaxNode statementToFix
-        ) {
+        )
+        {
             SyntaxNode newStatement;
             switch (statementToFix)
             {
@@ -144,14 +146,16 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.MakeStatementAsynchronous
                     SyntaxKind.ForEachVariableStatement,
                     SyntaxKind.UsingStatement
                 )
-            ) {
+            )
+            {
                 return node.Parent;
             }
 
             if (
                 node is LocalDeclarationStatementSyntax localDeclaration
                 && localDeclaration.UsingKeyword != default
-            ) {
+            )
+            {
                 return node;
             }
 
@@ -160,13 +164,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.MakeStatementAsynchronous
 
         private class MyCodeAction : CodeAction.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                CSharpFeaturesResources.Add_await,
-                createChangedDocument,
-                CSharpFeaturesResources.Add_await
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    CSharpFeaturesResources.Add_await,
+                    createChangedDocument,
+                    CSharpFeaturesResources.Add_await
+                ) { }
         }
     }
 }

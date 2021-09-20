@@ -394,7 +394,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             string xml,
             string expectedText,
             params DiagnosticDescription[] expectedDiagnostics
-        ) {
+        )
+        {
             var sourceTemplate =
                 @"
 /**
@@ -431,7 +432,8 @@ partial class Partial {{ }}
             string expectedTextTemplate,
             bool fallbackToErrorCodeOnlyForNonEnglish,
             params DiagnosticDescription[] expectedDiagnostics
-        ) {
+        )
+        {
             TestIncluded(
                 xml,
                 xpath,
@@ -447,7 +449,8 @@ partial class Partial {{ }}
             string expectedTextTemplate,
             Func<string, DiagnosticDescription[]> makeExpectedDiagnostics,
             bool fallbackToErrorCodeOnlyForNonEnglish = false
-        ) {
+        )
+        {
             var xmlFile = Temp.CreateFile(extension: ".xml").WriteAllText(xml);
             var xmlFilePath = xmlFile.Path;
 

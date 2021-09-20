@@ -115,7 +115,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             string pathToTool,
             string responseFileCommands,
             string commandLineCommands
-        ) {
+        )
+        {
             if (ProvideCommandLineArgs)
             {
                 CommandLineArgs = GetArguments(commandLineCommands, responseFileCommands)

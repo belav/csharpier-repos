@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             bool isAsync,
             ImmutableArray<SyntaxNode> statements,
             ImmutableArray<SyntaxNode> handlesExpressions
-        ) {
+        )
+        {
             _isNew = isNew;
             _isUnsafe = isUnsafe;
             _isPartial = isPartial;
@@ -47,7 +48,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             bool isAsync,
             ImmutableArray<SyntaxNode> statements,
             ImmutableArray<SyntaxNode> handlesExpressions
-        ) {
+        )
+        {
             var info = new CodeGenerationMethodInfo(
                 isNew,
                 isUnsafe,

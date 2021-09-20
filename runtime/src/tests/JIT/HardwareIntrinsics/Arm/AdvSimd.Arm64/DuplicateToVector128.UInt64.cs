@@ -113,7 +113,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario(
                 DuplicateUnaryOpTest__DuplicateToVector128_UInt64 testClass
-            ) {
+            )
+            {
                 var result = AdvSimd.Arm64.DuplicateToVector128(_fld);
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
                 testClass.ValidateResult(_fld, testClass._dataTable.outArrayPtr);
@@ -270,7 +271,8 @@ namespace JIT.HardwareIntrinsics.Arm
             UInt64 data,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             UInt64[] outArray = new UInt64[RetElementCount];
             Unsafe.CopyBlockUnaligned(
                 ref Unsafe.As<UInt64, byte>(ref outArray[0]),
@@ -284,7 +286,8 @@ namespace JIT.HardwareIntrinsics.Arm
             UInt64 data,
             UInt64[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (result[0] != data)

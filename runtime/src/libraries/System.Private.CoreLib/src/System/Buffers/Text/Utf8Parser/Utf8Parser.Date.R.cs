@@ -17,7 +17,8 @@ namespace System.Buffers.Text
             uint caseFlipXorMask,
             out DateTimeOffset dateTimeOffset,
             out int bytesConsumed
-        ) {
+        )
+        {
             if (source.Length < 29)
             {
                 bytesConsumed = 0;
@@ -241,7 +242,8 @@ namespace System.Buffers.Text
                 uint gmtString = (space << 24) | (g << 16) | (m << 8) | t;
                 if (
                     gmtString != 0x20474d54 /* ' GMT' */
-                ) {
+                )
+                {
                     bytesConsumed = 0;
                     dateTimeOffset = default;
                     return false;
@@ -262,7 +264,8 @@ namespace System.Buffers.Text
                     offsetMinutes: 0,
                     out dateTimeOffset
                 )
-            ) {
+            )
+            {
                 bytesConsumed = 0;
                 dateTimeOffset = default;
                 return false;

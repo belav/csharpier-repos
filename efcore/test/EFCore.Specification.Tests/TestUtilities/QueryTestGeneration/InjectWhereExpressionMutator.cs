@@ -150,7 +150,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration
                         || methodCallExpression.Method.Name == "Skip"
                         || methodCallExpression.Method.Name == "Take"
                     )
-                ) {
+                )
+                {
                     return expression;
                 }
 

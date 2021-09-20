@@ -28,7 +28,8 @@ namespace Internal.TypeSystem.Interop
             if (
                 hasNonTrivialParent
                 && (!IsBlittableType(baseType) || baseType.IsZeroSizedReferenceType)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -62,7 +63,8 @@ namespace Internal.TypeSystem.Interop
                     && marshallerKind != MarshallerKind.BlittableValue
                     && marshallerKind != MarshallerKind.BlittableStruct
                     && marshallerKind != MarshallerKind.UnicodeChar
-                ) {
+                )
+                {
                     return false;
                 }
             }

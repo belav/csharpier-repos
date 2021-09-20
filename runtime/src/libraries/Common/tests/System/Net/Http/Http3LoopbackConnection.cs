@@ -160,7 +160,8 @@ namespace System.Net.Test.Common
             string content = "",
             bool isFinal = true,
             int requestId = 0
-        ) {
+        )
+        {
             return GetOpenRequest(requestId)
                 .SendResponseAsync(statusCode, headers, content, isFinal);
         }
@@ -169,7 +170,8 @@ namespace System.Net.Test.Common
             byte[] content,
             bool isFinal = true,
             int requestId = 0
-        ) {
+        )
+        {
             return GetOpenRequest(requestId).SendResponseBodyAsync(content, isFinal);
         }
 
@@ -177,7 +179,8 @@ namespace System.Net.Test.Common
             HttpStatusCode statusCode = HttpStatusCode.OK,
             IList<HttpHeaderData> headers = null,
             int requestId = 0
-        ) {
+        )
+        {
             return GetOpenRequest(requestId).SendResponseHeadersAsync(statusCode, headers);
         }
 
@@ -185,7 +188,8 @@ namespace System.Net.Test.Common
             HttpStatusCode statusCode = HttpStatusCode.OK,
             IList<HttpHeaderData> headers = null,
             string content = ""
-        ) {
+        )
+        {
             Http3LoopbackStream stream = await AcceptRequestStreamAsync().ConfigureAwait(false);
             HttpRequestData request = await stream.HandleRequestAsync(statusCode, headers, content);
 
@@ -198,7 +202,8 @@ namespace System.Net.Test.Common
         public override async Task WaitForCancellationAsync(
             bool ignoreIncomingData = true,
             int requestId = 0
-        ) {
+        )
+        {
             await GetOpenRequest(requestId)
                 .WaitForCancellationAsync(ignoreIncomingData)
                 .ConfigureAwait(false);

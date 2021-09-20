@@ -1016,7 +1016,8 @@ namespace Microsoft.EntityFrameworkCore
 
         private static IDbContextOptions CreateOptions(
             params RelationalOptionsExtension[] optionsExtensions
-        ) {
+        )
+        {
             var optionsBuilder = new DbContextOptionsBuilder();
 
             foreach (var optionsExtension in optionsExtensions)

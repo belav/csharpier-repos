@@ -249,7 +249,8 @@ namespace System.Net.Http
             int startIndex,
             bool allowToken,
             out string? host
-        ) {
+        )
+        {
             Debug.Assert(input != null);
             Debug.Assert(startIndex >= 0);
 
@@ -302,7 +303,8 @@ namespace System.Net.Http
             string input,
             int startIndex,
             out int length
-        ) {
+        )
+        {
             return GetExpressionLength(input, startIndex, '(', ')', true, 1, out length);
         }
 
@@ -310,7 +312,8 @@ namespace System.Net.Http
             string input,
             int startIndex,
             out int length
-        ) {
+        )
+        {
             return GetExpressionLength(input, startIndex, '"', '"', false, 1, out length);
         }
 
@@ -320,7 +323,8 @@ namespace System.Net.Http
             string input,
             int startIndex,
             out int length
-        ) {
+        )
+        {
             Debug.Assert(input != null);
             Debug.Assert((startIndex >= 0) && (startIndex < input.Length));
 
@@ -362,7 +366,8 @@ namespace System.Net.Http
             bool supportsNesting,
             int nestedCount,
             out int length
-        ) {
+        )
+        {
             Debug.Assert(input != null);
             Debug.Assert((startIndex >= 0) && (startIndex < input.Length));
 
@@ -385,7 +390,8 @@ namespace System.Net.Http
                         GetQuotedPairLength(input, current, out quotedPairLength)
                         == HttpParseResult.Parsed
                     )
-                ) {
+                )
+                {
                     // We ignore invalid quoted-pairs. Invalid quoted-pairs may mean that it looked like a quoted pair,
                     // but we actually have a quoted-string: e.g. "\\u00FC" ('\' followed by a char >127 - quoted-pair only
                     // allows ASCII chars after '\'; qdtext allows both '\' and >127 chars).

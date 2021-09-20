@@ -50,7 +50,8 @@ namespace System.Speech.Internal.SrgsCompiler
             string pronunciation,
             string display,
             float reqConfidence
-        ) {
+        )
+        {
             ParseToken(
                 (ParseElementCollection)parent,
                 content,
@@ -68,7 +69,8 @@ namespace System.Speech.Internal.SrgsCompiler
             int maxRepeat,
             float repeatProbability,
             float weight
-        ) {
+        )
+        {
             return new Item(_backend, (Rule)rule, minRepeat, maxRepeat, repeatProbability, weight);
         }
 
@@ -82,7 +84,8 @@ namespace System.Speech.Internal.SrgsCompiler
             Uri srgsUri,
             string semanticKey,
             string parameters
-        ) {
+        )
+        {
             return new RuleRef(
                 (ParseElementCollection)parent,
                 _backend,
@@ -119,7 +122,8 @@ namespace System.Speech.Internal.SrgsCompiler
             string code,
             string filename,
             int line
-        ) {
+        )
+        {
             // add the #line information
             if (line >= 0)
             {
@@ -240,7 +244,8 @@ namespace System.Speech.Internal.SrgsCompiler
             string pronunciation,
             string display,
             float reqConfidence
-        ) {
+        )
+        {
             int requiredConfidence =
                 (parent != null) ? parent._confidence : CfgGrammar.SP_NORMAL_CONFIDENCE;
 
@@ -284,7 +289,8 @@ namespace System.Speech.Internal.SrgsCompiler
                         int iCurPron = 0, iDeliminator = 0;
                         iCurPron < pronunciation.Length;
                         iCurPron = iDeliminator + 1
-                    ) {
+                    )
+                    {
                         // Find semi-colon delimiter and replace with null
                         iDeliminator = pronunciation.IndexOf(';', iCurPron);
                         if (iDeliminator == -1)

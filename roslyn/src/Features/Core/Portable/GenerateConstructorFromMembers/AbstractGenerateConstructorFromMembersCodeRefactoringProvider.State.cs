@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
                 INamedTypeSymbol containingType,
                 ImmutableArray<ISymbol> selectedMembers,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var state = new State();
                 if (
                     !await state.TryInitializeAsync(
@@ -45,7 +46,8 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
                             cancellationToken
                         )
                         .ConfigureAwait(false)
-                ) {
+                )
+                {
                     return null;
                 }
 
@@ -59,7 +61,8 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
                 INamedTypeSymbol containingType,
                 ImmutableArray<ISymbol> selectedMembers,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (!selectedMembers.All(IsWritableInstanceFieldOrProperty))
                 {
                     return false;
@@ -96,7 +99,8 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
             private static IMethodSymbol GetDelegatedConstructorBasedOnParameterTypes(
                 INamedTypeSymbol containingType,
                 ImmutableArray<IParameterSymbol> parameters
-            ) {
+            )
+            {
                 var q =
                     from c in containingType.InstanceConstructors
                     orderby c.Parameters.Length descending

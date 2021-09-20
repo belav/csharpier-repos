@@ -147,7 +147,8 @@ ORDER BY [t0].[Id], [t1].[ClientId], [t1].[Id], [t1].[OrderClientId], [t1].[Orde
 
         public override async Task Navigation_rewrite_on_owned_reference_projecting_scalar(
             bool async
-        ) {
+        )
+        {
             await base.Navigation_rewrite_on_owned_reference_projecting_scalar(async);
 
             AssertSql(
@@ -159,7 +160,8 @@ WHERE [o].[PersonAddress_Country_Name] = N'USA'"
 
         public override async Task Navigation_rewrite_on_owned_reference_projecting_entity(
             bool async
-        ) {
+        )
+        {
             await base.Navigation_rewrite_on_owned_reference_projecting_entity(async);
 
             AssertSql(
@@ -197,7 +199,8 @@ ORDER BY [o].[Id], [t].[ClientId], [t].[Id], [t].[OrderClientId], [t].[OrderId],
 
         public override async Task Navigation_rewrite_on_owned_collection_with_composition(
             bool async
-        ) {
+        )
+        {
             await base.Navigation_rewrite_on_owned_collection_with_composition(async);
 
             AssertSql(
@@ -216,7 +219,8 @@ ORDER BY [o].[Id]"
 
         public override async Task Navigation_rewrite_on_owned_collection_with_composition_complex(
             bool async
-        ) {
+        )
+        {
             await base.Navigation_rewrite_on_owned_collection_with_composition_complex(async);
 
             AssertSql(
@@ -245,7 +249,8 @@ ORDER BY [o].[Id], [o0].[ClientId], [o0].[Id], [o1].[OrderClientId], [o1].[Order
 
         public override async Task Navigation_rewrite_on_owned_reference_followed_by_regular_entity(
             bool async
-        ) {
+        )
+        {
             await base.Navigation_rewrite_on_owned_reference_followed_by_regular_entity(async);
 
             AssertSql(
@@ -257,7 +262,8 @@ LEFT JOIN [Planet] AS [p] ON [o].[PersonAddress_Country_PlanetId] = [p].[Id]"
 
         public override async Task Filter_owned_entity_chained_with_regular_entity_followed_by_projecting_owned_collection(
             bool async
-        ) {
+        )
+        {
             await base.Filter_owned_entity_chained_with_regular_entity_followed_by_projecting_owned_collection(
                 async
             );
@@ -295,7 +301,8 @@ ORDER BY [o].[Id], [p].[Id], [t].[ClientId], [t].[Id], [t].[OrderClientId], [t].
 
         public override async Task Project_multiple_owned_navigations_with_expansion_on_owned_collections(
             bool async
-        ) {
+        )
+        {
             await base.Project_multiple_owned_navigations_with_expansion_on_owned_collections(
                 async
             );
@@ -316,7 +323,8 @@ ORDER BY [o].[Id]"
 
         public override async Task Navigation_rewrite_on_owned_reference_followed_by_regular_entity_filter(
             bool async
-        ) {
+        )
+        {
             await base.Navigation_rewrite_on_owned_reference_followed_by_regular_entity_filter(
                 async
             );
@@ -337,7 +345,8 @@ ORDER BY [o].[Id], [p].[Id], [t].[ClientId], [t].[Id], [t].[OrderClientId], [t].
 
         public override async Task Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_property(
             bool async
-        ) {
+        )
+        {
             await base.Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_property(
                 async
             );
@@ -351,7 +360,8 @@ LEFT JOIN [Planet] AS [p] ON [o].[PersonAddress_Country_PlanetId] = [p].[Id]"
 
         public override async Task Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_collection(
             bool async
-        ) {
+        )
+        {
             await base.Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_collection(
                 async
             );
@@ -367,7 +377,8 @@ ORDER BY [o].[Id], [p].[Id], [m].[Id]"
 
         public override async Task SelectMany_on_owned_reference_followed_by_regular_entity_and_collection(
             bool async
-        ) {
+        )
+        {
             await base.SelectMany_on_owned_reference_followed_by_regular_entity_and_collection(
                 async
             );
@@ -382,7 +393,8 @@ INNER JOIN [Moon] AS [m] ON [p].[Id] = [m].[PlanetId]"
 
         public override async Task SelectMany_on_owned_reference_with_entity_in_between_ending_in_owned_collection(
             bool async
-        ) {
+        )
+        {
             await base.SelectMany_on_owned_reference_with_entity_in_between_ending_in_owned_collection(
                 async
             );
@@ -398,7 +410,8 @@ INNER JOIN [Element] AS [e] ON [s].[Id] = [e].[StarId]"
 
         public override async Task Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_another_reference(
             bool async
-        ) {
+        )
+        {
             await base.Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_another_reference(
                 async
             );
@@ -415,7 +428,8 @@ ORDER BY [o].[Id], [p].[Id], [s].[Id], [e].[Id]"
 
         public override async Task Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_another_reference_and_scalar(
             bool async
-        ) {
+        )
+        {
             await base.Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_another_reference_and_scalar(
                 async
             );
@@ -430,7 +444,8 @@ LEFT JOIN [Star] AS [s] ON [p].[StarId] = [s].[Id]"
 
         public override async Task Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_another_reference_in_predicate_and_projection(
             bool async
-        ) {
+        )
+        {
             await base.Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_another_reference_in_predicate_and_projection(
                 async
             );
@@ -448,7 +463,8 @@ ORDER BY [o].[Id], [p].[Id], [s].[Id], [e].[Id]"
 
         public override async Task Query_with_OfType_eagerly_loads_correct_owned_navigations(
             bool async
-        ) {
+        )
+        {
             await base.Query_with_OfType_eagerly_loads_correct_owned_navigations(async);
 
             AssertSql(
@@ -466,7 +482,8 @@ ORDER BY [o].[Id], [t].[ClientId], [t].[Id], [t].[OrderClientId], [t].[OrderId],
 
         public override async Task Preserve_includes_when_applying_skip_take_after_anonymous_type_select(
             bool async
-        ) {
+        )
+        {
             await base.Preserve_includes_when_applying_skip_take_after_anonymous_type_select(async);
 
             AssertSql(
@@ -580,7 +597,8 @@ ORDER BY [t].[Id], [t0].[ClientId], [t0].[Id], [t0].[OrderClientId], [t0].[Order
 
         public override async Task Client_method_skip_loads_owned_navigations_variation_2(
             bool async
-        ) {
+        )
+        {
             await base.Client_method_skip_loads_owned_navigations_variation_2(async);
 
             AssertSql(
@@ -604,7 +622,8 @@ ORDER BY [t].[Id], [t0].[ClientId], [t0].[Id], [t0].[OrderClientId], [t0].[Order
 
         public override async Task Client_method_take_loads_owned_navigations_variation_2(
             bool async
-        ) {
+        )
+        {
             await base.Client_method_take_loads_owned_navigations_variation_2(async);
 
             AssertSql(
@@ -627,7 +646,8 @@ ORDER BY [t].[Id], [t0].[ClientId], [t0].[Id], [t0].[OrderClientId], [t0].[Order
 
         public override async Task Client_method_skip_take_loads_owned_navigations_variation_2(
             bool async
-        ) {
+        )
+        {
             await base.Client_method_skip_take_loads_owned_navigations_variation_2(async);
 
             AssertSql(
@@ -765,7 +785,8 @@ WHERE [o].[PersonAddress_ZipCode] = 38654"
 
         public override async Task Can_query_on_indexer_property_when_property_name_from_closure(
             bool async
-        ) {
+        )
+        {
             await base.Can_query_on_indexer_property_when_property_name_from_closure(async);
 
             AssertSql(
@@ -931,7 +952,8 @@ FROM [OwnedPerson] AS [o]"
 
         public override async Task Projecting_indexer_property_ignores_include_converted(
             bool isAsync
-        ) {
+        )
+        {
             await base.Projecting_indexer_property_ignores_include_converted(isAsync);
 
             AssertSql(
@@ -1091,7 +1113,8 @@ ORDER BY [o].[Id], [p].[Id], [o0].[ClientId], [o0].[Id]"
 
         public override async Task Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_collection_split(
             bool async
-        ) {
+        )
+        {
             await base.Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_collection_split(
                 async
             );
@@ -1112,7 +1135,8 @@ ORDER BY [o].[Id], [p].[Id]"
 
         public override async Task Query_with_OfType_eagerly_loads_correct_owned_navigations_split(
             bool async
-        ) {
+        )
+        {
             await base.Query_with_OfType_eagerly_loads_correct_owned_navigations_split(async);
 
             AssertSql(
@@ -1138,7 +1162,8 @@ ORDER BY [o].[Id], [o0].[ClientId], [o0].[Id]"
 
         public override async Task Unmapped_property_projection_loads_owned_navigations_split(
             bool async
-        ) {
+        )
+        {
             await base.Unmapped_property_projection_loads_owned_navigations_split(async);
 
             AssertSql(
@@ -1189,7 +1214,8 @@ ORDER BY [o].[Id], [o0].[ClientId], [o0].[Id]"
 
         public override async Task GroupBy_with_multiple_aggregates_on_owned_navigation_properties(
             bool async
-        ) {
+        )
+        {
             await base.GroupBy_with_multiple_aggregates_on_owned_navigation_properties(async);
 
             AssertSql(
@@ -1218,7 +1244,8 @@ ORDER BY [o].[PersonAddress_PlaceType], [o].[Id], [t].[ClientId], [t].[Id], [t].
 
         public override async Task Using_from_sql_on_owner_generates_join_with_table_for_owned_shared_dependents(
             bool async
-        ) {
+        )
+        {
             await base.Using_from_sql_on_owner_generates_join_with_table_for_owned_shared_dependents(
                 async
             );
@@ -1275,7 +1302,8 @@ ORDER BY [o].[Id], [t].[Id], [t].[Id0], [t0].[Id], [t0].[Id0], [t2].[Id], [t2].[
 
         public override async Task Projecting_collection_correlated_with_keyless_entity_after_navigation_works_using_parent_identifiers(
             bool async
-        ) {
+        )
+        {
             await base.Projecting_collection_correlated_with_keyless_entity_after_navigation_works_using_parent_identifiers(
                 async
             );

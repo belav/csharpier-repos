@@ -32,7 +32,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers
         public MemoryPoolViewBufferScope(
             ArrayPool<ViewBufferValue> viewBufferPool,
             ArrayPool<char> charPool
-        ) {
+        )
+        {
             _viewBufferPool = viewBufferPool;
             _charPool = charPool;
         }

@@ -69,7 +69,8 @@ namespace System.Net.Http.Tests
             int startIndex,
             NameValueHeaderValue expectedResult,
             int expectedIndex
-        ) {
+        )
+        {
             HttpHeaderParser parser = GenericHeaderParser.MultipleValueNameValueParser;
             object result = null;
             Assert.True(

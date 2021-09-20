@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             INamedTypeSymbol newType,
             AnnotatedSymbolMapping symbolMapping,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var originalRoot = await document.GetRequiredSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
             var typeDeclaration = originalRoot.GetAnnotatedNodes(symbolMapping.TypeNodeAnnotation)
@@ -66,7 +67,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             INamedTypeSymbol newSymbol,
             ImmutableArray<SyntaxTrivia> fileBanner,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var newDocumentId = DocumentId.CreateNewId(projectId, debugName: fileName);
             var solutionWithInterfaceDocument = solution.AddDocument(
                 newDocumentId,
@@ -130,7 +132,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             Document document,
             INamedTypeSymbol type,
             IEnumerable<ISymbol> extractableMembers
-        ) {
+        )
+        {
             var typeParameters = GetRequiredTypeParametersForMembers(type, extractableMembers);
 
             if (type.TypeParameters.Length == 0)
@@ -151,7 +154,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         public static ImmutableArray<ITypeParameterSymbol> GetRequiredTypeParametersForMembers(
             INamedTypeSymbol type,
             IEnumerable<ISymbol> includedMembers
-        ) {
+        )
+        {
             var potentialTypeParameters = GetPotentialTypeParameters(type);
 
             var directlyReferencedTypeParameters = GetDirectlyReferencedTypeParameters(
@@ -184,7 +188,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                                 originalTypeParameter,
                                 new HashSet<ITypeSymbol>()
                             )
-                        ) {
+                        )
+                        {
                             allReferencedTypeParameters.Add(originalTypeParameter);
                             unanalyzedTypeParameters.Enqueue(originalTypeParameter);
                         }
@@ -197,7 +202,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
 
         private static ImmutableArray<ITypeParameterSymbol> GetPotentialTypeParameters(
             INamedTypeSymbol type
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<ITypeParameterSymbol>.GetInstance(out var typeParameters);
 
             var typesToVisit = new Stack<INamedTypeSymbol>();
@@ -220,7 +226,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         private static ImmutableArray<ITypeParameterSymbol> GetDirectlyReferencedTypeParameters(
             IEnumerable<ITypeParameterSymbol> potentialTypeParameters,
             IEnumerable<ISymbol> includedMembers
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<ITypeParameterSymbol>.GetInstance(
                 out var directlyReferencedTypeParameters
             );
@@ -235,7 +242,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                                 new HashSet<ITypeSymbol>()
                             )
                     )
-                ) {
+                )
+                {
                     directlyReferencedTypeParameters.Add(typeParameter);
                 }
             }
@@ -247,7 +255,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             ISymbol member,
             ITypeParameterSymbol typeParameter,
             HashSet<ITypeSymbol> checkedTypes
-        ) {
+        )
+        {
             switch (member.Kind)
             {
                 case SymbolKind.Event:
@@ -300,7 +309,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             ITypeSymbol type,
             ITypeParameterSymbol typeParameter,
             HashSet<ITypeSymbol> checkedTypes
-        ) {
+        )
+        {
             if (!checkedTypes.Add(type))
             {
                 return false;
@@ -311,7 +321,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 type.Equals(typeParameter, SymbolEqualityComparer.Default)
                 || type.GetTypeArguments()
                     .Any(t => DoesTypeReferenceTypeParameter(t, typeParameter, checkedTypes))
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -319,7 +330,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 type.ContainingType != null
                 && type.Kind != SymbolKind.TypeParameter
                 && DoesTypeReferenceTypeParameter(type.ContainingType, typeParameter, checkedTypes)
-            ) {
+            )
+            {
                 return true;
             }
 

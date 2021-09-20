@@ -31,7 +31,8 @@ namespace Castle.DynamicProxy.Generators
             MethodEmitter emitter,
             ClassEmitter @class,
             INamingScope namingScope
-        ) {
+        )
+        {
             InitOutParameters(emitter, MethodToOverride.GetParameters());
 
             if (emitter.ReturnType == typeof(void))

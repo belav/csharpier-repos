@@ -49,7 +49,8 @@ namespace System.ComponentModel.Composition.Primitives
 
             foreach (
                 string fileName in expectations.Select(assembly => assembly.Location).ToArray()
-            ) {
+            )
+            {
                 File.Copy(fileName, Path.Combine(directoryPath, Path.GetFileName(fileName)));
             }
             var catalog = CreateDirectoryCatalog(directoryPath);
@@ -164,7 +165,8 @@ namespace System.ComponentModel.Composition.Primitives
 
         private DirectoryCatalog.DirectoryCatalogDebuggerProxy CreateAssemblyDebuggerProxy(
             DirectoryCatalog catalog
-        ) {
+        )
+        {
             return new DirectoryCatalog.DirectoryCatalogDebuggerProxy(catalog);
         }
 

@@ -119,7 +119,8 @@ namespace System.Web.Http.ModelBinding
                 Metadata.ModelMetadataProvider metadataProvider,
                 HttpActionContext actionContext,
                 Threading.CancellationToken cancellationToken
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 

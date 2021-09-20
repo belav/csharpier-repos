@@ -20,7 +20,8 @@ namespace System.Net
             int startIndex,
             int length,
             [NotNullWhen(true)] out string? name
-        ) {
+        )
+        {
             CharArrayHelpers.DebugAssertArrayInputs(array, startIndex, length);
 
             return TryGetHeaderName(
@@ -89,7 +90,8 @@ namespace System.Net
                         startIndex,
                         length
                     )
-                ) {
+                )
+                {
                     return Deflate;
                 }
             }
@@ -104,7 +106,8 @@ namespace System.Net
             Func<T, int, char> charAt,
             Func<string, T, int, int, bool> equals,
             [NotNullWhen(true)] out string? name
-        ) {
+        )
+        {
             Debug.Assert(key != null);
             Debug.Assert(startIndex >= 0);
             Debug.Assert(length >= 0);
@@ -524,7 +527,8 @@ namespace System.Net
             int length,
             Func<string, T, int, int, bool> equals,
             [NotNullWhen(true)] out string? name
-        ) {
+        )
+        {
             Debug.Assert(known != null);
             Debug.Assert(known.Length > 0);
             Debug.Assert(startIndex >= 0);

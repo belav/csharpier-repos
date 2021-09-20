@@ -54,7 +54,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         [InlineData(5)]
         public async Task SerializingTwoMessagesFromTheSameProtocolSimultaneouslyResultsInOneCachedItemAsync(
             int numberOfSerializationsToPreCache
-        ) {
+        )
+        {
             var invocation = new InvocationMessage("Foo", new object[0]);
             var message = new SerializedHubMessage(invocation);
 

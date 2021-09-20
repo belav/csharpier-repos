@@ -73,7 +73,8 @@ namespace Microsoft.CodeAnalysis.CommandLine
             ICompilerServerLogger logger,
             CreateServerFunc createServerFunc = null,
             int? timeoutOverride = null
-        ) {
+        )
+        {
             _language = language;
             _compileFunc = compileFunc;
             _logger = logger;
@@ -97,7 +98,8 @@ namespace Microsoft.CodeAnalysis.CommandLine
             CompileFunc compileFunc,
             ICompilerServerLogger logger,
             Guid? requestId = null
-        ) {
+        )
+        {
             var sdkDir = GetSystemSdkDirectory();
             if (RuntimeHostInfo.IsCoreClrRuntime)
             {
@@ -137,7 +139,8 @@ namespace Microsoft.CodeAnalysis.CommandLine
             TextWriter textWriter = null,
             string pipeName = null,
             Guid? requestId = null
-        ) {
+        )
+        {
             textWriter = textWriter ?? Console.Out;
 
             var args = originalArguments.Select(arg => arg.Trim()).ToArray();
@@ -155,7 +158,8 @@ namespace Microsoft.CodeAnalysis.CommandLine
                     out string commandLinePipeName,
                     out errorMessageOpt
                 )
-            ) {
+            )
+            {
                 pipeName ??= commandLinePipeName;
             }
             else
@@ -229,7 +233,8 @@ namespace Microsoft.CodeAnalysis.CommandLine
             IEnumerable<string> originalArguments,
             BuildPaths buildPaths,
             TextWriter textWriter = null
-        ) {
+        )
+        {
             var tcs = new TaskCompletionSource<RunCompilationResult>();
             ThreadStart action = () =>
             {
@@ -254,7 +259,8 @@ namespace Microsoft.CodeAnalysis.CommandLine
             string[] arguments,
             BuildPaths buildPaths,
             TextWriter textWriter
-        ) {
+        )
+        {
             var loader = new DefaultAnalyzerAssemblyLoader();
             return _compileFunc(arguments, buildPaths, textWriter, loader);
         }
@@ -271,7 +277,8 @@ namespace Microsoft.CodeAnalysis.CommandLine
             string pipeName,
             string keepAlive,
             Guid? requestId
-        ) {
+        )
+        {
             BuildResponse buildResponse;
 
             if (!AreNamedPipesSupported())

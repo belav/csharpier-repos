@@ -19,7 +19,8 @@ namespace System.Drawing.Drawing2D.Tests
             float dy,
             bool isIdentity,
             bool isInvertible
-        ) {
+        )
+        {
             Matrix3x2 matrix3X2 = new Matrix3x2(m11, m12, m21, m22, dx, dy);
             using (var matrix = new Matrix(matrix3X2))
             {
@@ -43,7 +44,8 @@ namespace System.Drawing.Drawing2D.Tests
             float dy,
             bool isIdentity,
             bool isInvertible
-        ) {
+        )
+        {
             Matrix3x2 matrix3X2 = new Matrix3x2(m11, m12, m21, m22, dx, dy);
             using (var matrix = new Matrix())
             {

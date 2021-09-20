@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 LexerMode mode,
                 int position,
                 GreenNode prevTokenTrailingTrivia
-            ) {
+            )
+            {
                 this.ResetCount = resetCount;
                 this.Mode = mode;
                 this.Position = position;

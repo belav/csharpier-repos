@@ -61,7 +61,8 @@ namespace Newtonsoft.Json.Converters
             Type objectType,
             object? existingValue,
             JsonSerializer serializer
-        ) {
+        )
+        {
             if (reader.TokenType == JsonToken.Null)
             {
                 return null;

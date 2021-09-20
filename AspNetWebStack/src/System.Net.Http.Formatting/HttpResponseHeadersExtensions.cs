@@ -37,7 +37,8 @@ namespace System.Net.Http
         public static void AddCookies(
             this HttpResponseHeaders headers,
             IEnumerable<CookieHeaderValue> cookies
-        ) {
+        )
+        {
             if (headers == null)
             {
                 throw Error.ArgumentNull("headers");

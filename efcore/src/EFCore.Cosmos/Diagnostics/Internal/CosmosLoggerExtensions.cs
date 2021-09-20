@@ -34,7 +34,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Diagnostics.Internal
             string containerId,
             string? partitionKey,
             CosmosSqlQuery cosmosSqlQuery
-        ) {
+        )
+        {
             var definition = CosmosResources.LogExecutingSqlQuery(diagnostics);
 
             if (diagnostics.ShouldLog(definition))
@@ -60,7 +61,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Diagnostics.Internal
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = new CosmosQueryEventData(
                     definition,
                     ExecutingSqlQuery,
@@ -104,7 +106,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Diagnostics.Internal
             string containerId,
             string? partitionKey,
             string resourceId
-        ) {
+        )
+        {
             var definition = CosmosResources.LogExecutingReadItem(diagnostics);
 
             if (diagnostics.ShouldLog(definition))
@@ -124,7 +127,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Diagnostics.Internal
                     out var diagnosticSourceEnabled,
                     out var simpleLogEnabled
                 )
-            ) {
+            )
+            {
                 var eventData = new CosmosReadItemEventData(
                     definition,
                     ExecutingReadItem,

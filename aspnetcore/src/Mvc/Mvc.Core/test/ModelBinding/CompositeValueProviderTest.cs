@@ -46,7 +46,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             BindingSource bindingSource,
             Dictionary<string, StringValues> values,
             CultureInfo culture
-        ) {
+        )
+        {
             var emptyValueProvider = new QueryStringValueProvider(
                 bindingSource,
                 new QueryCollection(),
@@ -140,7 +141,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         [MemberData(nameof(BinderMetadata))]
         public void FilterReturnsItself_ForAnyClassRegisteredAsGenericParam(
             IBindingSourceMetadata metadata
-        ) {
+        )
+        {
             // Arrange
             var values = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
 
@@ -279,7 +281,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
 
         private static Mock<IBindingSourceValueProvider> GetMockValueProvider(
             string bindingSourceId
-        ) {
+        )
+        {
             var valueProvider = new Mock<IBindingSourceValueProvider>(MockBehavior.Strict);
 
             valueProvider.Setup(o => o.Filter(It.Is<BindingSource>(s => s.Id == bindingSourceId)))

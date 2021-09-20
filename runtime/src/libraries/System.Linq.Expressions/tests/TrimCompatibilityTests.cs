@@ -33,7 +33,8 @@ namespace System.Linq.Expressions.Tests
                             | BindingFlags.Instance
                             | BindingFlags.Static
                     )
-                ) {
+                )
+                {
                     Type[] genericTypes = method.GetGenericArguments();
                     if (genericTypes != null)
                     {

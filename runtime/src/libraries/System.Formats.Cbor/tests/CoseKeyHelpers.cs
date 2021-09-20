@@ -24,7 +24,8 @@ namespace System.Formats.Cbor.Tests
 
         public static (ECDsa ecDsa, HashAlgorithmName? hashAlgName) ParseECDsaPublicKey(
             byte[] coseKey
-        ) {
+        )
+        {
             var reader = new CborReader(coseKey, CborConformanceMode.Ctap2Canonical);
             (ECParameters ecParams, HashAlgorithmName? hashAlgName) =
                 ReadECParametersAsCosePublicKey(reader);
@@ -35,7 +36,8 @@ namespace System.Formats.Cbor.Tests
             CborWriter writer,
             ECParameters ecParams,
             HashAlgorithmName? algorithmName
-        ) {
+        )
+        {
             Debug.Assert(
                 writer.ConformanceMode == CborConformanceMode.Ctap2Canonical
                     && writer.ConvertIndefiniteLengthEncodings
@@ -146,7 +148,8 @@ namespace System.Formats.Cbor.Tests
 
         private static (ECParameters, HashAlgorithmName?) ReadECParametersAsCosePublicKey(
             CborReader reader
-        ) {
+        )
+        {
             Debug.Assert(reader.ConformanceMode == CborConformanceMode.Ctap2Canonical);
 
             // CTAP2 conformance mode requires that fields are sorted by key encoding.

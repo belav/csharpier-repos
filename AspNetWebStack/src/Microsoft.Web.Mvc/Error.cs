@@ -24,7 +24,8 @@ namespace Microsoft.Web.Mvc
             Type providedType,
             Type requiredInterfaceType,
             string parameterName
-        ) {
+        )
+        {
             string errorString = String.Format(
                 CultureInfo.CurrentCulture,
                 MvcResources.Common_TypeMustImplementInterface,
@@ -37,7 +38,8 @@ namespace Microsoft.Web.Mvc
         public static ArgumentException GenericModelBinderProvider_ParameterMustSpecifyOpenGenericType(
             Type specifiedType,
             string parameterName
-        ) {
+        )
+        {
             string errorString = String.Format(
                 CultureInfo.CurrentCulture,
                 MvcResources.GenericModelBinderProvider_ParameterMustSpecifyOpenGenericType,
@@ -49,7 +51,8 @@ namespace Microsoft.Web.Mvc
         public static ArgumentException GenericModelBinderProvider_TypeArgumentCountMismatch(
             Type modelType,
             Type modelBinderType
-        ) {
+        )
+        {
             string errorString = String.Format(
                 CultureInfo.CurrentCulture,
                 MvcResources.GenericModelBinderProvider_TypeArgumentCountMismatch,
@@ -63,7 +66,8 @@ namespace Microsoft.Web.Mvc
 
         public static InvalidOperationException ModelBinderProviderCollection_BinderForTypeNotFound(
             Type modelType
-        ) {
+        )
+        {
             string errorString = String.Format(
                 CultureInfo.CurrentCulture,
                 MvcResources.ModelBinderProviderCollection_BinderForTypeNotFound,
@@ -95,7 +99,8 @@ namespace Microsoft.Web.Mvc
         public static ArgumentException ModelBinderUtil_ModelInstanceIsWrong(
             Type actualType,
             Type expectedType
-        ) {
+        )
+        {
             string errorString = String.Format(
                 CultureInfo.CurrentCulture,
                 MvcResources.ModelBinderUtil_ModelInstanceIsWrong,
@@ -126,7 +131,8 @@ namespace Microsoft.Web.Mvc
         public static ArgumentException ModelBinderUtil_ModelTypeIsWrong(
             Type actualType,
             Type expectedType
-        ) {
+        )
+        {
             string errorString = String.Format(
                 CultureInfo.CurrentCulture,
                 MvcResources.ModelBinderUtil_ModelTypeIsWrong,

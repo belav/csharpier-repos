@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             IntPtr wrapperUnknown,
             IntPtr innerUnknown,
             IntPtr managedObjectGCHandlePtr
-        ) {
+        )
+        {
             var pWrapper = (BlindAggregator*)wrapperUnknown;
             pWrapper->SetInnerObject(innerUnknown, managedObjectGCHandlePtr);
         }
@@ -184,7 +185,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 BlindAggregator* pThis,
                 [In] ref Guid riid,
                 out IntPtr pvObject
-            ) {
+            )
+            {
                 if (riid == s_IUnknownInterfaceGuid || riid == s_IComWrapperGuid)
                 {
                     AddRef(pThis);

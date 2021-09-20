@@ -24,7 +24,8 @@ namespace BinderTracingTests
             bool isolate = false,
             string testSetup = null,
             string[] additionalLoadsToTrack = null
-        ) {
+        )
+        {
             Isolate = isolate;
             TestSetup = testSetup;
             AdditionalLoadsToTrack = additionalLoadsToTrack;
@@ -234,7 +235,8 @@ namespace BinderTracingTests
             BinderEventListener listener,
             AssemblyName assemblyName,
             BindOperation expected
-        ) {
+        )
+        {
             BindOperation[] binds = listener.WaitAndGetEventsForAssembly(assemblyName);
             Assert.IsTrue(
                 binds.Length == 1,

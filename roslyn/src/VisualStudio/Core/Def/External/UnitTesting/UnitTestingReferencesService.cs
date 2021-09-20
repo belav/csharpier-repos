@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.UnitTesting.ExternalAccess
             CodeLensDescriptor descriptor,
             CodeLensDescriptorContext descriptorContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var callerMethods =
                 await callbackService.InvokeAsync<ImmutableArray<ReferenceMethodDescriptor>?>(
                         provider,

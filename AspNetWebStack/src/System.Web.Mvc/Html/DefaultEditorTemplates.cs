@@ -61,7 +61,8 @@ namespace System.Web.Mvc.Html
         internal static string CollectionTemplate(
             HtmlHelper html,
             TemplateHelpers.TemplateHelperDelegate templateHelper
-        ) {
+        )
+        {
             ViewDataDictionary viewData = html.ViewContext.ViewData;
             object model = viewData.ModelMetadata.Model;
             if (model == null)
@@ -147,7 +148,8 @@ namespace System.Web.Mvc.Html
             if (
                 html.ViewContext.ViewData.TemplateInfo.FormattedModelValue
                 == html.ViewContext.ViewData.ModelMetadata.Model
-            ) {
+            )
+            {
                 html.ViewContext.ViewData.TemplateInfo.FormattedModelValue = String.Format(
                     CultureInfo.CurrentCulture,
                     "{0:0.00}",
@@ -225,7 +227,8 @@ namespace System.Web.Mvc.Html
             HtmlHelper html,
             string className,
             string inputType = null
-        ) {
+        )
+        {
             object htmlAttributesObject = html.ViewContext.ViewData[HtmlAttributeKey];
             if (htmlAttributesObject != null)
             {
@@ -244,7 +247,8 @@ namespace System.Web.Mvc.Html
             object htmlAttributesObject,
             string className,
             string inputType
-        ) {
+        )
+        {
             IDictionary<string, object> htmlAttributesDict =
                 htmlAttributesObject as IDictionary<string, object>;
 
@@ -281,7 +285,8 @@ namespace System.Web.Mvc.Html
         internal static string ObjectTemplate(
             HtmlHelper html,
             TemplateHelpers.TemplateHelperDelegate templateHelper
-        ) {
+        )
+        {
             ViewDataDictionary viewData = html.ViewContext.ViewData;
             TemplateInfo templateInfo = viewData.TemplateInfo;
             ModelMetadata modelMetadata = viewData.ModelMetadata;
@@ -308,7 +313,8 @@ namespace System.Web.Mvc.Html
                 ModelMetadata propertyMetadata in modelMetadata.Properties.Where(
                     pm => ShouldShow(pm, templateInfo)
                 )
-            ) {
+            )
+            {
                 if (!propertyMetadata.HideSurroundingHtml)
                 {
                     string label = LabelExtensions.LabelHelper(
@@ -364,7 +370,8 @@ namespace System.Web.Mvc.Html
                 && usePasswordStrings.Length > 0
                 && bool.TryParse(usePasswordStrings[0], out usePasswordValue)
                 && usePasswordValue
-            ) {
+            )
+            {
                 value = html.ViewContext.ViewData.TemplateInfo.FormattedModelValue;
             }
 
@@ -470,7 +477,8 @@ namespace System.Web.Mvc.Html
             if (
                 html.ViewContext.ViewData.TemplateInfo.FormattedModelValue != value
                 && metadata.HasNonDefaultEditFormat
-            ) {
+            )
+            {
                 return;
             }
 
@@ -497,7 +505,8 @@ namespace System.Web.Mvc.Html
             HtmlHelper html,
             string inputType,
             object value
-        ) {
+        )
+        {
             return html.TextBox(
                     name: String.Empty,
                     value: value,

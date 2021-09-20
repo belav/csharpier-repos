@@ -30,7 +30,8 @@ namespace System.Web.Cors.Test
             string httpMethod,
             string requestedMethod,
             string origin
-        ) {
+        )
+        {
             CorsRequestContext requestContext = new CorsRequestContext
             {
                 HttpMethod = httpMethod,
@@ -51,7 +52,8 @@ namespace System.Web.Cors.Test
             string httpMethod,
             string requestedMethod,
             string origin
-        ) {
+        )
+        {
             CorsRequestContext requestContext = new CorsRequestContext()
             {
                 HttpMethod = httpMethod,

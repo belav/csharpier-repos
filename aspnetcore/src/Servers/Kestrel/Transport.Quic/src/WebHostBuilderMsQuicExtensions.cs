@@ -30,7 +30,8 @@ namespace Microsoft.AspNetCore.Hosting
         public static IWebHostBuilder UseQuic(
             this IWebHostBuilder hostBuilder,
             Action<QuicTransportOptions> configureOptions
-        ) {
+        )
+        {
             return hostBuilder.UseQuic()
                 .ConfigureServices(
                     services =>

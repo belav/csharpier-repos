@@ -83,7 +83,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             [NotNullWhen(returnValue: true)] this SyntaxNode? node,
             SyntaxKind kind1,
             SyntaxKind kind2
-        ) {
+        )
+        {
             if (node == null)
             {
                 return false;
@@ -98,7 +99,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             SyntaxKind kind1,
             SyntaxKind kind2,
             SyntaxKind kind3
-        ) {
+        )
+        {
             if (node == null)
             {
                 return false;
@@ -114,7 +116,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             SyntaxKind kind2,
             SyntaxKind kind3,
             SyntaxKind kind4
-        ) {
+        )
+        {
             if (node == null)
             {
                 return false;
@@ -134,7 +137,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             SyntaxKind kind3,
             SyntaxKind kind4,
             SyntaxKind kind5
-        ) {
+        )
+        {
             if (node == null)
             {
                 return false;
@@ -156,7 +160,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             SyntaxKind kind4,
             SyntaxKind kind5,
             SyntaxKind kind6
-        ) {
+        )
+        {
             if (node == null)
             {
                 return false;
@@ -180,7 +185,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             SyntaxKind kind5,
             SyntaxKind kind6,
             SyntaxKind kind7
-        ) {
+        )
+        {
             if (node == null)
             {
                 return false;
@@ -206,7 +212,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             SyntaxKind kind6,
             SyntaxKind kind7,
             SyntaxKind kind8
-        ) {
+        )
+        {
             if (node == null)
             {
                 return false;
@@ -235,7 +242,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             SyntaxKind kind8,
             SyntaxKind kind9,
             SyntaxKind kind10
-        ) {
+        )
+        {
             if (node == null)
             {
                 return false;
@@ -267,7 +275,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             SyntaxKind kind9,
             SyntaxKind kind10,
             SyntaxKind kind11
-        ) {
+        )
+        {
             if (node == null)
             {
                 return false;
@@ -306,7 +315,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this SyntaxToken token,
             SourceText? sourceText = null,
             bool includePreviousTokenTrailingTriviaOnlyIfOnSameLine = false
-        ) {
+        )
+        {
             var prevToken = token.GetPreviousToken(includeSkipped: true);
             if (prevToken.Kind() == SyntaxKind.None)
             {
@@ -320,7 +330,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             if (
                 includePreviousTokenTrailingTriviaOnlyIfOnSameLine
                 && !sourceText!.AreOnSameLine(prevToken, token)
-            ) {
+            )
+            {
                 return token.LeadingTrivia;
             }
 
@@ -337,7 +348,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
         public static (SyntaxToken openBrace, SyntaxToken closeBrace) GetBraces(
             this SyntaxNode? node
-        ) {
+        )
+        {
             switch (node)
             {
                 case NamespaceDeclarationSyntax namespaceNode:
@@ -381,7 +393,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
         public static bool IsEmbeddedStatementOwner(
             [NotNullWhen(returnValue: true)] this SyntaxNode? node
-        ) {
+        )
+        {
             return node is DoStatementSyntax
                 || node is ElseClauseSyntax
                 || node is FixedStatementSyntax
@@ -450,7 +463,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
         public static ConditionalAccessExpressionSyntax? GetParentConditionalAccessExpression(
             this SyntaxNode? node
-        ) {
+        )
+        {
             // Walk upwards based on the grammar/parser rules around ?. expressions (can be seen in
             // LanguageParser.ParseConsequenceSyntax).
 
@@ -478,7 +492,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     )
                     && memberBinding.Name == current
                 )
-            ) {
+            )
+            {
                 current = current.Parent;
             }
 
@@ -493,7 +508,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     SyntaxKind.MemberBindingExpression,
                     SyntaxKind.ElementBindingExpression
                 ) && current.Parent is not ConditionalAccessExpressionSyntax
-            ) {
+            )
+            {
                 current = current.Parent;
             }
 
@@ -530,14 +546,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     out ConditionalAccessExpressionSyntax? conditional
                 )
                 && conditional.Expression == current
-            ) {
+            )
+            {
                 current = conditional;
             }
 
             if (
                 current.IsParentKind(SyntaxKind.ConditionalAccessExpression, out conditional)
                 && conditional.WhenNotNull == current
-            ) {
+            )
+            {
                 current = conditional;
             }
 
@@ -549,7 +567,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         /// </summary>>
         public static ConditionalAccessExpressionSyntax? GetRootConditionalAccessExpression(
             this SyntaxNode? node
-        ) {
+        )
+        {
             // Once we've walked up the entire RHS, now we continually walk up the conditional accesses until we're at
             // the root. For example, if we have `a?.b` and we're on the `.b`, this will give `a?.b`.  Similarly with
             // `a?.b?.c` if we're on either `.b` or `.c` this will result in `a?.b?.c` (i.e. the root of this CAE
@@ -562,7 +581,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     out ConditionalAccessExpressionSyntax? conditional
                 )
                 && conditional.WhenNotNull == current
-            ) {
+            )
+            {
                 current = conditional;
             }
 
@@ -571,7 +591,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
         public static ConditionalAccessExpressionSyntax? GetInnerMostConditionalAccessExpression(
             this SyntaxNode node
-        ) {
+        )
+        {
             if (!(node is ConditionalAccessExpressionSyntax))
             {
                 return null;
@@ -588,7 +609,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
         public static bool IsAsyncSupportingFunctionSyntax(
             [NotNullWhen(returnValue: true)] this SyntaxNode? node
-        ) {
+        )
+        {
             return node.IsKind(SyntaxKind.MethodDeclaration)
                 || node.IsAnyLambdaOrAnonymousMethod()
                 || node.IsKind(SyntaxKind.LocalFunctionStatement);
@@ -639,7 +661,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
         public static bool IsLeftSideOfAnyAssignExpression(
             [NotNullWhen(true)] this SyntaxNode? node
-        ) {
+        )
+        {
             return node?.Parent != null
                 && node.Parent.IsAnyAssignExpression()
                 && ((AssignmentExpressionSyntax)node.Parent).Left == node;
@@ -647,7 +670,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
         public static bool IsRightSideOfAnyAssignExpression(
             [NotNullWhen(true)] this SyntaxNode? node
-        ) {
+        )
+        {
             return node?.Parent != null
                 && node.Parent.IsAnyAssignExpression()
                 && ((AssignmentExpressionSyntax)node.Parent).Right == node;
@@ -655,7 +679,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
         public static bool IsLeftSideOfCompoundAssignExpression(
             [NotNullWhen(true)] this SyntaxNode? node
-        ) {
+        )
+        {
             return node?.Parent != null
                 && node.Parent.IsCompoundAssignExpression()
                 && ((AssignmentExpressionSyntax)node.Parent).Left == node;
@@ -667,7 +692,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         /// </summary>
         public static IEnumerable<UsingDirectiveSyntax> GetEnclosingUsingDirectives(
             this SyntaxNode node
-        ) {
+        )
+        {
             return node.GetAncestorOrThis<CompilationUnitSyntax>()!.Usings.Concat(
                 node.GetAncestorsOrThis<NamespaceDeclarationSyntax>()
                     .Reverse()
@@ -677,7 +703,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
         public static IEnumerable<ExternAliasDirectiveSyntax> GetEnclosingExternAliasDirectives(
             this SyntaxNode node
-        ) {
+        )
+        {
             return node.GetAncestorOrThis<CompilationUnitSyntax>()!.Externs.Concat(
                 node.GetAncestorsOrThis<NamespaceDeclarationSyntax>()
                     .Reverse()
@@ -743,7 +770,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
         public static NamespaceDeclarationSyntax? GetInnermostNamespaceDeclarationWithUsings(
             this SyntaxNode contextNode
-        ) {
+        )
+        {
             var usingDirectiveAncestor = contextNode.GetAncestor<UsingDirectiveSyntax>();
             if (usingDirectiveAncestor == null)
             {
@@ -904,7 +932,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this SyntaxToken token,
             TextSpan textSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return ContainsInterleavedDirective(textSpan, token.LeadingTrivia, cancellationToken)
                 || ContainsInterleavedDirective(textSpan, token.TrailingTrivia, cancellationToken);
         }
@@ -913,7 +942,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             TextSpan textSpan,
             SyntaxTriviaList list,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             foreach (var trivia in list)
             {
                 if (textSpan.Contains(trivia.Span))
@@ -932,7 +962,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             TextSpan textSpan,
             SyntaxTrivia trivia,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (trivia.HasStructure)
             {
                 var structure = trivia.GetStructure()!;
@@ -944,7 +975,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                             SyntaxKind.IfDirectiveTrivia,
                             SyntaxKind.EndIfDirectiveTrivia
                         )
-                ) {
+                )
+                {
                     var match = ((DirectiveTriviaSyntax)structure).GetMatchingDirective(
                         cancellationToken
                     );
@@ -962,7 +994,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 else if (
                     trivia.GetStructure()
                         .IsKind(SyntaxKind.ElseDirectiveTrivia, SyntaxKind.ElifDirectiveTrivia)
-                ) {
+                )
+                {
                     var directives = (
                         (DirectiveTriviaSyntax)structure
                     ).GetMatchingConditionalDirectives(cancellationToken);
@@ -971,7 +1004,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                         if (
                             !textSpan.Contains(directives[0].SpanStart)
                             || !textSpan.Contains(directives[directives.Count - 1].SpanStart)
-                        ) {
+                        )
+                        {
                             // This else/elif belongs to a pp span that isn't
                             // entirely within this node.
                             return true;
@@ -1104,7 +1138,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         public static IEnumerable<SyntaxNode> GetAncestorsOrThis(
             this SyntaxNode? node,
             Func<SyntaxNode, bool> predicate
-        ) {
+        )
+        {
             var current = node;
             while (current != null)
             {
@@ -1127,7 +1162,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this SyntaxNode self,
             int position,
             out int childIndex
-        ) {
+        )
+        {
             var childList = self.ChildNodesAndTokens();
 
             var left = 0;
@@ -1165,7 +1201,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
         public static (SyntaxToken openParen, SyntaxToken closeParen) GetParentheses(
             this SyntaxNode node
-        ) {
+        )
+        {
             switch (node)
             {
                 case ParenthesizedExpressionSyntax n:
@@ -1223,7 +1260,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
         public static (SyntaxToken openBrace, SyntaxToken closeBrace) GetBrackets(
             this SyntaxNode node
-        ) {
+        )
+        {
             switch (node)
             {
                 case ArrayRankSpecifierSyntax n:
@@ -1281,7 +1319,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     {
                         if (
                             variable.Initializer != null && variable.Initializer.Span.Contains(span)
-                        ) {
+                        )
+                        {
                             return true;
                         }
                     }
@@ -1300,7 +1339,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         public static bool ContainsInArgument(
             this ConstructorInitializerSyntax initializer,
             TextSpan textSpan
-        ) {
+        )
+        {
             if (initializer == null)
             {
                 return false;
@@ -1326,7 +1366,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         public static bool ContainsInExpressionBodiedMemberBody(
             this ArrowExpressionClauseSyntax expressionBodiedMember,
             TextSpan textSpan
-        ) {
+        )
+        {
             if (expressionBodiedMember == null)
             {
                 return false;
@@ -1361,7 +1402,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             SemanticModel semanticModel,
             [NotNullWhen(returnValue: true)] INamedTypeSymbol? expressionTypeOpt,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (expressionTypeOpt != null)
             {
                 for (var current = node; current != null; current = current.Parent)
@@ -1384,7 +1426,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                         if (
                             TakesExpressionTree(info.CastInfo, expressionTypeOpt)
                             || TakesExpressionTree(info.OperationInfo, expressionTypeOpt)
-                        ) {
+                        )
+                        {
                             return true;
                         }
                     }
@@ -1401,7 +1444,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                         symbol is IMethodSymbol method
                         && method.Parameters.Length > 0
                         && expressionType.Equals(method.Parameters[0].Type?.OriginalDefinition)
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }
@@ -1413,7 +1457,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         public static bool IsInDeconstructionLeft(
             [NotNullWhen(returnValue: true)] this SyntaxNode? node,
             [NotNullWhen(returnValue: true)] out SyntaxNode? deconstructionLeft
-        ) {
+        )
+        {
             SyntaxNode? previous = null;
             for (var current = node; current != null; current = current.Parent)
             {
@@ -1427,7 +1472,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                         current is ForEachVariableStatementSyntax @foreach
                         && previous == @foreach.Variable
                     )
-                ) {
+                )
+                {
                     deconstructionLeft = previous;
                     return true;
                 }

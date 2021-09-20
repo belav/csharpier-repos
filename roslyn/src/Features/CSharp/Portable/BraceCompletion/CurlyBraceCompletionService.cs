@@ -53,7 +53,8 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
         public override async Task<BraceCompletionResult?> GetTextChangesAfterCompletionAsync(
             BraceCompletionContext braceCompletionContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var documentOptions = await braceCompletionContext.Document.GetOptionsAsync(
                     cancellationToken
                 )
@@ -94,7 +95,8 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
             BraceCompletionContext context,
             DocumentOptionSet documentOptions,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var document = context.Document;
             var closingPoint = context.ClosingPoint;
             var openingPoint = context.OpeningPoint;
@@ -188,7 +190,8 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
                 SourceText sourceText,
                 int lineNumber,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var indentationService = document.GetRequiredLanguageService<IIndentationService>();
                 var indentation = indentationService.GetIndentation(
                     document,
@@ -207,7 +210,8 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
                 TextChange newLineEdit,
                 ImmutableArray<TextChange> formattingChanges,
                 SourceText formattedText
-            ) {
+            )
+            {
                 var newRanges = TextChangeRangeExtensions.Merge(
                     ImmutableArray.Create(newLineEdit.ToTextChangeRange()),
                     formattingChanges.SelectAsArray(f => f.ToTextChangeRange())
@@ -242,7 +246,8 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
             int openingPosition,
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Only potentially valid for curly brace completion if not in an interpolation brace completion context.
             if (
                 OpeningBrace == brace
@@ -252,7 +257,8 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
                         cancellationToken
                     )
                     .ConfigureAwait(false)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -276,7 +282,8 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
             SourceText text,
             int openingPosition,
             int closingBraceEndPoint
-        ) {
+        )
+        {
             // Set the start point to the character after the opening brace.
             var start = openingPosition + 1;
             // Set the end point to the closing brace start character position.
@@ -306,7 +313,8 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
             ImmutableArray<AbstractFormattingRule> braceFormattingIndentationRules,
             DocumentOptionSet documentOptions,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var option = document.Project.Solution.Options.GetOption(
                 BraceCompletionOptions.AutoFormattingOnCloseBrace,
                 document.Project.Language
@@ -340,7 +348,8 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
             if (
                 text.Lines.GetLineFromPosition(startPoint)
                 == text.Lines.GetLineFromPosition(endPoint)
-            ) {
+            )
+            {
                 var startToken = root.FindToken(startPoint, findInsideTrivia: true);
                 if (
                     startToken.IsKind(SyntaxKind.OpenBraceToken)
@@ -349,7 +358,8 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
                             == true
                         || startToken.Parent is AnonymousObjectCreationExpressionSyntax
                     )
-                ) {
+                )
+                {
                     // Since the braces are next to each other the span to format is everything up to the opening brace start.
                     endPoint = startToken.SpanStart;
                 }
@@ -400,7 +410,8 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
                 Document document,
                 int closingBraceEndPoint,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var originalRoot = await document.GetRequiredSyntaxRootAsync(cancellationToken)
                     .ConfigureAwait(false);
                 var closeBraceToken = originalRoot.FindToken(closingBraceEndPoint - 1);
@@ -416,7 +427,8 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
 
         private static ImmutableArray<AbstractFormattingRule> GetBraceIndentationFormattingRules(
             DocumentOptionSet documentOptions
-        ) {
+        )
+        {
             var indentStyle = documentOptions.GetOption(FormattingOptions.SmartIndent);
             return ImmutableArray.Create(BraceCompletionFormattingRule.ForIndentStyle(indentStyle));
         }
@@ -442,14 +454,16 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
             private BraceCompletionFormattingRule(
                 FormattingOptions.IndentStyle indentStyle,
                 CachedOptions options
-            ) {
+            )
+            {
                 _indentStyle = indentStyle;
                 _options = options;
             }
 
             public static AbstractFormattingRule ForIndentStyle(
                 FormattingOptions.IndentStyle indentStyle
-            ) {
+            )
+            {
                 Debug.Assert(s_instances[(int)indentStyle]._indentStyle == indentStyle);
                 return s_instances[(int)indentStyle];
             }
@@ -470,7 +484,8 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
                 in SyntaxToken previousToken,
                 in SyntaxToken currentToken,
                 in NextGetAdjustNewLinesOperation nextOperation
-            ) {
+            )
+            {
                 // If we're inside any of the following expressions check if the option for
                 // braces on new lines in object / array initializers is set before we attempt
                 // to move the open brace location to a new line.
@@ -487,7 +502,8 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
                         SyntaxKind.ArrayInitializerExpression,
                         SyntaxKind.ImplicitArrayCreationExpression
                     )
-                ) {
+                )
+                {
                     if (_options.NewLinesForBracesInObjectCollectionArrayInitializers)
                     {
                         return CreateAdjustNewLinesOperation(1, AdjustNewLinesOption.PreserveLines);
@@ -509,7 +525,8 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
                 List<AlignTokensOperation> list,
                 SyntaxNode node,
                 in NextAlignTokensOperationAction nextOperation
-            ) {
+            )
+            {
                 base.AddAlignTokensOperations(list, node, in nextOperation);
                 if (_indentStyle == FormattingOptions.IndentStyle.Block)
                 {
@@ -533,7 +550,8 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
                 List<SuppressOperation> list,
                 SyntaxNode node,
                 in NextSuppressOperationAction nextOperation
-            ) {
+            )
+            {
                 base.AddSuppressOperations(list, node, in nextOperation);
 
                 // not sure exactly what is happening here, but removing the bellow causesthe indentation to be wrong.
@@ -567,7 +585,8 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
                 private static T GetOptionOrDefault<T>(
                     AnalyzerConfigOptions? options,
                     Option2<T> option
-                ) {
+                )
+                {
                     if (options is null)
                         return option.DefaultValue;
 

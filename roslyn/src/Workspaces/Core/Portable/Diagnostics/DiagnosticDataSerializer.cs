@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics
             string key,
             ImmutableArray<DiagnosticData> items,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfFalse(textDocument == null || textDocument.Project == project);
 
             using var stream = SerializableBytes.CreateWritableStream();
@@ -90,7 +91,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics
             TextDocument? textDocument,
             string key,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfFalse(textDocument == null || textDocument.Project == project);
 
             var storage = await persistentService.GetStorageAsync(
@@ -125,7 +127,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics
                     cancellationToken,
                     out var data
                 )
-            ) {
+            )
+            {
                 return default;
             }
 
@@ -136,7 +139,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics
             ObjectWriter writer,
             ImmutableArray<DiagnosticData> items,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             writer.WriteInt32(FormatVersion);
 
             AnalyzerVersion.WriteTo(writer);
@@ -186,7 +190,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics
             ObjectWriter writer,
             IReadOnlyCollection<DiagnosticDataLocation> additionalLocations,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             writer.WriteInt32(additionalLocations.Count);
 
             foreach (var location in additionalLocations)
@@ -236,7 +241,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics
             TextDocument? document,
             CancellationToken cancellationToken,
             out ImmutableArray<DiagnosticData> data
-        ) {
+        )
+        {
             data = default;
 
             try
@@ -281,7 +287,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics
             Project project,
             TextDocument? document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var count = reader.ReadInt32();
             if (count == 0)
             {
@@ -352,7 +359,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics
             Project project,
             ObjectReader reader,
             TextDocument? document
-        ) {
+        )
+        {
             var exists = reader.ReadBoolean();
             if (!exists)
             {
@@ -402,7 +410,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics
         private static ImmutableArray<DiagnosticDataLocation> ReadAdditionalLocations(
             Project project,
             ObjectReader reader
-        ) {
+        )
+        {
             var count = reader.ReadInt32();
             using var _ = ArrayBuilder<DiagnosticDataLocation>.GetInstance(count, out var result);
             for (var i = 0; i < count; i++)
@@ -414,7 +423,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics
         private static ImmutableDictionary<string, string?> GetProperties(
             ObjectReader reader,
             int count
-        ) {
+        )
+        {
             if (count > 0)
             {
                 var properties = ImmutableDictionary.CreateBuilder<string, string?>();

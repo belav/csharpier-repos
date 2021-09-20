@@ -156,7 +156,8 @@ namespace Microsoft.CodeAnalysis.Scripting
             bool allowUnsafe,
             int warningLevel,
             ParseOptions parseOptions
-        ) {
+        )
+        {
             Debug.Assert(filePath != null);
             Debug.Assert(!references.IsDefault);
             Debug.Assert(!namespaces.IsDefault);

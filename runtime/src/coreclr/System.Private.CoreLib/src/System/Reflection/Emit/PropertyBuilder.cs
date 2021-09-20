@@ -69,7 +69,8 @@ namespace System.Reflection.Emit
         private void SetMethodSemantics(
             MethodBuilder mdBuilder,
             MethodSemanticsAttributes semantics
-        ) {
+        )
+        {
             if (mdBuilder == null)
             {
                 throw new ArgumentNullException(nameof(mdBuilder));
@@ -143,7 +144,8 @@ namespace System.Reflection.Emit
             Binder? binder,
             object?[]? index,
             CultureInfo? culture
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.NotSupported_DynamicModule);
         }
 
@@ -159,7 +161,8 @@ namespace System.Reflection.Emit
             Binder? binder,
             object?[]? index,
             CultureInfo? culture
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.NotSupported_DynamicModule);
         }
 

@@ -197,7 +197,8 @@ namespace Microsoft.AspNetCore.Internal
                 {
                     fixed (char* sourceChars = &MemoryMarshal.GetReference(buffer))fixed (
                         byte* destinationBytes = &MemoryMarshal.GetReference(destination)
-                    ) {
+                    )
+                    {
                         _encoder.Convert(
                             sourceChars,
                             buffer.Length,

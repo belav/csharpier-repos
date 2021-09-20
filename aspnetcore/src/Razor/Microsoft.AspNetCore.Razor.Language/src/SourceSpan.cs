@@ -29,7 +29,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             int lineIndex,
             int characterIndex,
             int length
-        ) {
+        )
+        {
             AbsoluteIndex = absoluteIndex;
             LineIndex = lineIndex;
             CharacterIndex = characterIndex;

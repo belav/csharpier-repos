@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private bool TryAddAlias(
             INamespaceOrTypeSymbol symbol,
             ArrayBuilder<SymbolDisplayPart> builder
-        ) {
+        )
+        {
             var alias = GetAliasSymbol(symbol);
             if (alias != null)
             {
@@ -106,7 +107,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         if (
                             format.GlobalNamespaceStyle
                             == SymbolDisplayGlobalNamespaceStyle.Included
-                        ) {
+                        )
+                        {
                             AddGlobalNamespace(containingNamespace);
                             AddPunctuation(SyntaxKind.ColonColonToken);
                         }
@@ -296,7 +298,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     SymbolDisplayMiscellaneousOptions.RemoveAttributeSuffix
                 )
                 && semanticModelOpt.Compilation.IsAttributeType(symbol)
-            ) {
+            )
+            {
                 string nameWithoutAttributeSuffix;
                 if (symbolName.TryGetWithoutAttributeSuffix(out nameWithoutAttributeSuffix))
                 {

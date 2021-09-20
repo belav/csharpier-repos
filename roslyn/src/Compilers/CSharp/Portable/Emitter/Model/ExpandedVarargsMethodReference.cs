@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
         public ExpandedVarargsMethodReference(
             Cci.IMethodReference underlyingMethod,
             ImmutableArray<Cci.IParameterTypeInformation> argListParams
-        ) {
+        )
+        {
             Debug.Assert(underlyingMethod.AcceptsExtraArguments);
             Debug.Assert(!argListParams.IsEmpty);
 
@@ -100,7 +101,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
         ImmutableArray<Cci.IParameterTypeInformation> Cci.ISignature.GetParameters(
             EmitContext context
-        ) {
+        )
+        {
             return _underlyingMethod.GetParameters(context);
         }
 
@@ -164,13 +166,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
         IEnumerable<Cci.ITypeReference> Cci.IGenericMethodInstanceReference.GetGenericArguments(
             EmitContext context
-        ) {
+        )
+        {
             return _underlyingMethod.AsGenericMethodInstanceReference.GetGenericArguments(context);
         }
 
         Cci.IMethodReference Cci.IGenericMethodInstanceReference.GetGenericMethod(
             EmitContext context
-        ) {
+        )
+        {
             return new ExpandedVarargsMethodReference(
                 _underlyingMethod.AsGenericMethodInstanceReference.GetGenericMethod(context),
                 _argListParams

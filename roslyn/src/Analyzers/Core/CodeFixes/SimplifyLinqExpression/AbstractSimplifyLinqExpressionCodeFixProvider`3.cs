@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.SimplifyLinqExpression
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = editor.OriginalRoot;
             var expressionsToReWrite = diagnostics.Select(d => GetInvocation(root, d))
                 .OrderByDescending(i => i.SpanStart);
@@ -77,7 +78,8 @@ namespace Microsoft.CodeAnalysis.SimplifyLinqExpression
 
             (TExpressionSyntax Expression, TSimpleNameSyntax Name, SeparatedSyntaxList<SyntaxNode> Arguments) FindNodes(
                 TInvocationExpressionSyntax current
-            ) {
+            )
+            {
                 var memberAccess = SyntaxFacts.GetExpressionOfInvocationExpression(current);
                 var name = (TSimpleNameSyntax)SyntaxFacts.GetNameOfMemberAccessExpression(
                     memberAccess
@@ -97,13 +99,12 @@ namespace Microsoft.CodeAnalysis.SimplifyLinqExpression
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                AnalyzersResources.Simplify_LINQ_expression,
-                createChangedDocument,
-                AnalyzersResources.Simplify_LINQ_expression
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    AnalyzersResources.Simplify_LINQ_expression,
+                    createChangedDocument,
+                    AnalyzersResources.Simplify_LINQ_expression
+                ) { }
         }
     }
 }

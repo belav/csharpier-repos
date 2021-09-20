@@ -119,7 +119,8 @@ namespace System.IO.Pipelines
             int startIndex,
             BufferSegment endSegment,
             int endIndex
-        ) {
+        )
+        {
             return (endSegment.RunningIndex + (uint)endIndex)
                 - (startSegment.RunningIndex + (uint)startIndex);
         }

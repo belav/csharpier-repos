@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.DataProtection.XmlEncryption
         public bool TryGetKeyDecryptionCertificates(
             X509Certificate2 certInfo,
             [NotNullWhen(true)] out IReadOnlyList<X509Certificate2>? keyDecryptionCerts
-        ) {
+        )
+        {
             var key = GetKey(certInfo);
             var retVal = _certs.TryGetValue(key, out var keyDecryptionCertsRetVal);
             keyDecryptionCerts = keyDecryptionCertsRetVal;

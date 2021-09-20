@@ -59,12 +59,14 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             TState state,
             Exception? exception,
             Func<TState, Exception?, string> formatter
-        ) {
+        )
+        {
             // Only show SQL when verbose
             if (
                 _categoryName == DbLoggerCategory.Database.Command.Name
                 && eventId.Id == RelationalEventId.CommandExecuted.Id
-            ) {
+            )
+            {
                 logLevel = LogLevel.Debug;
             }
 
@@ -94,7 +96,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             TState state,
             Exception? exception,
             Func<TState, Exception?, string>? formatter
-        ) {
+        )
+        {
             var builder = new StringBuilder();
             if (formatter != null)
             {

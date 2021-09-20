@@ -87,7 +87,8 @@ namespace System.Reflection
             )]
                 Type baseType,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type interfaceType
-        ) {
+        )
+        {
             Debug.Assert(baseType != null);
             Debug.Assert(interfaceType != null);
 
@@ -104,7 +105,8 @@ namespace System.Reflection
             )]
                 Type baseType,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type interfaceType
-        ) {
+        )
+        {
             lock (s_baseTypeAndInterfaceToGeneratedProxyType)
             {
                 if (
@@ -112,7 +114,8 @@ namespace System.Reflection
                         baseType,
                         out Dictionary<Type, GeneratedTypeInfo>? interfaceToProxy
                     )
-                ) {
+                )
+                {
                     interfaceToProxy = new Dictionary<Type, GeneratedTypeInfo>();
                     s_baseTypeAndInterfaceToGeneratedProxyType[baseType] = interfaceToProxy;
                 }
@@ -122,7 +125,8 @@ namespace System.Reflection
                         interfaceType,
                         out GeneratedTypeInfo? generatedProxy
                     )
-                ) {
+                )
+                {
                     generatedProxy = GenerateProxyType(baseType, interfaceType);
                     interfaceToProxy[interfaceType] = generatedProxy;
                 }
@@ -143,7 +147,8 @@ namespace System.Reflection
             )]
                 Type baseType,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type interfaceType
-        ) {
+        )
+        {
             // Parameter validation is deferred until the point we need to create the proxy.
             // This prevents unnecessary overhead revalidating cached proxy types.
 
@@ -202,7 +207,8 @@ namespace System.Reflection
             public GeneratedTypeInfo(
                 [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type generatedType,
                 MethodInfo[] methodInfos
-            ) {
+            )
+            {
                 GeneratedType = generatedType;
                 MethodInfos = methodInfos;
             }
@@ -258,7 +264,8 @@ namespace System.Reflection
                     DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
                 )]
                     Type proxyBaseType
-            ) {
+            )
+            {
                 int nextId = Interlocked.Increment(ref _typeId);
                 TypeBuilder tb = _mb.DefineType(
                     name + "_" + nextId,
@@ -318,7 +325,8 @@ namespace System.Reflection
                     DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
                 )]
                     Type proxyBaseType
-            ) {
+            )
+            {
                 _assembly = assembly;
                 _tb = tb;
                 _proxyBaseType = proxyBaseType;
@@ -374,7 +382,8 @@ namespace System.Reflection
 
             internal void AddInterfaceImpl(
                 [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type iface
-            ) {
+            )
+            {
                 // If necessary, generate an attribute to permit visibility
                 // to internal types.
                 _assembly.EnsureTypeIsVisible(iface);
@@ -921,7 +930,8 @@ namespace System.Reflection
                 public PropertyAccessorInfo(
                     MethodInfo? interfaceGetMethod,
                     MethodInfo? interfaceSetMethod
-                ) {
+                )
+                {
                     InterfaceGetMethod = interfaceGetMethod;
                     InterfaceSetMethod = interfaceSetMethod;
                 }
@@ -940,7 +950,8 @@ namespace System.Reflection
                     MethodInfo? interfaceAddMethod,
                     MethodInfo? interfaceRemoveMethod,
                     MethodInfo? interfaceRaiseMethod
-                ) {
+                )
+                {
                     InterfaceAddMethod = interfaceAddMethod;
                     InterfaceRemoveMethod = interfaceRemoveMethod;
                     InterfaceRaiseMethod = interfaceRaiseMethod;

@@ -18,7 +18,8 @@ namespace System.IO.MemoryMappedFiles
             long pointerOffset,
             long size,
             MemoryMappedFileAccess access
-        ) {
+        )
+        {
             Debug.Assert(viewHandle != null);
 
             _viewHandle = viewHandle;
@@ -83,7 +84,8 @@ namespace System.IO.MemoryMappedFiles
             out ulong newSize,
             out long extraMemNeeded,
             out long newOffset
-        ) {
+        )
+        {
             Debug.Assert(size >= 0);
             Debug.Assert(offset >= 0);
             Debug.Assert(allocationGranularity > 0);

@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         public static async Task<T> PerformIOAsync<T>(
             Func<Task<T>> function,
             T defaultValue = default
-        ) {
+        )
+        {
             try
             {
                 return await function().ConfigureAwait(false);

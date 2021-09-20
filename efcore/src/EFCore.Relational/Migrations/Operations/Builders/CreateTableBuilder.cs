@@ -84,7 +84,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Operations.Builders
             string? principalSchema = null,
             ReferentialAction onUpdate = ReferentialAction.NoAction,
             ReferentialAction onDelete = ReferentialAction.NoAction
-        ) {
+        )
+        {
             Check.NotEmpty(name, nameof(name));
             Check.NotNull(columns, nameof(columns));
             Check.NotEmpty(principalTable, nameof(principalTable));
@@ -115,7 +116,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Operations.Builders
         public virtual OperationBuilder<AddPrimaryKeyOperation> PrimaryKey(
             string name,
             Expression<Func<TColumns, object>> columns
-        ) {
+        )
+        {
             Check.NotEmpty(name, nameof(name));
             Check.NotNull(columns, nameof(columns));
 
@@ -141,7 +143,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Operations.Builders
         public virtual OperationBuilder<AddUniqueConstraintOperation> UniqueConstraint(
             string name,
             Expression<Func<TColumns, object>> columns
-        ) {
+        )
+        {
             Check.NotEmpty(name, nameof(name));
             Check.NotNull(columns, nameof(columns));
 
@@ -166,7 +169,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Operations.Builders
         public virtual OperationBuilder<AddCheckConstraintOperation> CheckConstraint(
             string name,
             string sql
-        ) {
+        )
+        {
             Check.NotEmpty(name, nameof(name));
             Check.NotNull(sql, nameof(sql));
 

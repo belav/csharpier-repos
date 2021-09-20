@@ -590,26 +590,30 @@ namespace System.Runtime.CompilerServices
 
         protected static CSharpCompilationOptions WithNullableEnable(
             CSharpCompilationOptions options = null
-        ) {
+        )
+        {
             return WithNullable(options, NullableContextOptions.Enable);
         }
 
         protected static CSharpCompilationOptions WithNullableDisable(
             CSharpCompilationOptions options = null
-        ) {
+        )
+        {
             return WithNullable(options, NullableContextOptions.Disable);
         }
 
         protected static CSharpCompilationOptions WithNullable(
             NullableContextOptions nullableContextOptions
-        ) {
+        )
+        {
             return WithNullable(null, nullableContextOptions);
         }
 
         protected static CSharpCompilationOptions WithNullable(
             CSharpCompilationOptions options,
             NullableContextOptions nullableContextOptions
-        ) {
+        )
+        {
             return (options ?? TestOptions.ReleaseDll).WithNullableContextOptions(
                 nullableContextOptions
             );
@@ -704,7 +708,8 @@ namespace System.Runtime.CompilerServices
             CSharpParseOptions parseOptions = null,
             EmitOptions emitOptions = null,
             Verification verify = Verification.Passes
-        ) {
+        )
+        {
             options =
                 options
                 ?? TestOptions.ReleaseDll.WithOutputKind(
@@ -830,7 +835,8 @@ namespace System.Runtime.CompilerServices
             EmitOptions emitOptions = null,
             TargetFramework targetFramework = TargetFramework.Standard,
             Verification verify = Verification.Passes
-        ) {
+        )
+        {
             options =
                 options
                 ?? TestOptions.ReleaseDll.WithOutputKind(
@@ -875,7 +881,8 @@ namespace System.Runtime.CompilerServices
             string[] args = null,
             EmitOptions emitOptions = null,
             Verification verify = Verification.Passes
-        ) {
+        )
+        {
             Action<IModuleSymbol> translate(Action<ModuleSymbol> action)
             {
                 if (action != null)
@@ -940,7 +947,8 @@ namespace System.Runtime.CompilerServices
             string filename = "",
             CSharpParseOptions options = null,
             Encoding encoding = null
-        ) {
+        )
+        {
             if ((object)options == null)
             {
                 options = TestOptions.Regular;
@@ -963,7 +971,8 @@ namespace System.Runtime.CompilerServices
         public static SyntaxTree[] Parse(
             IEnumerable<string> sources,
             CSharpParseOptions options = null
-        ) {
+        )
+        {
             if (sources == null || !sources.Any())
             {
                 return new SyntaxTree[] {  };
@@ -985,7 +994,8 @@ namespace System.Runtime.CompilerServices
         public static SyntaxTree ParseWithRoundTripCheck(
             string text,
             CSharpParseOptions options = null
-        ) {
+        )
+        {
             var tree = Parse(text, options: options ?? TestOptions.RegularPreview);
             var parsedText = tree.GetRoot();
             // we validate the text roundtrips
@@ -1024,7 +1034,8 @@ namespace System.Runtime.CompilerServices
             CSharpCompilationOptions options = null,
             CSharpParseOptions parseOptions = null,
             bool appendDefaultHeader = true
-        ) {
+        )
+        {
             MetadataReference ilReference = CompileIL(ilSource, appendDefaultHeader);
             var allReferences = TargetFrameworkUtil.GetReferences(targetFramework, references)
                 .Add(ilReference);
@@ -1225,7 +1236,8 @@ namespace System.Runtime.CompilerServices
             CSharpParseOptions parseOptions = null,
             string assemblyName = "",
             string sourceFileName = ""
-        ) {
+        )
+        {
             parseOptions =
                 parseOptions != null
                     ? parseOptions.WithDocumentationMode(DocumentationMode.Diagnose)
@@ -1251,7 +1263,8 @@ namespace System.Runtime.CompilerServices
             CSharpParseOptions parseOptions = null,
             string assemblyName = "",
             string sourceFileName = ""
-        ) {
+        )
+        {
             IEnumerable<MetadataReference> allReferences;
 
             if (RuntimeUtilities.IsCoreClrRuntime)
@@ -1338,7 +1351,8 @@ namespace System.Runtime.CompilerServices
             string sourceFileName,
             bool skipUsesIsNullable,
             MessageID? experimentalFeature
-        ) {
+        )
+        {
             var syntaxTrees = source.GetSyntaxTrees(parseOptions, sourceFileName);
 
             if (options == null)
@@ -1394,7 +1408,8 @@ namespace System.Runtime.CompilerServices
 
         private static void VerifyUsedAssemblyReferences(
             Func<CSharpCompilation> createCompilationLambda
-        ) {
+        )
+        {
             if (!CompilationExtensions.EnableVerifyUsedAssemblies)
             {
                 return;
@@ -1413,7 +1428,8 @@ namespace System.Runtime.CompilerServices
             if (
                 !compileDiagnostics.Any(d => d.DefaultSeverity == DiagnosticSeverity.Error)
                 && !resolvedReferences.Any(r => r.Properties.HasRecursiveAliases)
-            ) {
+            )
+            {
                 if (resolvedReferences.Count() > used.Length)
                 {
                     AssertSubset(used, resolvedReferences);
@@ -1424,7 +1440,8 @@ namespace System.Runtime.CompilerServices
                                 d.Code == (int)ErrorCode.HDN_UnusedExternAlias
                                 || d.Code == (int)ErrorCode.HDN_UnusedUsingDirective
                         )
-                    ) {
+                    )
+                    {
                         var comp2 = comp.RemoveAllReferences()
                             .AddReferences(
                                 used.Concat(
@@ -1472,7 +1489,8 @@ namespace System.Runtime.CompilerServices
             static void AssertSubset(
                 ImmutableArray<MetadataReference> used,
                 IEnumerable<MetadataReference> resolvedReferences
-            ) {
+            )
+            {
                 foreach (var reference in used)
                 {
                     Assert.Contains(reference, resolvedReferences);
@@ -1495,7 +1513,8 @@ namespace System.Runtime.CompilerServices
         internal static void VerifyUsesOfNullability(
             Symbol symbol,
             ImmutableArray<string> expectedUsesOfNullable
-        ) {
+        )
+        {
             var builder = ArrayBuilder<Symbol>.GetInstance();
             UsesIsNullableVisitor.GetUses(builder, symbol);
 
@@ -1517,7 +1536,8 @@ namespace System.Runtime.CompilerServices
             MetadataReference[] references,
             CSharpCompilationOptions options = null,
             CSharpParseOptions parseOptions = null
-        ) {
+        )
+        {
             var trees =
                 (source == null)
                     ? null
@@ -1546,7 +1566,8 @@ namespace System.Runtime.CompilerServices
             CSharpCompilation previous = null,
             Type returnType = null,
             Type hostObjectType = null
-        ) {
+        )
+        {
             Func<CSharpCompilation> createCompilationLambda = () =>
                 CSharpCompilation.CreateScriptCompilation(
                     GetUniqueName(),
@@ -1573,7 +1594,8 @@ namespace System.Runtime.CompilerServices
             CSharpCompilation previous = null,
             Type returnType = null,
             Type hostObjectType = null
-        ) {
+        )
+        {
             Func<CSharpCompilation> createCompilationLambda = () =>
                 CSharpCompilation.CreateScriptCompilation(
                     GetUniqueName(),
@@ -1597,7 +1619,8 @@ namespace System.Runtime.CompilerServices
             bool importInternals = true,
             string expectedOutput = null,
             TargetFramework targetFramework = TargetFramework.Standard
-        ) {
+        )
+        {
             var compilationOptions =
                 (expectedOutput != null) ? TestOptions.ReleaseExe : TestOptions.ReleaseDll;
 
@@ -1634,10 +1657,12 @@ namespace System.Runtime.CompilerServices
         public static MetadataReference CreateMetadataReferenceFromIlSource(
             string ilSource,
             bool prependDefaultHeader = true
-        ) {
+        )
+        {
             using (
                 var tempAssembly = IlasmUtilities.CreateTempAssembly(ilSource, prependDefaultHeader)
-            ) {
+            )
+            {
                 return MetadataReference.CreateFromImage(ReadFromFile(tempAssembly.Path));
             }
         }
@@ -1697,7 +1722,8 @@ namespace System.Runtime.CompilerServices
         protected static List<SyntaxNode> GetSyntaxNodeList(
             SyntaxNode node,
             List<SyntaxNode> synList
-        ) {
+        )
+        {
             if (synList == null)
                 synList = new List<SyntaxNode>();
 
@@ -1939,25 +1965,29 @@ namespace System.Runtime.CompilerServices
 
         internal static IEnumerable<string> GetAttributeNames(
             ImmutableArray<SynthesizedAttributeData> attributes
-        ) {
+        )
+        {
             return attributes.Select(a => a.AttributeClass.Name);
         }
 
         internal static IEnumerable<string> GetAttributeNames(
             ImmutableArray<CSharpAttributeData> attributes
-        ) {
+        )
+        {
             return attributes.Select(a => a.AttributeClass.Name);
         }
 
         internal static IEnumerable<string> GetAttributeStrings(
             ImmutableArray<CSharpAttributeData> attributes
-        ) {
+        )
+        {
             return attributes.Select(a => a.ToString());
         }
 
         internal static IEnumerable<string> GetAttributeStrings(
             IEnumerable<CSharpAttributeData> attributes
-        ) {
+        )
+        {
             return attributes.Select(a => a.ToString());
         }
 
@@ -1968,7 +1998,8 @@ namespace System.Runtime.CompilerServices
         internal static string GetDocumentationCommentText(
             CSharpCompilation compilation,
             params DiagnosticDescription[] expectedDiagnostics
-        ) {
+        )
+        {
             return GetDocumentationCommentText(
                 compilation,
                 outputName: null,
@@ -1982,7 +2013,8 @@ namespace System.Runtime.CompilerServices
             CSharpCompilation compilation,
             bool ensureEnglishUICulture,
             params DiagnosticDescription[] expectedDiagnostics
-        ) {
+        )
+        {
             return GetDocumentationCommentText(
                 compilation,
                 outputName: null,
@@ -1999,7 +2031,8 @@ namespace System.Runtime.CompilerServices
             TextSpan? filterSpanWithinTree = null,
             bool ensureEnglishUICulture = false,
             params DiagnosticDescription[] expectedDiagnostics
-        ) {
+        )
+        {
             using (MemoryStream stream = new MemoryStream())
             {
                 DiagnosticBag diagnostics = DiagnosticBag.GetInstance();
@@ -2066,7 +2099,8 @@ namespace System.Runtime.CompilerServices
             CompilationTestData.MethodData methodData,
             IReadOnlyDictionary<int, string> markers,
             bool areLocalsZeroed
-        ) {
+        )
+        {
             return VisualizeRealIL(
                 (PEModuleSymbol)peModule.GetSymbol(),
                 methodData,
@@ -2090,7 +2124,8 @@ namespace System.Runtime.CompilerServices
             CompilationTestData.MethodData methodData,
             IReadOnlyDictionary<int, string> markers,
             bool areLocalsZeroed
-        ) {
+        )
+        {
             var typeName = GetContainingTypeMetadataName(methodData.Method);
             // TODO (tomat): global methods (typeName == null)
 
@@ -2171,7 +2206,8 @@ namespace System.Runtime.CompilerServices
         private static ImmutableArray<ILVisualizer.LocalInfo> ToLocalDefinitions(
             ImmutableArray<LocalInfo<TypeSymbol>> localInfos,
             ILBuilder builder
-        ) {
+        )
+        {
             if (localInfos.IsEmpty)
             {
                 return ImmutableArray.Create<ILVisualizer.LocalInfo>();
@@ -2284,7 +2320,8 @@ namespace System.Runtime.CompilerServices
         protected static string GetOperationTreeForTest(
             CSharpCompilation compilation,
             IOperation operation
-        ) {
+        )
+        {
             return operation != null
               ? OperationTreeVerifier.GetOperationTree(compilation, operation)
               : null;
@@ -2330,7 +2367,8 @@ namespace System.Runtime.CompilerServices
             SemanticModel model,
             SyntaxNode syntaxNode,
             string expectedOperationTree
-        ) {
+        )
+        {
             VerifyOperationTree(compilation, model.GetOperation(syntaxNode), expectedOperationTree);
         }
 
@@ -2338,7 +2376,8 @@ namespace System.Runtime.CompilerServices
             CSharpCompilation compilation,
             IOperation operation,
             string expectedOperationTree
-        ) {
+        )
+        {
             Assert.NotNull(operation);
             var actualOperationTree = GetOperationTreeForTest(compilation, operation);
             OperationTreeVerifier.Verify(expectedOperationTree, actualOperationTree);
@@ -2360,7 +2399,8 @@ namespace System.Runtime.CompilerServices
             CSharpCompilation compilation,
             SyntaxNode syntaxNode,
             string expectedFlowGraph
-        ) {
+        )
+        {
             var model = compilation.GetSemanticModel(syntaxNode.SyntaxTree);
             (ControlFlowGraph graph, ISymbol associatedSymbol) =
                 ControlFlowGraphVerifier.GetControlFlowGraph(syntaxNode, model);
@@ -2571,7 +2611,8 @@ namespace System.Runtime.CompilerServices
         protected static CSharpCompilation CreateCompilationWithSpan(
             SyntaxTree tree,
             CSharpCompilationOptions options = null
-        ) {
+        )
+        {
             var reference = CreateCompilation(SpanSource, options: TestOptions.UnsafeReleaseDll);
 
             reference.VerifyDiagnostics();
@@ -2599,7 +2640,8 @@ namespace System.Runtime.CompilerServices
             string text,
             CSharpCompilationOptions options = null,
             CSharpParseOptions parseOptions = null
-        ) {
+        )
+        {
             var reference = CreateEmptyCompilation(
                 SpanSource,
                 references: new List<MetadataReference>()
@@ -2633,7 +2675,8 @@ namespace System.Runtime.CompilerServices
             string text,
             CSharpCompilationOptions options = null,
             CSharpParseOptions parseOptions = null
-        ) {
+        )
+        {
             var textWitSpan = new string[] { text, SpanSource };
             var comp = CreateEmptyCompilation(
                 textWitSpan,
@@ -2860,7 +2903,8 @@ namespace System
             CSharpTestSource text,
             CSharpCompilationOptions options = null,
             CSharpParseOptions parseOptions = null
-        ) {
+        )
+        {
             var reference = CreateCompilation(TestSources.Index).VerifyDiagnostics();
 
             return CreateCompilation(
@@ -2875,7 +2919,8 @@ namespace System
             CSharpTestSource text,
             CSharpCompilationOptions options = null,
             CSharpParseOptions parseOptions = null
-        ) {
+        )
+        {
             var reference = CreateCompilation(new[] { TestSources.Index, TestSources.Range })
                 .VerifyDiagnostics();
 
@@ -2891,7 +2936,8 @@ namespace System
             CSharpTestSource text,
             CSharpCompilationOptions options = null,
             CSharpParseOptions parseOptions = null
-        ) {
+        )
+        {
             var reference = CreateCompilation(
                     new[] { TestSources.Index, TestSources.Range, TestSources.Span },
                     options: TestOptions.UnsafeReleaseDll

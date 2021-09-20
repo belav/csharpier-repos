@@ -29,7 +29,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             int offset,
             int count,
             HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             if (hashAlgorithm != HashAlgorithmName.SHA1)
                 throw new NotSupportedException();
 

@@ -44,7 +44,8 @@ namespace System.Security.Cryptography.Asn1.Pkcs7
         internal static EncryptedDataAsn Decode(
             ReadOnlyMemory<byte> encoded,
             AsnEncodingRules ruleSet
-        ) {
+        )
+        {
             return Decode(Asn1Tag.Sequence, encoded, ruleSet);
         }
 
@@ -52,7 +53,8 @@ namespace System.Security.Cryptography.Asn1.Pkcs7
             Asn1Tag expectedTag,
             ReadOnlyMemory<byte> encoded,
             AsnEncodingRules ruleSet
-        ) {
+        )
+        {
             try
             {
                 AsnValueReader reader = new AsnValueReader(encoded.Span, ruleSet);
@@ -71,7 +73,8 @@ namespace System.Security.Cryptography.Asn1.Pkcs7
             ref AsnValueReader reader,
             ReadOnlyMemory<byte> rebind,
             out EncryptedDataAsn decoded
-        ) {
+        )
+        {
             Decode(ref reader, Asn1Tag.Sequence, rebind, out decoded);
         }
 
@@ -80,7 +83,8 @@ namespace System.Security.Cryptography.Asn1.Pkcs7
             Asn1Tag expectedTag,
             ReadOnlyMemory<byte> rebind,
             out EncryptedDataAsn decoded
-        ) {
+        )
+        {
             try
             {
                 DecodeCore(ref reader, expectedTag, rebind, out decoded);
@@ -96,7 +100,8 @@ namespace System.Security.Cryptography.Asn1.Pkcs7
             Asn1Tag expectedTag,
             ReadOnlyMemory<byte> rebind,
             out EncryptedDataAsn decoded
-        ) {
+        )
+        {
             decoded = default;
             AsnValueReader sequenceReader = reader.ReadSequence(expectedTag);
             AsnValueReader collectionReader;
@@ -116,7 +121,8 @@ namespace System.Security.Cryptography.Asn1.Pkcs7
                 sequenceReader.HasData
                 && sequenceReader.PeekTag()
                     .HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 1))
-            ) {
+            )
+            {
                 // Decode SEQUENCE OF for UnprotectedAttributes
                 {
                     collectionReader = sequenceReader.ReadSetOf(

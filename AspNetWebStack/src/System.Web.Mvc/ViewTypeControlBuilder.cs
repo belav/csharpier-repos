@@ -18,7 +18,8 @@ namespace System.Web.Mvc
             string tagName,
             string id,
             IDictionary attribs
-        ) {
+        )
+        {
             base.Init(parser, parentBuilder, type, tagName, id, attribs);
 
             _typeName = (string)attribs["typename"];
@@ -30,7 +31,8 @@ namespace System.Web.Mvc
             CodeTypeDeclaration derivedType,
             CodeMemberMethod buildMethod,
             CodeMemberMethod dataBindingMethod
-        ) {
+        )
+        {
             // Override the view's base type with the explicit base type
             derivedType.BaseTypes[0] = new CodeTypeReference(_typeName);
         }

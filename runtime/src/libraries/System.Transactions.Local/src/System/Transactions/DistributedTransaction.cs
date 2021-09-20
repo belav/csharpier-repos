@@ -13,7 +13,8 @@ namespace System.Transactions.Distributed
             Guid resourceManagerIdentifier,
             byte[] resourceManagerRecoveryInformation,
             RecoveringInternalEnlistment internalEnlistment
-        ) {
+        )
+        {
             throw DistributedTransaction.NotSupported();
         }
 
@@ -34,20 +35,23 @@ namespace System.Transactions.Distributed
 
         internal static Transaction GetTransactionFromDtcTransaction(
             IDtcTransaction transactionNative
-        ) {
+        )
+        {
             throw DistributedTransaction.NotSupported();
         }
 
         internal static DistributedTransaction GetTransactionFromExportCookie(
             byte[] cookie,
             Guid txId
-        ) {
+        )
+        {
             throw DistributedTransaction.NotSupported();
         }
 
         internal static DistributedTransaction GetDistributedTransactionFromTransmitterPropagationToken(
             byte[] propagationToken
-        ) {
+        )
+        {
             throw DistributedTransaction.NotSupported();
         }
     }
@@ -70,7 +74,8 @@ namespace System.Transactions.Distributed
         protected DistributedTransaction(
             SerializationInfo serializationInfo,
             StreamingContext context
-        ) {
+        )
+        {
             //if (serializationInfo == null)
             //{
             //    throw new ArgumentNullException(nameof(serializationInfo));
@@ -92,7 +97,8 @@ namespace System.Transactions.Distributed
         internal IPromotedEnlistment EnlistVolatile(
             InternalEnlistment internalEnlistment,
             EnlistmentOptions enlistmentOptions
-        ) {
+        )
+        {
             throw NotSupported();
         }
 
@@ -101,7 +107,8 @@ namespace System.Transactions.Distributed
             DurableInternalEnlistment internalEnlistment,
             bool v,
             EnlistmentOptions enlistmentOptions
-        ) {
+        )
+        {
             throw NotSupported();
         }
 
@@ -118,7 +125,8 @@ namespace System.Transactions.Distributed
         internal IPromotedEnlistment EnlistVolatile(
             VolatileDemultiplexer volatileDemux,
             EnlistmentOptions enlistmentOptions
-        ) {
+        )
+        {
             throw NotSupported();
         }
 
@@ -145,7 +153,8 @@ namespace System.Transactions.Distributed
         void ISerializable.GetObjectData(
             SerializationInfo serializationInfo,
             StreamingContext context
-        ) {
+        )
+        {
             //if (serializationInfo == null)
             //{
             //    throw new ArgumentNullException(nameof(serializationInfo));

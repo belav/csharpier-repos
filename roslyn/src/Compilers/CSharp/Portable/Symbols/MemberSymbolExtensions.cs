@@ -311,7 +311,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal static NamespaceOrTypeSymbol OfMinimalArity(
             this IEnumerable<NamespaceOrTypeSymbol> symbols
-        ) {
+        )
+        {
             NamespaceOrTypeSymbol minAritySymbol = null;
             int minArity = Int32.MaxValue;
             foreach (var symbol in symbols)
@@ -329,7 +330,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal static ImmutableArray<TypeParameterSymbol> GetMemberTypeParameters(
             this Symbol symbol
-        ) {
+        )
+        {
             switch (symbol.Kind)
             {
                 case SymbolKind.Method:
@@ -348,7 +350,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal static ImmutableArray<TypeSymbol> GetMemberTypeArgumentsNoUseSiteDiagnostics(
             this Symbol symbol
-        ) {
+        )
+        {
             switch (symbol.Kind)
             {
                 case SymbolKind.Method:
@@ -565,7 +568,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal static ImmutableArray<Symbol> GetExplicitInterfaceImplementations(
             this Symbol member
-        ) {
+        )
+        {
             switch (member.Kind)
             {
                 case SymbolKind.Method:
@@ -606,7 +610,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal static Symbol GetLeastOverriddenMember(
             this Symbol member,
             NamedTypeSymbol accessingTypeOpt
-        ) {
+        )
+        {
             switch (member.Kind)
             {
                 case SymbolKind.Method:

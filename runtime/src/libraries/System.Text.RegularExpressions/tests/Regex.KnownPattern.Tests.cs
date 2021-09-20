@@ -378,7 +378,8 @@ namespace System.Text.RegularExpressions.Tests
         [InlineData(RegexOptions.Compiled)]
         public void Docs_GroupingConstructs_ZeroWidthPositiveLookaheadAssertions(
             RegexOptions options
-        ) {
+        )
+        {
             const string Pattern = @"\b\w+(?=\sis\b)";
             Match match;
 
@@ -403,7 +404,8 @@ namespace System.Text.RegularExpressions.Tests
         [InlineData(RegexOptions.Compiled)]
         public void Docs_GroupingConstructs_ZeroWidthNegativeLookaheadAssertions(
             RegexOptions options
-        ) {
+        )
+        {
             const string Pattern = @"\b(?!un)\w+\b";
             const string Input = "unite one unethical ethics use untie ultimate";
 
@@ -424,7 +426,8 @@ namespace System.Text.RegularExpressions.Tests
         [InlineData(RegexOptions.Compiled)]
         public void Docs_GroupingConstructs_ZeroWidthPositiveLookbehindAssertions(
             RegexOptions options
-        ) {
+        )
+        {
             const string Pattern = @"(?<=\b20)\d{2}\b";
             const string Input = "2010 1999 1861 2140 2009";
 
@@ -443,7 +446,8 @@ namespace System.Text.RegularExpressions.Tests
         [InlineData(RegexOptions.Compiled)]
         public void Docs_GroupingConstructs_ZeroWidthNegativeLookbehindAssertions(
             RegexOptions options
-        ) {
+        )
+        {
             const string Pattern = @"(?<!(Saturday|Sunday) )\b\w+ \d{1,2}, \d{4}\b";
 
             Assert.Equal(
@@ -791,7 +795,8 @@ namespace System.Text.RegularExpressions.Tests
         [InlineData(RegexOptions.Compiled)]
         public void Docs_Backtracking_WithOptionalQuantifiersOrAlternationConstructs(
             RegexOptions options
-        ) {
+        )
+        {
             const string Pattern = ".*(es)";
             const string Input = "Essential services are provided by regular expressions.";
 

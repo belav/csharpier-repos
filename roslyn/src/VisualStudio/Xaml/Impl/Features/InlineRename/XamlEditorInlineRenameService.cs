@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.Editor.Xaml.Features.InlineRename
             Document document,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var renameInfo = await _renameService.GetRenameInfoAsync(
                     document,
                     position,
@@ -82,7 +83,8 @@ namespace Microsoft.CodeAnalysis.Editor.Xaml.Features.InlineRename
             public async Task<IInlineRenameLocationSet> FindRenameLocationsAsync(
                 OptionSet optionSet,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var references = new List<InlineRenameLocation>();
 
                 var renameLocations = await _renameInfo.FindRenameLocationsAsync(
@@ -108,7 +110,8 @@ namespace Microsoft.CodeAnalysis.Editor.Xaml.Features.InlineRename
                 string triggerText,
                 string replacementText,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return location.TextSpan;
             }
 
@@ -121,7 +124,8 @@ namespace Microsoft.CodeAnalysis.Editor.Xaml.Features.InlineRename
                 InlineRenameLocation location,
                 string triggerText,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return location.TextSpan;
             }
 
@@ -129,7 +133,8 @@ namespace Microsoft.CodeAnalysis.Editor.Xaml.Features.InlineRename
                 Workspace workspace,
                 IEnumerable<DocumentId> changedDocumentIDs,
                 string replacementText
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -137,7 +142,8 @@ namespace Microsoft.CodeAnalysis.Editor.Xaml.Features.InlineRename
                 Workspace workspace,
                 IEnumerable<DocumentId> changedDocumentIDs,
                 string replacementText
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -173,7 +179,8 @@ namespace Microsoft.CodeAnalysis.Editor.Xaml.Features.InlineRename
                     IXamlRenameInfo renameInfo,
                     Solution solution,
                     ImmutableArray<InlineRenameLocation> locations
-                ) {
+                )
+                {
                     _renameInfo = renameInfo;
                     _oldSolution = solution;
                     Locations = locations;
@@ -190,7 +197,8 @@ namespace Microsoft.CodeAnalysis.Editor.Xaml.Features.InlineRename
                     string replacementText,
                     OptionSet optionSet,
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     var newSolution = _oldSolution;
                     foreach (var group in Locations.GroupBy(l => l.Document))
                     {
@@ -215,7 +223,8 @@ namespace Microsoft.CodeAnalysis.Editor.Xaml.Features.InlineRename
                         InlineRenameLocationSet inlineRenameLocationSet,
                         Solution newSolution,
                         string replacementText
-                    ) {
+                    )
+                    {
                         NewSolution = newSolution;
                         _inlineRenameLocationSet = inlineRenameLocationSet;
                         _replacementText = replacementText;
@@ -231,7 +240,8 @@ namespace Microsoft.CodeAnalysis.Editor.Xaml.Features.InlineRename
 
                     public IEnumerable<InlineRenameReplacement> GetReplacements(
                         DocumentId documentId
-                    ) {
+                    )
+                    {
                         yield break;
                     }
                 }

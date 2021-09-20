@@ -21,7 +21,8 @@ namespace System.Web.Http.Validation.Providers
             ModelMetadata metadata,
             IEnumerable<ModelValidatorProvider> validatorProviders,
             IEnumerable<Attribute> attributes
-        ) {
+        )
+        {
             if (metadata.ContainerType == null || String.IsNullOrEmpty(metadata.PropertyName))
             {
                 // Validate that the type's fields and nonpublic properties don't have any validation attributes on them
@@ -37,7 +38,8 @@ namespace System.Web.Http.Validation.Providers
                             typeof(ValidationAttribute),
                             inherit: true
                         ).Length > 0
-                    ) {
+                    )
+                    {
                         yield return new ErrorModelValidator(
                             validatorProviders,
                             Error.Format(
@@ -57,7 +59,8 @@ namespace System.Web.Http.Validation.Providers
                     if (
                         field.GetCustomAttributes(typeof(ValidationAttribute), inherit: true).Length
                         > 0
-                    ) {
+                    )
+                    {
                         yield return new ErrorModelValidator(
                             validatorProviders,
                             Error.Format(SRResources.ValidationAttributeOnField, field.Name, type)
@@ -73,13 +76,15 @@ namespace System.Web.Http.Validation.Providers
                 if (
                     metadata.ModelType.IsValueType
                     && attributes.Any(attribute => attribute is RequiredAttribute)
-                ) {
+                )
+                {
                     if (
                         !DataMemberModelValidatorProvider.IsRequiredDataMember(
                             metadata.ContainerType,
                             attributes
                         )
-                    ) {
+                    )
+                    {
                         yield return new ErrorModelValidator(
                             validatorProviders,
                             Error.Format(

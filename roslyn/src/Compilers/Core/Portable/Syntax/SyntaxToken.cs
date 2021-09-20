@@ -609,7 +609,8 @@ namespace Microsoft.CodeAnalysis
             bool includeSkipped = false,
             bool includeDirectives = false,
             bool includeDocumentationComments = false
-        ) {
+        )
+        {
             if (Node == null)
             {
                 return default(SyntaxToken);
@@ -634,7 +635,8 @@ namespace Microsoft.CodeAnalysis
         internal SyntaxToken GetNextToken(
             Func<SyntaxToken, bool> predicate,
             Func<SyntaxTrivia, bool>? stepInto = null
-        ) {
+        )
+        {
             if (Node == null)
             {
                 return default(SyntaxToken);
@@ -652,7 +654,8 @@ namespace Microsoft.CodeAnalysis
             bool includeSkipped = false,
             bool includeDirectives = false,
             bool includeDocumentationComments = false
-        ) {
+        )
+        {
             if (Node == null)
             {
                 return default(SyntaxToken);
@@ -677,7 +680,8 @@ namespace Microsoft.CodeAnalysis
         internal SyntaxToken GetPreviousToken(
             Func<SyntaxToken, bool> predicate,
             Func<SyntaxTrivia, bool>? stepInto = null
-        ) {
+        )
+        {
             return SyntaxNavigator.Instance.GetPreviousToken(this, predicate, stepInto);
         }
 

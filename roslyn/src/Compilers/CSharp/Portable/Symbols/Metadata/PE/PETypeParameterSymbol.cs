@@ -61,7 +61,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             Symbol definingSymbol,
             ushort ordinal,
             GenericParameterHandle handle
-        ) {
+        )
+        {
             Debug.Assert((object)moduleSymbol != null);
             Debug.Assert((object)definingSymbol != null);
             Debug.Assert(ordinal >= 0);
@@ -135,7 +136,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
         private ImmutableArray<TypeWithAnnotations> GetDeclaredConstraintTypes(
             ConsList<PETypeParameterSymbol> inProgress
-        ) {
+        )
+        {
             Debug.Assert(!inProgress.ContainsReference(this));
             Debug.Assert(
                 !inProgress.Any()
@@ -194,14 +196,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                                 CalculateIsNotNullableFromNonTypeConstraints(),
                                 bestObjectConstraint
                             )
-                        ) {
+                        )
+                        {
                             Debug.Assert(!HasNotNullConstraint && !HasValueTypeConstraint);
                             if (symbolsBuilder.Count == 0)
                             {
                                 if (
                                     bestObjectConstraint.NullableAnnotation.IsOblivious()
                                     && !HasReferenceTypeConstraint
-                                ) {
+                                )
+                                {
                                     bestObjectConstraint = default;
                                 }
                             }
@@ -219,7 +223,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                                             ),
                                             bestObjectConstraint
                                         )
-                                    ) {
+                                    )
+                                    {
                                         bestObjectConstraint = default;
                                         break;
                                     }
@@ -246,7 +251,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     hasUnmanagedModreqPattern
                         && (_flags & GenericParameterAttributes.NotNullableValueTypeConstraint) == 0
                     || hasUnmanagedModreqPattern != peModule.HasIsUnmanagedAttribute(_handle)
-                ) {
+                )
+                {
                     // we do not recognize these combinations as "unmanaged"
                     hasUnmanagedModreqPattern = false;
                     _lazyCachedConstraintsUseSiteInfo.InterlockedCompareExchange(
@@ -291,7 +297,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             MetadataDecoder tokenDecoder,
             GenericParameterConstraintHandle constraintHandle,
             ref bool hasUnmanagedModreqPattern
-        ) {
+        )
+        {
             var constraint = metadataReader.GetGenericParameterConstraint(constraintHandle);
             var typeSymbol = tokenDecoder.DecodeGenericParameterConstraint(
                 constraint.Type,
@@ -323,7 +330,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 if (
                     typeSymbol.SpecialType == SpecialType.System_ValueType
                     && ((_flags & GenericParameterAttributes.NotNullableValueTypeConstraint) != 0)
-                ) {
+                )
+                {
                     return default;
                 }
             }
@@ -353,12 +361,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             TypeWithAnnotations constraintType,
             ConsList<PETypeParameterSymbol> inProgress,
             out bool isNonNullableValueType
-        ) {
+        )
+        {
             if (
                 !(constraintType.Type is PETypeParameterSymbol typeParameter)
                 || (object)typeParameter.ContainingSymbol != inProgress.Head.ContainingSymbol
                 || typeParameter.GetConstraintHandleCollection().Count == 0
-            ) {
+            )
+            {
                 return IsNotNullableFromConstraintType(constraintType, out isNonNullableValueType);
             }
 
@@ -388,7 +398,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         private bool? CalculateIsNotNullable(
             ConsList<PETypeParameterSymbol> inProgress,
             out bool isNonNullableValueType
-        ) {
+        )
+        {
             if (inProgress.ContainsReference(this))
             {
                 isNonNullableValueType = false;
@@ -439,7 +450,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             ImmutableArray<TypeWithAnnotations> constraintTypes,
             ConsList<PETypeParameterSymbol> inProgress,
             out bool isNonNullableValueType
-        ) {
+        )
+        {
             Debug.Assert(!constraintTypes.IsDefaultOrEmpty);
 
             isNonNullableValueType = false;
@@ -473,7 +485,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
         private GenericParameterConstraintHandleCollection GetConstraintHandleCollection(
             PEModule module
-        ) {
+        )
+        {
             GenericParameterConstraintHandleCollection constraints;
 
             try
@@ -541,7 +554,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     out byte value,
                     out _
                 )
-            ) {
+            )
+            {
                 return value;
             }
             return _containingSymbol.GetNullableContextValue() ?? 0;
@@ -597,7 +611,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                         )
                     ) == 0
                     && !HasNotNullConstraint
-                ) {
+                )
+                {
                     var moduleSymbol = ((PEModuleSymbol)this.ContainingModule);
                     PEModule module = moduleSymbol.Module;
                     GenericParameterConstraintHandleCollection constraints =
@@ -608,7 +623,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                         if (
                             GetNullableAttributeValue()
                             == NullableAnnotationExtensions.AnnotatedAttributeValue
-                        ) {
+                        )
+                        {
                             return false;
                         }
 
@@ -616,7 +632,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     }
                     else if (
                         GetDeclaredConstraintTypes(ConsList<PETypeParameterSymbol>.Empty).IsEmpty
-                    ) {
+                    )
+                    {
                         // We must have filtered out some Object constraints, lets calculate nullability from them.
                         var symbolsBuilder = ArrayBuilder<TypeWithAnnotations>.GetInstance();
                         MetadataDecoder tokenDecoder = GetDecoderForConstraintTypes(moduleSymbol);
@@ -699,7 +716,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
         internal override ImmutableArray<TypeWithAnnotations> GetConstraintTypes(
             ConsList<TypeParameterSymbol> inProgress
-        ) {
+        )
+        {
             var bounds = this.GetBounds(inProgress);
             return (bounds != null)
               ? bounds.ConstraintTypes
@@ -708,14 +726,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
         internal override ImmutableArray<NamedTypeSymbol> GetInterfaces(
             ConsList<TypeParameterSymbol> inProgress
-        ) {
+        )
+        {
             var bounds = this.GetBounds(inProgress);
             return (bounds != null) ? bounds.Interfaces : ImmutableArray<NamedTypeSymbol>.Empty;
         }
 
         internal override NamedTypeSymbol GetEffectiveBaseClass(
             ConsList<TypeParameterSymbol> inProgress
-        ) {
+        )
+        {
             var bounds = this.GetBounds(inProgress);
             return (bounds != null) ? bounds.EffectiveBaseClass : this.GetDefaultBaseType();
         }

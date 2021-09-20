@@ -25,7 +25,8 @@ namespace Microsoft.AspNetCore.Hosting
             DiagnosticListener diagnosticSource,
             ActivitySource activitySource,
             IHttpContextFactory httpContextFactory
-        ) {
+        )
+        {
             _application = application;
             _diagnostics = new HostingApplicationDiagnostics(
                 logger,

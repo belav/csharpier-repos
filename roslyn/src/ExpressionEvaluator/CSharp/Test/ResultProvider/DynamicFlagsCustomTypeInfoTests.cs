@@ -503,7 +503,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
         private static void ValidateBytes(
             ReadOnlyCollection<byte> actualBytes,
             params byte[] expectedBytes
-        ) {
+        )
+        {
             Assert.NotNull(expectedBytes);
 
             if (expectedBytes.Length == 0)

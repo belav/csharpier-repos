@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor
         public FSharpNavigationBarItemService(
             IThreadingContext threadingContext,
             IFSharpNavigationBarItemService service
-        ) {
+        )
+        {
             _threadingContext = threadingContext;
             _service = service;
         }
@@ -41,7 +42,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor
         public async Task<IList<NavigationBarItem>?> GetItemsAsync(
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var items = await _service.GetItemsAsync(document, cancellationToken)
                 .ConfigureAwait(false);
             return items?.Select(x => ConvertToNavigationBarItem(x)).ToList();
@@ -62,7 +64,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor
             NavigationBarItem item,
             ITextView view,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // The logic here was ported from FSharp's implementation. The main reason was to avoid shimming INotificationService.
             if (!item.Spans.IsEmpty)
             {
@@ -83,7 +86,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor
                         virtualSpace: 0,
                         cancellationToken
                     )
-                ) {
+                )
+                {
                     navigationService.TryNavigateToPosition(
                         workspace,
                         document.Id,

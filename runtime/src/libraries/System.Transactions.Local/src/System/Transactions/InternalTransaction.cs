@@ -225,7 +225,8 @@ namespace System.Transactions
             if (
                 (_promoterType != Guid.Empty)
                 && (_promoterType != TransactionInterop.PromoterTypeDtc)
-            ) {
+            )
+            {
                 throw new InvalidOperationException(SR.PromoterTypeInvalid);
             }
             _promoterType = TransactionInterop.PromoterTypeDtc;
@@ -238,7 +239,8 @@ namespace System.Transactions
             if (
                 (_promoterType != Guid.Empty)
                 && (_promoterType != TransactionInterop.PromoterTypeDtc)
-            ) {
+            )
+            {
                 throw new TransactionPromotionException(
                     SR.Format(SR.PromoterTypeUnrecognized, _promoterType.ToString()),
                     _innerException
@@ -250,7 +252,8 @@ namespace System.Transactions
         internal InternalTransaction(
             TimeSpan timeout,
             CommittableTransaction committableTransaction
-        ) {
+        )
+        {
             // Calculate the absolute timeout for this transaction
             _absoluteTimeout = TransactionManager.TransactionTable.TimeoutTicks(timeout);
 
@@ -272,7 +275,8 @@ namespace System.Transactions
         internal InternalTransaction(
             Transaction outcomeSource,
             DistributedTransaction distributedTx
-        ) {
+        )
+        {
             _promotedTransaction = distributedTx;
 
             _absoluteTimeout = long.MaxValue;
@@ -314,7 +318,8 @@ namespace System.Transactions
         internal static void DistributedTransactionOutcome(
             InternalTransaction tx,
             TransactionStatus status
-        ) {
+        )
+        {
             FinalizedObject? fo = null;
 
             lock (tx)

@@ -42,7 +42,8 @@ namespace Roslyn.Test.Utilities
             Func<string, SyntaxTree> parser,
             Func<string, int> getSyntaxKind,
             bool removeTags = false
-        ) {
+        )
+        {
             Source = removeTags ? RemoveTags(markedSource) : ClearTags(markedSource);
             Input = markedSource;
             Tree = parser(Source);
@@ -59,7 +60,8 @@ namespace Roslyn.Test.Utilities
             string markedSource,
             int offset,
             Func<string, int> getSyntaxKind
-        ) {
+        )
+        {
             foreach (var match in s_markerPattern.Matches(markedSource).ToEnumerable())
             {
                 var tagName = match.Groups["TagName"];
@@ -89,7 +91,8 @@ namespace Roslyn.Test.Utilities
                         absoluteOffset,
                         getSyntaxKind
                     )
-                ) {
+                )
+                {
                     yield return nestedSpan;
                 }
             }
@@ -172,7 +175,8 @@ namespace Roslyn.Test.Utilities
         public static Func<SyntaxNode, SyntaxNode> GetSyntaxMap(
             SourceWithMarkedNodes source0,
             SourceWithMarkedNodes source1
-        ) {
+        )
+        {
             var map0 = source0.MapMarksToSyntaxNodes();
             var map1 = source1.MapSyntaxNodesToMarks();
 #if DUMP
@@ -184,7 +188,8 @@ namespace Roslyn.Test.Utilities
                     if (
                         map1.TryGetValue(node1, out var mark)
                         && map0.TryGetValue(mark, out var result)
-                    ) {
+                    )
+                    {
                         return result;
                     }
 

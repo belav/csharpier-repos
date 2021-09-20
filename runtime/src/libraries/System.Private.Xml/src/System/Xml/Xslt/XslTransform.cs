@@ -124,7 +124,8 @@ namespace System.Xml.Xsl
             XPathNavigator input,
             XsltArgumentList? args,
             XmlResolver? resolver
-        ) {
+        )
+        {
             CheckCommand();
             Processor processor = new Processor(
                 input,
@@ -148,7 +149,8 @@ namespace System.Xml.Xsl
             XsltArgumentList? args,
             XmlWriter output,
             XmlResolver? resolver
-        ) {
+        )
+        {
             CheckCommand();
             Processor processor = new Processor(
                 input,
@@ -171,7 +173,8 @@ namespace System.Xml.Xsl
             XsltArgumentList? args,
             Stream output,
             XmlResolver? resolver
-        ) {
+        )
+        {
             CheckCommand();
             Processor processor = new Processor(
                 input,
@@ -195,7 +198,8 @@ namespace System.Xml.Xsl
             XsltArgumentList? args,
             TextWriter output,
             XmlResolver? resolver
-        ) {
+        )
+        {
             CheckCommand();
             Processor processor = new Processor(
                 input,
@@ -228,7 +232,8 @@ namespace System.Xml.Xsl
             IXPathNavigable input,
             XsltArgumentList? args,
             XmlResolver? resolver
-        ) {
+        )
+        {
             if (input == null)
             {
                 throw new ArgumentNullException(nameof(input));
@@ -249,7 +254,8 @@ namespace System.Xml.Xsl
             XsltArgumentList? args,
             TextWriter output,
             XmlResolver? resolver
-        ) {
+        )
+        {
             if (input == null)
             {
                 throw new ArgumentNullException(nameof(input));
@@ -271,7 +277,8 @@ namespace System.Xml.Xsl
             XsltArgumentList? args,
             Stream output,
             XmlResolver? resolver
-        ) {
+        )
+        {
             if (input == null)
             {
                 throw new ArgumentNullException(nameof(input));
@@ -293,7 +300,8 @@ namespace System.Xml.Xsl
             XsltArgumentList? args,
             XmlWriter output,
             XmlResolver? resolver
-        ) {
+        )
+        {
             if (input == null)
             {
                 throw new ArgumentNullException(nameof(input));

@@ -42,7 +42,8 @@ namespace System.Formats.Asn1
                 ruleSet != AsnEncodingRules.BER
                 && ruleSet != AsnEncodingRules.CER
                 && ruleSet != AsnEncodingRules.DER
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(nameof(ruleSet));
             }
 
@@ -283,7 +284,8 @@ namespace System.Formats.Asn1
             if (
                 !tag.TryEncode(_buffer.AsSpan(_offset, spaceRequired), out int written)
                 || written != spaceRequired
-            ) {
+            )
+            {
                 Debug.Fail(
                     $"TryWrite failed or written was wrong value ({written} vs {spaceRequired})"
                 );
@@ -516,7 +518,8 @@ namespace System.Formats.Asn1
                 if (
                     RuleSet != AsnEncodingRules.CER
                     || containedLength <= AsnDecoder.MaxCERSegmentSize
-                ) {
+                )
+                {
                     // Need to replace the tag with the primitive tag.
                     // Since the P/C bit doesn't affect the length, overwrite the tag.
                     int tagLen = tag.CalculateEncodedSize();
@@ -657,7 +660,8 @@ namespace System.Formats.Asn1
                 if (
                     value.TagClass == TagClass.Universal
                     && value.TagValue != (int)universalTagNumber
-                ) {
+                )
+                {
                     throw new ArgumentException(SR.Argument_UniversalValueIsFixed, nameof(tag));
                 }
             }
@@ -709,7 +713,8 @@ namespace System.Formats.Asn1
                 out Asn1Tag tag,
                 out int offset,
                 out UniversalTagNumber itemType
-            ) {
+            )
+            {
                 tag = Tag;
                 offset = Offset;
                 itemType = ItemType;
@@ -780,7 +785,8 @@ namespace System.Formats.Asn1
                 }
                 else if (
                     _writer._nestingStack.Count > _depth && _writer._nestingStack.Contains(_frame)
-                ) {
+                )
+                {
                     // Another frame was pushed when we got disposed.
                     // Report the imbalance.
                     throw new InvalidOperationException(SR.AsnWriter_PopWrongTag);

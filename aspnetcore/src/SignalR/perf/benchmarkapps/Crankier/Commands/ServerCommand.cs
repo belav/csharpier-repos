@@ -42,14 +42,16 @@ namespace Microsoft.AspNetCore.SignalR.Crankier.Commands
                             if (
                                 logLevelOption.HasValue()
                                 && !Enum.TryParse(logLevelOption.Value(), out logLevel)
-                            ) {
+                            )
+                            {
                                 return InvalidArg(logLevelOption);
                             }
 
                             if (
                                 azureSignalRConnectionString.HasValue()
                                 && string.IsNullOrWhiteSpace(azureSignalRConnectionString.Value())
-                            ) {
+                            )
+                            {
                                 return InvalidArg(azureSignalRConnectionString);
                             }
 

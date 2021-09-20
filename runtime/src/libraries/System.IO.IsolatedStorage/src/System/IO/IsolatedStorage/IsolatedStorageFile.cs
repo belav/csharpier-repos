@@ -280,7 +280,8 @@ namespace System.IO.IsolatedStorage
             FileMode mode,
             FileAccess access,
             FileShare share
-        ) {
+        )
+        {
             EnsureStoreIsValid();
             return new IsolatedStorageFileStream(path, mode, access, share, this);
         }
@@ -658,7 +659,8 @@ namespace System.IO.IsolatedStorage
         public static IsolatedStorageFile GetStore(
             IsolatedStorageScope scope,
             Type? applicationEvidenceType
-        ) {
+        )
+        {
             // Scope MUST be Application
             return (applicationEvidenceType == null)
               ? GetStore(scope)
@@ -668,7 +670,8 @@ namespace System.IO.IsolatedStorage
         public static IsolatedStorageFile GetStore(
             IsolatedStorageScope scope,
             object? applicationIdentity
-        ) {
+        )
+        {
             // Scope MUST be Application
             return (applicationIdentity == null)
               ? GetStore(scope)
@@ -679,7 +682,8 @@ namespace System.IO.IsolatedStorage
             IsolatedStorageScope scope,
             Type? domainEvidenceType,
             Type? assemblyEvidenceType
-        ) {
+        )
+        {
             // Scope MUST NOT be Application (assembly is assumed otherwise)
             return (domainEvidenceType == null && assemblyEvidenceType == null)
               ? GetStore(scope)
@@ -690,7 +694,8 @@ namespace System.IO.IsolatedStorage
             IsolatedStorageScope scope,
             object? domainIdentity,
             object? assemblyIdentity
-        ) {
+        )
+        {
             // Scope MUST NOT be Application (assembly is assumed otherwise)
             return (domainIdentity == null && assemblyIdentity == null)
               ? GetStore(scope)
@@ -709,7 +714,8 @@ namespace System.IO.IsolatedStorage
                 if (
                     partialPath[i] != Path.DirectorySeparatorChar
                     && partialPath[i] != Path.AltDirectorySeparatorChar
-                ) {
+                )
+                {
                     break;
                 }
             }
@@ -738,7 +744,8 @@ namespace System.IO.IsolatedStorage
         internal static Exception GetIsolatedStorageException(
             string exceptionMsg,
             Exception rootCause
-        ) {
+        )
+        {
             IsolatedStorageException e = new IsolatedStorageException(exceptionMsg, rootCause);
             e._underlyingException = rootCause;
             return e;
@@ -838,7 +845,8 @@ namespace System.IO.IsolatedStorage
                 (scope != IsolatedStorageScope.User)
                 && (scope != (IsolatedStorageScope.User | IsolatedStorageScope.Roaming))
                 && (scope != IsolatedStorageScope.Machine)
-            ) {
+            )
+            {
                 throw new ArgumentException(SR.IsolatedStorage_Scope_U_R_M);
             }
         }

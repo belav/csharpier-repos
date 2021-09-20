@@ -74,7 +74,8 @@ namespace Microsoft.AspNetCore.Certificates.Generation
                         MacOSTrustCertificateCommandLine,
                         MacOSTrustCertificateCommandLineArguments + tmpFile
                     )
-                ) {
+                )
+                {
                     process.WaitForExit();
                     if (process.ExitCode != 0)
                     {
@@ -106,7 +107,8 @@ namespace Microsoft.AspNetCore.Certificates.Generation
         internal override CheckCertificateStateResult CheckCertificateState(
             X509Certificate2 candidate,
             bool interactive
-        ) {
+        )
+        {
             var sentinelPath = Path.Combine(
                 Environment.GetEnvironmentVariable("HOME")!,
                 ".dotnet",
@@ -144,7 +146,8 @@ namespace Microsoft.AspNetCore.Certificates.Generation
                 if (
                     Directory.Exists(Path.GetDirectoryName(sentinelPath))
                     && !File.Exists(sentinelPath)
-                ) {
+                )
+                {
                     File.WriteAllText(sentinelPath, "true");
                 }
 
@@ -277,7 +280,8 @@ namespace Microsoft.AspNetCore.Certificates.Generation
         private static void RemoveCertificateFromKeyChain(
             string keyChain,
             X509Certificate2 certificate
-        ) {
+        )
+        {
             var processInfo = new ProcessStartInfo(
                 MacOSDeleteCertificateCommandLine,
                 string.Format(
@@ -375,7 +379,8 @@ namespace Microsoft.AspNetCore.Certificates.Generation
         protected override IList<X509Certificate2> GetCertificatesToRemove(
             StoreName storeName,
             StoreLocation storeLocation
-        ) {
+        )
+        {
             return ListCertificates(StoreName.My, StoreLocation.CurrentUser, isValid: false);
         }
     }

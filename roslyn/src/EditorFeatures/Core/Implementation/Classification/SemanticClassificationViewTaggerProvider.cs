@@ -61,18 +61,21 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             IForegroundNotificationService notificationService,
             ClassificationTypeMap typeMap,
             IAsynchronousOperationListenerProvider listenerProvider
-        ) : base(
-            threadingContext,
-            listenerProvider.GetListener(FeatureAttribute.Classification),
-            notificationService
-        ) {
+        )
+            : base(
+                threadingContext,
+                listenerProvider.GetListener(FeatureAttribute.Classification),
+                notificationService
+            )
+        {
             _typeMap = typeMap;
         }
 
         protected override ITaggerEventSource CreateEventSource(
             ITextView textView,
             ITextBuffer subjectBuffer
-        ) {
+        )
+        {
             this.AssertIsForeground();
             const TaggerDelay Delay = TaggerDelay.Short;
 
@@ -104,7 +107,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
         protected override IEnumerable<SnapshotSpan> GetSpansToTag(
             ITextView textView,
             ITextBuffer subjectBuffer
-        ) {
+        )
+        {
             this.AssertIsForeground();
 
             // Find the visible span some 100 lines +/- what's actually in view.  This way

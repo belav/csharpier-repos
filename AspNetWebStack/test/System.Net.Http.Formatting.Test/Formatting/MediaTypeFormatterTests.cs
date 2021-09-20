@@ -219,7 +219,8 @@ namespace System.Net.Http.Formatting
             string bodyEncoding,
             string[] supportedEncodings,
             string expectedEncoding
-        ) {
+        )
+        {
             // Arrange
             MockMediaTypeFormatter formatter = new MockMediaTypeFormatter { CallBase = true };
 

@@ -16,7 +16,8 @@ namespace System.Text.Json.Serialization
             ref Utf8JsonReader reader,
             Type typeToConvert,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             // Bridge from resumable to value converters.
             if (options == null)
             {
@@ -33,7 +34,8 @@ namespace System.Text.Json.Serialization
             Utf8JsonWriter writer,
             T value,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             // Bridge from resumable to value converters.
             if (options == null)
             {

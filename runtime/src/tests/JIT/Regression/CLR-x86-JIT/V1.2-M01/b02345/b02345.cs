@@ -71,7 +71,8 @@ public class AA
                         (new ulong[115u, 35u, 113u, 82u])[1, 91, 62, 42],
                         (new ulong[32u])[108]
                     )
-            ) {
+            )
+            {
                 try { }
                 catch (Exception) { }
             }

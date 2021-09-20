@@ -175,7 +175,8 @@ namespace System.Xml
                             Ref.Equal(_namespaceURI, _asterisk)
                             || curNode.NamespaceURI == _namespaceURI
                         )
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }

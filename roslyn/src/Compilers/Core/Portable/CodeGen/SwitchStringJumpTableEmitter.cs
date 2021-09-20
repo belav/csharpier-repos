@@ -75,7 +75,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             LocalDefinition? keyHash,
             EmitStringCompareAndBranch emitStringCondBranchDelegate,
             GetStringHashCode computeStringHashcodeDelegate
-        ) {
+        )
+        {
             Debug.Assert(caseLabels.Length > 0);
             RoslynDebug.Assert(emitStringCondBranchDelegate != null);
 
@@ -134,7 +135,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
         // Emits conditional jumps to hash buckets, returning a map from hashValues to hashBucketLabels.
         private Dictionary<uint, object> EmitHashBucketJumpTable(
             Dictionary<uint, HashBucket> stringHashMap
-        ) {
+        )
+        {
             int count = stringHashMap.Count;
             var hashBucketLabelsMap = new Dictionary<uint, object>(count);
             var jumpTableLabels = new KeyValuePair<ConstantValue, object>[count];
@@ -194,7 +196,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
         private static Dictionary<uint, HashBucket> ComputeStringHashMap(
             KeyValuePair<ConstantValue, object>[] caseLabels,
             GetStringHashCode computeStringHashcodeDelegate
-        ) {
+        )
+        {
             RoslynDebug.Assert(caseLabels != null);
             var stringHashMap = new Dictionary<uint, HashBucket>(caseLabels.Length);
 
@@ -222,7 +225,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
         internal static bool ShouldGenerateHashTableSwitch(
             CommonPEModuleBuilder module,
             int labelsCount
-        ) {
+        )
+        {
             return module.SupportsPrivateImplClass && ShouldGenerateHashTableSwitch(labelsCount);
         }
 

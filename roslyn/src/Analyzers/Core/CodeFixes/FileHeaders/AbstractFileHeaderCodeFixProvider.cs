@@ -62,7 +62,8 @@ namespace Microsoft.CodeAnalysis.FileHeaders
         private Task<SyntaxNode> GetTransformedSyntaxRootAsync(
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
 #if CODE_STYLE
             var newLineText = Environment.NewLine;
 #else
@@ -88,7 +89,8 @@ namespace Microsoft.CodeAnalysis.FileHeaders
             SyntaxTrivia newLineTrivia,
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var tree = await document.GetRequiredSyntaxTreeAsync(cancellationToken)
                 .ConfigureAwait(false);
             var root = await tree.GetRootAsync(cancellationToken).ConfigureAwait(false);
@@ -99,7 +101,8 @@ namespace Microsoft.CodeAnalysis.FileHeaders
                     tree,
                     out var fileHeaderTemplate
                 ) || string.IsNullOrEmpty(fileHeaderTemplate)
-            ) {
+            )
+            {
                 // This exception would show up as a gold bar, but as indicated we do not believe this is reachable.
                 throw ExceptionUtilities.Unreachable;
             }
@@ -141,7 +144,8 @@ namespace Microsoft.CodeAnalysis.FileHeaders
             SyntaxTrivia newLineTrivia,
             SyntaxNode root,
             string expectedFileHeader
-        ) {
+        )
+        {
             // Skip single line comments, whitespace, and end of line trivia until a blank line is encountered.
             var triviaList = root.GetLeadingTrivia();
 
@@ -235,7 +239,8 @@ namespace Microsoft.CodeAnalysis.FileHeaders
             SyntaxTrivia newLineTrivia,
             SyntaxNode root,
             string expectedFileHeader
-        ) {
+        )
+        {
             var newTrivia = CreateNewHeader(
                     syntaxFacts,
                     fileHeaderHelper.CommentPrefix,
@@ -270,7 +275,8 @@ namespace Microsoft.CodeAnalysis.FileHeaders
             string prefixWithLeadingSpaces,
             string expectedFileHeader,
             string newLineText
-        ) {
+        )
+        {
             var copyrightText = GetCopyrightText(
                 prefixWithLeadingSpaces,
                 expectedFileHeader,
@@ -284,7 +290,8 @@ namespace Microsoft.CodeAnalysis.FileHeaders
             string prefixWithLeadingSpaces,
             string copyrightText,
             string newLineText
-        ) {
+        )
+        {
             copyrightText = copyrightText.Replace("\r\n", "\n");
             var lines = copyrightText.Split('\n');
             return string.Join(
@@ -312,13 +319,12 @@ namespace Microsoft.CodeAnalysis.FileHeaders
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                CodeFixesResources.Add_file_header,
-                createChangedDocument,
-                nameof(AbstractFileHeaderCodeFixProvider)
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    CodeFixesResources.Add_file_header,
+                    createChangedDocument,
+                    nameof(AbstractFileHeaderCodeFixProvider)
+                ) { }
         }
 
         public override FixAllProvider GetFixAllProvider() =>

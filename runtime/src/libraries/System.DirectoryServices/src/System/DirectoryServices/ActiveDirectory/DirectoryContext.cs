@@ -49,7 +49,8 @@ namespace System.DirectoryServices.ActiveDirectory
             string? name,
             string? username,
             string? password
-        ) {
+        )
+        {
             _name = name;
             _contextType = contextType;
             _credential = new NetworkCredential(username, password);
@@ -67,7 +68,8 @@ namespace System.DirectoryServices.ActiveDirectory
             DirectoryContextType contextType,
             string? name,
             DirectoryContext? context
-        ) {
+        )
+        {
             _name = name;
             _contextType = contextType;
 
@@ -115,7 +117,8 @@ namespace System.DirectoryServices.ActiveDirectory
             if (
                 contextType != DirectoryContextType.Domain
                 && contextType != DirectoryContextType.Forest
-            ) {
+            )
+            {
                 throw new ArgumentException(SR.OnlyDomainOrForest, nameof(contextType));
             }
 
@@ -127,7 +130,8 @@ namespace System.DirectoryServices.ActiveDirectory
             if (
                 contextType < DirectoryContextType.Domain
                 || contextType > DirectoryContextType.ApplicationPartition
-            ) {
+            )
+            {
                 throw new InvalidEnumArgumentException(
                     nameof(contextType),
                     (int)contextType,
@@ -152,7 +156,8 @@ namespace System.DirectoryServices.ActiveDirectory
             DirectoryContextType contextType,
             string? username,
             string? password
-        ) {
+        )
+        {
             //
             // this constructor can only be called for DirectoryContextType.Forest or DirectoryContextType.Domain
             // since all other types require the name to be specified
@@ -160,7 +165,8 @@ namespace System.DirectoryServices.ActiveDirectory
             if (
                 contextType != DirectoryContextType.Domain
                 && contextType != DirectoryContextType.Forest
-            ) {
+            )
+            {
                 throw new ArgumentException(SR.OnlyDomainOrForest, nameof(contextType));
             }
 
@@ -172,11 +178,13 @@ namespace System.DirectoryServices.ActiveDirectory
             string name,
             string? username,
             string? password
-        ) {
+        )
+        {
             if (
                 contextType < DirectoryContextType.Domain
                 || contextType > DirectoryContextType.ApplicationPartition
-            ) {
+            )
+            {
                 throw new InvalidEnumArgumentException(
                     nameof(contextType),
                     (int)contextType,
@@ -220,13 +228,15 @@ namespace System.DirectoryServices.ActiveDirectory
         internal static bool IsContextValid(
             DirectoryContext context,
             DirectoryContextType contextType
-        ) {
+        )
+        {
             bool contextIsValid = false;
 
             if (
                 (contextType == DirectoryContextType.Domain)
                 || ((contextType == DirectoryContextType.Forest) && (context.Name == null))
-            ) {
+            )
+            {
                 string? tmpTarget = context.Name;
 
                 if (tmpTarget == null)
@@ -447,7 +457,8 @@ namespace System.DirectoryServices.ActiveDirectory
                         (e.ErrorCode == unchecked((int)0x80070035))
                         || (e.ErrorCode == unchecked((int)0x80070033))
                         || (e.ErrorCode == unchecked((int)0x80005000))
-                    ) {
+                    )
+                    {
                         // if this returns bad network path
                         contextIsValid = false;
                     }
@@ -632,7 +643,8 @@ namespace System.DirectoryServices.ActiveDirectory
                             || (
                                 (_contextType == DirectoryContextType.Forest) && (isCurrentForest())
                             )
-                        ) {
+                        )
+                        {
                             serverName = GetLoggedOnDomain();
                         }
                         else
@@ -736,7 +748,8 @@ namespace System.DirectoryServices.ActiveDirectory
                                 UnsafeNativeMethods.LsaNtStatusToWinError(protocolStatus)
                                 == NativeMethods.ERROR_NO_SUCH_LOGON_SESSION
                             )
-                        ) {
+                        )
+                        {
                             // If this is a directory user, extract domain info from username
                             if (!Utils.IsSamUser())
                             {

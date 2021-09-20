@@ -114,16 +114,14 @@ namespace Microsoft.AspNetCore.Http.Connections.Client
         /// <param name="url">The URL to connect to.</param>
         /// <param name="transports">A bitmask combining one or more <see cref="HttpTransportType"/> values that specify what transports the client should use.</param>
         /// <param name="loggerFactory">The logger factory.</param>
-        public HttpConnection(
-            Uri url,
-            HttpTransportType transports,
-            ILoggerFactory? loggerFactory
-        ) : this(CreateHttpOptions(url, transports), loggerFactory) { }
+        public HttpConnection(Uri url, HttpTransportType transports, ILoggerFactory? loggerFactory)
+            : this(CreateHttpOptions(url, transports), loggerFactory) { }
 
         private static HttpConnectionOptions CreateHttpOptions(
             Uri url,
             HttpTransportType transports
-        ) {
+        )
+        {
             if (url == null)
             {
                 throw new ArgumentNullException(nameof(url));
@@ -139,7 +137,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client
         public HttpConnection(
             HttpConnectionOptions httpConnectionOptions,
             ILoggerFactory? loggerFactory
-        ) {
+        )
+        {
             if (httpConnectionOptions == null)
             {
                 throw new ArgumentNullException(nameof(httpConnectionOptions));
@@ -163,14 +162,16 @@ namespace Microsoft.AspNetCore.Http.Connections.Client
             if (
                 !httpConnectionOptions.SkipNegotiation
                 || httpConnectionOptions.Transports != HttpTransportType.WebSockets
-            ) {
+            )
+            {
                 _httpClient = CreateHttpClient();
             }
 
             if (
                 httpConnectionOptions.Transports == HttpTransportType.ServerSentEvents
                 && OperatingSystem.IsBrowser()
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     "ServerSentEvents can not be the only transport specified when running in the browser.",
                     nameof(httpConnectionOptions)
@@ -236,7 +237,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client
         public async Task StartAsync(
             TransferFormat transferFormat,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             using (_logger.BeginScope(_logScope))
             {
                 await StartAsyncCore(transferFormat, cancellationToken).ForceAsync();
@@ -246,7 +248,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client
         private async Task StartAsyncCore(
             TransferFormat transferFormat,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             CheckDisposed();
 
             if (_started)
@@ -346,7 +349,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client
         private async Task SelectAndStartTransport(
             TransferFormat transferFormat,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var uri = _url;
             // Set the initial access token provider back to the original one from options
             _accessTokenProvider = _httpConnectionOptions.AccessTokenProvider;
@@ -416,7 +420,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client
                             transport.Transport,
                             out var transportType
                         )
-                    ) {
+                    )
+                    {
                         Log.TransportNotSupported(_logger, transport.Transport!);
                         transportExceptions.Add(
                             new TransportFailedException(
@@ -442,7 +447,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client
                     if (
                         transportType == HttpTransportType.ServerSentEvents
                         && OperatingSystem.IsBrowser()
-                    ) {
+                    )
+                    {
                         Log.ServerSentEventsNotSupportedByBrowser(_logger);
                         transportExceptions.Add(
                             new TransportFailedException(
@@ -470,7 +476,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client
                                 transferFormatString,
                                 StringComparer.Ordinal
                             )
-                        ) {
+                        )
+                        {
                             Log.TransportDoesNotSupportTransferFormat(
                                 _logger,
                                 transportType,
@@ -546,7 +553,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client
             HttpClient httpClient,
             ILogger logger,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 // Get a connection ID from the server
@@ -585,7 +593,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client
                             HttpCompletionOption.ResponseHeadersRead,
                             cancellationToken
                         )
-                    ) {
+                    )
+                    {
                         response.EnsureSuccessStatusCode();
                         var responseBuffer = await response.Content.ReadAsByteArrayAsync();
                         var negotiateResponse = NegotiateProtocol.ParseResponse(responseBuffer);
@@ -620,7 +629,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client
             HttpTransportType transportType,
             TransferFormat transferFormat,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Construct the transport
             var transport = _transportFactory.CreateTransport(transportType);
 
@@ -737,7 +747,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client
                             Constants.UserAgent,
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         userSetUserAgent = true;
                         if (string.IsNullOrEmpty(header.Value))
                         {
@@ -816,7 +827,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client
         private async Task<NegotiationResponse> GetNegotiationResponseAsync(
             Uri uri,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var negotiationResponse = await NegotiateAsync(
                 uri,
                 _httpClient!,

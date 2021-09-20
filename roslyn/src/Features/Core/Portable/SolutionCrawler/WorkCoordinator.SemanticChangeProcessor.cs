@@ -98,7 +98,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         if (
                             await TryEnqueueFromHintAsync(data.Document, data.ChangedMember)
                                 .ConfigureAwait(continueOnCapturedContext: false)
-                        ) {
+                        )
+                        {
                             return;
                         }
 
@@ -111,7 +112,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                 private async Task<bool> TryEnqueueFromHintAsync(
                     Document document,
                     SyntaxPath? changedMember
-                ) {
+                )
+                {
                     if (changedMember == null)
                     {
                         return false;
@@ -126,7 +128,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                                 .ConfigureAwait(false),
                             out SyntaxNode? declarationNode
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
 
@@ -171,7 +174,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                 private async Task<bool> TryEnqueueFromMemberAsync(
                     Document document,
                     ISymbol symbol
-                ) {
+                )
+                {
                     if (!IsMember(symbol))
                     {
                         return false;
@@ -210,7 +214,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                 private async Task EnqueueWorkItemAsync(
                     Document thisDocument,
                     ImmutableArray<Location> locations
-                ) {
+                )
+                {
                     var solution = thisDocument.Project.Solution;
                     var projectId = thisDocument.Id.ProjectId;
 
@@ -248,7 +253,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                 private void EnqueueFullProjectDependency(
                     Document document,
                     IAssemblySymbol? internalVisibleToAssembly = null
-                ) {
+                )
+                {
                     var self = document.Project.Id;
 
                     // if there is no hint (this can happen for cases such as solution/project load and etc),
@@ -278,7 +284,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                                 && !assembly.IsSameAssemblyOrHasFriendAccessTo(
                                     internalVisibleToAssembly
                                 )
-                            ) {
+                            )
+                            {
                                 continue;
                             }
                         }
@@ -381,14 +388,16 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                 private static IEnumerable<ProjectId> GetProjectsToAnalyze(
                     Solution solution,
                     ProjectId projectId
-                ) {
+                )
+                {
                     var graph = solution.GetProjectDependencyGraph();
 
                     if (
                         solution.Workspace.Options.GetOption(
                             InternalSolutionCrawlerOptions.DirectDependencyPropagationOnly
                         )
-                    ) {
+                    )
+                    {
                         return graph.GetProjectsThatDirectlyDependOnThisProject(projectId)
                             .Concat(projectId);
                     }
@@ -409,7 +418,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         Document document,
                         SyntaxPath? changedMember,
                         IAsyncToken asyncToken
-                    ) {
+                    )
+                    {
                         AsyncToken = asyncToken;
                         Document = document;
                         ChangedMember = changedMember;
@@ -543,7 +553,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                             var solution = _registration.CurrentSolution;
                             foreach (
                                 var projectId in GetProjectsToAnalyze(solution, data.ProjectId)
-                            ) {
+                            )
+                            {
                                 project = solution.GetProject(projectId);
                                 await EnqueueWorkItemAsync(project).ConfigureAwait(false);
                             }
@@ -576,7 +587,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                             ProjectId projectId,
                             bool needDependencyTracking,
                             IAsyncToken asyncToken
-                        ) {
+                        )
+                        {
                             AsyncToken = asyncToken;
                             ProjectId = projectId;
                             NeedDependencyTracking = needDependencyTracking;

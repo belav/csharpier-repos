@@ -306,7 +306,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
         [InlineData("HEAD")]
         public async Task AutoRedirectSessionEndpoint_ReturnsBadRequest_WhenMethodIsNotPostOrGet(
             string method
-        ) {
+        )
+        {
             // Arrange
             var session = new Mock<IUserSession>();
             var endSessionValidator = new Mock<IEndSessionRequestValidator>();

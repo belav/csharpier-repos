@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis
         public AssemblyPortabilityPolicy(
             bool suppressSilverlightPlatformAssembliesPortability,
             bool suppressSilverlightLibraryAssembliesPortability
-        ) {
+        )
+        {
             this.SuppressSilverlightLibraryAssembliesPortability =
                 suppressSilverlightLibraryAssembliesPortability;
             this.SuppressSilverlightPlatformAssembliesPortability =
@@ -55,7 +56,8 @@ namespace Microsoft.CodeAnalysis
             int depth,
             string elementName,
             string elementNamespace = ""
-        ) {
+        )
+        {
             return reader.ReadToDescendant(elementName, elementNamespace) && reader.Depth == depth;
         }
 
@@ -77,7 +79,8 @@ namespace Microsoft.CodeAnalysis
                     || !ReadToChild(xml, 1, "runtime")
                     || !ReadToChild(xml, 2, "assemblyBinding", ns)
                     || !ReadToChild(xml, 3, "supportPortability", ns)
-                ) {
+                )
+                {
                     return default(AssemblyPortabilityPolicy);
                 }
 
@@ -114,7 +117,8 @@ namespace Microsoft.CodeAnalysis
                                 "31bf3856ad364e35",
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             suppressLibrary = !enable.Value;
                         }
                         else if (
@@ -123,7 +127,8 @@ namespace Microsoft.CodeAnalysis
                                 "7cec85d7bea7798e",
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             suppressPlatform = !enable.Value;
                         }
                     }

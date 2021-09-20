@@ -52,7 +52,8 @@ namespace System.Collections.Tests
             int enumerableLength,
             int numberOfMatchingElements,
             int numberOfDuplicateElements
-        ) {
+        )
+        {
             _ = listLength;
             _ = numberOfMatchingElements;
             IEnumerable<T> enumerable = CreateEnumerable(

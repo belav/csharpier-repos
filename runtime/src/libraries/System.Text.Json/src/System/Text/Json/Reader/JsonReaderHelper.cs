@@ -82,7 +82,8 @@ namespace System.Text.Json
             byte value1,
             byte lessThan,
             int length
-        ) {
+        )
+        {
             Debug.Assert(length >= 0);
 
             uint uValue0 = value0; // Use uint for comparisons to avoid unnecessary 8->32 extensions
@@ -276,7 +277,8 @@ namespace System.Text.Json
             if (
                 sourceUnescaped.Length <= JsonConstants.MaximumDateTimeOffsetParseLength
                 && JsonHelpers.TryParseAsISO(sourceUnescaped, out DateTime tmp)
-            ) {
+            )
+            {
                 value = tmp;
                 return true;
             }
@@ -288,7 +290,8 @@ namespace System.Text.Json
         public static bool TryGetEscapedDateTimeOffset(
             ReadOnlySpan<byte> source,
             out DateTimeOffset value
-        ) {
+        )
+        {
             int backslash = source.IndexOf(JsonConstants.BackSlash);
             Debug.Assert(backslash != -1);
 
@@ -304,7 +307,8 @@ namespace System.Text.Json
             if (
                 sourceUnescaped.Length <= JsonConstants.MaximumDateTimeOffsetParseLength
                 && JsonHelpers.TryParseAsISO(sourceUnescaped, out DateTimeOffset tmp)
-            ) {
+            )
+            {
                 value = tmp;
                 return true;
             }
@@ -331,7 +335,8 @@ namespace System.Text.Json
             if (
                 utf8Unescaped.Length == JsonConstants.MaximumFormatGuidLength
                 && Utf8Parser.TryParse(utf8Unescaped, out Guid tmp, out _, 'D')
-            ) {
+            )
+            {
                 value = tmp;
                 return true;
             }

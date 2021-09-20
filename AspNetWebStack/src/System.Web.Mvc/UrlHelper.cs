@@ -110,7 +110,8 @@ namespace System.Web.Mvc
             string actionName,
             string controllerName,
             RouteValueDictionary routeValues
-        ) {
+        )
+        {
             return GenerateUrl(
                 null /* routeName */
                 ,
@@ -125,7 +126,8 @@ namespace System.Web.Mvc
             string controllerName,
             RouteValueDictionary routeValues,
             string protocol
-        ) {
+        )
+        {
             return GenerateUrl(
                 null /* routeName */
                 ,
@@ -148,7 +150,8 @@ namespace System.Web.Mvc
             string controllerName,
             object routeValues,
             string protocol
-        ) {
+        )
+        {
             return GenerateUrl(
                 null /* routeName */
                 ,
@@ -172,7 +175,8 @@ namespace System.Web.Mvc
             RouteValueDictionary routeValues,
             string protocol,
             string hostName
-        ) {
+        )
+        {
             return GenerateUrl(
                 null /* routeName */
                 ,
@@ -242,7 +246,8 @@ namespace System.Web.Mvc
             string actionName,
             string controllerName,
             RouteValueDictionary routeValues
-        ) {
+        )
+        {
             return GenerateUrl(
                 routeName,
                 actionName,
@@ -270,7 +275,8 @@ namespace System.Web.Mvc
             RouteCollection routeCollection,
             RequestContext requestContext,
             bool includeImplicitMvcValues
-        ) {
+        )
+        {
             string url = GenerateUrl(
                 routeName,
                 actionName,
@@ -299,7 +305,8 @@ namespace System.Web.Mvc
 
                     if (
                         String.Equals(protocol, requestProtocol, StringComparison.OrdinalIgnoreCase)
-                    ) {
+                    )
+                    {
                         port = requestUrl.IsDefaultPort
                             ? String.Empty
                             : (
@@ -328,7 +335,8 @@ namespace System.Web.Mvc
             RouteCollection routeCollection,
             RequestContext requestContext,
             bool includeImplicitMvcValues
-        ) {
+        )
+        {
             if (routeCollection == null)
             {
                 throw new ArgumentNullException("routeCollection");
@@ -482,7 +490,8 @@ namespace System.Web.Mvc
             RouteValueDictionary routeValues,
             string protocol,
             string hostName
-        ) {
+        )
+        {
             return GenerateUrl(
                 routeName,
                 null /* actionName */

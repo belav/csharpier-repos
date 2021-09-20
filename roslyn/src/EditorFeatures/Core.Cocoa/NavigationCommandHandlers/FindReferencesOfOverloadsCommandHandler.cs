@@ -58,7 +58,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
             int caretPosition,
             Document document,
             CommandExecutionContext context
-        ) {
+        )
+        {
             var streamingService = document.GetLanguageService<IFindUsagesService>();
             var streamingPresenter = GetStreamingPresenter();
 
@@ -84,7 +85,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
             ISymbol symbol,
             Microsoft.CodeAnalysis.Solution solution,
             CancellationToken token
-        ) {
+        )
+        {
 #pragma warning disable CA2007 // Consider calling ConfigureAwait on the awaited task
             var implementations = await SymbolFinder.FindImplementationsAsync(
                 symbol,
@@ -108,7 +110,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
             int caretPosition,
             IStreamingFindUsagesPresenter presenter,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 // first, let's see if we even have a comment, otherwise there's no use in starting a search
@@ -143,13 +146,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
                         KeyValueLogMessage.Create(LogType.UserAction, m => m["type"] = "streaming"),
                         context.CancellationToken
                     )
-                ) {
+                )
+                {
                     var symbolsToLookup = new List<ISymbol>();
 
                     foreach (
                         var curSymbol in symbol.ContainingType.GetMembers()
                             .Where(m => m.Kind == symbol.Kind && m.Name == symbol.Name)
-                    ) {
+                    )
+                    {
                         Compilation compilation;
                         if (!document.Project.TryGetCompilation(out compilation))
                         {
@@ -163,7 +168,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
                                 compilation,
                                 context.CancellationToken
                             )
-                        ) {
+                        )
+                        {
                             // assumption here is, that FindSimilarSymbols returns symbols inside same project
 #pragma warning disable CA2007 // Consider calling ConfigureAwait on the awaited task
                             var symbolsToAdd = await GatherSymbolsAsync(

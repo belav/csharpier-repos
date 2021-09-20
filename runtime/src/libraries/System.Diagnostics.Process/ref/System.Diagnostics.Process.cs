@@ -341,7 +341,8 @@ namespace System.Diagnostics
         public static System.Diagnostics.Process[] GetProcessesByName(
             string? processName,
             string machineName
-        ) {
+        )
+        {
             throw null;
         }
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
@@ -363,7 +364,8 @@ namespace System.Diagnostics
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("tvos")]
         public static System.Diagnostics.Process? Start(
             System.Diagnostics.ProcessStartInfo startInfo
-        ) {
+        )
+        {
             throw null;
         }
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
@@ -383,7 +385,8 @@ namespace System.Diagnostics
         public static System.Diagnostics.Process Start(
             string fileName,
             System.Collections.Generic.IEnumerable<string> arguments
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
@@ -393,7 +396,8 @@ namespace System.Diagnostics
             string userName,
             System.Security.SecureString password,
             string domain
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
@@ -404,7 +408,8 @@ namespace System.Diagnostics
             string userName,
             System.Security.SecureString password,
             string domain
-        ) {
+        )
+        {
             throw null;
         }
         public override string ToString()
@@ -419,7 +424,8 @@ namespace System.Diagnostics
         public System.Threading.Tasks.Task WaitForExitAsync(
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public bool WaitForInputIdle()

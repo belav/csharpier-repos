@@ -90,7 +90,8 @@ namespace System.Formats.Asn1
             out int unusedBitCount,
             out ReadOnlySpan<byte> value,
             Asn1Tag? expectedTag = default
-        ) {
+        )
+        {
             bool ret = AsnDecoder.TryReadPrimitiveBitString(
                 _span,
                 _ruleSet,
@@ -134,7 +135,8 @@ namespace System.Formats.Asn1
         internal bool TryReadPrimitiveOctetString(
             out ReadOnlySpan<byte> value,
             Asn1Tag? expectedTag = default
-        ) {
+        )
+        {
             bool ret = AsnDecoder.TryReadPrimitiveOctetString(
                 _span,
                 _ruleSet,
@@ -226,7 +228,8 @@ namespace System.Formats.Asn1
         internal string ReadCharacterString(
             UniversalTagNumber encodingType,
             Asn1Tag? expectedTag = default
-        ) {
+        )
+        {
             string ret = AsnDecoder.ReadCharacterString(
                 _span,
                 _ruleSet,
@@ -244,7 +247,8 @@ namespace System.Formats.Asn1
         internal static void WriteEncodedValueForCrypto(
             this AsnWriter writer,
             ReadOnlySpan<byte> value
-        ) {
+        )
+        {
             try
             {
                 writer.WriteEncodedValue(value);

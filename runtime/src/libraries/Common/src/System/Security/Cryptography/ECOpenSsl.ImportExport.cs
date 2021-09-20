@@ -62,7 +62,8 @@ namespace System.Security.Cryptography
         public static ECParameters ExportParameters(
             SafeEcKeyHandle currentKey,
             bool includePrivateParameters
-        ) {
+        )
+        {
             ECParameters ecparams;
             if (Interop.Crypto.EcKeyHasCurveName(currentKey))
             {
@@ -78,7 +79,8 @@ namespace System.Security.Cryptography
         private static ECParameters ExportNamedCurveParameters(
             SafeEcKeyHandle key,
             bool includePrivateParameters
-        ) {
+        )
+        {
             CheckInvalidKey(key);
 
             ECParameters parameters = Interop.Crypto.GetECKeyParameters(
@@ -103,7 +105,8 @@ namespace System.Security.Cryptography
         private static ECParameters ExportExplicitCurveParameters(
             SafeEcKeyHandle key,
             bool includePrivateParameters
-        ) {
+        )
+        {
             CheckInvalidKey(key);
 
             ECParameters parameters = Interop.Crypto.GetECCurveParameters(

@@ -273,7 +273,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
                 if (
                     storeTypeNameBase!.StartsWith("[", StringComparison.Ordinal)
                     && storeTypeNameBase.EndsWith("]", StringComparison.Ordinal)
-                ) {
+                )
+                {
                     storeTypeNameBase = storeTypeNameBase.Substring(
                         1,
                         storeTypeNameBase.Length - 2
@@ -291,14 +292,16 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
                             StringComparison.OrdinalIgnoreCase
                         )
                     )
-                ) {
+                )
+                {
                     return _real;
                 }
 
                 if (
                     _storeTypeMappings.TryGetValue(storeTypeName, out var mapping)
                     || _storeTypeMappings.TryGetValue(storeTypeNameBase, out mapping)
-                ) {
+                )
+                {
                     return clrType == null || mapping.ClrType == clrType ? mapping : null;
                 }
 
@@ -402,7 +405,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
             out int? size,
             out int? precision,
             out int? scale
-        ) {
+        )
+        {
             var parsedName = base.ParseStoreTypeName(
                 storeTypeName,
                 out unicode,
@@ -417,7 +421,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
                 && _nameBasesUsingPrecision.Any(
                     n => storeTypeName.StartsWith(n, StringComparison.OrdinalIgnoreCase)
                 )
-            ) {
+            )
+            {
                 precision = size;
                 size = null;
             }

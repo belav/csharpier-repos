@@ -34,7 +34,8 @@ namespace System.CodeDom.Tests
             CodeExpression targetObject,
             string eventName,
             CodeExpression listener
-        ) {
+        )
+        {
             var removeEvent = new CodeRemoveEventStatement(targetObject, eventName, listener);
             Assert.Equal(targetObject, removeEvent.Event.TargetObject);
             Assert.Equal(eventName ?? string.Empty, removeEvent.Event.EventName);
@@ -60,7 +61,8 @@ namespace System.CodeDom.Tests
         public void Ctor_CodeEventReferenceExpression_CodeExpression(
             CodeEventReferenceExpression eventExpresion,
             CodeExpression listener
-        ) {
+        )
+        {
             var removeEvent = new CodeRemoveEventStatement(eventExpresion, listener);
             Assert.Equal(
                 (eventExpresion ?? new CodeEventReferenceExpression()).TargetObject,
@@ -78,7 +80,8 @@ namespace System.CodeDom.Tests
         public void Event_Set_Get_ReturnsExpected(
             CodeEventReferenceExpression value,
             CodeExpression listener
-        ) {
+        )
+        {
             _ = listener;
             var removeEvent = new CodeRemoveEventStatement();
             removeEvent.Event = value;

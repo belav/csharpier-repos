@@ -295,7 +295,8 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             int position,
             SymbolDisplayFormat format,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (rawXmlText is null)
             {
                 return ImmutableArray<TaggedText>.Empty;
@@ -325,7 +326,8 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             FormatterState state,
             XNode node,
             Compilation compilation
-        ) {
+        )
+        {
             if (node.NodeType == XmlNodeType.Text)
             {
                 AppendTextFromTextNode(state, (XText)node);
@@ -346,7 +348,8 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
                 name == DocumentationCommentXmlNames.SeeElementName
                 || name == DocumentationCommentXmlNames.SeeAlsoElementName
                 || name == "a"
-            ) {
+            )
+            {
                 if (element.IsEmpty || element.FirstNode == null)
                 {
                     foreach (var attribute in element.Attributes())
@@ -381,7 +384,8 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             else if (
                 name == DocumentationCommentXmlNames.ParameterReferenceElementName
                 || name == DocumentationCommentXmlNames.TypeParameterReferenceElementName
-            ) {
+            )
+            {
                 var kind =
                     name == DocumentationCommentXmlNames.ParameterReferenceElementName
                         ? SymbolDisplayPartKind.ParameterName
@@ -402,7 +406,8 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
                 name == DocumentationCommentXmlNames.CElementName
                 || name == DocumentationCommentXmlNames.CodeElementName
                 || name == "tt"
-            ) {
+            )
+            {
                 needPopStyle = true;
                 state.PushStyle(TaggedTextStyle.Code);
             }
@@ -415,7 +420,8 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
                 name == "strong"
                 || name == "b"
                 || name == DocumentationCommentXmlNames.TermElementName
-            ) {
+            )
+            {
                 needPopStyle = true;
                 state.PushStyle(TaggedTextStyle.Strong);
             }
@@ -447,7 +453,8 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             if (
                 name == DocumentationCommentXmlNames.ParaElementName
                 || name == DocumentationCommentXmlNames.CodeElementName
-            ) {
+            )
+            {
                 state.MarkBeginOrEndPara();
             }
             else if (name == "br")
@@ -463,7 +470,8 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             if (
                 name == DocumentationCommentXmlNames.ParaElementName
                 || name == DocumentationCommentXmlNames.CodeElementName
-            ) {
+            )
+            {
                 state.MarkBeginOrEndPara();
             }
 
@@ -494,7 +502,8 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             SemanticModel semanticModel,
             int position,
             SymbolDisplayFormat format
-        ) {
+        )
+        {
             var crefAttribute = element.Attribute(DocumentationCommentXmlNames.CrefAttributeName);
             if (crefAttribute is object)
             {
@@ -532,7 +541,8 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             XAttribute attribute,
             string attributeNameToParse,
             SymbolDisplayPartKind kind
-        ) {
+        )
+        {
             var attributeName = attribute.Name.LocalName;
             if (attributeNameToParse == attributeName)
             {
@@ -590,7 +600,8 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             SemanticModel semanticModel,
             SymbolDisplayFormat format = null,
             SymbolDisplayPartKind kind = SymbolDisplayPartKind.Text
-        ) {
+        )
+        {
             // first try to parse the symbol
             if (semanticModel != null)
             {
@@ -625,7 +636,8 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             int position,
             SemanticModel semanticModel,
             SymbolDisplayFormat format
-        ) {
+        )
+        {
             if (semanticModel != null)
             {
                 var typeParameterIndex =

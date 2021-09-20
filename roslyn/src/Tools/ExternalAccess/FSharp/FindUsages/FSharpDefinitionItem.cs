@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.FindUsages
 
         private FSharpDefinitionItem(
             Microsoft.CodeAnalysis.FindUsages.DefinitionItem roslynDefinitionItem
-        ) {
+        )
+        {
             _roslynDefinitionItem = roslynDefinitionItem;
         }
 
@@ -27,7 +28,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.FindUsages
             ImmutableArray<string> tags,
             ImmutableArray<TaggedText> displayParts,
             FSharpDocumentSpan sourceSpan
-        ) {
+        )
+        {
             return new FSharpDefinitionItem(
                 Microsoft.CodeAnalysis.FindUsages.DefinitionItem.Create(
                     tags,
@@ -41,7 +43,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.FindUsages
             ImmutableArray<string> tags,
             ImmutableArray<TaggedText> displayParts,
             ImmutableArray<TaggedText> originationParts
-        ) {
+        )
+        {
             return new FSharpDefinitionItem(
                 Microsoft.CodeAnalysis.FindUsages.DefinitionItem.CreateNonNavigableItem(
                     tags,

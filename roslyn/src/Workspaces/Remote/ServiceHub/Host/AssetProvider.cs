@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.Remote
             SolutionAssetCache assetCache,
             IAssetSource assetSource,
             ISerializerService serializerService
-        ) {
+        )
+        {
             _scopeId = scopeId;
             _assetCache = assetCache;
             _assetSource = assetSource;
@@ -40,7 +41,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public override async Task<T> GetAssetAsync<T>(
             Checksum checksum,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(checksum != Checksum.Null);
 
             if (_assetCache.TryGetAsset<T>(checksum, out var asset))
@@ -55,7 +57,8 @@ namespace Microsoft.CodeAnalysis.Remote
                     checksum,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 // TODO: what happen if service doesn't come back. timeout?
                 var value = await RequestAssetAsync(checksum, cancellationToken)
                     .ConfigureAwait(false);
@@ -68,7 +71,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public async Task<List<ValueTuple<Checksum, T>>> GetAssetsAsync<T>(
             IEnumerable<Checksum> checksums,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // this only works when caller wants to get same kind of assets at once
 
             // bulk synchronize checksums first
@@ -92,7 +96,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public async Task SynchronizeSolutionAssetsAsync(
             Checksum solutionChecksum,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // this will pull in assets that belong to the given solution checksum to this remote host.
             // this one is not supposed to be used for functionality but only for perf. that is why it doesn't return anything.
             // to get actual data GetAssetAsync should be used. and that will return actual data and if there is any missing data in cache, GetAssetAsync
@@ -108,7 +113,8 @@ namespace Microsoft.CodeAnalysis.Remote
                     solutionChecksum,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 var syncer = new ChecksumSynchronizer(this);
                 await syncer.SynchronizeSolutionAssetsAsync(solutionChecksum, cancellationToken)
                     .ConfigureAwait(false);
@@ -118,7 +124,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public async Task SynchronizeProjectAssetsAsync(
             IEnumerable<Checksum> projectChecksums,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // this will pull in assets that belong to the given project checksum to this remote host.
             // this one is not supposed to be used for functionality but only for perf. that is why it doesn't return anything.
             // to get actual data GetAssetAsync should be used. and that will return actual data and if there is any missing data in cache, GetAssetAsync
@@ -134,7 +141,8 @@ namespace Microsoft.CodeAnalysis.Remote
                     projectChecksums,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 var syncer = new ChecksumSynchronizer(this);
                 await syncer.SynchronizeProjectAssetsAsync(projectChecksums, cancellationToken)
                     .ConfigureAwait(false);
@@ -154,7 +162,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public async Task SynchronizeAssetsAsync(
             ISet<Checksum> checksums,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(!checksums.Contains(Checksum.Null));
 
             using (
@@ -164,7 +173,8 @@ namespace Microsoft.CodeAnalysis.Remote
                     checksums,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 var assets = await RequestAssetsAsync(checksums, cancellationToken)
                     .ConfigureAwait(false);
 
@@ -178,7 +188,8 @@ namespace Microsoft.CodeAnalysis.Remote
         private async Task<object> RequestAssetAsync(
             Checksum checksum,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(checksum != Checksum.Null);
 
             using var _ = PooledHashSet<Checksum>.GetInstance(out var checksums);
@@ -192,7 +203,8 @@ namespace Microsoft.CodeAnalysis.Remote
         private async Task<ImmutableArray<(Checksum checksum, object value)>> RequestAssetsAsync(
             ISet<Checksum> checksums,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(!checksums.Contains(Checksum.Null));
 
             if (checksums.Count == 0)

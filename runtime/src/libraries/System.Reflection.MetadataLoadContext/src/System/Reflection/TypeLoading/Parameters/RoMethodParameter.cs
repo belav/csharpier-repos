@@ -12,11 +12,8 @@ namespace System.Reflection.TypeLoading
     {
         private readonly Type _parameterType;
 
-        protected RoMethodParameter(
-            IRoMethodBase roMethodBase,
-            int position,
-            Type parameterType
-        ) : base(roMethodBase.MethodBase, position)
+        protected RoMethodParameter(IRoMethodBase roMethodBase, int position, Type parameterType)
+            : base(roMethodBase.MethodBase, position)
         {
             Debug.Assert(roMethodBase != null);
             Debug.Assert(parameterType != null);

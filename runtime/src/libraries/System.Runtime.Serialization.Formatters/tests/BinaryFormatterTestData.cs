@@ -79,7 +79,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             // Save old culture and set a fixed culture for object instantiation
             using (
                 new ThreadCultureChange(CultureInfo.InvariantCulture, CultureInfo.InvariantCulture)
-            ) {
+            )
+            {
                 return SerializableObjects().ToArray();
             }
         }
@@ -10114,14 +10115,16 @@ namespace System.Runtime.Serialization.Formatters.Tests
                         FormatterAssemblyStyle.Full,
                         FormatterAssemblyStyle.Simple
                     }
-                ) {
+                )
+                {
                     foreach (
                         TypeFilterLevel filterLevel in new[]
                         {
                             TypeFilterLevel.Full,
                             TypeFilterLevel.Low
                         }
-                    ) {
+                    )
+                    {
                         foreach (
                             FormatterTypeStyle typeFormat in new[]
                             {
@@ -10129,7 +10132,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
                                 FormatterTypeStyle.TypesWhenNeeded,
                                 FormatterTypeStyle.XsdString
                             }
-                        ) {
+                        )
+                        {
                             yield return new object[]
                             {
                                 record[0],
@@ -10153,14 +10157,16 @@ namespace System.Runtime.Serialization.Formatters.Tests
                         FormatterAssemblyStyle.Full,
                         FormatterAssemblyStyle.Simple
                     }
-                ) {
+                )
+                {
                     foreach (
                         TypeFilterLevel filterLevel in new[]
                         {
                             TypeFilterLevel.Full,
                             TypeFilterLevel.Low
                         }
-                    ) {
+                    )
+                    {
                         foreach (
                             FormatterTypeStyle typeFormat in new[]
                             {
@@ -10168,7 +10174,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
                                 FormatterTypeStyle.TypesWhenNeeded,
                                 FormatterTypeStyle.XsdString
                             }
-                        ) {
+                        )
+                        {
                             yield return new object[]
                             {
                                 obj,

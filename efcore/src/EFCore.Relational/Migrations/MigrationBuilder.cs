@@ -87,7 +87,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             int? precision = null,
             int? scale = null,
             bool? stored = null
-        ) {
+        )
+        {
             Check.NotEmpty(name, nameof(name));
             Check.NotEmpty(table, nameof(table));
 
@@ -186,7 +187,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string[]? principalColumns = null,
             ReferentialAction onUpdate = ReferentialAction.NoAction,
             ReferentialAction onDelete = ReferentialAction.NoAction
-        ) {
+        )
+        {
             Check.NotEmpty(name, nameof(name));
             Check.NotEmpty(table, nameof(table));
             Check.NotEmpty(columns, nameof(columns));
@@ -237,7 +239,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string table,
             string[] columns,
             string? schema = null
-        ) {
+        )
+        {
             Check.NotEmpty(name, nameof(name));
             Check.NotEmpty(table, nameof(table));
             Check.NotEmpty(columns, nameof(columns));
@@ -288,7 +291,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string table,
             string[] columns,
             string? schema = null
-        ) {
+        )
+        {
             Check.NotEmpty(name, nameof(name));
             Check.NotEmpty(table, nameof(table));
             Check.NotEmpty(columns, nameof(columns));
@@ -417,7 +421,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             int? oldScale = null,
             bool? stored = null,
             bool? oldStored = null
-        ) {
+        )
+        {
             Check.NotEmpty(name, nameof(name));
             Check.NotEmpty(table, nameof(table));
 
@@ -475,7 +480,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         public virtual AlterOperationBuilder<AlterDatabaseOperation> AlterDatabase(
             string? collation = null,
             string? oldCollation = null
-        ) {
+        )
+        {
             var operation = new AlterDatabaseOperation
             {
                 Collation = collation,
@@ -511,7 +517,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             long? oldMinValue = null,
             long? oldMaxValue = null,
             bool oldCyclic = false
-        ) {
+        )
+        {
             Check.NotEmpty(name, nameof(name));
 
             var operation = new AlterSequenceOperation
@@ -548,7 +555,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string? schema = null,
             string? comment = null,
             string? oldComment = null
-        ) {
+        )
+        {
             Check.NotEmpty(name, nameof(name));
 
             var operation = new AlterTableOperation
@@ -607,7 +615,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string? schema = null,
             bool unique = false,
             string? filter = null
-        ) {
+        )
+        {
             Check.NotEmpty(name, nameof(name));
             Check.NotEmpty(table, nameof(table));
             Check.NotEmpty(columns, nameof(columns));
@@ -683,7 +692,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             long? minValue = null,
             long? maxValue = null,
             bool cyclic = false
-        ) {
+        )
+        {
             Check.NotEmpty(name, nameof(name));
 
             var operation = new CreateSequenceOperation
@@ -736,7 +746,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string table,
             string sql,
             string? schema = null
-        ) {
+        )
+        {
             Check.NotEmpty(name, nameof(name));
 
             var operation = new AddCheckConstraintOperation
@@ -771,7 +782,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string? schema = null,
             Action<CreateTableBuilder<TColumns>>? constraints = null,
             string? comment = null
-        ) {
+        )
+        {
             Check.NotEmpty(name, nameof(name));
             Check.NotNull(columns, nameof(columns));
 
@@ -823,7 +835,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string name,
             string table,
             string? schema = null
-        ) {
+        )
+        {
             Check.NotEmpty(name, nameof(name));
             Check.NotEmpty(table, nameof(table));
 
@@ -844,7 +857,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string name,
             string table,
             string? schema = null
-        ) {
+        )
+        {
             Check.NotEmpty(name, nameof(name));
             Check.NotEmpty(table, nameof(table));
 
@@ -870,7 +884,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string name,
             string? table = null,
             string? schema = null
-        ) {
+        )
+        {
             Check.NotEmpty(name, nameof(name));
 
             var operation = new DropIndexOperation { Schema = schema, Table = table, Name = name };
@@ -890,7 +905,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string name,
             string table,
             string? schema = null
-        ) {
+        )
+        {
             Check.NotEmpty(name, nameof(name));
             Check.NotEmpty(table, nameof(table));
 
@@ -929,7 +945,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         public virtual OperationBuilder<DropSequenceOperation> DropSequence(
             string name,
             string? schema = null
-        ) {
+        )
+        {
             Check.NotEmpty(name, nameof(name));
 
             var operation = new DropSequenceOperation { Schema = schema, Name = name };
@@ -949,7 +966,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string name,
             string table,
             string? schema = null
-        ) {
+        )
+        {
             Check.NotEmpty(name, nameof(name));
 
             var operation = new DropCheckConstraintOperation
@@ -972,7 +990,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         public virtual OperationBuilder<DropTableOperation> DropTable(
             string name,
             string? schema = null
-        ) {
+        )
+        {
             Check.NotEmpty(name, nameof(name));
 
             var operation = new DropTableOperation { Schema = schema, Name = name };
@@ -992,7 +1011,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string name,
             string table,
             string? schema = null
-        ) {
+        )
+        {
             Check.NotEmpty(name, nameof(name));
             Check.NotEmpty(table, nameof(table));
 
@@ -1020,7 +1040,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string table,
             string newName,
             string? schema = null
-        ) {
+        )
+        {
             Check.NotEmpty(name, nameof(name));
             Check.NotEmpty(table, nameof(table));
             Check.NotEmpty(newName, nameof(newName));
@@ -1050,7 +1071,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string newName,
             string? table = null,
             string? schema = null
-        ) {
+        )
+        {
             Check.NotEmpty(name, nameof(name));
             Check.NotEmpty(newName, nameof(newName));
 
@@ -1079,7 +1101,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string? schema = null,
             string? newName = null,
             string? newSchema = null
-        ) {
+        )
+        {
             Check.NotEmpty(name, nameof(name));
 
             var operation = new RenameSequenceOperation
@@ -1107,7 +1130,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string? schema = null,
             string? newName = null,
             string? newSchema = null
-        ) {
+        )
+        {
             Check.NotEmpty(name, nameof(name));
 
             var operation = new RenameTableOperation
@@ -1133,7 +1157,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string name,
             long startValue = 1L,
             string? schema = null
-        ) {
+        )
+        {
             Check.NotEmpty(name, nameof(name));
 
             var operation = new RestartSequenceOperation
@@ -1158,7 +1183,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         public virtual OperationBuilder<SqlOperation> Sql(
             string sql,
             bool suppressTransaction = false
-        ) {
+        )
+        {
             Check.NotEmpty(sql, nameof(sql));
 
             var operation = new SqlOperation
@@ -1349,7 +1375,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string[] columnTypes,
             object?[,] values,
             string? schema = null
-        ) {
+        )
+        {
             Check.NotEmpty(columnTypes, nameof(columnTypes));
 
             return InsertDataInternal(table, columns, columnTypes, values, schema);
@@ -1361,7 +1388,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string[]? columnTypes,
             object?[,] values,
             string? schema
-        ) {
+        )
+        {
             Check.NotEmpty(table, nameof(table));
             Check.NotNull(columns, nameof(columns));
             Check.NotNull(values, nameof(values));
@@ -1568,7 +1596,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string[] keyColumnTypes,
             object?[,] keyValues,
             string? schema = null
-        ) {
+        )
+        {
             Check.NotEmpty(keyColumnTypes, nameof(keyColumnTypes));
 
             return DeleteDataInternal(table, keyColumns, keyColumnTypes, keyValues, schema);
@@ -1580,7 +1609,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string[]? keyColumnTypes,
             object?[,] keyValues,
             string? schema
-        ) {
+        )
+        {
             Check.NotEmpty(table, nameof(table));
             Check.NotNull(keyColumns, nameof(keyColumns));
             Check.NotNull(keyValues, nameof(keyValues));
@@ -1897,7 +1927,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string[] columnTypes,
             object?[,] values,
             string? schema = null
-        ) {
+        )
+        {
             Check.NotEmpty(keyColumnTypes, nameof(keyColumnTypes));
             Check.NotEmpty(columnTypes, nameof(columnTypes));
 
@@ -1922,7 +1953,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string[]? columnTypes,
             object?[,] values,
             string? schema
-        ) {
+        )
+        {
             Check.NotEmpty(table, nameof(table));
             Check.NotNull(keyColumns, nameof(keyColumns));
             Check.NotNull(keyValues, nameof(keyValues));
@@ -1948,7 +1980,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         private static object?[,] ToMultidimensionalArray(
             object?[] values,
             bool firstDimension = false
-        ) {
+        )
+        {
             var result = firstDimension
                 ? new object?[values.Length, 1]
                 : new object?[1, values.Length];

@@ -19,7 +19,8 @@ namespace System.Security.AccessControl.Tests
             int intCompoundAceType,
             string stringsid,
             int offset
-        ) {
+        )
+        {
             CompoundAceType compoundAceType = (CompoundAceType)intCompoundAceType;
             AceFlags flags = (AceFlags)intFlags;
             SecurityIdentifier sid = new SecurityIdentifier(stringsid);
@@ -129,7 +130,8 @@ namespace System.Security.AccessControl.Tests
             GenericAce testAce,
             byte[] expectedBinaryForm,
             int testOffset
-        ) {
+        )
+        {
             byte[] resultBinaryForm = new byte[testAce.BinaryLength + testOffset];
             testAce.GetBinaryForm(resultBinaryForm, testOffset);
             GenericAce_VerifyBinaryForms(expectedBinaryForm, resultBinaryForm, testOffset);
@@ -141,7 +143,8 @@ namespace System.Security.AccessControl.Tests
             GenericAce expectedAce,
             byte[] testBinaryForm,
             int testOffset
-        ) {
+        )
+        {
             GenericAce resultAce = CompoundAce.CreateFromBinaryForm(testBinaryForm, testOffset);
             GenericAce_VerifyAces(expectedAce, resultAce);
         }

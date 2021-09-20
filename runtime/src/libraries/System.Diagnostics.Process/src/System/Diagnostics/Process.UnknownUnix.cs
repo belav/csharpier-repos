@@ -75,7 +75,8 @@ namespace System.Diagnostics
             IntPtr? newMax,
             out IntPtr resultingMin,
             out IntPtr resultingMax
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 

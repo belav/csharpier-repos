@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             SemanticModel model,
             SyntaxNode node,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var nodeCache = GetNodeCache(model);
             if (nodeCache == null)
             {
@@ -48,7 +49,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             SemanticModel model,
             SyntaxToken token,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (semanticFacts == null)
             {
                 return model.GetAliasInfo(token.Parent, cancellationToken);
@@ -81,7 +83,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             SourceText sourceText,
             string text,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var normalized = syntaxFacts.IsCaseSensitive ? text : text.ToLowerInvariant();
 
             var entry = GetCachedEntry(model);
@@ -119,7 +122,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             SourceText sourceText,
             string text,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (sourceText != null)
             {
                 // identifier is not escaped
@@ -167,7 +171,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             string text,
             Func<SyntaxToken, ISyntaxFactsService, string, bool> candidate,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (text.Length == 0)
             {
                 return ImmutableArray<SyntaxToken>.Empty;
@@ -189,7 +194,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     && span.Start == index
                     && span.Length == text.Length
                     && candidate(token, syntaxFacts, text)
-                ) {
+                )
+                {
                     result.Add(token);
                 }
 
@@ -205,7 +211,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             SemanticModel model,
             SyntaxNode root,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // this one will only get called when we know given document contains constructor initializer.
             // no reason to use text to check whether it exist first.
             var entry = GetCachedEntry(model);
@@ -235,7 +242,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             ISyntaxFactsService syntaxFacts,
             SyntaxNode root,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var initializers = new List<SyntaxToken>();
             foreach (var constructor in syntaxFacts.GetConstructors(root, cancellationToken))
             {
@@ -244,7 +252,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     if (
                         !syntaxFacts.IsThisConstructorInitializer(token)
                         && !syntaxFacts.IsBaseConstructorInitializer(token)
-                    ) {
+                    )
+                    {
                         continue;
                     }
 
@@ -257,7 +266,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
         private static ConcurrentDictionary<SyntaxNode, SymbolInfo> GetNodeCache(
             SemanticModel model
-        ) {
+        )
+        {
             var entry = GetCachedEntry(model);
             if (entry == null)
             {

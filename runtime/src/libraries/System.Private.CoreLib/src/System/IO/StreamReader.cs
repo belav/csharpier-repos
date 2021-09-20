@@ -113,11 +113,8 @@ namespace System.IO
         public StreamReader(Stream stream, Encoding encoding)
             : this(stream, encoding, true, DefaultBufferSize, false) { }
 
-        public StreamReader(
-            Stream stream,
-            Encoding encoding,
-            bool detectEncodingFromByteOrderMarks
-        ) : this(stream, encoding, detectEncodingFromByteOrderMarks, DefaultBufferSize, false) { }
+        public StreamReader(Stream stream, Encoding encoding, bool detectEncodingFromByteOrderMarks)
+            : this(stream, encoding, detectEncodingFromByteOrderMarks, DefaultBufferSize, false) { }
 
         // Creates a new StreamReader for the given stream.  The
         // character encoding is set by encoding and the buffer size,
@@ -142,7 +139,8 @@ namespace System.IO
             bool detectEncodingFromByteOrderMarks = true,
             int bufferSize = -1,
             bool leaveOpen = false
-        ) {
+        )
+        {
             if (stream == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.stream);
@@ -191,30 +189,29 @@ namespace System.IO
         public StreamReader(string path, Encoding encoding)
             : this(path, encoding, true, DefaultBufferSize) { }
 
-        public StreamReader(
-            string path,
-            Encoding encoding,
-            bool detectEncodingFromByteOrderMarks
-        ) : this(path, encoding, detectEncodingFromByteOrderMarks, DefaultBufferSize) { }
+        public StreamReader(string path, Encoding encoding, bool detectEncodingFromByteOrderMarks)
+            : this(path, encoding, detectEncodingFromByteOrderMarks, DefaultBufferSize) { }
 
         public StreamReader(
             string path,
             Encoding encoding,
             bool detectEncodingFromByteOrderMarks,
             int bufferSize
-        ) : this(
-            ValidateArgsAndOpenPath(path, encoding, bufferSize),
-            encoding,
-            detectEncodingFromByteOrderMarks,
-            bufferSize,
-            leaveOpen: false
-        ) { }
+        )
+            : this(
+                ValidateArgsAndOpenPath(path, encoding, bufferSize),
+                encoding,
+                detectEncodingFromByteOrderMarks,
+                bufferSize,
+                leaveOpen: false
+            ) { }
 
         private static Stream ValidateArgsAndOpenPath(
             string path,
             Encoding encoding,
             int bufferSize
-        ) {
+        )
+        {
             if (path == null)
                 throw new ArgumentNullException(nameof(path));
             if (encoding == null)
@@ -523,7 +520,8 @@ namespace System.IO
                 && _byteBuffer[0] == 0xEF
                 && _byteBuffer[1] == 0xBB
                 && _byteBuffer[2] == 0xBF
-            ) {
+            )
+            {
                 // UTF-8
                 _encoding = Encoding.UTF8;
                 CompressBuffer(3);
@@ -535,7 +533,8 @@ namespace System.IO
                 && _byteBuffer[1] == 0
                 && _byteBuffer[2] == 0xFE
                 && _byteBuffer[3] == 0xFF
-            ) {
+            )
+            {
                 // Big Endian UTF32
                 _encoding = new UTF32Encoding(bigEndian: true, byteOrderMark: true);
                 CompressBuffer(4);
@@ -933,7 +932,8 @@ namespace System.IO
             if (
                 _charPos == _charLen
                 && (await ReadBufferAsync(CancellationToken.None).ConfigureAwait(false)) == 0
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -977,7 +977,8 @@ namespace System.IO
                                         .ConfigureAwait(false)
                                 ) > 0
                             )
-                        ) {
+                        )
+                        {
                             tmpCharPos = _charPos;
                             if (_charBuffer[tmpCharPos] == '\n')
                             {
@@ -1077,7 +1078,8 @@ namespace System.IO
         public override ValueTask<int> ReadAsync(
             Memory<char> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (GetType() != typeof(StreamReader))
             {
                 // Ensure we use existing overrides if a class already overrode existing overloads.
@@ -1098,11 +1100,13 @@ namespace System.IO
         internal override async ValueTask<int> ReadAsyncInternal(
             Memory<char> buffer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 _charPos == _charLen
                 && (await ReadBufferAsync(cancellationToken).ConfigureAwait(false)) == 0
-            ) {
+            )
+            {
                 return 0;
             }
 
@@ -1347,7 +1351,8 @@ namespace System.IO
         public override ValueTask<int> ReadBlockAsync(
             Memory<char> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (GetType() != typeof(StreamReader))
             {
                 // If a derived type may have overridden ReadBlockAsync(char[], ...) before this overload

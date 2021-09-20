@@ -252,7 +252,8 @@ namespace Microsoft.Extensions.Internal.Test
         private static void ExpectDisposeAggregateException(
             MemoryPool<byte> memoryPool,
             params Exception[] inner
-        ) {
+        )
+        {
             var exception = Assert.Throws<AggregateException>(() => memoryPool.Dispose());
 
             Assert.Equal(inner, exception.InnerExceptions);

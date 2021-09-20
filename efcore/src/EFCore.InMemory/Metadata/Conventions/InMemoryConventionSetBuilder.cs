@@ -27,9 +27,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Metadata.Conventions
         ///     Creates a new <see cref="InMemoryConventionSetBuilder" /> instance.
         /// </summary>
         /// <param name="dependencies"> The core dependencies for this service. </param>
-        public InMemoryConventionSetBuilder(
-            ProviderConventionSetBuilderDependencies dependencies
-        ) : base(dependencies) { }
+        public InMemoryConventionSetBuilder(ProviderConventionSetBuilderDependencies dependencies)
+            : base(dependencies) { }
 
         /// <inheritdoc />
         public override ConventionSet CreateConventionSet()

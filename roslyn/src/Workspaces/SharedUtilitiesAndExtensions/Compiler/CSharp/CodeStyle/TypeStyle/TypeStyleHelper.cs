@@ -37,14 +37,16 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeStyle.TypeStyle
             SemanticModel semanticModel,
             ITypeSymbol? typeInDeclaration,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // tuple literals
             if (
                 initializerExpression.IsKind(
                     SyntaxKind.TupleExpression,
                     out TupleExpressionSyntax? tuple
                 )
-            ) {
+            )
+            {
                 if (typeInDeclaration == null || !typeInDeclaration.IsTupleType)
                 {
                     return false;
@@ -69,7 +71,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeStyle.TypeStyle
                             tupleElementType,
                             cancellationToken
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }
@@ -96,7 +99,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeStyle.TypeStyle
                     SyntaxKind.ObjectCreationExpression,
                     SyntaxKind.ArrayCreationExpression
                 ) && !initializerExpression.IsKind(SyntaxKind.AnonymousObjectCreationExpression)
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -106,7 +110,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeStyle.TypeStyle
                 initializerExpression.IsKind(SyntaxKind.CastExpression)
                 || initializerExpression.IsKind(SyntaxKind.IsExpression)
                 || initializerExpression.IsKind(SyntaxKind.AsExpression)
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -126,7 +131,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeStyle.TypeStyle
                     semanticModel.GetSymbolInfo(memberName, cancellationToken).Symbol
                     is IMethodSymbol methodSymbol
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -151,7 +157,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeStyle.TypeStyle
             SemanticModel semanticModel,
             ExpressionSyntax containingTypeName,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (methodSymbol.ReturnsVoid)
             {
                 return false;
@@ -176,7 +183,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeStyle.TypeStyle
             IMethodSymbol methodSymbol,
             ITypeSymbol? typeInDeclaration,
             ITypeSymbol containingType
-        ) {
+        )
+        {
             if (!methodSymbol.IsStatic)
             {
                 return false;
@@ -213,13 +221,15 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeStyle.TypeStyle
             IMethodSymbol methodSymbol,
             ITypeSymbol? typeInDeclaration,
             ITypeSymbol containingType
-        ) {
+        )
+        {
             var returnType = UnwrapTupleType(methodSymbol.ReturnType);
 
             if (
                 UnwrapTupleType(typeInDeclaration)?.GetTypeArguments().Length > 0
                 || containingType.GetTypeArguments().Length > 0
-            ) {
+            )
+            {
                 return UnwrapTupleType(containingType).Name.Equals(returnType.Name);
             }
             else
@@ -250,7 +260,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeStyle.TypeStyle
             if (
                 node is InvocationExpressionSyntax invocationExpression
                 && invocationExpression.Expression != null
-            ) {
+            )
+            {
                 return GetRightmostInvocationExpression(invocationExpression.Expression);
             }
 

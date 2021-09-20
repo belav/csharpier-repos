@@ -60,7 +60,8 @@ namespace System.Transactions
 
         internal static void ProcessExistingTransactions(
             TransactionStartedEventHandler eventHandler
-        ) {
+        )
+        {
             lock (PromotedTransactionTable)
             {
                 // Manual use of IDictionaryEnumerator instead of foreach to avoid DictionaryEntry box allocations.
@@ -140,7 +141,8 @@ namespace System.Transactions
             Guid resourceManagerIdentifier,
             byte[] recoveryInformation,
             IEnlistmentNotification enlistmentNotification
-        ) {
+        )
+        {
             if (resourceManagerIdentifier == Guid.Empty)
             {
                 throw new ArgumentException(
@@ -272,7 +274,8 @@ namespace System.Transactions
                     (tm.NodeName == null && (nodeName == null || nodeName.Length == 0))
                     || (tm.NodeName != null && tm.NodeName.Equals(nodeName))
                 )
-            ) {
+            )
+            {
                 throw new ArgumentException(SR.InvalidRecoveryInformation, "recoveryInformation");
             }
             return tm;
@@ -517,7 +520,8 @@ namespace System.Transactions
         internal static Transaction FindOrCreatePromotedTransaction(
             Guid transactionIdentifier,
             DistributedTransaction dtx
-        ) {
+        )
+        {
             Transaction? tx = null;
             Hashtable promotedTransactionTable = PromotedTransactionTable;
             lock (promotedTransactionTable)

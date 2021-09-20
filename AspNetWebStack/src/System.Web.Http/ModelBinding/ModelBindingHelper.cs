@@ -69,7 +69,8 @@ namespace System.Web.Http.ModelBinding
             Type closedModelType,
             Type openModelType,
             Type openBinderType
-        ) {
+        )
+        {
             Type[] typeArguments = TypeHelper.GetTypeArgumentsIfMatch(
                 closedModelType,
                 openModelType
@@ -110,12 +111,14 @@ namespace System.Web.Http.ModelBinding
         internal static void ReplaceEmptyStringWithNull(
             ModelMetadata modelMetadata,
             ref object model
-        ) {
+        )
+        {
             if (
                 model is string
                 && modelMetadata.ConvertEmptyStringToNull
                 && String.IsNullOrWhiteSpace(model as string)
-            ) {
+            )
+            {
                 model = null;
             }
         }
@@ -124,7 +127,8 @@ namespace System.Web.Http.ModelBinding
             Type modelType,
             ModelBinderAttribute modelBinderAttribute,
             out ModelBinderProvider provider
-        ) {
+        )
+        {
             Contract.Assert(modelType != null, "modelType cannot be null.");
             Contract.Assert(modelBinderAttribute != null, "modelBinderAttribute cannot be null");
 
@@ -174,7 +178,8 @@ namespace System.Web.Http.ModelBinding
         internal static bool TryGetProviderFromAttributes(
             Type modelType,
             out ModelBinderProvider provider
-        ) {
+        )
+        {
             ModelBinderAttribute attr = GetModelBinderAttribute(modelType);
             if (attr == null)
             {
@@ -219,7 +224,8 @@ namespace System.Web.Http.ModelBinding
             ModelBindingContext bindingContext,
             Type requiredType,
             bool allowNullModel
-        ) {
+        )
+        {
             ValidateBindingContext(bindingContext);
 
             if (bindingContext.ModelType != requiredType)
@@ -243,7 +249,8 @@ namespace System.Web.Http.ModelBinding
 
             if (
                 bindingContext.Model != null && !requiredType.IsInstanceOfType(bindingContext.Model)
-            ) {
+            )
+            {
                 throw Error.Argument(
                     "bindingContext",
                     SRResources.ModelBinderUtil_ModelInstanceIsWrong,

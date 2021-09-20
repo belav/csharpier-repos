@@ -26,7 +26,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         public static IUIAutomationElement GetOpenDialogById(
             IntPtr visualStudioHWnd,
             string dialogAutomationId
-        ) {
+        )
+        {
             var dialogAutomationElement = FindDialogByAutomationId(
                 visualStudioHWnd,
                 dialogAutomationId,
@@ -47,12 +48,14 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
             string dialogAutomationId,
             bool isOpen,
             bool wait = true
-        ) {
+        )
+        {
             using (
                 var cancellationTokenSource = new CancellationTokenSource(
                     Helper.HangMitigatingTimeout
                 )
-            ) {
+            )
+            {
                 return Retry(
                     _ => FindDialogWorker(visualStudioHWnd, dialogAutomationId),
                     stoppingCondition: (automationElement, _) =>
@@ -71,7 +74,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
             string dialogName,
             bool isOpen,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return Retry(
                 _ => FindDialogByNameWorker(visualStudioHWnd, dialogName),
                 stoppingCondition: (automationElement, _) =>
@@ -90,7 +94,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
             string dialogAutomationName,
             string comboBoxAutomationName,
             string itemText
-        ) {
+        )
+        {
             var dialogAutomationElement = GetOpenDialogById(visualStudioHWnd, dialogAutomationName);
 
             var comboBoxAutomationElement = dialogAutomationElement.FindDescendantByAutomationId(
@@ -113,7 +118,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
             IntPtr visualStudioHWnd,
             string dialogAutomationName,
             string radioButtonAutomationName
-        ) {
+        )
+        {
             var dialogAutomationElement = GetOpenDialogById(visualStudioHWnd, dialogAutomationName);
 
             var radioButton = dialogAutomationElement.FindDescendantByAutomationId(
@@ -131,7 +137,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
             string dialogAutomationId,
             string elementAutomationId,
             string value
-        ) {
+        )
+        {
             var dialogAutomationElement = GetOpenDialogById(visualStudioHWnd, dialogAutomationId);
 
             var control = dialogAutomationElement.FindDescendantByAutomationId(elementAutomationId);
@@ -147,7 +154,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
             IntPtr visualStudioHWnd,
             string dialogAutomationId,
             string buttonAutomationId
-        ) {
+        )
+        {
             var dialogAutomationElement = GetOpenDialogById(visualStudioHWnd, dialogAutomationId);
 
             var buttonAutomationElement = dialogAutomationElement.FindDescendantByAutomationId(
@@ -165,7 +173,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
             IntPtr visualStudioHWnd,
             string dialogAutomationId,
             string buttonName
-        ) {
+        )
+        {
             var dialogAutomationElement = GetOpenDialogById(visualStudioHWnd, dialogAutomationId);
 
             var buttonAutomationElement = dialogAutomationElement.FindDescendantByName(buttonName);
@@ -181,13 +190,15 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
             IntPtr visualStudioHWnd,
             string dialogName,
             string buttonName
-        ) {
+        )
+        {
             IUIAutomationElement dialogAutomationElement;
             using (
                 var cancellationTokenSource = new CancellationTokenSource(
                     Helper.HangMitigatingTimeout
                 )
-            ) {
+            )
+            {
                 dialogAutomationElement = FindDialogByName(
                     visualStudioHWnd,
                     dialogName,
@@ -224,7 +235,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
             IntPtr visualStudioHWnd,
             string propertyValue,
             AutomationProperty nameProperty
-        ) {
+        )
+        {
             var vsAutomationElement = Helper.Automation.ElementFromHandle(visualStudioHWnd);
 
             var elementCondition = Helper.Automation.CreateAndConditionFromArray(
@@ -246,7 +258,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
             Func<T, CancellationToken, bool> stoppingCondition,
             TimeSpan delay,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             do
             {
                 cancellationToken.ThrowIfCancellationRequested();

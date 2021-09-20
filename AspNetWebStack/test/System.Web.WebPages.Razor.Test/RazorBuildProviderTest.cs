@@ -274,7 +274,8 @@ namespace System.Web.WebPages.Razor.Test
 
             public override void PostProcessGeneratedCode(
                 Web.Razor.Generator.CodeGeneratorContext context
-            ) {
+            )
+            {
                 context.CompileUnit.Namespaces.Insert(0, new CodeNamespace("Test"));
             }
         }

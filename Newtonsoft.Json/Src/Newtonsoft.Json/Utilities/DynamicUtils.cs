@@ -197,7 +197,8 @@ namespace Newtonsoft.Json.Utilities
 
         public static IEnumerable<string> GetDynamicMemberNames(
             this IDynamicMetaObjectProvider dynamicProvider
-        ) {
+        )
+        {
             DynamicMetaObject metaObject = dynamicProvider.GetMetaObject(
                 Expression.Constant(dynamicProvider)
             );
@@ -218,7 +219,8 @@ namespace Newtonsoft.Json.Utilities
         public override DynamicMetaObject FallbackGetMember(
             DynamicMetaObject target,
             DynamicMetaObject errorSuggestion
-        ) {
+        )
+        {
             DynamicMetaObject retMetaObject = _innerBinder.Bind(
                 target,
                 CollectionUtils.ArrayEmpty<DynamicMetaObject>()
@@ -249,7 +251,8 @@ namespace Newtonsoft.Json.Utilities
             DynamicMetaObject target,
             DynamicMetaObject value,
             DynamicMetaObject errorSuggestion
-        ) {
+        )
+        {
             DynamicMetaObject retMetaObject = _innerBinder.Bind(
                 target,
                 new DynamicMetaObject[] { value }

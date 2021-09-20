@@ -15,10 +15,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         private readonly SwitchExpressionSyntax SwitchExpressionSyntax;
 
-        internal SwitchExpressionBinder(
-            SwitchExpressionSyntax switchExpressionSyntax,
-            Binder next
-        ) : base(next)
+        internal SwitchExpressionBinder(SwitchExpressionSyntax switchExpressionSyntax, Binder next)
+            : base(next)
         {
             SwitchExpressionSyntax = switchExpressionSyntax;
         }
@@ -27,7 +25,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SwitchExpressionSyntax node,
             Binder originalBinder,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             Debug.Assert(node == SwitchExpressionSyntax);
 
             // Bind switch expression and set the switch governing type.
@@ -79,7 +78,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             out BoundDecisionDag decisionDag,
             [NotNullWhen(true)] out LabelSymbol? defaultLabel,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             defaultLabel = new GeneratedLabelSymbol("default");
             decisionDag = DecisionDagBuilder.CreateDecisionDagForSwitchExpression(
                 this.Compilation,
@@ -171,7 +171,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private TypeSymbol? InferResultType(
             ImmutableArray<BoundSwitchExpressionArm> switchCases,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var seenTypes =
                 Symbols.SpecializedSymbolCollections.GetPooledSymbolHashSetInstance<TypeSymbol>();
             var typesInOrder = ArrayBuilder<TypeSymbol>.GetInstance();
@@ -207,7 +208,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             commonType,
                             ref useSiteInfo
                         ).Exists
-                    ) {
+                    )
+                    {
                         commonType = null;
                         break;
                     }
@@ -223,7 +225,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Binder originalBinder,
             BoundExpression inputExpression,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var builder = ArrayBuilder<BoundSwitchExpressionArm>.GetInstance();
             (TypeSymbol inputType, uint valEscape) = GetInputTypeAndValEscape(inputExpression);
             foreach (var arm in node.Arms)
@@ -244,7 +247,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal (TypeSymbol GoverningType, uint GoverningValEscape) GetInputTypeAndValEscape(
             BoundExpression? inputExpression = null
-        ) {
+        )
+        {
             inputExpression ??= BindSwitchGoverningExpression(BindingDiagnosticBag.Discarded);
             Debug.Assert(inputExpression.Type is not null);
             return (inputExpression.Type, GetValEscape(inputExpression, LocalScopeDepth));
@@ -259,7 +263,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 switchGoverningExpression.Type == (object?)null
                 || switchGoverningExpression.Type.IsVoidType()
-            ) {
+            )
+            {
                 diagnostics.Add(
                     ErrorCode.ERR_BadPatternExpression,
                     SwitchExpressionSyntax.GoverningExpression.Location,

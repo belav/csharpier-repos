@@ -18,7 +18,8 @@ namespace System.Threading
         public CompleteWaitThreadPoolWorkItem(
             RegisteredWaitHandle registeredWaitHandle,
             bool timedOut
-        ) {
+        )
+        {
             _registeredWaitHandle = registeredWaitHandle;
             _timedOut = timedOut;
         }
@@ -272,7 +273,8 @@ namespace System.Threading
                     if (
                         signaledHandleIndex >= WaitHandle.WaitAbandoned
                         && signaledHandleIndex < WaitHandle.WaitAbandoned + 1 + numUserWaits
-                    ) {
+                    )
+                    {
                         // For compatibility, treat an abandoned mutex wait result as a success and ignore the abandonment
                         Debug.Assert(signaledHandleIndex != WaitHandle.WaitAbandoned); // the first wait handle is an event
                         signaledHandleIndex += WaitHandle.WaitSuccess - WaitHandle.WaitAbandoned;
@@ -306,7 +308,8 @@ namespace System.Threading
                         if (
                             !registeredHandle.IsInfiniteTimeout
                             && currentTimeMs - registeredHandle.TimeoutTimeMs >= 0
-                        ) {
+                        )
+                        {
                             QueueWaitCompletion(registeredHandle, true);
                         }
                     }

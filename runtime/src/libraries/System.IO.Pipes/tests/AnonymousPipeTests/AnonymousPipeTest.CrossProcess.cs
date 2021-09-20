@@ -38,7 +38,8 @@ namespace System.IO.Pipes.Tests
                     outbound.GetClientHandleAsString(),
                     inbound.GetClientHandleAsString()
                 )
-            ) {
+            )
+            {
                 // Close our local copies of the handles now that we've passed them of to the other process
                 outbound.DisposeLocalCopyOfClientHandle();
                 inbound.DisposeLocalCopyOfClientHandle();
@@ -82,7 +83,8 @@ namespace System.IO.Pipes.Tests
                     new Action<string>(ChildFunc),
                     pipe.GetClientHandleAsString()
                 )
-            ) {
+            )
+            {
                 pipe.DisposeLocalCopyOfClientHandle();
                 pipe.Write(new byte[] { 1, 2, 3, 4, 5 }, 0, 5);
 
@@ -119,7 +121,8 @@ namespace System.IO.Pipes.Tests
                     pipe.GetClientHandleAsString(),
                     new RemoteInvokeOptions { CheckExitCode = false }
                 )
-            ) {
+            )
+            {
                 pipe.DisposeLocalCopyOfClientHandle();
 
                 for (int i = 1; i <= 5; i++)

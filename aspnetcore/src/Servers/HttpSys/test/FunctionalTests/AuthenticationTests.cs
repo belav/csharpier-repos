@@ -45,7 +45,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address);
                 Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                 Assert.Empty(response.Headers.WwwAuthenticate);
@@ -69,7 +70,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         throw new NotImplementedException();
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address);
                 Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
                 Assert.Equal(
@@ -87,7 +89,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
         [InlineData(AuthenticationSchemes.Basic)]
         public async Task AuthType_AllowAnonymousButSpecify401_ChallengesAdded(
             AuthenticationSchemes authType
-        ) {
+        )
+        {
             using (
                 var server = Utilities.CreateDynamicHost(
                     authType,
@@ -102,7 +105,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address);
                 Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
                 Assert.Equal(
@@ -134,7 +138,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address);
                 Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
                 Assert.Equal(
@@ -158,7 +163,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
         )]
         public async Task AuthTypes_AllowAnonymousButSpecify401_Success(
             AuthenticationSchemes authType
-        ) {
+        )
+        {
             int requestId = 0;
             using (
                 var server = Utilities.CreateDynamicHost(
@@ -186,7 +192,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address, useDefaultCredentials: true);
                 Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             }
@@ -218,7 +225,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address, useDefaultCredentials: true);
                 Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             }
@@ -254,7 +262,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address, useDefaultCredentials: true);
                 Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                 await completed.Task.TimeoutAfter(TimeSpan.FromSeconds(5));
@@ -294,7 +303,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         Assert.True(authResults.None);
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address);
                 Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                 Assert.Empty(response.Headers.WwwAuthenticate);
@@ -330,7 +340,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         Assert.True(authResults.Succeeded);
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address, useDefaultCredentials: true);
                 Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             }
@@ -349,7 +360,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
         )]
         public async Task AuthTypes_ChallengeWithoutAuthTypes_AllChallengesSent(
             AuthenticationSchemes authType
-        ) {
+        )
+        {
             var authTypeList = authType.ToString()
                 .Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
             using (
@@ -365,7 +377,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return httpContext.ChallengeAsync(HttpSysDefaults.AuthenticationScheme);
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address);
                 Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
                 Assert.Equal(authTypeList.Count(), response.Headers.WwwAuthenticate.Count);
@@ -385,7 +398,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
         )]
         public async Task AuthTypes_ChallengeWithAllAuthTypes_AllChallengesSent(
             AuthenticationSchemes authType
-        ) {
+        )
+        {
             var authTypeList = authType.ToString()
                 .Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
             using (
@@ -401,7 +415,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         await httpContext.ChallengeAsync(HttpSysDefaults.AuthenticationScheme);
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address);
                 Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
                 Assert.Equal(authTypeList.Count(), response.Headers.WwwAuthenticate.Count);
@@ -429,7 +444,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return httpContext.ChallengeAsync(HttpSysDefaults.AuthenticationScheme);
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address);
                 Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
                 Assert.Equal(3, response.Headers.WwwAuthenticate.Count);
@@ -452,7 +468,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
         [InlineData(AuthenticationSchemes.NTLM | AuthenticationSchemes.Basic)]
         public async Task AuthTypes_ChallengeWillAskForAllEnabledSchemes(
             AuthenticationSchemes authType
-        ) {
+        )
+        {
             var authTypeList = authType.ToString()
                 .Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
             using (
@@ -468,7 +485,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return httpContext.ChallengeAsync(HttpSysDefaults.AuthenticationScheme);
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address);
                 Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
                 Assert.Equal(authTypeList.Count(), response.Headers.WwwAuthenticate.Count);
@@ -496,7 +514,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return httpContext.ForbidAsync(HttpSysDefaults.AuthenticationScheme);
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address);
                 Assert.Equal(HttpStatusCode.Forbidden, response.StatusCode);
                 Assert.Empty(response.Headers.WwwAuthenticate);
@@ -510,7 +529,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
         // [InlineData(AuthenticationSchemes.Basic)] // Can't log in with UseDefaultCredentials
         public async Task AuthTypes_UnathorizedAuthenticatedAuthType_Unauthorized(
             AuthenticationSchemes authType
-        ) {
+        )
+        {
             using (
                 var server = Utilities.CreateDynamicHost(
                     authType,
@@ -527,7 +547,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         );
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address, useDefaultCredentials: true);
                 Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
                 Assert.Single(response.Headers.WwwAuthenticate);
@@ -572,7 +593,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         Assert.True(authenticateResult.Principal.Identity.IsAuthenticated);
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address, useDefaultCredentials: true);
                 Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             }
@@ -581,7 +603,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
         private async Task<HttpResponseMessage> SendRequestAsync(
             string uri,
             bool useDefaultCredentials = false
-        ) {
+        )
+        {
             HttpClientHandler handler = new HttpClientHandler();
             handler.UseDefaultCredentials = useDefaultCredentials;
             using (HttpClient client = new HttpClient(handler))

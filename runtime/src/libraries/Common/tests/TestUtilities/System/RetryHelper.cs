@@ -23,7 +23,8 @@ namespace System
             int maxAttempts = 5,
             Func<int, int> backoffFunc = null,
             Predicate<Exception> retryWhen = null
-        ) {
+        )
+        {
             // Validate arguments
             if (maxAttempts < 1)
             {
@@ -68,7 +69,8 @@ namespace System
             int maxAttempts = 5,
             Func<int, int> backoffFunc = null,
             Predicate<Exception> retryWhen = null
-        ) {
+        )
+        {
             // Validate arguments
             if (maxAttempts < 1)
             {

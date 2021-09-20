@@ -67,7 +67,8 @@ namespace System.CommandLine.Tests
             [InlineData("one two three four five --verbose true")]
             public void When_multiple_arguments_are_present_then_their_order_relative_to_sibling_options_is_not_significant(
                 string commandLine
-            ) {
+            )
+            {
                 var command = new Command("the-command")
                 {
                     new Argument<string> { Name = "first" },

@@ -32,7 +32,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             IForeignKey foreignKey,
             IPrincipalKeyValueFactory<TKey> principalKeyValueFactory,
             IDependentKeyValueFactory<TKey> dependentKeyValueFactory
-        ) {
+        )
+        {
             _foreignKey = foreignKey;
             _principalKeyValueFactory = principalKeyValueFactory;
             _dependentKeyValueFactory = dependentKeyValueFactory;
@@ -52,7 +53,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             if (
                 _foreignKey.DeclaringEntityType.IsAssignableFrom(entry.EntityType)
                 && TryCreateFromCurrentValues(entry, out var key)
-            ) {
+            )
+            {
                 if (!_map.TryGetValue(key, out var dependents))
                 {
                     dependents = new HashSet<IUpdateEntry>();
@@ -74,7 +76,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             if (
                 _foreignKey.DeclaringEntityType.IsAssignableFrom(entry.EntityType)
                 && TryCreateFromCurrentValues(entry, out var key)
-            ) {
+            )
+            {
                 if (_map.TryGetValue(key, out var dependents))
                 {
                     dependents.Remove(entry);
@@ -95,7 +98,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 if (
                     _dependentKeyValueFactory.TryCreateFromRelationshipSnapshot(entry, out var key)
                     && _map.TryGetValue(key, out var dependents)
-                ) {
+                )
+                {
                     dependents.Remove(entry);
                 }
 
@@ -115,7 +119,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         private bool TryCreateFromCurrentValues(
             IUpdateEntry entry,
             [NotNullWhen(true)] out TKey? key
-        ) {
+        )
+        {
             // TODO: Move into delegate
             foreach (var property in _foreignKey.Properties)
             {
@@ -153,7 +158,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         /// </summary>
         public virtual IEnumerable<IUpdateEntry> GetDependentsUsingRelationshipSnapshot(
             IUpdateEntry principalEntry
-        ) {
+        )
+        {
             return _map.TryGetValue(
                 _principalKeyValueFactory.CreateFromRelationshipSnapshot(principalEntry),
                 out var dependents

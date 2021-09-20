@@ -22,17 +22,19 @@ namespace System.ComponentModel.Composition.ReflectionModel
             CreationPolicy requiredCreationPolicy,
             IDictionary<string, object?> metadata,
             ICompositionElement? origin
-        ) : base(
-            contractName,
-            requiredTypeIdentity,
-            requiredMetadata,
-            cardinality,
-            false,
-            true,
-            requiredCreationPolicy,
-            metadata,
-            origin
-        ) {
+        )
+            : base(
+                contractName,
+                requiredTypeIdentity,
+                requiredMetadata,
+                cardinality,
+                false,
+                true,
+                requiredCreationPolicy,
+                metadata,
+                origin
+            )
+        {
             if (importingLazyParameter == null)
             {
                 throw new ArgumentNullException(nameof(importingLazyParameter));

@@ -136,7 +136,8 @@ namespace System.Reflection.Tests
             bool nonPublicGetter,
             bool hasSetter,
             bool nonPublicSetter
-        ) {
+        )
+        {
             PropertyInfo property = TypeExtensions.GetProperty(type, name, Helpers.AllFlags);
 
             VerifyGetMethod(
@@ -173,7 +174,8 @@ namespace System.Reflection.Tests
             MethodInfo method,
             bool exists,
             bool nonPublic
-        ) {
+        )
+        {
             Assert.Equal(exists, method != null);
             if (exists)
             {
@@ -191,7 +193,8 @@ namespace System.Reflection.Tests
             MethodInfo method,
             bool exists,
             bool nonPublic
-        ) {
+        )
+        {
             Assert.Equal(exists, method != null);
             if (exists)
             {

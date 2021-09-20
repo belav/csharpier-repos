@@ -109,7 +109,8 @@ namespace System.Data
             string? name,
             DataColumn[] parentColumns,
             DataColumn[] childColumns
-        ) {
+        )
+        {
             var relation = new DataRelation(name, parentColumns, childColumns);
             Add(relation);
             return relation;
@@ -128,7 +129,8 @@ namespace System.Data
             DataColumn[] parentColumns,
             DataColumn[] childColumns,
             bool createConstraints
-        ) {
+        )
+        {
             var relation = new DataRelation(name, parentColumns, childColumns, createConstraints);
             Add(relation);
             return relation;
@@ -161,7 +163,8 @@ namespace System.Data
             string? name,
             DataColumn parentColumn,
             DataColumn childColumn
-        ) {
+        )
+        {
             var relation = new DataRelation(name, parentColumn, childColumn);
             Add(relation);
             return relation;
@@ -181,7 +184,8 @@ namespace System.Data
             DataColumn parentColumn,
             DataColumn childColumn,
             bool createConstraints
-        ) {
+        )
+        {
             var relation = new DataRelation(name, parentColumn, childColumn, createConstraints);
             Add(relation);
             return relation;
@@ -233,7 +237,8 @@ namespace System.Data
             if (
                 relation.ChildTable.Locale.LCID != relation.ParentTable.Locale.LCID
                 || relation.ChildTable.CaseSensitive != relation.ParentTable.CaseSensitive
-            ) {
+            )
+            {
                 throw ExceptionBuilder.CaseLocaleMismatch();
             }
 
@@ -843,7 +848,8 @@ namespace System.Data
                 if (
                     relation.ChildTable.DataSet != _dataSet
                     || relation.ParentTable.DataSet != _dataSet
-                ) {
+                )
+                {
                     throw ExceptionBuilder.ForeignRelation();
                 }
 

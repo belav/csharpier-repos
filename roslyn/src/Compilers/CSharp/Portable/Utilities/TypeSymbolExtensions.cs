@@ -95,7 +95,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public static bool HasCustomModifiers(
             this TypeSymbol type,
             bool flagNonDefaultArraySizesOrLowerBounds
-        ) {
+        )
+        {
             if ((object)type == null)
             {
                 return false;
@@ -135,7 +136,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             funcPtr.Signature.ReturnTypeWithAnnotations,
                             flagNonDefaultArraySizesOrLowerBounds
                         )
-                    ) {
+                    )
+                    {
                         return true;
                     }
 
@@ -147,7 +149,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 param.TypeWithAnnotations,
                                 flagNonDefaultArraySizesOrLowerBounds
                             )
-                        ) {
+                        )
+                        {
                             return true;
                         }
                     }
@@ -174,7 +177,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                         typeArg,
                                         flagNonDefaultArraySizesOrLowerBounds
                                     )
-                                ) {
+                                )
+                                {
                                     return true;
                                 }
                             }
@@ -221,7 +225,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ConsList<TypeSymbol> basesBeingResolved,
             CSharpCompilation compilation,
             ref PooledHashSet<NamedTypeSymbol> visited
-        ) {
+        )
+        {
             switch (type.TypeKind)
             {
                 case TypeKind.TypeParameter:
@@ -251,14 +256,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ConsList<TypeSymbol> basesBeingResolved,
             CSharpCompilation compilation,
             ref PooledHashSet<NamedTypeSymbol> visited
-        ) {
+        )
+        {
             // We shouldn't have visited this type earlier.
             Debug.Assert(visited == null || !visited.Contains(type.OriginalDefinition));
 
             if (
                 basesBeingResolved != null
                 && basesBeingResolved.ContainsReference(type.OriginalDefinition)
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -299,7 +306,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         private static void SetKnownToHaveNoDeclaredBaseCycles(
             ref PooledHashSet<NamedTypeSymbol> visited
-        ) {
+        )
+        {
             if (visited != null)
             {
                 foreach (var v in visited)
@@ -315,7 +323,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private static NamedTypeSymbol GetDefaultBaseOrNull(
             NamedTypeSymbol type,
             CSharpCompilation compilation
-        ) {
+        )
+        {
             if (compilation == null)
             {
                 return null;

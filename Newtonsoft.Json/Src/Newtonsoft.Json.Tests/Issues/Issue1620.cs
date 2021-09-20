@@ -99,7 +99,8 @@ namespace Newtonsoft.Json.Tests.Issues
                 JsonWriter writer,
                 object value,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 writer.WriteValue("foo");
             }
 
@@ -108,7 +109,8 @@ namespace Newtonsoft.Json.Tests.Issues
                 Type objectType,
                 object existingValue,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 return new Foo();
             }
 

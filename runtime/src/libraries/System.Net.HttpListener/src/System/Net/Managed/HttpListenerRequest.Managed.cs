@@ -266,7 +266,8 @@ namespace System.Net
                 if (
                     string.Equals(_method, "POST", StringComparison.OrdinalIgnoreCase)
                     || string.Equals(_method, "PUT", StringComparison.OrdinalIgnoreCase)
-                ) {
+                )
+                {
                     _context.Connection.SendError(null, 411);
                     return;
                 }
@@ -278,7 +279,8 @@ namespace System.Net
                     "100-continue",
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 HttpResponseStream output = _context.Connection.GetResponseStream();
                 output.InternalWrite(s_100continue, 0, s_100continue.Length);
             }
@@ -442,7 +444,8 @@ namespace System.Net
         private IAsyncResult BeginGetClientCertificateCore(
             AsyncCallback? requestCallback,
             object? state
-        ) {
+        )
+        {
             var asyncResult = new GetClientCertificateAsyncResult(this, state, requestCallback);
 
             // The certificate is already retrieved by the time this method is called. GetClientCertificateCore() evaluates to

@@ -77,7 +77,8 @@ namespace System.Net.Mail.Tests
                         tempFile.Path,
                         new Mime.ContentType(mediaType)
                     )
-                ) {
+                )
+                {
                     Assert.Equal(shortName, attach.Name);
                     Assert.Equal(mediaType, attach.ContentType.MediaType);
                 }

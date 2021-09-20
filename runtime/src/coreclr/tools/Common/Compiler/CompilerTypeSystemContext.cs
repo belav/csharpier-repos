@@ -97,7 +97,8 @@ namespace ILCompiler
         public override ModuleDesc ResolveAssembly(
             System.Reflection.AssemblyName name,
             bool throwIfNotFound
-        ) {
+        )
+        {
             // TODO: catch typesystem BadImageFormatException and throw a new one that also captures the
             // assembly name that caused the failure. (Along with the reason, which makes this rather annoying).
             return GetModuleForSimpleName(name.Name, throwIfNotFound);
@@ -151,7 +152,8 @@ namespace ILCompiler
         public static unsafe PEReader OpenPEFile(
             string filePath,
             out MemoryMappedViewAccessor mappedViewAccessor
-        ) {
+        )
+        {
             // System.Reflection.Metadata has heuristic that tries to save virtual address space. This heuristic does not work
             // well for us since it can make IL access very slow (call to OS for each method IL query). We will map the file
             // ourselves to get the desired performance characteristics reliably.
@@ -280,7 +282,8 @@ namespace ILCompiler
 
         protected override RuntimeInterfacesAlgorithm GetRuntimeInterfacesAlgorithmForDefType(
             DefType type
-        ) {
+        )
+        {
             return _metadataRuntimeInterfacesAlgorithm;
         }
 
@@ -295,7 +298,8 @@ namespace ILCompiler
             Instantiation instantiation,
             CanonicalFormKind kind,
             out bool changed
-        ) {
+        )
+        {
             if (_genericsMode == SharedGenericsMode.CanonicalReferenceTypes)
                 return RuntimeDeterminedCanonicalizationAlgorithm.ConvertInstantiationToCanonForm(
                     instantiation,
@@ -323,7 +327,8 @@ namespace ILCompiler
         protected override TypeDesc ConvertToCanon(
             TypeDesc typeToConvert,
             ref CanonicalFormKind kind
-        ) {
+        )
+        {
             if (_genericsMode == SharedGenericsMode.CanonicalReferenceTypes)
                 return RuntimeDeterminedCanonicalizationAlgorithm.ConvertToCanon(
                     typeToConvert,

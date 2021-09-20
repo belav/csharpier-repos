@@ -46,7 +46,8 @@ namespace System.Diagnostics.Tests
                             ThreadPriorityLevel.BelowNormal,
                             ThreadPriorityLevel.Normal
                         }
-                    ) {
+                    )
+                    {
                         targetThread.PriorityLevel = ThreadPriorityLevel.AboveNormal;
                         Assert.Equal(ThreadPriorityLevel.AboveNormal, targetThread.PriorityLevel);
                     }

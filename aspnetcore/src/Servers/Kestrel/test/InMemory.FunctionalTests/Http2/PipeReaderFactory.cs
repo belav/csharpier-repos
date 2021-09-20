@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.Http2
             PipeOptions options,
             Stream stream,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!stream.CanRead)
             {
                 throw new NotSupportedException();
@@ -35,7 +36,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.Http2
             Stream stream,
             Pipe pipe,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // We manually register for cancellation here in case the Stream implementation ignores it
             using (var registration = cancellationToken.Register(_cancelReader, pipe.Reader))
             {

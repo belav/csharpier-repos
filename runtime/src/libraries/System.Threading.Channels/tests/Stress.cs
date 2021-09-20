@@ -73,7 +73,8 @@ namespace System.Threading.Channels.Tests
                                 foreach (bool singleWriter in new[] { false, true })
                                     foreach (
                                         bool allowSynchronousContinuations in new[] { false, true }
-                                    ) {
+                                    )
+                                    {
                                         Func<ChannelOptions, Channel<int>> bounded = o =>
                                             Channel.CreateBounded<int>((BoundedChannelOptions)o);
                                         yield return new object[]
@@ -172,7 +173,8 @@ namespace System.Threading.Channels.Tests
             ChannelOptions options,
             Func<ChannelReader<int>, Task<bool>> readDelegate,
             Func<ChannelWriter<int>, int, Task> writeDelegate
-        ) {
+        )
+        {
             Channel<int> channel = channelCreator(options);
             ChannelReader<int> reader = channel.Reader;
             ChannelWriter<int> writer = channel.Writer;

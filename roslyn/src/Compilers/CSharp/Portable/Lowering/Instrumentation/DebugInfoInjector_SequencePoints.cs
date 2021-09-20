@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal static BoundStatement AddSequencePoint(
             VariableDeclaratorSyntax declaratorSyntax,
             BoundStatement rewrittenStatement
-        ) {
+        )
+        {
             SyntaxNode node;
             TextSpan? part;
             GetBreakpointSpan(declaratorSyntax, out node, out part);
@@ -35,7 +36,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal static BoundStatement AddSequencePoint(
             PropertyDeclarationSyntax declarationSyntax,
             BoundStatement rewrittenStatement
-        ) {
+        )
+        {
             Debug.Assert(declarationSyntax.Initializer != null);
             int start = declarationSyntax.Initializer.Value.SpanStart;
             int end = declarationSyntax.Initializer.Span.End;
@@ -49,7 +51,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal static BoundStatement AddSequencePoint(
             UsingStatementSyntax usingSyntax,
             BoundStatement rewrittenStatement
-        ) {
+        )
+        {
             int start = usingSyntax.Span.Start;
             int end = usingSyntax.CloseParenToken.Span.End;
             TextSpan span = TextSpan.FromBounds(start, end);
@@ -58,7 +61,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private static TextSpan CreateSpanForConstructorInitializer(
             ConstructorDeclarationSyntax constructorSyntax
-        ) {
+        )
+        {
             if (constructorSyntax.Initializer != null)
             {
                 //  [SomeAttribute] public MyCtorName(params int[] values): [|base()|] { ... }
@@ -87,7 +91,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxTokenList startOpt,
             SyntaxNodeOrToken startFallbackOpt,
             SyntaxNodeOrToken endOpt
-        ) {
+        )
+        {
             Debug.Assert(
                 startFallbackOpt != default(SyntaxNodeOrToken)
                     || endOpt != default(SyntaxNodeOrToken)
@@ -136,7 +141,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             VariableDeclaratorSyntax declaratorSyntax,
             out SyntaxNode node,
             out TextSpan? part
-        ) {
+        )
+        {
             var declarationSyntax = (VariableDeclarationSyntax)declaratorSyntax.Parent;
 
             if (declarationSyntax.Variables.First() == declaratorSyntax)
@@ -204,7 +210,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             VariableDeclaratorSyntax declaratorSyntax,
             out SyntaxNode node,
             out TextSpan? part
-        ) {
+        )
+        {
             var declarationSyntax = (VariableDeclarationSyntax)declaratorSyntax.Parent;
 
             // The first token may be a modifier (like public) or using or await
@@ -232,7 +239,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression condition,
             SyntaxNode synthesizedVariableSyntax,
             SyntheticBoundNodeFactory factory
-        ) {
+        )
+        {
             if (!factory.Compilation.Options.EnableEditAndContinue)
             {
                 return condition;

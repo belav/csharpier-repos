@@ -83,7 +83,8 @@ namespace System.Reflection.Metadata
         /// </summary>
         public CustomAttributeValue<TType> DecodeValue<TType>(
             ICustomAttributeTypeProvider<TType> provider
-        ) {
+        )
+        {
             var decoder = new CustomAttributeDecoder<TType>(provider, _reader);
             return decoder.DecodeValue(Constructor, Value);
         }

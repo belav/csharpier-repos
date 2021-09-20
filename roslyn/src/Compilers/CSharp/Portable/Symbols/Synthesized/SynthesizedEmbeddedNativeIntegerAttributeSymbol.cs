@@ -96,7 +96,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private void GenerateParameterlessConstructorBody(
             SyntheticBoundNodeFactory factory,
             ArrayBuilder<BoundStatement> statements
-        ) {
+        )
+        {
             statements.Add(
                 factory.ExpressionStatement(
                     factory.AssignmentExpression(
@@ -114,7 +115,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             SyntheticBoundNodeFactory factory,
             ArrayBuilder<BoundStatement> statements,
             ImmutableArray<ParameterSymbol> parameters
-        ) {
+        )
+        {
             statements.Add(
                 factory.ExpressionStatement(
                     factory.AssignmentExpression(

@@ -89,7 +89,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics,
             Binder originalBinder,
             TypeSymbol targetTypeOpt = null
-        ) {
+        )
+        {
             if (_lazyExpressionAndDiagnostics == null)
             {
                 // Filter out method group in conversion.
@@ -149,7 +150,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             public ExpressionAndDiagnostics(
                 BoundExpression expression,
                 ImmutableBindingDiagnostic<AssemblySymbol> diagnostics
-            ) {
+            )
+            {
                 this.Expression = expression;
                 this.Diagnostics = diagnostics;
             }

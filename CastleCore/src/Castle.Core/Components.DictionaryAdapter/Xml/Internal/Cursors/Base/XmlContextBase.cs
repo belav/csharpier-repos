@@ -129,7 +129,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             IXmlNode node,
             string namespaceUri,
             out string prefix
-        ) {
+        )
+        {
             var definedPrefix = node.LookupPrefix(namespaceUri);
             return string.IsNullOrEmpty(definedPrefix)
               ? Try.Failure(out prefix)
@@ -261,7 +262,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             string prefix,
             string name,
             XPathResultType[] argTypes
-        ) {
+        )
+        {
             return functions != null
               ? ResolveFunctionCore(prefix, name, argTypes)
               : parent != null ? parent.ResolveFunction(prefix, name, argTypes) : null;
@@ -279,7 +281,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             string prefix,
             string name,
             XPathResultType[] argTypes
-        ) {
+        )
+        {
             IXsltContextFunction function;
             var key = new XmlName(name, prefix ?? string.Empty);
             functions.TryGetValue(key, out function);

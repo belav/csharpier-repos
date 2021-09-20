@@ -64,7 +64,8 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
             string localSettingsDirectory,
             ISymbolSearchLogService logService,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Only the first thread to try to update this source should succeed
             // and cause us to actually begin the update loop.
             var ourSentinel = new object();
@@ -98,7 +99,8 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
                 ISymbolSearchLogService logService,
                 string source,
                 string localSettingsDirectory
-            ) {
+            )
+            {
                 _service = service;
                 _source = source;
                 _logService = logService;
@@ -194,7 +196,8 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
             /// <returns>The timespan the caller should wait until calling this method again.</returns>
             private async Task<TimeSpan> UpdateDatabaseInBackgroundWorkerAsync(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // Attempt to update the local db if we have one, or download a full db
                 // if we don't.  In the event of any error back off a minute and try
                 // again.  Lot of errors are possible here as IO/network/other-libraries
@@ -286,7 +289,8 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
             private async Task<TimeSpan> DownloadFullDatabaseAsync(
                 FileInfo databaseFileInfo,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var (_, delay) = await DownloadFullDatabaseWorkerAsync(
                         databaseFileInfo,
                         cancellationToken
@@ -298,7 +302,8 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
             private async Task<(bool succeeded, TimeSpan delay)> DownloadFullDatabaseWorkerAsync(
                 FileInfo databaseFileInfo,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var serverPath = Invariant(
                     $"Elfie_V{AddReferenceDatabaseTextFileFormatVersion}/Latest.xml"
                 );
@@ -330,7 +335,8 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
                 FileInfo databaseFileInfo,
                 XElement element,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 await LogInfoAsync("Processing full database element", cancellationToken)
                     .ConfigureAwait(false);
 
@@ -400,7 +406,8 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
                 FileInfo databaseFileInfo,
                 byte[] bytes,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 await LogInfoAsync("Writing database file", cancellationToken)
                     .ConfigureAwait(false);
 
@@ -485,7 +492,8 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
             private async Task<TimeSpan> PatchLocalDatabaseAsync(
                 FileInfo databaseFileInfo,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 await LogInfoAsync("Patching local database", cancellationToken)
                     .ConfigureAwait(false);
 
@@ -565,7 +573,8 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
             private async Task<AddReferenceDatabase> CreateAndSetInMemoryDatabaseAsync(
                 byte[] bytes,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var database = await CreateDatabaseFromBytesAsync(bytes, cancellationToken)
                     .ConfigureAwait(false);
                 _service._sourceToDatabase[_source] = new AddReferenceDatabaseWrapper(database);
@@ -577,7 +586,8 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
                 XElement patchElement,
                 byte[] databaseBytes,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 try
                 {
                     await LogInfoAsync("Processing patch element", cancellationToken)
@@ -620,7 +630,8 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
                 XElement patchElement,
                 byte[] databaseBytes,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 ParsePatchElement(
                     patchElement,
                     out var upToDate,
@@ -672,7 +683,8 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
                 out bool upToDate,
                 out bool tooOld,
                 out byte[] patchBytes
-            ) {
+            )
+            {
                 patchBytes = null;
 
                 var upToDateAttribute = patchElement.Attribute(UpToDateAttributeName);
@@ -702,7 +714,8 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
             private async Task<AddReferenceDatabase> CreateDatabaseFromBytesAsync(
                 byte[] bytes,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 await LogInfoAsync("Creating database from bytes", cancellationToken)
                     .ConfigureAwait(false);
                 var result = _service._databaseFactoryService.CreateDatabaseFromBytes(bytes);
@@ -714,7 +727,8 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
             private async Task<XElement> DownloadFileAsync(
                 string serverPath,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 await LogInfoAsync("Creating download client: " + serverPath, cancellationToken)
                     .ConfigureAwait(false);
 
@@ -768,7 +782,8 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
             private async Task<XElement> TryDownloadFileAsync(
                 IRemoteControlClient client,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 await LogInfoAsync("Read file from client", cancellationToken)
                     .ConfigureAwait(false);
 
@@ -849,7 +864,8 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
             private async Task<(bool succeeded, byte[] contentBytes)> TryParseDatabaseElementAsync(
                 XElement element,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 await LogInfoAsync("Parsing database element", cancellationToken)
                     .ConfigureAwait(false);
                 var contentsAttribute = element.Attribute(ContentAttributeName);
@@ -898,7 +914,8 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
             private async Task<byte[]> ConvertContentAttributeAsync(
                 XAttribute contentsAttribute,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var text = contentsAttribute.Value;
                 var compressedBytes = Convert.FromBase64String(text);
 

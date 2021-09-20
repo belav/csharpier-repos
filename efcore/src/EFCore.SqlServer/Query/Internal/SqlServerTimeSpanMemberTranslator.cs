@@ -52,7 +52,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             MemberInfo member,
             Type returnType,
             IDiagnosticsLogger<DbLoggerCategory.Query> logger
-        ) {
+        )
+        {
             Check.NotNull(member, nameof(member));
             Check.NotNull(returnType, nameof(returnType));
             Check.NotNull(logger, nameof(logger));
@@ -60,7 +61,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             if (
                 member.DeclaringType == typeof(TimeSpan)
                 && _datePartMappings.TryGetValue(member.Name, out var value)
-            ) {
+            )
+            {
                 return _sqlExpressionFactory.Function(
                     "DATEPART",
                     new[] { _sqlExpressionFactory.Fragment(value), instance! },

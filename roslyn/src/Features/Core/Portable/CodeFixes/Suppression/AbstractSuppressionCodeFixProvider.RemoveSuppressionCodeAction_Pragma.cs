@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                     Document document,
                     Diagnostic diagnostic,
                     AbstractSuppressionCodeFixProvider fixer
-                ) {
+                )
+                {
                     // We need to normalize the leading trivia on start token to account for
                     // the trailing trivia on its previous token (and similarly normalize trailing trivia for end token).
                     PragmaHelpers.NormalizeTriviaOnTokens(
@@ -87,7 +88,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                     bool includeStartTokenChange,
                     bool includeEndTokenChange,
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     var add = false;
                     var toggle = false;
 
@@ -108,7 +110,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                             isStartToken: false,
                             indexOfTriviaToRemove: out indexOfTrailingPragmaEnableToRemove
                         )
-                    ) {
+                    )
+                    {
                         // Verify if there is no other trivia before the start token would again cause this diagnostic to be suppressed.
                         // If invalidated, then we just toggle existing pragma enable and disable directives before and start of the line.
                         // If not, then we just remove the existing pragma trivia surrounding the line.
@@ -169,7 +172,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                     SyntaxToken token,
                     bool isStartToken,
                     AbstractSuppressionCodeFixProvider fixer
-                ) {
+                )
+                {
                     return isStartToken || fixer.IsEndOfFileToken(token)
                       ? token.LeadingTrivia
                       : token.TrailingTrivia;
@@ -180,7 +184,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                     bool isStartToken,
                     SyntaxTriviaList triviaList,
                     AbstractSuppressionCodeFixProvider fixer
-                ) {
+                )
+                {
                     return isStartToken || fixer.IsEndOfFileToken(token)
                       ? token.WithLeadingTrivia(triviaList)
                       : token.WithTrailingTrivia(triviaList);
@@ -192,7 +197,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                     AbstractSuppressionCodeFixProvider fixer,
                     bool isStartToken,
                     out int indexOfTriviaToRemove
-                ) {
+                )
+                {
                     indexOfTriviaToRemove = -1;
 
                     var triviaList = GetTriviaListForSuppression(token, isStartToken, fixer);
@@ -218,7 +224,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                                 out var isEnableDirective,
                                 out var hasMultipleIds
                             )
-                        ) {
+                        )
+                        {
                             if (hasMultipleIds)
                             {
                                 // Handle only simple cases where we have a single pragma directive with single ID matching ours in the trivia.
@@ -229,7 +236,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                             if (
                                 (isStartToken && !isEnableDirective)
                                 || (!isStartToken && isEnableDirective)
-                            ) {
+                            )
+                            {
                                 indexOfTriviaToRemove = triviaList.IndexOf(trivia);
                                 return true;
                             }
@@ -248,7 +256,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                     bool toggle,
                     int indexOfTriviaToRemoveOrToggle,
                     bool isStartToken
-                ) {
+                )
+                {
                     return add
                       ? GetNewTokenWithAddedPragma(token, currentDiagnosticSpan, isStartToken)
                       : GetNewTokenWithRemovedOrToggledPragma(
@@ -263,7 +272,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                     SyntaxToken token,
                     TextSpan currentDiagnosticSpan,
                     bool isStartToken
-                ) {
+                )
+                {
                     if (isStartToken)
                     {
                         return PragmaHelpers.GetNewStartTokenWithAddedPragma(
@@ -308,7 +318,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                     AbstractSuppressionCodeFixProvider fixer,
                     bool isStartToken,
                     bool toggle
-                ) {
+                )
+                {
                     Contract.ThrowIfFalse(indexOfTriviaToRemoveOrToggle >= 0);
 
                     var triviaList = GetTriviaListForSuppression(token, isStartToken, fixer);
@@ -331,7 +342,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 private async Task<bool> IsDiagnosticSuppressedBeforeLeadingPragmaAsync(
                     int indexOfPragma,
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     var model = await _document.GetSemanticModelAsync(cancellationToken)
                         .ConfigureAwait(false);
                     var tree = model.SyntaxTree;

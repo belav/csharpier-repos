@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.StaticFiles
         public static async Task<IHost> Create(
             Action<IApplicationBuilder> configureApp,
             Action<IServiceCollection> configureServices = null
-        ) {
+        )
+        {
             Action<IServiceCollection> defaultConfigureServices = services => { };
             var configuration = new ConfigurationBuilder().AddInMemoryCollection(
                     new[] { new KeyValuePair<string, string>("webroot", ".") }

@@ -46,7 +46,8 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption
         internal ManagedAuthenticatedEncryptor? CreateAuthenticatedEncryptorInstance(
             ISecret secret,
             ManagedAuthenticatedEncryptorConfiguration? configuration
-        ) {
+        )
+        {
             if (configuration == null)
             {
                 return null;
@@ -62,7 +63,8 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption
 
         private Func<KeyedHashAlgorithm> GetKeyedHashAlgorithmFactory(
             ManagedAuthenticatedEncryptorConfiguration configuration
-        ) {
+        )
+        {
             // basic argument checking
             if (configuration.ValidationAlgorithmType == null)
             {
@@ -90,7 +92,8 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption
 
         private Func<SymmetricAlgorithm> GetSymmetricBlockCipherAlgorithmFactory(
             ManagedAuthenticatedEncryptorConfiguration configuration
-        ) {
+        )
+        {
             // basic argument checking
             if (configuration.EncryptionAlgorithmType == null)
             {

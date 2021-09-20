@@ -60,7 +60,8 @@ class Program
         if (
             typeof(MyStructWithVirtuals).GetMethod("ToString").DeclaringType
             == typeof(MyStructWithVirtuals)
-        ) {
+        )
+        {
             // Make sure the constrained call to ToString doesn't box
             var mystruct = new MyStructWithVirtuals();
             mystruct.ToString();

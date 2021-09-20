@@ -20,7 +20,8 @@ namespace System.Globalization.Tests
         public void CurrencyPositivePattern_Get_ReturnsExpected(
             NumberFormatInfo format,
             int expected
-        ) {
+        )
+        {
             Assert.Equal(expected, format.CurrencyPositivePattern);
         }
 

@@ -130,7 +130,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override TResult Accept<TArgument, TResult>(
             CSharpSymbolVisitor<TArgument, TResult> visitor,
             TArgument argument
-        ) {
+        )
+        {
             return visitor.VisitNamespace(this, argument);
         }
 
@@ -332,7 +333,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             string nameOpt,
             int arity,
             LookupOptions options
-        ) {
+        )
+        {
             var assembly = this.ContainingAssembly;
 
             // Only MergedAssemblySymbol should have a null ContainingAssembly

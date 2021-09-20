@@ -30,11 +30,13 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
 
         private static JsonSerializerOptions GetHtmlSafeSerializerOptions(
             JsonSerializerOptions serializerOptions
-        ) {
+        )
+        {
             if (
                 serializerOptions.Encoder is null
                 || serializerOptions.Encoder == JavaScriptEncoder.Default
-            ) {
+            )
+            {
                 return serializerOptions;
             }
 

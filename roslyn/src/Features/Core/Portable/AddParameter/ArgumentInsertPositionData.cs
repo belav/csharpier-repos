@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.AddParameter
             IMethodSymbol methodToUpdate,
             TArgumentSyntax argumentToInsert,
             int argumentInsertionIndex
-        ) {
+        )
+        {
             MethodToUpdate = methodToUpdate;
             ArgumentToInsert = argumentToInsert;
             ArgumentInsertionIndex = argumentInsertionIndex;

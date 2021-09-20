@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.AddImport
             protected Reference(
                 AbstractAddImportFeatureService<TSimpleNameSyntax> provider,
                 SearchResult searchResult
-            ) {
+            )
+            {
                 this.provider = provider;
                 SearchResult = searchResult;
             }
@@ -85,7 +86,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                 SyntaxNode contextNode,
                 Document document,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (!SearchResult.DesiredNameDiffersFromSourceName())
                 {
                     return (contextNode, document);
@@ -126,7 +128,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                 bool placeSystemNamespaceFirst,
                 bool allowInHiddenRegions,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var originalDocument = document;
 
                 (node, document) = await ReplaceNameNodeAsync(node, document, cancellationToken)

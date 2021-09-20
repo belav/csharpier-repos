@@ -12,7 +12,8 @@ namespace System.Net
         internal static string? GetAuthenticationPackageName(
             SafeHandle safeHandle,
             int negotiationState
-        ) {
+        )
+        {
             if (safeHandle.IsInvalid)
             {
                 if (NetEventSource.Log.IsEnabled())
@@ -34,7 +35,8 @@ namespace System.Net
                 if (
                     negotiationState == Interop.SspiCli.SECPKG_NEGOTIATION_COMPLETE
                     || negotiationState == Interop.SspiCli.SECPKG_NEGOTIATION_OPTIMISTIC
-                ) {
+                )
+                {
                     string? name;
                     unsafe
                     {

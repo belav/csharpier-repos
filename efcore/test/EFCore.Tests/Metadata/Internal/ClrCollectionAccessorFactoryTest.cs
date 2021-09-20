@@ -254,7 +254,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             string navigationName,
             Func<MyEntity, IEnumerable<MyOtherEntity>> reader,
             bool initializeCollections = true
-        ) {
+        )
+        {
             var accessor = new ClrCollectionAccessorFactory().Create(
                 CreateNavigation(navigationName)
             );
@@ -357,7 +358,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
         private void Enumerable_backed_by_non_collection_throws(
             Action<IClrCollectionAccessor, MyEntity, MyOtherEntity> test
-        ) {
+        )
+        {
             var accessor = new ClrCollectionAccessorFactory().Create(
                 CreateNavigation("AsIEnumerableNotCollection")
             );

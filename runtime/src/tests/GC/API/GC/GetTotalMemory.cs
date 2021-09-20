@@ -23,7 +23,8 @@ namespace DefaultNamespace
             if (
                 (heapSizeAfterAlloc - heapSizeBeforeAlloc) + i * padding <= i * MB
                 || (heapSizeAfterAlloc - heapSizeBeforeAlloc) > (i + 1) * MB
-            ) {
+            )
+            {
                 Console.WriteLine("Test Failed");
                 return false;
             }

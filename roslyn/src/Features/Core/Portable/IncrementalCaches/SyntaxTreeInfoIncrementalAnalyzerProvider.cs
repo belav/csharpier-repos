@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.IncrementalCaches
                 Document document,
                 InvocationReasons reasons,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (!document.SupportsSyntaxTree)
                 {
                     // Not a language we can produce indices for (i.e. TypeScript).  Bail immediately.

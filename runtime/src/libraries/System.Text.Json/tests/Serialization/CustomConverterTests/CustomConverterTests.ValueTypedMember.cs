@@ -23,7 +23,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 ReadCallCount++;
 
                 string value = reader.GetString();
@@ -56,7 +57,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 IMemberInterface value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 WriteCallCount++;
 
                 JsonSerializer.Serialize<string>(
@@ -83,7 +85,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 ReadCallCount++;
 
                 string value = reader.GetString();
@@ -116,7 +119,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 object value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 WriteCallCount++;
 
                 JsonSerializer.Serialize<string>(

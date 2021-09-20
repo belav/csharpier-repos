@@ -14,7 +14,8 @@ namespace System.DirectoryServices.Protocols
             ResultCode result,
             string message,
             Uri[] referral
-        ) {
+        )
+        {
             MatchedDN = dn;
             _directoryControls = controls;
             ResultCode = result;

@@ -108,7 +108,8 @@ class C
                     source,
                     composition: s_compositionWithMockDiagnosticUpdateSourceRegistrationService
                 )
-            ) {
+            )
+            {
                 var analyzerReference = new AnalyzerImageReference(
                     ImmutableArray.Create<DiagnosticAnalyzer>(ideEngineAnalyzer)
                 );
@@ -406,7 +407,8 @@ class C
                     source,
                     composition: s_compositionWithMockDiagnosticUpdateSourceRegistrationService
                 )
-            ) {
+            )
+            {
                 var analyzerReference = new AnalyzerImageReference(
                     ImmutableArray.Create<DiagnosticAnalyzer>(analyzer)
                 );
@@ -446,7 +448,8 @@ class C
                     source,
                     composition: s_compositionWithMockDiagnosticUpdateSourceRegistrationService
                 )
-            ) {
+            )
+            {
                 var compilerEngineCompilation =
                     (CSharpCompilation)compilerEngineWorkspace.CurrentSolution.Projects.Single()
                         .GetRequiredCompilationAsync(CancellationToken.None).Result;
@@ -475,7 +478,8 @@ class C
 
             public void CreateAnalyzerWithinCodeBlock(
                 CodeBlockStartAnalysisContext<SyntaxKind> context
-            ) {
+            )
+            {
                 var blockAnalyzer = new CodeBlockAnalyzer();
                 context.RegisterCodeBlockEndAction(CodeBlockAnalyzer.AnalyzeCodeBlock);
                 context.RegisterSyntaxNodeAction(
@@ -1042,7 +1046,8 @@ class C
             ImmutableArray<VsixSuppressor> vsixSuppressors,
             bool expectedVsixSuppressorsExecuted,
             params (DiagnosticDescription diagnostic, string message)[] expectedDiagnostics
-        ) {
+        )
+        {
             // First clear out the analyzer state for all analyzers.
             foreach (var nugetAnalyzer in nugetAnalyzers)
             {
@@ -1171,7 +1176,8 @@ class C
             private static ImmutableArray<DiagnosticDescriptor> CreateSupportedDiagnostics(
                 string analyzerName,
                 string[] reportedIds
-            ) {
+            )
+            {
                 var builder = ArrayBuilder<DiagnosticDescriptor>.GetInstance(reportedIds.Length);
                 foreach (var id in reportedIds)
                 {
@@ -1237,7 +1243,8 @@ class C
                 string analyzerName,
                 Dictionary<string, SuppressionDescriptor> mapping,
                 string[] reportedIds
-            ) {
+            )
+            {
                 var builder = ArrayBuilder<SuppressionDescriptor>.GetInstance(reportedIds.Length);
                 foreach (var id in reportedIds)
                 {

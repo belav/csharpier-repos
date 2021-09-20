@@ -27,7 +27,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification.Fakes
             IFactoryService factoryService,
             IFakeService fakeService,
             IFakeScopedService scopedService
-        ) {
+        )
+        {
             MultipleService = multipleService;
             FactoryService = factoryService;
             Service = fakeService;

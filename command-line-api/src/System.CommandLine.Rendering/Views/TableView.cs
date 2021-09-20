@@ -119,7 +119,8 @@ namespace System.CommandLine.Rendering.Views
                 Func<TItem, T> cellValue,
                 View header,
                 ColumnDefinition columnDefinition
-            ) {
+            )
+            {
                 Header = header;
                 ColumnDefinition =
                     columnDefinition ?? throw new ArgumentNullException(nameof(columnDefinition));

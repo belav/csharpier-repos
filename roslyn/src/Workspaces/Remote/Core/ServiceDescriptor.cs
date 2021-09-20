@@ -34,13 +34,15 @@ namespace Microsoft.CodeAnalysis.Remote
             RemoteSerializationOptions serializationOptions,
             Func<string, string> displayNameProvider,
             Type? clientInterface
-        ) : base(
-            serviceMoniker,
-            clientInterface,
-            serializationOptions.Formatter,
-            serializationOptions.MessageDelimiters,
-            serializationOptions.MultiplexingStreamOptions
-        ) {
+        )
+            : base(
+                serviceMoniker,
+                clientInterface,
+                serializationOptions.Formatter,
+                serializationOptions.MessageDelimiters,
+                serializationOptions.MultiplexingStreamOptions
+            )
+        {
             _featureDisplayNameProvider = displayNameProvider;
             _serializationOptions = serializationOptions;
         }

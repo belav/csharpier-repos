@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal BoundSwitchExpressionArm BindSwitchExpressionArm(
             SwitchExpressionArmSyntax node,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             Debug.Assert(node == _arm);
             (TypeSymbol inputType, uint valEscape) =
                 _switchExpressionBinder.GetInputTypeAndValEscape();
@@ -45,7 +46,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol switchGoverningType,
             uint switchGoverningValEscape,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             Debug.Assert(node == _arm);
             Binder armBinder = this.GetRequiredBinder(node);
             bool hasErrors = switchGoverningType.IsErrorType();

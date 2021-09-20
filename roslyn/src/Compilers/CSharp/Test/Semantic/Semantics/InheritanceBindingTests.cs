@@ -12085,7 +12085,8 @@ class A<T> : global::T
             string text,
             ErrorDescription[] expectedErrors,
             params CSharpCompilation[] baseCompilations
-        ) {
+        )
+        {
             var refs = new List<MetadataReference>(
                 baseCompilations.Select(c => new CSharpCompilationReference(c))
             );
@@ -12104,7 +12105,8 @@ class A<T> : global::T
             string text2,
             ErrorDescription[] expectedErrors1,
             ErrorDescription[] expectedErrors2
-        ) {
+        )
+        {
             var comp1 = CompileAndVerifyDiagnostics(text1, expectedErrors1);
             var comp2 = CompileAndVerifyDiagnostics(text2, expectedErrors2, comp1);
             return comp2;

@@ -104,7 +104,8 @@ namespace System.Net.Http.Tests
             int startIndex,
             NameValueWithParametersHeaderValue expectedResult,
             int expectedIndex
-        ) {
+        )
+        {
             HttpHeaderParser parser =
                 GenericHeaderParser.MultipleValueNameValueWithParametersParser;
             object result = null;

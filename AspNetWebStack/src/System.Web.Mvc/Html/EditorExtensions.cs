@@ -27,7 +27,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper html,
             string expression,
             object additionalViewData
-        ) {
+        )
+        {
             return TemplateHelpers.Template(
                 html,
                 expression,
@@ -44,7 +45,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper html,
             string expression,
             string templateName
-        ) {
+        )
+        {
             return TemplateHelpers.Template(
                 html,
                 expression,
@@ -61,7 +63,8 @@ namespace System.Web.Mvc.Html
             string expression,
             string templateName,
             object additionalViewData
-        ) {
+        )
+        {
             return TemplateHelpers.Template(
                 html,
                 expression,
@@ -78,7 +81,8 @@ namespace System.Web.Mvc.Html
             string expression,
             string templateName,
             string htmlFieldName
-        ) {
+        )
+        {
             return TemplateHelpers.Template(
                 html,
                 expression,
@@ -95,7 +99,8 @@ namespace System.Web.Mvc.Html
             string templateName,
             string htmlFieldName,
             object additionalViewData
-        ) {
+        )
+        {
             return TemplateHelpers.Template(
                 html,
                 expression,
@@ -114,7 +119,8 @@ namespace System.Web.Mvc.Html
         public static MvcHtmlString EditorFor<TModel, TValue>(
             this HtmlHelper<TModel> html,
             Expression<Func<TModel, TValue>> expression
-        ) {
+        )
+        {
             return TemplateHelpers.TemplateFor(
                 html,
                 expression,
@@ -136,7 +142,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper<TModel> html,
             Expression<Func<TModel, TValue>> expression,
             object additionalViewData
-        ) {
+        )
+        {
             return TemplateHelpers.TemplateFor(
                 html,
                 expression,
@@ -158,7 +165,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper<TModel> html,
             Expression<Func<TModel, TValue>> expression,
             string templateName
-        ) {
+        )
+        {
             return TemplateHelpers.TemplateFor(
                 html,
                 expression,
@@ -180,7 +188,8 @@ namespace System.Web.Mvc.Html
             Expression<Func<TModel, TValue>> expression,
             string templateName,
             object additionalViewData
-        ) {
+        )
+        {
             return TemplateHelpers.TemplateFor(
                 html,
                 expression,
@@ -202,7 +211,8 @@ namespace System.Web.Mvc.Html
             Expression<Func<TModel, TValue>> expression,
             string templateName,
             string htmlFieldName
-        ) {
+        )
+        {
             return TemplateHelpers.TemplateFor(
                 html,
                 expression,
@@ -224,7 +234,8 @@ namespace System.Web.Mvc.Html
             string templateName,
             string htmlFieldName,
             object additionalViewData
-        ) {
+        )
+        {
             return TemplateHelpers.TemplateFor(
                 html,
                 expression,
@@ -283,7 +294,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper html,
             string templateName,
             object additionalViewData
-        ) {
+        )
+        {
             return MvcHtmlString.Create(
                 TemplateHelpers.TemplateHelper(
                     html,
@@ -300,7 +312,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper html,
             string templateName,
             string htmlFieldName
-        ) {
+        )
+        {
             return MvcHtmlString.Create(
                 TemplateHelpers.TemplateHelper(
                     html,
@@ -318,7 +331,8 @@ namespace System.Web.Mvc.Html
             string templateName,
             string htmlFieldName,
             object additionalViewData
-        ) {
+        )
+        {
             return MvcHtmlString.Create(
                 TemplateHelpers.TemplateHelper(
                     html,

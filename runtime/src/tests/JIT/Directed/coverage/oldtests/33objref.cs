@@ -72,7 +72,8 @@ internal class Test33objref
         ratnl a31,
         ratnl a32,
         ratnl a33
-    ) {
+    )
+    {
         ratnl result =
             (
                 (a1 * a2 + a3 * a4 + a5 * a6 + a7 * a8 + a9 * a10)
@@ -129,7 +130,8 @@ internal class Test33objref
         ratnl a31,
         ratnl a32,
         ratnl a33
-    ) {
+    )
+    {
         return (
                 (
                     a1.p_nmr * a2.p_nmr
@@ -192,7 +194,8 @@ internal class Test33objref
         ratnl a31,
         ratnl a32,
         ratnl a33
-    ) {
+    )
+    {
         return (
                 (
                     a1.p_dnm * a2.p_dnm
@@ -255,7 +258,8 @@ internal class Test33objref
         ref long a31,
         ref long a32,
         ref long a33
-    ) {
+    )
+    {
         return (
                 (a1 * a2 + a3 * a4 + a5 * a6 + a7 * a8 + a9 * a10)
                     * (a11 - a12)

@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             ReadOnlyCollection<string> formatSpecifiers,
             DkmEvaluationResultFlags flags,
             string editableValue
-        ) {
+        )
+        {
             Debug.Assert((inspectionContext.EvaluationFlags & DkmEvaluationFlags.NoExpansion) == 0);
 
             // Note: The native EE uses the proxy type, even for
@@ -117,7 +118,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmEvaluationResultFlags flags,
             string editableValue,
             ResultProvider resultProvider
-        ) {
+        )
+        {
             Debug.Assert(proxyValue != null);
             var proxyType = proxyValue.Type;
             var proxyTypeAndInfo = new TypeAndCustomInfo(proxyType);
@@ -186,7 +188,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             int count,
             bool visitAll,
             ref int index
-        ) {
+        )
+        {
             if (_proxyItem != null)
             {
                 _proxyItem.Expansion.GetRows(
@@ -213,7 +216,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         private EvalResult CreateRawViewRow(
             ResultProvider resultProvider,
             DkmInspectionContext inspectionContext
-        ) {
+        )
+        {
             return new EvalResult(
                 ExpansionKind.RawView,
                 _name,
@@ -244,7 +248,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmInspectionContext inspectionContext,
             TypeAndCustomInfo declaredTypeAndInfo,
             DkmClrValue value
-        ) {
+        )
+        {
             return resultProvider.GetTypeExpansion(
                 inspectionContext,
                 declaredTypeAndInfo,

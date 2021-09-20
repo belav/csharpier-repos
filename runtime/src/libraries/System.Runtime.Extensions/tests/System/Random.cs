@@ -151,7 +151,8 @@ namespace System.Tests
             bool seeded,
             int min,
             int max
-        ) {
+        )
+        {
             Random r = Create(derived, seeded);
             for (int i = 0; i < 100; i++)
             {
@@ -228,7 +229,8 @@ namespace System.Tests
             bool seeded,
             long min,
             long max
-        ) {
+        )
+        {
             Random r = Create(derived, seeded);
             for (int i = 0; i < 100; i++)
             {
@@ -647,7 +649,8 @@ namespace System.Tests
                     (42L, 47L),
                     ((long)int.MaxValue + 1, long.MaxValue)
                 }
-            ) {
+            )
+            {
                 r = seeded ? new SubRandom(42) : new SubRandom();
                 r.NextInt64(minValue, maxValue);
                 Assert.True(r.NextCalled);

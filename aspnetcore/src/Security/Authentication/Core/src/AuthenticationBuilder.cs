@@ -28,12 +28,9 @@ namespace Microsoft.AspNetCore.Authentication
         private AuthenticationBuilder AddSchemeHelper<
             TOptions,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] THandler
-        >(
-            string authenticationScheme,
-            string? displayName,
-            Action<TOptions>? configureOptions
-        ) where TOptions : AuthenticationSchemeOptions, new()
-          where THandler : class, IAuthenticationHandler
+        >(string authenticationScheme, string? displayName, Action<TOptions>? configureOptions)
+            where TOptions : AuthenticationSchemeOptions, new()
+            where THandler : class, IAuthenticationHandler
         {
             Services.Configure<AuthenticationOptions>(
                 o =>
@@ -76,12 +73,9 @@ namespace Microsoft.AspNetCore.Authentication
         public virtual AuthenticationBuilder AddScheme<
             TOptions,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] THandler
-        >(
-            string authenticationScheme,
-            string? displayName,
-            Action<TOptions>? configureOptions
-        ) where TOptions : AuthenticationSchemeOptions, new()
-          where THandler : AuthenticationHandler<TOptions> =>
+        >(string authenticationScheme, string? displayName, Action<TOptions>? configureOptions)
+            where TOptions : AuthenticationSchemeOptions, new()
+            where THandler : AuthenticationHandler<TOptions> =>
             AddSchemeHelper<TOptions, THandler>(
                 authenticationScheme,
                 displayName,
@@ -99,11 +93,9 @@ namespace Microsoft.AspNetCore.Authentication
         public virtual AuthenticationBuilder AddScheme<
             TOptions,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] THandler
-        >(
-            string authenticationScheme,
-            Action<TOptions>? configureOptions
-        ) where TOptions : AuthenticationSchemeOptions, new()
-          where THandler : AuthenticationHandler<TOptions> =>
+        >(string authenticationScheme, Action<TOptions>? configureOptions)
+            where TOptions : AuthenticationSchemeOptions, new()
+            where THandler : AuthenticationHandler<TOptions> =>
             AddScheme<TOptions, THandler>(
                 authenticationScheme,
                 displayName: null,
@@ -123,12 +115,9 @@ namespace Microsoft.AspNetCore.Authentication
         public virtual AuthenticationBuilder AddRemoteScheme<
             TOptions,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] THandler
-        >(
-            string authenticationScheme,
-            string? displayName,
-            Action<TOptions>? configureOptions
-        ) where TOptions : RemoteAuthenticationOptions, new()
-          where THandler : RemoteAuthenticationHandler<TOptions>
+        >(string authenticationScheme, string? displayName, Action<TOptions>? configureOptions)
+            where TOptions : RemoteAuthenticationOptions, new()
+            where THandler : RemoteAuthenticationHandler<TOptions>
         {
             Services.TryAddEnumerable(
                 ServiceDescriptor.Singleton<

@@ -248,7 +248,8 @@ internal static partial class Interop
 
         internal static unsafe List<KeyValuePair<ulong, proc_threadinfo?>> GetAllThreadsInProcess(
             int pid
-        ) {
+        )
+        {
             // Negative PIDs are invalid
             if (pid < 0)
             {

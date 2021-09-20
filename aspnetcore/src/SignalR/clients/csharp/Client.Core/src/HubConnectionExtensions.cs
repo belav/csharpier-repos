@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
             string methodName,
             Type[] parameterTypes,
             Action<object?[]> handler
-        ) {
+        )
+        {
             return hubConnection.On(
                 methodName,
                 parameterTypes,
@@ -41,7 +42,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
             this HubConnection hubConnection,
             string methodName,
             Action handler
-        ) {
+        )
+        {
             if (hubConnection == null)
             {
                 throw new ArgumentNullException(nameof(hubConnection));
@@ -62,7 +64,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
             this HubConnection hubConnection,
             string methodName,
             Action<T1> handler
-        ) {
+        )
+        {
             if (hubConnection == null)
             {
                 throw new ArgumentNullException(nameof(hubConnection));
@@ -88,7 +91,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
             this HubConnection hubConnection,
             string methodName,
             Action<T1, T2> handler
-        ) {
+        )
+        {
             if (hubConnection == null)
             {
                 throw new ArgumentNullException(nameof(hubConnection));
@@ -115,7 +119,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
             this HubConnection hubConnection,
             string methodName,
             Action<T1, T2, T3> handler
-        ) {
+        )
+        {
             if (hubConnection == null)
             {
                 throw new ArgumentNullException(nameof(hubConnection));
@@ -143,7 +148,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
             this HubConnection hubConnection,
             string methodName,
             Action<T1, T2, T3, T4> handler
-        ) {
+        )
+        {
             if (hubConnection == null)
             {
                 throw new ArgumentNullException(nameof(hubConnection));
@@ -172,7 +178,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
             this HubConnection hubConnection,
             string methodName,
             Action<T1, T2, T3, T4, T5> handler
-        ) {
+        )
+        {
             if (hubConnection == null)
             {
                 throw new ArgumentNullException(nameof(hubConnection));
@@ -203,7 +210,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
             this HubConnection hubConnection,
             string methodName,
             Action<T1, T2, T3, T4, T5, T6> handler
-        ) {
+        )
+        {
             if (hubConnection == null)
             {
                 throw new ArgumentNullException(nameof(hubConnection));
@@ -242,7 +250,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
             this HubConnection hubConnection,
             string methodName,
             Action<T1, T2, T3, T4, T5, T6, T7> handler
-        ) {
+        )
+        {
             if (hubConnection == null)
             {
                 throw new ArgumentNullException(nameof(hubConnection));
@@ -292,7 +301,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
             this HubConnection hubConnection,
             string methodName,
             Action<T1, T2, T3, T4, T5, T6, T7, T8> handler
-        ) {
+        )
+        {
             if (hubConnection == null)
             {
                 throw new ArgumentNullException(nameof(hubConnection));
@@ -338,7 +348,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
             string methodName,
             Type[] parameterTypes,
             Func<object?[], Task> handler
-        ) {
+        )
+        {
             return hubConnection.On(
                 methodName,
                 parameterTypes,
@@ -362,7 +373,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
             this HubConnection hubConnection,
             string methodName,
             Func<Task> handler
-        ) {
+        )
+        {
             if (hubConnection == null)
             {
                 throw new ArgumentNullException(nameof(hubConnection));
@@ -383,7 +395,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
             this HubConnection hubConnection,
             string methodName,
             Func<T1, Task> handler
-        ) {
+        )
+        {
             if (hubConnection == null)
             {
                 throw new ArgumentNullException(nameof(hubConnection));
@@ -409,7 +422,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
             this HubConnection hubConnection,
             string methodName,
             Func<T1, T2, Task> handler
-        ) {
+        )
+        {
             if (hubConnection == null)
             {
                 throw new ArgumentNullException(nameof(hubConnection));
@@ -436,7 +450,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
             this HubConnection hubConnection,
             string methodName,
             Func<T1, T2, T3, Task> handler
-        ) {
+        )
+        {
             if (hubConnection == null)
             {
                 throw new ArgumentNullException(nameof(hubConnection));
@@ -464,7 +479,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
             this HubConnection hubConnection,
             string methodName,
             Func<T1, T2, T3, T4, Task> handler
-        ) {
+        )
+        {
             if (hubConnection == null)
             {
                 throw new ArgumentNullException(nameof(hubConnection));
@@ -493,7 +509,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
             this HubConnection hubConnection,
             string methodName,
             Func<T1, T2, T3, T4, T5, Task> handler
-        ) {
+        )
+        {
             if (hubConnection == null)
             {
                 throw new ArgumentNullException(nameof(hubConnection));
@@ -524,7 +541,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
             this HubConnection hubConnection,
             string methodName,
             Func<T1, T2, T3, T4, T5, T6, Task> handler
-        ) {
+        )
+        {
             if (hubConnection == null)
             {
                 throw new ArgumentNullException(nameof(hubConnection));
@@ -563,7 +581,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
             this HubConnection hubConnection,
             string methodName,
             Func<T1, T2, T3, T4, T5, T6, T7, Task> handler
-        ) {
+        )
+        {
             if (hubConnection == null)
             {
                 throw new ArgumentNullException(nameof(hubConnection));
@@ -613,7 +632,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
             this HubConnection hubConnection,
             string methodName,
             Func<T1, T2, T3, T4, T5, T6, T7, T8, Task> handler
-        ) {
+        )
+        {
             if (hubConnection == null)
             {
                 throw new ArgumentNullException(nameof(hubConnection));

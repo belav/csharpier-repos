@@ -261,7 +261,8 @@ namespace System.Diagnostics.Eventing.Reader
                 EventLogHandle bookmarkHandle = EventLogRecord.GetBookmarkHandleFromBookmark(
                     bookmark
                 )
-            ) {
+            )
+            {
                 NativeWrapper.EvtSeek(
                     _handle,
                     offset,

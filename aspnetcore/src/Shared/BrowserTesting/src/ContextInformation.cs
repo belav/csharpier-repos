@@ -53,7 +53,8 @@ namespace Microsoft.AspNetCore.BrowserTesting
 
         internal BrowserContextOptions ConfigureUniqueHarPath(
             BrowserContextOptions browserContextOptions
-        ) {
+        )
+        {
             var uploadDir = Environment.GetEnvironmentVariable("HELIX_WORKITEM_UPLOAD_ROOT");
             if (browserContextOptions?.RecordHar?.Path != null)
             {

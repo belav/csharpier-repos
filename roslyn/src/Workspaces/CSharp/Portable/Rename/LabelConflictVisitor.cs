@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
                         SyntaxKind.LabeledStatement,
                         out LabeledStatementSyntax declarationStatement
                     )
-                ) {
+                )
+                {
                     tokens.Add(declarationStatement.Identifier);
                 }
             }

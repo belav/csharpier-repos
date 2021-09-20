@@ -145,7 +145,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
             public ValueTask<IConnectionListener> BindAsync(
                 EndPoint endpoint,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 var connections = new InMemoryConnection[_connectionsPerEndPoint];
                 for (var i = 0; i < _connectionsPerEndPoint; i++)
                 {
@@ -172,7 +173,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
             public InMemoryTransport(
                 EndPoint endpoint,
                 IReadOnlyList<InMemoryConnection> connections
-            ) {
+            )
+            {
                 EndPoint = endpoint;
                 _connections = connections;
             }
@@ -181,7 +183,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
 
             public ValueTask<ConnectionContext> AcceptAsync(
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 if (_acceptedConnections < _connections.Count)
                 {
                     return new ValueTask<ConnectionContext>(_connections[_acceptedConnections++]);

@@ -76,7 +76,8 @@ namespace System.Diagnostics
             string counterName,
             string instanceName,
             string machineName
-        ) {
+        )
+        {
             MachineName = machineName;
             CategoryName = categoryName;
             CounterName = counterName;
@@ -92,7 +93,8 @@ namespace System.Diagnostics
             string instanceName,
             string machineName,
             bool skipInit
-        ) {
+        )
+        {
             MachineName = machineName;
             CategoryName = categoryName;
             CounterName = counterName;
@@ -105,11 +107,8 @@ namespace System.Diagnostics
         /// <summary>
         ///     Creates the Performance Counter Object on local machine.
         /// </summary>
-        public PerformanceCounter(
-            string categoryName,
-            string counterName,
-            string instanceName
-        ) : this(categoryName, counterName, instanceName, true) { }
+        public PerformanceCounter(string categoryName, string counterName, string instanceName)
+            : this(categoryName, counterName, instanceName, true) { }
 
         /// <summary>
         ///     Creates the Performance Counter Object on local machine.
@@ -119,7 +118,8 @@ namespace System.Diagnostics
             string counterName,
             string instanceName,
             bool readOnly
-        ) {
+        )
+        {
             if (!readOnly)
             {
                 VerifyWriteableCounterAllowed();
@@ -159,7 +159,8 @@ namespace System.Diagnostics
                 if (
                     _categoryName == null
                     || !string.Equals(_categoryName, value, StringComparison.OrdinalIgnoreCase)
-                ) {
+                )
+                {
                     _categoryName = value;
                     Close();
                 }
@@ -203,7 +204,8 @@ namespace System.Diagnostics
                 if (
                     _counterName == null
                     || !string.Equals(_counterName, value, StringComparison.OrdinalIgnoreCase)
-                ) {
+                )
+                {
                     _counterName = value;
                     Close();
                 }
@@ -230,7 +232,8 @@ namespace System.Diagnostics
                             currentMachineName,
                             currentCategoryName
                         )
-                    ) {
+                    )
+                    {
                         CounterDefinitionSample counterSample =
                             categorySample.GetCounterDefinitionSample(_counterName);
                         _counterType = counterSample._counterType;
@@ -274,7 +277,8 @@ namespace System.Diagnostics
                     (value == null && _instanceName != null)
                     || (value != null && _instanceName == null)
                     || !string.Equals(_instanceName, value, StringComparison.OrdinalIgnoreCase)
-                ) {
+                )
+                {
                     _instanceName = value;
                     Close();
                 }
@@ -614,7 +618,8 @@ namespace System.Diagnostics
                     currentMachineName,
                     currentCategoryName
                 )
-            ) {
+            )
+            {
                 CounterDefinitionSample counterSample = categorySample.GetCounterDefinitionSample(
                     _counterName
                 );

@@ -20,7 +20,8 @@ namespace System.Reflection.Runtime.BindingFlagSupport
             RuntimeTypeInfo type,
             NameFilter? filter,
             RuntimeTypeInfo reflectedType
-        ) {
+        )
+        {
             return type.GetFieldsCore(filter, reflectedType);
         }
 
@@ -32,7 +33,8 @@ namespace System.Reflection.Runtime.BindingFlagSupport
             out bool isStatic,
             out bool isVirtual,
             out bool isNewSlot
-        ) {
+        )
+        {
             FieldAttributes fieldAttributes = member.Attributes;
             visibility = (MethodAttributes)(fieldAttributes & FieldAttributes.FieldAccessMask);
             isStatic = (0 != (fieldAttributes & FieldAttributes.Static));
@@ -50,7 +52,8 @@ namespace System.Reflection.Runtime.BindingFlagSupport
             FieldInfo[] priorMembers,
             int startIndex,
             int endIndex
-        ) {
+        )
+        {
             return false;
         }
 

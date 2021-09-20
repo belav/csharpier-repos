@@ -77,7 +77,8 @@ namespace System.Diagnostics
                         ref sizeInput
                     )
                 )
-            ) {
+            )
+            {
                 if (size == int.MaxValue)
                 {
                     ReleaseData(data, usePool);

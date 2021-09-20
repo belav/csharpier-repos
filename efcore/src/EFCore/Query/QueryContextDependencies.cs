@@ -64,7 +64,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             IConcurrencyDetector concurrencyDetector,
             IDiagnosticsLogger<DbLoggerCategory.Database.Command> commandLogger,
             IDiagnosticsLogger<DbLoggerCategory.Query> queryLogger
-        ) {
+        )
+        {
             Check.NotNull(currentContext, nameof(currentContext));
             Check.NotNull(executionStrategyFactory, nameof(executionStrategyFactory));
             Check.NotNull(concurrencyDetector, nameof(concurrencyDetector));

@@ -87,7 +87,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
                     DetermineSchemaSerializationMode(info, context)
                     == global::System.Data.SchemaSerializationMode.IncludeSchema
                 )
-            ) {
+            )
+            {
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXmlSchema(
                     new global::System.Xml.XmlTextReader(
@@ -234,7 +235,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
                     DetermineSchemaSerializationMode(reader)
                     == global::System.Data.SchemaSerializationMode.IncludeSchema
                 )
-            ) {
+            )
+            {
                 Reset();
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXml(reader);
@@ -334,7 +336,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
         private void SchemaChanged(
             object sender,
             global::System.ComponentModel.CollectionChangeEventArgs e
-        ) {
+        )
+        {
             if ((e.Action == global::System.ComponentModel.CollectionChangeAction.Remove))
             {
                 InitVars();
@@ -348,7 +351,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
         )]
         public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedDataSetSchema(
             global::System.Xml.Schema.XmlSchemaSet xs
-        ) {
+        )
+        {
             CustomerDataSet ds = new CustomerDataSet();
             global::System.Xml.Schema.XmlSchemaComplexType type =
                 new global::System.Xml.Schema.XmlSchemaComplexType();
@@ -375,7 +379,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
                             .GetEnumerator();
                         schemas.MoveNext();
 
-                    ) {
+                    )
+                    {
                         schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
                         s2.SetLength(0);
                         schema.Write(s2);
@@ -387,7 +392,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
                                 ;
                                 ((s1.Position != s1.Length) && (s1.ReadByte() == s2.ReadByte()));
 
-                            ) {
+                            )
+                            {
                                 ;
                             }
                             if ((s1.Position == s1.Length))
@@ -638,7 +644,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
             )]
             protected override global::System.Data.DataRow NewRowFromBuilder(
                 global::System.Data.DataRowBuilder builder
-            ) {
+            )
+            {
                 return new CustomersRow(builder);
             }
 
@@ -737,7 +744,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
             )]
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(
                 global::System.Xml.Schema.XmlSchemaSet xs
-            ) {
+            )
+            {
                 global::System.Xml.Schema.XmlSchemaComplexType type =
                     new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence =
@@ -783,7 +791,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
                                 .GetEnumerator();
                             schemas.MoveNext();
 
-                        ) {
+                        )
+                        {
                             schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
                             s2.SetLength(0);
                             schema.Write(s2);
@@ -798,7 +807,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
                                         && (s1.ReadByte() == s2.ReadByte())
                                     );
 
-                                ) {
+                                )
+                                {
                                     ;
                                 }
                                 if ((s1.Position == s1.Length))
@@ -909,7 +919,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
             public CustomersRowChangeEvent(
                 CustomersRow row,
                 global::System.Data.DataRowAction action
-            ) {
+            )
+            {
                 eventRow = row;
                 eventAction = action;
             }

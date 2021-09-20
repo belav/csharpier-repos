@@ -269,7 +269,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         /// <returns>The child content attributes</returns>
         public static IEnumerable<BoundAttributeDescriptor> GetChildContentProperties(
             this TagHelperDescriptor tagHelper
-        ) {
+        )
+        {
             if (tagHelper == null)
             {
                 throw new ArgumentNullException(nameof(tagHelper));
@@ -292,7 +293,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         /// <returns>The type parameter attributes</returns>
         public static IEnumerable<BoundAttributeDescriptor> GetTypeParameters(
             this TagHelperDescriptor tagHelper
-        ) {
+        )
+        {
             if (tagHelper == null)
             {
                 throw new ArgumentNullException(nameof(tagHelper));

@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                 IEnumerable<IOperation> operations,
                 AnalysisData analysisData,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var visitor = s_visitorPool.Allocate();
                 try
                 {
@@ -58,7 +59,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                 IEnumerable<IOperation> operations,
                 AnalysisData analysisData,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Debug.Assert(_currentContainingSymbol == null);
                 Debug.Assert(_currentAnalysisData == null);
                 Debug.Assert(_currentRootOperation == null);
@@ -107,7 +109,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                 ISymbol symbol,
                 IOperation operation,
                 ValueUsageInfo valueUsageInfo
-            ) {
+            )
+            {
                 // maybeWritten == 'ref' argument.
                 var isRef = valueUsageInfo == ValueUsageInfo.ReadableWritableReference;
                 _currentAnalysisData.OnWriteReferenceFound(
@@ -154,7 +157,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                     if (
                         operation.Parent is IFlowCaptureOperation flowCapture
                         && _currentAnalysisData.IsLValueFlowCapture(flowCapture.Id)
-                    ) {
+                    )
+                    {
                         OnLValueCaptureFound(symbol, operation, flowCapture.Id);
 
                         // For compound assignments, the flow capture can be both an R-Value and an L-Value capture.
@@ -177,7 +181,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                 if (
                     operation.Parent is IIncrementOrDecrementOperation
                     && operation.Parent.Parent?.Kind != OperationKind.ExpressionStatement
-                ) {
+                )
+                {
                     OnReadReferenceFound(symbol);
                 }
             }
@@ -191,7 +196,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                 if (
                     operation.Parent is IAssignmentOperation assignmentOperation
                     && assignmentOperation.Target == operation
-                ) {
+                )
+                {
                     var set = PooledHashSet<(ISymbol, IOperation)>.GetInstance();
                     set.Add((symbolOpt, operation));
                     _pendingWritesMap.Add(assignmentOperation, set);
@@ -199,7 +205,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                 }
                 else if (
                     operation.IsInLeftOfDeconstructionAssignment(out var deconstructionAssignment)
-                ) {
+                )
+                {
                     if (!_pendingWritesMap.TryGetValue(deconstructionAssignment, out var set))
                     {
                         set = PooledHashSet<(ISymbol, IOperation)>.GetInstance();
@@ -270,7 +277,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
 
             public override void VisitDeconstructionAssignment(
                 IDeconstructionAssignmentOperation operation
-            ) {
+            )
+            {
                 base.VisitDeconstructionAssignment(operation);
                 ProcessPendingWritesForAssignmentTarget(operation);
             }
@@ -299,7 +307,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                         && forEachLoop.LoopControlVariable == operation
                     || operation.Parent is ICatchClauseOperation catchClause
                         && catchClause.ExceptionDeclarationOrExpression == operation
-                ) {
+                )
+                {
                     OnWriteReferenceFound(operation.Symbol, operation, ValueUsageInfo.Write);
                 }
 
@@ -313,7 +322,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                 if (
                     _currentAnalysisData.IsLValueFlowCapture(operation.Id)
                     && !MakePendingWrite(operation, symbolOpt: null)
-                ) {
+                )
+                {
                     OnLValueDereferenceFound(operation.Id);
                 }
             }
@@ -377,7 +387,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                 if (
                     _currentAnalysisData.IsTrackingDelegateCreationTargets
                     && operation.Value.Type.IsDelegateType()
-                ) {
+                )
+                {
                     // Delegate argument might be captured and invoked multiple times.
                     // So, conservatively reset the state.
                     _currentAnalysisData.ResetState();
@@ -410,7 +421,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
 
             public override void VisitFlowAnonymousFunction(
                 IFlowAnonymousFunctionOperation operation
-            ) {
+            )
+            {
                 // Skip visiting if we are not analyzing an invocation of this lambda.
                 // This will only happen if the operation is not the current root operation.
                 if (_currentRootOperation != operation)
@@ -426,7 +438,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                 if (
                     !_currentAnalysisData.IsTrackingDelegateCreationTargets
                     || symbol.GetSymbolType()?.TypeKind != TypeKind.Delegate
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -540,7 +553,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                         operation,
                         out var targets
                     )
-                ) {
+                )
+                {
                     // Failed to identify targets, so conservatively reset the state.
                     _currentAnalysisData.ResetState();
                     return;

@@ -148,7 +148,8 @@ namespace Roslyn.Utilities
                 TryResolve(root, out var nodeOrToken)
                 && nodeOrToken.IsNode
                 && nodeOrToken.AsNode() is TNode n
-            ) {
+            )
+            {
                 node = n;
                 return true;
             }

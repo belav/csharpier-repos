@@ -93,7 +93,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         public void FrameworkReferencePriority(
             SettingLocation settingLocation,
             bool frameworkReferenceWins
-        ) {
+        )
+        {
             RunTest(
                     new TestSettings().WithRuntimeConfigCustomizer(
                             runtimeConfig =>
@@ -167,7 +168,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         public void InnerFrameworkReference(
             SettingLocation settingLocation,
             bool innerReferenceWins
-        ) {
+        )
+        {
             RunTest(
                     new TestSettings().WithRuntimeConfigCustomizer(
                             runtimeConfig =>

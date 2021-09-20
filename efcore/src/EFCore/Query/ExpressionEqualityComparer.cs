@@ -69,7 +69,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         if (
                             constantExpression.Value != null
                             && !(constantExpression.Value is IQueryable)
-                        ) {
+                        )
+                        {
                             hash.Add(constantExpression.Value);
                         }
                         break;
@@ -496,7 +497,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             private bool CompareExpressionList(
                 IReadOnlyList<Expression> a,
                 IReadOnlyList<Expression> b
-            ) {
+            )
+            {
                 if (ReferenceEquals(a, b))
                 {
                     return true;
@@ -521,7 +523,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             private bool CompareMemberList(
                 IReadOnlyList<MemberInfo>? a,
                 IReadOnlyList<MemberInfo>? b
-            ) {
+            )
+            {
                 if (ReferenceEquals(a, b))
                 {
                     return true;
@@ -546,7 +549,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             private bool CompareMemberBindingList(
                 IReadOnlyList<MemberBinding> a,
                 IReadOnlyList<MemberBinding> b
-            ) {
+            )
+            {
                 if (ReferenceEquals(a, b))
                 {
                     return true;
@@ -622,7 +626,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             private bool CompareElementInitList(
                 IReadOnlyList<ElementInit> a,
                 IReadOnlyList<ElementInit> b
-            ) {
+            )
+            {
                 if (ReferenceEquals(a, b))
                 {
                     return true;
@@ -650,7 +655,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             private bool CompareSwitchCaseList(
                 IReadOnlyList<SwitchCase> a,
                 IReadOnlyList<SwitchCase> b
-            ) {
+            )
+            {
                 if (ReferenceEquals(a, b))
                 {
                     return true;
@@ -678,7 +684,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             private bool CompareCatchBlockList(
                 IReadOnlyList<CatchBlock> a,
                 IReadOnlyList<CatchBlock> b
-            ) {
+            )
+            {
                 if (ReferenceEquals(a, b))
                 {
                     return true;

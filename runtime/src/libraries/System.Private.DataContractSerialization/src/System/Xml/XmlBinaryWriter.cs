@@ -52,7 +52,8 @@ namespace System.Xml
             IXmlDictionary? dictionary,
             XmlBinaryWriterSession? session,
             bool ownsStream
-        ) {
+        )
+        {
             _dictionary = dictionary;
             _session = session;
             _inAttribute = false;
@@ -582,7 +583,8 @@ namespace System.Xml
             byte[] base64Buffer,
             int base64Offset,
             int base64Count
-        ) {
+        )
+        {
             if (_inAttribute)
             {
                 _attributeValue.WriteBase64Text(
@@ -930,7 +932,8 @@ namespace System.Xml
             int count,
             byte* array,
             byte* arrayMax
-        ) {
+        )
+        {
             WriteArrayInfo(nodeType, count);
             UnsafeWriteArray(array, (int)(arrayMax - array));
         }
@@ -1067,7 +1070,8 @@ namespace System.Xml
                 byte[] buffer,
                 int offset,
                 int count
-            ) {
+            )
+            {
                 if (_captureText != null || _captureXText != null)
                 {
                     if (trailByteCount > 0)
@@ -1135,7 +1139,8 @@ namespace System.Xml
             IXmlDictionary? dictionary,
             XmlBinaryWriterSession? session,
             bool ownsStream
-        ) {
+        )
+        {
             if (stream == null)
                 throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                     new ArgumentNullException(nameof(stream))
@@ -1238,7 +1243,8 @@ namespace System.Xml
             string localName,
             string? namespaceUri,
             int count
-        ) {
+        )
+        {
             StartArray(count);
             _writer.WriteArrayNode();
             WriteStartElement(prefix, localName, namespaceUri);
@@ -1250,7 +1256,8 @@ namespace System.Xml
             XmlDictionaryString localName,
             XmlDictionaryString? namespaceUri,
             int count
-        ) {
+        )
+        {
             StartArray(count);
             _writer.WriteArrayNode();
             WriteStartElement(prefix, localName, namespaceUri);
@@ -1270,7 +1277,8 @@ namespace System.Xml
             int count,
             byte* array,
             byte* arrayMax
-        ) {
+        )
+        {
             WriteStartArray(prefix, localName, namespaceUri, count);
             _writer.UnsafeWriteArray(nodeType, count, array, arrayMax);
             WriteEndArray();
@@ -1284,7 +1292,8 @@ namespace System.Xml
             int count,
             byte* array,
             byte* arrayMax
-        ) {
+        )
+        {
             WriteStartArray(prefix, localName, namespaceUri, count);
             _writer.UnsafeWriteArray(nodeType, count, array, arrayMax);
             WriteEndArray();
@@ -1327,7 +1336,8 @@ namespace System.Xml
             bool[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             {
                 CheckArray(array, offset, count);
                 if (count > 0)
@@ -1355,7 +1365,8 @@ namespace System.Xml
             bool[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             {
                 CheckArray(array, offset, count);
                 if (count > 0)
@@ -1383,7 +1394,8 @@ namespace System.Xml
             short[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             {
                 CheckArray(array, offset, count);
                 if (count > 0)
@@ -1411,7 +1423,8 @@ namespace System.Xml
             short[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             {
                 CheckArray(array, offset, count);
                 if (count > 0)
@@ -1439,7 +1452,8 @@ namespace System.Xml
             int[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             {
                 CheckArray(array, offset, count);
                 if (count > 0)
@@ -1467,7 +1481,8 @@ namespace System.Xml
             int[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             {
                 CheckArray(array, offset, count);
                 if (count > 0)
@@ -1495,7 +1510,8 @@ namespace System.Xml
             long[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             {
                 CheckArray(array, offset, count);
                 if (count > 0)
@@ -1523,7 +1539,8 @@ namespace System.Xml
             long[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             {
                 CheckArray(array, offset, count);
                 if (count > 0)
@@ -1551,7 +1568,8 @@ namespace System.Xml
             float[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             {
                 CheckArray(array, offset, count);
                 if (count > 0)
@@ -1579,7 +1597,8 @@ namespace System.Xml
             float[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             {
                 CheckArray(array, offset, count);
                 if (count > 0)
@@ -1607,7 +1626,8 @@ namespace System.Xml
             double[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             {
                 CheckArray(array, offset, count);
                 if (count > 0)
@@ -1635,7 +1655,8 @@ namespace System.Xml
             double[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             {
                 CheckArray(array, offset, count);
                 if (count > 0)
@@ -1663,7 +1684,8 @@ namespace System.Xml
             decimal[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             {
                 CheckArray(array, offset, count);
                 if (count > 0)
@@ -1691,7 +1713,8 @@ namespace System.Xml
             decimal[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             {
                 CheckArray(array, offset, count);
                 if (count > 0)
@@ -1720,7 +1743,8 @@ namespace System.Xml
             DateTime[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             {
                 CheckArray(array, offset, count);
                 if (count > 0)
@@ -1739,7 +1763,8 @@ namespace System.Xml
             DateTime[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             {
                 CheckArray(array, offset, count);
                 if (count > 0)
@@ -1759,7 +1784,8 @@ namespace System.Xml
             Guid[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             {
                 CheckArray(array, offset, count);
                 if (count > 0)
@@ -1778,7 +1804,8 @@ namespace System.Xml
             Guid[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             {
                 CheckArray(array, offset, count);
                 if (count > 0)
@@ -1798,7 +1825,8 @@ namespace System.Xml
             TimeSpan[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             {
                 CheckArray(array, offset, count);
                 if (count > 0)
@@ -1817,7 +1845,8 @@ namespace System.Xml
             TimeSpan[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             {
                 CheckArray(array, offset, count);
                 if (count > 0)

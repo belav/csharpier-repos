@@ -34,7 +34,8 @@ namespace Microsoft.AspNetCore.Builder
             this IEndpointRouteBuilder endpoints,
             string pattern,
             Delegate action
-        ) {
+        )
+        {
             return MapMethods(endpoints, pattern, GetVerb, action);
         }
 
@@ -50,7 +51,8 @@ namespace Microsoft.AspNetCore.Builder
             this IEndpointRouteBuilder endpoints,
             string pattern,
             Delegate action
-        ) {
+        )
+        {
             return MapMethods(endpoints, pattern, PostVerb, action);
         }
 
@@ -66,7 +68,8 @@ namespace Microsoft.AspNetCore.Builder
             this IEndpointRouteBuilder endpoints,
             string pattern,
             Delegate action
-        ) {
+        )
+        {
             return MapMethods(endpoints, pattern, PutVerb, action);
         }
 
@@ -82,7 +85,8 @@ namespace Microsoft.AspNetCore.Builder
             this IEndpointRouteBuilder endpoints,
             string pattern,
             Delegate action
-        ) {
+        )
+        {
             return MapMethods(endpoints, pattern, DeleteVerb, action);
         }
 
@@ -100,7 +104,8 @@ namespace Microsoft.AspNetCore.Builder
             string pattern,
             IEnumerable<string> httpMethods,
             Delegate action
-        ) {
+        )
+        {
             if (httpMethods is null)
             {
                 throw new ArgumentNullException(nameof(httpMethods));
@@ -124,7 +129,8 @@ namespace Microsoft.AspNetCore.Builder
             this IEndpointRouteBuilder endpoints,
             string pattern,
             Delegate action
-        ) {
+        )
+        {
             return Map(endpoints, RoutePatternFactory.Parse(pattern), action);
         }
 
@@ -140,7 +146,8 @@ namespace Microsoft.AspNetCore.Builder
             this IEndpointRouteBuilder endpoints,
             RoutePattern pattern,
             Delegate action
-        ) {
+        )
+        {
             if (endpoints is null)
             {
                 throw new ArgumentNullException(nameof(endpoints));

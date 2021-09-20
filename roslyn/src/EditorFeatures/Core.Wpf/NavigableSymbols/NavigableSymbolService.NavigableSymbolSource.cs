@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.Editor.NavigableSymbols
                 IThreadingContext threadingContext,
                 IStreamingFindUsagesPresenter streamingPresenter,
                 IWaitIndicator waitIndicator
-            ) {
+            )
+            {
                 _threadingContext = threadingContext;
                 _presenter = streamingPresenter;
                 _waitIndicator = waitIndicator;
@@ -43,7 +44,8 @@ namespace Microsoft.CodeAnalysis.Editor.NavigableSymbols
             public async Task<INavigableSymbol> GetNavigableSymbolAsync(
                 SnapshotSpan triggerSpan,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (_disposed)
                 {
                     return null;

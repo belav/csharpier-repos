@@ -230,7 +230,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             public IQueryable<OrderByYear> GetCustomerOrderCountByYearOnlyFrom2000(
                 int customerId,
                 bool onlyFrom2000
-            ) {
+            )
+            {
                 return FromExpression(
                     () => GetCustomerOrderCountByYearOnlyFrom2000(customerId, onlyFrom2000)
                 );

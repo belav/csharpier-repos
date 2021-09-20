@@ -63,7 +63,8 @@ namespace System.Xml.Xsl.XPath
             string name,
             IList<QilNode> args,
             IFocus env
-        ) {
+        )
+        {
             Debug.Fail("Must not be called");
             return null;
         }
@@ -194,7 +195,8 @@ namespace System.Xml.Xsl.XPath
             QilNode left,
             QilNode right,
             XmlTypeCode compType
-        ) {
+        )
+        {
             Debug.Assert(
                 compType == XmlTypeCode.Boolean
                     || compType == XmlTypeCode.Double
@@ -233,7 +235,8 @@ namespace System.Xml.Xsl.XPath
             QilNode nodeset,
             QilNode val,
             XmlTypeCode compType
-        ) {
+        )
+        {
             _f.CheckNodeSet(nodeset);
             Debug.Assert(val.XmlType!.IsSingleton);
             Debug.Assert(
@@ -282,7 +285,8 @@ namespace System.Xml.Xsl.XPath
             QilNode left,
             QilNode right,
             XmlTypeCode compType
-        ) {
+        )
+        {
             _f.CheckNodeSet(left);
             _f.CheckNodeSet(right);
             if (right.XmlType!.IsSingleton)
@@ -477,7 +481,8 @@ namespace System.Xml.Xsl.XPath
             XmlNodeKindFlags inputTypeMask,
             XPathNodeType nodeType,
             XPathAxis xpathAxis
-        ) {
+        )
+        {
             return (XmlNodeKindFlags)(
                 (int)inputTypeMask
                 & (int)s_XPathNodeType2QilXmlNodeKind[(int)nodeType]
@@ -491,7 +496,8 @@ namespace System.Xml.Xsl.XPath
             XPathNodeType nodeType,
             string? name,
             string? nsUri
-        ) {
+        )
+        {
             XmlNodeKindFlags original = qilAxis.XmlType!.NodeKinds;
             XmlNodeKindFlags required = AxisTypeMask(original, nodeType, xpathAxis);
 
@@ -572,7 +578,8 @@ namespace System.Xml.Xsl.XPath
             XPathNodeType nodeType,
             string? nsUri,
             string? name
-        ) {
+        )
+        {
             QilNode currentNode = GetCurrentNode();
             QilNode qilAxis;
 
@@ -632,7 +639,8 @@ namespace System.Xml.Xsl.XPath
                 || xpathAxis == XPathAxis.Preceding
                 || xpathAxis == XPathAxis.AncestorOrSelf
                 || xpathAxis == XPathAxis.PrecedingSibling
-            ) {
+            )
+            {
                 result = _f.BaseFactory.DocOrderDistinct(result);
                 // To make grouping operator NOP we should always return path expressions in DOD.
                 // I can't use Pattern factory here becasue Predicate() depends on fact that DOD() is
@@ -646,7 +654,8 @@ namespace System.Xml.Xsl.XPath
             XPathNodeType nodeType,
             string? prefix,
             string? name
-        ) {
+        )
+        {
             string? nsUri = prefix == null ? null : _environment.ResolvePrefix(prefix);
             return BuildAxis(xpathAxis, nodeType, nsUri, name);
         }
@@ -703,7 +712,8 @@ namespace System.Xml.Xsl.XPath
             QilNode predicate,
             XPathQilFactory f,
             IXPathEnvironment env
-        ) {
+        )
+        {
             // Prepocess predicate: if (predicate is number) then predicate := (position() == predicate)
             if (!f.IsAnyType(predicate))
             {
@@ -741,7 +751,8 @@ namespace System.Xml.Xsl.XPath
             ref int numFixupCurrent,
             ref int numFixupPosition,
             ref int numFixupLast
-        ) {
+        )
+        {
             nodeset = f.EnsureNodeSet(nodeset);
 
             // Mirgeing nodeset and predicate:

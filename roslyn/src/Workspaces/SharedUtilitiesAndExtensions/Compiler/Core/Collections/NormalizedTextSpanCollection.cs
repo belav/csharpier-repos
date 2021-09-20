@@ -56,7 +56,8 @@ namespace Microsoft.CodeAnalysis.Shared
         public static NormalizedTextSpanCollection Union(
             NormalizedTextSpanCollection left,
             NormalizedTextSpanCollection right
-        ) {
+        )
+        {
             if (left == null)
             {
                 throw new ArgumentNullException(nameof(left));
@@ -142,7 +143,8 @@ namespace Microsoft.CodeAnalysis.Shared
         public static NormalizedTextSpanCollection Overlap(
             NormalizedTextSpanCollection left,
             NormalizedTextSpanCollection right
-        ) {
+        )
+        {
             if (left == null)
             {
                 throw new ArgumentNullException(nameof(left));
@@ -204,7 +206,8 @@ namespace Microsoft.CodeAnalysis.Shared
         public static NormalizedTextSpanCollection Intersection(
             NormalizedTextSpanCollection left,
             NormalizedTextSpanCollection right
-        ) {
+        )
+        {
             if (left == null)
             {
                 throw new ArgumentNullException(nameof(left));
@@ -264,7 +267,8 @@ namespace Microsoft.CodeAnalysis.Shared
         public static NormalizedTextSpanCollection Difference(
             NormalizedTextSpanCollection left,
             NormalizedTextSpanCollection right
-        ) {
+        )
+        {
             if (left == null)
             {
                 throw new ArgumentNullException(nameof(left));
@@ -357,7 +361,8 @@ namespace Microsoft.CodeAnalysis.Shared
         public static bool operator ==(
             NormalizedTextSpanCollection? left,
             NormalizedTextSpanCollection? right
-        ) {
+        )
+        {
             if (object.ReferenceEquals(left, right))
             {
                 return true;
@@ -577,7 +582,8 @@ namespace Microsoft.CodeAnalysis.Shared
             IList<TextSpan> spans,
             ref int start,
             ref int end
-        ) {
+        )
+        {
             if (end < span.Start)
             {
                 spans.Add(TextSpan.FromBounds(start, end));

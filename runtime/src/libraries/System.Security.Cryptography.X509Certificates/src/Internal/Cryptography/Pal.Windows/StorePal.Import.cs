@@ -17,7 +17,8 @@ namespace Internal.Cryptography.Pal
             ReadOnlySpan<byte> rawData,
             SafePasswordHandle password,
             X509KeyStorageFlags keyStorageFlags
-        ) {
+        )
+        {
             return FromBlobOrFile(rawData, null, password, keyStorageFlags);
         }
 
@@ -25,7 +26,8 @@ namespace Internal.Cryptography.Pal
             string fileName,
             SafePasswordHandle password,
             X509KeyStorageFlags keyStorageFlags
-        ) {
+        )
+        {
             return FromBlobOrFile(null, fileName, password, keyStorageFlags);
         }
 
@@ -34,7 +36,8 @@ namespace Internal.Cryptography.Pal
             string? fileName,
             SafePasswordHandle password,
             X509KeyStorageFlags keyStorageFlags
-        ) {
+        )
+        {
             Debug.Assert(password != null);
 
             bool fromFile = fileName != null;
@@ -73,7 +76,8 @@ namespace Internal.Cryptography.Pal
                                 IntPtr.Zero,
                                 IntPtr.Zero
                             )
-                        ) {
+                        )
+                        {
                             throw Marshal.GetLastWin32Error().ToCryptographicException();
                         }
 
@@ -113,7 +117,8 @@ namespace Internal.Cryptography.Pal
                                         certStore,
                                         ref pCertContext
                                     )
-                                ) {
+                                )
+                                {
                                     CRYPTOAPI_BLOB nullBlob = new CRYPTOAPI_BLOB(0, null);
                                     if (
                                         !Interop.crypt32.CertSetCertificateContextProperty(
@@ -168,7 +173,8 @@ namespace Internal.Cryptography.Pal
         /// </summary>
         public static IExportPal LinkFromCertificateCollection(
             X509Certificate2Collection certificates
-        ) {
+        )
+        {
             // we always want to use CERT_STORE_ENUM_ARCHIVED_FLAG since we want to preserve the collection in this operation.
             // By default, Archived certificates will not be included.
 
@@ -210,7 +216,8 @@ namespace Internal.Cryptography.Pal
             string storeName,
             StoreLocation storeLocation,
             OpenFlags openFlags
-        ) {
+        )
+        {
             CertStoreFlags certStoreFlags = MapX509StoreFlags(storeLocation, openFlags);
 
             SafeCertStoreHandle certStore = Interop.crypt32.CertOpenStore(
@@ -278,7 +285,8 @@ namespace Internal.Cryptography.Pal
         private static CertStoreFlags MapX509StoreFlags(
             StoreLocation storeLocation,
             OpenFlags flags
-        ) {
+        )
+        {
             CertStoreFlags dwFlags = 0;
             uint openMode = ((uint)flags) & 0x3;
             switch (openMode)

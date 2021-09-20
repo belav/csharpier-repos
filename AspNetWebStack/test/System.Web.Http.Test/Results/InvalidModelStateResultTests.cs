@@ -507,7 +507,8 @@ namespace System.Web.Http.Results
                         expectedInputFormatter,
                         contentNegotiator
                     )
-                ) {
+                )
+                {
                     controller.RequestContext = new HttpRequestContext
                     {
                         Configuration = configuration,
@@ -561,7 +562,8 @@ namespace System.Web.Http.Results
                     CreateFormatter(),
                     CreateDummyContentNegotiator()
                 )
-            ) {
+            )
+            {
                 configuration.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always;
                 controller.Configuration = configuration;
 
@@ -594,7 +596,8 @@ namespace System.Web.Http.Results
                     CreateFormatter(),
                     CreateDummyContentNegotiator()
                 )
-            ) {
+            )
+            {
                 controller.Configuration = configuration;
 
                 using (HttpRequestMessage request = CreateRequest())
@@ -632,7 +635,8 @@ namespace System.Web.Http.Results
                     CreateFormatter(),
                     CreateDummyContentNegotiator()
                 )
-            ) {
+            )
+            {
                 controller.Configuration = configuration;
                 InvalidModelStateResult result = CreateProductUnderTest(modelState, controller);
 
@@ -677,7 +681,8 @@ namespace System.Web.Http.Results
                         expectedFormatter,
                         contentNegotiator
                     )
-                ) {
+                )
+                {
                     controller.Configuration = lateConfiguration;
 
                     // Act
@@ -776,7 +781,8 @@ namespace System.Web.Http.Results
                     CreateFormatter(),
                     CreateDummyContentNegotiator()
                 )
-            ) {
+            )
+            {
                 controller.Configuration = configuration;
 
                 InvalidModelStateResult result = CreateProductUnderTest(modelState, controller);
@@ -829,7 +835,8 @@ namespace System.Web.Http.Results
                         CreateFormatter(),
                         contentNegotiator
                     )
-                ) {
+                )
+                {
                     controller.Configuration = lateConfiguration;
 
                     // Act
@@ -856,7 +863,8 @@ namespace System.Web.Http.Results
                     CreateFormatter(),
                     CreateDummyContentNegotiator()
                 )
-            ) {
+            )
+            {
                 controller.Configuration = configuration;
                 InvalidModelStateResult result = CreateProductUnderTest(modelState, controller);
 
@@ -954,7 +962,8 @@ namespace System.Web.Http.Results
         private static HttpConfiguration CreateConfiguration(
             MediaTypeFormatter formatter,
             IContentNegotiator contentNegotiator
-        ) {
+        )
+        {
             HttpConfiguration configuration = new HttpConfiguration();
             configuration.Formatters.Clear();
             configuration.Formatters.Add(formatter);
@@ -1005,7 +1014,8 @@ namespace System.Web.Http.Results
             IContentNegotiator contentNegotiator,
             HttpRequestMessage request,
             IEnumerable<MediaTypeFormatter> formatters
-        ) {
+        )
+        {
             return new InvalidModelStateResult(
                 modelState,
                 includeErrorDetail,
@@ -1018,7 +1028,8 @@ namespace System.Web.Http.Results
         private static InvalidModelStateResult CreateProductUnderTest(
             ModelStateDictionary modelState,
             ApiController controller
-        ) {
+        )
+        {
             return new InvalidModelStateResult(modelState, controller);
         }
 

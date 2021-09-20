@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             ImmutableArray<DiagnosticAnalyzer> analyzers,
             string? fullPath = null,
             string? display = null
-        ) {
+        )
+        {
             if (analyzers.Any(a => a == null))
             {
                 throw new ArgumentException("Cannot have null-valued analyzer", nameof(analyzers));

@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ExtractClass
 
         protected override async Task<SyntaxNode?> GetSelectedClassDeclarationAsync(
             CodeRefactoringContext context
-        ) {
+        )
+        {
             var relaventNodes = await context.GetRelevantNodesAsync<ClassDeclarationSyntax>()
                 .ConfigureAwait(false);
             return relaventNodes.FirstOrDefault();

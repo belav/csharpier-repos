@@ -68,7 +68,8 @@ namespace System.Net.Quic.Tests
             Func<QuicConnection, Task> clientFunction,
             Func<QuicConnection, Task> serverFunction,
             int millisecondsTimeout = 10_000
-        ) {
+        )
+        {
             using QuicListener listener = CreateQuicListener();
 
             await new[]

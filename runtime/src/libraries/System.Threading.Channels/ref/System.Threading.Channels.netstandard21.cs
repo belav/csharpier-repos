@@ -18,7 +18,8 @@ namespace System.Threading.Channels
         public virtual System.Collections.Generic.IAsyncEnumerable<T> ReadAllAsync(
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
     }

@@ -28,7 +28,8 @@ namespace Newtonsoft.Json
             Type serializedType,
             out string? assemblyName,
             out string? typeName
-        ) {
+        )
+        {
             assemblyName = null;
             typeName = null;
         }

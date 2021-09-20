@@ -25,7 +25,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             IReadOnlyKey duplicateKey,
             in StoreObjectIdentifier storeObject,
             bool shouldThrow
-        ) {
+        )
+        {
             if (key.IsClustered(storeObject) != duplicateKey.IsClustered(storeObject))
             {
                 if (shouldThrow)

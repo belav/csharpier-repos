@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
         public ValidateAntiforgeryTokenAuthorizationFilter(
             IAntiforgery antiforgery,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             if (antiforgery == null)
             {
                 throw new ArgumentNullException(nameof(antiforgery));

@@ -21,10 +21,8 @@ namespace Microsoft.CodeAnalysis.AddImport
         /// </summary>
         private abstract class SymbolReferenceCodeAction : AddImportCodeAction
         {
-            protected SymbolReferenceCodeAction(
-                Document originalDocument,
-                AddImportFixData fixData
-            ) : base(originalDocument, fixData) { }
+            protected SymbolReferenceCodeAction(Document originalDocument, AddImportFixData fixData)
+                : base(originalDocument, fixData) { }
 
             protected override async Task<
                 IEnumerable<CodeActionOperation>
@@ -45,7 +43,8 @@ namespace Microsoft.CodeAnalysis.AddImport
 
             protected override async Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var operation = await GetChangeSolutionOperationAsync(
                         isPreview: false,
                         cancellationToken
@@ -62,7 +61,8 @@ namespace Microsoft.CodeAnalysis.AddImport
             private async Task<CodeActionOperation?> GetChangeSolutionOperationAsync(
                 bool isPreview,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var updatedDocument = await GetUpdatedDocumentAsync(cancellationToken)
                     .ConfigureAwait(false);
 

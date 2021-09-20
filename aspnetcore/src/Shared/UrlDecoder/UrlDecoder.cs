@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.Internal
             ReadOnlySpan<byte> source,
             Span<byte> destination,
             bool isFormEncoding
-        ) {
+        )
+        {
             if (destination.Length < source.Length)
             {
                 throw new ArgumentException(
@@ -102,7 +103,8 @@ namespace Microsoft.AspNetCore.Internal
             ref int destinationIndex,
             Span<byte> buffer,
             bool isFormEncoding
-        ) {
+        )
+        {
             // preserves the original head. if the percent-encodings cannot be interpreted as sequence of UTF-8 octets,
             // bytes from this till the last scanned one will be copied to the memory pointed by writer.
             var byte1 = UnescapePercentEncoding(ref sourceIndex, buffer, isFormEncoding);
@@ -273,7 +275,8 @@ namespace Microsoft.AspNetCore.Internal
             ref int scan,
             Span<byte> buffer,
             bool isFormEncoding
-        ) {
+        )
+        {
             if (buffer[scan++] != '%')
             {
                 return -1;

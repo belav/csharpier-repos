@@ -23,7 +23,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public void Foreign_key_value_is_obtained_from_reference_to_principal(
             bool generateTemporary,
             bool async
-        ) {
+        )
+        {
             var model = BuildModel(generateTemporary);
 
             var principal = new Category { Id = 11 };
@@ -50,7 +51,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public void Foreign_key_value_is_obtained_from_tracked_principal_with_populated_collection(
             bool generateTemporary,
             bool async
-        ) {
+        )
+        {
             var model = BuildModel(generateTemporary);
             var contextServices = CreateContextServices(model);
             model = contextServices.GetRequiredService<IModel>();
@@ -79,7 +81,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public void Non_identifying_foreign_key_value_is_not_generated_if_principal_key_not_set(
             bool generateTemporary,
             bool async
-        ) {
+        )
+        {
             var model = BuildModel(generateTemporary);
 
             var principal = new Category();
@@ -105,7 +108,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public void One_to_one_foreign_key_value_is_obtained_from_reference_to_principal(
             bool generateTemporary,
             bool async
-        ) {
+        )
+        {
             var model = BuildModel(generateTemporary);
 
             var principal = new Product { Id = 21 };
@@ -132,7 +136,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public void One_to_one_foreign_key_value_is_obtained_from_tracked_principal(
             bool generateTemporary,
             bool async
-        ) {
+        )
+        {
             var model = BuildModel(generateTemporary);
             var contextServices = CreateContextServices(model);
             model = contextServices.GetRequiredService<IModel>();
@@ -160,7 +165,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public void Identifying_foreign_key_value_is_generated_if_principal_key_not_set(
             bool generateTemporary,
             bool async
-        ) {
+        )
+        {
             var model = BuildModel(generateTemporary);
 
             var principal = new Product();
@@ -186,7 +192,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public void Identifying_foreign_key_value_is_propagated_if_principal_key_is_generated(
             bool generateTemporary,
             bool async
-        ) {
+        )
+        {
             var model = BuildModel(generateTemporary);
 
             var principal = new Product();
@@ -220,7 +227,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public void Composite_foreign_key_value_is_obtained_from_reference_to_principal(
             bool generateTemporary,
             bool async
-        ) {
+        )
+        {
             var model = BuildModel(generateTemporary);
 
             var principal = new OrderLine { OrderId = 11, ProductId = 21 };
@@ -251,7 +259,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public void Composite_foreign_key_value_is_obtained_from_tracked_principal(
             bool generateTemporary,
             bool async
-        ) {
+        )
+        {
             var model = BuildModel(generateTemporary);
             var contextServices = CreateContextServices(model);
             model = contextServices.GetRequiredService<IModel>();
@@ -283,7 +292,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             InternalEntityEntry dependentEntry,
             IProperty property,
             bool async
-        ) {
+        )
+        {
             if (async)
             {
                 keyPropagator.PropagateValueAsync(dependentEntry, property)

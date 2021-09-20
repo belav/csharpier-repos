@@ -62,14 +62,15 @@ namespace Microsoft.AspNetCore.Mvc.Microbenchmarks
                 ITempDataDictionaryFactory tempDataFactory,
                 DiagnosticListener diagnosticListener,
                 IModelMetadataProvider modelMetadataProvider
-            ) : base(
-                viewOptions,
-                writerFactory,
-                viewEngine,
-                tempDataFactory,
-                diagnosticListener,
-                modelMetadataProvider
-            ) { }
+            )
+                : base(
+                    viewOptions,
+                    writerFactory,
+                    viewEngine,
+                    tempDataFactory,
+                    diagnosticListener,
+                    modelMetadataProvider
+                ) { }
 
             public StringBuilder StringBuilder { get; } = new StringBuilder();
 
@@ -80,7 +81,8 @@ namespace Microsoft.AspNetCore.Mvc.Microbenchmarks
                 ITempDataDictionary tempData,
                 string contentType,
                 int? statusCode
-            ) {
+            )
+            {
                 using (var stringWriter = new StringWriter(StringBuilder))
                 {
                     var viewContext = new ViewContext(

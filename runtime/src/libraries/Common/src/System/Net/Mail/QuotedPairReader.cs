@@ -37,7 +37,8 @@ namespace System.Net.Mail
             bool permitUnicodeEscaping,
             out int outIndex,
             bool throwExceptionIfFail
-        ) {
+        )
+        {
             Debug.Assert(
                 0 <= index && index < data.Length,
                 "Index out of range: " + index + ", " + data.Length

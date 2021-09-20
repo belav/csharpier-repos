@@ -23,11 +23,8 @@ namespace System.Data
             HResult = HResults.DBConcurrency;
         }
 
-        public DBConcurrencyException(
-            string? message,
-            Exception? inner,
-            DataRow[]? dataRows
-        ) : base(message, inner)
+        public DBConcurrencyException(string? message, Exception? inner, DataRow[]? dataRows)
+            : base(message, inner)
         {
             HResult = HResults.DBConcurrency;
             _dataRows = dataRows;

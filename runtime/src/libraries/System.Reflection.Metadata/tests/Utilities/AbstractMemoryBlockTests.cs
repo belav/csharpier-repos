@@ -83,7 +83,8 @@ namespace System.Reflection.Internal.Tests
                         isFileStream: false,
                         leaveOpen: true
                     )
-                ) {
+                )
+                {
                     using (var block = provider.GetMemoryBlock())
                     {
                         Assert.IsType<NativeHeapMemoryBlock>(block);
@@ -115,7 +116,8 @@ namespace System.Reflection.Internal.Tests
                         isFileStream: false,
                         leaveOpen: false
                     )
-                ) {
+                )
+                {
                     using (var block = provider.GetMemoryBlock())
                     {
                         Assert.IsType<NativeHeapMemoryBlock>(block);
@@ -163,7 +165,8 @@ namespace System.Reflection.Internal.Tests
                             4096,
                             useAsync
                         )
-                    ) {
+                    )
+                    {
                         Assert.True(FileStreamReadLightUp.IsFileStream(stream));
 
                         using (
@@ -174,7 +177,8 @@ namespace System.Reflection.Internal.Tests
                                 isFileStream: true,
                                 leaveOpen: false
                             )
-                        ) {
+                        )
+                        {
                             // large:
                             using (var block = provider.GetMemoryBlock())
                             {

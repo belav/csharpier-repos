@@ -27,7 +27,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         public RelationalParameterBasedSqlProcessor(
             RelationalParameterBasedSqlProcessorDependencies dependencies,
             bool useRelationalNulls
-        ) {
+        )
+        {
             Check.NotNull(dependencies, nameof(dependencies));
 
             Dependencies = dependencies;
@@ -55,7 +56,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             SelectExpression selectExpression,
             IReadOnlyDictionary<string, object?> parametersValues,
             out bool canCache
-        ) {
+        )
+        {
             Check.NotNull(selectExpression, nameof(selectExpression));
             Check.NotNull(parametersValues, nameof(parametersValues));
 
@@ -89,7 +91,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             SelectExpression selectExpression,
             IReadOnlyDictionary<string, object?> parametersValues,
             out bool canCache
-        ) {
+        )
+        {
             Check.NotNull(selectExpression, nameof(selectExpression));
             Check.NotNull(parametersValues, nameof(parametersValues));
 
@@ -111,7 +114,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             SelectExpression selectExpression,
             IReadOnlyDictionary<string, object?> parametersValues,
             out bool canCache
-        ) {
+        )
+        {
             Check.NotNull(selectExpression, nameof(selectExpression));
             Check.NotNull(parametersValues, nameof(parametersValues));
 

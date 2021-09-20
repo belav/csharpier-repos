@@ -24,7 +24,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
         public VsUpdateSolutionEvents(
             IVsSolutionBuildManager buildManager,
             TaskCompletionSource<bool> taskSource
-        ) {
+        )
+        {
             _taskSource = taskSource;
             _buildManager = buildManager;
 

@@ -97,7 +97,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                 ILogger logger,
                 Exception exception,
                 ulong requestId
-            ) {
+            )
+            {
                 _requestValidationFailed(logger, requestId, exception);
             }
         }

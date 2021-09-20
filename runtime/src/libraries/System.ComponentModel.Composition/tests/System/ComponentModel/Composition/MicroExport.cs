@@ -28,18 +28,17 @@ namespace System.ComponentModel.Composition
             Type contractType,
             IDictionary<string, object> metadata,
             params object[] exportedValues
-        ) : this(
-            AttributedModelServices.GetContractName(contractType),
-            exportedValues[0].GetType(),
-            metadata,
-            exportedValues
-        ) { }
+        )
+            : this(
+                AttributedModelServices.GetContractName(contractType),
+                exportedValues[0].GetType(),
+                metadata,
+                exportedValues
+            ) { }
 
-        public MicroExport(
-            string contractName,
-            Type contractType,
-            params object[] exportedValues
-        ) : this(contractName, contractType, (IDictionary<string, object>)null, exportedValues) { }
+        public MicroExport(string contractName, Type contractType, params object[] exportedValues)
+            : this(contractName, contractType, (IDictionary<string, object>)null, exportedValues)
+        { }
 
         public MicroExport(
             string contractName,
@@ -52,7 +51,8 @@ namespace System.ComponentModel.Composition
             Type contractType,
             IDictionary<string, object> metadata,
             params object[] exportedValues
-        ) {
+        )
+        {
             this.ContractName = contractName;
             this.ExportedValues = exportedValues;
 
@@ -71,7 +71,8 @@ namespace System.ComponentModel.Composition
                         CompositionConstants.ExportTypeIdentityMetadataName,
                         out val
                     )
-                ) {
+                )
+                {
                     metadata.Add(
                         CompositionConstants.ExportTypeIdentityMetadataName,
                         AttributedModelServices.GetTypeIdentity(contractType)

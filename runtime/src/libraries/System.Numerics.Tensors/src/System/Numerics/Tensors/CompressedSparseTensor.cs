@@ -36,10 +36,8 @@ namespace System.Numerics.Tensors
         /// </summary>
         /// <param name="dimensions">An span of integers that represent the size of each dimension of the CompressedSparseTensor to create.</param>
         /// <param name="reverseStride">False (default) to indicate that the first dimension is most major (farthest apart) and the last dimension is most minor (closest together): akin to row-major in a rank-2 tensor.  True to indicate that the last dimension is most major (farthest apart) and the first dimension is most minor (closest together): akin to column-major in a rank-2 tensor.</param>
-        public CompressedSparseTensor(
-            ReadOnlySpan<int> dimensions,
-            bool reverseStride = false
-        ) : this(dimensions, defaultCapacity, reverseStride) { }
+        public CompressedSparseTensor(ReadOnlySpan<int> dimensions, bool reverseStride = false)
+            : this(dimensions, defaultCapacity, reverseStride) { }
 
         /// <summary>
         /// Constructs a new CompressedSparseTensor of the specifed dimensions, initial capacity, and stride ordering.

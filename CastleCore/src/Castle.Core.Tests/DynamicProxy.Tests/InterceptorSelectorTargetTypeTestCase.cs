@@ -188,7 +188,8 @@ namespace Castle.DynamicProxy.Tests
                 Type type,
                 MethodInfo method,
                 IInterceptor[] interceptors
-            ) {
+            )
+            {
                 this.ReceivedType = type;
                 return interceptors;
             }

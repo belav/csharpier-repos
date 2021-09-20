@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             string? type = null,
             string? detail = null,
             string? instance = null
-        ) {
+        )
+        {
             statusCode ??= 500;
 
             var problemDetails = new ProblemDetails
@@ -52,7 +53,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             string? type = null,
             string? detail = null,
             string? instance = null
-        ) {
+        )
+        {
             if (modelStateDictionary == null)
             {
                 throw new ArgumentNullException(nameof(modelStateDictionary));
@@ -83,7 +85,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             HttpContext httpContext,
             ProblemDetails problemDetails,
             int statusCode
-        ) {
+        )
+        {
             problemDetails.Status ??= statusCode;
 
             if (_options.ClientErrorMapping.TryGetValue(statusCode, out var clientErrorData))

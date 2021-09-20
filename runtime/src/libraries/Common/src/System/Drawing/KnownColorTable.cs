@@ -472,7 +472,8 @@ namespace System.Drawing
             {
                 if (
                     s_colorKindTable[index] == KnownColorKindWeb && s_colorValueTable[index] == argb
-                ) {
+                )
+                {
                     return Color.FromKnownColor((KnownColor)index);
                 }
             }

@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             InlineRenameService renameService,
             IEditorFormatMapService editorFormatMapService,
             IWpfTextView textView
-        ) {
+        )
+        {
             _renameService = renameService;
             _editorFormatMapService = editorFormatMapService;
             _textView = textView;
@@ -65,7 +66,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                     _textView,
                     _renameService.ActiveSession.Workspace
                 )
-            ) {
+            )
+            {
                 var newAdornment = new Dashboard(
                     s_createdViewModels.GetValue(
                         _renameService.ActiveSession,
@@ -87,7 +89,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
         private static bool ViewIncludesBufferFromWorkspace(
             IWpfTextView textView,
             Workspace workspace
-        ) {
+        )
+        {
             return textView.BufferGraph.GetTextBuffers(
                     b => GetWorkspace(b.AsTextContainer()) == workspace
                 )

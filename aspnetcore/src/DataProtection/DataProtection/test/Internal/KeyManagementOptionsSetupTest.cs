@@ -87,7 +87,8 @@ namespace Microsoft.AspNetCore.DataProtection.Internal
         private static void RunTest(
             Dictionary<string, object> regValues,
             KeyManagementOptions options
-        ) {
+        )
+        {
             WithUniqueTempRegKey(
                 registryKey =>
                 {

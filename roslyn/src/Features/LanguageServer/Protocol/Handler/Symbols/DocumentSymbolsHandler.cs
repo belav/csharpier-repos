@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             DocumentSymbolParams request,
             RequestContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var document = context.Document;
             if (document == null)
             {
@@ -75,7 +76,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             if (
                 context.ClientCapabilities?.TextDocument?.DocumentSymbol?.HierarchicalDocumentSymbolSupport
                 == true
-            ) {
+            )
+            {
                 foreach (var item in navBarItems)
                 {
                     // only top level ones
@@ -139,7 +141,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             SourceText text,
             CancellationToken cancellationToken,
             string? containerName = null
-        ) {
+        )
+        {
             if (item.Spans.IsEmpty)
             {
                 return null;
@@ -160,7 +163,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 string? containerName,
                 Document document,
                 SourceText text
-            ) {
+            )
+            {
                 return new VSSymbolInformation
                 {
                     Name = item.Text,
@@ -185,7 +189,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             SyntaxTree tree,
             SourceText text,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // it is actually symbol location getter. but anyway.
             var location = GetLocation(item, compilation, tree, cancellationToken);
             if (location == null)
@@ -224,7 +229,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 SyntaxTree tree,
                 SourceText text,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 using var _ = ArrayBuilder<DocumentSymbol>.GetInstance(out var list);
                 foreach (var item in items)
                 {
@@ -247,7 +253,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 Location location,
                 Compilation compilation,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var model = compilation.GetSemanticModel(location.SourceTree);
                 var root = await model.SyntaxTree.GetRootAsync(cancellationToken)
                     .ConfigureAwait(false);
@@ -276,7 +283,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             Compilation compilation,
             SyntaxTree tree,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (item is not RoslynNavigationBarItem.SymbolItem symbolItem)
                 return null;
 

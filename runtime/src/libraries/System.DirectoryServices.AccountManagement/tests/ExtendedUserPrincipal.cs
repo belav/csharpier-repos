@@ -12,7 +12,8 @@ namespace System.DirectoryServices.AccountManagement.Tests
         public static new ExtendedUserPrincipal FindByIdentity(
             PrincipalContext context,
             string identityValue
-        ) {
+        )
+        {
             return (ExtendedUserPrincipal)FindByIdentityWithType(
                 context,
                 typeof(ExtendedUserPrincipal),

@@ -85,7 +85,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
             Type componentType,
             ParameterView parameters,
             string domElementSelector
-        ) {
+        )
+        {
             var component = InstantiateComponent(componentType);
             var componentId = AssignRootComponentId(component);
 
@@ -104,7 +105,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
             if (
                 _unacknowledgedRenderBatches.Count
                 >= _options.MaxBufferedUnacknowledgedRenderBatches
-            ) {
+            )
+            {
                 // If we got here it means we are at max capacity, so we don't want to actually process the queue,
                 // as we have a client that is not acknowledging render batches fast enough (something we consider needs
                 // to be fast).
@@ -162,7 +164,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
         /// <inheritdoc />
         protected override Task UpdateDisplayAsync(
             in Microsoft.AspNetCore.Components.RenderTree.RenderBatch batch
-        ) {
+        )
+        {
             if (_disposing)
             {
                 // We are being disposed, so do no work.
@@ -290,7 +293,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
             if (
                 !_unacknowledgedRenderBatches.TryPeek(out var nextUnacknowledgedBatch)
                 || incomingBatchId < nextUnacknowledgedBatch.BatchId
-            ) {
+            )
+            {
                 Log.ReceivedDuplicateBatchAck(_logger, incomingBatchId);
                 return Task.CompletedTask;
             }
@@ -301,7 +305,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
                 while (
                     _unacknowledgedRenderBatches.TryPeek(out nextUnacknowledgedBatch)
                     && nextUnacknowledgedBatch.BatchId <= incomingBatchId
-                ) {
+                )
+                {
                     lastBatchId = nextUnacknowledgedBatch.BatchId;
                     // At this point the queue is definitely not full, we have at least emptied one slot, so we allow a further
                     // full queue log entry the next time it fills up.
@@ -341,7 +346,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
         private void ProcessPendingBatch(
             string? errorMessageOrNull,
             UnacknowledgedRenderBatch entry
-        ) {
+        )
+        {
             var elapsedTime = entry.ValueStopwatch.GetElapsedTime();
             if (errorMessageOrNull == null)
             {
@@ -364,7 +370,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
         private void CompleteRender(
             TaskCompletionSource pendingRenderInfo,
             string? errorMessageOrNull
-        ) {
+        )
+        {
             if (errorMessageOrNull == null)
             {
                 pendingRenderInfo.TrySetResult();
@@ -384,7 +391,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
                 ArrayBuilder<byte> data,
                 TaskCompletionSource completionSource,
                 ValueStopwatch valueStopwatch
-            ) {
+            )
+            {
                 BatchId = batchId;
                 Data = data;
                 CompletionSource = completionSource;
@@ -548,7 +556,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
             public static void UnhandledExceptionRenderingComponent(
                 ILogger logger,
                 Exception exception
-            ) {
+            )
+            {
                 _unhandledExceptionRenderingComponent(logger, exception.Message, exception);
             }
 
@@ -557,14 +566,16 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
                 string connectionId,
                 long batchId,
                 int dataLength
-            ) {
+            )
+            {
                 _beginUpdateDisplayAsync(logger, batchId, dataLength, connectionId, null);
             }
 
             public static void BufferingRenderDisconnectedClient(
                 ILogger logger,
                 string connectionId
-            ) {
+            )
+            {
                 _bufferingRenderDisconnectedClient(logger, connectionId, null);
             }
 
@@ -573,7 +584,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
                 long batchId,
                 string errorMessage,
                 TimeSpan elapsedTime
-            ) {
+            )
+            {
                 _completingBatchWithError(
                     logger,
                     batchId,
@@ -587,7 +599,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
                 ILogger logger,
                 long batchId,
                 TimeSpan elapsedTime
-            ) {
+            )
+            {
                 _completingBatchWithoutError(logger, batchId, elapsedTime.TotalMilliseconds, null);
             }
 

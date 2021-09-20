@@ -116,7 +116,8 @@ namespace System.Net.Http.Tests
             int startIndex,
             long expectedResult,
             int expectedIndex
-        ) {
+        )
+        {
             Int64NumberHeaderParser parser = Int64NumberHeaderParser.Parser;
             object result = 0;
             Assert.True(

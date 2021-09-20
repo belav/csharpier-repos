@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateDefaultConstructors
                 SemanticDocument document,
                 TextSpan textSpan,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var state = new State();
                 if (!state.TryInitialize(service, document, textSpan, cancellationToken))
                 {
@@ -44,7 +45,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateDefaultConstructors
                 SemanticDocument semanticDocument,
                 TextSpan textSpan,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (
                     !service.TryInitializeState(
                         semanticDocument,
@@ -52,7 +54,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateDefaultConstructors
                         cancellationToken,
                         out var classType
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -88,7 +91,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateDefaultConstructors
                 IMethodSymbol constructor,
                 ImmutableArray<IMethodSymbol> classConstructors,
                 bool isCaseSensitive
-            ) {
+            )
+            {
                 var matchingConstructor = classConstructors.FirstOrDefault(
                     c =>
                         SignatureComparer.Instance.HaveSameSignature(

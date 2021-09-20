@@ -20,7 +20,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             RSAEncryptionPadding encryptionPadding,
             string expectedOid,
             byte[] expectedParameters
-        ) {
+        )
+        {
             KeyTransRecipientInfo recipientInfo1 = EncodeKeyTransl_Rsa2048(
                 encryptionPadding,
                 Certificates.RSA2048Sha256KeyTransfer1
@@ -98,7 +99,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         private static KeyTransRecipientInfo EncodeKeyTransl_Rsa2048(
             RSAEncryptionPadding encryptionPadding,
             CertLoader loader
-        ) {
+        )
+        {
             ContentInfo contentInfo = new ContentInfo(new byte[] { 1, 2, 3 });
             EnvelopedCms ecms = new EnvelopedCms(contentInfo);
             using (X509Certificate2 cert = loader.GetCertificate())

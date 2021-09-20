@@ -48,7 +48,8 @@ namespace System.Xml.Serialization.TrimmingTests
                 && serialized.Contains(
                     @"<DataUpdateInfo DataDate=""2009-04-14T00:00:00"" DataType=""Data"" LastUpdatedDate=""2010-12-12T00:00:00"" />"
                 )
-            ) {
+            )
+            {
                 return 100;
             }
 

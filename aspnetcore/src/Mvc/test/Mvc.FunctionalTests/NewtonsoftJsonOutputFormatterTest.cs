@@ -13,9 +13,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
     public class NewtonsoftJsonOutputFormatterTest
         : JsonOutputFormatterTestBase<FormatterWebSite.Startup>
     {
-        public NewtonsoftJsonOutputFormatterTest(
-            MvcTestFixture<FormatterWebSite.Startup> fixture
-        ) : base(fixture) { }
+        public NewtonsoftJsonOutputFormatterTest(MvcTestFixture<FormatterWebSite.Startup> fixture)
+            : base(fixture) { }
 
         [Fact]
         public async Task JsonOutputFormatter_ReturnsIndentedJson()

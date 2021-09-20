@@ -65,7 +65,8 @@ namespace System.Net.Security.Tests
             if (
                 PlatformDetection.SupportsTls12
                 && (PlatformDetection.SupportsTls10 || PlatformDetection.SupportsTls11)
-            ) {
+            )
+            {
                 // OpenSSL 1.0 where new is Tls12
                 clientProtocol = SslProtocols.Tls | SslProtocols.Tls11;
                 serverProtocol = SslProtocols.Tls12;
@@ -120,7 +121,8 @@ namespace System.Net.Security.Tests
                         null,
                         EncryptionPolicy.RequireEncryption
                     )
-                ) {
+                )
+                {
                     Task clientAuthenticationTask = clientStream.AuthenticateAsClientAsync(
                         serverCertificate.GetNameInfo(X509NameType.SimpleName, false),
                         null,
@@ -434,7 +436,8 @@ namespace System.Net.Security.Tests
                     StoreName.CertificateAuthority,
                     StoreLocation.CurrentUser
                 )
-            ) {
+            )
+            {
                 // add chain certificate so we can construct chain since there is no way how to pass intermediates directly.
                 store.Open(OpenFlags.ReadWrite);
                 store.AddRange(clientChain);
@@ -540,7 +543,8 @@ namespace System.Net.Security.Tests
             X509Certificate retrievedServerPublicCertificate,
             X509Chain chain,
             SslPolicyErrors sslPolicyErrors
-        ) {
+        )
+        {
             // Accept any certificate.
             return true;
         }

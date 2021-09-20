@@ -273,7 +273,8 @@ namespace System.Xml.Schema
                 List<XmlSchemaObjectEntry> entries,
                 int size,
                 EnumeratorType enumType
-            ) {
+            )
+            {
                 _entries = entries;
                 this.size = size;
                 _enumType = enumType;

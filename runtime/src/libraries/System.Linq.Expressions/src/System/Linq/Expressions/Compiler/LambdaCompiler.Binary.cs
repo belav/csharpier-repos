@@ -39,7 +39,8 @@ namespace System.Linq.Expressions.Compiler
             if (
                 (b.NodeType == ExpressionType.Equal || b.NodeType == ExpressionType.NotEqual)
                 && (b.Type == typeof(bool) || b.Type == typeof(bool?))
-            ) {
+            )
+            {
                 // If we have x==null, x!=null, null==x or null!=x where x is
                 // nullable but not null, then generate a call to x.HasValue.
                 Debug.Assert(!b.IsLiftedToNull || b.Type == typeof(bool?));
@@ -47,7 +48,8 @@ namespace System.Linq.Expressions.Compiler
                     ConstantCheck.IsNull(b.Left)
                     && !ConstantCheck.IsNull(b.Right)
                     && b.Right.Type.IsNullableType()
-                ) {
+                )
+                {
                     EmitNullEquality(b.NodeType, b.Right, b.IsLiftedToNull);
                     return;
                 }
@@ -55,7 +57,8 @@ namespace System.Linq.Expressions.Compiler
                     ConstantCheck.IsNull(b.Right)
                     && !ConstantCheck.IsNull(b.Left)
                     && b.Left.Type.IsNullableType()
-                ) {
+                )
+                {
                     EmitNullEquality(b.NodeType, b.Left, b.IsLiftedToNull);
                     return;
                 }
@@ -151,7 +154,8 @@ namespace System.Linq.Expressions.Compiler
             Type rightType,
             Type resultType,
             bool liftedToNull
-        ) {
+        )
+        {
             Debug.Assert(op != ExpressionType.Coalesce);
             if (op == ExpressionType.ArrayIndex)
             {
@@ -333,7 +337,8 @@ namespace System.Linq.Expressions.Compiler
             Type rightType,
             Type resultType,
             bool liftedToNull
-        ) {
+        )
+        {
             Debug.Assert(leftType.IsNullableType() || rightType.IsNullableType());
             switch (op)
             {
@@ -466,7 +471,8 @@ namespace System.Linq.Expressions.Compiler
             Type leftType,
             Type rightType,
             Type resultType
-        ) {
+        )
+        {
             bool leftIsNullable = leftType.IsNullableType();
             bool rightIsNullable = rightType.IsNullableType();
 

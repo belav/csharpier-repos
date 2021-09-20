@@ -261,7 +261,8 @@ namespace System.Linq.Expressions
         public Expression<TDelegate> Update(
             Expression body,
             IEnumerable<ParameterExpression>? parameters
-        ) {
+        )
+        {
             if (body == Body)
             {
                 // Ensure parameters is safe to enumerate twice.
@@ -299,7 +300,8 @@ namespace System.Linq.Expressions
         internal virtual Expression<TDelegate> Rewrite(
             Expression body,
             ParameterExpression[]? parameters
-        ) {
+        )
+        {
             throw ContractUtils.Unreachable;
         }
 
@@ -322,7 +324,8 @@ namespace System.Linq.Expressions
             string? name,
             bool tailCall,
             IReadOnlyList<ParameterExpression> parameters
-        ) {
+        )
+        {
             if (name == null && !tailCall)
             {
                 return parameters.Count switch
@@ -365,7 +368,8 @@ namespace System.Linq.Expressions
             string? name,
             bool tailCall,
             ReadOnlyCollection<ParameterExpression> parameters
-        ) {
+        )
+        {
             if (name == null && !tailCall)
             {
                 switch (parameters.Count)
@@ -413,7 +417,8 @@ namespace System.Linq.Expressions
         internal override Expression<TDelegate> Rewrite(
             Expression body,
             ParameterExpression[]? parameters
-        ) {
+        )
+        {
             Debug.Assert(body != null);
             Debug.Assert(parameters == null || parameters.Length == 0);
 
@@ -459,7 +464,8 @@ namespace System.Linq.Expressions
         internal override Expression<TDelegate> Rewrite(
             Expression body,
             ParameterExpression[]? parameters
-        ) {
+        )
+        {
             Debug.Assert(body != null);
             Debug.Assert(parameters == null || parameters.Length == 1);
 
@@ -480,11 +486,8 @@ namespace System.Linq.Expressions
         private object _par0;
         private readonly ParameterExpression _par1;
 
-        public Expression2(
-            Expression body,
-            ParameterExpression par0,
-            ParameterExpression par1
-        ) : base(body)
+        public Expression2(Expression body, ParameterExpression par0, ParameterExpression par1)
+            : base(body)
         {
             _par0 = par0;
             _par1 = par1;
@@ -529,7 +532,8 @@ namespace System.Linq.Expressions
         internal override Expression<TDelegate> Rewrite(
             Expression body,
             ParameterExpression[]? parameters
-        ) {
+        )
+        {
             Debug.Assert(body != null);
             Debug.Assert(parameters == null || parameters.Length == 2);
 
@@ -608,7 +612,8 @@ namespace System.Linq.Expressions
         internal override Expression<TDelegate> Rewrite(
             Expression body,
             ParameterExpression[]? parameters
-        ) {
+        )
+        {
             Debug.Assert(body != null);
             Debug.Assert(parameters == null || parameters.Length == 3);
 
@@ -649,7 +654,8 @@ namespace System.Linq.Expressions
         internal override Expression<TDelegate> Rewrite(
             Expression body,
             ParameterExpression[]? parameters
-        ) {
+        )
+        {
             Debug.Assert(body != null);
             Debug.Assert(parameters == null || parameters.Length == _parameters.Count);
 
@@ -686,7 +692,8 @@ namespace System.Linq.Expressions
             string? name,
             bool tailCall,
             ReadOnlyCollection<ParameterExpression> parameters
-        ) {
+        )
+        {
             // Get or create a delegate to the public Expression.Lambda<T>
             // method and call that will be used for creating instances of this
             // delegate type
@@ -769,7 +776,8 @@ namespace System.Linq.Expressions
         public static Expression<TDelegate> Lambda<TDelegate>(
             Expression body,
             params ParameterExpression[]? parameters
-        ) {
+        )
+        {
             return Lambda<TDelegate>(body, false, (IEnumerable<ParameterExpression>?)parameters);
         }
 
@@ -785,7 +793,8 @@ namespace System.Linq.Expressions
             Expression body,
             bool tailCall,
             params ParameterExpression[]? parameters
-        ) {
+        )
+        {
             return Lambda<TDelegate>(body, tailCall, (IEnumerable<ParameterExpression>?)parameters);
         }
 
@@ -799,7 +808,8 @@ namespace System.Linq.Expressions
         public static Expression<TDelegate> Lambda<TDelegate>(
             Expression body,
             IEnumerable<ParameterExpression>? parameters
-        ) {
+        )
+        {
             return Lambda<TDelegate>(body, null, false, parameters);
         }
 
@@ -815,7 +825,8 @@ namespace System.Linq.Expressions
             Expression body,
             bool tailCall,
             IEnumerable<ParameterExpression>? parameters
-        ) {
+        )
+        {
             return Lambda<TDelegate>(body, null, tailCall, parameters);
         }
 
@@ -831,7 +842,8 @@ namespace System.Linq.Expressions
             Expression body,
             string? name,
             IEnumerable<ParameterExpression>? parameters
-        ) {
+        )
+        {
             return Lambda<TDelegate>(body, name, false, parameters);
         }
 
@@ -849,7 +861,8 @@ namespace System.Linq.Expressions
             string? name,
             bool tailCall,
             IEnumerable<ParameterExpression>? parameters
-        ) {
+        )
+        {
             ReadOnlyCollection<ParameterExpression> parameterList = parameters.ToReadOnly();
             ValidateLambdaArgs(typeof(TDelegate), ref body, parameterList, nameof(TDelegate));
 #if FEATURE_COMPILE
@@ -873,7 +886,8 @@ namespace System.Linq.Expressions
         public static LambdaExpression Lambda(
             Expression body,
             params ParameterExpression[]? parameters
-        ) {
+        )
+        {
             return Lambda(body, false, (IEnumerable<ParameterExpression>?)parameters);
         }
 
@@ -888,7 +902,8 @@ namespace System.Linq.Expressions
             Expression body,
             bool tailCall,
             params ParameterExpression[]? parameters
-        ) {
+        )
+        {
             return Lambda(body, tailCall, (IEnumerable<ParameterExpression>?)parameters);
         }
 
@@ -901,7 +916,8 @@ namespace System.Linq.Expressions
         public static LambdaExpression Lambda(
             Expression body,
             IEnumerable<ParameterExpression>? parameters
-        ) {
+        )
+        {
             return Lambda(body, null, false, parameters);
         }
 
@@ -916,7 +932,8 @@ namespace System.Linq.Expressions
             Expression body,
             bool tailCall,
             IEnumerable<ParameterExpression>? parameters
-        ) {
+        )
+        {
             return Lambda(body, null, tailCall, parameters);
         }
 
@@ -931,7 +948,8 @@ namespace System.Linq.Expressions
             Type delegateType,
             Expression body,
             params ParameterExpression[]? parameters
-        ) {
+        )
+        {
             return Lambda(delegateType, body, null, false, parameters);
         }
 
@@ -948,7 +966,8 @@ namespace System.Linq.Expressions
             Expression body,
             bool tailCall,
             params ParameterExpression[]? parameters
-        ) {
+        )
+        {
             return Lambda(delegateType, body, null, tailCall, parameters);
         }
 
@@ -963,7 +982,8 @@ namespace System.Linq.Expressions
             Type delegateType,
             Expression body,
             IEnumerable<ParameterExpression>? parameters
-        ) {
+        )
+        {
             return Lambda(delegateType, body, null, false, parameters);
         }
 
@@ -980,7 +1000,8 @@ namespace System.Linq.Expressions
             Expression body,
             bool tailCall,
             IEnumerable<ParameterExpression>? parameters
-        ) {
+        )
+        {
             return Lambda(delegateType, body, null, tailCall, parameters);
         }
 
@@ -995,7 +1016,8 @@ namespace System.Linq.Expressions
             Expression body,
             string? name,
             IEnumerable<ParameterExpression>? parameters
-        ) {
+        )
+        {
             return Lambda(body, name, false, parameters);
         }
 
@@ -1012,7 +1034,8 @@ namespace System.Linq.Expressions
             string? name,
             bool tailCall,
             IEnumerable<ParameterExpression>? parameters
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(body, nameof(body));
 
             ReadOnlyCollection<ParameterExpression> parameterList = parameters.ToReadOnly();
@@ -1053,7 +1076,8 @@ namespace System.Linq.Expressions
             Expression body,
             string? name,
             IEnumerable<ParameterExpression>? parameters
-        ) {
+        )
+        {
             ReadOnlyCollection<ParameterExpression> paramList = parameters.ToReadOnly();
             ValidateLambdaArgs(delegateType, ref body, paramList, nameof(delegateType));
 
@@ -1075,7 +1099,8 @@ namespace System.Linq.Expressions
             string? name,
             bool tailCall,
             IEnumerable<ParameterExpression>? parameters
-        ) {
+        )
+        {
             ReadOnlyCollection<ParameterExpression> paramList = parameters.ToReadOnly();
             ValidateLambdaArgs(delegateType, ref body, paramList, nameof(delegateType));
 
@@ -1087,14 +1112,16 @@ namespace System.Linq.Expressions
             ref Expression body,
             ReadOnlyCollection<ParameterExpression> parameters,
             string paramName
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(delegateType, nameof(delegateType));
             ExpressionUtils.RequiresCanRead(body, nameof(body));
 
             if (
                 !typeof(MulticastDelegate).IsAssignableFrom(delegateType)
                 || delegateType == typeof(MulticastDelegate)
-            ) {
+            )
+            {
                 throw Error.LambdaTypeMustBeDerivedFromSystemDelegate(paramName);
             }
 
@@ -1159,7 +1186,8 @@ namespace System.Linq.Expressions
             if (
                 mi.ReturnType != typeof(void)
                 && !TypeUtils.AreReferenceAssignable(mi.ReturnType, body.Type)
-            ) {
+            )
+            {
                 if (!TryQuote(mi.ReturnType, ref body))
                 {
                     throw Error.ExpressionTypeDoesNotMatchReturn(body.Type, mi.ReturnType);
@@ -1286,7 +1314,8 @@ namespace System.Linq.Expressions
         public static bool TryGetActionType(
             Type[] typeArgs,
             [NotNullWhen(true)] out Type? actionType
-        ) {
+        )
+        {
             if (ValidateTryGetFuncActionArgs(typeArgs) == TryGetFuncActionArgsResult.Valid)
             {
                 return (actionType = Compiler.DelegateHelpers.GetActionType(typeArgs)) != null;

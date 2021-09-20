@@ -58,7 +58,8 @@ namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect
         public IDictionary<string, string> ValidateChallengeFormPost(
             string responseBody,
             params string[] parametersToValidate
-        ) {
+        )
+        {
             IDictionary<string, string> formInputs = null;
             var errors = new List<string>();
             var xdoc = XDocument.Parse(responseBody.Replace("doctype", "DOCTYPE"));
@@ -100,7 +101,8 @@ namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect
         public IDictionary<string, string> ValidateSignoutFormPost(
             TestTransaction transaction,
             params string[] parametersToValidate
-        ) {
+        )
+        {
             IDictionary<string, string> formInputs = null;
             var errors = new List<string>();
             var xdoc = XDocument.Parse(transaction.ResponseText.Replace("doctype", "DOCTYPE"));
@@ -163,7 +165,8 @@ namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect
             Uri redirectUri,
             OpenIdConnectRequestType requestType,
             string[] parametersToValidate
-        ) {
+        )
+        {
             var errors = new List<string>();
 
             // Validate the authority
@@ -203,7 +206,8 @@ namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect
             IEnumerable<string> parametersToValidate,
             ICollection<string> errors,
             bool htmlEncoded
-        ) {
+        )
+        {
             foreach (var paramToValidate in parametersToValidate)
             {
                 switch (paramToValidate)
@@ -256,7 +260,8 @@ namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect
             string absoluteUri,
             ICollection<string> errors,
             OpenIdConnectRequestType requestType
-        ) {
+        )
+        {
             string expectedAuthority;
             switch (requestType)
             {
@@ -377,7 +382,8 @@ namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect
         private static void ValidateSkuTelemetry(
             IDictionary<string, string> actualParams,
             ICollection<string> errors
-        ) {
+        )
+        {
             if (!actualParams.ContainsKey(OpenIdConnectParameterNames.SkuTelemetry))
             {
                 errors.Add($"Parameter {OpenIdConnectParameterNames.SkuTelemetry} is missing");
@@ -414,7 +420,8 @@ namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect
             IDictionary<string, string> actualQuery,
             ICollection<string> errors,
             bool htmlEncoded
-        ) {
+        )
+        {
             if (_options.MaxAge.HasValue)
             {
                 Assert.Equal(TimeSpan.FromMinutes(20), _options.MaxAge.Value);
@@ -454,7 +461,8 @@ namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect
             IDictionary<string, string> actualParams,
             ICollection<string> errors,
             bool htmlEncoded
-        ) {
+        )
+        {
             string actualValue;
             if (actualParams.TryGetValue(parameterName, out actualValue))
             {
@@ -481,19 +489,22 @@ namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect
             protected override async Task<HttpResponseMessage> SendAsync(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (
                     request.RequestUri.AbsoluteUri.Equals(
                         "https://login.microsoftonline.com/common/.well-known/openid-configuration"
                     )
-                ) {
+                )
+                {
                     return await ReturnResource("wellknownconfig.json");
                 }
                 if (
                     request.RequestUri.AbsoluteUri.Equals(
                         "https://login.microsoftonline.com/common/discovery/keys"
                     )
-                ) {
+                )
+                {
                     return await ReturnResource("wellknownkeys.json");
                 }
 

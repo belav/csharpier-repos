@@ -46,7 +46,8 @@ namespace System.Web.WebPages.Html
             string name,
             bool isChecked,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             if (String.IsNullOrEmpty(name))
             {
                 throw new ArgumentException(
@@ -61,7 +62,8 @@ namespace System.Web.WebPages.Html
             string name,
             bool? isChecked,
             IDictionary<string, object> attributes
-        ) {
+        )
+        {
             TagBuilder builder = new TagBuilder("input");
             builder.MergeAttribute("type", "checkbox", replaceExisting: true);
             builder.GenerateId(name);

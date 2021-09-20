@@ -40,21 +40,24 @@ namespace Microsoft.CodeAnalysis.CSharp
             IDictionary<INamespaceOrTypeSymbol, IAliasSymbol> aliasMap,
             bool isFirstSymbolVisited,
             bool inNamespaceOrType = false
-        ) : base(
-            builder,
-            format,
-            isFirstSymbolVisited,
-            semanticModelOpt,
-            positionOpt,
-            inNamespaceOrType
-        ) {
+        )
+            : base(
+                builder,
+                format,
+                isFirstSymbolVisited,
+                semanticModelOpt,
+                positionOpt,
+                inNamespaceOrType
+            )
+        {
             _escapeKeywordIdentifiers = escapeKeywordIdentifiers;
             _lazyAliasMap = aliasMap;
         }
 
         protected override AbstractSymbolDisplayVisitor MakeNotFirstVisitor(
             bool inNamespaceOrType = false
-        ) {
+        )
+        {
             return new SymbolDisplayVisitor(
                 this.builder,
                 this.format,
@@ -71,7 +74,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SymbolDisplayPartKind kind,
             ISymbol symbol,
             string text
-        ) {
+        )
+        {
             text =
                 (text == null)
                     ? "?"
@@ -145,7 +149,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 && format.KindOptions.IncludesOption(
                     SymbolDisplayKindOptions.IncludeNamespaceKeyword
                 )
-            ) {
+            )
+            {
                 AddKeyword(SyntaxKind.NamespaceKeyword);
                 AddSpace();
             }
@@ -153,7 +158,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 format.TypeQualificationStyle
                 == SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces
-            ) {
+            )
+            {
                 var containingNamespace = symbol.ContainingNamespace;
                 if (ShouldVisitNamespace(containingNamespace))
                 {
@@ -230,7 +236,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 symbol.IsRef
                 && format.LocalOptions.IncludesOption(SymbolDisplayLocalOptions.IncludeRef)
-            ) {
+            )
+            {
                 AddKeyword(SyntaxKind.RefKeyword);
                 AddSpace();
 
@@ -261,7 +268,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 && symbol.IsConst
                 && symbol.HasConstantValue
                 && CanAddConstant(symbol.Type, symbol.ConstantValue)
-            ) {
+            )
+            {
                 AddSpace();
                 AddPunctuation(SyntaxKind.EqualsToken);
                 AddSpace();
@@ -360,7 +368,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         && !IsEnumMember(symbol) & !IsLocalFunction(symbol)
                     )
                 )
-            ) {
+            )
+            {
                 AddAccessibility(symbol);
             }
         }
@@ -419,7 +428,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 format.TypeQualificationStyle
                 != SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -439,7 +449,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 && !format.CompilerInternalOptions.IncludesOption(
                     SymbolDisplayCompilerInternalOptions.IncludeScriptType
                 )
-            ) {
+            )
+            {
                 return false;
             }
 

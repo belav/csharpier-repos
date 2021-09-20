@@ -40,7 +40,8 @@ namespace Microsoft.EntityFrameworkCore
             DbContext context,
             object dependent,
             object principal
-        ) {
+        )
+        {
             var entry = context.Entry(dependent);
             entry.Property("Id1").IsTemporary = true;
             entry.Property("Id2").IsTemporary = true;
@@ -63,7 +64,8 @@ namespace Microsoft.EntityFrameworkCore
             object game,
             object level,
             object item
-        ) {
+        )
+        {
             var entry = context.Entry(game);
             entry.Property("Id").IsTemporary = true;
 

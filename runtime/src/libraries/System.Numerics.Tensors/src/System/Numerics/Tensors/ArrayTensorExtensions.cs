@@ -85,7 +85,8 @@ namespace System.Numerics.Tensors
         public static SparseTensor<T> ToSparseTensor<T>(
             this T[,,] array,
             bool reverseStride = false
-        ) {
+        )
+        {
             return new SparseTensor<T>(array, reverseStride);
         }
 
@@ -99,7 +100,8 @@ namespace System.Numerics.Tensors
         public static SparseTensor<T> ToSparseTensor<T>(
             this Array array,
             bool reverseStride = false
-        ) {
+        )
+        {
             return new SparseTensor<T>(array, reverseStride);
         }
 
@@ -124,7 +126,8 @@ namespace System.Numerics.Tensors
         public static CompressedSparseTensor<T> ToCompressedSparseTensor<T>(
             this T[,] array,
             bool reverseStride = false
-        ) {
+        )
+        {
             return new CompressedSparseTensor<T>(array, reverseStride);
         }
 
@@ -138,7 +141,8 @@ namespace System.Numerics.Tensors
         public static CompressedSparseTensor<T> ToCompressedSparseTensor<T>(
             this T[,,] array,
             bool reverseStride = false
-        ) {
+        )
+        {
             return new CompressedSparseTensor<T>(array, reverseStride);
         }
 
@@ -152,7 +156,8 @@ namespace System.Numerics.Tensors
         public static CompressedSparseTensor<T> ToCompressedSparseTensor<T>(
             this Array array,
             bool reverseStride = false
-        ) {
+        )
+        {
             return new CompressedSparseTensor<T>(array, reverseStride);
         }
     }

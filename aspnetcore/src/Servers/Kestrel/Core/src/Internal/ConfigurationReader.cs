@@ -133,7 +133,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
         private static Dictionary<string, SniConfig> ReadSni(
             IConfigurationSection sniConfig,
             string endpointName
-        ) {
+        )
+        {
             var sniDictionary = new Dictionary<string, SniConfig>(
                 0,
                 StringComparer.OrdinalIgnoreCase
@@ -186,14 +187,16 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
 
         private static ClientCertificateMode? ParseClientCertificateMode(
             string clientCertificateMode
-        ) {
+        )
+        {
             if (
                 Enum.TryParse<ClientCertificateMode>(
                     clientCertificateMode,
                     ignoreCase: true,
                     out var result
                 )
-            ) {
+            )
+            {
                 return result;
             }
 
@@ -233,7 +236,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
             if (
                 endpoint.Certificate != null
                 && (endpoint.Certificate.IsFileCert || endpoint.Certificate.IsStoreCert)
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     CoreStrings.FormatEndpointHasUnusedHttpsConfig(endpoint.Name, CertificateKey)
                 );
@@ -307,7 +311,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
             string url,
             Dictionary<string, SniConfig> sni,
             IConfigurationSection configSection
-        ) {
+        )
+        {
             Name = name;
             Url = url;
             Sni = sni;
@@ -364,7 +369,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
         private static bool CompareSniDictionaries(
             Dictionary<string, SniConfig> lhs,
             Dictionary<string, SniConfig> rhs
-        ) {
+        )
+        {
             if (lhs.Count != rhs.Count)
             {
                 return false;

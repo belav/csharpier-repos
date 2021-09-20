@@ -17,7 +17,8 @@ namespace System.Reflection.TypeLoading
             string name,
             Type? argumentType,
             object? value
-        ) {
+        )
+        {
             MemberInfo[] members = attributeType.GetMember(
                 name,
                 MemberTypes.Field | MemberTypes.Property,
@@ -39,7 +40,8 @@ namespace System.Reflection.TypeLoading
         /// </summary>
         public static ReadOnlyCollection<CustomAttributeTypedArgument> CloneForApiReturn(
             this IList<CustomAttributeTypedArgument> cats
-        ) {
+        )
+        {
             int count = cats.Count;
             CustomAttributeTypedArgument[] clones = new CustomAttributeTypedArgument[count];
             for (int i = 0; i < count; i++)
@@ -54,7 +56,8 @@ namespace System.Reflection.TypeLoading
         /// </summary>
         public static ReadOnlyCollection<CustomAttributeNamedArgument> CloneForApiReturn(
             this IList<CustomAttributeNamedArgument> cans
-        ) {
+        )
+        {
             int count = cans.Count;
             CustomAttributeNamedArgument[] clones = new CustomAttributeNamedArgument[count];
             for (int i = 0; i < count; i++)
@@ -69,7 +72,8 @@ namespace System.Reflection.TypeLoading
         /// </summary>
         private static CustomAttributeTypedArgument CloneForApiReturn(
             this CustomAttributeTypedArgument cat
-        ) {
+        )
+        {
             Type type = cat.ArgumentType;
             object? value = cat.Value;
 
@@ -90,7 +94,8 @@ namespace System.Reflection.TypeLoading
         /// </summary>
         private static CustomAttributeNamedArgument CloneForApiReturn(
             this CustomAttributeNamedArgument can
-        ) {
+        )
+        {
             return new CustomAttributeNamedArgument(
                 can.MemberInfo,
                 can.TypedValue.CloneForApiReturn()
@@ -104,7 +109,8 @@ namespace System.Reflection.TypeLoading
         public static CustomAttributeData? TryComputeMarshalAsCustomAttributeData(
             Func<MarshalAsAttribute> marshalAsAttributeComputer,
             MetadataLoadContext loader
-        ) {
+        )
+        {
             // Make sure all the necessary framework types exist in this MetadataLoadContext's core assembly. If one doesn't, skip.
             CoreTypes ct = loader.GetAllFoundCoreTypes();
             if (

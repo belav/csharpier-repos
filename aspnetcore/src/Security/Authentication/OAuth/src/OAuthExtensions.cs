@@ -66,8 +66,9 @@ namespace Microsoft.Extensions.DependencyInjection
             this AuthenticationBuilder builder,
             string authenticationScheme,
             Action<TOptions> configureOptions
-        ) where TOptions : OAuthOptions, new()
-          where THandler : OAuthHandler<TOptions> =>
+        )
+            where TOptions : OAuthOptions, new()
+            where THandler : OAuthHandler<TOptions> =>
             builder.AddOAuth<TOptions, THandler>(
                 authenticationScheme,
                 OAuthDefaults.DisplayName,
@@ -90,8 +91,9 @@ namespace Microsoft.Extensions.DependencyInjection
             string authenticationScheme,
             string displayName,
             Action<TOptions> configureOptions
-        ) where TOptions : OAuthOptions, new()
-          where THandler : OAuthHandler<TOptions>
+        )
+            where TOptions : OAuthOptions, new()
+            where THandler : OAuthHandler<TOptions>
         {
             builder.Services.TryAddEnumerable(
                 ServiceDescriptor.Singleton<

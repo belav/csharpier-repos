@@ -25,7 +25,8 @@ namespace System.IO.Enumeration
             ReadOnlySpan<char> rootDirectory,
             ReadOnlySpan<char> originalRootDirectory,
             Span<char> pathBuffer
-        ) {
+        )
+        {
             entry._directoryEntry = directoryEntry;
             entry.Directory = directory;
             entry.RootDirectory = rootDirectory;
@@ -52,7 +53,8 @@ namespace System.IO.Enumeration
                     || directoryEntry.InodeType == Interop.Sys.NodeType.DT_UNKNOWN
                 )
                 && Interop.Sys.Stat(entry.FullPath, out Interop.Sys.FileStatus targetStatus) >= 0
-            ) {
+            )
+            {
                 // Symlink or unknown: Stat to it to see if we can resolve it to a directory.
                 isDirectory =
                     (targetStatus.Mode & Interop.Sys.FileTypes.S_IFMT)
@@ -70,7 +72,8 @@ namespace System.IO.Enumeration
                     Interop.Sys.LStat(entry.FullPath, out Interop.Sys.FileStatus linkTargetStatus)
                     >= 0
                 )
-            ) {
+            )
+            {
                 isSymlink =
                     (linkTargetStatus.Mode & Interop.Sys.FileTypes.S_IFMT)
                     == Interop.Sys.FileTypes.S_IFLNK;

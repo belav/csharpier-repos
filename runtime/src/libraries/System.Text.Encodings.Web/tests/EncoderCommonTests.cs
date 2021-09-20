@@ -22,7 +22,8 @@ namespace System.Text.Encodings.Web.Tests
             int numCharsToEncode,
             int worstCaseOutputCharsPerInputChar,
             int expectedResult
-        ) {
+        )
+        {
             Assert.Equal(
                 expectedResult,
                 EncoderCommon.GetCapacityOfOutputStringBuilder(

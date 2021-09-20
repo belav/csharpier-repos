@@ -52,7 +52,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IDataProtectionBuilder AddDataProtection(
             this IServiceCollection services,
             Action<DataProtectionOptions> setupAction
-        ) {
+        )
+        {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));

@@ -25,7 +25,8 @@ namespace System.Web.Http.Controllers
         public static HttpParameterBinding BindAsError(
             this HttpParameterDescriptor parameter,
             string message
-        ) {
+        )
+        {
             return new ErrorParameterBinding(parameter, message);
         }
 
@@ -38,7 +39,8 @@ namespace System.Web.Http.Controllers
         public static HttpParameterBinding BindWithAttribute(
             this HttpParameterDescriptor parameter,
             ParameterBindingAttribute attribute
-        ) {
+        )
+        {
             return attribute.GetBinding(parameter);
         }
 
@@ -50,7 +52,8 @@ namespace System.Web.Http.Controllers
         /// <returns>a binding</returns>
         public static HttpParameterBinding BindWithModelBinding(
             this HttpParameterDescriptor parameter
-        ) {
+        )
+        {
             return BindWithAttribute(parameter, new ModelBinderAttribute());
         }
 
@@ -63,7 +66,8 @@ namespace System.Web.Http.Controllers
         public static HttpParameterBinding BindWithModelBinding(
             this HttpParameterDescriptor parameter,
             IModelBinder binder
-        ) {
+        )
+        {
             HttpConfiguration config = parameter.Configuration;
             IEnumerable<ValueProviderFactory> valueProviderFactories =
                 new ModelBinderAttribute().GetValueProviderFactories(config);
@@ -80,7 +84,8 @@ namespace System.Web.Http.Controllers
         public static HttpParameterBinding BindWithModelBinding(
             this HttpParameterDescriptor parameter,
             params ValueProviderFactory[] valueProviderFactories
-        ) {
+        )
+        {
             return BindWithModelBinding(
                 parameter,
                 (IEnumerable<ValueProviderFactory>)valueProviderFactories
@@ -96,7 +101,8 @@ namespace System.Web.Http.Controllers
         public static HttpParameterBinding BindWithModelBinding(
             this HttpParameterDescriptor parameter,
             IEnumerable<ValueProviderFactory> valueProviderFactories
-        ) {
+        )
+        {
             HttpConfiguration config = parameter.Configuration;
             IModelBinder binder = new ModelBinderAttribute().GetModelBinder(
                 config,
@@ -117,7 +123,8 @@ namespace System.Web.Http.Controllers
             this HttpParameterDescriptor parameter,
             IModelBinder binder,
             IEnumerable<ValueProviderFactory> valueProviderFactories
-        ) {
+        )
+        {
             return new ModelBinderParameterBinding(parameter, binder, valueProviderFactories);
         }
 
@@ -145,7 +152,8 @@ namespace System.Web.Http.Controllers
         public static HttpParameterBinding BindWithFormatter(
             this HttpParameterDescriptor parameter,
             params MediaTypeFormatter[] formatters
-        ) {
+        )
+        {
             return BindWithFormatter(parameter, (IEnumerable<MediaTypeFormatter>)formatters);
         }
 
@@ -158,7 +166,8 @@ namespace System.Web.Http.Controllers
         public static HttpParameterBinding BindWithFormatter(
             this HttpParameterDescriptor parameter,
             IEnumerable<MediaTypeFormatter> formatters
-        ) {
+        )
+        {
             HttpConfiguration config = parameter.Configuration;
             IBodyModelValidator validators = config.Services.GetBodyModelValidator();
             return new FormatterParameterBinding(parameter, formatters, validators);
@@ -175,7 +184,8 @@ namespace System.Web.Http.Controllers
             this HttpParameterDescriptor parameter,
             IEnumerable<MediaTypeFormatter> formatters,
             IBodyModelValidator bodyModelValidator
-        ) {
+        )
+        {
             return new FormatterParameterBinding(parameter, formatters, bodyModelValidator);
         }
     }

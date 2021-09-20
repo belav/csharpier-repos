@@ -84,7 +84,8 @@ namespace Microsoft.CodeAnalysis.Scripting
             Compilation compilation,
             bool emitDebugInformation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var diagnostics = DiagnosticBag.GetInstance();
             try
             {
@@ -120,7 +121,8 @@ namespace Microsoft.CodeAnalysis.Scripting
         private static void ThrowIfAnyCompilationErrors(
             DiagnosticBag diagnostics,
             DiagnosticFormatter formatter
-        ) {
+        )
+        {
             if (diagnostics.IsEmptyWithoutResolution)
             {
                 return;
@@ -146,7 +148,8 @@ namespace Microsoft.CodeAnalysis.Scripting
             DiagnosticBag diagnostics,
             bool emitDebugInformation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var entryPoint = compilation.GetEntryPoint(cancellationToken);
 
             using (var peStream = new MemoryStream())
@@ -170,7 +173,8 @@ namespace Microsoft.CodeAnalysis.Scripting
                 foreach (
                     var referencedAssembly in compilation.GetBoundReferenceManager()
                         .GetReferencedAssemblies()
-                ) {
+                )
+                {
                     var path = (referencedAssembly.Key as PortableExecutableReference)?.FilePath;
                     if (path != null)
                     {
@@ -209,7 +213,8 @@ namespace Microsoft.CodeAnalysis.Scripting
             Compilation compilation,
             EmitOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return compilation.Emit(
                 peStream: peStream,
                 pdbStream: pdbStreamOpt,
@@ -225,7 +230,8 @@ namespace Microsoft.CodeAnalysis.Scripting
             IMethodSymbol entryPoint,
             Assembly assembly,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             string entryPointTypeName = MetadataHelpers.BuildQualifiedName(
                 entryPoint.ContainingNamespace.MetadataName,
                 entryPoint.ContainingType.MetadataName

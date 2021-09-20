@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.Editor.Undo
             this Workspace workspace,
             string description,
             bool useFallback = true
-        ) {
+        )
+        {
             var undoService = workspace.Services.GetService<IGlobalUndoService>();
 
             try

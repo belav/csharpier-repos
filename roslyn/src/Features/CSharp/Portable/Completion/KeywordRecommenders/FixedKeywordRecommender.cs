@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             int position,
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return IsUnsafeStatementContext(context)
                 || IsMemberDeclarationContext(context, cancellationToken);
         }
@@ -38,7 +39,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
         private static bool IsMemberDeclarationContext(
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return context.TargetToken.IsUnsafeContext()
                 && (
                     context.SyntaxTree.IsGlobalMemberDeclarationContext(

@@ -84,7 +84,8 @@ namespace Roslyn.Test.PdbUtilities
             out int qualifiedNameLength,
             [MarshalAs(UnmanagedType.U4)] out TypeAttributes attributes,
             out int baseType
-        ) {
+        )
+        {
             if (_metadataReaderOpt == null)
             {
                 throw new NotSupportedException("Metadata not available");
@@ -126,7 +127,8 @@ namespace Roslyn.Test.PdbUtilities
             [MarshalAs(UnmanagedType.LPWStr), Out] StringBuilder qualifiedName,
             int qualifiedNameBufferLength,
             out int qualifiedNameLength
-        ) {
+        )
+        {
             if (_metadataReaderOpt == null)
             {
                 throw new NotSupportedException("Metadata not available");
@@ -179,7 +181,8 @@ namespace Roslyn.Test.PdbUtilities
             uint tokenType,
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 4)] uint[] arrayCustomAttributes,
             uint countMax
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -188,7 +191,8 @@ namespace Roslyn.Test.PdbUtilities
             uint td,
             uint* arrayEvents,
             uint countMax
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -197,7 +201,8 @@ namespace Roslyn.Test.PdbUtilities
             uint cl,
             uint* arrayFields,
             uint countMax
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -207,7 +212,8 @@ namespace Roslyn.Test.PdbUtilities
             string stringName,
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 4)] uint[] arrayFields,
             uint countMax
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -216,7 +222,8 @@ namespace Roslyn.Test.PdbUtilities
             uint td,
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 3)] uint[] arrayImpls,
             uint countMax
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -225,7 +232,8 @@ namespace Roslyn.Test.PdbUtilities
             uint tokenParent,
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 3)] uint[] arrayMemberRefs,
             uint countMax
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -234,7 +242,8 @@ namespace Roslyn.Test.PdbUtilities
             uint cl,
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 3)] uint[] arrayMembers,
             uint countMax
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -244,7 +253,8 @@ namespace Roslyn.Test.PdbUtilities
             string stringName,
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 4)] uint[] arrayMembers,
             uint countMax
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -254,7 +264,8 @@ namespace Roslyn.Test.PdbUtilities
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 4)] uint[] arrayMethodBody,
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 4)] uint[] arrayMethodDecl,
             uint countMax
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -263,7 +274,8 @@ namespace Roslyn.Test.PdbUtilities
             uint cl,
             uint* arrayMethods,
             uint countMax
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -272,7 +284,8 @@ namespace Roslyn.Test.PdbUtilities
             uint mb,
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 3)] uint[] arrayEventProp,
             uint countMax
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -282,7 +295,8 @@ namespace Roslyn.Test.PdbUtilities
             string stringName,
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 4)] uint[] arrayMethods,
             uint countMax
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -290,7 +304,8 @@ namespace Roslyn.Test.PdbUtilities
             ref uint handlePointerEnum,
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)] uint[] arrayModuleRefs,
             uint cmax
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -299,7 +314,8 @@ namespace Roslyn.Test.PdbUtilities
             uint mb,
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 3)] uint[] arrayParams,
             uint countMax
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -309,7 +325,8 @@ namespace Roslyn.Test.PdbUtilities
             uint dwordActions,
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 4)] uint[] arrayPermission,
             uint countMax
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -318,7 +335,8 @@ namespace Roslyn.Test.PdbUtilities
             uint td,
             uint* arrayProperties,
             uint countMax
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -326,7 +344,8 @@ namespace Roslyn.Test.PdbUtilities
             ref uint handlePointerEnum,
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)] uint[] arraySignatures,
             uint cmax
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -334,7 +353,8 @@ namespace Roslyn.Test.PdbUtilities
             ref uint handlePointerEnum,
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)] uint[] arrayTypeDefs,
             uint countMax
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -342,7 +362,8 @@ namespace Roslyn.Test.PdbUtilities
             ref uint handlePointerEnum,
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)] uint[] arrayTypeRefs,
             uint countMax
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -350,7 +371,8 @@ namespace Roslyn.Test.PdbUtilities
             ref uint handlePointerEnum,
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)] uint[] arrayTypeSpecs,
             uint cmax
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -358,7 +380,8 @@ namespace Roslyn.Test.PdbUtilities
             ref uint handlePointerEnum,
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)] uint[] arrayMethods,
             uint countMax
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -366,7 +389,8 @@ namespace Roslyn.Test.PdbUtilities
             ref uint handlePointerEnum,
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)] uint[] arrayStrings,
             uint cmax
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -375,7 +399,8 @@ namespace Roslyn.Test.PdbUtilities
             string stringName,
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 3)] byte[] voidPointerSigBlob,
             uint byteCountSigBlob
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -384,7 +409,8 @@ namespace Roslyn.Test.PdbUtilities
             string stringName,
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 3)] byte[] voidPointerSigBlob,
             uint byteCountSigBlob
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -393,7 +419,8 @@ namespace Roslyn.Test.PdbUtilities
             string stringName,
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 3)] byte[] voidPointerSigBlob,
             uint byteCountSigBlob
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -402,7 +429,8 @@ namespace Roslyn.Test.PdbUtilities
             string stringName,
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 3)] byte[] voidPointerSigBlob,
             uint byteCountSigBlob
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -422,7 +450,8 @@ namespace Roslyn.Test.PdbUtilities
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 3)] ulong[] arrayFieldOffset,
             uint countMax,
             out uint countPointerFieldOffset
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -430,7 +459,8 @@ namespace Roslyn.Test.PdbUtilities
             uint tokenObj,
             string stringName,
             out void* ppData
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -439,7 +469,8 @@ namespace Roslyn.Test.PdbUtilities
             out uint ptkObj,
             out uint ptkType,
             out void* ppBlob
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -456,7 +487,8 @@ namespace Roslyn.Test.PdbUtilities
             out uint pmdFire,
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 11)] uint[] rmdOtherMethod,
             uint countMax
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -476,7 +508,8 @@ namespace Roslyn.Test.PdbUtilities
             out uint pcbSigBlob,
             out uint pdwCPlusTypeFlag,
             out void* ppValue
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -498,7 +531,8 @@ namespace Roslyn.Test.PdbUtilities
             out uint pdwImplFlags,
             out uint pdwCPlusTypeFlag,
             out void* ppValue
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -509,7 +543,8 @@ namespace Roslyn.Test.PdbUtilities
             uint cchMember,
             out uint pchMember,
             out byte* ppvSigBlob
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -523,7 +558,8 @@ namespace Roslyn.Test.PdbUtilities
             IntPtr ppvSigBlob,
             IntPtr pcbSigBlob,
             IntPtr pulCodeRVA
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -572,7 +608,8 @@ namespace Roslyn.Test.PdbUtilities
             out uint pdwAttr,
             out uint pdwCPlusTypeFlag,
             out void* ppValue
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -580,7 +617,8 @@ namespace Roslyn.Test.PdbUtilities
             uint pm,
             out uint pdwAction,
             out void* ppvPermission
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -590,7 +628,8 @@ namespace Roslyn.Test.PdbUtilities
             StringBuilder stringImportName,
             uint cchImportName,
             out uint pchImportName
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -610,7 +649,8 @@ namespace Roslyn.Test.PdbUtilities
             out uint pmdGetter,
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 14)] uint[] rmdOtherMethod,
             uint countMax
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -654,7 +694,8 @@ namespace Roslyn.Test.PdbUtilities
             uint tr,
             [In] ref Guid riid,
             [MarshalAs(UnmanagedType.Interface)] out object ppIScope
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
         #endregion

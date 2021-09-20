@@ -40,7 +40,8 @@ namespace TagHelpersWebSite.TagHelpers
                 char[] value,
                 int startIndex,
                 int characterCount
-            ) {
+            )
+            {
                 if (characterCount == 0)
                 {
                     return;
@@ -56,7 +57,8 @@ namespace TagHelpersWebSite.TagHelpers
                 string value,
                 int startIndex,
                 int characterCount
-            ) {
+            )
+            {
                 if (characterCount == 0)
                 {
                     return;
@@ -74,7 +76,8 @@ namespace TagHelpersWebSite.TagHelpers
                 char* buffer,
                 int bufferLength,
                 out int numberOfCharactersWritten
-            ) {
+            )
+            {
                 numberOfCharactersWritten = 0;
 
                 return false;

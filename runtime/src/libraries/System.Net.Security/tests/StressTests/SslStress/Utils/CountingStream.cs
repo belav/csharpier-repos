@@ -57,7 +57,8 @@ namespace SslStress.Utils
         public override async ValueTask WriteAsync(
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             await _stream.WriteAsync(buffer, cancellationToken);
             Interlocked.Add(ref _counter.BytesWritten, buffer.Length);
         }
@@ -65,7 +66,8 @@ namespace SslStress.Utils
         public override async ValueTask<int> ReadAsync(
             Memory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             int read = await _stream.ReadAsync(buffer, cancellationToken);
             Interlocked.Add(ref _counter.BytesRead, read);
             return read;

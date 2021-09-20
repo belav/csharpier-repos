@@ -23,7 +23,8 @@ namespace System.Speech.Internal.Synthesis
                 if (
                     textFragment.State.Action == TtsEngineAction.StartParagraph
                     || textFragment.State.Action == TtsEngineAction.StartSentence
-                ) {
+                )
+                {
                     continue;
                 }
 

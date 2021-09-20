@@ -74,7 +74,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
                     SyntaxKind.VariableDeclaration,
                     out VariableDeclarationSyntax variableDeclaration
                 ) || !variableDeclaration.IsParentKind(SyntaxKind.LocalDeclarationStatement)
-            ) {
+            )
+            {
                 return;
             }
 
@@ -84,7 +85,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
                 || variableDeclarator.Initializer.Value.IsKind(
                     SyntaxKind.StackAllocArrayCreationExpression
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -100,7 +102,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
             if (
                 localDeclarationStatement.ContainsDiagnostics
                 || localDeclarationStatement.UsingKeyword != default
-            ) {
+            )
+            {
                 return;
             }
 
@@ -125,7 +128,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
         private static bool HasConflict(
             IdentifierNameSyntax identifier,
             VariableDeclaratorSyntax variableDeclarator
-        ) {
+        )
+        {
             // TODO: Check for more conflict types.
             if (identifier.SpanStart < variableDeclarator.SpanStart)
             {
@@ -160,7 +164,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
                     SyntaxKind.PostIncrementExpression,
                     SyntaxKind.AddressOfExpression
                 )
-            ) {
+            )
+            {
                 return true;
             }
             else if (identifierNode.Parent is AssignmentExpressionSyntax binaryExpression)
@@ -181,7 +186,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
             Document document,
             VariableDeclaratorSyntax declarator,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var workspace = document.Project.Solution.Workspace;
 
             // Annotate the variable declarator so that we can get back to it later.
@@ -278,7 +284,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
                         if (
                             semanticModel.GetSymbolInfo(o, cancellationToken).Symbol
                             is IMethodSymbol { IsConditional: true }
-                        ) {
+                        )
+                        {
                             node = node.WithAdditionalAnnotations(
                                 WarningAnnotation.Create(
                                     CSharpFeaturesResources.Warning_Inlining_temporary_into_conditional_method_call
@@ -401,7 +408,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
                             SyntaxKind.InvocationExpression
                         )
                 )
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -451,7 +459,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
 
         private static IEnumerable<IdentifierNameSyntax> FindReferenceAnnotatedNodes(
             SyntaxNode root
-        ) {
+        )
+        {
             var annotatedNodesAndTokens = root.GetAnnotatedNodesAndTokens(ReferenceAnnotation);
             foreach (var nodeOrToken in annotatedNodesAndTokens)
             {
@@ -459,7 +468,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
                     nodeOrToken.IsNode
                     && nodeOrToken.AsNode()
                         .IsKind(SyntaxKind.IdentifierName, out IdentifierNameSyntax identifierName)
-                ) {
+                )
+                {
                     yield return identifierName;
                 }
             }
@@ -505,7 +515,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
         private static SyntaxNode RemoveDeclaratorFromVariableList(
             VariableDeclaratorSyntax variableDeclarator,
             VariableDeclarationSyntax variableDeclaration
-        ) {
+        )
+        {
             Debug.Assert(variableDeclaration.Variables.Count > 1);
             Debug.Assert(variableDeclaration.Variables.Contains(variableDeclarator));
 
@@ -528,7 +539,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
         private static SyntaxNode RemoveDeclaratorFromScope(
             VariableDeclaratorSyntax variableDeclarator,
             SyntaxNode scope
-        ) {
+        )
+        {
             var variableDeclaration = (VariableDeclarationSyntax)variableDeclarator.Parent;
 
             // If there is more than one variable declarator, remove this one from the variable declaration.
@@ -573,7 +585,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
                     SyntaxKind.LabeledStatement,
                     out LabeledStatementSyntax labeledStatement
                 )
-            ) {
+            )
+            {
                 var newLabeledStatement = labeledStatement.ReplaceNode(
                     newLocalDeclaration,
                     SyntaxFactory.ParseStatement("")
@@ -587,7 +600,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
                     SyntaxKind.GlobalStatement,
                     out GlobalStatementSyntax globalStatement
                 )
-            ) {
+            )
+            {
                 return newScope.RemoveNode(globalStatement, SyntaxRemoveOptions.KeepNoTrivia);
             }
 
@@ -596,13 +610,15 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
 
         private static ExpressionSyntax SkipRedundantExteriorParentheses(
             ExpressionSyntax expression
-        ) {
+        )
+        {
             while (
                 expression.IsKind(
                     SyntaxKind.ParenthesizedExpression,
                     out ParenthesizedExpressionSyntax parenthesized
                 )
-            ) {
+            )
+            {
                 if (parenthesized.Expression == null || parenthesized.Expression.IsMissing)
                 {
                     break;
@@ -611,7 +627,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
                 if (
                     parenthesized.Expression.IsKind(SyntaxKind.ParenthesizedExpression)
                     || parenthesized.Expression.IsKind(SyntaxKind.IdentifierName)
-                ) {
+                )
+                {
                     expression = parenthesized.Expression;
                 }
                 else
@@ -627,7 +644,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
             VariableDeclaratorSyntax variableDeclarator,
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var updatedDocument = document;
 
             var expression = SkipRedundantExteriorParentheses(variableDeclarator.Initializer.Value);
@@ -740,7 +758,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
             SemanticModel semanticModelBeforeInline,
             SymbolInfo originalInitializerSymbolInfo,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // In this method we detect if inlining the expression introduced the following semantic change:
             // The symbol info associated with any of the inlined expressions does not match the symbol info for original initializer expression prior to inline.
 
@@ -806,7 +825,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
                             newInitializerSymbolInfo,
                             performEquivalenceCheck: true
                         )
-                    ) {
+                    )
+                    {
                         newInitializerSymbolInfo = newSemanticModelForInlinedDocument.GetSymbolInfo(
                             inlinedNode,
                             cancellationToken
@@ -817,7 +837,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
                                 newInitializerSymbolInfo,
                                 performEquivalenceCheck: true
                             )
-                        ) {
+                        )
+                        {
                             replacementNodesWithChangedSemantics ??= new Dictionary<
                                 SyntaxNode,
                                 SyntaxNode
@@ -878,7 +899,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
                         SyntaxKind.SimpleAssignmentExpression,
                         out AssignmentExpressionSyntax assignment
                     )
-                ) {
+                )
+                {
                     return assignment.Left == parent;
                 }
 

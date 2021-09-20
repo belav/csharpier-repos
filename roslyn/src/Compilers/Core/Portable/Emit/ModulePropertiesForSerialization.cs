@@ -132,7 +132,8 @@ namespace Microsoft.Cci
             ushort minorSubsystemVersion,
             byte linkerMajorVersion,
             byte linkerMinorVersion
-        ) {
+        )
+        {
             this.PersistentIdentifier = persistentIdentifier;
             this.FileAlignment = fileAlignment;
             this.SectionAlignment = sectionAlignment;

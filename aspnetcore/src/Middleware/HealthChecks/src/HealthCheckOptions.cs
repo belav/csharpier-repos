@@ -60,7 +60,8 @@ namespace Microsoft.AspNetCore.Diagnostics.HealthChecks
 
         private static IDictionary<HealthStatus, int> ValidateStatusCodesMapping(
             IDictionary<HealthStatus, int> mapping
-        ) {
+        )
+        {
             var missingHealthStatus = ((HealthStatus[])Enum.GetValues(typeof(HealthStatus))).Except(
                     mapping.Keys
                 )

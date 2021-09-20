@@ -45,7 +45,8 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
         internal static PolicyConstraintsAsn Decode(
             ReadOnlyMemory<byte> encoded,
             AsnEncodingRules ruleSet
-        ) {
+        )
+        {
             return Decode(Asn1Tag.Sequence, encoded, ruleSet);
         }
 
@@ -53,7 +54,8 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             Asn1Tag expectedTag,
             ReadOnlyMemory<byte> encoded,
             AsnEncodingRules ruleSet
-        ) {
+        )
+        {
             try
             {
                 AsnValueReader reader = new AsnValueReader(encoded.Span, ruleSet);
@@ -72,7 +74,8 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             ref AsnValueReader reader,
             ReadOnlyMemory<byte> rebind,
             out PolicyConstraintsAsn decoded
-        ) {
+        )
+        {
             Decode(ref reader, Asn1Tag.Sequence, rebind, out decoded);
         }
 
@@ -81,7 +84,8 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             Asn1Tag expectedTag,
             ReadOnlyMemory<byte> rebind,
             out PolicyConstraintsAsn decoded
-        ) {
+        )
+        {
             try
             {
                 DecodeCore(ref reader, expectedTag, rebind, out decoded);
@@ -97,7 +101,8 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             Asn1Tag expectedTag,
             ReadOnlyMemory<byte> rebind,
             out PolicyConstraintsAsn decoded
-        ) {
+        )
+        {
             decoded = default;
             AsnValueReader sequenceReader = reader.ReadSequence(expectedTag);
 
@@ -105,13 +110,15 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
                 sequenceReader.HasData
                 && sequenceReader.PeekTag()
                     .HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 0))
-            ) {
+            )
+            {
                 if (
                     sequenceReader.TryReadInt32(
                         out int tmpRequireExplicitPolicyDepth,
                         new Asn1Tag(TagClass.ContextSpecific, 0)
                     )
-                ) {
+                )
+                {
                     decoded.RequireExplicitPolicyDepth = tmpRequireExplicitPolicyDepth;
                 }
                 else
@@ -124,13 +131,15 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
                 sequenceReader.HasData
                 && sequenceReader.PeekTag()
                     .HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 1))
-            ) {
+            )
+            {
                 if (
                     sequenceReader.TryReadInt32(
                         out int tmpInhibitMappingDepth,
                         new Asn1Tag(TagClass.ContextSpecific, 1)
                     )
-                ) {
+                )
+                {
                     decoded.InhibitMappingDepth = tmpInhibitMappingDepth;
                 }
                 else

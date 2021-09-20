@@ -33,7 +33,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
                 string response = await SendRequestAsync(address);
                 Assert.Equal(string.Empty, response);
             }
@@ -63,7 +64,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
                 string[] customValues = new string[] { "custom1, and custom2", "custom3" };
 
                 await SendRequestAsync(address, "Custom-Header", customValues);
@@ -90,7 +92,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
                 string response = await SendRequestAsync(address);
                 Assert.Equal(string.Empty, response);
             }
@@ -108,7 +111,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             string address,
             string customHeader,
             string[] customValues
-        ) {
+        )
+        {
             var uri = new Uri(address);
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("GET / HTTP/1.1");

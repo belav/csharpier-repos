@@ -3251,7 +3251,8 @@ class Test
             string arg,
             string type,
             int size
-        ) {
+        )
+        {
             CompileAndVerify(
                     @"
 enum E

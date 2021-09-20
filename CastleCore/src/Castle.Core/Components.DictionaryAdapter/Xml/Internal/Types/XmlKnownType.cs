@@ -40,11 +40,12 @@ namespace Castle.Components.DictionaryAdapter.Xml
             string xsiTypeLocalName,
             string xsiTypeNamespaceUri,
             Type clrType
-        ) : this(
-            new XmlName(nameLocalName, nameNamespaceUri),
-            new XmlName(xsiTypeLocalName, xsiTypeNamespaceUri),
-            clrType
-        ) { }
+        )
+            : this(
+                new XmlName(nameLocalName, nameNamespaceUri),
+                new XmlName(xsiTypeLocalName, xsiTypeNamespaceUri),
+                clrType
+            ) { }
 
         public XmlName Name
         {

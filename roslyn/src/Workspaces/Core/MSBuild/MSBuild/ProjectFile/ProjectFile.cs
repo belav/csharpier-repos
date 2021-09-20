@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
             MSB.Evaluation.Project? loadedProject,
             ProjectBuildManager buildManager,
             DiagnosticLog log
-        ) {
+        )
+        {
             _loader = loader;
             _loadedProject = loadedProject;
             _buildManager = buildManager;
@@ -54,7 +55,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
 
         public async Task<ImmutableArray<ProjectFileInfo>> GetProjectFileInfosAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (_loadedProject is null)
             {
                 return ImmutableArray.Create(
@@ -72,7 +74,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
             if (
                 RoslynString.IsNullOrEmpty(targetFrameworkValue)
                 && !RoslynString.IsNullOrEmpty(targetFrameworksValue)
-            ) {
+            )
+            {
                 // This project has a <TargetFrameworks> property, but does not specify a <TargetFramework>.
                 // In this case, we need to iterate through the <TargetFrameworks>, set <TargetFramework> with
                 // each value, and build the project.
@@ -135,7 +138,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
 
         private async Task<ProjectFileInfo> BuildProjectFileInfoAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (_loadedProject is null)
             {
                 return ProjectFileInfo.CreateEmpty(Language, _loadedProject?.FullPath, Log);
@@ -253,7 +257,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
 
         private DocumentFileInfo MakeNonSourceFileDocumentFileInfo(
             MSB.Framework.ITaskItem documentItem
-        ) {
+        )
+        {
             var filePath = GetDocumentFilePath(documentItem);
             var logicalPath = GetDocumentLogicalPath(documentItem, _projectDirectory);
             var isLinked = IsDocumentLinked(documentItem);
@@ -311,7 +316,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
         protected static string GetDocumentLogicalPath(
             MSB.Framework.ITaskItem documentItem,
             string projectDirectory
-        ) {
+        )
+        {
             var link = documentItem.GetMetadata(MetadataNames.Link);
             if (!RoslynString.IsNullOrEmpty(link))
             {
@@ -493,7 +499,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
         private MSB.Evaluation.ProjectItem FindReferenceItem(
             AssemblyIdentity identity,
             string filePath
-        ) {
+        )
+        {
             if (_loadedProject is null)
             {
                 throw new InvalidOperationException(
@@ -624,7 +631,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
         private MSB.Evaluation.ProjectItem? FindProjectReferenceItem(
             string projectName,
             string projectFilePath
-        ) {
+        )
+        {
             if (_loadedProject is null)
             {
                 return null;

@@ -89,7 +89,8 @@ namespace Microsoft.CodeAnalysis.AddParameter
                         if (
                             semanticModel.GetEnclosingSymbol(node.SpanStart, cancellationToken)
                             is IMethodSymbol methodWithDiagnostic
-                        ) {
+                        )
+                        {
                             candidates = candidates.Remove(methodWithDiagnostic);
                         }
                     }
@@ -122,7 +123,8 @@ namespace Microsoft.CodeAnalysis.AddParameter
             SyntaxNode initialNode,
             SyntaxNode node,
             Diagnostic diagnostic
-        ) {
+        )
+        {
             if (TooManyArgumentsDiagnosticIds.Contains(diagnostic.Id))
             {
                 return null;
@@ -142,7 +144,8 @@ namespace Microsoft.CodeAnalysis.AddParameter
             ISyntaxFactsService syntaxFacts,
             SyntaxNode node,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (node is TInvocationExpressionSyntax invocationExpression)
             {
                 var expression = syntaxFacts.GetExpressionOfInvocationExpression(
@@ -176,7 +179,8 @@ namespace Microsoft.CodeAnalysis.AddParameter
             ISyntaxFactsService syntaxFacts,
             SyntaxNode node,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (node is TObjectCreationExpressionSyntax objectCreation)
             {
                 // Not supported if this is "new { ... }" (as there are no parameters at all.
@@ -233,7 +237,8 @@ namespace Microsoft.CodeAnalysis.AddParameter
             ISyntaxFactsService syntaxFacts,
             SeparatedSyntaxList<TArgumentSyntax> arguments,
             ImmutableArray<IMethodSymbol> methodCandidates
-        ) {
+        )
+        {
             var comparer = syntaxFacts.StringComparer;
             var methodsAndArgumentToAdd = ArrayBuilder<
                 ArgumentInsertPositionData<TArgumentSyntax>
@@ -290,7 +295,8 @@ namespace Microsoft.CodeAnalysis.AddParameter
             CodeFixContext context,
             SeparatedSyntaxList<TArgumentSyntax> arguments,
             ImmutableArray<ArgumentInsertPositionData<TArgumentSyntax>> methodsAndArgumentsToAdd
-        ) {
+        )
+        {
             var codeFixData = PrepareCreationOfCodeActions(
                 context.Document,
                 arguments,
@@ -442,7 +448,8 @@ namespace Microsoft.CodeAnalysis.AddParameter
             Document document,
             SeparatedSyntaxList<TArgumentSyntax> arguments,
             ImmutableArray<ArgumentInsertPositionData<TArgumentSyntax>> methodsAndArgumentsToAdd
-        ) {
+        )
+        {
             using var builderDisposer = ArrayBuilder<CodeFixData>.GetInstance(
                 methodsAndArgumentsToAdd.Length,
                 out var builder
@@ -455,7 +462,8 @@ namespace Microsoft.CodeAnalysis.AddParameter
                 var argumentInsertPositionData in methodsAndArgumentsToAdd.OrderByDescending(
                     t => t.ArgumentInsertionIndex
                 )
-            ) {
+            )
+            {
                 var methodToUpdate = argumentInsertPositionData.MethodToUpdate;
                 var argumentToInsert = argumentInsertPositionData.ArgumentToInsert;
 
@@ -499,7 +507,8 @@ namespace Microsoft.CodeAnalysis.AddParameter
             string resourceString,
             IMethodSymbol methodToUpdate,
             bool includeParameters
-        ) {
+        )
+        {
             var methodDisplay = methodToUpdate.ToDisplayString(
                 new SymbolDisplayFormat(
                     typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypes,
@@ -526,7 +535,8 @@ namespace Microsoft.CodeAnalysis.AddParameter
             SeparatedSyntaxList<TArgumentSyntax> argumentList,
             bool fixAllReferences,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var (argumentType, refKind) = await GetArgumentTypeAndRefKindAsync(
                     invocationDocument,
                     argument,
@@ -561,7 +571,8 @@ namespace Microsoft.CodeAnalysis.AddParameter
             Document invocationDocument,
             TArgumentSyntax argument,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxFacts = invocationDocument.GetLanguageService<ISyntaxFactsService>();
             var semanticModel = await invocationDocument.GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
@@ -577,7 +588,8 @@ namespace Microsoft.CodeAnalysis.AddParameter
             Document invocationDocument,
             TArgumentSyntax argument,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxFacts = invocationDocument.GetLanguageService<ISyntaxFactsService>();
 
             var argumentName = syntaxFacts.GetNameForArgument(argument);
@@ -618,7 +630,8 @@ namespace Microsoft.CodeAnalysis.AddParameter
             StringComparer comparer,
             IMethodSymbol method,
             SeparatedSyntaxList<TArgumentSyntax> arguments
-        ) {
+        )
+        {
             var compilation = semanticModel.Compilation;
             var methodParameterNames = new HashSet<string>(comparer);
             methodParameterNames.AddRange(method.Parameters.Select(p => p.Name));
@@ -687,7 +700,8 @@ namespace Microsoft.CodeAnalysis.AddParameter
                             isNullLiteral,
                             isDefaultLiteral
                         )
-                    ) {
+                    )
+                    {
                         if (
                             TypeInfoMatchesWithParamsExpansion(
                                 compilation,
@@ -696,7 +710,8 @@ namespace Microsoft.CodeAnalysis.AddParameter
                                 isNullLiteral,
                                 isDefaultLiteral
                             )
-                        ) {
+                        )
+                        {
                             // The argument matched if we expanded out the params-parameter.
                             // As the params-parameter has to be last, there's nothing else to
                             // do here.
@@ -717,7 +732,8 @@ namespace Microsoft.CodeAnalysis.AddParameter
             IParameterSymbol parameter,
             bool isNullLiteral,
             bool isDefaultLiteral
-        ) {
+        )
+        {
             if (parameter.IsParams && parameter.Type is IArrayTypeSymbol arrayType)
             {
                 if (
@@ -728,7 +744,8 @@ namespace Microsoft.CodeAnalysis.AddParameter
                         isNullLiteral,
                         isDefaultLiteral
                     )
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -742,7 +759,8 @@ namespace Microsoft.CodeAnalysis.AddParameter
             ITypeSymbol parameterType,
             bool isNullLiteral,
             bool isDefaultLiteral
-        ) {
+        )
+        {
             if (
                 parameterType.Equals(argumentTypeInfo.Type)
                 || parameterType.Equals(argumentTypeInfo.ConvertedType)

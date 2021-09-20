@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
                 SwitchStatementSyntax node,
                 SemanticModel semanticModel,
                 out bool shouldRemoveNextStatement
-            ) {
+            )
+            {
                 var parseOptions = (CSharpParseOptions)semanticModel.SyntaxTree.Options;
                 var analyzer = new Analyzer(
                     supportsOrPatterns: parseOptions.LanguageVersion.IsCSharp9OrAbove()
@@ -48,12 +49,14 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
                     nodeToGenerate == SyntaxKind.SimpleAssignmentExpression
                     && analyzer.TryGetVariableDeclaratorAndSymbol(semanticModel)
                         is var (declarator, symbol)
-                ) {
+                )
+                {
                     if (
                         shouldRemoveNextStatement
                         && semanticModel.AnalyzeDataFlow(node.GetNextStatement())
                             .DataFlowsIn.Contains(symbol)
-                    ) {
+                    )
+                    {
                         // Bail out if data flows into the next statement that we want to move
                         // For example:
                         //
@@ -88,7 +91,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
 
             private (VariableDeclaratorSyntax, ISymbol)? TryGetVariableDeclaratorAndSymbol(
                 SemanticModel semanticModel
-            ) {
+            )
+            {
                 if (!_assignmentTargetOpt.IsKind(SyntaxKind.IdentifierName))
                 {
                     return null;
@@ -103,7 +107,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
                             DeclaringSyntaxReferences: { Length: 1 } syntaxRefs
                         }
                     )
-                ) {
+                )
+                {
                     return null;
                 }
 
@@ -121,7 +126,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
             private SyntaxKind AnalyzeSwitchStatement(
                 SwitchStatementSyntax switchStatement,
                 out bool shouldRemoveNextStatement
-            ) {
+            )
+            {
                 // Fail if the switch statement is empty.
                 var sections = switchStatement.Sections;
                 if (sections.Count == 0)
@@ -188,7 +194,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
                     if (
                         label is CasePatternSwitchLabelSyntax casePattern
                         && casePattern.WhenClause != null
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }
@@ -200,13 +207,15 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
             private SyntaxKind AnalyzeNextStatement(
                 SwitchStatementSyntax switchStatement,
                 out bool shouldRemoveNextStatement
-            ) {
+            )
+            {
                 // Check if we have a catch-all label anywhere.  If so we don't need to pull in the next statements.
                 if (
                     switchStatement.Sections.Any(
                         section => section.Labels.Any(label => IsDefaultSwitchLabel(label))
                     )
-                ) {
+                )
+                {
                     // Throw can be overridden by other section bodies, therefore it has no effect on the result.
                     shouldRemoveNextStatement = false;
                     return SyntaxKind.ThrowStatement;

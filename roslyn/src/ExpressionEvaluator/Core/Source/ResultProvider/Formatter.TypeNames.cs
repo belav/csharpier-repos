@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             TypeAndCustomInfo typeAndInfo,
             bool escapeKeywordIdentifiers,
             out bool sawInvalidIdentifier
-        ) {
+        )
+        {
             var type = typeAndInfo.Type;
             if (type == null)
             {
@@ -78,7 +79,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             ref int tupleElementIndex,
             bool escapeKeywordIdentifiers,
             out bool sawInvalidIdentifier
-        ) {
+        )
+        {
             Type originalType = type;
 
             // Can have an array of pointers, but not a pointer to an array, so consume these first.
@@ -157,7 +159,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             ref int tupleElementIndex,
             bool escapeKeywordIdentifiers,
             out bool sawInvalidIdentifier
-        ) {
+        )
+        {
             var isDynamic =
                 DynamicFlagsCustomTypeInfo.GetFlag(dynamicFlags, dynamicFlagIndex++)
                 && type.IsObject();
@@ -310,7 +313,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             Type type,
             bool escapeKeywordIdentifiers,
             out bool sawInvalidIdentifier
-        ) {
+        )
+        {
             sawInvalidIdentifier = false;
 
             var @namespace = type.Namespace;
@@ -401,7 +405,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             int typeArgumentOffset,
             int arity,
             out bool sawInvalidIdentifier
-        ) {
+        )
+        {
             if (typeArguments == null || arity == 0)
             {
                 AppendIdentifier(
@@ -450,7 +455,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             ref int tupleElementIndex,
             bool escapeKeywordIdentifiers,
             out bool sawInvalidIdentifier
-        ) {
+        )
+        {
             sawInvalidIdentifier = false;
 #if DEBUG
             int lastNameIndex = tupleElementIndex + cardinality;
@@ -512,7 +518,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             bool escapeKeywordIdentifiers,
             string identifier,
             out bool sawInvalidIdentifier
-        ) {
+        )
+        {
             if (escapeKeywordIdentifiers)
             {
                 AppendIdentifierEscapingPotentialKeywords(

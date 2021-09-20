@@ -147,7 +147,8 @@ namespace Microsoft.AspNetCore.Http
                             _offset == _headerLength
                             && _leadingStart != -1
                             && _leadingStart != _offset
-                        ) {
+                        )
+                        {
                             // Also produce trailing whitespace
                             _leadingEnd = _offset;
                             return true;

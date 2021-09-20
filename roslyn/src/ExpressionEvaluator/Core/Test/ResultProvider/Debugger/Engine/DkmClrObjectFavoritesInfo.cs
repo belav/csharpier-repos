@@ -21,7 +21,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
             IList<string> favorites,
             string displayString = null,
             string simpleDisplayString = null
-        ) {
+        )
+        {
             Favorites = new ReadOnlyCollection<string>(favorites);
             DisplayString = displayString;
             SimpleDisplayString = simpleDisplayString;

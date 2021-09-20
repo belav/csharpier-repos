@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
             ref TemporaryArray<BlockSpan> spans,
             BlockStructureOptionProvider optionProvider,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var parentKind = node.Parent.Kind();
 
             // For most types of statements, just consider the block 'attached' to the

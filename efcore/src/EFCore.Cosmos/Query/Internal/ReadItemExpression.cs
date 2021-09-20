@@ -78,7 +78,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         public ReadItemExpression(
             IEntityType entityType,
             IDictionary<IProperty, string> propertyParameters
-        ) {
+        )
+        {
             Check.NotNull(entityType, nameof(entityType));
             Check.NotNull(propertyParameters, nameof(propertyParameters));
 

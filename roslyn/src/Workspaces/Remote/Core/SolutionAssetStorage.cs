@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.Remote
         internal async ValueTask<Scope> StoreAssetsAsync(
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var solutionState = solution.State;
             var solutionChecksum = await solutionState.GetChecksumAsync(cancellationToken)
                 .ConfigureAwait(false);
@@ -65,7 +66,8 @@ namespace Microsoft.CodeAnalysis.Remote
             int scopeId,
             Checksum checksum,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (checksum == Checksum.Null)
             {
                 // check nil case
@@ -100,7 +102,8 @@ namespace Microsoft.CodeAnalysis.Remote
             int scopeId,
             IEnumerable<Checksum> checksums,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var checksumsToFind = Creator.CreateChecksumSet(checksums);
 
             var numberOfChecksumsToSearch = checksumsToFind.Object.Count;
@@ -142,7 +145,8 @@ namespace Microsoft.CodeAnalysis.Remote
             SolutionState solutionState,
             Checksum checksum,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var checksumPool = Creator.CreateChecksumSet(
                 SpecializedCollections.SingletonEnumerable(checksum)
             );
@@ -176,7 +180,8 @@ namespace Microsoft.CodeAnalysis.Remote
             HashSet<Checksum> remainingChecksumsToFind,
             Dictionary<Checksum, SolutionAsset> result,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var resultPool = Creator.CreateResultSet();
 
             await FindAssetsAsync(
@@ -198,7 +203,8 @@ namespace Microsoft.CodeAnalysis.Remote
             HashSet<Checksum> remainingChecksumsToFind,
             Dictionary<Checksum, object> result,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // only solution with checksum can be in asset storage
             Contract.ThrowIfFalse(solutionState.TryGetStateChecksums(out var stateChecksums));
 
@@ -225,7 +231,8 @@ namespace Microsoft.CodeAnalysis.Remote
             public async ValueTask<SolutionAsset?> GetAssetAsync(
                 Checksum checksum,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 foreach (var (scopeId, _) in _solutionAssetStorage._solutionStates)
                 {
                     var data = await _solutionAssetStorage.GetAssetAsync(

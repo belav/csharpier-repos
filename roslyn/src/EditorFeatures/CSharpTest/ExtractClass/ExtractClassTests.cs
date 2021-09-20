@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
             bool sameFile = false,
             bool isClassDeclarationSelection = false,
             TestParameters testParameters = default
-        ) {
+        )
+        {
             var service = new TestExtractClassOptionsService(
                 dialogSelection,
                 sameFile,
@@ -1675,7 +1676,8 @@ class Test : MyBase
                 IEnumerable<(string name, bool makeAbstract)> dialogSelection = null,
                 bool sameFile = false,
                 bool isClassDeclarationSelection = false
-            ) {
+            )
+            {
                 _dialogSelection = dialogSelection;
                 _sameFile = sameFile;
                 this.isClassDeclarationSelection = isClassDeclarationSelection;
@@ -1688,7 +1690,8 @@ class Test : MyBase
                 Document document,
                 INamedTypeSymbol originalSymbol,
                 ISymbol selectedMember
-            ) {
+            )
+            {
                 var availableMembers = originalSymbol.GetMembers()
                     .Where(member => MemberAndDestinationValidator.IsMemberValid(member));
 

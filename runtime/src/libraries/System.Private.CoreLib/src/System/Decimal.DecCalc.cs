@@ -788,7 +788,8 @@ namespace System
                             power <= remainder
                             && (power < remainder || ((result[0] & 1) | sticky) != 0)
                             && ++result[0] == 0
-                        ) {
+                        )
+                        {
                             uint cur = 0;
                             do
                             {
@@ -827,7 +828,8 @@ namespace System
                 out uint quotient,
                 out uint remainder,
                 uint power
-            ) {
+            )
+            {
                 uint high = result[hiRes];
                 remainder = high - (quotient = high / power) * power;
                 for (uint i = hiRes - 1; (int)i >= 0; i--)
@@ -2114,7 +2116,8 @@ namespace System
                         if (
                             scale == DEC_SCALE_MAX
                             || (curScale = SearchScale(ref bufQuo, scale)) == 0
-                        ) {
+                        )
+                        {
                             // No more scaling to be done, but remainder is non-zero.
                             // Round quotient.
                             //
@@ -2200,7 +2203,8 @@ namespace System
                             if (
                                 scale == DEC_SCALE_MAX
                                 || (curScale = SearchScale(ref bufQuo, scale)) == 0
-                            ) {
+                            )
+                            {
                                 // No more scaling to be done, but remainder is non-zero.
                                 // Round quotient.
                                 //
@@ -2270,7 +2274,8 @@ namespace System
                             if (
                                 scale == DEC_SCALE_MAX
                                 || (curScale = SearchScale(ref bufQuo, scale)) == 0
-                            ) {
+                            )
+                            {
                                 // No more scaling to be done, but remainder is non-zero.
                                 // Round quotient.
                                 //

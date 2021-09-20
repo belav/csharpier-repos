@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         private static void VerifyDiagnostics(
             IEnumerable<Diagnostic> actualDiagnostics,
             params string[] expectedDiagnosticIds
-        ) {
+        )
+        {
             var actualDiagnosticIds = actualDiagnostics.Select(d => d.Id);
             Assert.True(
                 expectedDiagnosticIds.SequenceEqual(actualDiagnosticIds),
@@ -46,7 +47,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             string source,
             string pattern,
             params string[] expectedDiagnosticIds
-        ) {
+        )
+        {
             VerifyDiagnostics(
                 model.GetDiagnostics(FindSpan(source, pattern)),
                 expectedDiagnosticIds

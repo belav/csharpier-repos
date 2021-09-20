@@ -146,7 +146,8 @@ namespace Internal.TypeSystem
             string name,
             MethodSignature signature,
             Instantiation substitution
-        ) {
+        )
+        {
             MethodDesc typicalMethodDef = _typeDef.GetMethod(name, signature, substitution);
             if (typicalMethodDef == null)
                 return null;
@@ -185,7 +186,8 @@ namespace Internal.TypeSystem
             while (
                 typicalFinalizer.OwningType.GetTypeDefinition()
                 != typeInHierarchy.GetTypeDefinition()
-            ) {
+            )
+            {
                 typeInHierarchy = typeInHierarchy.MetadataBaseType;
             }
 
@@ -223,7 +225,8 @@ namespace Internal.TypeSystem
         public override TypeDesc InstantiateSignature(
             Instantiation typeInstantiation,
             Instantiation methodInstantiation
-        ) {
+        )
+        {
             TypeDesc[] clone = null;
 
             for (int i = 0; i < _instantiation.Length; i++)

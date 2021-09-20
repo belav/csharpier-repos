@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             out bool failedThroughTypeCheck,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo,
             ConsList<TypeSymbol> basesBeingResolved
-        ) {
+        )
+        {
             return this.IsSymbolAccessibleConditional(
                 symbol,
                 _namedType,
@@ -64,7 +65,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             LookupSymbolsInfo result,
             LookupOptions options,
             Binder originalBinder
-        ) {
+        )
+        {
             if (CanConsiderTypeParameters(options))
             {
                 foreach (var parameter in _namedType.TypeParameters)

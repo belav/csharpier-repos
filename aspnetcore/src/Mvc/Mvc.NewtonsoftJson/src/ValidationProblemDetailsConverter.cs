@@ -24,7 +24,8 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
             Type objectType,
             object existingValue,
             JsonSerializer serializer
-        ) {
+        )
+        {
             var annotatedProblemDetails = serializer.Deserialize<AnnotatedValidationProblemDetails>(
                 reader
             );
@@ -62,9 +63,8 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
             /// </remarks>
             public AnnotatedValidationProblemDetails() { }
 
-            public AnnotatedValidationProblemDetails(
-                ValidationProblemDetails problemDetails
-            ) : base(problemDetails)
+            public AnnotatedValidationProblemDetails(ValidationProblemDetails problemDetails)
+                : base(problemDetails)
             {
                 foreach (var kvp in problemDetails.Errors)
                 {

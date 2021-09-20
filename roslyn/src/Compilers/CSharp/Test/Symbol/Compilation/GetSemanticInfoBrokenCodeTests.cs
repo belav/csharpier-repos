@@ -204,7 +204,8 @@ abstract void M();";
                 var identifierSyntax in tree.GetCompilationUnitRoot()
                     .DescendantNodes()
                     .OfType<IdentifierNameSyntax>()
-            ) {
+            )
+            {
                 model.GetSymbolInfo(identifierSyntax);
             }
         }

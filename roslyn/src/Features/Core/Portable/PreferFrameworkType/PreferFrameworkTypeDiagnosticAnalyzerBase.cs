@@ -106,7 +106,8 @@ namespace Microsoft.CodeAnalysis.PreferFrameworkType
                         context.CancellationToken
                     ).Symbol is ITypeSymbol
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -119,7 +120,8 @@ namespace Microsoft.CodeAnalysis.PreferFrameworkType
                     language,
                     out var diagnosticSeverity
                 )
-            ) {
+            )
+            {
                 context.ReportDiagnostic(
                     DiagnosticHelper.Create(
                         Descriptor,
@@ -140,7 +142,8 @@ namespace Microsoft.CodeAnalysis.PreferFrameworkType
             SyntaxNodeAnalysisContext context,
             string language,
             out ReportDiagnostic severity
-        ) {
+        )
+        {
             // we have a predefined type syntax that is either in a member access context or a declaration context.
             // check the appropriate option and determine if we should report a diagnostic.
             var isMemberAccessOrCref = IsInMemberAccessOrCrefReferenceContext(predefinedTypeNode);
@@ -162,7 +165,8 @@ namespace Microsoft.CodeAnalysis.PreferFrameworkType
             SyntaxNodeAnalysisContext context,
             PerLanguageOption2<CodeStyleOption2<bool>> option,
             string language
-        ) {
+        )
+        {
             var optionValue = context.GetOption(option, language);
             return OptionSettingPrefersFrameworkType(
                 optionValue,

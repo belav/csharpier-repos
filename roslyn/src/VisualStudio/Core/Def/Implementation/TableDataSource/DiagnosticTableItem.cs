@@ -126,7 +126,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                     || rightLocation.OriginalFilePath == null
                     || left.DocumentId == null
                     || right.DocumentId == null
-                ) {
+                )
+                {
                     return left.Equals(right);
                 }
 
@@ -148,7 +149,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 // location-less or project level diagnostic:
                 if (
                     location == null || location.OriginalFilePath == null || data.DocumentId == null
-                ) {
+                )
+                {
                     return data.GetHashCode();
                 }
 

@@ -74,7 +74,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.AddAwait
             SyntaxNode invocation,
             SemanticModel model,
             ISyntaxFactsService syntaxFacts
-        ) {
+        )
+        {
             if (syntaxFacts.IsExpressionOfInvocationExpression(invocation.Parent))
             {
                 // Do not offer fix on `MethodAsync()$$.ConfigureAwait()`
@@ -101,7 +102,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.AddAwait
             TExpressionSyntax expression,
             bool withConfigureAwait,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var generator = SyntaxGenerator.GetGenerator(document);
             var withoutTrivia = expression.WithoutTrivia();
             withoutTrivia = (TExpressionSyntax)generator.AddParentheses(withoutTrivia);

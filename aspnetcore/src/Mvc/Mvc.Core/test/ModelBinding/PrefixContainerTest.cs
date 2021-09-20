@@ -168,7 +168,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         [InlineData(5)]
         public void ContainsPrefix_HasEntries_PartialAndPrefixMatch_WithSquareBrace(
             int partialMatches
-        ) {
+        )
+        {
             // Arrange
             var keys = new string[partialMatches + 1];
             for (var i = 0; i < partialMatches; i++)

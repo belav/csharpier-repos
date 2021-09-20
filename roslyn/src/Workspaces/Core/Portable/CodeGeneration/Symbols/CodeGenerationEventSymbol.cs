@@ -29,14 +29,16 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             IMethodSymbol? addMethod,
             IMethodSymbol? removeMethod,
             IMethodSymbol? raiseMethod
-        ) : base(
-            containingType?.ContainingAssembly,
-            containingType,
-            attributes,
-            declaredAccessibility,
-            modifiers,
-            name
-        ) {
+        )
+            : base(
+                containingType?.ContainingAssembly,
+                containingType,
+                attributes,
+                declaredAccessibility,
+                modifiers,
+                name
+            )
+        {
             this.Type = type;
             this.ExplicitInterfaceImplementations = explicitInterfaceImplementations.NullToEmpty();
             this.AddMethod = addMethod;

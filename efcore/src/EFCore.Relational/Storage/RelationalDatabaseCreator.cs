@@ -151,7 +151,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <returns> The generated commands. </returns>
         protected virtual IReadOnlyList<MigrationCommand> GetCreateTablesCommands(
             MigrationsSqlGenerationOptions options = MigrationsSqlGenerationOptions.Default
-        ) {
+        )
+        {
             var model = Dependencies.CurrentContext.Context.GetService<IDesignTimeModel>().Model;
             return Dependencies.MigrationsSqlGenerator.Generate(
                 Dependencies.ModelDiffer.GetDifferences(null, model.GetRelationalModel()),
@@ -226,7 +227,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
         public virtual async Task<bool> EnsureDeletedAsync(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (await ExistsAsync(cancellationToken).ConfigureAwait(false))
             {
                 await DeleteAsync(cancellationToken).ConfigureAwait(false);
@@ -252,7 +254,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     TransactionScopeOption.Suppress,
                     TransactionScopeAsyncFlowOption.Enabled
                 )
-            ) {
+            )
+            {
                 if (!Exists())
                 {
                     Create();
@@ -283,7 +286,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
         public virtual async Task<bool> EnsureCreatedAsync(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var transactionScope = new TransactionScope(
                 TransactionScopeOption.Suppress,
                 TransactionScopeAsyncFlowOption.Enabled
@@ -383,7 +387,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
         public virtual async Task<bool> CanConnectAsync(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             try
             {
                 return await ExistsAsync(cancellationToken).ConfigureAwait(false);

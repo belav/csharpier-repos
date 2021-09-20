@@ -1709,7 +1709,8 @@ class C : I
         private static void CompareUnsafeDiagnostics(
             string template,
             params DiagnosticDescription[] expectedWithoutUnsafe
-        ) {
+        )
+        {
             CompareUnsafeDiagnostics(template, expectedWithoutUnsafe, new DiagnosticDescription[0]);
         }
 
@@ -1717,7 +1718,8 @@ class C : I
             string template,
             DiagnosticDescription[] expectedWithoutUnsafe,
             DiagnosticDescription[] expectedWithUnsafe
-        ) {
+        )
+        {
             // NOTE: ERR_UnsafeNeeded is not affected by the presence/absence of the /unsafe flag.
             var withoutUnsafe = string.Format(template, "", "");
             CreateCompilation(withoutUnsafe).VerifyDiagnostics(expectedWithoutUnsafe);
@@ -2580,7 +2582,8 @@ No, Parameter 'x' does not require fixing. It has an underlying symbol 'x'
             string text,
             string expected,
             bool expectError = false
-        ) {
+        )
+        {
             var compilation = CreateCompilationWithMscorlib40AndSystemCore(
                 text,
                 options: TestOptions.UnsafeReleaseDll
@@ -2589,7 +2592,8 @@ No, Parameter 'x' does not require fixing. It has an underlying symbol 'x'
             if (
                 expectError
                 != compilationDiagnostics.Any(diag => diag.Severity == DiagnosticSeverity.Error)
-            ) {
+            )
+            {
                 compilationDiagnostics.Verify();
                 Assert.True(false);
             }
@@ -2636,7 +2640,8 @@ No, Parameter 'x' does not require fixing. It has an underlying symbol 'x'
                 BoundBlock block,
                 Binder binder,
                 ArrayBuilder<string> builder
-            ) {
+            )
+            {
                 var visitor = new CheckFixingVariablesVisitor(binder, builder);
                 visitor.Visit(block);
             }
@@ -2653,7 +2658,8 @@ No, Parameter 'x' does not require fixing. It has an underlying symbol 'x'
 
                         if (
                             _binder.IsMoveableVariable(expr, out Symbol accessedLocalOrParameterOpt)
-                        ) {
+                        )
+                        {
                             _builder.Add($"Yes, {expr.Kind} '{text}' requires fixing.");
                         }
                         else
@@ -5985,7 +5991,8 @@ unsafe struct S
                 var nullSyntax in tree.GetCompilationUnitRoot()
                     .DescendantTokens()
                     .Where(token => token.IsKind(SyntaxKind.NullKeyword))
-            ) {
+            )
+            {
                 var node = (ExpressionSyntax)nullSyntax.Parent;
                 var typeInfo = model.GetTypeInfo(node);
                 var conv = model.GetConversion(node);
@@ -6026,7 +6033,8 @@ unsafe struct S
                     .DescendantTokens()
                     .OfType<VariableDeclarationSyntax>()
                     .Where(syntax => syntax.GetFirstToken().IsKind(SyntaxKind.VoidKeyword))
-            ) {
+            )
+            {
                 var value = declarationSyntax.Variables.Single().Initializer.Value;
                 var typeInfo = model.GetTypeInfo(value);
 
@@ -6575,7 +6583,8 @@ unsafe class C
                 var binOpSyntax in tree.GetCompilationUnitRoot()
                     .DescendantNodes()
                     .OfType<BinaryExpressionSyntax>()
-            ) {
+            )
+            {
                 var summary = model.GetSemanticInfoSummary(binOpSyntax);
 
                 if (binOpSyntax.Kind() == SyntaxKind.SimpleAssignmentExpression)
@@ -6627,7 +6636,8 @@ unsafe class C
                 var binOpSyntax in tree.GetCompilationUnitRoot()
                     .DescendantNodes()
                     .OfType<BinaryExpressionSyntax>()
-            ) {
+            )
+            {
                 var summary = model.GetSemanticInfoSummary(binOpSyntax);
                 Assert.Equal(
                     "System.Int64 System.Byte*.op_Subtraction(System.Byte* left, System.Byte* right)",
@@ -7094,7 +7104,8 @@ unsafe class C
                 var binOpSyntax in tree.GetCompilationUnitRoot()
                     .DescendantNodes()
                     .OfType<BinaryExpressionSyntax>()
-            ) {
+            )
+            {
                 var summary = model.GetSemanticInfoSummary(binOpSyntax);
 
                 if (binOpSyntax.Kind() == SyntaxKind.SimpleAssignmentExpression)

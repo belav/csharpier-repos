@@ -98,7 +98,8 @@ namespace System.IO
                         | NotifyFilters.Size
                     )
                 ) != 0
-            ) {
+            )
+            {
                 flags =
                     FSEventStreamEventFlags.kFSEventStreamEventFlagItemInodeMetaMod
                     | FSEventStreamEventFlags.kFSEventStreamEventFlagItemFinderInfoMod
@@ -172,7 +173,8 @@ namespace System.IO
                 string directory,
                 bool includeChildren,
                 FSEventStreamEventFlags filter
-            ) {
+            )
+            {
                 Debug.Assert(!string.IsNullOrEmpty(directory));
 
                 // Make sure _fullPath doesn't contain a link or alias since the OS will give back the actual,
@@ -274,7 +276,8 @@ namespace System.IO
                 private static void WatchForFileSystemEventsThreadStart(
                     ManualResetEventSlim runLoopStarted,
                     SafeEventStreamHandle eventStream
-                ) {
+                )
+                {
                     // Get this thread's RunLoop
                     IntPtr runLoop = Interop.RunLoop.CFRunLoopGetCurrent();
                     s_watcherRunLoop = runLoop;
@@ -417,7 +420,8 @@ namespace System.IO
                 byte** eventPaths,
                 FSEventStreamEventFlags* eventFlags,
                 FSEventStreamEventId* eventIds
-            ) {
+            )
+            {
                 // Try to get the actual watcher from our weak reference.  We maintain a weak reference most of the time
                 // so as to avoid a rooted cycle that would prevent our processing loop from ever ending
                 // if the watcher is dropped by the user without being disposed. If we can't get the watcher,
@@ -463,7 +467,8 @@ namespace System.IO
                 Span<FSEventStreamEventFlags> eventFlags,
                 Span<FSEventStreamEventId> eventIds,
                 FileSystemWatcher watcher
-            ) {
+            )
+            {
                 // Since renames come in pairs, when we reach the first we need to test for the next one if it is the case. If the next one belongs into the pair,
                 // we'll store the event id so when the for-loop comes across it, we'll skip it since it's already been processed as part of the original of the pair.
                 int? handledRenameEvents = null;
@@ -482,7 +487,8 @@ namespace System.IO
                             _fullDirectory.AsSpan(0, path.Length),
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         continue;
                     }
 
@@ -505,14 +511,16 @@ namespace System.IO
                     else if (
                         CheckIfPathIsNested(path)
                         && ((eventType = FilterEvents(eventFlags[i])) != 0)
-                    ) {
+                    )
+                    {
                         // The base FileSystemWatcher does a match check against the relative path before combining with
                         // the root dir; however, null is special cased to signify the root dir, so check if we should use that.
                         ReadOnlySpan<char> relativePath = ReadOnlySpan<char>.Empty;
                         if (
                             path.Length > _fullDirectory.Length
                             && path.StartsWith(_fullDirectory, StringComparison.OrdinalIgnoreCase)
-                        ) {
+                        )
+                        {
                             // Remove the root directory to get the relative path
                             relativePath = path.Slice(_fullDirectory.Length);
                         }
@@ -556,7 +564,8 @@ namespace System.IO
                                             FSEventStreamEventFlags.kFSEventStreamEventFlagItemIsFile
                                         )
                                     )
-                                ) {
+                                )
+                                {
                                     if ((eventType & WatcherChangeTypes.Created) == 0)
                                     {
                                         watcher.NotifyFileSystemEventArgs(
@@ -581,7 +590,8 @@ namespace System.IO
                                     ParsedEvent pairedEvent = ParseEvent(
                                         eventPaths[pairedId.GetValueOrDefault()]
                                     )
-                                ) {
+                                )
+                                {
                                     ReadOnlySpan<char> newPathRelativeName = pairedEvent.Path;
                                     if (
                                         newPathRelativeName.Length >= _fullDirectory.Length
@@ -589,7 +599,8 @@ namespace System.IO
                                             _fullDirectory,
                                             StringComparison.OrdinalIgnoreCase
                                         )
-                                    ) {
+                                    )
+                                    {
                                         newPathRelativeName = newPathRelativeName.Slice(
                                             _fullDirectory.Length
                                         );
@@ -688,21 +699,24 @@ namespace System.IO
                         eventFlags.HasFlag(
                             FSEventStreamEventFlags.kFSEventStreamEventFlagItemRenamed
                         )
-                    ) {
+                    )
+                    {
                         eventType |= WatcherChangeTypes.Renamed;
                     }
                     if (
                         eventFlags.HasFlag(
                             FSEventStreamEventFlags.kFSEventStreamEventFlagItemCreated
                         )
-                    ) {
+                    )
+                    {
                         eventType |= WatcherChangeTypes.Created;
                     }
                     if (
                         eventFlags.HasFlag(
                             FSEventStreamEventFlags.kFSEventStreamEventFlagItemRemoved
                         )
-                    ) {
+                    )
+                    {
                         eventType |= WatcherChangeTypes.Deleted;
                     }
                 }
@@ -739,7 +753,8 @@ namespace System.IO
                 int currentIndex,
                 Span<FSEventStreamEventFlags> flags,
                 Span<FSEventStreamEventId> ids
-            ) {
+            )
+            {
                 // The rename event can be composed of two events. The first contains the original file name the second contains the new file name.
                 // Each of the events is delivered only when the corresponding folder is watched. It means both events are delivered when the rename/move
                 // occurs inside the watched folder. When the move has origin o final destination outside, only one event is delivered. To distinguish
@@ -756,7 +771,8 @@ namespace System.IO
                     && flags[nextIndex].HasFlag(
                         FSEventStreamEventFlags.kFSEventStreamEventFlagItemRenamed
                     )
-                ) {
+                )
+                {
                     return nextIndex;
                 }
 

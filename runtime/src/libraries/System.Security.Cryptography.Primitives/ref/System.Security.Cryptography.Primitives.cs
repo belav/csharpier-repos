@@ -51,13 +51,15 @@ namespace System.Security.Cryptography
         public virtual byte[] ExportEncryptedPkcs8PrivateKey(
             System.ReadOnlySpan<byte> passwordBytes,
             System.Security.Cryptography.PbeParameters pbeParameters
-        ) {
+        )
+        {
             throw null;
         }
         public virtual byte[] ExportEncryptedPkcs8PrivateKey(
             System.ReadOnlySpan<char> password,
             System.Security.Cryptography.PbeParameters pbeParameters
-        ) {
+        )
+        {
             throw null;
         }
         public virtual byte[] ExportPkcs8PrivateKey()
@@ -73,14 +75,16 @@ namespace System.Security.Cryptography
             System.ReadOnlySpan<byte> passwordBytes,
             System.ReadOnlySpan<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             throw null;
         }
         public virtual void ImportEncryptedPkcs8PrivateKey(
             System.ReadOnlySpan<char> password,
             System.ReadOnlySpan<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             throw null;
         }
         public virtual void ImportFromEncryptedPem(
@@ -95,13 +99,15 @@ namespace System.Security.Cryptography
         public virtual void ImportPkcs8PrivateKey(
             System.ReadOnlySpan<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             throw null;
         }
         public virtual void ImportSubjectPublicKeyInfo(
             System.ReadOnlySpan<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             throw null;
         }
         public virtual string ToXmlString(bool includePrivateParameters)
@@ -113,7 +119,8 @@ namespace System.Security.Cryptography
             System.Security.Cryptography.PbeParameters pbeParameters,
             System.Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
         public virtual bool TryExportEncryptedPkcs8PrivateKey(
@@ -121,19 +128,22 @@ namespace System.Security.Cryptography
             System.Security.Cryptography.PbeParameters pbeParameters,
             System.Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
         public virtual bool TryExportPkcs8PrivateKey(
             System.Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
         public virtual bool TryExportSubjectPublicKeyInfo(
             System.Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -153,7 +163,8 @@ namespace System.Security.Cryptography
         public static bool FixedTimeEquals(
             System.ReadOnlySpan<byte> left,
             System.ReadOnlySpan<byte> right
-        ) {
+        )
+        {
             throw null;
         }
         public static void ZeroMemory(System.Span<byte> buffer) { }
@@ -215,7 +226,8 @@ namespace System.Security.Cryptography
             int count,
             System.AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public override System.IAsyncResult BeginWrite(
@@ -224,7 +236,8 @@ namespace System.Security.Cryptography
             int count,
             System.AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public void Clear() { }
@@ -236,7 +249,8 @@ namespace System.Security.Cryptography
             System.IO.Stream destination,
             int bufferSize,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         protected override void Dispose(bool disposing) { }
@@ -252,14 +266,16 @@ namespace System.Security.Cryptography
         public override void Flush() { }
         public override System.Threading.Tasks.Task FlushAsync(
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public void FlushFinalBlock() { }
         public System.Threading.Tasks.ValueTask FlushFinalBlockAsync(
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public override int Read(byte[] buffer, int offset, int count)
@@ -271,13 +287,15 @@ namespace System.Security.Cryptography
             int offset,
             int count,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Threading.Tasks.ValueTask<int> ReadAsync(
             System.Memory<byte> buffer,
             System.Threading.CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             throw null;
         }
         public override int ReadByte()
@@ -295,13 +313,15 @@ namespace System.Security.Cryptography
             int offset,
             int count,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Threading.Tasks.ValueTask WriteAsync(
             System.ReadOnlyMemory<byte> buffer,
             System.Threading.CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             throw null;
         }
         public override void WriteByte(byte value) { }
@@ -360,7 +380,8 @@ namespace System.Security.Cryptography
             System.IO.Stream inputStream,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         [System.ObsoleteAttribute(
@@ -391,7 +412,8 @@ namespace System.Security.Cryptography
             int inputCount,
             byte[]? outputBuffer,
             int outputOffset
-        ) {
+        )
+        {
             throw null;
         }
         public byte[] TransformFinalBlock(byte[] inputBuffer, int inputOffset, int inputCount)
@@ -402,7 +424,8 @@ namespace System.Security.Cryptography
             System.ReadOnlySpan<byte> source,
             System.Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual bool TryHashFinal(System.Span<byte> destination, out int bytesWritten)
@@ -445,7 +468,8 @@ namespace System.Security.Cryptography
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(System.Security.Cryptography.HashAlgorithmName other)
@@ -463,13 +487,15 @@ namespace System.Security.Cryptography
         public static bool operator ==(
             System.Security.Cryptography.HashAlgorithmName left,
             System.Security.Cryptography.HashAlgorithmName right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Security.Cryptography.HashAlgorithmName left,
             System.Security.Cryptography.HashAlgorithmName right
-        ) {
+        )
+        {
             throw null;
         }
         public override string ToString()
@@ -479,7 +505,8 @@ namespace System.Security.Cryptography
         public static bool TryFromOid(
             string oidValue,
             out System.Security.Cryptography.HashAlgorithmName value
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -722,7 +749,8 @@ namespace System.Security.Cryptography
             int plaintextLength,
             System.Security.Cryptography.PaddingMode paddingMode =
                 System.Security.Cryptography.PaddingMode.PKCS7
-        ) {
+        )
+        {
             throw null;
         }
         public int GetCiphertextLengthCfb(
@@ -730,13 +758,15 @@ namespace System.Security.Cryptography
             System.Security.Cryptography.PaddingMode paddingMode =
                 System.Security.Cryptography.PaddingMode.None,
             int feedbackSizeInBits = 8
-        ) {
+        )
+        {
             throw null;
         }
         public int GetCiphertextLengthEcb(
             int plaintextLength,
             System.Security.Cryptography.PaddingMode paddingMode
-        ) {
+        )
+        {
             throw null;
         }
         public bool ValidKeySize(int bitLength)

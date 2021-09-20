@@ -24,7 +24,8 @@ namespace Microsoft.AspNetCore.Mvc.Testing
         // Copy constructor
         internal WebApplicationFactoryClientOptions(
             WebApplicationFactoryClientOptions clientOptions
-        ) {
+        )
+        {
             BaseAddress = clientOptions.BaseAddress;
             AllowAutoRedirect = clientOptions.AllowAutoRedirect;
             MaxAutomaticRedirections = clientOptions.MaxAutomaticRedirections;

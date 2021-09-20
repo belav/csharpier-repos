@@ -21,7 +21,8 @@ namespace System.Security
             Evidence applicationEvidence,
             Evidence activatorEvidence,
             TrustManagerContext context
-        ) {
+        )
+        {
             return default(ApplicationTrust);
         }
         public virtual Evidence ProvideAppDomainEvidence(Evidence inputEvidence)
@@ -31,7 +32,8 @@ namespace System.Security
         public virtual Evidence ProvideAssemblyEvidence(
             System.Reflection.Assembly loadedAssembly,
             Evidence inputEvidence
-        ) {
+        )
+        {
             return default(Evidence);
         }
         [Obsolete]

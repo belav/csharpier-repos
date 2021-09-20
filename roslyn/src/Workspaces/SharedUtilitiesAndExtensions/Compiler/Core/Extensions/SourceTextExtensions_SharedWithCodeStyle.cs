@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             TextSpan span,
             Func<int, CancellationToken, bool> isPositionHidden,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var result = TryOverlapsHiddenPosition(text, span, isPositionHidden, cancellationToken);
             cancellationToken.ThrowIfCancellationRequested();
             return result;
@@ -30,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             TextSpan span,
             Func<int, CancellationToken, bool> isPositionHidden,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var startLineNumber = text.Lines.IndexOf(span.Start);
             var endLineNumber = text.Lines.IndexOf(span.End);
 

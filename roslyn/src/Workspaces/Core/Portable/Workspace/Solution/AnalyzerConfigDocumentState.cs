@@ -22,13 +22,15 @@ namespace Microsoft.CodeAnalysis
             DocumentInfo.DocumentAttributes attributes,
             SourceText sourceTextOpt,
             ValueSource<TextAndVersion> textAndVersionSource
-        ) : base(
-            solutionServices,
-            documentServiceProvider,
-            attributes,
-            sourceTextOpt,
-            textAndVersionSource
-        ) {
+        )
+            : base(
+                solutionServices,
+                documentServiceProvider,
+                attributes,
+                sourceTextOpt,
+                textAndVersionSource
+            )
+        {
             _analyzerConfigValueSource = CreateAnalyzerConfigValueSource();
         }
 
@@ -76,7 +78,8 @@ namespace Microsoft.CodeAnalysis
             ValueSource<TextAndVersion> newTextSource,
             PreservationMode mode,
             bool incremental
-        ) {
+        )
+        {
             return new AnalyzerConfigDocumentState(
                 this.solutionServices,
                 this.Services,

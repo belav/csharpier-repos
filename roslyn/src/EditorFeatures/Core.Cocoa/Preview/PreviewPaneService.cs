@@ -30,17 +30,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public PreviewPaneService(
-            IThreadingContext threadingContext,
-            IImageService imageService
-        ) : base(threadingContext)
+        public PreviewPaneService(IThreadingContext threadingContext, IImageService imageService)
+            : base(threadingContext)
         {
             this.imageService = imageService;
         }
 
         IWorkspaceService IWorkspaceServiceFactory.CreateService(
             HostWorkspaceServices workspaceServices
-        ) {
+        )
+        {
             return this;
         }
 
@@ -78,7 +77,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
         object IPreviewPaneService.GetPreviewPane(
             DiagnosticData data,
             IReadOnlyList<object> previewContent
-        ) {
+        )
+        {
             var title = data?.Message;
 
             if (string.IsNullOrWhiteSpace(title))

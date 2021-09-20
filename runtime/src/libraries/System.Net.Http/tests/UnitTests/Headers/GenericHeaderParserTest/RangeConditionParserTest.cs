@@ -53,7 +53,8 @@ namespace System.Net.Http.Tests
             int startIndex,
             RangeConditionHeaderValue expectedResult,
             int expectedIndex
-        ) {
+        )
+        {
             HttpHeaderParser parser = GenericHeaderParser.RangeConditionParser;
             object result = null;
             Assert.True(

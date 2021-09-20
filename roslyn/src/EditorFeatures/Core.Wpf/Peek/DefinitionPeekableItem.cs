@@ -60,7 +60,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
                 IPeekResultCollection resultCollection,
                 CancellationToken cancellationToken,
                 IFindPeekResultsCallback callback
-            ) {
+            )
+            {
                 if (relationshipName != PredefinedPeekRelationships.Definitions.Name)
                 {
                     return;

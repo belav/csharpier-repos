@@ -116,7 +116,8 @@ namespace ComWrappersTests.GlobalInstance
                 object obj,
                 CreateComInterfaceFlags flags,
                 out int count
-            ) {
+            )
+            {
                 LastComputeVtablesObject = obj;
 
                 if (ReturnInvalid)
@@ -503,7 +504,8 @@ namespace ComWrappersTests.GlobalInstance
                     string.Empty,
                     string.Empty
                 )
-            ) {
+            )
+            {
                 Type t = Type.GetTypeFromCLSID(
                     Guid.Parse(Server.Contract.Guids.ConsumeNETServerTesting)
                 );

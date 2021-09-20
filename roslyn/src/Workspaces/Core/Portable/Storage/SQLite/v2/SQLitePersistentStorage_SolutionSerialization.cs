@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
                 SqlConnection connection,
                 string key,
                 out string dataId
-            ) {
+            )
+            {
                 // For the SolutionDataTable the key itself acts as the data-id.
                 dataId = key;
                 return true;
@@ -60,7 +61,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
                 Database database,
                 string dataId,
                 out long rowId
-            ) {
+            )
+            {
                 // For the solution table, we have whatever user string that was passed in as our 'key'.  So we actually
                 // have to  go to the DB to find the row for this.
                 return GetActualRowIdFromDatabase(connection, database, dataId, out rowId);

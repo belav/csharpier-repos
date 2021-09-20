@@ -31,7 +31,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             in SyntaxToken previousToken,
             in SyntaxToken currentToken,
             in NextGetAdjustNewLinesOperation nextOperation
-        ) {
+        )
+        {
             if (IsAfterEndRegionBeforeMethodDeclaration(previousToken))
             {
                 return FormattingOperations.CreateAdjustNewLinesOperation(

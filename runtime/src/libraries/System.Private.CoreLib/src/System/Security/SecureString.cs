@@ -474,7 +474,8 @@ namespace System.Security
                 UnmanagedBuffer source,
                 UnmanagedBuffer destination,
                 ulong bytesLength
-            ) {
+            )
+            {
                 if (bytesLength == 0)
                 {
                     return;

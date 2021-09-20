@@ -391,7 +391,8 @@ namespace System.Text.Json.Serialization.Tests
                 string oValue,
                 string qValue,
                 string sValue
-            ) {
+            )
+            {
                 AValue = aValue;
                 CValue = cValue;
                 EValue = eValue;

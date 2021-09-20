@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Serialization
             ChecksumWithChildren checksums,
             ObjectWriter writer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             var kind = checksums.GetWellKnownSynchronizationKind();
@@ -60,7 +61,8 @@ namespace Microsoft.CodeAnalysis.Serialization
         private ChecksumWithChildren DeserializeChecksumWithChildren(
             ObjectReader reader,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             var kind = (WellKnownSynchronizationKind)reader.ReadInt32();

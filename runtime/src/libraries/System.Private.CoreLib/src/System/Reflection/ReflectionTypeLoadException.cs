@@ -27,10 +27,8 @@ namespace System.Reflection
             HResult = HResults.COR_E_REFLECTIONTYPELOAD;
         }
 
-        private ReflectionTypeLoadException(
-            SerializationInfo info,
-            StreamingContext context
-        ) : base(info, context)
+        private ReflectionTypeLoadException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
             Types = Type.EmptyTypes;
             LoaderExceptions =

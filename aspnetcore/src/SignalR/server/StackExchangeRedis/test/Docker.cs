@@ -64,7 +64,8 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Tests
 
             foreach (
                 var dir in Environment.GetEnvironmentVariable("PATH").Split(Path.PathSeparator)
-            ) {
+            )
+            {
                 var candidate = Path.Combine(dir, "docker" + _exeSuffix);
                 if (File.Exists(candidate))
                 {
@@ -202,7 +203,8 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Tests
             string prefix,
             ILogger logger,
             out string output
-        ) {
+        )
+        {
             return RunProcessAndWait(
                 _path,
                 commandAndArguments,
@@ -219,7 +221,8 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Tests
             string prefix,
             ILogger logger,
             TimeSpan timeout
-        ) {
+        )
+        {
             var exitCode = RunProcessAndWait(
                 fileName,
                 arguments,
@@ -244,7 +247,8 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Tests
             ILogger logger,
             TimeSpan timeout,
             out string output
-        ) {
+        )
+        {
             var (process, lines) = RunProcess(fileName, arguments, prefix, logger);
 
             using (process)
@@ -276,7 +280,8 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Tests
             string arguments,
             string prefix,
             ILogger logger
-        ) {
+        )
+        {
             var process = new Process
             {
                 StartInfo = new ProcessStartInfo
@@ -315,7 +320,8 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Tests
             Action<string, object[]> logger,
             string message,
             string data
-        ) {
+        )
+        {
             if (!string.IsNullOrEmpty(data))
             {
                 logger(message, new[] { data });

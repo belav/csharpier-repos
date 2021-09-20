@@ -49,7 +49,8 @@ namespace System
             Type[]? genericArgs,
             IntPtr pModifiers,
             int cModifiers
-        ) {
+        )
+        {
             Type type = typeStart;
 
             if (genericArgs != null)
@@ -204,7 +205,8 @@ namespace System
         internal static IntPtr[]? CopyRuntimeTypeHandles(
             RuntimeTypeHandle[]? inHandles,
             out int length
-        ) {
+        )
+        {
             if (inHandles == null || inHandles.Length == 0)
             {
                 length = 0;
@@ -249,7 +251,8 @@ namespace System
             )]
                 RuntimeType type,
             RuntimeType genericParameter
-        ) {
+        )
+        {
             Debug.Assert(
                 type.GetConstructor(Type.EmptyTypes) is ConstructorInfo c && c.IsPublic,
                 $"CreateInstanceForAnotherGenericParameter requires {nameof(type)} to have a public parameterless constructor so it can be annotated for trimming without preserving private constructors."
@@ -276,7 +279,8 @@ namespace System
                 RuntimeType type,
             RuntimeType genericParameter1,
             RuntimeType genericParameter2
-        ) {
+        )
+        {
             Debug.Assert(
                 type.GetConstructor(Type.EmptyTypes) is ConstructorInfo c && c.IsPublic,
                 $"CreateInstanceForAnotherGenericParameter requires {nameof(type)} to have a public parameterless constructor so it can be annotated for trimming without preserving private constructors."
@@ -322,7 +326,8 @@ namespace System
             out void* vAllocatorFirstArg,
             out delegate* <object, void> pfnCtor,
             out bool ctorIsPublic
-        ) {
+        )
+        {
             Debug.Assert(rt != null);
 
             delegate* <void*, object> pfnAllocatorTemp = default;
@@ -519,7 +524,8 @@ namespace System
         internal RuntimeMethodHandleInternal GetInterfaceMethodImplementation(
             RuntimeTypeHandle interfaceHandle,
             RuntimeMethodHandleInternal interfaceMethodHandle
-        ) {
+        )
+        {
             RuntimeTypeHandle nativeHandle = GetNativeHandle();
             RuntimeTypeHandle nativeInterfaceHandle = interfaceHandle.GetNativeHandle();
             return GetInterfaceMethodImplementation(
@@ -603,7 +609,8 @@ namespace System
             bool throwOnError,
             bool ignoreCase,
             ref StackCrawlMark stackMark
-        ) {
+        )
+        {
             return GetTypeByName(
                 name,
                 throwOnError,
@@ -619,7 +626,8 @@ namespace System
             bool ignoreCase,
             ref StackCrawlMark stackMark,
             AssemblyLoadContext assemblyLoadContext
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(name))
             {
                 if (throwOnError)
@@ -869,7 +877,8 @@ namespace System
             RuntimeType[]? typeContext,
             RuntimeType[]? methodContext,
             RuntimeType toType
-        ) {
+        )
+        {
             IntPtr[]? typeContextHandles = CopyRuntimeTypeHandles(
                 typeContext,
                 out int typeContextLength
@@ -882,7 +891,8 @@ namespace System
             fixed (
                 IntPtr* pTypeContextHandles = typeContextHandles,
                     pMethodContextHandles = methodContextHandles
-            ) {
+            )
+            {
                 bool result = SatisfiesConstraints(
                     paramType,
                     pTypeContextHandles,
@@ -951,7 +961,8 @@ namespace System
         public RuntimeMethodInfoStub(
             RuntimeMethodHandleInternal methodHandleValue,
             object keepalive
-        ) {
+        )
+        {
             m_keepalive = keepalive;
             m_value = methodHandleValue;
         }
@@ -1103,7 +1114,8 @@ namespace System
         internal static string ConstructInstantiation(
             IRuntimeMethodInfo method,
             TypeNameFormatFlags format
-        ) {
+        )
+        {
             string? name = null;
             IRuntimeMethodInfo methodInfo = EnsureNonNullMethodInfo(method);
             ConstructInstantiation(methodInfo.Value, format, new StringHandleOnStack(ref name));
@@ -1189,7 +1201,8 @@ namespace System
 
         internal static RuntimeType[] GetMethodInstantiationInternal(
             RuntimeMethodHandleInternal method
-        ) {
+        )
+        {
             RuntimeType[]? types = null;
             GetMethodInstantiation(
                 method,
@@ -1584,7 +1597,8 @@ namespace System
             int typeToken,
             RuntimeTypeHandle[]? typeInstantiationContext,
             RuntimeTypeHandle[]? methodInstantiationContext
-        ) {
+        )
+        {
             RuntimeModule module = GetRuntimeModule();
             ValidateModulePointer(module);
 
@@ -1615,7 +1629,8 @@ namespace System
             fixed (
                 IntPtr* typeInstArgs = typeInstantiationContextHandles,
                     methodInstArgs = methodInstantiationContextHandles
-            ) {
+            )
+            {
                 try
                 {
                     RuntimeType? type = null;
@@ -1666,7 +1681,8 @@ namespace System
             int methodToken,
             RuntimeTypeHandle[]? typeInstantiationContext,
             RuntimeTypeHandle[]? methodInstantiationContext
-        ) {
+        )
+        {
             RuntimeModule module = GetRuntimeModule();
             // defensive copy of user-provided array, per CopyRuntimeTypeHandles contract
             typeInstantiationContext = (RuntimeTypeHandle[]?)typeInstantiationContext?.Clone();
@@ -1705,7 +1721,8 @@ namespace System
             int typeInstCount,
             IntPtr[]? methodInstantiationContext,
             int methodInstCount
-        ) {
+        )
+        {
             ValidateModulePointer(module);
 
             try
@@ -1713,7 +1730,8 @@ namespace System
                 fixed (
                     IntPtr* typeInstArgs = typeInstantiationContext,
                         methodInstArgs = methodInstantiationContext
-                ) {
+                )
+                {
                     return ResolveMethod(
                         new QCallModule(ref module),
                         methodToken,
@@ -1756,7 +1774,8 @@ namespace System
             int fieldToken,
             RuntimeTypeHandle[]? typeInstantiationContext,
             RuntimeTypeHandle[]? methodInstantiationContext
-        ) {
+        )
+        {
             RuntimeModule module = GetRuntimeModule();
             ValidateModulePointer(module);
 
@@ -1787,7 +1806,8 @@ namespace System
             fixed (
                 IntPtr* typeInstArgs = typeInstantiationContextHandles,
                     methodInstArgs = methodInstantiationContextHandles
-            ) {
+            )
+            {
                 try
                 {
                     IRuntimeFieldInfo? field = null;
@@ -1842,7 +1862,8 @@ namespace System
             RuntimeModule module,
             int propertyToken,
             uint hash
-        ) {
+        )
+        {
             return _ContainsPropertyMatchingHash(new QCallModule(ref module), propertyToken, hash)
                 != Interop.BOOL.FALSE;
         }
@@ -1865,7 +1886,8 @@ namespace System
             RuntimeModule module,
             out PortableExecutableKinds peKind,
             out ImageFileMachine machine
-        ) {
+        )
+        {
             int lKind,
                 lMachine;
             GetPEKind(new QCallModule(ref module), &lKind, &lMachine);
@@ -1947,7 +1969,8 @@ namespace System
             RuntimeType[] arguments,
             RuntimeType returnType,
             CallingConventions callingConvention
-        ) {
+        )
+        {
             m_pMethod = method.Value;
             m_arguments = arguments;
             m_returnTypeORfieldType = returnType;

@@ -118,7 +118,8 @@ namespace System.Configuration
         private static bool IsMatchingApiChangedLocationTag(
             OverrideModeSetting x,
             OverrideModeSetting y
-        ) {
+        )
+        {
             // x must be a changed through the API setting
             // Returns true if x and y can share the same location tag
 

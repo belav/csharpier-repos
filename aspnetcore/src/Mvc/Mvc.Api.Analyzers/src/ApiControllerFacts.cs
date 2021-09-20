@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
         public static bool IsApiControllerAction(
             ApiControllerSymbolCache symbolCache,
             IMethodSymbol method
-        ) {
+        )
+        {
             if (method == null)
             {
                 return false;
@@ -28,14 +29,16 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                     symbolCache.ControllerAttribute,
                     symbolCache.NonControllerAttribute
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
             if (
                 !method.ContainingType.HasAttribute(symbolCache.IApiBehaviorMetadata, inherit: true)
                 && !method.ContainingAssembly.HasAttribute(symbolCache.IApiBehaviorMetadata)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -45,7 +48,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                     symbolCache.NonActionAttribute,
                     symbolCache.IDisposableDispose
                 )
-            ) {
+            )
+            {
                 return false;
             }
 

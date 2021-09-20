@@ -55,7 +55,8 @@ class My
         Object o37,
         Object o38,
         Object o39
-    ) {
+    )
+    {
         return null;
     }
 

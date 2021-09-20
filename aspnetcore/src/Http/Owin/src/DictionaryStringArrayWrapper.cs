@@ -59,7 +59,8 @@ namespace Microsoft.AspNetCore.Owin
         void ICollection<KeyValuePair<string, string[]>>.CopyTo(
             KeyValuePair<string, string[]>[] array,
             int arrayIndex
-        ) {
+        )
+        {
             foreach (var kv in Inner)
             {
                 array[arrayIndex++] = Convert(kv);

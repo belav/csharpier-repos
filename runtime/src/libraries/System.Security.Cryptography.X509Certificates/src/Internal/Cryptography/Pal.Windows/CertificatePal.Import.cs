@@ -19,7 +19,8 @@ namespace Internal.Cryptography.Pal
             ReadOnlySpan<byte> rawData,
             SafePasswordHandle password,
             X509KeyStorageFlags keyStorageFlags
-        ) {
+        )
+        {
             return FromBlobOrFile(rawData, null, password, keyStorageFlags);
         }
 
@@ -27,7 +28,8 @@ namespace Internal.Cryptography.Pal
             string fileName,
             SafePasswordHandle password,
             X509KeyStorageFlags keyStorageFlags
-        ) {
+        )
+        {
             return FromBlobOrFile(ReadOnlySpan<byte>.Empty, fileName, password, keyStorageFlags);
         }
 
@@ -36,7 +38,8 @@ namespace Internal.Cryptography.Pal
             string? fileName,
             SafePasswordHandle password,
             X509KeyStorageFlags keyStorageFlags
-        ) {
+        )
+        {
             Debug.Assert(!rawData.IsEmpty || fileName != null);
             Debug.Assert(password != null);
 
@@ -94,7 +97,8 @@ namespace Internal.Cryptography.Pal
                     if (
                         contentType == ContentType.CERT_QUERY_CONTENT_PKCS7_SIGNED
                         || contentType == ContentType.CERT_QUERY_CONTENT_PKCS7_SIGNED_EMBED
-                    ) {
+                    )
+                    {
                         pCertContext = GetSignerInPKCS7Store(hCertStore, hCryptMsg);
                     }
                     else if (contentType == ContentType.CERT_QUERY_CONTENT_PFX)
@@ -131,7 +135,8 @@ namespace Internal.Cryptography.Pal
         private static unsafe SafeCertContextHandle GetSignerInPKCS7Store(
             SafeCertStoreHandle hCertStore,
             SafeCryptMsgHandle hCryptMsg
-        ) {
+        )
+        {
             // make sure that there is at least one signer of the certificate store
             int dwSigners;
             int cbSigners = sizeof(int);
@@ -201,7 +206,8 @@ namespace Internal.Cryptography.Pal
             ReadOnlySpan<byte> rawData,
             SafePasswordHandle password,
             PfxCertStoreFlags pfxCertStoreFlags
-        ) {
+        )
+        {
             SafeCertStoreHandle hStore;
             unsafe
             {

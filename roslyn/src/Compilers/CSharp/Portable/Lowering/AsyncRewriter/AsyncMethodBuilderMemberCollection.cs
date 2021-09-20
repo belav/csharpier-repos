@@ -95,7 +95,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             MethodSymbol setStateMachine,
             PropertySymbol task,
             bool checkGenericMethodConstraints
-        ) {
+        )
+        {
             BuilderType = builderType;
             ResultType = resultType;
             CreateBuilder = createBuilder;
@@ -114,7 +115,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             MethodSymbol method,
             TypeMap typeMap,
             out AsyncMethodBuilderMemberCollection collection
-        ) {
+        )
+        {
             if (method.IsIterator)
             {
                 var builderType = F.WellKnownType(
@@ -238,7 +240,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     (object)builderType == null
                     || (object)createBuilderMethod == null
                     || (object)taskProperty == null
-                ) {
+                )
+                {
                     collection = default(AsyncMethodBuilderMemberCollection);
                     return false;
                 }
@@ -320,7 +323,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     (object)builderType == null
                     || (object)taskProperty == null
                     || (object)createBuilderMethod == null
-                ) {
+                )
+                {
                     collection = default(AsyncMethodBuilderMemberCollection);
                     return false;
                 }
@@ -349,7 +353,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             object builderAttributeArgument,
             Accessibility desiredAccessibility,
             bool isGeneric
-        ) {
+        )
+        {
             var builderType = builderAttributeArgument as NamedTypeSymbol;
 
             if (
@@ -357,7 +362,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 && !builderType.IsErrorType()
                 && !builderType.IsVoidType()
                 && builderType.DeclaredAccessibility == desiredAccessibility
-            ) {
+            )
+            {
                 bool isArityOk = isGeneric
                     ? builderType.IsUnboundGenericType
                       && builderType.ContainingType?.IsGenericType != true
@@ -387,7 +393,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             WellKnownMember start,
             WellKnownMember? setStateMachine,
             out AsyncMethodBuilderMemberCollection collection
-        ) {
+        )
+        {
             MethodSymbol setExceptionMethod;
             MethodSymbol setResultMethod;
             MethodSymbol awaitOnCompletedMethod;
@@ -432,7 +439,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     customBuilder,
                     out setStateMachineMethod
                 )
-            ) {
+            )
+            {
                 collection = new AsyncMethodBuilderMemberCollection(
                     builderType,
                     resultType,
@@ -516,7 +524,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static MethodSymbol GetCustomCreateMethod(
             SyntheticBoundNodeFactory F,
             NamedTypeSymbol builderType
-        ) {
+        )
+        {
             // The Create method's return type is expected to be builderType.
             // The WellKnownMembers routines aren't able to enforce that, which is why this method exists.
             const string methodName = "Create";
@@ -534,7 +543,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     && method.ParameterCount == 0
                     && !method.IsGenericMethod
                     && method.ReturnType.Equals(builderType, TypeCompareKind.AllIgnoreOptions)
-                ) {
+                )
+                {
                     return method;
                 }
             }
@@ -551,7 +561,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntheticBoundNodeFactory F,
             NamedTypeSymbol builderType,
             NamedTypeSymbol returnType
-        ) {
+        )
+        {
             const string propertyName = "Task";
             var members = builderType.GetMembers(propertyName);
             foreach (var member in members)
@@ -565,7 +576,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     (property.DeclaredAccessibility == Accessibility.Public)
                     && !property.IsStatic
                     && (property.ParameterCount == 0)
-                ) {
+                )
+                {
                     if (!property.Type.Equals(returnType, TypeCompareKind.AllIgnoreOptions))
                     {
                         var badTaskProperty = new CSDiagnostic(

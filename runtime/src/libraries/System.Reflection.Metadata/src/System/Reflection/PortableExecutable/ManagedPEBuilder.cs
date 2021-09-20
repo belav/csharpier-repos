@@ -261,7 +261,8 @@ namespace System.Reflection.PortableExecutable
             BlobBuilder builder,
             Machine machine,
             int entryPointAddress
-        ) {
+        )
+        {
             Debug.Assert(builder.Count == 0);
 
             builder.WriteUInt32((((uint)entryPointAddress + 2) / 0x1000) * 0x1000);

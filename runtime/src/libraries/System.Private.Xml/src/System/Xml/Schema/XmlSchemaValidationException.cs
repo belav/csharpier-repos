@@ -18,10 +18,8 @@ namespace System.Xml.Schema
     {
         private object? _sourceNodeObject;
 
-        protected XmlSchemaValidationException(
-            SerializationInfo info,
-            StreamingContext context
-        ) : base(info, context) { }
+        protected XmlSchemaValidationException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
 
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
@@ -68,11 +66,8 @@ namespace System.Xml.Schema
             int linePosition
         ) : base(res, args, innerException, sourceUri, lineNumber, linePosition, null) { }
 
-        internal XmlSchemaValidationException(
-            string? res,
-            string?[]? args,
-            object sourceNode
-        ) : base(res, args, null, null, 0, 0, null)
+        internal XmlSchemaValidationException(string? res, string?[]? args, object sourceNode)
+            : base(res, args, null, null, 0, 0, null)
         {
             _sourceNodeObject = sourceNode;
         }

@@ -799,7 +799,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void Read_FullItem_ReturnsExpected(
             bool preserveAttributeExtensions,
             bool preserveElementExtensions
-        ) {
+        )
+        {
             VerifyRead(
                 @"<rss xmlns:a10=""http://www.w3.org/2005/Atom"" version=""2.0"">
     <channel xml:base=""http://microsoft.com/"" feed_name1="""" d2p1:feed_name2="""" d2p1:feed_name3=""feed_value"" d2p2:feed_name4="""" xmlns:d2p2=""xmlns"" xmlns:d2p1=""feed_namespace"">
@@ -1507,7 +1508,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void Read_TryParseTrue_ReturnsExpected(
             bool preserveAttributeExtensions,
             bool preserveElementExtensions
-        ) {
+        )
+        {
             using (
                 var stringReader = new StringReader(
                     @"<rss xmlns:a10=""http://www.w3.org/2005/Atom"" version=""2.0"">
@@ -1943,7 +1945,8 @@ namespace System.ServiceModel.Syndication.Tests
             bool preserveAttributeExtensions,
             bool preserveElementExtensions,
             Action<SyndicationFeed> verifyAction
-        ) {
+        )
+        {
             // ReadFrom.
             using (var stringReader = new StringReader(xmlString))
             using (XmlReader reader = XmlReader.Create(stringReader))
@@ -2347,7 +2350,8 @@ namespace System.ServiceModel.Syndication.Tests
         [InlineData(false)]
         public void PreserveAttributeExtensions_Set_GetReturnsExpected(
             bool preserveAttributeExtensions
-        ) {
+        )
+        {
             var formatter = new Rss20FeedFormatter()
             {
                 PreserveAttributeExtensions = preserveAttributeExtensions
@@ -2503,7 +2507,8 @@ namespace System.ServiceModel.Syndication.Tests
                 string contentType,
                 string version,
                 out SyndicationContent content
-            ) {
+            )
+            {
                 reader.Skip();
 
                 content = new TextSyndicationContent("overriden");
@@ -2613,7 +2618,8 @@ namespace System.ServiceModel.Syndication.Tests
                 XmlReader reader,
                 SyndicationFeed feed,
                 out bool areAllItemsRead
-            ) {
+            )
+            {
                 return ReadItems(reader, feed, out areAllItemsRead);
             }
         }

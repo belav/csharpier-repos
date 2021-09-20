@@ -19,10 +19,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         /// </summary>
         /// <param name="parameterInfo">The parameter info.</param>
         /// <param name="attributes">The attributes.</param>
-        public PageParameterModel(
-            ParameterInfo parameterInfo,
-            IReadOnlyList<object> attributes
-        ) : base(parameterInfo?.ParameterType, attributes)
+        public PageParameterModel(ParameterInfo parameterInfo, IReadOnlyList<object> attributes)
+            : base(parameterInfo?.ParameterType, attributes)
         {
             if (parameterInfo == null)
             {

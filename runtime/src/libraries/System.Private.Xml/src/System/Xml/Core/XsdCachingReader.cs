@@ -60,7 +60,8 @@ namespace System.Xml
             XmlReader reader,
             IXmlLineInfo? lineInfo,
             CachingEventHandler handlerMethod
-        ) {
+        )
+        {
             _coreReader = reader;
             _lineInfo = lineInfo;
             _cacheHandler = handlerMethod;
@@ -236,7 +237,8 @@ namespace System.Xml
                 if (
                     Ref.Equal(attribute.LocalName, atomizedName)
                     && Ref.Equal(attribute.Namespace, namespaceURI)
-                ) {
+                )
+                {
                     return attribute.RawValue;
                 }
             }
@@ -304,7 +306,8 @@ namespace System.Xml
                 if (
                     Ref.Equal(attribute.LocalName, atomizedName)
                     && Ref.Equal(attribute.Namespace, ns)
-                ) {
+                )
+                {
                     _currentAttrIndex = i;
                     _cachedNode = _attributeEvents[i];
                     return true;
@@ -354,7 +357,8 @@ namespace System.Xml
             if (
                 _cacheState != CachingReaderState.Replay
                 || _cachedNode!.NodeType != XmlNodeType.Attribute
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -449,7 +453,8 @@ namespace System.Xml
             int depth,
             int lineNo,
             int linePos
-        ) {
+        )
+        {
             ValidatingReaderNodeData textNode = AddContent(XmlNodeType.Text);
             textNode.SetItemData(textValue, originalStringValue);
             textNode.SetLineInfo(lineNo, linePos);

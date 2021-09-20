@@ -37,10 +37,16 @@ namespace System.Web.Http.Results
             IContentNegotiator contentNegotiator,
             HttpRequestMessage request,
             IEnumerable<MediaTypeFormatter> formatters
-        ) : this(
-            exception,
-            new DirectDependencyProvider(includeErrorDetail, contentNegotiator, request, formatters)
-        ) { }
+        )
+            : this(
+                exception,
+                new DirectDependencyProvider(
+                    includeErrorDetail,
+                    contentNegotiator,
+                    request,
+                    formatters
+                )
+            ) { }
 
         /// <summary>Initializes a new instance of the <see cref="ExceptionResult"/> class.</summary>
         /// <param name="exception">The exception to include in the error.</param>
@@ -138,7 +144,8 @@ namespace System.Web.Http.Results
                 IContentNegotiator contentNegotiator,
                 HttpRequestMessage request,
                 IEnumerable<MediaTypeFormatter> formatters
-            ) {
+            )
+            {
                 if (contentNegotiator == null)
                 {
                     throw new ArgumentNullException("contentNegotiator");

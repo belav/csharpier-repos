@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
         public RazorPageFactoryResult(
             CompiledViewDescriptor viewDescriptor,
             Func<IRazorPage>? razorPageFactory
-        ) {
+        )
+        {
             ViewDescriptor =
                 viewDescriptor ?? throw new ArgumentNullException(nameof(viewDescriptor));
             RazorPageFactory = razorPageFactory;

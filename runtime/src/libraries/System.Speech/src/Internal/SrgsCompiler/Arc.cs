@@ -57,17 +57,18 @@ namespace System.Speech.Internal.SrgsCompiler
             Rule specialRule,
             MatchMode matchMode,
             ref bool fNeedWeightTable
-        ) : this(
-            sWord,
-            ruleRef,
-            words,
-            flWeight,
-            confidence,
-            specialRule,
-            s_serializeToken++,
-            matchMode,
-            ref fNeedWeightTable
-        ) { }
+        )
+            : this(
+                sWord,
+                ruleRef,
+                words,
+                flWeight,
+                confidence,
+                specialRule,
+                s_serializeToken++,
+                matchMode,
+                ref fNeedWeightTable
+            ) { }
 
         private Arc(
             string sWord,
@@ -177,7 +178,8 @@ namespace System.Speech.Internal.SrgsCompiler
                             + (arc1._confidence - arc2._confidence)
                         != 0
                     )
-                ) {
+                )
+                {
                     int diff = 0;
                     if (arc1._ruleRef != null || arc2._ruleRef != null)
                     {
@@ -268,7 +270,8 @@ namespace System.Speech.Internal.SrgsCompiler
             Arc arc,
             bool isLast,
             uint arcIndex
-        ) {
+        )
+        {
             CfgArc A = new();
 
             A.LastArc = isLast;
@@ -288,7 +291,8 @@ namespace System.Speech.Internal.SrgsCompiler
             int iArc,
             uint iArcOffset,
             bool tagsCannotSpanOverMultipleArcs
-        ) {
+        )
+        {
             _startTags[iArc]._cfgTag.StartArcIndex = iArcOffset;
             _startTags[iArc]._cfgTag.ArcIndex = iArcOffset;
             if (tagsCannotSpanOverMultipleArcs)
@@ -363,7 +367,8 @@ namespace System.Speech.Internal.SrgsCompiler
                             (int)(arc1._end != null ? arc1._end.Id : 0)
                             - (int)(arc2._end != null ? arc2._end.Id : 0)
                     ) == 0
-                ) {
+                )
+                {
                     // Same tag
                     diff = arc1.SameTags(arc2) ? 0 : 1;
                 }
@@ -486,7 +491,8 @@ namespace System.Speech.Internal.SrgsCompiler
                             tag._cfgTag._valueOffset != 0
                             && tag._cfgTag.PropVariantType
                                 == System.Runtime.InteropServices.VarEnum.VT_EMPTY
-                        ) {
+                        )
+                        {
                             newTag._cfgTag._valueOffset = be.Symbols.Add(
                                 tag._be.Symbols.FromOffset(tag._cfgTag._valueOffset),
                                 out idTagName
@@ -523,7 +529,8 @@ namespace System.Speech.Internal.SrgsCompiler
                 && _startTags != null
                 && arc._startTags != null
                 && _startTags.Count == arc._startTags.Count
-            ) {
+            )
+            {
                 same = true;
                 for (int i = 0; i < _startTags.Count; i++)
                 {
@@ -542,7 +549,8 @@ namespace System.Speech.Internal.SrgsCompiler
                     && _endTags != null
                     && arc._endTags != null
                     && _endTags.Count == arc._endTags.Count
-                ) {
+                )
+                {
                     same = true;
                     for (int i = 0; i < _endTags.Count; i++)
                     {
@@ -768,7 +776,8 @@ namespace System.Speech.Internal.SrgsCompiler
                 if (
                     (_start != null && !_start.OutArcs.IsEmpty)
                     || (_end != null && !_end.InArcs.IsEmpty)
-                ) {
+                )
+                {
                     throw new InvalidOperationException();
                 }
                 _ruleRef = value;
@@ -830,7 +839,8 @@ namespace System.Speech.Internal.SrgsCompiler
             CfgSemanticTag tag,
             StringBlob symbols,
             out string value
-        ) {
+        )
+        {
 #pragma warning disable 0618 // VarEnum is obsolete
             switch (tag.PropVariantType)
             {

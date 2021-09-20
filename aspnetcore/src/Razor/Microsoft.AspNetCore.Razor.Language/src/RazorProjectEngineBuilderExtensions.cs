@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static RazorProjectEngineBuilder ConfigureClass(
             this RazorProjectEngineBuilder builder,
             Action<RazorCodeDocument, ClassDeclarationIntermediateNode> configureClass
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -48,7 +49,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static RazorProjectEngineBuilder SetBaseType(
             this RazorProjectEngineBuilder builder,
             string baseType
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -70,7 +72,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static RazorProjectEngineBuilder SetNamespace(
             this RazorProjectEngineBuilder builder,
             string namespaceName
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -92,7 +95,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static RazorProjectEngineBuilder SetRootNamespace(
             this RazorProjectEngineBuilder builder,
             string rootNamespace
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -105,7 +109,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static void SetImportFeature(
             this RazorProjectEngineBuilder builder,
             IImportProjectFeature feature
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -135,7 +140,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static RazorProjectEngineBuilder AddTargetExtension(
             this RazorProjectEngineBuilder builder,
             ICodeTargetExtension extension
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -161,7 +167,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static RazorProjectEngineBuilder AddDirective(
             this RazorProjectEngineBuilder builder,
             DirectiveDescriptor directive
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -189,7 +196,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             this RazorProjectEngineBuilder builder,
             DirectiveDescriptor directive,
             params string[] fileKinds
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -211,7 +219,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             {
                 if (
                     !directiveFeature.DirectivesByFileKind.TryGetValue(fileKind, out var directives)
-                ) {
+                )
+                {
                     directives = new List<DirectiveDescriptor>();
                     directiveFeature.DirectivesByFileKind.Add(fileKind, directives);
                 }
@@ -232,7 +241,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static RazorProjectEngineBuilder AddDefaultImports(
             this RazorProjectEngineBuilder builder,
             params string[] imports
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -245,7 +255,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         private static DefaultRazorDirectiveFeature GetDirectiveFeature(
             RazorProjectEngineBuilder builder
-        ) {
+        )
+        {
             var directiveFeature = builder.Features.OfType<DefaultRazorDirectiveFeature>()
                 .FirstOrDefault();
             if (directiveFeature == null)
@@ -259,7 +270,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         private static IRazorTargetExtensionFeature GetTargetExtensionFeature(
             RazorProjectEngineBuilder builder
-        ) {
+        )
+        {
             var targetExtensionFeature = builder.Features.OfType<IRazorTargetExtensionFeature>()
                 .FirstOrDefault();
             if (targetExtensionFeature == null)
@@ -273,7 +285,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         private static DefaultDocumentClassifierPassFeature GetDefaultDocumentClassifierPassFeature(
             RazorProjectEngineBuilder builder
-        ) {
+        )
+        {
             var configurationFeature =
                 builder.Features.OfType<DefaultDocumentClassifierPassFeature>().FirstOrDefault();
             if (configurationFeature == null)

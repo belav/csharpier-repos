@@ -12,7 +12,8 @@ namespace Microsoft.Extensions.DependencyModel.Resolution
             CompilationLibrary library,
             string basePath,
             out string packagePath
-        ) {
+        )
+        {
             string path = library.Path;
             if (string.IsNullOrEmpty(path))
             {
@@ -33,7 +34,8 @@ namespace Microsoft.Extensions.DependencyModel.Resolution
             string basePath,
             string assemblyPath,
             out string fullName
-        ) {
+        )
+        {
             fullName = Path.Combine(basePath, assemblyPath);
             if (fileSystem.File.Exists(fullName))
             {

@@ -33,7 +33,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
         internal VisualStudioDiagnosticAnalyzerProvider(
             object extensionManager,
             Type typeIExtensionContent
-        ) {
+        )
+        {
             Contract.ThrowIfNull(extensionManager);
             Contract.ThrowIfNull(typeIExtensionContent);
 
@@ -100,7 +101,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
                                 )
                                 is string assemblyPath
                             ) || string.IsNullOrEmpty(assemblyPath)
-                        ) {
+                        )
+                        {
                             continue;
                         }
 

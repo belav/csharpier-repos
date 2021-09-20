@@ -97,7 +97,8 @@ namespace ILCompiler.Diagnostics
             string libraryName,
             Assembly assembly,
             DllImportSearchPath? searchPath
-        ) {
+        )
+        {
             IntPtr libraryHandle = IntPtr.Zero;
             if (libraryName == DiaSymReaderLibrary)
             {
@@ -219,7 +220,8 @@ namespace ILCompiler.Diagnostics
             if (
                 !dllPath.EndsWith(".ni.dll", StringComparison.OrdinalIgnoreCase)
                 && !dllPath.EndsWith(".ni.exe", StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 _tempSourceDllName = Path.Combine(
                     Path.GetDirectoryName(dllPath),
                     dllNameWithoutExtension + ".ni" + Path.GetExtension(dllPath)
@@ -258,7 +260,8 @@ namespace ILCompiler.Diagnostics
                     new FileStream(dllPath, FileMode.Open),
                     PEStreamOptions.Default
                 )
-            ) {
+            )
+            {
                 var sections = peReader.PEHeaders.SectionHeaders;
 
                 for (int i = 0; i < sections.Length; i++)
@@ -315,7 +318,8 @@ namespace ILCompiler.Diagnostics
             string assemblyName,
             uint textSectionOffset,
             bool isILPDBProvided
-        ) {
+        )
+        {
             string nameSuffix =
                 $"{method.Name}$#{(assemblyName != method.AssemblyName ? method.AssemblyName : String.Empty)}#{method.MethodToken.ToString("X")}";
 

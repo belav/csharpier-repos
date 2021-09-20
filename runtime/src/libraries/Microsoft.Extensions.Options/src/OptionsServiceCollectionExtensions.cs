@@ -188,7 +188,8 @@ namespace Microsoft.Extensions.DependencyInjection
                         gtd == typeof(IConfigureOptions<>)
                         || gtd == typeof(IPostConfigureOptions<>)
                         || gtd == typeof(IValidateOptions<>)
-                    ) {
+                    )
+                    {
                         yield return t;
                     }
                 }
@@ -214,7 +215,8 @@ namespace Microsoft.Extensions.DependencyInjection
             this IServiceCollection services,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
                 Type configureType
-        ) {
+        )
+        {
             services.AddOptions();
 
             bool added = false;
@@ -243,7 +245,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection ConfigureOptions(
             this IServiceCollection services,
             object configureInstance
-        ) {
+        )
+        {
             services.AddOptions();
             Type configureType = configureInstance.GetType();
 

@@ -164,7 +164,8 @@ namespace System.Reflection.PortableExecutable.Tests
                 MetadataReaderProvider provider = reader.ReadEmbeddedPortablePdbDebugDirectoryData(
                     entries[2]
                 )
-            ) {
+            )
+            {
                 var pdbReader = provider.GetMetadataReader();
                 var document = pdbReader.GetDocument(pdbReader.Documents.First());
                 Assert.Equal(@"C:\Documents.cs", pdbReader.GetString(document.Name));
@@ -383,25 +384,29 @@ namespace System.Reflection.PortableExecutable.Tests
 
             using (
                 var block = new ByteArrayMemoryProvider(bytes).GetMemoryBlock(0, bytes.Length - 1)
-            ) {
+            )
+            {
                 Assert.Equal("x", PEReader.DecodeCodeViewDebugDirectoryData(block).Path);
             }
 
             using (
                 var block = new ByteArrayMemoryProvider(bytes).GetMemoryBlock(0, bytes.Length - 2)
-            ) {
+            )
+            {
                 Assert.Equal("x", PEReader.DecodeCodeViewDebugDirectoryData(block).Path);
             }
 
             using (
                 var block = new ByteArrayMemoryProvider(bytes).GetMemoryBlock(0, bytes.Length - 3)
-            ) {
+            )
+            {
                 Assert.Equal("x", PEReader.DecodeCodeViewDebugDirectoryData(block).Path);
             }
 
             using (
                 var block = new ByteArrayMemoryProvider(bytes).GetMemoryBlock(0, bytes.Length - 4)
-            ) {
+            )
+            {
                 Assert.Equal("", PEReader.DecodeCodeViewDebugDirectoryData(block).Path);
             }
         }
@@ -457,7 +462,8 @@ namespace System.Reflection.PortableExecutable.Tests
 
             using (
                 var block = new ByteArrayMemoryProvider(bytes).GetMemoryBlock(0, bytes.Length - 3)
-            ) {
+            )
+            {
                 Assert.Throws<BadImageFormatException>(
                     () => PEReader.DecodeCodeViewDebugDirectoryData(block)
                 );

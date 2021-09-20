@@ -61,7 +61,8 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
             bool includeComments,
             IPrefixGenerator prefixGenerator,
             int startingDepthForAttributePrefixGeneration
-        ) {
+        )
+        {
             _attributesToRender = new CanonicalAttributeManager();
             _encoder = encoder;
             _includeComments = includeComments;
@@ -807,7 +808,8 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
             string prefix,
             XmlDictionaryString localName,
             XmlDictionaryString ns
-        ) {
+        )
+        {
             WriteStartAttributeCore(
                 ref prefix,
                 localName == null ? null : localName.Value,
@@ -934,7 +936,8 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
             string prefix,
             XmlDictionaryString localName,
             XmlDictionaryString ns
-        ) {
+        )
+        {
             WriteStartElementCore(
                 ref prefix,
                 localName == null ? null : localName.Value,
@@ -1086,7 +1089,8 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
             int count,
             bool isRaw,
             bool isBase64Generated
-        ) {
+        )
+        {
             if (!isBase64Generated)
             {
                 OnPossibleEndOfBase64Content();

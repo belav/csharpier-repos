@@ -11,7 +11,8 @@ namespace System.Xml
             Uri absoluteUri,
             string? role,
             Type? ofObjectToReturn
-        ) {
+        )
+        {
             return _resolver.GetEntityAsync(absoluteUri, role, ofObjectToReturn);
         }
     }

@@ -62,7 +62,8 @@ namespace System.Net
                     Interop.Kernel32.FileCompletionNotificationModes.SkipCompletionPortOnSuccess
                         | Interop.Kernel32.FileCompletionNotificationModes.SkipSetEventOnHandle
                 )
-            ) {
+            )
+            {
                 throw new HttpListenerException(Marshal.GetLastWin32Error());
             }
 

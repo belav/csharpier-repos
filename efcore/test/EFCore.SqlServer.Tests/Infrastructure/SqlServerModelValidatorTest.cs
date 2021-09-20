@@ -810,7 +810,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         public void Metadata_throws_when_setting_conflicting_serverGenerated_values(
             string firstConfiguration,
             string secondConfiguration
-        ) {
+        )
+        {
             var modelBuilder = CreateConventionalModelBuilder();
 
             var propertyBuilder = modelBuilder.Entity<Dog>().Property<int?>("NullableInt");
@@ -836,7 +837,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         public void SqlServerValueGenerationStrategy_warns_when_setting_conflicting_value_generation_strategies(
             SqlServerValueGenerationStrategy sqlServerValueGenerationStrategy,
             string conflictingValueGenerationStrategy
-        ) {
+        )
+        {
             var modelBuilder = CreateConventionalModelBuilder();
 
             var propertyBuilder = modelBuilder.Entity<Dog>().Property<int>("Id");
@@ -867,7 +869,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         [InlineData(SqlServerValueGenerationStrategy.SequenceHiLo)]
         public void SqlServerValueGenerationStrategy_warns_when_setting_conflicting_DefaultValue(
             SqlServerValueGenerationStrategy sqlServerValueGenerationStrategy
-        ) {
+        )
+        {
             var modelBuilder = CreateConventionalModelBuilder();
 
             var propertyBuilder = modelBuilder.Entity<Dog>().Property<int>("Id");
@@ -900,7 +903,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             IMutableProperty property,
             string configuration,
             string value
-        ) {
+        )
+        {
             switch (configuration)
             {
                 case "DefaultValue":

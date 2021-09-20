@@ -56,7 +56,8 @@ namespace System.Net.Http
         public static WinHttpException CreateExceptionUsingError(
             int error,
             string nameOfCalledFunction
-        ) {
+        )
+        {
             var e = new WinHttpException(error, GetErrorMessage(error, nameOfCalledFunction));
             ExceptionStackTrace.AddCurrentStack(e);
             return e;
@@ -66,7 +67,8 @@ namespace System.Net.Http
             int error,
             string nameOfCalledFunction,
             Exception innerException
-        ) {
+        )
+        {
             var e = new WinHttpException(
                 error,
                 GetErrorMessage(error, nameOfCalledFunction),

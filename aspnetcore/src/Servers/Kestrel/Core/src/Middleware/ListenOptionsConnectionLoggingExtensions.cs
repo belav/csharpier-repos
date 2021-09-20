@@ -34,7 +34,8 @@ namespace Microsoft.AspNetCore.Hosting
         public static ListenOptions UseConnectionLogging(
             this ListenOptions listenOptions,
             string? loggerName
-        ) {
+        )
+        {
             var loggerFactory =
                 listenOptions.KestrelServerOptions.ApplicationServices.GetRequiredService<ILoggerFactory>();
             var logger =

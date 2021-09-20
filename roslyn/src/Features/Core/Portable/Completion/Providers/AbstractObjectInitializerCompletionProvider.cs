@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                     GetInitializedType(document, semanticModel, position, cancellationToken)
                     is var (type, initializerLocation)
                 )
-            ) {
+            )
+            {
                 return;
             }
 

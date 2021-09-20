@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 OptionSet options,
                 bool localFunction,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var codeGenerator = Create(
                     insertionPoint,
                     selectionResult,
@@ -64,7 +65,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 AnalyzerResult analyzerResult,
                 OptionSet options,
                 bool localFunction
-            ) {
+            )
+            {
                 if (ExpressionCodeGenerator.IsExtractMethodOnExpression(selectionResult))
                 {
                     return new ExpressionCodeGenerator(
@@ -91,7 +93,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     MultipleStatementsCodeGenerator.IsExtractMethodOnMultipleStatements(
                         selectionResult
                     )
-                ) {
+                )
+                {
                     return new MultipleStatementsCodeGenerator(
                         insertionPoint,
                         selectionResult,
@@ -132,7 +135,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             protected override OperationStatus<IMethodSymbol> GenerateMethodDefinition(
                 bool localFunction,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var result = CreateMethodBody(cancellationToken);
 
                 var methodSymbol = CodeGenerationSymbolFactory.CreateMethodSymbol(
@@ -158,7 +162,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
             protected override async Task<SyntaxNode> GenerateBodyForCallSiteContainerAsync(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var container = GetOutermostCallSiteContainerToProcess(cancellationToken);
                 var variableMapToRemove = CreateVariableDeclarationToRemoveMap(
                     AnalyzerResult.GetVariablesToMoveIntoMethodDefinition(cancellationToken),
@@ -192,7 +197,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 ImmutableArray<SyntaxNode>
             > CreateStatementsOrInitializerToInsertAtCallSiteAsync(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var selectedNode = GetFirstStatementOrInitializerSelectedAtCallSite();
 
                 // field initializer, constructor initializer, expression bodied member case
@@ -201,7 +207,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     || selectedNode is FieldDeclarationSyntax
                     || IsExpressionBodiedMember(selectedNode)
                     || IsExpressionBodiedAccessor(selectedNode)
-                ) {
+                )
+                {
                     var statement =
                         await GetStatementOrInitializerContainingInvocationToExtractedMethodAsync(
                                 cancellationToken
@@ -251,7 +258,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 var typeVariables = new List<TypeSyntax>();
                 foreach (
                     var methodTypeParameter in AnalyzerResult.MethodTypeParametersInDeclaration
-                ) {
+                )
+                {
                     typeVariables.Add(SyntaxFactory.ParseTypeName(methodTypeParameter.Name));
                 }
 
@@ -260,7 +268,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
             protected SyntaxNode GetCallSiteContainerFromOutermostMoveInVariable(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var outmostVariable = GetOutermostVariableToMoveIntoMethodDefinition(
                     cancellationToken
                 );
@@ -294,7 +303,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                         !Options.GetOption(CSharpCodeStyleOptions.PreferStaticLocalFunction).Value
                         || languageVersion < LanguageVersion.CSharp8
                     )
-                ) {
+                )
+                {
                     isStatic = false;
                 }
 
@@ -317,7 +327,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
             private OperationStatus<ImmutableArray<SyntaxNode>> CreateMethodBody(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var statements = GetInitialStatementsForMethodDefinitions();
 
                 statements = SplitOrMoveDeclarationIntoMethodDefinition(
@@ -336,7 +347,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
             private IEnumerable<StatementSyntax> WrapInCheckStatementIfNeeded(
                 IEnumerable<StatementSyntax> statements
-            ) {
+            )
+            {
                 var kind = CSharpSelectionResult.UnderCheckedStatementContext();
                 if (kind == SyntaxKind.None)
                 {
@@ -364,7 +376,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
             private static ImmutableArray<StatementSyntax> CleanupCode(
                 ImmutableArray<StatementSyntax> statements
-            ) {
+            )
+            {
                 statements = PostProcessor.RemoveRedundantBlock(statements);
                 statements = PostProcessor.RemoveDeclarationAssignmentPattern(statements);
                 statements = PostProcessor.RemoveInitializedDeclarationAndReturnPattern(statements);
@@ -374,7 +387,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
             private static OperationStatus CheckActiveStatements(
                 IEnumerable<StatementSyntax> statements
-            ) {
+            )
+            {
                 var count = statements.Count();
                 if (count == 0)
                 {
@@ -386,7 +400,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     if (
                         statements.Single() is ReturnStatementSyntax returnStatement
                         && returnStatement.Expression == null
-                    ) {
+                    )
+                    {
                         return OperationStatus.NoActiveStatement;
                     }
                 }
@@ -414,7 +429,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             private ImmutableArray<StatementSyntax> MoveDeclarationOutFromMethodDefinition(
                 ImmutableArray<StatementSyntax> statements,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 using var _ = ArrayBuilder<StatementSyntax>.GetInstance(out var result);
 
                 var variableToRemoveMap = CreateVariableDeclarationToRemoveMap(
@@ -431,7 +447,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     if (
                         !(statement is LocalDeclarationStatementSyntax declarationStatement)
                         || declarationStatement.Declaration.Variables.FullSpan.IsEmpty
-                    ) {
+                    )
+                    {
                         // if given statement is not decl statement.
                         result.Add(statement);
                         continue;
@@ -547,7 +564,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             private static StatementSyntax FixDeclarationExpressionsAndDeclarationPatterns(
                 StatementSyntax statement,
                 HashSet<SyntaxAnnotation> variablesToRemove
-            ) {
+            )
+            {
                 var replacements = new Dictionary<SyntaxNode, SyntaxNode>();
 
                 var declarations = statement.DescendantNodes()
@@ -569,7 +587,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                             if (
                                 declaration.Designation.Kind()
                                 != SyntaxKind.SingleVariableDesignation
-                            ) {
+                            )
+                            {
                                 break;
                             }
 
@@ -614,7 +633,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                                     pattern.Designation
                                     is SingleVariableDesignationSyntax designation
                                 )
-                            ) {
+                            )
+                            {
                                 break;
                             }
 
@@ -640,7 +660,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 LocalDeclarationStatementSyntax declarationStatement,
                 bool firstVariableToAttachTrivia,
                 VariableDeclaratorSyntax variable
-            ) {
+            )
+            {
                 var identifier = variable.Identifier;
                 var typeSyntax = declarationStatement.Declaration.Type;
                 if (firstVariableToAttachTrivia && typeSyntax != null)
@@ -666,7 +687,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             private ImmutableArray<StatementSyntax> SplitOrMoveDeclarationIntoMethodDefinition(
                 ImmutableArray<StatementSyntax> statements,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var semanticModel = SemanticDocument.SemanticModel;
                 var context = InsertionPoint.GetContext();
                 var postProcessor = new PostProcessor(semanticModel, context.SpanStart);
@@ -683,7 +705,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             private static ExpressionSyntax CreateAssignmentExpression(
                 SyntaxToken identifier,
                 ExpressionSyntax rvalue
-            ) {
+            )
+            {
                 return SyntaxFactory.AssignmentExpression(
                     SyntaxKind.SimpleAssignmentExpression,
                     SyntaxFactory.IdentifierName(identifier),
@@ -773,7 +796,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                                         }
                                     && parameters[0].Type.SpecialType == SpecialType.System_Boolean
                             )
-                    ) {
+                    )
+                    {
                         invocation = SyntaxFactory.InvocationExpression(
                             SyntaxFactory.MemberAccessExpression(
                                 SyntaxKind.SimpleMemberAccessExpression,
@@ -805,7 +829,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 VariableInfo variable,
                 ExpressionSyntax initialValue,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var type = variable.GetVariableType(SemanticDocument);
                 var typeNode = type.GenerateTypeSyntax();
 
@@ -829,7 +854,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 OperationStatus status,
                 SemanticDocument newDocument,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (status.Succeeded())
                 {
                     // in hybrid code cases such as extract method, formatter will have some difficulties on where it breaks lines in two.
@@ -924,12 +950,14 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 SemanticDocument originalDocument,
                 OperationStatus<IMethodSymbol> methodSymbolResult,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // Only need to update for nullable reference types in return
                 if (
                     methodSymbolResult.Data.ReturnType.NullableAnnotation
                     != NullableAnnotation.Annotated
-                ) {
+                )
+                {
                     return await base.UpdateMethodAfterGenerationAsync(
                             originalDocument,
                             methodSymbolResult,
@@ -985,7 +1013,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 static bool ReturnOperationBelongsToMethod(
                     SyntaxNode returnOperationSyntax,
                     SyntaxNode methodSyntax
-                ) {
+                )
+                {
                     var enclosingMethod = returnOperationSyntax.FirstAncestorOrSelf<SyntaxNode>(
                         n =>
                             n switch
@@ -1005,7 +1034,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     OperationStatus<IMethodSymbol> methodSymbolResult,
                     SemanticDocument originalDocument,
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     var semanticModel = originalDocument.SemanticModel;
 
                     var methodOperation = semanticModel.GetOperation(node, cancellationToken);
@@ -1021,7 +1051,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                                 returnOperation.Syntax,
                                 methodOperation.Syntax
                             )
-                        ) {
+                        )
+                        {
                             continue;
                         }
 
@@ -1048,7 +1079,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     TypeSyntax returnType,
                     SemanticDocument originalDocument,
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     // Return type can be updated to not be null
                     var newType = methodSymbolResult.Data.ReturnType.WithNullableAnnotation(
                         NullableAnnotation.NotAnnotated
@@ -1122,7 +1154,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                                     null
                                 )
                         )
-                    ) {
+                    )
+                    {
                         methodName = NewMethodCamelCaseStr;
                     }
                 }

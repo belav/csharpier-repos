@@ -33,7 +33,8 @@ namespace System.Net.Http.Functional.Tests
         {
             foreach (
                 Configuration.Http.RemoteServer remoteServer in Configuration.Http.RemoteServers
-            ) {
+            )
+            {
                 yield return new object[] { remoteServer, remoteServer.GZipUri };
                 // Remote deflate endpoint isn't correctly following the deflate protocol.
                 //yield return new object[] { remoteServer, remoteServer.DeflateUri };
@@ -51,7 +52,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task DecompressedResponse_MethodSpecified_DecompressedContentReturned(
             string encodingName,
             bool all
-        ) {
+        )
+        {
             Func<Stream, Stream> compress;
             DecompressionMethods methods;
             switch (encodingName)
@@ -163,7 +165,8 @@ namespace System.Net.Http.Functional.Tests
             string encodingName,
             Func<Stream, Stream> compress,
             DecompressionMethods methods
-        ) {
+        )
+        {
             var expectedContent = new byte[12345];
             new Random(42).NextBytes(expectedContent);
 
@@ -205,7 +208,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task GetAsync_SetAutomaticDecompression_ContentDecompressed_GZip(
             Configuration.Http.RemoteServer remoteServer,
             Uri uri
-        ) {
+        )
+        {
             // Sync API supported only up to HTTP/1.1
             if (!TestAsync && remoteServer.HttpVersion.Major >= 2)
             {
@@ -222,7 +226,8 @@ namespace System.Net.Http.Functional.Tests
                         TestAsync,
                         CreateRequest(HttpMethod.Get, uri, remoteServer.HttpVersion)
                     )
-                ) {
+                )
+                {
                     Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                     string responseContent = await response.Content.ReadAsStringAsync();
                     _output.WriteLine(responseContent);
@@ -247,7 +252,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task GetAsync_SetAutomaticDecompression_ContentDecompressed_Deflate(
             string uri,
             string expectedContent
-        ) {
+        )
+        {
             if (IsWinHttpHandler)
             {
                 // WinHttpHandler targets netstandard2.0 and still erroneously uses DeflateStream rather than ZlibStream for deflate.
@@ -268,7 +274,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task GetAsync_SetAutomaticDecompression_HeadersRemoved(
             Configuration.Http.RemoteServer remoteServer,
             Uri uri
-        ) {
+        )
+        {
             // Sync API supported only up to HTTP/1.1
             if (!TestAsync && remoteServer.HttpVersion.Major >= 2)
             {
@@ -285,7 +292,8 @@ namespace System.Net.Http.Functional.Tests
                     CreateRequest(HttpMethod.Get, uri, remoteServer.HttpVersion),
                     HttpCompletionOption.ResponseHeadersRead
                 )
-            ) {
+            )
+            {
                 Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
                 Assert.False(
@@ -325,12 +333,14 @@ namespace System.Net.Http.Functional.Tests
             DecompressionMethods methods,
             string encodings,
             string manualAcceptEncodingHeaderValues
-        ) {
+        )
+        {
             // Brotli only supported on SocketsHttpHandler.
             if (
                 IsWinHttpHandler
                 && (encodings.Contains("br") || manualAcceptEncodingHeaderValues.Contains("br"))
-            ) {
+            )
+            {
                 return;
             }
 
@@ -414,7 +424,8 @@ namespace System.Net.Http.Functional.Tests
             DecompressionMethods methods,
             string manualAcceptEncodingHeaderValues,
             string expectedHandlerAddedAcceptEncodingHeaderValues
-        ) {
+        )
+        {
             if (IsWinHttpHandler)
             {
                 return;
@@ -455,7 +466,8 @@ namespace System.Net.Http.Functional.Tests
                                     "Accept-Encoding",
                                     StringComparison.OrdinalIgnoreCase
                                 )
-                            ) {
+                            )
+                            {
                                 acceptEncodingValid = requestLine.Equals(
                                     $"Accept-Encoding: {manualAcceptEncodingHeaderValues}{(string.IsNullOrEmpty(expectedHandlerAddedAcceptEncodingHeaderValues) ? string.Empty : ", " + expectedHandlerAddedAcceptEncodingHeaderValues)}",
                                     StringComparison.OrdinalIgnoreCase

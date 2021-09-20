@@ -214,7 +214,8 @@ namespace System.Web.Http.Owin
             bool expected,
             IncludeErrorDetailPolicy policy,
             bool isLocal
-        ) {
+        )
+        {
             // Arrange
             IOwinContext owinContext = CreateStubOwinContext();
 
@@ -261,7 +262,8 @@ namespace System.Web.Http.Owin
         public void IncludeErrorDetailSet_OverridesPolicy(
             bool expected,
             IncludeErrorDetailPolicy policy
-        ) {
+        )
+        {
             // Arrange
             IOwinContext owinContext = CreateStubOwinContext();
 
@@ -606,7 +608,8 @@ namespace System.Web.Http.Owin
         [InlineData("")]
         public void VirtualPathRootGet_ReturnsSlash_WhenContextRequestPathBaseIsValue(
             string contextRequestPathBase
-        ) {
+        )
+        {
             // Arrange
             Mock<IOwinRequest> owinRequestMock = new Mock<IOwinRequest>(MockBehavior.Strict);
             owinRequestMock.Setup(r => r.PathBase).Returns(new PathString(contextRequestPathBase));
@@ -725,7 +728,8 @@ namespace System.Web.Http.Owin
         private static OwinHttpRequestContext CreateProductUnderTest(
             IOwinContext context,
             HttpRequestMessage request
-        ) {
+        )
+        {
             return new OwinHttpRequestContext(context, request);
         }
 

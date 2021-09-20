@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             ImmutableDictionary<string, DisplayClassVariable> displayClassVariables,
             BoundNode node,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             var rewriter = new CapturedVariableRewriter(
                 getThisReference,
                 conversions,
@@ -42,7 +43,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             Conversions conversions,
             ImmutableDictionary<string, DisplayClassVariable> displayClassVariables,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             _getThisReference = getThisReference;
             _conversions = conversions;
             _displayClassVariables = displayClassVariables;

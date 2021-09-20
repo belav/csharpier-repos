@@ -67,7 +67,8 @@ namespace Microsoft.CodeAnalysis.Tools.Workspaces
             string fullPath,
             SourceText newText,
             Encoding encoding
-        ) {
+        )
+        {
             try
             {
                 using var writer = new StreamWriter(fullPath, append: false, encoding);

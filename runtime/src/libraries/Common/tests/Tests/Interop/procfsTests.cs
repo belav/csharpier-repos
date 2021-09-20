@@ -345,7 +345,8 @@ namespace Common.Tests
             ulong expectedVsize,
             long expectedRss,
             ulong expectedRsslim
-        ) {
+        )
+        {
             string path = Path.GetTempFileName();
             try
             {

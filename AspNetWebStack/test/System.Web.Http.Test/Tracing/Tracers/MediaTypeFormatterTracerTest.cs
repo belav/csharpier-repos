@@ -55,7 +55,8 @@ namespace System.Web.Http.Tracing.Tracers
         [PropertyData("AllKnownFormatters")]
         public void Inner_Property_On_All_MediaTypeFormatterTracers_Returns_Object_Of_Type_MediaTypeFormatter(
             MediaTypeFormatter formatter
-        ) {
+        )
+        {
             // Arrange
             HttpRequestMessage request = new HttpRequestMessage();
             MediaTypeFormatter formatterTracer = MediaTypeFormatterTracer.CreateTracer(
@@ -76,7 +77,8 @@ namespace System.Web.Http.Tracing.Tracers
         [PropertyData("AllKnownFormatters")]
         public void Decorator_GetInner_On_All_MediaTypeFormatterTracers_Returns_Object_Of_Type_MediaTypeFormatter(
             MediaTypeFormatter formatter
-        ) {
+        )
+        {
             // Arrange
             HttpRequestMessage request = new HttpRequestMessage();
             MediaTypeFormatter formatterTracer = MediaTypeFormatterTracer.CreateTracer(
@@ -284,7 +286,8 @@ namespace System.Web.Http.Tracing.Tracers
                 HttpContent content,
                 IFormatterLogger formatterLogger,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return Task.FromResult(_result);
             }
 
@@ -295,7 +298,8 @@ namespace System.Web.Http.Tracing.Tracers
                 HttpContent content,
                 TransportContext transportContext,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return Task.FromResult(_result);
             }
         }

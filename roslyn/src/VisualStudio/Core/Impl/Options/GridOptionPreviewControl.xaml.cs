@@ -146,7 +146,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
                     Title = ServicesVSResources.Save_dot_editorconfig_file,
                     InitialDirectory = GetInitialDirectory()
                 }
-            ) {
+            )
+            {
                 if (sfd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     IOUtilities.PerformIO(
@@ -171,7 +172,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
                     !ErrorHandler.Failed(
                         solution.GetSolutionInfo(out _, out var solutionFilePath, out _)
                     )
-                ) {
+                )
+                {
                     return Path.GetDirectoryName(solutionFilePath);
                 }
             }

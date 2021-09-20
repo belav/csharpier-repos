@@ -91,7 +91,8 @@ namespace Microsoft.CodeAnalysis.Collections
                     || AddHelper(ref set._v2, i, ref added)
                     || AddHelper(ref set._v3, i, ref added)
                     || AddHelper(ref set._v4, i, ref added)
-                ) {
+                )
+                {
                     return added;
                 }
 

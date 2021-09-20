@@ -27,7 +27,8 @@ internal static partial class Interop
         internal static bool CreateDirectory(
             string path,
             ref SECURITY_ATTRIBUTES lpSecurityAttributes
-        ) {
+        )
+        {
             // We always want to add for CreateDirectory to get around the legacy 248 character limitation
             path = PathInternal.EnsureExtendedPrefix(path);
             return CreateDirectoryPrivate(path, ref lpSecurityAttributes);

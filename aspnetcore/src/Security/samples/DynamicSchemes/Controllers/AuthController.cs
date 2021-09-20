@@ -14,7 +14,8 @@ namespace AuthSamples.DynamicSchemes.Controllers
         public AuthController(
             IAuthenticationSchemeProvider schemeProvider,
             IOptionsMonitorCache<SimpleOptions> optionsCache
-        ) {
+        )
+        {
             _schemeProvider = schemeProvider;
             _optionsCache = optionsCache;
         }

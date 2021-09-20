@@ -49,7 +49,8 @@ namespace System.Composition.Runtime.Tests
             Type contractType,
             string contractName,
             IDictionary<string, object> metadataConstraints
-        ) {
+        )
+        {
             var contract = new CompositionContract(contractType, contractName, metadataConstraints);
             Assert.Equal(contractType, contract.ContractType);
             Assert.Equal(contractName, contract.ContractName);
@@ -386,7 +387,8 @@ namespace System.Composition.Runtime.Tests
             CompositionContract contract,
             object other,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, contract.Equals(other));
             Assert.Equal(contract.GetHashCode(), contract.GetHashCode());
         }

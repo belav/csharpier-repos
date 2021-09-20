@@ -86,7 +86,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2.Interop
         public static SqlConnection Create(
             IPersistentStorageFaultInjector? faultInjector,
             string databasePath
-        ) {
+        )
+        {
             faultInjector?.OnNewConnection();
 
             // Allocate dictionary before doing any sqlite work.  That way if it throws
@@ -168,7 +169,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2.Interop
         private SqlConnection(
             SafeSqliteHandle handle,
             Dictionary<string, SqlStatement> queryToStatement
-        ) {
+        )
+        {
             _handle = handle;
             _queryToStatement = queryToStatement;
         }
@@ -304,7 +306,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2.Interop
             Database database,
             Table table,
             long rowId
-        ) {
+        )
+        {
             return ReadBlob_MustRunInTransaction(
                 database,
                 table,
@@ -322,7 +325,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2.Interop
             Database database,
             Table table,
             long rowId
-        ) {
+        )
+        {
             return ReadBlob_MustRunInTransaction(
                 database,
                 table,
@@ -401,7 +405,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2.Interop
             Column column,
             long rowId,
             Func<SqlConnection, SafeSqliteBlobHandle, Optional<T>> readBlob
-        ) {
+        )
+        {
             // NOTE: we do need to do the blob reading in a transaction because of the
             // following: https://www.sqlite.org/c3ref/blob_open.html
             //

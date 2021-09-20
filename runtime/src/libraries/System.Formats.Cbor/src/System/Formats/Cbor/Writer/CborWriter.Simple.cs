@@ -44,7 +44,8 @@ namespace System.Formats.Cbor
             if (
                 !CborConformanceModeHelpers.RequiresPreservingFloatPrecision(ConformanceMode)
                 && FloatSerializationHelpers.TryConvertSingleToHalf(value, out Half half)
-            ) {
+            )
+            {
                 WriteHalf(half);
             }
             else
@@ -67,7 +68,8 @@ namespace System.Formats.Cbor
             if (
                 !CborConformanceModeHelpers.RequiresPreservingFloatPrecision(ConformanceMode)
                 && FloatSerializationHelpers.TryConvertDoubleToSingle(value, out float single)
-            ) {
+            )
+            {
                 if (FloatSerializationHelpers.TryConvertSingleToHalf(single, out Half half))
                 {
                     WriteHalf(half);
@@ -156,7 +158,8 @@ namespace System.Formats.Cbor
             else if (
                 value <= (CborSimpleValue)CborAdditionalInfo.IndefiniteLength
                 && CborConformanceModeHelpers.RequireCanonicalSimpleValueEncodings(ConformanceMode)
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(
                     SR.Format(SR.Cbor_ConformanceMode_InvalidSimpleValueEncoding, ConformanceMode)
                 );

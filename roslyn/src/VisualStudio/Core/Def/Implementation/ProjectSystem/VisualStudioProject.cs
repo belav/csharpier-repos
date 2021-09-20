@@ -150,7 +150,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             CompilationOptions? compilationOptions,
             string? filePath,
             ParseOptions? parseOptions
-        ) {
+        )
+        {
             _workspace = workspace;
             _dynamicFileInfoProviders = dynamicFileInfoProviders;
             _hostDiagnosticUpdateSource = hostDiagnosticUpdateSource;
@@ -226,7 +227,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             T newValue,
             Func<Solution, Solution> withNewValue,
             bool logThrowAwayTelemetry = false
-        ) {
+        )
+        {
             lock (_gate)
             {
                 // If nothing is changing, we can skip entirely
@@ -254,7 +256,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     logThrowAwayTelemetry
                     && _telemetryService?.HasActiveSession == true
                     && !isFullyLoaded
-                ) {
+                )
+                {
                     TryReportCompilationThrownAway(_workspace.CurrentSolution.State, Id);
                 }
 
@@ -275,7 +278,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         private static void TryReportCompilationThrownAway(
             SolutionState solutionState,
             ProjectId projectId
-        ) {
+        )
+        {
             // We log the number of syntax trees that have been parsed even if there was no compilation created yet
             var projectState = solutionState.GetRequiredProjectState(projectId);
             var parsedTrees = 0;
@@ -313,7 +317,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             ref string? field,
             string? newValue,
             Func<Solution, Solution> withNewValue
-        ) {
+        )
+        {
             lock (_gate)
             {
                 // Skip if nothing changing
@@ -814,7 +819,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             ImmutableArray<string> folders = default,
             bool designTimeOnly = false,
             IDocumentServiceProvider? documentServiceProvider = null
-        ) {
+        )
+        {
             return _sourceFiles.AddTextContainer(
                 textContainer,
                 fullPath,
@@ -886,7 +892,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                         !provider.Metadata.Extensions.Any(
                             e => string.Equals(e, extension, StringComparison.OrdinalIgnoreCase)
                         )
-                    ) {
+                    )
+                    {
                         continue;
                     }
 
@@ -946,7 +953,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         private static DynamicFileInfo FixUpDynamicFileInfo(
             DynamicFileInfo fileInfo,
             string filePath
-        ) {
+        )
+        {
             // we might change contract and just throw here. but for now, we keep existing contract where one can return null for DynamicFileInfo.FilePath.
             // In this case we substitute the file being generated from so we still have some path.
             if (string.IsNullOrEmpty(fileInfo.FilePath))
@@ -1167,7 +1175,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         public bool ContainsMetadataReference(
             string fullPath,
             MetadataReferenceProperties properties
-        ) {
+        )
+        {
             lock (_gate)
             {
                 return GetPropertiesForMetadataReference(fullPath).Contains(properties);
@@ -1180,7 +1189,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         /// </summary>
         public ImmutableArray<MetadataReferenceProperties> GetPropertiesForMetadataReference(
             string fullPath
-        ) {
+        )
+        {
             lock (_gate)
             {
                 return _allMetadataReferences.TryGetValue(fullPath, out var list)
@@ -1523,7 +1533,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 Action<Workspace, DocumentInfo> documentAddAction,
                 Action<Workspace, DocumentId> documentRemoveAction,
                 Action<Workspace, DocumentId, TextLoader> documentTextLoaderChangedAction
-            ) {
+            )
+            {
                 _project = project;
                 _documentAlreadyInWorkspace = documentAlreadyInWorkspace;
                 _documentAddAction = documentAddAction;
@@ -1535,7 +1546,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 string fullPath,
                 SourceCodeKind sourceCodeKind,
                 ImmutableArray<string> folders
-            ) {
+            )
+            {
                 if (string.IsNullOrEmpty(fullPath))
                 {
                     throw new ArgumentException(
@@ -1600,7 +1612,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 ImmutableArray<string> folders,
                 bool designTimeOnly,
                 IDocumentServiceProvider? documentServiceProvider
-            ) {
+            )
+            {
                 if (textContainer == null)
                 {
                     throw new ArgumentNullException(nameof(textContainer));
@@ -1673,7 +1686,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 IDynamicFileInfoProvider fileInfoProvider,
                 DynamicFileInfo fileInfo,
                 ImmutableArray<string> folders
-            ) {
+            )
+            {
                 var documentInfo = CreateDocumentInfoFromFileInfo(fileInfo, folders.NullToEmpty());
 
                 // Generally, DocumentInfo.FilePath can be null, but we always have file paths for dynamic files.
@@ -1736,7 +1750,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                             documentId,
                             out var fileInfoProvider
                         )
-                    ) {
+                    )
+                    {
                         throw new ArgumentException(
                             $"'{fullPath}' is not a dynamic file of this project."
                         );
@@ -1828,7 +1843,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                             textContainer,
                             out var documentId
                         )
-                    ) {
+                    )
+                    {
                         throw new ArgumentException(
                             $"{nameof(textContainer)} is not a text container added to this project."
                         );
@@ -1923,7 +1939,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                             workspaceFilePath,
                             out var documentId
                         )
-                    ) {
+                    )
+                    {
                         // We create file watching prior to pushing the file to the workspace in batching, so it's
                         // possible we might see a file change notification early. In this case, toss it out. Since
                         // all adds/removals of documents for this project happen under our lock, it's safe to do this
@@ -2063,7 +2080,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 WorkspaceChangeKind addDocumentChangeKind,
                 Func<Solution, ImmutableArray<DocumentId>, Solution> removeDocuments,
                 WorkspaceChangeKind removeDocumentChangeKind
-            ) {
+            )
+            {
                 // Document adding...
                 solutionChanges.UpdateSolutionForDocumentAction(
                     newSolution: addDocuments(
@@ -2087,7 +2105,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                             documentInfo.Id,
                             out var textContainer
                         )
-                    ) {
+                    )
+                    {
                         documentsToOpen.Add((documentInfo.Id, textContainer));
                     }
                 }
@@ -2123,7 +2142,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             private DocumentInfo CreateDocumentInfoFromFileInfo(
                 DynamicFileInfo fileInfo,
                 ImmutableArray<string> folders
-            ) {
+            )
+            {
                 Contract.ThrowIfTrue(folders.IsDefault);
 
                 // we use this file path for editorconfig.

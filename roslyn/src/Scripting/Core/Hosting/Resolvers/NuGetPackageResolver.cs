@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             string reference,
             out string name,
             out string version
-        ) {
+        )
+        {
             if (reference.StartsWith(ReferencePrefix, StringComparison.Ordinal))
             {
                 var parts = reference.Substring(ReferencePrefix.Length).Split('/');

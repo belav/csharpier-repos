@@ -32,7 +32,8 @@ namespace System.Diagnostics.Tracing
             TraceLoggingMetadataCollector collector,
             string? name,
             EventFieldFormat format
-        ) {
+        )
+        {
             collector.AddGroup(name);
         }
 
@@ -76,7 +77,8 @@ namespace System.Diagnostics.Tracing
             TraceLoggingMetadataCollector collector,
             string? name,
             EventFieldFormat format
-        ) {
+        )
+        {
             collector.AddScalar(name!, Statics.FormatScalar(format, nativeFormat));
         }
 
@@ -141,11 +143,8 @@ namespace System.Diagnostics.Tracing
         private readonly TraceLoggingDataType nativeFormat;
         private readonly int elementSize;
 
-        private ScalarArrayTypeInfo(
-            Type type,
-            TraceLoggingDataType nativeFormat,
-            int elementSize
-        ) : base(type)
+        private ScalarArrayTypeInfo(Type type, TraceLoggingDataType nativeFormat, int elementSize)
+            : base(type)
         {
             this.nativeFormat = nativeFormat;
             this.elementSize = elementSize;
@@ -155,7 +154,8 @@ namespace System.Diagnostics.Tracing
             TraceLoggingMetadataCollector collector,
             string? name,
             EventFieldFormat format
-        ) {
+        )
+        {
             collector.AddArray(name!, Statics.FormatScalar(format, nativeFormat));
         }
 
@@ -271,7 +271,8 @@ namespace System.Diagnostics.Tracing
             TraceLoggingMetadataCollector collector,
             string? name,
             EventFieldFormat format
-        ) {
+        )
+        {
             // name can be null if the string was used as a top-level object in an event.
             // In that case, use 'message' as the name of the field.
             name ??= "message";
@@ -313,7 +314,8 @@ namespace System.Diagnostics.Tracing
             TraceLoggingMetadataCollector collector,
             string? name,
             EventFieldFormat format
-        ) {
+        )
+        {
             collector.AddScalar(name!, Statics.MakeDataType(TraceLoggingDataType.FileTime, format));
         }
 
@@ -346,7 +348,8 @@ namespace System.Diagnostics.Tracing
             TraceLoggingMetadataCollector collector,
             string? name,
             EventFieldFormat format
-        ) {
+        )
+        {
             TraceLoggingMetadataCollector group = collector.AddGroup(name);
             group.AddScalar("Ticks", Statics.MakeDataType(TraceLoggingDataType.FileTime, format));
             group.AddScalar("Offset", TraceLoggingDataType.Int64);
@@ -378,7 +381,8 @@ namespace System.Diagnostics.Tracing
             TraceLoggingMetadataCollector collector,
             string? name,
             EventFieldFormat format
-        ) {
+        )
+        {
             collector.AddScalar(name!, Statics.MakeDataType(TraceLoggingDataType.Int64, format));
         }
 
@@ -403,7 +407,8 @@ namespace System.Diagnostics.Tracing
             TraceLoggingMetadataCollector collector,
             string? name,
             EventFieldFormat format
-        ) {
+        )
+        {
             collector.AddScalar(name!, Statics.MakeDataType(TraceLoggingDataType.Double, format));
         }
 
@@ -436,7 +441,8 @@ namespace System.Diagnostics.Tracing
             TraceLoggingMetadataCollector collector,
             string? name,
             EventFieldFormat format
-        ) {
+        )
+        {
             TraceLoggingMetadataCollector group = collector.AddGroup(name);
             group.AddScalar("HasValue", TraceLoggingDataType.Boolean8);
             this.valueInfo.WriteMetadata(group, "Value", format);

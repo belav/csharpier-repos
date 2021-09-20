@@ -39,7 +39,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public ConstructorBindingFactory(
             IPropertyParameterBindingFactory propertyFactory,
             IParameterBindingFactories factories
-        ) {
+        )
+        {
             _propertyFactory = propertyFactory;
             _factories = factories;
         }
@@ -109,7 +110,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             > bind,
             out InstantiationBinding constructorBinding,
             out InstantiationBinding? serviceOnlyBinding
-        ) {
+        )
+        {
             var maxServiceParams = 0;
             var maxServiceOnlyParams = 0;
             var minPropertyParams = int.MaxValue;
@@ -120,7 +122,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             foreach (
                 var constructor in entityType.ClrType.GetTypeInfo()
                     .DeclaredConstructors.Where(c => !c.IsStatic)
-            ) {
+            )
+            {
                 // Trying to find the constructor with the most service properties
                 // followed by the least scalar property parameters
                 if (
@@ -131,7 +134,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                         out var binding,
                         out var failures
                     )
-                ) {
+                )
+                {
                     var serviceParamCount =
                         binding.ParameterBindings.OfType<ServiceParameterBinding>().Count();
                     var propertyParamCount = binding.ParameterBindings.Count - serviceParamCount;
@@ -154,7 +158,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     if (
                         serviceParamCount == maxServiceParams
                         && propertyParamCount == minPropertyParams
-                    ) {
+                    )
+                    {
                         foundBindings.Add(binding);
                     }
                     else if (serviceParamCount > maxServiceParams)
@@ -285,7 +290,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             > bind,
             [NotNullWhen(true)] out InstantiationBinding? binding,
             [NotNullWhen(false)] out IEnumerable<ParameterInfo>? unboundParameters
-        ) {
+        )
+        {
             IEnumerable<(ParameterInfo Parameter, ParameterBinding? Binding)> bindings =
                 constructor.GetParameters()
                     .Select(

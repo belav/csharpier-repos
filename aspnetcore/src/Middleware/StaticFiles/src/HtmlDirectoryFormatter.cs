@@ -42,7 +42,8 @@ namespace Microsoft.AspNetCore.StaticFiles
         public virtual Task GenerateContentAsync(
             HttpContext context,
             IEnumerable<IFileInfo> contents
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -132,7 +133,8 @@ namespace Microsoft.AspNetCore.StaticFiles
                     new[] { '/' },
                     StringSplitOptions.RemoveEmptyEntries
                 )
-            ) {
+            )
+            {
                 cumulativePath = cumulativePath + segment + "/";
                 builder.AppendFormat(
                     CultureInfo.InvariantCulture,

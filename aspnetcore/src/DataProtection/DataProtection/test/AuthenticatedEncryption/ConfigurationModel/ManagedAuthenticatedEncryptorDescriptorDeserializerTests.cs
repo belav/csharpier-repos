@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.Configurat
         public void ImportFromXml_BuiltInTypes_CreatesAppropriateDescriptor(
             Type encryptionAlgorithmType,
             Type validationAlgorithmType
-        ) {
+        )
+        {
             // Arrange
             var masterKey = Convert.ToBase64String(Encoding.UTF8.GetBytes("[PLACEHOLDER]"));
             var descriptor = new ManagedAuthenticatedEncryptorDescriptor(
@@ -116,7 +117,8 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.Configurat
 
         private static IAuthenticatedEncryptor CreateEncryptorInstanceFromDescriptor(
             ManagedAuthenticatedEncryptorDescriptor descriptor
-        ) {
+        )
+        {
             var encryptorFactory = new ManagedAuthenticatedEncryptorFactory(
                 NullLoggerFactory.Instance
             );

@@ -19,7 +19,8 @@ namespace System.Reflection.TypeLoading.Ecma
             ReadOnlySpan<byte> ns,
             ReadOnlySpan<byte> name,
             out Exception? e
-        ) {
+        )
+        {
             MetadataReader reader = Reader;
 
             // Look through types declared in the manifest module.

@@ -25,7 +25,8 @@ namespace System.Diagnostics.Tracing
             TraceLoggingMetadataCollector collector,
             string? name,
             EventFieldFormat format
-        ) {
+        )
+        {
             collector.BeginBufferedArray();
             this.elementInfo.WriteMetadata(collector, name, format);
             collector.EndBufferedArray();

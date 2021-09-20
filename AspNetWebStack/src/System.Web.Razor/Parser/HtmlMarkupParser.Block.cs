@@ -85,7 +85,8 @@ namespace System.Web.Razor.Parser
                 CurrentSymbol.Type == HtmlSymbolType.Text
                 && CurrentSymbol.Content.Length > 0
                 && CurrentSymbol.Content[0] == ':'
-            ) {
+            )
+            {
                 // Split the token
                 Tuple<HtmlSymbol, HtmlSymbol> split = Language.SplitSymbol(
                     CurrentSymbol,
@@ -164,7 +165,8 @@ namespace System.Web.Razor.Parser
         private bool AfterTagStart(
             SourceLocation tagStart,
             Stack<Tuple<HtmlSymbol, SourceLocation>> tags
-        ) {
+        )
+        {
             if (!EndOfFile)
             {
                 switch (CurrentSymbol.Type)
@@ -234,7 +236,8 @@ namespace System.Web.Razor.Parser
             if (
                 CurrentSymbol.Type == HtmlSymbolType.Text
                 && String.Equals(CurrentSymbol.Content, "cdata", StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 if (AcceptAndMoveNext())
                 {
                     if (CurrentSymbol.Type == HtmlSymbolType.LeftBracket)
@@ -279,7 +282,8 @@ namespace System.Web.Razor.Parser
                         StringComparison.OrdinalIgnoreCase
                     )
                     && matched
-                ) {
+                )
+                {
                     Output(SpanKind.Markup);
                     return EndTextTag(solidus);
                 }
@@ -422,7 +426,8 @@ namespace System.Web.Razor.Parser
         private void AttributePrefix(
             IEnumerable<HtmlSymbol> whitespace,
             IEnumerable<HtmlSymbol> nameSymbols
-        ) {
+        )
+        {
             // First, determine if this is a 'data-' attribute (since those can't use conditional attributes)
             LocationTagged<string> name = nameSymbols.GetContent(Span.Start);
             bool attributeCanBeConditional = !name.Value.StartsWith(
@@ -524,7 +529,8 @@ namespace System.Web.Razor.Parser
                 && CurrentSymbol.Content.Length > 0
                 && CurrentSymbol.Content[0] == '~'
                 && NextIs(HtmlSymbolType.Solidus)
-            ) {
+            )
+            {
                 // Virtual Path value
                 SourceLocation valueStart = CurrentLocation;
                 VirtualPath();
@@ -669,7 +675,8 @@ namespace System.Web.Razor.Parser
                     SyntaxConstants.TextTagName,
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 Output(SpanKind.Markup);
                 Span.CodeGenerator = SpanCodeGenerator.Null;
 
@@ -720,7 +727,8 @@ namespace System.Web.Razor.Parser
         private bool RestOfTag(
             Tuple<HtmlSymbol, SourceLocation> tag,
             Stack<Tuple<HtmlSymbol, SourceLocation>> tags
-        ) {
+        )
+        {
             TagContent();
 
             // We are now at a possible end of the tag
@@ -780,7 +788,8 @@ namespace System.Web.Razor.Parser
                                     tagName,
                                     StringComparison.OrdinalIgnoreCase
                                 )
-                            ) {
+                            )
+                            {
                                 // Accept up to here
                                 Accept(ws);
                                 Accept(openAngle);
@@ -832,7 +841,8 @@ namespace System.Web.Razor.Parser
                             "script",
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         // </script!
                         SkipToAndParseCode(HtmlSymbolType.CloseAngle);
                         if (!Optional(HtmlSymbolType.CloseAngle))
@@ -868,7 +878,8 @@ namespace System.Web.Razor.Parser
             Stack<Tuple<HtmlSymbol, SourceLocation>> tags,
             string tagName,
             SourceLocation tagStart
-        ) {
+        )
+        {
             Tuple<HtmlSymbol, SourceLocation> currentTag = null;
             while (tags.Count > 0)
             {
@@ -879,7 +890,8 @@ namespace System.Web.Razor.Parser
                         currentTag.Item1.Content,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     // Matched the tag
                     return true;
                 }

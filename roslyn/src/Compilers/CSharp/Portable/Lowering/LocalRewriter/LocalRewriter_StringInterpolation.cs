@@ -57,7 +57,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         || fillin.Value.Type?.SpecialType != SpecialType.System_String
                         || fillin.Alignment != null
                         || fillin.Format != null
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }
@@ -70,7 +71,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundInterpolatedString node,
             out BoundExpression format,
             out ArrayBuilder<BoundExpression> expressions
-        ) {
+        )
+        {
             _factory.Syntax = node.Syntax;
             int n = node.Parts.Length - 1;
             var formatString = PooledStringBuilder.GetInstance();

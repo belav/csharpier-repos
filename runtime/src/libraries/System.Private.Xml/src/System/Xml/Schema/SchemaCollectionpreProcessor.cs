@@ -68,7 +68,8 @@ namespace System.Xml.Schema
             string? targetNamespace,
             bool loadExternals,
             XmlSchemaCollection? xsc
-        ) {
+        )
+        {
             _schema = schema;
             _xmlns = NameTable.Add("xmlns");
 
@@ -164,7 +165,8 @@ namespace System.Xml.Schema
                     if (
                         include is XmlSchemaImport
                         && ((XmlSchemaImport)include).Namespace == XmlReservedNs.NsXml
-                    ) {
+                    )
+                    {
                         _buildinIncluded = true;
                     }
                     else
@@ -192,7 +194,8 @@ namespace System.Xml.Schema
                         if (
                             include.Schema.BaseUri != null
                             && _schemaLocations![include.Schema.BaseUri] == null
-                        ) {
+                        )
+                        {
                             _schemaLocations.Add(include.Schema.BaseUri, include.Schema.BaseUri);
                         }
                         //To avoid re-including components that were already included through a different path
@@ -234,7 +237,8 @@ namespace System.Xml.Schema
                 if (
                     include is XmlSchemaImport
                     && ((XmlSchemaImport)include).Namespace == XmlReservedNs.NsXml
-                ) {
+                )
+                {
                     if (!_buildinIncluded)
                     {
                         _buildinIncluded = true;
@@ -401,7 +405,8 @@ namespace System.Xml.Schema
                         schema.TargetNamespace == null
                         && targetNamespace != null
                         && targetNamespace.Length == 0
-                    ) { // no namespace schema
+                    )
+                    { // no namespace schema
                         targetNamespace = null;
                     }
                     if (targetNamespace != schema.TargetNamespace)
@@ -462,7 +467,8 @@ namespace System.Xml.Schema
                 else if (
                     (include is XmlSchemaRedefine || include is XmlSchemaInclude)
                     && include.Schema == null
-                ) {
+                )
+                {
                     SendValidationEvent(SR.Sch_MissRequiredAttribute, "schemaLocation", include);
                 }
                 if (include.Schema != null)
@@ -476,7 +482,8 @@ namespace System.Xml.Schema
                         if (
                             ((XmlSchemaImport)include).Namespace == null
                             && schema.TargetNamespace == null
-                        ) {
+                        )
+                        {
                             SendValidationEvent(SR.Sch_ImportTargetNamespaceNull, include);
                         }
                         else if (((XmlSchemaImport)include).Namespace == schema.TargetNamespace)
@@ -609,7 +616,8 @@ namespace System.Xml.Schema
 
                     foreach (
                         XmlSchemaAttributeGroup? attributeGroup in includedSchema.AttributeGroups.Values
-                    ) {
+                    )
+                    {
                         AddToTable(
                             schema.AttributeGroups,
                             attributeGroup!.QualifiedName,
@@ -1024,7 +1032,8 @@ namespace System.Xml.Schema
                     || attribute.Form != XmlSchemaForm.None /*||
                     attribute.DefaultValue != null ||
                     attribute.FixedValue != null*/
-                ) {
+                )
+                {
                     SendValidationEvent(SR.Sch_InvalidAttributeRef, attribute);
                 }
                 attribute.SetQualifiedName(attribute.RefName);
@@ -1051,7 +1060,8 @@ namespace System.Xml.Schema
                 attribute.DefaultValue != null
                 && attribute.Use != XmlSchemaUse.Optional
                 && attribute.Use != XmlSchemaUse.None
-            ) {
+            )
+            {
                 SendValidationEvent(SR.Sch_OptionalDefaultAttribute, attribute);
             }
             if (attribute.Name == _xmlns)
@@ -1193,7 +1203,8 @@ namespace System.Xml.Schema
                     || element.Form != XmlSchemaForm.None
                     || element.FixedValue != null
                     || element.HasNillableAttribute
-                ) {
+                )
+                {
                     SendValidationEvent(SR.Sch_InvalidElementRef, element);
                 }
                 if (element.DefaultValue != null && element.FixedValue != null)
@@ -1924,7 +1935,8 @@ namespace System.Xml.Schema
             XmlSchemaObjectCollection attributes,
             XmlSchemaAnyAttribute? anyAttribute,
             XmlSchemaObject parent
-        ) {
+        )
+        {
             for (int i = 0; i < attributes.Count; ++i)
             {
                 SetParent(attributes[i], parent);
@@ -2020,7 +2032,8 @@ namespace System.Xml.Schema
             XmlSchemaObject xso,
             string attributeName,
             XmlQualifiedName value
-        ) {
+        )
+        {
             try
             {
                 value.Verify();

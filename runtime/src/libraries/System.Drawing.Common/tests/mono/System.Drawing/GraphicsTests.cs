@@ -1098,7 +1098,8 @@ namespace MonoTests.System.Drawing
             float yy,
             float x0,
             float y0
-        ) {
+        )
+        {
             float[] elements = m.Elements;
             AssertEquals(message + ".Matrix.xx", xx, elements[0], 2);
             AssertEquals(message + ".Matrix.yx", yx, elements[1], 2);

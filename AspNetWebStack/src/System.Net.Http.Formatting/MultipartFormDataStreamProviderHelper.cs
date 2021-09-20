@@ -52,7 +52,8 @@ namespace System.Net.Http
             Collection<HttpContent> contents,
             NameValueCollection formData,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Find instances of HttpContent for which we created a memory stream and read them asynchronously
             // to get the string content and then add that as form data
             foreach (HttpContent content in contents)

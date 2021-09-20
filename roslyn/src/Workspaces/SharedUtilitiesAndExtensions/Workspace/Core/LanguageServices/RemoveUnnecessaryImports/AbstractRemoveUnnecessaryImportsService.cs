@@ -52,7 +52,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
                 && syntaxFacts.IsEndOfLineTrivia(trimmedLeadingTrivia[^3])
                 && syntaxFacts.IsEndOfLineTrivia(trimmedLeadingTrivia[^2])
                 && syntaxFacts.IsEndOfLineTrivia(trimmedLeadingTrivia[^1])
-            ) {
+            )
+            {
                 trimmedLeadingTrivia.RemoveAt(trimmedLeadingTrivia.Count - 1);
             }
 
@@ -63,7 +64,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
             Document document,
             Func<SyntaxNode, bool> predicate,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var model = await document.GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);

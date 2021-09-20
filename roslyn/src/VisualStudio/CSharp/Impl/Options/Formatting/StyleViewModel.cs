@@ -2685,7 +2685,8 @@ class C2
         private void AddExpressionBodyOptions(
             OptionStore optionStore,
             string expressionPreferencesGroupTitle
-        ) {
+        )
+        {
             var expressionBodyPreferences = new List<CodeStylePreference>
             {
                 new CodeStylePreference(CSharpVSResources.Never, isChecked: false),
@@ -2848,7 +2849,8 @@ class C2
         private void AddUnusedValueOptions(
             OptionStore optionStore,
             string expressionPreferencesGroupTitle
-        ) {
+        )
+        {
             var unusedValuePreferences = new List<CodeStylePreference>
             {
                 new CodeStylePreference(CSharpVSResources.Unused_local, isChecked: false),
@@ -2899,7 +2901,8 @@ class C2
         private void AddParameterOptions(
             OptionStore optionStore,
             string parameterPreferencesGroupTitle
-        ) {
+        )
+        {
             var examples = new[]
             {
                 s_avoidUnusedParametersNonPublicMethods,

@@ -175,7 +175,8 @@ namespace System.Linq.Expressions.Compiler
                 !node.Method.IsStatic
                 && node.Object!.Type.IsArray
                 && node.Method == TypeUtils.GetArrayGetMethod(node.Object.Type)
-            ) {
+            )
+            {
                 MethodInfo mi = TypeUtils.GetArrayAddressMethod(node.Object.Type);
 
                 EmitMethodCall(node.Object, mi, node);

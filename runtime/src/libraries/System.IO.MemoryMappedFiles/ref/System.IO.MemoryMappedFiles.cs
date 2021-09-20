@@ -45,7 +45,8 @@ namespace System.IO.MemoryMappedFiles
             System.IO.MemoryMappedFiles.MemoryMappedFileAccess access,
             System.IO.HandleInheritability inheritability,
             bool leaveOpen
-        ) {
+        )
+        {
             throw null;
         }
         public static System.IO.MemoryMappedFiles.MemoryMappedFile CreateFromFile(string path)
@@ -55,14 +56,16 @@ namespace System.IO.MemoryMappedFiles
         public static System.IO.MemoryMappedFiles.MemoryMappedFile CreateFromFile(
             string path,
             System.IO.FileMode mode
-        ) {
+        )
+        {
             throw null;
         }
         public static System.IO.MemoryMappedFiles.MemoryMappedFile CreateFromFile(
             string path,
             System.IO.FileMode mode,
             string? mapName
-        ) {
+        )
+        {
             throw null;
         }
         public static System.IO.MemoryMappedFiles.MemoryMappedFile CreateFromFile(
@@ -70,7 +73,8 @@ namespace System.IO.MemoryMappedFiles
             System.IO.FileMode mode,
             string? mapName,
             long capacity
-        ) {
+        )
+        {
             throw null;
         }
         public static System.IO.MemoryMappedFiles.MemoryMappedFile CreateFromFile(
@@ -79,20 +83,23 @@ namespace System.IO.MemoryMappedFiles
             string? mapName,
             long capacity,
             System.IO.MemoryMappedFiles.MemoryMappedFileAccess access
-        ) {
+        )
+        {
             throw null;
         }
         public static System.IO.MemoryMappedFiles.MemoryMappedFile CreateNew(
             string? mapName,
             long capacity
-        ) {
+        )
+        {
             throw null;
         }
         public static System.IO.MemoryMappedFiles.MemoryMappedFile CreateNew(
             string? mapName,
             long capacity,
             System.IO.MemoryMappedFiles.MemoryMappedFileAccess access
-        ) {
+        )
+        {
             throw null;
         }
         public static System.IO.MemoryMappedFiles.MemoryMappedFile CreateNew(
@@ -101,14 +108,16 @@ namespace System.IO.MemoryMappedFiles
             System.IO.MemoryMappedFiles.MemoryMappedFileAccess access,
             System.IO.MemoryMappedFiles.MemoryMappedFileOptions options,
             System.IO.HandleInheritability inheritability
-        ) {
+        )
+        {
             throw null;
         }
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public static System.IO.MemoryMappedFiles.MemoryMappedFile CreateOrOpen(
             string mapName,
             long capacity
-        ) {
+        )
+        {
             throw null;
         }
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
@@ -116,7 +125,8 @@ namespace System.IO.MemoryMappedFiles
             string mapName,
             long capacity,
             System.IO.MemoryMappedFiles.MemoryMappedFileAccess access
-        ) {
+        )
+        {
             throw null;
         }
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
@@ -126,7 +136,8 @@ namespace System.IO.MemoryMappedFiles
             System.IO.MemoryMappedFiles.MemoryMappedFileAccess access,
             System.IO.MemoryMappedFiles.MemoryMappedFileOptions options,
             System.IO.HandleInheritability inheritability
-        ) {
+        )
+        {
             throw null;
         }
         public System.IO.MemoryMappedFiles.MemoryMappedViewAccessor CreateViewAccessor()
@@ -136,14 +147,16 @@ namespace System.IO.MemoryMappedFiles
         public System.IO.MemoryMappedFiles.MemoryMappedViewAccessor CreateViewAccessor(
             long offset,
             long size
-        ) {
+        )
+        {
             throw null;
         }
         public System.IO.MemoryMappedFiles.MemoryMappedViewAccessor CreateViewAccessor(
             long offset,
             long size,
             System.IO.MemoryMappedFiles.MemoryMappedFileAccess access
-        ) {
+        )
+        {
             throw null;
         }
         public System.IO.MemoryMappedFiles.MemoryMappedViewStream CreateViewStream()
@@ -153,14 +166,16 @@ namespace System.IO.MemoryMappedFiles
         public System.IO.MemoryMappedFiles.MemoryMappedViewStream CreateViewStream(
             long offset,
             long size
-        ) {
+        )
+        {
             throw null;
         }
         public System.IO.MemoryMappedFiles.MemoryMappedViewStream CreateViewStream(
             long offset,
             long size,
             System.IO.MemoryMappedFiles.MemoryMappedFileAccess access
-        ) {
+        )
+        {
             throw null;
         }
         public void Dispose() { }
@@ -174,7 +189,8 @@ namespace System.IO.MemoryMappedFiles
         public static System.IO.MemoryMappedFiles.MemoryMappedFile OpenExisting(
             string mapName,
             System.IO.MemoryMappedFiles.MemoryMappedFileRights desiredAccessRights
-        ) {
+        )
+        {
             throw null;
         }
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
@@ -182,7 +198,8 @@ namespace System.IO.MemoryMappedFiles
             string mapName,
             System.IO.MemoryMappedFiles.MemoryMappedFileRights desiredAccessRights,
             System.IO.HandleInheritability inheritability
-        ) {
+        )
+        {
             throw null;
         }
     }

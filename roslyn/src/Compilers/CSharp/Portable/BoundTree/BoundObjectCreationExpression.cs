@@ -22,22 +22,23 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundObjectInitializerExpressionBase? initializerExpressionOpt,
             TypeSymbol type,
             bool hasErrors = false
-        ) : this(
-            syntax,
-            constructor,
-            ImmutableArray<MethodSymbol>.Empty,
-            arguments,
-            argumentNamesOpt,
-            argumentRefKindsOpt,
-            expanded,
-            argsToParamsOpt,
-            defaultArguments,
-            constantValueOpt,
-            initializerExpressionOpt,
-            wasTargetTyped: false,
-            type,
-            hasErrors
-        ) { }
+        )
+            : this(
+                syntax,
+                constructor,
+                ImmutableArray<MethodSymbol>.Empty,
+                arguments,
+                argumentNamesOpt,
+                argumentRefKindsOpt,
+                expanded,
+                argsToParamsOpt,
+                defaultArguments,
+                constantValueOpt,
+                initializerExpressionOpt,
+                wasTargetTyped: false,
+                type,
+                hasErrors
+            ) { }
 
         public BoundObjectCreationExpression Update(
             MethodSymbol constructor,
@@ -50,7 +51,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ConstantValue? constantValueOpt,
             BoundObjectInitializerExpressionBase? initializerExpressionOpt,
             TypeSymbol type
-        ) {
+        )
+        {
             return this.Update(
                 constructor,
                 ImmutableArray<MethodSymbol>.Empty,
@@ -79,7 +81,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ConstantValue? constantValueOpt,
             BoundObjectInitializerExpressionBase? initializerExpressionOpt,
             TypeSymbol type
-        ) {
+        )
+        {
             return this.Update(
                 constructor,
                 constructorsGroup,

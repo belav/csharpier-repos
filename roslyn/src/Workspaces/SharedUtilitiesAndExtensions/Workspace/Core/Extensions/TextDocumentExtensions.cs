@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static TextDocument WithAdditionalDocumentText(
             this TextDocument textDocument,
             SourceText text
-        ) {
+        )
+        {
             Contract.ThrowIfFalse(textDocument is AdditionalDocument);
             return textDocument.Project.Solution.WithAdditionalDocumentText(
                     textDocument.Id,
@@ -52,7 +53,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static TextDocument WithAnalyzerConfigDocumentText(
             this TextDocument textDocument,
             SourceText text
-        ) {
+        )
+        {
             Contract.ThrowIfFalse(textDocument is AnalyzerConfigDocument);
             return textDocument.Project.Solution.WithAnalyzerConfigDocumentText(
                     textDocument.Id,

@@ -71,7 +71,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             SymbolGroup group,
             ISymbol definition,
             ReferenceLocation location
-        ) {
+        )
+        {
             lock (_gate)
             {
                 _symbolToLocations[definition].Add(location);

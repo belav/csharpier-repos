@@ -34,7 +34,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         private static string GetStackForAggregateException(
             Exception exception,
             AggregateException aggregate
-        ) {
+        )
+        {
             var text = GetStackForException(exception, includeMessageOnly: true);
             for (var i = 0; i < aggregate.InnerExceptions.Count; i++)
             {
@@ -166,7 +167,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         private static void FormatGenericArguments(
             StringBuilder stringBuilder,
             Type[] genericTypeArguments
-        ) {
+        )
+        {
             if (genericTypeArguments.Length <= 0)
             {
                 return;

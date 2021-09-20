@@ -15,7 +15,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 return new TestStruct { InnerValue = reader.GetInt32() };
             }
 
@@ -23,7 +24,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 TestStruct value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 writer.WriteNumberValue(value.InnerValue);
             }
         }
@@ -34,7 +36,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 throw new NotSupportedException();
             }
 
@@ -42,7 +45,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 TestStruct value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 throw new NotSupportedException();
             }
         }
@@ -160,7 +164,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 if (reader.TokenType == JsonTokenType.Null)
                 {
                     // Use literal value to differ from the default converter's behavior.
@@ -175,7 +180,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 int? value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 if (value == null)
                 {
                     // Use literal value to differ from the default converter's behavior.
@@ -236,7 +242,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 if (reader.TokenType == JsonTokenType.Null)
                 {
                     Debug.Assert(false);
@@ -256,7 +263,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 PocoSingleInt value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 if (value == null)
                 {
                     Debug.Assert(false);
@@ -476,7 +484,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 if (reader.TokenType != JsonTokenType.StartObject)
                 {
                     throw new JsonException();
@@ -487,7 +496,8 @@ namespace System.Text.Json.Serialization.Tests
                 if (
                     reader.TokenType != JsonTokenType.PropertyName
                     || reader.GetString() != "InnerValue"
-                ) {
+                )
+                {
                     throw new JsonException();
                 }
 
@@ -509,7 +519,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 TestStructWithConverter value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 writer.WriteStartObject();
                 writer.WriteNumber("InnerValue", value.InnerValue + 5);
                 writer.WriteEndObject();
@@ -579,7 +590,8 @@ namespace System.Text.Json.Serialization.Tests
             public override JsonConverter CreateConverter(
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 Debug.Assert(CanConvert(typeToConvert));
 
                 Type[] genericArgs = typeToConvert.GetGenericArguments();
@@ -609,7 +621,8 @@ namespace System.Text.Json.Serialization.Tests
                     ref Utf8JsonReader reader,
                     Type typeToConvert,
                     JsonSerializerOptions options
-                ) {
+                )
+                {
                     Debug.Assert(reader.TokenType == JsonTokenType.StartObject);
 
                     reader.Read();
@@ -654,7 +667,8 @@ namespace System.Text.Json.Serialization.Tests
                     Utf8JsonWriter writer,
                     (TItem1, TItem2) value,
                     JsonSerializerOptions options
-                ) {
+                )
+                {
                     writer.WriteStartObject();
 
                     writer.WritePropertyName("Item1");

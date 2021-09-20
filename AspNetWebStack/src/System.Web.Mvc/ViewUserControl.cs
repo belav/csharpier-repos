@@ -182,7 +182,8 @@ namespace System.Web.Mvc
         {
             using (
                 ViewUserControlContainerPage containerPage = new ViewUserControlContainerPage(this)
-            ) {
+            )
+            {
                 RenderViewAndRestoreContentType(containerPage, viewContext);
             }
         }
@@ -190,7 +191,8 @@ namespace System.Web.Mvc
         internal static void RenderViewAndRestoreContentType(
             ViewPage containerPage,
             ViewContext viewContext
-        ) {
+        )
+        {
             // We need to restore the Content-Type since Page.SetIntrinsics() will reset it. It's not possible
             // to work around the call to SetIntrinsics() since the control's render method requires the
             // containing page's Response property to be non-null, and SetIntrinsics() is the only way to set

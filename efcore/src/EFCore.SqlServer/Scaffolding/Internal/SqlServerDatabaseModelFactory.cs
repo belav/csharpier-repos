@@ -86,7 +86,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Scaffolding.Internal
         /// </summary>
         public SqlServerDatabaseModelFactory(
             IDiagnosticsLogger<DbLoggerCategory.Scaffolding> logger
-        ) {
+        )
+        {
             Check.NotNull(logger, nameof(logger));
 
             _logger = logger;
@@ -101,7 +102,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Scaffolding.Internal
         public override DatabaseModel Create(
             string connectionString,
             DatabaseModelFactoryOptions options
-        ) {
+        )
+        {
             Check.NotEmpty(connectionString, nameof(connectionString));
             Check.NotNull(options, nameof(options));
 
@@ -118,7 +120,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Scaffolding.Internal
         public override DatabaseModel Create(
             DbConnection connection,
             DatabaseModelFactoryOptions options
-        ) {
+        )
+        {
             Check.NotNull(connection, nameof(connection));
             Check.NotNull(options, nameof(options));
 
@@ -161,7 +164,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Scaffolding.Internal
                         databaseModel.Sequences.Select(s => s.Schema)
                             .Concat(databaseModel.Tables.Select(t => t.Schema))
                     )
-                ) {
+                )
+                {
                     _logger.MissingSchemaWarning(schema);
                 }
 
@@ -174,7 +178,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Scaffolding.Internal
                                 !string.IsNullOrEmpty(parsedSchema) && t.Schema == parsedSchema
                                 || t.Name == parsedTableName
                         )
-                    ) {
+                    )
+                    {
                         _logger.MissingTableWarning(table);
                     }
                 }
@@ -367,7 +372,8 @@ WHERE name = '{connection.Database}';";
 
         private IReadOnlyDictionary<string, (string, string)> GetTypeAliases(
             DbConnection connection
-        ) {
+        )
+        {
             using var command = connection.CreateCommand();
             var typeAliasMap = new Dictionary<string, (string, string)>(
                 StringComparer.OrdinalIgnoreCase
@@ -413,7 +419,8 @@ WHERE [t].[is_user_defined] = 1 OR [t].[system_type_id] <> [t].[user_type_id]";
             DatabaseModel databaseModel,
             Func<string, string>? schemaFilter,
             IReadOnlyDictionary<string, (string storeType, string)> typeAliases
-        ) {
+        )
+        {
             using var command = connection.CreateCommand();
             command.CommandText =
                 @"
@@ -522,7 +529,8 @@ WHERE " + schemaFilter("OBJECT_SCHEMA_NAME([s].[object_id])");
             DatabaseModel databaseModel,
             Func<string, string, string>? tableFilter,
             IReadOnlyDictionary<string, (string, string)> typeAliases
-        ) {
+        )
+        {
             using var command = connection.CreateCommand();
             var tables = new List<DatabaseTable>();
 
@@ -678,7 +686,8 @@ WHERE "
             string viewFilter,
             IReadOnlyDictionary<string, (string storeType, string typeName)> typeAliases,
             string? databaseCollation
-        ) {
+        )
+        {
             using var command = connection.CreateCommand();
             var commandText =
                 @"
@@ -796,7 +805,8 @@ ORDER BY [table_schema], [table_name], [c].[column_id]";
                             $"[{dataTypeSchemaName}].[{dataTypeName}]",
                             out var value
                         )
-                    ) {
+                    )
+                    {
                         storeType = value.storeType;
                         systemTypeName = value.typeName;
                     }
@@ -848,7 +858,8 @@ ORDER BY [table_schema], [table_name], [c].[column_id]";
             string dataTypeName,
             bool nullable,
             string? defaultValue
-        ) {
+        )
+        {
             if (defaultValue == null || defaultValue == "(NULL)")
             {
                 return null;
@@ -873,7 +884,8 @@ ORDER BY [table_schema], [table_name], [c].[column_id]";
                     || dataTypeName == "smallint"
                     || dataTypeName == "smallmoney"
                     || dataTypeName == "tinyint"
-                ) {
+                )
+                {
                     return null;
                 }
             }
@@ -886,7 +898,8 @@ ORDER BY [table_schema], [table_name], [c].[column_id]";
                     || dataTypeName == "numeric"
                     || dataTypeName == "real"
                     || dataTypeName == "smallmoney"
-                ) {
+                )
+                {
                     return null;
                 }
             }
@@ -909,7 +922,8 @@ ORDER BY [table_schema], [table_name], [c].[column_id]";
                     defaultValue == "('00000000-0000-0000-0000-000000000000')"
                     && dataTypeName == "uniqueidentifier"
                 )
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -921,7 +935,8 @@ ORDER BY [table_schema], [table_name], [c].[column_id]";
             int maxLength,
             int precision,
             int scale
-        ) {
+        )
+        {
             if (dataTypeName == "timestamp")
             {
                 return "rowversion";
@@ -959,7 +974,8 @@ ORDER BY [table_schema], [table_name], [c].[column_id]";
             DbConnection connection,
             IReadOnlyList<DatabaseTable> tables,
             string tableFilter
-        ) {
+        )
+        {
             using var command = connection.CreateCommand();
             var commandText =
                 @"
@@ -1200,7 +1216,8 @@ ORDER BY [table_schema], [table_name], [index_name], [ic].[key_ordinal]";
             DbConnection connection,
             IReadOnlyList<DatabaseTable> tables,
             string tableFilter
-        ) {
+        )
+        {
             using var command = connection.CreateCommand();
             command.CommandText =
                 @"

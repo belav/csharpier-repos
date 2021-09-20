@@ -235,7 +235,8 @@ namespace Tests.Integration
             private ComposablePartDefinition CreateWrapped(
                 ComposablePartDefinition partDefinition,
                 Type type
-            ) {
+            )
+            {
                 IEnumerable<ExportDefinition> exports = partDefinition.ExportDefinitions.Select(
                         e => this.CreateWrapped(e, type)
                     )

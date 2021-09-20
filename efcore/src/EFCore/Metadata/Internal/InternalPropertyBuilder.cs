@@ -44,11 +44,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual InternalPropertyBuilder? IsRequired(
             bool? required,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             if (
                 configurationSource != ConfigurationSource.Explicit
                 && !CanSetIsRequired(required, configurationSource)
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -61,7 +63,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                         if (
                             configurationSource == ConfigurationSource.Explicit
                             && key.GetConfigurationSource() == ConfigurationSource.Explicit
-                        ) {
+                        )
+                        {
                             throw new InvalidOperationException(
                                 CoreStrings.KeyPropertyCannotBeNullable(
                                     Metadata.Name,
@@ -117,7 +120,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual InternalPropertyBuilder? ValueGenerated(
             ValueGenerated? valueGenerated,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             if (CanSetValueGenerated(valueGenerated, configurationSource))
             {
                 Metadata.SetValueGenerated(valueGenerated, configurationSource);
@@ -150,7 +154,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual InternalPropertyBuilder? IsConcurrencyToken(
             bool? concurrencyToken,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             if (CanSetIsConcurrencyToken(concurrencyToken, configurationSource))
             {
                 Metadata.SetIsConcurrencyToken(concurrencyToken, configurationSource);
@@ -219,7 +224,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual InternalPropertyBuilder? HasMaxLength(
             int? maxLength,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             if (CanSetMaxLength(maxLength, configurationSource))
             {
                 Metadata.SetMaxLength(maxLength, configurationSource);
@@ -252,7 +258,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual InternalPropertyBuilder? HasPrecision(
             int? precision,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             if (CanSetPrecision(precision, configurationSource))
             {
                 Metadata.SetPrecision(precision, configurationSource);
@@ -285,7 +292,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual InternalPropertyBuilder? HasScale(
             int? scale,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             if (CanSetScale(scale, configurationSource))
             {
                 Metadata.SetScale(scale, configurationSource);
@@ -315,7 +323,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual InternalPropertyBuilder? IsUnicode(
             bool? unicode,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             if (CanSetIsUnicode(unicode, configurationSource))
             {
                 Metadata.SetIsUnicode(unicode, configurationSource);
@@ -348,7 +357,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual InternalPropertyBuilder? BeforeSave(
             PropertySaveBehavior? behavior,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             if (CanSetBeforeSave(behavior, configurationSource))
             {
                 Metadata.SetBeforeSaveBehavior(behavior, configurationSource);
@@ -381,7 +391,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual InternalPropertyBuilder? AfterSave(
             PropertySaveBehavior? behavior,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             if (CanSetAfterSave(behavior, configurationSource))
             {
                 Metadata.SetAfterSaveBehavior(behavior, configurationSource);
@@ -417,7 +428,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual InternalPropertyBuilder? HasValueGenerator(
             Type? valueGeneratorType,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             if (valueGeneratorType == null)
             {
                 return HasValueGenerator(
@@ -466,7 +478,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual InternalPropertyBuilder? HasValueGenerator(
             Func<IProperty, IEntityType, ValueGenerator>? factory,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             if (CanSetValueGenerator(factory, configurationSource))
             {
                 Metadata.SetValueGeneratorFactory(factory, configurationSource);
@@ -499,7 +512,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual InternalPropertyBuilder? HasConversion(
             ValueConverter? converter,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             if (CanSetConversion(converter, configurationSource))
             {
                 Metadata.SetValueConverter(converter, configurationSource);
@@ -536,7 +550,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual InternalPropertyBuilder? HasConversion(
             Type? providerClrType,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             if (CanSetConversion(providerClrType, configurationSource))
             {
                 Metadata.SetProviderClrType(providerClrType, configurationSource);
@@ -569,7 +584,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual InternalPropertyBuilder? HasTypeMapping(
             CoreTypeMapping? typeMapping,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             if (CanSetTypeMapping(typeMapping, configurationSource))
             {
                 Metadata.SetTypeMapping(typeMapping, configurationSource);
@@ -602,7 +618,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual InternalPropertyBuilder? HasValueComparer(
             ValueComparer? comparer,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             if (CanSetValueComparer(comparer, configurationSource))
             {
                 Metadata.SetValueComparer(comparer, configurationSource);
@@ -622,7 +639,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual bool CanSetValueComparer(
             ValueComparer? comparer,
             ConfigurationSource? configurationSource
-        ) {
+        )
+        {
             if (configurationSource.Overrides(Metadata.GetValueComparerConfigurationSource()))
             {
                 var errorString = Metadata.CheckValueComparer(comparer);
@@ -687,7 +705,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                             == newProperty.GetIdentifyingMemberInfo()?.Name
                     )
                 )
-            ) {
+            )
+            {
                 newPropertyBuilder = newProperty.Builder;
                 newProperty.UpdateConfigurationSource(configurationSource);
                 if (typeConfigurationSource.HasValue)
@@ -797,7 +816,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     Metadata.FieldInfo,
                     oldFieldInfoConfigurationSource
                 )
-            ) {
+            )
+            {
                 newPropertyBuilder.HasField(
                     Metadata.FieldInfo,
                     oldFieldInfoConfigurationSource.Value

@@ -118,7 +118,8 @@ namespace JIT.HardwareIntrinsics.General
             UInt16 result,
             UInt16[] values,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             if (result != values[0])
             {
                 TestLibrary.TestFramework.LogInformation(

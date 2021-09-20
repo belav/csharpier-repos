@@ -33,7 +33,8 @@ namespace System.IO.Pipes.Tests
                 AnonymousPipeServerStream dummyserver = new AnonymousPipeServerStream(
                     PipeDirection.Out
                 )
-            ) {
+            )
+            {
                 Assert.Throws<NotSupportedException>(
                     () =>
                         new AnonymousPipeServerStream(
@@ -48,7 +49,8 @@ namespace System.IO.Pipes.Tests
                 AnonymousPipeServerStream dummyserver = new AnonymousPipeServerStream(
                     PipeDirection.In
                 )
-            ) {
+            )
+            {
                 Assert.Throws<NotSupportedException>(
                     () =>
                         new AnonymousPipeServerStream(
@@ -66,7 +68,8 @@ namespace System.IO.Pipes.Tests
         public static void ServerBadInheritabilityThrows(
             PipeDirection direction,
             HandleInheritability inheritability
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "inheritability",
                 () => new AnonymousPipeServerStream(direction, inheritability)
@@ -84,7 +87,8 @@ namespace System.IO.Pipes.Tests
         public static void InvalidBufferSize_Throws_ArgumentOutOfRangeException(
             PipeDirection direction,
             int bufferSize
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "bufferSize",
                 () =>
@@ -131,7 +135,8 @@ namespace System.IO.Pipes.Tests
                 AnonymousPipeServerStream dummyserver = new AnonymousPipeServerStream(
                     PipeDirection.Out
                 )
-            ) {
+            )
+            {
                 AssertExtensions.Throws<ArgumentNullException>(
                     "serverSafePipeHandle",
                     () =>

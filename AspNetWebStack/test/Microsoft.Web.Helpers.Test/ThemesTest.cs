@@ -497,7 +497,8 @@ namespace Microsoft.Web.Helpers.Test
         private static VirtualPathProvider GetVirtualPathProvider(
             string themeRoot,
             params Dir[] fileSystem
-        ) {
+        )
+        {
             var mockVpp = new Mock<VirtualPathProvider>();
             var dirRoot = new Mock<VirtualDirectory>(themeRoot);
 

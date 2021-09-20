@@ -23,7 +23,8 @@ namespace Internal.Cryptography.Pal.AnyOS
             out AlgorithmIdentifier contentEncryptionAlgorithm,
             out X509Certificate2Collection originatorCerts,
             out CryptographicAttributeObjectCollection unprotectedAttributes
-        ) {
+        )
+        {
             // Read using BER because the CMS specification says the encoding is BER.
             byte[] copy = CopyContent(encodedMessage);
             EnvelopedDataAsn data = EnvelopedDataAsn.Decode(copy, AsnEncodingRules.BER);
@@ -44,7 +45,8 @@ namespace Internal.Cryptography.Pal.AnyOS
             {
                 foreach (
                     CertificateChoiceAsn certChoice in data.OriginatorInfo.Value.CertificateSet
-                ) {
+                )
+                {
                     if (certChoice.Certificate != null)
                     {
                         originatorCerts.Add(

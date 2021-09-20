@@ -52,7 +52,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Action<TEntity, TCollection>? setCollectionForMaterialization,
             Func<TEntity, Action<TEntity, TCollection>, TCollection>? createAndSetCollection,
             Func<TCollection>? createCollection
-        ) {
+        )
+        {
             _propertyName = propertyName;
             _getCollection = getCollection;
             _setCollection = setCollection;
@@ -116,7 +117,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         private ICollection<TElement> GetOrCreateCollection(
             object instance,
             bool forMaterialization
-        ) {
+        )
+        {
             var collection = GetCollection(instance);
             if (collection == null)
             {

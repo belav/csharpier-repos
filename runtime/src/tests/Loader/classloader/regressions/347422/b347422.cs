@@ -31,7 +31,8 @@ public class Casting
             if (
                 e.Message.Equals(msg)
                 || e.Message.Contains("Debugging resource strings are unavailable")
-            ) {
+            )
+            {
                 Console.WriteLine("PASS");
                 return 100;
             }

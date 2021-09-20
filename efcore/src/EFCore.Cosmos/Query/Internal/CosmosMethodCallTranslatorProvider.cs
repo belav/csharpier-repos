@@ -30,7 +30,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         public CosmosMethodCallTranslatorProvider(
             ISqlExpressionFactory sqlExpressionFactory,
             IEnumerable<IMethodCallTranslatorPlugin> plugins
-        ) {
+        )
+        {
             _plugins.AddRange(plugins.SelectMany(p => p.Translators));
 
             _translators.AddRange(
@@ -60,7 +61,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             MethodInfo method,
             IReadOnlyList<SqlExpression> arguments,
             IDiagnosticsLogger<DbLoggerCategory.Query> logger
-        ) {
+        )
+        {
             Check.NotNull(model, nameof(model));
             Check.NotNull(method, nameof(method));
             Check.NotNull(arguments, nameof(arguments));

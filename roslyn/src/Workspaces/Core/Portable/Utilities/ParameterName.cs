@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.Utilities
             string nameBasedOnArgument,
             bool isFixed,
             NamingRule parameterNamingRule
-        ) {
+        )
+        {
             NameBasedOnArgument = nameBasedOnArgument;
 
             if (isFixed)

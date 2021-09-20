@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         public static bool IsTypeInferred(
             this CommonForEachStatementSyntax forEachStatement,
             SemanticModel semanticModel
-        ) {
+        )
+        {
             switch (forEachStatement.Kind())
             {
                 case SyntaxKind.ForEachStatement:

@@ -17,7 +17,8 @@ namespace System.Reflection
         }
         public static System.Reflection.Module[] GetModules(
             this System.Reflection.Assembly assembly
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -32,35 +33,41 @@ namespace System.Reflection
     {
         public static System.Reflection.MethodInfo? GetAddMethod(
             this System.Reflection.EventInfo eventInfo
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.MethodInfo? GetAddMethod(
             this System.Reflection.EventInfo eventInfo,
             bool nonPublic
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.MethodInfo? GetRaiseMethod(
             this System.Reflection.EventInfo eventInfo
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.MethodInfo? GetRaiseMethod(
             this System.Reflection.EventInfo eventInfo,
             bool nonPublic
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.MethodInfo? GetRemoveMethod(
             this System.Reflection.EventInfo eventInfo
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.MethodInfo? GetRemoveMethod(
             this System.Reflection.EventInfo eventInfo,
             bool nonPublic
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -79,7 +86,8 @@ namespace System.Reflection
     {
         public static System.Reflection.MethodInfo GetBaseDefinition(
             this System.Reflection.MethodInfo method
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -98,35 +106,41 @@ namespace System.Reflection
     {
         public static System.Reflection.MethodInfo[] GetAccessors(
             this System.Reflection.PropertyInfo property
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.MethodInfo[] GetAccessors(
             this System.Reflection.PropertyInfo property,
             bool nonPublic
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.MethodInfo? GetGetMethod(
             this System.Reflection.PropertyInfo property
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.MethodInfo? GetGetMethod(
             this System.Reflection.PropertyInfo property,
             bool nonPublic
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.MethodInfo? GetSetMethod(
             this System.Reflection.PropertyInfo property
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.MethodInfo? GetSetMethod(
             this System.Reflection.PropertyInfo property,
             bool nonPublic
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -138,7 +152,8 @@ namespace System.Reflection
             )]
                 this System.Type type,
             System.Type[] types
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.ConstructorInfo[] GetConstructors(
@@ -146,7 +161,8 @@ namespace System.Reflection
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
             )]
                 this System.Type type
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.ConstructorInfo[] GetConstructors(
@@ -156,7 +172,8 @@ namespace System.Reflection
             )]
                 this System.Type type,
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.MemberInfo[] GetDefaultMembers(
@@ -169,7 +186,8 @@ namespace System.Reflection
                     | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicProperties
             )]
                 this System.Type type
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.EventInfo? GetEvent(
@@ -178,7 +196,8 @@ namespace System.Reflection
             )]
                 this System.Type type,
             string name
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.EventInfo? GetEvent(
@@ -189,7 +208,8 @@ namespace System.Reflection
                 this System.Type type,
             string name,
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.EventInfo[] GetEvents(
@@ -197,7 +217,8 @@ namespace System.Reflection
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicEvents
             )]
                 this System.Type type
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.EventInfo[] GetEvents(
@@ -207,7 +228,8 @@ namespace System.Reflection
             )]
                 this System.Type type,
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.FieldInfo? GetField(
@@ -216,7 +238,8 @@ namespace System.Reflection
             )]
                 this System.Type type,
             string name
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.FieldInfo? GetField(
@@ -227,7 +250,8 @@ namespace System.Reflection
                 this System.Type type,
             string name,
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.FieldInfo[] GetFields(
@@ -235,7 +259,8 @@ namespace System.Reflection
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicFields
             )]
                 this System.Type type
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.FieldInfo[] GetFields(
@@ -245,7 +270,8 @@ namespace System.Reflection
             )]
                 this System.Type type,
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Type[] GetGenericArguments(this System.Type type)
@@ -267,7 +293,8 @@ namespace System.Reflection
             )]
                 this System.Type type,
             string name
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.MemberInfo[] GetMember(
@@ -277,7 +304,8 @@ namespace System.Reflection
                 this System.Type type,
             string name,
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.MemberInfo[] GetMembers(
@@ -290,7 +318,8 @@ namespace System.Reflection
                     | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicProperties
             )]
                 this System.Type type
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.MemberInfo[] GetMembers(
@@ -299,7 +328,8 @@ namespace System.Reflection
             )]
                 this System.Type type,
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.MethodInfo? GetMethod(
@@ -308,7 +338,8 @@ namespace System.Reflection
             )]
                 this System.Type type,
             string name
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.MethodInfo? GetMethod(
@@ -319,7 +350,8 @@ namespace System.Reflection
                 this System.Type type,
             string name,
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.MethodInfo? GetMethod(
@@ -329,7 +361,8 @@ namespace System.Reflection
                 this System.Type type,
             string name,
             System.Type[] types
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.MethodInfo[] GetMethods(
@@ -337,7 +370,8 @@ namespace System.Reflection
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicMethods
             )]
                 this System.Type type
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.MethodInfo[] GetMethods(
@@ -347,7 +381,8 @@ namespace System.Reflection
             )]
                 this System.Type type,
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Type? GetNestedType(
@@ -358,7 +393,8 @@ namespace System.Reflection
                 this System.Type type,
             string name,
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Type[] GetNestedTypes(
@@ -368,7 +404,8 @@ namespace System.Reflection
             )]
                 this System.Type type,
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.PropertyInfo[] GetProperties(
@@ -376,7 +413,8 @@ namespace System.Reflection
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicProperties
             )]
                 this System.Type type
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.PropertyInfo[] GetProperties(
@@ -386,7 +424,8 @@ namespace System.Reflection
             )]
                 this System.Type type,
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.PropertyInfo? GetProperty(
@@ -395,7 +434,8 @@ namespace System.Reflection
             )]
                 this System.Type type,
             string name
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.PropertyInfo? GetProperty(
@@ -406,7 +446,8 @@ namespace System.Reflection
                 this System.Type type,
             string name,
             System.Reflection.BindingFlags bindingAttr
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.PropertyInfo? GetProperty(
@@ -416,7 +457,8 @@ namespace System.Reflection
                 this System.Type type,
             string name,
             System.Type? returnType
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Reflection.PropertyInfo? GetProperty(
@@ -427,19 +469,22 @@ namespace System.Reflection
             string name,
             System.Type? returnType,
             System.Type[] types
-        ) {
+        )
+        {
             throw null;
         }
         public static bool IsAssignableFrom(
             this System.Type type,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] System.Type? c
-        ) {
+        )
+        {
             throw null;
         }
         public static bool IsInstanceOfType(
             this System.Type type,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? o
-        ) {
+        )
+        {
             throw null;
         }
     }

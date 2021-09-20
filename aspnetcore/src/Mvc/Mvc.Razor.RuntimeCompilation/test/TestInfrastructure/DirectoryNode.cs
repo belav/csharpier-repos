@@ -97,7 +97,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                         path.Length - directoryLength,
                         StringComparison.OrdinalIgnoreCase
                     ) == 0
-                ) {
+                )
+                {
                     return file.ProjectItem;
                 }
             }
@@ -121,7 +122,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             DirectoryNode directory,
             string path,
             bool createIfNotExists = false
-        ) {
+        )
+        {
             Debug.Assert(!string.IsNullOrEmpty(path));
             if (path[path.Length - 1] != '/')
             {
@@ -175,7 +177,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                         directoryPath.Length - startIndex,
                         StringComparison.OrdinalIgnoreCase
                     ) == 0
-                ) {
+                )
+                {
                     return currentDirectory;
                 }
             }

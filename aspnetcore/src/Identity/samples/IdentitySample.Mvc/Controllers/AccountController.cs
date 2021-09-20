@@ -27,7 +27,8 @@ namespace IdentitySample.Controllers
             IEmailSender emailSender,
             ISmsSender smsSender,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
@@ -170,7 +171,8 @@ namespace IdentitySample.Controllers
         public async Task<IActionResult> ExternalLoginCallback(
             string returnUrl = null,
             string remoteError = null
-        ) {
+        )
+        {
             if (remoteError != null)
             {
                 ModelState.AddModelError(
@@ -232,7 +234,8 @@ namespace IdentitySample.Controllers
         public async Task<IActionResult> ExternalLoginConfirmation(
             ExternalLoginConfirmationViewModel model,
             string returnUrl = null
-        ) {
+        )
+        {
             if (ModelState.IsValid)
             {
                 // Get the information about the user from the external login provider
@@ -477,7 +480,8 @@ namespace IdentitySample.Controllers
             string provider,
             bool rememberMe,
             string returnUrl = null
-        ) {
+        )
+        {
             // Require that the user has already logged in via username/password or external login
             var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
             if (user == null)
@@ -538,7 +542,8 @@ namespace IdentitySample.Controllers
         public async Task<IActionResult> VerifyAuthenticatorCode(
             bool rememberMe,
             string returnUrl = null
-        ) {
+        )
+        {
             // Require that the user has already logged in via username/password or external login
             var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
             if (user == null)
@@ -561,7 +566,8 @@ namespace IdentitySample.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> VerifyAuthenticatorCode(
             VerifyAuthenticatorCodeViewModel model
-        ) {
+        )
+        {
             if (!ModelState.IsValid)
             {
                 return View(model);

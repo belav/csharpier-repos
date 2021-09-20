@@ -56,7 +56,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessPropertyAdded(
             IConventionPropertyBuilder propertyBuilder,
             IConventionContext<IConventionPropertyBuilder> context
-        ) {
+        )
+        {
             DiscoverField(propertyBuilder);
         }
 
@@ -64,7 +65,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessNavigationAdded(
             IConventionNavigationBuilder navigationBuilder,
             IConventionContext<IConventionNavigationBuilder> context
-        ) {
+        )
+        {
             DiscoverField(navigationBuilder);
         }
 
@@ -72,7 +74,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessSkipNavigationAdded(
             IConventionSkipNavigationBuilder skipNavigationBuilder,
             IConventionContext<IConventionSkipNavigationBuilder> context
-        ) {
+        )
+        {
             DiscoverField(skipNavigationBuilder);
         }
 
@@ -80,7 +83,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessModelFinalizing(
             IConventionModelBuilder modelBuilder,
             IConventionContext<IConventionModelBuilder> context
-        ) {
+        )
+        {
             foreach (var entityType in modelBuilder.Metadata.GetEntityTypes())
             {
                 foreach (var property in entityType.GetDeclaredProperties())
@@ -107,7 +111,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 ConfigurationSource.Convention.Overrides(
                     conventionPropertyBaseBuilder.Metadata.GetFieldInfoConfigurationSource()
                 )
-            ) {
+            )
+            {
                 var field = GetFieldToSet(conventionPropertyBaseBuilder.Metadata);
                 if (field != null)
                 {
@@ -125,7 +130,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 )
                 || propertyBase.IsIndexerProperty()
                 || propertyBase.IsShadowProperty()
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -141,7 +147,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         propertyBase.PropertyInfo != null
                         || propertyBase.Name == fieldInfo.GetSimpleMemberName()
                     )
-                ) {
+                )
+                {
                     return fieldInfo;
                 }
 
@@ -156,7 +163,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionPropertyBase propertyBase,
             IConventionEntityType? entityType,
             Type entityClrType
-        ) {
+        )
+        {
             var propertyName = propertyBase.Name;
 
             IReadOnlyDictionary<string, FieldInfo> fields;
@@ -280,7 +288,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             FieldInfo? existingMatch,
             Type entityClrType,
             string propertyName
-        ) {
+        )
+        {
             var index = PrefixBinarySearch(array, prefix, 0, array.Length - 1);
             if (index == -1)
             {
@@ -297,7 +306,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     && currentValue.Key.EndsWith(suffix, StringComparison.Ordinal)
                     && currentValue.Key.IndexOf(middle, prefix.Length, StringComparison.Ordinal)
                         == prefix.Length
-                ) {
+                )
+                {
                     var newMatch =
                         typeInfo == null
                             ? currentValue.Value
@@ -347,7 +357,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             string prefix,
             int left,
             int right
-        ) {
+        )
+        {
             var found = -1;
             while (true)
             {

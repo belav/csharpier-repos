@@ -55,7 +55,8 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
             Document document,
             SyntaxNode node,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (Logger.LogBlock(FunctionId.Refactoring_ImplementInterface, cancellationToken))
             {
                 var model = await document.GetSemanticModelAsync(cancellationToken)
@@ -86,7 +87,8 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
             SemanticModel model,
             SyntaxNode node,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var state = State.Generate(this, document, model, node, cancellationToken);
             return GetActions(document, state).ToImmutableArray();
         }
@@ -101,7 +103,8 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
             if (
                 state.MembersWithoutExplicitOrImplicitImplementationWhichCanBeImplicitlyImplemented.Length
                 > 0
-            ) {
+            )
+            {
                 yield return ImplementInterfaceCodeAction.CreateImplementCodeAction(
                     this,
                     document,
@@ -171,7 +174,8 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
             if (
                 state.MembersWithoutExplicitOrImplicitImplementation.Length
                 != state.MembersWithoutExplicitImplementation.Length
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -241,7 +245,8 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
         protected static SyntaxTriviaList CreateCommentTrivia(
             SyntaxGenerator generator,
             params string[] comments
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<SyntaxTrivia>.GetInstance(out var trivia);
 
             foreach (var comment in comments)

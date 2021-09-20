@@ -121,7 +121,8 @@ namespace System.Web.Http.ExceptionHandling
             string name,
             bool isTopLevel,
             bool callsHandler
-        ) {
+        )
+        {
             return new ExceptionContextCatchBlock(name, isTopLevel, callsHandler);
         }
     }

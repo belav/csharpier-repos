@@ -199,7 +199,8 @@ namespace System.Diagnostics
                                                     splitVersion[1],
                                                     out currentVersion[1]
                                                 )
-                                            ) {
+                                            )
+                                            {
                                                 continue;
                                             }
 
@@ -219,7 +220,8 @@ namespace System.Diagnostics
                                                         (currentVersion[0] == largestVersion[0])
                                                         && (currentVersion[1] > largestVersion[1])
                                                     )
-                                                ) {
+                                                )
+                                                {
                                                     largestVersion = currentVersion;
                                                 }
                                             }

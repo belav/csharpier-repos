@@ -77,7 +77,8 @@ namespace Microsoft.AspNetCore.Http
         internal static RequestCookieCollection ParseInternal(
             StringValues values,
             bool enableCookieNameEncoding
-        ) {
+        )
+        {
             if (values.Count == 0)
             {
                 return Empty;
@@ -92,7 +93,8 @@ namespace Microsoft.AspNetCore.Http
                     enableCookieNameEncoding,
                     supportsMultipleValues: true
                 )
-            ) {
+            )
+            {
                 if (store.Count == 0)
                 {
                     return Empty;
@@ -202,7 +204,8 @@ namespace Microsoft.AspNetCore.Http
 
             internal Enumerator(
                 AdaptiveCapacityDictionary<string, string>.Enumerator dictionaryEnumerator
-            ) {
+            )
+            {
                 _dictionaryEnumerator = dictionaryEnumerator;
                 _notEmpty = true;
             }

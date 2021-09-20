@@ -235,7 +235,8 @@ namespace System.Diagnostics
             string SourceName,
             string EventName,
             IEnumerable<KeyValuePair<string, string?>>? Arguments
-        ) {
+        )
+        {
             WriteEvent(2, SourceName, EventName, Arguments);
         }
 #endif
@@ -265,7 +266,8 @@ namespace System.Diagnostics
             string SourceName,
             string EventName,
             IEnumerable<KeyValuePair<string, string?>> Arguments
-        ) {
+        )
+        {
             WriteEvent(4, SourceName, EventName, Arguments);
         }
 
@@ -284,7 +286,8 @@ namespace System.Diagnostics
             string SourceName,
             string EventName,
             IEnumerable<KeyValuePair<string, string?>> Arguments
-        ) {
+        )
+        {
             WriteEvent(5, SourceName, EventName, Arguments);
         }
 
@@ -303,7 +306,8 @@ namespace System.Diagnostics
             string SourceName,
             string EventName,
             IEnumerable<KeyValuePair<string, string?>> Arguments
-        ) {
+        )
+        {
             WriteEvent(6, SourceName, EventName, Arguments);
         }
 
@@ -322,7 +326,8 @@ namespace System.Diagnostics
             string SourceName,
             string EventName,
             IEnumerable<KeyValuePair<string, string?>> Arguments
-        ) {
+        )
+        {
             WriteEvent(7, SourceName, EventName, Arguments);
         }
 
@@ -341,7 +346,8 @@ namespace System.Diagnostics
             string SourceName,
             string EventName,
             IEnumerable<KeyValuePair<string, string?>> Arguments
-        ) {
+        )
+        {
             WriteEvent(8, SourceName, EventName, Arguments);
         }
 
@@ -360,7 +366,8 @@ namespace System.Diagnostics
             string SourceName,
             string EventName,
             IEnumerable<KeyValuePair<string, string?>> Arguments
-        ) {
+        )
+        {
             WriteEvent(9, SourceName, EventName, Arguments);
         }
 #endif
@@ -493,7 +500,8 @@ namespace System.Diagnostics
                         command.Command == EventCommand.Update
                         || command.Command == EventCommand.Enable
                     ) && IsEnabled(EventLevel.Informational, Keywords.Events)
-                ) {
+                )
+                {
                     string? filterAndPayloadSpecs = null;
                     command.Arguments!.TryGetValue(
                         "FilterAndPayloadSpecs",
@@ -527,7 +535,8 @@ namespace System.Diagnostics
                 else if (
                     command.Command == EventCommand.Update
                     || command.Command == EventCommand.Disable
-                ) {
+                )
+                {
                     FilterAndTransform.DestroyFilterAndTransformList(ref _specs, this);
                 }
             }
@@ -605,7 +614,8 @@ namespace System.Diagnostics
                 ref FilterAndTransform? specList,
                 string? filterAndPayloadSpecs,
                 DiagnosticSourceEventSource eventSource
-            ) {
+            )
+            {
                 DestroyFilterAndTransformList(ref specList, eventSource); // Stop anything that was on before.
                 if (filterAndPayloadSpecs == null)
                     filterAndPayloadSpecs = "";
@@ -670,7 +680,8 @@ namespace System.Diagnostics
             public static void DestroyFilterAndTransformList(
                 ref FilterAndTransform? specList,
                 DiagnosticSourceEventSource eventSource
-            ) {
+            )
+            {
 #if EVENTSOURCE_ACTIVITY_SUPPORT
                 eventSource._activityListener?.Dispose();
                 eventSource._activityListener = null;
@@ -697,7 +708,8 @@ namespace System.Diagnostics
                 int endIdx,
                 DiagnosticSourceEventSource eventSource,
                 FilterAndTransform? next
-            ) {
+            )
+            {
                 Debug.Assert(
                     filterAndPayloadSpec != null
                         && startIdx >= 0
@@ -853,7 +865,8 @@ namespace System.Diagnostics
                         string sourceName,
                         string eventName,
                         IEnumerable<KeyValuePair<string, string>> arguments
-                    ) {
+                    )
+                    {
                         _eventSource.EventJson(sourceName, eventName, ToJson(arguments));
                     };
 #endif
@@ -867,7 +880,8 @@ namespace System.Diagnostics
                         {
                             if (
                                 listenerNameFilter == null || listenerNameFilter == newListener.Name
-                            ) {
+                            )
+                            {
                                 _eventSource.NewDiagnosticListener(newListener.Name);
                                 Predicate<string>? eventNameFilterPredicate = null;
                                 if (eventNameFilter != null)
@@ -917,7 +931,8 @@ namespace System.Diagnostics
                 ActivityEvents events,
                 ActivitySamplingResult samplingResult,
                 DiagnosticSourceEventSource eventSource
-            ) {
+            )
+            {
                 _eventSource = eventSource;
 
                 Next = _eventSource._activitySourceSpecs;
@@ -935,7 +950,8 @@ namespace System.Diagnostics
                     // If the transform spec begins with a - it means you don't want implicit transforms.
                     if (
                         startTransformIdx < endIdx && filterAndPayloadSpec[startTransformIdx] == '-'
-                    ) {
+                    )
+                    {
                         _eventSource.Message("DiagnosticSource: suppressing implicit transforms.");
                         _noImplicitTransforms = true;
                         startTransformIdx++;
@@ -1002,7 +1018,8 @@ namespace System.Diagnostics
                 int startIdx,
                 int endIdx,
                 DiagnosticSourceEventSource eventSource
-            ) {
+            )
+            {
                 Debug.Assert(endIdx - startIdx >= 4);
                 Debug.Assert(IsActivitySourceEntry(filterAndPayloadSpec, startIdx, endIdx));
 
@@ -1054,7 +1071,8 @@ namespace System.Diagnostics
                                     "Propagate".AsSpan(),
                                     StringComparison.OrdinalIgnoreCase
                                 )
-                            ) {
+                            )
+                            {
                                 samplingResult = ActivitySamplingResult.PropagationData;
                             }
                             else if (
@@ -1062,7 +1080,8 @@ namespace System.Diagnostics
                                     "Record".AsSpan(),
                                     StringComparison.OrdinalIgnoreCase
                                 )
-                            ) {
+                            )
+                            {
                                 samplingResult = ActivitySamplingResult.AllData;
                             }
                             else
@@ -1086,7 +1105,8 @@ namespace System.Diagnostics
                         }
                         else if (
                             eventName.Equals("Stop".AsSpan(), StringComparison.OrdinalIgnoreCase)
-                        ) {
+                        )
+                        {
                             supportedEvent = ActivityEvents.ActivityStop;
                         }
                         else
@@ -1127,7 +1147,8 @@ namespace System.Diagnostics
                 string activitySourceName,
                 string activityName,
                 DiagnosticSourceEventSource eventSource
-            ) {
+            )
+            {
                 FilterAndTransform? list = eventSource._activitySourceSpecs;
                 ActivitySamplingResult specificResult = ActivitySamplingResult.None;
                 ActivitySamplingResult wildResult = ActivitySamplingResult.None;
@@ -1233,7 +1254,8 @@ namespace System.Diagnostics
             private static void OnActivityStarted(
                 DiagnosticSourceEventSource eventSource,
                 Activity activity
-            ) {
+            )
+            {
                 FilterAndTransform? list = eventSource._activitySourceSpecs;
                 while (list != null)
                 {
@@ -1243,7 +1265,8 @@ namespace System.Diagnostics
                         && (
                             list.ActivityName == null || list.ActivityName == activity.OperationName
                         )
-                    ) {
+                    )
+                    {
                         eventSource.ActivityStart(
                             activity.Source.Name,
                             activity.OperationName,
@@ -1264,7 +1287,8 @@ namespace System.Diagnostics
             private static void OnActivityStopped(
                 DiagnosticSourceEventSource eventSource,
                 Activity activity
-            ) {
+            )
+            {
                 FilterAndTransform? list = eventSource._activitySourceSpecs;
                 while (list != null)
                 {
@@ -1274,7 +1298,8 @@ namespace System.Diagnostics
                         && (
                             list.ActivityName == null || list.ActivityName == activity.OperationName
                         )
-                    ) {
+                    )
+                    {
                         eventSource.ActivityStop(
                             activity.Source.Name,
                             activity.OperationName,
@@ -1291,7 +1316,8 @@ namespace System.Diagnostics
             // This will give more priority to the specific nodes over the wildcards.
             internal static void NormalizeActivitySourceSpecsList(
                 DiagnosticSourceEventSource eventSource
-            ) {
+            )
+            {
                 Debug.Assert(eventSource._activityListener == null);
                 Debug.Assert(eventSource._activitySourceSpecs != null);
 
@@ -1452,7 +1478,8 @@ namespace System.Diagnostics
                             TransformSpec? explicitTransform = _explicitTransforms;
                             explicitTransform != null;
                             explicitTransform = explicitTransform.Next
-                        ) {
+                        )
+                        {
                             var keyValue = explicitTransform.Morph(args);
                             if (keyValue.Value != null)
                                 outputArgs.Add(keyValue);
@@ -1548,7 +1575,8 @@ namespace System.Diagnostics
                 int startIdx,
                 int endIdx,
                 TransformSpec? next = null
-            ) {
+            )
+            {
                 Debug.Assert(
                     transformSpec != null
                         && startIdx >= 0
@@ -1734,7 +1762,8 @@ namespace System.Diagnostics
                                     !iFaceTypeInfo.IsGenericType
                                     || iFaceTypeInfo.GetGenericTypeDefinition()
                                         != typeof(IEnumerable<>)
-                                ) {
+                                )
+                                {
                                     continue;
                                 }
 
@@ -1767,7 +1796,8 @@ namespace System.Diagnostics
                             else if (
                                 propertyInfo.GetMethod?.IsStatic == true
                                 || propertyInfo.SetMethod?.IsStatic == true
-                            ) {
+                            )
+                            {
                                 Logger.Message($"Property {propertyName} is static.");
                                 return new PropertyFetch(type);
                             }

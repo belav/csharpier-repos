@@ -564,7 +564,8 @@ namespace System.Numerics.Tests
             double imaginary,
             double expectedReal,
             double expectedImaginary
-        ) {
+        )
+        {
             var complex = new Complex(real, imaginary);
             Complex result = Complex.Acos(complex);
             VerifyRealImaginaryProperties(result, expectedReal, expectedImaginary);
@@ -642,7 +643,8 @@ namespace System.Numerics.Tests
             double imaginaryLeft,
             double realRight,
             double imaginaryRight
-        ) {
+        )
+        {
             var left = new Complex(realLeft, imaginaryLeft);
             var right = new Complex(realRight, imaginaryRight);
 
@@ -668,7 +670,8 @@ namespace System.Numerics.Tests
             double imaginaryLeft,
             double realRight,
             double imaginaryRight
-        ) {
+        )
+        {
             var left = new Complex(realLeft, imaginaryLeft);
             _ = imaginaryRight; // not used when testing operations with doubles
             double right = realRight;
@@ -778,7 +781,8 @@ namespace System.Numerics.Tests
             double imaginary,
             double expectedReal,
             double expectedImaginary
-        ) {
+        )
+        {
             var complex = new Complex(real, imaginary);
             Complex result = Complex.Asin(complex);
             VerifyRealImaginaryProperties(result, expectedReal, expectedImaginary);
@@ -857,7 +861,8 @@ namespace System.Numerics.Tests
             double imaginary,
             double expectedReal,
             double expectedImaginary
-        ) {
+        )
+        {
             var complex = new Complex(real, imaginary);
             Complex result = Complex.Atan(complex);
             VerifyRealImaginaryProperties(result, expectedReal, expectedImaginary);
@@ -968,7 +973,8 @@ namespace System.Numerics.Tests
             double imaginary,
             double expectedReal,
             double expectedImaginary
-        ) {
+        )
+        {
             var complex = new Complex(real, imaginary);
             Complex result = Complex.Cos(complex);
             VerifyRealImaginaryProperties(result, expectedReal, expectedImaginary);
@@ -1073,7 +1079,8 @@ namespace System.Numerics.Tests
             double imaginary,
             double expectedReal,
             double expectedImaginary
-        ) {
+        )
+        {
             var complex = new Complex(real, imaginary);
             Complex result = Complex.Cosh(complex);
             VerifyRealImaginaryProperties(result, expectedReal, expectedImaginary);
@@ -1138,7 +1145,8 @@ namespace System.Numerics.Tests
             double imaginaryLeft,
             double realRight,
             double imaginaryRight
-        ) {
+        )
+        {
             var dividend = new Complex(realLeft, imaginaryLeft);
             var divisor = new Complex(realRight, imaginaryRight);
 
@@ -1173,7 +1181,8 @@ namespace System.Numerics.Tests
             double imaginaryLeft,
             double realRight,
             double imaginaryRight
-        ) {
+        )
+        {
             var dividend = new Complex(realLeft, imaginaryLeft);
             _ = imaginaryRight; // not used when testing operations with doubles
             double divisor = realRight;
@@ -1200,7 +1209,8 @@ namespace System.Numerics.Tests
             double imaginaryLeft,
             double realRight,
             double imaginaryRight
-        ) {
+        )
+        {
             _ = imaginaryLeft; // not used when testing operations with doubles
             double dividend = realLeft;
             var divisor = new Complex(realRight, imaginaryRight);
@@ -1339,7 +1349,8 @@ namespace System.Numerics.Tests
             object obj,
             bool expected,
             bool expectedEquals
-        ) {
+        )
+        {
             if (obj is Complex)
             {
                 Complex complex2 = (Complex)obj;
@@ -1579,7 +1590,8 @@ namespace System.Numerics.Tests
                 && real1 != double.MinValue
                 && imaginary1 != double.MaxValue
                 && imaginary1 != double.MinValue
-            ) {
+            )
+            {
                 VerifyLogWithMultiply(complex1, complex2);
                 VerifyLogWithPowerMinusOne(complex1);
                 VerifyLogWithExp(complex1);
@@ -1712,7 +1724,8 @@ namespace System.Numerics.Tests
             double imaginaryLeft,
             double realRight,
             double imaginaryRight
-        ) {
+        )
+        {
             var left = new Complex(realLeft, imaginaryLeft);
             var right = new Complex(realRight, imaginaryRight);
 
@@ -1737,7 +1750,8 @@ namespace System.Numerics.Tests
             double imaginaryLeft,
             double realRight,
             double imaginaryRight
-        ) {
+        )
+        {
             var left = new Complex(realLeft, imaginaryLeft);
             _ = imaginaryRight; // not used when testing operations with doubles
             double right = realRight;
@@ -1804,7 +1818,8 @@ namespace System.Numerics.Tests
             double realValue,
             double imaginaryValue,
             double power
-        ) {
+        )
+        {
             var value = new Complex(realValue, imaginaryValue);
             Complex result = Complex.Pow(value, power);
 
@@ -1863,7 +1878,8 @@ namespace System.Numerics.Tests
             double imaginaryValue,
             double realPower,
             double imaginaryPower
-        ) {
+        )
+        {
             var value = new Complex(realValue, imaginaryValue);
             var power = new Complex(realPower, imaginaryPower);
             Complex result = Complex.Pow(value, power);
@@ -1904,7 +1920,8 @@ namespace System.Numerics.Tests
                 && !(
                     double.IsInfinity(imaginary) && !(double.IsInfinity(real) || double.IsNaN(real))
                 )
-            ) {
+            )
+            {
                 double magnitude = complex.Magnitude;
                 expected = Complex.Conjugate(complex) / magnitude; // In order to avoid Infinity = magnitude* magnitude
                 expected /= magnitude;
@@ -1993,7 +2010,8 @@ namespace System.Numerics.Tests
             double imaginary,
             double expectedReal,
             double expectedImaginary
-        ) {
+        )
+        {
             var complex = new Complex(real, imaginary);
             Complex result = Complex.Sin(complex);
             VerifyRealImaginaryProperties(result, expectedReal, expectedImaginary);
@@ -2098,7 +2116,8 @@ namespace System.Numerics.Tests
             double imaginary,
             double expectedReal,
             double expectedImaginary
-        ) {
+        )
+        {
             var complex = new Complex(real, imaginary);
             Complex result = Complex.Sinh(complex);
             VerifyRealImaginaryProperties(result, expectedReal, expectedImaginary);
@@ -2198,7 +2217,8 @@ namespace System.Numerics.Tests
             double imaginaryLeft,
             double realRight,
             double imaginaryRight
-        ) {
+        )
+        {
             var left = new Complex(realLeft, imaginaryLeft);
             var right = new Complex(realRight, imaginaryRight);
 
@@ -2224,7 +2244,8 @@ namespace System.Numerics.Tests
             double imaginaryLeft,
             double realRight,
             double imaginaryRight
-        ) {
+        )
+        {
             var left = new Complex(realLeft, imaginaryLeft);
             _ = imaginaryRight; // not used when testing operations with doubles
             double right = realRight;
@@ -2390,7 +2411,8 @@ namespace System.Numerics.Tests
             double imaginary,
             double expectedReal,
             double expectedImaginary
-        ) {
+        )
+        {
             var complex = new Complex(real, imaginary);
             Complex result = Complex.Sqrt(complex);
             VerifyRealImaginaryProperties(result, expectedReal, expectedImaginary);
@@ -2403,7 +2425,8 @@ namespace System.Numerics.Tests
             double imaginary,
             double expectedReal,
             double expectedImaginary
-        ) {
+        )
+        {
             var complex = new Complex(real, imaginary);
             Complex result = Complex.Sqrt(complex);
             VerifyRealImaginaryProperties(result, expectedReal, expectedImaginary);
@@ -2499,7 +2522,8 @@ namespace System.Numerics.Tests
             double imaginary,
             double expectedReal,
             double expectedImaginary
-        ) {
+        )
+        {
             var complex = new Complex(real, imaginary);
             Complex result = Complex.Tan(complex);
             VerifyRealImaginaryProperties(result, expectedReal, expectedImaginary);
@@ -2589,7 +2613,8 @@ namespace System.Numerics.Tests
             double imaginary,
             double expectedReal,
             double expectedImaginary
-        ) {
+        )
+        {
             var complex = new Complex(real, imaginary);
             Complex result = Complex.Tanh(complex);
             VerifyRealImaginaryProperties(result, expectedReal, expectedImaginary);
@@ -2901,7 +2926,8 @@ namespace System.Numerics.Tests
             double real,
             double imaginary,
             [CallerLineNumber] int lineNumber = 0
-        ) {
+        )
+        {
             Assert.True(
                 real.Equals(complex.Real) || IsDiffTolerable(complex.Real, real),
                 string.Format(
@@ -2928,7 +2954,8 @@ namespace System.Numerics.Tests
             double magnitude,
             double phase,
             [CallerLineNumber] int lineNumber = 0
-        ) {
+        )
+        {
             // The magnitude (m) of a complex number (z = x + yi) is the absolute value - |z| = sqrt(x^2 + y^2)
             // Verification is done using the square of the magnitude since m^2 = x^2 + y^2
             double expectedMagnitudeSquared = magnitude * magnitude;

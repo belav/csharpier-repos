@@ -51,7 +51,8 @@ namespace System.Net.Http
             FailedProxyCache failedProxyCache,
             string? proxyConfig,
             bool secure
-        ) {
+        )
+        {
             Debug.Assert(failedProxyCache != null);
 
             Uri[] uris = Array.Empty<Uri>();
@@ -83,7 +84,8 @@ namespace System.Net.Http
             FailedProxyCache failedProxyCache,
             string proxyConfig,
             bool secure
-        ) {
+        )
+        {
             Debug.Assert(failedProxyCache != null);
 
             return string.IsNullOrEmpty(proxyConfig) == false
@@ -212,7 +214,8 @@ namespace System.Net.Http
             bool secure,
             [NotNullWhen(true)] out Uri? uri,
             out int charactersConsumed
-        ) {
+        )
+        {
             const int SECURE_FLAG = 1;
             const int INSECURE_FLAG = 2;
 
@@ -226,7 +229,8 @@ namespace System.Net.Http
                 while (
                     iter < proxyString.Length
                     && Array.IndexOf(s_proxyDelimiters, proxyString[iter]) >= 0
-                ) {
+                )
+                {
                     ++iter;
                 }
 
@@ -278,7 +282,8 @@ namespace System.Net.Http
                         UriKind.Absolute,
                         out uri
                     )
-                ) {
+                )
+                {
                     charactersConsumed = originalLength - proxyString.Length + iter;
                     Debug.Assert(charactersConsumed > 0);
 

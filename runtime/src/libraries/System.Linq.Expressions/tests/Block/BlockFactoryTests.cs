@@ -122,7 +122,8 @@ namespace System.Linq.Expressions.Tests
         private static void AssertBlockIsOptimized(
             BlockExpression expr,
             IReadOnlyList<Expression> args
-        ) {
+        )
+        {
             int n = args.Count;
 
             BlockExpression updated = Update(expr);

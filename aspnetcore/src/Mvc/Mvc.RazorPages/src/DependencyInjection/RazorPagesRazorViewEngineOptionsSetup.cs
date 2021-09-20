@@ -89,13 +89,15 @@ namespace Microsoft.Extensions.DependencyInjection
             if (
                 path1.EndsWith("/", StringComparison.Ordinal)
                 || path2.StartsWith("/", StringComparison.Ordinal)
-            ) {
+            )
+            {
                 return path1 + path2;
             }
             else if (
                 path1.EndsWith("/", StringComparison.Ordinal)
                 && path2.StartsWith("/", StringComparison.Ordinal)
-            ) {
+            )
+            {
                 return path1 + path2.Substring(1);
             }
 

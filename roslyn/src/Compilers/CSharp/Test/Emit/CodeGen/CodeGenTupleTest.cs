@@ -14633,7 +14633,8 @@ class C
         private static void AssertTupleMembersParametersEquality(
             ImmutableArray<ParameterSymbol> parameters1,
             ImmutableArray<ParameterSymbol> parameters2
-        ) {
+        )
+        {
             Assert.Equal(parameters1.Length, parameters2.Length);
             for (int j = 0; j < parameters1.Length; j++)
             {
@@ -17110,7 +17111,8 @@ namespace System
         private static void AssertTestDisplayString(
             ImmutableArray<Symbol> symbols,
             params string[] baseLine
-        ) {
+        )
+        {
             AssertEx.Equal(baseLine, symbols.Select(s => s.ToTestDisplayString()));
         }
 
@@ -31793,7 +31795,8 @@ class C
 
         private static void VerifySemanticModelTypelessTupleWithNoImplicitConversion(
             CSharpCompilation comp
-        ) {
+        )
+        {
             var tree = comp.SyntaxTrees.Single();
             var model = comp.GetSemanticModel(tree);
             var tuple = tree.GetRoot().DescendantNodes().OfType<TupleExpressionSyntax>().Single();
@@ -31886,7 +31889,8 @@ class C
 
         private static void VerifySemanticModelTypelessTupleWithNoImplicitConversion2(
             CSharpCompilation comp
-        ) {
+        )
+        {
             var tree = comp.SyntaxTrees.Single();
             var model = comp.GetSemanticModel(tree);
             var tuple = tree.GetRoot().DescendantNodes().OfType<TupleExpressionSyntax>().Single();
@@ -32669,7 +32673,8 @@ public class C
         public void MissingTypeArgumentInBase_ValueTupleInContainer(
             bool useImageReference,
             bool missingValueTuple
-        ) {
+        )
+        {
             var missingContainer_cs =
                 @"
 public class MissingContainer<T>
@@ -33077,7 +33082,8 @@ public class ClassB
             void verifyTupleTypeWithErrorUnderlyingType(
                 CSharpCompilation compilation,
                 bool decodingSuccessful
-            ) {
+            )
+            {
                 var classA = (NamedTypeSymbol)compilation.GetMember("ClassA");
                 var iEnumerable = (ConstructedNamedTypeSymbol)classA.Interfaces()[0];
                 if (decodingSuccessful)
@@ -33298,7 +33304,8 @@ public class ClassB
             void verifyTupleTypeWithErrorUnderlyingType(
                 CSharpCompilation compilation,
                 bool decodingSuccessful
-            ) {
+            )
+            {
                 var classA = (NamedTypeSymbol)compilation.GetMember("ClassA");
                 var iEnumerable = (ConstructedNamedTypeSymbol)classA.Interfaces()[0];
 
@@ -33415,7 +33422,8 @@ public class ClassB
             void verifyTupleTypeWithErrorUnderlyingType(
                 CSharpCompilation compilation,
                 bool decodingSuccessful
-            ) {
+            )
+            {
                 var classA = (NamedTypeSymbol)compilation.GetMember("ClassA");
                 var iEnumerable = (ConstructedNamedTypeSymbol)classA.Interfaces()[0];
                 AssertEx.Equal(
@@ -34102,7 +34110,8 @@ End Class";
             TupleUnderlyingTypeValue definitionPublicValue,
             string expectedCSharp,
             string expectedVisualBasic
-        ) {
+        )
+        {
             VerifyDisplay(type.GetPublicSymbol(), expectedCSharp, expectedVisualBasic);
             VerifyInternalType(type, expectedInternalValue);
             VerifyPublicType(type.GetPublicSymbol(), expectedPublicValue);
@@ -34116,7 +34125,8 @@ End Class";
             TupleUnderlyingTypeValue expectedValue,
             string expectedCSharp,
             string expectedVisualBasic
-        ) {
+        )
+        {
             VerifyDisplay(type, expectedCSharp, expectedVisualBasic);
             VerifyPublicType(type, expectedValue);
             VerifyPublicType(type.OriginalDefinition, expectedValue);
@@ -34126,7 +34136,8 @@ End Class";
             INamedTypeSymbol type,
             string expectedCSharp,
             string expectedVisualBasic
-        ) {
+        )
+        {
             Assert.Equal(
                 expectedCSharp,
                 CSharp.SymbolDisplay.ToDisplayString(type, SymbolDisplayFormat.TestFormat)
@@ -34140,7 +34151,8 @@ End Class";
         private static void VerifyInternalType(
             NamedTypeSymbol type,
             TupleUnderlyingTypeValue expectedValue
-        ) {
+        )
+        {
             var underlyingType = type.TupleUnderlyingType;
 
             switch (expectedValue)
@@ -34166,7 +34178,8 @@ End Class";
         private static void VerifyPublicType(
             INamedTypeSymbol type,
             TupleUnderlyingTypeValue expectedValue
-        ) {
+        )
+        {
             var underlyingType = type.TupleUnderlyingType;
 
             switch (expectedValue)
@@ -36223,7 +36236,8 @@ unsafe struct Z
                 TupleErrorFieldSymbol tupleField,
                 int i,
                 bool isDefaultElement
-            ) {
+            )
+            {
                 Assert.Equal(i, tupleField.TupleElementIndex);
                 Assert.Equal(isDefaultElement, tupleField.IsDefaultTupleElement);
             }
@@ -36232,7 +36246,8 @@ unsafe struct Z
                 FieldSymbol tupleField,
                 int i,
                 string nullabilityString
-            ) {
+            )
+            {
                 AssertEx.Equal(
                     $"System.Object{nullabilityString} System.ValueTuple<System.Object!, System.Object?, System.Object!, System.Object?, System.Object!, System.Object?, System.Object!, (System.Object?, System.Object!)>.Item{i + 1}",
                     tupleField.CorrespondingTupleField.ToTestDisplayString(includeNonNullable: true)

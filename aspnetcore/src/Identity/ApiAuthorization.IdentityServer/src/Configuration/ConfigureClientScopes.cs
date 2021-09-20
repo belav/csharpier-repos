@@ -34,7 +34,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer.Configuration
                         ApplicationProfilesPropertyNames.Clients,
                         out var clientList
                     )
-                ) {
+                )
+                {
                     _logger.LogInformation(
                         LoggerEventIds.AllowedApplicationNotDefienedForIdentityResource,
                         "Identity resource '{IdentityResourceName}' doesn't define a list of allowed applications.",
@@ -60,7 +61,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer.Configuration
                 if (
                     resourceClients.Length == 1
                     && resourceClients[0] == ApplicationProfilesPropertyValues.AllowAllApplications
-                ) {
+                )
+                {
                     _logger.LogInformation(
                         LoggerEventIds.AllApplicationsAllowedForIdentityResource,
                         "Identity resource '{IdentityResourceName}' allows all applications.",
@@ -85,7 +87,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer.Configuration
                             && resourceClients[0]
                                 == ApplicationProfilesPropertyValues.AllowAllApplications
                         ) || resourceClients.Contains(client.ClientId)
-                    ) {
+                    )
+                    {
                         client.AllowedScopes.Add(identityResource.Name);
                     }
                 }
@@ -101,7 +104,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer.Configuration
                         ApplicationProfilesPropertyNames.Clients,
                         out var clientList
                     )
-                ) {
+                )
+                {
                     _logger.LogInformation(
                         LoggerEventIds.AllowedApplicationNotDefienedForApiResource,
                         "Resource '{ApiResourceName}' doesn't define a list of allowed applications.",
@@ -127,7 +131,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer.Configuration
                 if (
                     resourceClients.Length == 1
                     && resourceClients[0] == ApplicationProfilesPropertyValues.AllowAllApplications
-                ) {
+                )
+                {
                     _logger.LogInformation(
                         LoggerEventIds.AllApplicationsAllowedForApiResource,
                         "Resource '{ApiResourceName}' allows all applications.",
@@ -152,7 +157,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer.Configuration
                             && resourceClients[0]
                                 == ApplicationProfilesPropertyValues.AllowAllApplications
                         ) || resourceClients.Contains(client.ClientId)
-                    ) {
+                    )
+                    {
                         AddScopes(resource, client);
                     }
                 }

@@ -136,7 +136,8 @@ class B
             MetadataReference reference,
             SymbolKind symbolKind,
             string name
-        ) {
+        )
+        {
             var tree = Parse(source);
             var comp = CreateCompilation(tree, new[] { reference });
 

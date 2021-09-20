@@ -84,7 +84,8 @@ namespace System.Diagnostics.Tracing
             uint ActiveWorkerThreadCount,
             uint RetiredWorkerThreadCount = 0,
             ushort ClrInstanceID = DefaultClrInstanceId
-        ) {
+        )
+        {
             if (IsEnabled(EventLevel.Informational, Keywords.ThreadingKeyword))
             {
                 LogThreadPoolWorkerThreadStart(
@@ -108,7 +109,8 @@ namespace System.Diagnostics.Tracing
             uint ActiveWorkerThreadCount,
             uint RetiredWorkerThreadCount = 0,
             ushort ClrInstanceID = DefaultClrInstanceId
-        ) {
+        )
+        {
             if (IsEnabled(EventLevel.Informational, Keywords.ThreadingKeyword))
             {
                 LogThreadPoolWorkerThreadStop(
@@ -133,7 +135,8 @@ namespace System.Diagnostics.Tracing
             uint ActiveWorkerThreadCount,
             uint RetiredWorkerThreadCount = 0,
             ushort ClrInstanceID = DefaultClrInstanceId
-        ) {
+        )
+        {
             if (IsEnabled(EventLevel.Informational, Keywords.ThreadingKeyword))
             {
                 LogThreadPoolWorkerThreadWait(
@@ -156,7 +159,8 @@ namespace System.Diagnostics.Tracing
         public unsafe void ThreadPoolWorkerThreadAdjustmentSample(
             double Throughput,
             ushort ClrInstanceID = DefaultClrInstanceId
-        ) {
+        )
+        {
             if (!IsEnabled(EventLevel.Informational, Keywords.ThreadingKeyword))
             {
                 return;
@@ -178,7 +182,8 @@ namespace System.Diagnostics.Tracing
             uint NewWorkerThreadCount,
             ThreadAdjustmentReasonMap Reason,
             ushort ClrInstanceID = DefaultClrInstanceId
-        ) {
+        )
+        {
             if (!IsEnabled(EventLevel.Informational, Keywords.ThreadingKeyword))
             {
                 return;
@@ -212,7 +217,8 @@ namespace System.Diagnostics.Tracing
             double NewControlSetting,
             ushort NewThreadWaveMagnitude,
             ushort ClrInstanceID = DefaultClrInstanceId
-        ) {
+        )
+        {
             if (!IsEnabled(EventLevel.Verbose, Keywords.ThreadingKeyword))
             {
                 return;
@@ -246,7 +252,8 @@ namespace System.Diagnostics.Tracing
             IntPtr Overlapped,
             bool MultiDequeues,
             ushort ClrInstanceID = DefaultClrInstanceId
-        ) {
+        )
+        {
             int multiDequeuesInt = Convert.ToInt32(MultiDequeues); // bool maps to "win:Boolean", a 4-byte boolean
             LogThreadPoolIOEnqueue(NativeOverlapped, Overlapped, MultiDequeues, ClrInstanceID);
         }
@@ -262,7 +269,8 @@ namespace System.Diagnostics.Tracing
                     EventLevel.Verbose,
                     Keywords.ThreadingKeyword | Keywords.ThreadTransferKeyword
                 )
-            ) {
+            )
+            {
                 ThreadPoolIOEnqueue(
                     (IntPtr)registeredWaitHandle.GetHashCode(),
                     IntPtr.Zero,
@@ -284,7 +292,8 @@ namespace System.Diagnostics.Tracing
             IntPtr NativeOverlapped,
             IntPtr Overlapped,
             ushort ClrInstanceID = DefaultClrInstanceId
-        ) {
+        )
+        {
             LogThreadPoolIODequeue(NativeOverlapped, Overlapped, ClrInstanceID);
         }
 
@@ -299,7 +308,8 @@ namespace System.Diagnostics.Tracing
                     EventLevel.Verbose,
                     Keywords.ThreadingKeyword | Keywords.ThreadTransferKeyword
                 )
-            ) {
+            )
+            {
                 ThreadPoolIODequeue((IntPtr)registeredWaitHandle.GetHashCode(), IntPtr.Zero);
             }
         }
@@ -316,7 +326,8 @@ namespace System.Diagnostics.Tracing
         public unsafe void ThreadPoolWorkingThreadCount(
             uint Count,
             ushort ClrInstanceID = DefaultClrInstanceId
-        ) {
+        )
+        {
             if (!IsEnabled(EventLevel.Verbose, Keywords.ThreadingKeyword))
             {
                 return;

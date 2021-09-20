@@ -56,7 +56,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         public virtual IModel GetModel(
             DbContext context,
             IConventionSetBuilder conventionSetBuilder
-        ) {
+        )
+        {
             var cache = Dependencies.MemoryCache;
             var cacheKey = Dependencies.ModelCacheKeyFactory.Create(context);
             if (!cache.TryGetValue(cacheKey, out IModel model))
@@ -95,7 +96,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             DbContext context,
             IConventionSetBuilder conventionSetBuilder,
             ModelDependencies modelDependencies
-        ) {
+        )
+        {
             var cache = Dependencies.MemoryCache;
             var cacheKey = Dependencies.ModelCacheKeyFactory.Create(context);
             if (!cache.TryGetValue(cacheKey, out IModel model))
@@ -133,7 +135,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             DbContext context,
             ModelCreationDependencies modelCreationDependencies,
             bool designTime
-        ) {
+        )
+        {
             var cache = Dependencies.MemoryCache;
             var cacheKey = Dependencies.ModelCacheKeyFactory.Create(context, designTime);
             if (!cache.TryGetValue(cacheKey, out IModel model))
@@ -181,7 +184,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         protected virtual IModel CreateModel(
             DbContext context,
             IConventionSetBuilder conventionSetBuilder
-        ) {
+        )
+        {
             Check.NotNull(context, nameof(context));
 
             var modelBuilder = new ModelBuilder(conventionSetBuilder.CreateConventionSet());
@@ -202,7 +206,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             DbContext context,
             IConventionSetBuilder conventionSetBuilder,
             ModelDependencies modelDependencies
-        ) {
+        )
+        {
             Check.DebugAssert(context != null, "context == null");
 
             var modelBuilder = new ModelBuilder(

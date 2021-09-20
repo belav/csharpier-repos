@@ -39,7 +39,8 @@ public class ReadyToRunJittedMethods : IDisposable
         List<ProcessInfo> processList,
         int startIndex,
         int endIndex
-    ) {
+    )
+    {
         _etwProcesses = new List<Process>();
         _pidToProcess = new Dictionary<int, ProcessInfo>();
         _testModuleNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
@@ -76,7 +77,8 @@ public class ReadyToRunJittedMethods : IDisposable
                 data.IsJitted
                 && _pidToProcess.TryGetValue(data.ProcessID, out processInfo)
                 && _testModuleIds.Contains(data.ModuleID)
-            ) {
+            )
+            {
                 // Console.WriteLine($"Method loaded {GetName(data)} - {data}");
                 string methodName = GetName(data);
                 string moduleName = _testModuleIdToName[data.ModuleID];

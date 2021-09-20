@@ -74,11 +74,13 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
         public static ReflectionWritableMember ToReflectionWriteableMember(
             this LazyMemberInfo lazyMember
-        ) {
+        )
+        {
             if (
                 (lazyMember.MemberType != MemberTypes.Field)
                 && (lazyMember.MemberType != MemberTypes.Property)
-            ) {
+            )
+            {
                 throw new Exception(SR.Diagnostic_InternalExceptionMessage);
             }
 
@@ -108,7 +110,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
         public static ReflectionProperty CreateReflectionProperty(
             MethodInfo getMethod,
             MethodInfo setMethod
-        ) {
+        )
+        {
             if (getMethod == null && setMethod == null)
             {
                 throw new Exception(SR.Diagnostic_InternalExceptionMessage);

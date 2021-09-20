@@ -33,7 +33,8 @@ namespace System.Speech.Internal.SrgsCompiler
             Uri originalUri,
             string[] referencedAssemblies,
             string keyFile
-        ) {
+        )
+        {
             // raft of files to compiler is only available for class library
             System.Diagnostics.Debug.Assert(!fOutputCfg || xmlReaders.Length == 1);
 
@@ -51,7 +52,8 @@ namespace System.Speech.Internal.SrgsCompiler
                     if (
                         xmlReaders[iReader].BaseURI != null
                         && xmlReaders[iReader].BaseURI.Length > 0
-                    ) {
+                    )
+                    {
                         uri = new Uri(xmlReaders[iReader].BaseURI);
                     }
                 }
@@ -107,7 +109,8 @@ namespace System.Speech.Internal.SrgsCompiler
             bool fOutputCfg,
             string[] referencedAssemblies,
             string keyFile
-        ) {
+        )
+        {
             ISrgsParser srgsParser = new SrgsDocumentParser(srgsGrammar.Grammar);
 
             List<CustomGrammar.CfgResource> cfgResources = new();
@@ -153,7 +156,8 @@ namespace System.Speech.Internal.SrgsCompiler
             out CultureInfo culture,
             string[] referencedAssemblies,
             string keyFile
-        ) {
+        )
+        {
             Backend backend = new();
             CustomGrammar cg = new();
             SrgsElementCompilerFactory elementFactory = new(backend, cg);

@@ -297,7 +297,8 @@ namespace N1
             out bool compilationStartedFired,
             out HashSet<string> declaredSymbolNames,
             out HashSet<string> completedCompilationUnits
-        ) {
+        )
+        {
             compilationStartedFired = false;
             declaredSymbolNames = new HashSet<string>();
             completedCompilationUnits = new HashSet<string>();
@@ -678,7 +679,8 @@ class C
                 Compilation compilation,
                 DiagnosticAnalyzer analyzer,
                 (string key, string value)? options
-            ) {
+            )
+            {
                 AnalyzerOptions analyzerOptions;
                 if (options.HasValue)
                 {
@@ -797,7 +799,8 @@ class C3
         [InlineData(50)]
         public async Task TestConcurrentGetAnalyzerDiagnostics_SymbolStartAnalyzer(
             int partialDeclarationCount
-        ) {
+        )
+        {
             var sources = new string[partialDeclarationCount + 1];
 
             for (var i = 0; i < partialDeclarationCount; i++)

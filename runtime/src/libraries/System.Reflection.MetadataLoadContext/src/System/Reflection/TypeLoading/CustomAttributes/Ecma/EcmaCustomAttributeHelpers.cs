@@ -19,7 +19,8 @@ namespace System.Reflection.TypeLoading.Ecma
         public static IEnumerable<CustomAttributeData> ToTrueCustomAttributes(
             this CustomAttributeHandleCollection handles,
             EcmaModule module
-        ) {
+        )
+        {
             foreach (CustomAttributeHandle handle in handles)
             {
                 yield return handle.ToCustomAttributeData(module);
@@ -36,7 +37,8 @@ namespace System.Reflection.TypeLoading.Ecma
             ReadOnlySpan<byte> ns,
             ReadOnlySpan<byte> name,
             EcmaModule module
-        ) {
+        )
+        {
             return !handles.FindCustomAttributeByName(ns, name, module).IsNil;
         }
 
@@ -45,7 +47,8 @@ namespace System.Reflection.TypeLoading.Ecma
             ReadOnlySpan<byte> ns,
             ReadOnlySpan<byte> name,
             EcmaModule module
-        ) {
+        )
+        {
             CustomAttributeHandle handle = handles.FindCustomAttributeByName(ns, name, module);
             if (handle.IsNil)
                 return null;
@@ -57,7 +60,8 @@ namespace System.Reflection.TypeLoading.Ecma
             ReadOnlySpan<byte> ns,
             ReadOnlySpan<byte> name,
             EcmaModule module
-        ) {
+        )
+        {
             MetadataReader reader = module.Reader;
             foreach (CustomAttributeHandle handle in handles)
             {
@@ -77,7 +81,8 @@ namespace System.Reflection.TypeLoading.Ecma
             ReadOnlySpan<byte> ns,
             ReadOnlySpan<byte> name,
             MetadataReader reader
-        ) {
+        )
+        {
             switch (handle.Kind)
             {
                 case HandleKind.TypeDefinition: // Not clear if this can happen but as fail-safe....
@@ -102,7 +107,8 @@ namespace System.Reflection.TypeLoading.Ecma
         public static EntityHandle TryGetDeclaringTypeHandle(
             this in CustomAttribute ca,
             MetadataReader reader
-        ) {
+        )
+        {
             EntityHandle ctorHandle = ca.Constructor;
             switch (ctorHandle.Kind)
             {
@@ -129,7 +135,8 @@ namespace System.Reflection.TypeLoading.Ecma
         /// </summary>
         public static IList<CustomAttributeTypedArgument> ToApiForm(
             this IList<CustomAttributeTypedArgument<RoType>> catgs
-        ) {
+        )
+        {
             int count = catgs.Count;
             CustomAttributeTypedArgument[] cats = new CustomAttributeTypedArgument[count];
             for (int i = 0; i < count; i++)
@@ -164,7 +171,8 @@ namespace System.Reflection.TypeLoading.Ecma
         public static IList<CustomAttributeNamedArgument> ToApiForm(
             this IList<CustomAttributeNamedArgument<RoType>> cangs,
             Type attributeType
-        ) {
+        )
+        {
             int count = cangs.Count;
             CustomAttributeNamedArgument[] cans = new CustomAttributeNamedArgument[count];
             for (int i = 0; i < count; i++)
@@ -181,7 +189,8 @@ namespace System.Reflection.TypeLoading.Ecma
         public static CustomAttributeNamedArgument ToApiForm(
             this CustomAttributeNamedArgument<RoType> cang,
             Type attributeType
-        ) {
+        )
+        {
             MemberInfo? member;
             switch (cang.Kind)
             {
@@ -215,7 +224,8 @@ namespace System.Reflection.TypeLoading.Ecma
         public static MarshalAsAttribute ToMarshalAsAttribute(
             this BlobHandle blobHandle,
             EcmaModule module
-        ) {
+        )
+        {
             MetadataReader reader = module.Reader;
             BlobReader br = blobHandle.GetBlobReader(reader);
             UnmanagedType unmgdType = (UnmanagedType)br.ReadByte();

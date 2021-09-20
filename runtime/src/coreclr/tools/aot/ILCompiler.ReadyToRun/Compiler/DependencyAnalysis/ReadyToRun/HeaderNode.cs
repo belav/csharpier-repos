@@ -52,7 +52,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 ReadyToRunSectionType id,
                 DependencyNodeCore<NodeFactory> node,
                 ISymbolNode startSymbol
-            ) {
+            )
+            {
                 Id = id;
                 Node = node;
                 StartSymbol = startSymbol;
@@ -77,7 +78,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             ReadyToRunSectionType id,
             DependencyNodeCore<NodeFactory> node,
             ISymbolNode startSymbol
-        ) {
+        )
+        {
             _items.Add(new HeaderItem(id, node, startSymbol));
         }
 
@@ -177,7 +179,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         protected override void AppendMangledHeaderName(
             NameMangler nameMangler,
             Utf8StringBuilder sb
-        ) {
+        )
+        {
             sb.Append(nameMangler.CompilationUnitPrefix);
             sb.Append("__ReadyToRunHeader");
         }
@@ -215,7 +218,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         protected override void AppendMangledHeaderName(
             NameMangler nameMangler,
             Utf8StringBuilder sb
-        ) {
+        )
+        {
             sb.Append(nameMangler.CompilationUnitPrefix);
             sb.Append("__ReadyToRunAssemblyHeader__");
             sb.Append(_index.ToString());

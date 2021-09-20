@@ -48,12 +48,12 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <param name="context"> The context on which the operations will be invoked. </param>
         /// <param name="maxRetryCount"> The maximum number of retry attempts. </param>
         /// <param name="maxRetryDelay"> The maximum delay between retries. </param>
-        protected ExecutionStrategy(
-            DbContext context,
-            int maxRetryCount,
-            TimeSpan maxRetryDelay
-        ) : this(context.GetService<ExecutionStrategyDependencies>(), maxRetryCount, maxRetryDelay)
-        { }
+        protected ExecutionStrategy(DbContext context, int maxRetryCount, TimeSpan maxRetryDelay)
+            : this(
+                context.GetService<ExecutionStrategyDependencies>(),
+                maxRetryCount,
+                maxRetryDelay
+            ) { }
 
         /// <summary>
         ///     Creates a new instance of <see cref="ExecutionStrategy" />.
@@ -65,7 +65,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             ExecutionStrategyDependencies dependencies,
             int maxRetryCount,
             TimeSpan maxRetryDelay
-        ) {
+        )
+        {
             if (maxRetryCount < 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(maxRetryCount));
@@ -141,7 +142,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             TState state,
             Func<DbContext, TState, TResult> operation,
             Func<DbContext, TState, ExecutionResult<TResult>>? verifySucceeded
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
 
             if (Suspended)
@@ -163,7 +165,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             Func<DbContext, TState, ExecutionResult<TResult>> operation,
             Func<DbContext, TState, ExecutionResult<TResult>>? verifySucceeded,
             TState state
-        ) {
+        )
+        {
             while (true)
             {
                 try
@@ -181,7 +184,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
                     if (
                         verifySucceeded != null && CallOnWrappedException(ex, ShouldVerifySuccessOn)
-                    ) {
+                    )
+                    {
                         var result = ExecuteImplementation(verifySucceeded, null, state);
                         if (result.IsSuccessful)
                         {
@@ -252,7 +256,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 Task<ExecutionResult<TResult>>
             >? verifySucceeded,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
 
             if (Suspended)
@@ -292,7 +297,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             >? verifySucceeded,
             TState state,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             while (true)
             {
                 cancellationToken.ThrowIfCancellationRequested();
@@ -317,7 +323,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
                     if (
                         verifySucceeded != null && CallOnWrappedException(ex, ShouldVerifySuccessOn)
-                    ) {
+                    )
+                    {
                         var result = await ExecuteImplementationAsync(
                                 verifySucceeded,
                                 null,
@@ -374,7 +381,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     ).Dependencies.TransactionManager as ITransactionEnlistmentManager
                 )?.CurrentAmbientTransaction
                     is not null
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     CoreStrings.ExecutionStrategyExistingTransaction(
                         GetType().Name,

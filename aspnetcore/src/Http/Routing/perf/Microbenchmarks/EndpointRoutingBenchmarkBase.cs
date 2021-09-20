@@ -98,7 +98,8 @@ namespace Microsoft.AspNetCore.Routing
             string expectedUrl,
             string actualUrl,
             StringComparison stringComparison
-        ) {
+        )
+        {
             if (!string.Equals(expectedUrl, actualUrl, stringComparison))
             {
                 throw new InvalidOperationException(
@@ -124,7 +125,8 @@ namespace Microsoft.AspNetCore.Routing
             string displayName = null,
             string routeName = null,
             params object[] metadata
-        ) {
+        )
+        {
             var endpointMetadata = new List<object>(metadata ?? Array.Empty<object>());
             if (routeName != null)
             {
@@ -142,7 +144,8 @@ namespace Microsoft.AspNetCore.Routing
 
         protected (HttpContext httpContext, RouteValueDictionary ambientValues) CreateCurrentRequestContext(
             object ambientValues = null
-        ) {
+        )
+        {
             var context = new DefaultHttpContext();
             context.Request.RouteValues = new RouteValueDictionary(ambientValues);
 
@@ -152,7 +155,8 @@ namespace Microsoft.AspNetCore.Routing
         protected void CreateOutboundRouteEntry(
             TreeRouteBuilder treeRouteBuilder,
             RouteEndpoint endpoint
-        ) {
+        )
+        {
             treeRouteBuilder.MapOutbound(
                 NullRouter.Instance,
                 new RouteTemplate(

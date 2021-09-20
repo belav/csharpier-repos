@@ -89,7 +89,8 @@ namespace Internal.Cryptography.Pal.Native
             this byte[] encoded,
             CryptDecodeObjectStructType lpszStructType,
             DecodedObjectReceiver<TResult> receiver
-        ) {
+        )
+        {
             unsafe
             {
                 int cb = 0;
@@ -104,7 +105,8 @@ namespace Internal.Cryptography.Pal.Native
                         null,
                         ref cb
                     )
-                ) {
+                )
+                {
                     throw Marshal.GetLastWin32Error().ToCryptographicException();
                 }
 
@@ -120,7 +122,8 @@ namespace Internal.Cryptography.Pal.Native
                         decoded,
                         ref cb
                     )
-                ) {
+                )
+                {
                     throw Marshal.GetLastWin32Error().ToCryptographicException();
                 }
 
@@ -132,7 +135,8 @@ namespace Internal.Cryptography.Pal.Native
             this byte[] encoded,
             string lpszStructType,
             DecodedObjectReceiver<TResult> receiver
-        ) {
+        )
+        {
             unsafe
             {
                 int cb = 0;
@@ -147,7 +151,8 @@ namespace Internal.Cryptography.Pal.Native
                         null,
                         ref cb
                     )
-                ) {
+                )
+                {
                     throw Marshal.GetLastWin32Error().ToCryptographicException();
                 }
 
@@ -163,7 +168,8 @@ namespace Internal.Cryptography.Pal.Native
                         decoded,
                         ref cb
                     )
-                ) {
+                )
+                {
                     throw Marshal.GetLastWin32Error().ToCryptographicException();
                 }
 
@@ -175,7 +181,8 @@ namespace Internal.Cryptography.Pal.Native
             this byte[] encoded,
             CryptDecodeObjectStructType lpszStructType,
             DecodedObjectReceiver receiver
-        ) {
+        )
+        {
             unsafe
             {
                 int cb = 0;
@@ -190,7 +197,8 @@ namespace Internal.Cryptography.Pal.Native
                         null,
                         ref cb
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -206,7 +214,8 @@ namespace Internal.Cryptography.Pal.Native
                         decoded,
                         ref cb
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 

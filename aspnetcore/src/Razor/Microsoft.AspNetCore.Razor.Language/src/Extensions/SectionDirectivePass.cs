@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
         protected override void ExecuteCore(
             RazorCodeDocument codeDocument,
             DocumentIntermediateNode documentNode
-        ) {
+        )
+        {
             var @class = documentNode.FindPrimaryClass();
             if (@class == null)
             {
@@ -23,7 +24,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
 
             foreach (
                 var directive in documentNode.FindDirectiveReferences(SectionDirective.Directive)
-            ) {
+            )
+            {
                 var sectionName = (
                     (DirectiveIntermediateNode)directive.Node
                 ).Tokens.FirstOrDefault()?.Content;

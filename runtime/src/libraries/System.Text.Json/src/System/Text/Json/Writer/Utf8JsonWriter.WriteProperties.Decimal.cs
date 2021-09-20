@@ -141,7 +141,8 @@ namespace System.Text.Json
             ReadOnlySpan<char> propertyName,
             decimal value,
             int firstEscapeIndexProp
-        ) {
+        )
+        {
             Debug.Assert(
                 int.MaxValue / JsonConstants.MaxExpansionFactorWhileEscaping >= propertyName.Length
             );
@@ -179,7 +180,8 @@ namespace System.Text.Json
             ReadOnlySpan<byte> utf8PropertyName,
             decimal value,
             int firstEscapeIndexProp
-        ) {
+        )
+        {
             Debug.Assert(
                 int.MaxValue / JsonConstants.MaxExpansionFactorWhileEscaping
                     >= utf8PropertyName.Length

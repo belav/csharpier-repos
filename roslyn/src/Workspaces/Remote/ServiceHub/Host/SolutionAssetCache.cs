@@ -81,7 +81,8 @@ namespace Microsoft.CodeAnalysis.Remote
                     checksum,
                     CancellationToken.None
                 )
-            ) {
+            )
+            {
                 if (!_assets.TryGetValue(checksum, out var entry))
                 {
                     value = default;

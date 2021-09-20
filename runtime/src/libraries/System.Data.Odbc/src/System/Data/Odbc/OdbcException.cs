@@ -17,7 +17,8 @@ namespace System.Data.Odbc
         internal static OdbcException CreateException(
             OdbcErrorCollection errors,
             ODBC32.RetCode retcode
-        ) {
+        )
+        {
             StringBuilder builder = new StringBuilder();
             foreach (OdbcError error in errors)
             {

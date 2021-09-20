@@ -147,7 +147,8 @@ namespace Microsoft.AspNetCore.DeveloperCertificates.Tools
                                         || check.HasValue()
                                         || (!import.HasValue() && password.HasValue())
                                         || (import.HasValue() && !password.HasValue())
-                                    ) {
+                                    )
+                                    {
                                         reporter.Error(InvalidUsageErrorMessage);
                                         return CriticalError;
                                     }
@@ -162,7 +163,8 @@ namespace Microsoft.AspNetCore.DeveloperCertificates.Tools
                                         || clean.HasValue()
                                         || format.HasValue()
                                         || import.HasValue()
-                                    ) {
+                                    )
+                                    {
                                         reporter.Error(InvalidUsageErrorMessage);
                                         return CriticalError;
                                     }
@@ -186,7 +188,8 @@ namespace Microsoft.AspNetCore.DeveloperCertificates.Tools
                                                 StringComparison.OrdinalIgnoreCase
                                             )
                                         )
-                                    ) {
+                                    )
+                                    {
                                         reporter.Error(InvalidUsageErrorMessage);
                                         return CriticalError;
                                     }
@@ -249,7 +252,8 @@ namespace Microsoft.AspNetCore.DeveloperCertificates.Tools
             CommandOption import,
             CommandOption password,
             ConsoleReporter reporter
-        ) {
+        )
+        {
             var manager = CertificateManager.Instance;
             try
             {
@@ -409,7 +413,8 @@ namespace Microsoft.AspNetCore.DeveloperCertificates.Tools
             CommandOption trust,
             CommandOption exportFormat,
             IReporter reporter
-        ) {
+        )
+        {
             var now = DateTimeOffset.Now;
             var manager = CertificateManager.Instance;
 
@@ -473,7 +478,8 @@ namespace Microsoft.AspNetCore.DeveloperCertificates.Tools
             if (
                 exportFormat.HasValue()
                 && !Enum.TryParse(exportFormat.Value(), ignoreCase: true, out format)
-            ) {
+            )
+            {
                 reporter.Error($"Unknown key format '{exportFormat.Value()}'.");
                 return InvalidKeyExportFormat;
             }

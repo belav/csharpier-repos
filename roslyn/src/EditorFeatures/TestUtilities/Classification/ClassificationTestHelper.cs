@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Classification
             IEnumerable<FormattedClassification> expectedClassifications,
             string actualText,
             IEnumerable<ClassifiedSpan> actualClassifications
-        ) {
+        )
+        {
             Assert.Equal(expectedText, actualText);
 
             if (expectedClassifications != null)
@@ -71,7 +72,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Classification
             string expectedText,
             IEnumerable<FormattedClassification> expectedClassifications,
             IList<TaggedText> actualContent
-        ) {
+        )
+        {
             VerifyTextAndClassifications(
                 expectedText,
                 expectedClassifications,

@@ -47,7 +47,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             if (
                 query is ShapedQueryExpression shapedQueryExpression
                 && shapedQueryExpression.QueryExpression is SelectExpression selectExpression
-            ) {
+            )
+            {
                 // Cosmos does not have nested select expression so this should be safe.
                 selectExpression.ApplyProjection();
             }

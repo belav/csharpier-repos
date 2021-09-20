@@ -66,7 +66,8 @@ namespace System.Security.Cryptography.Xml
             XmlElement element,
             string localName,
             string namespaceURI
-        ) {
+        )
+        {
             string s = (element.HasAttribute(localName) ? element.GetAttribute(localName) : null);
             if (s == null && element.HasAttribute(localName, namespaceURI))
                 s = element.GetAttribute(localName, namespaceURI);
@@ -102,7 +103,8 @@ namespace System.Security.Cryptography.Xml
                     !attrIsAllowed
                     && expectedAttrNames != null
                     && expectedInd < expectedAttrNames.Length
-                ) {
+                )
+                {
                     attrIsAllowed = attr.Name == expectedAttrNames[expectedInd];
                     expectedInd++;
                 }
@@ -156,7 +158,8 @@ namespace System.Security.Cryptography.Xml
         internal static bool IsNonRedundantNamespaceDecl(
             XmlAttribute a,
             XmlAttribute nearestAncestorWithSamePrefix
-        ) {
+        )
+        {
             if (nearestAncestorWithSamePrefix == null)
                 return !IsEmptyDefaultNamespaceNode(a);
             else
@@ -178,7 +181,8 @@ namespace System.Security.Cryptography.Xml
             string inputBuffer,
             int inputOffset,
             int inputCount
-        ) {
+        )
+        {
             int i,
                 iCount = 0;
             for (i = 0; i < inputCount; i++)
@@ -198,7 +202,8 @@ namespace System.Security.Cryptography.Xml
             StringBuilder sb,
             char oldChar,
             string newString
-        ) {
+        )
+        {
             int i = 0;
             int newStringLength = newString.Length;
             while (i < sb.Length)
@@ -218,7 +223,8 @@ namespace System.Security.Cryptography.Xml
             Stream inputStream,
             XmlResolver xmlResolver,
             string baseUri
-        ) {
+        )
+        {
             XmlReaderSettings settings = GetSecureXmlReaderSettings(xmlResolver);
             XmlReader reader = XmlReader.Create(inputStream, settings, baseUri);
             return reader;
@@ -238,7 +244,8 @@ namespace System.Security.Cryptography.Xml
             XmlDocument document,
             XmlResolver xmlResolver,
             string baseUri
-        ) {
+        )
+        {
             if (document == null)
                 throw new ArgumentNullException(nameof(document));
 
@@ -263,7 +270,8 @@ namespace System.Security.Cryptography.Xml
             XmlElement elem,
             XmlResolver xmlResolver,
             string baseUri
-        ) {
+        )
+        {
             if (elem == null)
                 throw new ArgumentNullException(nameof(elem));
 
@@ -572,7 +580,8 @@ namespace System.Security.Cryptography.Xml
                         ancestorElement.Prefix,
                         ancestorElement.NamespaceURI
                     )
-                ) {
+                )
+                {
                     // Add the namespace attribute to the collection if needed
                     if (
                         !Utils.IsRedundantNamespace(
@@ -580,7 +589,8 @@ namespace System.Security.Cryptography.Xml
                             ancestorElement.Prefix,
                             ancestorElement.NamespaceURI
                         )
-                    ) {
+                    )
+                    {
                         string name = (
                             (ancestorElement.Prefix.Length > 0)
                                 ? "xmlns:" + ancestorElement.Prefix
@@ -619,7 +629,8 @@ namespace System.Security.Cryptography.Xml
                                     attrib.Prefix,
                                     attrib.NamespaceURI
                                 )
-                            ) {
+                            )
+                            {
                                 // Add the namespace attribute to the collection if needed
                                 if (
                                     !Utils.IsRedundantNamespace(
@@ -627,7 +638,8 @@ namespace System.Security.Cryptography.Xml
                                         attrib.Prefix,
                                         attrib.NamespaceURI
                                     )
-                                ) {
+                                )
+                                {
                                     string name = (
                                         (attrib.Prefix.Length > 0)
                                             ? "xmlns:" + attrib.Prefix
@@ -704,7 +716,8 @@ namespace System.Security.Cryptography.Xml
         internal static X509IssuerSerial CreateX509IssuerSerial(
             string issuerName,
             string serialNumber
-        ) {
+        )
+        {
             if (issuerName == null || issuerName.Length == 0)
                 throw new ArgumentException(SR.Arg_EmptyOrNullString, nameof(issuerName));
             if (serialNumber == null || serialNumber.Length == 0)
@@ -716,7 +729,8 @@ namespace System.Security.Cryptography.Xml
         internal static X509Certificate2Collection BuildBagOfCerts(
             KeyInfoX509Data keyInfoX509Data,
             CertUsageType certUsageType
-        ) {
+        )
+        {
             X509Certificate2Collection collection = new X509Certificate2Collection();
             ArrayList decryptionIssuerSerials = (
                 certUsageType == CertUsageType.Decryption ? new ArrayList() : null

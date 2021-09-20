@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateEnumMember
             CancellationToken cancellationToken,
             out SyntaxToken identifierToken,
             out ExpressionSyntax simpleNameOrMemberAccessExpression
-        ) {
+        )
+        {
             identifierToken = identifierName.Identifier;
             if (identifierToken.ValueText != string.Empty && !identifierName.IsVar)
             {
@@ -57,7 +58,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateEnumMember
                     || simpleNameOrMemberAccessExpression.IsParentKind(
                         SyntaxKind.AliasQualifiedName
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 

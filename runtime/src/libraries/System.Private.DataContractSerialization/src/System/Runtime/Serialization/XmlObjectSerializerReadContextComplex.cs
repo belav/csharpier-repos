@@ -41,7 +41,8 @@ namespace System.Runtime.Serialization
             RuntimeTypeHandle declaredTypeHandle,
             string name,
             string ns
-        ) {
+        )
+        {
             if (_mode == SerializationMode.SharedContract)
             {
                 if (_serializationSurrogateProvider == null)
@@ -79,7 +80,8 @@ namespace System.Runtime.Serialization
             Type declaredType,
             string name,
             string ns
-        ) {
+        )
+        {
             if (_mode == SerializationMode.SharedContract)
             {
                 if (_serializationSurrogateProvider == null)
@@ -106,7 +108,8 @@ namespace System.Runtime.Serialization
             DataContract? dataContract,
             string? name,
             string? ns
-        ) {
+        )
+        {
             if (_mode == SerializationMode.SharedContract)
             {
                 if (_serializationSurrogateProvider == null)
@@ -138,7 +141,8 @@ namespace System.Runtime.Serialization
             Type declaredType,
             string? name,
             string? ns
-        ) {
+        )
+        {
             Debug.Assert(attributes != null);
 
             object? retObj = null;
@@ -236,7 +240,8 @@ namespace System.Runtime.Serialization
             DataContract? surrogateDataContract,
             string? name,
             string? ns
-        ) {
+        )
+        {
             Debug.Assert(_serializationSurrogateProvider != null);
 
             DataContract dataContract =
@@ -282,7 +287,8 @@ namespace System.Runtime.Serialization
             string assemblyName,
             string typeName,
             out Assembly assembly
-        ) {
+        )
+        {
             // The method is used only when _mode == SerializationMode.SharedType.
             // _mode is set to SerializationMode.SharedType only when the context is for NetDataContractSerializer.
             throw new PlatformNotSupportedException(
@@ -295,7 +301,8 @@ namespace System.Runtime.Serialization
             string typeName,
             out Assembly assembly,
             out Type type
-        ) {
+        )
+        {
             type = ResolveDataContractTypeInSharedTypeMode(assemblyName, typeName, out assembly);
             if (type != null)
             {
@@ -333,7 +340,8 @@ namespace System.Runtime.Serialization
         internal override void CheckIfTypeSerializable(
             Type memberType,
             bool isMemberTypeSerializable
-        ) {
+        )
+        {
             if (_serializationSurrogateProvider != null)
             {
                 while (memberType.IsArray)

@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         public RedirectResultExecutor(
             ILoggerFactory loggerFactory,
             IUrlHelperFactory urlHelperFactory
-        ) {
+        )
+        {
             if (loggerFactory == null)
             {
                 throw new ArgumentNullException(nameof(loggerFactory));

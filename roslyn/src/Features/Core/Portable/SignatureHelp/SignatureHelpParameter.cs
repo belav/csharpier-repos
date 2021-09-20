@@ -71,7 +71,8 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
             IEnumerable<SymbolDisplayPart>? prefixDisplayParts = null,
             IEnumerable<SymbolDisplayPart>? suffixDisplayParts = null,
             IEnumerable<SymbolDisplayPart>? selectedDisplayParts = null
-        ) {
+        )
+        {
             Name = name ?? string.Empty;
             IsOptional = isOptional;
             DocumentationFactory = documentationFactory ?? s_emptyDocumentationFactory;
@@ -90,7 +91,8 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
 
         public static explicit operator SignatureHelpParameter(
             SignatureHelpSymbolParameter parameter
-        ) {
+        )
+        {
             return new SignatureHelpParameter(
                 parameter.Name,
                 parameter.IsOptional,
@@ -158,15 +160,16 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
             IEnumerable<SymbolDisplayPart>? prefixDisplayParts = null,
             IEnumerable<SymbolDisplayPart>? suffixDisplayParts = null,
             IEnumerable<SymbolDisplayPart>? selectedDisplayParts = null
-        ) : this(
-            name,
-            isOptional,
-            documentationFactory is null ? null : c => documentationFactory(c).ToTaggedText(),
-            displayParts.ToTaggedText(),
-            prefixDisplayParts.ToTaggedText(),
-            suffixDisplayParts.ToTaggedText(),
-            selectedDisplayParts.ToTaggedText()
-        ) { }
+        )
+            : this(
+                name,
+                isOptional,
+                documentationFactory is null ? null : c => documentationFactory(c).ToTaggedText(),
+                displayParts.ToTaggedText(),
+                prefixDisplayParts.ToTaggedText(),
+                suffixDisplayParts.ToTaggedText(),
+                selectedDisplayParts.ToTaggedText()
+            ) { }
 
         public SignatureHelpParameter(
             string name,
@@ -176,7 +179,8 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
             IEnumerable<TaggedText>? prefixDisplayParts = null,
             IEnumerable<TaggedText>? suffixDisplayParts = null,
             IEnumerable<TaggedText>? selectedDisplayParts = null
-        ) {
+        )
+        {
             Name = name ?? string.Empty;
             IsOptional = isOptional;
             DocumentationFactory = documentationFactory ?? s_emptyDocumentationFactory;

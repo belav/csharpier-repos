@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis
                         loadContext,
                         null
                     ) == null
-                ) {
+                )
+                {
                     _loadContext.Resolving += (context, name) =>
                     {
                         Debug.Assert(ReferenceEquals(context, _loadContext));

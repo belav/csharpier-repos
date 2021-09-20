@@ -199,7 +199,8 @@ namespace System.Net.WebSockets
                             HttpKnownHeaderNames.SecWebSocketVersion,
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         version = header.Value;
                         break;
                     }
@@ -222,7 +223,8 @@ namespace System.Net.WebSockets
             Interop.WebSocket.Property[] properties,
             int propertyCount,
             out SafeWebSocketHandle webSocketHandle
-        ) {
+        )
+        {
             Debug.Assert(propertyCount >= 0, "'propertyCount' MUST NOT be negative.");
             Debug.Assert(
                 (properties == null && propertyCount == 0)
@@ -305,7 +307,8 @@ namespace System.Net.WebSockets
             WebSocketBase webSocket,
             BufferType bufferType,
             Interop.WebSocket.Buffer buffer
-        ) {
+        )
+        {
             Debug.Assert(webSocket != null, "'webSocket' MUST NOT be NULL or INVALID.");
             Debug.Assert(
                 webSocket.SessionHandle != null && !webSocket.SessionHandle.IsInvalid,
@@ -335,7 +338,8 @@ namespace System.Net.WebSockets
         internal static void WebSocketSendWithoutBody(
             WebSocketBase webSocket,
             BufferType bufferType
-        ) {
+        )
+        {
             Debug.Assert(webSocket != null, "'webSocket' MUST NOT be NULL or INVALID.");
             Debug.Assert(
                 webSocket.SessionHandle != null && !webSocket.SessionHandle.IsInvalid,
@@ -397,7 +401,8 @@ namespace System.Net.WebSockets
             out Action action,
             out BufferType bufferType,
             out IntPtr actionContext
-        ) {
+        )
+        {
             Debug.Assert(webSocket != null, "'webSocket' MUST NOT be NULL or INVALID.");
             Debug.Assert(
                 webSocket.SessionHandle != null && !webSocket.SessionHandle.IsInvalid,
@@ -450,7 +455,8 @@ namespace System.Net.WebSockets
             WebSocketBase webSocket,
             IntPtr actionContext,
             int bytesTransferred
-        ) {
+        )
+        {
             Debug.Assert(webSocket != null, "'webSocket' MUST NOT be NULL or INVALID.");
             Debug.Assert(
                 webSocket.SessionHandle != null && !webSocket.SessionHandle.IsInvalid,
@@ -520,7 +526,8 @@ namespace System.Net.WebSockets
         private static void MarshalAndVerifyHttpHeader(
             IntPtr httpHeaderPtr,
             ref Interop.WebSocket.HttpHeader httpHeader
-        ) {
+        )
+        {
             Debug.Assert(
                 httpHeaderPtr != IntPtr.Zero,
                 "'currentHttpHeaderPtr' MUST NOT be IntPtr.Zero."
@@ -539,7 +546,8 @@ namespace System.Net.WebSockets
             if (
                 (httpHeader.Name == null && length != 0)
                 || (httpHeader.Name != null && length != httpHeader.Name.Length)
-            ) {
+            )
+            {
                 Debug.Fail("The length of 'httpHeader.Name' MUST MATCH 'length'.");
                 throw new AccessViolationException();
             }
@@ -562,7 +570,8 @@ namespace System.Net.WebSockets
             if (
                 (httpHeader.Value == null && length != 0)
                 || (httpHeader.Value != null && length != httpHeader.Value.Length)
-            ) {
+            )
+            {
                 Debug.Fail("The length of 'httpHeader.Value' MUST MATCH 'length'.");
                 throw new AccessViolationException();
             }
@@ -571,7 +580,8 @@ namespace System.Net.WebSockets
         private static Interop.WebSocket.HttpHeader[] MarshalHttpHeaders(
             IntPtr nativeHeadersPtr,
             int nativeHeaderCount
-        ) {
+        )
+        {
             Debug.Assert(nativeHeaderCount >= 0, "'nativeHeaderCount' MUST NOT be negative.");
             Debug.Assert(
                 nativeHeadersPtr != IntPtr.Zero || nativeHeaderCount == 0,
@@ -637,7 +647,8 @@ namespace System.Net.WebSockets
         private static WebSocketException ConvertObjectDisposedException(
             WebSocketBase webSocket,
             ObjectDisposedException innerException
-        ) {
+        )
+        {
             return new WebSocketException(
                 WebSocketError.InvalidState,
                 SR.Format(

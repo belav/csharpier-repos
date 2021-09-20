@@ -50,7 +50,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             Compilation compilation,
             CaptureIdDispenser? captureIdDispenser,
             ArrayBuilder<BasicBlockBuilder> blocks
-        ) {
+        )
+        {
             Debug.Assert(compilation != null);
             _compilation = compilation;
             _captureIdDispenser = captureIdDispenser ?? new CaptureIdDispenser();
@@ -80,7 +81,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             ControlFlowRegion? enclosing = null,
             CaptureIdDispenser? captureIdDispenser = null,
             in Context context = default
-        ) {
+        )
+        {
             Debug.Assert(body != null);
             Debug.Assert(((Operation)body).OwningSemanticModel != null);
 
@@ -200,7 +202,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 
         private static ImmutableArray<BasicBlock> ToImmutableBlocks(
             ArrayBuilder<BasicBlockBuilder> blockBuilders
-        ) {
+        )
+        {
             var builder = ArrayBuilder<BasicBlock>.GetInstance(blockBuilders.Count);
 
             // Pass 1: Iterate through blocksBuilder to create basic blocks.
@@ -254,7 +257,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 in BasicBlockBuilder.Branch branch,
                 BasicBlockBuilder source,
                 bool isConditionalSuccessor
-            ) {
+            )
+            {
                 return new ControlFlowBranch(
                     source: builder[source.Ordinal],
                     destination: branch.Destination != null
@@ -297,7 +301,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             PooledDictionary<ControlFlowRegion, bool> continueDispatchAfterFinally,
             PooledHashSet<ControlFlowRegion> dispatchedExceptionsFromRegions,
             out bool fellThrough
-        ) {
+        )
+        {
             var visited = BitVector.Empty;
             var toVisit = ArrayBuilder<BasicBlockBuilder>.GetInstance();
 
@@ -329,10 +334,12 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                     if (
                         current.BranchValue.GetConstantValue() is
                         { IsBoolean: true, BooleanValue: bool constant }
-                    ) {
+                    )
+                    {
                         if (
                             constant == (current.ConditionKind == ControlFlowConditionKind.WhenTrue)
-                        ) {
+                        )
+                        {
                             followBranch(current, in current.Conditional);
                             fallThrough = false;
                         }
@@ -352,7 +359,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                         current.Ordinal == lastBlockOrdinal
                         && branch.Kind != ControlFlowBranchSemantics.Throw
                         && branch.Kind != ControlFlowBranchSemantics.Rethrow
-                    ) {
+                    )
+                    {
                         fellThrough = true;
                     }
                 }
@@ -410,7 +418,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                     if (
                         region.Kind == ControlFlowRegionKind.Try
                         && enclosing.Kind == ControlFlowRegionKind.TryAndFinally
-                    ) {
+                    )
+                    {
                         Debug.Assert(enclosing.NestedRegions[0] == region);
                         Debug.Assert(
                             enclosing.NestedRegions[1].Kind == ControlFlowRegionKind.Finally
@@ -569,7 +578,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             ArrayBuilder<BasicBlockBuilder> blocks,
             RegionBuilder root,
             PooledDictionary<BasicBlockBuilder, RegionBuilder> regionMap
-        ) {
+        )
+        {
             bool regionsChanged = true;
 
             while (true)
@@ -589,7 +599,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             RegionBuilder root,
             ArrayBuilder<BasicBlockBuilder> blocks,
             PooledDictionary<BasicBlockBuilder, RegionBuilder> regionMap
-        ) {
+        )
+        {
             return PackRegion(root);
 
             bool PackRegion(RegionBuilder region)
@@ -612,7 +623,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                             && r.Locals.IsEmpty
                             && !r.HasLocalFunctions
                             && !r.HasCaptureIds
-                        ) {
+                        )
+                        {
                             MergeSubRegionAndFree(r, blocks, regionMap);
                             result = true;
                         }
@@ -637,7 +649,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                                 subRegion.Kind == ControlFlowRegionKind.LocalLifetime
                                 && subRegion.FirstBlock == region.FirstBlock
                                 && subRegion.LastBlock == region.LastBlock
-                            ) {
+                            )
+                            {
                                 Debug.Assert(region.Kind != ControlFlowRegionKind.Root);
 
                                 // Transfer all content of the sub-region into the current region
@@ -661,7 +674,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                                     && !subRegion.HasLocalFunctions
                                     && !subRegion.HasRegions
                                     && subRegion.FirstBlock == subRegion.LastBlock
-                                ) {
+                                )
+                                {
                                     Debug.Assert(subRegion.FirstBlock != null);
                                     BasicBlockBuilder block = subRegion.FirstBlock;
 
@@ -704,7 +718,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             ArrayBuilder<BasicBlockBuilder> blocks,
             PooledDictionary<BasicBlockBuilder, RegionBuilder> regionMap,
             bool canHaveEmptyRegion = false
-        ) {
+        )
+        {
             Debug.Assert(subRegion.Kind != ControlFlowRegionKind.Root);
             Debug.Assert(subRegion.Enclosing != null);
             RegionBuilder enclosing = subRegion.Enclosing;
@@ -762,7 +777,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         private static bool PackBlocks(
             ArrayBuilder<BasicBlockBuilder> blocks,
             PooledDictionary<BasicBlockBuilder, RegionBuilder> regionMap
-        ) {
+        )
+        {
             ArrayBuilder<RegionBuilder>? fromCurrent = null;
             ArrayBuilder<RegionBuilder>? fromDestination = null;
             ArrayBuilder<RegionBuilder>? fromPredecessor = null;
@@ -795,7 +811,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                             && predecessor.Kind != BasicBlockKind.Entry
                             && predecessor.FallThrough.Destination == block
                             && regionMap[predecessor] == regionMap[block]
-                        ) {
+                        )
+                        {
                             Debug.Assert(predecessor.BranchValue == null);
                             Debug.Assert(
                                 predecessor.FallThrough.Kind == ControlFlowBranchSemantics.Regular
@@ -865,7 +882,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                                 && next.Kind
                                     == ControlFlowBranchSemantics.StructuredExceptionHandling
                                 && !block.HasPredecessors
-                            ) {
+                            )
+                            {
                                 // Nothing useful is happening in this finally, let's remove it
                                 Debug.Assert(currentRegion.Enclosing != null);
                                 RegionBuilder tryAndFinally = currentRegion.Enclosing;
@@ -883,7 +901,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                                     @try.Locals.IsEmpty
                                     && !@try.HasLocalFunctions
                                     && !@try.HasCaptureIds
-                                ) {
+                                )
+                                {
                                     Debug.Assert(@try.FirstBlock != null);
                                     i = @try.FirstBlock.Ordinal - 1; // restart at the first block of removed .try region
                                     MergeSubRegionAndFree(@try, blocks, regionMap);
@@ -930,7 +949,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                                     || predecessor.FallThrough.Destination != block
                                     || predecessor.Conditional.Destination == block
                                     || regionMap[predecessor] != currentRegion
-                                ) {
+                                )
+                                {
                                     // Do not merge StructuredExceptionHandling into the middle of the filter or finally,
                                     // Do not merge StructuredExceptionHandling into conditional branch
                                     // Do not merge StructuredExceptionHandling into a different region
@@ -981,7 +1001,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                                 if (
                                     !block.HasPredecessors
                                     && next.Kind == ControlFlowBranchSemantics.Return
-                                ) {
+                                )
+                                {
                                     // Let's drop an unreachable compiler generated return that VB optimistically adds at the end of a method body
                                     Debug.Assert(next.Destination != null);
                                     if (
@@ -989,7 +1010,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                                         || !value.IsImplicit
                                         || value.Kind != OperationKind.LocalReference
                                         || !((ILocalReferenceOperation)value).Local.IsFunctionValue
-                                    ) {
+                                    )
+                                    {
                                         continue;
                                     }
                                 }
@@ -1002,7 +1024,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                                         || predecessor.BranchValue != null
                                         || predecessor.Kind == BasicBlockKind.Entry
                                         || regionMap[predecessor] != currentRegion
-                                    ) {
+                                    )
+                                    {
                                         // Do not merge return/throw with expression with more than one predecessor
                                         // Do not merge return/throw into a block with conditional branch
                                         // Do not merge return/throw with expression with an entry block
@@ -1045,7 +1068,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                                             currentRegion,
                                             destinationRegionOpt
                                         )
-                                    ) {
+                                    )
+                                    {
                                         continue;
                                     }
                                 }
@@ -1058,7 +1082,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                                             ref predecessor.FallThrough,
                                             block
                                         )
-                                    ) {
+                                    )
+                                    {
                                         if (value != null)
                                         {
                                             Debug.Assert(predecessor.BranchValue == null);
@@ -1072,7 +1097,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                                             ref predecessor.Conditional,
                                             block
                                         )
-                                    ) {
+                                    )
+                                    {
                                         Debug.Assert(value == null);
                                     }
                                 }
@@ -1123,7 +1149,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                             && predecessor.FallThrough.Destination == block
                             && !predecessor.HasCondition
                             && regionMap[predecessor] == currentRegion
-                        ) {
+                        )
+                        {
                             Debug.Assert(predecessor != block);
                             Debug.Assert(predecessor.BranchValue == null);
 
@@ -1164,7 +1191,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             RegionBuilder? tryGetImplicitEntryRegion(
                 BasicBlockBuilder block,
                 [DisallowNull] RegionBuilder? currentRegion
-            ) {
+            )
+            {
                 do
                 {
                     if (currentRegion.FirstBlock != block)
@@ -1234,7 +1262,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 BasicBlockBuilder predecessor,
                 ref BasicBlockBuilder.Branch predecessorBranch,
                 BasicBlockBuilder successor
-            ) {
+            )
+            {
                 if (predecessorBranch.Destination == successor)
                 {
                     mergeBranch(predecessor, ref predecessorBranch, ref successor.FallThrough);
@@ -1248,7 +1277,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 BasicBlockBuilder predecessor,
                 ref BasicBlockBuilder.Branch predecessorBranch,
                 ref BasicBlockBuilder.Branch successorBranch
-            ) {
+            )
+            {
                 predecessorBranch.Destination = successorBranch.Destination;
                 successorBranch.Destination?.AddPredecessor(predecessor);
                 Debug.Assert(predecessorBranch.Kind == ControlFlowBranchSemantics.Regular);
@@ -1259,7 +1289,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 ArrayBuilder<BasicBlockBuilder> predecessors,
                 RegionBuilder currentRegion,
                 RegionBuilder? destinationRegionOpt
-            ) {
+            )
+            {
                 foreach (BasicBlockBuilder predecessor in predecessors)
                 {
                     RegionBuilder predecessorRegion = regionMap[predecessor];
@@ -1301,14 +1332,16 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                                 fromPredecessor.Count
                                 - lastLeftRegionOnTheWayFromPredecessorToDestination
                             )
-                        ) {
+                        )
+                        {
                             // We have different transitions
                             return false;
                         }
                     }
                     else if (
                         predecessor.Kind == BasicBlockKind.Entry && destinationRegionOpt == null
-                    ) {
+                    )
+                    {
                         // Do not merge throw into an entry block
                         return false;
                     }
@@ -1320,7 +1353,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             void collectAncestorsAndSelf(
                 [DisallowNull] RegionBuilder? from,
                 [NotNull] ref ArrayBuilder<RegionBuilder>? builder
-            ) {
+            )
+            {
                 if (builder == null)
                 {
                     builder = ArrayBuilder<RegionBuilder>.GetInstance();
@@ -1343,12 +1377,14 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             int getIndexOfLastLeftRegion(
                 ArrayBuilder<RegionBuilder> from,
                 ArrayBuilder<RegionBuilder> to
-            ) {
+            )
+            {
                 int mismatch = 0;
 
                 while (
                     mismatch < from.Count && mismatch < to.Count && from[mismatch] == to[mismatch]
-                ) {
+                )
+                {
                     mismatch++;
                 }
 
@@ -1362,7 +1398,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         private static void CheckUnresolvedBranches(
             ArrayBuilder<BasicBlockBuilder> blocks,
             PooledDictionary<ILabelSymbol, BasicBlockBuilder>? labeledBlocks
-        ) {
+        )
+        {
             if (labeledBlocks == null)
             {
                 return;
@@ -1451,7 +1488,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             ,
             bool spillingTheStack = false
 #endif
-        ) {
+        )
+        {
 #if DEBUG
             Debug.Assert(
                 spillingTheStack
@@ -1552,7 +1590,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             BasicBlockBuilder prevBlock,
             BasicBlockBuilder nextBlock,
             ControlFlowBranchSemantics branchKind = ControlFlowBranchSemantics.Regular
-        ) {
+        )
+        {
             Debug.Assert(prevBlock.HasCondition || prevBlock.BranchValue == null);
             Debug.Assert(prevBlock.FallThrough.Destination == null);
             prevBlock.FallThrough.Destination = nextBlock;
@@ -1590,7 +1629,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         private IOperation? FinishVisitingStatement(
             IOperation originalOperation,
             IOperation? result = null
-        ) {
+        )
+        {
             Debug.Assert(
                 ((Operation)originalOperation).OwningSemanticModel != null,
                 "Not an original node."
@@ -1638,7 +1678,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             IOperation? operation,
             ImmutableArray<IOperation> statements,
             int startIndex
-        ) {
+        )
+        {
             switch (operation)
             {
                 case IUsingDeclarationOperation usingDeclarationOperation:
@@ -1676,7 +1717,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         internal override IOperation? VisitWithStatement(
             IWithStatementOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             StartVisitingStatement(operation);
 
             ImplicitInstanceInfo previousInitializedInstance = _currentImplicitInstance;
@@ -1691,7 +1733,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation? VisitConstructorBodyOperation(
             IConstructorBodyOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             StartVisitingStatement(operation);
 
             EnterRegion(
@@ -1712,7 +1755,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation? VisitMethodBodyOperation(
             IMethodBodyOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             StartVisitingStatement(operation);
 
             VisitMethodBodyBaseOperation(operation);
@@ -1752,7 +1796,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation? VisitConditional(
             IConditionalOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             if (operation == _currentStatement)
             {
                 if (operation.WhenFalse == null)
@@ -1832,7 +1877,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 if (
                     operation.WhenTrue is IConversionOperation whenTrueConversion
                     && whenTrueConversion.Operand.Kind == OperationKind.Throw
-                ) {
+                )
+                {
                     IOperation? rewrittenThrow = base.Visit(whenTrueConversion.Operand, null);
                     Debug.Assert(rewrittenThrow!.Kind == OperationKind.None);
                     Debug.Assert(rewrittenThrow.Children.IsEmpty());
@@ -1846,7 +1892,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 else if (
                     operation.WhenFalse is IConversionOperation whenFalseConversion
                     && whenFalseConversion.Operand.Kind == OperationKind.Throw
-                ) {
+                )
+                {
                     result = VisitRequired(operation.WhenTrue);
 
                     UnconditionalBranch(afterIf);
@@ -1910,7 +1957,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             if (
                 result.Kind != OperationKind.FlowCaptureReference
                 || captureId != ((IFlowCaptureReferenceOperation)result).Id.Value
-            ) {
+            )
+            {
                 SpillEvalStack();
                 AddStatement(new FlowCaptureOperation(captureId, syntax, result));
             }
@@ -2075,7 +2123,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                     && operationOpt.Kind != OperationKind.DeclarationExpression
                     && operationOpt.Kind != OperationKind.Discard
                     && operationOpt.Kind != OperationKind.OmittedArgument
-                ) {
+                )
+                {
                     // Here we need to decide what region should own the new capture. Due to the spilling operations occurred before,
                     // we currently might be in a region that is not associated with the stack frame we are in, but it is one of its
                     // directly or indirectly nested regions. The operation that we are about to spill is likely to remove references
@@ -2109,7 +2158,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                                     foreach (
                                         IFlowCaptureReferenceOperation reference in operation.DescendantsAndSelf()
                                             .OfType<IFlowCaptureReferenceOperation>()
-                                    ) {
+                                    )
+                                    {
                                         idsStillOnTheStack.Add(reference.Id);
                                     }
                                 }
@@ -2126,7 +2176,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                                     (id, set) => set.Contains(id),
                                     idsStillOnTheStack
                                 )
-                            ) {
+                            )
+                            {
                                 currentSpillRegion = candidate;
                                 break;
                             }
@@ -2284,7 +2335,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 
         private ImmutableArray<IArgumentOperation> VisitArguments(
             ImmutableArray<IArgumentOperation> arguments
-        ) {
+        )
+        {
             return VisitArray(arguments, UnwrapArgument, RewriteArgumentFromArray);
         }
 
@@ -2297,7 +2349,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             IOperation visitedArgument,
             int index,
             ImmutableArray<IArgumentOperation> args
-        ) {
+        )
+        {
             Debug.Assert(index >= 0 && index < args.Length);
             var originalArgument = (ArgumentOperation)args[index];
             return new ArgumentOperation(
@@ -2315,7 +2368,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitSimpleAssignment(
             ISimpleAssignmentOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             EvalStackFrame frame = PushStackFrame();
             PushOperand(VisitRequired(operation.Target));
             IOperation value = VisitRequired(operation.Value);
@@ -2337,7 +2391,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitCompoundAssignment(
             ICompoundAssignmentOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             EvalStackFrame frame = PushStackFrame();
             var compoundAssignment = (CompoundAssignmentOperation)operation;
             PushOperand(VisitRequired(compoundAssignment.Target));
@@ -2365,7 +2420,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitArrayElementReference(
             IArrayElementReferenceOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             EvalStackFrame frame = PushStackFrame();
             PushOperand(VisitRequired(operation.ArrayReference));
             ImmutableArray<IOperation> visitedIndices = VisitArray(operation.Indices);
@@ -2396,7 +2452,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitBinaryOperator(
             IBinaryOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             if (IsConditional(operation))
             {
                 if (operation.OperatorMethod == null)
@@ -2405,7 +2462,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                         ITypeSymbolHelpers.IsBooleanType(operation.Type)
                         && ITypeSymbolHelpers.IsBooleanType(operation.LeftOperand.Type)
                         && ITypeSymbolHelpers.IsBooleanType(operation.RightOperand.Type)
-                    ) {
+                    )
+                    {
                         // Regular boolean logic
                         return VisitBinaryConditionalOperator(
                             operation,
@@ -2420,7 +2478,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                         && ITypeSymbolHelpers.IsNullableOfBoolean(operation.Type)
                         && ITypeSymbolHelpers.IsNullableOfBoolean(operation.LeftOperand.Type)
                         && ITypeSymbolHelpers.IsNullableOfBoolean(operation.RightOperand.Type)
-                    ) {
+                    )
+                    {
                         // Three-value boolean logic (VB).
                         return VisitNullableBinaryConditionalOperator(
                             operation,
@@ -2431,7 +2490,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                         ITypeSymbolHelpers.IsObjectType(operation.Type)
                         && ITypeSymbolHelpers.IsObjectType(operation.LeftOperand.Type)
                         && ITypeSymbolHelpers.IsObjectType(operation.RightOperand.Type)
-                    ) {
+                    )
+                    {
                         return VisitObjectBinaryConditionalOperator(operation, captureIdForResult);
                     }
                     else if (
@@ -2440,7 +2500,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                             ITypeSymbolHelpers.IsDynamicType(operation.LeftOperand.Type)
                             || ITypeSymbolHelpers.IsDynamicType(operation.RightOperand.Type)
                         )
-                    ) {
+                    )
+                    {
                         return VisitDynamicBinaryConditionalOperator(operation, captureIdForResult);
                     }
                 }
@@ -2476,7 +2537,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitTupleBinaryOperator(
             ITupleBinaryOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             (IOperation visitedLeft, IOperation visitedRight) = VisitPreservingTupleOperations(
                 operation.LeftOperand,
                 operation.RightOperand
@@ -2495,7 +2557,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitUnaryOperator(
             IUnaryOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             if (IsBooleanLogicalNot(operation))
             {
                 return VisitConditionalExpression(
@@ -2551,7 +2614,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             int? captureIdForResult,
             BasicBlockBuilder? fallToTrueOpt,
             BasicBlockBuilder? fallToFalseOpt
-        ) {
+        )
+        {
             // ~(a && b) is equivalent to (~a || ~b)
             if (!CalculateAndOrSense(binOp, sense))
             {
@@ -2584,7 +2648,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         private IOperation VisitNullableBinaryConditionalOperator(
             IBinaryOperation binOp,
             int? captureIdForResult
-        ) {
+        )
+        {
             SpillEvalStack();
 
             IOperation left = binOp.LeftOperand;
@@ -2718,7 +2783,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         private IOperation VisitObjectBinaryConditionalOperator(
             IBinaryOperation binOp,
             int? captureIdForResult
-        ) {
+        )
+        {
             SpillEvalStack();
 
             INamedTypeSymbol booleanType = _compilation.GetSpecialType(SpecialType.System_Boolean);
@@ -2814,7 +2880,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         private IOperation VisitDynamicBinaryConditionalOperator(
             IBinaryOperation binOp,
             int? captureIdForResult
-        ) {
+        )
+        {
             SpillEvalStack();
             Debug.Assert(binOp.Type is not null);
 
@@ -2859,7 +2926,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                             )
                         )
                     )
-                ) {
+                )
+                {
                     condition = new UnaryOperation(
                         isAndAlso ? UnaryOperatorKind.False : UnaryOperatorKind.True,
                         condition,
@@ -2937,7 +3005,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         private IOperation VisitUserDefinedBinaryConditionalOperator(
             IBinaryOperation binOp,
             int? captureIdForResult
-        ) {
+        )
+        {
             SpillEvalStack();
 
             var resultCaptureRegion = CurrentRegionRequired;
@@ -2963,7 +3032,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                     unaryOperatorMethod == null
                         ? isLifted
                         : !ITypeSymbolHelpers.IsNullableType(unaryOperatorMethod.Parameters[0].Type)
-                ) {
+                )
+                {
                     condition = MakeIsNullOperation(condition, booleanType);
                     ConditionalBranch(condition, jumpIfTrue: true, doBitWise);
                     _currentBasicBlock = null;
@@ -2983,14 +3053,16 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             else if (
                 unaryOperatorMethod != null
                 && ITypeSymbolHelpers.IsNullableType(unaryOperatorMethod.Parameters[0].Type)
-            ) {
+            )
+            {
                 condition = MakeInvalidOperation(unaryOperatorMethod.Parameters[0].Type, condition);
             }
 
             if (
                 unaryOperatorMethod != null
                 && ITypeSymbolHelpers.IsBooleanType(unaryOperatorMethod.ReturnType)
-            ) {
+            )
+            {
                 condition = new UnaryOperation(
                     isAndAlso ? UnaryOperatorKind.False : UnaryOperatorKind.True,
                     condition,
@@ -3066,7 +3138,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             int? captureIdForResult,
             BasicBlockBuilder? fallToTrueOpt,
             BasicBlockBuilder? fallToFalseOpt
-        ) {
+        )
+        {
             Debug.Assert(IsBooleanConditionalOperator(condition));
 
             // we generate:
@@ -3146,7 +3219,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             int? captureIdForResult,
             BasicBlockBuilder? fallToTrueOpt,
             BasicBlockBuilder? fallToFalseOpt
-        ) {
+        )
+        {
             Debug.Assert(ITypeSymbolHelpers.IsBooleanType(condition.Type));
 
             IUnaryOperation? lastUnary = null;
@@ -3228,7 +3302,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             IOperation condition,
             [NotNull] ref BasicBlockBuilder? dest,
             bool jumpIfTrue
-        ) {
+        )
+        {
             SpillEvalStack();
 #if DEBUG
             RegionBuilder? current = _currentRegion;
@@ -3246,7 +3321,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             IOperation condition,
             [NotNull] ref BasicBlockBuilder? dest,
             bool jumpIfTrue
-        ) {
+        )
+        {
             oneMoreTime:
             Debug.Assert(_startSpillingAt == _evalStack.Count);
 
@@ -3314,7 +3390,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                         if (
                             ITypeSymbolHelpers.IsBooleanType(conditional.WhenTrue.Type)
                             && ITypeSymbolHelpers.IsBooleanType(conditional.WhenFalse.Type)
-                        ) {
+                        )
+                        {
                             BasicBlockBuilder? whenFalse = null;
                             VisitConditionalBranchCore(
                                 conditional.Condition,
@@ -3403,7 +3480,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             IOperation condition,
             bool jumpIfTrue,
             BasicBlockBuilder destination
-        ) {
+        )
+        {
             BasicBlockBuilder previous = CurrentBasicBlock;
             BasicBlockBuilder.Branch branch = RegularBranch(destination);
             Debug.Assert(previous.BranchValue == null);
@@ -3426,7 +3504,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         private IOperation NullCheckAndConvertCoalesceValue(
             ICoalesceOperation operation,
             BasicBlockBuilder whenNull
-        ) {
+        )
+        {
             Debug.Assert(_evalStack.Last().frameOpt != null);
             Debug.Assert(_startSpillingAt >= _evalStack.Count - 1);
 
@@ -3455,7 +3534,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                         !testConversion.IsIdentity
                         || !ITypeSymbolHelpers.IsNullableType(operation.Type)
                     )
-                ) {
+                )
+                {
                     possiblyUnwrappedValue = TryCallNullableMember(
                         capturedValue,
                         SpecialMember.System_Nullable_T_GetValueOrDefault
@@ -3500,7 +3580,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitCoalesce(
             ICoalesceOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             SpillEvalStack();
 
             var conversion = operation.WhenNull as IConversionOperation;
@@ -3568,7 +3649,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation? VisitCoalesceAssignment(
             ICoalesceAssignmentOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             SpillEvalStack();
 
             // If we're in a statement context, we elide the capture of the result of the assignment, as it will
@@ -3611,7 +3693,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 && ((INamedTypeSymbol)operation.Target.Type!).TypeArguments[0].Equals(
                     operation.Type
                 )
-            ) {
+            )
+            {
                 nullableValueTypeReturn();
             }
             else
@@ -3832,7 +3915,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             ITypeSymbol? type,
             IOperation child1,
             IOperation child2
-        ) {
+        )
+        {
             return MakeInvalidOperation(
                 syntax,
                 type,
@@ -3844,7 +3928,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             SyntaxNode syntax,
             ITypeSymbol? type,
             ImmutableArray<IOperation> children
-        ) {
+        )
+        {
             return new InvalidOperation(
                 children,
                 semanticModel: null,
@@ -3866,7 +3951,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         private static IsNullOperation MakeIsNullOperation(
             IOperation operand,
             ITypeSymbol booleanType
-        ) {
+        )
+        {
             Debug.Assert(ITypeSymbolHelpers.IsBooleanType(booleanType));
             ConstantValue? constantValue = operand.GetConstantValue() is { IsNull: var isNull }
                 ? ConstantValue.Create(isNull)
@@ -3928,7 +4014,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation? VisitConditionalAccess(
             IConditionalAccessOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             SpillEvalStack();
 
             RegionBuilder resultCaptureRegion = CurrentRegionRequired;
@@ -3964,7 +4051,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                     !isConditionalAccessInstancePresentInChildren(
                         currentConditionalAccess.WhenNotNull
                     )
-                ) {
+                )
+                {
                     // https://github.com/dotnet/roslyn/issues/27564: It looks like there is a bug in IOperation tree around XmlMemberAccessExpressionSyntax,
                     //                      a None operation is created and all children are dropped.
                     //                      See Microsoft.CodeAnalysis.VisualBasic.ExpressionEvaluator.UnitTests.ExpressionCompilerTests.ConditionalAccessExpressionType
@@ -4015,7 +4103,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 if (
                     ITypeSymbolHelpers.IsNullableType(operation.Type)
                     && !ITypeSymbolHelpers.IsNullableType(currentConditionalAccess.WhenNotNull.Type)
-                ) {
+                )
+                {
                     IOperation access = VisitRequired(currentConditionalAccess.WhenNotNull);
                     AddStatement(
                         new FlowCaptureOperation(
@@ -4093,7 +4182,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 while (
                     currentOperation.ChildOperations.GetEnumerator() is var enumerator
                     && enumerator.MoveNext()
-                ) {
+                )
+                {
                     if (enumerator.Current is IConditionalAccessInstanceOperation)
                     {
                         return true;
@@ -4118,7 +4208,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                     if (
                         child is IConditionalAccessInstanceOperation
                         || isConditionalAccessInstancePresentInChildren(child)
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }
@@ -4130,7 +4221,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitConditionalAccessInstance(
             IConditionalAccessInstanceOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             Debug.Assert(
                 !_currentConditionalAccessTracker.IsDefault
                     && _currentConditionalAccessTracker.Operations.Count > 0
@@ -4175,7 +4267,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation? VisitExpressionStatement(
             IExpressionStatementOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             StartVisitingStatement(operation);
 
             IOperation? underlying = Visit(operation.Operation);
@@ -4207,7 +4300,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation? VisitWhileLoop(
             IWhileLoopOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             StartVisitingStatement(operation);
             var locals = new RegionBuilder(
                 ControlFlowRegionKind.LocalLifetime,
@@ -4463,7 +4557,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         private void AddExceptionStore(
             ITypeSymbol exceptionType,
             IOperation? exceptionDeclarationOrExpression
-        ) {
+        )
+        {
             if (exceptionDeclarationOrExpression != null)
             {
                 IOperation exceptionTarget;
@@ -4508,7 +4603,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitCatchClause(
             ICatchClauseOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
 
@@ -4557,7 +4653,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation? VisitLabeled(
             ILabeledOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             StartVisitingStatement(operation);
             VisitLabel(operation.Label);
             VisitStatement(operation.Operation);
@@ -4680,7 +4777,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             ImmutableArray<IArgumentOperation> disposeArguments,
             ImmutableArray<ILocalSymbol> locals,
             bool isAsynchronous
-        ) {
+        )
+        {
             var usingRegion = new RegionBuilder(
                 ControlFlowRegionKind.LocalLifetime,
                 locals: locals
@@ -4738,7 +4836,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 
             void processQueue(
                 ArrayBuilder<(IVariableDeclarationOperation, IVariableDeclaratorOperation)>? resourceQueueOpt
-            ) {
+            )
+            {
                 if (resourceQueueOpt == null || resourceQueueOpt.Count == 0)
                 {
                     VisitStatement(body);
@@ -4774,7 +4873,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             void processResource(
                 IOperation resource,
                 ArrayBuilder<(IVariableDeclarationOperation, IVariableDeclaratorOperation)>? resourceQueueOpt
-            ) {
+            )
+            {
                 // When ResourceType is a non-nullable value type that implements IDisposable, the expansion is:
                 //
                 // {
@@ -4869,7 +4969,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             IMethodSymbol? disposeMethod,
             ImmutableArray<IArgumentOperation> disposeArguments,
             bool isAsynchronous
-        ) {
+        )
+        {
             Debug.Assert(CurrentRegionRequired.Kind == ControlFlowRegionKind.TryAndFinally);
 
             var endOfFinally = new BasicBlockBuilder(BasicBlockKind.Block);
@@ -4977,7 +5078,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             IOperation operand,
             ITypeSymbol iDisposable,
             bool isTryCast = false
-        ) {
+        )
+        {
             Debug.Assert(
                 iDisposable.SpecialType == SpecialType.System_IDisposable
                     || iDisposable.Equals(
@@ -5247,7 +5349,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation? VisitForEachLoop(
             IForEachLoopOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             StartVisitingStatement(operation);
 
             var enumeratorCaptureRegion = new RegionBuilder(ControlFlowRegionKind.LocalLifetime);
@@ -5260,7 +5363,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             if (
                 !operation.Locals.IsEmpty
                 && operation.LoopControlVariable.Kind == OperationKind.VariableDeclarator
-            ) {
+            )
+            {
                 // VB has rather interesting scoping rules for control variable.
                 // It is in scope in the collection expression. However, it is considered to be
                 // "a different" version of that local. Effectively when the code is emitted,
@@ -5376,7 +5480,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 IConvertibleConversion? conversionOpt,
                 IOperation operand,
                 ITypeSymbol? targetType
-            ) {
+            )
+            {
                 if (conversionOpt?.ToCommonConversion().IsIdentity == false)
                 {
                     operand = new ConversionOperation(
@@ -5558,7 +5663,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 IMethodSymbol method,
                 IOperation instance,
                 ImmutableArray<IArgumentOperation> arguments
-            ) {
+            )
+            {
                 return makeInvocation(
                     instance.Syntax,
                     method,
@@ -5572,7 +5678,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 IMethodSymbol method,
                 IOperation? instanceOpt,
                 ImmutableArray<IArgumentOperation> arguments
-            ) {
+            )
+            {
                 Debug.Assert(method.IsStatic == (instanceOpt == null));
                 return new InvocationOperation(
                     method,
@@ -5588,7 +5695,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 
             ImmutableArray<IArgumentOperation> makeArguments(
                 ImmutableArray<IArgumentOperation> arguments
-            ) {
+            )
+            {
                 if (arguments != null)
                 {
                     return VisitArguments(arguments);
@@ -5601,7 +5709,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation? VisitForToLoop(
             IForToLoopOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             StartVisitingStatement(operation);
 
             (ILocalSymbol loopObject, ForToLoopOperationUserDefinedInfo userDefinedInfo) =
@@ -5841,7 +5950,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                         !(operation.StepValue.GetConstantValue() is { IsBad: false })
                         && !ITypeSymbolHelpers.IsSignedIntegralType(stepEnumUnderlyingTypeOrSelf)
                         && !ITypeSymbolHelpers.IsUnsignedIntegralType(stepEnumUnderlyingTypeOrSelf)
-                    ) {
+                    )
+                    {
                         IOperation? stepValueIsNull = null;
 
                         if (ITypeSymbolHelpers.IsNullableType(stepValue.Type))
@@ -6081,7 +6191,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                     if (
                         comparisonKind == BinaryOperatorKind.None
                         && ITypeSymbolHelpers.IsSignedIntegralType(stepEnumUnderlyingTypeOrSelf)
-                    ) {
+                    )
+                    {
                         comparisonKind = BinaryOperatorKind.LessThanOrEqual;
                         PushOperand(negateIfStepNegative(PopOperand()));
                         limitReference = negateIfStepNegative(limitReference);
@@ -6509,7 +6620,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         private static FlowCaptureReferenceOperation GetCaptureReference(
             int id,
             IOperation underlying
-        ) {
+        )
+        {
             return new FlowCaptureReferenceOperation(
                 id,
                 underlying.Syntax,
@@ -6521,7 +6633,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         internal override IOperation VisitAggregateQuery(
             IAggregateQueryOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             SpillEvalStack();
 
             IOperation? previousAggregationGroup = _currentAggregationGroup;
@@ -6617,7 +6730,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 ICaseClauseOperation caseClause,
                 BasicBlockBuilder body,
                 [DisallowNull] BasicBlockBuilder? nextCase
-            ) {
+            )
+            {
                 IOperation condition;
                 BasicBlockBuilder labeled = GetLabeledOrNewBlock(caseClause.Label);
                 LinkBlocks(labeled, body);
@@ -6766,42 +6880,48 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitSwitchCase(
             ISwitchCaseOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
 
         public override IOperation VisitSingleValueCaseClause(
             ISingleValueCaseClauseOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
 
         public override IOperation VisitDefaultCaseClause(
             IDefaultCaseClauseOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
 
         public override IOperation VisitRelationalCaseClause(
             IRelationalCaseClauseOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
 
         public override IOperation VisitRangeCaseClause(
             IRangeCaseClauseOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
 
         public override IOperation VisitPatternCaseClause(
             IPatternCaseClauseOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
 
@@ -6821,7 +6941,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation? VisitForLoop(
             IForLoopOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             StartVisitingStatement(operation);
 
             // for (initializer; condition; increment)
@@ -6851,7 +6972,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             if (
                 initialization.Length == 1
                 && initialization[0].Kind == OperationKind.VariableDeclarationGroup
-            ) {
+            )
+            {
                 HandleVariableDeclarations(
                     (VariableDeclarationGroupOperation)initialization.Single()
                 );
@@ -6912,7 +7034,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation? VisitVariableDeclarationGroup(
             IVariableDeclarationGroupOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             // Anything that has a declaration group (such as for loops) needs to handle them directly itself,
             // this should only be encountered by the visitor for declaration statements.
             StartVisitingStatement(operation);
@@ -6942,7 +7065,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         private void HandleVariableDeclarator(
             IVariableDeclarationOperation declaration,
             IVariableDeclaratorOperation declarator
-        ) {
+        )
+        {
             if (declarator.Initializer == null && declaration.Initializer == null)
             {
                 return;
@@ -7041,7 +7165,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitVariableDeclaration(
             IVariableDeclarationOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             // All variable declarators should be handled by VisitVariableDeclarationGroup.
             throw ExceptionUtilities.Unreachable;
         }
@@ -7049,7 +7174,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitVariableDeclarator(
             IVariableDeclaratorOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             // All variable declarators should be handled by VisitVariableDeclaration.
             throw ExceptionUtilities.Unreachable;
         }
@@ -7057,7 +7183,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitVariableInitializer(
             IVariableInitializerOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             // All variable initializers should be removed from the tree by VisitVariableDeclaration.
             throw ExceptionUtilities.Unreachable;
         }
@@ -7065,14 +7192,16 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitFlowCapture(
             IFlowCaptureOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
 
         public override IOperation VisitFlowCaptureReference(
             IFlowCaptureReferenceOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
 
@@ -7084,14 +7213,16 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitCaughtException(
             ICaughtExceptionOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
 
         public override IOperation VisitInvocation(
             IInvocationOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             EvalStackFrame frame = PushStackFrame();
             IOperation? instance = operation.TargetMethod.IsStatic ? null : operation.Instance;
             (IOperation? visitedInstance, ImmutableArray<IArgumentOperation> visitedArguments) =
@@ -7112,7 +7243,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         private (IOperation? visitedInstance, ImmutableArray<IArgumentOperation> visitedArguments) VisitInstanceWithArguments(
             IOperation? instance,
             ImmutableArray<IArgumentOperation> arguments
-        ) {
+        )
+        {
             if (instance != null)
             {
                 PushOperand(VisitRequired(instance));
@@ -7127,7 +7259,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         internal override IOperation VisitNoPiaObjectCreation(
             INoPiaObjectCreationOperation operation,
             int? argument
-        ) {
+        )
+        {
             EvalStackFrame frame = PushStackFrame();
             // Initializer is removed from the tree and turned into a series of statements that assign to the created instance
             IOperation initializedInstance = new NoPiaObjectCreationOperation(
@@ -7146,7 +7279,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitObjectCreation(
             IObjectCreationOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             EvalStackFrame frame = PushStackFrame();
             EvalStackFrame argumentsFrame = PushStackFrame();
             ImmutableArray<IArgumentOperation> visitedArgs = VisitArguments(operation.Arguments);
@@ -7172,7 +7306,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitTypeParameterObjectCreation(
             ITypeParameterObjectCreationOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             EvalStackFrame frame = PushStackFrame();
             var initializedInstance = new TypeParameterObjectCreationOperation(
                 initializer: null,
@@ -7190,7 +7325,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitDynamicObjectCreation(
             IDynamicObjectCreationOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             EvalStackFrame frame = PushStackFrame();
             EvalStackFrame argumentsFrame = PushStackFrame();
             ImmutableArray<IOperation> visitedArguments = VisitArray(operation.Arguments);
@@ -7217,7 +7353,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         private IOperation HandleObjectOrCollectionInitializer(
             IObjectOrCollectionInitializerOperation? initializer,
             IOperation objectCreation
-        ) {
+        )
+        {
             // If the initializer is null, nothing to spill. Just return the original instance.
             if (initializer == null || initializer.Initializers.IsEmpty)
             {
@@ -7236,7 +7373,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             void visitInitializer(
                 IObjectOrCollectionInitializerOperation initializerOperation,
                 IOperation initializedInstance
-            ) {
+            )
+            {
                 ImplicitInstanceInfo previousInitializedInstance = _currentImplicitInstance;
                 _currentImplicitInstance = new ImplicitInstanceInfo(initializedInstance);
 
@@ -7542,7 +7680,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitObjectOrCollectionInitializer(
             IObjectOrCollectionInitializerOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             Debug.Fail("This code path should not be reachable.");
             return MakeInvalidOperation(
                 operation.Syntax,
@@ -7554,7 +7693,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitMemberInitializer(
             IMemberInitializerOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             Debug.Fail("This code path should not be reachable.");
             return MakeInvalidOperation(
                 operation.Syntax,
@@ -7566,7 +7706,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitAnonymousObjectCreation(
             IAnonymousObjectCreationOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             if (operation.Initializers.IsEmpty)
             {
                 return new AnonymousObjectCreationOperation(
@@ -7657,7 +7798,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             IOperation visitAndCaptureInitializer(
                 IPropertySymbol initializedProperty,
                 IOperation initializer
-            ) {
+            )
+            {
                 PushOperand(VisitRequired(initializer));
                 SpillEvalStack();
                 IOperation captured = PeekOperand(); // Keep it on the stack so that we know it is still used.
@@ -7676,7 +7818,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation? VisitLocalFunction(
             ILocalFunctionOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             StartVisitingStatement(operation);
 
             RegionBuilder owner = CurrentRegionRequired;
@@ -7701,7 +7844,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitAnonymousFunction(
             IAnonymousFunctionOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             _haveAnonymousFunction = true;
             return new FlowAnonymousFunctionOperation(
                 GetCurrentContext(),
@@ -7713,14 +7857,16 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitFlowAnonymousFunction(
             IFlowAnonymousFunctionOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
 
         public override IOperation VisitArrayCreation(
             IArrayCreationOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             // We have couple of options on how to rewrite an array creation with an initializer:
             //       1) Retain the original tree shape so the visited IArrayCreationOperation still has an IArrayInitializerOperation child node.
             //       2) Lower the IArrayCreationOperation so it always has a null initializer, followed by explicit assignments
@@ -7753,7 +7899,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitArrayInitializer(
             IArrayInitializerOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             EvalStackFrame frame = PushStackFrame();
             visitAndPushArrayInitializerValues(operation);
             return PopStackFrame(frame, popAndAssembleArrayInitializerValues(operation));
@@ -7778,7 +7925,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 
             IArrayInitializerOperation popAndAssembleArrayInitializerValues(
                 IArrayInitializerOperation initializer
-            ) {
+            )
+            {
                 var builder = ArrayBuilder<IOperation>.GetInstance(
                     initializer.ElementValues.Length
                 );
@@ -7814,7 +7962,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitInstanceReference(
             IInstanceReferenceOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             if (operation.ReferenceKind == InstanceReferenceKind.ImplicitReceiver)
             {
                 // When we're in an object or collection initializer, we need to replace the instance reference with a reference to the object being initialized
@@ -7851,7 +8000,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitDynamicInvocation(
             IDynamicInvocationOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             EvalStackFrame frame = PushStackFrame();
 
             if (operation.Operation.Kind == OperationKind.DynamicMemberReference)
@@ -7907,7 +8057,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitDynamicIndexerAccess(
             IDynamicIndexerAccessOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             PushOperand(VisitRequired(operation.Operation));
 
             ImmutableArray<IOperation> rewrittenArguments = VisitArray(operation.Arguments);
@@ -7928,7 +8079,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitDynamicMemberReference(
             IDynamicMemberReferenceOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             return new DynamicMemberReferenceOperation(
                 Visit(operation.Instance),
                 operation.MemberName,
@@ -7944,7 +8096,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitDeconstructionAssignment(
             IDeconstructionAssignmentOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             (IOperation visitedTarget, IOperation visitedValue) = VisitPreservingTupleOperations(
                 operation.Target,
                 operation.Value
@@ -8012,7 +8165,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitDeclarationExpression(
             IDeclarationExpressionOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             return new DeclarationExpressionOperation(
                 VisitPreservingTupleOperations(operation.Expression),
                 semanticModel: null,
@@ -8032,7 +8186,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         private (IOperation visitedLeft, IOperation visitedRight) VisitPreservingTupleOperations(
             IOperation left,
             IOperation right
-        ) {
+        )
+        {
             Debug.Assert(left != null);
             Debug.Assert(right != null);
 
@@ -8056,7 +8211,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         internal override IOperation VisitNoneOperation(
             IOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             if (_currentStatement == operation)
             {
                 return VisitNoneOperationStatement(operation);
@@ -8099,7 +8255,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitInterpolatedString(
             IInterpolatedStringOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             // We visit and rewrite the interpolation parts in two phases:
             //  1. Visit all the non-literal parts of the interpolation and push them onto the eval stack.
             //  2. Traverse the parts in reverse order, popping the non-literal values from the eval stack and visiting the literal values.
@@ -8188,14 +8345,16 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitInterpolatedStringText(
             IInterpolatedStringTextOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
 
         public override IOperation VisitInterpolation(
             IInterpolationOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
 
@@ -8214,7 +8373,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitLiteral(
             ILiteralOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             return new LiteralOperation(
                 semanticModel: null,
                 operation.Syntax,
@@ -8227,7 +8387,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitLocalReference(
             ILocalReferenceOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             return new LocalReferenceOperation(
                 operation.Local,
                 operation.IsDeclaration,
@@ -8242,7 +8403,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitParameterReference(
             IParameterReferenceOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             return new ParameterReferenceOperation(
                 operation.Parameter,
                 semanticModel: null,
@@ -8255,7 +8417,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitFieldReference(
             IFieldReferenceOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             IOperation? visitedInstance = operation.Field.IsStatic
                 ? null
                 : Visit(operation.Instance);
@@ -8274,7 +8437,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitMethodReference(
             IMethodReferenceOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             IOperation? visitedInstance = operation.Method.IsStatic
                 ? null
                 : Visit(operation.Instance);
@@ -8292,21 +8456,24 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitPropertyReference(
             IPropertyReferenceOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             // Check if this is an anonymous type property reference with an implicit receiver within an anonymous object initializer.
             if (
                 operation.Instance is IInstanceReferenceOperation instanceReference
                 && instanceReference.ReferenceKind == InstanceReferenceKind.ImplicitReceiver
                 && operation.Property.ContainingType.IsAnonymousType
                 && operation.Property.ContainingType == _currentImplicitInstance.AnonymousType
-            ) {
+            )
+            {
                 Debug.Assert(_currentImplicitInstance.AnonymousTypePropertyValues is not null);
                 if (
                     _currentImplicitInstance.AnonymousTypePropertyValues.TryGetValue(
                         operation.Property,
                         out IOperation? captured
                     )
-                ) {
+                )
+                {
                     return captured is IFlowCaptureReferenceOperation reference
                       ? GetCaptureReference(reference.Id.Value, operation)
                       : OperationCloner.CloneOperation(captured);
@@ -8340,7 +8507,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitEventReference(
             IEventReferenceOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             IOperation? visitedInstance = operation.Event.IsStatic
                 ? null
                 : Visit(operation.Instance);
@@ -8368,7 +8536,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitParenthesized(
             IParenthesizedOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             return new ParenthesizedOperation(
                 VisitRequired(operation.Operand),
                 semanticModel: null,
@@ -8423,7 +8592,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation? VisitParameterInitializer(
             IParameterInitializerOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             StartVisitingStatement(operation);
 
             var parameterRef = new ParameterReferenceOperation(
@@ -8440,7 +8610,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation? VisitFieldInitializer(
             IFieldInitializerOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             StartVisitingStatement(operation);
 
             foreach (IFieldSymbol fieldSymbol in operation.InitializedFields)
@@ -8473,7 +8644,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation? VisitPropertyInitializer(
             IPropertyInitializerOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             StartVisitingStatement(operation);
 
             foreach (IPropertySymbol propertySymbol in operation.InitializedProperties)
@@ -8543,7 +8715,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         private void VisitInitializer(
             IOperation rewrittenTarget,
             ISymbolInitializerOperation initializer
-        ) {
+        )
+        {
             EnterRegion(
                 new RegionBuilder(ControlFlowRegionKind.LocalLifetime, locals: initializer.Locals)
             );
@@ -8568,7 +8741,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitEventAssignment(
             IEventAssignmentOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             EvalStackFrame frame = PushStackFrame();
             IOperation visitedEventReference,
                 visitedHandler;
@@ -8644,7 +8818,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitRaiseEvent(
             IRaiseEventOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             StartVisitingStatement(operation);
 
             EvalStackFrame frame = PushStackFrame();
@@ -8685,7 +8860,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitAddressOf(
             IAddressOfOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             return new AddressOfOperation(
                 VisitRequired(operation.Reference),
                 semanticModel: null,
@@ -8698,7 +8874,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitIncrementOrDecrement(
             IIncrementOrDecrementOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             return new IncrementOrDecrementOperation(
                 operation.IsPostfix,
                 operation.IsLifted,
@@ -8716,7 +8893,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitDiscardOperation(
             IDiscardOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             return new DiscardOperation(
                 operation.DiscardSymbol,
                 semanticModel: null,
@@ -8729,7 +8907,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitDiscardPattern(
             IDiscardPatternOperation pat,
             int? captureIdForResult
-        ) {
+        )
+        {
             return new DiscardPatternOperation(
                 pat.InputType,
                 pat.NarrowedType,
@@ -8742,7 +8921,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitOmittedArgument(
             IOmittedArgumentOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             return new OmittedArgumentOperation(
                 semanticModel: null,
                 operation.Syntax,
@@ -8754,7 +8934,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         internal override IOperation VisitPlaceholder(
             IPlaceholderOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             switch (operation.PlaceholderKind)
             {
                 case PlaceholderKind.SwitchOperationExpression:
@@ -8798,7 +8979,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitConversion(
             IConversionOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             return new ConversionOperation(
                 VisitRequired(operation.Operand),
                 ((ConversionOperation)operation).ConversionConvertible,
@@ -8815,7 +8997,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitDefaultValue(
             IDefaultValueOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             return new DefaultValueOperation(
                 semanticModel: null,
                 operation.Syntax,
@@ -8828,7 +9011,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitIsPattern(
             IIsPatternOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             EvalStackFrame frame = PushStackFrame();
             PushOperand(VisitRequired(operation.Value));
             var visitedPattern = (IPatternOperation)VisitRequired(operation.Pattern);
@@ -8847,14 +9031,16 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitInvalid(
             IInvalidOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             var children = ArrayBuilder<IOperation>.GetInstance();
             children.AddRange(((InvalidOperation)operation).Children);
 
             if (
                 children.Count != 0
                 && children.Last().Kind == OperationKind.ObjectOrCollectionInitializer
-            ) {
+            )
+            {
                 // We are dealing with erroneous object creation. All children, but the last one are arguments for the constructor,
                 // but overload resolution failed.
                 SpillEvalStack();
@@ -8986,7 +9172,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitTranslatedQuery(
             ITranslatedQueryOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             return new TranslatedQueryOperation(
                 VisitRequired(operation.Operation),
                 semanticModel: null,
@@ -8999,7 +9186,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitConstantPattern(
             IConstantPatternOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             return new ConstantPatternOperation(
                 VisitRequired(operation.Value),
                 operation.InputType,
@@ -9013,7 +9201,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitRelationalPattern(
             IRelationalPatternOperation operation,
             int? argument
-        ) {
+        )
+        {
             return new RelationalPatternOperation(
                 operatorKind: operation.OperatorKind,
                 value: VisitRequired(operation.Value),
@@ -9028,7 +9217,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitBinaryPattern(
             IBinaryPatternOperation operation,
             int? argument
-        ) {
+        )
+        {
             return new BinaryPatternOperation(
                 operatorKind: operation.OperatorKind,
                 leftPattern: (IPatternOperation)VisitRequired(operation.LeftPattern),
@@ -9044,7 +9234,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitNegatedPattern(
             INegatedPatternOperation operation,
             int? argument
-        ) {
+        )
+        {
             return new NegatedPatternOperation(
                 pattern: (IPatternOperation)VisitRequired(operation.Pattern),
                 inputType: operation.InputType,
@@ -9070,7 +9261,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitDeclarationPattern(
             IDeclarationPatternOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             return new DeclarationPatternOperation(
                 operation.MatchedType,
                 operation.MatchesNull,
@@ -9086,7 +9278,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitRecursivePattern(
             IRecursivePatternOperation operation,
             int? argument
-        ) {
+        )
+        {
             return new RecursivePatternOperation(
                 operation.MatchedType,
                 operation.DeconstructSymbol,
@@ -9110,7 +9303,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitPropertySubpattern(
             IPropertySubpatternOperation operation,
             int? argument
-        ) {
+        )
+        {
             return new PropertySubpatternOperation(
                 VisitRequired(operation.Member),
                 (IPatternOperation)VisitRequired(operation.Pattern),
@@ -9123,7 +9317,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitDelegateCreation(
             IDelegateCreationOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             return new DelegateCreationOperation(
                 VisitRequired(operation.Target),
                 semanticModel: null,
@@ -9163,7 +9358,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitSwitchExpression(
             ISwitchExpressionOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             // expression switch { pat1 when g1 => e1, pat2 when g2 => e2 }
             //
             // becomes
@@ -9282,7 +9478,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         private void VisitUsingVariableDeclarationOperation(
             IUsingDeclarationOperation operation,
             ReadOnlySpan<IOperation> statements
-        ) {
+        )
+        {
             IOperation? saveCurrentStatement = _currentStatement;
             _currentStatement = operation;
             StartVisitingStatement(operation);
@@ -9386,14 +9583,16 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override IOperation VisitArgument(
             IArgumentOperation operation,
             int? captureIdForResult
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
 
         public override IOperation VisitUsingDeclaration(
             IUsingDeclarationOperation operation,
             int? argument
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
 

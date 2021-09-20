@@ -128,7 +128,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             bool createCategory = true,
             bool createFeaturedProductCategory = true,
             bool createFeaturedProduct = true
-        ) {
+        )
+        {
             var builder = InMemoryTestHelpers.Instance.CreateConventionBuilder();
             var model = builder.Model;
 

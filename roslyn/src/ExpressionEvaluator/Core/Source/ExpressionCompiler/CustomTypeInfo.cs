@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         internal static DkmClrCustomTypeInfo? Create(
             ReadOnlyCollection<byte>? dynamicFlags,
             ReadOnlyCollection<string?>? tupleElementNames
-        ) {
+        )
+        {
             var payload = Encode(dynamicFlags, tupleElementNames);
             return (payload == null) ? null : DkmClrCustomTypeInfo.Create(PayloadTypeId, payload);
         }
@@ -30,12 +31,14 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         /// </summary>
         internal static DkmClrCustomTypeInfo? WithNoTupleElementNames(
             this DkmClrCustomTypeInfo typeInfo
-        ) {
+        )
+        {
             if (
                 typeInfo == null
                 || typeInfo.Payload == null
                 || typeInfo.PayloadTypeId != PayloadTypeId
-            ) {
+            )
+            {
                 return typeInfo;
             }
 
@@ -82,7 +85,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         internal static string? GetTupleElementNameIfAny(
             ReadOnlyCollection<string> tupleElementNames,
             int index
-        ) {
+        )
+        {
             return tupleElementNames != null && index < tupleElementNames.Count
               ? tupleElementNames[index]
               : null;
@@ -94,7 +98,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         internal static ReadOnlyCollection<byte>? Encode(
             ReadOnlyCollection<byte>? dynamicFlags,
             ReadOnlyCollection<string?>? tupleElementNames
-        ) {
+        )
+        {
             if (dynamicFlags == null && tupleElementNames == null)
             {
                 return null;
@@ -132,7 +137,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             ReadOnlyCollection<byte> payload,
             out ReadOnlyCollection<byte>? dynamicFlags,
             out ReadOnlyCollection<string?>? tupleElementNames
-        ) {
+        )
+        {
             dynamicFlags = null;
             tupleElementNames = null;
 
@@ -165,7 +171,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         private static ReadOnlyCollection<string?> DecodeNames(
             ReadOnlyCollection<byte> bytes,
             int start
-        ) {
+        )
+        {
             int length = bytes.Count - start;
             var array = CopyBytes(bytes, start, length);
             var str = Encoding.UTF8.GetString(array, 0, length);

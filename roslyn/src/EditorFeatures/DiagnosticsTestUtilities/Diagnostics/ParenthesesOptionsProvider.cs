@@ -109,7 +109,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
 
         private OptionsCollection GetSingleRequireOption(
             PerLanguageOption2<CodeStyleOption2<ParenthesesPreference>> option
-        ) {
+        )
+        {
             var optionsCollection = new OptionsCollection(_language);
             foreach (var o in GetAllParenthesesOptions())
             {

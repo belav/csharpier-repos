@@ -29,7 +29,8 @@ namespace System.Net.Http
         protected internal sealed override HttpResponseMessage Send(
             HttpRequestMessage request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (request == null)
             {
                 throw new ArgumentNullException(nameof(request), SR.net_http_handler_norequest);
@@ -45,7 +46,8 @@ namespace System.Net.Http
         protected internal sealed override Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (request == null)
             {
                 throw new ArgumentNullException(nameof(request), SR.net_http_handler_norequest);
@@ -138,7 +140,8 @@ namespace System.Net.Http
             CancellationToken cancellationToken,
             TaskCompletionSource<HttpResponseMessage> tcs,
             OperationCanceledException e
-        ) {
+        )
+        {
             // Check if the exception was due to a cancellation. If so, check if the OperationCanceledException is
             // related to our CancellationToken. If it was indeed caused due to our cancellation token being
             // canceled, set the Task as canceled. Set it to faulted otherwise, since the OperationCanceledException
@@ -146,7 +149,8 @@ namespace System.Net.Http
             if (
                 cancellationToken.IsCancellationRequested
                 && (e.CancellationToken == cancellationToken)
-            ) {
+            )
+            {
                 tcs.TrySetCanceled(cancellationToken);
             }
             else

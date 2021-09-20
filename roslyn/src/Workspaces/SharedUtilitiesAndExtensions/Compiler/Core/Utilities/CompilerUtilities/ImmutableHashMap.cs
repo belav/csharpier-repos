@@ -71,7 +71,8 @@ namespace Roslyn.Collections.Immutable
         internal ImmutableHashMap(
             IEqualityComparer<TKey>? comparer = null,
             IEqualityComparer<TValue>? valueComparer = null
-        ) {
+        )
+        {
             _keyComparer = comparer ?? EqualityComparer<TKey>.Default;
             _valueComparer = valueComparer ?? EqualityComparer<TValue>.Default;
         }
@@ -114,7 +115,8 @@ namespace Roslyn.Collections.Immutable
         [Pure]
         public ImmutableHashMap<TKey, TValue> AddRange(
             IEnumerable<KeyValuePair<TKey, TValue>> pairs
-        ) {
+        )
+        {
             Requires.NotNull(pairs, "pairs");
             Contract.Ensures(Contract.Result<ImmutableHashMap<TKey, TValue>>() != null);
 
@@ -149,7 +151,8 @@ namespace Roslyn.Collections.Immutable
         [Pure]
         public ImmutableHashMap<TKey, TValue> SetItems(
             IEnumerable<KeyValuePair<TKey, TValue>> items
-        ) {
+        )
+        {
             Requires.NotNull(items, "items");
             Contract.Ensures(Contract.Result<ImmutableDictionary<TKey, TValue>>() != null);
 
@@ -209,7 +212,8 @@ namespace Roslyn.Collections.Immutable
         public ImmutableHashMap<TKey, TValue> WithComparers(
             IEqualityComparer<TKey> keyComparer,
             IEqualityComparer<TValue> valueComparer
-        ) {
+        )
+        {
             if (keyComparer == null)
             {
                 keyComparer = EqualityComparer<TKey>.Default;
@@ -516,7 +520,8 @@ namespace Roslyn.Collections.Immutable
         private static bool TryCastToImmutableMap(
             IEnumerable<KeyValuePair<TKey, TValue>> sequence,
             [NotNullWhen(true)] out ImmutableHashMap<TKey, TValue>? other
-        ) {
+        )
+        {
             other = sequence as ImmutableHashMap<TKey, TValue>;
             if (other != null)
             {
@@ -554,7 +559,8 @@ namespace Roslyn.Collections.Immutable
             IEnumerable<KeyValuePair<TKey, TValue>> pairs,
             bool overwriteOnCollision,
             bool avoidToHashMap
-        ) {
+        )
+        {
             RoslynDebug.AssertNotNull(pairs);
             Contract.Ensures(Contract.Result<ImmutableHashMap<TKey, TValue>>() != null);
 
@@ -669,7 +675,8 @@ namespace Roslyn.Collections.Immutable
                 IEqualityComparer<TKey> comparer,
                 IEqualityComparer<TValue> valueComparer,
                 bool overwriteExistingValue
-            ) {
+            )
+            {
                 if (this.Hash == bucket.Hash)
                 {
                     if (comparer.Equals(this.Key, bucket.Key))
@@ -750,7 +757,8 @@ namespace Roslyn.Collections.Immutable
                 IEqualityComparer<TKey> comparer,
                 IEqualityComparer<TValue> valueComparer,
                 bool overwriteExistingValue
-            ) {
+            )
+            {
                 if (this.Hash == bucket.Hash)
                 {
                     var pos = this.Find(bucket.Key, comparer);
@@ -874,7 +882,8 @@ namespace Roslyn.Collections.Immutable
                 int suggestedHashRoll,
                 ValueOrListBucket bucket1,
                 ValueOrListBucket bucket2
-            ) {
+            )
+            {
                 RoslynDebug.AssertNotNull(bucket1);
                 RoslynDebug.AssertNotNull(bucket2);
                 Debug.Assert(bucket1.Hash != bucket2.Hash);
@@ -911,7 +920,8 @@ namespace Roslyn.Collections.Immutable
                 IEqualityComparer<TKey> keyComparer,
                 IEqualityComparer<TValue> valueComparer,
                 bool overwriteExistingValue
-            ) {
+            )
+            {
                 var logicalSlot = ComputeLogicalSlot(bucket.Hash);
                 if (IsInUse(logicalSlot))
                 {

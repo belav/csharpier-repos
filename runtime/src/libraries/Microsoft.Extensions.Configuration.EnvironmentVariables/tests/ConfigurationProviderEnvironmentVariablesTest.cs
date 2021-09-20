@@ -13,7 +13,8 @@ namespace Microsoft.Extensions.Configuration.EnvironmentVariables.Test
     {
         protected override (IConfigurationProvider Provider, Action Initializer) LoadThroughProvider(
             TestSection testConfig
-        ) {
+        )
+        {
             var values = new List<KeyValuePair<string, string>>();
             SectionToValues(testConfig, "", values);
 

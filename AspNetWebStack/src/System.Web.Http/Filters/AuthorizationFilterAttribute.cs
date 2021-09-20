@@ -25,7 +25,8 @@ namespace System.Web.Http.Filters
         public virtual Task OnAuthorizationAsync(
             HttpActionContext actionContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 OnAuthorization(actionContext);
@@ -42,7 +43,8 @@ namespace System.Web.Http.Filters
             HttpActionContext actionContext,
             CancellationToken cancellationToken,
             Func<Task<HttpResponseMessage>> continuation
-        ) {
+        )
+        {
             if (actionContext == null)
             {
                 throw Error.ArgumentNull("actionContext");
@@ -63,7 +65,8 @@ namespace System.Web.Http.Filters
             HttpActionContext actionContext,
             CancellationToken cancellationToken,
             Func<Task<HttpResponseMessage>> continuation
-        ) {
+        )
+        {
             await OnAuthorizationAsync(actionContext, cancellationToken);
 
             if (actionContext.Response != null)

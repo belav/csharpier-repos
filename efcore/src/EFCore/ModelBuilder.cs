@@ -52,7 +52,8 @@ namespace Microsoft.EntityFrameworkCore
             ConventionSet conventions,
             ModelDependencies? modelDependencies,
             bool _
-        ) {
+        )
+        {
             Check.NotNull(conventions, nameof(conventions));
 
             _builder = new Model(conventions, modelDependencies).Builder;
@@ -360,7 +361,8 @@ namespace Microsoft.EntityFrameworkCore
             string name,
             Type type,
             Action<EntityTypeBuilder> buildAction
-        ) {
+        )
+        {
             Check.NotEmpty(name, nameof(name));
             Check.NotNull(type, nameof(type));
             Check.NotNull(buildAction, nameof(buildAction));
@@ -446,7 +448,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual ModelBuilder ApplyConfigurationsFromAssembly(
             Assembly assembly,
             Func<Type, bool>? predicate = null
-        ) {
+        )
+        {
             var applyEntityConfigurationMethod = typeof(ModelBuilder).GetMethods()
                 .Single(
                     e =>
@@ -463,7 +466,8 @@ namespace Microsoft.EntityFrameworkCore
                 if (
                     type.GetConstructor(Type.EmptyTypes) == null
                     || (!predicate?.Invoke(type) ?? false)
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -523,7 +527,8 @@ namespace Microsoft.EntityFrameworkCore
         /// </returns>
         public virtual ModelBuilder HasChangeTrackingStrategy(
             ChangeTrackingStrategy changeTrackingStrategy
-        ) {
+        )
+        {
             Builder.HasChangeTrackingStrategy(changeTrackingStrategy, ConfigurationSource.Explicit);
 
             return this;

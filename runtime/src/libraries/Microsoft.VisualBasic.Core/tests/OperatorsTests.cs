@@ -212,7 +212,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             object left,
             object right,
             object expected
-        ) {
+        )
+        {
             Assert.Equal(expected, Operators.AddObject(left, right));
 
             if (expected is string expectedString)
@@ -324,7 +325,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void AddObject_MismatchingObjects_ThrowsAmibguousMatchException(
             object left,
             object right
-        ) {
+        )
+        {
             Assert.Throws<AmbiguousMatchException>(() => Operators.AddObject(left, right));
         }
 
@@ -901,7 +903,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void AndObject_MismatchingObjects_ThrowsAmibguousMatchException(
             object left,
             object right
-        ) {
+        )
+        {
             Assert.Throws<AmbiguousMatchException>(() => Operators.AndObject(left, right));
         }
 
@@ -1227,7 +1230,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             object left,
             object right,
             object expected
-        ) {
+        )
+        {
             Assert.Equal(expected, Operators.ConcatenateObject(left, right));
         }
 
@@ -1244,7 +1248,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void ConcatenateObject_InvalidObjects_ThrowsInvalidCastException(
             object left,
             object right
-        ) {
+        )
+        {
             Assert.Throws<InvalidCastException>(() => Operators.ConcatenateObject(left, right));
             Assert.Throws<InvalidCastException>(() => Operators.ConcatenateObject(right, left));
         }
@@ -1262,7 +1267,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void ConcatenateObject_MismatchingObjects_ThrowsAmibguousMatchException(
             object left,
             object right
-        ) {
+        )
+        {
             Assert.Throws<AmbiguousMatchException>(() => Operators.ConcatenateObject(left, right));
         }
 
@@ -1568,7 +1574,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void DivideObject_InvalidObjects_ThrowsInvalidCastException(
             object left,
             object right
-        ) {
+        )
+        {
             Assert.Throws<InvalidCastException>(() => Operators.DivideObject(left, right));
             Assert.Throws<InvalidCastException>(() => Operators.DivideObject(right, left));
         }
@@ -1586,7 +1593,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void DivideObject_MismatchingObjects_ThrowsAmibguousMatchException(
             object left,
             object right
-        ) {
+        )
+        {
             Assert.Throws<AmbiguousMatchException>(() => Operators.DivideObject(left, right));
         }
 
@@ -1818,7 +1826,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             object left,
             object right,
             object expected
-        ) {
+        )
+        {
             Assert.Equal(expected, Operators.ExponentObject(left, right));
         }
 
@@ -1834,7 +1843,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void ExponentObject_InvalidObjects_ThrowsInvalidCastException(
             object left,
             object right
-        ) {
+        )
+        {
             Assert.Throws<InvalidCastException>(() => Operators.ExponentObject(left, right));
             Assert.Throws<InvalidCastException>(() => Operators.ExponentObject(right, left));
         }
@@ -1852,7 +1862,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void ExponentObject_MismatchingObjects_ThrowsAmibguousMatchException(
             object left,
             object right
-        ) {
+        )
+        {
             Assert.Throws<AmbiguousMatchException>(() => Operators.ExponentObject(left, right));
         }
 
@@ -2110,7 +2121,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             object left,
             object right,
             object expected
-        ) {
+        )
+        {
             Assert.Equal(expected, Operators.IntDivideObject(left, right));
         }
 
@@ -2165,7 +2177,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void IntDivideObject_ResultOverflows_ThrowsOverflowException(
             object left,
             object right
-        ) {
+        )
+        {
             Assert.Throws<OverflowException>(() => Operators.IntDivideObject(left, right));
         }
 
@@ -2181,7 +2194,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void IntDivideObject_InvalidObjects_ThrowsInvalidCastException(
             object left,
             object right
-        ) {
+        )
+        {
             Assert.Throws<InvalidCastException>(() => Operators.IntDivideObject(left, right));
             Assert.Throws<InvalidCastException>(() => Operators.IntDivideObject(right, left));
         }
@@ -2199,7 +2213,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void IntDivideObject_MismatchingObjects_ThrowsAmibguousMatchException(
             object left,
             object right
-        ) {
+        )
+        {
             Assert.Throws<AmbiguousMatchException>(() => Operators.IntDivideObject(left, right));
         }
 
@@ -2469,7 +2484,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             object left,
             object right,
             object expected
-        ) {
+        )
+        {
             Assert.Equal(expected, Operators.LeftShiftObject(left, right));
         }
 
@@ -2485,7 +2501,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void LeftShiftObject_InvalidObjects_ThrowsInvalidCastException(
             object left,
             object right
-        ) {
+        )
+        {
             Assert.Throws<InvalidCastException>(() => Operators.LeftShiftObject(left, right));
             Assert.Throws<InvalidCastException>(() => Operators.LeftShiftObject(right, left));
         }
@@ -2503,7 +2520,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void LeftShiftObject_MismatchingObjects_ThrowsAmibguousMatchException(
             object left,
             object right
-        ) {
+        )
+        {
             Assert.Throws<AmbiguousMatchException>(() => Operators.LeftShiftObject(left, right));
         }
 
@@ -2886,7 +2904,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             object left,
             object right,
             object expected
-        ) {
+        )
+        {
             Assert.Equal(expected, Operators.MultiplyObject(left, right));
 
             if (expected is string expectedString)
@@ -2912,7 +2931,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void MultiplyObject_InvalidObjects_ThrowsInvalidCastException(
             object left,
             object right
-        ) {
+        )
+        {
             Assert.Throws<InvalidCastException>(() => Operators.MultiplyObject(left, right));
             Assert.Throws<InvalidCastException>(() => Operators.MultiplyObject(right, left));
         }
@@ -2930,7 +2950,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void MultiplyObject_MismatchingObjects_ThrowsAmibguousMatchException(
             object left,
             object right
-        ) {
+        )
+        {
             Assert.Throws<AmbiguousMatchException>(() => Operators.MultiplyObject(left, right));
         }
 
@@ -3573,7 +3594,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void ModObject_DivideByZeroObject_ThrowsDivideByZeroException(
             object left,
             object right
-        ) {
+        )
+        {
             Assert.Throws<DivideByZeroException>(() => Operators.ModObject(left, right));
         }
 
@@ -3612,7 +3634,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void ModObject_MismatchingObjects_ThrowsAmibguousMatchException(
             object left,
             object right
-        ) {
+        )
+        {
             Assert.Throws<AmbiguousMatchException>(() => Operators.ModObject(left, right));
         }
 
@@ -4436,7 +4459,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void OrObject_MismatchingObjects_ThrowsAmibguousMatchException(
             object left,
             object right
-        ) {
+        )
+        {
             Assert.Throws<AmbiguousMatchException>(() => Operators.OrObject(left, right));
         }
 
@@ -4784,7 +4808,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             object left,
             object right,
             object expected
-        ) {
+        )
+        {
             Assert.Equal(expected, Operators.RightShiftObject(left, right));
         }
 
@@ -4800,7 +4825,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void RightShiftObject_InvalidObjects_ThrowsInvalidCastException(
             object left,
             object right
-        ) {
+        )
+        {
             Assert.Throws<InvalidCastException>(() => Operators.RightShiftObject(left, right));
             Assert.Throws<InvalidCastException>(() => Operators.RightShiftObject(right, left));
         }
@@ -4818,7 +4844,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void RightShiftObject_MismatchingObjects_ThrowsAmibguousMatchException(
             object left,
             object right
-        ) {
+        )
+        {
             Assert.Throws<AmbiguousMatchException>(() => Operators.RightShiftObject(left, right));
         }
 
@@ -5161,7 +5188,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             object left,
             object right,
             object expected
-        ) {
+        )
+        {
             Assert.Equal(expected, Operators.SubtractObject(left, right));
         }
 
@@ -5177,7 +5205,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void SubtractObject_InvalidObjects_ThrowsInvalidCastException(
             object left,
             object right
-        ) {
+        )
+        {
             Assert.Throws<InvalidCastException>(() => Operators.SubtractObject(left, right));
             Assert.Throws<InvalidCastException>(() => Operators.SubtractObject(right, left));
         }
@@ -5195,7 +5224,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void SubtractObject_MismatchingObjects_ThrowsAmibguousMatchException(
             object left,
             object right
-        ) {
+        )
+        {
             Assert.Throws<AmbiguousMatchException>(() => Operators.SubtractObject(left, right));
         }
 
@@ -5774,7 +5804,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void XorObject_MismatchingObjects_ThrowsAmibguousMatchException(
             object left,
             object right
-        ) {
+        )
+        {
             Assert.Throws<AmbiguousMatchException>(() => Operators.XorObject(left, right));
         }
 

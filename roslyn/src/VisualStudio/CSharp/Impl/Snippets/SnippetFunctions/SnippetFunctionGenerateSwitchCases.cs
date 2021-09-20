@@ -28,12 +28,13 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets.SnippetFunctio
             ITextBuffer subjectBuffer,
             string caseGenerationLocationField,
             string switchExpressionField
-        ) : base(
-            snippetExpansionClient,
-            subjectBuffer,
-            caseGenerationLocationField,
-            switchExpressionField
-        ) { }
+        )
+            : base(
+                snippetExpansionClient,
+                subjectBuffer,
+                caseGenerationLocationField,
+                switchExpressionField
+            ) { }
 
         protected override string CaseFormat
         {
@@ -57,7 +58,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets.SnippetFunctio
         protected override bool TryGetEnumTypeSymbol(
             CancellationToken cancellationToken,
             out ITypeSymbol typeSymbol
-        ) {
+        )
+        {
             typeSymbol = null;
             if (!TryGetDocument(out var document))
             {
@@ -70,7 +72,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets.SnippetFunctio
                     SwitchExpressionField,
                     surfaceBufferFieldSpan
                 ) != VSConstants.S_OK
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -79,7 +82,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets.SnippetFunctio
                     surfaceBufferFieldSpan[0],
                     out var subjectBufferFieldSpan
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -112,7 +116,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets.SnippetFunctio
             int endPosition,
             CancellationToken cancellationToken,
             out string simplifiedTypeName
-        ) {
+        )
+        {
             simplifiedTypeName = string.Empty;
             var typeAnnotation = new SyntaxAnnotation();
 

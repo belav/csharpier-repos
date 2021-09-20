@@ -27,16 +27,17 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 SemanticDocument document,
                 SyntaxAnnotation firstTokenAnnotation,
                 SyntaxAnnotation lastTokenAnnotation
-            ) : base(
-                status,
-                originalSpan,
-                finalSpan,
-                options,
-                selectionInExpression,
-                document,
-                firstTokenAnnotation,
-                lastTokenAnnotation
-            ) { }
+            )
+                : base(
+                    status,
+                    originalSpan,
+                    finalSpan,
+                    options,
+                    selectionInExpression,
+                    document,
+                    firstTokenAnnotation,
+                    lastTokenAnnotation
+                ) { }
 
             public override bool ContainingScopeHasAsyncKeyword()
             {

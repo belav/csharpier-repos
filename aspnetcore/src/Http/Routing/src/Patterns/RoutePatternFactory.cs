@@ -64,7 +64,8 @@ namespace Microsoft.AspNetCore.Routing.Patterns
             string pattern,
             object? defaults,
             object? parameterPolicies
-        ) {
+        )
+        {
             if (pattern == null)
             {
                 throw new ArgumentNullException(nameof(pattern));
@@ -105,7 +106,8 @@ namespace Microsoft.AspNetCore.Routing.Patterns
             object? defaults,
             object? parameterPolicies,
             object? requiredValues
-        ) {
+        )
+        {
             if (pattern == null)
             {
                 throw new ArgumentNullException(nameof(pattern));
@@ -145,7 +147,8 @@ namespace Microsoft.AspNetCore.Routing.Patterns
         public static RoutePattern Pattern(
             string? rawText,
             IEnumerable<RoutePatternPathSegment> segments
-        ) {
+        )
+        {
             if (segments == null)
             {
                 throw new ArgumentNullException(nameof(segments));
@@ -175,7 +178,8 @@ namespace Microsoft.AspNetCore.Routing.Patterns
             object? defaults,
             object? parameterPolicies,
             IEnumerable<RoutePatternPathSegment> segments
-        ) {
+        )
+        {
             if (segments == null)
             {
                 throw new ArgumentNullException(nameof(segments));
@@ -213,7 +217,8 @@ namespace Microsoft.AspNetCore.Routing.Patterns
             object? defaults,
             object? parameterPolicies,
             IEnumerable<RoutePatternPathSegment> segments
-        ) {
+        )
+        {
             if (segments == null)
             {
                 throw new ArgumentNullException(nameof(segments));
@@ -252,7 +257,8 @@ namespace Microsoft.AspNetCore.Routing.Patterns
         public static RoutePattern Pattern(
             string rawText,
             params RoutePatternPathSegment[] segments
-        ) {
+        )
+        {
             if (segments == null)
             {
                 throw new ArgumentNullException(nameof(segments));
@@ -282,7 +288,8 @@ namespace Microsoft.AspNetCore.Routing.Patterns
             object? defaults,
             object? parameterPolicies,
             params RoutePatternPathSegment[] segments
-        ) {
+        )
+        {
             if (segments == null)
             {
                 throw new ArgumentNullException(nameof(segments));
@@ -320,7 +327,8 @@ namespace Microsoft.AspNetCore.Routing.Patterns
             object? defaults,
             object? parameterPolicies,
             params RoutePatternPathSegment[] segments
-        ) {
+        )
+        {
             if (segments == null)
             {
                 throw new ArgumentNullException(nameof(segments));
@@ -341,7 +349,8 @@ namespace Microsoft.AspNetCore.Routing.Patterns
             RouteValueDictionary? parameterPolicies,
             RouteValueDictionary? requiredValues,
             IEnumerable<RoutePatternPathSegment> segments
-        ) {
+        )
+        {
             // We want to merge the segment data with the 'out of line' defaults and parameter policies.
             //
             // This means that for parameters that have 'out of line' defaults we will modify
@@ -458,7 +467,8 @@ namespace Microsoft.AspNetCore.Routing.Patterns
                                     parameters[i].Name,
                                     StringComparison.OrdinalIgnoreCase
                                 )
-                            ) {
+                            )
+                            {
                                 found = true;
                                 break;
                             }
@@ -471,7 +481,8 @@ namespace Microsoft.AspNetCore.Routing.Patterns
                         && updatedDefaults != null
                         && updatedDefaults.TryGetValue(kvp.Key, out var defaultValue)
                         && RouteValueEqualityComparer.Default.Equals(kvp.Value, defaultValue)
-                    ) {
+                    )
+                    {
                         found = true;
                     }
 
@@ -543,7 +554,8 @@ namespace Microsoft.AspNetCore.Routing.Patterns
                 if (
                     updatedDefaults != null
                     && updatedDefaults.TryGetValue(parameter.Name, out var newDefault)
-                ) {
+                )
+                {
                     if (parameter.Default != null && !Equals(newDefault, parameter.Default))
                     {
                         var message =
@@ -584,7 +596,8 @@ namespace Microsoft.AspNetCore.Routing.Patterns
                         )
                     )
                     && parameter.ParameterPolicies.Count > 0
-                ) {
+                )
+                {
                     if (updatedParameterPolicies == null)
                     {
                         updatedParameterPolicies = new Dictionary<
@@ -608,7 +621,8 @@ namespace Microsoft.AspNetCore.Routing.Patterns
                     Equals(parameter.Default, @default)
                     && parameter.ParameterPolicies.Count == 0
                     && (parameterConstraints?.Count ?? 0) == 0
-                ) {
+                )
+                {
                     // Part has not changed
                     return part;
                 }
@@ -776,7 +790,8 @@ namespace Microsoft.AspNetCore.Routing.Patterns
             string parameterName,
             object? @default,
             RoutePatternParameterKind parameterKind
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(parameterName))
             {
                 throw new ArgumentException(Resources.Argument_NullOrEmpty, nameof(parameterName));
@@ -819,7 +834,8 @@ namespace Microsoft.AspNetCore.Routing.Patterns
             object? @default,
             RoutePatternParameterKind parameterKind,
             IEnumerable<RoutePatternParameterPolicyReference> parameterPolicies
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(parameterName))
             {
                 throw new ArgumentException(Resources.Argument_NullOrEmpty, nameof(parameterName));
@@ -867,7 +883,8 @@ namespace Microsoft.AspNetCore.Routing.Patterns
             object? @default,
             RoutePatternParameterKind parameterKind,
             params RoutePatternParameterPolicyReference[] parameterPolicies
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(parameterName))
             {
                 throw new ArgumentException(Resources.Argument_NullOrEmpty, nameof(parameterName));
@@ -906,7 +923,8 @@ namespace Microsoft.AspNetCore.Routing.Patterns
             object? @default,
             RoutePatternParameterKind parameterKind,
             RoutePatternParameterPolicyReference[] parameterPolicies
-        ) {
+        )
+        {
             return ParameterPartCore(
                 parameterName,
                 @default,
@@ -922,7 +940,8 @@ namespace Microsoft.AspNetCore.Routing.Patterns
             RoutePatternParameterKind parameterKind,
             RoutePatternParameterPolicyReference[] parameterPolicies,
             bool encodeSlashes
-        ) {
+        )
+        {
             return new RoutePatternParameterPart(
                 parameterName,
                 @default,
@@ -1006,7 +1025,8 @@ namespace Microsoft.AspNetCore.Routing.Patterns
         /// <returns>The <see cref="RoutePatternParameterPolicyReference"/>.</returns>
         public static RoutePatternParameterPolicyReference ParameterPolicy(
             IParameterPolicy parameterPolicy
-        ) {
+        )
+        {
             if (parameterPolicy == null)
             {
                 throw new ArgumentNullException(nameof(parameterPolicy));
@@ -1037,13 +1057,15 @@ namespace Microsoft.AspNetCore.Routing.Patterns
 
         private static RoutePatternParameterPolicyReference ParameterPolicyCore(
             string parameterPolicy
-        ) {
+        )
+        {
             return new RoutePatternParameterPolicyReference(parameterPolicy);
         }
 
         private static RoutePatternParameterPolicyReference ParameterPolicyCore(
             IParameterPolicy parameterPolicy
-        ) {
+        )
+        {
             return new RoutePatternParameterPolicyReference(parameterPolicy);
         }
 

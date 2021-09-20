@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Serialization
             CompilationOptions options,
             ObjectWriter writer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             WriteCompilationOptionsTo(options, writer, cancellationToken);
 
             var csharpOptions = (CSharpCompilationOptions)options;
@@ -46,7 +47,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Serialization
         public override CompilationOptions ReadCompilationOptionsFrom(
             ObjectReader reader,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ReadCompilationOptionsFrom(
                 reader,
                 out var outputKind,
@@ -114,7 +116,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Serialization
         public override ParseOptions ReadParseOptionsFrom(
             ObjectReader reader,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ReadParseOptionsFrom(
                 reader,
                 out var kind,

@@ -72,7 +72,8 @@ namespace Microsoft.CodeAnalysis
             bool isSubmission,
             SemanticModelProvider? semanticModelProvider,
             AsyncQueue<CompilationEvent>? eventQueue
-        ) {
+        )
+        {
             RoslynDebug.Assert(!references.IsDefault);
             RoslynDebug.Assert(features != null);
 
@@ -89,7 +90,8 @@ namespace Microsoft.CodeAnalysis
 
         protected static IReadOnlyDictionary<string, string> SyntaxTreeCommonFeatures(
             IEnumerable<SyntaxTree> trees
-        ) {
+        )
+        {
             IReadOnlyDictionary<string, string>? set = null;
 
             foreach (var tree in trees)
@@ -137,7 +139,8 @@ namespace Microsoft.CodeAnalysis
             Compilation? previousScriptCompilation,
             Type? returnType,
             ref Type? globalsType
-        ) {
+        )
+        {
             if (globalsType != null && !IsValidHostObjectType(globalsType))
             {
                 throw new ArgumentException(
@@ -172,7 +175,8 @@ namespace Microsoft.CodeAnalysis
                 if (
                     previousScriptCompilation.GetDiagnostics()
                         .Any(d => d.Severity == DiagnosticSeverity.Error)
-                ) {
+                )
+                {
                     throw new InvalidOperationException(
                         CodeAnalysisResources.PreviousSubmissionHasErrors
                     );
@@ -194,7 +198,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 options.OutputKind.IsValid()
                 && options.OutputKind != OutputKind.DynamicallyLinkedLibrary
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     CodeAnalysisResources.InvalidOutputKindForSubmission,
                     nameof(options)
@@ -207,7 +212,8 @@ namespace Microsoft.CodeAnalysis
                 || options.DelaySign != null
                 || !options.CryptoPublicKey.IsEmpty
                 || (options.DelaySign == true && options.PublicSign)
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     CodeAnalysisResources.InvalidCompilationOptions,
                     nameof(options)
@@ -283,7 +289,8 @@ namespace Microsoft.CodeAnalysis
             INamespaceOrTypeSymbol? container,
             string name,
             int arity
-        ) {
+        )
+        {
             if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));
@@ -832,7 +839,8 @@ namespace Microsoft.CodeAnalysis
         public Compilation ReplaceReference(
             MetadataReference oldReference,
             MetadataReference? newReference
-        ) {
+        )
+        {
             if (oldReference == null)
             {
                 throw new ArgumentNullException(nameof(oldReference));
@@ -1041,7 +1049,8 @@ namespace Microsoft.CodeAnalysis
 
             foreach (
                 INamedTypeSymbol candidate in container.GetTypeMembers(parts[parts.Length - 1])
-            ) {
+            )
+            {
                 if (candidate.IsScriptClass)
                 {
                     return candidate;
@@ -1069,7 +1078,8 @@ namespace Microsoft.CodeAnalysis
             ITypeSymbol elementType,
             int rank = 1,
             NullableAnnotation elementNullableAnnotation = NullableAnnotation.None
-        ) {
+        )
+        {
             return CommonCreateArrayTypeSymbol(elementType, rank, elementNullableAnnotation);
         }
 
@@ -1123,7 +1133,8 @@ namespace Microsoft.CodeAnalysis
             ImmutableArray<RefKind> parameterRefKinds,
             SignatureCallingConvention callingConvention = SignatureCallingConvention.Default,
             ImmutableArray<INamedTypeSymbol> callingConventionTypes = default
-        ) {
+        )
+        {
             return CommonCreateFunctionPointerTypeSymbol(
                 returnType,
                 returnRefKind,
@@ -1194,7 +1205,8 @@ namespace Microsoft.CodeAnalysis
             ImmutableArray<string?> elementNames = default,
             ImmutableArray<Location?> elementLocations = default,
             ImmutableArray<NullableAnnotation> elementNullableAnnotations = default
-        ) {
+        )
+        {
             if (elementTypes.IsDefault)
             {
                 throw new ArgumentNullException(nameof(elementTypes));
@@ -1243,7 +1255,8 @@ namespace Microsoft.CodeAnalysis
             ImmutableArray<ITypeSymbol> elementTypes,
             ImmutableArray<string?> elementNames,
             ImmutableArray<Location?> elementLocations
-        ) {
+        )
+        {
             return CreateTupleTypeSymbol(
                 elementTypes,
                 elementNames,
@@ -1255,7 +1268,8 @@ namespace Microsoft.CodeAnalysis
         protected static void CheckTupleElementNullableAnnotations(
             int cardinality,
             ImmutableArray<NullableAnnotation> elementNullableAnnotations
-        ) {
+        )
+        {
             if (!elementNullableAnnotations.IsDefault)
             {
                 if (elementNullableAnnotations.Length != cardinality)
@@ -1275,7 +1289,8 @@ namespace Microsoft.CodeAnalysis
         protected static ImmutableArray<string?> CheckTupleElementNames(
             int cardinality,
             ImmutableArray<string?> elementNames
-        ) {
+        )
+        {
             if (!elementNames.IsDefault)
             {
                 if (elementNames.Length != cardinality)
@@ -1309,7 +1324,8 @@ namespace Microsoft.CodeAnalysis
         protected static void CheckTupleElementLocations(
             int cardinality,
             ImmutableArray<Location?> elementLocations
-        ) {
+        )
+        {
             if (!elementLocations.IsDefault)
             {
                 if (elementLocations.Length != cardinality)
@@ -1340,7 +1356,8 @@ namespace Microsoft.CodeAnalysis
             ImmutableArray<string?> elementNames = default,
             ImmutableArray<Location?> elementLocations = default,
             ImmutableArray<NullableAnnotation> elementNullableAnnotations = default
-        ) {
+        )
+        {
             if ((object)underlyingType == null)
             {
                 throw new ArgumentNullException(nameof(underlyingType));
@@ -1364,7 +1381,8 @@ namespace Microsoft.CodeAnalysis
             INamedTypeSymbol underlyingType,
             ImmutableArray<string?> elementNames,
             ImmutableArray<Location?> elementLocations
-        ) {
+        )
+        {
             return CreateTupleTypeSymbol(
                 underlyingType,
                 elementNames,
@@ -1392,7 +1410,8 @@ namespace Microsoft.CodeAnalysis
             ImmutableArray<bool> memberIsReadOnly = default,
             ImmutableArray<Location> memberLocations = default,
             ImmutableArray<NullableAnnotation> memberNullableAnnotations = default
-        ) {
+        )
+        {
             if (memberTypes.IsDefault)
             {
                 throw new ArgumentNullException(nameof(memberTypes));
@@ -1439,7 +1458,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 !memberNullableAnnotations.IsDefault
                 && memberNullableAnnotations.Length != memberTypes.Length
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     string.Format(
                         CodeAnalysisResources.AnonymousTypeArgumentCountMismatch2,
@@ -1488,7 +1508,8 @@ namespace Microsoft.CodeAnalysis
             ImmutableArray<string> memberNames,
             ImmutableArray<bool> memberIsReadOnly,
             ImmutableArray<Location> memberLocations
-        ) {
+        )
+        {
             return CreateAnonymousTypeSymbol(
                 memberTypes,
                 memberNames,
@@ -1551,7 +1572,8 @@ namespace Microsoft.CodeAnalysis
             ISymbol symbol,
             ISymbol within,
             ITypeSymbol? throughType = null
-        ) {
+        )
+        {
             if (symbol is null)
             {
                 throw new ArgumentNullException(nameof(symbol));
@@ -1612,7 +1634,8 @@ namespace Microsoft.CodeAnalysis
                         Compilation? c = this.PreviousSubmission;
                         c != null;
                         c = c.PreviousSubmission
-                    ) {
+                    )
+                    {
                         if (assemblyIsInCompilationReferences(a, c))
                         {
                             return true;
@@ -1793,7 +1816,8 @@ namespace Microsoft.CodeAnalysis
             DiagnosticBag accumulator,
             [DisallowNull] ref DiagnosticBag? incoming,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             RoslynDebug.Assert(incoming is object);
             bool result = FilterAndAppendDiagnostics(
                 accumulator,
@@ -1815,7 +1839,8 @@ namespace Microsoft.CodeAnalysis
             IEnumerable<Diagnostic> incoming,
             HashSet<int>? exclude,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             bool hasError = false;
             bool reportSuppressedDiagnostics = Options.ReportSuppressedDiagnostics;
 
@@ -1854,7 +1879,8 @@ namespace Microsoft.CodeAnalysis
             bool noManifest,
             Stream? manifestContents,
             Stream? iconInIcoFormat
-        ) {
+        )
+        {
             //Win32 resource encodings use a lot of 16bit values. Do all of the math checked with the
             //expectation that integer types are well-chosen with size in mind.
             checked
@@ -1952,7 +1978,8 @@ namespace Microsoft.CodeAnalysis
         internal Cci.ResourceSection? MakeWin32ResourcesFromCOFF(
             Stream? win32Resources,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             if (win32Resources == null)
             {
                 return null;
@@ -2004,7 +2031,8 @@ namespace Microsoft.CodeAnalysis
         internal List<Win32Resource>? MakeWin32ResourceList(
             Stream? win32Resources,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             if (win32Resources == null)
             {
                 return null;
@@ -2059,7 +2087,8 @@ namespace Microsoft.CodeAnalysis
             Stream? win32Resources,
             bool useRawWin32Resources,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             if (win32Resources == null)
                 return;
 
@@ -2129,11 +2158,13 @@ namespace Microsoft.CodeAnalysis
             IEnumerable<string> addedModuleNames,
             IEnumerable<string> addedModuleResourceNames,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             if (
                 Options.OutputKind == OutputKind.NetModule
                 && !(manifestResources != null && manifestResources.Any())
-            ) {
+            )
+            {
                 return;
             }
 
@@ -2227,7 +2258,8 @@ namespace Microsoft.CodeAnalysis
             EmitOptions emitOptions,
             string? targetRuntimeVersion,
             Guid moduleVersionId = default(Guid)
-        ) {
+        )
+        {
             CompilationOptions compilationOptions = this.Options;
             Platform platform = compilationOptions.Platform;
             OutputKind outputKind = compilationOptions.OutputKind;
@@ -2249,7 +2281,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 emitOptions.FileAlignment == 0
                 || !CompilationOptions.IsValidFileAlignment(emitOptions.FileAlignment)
-            ) {
+            )
+            {
                 fileAlignment = requires64Bit
                     ? Cci.ModulePropertiesForSerialization.DefaultFileAlignment64Bit
                     : Cci.ModulePropertiesForSerialization.DefaultFileAlignment32Bit;
@@ -2270,7 +2303,8 @@ namespace Microsoft.CodeAnalysis
                     outputKind == OutputKind.ConsoleApplication
                     || outputKind == OutputKind.WindowsApplication
                     || outputKind == OutputKind.WindowsRuntimeApplication
-                ) {
+                )
+                {
                     baseAddress =
                         (requires64Bit)
                             ? Cci.ModulePropertiesForSerialization.DefaultExeBaseAddress64Bit
@@ -2306,7 +2340,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 emitOptions.SubsystemVersion.Equals(SubsystemVersion.None)
                 || !emitOptions.SubsystemVersion.IsValid
-            ) {
+            )
+            {
                 subsystemVersion = SubsystemVersion.Default(outputKind, platform);
             }
             else
@@ -2379,7 +2414,8 @@ namespace Microsoft.CodeAnalysis
             Machine machine,
             bool strongNameSigned,
             bool prefers32Bit
-        ) {
+        )
+        {
             CorFlags result = CorFlags.ILOnly;
 
             if (machine == Machine.I386)
@@ -2403,7 +2439,8 @@ namespace Microsoft.CodeAnalysis
         internal static DllCharacteristics GetDllCharacteristics(
             bool enableHighEntropyVA,
             bool configureToExecuteInAppContainer
-        ) {
+        )
+        {
             var result =
                 DllCharacteristics.DynamicBase
                 | DllCharacteristics.NxCompatible
@@ -2551,7 +2588,8 @@ namespace Microsoft.CodeAnalysis
             DebugDocumentsBuilder documentsBuilder,
             IEnumerable<EmbeddedText> embeddedTexts,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             // Check that all syntax trees are debuggable:
             bool allTreesDebuggable = true;
             foreach (var tree in CommonSyntaxTrees)
@@ -2692,7 +2730,8 @@ namespace Microsoft.CodeAnalysis
             DiagnosticBag diagnostics,
             Predicate<ISymbolInternal>? filterOpt,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 return CompileMethods(
@@ -2767,7 +2806,8 @@ namespace Microsoft.CodeAnalysis
             IEnumerable<ResourceDescription>? manifestResources,
             EmitOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return Emit(
                 peStream,
                 pdbStream,
@@ -2793,7 +2833,8 @@ namespace Microsoft.CodeAnalysis
             EmitOptions options,
             IMethodSymbol debugEntryPoint,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return Emit(
                 peStream,
                 pdbStream,
@@ -2820,7 +2861,8 @@ namespace Microsoft.CodeAnalysis
             Stream? sourceLinkStream,
             IEnumerable<EmbeddedText>? embeddedTexts,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return Emit(
                 peStream,
                 pdbStream,
@@ -2883,7 +2925,8 @@ namespace Microsoft.CodeAnalysis
             IEnumerable<EmbeddedText>? embeddedTexts = null,
             Stream? metadataPEStream = null,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return Emit(
                 peStream,
                 pdbStream,
@@ -2915,7 +2958,8 @@ namespace Microsoft.CodeAnalysis
             Stream? metadataPEStream,
             BlobReader? pdbOptionsBlobReader,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (peStream == null)
             {
                 throw new ArgumentNullException(nameof(peStream));
@@ -2981,7 +3025,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 options?.DebugInformationFormat == DebugInformationFormat.Embedded
                 && options?.EmitMetadataOnly == true
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     CodeAnalysisResources.EmbeddingPdbUnexpectedWhenEmittingMetadata,
                     nameof(metadataPEStream)
@@ -3030,7 +3075,8 @@ namespace Microsoft.CodeAnalysis
                 && !embeddedTexts.IsEmpty()
                 && pdbStream == null
                 && options?.DebugInformationFormat != DebugInformationFormat.Embedded
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     CodeAnalysisResources.EmbeddedTextsRequirePdb,
                     nameof(embeddedTexts)
@@ -3074,7 +3120,8 @@ namespace Microsoft.CodeAnalysis
             BlobReader? pdbOptionsBlobReader,
             CompilationTestData? testData,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             options =
                 options ?? EmitOptions.Default.WithIncludePrivateMembers(metadataPEStream == null);
 
@@ -3125,7 +3172,8 @@ namespace Microsoft.CodeAnalysis
                                 diagnostics,
                                 cancellationToken
                             )
-                        ) {
+                        )
+                        {
                             success = false;
                         }
 
@@ -3189,7 +3237,8 @@ namespace Microsoft.CodeAnalysis
             Stream pdbStream,
             ICollection<MethodDefinitionHandle> updatedMethods,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return EmitDifference(
                 baseline,
                 edits,
@@ -3218,7 +3267,8 @@ namespace Microsoft.CodeAnalysis
             Stream pdbStream,
             ICollection<MethodDefinitionHandle> updatedMethods,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             if (baseline == null)
             {
                 throw new ArgumentNullException(nameof(baseline));
@@ -3290,7 +3340,8 @@ namespace Microsoft.CodeAnalysis
             IEnumerable<EmbeddedText>? embeddedTexts,
             CompilationTestData? testData,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             options.ValidateOptions(diagnostics, MessageProvider, Options.Deterministic);
 
             if (debugEntryPoint != null)
@@ -3359,7 +3410,8 @@ namespace Microsoft.CodeAnalysis
             EmitOptions emitOptions,
             RSAParameters? privateKeyOpt,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             Cci.PdbWriter? nativePdbWriter = null;
@@ -3379,7 +3431,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 moduleBeingBuilt.DebugInformationFormat == DebugInformationFormat.Embedded
                 || pdbStreamProvider != null
-            ) {
+            )
+            {
                 pePdbFilePath =
                     pePdbFilePath ?? FileNameUtilities.ChangeExtension(SourceModule.Name, "pdb");
             }
@@ -3391,7 +3444,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 moduleBeingBuilt.DebugInformationFormat == DebugInformationFormat.Embedded
                 && !RoslynString.IsNullOrEmpty(pePdbFilePath)
-            ) {
+            )
+            {
                 pePdbFilePath = PathUtilities.GetFileName(pePdbFilePath);
             }
 
@@ -3424,7 +3478,8 @@ namespace Microsoft.CodeAnalysis
                 if (
                     moduleBeingBuilt.DebugInformationFormat == DebugInformationFormat.Pdb
                     && pdbStreamProvider != null
-                ) {
+                )
+                {
                     // The algorithm must be specified for deterministic builds (checked earlier).
                     Debug.Assert(
                         !deterministic || moduleBeingBuilt.PdbChecksumAlgorithm.Name != null
@@ -3472,7 +3527,8 @@ namespace Microsoft.CodeAnalysis
                             privateKeyOpt,
                             cancellationToken
                         )
-                    ) {
+                    )
+                    {
                         if (nativePdbWriter != null)
                         {
                             var nativePdbStream = pdbStreamProvider!.GetOrCreateStream(
@@ -3544,7 +3600,8 @@ namespace Microsoft.CodeAnalysis
                         ref metadataDiagnostics,
                         cancellationToken
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -3568,7 +3625,8 @@ namespace Microsoft.CodeAnalysis
         private static Stream? ConditionalGetOrCreateStream(
             EmitStreamProvider metadataPEStreamProvider,
             DiagnosticBag metadataDiagnostics
-        ) {
+        )
+        {
             if (metadataDiagnostics.HasAnyErrors())
             {
                 return null;
@@ -3595,7 +3653,8 @@ namespace Microsoft.CodeAnalysis
             bool emitTestCoverageData,
             RSAParameters? privateKeyOpt,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             bool emitSecondaryAssembly = getMetadataPeStreamOpt != null;
 
             bool includePrivateMembersOnPrimaryOutput = metadataOnly ? includePrivateMembers : true;
@@ -3622,7 +3681,8 @@ namespace Microsoft.CodeAnalysis
                     privateKeyOpt,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -3653,7 +3713,8 @@ namespace Microsoft.CodeAnalysis
                         privateKeyOpt: privateKeyOpt,
                         cancellationToken: cancellationToken
                     )
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -3674,7 +3735,8 @@ namespace Microsoft.CodeAnalysis
             Func<ISymWriterMetadataProvider, SymUnmanagedWriter>? testSymWriterFactory,
             string? pdbFilePath,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var nativePdbWriter =
                 (moduleBeingBuilt.DebugInformationFormat != DebugInformationFormat.Pdb)
                     ? null
@@ -4045,7 +4107,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public ImmutableArray<AssemblyIdentity> GetUnreferencedAssemblyIdentities(
             Diagnostic diagnostic
-        ) {
+        )
+        {
             if (diagnostic == null)
             {
                 throw new ArgumentNullException(nameof(diagnostic));

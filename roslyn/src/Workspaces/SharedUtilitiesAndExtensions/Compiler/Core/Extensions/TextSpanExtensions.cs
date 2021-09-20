@@ -63,7 +63,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this TextSpan span,
             SyntaxNodeOrToken startNode,
             SyntaxNodeOrToken endNode
-        ) {
+        )
+        {
             var innerSpan = TextSpan.FromBounds(startNode.Span.Start, endNode.Span.End);
             var outerSpan = TextSpan.FromBounds(startNode.FullSpan.Start, endNode.FullSpan.End);
             return span.Contains(innerSpan) && outerSpan.Contains(span);

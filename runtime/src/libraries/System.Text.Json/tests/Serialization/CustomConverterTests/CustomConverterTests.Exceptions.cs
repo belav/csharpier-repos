@@ -15,7 +15,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 throw new TException();
             }
 
@@ -23,7 +24,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 int value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 throw new TException();
             }
         }

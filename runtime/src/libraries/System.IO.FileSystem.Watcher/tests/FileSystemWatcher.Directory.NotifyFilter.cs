@@ -45,7 +45,8 @@ namespace System.IO.Tests
             using (var dir = new TempDirectory(Path.Combine(testDirectory.Path, "dir")))
             using (
                 var watcher = new FileSystemWatcher(testDirectory.Path, Path.GetFileName(dir.Path))
-            ) {
+            )
+            {
                 watcher.NotifyFilter = filter;
                 var attributes = File.GetAttributes(dir.Path);
 
@@ -74,7 +75,8 @@ namespace System.IO.Tests
             using (var dir = new TempDirectory(Path.Combine(testDirectory.Path, "dir")))
             using (
                 var watcher = new FileSystemWatcher(testDirectory.Path, Path.GetFileName(dir.Path))
-            ) {
+            )
+            {
                 watcher.NotifyFilter = filter;
                 Action action = () =>
                     Directory.SetCreationTime(dir.Path, DateTime.Now + TimeSpan.FromSeconds(10));
@@ -99,7 +101,8 @@ namespace System.IO.Tests
             using (var dir = new TempDirectory(Path.Combine(testDirectory.Path, "dir")))
             using (
                 var watcher = new FileSystemWatcher(testDirectory.Path, Path.GetFileName(dir.Path))
-            ) {
+            )
+            {
                 string sourcePath = dir.Path;
                 string targetPath = Path.Combine(testDirectory.Path, "targetDir");
                 watcher.NotifyFilter = filter;
@@ -123,7 +126,8 @@ namespace System.IO.Tests
             using (var dir = new TempDirectory(Path.Combine(testDirectory.Path, "dir")))
             using (
                 var watcher = new FileSystemWatcher(testDirectory.Path, Path.GetFileName(dir.Path))
-            ) {
+            )
+            {
                 watcher.NotifyFilter = filter;
                 Action action = () =>
                     Directory.SetLastAccessTime(dir.Path, DateTime.Now + TimeSpan.FromSeconds(10));
@@ -148,7 +152,8 @@ namespace System.IO.Tests
             using (var dir = new TempDirectory(Path.Combine(testDirectory.Path, "dir")))
             using (
                 var watcher = new FileSystemWatcher(testDirectory.Path, Path.GetFileName(dir.Path))
-            ) {
+            )
+            {
                 watcher.NotifyFilter = filter;
                 Action action = () =>
                     Directory.SetLastWriteTime(dir.Path, DateTime.Now + TimeSpan.FromSeconds(10));
@@ -170,7 +175,8 @@ namespace System.IO.Tests
         [MemberData(nameof(FilterTypes))]
         public void FileSystemWatcher_Directory_NotifyFilter_LastWriteTime_TwoFilters(
             NotifyFilters filter
-        ) {
+        )
+        {
             Assert.All(
                 FilterTypes(),
                 (
@@ -183,7 +189,8 @@ namespace System.IO.Tests
                                 testDirectory.Path,
                                 Path.GetFileName(dir.Path)
                             )
-                        ) {
+                        )
+                        {
                             filter |= (NotifyFilters)filter2Arr[0];
                             watcher.NotifyFilter = filter;
                             Action action = () =>
@@ -220,7 +227,8 @@ namespace System.IO.Tests
             using (var dir = new TempDirectory(Path.Combine(testDirectory.Path, "dir")))
             using (
                 var watcher = new FileSystemWatcher(testDirectory.Path, Path.GetFileName(dir.Path))
-            ) {
+            )
+            {
                 watcher.NotifyFilter = filter;
                 Action action = () =>
                 {
@@ -262,7 +270,8 @@ namespace System.IO.Tests
             using (var file = new TempFile(Path.Combine(testDirectory.Path, "file")))
             using (
                 var watcher = new FileSystemWatcher(testDirectory.Path, Path.GetFileName(file.Path))
-            ) {
+            )
+            {
                 NotifyFilters filter = NotifyFilters.LastWrite | NotifyFilters.DirectoryName;
                 watcher.NotifyFilter = filter;
 

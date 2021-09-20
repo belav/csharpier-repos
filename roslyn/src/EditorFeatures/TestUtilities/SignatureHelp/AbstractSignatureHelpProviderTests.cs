@@ -54,7 +54,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SignatureHelp
             bool usePreviousCharAsTrigger = false,
             SourceCodeKind? sourceCodeKind = null,
             bool experimental = false
-        ) {
+        )
+        {
             using var workspaceFixture = GetOrCreateWorkspaceFixture();
 
             if (sourceCodeKind.HasValue)
@@ -92,7 +93,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SignatureHelp
             bool experimental,
             IEnumerable<SignatureHelpTestItem> expectedOrderedItemsOrNull = null,
             bool usePreviousCharAsTrigger = false
-        ) {
+        )
+        {
             using var workspaceFixture = GetOrCreateWorkspaceFixture();
 
             markupWithPositionAndOptSpan = markupWithPositionAndOptSpan.NormalizeLineEndings();
@@ -161,7 +163,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SignatureHelp
         private static async Task<bool> CanUseSpeculativeSemanticModelAsync(
             Document document,
             int position
-        ) {
+        )
+        {
             var service = document.GetLanguageService<ISyntaxFactsService>();
             var node = (await document.GetSyntaxRootAsync()).FindToken(position).Parent;
 
@@ -171,7 +174,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SignatureHelp
         protected void VerifyTriggerCharacters(
             char[] expectedTriggerCharacters,
             char[] unexpectedTriggerCharacters
-        ) {
+        )
+        {
             using var workspaceFixture = GetOrCreateWorkspaceFixture();
 
             var signatureHelpProviderType = GetSignatureHelpProviderType();
@@ -200,7 +204,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SignatureHelp
             string markup,
             string expectedParameterName,
             SourceCodeKind? sourceCodeKind = null
-        ) {
+        )
+        {
             using var workspaceFixture = GetOrCreateWorkspaceFixture();
 
             if (sourceCodeKind.HasValue)
@@ -231,7 +236,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SignatureHelp
             Document document,
             ISignatureHelpProvider signatureHelpProvider,
             SignatureHelpTriggerInfo triggerInfo
-        ) {
+        )
+        {
             var items = await signatureHelpProvider.GetItemsAsync(
                 document,
                 cursorPosition,
@@ -252,7 +258,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SignatureHelp
             string markup,
             string expectedParameterName,
             SourceCodeKind sourceCodeKind
-        ) {
+        )
+        {
             using var workspaceFixture = GetOrCreateWorkspaceFixture();
 
             MarkupTestFile.GetPosition(
@@ -292,7 +299,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SignatureHelp
         private static void CompareAndAssertCollectionsAndCurrentParameter(
             IEnumerable<SignatureHelpTestItem> expectedTestItems,
             SignatureHelpItems actualSignatureHelpItems
-        ) {
+        )
+        {
             Assert.Equal(expectedTestItems.Count(), actualSignatureHelpItems.Items.Count());
 
             for (var i = 0; i < expectedTestItems.Count(); i++)
@@ -309,7 +317,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SignatureHelp
             SignatureHelpItems items,
             SignatureHelpItem actualSignatureHelpItem,
             SignatureHelpTestItem expectedTestItem
-        ) {
+        )
+        {
             var currentParameterIndex = -1;
             if (expectedTestItem.CurrentParameterIndex != null)
             {
@@ -317,7 +326,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SignatureHelp
                     expectedTestItem.CurrentParameterIndex.Value >= 0
                     && expectedTestItem.CurrentParameterIndex.Value
                         < actualSignatureHelpItem.Parameters.Length
-                ) {
+                )
+                {
                     currentParameterIndex = expectedTestItem.CurrentParameterIndex.Value;
                 }
             }
@@ -407,11 +417,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SignatureHelp
             string sourceLanguage,
             string referencedLanguage,
             bool hideAdvancedMembers = false
-        ) {
+        )
+        {
             if (
                 expectedOrderedItemsMetadataReference == null
                 || expectedOrderedItemsSameSolution == null
-            ) {
+            )
+            {
                 AssertEx.Fail(
                     "Expected signature help items must be provided for EditorBrowsable tests. If there are no expected items, provide an empty IEnumerable rather than null."
                 );
@@ -454,7 +466,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SignatureHelp
             string sourceLanguage,
             string referencedLanguage,
             bool hideAdvancedMembers
-        ) {
+        )
+        {
             var xmlString = string.Format(
                 @"
 <Workspace>
@@ -489,7 +502,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SignatureHelp
             string sourceLanguage,
             string referencedLanguage,
             bool hideAdvancedMembers
-        ) {
+        )
+        {
             var xmlString = string.Format(
                 @"
 <Workspace>
@@ -525,7 +539,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SignatureHelp
             IEnumerable<SignatureHelpTestItem> expectedOrderedItems,
             string sourceLanguage,
             bool hideAdvancedMembers
-        ) {
+        )
+        {
             var xmlString = string.Format(
                 @"
 <Workspace>
@@ -554,7 +569,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SignatureHelp
             string xmlString,
             IEnumerable<SignatureHelpTestItem> expectedOrderedItems,
             bool hideAdvancedMembers
-        ) {
+        )
+        {
             using var testWorkspace = TestWorkspace.Create(xmlString);
 
             var cursorPosition =
@@ -608,7 +624,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SignatureHelp
             TextSpan? textSpan,
             IEnumerable<SignatureHelpTestItem> expectedOrderedItemsOrNull = null,
             bool usePreviousCharAsTrigger = false
-        ) {
+        )
+        {
             var signatureHelpProviderType = GetSignatureHelpProviderType();
             var signatureHelpProvider =
                 workspace.ExportProvider.GetExportedValues<ISignatureHelpProvider>()
@@ -641,7 +658,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SignatureHelp
             if (
                 (expectedOrderedItemsOrNull == null || !expectedOrderedItemsOrNull.Any())
                 && items == null
-            ) {
+            )
+            {
                 return;
             }
 
@@ -666,11 +684,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SignatureHelp
         private static void CompareSelectedIndex(
             IEnumerable<SignatureHelpTestItem> expectedOrderedItemsOrNull,
             int? selectedItemIndex
-        ) {
+        )
+        {
             if (
                 expectedOrderedItemsOrNull == null
                 || !expectedOrderedItemsOrNull.Any(i => i.IsSelected)
-            ) {
+            )
+            {
                 return;
             }
 
@@ -709,7 +729,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SignatureHelp
             string markup,
             IEnumerable<SignatureHelpTestItem> expectedOrderedItems,
             string sourceLanguage
-        ) {
+        )
+        {
             var xmlString = string.Format(
                 @"
 <Workspace>

@@ -91,7 +91,8 @@ namespace System.Configuration
             string prefix,
             string localName,
             string namespaceUri
-        ) {
+        )
+        {
             return new ConfigXmlAttribute(
                 _filename,
                 LineNumber,
@@ -106,7 +107,8 @@ namespace System.Configuration
             string prefix,
             string localName,
             string namespaceUri
-        ) {
+        )
+        {
             return new ConfigXmlElement(
                 _filename,
                 LineNumber,

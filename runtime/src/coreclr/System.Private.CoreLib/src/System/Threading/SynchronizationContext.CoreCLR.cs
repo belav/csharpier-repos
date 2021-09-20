@@ -10,7 +10,8 @@ namespace System.Threading
             IntPtr[] waitHandles,
             bool waitAll,
             int millisecondsTimeout
-        ) {
+        )
+        {
             return syncContext.Wait(waitHandles, waitAll, millisecondsTimeout);
         }
     }

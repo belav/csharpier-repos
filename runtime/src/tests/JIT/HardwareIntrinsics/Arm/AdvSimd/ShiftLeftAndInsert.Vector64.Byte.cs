@@ -133,7 +133,8 @@ namespace JIT.HardwareIntrinsics.Arm
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfinArray2
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -212,7 +213,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario(
                 ImmBinaryOpTest__ShiftLeftAndInsert_Vector64_Byte testClass
-            ) {
+            )
+            {
                 var result = AdvSimd.ShiftLeftAndInsert(_fld1, _fld2, 4);
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
@@ -221,7 +223,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario_Load(
                 ImmBinaryOpTest__ShiftLeftAndInsert_Vector64_Byte testClass
-            ) {
+            )
+            {
                 fixed (Vector64<Byte>* pFld1 = &_fld1)fixed (Vector64<Byte>* pFld2 = &_fld2)
                 {
                     var result = AdvSimd.ShiftLeftAndInsert(
@@ -569,7 +572,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Vector64<Byte> secondOp,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Byte[] inArray1 = new Byte[Op1ElementCount];
             Byte[] inArray2 = new Byte[Op2ElementCount];
             Byte[] outArray = new Byte[RetElementCount];
@@ -590,7 +594,8 @@ namespace JIT.HardwareIntrinsics.Arm
             void* secondOp,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Byte[] inArray1 = new Byte[Op1ElementCount];
             Byte[] inArray2 = new Byte[Op2ElementCount];
             Byte[] outArray = new Byte[RetElementCount];
@@ -619,7 +624,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Byte[] secondOp,
             Byte[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             for (var i = 0; i < RetElementCount; i++)

@@ -24,7 +24,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests.Account.Manage
         public async Task<RemoveExternalLogin> RemoveLoginAsync(
             string loginProvider,
             string providerKey
-        ) {
+        )
+        {
             await Client.SendAsync(
                 _removeLoginForm,
                 new Dictionary<string, string>

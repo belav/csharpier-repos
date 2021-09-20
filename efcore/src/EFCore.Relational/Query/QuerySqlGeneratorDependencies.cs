@@ -55,7 +55,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         public QuerySqlGeneratorDependencies(
             IRelationalCommandBuilderFactory relationalCommandBuilderFactory,
             ISqlGenerationHelper sqlGenerationHelper
-        ) {
+        )
+        {
             Check.NotNull(relationalCommandBuilderFactory, nameof(relationalCommandBuilderFactory));
             Check.NotNull(sqlGenerationHelper, nameof(sqlGenerationHelper));
 

@@ -27,7 +27,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
         public UnusedReferencesTableProvider(
             ITableManagerProvider tableMangerProvider,
             IWpfTableControlProvider tableControlProvider
-        ) {
+        )
+        {
             _tableManager = tableMangerProvider.GetTableManager(UnusedReferencesDataSource.Name);
             _tableControlProvider = tableControlProvider;
 
@@ -98,7 +99,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
             Solution solution,
             string projectFilePath,
             ImmutableArray<ReferenceUpdate> referenceUpdates
-        ) {
+        )
+        {
             _dataSource.AddTableData(solution, projectFilePath, referenceUpdates);
         }
 

@@ -21,7 +21,8 @@ namespace System.Drawing
             if (
                 (destinationType == typeof(string))
                 || (destinationType == typeof(InstanceDescriptor))
-            ) {
+            )
+            {
                 return true;
             }
             return base.CanConvertTo(context, destinationType);
@@ -31,7 +32,8 @@ namespace System.Drawing
             ITypeDescriptorContext? context,
             CultureInfo? culture,
             object value
-        ) {
+        )
+        {
             // we must be able to convert from short names and long names
             string? strFormat = value as string;
             if (strFormat == null)
@@ -44,7 +46,8 @@ namespace System.Drawing
                 (strFormat[0] == '[')
                 && (strFormat.Length >= 50)
                 && Guid.TryParse(strFormat.AsSpan(14, 36), out Guid guid)
-            ) {
+            )
+            {
                 // case #2, this is probably a long format (guid)
                 return new ImageFormat(guid);
             }
@@ -81,7 +84,8 @@ namespace System.Drawing
             CultureInfo? culture,
             object? value,
             Type destinationType
-        ) {
+        )
+        {
             if (value is ImageFormat imgFormat)
             {
                 if (destinationType == typeof(string))

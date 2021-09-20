@@ -466,7 +466,8 @@ namespace MS.Internal.Xml.Cache
             XPathNodeInfoTable infoTable,
             XPathNode[] pageSibling,
             int idxSibling
-        ) {
+        )
+        {
             Debug.Assert(
                 pageSibling != null && idxSibling != 0 && idxSibling <= ushort.MaxValue,
                 "Bad argument"
@@ -500,7 +501,8 @@ namespace MS.Internal.Xml.Cache
             XPathNodeInfoTable infoTable,
             XPathNode[] pageSimilar,
             int idxSimilar
-        ) {
+        )
+        {
             Debug.Assert(
                 pageSimilar != null && idxSimilar != 0 && idxSimilar <= ushort.MaxValue,
                 "Bad argument"

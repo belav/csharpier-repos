@@ -14,7 +14,8 @@ namespace Microsoft.EntityFrameworkCore.Tools
             IReadOnlyList<string> args,
             string? workingDirectory = null,
             bool interceptOutput = false
-        ) {
+        )
+        {
             var arguments = ToArguments(args);
 
             Reporter.WriteVerbose(executable + " " + arguments);

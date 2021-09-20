@@ -132,7 +132,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                     var dir in new DirectoryInfo(
                         Path.Combine(_path, "host", "fxr")
                     ).GetDirectories()
-                ) {
+                )
+                {
                     dir.Delete(recursive: true);
                 }
             }
@@ -152,7 +153,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         public DotNetBuilder AddMicrosoftNETCoreAppFrameworkMockCoreClr(
             string version,
             Action<NetCoreAppBuilder> customizer = null
-        ) {
+        )
+        {
             // ./shared/Microsoft.NETCore.App/<version> - create a mock of the root framework
             string netCoreAppPath = Path.Combine(_path, "shared", "Microsoft.NETCore.App", version);
             Directory.CreateDirectory(netCoreAppPath);
@@ -241,7 +243,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             string name,
             string version,
             Action<RuntimeConfig> runtimeConfigCustomizer
-        ) {
+        )
+        {
             // ./shared/<name>/<version> - create a mock of effectively empty non-root framework
             string path = Path.Combine(_path, "shared", name, version);
             Directory.CreateDirectory(path);

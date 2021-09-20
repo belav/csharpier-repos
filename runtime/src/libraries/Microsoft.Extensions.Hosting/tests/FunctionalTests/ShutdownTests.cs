@@ -73,7 +73,8 @@ namespace Microsoft.AspNetCore.Hosting.FunctionalTests
 
             using (
                 var deployer = new SelfHostDeployer(deploymentParameters, xunitTestLoggerFactory)
-            ) {
+            )
+            {
                 var result = await deployer.DeployAsync();
 
                 var started = new TaskCompletionSource<int>(

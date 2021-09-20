@@ -122,7 +122,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         private bool IsSuperSetOfAnySupportedMediaType(
             string contentType,
             MediaTypeCollection supportedMediaTypes
-        ) {
+        )
+        {
             var parsedContentType = new MediaType(contentType);
             for (var i = 0; i < supportedMediaTypes.Count; i++)
             {
@@ -167,7 +168,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             if (
                 objectResult.ContentTypes.Count == 1
                 || !string.IsNullOrEmpty(context.HttpContext.Response.ContentType)
-            ) {
+            )
+            {
                 _logger.CannotApplyFormatFilterContentType(format);
                 return;
             }

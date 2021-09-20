@@ -73,7 +73,8 @@ namespace System.Web.WebPages.Administration.PackageManager
         private static RemoteAssembly CopyAssemblyProperties(
             AssemblyName assemblyName,
             RemoteAssembly assembly
-        ) {
+        )
+        {
             assembly.Name = assemblyName.Name;
             assembly.Version = assemblyName.Version;
             assembly.PublicKeyToken = assemblyName.GetPublicKeyTokenString();
@@ -109,7 +110,8 @@ namespace System.Web.WebPages.Administration.PackageManager
         public static IEnumerable<IAssembly> GetAssembliesForBindingRedirect(
             AppDomain appDomain,
             string binDirectoryPath
-        ) {
+        )
+        {
             return GetAssembliesForBindingRedirect(appDomain, binDirectoryPath, GetBinAssemblies);
         }
 
@@ -117,7 +119,8 @@ namespace System.Web.WebPages.Administration.PackageManager
             AppDomain appDomain,
             string binDirectoryPath,
             Func<AppDomain, string, IEnumerable<IAssembly>> getBinAssemblies
-        ) {
+        )
+        {
             var binAssemblies = getBinAssemblies(appDomain, binDirectoryPath).ToList();
             if (!binAssemblies.Any())
             {
@@ -132,7 +135,8 @@ namespace System.Web.WebPages.Administration.PackageManager
         private static IEnumerable<IAssembly> GetBinAssemblies(
             AppDomain appDomain,
             string binDirectoryPath
-        ) {
+        )
+        {
             if (!Directory.Exists(binDirectoryPath))
             {
                 yield break;

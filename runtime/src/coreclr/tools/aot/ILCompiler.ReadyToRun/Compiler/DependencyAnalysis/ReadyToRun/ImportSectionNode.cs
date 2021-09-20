@@ -47,7 +47,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             byte entrySize,
             bool emitPrecode,
             bool emitGCRefMap
-        ) {
+        )
+        {
             _name = name;
             _type = importType;
             _flags = flags;
@@ -114,7 +115,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             ref ObjectDataBuilder dataBuilder,
             NodeFactory factory,
             bool relocsOnly
-        ) {
+        )
+        {
             if (!_imports.ShouldSkipEmittingObjectNode(factory))
             {
                 dataBuilder.EmitReloc(_imports.StartSymbol, RelocType.IMAGE_REL_BASED_ADDR32NB, 0);

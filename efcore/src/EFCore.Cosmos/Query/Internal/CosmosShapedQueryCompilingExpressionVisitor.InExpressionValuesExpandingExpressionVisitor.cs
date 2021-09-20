@@ -20,7 +20,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             public InExpressionValuesExpandingExpressionVisitor(
                 ISqlExpressionFactory sqlExpressionFactory,
                 IReadOnlyDictionary<string, object> parametersValues
-            ) {
+            )
+            {
                 _sqlExpressionFactory = sqlExpressionFactory;
                 _parametersValues = parametersValues;
             }

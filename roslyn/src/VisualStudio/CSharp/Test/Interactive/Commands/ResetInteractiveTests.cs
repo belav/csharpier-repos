@@ -99,7 +99,8 @@ namespace ResetInteractiveTestsDocument
             bool buildSucceeds,
             List<string> expectedReferences = null,
             List<string> expectedUsings = null
-        ) {
+        )
+        {
             expectedReferences ??= new List<string>();
             expectedUsings ??= new List<string>();
 

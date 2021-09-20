@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.BraceMatching
             Document document,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var languagesProvider = document.GetLanguageService<IEmbeddedLanguagesProvider>();
             if (languagesProvider != null)
             {

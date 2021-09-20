@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             Document document,
             SyntaxToken invocationNameToken,
             SyntaxNode methodDeclarationNode
-        ) {
+        )
+        {
             Status = status;
 
             Succeeded = status.Succeeded() && !status.HasSuggestion();

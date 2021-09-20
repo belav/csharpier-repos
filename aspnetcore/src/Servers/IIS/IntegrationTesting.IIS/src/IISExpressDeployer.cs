@@ -89,7 +89,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
                     if (
                         DeploymentParameters.RuntimeFlavor == RuntimeFlavor.CoreClr
                         && DeploymentParameters.ApplicationType == ApplicationType.Portable
-                    ) {
+                    )
+                    {
                         executableName = GetDotNetExeForArchitecture();
                         executableArgs = entryPoint;
                     }
@@ -168,7 +169,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
                     else if (
                         DeploymentParameters.RuntimeFlavor == RuntimeFlavor.Clr
                         && DeploymentParameters.RuntimeArchitecture == RuntimeArchitecture.x86
-                    ) {
+                    )
+                    {
                         // x64 is the default. Publish to rebuild for the right bitness
                         DeploymentParameters.PublishApplicationBeforeDeployment = true;
                     }
@@ -178,7 +180,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
             if (
                 DeploymentParameters.RuntimeFlavor == RuntimeFlavor.CoreClr
                 && DeploymentParameters.ApplicationType == ApplicationType.Standalone
-            ) {
+            )
+            {
                 // Publish is always required to get the correct standalone files in the output directory
                 DeploymentParameters.PublishApplicationBeforeDeployment = true;
             }
@@ -188,7 +191,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
 
         private async Task<(Uri url, CancellationToken hostExitToken)> StartIISExpressAsync(
             string contentRoot
-        ) {
+        )
+        {
             using (Logger.BeginScope("StartIISExpress"))
             {
                 var iisExpressPath = GetIISExpressPath();
@@ -260,7 +264,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
                                 UnableToStartIISExpressMessage,
                                 StringComparison.Ordinal
                             )
-                        ) {
+                        )
+                        {
                             // We completely failed to start and we don't really know why
                             started.TrySetException(
                                 new InvalidOperationException("Failed to start IIS Express")
@@ -272,7 +277,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
                                 FailedToInitializeBindingsMessage,
                                 StringComparison.Ordinal
                             )
-                        ) {
+                        )
+                        {
                             started.TrySetResult(false);
                         }
                         else if (
@@ -281,7 +287,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
                                 IISExpressRunningMessage,
                                 StringComparison.Ordinal
                             )
-                        ) {
+                        )
+                        {
                             started.TrySetResult(true);
                         }
                         else if (!string.IsNullOrEmpty(dataArgs.Data))
@@ -399,7 +406,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
             if (
                 !DeploymentParameters.PublishApplicationBeforeDeployment
                 && !File.Exists(webConfigPath)
-            ) {
+            )
+            {
                 // The elements normally in the web.config are in the applicationhost.config for unpublished apps.
                 AddAspNetCoreElement(config.Root);
             }
@@ -463,7 +471,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
                     DeploymentParameters.RuntimeFlavor == RuntimeFlavor.CoreClr
                     && DeploymentParameters.ApplicationType == ApplicationType.Portable
                     && DotNetCommands.IsRunningX86OnX64(DeploymentParameters.RuntimeArchitecture)
-                ) {
+                )
+                {
                     var executableName = DotNetCommands.GetDotNetExecutable(
                         DeploymentParameters.RuntimeArchitecture
                     );
@@ -529,7 +538,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
                 if (
                     !string.IsNullOrEmpty(DeploymentParameters.ServerConfigLocation)
                     && File.Exists(DeploymentParameters.ServerConfigLocation)
-                ) {
+                )
+                {
                     // Delete the temp applicationHostConfig that we created.
                     Logger.LogDebug(
                         "Deleting applicationHost.config file from {configLocation}",
@@ -625,7 +635,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
                                     className,
                                     className.Capacity
                                 ) == 0
-                            ) {
+                            )
+                            {
                                 throw new InvalidOperationException(
                                     $"Unable to get window class name: {Marshal.GetLastWin32Error()}"
                                 );
@@ -637,7 +648,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
                                     "IISEXPRESS",
                                     StringComparison.OrdinalIgnoreCase
                                 )
-                            ) {
+                            )
+                            {
                                 Logger.LogDebug(
                                     $"Skipping window {ptr} with class name {className}"
                                 );
@@ -653,7 +665,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
                                     IntPtr.Zero,
                                     IntPtr.Zero
                                 )
-                            ) {
+                            )
+                            {
                                 throw new InvalidOperationException(
                                     $"Unable to PostMessage to process {pid}. LastError: {Marshal.GetLastWin32Error()}"
                                 );

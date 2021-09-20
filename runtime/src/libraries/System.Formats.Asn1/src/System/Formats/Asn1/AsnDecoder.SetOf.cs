@@ -66,7 +66,8 @@ namespace System.Formats.Asn1
             out int bytesConsumed,
             bool skipSortOrderValidation = false,
             Asn1Tag? expectedTag = null
-        ) {
+        )
+        {
             Asn1Tag tag = ReadTagAndLength(source, ruleSet, out int? length, out int headerLength);
             CheckExpectedTag(tag, expectedTag ?? Asn1Tag.SetOf, UniversalTagNumber.SetOf);
 

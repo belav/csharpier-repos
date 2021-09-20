@@ -61,7 +61,8 @@ namespace System.ComponentModel.Tests
             ListBindableAttribute attribute,
             object other,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, attribute.Equals(other));
         }
 

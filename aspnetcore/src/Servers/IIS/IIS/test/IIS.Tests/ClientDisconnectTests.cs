@@ -48,7 +48,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
                     },
                     LoggerFactory
                 )
-            ) {
+            )
+            {
                 using (var connection = testServer.CreateConnection())
                 {
                     await SendContentLength1Post(connection);
@@ -98,7 +99,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
                     },
                     LoggerFactory
                 )
-            ) {
+            )
+            {
                 using (var connection = testServer.CreateConnection())
                 {
                     await SendContentLength1Post(connection);
@@ -145,7 +147,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
                     },
                     LoggerFactory
                 )
-            ) {
+            )
+            {
                 using (var connection = testServer.CreateConnection())
                 {
                     await SendContentLength1Post(connection);
@@ -199,7 +202,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
                     },
                     LoggerFactory
                 )
-            ) {
+            )
+            {
                 using (var connection = testServer.CreateConnection())
                 {
                     await SendContentLength1Post(connection);
@@ -250,7 +254,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
                     },
                     LoggerFactory
                 )
-            ) {
+            )
+            {
                 using (var connection = testServer.CreateConnection())
                 {
                     await SendContentLength1Post(connection);
@@ -302,7 +307,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
                     },
                     LoggerFactory
                 )
-            ) {
+            )
+            {
                 using (var connection = testServer.CreateConnection())
                 {
                     await connection.Send(
@@ -353,7 +359,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
                         },
                         LoggerFactory
                     )
-                ) {
+                )
+                {
                     using (var connection = testServer.CreateConnection())
                     {
                         await SendContentLength1Post(connection);
@@ -386,7 +393,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
                     },
                     LoggerFactory
                 )
-            ) {
+            )
+            {
                 using (var connection = testServer.CreateConnection())
                 {
                     await SendContentLength1Post(connection);

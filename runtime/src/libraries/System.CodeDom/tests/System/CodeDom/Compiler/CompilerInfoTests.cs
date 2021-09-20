@@ -93,7 +93,8 @@ namespace System.CodeDom.Compiler.Tests
             CompilerInfo compilerInfo,
             object other,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, compilerInfo.Equals(other));
             if (other is CompilerInfo)
             {

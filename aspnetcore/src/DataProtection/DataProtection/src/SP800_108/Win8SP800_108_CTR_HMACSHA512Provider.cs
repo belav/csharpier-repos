@@ -25,7 +25,8 @@ namespace Microsoft.AspNetCore.DataProtection.SP800_108
             uint cbContext,
             byte* pbDerivedKey,
             uint cbDerivedKey
-        ) {
+        )
+        {
             const int SHA512_ALG_CHAR_COUNT = 7;
             char* pszHashAlgorithm =
                 stackalloc char[

@@ -71,7 +71,8 @@ namespace System.Runtime.Caching
             object value,
             DateTimeOffset absoluteExpiration,
             string regionName = null
-        ) {
+        )
+        {
             return (AddOrGetExisting(key, value, absoluteExpiration, regionName) == null);
         }
 
@@ -85,7 +86,8 @@ namespace System.Runtime.Caching
             object value,
             CacheItemPolicy policy,
             string regionName = null
-        ) {
+        )
+        {
             return (AddOrGetExisting(key, value, policy, regionName) == null);
         }
 
@@ -133,7 +135,8 @@ namespace System.Runtime.Caching
         public virtual IDictionary<string, object> GetValues(
             string regionName,
             params string[] keys
-        ) {
+        )
+        {
             return GetValues(keys, regionName);
         }
 

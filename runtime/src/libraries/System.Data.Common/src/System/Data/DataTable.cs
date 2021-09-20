@@ -240,7 +240,8 @@ namespace System.Data
             StreamingContext context,
             bool isSingleTable,
             SerializationFormat remotingFormat
-        ) {
+        )
+        {
             info.AddValue("DataTable.RemotingVersion", new Version(2, 0));
 
             // SqlHotFix 299, SerializationFormat enumeration types don't exist in V1.1 SP1
@@ -310,7 +311,8 @@ namespace System.Data
             StreamingContext context,
             bool isSingleTable,
             SerializationFormat remotingFormat
-        ) {
+        )
+        {
             if (remotingFormat != SerializationFormat.Xml)
             {
                 //Binary
@@ -357,7 +359,8 @@ namespace System.Data
             SerializationInfo info,
             StreamingContext context,
             bool isSingleTable
-        ) {
+        )
+        {
             //DataTable basic  properties
             info.AddValue("DataTable.TableName", TableName);
             info.AddValue("DataTable.Namespace", Namespace);
@@ -501,7 +504,8 @@ namespace System.Data
             SerializationInfo info,
             StreamingContext context,
             bool isSingleTable
-        ) {
+        )
+        {
             //DataTable basic properties
             _tableName = info.GetString("DataTable.TableName")!;
             _tableNamespace = info.GetString("DataTable.Namespace");
@@ -662,7 +666,8 @@ namespace System.Data
             StreamingContext context,
             int serIndex,
             bool allConstraints
-        ) {
+        )
+        {
             if (allConstraints)
             {
                 Debug.Assert(DataSet != null);
@@ -751,7 +756,8 @@ namespace System.Data
             StreamingContext context,
             int serIndex,
             bool allConstraints
-        ) {
+        )
+        {
             ArrayList constraintList = (ArrayList)info.GetValue(
                 string.Format(CultureInfo.InvariantCulture, "DataTable_{0}.Constraints", serIndex),
                 typeof(ArrayList)
@@ -838,7 +844,8 @@ namespace System.Data
             SerializationInfo info,
             StreamingContext context,
             int serIndex
-        ) {
+        )
+        {
             int colCount = Columns.Count;
             for (int i = 0; i < colCount; i++)
             {
@@ -859,7 +866,8 @@ namespace System.Data
             SerializationInfo info,
             StreamingContext context,
             int serIndex
-        ) {
+        )
+        {
             int colCount = Columns.Count;
             for (int i = 0; i < colCount; i++)
             {
@@ -883,7 +891,8 @@ namespace System.Data
             SerializationInfo info,
             StreamingContext context,
             int serIndex
-        ) {
+        )
+        {
             //Cache all the column count, row count
             int colCount = Columns.Count;
             int rowCount = Rows.Count;
@@ -996,7 +1005,8 @@ namespace System.Data
             SerializationInfo info,
             StreamingContext context,
             int serIndex
-        ) {
+        )
+        {
             bool enforceConstraintsOrg = _enforceConstraints;
             bool inDataLoadOrg = _inDataLoad;
 
@@ -2080,7 +2090,8 @@ namespace System.Data
                                         _dataSet.Locale
                                     )
                                 ) && !_fNestedInDataset
-                            ) {
+                            )
+                            {
                                 throw ExceptionBuilder.DatasetConflictingName(_dataSet.DataSetName);
                             }
 
@@ -2170,7 +2181,8 @@ namespace System.Data
                         (nestedRelations[j].ParentTable == this)
                         || (visitedTables.Contains(nestedRelations[j].ParentTable))
                     )
-                ) {
+                )
+                {
                     j++;
                 }
                 if (j < nestedRelations.Length)
@@ -2251,7 +2263,8 @@ namespace System.Data
                     (rel.Nested)
                     && (rel.ChildTable != this)
                     && (rel.ChildTable._tableNamespace == null)
-                ) {
+                )
+                {
                     DataTable childTable = rel.ChildTable;
                     if (_dataSet!.Tables.Contains(childTable.TableName, realNamespace, false, true))
                         throw ExceptionBuilder.DuplicateTableName2(TableName, realNamespace);
@@ -2296,7 +2309,8 @@ namespace System.Data
         internal void CheckNamespaceValidityForNestedParentRelations(
             string ns,
             DataTable parentTable
-        ) {
+        )
+        {
             foreach (DataRelation rel in ParentRelations)
             {
                 if (rel.Nested)
@@ -2402,7 +2416,8 @@ namespace System.Data
                 if (
                     (XmlConvert.DecodeName(value) == value)
                     && (XmlConvert.EncodeName(value) != value)
-                ) {
+                )
+                {
                     throw ExceptionBuilder.InvalidPrefix(value);
                 }
 
@@ -2488,7 +2503,8 @@ namespace System.Data
             int newRecord,
             int oldRecord,
             DataRowAction action
-        ) {
+        )
+        {
             if (newRecord != -1)
             {
                 SetNewRecord(row, newRecord, action, true, true);
@@ -2513,7 +2529,8 @@ namespace System.Data
             DataRow? targetRow,
             bool preserveChanges,
             Index? idxSearch
-        ) {
+        )
+        {
             if (targetRow == null)
             {
                 targetRow = NewEmptyRow();
@@ -2544,7 +2561,8 @@ namespace System.Data
                     if (
                         targetRow.RowState == DataRowState.Unchanged
                         && row.RowState == DataRowState.Unchanged
-                    ) {
+                    )
+                    {
                         // unchanged row merging with unchanged row
                         oldRecord = targetRow._oldRecord;
                         newRecord =
@@ -2577,7 +2595,8 @@ namespace System.Data
                         if (
                             saveIdxRecord
                             != ((saveRowState == DataRowState.Added) ? newRecord : oldRecord)
-                        ) {
+                        )
+                        {
                             SetMergeRecords(
                                 targetRow,
                                 newRecord,
@@ -2868,7 +2887,8 @@ namespace System.Data
                             foreign.Clone(clone) is ForeignKeyConstraint clonedConstraint
                             && clone.Constraints.FindConstraint(clonedConstraint)
                                 is Constraint oldConstraint
-                        ) {
+                        )
+                        {
                             oldConstraint.ConstraintName = Constraints[j].ConstraintName;
                         }
                     }
@@ -2879,7 +2899,8 @@ namespace System.Data
                         unique.Clone(clone) is UniqueConstraint clonedConstraint
                         && clone.Constraints.FindConstraint(clonedConstraint)
                             is Constraint oldConstraint
-                    ) {
+                    )
+                    {
                         oldConstraint.ConstraintName = Constraints[j].ConstraintName;
                         foreach (object key in clonedConstraint.ExtendedProperties.Keys)
                         {
@@ -2902,7 +2923,8 @@ namespace System.Data
                         if (
                             foreign.Table == foreign.RelatedTable
                             && foreign.Clone(clone) is ForeignKeyConstraint newforeign
-                        ) {
+                        )
+                        {
                             // we cant make sure that we recieve a cloned FKC,since it depends if table and relatedtable be the same
                             clone.Constraints.Add(newforeign);
                         }
@@ -3330,7 +3352,8 @@ namespace System.Data
                             new ParentForeignKeyConstraintEnumerator(_dataSet, this);
                         constraints.GetNext();
 
-                    ) {
+                    )
+                    {
                         ForeignKeyConstraint constraint = constraints.GetForeignKeyConstraint();
                         constraint.CheckCanClearParentTable(this);
                     }
@@ -3377,7 +3400,8 @@ namespace System.Data
                         new ParentForeignKeyConstraintEnumerator(_dataSet, this);
                     constraints.GetNext();
 
-                ) {
+                )
+                {
                     constraints.GetForeignKeyConstraint().CheckCascade(row, action);
                 }
             }
@@ -3676,7 +3700,8 @@ namespace System.Data
             IndexField[] indexDesc,
             DataViewRowState recordStates,
             IFilter? rowFilter
-        ) {
+        )
+        {
             _indexesLock.EnterUpgradeableReadLock();
             try
             {
@@ -4124,7 +4149,8 @@ namespace System.Data
             DataRowChangeEventArgs? args,
             DataRow eRow,
             DataRowAction eAction
-        ) {
+        )
+        {
             if ((null != _onRowChangedDelegate) || IsTypedDataTable)
             {
                 if (null == args)
@@ -4140,7 +4166,8 @@ namespace System.Data
             DataRowChangeEventArgs? args,
             DataRow eRow,
             DataRowAction eAction
-        ) {
+        )
+        {
             if ((null != _onRowChangingDelegate) || IsTypedDataTable)
             {
                 if (null == args)
@@ -4280,7 +4307,8 @@ namespace System.Data
                             4,
                             StringComparison.OrdinalIgnoreCase
                         ) == 0
-                    ) {
+                    )
+                    {
                         current = current.AsSpan(0, length - 4).Trim().ToString();
                     }
                     else if (
@@ -4293,7 +4321,8 @@ namespace System.Data
                             5,
                             StringComparison.OrdinalIgnoreCase
                         ) == 0
-                    ) {
+                    )
+                    {
                         descending = true;
                         current = current.AsSpan(0, length - 5).Trim().ToString();
                     }
@@ -4390,7 +4419,8 @@ namespace System.Data
             int record,
             DataViewRowState oldState,
             DataViewRowState newState
-        ) {
+        )
+        {
             SetShadowIndexes();
             try
             {
@@ -4419,7 +4449,8 @@ namespace System.Data
             int record2,
             DataViewRowState oldState2,
             DataViewRowState newState2
-        ) {
+        )
+        {
             SetShadowIndexes();
             try
             {
@@ -4475,7 +4506,8 @@ namespace System.Data
                 if (
                     row.HasVersion(version)
                     && ((states & _indexes[indexCount].RecordStates) != DataViewRowState.None)
-                ) {
+                )
+                {
                     int index = _indexes[indexCount].GetIndex(recordNo);
                     if (index > -1)
                     {
@@ -4530,7 +4562,8 @@ namespace System.Data
             DataColumn dc,
             DataRowVersion version,
             object newValue
-        ) {
+        )
+        {
             // get record for version
             int record = dr.GetRecordFromVersion(version);
 
@@ -4612,7 +4645,8 @@ namespace System.Data
                         new ParentForeignKeyConstraintEnumerator(_dataSet, this);
                     constraints.GetNext();
 
-                ) {
+                )
+                {
                     constraints.GetForeignKeyConstraint().CheckCanRemoveParentRow(row);
                 }
             }
@@ -4742,13 +4776,15 @@ namespace System.Data
             DataRowChangeEventArgs? args,
             DataRow eRow,
             DataRowAction eAction
-        ) {
+        )
+        {
             try
             {
                 if (
                     UpdatingCurrent(eRow, eAction)
                     && (IsTypedDataTable || (null != _onRowChangedDelegate))
-                ) {
+                )
+                {
                     args = OnRowChanged(args, eRow, eAction);
                 }
                 // check if we deleting good row
@@ -4756,7 +4792,8 @@ namespace System.Data
                     DataRowAction.Delete == eAction
                     && eRow._newRecord == -1
                     && (IsTypedDataTable || (null != _onRowDeletedDelegate))
-                ) {
+                )
+                {
                     if (null == args)
                     {
                         args = new DataRowChangeEventArgs(eRow, eAction);
@@ -4775,11 +4812,13 @@ namespace System.Data
             DataRowChangeEventArgs? args,
             DataRow eRow,
             DataRowAction eAction
-        ) {
+        )
+        {
             if (
                 UpdatingCurrent(eRow, eAction)
                 && (IsTypedDataTable || (null != _onRowChangingDelegate))
-            ) {
+            )
+            {
                 eRow._inChangingEvent = true;
 
                 // don't catch
@@ -4798,7 +4837,8 @@ namespace System.Data
                 DataRowAction.Delete == eAction
                 && eRow._newRecord != -1
                 && (IsTypedDataTable || (null != _onRowDeletingDelegate))
-            ) {
+            )
+            {
                 eRow._inDeletingEvent = true;
                 // don't catch
                 try
@@ -4823,7 +4863,8 @@ namespace System.Data
             DataRow eRow,
             DataRowAction eAction,
             bool fireEvent
-        ) {
+        )
+        {
             // check all constraints
             if (EnforceConstraints)
             {
@@ -4856,7 +4897,8 @@ namespace System.Data
                     !MergingData
                     && eAction != DataRowAction.Nothing
                     && eAction != DataRowAction.ChangeOriginal
-                ) {
+                )
+                {
                     CascadeAll(eRow, eAction);
                 }
             }
@@ -4919,7 +4961,8 @@ namespace System.Data
             string? filterExpression,
             string? sort,
             DataViewRowState recordStates
-        ) {
+        )
+        {
             DataCommonEventSource.Log.Trace(
                 "<ds.DataTable.Select|API> {0}, filterExpression='{1}', sort='{2}', recordStates={3}",
                 ObjectID,
@@ -4937,7 +4980,8 @@ namespace System.Data
             bool isInMerge = false,
             bool fireEvent = true,
             bool suppressEnsurePropertyChanged = false
-        ) {
+        )
+        {
             Exception? deferredException = null;
             SetNewRecordWorker(
                 row,
@@ -4964,7 +5008,8 @@ namespace System.Data
             int position,
             bool fireEvent,
             out Exception? deferredException
-        ) {
+        )
+        {
             // this is the event workhorse... it will throw the changing/changed events
             // and update the indexes. Used by change, add, delete, revert.
 
@@ -5050,7 +5095,8 @@ namespace System.Data
                 (action == DataRowAction.Delete || action == DataRowAction.Change)
                 && _dependentColumns != null
                 && _dependentColumns.Count > 0
-            ) {
+            )
+            {
                 // if there are expression columns, need to cache related rows for deletes and updates (key changes)
                 // before indexes are modified.
                 cachedRows = new List<DataRow>();
@@ -5083,7 +5129,8 @@ namespace System.Data
                 && (row._newRecord != proposedRecord)
                 && (-1 != proposedRecord)
                 && (-1 != row._newRecord)
-            ) {
+            )
+            {
                 // DataRow will believe multiple edits occurred and
                 // DataView.ListChanged event w/ ListChangedType.ItemChanged will raise DataRowView.PropertyChanged event and
                 // PropertyChangedEventArgs.PropertyName will now be empty string so
@@ -5100,7 +5147,8 @@ namespace System.Data
                     && (-1 != proposedRecord)
                     && (-1 != row._oldRecord)
                     && (proposedRecord != row._oldRecord)
-                ) {
+                )
+                {
                     // the transition from DataRowState.Deleted -> DataRowState.Modified
                     // with same orginal record but new current record
                     // needs to raise an ItemChanged or ItemMoved instead of ItemAdded in the ListChanged event.
@@ -5224,7 +5272,8 @@ namespace System.Data
                         && (-1 != proposedRecord)
                         && (-1 != row._newRecord)
                         && (proposedRecord != row._newRecord)
-                    ) {
+                    )
+                    {
                         // the transition from DataRowState.Added -> DataRowState.Modified
                         // with same current record but new original record
                         // needs to raise an ItemChanged or ItemMoved instead of ItemAdded in the ListChanged event.
@@ -5270,7 +5319,8 @@ namespace System.Data
                     && (originalRecord != row._tempRecord)
                     && (originalRecord != row._oldRecord)
                     && (originalRecord != row._newRecord)
-                ) {
+                )
+                {
                     FreeRecord(ref originalRecord);
                 }
                 // else during an event 'row.AcceptChanges(); row.BeginEdit(); row.EndEdit();'
@@ -5693,7 +5743,8 @@ namespace System.Data
         /// </summary>
         internal PropertyDescriptorCollection GetPropertyDescriptorCollection(
             Attribute[]? attributes
-        ) {
+        )
+        {
             if (_propertyDescriptorCollectionCache == null)
             {
                 int columnsCount = Columns.Count;
@@ -5734,7 +5785,8 @@ namespace System.Data
             DataTable table,
             bool preserveChanges,
             MissingSchemaAction missingSchemaAction
-        ) {
+        )
+        {
             long logScopeId = DataCommonEventSource.Log.EnterScope(
                 "<ds.DataTable.Merge|API> {0}, table={1}, preserveChanges={2}, missingSchemaAction={3}",
                 ObjectID,
@@ -5778,7 +5830,8 @@ namespace System.Data
             IDataReader reader,
             LoadOption loadOption,
             FillErrorEventHandler? errorHandler
-        ) {
+        )
+        {
             long logScopeId = DataCommonEventSource.Log.EnterScope(
                 "<ds.DataTable.Load|API> {0}, loadOption={1}",
                 ObjectID,
@@ -5868,7 +5921,8 @@ namespace System.Data
                         if (
                             loadOption != LoadOption.Upsert
                             || dataRow.RowState != DataRowState.Deleted
-                        ) {
+                        )
+                        {
                             SetDataRowWithLoadOption(dataRow, recordNo, loadOption, true);
                         }
                         else
@@ -5926,7 +5980,8 @@ namespace System.Data
             int recordNo,
             LoadOption loadOption,
             bool checkReadOnly
-        ) {
+        )
+        {
             bool hasError = false;
             if (checkReadOnly)
             {
@@ -6521,7 +6576,8 @@ namespace System.Data
                         reader.LocalName == Keywords.DIFFGRAM
                         && reader.NamespaceURI == Keywords.DFFNS
                     )
-                ) {
+                )
+                {
                     return true;
                 }
                 if (reader.AttributeCount == 1)
@@ -6532,7 +6588,8 @@ namespace System.Data
                         && (Prefix == reader.LocalName)
                         && (reader.Prefix == Keywords.XMLNS)
                         && (reader.NamespaceURI == Keywords.XSD_XMLNS_NS)
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }
@@ -6606,7 +6663,8 @@ namespace System.Data
                         if (
                             (reader.LocalName == Keywords.DIFFGRAM)
                             && (reader.NamespaceURI == Keywords.DFFNS)
-                        ) {
+                        )
+                        {
                             if (Columns.Count == 0)
                             {
                                 if (reader.IsEmptyElement)
@@ -6628,7 +6686,8 @@ namespace System.Data
                         if (
                             reader.LocalName == Keywords.XDR_SCHEMA
                             && reader.NamespaceURI == Keywords.XDRNS
-                        ) {
+                        )
+                        {
                             // load XDR schema and exit
                             ReadXDRSchema(reader);
 
@@ -6639,7 +6698,8 @@ namespace System.Data
                         if (
                             reader.LocalName == Keywords.XSD_SCHEMA
                             && reader.NamespaceURI == Keywords.XSDNS
-                        ) {
+                        )
+                        {
                             // load XSD schema and exit
                             ReadXmlSchema(reader, denyResolving);
                             RestoreConstraint(originalEnforceConstraint);
@@ -6652,7 +6712,8 @@ namespace System.Data
                                 Keywords.XSD_NS_START,
                                 StringComparison.Ordinal
                             )
-                        ) {
+                        )
+                        {
                             if (DataSet != null)
                             { // we should not throw for constraint, we already will throw for unsupported schema, so restore enforce cost, but not via property
                                 DataSet.RestoreEnforceConstraints(originalEnforceConstraint);
@@ -6701,7 +6762,8 @@ namespace System.Data
                             if (
                                 (reader.LocalName == Keywords.DIFFGRAM)
                                 && (reader.NamespaceURI == Keywords.DFFNS)
-                            ) {
+                            )
+                            {
                                 ReadXmlDiffgram(reader);
                                 // read the closing tag of the current element
                                 ReadEndElement(reader);
@@ -6717,7 +6779,8 @@ namespace System.Data
                                 && !fDataFound
                                 && reader.LocalName == Keywords.XDR_SCHEMA
                                 && reader.NamespaceURI == Keywords.XDRNS
-                            ) {
+                            )
+                            {
                                 // load XDR schema and exit
                                 ReadXDRSchema(reader);
                                 fSchemaFound = true;
@@ -6728,7 +6791,8 @@ namespace System.Data
                             if (
                                 reader.LocalName == Keywords.XSD_SCHEMA
                                 && reader.NamespaceURI == Keywords.XSDNS
-                            ) {
+                            )
+                            {
                                 // load XSD schema and exit
                                 ReadXmlSchema(reader, denyResolving);
                                 fSchemaFound = true;
@@ -6741,7 +6805,8 @@ namespace System.Data
                                     Keywords.XSD_NS_START,
                                     StringComparison.Ordinal
                                 )
-                            ) {
+                            )
+                            {
                                 if (DataSet != null)
                                 {
                                     // we should not throw for constraint, we already will throw for unsupported schema, so restore enforce cost, but not via property
@@ -6757,7 +6822,8 @@ namespace System.Data
                             if (
                                 (reader.LocalName == Keywords.DIFFGRAM)
                                 && (reader.NamespaceURI == Keywords.DFFNS)
-                            ) {
+                            )
+                            {
                                 ReadXmlDiffgram(reader);
                                 fDiffsFound = true;
                                 ret = XmlReadMode.DiffGram;
@@ -6896,10 +6962,12 @@ namespace System.Data
                         if (
                             (reader.LocalName == Keywords.DIFFGRAM)
                             && (reader.NamespaceURI == Keywords.DFFNS)
-                        ) {
+                        )
+                        {
                             if (
                                 (mode == XmlReadMode.DiffGram) || (mode == XmlReadMode.IgnoreSchema)
-                            ) {
+                            )
+                            {
                                 if (Columns.Count == 0)
                                 {
                                     if (reader.IsEmptyElement)
@@ -6924,12 +6992,14 @@ namespace System.Data
                         if (
                             reader.LocalName == Keywords.XDR_SCHEMA
                             && reader.NamespaceURI == Keywords.XDRNS
-                        ) {
+                        )
+                        {
                             // load XDR schema and exit
                             if (
                                 (mode != XmlReadMode.IgnoreSchema)
                                 && (mode != XmlReadMode.InferSchema)
-                            ) {
+                            )
+                            {
                                 ReadXDRSchema(reader);
                             }
                             else
@@ -6943,12 +7013,14 @@ namespace System.Data
                         if (
                             reader.LocalName == Keywords.XSD_SCHEMA
                             && reader.NamespaceURI == Keywords.XSDNS
-                        ) {
+                        )
+                        {
                             // load XSD schema and exit
                             if (
                                 (mode != XmlReadMode.IgnoreSchema)
                                 && (mode != XmlReadMode.InferSchema)
-                            ) {
+                            )
+                            {
                                 ReadXmlSchema(reader, denyResolving);
                             }
                             else
@@ -6966,7 +7038,8 @@ namespace System.Data
                                 Keywords.XSD_NS_START,
                                 StringComparison.Ordinal
                             )
-                        ) {
+                        )
+                        {
                             if (DataSet != null)
                             {
                                 // we should not throw for constraint, we already will throw for unsupported schema, so restore enforce cost, but not via property
@@ -7015,14 +7088,16 @@ namespace System.Data
                         if (
                             reader.LocalName == Keywords.XDR_SCHEMA
                             && reader.NamespaceURI == Keywords.XDRNS
-                        ) {
+                        )
+                        {
                             // load XDR schema
                             if (
                                 !fSchemaFound
                                 && !fDataFound
                                 && (mode != XmlReadMode.IgnoreSchema)
                                 && (mode != XmlReadMode.InferSchema)
-                            ) {
+                            )
+                            {
                                 ReadXDRSchema(reader);
                                 fSchemaFound = true;
                                 fIsXdr = true;
@@ -7037,12 +7112,14 @@ namespace System.Data
                         if (
                             reader.LocalName == Keywords.XSD_SCHEMA
                             && reader.NamespaceURI == Keywords.XSDNS
-                        ) {
+                        )
+                        {
                             // load XSD schema and exit
                             if (
                                 (mode != XmlReadMode.IgnoreSchema)
                                 && (mode != XmlReadMode.InferSchema)
-                            ) {
+                            )
+                            {
                                 ReadXmlSchema(reader, denyResolving);
                                 fSchemaFound = true;
                             }
@@ -7056,10 +7133,12 @@ namespace System.Data
                         if (
                             (reader.LocalName == Keywords.DIFFGRAM)
                             && (reader.NamespaceURI == Keywords.DFFNS)
-                        ) {
+                        )
+                        {
                             if (
                                 (mode == XmlReadMode.DiffGram) || (mode == XmlReadMode.IgnoreSchema)
-                            ) {
+                            )
+                            {
                                 if (Columns.Count == 0)
                                 {
                                     if (reader.IsEmptyElement)
@@ -7085,7 +7164,8 @@ namespace System.Data
                                 Keywords.XSD_NS_START,
                                 StringComparison.Ordinal
                             )
-                        ) {
+                        )
+                        {
                             if (DataSet != null)
                             {
                                 // we should not throw for constraint, we already will throw for unsupported schema, so restore enforce cost, but not via property
@@ -7201,7 +7281,8 @@ namespace System.Data
                 && reader.NodeType != XmlNodeType.EndElement
                 && reader.NodeType != XmlNodeType.Element
                 && reader.Depth > depth
-            ) {
+            )
+            {
                 reader.Read();
             }
             return (reader.NodeType == XmlNodeType.Element);
@@ -7252,7 +7333,8 @@ namespace System.Data
                 if (
                     (reader.NamespaceURI != Keywords.DFFNS)
                     && (reader.NamespaceURI != Keywords.MSDNS)
-                ) {
+                )
+                {
                     //we should be inside the dataset part
                     XmlDocument xdoc = new XmlDocument();
                     XmlElement node = xdoc.CreateElement(
@@ -7279,7 +7361,8 @@ namespace System.Data
                         (reader.LocalName == Keywords.MSD_ERRORS)
                         && (reader.NamespaceURI == Keywords.DFFNS)
                     )
-                ) {
+                )
+                {
                     //this will consume the changes and the errors part
                     XMLDiffLoader diffLoader = new XMLDiffLoader();
                     diffLoader.LoadDiffGram(newDt, reader);
@@ -7532,7 +7615,8 @@ namespace System.Data
                                     if (
                                         tableList.Contains(fkc.Table!)
                                         && tableList.Contains(fkc.RelatedTable)
-                                    ) {
+                                    )
+                                    {
                                         ForeignKeyConstraint newFKC =
                                             (ForeignKeyConstraint)fkc.Clone(
                                                 destinationTable.DataSet!
@@ -7541,7 +7625,8 @@ namespace System.Data
                                             !destinationTable.Constraints.Contains(
                                                 newFKC.ConstraintName
                                             )
-                                        ) {
+                                        )
+                                        {
                                             destinationTable.Constraints.Add(newFKC); // we know that the dest table is already in the table
                                         }
                                     }
@@ -7931,7 +8016,8 @@ namespace System.Data
             DataRow row,
             DataRowAction action,
             List<DataRow>? cachedRows
-        ) {
+        )
+        {
             // evaluate all expressions for specified row
             if (
                 action == DataRowAction.Add
@@ -7940,7 +8026,8 @@ namespace System.Data
                     action == DataRowAction.Rollback
                     && (row._oldRecord != -1 || row._newRecord != -1)
                 )
-            ) {
+            )
+            {
                 // only evaluate original values if different from current.
                 if (row._oldRecord != -1 && row._oldRecord != row._newRecord)
                 {
@@ -7981,14 +8068,16 @@ namespace System.Data
                     )
                 )
                 && _dependentColumns != null
-            ) {
+            )
+            {
                 foreach (DataColumn col in _dependentColumns)
                 {
                     if (
                         col.DataExpression != null
                         && col.DataExpression.HasLocalAggregate()
                         && col.Table == this
-                    ) {
+                    )
+                    {
                         for (int j = 0; j < Rows.Count; j++)
                         {
                             DataRow tableRow = Rows[j];
@@ -7996,7 +8085,8 @@ namespace System.Data
                             if (
                                 tableRow._oldRecord != -1
                                 && tableRow._oldRecord != tableRow._newRecord
-                            ) {
+                            )
+                            {
                                 EvaluateDependentExpressions(
                                     _dependentColumns,
                                     tableRow,
@@ -8048,7 +8138,8 @@ namespace System.Data
                         if (
                             relatedRow._oldRecord != -1
                             && relatedRow._oldRecord != relatedRow._newRecord
-                        ) {
+                        )
+                        {
                             relatedRow.Table.EvaluateDependentExpressions(
                                 relatedRow.Table._dependentColumns,
                                 relatedRow,
@@ -8162,7 +8253,8 @@ namespace System.Data
             DataRow row,
             DataRowVersion version,
             List<DataRow>? cachedRows
-        ) {
+        )
+        {
             if (columns == null)
             {
                 return;
@@ -8199,7 +8291,8 @@ namespace System.Data
                             else if (
                                 expressionVersion == DataRowVersion.Original
                                 && (dr._oldRecord == -1 || dr._oldRecord == dr._newRecord)
-                            ) {
+                            )
+                            {
                                 continue;
                             }
 
@@ -8219,7 +8312,8 @@ namespace System.Data
                         else if (
                             version == DataRowVersion.Original
                             && (row._oldRecord == -1 || row._oldRecord == row._newRecord)
-                        ) {
+                        )
+                        {
                             continue;
                         }
                         SilentlySetValue(
@@ -8242,7 +8336,8 @@ namespace System.Data
                 if (
                     dc.Table != this
                     || (dc.DataExpression != null && !dc.DataExpression.HasLocalAggregate())
-                ) {
+                )
+                {
                     DataRowVersion foreignVer =
                         (version == DataRowVersion.Proposed) ? DataRowVersion.Default : version;
 
@@ -8260,7 +8355,8 @@ namespace System.Data
                             if (
                                 foreignVer == DataRowVersion.Original
                                 && cachedRow._newRecord == cachedRow._oldRecord
-                            ) {
+                            )
+                            {
                                 continue;
                             }
 
@@ -8273,7 +8369,8 @@ namespace System.Data
                                         || cachedRow._oldRecord != -1
                                     )
                                 )
-                            ) {
+                            )
+                            {
                                 // if deleted GetRecordFromVersion will throw
                                 // TODO: Possible bug, dc.DataExpression may be null
                                 object newValue = dc.DataExpression!.Evaluate(
@@ -8305,7 +8402,8 @@ namespace System.Data
                             if (
                                 foreignVer == DataRowVersion.Original
                                 && parentRow._newRecord == parentRow._oldRecord
-                            ) {
+                            )
+                            {
                                 continue;
                             }
 
@@ -8318,7 +8416,8 @@ namespace System.Data
                                         || parentRow._oldRecord != -1
                                     )
                                 )
-                            ) {
+                            )
+                            {
                                 // if deleted GetRecordFromVersion will throw
                                 // TODO: Possible bug, dc.DataExpression may be null
                                 object newValue = dc.DataExpression!.Evaluate(
@@ -8350,7 +8449,8 @@ namespace System.Data
                             if (
                                 foreignVer == DataRowVersion.Original
                                 && childRow._newRecord == childRow._oldRecord
-                            ) {
+                            )
+                            {
                                 continue;
                             }
 
@@ -8363,7 +8463,8 @@ namespace System.Data
                                         || childRow._oldRecord != -1
                                     )
                                 )
-                            ) {
+                            )
+                            {
                                 // if deleted GetRecordFromVersion will throw
                                 // TODO: Possible bug, dc.DataExpression may be null
                                 object newValue = dc.DataExpression!.Evaluate(childRow, foreignVer);

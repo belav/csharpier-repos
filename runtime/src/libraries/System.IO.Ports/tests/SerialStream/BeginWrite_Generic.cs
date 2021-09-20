@@ -50,7 +50,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 Debug.WriteLine("Verifying write method throws exception after a call to Cloes()");
 
                 com.Open();
@@ -68,7 +69,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 Debug.WriteLine(
                     "Verifying write method throws exception after a call to BaseStream.Close()"
                 );
@@ -100,7 +102,8 @@ namespace System.IO.Ports.Tests
             )
             using (
                 var com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName)
-            ) {
+            )
+            {
                 var elapsedTime = 0;
 
                 Debug.WriteLine("Verifying BytesToWrite with one call to Write");
@@ -152,7 +155,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 // Write a random byte[] asynchronously so we can verify some things while the write call is blocking
                 Debug.WriteLine("Verifying Handshake=None");
 
@@ -231,7 +235,8 @@ namespace System.IO.Ports.Tests
             )
             using (
                 var com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName)
-            ) {
+            )
+            {
                 var asyncRead = new AsyncWrite(com1);
                 var asyncEndWrite = new Task(asyncRead.EndWrite);
                 var asyncCallbackCalled = false;
@@ -301,7 +306,8 @@ namespace System.IO.Ports.Tests
             )
             using (
                 var com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName)
-            ) {
+            )
+            {
                 bool rts =
                     Handshake.RequestToSend == handshake
                     || Handshake.RequestToSendXOnXOff == handshake;

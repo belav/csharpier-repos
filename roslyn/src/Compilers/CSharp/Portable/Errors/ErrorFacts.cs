@@ -601,7 +601,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal static bool PreventsSuccessfulDelegateConversion(
             ImmutableArray<Diagnostic> diagnostics
-        ) {
+        )
+        {
             foreach (var diag in diagnostics)
             {
                 if (ErrorFacts.PreventsSuccessfulDelegateConversion((ErrorCode)diag.Code))

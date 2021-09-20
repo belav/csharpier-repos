@@ -24,7 +24,8 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(LoopbackServer.ContentMode.BytePerChunk)]
         public async Task GetAsync_DisposeBeforeReadingToEnd_DrainsRequestsAndReusesConnection(
             LoopbackServer.ContentMode mode
-        ) {
+        )
+        {
             const string simpleContent = "Hello world!";
 
             await LoopbackServer.CreateClientAndServerAsync(
@@ -111,7 +112,8 @@ namespace System.Net.Http.Functional.Tests
             int totalSize,
             int readSize,
             LoopbackServer.ContentMode mode
-        ) {
+        )
+        {
             await LoopbackServer.CreateClientAndServerAsync(
                 async url =>
                 {
@@ -181,7 +183,8 @@ namespace System.Net.Http.Functional.Tests
             int totalSize,
             int readSize,
             LoopbackServer.ContentMode mode
-        ) {
+        )
+        {
             await GetAsyncWithMaxConnections_DisposeBeforeReadingToEnd_DrainsRequestsAndReusesConnection(
                 totalSize,
                 readSize,
@@ -204,7 +207,8 @@ namespace System.Net.Http.Functional.Tests
             int totalSize,
             int readSize,
             LoopbackServer.ContentMode mode
-        ) {
+        )
+        {
             await LoopbackServer.CreateClientAndServerAsync(
                 async url =>
                 {
@@ -275,7 +279,8 @@ namespace System.Net.Http.Functional.Tests
             HttpResponseMessage response,
             int contentLength,
             LoopbackServer.ContentMode mode
-        ) {
+        )
+        {
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
             switch (mode)

@@ -45,7 +45,8 @@ namespace System.Text.Json.Node
         public override DynamicMetaObject BindSetMember(
             SetMemberBinder binder,
             DynamicMetaObject value
-        ) {
+        )
+        {
             MethodInfo? methodInfo = Dynamic.TrySetMemberMethodInfo;
             if (methodInfo == null)
             {
@@ -240,7 +241,8 @@ namespace System.Text.Json.Node
                 if (
                     binder.ReturnType.IsValueType
                     && Nullable.GetUnderlyingType(binder.ReturnType) == null
-                ) {
+                )
+                {
                     condition = Expression.TypeIs(resultMO.Expression, binder.ReturnType);
                 }
                 else
@@ -435,7 +437,8 @@ namespace System.Text.Json.Node
             public override DynamicMetaObject FallbackGetMember(
                 DynamicMetaObject target,
                 DynamicMetaObject? errorSuggestion
-            ) {
+            )
+            {
                 throw new NotSupportedException();
             }
         }

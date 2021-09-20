@@ -39,15 +39,17 @@ namespace Microsoft.CodeAnalysis.CSharp
                 VariableSlotAllocator slotAllocatorOpt,
                 TypeCompilationState compilationState,
                 BindingDiagnosticBag diagnostics
-            ) : base(
-                body,
-                method,
-                methodOrdinal,
-                stateMachineType,
-                slotAllocatorOpt,
-                compilationState,
-                diagnostics
-            ) {
+            )
+                : base(
+                    body,
+                    method,
+                    methodOrdinal,
+                    stateMachineType,
+                    slotAllocatorOpt,
+                    compilationState,
+                    diagnostics
+                )
+            {
                 Debug.Assert(
                     !TypeSymbol.Equals(
                         method.IteratorElementTypeWithAnnotations.Type,
@@ -237,7 +239,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     && this.method.Parameters.Any(
                         p => p.IsSourceParameterWithEnumeratorCancellationAttribute()
                     )
-                ) {
+                )
+                {
                     // Add a field: CancellationTokenSource combinedTokens
                     _combinedTokensField = F.StateMachineField(
                         F.WellKnownType(WellKnownType.System_Threading_CancellationTokenSource),
@@ -299,7 +302,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ArrayBuilder<BoundStatement> bodyBuilder,
                 NamedTypeSymbol frameType,
                 LocalSymbol stateMachineLocal
-            ) {
+            )
+            {
                 // var stateMachineLocal = new {StateMachineType}({initialState})
                 int initialState = _isEnumerable
                     ? StateMachineStates.FinishedStateMachine
@@ -320,7 +324,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ParameterSymbol parameter,
                 BoundExpression resultParameter,
                 BoundExpression parameterProxy
-            ) {
+            )
+            {
                 BoundStatement result;
                 if (
                     _combinedTokensField is object
@@ -331,7 +336,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         ),
                         TypeCompareKind.ConsiderEverything
                     )
-                ) {
+                )
+                {
                     // For a parameter of type CancellationToken with [EnumeratorCancellation]
                     // if (this.parameterProxy.Equals(default))
                     // {
@@ -410,7 +416,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 LocalSymbol stateMachineVariable,
                 NamedTypeSymbol frameType,
                 IReadOnlyDictionary<Symbol, CapturedSymbolReplacement> proxies
-            ) {
+            )
+            {
                 var bodyBuilder = ArrayBuilder<BoundStatement>.GetInstance();
 
                 bodyBuilder.Add(GenerateParameterStorage(stateMachineVariable, proxies));
@@ -564,7 +571,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 out BoundStatement instAssignment,
                 out BoundExpressionStatement startCall,
                 out MethodSymbol promise_get_Version
-            ) {
+            )
+            {
                 // Produce the following parts:
                 // - _promiseOfValueOrEnd.Reset();
                 // - var inst = this;
@@ -986,7 +994,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             protected override void GenerateResetInstance(
                 ArrayBuilder<BoundStatement> builder,
                 int initialState
-            ) {
+            )
+            {
                 // this.state = {initialState};
                 // this.builder = System.Runtime.CompilerServices.AsyncIteratorMethodBuilder.Create();
                 // this.disposeMode = false;

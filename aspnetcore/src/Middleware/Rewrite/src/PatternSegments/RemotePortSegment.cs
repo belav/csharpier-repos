@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Rewrite.PatternSegments
             RewriteContext context,
             BackReferenceCollection? ruleBackReferences,
             BackReferenceCollection? conditionBackReferences
-        ) {
+        )
+        {
             return context.HttpContext.Connection.RemotePort.ToString(CultureInfo.InvariantCulture);
         }
     }

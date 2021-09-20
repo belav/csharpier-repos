@@ -24,7 +24,8 @@ namespace System.Reflection.Emit
             Type[]? requiredCustomModifiers,
             Type[]? optionalCustomModifiers,
             FieldAttributes attributes
-        ) {
+        )
+        {
             if (fieldName == null)
                 throw new ArgumentNullException(nameof(fieldName));
 
@@ -120,7 +121,8 @@ namespace System.Reflection.Emit
             BindingFlags invokeAttr,
             Binder? binder,
             CultureInfo? culture
-        ) {
+        )
+        {
             // NOTE!!  If this is implemented, make sure that this throws
             // a NotSupportedException for Save-only dynamic assemblies.
             // Otherwise, it could cause the .cctor to be executed.

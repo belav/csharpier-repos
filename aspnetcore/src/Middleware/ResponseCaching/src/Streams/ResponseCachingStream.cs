@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.ResponseCaching
             long maxBufferSize,
             int segmentSize,
             Action startResponseCallback
-        ) {
+        )
+        {
             _innerStream = innerStream;
             _maxBufferSize = maxBufferSize;
             _segmentSize = segmentSize;
@@ -144,7 +145,8 @@ namespace Microsoft.AspNetCore.ResponseCaching
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 _startResponseCallback();

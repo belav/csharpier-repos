@@ -37,7 +37,8 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
             MemoryPool<byte> memoryPool,
             uint? bufferSize,
             ulong requestId
-        ) {
+        )
+        {
             // TODO:
             // Apparently the HttpReceiveHttpRequest memory alignment requirements for non - ARM processors
             // are different than for ARM processors. We have seen 4 - byte - aligned buffers allocated on
@@ -175,13 +176,15 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
             if (
                 verb > HttpApiTypes.HTTP_VERB.HttpVerbUnknown
                 && verb < HttpApiTypes.HTTP_VERB.HttpVerbMaximum
-            ) {
+            )
+            {
                 return HttpApiTypes.HttpVerbs[(int)verb];
             }
             else if (
                 verb == HttpApiTypes.HTTP_VERB.HttpVerbUnknown
                 && NativeRequest->pUnknownVerb != null
-            ) {
+            )
+            {
                 // Never use Latin1 for the VERB
                 return HeaderEncoding.GetString(
                     NativeRequest->pUnknownVerb,
@@ -250,7 +253,8 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
                 if (
                     info != null
                     && info->InfoType == HttpApiTypes.HTTP_REQUEST_INFO_TYPE.HttpRequestInfoTypeAuth
-                ) {
+                )
+                {
                     var authInfo = (HttpApiTypes.HTTP_REQUEST_AUTH_INFO*)info->pInfo;
                     if (authInfo->AuthStatus == HttpApiTypes.HTTP_AUTH_STATUS.HttpAuthStatusSuccess)
                     {
@@ -272,7 +276,8 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
                 if (
                     info != null
                     && info->InfoType == HttpApiTypes.HTTP_REQUEST_INFO_TYPE.HttpRequestInfoTypeAuth
-                ) {
+                )
+                {
                     var authInfo = (HttpApiTypes.HTTP_REQUEST_AUTH_INFO*)info->pInfo;
                     if (authInfo->AuthStatus == HttpApiTypes.HTTP_AUTH_STATUS.HttpAuthStatusSuccess)
                     {
@@ -305,7 +310,8 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
                     info != null
                     && info->InfoType
                         == HttpApiTypes.HTTP_REQUEST_INFO_TYPE.HttpRequestInfoTypeSslProtocol
-                ) {
+                )
+                {
                     var authInfo = (HttpApiTypes.HTTP_SSL_PROTOCOL_INFO*)info->pInfo;
                     return *authInfo;
                 }
@@ -357,7 +363,8 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
             HttpSysRequestHeader header,
             long fixup,
             HttpApiTypes.HTTP_REQUEST* request
-        ) {
+        )
+        {
             int headerIndex = (int)header;
             string? value = null;
 
@@ -399,7 +406,8 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
             IDictionary<string, StringValues> unknownHeaders,
             long fixup,
             HttpApiTypes.HTTP_REQUEST* request
-        ) {
+        )
+        {
             int index;
 
             // unknown headers
@@ -471,7 +479,8 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
             bool localEndpoint,
             HttpApiTypes.HTTP_REQUEST* request,
             byte* pMemoryBlob
-        ) {
+        )
+        {
             var source = localEndpoint
                 ? (byte*)request->Address.pLocalAddress
                 : (byte*)request->Address.pRemoteAddress;
@@ -529,7 +538,8 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
             byte[] buffer,
             int offset,
             int size
-        ) {
+        )
+        {
             // Return value.
             if (PermanentlyPinned)
             {
@@ -570,14 +580,16 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
             int size,
             long fixup,
             HttpApiTypes.HTTP_REQUEST* request
-        ) {
+        )
+        {
             uint dataRead = 0;
 
             if (
                 request->EntityChunkCount > 0
                 && dataChunkIndex < request->EntityChunkCount
                 && dataChunkIndex != -1
-            ) {
+            )
+            {
                 var pDataChunk = (HttpApiTypes.HTTP_DATA_CHUNK*)(
                     fixup + (byte*)&request->pEntityChunks[dataChunkIndex]
                 );
@@ -646,7 +658,8 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
         private IReadOnlyDictionary<int, ReadOnlyMemory<byte>> GetRequestInfo(
             IntPtr baseAddress,
             HttpApiTypes.HTTP_REQUEST_V2* nativeRequest
-        ) {
+        )
+        {
             var count = nativeRequest->RequestInfoCount;
             if (count == 0)
             {
@@ -691,7 +704,8 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
         private X509Certificate2? GetClientCertificate(
             IntPtr baseAddress,
             HttpApiTypes.HTTP_REQUEST_V2* nativeRequest
-        ) {
+        )
+        {
             var request = nativeRequest->Request;
             long fixup = (byte*)nativeRequest - (byte*)baseAddress;
             if (request.pSslInfo == null)

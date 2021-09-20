@@ -297,7 +297,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             if (
                 message.IndexOf("warning", StringComparison.OrdinalIgnoreCase) == -1
                 && message.IndexOf("error", StringComparison.OrdinalIgnoreCase) == -1
-            ) {
+            )
+            {
                 return null;
             }
 

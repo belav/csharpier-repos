@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Authentication
             ClaimsPrincipal principal,
             AuthenticationProperties? properties,
             string authenticationScheme
-        ) {
+        )
+        {
             if (principal == null)
             {
                 throw new ArgumentNullException(nameof(principal));

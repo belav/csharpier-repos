@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Tools.Workspaces
             bool logWorkspaceWarnings,
             ILogger logger,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var properties = new Dictionary<string, string>(StringComparer.Ordinal)
             {
                 // This property ensures that XAML files will be compiled in the current AppDomain
@@ -82,7 +83,8 @@ namespace Microsoft.CodeAnalysis.Tools.Workspaces
                 ILogger logger,
                 bool logWorkspaceWarnings,
                 ImmutableList<WorkspaceDiagnostic> diagnostics
-            ) {
+            )
+            {
                 if (!logWorkspaceWarnings)
                 {
                     if (!diagnostics.IsEmpty)
@@ -119,7 +121,8 @@ namespace Microsoft.CodeAnalysis.Tools.Workspaces
             bool logWorkspaceWarnings,
             ILogger logger,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             await Guard.WaitAsync();
             try
             {

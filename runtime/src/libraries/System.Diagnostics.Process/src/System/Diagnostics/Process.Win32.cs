@@ -59,7 +59,8 @@ namespace System.Diagnostics
             )fixed (
                 char* directory =
                     startInfo.WorkingDirectory.Length > 0 ? startInfo.WorkingDirectory : null
-            ) {
+            )
+            {
                 Interop.Shell32.SHELLEXECUTEINFO shellExecuteInfo =
                     new Interop.Shell32.SHELLEXECUTEINFO()
                     {
@@ -337,7 +338,8 @@ namespace System.Diagnostics
                     Interop.Advapi32.ProcessOptions.SYNCHRONIZE
                         | Interop.Advapi32.ProcessOptions.PROCESS_QUERY_INFORMATION
                 )
-            ) {
+            )
+            {
                 int ret = Interop.User32.WaitForInputIdle(handle, milliseconds);
                 switch (ret)
                 {
@@ -381,7 +383,8 @@ namespace System.Diagnostics
                     SafeProcessHandle handle = GetProcessHandle(
                         Interop.Advapi32.ProcessOptions.PROCESS_QUERY_INFORMATION
                     )
-                ) {
+                )
+                {
                     Interop.NtDll.PROCESS_BASIC_INFORMATION info;
 
                     if (
@@ -421,7 +424,8 @@ namespace System.Diagnostics
                     Interop.Advapi32.ProcessOptions.PROCESS_QUERY_LIMITED_INFORMATION,
                     throwIfExited: false
                 )
-            ) {
+            )
+            {
                 // If the process has exited, the handle is invalid.
                 if (handle.IsInvalid)
                     return null;
@@ -477,7 +481,8 @@ namespace System.Diagnostics
 
         private List<(Process Process, SafeProcessHandle Handle)> GetProcessHandlePairs(
             Func<Process, Process, bool> predicate
-        ) {
+        )
+        {
             var results = new List<(Process Process, SafeProcessHandle Handle)>();
 
             foreach (Process p in GetProcesses())

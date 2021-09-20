@@ -61,7 +61,8 @@ namespace System.Security.Cryptography
         public byte[] DeriveKeyFromHash(
             ECDiffieHellmanPublicKey otherPartyPublicKey,
             HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             return DeriveKeyFromHash(otherPartyPublicKey, hashAlgorithm, null, null);
         }
 
@@ -80,7 +81,8 @@ namespace System.Security.Cryptography
             HashAlgorithmName hashAlgorithm,
             byte[]? secretPrepend,
             byte[]? secretAppend
-        ) {
+        )
+        {
             throw DerivedClassMustOverride();
         }
 
@@ -97,7 +99,8 @@ namespace System.Security.Cryptography
             ECDiffieHellmanPublicKey otherPartyPublicKey,
             HashAlgorithmName hashAlgorithm,
             byte[]? hmacKey
-        ) {
+        )
+        {
             return DeriveKeyFromHmac(otherPartyPublicKey, hashAlgorithm, hmacKey, null, null);
         }
 
@@ -118,7 +121,8 @@ namespace System.Security.Cryptography
             byte[]? hmacKey,
             byte[]? secretPrepend,
             byte[]? secretAppend
-        ) {
+        )
+        {
             throw DerivedClassMustOverride();
         }
 
@@ -137,7 +141,8 @@ namespace System.Security.Cryptography
             ECDiffieHellmanPublicKey otherPartyPublicKey,
             byte[] prfLabel,
             byte[] prfSeed
-        ) {
+        )
+        {
             throw DerivedClassMustOverride();
         }
 
@@ -191,7 +196,8 @@ namespace System.Security.Cryptography
             PbeParameters pbeParameters,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             if (pbeParameters == null)
                 throw new ArgumentNullException(nameof(pbeParameters));
 
@@ -232,7 +238,8 @@ namespace System.Security.Cryptography
             PbeParameters pbeParameters,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             if (pbeParameters == null)
                 throw new ArgumentNullException(nameof(pbeParameters));
 
@@ -271,7 +278,8 @@ namespace System.Security.Cryptography
         public override unsafe bool TryExportPkcs8PrivateKey(
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             ECParameters ecParameters = ExportParameters(true);
 
             fixed (byte* privPtr = ecParameters.D)
@@ -292,7 +300,8 @@ namespace System.Security.Cryptography
         public override bool TryExportSubjectPublicKeyInfo(
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             ECParameters ecParameters = ExportParameters(false);
 
             AsnWriter writer = EccKeyFormatHelper.WriteSubjectPublicKeyInfo(ecParameters);
@@ -303,7 +312,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> passwordBytes,
             ReadOnlySpan<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             KeyFormatHelper.ReadEncryptedPkcs8<ECParameters>(
                 s_validOids,
                 source,
@@ -332,7 +342,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<char> password,
             ReadOnlySpan<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             KeyFormatHelper.ReadEncryptedPkcs8<ECParameters>(
                 s_validOids,
                 source,
@@ -360,7 +371,8 @@ namespace System.Security.Cryptography
         public override unsafe void ImportPkcs8PrivateKey(
             ReadOnlySpan<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             KeyFormatHelper.ReadPkcs8<ECParameters>(
                 s_validOids,
                 source,
@@ -387,7 +399,8 @@ namespace System.Security.Cryptography
         public override void ImportSubjectPublicKeyInfo(
             ReadOnlySpan<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             KeyFormatHelper.ReadSubjectPublicKeyInfo<ECParameters>(
                 s_validOids,
                 source,
@@ -444,7 +457,8 @@ namespace System.Security.Cryptography
         public virtual unsafe bool TryExportECPrivateKey(
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             ECParameters ecParameters = ExportParameters(true);
 
             fixed (byte* privPin = ecParameters.D)
@@ -591,7 +605,8 @@ namespace System.Security.Cryptography
         public override void ImportFromEncryptedPem(
             ReadOnlySpan<char> input,
             ReadOnlySpan<char> password
-        ) {
+        )
+        {
             PemKeyImportHelpers.ImportEncryptedPem<char>(
                 input,
                 password,
@@ -667,7 +682,8 @@ namespace System.Security.Cryptography
         public override void ImportFromEncryptedPem(
             ReadOnlySpan<char> input,
             ReadOnlySpan<byte> passwordBytes
-        ) {
+        )
+        {
             PemKeyImportHelpers.ImportEncryptedPem<byte>(
                 input,
                 passwordBytes,

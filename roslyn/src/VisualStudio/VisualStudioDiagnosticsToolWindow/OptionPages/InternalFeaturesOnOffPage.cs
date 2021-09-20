@@ -23,7 +23,8 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow.OptionsPages
         protected override AbstractOptionPageControl CreateOptionPage(
             IServiceProvider serviceProvider,
             OptionStore optionStore
-        ) {
+        )
+        {
             return new InternalFeaturesOptionsControl(
                 nameof(InternalFeatureOnOffOptions),
                 optionStore
@@ -32,10 +33,8 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow.OptionsPages
 
         internal class InternalFeaturesOptionsControl : InternalOptionsControl
         {
-            public InternalFeaturesOptionsControl(
-                string featureOptionName,
-                OptionStore optionStore
-            ) : base(featureOptionName, optionStore) { }
+            public InternalFeaturesOptionsControl(string featureOptionName, OptionStore optionStore)
+                : base(featureOptionName, optionStore) { }
 
             protected override void AddOptions(Panel panel)
             {

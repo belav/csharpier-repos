@@ -36,7 +36,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CommonControls
             ImmutableArray<PullMemberUpSymbolViewModel> members,
             ImmutableDictionary<ISymbol, Task<ImmutableArray<ISymbol>>> dependentsMap,
             TypeKind destinationTypeKind = TypeKind.Class
-        ) {
+        )
+        {
             _waitIndicator = waitIndicator;
             // Use public property to hook property change events up
             Members = members;
@@ -170,7 +171,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CommonControls
         private void SelectMembers(
             ImmutableArray<PullMemberUpSymbolViewModel> members,
             bool isChecked = true
-        ) {
+        )
+        {
             foreach (var member in members.Where(viewModel => viewModel.IsCheckable))
             {
                 member.IsChecked = isChecked;

@@ -174,7 +174,8 @@ namespace System.Numerics.Tests
             int bigShiftLoopLimit,
             int smallShift = 0,
             int smallShiftLoopLimit = 1
-        ) {
+        )
+        {
             BigInteger init = BigInteger.One << startShift;
             double logbase = 2D;
 

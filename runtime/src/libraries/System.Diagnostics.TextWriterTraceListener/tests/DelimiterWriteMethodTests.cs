@@ -124,7 +124,8 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
             int id,
             string format,
             object[] args
-        ) {
+        )
+        {
             using (var target = GetListener())
             {
                 target.Filter = filter;
@@ -160,7 +161,8 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
             int id,
             string format,
             object[] args
-        ) {
+        )
+        {
             string message = args != null ? string.Format(format, args) : format;
             using (var target = GetListener())
             {
@@ -249,7 +251,8 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
             TraceEventType eventType,
             int id,
             object data
-        ) {
+        )
+        {
             using (var target = GetListener())
             {
                 target.Filter = filter;
@@ -340,7 +343,8 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
             TraceEventType eventType,
             int id,
             object[] data
-        ) {
+        )
+        {
             using (var target = GetListener())
             {
                 target.Delimiter = delimiter;
@@ -377,7 +381,8 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
             TraceEventType eventType,
             int id,
             object[] data
-        ) {
+        )
+        {
             string newDelimiter = "||";
             using (var target = GetListener())
             {
@@ -419,7 +424,8 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
             TraceEventType eventType,
             int id,
             object[] data
-        ) {
+        )
+        {
             string newDelimiter = "||";
             using (var target = GetListener())
             {
@@ -463,7 +469,8 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
             TraceEventType eventType,
             int id,
             object[] data
-        ) {
+        )
+        {
             string newDelimiter = "||";
             using (var target = GetListener())
             {

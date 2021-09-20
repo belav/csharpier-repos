@@ -77,7 +77,8 @@ namespace System.Security.Cryptography.Asn1.Pkcs12
                 if (
                     !hmac.TryGetHashAndReset(derived, out int bytesWritten)
                     || bytesWritten != expectedOutputSize
-                ) {
+                )
+                {
                     Debug.Fail(
                         $"TryGetHashAndReset wrote {bytesWritten} bytes when {expectedOutputSize} was expected"
                     );

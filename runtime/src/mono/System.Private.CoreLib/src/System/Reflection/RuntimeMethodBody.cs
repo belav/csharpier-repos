@@ -13,7 +13,8 @@ namespace System.Reflection
             bool init_locals,
             int sig_token,
             int max_stack
-        ) {
+        )
+        {
             _exceptionHandlingClauses = clauses;
             _localVariables = locals;
             _IL = il;

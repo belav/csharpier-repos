@@ -103,7 +103,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IEnumerable<object?> GetServices(
             this IServiceProvider provider,
             Type serviceType
-        ) {
+        )
+        {
             if (provider == null)
             {
                 throw new ArgumentNullException(nameof(provider));

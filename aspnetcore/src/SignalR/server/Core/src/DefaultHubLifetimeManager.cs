@@ -36,7 +36,8 @@ namespace Microsoft.AspNetCore.SignalR
             string connectionId,
             string groupName,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (connectionId == null)
             {
                 throw new ArgumentNullException(nameof(connectionId));
@@ -63,7 +64,8 @@ namespace Microsoft.AspNetCore.SignalR
             string connectionId,
             string groupName,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (connectionId == null)
             {
                 throw new ArgumentNullException(nameof(connectionId));
@@ -90,7 +92,8 @@ namespace Microsoft.AspNetCore.SignalR
             string methodName,
             object?[] args,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return SendToAllConnections(
                 methodName,
                 args,
@@ -106,7 +109,8 @@ namespace Microsoft.AspNetCore.SignalR
             Func<HubConnectionContext, object?, bool>? include,
             object? state = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             List<Task>? tasks = null;
             SerializedHubMessage? message = null;
 
@@ -162,7 +166,8 @@ namespace Microsoft.AspNetCore.SignalR
             ref List<Task>? tasks,
             ref SerializedHubMessage? message,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // foreach over ConcurrentDictionary avoids allocating an enumerator
             foreach (var connection in connections)
             {
@@ -202,7 +207,8 @@ namespace Microsoft.AspNetCore.SignalR
             string methodName,
             object?[] args,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (connectionId == null)
             {
                 throw new ArgumentNullException(nameof(connectionId));
@@ -228,7 +234,8 @@ namespace Microsoft.AspNetCore.SignalR
             string methodName,
             object?[] args,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (groupName == null)
             {
                 throw new ArgumentNullException(nameof(groupName));
@@ -267,7 +274,8 @@ namespace Microsoft.AspNetCore.SignalR
             string methodName,
             object?[] args,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             // Each task represents the list of tasks for each of the writes within a group
             List<Task>? tasks = null;
             SerializedHubMessage? message = null;
@@ -310,7 +318,8 @@ namespace Microsoft.AspNetCore.SignalR
             object?[] args,
             IReadOnlyList<string> excludedConnectionIds,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (groupName == null)
             {
                 throw new ArgumentNullException(nameof(groupName));
@@ -346,7 +355,8 @@ namespace Microsoft.AspNetCore.SignalR
         private SerializedHubMessage CreateSerializedInvocationMessage(
             string methodName,
             object?[] args
-        ) {
+        )
+        {
             return new SerializedHubMessage(CreateInvocationMessage(methodName, args));
         }
 
@@ -361,7 +371,8 @@ namespace Microsoft.AspNetCore.SignalR
             string methodName,
             object?[] args,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return SendToAllConnections(
                 methodName,
                 args,
@@ -397,7 +408,8 @@ namespace Microsoft.AspNetCore.SignalR
             object?[] args,
             IReadOnlyList<string> excludedConnectionIds,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return SendToAllConnections(
                 methodName,
                 args,
@@ -414,7 +426,8 @@ namespace Microsoft.AspNetCore.SignalR
             string methodName,
             object?[] args,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return SendToAllConnections(
                 methodName,
                 args,
@@ -431,7 +444,8 @@ namespace Microsoft.AspNetCore.SignalR
             string methodName,
             object?[] args,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return SendToAllConnections(
                 methodName,
                 args,

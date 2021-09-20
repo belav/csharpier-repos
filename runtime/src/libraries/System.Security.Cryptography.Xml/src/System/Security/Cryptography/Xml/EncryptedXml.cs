@@ -265,7 +265,8 @@ namespace System.Security.Cryptography.Xml
         public virtual byte[] GetDecryptionIV(
             EncryptedData encryptedData,
             string symmetricAlgorithmUri
-        ) {
+        )
+        {
             if (encryptedData == null)
                 throw new ArgumentNullException(nameof(encryptedData));
 
@@ -303,7 +304,8 @@ namespace System.Security.Cryptography.Xml
         public virtual SymmetricAlgorithm GetDecryptionKey(
             EncryptedData encryptedData,
             string symmetricAlgorithmUri
-        ) {
+        )
+        {
             if (encryptedData == null)
                 throw new ArgumentNullException(nameof(encryptedData));
 
@@ -417,7 +419,8 @@ namespace System.Security.Cryptography.Xml
                         if (
                             encryptedKey.CipherData == null
                             || encryptedKey.CipherData.CipherValue == null
-                        ) {
+                        )
+                        {
                             throw new CryptographicException(SR.Cryptography_Xml_MissingAlgorithm);
                         }
                         // kek is either a SymmetricAlgorithm or an RSA key, otherwise, we wouldn't be able to insert it in the hash table
@@ -457,7 +460,8 @@ namespace System.Security.Cryptography.Xml
                                 if (
                                     encryptedKey.CipherData == null
                                     || encryptedKey.CipherData.CipherValue == null
-                                ) {
+                                )
+                                {
                                     throw new CryptographicException(
                                         SR.Cryptography_Xml_MissingAlgorithm
                                     );
@@ -525,7 +529,8 @@ namespace System.Security.Cryptography.Xml
                         if (
                             encryptedKey.CipherData == null
                             || encryptedKey.CipherData.CipherValue == null
-                        ) {
+                        )
+                        {
                             throw new CryptographicException(SR.Cryptography_Xml_MissingAlgorithm);
                         }
                         symAlg.Key = encryptionKey;
@@ -752,7 +757,8 @@ namespace System.Security.Cryptography.Xml
             XmlElement inputElement,
             SymmetricAlgorithm symmetricAlgorithm,
             bool content
-        ) {
+        )
+        {
             if (inputElement == null)
                 throw new ArgumentNullException(nameof(inputElement));
             if (symmetricAlgorithm == null)
@@ -770,7 +776,8 @@ namespace System.Security.Cryptography.Xml
         public byte[] DecryptData(
             EncryptedData encryptedData,
             SymmetricAlgorithm symmetricAlgorithm
-        ) {
+        )
+        {
             if (encryptedData == null)
                 throw new ArgumentNullException(nameof(encryptedData));
             if (symmetricAlgorithm == null)
@@ -845,7 +852,8 @@ namespace System.Security.Cryptography.Xml
                             sr,
                             Utils.GetSecureXmlReaderSettings(_xmlResolver)
                         )
-                    ) {
+                    )
+                    {
                         importDocument.Load(xr);
                     }
                 }
@@ -907,7 +915,8 @@ namespace System.Security.Cryptography.Xml
             XmlElement inputElement,
             EncryptedData encryptedData,
             bool content
-        ) {
+        )
+        {
             if (inputElement == null)
                 throw new ArgumentNullException(nameof(inputElement));
             if (encryptedData == null)

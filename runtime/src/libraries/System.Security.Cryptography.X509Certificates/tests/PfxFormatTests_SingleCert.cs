@@ -12,7 +12,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             string correctPassword,
             X509Certificate2 expectedCert,
             Action<X509Certificate2> otherWork
-        ) {
+        )
+        {
             ReadPfx(pfxBytes, correctPassword, expectedCert, otherWork, s_importFlags);
             ReadPfx(pfxBytes, correctPassword, expectedCert, otherWork, s_exportableImportFlags);
         }
@@ -23,7 +24,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             X509Certificate2 expectedSingleCert,
             X509Certificate2[] expectedOrder,
             Action<X509Certificate2> perCertOtherWork
-        ) {
+        )
+        {
             ReadPfx(pfxBytes, correctPassword, expectedSingleCert, perCertOtherWork, s_importFlags);
             ReadPfx(
                 pfxBytes,
@@ -40,7 +42,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             X509Certificate2 expectedCert,
             Action<X509Certificate2> otherWork,
             X509KeyStorageFlags flags
-        ) {
+        )
+        {
             using (X509Certificate2 cert = new X509Certificate2(pfxBytes, correctPassword, flags))
             {
                 AssertCertEquals(expectedCert, cert);
@@ -72,7 +75,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             string bestPassword,
             int win32Error,
             int altWin32Error
-        ) {
+        )
+        {
             CryptographicException ex = Assert.ThrowsAny<CryptographicException>(
                 () => new X509Certificate2(pfxBytes, bestPassword, s_importFlags)
             );

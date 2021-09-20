@@ -157,7 +157,8 @@ namespace System.ComponentModel.Tests
         public void Dispose_InvokeBoolWithDisposed_CallsHandlerIfDisposing(
             bool disposing,
             int expectedCallCount
-        ) {
+        )
+        {
             var component = new SubComponent();
             int callCount = 0;
             EventHandler handler = (sender, e) =>

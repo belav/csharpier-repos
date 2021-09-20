@@ -33,7 +33,8 @@ namespace WebServer
             Type objectType,
             object existingValue,
             JsonSerializer serializer
-        ) {
+        )
+        {
             var nameValueCollection = new NameValueCollection();
             var key = "";
             while (reader.Read())

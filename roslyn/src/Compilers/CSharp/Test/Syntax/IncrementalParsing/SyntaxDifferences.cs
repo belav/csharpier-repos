@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static ImmutableArray<SyntaxNodeOrToken> GetRebuiltNodes(
             SyntaxTree oldTree,
             SyntaxTree newTree
-        ) {
+        )
+        {
             var hashSet = new HashSet<GreenNode>();
             GatherNodes(oldTree.GetCompilationUnitRoot(), hashSet);
 
@@ -36,7 +37,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxNodeOrToken newNode,
             HashSet<GreenNode> hashSet,
             ArrayBuilder<SyntaxNodeOrToken> nodes
-        ) {
+        )
+        {
             if (hashSet.Contains(newNode.UnderlyingNode))
             {
                 return;

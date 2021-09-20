@@ -61,7 +61,8 @@ namespace System.Net.NetworkInformation.Tests
         {
             using (
                 var server = new Socket(address.AddressFamily, SocketType.Stream, ProtocolType.Tcp)
-            ) {
+            )
+            {
                 server.Bind(new IPEndPoint(address, 0));
                 server.Listen(1);
                 _log.WriteLine($"listening on {server.LocalEndPoint}");
@@ -100,7 +101,8 @@ namespace System.Net.NetworkInformation.Tests
             )
             using (
                 var client = new Socket(address.AddressFamily, SocketType.Stream, ProtocolType.Tcp)
-            ) {
+            )
+            {
                 server.Bind(new IPEndPoint(address, 0));
                 server.Listen(1);
                 _log.WriteLine($"listening on {server.LocalEndPoint}");
@@ -119,7 +121,8 @@ namespace System.Net.NetworkInformation.Tests
                         ti.LocalEndPoint.Equals(client.LocalEndPoint)
                         && ti.RemoteEndPoint.Equals(client.RemoteEndPoint)
                         && (ti.State == TcpState.Established)
-                    ) {
+                    )
+                    {
                         found = true;
                         break;
                     }

@@ -183,7 +183,8 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks
         private static IServiceProvider CreateServices(
             Func<TestDbContext, CancellationToken, Task<bool>> testQuery = null,
             HealthStatus? failureStatus = HealthStatus.Unhealthy
-        ) {
+        )
+        {
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddDbContext<TestDbContext>(
                 o => o.UseInMemoryDatabase("Test" + Interlocked.Increment(ref _testDbCounter))

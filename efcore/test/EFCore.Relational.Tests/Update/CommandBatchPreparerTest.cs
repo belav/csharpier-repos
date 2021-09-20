@@ -439,7 +439,8 @@ namespace Microsoft.EntityFrameworkCore.Update
         [ConditionalTheory]
         public void Batch_command_throws_on_commands_with_circular_dependencies(
             bool sensitiveLogging
-        ) {
+        )
+        {
             var model = CreateCyclicFKModel();
             var configuration = CreateContextServices(model);
             var stateManager = configuration.GetRequiredService<IStateManager>();
@@ -485,7 +486,8 @@ ForeignKey { 'RelatedId' } FakeEntity [Added]" + CoreStrings.SensitiveDataDisabl
         [ConditionalTheory]
         public void Batch_command_throws_on_commands_with_circular_dependencies_including_indexes(
             bool sensitiveLogging
-        ) {
+        )
+        {
             var model = CreateCyclicFKModel();
             var configuration = CreateContextServices(model);
             var stateManager = configuration.GetRequiredService<IStateManager>();
@@ -545,7 +547,8 @@ Index { 'UniqueValue' } FakeEntity [Added]" + CoreStrings.SensitiveDataDisabled;
         [ConditionalTheory]
         public void Batch_command_throws_on_delete_commands_with_circular_dependencies(
             bool sensitiveLogging
-        ) {
+        )
+        {
             var model = CreateCyclicFkWithTailModel();
             var configuration = CreateContextServices(model);
             var stateManager = configuration.GetRequiredService<IStateManager>();
@@ -790,7 +793,8 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
         [ConditionalTheory]
         public void BatchCommands_throws_on_conflicting_updates_for_shared_table_added_entities(
             bool sensitiveLogging
-        ) {
+        )
+        {
             var currentDbContext = CreateContextServices(CreateSharedTableModel())
                 .GetRequiredService<ICurrentDbContext>();
             var stateManager = currentDbContext.GetDependencies().StateManager;
@@ -856,7 +860,8 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
         public void BatchCommands_throws_on_conflicting_values_for_shared_table_added_entities(
             bool useCurrentValues,
             bool sensitiveLogging
-        ) {
+        )
+        {
             var currentDbContext = CreateContextServices(CreateSharedTableModel())
                 .GetRequiredService<ICurrentDbContext>();
             var stateManager = currentDbContext.GetDependencies().StateManager;
@@ -983,7 +988,8 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
         [ConditionalTheory(Skip = "Issue #17947")]
         public void BatchCommands_creates_batch_on_incomplete_updates_for_shared_table_no_principal(
             EntityState state
-        ) {
+        )
+        {
             var currentDbContext = CreateContextServices(CreateSharedTableModel())
                 .GetRequiredService<ICurrentDbContext>();
             var stateManager = currentDbContext.GetDependencies().StateManager;
@@ -1059,7 +1065,8 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
         [ConditionalTheory]
         public void BatchCommands_works_with_incomplete_updates_for_shared_table_no_leaf_dependent(
             EntityState state
-        ) {
+        )
+        {
             var currentDbContext = CreateContextServices(CreateSharedTableModel())
                 .GetRequiredService<ICurrentDbContext>();
             var stateManager = currentDbContext.GetDependencies().StateManager;
@@ -1089,7 +1096,8 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
         [ConditionalTheory(Skip = "Issue #17947")]
         public void BatchCommands_creates_batch_on_incomplete_updates_for_shared_table_no_middle_dependent(
             EntityState state
-        ) {
+        )
+        {
             var currentDbContext = CreateContextServices(CreateSharedTableModel())
                 .GetRequiredService<ICurrentDbContext>();
             var stateManager = currentDbContext.GetDependencies().StateManager;
@@ -1156,7 +1164,8 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
             IModificationCommandBatchFactory modificationCommandBatchFactory = null,
             IUpdateAdapter updateAdapter = null,
             bool sensitiveLogging = false
-        ) {
+        )
+        {
             modificationCommandBatchFactory ??=
                 RelationalTestHelpers.Instance.CreateContextServices()
                     .GetRequiredService<IModificationCommandBatchFactory>();

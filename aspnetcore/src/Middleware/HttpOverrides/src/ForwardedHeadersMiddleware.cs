@@ -75,7 +75,8 @@ namespace Microsoft.AspNetCore.HttpOverrides
             RequestDelegate next,
             ILoggerFactory loggerFactory,
             IOptions<ForwardedHeadersOptions> options
-        ) {
+        )
+        {
             if (next == null)
             {
                 throw new ArgumentNullException(nameof(next));
@@ -215,7 +216,8 @@ namespace Microsoft.AspNetCore.HttpOverrides
                     _options.RequireHeaderSymmetry
                     && checkFor
                     && forwardedFor!.Length != forwardedProto.Length
-                ) {
+                )
+                {
                     _logger.LogWarning(
                         1,
                         "Parameter count mismatch between X-Forwarded-For and X-Forwarded-Proto."
@@ -237,7 +239,8 @@ namespace Microsoft.AspNetCore.HttpOverrides
                         (checkFor && forwardedFor!.Length != forwardedHost.Length)
                         || (checkProto && forwardedProto!.Length != forwardedHost.Length)
                     )
-                ) {
+                )
+                {
                     _logger.LogWarning(
                         1,
                         "Parameter count mismatch between X-Forwarded-Host and X-Forwarded-For or X-Forwarded-Proto."
@@ -299,7 +302,8 @@ namespace Microsoft.AspNetCore.HttpOverrides
                         currentValues.RemoteIpAndPort != null
                         && checkKnownIps
                         && !CheckKnownAddress(currentValues.RemoteIpAndPort.Address)
-                    ) {
+                    )
+                    {
                         // Stop at the first unknown remote IP, but still apply changes processed so far.
                         _logger.LogDebug(
                             1,
@@ -352,7 +356,8 @@ namespace Microsoft.AspNetCore.HttpOverrides
                         !string.IsNullOrEmpty(set.Host)
                         && TryValidateHost(set.Host)
                         && (_allowAllHosts || HostString.MatchesAny(set.Host, _allowedHosts!))
-                    ) {
+                    )
+                    {
                         applyChanges = true;
                         currentValues.Host = set.Host;
                     }

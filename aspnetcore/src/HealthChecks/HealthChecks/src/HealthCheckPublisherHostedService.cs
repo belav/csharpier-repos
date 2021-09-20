@@ -29,7 +29,8 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks
             IOptions<HealthCheckPublisherOptions> options,
             ILogger<HealthCheckPublisherHostedService> logger,
             IEnumerable<IHealthCheckPublisher> publishers
-        ) {
+        )
+        {
             if (healthCheckService == null)
             {
                 throw new ArgumentNullException(nameof(healthCheckService));
@@ -175,7 +176,8 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks
             IHealthCheckPublisher publisher,
             HealthReport report,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var duration = ValueStopwatch.StartNew();
 
             try
@@ -308,14 +310,16 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks
                 ILogger logger,
                 TimeSpan duration,
                 Exception? exception = null
-            ) {
+            )
+            {
                 _healthCheckPublisherProcessingEnd(logger, duration.TotalMilliseconds, exception);
             }
 
             public static void HealthCheckPublisherBegin(
                 ILogger logger,
                 IHealthCheckPublisher publisher
-            ) {
+            )
+            {
                 _healthCheckPublisherBegin(logger, publisher, null);
             }
 
@@ -323,7 +327,8 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks
                 ILogger logger,
                 IHealthCheckPublisher publisher,
                 TimeSpan duration
-            ) {
+            )
+            {
                 _healthCheckPublisherEnd(logger, publisher, duration.TotalMilliseconds, null);
             }
 
@@ -332,7 +337,8 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks
                 IHealthCheckPublisher publisher,
                 TimeSpan duration,
                 Exception exception
-            ) {
+            )
+            {
                 _healthCheckPublisherError(
                     logger,
                     publisher,
@@ -345,7 +351,8 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks
                 ILogger logger,
                 IHealthCheckPublisher publisher,
                 TimeSpan duration
-            ) {
+            )
+            {
                 _healthCheckPublisherTimeout(logger, publisher, duration.TotalMilliseconds, null);
             }
         }

@@ -28,7 +28,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTrans
             MemoryPool<byte> memoryPool,
             ILogger logger,
             PipeScheduler scheduler = null
-        ) {
+        )
+        {
             MemoryPool = memoryPool;
             _logger = logger;
 
@@ -170,7 +171,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTrans
 
                 public override ValueTask<ReadResult> ReadAsync(
                     CancellationToken cancellationToken = default
-                ) {
+                )
+                {
                     var task = _reader.ReadAsync(cancellationToken);
 
                     if (_tcs.Task.IsCompleted)
@@ -227,7 +229,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTrans
                         object state,
                         short token,
                         ValueTaskSourceOnCompletedFlags flags
-                    ) {
+                    )
+                    {
                         _task.GetAwaiter().UnsafeOnCompleted(() => continuation(state));
 
                         _tcs.TrySetResult();

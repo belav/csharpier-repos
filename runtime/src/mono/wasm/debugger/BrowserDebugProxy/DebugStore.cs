@@ -361,7 +361,8 @@ namespace Microsoft.WebAssembly.Diagnostics
             int token,
             SourceFile source,
             TypeInfo type
-        ) {
+        )
+        {
             this.Assembly = assembly;
             this.methodDef = Assembly.asmMetadataReader.GetMethodDefinition(methodDefHandle);
             this.DebugInformation = Assembly.pdbMetadataReader.GetMethodDebugInformation(
@@ -728,7 +729,8 @@ namespace Microsoft.WebAssembly.Diagnostics
             DocumentHandle docHandle,
             Uri sourceLinkUri,
             string url
-        ) {
+        )
+        {
             this.methods = new Dictionary<int, MethodInfo>();
             this.SourceLinkUri = sourceLinkUri;
             this.assembly = assembly;
@@ -857,7 +859,8 @@ namespace Microsoft.WebAssembly.Diagnostics
         public async Task<Stream> GetSourceAsync(
             bool checkHash,
             CancellationToken token = default(CancellationToken)
-        ) {
+        )
+        {
             var reader = assembly.pdbMetadataReader;
             byte[] bytes = (
                 from handle in reader.GetCustomDebugInformation(docHandle)
@@ -884,7 +887,8 @@ namespace Microsoft.WebAssembly.Diagnostics
                     mem != null
                     && mem.Length > 0
                     && (!checkHash || CheckPdbHash(ComputePdbHash(mem)))
-                ) {
+                )
+                {
                     mem.Position = 0;
                     return mem;
                 }
@@ -931,7 +935,8 @@ namespace Microsoft.WebAssembly.Diagnostics
             SessionId sessionId,
             byte[] assembly_data,
             byte[] pdb_data
-        ) {
+        )
+        {
             AssemblyInfo assembly = null;
             try
             {
@@ -965,7 +970,8 @@ namespace Microsoft.WebAssembly.Diagnostics
             SessionId sessionId,
             string[] loaded_files,
             [EnumeratorCancellation] CancellationToken token
-        ) {
+        )
+        {
             var asm_files = new List<string>();
             var pdb_files = new List<string>();
             foreach (string file_name in loaded_files)
@@ -1078,7 +1084,8 @@ namespace Microsoft.WebAssembly.Diagnostics
         public List<SourceLocation> FindPossibleBreakpoints(
             SourceLocation start,
             SourceLocation end
-        ) {
+        )
+        {
             //XXX FIXME no idea what todo with locations on different files
             if (start.Id != end.Id)
             {
@@ -1105,7 +1112,8 @@ namespace Microsoft.WebAssembly.Diagnostics
                 {
                     foreach (
                         SequencePoint sequencePoint in method.DebugInformation.GetSequencePoints()
-                    ) {
+                    )
+                    {
                         if (!sequencePoint.IsHidden && Match(sequencePoint, start, end))
                             res.Add(new SourceLocation(method, sequencePoint));
                     }
@@ -1158,7 +1166,8 @@ namespace Microsoft.WebAssembly.Diagnostics
                 {
                     foreach (
                         SequencePoint sequencePoint in method.DebugInformation.GetSequencePoints()
-                    ) {
+                    )
+                    {
                         if (
                             !sequencePoint.IsHidden
                             && Match(sequencePoint, request.Line, request.Column)

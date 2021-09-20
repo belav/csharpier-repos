@@ -22,7 +22,8 @@ namespace Roslyn.Test.Utilities
             int code,
             Location location,
             params object[] args
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -36,14 +37,16 @@ namespace Roslyn.Test.Utilities
             DiagnosticSeverity severity,
             bool isWarningAsError,
             CultureInfo culture
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
         public override ReportDiagnostic GetDiagnosticReport(
             DiagnosticInfo diagnosticInfo,
             CompilationOptions options
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -272,7 +275,8 @@ namespace Roslyn.Test.Utilities
             AssemblyIdentity identity,
             MetadataReference equivalentReference,
             AssemblyIdentity equivalentIdentity
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -283,7 +287,8 @@ namespace Roslyn.Test.Utilities
             AssemblyIdentity identity,
             MetadataReference equivalentReference,
             AssemblyIdentity equivalentIdentity
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -292,7 +297,8 @@ namespace Roslyn.Test.Utilities
             SyntaxNode attributeSyntax,
             int parameterIndex,
             AttributeData attribute
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -302,7 +308,8 @@ namespace Roslyn.Test.Utilities
             int namedArgumentIndex,
             ITypeSymbol attributeClass,
             string parameterName
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -310,7 +317,8 @@ namespace Roslyn.Test.Utilities
             DiagnosticBag diagnostics,
             SyntaxNode attributeSyntax,
             int namedArgumentIndex
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -320,7 +328,8 @@ namespace Roslyn.Test.Utilities
             int parameterIndex,
             string unmanagedTypeName,
             AttributeData attribute
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -330,7 +339,8 @@ namespace Roslyn.Test.Utilities
             int parameterIndex,
             string unmanagedTypeName,
             AttributeData attribute
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -338,7 +348,8 @@ namespace Roslyn.Test.Utilities
             DiagnosticBag diagnostics,
             SyntaxNode attributeSyntax,
             string parameterName
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -347,7 +358,8 @@ namespace Roslyn.Test.Utilities
             SyntaxNode attributeSyntax,
             string parameterName1,
             string parameterName2
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 

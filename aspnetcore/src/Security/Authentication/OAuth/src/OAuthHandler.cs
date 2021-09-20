@@ -186,7 +186,8 @@ namespace Microsoft.AspNetCore.Authentication.OAuth
                             CultureInfo.InvariantCulture,
                             out value
                         )
-                    ) {
+                    )
+                    {
                         // https://www.w3.org/TR/xmlschema-2/#dateTime
                         // https://msdn.microsoft.com/en-us/library/az4se3k1(v=vs.110).aspx
                         var expiresAt = Clock.UtcNow + TimeSpan.FromSeconds(value);
@@ -224,7 +225,8 @@ namespace Microsoft.AspNetCore.Authentication.OAuth
         /// <returns>The response <see cref="OAuthTokenResponse"/>.</returns>
         protected virtual async Task<OAuthTokenResponse> ExchangeCodeAsync(
             OAuthCodeExchangeContext context
-        ) {
+        )
+        {
             var tokenRequestParameters = new Dictionary<string, string>()
             {
                 { "client_id", Options.ClientId },
@@ -240,7 +242,8 @@ namespace Microsoft.AspNetCore.Authentication.OAuth
                     OAuthConstants.CodeVerifierKey,
                     out var codeVerifier
                 )
-            ) {
+            )
+            {
                 tokenRequestParameters.Add(OAuthConstants.CodeVerifierKey, codeVerifier!);
                 context.Properties.Items.Remove(OAuthConstants.CodeVerifierKey);
             }
@@ -288,7 +291,8 @@ namespace Microsoft.AspNetCore.Authentication.OAuth
             ClaimsIdentity identity,
             AuthenticationProperties properties,
             OAuthTokenResponse tokens
-        ) {
+        )
+        {
             using (var user = JsonDocument.Parse("{}"))
             {
                 var context = new OAuthCreatingTicketContext(
@@ -356,7 +360,8 @@ namespace Microsoft.AspNetCore.Authentication.OAuth
         protected virtual string BuildChallengeUrl(
             AuthenticationProperties properties,
             string redirectUri
-        ) {
+        )
+        {
             var scopeParameter = properties.GetParameter<ICollection<string>>(
                 OAuthChallengeProperties.ScopeKey
             );

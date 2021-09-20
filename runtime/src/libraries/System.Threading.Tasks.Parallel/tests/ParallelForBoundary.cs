@@ -61,7 +61,8 @@ namespace System.Threading.Tasks.Tests
             int startIndexOffset,
             int count,
             WorkloadPattern workloadPattern
-        ) {
+        )
+        {
             var parameters = new TestParameters(api, startIndexBase, startIndexOffset)
             {
                 Count = count,

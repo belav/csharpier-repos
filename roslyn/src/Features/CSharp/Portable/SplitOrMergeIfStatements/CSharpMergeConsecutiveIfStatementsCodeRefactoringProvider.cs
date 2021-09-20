@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SplitOrMergeIfStatements
             SyntaxNode node,
             TextSpan span,
             out SyntaxNode ifOrElseIf
-        ) {
+        )
+        {
             if (node is IfStatementSyntax ifStatement)
             {
                 // Cases:
@@ -49,7 +50,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SplitOrMergeIfStatements
                     || span.IsAround(ifStatement.IfKeyword)
                     || span.IsAround(ifStatement.IfKeyword, ifStatement.CloseParenToken)
                     || span.IsAround(ifStatement.IfKeyword, ifStatement.Statement)
-                ) {
+                )
+                {
                     ifOrElseIf = ifStatement;
                     return true;
                 }
@@ -58,7 +60,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SplitOrMergeIfStatements
             if (
                 node is ElseClauseSyntax elseClause
                 && elseClause.Statement is IfStatementSyntax elseIfStatement
-            ) {
+            )
+            {
                 // 5. Position is at a child token of an else clause with no selection ('else' keyword)
                 // 6. Selection around the header including the 'else' keyword - from 'else' keyword to the end of the condition
                 // 7. Selection from the 'else' keyword to the end of the if statement's statement
@@ -66,7 +69,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SplitOrMergeIfStatements
                     span.Length == 0
                     || span.IsAround(elseClause.ElseKeyword, elseIfStatement.CloseParenToken)
                     || span.IsAround(elseClause.ElseKeyword, elseIfStatement.Statement)
-                ) {
+                )
+                {
                     ifOrElseIf = elseIfStatement;
                     return true;
                 }

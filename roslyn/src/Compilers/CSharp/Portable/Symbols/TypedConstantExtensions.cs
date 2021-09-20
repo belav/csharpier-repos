@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 constant.Kind == TypedConstantKind.Type
                 || constant.TypeInternal!.SpecialType == SpecialType.System_Object
-            ) {
+            )
+            {
                 Debug.Assert(constant.Value is object);
                 return "typeof(" + constant.Value.ToString() + ")";
             }
@@ -90,7 +91,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SpecialType specialType,
             ulong constantToDecode,
             string typeName
-        ) {
+        )
+        {
             Debug.Assert(constant.Kind == TypedConstantKind.Enum);
 
             // Specified valueConstant might have an exact matching enum field
@@ -176,7 +178,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SpecialType specialType,
             long constantToDecode,
             string typeName
-        ) {
+        )
+        {
             Debug.Assert(constant.Kind == TypedConstantKind.Enum);
 
             // Specified valueConstant might have an exact matching enum field

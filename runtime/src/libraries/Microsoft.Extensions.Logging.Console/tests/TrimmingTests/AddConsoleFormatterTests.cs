@@ -51,7 +51,8 @@ class Program
             in LogEntry<TState> logEntry,
             IExternalScopeProvider scopeProvider,
             TextWriter textWriter
-        ) {
+        )
+        {
             WriteCallCount++;
         }
     }

@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.Razor
 
         public override TypeNameRewriter CreateGenericTypeRewriter(
             Dictionary<string, string> bindings
-        ) {
+        )
+        {
             if (bindings == null)
             {
                 throw new ArgumentNullException(nameof(bindings));
@@ -47,7 +48,8 @@ namespace Microsoft.CodeAnalysis.Razor
 
         public override TypeNameRewriter CreateGlobalQualifiedTypeNameRewriter(
             ICollection<string> ignore
-        ) {
+        )
+        {
             if (ignore == null)
             {
                 throw new ArgumentNullException(nameof(ignore));

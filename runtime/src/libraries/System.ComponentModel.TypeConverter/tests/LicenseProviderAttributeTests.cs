@@ -78,7 +78,8 @@ namespace System.ComponentModel.Tests
         public void TypeId_ValidDesignerBaseTypeName_ReturnsExcepted(
             LicenseProviderAttribute attribute,
             object expected
-        ) {
+        )
+        {
             Assert.Equal(expected, attribute.TypeId);
         }
 
@@ -140,7 +141,8 @@ namespace System.ComponentModel.Tests
             LicenseProviderAttribute attribute,
             object other,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, attribute.Equals(other));
             if (other is LicenseProviderAttribute otherAttribute)
             {

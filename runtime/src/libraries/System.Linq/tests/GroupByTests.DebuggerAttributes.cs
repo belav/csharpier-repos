@@ -15,7 +15,8 @@ namespace System.Linq.Tests
         public void DebuggerAttributesValid<TKey, TElement>(
             IGrouping<TKey, TElement> grouping,
             string keyString
-        ) {
+        )
+        {
             Assert.Equal(
                 $"Key = {keyString}",
                 DebuggerAttributes.ValidateDebuggerDisplayReferences(grouping)

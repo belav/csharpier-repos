@@ -47,13 +47,15 @@ namespace Microsoft.CodeAnalysis.Text
             ImmutableArray<byte> checksum = default(ImmutableArray<byte>),
             SourceHashAlgorithm checksumAlgorithm = SourceHashAlgorithm.Sha1,
             SourceTextContainer? container = null
-        ) {
+        )
+        {
             ValidateChecksumAlgorithm(checksumAlgorithm);
 
             if (
                 !checksum.IsDefault
                 && checksum.Length != CryptographicHashProvider.GetHashSize(checksumAlgorithm)
-            ) {
+            )
+            {
                 throw new ArgumentException(CodeAnalysisResources.InvalidHash, nameof(checksum));
             }
 
@@ -113,7 +115,8 @@ namespace Microsoft.CodeAnalysis.Text
             string text,
             Encoding? encoding = null,
             SourceHashAlgorithm checksumAlgorithm = SourceHashAlgorithm.Sha1
-        ) {
+        )
+        {
             if (text == null)
             {
                 throw new ArgumentNullException(nameof(text));
@@ -143,7 +146,8 @@ namespace Microsoft.CodeAnalysis.Text
             int length,
             Encoding? encoding = null,
             SourceHashAlgorithm checksumAlgorithm = SourceHashAlgorithm.Sha1
-        ) {
+        )
+        {
             if (reader == null)
             {
                 throw new ArgumentNullException(nameof(reader));
@@ -197,7 +201,8 @@ namespace Microsoft.CodeAnalysis.Text
             SourceHashAlgorithm checksumAlgorithm = SourceHashAlgorithm.Sha1,
             bool throwIfBinaryDetected = false,
             bool canBeEmbedded = false
-        ) {
+        )
+        {
             if (stream == null)
             {
                 throw new ArgumentNullException(nameof(stream));
@@ -291,7 +296,8 @@ namespace Microsoft.CodeAnalysis.Text
             SourceHashAlgorithm checksumAlgorithm = SourceHashAlgorithm.Sha1,
             bool throwIfBinaryDetected = false,
             bool canBeEmbedded = false
-        ) {
+        )
+        {
             if (buffer == null)
             {
                 throw new ArgumentNullException(nameof(buffer));
@@ -361,7 +367,8 @@ namespace Microsoft.CodeAnalysis.Text
                     bufferSize: bufferSize,
                     leaveOpen: true
                 )
-            ) {
+            )
+            {
                 string text = reader.ReadToEnd();
                 actualEncoding = reader.CurrentEncoding;
                 return text;
@@ -382,7 +389,8 @@ namespace Microsoft.CodeAnalysis.Text
             int length,
             Encoding encoding,
             out Encoding actualEncoding
-        ) {
+        )
+        {
             RoslynDebug.Assert(buffer != null);
             RoslynDebug.Assert(encoding != null);
             int preambleLength;
@@ -593,7 +601,8 @@ namespace Microsoft.CodeAnalysis.Text
         public void Write(
             TextWriter textWriter,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             this.Write(textWriter, new TextSpan(0, this.Length), cancellationToken);
         }
 
@@ -604,7 +613,8 @@ namespace Microsoft.CodeAnalysis.Text
             TextWriter writer,
             TextSpan span,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             CheckSubSpan(span);
 
             var buffer = s_charArrayPool.Allocate();
@@ -650,7 +660,8 @@ namespace Microsoft.CodeAnalysis.Text
             int offset,
             int count,
             SourceHashAlgorithm algorithmId
-        ) {
+        )
+        {
             using (var algorithm = CryptographicHashProvider.TryGetAlgorithm(algorithmId))
             {
                 RoslynDebug.Assert(algorithm != null);
@@ -661,7 +672,8 @@ namespace Microsoft.CodeAnalysis.Text
         internal static ImmutableArray<byte> CalculateChecksum(
             Stream stream,
             SourceHashAlgorithm algorithmId
-        ) {
+        )
+        {
             using (var algorithm = CryptographicHashProvider.TryGetAlgorithm(algorithmId))
             {
                 RoslynDebug.Assert(algorithm != null);
@@ -1138,7 +1150,8 @@ namespace Microsoft.CodeAnalysis.Text
                 && !rightChecksum.IsDefault
                 && this.Encoding == other.Encoding
                 && this.ChecksumAlgorithm == other.ChecksumAlgorithm
-            ) {
+            )
+            {
                 return leftChecksum.SequenceEqual(rightChecksum);
             }
 
@@ -1208,7 +1221,8 @@ namespace Microsoft.CodeAnalysis.Text
             byte[] source,
             int length,
             out int preambleLength
-        ) {
+        )
+        {
             RoslynDebug.Assert(source != null);
             Debug.Assert(length <= source.Length);
 

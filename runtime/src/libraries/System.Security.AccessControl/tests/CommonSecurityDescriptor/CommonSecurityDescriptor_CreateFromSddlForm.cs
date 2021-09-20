@@ -229,7 +229,8 @@ namespace System.Security.AccessControl.Tests
             bool isDS,
             string sddl,
             string verifierSddl
-        ) {
+        )
+        {
             CommonSecurityDescriptor commonSecurityDescriptor = null;
             commonSecurityDescriptor = new CommonSecurityDescriptor(isContainer, isDS, sddl);
             string resultSddlForm = commonSecurityDescriptor.GetSddlForm(AccessControlSections.All);

@@ -140,7 +140,8 @@ namespace System.Web.Mvc
             object defaults,
             object constraints,
             string[] namespaces
-        ) {
+        )
+        {
             if (namespaces == null && Namespaces != null)
             {
                 namespaces = Namespaces.ToArray();

@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             Solution solution,
             IImmutableSet<Project> projects = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return await FindOverridesArrayAsync(symbol, solution, projects, cancellationToken)
                 .ConfigureAwait(false);
         }
@@ -43,7 +44,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             Solution solution,
             IImmutableSet<Project> projects = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var results = ArrayBuilder<ISymbol>.GetInstance();
 
             symbol = symbol?.OriginalDefinition;
@@ -75,7 +77,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                         if (
                             await IsOverrideAsync(solution, bestMember, symbol, cancellationToken)
                                 .ConfigureAwait(false)
-                        ) {
+                        )
+                        {
                             results.Add(bestMember);
                         }
                     }
@@ -90,7 +93,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             ISymbol member,
             ISymbol symbol,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             for (var current = member; current != null; current = current.GetOverriddenMember())
             {
                 if (
@@ -116,7 +120,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             Solution solution,
             IImmutableSet<Project> projects = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return await FindImplementedInterfaceMembersArrayAsync(
                     symbol,
                     solution,
@@ -137,7 +142,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             Solution solution,
             IImmutableSet<Project> projects = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             // Member can only implement interface members if it is an explicit member, or if it is
             // public and non static.
             if (symbol != null)
@@ -154,7 +160,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                         symbol.ContainingType.TypeKind == TypeKind.Class
                         || symbol.ContainingType.TypeKind == TypeKind.Struct
                     )
-                ) {
+                )
+                {
                     // Interface implementation is a tricky thing.  A method may implement an interface
                     // method, even if its containing type doesn't state that it implements the
                     // interface.  For example:
@@ -216,7 +223,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                                                 implementation.OriginalDefinition,
                                                 symbol.OriginalDefinition
                                             )
-                                        ) {
+                                        )
+                                        {
                                             builder.Add(bestMethod);
                                         }
                                     }
@@ -250,7 +258,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             Solution solution,
             IImmutableSet<Project> projects,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return FindDerivedClassesAsync(
                 type,
                 solution,
@@ -305,7 +314,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             bool transitive,
             IImmutableSet<Project> projects = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var types = await DependentTypeFinder.FindTypesAsync(
                     type,
                     solution,
@@ -366,7 +376,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             bool transitive,
             IImmutableSet<Project> projects = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var types = await DependentTypeFinder.FindTypesAsync(
                     type,
                     solution,
@@ -425,7 +436,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             bool transitive,
             IImmutableSet<Project> projects = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var types = await DependentTypeFinder.FindTypesAsync(
                     type,
                     solution,
@@ -449,7 +461,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             Solution solution,
             IImmutableSet<Project> projects = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (symbol == null)
                 throw new ArgumentNullException(nameof(symbol));
 
@@ -488,7 +501,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             Solution solution,
             IImmutableSet<Project> projects = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (!symbol.IsImplementableMember())
                 return ImmutableArray<ISymbol>.Empty;
 

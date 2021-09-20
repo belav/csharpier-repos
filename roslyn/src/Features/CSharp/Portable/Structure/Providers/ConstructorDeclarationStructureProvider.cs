@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
             ref TemporaryArray<BlockSpan> spans,
             BlockStructureOptionProvider optionProvider,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             CSharpStructureHelpers.CollectCommentBlockSpans(
                 constructorDeclaration,
                 ref spans,
@@ -29,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
                 constructorDeclaration.Body == null
                 || constructorDeclaration.Body.OpenBraceToken.IsMissing
                 || constructorDeclaration.Body.CloseBraceToken.IsMissing
-            ) {
+            )
+            {
                 return;
             }
 

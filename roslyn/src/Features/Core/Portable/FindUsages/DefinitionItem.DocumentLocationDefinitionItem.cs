@@ -32,21 +32,23 @@ namespace Microsoft.CodeAnalysis.FindUsages
                 ImmutableDictionary<string, string> properties,
                 ImmutableDictionary<string, string> displayableProperties,
                 bool displayIfNoReferences
-            ) : base(
-                tags,
-                displayParts,
-                nameDisplayParts,
-                originationParts,
-                sourceSpans,
-                properties,
-                displayableProperties,
-                displayIfNoReferences
-            ) { }
+            )
+                : base(
+                    tags,
+                    displayParts,
+                    nameDisplayParts,
+                    originationParts,
+                    sourceSpans,
+                    properties,
+                    displayableProperties,
+                    displayIfNoReferences
+                ) { }
 
             public override bool CanNavigateTo(
                 Workspace workspace,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (Properties.ContainsKey(NonNavigable))
                 {
                     return false;
@@ -65,7 +67,8 @@ namespace Microsoft.CodeAnalysis.FindUsages
                 bool showInPreviewTab,
                 bool activateTab,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (Properties.ContainsKey(NonNavigable))
                 {
                     return false;
@@ -113,7 +116,8 @@ namespace Microsoft.CodeAnalysis.FindUsages
                 Workspace workspace,
                 string symbolKey,
                 Func<ISymbol, Project, ISymbolNavigationService, bool> action
-            ) {
+            )
+            {
                 var projectAndSymbol = TryResolveSymbolInCurrentSolution(workspace, symbolKey);
 
                 var project = projectAndSymbol.project;
@@ -135,7 +139,8 @@ namespace Microsoft.CodeAnalysis.FindUsages
             private (Project project, ISymbol symbol) TryResolveSymbolInCurrentSolution(
                 Workspace workspace,
                 string symbolKey
-            ) {
+            )
+            {
                 if (
                     !Properties.TryGetValue(
                         MetadataSymbolOriginatingProjectIdGuid,
@@ -145,7 +150,8 @@ namespace Microsoft.CodeAnalysis.FindUsages
                         MetadataSymbolOriginatingProjectIdDebugName,
                         out var projectDebugName
                     )
-                ) {
+                )
+                {
                     return (null, null);
                 }
 

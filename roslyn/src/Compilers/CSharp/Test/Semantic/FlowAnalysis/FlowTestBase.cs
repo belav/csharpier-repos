@@ -94,7 +94,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         protected DataFlowAnalysis CompileAndAnalyzeDataFlowExpression(
             string program,
             params MetadataReference[] references
-        ) {
+        )
+        {
             return CompileAndGetModelAndExpression(
                 program,
                 (model, expression) => model.AnalyzeDataFlow(expression),
@@ -112,7 +113,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         protected (ControlFlowAnalysis controlFlowAnalysis, DataFlowAnalysis dataFlowAnalysis) CompileAndAnalyzeControlAndDataFlowStatements(
             string program
-        ) {
+        )
+        {
             return CompileAndGetModelAndStatements(
                 program,
                 (model, stmt1, stmt2) =>
@@ -124,7 +126,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             string program,
             Func<SemanticModel, ExpressionSyntax, T> analysisDelegate,
             params MetadataReference[] references
-        ) {
+        )
+        {
             var comp = CreateCompilation(
                 program,
                 parseOptions: TestOptions.RegularPreview,
@@ -151,7 +154,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         protected T CompileAndGetModelAndStatements<T>(
             string program,
             Func<SemanticModel, StatementSyntax, StatementSyntax, T> analysisDelegate
-        ) {
+        )
+        {
             var comp = CreateCompilation(program);
             var tree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(tree);
@@ -170,7 +174,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     firstStatement != null
                     && stmt.Span.End <= end
                     && stmt.Parent == firstStatement.Parent
-                ) {
+                )
+                {
                     lastStatement = stmt;
                 }
             }
@@ -207,7 +212,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             string program,
             int treeindex = 0,
             int which = -1
-        ) {
+        )
+        {
             return CompileAndGetModelAndMultipleStatements(
                 program,
                 (model, stmt) => model.AnalyzeControlFlow(stmt),
@@ -220,7 +226,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             string program,
             int treeindex = 0,
             int which = -1
-        ) {
+        )
+        {
             return CompileAndGetModelAndMultipleStatements(
                 program,
                 (model, stmt) => model.AnalyzeDataFlow(stmt),
@@ -233,7 +240,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             string program,
             int treeindex = 0,
             int which = -1
-        ) {
+        )
+        {
             return CompileAndGetModelAndMultipleExpressions(
                 program,
                 (model, expression) => model.AnalyzeDataFlow(expression),
@@ -246,7 +254,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             string program,
             int treeindex = 0,
             int which = -1
-        ) {
+        )
+        {
             return (
                 CompileAndAnalyzeMultipleControlFlowStatements(program, treeindex, which),
                 CompileAndAnalyzeMultipleDataFlowStatements(program, treeindex, which)
@@ -258,7 +267,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Func<SemanticModel, ExpressionSyntax, T> analysisDelegate,
             int treeindex = 0,
             int which = -1
-        ) {
+        )
+        {
             var comp = CreateCompilation(program);
             var tuple = GetBindingNodesAndModel<ExpressionSyntax>(comp, treeindex, which);
 
@@ -273,7 +283,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Func<SemanticModel, StatementSyntax, T> analysisDelegate,
             int treeindex = 0,
             int which = -1
-        ) {
+        )
+        {
             var comp = CreateCompilation(program);
             var tuple = GetBindingNodesAndModel<StatementSyntax>(comp, treeindex, which);
 

@@ -38,7 +38,8 @@ namespace System.Net.WebSockets
             string secWebSocketVersion,
             string secWebSocketKey,
             WebSocket webSocket
-        ) {
+        )
+        {
             Debug.Assert(requestUri != null, "requestUri shouldn't be null");
             Debug.Assert(headers != null, "headers shouldn't be null");
             Debug.Assert(cookieCollection != null, "cookieCollection shouldn't be null");

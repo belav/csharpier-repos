@@ -41,7 +41,8 @@ namespace Microsoft.AspNetCore.Builder.Extensions
             public ApplicationBuilderWrapper(
                 IApplicationBuilder applicationBuilder,
                 Action useCallback
-            ) {
+            )
+            {
                 _wrappedBuilder = applicationBuilder;
                 _useCallback = useCallback;
             }
@@ -97,7 +98,8 @@ namespace Microsoft.AspNetCore.Builder.Extensions
             string requestPath,
             string expectedPathBase,
             string expectedPath
-        ) {
+        )
+        {
             return TestPathBase(
                 registeredPathBase,
                 pathBase,
@@ -122,7 +124,8 @@ namespace Microsoft.AspNetCore.Builder.Extensions
             string requestPath,
             string expectedPathBase,
             string expectedPath
-        ) {
+        )
+        {
             return TestPathBase(
                 registeredPathBase,
                 pathBase,
@@ -149,7 +152,8 @@ namespace Microsoft.AspNetCore.Builder.Extensions
             string requestPath,
             string expectedPathBase,
             string expectedPath
-        ) {
+        )
+        {
             return TestPathBase(
                 registeredPathBase,
                 pathBase,
@@ -168,7 +172,8 @@ namespace Microsoft.AspNetCore.Builder.Extensions
             string requestPath,
             string expectedPathBase,
             string expectedPath
-        ) {
+        )
+        {
             return TestPathBase(
                 registeredPathBase,
                 pathBase,
@@ -191,7 +196,8 @@ namespace Microsoft.AspNetCore.Builder.Extensions
             string requestPath,
             string expectedPathBase,
             string expectedPath
-        ) {
+        )
+        {
             return TestPathBase(
                 registeredPathBase,
                 pathBase,
@@ -207,7 +213,8 @@ namespace Microsoft.AspNetCore.Builder.Extensions
             string requestPath,
             string expectedPathBase,
             string expectedPath
-        ) {
+        )
+        {
             HttpContext requestContext = CreateRequest(pathBase, requestPath);
             var builder = CreateBuilder().UsePathBase(registeredPathBase);
             builder.Run(

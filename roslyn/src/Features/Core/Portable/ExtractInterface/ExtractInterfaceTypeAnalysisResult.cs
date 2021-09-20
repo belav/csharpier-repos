@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
             SyntaxNode typeNode,
             INamedTypeSymbol typeToExtractFrom,
             IEnumerable<ISymbol> extractableMembers
-        ) {
+        )
+        {
             CanExtractInterface = true;
             DocumentToExtractFrom = documentToExtractFrom;
             TypeNode = typeNode;

@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.Hosting
             this IConfiguration configuration,
             string hostingStartupName,
             string featureName
-        ) {
+        )
+        {
             if (configuration.TryGetOption(hostingStartupName, featureName, out var value))
             {
                 value = value.ToLowerInvariant();
@@ -31,7 +32,8 @@ namespace Microsoft.AspNetCore.Hosting
             string hostingStartupName,
             string featureName,
             out string value
-        ) {
+        )
+        {
             value = configuration[$"HostingStartup:{hostingStartupName}:{featureName}"];
             return !string.IsNullOrEmpty(value);
         }

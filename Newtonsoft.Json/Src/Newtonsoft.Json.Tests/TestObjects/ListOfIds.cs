@@ -49,7 +49,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
             Type objectType,
             object existingValue,
             JsonSerializer serializer
-        ) {
+        )
+        {
             IList<T> list = new List<T>();
 
             reader.Read();

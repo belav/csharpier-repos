@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         internal override string TrimAndGetFormatSpecifiers(
             string expression,
             out ReadOnlyCollection<string> formatSpecifiers
-        ) {
+        )
+        {
             expression = RemoveComments(expression);
             expression = RemoveFormatSpecifiers(expression, out formatSpecifiers);
             return RemoveLeadingAndTrailingContent(

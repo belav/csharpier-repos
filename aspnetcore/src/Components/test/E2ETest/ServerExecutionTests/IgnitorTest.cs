@@ -28,7 +28,8 @@ namespace Microsoft.AspNetCore.Components
         protected IgnitorTest(
             BasicTestAppServerSiteFixture<TStartup> serverFixture,
             ITestOutputHelper output
-        ) {
+        )
+        {
             ServerFixture = serverFixture;
             Output = output;
         }
@@ -138,7 +139,8 @@ namespace Microsoft.AspNetCore.Components
                 EventId eventId,
                 string message,
                 Exception exception
-            ) {
+            )
+            {
                 LogLevel = logLevel;
                 EventId = eventId;
                 Message = message;

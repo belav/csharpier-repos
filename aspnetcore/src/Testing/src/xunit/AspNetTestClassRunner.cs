@@ -22,24 +22,26 @@ namespace Microsoft.AspNetCore.Testing
             ExceptionAggregator aggregator,
             CancellationTokenSource cancellationTokenSource,
             IDictionary<Type, object> collectionFixtureMappings
-        ) : base(
-            testClass,
-            @class,
-            testCases,
-            diagnosticMessageSink,
-            messageBus,
-            testCaseOrderer,
-            aggregator,
-            cancellationTokenSource,
-            collectionFixtureMappings
-        ) { }
+        )
+            : base(
+                testClass,
+                @class,
+                testCases,
+                diagnosticMessageSink,
+                messageBus,
+                testCaseOrderer,
+                aggregator,
+                cancellationTokenSource,
+                collectionFixtureMappings
+            ) { }
 
         protected override Task<RunSummary> RunTestMethodAsync(
             ITestMethod testMethod,
             IReflectionMethodInfo method,
             IEnumerable<IXunitTestCase> testCases,
             object[] constructorArguments
-        ) {
+        )
+        {
             var runner = new AspNetTestMethodRunner(
                 testMethod,
                 Class,

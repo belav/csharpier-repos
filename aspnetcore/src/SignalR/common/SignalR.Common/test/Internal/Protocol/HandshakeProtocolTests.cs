@@ -37,7 +37,8 @@ namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Protocol
             string json,
             string protocol,
             int version
-        ) {
+        )
+        {
             var message = new ReadOnlySequence<byte>(Encoding.UTF8.GetBytes(json));
 
             Assert.True(
@@ -71,7 +72,8 @@ namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Protocol
         public void ParsingHandshakeResponseMessageSuccessForValidMessages(
             string json,
             string error
-        ) {
+        )
+        {
             var message = new ReadOnlySequence<byte>(Encoding.UTF8.GetBytes(json));
 
             Assert.True(HandshakeProtocol.TryParseResponseMessage(ref message, out var response));
@@ -124,7 +126,8 @@ namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Protocol
         public void ParsingHandshakeRequestMessageThrowsForInvalidMessages(
             string payload,
             string expectedMessage
-        ) {
+        )
+        {
             var message = new ReadOnlySequence<byte>(Encoding.UTF8.GetBytes(payload));
 
             var exception = Assert.Throws<InvalidDataException>(
@@ -143,7 +146,8 @@ namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Protocol
         public void ParsingHandshakeResponseMessageThrowsForInvalidMessages(
             string payload,
             string expectedMessage
-        ) {
+        )
+        {
             var message = new ReadOnlySequence<byte>(Encoding.UTF8.GetBytes(payload));
 
             var exception = Assert.Throws<InvalidDataException>(

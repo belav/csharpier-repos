@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
             string path,
             ProjectBuildManager buildManager,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (path == null)
             {
                 throw new ArgumentNullException(nameof(path));
@@ -45,7 +46,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
         public static IProjectFileLoader GetLoaderForProjectFileExtension(
             HostWorkspaceServices workspaceServices,
             string extension
-        ) {
+        )
+        {
             return workspaceServices.FindLanguageServices<IProjectFileLoader>(
                     d =>
                         d.GetEnumerableMetadata<string>("ProjectFileExtension")

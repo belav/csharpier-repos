@@ -85,7 +85,8 @@ namespace Newtonsoft.Json.Serialization
         protected NullValueHandling ResolvedNullValueHandling(
             JsonObjectContract? containerContract,
             JsonProperty property
-        ) {
+        )
+        {
             NullValueHandling resolvedNullValueHandling =
                 property.NullValueHandling
                 ?? containerContract?.ItemNullValueHandling
@@ -99,7 +100,8 @@ namespace Newtonsoft.Json.Serialization
             object? member,
             string path,
             Exception error
-        ) {
+        )
+        {
             if (_currentErrorContext == null)
             {
                 _currentErrorContext = new ErrorContext(currentObject, member, path, error);
@@ -134,14 +136,16 @@ namespace Newtonsoft.Json.Serialization
             IJsonLineInfo? lineInfo,
             string path,
             Exception ex
-        ) {
+        )
+        {
             ErrorContext errorContext = GetErrorContext(currentObject, keyValue, path, ex);
 
             if (
                 TraceWriter != null
                 && TraceWriter.LevelFilter >= TraceLevel.Error
                 && !errorContext.Traced
-            ) {
+            )
+            {
                 // only write error once
                 errorContext.Traced = true;
 

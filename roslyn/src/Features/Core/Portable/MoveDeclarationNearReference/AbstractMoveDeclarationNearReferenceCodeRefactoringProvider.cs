@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
                         cancellationToken
                     )
                     .ConfigureAwait(false)
-            ) {
+            )
+            {
                 return;
             }
 
@@ -60,7 +61,8 @@ namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
             Document document,
             SyntaxNode statement,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var service = document.GetLanguageService<IMoveDeclarationNearReferenceService>();
             return await service.MoveDeclarationNearReferenceAsync(
                     document,
@@ -72,9 +74,8 @@ namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
 
         private class MyCodeAction : CodeAction.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(FeaturesResources.Move_declaration_near_reference, createChangedDocument) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(FeaturesResources.Move_declaration_near_reference, createChangedDocument) { }
 
             internal override CodeActionPriority Priority => CodeActionPriority.Low;
         }

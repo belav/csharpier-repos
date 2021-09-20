@@ -171,7 +171,8 @@ namespace Microsoft.CodeAnalysis
         internal static SyntaxNodeOrToken ChildThatContainsPosition(
             SyntaxNode node,
             int targetPosition
-        ) {
+        )
+        {
             // The targetPosition must already be within this node
             Debug.Assert(node.FullSpan.Contains(targetPosition));
 

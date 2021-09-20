@@ -73,7 +73,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveConfusingSuppression
             ImmutableArray<Diagnostic> diagnostics,
             bool negate,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
             var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)

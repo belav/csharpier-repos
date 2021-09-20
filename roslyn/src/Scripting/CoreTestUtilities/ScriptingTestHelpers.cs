@@ -60,7 +60,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Test
             Task<ScriptState<T>> scriptState,
             string code,
             string expectedOutput
-        ) {
+        )
+        {
             string output;
             string errorOutput;
             RuntimeEnvironmentFactory.CaptureOutput(
@@ -78,7 +79,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Test
         internal static void AssertCompilationError(
             Script script,
             params DiagnosticDescription[] expectedDiagnostics
-        ) {
+        )
+        {
             AssertCompilationError(() => script.RunAsync().Wait(), expectedDiagnostics);
         }
 
@@ -86,7 +88,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Test
             Task<ScriptState> state,
             string code,
             params DiagnosticDescription[] expectedDiagnostics
-        ) {
+        )
+        {
             AssertCompilationError(
                 () => state.Result.ContinueWithAsync(code).Wait(),
                 expectedDiagnostics
@@ -97,7 +100,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Test
             Task<ScriptState<T>> state,
             string code,
             params DiagnosticDescription[] expectedDiagnostics
-        ) {
+        )
+        {
             AssertCompilationError(
                 () => state.Result.ContinueWithAsync(code).Wait(),
                 expectedDiagnostics
@@ -108,14 +112,16 @@ namespace Microsoft.CodeAnalysis.Scripting.Test
             ScriptState state,
             string code,
             params DiagnosticDescription[] expectedDiagnostics
-        ) {
+        )
+        {
             AssertCompilationError(() => state.ContinueWithAsync(code).Wait(), expectedDiagnostics);
         }
 
         internal static void AssertCompilationError(
             Action action,
             params DiagnosticDescription[] expectedDiagnostics
-        ) {
+        )
+        {
             bool noException = false;
             try
             {

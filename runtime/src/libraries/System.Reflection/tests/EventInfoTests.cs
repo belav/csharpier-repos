@@ -161,7 +161,8 @@ namespace System.Reflection.Tests
             object target,
             Delegate handler,
             Type exceptionType
-        ) {
+        )
+        {
             EventInfo eventInfo = GetEventInfo(type, name);
             Assert.Throws(exceptionType, () => eventInfo.AddEventHandler(target, handler));
         }
@@ -215,7 +216,8 @@ namespace System.Reflection.Tests
             object removeTarget,
             Delegate removeHandler,
             Type exceptionType
-        ) {
+        )
+        {
             EventInfo eventInfo = GetEventInfo(type, name);
             eventInfo.AddEventHandler(addTarget, addHandler);
 

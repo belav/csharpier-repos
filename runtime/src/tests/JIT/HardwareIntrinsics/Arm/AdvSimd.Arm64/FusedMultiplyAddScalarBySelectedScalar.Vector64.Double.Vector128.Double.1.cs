@@ -132,7 +132,8 @@ namespace JIT.HardwareIntrinsics.Arm
                 Double[] inArray3,
                 Double[] outArray,
                 int alignment
-            ) {
+            )
+            {
                 int sizeOfinArray1 = inArray1.Length * Unsafe.SizeOf<Double>();
                 int sizeOfinArray2 = inArray2.Length * Unsafe.SizeOf<Double>();
                 int sizeOfinArray3 = inArray3.Length * Unsafe.SizeOf<Double>();
@@ -143,7 +144,8 @@ namespace JIT.HardwareIntrinsics.Arm
                     || (alignment * 2) < sizeOfinArray2
                     || (alignment * 2) < sizeOfinArray3
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -242,7 +244,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario(
                 SimpleTernaryOpTest__FusedMultiplyAddScalarBySelectedScalar_Vector64_Double_Vector128_Double_1 testClass
-            ) {
+            )
+            {
                 var result = AdvSimd.Arm64.FusedMultiplyAddScalarBySelectedScalar(
                     _fld1,
                     _fld2,
@@ -256,7 +259,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario_Load(
                 SimpleTernaryOpTest__FusedMultiplyAddScalarBySelectedScalar_Vector64_Double_Vector128_Double_1 testClass
-            ) {
+            )
+            {
                 fixed (Vector64<Double>* pFld1 = &_fld1)fixed (
                     Vector64<Double>* pFld2 = &_fld2
                 )fixed (Vector128<Double>* pFld3 = &_fld3)
@@ -618,7 +622,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             fixed (Vector64<Double>* pFld1 = &_fld1)fixed (Vector64<Double>* pFld2 = &_fld2)fixed (
                 Vector128<Double>* pFld3 = &_fld3
-            ) {
+            )
+            {
                 var result = AdvSimd.Arm64.FusedMultiplyAddScalarBySelectedScalar(
                     AdvSimd.LoadVector64((Double*)(pFld1)),
                     AdvSimd.LoadVector64((Double*)(pFld2)),
@@ -706,7 +711,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Vector128<Double> op3,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Double[] inArray1 = new Double[Op1ElementCount];
             Double[] inArray2 = new Double[Op2ElementCount];
             Double[] inArray3 = new Double[Op3ElementCount];
@@ -730,7 +736,8 @@ namespace JIT.HardwareIntrinsics.Arm
             void* op3,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Double[] inArray1 = new Double[Op1ElementCount];
             Double[] inArray2 = new Double[Op2ElementCount];
             Double[] inArray3 = new Double[Op3ElementCount];
@@ -766,14 +773,16 @@ namespace JIT.HardwareIntrinsics.Arm
             Double[] thirdOp,
             Double[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (
                 BitConverter.DoubleToInt64Bits(
                     Helpers.FusedMultiplyAdd(firstOp[0], secondOp[0], thirdOp[Imm])
                 ) != BitConverter.DoubleToInt64Bits(result[0])
-            ) {
+            )
+            {
                 succeeded = false;
             }
             else

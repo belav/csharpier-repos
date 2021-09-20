@@ -75,7 +75,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             IHttpResponseStreamWriterFactory writerFactory,
             ICompositeViewEngine viewEngine,
             DiagnosticListener diagnosticListener
-        ) {
+        )
+        {
             if (writerFactory == null)
             {
                 throw new ArgumentNullException(nameof(writerFactory));
@@ -148,7 +149,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             ITempDataDictionary tempData,
             string? contentType,
             int? statusCode
-        ) {
+        )
+        {
             if (actionContext == null)
             {
                 throw new ArgumentNullException(nameof(actionContext));
@@ -224,7 +226,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             ViewContext viewContext,
             string? contentType,
             int? statusCode
-        ) {
+        )
+        {
             if (viewContext == null)
             {
                 throw new ArgumentNullException(nameof(viewContext));
@@ -251,7 +254,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
             await using (
                 var writer = WriterFactory.CreateWriter(response.Body, resolvedContentTypeEncoding)
-            ) {
+            )
+            {
                 var view = viewContext.View;
 
                 var oldWriter = viewContext.Writer;

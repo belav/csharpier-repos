@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.BraceMatching
             string markup,
             string expectedCode,
             ParseOptions options = null
-        ) {
+        )
+        {
             using (var workspace = CreateWorkspaceFromCode(markup, options))
             {
                 var position = workspace.Documents.Single().CursorPosition.Value;

@@ -20,7 +20,8 @@ namespace System.Globalization.Tests
             NumberFormatInfo format,
             int expectedNls,
             int expectedIcu
-        ) {
+        )
+        {
             int expected = PlatformDetection.IsNlsGlobalization ? expectedNls : expectedIcu;
             Assert.Equal(expected, format.NumberDecimalDigits);
         }

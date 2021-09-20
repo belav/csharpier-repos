@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessarySuppressions
         protected override void RegisterAttributeSyntaxAction(
             CompilationStartAnalysisContext context,
             CompilationAnalyzer compilationAnalyzer
-        ) {
+        )
+        {
             context.RegisterSyntaxNodeAction(
                 context =>
                 {

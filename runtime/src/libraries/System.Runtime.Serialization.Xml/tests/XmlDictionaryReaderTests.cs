@@ -29,7 +29,8 @@ namespace System.Runtime.Serialization.Xml.Tests
                 int wideChars = startWideChars;
                 wideChars < endWideChars;
                 wideChars += incrementWideChars
-            ) {
+            )
+            {
                 for (int singleByteChars = 0; singleByteChars < 4; singleByteChars++)
                 {
                     string testString = GenerateDoubleWideTestString(wideChars, singleByteChars);
@@ -184,7 +185,8 @@ namespace System.Runtime.Serialization.Xml.Tests
                     dictionary,
                     null
                 )
-            ) {
+            )
+            {
                 // write using the dictionary - element name, namespace, value
                 string value = "value";
                 writer.WriteElementString(stringList[0], stringList[1], value);

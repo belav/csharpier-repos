@@ -12,7 +12,8 @@ namespace System.Web.Http.Cors.Test.Controllers
         public void Initialize(
             HttpControllerSettings controllerSettings,
             HttpControllerDescriptor controllerDescriptor
-        ) {
+        )
+        {
             controllerSettings.Services.Replace(
                 typeof(IHttpActionSelector),
                 new ExternalActionSelector()
@@ -34,7 +35,8 @@ namespace System.Web.Http.Cors.Test.Controllers
 
             public ILookup<string, HttpActionDescriptor> GetActionMapping(
                 HttpControllerDescriptor controllerDescriptor
-            ) {
+            )
+            {
                 List<HttpActionDescriptor> descriptors = new List<HttpActionDescriptor>();
                 return descriptors.ToLookup(d => d.ActionName);
             }

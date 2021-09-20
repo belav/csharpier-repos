@@ -22,7 +22,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
             CodeModelState state,
             AbstractCodeElement parent,
             params ICodeElements[] collections
-        ) {
+        )
+        {
             var collection = new UnionCollection(state, parent, collections);
             return (EnvDTE.CodeElements)ComAggregate.CreateAggregatedObject(collection);
         }

@@ -144,7 +144,8 @@ namespace XLinqTests
             int numOfNodes,
             bool touchOrigNodes,
             int type
-        ) {
+        )
+        {
             int count = 0;
             foreach (var replacement in nodes.NonRecursiveVariations(numOfNodes))
             {

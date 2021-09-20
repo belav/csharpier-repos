@@ -27,7 +27,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             ReadyToRunFixupKind fixupKind,
             MethodWithToken method,
             bool isInstantiatingStub
-        ) {
+        )
+        {
             _fixupKind = fixupKind;
             _method = method;
             _isInstantiatingStub = isInstantiatingStub;
@@ -72,12 +73,14 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 && !_isInstantiatingStub
                 && _method.ConstrainedType == null
                 && fixupKind == ReadyToRunFixupKind.MethodEntry
-            ) {
+            )
+            {
                 if (
                     !_method.Method.HasInstantiation
                     && !_method.Method.OwningType.HasInstantiation
                     && !_method.Method.OwningType.IsArray
-                ) {
+                )
+                {
                     if (_method.Token.TokenType == CorTokenType.mdtMethodDef)
                     {
                         fixupKind = ReadyToRunFixupKind.MethodEntry_DefToken;

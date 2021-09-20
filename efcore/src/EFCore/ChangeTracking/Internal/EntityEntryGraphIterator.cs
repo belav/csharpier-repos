@@ -36,7 +36,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public virtual void TraverseGraph<TState>(
             EntityEntryGraphNode<TState> node,
             Func<EntityEntryGraphNode<TState>, bool> handleNode
-        ) {
+        )
+        {
             if (!handleNode(node))
             {
                 return;
@@ -60,7 +61,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                         foreach (
                             var relatedEntity in ((IEnumerable)navigationValue).Cast<object>()
                                 .ToList()
-                        ) {
+                        )
+                        {
                             var targetEntry = stateManager.GetOrCreateEntry(
                                 relatedEntity,
                                 targetEntityType
@@ -104,7 +106,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             EntityEntryGraphNode<TState> node,
             Func<EntityEntryGraphNode<TState>, CancellationToken, Task<bool>> handleNode,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (!await handleNode(node, cancellationToken).ConfigureAwait(false))
             {
                 return;
@@ -127,7 +130,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                         foreach (
                             var relatedEntity in ((IEnumerable)navigationValue).Cast<object>()
                                 .ToList()
-                        ) {
+                        )
+                        {
                             var targetEntry = stateManager.GetOrCreateEntry(
                                 relatedEntity,
                                 targetType

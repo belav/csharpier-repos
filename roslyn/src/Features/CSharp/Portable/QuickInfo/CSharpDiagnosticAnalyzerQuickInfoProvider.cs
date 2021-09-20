@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
         )]
         public CSharpDiagnosticAnalyzerQuickInfoProvider(
             IDiagnosticAnalyzerService diagnosticAnalyzerService
-        ) {
+        )
+        {
             _diagnosticAnalyzerService = diagnosticAnalyzerService;
         }
 
@@ -48,7 +49,8 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
             Document document,
             SyntaxToken token,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return GetQuickinfoForPragmaWarning(document, token)
                 ?? (
                     await GetQuickInfoForSuppressMessageAttributeAsync(
@@ -110,7 +112,8 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
             Document document,
             SyntaxToken token,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // SuppressMessageAttribute docs
             // https://docs.microsoft.com/en-us/dotnet/api/system.diagnostics.codeanalysis.suppressmessageattribute
             var suppressMessageCheckIdArgument = token.GetAncestor<AttributeArgumentSyntax>() switch
@@ -159,7 +162,8 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
             Document document,
             string errorCode,
             TextSpan location
-        ) {
+        )
+        {
             var infoCache = _diagnosticAnalyzerService.AnalyzerInfoCache;
             var hostAnalyzers = document.Project.Solution.State.Analyzers;
             var groupedDiagnostics =
@@ -181,7 +185,8 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
             TextSpan location,
             DiagnosticDescriptor descriptor,
             params TextSpan[] relatedSpans
-        ) {
+        )
+        {
             var description =
                 descriptor.Title.ToStringOrNull()
                 ?? descriptor.Description.ToStringOrNull()

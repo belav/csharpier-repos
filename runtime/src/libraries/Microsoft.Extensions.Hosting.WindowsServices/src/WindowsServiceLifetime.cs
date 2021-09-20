@@ -22,13 +22,14 @@ namespace Microsoft.Extensions.Hosting.WindowsServices
             IHostApplicationLifetime applicationLifetime,
             ILoggerFactory loggerFactory,
             IOptions<HostOptions> optionsAccessor
-        ) : this(
-            environment,
-            applicationLifetime,
-            loggerFactory,
-            optionsAccessor,
-            Options.Options.Create(new WindowsServiceLifetimeOptions())
-        ) { }
+        )
+            : this(
+                environment,
+                applicationLifetime,
+                loggerFactory,
+                optionsAccessor,
+                Options.Options.Create(new WindowsServiceLifetimeOptions())
+            ) { }
 
         public WindowsServiceLifetime(
             IHostEnvironment environment,
@@ -36,7 +37,8 @@ namespace Microsoft.Extensions.Hosting.WindowsServices
             ILoggerFactory loggerFactory,
             IOptions<HostOptions> optionsAccessor,
             IOptions<WindowsServiceLifetimeOptions> windowsServiceOptionsAccessor
-        ) {
+        )
+        {
             Environment = environment ?? throw new ArgumentNullException(nameof(environment));
             ApplicationLifetime =
                 applicationLifetime ?? throw new ArgumentNullException(nameof(applicationLifetime));

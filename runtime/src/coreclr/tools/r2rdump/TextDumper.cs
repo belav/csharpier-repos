@@ -100,7 +100,8 @@ namespace R2RDump
                                 kvp => kvp.Value
                             )
                             .Select(kvp => kvp.Key)
-                    ) {
+                    )
+                    {
                         string dividerName =
                             $@"Component Assembly [{assemblyIndex}]: {assemblyName}";
                         if (
@@ -108,7 +109,8 @@ namespace R2RDump
                                 ReadyToRunSectionType.ManifestAssemblyMvids,
                                 out ReadyToRunSection mvidSection
                             )
-                        ) {
+                        )
+                        {
                             int mvidOffset =
                                 _r2r.GetOffset(mvidSection.RelativeVirtualAddress)
                                 + GuidByteSize * assemblyIndex;
@@ -310,7 +312,8 @@ namespace R2RDump
                     && (
                         (ILCompiler.Reflection.ReadyToRun.Amd64.UnwindInfo)rtf.UnwindInfo
                     ).CodeOffsetToUnwindCodeIndex.TryGetValue(codeOffset, out int unwindCodeIndex)
-                ) {
+                )
+                {
                     ILCompiler.Reflection.ReadyToRun.Amd64.UnwindCode code = (
                         (ILCompiler.Reflection.ReadyToRun.Amd64.UnwindInfo)rtf.UnwindInfo
                     ).UnwindCodes[unwindCodeIndex];
@@ -329,13 +332,15 @@ namespace R2RDump
                         codeOffset,
                         out List<BaseGcTransition> transitionsForOffset
                     )
-                ) {
+                )
+                {
                     string[] formattedTransitions = new string[transitionsForOffset.Count];
                     for (
                         int transitionIndex = 0;
                         transitionIndex < formattedTransitions.Length;
                         transitionIndex++
-                    ) {
+                    )
+                    {
                         formattedTransitions[transitionIndex] = transitionsForOffset[
                             transitionIndex
                         ].ToString();
@@ -368,7 +373,8 @@ namespace R2RDump
             uint size,
             string name = "Raw",
             bool convertToOffset = true
-        ) {
+        )
+        {
             int start = rva;
             if (convertToOffset)
                 start = _r2r.GetOffset(rva);
@@ -428,7 +434,8 @@ namespace R2RDump
                         _writer.WriteLine();
                         foreach (
                             string name in _r2r.ReadyToRunAssemblies[assemblyIndex1].AvailableTypes
-                        ) {
+                        )
+                        {
                             _writer.WriteLine(name);
                         }
                     }
@@ -451,7 +458,8 @@ namespace R2RDump
                             ReadyToRunMethod method in _r2r.ReadyToRunAssemblies[
                                 assemblyIndex2
                             ].Methods
-                        ) {
+                        )
+                        {
                             _writer.WriteLine(
                                 $@"{MetadataTokens.GetToken(method.MethodHandle):X8}: {method.SignatureString}"
                             );
@@ -539,7 +547,8 @@ namespace R2RDump
                                 if (
                                     importSection.AuxiliaryDataRVA != 0
                                     && importSection.AuxiliaryDataSize != 0
-                                ) {
+                                )
+                                {
                                     _writer.WriteLine("AuxiliaryData Bytes:");
                                     DumpBytes(
                                         importSection.AuxiliaryDataRVA,
@@ -549,7 +558,8 @@ namespace R2RDump
                             }
                             foreach (
                                 ReadyToRunImportSection.ImportSectionEntry entry in importSection.Entries
-                            ) {
+                            )
+                            {
                                 entry.WriteTo(_writer, _options);
                                 _writer.WriteLine();
                             }
@@ -569,7 +579,8 @@ namespace R2RDump
                             int assemblyRefIndex = 1;
                             assemblyRefIndex < assemblyRefCount;
                             assemblyRefIndex++
-                        ) {
+                        )
+                        {
                             AssemblyReference assemblyRef = globalReader.GetAssemblyReference(
                                 MetadataTokens.AssemblyReferenceHandle(assemblyRefIndex)
                             );
@@ -587,7 +598,8 @@ namespace R2RDump
                                 kvp => kvp.Value
                             )
                             .Select(kvp => kvp.Key)
-                    ) {
+                    )
+                    {
                         _writer.WriteLine(
                             $"[ID 0x{manifestAsmIndex + assemblyRefCount + 1:X2}]: {manifestReferenceAssembly}"
                         );

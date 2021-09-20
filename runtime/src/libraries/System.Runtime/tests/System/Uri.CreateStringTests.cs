@@ -142,7 +142,8 @@ namespace System.Tests
             string uriString,
             string absoluteUri,
             string toString
-        ) {
+        )
+        {
             PerformAction(
                 uriString,
                 UriKind.Absolute,
@@ -2773,7 +2774,8 @@ namespace System.Tests
             int port,
             bool isDefaultPort,
             bool isLoopback
-        ) {
+        )
+        {
             string idnHost = host;
             if (hostNameType == UriHostNameType.IPv6)
             {
@@ -2904,7 +2906,8 @@ namespace System.Tests
             int port,
             bool isDefaultPort,
             bool isLoopback
-        ) {
+        )
+        {
             string authority = host;
             if (!isDefaultPort)
             {
@@ -3876,7 +3879,8 @@ namespace System.Tests
             string path,
             string query,
             string fragment
-        ) {
+        )
+        {
             IEnumerable<string> segments = null;
             string localPath = null;
             string segmentsPath = null;

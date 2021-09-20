@@ -344,7 +344,8 @@ namespace JIT.HardwareIntrinsics.X86
             Vector256<Int32> firstOp,
             Int32 result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Int32[] inArray = new Int32[Op1ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<Int32, byte>(ref inArray[0]), firstOp);
             ValidateResult(inArray, result, method);
@@ -354,7 +355,8 @@ namespace JIT.HardwareIntrinsics.X86
             void* firstOp,
             Int32 result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Int32[] inArray = new Int32[Op1ElementCount];
             Unsafe.CopyBlockUnaligned(
                 ref Unsafe.As<Int32, byte>(ref inArray[0]),
@@ -368,7 +370,8 @@ namespace JIT.HardwareIntrinsics.X86
             Int32[] firstOp,
             Int32 result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (result != firstOp[0])

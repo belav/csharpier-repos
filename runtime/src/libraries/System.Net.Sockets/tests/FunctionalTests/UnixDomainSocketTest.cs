@@ -72,7 +72,8 @@ namespace System.Net.Sockets.Tests
                         SocketType.Stream,
                         ProtocolType.Unspecified
                     )
-                ) {
+                )
+                {
                     bool willRaiseEvent = sock.ConnectAsync(args);
                     if (willRaiseEvent)
                     {
@@ -116,7 +117,8 @@ namespace System.Net.Sockets.Tests
                         SocketType.Stream,
                         ProtocolType.Unspecified
                     )
-                ) {
+                )
+                {
                     bool willRaiseEvent = sock.ConnectAsync(args);
                     if (willRaiseEvent)
                     {
@@ -162,7 +164,8 @@ namespace System.Net.Sockets.Tests
                         SocketType.Stream,
                         ProtocolType.Unspecified
                     )
-                ) {
+                )
+                {
                     server.Bind(endPoint);
                     server.Listen(1);
 
@@ -292,7 +295,8 @@ namespace System.Net.Sockets.Tests
                         SocketType.Stream,
                         ProtocolType.Unspecified
                     )
-                ) {
+                )
+                {
                     server.Bind(endPoint);
                     server.Listen(1);
 
@@ -343,7 +347,8 @@ namespace System.Net.Sockets.Tests
             int iterations,
             int writeBufferSize,
             int readBufferSize
-        ) {
+        )
+        {
             var writeBuffer = new byte[writeBufferSize * iterations];
             Random.Shared.NextBytes(writeBuffer);
             var readData = new MemoryStream();
@@ -365,7 +370,8 @@ namespace System.Net.Sockets.Tests
                         SocketType.Stream,
                         ProtocolType.Unspecified
                     )
-                ) {
+                )
+                {
                     server.Bind(endPoint);
                     server.Listen(1);
 
@@ -445,7 +451,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Unspecified
                 )
-            ) {
+            )
+            {
                 const int Iters = 25;
                 byte[] sendData = new byte[Iters];
                 byte[] receiveData = new byte[sendData.Length];
@@ -508,7 +515,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Unspecified
                 )
-            ) {
+            )
+            {
                 const int Iters = 2048;
                 byte[] sendData = new byte[Iters];
                 byte[] receiveData = new byte[sendData.Length];
@@ -603,7 +611,8 @@ namespace System.Net.Sockets.Tests
                         SocketType.Stream,
                         ProtocolType.Unspecified
                     )
-                ) {
+                )
+                {
                     server.Bind(new UnixDomainSocketEndPoint(serverAddress));
                     server.Listen(1);
 
@@ -613,7 +622,8 @@ namespace System.Net.Sockets.Tests
                             SocketType.Stream,
                             ProtocolType.Unspecified
                         )
-                    ) {
+                    )
+                    {
                         // Bind the client.
                         client.Bind(new UnixDomainSocketEndPoint(clientAddress));
                         client.Connect(new UnixDomainSocketEndPoint(serverAddress));
@@ -664,7 +674,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Unspecified
                 )
-            ) {
+            )
+            {
                 Assert.ThrowsAny<SocketException>(
                     () => socket.Bind(new UnixDomainSocketEndPoint(address))
                 );
@@ -677,7 +688,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Unspecified
                 )
-            ) {
+            )
+            {
                 Assert.ThrowsAny<SocketException>(
                     () => socket.Connect(new UnixDomainSocketEndPoint(address))
                 );

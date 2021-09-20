@@ -153,7 +153,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
             ImportDefinition definition,
             out Tuple<ComposablePartDefinition, ExportDefinition>? singleMatch,
             out IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>>? multipleMatches
-        ) {
+        )
+        {
             if (this.IsGeneric())
             {
                 singleMatch = null;
@@ -176,7 +177,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
                             genericParameters,
                             out Type?[]? genericTypeParameters
                         )
-                    ) {
+                    )
+                    {
                         HashSet<ComposablePartDefinition>? candidates = null;
                         ComposablePartDefinition? previousPart = null;
 
@@ -185,13 +187,15 @@ namespace System.ComponentModel.Composition.ReflectionModel
                             Type[] candidateParameters in GetCandidateParameters(
                                 genericTypeParameters!
                             )
-                        ) {
+                        )
+                        {
                             if (
                                 TryMakeGenericPartDefinition(
                                     candidateParameters,
                                     out ComposablePartDefinition? candidatePart
                                 )
-                            ) {
+                            )
+                            {
                                 bool alreadyProcessed = false;
                                 if (candidates == null)
                                 {
@@ -237,7 +241,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
                                                 Tuple<ComposablePartDefinition, ExportDefinition>
                                             >? candidateMultipleMatches
                                         )
-                                    ) {
+                                    )
+                                    {
                                         exports = exports.FastAppendToListAllowNulls(
                                             candidateSingleMatch,
                                             candidateMultipleMatches
@@ -269,7 +274,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
             ImportDefinition definition,
             out Tuple<ComposablePartDefinition, ExportDefinition>? singleMatch,
             out IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>>? multipleMatches
-        ) {
+        )
+        {
             singleMatch = null;
             multipleMatches = null;
 
@@ -332,7 +338,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
                 if (
                     (genericParametersOrder != null)
                     && (genericParametersOrder.Length == genericParameters.Length)
-                ) {
+                )
+                {
                     yield return GenericServices.Reorder(genericParameters, genericParametersOrder);
                 }
             }
@@ -341,7 +348,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
         private static bool TryGetGenericTypeParameters(
             IEnumerable<object> genericParameters,
             [NotNullWhen(true)] out Type?[]? genericTypeParameters
-        ) {
+        )
+        {
             genericTypeParameters = genericParameters as Type[];
             if (genericTypeParameters == null)
             {
@@ -362,7 +370,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
         internal bool TryMakeGenericPartDefinition(
             Type[] genericTypeParameters,
             [NotNullWhen(true)] out ComposablePartDefinition? genericPartDefinition
-        ) {
+        )
+        {
             genericPartDefinition = null;
 
             if (
@@ -370,7 +379,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
                     Metadata,
                     genericTypeParameters
                 )
-            ) {
+            )
+            {
                 return false;
             }
 

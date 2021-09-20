@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             SyntaxGenerator factory,
             SemanticDocument document,
             string exceptionMetadataName
-        ) {
+        )
+        {
             var compilation = document.SemanticModel.Compilation;
             var exceptionType = compilation.GetTypeByMetadataName(exceptionMetadataName);
 
@@ -57,12 +58,14 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             CodeGenerationOptions options,
             out string name,
             out INamespaceSymbol innermostNamespace
-        ) {
+        )
+        {
             if (
                 options.GenerateMembers
                 && options.MergeNestedNamespaces
                 && @namespace.Name != string.Empty
-            ) {
+            )
+            {
                 var names = new List<string>();
                 names.Add(@namespace.Name);
 
@@ -74,7 +77,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
                         members.Count == 1
                         && members[0] is INamespaceSymbol
                         && CodeGenerationNamespaceInfo.GetImports(innermostNamespace).Count == 0
-                    ) {
+                    )
+                    {
                         var childNamespace = (INamespaceSymbol)members[0];
                         names.Add(childNamespace.Name);
                         innermostNamespace = childNamespace;
@@ -129,7 +133,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             string commentToken,
             [NotNullWhen(true)] out string? comment,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var xml = symbol.GetDocumentationCommentXml(cancellationToken: cancellationToken);
             if (string.IsNullOrEmpty(xml))
             {
@@ -420,7 +425,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
                         declaration,
                         declarationList[desiredGroupIndex]
                     )
-                ) {
+                )
+                {
                     // Found the index of an item not of our group.
                     break;
                 }
@@ -445,7 +451,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
                 if (
                     0
                     != comparerWithoutNameCheck.Compare(declaration, declarationList[previousIndex])
-                ) {
+                )
+                {
                     // Hit the previous group of items.
                     break;
                 }

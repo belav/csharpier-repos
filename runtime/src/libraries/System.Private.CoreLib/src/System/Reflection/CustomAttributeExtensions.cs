@@ -46,14 +46,16 @@ namespace System.Reflection
             this MemberInfo element,
             Type attributeType,
             bool inherit
-        ) {
+        )
+        {
             return Attribute.GetCustomAttribute(element, attributeType, inherit);
         }
         public static Attribute? GetCustomAttribute(
             this ParameterInfo element,
             Type attributeType,
             bool inherit
-        ) {
+        )
+        {
             return Attribute.GetCustomAttribute(element, attributeType, inherit);
         }
 
@@ -90,13 +92,15 @@ namespace System.Reflection
         public static IEnumerable<Attribute> GetCustomAttributes(
             this MemberInfo element,
             bool inherit
-        ) {
+        )
+        {
             return Attribute.GetCustomAttributes(element, inherit);
         }
         public static IEnumerable<Attribute> GetCustomAttributes(
             this ParameterInfo element,
             bool inherit
-        ) {
+        )
+        {
             return Attribute.GetCustomAttributes(element, inherit);
         }
         #endregion
@@ -105,25 +109,29 @@ namespace System.Reflection
         public static IEnumerable<Attribute> GetCustomAttributes(
             this Assembly element,
             Type attributeType
-        ) {
+        )
+        {
             return Attribute.GetCustomAttributes(element, attributeType);
         }
         public static IEnumerable<Attribute> GetCustomAttributes(
             this Module element,
             Type attributeType
-        ) {
+        )
+        {
             return Attribute.GetCustomAttributes(element, attributeType);
         }
         public static IEnumerable<Attribute> GetCustomAttributes(
             this MemberInfo element,
             Type attributeType
-        ) {
+        )
+        {
             return Attribute.GetCustomAttributes(element, attributeType);
         }
         public static IEnumerable<Attribute> GetCustomAttributes(
             this ParameterInfo element,
             Type attributeType
-        ) {
+        )
+        {
             return Attribute.GetCustomAttributes(element, attributeType);
         }
 
@@ -151,14 +159,16 @@ namespace System.Reflection
             this MemberInfo element,
             Type attributeType,
             bool inherit
-        ) {
+        )
+        {
             return Attribute.GetCustomAttributes(element, attributeType, inherit);
         }
         public static IEnumerable<Attribute> GetCustomAttributes(
             this ParameterInfo element,
             Type attributeType,
             bool inherit
-        ) {
+        )
+        {
             return Attribute.GetCustomAttributes(element, attributeType, inherit);
         }
 

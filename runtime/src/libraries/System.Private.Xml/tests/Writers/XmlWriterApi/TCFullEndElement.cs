@@ -4602,7 +4602,8 @@ namespace System.Xml.Tests
                 string destStr,
                 bool isValid,
                 object expVal
-            ) {
+            )
+            {
                 Type dest = typeMapper[destStr];
                 CultureInfo origCulture = null;
 
@@ -4711,7 +4712,8 @@ namespace System.Xml.Tests
                 string destStr,
                 bool isValid,
                 object expVal
-            ) {
+            )
+            {
                 writeValue_27(utils, param, sourceStr, destStr, isValid, expVal);
             }
 
@@ -6209,7 +6211,8 @@ namespace System.Xml.Tests
                             overrideAsync: true,
                             async: utils.Async
                         )
-                    ) {
+                    )
+                    {
                         w.WriteBase64(data, 0, data.Length);
                     }
 
@@ -6886,7 +6889,8 @@ namespace System.Xml.Tests
                                 overrideAsync: true,
                                 async: utils.Async
                             )
-                        ) {
+                        )
+                        {
                             w.WriteStartElement("B");
                             w.WriteStartAttribute("aaa");
                             try

@@ -13,7 +13,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
         private static List<TElement> BindComplexCollection(
             ControllerContext controllerContext,
             ExtensibleModelBindingContext bindingContext
-        ) {
+        )
+        {
             string indexPropertyName = ModelBinderUtil.CreatePropertyModelName(
                 bindingContext.ModelName,
                 "index"
@@ -32,7 +33,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
             ControllerContext controllerContext,
             ExtensibleModelBindingContext bindingContext,
             IEnumerable<string> indexNames
-        ) {
+        )
+        {
             bool indexNamesIsFinite;
             if (indexNames != null)
             {
@@ -96,7 +98,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
         public virtual bool BindModel(
             ControllerContext controllerContext,
             ExtensibleModelBindingContext bindingContext
-        ) {
+        )
+        {
             ModelBinderUtil.ValidateBindingContext(bindingContext);
 
             ValueProviderResult valueProviderResult = bindingContext.ValueProvider.GetValue(
@@ -127,7 +130,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
             ExtensibleModelBindingContext bindingContext,
             object rawValue,
             CultureInfo culture
-        ) {
+        )
+        {
             if (rawValue == null)
             {
                 return null; // nothing to do
@@ -185,7 +189,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
             ControllerContext controllerContext,
             ExtensibleModelBindingContext bindingContext,
             IList<TElement> newCollection
-        ) {
+        )
+        {
             CollectionModelBinderUtil.CreateOrReplaceCollection(
                 bindingContext,
                 newCollection,

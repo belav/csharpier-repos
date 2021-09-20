@@ -107,7 +107,8 @@ namespace System.IO.Compression.Tests
                 LocalMemoryStream nonReadable = new LocalMemoryStream(),
                     nonWriteable = new LocalMemoryStream(),
                     nonSeekable = new LocalMemoryStream()
-            ) {
+            )
+            {
                 nonReadable.SetCanRead(false);
                 nonWriteable.SetCanWrite(false);
                 nonSeekable.SetCanSeek(false);
@@ -636,7 +637,8 @@ namespace System.IO.Compression.Tests
             MemoryStream packageStream,
             int distance,
             int start = 0
-        ) {
+        )
+        {
             var buffer = packageStream.GetBuffer();
             var startOfName = FindSequenceIndex(fileNameInBytes, buffer, start);
             var startOfUpdatingData = startOfName - distance;
@@ -655,7 +657,8 @@ namespace System.IO.Compression.Tests
             MemoryStream packageStream,
             int distance,
             int start = 0
-        ) {
+        )
+        {
             var buffer = packageStream.GetBuffer();
             var startOfName = FindSequenceIndex(fileNameInBytes, buffer, start);
             var startOfUpdatingData = startOfName - distance;
@@ -673,14 +676,16 @@ namespace System.IO.Compression.Tests
             byte[] searchItem,
             byte[] whereToSearch,
             int startIndex = 0
-        ) {
+        )
+        {
             for (int start = startIndex; start < whereToSearch.Length - searchItem.Length; ++start)
             {
                 int searchIndex = 0;
                 while (
                     searchIndex < searchItem.Length
                     && searchItem[searchIndex] == whereToSearch[start + searchIndex]
-                ) {
+                )
+                {
                     ++searchIndex;
                 }
                 if (searchIndex == searchItem.Length)
@@ -732,7 +737,8 @@ namespace System.IO.Compression.Tests
                     await StreamHelpers.CreateTempCopyStream(filename),
                     ZipArchiveMode.Read
                 )
-            ) {
+            )
+            {
                 ZipArchiveEntry e = archive.Entries[0];
                 if (throwsOnOpen)
                 {
@@ -756,7 +762,8 @@ namespace System.IO.Compression.Tests
                     await StreamHelpers.CreateTempCopyStream(bad("invaliddate.zip")),
                     ZipArchiveMode.Read
                 )
-            ) {
+            )
+            {
                 Assert.Equal(
                     new DateTime(1980, 1, 1, 0, 0, 0),
                     archive.Entries[0].LastWriteTime.DateTime
@@ -813,7 +820,8 @@ namespace System.IO.Compression.Tests
             string zipFile,
             string zipFolder,
             bool requireExplicit
-        ) {
+        )
+        {
             IsZipSameAsDir(
                 await StreamHelpers.CreateTempCopyStream(strange(zipFile)),
                 zfolder(zipFolder),
@@ -1252,7 +1260,8 @@ namespace System.IO.Compression.Tests
                         ZipArchiveMode.Update,
                         leaveOpen: true
                     )
-                ) {
+                )
+                {
                     InsertEntry(archive, name0, str64KB);
                     InsertEntry(archive, name1, str64KB);
                 }
@@ -1265,7 +1274,8 @@ namespace System.IO.Compression.Tests
                         ZipArchiveMode.Read,
                         leaveOpen: true
                     )
-                ) {
+                )
+                {
                     Assert.Equal(2, archive.Entries.Count);
                     VerifyValidEntry(archive.Entries[0], name0, ushort.MaxValue);
                     VerifyValidEntry(archive.Entries[1], name1, ushort.MaxValue);

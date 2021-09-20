@@ -184,7 +184,8 @@ namespace ILCompiler
                         "armel",
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     _targetArchitecture = TargetArchitecture.ARM;
                     _armelAbi = true;
                 }
@@ -229,7 +230,8 @@ namespace ILCompiler
             if (
                 (_targetArchitecture == TargetArchitecture.X86)
                 || (_targetArchitecture == TargetArchitecture.X64)
-            ) {
+            )
+            {
                 instructionSetSupportBuilder.AddSupportedInstructionSet("sse");
                 instructionSetSupportBuilder.AddSupportedInstructionSet("sse2");
             }
@@ -322,7 +324,8 @@ namespace ILCompiler
             if (
                 (_targetArchitecture == TargetArchitecture.X86)
                 || (_targetArchitecture == TargetArchitecture.X64)
-            ) {
+            )
+            {
                 // For ReadyToRun we set these hardware features as enabled always, as most
                 // of hardware in the wild supports them. Note that we do not indicate support for AVX, or any other
                 // instruction set which uses the VEX encodings as the presence of those makes otherwise acceptable
@@ -412,7 +415,8 @@ namespace ILCompiler
                                     "System.Private.CoreLib",
                                     StringComparison.OrdinalIgnoreCase
                                 ) == 0
-                            ) {
+                            )
+                            {
                                 versionBubbleIncludesCoreLib = true;
                                 break;
                             }
@@ -427,7 +431,8 @@ namespace ILCompiler
                                         "System.Private.CoreLib",
                                         StringComparison.OrdinalIgnoreCase
                                     ) == 0
-                                ) {
+                                )
+                                {
                                     versionBubbleIncludesCoreLib = true;
                                     break;
                                 }
@@ -715,7 +720,8 @@ namespace ILCompiler
                         _optimizationMode == OptimizationMode.None
                         && !_commandLineOptions.OptimizeDisabled
                         && !_commandLineOptions.Composite
-                    ) {
+                    )
+                    {
                         System.Diagnostics.Debug.Assert(inputModules.Count == 1);
                         _optimizationMode = (
                             (EcmaAssembly)inputModules[0].Assembly
@@ -801,7 +807,8 @@ namespace ILCompiler
                         module.PEReader.PEHeaders.CorHeader.Flags
                         & (CorFlags.ILLibrary | CorFlags.ILOnly)
                     ) == (CorFlags)0
-                ) {
+                )
+                {
                     throw new CommandLineException(
                         string.Format(SR.ManagedCppNotSupported, inputFilePath)
                     );
@@ -912,7 +919,8 @@ namespace ILCompiler
                         != _commandLineOptions.SingleMethodGenericArg.Count
                     )
                 )
-            ) {
+            )
+            {
                 throw new CommandLineException(
                     string.Format(
                         SR.GenericArgCountMismatch,

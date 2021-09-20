@@ -133,7 +133,8 @@ namespace System.DirectoryServices.Protocols.Tests
             byte[] cookie,
             DirectorySynchronizationOptions option,
             byte[] expectedValue
-        ) {
+        )
+        {
             var control = new DirSyncRequestControl(cookie, option);
             Assert.Equal(1048576, control.AttributeCount);
             Assert.Equal(cookie ?? Array.Empty<byte>(), control.Cookie);
@@ -184,7 +185,8 @@ namespace System.DirectoryServices.Protocols.Tests
             DirectorySynchronizationOptions option,
             int attributeCount,
             byte[] expectedValue
-        ) {
+        )
+        {
             var control = new DirSyncRequestControl(cookie, option, attributeCount);
             Assert.Equal(attributeCount, control.AttributeCount);
             Assert.Equal(cookie ?? Array.Empty<byte>(), control.Cookie);

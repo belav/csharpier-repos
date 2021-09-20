@@ -36,7 +36,8 @@ namespace System.Net.Http.Tests
             string rawProxyString,
             string rawInsecureUri,
             string rawSecureUri
-        ) {
+        )
+        {
             RemoteExecutor.Invoke(
                     (proxyString, insecureProxy, secureProxy) =>
                     {
@@ -84,7 +85,8 @@ namespace System.Net.Http.Tests
             string rawProxyString,
             string rawInsecureUri,
             string rawSecureUri
-        ) {
+        )
+        {
             RemoteExecutor.Invoke(
                     (proxyString, insecureProxy, secureProxy) =>
                     {
@@ -331,7 +333,8 @@ namespace System.Net.Http.Tests
             string proxyConfig,
             string url,
             string expected
-        ) {
+        )
+        {
             RemoteExecutor.Invoke(
                     (manualConfigValue, proxyConfigValue, urlValue, expectedValue) =>
                     {

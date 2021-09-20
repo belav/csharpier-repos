@@ -28,15 +28,17 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
             DkmLanguage intermediateLanguage,
             DkmRuntimeInstance targetRuntime,
             DkmDataItem dataItem
-        ) : base(
-            inspectionContext,
-            stackFrame,
-            name,
-            fullName,
-            DkmEvaluationResultFlags.None,
-            null,
-            dataItem
-        ) {
+        )
+            : base(
+                inspectionContext,
+                stackFrame,
+                name,
+                fullName,
+                DkmEvaluationResultFlags.None,
+                null,
+                dataItem
+            )
+        {
             this.Expression = expression;
             this.IntermediateLanguage = intermediateLanguage;
             this.TargetRuntime = targetRuntime;
@@ -51,7 +53,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
             DkmLanguage IntermediateLanguage,
             DkmRuntimeInstance TargetRuntime,
             DkmDataItem DataItem
-        ) {
+        )
+        {
             return new DkmIntermediateEvaluationResult(
                 InspectionContext,
                 StackFrame,

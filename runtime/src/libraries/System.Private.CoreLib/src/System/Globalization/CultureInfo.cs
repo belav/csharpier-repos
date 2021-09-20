@@ -126,13 +126,15 @@ namespace System.Globalization
 
         private static void AsyncLocalSetCurrentCulture(
             AsyncLocalValueChangedArgs<CultureInfo> args
-        ) {
+        )
+        {
             s_currentThreadCulture = args.CurrentValue;
         }
 
         private static void AsyncLocalSetCurrentUICulture(
             AsyncLocalValueChangedArgs<CultureInfo> args
-        ) {
+        )
+        {
             s_currentThreadUICulture = args.CurrentValue;
         }
 
@@ -1237,7 +1239,8 @@ namespace System.Globalization
                     GlobalizationMode.UseNls
                         ? !CultureData.NlsIsEnsurePredefinedLocaleName(name)
                         : !CultureData.IcuIsEnsurePredefinedLocaleName(name)
-                ) {
+                )
+                {
                     throw new CultureNotFoundException(
                         nameof(name),
                         name,

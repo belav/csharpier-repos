@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             int position,
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (context.IsPreProcessorDirectiveContext)
             {
                 return false;
@@ -33,7 +34,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             int position,
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return IsValidContext(position, context, cancellationToken)
               ? ImmutableArray.Create(new RecommendedKeyword("dynamic"))
               : ImmutableArray<RecommendedKeyword>.Empty;
@@ -43,7 +45,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             int position,
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxTree = context.SyntaxTree;
 
             // first do quick exit check

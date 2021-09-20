@@ -39,7 +39,8 @@ namespace System.Web.Razor.Test.Generator
             bool designTime,
             bool isIndentingWithTabs,
             int tabSize
-        ) {
+        )
+        {
             RazorEngineHost host = CreateHost(
                 designTime: designTime,
                 isIndentingWithTabs: isIndentingWithTabs,
@@ -68,7 +69,8 @@ namespace System.Web.Razor.Test.Generator
             bool designTime,
             bool isIndentingWithTabs,
             int tabSize
-        ) {
+        )
+        {
             RazorEngineHost host = CreateHost(
                 designTime: designTime,
                 isIndentingWithTabs: isIndentingWithTabs,
@@ -101,7 +103,8 @@ namespace System.Web.Razor.Test.Generator
             int tabSize,
             int numTabs,
             int numSpaces
-        ) {
+        )
+        {
             RazorEngineHost host = CreateHost(
                 designTime: designTime,
                 isIndentingWithTabs: isIndentingWithTabs,
@@ -163,7 +166,8 @@ namespace System.Web.Razor.Test.Generator
             int tabSize,
             int numTabs,
             int numSpaces
-        ) {
+        )
+        {
             RazorEngineHost host = CreateHost(
                 designTime: designTime,
                 isIndentingWithTabs: isIndentingWithTabs,
@@ -224,7 +228,8 @@ namespace System.Web.Razor.Test.Generator
             int tabSize,
             int numTabs,
             int numSpaces
-        ) {
+        )
+        {
             RazorEngineHost host = CreateHost(
                 designTime: designTime,
                 isIndentingWithTabs: isIndentingWithTabs,
@@ -255,7 +260,8 @@ namespace System.Web.Razor.Test.Generator
             string code,
             string padded,
             int paddingCharCount
-        ) {
+        )
+        {
             Assert.Equal(numTabs + numSpaces + code.Length, padded.Length);
 
             if (numTabs > 0 || numSpaces > 0)
@@ -280,7 +286,8 @@ namespace System.Web.Razor.Test.Generator
             bool designTime,
             bool isIndentingWithTabs = false,
             int tabSize = 4
-        ) {
+        )
+        {
             return new RazorEngineHost(new CSharpRazorCodeLanguage())
             {
                 DesignTimeMode = designTime,
@@ -294,7 +301,8 @@ namespace System.Web.Razor.Test.Generator
             SpanKind spanKind,
             int spanIndex,
             string spanText
-        ) {
+        )
+        {
             Span[] spans = GenerateSpans(text, spanKind, spanIndex, spanText);
 
             return spans[spanIndex];
@@ -305,7 +313,8 @@ namespace System.Web.Razor.Test.Generator
             SpanKind spanKind,
             int spanIndex,
             string spanText
-        ) {
+        )
+        {
             Assert.True(spanIndex > 0);
 
             RazorParser parser = new RazorParser(new CSharpCodeParser(), new HtmlMarkupParser());

@@ -196,7 +196,8 @@ namespace System.Xml.Tests
             string attrNs,
             int expectedError,
             string expectedNs = null
-        ) {
+        )
+        {
             XmlSchemaSet xss = new XmlSchemaSet();
             xss.XmlResolver = new XmlUrlResolver();
             xss.ValidationEventHandler += new ValidationEventHandler(ValidationCallback);
@@ -239,7 +240,8 @@ namespace System.Xml.Tests
             string attrNs,
             int expectedError,
             string expectedNs = null
-        ) {
+        )
+        {
             XmlSchemaSet xss = new XmlSchemaSet();
             xss.XmlResolver = new XmlUrlResolver();
             xss.ValidationEventHandler += new ValidationEventHandler(ValidationCallback);

@@ -35,7 +35,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         public CodeActionOperation CreateAddMetadataReferenceOperation(
             ProjectId projectId,
             AssemblyIdentity assemblyIdentity
-        ) {
+        )
+        {
             if (projectId == null)
             {
                 throw new ArgumentNullException(nameof(projectId));
@@ -58,7 +59,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             public AddMetadataReferenceOperation(
                 ProjectId projectId,
                 AssemblyIdentity assemblyIdentity
-            ) {
+            )
+            {
                 _projectId = projectId;
                 _assemblyIdentity = assemblyIdentity;
             }
@@ -66,21 +68,24 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             public override void Apply(
                 Microsoft.CodeAnalysis.Workspace workspace,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 var visualStudioWorkspace = (VisualStudioWorkspaceImpl)workspace;
                 if (
                     !visualStudioWorkspace.TryAddReferenceToProject(
                         _projectId,
                         "*" + _assemblyIdentity.GetDisplayName()
                     )
-                ) {
+                )
+                {
                     // We failed to add the reference, which means the project system wasn't able to bind.
                     // We'll pop up the Add Reference dialog to let the user figure this out themselves.
                     // This is the same approach done in CVBErrorFixApply::ApplyAddMetaReferenceFix
 
                     if (
                         visualStudioWorkspace.GetHierarchy(_projectId) is IVsUIHierarchy uiHierarchy
-                    ) {
+                    )
+                    {
                         var command = new OLECMD[1];
                         command[0].cmdID = (uint)VSConstants.VSStd2KCmdID.ADDREFERENCE;
 
@@ -94,7 +99,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                                     IntPtr.Zero
                                 )
                             )
-                        ) {
+                        )
+                        {
                             if ((((OLECMDF)command[0].cmdf) & OLECMDF.OLECMDF_ENABLED) != 0)
                             {
                                 uiHierarchy.ExecCommand(

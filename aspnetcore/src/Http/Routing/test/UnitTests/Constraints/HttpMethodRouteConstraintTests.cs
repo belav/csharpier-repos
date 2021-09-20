@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.Routing.Constraints
         [InlineData("PosT")]
         public void HttpMethodRouteConstraint_IncomingRequest_AcceptsAllowedMethods(
             string httpMethod
-        ) {
+        )
+        {
             // Arrange
             var constraint = new HttpMethodRouteConstraint("GET", "post");
 

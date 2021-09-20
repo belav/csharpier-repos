@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineHints
             SyntaxNode node,
             ArrayBuilder<(int position, IParameterSymbol? parameter, HintKind kind)> buffer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (node is BaseArgumentListSyntax argumentList)
             {
                 AddArguments(semanticModel, buffer, argumentList, cancellationToken);
@@ -45,7 +46,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineHints
             ArrayBuilder<(int position, IParameterSymbol? parameter, HintKind kind)> buffer,
             AttributeArgumentListSyntax argumentList,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             foreach (var argument in argumentList.Arguments)
             {
                 if (argument.NameEquals != null || argument.NameColon != null)
@@ -64,7 +66,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineHints
             ArrayBuilder<(int position, IParameterSymbol? parameter, HintKind kind)> buffer,
             BaseArgumentListSyntax argumentList,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             foreach (var argument in argumentList.Arguments)
             {
                 if (argument.NameColon != null)

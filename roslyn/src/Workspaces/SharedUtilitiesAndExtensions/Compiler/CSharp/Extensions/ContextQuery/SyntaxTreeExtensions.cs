@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
             int position,
             SyntaxToken preProcessorTokenOnLeftOfPosition,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var token = preProcessorTokenOnLeftOfPosition;
             var directive = token.GetAncestor<DirectiveTriviaSyntax>();
 

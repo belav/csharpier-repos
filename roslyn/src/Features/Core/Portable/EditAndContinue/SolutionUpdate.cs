@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             ImmutableArray<(ProjectId ProjectId, EmitBaseline Baseline)> emitBaselines,
             ImmutableArray<(ProjectId ProjectId, ImmutableArray<Diagnostic> Diagnostics)> diagnostics,
             ImmutableArray<(DocumentId DocumentId, ImmutableArray<RudeEditDiagnostic> Diagnostics)> documentsWithRudeEdits
-        ) {
+        )
+        {
             ModuleUpdates = moduleUpdates;
             NonRemappableRegions = nonRemappableRegions;
             EmitBaselines = emitBaselines;

@@ -50,7 +50,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
                             conventionParameter.Name,
                             nameMatchBehavior
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }
@@ -63,21 +64,24 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
 
         internal static ApiConventionNameMatchBehavior GetNameMatchBehavior(
             ICustomAttributeProvider attributeProvider
-        ) {
+        )
+        {
             var attribute = GetCustomAttribute<ApiConventionNameMatchAttribute>(attributeProvider);
             return attribute?.MatchBehavior ?? ApiConventionNameMatchBehavior.Exact;
         }
 
         internal static ApiConventionTypeMatchBehavior GetTypeMatchBehavior(
             ICustomAttributeProvider attributeProvider
-        ) {
+        )
+        {
             var attribute = GetCustomAttribute<ApiConventionTypeMatchAttribute>(attributeProvider);
             return attribute?.MatchBehavior ?? ApiConventionTypeMatchBehavior.AssignableFrom;
         }
 
         private static TAttribute? GetCustomAttribute<TAttribute>(
             ICustomAttributeProvider attributeProvider
-        ) {
+        )
+        {
             var attributes = attributeProvider.GetCustomAttributes(inherit: false);
             for (var i = 0; i < attributes.Length; i++)
             {
@@ -94,7 +98,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             string? name,
             string? conventionName,
             ApiConventionNameMatchBehavior nameMatchBehavior
-        ) {
+        )
+        {
             switch (nameMatchBehavior)
             {
                 case ApiConventionNameMatchBehavior.Any:
@@ -193,7 +198,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             Type type,
             Type conventionType,
             ApiConventionTypeMatchBehavior typeMatchBehavior
-        ) {
+        )
+        {
             switch (typeMatchBehavior)
             {
                 case ApiConventionTypeMatchBehavior.Any:

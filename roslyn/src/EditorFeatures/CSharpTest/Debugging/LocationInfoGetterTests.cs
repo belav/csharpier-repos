@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
             string expectedName,
             int expectedLineOffset,
             CSharpParseOptions parseOptions = null
-        ) {
+        )
+        {
             using var workspace = TestWorkspace.CreateCSharp(markup, parseOptions);
 
             var testDocument = workspace.Documents.Single();

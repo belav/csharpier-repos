@@ -36,7 +36,8 @@ namespace Microsoft.AspNetCore.E2ETesting
                 // and the browser logs will include exceptions thrown by js in the browser.
                 foreach (
                     var kind in logs.AvailableLogTypes.OrderBy(k => k == LogType.Browser ? 0 : 1)
-                ) {
+                )
+                {
                     output.WriteLine($"{kind} Logs from Selenium:");
 
                     var entries = logs.GetLog(kind);

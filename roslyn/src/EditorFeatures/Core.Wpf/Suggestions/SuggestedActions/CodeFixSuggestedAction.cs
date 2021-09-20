@@ -34,15 +34,17 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
             object provider,
             CodeAction action,
             SuggestedActionSet fixAllFlavors
-        ) : base(
-            threadingContext,
-            sourceProvider,
-            workspace,
-            subjectBuffer,
-            provider,
-            action,
-            fixAllFlavors
-        ) {
+        )
+            : base(
+                threadingContext,
+                sourceProvider,
+                workspace,
+                subjectBuffer,
+                provider,
+                action,
+                fixAllFlavors
+            )
+        {
             CodeFix = fix;
         }
 

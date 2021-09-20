@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             TaskQueue postBuildAndErrorListRefreshTaskQueue,
             bool onBuildCompleted,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (_map.TryGetValue(workspace, out var analyzer))
             {
                 return analyzer.SynchronizeWithBuildAsync(

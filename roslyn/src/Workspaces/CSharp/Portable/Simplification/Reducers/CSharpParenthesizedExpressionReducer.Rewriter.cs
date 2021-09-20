@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
 
             public override SyntaxNode VisitParenthesizedExpression(
                 ParenthesizedExpressionSyntax node
-            ) {
+            )
+            {
                 return SimplifyExpression(
                     node,
                     newNode: base.VisitParenthesizedExpression(node),

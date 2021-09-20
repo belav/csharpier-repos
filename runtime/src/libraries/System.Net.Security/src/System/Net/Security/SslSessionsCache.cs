@@ -38,7 +38,8 @@ namespace System.Net.Security
                 int allowedProtocols,
                 bool isServerMode,
                 EncryptionPolicy encryptionPolicy
-            ) {
+            )
+            {
                 _thumbPrint = thumbPrint ?? Array.Empty<byte>();
                 _allowedProtocols = allowedProtocols;
                 _encryptionPolicy = encryptionPolicy;
@@ -126,7 +127,8 @@ namespace System.Net.Security
             SslProtocols sslProtocols,
             bool isServer,
             EncryptionPolicy encryptionPolicy
-        ) {
+        )
+        {
             if (s_cachedCreds.IsEmpty)
             {
                 if (NetEventSource.Log.IsEnabled())
@@ -175,7 +177,8 @@ namespace System.Net.Security
             SslProtocols sslProtocols,
             bool isServer,
             EncryptionPolicy encryptionPolicy
-        ) {
+        )
+        {
             Debug.Assert(creds != null, "creds == null");
 
             if (creds.IsInvalid)

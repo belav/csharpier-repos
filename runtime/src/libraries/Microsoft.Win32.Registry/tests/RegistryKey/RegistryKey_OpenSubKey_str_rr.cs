@@ -33,7 +33,8 @@ namespace Microsoft.Win32.RegistryTests
                     name: TestRegistryKeyName,
                     rights: RegistryRights.ReadKey
                 )
-            ) {
+            )
+            {
                 Assert.Throws<UnauthorizedAccessException>(() => rk.CreateSubKey(name));
                 Assert.Throws<UnauthorizedAccessException>(() => rk.SetValue(name, "String"));
                 Assert.Throws<UnauthorizedAccessException>(() => rk.DeleteValue(name));
@@ -62,7 +63,8 @@ namespace Microsoft.Win32.RegistryTests
                     "",
                     RegistryRights.SetValue | RegistryRights.QueryValues
                 )
-            ) {
+            )
+            {
                 rk.SetValue(valueName, expectedValue);
                 Assert.Equal(expectedValue, rk.GetValue(valueName));
             }

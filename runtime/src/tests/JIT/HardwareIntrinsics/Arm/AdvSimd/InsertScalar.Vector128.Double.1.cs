@@ -133,7 +133,8 @@ namespace JIT.HardwareIntrinsics.Arm
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfinArray3
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -212,7 +213,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario(
                 InsertScalarTest__InsertScalar_Vector128_Double_1 testClass
-            ) {
+            )
+            {
                 var result = AdvSimd.InsertScalar(_fld1, 1, _fld3);
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
@@ -221,7 +223,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario_Load(
                 InsertScalarTest__InsertScalar_Vector128_Double_1 testClass
-            ) {
+            )
+            {
                 fixed (Vector128<Double>* pFld1 = &_fld1)fixed (Vector64<Double>* pFld2 = &_fld3)
                 {
                     var result = AdvSimd.InsertScalar(
@@ -410,7 +413,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             fixed (Vector128<Double>* pClsVar1 = &_clsVar1)fixed (
                 Vector64<Double>* pClsVar3 = &_clsVar3
-            ) {
+            )
+            {
                 var result = AdvSimd.InsertScalar(
                     AdvSimd.LoadVector128((Double*)(pClsVar1)),
                     1,
@@ -465,7 +469,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             fixed (Vector128<Double>* pFld1 = &test._fld1)fixed (
                 Vector64<Double>* pFld2 = &test._fld3
-            ) {
+            )
+            {
                 var result = AdvSimd.InsertScalar(
                     AdvSimd.LoadVector128((Double*)pFld1),
                     1,
@@ -572,7 +577,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Vector64<Double> op3,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Double[] inArray1 = new Double[Op1ElementCount];
             Double[] inArray3 = new Double[Op3ElementCount];
             Double[] outArray = new Double[RetElementCount];
@@ -593,7 +599,8 @@ namespace JIT.HardwareIntrinsics.Arm
             void* op3,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Double[] inArray1 = new Double[Op1ElementCount];
             Double[] inArray3 = new Double[Op3ElementCount];
             Double[] outArray = new Double[RetElementCount];
@@ -622,7 +629,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Double[] thirdOp,
             Double[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             for (var i = 0; i < RetElementCount; i++)
@@ -631,7 +639,8 @@ namespace JIT.HardwareIntrinsics.Arm
                     BitConverter.DoubleToInt64Bits(
                         Helpers.Insert(firstOp, ElementIndex, thirdOp[0], i)
                     ) != BitConverter.DoubleToInt64Bits(result[i])
-                ) {
+                )
+                {
                     succeeded = false;
                     break;
                 }

@@ -21,7 +21,8 @@ namespace System.Diagnostics.TraceSourceTests
             object[] args,
             object data1,
             object[] data
-        ) {
+        )
+        {
             return _shouldTrace;
         }
     }

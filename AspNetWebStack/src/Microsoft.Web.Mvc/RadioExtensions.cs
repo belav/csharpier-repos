@@ -23,7 +23,8 @@ namespace Microsoft.Web.Mvc
             this HtmlHelper htmlHelper,
             string name,
             object htmlAttributes
-        ) {
+        )
+        {
             return RadioButtonList(
                 htmlHelper,
                 name,
@@ -35,7 +36,8 @@ namespace Microsoft.Web.Mvc
             this HtmlHelper htmlHelper,
             string name,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             IEnumerable<SelectListItem> selectList = htmlHelper.GetSelectData(name);
             return htmlHelper.RadioButtonListInternal(
                 name,
@@ -50,7 +52,8 @@ namespace Microsoft.Web.Mvc
             this HtmlHelper htmlHelper,
             string name,
             IEnumerable<SelectListItem> selectList
-        ) {
+        )
+        {
             return RadioButtonList(htmlHelper, name, selectList, null);
         }
 
@@ -59,7 +62,8 @@ namespace Microsoft.Web.Mvc
             string name,
             IEnumerable<SelectListItem> selectList,
             object htmlAttributes
-        ) {
+        )
+        {
             return RadioButtonList(
                 htmlHelper,
                 name,
@@ -73,7 +77,8 @@ namespace Microsoft.Web.Mvc
             string name,
             IEnumerable<SelectListItem> selectList,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             return htmlHelper.RadioButtonListInternal(
                 name,
                 selectList,
@@ -86,7 +91,8 @@ namespace Microsoft.Web.Mvc
         private static IEnumerable<SelectListItem> GetSelectData(
             this HtmlHelper htmlHelper,
             string name
-        ) {
+        )
+        {
             object o = null;
             if (htmlHelper.ViewData != null)
             {
@@ -125,7 +131,8 @@ namespace Microsoft.Web.Mvc
             IEnumerable<SelectListItem> selectList,
             bool usedViewData,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             if (String.IsNullOrEmpty(name))
             {
                 throw new ArgumentException(MvcResources.Common_NullOrEmpty, "name");

@@ -28,7 +28,8 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client.Razor
             IContentTypeRegistryService contentTypeRegistry,
             SVsServiceProvider serviceProvider,
             CSharpLspRazorProjectFactory razorProjectFactory
-        ) {
+        )
+        {
             _contentTypeRegistry =
                 contentTypeRegistry ?? throw new ArgumentNullException(nameof(contentTypeRegistry));
             _serviceProvider =
@@ -43,7 +44,8 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client.Razor
         public IVsContainedLanguage GetLanguage(
             string filePath,
             IVsTextBufferCoordinator bufferCoordinator
-        ) {
+        )
+        {
             var componentModel = (IComponentModel)_serviceProvider.GetService(
                 typeof(SComponentModel)
             );

@@ -25,7 +25,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests.Account
             IHtmlAnchorElement link,
             HttpClient client,
             DefaultUIContext context
-        ) {
+        )
+        {
             var resetPasswordResponse = await client.GetAsync(link.Href);
             var resetPassword = await ResponseAssert.IsHtmlDocumentAsync(resetPasswordResponse);
 
@@ -35,7 +36,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests.Account
         public async Task<ResetPasswordConfirmation> SendNewPasswordAsync(
             string email,
             string newPassword
-        ) {
+        )
+        {
             var resetPasswordResponse = await Client.SendAsync(
                 _resetPasswordForm,
                 new Dictionary<string, string>

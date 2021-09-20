@@ -43,7 +43,8 @@ namespace Microsoft.AspNetCore.Authorization.Test.TestObjects
             HttpContext context,
             string scheme,
             AuthenticationProperties properties
-        ) {
+        )
+        {
             ChallengeCount++;
             return Task.CompletedTask;
         }
@@ -52,7 +53,8 @@ namespace Microsoft.AspNetCore.Authorization.Test.TestObjects
             HttpContext context,
             string scheme,
             AuthenticationProperties properties
-        ) {
+        )
+        {
             ForbidCount++;
             return Task.CompletedTask;
         }
@@ -62,7 +64,8 @@ namespace Microsoft.AspNetCore.Authorization.Test.TestObjects
             string scheme,
             ClaimsPrincipal principal,
             AuthenticationProperties properties
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -70,7 +73,8 @@ namespace Microsoft.AspNetCore.Authorization.Test.TestObjects
             HttpContext context,
             string scheme,
             AuthenticationProperties properties
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
     }

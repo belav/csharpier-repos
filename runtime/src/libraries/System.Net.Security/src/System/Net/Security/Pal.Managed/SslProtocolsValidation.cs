@@ -10,7 +10,8 @@ namespace System.Net
         public static (int MinIndex, int MaxIndex) ValidateContiguous(
             this SslProtocols protocols,
             SslProtocols[] orderedSslProtocols
-        ) {
+        )
+        {
             // A contiguous range of protocols is required.  Find the min and max of the range,
             // or throw if it's non-contiguous or if no protocols are specified.
 
@@ -47,7 +48,8 @@ namespace System.Net
                                 int verifyNotSet = max + 1;
                                 verifyNotSet < protocolSet.Length;
                                 verifyNotSet++
-                            ) {
+                            )
+                            {
                                 if (protocolSet[verifyNotSet])
                                 {
                                     throw new PlatformNotSupportedException(

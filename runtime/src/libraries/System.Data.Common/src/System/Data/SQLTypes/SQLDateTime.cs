@@ -133,7 +133,8 @@ namespace System.Data.SqlTypes
             int minute,
             int second,
             double millisecond
-        ) {
+        )
+        {
             if (year >= s_minYear && year <= s_maxYear && month >= 1 && month <= 12)
             {
                 int[] days = IsLeapYear(year) ? s_daysToMonth366 : s_daysToMonth365;
@@ -154,7 +155,8 @@ namespace System.Data.SqlTypes
                         && second < 60
                         && millisecond >= 0
                         && millisecond < 1000.0
-                    ) {
+                    )
+                    {
                         double ticksForMilisecond = millisecond * s_SQLTicksPerMillisecond + 0.5;
                         int timeticks =
                             hour * SQLTicksPerHour
@@ -202,7 +204,8 @@ namespace System.Data.SqlTypes
                 || dayTicks > s_maxDay
                 || timeTicks < s_minTime
                 || timeTicks > s_maxTime
-            ) {
+            )
+            {
                 m_fNotNull = false;
                 throw new OverflowException(SQLResource.DateTimeOverflowMessage);
             }
@@ -270,7 +273,8 @@ namespace System.Data.SqlTypes
                 || daypart > s_maxDay
                 || timepart < s_minTime
                 || timepart > s_maxTime
-            ) {
+            )
+            {
                 throw new OverflowException(SQLResource.DateTimeOverflowMessage);
             }
             long dayticks = daypart * TimeSpan.TicksPerDay;

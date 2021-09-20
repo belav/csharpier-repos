@@ -77,7 +77,8 @@ namespace System.Runtime.CompilerServices
             TryCode code,
             CleanupCode backoutCode,
             object? userData
-        ) {
+        )
+        {
             if (code == null)
                 throw new ArgumentNullException(nameof(code));
             if (backoutCode == null)

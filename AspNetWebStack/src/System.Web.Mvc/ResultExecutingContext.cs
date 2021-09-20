@@ -15,10 +15,8 @@ namespace System.Web.Mvc
             "CA2214:DoNotCallOverridableMethodsInConstructors",
             Justification = "The virtual property setters are only to support mocking frameworks, in which case this constructor shouldn't be called anyway."
         )]
-        public ResultExecutingContext(
-            ControllerContext controllerContext,
-            ActionResult result
-        ) : base(controllerContext)
+        public ResultExecutingContext(ControllerContext controllerContext, ActionResult result)
+            : base(controllerContext)
         {
             if (result == null)
             {

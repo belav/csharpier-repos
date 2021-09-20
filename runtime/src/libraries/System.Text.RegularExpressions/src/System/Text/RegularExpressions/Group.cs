@@ -26,7 +26,8 @@ namespace System.Text.RegularExpressions
                 text,
                 capcount == 0 ? 0 : caps[(capcount - 1) * 2],
                 capcount == 0 ? 0 : caps[(capcount * 2) - 1]
-            ) {
+            )
+        {
             _caps = caps;
             _capcount = capcount;
             Name = name;

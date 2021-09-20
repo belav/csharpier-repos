@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         public static DisposableFile CreateTempAssembly(
             string declarations,
             bool prependDefaultHeader = true
-        ) {
+        )
+        {
             IlasmTempAssembly(
                 declarations,
                 prependDefaultHeader,
@@ -79,7 +80,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             bool autoInherit,
             out string assemblyPath,
             out string pdbPath
-        ) {
+        )
+        {
             if (declarations == null)
                 throw new ArgumentNullException(nameof(declarations));
 

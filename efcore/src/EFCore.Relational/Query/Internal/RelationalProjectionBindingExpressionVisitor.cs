@@ -54,7 +54,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         public RelationalProjectionBindingExpressionVisitor(
             RelationalQueryableMethodTranslatingExpressionVisitor queryableMethodTranslatingExpressionVisitor,
             RelationalSqlTranslatingExpressionVisitor sqlTranslatingExpressionVisitor
-        ) {
+        )
+        {
             _queryableMethodTranslatingExpressionVisitor =
                 queryableMethodTranslatingExpressionVisitor;
             _sqlTranslator = sqlTranslatingExpressionVisitor;
@@ -72,7 +73,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         public virtual Expression Translate(
             SelectExpression selectExpression,
             Expression expression
-        ) {
+        )
+        {
             _selectExpression = selectExpression;
             _clientEval = false;
 
@@ -134,13 +136,15 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     || expression is EntityShaperExpression
                     || expression is IncludeExpression
                 )
-            ) {
+            )
+            {
                 // This skips the group parameter from GroupJoin
                 if (
                     expression is ParameterExpression parameter
                     && parameter.Type.IsGenericType
                     && parameter.Type.GetGenericTypeDefinition() == typeof(IEnumerable<>)
-                ) {
+                )
+                {
                     return parameter;
                 }
 
@@ -189,7 +193,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                                     QueryCompilationContext.QueryParameterPrefix,
                                     StringComparison.Ordinal
                                 ) == true
-                            ) {
+                            )
+                            {
                                 return Expression.Call(
                                     _getParameterValueMethodInfo.MakeGenericMethod(
                                         parameterExpression.Type
@@ -218,7 +223,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                                 methodCallExpression.Method.IsGenericMethod
                                 && methodCallExpression.Method.DeclaringType == typeof(Enumerable)
                                 && methodCallExpression.Method.Name == nameof(Enumerable.ToList)
-                            ) {
+                            )
+                            {
                                 var elementType = methodCallExpression.Method.GetGenericArguments()[
                                     0
                                 ];
@@ -288,7 +294,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                                                 methodCallExpression.Method
                                             )
                                         )
-                                    ) {
+                                    )
+                                    {
                                         return _selectExpression.AddSingleProjection(subquery);
                                     }
                                 }
@@ -387,7 +394,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     if (
                         entityShaperExpression.ValueBufferExpression
                         is ProjectionBindingExpression projectionBindingExpression
-                    ) {
+                    )
+                    {
                         // If projectionBinding is not mapped then SelectExpression has client projection
                         // Hence force client eval
                         if (projectionBindingExpression.ProjectionMember == null)
@@ -427,7 +435,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                                 entityProjectionExpression,
                                 out var entityProjectionBinding
                             )
-                        ) {
+                        )
+                        {
                             entityProjectionBinding = new ProjectionBindingExpression(
                                 _selectExpression,
                                 _selectExpression.AddToProjection(entityProjectionExpression)
@@ -494,7 +503,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             if (
                 expression?.Type.IsNullableType() == true
                 && !_includeFindingExpressionVisitor.ContainsInclude(expression)
-            ) {
+            )
+            {
                 var nullableReturnType = memberExpression.Type.MakeNullable();
                 if (!memberExpression.Type.IsNullableType())
                 {
@@ -579,7 +589,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     && memberAssignment.Expression is UnaryExpression unaryExpression
                     && unaryExpression.NodeType == ExpressionType.Convert
                     && unaryExpression.Operand == QueryCompilationContext.NotTranslatedExpression
-                ) {
+                )
+                {
                     return QueryCompilationContext.NotTranslatedExpression;
                 }
             }
@@ -612,7 +623,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 @object?.Type.IsNullableType() == true
                 && methodCallExpression.Object != null
                 && !methodCallExpression.Object.Type.IsNullableType()
-            ) {
+            )
+            {
                 var nullableReturnType = methodCallExpression.Type.MakeNullable();
                 if (!methodCallExpression.Type.IsNullableType())
                 {
@@ -718,7 +730,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             if (
                 targetType != expression.Type
                 && targetType.TryGetElementType(typeof(IQueryable<>)) == null
-            ) {
+            )
+            {
                 Check.DebugAssert(
                     targetType.MakeNullable() == expression.Type,
                     "expression.Type must be nullable of targetType"

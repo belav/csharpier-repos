@@ -60,7 +60,8 @@ namespace System.Security.Cryptography.Xml.Tests
             using (
                 MemoryStream memoryStream =
                     data != null ? new MemoryStream(Encoding.UTF8.GetBytes(data)) : null
-            ) {
+            )
+            {
                 Reference reference = new Reference(memoryStream);
 
                 Assert.Equal("http://www.w3.org/2001/04/xmlenc#sha256", reference.DigestMethod);

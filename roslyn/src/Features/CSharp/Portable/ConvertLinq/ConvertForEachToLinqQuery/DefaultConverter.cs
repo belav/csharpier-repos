@@ -19,15 +19,15 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
     {
         private static readonly TypeSyntax VarNameIdentifier = SyntaxFactory.IdentifierName("var");
 
-        public DefaultConverter(
-            ForEachInfo<ForEachStatementSyntax, StatementSyntax> forEachInfo
-        ) : base(forEachInfo) { }
+        public DefaultConverter(ForEachInfo<ForEachStatementSyntax, StatementSyntax> forEachInfo)
+            : base(forEachInfo) { }
 
         public override void Convert(
             SyntaxEditor editor,
             bool convertToQuery,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Filter out identifiers which are not used in statements.
             var variableNamesReadInside = new HashSet<string>(
                 ForEachInfo.Statements.SelectMany(
@@ -62,7 +62,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
             IEnumerable<SyntaxToken> identifiers,
             BlockSyntax block,
             bool convertToQuery
-        ) {
+        )
+        {
             var identifiersCount = identifiers.Count();
             if (identifiersCount == 0)
             {

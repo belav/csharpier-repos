@@ -102,7 +102,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseSimpleUsingStatement
                 var current = outermostUsing;
                 current != null;
                 current = current.Statement as UsingStatementSyntax
-            ) {
+            )
+            {
                 innermostUsing = current;
                 if (current.Declaration == null)
                 {
@@ -131,7 +132,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseSimpleUsingStatement
                     innermostUsing,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -163,7 +165,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseSimpleUsingStatement
             UsingStatementSyntax outermostUsing,
             UsingStatementSyntax innermostUsing,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var symbolNameToExistingSymbol = semanticModel.GetExistingSymbols(
                     parentBlock,
                     cancellationToken
@@ -174,7 +177,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseSimpleUsingStatement
                 var current = outermostUsing;
                 current != null;
                 current = current.Statement as UsingStatementSyntax
-            ) {
+            )
+            {
                 // Check if the using statement itself contains variables that will collide
                 // with other variables in the block.
                 var usingOperation = (IUsingOperation)semanticModel.GetOperation(
@@ -217,7 +221,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseSimpleUsingStatement
             BlockSyntax parentBlock,
             UsingStatementSyntax outermostUsing,
             UsingStatementSyntax innermostUsing
-        ) {
+        )
+        {
             var statements = parentBlock.Statements;
             var index = statements.IndexOf(outermostUsing);
 
@@ -229,7 +234,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseSimpleUsingStatement
             SyntaxList<StatementSyntax> parentStatements,
             int index,
             UsingStatementSyntax innermostUsing
-        ) {
+        )
+        {
             // Jumps are not allowed to cross a using declaration in the forward direction,
             // and can't go back unless there is a curly brace between the using and the label.
             //
@@ -270,7 +276,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseSimpleUsingStatement
         private static bool UsingValueDoesNotLeakToFollowingStatements(
             SyntaxList<StatementSyntax> statements,
             int index
-        ) {
+        )
+        {
             // Has to be one of the following forms:
             // 1. Using statement is the last statement in the parent.
             // 2. Using statement is not the last statement in parent, but is followed by
@@ -300,7 +307,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseSimpleUsingStatement
             if (
                 nextStatement is ReturnStatementSyntax returnStatement
                 && returnStatement.Expression == null
-            ) {
+            )
+            {
                 // using statement followed by `return`.  Can conver this as executing
                 // the `return` will cause the code to exit the using scope, causing
                 // Dispose to be called at the same place as before.

@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Routing.Tests
             bool inner1Result,
             bool inner2Result,
             bool expected
-        ) {
+        )
+        {
             // Arrange
             var inner1 = MockConstraintWithResult(inner1Result);
             var inner2 = MockConstraintWithResult(inner2Result);

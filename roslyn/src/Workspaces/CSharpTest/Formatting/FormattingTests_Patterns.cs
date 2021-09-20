@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Formatting
         public async Task FormatRelationalPatterns1(
             [CombinatorialValues("<", "<=", ">", ">=")] string operatorText,
             BinaryOperatorSpacingOptions spacing
-        ) {
+        )
+        {
             var content =
                 $@"
 class A
@@ -85,7 +86,8 @@ class A
             [CombinatorialValues("<", "<=", ">", ">=")] string operatorText,
             BinaryOperatorSpacingOptions spacing,
             bool spaceWithinExpressionParentheses
-        ) {
+        )
+        {
             var content =
                 $@"
 class A
@@ -246,7 +248,8 @@ class A
         public async Task FormatNotPatterns2(
             BinaryOperatorSpacingOptions spacing,
             bool spaceWithinExpressionParentheses
-        ) {
+        )
+        {
             var content =
                 $@"
 class A

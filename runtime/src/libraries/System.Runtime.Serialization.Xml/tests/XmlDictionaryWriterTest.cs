@@ -225,7 +225,8 @@ public static class XmlDictionaryWriterTest
                     Encoding.UTF8,
                     false
                 )
-            ) {
+            )
+            {
                 writer.WriteElementString("localName", "the value");
                 writer.Flush();
                 byte[] bytes = stream.ToArray();
@@ -240,7 +241,8 @@ public static class XmlDictionaryWriterTest
                         bytes,
                         new XmlDictionaryReaderQuotas()
                     )
-                ) {
+                )
+                {
                     xreader.Read();
                     string xml = xreader.ReadOuterXml();
                     Assert.Equal(expected, xml);
@@ -384,7 +386,8 @@ public static class XmlDictionaryWriterTest
         Encoding encoding,
         ReaderWriterFactory.ReaderWriterType rwType,
         byte[] byteArray
-    ) {
+    )
+    {
         ms.Position = 0;
         XmlDictionaryReader reader = (XmlDictionaryReader)ReaderWriterFactory.CreateXmlReader(
             rwType,
@@ -415,7 +418,8 @@ public static class XmlDictionaryWriterTest
         ReaderWriterFactory.ReaderWriterType rwType,
         Encoding encoding,
         MyStreamProvider myStreamProvider
-    ) {
+    )
+    {
         XmlWriter writer = ReaderWriterFactory.CreateXmlWriter(rwType, ms, encoding);
         XmlDictionaryWriter writeD = writer as XmlDictionaryWriter;
         writeD.WriteStartElement("Root");
@@ -447,7 +451,8 @@ public static class XmlDictionaryWriterTest
         MemoryStream ms,
         Encoding encoding,
         MyStreamProvider myStreamProvider
-    ) {
+    )
+    {
         XmlDictionaryWriter writer = XmlDictionaryWriter.CreateTextWriter(ms);
         writer.WriteStartElement("Root");
         Task writeValueAsynctask = writer.WriteValueAsync(myStreamProvider);
@@ -463,7 +468,8 @@ public static class XmlDictionaryWriterTest
         byte[] byteArray,
         Encoding encoding,
         MyStreamProvider myStreamProvider
-    ) {
+    )
+    {
         XmlDictionaryWriter writer = XmlDictionaryWriter.CreateTextWriter(ms);
         writer.WriteStartElement("Root");
         Task writeValueBase64Asynctask = writer.WriteBase64Async(byteArray, 0, byteArray.Length);
@@ -505,7 +511,8 @@ public static class XmlDictionaryWriterTest
         XmlDictionaryWriter writer,
         bool useFragmentAPI,
         int nestedLevelsLeft
-    ) {
+    )
+    {
         if (nestedLevelsLeft <= 0)
         {
             return;
@@ -569,7 +576,8 @@ public static class XmlDictionaryWriterTest
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             await Task.Delay(1).ConfigureAwait(false);
             await base.WriteAsync(buffer, offset, count, cancellationToken);
         }
@@ -588,7 +596,8 @@ public static class XmlDictionaryWriterTest
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             while (_blockAsync)
             {
                 await Task.Delay(10).ConfigureAwait(false);

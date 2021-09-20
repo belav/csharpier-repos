@@ -235,7 +235,8 @@ namespace System.Threading.Tasks
                 if (
                     !(state is ValueTaskSourceAsTask vtst)
                     || !(vtst._source is IValueTaskSource source)
-                ) {
+                )
+                {
                     // This could only happen if the IValueTaskSource passed the wrong state
                     // or if this callback were invoked multiple times such that the state
                     // was previously nulled out.
@@ -632,7 +633,8 @@ namespace System.Threading.Tasks
                 if (
                     !(state is ValueTaskSourceAsTask vtst)
                     || !(vtst._source is IValueTaskSource<TResult> source)
-                ) {
+                )
+                {
                     // This could only happen if the IValueTaskSource<TResult> passed the wrong state
                     // or if this callback were invoked multiple times such that the state
                     // was previously nulled out.

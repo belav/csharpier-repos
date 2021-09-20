@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
         private static void VisitTypeReference(
             Cci.ITypeReference typeReference,
             EmitContext context
-        ) {
+        )
+        {
             RoslynDebug.Assert(typeReference != null);
 
             Cci.IArrayTypeReference? arrayType = typeReference as Cci.IArrayTypeReference;
@@ -107,7 +108,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
         private static void VisitMethodReference(
             Cci.IMethodReference methodReference,
             EmitContext context
-        ) {
+        )
+        {
             RoslynDebug.Assert(methodReference != null);
 
             // Visit containing type
@@ -163,7 +165,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
         private static void VisitParameters(
             ImmutableArray<Cci.IParameterTypeInformation> parameters,
             EmitContext context
-        ) {
+        )
+        {
             foreach (var param in parameters)
             {
                 VisitTypeReference(param.GetType(context), context);
@@ -183,7 +186,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
         private static void VisitFieldReference(
             Cci.IFieldReference fieldReference,
             EmitContext context
-        ) {
+        )
+        {
             RoslynDebug.Assert(fieldReference != null);
 
             // Visit containing type

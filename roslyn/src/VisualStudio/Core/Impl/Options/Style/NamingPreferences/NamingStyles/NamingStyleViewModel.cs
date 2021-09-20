@@ -25,7 +25,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
             MutableNamingStyle style,
             bool canBeDeleted,
             INotificationService notificationService
-        ) {
+        )
+        {
             _notificationService = notificationService;
             _style = style;
             ID = style.ID;

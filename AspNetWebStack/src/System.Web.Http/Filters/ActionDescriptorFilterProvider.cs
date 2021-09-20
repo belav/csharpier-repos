@@ -25,7 +25,8 @@ namespace System.Web.Http.Filters
         public IEnumerable<FilterInfo> GetFilters(
             HttpConfiguration configuration,
             HttpActionDescriptor actionDescriptor
-        ) {
+        )
+        {
             if (configuration == null)
             {
                 throw Error.ArgumentNull("configuration");

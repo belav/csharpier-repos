@@ -192,12 +192,8 @@ namespace System.Management
         /// always less than or equal to upperBound.</param>
         /// <param name="message">Optional additional information regarding
         /// operation progress.</param>
-        internal ProgressEventArgs(
-            object context,
-            int upperBound,
-            int current,
-            string message
-        ) : base(context)
+        internal ProgressEventArgs(object context, int upperBound, int current, string message)
+            : base(context)
         {
             this.upperBound = upperBound;
             this.current = current;

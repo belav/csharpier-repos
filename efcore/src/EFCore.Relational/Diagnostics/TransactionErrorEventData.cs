@@ -39,17 +39,19 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             Exception exception,
             DateTimeOffset startTime,
             TimeSpan duration
-        ) : base(
-            eventDefinition,
-            messageGenerator,
-            transaction,
-            context,
-            transactionId,
-            connectionId,
-            async,
-            startTime,
-            duration
-        ) {
+        )
+            : base(
+                eventDefinition,
+                messageGenerator,
+                transaction,
+                context,
+                transactionId,
+                connectionId,
+                async,
+                startTime,
+                duration
+            )
+        {
             Action = action;
             Exception = exception;
         }

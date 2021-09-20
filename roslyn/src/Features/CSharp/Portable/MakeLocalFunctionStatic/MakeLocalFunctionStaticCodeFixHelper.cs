@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
             LocalFunctionStatementSyntax localFunction,
             ImmutableArray<ISymbol> captures,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = (
                 await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false)
             )!;
@@ -48,7 +49,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
             ImmutableArray<ISymbol> captures,
             SyntaxEditor syntaxEditor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = (
                 await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false)
             )!;

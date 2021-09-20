@@ -177,7 +177,8 @@ namespace System.Net.Http
             bool isRequest,
             IEnumerable<string> header,
             string body
-        ) {
+        )
+        {
             StringBuilder message = new StringBuilder();
             foreach (string h in header)
             {
@@ -209,7 +210,8 @@ namespace System.Net.Http
         private static async Task ValidateRequestMessageAsync(
             HttpRequestMessage request,
             bool hasEntity
-        ) {
+        )
+        {
             Assert.NotNull(request);
             Assert.Equal(Version.Parse("1.2"), request.Version);
             Assert.Equal(ParserData.HttpMethod, request.Method.ToString());
@@ -233,7 +235,8 @@ namespace System.Net.Http
         private static async Task ValidateResponseMessageAsync(
             HttpResponseMessage response,
             bool hasEntity
-        ) {
+        )
+        {
             Assert.NotNull(response);
             Assert.Equal(new Version("1.2"), response.Version);
             Assert.Equal(ParserData.HttpStatus, response.StatusCode);

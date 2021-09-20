@@ -33,7 +33,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
 
         public PublicParameterizedConstructorWithPropertyNameConflictWithAttribute(
             [JsonProperty("name")] string nameParameter
-        ) {
+        )
+        {
             _value = Convert.ToInt32(nameParameter);
         }
 

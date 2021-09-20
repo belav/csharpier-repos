@@ -162,7 +162,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         public void OneCert_EncryptedEmptyPassword_OneKey_EncryptedNullPassword_NoMac(
             bool encryptKeySafe,
             bool associateKey
-        ) {
+        )
+        {
             // This test shows that while a null or empty password will result in both
             // types being tested, the PFX contents have to be the same throughout.
             using (
@@ -871,7 +872,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         public void TwoCerts_TwoKeys_ManySafeContentsValues(
             bool invertCertOrder,
             bool invertKeyOrder
-        ) {
+        )
+        {
             string pw = nameof(TwoCerts_TwoKeys_ManySafeContentsValues);
 
             using (
@@ -880,7 +882,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     null,
                     s_exportableImportFlags
                 )
-            ) {
+            )
+            {
                 X509Certificate2Collection certs = ic.Collection;
                 X509Certificate2 first = certs[0];
                 X509Certificate2 second = certs[1];
@@ -1031,7 +1034,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             Pkcs12Builder builder,
             string password,
             bool encrypt
-        ) {
+        )
+        {
             if (encrypt)
             {
                 builder.AddSafeContentsEncrypted(contents, password, s_windowsPbe);
@@ -1045,7 +1049,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         protected static void AssertCertEquals(
             X509Certificate2 expectedCert,
             X509Certificate2 actual
-        ) {
+        )
+        {
             if (expectedCert.HasPrivateKey)
             {
                 Assert.True(actual.HasPrivateKey, "actual.HasPrivateKey");

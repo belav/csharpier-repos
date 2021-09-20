@@ -18,11 +18,8 @@ namespace System.Web.Mvc.ExpressionUtil
     )]
     internal sealed class TypeBinaryExpressionFingerprint : ExpressionFingerprint
     {
-        public TypeBinaryExpressionFingerprint(
-            ExpressionType nodeType,
-            Type type,
-            Type typeOperand
-        ) : base(nodeType, type)
+        public TypeBinaryExpressionFingerprint(ExpressionType nodeType, Type type, Type typeOperand)
+            : base(nodeType, type)
         {
             TypeOperand = typeOperand;
         }

@@ -110,7 +110,8 @@ namespace Microsoft.CodeAnalysis.Razor
                     targetAssembly,
                     bindMethods.ContainingAssembly
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -284,7 +285,8 @@ namespace Microsoft.CodeAnalysis.Razor
                     if (
                         SymbolEqualityComparer.Default.Equals(attribute.AttributeClass, bindElement)
                         && attribute.ConstructorArguments.Length == 4
-                    ) {
+                    )
+                    {
                         results.Add(
                             new ElementBindData(
                                 type.ContainingAssembly.Name,
@@ -303,7 +305,8 @@ namespace Microsoft.CodeAnalysis.Razor
                             bindInputElement
                         )
                         && attribute.ConstructorArguments.Length == 4
-                    ) {
+                    )
+                    {
                         results.Add(
                             new ElementBindData(
                                 type.ContainingAssembly.Name,
@@ -322,7 +325,8 @@ namespace Microsoft.CodeAnalysis.Razor
                             bindInputElement
                         )
                         && attribute.ConstructorArguments.Length == 6
-                    ) {
+                    )
+                    {
                         results.Add(
                             new ElementBindData(
                                 type.ContainingAssembly.Name,
@@ -535,7 +539,8 @@ namespace Microsoft.CodeAnalysis.Razor
 
         private List<TagHelperDescriptor> CreateComponentBindTagHelpers(
             ICollection<TagHelperDescriptor> tagHelpers
-        ) {
+        )
+        {
             var results = new List<TagHelperDescriptor>();
 
             foreach (var tagHelper in tagHelpers)
@@ -566,7 +571,8 @@ namespace Microsoft.CodeAnalysis.Razor
                             !changeAttribute.IsDelegateProperty()
                             && !changeAttribute.IsEventCallbackProperty()
                         )
-                    ) {
+                    )
+                    {
                         continue;
                     }
 
@@ -701,7 +707,8 @@ namespace Microsoft.CodeAnalysis.Razor
                 string changeAttribute,
                 bool isInvariantCulture = false,
                 string format = null
-            ) {
+            )
+            {
                 Assembly = assembly;
                 TypeName = typeName;
                 Element = element;
@@ -738,7 +745,8 @@ namespace Microsoft.CodeAnalysis.Razor
                 if (
                     symbol.Name == "BindAttributes"
                     && symbol.DeclaredAccessibility == Accessibility.Public
-                ) {
+                )
+                {
                     _results.Add(symbol);
                 }
             }
@@ -758,7 +766,8 @@ namespace Microsoft.CodeAnalysis.Razor
                 if (
                     symbol.Name != null
                     && !symbol.Name.StartsWith("System.", StringComparison.Ordinal)
-                ) {
+                )
+                {
                     Visit(symbol.GlobalNamespace);
                 }
             }

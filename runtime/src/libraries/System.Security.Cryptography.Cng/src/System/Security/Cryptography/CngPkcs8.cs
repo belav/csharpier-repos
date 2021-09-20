@@ -37,7 +37,8 @@ namespace System.Security.Cryptography
         private static Pkcs8Response ImportPkcs8(
             ReadOnlySpan<byte> keyBlob,
             ReadOnlySpan<char> password
-        ) {
+        )
+        {
             CngKey key = CngKey.ImportEncryptedPkcs8(keyBlob, password);
             key.ExportPolicy =
                 CngExportPolicies.AllowExport | CngExportPolicies.AllowPlaintextExport;

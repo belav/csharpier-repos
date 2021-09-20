@@ -20,40 +20,47 @@ namespace System.IO
             int bufferSize,
             System.IO.FileOptions options,
             System.Security.AccessControl.FileSecurity fileSecurity
-        ) {
+        )
+        {
             throw null;
         }
         public static System.IO.DirectoryInfo CreateDirectory(
             this System.Security.AccessControl.DirectorySecurity directorySecurity,
             string path
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Security.AccessControl.DirectorySecurity GetAccessControl(
             this System.IO.DirectoryInfo directoryInfo
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Security.AccessControl.DirectorySecurity GetAccessControl(
             this System.IO.DirectoryInfo directoryInfo,
             System.Security.AccessControl.AccessControlSections includeSections
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Security.AccessControl.FileSecurity GetAccessControl(
             this System.IO.FileInfo fileInfo
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Security.AccessControl.FileSecurity GetAccessControl(
             this System.IO.FileInfo fileInfo,
             System.Security.AccessControl.AccessControlSections includeSections
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Security.AccessControl.FileSecurity GetAccessControl(
             this System.IO.FileStream fileStream
-        ) {
+        )
+        {
             throw null;
         }
         public static void SetAccessControl(
@@ -88,7 +95,8 @@ namespace System.Security.AccessControl
             System.Security.AccessControl.AccessControlType type,
             System.Guid objectType,
             System.Guid inheritedObjectType
-        ) {
+        )
+        {
             throw null;
         }
         protected void AddAccessRule(System.Security.AccessControl.ObjectAccessRule rule) { }
@@ -102,35 +110,40 @@ namespace System.Security.AccessControl
             System.Security.AccessControl.AuditFlags flags,
             System.Guid objectType,
             System.Guid inheritedObjectType
-        ) {
+        )
+        {
             throw null;
         }
         public System.Security.AccessControl.AuthorizationRuleCollection GetAccessRules(
             bool includeExplicit,
             bool includeInherited,
             System.Type targetType
-        ) {
+        )
+        {
             throw null;
         }
         public System.Security.AccessControl.AuthorizationRuleCollection GetAuditRules(
             bool includeExplicit,
             bool includeInherited,
             System.Type targetType
-        ) {
+        )
+        {
             throw null;
         }
         protected override bool ModifyAccess(
             System.Security.AccessControl.AccessControlModification modification,
             System.Security.AccessControl.AccessRule rule,
             out bool modified
-        ) {
+        )
+        {
             throw null;
         }
         protected override bool ModifyAudit(
             System.Security.AccessControl.AccessControlModification modification,
             System.Security.AccessControl.AuditRule rule,
             out bool modified
-        ) {
+        )
+        {
             throw null;
         }
         protected bool RemoveAccessRule(System.Security.AccessControl.ObjectAccessRule rule)
@@ -175,54 +188,58 @@ namespace System.Security.AccessControl
             System.Security.Principal.IdentityReference identity,
             System.Security.AccessControl.FileSystemRights fileSystemRights,
             System.Security.AccessControl.AccessControlType type
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(int),
-            default(bool),
-            default(System.Security.AccessControl.InheritanceFlags),
-            default(System.Security.AccessControl.PropagationFlags),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(int),
+                default(bool),
+                default(System.Security.AccessControl.InheritanceFlags),
+                default(System.Security.AccessControl.PropagationFlags),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
         public FileSystemAccessRule(
             System.Security.Principal.IdentityReference identity,
             System.Security.AccessControl.FileSystemRights fileSystemRights,
             System.Security.AccessControl.InheritanceFlags inheritanceFlags,
             System.Security.AccessControl.PropagationFlags propagationFlags,
             System.Security.AccessControl.AccessControlType type
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(int),
-            default(bool),
-            default(System.Security.AccessControl.InheritanceFlags),
-            default(System.Security.AccessControl.PropagationFlags),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(int),
+                default(bool),
+                default(System.Security.AccessControl.InheritanceFlags),
+                default(System.Security.AccessControl.PropagationFlags),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
         public FileSystemAccessRule(
             string identity,
             System.Security.AccessControl.FileSystemRights fileSystemRights,
             System.Security.AccessControl.AccessControlType type
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(int),
-            default(bool),
-            default(System.Security.AccessControl.InheritanceFlags),
-            default(System.Security.AccessControl.PropagationFlags),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(int),
+                default(bool),
+                default(System.Security.AccessControl.InheritanceFlags),
+                default(System.Security.AccessControl.PropagationFlags),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
         public FileSystemAccessRule(
             string identity,
             System.Security.AccessControl.FileSystemRights fileSystemRights,
             System.Security.AccessControl.InheritanceFlags inheritanceFlags,
             System.Security.AccessControl.PropagationFlags propagationFlags,
             System.Security.AccessControl.AccessControlType type
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(int),
-            default(bool),
-            default(System.Security.AccessControl.InheritanceFlags),
-            default(System.Security.AccessControl.PropagationFlags),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(int),
+                default(bool),
+                default(System.Security.AccessControl.InheritanceFlags),
+                default(System.Security.AccessControl.PropagationFlags),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
         public System.Security.AccessControl.FileSystemRights FileSystemRights
         {
             get { throw null; }
@@ -234,54 +251,58 @@ namespace System.Security.AccessControl
             System.Security.Principal.IdentityReference identity,
             System.Security.AccessControl.FileSystemRights fileSystemRights,
             System.Security.AccessControl.AuditFlags flags
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(int),
-            default(bool),
-            default(System.Security.AccessControl.InheritanceFlags),
-            default(System.Security.AccessControl.PropagationFlags),
-            default(System.Security.AccessControl.AuditFlags)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(int),
+                default(bool),
+                default(System.Security.AccessControl.InheritanceFlags),
+                default(System.Security.AccessControl.PropagationFlags),
+                default(System.Security.AccessControl.AuditFlags)
+            ) { }
         public FileSystemAuditRule(
             System.Security.Principal.IdentityReference identity,
             System.Security.AccessControl.FileSystemRights fileSystemRights,
             System.Security.AccessControl.InheritanceFlags inheritanceFlags,
             System.Security.AccessControl.PropagationFlags propagationFlags,
             System.Security.AccessControl.AuditFlags flags
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(int),
-            default(bool),
-            default(System.Security.AccessControl.InheritanceFlags),
-            default(System.Security.AccessControl.PropagationFlags),
-            default(System.Security.AccessControl.AuditFlags)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(int),
+                default(bool),
+                default(System.Security.AccessControl.InheritanceFlags),
+                default(System.Security.AccessControl.PropagationFlags),
+                default(System.Security.AccessControl.AuditFlags)
+            ) { }
         public FileSystemAuditRule(
             string identity,
             System.Security.AccessControl.FileSystemRights fileSystemRights,
             System.Security.AccessControl.AuditFlags flags
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(int),
-            default(bool),
-            default(System.Security.AccessControl.InheritanceFlags),
-            default(System.Security.AccessControl.PropagationFlags),
-            default(System.Security.AccessControl.AuditFlags)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(int),
+                default(bool),
+                default(System.Security.AccessControl.InheritanceFlags),
+                default(System.Security.AccessControl.PropagationFlags),
+                default(System.Security.AccessControl.AuditFlags)
+            ) { }
         public FileSystemAuditRule(
             string identity,
             System.Security.AccessControl.FileSystemRights fileSystemRights,
             System.Security.AccessControl.InheritanceFlags inheritanceFlags,
             System.Security.AccessControl.PropagationFlags propagationFlags,
             System.Security.AccessControl.AuditFlags flags
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(int),
-            default(bool),
-            default(System.Security.AccessControl.InheritanceFlags),
-            default(System.Security.AccessControl.PropagationFlags),
-            default(System.Security.AccessControl.AuditFlags)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(int),
+                default(bool),
+                default(System.Security.AccessControl.InheritanceFlags),
+                default(System.Security.AccessControl.PropagationFlags),
+                default(System.Security.AccessControl.AuditFlags)
+            ) { }
         public System.Security.AccessControl.FileSystemRights FileSystemRights
         {
             get { throw null; }
@@ -338,7 +359,8 @@ namespace System.Security.AccessControl
             System.Security.AccessControl.InheritanceFlags inheritanceFlags,
             System.Security.AccessControl.PropagationFlags propagationFlags,
             System.Security.AccessControl.AccessControlType type
-        ) {
+        )
+        {
             throw null;
         }
         public void AddAccessRule(System.Security.AccessControl.FileSystemAccessRule rule) { }
@@ -350,7 +372,8 @@ namespace System.Security.AccessControl
             System.Security.AccessControl.InheritanceFlags inheritanceFlags,
             System.Security.AccessControl.PropagationFlags propagationFlags,
             System.Security.AccessControl.AuditFlags flags
-        ) {
+        )
+        {
             throw null;
         }
         public bool RemoveAccessRule(System.Security.AccessControl.FileSystemAccessRule rule)

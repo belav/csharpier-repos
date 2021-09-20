@@ -12,7 +12,8 @@ namespace System.Text.Json.Serialization.Converters
         public override JsonConverter? CreateConverter(
             Type typeToConvert,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             if (JsonTypeInfo.ObjectType == typeToConvert)
             {
                 if (options.UnknownTypeHandling == JsonUnknownTypeHandling.JsonNode)

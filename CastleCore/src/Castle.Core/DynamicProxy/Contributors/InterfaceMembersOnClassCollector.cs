@@ -38,7 +38,8 @@ namespace Castle.DynamicProxy.Contributors
             MethodInfo method,
             IProxyGenerationHook hook,
             bool isStandalone
-        ) {
+        )
+        {
             if (ProxyUtil.IsAccessibleMethod(method) == false)
             {
                 return null;

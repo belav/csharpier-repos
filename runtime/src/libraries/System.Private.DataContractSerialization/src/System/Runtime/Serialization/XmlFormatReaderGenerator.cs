@@ -53,13 +53,15 @@ namespace System.Runtime.Serialization
 
         public XmlFormatCollectionReaderDelegate GenerateCollectionReader(
             CollectionDataContract collectionContract
-        ) {
+        )
+        {
             return _helper.GenerateCollectionReader(collectionContract);
         }
 
         public XmlFormatGetOnlyCollectionReaderDelegate GenerateGetOnlyCollectionReader(
             CollectionDataContract collectionContract
-        ) {
+        )
+        {
             return _helper.GenerateGetOnlyCollectionReader(collectionContract);
         }
 
@@ -81,7 +83,8 @@ namespace System.Runtime.Serialization
 
             private XmlFormatClassReaderDelegate CreateReflectionXmlClassReader(
                 ClassDataContract classContract
-            ) {
+            )
+            {
                 return new ReflectionXmlClassReader(classContract).ReflectionReadClass;
             }
 
@@ -145,7 +148,8 @@ namespace System.Runtime.Serialization
                         Globals.TypeOfIDeserializationCallback.IsAssignableFrom(
                             classContract.UnderlyingType
                         )
-                    ) {
+                    )
+                    {
                         _ilg.Call(
                             _objectLocal,
                             XmlFormatGeneratorStatics.OnDeserializationMethod,
@@ -204,7 +208,8 @@ namespace System.Runtime.Serialization
 
             public XmlFormatCollectionReaderDelegate GenerateCollectionReader(
                 CollectionDataContract collectionContract
-            ) {
+            )
+            {
                 if (DataContractSerializer.Option == SerializationOption.ReflectionOnly)
                 {
                     return CreateReflectionXmlCollectionReader();
@@ -229,7 +234,8 @@ namespace System.Runtime.Serialization
 
             public XmlFormatGetOnlyCollectionReaderDelegate GenerateGetOnlyCollectionReader(
                 CollectionDataContract collectionContract
-            ) {
+            )
+            {
                 if (DataContractSerializer.Option == SerializationOption.ReflectionOnly)
                 {
                     return CreateReflectionReadGetOnlyCollectionReader();
@@ -248,7 +254,8 @@ namespace System.Runtime.Serialization
             private CodeGenerator GenerateCollectionReaderHelper(
                 CollectionDataContract collectionContract,
                 bool isGetOnlyCollection
-            ) {
+            )
+            {
                 _ilg = new CodeGenerator();
                 bool memberAccessFlag = collectionContract.RequiresMemberAccessForRead(null);
                 try
@@ -378,7 +385,8 @@ namespace System.Runtime.Serialization
             private bool InvokeFactoryMethod(
                 ClassDataContract classContract,
                 LocalBuilder? objectId
-            ) {
+            )
+            {
                 Debug.Assert(_objectLocal != null);
 
                 if (HasFactoryMethod(classContract))
@@ -428,7 +436,8 @@ namespace System.Runtime.Serialization
             private void ReadMembers(
                 ClassDataContract classContract,
                 LocalBuilder? extensionDataLocal
-            ) {
+            )
+            {
                 int memberCount = classContract.MemberNames!.Length;
                 _ilg.Call(
                     _contextArg,
@@ -504,7 +513,8 @@ namespace System.Runtime.Serialization
                 Label[] memberLabels,
                 LocalBuilder memberIndexLocal,
                 LocalBuilder? requiredIndexLocal
-            ) {
+            )
+            {
                 Debug.Assert(_objectLocal != null);
                 Debug.Assert(_objectType != null);
 
@@ -575,7 +585,8 @@ namespace System.Runtime.Serialization
             private bool[] GetRequiredMembers(
                 ClassDataContract contract,
                 out int firstRequiredMember
-            ) {
+            )
+            {
                 int memberCount = contract.MemberNames!.Length;
                 bool[] requiredMembers = new bool[memberCount];
                 GetRequiredMembers(contract, requiredMembers);
@@ -629,7 +640,8 @@ namespace System.Runtime.Serialization
                 int nullables = 0;
                 while (
                     type.IsGenericType && type.GetGenericTypeDefinition() == Globals.TypeOfNullable
-                ) {
+                )
+                {
                     nullables++;
                     type = type.GetGenericArguments()[0];
                 }
@@ -643,7 +655,8 @@ namespace System.Runtime.Serialization
                     )
                     || nullables != 0
                     || type.IsValueType
-                ) {
+                )
+                {
                     LocalBuilder objectId = _ilg.DeclareLocal(Globals.TypeOfString, "objectIdRead");
                     _ilg.Call(
                         _contextArg,
@@ -704,7 +717,8 @@ namespace System.Runtime.Serialization
                     if (
                         primitiveContract != null
                         && primitiveContract.UnderlyingType != Globals.TypeOfObject
-                    ) {
+                    )
+                    {
                         _ilg.Call(_xmlReaderArg, primitiveContract.XmlFormatReaderMethod);
                         _ilg.Stloc(value);
                         if (!type.IsValueType)
@@ -777,7 +791,8 @@ namespace System.Runtime.Serialization
                 LocalBuilder innerValue,
                 LocalBuilder outerValue,
                 int nullables
-            ) {
+            )
+            {
                 Type innerType = innerValue.LocalType,
                     outerType = outerValue.LocalType;
                 _ilg.LoadAddress(outerValue);
@@ -1117,11 +1132,13 @@ namespace System.Runtime.Serialization
                 Type itemType,
                 string itemName,
                 string itemNs
-            ) {
+            )
+            {
                 if (
                     collectionContract.Kind == CollectionKind.Dictionary
                     || collectionContract.Kind == CollectionKind.GenericDictionary
-                ) {
+                )
+                {
                     _ilg.Call(_contextArg, XmlFormatGeneratorStatics.ResetAttributesMethod);
                     LocalBuilder value = _ilg.DeclareLocal(itemType, "valueRead");
                     _ilg.Load(_collectionContractArg);
@@ -1143,13 +1160,15 @@ namespace System.Runtime.Serialization
                 LocalBuilder collection,
                 LocalBuilder value,
                 CollectionDataContract collectionContract
-            ) {
+            )
+            {
                 Debug.Assert(collectionContract.AddMethod != null);
 
                 if (
                     collectionContract.Kind == CollectionKind.GenericDictionary
                     || collectionContract.Kind == CollectionKind.Dictionary
-                ) {
+                )
+                {
                     ClassDataContract? keyValuePairContract =
                         DataContract.GetDataContract(value.LocalType) as ClassDataContract;
                     if (keyValuePairContract == null)

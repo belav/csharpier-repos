@@ -33,7 +33,8 @@ namespace System.Speech.Internal.SrgsCompiler
             RulePublic publicRule,
             RuleDynamic dynamic,
             bool hasScript
-        ) {
+        )
+        {
             SPCFGRULEATTRIBUTES dwRuleAttributes = 0;
 
             // Determine rule attributes to apply based on RuleScope, IsDynamic, and IsRootRule.
@@ -102,7 +103,8 @@ namespace System.Speech.Internal.SrgsCompiler
                 containsCode
                 && ((IGrammar)this).TagFormat
                     != System.Speech.Recognition.SrgsGrammar.SrgsTagFormat.KeyValuePairs
-            ) {
+            )
+            {
                 XmlParser.ThrowSrgsException(SRID.InvalidSemanticProcessingType);
             }
         }

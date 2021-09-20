@@ -14,7 +14,8 @@ namespace MonoDelta
             byte[] dmeta_data,
             byte[] dil_data,
             byte[] dpdb_data
-        ) {
+        )
+        {
             System.Reflection.Metadata.AssemblyExtensions.ApplyUpdate(
                 assm,
                 dmeta_data,

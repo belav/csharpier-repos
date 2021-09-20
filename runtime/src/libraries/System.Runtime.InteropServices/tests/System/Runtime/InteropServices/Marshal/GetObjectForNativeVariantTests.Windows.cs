@@ -454,7 +454,8 @@ namespace System.Runtime.InteropServices.Tests
         public void GetObjectForNativeVariant_Normal_ReturnsExpected(
             Variant variant,
             object expected
-        ) {
+        )
+        {
             try
             {
                 Assert.Equal(expected, GetObjectForNativeVariant(variant));
@@ -485,7 +486,8 @@ namespace System.Runtime.InteropServices.Tests
         public void GetObjectForNativeVariant_NestedVariant_ReturnsExpected(
             Variant source,
             object expected
-        ) {
+        )
+        {
             IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf<Variant>());
             try
             {
@@ -546,7 +548,8 @@ namespace System.Runtime.InteropServices.Tests
         public unsafe void GetObjectForNativeVariant_ByRef_ReturnsExpected(
             Variant source,
             object value
-        ) {
+        )
+        {
             try
             {
                 IntPtr ptr = new IntPtr(&source.m_Variant._unionTypes);

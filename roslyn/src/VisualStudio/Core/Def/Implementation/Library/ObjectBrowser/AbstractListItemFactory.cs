@@ -76,7 +76,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             ISymbol memberSymbol,
             ProjectId projectId,
             bool hidden
-        ) {
+        )
+        {
             var displayText = GetMemberAndTypeDisplayString(memberSymbol);
             var fullNameText = displayText;
             var searchText = memberSymbol.ToDisplayString(s_searchFormat);
@@ -109,7 +110,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             ProjectId projectId,
             bool hidden,
             bool isInherited
-        ) {
+        )
+        {
             var displayText = GetMemberDisplayString(memberSymbol);
 
             var containingType = memberSymbol.ContainingType;
@@ -135,7 +137,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             INamedTypeSymbol namedTypeSymbol,
             ProjectId projectId,
             bool hidden
-        ) {
+        )
+        {
             var displayText = GetSimpleDisplayText(namedTypeSymbol);
 
             var fullNameText =
@@ -159,7 +162,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             INamedTypeSymbol namedTypeSymbol,
             ProjectId projectId,
             bool hidden
-        ) {
+        )
+        {
             var displayText =
                 namedTypeSymbol.SpecialType.ToPredefinedType() != PredefinedType.None
                     ? namedTypeSymbol.ToDisplayString(s_predefinedTypeDisplay)
@@ -182,7 +186,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
         protected NamespaceListItem CreateNamespaceListItem(
             INamespaceSymbol namespaceSymbol,
             ProjectId projectId
-        ) {
+        )
+        {
             var text = namespaceSymbol.ToDisplayString();
 
             return new NamespaceListItem(
@@ -277,7 +282,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             INamedTypeSymbol namedTypeSymbol,
             Compilation compilation,
             ProjectId projectId
-        ) {
+        )
+        {
             // Special case: System.Object doesn't have a base type
             if (namedTypeSymbol.SpecialType == SpecialType.System_Object)
             {
@@ -308,7 +314,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
         public ImmutableArray<ObjectListItem> GetBaseTypeListItems(
             ObjectListItem parentListItem,
             Compilation compilation
-        ) {
+        )
+        {
             Debug.Assert(parentListItem != null);
             Debug.Assert(parentListItem is TypeListItem);
             Debug.Assert(compilation != null);
@@ -326,7 +333,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
         public ImmutableArray<ObjectListItem> GetFolderListItems(
             ObjectListItem parentListItem,
             Compilation compilation
-        ) {
+        )
+        {
             Debug.Assert(parentListItem != null);
             Debug.Assert(parentListItem is TypeListItem || parentListItem is ProjectListItem);
             Debug.Assert(compilation != null);
@@ -362,7 +370,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                 else if (
                     typeSymbol.TypeKind != TypeKind.Module
                     && typeSymbol.SpecialType != SpecialType.System_Object
-                ) {
+                )
+                {
                     addBaseTypes = true;
                 }
 
@@ -382,7 +391,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             Compilation compilation,
             ProjectId projectId,
             bool fullyQualified = false
-        ) {
+        )
+        {
             var builder = ImmutableArray.CreateBuilder<ObjectListItem>();
 
             var immediateMembers = GetMemberSymbols(namedTypeSymbol, compilation);
@@ -424,7 +434,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
         private ImmutableArray<ISymbol> GetMemberSymbols(
             INamedTypeSymbol namedTypeSymbol,
             Compilation compilation
-        ) {
+        )
+        {
             var members = namedTypeSymbol.GetMembers();
             var symbolBuilder = ImmutableArray.CreateBuilder<ISymbol>(members.Length);
 
@@ -442,7 +453,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
         private ImmutableArray<ISymbol> GetInheritedMemberSymbols(
             INamedTypeSymbol namedTypeSymbol,
             Compilation compilation
-        ) {
+        )
+        {
             var symbolBuilder = ImmutableArray.CreateBuilder<ISymbol>();
 
             HashSet<ISymbol> overriddenMembers = null;
@@ -461,7 +473,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                             methodSymbol.MethodKind == MethodKind.Destructor
                             || methodSymbol.MethodKind == MethodKind.Constructor
                             || methodSymbol.IsImplicitlyDeclared
-                        ) {
+                        )
+                        {
                             continue;
                         }
                     }
@@ -489,7 +502,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
         private void AddOverriddenMembers(
             INamedTypeSymbol namedTypeSymbol,
             ref HashSet<ISymbol> overriddenMembers
-        ) {
+        )
+        {
             foreach (var member in namedTypeSymbol.GetMembers())
             {
                 if (member.IsOverride)
@@ -498,7 +512,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                         var overriddenMember = member.GetOverriddenMember();
                         overriddenMember != null;
                         overriddenMember = overriddenMember.GetOverriddenMember()
-                    ) {
+                    )
+                    {
                         overriddenMembers ??= new();
                         overriddenMembers.Add(overriddenMember);
                     }
@@ -509,7 +524,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
         public ImmutableArray<ObjectListItem> GetMemberListItems(
             ObjectListItem parentListItem,
             Compilation compilation
-        ) {
+        )
+        {
             Debug.Assert(parentListItem != null);
             Debug.Assert(parentListItem is TypeListItem);
             Debug.Assert(compilation != null);
@@ -529,7 +545,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             ProjectId projectId,
             ImmutableArray<ObjectListItem>.Builder builder,
             string searchString
-        ) {
+        )
+        {
             Debug.Assert(assemblySymbol != null);
 
             var stack = new Stack<INamespaceSymbol>();
@@ -543,7 +560,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                 if (
                     !namespaceSymbol.IsGlobalNamespace
                     && ContainsAccessibleTypeMember(namespaceSymbol, assemblySymbol)
-                ) {
+                )
+                {
                     var namespaceListItem = CreateNamespaceListItem(namespaceSymbol, projectId);
 
                     if (searchString == null)
@@ -555,7 +573,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                             searchString,
                             StringComparison.OrdinalIgnoreCase
                         ) >= 0
-                    ) {
+                    )
+                    {
                         builder.Add(namespaceListItem);
                     }
                 }
@@ -571,7 +590,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
         public ImmutableArray<ObjectListItem> GetNamespaceListItems(
             ObjectListItem parentListItem,
             Compilation compilation
-        ) {
+        )
+        {
             Debug.Assert(parentListItem != null);
             Debug.Assert(parentListItem is ProjectListItem || parentListItem is ReferenceListItem);
             Debug.Assert(compilation != null);
@@ -608,7 +628,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             Solution solution,
             string languageName,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var set = ImmutableHashSet.CreateBuilder(new AssemblySymbolComparer());
 
             foreach (var projectId in solution.ProjectIds)
@@ -640,7 +661,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                         if (
                             compilation.GetAssemblyOrModuleSymbol(reference)
                             is IAssemblySymbol referenceAssembly
-                        ) {
+                        )
+                        {
                             set.Add(Tuple.Create(projectId, referenceAssembly));
                         }
                     }
@@ -654,7 +676,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             Project project,
             bool lookInReferences,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var set = ImmutableHashSet.CreateBuilder(new AssemblySymbolComparer());
 
             var compilation = project.GetCompilationAsync(cancellationToken)
@@ -673,7 +696,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                         if (
                             compilation.GetAssemblyOrModuleSymbol(reference)
                             is IAssemblySymbol referenceAssembly
-                        ) {
+                        )
+                        {
                             set.Add(Tuple.Create(project.Id, referenceAssembly));
                         }
                     }
@@ -686,7 +710,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
         private bool ContainsAccessibleTypeMember(
             INamespaceOrTypeSymbol namespaceOrTypeSymbol,
             IAssemblySymbol assemblySymbol
-        ) {
+        )
+        {
             foreach (var typeMember in namespaceOrTypeSymbol.GetTypeMembers())
             {
                 if (IncludeSymbol(typeMember) && typeMember.IsAccessibleWithin(assemblySymbol))
@@ -701,7 +726,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
         private ImmutableArray<INamedTypeSymbol> GetAccessibleTypeMembers(
             INamespaceOrTypeSymbol namespaceOrTypeSymbol,
             IAssemblySymbol assemblySymbol
-        ) {
+        )
+        {
             var typeMembers = namespaceOrTypeSymbol.GetTypeMembers();
             var builder = ImmutableArray.CreateBuilder<INamedTypeSymbol>(typeMembers.Length);
 
@@ -740,7 +766,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             Solution solution,
             string languageName,
             uint listFlags
-        ) {
+        )
+        {
             var projectIds = solution.ProjectIds;
             if (!projectIds.Any())
             {
@@ -785,7 +812,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                             if (
                                 assemblyIdentity != null
                                 && !assemblyIdentitySet.Contains(assemblyIdentity)
-                            ) {
+                            )
+                            {
                                 assemblyIdentitySet.Add(assemblyIdentity);
 
                                 var referenceListItem = new ReferenceListItem(
@@ -808,7 +836,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
         public ImmutableArray<ObjectListItem> GetReferenceListItems(
             ObjectListItem parentListItem,
             Compilation compilation
-        ) {
+        )
+        {
             Debug.Assert(parentListItem != null);
             Debug.Assert(parentListItem is ProjectListItem);
             Debug.Assert(compilation != null);
@@ -825,7 +854,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                 if (
                     compilation.GetAssemblyOrModuleSymbol(reference)
                     is IAssemblySymbol assemblySymbol
-                ) {
+                )
+                {
                     builder.Add(
                         new ReferenceListItem(
                             parentListItem.ProjectId,
@@ -842,7 +872,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
         private ImmutableArray<INamedTypeSymbol> GetAccessibleTypes(
             INamespaceSymbol namespaceSymbol,
             Compilation compilation
-        ) {
+        )
+        {
             var typeMembers = GetAccessibleTypeMembers(namespaceSymbol, compilation.Assembly);
             var builder = ImmutableArray.CreateBuilder<INamedTypeSymbol>(typeMembers.Length);
             var stack = new Stack<INamedTypeSymbol>();
@@ -862,7 +893,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                             typeSymbol,
                             compilation.Assembly
                         )
-                    ) {
+                    )
+                    {
                         stack.Push(nestedTypeMember);
                     }
                 }
@@ -877,7 +909,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             ProjectId projectId,
             string searchString,
             bool fullyQualified = false
-        ) {
+        )
+        {
             var types = GetAccessibleTypes(namespaceSymbol, compilation);
 
             var listItems = fullyQualified
@@ -906,7 +939,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                 if (
                     listItem.DisplayText.IndexOf(searchString, StringComparison.OrdinalIgnoreCase)
                     >= 0
-                ) {
+                )
+                {
                     finalBuilder.Add(listItem);
                 }
             }
@@ -917,7 +951,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
         public ImmutableArray<ObjectListItem> GetTypeListItems(
             ObjectListItem parentListItem,
             Compilation compilation
-        ) {
+        )
+        {
             Debug.Assert(parentListItem != null);
             Debug.Assert(
                 parentListItem is NamespaceListItem
@@ -954,7 +989,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             ProjectId projectId,
             ImmutableArray<ObjectListItem>.Builder builder,
             string searchString
-        ) {
+        )
+        {
             Debug.Assert(assemblySymbol != null);
             Debug.Assert(compilation != null);
 
@@ -983,7 +1019,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                             searchString,
                             StringComparison.OrdinalIgnoreCase
                         ) >= 0
-                    ) {
+                    )
+                    {
                         builder.Add(typeListItem);
                     }
                 }
@@ -1002,7 +1039,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             ProjectId projectId,
             ImmutableArray<ObjectListItem>.Builder builder,
             string searchString
-        ) {
+        )
+        {
             Debug.Assert(assemblySymbol != null);
             Debug.Assert(compilation != null);
 
@@ -1033,7 +1071,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                                 searchString,
                                 StringComparison.OrdinalIgnoreCase
                             ) >= 0
-                        ) {
+                        )
+                        {
                             builder.Add(memberListItem);
                         }
                     }

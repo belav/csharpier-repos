@@ -182,7 +182,8 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
         public void Trace_Writes_Correct_EventType_To_TraceListeners(
             TraceLevel level,
             TraceEventType diagnosticLevel
-        ) {
+        )
+        {
             // Arrange
             SystemDiagnosticsTraceWriter writer = CreateTraceWriter();
             writer.MinimumLevel = level;
@@ -219,7 +220,8 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
         [InlineData(TraceLevel.Fatal)]
         public void Trace_Verbose_Writes_Correct_Message_To_TraceListeners_With_All_Fields_Set(
             TraceLevel level
-        ) {
+        )
+        {
             // Arrange
             SystemDiagnosticsTraceWriter writer = CreateTraceWriter();
             writer.MinimumLevel = level;
@@ -270,7 +272,8 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
         [InlineData(TraceLevel.Fatal)]
         public void Trace_Brief_Writes_Correct_Message_To_TraceListeners_With_All_Fields_Set(
             TraceLevel level
-        ) {
+        )
+        {
             // Arrange
             SystemDiagnosticsTraceWriter writer = CreateTraceWriter();
             writer.MinimumLevel = level;
@@ -1300,7 +1303,8 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
         private static void AssertContainsExactly(
             string trace,
             IDictionary<string, string> expected
-        ) {
+        )
+        {
             IDictionary<string, string> actual = ParseTrace(trace);
             Assert.Equal(expected.Count, actual.Count);
             foreach (string key in expected.Keys)
@@ -1408,7 +1412,8 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
                 TraceEventType eventType,
                 int id,
                 string message
-            ) {
+            )
+            {
                 _messages.Add(message);
                 SourceName = source;
                 Id = id;

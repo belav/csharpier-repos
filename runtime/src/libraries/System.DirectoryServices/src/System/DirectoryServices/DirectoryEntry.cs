@@ -91,7 +91,8 @@ namespace System.DirectoryServices
             string? username,
             string? password,
             AuthenticationTypes authenticationType
-        ) {
+        )
+        {
             _path = path;
             _useCache = useCache;
             _credentials = new NetworkCredential(username, password);
@@ -128,7 +129,8 @@ namespace System.DirectoryServices
             string? password,
             AuthenticationTypes authenticationType,
             bool AdsObjIsExternal
-        ) {
+        )
+        {
             _adsObject = adsObject as UnsafeNativeMethods.IAds;
             if (_adsObject == null)
                 throw new ArgumentException(SR.DSDoesNotImplementIADs);
@@ -520,7 +522,8 @@ namespace System.DirectoryServices
                     if (
                         (unmanagedResult == unchecked((int)0x80004001))
                         || (unmanagedResult == unchecked((int)0x80005008))
-                    ) {
+                    )
+                    {
                         return;
                     }
                     else
@@ -1021,7 +1024,8 @@ namespace System.DirectoryServices
                             0,
                             parentPath.Length
                         ) == 0
-                    ) {
+                    )
+                    {
                         uint compareFlags =
                             System.DirectoryServices.ActiveDirectory.Utils.NORM_IGNORENONSPACE
                             | System.DirectoryServices.ActiveDirectory.Utils.NORM_IGNOREKANATYPE
@@ -1038,7 +1042,8 @@ namespace System.DirectoryServices
                                 parentPath.Length,
                                 compareFlags
                             ) != 0
-                        ) {
+                        )
+                        {
                             childPath = parentPath + childPath.Substring(parentPath.Length);
                         }
                     }
@@ -1155,7 +1160,8 @@ namespace System.DirectoryServices
                                 SecurityDescriptorProperty,
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             _objectSecurityInitialized = false;
                             _objectSecurityModified = false;
                         }
@@ -1301,7 +1307,8 @@ namespace System.DirectoryServices
             if (
                 (_objectSecurity != null)
                 && (_objectSecurityModified || _objectSecurity.IsModified())
-            ) {
+            )
+            {
                 UnsafeNativeMethods.IAdsPropertyValue sDValue =
                     (UnsafeNativeMethods.IAdsPropertyValue)new UnsafeNativeMethods.PropertyValue();
 

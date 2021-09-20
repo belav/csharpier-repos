@@ -55,14 +55,16 @@ namespace System.Reflection.Context
         protected virtual IEnumerable<object> GetCustomAttributes(
             MemberInfo member,
             IEnumerable<object> declaredAttributes
-        ) {
+        )
+        {
             return declaredAttributes;
         }
 
         protected virtual IEnumerable<object> GetCustomAttributes(
             ParameterInfo parameter,
             IEnumerable<object> declaredAttributes
-        ) {
+        )
+        {
             return declaredAttributes;
         }
 
@@ -78,7 +80,8 @@ namespace System.Reflection.Context
             string name,
             Func<object, object>? getter,
             Action<object, object>? setter
-        ) {
+        )
+        {
             return new VirtualPropertyInfo(
                 name,
                 propertyType,
@@ -99,7 +102,8 @@ namespace System.Reflection.Context
             IEnumerable<Attribute>? propertyCustomAttributes,
             IEnumerable<Attribute>? getterCustomAttributes,
             IEnumerable<Attribute>? setterCustomAttributes
-        ) {
+        )
+        {
             return new VirtualPropertyInfo(
                 name,
                 propertyType,
@@ -148,7 +152,8 @@ namespace System.Reflection.Context
             MemberInfo member,
             IEnumerable<object> declaredAttributes,
             Type attributeFilterType
-        ) {
+        )
+        {
             IEnumerable<object> attributes = GetCustomAttributes(member, declaredAttributes);
             return AttributeUtils.FilterCustomAttributes(attributes, attributeFilterType);
         }
@@ -157,7 +162,8 @@ namespace System.Reflection.Context
             ParameterInfo parameter,
             IEnumerable<object> declaredAttributes,
             Type attributeFilterType
-        ) {
+        )
+        {
             IEnumerable<object> attributes = GetCustomAttributes(parameter, declaredAttributes);
             return AttributeUtils.FilterCustomAttributes(attributes, attributeFilterType);
         }

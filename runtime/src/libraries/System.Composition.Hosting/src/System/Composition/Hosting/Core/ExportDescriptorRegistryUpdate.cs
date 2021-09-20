@@ -25,7 +25,8 @@ namespace System.Composition.Hosting.Core
         public ExportDescriptorRegistryUpdate(
             IDictionary<CompositionContract, ExportDescriptor[]> partDefinitions,
             ExportDescriptorProvider[] exportDescriptorProviders
-        ) {
+        )
+        {
             _partDefinitions = partDefinitions;
             _exportDescriptorProviders = exportDescriptorProviders;
         }
@@ -61,7 +62,8 @@ namespace System.Composition.Hosting.Core
             CompositionDependency dependency,
             HashSet<ExportDescriptorPromise> @checked,
             Stack<CompositionDependency> checking
-        ) {
+        )
+        {
             if (dependency.IsError)
             {
                 var message = new StringBuilder();
@@ -89,7 +91,8 @@ namespace System.Composition.Hosting.Core
             CompositionDependency dependency,
             HashSet<ExportDescriptorPromise> @checked,
             Stack<CompositionDependency> checking
-        ) {
+        )
+        {
             if (@checked.Contains(dependency.Target))
             {
                 var sharedSeen = false;
@@ -129,7 +132,8 @@ namespace System.Composition.Hosting.Core
         private StringBuilder DescribeCompositionStack(
             CompositionDependency import,
             IEnumerable<CompositionDependency> dependencies
-        ) {
+        )
+        {
             var result = new StringBuilder();
             if (dependencies.FirstOrDefault() == null)
             {
@@ -153,7 +157,8 @@ namespace System.Composition.Hosting.Core
 
         protected override IEnumerable<ExportDescriptorPromise> GetPromises(
             CompositionContract contract
-        ) {
+        )
+        {
             if (_updateFinished)
             {
                 throw new Exception(SR.Dependencies_Should_Be_Requested_Earlier);

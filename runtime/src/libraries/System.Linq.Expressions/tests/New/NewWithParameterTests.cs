@@ -76,21 +76,24 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckNewWithParameterGenericWithStructRestrictionWithEnumTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckNewWithParameterGenericWithStructRestrictionHelper<E>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckNewWithParameterGenericWithStructRestrictionWithStructTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckNewWithParameterGenericWithStructRestrictionHelper<S>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckNewWithParameterGenericWithStructRestrictionWithStructWithStringAndFieldTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckNewWithParameterGenericWithStructRestrictionHelper<Scs>(useInterpreter);
         }
 
@@ -163,7 +166,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyWithParameterStructWithStringAndField(
             Scs value,
             bool useInterpreter
-        ) {
+        )
+        {
             ConstructorInfo constructor = typeof(Scs?).GetConstructor(new Type[] { typeof(Scs) });
             Expression[] exprArgs = new Expression[] { Expression.Constant(value, typeof(Scs)) };
             Expression<Func<Scs?>> e = Expression.Lambda<Func<Scs?>>(

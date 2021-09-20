@@ -16,7 +16,8 @@ namespace System.Web.Http.Controllers
         public void GetResultConverter_GetAppropriateConverterInstance(
             Type actionReturnType,
             Type expectedConverterType
-        ) {
+        )
+        {
             var result = HttpActionDescriptor.GetResultConverter(actionReturnType);
 
             Assert.IsType(expectedConverterType, result);

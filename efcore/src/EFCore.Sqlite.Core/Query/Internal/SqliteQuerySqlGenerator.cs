@@ -82,7 +82,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
         protected override void GenerateSetOperationOperand(
             SetOperationBase setOperation,
             SelectExpression operand
-        ) {
+        )
+        {
             Check.NotNull(setOperation, nameof(setOperation));
             Check.NotNull(operand, nameof(operand));
 

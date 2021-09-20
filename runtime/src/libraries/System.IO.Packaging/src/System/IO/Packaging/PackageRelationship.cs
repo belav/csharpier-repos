@@ -101,7 +101,8 @@ namespace System.IO.Packaging
             TargetMode targetMode,
             string relationshipType,
             string id
-        ) {
+        )
+        {
             //sourcePart can be null to represent that the relationships are at the package level
 
             if (package == null)

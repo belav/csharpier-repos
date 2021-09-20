@@ -38,7 +38,8 @@ namespace System.ComponentModel.Design
             DesignerOptionCollection parent,
             string name,
             object value
-        ) {
+        )
+        {
             if (parent == null)
             {
                 throw new ArgumentNullException(nameof(parent));
@@ -153,7 +154,8 @@ namespace System.ComponentModel.Design
                 DesignerOptionCollection parent,
                 string name,
                 object value
-            ) {
+            )
+            {
                 _service = service;
                 Parent = parent;
                 Name = name;
@@ -275,7 +277,8 @@ namespace System.ComponentModel.Design
                         if (
                             string.Compare(child.Name, name, true, CultureInfo.InvariantCulture)
                             == 0
-                        ) {
+                        )
+                        {
                             return child;
                         }
                     }
@@ -445,10 +448,8 @@ namespace System.ComponentModel.Design
                 private readonly object _target;
                 private readonly PropertyDescriptor _property;
 
-                internal WrappedPropertyDescriptor(
-                    PropertyDescriptor property,
-                    object target
-                ) : base(property.Name, null)
+                internal WrappedPropertyDescriptor(PropertyDescriptor property, object target)
+                    : base(property.Name, null)
                 {
                     _property = property;
                     _target = target;
@@ -492,7 +493,8 @@ namespace System.ComponentModel.Design
                 ITypeDescriptorContext cxt,
                 object value,
                 Attribute[] attributes
-            ) {
+            )
+            {
                 PropertyDescriptorCollection props = new PropertyDescriptorCollection(null);
                 if (!(value is DesignerOptionCollection options))
                 {
@@ -516,7 +518,8 @@ namespace System.ComponentModel.Design
                 CultureInfo culture,
                 object value,
                 Type destinationType
-            ) {
+            )
+            {
                 if (destinationType == typeof(string))
                 {
                     return SR.CollectionConverterText;

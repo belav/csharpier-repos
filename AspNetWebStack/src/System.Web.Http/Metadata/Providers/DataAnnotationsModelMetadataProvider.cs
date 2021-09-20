@@ -13,7 +13,8 @@ namespace System.Web.Http.Metadata.Providers
             Type containerType,
             Type modelType,
             string propertyName
-        ) {
+        )
+        {
             return new CachedDataAnnotationsModelMetadata(
                 this,
                 containerType,
@@ -26,7 +27,8 @@ namespace System.Web.Http.Metadata.Providers
         protected override CachedDataAnnotationsModelMetadata CreateMetadataFromPrototype(
             CachedDataAnnotationsModelMetadata prototype,
             Func<object> modelAccessor
-        ) {
+        )
+        {
             return new CachedDataAnnotationsModelMetadata(prototype, modelAccessor);
         }
     }

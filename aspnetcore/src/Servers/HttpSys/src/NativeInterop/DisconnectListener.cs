@@ -110,7 +110,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             if (
                 statusCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_IO_PENDING
                 && statusCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS
-            ) {
+            )
+            {
                 // We got an unknown result, assume the connection has been closed.
                 Overlapped.Free(nativeOverlapped);
                 _connectionCancellationTokens.TryRemove(connectionId, out _);
@@ -121,7 +122,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             if (
                 statusCode == UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS
                 && HttpSysListener.SkipIOCPCallbackOnSuccess
-            ) {
+            )
+            {
                 // IO operation completed synchronously - callback won't be called to signal completion
                 Overlapped.Free(nativeOverlapped);
                 _connectionCancellationTokens.TryRemove(connectionId, out _);

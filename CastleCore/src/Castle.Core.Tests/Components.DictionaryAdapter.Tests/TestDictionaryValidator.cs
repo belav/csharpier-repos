@@ -49,7 +49,8 @@ namespace Castle.Components.DictionaryAdapter.Tests
         void IDictionaryInitializer.Initialize(
             IDictionaryAdapter dictionaryAdapter,
             object[] behaviors
-        ) {
+        )
+        {
             dictionaryAdapter.AddValidator(this);
         }
 
@@ -117,7 +118,8 @@ namespace Castle.Components.DictionaryAdapter.Tests
             PropertyDescriptor property,
             object propertyValue,
             IList<string> errors
-        ) {
+        )
+        {
             if (rules != null)
             {
                 foreach (var rule in rules)
@@ -142,11 +144,13 @@ namespace Castle.Components.DictionaryAdapter.Tests
             PropertyDescriptor property,
             object propertyValue,
             IList<string> errors
-        ) {
+        )
+        {
             if (
                 propertyValue == null
                 || (propertyValue is string && ((string)propertyValue).Length < 10)
-            ) {
+            )
+            {
                 errors.Add(
                     string.Format(
                         "Property {0} must be at least {1} characters long",

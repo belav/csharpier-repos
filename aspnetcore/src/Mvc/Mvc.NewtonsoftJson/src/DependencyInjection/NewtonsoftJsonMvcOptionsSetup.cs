@@ -30,7 +30,8 @@ namespace Microsoft.Extensions.DependencyInjection
             IOptions<MvcNewtonsoftJsonOptions> jsonOptions,
             ArrayPool<char> charPool,
             ObjectPoolProvider objectPoolProvider
-        ) {
+        )
+        {
             if (loggerFactory == null)
             {
                 throw new ArgumentNullException(nameof(loggerFactory));

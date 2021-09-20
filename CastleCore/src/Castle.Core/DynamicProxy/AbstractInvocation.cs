@@ -32,7 +32,8 @@ namespace Castle.DynamicProxy
             IInterceptor[] interceptors,
             MethodInfo proxiedMethod,
             object[] arguments
-        ) {
+        )
+        {
             Debug.Assert(proxiedMethod != null);
             proxyObject = proxy;
             this.interceptors = interceptors;

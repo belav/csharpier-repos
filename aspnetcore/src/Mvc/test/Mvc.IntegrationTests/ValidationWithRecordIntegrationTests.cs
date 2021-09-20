@@ -78,7 +78,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         [MemberData(nameof(MultipleActionParametersAndValidationData))]
         public async Task ValidationIsTriggered_OnFromBodyModels(
             List<ParameterDescriptor> parameters
-        ) {
+        )
+        {
             // Arrange
             var actionDescriptor = new ControllerActionDescriptor()
             {
@@ -126,7 +127,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         [MemberData(nameof(MultipleActionParametersAndValidationData))]
         public async Task MultipleActionParameter_ValidModelState(
             List<ParameterDescriptor> parameters
-        ) {
+        )
+        {
             // Since validation attribute is only present on the FromBody model's property(TransferInfo's AccountId),
             // validation should not trigger for the parameter which is bound from Uri.
 
@@ -804,7 +806,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             protected override ValidationResult IsValid(
                 object value,
                 ValidationContext validationContext
-            ) {
+            )
+            {
                 if (((Person8)value).Name == "bill")
                 {
                     return null;
@@ -910,7 +913,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             protected override ValidationResult IsValid(
                 object value,
                 ValidationContext validationContext
-            ) {
+            )
+            {
                 if (((List<Product9>)value)[0].Name == "bill")
                 {
                     return null;
@@ -1228,7 +1232,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             protected override ValidationResult IsValid(
                 object value,
                 ValidationContext validationContext
-            ) {
+            )
+            {
                 // By default, ValidationVisitor visits _all_ properties within a non-null complex object.
                 // But, like most reasonable ValidationAttributes, NeverValidAttribute ignores null property values.
                 if (value == null)
@@ -1247,7 +1252,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             [Display(Name = "Not ever valid")] NeverValid NeverValidBecauseType,
             [NeverValid] [Display(Name = "Never valid")] string NeverValidBecauseAttribute,
             [ValidateNever] [NeverValid] string ValidateNever
-        ) {
+        )
+        {
             [ValidateNever]
             public int ValidateNeverLength => ValidateNever.Length;
         }
@@ -1429,7 +1435,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 if (
                     entry.Metadata.MetadataKind == ModelMetadataKind.Property
                     && parentEntry.Metadata != null
-                ) {
+                )
+                {
                     // In real life, would throw an InvalidOperationException if otherProperty were null i.e. the
                     // property was not known. Could also assert container is non-null (see ValidationVisitor).
                     var container = parentEntry.Model;

@@ -69,7 +69,8 @@ namespace System.ComponentModel.Composition
         // Test Codebase variant of the APIs
         internal static void Constructor_ValueAsCodebaseArgument_ShouldSetAssemblyProperty(
             Func<string, AssemblyCatalog> catalogCreator
-        ) {
+        )
+        {
             var expectations = Expectations.GetAssemblies();
 
             foreach (var e in expectations)
@@ -84,7 +85,8 @@ namespace System.ComponentModel.Composition
 
         internal static void Constructor_LockedFileAsCodeBaseArgument_ShouldThrowFileLoad(
             Func<string, AssemblyCatalog> catalogCreator
-        ) {
+        )
+        {
             string filename = Path.GetTempFileName();
             using (
                 FileStream stream = new FileStream(
@@ -93,7 +95,8 @@ namespace System.ComponentModel.Composition
                     FileAccess.Read,
                     FileShare.None
                 )
-            ) {
+            )
+            {
                 if (PlatformDetection.IsWindows) // File locking is Windows specific.
                 {
                     Assert.Throws<FileLoadException>(() => catalogCreator(filename));
@@ -107,31 +110,36 @@ namespace System.ComponentModel.Composition
 
         internal static void Constructor_NullFileNameAsCodeBaseArgument_ShouldThrowArgumentNull(
             Func<string, AssemblyCatalog> catalogCreator
-        ) {
+        )
+        {
             Assert.Throws<ArgumentNullException>("codeBase", () => catalogCreator(null));
         }
 
         internal static void Constructor_EmptyFileNameAsCodeBaseArgument_ShouldThrowArgument(
             Func<string, AssemblyCatalog> catalogCreator
-        ) {
+        )
+        {
             Assert.Throws<ArgumentException>("codeBase", () => catalogCreator(""));
         }
 
         internal static void Constructor_InvalidFileNameAsCodeBaseArgument_ShouldThrowArgument(
             Func<string, AssemblyCatalog> catalogCreator
-        ) {
+        )
+        {
             Assert.Throws<ArgumentException>(() => catalogCreator("??||>"));
         }
 
         internal static void Constructor_InvalidFileNameAsCodeBaseArgument_ShouldThrowIO(
             Func<string, AssemblyCatalog> catalogCreator
-        ) {
+        )
+        {
             Assert.ThrowsAny<IOException>(() => catalogCreator("??||>"));
         }
 
         internal static void Constructor_DirectoryAsCodeBaseArgument_ShouldThrowFileLoad(
             Func<string, AssemblyCatalog> catalogCreator
-        ) {
+        )
+        {
             string directory = Environment.GetFolderPath(Environment.SpecialFolder.System);
             Assert.True(Directory.Exists(directory));
 
@@ -140,7 +148,8 @@ namespace System.ComponentModel.Composition
 
         internal static void Constructor_TooLongFileNameAsCodeBaseArgument_ShouldThrowPathTooLong(
             Func<string, AssemblyCatalog> catalogCreator
-        ) {
+        )
+        {
             Assert.Throws<PathTooLongException>(
                 () =>
                     catalogCreator(
@@ -151,14 +160,16 @@ namespace System.ComponentModel.Composition
 
         internal static void Constructor_NonAssemblyFileNameAsCodeBaseArgument_ShouldThrowBadImageFormat(
             Func<string, AssemblyCatalog> catalogCreator
-        ) {
+        )
+        {
             string filename = Path.GetTempFileName();
             Assert.Throws<BadImageFormatException>(() => catalogCreator(filename));
         }
 
         internal static void Constructor_NonExistentFileNameAsCodeBaseArgument_ShouldThrowFileNotFound(
             Func<string, AssemblyCatalog> catalogCreator
-        ) {
+        )
+        {
             Assert.Throws<FileNotFoundException>(
                 () => catalogCreator(@"FileThat should not ever exist")
             );
@@ -167,7 +178,8 @@ namespace System.ComponentModel.Composition
         // Test Assembly variant of the APIs
         internal static void Constructor_ValueAsAssemblyArgument_ShouldSetAssemblyProperty(
             Func<Assembly, AssemblyCatalog> catalogCreator
-        ) {
+        )
+        {
             var expectations = Expectations.GetAssemblies();
 
             foreach (var e in expectations)
@@ -180,7 +192,8 @@ namespace System.ComponentModel.Composition
 
         internal static void Constructor_NullReflectionContextArgument_ShouldThrowArgumentNull(
             Func<ReflectionContext, AssemblyCatalog> catalogCreator
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentNullException>(
                 "reflectionContext",
                 () => catalogCreator(null)
@@ -189,7 +202,8 @@ namespace System.ComponentModel.Composition
 
         internal static void Constructor_NullDefinitionOriginArgument_ShouldThrowArgumentNull(
             Func<ICompositionElement, AssemblyCatalog> catalogCreator
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentNullException>(
                 "definitionOrigin",
                 () => catalogCreator(null)

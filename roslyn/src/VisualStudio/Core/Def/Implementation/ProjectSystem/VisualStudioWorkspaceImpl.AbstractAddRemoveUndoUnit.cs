@@ -18,7 +18,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             protected AbstractAddRemoveUndoUnit(
                 VisualStudioWorkspaceImpl workspace,
                 ProjectId fromProjectId
-            ) {
+            )
+            {
                 Workspace = workspace;
                 FromProjectId = fromProjectId;
             }

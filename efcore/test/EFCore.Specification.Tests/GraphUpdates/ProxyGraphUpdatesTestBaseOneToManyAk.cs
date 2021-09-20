@@ -39,7 +39,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Save_optional_many_to_one_dependents_with_alternate_key(
             ChangeMechanism changeMechanism,
             bool useExistingEntities
-        ) {
+        )
+        {
             OptionalAk1 new1 = null;
             OptionalAk1Derived new1d = null;
             OptionalAk1MoreDerived new1dd = null;
@@ -235,7 +236,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Save_required_many_to_one_dependents_with_alternate_key(
             ChangeMechanism changeMechanism,
             bool useExistingEntities
-        ) {
+        )
+        {
             Root newRoot;
             RequiredAk1 new1 = null;
             RequiredAk1Derived new1d = null;
@@ -460,7 +462,8 @@ namespace Microsoft.EntityFrameworkCore
         )]
         public virtual void Save_removed_optional_many_to_one_dependents_with_alternate_key(
             ChangeMechanism changeMechanism
-        ) {
+        )
+        {
             Root root;
             ExecuteWithStrategyInTransaction(
                 context =>
@@ -551,7 +554,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent))]
         public virtual void Save_removed_required_many_to_one_dependents_with_alternate_key(
             ChangeMechanism changeMechanism
-        ) {
+        )
+        {
             Root root = null;
             RequiredAk2 removed2 = null;
             RequiredComposite2 removed2c = null;
@@ -652,7 +656,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Optional_many_to_one_dependents_with_alternate_key_are_orphaned(
             CascadeTiming cascadeDeleteTiming,
             CascadeTiming deleteOrphansTiming
-        ) {
+        )
+        {
             var removedId = 0;
             List<int> orphanedIds = null;
 
@@ -742,7 +747,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Required_many_to_one_dependents_with_alternate_key_are_cascade_deleted(
             CascadeTiming cascadeDeleteTiming,
             CascadeTiming deleteOrphansTiming
-        ) {
+        )
+        {
             var removedId = 0;
             List<int> orphanedIds = null;
             List<int> orphanedIdCs = null;
@@ -853,7 +859,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Required_many_to_one_dependents_with_alternate_key_are_cascade_deleted_in_store(
             CascadeTiming cascadeDeleteTiming,
             CascadeTiming deleteOrphansTiming
-        ) {
+        )
+        {
             var removedId = 0;
             List<int> orphanedIds = null;
             List<int> orphanedIdCs = null;
@@ -950,7 +957,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Optional_many_to_one_dependents_with_alternate_key_are_orphaned_in_store(
             CascadeTiming cascadeDeleteTiming,
             CascadeTiming deleteOrphansTiming
-        ) {
+        )
+        {
             var removedId = 0;
             List<int> orphanedIds = null;
             List<int> orphanedIdCs = null;
@@ -997,7 +1005,8 @@ namespace Microsoft.EntityFrameworkCore
                         var toOrphan in context.Set<OptionalComposite2>()
                             .Where(e => orphanedIdCs.Contains(e.Id))
                             .ToList()
-                    ) {
+                    )
+                    {
                         toOrphan.ParentId = null;
                     }
 
@@ -1071,7 +1080,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Optional_many_to_one_dependents_with_alternate_key_are_orphaned_starting_detached(
             CascadeTiming cascadeDeleteTiming,
             CascadeTiming deleteOrphansTiming
-        ) {
+        )
+        {
             var removedId = 0;
             List<int> orphanedIds = null;
             List<int> orphanedIdCs = null;
@@ -1180,7 +1190,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Required_many_to_one_dependents_with_alternate_key_are_cascade_deleted_starting_detached(
             CascadeTiming cascadeDeleteTiming,
             CascadeTiming deleteOrphansTiming
-        ) {
+        )
+        {
             var removedId = 0;
             List<int> orphanedIds = null;
             List<int> orphanedIdCs = null;
@@ -1299,7 +1310,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Required_many_to_one_dependents_with_alternate_key_are_cascade_detached_when_Added(
             CascadeTiming cascadeDeleteTiming,
             CascadeTiming deleteOrphansTiming
-        ) {
+        )
+        {
             var removedId = 0;
             List<int> orphanedIds = null;
             List<int> orphanedIdCs = null;

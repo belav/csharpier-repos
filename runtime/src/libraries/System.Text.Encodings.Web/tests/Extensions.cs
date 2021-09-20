@@ -12,7 +12,8 @@ namespace System.Text.Encodings.Web.Tests
         public unsafe static int FindFirstCharacterToEncodeUtf16(
             this TextEncoder encoder,
             ReadOnlySpan<char> text
-        ) {
+        )
+        {
             if (text.IsEmpty)
             {
                 char dummy = default;

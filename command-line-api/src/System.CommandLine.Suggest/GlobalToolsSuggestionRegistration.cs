@@ -15,7 +15,8 @@ namespace System.CommandLine.Suggest
         public GlobalToolsSuggestionRegistration(
             string dotnetProfileDirectory = null,
             IEnumerable<string> filesNameWithoutExtensionUnderDotnetProfileTools = null
-        ) {
+        )
+        {
             var directory = dotnetProfileDirectory;
             if (directory == null)
             {

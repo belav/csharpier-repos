@@ -39,7 +39,8 @@ namespace Microsoft.AspNetCore.Authentication.Google
         protected override void RegisterAuth(
             AuthenticationBuilder services,
             Action<GoogleOptions> configure
-        ) {
+        )
+        {
             services.AddGoogle(
                 o =>
                 {
@@ -1379,7 +1380,8 @@ namespace Microsoft.AspNetCore.Authentication.Google
                             UriComponents.SchemeAndServer | UriComponents.Path,
                             UriFormat.UriEscaped
                         ) == "https://www.googleapis.com/oauth2/v2/userinfo"
-                    ) {
+                    )
+                    {
                         return ReturnJsonResponse(
                             new
                             {
@@ -1401,7 +1403,8 @@ namespace Microsoft.AspNetCore.Authentication.Google
         private static HttpResponseMessage ReturnJsonResponse(
             object content,
             HttpStatusCode code = HttpStatusCode.OK
-        ) {
+        )
+        {
             var res = new HttpResponseMessage(code);
             var text = Newtonsoft.Json.JsonConvert.SerializeObject(content);
             res.Content = new StringContent(text, Encoding.UTF8, "application/json");
@@ -1425,7 +1428,8 @@ namespace Microsoft.AspNetCore.Authentication.Google
         private static async Task<IHost> CreateHost(
             Action<GoogleOptions> configureOptions,
             Func<HttpContext, Task> testpath = null
-        ) {
+        )
+        {
             var host = new HostBuilder().ConfigureWebHost(
                     builder =>
                         builder.UseTestServer()
@@ -1444,7 +1448,8 @@ namespace Microsoft.AspNetCore.Authentication.Google
                                             }
                                             else if (
                                                 req.Path == new PathString("/challengeFacebook")
-                                            ) {
+                                            )
+                                            {
                                                 await context.ChallengeAsync("Facebook");
                                             }
                                             else if (req.Path == new PathString("/tokens"))
@@ -1468,7 +1473,8 @@ namespace Microsoft.AspNetCore.Authentication.Google
                                             }
                                             else if (
                                                 req.Path == new PathString("/authenticateGoogle")
-                                            ) {
+                                            )
+                                            {
                                                 var result = await context.AuthenticateAsync(
                                                     "Google"
                                                 );
@@ -1476,7 +1482,8 @@ namespace Microsoft.AspNetCore.Authentication.Google
                                             }
                                             else if (
                                                 req.Path == new PathString("/authenticateFacebook")
-                                            ) {
+                                            )
+                                            {
                                                 var result = await context.AuthenticateAsync(
                                                     "Facebook"
                                                 );
@@ -1492,7 +1499,8 @@ namespace Microsoft.AspNetCore.Authentication.Google
                                             }
                                             else if (
                                                 req.Path == new PathString("/unauthorizedAuto")
-                                            ) {
+                                            )
+                                            {
                                                 var result = await context.AuthenticateAsync(
                                                     "Google"
                                                 );

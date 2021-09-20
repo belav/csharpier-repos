@@ -86,7 +86,8 @@ namespace System
             bool allowIPv6,
             bool notImplicitFile,
             bool unknownScheme
-        ) {
+        )
+        {
             // IPv6 can only have canonical IPv4 embedded. Unknown schemes will not attempt parsing of non-canonical IPv4 addresses.
             if (allowIPv6 || unknownScheme)
             {
@@ -117,7 +118,8 @@ namespace System
             ref int end,
             bool allowIPv6,
             bool notImplicitFile
-        ) {
+        )
+        {
             int dots = 0;
             int number = 0;
             bool haveNumber = false;
@@ -136,7 +138,8 @@ namespace System
                     ch == '/'
                     || ch == '\\'
                     || (notImplicitFile && (ch == ':' || ch == '?' || ch == '#'))
-                ) {
+                )
+                {
                     break;
                 }
 
@@ -195,7 +198,8 @@ namespace System
             int start,
             ref int end,
             bool notImplicitFile
-        ) {
+        )
+        {
             int numberBase = Decimal;
             char ch;
             long* parts = stackalloc long[4];
@@ -273,7 +277,8 @@ namespace System
                         || !atLeastOneChar // No empty segmets: 1...1
                         // Only the last segment can be more than 255 (if there are less than 3 dots)
                         || currentValue > 0xFF
-                    ) {
+                    )
+                    {
                         return Invalid;
                     }
                     parts[dotCount] = currentValue;
@@ -298,7 +303,8 @@ namespace System
                 (ch = name[current]) == '/'
                 || ch == '\\'
                 || (notImplicitFile && (ch == ':' || ch == '?' || ch == '#'))
-            ) {
+            )
+            {
                 end = current;
             }
             else

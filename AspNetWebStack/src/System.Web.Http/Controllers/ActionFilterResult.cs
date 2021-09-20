@@ -21,7 +21,8 @@ namespace System.Web.Http.Controllers
             HttpActionContext context,
             ServicesContainer services,
             IActionFilter[] filters
-        ) {
+        )
+        {
             Contract.Assert(binding != null);
             Contract.Assert(context != null);
             Contract.Assert(services != null);
@@ -61,7 +62,8 @@ namespace System.Web.Http.Controllers
             CancellationToken cancellationToken,
             IActionFilter[] filters,
             Func<Task<HttpResponseMessage>> innerAction
-        ) {
+        )
+        {
             Contract.Assert(actionContext != null);
             Contract.Assert(filters != null);
             Contract.Assert(innerAction != null);
@@ -97,7 +99,8 @@ namespace System.Web.Http.Controllers
             IActionFilter[] filters,
             Func<T, Task<HttpResponseMessage>> innerAction,
             T state
-        ) {
+        )
+        {
             return InvokeActionWithActionFilters(
                 actionContext,
                 cancellationToken,
@@ -117,7 +120,8 @@ namespace System.Web.Http.Controllers
                 HttpActionContext context,
                 CancellationToken cancellationToken,
                 ServicesContainer controllerServices
-            ) {
+            )
+            {
                 Contract.Assert(controllerServices != null);
 
                 _context = context;

@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.Remote
             public LogService(
                 RemoteCallback<IRemoteSymbolSearchUpdateService.ICallback> callback,
                 RemoteServiceCallbackId callbackId
-            ) {
+            )
+            {
                 _callback = callback;
                 _callbackId = callbackId;
             }
@@ -79,7 +80,8 @@ namespace Microsoft.CodeAnalysis.Remote
             string sourceName,
             string localSettingsDirectory,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 cancellationToken =>
                     _updateEngine.UpdateContinuouslyAsync(
@@ -97,7 +99,8 @@ namespace Microsoft.CodeAnalysis.Remote
             string name,
             int arity,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 cancellationToken =>
                     _updateEngine.FindPackagesWithTypeAsync(source, name, arity, cancellationToken),
@@ -109,7 +112,8 @@ namespace Microsoft.CodeAnalysis.Remote
             string source,
             string assemblyName,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 cancallationToken =>
                     _updateEngine.FindPackagesWithAssemblyAsync(
@@ -127,7 +131,8 @@ namespace Microsoft.CodeAnalysis.Remote
             string name,
             int arity,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 cancallationToken =>
                     _updateEngine.FindReferenceAssembliesWithTypeAsync(

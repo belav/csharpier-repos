@@ -50,7 +50,8 @@ namespace System.Web.Http
             string routeSuffix,
             NetworkCredential credential,
             Action<HttpResponseMessage> assert
-        ) {
+        )
+        {
             using (var port = new PortReserver())
             {
                 // Arrange

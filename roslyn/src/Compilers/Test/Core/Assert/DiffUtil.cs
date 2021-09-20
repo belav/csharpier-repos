@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 int indexA,
                 IList<T> sequenceB,
                 int indexB
-            ) {
+            )
+            {
                 return _comparer.Equals(sequenceA[indexA], sequenceB[indexB]);
             }
 
@@ -57,11 +58,13 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 IList<T> sequenceA,
                 IList<T> sequenceB,
                 Func<T, string> toString
-            ) {
+            )
+            {
                 foreach (
                     var edit in GetEdits(sequenceA, sequenceA.Count, sequenceB, sequenceB.Count)
                         .Reverse()
-                ) {
+                )
+                {
                     switch (edit.Kind)
                     {
                         case EditKind.Delete:
@@ -86,7 +89,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             string separator,
             IEqualityComparer<T> comparer = null,
             Func<T, string> toString = null
-        ) {
+        )
+        {
             var lcs = (comparer != null) ? new LCS<T>(comparer) : LCS<T>.Default;
             toString = toString ?? new Func<T, string>(obj => obj.ToString());
 
@@ -145,7 +149,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 int lengthA,
                 TSequence sequenceB,
                 int lengthB
-            ) {
+            )
+            {
                 int[,] d = ComputeCostMatrix(sequenceA, lengthA, sequenceB, lengthB);
                 int i = lengthA;
                 int j = lengthB;
@@ -174,7 +179,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 int lengthA,
                 TSequence sequenceB,
                 int lengthB
-            ) {
+            )
+            {
                 int[,] d = ComputeCostMatrix(sequenceA, lengthA, sequenceB, lengthB);
                 int i = lengthA;
                 int j = lengthB;
@@ -225,7 +231,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 int lengthA,
                 TSequence sequenceB,
                 int lengthB
-            ) {
+            )
+            {
                 Debug.Assert(lengthA >= 0 && lengthB >= 0);
 
                 if (lengthA == 0 || lengthB == 0)
@@ -269,7 +276,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 int lengthA,
                 TSequence sequenceB,
                 int lengthB
-            ) {
+            )
+            {
                 var la = lengthA + 1;
                 var lb = lengthB + 1;
 

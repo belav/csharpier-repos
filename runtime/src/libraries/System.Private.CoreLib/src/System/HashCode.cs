@@ -155,7 +155,8 @@ namespace System
             T3 value3,
             T4 value4,
             T5 value5
-        ) {
+        )
+        {
             uint hc1 = (uint)(value1?.GetHashCode() ?? 0);
             uint hc2 = (uint)(value2?.GetHashCode() ?? 0);
             uint hc3 = (uint)(value3?.GetHashCode() ?? 0);
@@ -185,7 +186,8 @@ namespace System
             T4 value4,
             T5 value5,
             T6 value6
-        ) {
+        )
+        {
             uint hc1 = (uint)(value1?.GetHashCode() ?? 0);
             uint hc2 = (uint)(value2?.GetHashCode() ?? 0);
             uint hc3 = (uint)(value3?.GetHashCode() ?? 0);
@@ -218,7 +220,8 @@ namespace System
             T5 value5,
             T6 value6,
             T7 value7
-        ) {
+        )
+        {
             uint hc1 = (uint)(value1?.GetHashCode() ?? 0);
             uint hc2 = (uint)(value2?.GetHashCode() ?? 0);
             uint hc3 = (uint)(value3?.GetHashCode() ?? 0);
@@ -254,7 +257,8 @@ namespace System
             T6 value6,
             T7 value7,
             T8 value8
-        ) {
+        )
+        {
             uint hc1 = (uint)(value1?.GetHashCode() ?? 0);
             uint hc2 = (uint)(value2?.GetHashCode() ?? 0);
             uint hc3 = (uint)(value3?.GetHashCode() ?? 0);

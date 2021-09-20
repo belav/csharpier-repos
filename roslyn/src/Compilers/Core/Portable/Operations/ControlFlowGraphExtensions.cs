@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             this ControlFlowGraph controlFlowGraph,
             IMethodSymbol localFunction,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (controlFlowGraph == null)
             {
                 throw new ArgumentNullException(nameof(controlFlowGraph));
@@ -37,7 +38,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                         cancellationToken,
                         out ControlFlowGraph? localFunctionControlFlowGraph
                     )
-                ) {
+                )
+                {
                     return localFunctionControlFlowGraph;
                 }
             } while ((currentGraph = currentGraph.Parent) != null);
@@ -53,7 +55,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             this ControlFlowGraph controlFlowGraph,
             IFlowAnonymousFunctionOperation anonymousFunction,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (controlFlowGraph == null)
             {
                 throw new ArgumentNullException(nameof(controlFlowGraph));
@@ -73,7 +76,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                         cancellationToken,
                         out ControlFlowGraph? localFunctionControlFlowGraph
                     )
-                ) {
+                )
+                {
                     return localFunctionControlFlowGraph;
                 }
             } while ((currentGraph = currentGraph.Parent) != null);

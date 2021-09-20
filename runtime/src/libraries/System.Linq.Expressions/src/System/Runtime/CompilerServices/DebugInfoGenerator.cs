@@ -46,7 +46,8 @@ namespace System.Runtime.CompilerServices
             MethodBase methodBase,
             ILGenerator ilg,
             DebugInfoExpression sequencePoint
-        ) {
+        )
+        {
             MarkSequencePoint(method, ilg.ILOffset, sequencePoint);
         }
 

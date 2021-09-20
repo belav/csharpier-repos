@@ -28,7 +28,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
         public static void SetDocumentationProvider(
             this HttpConfiguration config,
             IDocumentationProvider documentationProvider
-        ) {
+        )
+        {
             config.Services.Replace(typeof(IDocumentationProvider), documentationProvider);
         }
 
@@ -40,7 +41,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
         public static void SetSampleObjects(
             this HttpConfiguration config,
             IDictionary<Type, object> sampleObjects
-        ) {
+        )
+        {
             config.GetHelpPageSampleGenerator().SampleObjects = sampleObjects;
         }
 
@@ -58,7 +60,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
             MediaTypeHeaderValue mediaType,
             string controllerName,
             string actionName
-        ) {
+        )
+        {
             config.GetHelpPageSampleGenerator()
                 .ActionSamples.Add(
                     new HelpPageSampleKey(
@@ -88,7 +91,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
             string controllerName,
             string actionName,
             params string[] parameterNames
-        ) {
+        )
+        {
             config.GetHelpPageSampleGenerator()
                 .ActionSamples.Add(
                     new HelpPageSampleKey(
@@ -116,7 +120,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
             MediaTypeHeaderValue mediaType,
             string controllerName,
             string actionName
-        ) {
+        )
+        {
             config.GetHelpPageSampleGenerator()
                 .ActionSamples.Add(
                     new HelpPageSampleKey(
@@ -146,7 +151,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
             string controllerName,
             string actionName,
             params string[] parameterNames
-        ) {
+        )
+        {
             config.GetHelpPageSampleGenerator()
                 .ActionSamples.Add(
                     new HelpPageSampleKey(
@@ -170,7 +176,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
             this HttpConfiguration config,
             object sample,
             MediaTypeHeaderValue mediaType
-        ) {
+        )
+        {
             config.GetHelpPageSampleGenerator()
                 .ActionSamples.Add(new HelpPageSampleKey(mediaType), sample);
         }
@@ -187,7 +194,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
             object sample,
             MediaTypeHeaderValue mediaType,
             Type type
-        ) {
+        )
+        {
             config.GetHelpPageSampleGenerator()
                 .ActionSamples.Add(new HelpPageSampleKey(mediaType, type), sample);
         }
@@ -205,7 +213,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
             Type type,
             string controllerName,
             string actionName
-        ) {
+        )
+        {
             config.GetHelpPageSampleGenerator()
                 .ActualHttpMessageTypes.Add(
                     new HelpPageSampleKey(
@@ -233,7 +242,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
             string controllerName,
             string actionName,
             params string[] parameterNames
-        ) {
+        )
+        {
             config.GetHelpPageSampleGenerator()
                 .ActualHttpMessageTypes.Add(
                     new HelpPageSampleKey(
@@ -259,7 +269,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
             Type type,
             string controllerName,
             string actionName
-        ) {
+        )
+        {
             config.GetHelpPageSampleGenerator()
                 .ActualHttpMessageTypes.Add(
                     new HelpPageSampleKey(
@@ -287,7 +298,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
             string controllerName,
             string actionName,
             params string[] parameterNames
-        ) {
+        )
+        {
             config.GetHelpPageSampleGenerator()
                 .ActualHttpMessageTypes.Add(
                     new HelpPageSampleKey(
@@ -307,7 +319,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
         /// <returns>The help page sample generator.</returns>
         public static HelpPageSampleGenerator GetHelpPageSampleGenerator(
             this HttpConfiguration config
-        ) {
+        )
+        {
             return (HelpPageSampleGenerator)config.Properties.GetOrAdd(
                 typeof(HelpPageSampleGenerator),
                 k => new HelpPageSampleGenerator()
@@ -322,7 +335,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
         public static void SetHelpPageSampleGenerator(
             this HttpConfiguration config,
             HelpPageSampleGenerator sampleGenerator
-        ) {
+        )
+        {
             config.Properties.AddOrUpdate(
                 typeof(HelpPageSampleGenerator),
                 k => sampleGenerator,
@@ -337,7 +351,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
         /// <returns>The <see cref="ModelDescriptionGenerator"/></returns>
         public static ModelDescriptionGenerator GetModelDescriptionGenerator(
             this HttpConfiguration config
-        ) {
+        )
+        {
             return (ModelDescriptionGenerator)config.Properties.GetOrAdd(
                 typeof(ModelDescriptionGenerator),
                 k => InitializeModelDescriptionGenerator(config)
@@ -355,7 +370,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
         public static HelpPageApiModel GetHelpPageApiModel(
             this HttpConfiguration config,
             string apiDescriptionId
-        ) {
+        )
+        {
             object model;
             string modelId = ApiModelPrefix + apiDescriptionId;
             if (!config.Properties.TryGetValue(modelId, out model))
@@ -383,7 +399,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
         private static HelpPageApiModel GenerateApiModel(
             ApiDescription apiDescription,
             HttpConfiguration config
-        ) {
+        )
+        {
             HelpPageApiModel apiModel = new HelpPageApiModel() { ApiDescription = apiDescription, };
 
             ModelDescriptionGenerator modelGenerator = config.GetModelDescriptionGenerator();
@@ -399,7 +416,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
         private static void GenerateUriParameters(
             HelpPageApiModel apiModel,
             ModelDescriptionGenerator modelGenerator
-        ) {
+        )
+        {
             ApiDescription apiDescription = apiModel.ApiDescription;
             foreach (ApiParameterDescription apiParameter in apiDescription.ParameterDescriptions)
             {
@@ -439,10 +457,12 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
                     if (
                         complexTypeDescription != null
                         && !IsBindableWithTypeConverter(parameterType)
-                    ) {
+                    )
+                    {
                         foreach (
                             ParameterDescription uriParameter in complexTypeDescription.Properties
-                        ) {
+                        )
+                        {
                             apiModel.UriParameters.Add(uriParameter);
                         }
                     }
@@ -506,7 +526,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
             HelpPageApiModel apiModel,
             ApiParameterDescription apiParameter,
             ModelDescription typeDescription
-        ) {
+        )
+        {
             ParameterDescription parameterDescription = new ParameterDescription
             {
                 Name = apiParameter.Name,
@@ -522,7 +543,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
             HelpPageApiModel apiModel,
             ModelDescriptionGenerator modelGenerator,
             HelpPageSampleGenerator sampleGenerator
-        ) {
+        )
+        {
             ApiDescription apiDescription = apiModel.ApiDescription;
             foreach (ApiParameterDescription apiParameter in apiDescription.ParameterDescriptions)
             {
@@ -537,7 +559,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
                 else if (
                     apiParameter.ParameterDescriptor != null
                     && apiParameter.ParameterDescriptor.ParameterType == typeof(HttpRequestMessage)
-                ) {
+                )
+                {
                     Type parameterType = sampleGenerator.ResolveHttpRequestMessageType(
                         apiDescription
                     );
@@ -554,7 +577,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
         private static void GenerateResourceDescription(
             HelpPageApiModel apiModel,
             ModelDescriptionGenerator modelGenerator
-        ) {
+        )
+        {
             ResponseDescription response = apiModel.ApiDescription.ResponseDescription;
             Type responseType = response.ResponseType ?? response.DeclaredType;
             if (responseType != null && responseType != typeof(void))
@@ -573,7 +597,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
         private static void GenerateSamples(
             HelpPageApiModel apiModel,
             HelpPageSampleGenerator sampleGenerator
-        ) {
+        )
+        {
             try
             {
                 foreach (var item in sampleGenerator.GetSampleRequests(apiModel.ApiDescription))
@@ -605,7 +630,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
             HttpConfiguration config,
             out ApiParameterDescription parameterDescription,
             out Type resourceType
-        ) {
+        )
+        {
             parameterDescription = apiDescription.ParameterDescriptions.FirstOrDefault(
                 p =>
                     p.Source == ApiParameterSource.FromBody
@@ -640,7 +666,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
 
         private static ModelDescriptionGenerator InitializeModelDescriptionGenerator(
             HttpConfiguration config
-        ) {
+        )
+        {
             ModelDescriptionGenerator modelGenerator = new ModelDescriptionGenerator(config);
             Collection<ApiDescription> apis = config.Services.GetApiExplorer().ApiDescriptions;
             foreach (ApiDescription api in apis)
@@ -654,7 +681,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
                         out parameterDescription,
                         out parameterType
                     )
-                ) {
+                )
+                {
                     modelGenerator.GetOrCreateModelDescription(parameterType);
                 }
             }

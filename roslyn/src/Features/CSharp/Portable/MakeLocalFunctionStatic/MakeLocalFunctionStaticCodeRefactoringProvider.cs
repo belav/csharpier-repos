@@ -65,7 +65,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
                     semanticModel,
                     out var captures
                 )
-            ) {
+            )
+            {
                 context.RegisterRefactoring(
                     new MyCodeAction(
                         CSharpAnalyzersResources.Make_local_function_static,

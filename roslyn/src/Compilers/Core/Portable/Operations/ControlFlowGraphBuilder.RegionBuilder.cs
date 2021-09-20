@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 ITypeSymbol? exceptionType = null,
                 ImmutableArray<ILocalSymbol> locals = default,
                 bool isStackSpillRegion = false
-            ) {
+            )
+            {
                 Debug.Assert(
                     !isStackSpillRegion
                         || (kind == ControlFlowRegionKind.LocalLifetime && locals.IsDefaultOrEmpty)
@@ -227,7 +228,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             public void ReplaceRegion(
                 RegionBuilder toReplace,
                 ArrayBuilder<RegionBuilder> replaceWith
-            ) {
+            )
+            {
                 Debug.Assert(toReplace.Enclosing == this);
                 Debug.Assert(
                     toReplace.FirstBlock!.Ordinal <= replaceWith.First().FirstBlock!.Ordinal
@@ -339,7 +341,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                     (ControlFlowRegion region, int ordinal)
                 >.Builder? anonymousFunctionsMapOpt,
                 ControlFlowRegion? enclosing
-            ) {
+            )
+            {
 #if DEBUG
                 Debug.Assert(!_aboutToFree);
 #endif
@@ -401,7 +404,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 {
                     foreach (
                         (IMethodSymbol method, ILocalFunctionOperation operation) in LocalFunctions
-                    ) {
+                    )
+                    {
                         localFunctionsMap.Add(method, (result, operation, localFunctionsBefore++));
                     }
                 }
@@ -476,7 +480,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                         IFlowAnonymousFunctionOperation,
                         (ControlFlowRegion region, int ordinal)
                     >.Builder map, ControlFlowRegion region) argument
-                ) {
+                )
+                {
                     argument.map.Add(operation, (argument.region, argument.map.Count));
                     return base.VisitFlowAnonymousFunction(operation, argument);
                 }
@@ -487,7 +492,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                         IFlowAnonymousFunctionOperation,
                         (ControlFlowRegion region, int ordinal)
                     >.Builder map, ControlFlowRegion region) argument
-                ) {
+                )
+                {
                     return DefaultVisit(operation, argument);
                 }
 
@@ -497,7 +503,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                         IFlowAnonymousFunctionOperation,
                         (ControlFlowRegion region, int ordinal)
                     >.Builder map, ControlFlowRegion region) argument
-                ) {
+                )
+                {
                     foreach (IOperation child in ((Operation)operation).ChildOperations)
                     {
                         Visit(child, argument);

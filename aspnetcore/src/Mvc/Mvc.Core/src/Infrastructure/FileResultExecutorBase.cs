@@ -67,7 +67,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             bool enableRangeProcessing,
             DateTimeOffset? lastModified = null,
             EntityTagHeaderValue? etag = null
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -130,7 +131,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                             || preconditionState == PreconditionState.ShouldProcess
                         )
                         && (IfRangeValid(httpRequestHeaders, lastModified, etag))
-                    ) {
+                    )
+                    {
                         return SetRangeHeaders(context, httpRequestHeaders, fileLength.Value);
                     }
                 }
@@ -169,7 +171,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             HttpResponse response,
             DateTimeOffset? lastModified,
             EntityTagHeaderValue? etag
-        ) {
+        )
+        {
             var httpResponseHeaders = response.GetTypedHeaders();
             if (lastModified.HasValue)
             {
@@ -190,7 +193,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             RequestHeaders httpRequestHeaders,
             DateTimeOffset? lastModified,
             EntityTagHeaderValue? etag
-        ) {
+        )
+        {
             // 14.27 If-Range
             var ifRange = httpRequestHeaders.IfRange;
             if (ifRange != null)
@@ -215,7 +219,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                     etag != null
                     && ifRange.EntityTag != null
                     && !ifRange.EntityTag.Compare(etag, useStrongComparison: true)
-                ) {
+                )
+                {
                     Logger.IfRangeETagPreconditionFailed(etag, ifRange.EntityTag);
                     return false;
                 }
@@ -229,7 +234,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             RequestHeaders httpRequestHeaders,
             DateTimeOffset? lastModified,
             EntityTagHeaderValue? etag
-        ) {
+        )
+        {
             var ifMatchState = PreconditionState.Unspecified;
             var ifNoneMatchState = PreconditionState.Unspecified;
             var ifModifiedSinceState = PreconditionState.Unspecified;
@@ -308,7 +314,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             EntityTagHeaderValue etag,
             PreconditionState matchFoundState,
             PreconditionState matchNotFoundState
-        ) {
+        )
+        {
             if (etagHeader?.Count > 0)
             {
                 var state = matchNotFoundState;
@@ -317,7 +324,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                     if (
                         entityTag.Equals(EntityTagHeaderValue.Any)
                         || entityTag.Compare(etag, useStrongComparison)
-                    ) {
+                    )
+                    {
                         state = matchFoundState;
                         break;
                     }
@@ -347,7 +355,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             ActionContext context,
             RequestHeaders httpRequestHeaders,
             long fileLength
-        ) {
+        )
+        {
             var response = context.HttpContext.Response;
             var httpResponseHeaders = response.GetTypedHeaders();
             var serveBody = !HttpMethods.IsHead(context.HttpContext.Request.Method);
@@ -430,7 +439,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             Stream fileStream,
             RangeItemHeaderValue? range,
             long rangeLength
-        ) {
+        )
+        {
             var outputStream = context.Response.Body;
             using (fileStream)
             {

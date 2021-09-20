@@ -38,7 +38,8 @@ namespace Microsoft.AspNetCore.Authentication.Facebook
             ClaimsIdentity identity,
             AuthenticationProperties properties,
             OAuthTokenResponse tokens
-        ) {
+        )
+        {
             var endpoint = QueryHelpers.AddQueryString(
                 Options.UserInformationEndpoint,
                 "access_token",
@@ -73,7 +74,8 @@ namespace Microsoft.AspNetCore.Authentication.Facebook
                 var payload = JsonDocument.Parse(
                     await response.Content.ReadAsStringAsync(Context.RequestAborted)
                 )
-            ) {
+            )
+            {
                 var context = new OAuthCreatingTicketContext(
                     new ClaimsPrincipal(identity),
                     properties,

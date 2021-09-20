@@ -14,7 +14,8 @@ namespace System.Web.Http.Controllers
         public virtual Task<HttpResponseMessage> InvokeActionAsync(
             HttpActionContext actionContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (actionContext == null)
             {
                 throw Error.ArgumentNull("actionContext");
@@ -26,7 +27,8 @@ namespace System.Web.Http.Controllers
         private static async Task<HttpResponseMessage> InvokeActionAsyncCore(
             HttpActionContext actionContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             HttpActionDescriptor actionDescriptor = actionContext.ActionDescriptor;
             Contract.Assert(actionDescriptor != null);
 

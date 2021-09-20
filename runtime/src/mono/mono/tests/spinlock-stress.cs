@@ -65,7 +65,8 @@ static class ParallelTestHelper
         TSource obj,
         Action<TSource> action,
         int numThread
-    ) {
+    )
+    {
         Thread[] threads = new Thread[numThread];
         for (int i = 0; i < numThread; i++)
         {

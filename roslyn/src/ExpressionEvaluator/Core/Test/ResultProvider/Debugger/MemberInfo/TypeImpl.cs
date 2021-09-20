@@ -268,7 +268,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             ParameterModifier[] modifiers,
             CultureInfo culture,
             string[] namedParameters
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -332,7 +333,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         private static ExplicitInterfaceInfo MakeExplicitInterfaceInfo(
             System.Reflection.MethodInfo interfaceMethod,
             System.Reflection.MethodInfo implementingMethod
-        ) {
+        )
+        {
             return (ExplicitInterfaceInfo)typeof(ExplicitInterfaceInfo).Instantiate(
                 new MethodInfoImpl(interfaceMethod),
                 new MethodInfoImpl(implementingMethod)
@@ -409,7 +411,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             System.Reflection.CallingConventions callConvention,
             Type[] types,
             ParameterModifier[] modifiers
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -420,7 +423,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             System.Reflection.CallingConventions callConvention,
             Type[] types,
             ParameterModifier[] modifiers
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -431,7 +435,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             Type returnType,
             Type[] types,
             ParameterModifier[] modifiers
-        ) {
+        )
+        {
             Debug.Assert(binder == null, "NYI");
             Debug.Assert(returnType == null, "NYI");
             Debug.Assert(types == null, "NYI");

@@ -19,7 +19,8 @@ namespace System.Reflection.Emit.Tests
                     "\uD800\uDC00",
                     "a\0b\0c"
                 }
-            ) {
+            )
+            {
                 foreach (
                     TypeAttributes attributes in new TypeAttributes[]
                     {
@@ -27,7 +28,8 @@ namespace System.Reflection.Emit.Tests
                         TypeAttributes.Interface | TypeAttributes.Abstract,
                         TypeAttributes.Class
                     }
-                ) {
+                )
+                {
                     foreach (Type parent in new Type[] { null, typeof(ModuleBuilderDefineType) })
                     {
                         foreach (
@@ -36,7 +38,8 @@ namespace System.Reflection.Emit.Tests
                                 PackingSize.Unspecified,
                                 PackingSize.Size1
                             }
-                        ) {
+                        )
+                        {
                             foreach (int size in new int[] { 0, -1, 1 })
                             {
                                 yield return new object[]
@@ -83,7 +86,8 @@ namespace System.Reflection.Emit.Tests
             PackingSize packingSize,
             int typesize,
             Type[] implementedInterfaces
-        ) {
+        )
+        {
             bool isDefaultImplementedInterfaces = implementedInterfaces?.Length == 0;
             bool isDefaultPackingSize = packingSize == PackingSize.Unspecified;
             bool isDefaultSize = typesize == 0;

@@ -188,7 +188,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
             CertificateRequest request,
             string expectedKeyOid,
             bool exportPfx
-        ) {
+        )
+        {
             request.CertificateExtensions.Add(
                 new X509EnhancedKeyUsageExtension(
                     new OidCollection { new Oid("1.3.6.1.5.5.7.3.1") },
@@ -331,7 +332,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                 ECDsa ecdsa = ECDsa.Create(
                     EccTestData.Secp521r1_DiminishedPublic_Data.KeyParameters
                 )
-            ) {
+            )
+            {
                 pubParams = ecdsa.ExportParameters(false);
 
                 CertificateRequest request = new CertificateRequest(
@@ -375,7 +377,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                 ECDsa ecdsa = ECDsa.Create(
                     EccTestData.Secp521r1_DiminishedPublic_Data.KeyParameters
                 )
-            ) {
+            )
+            {
                 var generator = X509SignatureGenerator.CreateForECDsa(ecdsa);
 
                 CertificateRequest request = new CertificateRequest(
@@ -1185,7 +1188,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                 byte[] keyBytes,
                 byte[] parameterBytes,
                 byte[] sigAlgBytes
-            ) {
+            )
+            {
                 _signatureAlgBytes = sigAlgBytes;
 
                 Oid oid = new Oid("2.1.2.1", "DER");

@@ -17,7 +17,8 @@ namespace System.Memory.Tests.SequenceReader
                 || minSize <= 0
                 || maxSize <= 0
                 || minSize > maxSize
-            ) {
+            )
+            {
                 throw new InvalidOperationException();
             }
 

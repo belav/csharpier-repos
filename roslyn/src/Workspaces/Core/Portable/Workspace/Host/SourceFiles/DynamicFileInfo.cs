@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.Host
             TextLoader textLoader,
             bool designTimeOnly,
             IDocumentServiceProvider documentServiceProvider
-        ) {
+        )
+        {
             FilePath = filePath;
             SourceCodeKind = sourceCodeKind;
             TextLoader = textLoader;

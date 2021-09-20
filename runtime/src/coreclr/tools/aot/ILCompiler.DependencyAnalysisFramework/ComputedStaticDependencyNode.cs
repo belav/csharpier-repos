@@ -19,7 +19,8 @@ namespace ILCompiler.DependencyAnalysisFramework
         public void SetStaticDependencies(
             IEnumerable<DependencyListEntry> dependencies,
             IEnumerable<CombinedDependencyListEntry> conditionalDependencies
-        ) {
+        )
+        {
             Debug.Assert(_dependencies == null);
             Debug.Assert(_conditionalDependencies == null);
             Debug.Assert(dependencies != null);
@@ -50,13 +51,15 @@ namespace ILCompiler.DependencyAnalysisFramework
 
         public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(
             DependencyContextType context
-        ) {
+        )
+        {
             return _conditionalDependencies;
         }
 
         public override IEnumerable<DependencyListEntry> GetStaticDependencies(
             DependencyContextType context
-        ) {
+        )
+        {
             return _dependencies;
         }
 
@@ -64,7 +67,8 @@ namespace ILCompiler.DependencyAnalysisFramework
             List<DependencyNodeCore<DependencyContextType>> markedNodes,
             int firstNode,
             DependencyContextType context
-        ) {
+        )
+        {
             return Array.Empty<CombinedDependencyListEntry>();
         }
     }

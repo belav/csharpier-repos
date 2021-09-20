@@ -368,7 +368,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
         /// <param name="descendIntoChildren">An optional function that determines if the search descends into the argument node's children.</param>
         public IEnumerable<SyntaxNode> DescendantNodes(
             Func<SyntaxNode, bool> descendIntoChildren = null
-        ) {
+        )
+        {
             return DescendantNodesImpl(FullSpan, descendIntoChildren, includeSelf: false);
         }
 
@@ -378,7 +379,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
         /// <param name="descendIntoChildren">An optional function that determines if the search descends into the argument node's children.</param>
         public IEnumerable<SyntaxNode> DescendantNodesAndSelf(
             Func<SyntaxNode, bool> descendIntoChildren = null
-        ) {
+        )
+        {
             return DescendantNodesImpl(FullSpan, descendIntoChildren, includeSelf: true);
         }
 
@@ -393,7 +395,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
         protected internal SyntaxNode ReplaceNodeInListCore(
             SyntaxNode originalNode,
             IEnumerable<SyntaxNode> replacementNodes
-        ) {
+        )
+        {
             return SyntaxReplacer.ReplaceNodeInList(this, originalNode, replacementNodes);
         }
 
@@ -401,7 +404,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
             SyntaxNode nodeInList,
             IEnumerable<SyntaxNode> nodesToInsert,
             bool insertBefore
-        ) {
+        )
+        {
             return SyntaxReplacer.InsertNodeInList(this, nodeInList, nodesToInsert, insertBefore);
         }
 

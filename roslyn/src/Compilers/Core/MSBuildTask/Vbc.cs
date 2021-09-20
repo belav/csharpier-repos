@@ -241,7 +241,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         private protected override void LogCompilerOutput(
             string output,
             MessageImportance messageImportance
-        ) {
+        )
+        {
             var lines = output.Split(s_separator, StringSplitOptions.None);
             foreach (string line in lines)
             {
@@ -321,7 +322,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                             desiredPdbInfo.Exists
                             && actualPdbInfo.LastWriteTime > desiredPdbInfo.LastWriteTime
                         )
-                    ) {
+                    )
+                    {
                         // Delete the existing one if it's already there, as Move would otherwise fail
                         if (desiredPdbInfo.Exists)
                         {
@@ -371,7 +373,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                                 StringComparison.OrdinalIgnoreCase
                             )
                         )
-                    ) {
+                    )
+                    {
                         // The incoming string is already in hex format ... we just need to
                         // remove the 0x or &H from the beginning.
                         return originalBaseAddress.Substring(2);
@@ -408,7 +411,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         /// </summary>
         protected internal override void AddResponseFileCommands(
             CommandLineBuilderExtension commandLine
-        ) {
+        )
+        {
             commandLine.AppendSwitchIfNotNull("/baseaddress:", this.GetBaseAddressInHex());
             commandLine.AppendSwitchIfNotNull("/libpath:", this.AdditionalLibPaths, ",");
             commandLine.AppendSwitchIfNotNull("/imports:", this.Imports, ",");
@@ -479,7 +483,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                     this.VBRuntime,
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 commandLine.AppendSwitchIfNotNull("/vbruntime:", this.VBRuntimePath);
             }
             else if (this.VBRuntime != null)
@@ -488,12 +493,14 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                 if (
                     0
                     == String.Compare(vbRuntimeSwitch, "EMBED", StringComparison.OrdinalIgnoreCase)
-                ) {
+                )
+                {
                     commandLine.AppendSwitch("/vbruntime*");
                 }
                 else if (
                     0 == String.Compare(vbRuntimeSwitch, "NONE", StringComparison.OrdinalIgnoreCase)
-                ) {
+                )
+                {
                     commandLine.AppendSwitch("/vbruntime-");
                 }
                 else if (
@@ -503,7 +510,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                         "DEFAULT",
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     commandLine.AppendSwitch("/vbruntime+");
                 }
                 else
@@ -533,7 +541,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                         )
                     )
                 )
-            ) {
+            )
+            {
                 commandLine.AppendSwitchIfNotNull("/", this.Verbosity);
             }
 
@@ -561,7 +570,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                     this.MainEntryPoint,
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 commandLine.AppendSwitchIfNotNull("/main:", this.MainEntryPoint);
             }
 
@@ -686,7 +696,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                         0
                         != String.Compare(Verbosity, "verbose", StringComparison.OrdinalIgnoreCase)
                     )
-                ) {
+                )
+                {
                     Log.LogErrorWithCodeFromResources(
                         "Vbc_EnumParameterHasInvalidValue",
                         "Verbosity",
@@ -712,7 +723,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         protected override void LogEventsFromTextOutput(
             string singleLine,
             MessageImportance messageImportance
-        ) {
+        )
+        {
             // We can return immediately if this was not called by the out of proc compiler
             if (!this.UsedCommandLineTool)
             {
@@ -726,7 +738,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                 _vbErrorLines.Count == 0
                 && singleLine.IndexOf("warning", StringComparison.OrdinalIgnoreCase) == -1
                 && singleLine.IndexOf("error", StringComparison.OrdinalIgnoreCase) == -1
-            ) {
+            )
+            {
                 base.LogEventsFromTextOutput(singleLine, messageImportance);
                 return;
             }
@@ -768,7 +781,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                 if (
                     _isDoneOutputtingErrorMessage
                     && _vbErrorLines.Count == _numberOfLinesInErrorMessage + 3
-                ) {
+                )
+                {
                     // Once we have the 4th line (error line + 3), then parse it for the first ~
                     // which will correspond to the column of the token with the error because
                     // VBC respects the users's indentation settings in the file it is compiling
@@ -832,7 +846,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                         || parts.category == CanonicalError.Parts.Category.Warning
                     )
                     && parts.column == CanonicalError.Parts.numberNotSpecified
-                ) {
+                )
+                {
                     if (parts.line != CanonicalError.Parts.numberNotSpecified)
                     {
                         // If we got here, then this is a standard VBC error or warning.
@@ -1195,7 +1210,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                 if (
                     vbcHostObject is IVbcHostObject3
                     && !DeferToICompilerOptionsHostObject(LangVersion, vbcHostObject)
-                ) {
+                )
+                {
                     IVbcHostObject3 vbcHostObject3 = (IVbcHostObject3)vbcHostObject;
                     CheckHostObjectSupport(
                         param = nameof(LangVersion),
@@ -1243,7 +1259,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                         System.Globalization.CultureInfo.CurrentUICulture.Name,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     CheckHostObjectSupport(
                         param = nameof(PreferredUILang),
                         resultFromHostObjectSetOperation: false
@@ -1275,7 +1292,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         private static bool DeferToICompilerOptionsHostObject(
             string? langVersion,
             IVbcHostObject vbcHostObject
-        ) {
+        )
+        {
             if (!(vbcHostObject is ICompilerOptionsHostObject))
             {
                 return false;
@@ -1334,7 +1352,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                     using (
                         RCWForCurrentContext<IVbcHostObject> hostObject =
                             new RCWForCurrentContext<IVbcHostObject>(hostObjectCOM)
-                    ) {
+                    )
+                    {
                         IVbcHostObject vbcHostObject = hostObject.RCW;
                         bool hostObjectSuccessfullyInitialized = InitializeHostCompiler(
                             vbcHostObject

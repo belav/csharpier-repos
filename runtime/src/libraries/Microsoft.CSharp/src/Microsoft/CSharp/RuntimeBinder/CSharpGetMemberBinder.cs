@@ -25,7 +25,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             RuntimeBinder runtimeBinder,
             ArgumentObject[] arguments,
             LocalVariableSymbol[] locals
-        ) {
+        )
+        {
             Debug.Assert(arguments.Length == 1);
             return runtimeBinder.BindProperty(this, arguments[0], locals[0], null);
         }
@@ -61,10 +62,12 @@ namespace Microsoft.CSharp.RuntimeBinder
             bool resultIndexed,
             Type callingContext,
             IEnumerable<CSharpArgumentInfo> argumentInfo
-        ) : base(
-            name,
-            false /*caseInsensitive*/
-        ) {
+        )
+            : base(
+                name,
+                false /*caseInsensitive*/
+            )
+        {
             ResultIndexed = resultIndexed;
             _argumentInfo = BinderHelper.ToArray(argumentInfo);
             _callingContext = callingContext;
@@ -97,7 +100,8 @@ namespace Microsoft.CSharp.RuntimeBinder
                 || ResultIndexed != otherBinder.ResultIndexed
                 || _callingContext != otherBinder._callingContext
                 || _argumentInfo.Length != otherBinder._argumentInfo.Length
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -118,7 +122,8 @@ namespace Microsoft.CSharp.RuntimeBinder
         public override DynamicMetaObject FallbackGetMember(
             DynamicMetaObject target,
             DynamicMetaObject errorSuggestion
-        ) {
+        )
+        {
 #if ENABLECOMBINDER
             DynamicMetaObject com;
             if (ComInterop.ComBinder.TryBindGetMember(this, target, out com, ResultIndexed))

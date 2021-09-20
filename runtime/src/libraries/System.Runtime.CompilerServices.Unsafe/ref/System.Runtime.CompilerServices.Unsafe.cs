@@ -35,7 +35,8 @@ namespace System.Runtime.CompilerServices
         public static bool AreSame<T>(
             [System.Diagnostics.CodeAnalysis.AllowNull] ref T left,
             [System.Diagnostics.CodeAnalysis.AllowNull] ref T right
-        ) {
+        )
+        {
             throw null;
         }
         public unsafe static void* AsPointer<T>(ref T value)
@@ -62,7 +63,8 @@ namespace System.Runtime.CompilerServices
         public static System.IntPtr ByteOffset<T>(
             [System.Diagnostics.CodeAnalysis.AllowNull] ref T origin,
             [System.Diagnostics.CodeAnalysis.AllowNull] ref T target
-        ) {
+        )
+        {
             throw null;
         }
         public static void CopyBlock(ref byte destination, ref byte source, uint byteCount) { }
@@ -90,13 +92,15 @@ namespace System.Runtime.CompilerServices
         public static bool IsAddressGreaterThan<T>(
             [System.Diagnostics.CodeAnalysis.AllowNull] ref T left,
             [System.Diagnostics.CodeAnalysis.AllowNull] ref T right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool IsAddressLessThan<T>(
             [System.Diagnostics.CodeAnalysis.AllowNull] ref T left,
             [System.Diagnostics.CodeAnalysis.AllowNull] ref T right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool IsNullRef<T>(ref T source)

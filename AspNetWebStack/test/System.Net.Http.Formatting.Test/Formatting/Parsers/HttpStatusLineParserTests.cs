@@ -233,7 +233,8 @@ namespace System.Net.Http.Formatting.Parsers
             string statusCode,
             string reasonPhrase,
             bool withLws
-        ) {
+        )
+        {
             const string SP = " ";
             const string HTAB = "\t";
             const string CRLF = "\r\n";
@@ -261,7 +262,8 @@ namespace System.Net.Http.Formatting.Parsers
             byte[] buffer,
             int readsize,
             out int totalBytesConsumed
-        ) {
+        )
+        {
             ParserState state = ParserState.Invalid;
             totalBytesConsumed = 0;
             while (totalBytesConsumed <= buffer.Length)
@@ -288,7 +290,8 @@ namespace System.Net.Http.Formatting.Parsers
             Version version,
             HttpStatusCode statusCode,
             string reasonPhrase
-        ) {
+        )
+        {
             Assert.Equal(version, statusLine.Version);
             Assert.Equal(statusCode, statusLine.StatusCode);
             Assert.Equal(reasonPhrase, statusLine.ReasonPhrase);

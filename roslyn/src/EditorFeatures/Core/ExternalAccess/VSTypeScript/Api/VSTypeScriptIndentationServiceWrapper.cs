@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
             Document document,
             int lineNumber,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var result = await _underlyingObject.GetDesiredIndentation(
                     document,
                     lineNumber,

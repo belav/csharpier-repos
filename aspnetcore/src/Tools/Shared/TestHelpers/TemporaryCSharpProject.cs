@@ -98,7 +98,8 @@ namespace Microsoft.Extensions.Tools.Internal
         public TemporaryCSharpProject WithProjectReference(
             TemporaryCSharpProject reference,
             bool watch = true
-        ) {
+        )
+        {
             if (ReferenceEquals(this, reference))
             {
                 throw new InvalidOperationException("Can add project reference to self");

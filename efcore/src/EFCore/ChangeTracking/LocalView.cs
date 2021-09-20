@@ -155,7 +155,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                     if (
                         args.Action == NotifyCollectionChangedAction.Remove
                         || args.Action == NotifyCollectionChangedAction.Replace
-                    ) {
+                    )
+                    {
                         foreach (TEntity entity in args.OldItems!)
                         {
                             Remove(entity);
@@ -165,7 +166,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                     if (
                         args.Action == NotifyCollectionChangedAction.Add
                         || args.Action == NotifyCollectionChangedAction.Replace
-                    ) {
+                    )
+                    {
                         foreach (TEntity entity in args.NewItems!)
                         {
                             Add(entity);
@@ -218,7 +220,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             if (
                 entry.EntityState == EntityState.Deleted
                 || entry.EntityState == EntityState.Detached
-            ) {
+            )
+            {
                 try
                 {
                     _triggeringStateManagerChange = true;
@@ -259,7 +262,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 var entity in _context.GetDependencies()
                     .StateManager.GetNonDeletedEntities<TEntity>()
                     .ToList()
-            ) {
+            )
+            {
                 Remove(entity);
             }
         }
@@ -288,7 +292,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             foreach (
                 var entity in _context.GetDependencies()
                     .StateManager.GetNonDeletedEntities<TEntity>()
-            ) {
+            )
+            {
                 array[arrayIndex++] = entity;
             }
         }
@@ -340,7 +345,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         private void StateManagerChangedHandler(
             InternalEntityEntry entry,
             EntityState previousState
-        ) {
+        )
+        {
             if (_triggeringStateManagerChange)
             {
                 return;

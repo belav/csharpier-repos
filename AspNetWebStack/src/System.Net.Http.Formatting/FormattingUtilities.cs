@@ -197,7 +197,8 @@ namespace System.Net.Http
                 token.StartsWith("\"", StringComparison.Ordinal)
                 && token.EndsWith("\"", StringComparison.Ordinal)
                 && token.Length > 1
-            ) {
+            )
+            {
                 return token.Substring(1, token.Length - 2);
             }
 

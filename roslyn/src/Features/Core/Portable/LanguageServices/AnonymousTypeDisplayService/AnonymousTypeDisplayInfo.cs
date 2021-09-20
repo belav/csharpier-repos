@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         public static IList<SymbolDisplayPart> ReplaceAnonymousTypes(
             IList<SymbolDisplayPart> parts,
             IDictionary<INamedTypeSymbol, string> anonymousTypeToName
-        ) {
+        )
+        {
             var result = parts;
             for (var i = 0; i < result.Count; i++)
             {
@@ -37,7 +38,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
                     part.Symbol is INamedTypeSymbol type
                     && anonymousTypeToName.TryGetValue(type, out var name)
                     && part.ToString() != name
-                ) {
+                )
+                {
                     result = result == parts ? new List<SymbolDisplayPart>(parts) : result;
                     result[i] = new SymbolDisplayPart(part.Kind, part.Symbol, name);
                 }

@@ -35,7 +35,8 @@ namespace System.Web.Http.ModelBinding
             Stream readStream,
             HttpContent content,
             IFormatterLogger formatterLogger
-        ) {
+        )
+        {
             if (type == null)
             {
                 throw new ArgumentNullException("type");
@@ -60,7 +61,8 @@ namespace System.Web.Http.ModelBinding
             Stream readStream,
             HttpContent content,
             IFormatterLogger formatterLogger
-        ) {
+        )
+        {
             object obj = await base.ReadFromStreamAsync(
                 typeof(FormDataCollection),
                 readStream,

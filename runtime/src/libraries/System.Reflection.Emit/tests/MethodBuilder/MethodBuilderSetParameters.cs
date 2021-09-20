@@ -145,7 +145,8 @@ namespace System.Reflection.Emit.Tests
             ParameterInfo[] parameters,
             Type[] parameterTypes,
             string[] parameterName
-        ) {
+        )
+        {
             if (parameterTypes == null)
             {
                 Assert.Null(parameters);

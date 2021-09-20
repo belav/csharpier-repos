@@ -866,7 +866,8 @@ public class A
             Accessibility declaredAccessibility,
             SpecialType fieldType,
             object value
-        ) {
+        )
+        {
             var field = type.GetMembers(name).SingleOrDefault() as FieldSymbol;
             Assert.NotNull(field);
             Assert.True(field.IsStatic);
@@ -961,7 +962,8 @@ class Properties
             NamedTypeSymbol type,
             bool isFromSource,
             bool importPrivates
-        ) {
+        )
+        {
             Symbol member;
             member = type.GetMembers("Public").SingleOrDefault();
             Assert.NotNull(member);
@@ -1517,7 +1519,8 @@ public class C : I
             Accessibility propertyAccessibility,
             Accessibility getterAccessibility,
             Accessibility setterAccessibility
-        ) {
+        )
+        {
             var type = property.TypeWithAnnotations;
             Assert.NotEqual(Microsoft.Cci.PrimitiveTypeCode.Void, type.PrimitiveTypeCode);
             Assert.Equal(propertyAccessibility, property.DeclaredAccessibility);
@@ -1540,7 +1543,8 @@ public class C : I
             Accessibility propertyAccessibility,
             MethodSymbol accessor,
             Accessibility accessorAccessibility
-        ) {
+        )
+        {
             if (accessor == null)
             {
                 Assert.Equal(Accessibility.NotApplicable, accessorAccessibility);
@@ -1697,7 +1701,8 @@ class C : B<string>
         private static void VerifyAutoPropertyAccessor(
             PropertySymbol property,
             MethodSymbol accessor
-        ) {
+        )
+        {
             if (accessor != null)
             {
                 var method = property.ContainingType.GetMembers(accessor.Name).Single();
@@ -1787,7 +1792,8 @@ class C : B<string>
             NamedTypeSymbol type,
             Accessibility declaredAccessibility,
             SpecialType underlyingType
-        ) {
+        )
+        {
             Assert.Equal(SpecialType.System_Enum, type.BaseType().SpecialType);
             Assert.Equal(type.EnumUnderlyingType.SpecialType, underlyingType);
             Assert.Equal(type.DeclaredAccessibility, declaredAccessibility);

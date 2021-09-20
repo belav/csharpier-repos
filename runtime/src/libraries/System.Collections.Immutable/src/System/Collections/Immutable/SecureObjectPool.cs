@@ -54,7 +54,8 @@ namespace System.Collections.Immutable
             if (
                 caller.PoolUserId != SecureObjectPool.UnassignedId
                 && AllocFreeConcurrentStack<SecurePooledObject<T>>.TryTake(out item)
-            ) {
+            )
+            {
                 item.Owner = caller.PoolUserId;
                 return true;
             }

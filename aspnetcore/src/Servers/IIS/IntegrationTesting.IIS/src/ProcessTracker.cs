@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
             if (
                 !RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
                 || Environment.OSVersion.Version < new Version(6, 2)
-            ) {
+            )
+            {
                 return;
             }
 
@@ -50,7 +51,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
                         extendedInfoPtr,
                         (uint)length
                     )
-                ) {
+                )
+                {
                     throw new Win32Exception();
                 }
             }

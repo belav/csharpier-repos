@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
             Type objectType,
             object existingValue,
             JsonSerializer serializer
-        ) {
+        )
+        {
             var annotatedProblemDetails = serializer.Deserialize<AnnotatedProblemDetails>(reader);
             if (annotatedProblemDetails == null)
             {

@@ -76,7 +76,8 @@ namespace System.Linq.Tests
             int index,
             int indexFromEnd,
             int expected
-        ) {
+        )
+        {
             Assert.Equal(expected, source.ElementAtOrDefault(index));
 
             if (index >= 0)
@@ -94,7 +95,8 @@ namespace System.Linq.Tests
             int index,
             int indexFromEnd,
             int expected
-        ) {
+        )
+        {
             Assert.Equal(expected, source.RunOnce().ElementAtOrDefault(index));
 
             if (index >= 0)

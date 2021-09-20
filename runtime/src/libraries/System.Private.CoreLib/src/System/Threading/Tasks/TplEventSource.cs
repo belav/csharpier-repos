@@ -218,12 +218,14 @@ namespace System.Threading.Tasks
             int CreatingTaskID,
             int TaskCreationOptions,
             int appDomain = DefaultAppDomainID
-        ) {
+        )
+        {
             // IsEnabled() call is an inlined quick check that makes this very fast when provider is off
             if (
                 IsEnabled()
                 && IsEnabled(EventLevel.Informational, Keywords.TaskTransfer | Keywords.Tasks)
-            ) {
+            )
+            {
                 unsafe
                 {
                     EventData* eventPayload = stackalloc EventData[6];
@@ -274,7 +276,8 @@ namespace System.Threading.Tasks
             int OriginatingTaskSchedulerID,
             int OriginatingTaskID, // PFX_COMMON_EVENT_HEADER
             int TaskID
-        ) {
+        )
+        {
             if (IsEnabled(EventLevel.Informational, Keywords.Tasks))
                 WriteEvent(TASKSTARTED_ID, OriginatingTaskSchedulerID, OriginatingTaskID, TaskID);
         }
@@ -306,7 +309,8 @@ namespace System.Threading.Tasks
             int OriginatingTaskID, // PFX_COMMON_EVENT_HEADER
             int TaskID,
             bool IsExceptional
-        ) {
+        )
+        {
             if (IsEnabled() && IsEnabled(EventLevel.Informational, Keywords.Tasks))
             {
                 unsafe
@@ -364,11 +368,13 @@ namespace System.Threading.Tasks
             int TaskID,
             TaskWaitBehavior Behavior,
             int ContinueWithTaskID
-        ) {
+        )
+        {
             if (
                 IsEnabled()
                 && IsEnabled(EventLevel.Informational, Keywords.TaskTransfer | Keywords.Tasks)
-            ) {
+            )
+            {
                 unsafe
                 {
                     EventData* eventPayload = stackalloc EventData[5];
@@ -417,7 +423,8 @@ namespace System.Threading.Tasks
             int OriginatingTaskSchedulerID,
             int OriginatingTaskID, // PFX_COMMON_EVENT_HEADER
             int TaskID
-        ) {
+        )
+        {
             // Log an event if indicated.
             if (IsEnabled() && IsEnabled(EventLevel.Verbose, Keywords.Tasks))
                 WriteEvent(TASKWAITEND_ID, OriginatingTaskSchedulerID, OriginatingTaskID, TaskID);
@@ -479,11 +486,13 @@ namespace System.Threading.Tasks
             int OriginatingTaskSchedulerID,
             int OriginatingTaskID, // PFX_COMMON_EVENT_HEADER
             int ContinueWithTaskId
-        ) {
+        )
+        {
             if (
                 IsEnabled()
                 && IsEnabled(EventLevel.Informational, Keywords.TaskTransfer | Keywords.Tasks)
-            ) {
+            )
+            {
                 unsafe
                 {
                     EventData* eventPayload = stackalloc EventData[3];
@@ -529,7 +538,8 @@ namespace System.Threading.Tasks
         {
             if (
                 IsEnabled() && IsEnabled(EventLevel.Informational, Keywords.AsyncCausalityOperation)
-            ) {
+            )
+            {
                 unsafe
                 {
                     fixed (char* operationNamePtr = OperationName)
@@ -611,7 +621,8 @@ namespace System.Threading.Tasks
             if (
                 IsEnabled()
                 && IsEnabled(EventLevel.Informational, Keywords.AsyncCausalitySynchronousWork)
-            ) {
+            )
+            {
                 unsafe
                 {
                     EventData* eventPayload = stackalloc EventData[1];

@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                 SemanticModel semanticModel,
                 OptionSet optionSet,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (CanSimplifyTupleElementName(node, this.ParseOptions))
                 {
                     return node.WithNameColon(null).WithTriviaFrom(node);
@@ -58,7 +59,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                 SemanticModel semanticModel,
                 OptionSet optionSet,
                 CancellationToken canellationToken
-            ) {
+            )
+            {
                 if (CanSimplifyAnonymousTypeMemberName(node))
                 {
                     return node.WithNameEquals(null).WithTriviaFrom(node);
@@ -86,7 +88,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
 
             public override SyntaxNode VisitAnonymousObjectMemberDeclarator(
                 AnonymousObjectMemberDeclaratorSyntax node
-            ) {
+            )
+            {
                 return SimplifyNode(
                     node,
                     parentNode: node.Parent,

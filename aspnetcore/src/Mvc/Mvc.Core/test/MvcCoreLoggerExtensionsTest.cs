@@ -50,7 +50,8 @@ namespace Microsoft.AspNetCore.Mvc
         public void ExecutingAction_ForControllerAction_WithGivenRouteValues_LogsActionAndRouteData(
             string expectedRouteValuesLogMessage,
             params KeyValuePair<string, string>[] routeValues
-        ) {
+        )
+        {
             // Arrange
             var testSink = new TestSink();
             var loggerFactory = new TestLoggerFactory(testSink, enabled: true);
@@ -85,7 +86,8 @@ namespace Microsoft.AspNetCore.Mvc
         public void ExecutingAction_ForAction_WithGivenRouteValues_LogsActionAndRouteData(
             string expectedRouteValuesLogMessage,
             params KeyValuePair<string, string>[] routeValues
-        ) {
+        )
+        {
             // Arrange
             var testSink = new TestSink();
             var loggerFactory = new TestLoggerFactory(testSink, enabled: true);
@@ -114,7 +116,8 @@ namespace Microsoft.AspNetCore.Mvc
         public void ExecutingAction_ForPage_WithGivenRouteValues_LogsPageAndRouteData(
             string expectedRouteValuesLogMessage,
             params KeyValuePair<string, string>[] routeValues
-        ) {
+        )
+        {
             // Arrange
             var testSink = new TestSink();
             var loggerFactory = new TestLoggerFactory(testSink, enabled: true);

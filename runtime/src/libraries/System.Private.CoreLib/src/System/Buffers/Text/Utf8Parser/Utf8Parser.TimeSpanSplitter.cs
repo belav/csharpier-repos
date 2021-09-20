@@ -36,7 +36,8 @@ namespace System.Buffers.Text
                 ReadOnlySpan<byte> source,
                 bool periodUsedToSeparateDay,
                 out int bytesConsumed
-            ) {
+            )
+            {
                 int srcIndex = 0;
                 byte c = default;
 
@@ -189,7 +190,8 @@ namespace System.Buffers.Text
                         source[srcIndex] == Utf8Constants.Period
                         || source[srcIndex] == Utf8Constants.Colon
                     )
-                ) {
+                )
+                {
                     bytesConsumed = 0;
                     return false;
                 }
@@ -206,7 +208,8 @@ namespace System.Buffers.Text
                 bool neverParseAsFraction,
                 ref int srcIndex,
                 out uint value
-            ) {
+            )
+            {
                 if (srcIndex == source.Length)
                 {
                     value = default;
@@ -239,7 +242,8 @@ namespace System.Buffers.Text
                             out value,
                             out int bytesConsumed
                         )
-                    ) {
+                    )
+                    {
                         value = default;
                         return ComponentParseResult.ParseFailure;
                     }

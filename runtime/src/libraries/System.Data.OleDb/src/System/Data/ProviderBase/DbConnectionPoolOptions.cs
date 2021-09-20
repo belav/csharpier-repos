@@ -20,7 +20,8 @@ namespace System.Data.ProviderBase
             int creationTimeout,
             int loadBalanceTimeout,
             bool hasTransactionAffinity
-        ) {
+        )
+        {
             _poolByIdentity = poolByIdentity;
             _minPoolSize = minPoolSize;
             _maxPoolSize = maxPoolSize;

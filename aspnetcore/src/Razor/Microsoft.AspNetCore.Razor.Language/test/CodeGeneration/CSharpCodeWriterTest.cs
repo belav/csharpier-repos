@@ -87,7 +87,8 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
         [MemberData(nameof(NewLines))]
         public void CSharpCodeWriter_TracksPosition_WithWriteLine_WithNewLineInContent(
             string newLine
-        ) {
+        )
+        {
             // Arrange
             var writer = new CodeWriter();
 

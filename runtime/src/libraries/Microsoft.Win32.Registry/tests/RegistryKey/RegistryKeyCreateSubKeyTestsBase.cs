@@ -11,7 +11,8 @@ namespace Microsoft.Win32.RegistryTests
         protected void Verify_CreateSubKey_KeyExists_OpensKeyWithFixedUpName(
             string expected,
             Func<RegistryKey> createSubKey
-        ) {
+        )
+        {
             CreateTestRegistrySubKey(expected);
 
             using (RegistryKey key = createSubKey())
@@ -25,7 +26,8 @@ namespace Microsoft.Win32.RegistryTests
         protected void Verify_CreateSubKey_KeyDoesNotExist_CreatesKeyWithFixedUpName(
             string expected,
             Func<RegistryKey> createSubKey
-        ) {
+        )
+        {
             Assert.Null(TestRegistryKey.OpenSubKey(expected));
             Assert.Equal(0, TestRegistryKey.SubKeyCount);
 

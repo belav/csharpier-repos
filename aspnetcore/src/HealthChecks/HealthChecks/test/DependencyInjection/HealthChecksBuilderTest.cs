@@ -285,7 +285,8 @@ namespace Microsoft.Extensions.DependencyInjection
             public Task<HealthCheckResult> CheckHealthAsync(
                 HealthCheckContext context,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 throw new System.NotImplementedException();
             }
         }
@@ -305,7 +306,8 @@ namespace Microsoft.Extensions.DependencyInjection
             public Task<HealthCheckResult> CheckHealthAsync(
                 HealthCheckContext context,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 throw new System.NotImplementedException();
             }
         }

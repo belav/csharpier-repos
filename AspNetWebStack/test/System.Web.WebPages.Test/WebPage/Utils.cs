@@ -19,7 +19,8 @@ namespace System.Web.WebPages.Test
             WebPage page,
             StartPage startPage = null,
             HttpRequestBase request = null
-        ) {
+        )
+        {
             var writer = new StringWriter();
 
             // Create an actual dummy HttpContext that has a request object
@@ -38,7 +39,8 @@ namespace System.Web.WebPages.Test
             HttpRequestBase request = null,
             HttpResponseBase response = null,
             IDictionary items = null
-        ) {
+        )
+        {
             items = items ?? new Hashtable();
             request =
                 request
@@ -75,7 +77,8 @@ namespace System.Web.WebPages.Test
         public static string RenderWebPage(
             Action<WebPage> pageExecuteAction,
             string pagePath = "~/index.cshtml"
-        ) {
+        )
+        {
             var page = CreatePage(pageExecuteAction, pagePath);
             return RenderWebPage(page);
         }
@@ -83,7 +86,8 @@ namespace System.Web.WebPages.Test
         public static MockPage CreatePage(
             Action<WebPage> pageExecuteAction,
             string pagePath = "~/index.cshtml"
-        ) {
+        )
+        {
             var page = new MockPage()
             {
                 VirtualPath = pagePath,
@@ -100,7 +104,8 @@ namespace System.Web.WebPages.Test
         public static MockStartPage CreateStartPage(
             Action<StartPage> pageExecuteAction,
             string pagePath = "~/_pagestart.cshtml"
-        ) {
+        )
+        {
             var page = new MockStartPage()
             {
                 VirtualPath = pagePath,
@@ -119,7 +124,8 @@ namespace System.Web.WebPages.Test
             Action<WebPage> subpageExecuteAction,
             string pagePath = "~/index.cshtml",
             string subpagePath = "~/subpage.cshtml"
-        ) {
+        )
+        {
             var page = CreatePage(pageExecuteAction);
             var subPage = CreatePage(subpageExecuteAction, subpagePath);
             var virtualPathFactory = new HashVirtualPathFactory(page, subPage);
@@ -179,7 +185,8 @@ namespace System.Web.WebPages.Test
         /// </summary>
         internal static IVirtualPathFactory AssignObjectFactoriesAndDisplayModeProvider(
             params WebPageExecutingBase[] pages
-        ) {
+        )
+        {
             var objectFactory = new HashVirtualPathFactory(pages);
             var displayModeProvider = new DisplayModeProvider();
             foreach (var item in pages)
@@ -197,7 +204,8 @@ namespace System.Web.WebPages.Test
 
         internal static DisplayModeProvider AssignDisplayModeProvider(
             params WebPageRenderingBase[] pages
-        ) {
+        )
+        {
             var displayModeProvider = new DisplayModeProvider();
             foreach (var item in pages)
             {

@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.Organizing
 
         protected Func<SyntaxNode, IEnumerable<ISyntaxOrganizer>> GetNodeToOrganizers(
             IEnumerable<ISyntaxOrganizer> organizers
-        ) {
+        )
+        {
             var map = new ConcurrentDictionary<Type, IEnumerable<ISyntaxOrganizer>>();
             IEnumerable<ISyntaxOrganizer> getter(Type t1)
             {

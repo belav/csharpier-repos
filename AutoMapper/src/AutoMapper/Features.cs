@@ -51,21 +51,24 @@ namespace AutoMapper.Features
         public static IMapperConfigurationExpression SetFeature(
             this IMapperConfigurationExpression configuration,
             IGlobalFeature feature
-        ) {
+        )
+        {
             configuration.Internal().Features.Set(feature);
             return configuration;
         }
         public static IMappingExpression<TSource, TDestination> SetFeature<TSource, TDestination>(
             this IMappingExpression<TSource, TDestination> mapping,
             IMappingFeature feature
-        ) {
+        )
+        {
             mapping.Features.Set(feature);
             return mapping;
         }
         internal static void Configure(
             this Features<IGlobalFeature> features,
             MapperConfiguration mapperConfiguration
-        ) {
+        )
+        {
             if (features.Count == 0)
             {
                 return;
@@ -78,7 +81,8 @@ namespace AutoMapper.Features
         public static void ReverseTo(
             this Features<IMappingFeature> features,
             Features<IMappingFeature> reversedFeatures
-        ) {
+        )
+        {
             if (features.Count == 0)
             {
                 return;
@@ -106,7 +110,8 @@ namespace AutoMapper.Features
         internal static void Seal(
             this Features<IRuntimeFeature> features,
             IGlobalConfiguration configurationProvider
-        ) {
+        )
+        {
             if (features.Count == 0)
             {
                 return;

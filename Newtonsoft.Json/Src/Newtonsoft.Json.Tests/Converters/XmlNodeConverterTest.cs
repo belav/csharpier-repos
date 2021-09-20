@@ -1251,7 +1251,8 @@ namespace Newtonsoft.Json.Tests.Converters
                     new Utf8StringWriter(builder),
                     new XmlWriterSettings { Indent = indent }
                 )
-            ) {
+            )
+            {
                 doc.Save(writer);
             }
             return builder.ToString();
@@ -1266,7 +1267,8 @@ namespace Newtonsoft.Json.Tests.Converters
                     new Utf8StringWriter(builder),
                     new XmlWriterSettings { Indent = indent }
                 )
-            ) {
+            )
+            {
                 doc.Save(writer);
             }
             return builder.ToString();
@@ -2901,7 +2903,8 @@ namespace Newtonsoft.Json.Tests.Converters
                 Newtonsoft.Json.JsonTextReader reader = new Newtonsoft.Json.JsonTextReader(
                     new System.IO.StreamReader(json)
                 )
-            ) {
+            )
+            {
                 XmlDocument doc = (XmlDocument)serializer.Deserialize(reader, typeof(XmlDocument));
                 if (reader.Read() && reader.TokenType != JsonToken.Comment)
                 {

@@ -238,7 +238,8 @@ namespace Microsoft.AspNetCore.Routing.Template
         internal static int ComputeInboundPrecedenceDigit(
             RoutePattern routePattern,
             RoutePatternPathSegment pathSegment
-        ) {
+        )
+        {
             if (pathSegment.Parts.Count > 1)
             {
                 // Multi-part segments should appear after literal segments and along with parameter segments
@@ -259,7 +260,8 @@ namespace Microsoft.AspNetCore.Routing.Template
                         parameterPart.Name,
                         out var requiredValue
                     ) && !RouteValueEqualityComparer.Default.Equals(requiredValue, string.Empty)
-                ) {
+                )
+                {
                     return 1;
                 }
 

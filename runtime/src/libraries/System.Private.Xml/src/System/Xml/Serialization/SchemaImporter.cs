@@ -32,7 +32,8 @@ namespace System.Xml.Serialization
             XmlSchemas schemas,
             CodeGenerationOptions options,
             ImportContext context
-        ) {
+        )
+        {
             if (!schemas.Contains(XmlSchema.Namespace))
             {
                 schemas.AddReference(XmlSchemas.XsdSchema);
@@ -124,7 +125,8 @@ namespace System.Xml.Serialization
             StructMapping structMapping,
             Type? baseType,
             bool baseTypeCanBeIndirect
-        ) {
+        )
+        {
             structMapping.ReferencedByTopLevelElement = true;
             TypeDesc baseTypeDesc;
             if (baseType != null)

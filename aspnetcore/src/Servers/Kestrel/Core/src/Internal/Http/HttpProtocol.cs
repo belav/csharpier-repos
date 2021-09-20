@@ -535,7 +535,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             bool indexOnly,
             ReadOnlySpan<byte> name,
             ReadOnlySpan<byte> value
-        ) {
+        )
+        {
             IncrementRequestHeadersCount();
             // This method should be overriden in specific implementations and the base should be
             // called to validate the header count.
@@ -684,13 +685,15 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                         !HasResponseStarted
                         && _applicationException == null
                         && _onStarting?.Count > 0
-                    ) {
+                    )
+                    {
                         await FireOnStarting();
                     }
 
                     if (
                         !_connectionAborted && !VerifyResponseContentLength(out var lengthException)
-                    ) {
+                    )
+                    {
                         ReportApplicationError(lengthException);
                     }
                 }
@@ -761,7 +764,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                 // Even for non-keep-alive requests, try to consume the entire body to avoid RSTs.
                 if (
                     !_connectionAborted && _requestRejectedException == null && !messageBody.IsEmpty
-                ) {
+                )
+                {
                     await messageBody.ConsumeAsync();
                 }
 
@@ -808,7 +812,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             static async Task ProcessEvents(
                 HttpProtocol protocol,
                 Stack<KeyValuePair<Func<object, Task>, object>> events
-            ) {
+            )
+            {
                 // Try/Catch is outside the loop as any error that occurs is before the request starts.
                 // So we want to report it as an ApplicationError to fail the request and not process more events.
                 try
@@ -838,7 +843,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             static async Task ProcessEvents(
                 HttpProtocol protocol,
                 Stack<KeyValuePair<Func<object, Task>, object>> events
-            ) {
+            )
+            {
                 // Try/Catch is inside the loop as any error that occurs is after the request has finished.
                 // So we will just log it and keep processing the events, as the completion has already happened.
                 while (events.TryPop(out var entry))
@@ -868,7 +874,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                 && !responseHeaders.HasTransferEncoding
                 && responseHeaders.ContentLength.HasValue
                 && _responseBytesWritten + count > responseHeaders.ContentLength.Value
-            ) {
+            )
+            {
                 _keepAlive = false;
                 ThrowTooManyBytesWritten(count);
             }
@@ -908,7 +915,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                 && !responseHeaders.HasTransferEncoding
                 && responseHeaders.ContentLength.HasValue
                 && _responseBytesWritten == responseHeaders.ContentLength.Value
-            ) {
+            )
+            {
                 PreventRequestAbortedCancellation();
             }
         }
@@ -923,7 +931,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                 && !responseHeaders.HasTransferEncoding
                 && responseHeaders.ContentLength.HasValue
                 && _responseBytesWritten < responseHeaders.ContentLength.Value
-            ) {
+            )
+            {
                 // We need to close the connection if any bytes were written since the client
                 // cannot be certain of how many bytes it will receive.
                 if (_responseBytesWritten > 0)
@@ -961,7 +970,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                     "100-continue",
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 return Output.Write100ContinueAsync();
             }
 
@@ -1169,7 +1179,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                 _keepAlive
                 && hasConnection
                 && (HttpHeaders.ParseConnection(responseHeaders) & ConnectionOptions.KeepAlive) == 0
-            ) {
+            )
+            {
                 _keepAlive = false;
             }
 
@@ -1182,7 +1193,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                 hasTransferEncoding
                 && HttpHeaders.GetFinalTransferCoding(responseHeaders.HeaderTransferEncoding)
                     != TransferCoding.Chunked
-            ) {
+            )
+            {
                 _keepAlive = false;
             }
 
@@ -1572,7 +1584,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
         public ValueTask<FlushResult> WritePipeAsync(
             ReadOnlyMemory<byte> data,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // For the first write, ensure headers are flushed if WriteDataAsync isn't called.
             if (!HasResponseStarted)
             {
@@ -1613,7 +1626,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
         private ValueTask<FlushResult> FirstWriteAsync(
             ReadOnlyMemory<byte> data,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(!HasResponseStarted);
 
             var startingTask = FireOnStarting();
@@ -1629,7 +1643,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             Task initializeTask,
             ReadOnlyMemory<byte> data,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             await initializeTask;
 
             return await FirstWriteAsyncInternal(data, cancellationToken);
@@ -1638,7 +1653,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
         private ValueTask<FlushResult> FirstWriteAsyncInternal(
             ReadOnlyMemory<byte> data,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var responseHeaders = InitializeResponseFirstWrite(data.Length);
 
             if (_canWriteResponseBody)
@@ -1702,7 +1718,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
         private async ValueTask<FlushResult> FlushAsyncAwaited(
             Task initializeTask,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             await initializeTask;
             return await Output.FlushAsync(cancellationToken);
         }
@@ -1710,7 +1727,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
         public Task WriteAsync(
             ReadOnlyMemory<byte> data,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return WritePipeAsync(data, cancellationToken).GetAsTask();
         }
 
@@ -1718,7 +1736,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             Task initializeTask,
             ReadOnlyMemory<byte> data,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             await initializeTask;
 
             // WriteAsyncAwaited is only called for the first write to the body.

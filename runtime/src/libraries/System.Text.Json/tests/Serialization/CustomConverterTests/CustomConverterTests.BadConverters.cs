@@ -24,7 +24,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 throw new SuccessException();
             }
 
@@ -32,7 +33,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 Customer value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 throw new SuccessException();
             }
         }
@@ -233,7 +235,8 @@ namespace System.Text.Json.Serialization.Tests
             public override JsonConverter CreateConverter(
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 return null;
             }
         }
@@ -323,7 +326,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 Assert.Equal(JsonTokenType.StartObject, reader.TokenType);
 
                 reader.Read();
@@ -358,7 +362,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 Level3 value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 if (value.ReadWriteTooMuch)
                 {
                     writer.WriteStartObject();
@@ -531,7 +536,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -539,7 +545,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 ClassWithConverterWithoutPublicEmptyCtor value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }

@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.Editing
         public async Task<DocumentEditor> GetDocumentEditorAsync(
             DocumentId id,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (!_documentEditors.TryGetValue(id, out var editor))
             {
                 editor = await DocumentEditor.CreateAsync(

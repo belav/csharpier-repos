@@ -261,7 +261,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             out ComMethodDesc method,
             Type limitType,
             bool holdsNull
-        ) {
+        )
+        {
             EnsureScanDefinedMethods();
 
             int hresult = GetIDsOfNames(DispatchObject, name, out int dispId);
@@ -375,7 +376,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             int funcIndex,
             out ComTypes.FUNCDESC funcDesc,
             out IntPtr funcDescHandle
-        ) {
+        )
+        {
             IntPtr pFuncDesc;
             typeInfo.GetFuncDesc(funcIndex, out pFuncDesc);
 
@@ -425,7 +427,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                     if (
                         s_cacheComTypeDesc.TryGetValue(typeAttr.guid, out _comTypeDesc)
                         && _comTypeDesc.Events != null
-                    ) {
+                    )
+                    {
                         return;
                     }
                 }
@@ -495,7 +498,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         private static void ScanSourceInterface(
             ComTypes.ITypeInfo sourceTypeInfo,
             ref Dictionary<string, ComEventDesc> events
-        ) {
+        )
+        {
             ComTypes.TYPEATTR sourceTypeAttribute = ComRuntimeHelpers.GetTypeAttrForTypeInfo(
                 sourceTypeInfo
             );
@@ -555,7 +559,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         private static ComTypes.ITypeInfo GetCoClassTypeInfo(
             object rcw,
             ComTypes.ITypeInfo typeInfo
-        ) {
+        )
+        {
             Debug.Assert(typeInfo != null);
 
             if (rcw is IProvideClassInfo provideClassInfo)
@@ -627,7 +632,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                     if (
                         s_cacheComTypeDesc.TryGetValue(typeAttr.guid, out _comTypeDesc)
                         && _comTypeDesc.Funcs != null
-                    ) {
+                    )
+                    {
                         return;
                     }
                 }
@@ -737,7 +743,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             out ComMethodDesc method,
             Type limitType,
             bool holdsNull
-        ) {
+        )
+        {
             EnsureScanDefinedMethods();
 
             if (ComBinderHelpers.PreferPut(limitType, holdsNull))

@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             this Workspace workspace,
             Document newDocument,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var oldSolution = workspace.CurrentSolution;
             var oldDocument = oldSolution.GetRequiredDocument(newDocument.Id);
             var changes = newDocument.GetTextChangesAsync(oldDocument, cancellationToken)
@@ -42,7 +43,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             DocumentId id,
             IEnumerable<TextChange> textChanges,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var oldSolution = workspace.CurrentSolution;
             var newSolution = oldSolution.UpdateDocument(id, textChanges, cancellationToken);
             workspace.TryApplyChanges(newSolution);
@@ -68,7 +70,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             DocumentId id,
             IEnumerable<TextChange> textChanges,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var oldDocument = solution.GetRequiredDocument(id);
             var oldText = oldDocument.GetTextSynchronously(cancellationToken);
             var newText = oldText.WithChanges(textChanges);

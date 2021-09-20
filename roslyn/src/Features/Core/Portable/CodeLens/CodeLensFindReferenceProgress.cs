@@ -51,7 +51,8 @@ namespace Microsoft.CodeAnalysis.CodeLens
             SyntaxNode queriedNode,
             int searchCap,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _queriedSymbol = queriedDefinition;
             _queriedNode = queriedNode;
             _aggregateCancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(
@@ -80,7 +81,8 @@ namespace Microsoft.CodeAnalysis.CodeLens
         private IEnumerable<Location> GetPartialLocations(
             ISymbol symbol,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Returns nodes from source not equal to actual location
             return from syntaxReference in symbol.DeclaringSyntaxReferences
             let candidateSyntaxNode = syntaxReference.GetSyntax(cancellationToken)

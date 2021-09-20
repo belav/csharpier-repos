@@ -25,7 +25,8 @@ namespace System.Security.Cryptography.EcDsa.Tests
             int offset,
             int count,
             HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 

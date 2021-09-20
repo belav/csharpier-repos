@@ -117,7 +117,8 @@ namespace System
             ReadOnlySpan<char> s,
             NumberStyles style = NumberStyles.Integer,
             IFormatProvider? provider = null
-        ) {
+        )
+        {
             NumberFormatInfo.ValidateParseStyleInteger(style);
             return Parse(s, style, NumberFormatInfo.GetInstance(provider));
         }
@@ -161,7 +162,8 @@ namespace System
             NumberStyles style,
             IFormatProvider? provider,
             out byte result
-        ) {
+        )
+        {
             NumberFormatInfo.ValidateParseStyleInteger(style);
 
             if (s == null)
@@ -183,7 +185,8 @@ namespace System
             NumberStyles style,
             IFormatProvider? provider,
             out byte result
-        ) {
+        )
+        {
             NumberFormatInfo.ValidateParseStyleInteger(style);
             return TryParse(s, style, NumberFormatInfo.GetInstance(provider), out result);
         }
@@ -193,11 +196,13 @@ namespace System
             NumberStyles style,
             NumberFormatInfo info,
             out byte result
-        ) {
+        )
+        {
             if (
                 Number.TryParseUInt32(s, style, info, out uint i) != Number.ParsingStatus.OK
                 || i > MaxValue
-            ) {
+            )
+            {
                 result = 0;
                 return false;
             }
@@ -230,7 +235,8 @@ namespace System
             out int charsWritten,
             ReadOnlySpan<char> format = default,
             IFormatProvider? provider = null
-        ) {
+        )
+        {
             return Number.TryFormatUInt32(m_value, format, provider, destination, out charsWritten);
         }
 

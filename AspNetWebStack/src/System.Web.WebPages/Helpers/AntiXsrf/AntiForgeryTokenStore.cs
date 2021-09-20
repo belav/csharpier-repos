@@ -16,7 +16,8 @@ namespace System.Web.Helpers.AntiXsrf
         internal AntiForgeryTokenStore(
             IAntiForgeryConfig config,
             IAntiForgeryTokenSerializer serializer
-        ) {
+        )
+        {
             _config = config;
             _serializer = serializer;
         }

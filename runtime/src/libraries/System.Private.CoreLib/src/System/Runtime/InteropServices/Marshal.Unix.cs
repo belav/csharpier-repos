@@ -38,7 +38,8 @@ namespace System.Runtime.InteropServices
             int bufferLength,
             bool bestFit = false,
             bool throwOnUnmappableChar = false
-        ) {
+        )
+        {
             Debug.Assert(
                 bufferLength >= (s.Length + 1) * SystemMaxDBCSCharSize,
                 "Insufficient buffer length passed to StringToAnsiString"

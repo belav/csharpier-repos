@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.UnitTests
 
         internal static InlineRenameReplacementKind GetExpectedInlineRenameReplacementKind(
             FSharpInlineRenameReplacementKind kind
-        ) {
+        )
+        {
             switch (kind)
             {
                 case FSharpInlineRenameReplacementKind.NoConflict:

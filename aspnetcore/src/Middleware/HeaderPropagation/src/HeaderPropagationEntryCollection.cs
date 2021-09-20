@@ -93,7 +93,8 @@ namespace Microsoft.AspNetCore.HeaderPropagation
             string inboundHeaderName,
             string outboundHeaderName,
             Func<HeaderPropagationContext, StringValues> valueFilter
-        ) {
+        )
+        {
             if (inboundHeaderName == null)
             {
                 throw new ArgumentNullException(nameof(inboundHeaderName));

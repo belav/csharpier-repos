@@ -34,7 +34,8 @@ namespace System.Runtime.CompilerServices
             if (
                 mb.Name == CallSite.CallSiteTargetMethodName
                 && mb.GetType() != s_knownNonDynamicMethodType
-            ) {
+            )
+            {
                 return true;
             }
 

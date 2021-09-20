@@ -129,7 +129,8 @@ namespace Microsoft.Extensions.Logging.EventSource
             int EventId,
             string EventName,
             string FormattedMessage
-        ) {
+        )
+        {
             if (IsEnabled())
             {
                 LoggerName ??= "";
@@ -138,7 +139,8 @@ namespace Microsoft.Extensions.Logging.EventSource
 
                 fixed (char* loggerName = LoggerName)fixed (char* eventName = EventName)fixed (
                     char* formattedMessage = FormattedMessage
-                ) {
+                )
+                {
                     const int eventDataCount = 6;
                     EventData* eventData = stackalloc EventData[eventDataCount];
 
@@ -167,7 +169,8 @@ namespace Microsoft.Extensions.Logging.EventSource
             string EventName,
             ExceptionInfo Exception,
             IEnumerable<KeyValuePair<string, string>> Arguments
-        ) {
+        )
+        {
             if (IsEnabled())
             {
                 WriteEvent(
@@ -197,7 +200,8 @@ namespace Microsoft.Extensions.Logging.EventSource
             int FactoryID,
             string LoggerName,
             IEnumerable<KeyValuePair<string, string>> Arguments
-        ) {
+        )
+        {
             if (IsEnabled())
             {
                 WriteEvent(3, ID, FactoryID, LoggerName, Arguments);
@@ -239,7 +243,8 @@ namespace Microsoft.Extensions.Logging.EventSource
             string ExceptionJson,
             string ArgumentsJson,
             string FormattedMessage
-        ) {
+        )
+        {
             if (IsEnabled())
             {
                 LoggerName ??= "";
@@ -252,7 +257,8 @@ namespace Microsoft.Extensions.Logging.EventSource
                     char* exceptionJson = ExceptionJson
                 )fixed (char* argumentsJson = ArgumentsJson)fixed (
                     char* formattedMessage = FormattedMessage
-                ) {
+                )
+                {
                     const int eventDataCount = 8;
                     EventData* eventData = stackalloc EventData[eventDataCount];
 
@@ -281,7 +287,8 @@ namespace Microsoft.Extensions.Logging.EventSource
             int FactoryID,
             string LoggerName,
             string ArgumentsJson
-        ) {
+        )
+        {
             if (IsEnabled())
             {
                 LoggerName ??= "";
@@ -424,7 +431,8 @@ namespace Microsoft.Extensions.Logging.EventSource
             if (
                 ruleStrings.Length > 0
                 && ruleStrings[0].Equals(UseAppFilters, StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 // Avoid adding default rule to disable event source loggers
                 ruleStringsStartIndex = 1;
             }
@@ -488,7 +496,8 @@ namespace Microsoft.Extensions.Logging.EventSource
             LogLevel defaultLevel,
             string levelString,
             out LogLevel ret
-        ) {
+        )
+        {
             ret = defaultLevel;
 
             if (levelString.Length == 0)
@@ -575,7 +584,8 @@ namespace Microsoft.Extensions.Logging.EventSource
             ref EventData eventData,
             ref T value,
             void* pinnedString = null
-        ) {
+        )
+        {
             if (typeof(T) == typeof(string))
             {
                 string str = value as string;

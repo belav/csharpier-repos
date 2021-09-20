@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                 bool useExplicitInterfaceSymbol,
                 string memberName,
                 ImplementTypePropertyGenerationBehavior propertyGenerationBehavior
-            ) {
+            )
+            {
                 var factory = Document.GetLanguageService<SyntaxGenerator>();
                 var attributesToRemove = AttributesToRemove(compilation);
 
@@ -104,7 +105,8 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                 bool useExplicitInterfaceSymbol,
                 ImplementTypePropertyGenerationBehavior propertyGenerationBehavior,
                 INamedTypeSymbol[] attributesToRemove
-            ) {
+            )
+            {
                 if (property.SetMethod == null)
                 {
                     return null;
@@ -146,7 +148,8 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                 bool useExplicitInterfaceSymbol,
                 ImplementTypePropertyGenerationBehavior propertyGenerationBehavior,
                 INamedTypeSymbol[] attributesToRemove
-            ) {
+            )
+            {
                 if (property.GetMethod == null)
                 {
                     return null;
@@ -178,7 +181,8 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                 IPropertySymbol property,
                 bool generateAbstractly,
                 ImplementTypePropertyGenerationBehavior propertyGenerationBehavior
-            ) {
+            )
+            {
                 if (generateAbstractly)
                     return default;
 
@@ -197,7 +201,8 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                 IPropertySymbol property,
                 bool generateAbstractly,
                 ImplementTypePropertyGenerationBehavior propertyGenerationBehavior
-            ) {
+            )
+            {
                 if (generateAbstractly)
                     return default;
 

@@ -82,7 +82,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             Action<SyntaxNode, T> updater,
             T value,
             bool trackKinds = true
-        ) {
+        )
+        {
             FileCodeModel.EnsureEditor(
                 () =>
                 {

@@ -23,7 +23,8 @@ namespace Microsoft.TestCommon
             Type declaringType,
             string propertyName,
             TestDataVariations testDataVariations = TestCommon.TestDataVariations.All
-        ) {
+        )
+        {
             DeclaringType = declaringType;
             PropertyName = propertyName;
             TestDataVariations = testDataVariations;
@@ -107,7 +108,8 @@ namespace Microsoft.TestCommon
         public override IEnumerable<object[]> GetData(
             MethodInfo methodUnderTest,
             Type[] parameterTypes
-        ) {
+        )
+        {
             IEnumerable<object[]> baseDataSet = GetBaseDataSet(
                 DeclaringType,
                 PropertyName,
@@ -126,7 +128,8 @@ namespace Microsoft.TestCommon
 
         private static IEnumerable<object[]> CrossProduct(
             IEnumerable<IEnumerable<object[]>> datasets
-        ) {
+        )
+        {
             if (datasets.Count() == 1)
             {
                 foreach (var dataset in datasets.First())
@@ -154,7 +157,8 @@ namespace Microsoft.TestCommon
             Type declaringType,
             string propertyName,
             TestDataVariations variations
-        ) {
+        )
+        {
             return TryGetDataSetFromTestDataCollection(declaringType, propertyName, variations)
                 ?? GetDataSet(declaringType, propertyName);
         }
@@ -224,7 +228,8 @@ namespace Microsoft.TestCommon
             Type declaringType,
             string propertyName,
             TestDataVariations variations
-        ) {
+        )
+        {
             object propertyValue = GetTestDataPropertyValue(declaringType, propertyName);
 
             IEnumerable<TestData> testDataCollection = propertyValue as IEnumerable<TestData>;
@@ -237,12 +242,14 @@ namespace Microsoft.TestCommon
         private static IEnumerable<object[]> GetDataSetFromTestDataCollection(
             IEnumerable<TestData> testDataCollection,
             TestDataVariations variations
-        ) {
+        )
+        {
             foreach (TestData testdataInstance in testDataCollection)
             {
                 foreach (
                     TestDataVariations variation in testdataInstance.GetSupportedTestDataVariations()
-                ) {
+                )
+                {
                     if ((variation & variations) == variation)
                     {
                         Type variationType = testdataInstance.GetAsTypeOrNull(variation);

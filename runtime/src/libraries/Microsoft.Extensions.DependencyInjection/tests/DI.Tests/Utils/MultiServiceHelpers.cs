@@ -13,7 +13,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
         public static IEnumerable GetMultiService(
             Type collectionType,
             Func<Type, IEnumerable> getAllServices
-        ) {
+        )
+        {
             if (IsGenericIEnumerable(collectionType))
             {
                 Type serviceType = FirstGenericArgument(collectionType);

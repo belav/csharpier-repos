@@ -107,7 +107,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal static AttributeLocation ToAttributeLocation(
             this Syntax.InternalSyntax.SyntaxToken token
-        ) {
+        )
+        {
             // NOTE: to match dev10, we're using the value text, rather
             // than the actual text.  For example, "@return" is equivalent
             // to "return".

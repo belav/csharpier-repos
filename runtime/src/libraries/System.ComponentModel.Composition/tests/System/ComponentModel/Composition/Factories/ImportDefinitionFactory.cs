@@ -30,7 +30,8 @@ namespace System.ComponentModel.Composition.Factories
         public static ImportDefinition Create(
             string contractName,
             IEnumerable<KeyValuePair<string, Type>> requiredMetadata
-        ) {
+        )
+        {
             return Create(
                 contractName,
                 requiredMetadata,
@@ -45,7 +46,8 @@ namespace System.ComponentModel.Composition.Factories
             ImportCardinality cardinality,
             bool isRecomposable,
             bool isPrerequisite
-        ) {
+        )
+        {
             return Create(
                 contractName,
                 (IEnumerable<KeyValuePair<string, Type>>)null,
@@ -81,7 +83,8 @@ namespace System.ComponentModel.Composition.Factories
             string contractName,
             bool isRecomposable,
             bool isPrerequisite
-        ) {
+        )
+        {
             return Create(
                 contractName,
                 (IEnumerable<KeyValuePair<string, Type>>)null,
@@ -97,7 +100,8 @@ namespace System.ComponentModel.Composition.Factories
             ImportCardinality cardinality,
             bool isRecomposable,
             bool isPrerequisite
-        ) {
+        )
+        {
             return new DerivedContractBasedImportDefinition(
                 contractName,
                 requiredMetadata,
@@ -120,7 +124,8 @@ namespace System.ComponentModel.Composition.Factories
         public static ImportDefinition Create(
             Expression<Func<ExportDefinition, bool>> constraint,
             ImportCardinality cardinality
-        ) {
+        )
+        {
             return Create(constraint, cardinality, true, false);
         }
 
@@ -129,7 +134,8 @@ namespace System.ComponentModel.Composition.Factories
             ImportCardinality cardinality,
             bool isRecomposable,
             bool isPrerequisite
-        ) {
+        )
+        {
             return new DerivedImportDefinition(
                 constraint,
                 cardinality,
@@ -143,7 +149,8 @@ namespace System.ComponentModel.Composition.Factories
             ImportCardinality cardinality,
             bool isRecomposable,
             bool isPrerequisite
-        ) {
+        )
+        {
             return new ContractBasedImportDefinition(
                 contractName,
                 (string)null,

@@ -16,14 +16,16 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static void Verify(
             this IEnumerable<DiagnosticInfo> actual,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             actual.Select(info => new CSDiagnostic(info, NoLocation.Singleton)).Verify(expected);
         }
 
         public static void Verify(
             this ImmutableArray<DiagnosticInfo> actual,
             params DiagnosticDescription[] expected
-        ) {
+        )
+        {
             actual.Select(info => new CSDiagnostic(info, NoLocation.Singleton)).Verify(expected);
         }
 

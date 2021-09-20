@@ -178,7 +178,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
         public void ReceiveAllAsync_MultipleSingleElementEnumerations_AllItemsEnumerated(
             bool sameEnumerable,
             bool dispose
-        ) {
+        )
+        {
             var source = new BufferBlock<int>();
             IAsyncEnumerable<int> enumerable = source.ReceiveAllAsync();
 
@@ -206,7 +207,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
         [InlineData(true)]
         public async Task ReceiveAllAsync_DualConcurrentEnumeration_AllItemsEnumerated(
             bool sameEnumerable
-        ) {
+        )
+        {
             var source = new BufferBlock<int>();
 
             IAsyncEnumerable<int> enumerable = source.ReceiveAllAsync();

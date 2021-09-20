@@ -43,7 +43,8 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
                     () => { },
                     TestServer.FakeServerEndpoint
                 )
-            ) {
+            )
+            {
                 Assert.Equal(0, APICallHistory.WinHttpOptionClientCertContext.Count);
             }
         }
@@ -51,7 +52,8 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
         [Theory, MemberData(nameof(ValidClientCertificates))]
         public void NonSecureRequest_AddValidCertificate_CertificateContextNotSet(
             X509Certificate2 certificate
-        ) {
+        )
+        {
             using (var handler = new WinHttpHandler())
             {
                 handler.ClientCertificates.Add(certificate);
@@ -61,7 +63,8 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
                         () => { },
                         TestServer.FakeServerEndpoint
                     )
-                ) {
+                )
+                {
                     Assert.Equal(0, APICallHistory.WinHttpOptionClientCertContext.Count);
                 }
             }
@@ -77,7 +80,8 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
                     () => { },
                     TestServer.FakeSecureServerEndpoint
                 )
-            ) {
+            )
+            {
                 Assert.Equal(1, APICallHistory.WinHttpOptionClientCertContext.Count);
                 Assert.Equal(IntPtr.Zero, APICallHistory.WinHttpOptionClientCertContext[0]);
             }
@@ -86,7 +90,8 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
         [Theory, MemberData(nameof(ValidClientCertificates))]
         public void SecureRequest_AddValidCertificate_ValidCertificateContextSet(
             X509Certificate2 certificate
-        ) {
+        )
+        {
             using (var handler = new WinHttpHandler())
             {
                 handler.ClientCertificates.Add(certificate);
@@ -96,7 +101,8 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
                         () => { },
                         TestServer.FakeSecureServerEndpoint
                     )
-                ) {
+                )
+                {
                     Assert.Equal(1, APICallHistory.WinHttpOptionClientCertContext.Count);
                     Assert.NotEqual(IntPtr.Zero, APICallHistory.WinHttpOptionClientCertContext[0]);
                 }
@@ -106,7 +112,8 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
         [Theory, MemberData(nameof(InvalidClientCertificates))]
         public void SecureRequest_AddInvalidCertificate_NullCertificateContextSet(
             X509Certificate2 certificate
-        ) {
+        )
+        {
             using (var handler = new WinHttpHandler())
             {
                 handler.ClientCertificates.Add(certificate);
@@ -116,7 +123,8 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
                         () => { },
                         TestServer.FakeSecureServerEndpoint
                     )
-                ) {
+                )
+                {
                     Assert.Equal(1, APICallHistory.WinHttpOptionClientCertContext.Count);
                     Assert.Equal(IntPtr.Zero, APICallHistory.WinHttpOptionClientCertContext[0]);
                 }
@@ -135,7 +143,8 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
                         () => { },
                         TestServer.FakeSecureServerEndpoint
                     )
-                ) {
+                )
+                {
                     Assert.Equal(1, APICallHistory.WinHttpOptionClientCertContext.Count);
                     Assert.Equal(IntPtr.Zero, APICallHistory.WinHttpOptionClientCertContext[0]);
                 }
@@ -156,7 +165,8 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
                         () => { },
                         TestServer.FakeSecureServerEndpoint
                     )
-                ) {
+                )
+                {
                     Assert.Equal(1, APICallHistory.WinHttpOptionClientCertContext.Count);
                     Assert.Equal(IntPtr.Zero, APICallHistory.WinHttpOptionClientCertContext[0]);
                 }
@@ -177,7 +187,8 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
                         () => { },
                         TestServer.FakeSecureServerEndpoint
                     )
-                ) {
+                )
+                {
                     Assert.Equal(1, APICallHistory.WinHttpOptionClientCertContext.Count);
                     Assert.NotEqual(IntPtr.Zero, APICallHistory.WinHttpOptionClientCertContext[0]);
                 }
@@ -199,7 +210,8 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
                         () => { },
                         TestServer.FakeSecureServerEndpoint
                     )
-                ) {
+                )
+                {
                     Assert.Equal(1, APICallHistory.WinHttpOptionClientCertContext.Count);
                     Assert.NotEqual(IntPtr.Zero, APICallHistory.WinHttpOptionClientCertContext[0]);
                 }

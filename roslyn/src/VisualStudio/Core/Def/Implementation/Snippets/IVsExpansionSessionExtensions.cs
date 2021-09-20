@@ -14,7 +14,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             this IVsExpansionSession expansionSession,
             string name,
             [NotNullWhen(true)] out IXMLDOMNode? node
-        ) {
+        )
+        {
             var query = name is null ? null : $@"node()[local-name()=""{name}""]";
 
             IXMLDOMNode? localNode = null;
@@ -24,7 +25,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
                         () => expansionSession.GetHeaderNode(query, out localNode)
                     )
                 )
-            ) {
+            )
+            {
                 node = null;
                 return false;
             }

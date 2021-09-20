@@ -55,7 +55,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public static IReadOnlyList<IProperty> GetNonPrincipalSharedNonPkProperties(
             this IEntityType entityType,
             ITableBase table
-        ) {
+        )
+        {
             var nonPrincipalSharedProperties = new List<IProperty>();
             var principalEntityTypes = new HashSet<IEntityType>();
             PopulatePrincipalEntityTypes(table, entityType, principalEntityTypes);
@@ -72,7 +73,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     && propertyMappings.Any(
                         pm => principalEntityTypes.Contains(pm.TableMapping.EntityType)
                     )
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -85,7 +87,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 ITableBase table,
                 IEntityType entityType,
                 HashSet<IEntityType> entityTypes
-            ) {
+            )
+            {
                 foreach (var linkingFk in table.GetRowInternalForeignKeys(entityType))
                 {
                     entityTypes.Add(linkingFk.PrincipalEntityType);

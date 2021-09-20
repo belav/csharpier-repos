@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
             string expectedOutput = null,
             IEnumerable<MetadataReference> references = null,
             CSharpCompilationOptions options = null
-        ) {
+        )
+        {
             return base.CompileAndVerify(
                 source,
                 expectedOutput: expectedOutput,

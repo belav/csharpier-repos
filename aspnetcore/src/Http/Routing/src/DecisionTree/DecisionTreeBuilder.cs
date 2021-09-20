@@ -75,7 +75,8 @@ namespace Microsoft.AspNetCore.Routing.DecisionTree
         public static DecisionTreeNode<TItem> GenerateTree(
             IReadOnlyList<TItem> items,
             IClassifier<TItem> classifier
-        ) {
+        )
+        {
             var itemCount = items.Count;
             var itemDescriptors = new List<ItemDescriptor<TItem>>(itemCount);
             for (var i = 0; i < itemCount; i++)
@@ -99,7 +100,8 @@ namespace Microsoft.AspNetCore.Routing.DecisionTree
             TreeBuilderContext context,
             DecisionCriterionValueEqualityComparer comparer,
             List<ItemDescriptor<TItem>> items
-        ) {
+        )
+        {
             // The extreme use of generics here is intended to reduce the number of intermediate
             // allocations of wrapper classes. Performance testing found that building these trees allocates
             // significant memory that we can avoid and that it has a real impact on startup.

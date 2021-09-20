@@ -87,7 +87,8 @@ namespace System.Data
                 else if (
                     _dataView.Table.DataSet != null
                     && _dataView.Table.DataSet.Relations.Contains(property)
-                ) {
+                )
+                {
                     return CreateChildView(property);
                 }
                 throw ExceptionBuilder.PropertyNotFound(property, _dataView.Table.TableName);

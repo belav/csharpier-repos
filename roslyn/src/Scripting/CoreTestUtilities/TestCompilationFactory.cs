@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.Scripting
         internal static Compilation CreateCSharpCompilationWithCorlib(
             string source,
             string assemblyName = null
-        ) {
+        )
+        {
             return CSharpCompilation.Create(
                 assemblyName ?? Guid.NewGuid().ToString(),
                 new[] { CSharp.SyntaxFactory.ParseSyntaxTree(source) },
@@ -30,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Scripting
         internal static Compilation CreateVisualBasicCompilationWithCorlib(
             string source,
             string assemblyName = null
-        ) {
+        )
+        {
             return VisualBasicCompilation.Create(
                 assemblyName ?? Guid.NewGuid().ToString(),
                 new[] { VisualBasic.SyntaxFactory.ParseSyntaxTree(source) },
@@ -44,7 +46,8 @@ namespace Microsoft.CodeAnalysis.Scripting
             IEnumerable<MetadataReference> references,
             string assemblyName = null,
             CSharpCompilationOptions options = null
-        ) {
+        )
+        {
             return CSharpCompilation.Create(
                 assemblyName ?? Guid.NewGuid().ToString(),
                 new[] { CSharp.SyntaxFactory.ParseSyntaxTree(source) },

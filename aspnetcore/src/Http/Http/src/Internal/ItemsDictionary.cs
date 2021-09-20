@@ -97,7 +97,8 @@ namespace Microsoft.AspNetCore.Http
         void ICollection<KeyValuePair<object, object?>>.CopyTo(
             KeyValuePair<object, object?>[] array,
             int arrayIndex
-        ) {
+        )
+        {
             if (_items == null)
             {
                 //Delegate to Empty Dictionary to do the argument checking.

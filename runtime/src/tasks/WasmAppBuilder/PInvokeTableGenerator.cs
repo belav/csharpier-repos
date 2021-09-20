@@ -67,7 +67,8 @@ public class PInvokeTableGenerator : Task
                     | BindingFlags.Static
                     | BindingFlags.Instance
             )
-        ) {
+        )
+        {
             if ((method.Attributes & MethodAttributes.PinvokeImpl) != 0)
             {
                 var dllimport = method.CustomAttributes.First(
@@ -103,7 +104,8 @@ public class PInvokeTableGenerator : Task
         StreamWriter w,
         Dictionary<string, string> modules,
         List<PInvoke> pinvokes
-    ) {
+    )
+    {
         w.WriteLine("// GENERATED FILE, DO NOT MODIFY");
         w.WriteLine();
 

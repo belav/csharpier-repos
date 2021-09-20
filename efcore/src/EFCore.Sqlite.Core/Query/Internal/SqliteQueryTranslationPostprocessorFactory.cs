@@ -25,7 +25,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
         public SqliteQueryTranslationPostprocessorFactory(
             QueryTranslationPostprocessorDependencies dependencies,
             RelationalQueryTranslationPostprocessorDependencies relationalDependencies
-        ) {
+        )
+        {
             _dependencies = dependencies;
             _relationalDependencies = relationalDependencies;
         }
@@ -38,7 +39,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
         /// </summary>
         public virtual QueryTranslationPostprocessor Create(
             QueryCompilationContext queryCompilationContext
-        ) {
+        )
+        {
             return new SqliteQueryTranslationPostprocessor(
                 _dependencies,
                 _relationalDependencies,

@@ -319,7 +319,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         public void IsModified_tracks_detects_deletion_of_related_entity(
             bool useExplicitPk,
             CascadeTiming cascadeTiming
-        ) {
+        )
+        {
             using var context = useExplicitPk ? new ExplicitFreezerContext() : new FreezerContext();
 
             context.ChangeTracker.CascadeDeleteTiming = cascadeTiming;
@@ -583,7 +584,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             Cherry cherry2,
             Chunky chunky1,
             Chunky chunky2
-        ) {
+        )
+        {
             cherry1.Chunkies = new List<Chunky> { chunky1, chunky2 };
             cherry2.Chunkies = new List<Chunky>();
 

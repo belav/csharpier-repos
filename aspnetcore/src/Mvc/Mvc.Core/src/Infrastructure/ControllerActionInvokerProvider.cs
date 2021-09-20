@@ -31,14 +31,15 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             ILoggerFactory loggerFactory,
             DiagnosticListener diagnosticListener,
             IActionResultTypeMapper mapper
-        ) : this(
-            controllerActionInvokerCache,
-            optionsAccessor,
-            loggerFactory,
-            diagnosticListener,
-            mapper,
-            null
-        ) { }
+        )
+            : this(
+                controllerActionInvokerCache,
+                optionsAccessor,
+                loggerFactory,
+                diagnosticListener,
+                mapper,
+                null
+            ) { }
 
         public ControllerActionInvokerProvider(
             ControllerActionInvokerCache controllerActionInvokerCache,
@@ -47,7 +48,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             DiagnosticListener diagnosticListener,
             IActionResultTypeMapper mapper,
             IActionContextAccessor? actionContextAccessor
-        ) {
+        )
+        {
             _controllerActionInvokerCache = controllerActionInvokerCache;
             _valueProviderFactories = optionsAccessor.Value.ValueProviderFactories.ToArray();
             _maxModelValidationErrors = optionsAccessor.Value.MaxModelValidationErrors;

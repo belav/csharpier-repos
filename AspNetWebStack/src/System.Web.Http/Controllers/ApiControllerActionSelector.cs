@@ -44,7 +44,8 @@ namespace System.Web.Http.Controllers
 
         public virtual ILookup<string, HttpActionDescriptor> GetActionMapping(
             HttpControllerDescriptor controllerDescriptor
-        ) {
+        )
+        {
             if (controllerDescriptor == null)
             {
                 throw Error.ArgumentNull("controllerDescriptor");
@@ -56,7 +57,8 @@ namespace System.Web.Http.Controllers
 
         private ActionSelectorCacheItem GetInternalSelector(
             HttpControllerDescriptor controllerDescriptor
-        ) {
+        )
+        {
             // Performance-sensitive
 
             // First check in the local fast cache and if not a match then look in the broader
@@ -216,7 +218,8 @@ namespace System.Web.Http.Controllers
                         if (
                             action.MethodInfo.DeclaringType != _controllerDescriptor.ControllerType
                             || !candidate.ActionDescriptor.IsAttributeRouted()
-                        ) {
+                        )
+                        {
                             standardCandidateActions.Add(candidate);
                         }
                     }
@@ -274,7 +277,8 @@ namespace System.Web.Http.Controllers
             private static void ElevateRouteData(
                 HttpControllerContext controllerContext,
                 CandidateActionWithParams selectedCandidate
-            ) {
+            )
+            {
                 controllerContext.RouteData = selectedCandidate.RouteDataSource;
             }
 
@@ -283,7 +287,8 @@ namespace System.Web.Http.Controllers
             private List<CandidateActionWithParams> FindMatchingActions(
                 HttpControllerContext controllerContext,
                 bool ignoreVerbs = false
-            ) {
+            )
+            {
                 // If matched with direct route?
                 IHttpRouteData routeData = controllerContext.RouteData;
                 IEnumerable<IHttpRouteData> subRoutes = routeData.GetSubRoutes();
@@ -328,7 +333,8 @@ namespace System.Web.Http.Controllers
             )]
             private HttpResponseMessage CreateSelectionError(
                 HttpControllerContext controllerContext
-            ) {
+            )
+            {
                 // Check for 405.
                 List<CandidateActionWithParams> actionsFoundByParams = FindMatchingActions(
                     controllerContext,
@@ -353,7 +359,8 @@ namespace System.Web.Http.Controllers
             private static HttpResponseMessage Create405Response(
                 HttpControllerContext controllerContext,
                 IEnumerable<CandidateActionWithParams> allowedCandidates
-            ) {
+            )
+            {
                 HttpMethod incomingMethod = controllerContext.Request.Method;
                 HttpResponseMessage response = controllerContext.Request.CreateErrorResponse(
                     HttpStatusCode.MethodNotAllowed,
@@ -381,7 +388,8 @@ namespace System.Web.Http.Controllers
             // Create a 404
             private HttpResponseMessage CreateActionNotFoundResponse(
                 HttpControllerContext controllerContext
-            ) {
+            )
+            {
                 return controllerContext.Request.CreateErrorResponse(
                     HttpStatusCode.NotFound,
                     Error.Format(
@@ -400,7 +408,8 @@ namespace System.Web.Http.Controllers
             private HttpResponseMessage CreateActionNotFoundResponse(
                 HttpControllerContext controllerContext,
                 string actionName
-            ) {
+            )
+            {
                 return controllerContext.Request.CreateErrorResponse(
                     HttpStatusCode.NotFound,
                     Error.Format(
@@ -420,7 +429,8 @@ namespace System.Web.Http.Controllers
                 HttpControllerContext controllerContext,
                 IEnumerable<IHttpRouteData> subRoutes,
                 bool ignoreVerbs
-            ) {
+            )
+            {
                 HttpRequestMessage request = controllerContext.Request;
                 HttpMethod incomingMethod = controllerContext.Request.Method;
 
@@ -466,7 +476,8 @@ namespace System.Web.Http.Controllers
             private IEnumerable<CandidateActionWithParams> GetInitialCandidateWithParameterListForRegularRoutes(
                 HttpControllerContext controllerContext,
                 bool ignoreVerbs = false
-            ) {
+            )
+            {
                 CandidateAction[] candidates = GetInitialCandidateList(
                     controllerContext,
                     ignoreVerbs
@@ -477,7 +488,8 @@ namespace System.Web.Http.Controllers
             private CandidateAction[] GetInitialCandidateList(
                 HttpControllerContext controllerContext,
                 bool ignoreVerbs = false
-            ) {
+            )
+            {
                 // Initial candidate list is determined by:
                 // - Direct route?
                 // - {action} value?
@@ -551,7 +563,8 @@ namespace System.Web.Http.Controllers
             private static CandidateAction[] FilterIncompatibleVerbs(
                 HttpMethod incomingMethod,
                 CandidateAction[] candidatesFoundByName
-            ) {
+            )
+            {
                 return candidatesFoundByName.Where(
                         candidate =>
                             candidate.ActionDescriptor.SupportedHttpMethods.Contains(incomingMethod)
@@ -568,7 +581,8 @@ namespace System.Web.Http.Controllers
             private static ISet<string> GetCombinedParameterNames(
                 IEnumerable<KeyValuePair<string, string>> queryNameValuePairs,
                 IDictionary<string, object> routeValues
-            ) {
+            )
+            {
                 HashSet<string> routeParameterNames = new HashSet<string>(
                     routeValues.Keys,
                     StringComparer.OrdinalIgnoreCase
@@ -592,7 +606,8 @@ namespace System.Web.Http.Controllers
 
             private List<CandidateActionWithParams> FindActionMatchRequiredRouteAndQueryParameters(
                 IEnumerable<CandidateActionWithParams> candidatesFound
-            ) {
+            )
+            {
                 List<CandidateActionWithParams> matches = new List<CandidateActionWithParams>();
 
                 foreach (var candidate in candidatesFound)
@@ -603,7 +618,8 @@ namespace System.Web.Http.Controllers
                             _actionParameterNames[descriptor],
                             candidate.CombinedParameterNames
                         )
-                    ) {
+                    )
+                    {
                         matches.Add(candidate);
                     }
                 }
@@ -613,7 +629,8 @@ namespace System.Web.Http.Controllers
 
             private List<CandidateActionWithParams> FindActionMatchMostRouteAndQueryParameters(
                 List<CandidateActionWithParams> candidatesFound
-            ) {
+            )
+            {
                 if (candidatesFound.Count > 1)
                 {
                     // select the results that match the most number of required parameters
@@ -633,7 +650,8 @@ namespace System.Web.Http.Controllers
             private static CandidateActionWithParams[] GetCandidateActionsWithBindings(
                 HttpControllerContext controllerContext,
                 CandidateAction[] candidatesFound
-            ) {
+            )
+            {
                 HttpRequestMessage request = controllerContext.Request;
                 var queryNameValuePairs = request.GetQueryNameValuePairs();
                 IHttpRouteData routeData = controllerContext.RouteData;
@@ -654,7 +672,8 @@ namespace System.Web.Http.Controllers
             private static bool IsSubset(
                 string[] actionParameters,
                 ISet<string> routeAndQueryParameters
-            ) {
+            )
+            {
                 foreach (string actionParameter in actionParameters)
                 {
                     if (!routeAndQueryParameters.Contains(actionParameter))
@@ -668,7 +687,8 @@ namespace System.Web.Http.Controllers
 
             private static List<CandidateActionWithParams> RunOrderFilter(
                 List<CandidateActionWithParams> candidatesFound
-            ) {
+            )
+            {
                 if (candidatesFound.Count == 0)
                 {
                     return candidatesFound;
@@ -679,7 +699,8 @@ namespace System.Web.Http.Controllers
 
             private static List<CandidateActionWithParams> RunPrecedenceFilter(
                 List<CandidateActionWithParams> candidatesFound
-            ) {
+            )
+            {
                 if (candidatesFound.Count == 0)
                 {
                     return candidatesFound;
@@ -695,7 +716,8 @@ namespace System.Web.Http.Controllers
                 HttpMethod verb,
                 CandidateAction[][] actionsByVerb,
                 CandidateAction[] otherActions
-            ) {
+            )
+            {
                 // Check cache for common verbs.
                 for (int i = 0; i < _cacheListVerbKinds.Length; i++)
                 {
@@ -717,7 +739,8 @@ namespace System.Web.Http.Controllers
             private static CandidateAction[] FindActionsForVerbWorker(
                 HttpMethod verb,
                 CandidateAction[] candidates
-            ) {
+            )
+            {
                 List<CandidateAction> listCandidates = new List<CandidateAction>();
 
                 FindActionsForVerbWorker(verb, candidates, listCandidates);
@@ -730,13 +753,15 @@ namespace System.Web.Http.Controllers
                 HttpMethod verb,
                 CandidateAction[] candidates,
                 List<CandidateAction> listCandidates
-            ) {
+            )
+            {
                 foreach (CandidateAction candidate in candidates)
                 {
                     if (
                         candidate.ActionDescriptor != null
                         && candidate.ActionDescriptor.SupportedHttpMethods.Contains(verb)
-                    ) {
+                    )
+                    {
                         listCandidates.Add(candidate);
                     }
                 }
@@ -744,7 +769,8 @@ namespace System.Web.Http.Controllers
 
             private static string CreateAmbiguousMatchList(
                 IEnumerable<CandidateActionWithParams> ambiguousCandidates
-            ) {
+            )
+            {
                 StringBuilder exceptionMessageBuilder = new StringBuilder();
                 foreach (CandidateActionWithParams candidate in ambiguousCandidates)
                 {
@@ -756,7 +782,8 @@ namespace System.Web.Http.Controllers
                     if (
                         descriptor.ControllerDescriptor != null
                         && descriptor.ControllerDescriptor.ControllerType != null
-                    ) {
+                    )
+                    {
                         controllerTypeName =
                             descriptor.ControllerDescriptor.ControllerType.FullName;
                     }
@@ -789,7 +816,8 @@ namespace System.Web.Http.Controllers
                 if (
                     methodInfo.GetBaseDefinition()
                         .DeclaringType.IsAssignableFrom(TypeHelper.ApiControllerType)
-                ) {
+                )
+                {
                     // is a method on Object, IHttpController, ApiController
                     return false;
                 }
@@ -815,7 +843,8 @@ namespace System.Web.Http.Controllers
                 CandidateAction candidateAction,
                 ISet<string> parameters,
                 IHttpRouteData routeDataSource
-            ) {
+            )
+            {
                 CandidateAction = candidateAction;
                 CombinedParameterNames = parameters;
                 RouteDataSource = routeDataSource;

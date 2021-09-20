@@ -66,7 +66,8 @@ namespace Microsoft.CodeAnalysis
             AsyncLazy<VersionStamp> lazyLatestDocumentVersion,
             AsyncLazy<VersionStamp> lazyLatestDocumentTopLevelChangeVersion,
             ValueSource<CachingAnalyzerConfigSet> lazyAnalyzerConfigSet
-        ) {
+        )
+        {
             _solutionServices = solutionServices;
             _languageServices = languageServices;
             DocumentStates = documentStates;
@@ -91,7 +92,8 @@ namespace Microsoft.CodeAnalysis
             ProjectInfo projectInfo,
             HostLanguageServices languageServices,
             SolutionServices solutionServices
-        ) {
+        )
+        {
             Contract.ThrowIfNull(projectInfo);
             Contract.ThrowIfNull(languageServices);
             Contract.ThrowIfNull(solutionServices);
@@ -196,7 +198,8 @@ namespace Microsoft.CodeAnalysis
             TextDocumentStates<DocumentState> documentStates,
             TextDocumentStates<TextDocumentState> additionalDocumentStates,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // this may produce a version that is out of sync with the actual Document versions.
             var latestVersion = VersionStamp.Default;
             foreach (var state in documentStates.States)
@@ -227,7 +230,8 @@ namespace Microsoft.CodeAnalysis
             TextDocumentState newDocument,
             TextDocumentStates<DocumentState> newDocumentStates,
             TextDocumentStates<TextDocumentState> newAdditionalDocumentStates
-        ) {
+        )
+        {
             if (_lazyLatestDocumentTopLevelChangeVersion.TryGetValue(out var oldVersion))
             {
                 return new AsyncLazy<VersionStamp>(
@@ -253,7 +257,8 @@ namespace Microsoft.CodeAnalysis
             VersionStamp oldVersion,
             TextDocumentState newDocument,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var newVersion = await newDocument.GetTopLevelChangeTextVersionAsync(cancellationToken)
                 .ConfigureAwait(false);
             return newVersion.GetNewerVersion(oldVersion);
@@ -263,7 +268,8 @@ namespace Microsoft.CodeAnalysis
             TextDocumentStates<DocumentState> documentStates,
             TextDocumentStates<TextDocumentState> additionalDocumentStates,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // this may produce a version that is out of sync with the actual Document versions.
             var latestVersion = VersionStamp.Default;
             foreach (var state in documentStates.States)
@@ -315,7 +321,8 @@ namespace Microsoft.CodeAnalysis
         public async Task<ImmutableDictionary<string, string>> GetAnalyzerOptionsForPathAsync(
             string path,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var configSet = await _lazyAnalyzerConfigSet.GetValueAsync(cancellationToken)
                 .ConfigureAwait(false);
             return configSet.GetOptionsForSourcePath(path).AnalyzerOptions;
@@ -421,7 +428,8 @@ namespace Microsoft.CodeAnalysis
             public override GeneratedKind IsGenerated(
                 SyntaxTree tree,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var options = _lazyAnalyzerConfigSet.GetValue(cancellationToken)
                     .GetOptionsForSourcePath(tree.FilePath);
                 return GeneratedCodeUtilities.GetIsGeneratedCodeFromOptions(
@@ -434,7 +442,8 @@ namespace Microsoft.CodeAnalysis
                 string diagnosticId,
                 CancellationToken cancellationToken,
                 out ReportDiagnostic severity
-            ) {
+            )
+            {
                 var options = _lazyAnalyzerConfigSet.GetValue(cancellationToken)
                     .GetOptionsForSourcePath(tree.FilePath);
                 return options.TreeOptions.TryGetValue(diagnosticId, out severity);
@@ -444,7 +453,8 @@ namespace Microsoft.CodeAnalysis
                 string diagnosticId,
                 CancellationToken cancellationToken,
                 out ReportDiagnostic severity
-            ) {
+            )
+            {
                 var options =
                     _lazyAnalyzerConfigSet.GetValue(cancellationToken).GlobalConfigOptions;
                 return options.TreeOptions.TryGetValue(diagnosticId, out severity);
@@ -461,7 +471,8 @@ namespace Microsoft.CodeAnalysis
 
         private static ValueSource<CachingAnalyzerConfigSet> ComputeAnalyzerConfigSetValueSource(
             TextDocumentStates<AnalyzerConfigDocumentState> analyzerConfigDocumentStates
-        ) {
+        )
+        {
             return new AsyncLazy<CachingAnalyzerConfigSet>(
                 asynchronousComputeFunction: async cancellationToken =>
                 {
@@ -491,7 +502,8 @@ namespace Microsoft.CodeAnalysis
 
         public async Task<VersionStamp> GetSemanticVersionAsync(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var docVersion = await _lazyLatestDocumentTopLevelChangeVersion.GetValueAsync(
                     cancellationToken
                 )
@@ -582,7 +594,8 @@ namespace Microsoft.CodeAnalysis
             AsyncLazy<VersionStamp>? latestDocumentVersion = null,
             AsyncLazy<VersionStamp>? latestDocumentTopLevelChangeVersion = null,
             ValueSource<CachingAnalyzerConfigSet>? analyzerConfigSet = null
-        ) {
+        )
+        {
             return new ProjectState(
                 projectInfo ?? _projectInfo,
                 _languageServices,
@@ -751,7 +764,8 @@ namespace Microsoft.CodeAnalysis
 
         public ProjectState WithMetadataReferences(
             IReadOnlyList<MetadataReference> metadataReferences
-        ) {
+        )
+        {
             if (metadataReferences == MetadataReferences)
             {
                 return this;
@@ -765,7 +779,8 @@ namespace Microsoft.CodeAnalysis
 
         public ProjectState WithAnalyzerReferences(
             IEnumerable<AnalyzerReference> analyzerReferences
-        ) {
+        )
+        {
             if (analyzerReferences == AnalyzerReferences)
             {
                 return this;
@@ -799,7 +814,8 @@ namespace Microsoft.CodeAnalysis
 
         public ProjectState AddAnalyzerConfigDocuments(
             ImmutableArray<AnalyzerConfigDocumentState> documents
-        ) {
+        )
+        {
             Debug.Assert(!documents.Any(d => AnalyzerConfigDocumentStates.Contains(d.Id)));
 
             var newAnalyzerConfigDocumentStates = AnalyzerConfigDocumentStates.AddRange(documents);
@@ -809,7 +825,8 @@ namespace Microsoft.CodeAnalysis
 
         private ProjectState CreateNewStateForChangedAnalyzerConfigDocuments(
             TextDocumentStates<AnalyzerConfigDocumentState> newAnalyzerConfigDocumentStates
-        ) {
+        )
+        {
             var newAnalyzerConfigSet = ComputeAnalyzerConfigSetValueSource(
                 newAnalyzerConfigDocumentStates
             );
@@ -874,7 +891,8 @@ namespace Microsoft.CodeAnalysis
             DocumentState newDocument,
             bool textChanged,
             bool recalculateDependentVersions
-        ) {
+        )
+        {
             var oldDocument = DocumentStates.GetRequiredState(newDocument.Id);
             if (oldDocument == newDocument)
             {
@@ -904,7 +922,8 @@ namespace Microsoft.CodeAnalysis
             TextDocumentState newDocument,
             bool textChanged,
             bool recalculateDependentVersions
-        ) {
+        )
+        {
             var oldDocument = AdditionalDocumentStates.GetRequiredState(newDocument.Id);
             if (oldDocument == newDocument)
             {
@@ -968,7 +987,8 @@ namespace Microsoft.CodeAnalysis
             bool textChanged,
             out AsyncLazy<VersionStamp> dependentDocumentVersion,
             out AsyncLazy<VersionStamp> dependentSemanticVersion
-        ) {
+        )
+        {
             var recalculateDocumentVersion = false;
             var recalculateSemanticVersion = false;
 
@@ -979,7 +999,8 @@ namespace Microsoft.CodeAnalysis
                     if (
                         !_lazyLatestDocumentVersion.TryGetValue(out var documentVersion)
                         || documentVersion == oldVersion
-                    ) {
+                    )
+                    {
                         recalculateDocumentVersion = true;
                     }
 
@@ -988,7 +1009,8 @@ namespace Microsoft.CodeAnalysis
                             out var semanticVersion
                         )
                         || semanticVersion == oldVersion
-                    ) {
+                    )
+                    {
                         recalculateSemanticVersion = true;
                     }
                 }

@@ -21,7 +21,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             int maxIdentifierLength,
             ProviderConventionSetBuilderDependencies dependencies,
             RelationalConventionSetBuilderDependencies relationalDependencies
-        ) {
+        )
+        {
             MaxIdentifierLength = maxIdentifierLength;
             Dependencies = dependencies;
         }
@@ -44,7 +45,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessModelInitialized(
             IConventionModelBuilder modelBuilder,
             IConventionContext<IConventionModelBuilder> context
-        ) {
+        )
+        {
             modelBuilder.Metadata.Builder.HasMaxIdentifierLength(MaxIdentifierLength);
         }
     }

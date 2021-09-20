@@ -16,7 +16,8 @@ namespace System.IO.Tests
             WatcherChangeTypes changeType,
             string directory,
             string name
-        ) {
+        )
+        {
             FileSystemEventArgs args = new FileSystemEventArgs(changeType, directory, name);
 
             if (
@@ -24,7 +25,8 @@ namespace System.IO.Tests
                     Path.DirectorySeparatorChar.ToString(),
                     StringComparison.Ordinal
                 )
-            ) {
+            )
+            {
                 directory += Path.DirectorySeparatorChar;
             }
 

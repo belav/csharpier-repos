@@ -27,7 +27,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         public LegacyDiagnosticItemSourceProvider(
             [Import(typeof(AnalyzersCommandHandler))] IAnalyzersCommandHandler commandHandler,
             IDiagnosticAnalyzerService diagnosticAnalyzerService
-        ) {
+        )
+        {
             _commandHandler = commandHandler;
             _diagnosticAnalyzerService = diagnosticAnalyzerService;
         }
@@ -35,7 +36,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         protected override IAttachedCollectionSource? CreateCollectionSource(
             AnalyzerItem item,
             string relationshipName
-        ) {
+        )
+        {
             if (relationshipName == KnownRelationships.Contains)
             {
                 return new LegacyDiagnosticItemSource(

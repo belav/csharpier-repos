@@ -31,7 +31,8 @@ namespace System.Web.Mvc.Html
         public static MvcHtmlString ValueFor<TModel, TProperty>(
             this HtmlHelper<TModel> html,
             Expression<Func<TModel, TProperty>> expression
-        ) {
+        )
+        {
             return ValueFor(html, expression, format: null);
         }
 
@@ -44,7 +45,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper<TModel> html,
             Expression<Func<TModel, TProperty>> expression,
             string format
-        ) {
+        )
+        {
             ModelMetadata metadata = ModelMetadata.FromLambdaExpression(expression, html.ViewData);
             return ValueForHelper(
                 html,
@@ -71,7 +73,8 @@ namespace System.Web.Mvc.Html
             object value,
             string format,
             bool useViewData
-        ) {
+        )
+        {
             string fullName = html.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(name);
             string attemptedValue = (string)html.GetModelStateValue(fullName, typeof(string));
             string resolvedValue;

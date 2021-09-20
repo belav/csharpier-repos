@@ -143,7 +143,8 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
             TimeSpan timeout,
             AsyncCallback callback,
             object state
-        ) {
+        )
+        {
             return new OpenAsyncResult(
                 InnerChannelListener,
                 _sharedInnerListener,
@@ -171,7 +172,8 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
             TimeSpan timeout,
             AsyncCallback callback,
             object state
-        ) {
+        )
+        {
             OnCloseOrAbort();
             return new CloseAsyncResult(
                 InnerChannelListener,

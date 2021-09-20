@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.CookiePolicy
             CookiePolicyOptions options,
             IResponseCookiesFeature feature,
             ILogger logger
-        ) {
+        )
+        {
             Context = context;
             Feature = feature;
             Options = options;

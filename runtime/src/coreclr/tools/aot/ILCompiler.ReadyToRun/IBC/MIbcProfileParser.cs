@@ -32,7 +32,8 @@ namespace ILCompiler.IBC
             }
             TypeSystemEntityOrUnknown IPgoSchemaDataLoader<TypeSystemEntityOrUnknown>.TypeFromLong(
                 long token
-            ) {
+            )
+            {
                 try
                 {
                     if (token == 0)
@@ -93,7 +94,8 @@ namespace ILCompiler.IBC
                                 leaveOpen: false,
                                 entryNameEncoding: null
                             )
-                        ) {
+                        )
+                        {
                             disposeOnException = false;
                             var mibcDataEntry = zipFile.GetEntry(
                                 Path.GetFileName(filename) + ".dll"
@@ -153,7 +155,8 @@ namespace ILCompiler.IBC
             PEReader peReader,
             HashSet<string> assemblyNamesInVersionBubble,
             string onlyDefinedInAssembly
-        ) {
+        )
+        {
             var mibcModule = EcmaModule.Create(
                 tsc,
                 peReader,
@@ -273,7 +276,8 @@ namespace ILCompiler.IBC
         static IEnumerable<MethodProfileData> ReadMIbcGroup(
             TypeSystemContext tsc,
             EcmaMethod method
-        ) {
+        )
+        {
             EcmaMethodIL ilBody = EcmaMethodIL.Create(method);
             MetadataLoaderForPgoData metadataLoader = new MetadataLoaderForPgoData(ilBody);
             ILReader ilReader = new ILReader(ilBody.GetILBytes());
@@ -574,7 +578,8 @@ namespace ILCompiler.IBC
                     string nameSpace,
                     string name,
                     NotFoundBehavior notFoundBehavior
-                ) {
+                )
+                {
                     TypeSystemContext context = Context;
 
                     if (
@@ -637,7 +642,8 @@ namespace ILCompiler.IBC
                 IAssemblyDesc referencingModule,
                 string fileName,
                 bool throwIfNotFound
-            ) {
+            )
+            {
                 return _wrappedResolver.ResolveModule(referencingModule, fileName, throwIfNotFound);
             }
         }

@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     {
         ImmutableArray<Cci.IMetadataExpression> Cci.ICustomAttribute.GetArguments(
             EmitContext context
-        ) {
+        )
+        {
             var commonArgs = this.CommonConstructorArguments;
             if (commonArgs.IsEmpty)
             {
@@ -37,7 +38,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         Cci.IMethodReference Cci.ICustomAttribute.Constructor(
             EmitContext context,
             bool reportDiagnostics
-        ) {
+        )
+        {
             if (this.AttributeConstructor.IsDefaultValueTypeConstructor())
             {
                 // Parameter constructors for structs exist in symbol table, but are not emitted.
@@ -66,7 +68,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         ImmutableArray<Cci.IMetadataNamedArgument> Cci.ICustomAttribute.GetNamedArguments(
             EmitContext context
-        ) {
+        )
+        {
             var commonArgs = this.CommonNamedArguments;
             if (commonArgs.IsEmpty)
             {
@@ -111,7 +114,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private Cci.IMetadataExpression CreateMetadataExpression(
             TypedConstant argument,
             EmitContext context
-        ) {
+        )
+        {
             if (argument.IsNull)
             {
                 return CreateMetadataConstant(argument.TypeInternal, null, context);
@@ -188,7 +192,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ITypeSymbolInternal type,
             object value,
             EmitContext context
-        ) {
+        )
+        {
             PEModuleBuilder moduleBeingBuilt = (PEModuleBuilder)context.Module;
             return moduleBeingBuilt.CreateConstant(
                 (TypeSymbol)type,
@@ -202,7 +207,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             string name,
             TypedConstant argument,
             EmitContext context
-        ) {
+        )
+        {
             var symbol = LookupName(name);
             var value = CreateMetadataExpression(argument, context);
             TypeSymbol type;

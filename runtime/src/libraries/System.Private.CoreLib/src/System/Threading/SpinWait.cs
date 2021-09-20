@@ -184,7 +184,8 @@ namespace System.Threading
                         || (_count - YieldThreshold) % 2 == 0
                     )
                 ) || Environment.IsSingleProcessor
-            ) {
+            )
+            {
                 //
                 // We must yield.
                 //

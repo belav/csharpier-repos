@@ -14,7 +14,8 @@ namespace System.Text.Json
             ReadOnlySpan<byte> utf8Source,
             int idx,
             [NotNullWhen(true)] out byte[]? bytes
-        ) {
+        )
+        {
             byte[]? unescapedArray = null;
 
             Span<byte> utf8Unescaped =
@@ -102,7 +103,8 @@ namespace System.Text.Json
         public static bool UnescapeAndCompare(
             ReadOnlySpan<byte> utf8Source,
             ReadOnlySpan<byte> other
-        ) {
+        )
+        {
             Debug.Assert(
                 utf8Source.Length >= other.Length
                     && utf8Source.Length / JsonConstants.MaxExpansionFactorWhileEscaping
@@ -136,7 +138,8 @@ namespace System.Text.Json
         public static bool UnescapeAndCompare(
             ReadOnlySequence<byte> utf8Source,
             ReadOnlySpan<byte> other
-        ) {
+        )
+        {
             Debug.Assert(!utf8Source.IsSingleSegment);
             Debug.Assert(
                 utf8Source.Length >= other.Length
@@ -185,7 +188,8 @@ namespace System.Text.Json
         public static bool TryDecodeBase64InPlace(
             Span<byte> utf8Unescaped,
             [NotNullWhen(true)] out byte[]? bytes
-        ) {
+        )
+        {
             OperationStatus status = Base64.DecodeFromUtf8InPlace(
                 utf8Unescaped,
                 out int bytesWritten
@@ -202,7 +206,8 @@ namespace System.Text.Json
         public static bool TryDecodeBase64(
             ReadOnlySpan<byte> utf8Unescaped,
             [NotNullWhen(true)] out byte[]? bytes
-        ) {
+        )
+        {
             byte[]? pooledArray = null;
 
             Span<byte> byteSpan =
@@ -359,7 +364,8 @@ namespace System.Text.Json
             Span<byte> destination,
             int idx,
             out int written
-        ) {
+        )
+        {
             Debug.Assert(idx >= 0 && idx < source.Length);
             Debug.Assert(source[idx] == JsonConstants.BackSlash);
             Debug.Assert(destination.Length >= source.Length);
@@ -429,7 +435,8 @@ namespace System.Text.Json
                                 JsonConstants.HighSurrogateStartValue,
                                 JsonConstants.LowSurrogateEndValue
                             )
-                        ) {
+                        )
+                        {
                             // The first hex value cannot be a low surrogate.
                             if (scalar >= JsonConstants.LowSurrogateStartValue)
                             {
@@ -451,7 +458,8 @@ namespace System.Text.Json
                                 source.Length < idx + 4
                                 || source[idx - 2] != '\\'
                                 || source[idx - 1] != 'u'
-                            ) {
+                            )
+                            {
                                 ThrowHelper.ThrowInvalidOperationException_ReadInvalidUTF16();
                             }
 
@@ -473,7 +481,8 @@ namespace System.Text.Json
                                     JsonConstants.LowSurrogateStartValue,
                                     JsonConstants.LowSurrogateEndValue
                                 )
-                            ) {
+                            )
+                            {
                                 ThrowHelper.ThrowInvalidOperationException_ReadInvalidUTF16(
                                     lowSurrogate
                                 );
@@ -522,7 +531,8 @@ namespace System.Text.Json
             uint scalar,
             Span<byte> utf8Destination,
             out int bytesWritten
-        ) {
+        )
+        {
             Debug.Assert(JsonHelpers.IsValidUnicodeScalar(scalar));
             Debug.Assert(utf8Destination.Length >= 4);
 

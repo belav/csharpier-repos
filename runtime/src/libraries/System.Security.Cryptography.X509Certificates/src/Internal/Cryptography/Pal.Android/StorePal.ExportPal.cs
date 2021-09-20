@@ -40,7 +40,8 @@ namespace Internal.Cryptography.Pal
             protected override byte[] ExportPkcs8(
                 ICertificatePalCore certificatePal,
                 ReadOnlySpan<char> password
-            ) {
+            )
+            {
                 Debug.Assert(certificatePal.HasPrivateKey);
                 SafeKeyHandle? privateKey =
                     ((AndroidCertificatePal)certificatePal).PrivateKeyHandle;

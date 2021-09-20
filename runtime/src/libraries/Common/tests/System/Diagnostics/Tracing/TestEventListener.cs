@@ -27,7 +27,8 @@ namespace System.Diagnostics.Tracing
             string targetSourceName,
             EventLevel level,
             double? eventCounterInterval = null
-        ) {
+        )
+        {
             _eventCounterInterval = eventCounterInterval;
             AddSource(targetSourceName, level);
         }
@@ -36,7 +37,8 @@ namespace System.Diagnostics.Tracing
             Guid targetSourceGuid,
             EventLevel level,
             double? eventCounterInterval = null
-        ) {
+        )
+        {
             _eventCounterInterval = eventCounterInterval;
             AddSource(targetSourceGuid, level);
         }
@@ -136,7 +138,8 @@ namespace System.Diagnostics.Tracing
         public async Task RunWithCallbackAsync(
             Action<EventWrittenEventArgs> handler,
             Func<Task> body
-        ) {
+        )
+        {
             _eventWritten = handler;
             try
             {

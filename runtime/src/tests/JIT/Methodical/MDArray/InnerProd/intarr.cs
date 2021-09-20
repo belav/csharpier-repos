@@ -53,7 +53,8 @@ public class intmm
         ref int[][] b,
         int row,
         int col
-    ) {
+    )
+    {
         int i;
         res = 0;
         i = 0;

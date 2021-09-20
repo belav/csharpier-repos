@@ -40,7 +40,8 @@ namespace System.Runtime.InteropServices.Tests
         public void GetExceptionForHR_ErrorInfo_ReturnsValidException(
             int errorCode,
             IntPtr errorInfo
-        ) {
+        )
+        {
             ClearCurrentIErrorInfo();
 
             Exception ex = Assert.IsType<COMException>(

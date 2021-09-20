@@ -31,7 +31,8 @@ namespace AutoMapper.Internal
             MemberInfo member,
             object source,
             object destination = null
-        ) {
+        )
+        {
             var memberType = GetMemberType(member);
             var destValue = destination == null ? null : GetMemberValue(member, destination);
             return context.Map(source, destValue, null, memberType, MemberMap.Instance);
@@ -40,7 +41,8 @@ namespace AutoMapper.Internal
             this MemberInfo propertyOrField,
             object target,
             object value
-        ) {
+        )
+        {
             if (propertyOrField is PropertyInfo property)
             {
                 property.SetValue(target, value, null);

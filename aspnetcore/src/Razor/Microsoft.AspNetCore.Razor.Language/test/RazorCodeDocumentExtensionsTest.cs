@@ -725,7 +725,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             string basePath,
             string relativePath,
             string expectedNamespace
-        ) {
+        )
+        {
             // Arrange
             var sourceDocument = TestRazorSourceDocument.Create(
                 filePath: Path.Combine(basePath, relativePath),

@@ -64,7 +64,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         public async override Task<InputFormatterResult> ReadRequestBodyAsync(
             InputFormatterContext context,
             Encoding encoding
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -81,7 +82,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 if (
                     result.Model is IJsonPatchDocument jsonPatchDocument
                     && SerializerSettings.ContractResolver is not null
-                ) {
+                )
+                {
                     jsonPatchDocument.ContractResolver = SerializerSettings.ContractResolver;
                 }
             }

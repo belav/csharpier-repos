@@ -47,7 +47,8 @@ namespace System.Xml
             byte[] localNameBuffer,
             int localNameOffset,
             int localNameLength
-        ) {
+        )
+        {
             WriteStartElement(
                 Encoding.UTF8.GetString(prefixBuffer, prefixOffset, prefixLength),
                 Encoding.UTF8.GetString(localNameBuffer, localNameOffset, localNameLength)
@@ -71,7 +72,8 @@ namespace System.Xml
             byte[] localNameBuffer,
             int localNameOffset,
             int localNameLength
-        ) {
+        )
+        {
             WriteEndElement(
                 Encoding.UTF8.GetString(prefixBuffer, prefixOffset, prefixLength),
                 Encoding.UTF8.GetString(localNameBuffer, localNameOffset, localNameLength)
@@ -85,7 +87,8 @@ namespace System.Xml
             byte[] nsBuffer,
             int nsOffset,
             int nsLength
-        ) {
+        )
+        {
             WriteXmlnsAttribute(
                 Encoding.UTF8.GetString(prefixBuffer, prefixOffset, prefixLength),
                 Encoding.UTF8.GetString(nsBuffer, nsOffset, nsLength)
@@ -100,7 +103,8 @@ namespace System.Xml
             byte[] localNameBuffer,
             int localNameOffset,
             int localNameLength
-        ) {
+        )
+        {
             WriteStartAttribute(
                 Encoding.UTF8.GetString(prefixBuffer, prefixOffset, prefixLength),
                 Encoding.UTF8.GetString(localNameBuffer, localNameOffset, localNameLength)
@@ -148,7 +152,8 @@ namespace System.Xml
             byte[] buffer,
             int offset,
             int count
-        ) {
+        )
+        {
             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(NotImplemented.ByDesign);
         }
         public abstract void WriteQualifiedName(string prefix, XmlDictionaryString localName);

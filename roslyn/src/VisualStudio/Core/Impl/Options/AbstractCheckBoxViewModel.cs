@@ -34,7 +34,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             string truePreview,
             string falsePreview,
             AbstractOptionPreviewViewModel info
-        ) {
+        )
+        {
             _truePreview = truePreview;
             _falsePreview = falsePreview;
 

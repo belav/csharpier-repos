@@ -628,7 +628,8 @@ namespace System.Drawing
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Drawing.Color FromArgb(int argb)
@@ -945,7 +946,8 @@ namespace System.Drawing
         }
         public override readonly bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public override readonly int GetHashCode()
@@ -957,7 +959,8 @@ namespace System.Drawing
         public static System.Drawing.Point operator +(
             System.Drawing.Point pt,
             System.Drawing.Size sz
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator ==(System.Drawing.Point left, System.Drawing.Point right)
@@ -979,7 +982,8 @@ namespace System.Drawing
         public static System.Drawing.Point operator -(
             System.Drawing.Point pt,
             System.Drawing.Size sz
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Drawing.Point Round(System.Drawing.PointF value)
@@ -1040,7 +1044,8 @@ namespace System.Drawing
         }
         public override readonly bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public override readonly int GetHashCode()
@@ -1058,13 +1063,15 @@ namespace System.Drawing
         public static System.Drawing.PointF operator +(
             System.Drawing.PointF pt,
             System.Drawing.Size sz
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Drawing.PointF operator +(
             System.Drawing.PointF pt,
             System.Drawing.SizeF sz
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator ==(System.Drawing.PointF left, System.Drawing.PointF right)
@@ -1078,25 +1085,29 @@ namespace System.Drawing
         public static System.Drawing.PointF operator -(
             System.Drawing.PointF pt,
             System.Drawing.Size sz
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Drawing.PointF operator -(
             System.Drawing.PointF pt,
             System.Drawing.SizeF sz
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Drawing.PointF Subtract(
             System.Drawing.PointF pt,
             System.Drawing.Size sz
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Drawing.PointF Subtract(
             System.Drawing.PointF pt,
             System.Drawing.SizeF sz
-        ) {
+        )
+        {
             throw null;
         }
         public override readonly string ToString()
@@ -1202,7 +1213,8 @@ namespace System.Drawing
         }
         public override readonly bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Drawing.Rectangle FromLTRB(int left, int top, int right, int bottom)
@@ -1223,7 +1235,8 @@ namespace System.Drawing
         public static System.Drawing.Rectangle Intersect(
             System.Drawing.Rectangle a,
             System.Drawing.Rectangle b
-        ) {
+        )
+        {
             throw null;
         }
         public readonly bool IntersectsWith(System.Drawing.Rectangle rect)
@@ -1235,13 +1248,15 @@ namespace System.Drawing
         public static bool operator ==(
             System.Drawing.Rectangle left,
             System.Drawing.Rectangle right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Drawing.Rectangle left,
             System.Drawing.Rectangle right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Drawing.Rectangle Round(System.Drawing.RectangleF value)
@@ -1259,7 +1274,8 @@ namespace System.Drawing
         public static System.Drawing.Rectangle Union(
             System.Drawing.Rectangle a,
             System.Drawing.Rectangle b
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1354,7 +1370,8 @@ namespace System.Drawing
         }
         public override readonly bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Drawing.RectangleF FromLTRB(
@@ -1362,7 +1379,8 @@ namespace System.Drawing
             float top,
             float right,
             float bottom
-        ) {
+        )
+        {
             throw null;
         }
         public override readonly int GetHashCode()
@@ -1373,7 +1391,8 @@ namespace System.Drawing
             System.Drawing.RectangleF rect,
             float x,
             float y
-        ) {
+        )
+        {
             throw null;
         }
         public void Inflate(System.Drawing.SizeF size) { }
@@ -1382,7 +1401,8 @@ namespace System.Drawing
         public static System.Drawing.RectangleF Intersect(
             System.Drawing.RectangleF a,
             System.Drawing.RectangleF b
-        ) {
+        )
+        {
             throw null;
         }
         public readonly bool IntersectsWith(System.Drawing.RectangleF rect)
@@ -1402,7 +1422,8 @@ namespace System.Drawing
         public static bool operator ==(
             System.Drawing.RectangleF left,
             System.Drawing.RectangleF right
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Drawing.RectangleF(System.Drawing.Rectangle r)
@@ -1412,7 +1433,8 @@ namespace System.Drawing
         public static bool operator !=(
             System.Drawing.RectangleF left,
             System.Drawing.RectangleF right
-        ) {
+        )
+        {
             throw null;
         }
         public override readonly string ToString()
@@ -1426,7 +1448,8 @@ namespace System.Drawing
         public static System.Drawing.RectangleF Union(
             System.Drawing.RectangleF a,
             System.Drawing.RectangleF b
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1474,7 +1497,8 @@ namespace System.Drawing
         }
         public override readonly bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public override readonly int GetHashCode()
@@ -1484,7 +1508,8 @@ namespace System.Drawing
         public static System.Drawing.Size operator +(
             System.Drawing.Size sz1,
             System.Drawing.Size sz2
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Drawing.Size operator /(System.Drawing.Size left, int right)
@@ -1530,7 +1555,8 @@ namespace System.Drawing
         public static System.Drawing.Size operator -(
             System.Drawing.Size sz1,
             System.Drawing.Size sz2
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Drawing.Size Round(System.Drawing.SizeF value)
@@ -1598,7 +1624,8 @@ namespace System.Drawing
         }
         public override readonly bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public override readonly int GetHashCode()
@@ -1616,7 +1643,8 @@ namespace System.Drawing
         public static System.Drawing.SizeF operator +(
             System.Drawing.SizeF sz1,
             System.Drawing.SizeF sz2
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Drawing.SizeF operator /(System.Drawing.SizeF left, float right)
@@ -1646,13 +1674,15 @@ namespace System.Drawing
         public static System.Drawing.SizeF operator -(
             System.Drawing.SizeF sz1,
             System.Drawing.SizeF sz2
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Drawing.SizeF Subtract(
             System.Drawing.SizeF sz1,
             System.Drawing.SizeF sz2
-        ) {
+        )
+        {
             throw null;
         }
         public readonly System.Drawing.PointF ToPointF()

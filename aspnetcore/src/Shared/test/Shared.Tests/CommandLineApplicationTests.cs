@@ -1143,7 +1143,8 @@ namespace Microsoft.Extensions.Internal
             string[] input,
             string[] expectedRemaining,
             string topLevelValue
-        ) {
+        )
+        {
             var app = new CommandLineApplication(throwOnUnexpectedArg: false)
             {
                 AllowArgumentSeparator = true
@@ -1182,7 +1183,8 @@ namespace Microsoft.Extensions.Internal
             string[] expectedRemaining,
             string topLevelValue,
             bool isShowingInformation
-        ) {
+        )
+        {
             var app = new CommandLineApplication(throwOnUnexpectedArg: false);
             var optHelp = app.HelpOption("--help");
             var optVersion = app.VersionOption("--version", "1", "1.0");
@@ -1223,7 +1225,8 @@ namespace Microsoft.Extensions.Internal
             string[] expectedRemaining,
             string topLevelValue,
             bool isShowingInformation
-        ) {
+        )
+        {
             var app = new CommandLineApplication(throwOnUnexpectedArg: false);
             var optHelp = app.HelpOption("--help");
             var optVersion = app.VersionOption("--version", "1", "1.0");
@@ -1259,7 +1262,8 @@ namespace Microsoft.Extensions.Internal
             string[] expectedRemaining,
             string topLevelValue,
             bool isShowingInformation
-        ) {
+        )
+        {
             var app = new CommandLineApplication(
                 throwOnUnexpectedArg: false,
                 continueAfterUnexpectedArg: true

@@ -53,7 +53,8 @@ namespace Microsoft.AspNetCore.Routing.Internal
                         endpoint.Metadata.GetMetadata<ISuppressMatchingMetadata>()?.SuppressMatching
                         ?? false
                     ) == false
-                ) {
+                )
+                {
                     builder.AddEndpoint(endpoint);
                 }
             }

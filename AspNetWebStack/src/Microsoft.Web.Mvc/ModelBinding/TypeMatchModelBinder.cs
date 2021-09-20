@@ -10,7 +10,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
         public bool BindModel(
             ControllerContext controllerContext,
             ExtensibleModelBindingContext bindingContext
-        ) {
+        )
+        {
             ValueProviderResult valueProviderResult = GetCompatibleValueProviderResult(
                 bindingContext
             );
@@ -29,7 +30,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
 
         internal static ValueProviderResult GetCompatibleValueProviderResult(
             ExtensibleModelBindingContext bindingContext
-        ) {
+        )
+        {
             ModelBinderUtil.ValidateBindingContext(bindingContext);
 
             ValueProviderResult valueProviderResult = bindingContext.ValueProvider.GetValue(
@@ -45,7 +47,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
                     bindingContext.ModelType,
                     valueProviderResult.RawValue
                 )
-            ) {
+            )
+            {
                 return null; // value is of incompatible type
             }
 

@@ -19,7 +19,8 @@ namespace System.Net.WebSockets
             int count,
             WebSocketMessageType messageType,
             bool endOfMessage
-        ) {
+        )
+        {
             if (count < 0)
                 ThrowCountOutOfRange();
             if ((uint)messageType > (uint)WebSocketMessageType.Close)

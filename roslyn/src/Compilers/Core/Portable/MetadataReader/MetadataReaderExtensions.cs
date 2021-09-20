@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis
             this MetadataReader reader,
             out int majorVersion,
             out int minorVersion
-        ) {
+        )
+        {
             if (reader.MetadataKind == MetadataKind.WindowsMetadata)
             {
                 // Name should be of the form "WindowsRuntime {major}.{minor}".
@@ -42,7 +43,8 @@ namespace Microsoft.CodeAnalysis
                             CultureInfo.InvariantCulture,
                             out minorVersion
                         )
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }
@@ -76,7 +78,8 @@ namespace Microsoft.CodeAnalysis
         /// <exception cref="BadImageFormatException">An exception from metadata reader.</exception>
         internal static ImmutableArray<AssemblyIdentity> GetReferencedAssembliesOrThrow(
             this MetadataReader reader
-        ) {
+        )
+        {
             var result = ArrayBuilder<AssemblyIdentity>.GetInstance(
                 reader.AssemblyReferences.Count
             );
@@ -121,7 +124,8 @@ namespace Microsoft.CodeAnalysis
             StringHandle name,
             StringHandle culture,
             bool isReference
-        ) {
+        )
+        {
             string nameStr = reader.GetString(name);
             if (!MetadataHelpers.IsValidMetadataIdentifier(nameStr))
             {
@@ -156,7 +160,8 @@ namespace Microsoft.CodeAnalysis
                     if (
                         !publicKeyOrToken.IsEmpty
                         && publicKeyOrToken.Length != AssemblyIdentity.PublicKeyTokenSize
-                    ) {
+                    )
+                    {
                         throw new BadImageFormatException(
                             CodeAnalysisResources.InvalidPublicKeyToken
                         );
@@ -209,7 +214,8 @@ namespace Microsoft.CodeAnalysis
         internal static bool DeclaresType(
             this MetadataReader reader,
             Func<MetadataReader, TypeDefinition, bool> predicate
-        ) {
+        )
+        {
             foreach (TypeDefinitionHandle handle in reader.TypeDefinitions)
             {
                 try
@@ -232,7 +238,8 @@ namespace Microsoft.CodeAnalysis
             TypeDefinition typeDef,
             string namespaceName,
             string typeName
-        ) {
+        )
+        {
             return (typeDef.Attributes & (TypeAttributes.Public | TypeAttributes.Interface))
                     == TypeAttributes.Public
                 && reader.StringComparer.Equals(typeDef.Name, typeName)

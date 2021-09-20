@@ -25,7 +25,8 @@ namespace System.Web.Http.Controllers
         /// <returns>An <see cref="ModelMetadataProvider"/> instance.</returns>
         public static ModelMetadataProvider GetMetadataProvider(
             this HttpActionContext actionContext
-        ) {
+        )
+        {
             if (actionContext == null)
             {
                 throw Error.ArgumentNull("actionContext");
@@ -41,7 +42,8 @@ namespace System.Web.Http.Controllers
         /// <returns>A collection of <see cref="ModelValidatorProvider"/> instances.</returns>
         public static IEnumerable<ModelValidatorProvider> GetValidatorProviders(
             this HttpActionContext actionContext
-        ) {
+        )
+        {
             if (actionContext == null)
             {
                 throw Error.ArgumentNull("actionContext");
@@ -59,7 +61,8 @@ namespace System.Web.Http.Controllers
         public static IEnumerable<ModelValidator> GetValidators(
             this HttpActionContext actionContext,
             ModelMetadata metadata
-        ) {
+        )
+        {
             if (actionContext == null)
             {
                 throw Error.ArgumentNull("actionContext");
@@ -73,7 +76,8 @@ namespace System.Web.Http.Controllers
             this HttpActionContext actionContext,
             ModelMetadata metadata,
             IModelValidatorCache validatorCache
-        ) {
+        )
+        {
             if (validatorCache == null)
             {
                 // slow path: there is no validator cache on the configuration
@@ -99,7 +103,8 @@ namespace System.Web.Http.Controllers
             string propertyName,
             ModelMetadataProvider metadataProvider,
             out TModel model
-        ) {
+        )
+        {
             if (actionContext == null)
             {
                 throw Error.ArgumentNull("actionContext");
@@ -133,7 +138,8 @@ namespace System.Web.Http.Controllers
         public static bool Bind(
             this HttpActionContext actionContext,
             ModelBindingContext bindingContext
-        ) {
+        )
+        {
             Type modelType = bindingContext.ModelType;
             HttpConfiguration config = actionContext.ControllerContext.Configuration;
 
@@ -155,7 +161,8 @@ namespace System.Web.Http.Controllers
             this HttpActionContext actionContext,
             ModelBindingContext bindingContext,
             IEnumerable<IModelBinder> binders
-        ) {
+        )
+        {
             if (actionContext == null)
             {
                 throw Error.ArgumentNull("actionContext");

@@ -139,7 +139,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     {
         internal FunctionPointerTypeSymbolAdapter(
             FunctionPointerTypeSymbol underlyingFunctionPointerTypeSymbol
-        ) {
+        )
+        {
             AdaptedFunctionPointerTypeSymbol = underlyingFunctionPointerTypeSymbol;
         }
 

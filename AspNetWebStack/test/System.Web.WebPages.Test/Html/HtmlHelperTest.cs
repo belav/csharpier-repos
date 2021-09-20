@@ -205,7 +205,8 @@ namespace System.Web.WebPages.Test
         /// <param name="helperInvocation"></param>
         internal static void AssertHelperTransformsAttributesUnderscoresToDashs(
             Func<HtmlHelper, object, IHtmlString> helperInvocation
-        ) {
+        )
+        {
             // Arrange
             HtmlHelper helper = HtmlHelperFactory.Create();
             const string expected = @"data-name=""value""";

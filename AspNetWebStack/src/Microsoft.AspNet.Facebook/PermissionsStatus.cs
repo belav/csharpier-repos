@@ -65,7 +65,8 @@ namespace Microsoft.AspNet.Facebook
                     FacebookPermissionGranted,
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 return PermissionStatus.Granted;
             }
             else if (
@@ -74,7 +75,8 @@ namespace Microsoft.AspNet.Facebook
                     FacebookPermissionDeclined,
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 return PermissionStatus.Declined;
             }
 
@@ -83,7 +85,8 @@ namespace Microsoft.AspNet.Facebook
 
         private static IDictionary<string, PermissionStatus> ConvertApiResult(
             IList<IDictionary<string, string>> apiResults
-        ) {
+        )
+        {
             IDictionary<string, PermissionStatus> transformedPermissions = new Dictionary<
                 string,
                 PermissionStatus

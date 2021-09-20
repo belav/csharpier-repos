@@ -53,7 +53,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
             protected CommonEmbeddedType(
                 TEmbeddedTypesManager typeManager,
                 TNamedTypeSymbol underlyingNamedType
-            ) {
+            )
+            {
                 this.TypeManager = typeManager;
                 this.UnderlyingNamedType = underlyingNamedType;
             }
@@ -106,7 +107,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
             private bool IsTargetAttribute(
                 TAttributeData attrData,
                 AttributeDescription description
-            ) {
+            )
+            {
                 return TypeManager.IsTargetAttribute(UnderlyingNamedType, attrData, description);
             }
 
@@ -114,7 +116,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
                 TPEModuleBuilder moduleBuilder,
                 TSyntaxNode syntaxNodeOpt,
                 DiagnosticBag diagnostics
-            ) {
+            )
+            {
                 var builder = ArrayBuilder<TAttributeData>.GetInstance();
 
                 // Put the CompilerGenerated attribute on the NoPIA types we define so that
@@ -151,7 +154,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
                     }
                     else if (
                         IsTargetAttribute(attrData, AttributeDescription.ComEventInterfaceAttribute)
-                    ) {
+                    )
+                    {
                         if (attrData.CommonConstructorArguments.Length == 2)
                         {
                             hasComEventInterfaceAttribute = true;
@@ -194,7 +198,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
                                 attrData,
                                 AttributeDescription.BestFitMappingAttribute
                             )
-                        ) {
+                        )
+                        {
                             if (attrData.CommonConstructorArguments.Length == 1)
                             {
                                 builder.AddOptional(
@@ -226,7 +231,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
                             if (
                                 attrData.CommonConstructorArguments.Length == 0
                                 && UnderlyingNamedType.IsEnum
-                            ) {
+                            )
+                            {
                                 builder.AddOptional(
                                     TypeManager.CreateSynthesizedAttribute(
                                         WellKnownMember.System_FlagsAttribute__ctor,
@@ -239,7 +245,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
                         }
                         else if (
                             IsTargetAttribute(attrData, AttributeDescription.DefaultMemberAttribute)
-                        ) {
+                        )
+                        {
                             if (attrData.CommonConstructorArguments.Length == 1)
                             {
                                 builder.AddOptional(
@@ -265,7 +272,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
                                 attrData,
                                 AttributeDescription.UnmanagedFunctionPointerAttribute
                             )
-                        ) {
+                        )
+                        {
                             if (attrData.CommonConstructorArguments.Length == 1)
                             {
                                 builder.AddOptional(
@@ -384,7 +392,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
 
             IEnumerable<Cci.MethodImplementation> Cci.ITypeDefinition.GetExplicitImplementationOverrides(
                 EmitContext context
-            ) {
+            )
+            {
                 return SpecializedCollections.EmptyEnumerable<Cci.MethodImplementation>();
             }
 
@@ -436,7 +445,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
 
             IEnumerable<Cci.TypeReferenceWithAttributes> Cci.ITypeDefinition.Interfaces(
                 EmitContext context
-            ) {
+            )
+            {
                 return GetInterfaces(context);
             }
 
@@ -577,13 +587,15 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
 
             IEnumerable<Cci.INestedTypeDefinition> Cci.ITypeDefinition.GetNestedTypes(
                 EmitContext context
-            ) {
+            )
+            {
                 return SpecializedCollections.EmptyEnumerable<Cci.INestedTypeDefinition>();
             }
 
             IEnumerable<Cci.IPropertyDefinition> Cci.ITypeDefinition.GetProperties(
                 EmitContext context
-            ) {
+            )
+            {
                 if (_lazyProperties.IsDefault)
                 {
                     Debug.Assert(TypeManager.IsFrozen);
@@ -700,7 +712,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
 
             Cci.INamespaceTypeDefinition Cci.ITypeReference.AsNamespaceTypeDefinition(
                 EmitContext context
-            ) {
+            )
+            {
                 return this;
             }
 

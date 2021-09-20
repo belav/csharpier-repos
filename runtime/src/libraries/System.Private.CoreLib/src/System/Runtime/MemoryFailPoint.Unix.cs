@@ -15,7 +15,8 @@ namespace System.Runtime
         private static bool CheckForAvailableMemory(
             out ulong availPageFile,
             out ulong totalAddressSpaceFree
-        ) {
+        )
+        {
             // TODO: Implement
             availPageFile = 0;
             totalAddressSpaceFree = 0;

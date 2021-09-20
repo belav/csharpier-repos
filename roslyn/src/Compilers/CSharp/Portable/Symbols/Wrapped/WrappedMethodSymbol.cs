@@ -188,7 +188,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             CultureInfo preferredCulture = null,
             bool expandIncludes = false,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return UnderlyingMethod.GetDocumentationCommentXml(
                 preferredCulture,
                 expandIncludes,

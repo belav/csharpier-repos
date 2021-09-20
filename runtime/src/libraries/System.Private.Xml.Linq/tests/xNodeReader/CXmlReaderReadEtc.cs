@@ -91,7 +91,8 @@ namespace CoreXml.Test.XLinq
                     while (
                         DataReader.NodeType == XmlNodeType.Whitespace
                         || DataReader.NodeType == XmlNodeType.SignificantWhitespace
-                    ) {
+                    )
+                    {
                         // skip all whitespace nodes
                         // if EOF is reached NodeType=None
                         DataReader.Read();

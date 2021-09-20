@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics
             bool getSymbol,
             ArrayBuilder<DeclarationInfo> builder,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             CSharpDeclarationComputer.ComputeDeclarationsInSpan(
                 model,
                 span,

@@ -63,7 +63,8 @@ namespace System.Web.Http.WebHost
         [PropertyData("AllHttpMethods")]
         public void ConvertRequest_Creates_HttpRequestMessage_For_All_HttpMethods(
             HttpMethod httpMethod
-        ) {
+        )
+        {
             // Arrange
             HttpContextBase contextBase = CreateStubContextBase(
                 httpMethod.Method,
@@ -118,7 +119,8 @@ namespace System.Web.Http.WebHost
         [PropertyData("HttpMethodsWithContent")]
         public void ConvertRequest_Creates_Request_With_Content_For_Content_Methods(
             HttpMethod httpMethod
-        ) {
+        )
+        {
             // Arrange
             HttpContextBase contextBase = CreateStubContextBase(
                 httpMethod.Method,
@@ -168,7 +170,8 @@ namespace System.Web.Http.WebHost
                 // Act
                 using (
                     HttpRequestMessage actualRequest = HttpControllerHandler.ConvertRequest(context)
-                ) {
+                )
+                {
                     IDictionary<string, object> environment = actualRequest.GetOwinEnvironment();
 
                     // Assert
@@ -190,7 +193,8 @@ namespace System.Web.Http.WebHost
                 // Act
                 using (
                     HttpRequestMessage actualRequest = HttpControllerHandler.ConvertRequest(context)
-                ) {
+                )
+                {
                     // Assert
                     object ignore;
                     bool found = actualRequest.Properties.TryGetValue(
@@ -215,7 +219,8 @@ namespace System.Web.Http.WebHost
                 // Act
                 using (
                     HttpRequestMessage actualRequest = HttpControllerHandler.ConvertRequest(context)
-                ) {
+                )
+                {
                     // Assert
                     object ignore;
                     bool found = actualRequest.Properties.TryGetValue(
@@ -482,7 +487,8 @@ namespace System.Web.Http.WebHost
                 HttpRequestMessage expectedRequest = HttpControllerHandler.ConvertRequest(
                     contextBase
                 )
-            ) {
+            )
+            {
                 // Assert
                 HttpRequestContext context = expectedRequest.GetRequestContext();
                 WebHostHttpRequestContext typedContext = Assert.IsType<WebHostHttpRequestContext>(
@@ -791,7 +797,8 @@ namespace System.Web.Http.WebHost
                 {
                     RequestMessage = request
                 }
-            ) {
+            )
+            {
                 response.Headers.TransferEncodingChunked = true;
                 response.Content = new StringContent("SomeContent");
                 Assert.NotNull(response.Content.Headers.ContentLength); // Guard; added by System.Net.Http.
@@ -818,7 +825,8 @@ namespace System.Web.Http.WebHost
                 {
                     RequestMessage = request
                 }
-            ) {
+            )
+            {
                 response.Headers.TransferEncodingChunked = true;
 
                 // Act
@@ -843,7 +851,8 @@ namespace System.Web.Http.WebHost
                 {
                     RequestMessage = request
                 }
-            ) {
+            )
+            {
                 response.Headers.TransferEncoding.Add(new TransferCodingHeaderValue("identity"));
 
                 // Act
@@ -872,7 +881,8 @@ namespace System.Web.Http.WebHost
                 {
                     RequestMessage = request
                 }
-            ) {
+            )
+            {
                 response.Headers.TransferEncoding.Add(new TransferCodingHeaderValue("identity"));
                 response.Headers.TransferEncodingChunked = true;
                 Assert.Equal("identity, chunked", response.Headers.TransferEncoding.ToString()); // Guard
@@ -903,7 +913,8 @@ namespace System.Web.Http.WebHost
                 {
                     RequestMessage = request
                 }
-            ) {
+            )
+            {
                 response.Headers.TransferEncodingChunked = true;
                 response.Content = new ObjectContent(
                     typeof(string),
@@ -2127,7 +2138,8 @@ namespace System.Web.Http.WebHost
 
                 using (
                     HttpRequestMessage actualRequest = HttpControllerHandler.ConvertRequest(context)
-                ) {
+                )
+                {
                     // Guard
                     request.Verify(r => r.GetBufferedInputStream(), Times.Never());
                     request.Verify(r => r.InputStream, Times.Never());
@@ -2154,7 +2166,8 @@ namespace System.Web.Http.WebHost
 
                 using (
                     HttpRequestMessage actualRequest = HttpControllerHandler.ConvertRequest(context)
-                ) {
+                )
+                {
                     // Guard
                     request.Verify(r => r.GetBufferedInputStream(), Times.Never());
                     request.Verify(r => r.InputStream, Times.Never());
@@ -2182,7 +2195,8 @@ namespace System.Web.Http.WebHost
 
                 using (
                     HttpRequestMessage actualRequest = HttpControllerHandler.ConvertRequest(context)
-                ) {
+                )
+                {
                     var stream = await actualRequest.Content.ReadAsStreamAsync();
 
                     // Guard
@@ -2212,7 +2226,8 @@ namespace System.Web.Http.WebHost
 
                 using (
                     HttpRequestMessage actualRequest = HttpControllerHandler.ConvertRequest(context)
-                ) {
+                )
+                {
                     // Act
                     var actual1 = await actualRequest.Content.ReadAsStringAsync();
                     var actual2 = await actualRequest.Content.ReadAsStringAsync();
@@ -2237,7 +2252,8 @@ namespace System.Web.Http.WebHost
 
                 using (
                     HttpRequestMessage actualRequest = HttpControllerHandler.ConvertRequest(context)
-                ) {
+                )
+                {
                     // Act
                     var actual1 = await actualRequest.Content.ReadAsStringAsync();
 
@@ -2270,7 +2286,8 @@ namespace System.Web.Http.WebHost
 
                 using (
                     HttpRequestMessage actualRequest = HttpControllerHandler.ConvertRequest(context)
-                ) {
+                )
+                {
                     // Act
                     var stream = await actualRequest.Content.ReadAsStreamAsync();
                     stream.Seek(1L, SeekOrigin.Begin);
@@ -2317,7 +2334,8 @@ namespace System.Web.Http.WebHost
             HttpContextBase contextBase,
             HttpRequestMessage request,
             HttpResponseMessage response
-        ) {
+        )
+        {
             IExceptionLogger exceptionLogger = CreateDummyExceptionLogger();
             IExceptionHandler exceptionHandler = CreateDummyExceptionHandler();
             CancellationToken cancellationToken = CancellationToken.None;
@@ -2374,7 +2392,8 @@ namespace System.Web.Http.WebHost
         private static HttpContextBase CreateStubContextBase(
             string httpMethod,
             Stream bufferedStream
-        ) {
+        )
+        {
             HttpRequestBase request = CreateStubRequestBase(httpMethod, bufferedStream);
             Mock<HttpContextBase> contextMock = new Mock<HttpContextBase>()
             {
@@ -2392,7 +2411,8 @@ namespace System.Web.Http.WebHost
         internal static HttpContextBase CreateStubContextBase(
             HttpRequestBase request,
             IDictionary items
-        ) {
+        )
+        {
             Mock<HttpContextBase> contextMock = new Mock<HttpContextBase>()
             {
                 DefaultValue = DefaultValue.Mock
@@ -2405,7 +2425,8 @@ namespace System.Web.Http.WebHost
         private static HttpContextBase CreateStubContextBase(
             HttpRequestBase request,
             HttpResponseBase response
-        ) {
+        )
+        {
             Mock<HttpContextBase> contextMock = new Mock<HttpContextBase>();
             contextMock.SetupGet(m => m.Request).Returns(request);
             contextMock.SetupGet(m => m.Response).Returns(response);
@@ -2465,7 +2486,8 @@ namespace System.Web.Http.WebHost
         private static HttpRequestBase CreateStubRequestBase(
             string httpMethod,
             Stream bufferedStream
-        ) {
+        )
+        {
             return CreateStubRequestBaseMock(httpMethod, bufferedStream, bufferedStream).Object;
         }
 
@@ -2473,7 +2495,8 @@ namespace System.Web.Http.WebHost
             string httpMethod,
             Stream nonSeekableStream,
             Stream seekableStream
-        ) {
+        )
+        {
             Mock<HttpRequestBase> requestBaseMock = new Mock<HttpRequestBase>() { CallBase = true };
             requestBaseMock.SetupGet(m => m.HttpMethod).Returns(httpMethod);
             requestBaseMock.SetupGet(m => m.Url).Returns(new Uri("Http://localhost"));
@@ -2507,7 +2530,8 @@ namespace System.Web.Http.WebHost
                         if (
                             readEntityBodyMode == ReadEntityBodyMode.None
                             || readEntityBodyMode == ReadEntityBodyMode.Buffered
-                        ) {
+                        )
+                        {
                             readEntityBodyMode = ReadEntityBodyMode.Buffered;
                             return getStream();
                         }
@@ -2522,7 +2546,8 @@ namespace System.Web.Http.WebHost
                         if (
                             readEntityBodyMode == ReadEntityBodyMode.None
                             || readEntityBodyMode == ReadEntityBodyMode.Classic
-                        ) {
+                        )
+                        {
                             readEntityBodyMode = ReadEntityBodyMode.Classic;
                             return getStream();
                         }
@@ -2545,7 +2570,8 @@ namespace System.Web.Http.WebHost
                         if (
                             readEntityBodyMode == ReadEntityBodyMode.None
                             || readEntityBodyMode == ReadEntityBodyMode.Bufferless
-                        ) {
+                        )
+                        {
                             readEntityBodyMode = ReadEntityBodyMode.Bufferless;
                             return getStream();
                         }
@@ -2569,7 +2595,8 @@ namespace System.Web.Http.WebHost
 
         private static Mock<HttpResponseBase> CreateMockHttpResponseBaseForResponse(
             Stream outputStream
-        ) {
+        )
+        {
             NameValueCollection testHeaders = new NameValueCollection();
 
             Mock<HttpResponseBase> responseBaseMock = new Mock<HttpResponseBase>()
@@ -2590,7 +2617,8 @@ namespace System.Web.Http.WebHost
 
         private static Mock<HttpContextBase> CreateMockHttpContextBaseForResponse(
             Stream outputStream
-        ) {
+        )
+        {
             NameValueCollection testHeaders = new NameValueCollection();
 
             Mock<HttpResponseBase> responseBaseMock = CreateMockHttpResponseBaseForResponse(
@@ -2615,7 +2643,8 @@ namespace System.Web.Http.WebHost
             HttpContextBase contextBase,
             HttpRequestMessage request,
             HttpResponseMessage response
-        ) {
+        )
+        {
             IExceptionLogger exceptionLogger = CreateStubExceptionLogger();
             CancellationToken cancellationToken = CancellationToken.None;
 
@@ -2660,7 +2689,8 @@ namespace System.Web.Http.WebHost
 
             public LambdaHttpMessageHandler(
                 Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> sendAsync
-            ) {
+            )
+            {
                 Contract.Assert(sendAsync != null);
                 _sendAsync = sendAsync;
             }
@@ -2668,7 +2698,8 @@ namespace System.Web.Http.WebHost
             protected override Task<HttpResponseMessage> SendAsync(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return _sendAsync.Invoke(request, cancellationToken);
             }
         }

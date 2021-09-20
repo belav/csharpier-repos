@@ -269,7 +269,8 @@ namespace System.Web.Mvc.Html.Test
             string text,
             bool htmlEncode,
             string expectedResult
-        ) {
+        )
+        {
             // Arrange
             var viewData = new ViewDataDictionary<Cart>(model: null);
             viewData.ModelMetadata.DisplayName = text;

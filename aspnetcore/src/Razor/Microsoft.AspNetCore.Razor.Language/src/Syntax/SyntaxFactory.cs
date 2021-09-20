@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
             SyntaxKind kind,
             string content,
             params RazorDiagnostic[] diagnostics
-        ) {
+        )
+        {
             return new SyntaxToken(
                 InternalSyntax.SyntaxFactory.Token(kind, content),
                 parent: null,
@@ -25,7 +26,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
         internal static SyntaxToken MissingToken(
             SyntaxKind kind,
             params RazorDiagnostic[] diagnostics
-        ) {
+        )
+        {
             return new SyntaxToken(
                 InternalSyntax.SyntaxFactory.MissingToken(kind, diagnostics),
                 parent: null,

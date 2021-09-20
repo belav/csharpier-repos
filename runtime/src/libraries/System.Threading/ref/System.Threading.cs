@@ -43,7 +43,8 @@ namespace System.Threading
         public void Dispose() { }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(System.Threading.AsyncFlowControl obj)
@@ -57,13 +58,15 @@ namespace System.Threading
         public static bool operator ==(
             System.Threading.AsyncFlowControl a,
             System.Threading.AsyncFlowControl b
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Threading.AsyncFlowControl a,
             System.Threading.AsyncFlowControl b
-        ) {
+        )
+        {
             throw null;
         }
         public void Undo() { }
@@ -148,7 +151,8 @@ namespace System.Threading
         public bool SignalAndWait(
             int millisecondsTimeout,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
@@ -162,7 +166,8 @@ namespace System.Threading
         public bool SignalAndWait(
             System.TimeSpan timeout,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -230,7 +235,8 @@ namespace System.Threading
         public bool Wait(
             int millisecondsTimeout,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
@@ -244,7 +250,8 @@ namespace System.Threading
         public bool Wait(
             System.TimeSpan timeout,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -266,7 +273,8 @@ namespace System.Threading
             System.Threading.EventResetMode mode,
             string? name,
             out bool createdNew
-        ) {
+        )
+        {
             throw null;
         }
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
@@ -287,7 +295,8 @@ namespace System.Threading
             string name,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Threading.EventWaitHandle? result
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -351,7 +360,8 @@ namespace System.Threading
         public virtual void Revert(object previousState) { }
         public virtual object SetHostExecutionContext(
             System.Threading.HostExecutionContext hostExecutionContext
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -409,7 +419,8 @@ namespace System.Threading
             ref System.IntPtr location1,
             System.IntPtr value,
             System.IntPtr comparand
-        ) {
+        )
+        {
             throw null;
         }
         [return: System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute("location1")]
@@ -417,7 +428,8 @@ namespace System.Threading
             ref object? location1,
             object? value,
             object? comparand
-        ) {
+        )
+        {
             throw null;
         }
         public static float CompareExchange(ref float location1, float value, float comparand)
@@ -478,7 +490,8 @@ namespace System.Threading
             [System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute("value")]
                 ref object? location1,
             object? value
-        ) {
+        )
+        {
             throw null;
         }
         public static float Exchange(ref float location1, float value)
@@ -572,7 +585,8 @@ namespace System.Threading
             ref bool initialized,
             [System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute("syncLock")]
                 ref object? syncLock
-        ) {
+        )
+        {
             throw null;
         }
         public static T EnsureInitialized<T>(
@@ -581,7 +595,8 @@ namespace System.Threading
             [System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute("syncLock")]
                 ref object? syncLock,
             System.Func<T> valueFactory
-        ) {
+        )
+        {
             throw null;
         }
         public static T EnsureInitialized<T>(
@@ -606,7 +621,8 @@ namespace System.Threading
         private int _dummyPrimitive;
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(System.Threading.LockCookie obj)
@@ -678,7 +694,8 @@ namespace System.Threading
         public bool Wait(
             int millisecondsTimeout,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
@@ -692,7 +709,8 @@ namespace System.Threading
         public bool Wait(
             System.TimeSpan timeout,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -770,7 +788,8 @@ namespace System.Threading
             string name,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Threading.Mutex? result
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -926,7 +945,8 @@ namespace System.Threading
             string name,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Threading.Semaphore? result
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -973,7 +993,8 @@ namespace System.Threading
         public bool Wait(
             int millisecondsTimeout,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
@@ -987,7 +1008,8 @@ namespace System.Threading
         public bool Wait(
             System.TimeSpan timeout,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task WaitAsync()
@@ -1001,12 +1023,14 @@ namespace System.Threading
         public System.Threading.Tasks.Task<bool> WaitAsync(
             int millisecondsTimeout,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task WaitAsync(
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<bool> WaitAsync(System.TimeSpan timeout)
@@ -1016,7 +1040,8 @@ namespace System.Threading
         public System.Threading.Tasks.Task<bool> WaitAsync(
             System.TimeSpan timeout,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1104,7 +1129,8 @@ namespace System.Threading
             System.IntPtr[] waitHandles,
             bool waitAll,
             int millisecondsTimeout
-        ) {
+        )
+        {
             throw null;
         }
     }

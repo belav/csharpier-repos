@@ -21,7 +21,8 @@ namespace System.Net.Mail
             object sessionCookie,
             string? spn,
             ChannelBinding? channelBindingToken
-        ) {
+        )
+        {
             try
             {
                 lock (_sessions)

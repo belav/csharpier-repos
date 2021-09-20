@@ -43,7 +43,8 @@ namespace System.Xml.Xsl.Runtime
             XmlWriterSettings defaultWriterSettings,
             IList<WhitespaceRule> whitespaceRules,
             StaticDataManager staticData
-        ) {
+        )
+        {
             Debug.Assert(defaultWriterSettings != null && staticData != null);
             _defaultWriterSettings = defaultWriterSettings;
             _whitespaceRules = whitespaceRules;

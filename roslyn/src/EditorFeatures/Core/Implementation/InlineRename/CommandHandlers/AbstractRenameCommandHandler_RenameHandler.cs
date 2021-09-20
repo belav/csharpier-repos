@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                     allowCancellation: true,
                     EditorFeaturesResources.Finding_token_to_rename
                 )
-            ) {
+            )
+            {
                 ExecuteRenameWorker(args, context);
             }
 
@@ -74,7 +75,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                         caretPoint.Value,
                         out _
                     )
-                ) {
+                )
+                {
                     SetFocusToDashboard(args.TextView);
                     return;
                 }

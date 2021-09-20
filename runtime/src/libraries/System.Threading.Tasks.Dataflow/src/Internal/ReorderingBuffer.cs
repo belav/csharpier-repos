@@ -171,7 +171,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
                     _nextReorderedIdToOutput,
                     out nextOutputItemWithValidity
                 )
-            ) {
+            )
+            {
                 _reorderingBuffer.Remove(_nextReorderedIdToOutput);
                 _nextReorderedIdToOutput++;
                 if (nextOutputItemWithValidity.Key)

@@ -69,7 +69,8 @@ namespace System.Collections.Tests
             int enumerableLength,
             int numberOfMatchingElements,
             int numberOfDuplicateElements
-        ) {
+        )
+        {
             _ = setLength;
             _ = numberOfMatchingElements;
             IEnumerable<T> enumerable = CreateEnumerable(
@@ -347,7 +348,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void Queue_Generic_EnsureCapacity_RequestingLargerCapacity_DoesInvalidateEnumeration(
             int count
-        ) {
+        )
+        {
             Queue<T> queue = GenericQueueFactory(count);
             IEnumerator<T> copiedEnumerator = new List<T>(queue).GetEnumerator();
             IEnumerator<T> enumerator = queue.GetEnumerator();
@@ -385,7 +387,8 @@ namespace System.Collections.Tests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/51411", TestRuntimes.Mono)]
         public void Queue_Generic_EnsureCapacity_LargeCapacityRequested_Throws(
             int requestedCapacity
-        ) {
+        )
+        {
             var queue = GenericQueueFactory();
             AssertExtensions.Throws<OutOfMemoryException>(
                 () => queue.EnsureCapacity(requestedCapacity)
@@ -396,7 +399,8 @@ namespace System.Collections.Tests
         [InlineData(5)]
         public void Queue_Generic_EnsureCapacity_RequestedCapacitySmallerThanOrEqualToCurrent_CapacityUnchanged(
             int currentCapacity
-        ) {
+        )
+        {
             var queue = new Queue<T>(currentCapacity);
 
             for (int requestCapacity = 0; requestCapacity <= currentCapacity; requestCapacity++)
@@ -409,7 +413,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void Queue_Generic_EnsureCapacity_RequestedCapacitySmallerThanOrEqualToCount_CapacityUnchanged(
             int count
-        ) {
+        )
+        {
             Queue<T> queue = GenericQueueFactory(count);
 
             for (int requestCapacity = 0; requestCapacity <= count; requestCapacity++)
@@ -435,7 +440,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void Queue_Generic_EnsureCapacity_RequestingLargerCapacity_DoesNotImpactQueueContent(
             int count
-        ) {
+        )
+        {
             Queue<T> queue = GenericQueueFactory(count);
             var copiedList = new List<T>(queue);
 

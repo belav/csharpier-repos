@@ -25,7 +25,8 @@ namespace SerializerTrimmingTest
                         json
                     )
                 )
-            ) {
+            )
+            {
                 return -1;
             }
 

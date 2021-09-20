@@ -43,7 +43,8 @@ namespace System.Linq
                 if (
                     (mInfo.IsStatic || mInfo.DeclaringType!.IsAssignableFrom(obj!.Type))
                     && ArgsMatch(mInfo, args, typeArgs)
-                ) {
+                )
+                {
                     // current method is still valid
                     return Expression.Call(obj, mInfo, args);
                 }
@@ -77,7 +78,8 @@ namespace System.Linq
         private ReadOnlyCollection<Expression> FixupQuotedArgs(
             MethodInfo mi,
             ReadOnlyCollection<Expression> argList
-        ) {
+        )
+        {
             ParameterInfo[] pis = mi.GetParameters();
             if (pis.Length > 0)
             {
@@ -119,7 +121,8 @@ namespace System.Linq
                 !type.IsAssignableFrom(expr.Type)
                 && type.IsArray
                 && expr.NodeType == ExpressionType.NewArrayInit
-            ) {
+            )
+            {
                 Type strippedType = StripExpression(expr.Type);
                 if (type.IsAssignableFrom(strippedType))
                 {
@@ -259,7 +262,8 @@ namespace System.Linq
             string name,
             ReadOnlyCollection<Expression> args,
             params Type[]? typeArgs
-        ) {
+        )
+        {
             if (s_seqMethods == null)
             {
                 s_seqMethods = GetEnumerableStaticMethods(typeof(Enumerable)).ToLookup(m => m.Name);
@@ -291,14 +295,16 @@ namespace System.Linq
             string name,
             ReadOnlyCollection<Expression> args,
             Type[]? typeArgs
-        ) {
+        )
+        {
             using (
                 IEnumerator<MethodInfo> en = type.GetMethods(
                         BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static
                     )
                     .Where(m => m.Name == name)
                     .GetEnumerator()
-            ) {
+            )
+            {
                 if (!en.MoveNext())
                     throw Error.NoMethodOnType(name, type);
                 do
@@ -315,7 +321,8 @@ namespace System.Linq
             MethodInfo m,
             ReadOnlyCollection<Expression> args,
             Type[]? typeArgs
-        ) {
+        )
+        {
             ParameterInfo[] mParams = m.GetParameters();
             if (mParams.Length != args.Count)
                 return false;
@@ -363,7 +370,8 @@ namespace System.Linq
                     if (
                         !parameterType.IsAssignableFrom(arg.Type)
                         && !parameterType.IsAssignableFrom(StripExpression(arg.Type))
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }

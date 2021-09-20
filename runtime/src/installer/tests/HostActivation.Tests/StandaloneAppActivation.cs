@@ -370,7 +370,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
              */
             private static void ReplaceTestProjectOutputHostInTestProjectFixture(
                 TestProjectFixture testProjectFixture
-            ) {
+            )
+            {
                 var dotnet = testProjectFixture.BuiltDotnet;
 
                 var testProjectHostPolicy = testProjectFixture.TestProject.HostPolicyDll;

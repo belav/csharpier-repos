@@ -23,7 +23,8 @@ namespace System.Net.WebSockets.Client.Tests
         public async Task CloseAsync_ServerInitiatedClose_Success(
             Uri server,
             bool useCloseOutputAsync
-        ) {
+        )
+        {
             const string closeWebSocketMetaCommand = ".close";
 
             using (
@@ -32,7 +33,8 @@ namespace System.Net.WebSockets.Client.Tests
                     TimeOutMilliseconds,
                     _output
                 )
-            ) {
+            )
+            {
                 var cts = new CancellationTokenSource(TimeOutMilliseconds);
 
                 _output.WriteLine("SendAsync starting.");
@@ -96,7 +98,8 @@ namespace System.Net.WebSockets.Client.Tests
                     TimeOutMilliseconds,
                     _output
                 )
-            ) {
+            )
+            {
                 var cts = new CancellationTokenSource(TimeOutMilliseconds);
                 Assert.Equal(WebSocketState.Open, cws.State);
 
@@ -127,7 +130,8 @@ namespace System.Net.WebSockets.Client.Tests
                     TimeOutMilliseconds,
                     _output
                 )
-            ) {
+            )
+            {
                 var cts = new CancellationTokenSource(TimeOutMilliseconds);
 
                 await cws.CloseAsync(
@@ -142,7 +146,8 @@ namespace System.Net.WebSockets.Client.Tests
         [ConditionalTheory(nameof(WebSocketsSupported)), MemberData(nameof(EchoServers))]
         public async Task CloseAsync_CloseDescriptionIsMaxLengthPlusOne_ThrowsArgumentException(
             Uri server
-        ) {
+        )
+        {
             string closeDescription = new string('C', CloseDescriptionMaxLength + 1);
 
             using (
@@ -151,7 +156,8 @@ namespace System.Net.WebSockets.Client.Tests
                     TimeOutMilliseconds,
                     _output
                 )
-            ) {
+            )
+            {
                 var cts = new CancellationTokenSource(TimeOutMilliseconds);
 
                 string expectedInnerMessage = ResourceHelper.GetExceptionMessage(
@@ -192,7 +198,8 @@ namespace System.Net.WebSockets.Client.Tests
                     TimeOutMilliseconds,
                     _output
                 )
-            ) {
+            )
+            {
                 var cts = new CancellationTokenSource(TimeOutMilliseconds);
 
                 // See issue for Browser websocket differences https://github.com/dotnet/runtime/issues/45538
@@ -218,7 +225,8 @@ namespace System.Net.WebSockets.Client.Tests
                     TimeOutMilliseconds,
                     _output
                 )
-            ) {
+            )
+            {
                 var cts = new CancellationTokenSource(TimeOutMilliseconds);
 
                 var closeStatus = WebSocketCloseStatus.NormalClosure;
@@ -239,7 +247,8 @@ namespace System.Net.WebSockets.Client.Tests
                     TimeOutMilliseconds,
                     _output
                 )
-            ) {
+            )
+            {
                 var cts = new CancellationTokenSource(TimeOutMilliseconds);
 
                 var closeStatus = WebSocketCloseStatus.NormalClosure;
@@ -264,7 +273,8 @@ namespace System.Net.WebSockets.Client.Tests
                     TimeOutMilliseconds,
                     _output
                 )
-            ) {
+            )
+            {
                 var cts = new CancellationTokenSource(TimeOutMilliseconds);
 
                 var closeStatus = WebSocketCloseStatus.NormalClosure;
@@ -302,7 +312,8 @@ namespace System.Net.WebSockets.Client.Tests
                     TimeOutMilliseconds,
                     _output
                 )
-            ) {
+            )
+            {
                 var cts = new CancellationTokenSource(TimeOutMilliseconds);
 
                 // See issue for Browser websocket differences https://github.com/dotnet/runtime/issues/45538
@@ -356,7 +367,8 @@ namespace System.Net.WebSockets.Client.Tests
                     TimeOutMilliseconds,
                     _output
                 )
-            ) {
+            )
+            {
                 var cts = new CancellationTokenSource(TimeOutMilliseconds);
 
                 await cws.SendAsync(
@@ -410,7 +422,8 @@ namespace System.Net.WebSockets.Client.Tests
                     TimeOutMilliseconds,
                     _output
                 )
-            ) {
+            )
+            {
                 var cts = new CancellationTokenSource(TimeOutMilliseconds);
 
                 var closeStatus = WebSocketCloseStatus.NormalClosure;
@@ -435,7 +448,8 @@ namespace System.Net.WebSockets.Client.Tests
                     TimeOutMilliseconds,
                     _output
                 )
-            ) {
+            )
+            {
                 // Issue a receive but don't wait for it.
                 var t = cws.ReceiveAsync(
                     new ArraySegment<byte>(receiveBuffer),
@@ -493,7 +507,8 @@ namespace System.Net.WebSockets.Client.Tests
                     TimeOutMilliseconds,
                     _output
                 )
-            ) {
+            )
+            {
                 var t = cws.ReceiveAsync(
                     new ArraySegment<byte>(receiveBuffer),
                     CancellationToken.None

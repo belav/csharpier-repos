@@ -55,7 +55,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AddImports
             bool allowInHiddenRegions,
             SyntaxNode root,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var rewriter = new Rewriter(
                 externAliases,
                 usingDirectives,
@@ -119,7 +120,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AddImports
                 bool placeSystemNamespaceFirst,
                 bool allowInHiddenRegions,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 _externAliases = externAliases;
                 _usingDirectives = usingDirectives;
                 _staticUsingDirectives = staticUsingDirectives;

@@ -55,7 +55,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 var navigation in entityType.GetNavigations()
                     .Concat<INavigationBase>(entityType.GetSkipNavigations())
                     .Where(n => n.IsCollection)
-            ) {
+            )
+            {
                 AsINotifyCollectionChanged(
                     entry,
                     navigation,
@@ -96,7 +97,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     var navigation in entityType.GetNavigations()
                         .Concat<INavigationBase>(entityType.GetSkipNavigations())
                         .Where(n => n.IsCollection)
-                ) {
+                )
+                {
                     AsINotifyCollectionChanged(
                         entry,
                         navigation,
@@ -127,14 +129,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             INavigationBase navigation,
             IEntityType entityType,
             ChangeTrackingStrategy changeTrackingStrategy
-        ) {
+        )
+        {
             if (
                 navigation.GetCollectionAccessor()?.GetOrCreate(
                     entry.Entity,
                     forMaterialization: false
                 )
                 is not INotifyCollectionChanged notifyingCollection
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     CoreStrings.NonNotifyingCollection(
                         navigation.Name,
@@ -151,7 +155,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             InternalEntityEntry entry,
             IEntityType entityType,
             ChangeTrackingStrategy changeTrackingStrategy
-        ) {
+        )
+        {
             if (entry.Entity is not INotifyPropertyChanged changed)
             {
                 throw new InvalidOperationException(
@@ -170,7 +175,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             InternalEntityEntry entry,
             IEntityType entityType,
             ChangeTrackingStrategy changeTrackingStrategy
-        ) {
+        )
+        {
             if (entry.Entity is not INotifyPropertyChanging changing)
             {
                 throw new InvalidOperationException(

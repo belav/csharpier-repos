@@ -526,7 +526,8 @@ namespace System.Net
                         (int)TimerThreadState.Running,
                         (int)TimerThreadState.Running
                     ) != (int)TimerThreadState.Running
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -548,7 +549,8 @@ namespace System.Net
                                         LinkedListNode<WeakReference>? node = s_newQueues.First;
                                         node != null;
                                         node = s_newQueues.First
-                                    ) {
+                                    )
+                                    {
                                         s_newQueues.Remove(node);
                                         s_queues.AddLast(node);
                                     }
@@ -562,7 +564,8 @@ namespace System.Net
                                 LinkedListNode<WeakReference>? node = s_queues.First;
                                 node != null; /* node = node.Next must be done in the body */
 
-                            ) {
+                            )
+                            {
                                 TimerQueue? queue = (TimerQueue?)node.Value.Target;
                                 if (queue == null)
                                 {
@@ -582,7 +585,8 @@ namespace System.Net
                                         !haveNextTick
                                         || IsTickBetween(now, nextTick, nextTickInstance)
                                     )
-                                ) {
+                                )
+                                {
                                     nextTick = nextTickInstance;
                                     haveNextTick = true;
                                 }
@@ -645,7 +649,8 @@ namespace System.Net
                                             (int)TimerThreadState.Running,
                                             (int)TimerThreadState.Idle
                                         ) == (int)TimerThreadState.Idle
-                                    ) {
+                                    )
+                                    {
                                         continue;
                                     }
                                 }

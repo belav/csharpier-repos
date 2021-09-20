@@ -66,7 +66,8 @@ namespace Microsoft.Extensions.FileProviders
             Assembly assembly,
             EmbeddedFilesManifest manifest,
             DateTimeOffset lastModified
-        ) {
+        )
+        {
             if (assembly == null)
             {
                 throw new ArgumentNullException(nameof(assembly));

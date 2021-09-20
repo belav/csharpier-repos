@@ -43,7 +43,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddConnections(
             this IServiceCollection services,
             Action<ConnectionOptions> options
-        ) {
+        )
+        {
             return services.Configure(options).AddConnections();
         }
     }

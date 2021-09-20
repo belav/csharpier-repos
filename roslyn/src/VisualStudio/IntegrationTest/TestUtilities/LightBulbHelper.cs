@@ -16,7 +16,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         public static Task<bool> WaitForLightBulbSessionAsync(
             ILightBulbBroker broker,
             IWpfTextView view
-        ) {
+        )
+        {
             var startTime = DateTimeOffset.Now;
 
             return Helper.RetryAsync(

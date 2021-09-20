@@ -28,7 +28,8 @@ namespace System.Net.Http.Formatting
         public static bool IsSubsetOf(
             this MediaTypeHeaderValue mediaType1,
             MediaTypeHeaderValue mediaType2
-        ) {
+        )
+        {
             MediaTypeHeaderValueRange mediaType2Range;
             return IsSubsetOf(mediaType1, mediaType2, out mediaType2Range);
         }
@@ -49,7 +50,8 @@ namespace System.Net.Http.Formatting
             this MediaTypeHeaderValue mediaType1,
             MediaTypeHeaderValue mediaType2,
             out MediaTypeHeaderValueRange mediaType2Range
-        ) {
+        )
+        {
             // Performance-sensitive
             Contract.Assert(mediaType1 != null);
 

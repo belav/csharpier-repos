@@ -53,7 +53,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                     DebuggerWrapper.Singleton,
                     testKestrelTrace
                 )
-            ) {
+            )
+            {
                 Assert.Equal(
                     now.ToString(Rfc1123DateFormat),
                     dateHeaderValueManager.GetDateHeaderValues().String
@@ -89,7 +90,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                     DebuggerWrapper.Singleton,
                     testKestrelTrace
                 )
-            ) {
+            )
+            {
                 heartbeat.OnHeartbeat();
 
                 Assert.Equal(
@@ -129,7 +131,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                     DebuggerWrapper.Singleton,
                     testKestrelTrace
                 )
-            ) {
+            )
+            {
                 heartbeat.OnHeartbeat();
                 Assert.Equal(
                     now.ToString(Rfc1123DateFormat),

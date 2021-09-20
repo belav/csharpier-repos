@@ -149,7 +149,8 @@ namespace Microsoft.CodeAnalysis
         private ImmutableArray<byte> GetHash(
             ref ImmutableArray<byte> lazyHash,
             HashAlgorithm algorithm
-        ) {
+        )
+        {
             if (lazyHash.IsDefault)
             {
                 ImmutableInterlocked.InterlockedCompareExchange(
@@ -194,7 +195,8 @@ namespace Microsoft.CodeAnalysis
         internal static ImmutableArray<byte> ComputeHash(
             HashAlgorithmName algorithmName,
             IEnumerable<Blob> bytes
-        ) {
+        )
+        {
             using (var incrementalHash = IncrementalHash.CreateHash(algorithmName))
             {
                 incrementalHash.AppendData(bytes);
@@ -205,7 +207,8 @@ namespace Microsoft.CodeAnalysis
         internal static ImmutableArray<byte> ComputeHash(
             HashAlgorithmName algorithmName,
             IEnumerable<ArraySegment<byte>> bytes
-        ) {
+        )
+        {
             using (var incrementalHash = IncrementalHash.CreateHash(algorithmName))
             {
                 incrementalHash.AppendData(bytes);
@@ -216,7 +219,8 @@ namespace Microsoft.CodeAnalysis
         internal static ImmutableArray<byte> ComputeSourceHash(
             ImmutableArray<byte> bytes,
             SourceHashAlgorithm hashAlgorithm = SourceHashAlgorithmUtils.DefaultContentHashAlgorithm
-        ) {
+        )
+        {
             var algorithmName = GetAlgorithmName(hashAlgorithm);
             using (var incrementalHash = IncrementalHash.CreateHash(algorithmName))
             {
@@ -228,7 +232,8 @@ namespace Microsoft.CodeAnalysis
         internal static ImmutableArray<byte> ComputeSourceHash(
             IEnumerable<Blob> bytes,
             SourceHashAlgorithm hashAlgorithm = SourceHashAlgorithmUtils.DefaultContentHashAlgorithm
-        ) {
+        )
+        {
             return ComputeHash(GetAlgorithmName(hashAlgorithm), bytes);
         }
     }

@@ -42,7 +42,8 @@ namespace System.Diagnostics.SymbolStore.Tests
             SymbolToken symbolToken,
             object other,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, symbolToken.Equals(other));
             if (other is SymbolToken otherSymbolToken)
             {

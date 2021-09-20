@@ -39,7 +39,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Interactive
             OleMenuCommandService menuCommandService,
             IVsMonitorSelection monitorSelection,
             IComponentModel componentModel
-        ) {
+        )
+        {
             _contentType = contentType;
             _menuCommandService = menuCommandService;
             _monitorSelection = monitorSelection;

@@ -328,7 +328,8 @@ namespace JIT.HardwareIntrinsics.X86
             Vector128<Byte> right,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Byte[] inArray1 = new Byte[Op1ElementCount];
             Byte[] inArray2 = new Byte[Op2ElementCount];
             Byte[] outArray = new Byte[RetElementCount];
@@ -349,7 +350,8 @@ namespace JIT.HardwareIntrinsics.X86
             void* right,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Byte[] inArray1 = new Byte[Op1ElementCount];
             Byte[] inArray2 = new Byte[Op2ElementCount];
             Byte[] outArray = new Byte[RetElementCount];
@@ -378,7 +380,8 @@ namespace JIT.HardwareIntrinsics.X86
             Byte[] right,
             Byte[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             if ((byte)(left[0] * right[0]) != result[0])
             {
                 Succeeded = false;

@@ -1025,14 +1025,16 @@ namespace System.Tests
             NumberStyles style,
             IFormatProvider provider,
             float expectedFloat
-        ) {
+        )
+        {
             bool isDefaultProvider = provider == null || provider == NumberFormatInfo.CurrentInfo;
             Half result;
             Half expected = (Half)expectedFloat;
             if (
                 (style & ~(NumberStyles.Float | NumberStyles.AllowThousands)) == 0
                 && style != NumberStyles.None
-            ) {
+            )
+            {
                 // Use Parse(string) or Parse(string, IFormatProvider)
                 if (isDefaultProvider)
                 {
@@ -1130,7 +1132,8 @@ namespace System.Tests
             NumberStyles style,
             IFormatProvider provider,
             Type exceptionType
-        ) {
+        )
+        {
             bool isDefaultProvider = provider == null || provider == NumberFormatInfo.CurrentInfo;
             Half result;
             if (
@@ -1138,7 +1141,8 @@ namespace System.Tests
                 && style != NumberStyles.None
                 && (style & NumberStyles.AllowLeadingWhite)
                     == (style & NumberStyles.AllowTrailingWhite)
-            ) {
+            )
+            {
                 // Use Parse(string) or Parse(string, IFormatProvider)
                 if (isDefaultProvider)
                 {
@@ -1238,14 +1242,16 @@ namespace System.Tests
             NumberStyles style,
             IFormatProvider provider,
             float expectedFloat
-        ) {
+        )
+        {
             bool isDefaultProvider = provider == null || provider == NumberFormatInfo.CurrentInfo;
             Half result;
             Half expected = (Half)expectedFloat;
             if (
                 (style & ~(NumberStyles.Float | NumberStyles.AllowThousands)) == 0
                 && style != NumberStyles.None
-            ) {
+            )
+            {
                 // Use Parse(string) or Parse(string, IFormatProvider)
                 if (isDefaultProvider)
                 {
@@ -1277,7 +1283,8 @@ namespace System.Tests
             NumberStyles style,
             IFormatProvider provider,
             Type exceptionType
-        ) {
+        )
+        {
             if (value != null)
             {
                 Assert.Throws(exceptionType, () => float.Parse(value.AsSpan(), style, provider));
@@ -1416,7 +1423,8 @@ namespace System.Tests
             string format,
             IFormatProvider provider,
             string expected
-        ) {
+        )
+        {
             bool isDefaultProvider = provider == null;
             if (string.IsNullOrEmpty(format) || format.ToUpperInvariant() == "G")
             {

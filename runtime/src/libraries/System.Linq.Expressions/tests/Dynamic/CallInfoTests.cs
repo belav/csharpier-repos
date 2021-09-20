@@ -29,7 +29,8 @@ namespace System.Dynamic.Tests
         public void Ctor_CountLessThanArgNamesCount_ThrowsArgumentException(
             int argCount,
             string[] argNames
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentException>(
                 null,
                 () => new CallInfo(argCount, argNames)
@@ -107,7 +108,8 @@ namespace System.Dynamic.Tests
             CallInfo info,
             object obj,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, info.Equals(obj));
 
             if (obj is CallInfo)

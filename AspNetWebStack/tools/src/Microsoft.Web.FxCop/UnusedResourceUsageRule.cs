@@ -78,7 +78,8 @@ namespace Microsoft.Web.FxCop
                     methodBeingCalled != null
                     && IsResourceType(methodBeingCalled.DeclaringType)
                     && IsResource(methodBeingCalled.DeclaringMember as PropertyNode)
-                ) {
+                )
+                {
                     var property = methodBeingCalled.DeclaringMember as PropertyNode;
 
                     ISet<PropertyNode> properties = null;
@@ -88,7 +89,8 @@ namespace Microsoft.Web.FxCop
                             (AssemblyNode)property.DeclaringType.DeclaringModule,
                             out properties
                         )
-                    ) {
+                    )
+                    {
                         AddItemWithLock(properties, property);
                     }
                 }

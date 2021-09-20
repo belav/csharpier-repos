@@ -102,20 +102,23 @@ namespace System.ComponentModel.Composition
 
         private static ImportCardinalityMismatchException CreateCardinalityMismatchException(
             string message
-        ) {
+        )
+        {
             return CreateCardinalityMismatchException(message, (Exception)null);
         }
 
         private static ImportCardinalityMismatchException CreateCardinalityMismatchException(
             Exception innerException
-        ) {
+        )
+        {
             return CreateCardinalityMismatchException((string)null, innerException);
         }
 
         private static ImportCardinalityMismatchException CreateCardinalityMismatchException(
             string message,
             Exception innerException
-        ) {
+        )
+        {
             return new ImportCardinalityMismatchException(message, innerException);
         }
     }

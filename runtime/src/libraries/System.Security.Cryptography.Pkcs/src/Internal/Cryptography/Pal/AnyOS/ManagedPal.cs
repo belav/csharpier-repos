@@ -106,7 +106,8 @@ namespace Internal.Cryptography.Pal.AnyOS
 
         private static SymmetricAlgorithm OpenAlgorithm(
             AlgorithmIdentifierAsn contentEncryptionAlgorithm
-        ) {
+        )
+        {
             SymmetricAlgorithm alg = OpenAlgorithm(contentEncryptionAlgorithm.Algorithm);
 
             if (alg is RC2)

@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.Host.Mef
     {
         public static ImmutableArray<Assembly> LoadNearbyAssemblies(
             IEnumerable<string> assemblyNames
-        ) {
+        )
+        {
             var assemblies = new List<Assembly>();
 
             foreach (var assemblyName in assemblyNames)

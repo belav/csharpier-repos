@@ -73,7 +73,8 @@ namespace System.Net.Http.Unit.Tests.HPack
         public void HPack_HeaderEncodeDecodeRoundtrip_ShouldMatchOriginalInput(
             HttpHeaders headers,
             Encoding? valueEncoding
-        ) {
+        )
+        {
             Memory<byte> encoding = HPackEncode(headers, valueEncoding);
             HttpHeaders decodedHeaders = HPackDecode(encoding, valueEncoding);
 
@@ -159,7 +160,8 @@ namespace System.Net.Http.Unit.Tests.HPack
                         buffer.AvailableSpan,
                         out bytesWritten
                     )
-                ) {
+                )
+                {
                     buffer.EnsureAvailableSpace(buffer.AvailableLength + 1);
                     FillAvailableSpaceWithOnes(buffer);
                 }
@@ -179,7 +181,8 @@ namespace System.Net.Http.Unit.Tests.HPack
                         buffer.AvailableSpan,
                         out bytesWritten
                     )
-                ) {
+                )
+                {
                     buffer.EnsureAvailableSpace(buffer.AvailableLength + 1);
                     FillAvailableSpaceWithOnes(buffer);
                 }

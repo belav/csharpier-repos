@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.UseNamedArguments
             public async Task ComputeRefactoringsAsync(
                 CodeRefactoringContext context,
                 SyntaxNode root
-            ) {
+            )
+            {
                 var (document, textSpan, cancellationToken) = context;
 
                 var potentialArguments = await document.GetRelevantNodesAsync<TBaseArgumentSyntax>(
@@ -122,7 +123,8 @@ namespace Microsoft.CodeAnalysis.UseNamedArguments
                 if (
                     SupportsNonTrailingNamedArguments(root.SyntaxTree.Options)
                     && potentialArgumentsToName > 1
-                ) {
+                )
+                {
                     context.RegisterRefactoring(
                         new MyCodeAction(
                             string.Format(FeaturesResources.Add_argument_name_0, argumentName),
@@ -185,7 +187,8 @@ namespace Microsoft.CodeAnalysis.UseNamedArguments
                 ImmutableArray<IParameterSymbol> parameters,
                 int index,
                 bool includingTrailingArguments
-            ) {
+            )
+            {
                 var argumentList = (TArgumentListSyntax)firstArgument.Parent!;
                 var newArgumentList = GetOrSynthesizeNamedArguments(
                     parameters,
@@ -202,7 +205,8 @@ namespace Microsoft.CodeAnalysis.UseNamedArguments
                 TArgumentListSyntax argumentList,
                 int index,
                 bool includingTrailingArguments
-            ) {
+            )
+            {
                 var arguments = GetArguments(argumentList);
                 var namedArguments = arguments.Select(
                     (argument, i) =>
@@ -262,7 +266,8 @@ namespace Microsoft.CodeAnalysis.UseNamedArguments
         protected AbstractUseNamedArgumentsCodeRefactoringProvider(
             IAnalyzer argumentAnalyzer,
             IAnalyzer attributeArgumentAnalyzer
-        ) {
+        )
+        {
             _argumentAnalyzer = argumentAnalyzer;
             _attributeArgumentAnalyzer = attributeArgumentAnalyzer;
         }

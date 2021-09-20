@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
             OptionSet optionSet,
             IEnumerable<AbstractFormattingRule> formattingRules,
             CompilationUnitSyntax root
-        ) {
+        )
+        {
             Contract.ThrowIfNull(optionSet);
             Contract.ThrowIfNull(formattingRules);
             Contract.ThrowIfNull(root);
@@ -46,7 +47,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
             SyntaxToken startToken,
             SyntaxToken endToken,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfTrue(
                 startToken.Kind() == SyntaxKind.None
                     || startToken.Kind() == SyntaxKind.EndOfFileToken
@@ -94,7 +96,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
             Workspace workspace,
             SyntaxToken token,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfTrue(
                 token.Kind() == SyntaxKind.None || token.Kind() == SyntaxKind.EndOfFileToken
             );
@@ -118,7 +121,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
                     token.Parent.IsInitializerForArrayOrCollectionCreationExpression()
                     || token.Parent is AnonymousObjectCreationExpressionSyntax
                 )
-            ) {
+            )
+            {
                 var nextToken = token.GetNextToken(includeZeroWidth: true);
                 if (nextToken.IsKind(SyntaxKind.CloseBraceToken))
                 {
@@ -138,7 +142,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
             if (
                 token.IsKind(SyntaxKind.OpenBraceToken)
                 && indentStyle != FormattingOptions.IndentStyle.Smart
-            ) {
+            )
+            {
                 RoslynDebug.AssertNotNull(token.SyntaxTree);
                 var text = await token.SyntaxTree.GetTextAsync(cancellationToken)
                     .ConfigureAwait(false);
@@ -164,7 +169,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
                 in SyntaxToken previousToken,
                 in SyntaxToken currentToken,
                 in NextGetAdjustNewLinesOperation nextOperation
-            ) {
+            )
+            {
                 // no line operation. no line changes what so ever
                 var lineOperation = base.GetAdjustNewLinesOperation(
                     in previousToken,
@@ -197,7 +203,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
                 List<SuppressOperation> list,
                 SyntaxNode node,
                 in NextSuppressOperationAction nextOperation
-            ) {
+            )
+            {
                 // don't suppress anything
             }
 
@@ -205,7 +212,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
                 in SyntaxToken previousToken,
                 in SyntaxToken currentToken,
                 in NextGetAdjustSpacesOperation nextOperation
-            ) {
+            )
+            {
                 var spaceOperation = base.GetAdjustSpacesOperation(
                     in previousToken,
                     in currentToken,
@@ -217,7 +225,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
                 if (
                     spaceOperation != null
                     && spaceOperation.Option == AdjustSpacesOption.ForceSpaces
-                ) {
+                )
+                {
                     return FormattingOperations.CreateAdjustSpacesOperation(
                         spaceOperation.Space,
                         AdjustSpacesOption.ForceSpacesIfOnSingleLine

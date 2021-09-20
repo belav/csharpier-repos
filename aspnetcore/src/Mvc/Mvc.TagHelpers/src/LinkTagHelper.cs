@@ -350,7 +350,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             if (
                 mode == Mode.GlobbedHref
                 || mode == Mode.Fallback && !string.IsNullOrEmpty(HrefInclude)
-            ) {
+            )
+            {
                 BuildGlobbedLinkTags(output.Attributes, builder);
                 if (string.IsNullOrEmpty(Href))
                 {
@@ -374,7 +375,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         private void BuildGlobbedLinkTags(
             TagHelperAttributeList attributes,
             TagHelperContent builder
-        ) {
+        )
+        {
             EnsureGlobbingUrlBuilder();
 
             // Build a <link /> tag for each matched href.
@@ -446,7 +448,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                         HrefAttributeName,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -457,7 +460,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                         IntegrityAttributeName,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -479,7 +483,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             if (
                 !attributes.TryGetAttribute(RelAttributeName, out var relAttribute)
                 || relAttribute.Value == null
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -510,7 +515,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         private void AppendFallbackHrefs(
             TagHelperContent builder,
             IReadOnlyList<string> fallbackHrefs
-        ) {
+        )
+        {
             builder.AppendHtml("[");
             var firstAdded = false;
 
@@ -576,7 +582,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             string href,
             TagHelperAttributeList attributes,
             TagHelperContent builder
-        ) {
+        )
+        {
             builder.AppendHtml("<link ");
 
             var addHref = true;
@@ -593,7 +600,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                         HrefAttributeName,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     addHref = false;
 
                     AppendVersionedHref(attribute.Name, href, builder);
@@ -617,7 +625,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             string hrefName,
             string hrefValue,
             TagHelperContent builder
-        ) {
+        )
+        {
             if (AppendVersion == true)
             {
                 hrefValue = FileVersionProvider.AddFileVersionToPath(

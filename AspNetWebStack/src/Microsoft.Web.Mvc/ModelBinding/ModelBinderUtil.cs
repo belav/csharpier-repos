@@ -47,7 +47,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
             Type closedModelType,
             Type openModelType,
             Type openBinderType
-        ) {
+        )
+        {
             Type[] typeArguments = TypeHelpers.GetTypeArgumentsIfMatch(
                 closedModelType,
                 openModelType
@@ -89,7 +90,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
         {
             if (
                 modelMetadata.ConvertEmptyStringToNull && StringIsEmptyOrWhitespace(model as string)
-            ) {
+            )
+            {
                 model = null;
             }
         }
@@ -103,7 +105,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
         public static MissingMethodException EnsureDebuggableException(
             MissingMethodException originalException,
             string fullTypeName
-        ) {
+        )
+        {
             MissingMethodException replacementException = null;
             if (!originalException.Message.Contains(fullTypeName))
             {
@@ -157,7 +160,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
             ExtensibleModelBindingContext bindingContext,
             Type requiredType,
             bool allowNullModel
-        ) {
+        )
+        {
             ValidateBindingContext(bindingContext);
 
             if (bindingContext.ModelType != requiredType)
@@ -175,7 +179,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
 
             if (
                 bindingContext.Model != null && !requiredType.IsInstanceOfType(bindingContext.Model)
-            ) {
+            )
+            {
                 throw Error.ModelBinderUtil_ModelInstanceIsWrong(
                     bindingContext.Model.GetType(),
                     requiredType

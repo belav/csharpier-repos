@@ -45,7 +45,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         [InlineData("\\foo")]
         public void NormalizeAndEnsureValidPath_ThrowsIfPathDoesNotStartWithForwardSlash(
             string path
-        ) {
+        )
+        {
             // Arrange
             var project = new TestRazorProject();
 

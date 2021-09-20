@@ -87,7 +87,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
                 TAttributeData attrData,
                 TSyntaxNode syntaxNodeOpt,
                 DiagnosticBag diagnostics
-            ) {
+            )
+            {
                 // Note, when porting attributes, we are not using constructors from original symbol.
                 // The constructors might be missing (for example, in metadata case) and doing lookup
                 // will ensure that we report appropriate errors.
@@ -98,7 +99,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
                         attrData,
                         AttributeDescription.LCIDConversionAttribute
                     )
-                ) {
+                )
+                {
                     if (attrData.CommonConstructorArguments.Length == 1)
                     {
                         return TypeManager.CreateSynthesizedAttribute(
@@ -219,7 +221,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
 
             System.Reflection.MethodImplAttributes Cci.IMethodDefinition.GetImplementationAttributes(
                 EmitContext context
-            ) {
+            )
+            {
                 return GetImplementationAttributes(context);
             }
 
@@ -232,7 +235,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
 
             IEnumerable<Cci.ICustomAttribute> Cci.IMethodDefinition.GetReturnValueAttributes(
                 EmitContext context
-            ) {
+            )
+            {
                 // TODO:
                 return SpecializedCollections.EmptyEnumerable<Cci.ICustomAttribute>();
             }
@@ -306,7 +310,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
 
             ImmutableArray<Cci.IParameterTypeInformation> Cci.ISignature.GetParameters(
                 EmitContext context
-            ) {
+            )
+            {
                 return StaticCast<Cci.IParameterTypeInformation>.From(_parameters);
             }
 

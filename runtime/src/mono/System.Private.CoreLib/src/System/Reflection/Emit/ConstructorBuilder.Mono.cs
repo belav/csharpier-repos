@@ -69,7 +69,8 @@ namespace System.Reflection.Emit
             Type[]? parameterTypes,
             Type[][]? paramModReq,
             Type[][]? paramModOpt
-        ) {
+        )
+        {
             attrs = attributes | MethodAttributes.SpecialName | MethodAttributes.RTSpecialName;
             call_conv = callingConvention;
             if (parameterTypes != null)
@@ -163,7 +164,8 @@ namespace System.Reflection.Emit
             Binder? binder,
             object?[]? parameters,
             CultureInfo? culture
-        ) {
+        )
+        {
             throw not_supported();
         }
 
@@ -172,7 +174,8 @@ namespace System.Reflection.Emit
             Binder? binder,
             object?[]? parameters,
             CultureInfo? culture
-        ) {
+        )
+        {
             throw not_supported();
         }
 
@@ -217,7 +220,8 @@ namespace System.Reflection.Emit
             int iSequence,
             ParameterAttributes attributes,
             string? strParamName
-        ) {
+        )
+        {
             // The 0th ParameterBuilder does not correspond to an
             // actual parameter, but .NETFramework lets you define
             // it anyway. It is not useful.
@@ -349,7 +353,8 @@ namespace System.Reflection.Emit
                     (iattrs & (MethodImplAttributes.Runtime | MethodImplAttributes.InternalCall))
                     == 0
                 )
-            ) {
+            )
+            {
                 if ((ilgen == null) || (ilgen.ILOffset == 0))
                     throw new InvalidOperationException(
                         "Method '" + Name + "' does not have a method body."

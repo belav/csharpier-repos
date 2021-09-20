@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                 SyntaxNode localStatement,
                 SyntaxNode enclosingBlock,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Debug.Assert(semanticModel != null);
                 Debug.Assert(localSymbol != null);
                 Debug.Assert(comparison != null);
@@ -57,7 +58,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                 SyntaxNode localStatement,
                 SyntaxNode enclosingBlock,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var analyzer = new Analyzer(
                     semanticModel,
                     localSymbol,
@@ -152,7 +154,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                                       ? conditionalExpression.WhenFalse
                                       : conditionalExpression.WhenTrue
                                 )
-                            ) {
+                            )
+                            {
                                 // In a conditional expression, the pattern variable
                                 // would not be definitely assigned in the opposite branch.
                                 return false;
@@ -222,7 +225,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                                 && !_semanticModel.AnalyzeControlFlow(
                                     ifStatement.Statement
                                 ).EndPointIsReachable
-                            ) {
+                            )
+                            {
                                 // Access before assignment here is only valid if we have a negative
                                 // pattern-matching in an if-statement with an unreachable endpoint.
                                 // For example:
@@ -266,7 +270,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                 SyntaxNode statement,
                 StatementSyntax body,
                 bool defAssignedWhenTrue
-            ) {
+            )
+            {
                 if (_operand.Kind() == SyntaxKind.IdentifierName)
                 {
                     // We have something like:
@@ -323,7 +328,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                             firstStatement: statement.GetNextStatement(),
                             lastStatement: block.Statements.Last()
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
 
@@ -359,7 +365,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                     if (
                         descendentNodeSpanStart >= comparisonSpanStart
                         && scopeSpan.Contains(descendentNode.Span)
-                    ) {
+                    )
+                    {
                         // If this is in the scope and after null-check, we don't bother checking the symbol.
                         continue;
                     }
@@ -373,7 +380,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                         && _localSymbol.Equals(
                             _semanticModel.GetSymbolInfo(identifierName, _cancellationToken).Symbol
                         )
-                    ) {
+                    )
+                    {
                         // If we got here, it means we have a local
                         // reference out of scope of the pattern variable.
                         return true;

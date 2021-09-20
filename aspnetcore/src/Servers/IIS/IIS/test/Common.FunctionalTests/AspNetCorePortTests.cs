@@ -157,7 +157,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
                         SocketType.Stream,
                         ProtocolType.Tcp
                     )
-                ) {
+                )
+                {
                     try
                     {
                         socket.Bind(new IPEndPoint(IPAddress.Loopback, port));

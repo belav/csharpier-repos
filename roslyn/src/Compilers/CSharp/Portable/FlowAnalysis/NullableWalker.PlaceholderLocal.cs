@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Symbol containingSymbol,
                 object identifier,
                 TypeWithAnnotations type
-            ) {
+            )
+            {
                 Debug.Assert(identifier != null);
                 _containingSymbol = containingSymbol;
                 _type = type;

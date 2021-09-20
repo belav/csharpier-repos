@@ -294,7 +294,8 @@ namespace System
             out int charsWritten,
             ReadOnlySpan<char> format = default,
             IFormatProvider? provider = null
-        ) {
+        )
+        {
             return Number.TryFormatDouble(
                 m_value,
                 format,
@@ -354,7 +355,8 @@ namespace System
             ReadOnlySpan<char> s,
             NumberStyles style = NumberStyles.Float | NumberStyles.AllowThousands,
             IFormatProvider? provider = null
-        ) {
+        )
+        {
             NumberFormatInfo.ValidateParseStyleFloatingPoint(style);
             return Number.ParseDouble(s, style, NumberFormatInfo.GetInstance(provider));
         }
@@ -390,7 +392,8 @@ namespace System
             NumberStyles style,
             IFormatProvider? provider,
             out double result
-        ) {
+        )
+        {
             NumberFormatInfo.ValidateParseStyleFloatingPoint(style);
 
             if (s == null)
@@ -412,7 +415,8 @@ namespace System
             NumberStyles style,
             IFormatProvider? provider,
             out double result
-        ) {
+        )
+        {
             NumberFormatInfo.ValidateParseStyleFloatingPoint(style);
             return TryParse(s, style, NumberFormatInfo.GetInstance(provider), out result);
         }
@@ -422,7 +426,8 @@ namespace System
             NumberStyles style,
             NumberFormatInfo info,
             out double result
-        ) {
+        )
+        {
             return Number.TryParseDouble(s, style, info, out result);
         }
 

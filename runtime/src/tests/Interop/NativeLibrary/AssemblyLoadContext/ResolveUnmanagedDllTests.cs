@@ -249,7 +249,8 @@ public class ResolveUnmanagedDllTests
         AssemblyLoadContext alc,
         int addend1,
         int addend2
-    ) {
+    )
+    {
         string currentDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         var assembly = alc.LoadFromAssemblyPath(Path.Combine(currentDir, "TestAsm.dll"));
         var type = assembly.GetType("TestAsm");

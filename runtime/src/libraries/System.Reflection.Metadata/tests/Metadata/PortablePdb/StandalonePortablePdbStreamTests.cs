@@ -13,7 +13,8 @@ namespace System.Reflection.Metadata.Tests
             out DebugMetadataHeader header,
             out int[] externalRowCounts,
             byte[] buffer
-        ) {
+        )
+        {
             fixed (byte* bufferPtr = &buffer[0])
             {
                 MetadataReader.ReadStandalonePortablePdbStream(

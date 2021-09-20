@@ -65,7 +65,8 @@ namespace System.Web.Mvc.Async
         public override ActionDescriptor FindAction(
             ControllerContext controllerContext,
             string actionName
-        ) {
+        )
+        {
             if (controllerContext == null)
             {
                 throw new ArgumentNullException("controllerContext");

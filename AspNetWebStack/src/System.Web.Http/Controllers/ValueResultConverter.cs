@@ -15,7 +15,8 @@ namespace System.Web.Http.Controllers
         public HttpResponseMessage Convert(
             HttpControllerContext controllerContext,
             object actionResult
-        ) {
+        )
+        {
             if (controllerContext == null)
             {
                 throw Error.ArgumentNull("controllerContext");

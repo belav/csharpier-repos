@@ -35,7 +35,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
         public virtual void EnsureInitialized(
             IServiceProvider serviceProvider,
             IDbContextOptions options
-        ) {
+        )
+        {
             if (!_isInitialized)
             {
                 lock (_lock)
@@ -46,7 +47,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
                             var singletonOptions in serviceProvider.GetRequiredService<
                                 IEnumerable<ISingletonOptions>
                             >()
-                        ) {
+                        )
+                        {
                             singletonOptions.Initialize(options);
                         }
 
@@ -59,7 +61,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
                 var singletonOptions in serviceProvider.GetRequiredService<
                     IEnumerable<ISingletonOptions>
                 >()
-            ) {
+            )
+            {
                 singletonOptions.Validate(options);
             }
         }

@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
     {
         public PageAsyncDisposalTest(
             MvcTestFixture<RazorPagesWebSite.StartupWithoutEndpointRouting> fixture
-        ) {
+        )
+        {
             Factory =
                 fixture.Factories.FirstOrDefault()
                 ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);

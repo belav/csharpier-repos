@@ -44,7 +44,8 @@ namespace System.Net.Security.Tests
                                 "Private.InternalDiagnostics.System.Net.Security",
                                 EventLevel.Verbose
                             )
-                        ) {
+                        )
+                        {
                             var events = new ConcurrentQueue<EventWrittenEventArgs>();
                             listener.RunWithCallback(
                                 events.Enqueue,

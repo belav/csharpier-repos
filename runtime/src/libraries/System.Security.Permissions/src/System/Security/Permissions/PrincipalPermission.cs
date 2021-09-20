@@ -125,7 +125,8 @@ namespace System.Security.Permissions
                             operandIdRole.Role == null
                             || (idRole.Role != null && idRole.Role.Equals(operandIdRole.Role))
                         )
-                    ) {
+                    )
+                    {
                         foundMatch = true;
                         break;
                     }
@@ -179,7 +180,8 @@ namespace System.Security.Permissions
                             operandIdRole.ID == null
                             || idRole.ID == null
                             || idRole.ID.Equals(operandIdRole.ID)
-                        ) {
+                        )
+                        {
                             newID = operandIdRole.ID == null ? idRole.ID : operandIdRole.ID;
                             addToNewIDRoles = true;
                         }
@@ -187,7 +189,8 @@ namespace System.Security.Permissions
                             operandIdRole.Role == null
                             || idRole.Role == null
                             || idRole.Role.Equals(operandIdRole.Role)
-                        ) {
+                        )
+                        {
                             newRole = operandIdRole.Role == null ? idRole.Role : operandIdRole.Role;
                             addToNewIDRoles = true;
                         }
@@ -283,7 +286,8 @@ namespace System.Security.Permissions
                             StringComparison.OrdinalIgnoreCase
                         )
                     )
-                ) {
+                )
+                {
                     if (idRole.Role == null || principal.IsInRole(idRole.Role))
                         return;
                 }

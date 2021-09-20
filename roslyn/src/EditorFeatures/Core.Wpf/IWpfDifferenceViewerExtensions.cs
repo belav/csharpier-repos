@@ -55,7 +55,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
 
             private async Task<IProjectionSnapshot> GetInlineBufferSnapshotAsync(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 cancellationToken.ThrowIfCancellationRequested();
 
                 if (_diffViewer.DifferenceBuffer.CurrentInlineBufferSnapshot is { } snapshot)
@@ -89,7 +90,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                 void HandleSnapshotDifferenceChanged(
                     object sender,
                     SnapshotDifferenceChangeEventArgs e
-                ) {
+                )
+                {
                     // This event handler will only be called when the inline diff snapshot computation is complete.
                     Contract.ThrowIfNull(_diffViewer.DifferenceBuffer.CurrentInlineBufferSnapshot);
 
@@ -161,7 +163,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             IThreadingContext threadingContext,
             double minWidth = 400.0,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var helper = new SizeToFitHelper(threadingContext, diffViewer, minWidth);
             return helper.SizeToFitAsync(cancellationToken);
         }

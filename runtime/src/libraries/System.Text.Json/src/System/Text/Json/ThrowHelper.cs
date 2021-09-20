@@ -15,7 +15,8 @@ namespace System.Text.Json
 
         public static ArgumentOutOfRangeException GetArgumentOutOfRangeException_MaxDepthMustBePositive(
             string parameterName
-        ) {
+        )
+        {
             return GetArgumentOutOfRangeException(parameterName, SR.MaxDepthMustBePositive);
         }
 
@@ -23,13 +24,15 @@ namespace System.Text.Json
         private static ArgumentOutOfRangeException GetArgumentOutOfRangeException(
             string parameterName,
             string message
-        ) {
+        )
+        {
             return new ArgumentOutOfRangeException(parameterName, message);
         }
 
         public static ArgumentOutOfRangeException GetArgumentOutOfRangeException_CommentEnumMustBeInRange(
             string parameterName
-        ) {
+        )
+        {
             return GetArgumentOutOfRangeException(parameterName, SR.CommentHandlingMustBeValid);
         }
 
@@ -47,7 +50,8 @@ namespace System.Text.Json
 
         public static InvalidOperationException GetInvalidOperationException_CallFlushFirst(
             int _buffered
-        ) {
+        )
+        {
             return GetInvalidOperationException(SR.Format(SR.CallFlushToAvoidDataLoss, _buffered));
         }
 
@@ -79,7 +83,8 @@ namespace System.Text.Json
         public static void ThrowArgumentException(
             ReadOnlySpan<byte> propertyName,
             ReadOnlySpan<byte> value
-        ) {
+        )
+        {
             if (propertyName.Length > JsonConstants.MaxUnescapedTokenSize)
             {
                 ThrowArgumentException(SR.Format(SR.PropertyNameTooLarge, propertyName.Length));
@@ -95,7 +100,8 @@ namespace System.Text.Json
         public static void ThrowArgumentException(
             ReadOnlySpan<byte> propertyName,
             ReadOnlySpan<char> value
-        ) {
+        )
+        {
             if (propertyName.Length > JsonConstants.MaxUnescapedTokenSize)
             {
                 ThrowArgumentException(SR.Format(SR.PropertyNameTooLarge, propertyName.Length));
@@ -111,7 +117,8 @@ namespace System.Text.Json
         public static void ThrowArgumentException(
             ReadOnlySpan<char> propertyName,
             ReadOnlySpan<byte> value
-        ) {
+        )
+        {
             if (propertyName.Length > JsonConstants.MaxCharacterTokenSize)
             {
                 ThrowArgumentException(SR.Format(SR.PropertyNameTooLarge, propertyName.Length));
@@ -127,7 +134,8 @@ namespace System.Text.Json
         public static void ThrowArgumentException(
             ReadOnlySpan<char> propertyName,
             ReadOnlySpan<char> value
-        ) {
+        )
+        {
             if (propertyName.Length > JsonConstants.MaxCharacterTokenSize)
             {
                 ThrowArgumentException(SR.Format(SR.PropertyNameTooLarge, propertyName.Length));
@@ -143,7 +151,8 @@ namespace System.Text.Json
         public static void ThrowInvalidOperationOrArgumentException(
             ReadOnlySpan<byte> propertyName,
             int currentDepth
-        ) {
+        )
+        {
             currentDepth &= JsonConstants.RemoveFlagsBitMask;
             if (currentDepth >= JsonConstants.MaxWriterDepth)
             {
@@ -206,7 +215,8 @@ namespace System.Text.Json
         public static void ThrowInvalidOperationOrArgumentException(
             ReadOnlySpan<char> propertyName,
             int currentDepth
-        ) {
+        )
+        {
             currentDepth &= JsonConstants.RemoveFlagsBitMask;
             if (currentDepth >= JsonConstants.MaxWriterDepth)
             {
@@ -223,43 +233,50 @@ namespace System.Text.Json
 
         public static InvalidOperationException GetInvalidOperationException_ExpectedArray(
             JsonTokenType tokenType
-        ) {
+        )
+        {
             return GetInvalidOperationException("array", tokenType);
         }
 
         public static InvalidOperationException GetInvalidOperationException_ExpectedObject(
             JsonTokenType tokenType
-        ) {
+        )
+        {
             return GetInvalidOperationException("object", tokenType);
         }
 
         public static InvalidOperationException GetInvalidOperationException_ExpectedNumber(
             JsonTokenType tokenType
-        ) {
+        )
+        {
             return GetInvalidOperationException("number", tokenType);
         }
 
         public static InvalidOperationException GetInvalidOperationException_ExpectedBoolean(
             JsonTokenType tokenType
-        ) {
+        )
+        {
             return GetInvalidOperationException("boolean", tokenType);
         }
 
         public static InvalidOperationException GetInvalidOperationException_ExpectedString(
             JsonTokenType tokenType
-        ) {
+        )
+        {
             return GetInvalidOperationException("string", tokenType);
         }
 
         public static InvalidOperationException GetInvalidOperationException_ExpectedStringComparison(
             JsonTokenType tokenType
-        ) {
+        )
+        {
             return GetInvalidOperationException(tokenType);
         }
 
         public static InvalidOperationException GetInvalidOperationException_ExpectedComment(
             JsonTokenType tokenType
-        ) {
+        )
+        {
             return GetInvalidOperationException("comment", tokenType);
         }
 
@@ -273,14 +290,16 @@ namespace System.Text.Json
         private static InvalidOperationException GetInvalidOperationException(
             string message,
             JsonTokenType tokenType
-        ) {
+        )
+        {
             return GetInvalidOperationException(SR.Format(SR.InvalidCast, tokenType, message));
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static InvalidOperationException GetInvalidOperationException(
             JsonTokenType tokenType
-        ) {
+        )
+        {
             return GetInvalidOperationException(SR.Format(SR.InvalidComparison, tokenType));
         }
 
@@ -288,7 +307,8 @@ namespace System.Text.Json
         internal static InvalidOperationException GetJsonElementWrongTypeException(
             JsonTokenType expectedType,
             JsonTokenType actualType
-        ) {
+        )
+        {
             return GetJsonElementWrongTypeException(
                 expectedType.ToValueKind(),
                 actualType.ToValueKind()
@@ -299,7 +319,8 @@ namespace System.Text.Json
         internal static InvalidOperationException GetJsonElementWrongTypeException(
             string expectedTypeName,
             JsonTokenType actualType
-        ) {
+        )
+        {
             return GetJsonElementWrongTypeException(expectedTypeName, actualType.ToValueKind());
         }
 
@@ -307,7 +328,8 @@ namespace System.Text.Json
         internal static InvalidOperationException GetJsonElementWrongTypeException(
             JsonValueKind expectedType,
             JsonValueKind actualType
-        ) {
+        )
+        {
             return GetInvalidOperationException(
                 SR.Format(SR.JsonElementHasWrongType, expectedType, actualType)
             );
@@ -317,7 +339,8 @@ namespace System.Text.Json
         internal static InvalidOperationException GetJsonElementWrongTypeException(
             string expectedTypeName,
             JsonValueKind actualType
-        ) {
+        )
+        {
             return GetInvalidOperationException(
                 SR.Format(SR.JsonElementHasWrongType, expectedTypeName, actualType)
             );
@@ -329,7 +352,8 @@ namespace System.Text.Json
             ExceptionResource resource,
             byte nextByte = default,
             ReadOnlySpan<byte> bytes = default
-        ) {
+        )
+        {
             throw GetJsonReaderException(ref json, resource, nextByte, bytes);
         }
 
@@ -339,7 +363,8 @@ namespace System.Text.Json
             ExceptionResource resource,
             byte nextByte,
             ReadOnlySpan<byte> bytes
-        ) {
+        )
+        {
             string message = GetResourceString(
                 ref json,
                 resource,
@@ -369,7 +394,8 @@ namespace System.Text.Json
             ExceptionResource resource,
             byte nextByte,
             string characters
-        ) {
+        )
+        {
             string character = GetPrintableString(nextByte);
 
             string message = "";
@@ -496,7 +522,8 @@ namespace System.Text.Json
             int currentDepth,
             byte token,
             JsonTokenType tokenType
-        ) {
+        )
+        {
             throw GetInvalidOperationException(resource, currentDepth, token, tokenType);
         }
 
@@ -558,20 +585,23 @@ namespace System.Text.Json
 
         public static InvalidOperationException GetInvalidOperationException_ReadInvalidUTF8(
             DecoderFallbackException innerException
-        ) {
+        )
+        {
             return GetInvalidOperationException(SR.CannotTranscodeInvalidUtf8, innerException);
         }
 
         public static ArgumentException GetArgumentException_ReadInvalidUTF16(
             EncoderFallbackException innerException
-        ) {
+        )
+        {
             return new ArgumentException(SR.CannotTranscodeInvalidUtf16, innerException);
         }
 
         public static InvalidOperationException GetInvalidOperationException(
             string message,
             Exception innerException
-        ) {
+        )
+        {
             InvalidOperationException ex = new InvalidOperationException(message, innerException);
             ex.Source = ExceptionSourceValueToRethrowAsJsonException;
             return ex;
@@ -583,7 +613,8 @@ namespace System.Text.Json
             int currentDepth,
             byte token,
             JsonTokenType tokenType
-        ) {
+        )
+        {
             string message = GetResourceString(resource, currentDepth, token, tokenType);
             InvalidOperationException ex = GetInvalidOperationException(message);
             ex.Source = ExceptionSourceValueToRethrowAsJsonException;
@@ -603,7 +634,8 @@ namespace System.Text.Json
             int currentDepth,
             byte token,
             JsonTokenType tokenType
-        ) {
+        )
+        {
             string message = "";
             switch (resource)
             {
@@ -746,7 +778,8 @@ namespace System.Text.Json
 
         public static InvalidOperationException GetInvalidOperationException_ExpectedChar(
             JsonTokenType tokenType
-        ) {
+        )
+        {
             return GetInvalidOperationException("char", tokenType);
         }
     }

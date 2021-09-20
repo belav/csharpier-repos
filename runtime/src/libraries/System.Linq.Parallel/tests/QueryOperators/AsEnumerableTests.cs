@@ -31,7 +31,8 @@ namespace System.Linq.Parallel.Tests
         public static void AsEnumerable_Unordered_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             AsEnumerable_Unordered(labeled, count);
         }
 

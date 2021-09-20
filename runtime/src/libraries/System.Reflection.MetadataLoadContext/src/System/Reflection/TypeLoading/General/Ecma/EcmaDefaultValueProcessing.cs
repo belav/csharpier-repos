@@ -12,7 +12,8 @@ namespace System.Reflection.TypeLoading.Ecma
         public static object? ToRawObject(
             this ConstantHandle constantHandle,
             MetadataReader metadataReader
-        ) {
+        )
+        {
             if (constantHandle.IsNil)
                 throw new BadImageFormatException();
 
@@ -77,7 +78,8 @@ namespace System.Reflection.TypeLoading.Ecma
             this CustomAttributeHandleCollection handles,
             EcmaModule module,
             out object? rawDefaultValue
-        ) {
+        )
+        {
             rawDefaultValue = default;
 
             MetadataReader reader = module.Reader;
@@ -94,7 +96,8 @@ namespace System.Reflection.TypeLoading.Ecma
                         Utf8Constants.DateTimeConstantAttribute,
                         reader
                     )
-                ) {
+                )
+                {
                     CustomAttributeData cad = handle.ToCustomAttributeData(module);
                     IList<CustomAttributeTypedArgument> cats = cad.ConstructorArguments;
                     if (cats.Count != 1)
@@ -115,7 +118,8 @@ namespace System.Reflection.TypeLoading.Ecma
                         Utf8Constants.DecimalConstantAttribute,
                         reader
                     )
-                ) {
+                )
+                {
                     CustomAttributeData cad = handle.ToCustomAttributeData(module);
                     IList<CustomAttributeTypedArgument> cats = cad.ConstructorArguments;
                     if (cats.Count != 5)
@@ -135,7 +139,8 @@ namespace System.Reflection.TypeLoading.Ecma
                         cats[2].ArgumentType == ct[CoreType.Int32]
                         && cats[3].ArgumentType == ct[CoreType.Int32]
                         && cats[4].ArgumentType == ct[CoreType.Int32]
-                    ) {
+                    )
+                    {
                         int hi = (int)cats[2].Value!;
                         int mid = (int)cats[3].Value!;
                         int lo = (int)cats[4].Value!;
@@ -148,7 +153,8 @@ namespace System.Reflection.TypeLoading.Ecma
                         cats[2].ArgumentType == ct[CoreType.UInt32]
                         && cats[3].ArgumentType == ct[CoreType.UInt32]
                         && cats[4].ArgumentType == ct[CoreType.UInt32]
-                    ) {
+                    )
+                    {
                         uint hi = (uint)cats[2].Value!;
                         uint mid = (uint)cats[3].Value!;
                         uint lo = (uint)cats[4].Value!;

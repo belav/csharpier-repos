@@ -46,7 +46,8 @@ namespace BenchmarkDotNet.Attributes
                         ConfigName ?? NamedConfiguration.Default,
                         out var configType
                     )
-                ) {
+                )
+                {
                     var message =
                         $"Could not find a configuration matching {ConfigName}. "
                         + $"Known configurations: {string.Join(", ", ConfigTypes.Keys)}";

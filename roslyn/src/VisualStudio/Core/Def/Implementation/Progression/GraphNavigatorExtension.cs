@@ -27,10 +27,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
     {
         private readonly Workspace _workspace;
 
-        public GraphNavigatorExtension(
-            IThreadingContext threadingContext,
-            Workspace workspace
-        ) : base(threadingContext)
+        public GraphNavigatorExtension(IThreadingContext threadingContext, Workspace workspace)
+            : base(threadingContext)
         {
             _workspace = workspace;
         }
@@ -120,7 +118,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             Project project,
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             AssertIsForeground();
 
             // Notify of navigation so third parties can intercept the navigation
@@ -146,7 +145,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                             cancellationToken
                         )
                         .WaitAndGetResult(cancellationToken)
-                ) {
+                )
+                {
                     return;
                 }
             }

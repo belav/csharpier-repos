@@ -62,14 +62,16 @@ namespace Microsoft.AspNetCore.TestHost
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _inner.ReadAsync(buffer, offset, count, cancellationToken);
         }
 
         public override ValueTask<int> ReadAsync(
             Memory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return _inner.ReadAsync(buffer, cancellationToken);
         }
 
@@ -79,7 +81,8 @@ namespace Microsoft.AspNetCore.TestHost
             int count,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             return _inner.BeginRead(buffer, offset, count, callback, state);
         }
 
@@ -116,7 +119,8 @@ namespace Microsoft.AspNetCore.TestHost
             int count,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             return _inner.BeginWrite(buffer, offset, count, callback, state);
         }
 
@@ -130,14 +134,16 @@ namespace Microsoft.AspNetCore.TestHost
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _inner.WriteAsync(buffer, offset, count, cancellationToken);
         }
 
         public override ValueTask WriteAsync(
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return _inner.WriteAsync(buffer, cancellationToken);
         }
 

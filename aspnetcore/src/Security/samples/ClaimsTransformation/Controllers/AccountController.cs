@@ -27,7 +27,8 @@ namespace AuthSamples.ClaimsTransformer.Controllers
             string userName,
             string password,
             string returnUrl = null
-        ) {
+        )
+        {
             ViewData["ReturnUrl"] = returnUrl;
 
             // Normally Identity handles sign in, but you can do it directly

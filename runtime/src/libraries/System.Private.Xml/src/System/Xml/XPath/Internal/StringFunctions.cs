@@ -106,7 +106,8 @@ namespace MS.Internal.Xml.XPath
                 if (
                     _funcType == Function.FunctionType.FuncStartsWith
                     || _funcType == Function.FunctionType.FuncContains
-                ) {
+                )
+                {
                     return XPathResultType.Boolean;
                 }
                 return XPathResultType.String;

@@ -39,7 +39,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IEndpointConventionBuilder MapFallback(
             this IEndpointRouteBuilder endpoints,
             RequestDelegate requestDelegate
-        ) {
+        )
+        {
             if (endpoints == null)
             {
                 throw new ArgumentNullException(nameof(endpoints));
@@ -78,7 +79,8 @@ namespace Microsoft.AspNetCore.Builder
             this IEndpointRouteBuilder endpoints,
             string pattern,
             RequestDelegate requestDelegate
-        ) {
+        )
+        {
             if (endpoints == null)
             {
                 throw new ArgumentNullException(nameof(endpoints));

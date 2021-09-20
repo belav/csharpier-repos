@@ -27,7 +27,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
             bool? lazyLoadingEnabled,
             CascadeTiming? cascadeDeleteTiming,
             CascadeTiming? deleteOrphansTiming
-        ) {
+        )
+        {
             AutoDetectChangesEnabled = autoDetectChangesEnabled;
             QueryTrackingBehavior = queryTrackingBehavior;
             AutoTransactionsEnabled = autoTransactionsEnabled;

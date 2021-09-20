@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             string directory,
             string callerSourcePath,
             int callerLineNumber
-        ) {
+        )
+        {
             while (true)
             {
                 if (prefix == null)

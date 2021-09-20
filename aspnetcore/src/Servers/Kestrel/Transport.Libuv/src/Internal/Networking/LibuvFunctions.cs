@@ -263,7 +263,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
             UvPipeHandle handle,
             string name,
             uv_connect_cb cb
-        ) {
+        )
+        {
             req.Validate();
             handle.Validate();
             _uv_pipe_connect(req, handle, name, cb);
@@ -320,7 +321,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
             uv_buf_t* bufs,
             int nbufs,
             uv_write_cb cb
-        ) {
+        )
+        {
             req.Validate();
             handle.Validate();
             ThrowIfErrored(_uv_write(req, handle, bufs, nbufs, cb));
@@ -342,7 +344,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
             int nbufs,
             UvStreamHandle sendHandle,
             uv_write_cb cb
-        ) {
+        )
+        {
             req.Validate();
             handle.Validate();
             ThrowIfErrored(_uv_write2(req, handle, bufs, nbufs, sendHandle, cb));
@@ -419,7 +422,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
             uv_timer_cb cb,
             long timeout,
             long repeat
-        ) {
+        )
+        {
             handle.Validate();
             ThrowIfErrored(_uv_timer_start(handle, cb, timeout, repeat));
         }

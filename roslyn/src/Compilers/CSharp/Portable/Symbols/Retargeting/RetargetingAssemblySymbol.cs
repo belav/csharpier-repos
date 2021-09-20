@@ -164,7 +164,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
             CultureInfo preferredCulture = null,
             bool expandIncludes = false,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return _underlyingAssembly.GetDocumentationCommentXml(
                 preferredCulture,
                 expandIncludes,
@@ -193,7 +194,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
         internal override IEnumerable<ImmutableArray<byte>> GetInternalsVisibleToPublicKeys(
             string simpleName
-        ) {
+        )
+        {
             return _underlyingAssembly.GetInternalsVisibleToPublicKeys(simpleName);
         }
 
@@ -230,13 +232,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
         internal override void SetNoPiaResolutionAssemblies(
             ImmutableArray<AssemblySymbol> assemblies
-        ) {
+        )
+        {
             _noPiaResolutionAssemblies = assemblies;
         }
 
         internal override void SetLinkedReferencedAssemblies(
             ImmutableArray<AssemblySymbol> assemblies
-        ) {
+        )
+        {
             _linkedReferencedAssemblies = assemblies;
         }
 
@@ -278,7 +282,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
         internal override NamedTypeSymbol TryLookupForwardedMetadataTypeWithCycleDetection(
             ref MetadataTypeName emittedName,
             ConsList<AssemblySymbol> visitedAssemblies
-        ) {
+        )
+        {
             NamedTypeSymbol underlying = _underlyingAssembly.TryLookupForwardedMetadataType(
                 ref emittedName
             );
@@ -298,7 +303,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
         {
             foreach (
                 NamedTypeSymbol underlying in _underlyingAssembly.GetAllTopLevelForwardedTypes()
-            ) {
+            )
+            {
                 yield return this.RetargetingTranslator.Retarget(
                     underlying,
                     RetargetOptions.RetargetPrimitiveTypesByName

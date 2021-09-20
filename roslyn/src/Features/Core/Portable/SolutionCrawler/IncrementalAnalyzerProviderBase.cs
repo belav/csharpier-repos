@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     PerLanguageIncrementalAnalyzerProviderMetadata
                 >
             > providers
-        ) {
+        )
+        {
             _providers = providers.Where(p => p.Metadata.Name == name).ToList();
         }
 

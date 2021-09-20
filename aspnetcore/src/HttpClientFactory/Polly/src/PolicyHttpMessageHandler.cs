@@ -100,7 +100,8 @@ namespace Microsoft.Extensions.Http
         /// <param name="policySelector">A function which can select the desired policy for a given <see cref="HttpRequestMessage"/>.</param>
         public PolicyHttpMessageHandler(
             Func<HttpRequestMessage, IAsyncPolicy<HttpResponseMessage>> policySelector
-        ) {
+        )
+        {
             if (policySelector == null)
             {
                 throw new ArgumentNullException(nameof(policySelector));
@@ -113,7 +114,8 @@ namespace Microsoft.Extensions.Http
         protected override async Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (request == null)
             {
                 throw new ArgumentNullException(nameof(request));
@@ -164,7 +166,8 @@ namespace Microsoft.Extensions.Http
             HttpRequestMessage request,
             Context context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (request == null)
             {
                 throw new ArgumentNullException(nameof(request));

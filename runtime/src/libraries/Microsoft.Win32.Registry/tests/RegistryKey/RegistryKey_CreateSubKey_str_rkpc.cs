@@ -49,7 +49,8 @@ namespace Microsoft.Win32.RegistryTests
                     TestRegistryKeyName,
                     RegistryKeyPermissionCheck.ReadWriteSubTree
                 )
-            ) {
+            )
+            {
                 Assert.NotNull(rk);
 
                 rk.SetValue(testValueName, testValue);
@@ -173,7 +174,8 @@ namespace Microsoft.Win32.RegistryTests
                     writable: false,
                     options: RegistryOptions.None
                 )
-            ) {
+            )
+            {
                 Assert.Throws<UnauthorizedAccessException>(() => rk.CreateSubKey(name));
                 Assert.Throws<UnauthorizedAccessException>(() => rk.SetValue(name, "String"));
                 Assert.Throws<UnauthorizedAccessException>(() => rk.DeleteValue(name));
@@ -187,7 +189,8 @@ namespace Microsoft.Win32.RegistryTests
                     RegistryKeyPermissionCheck.ReadSubTree,
                     RegistryOptions.None
                 )
-            ) {
+            )
+            {
                 Assert.Throws<UnauthorizedAccessException>(() => rk.CreateSubKey(name));
                 Assert.Throws<UnauthorizedAccessException>(() => rk.SetValue(name, "String"));
                 Assert.Throws<UnauthorizedAccessException>(() => rk.DeleteValue(name));
@@ -227,7 +230,8 @@ namespace Microsoft.Win32.RegistryTests
                     string.Empty,
                     RegistryKeyPermissionCheck.ReadWriteSubTree
                 )
-            ) {
+            )
+            {
                 Assert.NotNull(rk);
                 Assert.Equal(expectedName, rk.Name);
             }
@@ -258,7 +262,8 @@ namespace Microsoft.Win32.RegistryTests
         public void ReadWritePermissionCheckWithRegistryOptionsTestsValid(
             bool alreadyExists,
             RegistryOptions options
-        ) {
+        )
+        {
             string subkey = "TEST_" + options.ToString();
 
             if (alreadyExists)

@@ -115,7 +115,8 @@ namespace System.Configuration
             SettingsContext context,
             SettingsPropertyCollection properties,
             SettingsProviderCollection providers
-        ) {
+        )
+        {
             _context = context;
             _properties = properties;
             _providers = providers;

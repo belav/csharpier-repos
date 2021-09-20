@@ -302,7 +302,8 @@ namespace System.Web.Helpers.Test
             string fileName,
             byte[] content,
             string expectedExtension
-        ) {
+        )
+        {
             // Arrange
             Mock<HttpPostedFileBase> postedFile = new Mock<HttpPostedFileBase>();
             postedFile.Setup(c => c.FileName).Returns(fileName);

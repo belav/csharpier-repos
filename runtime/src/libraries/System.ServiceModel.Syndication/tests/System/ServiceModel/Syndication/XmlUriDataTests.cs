@@ -54,7 +54,8 @@ namespace System.ServiceModel.Syndication.Tests
             string uriString,
             UriKind uriKind,
             XmlQualifiedName elementQualifiedName
-        ) {
+        )
+        {
             var data = new XmlUriData(uriString, uriKind, elementQualifiedName);
             Assert.Equal(uriString, data.UriString);
             Assert.Equal(uriKind, data.UriKind);

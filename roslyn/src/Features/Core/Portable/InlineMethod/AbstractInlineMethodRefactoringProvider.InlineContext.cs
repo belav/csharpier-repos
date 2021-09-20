@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                 ImmutableArray<TStatementSyntax> statementsToInsertBeforeInvocationOfCallee,
                 TExpressionSyntax inlineExpression,
                 bool containsAwaitExpression
-            ) {
+            )
+            {
                 StatementsToInsertBeforeInvocationOfCallee =
                     statementsToInsertBeforeInvocationOfCallee;
                 InlineExpression = inlineExpression;
@@ -60,7 +61,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
             TExpressionSyntax rawInlineExpression,
             MethodParametersInfo methodParametersInfo,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var inlineExpression = rawInlineExpression;
             var syntaxGenerator = SyntaxGenerator.GetGenerator(document);
             var callerSemanticModel = await document.GetRequiredSemanticModelAsync(
@@ -278,7 +280,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
             ImmutableArray<(IParameterSymbol parameterSymbol, TExpressionSyntax expression)> parametersToGenerateFreshVariablesFor,
             ImmutableArray<(IParameterSymbol parameterSymbol, string identifierName)> parametersWithVariableDeclarationArgument,
             ImmutableDictionary<ISymbol, string> renameTable
-        ) {
+        )
+        {
             var declarationsQuery = parametersToGenerateFreshVariablesFor.Select(
                 parameterAndArguments =>
                     CreateLocalDeclarationStatement(
@@ -316,7 +319,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
             SyntaxGenerator syntaxGenerator,
             ImmutableDictionary<ISymbol, string> renameTable,
             (IParameterSymbol parameterSymbol, TExpressionSyntax expression) parameterAndExpression
-        ) {
+        )
+        {
             var (parameterSymbol, expression) = parameterAndExpression;
             var name = renameTable.TryGetValue(parameterSymbol, out var newName)
                 ? newName
@@ -334,7 +338,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
             SyntaxGenerator syntaxGenerator,
             ImmutableDictionary<ISymbol, SyntaxNode> replacementTable,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var editor = new SyntaxEditor(inlineExpression, syntaxGenerator);
 
             foreach (var (symbol, syntaxNode) in replacementTable)
@@ -382,7 +387,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
             ImmutableDictionary<IParameterSymbol, TExpressionSyntax> parametersToReplace,
             SyntaxGenerator syntaxGenerator,
             ImmutableDictionary<ISymbol, string> renameTable
-        ) {
+        )
+        {
             var typeParametersReplacementQuery = calleeMethodSymbol.TypeParameters.Zip(
                 calleeMethodSymbol.TypeArguments,
                 (parameter, argument) =>
@@ -428,7 +434,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
             TExpressionSyntax rawInlineExpression,
             ImmutableArray<IParameterSymbol> parametersNeedGenerateFreshVariableFor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var renameTable = new Dictionary<ISymbol, string>();
             var localSymbolsInCallee = LocalVariableDeclarationVisitor.GetAllSymbols(
                 calleeSemanticModel,
@@ -437,7 +444,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
             );
             foreach (
                 var symbol in parametersNeedGenerateFreshVariableFor.Concat(localSymbolsInCallee)
-            ) {
+            )
+            {
                 var usedNames = renameTable.Values;
                 renameTable[symbol] =
                     semanticFacts.GenerateUniqueLocalName(
@@ -467,7 +475,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                 SemanticModel semanticModel,
                 TExpressionSyntax methodDeclarationSyntax,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var visitor = new LocalVariableDeclarationVisitor(cancellationToken);
                 var operation = semanticModel.GetOperation(
                     methodDeclarationSyntax,
@@ -494,7 +503,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                 if (
                     operation is ILocalReferenceOperation localReferenceOperation
                     && localReferenceOperation.IsDeclaration
-                ) {
+                )
+                {
                     _allSymbols.Add(localReferenceOperation.Local);
                 }
 
@@ -502,7 +512,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                 if (
                     operation.Kind == OperationKind.AnonymousFunction
                     || operation.Kind == OperationKind.LocalFunction
-                ) {
+                )
+                {
                     return;
                 }
 

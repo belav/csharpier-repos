@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.CookiePolicy
             CookieOptions options,
             string name,
             string value
-        ) {
+        )
+        {
             Context = context;
             CookieOptions = options;
             CookieName = name;

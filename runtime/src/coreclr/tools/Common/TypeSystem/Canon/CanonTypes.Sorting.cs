@@ -11,7 +11,8 @@ namespace Internal.TypeSystem
         protected internal sealed override int CompareToImpl(
             TypeDesc other,
             TypeSystemComparer comparer
-        ) {
+        )
+        {
             // These should be singletons
             Debug.Assert(this == other);
             return 0;

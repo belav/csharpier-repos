@@ -49,7 +49,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
 
         private Func<ModelMetadata, bool> GetPropertyFilterFromExpression(
             IEnumerable<Expression<Func<TModel, object>>> includeExpressions
-        ) {
+        )
+        {
             var expression = ModelBindingHelper.GetPropertyFilterExpression(
                 includeExpressions.ToArray()
             );

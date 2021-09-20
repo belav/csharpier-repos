@@ -50,15 +50,15 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             /// </summary>
             /// <param name="underlyingContext">The fallback synchronization context to use for scheduling operations
             /// posted to this synchronization context.</param>
-            public DenyExecutionSynchronizationContext(
-                SynchronizationContext? underlyingContext
-            ) : this(underlyingContext, mainThread: null, failedTransfer: null) { }
+            public DenyExecutionSynchronizationContext(SynchronizationContext? underlyingContext)
+                : this(underlyingContext, mainThread: null, failedTransfer: null) { }
 
             private DenyExecutionSynchronizationContext(
                 SynchronizationContext? underlyingContext,
                 Thread? mainThread,
                 StrongBox<ExceptionDispatchInfo>? failedTransfer
-            ) {
+            )
+            {
                 UnderlyingContext = underlyingContext ?? new SynchronizationContext();
                 MainThread = mainThread ?? new Thread(MainThreadStart);
                 _failedTransfer = failedTransfer ?? new StrongBox<ExceptionDispatchInfo>();

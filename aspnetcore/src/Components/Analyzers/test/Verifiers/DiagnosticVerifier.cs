@@ -116,7 +116,8 @@ namespace TestHelper
             string language,
             DiagnosticAnalyzer analyzer,
             params DiagnosticResult[] expected
-        ) {
+        )
+        {
             var diagnostics = GetSortedDiagnostics(sources, language, analyzer);
             VerifyDiagnosticResults(diagnostics, analyzer, expected);
         }
@@ -135,7 +136,8 @@ namespace TestHelper
             IEnumerable<Diagnostic> actualResults,
             DiagnosticAnalyzer analyzer,
             params DiagnosticResult[] expectedResults
-        ) {
+        )
+        {
             int expectedCount = expectedResults.Count();
             int actualCount = actualResults.Count();
 
@@ -267,7 +269,8 @@ namespace TestHelper
             Diagnostic diagnostic,
             Location actual,
             DiagnosticResultLocation expected
-        ) {
+        )
+        {
             var actualSpan = actual.GetLineSpan();
 
             Assert.True(
@@ -336,7 +339,8 @@ namespace TestHelper
         private static string FormatDiagnostics(
             DiagnosticAnalyzer analyzer,
             params Diagnostic[] diagnostics
-        ) {
+        )
+        {
             var builder = new StringBuilder();
             for (int i = 0; i < diagnostics.Length; ++i)
             {

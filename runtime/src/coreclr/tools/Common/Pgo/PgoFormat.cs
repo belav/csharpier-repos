@@ -192,13 +192,15 @@ namespace Internal.Pgo
                 if (
                     (value & SIGN_MASK_ONEBYTE_64BIT) == 0
                     || (value & SIGN_MASK_ONEBYTE_64BIT) == SIGN_MASK_ONEBYTE_64BIT
-                ) {
+                )
+                {
                     yield return (byte)((byte)((value & ~SIGN_MASK_ONEBYTE_64BIT) << 1 | isSigned));
                 }
                 else if (
                     (value & SIGN_MASK_TWOBYTE_64BIT) == 0
                     || (value & SIGN_MASK_TWOBYTE_64BIT) == SIGN_MASK_TWOBYTE_64BIT
-                ) {
+                )
+                {
                     int iData = (int)((value & ~SIGN_MASK_TWOBYTE_64BIT) << 1 | isSigned);
                     yield return (byte)((iData >> 8) | 0x80);
                     yield return (byte)(iData & 0xff);
@@ -206,7 +208,8 @@ namespace Internal.Pgo
                 else if (
                     (value & SIGN_MASK_FOURBYTE_64BIT) == 0
                     || (value & SIGN_MASK_FOURBYTE_64BIT) == SIGN_MASK_FOURBYTE_64BIT
-                ) {
+                )
+                {
                     // Unlike CorSigCompressSignedInt, this just writes a header byte
                     // then 4 bytes, ignoring the whole signed bit detail
                     yield return 0xC0;
@@ -236,7 +239,8 @@ namespace Internal.Pgo
             IPgoSchemaDataLoader<TType> dataProvider,
             IEnumerable<long> inputDataStream,
             bool longsAreCompressed
-        ) {
+        )
+        {
             int dataCountToRead = 0;
             PgoSchemaElem curSchema = default(PgoSchemaElem);
             InstrumentationDataProcessingState processingState =
@@ -309,7 +313,8 @@ namespace Internal.Pgo
                 if (
                     (processingState & InstrumentationDataProcessingState.ILOffset)
                     == InstrumentationDataProcessingState.ILOffset
-                ) {
+                )
+                {
                     if (longsAreCompressed)
                         curSchema.ILOffset = checked((int)(value + (long)curSchema.ILOffset));
                     else
@@ -321,7 +326,8 @@ namespace Internal.Pgo
                 else if (
                     (processingState & InstrumentationDataProcessingState.Type)
                     == InstrumentationDataProcessingState.Type
-                ) {
+                )
+                {
                     if (longsAreCompressed)
                         curSchema.InstrumentationKind = (PgoInstrumentationKind)(
                             ((int)(curSchema.InstrumentationKind)) + checked((int)value)
@@ -334,7 +340,8 @@ namespace Internal.Pgo
                 else if (
                     (processingState & InstrumentationDataProcessingState.Count)
                     == InstrumentationDataProcessingState.Count
-                ) {
+                )
+                {
                     if (longsAreCompressed)
                         curSchema.Count = checked((int)(value + (long)curSchema.Count));
                     else
@@ -344,7 +351,8 @@ namespace Internal.Pgo
                 else if (
                     (processingState & InstrumentationDataProcessingState.Other)
                     == InstrumentationDataProcessingState.Other
-                ) {
+                )
+                {
                     if (longsAreCompressed)
                         curSchema.Other = checked((int)(value + (long)curSchema.Other));
                     else
@@ -398,7 +406,8 @@ namespace Internal.Pgo
             IEnumerable<PgoSchemaElem> schemas,
             IPgoEncodedValueEmitter<TType> valueEmitter,
             bool emitAllElementsUnconditionally
-        ) {
+        )
+        {
             PgoSchemaElem prevSchema = default(PgoSchemaElem);
             TType prevEmittedType = default(TType);
             long prevEmittedIntData = 0;
@@ -532,7 +541,8 @@ namespace Internal.Pgo
 
             private static bool SchemaMergesItemsWithDifferentOtherFields(
                 PgoInstrumentationKind kind
-            ) {
+            )
+            {
                 switch (kind)
                 {
                     //
@@ -556,7 +566,8 @@ namespace Internal.Pgo
                 if (
                     x.Other != y.Other
                     && SchemaMergesItemsWithDifferentOtherFields(x.InstrumentationKind)
-                ) {
+                )
+                {
                     return x.Other.CompareTo(y.Other);
                 }
 
@@ -621,7 +632,8 @@ namespace Internal.Pgo
             void MergeInSchemaElem(
                 Dictionary<PgoSchemaElem, PgoSchemaElem> dataMerger,
                 PgoSchemaElem schema
-            ) {
+            )
+            {
                 if (dataMerger.TryGetValue(schema, out var existingSchemaItem))
                 {
                     // Actually merge two schema items

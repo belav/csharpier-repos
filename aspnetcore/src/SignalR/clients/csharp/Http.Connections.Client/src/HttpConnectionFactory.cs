@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client
         public HttpConnectionFactory(
             IOptions<HttpConnectionOptions> options,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -49,7 +50,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client
         public async ValueTask<ConnectionContext> ConnectAsync(
             EndPoint endPoint,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (endPoint == null)
             {
                 throw new ArgumentNullException(nameof(endPoint));
@@ -91,7 +93,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client
         // Internal for testing
         internal static HttpConnectionOptions ShallowCopyHttpConnectionOptions(
             HttpConnectionOptions options
-        ) {
+        )
+        {
             var newOptions = new HttpConnectionOptions
             {
                 HttpMessageHandlerFactory = options.HttpMessageHandlerFactory,

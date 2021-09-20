@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             bool isNew,
             bool isUnsafe,
             SyntaxNode initializer
-        ) {
+        )
+        {
             var info = new CodeGenerationPropertyInfo(isNew, isUnsafe, initializer);
             s_propertyToInfoMap.Add(property, info);
         }

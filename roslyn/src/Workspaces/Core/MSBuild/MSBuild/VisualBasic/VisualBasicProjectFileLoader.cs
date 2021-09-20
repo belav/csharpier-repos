@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.VisualBasic
             MSB.Evaluation.Project? project,
             ProjectBuildManager buildManager,
             DiagnosticLog log
-        ) {
+        )
+        {
             return new VisualBasicProjectFile(this, project, buildManager, log);
         }
     }

@@ -17,7 +17,8 @@ namespace System.DirectoryServices.Tests
             string password,
             string port,
             AuthenticationTypes at
-        ) {
+        )
+        {
             ServerName = serverName;
             SearchDn = searchDn;
             UserName = userName;
@@ -85,7 +86,8 @@ namespace System.DirectoryServices.Tests
                             LdapConfiguration.Configuration.Password,
                             LdapConfiguration.Configuration.AuthenticationTypes
                         )
-                    ) {
+                    )
+                    {
                         return rootDse.Properties["supportedCapabilities"].Contains(
                             LDAP_CAP_ACTIVE_DIRECTORY_OID
                         );
@@ -110,7 +112,8 @@ namespace System.DirectoryServices.Tests
                     Environment.GetEnvironmentVariable("LDAP_TEST_SERVER_INDEX"),
                     out int serverIndex
                 )
-            ) {
+            )
+            {
                 return null;
             }
 

@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             ModelError modelError,
             ModelStateEntry containingEntry,
             ModelExplorer modelExplorer
-        ) {
+        )
+        {
             Debug.Assert(modelError != null);
             Debug.Assert(containingEntry != null);
             Debug.Assert(modelExplorer != null);
@@ -48,7 +49,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public static IList<ModelStateEntry> GetModelStateList(
             ViewDataDictionary viewData,
             bool excludePropertyErrors
-        ) {
+        )
+        {
             if (excludePropertyErrors)
             {
                 viewData.ModelState.TryGetValue(viewData.TemplateInfo.HtmlFieldPrefix, out var ms);
@@ -87,7 +89,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             ModelStateEntry modelStateEntry,
             ModelMetadata metadata,
             List<ModelStateEntry> orderedModelStateEntries
-        ) {
+        )
+        {
             if (metadata.ElementMetadata != null && modelStateEntry.Children != null)
             {
                 foreach (var indexEntry in modelStateEntry.Children)

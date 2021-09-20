@@ -55,12 +55,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Diagnostics
             IForegroundNotificationService notificationService,
             IEditorOptionsFactoryService editorOptionsFactoryService,
             IAsynchronousOperationListenerProvider listenerProvider
-        ) : base(
-            threadingContext,
-            diagnosticService,
-            notificationService,
-            listenerProvider.GetListener(FeatureAttribute.Classification)
-        ) {
+        )
+            : base(
+                threadingContext,
+                diagnosticService,
+                notificationService,
+                listenerProvider.GetListener(FeatureAttribute.Classification)
+            )
+        {
             _typeMap = typeMap;
             _classificationTag = new ClassificationTag(
                 _typeMap.GetClassificationType(ClassificationTypeDefinitions.UnnecessaryCode)
@@ -87,7 +89,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Diagnostics
 
         protected internal override ImmutableArray<DiagnosticDataLocation> GetLocationsToTag(
             DiagnosticData diagnosticData
-        ) {
+        )
+        {
             // If there are 'unnecessary' locations specified in the property bag, use those instead of the main diagnostic location.
             if (
                 diagnosticData.AdditionalLocations.Length > 0
@@ -97,7 +100,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Diagnostics
                     out var unnecessaryIndices
                 )
                 && unnecessaryIndices is object
-            ) {
+            )
+            {
                 using var _ = PooledObjects.ArrayBuilder<DiagnosticDataLocation>.GetInstance(
                     out var locationsToTag
                 );

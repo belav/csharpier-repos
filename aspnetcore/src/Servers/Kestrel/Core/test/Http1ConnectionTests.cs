@@ -436,7 +436,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [MemberData(nameof(MinDataRateData))]
         public void ConfiguringIHttpMinRequestBodyDataRateFeatureSetsMinRequestBodyDataRate(
             MinDataRate minDataRate
-        ) {
+        )
+        {
             (
                 (IFeatureCollection)_http1Connection
             ).Get<IHttpMinRequestBodyDataRateFeature>().MinDataRate = minDataRate;
@@ -448,7 +449,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [MemberData(nameof(MinDataRateData))]
         public void ConfiguringIHttpMinResponseDataRateFeatureSetsMinResponseDataRate(
             MinDataRate minDataRate
-        ) {
+        )
+        {
             (
                 (IFeatureCollection)_http1Connection
             ).Get<IHttpMinResponseDataRateFeature>().MinDataRate = minDataRate;
@@ -522,7 +524,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             string expectedDecodedPath,
             string expectedQueryString,
             string expectedHttpVersion
-        ) {
+        )
+        {
             var requestLineBytes = Encoding.ASCII.GetBytes(requestLine);
             await _application.Output.WriteAsync(requestLineBytes);
             var readableBuffer = (await _transport.Input.ReadAsync()).Buffer;
@@ -545,7 +548,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             string expectedRawTarget,
             string expectedDecodedPath,
             string expectedQueryString
-        ) {
+        )
+        {
             var requestLineBytes = Encoding.ASCII.GetBytes(requestLine);
             await _application.Output.WriteAsync(requestLineBytes);
             var readableBuffer = (await _transport.Input.ReadAsync()).Buffer;
@@ -685,7 +689,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         public async Task TakeStartLineThrowsWhenRequestTargetIsInvalid(
             string method,
             string target
-        ) {
+        )
+        {
             var requestLine = $"{method} {target} HTTP/1.1\r\n";
 
             await _application.Output.WriteAsync(Encoding.ASCII.GetBytes(requestLine));
@@ -709,7 +714,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         public async Task TakeStartLineThrowsWhenMethodNotAllowed(
             string requestLine,
             int intAllowedMethod
-        ) {
+        )
+        {
             var allowedMethod = (HttpMethod)intAllowedMethod;
             await _application.Output.WriteAsync(Encoding.ASCII.GetBytes(requestLine));
             var readableBuffer = (await _transport.Input.ReadAsync()).Buffer;
@@ -1236,7 +1242,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             bool trailers,
             out SequencePosition consumed,
             out SequencePosition examined
-        ) {
+        )
+        {
             var reader = new SequenceReader<byte>(readableBuffer);
             if (_http1Connection.TakeMessageHeaders(ref reader, trailers: trailers))
             {
@@ -1256,7 +1263,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             ReadOnlySequence<byte> readableBuffer,
             out SequencePosition consumed,
             out SequencePosition examined
-        ) {
+        )
+        {
             var reader = new SequenceReader<byte>(readableBuffer);
             if (_http1Connection.TakeStartLine(ref reader))
             {
@@ -1276,7 +1284,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             ReadOnlySequence<byte> readableBuffer,
             out SequencePosition consumed,
             out SequencePosition examined
-        ) {
+        )
+        {
             var reader = new SequenceReader<byte>(readableBuffer);
             if (_http1Connection.ParseRequest(ref reader))
             {

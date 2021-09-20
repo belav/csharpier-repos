@@ -127,7 +127,8 @@ namespace Microsoft.CodeAnalysis.Completion
             string displayTextSuffix,
             string inlineDescription,
             bool isComplexTextEdit
-        ) {
+        )
+        {
             DisplayText = displayText ?? "";
             DisplayTextPrefix = displayTextPrefix ?? "";
             DisplayTextSuffix = displayTextSuffix ?? "";
@@ -153,7 +154,8 @@ namespace Microsoft.CodeAnalysis.Completion
             ImmutableDictionary<string, string> properties,
             ImmutableArray<string> tags,
             CompletionItemRules rules
-        ) {
+        )
+        {
             return Create(
                 displayText,
                 filterText,
@@ -176,7 +178,8 @@ namespace Microsoft.CodeAnalysis.Completion
             CompletionItemRules rules,
             string displayTextPrefix,
             string displayTextSuffix
-        ) {
+        )
+        {
             return Create(
                 displayText,
                 filterText,
@@ -201,7 +204,8 @@ namespace Microsoft.CodeAnalysis.Completion
             string displayTextPrefix,
             string displayTextSuffix,
             string inlineDescription
-        ) {
+        )
+        {
             return Create(
                 displayText,
                 filterText,
@@ -227,7 +231,8 @@ namespace Microsoft.CodeAnalysis.Completion
             string displayTextSuffix = null,
             string inlineDescription = null,
             bool isComplexTextEdit = false
-        ) {
+        )
+        {
             return new CompletionItem(
                 span: default,
                 displayText: displayText,
@@ -264,7 +269,8 @@ namespace Microsoft.CodeAnalysis.Completion
             ImmutableDictionary<string, string> properties,
             ImmutableArray<string> tags,
             CompletionItemRules rules
-        ) {
+        )
+        {
             return new CompletionItem(
                 span: span,
                 displayText: displayText,
@@ -292,7 +298,8 @@ namespace Microsoft.CodeAnalysis.Completion
             Optional<string> displayTextSuffix = default,
             Optional<string> inlineDescription = default,
             Optional<bool> isComplexTextEdit = default
-        ) {
+        )
+        {
             var newSpan = span.HasValue ? span.Value : Span;
             var newDisplayText = displayText.HasValue ? displayText.Value : DisplayText;
             var newFilterText = filterText.HasValue ? filterText.Value : FilterText;
@@ -325,7 +332,8 @@ namespace Microsoft.CodeAnalysis.Completion
                 && newDisplayTextSuffix == DisplayTextSuffix
                 && newInlineDescription == InlineDescription
                 && newIsComplexTextEdit == IsComplexTextEdit
-            ) {
+            )
+            {
                 return this;
             }
 

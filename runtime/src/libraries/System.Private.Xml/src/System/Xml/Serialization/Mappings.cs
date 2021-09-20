@@ -511,7 +511,8 @@ namespace System.Xml.Serialization
                             StructMapping? derived = _derivedMappings;
                             derived != null;
                             derived = derived.NextDerivedMapping
-                        ) {
+                        )
+                        {
                             derived.SetSequence();
                         }
                     }
@@ -618,7 +619,8 @@ namespace System.Xml.Serialization
             MemberMapping member,
             out StructMapping? declaringMapping,
             string? parent
-        ) {
+        )
+        {
             declaringMapping = null;
             if (BaseMapping != null)
             {
@@ -710,7 +712,8 @@ namespace System.Xml.Serialization
                     && !BaseMapping.TypeDesc!.IsRoot
                     && (text.Mapping.TypeDesc.IsEnum || text.Mapping.TypeDesc.IsPrimitive)
                 )
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     SR.Format(
                         SR.XmlIllegalTypedTextAttribute,
@@ -757,7 +760,8 @@ namespace System.Xml.Serialization
                 StructMapping? derived = start.DerivedMappings;
                 derived != null;
                 derived = derived.NextDerivedMapping
-            ) {
+            )
+            {
                 derived.SetSequence();
             }
         }
@@ -1306,7 +1310,8 @@ namespace System.Xml.Serialization
         internal static void ValidationCallbackWithErrorCode(
             object? sender,
             ValidationEventArgs args
-        ) {
+        )
+        {
             // CONSIDER: need the real type name
             if (args.Severity == XmlSeverityType.Error)
                 throw new InvalidOperationException(
@@ -1402,7 +1407,8 @@ namespace System.Xml.Serialization
                         }
                         else if (
                             typeof(XmlQualifiedName).IsAssignableFrom(_getSchemaMethod.ReturnType)
-                        ) {
+                        )
+                        {
                             _xsiType = (XmlQualifiedName)typeInfo;
                             if (_xsiType.IsEmpty)
                             {

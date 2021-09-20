@@ -604,7 +604,8 @@ namespace System.Text
             while (
                 (ch = (fallbackBuffer == null) ? '\0' : fallbackHelper.InternalGetNextChar()) != 0
                 || chars < charEnd
-            ) {
+            )
+            {
                 // First unwind any fallback
                 if (ch == 0)
                 {
@@ -651,7 +652,8 @@ namespace System.Text
             byte* bytes,
             int byteCount,
             EncoderNLS? encoder
-        ) {
+        )
+        {
             // Just need to ASSERT, this is called by something else internal that checked parameters already
             Debug.Assert(bytes != null, "[DBCSCodePageEncoding.GetBytes]bytes is null");
             Debug.Assert(byteCount >= 0, "[DBCSCodePageEncoding.GetBytes]byteCount is negative");
@@ -725,7 +727,8 @@ namespace System.Text
             while (
                 (ch = (fallbackBuffer == null) ? '\0' : fallbackHelper.InternalGetNextChar()) != 0
                 || chars < charEnd
-            ) {
+            )
+            {
                 // First unwind any fallback
                 if (ch == 0)
                 {
@@ -1001,7 +1004,8 @@ namespace System.Text
             char* chars,
             int charCount,
             DecoderNLS? baseDecoder
-        ) {
+        )
+        {
             // Just need to ASSERT, this is called by something else internal that checked parameters already
             Debug.Assert(bytes != null, "[DBCSCodePageEncoding.GetChars]bytes is null");
             Debug.Assert(byteCount >= 0, "[DBCSCodePageEncoding.GetChars]byteCount is negative");

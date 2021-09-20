@@ -607,7 +607,8 @@ namespace System.Media
                     waveFormat.wFormatTag != Interop.WinMM.WAVE_FORMAT_PCM
                     && waveFormat.wFormatTag != Interop.WinMM.WAVE_FORMAT_ADPCM
                     && waveFormat.wFormatTag != Interop.WinMM.WAVE_FORMAT_IEEE_FLOAT
-                ) {
+                )
+                {
                     throw new InvalidOperationException(SR.SoundAPIFormatNotSupported);
                 }
             }
@@ -653,7 +654,8 @@ namespace System.Media
                     && data[position + 1] == (byte)'m'
                     && data[position + 2] == (byte)'t'
                     && data[position + 3] == (byte)' '
-                ) {
+                )
+                {
                     // fmt chunk
                     fmtChunkFound = true;
                     int chunkSize = BytesToInt(
@@ -718,7 +720,8 @@ namespace System.Media
                 wFormatTag != Interop.WinMM.WAVE_FORMAT_PCM
                 && wFormatTag != Interop.WinMM.WAVE_FORMAT_ADPCM
                 && wFormatTag != Interop.WinMM.WAVE_FORMAT_IEEE_FLOAT
-            ) {
+            )
+            {
                 throw new InvalidOperationException(SR.SoundAPIFormatNotSupported);
             }
         }

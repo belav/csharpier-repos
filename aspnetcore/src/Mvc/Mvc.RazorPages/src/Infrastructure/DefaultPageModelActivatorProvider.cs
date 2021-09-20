@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         /// <inheritdoc />
         public virtual Func<PageContext, object> CreateActivator(
             CompiledPageActionDescriptor actionDescriptor
-        ) {
+        )
+        {
             if (actionDescriptor == null)
             {
                 throw new ArgumentNullException(nameof(actionDescriptor));
@@ -44,7 +45,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
 
         public virtual Action<PageContext, object> CreateReleaser(
             CompiledPageActionDescriptor actionDescriptor
-        ) {
+        )
+        {
             if (actionDescriptor == null)
             {
                 throw new ArgumentNullException(nameof(actionDescriptor));
@@ -60,7 +62,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
 
         public virtual Func<PageContext, object, ValueTask> CreateAsyncReleaser(
             CompiledPageActionDescriptor actionDescriptor
-        ) {
+        )
+        {
             if (actionDescriptor == null)
             {
                 throw new ArgumentNullException(nameof(actionDescriptor));
@@ -69,7 +72,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             if (
                 typeof(IAsyncDisposable).GetTypeInfo()
                     .IsAssignableFrom(actionDescriptor.ModelTypeInfo)
-            ) {
+            )
+            {
                 return _asyncDisposer;
             }
 

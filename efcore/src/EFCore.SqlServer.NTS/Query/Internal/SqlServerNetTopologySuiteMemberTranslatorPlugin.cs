@@ -32,7 +32,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         public SqlServerNetTopologySuiteMemberTranslatorPlugin(
             IRelationalTypeMappingSource typeMappingSource,
             ISqlExpressionFactory sqlExpressionFactory
-        ) {
+        )
+        {
             Translators = new IMemberTranslator[]
             {
                 new SqlServerGeometryMemberTranslator(typeMappingSource, sqlExpressionFactory),

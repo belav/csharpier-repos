@@ -13,7 +13,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
         public static IHostBuilder GetHostBuilder(
             Func<MemoryPool<byte>> memoryPoolFactory = null,
             long? maxReadBufferSize = null
-        ) {
+        )
+        {
 #pragma warning disable CS0618
             return new HostBuilder().ConfigureWebHost(
                 webHostBuilder =>

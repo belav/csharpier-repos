@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.RequestOrdering
             TestRequest request,
             RequestContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Assert.Null(context.Solution);
 
             return Task.FromResult(new TestResponse());

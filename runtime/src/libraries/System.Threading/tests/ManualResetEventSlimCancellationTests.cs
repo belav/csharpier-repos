@@ -54,7 +54,8 @@ namespace System.Threading.Tests
         private static void EnsureOperationCanceledExceptionThrown(
             Action action,
             CancellationToken token
-        ) {
+        )
+        {
             OperationCanceledException operationCanceledEx =
                 Assert.Throws<OperationCanceledException>(action);
             Assert.Equal(token, operationCanceledEx.CancellationToken);

@@ -91,7 +91,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InitializeParameter
             DocumentOptionSet options,
             ExpressionSyntax condition,
             StatementSyntax ifTrueStatement
-        ) {
+        )
+        {
             var withBlock =
                 options.GetOption(CSharpCodeStyleOptions.PreferBraces).Value
                 == CodeAnalysis.CodeStyle.PreferBracesPreference.Always;

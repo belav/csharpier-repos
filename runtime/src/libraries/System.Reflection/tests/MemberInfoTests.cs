@@ -591,7 +591,8 @@ namespace System.Reflection.Tests
                     MemberInfo member in arrayType.GetMembers(
                         BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly
                     )
-                ) {
+                )
+                {
                     if (member is MethodBase)
                     {
                         members.Add(member);
@@ -832,7 +833,8 @@ namespace System.Reflection.Tests
             this Type t,
             string name,
             params Type[] parameterTypes
-        ) {
+        )
+        {
             BindingFlags bf =
                 BindingFlags.Public
                 | BindingFlags.NonPublic
@@ -847,7 +849,8 @@ namespace System.Reflection.Tests
         internal static ConstructorInfo GetConfirmedConstructor(
             this Type t,
             params Type[] parameterTypes
-        ) {
+        )
+        {
             BindingFlags bf =
                 BindingFlags.Public
                 | BindingFlags.NonPublic

@@ -40,7 +40,8 @@ namespace Microsoft.AspNetCore.HttpsPolicy
             IOptions<HttpsRedirectionOptions> options,
             IConfiguration config,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             _next = next ?? throw new ArgumentNullException(nameof(next));
             _config = config ?? throw new ArgumentNullException(nameof(config));
 

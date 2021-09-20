@@ -740,7 +740,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
         private static void CheckNamedArg(
             KeyValuePair<string, string> expected,
             KeyValuePair<string, TypedConstant> actual
-        ) {
+        )
+        {
             Assert.Equal(expected.Key, actual.Key.ToString());
             Assert.Equal(expected.Value, actual.Value.Value.ToString());
         }

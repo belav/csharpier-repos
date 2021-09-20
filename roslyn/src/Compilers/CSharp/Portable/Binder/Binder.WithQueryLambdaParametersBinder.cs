@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 SimpleNameSyntax node,
                 RangeVariableSymbol qv,
                 BindingDiagnosticBag diagnostics
-            ) {
+            )
+            {
                 Debug.Assert(!qv.IsTransparent);
 
                 BoundExpression translation;
@@ -85,7 +86,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 BoundExpression receiver,
                 string name,
                 BindingDiagnosticBag diagnostics
-            ) {
+            )
+            {
                 var receiverType = receiver.Type as NamedTypeSymbol;
                 if ((object)receiverType == null || !receiverType.IsAnonymousType)
                 {
@@ -152,7 +154,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Binder originalBinder,
                 bool diagnose,
                 ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-            ) {
+            )
+            {
                 Debug.Assert(result.IsClear);
 
                 if ((options & LookupOptions.NamespaceAliasesOnly) != 0)
@@ -179,7 +182,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 LookupSymbolsInfo result,
                 LookupOptions options,
                 Binder originalBinder
-            ) {
+            )
+            {
                 if (options.CanConsiderMembers())
                 {
                     foreach (var kvp in _parameterMap)

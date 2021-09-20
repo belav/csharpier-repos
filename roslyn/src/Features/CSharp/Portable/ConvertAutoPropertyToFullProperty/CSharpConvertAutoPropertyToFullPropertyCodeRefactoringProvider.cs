@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertAutoPropertyToFullProperty
             Document document,
             IPropertySymbol property,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var rule = await document.GetApplicableNamingRuleAsync(
                     new SymbolKindOrTypeKind(SymbolKind.Field),
                     property.IsStatic ? DeclarationModifiers.Static : DeclarationModifiers.None,
@@ -70,7 +71,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertAutoPropertyToFullProperty
             SyntaxNode property,
             string fieldName,
             SyntaxGenerator generator
-        ) {
+        )
+        {
             // C# might have trivia with the accessors that needs to be preserved.
             // so we will update the existing accessors instead of creating new ones
             var accessorListSyntax = ((PropertyDeclarationSyntax)property).AccessorList;
@@ -114,7 +116,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertAutoPropertyToFullProperty
             DocumentOptionSet options,
             SyntaxNode accessor,
             SyntaxNode statement
-        ) {
+        )
+        {
             var newAccessor = AddStatement(accessor, statement);
             var accessorDeclarationSyntax = (AccessorDeclarationSyntax)newAccessor;
 
@@ -132,7 +135,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertAutoPropertyToFullProperty
                     out var arrowExpression,
                     out _
                 )
-            ) {
+            )
+            {
                 return accessorDeclarationSyntax.WithSemicolonToken(default);
             }
 
@@ -160,7 +164,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertAutoPropertyToFullProperty
         internal override SyntaxNode ConvertPropertyToExpressionBodyIfDesired(
             DocumentOptionSet options,
             SyntaxNode property
-        ) {
+        )
+        {
             var propertyDeclaration = (PropertyDeclarationSyntax)property;
 
             var preference = GetPropertyExpressionBodyPreference(options);
@@ -174,7 +179,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertAutoPropertyToFullProperty
                 propertyDeclaration.AccessorList?.Accessors.Count == 1
                 && propertyDeclaration.AccessorList.Accessors[0].Kind()
                     == SyntaxKind.GetAccessorDeclaration
-            ) {
+            )
+            {
                 var getAccessor = propertyDeclaration.AccessorList.Accessors[0];
                 if (getAccessor.ExpressionBody != null)
                 {

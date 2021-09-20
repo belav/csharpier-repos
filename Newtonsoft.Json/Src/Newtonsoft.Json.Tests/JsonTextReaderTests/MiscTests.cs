@@ -627,7 +627,8 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
 
             using (
                 JsonWriter jsonWriter = new JsonTextWriter(sw) { Formatting = Formatting.Indented }
-            ) {
+            )
+            {
                 jsonWriter.WriteStartArray();
                 jsonWriter.WriteValue(true);
 
@@ -671,7 +672,8 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
 
             using (
                 JsonWriter jsonWriter = new JsonTextWriter(sw) { Formatting = Formatting.Indented }
-            ) {
+            )
+            {
                 serializer.Serialize(jsonWriter, jsonObject);
             }
 

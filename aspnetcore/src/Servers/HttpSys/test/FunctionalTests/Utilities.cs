@@ -56,7 +56,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             out string baseAddress,
             RequestDelegate app,
             Action<HttpSysOptions> configureOptions
-        ) {
+        )
+        {
             string root;
             return CreateDynamicHttpServer(
                 string.Empty,
@@ -71,7 +72,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             string path,
             out string root,
             RequestDelegate app
-        ) {
+        )
+        {
             string baseAddress;
             return CreateDynamicHttpServer(path, out root, out baseAddress, options => { }, app);
         }
@@ -81,7 +83,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             bool allowAnonymous,
             out string baseAddress,
             RequestDelegate app
-        ) {
+        )
+        {
             string root;
             return CreateDynamicHttpServer(
                 string.Empty,
@@ -101,7 +104,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             bool allowAnonymous,
             out string root,
             RequestDelegate app
-        ) {
+        )
+        {
             return CreateDynamicHost(
                 string.Empty,
                 out root,
@@ -119,7 +123,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             out string baseAddress,
             Action<HttpSysOptions> configureOptions,
             RequestDelegate app
-        ) {
+        )
+        {
             return CreateDynamicHost(
                 string.Empty,
                 out var root,
@@ -135,7 +140,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             out string baseAddress,
             Action<HttpSysOptions> configureOptions,
             RequestDelegate app
-        ) {
+        )
+        {
             var prefix = UrlPrefix.Create("http", "localhost", "0", basePath);
 
             var builder = new HostBuilder().ConfigureWebHost(
@@ -174,7 +180,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
         internal static MessagePump CreatePump(
             Action<HttpSysOptions> configureOptions,
             ILoggerFactory loggerFactory = null
-        ) {
+        )
+        {
             var options = new HttpSysOptions();
             configureOptions(options);
             return new MessagePump(
@@ -190,7 +197,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             out string baseAddress,
             Action<HttpSysOptions> configureOptions,
             RequestDelegate app
-        ) {
+        )
+        {
             var prefix = UrlPrefix.Create("http", "localhost", "0", basePath);
 
             var server = CreatePump(configureOptions);
@@ -208,7 +216,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             out string baseAddress,
             RequestDelegate app,
             ILoggerFactory loggerFactory = null
-        ) {
+        )
+        {
             return CreateDynamicHttpsServer(
                 "/",
                 out var root,
@@ -226,7 +235,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             Action<HttpSysOptions> configureOptions,
             RequestDelegate app,
             ILoggerFactory loggerFactory = null
-        ) {
+        )
+        {
             lock (PortLock)
             {
                 while (NextHttpsPort < MaxHttpsPort)

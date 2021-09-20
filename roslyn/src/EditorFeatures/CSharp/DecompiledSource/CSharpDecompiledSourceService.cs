@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.DecompiledSource
             Compilation symbolCompilation,
             ISymbol symbol,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Get the name of the type the symbol is in
             var containingOrThis = symbol.GetContainingTypeOrThis();
             var fullName = GetFullReflectionName(containingOrThis);
@@ -115,7 +116,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.DecompiledSource
         public static async Task<Document> FormatDocumentAsync(
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var node = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
 
             // Apply formatting rules
@@ -138,7 +140,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.DecompiledSource
             string fullName,
             Compilation compilation,
             string assemblyLocation
-        ) {
+        )
+        {
             // Load the assembly.
             var file = new PEFile(assemblyLocation, PEStreamOptions.PrefetchEntireImage);
 
@@ -170,7 +173,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.DecompiledSource
             Document document,
             ISymbol symbol,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var assemblyInfo = MetadataAsSourceHelpers.GetAssemblyInfo(symbol.ContainingAssembly);
             var compilation = await document.Project.GetCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
@@ -210,7 +214,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.DecompiledSource
             Document document,
             IDocumentationCommentFormattingService docCommentFormattingService,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxRoot = await document.GetSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
 

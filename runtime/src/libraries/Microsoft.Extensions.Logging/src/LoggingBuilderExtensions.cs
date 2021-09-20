@@ -38,7 +38,8 @@ namespace Microsoft.Extensions.Logging
         public static ILoggingBuilder AddProvider(
             this ILoggingBuilder builder,
             ILoggerProvider provider
-        ) {
+        )
+        {
             builder.Services.AddSingleton(provider);
             return builder;
         }
@@ -63,7 +64,8 @@ namespace Microsoft.Extensions.Logging
         public static ILoggingBuilder Configure(
             this ILoggingBuilder builder,
             Action<LoggerFactoryOptions> action
-        ) {
+        )
+        {
             builder.Services.Configure(action);
             return builder;
         }

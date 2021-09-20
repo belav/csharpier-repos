@@ -13,7 +13,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
     {
         public ControllerFromServicesTest(
             MvcTestFixture<ControllersFromServicesWebSite.Startup> fixture
-        ) {
+        )
+        {
             Client = fixture.CreateDefaultClient();
         }
 
@@ -105,7 +106,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [InlineData("ClientUIStub/GetClientContent/5")]
         public async Task AddControllersFromServices_UsesControllerDiscoveryContentions(
             string action
-        ) {
+        )
+        {
             // Arrange & Act
             var response = await Client.GetAsync("http://localhost/" + action);
 

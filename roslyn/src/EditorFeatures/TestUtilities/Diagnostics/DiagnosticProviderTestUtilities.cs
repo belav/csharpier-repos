@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
             Document document,
             TextSpan span,
             bool includeSuppressedDiagnostics = false
-        ) {
+        )
+        {
             var testDriver = new TestDiagnosticAnalyzerDriver(
                 workspace,
                 document.Project,
@@ -31,7 +32,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
             Document document,
             TextSpan span,
             bool includeSuppressedDiagnostics = false
-        ) {
+        )
+        {
             var testDriver = new TestDiagnosticAnalyzerDriver(
                 workspace,
                 document.Project,
@@ -44,7 +46,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
             Workspace workspace,
             Project project,
             bool includeSuppressedDiagnostics = false
-        ) {
+        )
+        {
             var testDriver = new TestDiagnosticAnalyzerDriver(
                 workspace,
                 project,

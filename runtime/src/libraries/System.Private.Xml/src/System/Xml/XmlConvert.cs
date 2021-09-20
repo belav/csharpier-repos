@@ -210,7 +210,8 @@ namespace System.Xml
             string? name, /*Name_not_NmToken*/
             bool first,
             bool local
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(name))
             {
                 return name;
@@ -250,7 +251,8 @@ namespace System.Xml
                         && (local || (!local && name[0] != ':'))
                     )
                     || matchPos == 0
-                ) {
+                )
+                {
                     if (bufBld == null)
                     {
                         bufBld = new StringBuilder(length + 20);
@@ -261,7 +263,8 @@ namespace System.Xml
                         length > 1
                         && XmlCharType.IsHighSurrogate(name[0])
                         && XmlCharType.IsLowSurrogate(name[1])
-                    ) {
+                    )
+                    {
                         int x = name[0];
                         int y = name[1];
                         int u = XmlCharType.CombineSurrogateChar(y, x);
@@ -292,7 +295,8 @@ namespace System.Xml
                     (local && !XmlCharType.IsNCNameCharXml4e(name[position]))
                     || (!local && !XmlCharType.IsNameCharXml4e(name[position]))
                     || (matchPos == position)
-                ) {
+                )
+                {
                     if (bufBld == null)
                     {
                         bufBld = new StringBuilder(length + 20);
@@ -310,7 +314,8 @@ namespace System.Xml
                         (length > position + 1)
                         && XmlCharType.IsHighSurrogate(name[position])
                         && XmlCharType.IsLowSurrogate(name[position + 1])
-                    ) {
+                    )
+                    {
                         int x = name[position];
                         int y = name[position + 1];
                         int u = XmlCharType.CombineSurrogateChar(y, x);
@@ -510,7 +515,8 @@ namespace System.Xml
                 || token[token.Length - 1] == ' '
                 || token.IndexOfAny(crt) != -1
                 || token.IndexOf("  ", StringComparison.Ordinal) != -1
-            ) {
+            )
+            {
                 throw new XmlException(SR.Sch_NotTokenString, token);
             }
             return token;
@@ -528,7 +534,8 @@ namespace System.Xml
                 || token[token.Length - 1] == ' '
                 || token.IndexOfAny(crt) != -1
                 || token.IndexOf("  ", StringComparison.Ordinal) != -1
-            ) {
+            )
+            {
                 return new XmlException(SR.Sch_NotTokenString, token);
             }
 
@@ -956,7 +963,8 @@ namespace System.Xml
                     NumberFormatInfo.InvariantInfo,
                     out result
                 )
-            ) {
+            )
+            {
                 return new FormatException(SR.Format(SR.XmlConvert_BadFormat, s, "Decimal"));
             }
 
@@ -985,7 +993,8 @@ namespace System.Xml
                     NumberFormatInfo.InvariantInfo,
                     out result
                 )
-            ) {
+            )
+            {
                 return new FormatException(SR.Format(SR.XmlConvert_BadFormat, s, "Integer"));
             }
 
@@ -1015,7 +1024,8 @@ namespace System.Xml
                     NumberFormatInfo.InvariantInfo,
                     out result
                 )
-            ) {
+            )
+            {
                 return new FormatException(SR.Format(SR.XmlConvert_BadFormat, s, "SByte"));
             }
 
@@ -1044,7 +1054,8 @@ namespace System.Xml
                     NumberFormatInfo.InvariantInfo,
                     out result
                 )
-            ) {
+            )
+            {
                 return new FormatException(SR.Format(SR.XmlConvert_BadFormat, s, "Int16"));
             }
 
@@ -1073,7 +1084,8 @@ namespace System.Xml
                     NumberFormatInfo.InvariantInfo,
                     out result
                 )
-            ) {
+            )
+            {
                 return new FormatException(SR.Format(SR.XmlConvert_BadFormat, s, "Int32"));
             }
 
@@ -1102,7 +1114,8 @@ namespace System.Xml
                     NumberFormatInfo.InvariantInfo,
                     out result
                 )
-            ) {
+            )
+            {
                 return new FormatException(SR.Format(SR.XmlConvert_BadFormat, s, "Int64"));
             }
 
@@ -1127,7 +1140,8 @@ namespace System.Xml
                     NumberFormatInfo.InvariantInfo,
                     out result
                 )
-            ) {
+            )
+            {
                 return new FormatException(SR.Format(SR.XmlConvert_BadFormat, s, "Byte"));
             }
 
@@ -1153,7 +1167,8 @@ namespace System.Xml
                     NumberFormatInfo.InvariantInfo,
                     out result
                 )
-            ) {
+            )
+            {
                 return new FormatException(SR.Format(SR.XmlConvert_BadFormat, s, "UInt16"));
             }
 
@@ -1179,7 +1194,8 @@ namespace System.Xml
                     NumberFormatInfo.InvariantInfo,
                     out result
                 )
-            ) {
+            )
+            {
                 return new FormatException(SR.Format(SR.XmlConvert_BadFormat, s, "UInt32"));
             }
 
@@ -1205,7 +1221,8 @@ namespace System.Xml
                     NumberFormatInfo.InvariantInfo,
                     out result
                 )
-            ) {
+            )
+            {
                 return new FormatException(SR.Format(SR.XmlConvert_BadFormat, s, "UInt64"));
             }
 
@@ -1256,7 +1273,8 @@ namespace System.Xml
                     NumberFormatInfo.InvariantInfo,
                     out result
                 )
-            ) {
+            )
+            {
                 return new FormatException(SR.Format(SR.XmlConvert_BadFormat, s, "Single"));
             }
 
@@ -1315,7 +1333,8 @@ namespace System.Xml
                     NumberFormatInfo.InvariantInfo,
                     out result
                 )
-            ) {
+            )
+            {
                 return new FormatException(SR.Format(SR.XmlConvert_BadFormat, s, "Double"));
             }
 
@@ -1344,7 +1363,8 @@ namespace System.Xml
                             NumberFormatInfo.InvariantInfo,
                             out d
                         )
-                    ) {
+                    )
+                    {
                         return d;
                     }
                 }
@@ -1729,7 +1749,8 @@ namespace System.Xml
             if (
                 value == 0
                 && BitConverter.DoubleToInt64Bits(value) == BitConverter.DoubleToInt64Bits(-0e0)
-            ) {
+            )
+            {
                 return true;
             }
             return false;
@@ -1744,7 +1765,8 @@ namespace System.Xml
             string? data,
             ExceptionType invCharExceptionType,
             ExceptionType invSurrogateExceptionType
-        ) {
+        )
+        {
             if (data == null || data.Length == 0)
             {
                 return;
@@ -1801,7 +1823,8 @@ namespace System.Xml
             int offset,
             int len,
             ExceptionType exceptionType
-        ) {
+        )
+        {
             if (data == null || len == 0)
             {
                 return;
@@ -1912,7 +1935,8 @@ namespace System.Xml
             ExceptionType exceptionType,
             int lineNo,
             int linePos
-        ) {
+        )
+        {
             switch (exceptionType)
             {
                 case ExceptionType.ArgumentException:
@@ -1927,7 +1951,8 @@ namespace System.Xml
             string res,
             string arg,
             ExceptionType exceptionType
-        ) {
+        )
+        {
             return CreateException(res, arg, exceptionType, 0, 0);
         }
 
@@ -1937,7 +1962,8 @@ namespace System.Xml
             ExceptionType exceptionType,
             int lineNo,
             int linePos
-        ) {
+        )
+        {
             switch (exceptionType)
             {
                 case ExceptionType.ArgumentException:
@@ -1952,7 +1978,8 @@ namespace System.Xml
             string res,
             string[] args,
             ExceptionType exceptionType
-        ) {
+        )
+        {
             return CreateException(res, args, exceptionType, 0, 0);
         }
 
@@ -1962,7 +1989,8 @@ namespace System.Xml
             ExceptionType exceptionType,
             int lineNo,
             int linePos
-        ) {
+        )
+        {
             switch (exceptionType)
             {
                 case ExceptionType.ArgumentException:
@@ -1982,7 +2010,8 @@ namespace System.Xml
             char low,
             char hi,
             ExceptionType exceptionType
-        ) {
+        )
+        {
             return CreateInvalidSurrogatePairException(low, hi, exceptionType, 0, 0);
         }
 
@@ -1992,7 +2021,8 @@ namespace System.Xml
             ExceptionType exceptionType,
             int lineNo,
             int linePos
-        ) {
+        )
+        {
             string[] args = new string[]
             {
                 ((uint)hi).ToString("X", CultureInfo.InvariantCulture),
@@ -2015,7 +2045,8 @@ namespace System.Xml
         internal static Exception CreateInvalidHighSurrogateCharException(
             char hi,
             ExceptionType exceptionType
-        ) {
+        )
+        {
             return CreateInvalidHighSurrogateCharException(hi, exceptionType, 0, 0);
         }
 
@@ -2024,7 +2055,8 @@ namespace System.Xml
             ExceptionType exceptionType,
             int lineNo,
             int linePos
-        ) {
+        )
+        {
             return CreateException(
                 SR.Xml_InvalidSurrogateHighChar,
                 ((uint)hi).ToString("X", CultureInfo.InvariantCulture),
@@ -2039,7 +2071,8 @@ namespace System.Xml
             int length,
             int invCharPos,
             ExceptionType exceptionType
-        ) {
+        )
+        {
             return CreateException(
                 SR.Xml_InvalidCharacter,
                 XmlException.BuildCharExceptionArgs(data, length, invCharPos),
@@ -2058,7 +2091,8 @@ namespace System.Xml
             string data,
             int invCharPos,
             ExceptionType exceptionType
-        ) {
+        )
+        {
             return CreateException(
                 SR.Xml_InvalidCharacter,
                 XmlException.BuildCharExceptionArgs(data, invCharPos),
@@ -2077,7 +2111,8 @@ namespace System.Xml
             char invChar,
             char nextChar,
             ExceptionType exceptionType
-        ) {
+        )
+        {
             return CreateException(
                 SR.Xml_InvalidCharacter,
                 XmlException.BuildCharExceptionArgs(invChar, nextChar),
@@ -2089,7 +2124,8 @@ namespace System.Xml
             string name,
             int index,
             ExceptionType exceptionType
-        ) {
+        )
+        {
             return CreateException(
                 index == 0 ? SR.Xml_BadStartNameChar : SR.Xml_BadNameChar,
                 XmlException.BuildCharExceptionArgs(name, index),
@@ -2102,7 +2138,8 @@ namespace System.Xml
         internal static ArgumentException CreateInvalidNameArgumentException(
             string? name,
             string? argumentName
-        ) {
+        )
+        {
             return (name == null)
               ? new ArgumentNullException(argumentName)
               : new ArgumentException(SR.Xml_EmptyName, argumentName);

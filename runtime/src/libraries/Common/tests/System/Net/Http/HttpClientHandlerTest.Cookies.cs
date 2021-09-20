@@ -39,7 +39,8 @@ namespace System.Net.Http.Functional.Tests
             Uri uri,
             string cookieName,
             string cookieValue
-        ) {
+        )
+        {
             var container = new CookieContainer();
             container.Add(uri, new Cookie(cookieName, cookieValue));
             return container;
@@ -73,7 +74,8 @@ namespace System.Net.Http.Functional.Tests
             string cookieName,
             string cookieValue,
             bool useCookies
-        ) {
+        )
+        {
             await LoopbackServerFactory.CreateClientAndServerAsync(
                 async uri =>
                 {
@@ -406,7 +408,8 @@ namespace System.Net.Http.Functional.Tests
             string cookieName,
             string cookieValue,
             bool useCookies
-        ) {
+        )
+        {
             await LoopbackServerFactory.CreateServerAsync(
                 async (server, url) =>
                 {

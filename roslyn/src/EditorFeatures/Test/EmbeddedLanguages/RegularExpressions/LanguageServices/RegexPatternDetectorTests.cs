@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.EmbeddedLanguages.RegularExpressions.
             string value,
             RegexOptions? expectedOptions = null,
             string prefix = "//"
-        ) {
+        )
+        {
             var (matched, options) = RegexPatternDetector.TestAccessor.TryMatch(prefix + value);
             Assert.True(matched);
 

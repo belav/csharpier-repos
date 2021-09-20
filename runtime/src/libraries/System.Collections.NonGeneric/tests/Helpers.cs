@@ -40,7 +40,8 @@ namespace System.Collections.Tests
         public static void PerformActionOnAllHashtableWrappers(
             Hashtable hashtable,
             Action<Hashtable> action
-        ) {
+        )
+        {
             // Synchronized returns a slightly different version of Hashtable
             Hashtable[] hashtableTypes =
             {
@@ -84,7 +85,8 @@ namespace System.Collections.Tests
         public static void PerformActionOnAllArrayListWrappers(
             ArrayList arrList,
             Action<ArrayList> action
-        ) {
+        )
+        {
             // Adapter, GetRange, Synchronized, ReadOnly returns a slightly different version of ArrayList.
             // The following variable contains each one of these types of array lists
             ArrayList[] arrayListTypes =
@@ -107,7 +109,8 @@ namespace System.Collections.Tests
             int count,
             int start = 0,
             string optionalString = null
-        ) {
+        )
+        {
             var arrayList = new ArrayList();
 
             for (int i = start; i < start + count; i++)
@@ -179,7 +182,8 @@ namespace System.Collections.Tests
         public static void PerformActionOnAllSortedListWrappers(
             SortedList sortedList,
             Action<SortedList> action
-        ) {
+        )
+        {
             // Synchronized returns a slightly different version of Stack
             SortedList[] sortedListTypes =
             {

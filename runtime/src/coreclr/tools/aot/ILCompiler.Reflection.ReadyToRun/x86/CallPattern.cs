@@ -18,7 +18,8 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
             out uint regMask,
             out uint argMask,
             out uint codeDelta
-        ) {
+        )
+        {
             uint val = callPatternTable[pattern];
             byte[] fld = BitConverter.GetBytes(val);
             argCnt = fld[0];

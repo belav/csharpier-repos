@@ -44,7 +44,8 @@ namespace System.Collections.ObjectModel
         public bool TryGetValue(
             TKey key,
             [System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute(false)] out TItem item
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -266,7 +267,8 @@ namespace System.Collections.ObjectModel
         public bool TryGetValue(
             TKey key,
             [System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute(false)] out TValue value
-        ) {
+        )
+        {
             throw null;
         }
         public sealed partial class KeyCollection

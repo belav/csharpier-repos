@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 Func<SyntaxToken, TextSpan, SyntaxToken> getNewStartToken,
                 Func<SyntaxToken, TextSpan, SyntaxToken> getNewEndToken,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var startToken = suppressionTargetInfo.StartToken;
                 var endToken = suppressionTargetInfo.EndToken;
                 var nodeWithTokens = suppressionTargetInfo.NodeWithTokens;
@@ -82,7 +83,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 AbstractSuppressionCodeFixProvider fixer,
                 bool isStartToken,
                 out SyntaxTrivia triviaAtIndex
-            ) {
+            )
+            {
                 // Start token: Insert the #pragma disable directive just **before** the first end of line trivia prior to diagnostic location.
                 // End token: Insert the #pragma disable directive just **after** the first end of line trivia after diagnostic location.
 
@@ -125,7 +127,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 AbstractSuppressionCodeFixProvider fixer,
                 Func<SyntaxNode, SyntaxNode> formatNode,
                 bool isRemoveSuppression = false
-            ) {
+            )
+            {
                 var trivia = startToken.LeadingTrivia.ToImmutableArray();
                 var index = GetPositionForPragmaInsertion(
                     trivia,
@@ -170,7 +173,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
             private static bool IsEndOfLineOrHasLeadingEndOfLine(
                 SyntaxTrivia trivia,
                 AbstractSuppressionCodeFixProvider fixer
-            ) {
+            )
+            {
                 return fixer.IsEndOfLine(trivia)
                     || (
                         trivia.HasStructure
@@ -183,7 +187,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
             private static bool IsEndOfLineOrHasTrailingEndOfLine(
                 SyntaxTrivia trivia,
                 AbstractSuppressionCodeFixProvider fixer
-            ) {
+            )
+            {
                 return fixer.IsEndOfLine(trivia)
                     || (
                         trivia.HasStructure
@@ -196,7 +201,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
             private static bool IsEndOfLineOrContainsEndOfLine(
                 SyntaxTrivia trivia,
                 AbstractSuppressionCodeFixProvider fixer
-            ) {
+            )
+            {
                 return fixer.IsEndOfLine(trivia)
                     || (
                         trivia.HasStructure
@@ -211,7 +217,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 AbstractSuppressionCodeFixProvider fixer,
                 Func<SyntaxNode, SyntaxNode> formatNode,
                 bool isRemoveSuppression = false
-            ) {
+            )
+            {
                 ImmutableArray<SyntaxTrivia> trivia;
                 var isEOF = fixer.IsEndOfFileToken(endToken);
                 if (isEOF)
@@ -273,7 +280,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 AbstractSuppressionCodeFixProvider fixer,
                 ref Document document,
                 ref SuppressionTargetInfo suppressionTargetInfo
-            ) {
+            )
+            {
                 // For pragma suppression fixes, we need to normalize the leading trivia on start token to account for
                 // the trailing trivia on its previous token (and similarly normalize trailing trivia for end token).
 

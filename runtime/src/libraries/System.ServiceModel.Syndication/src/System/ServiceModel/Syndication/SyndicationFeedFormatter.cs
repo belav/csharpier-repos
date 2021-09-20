@@ -44,7 +44,8 @@ namespace System.ServiceModel.Syndication
         private bool NotImplementedDateTimeParser(
             XmlDateTimeData XmlDateTimeData,
             out DateTimeOffset dateTimeOffset
-        ) {
+        )
+        {
             dateTimeOffset = default;
             return false;
         }
@@ -133,7 +134,8 @@ namespace System.ServiceModel.Syndication
             XmlReader reader,
             SyndicationFeed feed,
             int maxExtensionSize
-        ) {
+        )
+        {
             if (feed == null)
             {
                 throw new ArgumentNullException(nameof(feed));
@@ -146,7 +148,8 @@ namespace System.ServiceModel.Syndication
             XmlReader reader,
             SyndicationItem item,
             int maxExtensionSize
-        ) {
+        )
+        {
             if (item == null)
             {
                 throw new ArgumentNullException(nameof(item));
@@ -159,7 +162,8 @@ namespace System.ServiceModel.Syndication
             XmlReader reader,
             SyndicationCategory category,
             int maxExtensionSize
-        ) {
+        )
+        {
             if (category == null)
             {
                 throw new ArgumentNullException(nameof(category));
@@ -172,7 +176,8 @@ namespace System.ServiceModel.Syndication
             XmlReader reader,
             SyndicationLink link,
             int maxExtensionSize
-        ) {
+        )
+        {
             if (link == null)
             {
                 throw new ArgumentNullException(nameof(link));
@@ -185,7 +190,8 @@ namespace System.ServiceModel.Syndication
             XmlReader reader,
             SyndicationPerson person,
             int maxExtensionSize
-        ) {
+        )
+        {
             if (person == null)
             {
                 throw new ArgumentNullException(nameof(person));
@@ -200,7 +206,8 @@ namespace System.ServiceModel.Syndication
             string value,
             SyndicationFeed feed,
             string version
-        ) {
+        )
+        {
             if (feed == null)
             {
                 throw new ArgumentNullException(nameof(feed));
@@ -219,7 +226,8 @@ namespace System.ServiceModel.Syndication
             string value,
             SyndicationItem item,
             string version
-        ) {
+        )
+        {
             if (item == null)
             {
                 throw new ArgumentNullException(nameof(item));
@@ -238,7 +246,8 @@ namespace System.ServiceModel.Syndication
             string value,
             SyndicationCategory category,
             string version
-        ) {
+        )
+        {
             if (category == null)
             {
                 throw new ArgumentNullException(nameof(category));
@@ -257,7 +266,8 @@ namespace System.ServiceModel.Syndication
             string value,
             SyndicationLink link,
             string version
-        ) {
+        )
+        {
             if (link == null)
             {
                 throw new ArgumentNullException(nameof(link));
@@ -276,7 +286,8 @@ namespace System.ServiceModel.Syndication
             string value,
             SyndicationPerson person,
             string version
-        ) {
+        )
+        {
             if (person == null)
             {
                 throw new ArgumentNullException(nameof(person));
@@ -295,7 +306,8 @@ namespace System.ServiceModel.Syndication
             string contentType,
             string version,
             out SyndicationContent content
-        ) {
+        )
+        {
             return item.TryParseContent(reader, contentType, version, out content);
         }
 
@@ -303,7 +315,8 @@ namespace System.ServiceModel.Syndication
             XmlReader reader,
             SyndicationFeed feed,
             string version
-        ) {
+        )
+        {
             if (feed == null)
             {
                 throw new ArgumentNullException(nameof(feed));
@@ -316,7 +329,8 @@ namespace System.ServiceModel.Syndication
             XmlReader reader,
             SyndicationItem item,
             string version
-        ) {
+        )
+        {
             if (item == null)
             {
                 throw new ArgumentNullException(nameof(item));
@@ -329,7 +343,8 @@ namespace System.ServiceModel.Syndication
             XmlReader reader,
             SyndicationCategory category,
             string version
-        ) {
+        )
+        {
             if (category == null)
             {
                 throw new ArgumentNullException(nameof(category));
@@ -342,7 +357,8 @@ namespace System.ServiceModel.Syndication
             XmlReader reader,
             SyndicationLink link,
             string version
-        ) {
+        )
+        {
             if (link == null)
             {
                 throw new ArgumentNullException(nameof(link));
@@ -355,7 +371,8 @@ namespace System.ServiceModel.Syndication
             XmlReader reader,
             SyndicationPerson person,
             string version
-        ) {
+        )
+        {
             if (person == null)
             {
                 throw new ArgumentNullException(nameof(person));
@@ -368,7 +385,8 @@ namespace System.ServiceModel.Syndication
             XmlWriter writer,
             SyndicationFeed feed,
             string version
-        ) {
+        )
+        {
             if (feed == null)
             {
                 throw new ArgumentNullException(nameof(feed));
@@ -381,7 +399,8 @@ namespace System.ServiceModel.Syndication
             XmlWriter writer,
             SyndicationItem item,
             string version
-        ) {
+        )
+        {
             if (item == null)
             {
                 throw new ArgumentNullException(nameof(item));
@@ -394,7 +413,8 @@ namespace System.ServiceModel.Syndication
             XmlWriter writer,
             SyndicationCategory category,
             string version
-        ) {
+        )
+        {
             if (category == null)
             {
                 throw new ArgumentNullException(nameof(category));
@@ -407,7 +427,8 @@ namespace System.ServiceModel.Syndication
             XmlWriter writer,
             SyndicationLink link,
             string version
-        ) {
+        )
+        {
             if (link == null)
             {
                 throw new ArgumentNullException(nameof(link));
@@ -420,7 +441,8 @@ namespace System.ServiceModel.Syndication
             XmlWriter writer,
             SyndicationPerson person,
             string version
-        ) {
+        )
+        {
             if (person == null)
             {
                 throw new ArgumentNullException(nameof(person));
@@ -433,7 +455,8 @@ namespace System.ServiceModel.Syndication
             XmlWriter writer,
             SyndicationFeed feed,
             string version
-        ) {
+        )
+        {
             if (feed == null)
             {
                 throw new ArgumentNullException(nameof(feed));
@@ -446,7 +469,8 @@ namespace System.ServiceModel.Syndication
             XmlWriter writer,
             SyndicationItem item,
             string version
-        ) {
+        )
+        {
             if (item == null)
             {
                 throw new ArgumentNullException(nameof(item));
@@ -459,7 +483,8 @@ namespace System.ServiceModel.Syndication
             XmlWriter writer,
             SyndicationCategory category,
             string version
-        ) {
+        )
+        {
             if (category == null)
             {
                 throw new ArgumentNullException(nameof(category));
@@ -472,7 +497,8 @@ namespace System.ServiceModel.Syndication
             XmlWriter writer,
             SyndicationLink link,
             string version
-        ) {
+        )
+        {
             if (link == null)
             {
                 throw new ArgumentNullException(nameof(link));
@@ -485,7 +511,8 @@ namespace System.ServiceModel.Syndication
             XmlWriter writer,
             SyndicationPerson person,
             string version
-        ) {
+        )
+        {
             if (person == null)
             {
                 throw new ArgumentNullException(nameof(person));
@@ -505,7 +532,8 @@ namespace System.ServiceModel.Syndication
             string localName,
             string namespaceURI,
             XmlReader reader
-        ) {
+        )
+        {
             return UriFromString(UriParser, uriString, uriKind, localName, namespaceURI, reader);
         }
 
@@ -516,7 +544,8 @@ namespace System.ServiceModel.Syndication
             string localName,
             string namespaceURI,
             XmlReader reader
-        ) {
+        )
+        {
             Uri uri = null;
             var elementQualifiedName = new XmlQualifiedName(localName, namespaceURI);
             var xmlUriData = new XmlUriData(uriString, uriKind, elementQualifiedName);
@@ -591,7 +620,8 @@ namespace System.ServiceModel.Syndication
             ref XmlDictionaryWriter extWriter,
             XmlReader reader,
             int maxExtensionSize
-        ) {
+        )
+        {
             if (buffer == null)
             {
                 buffer = new XmlBuffer(maxExtensionSize);
@@ -617,7 +647,8 @@ namespace System.ServiceModel.Syndication
             XmlBuffer buffer,
             XmlDictionaryWriter writer,
             SyndicationFeed feed
-        ) {
+        )
+        {
             if (feed == null)
             {
                 throw new ArgumentNullException(nameof(feed));
@@ -631,7 +662,8 @@ namespace System.ServiceModel.Syndication
             XmlBuffer buffer,
             XmlDictionaryWriter writer,
             SyndicationItem item
-        ) {
+        )
+        {
             Debug.Assert(item != null);
 
             CloseBuffer(buffer, writer);
@@ -642,7 +674,8 @@ namespace System.ServiceModel.Syndication
             XmlBuffer buffer,
             XmlDictionaryWriter writer,
             SyndicationCategory category
-        ) {
+        )
+        {
             Debug.Assert(category != null);
 
             CloseBuffer(buffer, writer);
@@ -653,7 +686,8 @@ namespace System.ServiceModel.Syndication
             XmlBuffer buffer,
             XmlDictionaryWriter writer,
             SyndicationLink link
-        ) {
+        )
+        {
             Debug.Assert(link != null);
 
             CloseBuffer(buffer, writer);
@@ -664,7 +698,8 @@ namespace System.ServiceModel.Syndication
             XmlBuffer buffer,
             XmlDictionaryWriter writer,
             SyndicationPerson person
-        ) {
+        )
+        {
             Debug.Assert(person != null);
 
             CloseBuffer(buffer, writer);
@@ -700,7 +735,8 @@ namespace System.ServiceModel.Syndication
                 XmlDictionaryReader reader,
                 string res,
                 string arg1
-            ) {
+            )
+            {
                 string s = SR.Format(res, arg1);
                 if (reader is IXmlLineInfo lineInfo && lineInfo.HasLineInfo())
                 {

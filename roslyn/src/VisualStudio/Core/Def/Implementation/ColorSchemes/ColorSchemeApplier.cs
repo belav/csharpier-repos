@@ -162,7 +162,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
         /// <param name="colorScheme">The color scheme to update with.</param>
         private bool TryGetUpdatedColorScheme(
             [NotNullWhen(returnValue: true)] out SchemeName? colorScheme
-        ) {
+        )
+        {
             // The color scheme that is currently applied to the registry
             var appliedColorScheme = _settings.GetAppliedColorScheme();
 

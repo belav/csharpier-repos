@@ -15,7 +15,8 @@ namespace System
             ref ValueStringBuilder dest,
             bool isQuery,
             bool iriParsing
-        ) {
+        )
+        {
             // The following assertions rely on the input not mutating mid-operation, as is the case currently since callers are working with strings
             // If we start accepting input such as spans, this method must be audited to ensure no buffer overruns/infinite loops could occur
 
@@ -112,7 +113,8 @@ namespace System
                     out Rune rune,
                     out bytesConsumed
                 ) == OperationStatus.Done
-            ) {
+            )
+            {
                 Debug.Assert(
                     bytesConsumed >= 2,
                     $"Rune.DecodeFromUtf8 consumed {bytesConsumed} bytes, likely indicating input was modified concurrently during UnescapePercentEncodedUTF8Sequence's execution"

@@ -14,7 +14,8 @@ namespace System.Collections.Generic
         public static RuntimeAssetGroup GetRuntimeGroup(
             this IEnumerable<RuntimeAssetGroup> self,
             string runtime
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(runtime))
             {
                 throw new ArgumentNullException(nameof(runtime));
@@ -25,7 +26,8 @@ namespace System.Collections.Generic
         private static RuntimeAssetGroup GetGroup(
             IEnumerable<RuntimeAssetGroup> groups,
             string runtime
-        ) {
+        )
+        {
             return groups.FirstOrDefault(g => g.Runtime == runtime);
         }
 
@@ -35,7 +37,8 @@ namespace System.Collections.Generic
         public static IEnumerable<string> GetRuntimeAssets(
             this IEnumerable<RuntimeAssetGroup> self,
             string runtime
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(runtime))
             {
                 throw new ArgumentNullException(nameof(runtime));
@@ -46,7 +49,8 @@ namespace System.Collections.Generic
         private static IEnumerable<string> GetAssets(
             IEnumerable<RuntimeAssetGroup> groups,
             string runtime
-        ) {
+        )
+        {
             foreach (RuntimeAssetGroup group in groups)
             {
                 if (group.Runtime == runtime)
@@ -65,7 +69,8 @@ namespace System.Collections.Generic
         public static IEnumerable<RuntimeFile> GetRuntimeFileAssets(
             this IEnumerable<RuntimeAssetGroup> self,
             string runtime
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(runtime))
             {
                 throw new ArgumentNullException(nameof(runtime));
@@ -76,7 +81,8 @@ namespace System.Collections.Generic
         private static IEnumerable<RuntimeFile> GetRuntimeFiles(
             IEnumerable<RuntimeAssetGroup> groups,
             string runtime
-        ) {
+        )
+        {
             foreach (RuntimeAssetGroup group in groups)
             {
                 if (group.Runtime == runtime)

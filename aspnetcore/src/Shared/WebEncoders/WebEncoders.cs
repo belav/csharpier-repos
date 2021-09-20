@@ -102,7 +102,8 @@ namespace Microsoft.Extensions.Internal
             char[] buffer,
             int bufferOffset,
             int count
-        ) {
+        )
+        {
             if (input == null)
             {
                 throw new ArgumentNullException(nameof(input));
@@ -278,7 +279,8 @@ namespace Microsoft.Extensions.Internal
             char[] output,
             int outputOffset,
             int count
-        ) {
+        )
+        {
             if (input == null)
             {
                 throw new ArgumentNullException(nameof(input));
@@ -460,7 +462,8 @@ namespace Microsoft.Extensions.Internal
             string inputName,
             int offset,
             int count
-        ) {
+        )
+        {
             if (offset < 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(offset));

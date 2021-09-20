@@ -80,7 +80,8 @@ namespace System.Net.NetworkInformation
                     ref addressCount,
                     ref ai
                 ) != 0
-            ) {
+            )
+            {
                 string message = Interop.Sys.GetLastErrorInfo().GetErrorMessage();
                 throw new NetworkInformationException(message);
             }
@@ -137,7 +138,8 @@ namespace System.Net.NetworkInformation
                             ai->InterfaceIndex,
                             out LinuxNetworkInterface? lni
                         )
-                    ) {
+                    )
+                    {
                         lni.AddAddress(address, ai->PrefixLength);
                     }
 

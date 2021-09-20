@@ -58,7 +58,8 @@ namespace Microsoft.CodeAnalysis.Tools
             int charNumber,
             string message,
             bool changesAreErrors
-        ) {
+        )
+        {
             var formattedMessage = IssueFormatter.FormatIssue(
                 document,
                 severity,

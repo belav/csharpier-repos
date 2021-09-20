@@ -23,7 +23,8 @@ namespace System.ComponentModel.Composition.Factories
         public static ExportDefinition Create(
             string contractName,
             IDictionary<string, object> metadata
-        ) {
+        )
+        {
             return new DerivedExportDefinition(contractName, metadata);
         }
     }

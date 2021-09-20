@@ -91,7 +91,8 @@ namespace Microsoft.CodeAnalysis.ReplaceDocCommentTextWithTag
                         fullyQualifiedSpan,
                         cancellationToken
                     )
-                ) {
+                )
+                {
                     return;
                 }
             }
@@ -157,7 +158,8 @@ namespace Microsoft.CodeAnalysis.ReplaceDocCommentTextWithTag
             SyntaxToken token,
             TextSpan replacementSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var sourceText = semanticModel.SyntaxTree.GetText(cancellationToken);
             var text = sourceText.ToString(replacementSpan);
 
@@ -181,7 +183,8 @@ namespace Microsoft.CodeAnalysis.ReplaceDocCommentTextWithTag
             SemanticModel semanticModel,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = semanticModel.SyntaxTree.GetRoot(cancellationToken);
             var token = root.FindToken(position);
 
@@ -200,7 +203,8 @@ namespace Microsoft.CodeAnalysis.ReplaceDocCommentTextWithTag
             CodeRefactoringContext context,
             TextSpan expandedSpan,
             string replacement
-        ) {
+        )
+        {
             context.RegisterRefactoring(
                 new MyCodeAction(
                     string.Format(FeaturesResources.Use_0, replacement),
@@ -215,7 +219,8 @@ namespace Microsoft.CodeAnalysis.ReplaceDocCommentTextWithTag
             TextSpan span,
             string replacement,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
             var newText = text.Replace(span, replacement);
 
@@ -226,7 +231,8 @@ namespace Microsoft.CodeAnalysis.ReplaceDocCommentTextWithTag
             SourceText sourceText,
             TextSpan span,
             bool fullyQualifiedName
-        ) {
+        )
+        {
             if (span.Length != 0)
             {
                 return span;
@@ -241,14 +247,16 @@ namespace Microsoft.CodeAnalysis.ReplaceDocCommentTextWithTag
                     startInclusive,
                     fullyQualifiedName
                 )
-            ) {
+            )
+            {
                 startInclusive--;
             }
 
             while (
                 endExclusive < sourceText.Length
                 && ShouldExpandSpanForwardOneCharacter(sourceText, endExclusive, fullyQualifiedName)
-            ) {
+            )
+            {
                 endExclusive++;
             }
 
@@ -259,7 +267,8 @@ namespace Microsoft.CodeAnalysis.ReplaceDocCommentTextWithTag
             SourceText sourceText,
             int endExclusive,
             bool fullyQualifiedName
-        ) {
+        )
+        {
             var currentChar = sourceText[endExclusive];
 
             if (char.IsLetterOrDigit(currentChar))
@@ -274,7 +283,8 @@ namespace Microsoft.CodeAnalysis.ReplaceDocCommentTextWithTag
                 && currentChar == '.'
                 && endExclusive + 1 < sourceText.Length
                 && char.IsLetterOrDigit(sourceText[endExclusive + 1])
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -285,7 +295,8 @@ namespace Microsoft.CodeAnalysis.ReplaceDocCommentTextWithTag
             SourceText sourceText,
             int startInclusive,
             bool fullyQualifiedName
-        ) {
+        )
+        {
             Debug.Assert(startInclusive > 0);
 
             var previousCharacter = sourceText[startInclusive - 1];

@@ -81,7 +81,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             CompilationOptions compilationOptions,
             ParseOptions parseOptions,
             string content
-        ) {
+        )
+        {
             return Create(language, compilationOptions, parseOptions, new[] { content });
         }
 
@@ -95,7 +96,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             CompilationOptions compilationOptions,
             ParseOptions parseOptions,
             string content
-        ) {
+        )
+        {
             return Create(
                 workspaceKind,
                 language,
@@ -111,7 +113,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             CompilationOptions compilationOptions,
             ParseOptions parseOptions,
             params string[] files
-        ) {
+        )
+        {
             return Create(language, compilationOptions, parseOptions, files, exportProvider: null);
         }
 
@@ -122,7 +125,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             CompilationOptions compilationOptions,
             ParseOptions parseOptions,
             params string[] files
-        ) {
+        )
+        {
             return Create(
                 language,
                 compilationOptions,
@@ -149,7 +153,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             bool commonReferences = true,
             bool openDocuments = false,
             IDocumentServiceProvider documentServiceProvider = null
-        ) {
+        )
+        {
             var workspaceElement = CreateWorkspaceElement(
                 language,
                 compilationOptions,
@@ -175,7 +180,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             ParseOptions[] parseOptions,
             string[] files,
             ExportProvider exportProvider
-        ) {
+        )
+        {
             Debug.Assert(
                 parseOptions == null || (files.Length == parseOptions.Length),
                 "Please specify a parse option for each file."
@@ -239,7 +245,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             TestComposition composition = null,
             string[] metadataReferences = null,
             bool openDocuments = false
-        ) {
+        )
+        {
             return CreateCSharp(
                 new[] { file },
                 parseOptions,
@@ -259,7 +266,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             TestComposition composition = null,
             string[] metadataReferences = null,
             bool openDocuments = false
-        ) {
+        )
+        {
             return Create(
                 LanguageNames.CSharp,
                 compilationOptions,
@@ -277,7 +285,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             ParseOptions[] parseOptions = null,
             CompilationOptions compilationOptions = null,
             ExportProvider exportProvider = null
-        ) {
+        )
+        {
             return Create(
                 LanguageNames.CSharp,
                 compilationOptions,
@@ -299,7 +308,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             TestComposition composition = null,
             string[] metadataReferences = null,
             bool openDocuments = false
-        ) {
+        )
+        {
             return CreateVisualBasic(
                 new[] { file },
                 parseOptions,
@@ -319,7 +329,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             TestComposition composition = null,
             string[] metadataReferences = null,
             bool openDocuments = false
-        ) {
+        )
+        {
             return Create(
                 LanguageNames.VisualBasic,
                 compilationOptions,
@@ -338,7 +349,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             ParseOptions[] parseOptions = null,
             CompilationOptions compilationOptions = null,
             ExportProvider exportProvider = null
-        ) {
+        )
+        {
             return Create(
                 LanguageNames.VisualBasic,
                 compilationOptions,

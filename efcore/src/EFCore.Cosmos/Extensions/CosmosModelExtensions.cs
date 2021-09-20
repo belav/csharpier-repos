@@ -43,7 +43,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionModel model,
             string? name,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             model.SetOrRemoveAnnotation(
                 CosmosAnnotationNames.ContainerName,
                 Check.NullButNotEmpty(name, nameof(name)),

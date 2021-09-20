@@ -11,16 +11,14 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
     internal sealed class ComMetaObject : DynamicMetaObject
     {
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        internal ComMetaObject(
-            Expression expression,
-            BindingRestrictions restrictions,
-            object arg
-        ) : base(expression, restrictions, arg) { }
+        internal ComMetaObject(Expression expression, BindingRestrictions restrictions, object arg)
+            : base(expression, restrictions, arg) { }
 
         public override DynamicMetaObject BindInvokeMember(
             InvokeMemberBinder binder,
             DynamicMetaObject[] args
-        ) {
+        )
+        {
             Requires.NotNull(binder, nameof(binder));
             return binder.Defer(args.AddFirst(WrapSelf()));
         }
@@ -40,7 +38,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         public override DynamicMetaObject BindSetMember(
             SetMemberBinder binder,
             DynamicMetaObject value
-        ) {
+        )
+        {
             Requires.NotNull(binder, nameof(binder));
             return binder.Defer(WrapSelf(), value);
         }
@@ -48,7 +47,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         public override DynamicMetaObject BindGetIndex(
             GetIndexBinder binder,
             DynamicMetaObject[] indexes
-        ) {
+        )
+        {
             Requires.NotNull(binder, nameof(binder));
             return binder.Defer(WrapSelf(), indexes);
         }
@@ -57,7 +57,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             SetIndexBinder binder,
             DynamicMetaObject[] indexes,
             DynamicMetaObject value
-        ) {
+        )
+        {
             Requires.NotNull(binder, nameof(binder));
             return binder.Defer(WrapSelf(), indexes.AddLast(value));
         }

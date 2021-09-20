@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         internal static AssemblySymbol[] GetSymbolsForReferences(
             MetadataReference[] mrefs,
             Compilation[] compilations
-        ) {
+        )
+        {
             return GetSymbolsForReferences(
                 mrefs: mrefs.Concat(compilations.Select(c => c.ToMetadataReference())).ToArray()
             );
@@ -52,7 +53,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             byte[][] bytes = null,
             MetadataReference[] mrefs = null,
             CSharpCompilationOptions options = null
-        ) {
+        )
+        {
             var refs = new List<MetadataReference>();
 
             if (compilations != null)

@@ -15,7 +15,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         protected override void ExecuteCore(
             RazorCodeDocument codeDocument,
             DocumentIntermediateNode documentNode
-        ) {
+        )
+        {
             if (!IsComponentDocument(documentNode))
             {
                 return;
@@ -47,7 +48,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             ClassDeclarationIntermediateNode classNode,
             IntermediateNode parent,
             TagHelperDirectiveAttributeIntermediateNode node
-        ) {
+        )
+        {
             // If we can't get a nonempty attribute name, do nothing because there will
             // already be a diagnostic for empty values
             var identifierToken = DetermineIdentifierToken(node);
@@ -74,7 +76,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
 
         private IntermediateToken DetermineIdentifierToken(
             TagHelperDirectiveAttributeIntermediateNode attributeNode
-        ) {
+        )
+        {
             IntermediateToken foundToken = null;
 
             if (attributeNode.Children.Count == 1)

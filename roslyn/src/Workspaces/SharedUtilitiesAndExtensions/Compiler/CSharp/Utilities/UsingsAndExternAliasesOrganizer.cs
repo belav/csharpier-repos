@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             bool separateGroups,
             out SyntaxList<ExternAliasDirectiveSyntax> organizedExternAliasList,
             out SyntaxList<UsingDirectiveSyntax> organizedUsingList
-        ) {
+        )
+        {
             OrganizeWorker(
                 externAliasList,
                 usingList,
@@ -52,7 +53,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                     if (
                         NeedsGrouping(lastUsing, currentUsing)
                         && !currentUsing.GetLeadingTrivia().Any(t => t.IsEndOfLine())
-                    ) {
+                    )
+                    {
                         var newCurrentUsing = currentUsing.WithPrependedLeadingTrivia(s_newLine);
                         organizedUsingList = organizedUsingList.Replace(
                             currentUsing,
@@ -103,7 +105,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             bool placeSystemNamespaceFirst,
             out SyntaxList<ExternAliasDirectiveSyntax> organizedExternAliasList,
             out SyntaxList<UsingDirectiveSyntax> organizedUsingList
-        ) {
+        )
+        {
             if (externAliasList.Count > 0 || usingList.Count > 0)
             {
                 // Merge the list of usings and externs into one list.
@@ -168,7 +171,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                 if (
                     !trailingTrivia.Any()
                     || trailingTrivia.Last().Kind() != SyntaxKind.EndOfLineTrivia
-                ) {
+                )
+                {
                     list[i] = node.WithTrailingTrivia(trailingTrivia.Concat(s_newLine));
                 }
             }

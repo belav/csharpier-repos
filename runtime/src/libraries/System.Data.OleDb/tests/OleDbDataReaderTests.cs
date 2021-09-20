@@ -304,7 +304,8 @@ namespace System.Data.OleDb.Tests
             Action<OleDbDataReader> testAction,
             bool schemaOnly = false,
             [CallerMemberName] string memberName = null
-        ) {
+        )
+        {
             string tableName = Helpers.GetTableName(memberName);
             Assert.False(File.Exists(Path.Combine(TestDirectory, tableName)));
             command.CommandText =
@@ -345,7 +346,8 @@ namespace System.Data.OleDb.Tests
                 OleDbDataReader reader = schemaOnly
                     ? command.ExecuteReader(CommandBehavior.SchemaOnly)
                     : command.ExecuteReader()
-            ) {
+            )
+            {
                 testAction(reader);
             }
             command.CommandText = @"DROP TABLE " + tableName;

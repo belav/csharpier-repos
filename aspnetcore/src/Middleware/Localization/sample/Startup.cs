@@ -53,7 +53,8 @@ namespace LocalizationSample
                 {
                     if (
                         context.Request.Path.Value.EndsWith("favicon.ico", StringComparison.Ordinal)
-                    ) {
+                    )
+                    {
                         // Pesky browsers
                         context.Response.StatusCode = 404;
                         return;
@@ -188,7 +189,8 @@ namespace LocalizationSample
 
         private static async System.Threading.Tasks.Task WriteCultureSelectOptions(
             HttpContext context
-        ) {
+        )
+        {
             await context.Response.WriteAsync($"    <option value=\"\">-- select --</option>");
             await context.Response.WriteAsync(
                 $"    <option value=\"{new CultureInfo("en-US").Name}\">{new CultureInfo("en-US").DisplayName}</option>"

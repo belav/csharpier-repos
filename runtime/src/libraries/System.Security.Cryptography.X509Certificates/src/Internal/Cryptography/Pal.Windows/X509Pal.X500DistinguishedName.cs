@@ -24,7 +24,8 @@ namespace Internal.Cryptography.Pal
         public string X500DistinguishedNameDecode(
             byte[] encodedDistinguishedName,
             X500DistinguishedNameFlags flag
-        ) {
+        )
+        {
             int dwStrType = (int)(
                 CertNameStrTypeAndFlags.CERT_X500_NAME_STR | MapNameToStrFlag(flag)
             );
@@ -70,7 +71,8 @@ namespace Internal.Cryptography.Pal
         public byte[] X500DistinguishedNameEncode(
             string distinguishedName,
             X500DistinguishedNameFlags flag
-        ) {
+        )
+        {
             Debug.Assert(distinguishedName != null);
 
             CertNameStrTypeAndFlags dwStrType =
@@ -110,7 +112,8 @@ namespace Internal.Cryptography.Pal
         public unsafe string X500DistinguishedNameFormat(
             byte[] encodedDistinguishedName,
             bool multiLine
-        ) {
+        )
+        {
             if (encodedDistinguishedName == null || encodedDistinguishedName.Length == 0)
                 return string.Empty;
 
@@ -131,7 +134,8 @@ namespace Internal.Cryptography.Pal
                     null,
                     ref cbFormat
                 )
-            ) {
+            )
+            {
                 return encodedDistinguishedName.ToHexStringUpper();
             }
 
@@ -152,7 +156,8 @@ namespace Internal.Cryptography.Pal
                         (byte*)ptr,
                         ref cbFormat
                     )
-                ) {
+                )
+                {
                     return encodedDistinguishedName.ToHexStringUpper();
                 }
             }

@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryParentheses
             SemanticModel semanticModel,
             out PrecedenceKind precedence,
             out bool clarifiesPrecedence
-        ) {
+        )
+        {
             return CanRemoveParenthesesHelper(
                 parenthesizedExpression,
                 semanticModel,
@@ -43,7 +44,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryParentheses
             SemanticModel semanticModel,
             out PrecedenceKind parentPrecedenceKind,
             out bool clarifiesPrecedence
-        ) {
+        )
+        {
             var result = parenthesizedExpression.CanRemoveParentheses(semanticModel);
             if (!result)
             {

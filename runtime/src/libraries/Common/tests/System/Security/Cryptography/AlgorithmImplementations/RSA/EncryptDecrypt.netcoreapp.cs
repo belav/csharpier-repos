@@ -217,7 +217,8 @@ namespace System.Security.Cryptography.Rsa.Tests
                     if (
                         rsa2.TryDecrypt(encrypted, buf, padding, out bytesWritten)
                         && bytesWritten == input.Length
-                    ) {
+                    )
+                    {
                         // We'll get -here- 1 in 111014 runs (RSA-2048 Pkcs1).
                         Assert.NotEqual(input, buf.AsSpan(0, bytesWritten).ToArray());
                     }

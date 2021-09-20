@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.ConvertLinq.ConvertForEachToLinqQuery
             SyntaxNode node,
             IEnumerable<SyntaxTrivia> extraLeadingComments,
             IEnumerable<SyntaxTrivia> extraTrailingComments
-        ) {
+        )
+        {
             Node = node;
             ExtraLeadingComments = extraLeadingComments.ToImmutableArray();
             ExtraTrailingComments = extraTrailingComments.ToImmutableArray();

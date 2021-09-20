@@ -119,7 +119,8 @@ namespace System.Text.Json.Serialization.Tests
             T number,
             string jsonWithNumberAsNumber,
             string jsonWithNumberAsString
-        ) {
+        )
+        {
             // Option: read from string
 
             // Deserialize
@@ -554,7 +555,8 @@ namespace System.Text.Json.Serialization.Tests
             string json_NumbersAsStrings,
             string json_NumbersAsNumbersAndStrings,
             string json_NumbersAsNumbersAndStrings_Alternate
-        ) {
+        )
+        {
             List<T> deserialized;
 
             // Option: read from string
@@ -2033,7 +2035,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -2041,7 +2044,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 ClassWith_NumberHandlingOn_Type_WithCustomConverter value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }
@@ -2077,7 +2081,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 if (reader.TokenType == JsonTokenType.String && reader.GetString() == "NaN")
                 {
                     return 25;
@@ -2090,7 +2095,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 float? value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 if (float.IsNaN(value.Value))
                 {
                     writer.WriteNumberValue(25);

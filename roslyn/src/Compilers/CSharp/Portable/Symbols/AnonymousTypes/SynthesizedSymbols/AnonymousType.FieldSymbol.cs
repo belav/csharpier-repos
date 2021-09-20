@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             internal override TypeWithAnnotations GetFieldType(
                 ConsList<FieldSymbol> fieldsBeingBound
-            ) {
+            )
+            {
                 return _property.TypeWithAnnotations;
             }
 
@@ -94,7 +95,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             internal override ConstantValue GetConstantValue(
                 ConstantFieldsInProgress inProgress,
                 bool earlyDecodingWellKnownAttributes
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -136,7 +138,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             internal override void AddSynthesizedAttributes(
                 PEModuleBuilder moduleBuilder,
                 ref ArrayBuilder<SynthesizedAttributeData> attributes
-            ) {
+            )
+            {
                 base.AddSynthesizedAttributes(moduleBuilder, ref attributes);
 
                 AnonymousTypeManager manager =

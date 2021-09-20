@@ -194,7 +194,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Project_reference_that_itself_has_query_filter_with_another_reference(
             bool async
-        ) {
+        )
+        {
             return AssertFilteredQuery(
                 async,
                 ss => ss.Set<OrderDetail>().Select(od => od.Order),

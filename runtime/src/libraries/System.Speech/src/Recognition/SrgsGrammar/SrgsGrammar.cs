@@ -101,7 +101,8 @@ namespace System.Speech.Recognition.SrgsGrammar
             if (
                 _hasPhoneticAlphabetBeenSet
                 || (_phoneticAlphabet != SrgsPhoneticAlphabet.Sapi && HasPronunciation)
-            ) {
+            )
+            {
                 string alphabet =
                     _phoneticAlphabet == SrgsPhoneticAlphabet.Ipa
                         ? "ipa"
@@ -212,7 +213,8 @@ namespace System.Speech.Recognition.SrgsGrammar
             RulePublic publicRule,
             RuleDynamic dynamic,
             bool hasScript
-        ) {
+        )
+        {
             SrgsRule rule = new(id);
             if (publicRule != RulePublic.NotSet)
             {

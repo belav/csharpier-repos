@@ -72,7 +72,8 @@ namespace System.Web.Razor.Parser
         protected void SessionStateTypeDirective(
             string noValueError,
             Func<string, string, SpanCodeGenerator> createCodeGenerator
-        ) {
+        )
+        {
             // Set the block type
             Context.CurrentBlock.Type = BlockType.Directive;
 
@@ -232,7 +233,8 @@ namespace System.Web.Razor.Parser
                         CSharpSymbolType.RightParenthesis,
                         bracketStart
                     )
-                ) {
+                )
+                {
                     errorReported = true;
                     Context.OnError(
                         bracketErrorPos,
@@ -364,7 +366,8 @@ namespace System.Web.Razor.Parser
                     errorIfNotFound: true,
                     errorBase: RazorResources.ParseError_Unexpected_Character_At_Section_Name_Start
                 )
-            ) {
+            )
+            {
                 if (!errorReported)
                 {
                     errorReported = true;
@@ -555,7 +558,8 @@ namespace System.Web.Razor.Parser
         protected void BaseTypeDirective(
             string noTypeNameError,
             Func<string, SpanCodeGenerator> createCodeGenerator
-        ) {
+        )
+        {
             // Set the block type
             Context.CurrentBlock.Type = BlockType.Directive;
 

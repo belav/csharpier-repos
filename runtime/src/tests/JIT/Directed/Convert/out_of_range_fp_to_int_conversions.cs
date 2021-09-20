@@ -263,7 +263,8 @@ namespace FPBehaviorApp
         public static Vector<int> ConvertToVectorInt32(
             Vector<float> vFloat,
             FPtoIntegerConversionType t
-        ) {
+        )
+        {
             int[] values = new int[Vector<float>.Count];
             for (int i = 0; i < values.Length; i++)
             {
@@ -275,7 +276,8 @@ namespace FPBehaviorApp
         public static Vector<uint> ConvertToVectorUInt32(
             Vector<float> vFloat,
             FPtoIntegerConversionType t
-        ) {
+        )
+        {
             uint[] values = new uint[Vector<float>.Count];
             for (int i = 0; i < values.Length; i++)
             {
@@ -287,7 +289,8 @@ namespace FPBehaviorApp
         public static Vector<long> ConvertToVectorInt64(
             Vector<double> vFloat,
             FPtoIntegerConversionType t
-        ) {
+        )
+        {
             long[] values = new long[Vector<double>.Count];
             for (int i = 0; i < values.Length; i++)
             {
@@ -299,7 +302,8 @@ namespace FPBehaviorApp
         public static Vector<ulong> ConvertToVectorUInt64(
             Vector<double> vFloat,
             FPtoIntegerConversionType t
-        ) {
+        )
+        {
             ulong[] values = new ulong[Vector<double>.Count];
             for (int i = 0; i < values.Length; i++)
             {
@@ -319,7 +323,8 @@ namespace FPBehaviorApp
             uint value,
             double? dblValNullable = null,
             FPtoIntegerConversionType? tValue = null
-        ) {
+        )
+        {
             double dblVal;
 
             if (dblValNullable.HasValue)
@@ -390,7 +395,8 @@ namespace FPBehaviorApp
                         dblVal,
                         FPtoIntegerConversionType.CONVERT_NATIVECOMPILERBEHAVIOR
                     ) != Managed.ConvertDoubleToInt32(dblVal, t)
-                ) {
+                )
+                {
                     failures++;
                     Console.WriteLine(
                         $"ConvertDoubleToInt32 NativeCompilerBehavior(managed) {t} {value} {dblVal} {Managed.ConvertDoubleToInt32(dblVal, FPtoIntegerConversionType.CONVERT_NATIVECOMPILERBEHAVIOR)} != {Managed.ConvertDoubleToInt32(dblVal, t)}"
@@ -402,7 +408,8 @@ namespace FPBehaviorApp
                         dblVal,
                         FPtoIntegerConversionType.CONVERT_NATIVECOMPILERBEHAVIOR
                     ) != Managed.ConvertDoubleToUInt32(dblVal, t)
-                ) {
+                )
+                {
                     failures++;
                     Console.WriteLine(
                         $"ConvertDoubleToUInt32 NativeCompilerBehavior(managed) {t} {value} {dblVal} {Managed.ConvertDoubleToUInt32(dblVal, FPtoIntegerConversionType.CONVERT_NATIVECOMPILERBEHAVIOR)} != {Managed.ConvertDoubleToUInt32(dblVal, t)}"
@@ -414,7 +421,8 @@ namespace FPBehaviorApp
                         dblVal,
                         FPtoIntegerConversionType.CONVERT_NATIVECOMPILERBEHAVIOR
                     ) != Managed.ConvertDoubleToInt64(dblVal, t)
-                ) {
+                )
+                {
                     failures++;
                     Console.WriteLine(
                         $"ConvertDoubleToInt64 NativeCompilerBehavior(managed) {t} {value} {dblVal} {Managed.ConvertDoubleToInt64(dblVal, FPtoIntegerConversionType.CONVERT_NATIVECOMPILERBEHAVIOR)} != {Managed.ConvertDoubleToInt64(dblVal, t)}"
@@ -426,7 +434,8 @@ namespace FPBehaviorApp
                         dblVal,
                         FPtoIntegerConversionType.CONVERT_NATIVECOMPILERBEHAVIOR
                     ) != Managed.ConvertDoubleToUInt64(dblVal, t)
-                ) {
+                )
+                {
                     failures++;
                     Console.WriteLine(
                         $"ConvertDoubleToUInt64 NativeCompilerBehavior(managed) {t} {value} {dblVal} {Managed.ConvertDoubleToUInt64(dblVal, FPtoIntegerConversionType.CONVERT_NATIVECOMPILERBEHAVIOR)} != {Managed.ConvertDoubleToUInt64(dblVal, t)}"

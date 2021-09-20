@@ -18,11 +18,8 @@ namespace System.Xml.Serialization
     internal sealed class XmlSerializationWriterILGen : XmlSerializationILGen
     {
         [RequiresUnreferencedCode("creates XmlSerializationILGen")]
-        internal XmlSerializationWriterILGen(
-            TypeScope[] scopes,
-            string access,
-            string className
-        ) : base(scopes, access, className) { }
+        internal XmlSerializationWriterILGen(TypeScope[] scopes, string access, string className)
+            : base(scopes, access, className) { }
 
         [RequiresUnreferencedCode("calls WriteReflectionInit")]
         internal void GenerateBegin()
@@ -109,7 +106,8 @@ namespace System.Xml.Serialization
             SourceInfo source,
             bool nullable,
             TypeMapping mapping
-        ) {
+        )
+        {
             bool hasDefault = defaultValue != null && defaultValue != DBNull.Value;
             if (hasDefault)
             {
@@ -232,7 +230,8 @@ namespace System.Xml.Serialization
             bool writeXsiType,
             bool isElement,
             bool isNullable
-        ) {
+        )
+        {
             TypeDesc typeDesc = mapping.TypeDesc!;
             bool hasDefault =
                 defaultValue != null
@@ -874,7 +873,8 @@ namespace System.Xml.Serialization
                 StructMapping? derived = mapping.DerivedMappings;
                 derived != null;
                 derived = derived.NextDerivedMapping
-            ) {
+            )
+            {
                 ilg.InitElseIf();
                 WriteTypeCompare("t", derived.TypeDesc!.Type!);
                 ilg.AndIf();
@@ -1179,7 +1179,8 @@ namespace System.Xml.Serialization
                 if (
                     mapping.TypeDesc.Type != null
                     && typeof(XmlSchemaObject).IsAssignableFrom(mapping.TypeDesc.Type)
-                ) {
+                )
+                {
                     MethodInfo XmlSerializationWriter_set_EscapeName =
                         typeof(XmlSerializationWriter).GetMethod(
                             "set_EscapeName",
@@ -1365,7 +1366,8 @@ namespace System.Xml.Serialization
             AttributeAccessor attribute,
             TypeDesc memberTypeDesc,
             string parent
-        ) {
+        )
+        {
             if (memberTypeDesc.IsAbstract)
                 return;
             if (memberTypeDesc.IsArrayLike)
@@ -1605,7 +1607,8 @@ namespace System.Xml.Serialization
                 if (
                     special.TypeDesc!.Kind == TypeKind.Attribute
                     || special.TypeDesc.CanBeAttributeValue
-                ) {
+                )
+                {
                     System.Diagnostics.Debug.Assert(parent == "o" || parent == "p");
                     MethodInfo XmlSerializationWriter_WriteXmlAttribute =
                         typeof(XmlSerializationWriter).GetMethod(
@@ -1644,7 +1647,8 @@ namespace System.Xml.Serialization
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
                 Type? targetType,
             object? rawDefaultValue
-        ) {
+        )
+        {
             if (targetType == null)
             {
                 return rawDefaultValue;
@@ -1668,7 +1672,8 @@ namespace System.Xml.Serialization
             ChoiceIdentifierAccessor? choice,
             TypeDesc memberTypeDesc,
             bool writeAccessors
-        ) {
+        )
+        {
             if (
                 memberTypeDesc.IsArrayLike
                 && !(elements.Length == 1 && elements[0].Mapping is ArrayMapping)
@@ -1696,7 +1701,8 @@ namespace System.Xml.Serialization
             TextAccessor? text,
             ChoiceIdentifierAccessor? choice,
             TypeDesc arrayTypeDesc
-        ) {
+        )
+        {
             if (elements.Length == 0 && text == null)
                 return;
             string arrayTypeName = arrayTypeDesc.CSharpName;
@@ -1774,7 +1780,8 @@ namespace System.Xml.Serialization
             TypeDesc arrayTypeDesc,
             string arrayName,
             string? choiceName
-        ) {
+        )
+        {
             TypeDesc arrayElementTypeDesc = arrayTypeDesc.ArrayElementTypeDesc!;
 
             if (arrayTypeDesc.IsEnumerable)
@@ -1931,7 +1938,8 @@ namespace System.Xml.Serialization
             string arrayName,
             bool writeAccessors,
             bool isNullable
-        ) {
+        )
+        {
             if (elements.Length == 0 && text == null)
                 return;
             if (elements.Length == 1 && text == null)
@@ -2349,7 +2357,8 @@ namespace System.Xml.Serialization
             ElementAccessor element,
             string arrayName,
             bool writeAccessor
-        ) {
+        )
+        {
             string name = writeAccessor ? element.Name : element.Mapping!.TypeName!;
             string? ns =
                 element.Any && element.Name.Length == 0
@@ -2594,7 +2603,8 @@ namespace System.Xml.Serialization
             string? ns,
             bool isNullable,
             bool isAny
-        ) {
+        )
+        {
             MethodInfo XmlSerializationWriter_func = typeof(XmlSerializationWriter).GetMethod(
                 func,
                 CodeGenerator.InstanceBindingFlags,
@@ -2688,7 +2698,8 @@ namespace System.Xml.Serialization
             ChoiceIdentifierAccessor choice,
             string enumName,
             TypeDesc typeDesc
-        ) {
+        )
+        {
             Label labelFalse = ilg.DefineLabel();
             Label labelEnd = ilg.DefineLabel();
             source.Load(typeof(object));
@@ -2773,7 +2784,8 @@ namespace System.Xml.Serialization
             string variableName,
             SourceInfo initValue,
             TypeDesc arrayTypeDesc
-        ) {
+        )
+        {
             RaCodeGen.WriteArrayLocalDecl(typeName, variableName, initValue, arrayTypeDesc);
         }
         private void WriteTypeCompare(string variable, Type type)
@@ -2795,7 +2807,8 @@ namespace System.Xml.Serialization
             ElementAccessor element,
             EnumMapping choiceMapping,
             out object? eValue
-        ) {
+        )
+        {
             string? enumValue = null;
             eValue = null;
 
@@ -2829,7 +2842,8 @@ namespace System.Xml.Serialization
                             && string.IsNullOrEmpty(choiceNs)
                         )
                         || element.Namespace == choiceNs
-                    ) {
+                    )
+                    {
                         enumValue = choiceMapping.Constants[i].Name;
                         eValue = Enum.ToObject(
                             choiceMapping.TypeDesc!.Type!,
@@ -2915,7 +2929,8 @@ namespace System.Xml.Serialization
             MemberMapping member,
             TypeDesc typeDesc,
             CodeGenerator ilg
-        ) {
+        )
+        {
             return GetSourceForMember(obj, member, member.MemberInfo, typeDesc, ilg);
         }
         internal SourceInfo GetSourceForMember(
@@ -2924,7 +2939,8 @@ namespace System.Xml.Serialization
             MemberInfo? memberInfo,
             TypeDesc typeDesc,
             CodeGenerator ilg
-        ) {
+        )
+        {
             return new SourceInfo(
                 GetStringForMember(obj, member.Name, typeDesc),
                 obj,
@@ -2942,7 +2958,8 @@ namespace System.Xml.Serialization
             string? arrayName,
             string subscript,
             TypeDesc arrayTypeDesc
-        ) {
+        )
+        {
             {
                 return arrayName + "[" + subscript + "]";
             }
@@ -2958,7 +2975,8 @@ namespace System.Xml.Serialization
             Type type,
             bool ctorInaccessible,
             bool cast
-        ) {
+        )
+        {
             if (!ctorInaccessible)
             {
                 ConstructorInfo ctor = type.GetConstructor(
@@ -2986,7 +3004,8 @@ namespace System.Xml.Serialization
             Type type,
             Type? cast,
             bool nonPublic
-        ) {
+        )
+        {
             // Special case DBNull
             if (type == typeof(DBNull))
             {
@@ -3162,7 +3181,8 @@ namespace System.Xml.Serialization
             bool ctorInaccessible,
             Type type,
             CodeGenerator ilg
-        ) {
+        )
+        {
             LocalBuilder sLoc = ilg.DeclareOrGetLocal(type, source);
             ILGenForCreateInstance(ilg, type, ctorInaccessible, ctorInaccessible);
             ilg.Stloc(sLoc);
@@ -3186,7 +3206,8 @@ namespace System.Xml.Serialization
             string variableName,
             SourceInfo initValue,
             TypeDesc arrayTypeDesc
-        ) {
+        )
+        {
             Debug.Assert(
                 typeName == arrayTypeDesc.CSharpName || typeName == arrayTypeDesc.CSharpName + "[]"
             );

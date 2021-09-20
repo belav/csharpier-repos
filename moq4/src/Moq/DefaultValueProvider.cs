@@ -66,7 +66,8 @@ namespace Moq
         protected internal virtual object GetDefaultParameterValue(
             ParameterInfo parameter,
             Mock mock
-        ) {
+        )
+        {
             Debug.Assert(parameter != null);
             Debug.Assert(parameter.ParameterType != typeof(void));
             Debug.Assert(mock != null);

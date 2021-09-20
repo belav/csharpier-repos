@@ -186,7 +186,8 @@ namespace System.Drawing
                             }
                             else if (
                                 (ide.height > best.Value.height) || (ide.width > best.Value.width)
-                            ) {
+                            )
+                            {
                                 best = ide;
                                 id = i;
                             }
@@ -795,7 +796,8 @@ namespace System.Drawing
                         if (
                             iconDir.idEntries[j].bytesInRes >= largestSize
                             && !iconDir.idEntries[j].png
-                        ) {
+                        )
+                        {
                             largestSize = iconDir.idEntries[j].bytesInRes;
                             this.id = (ushort)j;
                             this.iconSize.Height = iconDir.idEntries[j].height;
@@ -820,7 +822,8 @@ namespace System.Drawing
                         if (
                             iconDir.idEntries[j].png
                             || (headerSize == PNGSignature1 && headerWidth == (int)PNGSignature2)
-                        ) {
+                        )
+                        {
                             IconDump id = new IconDump();
                             id.data = buffer;
                             imageData[j] = id;

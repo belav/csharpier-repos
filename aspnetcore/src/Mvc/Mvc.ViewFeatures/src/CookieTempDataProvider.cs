@@ -43,7 +43,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             ILoggerFactory loggerFactory,
             IOptions<CookieTempDataProviderOptions> options,
             TempDataSerializer tempDataSerializer
-        ) {
+        )
+        {
             _dataProtector = dataProtectionProvider.CreateProtector(Purpose);
             _logger = loggerFactory.CreateLogger<CookieTempDataProvider>();
             _tempDataSerializer = tempDataSerializer;

@@ -69,7 +69,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
             IOptionsSnapshot<RemoteAuthenticationOptions<TProviderOptions>> options,
             NavigationManager navigation,
             AccountClaimsPrincipalFactory<TAccount> accountClaimsPrincipalFactory
-        ) {
+        )
+        {
             JsRuntime = jsRuntime;
             Navigation = navigation;
             AccountClaimsPrincipalFactory = accountClaimsPrincipalFactory;
@@ -174,7 +175,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
                     ignoreCase: true,
                     out var parsedStatus
                 )
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     $"Invalid access token result status '{result.Status ?? "(null)"}'"
                 );
@@ -192,7 +194,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
         /// <inheritdoc />
         public virtual async ValueTask<AccessTokenResult> RequestAccessToken(
             AccessTokenRequestOptions options
-        ) {
+        )
+        {
             if (options is null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -210,7 +213,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
                     ignoreCase: true,
                     out var parsedStatus
                 )
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     $"Invalid access token result status '{result.Status ?? "(null)"}'"
                 );
@@ -321,7 +325,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
                     ignoreCase: true,
                     out var status
                 )
-            ) {
+            )
+            {
                 result.Status = status;
             }
             else

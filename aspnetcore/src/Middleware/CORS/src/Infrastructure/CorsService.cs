@@ -118,7 +118,8 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
             HttpContext context,
             CorsPolicy policy,
             CorsResult result
-        ) {
+        )
+        {
             var headers = context.Request.Headers;
             if (policy.AllowAnyOrigin)
             {
@@ -164,7 +165,8 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
             HttpContext context,
             CorsPolicy policy,
             CorsResult result
-        ) {
+        )
+        {
             PopulateResult(context, policy, result);
         }
 
@@ -178,7 +180,8 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
             HttpContext context,
             CorsPolicy policy,
             CorsResult result
-        ) {
+        )
+        {
             PopulateResult(context, policy, result);
         }
 

@@ -45,7 +45,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionEntityType entityType,
             bool? memoryOptimized,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             entityType.SetOrRemoveAnnotation(
                 SqlServerAnnotationNames.MemoryOptimized,
                 memoryOptimized,

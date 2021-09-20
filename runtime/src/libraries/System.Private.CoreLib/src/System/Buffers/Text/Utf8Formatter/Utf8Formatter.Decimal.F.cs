@@ -12,7 +12,8 @@ namespace System.Buffers.Text
             Span<byte> destination,
             out int bytesWritten,
             byte precision
-        ) {
+        )
+        {
             int scale = number.Scale;
             ReadOnlySpan<byte> digits = number.Digits;
 

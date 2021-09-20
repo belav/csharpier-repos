@@ -25,7 +25,8 @@ namespace System.IO.Ports.Tests
                 if (
                     !string.IsNullOrEmpty(keyValuePair.Key)
                     && !comPortNameRegex.IsMatch(keyValuePair.Key)
-                ) {
+                )
+                {
                     using (SerialPort com1 = new SerialPort(keyValuePair.Key))
                     {
                         Debug.WriteLine($"Checking exception thrown with Key {keyValuePair.Key}");
@@ -36,7 +37,8 @@ namespace System.IO.Ports.Tests
                 if (
                     !string.IsNullOrEmpty(keyValuePair.Value)
                     && !comPortNameRegex.IsMatch(keyValuePair.Key)
-                ) {
+                )
+                {
                     using (SerialPort com1 = new SerialPort(keyValuePair.Value))
                     {
                         Debug.WriteLine(

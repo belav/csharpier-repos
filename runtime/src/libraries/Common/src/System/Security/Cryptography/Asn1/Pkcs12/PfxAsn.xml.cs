@@ -44,7 +44,8 @@ namespace System.Security.Cryptography.Asn1.Pkcs12
             Asn1Tag expectedTag,
             ReadOnlyMemory<byte> encoded,
             AsnEncodingRules ruleSet
-        ) {
+        )
+        {
             try
             {
                 AsnValueReader reader = new AsnValueReader(encoded.Span, ruleSet);
@@ -63,7 +64,8 @@ namespace System.Security.Cryptography.Asn1.Pkcs12
             ref AsnValueReader reader,
             ReadOnlyMemory<byte> rebind,
             out PfxAsn decoded
-        ) {
+        )
+        {
             Decode(ref reader, Asn1Tag.Sequence, rebind, out decoded);
         }
 
@@ -72,7 +74,8 @@ namespace System.Security.Cryptography.Asn1.Pkcs12
             Asn1Tag expectedTag,
             ReadOnlyMemory<byte> rebind,
             out PfxAsn decoded
-        ) {
+        )
+        {
             try
             {
                 DecodeCore(ref reader, expectedTag, rebind, out decoded);
@@ -88,7 +91,8 @@ namespace System.Security.Cryptography.Asn1.Pkcs12
             Asn1Tag expectedTag,
             ReadOnlyMemory<byte> rebind,
             out PfxAsn decoded
-        ) {
+        )
+        {
             decoded = default;
             AsnValueReader sequenceReader = reader.ReadSequence(expectedTag);
 
@@ -106,7 +110,8 @@ namespace System.Security.Cryptography.Asn1.Pkcs12
             if (
                 sequenceReader.HasData
                 && sequenceReader.PeekTag().HasSameClassAndValue(Asn1Tag.Sequence)
-            ) {
+            )
+            {
                 System.Security.Cryptography.Asn1.Pkcs12.MacData tmpMacData;
                 System.Security.Cryptography.Asn1.Pkcs12.MacData.Decode(
                     ref sequenceReader,

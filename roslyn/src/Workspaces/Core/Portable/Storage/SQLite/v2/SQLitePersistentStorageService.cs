@@ -51,7 +51,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
             SolutionKey solutionKey,
             string workingFolderPath,
             string databaseFilePath
-        ) {
+        )
+        {
             if (!TryInitializeLibraries())
             {
                 // SQLite is not supported on the current platform

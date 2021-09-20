@@ -138,7 +138,8 @@ namespace Wasm.Build.Tests
             string emsdkPath,
             string errorPattern,
             string id
-        ) {
+        )
+        {
             string projectName = $"missing_emsdk";
             buildArgs = buildArgs with
             {
@@ -213,7 +214,8 @@ namespace Wasm.Build.Tests
             string id,
             string? extraProperties = null,
             bool? dotnetWasmFromRuntimePack = null
-        ) {
+        )
+        {
             buildArgs = buildArgs with { ProjectName = projectName };
             buildArgs = GetBuildArgsWith(buildArgs, extraProperties);
 

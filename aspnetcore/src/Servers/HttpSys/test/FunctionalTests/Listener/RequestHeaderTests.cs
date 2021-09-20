@@ -111,7 +111,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
             string address,
             string customHeader,
             string[] customValues
-        ) {
+        )
+        {
             var uri = new Uri(address);
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("GET / HTTP/1.1");

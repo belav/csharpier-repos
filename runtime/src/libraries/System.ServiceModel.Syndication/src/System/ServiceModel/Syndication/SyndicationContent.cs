@@ -57,7 +57,8 @@ namespace System.ServiceModel.Syndication
         public static XmlSyndicationContent CreateXmlContent(
             object dataContractObject,
             XmlObjectSerializer dataContractSerializer
-        ) {
+        )
+        {
             return new XmlSyndicationContent(
                 Atom10Constants.XmlMediaType,
                 dataContractObject,
@@ -73,7 +74,8 @@ namespace System.ServiceModel.Syndication
         public static XmlSyndicationContent CreateXmlContent(
             object xmlSerializerObject,
             XmlSerializer serializer
-        ) {
+        )
+        {
             return new XmlSyndicationContent(
                 Atom10Constants.XmlMediaType,
                 xmlSerializerObject,

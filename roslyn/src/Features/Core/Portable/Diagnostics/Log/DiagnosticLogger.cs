@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Log
             bool description,
             bool telemetry,
             string uri
-        ) {
+        )
+        {
             Logger.Log(
                 FunctionId.Diagnostics_HyperLink,
                 KeyValueLogMessage.Create(

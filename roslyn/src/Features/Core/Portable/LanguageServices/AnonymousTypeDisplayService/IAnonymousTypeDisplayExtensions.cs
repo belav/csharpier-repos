@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             IList<SymbolDisplayPart> parts,
             SemanticModel semanticModel,
             int position
-        ) {
+        )
+        {
             var result = parts;
             while (true)
             {
@@ -46,7 +47,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             IList<SymbolDisplayPart> list,
             INamedTypeSymbol anonymousType,
             IEnumerable<SymbolDisplayPart> parts
-        ) {
+        )
+        {
             var index = list.IndexOf(p => anonymousType.Equals(p.Symbol));
             if (index >= 0)
             {

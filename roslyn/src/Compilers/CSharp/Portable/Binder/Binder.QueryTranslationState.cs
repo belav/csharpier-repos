@@ -68,7 +68,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Binder binder,
                 SyntaxToken identifier,
                 BindingDiagnosticBag diagnostics
-            ) {
+            )
+            {
                 string name = identifier.ValueText;
                 var result = new RangeVariableSymbol(
                     name,

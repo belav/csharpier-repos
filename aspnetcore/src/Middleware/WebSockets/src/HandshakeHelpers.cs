@@ -71,7 +71,8 @@ namespace Microsoft.AspNetCore.WebSockets
             string method,
             List<KeyValuePair<string, string>> interestingHeaders,
             IHeaderDictionary requestHeaders
-        ) {
+        )
+        {
             bool validUpgrade = false,
                 validConnection = false,
                 validKey = false,
@@ -90,27 +91,31 @@ namespace Microsoft.AspNetCore.WebSockets
                         pair.Key,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     if (
                         string.Equals(
                             HeaderNames.Upgrade,
                             pair.Value,
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         validConnection = true;
                     }
                 }
                 else if (
                     string.Equals(HeaderNames.Upgrade, pair.Key, StringComparison.OrdinalIgnoreCase)
-                ) {
+                )
+                {
                     if (
                         string.Equals(
                             Constants.Headers.UpgradeWebSocket,
                             pair.Value,
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         validUpgrade = true;
                     }
                 }
@@ -120,14 +125,16 @@ namespace Microsoft.AspNetCore.WebSockets
                         pair.Key,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     if (
                         string.Equals(
                             Constants.Headers.SupportedVersion,
                             pair.Value,
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         validVersion = true;
                     }
                 }
@@ -137,7 +144,8 @@ namespace Microsoft.AspNetCore.WebSockets
                         pair.Key,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     validKey = IsRequestKeyValid(pair.Value);
                 }
             }
@@ -164,7 +172,8 @@ namespace Microsoft.AspNetCore.WebSockets
             string key,
             string? subProtocol,
             IHeaderDictionary headers
-        ) {
+        )
+        {
             headers[HeaderNames.Connection] = HeaderNames.Upgrade;
             headers[HeaderNames.Upgrade] = Constants.Headers.UpgradeWebSocket;
             headers[HeaderNames.SecWebSocketAccept] = CreateResponseKey(key);

@@ -920,7 +920,8 @@ public class Test
         public async Task TestExpressionWithNullConditionalAccessVariations(
             string subStringCode,
             string rangeCode
-        ) {
+        )
+        {
             var source =
                 @$"
 public class C

@@ -28,7 +28,8 @@ namespace Microsoft.AspNetCore.SignalR
                 if (
                     nullableType.IsGenericType
                     && nullableType.GetGenericTypeDefinition() == typeof(ChannelReader<>)
-                ) {
+                )
+                {
                     return true;
                 }
 

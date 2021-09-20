@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.GenerateOverrides
                 TextSpan textSpan,
                 INamedTypeSymbol containingType,
                 ImmutableArray<ISymbol> viableMembers
-            ) {
+            )
+            {
                 _service = service;
                 _document = document;
                 _containingType = containingType;
@@ -54,7 +55,8 @@ namespace Microsoft.CodeAnalysis.GenerateOverrides
             protected override async Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(
                 object options,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var result = (PickMembersResult)options;
                 if (result.IsCanceled || result.Members.Length == 0)
                 {
@@ -100,7 +102,8 @@ namespace Microsoft.CodeAnalysis.GenerateOverrides
                 SyntaxGenerator generator,
                 ISymbol symbol,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return generator.OverrideAsync(
                     symbol,
                     _containingType,

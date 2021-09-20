@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.DataProtection.SP800_108
             uint cbContext,
             byte* pbDerivedKey,
             uint cbDerivedKey
-        ) {
+        )
+        {
             var cbCombinedContext = checked((uint)contextHeader.Length + cbContext);
 
             // Try allocating the combined context on the stack to avoid temporary managed objects; only fall back to heap if buffers are too large.

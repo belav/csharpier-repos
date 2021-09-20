@@ -591,7 +591,8 @@ namespace System.Runtime.Intrinsics
             byte e29,
             byte e30,
             byte e31
-        ) {
+        )
+        {
             if (Avx.IsSupported)
             {
                 return Create(
@@ -698,7 +699,8 @@ namespace System.Runtime.Intrinsics
                 byte e29,
                 byte e30,
                 byte e31
-            ) {
+            )
+            {
                 byte* pResult =
                     stackalloc byte[32] {
                         e0,
@@ -801,7 +803,8 @@ namespace System.Runtime.Intrinsics
             short e13,
             short e14,
             short e15
-        ) {
+        )
+        {
             if (Avx.IsSupported)
             {
                 return Create(e0, e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11, e12, e13, e14, e15);
@@ -843,7 +846,8 @@ namespace System.Runtime.Intrinsics
                 short e13,
                 short e14,
                 short e15
-            ) {
+            )
+            {
                 short* pResult =
                     stackalloc short[16] {
                         e0,
@@ -889,7 +893,8 @@ namespace System.Runtime.Intrinsics
             int e5,
             int e6,
             int e7
-        ) {
+        )
+        {
             if (Avx.IsSupported)
             {
                 return Create(e0, e1, e2, e3, e4, e5, e6, e7);
@@ -906,7 +911,8 @@ namespace System.Runtime.Intrinsics
                 int e5,
                 int e6,
                 int e7
-            ) {
+            )
+            {
                 int* pResult = stackalloc int[8] { e0, e1, e2, e3, e4, e5, e6, e7, };
 
                 return Unsafe.AsRef<Vector256<int>>(pResult);
@@ -1008,7 +1014,8 @@ namespace System.Runtime.Intrinsics
             sbyte e29,
             sbyte e30,
             sbyte e31
-        ) {
+        )
+        {
             if (Avx.IsSupported)
             {
                 return Create(
@@ -1115,7 +1122,8 @@ namespace System.Runtime.Intrinsics
                 sbyte e29,
                 sbyte e30,
                 sbyte e31
-            ) {
+            )
+            {
                 sbyte* pResult =
                     stackalloc sbyte[32] {
                         e0,
@@ -1177,7 +1185,8 @@ namespace System.Runtime.Intrinsics
             float e5,
             float e6,
             float e7
-        ) {
+        )
+        {
             if (Avx.IsSupported)
             {
                 return Create(e0, e1, e2, e3, e4, e5, e6, e7);
@@ -1194,7 +1203,8 @@ namespace System.Runtime.Intrinsics
                 float e5,
                 float e6,
                 float e7
-            ) {
+            )
+            {
                 float* pResult = stackalloc float[8] { e0, e1, e2, e3, e4, e5, e6, e7, };
 
                 return Unsafe.AsRef<Vector256<float>>(pResult);
@@ -1239,7 +1249,8 @@ namespace System.Runtime.Intrinsics
             ushort e13,
             ushort e14,
             ushort e15
-        ) {
+        )
+        {
             if (Avx.IsSupported)
             {
                 return Create(e0, e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11, e12, e13, e14, e15);
@@ -1281,7 +1292,8 @@ namespace System.Runtime.Intrinsics
                 ushort e13,
                 ushort e14,
                 ushort e15
-            ) {
+            )
+            {
                 ushort* pResult =
                     stackalloc ushort[16] {
                         e0,
@@ -1328,7 +1340,8 @@ namespace System.Runtime.Intrinsics
             uint e5,
             uint e6,
             uint e7
-        ) {
+        )
+        {
             if (Avx.IsSupported)
             {
                 return Create(e0, e1, e2, e3, e4, e5, e6, e7);
@@ -1345,7 +1358,8 @@ namespace System.Runtime.Intrinsics
                 uint e5,
                 uint e6,
                 uint e7
-            ) {
+            )
+            {
                 uint* pResult = stackalloc uint[8] { e0, e1, e2, e3, e4, e5, e6, e7, };
 
                 return Unsafe.AsRef<Vector256<uint>>(pResult);
@@ -1416,7 +1430,8 @@ namespace System.Runtime.Intrinsics
         public static unsafe Vector256<double> Create(
             Vector128<double> lower,
             Vector128<double> upper
-        ) {
+        )
+        {
             if (Avx.IsSupported)
             {
                 Vector256<double> result = lower.ToVector256Unsafe();
@@ -1428,7 +1443,8 @@ namespace System.Runtime.Intrinsics
             static Vector256<double> SoftwareFallback(
                 Vector128<double> lower,
                 Vector128<double> upper
-            ) {
+            )
+            {
                 Vector256<double> result256 = Vector256<double>.Zero;
 
                 ref Vector128<double> result128 = ref Unsafe.As<
@@ -1599,7 +1615,8 @@ namespace System.Runtime.Intrinsics
         public static unsafe Vector256<ushort> Create(
             Vector128<ushort> lower,
             Vector128<ushort> upper
-        ) {
+        )
+        {
             if (Avx.IsSupported)
             {
                 Vector256<ushort> result = lower.ToVector256Unsafe();
@@ -1611,7 +1628,8 @@ namespace System.Runtime.Intrinsics
             static Vector256<ushort> SoftwareFallback(
                 Vector128<ushort> lower,
                 Vector128<ushort> upper
-            ) {
+            )
+            {
                 Vector256<ushort> result256 = Vector256<ushort>.Zero;
 
                 ref Vector128<ushort> result128 = ref Unsafe.As<

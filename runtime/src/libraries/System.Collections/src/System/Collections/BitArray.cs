@@ -180,7 +180,8 @@ namespace System.Collections
                         ;
                         (i + Vector128ByteCount * 2u) <= (uint)values.Length;
                         i += Vector128ByteCount * 2u
-                    ) {
+                    )
+                    {
                         Vector128<byte> lowerVector = Sse2.LoadVector128((byte*)ptr + i);
                         Vector128<byte> lowerIsFalse = Sse2.CompareEqual(lowerVector, zero);
                         int lowerPackedIsFalse = Sse2.MoveMask(lowerIsFalse);
@@ -207,7 +208,8 @@ namespace System.Collections
                         ;
                         (i + Vector128ByteCount * 2u) <= (uint)values.Length;
                         i += Vector128ByteCount * 2u
-                    ) {
+                    )
+                    {
                         // Same logic as SSE2 path, however we lack MoveMask (equivalent) instruction
                         // As a workaround, mask out the relevant bit after comparison
                         // and combine by ORing all of them together (In this case, adding all of them does the same thing)
@@ -1091,7 +1093,8 @@ namespace System.Collections
                             ;
                             (i + Vector128ByteCount * 2u) <= (uint)m_length;
                             i += Vector128ByteCount * 2u
-                        ) {
+                        )
+                        {
                             int bits = m_array[i / (uint)BitsPerInt32];
                             Vector128<int> scalar = Vector128.CreateScalarUnsafe(bits);
 
@@ -1128,7 +1131,8 @@ namespace System.Collections
                             ;
                             (i + Vector128ByteCount * 2u) <= (uint)m_length;
                             i += Vector128ByteCount * 2u
-                        ) {
+                        )
+                        {
                             int bits = m_array[i / (uint)BitsPerInt32];
                             // Same logic as SSSE3 path, except we do not have Shuffle instruction.
                             // (TableVectorLookup could be an alternative - dotnet/runtime#1277)

@@ -43,7 +43,8 @@ namespace RunTests
         private static List<Process> GetProcessChildrenCore(
             Process parentProcess,
             IEnumerable<Process> processes
-        ) {
+        )
+        {
             var list = new List<Process>();
             foreach (var process in processes)
             {

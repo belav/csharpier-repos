@@ -422,7 +422,8 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
                 object expected,
                 ref bool realized,
                 string message
-            ) {
+            )
+            {
                 Assert.AreSame(AsVirtual(expected), sender, message);
                 realized = true;
             }

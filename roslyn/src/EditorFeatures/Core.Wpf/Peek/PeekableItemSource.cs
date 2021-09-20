@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
             IPeekableItemFactory peekableItemFactory,
             IPeekResultFactory peekResultFactory,
             IWaitIndicator waitIndicator
-        ) {
+        )
+        {
             _textBuffer = textBuffer;
             _peekableItemFactory = peekableItemFactory;
             _peekResultFactory = peekResultFactory;
@@ -45,7 +46,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
                     PredefinedPeekRelationships.Definitions.Name,
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -148,7 +150,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
             Project project,
             IPeekResultFactory peekResultFactory,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (navigableItems != null)
             {
                 var workspace = project.Solution.Workspace;
@@ -165,7 +168,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
                             item.SourceSpan.Start,
                             cancellationToken
                         )
-                    ) {
+                    )
+                    {
                         var text = document.GetTextSynchronously(cancellationToken);
                         var linePositionSpan = text.Lines.GetLinePositionSpan(item.SourceSpan);
                         if (document.FilePath != null)

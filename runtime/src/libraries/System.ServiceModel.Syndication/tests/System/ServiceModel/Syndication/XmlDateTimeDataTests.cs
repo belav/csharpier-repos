@@ -29,7 +29,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void Ctor_String_XmlQualifiedName(
             string dateTimeString,
             XmlQualifiedName elementQualifiedName
-        ) {
+        )
+        {
             var data = new XmlDateTimeData(dateTimeString, elementQualifiedName);
             Assert.Equal(dateTimeString, data.DateTimeString);
             Assert.Equal(elementQualifiedName, data.ElementQualifiedName);

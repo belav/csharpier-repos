@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
         /// <param name="descriptorProvider">The <see cref="IViewComponentDescriptorCollectionProvider"/>.</param>
         public DefaultViewComponentSelector(
             IViewComponentDescriptorCollectionProvider descriptorProvider
-        ) {
+        )
+        {
             _descriptorProvider = descriptorProvider;
         }
 
@@ -81,7 +82,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
             private static ViewComponentDescriptor Select(
                 ILookup<string, ViewComponentDescriptor> candidates,
                 string name
-            ) {
+            )
+            {
                 var matches = candidates[name];
 
                 var count = matches.Count();

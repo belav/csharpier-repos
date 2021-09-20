@@ -11,7 +11,8 @@ namespace System.Net.Test.Common
     {
         public static (int bytesConsumed, int requiredInsertCount, int deltaBase) DecodePrefix(
             ReadOnlySpan<byte> buffer
-        ) {
+        )
+        {
             if (buffer[0] != 0x00 && buffer[1] != 0x00)
             {
                 throw new Exception("QPack dynamic table is not yet supported.");
@@ -88,7 +89,8 @@ namespace System.Net.Test.Common
         private static (int bytesConsumed, string value) DecodeString(
             ReadOnlySpan<byte> buffer,
             byte prefixMask
-        ) {
+        )
+        {
             bool huffman = (buffer[0] & (1 << BitOperations.TrailingZeroCount(~prefixMask))) != 0;
 
             if (huffman)
@@ -110,7 +112,8 @@ namespace System.Net.Test.Common
         public static (int bytesConsumed, int value) DecodeInteger(
             ReadOnlySpan<byte> headerBlock,
             byte prefixMask
-        ) {
+        )
+        {
             int value = headerBlock[0] & prefixMask;
             if (value != prefixMask)
             {

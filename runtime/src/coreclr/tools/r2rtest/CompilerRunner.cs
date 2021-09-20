@@ -76,7 +76,8 @@ namespace R2RTest
                     || exclusion.ExclusionType == ExclusionType.DontCrossgen2
                         && index == CompilerIndex.CPAOT
                 )
-            ) {
+            )
+            {
                 reason = exclusion.Reason;
                 return true;
             }
@@ -107,7 +108,8 @@ namespace R2RTest
             BuildOptions options,
             IEnumerable<string> references,
             string overrideOutputPath = null
-        ) {
+        )
+        {
             _options = options;
             _overrideOutputPath = overrideOutputPath;
 
@@ -144,7 +146,8 @@ namespace R2RTest
         public virtual ProcessParameters CompilationProcess(
             string outputFileName,
             IEnumerable<string> inputAssemblyFileNames
-        ) {
+        )
+        {
             Directory.CreateDirectory(Path.GetDirectoryName(outputFileName));
 
             string responseFile = outputFileName + ".rsp";
@@ -239,7 +242,8 @@ namespace R2RTest
             IEnumerable<string> modules,
             IEnumerable<string> folders,
             bool noEtw
-        ) {
+        )
+        {
             ProcessParameters processParameters = new ProcessParameters();
 
             if (!string.IsNullOrEmpty(_options.GCStress))
@@ -279,7 +283,8 @@ namespace R2RTest
             string scriptPath,
             IEnumerable<string> modules,
             IEnumerable<string> folders
-        ) {
+        )
+        {
             string scriptToRun = GetOutputFileName(outputRoot, scriptPath);
             ProcessParameters processParameters = ExecutionProcess(
                 modules,
@@ -322,7 +327,8 @@ namespace R2RTest
             string appPath,
             IEnumerable<string> modules,
             IEnumerable<string> folders
-        ) {
+        )
+        {
             string exeToRun = GetOutputFileName(outputRoot, appPath);
             ProcessParameters processParameters = ExecutionProcess(
                 modules,
@@ -350,7 +356,8 @@ namespace R2RTest
         protected void CreateResponseFile(
             string responseFile,
             IEnumerable<string> commandLineArguments
-        ) {
+        )
+        {
             using (TextWriter tw = File.CreateText(responseFile))
             {
                 foreach (var arg in commandLineArguments)

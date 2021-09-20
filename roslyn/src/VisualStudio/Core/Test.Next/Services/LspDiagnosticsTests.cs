@@ -526,7 +526,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
             IDiagnosticService diagnosticService,
             int expectedNumberOfCallbacks,
             params Document[] documentsToPublish
-        ) {
+        )
+        {
             var (clientStream, serverStream) = FullDuplexStream.CreatePair();
             var languageServer = await CreateLanguageServerAsync(
                     serverStream,
@@ -563,7 +564,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
                 Stream outputStream,
                 TestWorkspace workspace,
                 IDiagnosticService mockDiagnosticService
-            ) {
+            )
+            {
                 var dispatcherFactory =
                     workspace.ExportProvider.GetExportedValue<CSharpVisualBasicRequestDispatcherFactory>();
                 var listenerProvider =
@@ -593,7 +595,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
             Mock<IDiagnosticService> diagnosticServiceMock,
             DocumentId documentId,
             ImmutableArray<DiagnosticData> diagnostics
-        ) {
+        )
+        {
             diagnosticServiceMock.Setup(
                     d =>
                         d.GetPushDiagnosticsAsync(
@@ -614,7 +617,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
             DocumentId documentId,
             ImmutableArray<DiagnosticData> firstDiagnostics,
             ImmutableArray<DiagnosticData> secondDiagnostics
-        ) {
+        )
+        {
             diagnosticServiceMock.SetupSequence(
                     d =>
                         d.GetPushDiagnosticsAsync(
@@ -634,7 +638,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
         private async Task<ImmutableArray<DiagnosticData>> CreateMockDiagnosticDataAsync(
             Document document,
             string id
-        ) {
+        )
+        {
             var descriptor = new DiagnosticDescriptor(
                 id,
                 "",
@@ -658,7 +663,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
         > CreateMockDiagnosticDatasWithMappedLocationAsync(
             Document document,
             params (string diagnosticId, string mappedFilePath)[] diagnostics
-        ) {
+        )
+        {
             var tree = await document.GetRequiredSyntaxTreeAsync(CancellationToken.None)
                 .ConfigureAwait(false);
 
@@ -678,7 +684,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
                 SyntaxTree tree,
                 string id,
                 string mappedFilePath
-            ) {
+            )
+            {
                 var descriptor = new DiagnosticDescriptor(
                     id,
                     "",

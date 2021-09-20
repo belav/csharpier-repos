@@ -31,13 +31,15 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateDefaultConstructors
             Document document,
             TextSpan textSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (
                 Logger.LogBlock(
                     FunctionId.Refactoring_GenerateMember_GenerateDefaultConstructors,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 var semanticDocument = await SemanticDocument.CreateAsync(
                         document,
                         cancellationToken

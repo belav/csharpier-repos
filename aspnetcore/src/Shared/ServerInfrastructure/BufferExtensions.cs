@@ -44,7 +44,8 @@ namespace System.Buffers
         private static void CopyToMultiSegment(
             in ReadOnlySequence<byte> buffer,
             PipeWriter pipeWriter
-        ) {
+        )
+        {
             foreach (var item in buffer)
             {
                 pipeWriter.Write(item.Span);
@@ -142,7 +143,8 @@ namespace System.Buffers
         internal static unsafe void WriteNumeric(
             ref this BufferWriter<PipeWriter> buffer,
             ulong number
-        ) {
+        )
+        {
             const byte AsciiDigitStart = (byte)'0';
 
             var span = buffer.Span;
@@ -194,7 +196,8 @@ namespace System.Buffers
         private static void WriteNumericMultiWrite(
             ref this BufferWriter<PipeWriter> buffer,
             ulong number
-        ) {
+        )
+        {
             const byte AsciiDigitStart = (byte)'0';
 
             var value = number;
@@ -216,7 +219,8 @@ namespace System.Buffers
         private static void WriteAsciiMultiWrite(
             ref this BufferWriter<PipeWriter> buffer,
             string data
-        ) {
+        )
+        {
             var dataLength = data.Length;
             var offset = 0;
             var bytes = buffer.Span;

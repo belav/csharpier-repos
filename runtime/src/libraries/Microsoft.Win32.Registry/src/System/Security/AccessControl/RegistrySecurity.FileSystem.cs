@@ -12,7 +12,8 @@ namespace System.Security.AccessControl
             string? name,
             SafeHandle? handle,
             object? context
-        ) {
+        )
+        {
             // TODO: Implement this
             throw new PlatformNotSupportedException();
         }

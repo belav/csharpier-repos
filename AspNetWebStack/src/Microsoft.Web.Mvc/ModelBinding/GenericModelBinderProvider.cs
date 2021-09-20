@@ -82,7 +82,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
         public GenericModelBinderProvider(
             Type modelType,
             Func<Type[], IExtensibleModelBinder> modelBinderFactory
-        ) {
+        )
+        {
             if (modelType == null)
             {
                 throw new ArgumentNullException("modelType");
@@ -111,7 +112,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
         public override IExtensibleModelBinder GetBinder(
             ControllerContext controllerContext,
             ExtensibleModelBindingContext bindingContext
-        ) {
+        )
+        {
             ModelBinderUtil.ValidateBindingContext(bindingContext);
 
             Type[] typeArguments = null;
@@ -139,7 +141,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
                 if (
                     SuppressPrefixCheck
                     || bindingContext.ValueProvider.ContainsPrefix(bindingContext.ModelName)
-                ) {
+                )
+                {
                     return _modelBinderFactory(typeArguments);
                 }
             }
@@ -171,7 +174,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
                     if (
                         modelType.GetGenericArguments().Length
                         != modelBinderType.GetGenericArguments().Length
-                    ) {
+                    )
+                    {
                         throw Error.GenericModelBinderProvider_TypeArgumentCountMismatch(
                             modelType,
                             modelBinderType

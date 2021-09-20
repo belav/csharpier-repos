@@ -86,7 +86,8 @@ namespace System.CodeDom.Tests
         public void Ctor_CodeTypeReference(
             CodeTypeReference attributeType,
             CodeAttributeArgument[] arguments
-        ) {
+        )
+        {
             if (arguments == null || arguments.Length == 0)
             {
                 var declaration1 = new CodeAttributeDeclaration(attributeType);

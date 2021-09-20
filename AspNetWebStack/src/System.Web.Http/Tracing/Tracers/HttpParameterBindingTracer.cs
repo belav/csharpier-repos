@@ -74,7 +74,8 @@ namespace System.Web.Http.Tracing.Tracers
             ModelMetadataProvider metadataProvider,
             HttpActionContext actionContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return TraceWriter.TraceBeginEndAsync(
                 actionContext.Request,
                 TraceCategories.ModelBindingCategory,
@@ -102,7 +103,8 @@ namespace System.Web.Http.Tracing.Tracers
                     if (
                         !actionContext.ModelState.IsValid
                         && actionContext.ModelState.ContainsKey(parameterName)
-                    ) {
+                    )
+                    {
                         tr.Message = Error.Format(
                             SRResources.TraceModelStateInvalidMessage,
                             FormattingUtilities.ModelStateToString(actionContext.ModelState)

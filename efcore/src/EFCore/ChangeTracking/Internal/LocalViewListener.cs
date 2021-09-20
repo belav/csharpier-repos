@@ -46,7 +46,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             InternalEntityEntry entry,
             EntityState oldState,
             bool fromQuery
-        ) {
+        )
+        {
             // ReSharper disable once ForCanBeConvertedToForeach
             for (var i = 0; i < _viewActions.Count; i++)
             {

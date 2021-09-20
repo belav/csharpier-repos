@@ -32,7 +32,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </returns>
         public static IServiceCollection AddEntityFrameworkProxies(
             this IServiceCollection serviceCollection
-        ) {
+        )
+        {
             Check.NotNull(serviceCollection, nameof(serviceCollection));
 
             new EntityFrameworkServicesBuilder(serviceCollection).TryAdd<

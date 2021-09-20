@@ -39,7 +39,8 @@ namespace System.ComponentModel.Tests
             DesignOnlyAttribute attribute,
             object other,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, attribute.Equals(other));
             if (other is DesignOnlyAttribute otherAttribute)
             {
@@ -59,7 +60,8 @@ namespace System.ComponentModel.Tests
         public void DefaultProperties_GetDesignOnly_ReturnsExpected(
             DesignOnlyAttribute attribute,
             bool expectedDesignOnly
-        ) {
+        )
+        {
             Assert.Equal(expectedDesignOnly, attribute.IsDesignOnly);
             Assert.Equal(!expectedDesignOnly, attribute.IsDefaultAttribute());
         }

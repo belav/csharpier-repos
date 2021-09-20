@@ -326,7 +326,8 @@ namespace System
             ReadOnlySpan<char> str0,
             ReadOnlySpan<char> str1,
             ReadOnlySpan<char> str2
-        ) {
+        )
+        {
             int length = checked(str0.Length + str1.Length + str2.Length);
             if (length == 0)
             {
@@ -352,7 +353,8 @@ namespace System
             ReadOnlySpan<char> str1,
             ReadOnlySpan<char> str2,
             ReadOnlySpan<char> str3
-        ) {
+        )
+        {
             int length = checked(str0.Length + str1.Length + str2.Length + str3.Length);
             if (length == 0)
             {
@@ -479,7 +481,8 @@ namespace System
             string format,
             object? arg0,
             object? arg1
-        ) {
+        )
+        {
             return FormatHelper(provider, format, new ParamsArray(arg0, arg1));
         }
 
@@ -489,7 +492,8 @@ namespace System
             object? arg0,
             object? arg1,
             object? arg2
-        ) {
+        )
+        {
             return FormatHelper(provider, format, new ParamsArray(arg0, arg1, arg2));
         }
 
@@ -509,7 +513,8 @@ namespace System
             IFormatProvider? provider,
             string format,
             ParamsArray args
-        ) {
+        )
+        {
             if (format == null)
                 throw new ArgumentNullException(nameof(format));
 
@@ -587,7 +592,8 @@ namespace System
             string?[] value,
             int startIndex,
             int count
-        ) {
+        )
+        {
             if (value == null)
             {
                 throw new ArgumentNullException(nameof(value));
@@ -952,7 +958,8 @@ namespace System
             string? newValue,
             bool ignoreCase,
             CultureInfo? culture
-        ) {
+        )
+        {
             return ReplaceCore(
                 oldValue,
                 newValue,
@@ -1007,7 +1014,8 @@ namespace System
             string? newValue,
             CompareInfo? ci,
             CompareOptions options
-        ) {
+        )
+        {
             if (oldValue is null)
             {
                 throw new ArgumentNullException(nameof(oldValue));
@@ -1039,7 +1047,8 @@ namespace System
             ReadOnlySpan<char> newValue,
             CompareInfo compareInfo,
             CompareOptions options
-        ) {
+        )
+        {
             Debug.Assert(!oldValue.IsEmpty);
             Debug.Assert(compareInfo != null);
 
@@ -1287,7 +1296,8 @@ namespace System
             char separator,
             int count,
             StringSplitOptions options = StringSplitOptions.None
-        ) {
+        )
+        {
             return SplitInternal(new ReadOnlySpan<char>(ref separator, 1), count, options);
         }
 
@@ -1335,7 +1345,8 @@ namespace System
             ReadOnlySpan<char> separators,
             int count,
             StringSplitOptions options
-        ) {
+        )
+        {
             if (count < 0)
                 throw new ArgumentOutOfRangeException(
                     nameof(count),
@@ -1358,7 +1369,8 @@ namespace System
                 if (
                     ((options & StringSplitOptions.RemoveEmptyEntries) != 0)
                     && (candidate.Length == 0)
-                ) {
+                )
+                {
                     count = 0;
                 }
                 return (count == 0) ? Array.Empty<string>() : new string[] { candidate };
@@ -1397,7 +1409,8 @@ namespace System
         public string[] Split(
             string? separator,
             StringSplitOptions options = StringSplitOptions.None
-        ) {
+        )
+        {
             return SplitInternal(separator ?? string.Empty, null, int.MaxValue, options);
         }
 
@@ -1405,7 +1418,8 @@ namespace System
             string? separator,
             int count,
             StringSplitOptions options = StringSplitOptions.None
-        ) {
+        )
+        {
             return SplitInternal(separator ?? string.Empty, null, count, options);
         }
 
@@ -1424,7 +1438,8 @@ namespace System
             string?[]? separators,
             int count,
             StringSplitOptions options
-        ) {
+        )
+        {
             if (count < 0)
             {
                 throw new ArgumentOutOfRangeException(
@@ -1457,7 +1472,8 @@ namespace System
                 if (
                     ((options & StringSplitOptions.RemoveEmptyEntries) != 0)
                     && (candidate.Length == 0)
-                ) {
+                )
+                {
                     count = 0;
                 }
                 return (count == 0) ? Array.Empty<string>() : new string[] { candidate };
@@ -1544,7 +1560,8 @@ namespace System
             ReadOnlySpan<int> lengthList,
             int defaultLength,
             int count
-        ) {
+        )
+        {
             Debug.Assert(count >= 2);
 
             int currIndex = 0;
@@ -1585,7 +1602,8 @@ namespace System
             int defaultLength,
             int count,
             StringSplitOptions options
-        ) {
+        )
+        {
             Debug.Assert(count >= 2);
 
             int numReplaces = sepList.Length;
@@ -1666,7 +1684,8 @@ namespace System
         private void MakeSeparatorList(
             ReadOnlySpan<char> separators,
             ref ValueListBuilder<int> sepListBuilder
-        ) {
+        )
+        {
             // Special-case no separators to mean any whitespace is a separator.
             if (separators.Length == 0)
             {
@@ -1720,7 +1739,8 @@ namespace System
                             IsCharBitSet(charMap, (byte)c)
                             && IsCharBitSet(charMap, (byte)(c >> 8))
                             && separators.Contains(c)
-                        ) {
+                        )
+                        {
                             sepListBuilder.Append(i);
                         }
                     }
@@ -1733,7 +1753,8 @@ namespace System
             char c,
             char c2,
             char c3
-        ) {
+        )
+        {
             // Redundant test so we won't prejit remainder of this method
             // on platforms without SSE.
             if (!Sse41.IsSupported)
@@ -1845,7 +1866,8 @@ namespace System
                     if (
                         currentSepLength == 1
                         || this.AsSpan(i, currentSepLength).SequenceEqual(separator)
-                    ) {
+                    )
+                    {
                         sepListBuilder.Append(i);
                         i += currentSepLength - 1;
                     }
@@ -1863,7 +1885,8 @@ namespace System
             string?[] separators,
             ref ValueListBuilder<int> sepListBuilder,
             ref ValueListBuilder<int> lengthListBuilder
-        ) {
+        )
+        {
             Debug.Assert(
                 separators != null && separators.Length > 0,
                 "separators != null && separators.Length > 0"
@@ -1884,7 +1907,8 @@ namespace System
                         if (
                             currentSepLength == 1
                             || this.AsSpan(i, currentSepLength).SequenceEqual(separator)
-                        ) {
+                        )
+                        {
                             sepListBuilder.Append(i);
                             lengthListBuilder.Append(currentSepLength);
                             i += currentSepLength - 1;

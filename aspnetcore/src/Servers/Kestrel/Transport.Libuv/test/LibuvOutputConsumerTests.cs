@@ -210,7 +210,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
         [MemberData(nameof(PositiveMaxResponseBufferSizeData))]
         public async Task WritesDontCompleteImmediatelyWhenTooManyBytesAreAlreadyBuffered(
             int maxResponseBufferSize
-        ) {
+        )
+        {
             var completeQueue = new ConcurrentQueue<Action<int>>();
 
             // Arrange
@@ -275,7 +276,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
         [MemberData(nameof(PositiveMaxResponseBufferSizeData))]
         public async Task WritesDontCompleteImmediatelyWhenTooManyBytesIncludingNonImmediateAreAlreadyBuffered(
             int maxResponseBufferSize
-        ) {
+        )
+        {
             await Task.Run(
                 async () =>
                 {
@@ -760,7 +762,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
         private LibuvOuputProcessor CreateOutputProducer(
             PipeOptions pipeOptions,
             CancellationTokenSource cts = null
-        ) {
+        )
+        {
             var pair = DuplexPipe.CreateConnectionPair(pipeOptions, pipeOptions);
 
             var logger = new TestApplicationErrorLogger();
@@ -834,7 +837,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
             LibuvOutputConsumer consumer,
             PipeReader outputReader,
             Http1Connection http1Connection
-        ) {
+        )
+        {
             // This WriteOutputAsync() calling code is equivalent to that in LibuvConnection.
             try
             {
@@ -868,7 +872,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
             public static DuplexPipePair CreateConnectionPair(
                 PipeOptions inputOptions,
                 PipeOptions outputOptions
-            ) {
+            )
+            {
                 var input = new Pipe(inputOptions);
                 var output = new Pipe(outputOptions);
 

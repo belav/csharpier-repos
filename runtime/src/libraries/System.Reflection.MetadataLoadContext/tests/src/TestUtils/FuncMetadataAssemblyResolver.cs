@@ -18,14 +18,16 @@ namespace System.Reflection.Tests
                 System.Reflection.AssemblyName,
                 System.Reflection.Assembly
             > func
-        ) {
+        )
+        {
             this.func = func ?? throw new ArgumentException("", nameof(func));
         }
 
         public override Assembly Resolve(
             System.Reflection.MetadataLoadContext context,
             AssemblyName assemblyName
-        ) {
+        )
+        {
             Debug.Assert(assemblyName != null);
 
             Assembly assembly = func.Invoke(context, assemblyName);

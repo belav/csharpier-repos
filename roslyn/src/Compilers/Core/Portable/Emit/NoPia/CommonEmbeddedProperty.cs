@@ -87,7 +87,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
 
             IEnumerable<Cci.IMethodReference> Cci.IPropertyDefinition.GetAccessors(
                 EmitContext context
-            ) {
+            )
+            {
                 if (_getter != null)
                 {
                     yield return _getter;
@@ -136,7 +137,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
 
             ImmutableArray<Cci.IParameterTypeInformation> Cci.ISignature.GetParameters(
                 EmitContext context
-            ) {
+            )
+            {
                 return StaticCast<Cci.IParameterTypeInformation>.From(_parameters);
             }
 

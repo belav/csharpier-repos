@@ -127,7 +127,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
 
         private static PageHandlerExecutingContext GetContext(
             HandlerMethodDescriptor handlerMethodDescriptor
-        ) {
+        )
+        {
             var actionContext = new ActionContext(
                 new DefaultHttpContext(),
                 new RouteData(),

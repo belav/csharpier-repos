@@ -179,7 +179,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         private protected override void LogCompilerOutput(
             string output,
             MessageImportance messageImportance
-        ) {
+        )
+        {
             var lines = output.Split(s_separators, StringSplitOptions.RemoveEmptyEntries);
             foreach (string line in lines)
             {
@@ -204,7 +205,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         /// </summary>
         protected internal override void AddResponseFileCommands(
             CommandLineBuilderExtension commandLine
-        ) {
+        )
+        {
             commandLine.AppendSwitchIfNotNull("/lib:", AdditionalLibPaths, ",");
             commandLine.AppendPlusOrMinusSwitch("/unsafe", _store, nameof(AllowUnsafeBlocks));
             commandLine.AppendPlusOrMinusSwitch(
@@ -323,7 +325,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             CommandLineBuilderExtension commandLine,
             ITaskItem[]? references,
             bool isInteractive = false
-        ) {
+        )
+        {
             // If there were no references passed in, don't add any /reference: switches
             // on the command-line.
             if (references == null)
@@ -400,7 +403,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                                 trimmedAlias,
                                 StringComparison.OrdinalIgnoreCase
                             ) == 0
-                        ) {
+                        )
+                        {
                             commandLine.AppendSwitchIfNotNull(switchName, reference.ItemSpec);
                         }
                         else
@@ -436,7 +440,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         internal static string? GetDefineConstantsSwitch(
             string? originalDefineConstants,
             TaskLoggingHelper log
-        ) {
+        )
+        {
             if (originalDefineConstants == null)
             {
                 return null;
@@ -818,7 +823,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                         System.Globalization.CultureInfo.CurrentUICulture.Name,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     CheckHostObjectSupport(
                         nameof(PreferredUILang),
                         resultFromHostObjectSetOperation: false
@@ -912,7 +918,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                     using (
                         RCWForCurrentContext<ICscHostObject> hostObject =
                             new RCWForCurrentContext<ICscHostObject>(hostObjectCOM)
-                    ) {
+                    )
+                    {
                         ICscHostObject cscHostObject = hostObject.RCW;
 
                         bool hostObjectSuccessfullyInitialized = InitializeHostCompiler(

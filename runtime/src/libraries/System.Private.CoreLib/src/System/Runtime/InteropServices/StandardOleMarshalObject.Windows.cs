@@ -82,7 +82,8 @@ namespace System.Runtime.InteropServices
             IntPtr pvDestContext,
             int mshlflags,
             out Guid pCid
-        ) {
+        )
+        {
             pCid = CLSID_StdMarshal;
             return HResults.S_OK;
         }
@@ -94,7 +95,8 @@ namespace System.Runtime.InteropServices
             IntPtr pvDestContext,
             int mshlflags,
             out int pSize
-        ) {
+        )
+        {
             IntPtr pStandardMarshal = GetStdMarshaler(ref riid, dwDestContext, mshlflags);
 
             try
@@ -138,7 +140,8 @@ namespace System.Runtime.InteropServices
             int dwDestContext,
             IntPtr pvDestContext,
             int mshlflags
-        ) {
+        )
+        {
             IntPtr pStandardMarshal = GetStdMarshaler(ref riid, dwDestContext, mshlflags);
 
             try

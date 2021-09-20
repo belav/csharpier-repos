@@ -17,7 +17,8 @@ namespace System.Collections.Tests
             Func<T, int> getHashCode = null,
             Func<object, object, bool> objectEquals = null,
             Func<object, int> objectGetHashCode = null
-        ) {
+        )
+        {
             _equals =
                 equals
                 ?? (

@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
         public async Task<IInlineRenameLocationSet> FindRenameLocationsAsync(
             OptionSet optionSet,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var set = await _info.FindRenameLocationsAsync(optionSet, cancellationToken)
                 .ConfigureAwait(false);
             if (set != null)
@@ -64,7 +65,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
             string triggerText,
             string replacementText,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _info.GetConflictEditSpan(
                 new VSTypeScriptInlineRenameLocationWrapper(
                     new InlineRenameLocation(location.Document, location.TextSpan)
@@ -81,7 +83,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
             InlineRenameLocation location,
             string triggerText,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _info.GetReferenceEditSpan(
                 new VSTypeScriptInlineRenameLocationWrapper(
                     new InlineRenameLocation(location.Document, location.TextSpan)

@@ -10,11 +10,8 @@ namespace System.CommandLine.Parsing
     {
         private ArgumentConversionResult? _argumentConversionResult;
 
-        internal OptionResult(
-            IOption option,
-            Token? token = null,
-            CommandResult? parent = null
-        ) : base(option ?? throw new ArgumentNullException(nameof(option)), parent)
+        internal OptionResult(IOption option, Token? token = null, CommandResult? parent = null)
+            : base(option ?? throw new ArgumentNullException(nameof(option)), parent)
         {
             Option = option;
             Token = token;

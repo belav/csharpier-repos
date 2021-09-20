@@ -320,7 +320,8 @@ namespace System.Xml.Schema
             XmlSchema? schema,
             bool compile,
             XmlResolver? resolver
-        ) {
+        )
+        {
             int errorCount = 0;
             if (schema != null)
             {
@@ -336,7 +337,8 @@ namespace System.Xml.Schema
                             _nameTable,
                             true
                         )
-                    ) {
+                    )
+                    {
                         errorCount = 1;
                     }
 

@@ -20,7 +20,8 @@ namespace System.Web.Http.Tracing.Tracers
             JsonMediaTypeFormatter formatter,
             HttpRequestMessage request,
             ITraceWriter traceWriter
-        ) {
+        )
+        {
             return new JsonMediaTypeFormatterTracer(formatter, traceWriter, request);
         }
 
@@ -223,7 +224,8 @@ namespace System.Web.Http.Tracing.Tracers
             IList<TraceRecord> expectedTraces,
             HttpRequestMessage request,
             string requestBody
-        ) {
+        )
+        {
             // Arrange
             var formatter = new JsonMediaTypeFormatter();
             formatter.UseDataContractJsonSerializer = false;

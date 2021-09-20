@@ -91,7 +91,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             EventData eventData,
             bool diagnosticSourceEnabled,
             bool simpleLogEnabled
-        ) {
+        )
+        {
             // No null checks; low-level code in hot path for logging.
 
             if (diagnosticSourceEnabled)
@@ -125,7 +126,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             EventDefinitionBase definition,
             out bool diagnosticSourceEnabled,
             out bool simpleLogEnabled
-        ) {
+        )
+        {
             // No null checks; low-level code in hot path for logging.
 
             diagnosticSourceEnabled = DiagnosticSource.IsEnabled(definition.EventId.Name!);

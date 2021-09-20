@@ -116,7 +116,8 @@ namespace Roslyn.Utilities
                     "*",
                     SearchOption.TopDirectoryOnly
                 )
-            ) {
+            )
+            {
                 string satelliteAssemblyPath = Path.Combine(
                     subDirectory,
                     resourcesNameWithExtension
@@ -149,7 +150,8 @@ namespace Roslyn.Utilities
         public static ImmutableArray<AssemblyIdentity> IdentifyMissingDependencies(
             string assemblyPath,
             IEnumerable<string> dependencyFilePaths
-        ) {
+        )
+        {
             RoslynDebug.Assert(PathUtilities.IsAbsolute(assemblyPath));
             RoslynDebug.Assert(dependencyFilePaths != null);
 

@@ -2532,7 +2532,8 @@ class C
             string expectedMarkup,
             ParseOptions? parseOptions = null,
             int index = 0
-        ) {
+        )
+        {
             await TestAsync(
                 initialMarkup,
                 expectedMarkup,

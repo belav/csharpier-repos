@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                     FunctionId.Completion_KeywordCompletionProvider_GetItemsWorker,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 context.AddItems(
                     await context.Document.GetUnionItemsFromDocumentAndLinkedDocumentsAsync(
                             s_comparer,
@@ -62,7 +63,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             Document document,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxContextService = document.GetRequiredLanguageService<ISyntaxContextService>();
             var semanticModel = await document.ReuseExistingSpeculativeModelAsync(
                     position,
@@ -90,7 +92,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             int position,
             TContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxTree = await document.GetSyntaxTreeAsync(cancellationToken)
                 .ConfigureAwait(false);
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();

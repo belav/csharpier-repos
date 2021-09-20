@@ -123,7 +123,8 @@ namespace Microsoft.DotNet.CoreSetup.Test
             string sourceDirectory,
             string destinationDirectory,
             bool overwrite = false
-        ) {
+        )
+        {
             FileUtils.EnsureDirectoryExists(destinationDirectory);
 
             foreach (var dir in Directory.EnumerateDirectories(sourceDirectory))

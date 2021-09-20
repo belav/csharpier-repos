@@ -70,7 +70,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static ISignalRServerBuilder AddSignalR(
             this IServiceCollection services,
             Action<HubOptions> configure
-        ) {
+        )
+        {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));

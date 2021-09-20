@@ -169,7 +169,8 @@ namespace System.Collections.Specialized
             short maxValue,
             short priorMask,
             short priorOffset
-        ) {
+        )
+        {
             if (maxValue < 1)
             {
                 throw new ArgumentException(

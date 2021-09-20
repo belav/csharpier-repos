@@ -37,7 +37,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             ref ReadOnlySequence<byte> input,
             IInvocationBinder binder,
             out HubMessage message
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
 

@@ -162,7 +162,8 @@ namespace System.Security.Cryptography.Xml.Tests
             out KeyInfo keyInfo,
             out EncryptionMethod encryptionMethod,
             out CipherData cipherData
-        ) {
+        )
+        {
             using (Aes sessionKey = Aes.Create())
             {
                 sessionKey.KeySize = 128;

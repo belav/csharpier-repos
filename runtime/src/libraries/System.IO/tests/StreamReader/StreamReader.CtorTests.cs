@@ -86,7 +86,8 @@ namespace System.IO.Tests
             Encoding expectedEncoding,
             byte[] encodedData,
             string expectedOutput
-        ) {
+        )
+        {
             var ms2 = new MemoryStream();
             ms2.Write(encodedData, 0, encodedData.Length);
             ms2.Position = 0;
@@ -140,7 +141,8 @@ namespace System.IO.Tests
         public static void CreationFromMemoryStreamWithEncodingTrueDetectsCorrectEncodingWithOffPatterns(
             Encoding expectedEncoding,
             byte[] encodedData
-        ) {
+        )
+        {
             var ms2 = new MemoryStream();
             ms2.Write(encodedData, 0, encodedData.Length);
             ms2.Position = 0;
@@ -184,7 +186,8 @@ namespace System.IO.Tests
         public static void CreationFromMemoryStreamWithEncodingTrueDoesNotFailOnSmallInputs(
             Encoding expectedEncoding,
             byte[] data
-        ) {
+        )
+        {
             var ms2 = new MemoryStream();
             ms2.Write(data, 0, data.Length);
             ms2.Position = 0;

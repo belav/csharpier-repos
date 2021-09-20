@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis
         public static PooledObject<List<TItem>> GetPooledObject<TItem>(
             this ObjectPool<List<TItem>> pool,
             out List<TItem> list
-        ) {
+        )
+        {
             var pooledObject = PooledObject<List<TItem>>.Create(pool);
             list = pooledObject.Object;
             return pooledObject;

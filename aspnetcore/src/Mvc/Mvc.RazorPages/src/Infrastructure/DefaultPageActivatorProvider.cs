@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         /// <inheritdoc />
         public Func<PageContext, ViewContext, object> CreateActivator(
             CompiledPageActionDescriptor actionDescriptor
-        ) {
+        )
+        {
             if (actionDescriptor == null)
             {
                 throw new ArgumentNullException(nameof(actionDescriptor));
@@ -46,7 +47,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
 
         public Action<PageContext, ViewContext, object> CreateReleaser(
             CompiledPageActionDescriptor actionDescriptor
-        ) {
+        )
+        {
             if (actionDescriptor == null)
             {
                 throw new ArgumentNullException(nameof(actionDescriptor));
@@ -62,7 +64,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
 
         public Func<PageContext, ViewContext, object, ValueTask> CreateAsyncReleaser(
             CompiledPageActionDescriptor actionDescriptor
-        ) {
+        )
+        {
             if (actionDescriptor == null)
             {
                 throw new ArgumentNullException(nameof(actionDescriptor));
@@ -71,7 +74,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             if (
                 typeof(IAsyncDisposable).GetTypeInfo()
                     .IsAssignableFrom(actionDescriptor.PageTypeInfo)
-            ) {
+            )
+            {
                 return _asyncDisposer;
             }
 
@@ -125,7 +129,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             PageContext context,
             ViewContext viewContext,
             object page
-        ) {
+        )
+        {
             Dispose(context, viewContext, page);
             return default;
         }
@@ -134,7 +139,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             PageContext context,
             ViewContext viewContext,
             object page
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));

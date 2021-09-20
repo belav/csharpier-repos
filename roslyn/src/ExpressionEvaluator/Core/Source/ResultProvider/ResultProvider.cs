@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         internal ResultProvider(
             IDkmClrFormatter2 formatter2,
             IDkmClrFullNameProvider fullNameProvider
-        ) {
+        )
+        {
             Formatter2 = formatter2;
             FullNameProvider = fullNameProvider;
         }
@@ -65,7 +66,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             string resultName,
             string resultFullName,
             DkmCompletionRoutine<DkmEvaluationAsyncResult> completionRoutine
-        ) {
+        )
+        {
             if (formatSpecifiers == null)
             {
                 formatSpecifiers = Formatter.NoFormatSpecifiers;
@@ -137,7 +139,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             int initialRequestSize,
             DkmInspectionContext inspectionContext,
             DkmCompletionRoutine<DkmGetChildrenAsyncResult> completionRoutine
-        ) {
+        )
+        {
             var dataItem = evaluationResult.GetDataItem<EvalResultDataItem>();
             if (dataItem == null)
             {
@@ -226,7 +229,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             int startIndex,
             int count,
             DkmCompletionRoutine<DkmEvaluationEnumAsyncResult> completionRoutine
-        ) {
+        )
+        {
             var enumContextDataItem = enumContext.GetDataItem<EnumContextDataItem>();
             if (enumContextDataItem == null)
             {
@@ -312,7 +316,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             WorkList workList,
             EvalResult row,
             DkmCompletionRoutine<DkmEvaluationAsyncResult> completionRoutine
-        ) {
+        )
+        {
             var inspectionContext = row.InspectionContext;
             if ((row.Kind != ExpansionKind.Default) || (row.Value == null))
             {
@@ -359,7 +364,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmInspectionContext inspectionContext,
             DkmStackWalkFrame stackFrame,
             CompletionRoutine<DkmEvaluationResult> completionRoutine
-        ) {
+        )
+        {
             switch (result.Kind)
             {
                 case ExpansionKind.Explicit:
@@ -577,7 +583,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             string typeName,
             string display,
             EvalResult result
-        ) {
+        )
+        {
             if (value.IsError())
             {
                 // Evaluation failed
@@ -650,7 +657,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmClrType declaredType,
             DkmClrCustomTypeInfo declaredTypeInfo,
             bool isPointerDereference
-        ) {
+        )
+        {
             var declaredLmrType = declaredType.GetLmrType();
             var runtimeType = value.Type;
             var declaredTypeName = inspectionContext.GetTypeName(
@@ -666,7 +674,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                     !declaredLmrType.IsNullable()
                     || value.EvalFlags.Includes(DkmEvaluationResultFlags.ExceptionThrown)
                 )
-            ) {
+            )
+            {
                 // Generate the declared type name without tuple element names.
                 var declaredTypeInfoNoTupleElementNames =
                     declaredTypeInfo.WithNoTupleElementNames();
@@ -716,7 +725,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             bool canFavorite,
             bool isFavorite,
             bool supportsFavorites
-        ) {
+        )
+        {
             if ((evalFlags & DkmEvaluationFlags.ShowValueRaw) != 0)
             {
                 formatSpecifiers = Formatter.AddFormatSpecifier(formatSpecifiers, "raw");
@@ -739,7 +749,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 else if (
                     (nullableValue = value.GetNullableValue(lmrNullableTypeArg, inspectionContext))
                     == null
-                ) {
+                )
+                {
                     Debug.Assert(declaredType.Equals(value.Type.GetLmrType()));
                     // No expansion of "null".
                     expansion = null;
@@ -784,7 +795,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             else if (
                 value.IsError()
                 || (inspectionContext.EvaluationFlags & DkmEvaluationFlags.NoExpansion) != 0
-            ) {
+            )
+            {
                 expansion = null;
             }
             else
@@ -865,7 +877,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             string fullName,
             ReadOnlyCollection<string> formatSpecifiers,
             CompletionRoutine<DkmEvaluationResult> completionRoutine
-        ) {
+        )
+        {
             Debug.Assert(formatSpecifiers != null);
 
             var type = value.Type.GetLmrType();
@@ -1031,7 +1044,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmInspectionContext inspectionContext,
             bool useDebuggerDisplay,
             CompletionRoutine<DkmEvaluationResult> completionRoutine
-        ) {
+        )
+        {
             var value = result.Value; // Value may have been replaced (specifically, for Nullable<T>).
 
             if (value.TryGetDebuggerDisplayInfo(out DebuggerDisplayInfo displayInfo))
@@ -1112,7 +1126,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DebuggerDisplayItemInfo displayInfo,
             CompletionRoutine<DkmEvaluateDebuggerDisplayStringAsyncResult> onCompleted,
             CompletionRoutine<Exception> onException
-        ) {
+        )
+        {
             void completionRoutine(DkmEvaluateDebuggerDisplayStringAsyncResult result)
             {
                 try
@@ -1149,7 +1164,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             string displayValue,
             string displayType,
             bool useDebuggerDisplay
-        ) {
+        )
+        {
             var name = result.Name;
             Debug.Assert(name != null);
             var typeDeclaringMemberAndInfo = result.TypeDeclaringMemberAndInfo;
@@ -1224,7 +1240,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmInspectionContext inspectionContext,
             CompletionRoutine onCompleted,
             CompletionRoutine<Exception> onException
-        ) {
+        )
+        {
             void completionRoutine(DkmEvaluationAsyncResult result)
             {
                 try
@@ -1268,7 +1285,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmClrValue value,
             ExpansionFlags flags,
             bool supportsFavorites
-        ) {
+        )
+        {
             var declaredType = declaredTypeAndInfo.Type;
             Debug.Assert(!declaredType.IsTypeVariables());
 
@@ -1343,7 +1361,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             if (
                 value.EvalFlags.Includes(DkmEvaluationResultFlags.ExceptionThrown)
                 && runtimeType.IsEmptyResultsViewException()
-            ) {
+            )
+            {
                 // The value is an exception thrown expanding an empty
                 // IEnumerable. Use the runtime type of the exception and
                 // skip base types. (This matches the native EE behavior
@@ -1378,7 +1397,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             Exception e,
             EvalResult result,
             DkmInspectionContext inspectionContext
-        ) {
+        )
+        {
             return DkmFailedEvaluationResult.Create(
                 inspectionContext,
                 result.Value.StackFrame,
@@ -1396,7 +1416,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             TypeAndCustomInfo typeDeclaringMember,
             string memberName,
             IDkmClrFullNameProvider fullNameProvider
-        ) {
+        )
+        {
             var typeName =
                 fullNameProvider.GetClrTypeName(
                     inspectionContext,
@@ -1485,7 +1506,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 DkmEvaluationResultAccessType access,
                 DkmEvaluationResultStorageType storageType,
                 DkmEvaluationResultTypeModifierFlags typeModifierFlags
-            ) {
+            )
+            {
                 Category = category;
                 Access = access;
                 StorageType = storageType;

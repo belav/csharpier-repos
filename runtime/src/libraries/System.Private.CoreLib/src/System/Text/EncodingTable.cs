@@ -106,7 +106,8 @@ namespace System.Text
                             s_encodingNameIndices[left + 1] - s_encodingNameIndices[left]
                         )
                     ) == 0
-                ) {
+                )
+                {
                     return s_codePagesByName[left];
                 }
             }
@@ -140,7 +141,8 @@ namespace System.Text
                 if (
                     codePage == Encoding.CodePageUTF7
                     && !LocalAppContextSwitches.EnableUnsafeUTF7Encoding
-                ) {
+                )
+                {
                     continue; // skip this entry; UTF-7 is disabled
                 }
 
@@ -174,7 +176,8 @@ namespace System.Text
                     if (
                         codePage != Encoding.CodePageUTF7
                         || LocalAppContextSwitches.EnableUnsafeUTF7Encoding
-                    ) {
+                    )
+                    {
                         encodingInfoList[codePage] = new EncodingInfo(
                             codePage,
                             webNames[webNameIndices[i]..webNameIndices[i + 1]],

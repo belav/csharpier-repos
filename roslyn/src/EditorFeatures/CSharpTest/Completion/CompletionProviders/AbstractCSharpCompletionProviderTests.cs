@@ -52,7 +52,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
             bool? isComplexTextEdit = null,
             List<CompletionFilter> matchingFilters = null,
             CompletionItemFlags? flags = null
-        ) {
+        )
+        {
             return base.VerifyWorkerAsync(
                 code,
                 position,
@@ -90,7 +91,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
             bool? isComplexTextEdit = null,
             List<CompletionFilter> matchingFilters = null,
             CompletionItemFlags? flags = null
-        ) {
+        )
+        {
             await VerifyAtPositionAsync(
                 code,
                 position,
@@ -223,7 +225,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
             string inlineDescription,
             bool? isComplexTextEdit,
             List<CompletionFilter> matchingFilters
-        ) {
+        )
+        {
             code = code.Substring(0, position) + insertText + "/**/" + code.Substring(position);
             position += insertText.Length;
 
@@ -263,7 +266,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
             string inlineDescription,
             bool? isComplexTextEdit,
             List<CompletionFilter> matchingFilters
-        ) {
+        )
+        {
             return VerifyInFrontOfCommentAsync(
                 code,
                 position,
@@ -300,7 +304,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
             string inlineDescription,
             bool? isComplexTextEdit,
             List<CompletionFilter> matchingFilters
-        ) {
+        )
+        {
             return VerifyInFrontOfCommentAsync(
                 code,
                 position,
@@ -348,7 +353,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
             string textTypedSoFar,
             EnterKeyRule sendThroughEnterOption,
             bool expected
-        ) {
+        )
+        {
             using var workspace = CreateWorkspace(initialMarkup);
             var hostDocument = workspace.DocumentWithCursor;
 

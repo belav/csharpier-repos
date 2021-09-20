@@ -31,7 +31,8 @@ namespace System.Net
         protected WebHeaderCollection(
             SerializationInfo serializationInfo,
             StreamingContext streamingContext
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -160,14 +161,16 @@ namespace System.Net
         public override void GetObjectData(
             SerializationInfo serializationInfo,
             StreamingContext streamingContext
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
         void ISerializable.GetObjectData(
             SerializationInfo serializationInfo,
             StreamingContext streamingContext
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 

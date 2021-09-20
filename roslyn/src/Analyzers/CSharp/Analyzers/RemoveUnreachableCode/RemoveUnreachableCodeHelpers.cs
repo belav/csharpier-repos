@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnreachableCode
                 int i = firstUnreachableStatementIndex + 1, n = siblingStatements.Count;
                 i < n;
                 i++
-            ) {
+            )
+            {
                 var currentStatement = siblingStatements[i];
                 if (currentStatement.IsKind(SyntaxKind.LabeledStatement))
                 {
@@ -81,7 +82,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnreachableCode
         private static void AddIfNonEmpty(
             ArrayBuilder<ImmutableArray<StatementSyntax>> sections,
             ImmutableArray<StatementSyntax> lastSection
-        ) {
+        )
+        {
             if (!lastSection.IsEmpty)
             {
                 sections.Add(lastSection);

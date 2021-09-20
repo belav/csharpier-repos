@@ -51,7 +51,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             SourceText text,
             int characterPosition,
             OptionSet options
-        ) {
+        )
+        {
             var ch = text[characterPosition];
             return ch == ' '
                 || (
@@ -82,7 +83,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
         protected override (string displayText, string suffix, string insertionText) GetDisplayAndSuffixAndInsertionText(
             INamedTypeSymbol symbol,
             CSharpSyntaxContext context
-        ) {
+        )
+        {
             var displayAndInsertionText = symbol.ToMinimalDisplayString(
                 context.SemanticModel,
                 context.Position,
@@ -95,7 +97,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             CSharpSyntaxContext context,
             INamedTypeSymbol declaredSymbol,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var candidates = base.LookupCandidateSymbols(
                 context,
                 declaredSymbol,
@@ -133,7 +136,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             CompletionItem selectedItem,
             char? ch,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (ch == '<')
             {
                 if (
@@ -141,7 +145,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                         InsertionTextOnLessThan,
                         out var insertionText
                     )
-                ) {
+                )
+                {
                     return new TextChange(selectedItem.Span, insertionText);
                 }
             }

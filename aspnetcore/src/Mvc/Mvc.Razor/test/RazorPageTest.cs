@@ -1067,7 +1067,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             int valueOffset,
             bool isLiteral,
             string expectedValue
-        ) {
+        )
+        {
             // Arrange
             var page = CreatePage(p => { });
             page.HtmlEncoder = new HtmlTestEncoder();
@@ -1254,7 +1255,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
         public void AddHtmlAttributeValues_OnlyAddsToAllAttributesWhenAttributeRemoved(
             object attributeValue,
             string expectedValue
-        ) {
+        )
+        {
             // Arrange
             var page = CreatePage(p => { });
             page.HtmlEncoder = new HtmlTestEncoder();
@@ -1359,7 +1361,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             int valueOffset,
             bool isLiteral,
             string expectedOutput
-        ) {
+        )
+        {
             // Arrange
             var page = CreatePage(p => { });
             page.HtmlEncoder = new HtmlTestEncoder();
@@ -1538,7 +1541,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
         private static TestableRazorPage CreatePage(
             Action<TestableRazorPage> executeAction,
             ViewContext context = null
-        ) {
+        )
+        {
             return CreatePage(
                 page =>
                 {
@@ -1552,7 +1556,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
         private static TestableRazorPage CreatePage(
             Func<TestableRazorPage, Task> executeAction,
             ViewContext context = null
-        ) {
+        )
+        {
             context = context ?? CreateViewContext();
             var view = new Mock<TestableRazorPage> { CallBase = true };
             if (executeAction != null)
@@ -1574,7 +1579,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             TextWriter writer = null,
             IViewBufferScope bufferScope = null,
             string viewPath = null
-        ) {
+        )
+        {
             bufferScope = bufferScope ?? new TestViewBufferScope();
             var buffer = new ViewBuffer(bufferScope, viewPath ?? "TEST", 32);
             writer = writer ?? new ViewBufferTextWriter(buffer, Encoding.UTF8);

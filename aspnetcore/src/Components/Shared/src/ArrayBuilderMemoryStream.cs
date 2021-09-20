@@ -75,7 +75,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ValidateArguments(buffer, offset, count);
 
             ArrayBuilder.Append(buffer, offset, count);

@@ -262,7 +262,8 @@ namespace System.Xml.Xsl.XPath
             out XPathNodeType nodeType,
             out string? nodePrefix,
             out string? nodeName
-        ) {
+        )
+        {
             switch (scanner.Kind)
             {
                 case LexKind.Name:

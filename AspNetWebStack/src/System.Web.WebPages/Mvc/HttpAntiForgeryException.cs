@@ -56,7 +56,8 @@ namespace System.Web.Mvc
 
         internal static HttpAntiForgeryException CreateFormFieldMissingException(
             string formFieldName
-        ) {
+        )
+        {
             return new HttpAntiForgeryException(
                 WebPageResources.AntiForgeryToken_FormFieldMissing,
                 formFieldName
@@ -73,7 +74,8 @@ namespace System.Web.Mvc
         internal static HttpAntiForgeryException CreateTokensSwappedException(
             string cookieName,
             string formFieldName
-        ) {
+        )
+        {
             return new HttpAntiForgeryException(
                 WebPageResources.AntiForgeryToken_TokensSwapped,
                 cookieName,
@@ -84,7 +86,8 @@ namespace System.Web.Mvc
         internal static HttpAntiForgeryException CreateUsernameMismatchException(
             string usernameInToken,
             string currentUsername
-        ) {
+        )
+        {
             return new HttpAntiForgeryException(
                 WebPageResources.AntiForgeryToken_UsernameMismatch,
                 usernameInToken,

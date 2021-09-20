@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Host
         public static HostLanguageServices GetExtendedLanguageServices(
             this HostWorkspaceServices hostWorkspaceServices,
             string languageName
-        ) {
+        )
+        {
             var languageServices = hostWorkspaceServices.GetLanguageServices(languageName);
 
 #if CODE_STYLE

@@ -139,7 +139,8 @@ namespace System.Threading.Tasks.Dataflow
         public IDisposable LinkTo(
             ITargetBlock<Tuple<T1, T2>> target,
             DataflowLinkOptions linkOptions
-        ) {
+        )
+        {
             return _source.LinkTo(target, linkOptions);
         }
 
@@ -147,7 +148,8 @@ namespace System.Threading.Tasks.Dataflow
         public bool TryReceive(
             Predicate<Tuple<T1, T2>>? filter,
             [NotNullWhen(true)] out Tuple<T1, T2>? item
-        ) {
+        )
+        {
             return _source.TryReceive(filter, out item);
         }
 
@@ -225,7 +227,8 @@ namespace System.Threading.Tasks.Dataflow
             DataflowMessageHeader messageHeader,
             ITargetBlock<Tuple<T1, T2>> target,
             out bool messageConsumed
-        ) {
+        )
+        {
             return _source.ConsumeMessage(messageHeader, target, out messageConsumed);
         }
 
@@ -233,7 +236,8 @@ namespace System.Threading.Tasks.Dataflow
         bool ISourceBlock<Tuple<T1, T2>>.ReserveMessage(
             DataflowMessageHeader messageHeader,
             ITargetBlock<Tuple<T1, T2>> target
-        ) {
+        )
+        {
             return _source.ReserveMessage(messageHeader, target);
         }
 
@@ -241,7 +245,8 @@ namespace System.Threading.Tasks.Dataflow
         void ISourceBlock<Tuple<T1, T2>>.ReleaseReservation(
             DataflowMessageHeader messageHeader,
             ITargetBlock<Tuple<T1, T2>> target
-        ) {
+        )
+        {
             _source.ReleaseReservation(messageHeader, target);
         }
 
@@ -491,7 +496,8 @@ namespace System.Threading.Tasks.Dataflow
         public IDisposable LinkTo(
             ITargetBlock<Tuple<T1, T2, T3>> target,
             DataflowLinkOptions linkOptions
-        ) {
+        )
+        {
             return _source.LinkTo(target, linkOptions);
         }
 
@@ -499,7 +505,8 @@ namespace System.Threading.Tasks.Dataflow
         public bool TryReceive(
             Predicate<Tuple<T1, T2, T3>>? filter,
             [NotNullWhen(true)] out Tuple<T1, T2, T3>? item
-        ) {
+        )
+        {
             return _source.TryReceive(filter, out item);
         }
 
@@ -589,7 +596,8 @@ namespace System.Threading.Tasks.Dataflow
             DataflowMessageHeader messageHeader,
             ITargetBlock<Tuple<T1, T2, T3>> target,
             out bool messageConsumed
-        ) {
+        )
+        {
             return _source.ConsumeMessage(messageHeader, target, out messageConsumed);
         }
 
@@ -597,7 +605,8 @@ namespace System.Threading.Tasks.Dataflow
         bool ISourceBlock<Tuple<T1, T2, T3>>.ReserveMessage(
             DataflowMessageHeader messageHeader,
             ITargetBlock<Tuple<T1, T2, T3>> target
-        ) {
+        )
+        {
             return _source.ReserveMessage(messageHeader, target);
         }
 
@@ -605,7 +614,8 @@ namespace System.Threading.Tasks.Dataflow
         void ISourceBlock<Tuple<T1, T2, T3>>.ReleaseReservation(
             DataflowMessageHeader messageHeader,
             ITargetBlock<Tuple<T1, T2, T3>> target
-        ) {
+        )
+        {
             _source.ReleaseReservation(messageHeader, target);
         }
 
@@ -1064,7 +1074,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
             if (
                 (_sharedResources._joinsCreated + messageCount)
                 >= _sharedResources._dataflowBlockOptions.ActualMaxNumberOfGroups
-            ) {
+            )
+            {
                 _decliningPermanently = true;
 
                 bool allAreDecliningPermanently = true;
@@ -1171,7 +1182,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
             T messageValue,
             ISourceBlock<T>? source,
             bool consumeToAccept
-        ) {
+        )
+        {
             // Validate arguments
             if (!messageHeader.IsValid)
                 throw new ArgumentException(
@@ -1212,7 +1224,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
                             && _sharedResources._taskForInputProcessing == null
                         )
                     )
-                ) {
+                )
+                {
                     if (consumeToAccept)
                     {
                         Debug.Assert(
@@ -1270,7 +1283,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
             Exception? exception,
             bool dropPendingMessages,
             bool releaseReservedMessages
-        ) {
+        )
+        {
             bool greedy = _sharedResources._dataflowBlockOptions.Greedy;
             lock (_sharedResources.IncomingLock)
             {
@@ -1282,7 +1296,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
                         (!_decliningPermanently && !_sharedResources._decliningPermanently)
                         || releaseReservedMessages
                     )
-                ) {
+                )
+                {
                     _sharedResources._exceptionAction(exception);
                 }
 
@@ -1471,7 +1486,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
             Action joinFilledAction,
             Action<Exception> exceptionAction,
             GroupingDataflowBlockOptions dataflowBlockOptions
-        ) {
+        )
+        {
             Debug.Assert(ownerJoin != null, "Resources must be associated with a join.");
             Debug.Assert(targets != null, "Resources must be shared between multiple targets.");
             Debug.Assert(

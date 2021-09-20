@@ -197,7 +197,8 @@ namespace System.Numerics
             ref BitsBuffer yBuffer,
             out ulong x,
             out ulong y
-        ) {
+        )
+        {
             Debug.Assert(xBuffer.GetLength() >= 3);
             Debug.Assert(yBuffer.GetLength() >= 3);
             Debug.Assert(xBuffer.GetLength() >= yBuffer.GetLength());
@@ -263,7 +264,8 @@ namespace System.Numerics
             long b,
             long c,
             long d
-        ) {
+        )
+        {
             Debug.Assert(xBuffer.GetLength() >= 1);
             Debug.Assert(yBuffer.GetLength() >= 1);
             Debug.Assert(xBuffer.GetLength() >= yBuffer.GetLength());

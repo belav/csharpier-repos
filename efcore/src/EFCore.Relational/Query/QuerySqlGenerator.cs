@@ -263,7 +263,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     projectionExpression.Expression is ColumnExpression column
                     && column.Name == projectionExpression.Alias
                 )
-            ) {
+            )
+            {
                 _relationalCommandBuilder.Append(AliasSeparator)
                     .Append(_sqlGenerationHelper.DelimitIdentifier(projectionExpression.Alias));
             }
@@ -314,7 +315,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <inheritdoc />
         protected override Expression VisitTableValuedFunction(
             TableValuedFunctionExpression tableValuedFunctionExpression
-        ) {
+        )
+        {
             Check.NotNull(tableValuedFunctionExpression, nameof(tableValuedFunctionExpression));
 
             if (!string.IsNullOrEmpty(tableValuedFunctionExpression.StoreFunction.Schema))
@@ -519,7 +521,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     && char.ToLowerInvariant(NextChar()) == 'e'
                     && char.ToLowerInvariant(NextChar()) == 'c'
                     && char.ToLowerInvariant(NextChar()) == 't'
-                ) {
+                )
+                {
                     var (c1, c2) = (NextChar(), NextChar());
                     if (char.IsWhiteSpace(c1) || c1 == '-' && c2 == '-' || c1 == '/' && c2 == '*')
                     {
@@ -592,7 +595,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <inheritdoc />
         protected override Expression VisitSqlParameter(
             SqlParameterExpression sqlParameterExpression
-        ) {
+        )
+        {
             Check.NotNull(sqlParameterExpression, nameof(sqlParameterExpression));
 
             var parameterNameInCommand = _sqlGenerationHelper.GenerateParameterName(
@@ -603,7 +607,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 _relationalCommandBuilder.Parameters.All(
                     p => p.InvariantName != sqlParameterExpression.Name
                 )
-            ) {
+            )
+            {
                 _relationalCommandBuilder.AddParameter(
                     sqlParameterExpression.Name,
                     parameterNameInCommand,
@@ -627,7 +632,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             if (
                 orderingExpression.Expression is SqlConstantExpression
                 || orderingExpression.Expression is SqlParameterExpression
-            ) {
+            )
+            {
                 _relationalCommandBuilder.Append("(SELECT 1)");
             }
             else
@@ -962,7 +968,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             IReadOnlyList<T> items,
             Action<T> generationAction,
             Action<IRelationalCommandBuilder>? joinAction = null
-        ) {
+        )
+        {
             joinAction ??= (isb => isb.Append(", "));
 
             for (var i = 0; i < items.Count; i++)
@@ -1038,7 +1045,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <inheritdoc />
         protected override Expression VisitScalarSubquery(
             ScalarSubqueryExpression scalarSubqueryExpression
-        ) {
+        )
+        {
             Check.NotNull(scalarSubqueryExpression, nameof(scalarSubqueryExpression));
 
             _relationalCommandBuilder.AppendLine("(");
@@ -1107,7 +1115,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         protected virtual void GenerateSetOperationOperand(
             SetOperationBase setOperation,
             SelectExpression operand
-        ) {
+        )
+        {
             Check.NotNull(setOperation, nameof(setOperation));
             Check.NotNull(operand, nameof(operand));
 
@@ -1116,7 +1125,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             if (
                 IsNonComposedSetOperation(operand)
                 && operand.Tables[0].GetType() != setOperation.GetType()
-            ) {
+            )
+            {
                 _relationalCommandBuilder.AppendLine("(");
                 using (_relationalCommandBuilder.Indent())
                 {

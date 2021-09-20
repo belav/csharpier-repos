@@ -478,7 +478,8 @@ namespace System
             out int charsWritten,
             ReadOnlySpan<char> format = default,
             IFormatProvider? provider = null
-        ) {
+        )
+        {
             return Number.TryFormatDecimal(
                 this,
                 format,
@@ -533,7 +534,8 @@ namespace System
             ReadOnlySpan<char> s,
             NumberStyles style = NumberStyles.Number,
             IFormatProvider? provider = null
-        ) {
+        )
+        {
             NumberFormatInfo.ValidateParseStyleFloatingPoint(style);
             return Number.ParseDecimal(s, style, NumberFormatInfo.GetInstance(provider));
         }
@@ -569,7 +571,8 @@ namespace System
             NumberStyles style,
             IFormatProvider? provider,
             out decimal result
-        ) {
+        )
+        {
             NumberFormatInfo.ValidateParseStyleFloatingPoint(style);
 
             if (s == null)
@@ -591,7 +594,8 @@ namespace System
             NumberStyles style,
             IFormatProvider? provider,
             out decimal result
-        ) {
+        )
+        {
             NumberFormatInfo.ValidateParseStyleFloatingPoint(style);
             return Number.TryParseDecimal(
                     s,

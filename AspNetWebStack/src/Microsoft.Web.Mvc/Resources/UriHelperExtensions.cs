@@ -37,7 +37,8 @@ namespace Microsoft.Web.Mvc.Resources
             this UrlHelper url,
             string controllerName,
             object routeValues
-        ) {
+        )
+        {
             return url.ResourceUrl(controllerName, routeValues, ActionType.Retrieve);
         }
 
@@ -71,7 +72,8 @@ namespace Microsoft.Web.Mvc.Resources
             string controllerName,
             object routeValues,
             ActionType actionType
-        ) {
+        )
+        {
             switch (actionType)
             {
                 case ActionType.GetUpdateForm:

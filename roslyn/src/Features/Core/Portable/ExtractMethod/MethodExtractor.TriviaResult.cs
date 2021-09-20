@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 ITriviaSavedResult result,
                 int endOfLineKind,
                 int whitespaceKind
-            ) {
+            )
+            {
                 SemanticDocument = document;
 
                 _result = result;
@@ -46,7 +47,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             public async Task<OperationStatus<SemanticDocument>> ApplyAsync(
                 GeneratedCode generatedCode,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var document = generatedCode.SemanticDocument;
                 var root = document.Root;
 
@@ -116,7 +118,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                                 currentLine.All(
                                     t => t.RawKind == _endOfLineKind || t.RawKind == _whitespaceKind
                                 )
-                            ) {
+                            )
+                            {
                                 continue;
                             }
 
@@ -143,7 +146,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
 
             protected IEnumerable<SyntaxTrivia> RemoveLeadingElasticBeforeEndOfLine(
                 IEnumerable<SyntaxTrivia> list
-            ) {
+            )
+            {
                 var trivia = list.FirstOrDefault();
                 if (!trivia.IsElastic())
                 {

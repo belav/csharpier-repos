@@ -57,7 +57,8 @@ namespace Roslyn.Utilities
             char[] concatenatedLowerCaseWords,
             ImmutableArray<Node> nodes,
             ImmutableArray<Edge> edges
-        ) {
+        )
+        {
             _concatenatedLowerCaseWords = concatenatedLowerCaseWords;
             _nodes = nodes;
             _edges = edges;
@@ -110,7 +111,8 @@ namespace Roslyn.Utilities
             int threshold,
             List<string> result,
             int recursionCount
-        ) {
+        )
+        {
             // Don't bother recursing too deeply in the case of pathological trees.
             // This really only happens when the actual code is strange (like
             // 10,000 symbols all a single letter long).  In htat case, searching

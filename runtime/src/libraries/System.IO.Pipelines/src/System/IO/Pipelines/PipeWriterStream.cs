@@ -75,7 +75,8 @@ namespace System.IO.Pipelines
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (buffer is null)
             {
                 throw new ArgumentNullException(nameof(buffer));
@@ -93,7 +94,8 @@ namespace System.IO.Pipelines
         public override ValueTask WriteAsync(
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             ValueTask<FlushResult> valueTask = _pipeWriter.WriteAsync(buffer, cancellationToken);
 
             return new ValueTask(GetFlushResultAsTask(valueTask));

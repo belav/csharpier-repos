@@ -97,7 +97,8 @@ namespace System.Text
             int byteCount,
             char[] chars,
             int charIndex
-        ) {
+        )
+        {
             return GetChars(bytes, byteIndex, byteCount, chars, charIndex, false);
         }
 
@@ -108,7 +109,8 @@ namespace System.Text
             char[] chars,
             int charIndex,
             bool flush
-        ) {
+        )
+        {
             // Validate Parameters
             if (bytes == null || chars == null)
                 throw new ArgumentNullException(
@@ -150,7 +152,8 @@ namespace System.Text
             char* chars,
             int charCount,
             bool flush
-        ) {
+        )
+        {
             // Validate parameters
             if (chars == null || bytes == null)
                 throw new ArgumentNullException(
@@ -186,7 +189,8 @@ namespace System.Text
             out int bytesUsed,
             out int charsUsed,
             out bool completed
-        ) {
+        )
+        {
             // Validate parameters
             if (bytes == null || chars == null)
                 throw new ArgumentNullException(
@@ -248,7 +252,8 @@ namespace System.Text
             out int bytesUsed,
             out int charsUsed,
             out bool completed
-        ) {
+        )
+        {
             // Validate input parameters
             if (chars == null || bytes == null)
                 throw new ArgumentNullException(
@@ -311,7 +316,8 @@ namespace System.Text
         internal int DrainLeftoverDataForGetCharCount(
             ReadOnlySpan<byte> bytes,
             out int bytesConsumed
-        ) {
+        )
+        {
             // Quick check: we _should not_ have leftover fallback data from a previous invocation,
             // as we'd end up consuming any such data and would corrupt whatever Convert call happens
             // to be in progress. Unlike EncoderNLS, this is simply a Debug.Assert. No exception is thrown.
@@ -373,7 +379,8 @@ namespace System.Text
                     combinedBuffer.Slice(0, combinedBufferBytesConsumed).ToArray(),
                     index: -_leftoverByteCount
                 )
-            ) {
+            )
+            {
                 charCount = _fallbackBuffer!.DrainRemainingDataForGetCharCount();
                 Debug.Assert(
                     charCount >= 0,
@@ -391,7 +398,8 @@ namespace System.Text
             ReadOnlySpan<byte> bytes,
             Span<char> chars,
             out int bytesConsumed
-        ) {
+        )
+        {
             // Quick check: we _should not_ have leftover fallback data from a previous invocation,
             // as we'd end up consuming any such data and would corrupt whatever Convert call happens
             // to be in progress. Unlike EncoderNLS, this is simply a Debug.Assert. No exception is thrown.
@@ -465,7 +473,8 @@ namespace System.Text
                     combinedBuffer.Slice(0, combinedBufferBytesConsumed).ToArray(),
                     index: -_leftoverByteCount
                 ) && !_fallbackBuffer!.TryDrainRemainingDataForGetChars(chars, out charsWritten)
-            ) {
+            )
+            {
                 goto DestinationTooSmall;
             }
 
@@ -513,7 +522,8 @@ namespace System.Text
             ReadOnlySpan<byte> srcLeft,
             ReadOnlySpan<byte> srcRight,
             Span<byte> dest
-        ) {
+        )
+        {
             int total = 0;
 
             for (int i = 0; i < srcLeft.Length; i++)

@@ -79,7 +79,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                             IPropertySymbol,
                             IOperation
                         > pair in context.AnonymousTypePropertyValues
-                    ) {
+                    )
+                    {
                         AnonymousTypePropertyValues.Add(pair.Key, pair.Value);
                     }
                 }

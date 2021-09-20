@@ -15,7 +15,8 @@ namespace System.Net.WebSockets
             int receiveBufferSize,
             TimeSpan keepAliveInterval,
             ArraySegment<byte> internalBuffer
-        ) {
+        )
+        {
             if (!WebSocketProtocolComponent.IsSupported)
             {
                 HttpWebSocket.ThrowPlatformNotSupportedException_WSPC();
@@ -54,12 +55,14 @@ namespace System.Net.WebSockets
             int receiveBufferSize,
             TimeSpan keepAliveInterval,
             ArraySegment<byte> internalBuffer
-        ) : base(
-            innerStream,
-            subProtocol,
-            keepAliveInterval,
-            WebSocketBuffer.CreateServerBuffer(internalBuffer, receiveBufferSize)
-        ) {
+        )
+            : base(
+                innerStream,
+                subProtocol,
+                keepAliveInterval,
+                WebSocketBuffer.CreateServerBuffer(internalBuffer, receiveBufferSize)
+            )
+        {
             _properties = InternalBuffer.CreateProperties(false);
             _sessionHandle = CreateWebSocketHandle();
 

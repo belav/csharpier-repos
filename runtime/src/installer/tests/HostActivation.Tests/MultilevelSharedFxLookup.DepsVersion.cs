@@ -52,7 +52,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             string appAssemblyVersion,
             string uberFxAssemblyVersion,
             string uberProductVersion
-        ) {
+        )
+        {
             string appAssembly;
             string uberAssembly;
             string netcoreAssembly;
@@ -124,7 +125,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             out string appAssembly,
             out string uberAssembly,
             out string netcoreAssembly
-        ) {
+        )
+        {
             const string fileVersion = "0.0.0.9";
             var fixture = SharedFxLookupPortableAppFixture.Copy();
 

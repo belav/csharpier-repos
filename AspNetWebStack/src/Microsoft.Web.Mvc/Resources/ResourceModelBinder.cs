@@ -34,13 +34,15 @@ namespace Microsoft.Web.Mvc.Resources
         public object BindModel(
             ControllerContext controllerContext,
             ModelBindingContext bindingContext
-        ) {
+        )
+        {
             if (WebApiEnabledAttribute.IsDefined(controllerContext.Controller))
             {
                 if (
                     !controllerContext.RouteData.Values.ContainsKey(bindingContext.ModelName)
                     && controllerContext.HttpContext.Request.HasBody()
-                ) {
+                )
+                {
                     ContentType requestFormat = controllerContext.RequestContext.GetRequestFormat();
                     object model;
                     if (TryBindModel(controllerContext, bindingContext, requestFormat, out model))
@@ -90,7 +92,8 @@ namespace Microsoft.Web.Mvc.Resources
             ModelBindingContext bindingContext,
             ContentType requestFormat,
             out object model
-        ) {
+        )
+        {
             if (
                 requestFormat != null
                 && String.Compare(
@@ -98,7 +101,8 @@ namespace Microsoft.Web.Mvc.Resources
                     FormatManager.UrlEncoded,
                     StringComparison.OrdinalIgnoreCase
                 ) == 0
-            ) {
+            )
+            {
                 model = this._inner.BindModel(controllerContext, bindingContext);
                 return true;
             }
@@ -109,7 +113,8 @@ namespace Microsoft.Web.Mvc.Resources
                     requestFormat,
                     out model
                 )
-            ) {
+            )
+            {
                 model = null;
                 return false;
             }
@@ -121,7 +126,8 @@ namespace Microsoft.Web.Mvc.Resources
             public void CallOnModelUpdated(
                 ControllerContext controllerContext,
                 ModelBindingContext bindingContext
-            ) {
+            )
+            {
                 OnModelUpdated(controllerContext, bindingContext);
             }
 

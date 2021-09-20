@@ -84,7 +84,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                                 parameters[i].ParameterType,
                                 genericParams[i].AssociatedSystemType
                             )
-                        ) {
+                        )
+                        {
                             match = false;
                             break;
                         }
@@ -147,7 +148,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                             | BindingFlags.Instance
                             | BindingFlags.Static
                     )
-                ) {
+                )
+                {
                     if (!c.HasSameMetadataDefinitionAs(ctorInfo))
                     {
                         continue;
@@ -167,7 +169,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                                 parameters[i].ParameterType,
                                 genericInstanceParams[i].AssociatedSystemType
                             )
-                        ) {
+                        )
+                        {
                             match = false;
                             break;
                         }

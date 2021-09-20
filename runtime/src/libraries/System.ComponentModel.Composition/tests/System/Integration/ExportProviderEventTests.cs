@@ -139,7 +139,8 @@ namespace System.ComponentModel.Composition
             public ExportProviderListener(
                 CompositionContainer container,
                 ExportProvider watchExportProvider
-            ) {
+            )
+            {
                 watchExportProvider.ExportsChanged += OnExportsChanged;
                 watchExportProvider.ExportsChanging += OnExportsChanging;
                 this._watchedProvider = watchExportProvider;

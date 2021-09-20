@@ -43,7 +43,8 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Tests
         public async Task HubConnectionCanSendAndReceiveMessages(
             HttpTransportType transportType,
             string protocolName
-        ) {
+        )
+        {
             using (StartVerifiableLog())
             {
                 var protocol = HubProtocolHelpers.GetHubProtocol(protocolName);
@@ -71,7 +72,8 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Tests
         public async Task HubConnectionCanSendAndReceiveGroupMessages(
             HttpTransportType transportType,
             string protocolName
-        ) {
+        )
+        {
             using (StartVerifiableLog())
             {
                 var protocol = HubProtocolHelpers.GetHubProtocol(protocolName);
@@ -116,7 +118,8 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Tests
         public async Task CanSendAndReceiveUserMessagesFromMultipleConnectionsWithSameUser(
             HttpTransportType transportType,
             string protocolName
-        ) {
+        )
+        {
             using (StartVerifiableLog())
             {
                 var protocol = HubProtocolHelpers.GetHubProtocol(protocolName);
@@ -159,7 +162,8 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Tests
         public async Task CanSendAndReceiveUserMessagesWhenOneConnectionWithUserDisconnects(
             HttpTransportType transportType,
             string protocolName
-        ) {
+        )
+        {
             // Regression test:
             // When multiple connections from the same user were connected and one left, it used to unsubscribe from the user channel
             // Now we keep track of users connections and only unsubscribe when no users are listening
@@ -203,7 +207,8 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Tests
             IHubProtocol protocol,
             ILoggerFactory loggerFactory,
             string userName = null
-        ) {
+        )
+        {
             var hubConnectionBuilder = new HubConnectionBuilder().WithLoggerFactory(loggerFactory)
                 .WithUrl(
                     url,

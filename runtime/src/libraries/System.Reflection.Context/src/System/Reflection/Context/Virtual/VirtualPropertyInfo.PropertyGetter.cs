@@ -33,7 +33,8 @@ namespace System.Reflection.Context.Virtual
                 Binder binder,
                 object[] parameters,
                 CultureInfo culture
-            ) {
+            )
+            {
                 // invokeAttr, binder, and culture are ignored, similar to what runtime reflection does with the default binder.
 
                 if (parameters != null && parameters.Length > 0)

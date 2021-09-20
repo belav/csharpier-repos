@@ -330,7 +330,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             CandidateFunctionMember node2,
             CType pTypeThrough,
             ArgInfos args
-        ) {
+        )
+        {
             MethPropWithInst mpwi1 = node1.mpwi;
             MethPropWithInst mpwi2 = node2.mpwi;
 
@@ -497,7 +498,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             MethPropWithInst mpwi,
             CType pTypeThrough,
             ArgInfos args
-        ) {
+        )
+        {
 #if DEBUG
             // We never have a named argument that is in a position in the argument
             // list past the end of what would be the formal parameter list.
@@ -583,7 +585,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             CandidateFunctionMember node2,
             CType pTypeThrough,
             ArgInfos args
-        ) {
+        )
+        {
             MethPropWithInst mpwi1 = node1.mpwi;
             MethPropWithInst mpwi2 = node2.mpwi;
 
@@ -786,7 +789,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             ArgInfos args,
             out CandidateFunctionMember methAmbig1,
             out CandidateFunctionMember methAmbig2
-        ) {
+        )
+        {
             Debug.Assert(list.Count != 0);
             Debug.Assert(list[0].mpwi != null);
 

@@ -65,7 +65,8 @@ namespace System.Speech.Internal.GrammarBuilding
             IElement parent,
             IRule rule,
             IdentifierCollection ruleIds
-        ) {
+        )
+        {
             // Create the children elements
             IItem item = parent as IItem;
             if (item != null)

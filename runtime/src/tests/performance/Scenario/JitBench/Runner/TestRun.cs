@@ -229,7 +229,8 @@ namespace JitBench
         void WriteBenchmarkResultsTable(
             Func<Benchmark, Metric, bool> primaryMetricSelector,
             ITestOutputHelper output
-        ) {
+        )
+        {
             List<ResultTableRowModel> rows = BuildRowModels(primaryMetricSelector);
             List<ResultTableColumn> columns = BuildColumns();
             List<List<string>> formattedCells = new List<List<string>>();
@@ -273,7 +274,8 @@ namespace JitBench
 
         List<ResultTableRowModel> BuildRowModels(
             Func<Benchmark, Metric, bool> primaryMetricSelector
-        ) {
+        )
+        {
             List<ResultTableRowModel> rows = new List<ResultTableRowModel>();
             foreach (Benchmark benchmark in Benchmarks)
             {
@@ -285,7 +287,8 @@ namespace JitBench
                     canonResult == null
                     || canonResult.IterationResults == null
                     || canonResult.IterationResults.Count == 0
-                ) {
+                )
+                {
                     continue;
                 }
                 IterationResult canonIteration = canonResult.IterationResults[0];

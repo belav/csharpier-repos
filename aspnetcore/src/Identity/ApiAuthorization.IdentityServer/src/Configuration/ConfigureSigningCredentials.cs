@@ -26,7 +26,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
         public ConfigureSigningCredentials(
             IConfiguration configuration,
             ILogger<ConfigureSigningCredentials> logger
-        ) {
+        )
+        {
             _configuration = configuration;
             _logger = logger;
         }

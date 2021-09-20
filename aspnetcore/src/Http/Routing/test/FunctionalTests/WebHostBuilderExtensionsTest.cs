@@ -106,7 +106,8 @@ namespace Microsoft.AspNetCore.Routing.FunctionalTests
             Action<IRouteBuilder> routeBuilder,
             HttpRequestMessage request,
             string expected
-        ) {
+        )
+        {
             // Arrange
             using var host = new HostBuilder().ConfigureWebHost(
                     webhostbuilder =>

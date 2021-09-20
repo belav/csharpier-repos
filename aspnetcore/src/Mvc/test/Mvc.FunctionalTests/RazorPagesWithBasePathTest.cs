@@ -15,7 +15,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
     {
         public RazorPagesWithBasePathTest(
             MvcTestFixture<RazorPagesWebSite.StartupWithBasePath> fixture
-        ) {
+        )
+        {
             Client = fixture.CreateDefaultClient();
         }
 

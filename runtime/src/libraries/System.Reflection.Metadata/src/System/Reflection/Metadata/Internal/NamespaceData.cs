@@ -21,7 +21,8 @@ namespace System.Reflection.Metadata.Ecma335
             ImmutableArray<NamespaceDefinitionHandle> namespaceDefinitions,
             ImmutableArray<TypeDefinitionHandle> typeDefinitions,
             ImmutableArray<ExportedTypeHandle> exportedTypes
-        ) {
+        )
+        {
             this.Name = name;
             this.FullName = fullName;
             this.Parent = parent;

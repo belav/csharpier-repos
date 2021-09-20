@@ -82,7 +82,8 @@ namespace Castle.DynamicProxy.Generators.Emitters
         protected virtual IEnumerable<Type> InitializeGenericArgumentsFromBases(
             ref Type baseType,
             IEnumerable<Type> interfaces
-        ) {
+        )
+        {
             if (baseType != null && baseType.IsGenericTypeDefinition)
             {
                 throw new NotSupportedException(
@@ -116,7 +117,8 @@ namespace Castle.DynamicProxy.Generators.Emitters
             IEnumerable<Type> interfaces,
             TypeAttributes flags,
             bool forceUnsigned
-        ) {
+        )
+        {
             var isAssemblySigned =
                 !forceUnsigned
                 && !StrongNameUtil.IsAnyTypeFromUnsignedAssembly(baseType, interfaces);

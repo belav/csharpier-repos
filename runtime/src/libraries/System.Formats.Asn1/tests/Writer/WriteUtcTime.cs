@@ -43,7 +43,8 @@ namespace System.Formats.Asn1.Tests.Writer
         public void VerifyWriteUtcTime_BER_CustomTag(
             DateTimeOffset input,
             string expectedHexPayload
-        ) {
+        )
+        {
             AsnWriter writer = new AsnWriter(AsnEncodingRules.BER);
             Asn1Tag tag = new Asn1Tag(TagClass.Application, 11);
             writer.WriteUtcTime(input, tag);
@@ -66,7 +67,8 @@ namespace System.Formats.Asn1.Tests.Writer
         public void VerifyWriteUtcTime_CER_CustomTag(
             DateTimeOffset input,
             string expectedHexPayload
-        ) {
+        )
+        {
             AsnWriter writer = new AsnWriter(AsnEncodingRules.CER);
             Asn1Tag tag = new Asn1Tag(TagClass.Private, 95);
             writer.WriteUtcTime(input, tag);
@@ -89,7 +91,8 @@ namespace System.Formats.Asn1.Tests.Writer
         public void VerifyWriteUtcTime_DER_CustomTag(
             DateTimeOffset input,
             string expectedHexPayload
-        ) {
+        )
+        {
             AsnWriter writer = new AsnWriter(AsnEncodingRules.DER);
             Asn1Tag tag = new Asn1Tag(TagClass.ContextSpecific, 3);
             writer.WriteUtcTime(input, tag);
@@ -130,7 +133,8 @@ namespace System.Formats.Asn1.Tests.Writer
         public void VerifyWriteUtcTime_RespectsYearMax_DER(
             DateTimeOffset input,
             string expectedHexPayload
-        ) {
+        )
+        {
             AsnWriter writer = new AsnWriter(AsnEncodingRules.DER);
             Assert.Equal(0, writer.GetEncodedLength());
 

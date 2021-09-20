@@ -11,14 +11,16 @@ namespace Microsoft.Extensions.Configuration
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder AddConfiguration(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder configurationBuilder,
             Microsoft.Extensions.Configuration.IConfiguration config
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder AddConfiguration(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder configurationBuilder,
             Microsoft.Extensions.Configuration.IConfiguration config,
             bool shouldDisposeConfiguration
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -33,7 +35,8 @@ namespace Microsoft.Extensions.Configuration
         public System.Collections.Generic.IEnumerable<string> GetChildKeys(
             System.Collections.Generic.IEnumerable<string> earlierKeys,
             string parentPath
-        ) {
+        )
+        {
             throw null;
         }
         public Microsoft.Extensions.Primitives.IChangeToken GetReloadToken()
@@ -63,7 +66,8 @@ namespace Microsoft.Extensions.Configuration
         }
         public Microsoft.Extensions.Configuration.IConfigurationProvider Build(
             Microsoft.Extensions.Configuration.IConfigurationBuilder builder
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -81,7 +85,8 @@ namespace Microsoft.Extensions.Configuration
         }
         public Microsoft.Extensions.Configuration.IConfigurationBuilder Add(
             Microsoft.Extensions.Configuration.IConfigurationSource source
-        ) {
+        )
+        {
             throw null;
         }
         public Microsoft.Extensions.Configuration.IConfigurationRoot Build()
@@ -113,7 +118,8 @@ namespace Microsoft.Extensions.Configuration
         public virtual System.Collections.Generic.IEnumerable<string> GetChildKeys(
             System.Collections.Generic.IEnumerable<string> earlierKeys,
             string parentPath
-        ) {
+        )
+        {
             throw null;
         }
         public Microsoft.Extensions.Primitives.IChangeToken GetReloadToken()
@@ -147,7 +153,8 @@ namespace Microsoft.Extensions.Configuration
         public System.IDisposable RegisterChangeCallback(
             System.Action<object> callback,
             object state
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -226,7 +233,8 @@ namespace Microsoft.Extensions.Configuration
     {
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder AddInMemoryCollection(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder configurationBuilder
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder AddInMemoryCollection(
@@ -235,7 +243,8 @@ namespace Microsoft.Extensions.Configuration
                     string,
                     string
                 >> initialData
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -306,7 +315,8 @@ namespace Microsoft.Extensions.Configuration.Memory
         }
         public Microsoft.Extensions.Configuration.IConfigurationProvider Build(
             Microsoft.Extensions.Configuration.IConfigurationBuilder builder
-        ) {
+        )
+        {
             throw null;
         }
     }

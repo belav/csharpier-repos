@@ -46,7 +46,8 @@ namespace Roslyn.Test.Utilities.TestGenerators
             Action<GeneratorInitializationContext> onInit,
             Action<GeneratorExecutionContext> onExecute,
             string? source = ""
-        ) {
+        )
+        {
             _onInit = onInit;
             _onExecute = onExecute;
             _source = source;

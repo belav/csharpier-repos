@@ -86,7 +86,8 @@ namespace System.Net.Http
             Socket? socket,
             Stream stream,
             TransportContext? transportContext
-        ) {
+        )
+        {
             Debug.Assert(pool != null);
             Debug.Assert(stream != null);
 
@@ -129,7 +130,8 @@ namespace System.Net.Http
                 if (
                     HttpTelemetry.Log.IsEnabled()
                     && previousValue == Status_NotDisposedAndTrackedByTelemetry
-                ) {
+                )
+                {
                     HttpTelemetry.Log.Http11ConnectionClosed();
                 }
 
@@ -269,7 +271,8 @@ namespace System.Net.Http
             HttpHeaders headers,
             string? cookiesFromContainer,
             bool async
-        ) {
+        )
+        {
             Debug.Assert(_currentRequest != null);
 
             if (headers.HeaderStore != null)
@@ -310,7 +313,8 @@ namespace System.Net.Http
                         if (
                             cookiesFromContainer != null
                             && header.Key.KnownHeader == KnownHeaders.Cookie
-                        ) {
+                        )
+                        {
                             await WriteTwoBytesAsync((byte)';', (byte)' ', async)
                                 .ConfigureAwait(false);
                             await WriteStringAsync(cookiesFromContainer, async, valueEncoding)
@@ -406,7 +410,8 @@ namespace System.Net.Http
                     new Span<byte>(_writeBuffer, _writeOffset, _writeBuffer.Length - _writeOffset),
                     out int bytesWritten
                 )
-            ) {
+            )
+            {
                 _writeOffset += bytesWritten;
                 return Task.CompletedTask;
             }
@@ -425,7 +430,8 @@ namespace System.Net.Http
                     out int bytesWritten,
                     'X'
                 )
-            ) {
+            )
+            {
                 _writeOffset += bytesWritten;
                 return Task.CompletedTask;
             }
@@ -438,7 +444,8 @@ namespace System.Net.Http
             HttpRequestMessage request,
             bool async,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             TaskCompletionSource<bool>? allowExpect100ToContinue = null;
             Task? sendRequestContentTask = null;
             Debug.Assert(_currentRequest == null, $"Expected null {nameof(_currentRequest)}.");
@@ -711,7 +718,8 @@ namespace System.Net.Http
                     if (
                         allowExpect100ToContinue != null
                         && response.StatusCode == HttpStatusCode.Continue
-                    ) {
+                    )
+                    {
                         allowExpect100ToContinue.TrySetResult(true);
                         allowExpect100ToContinue = null;
                     }
@@ -779,7 +787,8 @@ namespace System.Net.Http
                                 > Expect100ErrorSendThreshold
                         )
                         && !AuthenticationHelper.IsSessionAuthenticationChallenge(response)
-                    ) {
+                    )
+                    {
                         // For error final status codes, try to avoid sending the payload if its size is unknown or if it's known to be "big".
                         // If we already sent a header detailing the size of the payload, if we then don't send that payload, the server may wait
                         // for it and assume that the next request on the connection is actually this request's payload.  Thus we mark the connection
@@ -835,14 +844,16 @@ namespace System.Net.Http
                     ReferenceEquals(normalizedMethod, HttpMethod.Head)
                     || response.StatusCode == HttpStatusCode.NoContent
                     || response.StatusCode == HttpStatusCode.NotModified
-                ) {
+                )
+                {
                     responseStream = EmptyReadStream.Instance;
                     CompleteResponse();
                 }
                 else if (
                     ReferenceEquals(normalizedMethod, HttpMethod.Connect)
                     && response.StatusCode == HttpStatusCode.OK
-                ) {
+                )
+                {
                     // Successful response to CONNECT does not have body.
                     // What ever comes next should be opaque.
                     responseStream = new RawConnectionStream(this);
@@ -909,7 +920,8 @@ namespace System.Net.Http
                 if (
                     sendRequestContentTask != null
                     && !sendRequestContentTask.IsCompletedSuccessfully
-                ) {
+                )
+                {
                     // In case the connection is disposed, it's most probable that
                     // expect100Continue timer expired and request content sending failed.
                     // We're awaiting the task to propagate the exception in this case.
@@ -953,13 +965,15 @@ namespace System.Net.Http
             Exception exception,
             CancellationToken cancellationToken,
             out Exception mappedException
-        ) {
+        )
+        {
             if (
                 CancellationHelper.ShouldWrapInOperationCanceledException(
                     exception,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 // Cancellation was requested, so assume that the failure is due to
                 // the cancellation request. This is a bit unorthodox, as usually we'd
                 // prioritize a non-OperationCanceledException over a cancellation
@@ -1012,7 +1026,8 @@ namespace System.Net.Http
 
         private CancellationTokenRegistration RegisterCancellation(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Cancellation design:
             // - We register with the SendAsync CancellationToken for the duration of the SendAsync operation.
             // - We register with the Read/Write/CopyToAsync methods on the response stream for each such individual operation.
@@ -1045,7 +1060,8 @@ namespace System.Net.Http
             HttpContentWriteStream stream,
             bool async,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Now that we're sending content, prohibit retries on this connection.
             _canRetry = false;
 
@@ -1084,7 +1100,8 @@ namespace System.Net.Http
             Timer expect100Timer,
             bool async,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Wait until we receive a trigger notification that it's ok to continue sending content.
             // This will come either when the timer fires or when we receive a response status line from the server.
             bool sendRequestContent = await allowExpect100ToContinueTask.ConfigureAwait(false);
@@ -1227,7 +1244,8 @@ namespace System.Net.Http
             ReadOnlySpan<byte> line,
             HttpResponseMessage response,
             bool isFromTrailer
-        ) {
+        )
+        {
             Debug.Assert(line.Length > 0);
 
             int pos = 0;
@@ -1270,7 +1288,8 @@ namespace System.Net.Http
                 && descriptor.KnownHeader != null
                 && (descriptor.KnownHeader.HeaderType & HttpHeaderType.NonTrailing)
                     == HttpHeaderType.NonTrailing
-            ) {
+            )
+            {
                 // Disallowed trailer fields.
                 // A recipient MUST ignore fields that are forbidden to be sent in a trailer.
                 if (NetEventSource.Log.IsEnabled())
@@ -1482,7 +1501,8 @@ namespace System.Net.Http
         private async ValueTask FlushThenWriteWithoutBufferingAsync(
             ReadOnlyMemory<byte> source,
             bool async
-        ) {
+        )
+        {
             await FlushAsync(async).ConfigureAwait(false);
             await WriteToStreamAsync(source, async).ConfigureAwait(false);
         }
@@ -1743,7 +1763,8 @@ namespace System.Net.Http
         private async ValueTask<ReadOnlyMemory<byte>> ReadNextResponseHeaderLineAsync(
             bool async,
             bool foldedHeadersAllowed = false
-        ) {
+        )
+        {
             int previouslyScannedBytes = 0;
             while (true)
             {
@@ -1805,7 +1826,8 @@ namespace System.Net.Http
                                     _readOffset,
                                     lfIndex - _readOffset
                                 ) == -1
-                            ) {
+                            )
+                            {
                                 throw new HttpRequestException(
                                     SR.net_http_invalid_response_header_folder
                                 );
@@ -2091,7 +2113,8 @@ namespace System.Net.Http
             bool async,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(count <= _readLength - _readOffset);
 
             if (NetEventSource.Log.IsEnabled())
@@ -2116,7 +2139,8 @@ namespace System.Net.Http
             bool async,
             int bufferSize,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(destination != null);
 
             int remaining = _readLength - _readOffset;
@@ -2145,7 +2169,8 @@ namespace System.Net.Http
             bool async,
             int bufferSize,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             int remaining = _readLength - _readOffset;
             Debug.Assert(remaining > 0);
 
@@ -2171,7 +2196,8 @@ namespace System.Net.Http
             ulong length,
             int bufferSize,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(destination != null);
             Debug.Assert(length > 0);
 
@@ -2321,7 +2347,8 @@ namespace System.Net.Http
         public async ValueTask DrainResponseAsync(
             HttpResponseMessage response,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(_inUse);
 
             if (_connectionClose)

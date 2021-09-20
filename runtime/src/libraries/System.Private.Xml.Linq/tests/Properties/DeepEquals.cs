@@ -53,7 +53,8 @@ namespace System.Xml.Linq.Tests
             string target2,
             string data2,
             bool checkHashCode
-        ) {
+        )
+        {
             var p1 = new XProcessingInstruction(target1, data1);
             var p2 = new XProcessingInstruction(target2, data2);
 
@@ -331,7 +332,8 @@ namespace System.Xml.Linq.Tests
         private IEnumerable<object> ExpandAndProtectTextNodes(
             IEnumerable<object> source,
             int position
-        ) {
+        )
+        {
             foreach (object o in source)
             {
                 object t = (o is object[]) ? (o as object[])[position] : o;

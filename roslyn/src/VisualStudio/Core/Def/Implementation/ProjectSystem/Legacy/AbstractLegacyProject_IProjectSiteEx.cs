@@ -28,7 +28,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
         public void AddFileEx(
             [MarshalAs(UnmanagedType.LPWStr)] string filePath,
             [MarshalAs(UnmanagedType.LPWStr)] string linkMetadata
-        ) {
+        )
+        {
             // TODO: uncomment when fixing https://github.com/dotnet/roslyn/issues/5325
             //var sourceCodeKind = extension.Equals(".csx", StringComparison.OrdinalIgnoreCase)
             //    ? SourceCodeKind.Script
@@ -39,7 +40,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
         public void SetProperty(
             [MarshalAs(UnmanagedType.LPWStr)] string property,
             [MarshalAs(UnmanagedType.LPWStr)] string value
-        ) {
+        )
+        {
             // TODO: Handle the properties we care about.
         }
     }

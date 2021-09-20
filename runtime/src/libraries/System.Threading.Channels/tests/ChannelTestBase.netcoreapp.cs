@@ -26,7 +26,8 @@ namespace System.Threading.Channels.Tests
         [InlineData(true)]
         public async Task ReadAllAsync_UseMoveNextAsyncAfterCompleted_ReturnsFalse(
             bool completeWhilePending
-        ) {
+        )
+        {
             Channel<int> c = CreateChannel();
             IAsyncEnumerator<int> e = c.Reader.ReadAllAsync().GetAsyncEnumerator();
 
@@ -183,7 +184,8 @@ namespace System.Threading.Channels.Tests
         public void ReadAllAsync_MultipleSingleElementEnumerations_AllItemsEnumerated(
             bool sameEnumerable,
             bool dispose
-        ) {
+        )
+        {
             Channel<int> c = CreateChannel();
             IAsyncEnumerable<int> enumerable = c.Reader.ReadAllAsync();
 
@@ -211,7 +213,8 @@ namespace System.Threading.Channels.Tests
         [InlineData(true)]
         public async Task ReadAllAsync_DualConcurrentEnumeration_AllItemsEnumerated(
             bool sameEnumerable
-        ) {
+        )
+        {
             if (RequiresSingleReader)
             {
                 return;

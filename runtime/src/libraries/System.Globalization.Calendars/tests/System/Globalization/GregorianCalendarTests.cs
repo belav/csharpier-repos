@@ -51,7 +51,8 @@ namespace System.Globalization.Tests
         [InlineData(GregorianCalendarTypes.TransliteratedFrench + 1)]
         public void CalendarType_SetInvalidValue_ThrowsArgumentOutOfRangeException(
             GregorianCalendarTypes type
-        ) {
+        )
+        {
             GregorianCalendar calendar = ((GregorianCalendar)Calendar);
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "value",

@@ -28,7 +28,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 Check.NotNull(bindings, nameof(bindings))
                     .SelectMany(b => b.ConsumedProperties)
                     .ToArray()
-            ) {
+            )
+        {
             _bindings = bindings;
         }
 

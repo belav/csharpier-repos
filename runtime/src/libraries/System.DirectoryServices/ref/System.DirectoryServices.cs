@@ -12,78 +12,83 @@ namespace System.DirectoryServices
             System.Security.Principal.IdentityReference identity,
             System.DirectoryServices.ActiveDirectoryRights adRights,
             System.Security.AccessControl.AccessControlType type
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(int),
-            default(bool),
-            default(System.Security.AccessControl.InheritanceFlags),
-            default(System.Security.AccessControl.PropagationFlags),
-            default(System.Guid),
-            default(System.Guid),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(int),
+                default(bool),
+                default(System.Security.AccessControl.InheritanceFlags),
+                default(System.Security.AccessControl.PropagationFlags),
+                default(System.Guid),
+                default(System.Guid),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
         public ActiveDirectoryAccessRule(
             System.Security.Principal.IdentityReference identity,
             System.DirectoryServices.ActiveDirectoryRights adRights,
             System.Security.AccessControl.AccessControlType type,
             System.DirectoryServices.ActiveDirectorySecurityInheritance inheritanceType
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(int),
-            default(bool),
-            default(System.Security.AccessControl.InheritanceFlags),
-            default(System.Security.AccessControl.PropagationFlags),
-            default(System.Guid),
-            default(System.Guid),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(int),
+                default(bool),
+                default(System.Security.AccessControl.InheritanceFlags),
+                default(System.Security.AccessControl.PropagationFlags),
+                default(System.Guid),
+                default(System.Guid),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
         public ActiveDirectoryAccessRule(
             System.Security.Principal.IdentityReference identity,
             System.DirectoryServices.ActiveDirectoryRights adRights,
             System.Security.AccessControl.AccessControlType type,
             System.DirectoryServices.ActiveDirectorySecurityInheritance inheritanceType,
             System.Guid inheritedObjectType
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(int),
-            default(bool),
-            default(System.Security.AccessControl.InheritanceFlags),
-            default(System.Security.AccessControl.PropagationFlags),
-            default(System.Guid),
-            default(System.Guid),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(int),
+                default(bool),
+                default(System.Security.AccessControl.InheritanceFlags),
+                default(System.Security.AccessControl.PropagationFlags),
+                default(System.Guid),
+                default(System.Guid),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
         public ActiveDirectoryAccessRule(
             System.Security.Principal.IdentityReference identity,
             System.DirectoryServices.ActiveDirectoryRights adRights,
             System.Security.AccessControl.AccessControlType type,
             System.Guid objectType
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(int),
-            default(bool),
-            default(System.Security.AccessControl.InheritanceFlags),
-            default(System.Security.AccessControl.PropagationFlags),
-            default(System.Guid),
-            default(System.Guid),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(int),
+                default(bool),
+                default(System.Security.AccessControl.InheritanceFlags),
+                default(System.Security.AccessControl.PropagationFlags),
+                default(System.Guid),
+                default(System.Guid),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
         public ActiveDirectoryAccessRule(
             System.Security.Principal.IdentityReference identity,
             System.DirectoryServices.ActiveDirectoryRights adRights,
             System.Security.AccessControl.AccessControlType type,
             System.Guid objectType,
             System.DirectoryServices.ActiveDirectorySecurityInheritance inheritanceType
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(int),
-            default(bool),
-            default(System.Security.AccessControl.InheritanceFlags),
-            default(System.Security.AccessControl.PropagationFlags),
-            default(System.Guid),
-            default(System.Guid),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(int),
+                default(bool),
+                default(System.Security.AccessControl.InheritanceFlags),
+                default(System.Security.AccessControl.PropagationFlags),
+                default(System.Guid),
+                default(System.Guid),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
         public ActiveDirectoryAccessRule(
             System.Security.Principal.IdentityReference identity,
             System.DirectoryServices.ActiveDirectoryRights adRights,
@@ -91,16 +96,17 @@ namespace System.DirectoryServices
             System.Guid objectType,
             System.DirectoryServices.ActiveDirectorySecurityInheritance inheritanceType,
             System.Guid inheritedObjectType
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(int),
-            default(bool),
-            default(System.Security.AccessControl.InheritanceFlags),
-            default(System.Security.AccessControl.PropagationFlags),
-            default(System.Guid),
-            default(System.Guid),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(int),
+                default(bool),
+                default(System.Security.AccessControl.InheritanceFlags),
+                default(System.Security.AccessControl.PropagationFlags),
+                default(System.Guid),
+                default(System.Guid),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
         public System.DirectoryServices.ActiveDirectoryRights ActiveDirectoryRights
         {
             get { throw null; }
@@ -116,78 +122,83 @@ namespace System.DirectoryServices
             System.Security.Principal.IdentityReference identity,
             System.DirectoryServices.ActiveDirectoryRights adRights,
             System.Security.AccessControl.AuditFlags auditFlags
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(int),
-            default(bool),
-            default(System.Security.AccessControl.InheritanceFlags),
-            default(System.Security.AccessControl.PropagationFlags),
-            default(System.Guid),
-            default(System.Guid),
-            default(System.Security.AccessControl.AuditFlags)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(int),
+                default(bool),
+                default(System.Security.AccessControl.InheritanceFlags),
+                default(System.Security.AccessControl.PropagationFlags),
+                default(System.Guid),
+                default(System.Guid),
+                default(System.Security.AccessControl.AuditFlags)
+            ) { }
         public ActiveDirectoryAuditRule(
             System.Security.Principal.IdentityReference identity,
             System.DirectoryServices.ActiveDirectoryRights adRights,
             System.Security.AccessControl.AuditFlags auditFlags,
             System.DirectoryServices.ActiveDirectorySecurityInheritance inheritanceType
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(int),
-            default(bool),
-            default(System.Security.AccessControl.InheritanceFlags),
-            default(System.Security.AccessControl.PropagationFlags),
-            default(System.Guid),
-            default(System.Guid),
-            default(System.Security.AccessControl.AuditFlags)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(int),
+                default(bool),
+                default(System.Security.AccessControl.InheritanceFlags),
+                default(System.Security.AccessControl.PropagationFlags),
+                default(System.Guid),
+                default(System.Guid),
+                default(System.Security.AccessControl.AuditFlags)
+            ) { }
         public ActiveDirectoryAuditRule(
             System.Security.Principal.IdentityReference identity,
             System.DirectoryServices.ActiveDirectoryRights adRights,
             System.Security.AccessControl.AuditFlags auditFlags,
             System.DirectoryServices.ActiveDirectorySecurityInheritance inheritanceType,
             System.Guid inheritedObjectType
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(int),
-            default(bool),
-            default(System.Security.AccessControl.InheritanceFlags),
-            default(System.Security.AccessControl.PropagationFlags),
-            default(System.Guid),
-            default(System.Guid),
-            default(System.Security.AccessControl.AuditFlags)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(int),
+                default(bool),
+                default(System.Security.AccessControl.InheritanceFlags),
+                default(System.Security.AccessControl.PropagationFlags),
+                default(System.Guid),
+                default(System.Guid),
+                default(System.Security.AccessControl.AuditFlags)
+            ) { }
         public ActiveDirectoryAuditRule(
             System.Security.Principal.IdentityReference identity,
             System.DirectoryServices.ActiveDirectoryRights adRights,
             System.Security.AccessControl.AuditFlags auditFlags,
             System.Guid objectType
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(int),
-            default(bool),
-            default(System.Security.AccessControl.InheritanceFlags),
-            default(System.Security.AccessControl.PropagationFlags),
-            default(System.Guid),
-            default(System.Guid),
-            default(System.Security.AccessControl.AuditFlags)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(int),
+                default(bool),
+                default(System.Security.AccessControl.InheritanceFlags),
+                default(System.Security.AccessControl.PropagationFlags),
+                default(System.Guid),
+                default(System.Guid),
+                default(System.Security.AccessControl.AuditFlags)
+            ) { }
         public ActiveDirectoryAuditRule(
             System.Security.Principal.IdentityReference identity,
             System.DirectoryServices.ActiveDirectoryRights adRights,
             System.Security.AccessControl.AuditFlags auditFlags,
             System.Guid objectType,
             System.DirectoryServices.ActiveDirectorySecurityInheritance inheritanceType
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(int),
-            default(bool),
-            default(System.Security.AccessControl.InheritanceFlags),
-            default(System.Security.AccessControl.PropagationFlags),
-            default(System.Guid),
-            default(System.Guid),
-            default(System.Security.AccessControl.AuditFlags)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(int),
+                default(bool),
+                default(System.Security.AccessControl.InheritanceFlags),
+                default(System.Security.AccessControl.PropagationFlags),
+                default(System.Guid),
+                default(System.Guid),
+                default(System.Security.AccessControl.AuditFlags)
+            ) { }
         public ActiveDirectoryAuditRule(
             System.Security.Principal.IdentityReference identity,
             System.DirectoryServices.ActiveDirectoryRights adRights,
@@ -195,16 +206,17 @@ namespace System.DirectoryServices
             System.Guid objectType,
             System.DirectoryServices.ActiveDirectorySecurityInheritance inheritanceType,
             System.Guid inheritedObjectType
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(int),
-            default(bool),
-            default(System.Security.AccessControl.InheritanceFlags),
-            default(System.Security.AccessControl.PropagationFlags),
-            default(System.Guid),
-            default(System.Guid),
-            default(System.Security.AccessControl.AuditFlags)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(int),
+                default(bool),
+                default(System.Security.AccessControl.InheritanceFlags),
+                default(System.Security.AccessControl.PropagationFlags),
+                default(System.Guid),
+                default(System.Guid),
+                default(System.Security.AccessControl.AuditFlags)
+            ) { }
         public System.DirectoryServices.ActiveDirectoryRights ActiveDirectoryRights
         {
             get { throw null; }
@@ -260,7 +272,8 @@ namespace System.DirectoryServices
             System.Security.AccessControl.InheritanceFlags inheritanceFlags,
             System.Security.AccessControl.PropagationFlags propagationFlags,
             System.Security.AccessControl.AccessControlType type
-        ) {
+        )
+        {
             throw null;
         }
         public sealed override System.Security.AccessControl.AccessRule AccessRuleFactory(
@@ -272,7 +285,8 @@ namespace System.DirectoryServices
             System.Security.AccessControl.AccessControlType type,
             System.Guid objectGuid,
             System.Guid inheritedObjectGuid
-        ) {
+        )
+        {
             throw null;
         }
         public void AddAccessRule(System.DirectoryServices.ActiveDirectoryAccessRule rule) { }
@@ -284,7 +298,8 @@ namespace System.DirectoryServices
             System.Security.AccessControl.InheritanceFlags inheritanceFlags,
             System.Security.AccessControl.PropagationFlags propagationFlags,
             System.Security.AccessControl.AuditFlags flags
-        ) {
+        )
+        {
             throw null;
         }
         public sealed override System.Security.AccessControl.AuditRule AuditRuleFactory(
@@ -296,21 +311,24 @@ namespace System.DirectoryServices
             System.Security.AccessControl.AuditFlags flags,
             System.Guid objectGuid,
             System.Guid inheritedObjectGuid
-        ) {
+        )
+        {
             throw null;
         }
         public override bool ModifyAccessRule(
             System.Security.AccessControl.AccessControlModification modification,
             System.Security.AccessControl.AccessRule rule,
             out bool modified
-        ) {
+        )
+        {
             throw null;
         }
         public override bool ModifyAuditRule(
             System.Security.AccessControl.AccessControlModification modification,
             System.Security.AccessControl.AuditRule rule,
             out bool modified
-        ) {
+        )
+        {
             throw null;
         }
         public override void PurgeAccessRules(
@@ -371,60 +389,66 @@ namespace System.DirectoryServices
         public CreateChildAccessRule(
             System.Security.Principal.IdentityReference identity,
             System.Security.AccessControl.AccessControlType type
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(System.DirectoryServices.ActiveDirectoryRights),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(System.DirectoryServices.ActiveDirectoryRights),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
         public CreateChildAccessRule(
             System.Security.Principal.IdentityReference identity,
             System.Security.AccessControl.AccessControlType type,
             System.DirectoryServices.ActiveDirectorySecurityInheritance inheritanceType
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(System.DirectoryServices.ActiveDirectoryRights),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(System.DirectoryServices.ActiveDirectoryRights),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
         public CreateChildAccessRule(
             System.Security.Principal.IdentityReference identity,
             System.Security.AccessControl.AccessControlType type,
             System.DirectoryServices.ActiveDirectorySecurityInheritance inheritanceType,
             System.Guid inheritedObjectType
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(System.DirectoryServices.ActiveDirectoryRights),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(System.DirectoryServices.ActiveDirectoryRights),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
         public CreateChildAccessRule(
             System.Security.Principal.IdentityReference identity,
             System.Security.AccessControl.AccessControlType type,
             System.Guid childType
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(System.DirectoryServices.ActiveDirectoryRights),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(System.DirectoryServices.ActiveDirectoryRights),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
         public CreateChildAccessRule(
             System.Security.Principal.IdentityReference identity,
             System.Security.AccessControl.AccessControlType type,
             System.Guid childType,
             System.DirectoryServices.ActiveDirectorySecurityInheritance inheritanceType
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(System.DirectoryServices.ActiveDirectoryRights),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(System.DirectoryServices.ActiveDirectoryRights),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
         public CreateChildAccessRule(
             System.Security.Principal.IdentityReference identity,
             System.Security.AccessControl.AccessControlType type,
             System.Guid childType,
             System.DirectoryServices.ActiveDirectorySecurityInheritance inheritanceType,
             System.Guid inheritedObjectType
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(System.DirectoryServices.ActiveDirectoryRights),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(System.DirectoryServices.ActiveDirectoryRights),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
     }
     public sealed partial class DeleteChildAccessRule
         : System.DirectoryServices.ActiveDirectoryAccessRule
@@ -432,60 +456,66 @@ namespace System.DirectoryServices
         public DeleteChildAccessRule(
             System.Security.Principal.IdentityReference identity,
             System.Security.AccessControl.AccessControlType type
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(System.DirectoryServices.ActiveDirectoryRights),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(System.DirectoryServices.ActiveDirectoryRights),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
         public DeleteChildAccessRule(
             System.Security.Principal.IdentityReference identity,
             System.Security.AccessControl.AccessControlType type,
             System.DirectoryServices.ActiveDirectorySecurityInheritance inheritanceType
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(System.DirectoryServices.ActiveDirectoryRights),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(System.DirectoryServices.ActiveDirectoryRights),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
         public DeleteChildAccessRule(
             System.Security.Principal.IdentityReference identity,
             System.Security.AccessControl.AccessControlType type,
             System.DirectoryServices.ActiveDirectorySecurityInheritance inheritanceType,
             System.Guid inheritedObjectType
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(System.DirectoryServices.ActiveDirectoryRights),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(System.DirectoryServices.ActiveDirectoryRights),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
         public DeleteChildAccessRule(
             System.Security.Principal.IdentityReference identity,
             System.Security.AccessControl.AccessControlType type,
             System.Guid childType
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(System.DirectoryServices.ActiveDirectoryRights),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(System.DirectoryServices.ActiveDirectoryRights),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
         public DeleteChildAccessRule(
             System.Security.Principal.IdentityReference identity,
             System.Security.AccessControl.AccessControlType type,
             System.Guid childType,
             System.DirectoryServices.ActiveDirectorySecurityInheritance inheritanceType
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(System.DirectoryServices.ActiveDirectoryRights),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(System.DirectoryServices.ActiveDirectoryRights),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
         public DeleteChildAccessRule(
             System.Security.Principal.IdentityReference identity,
             System.Security.AccessControl.AccessControlType type,
             System.Guid childType,
             System.DirectoryServices.ActiveDirectorySecurityInheritance inheritanceType,
             System.Guid inheritedObjectType
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(System.DirectoryServices.ActiveDirectoryRights),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(System.DirectoryServices.ActiveDirectoryRights),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
     }
     public sealed partial class DeleteTreeAccessRule
         : System.DirectoryServices.ActiveDirectoryAccessRule
@@ -493,30 +523,33 @@ namespace System.DirectoryServices
         public DeleteTreeAccessRule(
             System.Security.Principal.IdentityReference identity,
             System.Security.AccessControl.AccessControlType type
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(System.DirectoryServices.ActiveDirectoryRights),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(System.DirectoryServices.ActiveDirectoryRights),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
         public DeleteTreeAccessRule(
             System.Security.Principal.IdentityReference identity,
             System.Security.AccessControl.AccessControlType type,
             System.DirectoryServices.ActiveDirectorySecurityInheritance inheritanceType
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(System.DirectoryServices.ActiveDirectoryRights),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(System.DirectoryServices.ActiveDirectoryRights),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
         public DeleteTreeAccessRule(
             System.Security.Principal.IdentityReference identity,
             System.Security.AccessControl.AccessControlType type,
             System.DirectoryServices.ActiveDirectorySecurityInheritance inheritanceType,
             System.Guid inheritedObjectType
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(System.DirectoryServices.ActiveDirectoryRights),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(System.DirectoryServices.ActiveDirectoryRights),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
     }
     public enum DereferenceAlias
     {
@@ -643,13 +676,15 @@ namespace System.DirectoryServices
         public void CommitChanges() { }
         public System.DirectoryServices.DirectoryEntry CopyTo(
             System.DirectoryServices.DirectoryEntry newParent
-        ) {
+        )
+        {
             throw null;
         }
         public System.DirectoryServices.DirectoryEntry CopyTo(
             System.DirectoryServices.DirectoryEntry newParent,
             string? newName
-        ) {
+        )
+        {
             throw null;
         }
         public void DeleteTree() { }
@@ -1144,60 +1179,66 @@ namespace System.DirectoryServices
         public ExtendedRightAccessRule(
             System.Security.Principal.IdentityReference identity,
             System.Security.AccessControl.AccessControlType type
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(System.DirectoryServices.ActiveDirectoryRights),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(System.DirectoryServices.ActiveDirectoryRights),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
         public ExtendedRightAccessRule(
             System.Security.Principal.IdentityReference identity,
             System.Security.AccessControl.AccessControlType type,
             System.DirectoryServices.ActiveDirectorySecurityInheritance inheritanceType
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(System.DirectoryServices.ActiveDirectoryRights),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(System.DirectoryServices.ActiveDirectoryRights),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
         public ExtendedRightAccessRule(
             System.Security.Principal.IdentityReference identity,
             System.Security.AccessControl.AccessControlType type,
             System.DirectoryServices.ActiveDirectorySecurityInheritance inheritanceType,
             System.Guid inheritedObjectType
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(System.DirectoryServices.ActiveDirectoryRights),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(System.DirectoryServices.ActiveDirectoryRights),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
         public ExtendedRightAccessRule(
             System.Security.Principal.IdentityReference identity,
             System.Security.AccessControl.AccessControlType type,
             System.Guid extendedRightType
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(System.DirectoryServices.ActiveDirectoryRights),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(System.DirectoryServices.ActiveDirectoryRights),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
         public ExtendedRightAccessRule(
             System.Security.Principal.IdentityReference identity,
             System.Security.AccessControl.AccessControlType type,
             System.Guid extendedRightType,
             System.DirectoryServices.ActiveDirectorySecurityInheritance inheritanceType
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(System.DirectoryServices.ActiveDirectoryRights),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(System.DirectoryServices.ActiveDirectoryRights),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
         public ExtendedRightAccessRule(
             System.Security.Principal.IdentityReference identity,
             System.Security.AccessControl.AccessControlType type,
             System.Guid extendedRightType,
             System.DirectoryServices.ActiveDirectorySecurityInheritance inheritanceType,
             System.Guid inheritedObjectType
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(System.DirectoryServices.ActiveDirectoryRights),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(System.DirectoryServices.ActiveDirectoryRights),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
     }
     public sealed partial class ListChildrenAccessRule
         : System.DirectoryServices.ActiveDirectoryAccessRule
@@ -1205,30 +1246,33 @@ namespace System.DirectoryServices
         public ListChildrenAccessRule(
             System.Security.Principal.IdentityReference identity,
             System.Security.AccessControl.AccessControlType type
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(System.DirectoryServices.ActiveDirectoryRights),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(System.DirectoryServices.ActiveDirectoryRights),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
         public ListChildrenAccessRule(
             System.Security.Principal.IdentityReference identity,
             System.Security.AccessControl.AccessControlType type,
             System.DirectoryServices.ActiveDirectorySecurityInheritance inheritanceType
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(System.DirectoryServices.ActiveDirectoryRights),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(System.DirectoryServices.ActiveDirectoryRights),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
         public ListChildrenAccessRule(
             System.Security.Principal.IdentityReference identity,
             System.Security.AccessControl.AccessControlType type,
             System.DirectoryServices.ActiveDirectorySecurityInheritance inheritanceType,
             System.Guid inheritedObjectType
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(System.DirectoryServices.ActiveDirectoryRights),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(System.DirectoryServices.ActiveDirectoryRights),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
     }
     public enum PasswordEncodingMethod
     {
@@ -1247,53 +1291,58 @@ namespace System.DirectoryServices
             System.Security.Principal.IdentityReference identity,
             System.Security.AccessControl.AccessControlType type,
             System.DirectoryServices.PropertyAccess access
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(System.DirectoryServices.ActiveDirectoryRights),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(System.DirectoryServices.ActiveDirectoryRights),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
         public PropertyAccessRule(
             System.Security.Principal.IdentityReference identity,
             System.Security.AccessControl.AccessControlType type,
             System.DirectoryServices.PropertyAccess access,
             System.DirectoryServices.ActiveDirectorySecurityInheritance inheritanceType
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(System.DirectoryServices.ActiveDirectoryRights),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(System.DirectoryServices.ActiveDirectoryRights),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
         public PropertyAccessRule(
             System.Security.Principal.IdentityReference identity,
             System.Security.AccessControl.AccessControlType type,
             System.DirectoryServices.PropertyAccess access,
             System.DirectoryServices.ActiveDirectorySecurityInheritance inheritanceType,
             System.Guid inheritedObjectType
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(System.DirectoryServices.ActiveDirectoryRights),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(System.DirectoryServices.ActiveDirectoryRights),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
         public PropertyAccessRule(
             System.Security.Principal.IdentityReference identity,
             System.Security.AccessControl.AccessControlType type,
             System.DirectoryServices.PropertyAccess access,
             System.Guid propertyType
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(System.DirectoryServices.ActiveDirectoryRights),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(System.DirectoryServices.ActiveDirectoryRights),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
         public PropertyAccessRule(
             System.Security.Principal.IdentityReference identity,
             System.Security.AccessControl.AccessControlType type,
             System.DirectoryServices.PropertyAccess access,
             System.Guid propertyType,
             System.DirectoryServices.ActiveDirectorySecurityInheritance inheritanceType
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(System.DirectoryServices.ActiveDirectoryRights),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(System.DirectoryServices.ActiveDirectoryRights),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
         public PropertyAccessRule(
             System.Security.Principal.IdentityReference identity,
             System.Security.AccessControl.AccessControlType type,
@@ -1301,11 +1350,12 @@ namespace System.DirectoryServices
             System.Guid propertyType,
             System.DirectoryServices.ActiveDirectorySecurityInheritance inheritanceType,
             System.Guid inheritedObjectType
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(System.DirectoryServices.ActiveDirectoryRights),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(System.DirectoryServices.ActiveDirectoryRights),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
     }
     public partial class PropertyCollection
         : System.Collections.ICollection,
@@ -1384,22 +1434,24 @@ namespace System.DirectoryServices
             System.Security.AccessControl.AccessControlType type,
             System.DirectoryServices.PropertyAccess access,
             System.Guid propertySetType
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(System.DirectoryServices.ActiveDirectoryRights),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(System.DirectoryServices.ActiveDirectoryRights),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
         public PropertySetAccessRule(
             System.Security.Principal.IdentityReference identity,
             System.Security.AccessControl.AccessControlType type,
             System.DirectoryServices.PropertyAccess access,
             System.Guid propertySetType,
             System.DirectoryServices.ActiveDirectorySecurityInheritance inheritanceType
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(System.DirectoryServices.ActiveDirectoryRights),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(System.DirectoryServices.ActiveDirectoryRights),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
         public PropertySetAccessRule(
             System.Security.Principal.IdentityReference identity,
             System.Security.AccessControl.AccessControlType type,
@@ -1407,11 +1459,12 @@ namespace System.DirectoryServices
             System.Guid propertySetType,
             System.DirectoryServices.ActiveDirectorySecurityInheritance inheritanceType,
             System.Guid inheritedObjectType
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(System.DirectoryServices.ActiveDirectoryRights),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(System.DirectoryServices.ActiveDirectoryRights),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
     }
     public partial class PropertyValueCollection : System.Collections.CollectionBase
     {
@@ -1716,7 +1769,8 @@ namespace System.DirectoryServices.ActiveDirectory
         public static System.DirectoryServices.ActiveDirectory.ActiveDirectoryInterSiteTransport FindByTransportType(
             System.DirectoryServices.ActiveDirectory.DirectoryContext context,
             System.DirectoryServices.ActiveDirectory.ActiveDirectoryTransportType transport
-        ) {
+        )
+        {
             throw null;
         }
         public System.DirectoryServices.DirectoryEntry GetDirectoryEntry()
@@ -1909,7 +1963,8 @@ namespace System.DirectoryServices.ActiveDirectory
         }
         public System.DirectoryServices.ActiveDirectory.ReadOnlyActiveDirectorySchemaClassCollection FindAllClasses(
             System.DirectoryServices.ActiveDirectory.SchemaClassType type
-        ) {
+        )
+        {
             throw null;
         }
         public System.DirectoryServices.ActiveDirectory.ReadOnlyActiveDirectorySchemaClassCollection FindAllDefunctClasses()
@@ -1926,27 +1981,32 @@ namespace System.DirectoryServices.ActiveDirectory
         }
         public System.DirectoryServices.ActiveDirectory.ReadOnlyActiveDirectorySchemaPropertyCollection FindAllProperties(
             System.DirectoryServices.ActiveDirectory.PropertyTypes type
-        ) {
+        )
+        {
             throw null;
         }
         public System.DirectoryServices.ActiveDirectory.ActiveDirectorySchemaClass FindClass(
             string ldapDisplayName
-        ) {
+        )
+        {
             throw null;
         }
         public System.DirectoryServices.ActiveDirectory.ActiveDirectorySchemaClass FindDefunctClass(
             string commonName
-        ) {
+        )
+        {
             throw null;
         }
         public System.DirectoryServices.ActiveDirectory.ActiveDirectorySchemaProperty FindDefunctProperty(
             string commonName
-        ) {
+        )
+        {
             throw null;
         }
         public System.DirectoryServices.ActiveDirectory.ActiveDirectorySchemaProperty FindProperty(
             string ldapDisplayName
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DirectoryServices.ActiveDirectory.ActiveDirectorySchema GetCurrentSchema()
@@ -1959,7 +2019,8 @@ namespace System.DirectoryServices.ActiveDirectory
         }
         public static System.DirectoryServices.ActiveDirectory.ActiveDirectorySchema GetSchema(
             System.DirectoryServices.ActiveDirectory.DirectoryContext context
-        ) {
+        )
+        {
             throw null;
         }
         public void RefreshSchema() { }
@@ -2039,7 +2100,8 @@ namespace System.DirectoryServices.ActiveDirectory
         public static System.DirectoryServices.ActiveDirectory.ActiveDirectorySchemaClass FindByName(
             System.DirectoryServices.ActiveDirectory.DirectoryContext context,
             string ldapDisplayName
-        ) {
+        )
+        {
             throw null;
         }
         public System.DirectoryServices.ActiveDirectory.ReadOnlyActiveDirectorySchemaPropertyCollection GetAllProperties()
@@ -2066,7 +2128,8 @@ namespace System.DirectoryServices.ActiveDirectory
         }
         public int Add(
             System.DirectoryServices.ActiveDirectory.ActiveDirectorySchemaClass schemaClass
-        ) {
+        )
+        {
             throw null;
         }
         public void AddRange(
@@ -2080,7 +2143,8 @@ namespace System.DirectoryServices.ActiveDirectory
         ) { }
         public bool Contains(
             System.DirectoryServices.ActiveDirectory.ActiveDirectorySchemaClass schemaClass
-        ) {
+        )
+        {
             throw null;
         }
         public void CopyTo(
@@ -2089,7 +2153,8 @@ namespace System.DirectoryServices.ActiveDirectory
         ) { }
         public int IndexOf(
             System.DirectoryServices.ActiveDirectory.ActiveDirectorySchemaClass schemaClass
-        ) {
+        )
+        {
             throw null;
         }
         public void Insert(
@@ -2204,7 +2269,8 @@ namespace System.DirectoryServices.ActiveDirectory
         public static System.DirectoryServices.ActiveDirectory.ActiveDirectorySchemaProperty FindByName(
             System.DirectoryServices.ActiveDirectory.DirectoryContext context,
             string ldapDisplayName
-        ) {
+        )
+        {
             throw null;
         }
         public System.DirectoryServices.DirectoryEntry GetDirectoryEntry()
@@ -2227,7 +2293,8 @@ namespace System.DirectoryServices.ActiveDirectory
         }
         public int Add(
             System.DirectoryServices.ActiveDirectory.ActiveDirectorySchemaProperty schemaProperty
-        ) {
+        )
+        {
             throw null;
         }
         public void AddRange(
@@ -2241,7 +2308,8 @@ namespace System.DirectoryServices.ActiveDirectory
         ) { }
         public bool Contains(
             System.DirectoryServices.ActiveDirectory.ActiveDirectorySchemaProperty schemaProperty
-        ) {
+        )
+        {
             throw null;
         }
         public void CopyTo(
@@ -2250,7 +2318,8 @@ namespace System.DirectoryServices.ActiveDirectory
         ) { }
         public int IndexOf(
             System.DirectoryServices.ActiveDirectory.ActiveDirectorySchemaProperty schemaProperty
-        ) {
+        )
+        {
             throw null;
         }
         public void Insert(
@@ -2370,7 +2439,8 @@ namespace System.DirectoryServices.ActiveDirectory
         public static System.DirectoryServices.ActiveDirectory.ActiveDirectorySite FindByName(
             System.DirectoryServices.ActiveDirectory.DirectoryContext context,
             string siteName
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DirectoryServices.ActiveDirectory.ActiveDirectorySite GetComputerSite()
@@ -2493,14 +2563,16 @@ namespace System.DirectoryServices.ActiveDirectory
         public static System.DirectoryServices.ActiveDirectory.ActiveDirectorySiteLink FindByName(
             System.DirectoryServices.ActiveDirectory.DirectoryContext context,
             string siteLinkName
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DirectoryServices.ActiveDirectory.ActiveDirectorySiteLink FindByName(
             System.DirectoryServices.ActiveDirectory.DirectoryContext context,
             string siteLinkName,
             System.DirectoryServices.ActiveDirectory.ActiveDirectoryTransportType transport
-        ) {
+        )
+        {
             throw null;
         }
         public System.DirectoryServices.DirectoryEntry GetDirectoryEntry()
@@ -2542,14 +2614,16 @@ namespace System.DirectoryServices.ActiveDirectory
         public static System.DirectoryServices.ActiveDirectory.ActiveDirectorySiteLinkBridge FindByName(
             System.DirectoryServices.ActiveDirectory.DirectoryContext context,
             string bridgeName
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DirectoryServices.ActiveDirectory.ActiveDirectorySiteLinkBridge FindByName(
             System.DirectoryServices.ActiveDirectory.DirectoryContext context,
             string bridgeName,
             System.DirectoryServices.ActiveDirectory.ActiveDirectoryTransportType transport
-        ) {
+        )
+        {
             throw null;
         }
         public System.DirectoryServices.DirectoryEntry GetDirectoryEntry()
@@ -2652,7 +2726,8 @@ namespace System.DirectoryServices.ActiveDirectory
         public static System.DirectoryServices.ActiveDirectory.ActiveDirectorySubnet FindByName(
             System.DirectoryServices.ActiveDirectory.DirectoryContext context,
             string subnetName
-        ) {
+        )
+        {
             throw null;
         }
         public System.DirectoryServices.DirectoryEntry GetDirectoryEntry()
@@ -2795,18 +2870,21 @@ namespace System.DirectoryServices.ActiveDirectory
         public static System.DirectoryServices.ActiveDirectory.AdamInstanceCollection FindAll(
             System.DirectoryServices.ActiveDirectory.DirectoryContext context,
             string partitionName
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DirectoryServices.ActiveDirectory.AdamInstance FindOne(
             System.DirectoryServices.ActiveDirectory.DirectoryContext context,
             string partitionName
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DirectoryServices.ActiveDirectory.AdamInstance GetAdamInstance(
             System.DirectoryServices.ActiveDirectory.DirectoryContext context
-        ) {
+        )
+        {
             throw null;
         }
         public override System.DirectoryServices.ActiveDirectory.ReplicationNeighborCollection GetAllReplicationNeighbors()
@@ -2819,17 +2897,20 @@ namespace System.DirectoryServices.ActiveDirectory
         }
         public override System.DirectoryServices.ActiveDirectory.ReplicationCursorCollection GetReplicationCursors(
             string partition
-        ) {
+        )
+        {
             throw null;
         }
         public override System.DirectoryServices.ActiveDirectory.ActiveDirectoryReplicationMetadata GetReplicationMetadata(
             string objectPath
-        ) {
+        )
+        {
             throw null;
         }
         public override System.DirectoryServices.ActiveDirectory.ReplicationNeighborCollection GetReplicationNeighbors(
             string partition
-        ) {
+        )
+        {
             throw null;
         }
         public override System.DirectoryServices.ActiveDirectory.ReplicationOperationInformation GetReplicationOperationInformation()
@@ -2919,7 +3000,8 @@ namespace System.DirectoryServices.ActiveDirectory
         }
         public System.DirectoryServices.ActiveDirectory.ReadOnlyDirectoryServerCollection FindAllDirectoryServers(
             string siteName
-        ) {
+        )
+        {
             throw null;
         }
         public System.DirectoryServices.ActiveDirectory.ReadOnlyDirectoryServerCollection FindAllDiscoverableDirectoryServers()
@@ -2928,13 +3010,15 @@ namespace System.DirectoryServices.ActiveDirectory
         }
         public System.DirectoryServices.ActiveDirectory.ReadOnlyDirectoryServerCollection FindAllDiscoverableDirectoryServers(
             string siteName
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DirectoryServices.ActiveDirectory.ApplicationPartition FindByName(
             System.DirectoryServices.ActiveDirectory.DirectoryContext context,
             string distinguishedName
-        ) {
+        )
+        {
             throw null;
         }
         public System.DirectoryServices.ActiveDirectory.DirectoryServer FindDirectoryServer()
@@ -2943,23 +3027,27 @@ namespace System.DirectoryServices.ActiveDirectory
         }
         public System.DirectoryServices.ActiveDirectory.DirectoryServer FindDirectoryServer(
             bool forceRediscovery
-        ) {
+        )
+        {
             throw null;
         }
         public System.DirectoryServices.ActiveDirectory.DirectoryServer FindDirectoryServer(
             string siteName
-        ) {
+        )
+        {
             throw null;
         }
         public System.DirectoryServices.ActiveDirectory.DirectoryServer FindDirectoryServer(
             string siteName,
             bool forceRediscovery
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DirectoryServices.ActiveDirectory.ApplicationPartition GetApplicationPartition(
             System.DirectoryServices.ActiveDirectory.DirectoryContext context
-        ) {
+        )
+        {
             throw null;
         }
         public override System.DirectoryServices.DirectoryEntry GetDirectoryEntry()
@@ -2977,7 +3065,8 @@ namespace System.DirectoryServices.ActiveDirectory
         }
         public bool Contains(
             System.DirectoryServices.ActiveDirectory.ApplicationPartition applicationPartition
-        ) {
+        )
+        {
             throw null;
         }
         public void CopyTo(
@@ -2986,7 +3075,8 @@ namespace System.DirectoryServices.ActiveDirectory
         ) { }
         public int IndexOf(
             System.DirectoryServices.ActiveDirectory.ApplicationPartition applicationPartition
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -3081,13 +3171,15 @@ namespace System.DirectoryServices.ActiveDirectory
         }
         public System.DirectoryServices.ActiveDirectory.AdamInstance FindAdamInstance(
             string partitionName
-        ) {
+        )
+        {
             throw null;
         }
         public System.DirectoryServices.ActiveDirectory.AdamInstance FindAdamInstance(
             string? partitionName,
             string siteName
-        ) {
+        )
+        {
             throw null;
         }
         public System.DirectoryServices.ActiveDirectory.AdamInstanceCollection FindAllAdamInstances()
@@ -3096,18 +3188,21 @@ namespace System.DirectoryServices.ActiveDirectory
         }
         public System.DirectoryServices.ActiveDirectory.AdamInstanceCollection FindAllAdamInstances(
             string? partitionName
-        ) {
+        )
+        {
             throw null;
         }
         public System.DirectoryServices.ActiveDirectory.AdamInstanceCollection FindAllAdamInstances(
             string? partitionName,
             string? siteName
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DirectoryServices.ActiveDirectory.ConfigurationSet GetConfigurationSet(
             System.DirectoryServices.ActiveDirectory.DirectoryContext context
-        ) {
+        )
+        {
             throw null;
         }
         public System.DirectoryServices.DirectoryEntry GetDirectoryEntry()
@@ -3310,7 +3405,8 @@ namespace System.DirectoryServices.ActiveDirectory
         }
         public System.DirectoryServices.ActiveDirectory.DomainControllerCollection FindAllDiscoverableDomainControllers(
             string siteName
-        ) {
+        )
+        {
             throw null;
         }
         public System.DirectoryServices.ActiveDirectory.DomainControllerCollection FindAllDomainControllers()
@@ -3319,7 +3415,8 @@ namespace System.DirectoryServices.ActiveDirectory
         }
         public System.DirectoryServices.ActiveDirectory.DomainControllerCollection FindAllDomainControllers(
             string siteName
-        ) {
+        )
+        {
             throw null;
         }
         public System.DirectoryServices.ActiveDirectory.DomainController FindDomainController()
@@ -3328,18 +3425,21 @@ namespace System.DirectoryServices.ActiveDirectory
         }
         public System.DirectoryServices.ActiveDirectory.DomainController FindDomainController(
             System.DirectoryServices.ActiveDirectory.LocatorOptions flag
-        ) {
+        )
+        {
             throw null;
         }
         public System.DirectoryServices.ActiveDirectory.DomainController FindDomainController(
             string siteName
-        ) {
+        )
+        {
             throw null;
         }
         public System.DirectoryServices.ActiveDirectory.DomainController FindDomainController(
             string siteName,
             System.DirectoryServices.ActiveDirectory.LocatorOptions flag
-        ) {
+        )
+        {
             throw null;
         }
         public System.DirectoryServices.ActiveDirectory.TrustRelationshipInformationCollection GetAllTrustRelationships()
@@ -3360,7 +3460,8 @@ namespace System.DirectoryServices.ActiveDirectory
         }
         public static System.DirectoryServices.ActiveDirectory.Domain GetDomain(
             System.DirectoryServices.ActiveDirectory.DirectoryContext context
-        ) {
+        )
+        {
             throw null;
         }
         public bool GetSelectiveAuthenticationStatus(string targetDomainName)
@@ -3373,7 +3474,8 @@ namespace System.DirectoryServices.ActiveDirectory
         }
         public System.DirectoryServices.ActiveDirectory.TrustRelationshipInformation GetTrustRelationship(
             string targetDomainName
-        ) {
+        )
+        {
             throw null;
         }
         public void RaiseDomainFunctionality(
@@ -3487,37 +3589,43 @@ namespace System.DirectoryServices.ActiveDirectory
         ~DomainController() { }
         public static System.DirectoryServices.ActiveDirectory.DomainControllerCollection FindAll(
             System.DirectoryServices.ActiveDirectory.DirectoryContext context
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DirectoryServices.ActiveDirectory.DomainControllerCollection FindAll(
             System.DirectoryServices.ActiveDirectory.DirectoryContext context,
             string siteName
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DirectoryServices.ActiveDirectory.DomainController FindOne(
             System.DirectoryServices.ActiveDirectory.DirectoryContext context
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DirectoryServices.ActiveDirectory.DomainController FindOne(
             System.DirectoryServices.ActiveDirectory.DirectoryContext context,
             System.DirectoryServices.ActiveDirectory.LocatorOptions flag
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DirectoryServices.ActiveDirectory.DomainController FindOne(
             System.DirectoryServices.ActiveDirectory.DirectoryContext context,
             string siteName
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DirectoryServices.ActiveDirectory.DomainController FindOne(
             System.DirectoryServices.ActiveDirectory.DirectoryContext context,
             string siteName,
             System.DirectoryServices.ActiveDirectory.LocatorOptions flag
-        ) {
+        )
+        {
             throw null;
         }
         public override System.DirectoryServices.ActiveDirectory.ReplicationNeighborCollection GetAllReplicationNeighbors()
@@ -3530,7 +3638,8 @@ namespace System.DirectoryServices.ActiveDirectory
         }
         public static System.DirectoryServices.ActiveDirectory.DomainController GetDomainController(
             System.DirectoryServices.ActiveDirectory.DirectoryContext context
-        ) {
+        )
+        {
             throw null;
         }
         public override System.DirectoryServices.ActiveDirectory.ReplicationFailureCollection GetReplicationConnectionFailures()
@@ -3539,17 +3648,20 @@ namespace System.DirectoryServices.ActiveDirectory
         }
         public override System.DirectoryServices.ActiveDirectory.ReplicationCursorCollection GetReplicationCursors(
             string partition
-        ) {
+        )
+        {
             throw null;
         }
         public override System.DirectoryServices.ActiveDirectory.ActiveDirectoryReplicationMetadata GetReplicationMetadata(
             string objectPath
-        ) {
+        )
+        {
             throw null;
         }
         public override System.DirectoryServices.ActiveDirectory.ReplicationNeighborCollection GetReplicationNeighbors(
             string partition
-        ) {
+        )
+        {
             throw null;
         }
         public override System.DirectoryServices.ActiveDirectory.ReplicationOperationInformation GetReplicationOperationInformation()
@@ -3582,7 +3694,8 @@ namespace System.DirectoryServices.ActiveDirectory
         }
         public bool Contains(
             System.DirectoryServices.ActiveDirectory.DomainController domainController
-        ) {
+        )
+        {
             throw null;
         }
         public void CopyTo(
@@ -3591,7 +3704,8 @@ namespace System.DirectoryServices.ActiveDirectory
         ) { }
         public int IndexOf(
             System.DirectoryServices.ActiveDirectory.DomainController domainController
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -3675,7 +3789,8 @@ namespace System.DirectoryServices.ActiveDirectory
         }
         public System.DirectoryServices.ActiveDirectory.GlobalCatalogCollection FindAllDiscoverableGlobalCatalogs(
             string siteName
-        ) {
+        )
+        {
             throw null;
         }
         public System.DirectoryServices.ActiveDirectory.GlobalCatalogCollection FindAllGlobalCatalogs()
@@ -3684,7 +3799,8 @@ namespace System.DirectoryServices.ActiveDirectory
         }
         public System.DirectoryServices.ActiveDirectory.GlobalCatalogCollection FindAllGlobalCatalogs(
             string siteName
-        ) {
+        )
+        {
             throw null;
         }
         public System.DirectoryServices.ActiveDirectory.GlobalCatalog FindGlobalCatalog()
@@ -3693,18 +3809,21 @@ namespace System.DirectoryServices.ActiveDirectory
         }
         public System.DirectoryServices.ActiveDirectory.GlobalCatalog FindGlobalCatalog(
             System.DirectoryServices.ActiveDirectory.LocatorOptions flag
-        ) {
+        )
+        {
             throw null;
         }
         public System.DirectoryServices.ActiveDirectory.GlobalCatalog FindGlobalCatalog(
             string siteName
-        ) {
+        )
+        {
             throw null;
         }
         public System.DirectoryServices.ActiveDirectory.GlobalCatalog FindGlobalCatalog(
             string siteName,
             System.DirectoryServices.ActiveDirectory.LocatorOptions flag
-        ) {
+        )
+        {
             throw null;
         }
         public System.DirectoryServices.ActiveDirectory.TrustRelationshipInformationCollection GetAllTrustRelationships()
@@ -3717,7 +3836,8 @@ namespace System.DirectoryServices.ActiveDirectory
         }
         public static System.DirectoryServices.ActiveDirectory.Forest GetForest(
             System.DirectoryServices.ActiveDirectory.DirectoryContext context
-        ) {
+        )
+        {
             throw null;
         }
         public bool GetSelectiveAuthenticationStatus(string targetForestName)
@@ -3730,7 +3850,8 @@ namespace System.DirectoryServices.ActiveDirectory
         }
         public System.DirectoryServices.ActiveDirectory.ForestTrustRelationshipInformation GetTrustRelationship(
             string targetForestName
-        ) {
+        )
+        {
             throw null;
         }
         public void RaiseForestFunctionality(
@@ -3816,7 +3937,8 @@ namespace System.DirectoryServices.ActiveDirectory
         }
         public bool Contains(
             System.DirectoryServices.ActiveDirectory.ForestTrustDomainInformation information
-        ) {
+        )
+        {
             throw null;
         }
         public void CopyTo(
@@ -3825,7 +3947,8 @@ namespace System.DirectoryServices.ActiveDirectory
         ) { }
         public int IndexOf(
             System.DirectoryServices.ActiveDirectory.ForestTrustDomainInformation information
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -3888,7 +4011,8 @@ namespace System.DirectoryServices.ActiveDirectory
         }
         public bool Contains(
             System.DirectoryServices.ActiveDirectory.ForestTrustRelationshipCollision collision
-        ) {
+        )
+        {
             throw null;
         }
         public void CopyTo(
@@ -3897,7 +4021,8 @@ namespace System.DirectoryServices.ActiveDirectory
         ) { }
         public int IndexOf(
             System.DirectoryServices.ActiveDirectory.ForestTrustRelationshipCollision collision
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -3932,13 +4057,15 @@ namespace System.DirectoryServices.ActiveDirectory
         }
         public static new System.DirectoryServices.ActiveDirectory.GlobalCatalogCollection FindAll(
             System.DirectoryServices.ActiveDirectory.DirectoryContext context
-        ) {
+        )
+        {
             throw null;
         }
         public static new System.DirectoryServices.ActiveDirectory.GlobalCatalogCollection FindAll(
             System.DirectoryServices.ActiveDirectory.DirectoryContext context,
             string siteName
-        ) {
+        )
+        {
             throw null;
         }
         public System.DirectoryServices.ActiveDirectory.ReadOnlyActiveDirectorySchemaPropertyCollection FindAllProperties()
@@ -3947,26 +4074,30 @@ namespace System.DirectoryServices.ActiveDirectory
         }
         public static new System.DirectoryServices.ActiveDirectory.GlobalCatalog FindOne(
             System.DirectoryServices.ActiveDirectory.DirectoryContext context
-        ) {
+        )
+        {
             throw null;
         }
         public static new System.DirectoryServices.ActiveDirectory.GlobalCatalog FindOne(
             System.DirectoryServices.ActiveDirectory.DirectoryContext context,
             System.DirectoryServices.ActiveDirectory.LocatorOptions flag
-        ) {
+        )
+        {
             throw null;
         }
         public static new System.DirectoryServices.ActiveDirectory.GlobalCatalog FindOne(
             System.DirectoryServices.ActiveDirectory.DirectoryContext context,
             string siteName
-        ) {
+        )
+        {
             throw null;
         }
         public static new System.DirectoryServices.ActiveDirectory.GlobalCatalog FindOne(
             System.DirectoryServices.ActiveDirectory.DirectoryContext context,
             string siteName,
             System.DirectoryServices.ActiveDirectory.LocatorOptions flag
-        ) {
+        )
+        {
             throw null;
         }
         public override System.DirectoryServices.DirectorySearcher GetDirectorySearcher()
@@ -3975,7 +4106,8 @@ namespace System.DirectoryServices.ActiveDirectory
         }
         public static System.DirectoryServices.ActiveDirectory.GlobalCatalog GetGlobalCatalog(
             System.DirectoryServices.ActiveDirectory.DirectoryContext context
-        ) {
+        )
+        {
             throw null;
         }
         public override bool IsGlobalCatalog()
@@ -4068,7 +4200,8 @@ namespace System.DirectoryServices.ActiveDirectory
         }
         public bool Contains(
             System.DirectoryServices.ActiveDirectory.ActiveDirectorySchemaClass schemaClass
-        ) {
+        )
+        {
             throw null;
         }
         public void CopyTo(
@@ -4077,7 +4210,8 @@ namespace System.DirectoryServices.ActiveDirectory
         ) { }
         public int IndexOf(
             System.DirectoryServices.ActiveDirectory.ActiveDirectorySchemaClass schemaClass
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -4091,7 +4225,8 @@ namespace System.DirectoryServices.ActiveDirectory
         }
         public bool Contains(
             System.DirectoryServices.ActiveDirectory.ActiveDirectorySchemaProperty schemaProperty
-        ) {
+        )
+        {
             throw null;
         }
         public void CopyTo(
@@ -4100,7 +4235,8 @@ namespace System.DirectoryServices.ActiveDirectory
         ) { }
         public int IndexOf(
             System.DirectoryServices.ActiveDirectory.ActiveDirectorySchemaProperty schemaProperty
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -4114,7 +4250,8 @@ namespace System.DirectoryServices.ActiveDirectory
         }
         public bool Contains(
             System.DirectoryServices.ActiveDirectory.DirectoryServer directoryServer
-        ) {
+        )
+        {
             throw null;
         }
         public void CopyTo(
@@ -4156,7 +4293,8 @@ namespace System.DirectoryServices.ActiveDirectory
         }
         public bool Contains(
             System.DirectoryServices.ActiveDirectory.ActiveDirectorySiteLinkBridge bridge
-        ) {
+        )
+        {
             throw null;
         }
         public void CopyTo(
@@ -4165,7 +4303,8 @@ namespace System.DirectoryServices.ActiveDirectory
         ) { }
         public int IndexOf(
             System.DirectoryServices.ActiveDirectory.ActiveDirectorySiteLinkBridge bridge
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -4294,7 +4433,8 @@ namespace System.DirectoryServices.ActiveDirectory
         public static System.DirectoryServices.ActiveDirectory.ReplicationConnection FindByName(
             System.DirectoryServices.ActiveDirectory.DirectoryContext context,
             string name
-        ) {
+        )
+        {
             throw null;
         }
         public System.DirectoryServices.DirectoryEntry GetDirectoryEntry()
@@ -4316,7 +4456,8 @@ namespace System.DirectoryServices.ActiveDirectory
         }
         public bool Contains(
             System.DirectoryServices.ActiveDirectory.ReplicationConnection connection
-        ) {
+        )
+        {
             throw null;
         }
         public void CopyTo(
@@ -4325,7 +4466,8 @@ namespace System.DirectoryServices.ActiveDirectory
         ) { }
         public int IndexOf(
             System.DirectoryServices.ActiveDirectory.ReplicationConnection connection
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -4545,7 +4687,8 @@ namespace System.DirectoryServices.ActiveDirectory
         }
         public bool Contains(
             System.DirectoryServices.ActiveDirectory.ReplicationOperation operation
-        ) {
+        )
+        {
             throw null;
         }
         public void CopyTo(
@@ -4762,7 +4905,8 @@ namespace System.DirectoryServices.ActiveDirectory
         }
         public bool Contains(
             System.DirectoryServices.ActiveDirectory.TrustRelationshipInformation information
-        ) {
+        )
+        {
             throw null;
         }
         public void CopyTo(
@@ -4771,7 +4915,8 @@ namespace System.DirectoryServices.ActiveDirectory
         ) { }
         public int IndexOf(
             System.DirectoryServices.ActiveDirectory.TrustRelationshipInformation information
-        ) {
+        )
+        {
             throw null;
         }
     }

@@ -167,7 +167,8 @@ namespace System.Net.Http.Tests
             MediaTypeHeaderValue expectedResult,
             int expectedIndex,
             bool supportsMultipleValues
-        ) {
+        )
+        {
             MediaTypeHeaderParser parser = null;
             if (supportsMultipleValues)
             {
@@ -195,7 +196,8 @@ namespace System.Net.Http.Tests
             string input,
             int startIndex,
             bool supportsMultipleValues
-        ) {
+        )
+        {
             MediaTypeHeaderParser parser = null;
             if (supportsMultipleValues)
             {

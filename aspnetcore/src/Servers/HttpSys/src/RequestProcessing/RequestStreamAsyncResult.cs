@@ -29,7 +29,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             RequestStream requestStream,
             object? userState,
             AsyncCallback? callback
-        ) {
+        )
+        {
             _requestStream = requestStream;
             _tcs = new TaskCompletionSource<int>(userState);
             _callback = callback;
@@ -52,15 +53,16 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             byte[] buffer,
             int offset,
             uint dataAlreadyRead
-        ) : this(
-            requestStream,
-            userState,
-            callback,
-            buffer,
-            offset,
-            dataAlreadyRead,
-            new CancellationTokenRegistration()
-        ) { }
+        )
+            : this(
+                requestStream,
+                userState,
+                callback,
+                buffer,
+                offset,
+                dataAlreadyRead,
+                new CancellationTokenRegistration()
+            ) { }
 
         internal RequestStreamAsyncResult(
             RequestStream requestStream,
@@ -121,13 +123,15 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             RequestStreamAsyncResult asyncResult,
             uint errorCode,
             uint numBytes
-        ) {
+        )
+        {
             try
             {
                 if (
                     errorCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS
                     && errorCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_HANDLE_EOF
-                ) {
+                )
+                {
                     asyncResult.Fail(
                         new IOException(string.Empty, new HttpSysException((int)errorCode))
                     );
@@ -148,7 +152,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             uint errorCode,
             uint numBytes,
             NativeOverlapped* nativeOverlapped
-        ) {
+        )
+        {
             var asyncResult =
                 (RequestStreamAsyncResult)ThreadPoolBoundHandle.GetNativeOverlappedState(
                     nativeOverlapped
@@ -159,7 +164,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
         internal void Complete(
             int read,
             uint errorCode = UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS
-        ) {
+        )
+        {
             if (_requestStream.TryCheckSizeLimit(read + (int)DataAlreadyRead, out var exception))
             {
                 _tcs.TrySetException(exception);

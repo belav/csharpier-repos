@@ -121,7 +121,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             Func<NotQuiteIdentityRazorPage, ModelExpression> createModelExpression,
             string expectedName,
             Type expectedType
-        ) {
+        )
+        {
             var viewContext = CreateViewContext();
             var viewData = new ViewDataDictionary<RecursiveModel>(viewContext.ViewData);
             viewContext.ViewData = viewData;

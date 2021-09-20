@@ -53,14 +53,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
             int position,
             string expressionValue,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var expression = SyntaxFactory.ParseExpression(expressionValue);
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             var token = root.FindToken(position);
             if (
                 token.Kind() == SyntaxKind.CloseBraceToken
                 && token.GetPreviousToken().Kind() != SyntaxKind.None
-            ) {
+            )
+            {
                 token = token.GetPreviousToken();
             }
 
@@ -99,7 +101,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
             Document document,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 var tree = await document.GetSyntaxTreeAsync(cancellationToken)
@@ -129,7 +132,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
             StatementSyntax statement,
             IList<string> expressions,
             bool includeDeclarations
-        ) {
+        )
+        {
             new RelevantExpressionsCollector(includeDeclarations, expressions).Visit(statement);
         }
     }

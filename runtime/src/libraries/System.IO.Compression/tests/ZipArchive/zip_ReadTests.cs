@@ -55,7 +55,8 @@ namespace System.IO.Compression.Tests
                     await StreamHelpers.CreateTempCopyStream(zfile("normal.zip")),
                     ZipArchiveMode.Read
                 )
-            ) {
+            )
+            {
                 foreach (ZipArchiveEntry e in archive.Entries)
                 {
                     using (Stream s = e.Open())
@@ -76,7 +77,8 @@ namespace System.IO.Compression.Tests
                 ZipArchive archive = new ZipArchive(
                     await StreamHelpers.CreateTempCopyStream(zfile("normal.zip"))
                 )
-            ) {
+            )
+            {
                 ZipArchiveEntry e1 = archive.GetEntry("first.txt");
                 ZipArchiveEntry e2 = archive.GetEntry("notempty/second.txt");
 
@@ -101,7 +103,8 @@ namespace System.IO.Compression.Tests
                 using (
                     Stream e1s = e1.Open(),
                         e2s = e2.Open()
-                ) {
+                )
+                {
                     int e1pos = 0;
                     int e2pos = 0;
 
@@ -144,7 +147,8 @@ namespace System.IO.Compression.Tests
                 using (
                     Stream s1 = e1.Open(),
                         s2 = e1.Open()
-                ) {
+                )
+                {
                     int s1pos = 0;
                     int s2pos = 0;
 
@@ -242,7 +246,8 @@ namespace System.IO.Compression.Tests
 
             using (
                 var singleEntryArchive = new ZipArchive(memoryStream, ZipArchiveMode.Create, true)
-            ) {
+            )
+            {
                 singleEntryArchive.CreateEntry("1");
             }
 

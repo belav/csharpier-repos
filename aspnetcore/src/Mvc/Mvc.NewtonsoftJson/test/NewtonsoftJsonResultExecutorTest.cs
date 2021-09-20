@@ -13,7 +13,8 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
     {
         protected override IActionResultExecutor<JsonResult> CreateExecutor(
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             return new NewtonsoftJsonResultExecutor(
                 new TestHttpResponseStreamWriterFactory(),
                 loggerFactory.CreateLogger<NewtonsoftJsonResultExecutor>(),

@@ -268,7 +268,8 @@ namespace System
             object? value,
             TypeCode typeCode,
             IFormatProvider? provider
-        ) {
+        )
+        {
             if (
                 value == null
                 && (
@@ -276,7 +277,8 @@ namespace System
                     || typeCode == TypeCode.String
                     || typeCode == TypeCode.Object
                 )
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -316,7 +318,8 @@ namespace System
             IConvertible value,
             Type targetType,
             IFormatProvider? provider
-        ) {
+        )
+        {
             Debug.Assert(value != null, "[Convert.DefaultToType]value!=null");
             if (targetType == null)
             {
@@ -384,7 +387,8 @@ namespace System
             object? value,
             Type conversionType,
             IFormatProvider? provider
-        ) {
+        )
+        {
             if (conversionType is null)
             {
                 throw new ArgumentNullException(nameof(conversionType));
@@ -2525,7 +2529,8 @@ namespace System
             int offset,
             int length,
             Base64FormattingOptions options
-        ) {
+        )
+        {
             if (inArray == null)
                 throw new ArgumentNullException(nameof(inArray));
             if (length < 0)
@@ -2547,11 +2552,13 @@ namespace System
         public static string ToBase64String(
             ReadOnlySpan<byte> bytes,
             Base64FormattingOptions options = Base64FormattingOptions.None
-        ) {
+        )
+        {
             if (
                 options < Base64FormattingOptions.None
                 || options > Base64FormattingOptions.InsertLineBreaks
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     SR.Format(SR.Arg_EnumIllegalVal, (int)options),
                     nameof(options)
@@ -2571,7 +2578,8 @@ namespace System
             {
                 fixed (byte* bytesPtr = &MemoryMarshal.GetReference(bytes))fixed (
                     char* charsPtr = result
-                ) {
+                )
+                {
                     int charsWritten = ConvertToBase64Array(
                         charsPtr,
                         bytesPtr,
@@ -2595,7 +2603,8 @@ namespace System
             int length,
             char[] outArray,
             int offsetOut
-        ) {
+        )
+        {
             return ToBase64CharArray(
                 inArray,
                 offsetIn,
@@ -2613,7 +2622,8 @@ namespace System
             char[] outArray,
             int offsetOut,
             Base64FormattingOptions options
-        ) {
+        )
+        {
             // Do data verfication
             if (inArray == null)
                 throw new ArgumentNullException(nameof(inArray));
@@ -2635,7 +2645,8 @@ namespace System
             if (
                 options < Base64FormattingOptions.None
                 || options > Base64FormattingOptions.InsertLineBreaks
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     SR.Format(SR.Arg_EnumIllegalVal, (int)options),
                     nameof(options)
@@ -2694,11 +2705,13 @@ namespace System
             Span<char> chars,
             out int charsWritten,
             Base64FormattingOptions options = Base64FormattingOptions.None
-        ) {
+        )
+        {
             if (
                 options < Base64FormattingOptions.None
                 || options > Base64FormattingOptions.InsertLineBreaks
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     SR.Format(SR.Arg_EnumIllegalVal, (int)options),
                     nameof(options)
@@ -2725,7 +2738,8 @@ namespace System
 
             fixed (char* outChars = &MemoryMarshal.GetReference(chars))fixed (
                 byte* inData = &MemoryMarshal.GetReference(bytes)
-            ) {
+            )
+            {
                 charsWritten = ConvertToBase64Array(
                     outChars,
                     inData,
@@ -2743,7 +2757,8 @@ namespace System
             int offset,
             int length,
             bool insertLineBreaks
-        ) {
+        )
+        {
             int lengthmod3 = length % 3;
             int calcLength = offset + (length - lengthmod3);
             int j = 0;
@@ -2813,7 +2828,8 @@ namespace System
         private static int ToBase64_CalculateAndValidateOutputLength(
             int inputLength,
             bool insertLineBreaks
-        ) {
+        )
+        {
             long outlen = ((long)inputLength) / 3 * 4; // the base length - we want integer division here.
             outlen += ((inputLength % 3) != 0) ? 4 : 0; // at most 4 more chars for the remainder
 
@@ -2874,7 +2890,8 @@ namespace System
             ReadOnlySpan<char> chars,
             Span<byte> bytes,
             out int bytesWritten
-        ) {
+        )
+        {
             // This is actually local to one of the nested blocks but is being declared at the top as we don't want multiple stackallocs
             // for each iteraton of the loop.
             Span<char> tempBuffer = stackalloc char[4]; // Note: The tempBuffer size could be made larger than 4 but the size must be a multiple of 4.
@@ -2952,7 +2969,8 @@ namespace System
                             out int consumedFromTempBuffer,
                             out int bytesWrittenFromTempBuffer
                         )
-                    ) {
+                    )
+                    {
                         bytesWritten = default;
                         return false;
                     }
@@ -2986,7 +3004,8 @@ namespace System
             Span<char> tempBuffer,
             out int consumed,
             out int charsWritten
-        ) {
+        )
+        {
             Debug.Assert(tempBuffer.Length != 0); // We only bound-check after writing a character to the tempBuffer.
 
             charsWritten = 0;

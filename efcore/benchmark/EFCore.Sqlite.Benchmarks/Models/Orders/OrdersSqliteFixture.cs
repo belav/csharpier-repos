@@ -22,7 +22,8 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.Orders
         public override OrdersContextBase CreateContext(
             IServiceProvider serviceProvider = null,
             bool disableBatching = false
-        ) {
+        )
+        {
             return new OrdersSqliteContext(_connectionString, serviceProvider, disableBatching);
         }
     }

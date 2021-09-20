@@ -154,7 +154,8 @@ namespace System.Configuration
             System.Configuration.ConfigurationElement parentElement,
             string name,
             System.Configuration.ConfigurationSaveMode saveMode
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -240,7 +241,8 @@ namespace System.Configuration
             System.ComponentModel.ITypeDescriptorContext ctx,
             System.Globalization.CultureInfo ci,
             object data
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertTo(
@@ -248,7 +250,8 @@ namespace System.Configuration
             System.Globalization.CultureInfo ci,
             object value,
             System.Type type
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -317,7 +320,8 @@ namespace System.Configuration
         }
         public System.Configuration.ConfigurationSectionGroup GetSectionGroup(
             string sectionGroupName
-        ) {
+        )
+        {
             throw null;
         }
         public void Save() { }
@@ -382,13 +386,15 @@ namespace System.Configuration
         public override bool CanConvertFrom(
             System.ComponentModel.ITypeDescriptorContext ctx,
             System.Type type
-        ) {
+        )
+        {
             throw null;
         }
         public override bool CanConvertTo(
             System.ComponentModel.ITypeDescriptorContext ctx,
             System.Type type
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -488,7 +494,8 @@ namespace System.Configuration
         protected virtual bool OnDeserializeUnrecognizedElement(
             string elementName,
             System.Xml.XmlReader reader
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual object OnRequiredPropertyNotFound(string name)
@@ -502,13 +509,15 @@ namespace System.Configuration
         protected virtual bool SerializeElement(
             System.Xml.XmlWriter writer,
             bool serializeCollectionKey
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual bool SerializeToXmlElement(
             System.Xml.XmlWriter writer,
             string elementName
-        ) {
+        )
+        {
             throw null;
         }
         protected void SetPropertyValue(
@@ -615,7 +624,8 @@ namespace System.Configuration
         protected abstract System.Configuration.ConfigurationElement CreateNewElement();
         protected virtual System.Configuration.ConfigurationElement CreateNewElement(
             string elementName
-        ) {
+        )
+        {
             throw null;
         }
         public override bool Equals(object compareTo)
@@ -650,7 +660,8 @@ namespace System.Configuration
         protected override bool OnDeserializeUnrecognizedElement(
             string elementName,
             System.Xml.XmlReader reader
-        ) {
+        )
+        {
             throw null;
         }
         protected override void Reset(System.Configuration.ConfigurationElement parentElement) { }
@@ -658,7 +669,8 @@ namespace System.Configuration
         protected override bool SerializeElement(
             System.Xml.XmlWriter writer,
             bool serializeCollectionKey
-        ) {
+        )
+        {
             throw null;
         }
         protected override void SetReadOnly() { }
@@ -931,7 +943,8 @@ namespace System.Configuration
         }
         public static System.Configuration.Configuration OpenExeConfiguration(
             System.Configuration.ConfigurationUserLevel userLevel
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Configuration.Configuration OpenExeConfiguration(string exePath)
@@ -945,19 +958,22 @@ namespace System.Configuration
         public static System.Configuration.Configuration OpenMappedExeConfiguration(
             System.Configuration.ExeConfigurationFileMap fileMap,
             System.Configuration.ConfigurationUserLevel userLevel
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Configuration.Configuration OpenMappedExeConfiguration(
             System.Configuration.ExeConfigurationFileMap fileMap,
             System.Configuration.ConfigurationUserLevel userLevel,
             bool preLoad
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Configuration.Configuration OpenMappedMachineConfiguration(
             System.Configuration.ConfigurationFileMap fileMap
-        ) {
+        )
+        {
             throw null;
         }
         public static void RefreshSection(string sectionName) { }
@@ -1148,14 +1164,16 @@ namespace System.Configuration
             System.Configuration.ConfigurationElement parentElement,
             string name,
             System.Configuration.ConfigurationSaveMode saveMode
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual bool ShouldSerializeElementInTargetVersion(
             System.Configuration.ConfigurationElement element,
             string elementName,
             System.Runtime.Versioning.FrameworkName targetFramework
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual bool ShouldSerializePropertyInTargetVersion(
@@ -1163,12 +1181,14 @@ namespace System.Configuration
             string propertyName,
             System.Runtime.Versioning.FrameworkName targetFramework,
             System.Configuration.ConfigurationElement parentConfigurationElement
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual bool ShouldSerializeSectionInTargetVersion(
             System.Runtime.Versioning.FrameworkName targetFramework
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1254,7 +1274,8 @@ namespace System.Configuration
         public void ForceDeclaration(bool force) { }
         protected virtual bool ShouldSerializeSectionGroupInTargetVersion(
             System.Runtime.Versioning.FrameworkName targetFramework
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1379,7 +1400,8 @@ namespace System.Configuration
             string prefix,
             string localName,
             string namespaceUri
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Xml.XmlCDataSection CreateCDataSection(string data)
@@ -1394,7 +1416,8 @@ namespace System.Configuration
             string prefix,
             string localName,
             string namespaceUri
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Xml.XmlSignificantWhitespace CreateSignificantWhitespace(string data)
@@ -1534,7 +1557,8 @@ namespace System.Configuration
             System.Configuration.ConfigurationElement parentSection,
             string name,
             System.Configuration.ConfigurationSaveMode saveMode
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1679,7 +1703,8 @@ namespace System.Configuration
             System.ComponentModel.ITypeDescriptorContext ctx,
             System.Globalization.CultureInfo ci,
             object data
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertTo(
@@ -1687,7 +1712,8 @@ namespace System.Configuration
             System.Globalization.CultureInfo ci,
             object value,
             System.Type type
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1743,7 +1769,8 @@ namespace System.Configuration
             System.Configuration.ConfigurationElement parentSection,
             string name,
             System.Configuration.ConfigurationSaveMode saveMode
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1754,7 +1781,8 @@ namespace System.Configuration
             object parent,
             object configContext,
             System.Xml.XmlNode section
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1766,7 +1794,8 @@ namespace System.Configuration
             System.ComponentModel.ITypeDescriptorContext ctx,
             System.Globalization.CultureInfo ci,
             object data
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertTo(
@@ -1774,7 +1803,8 @@ namespace System.Configuration
             System.Globalization.CultureInfo ci,
             object value,
             System.Type type
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1786,7 +1816,8 @@ namespace System.Configuration
             System.ComponentModel.ITypeDescriptorContext ctx,
             System.Globalization.CultureInfo ci,
             object data
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertTo(
@@ -1794,7 +1825,8 @@ namespace System.Configuration
             System.Globalization.CultureInfo ci,
             object value,
             System.Type type
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1929,13 +1961,15 @@ namespace System.Configuration
         public System.Configuration.SettingsPropertyValue GetPreviousVersion(
             System.Configuration.SettingsContext context,
             System.Configuration.SettingsProperty property
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Configuration.SettingsPropertyValueCollection GetPropertyValues(
             System.Configuration.SettingsContext context,
             System.Configuration.SettingsPropertyCollection properties
-        ) {
+        )
+        {
             throw null;
         }
         public override void Initialize(
@@ -2679,7 +2713,8 @@ namespace System.Configuration
         public virtual void Save() { }
         public static System.Configuration.SettingsBase Synchronized(
             System.Configuration.SettingsBase settingsBase
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -3041,7 +3076,8 @@ namespace System.Configuration
         protected override bool SerializeToXmlElement(
             System.Xml.XmlWriter writer,
             string elementName
-        ) {
+        )
+        {
             throw null;
         }
         protected override void Unmerge(
@@ -3141,7 +3177,8 @@ namespace System.Configuration
             System.ComponentModel.ITypeDescriptorContext ctx,
             System.Globalization.CultureInfo ci,
             object data
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertTo(
@@ -3149,7 +3186,8 @@ namespace System.Configuration
             System.Globalization.CultureInfo ci,
             object value,
             System.Type type
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -3161,7 +3199,8 @@ namespace System.Configuration
             System.ComponentModel.ITypeDescriptorContext ctx,
             System.Globalization.CultureInfo ci,
             object data
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertTo(
@@ -3169,7 +3208,8 @@ namespace System.Configuration
             System.Globalization.CultureInfo ci,
             object value,
             System.Type type
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -3180,7 +3220,8 @@ namespace System.Configuration
             System.ComponentModel.ITypeDescriptorContext ctx,
             System.Globalization.CultureInfo ci,
             object data
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertTo(
@@ -3188,7 +3229,8 @@ namespace System.Configuration
             System.Globalization.CultureInfo ci,
             object value,
             System.Type type
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -3200,7 +3242,8 @@ namespace System.Configuration
             System.ComponentModel.ITypeDescriptorContext ctx,
             System.Globalization.CultureInfo ci,
             object data
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertTo(
@@ -3208,7 +3251,8 @@ namespace System.Configuration
             System.Globalization.CultureInfo ci,
             object value,
             System.Type type
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -3274,7 +3318,8 @@ namespace System.Configuration
             System.ComponentModel.ITypeDescriptorContext ctx,
             System.Globalization.CultureInfo ci,
             object data
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertTo(
@@ -3282,7 +3327,8 @@ namespace System.Configuration
             System.Globalization.CultureInfo ci,
             object value,
             System.Type type
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -3324,7 +3370,8 @@ namespace System.Configuration
             System.ComponentModel.ITypeDescriptorContext ctx,
             System.Globalization.CultureInfo ci,
             object data
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertTo(
@@ -3332,7 +3379,8 @@ namespace System.Configuration
             System.Globalization.CultureInfo ci,
             object value,
             System.Type type
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -3391,7 +3439,8 @@ namespace System.Configuration.Internal
             string encryptedXml,
             System.Configuration.ProtectedConfigurationProvider protectionProvider,
             System.Configuration.ProtectedConfigurationSection protectedConfigSection
-        ) {
+        )
+        {
             throw null;
         }
         public virtual void DeleteStream(string streamName) { }
@@ -3399,13 +3448,15 @@ namespace System.Configuration.Internal
             string clearTextXml,
             System.Configuration.ProtectedConfigurationProvider protectionProvider,
             System.Configuration.ProtectedConfigurationSection protectedConfigSection
-        ) {
+        )
+        {
             throw null;
         }
         public virtual string GetConfigPathFromLocationSubPath(
             string configPath,
             string locationSubPath
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Type GetConfigType(string typeName, bool throwOnError)
@@ -3420,7 +3471,8 @@ namespace System.Configuration.Internal
             System.Configuration.Internal.IInternalConfigRecord configRecord,
             out System.Security.PermissionSet permissionSet,
             out bool isHostReady
-        ) {
+        )
+        {
             throw null;
         }
         public virtual string GetStreamName(string configPath)
@@ -3449,7 +3501,8 @@ namespace System.Configuration.Internal
             out string locationConfigPath,
             System.Configuration.Internal.IInternalConfigRoot configRoot,
             params object[] hostInitConfigurationParams
-        ) {
+        )
+        {
             throw null;
         }
         public virtual bool IsAboveApplication(string configPath)
@@ -3464,7 +3517,8 @@ namespace System.Configuration.Internal
             string configPath,
             System.Configuration.ConfigurationAllowDefinition allowDefinition,
             System.Configuration.ConfigurationAllowExeDefinition allowExeDefinition
-        ) {
+        )
+        {
             throw null;
         }
         public virtual bool IsFile(string streamName)
@@ -3473,12 +3527,14 @@ namespace System.Configuration.Internal
         }
         public virtual bool IsFullTrustSectionWithoutAptcaAllowed(
             System.Configuration.Internal.IInternalConfigRecord configRecord
-        ) {
+        )
+        {
             throw null;
         }
         public virtual bool IsInitDelayed(
             System.Configuration.Internal.IInternalConfigRecord configRecord
-        ) {
+        )
+        {
             throw null;
         }
         public virtual bool IsLocationApplicable(string configPath)
@@ -3505,7 +3561,8 @@ namespace System.Configuration.Internal
             string streamName,
             string templateStreamName,
             ref object writeContext
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.IO.Stream OpenStreamForWrite(
@@ -3513,7 +3570,8 @@ namespace System.Configuration.Internal
             string templateStreamName,
             ref object writeContext,
             bool assertPermissions
-        ) {
+        )
+        {
             throw null;
         }
         public virtual bool PrefetchAll(string configPath, string streamName)
@@ -3531,7 +3589,8 @@ namespace System.Configuration.Internal
         public virtual object StartMonitoringStreamForChanges(
             string streamName,
             System.Configuration.Internal.StreamChangeCallback callback
-        ) {
+        )
+        {
             throw null;
         }
         public virtual void StopMonitoringStreamForChanges(

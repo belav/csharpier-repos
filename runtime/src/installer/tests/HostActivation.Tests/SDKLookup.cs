@@ -697,7 +697,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         public void It_falls_back_to_latest_sdk_for_invalid_global_json(
             string globalJsonContents,
             string[] messages
-        ) {
+        )
+        {
             AddAvailableSdkVersions(
                 _exeSdkBaseDir,
                 "9999.0.100",
@@ -735,7 +736,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             bool allowPrerelease,
             string expected,
             string[] installed
-        ) {
+        )
+        {
             AddAvailableSdkVersions(_exeSdkBaseDir, installed);
 
             WriteGlobalJson(
@@ -1452,7 +1454,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             string version = null,
             string policy = null,
             bool? allowPrerelease = null
-        ) {
+        )
+        {
             version = version == null ? "null" : string.Format("\"{0}\"", version);
             policy = policy == null ? "null" : string.Format("\"{0}\"", policy);
             string allow = allowPrerelease.HasValue

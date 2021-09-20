@@ -16,7 +16,8 @@ namespace System.Security.Cryptography.Dsa.Tests
                     TestData.Key_DSA1024Key,
                     CngKeyBlobFormat.GenericPrivateBlob
                 )
-            ) {
+            )
+            {
                 VerifyImportedKey(key);
                 Assert.Equal(1024, key.KeySize);
             }
@@ -30,7 +31,8 @@ namespace System.Security.Cryptography.Dsa.Tests
                     TestData.Key_DSA2048Key,
                     CngKeyBlobFormat.GenericPrivateBlob
                 )
-            ) {
+            )
+            {
                 VerifyImportedKey(key);
                 Assert.Equal(2048, key.KeySize);
             }
@@ -65,7 +67,8 @@ namespace System.Security.Cryptography.Dsa.Tests
                     TestData.Key_DSA1024PublicKey,
                     CngKeyBlobFormat.GenericPublicBlob
                 )
-            ) {
+            )
+            {
                 byte[] reExported = key.Export(CngKeyBlobFormat.GenericPublicBlob);
                 Assert.Equal<byte>(TestData.Key_DSA1024PublicKey, reExported);
             }

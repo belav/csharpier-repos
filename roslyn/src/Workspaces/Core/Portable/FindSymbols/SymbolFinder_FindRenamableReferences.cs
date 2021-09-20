@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             ISymbol symbol,
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (Logger.LogBlock(FunctionId.FindReference_Rename, cancellationToken))
             {
                 var streamingProgress = new StreamingProgressCollector();

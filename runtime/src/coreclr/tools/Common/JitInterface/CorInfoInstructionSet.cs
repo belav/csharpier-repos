@@ -176,7 +176,8 @@ namespace Internal.JitInterface
         public static InstructionSetFlags ExpandInstructionSetByImplicationHelper(
             TargetArchitecture architecture,
             InstructionSetFlags input
-        ) {
+        )
+        {
             InstructionSetFlags oldflags = input;
             InstructionSetFlags resultflags = input;
             do
@@ -375,7 +376,8 @@ namespace Internal.JitInterface
         private static InstructionSetFlags ExpandInstructionSetByReverseImplicationHelper(
             TargetArchitecture architecture,
             InstructionSetFlags input
-        ) {
+        )
+        {
             InstructionSetFlags oldflags = input;
             InstructionSetFlags resultflags = input;
             do
@@ -530,7 +532,8 @@ namespace Internal.JitInterface
                 string managedName,
                 InstructionSet instructionSet,
                 bool specifiable
-            ) {
+            )
+            {
                 Name = name;
                 ManagedName = managedName;
                 InstructionSet = instructionSet;
@@ -540,7 +543,8 @@ namespace Internal.JitInterface
 
         public static IEnumerable<InstructionSetInfo> ArchitectureToValidInstructionSets(
             TargetArchitecture architecture
-        ) {
+        )
+        {
             switch (architecture)
             {
                 case TargetArchitecture.ARM64:

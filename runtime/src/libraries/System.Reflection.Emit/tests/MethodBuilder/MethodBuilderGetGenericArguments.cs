@@ -56,7 +56,8 @@ namespace System.Reflection.Emit.Tests
         private static void VerifyGenericArguments(
             MethodBuilder method,
             GenericTypeParameterBuilder[] expected
-        ) {
+        )
+        {
             Type[] genericArguments = method.GetGenericArguments();
             Assert.Equal(expected.Select(p => p.AsType()), genericArguments);
         }

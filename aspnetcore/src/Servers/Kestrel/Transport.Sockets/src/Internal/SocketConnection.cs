@@ -45,7 +45,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.Internal
             PipeOptions inputOptions,
             PipeOptions outputOptions,
             bool waitForData = true
-        ) {
+        )
+        {
             Debug.Assert(socket != null);
             Debug.Assert(memoryPool != null);
             Debug.Assert(trace != null);

@@ -65,7 +65,8 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             int position,
             DocumentOptionSet options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!options.GetOption(DocumentationCommentOptions.AutoXmlDocCommentGeneration))
             {
                 return null;
@@ -106,7 +107,8 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             SourceText text,
             DocumentOptionSet options,
             out string? indentText
-        ) {
+        )
+        {
             indentText = null;
             var documentationComment = token.GetAncestor<TDocumentationComment>();
 
@@ -163,7 +165,8 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             SourceText text,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var member = GetContainingMember(syntaxTree, position, cancellationToken);
             if (member == null)
             {
@@ -225,7 +228,8 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             int position,
             DocumentOptionSet options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Don't attempt to generate a new XML doc comment on ENTER if the option to auto-generate
             // them isn't set. Regardless of the option, we should generate exterior trivia (i.e. /// or ''')
             // on ENTER inside an existing XML doc comment.
@@ -260,7 +264,8 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             int position,
             DocumentOptionSet options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Find the documentation comment before the new line that was just pressed
             var token = GetTokenToLeft(syntaxTree, position, cancellationToken);
             if (!IsDocCommentNewLine(token))
@@ -308,7 +313,8 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             int position,
             DocumentOptionSet options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var targetMember = GetTargetMember(syntaxTree, text, position, cancellationToken);
             if (targetMember == null)
             {
@@ -355,7 +361,8 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             int position,
             DocumentOptionSet options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Find the documentation comment before the new line that was just pressed
             var token = GetTokenToLeft(syntaxTree, position, cancellationToken);
             if (!IsDocCommentNewLine(token) && HasSkippedTrailingTrivia(token))
@@ -397,7 +404,8 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
                 previousLineText.Equals(ExteriorTriviaText)
                 && string.IsNullOrWhiteSpace(currentLine.ToString())
                 && !nextLineStartsWithDocComment
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -411,7 +419,8 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
                 EndsWithSingleExteriorTrivia(documentationComment)
                 && currentLine.IsEmptyOrWhitespace()
                 && !nextLineStartsWithDocComment
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -426,7 +435,8 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             DocumentOptionSet options,
             TextLine currentLine,
             TextLine previousLine
-        ) {
+        )
+        {
             var insertionText = CreateInsertionTextFromPreviousLine(previousLine, options);
 
             var firstNonWhitespaceOffset = currentLine.GetFirstNonWhitespaceOffset();
@@ -448,7 +458,8 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
         private string CreateInsertionTextFromPreviousLine(
             TextLine previousLine,
             DocumentOptionSet options
-        ) {
+        )
+        {
             var useTabs = options.GetOption(FormattingOptions.UseTabs);
             var tabSize = options.GetOption(FormattingOptions.TabSize);
 

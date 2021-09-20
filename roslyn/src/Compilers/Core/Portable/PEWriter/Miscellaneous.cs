@@ -23,7 +23,8 @@ namespace Microsoft.Cci
         /// </summary>
         public static bool EnumerableIsNotEmpty<T>(
             [NotNullWhen(returnValue: true)] IEnumerable<T>? enumerable
-        ) {
+        )
+        {
             if (enumerable == null)
             {
                 return false;
@@ -49,7 +50,8 @@ namespace Microsoft.Cci
         /// </summary>
         public static bool EnumerableIsEmpty<T>(
             [NotNullWhen(returnValue: false)] IEnumerable<T>? enumerable
-        ) {
+        )
+        {
             return !EnumerableIsNotEmpty<T>(enumerable);
         }
 

@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.Identity.UI.Areas.Identity.Filters
         public async Task OnPageHandlerExecutionAsync(
             PageHandlerExecutingContext context,
             PageHandlerExecutionDelegate next
-        ) {
+        )
+        {
             var result = await next();
             if (result.Result is PageResult page)
             {

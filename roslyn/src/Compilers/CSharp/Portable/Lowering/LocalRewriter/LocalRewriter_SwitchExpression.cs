@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         public override BoundNode VisitConvertedSwitchExpression(
             BoundConvertedSwitchExpression node
-        ) {
+        )
+        {
             // The switch expression is lowered to an expression that involves the use of side-effects
             // such as jumps and labels, therefore it is represented by a BoundSpillSequence and
             // the resulting nodes will need to be "spilled" to move such statements to the top
@@ -30,17 +31,19 @@ namespace Microsoft.CodeAnalysis.CSharp
             private SwitchExpressionLocalRewriter(
                 BoundConvertedSwitchExpression node,
                 LocalRewriter localRewriter
-            ) : base(
-                node.Syntax,
-                localRewriter,
-                node.SwitchArms.SelectAsArray(arm => arm.Syntax),
-                generateInstrumentation: !node.WasCompilerGenerated && localRewriter.Instrument
-            ) { }
+            )
+                : base(
+                    node.Syntax,
+                    localRewriter,
+                    node.SwitchArms.SelectAsArray(arm => arm.Syntax),
+                    generateInstrumentation: !node.WasCompilerGenerated && localRewriter.Instrument
+                ) { }
 
             public static BoundExpression Rewrite(
                 LocalRewriter localRewriter,
                 BoundConvertedSwitchExpression node
-            ) {
+            )
+            {
                 var rewriter = new SwitchExpressionLocalRewriter(node, localRewriter);
                 BoundExpression result = rewriter.LowerSwitchExpression(node);
                 rewriter.Free();

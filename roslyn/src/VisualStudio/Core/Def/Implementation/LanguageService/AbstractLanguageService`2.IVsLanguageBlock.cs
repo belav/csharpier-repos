@@ -29,7 +29,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             VsTextSpan[] ptsBlockSpan,
             out string pbstrDescription,
             out int pfBlockAvailable
-        ) {
+        )
+        {
             var snapshot =
                 this.EditorAdaptersFactoryService.GetDataBuffer(pTextLines).CurrentSnapshot;
             var position = snapshot?.TryGetPosition(iCurrentLine, iCurrentChar);
@@ -75,7 +76,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             ITextSnapshot snapshot,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var document = snapshot.GetOpenDocumentInCurrentContextWithChanges();
             if (document == null || !document.SupportsSyntaxTree)
             {

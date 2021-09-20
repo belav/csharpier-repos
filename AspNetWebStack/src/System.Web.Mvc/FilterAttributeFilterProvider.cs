@@ -20,14 +20,16 @@ namespace System.Web.Mvc
         protected virtual IEnumerable<FilterAttribute> GetActionAttributes(
             ControllerContext controllerContext,
             ActionDescriptor actionDescriptor
-        ) {
+        )
+        {
             return actionDescriptor.GetFilterAttributes(_cacheAttributeInstances);
         }
 
         protected virtual IEnumerable<FilterAttribute> GetControllerAttributes(
             ControllerContext controllerContext,
             ActionDescriptor actionDescriptor
-        ) {
+        )
+        {
             return actionDescriptor.ControllerDescriptor.GetFilterAttributes(
                 _cacheAttributeInstances
             );
@@ -36,7 +38,8 @@ namespace System.Web.Mvc
         public virtual IEnumerable<Filter> GetFilters(
             ControllerContext controllerContext,
             ActionDescriptor actionDescriptor
-        ) {
+        )
+        {
             // Results are low in number in the common case so use yield return to avoid creating intermediate collections or nested enumerables
             if (controllerContext.Controller != null)
             {
@@ -45,12 +48,14 @@ namespace System.Web.Mvc
                         controllerContext,
                         actionDescriptor
                     )
-                ) {
+                )
+                {
                     yield return new Filter(attr, FilterScope.Controller, order: null);
                 }
                 foreach (
                     FilterAttribute attr in GetActionAttributes(controllerContext, actionDescriptor)
-                ) {
+                )
+                {
                     yield return new Filter(attr, FilterScope.Action, order: null);
                 }
             }

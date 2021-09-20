@@ -130,7 +130,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
             double lof,
             double mean,
             double stddev
-        ) {
+        )
+        {
             Assert.True(
                 analyzer.PIISafeAnalyzerId.IndexOf(analyzerId, StringComparison.OrdinalIgnoreCase)
                     >= 0
@@ -168,7 +169,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
         private IEnumerable<AnalyzerPerformanceInfo> CreateSnapshots(
             Dictionary<string, double[]> matrix,
             int index
-        ) {
+        )
+        {
             foreach (var kv in matrix)
             {
                 var timeSpan = kv.Value[index];
@@ -215,7 +217,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
                             CultureInfo.InvariantCulture,
                             out result
                         )
-                    ) {
+                    )
+                    {
                         // no data for this analyzer for this particular run
                         result = double.NaN;
                     }

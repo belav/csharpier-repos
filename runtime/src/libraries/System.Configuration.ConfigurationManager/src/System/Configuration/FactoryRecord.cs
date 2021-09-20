@@ -37,7 +37,8 @@ namespace System.Configuration
             string filename,
             int lineNumber,
             ICollection<ConfigurationException> errors
-        ) {
+        )
+        {
             ConfigKey = configKey;
             Group = group;
             Name = name;
@@ -61,7 +62,8 @@ namespace System.Configuration
             string factoryTypeName,
             string filename,
             int lineNumber
-        ) {
+        )
+        {
             ConfigKey = configKey;
             Group = group;
             Name = name;
@@ -87,7 +89,8 @@ namespace System.Configuration
             bool isUndeclared,
             string filename,
             int lineNumber
-        ) {
+        )
+        {
             ConfigKey = configKey;
             Group = group;
             Name = name;
@@ -192,7 +195,8 @@ namespace System.Configuration
             string factoryTypeName,
             string filename,
             int lineNumber
-        ) {
+        )
+        {
             if (FactoryTypeName != null)
                 factoryTypeName = FactoryTypeName;
 
@@ -256,7 +260,8 @@ namespace System.Configuration
             ConfigurationAllowExeDefinition allowExeDefinition,
             bool restartOnExternalChanges,
             bool requirePermission
-        ) {
+        )
+        {
             if (
                 (allowLocation != AllowLocation)
                 || (allowDefinition != AllowDefinition)

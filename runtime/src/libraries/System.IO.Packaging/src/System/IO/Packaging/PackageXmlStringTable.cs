@@ -185,7 +185,8 @@ namespace System.IO.Packaging
             if (
                 (id <= PackageXmlEnum.NotDefined)
                 || (id >= (PackageXmlEnum.LastPrinted | PackageXmlEnum.XmlSchemaInstanceNamespace))
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(nameof(id));
             }
         }

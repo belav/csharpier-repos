@@ -79,7 +79,8 @@ namespace System.Runtime.Intrinsics.Arm
         public static Vector128<long> PolynomialMultiplyWideningLower(
             Vector64<long> left,
             Vector64<long> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -91,7 +92,8 @@ namespace System.Runtime.Intrinsics.Arm
         public static Vector128<ulong> PolynomialMultiplyWideningLower(
             Vector64<ulong> left,
             Vector64<ulong> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -103,7 +105,8 @@ namespace System.Runtime.Intrinsics.Arm
         public static Vector128<long> PolynomialMultiplyWideningUpper(
             Vector128<long> left,
             Vector128<long> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -115,7 +118,8 @@ namespace System.Runtime.Intrinsics.Arm
         public static Vector128<ulong> PolynomialMultiplyWideningUpper(
             Vector128<ulong> left,
             Vector128<ulong> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
     }

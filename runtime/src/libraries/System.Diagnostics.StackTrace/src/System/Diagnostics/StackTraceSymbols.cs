@@ -61,7 +61,8 @@ namespace System.Diagnostics
             out string? sourceFile,
             out int sourceLine,
             out int sourceColumn
-        ) {
+        )
+        {
             sourceFile = null;
             sourceLine = 0;
             sourceColumn = 0;
@@ -142,11 +143,13 @@ namespace System.Diagnostics
             int loadedPeSize,
             IntPtr inMemoryPdbAddress,
             int inMemoryPdbSize
-        ) {
+        )
+        {
             if (
                 (loadedPeAddress == IntPtr.Zero || assemblyPath == null)
                 && inMemoryPdbAddress == IntPtr.Zero
-            ) {
+            )
+            {
                 // Dynamic or in-memory module without symbols (they would be in-memory if they were available).
                 return null;
             }
@@ -170,7 +173,8 @@ namespace System.Diagnostics
         private static unsafe MetadataReaderProvider? TryOpenReaderForInMemoryPdb(
             IntPtr inMemoryPdbAddress,
             int inMemoryPdbSize
-        ) {
+        )
+        {
             Debug.Assert(inMemoryPdbAddress != IntPtr.Zero);
 
             // quick check to avoid throwing exceptions below in common cases:
@@ -178,7 +182,8 @@ namespace System.Diagnostics
             if (
                 inMemoryPdbSize < sizeof(uint)
                 || *(uint*)inMemoryPdbAddress != ManagedMetadataSignature
-            ) {
+            )
+            {
                 // not a Portable PDB
                 return null;
             }
@@ -204,7 +209,8 @@ namespace System.Diagnostics
             string assemblyPath,
             IntPtr loadedPeAddress,
             int loadedPeSize
-        ) {
+        )
+        {
             // TODO: https://github.com/dotnet/runtime/issues/18423
             //if (loadedPeAddress != IntPtr.Zero && loadedPeSize > 0)
             //{
@@ -224,7 +230,8 @@ namespace System.Diagnostics
             string assemblyPath,
             IntPtr loadedPeAddress,
             int loadedPeSize
-        ) {
+        )
+        {
             using (var peReader = TryGetPEReader(assemblyPath, loadedPeAddress, loadedPeSize))
             {
                 if (peReader == null)
@@ -241,7 +248,8 @@ namespace System.Diagnostics
                         out provider,
                         out pdbPath
                     )
-                ) {
+                )
+                {
                     // TODO:
                     // Consider caching the provider in a global cache (across stack traces) if the PDB is embedded (pdbPath == null),
                     // as decompressing embedded PDB takes some time.

@@ -149,7 +149,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 bool isExtensionMethod,
                 bool isNullableAnalysisEnabled,
                 bool isMetadataVirtualIgnoringModifiers = false
-            ) {
+            )
+            {
                 bool isMetadataVirtual =
                     isMetadataVirtualIgnoringModifiers
                     || ModifiersRequireMetadataVirtual(declarationModifiers);
@@ -250,7 +251,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal ImmutableArray<Diagnostic> SetDiagnostics(
             ImmutableArray<Diagnostic> newSet,
             out bool diagsWritten
-        ) {
+        )
+        {
             //return the diagnostics that were actually saved in the event that there were two threads racing.
             diagsWritten = ImmutableInterlocked.InterlockedInitialize(
                 ref _cachedDiagnostics,
@@ -290,11 +292,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             TypeWithAnnotations returnType,
             ImmutableArray<ParameterSymbol> parameters,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             if (
                 this.DeclaredAccessibility <= Accessibility.Private
                 || MethodKind == MethodKind.ExplicitInterfaceImplementation
-            ) {
+            )
+            {
                 return;
             }
 
@@ -343,7 +347,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             bool isExtensionMethod,
             bool isNullableAnalysisEnabled,
             bool isMetadataVirtualIgnoringModifiers = false
-        ) {
+        )
+        {
             DeclarationModifiers = declarationModifiers;
             this.flags = new Flags(
                 methodKind,
@@ -659,7 +664,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal virtual ExecutableCodeBinder TryGetBodyBinder(
             BinderFactory binderFactoryOpt = null,
             bool ignoreAccessibility = false
-        ) {
+        )
+        {
             Binder inMethod = TryGetInMethodBinder(binderFactoryOpt);
             return inMethod == null
               ? null
@@ -685,7 +691,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             CultureInfo preferredCulture = null,
             bool expandIncludes = false,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             ref var lazyDocComment = ref expandIncludes
                 ? ref this.lazyExpandedDocComment
                 : ref this.lazyDocComment;
@@ -790,7 +797,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void ForceComplete(
             SourceLocation locationOpt,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             while (true)
             {
                 cancellationToken.ThrowIfCancellationRequested();
@@ -870,7 +878,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void AfterAddingTypeMembersChecks(
             ConversionsBase conversions,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             base.AfterAddingTypeMembersChecks(conversions, diagnostics);
 
             var compilation = this.DeclaringCompilation;
@@ -888,7 +897,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (
                 compilation.ShouldEmitNullableAttributes(this)
                 && ShouldEmitNullableContextValue(out _)
-            ) {
+            )
+            {
                 compilation.EnsureNullableContextAttributeExists(
                     diagnostics,
                     location,
@@ -940,7 +950,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void AddSynthesizedAttributes(
             PEModuleBuilder moduleBuilder,
             ref ArrayBuilder<SynthesizedAttributeData> attributes
-        ) {
+        )
+        {
             base.AddSynthesizedAttributes(moduleBuilder, ref attributes);
 
             if (IsDeclaredReadOnly && !ContainingType.IsReadOnly)
@@ -956,7 +967,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (
                 compilation.ShouldEmitNullableAttributes(this)
                 && ShouldEmitNullableContextValue(out byte nullableContextValue)
-            ) {
+            )
+            {
                 AddSynthesizedAttribute(
                     ref attributes,
                     moduleBuilder.SynthesizeNullableContextAttribute(this, nullableContextValue)
@@ -988,7 +1000,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     this,
                     out NamedTypeSymbol stateMachineType
                 )
-            ) {
+            )
+            {
                 var arg = new TypedConstant(
                     compilation.GetWellKnownType(WellKnownType.System_Type),
                     TypedConstantKind.Type,
@@ -1062,7 +1075,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Location location,
             bool hasBody,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             if (_containingType.IsInterface)
             {
                 if (hasBody || IsExplicitInterfaceImplementation)
@@ -1078,7 +1092,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (
                     (hasBody || IsExplicitInterfaceImplementation || IsExtern)
                     && !ContainingAssembly.RuntimeSupportsDefaultInterfaceImplementation
-                ) {
+                )
+                {
                     diagnostics.Add(
                         ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
                         location

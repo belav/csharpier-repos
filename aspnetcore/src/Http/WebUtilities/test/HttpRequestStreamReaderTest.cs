@@ -155,7 +155,8 @@ namespace Microsoft.AspNetCore.WebUtilities
         [MemberData(nameof(ReadLineData))]
         public static async Task ReadLine_ReadMultipleLines(
             Func<HttpRequestStreamReader, Task<string>> action
-        ) {
+        )
+        {
             // Arrange
             var reader = CreateReader();
             var valueString = new string(CharData);
@@ -178,7 +179,8 @@ namespace Microsoft.AspNetCore.WebUtilities
         [MemberData(nameof(ReadLineData))]
         public static async Task ReadLine_ReadWithNoNewlines(
             Func<HttpRequestStreamReader, Task<string>> action
-        ) {
+        )
+        {
             // Arrange
             var reader = CreateReader();
             var valueString = new string(CharData);
@@ -196,7 +198,8 @@ namespace Microsoft.AspNetCore.WebUtilities
         [MemberData(nameof(ReadLineData))]
         public static async Task ReadLine_MultipleContinuousLines(
             Func<HttpRequestStreamReader, Task<string>> action
-        ) {
+        )
+        {
             // Arrange
             var stream = new MemoryStream();
             var writer = new StreamWriter(stream);
@@ -221,7 +224,8 @@ namespace Microsoft.AspNetCore.WebUtilities
         [MemberData(nameof(ReadLineData))]
         public static async Task ReadLine_CarriageReturnAndLineFeedAcrossBufferBundaries(
             Func<HttpRequestStreamReader, Task<string>> action
-        ) {
+        )
+        {
             // Arrange
             var stream = new MemoryStream();
             var writer = new StreamWriter(stream);
@@ -259,7 +263,8 @@ namespace Microsoft.AspNetCore.WebUtilities
         [MemberData(nameof(ReadLineData))]
         public static async Task ReadLine_NewLineOnly(
             Func<HttpRequestStreamReader, Task<string>> action
-        ) {
+        )
+        {
             // Arrange
             var stream = new MemoryStream();
             var writer = new StreamWriter(stream);
@@ -357,7 +362,8 @@ namespace Microsoft.AspNetCore.WebUtilities
             Encoding encoding,
             ArrayPool<byte> bytePool,
             ArrayPool<char> charPool
-        ) {
+        )
+        {
             Assert.Throws<ArgumentNullException>(
                 () =>
                 {
@@ -414,7 +420,8 @@ namespace Microsoft.AspNetCore.WebUtilities
         [MemberData(nameof(HttpRequestDisposeData))]
         public static void StreamDisposed_ExpectedObjectDisposedException(
             Action<HttpRequestStreamReader> action
-        ) {
+        )
+        {
             var httpRequestStreamReader = new HttpRequestStreamReader(
                 new MemoryStream(),
                 Encoding.UTF8,
@@ -436,7 +443,8 @@ namespace Microsoft.AspNetCore.WebUtilities
         [MemberData(nameof(HttpRequestDisposeDataAsync))]
         public static async Task StreamDisposed_ExpectObjectDisposedExceptionAsync(
             Func<HttpRequestStreamReader, Task> action
-        ) {
+        )
+        {
             var httpRequestStreamReader = new HttpRequestStreamReader(
                 new MemoryStream(),
                 Encoding.UTF8,
@@ -649,7 +657,8 @@ namespace Microsoft.AspNetCore.WebUtilities
                 int offset,
                 int count,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return _inner.ReadAsync(buffer, offset, count, cancellationToken);
             }
 
@@ -673,7 +682,8 @@ namespace Microsoft.AspNetCore.WebUtilities
                 int offset,
                 int count,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return _inner.WriteAsync(buffer, offset, count, cancellationToken);
             }
 

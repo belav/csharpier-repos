@@ -47,7 +47,8 @@ namespace ILCompiler.PEWriter
                 int calleeRVA,
                 int callCount,
                 CrossPageCall callType
-            ) {
+            )
+            {
                 Caller = caller;
                 CallerNode = callerNode;
                 CallerRVA = callerRVA;
@@ -71,7 +72,8 @@ namespace ILCompiler.PEWriter
             OutputInfoBuilder outputInfoBuilder,
             CallChainProfile callChainProfile,
             TargetDetails targetDetails
-        ) {
+        )
+        {
             _outputInfoBuilder = outputInfoBuilder;
             _callChainProfile = callChainProfile;
             _targetDetails = targetDetails;
@@ -205,7 +207,8 @@ namespace ILCompiler.PEWriter
                     ISymbolDefinitionNode,
                     MethodWithGCInfo
                 > kvpSymbolMethod in _outputInfoBuilder.MethodSymbolMap
-            ) {
+            )
+            {
                 _symbolMethodMap.Add(kvpSymbolMethod.Value.Method, kvpSymbolMethod.Key);
             }
         }
@@ -226,7 +229,8 @@ namespace ILCompiler.PEWriter
                     MethodDesc,
                     Dictionary<MethodDesc, int>
                 > kvpCallerCalleeCount in _callChainProfile.ResolvedProfileData
-            ) {
+            )
+            {
                 OutputNode callerNode = null;
                 int callerRVA = 0;
                 if (
@@ -234,7 +238,8 @@ namespace ILCompiler.PEWriter
                         kvpCallerCalleeCount.Key,
                         out ISymbolDefinitionNode callerSymbol
                     ) && _outputInfoBuilder.NodeSymbolMap.TryGetValue(callerSymbol, out callerNode)
-                ) {
+                )
+                {
                     callerRVA =
                         _outputInfoBuilder.Sections[callerNode.SectionIndex].RVAWhenPlaced
                         + callerNode.Offset;
@@ -253,7 +258,8 @@ namespace ILCompiler.PEWriter
                             calleeSymbol,
                             out calleeNode
                         )
-                    ) {
+                    )
+                    {
                         calleeRVA =
                             _outputInfoBuilder.Sections[calleeNode.SectionIndex].RVAWhenPlaced
                             + calleeNode.Offset;
@@ -280,7 +286,8 @@ namespace ILCompiler.PEWriter
             int callerRVA,
             OutputNode callee,
             int calleeRVA
-        ) {
+        )
+        {
             if (caller == null || callee == null)
             {
                 return CrossPageCall.Unresolved;

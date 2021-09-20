@@ -203,7 +203,8 @@ namespace System.Xml.Xsl.Xslt
                     eq.Left.NodeType == QilNodeType.NameOf
                     && ((QilUnary)eq.Left).Child == _iterator
                     && eq.Right.NodeType == QilNodeType.LiteralQName
-                ) {
+                )
+                {
                     // Recognized pattern B
                     x = lastAnd;
                     _qname = (QilName?)((QilLiteral)eq.Right).Value;
@@ -314,7 +315,8 @@ namespace System.Xml.Xsl.Xslt
             XPathQilFactory f,
             ReferenceReplacer refReplacer,
             InvokeGenerator invkGen
-        ) {
+        )
+        {
             _f = f;
             _refReplacer = refReplacer;
             _invkGen = invkGen;
@@ -445,7 +447,8 @@ namespace System.Xml.Xsl.Xslt
             XmlQueryType xt,
             List<Pattern> patternList,
             QilNode otherwise
-        ) {
+        )
+        {
             if (patternList.Count == 0)
             {
                 return otherwise;
@@ -467,7 +470,8 @@ namespace System.Xml.Xsl.Xslt
             QilIterator it,
             List<Pattern> patternList,
             QilNode matcher
-        ) {
+        )
+        {
             if (patternList.Count == 0)
             {
                 return matcher;
@@ -523,7 +527,8 @@ namespace System.Xml.Xsl.Xslt
             XmlQueryType xt,
             PatternBag patternBag,
             QilNode otherwise
-        ) {
+        )
+        {
             if (patternBag.FixedNamePatternsNames.Count == 0)
             {
                 return MatchPatterns(it, xt, patternBag.NonFixedNamePatterns, otherwise);

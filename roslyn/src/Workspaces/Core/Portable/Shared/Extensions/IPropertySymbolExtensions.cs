@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static IPropertySymbol RenameParameters(
             this IPropertySymbol property,
             ImmutableArray<string> parameterNames
-        ) {
+        )
+        {
             var parameterList = property.Parameters;
             if (parameterList.Select(p => p.Name).SequenceEqual(parameterNames))
             {
@@ -44,7 +45,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this IPropertySymbol property,
             ISymbol accessibleWithin,
             params INamedTypeSymbol[] attributesToRemove
-        ) {
+        )
+        {
             var someParameterHasAttribute = property.Parameters.Any(
                 p => p.GetAttributes().Any(shouldRemoveAttribute)
             );

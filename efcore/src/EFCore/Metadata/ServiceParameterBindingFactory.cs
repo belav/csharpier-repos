@@ -80,7 +80,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             IReadOnlyEntityType entityType,
             Type parameterType,
             string parameterName
-        ) {
+        )
+        {
             Check.NotNull(entityType, nameof(entityType));
             Check.NotNull(parameterType, nameof(parameterType));
             Check.NotEmpty(parameterName, nameof(parameterName));

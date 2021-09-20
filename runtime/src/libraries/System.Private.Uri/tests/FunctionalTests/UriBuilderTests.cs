@@ -109,7 +109,8 @@ namespace System.PrivateUri.Tests
             string path,
             string query,
             string fragment
-        ) {
+        )
+        {
             var uriBuilder = new UriBuilder(uriString);
             VerifyUriBuilder(
                 uriBuilder,
@@ -180,7 +181,8 @@ namespace System.PrivateUri.Tests
             string hostName,
             string expectedScheme,
             string expectedHost
-        ) {
+        )
+        {
             var uriBuilder = new UriBuilder(schemeName, hostName);
             VerifyUriBuilder(uriBuilder, expectedScheme, "", "", expectedHost, -1, "/", "", "");
         }
@@ -204,7 +206,8 @@ namespace System.PrivateUri.Tests
             int port,
             string expectedScheme,
             string expectedHost
-        ) {
+        )
+        {
             var uriBuilder = new UriBuilder(scheme, host, port);
             VerifyUriBuilder(uriBuilder, expectedScheme, "", "", expectedHost, port, "/", "", "");
         }
@@ -230,7 +233,8 @@ namespace System.PrivateUri.Tests
             string expectedScheme,
             string expectedHost,
             string expectedPath
-        ) {
+        )
+        {
             var uriBuilder = new UriBuilder(schemeName, hostName, port, pathValue);
             VerifyUriBuilder(
                 uriBuilder,
@@ -334,7 +338,8 @@ namespace System.PrivateUri.Tests
             string expectedPath,
             string expectedQuery,
             string expectedFragment
-        ) {
+        )
+        {
             var uriBuilder = new UriBuilder(schemeName, hostName, port, pathValue, extraValue);
             VerifyUriBuilder(
                 uriBuilder,
@@ -728,7 +733,8 @@ namespace System.PrivateUri.Tests
             string path,
             string query,
             string fragment
-        ) {
+        )
+        {
             Assert.Equal(scheme, uriBuilder.Scheme);
             Assert.Equal(userName, uriBuilder.UserName);
             Assert.Equal(password, uriBuilder.Password);

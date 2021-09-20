@@ -161,7 +161,8 @@ namespace System.Text.Tests
             char highSurrogate,
             char lowSurrogate,
             int expectedValue
-        ) {
+        )
+        {
             Assert.Equal(expectedValue, new Rune(highSurrogate, lowSurrogate).Value);
         }
 
@@ -213,7 +214,8 @@ namespace System.Text.Tests
             OperationStatus expectedOperationStatus,
             int expectedRuneValue,
             int expectedCharsConsumed
-        ) {
+        )
+        {
             Assert.Equal(
                 expectedOperationStatus,
                 Rune.DecodeFromUtf16(data, out Rune actualRune, out int actualCharsConsumed)
@@ -234,7 +236,8 @@ namespace System.Text.Tests
             OperationStatus expectedOperationStatus,
             int expectedRuneValue,
             int expectedCharsConsumed
-        ) {
+        )
+        {
             Assert.Equal(
                 expectedOperationStatus,
                 Rune.DecodeLastFromUtf16(data, out Rune actualRune, out int actualCharsConsumed)
@@ -275,7 +278,8 @@ namespace System.Text.Tests
             OperationStatus expectedOperationStatus,
             int expectedRuneValue,
             int expectedBytesConsumed
-        ) {
+        )
+        {
             Assert.Equal(
                 expectedOperationStatus,
                 Rune.DecodeFromUtf8(data, out Rune actualRune, out int actualBytesConsumed)
@@ -303,7 +307,8 @@ namespace System.Text.Tests
             OperationStatus expectedOperationStatus,
             int expectedRuneValue,
             int expectedBytesConsumed
-        ) {
+        )
+        {
             Assert.Equal(
                 expectedOperationStatus,
                 Rune.DecodeLastFromUtf8(data, out Rune actualRune, out int actualBytesConsumed)
@@ -324,7 +329,8 @@ namespace System.Text.Tests
             int first,
             int other,
             bool expected
-        ) {
+        )
+        {
             Rune a = new Rune(first);
             Rune b = new Rune(other);
 
@@ -354,7 +360,8 @@ namespace System.Text.Tests
             string inputString,
             int index,
             int expectedScalarValue
-        ) {
+        )
+        {
             // GetRuneAt
             Assert.Equal(expectedScalarValue, Rune.GetRuneAt(inputString, index).Value);
 
@@ -373,7 +380,8 @@ namespace System.Text.Tests
         public static void GetRuneAt_TryGetRuneAt_Utf16_InvalidData(
             char[] inputCharArray,
             int index
-        ) {
+        )
+        {
             string inputString = new string(inputCharArray);
 
             // GetRuneAt
@@ -618,7 +626,8 @@ namespace System.Text.Tests
             char highSurrogate,
             char lowSurrogate,
             int expectedValue
-        ) {
+        )
+        {
             Assert.True(Rune.TryCreate(highSurrogate, lowSurrogate, out Rune result));
             Assert.Equal(expectedValue, result.Value);
         }

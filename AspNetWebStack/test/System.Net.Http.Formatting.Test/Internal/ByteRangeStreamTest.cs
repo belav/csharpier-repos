@@ -325,7 +325,8 @@ namespace System.Net.Http.Internal
             int to,
             int innerLength,
             int effectiveLength
-        ) {
+        )
+        {
             // Arrange
             var mockInnerStream = new Mock<Stream>();
             mockInnerStream.Setup(s => s.CanSeek).Returns(true);
@@ -388,7 +389,8 @@ namespace System.Net.Http.Internal
             int to,
             int innerLength,
             int effectiveLength
-        ) {
+        )
+        {
             // Arrange
             var mockInnerStream = new Mock<Stream>();
             mockInnerStream.Setup(s => s.CanSeek).Returns(true);
@@ -442,7 +444,8 @@ namespace System.Net.Http.Internal
             int to,
             int innerLength,
             int effectiveLength
-        ) {
+        )
+        {
             // Arrange
             var mockInnerStream = new Mock<Stream>();
             mockInnerStream.Setup(s => s.CanSeek).Returns(true);
@@ -499,7 +502,8 @@ namespace System.Net.Http.Internal
             int to,
             int innerLength,
             int effectiveLength
-        ) {
+        )
+        {
             // Arrange
             var mockInnerStream = new Mock<Stream>();
             mockInnerStream.Setup(s => s.CanSeek).Returns(true);

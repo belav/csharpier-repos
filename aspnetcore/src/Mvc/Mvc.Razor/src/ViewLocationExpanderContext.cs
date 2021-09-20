@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             string? areaName,
             string? pageName,
             bool isMainPage
-        ) {
+        )
+        {
             if (actionContext == null)
             {
                 throw new ArgumentNullException(nameof(actionContext));

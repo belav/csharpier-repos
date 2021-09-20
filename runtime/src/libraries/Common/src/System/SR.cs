@@ -119,7 +119,8 @@ namespace System
             string resourceFormat,
             object? p1,
             object? p2
-        ) {
+        )
+        {
             if (UsingResourceKeys())
             {
                 return string.Join(", ", resourceFormat, p1, p2);
@@ -134,7 +135,8 @@ namespace System
             object? p1,
             object? p2,
             object? p3
-        ) {
+        )
+        {
             if (UsingResourceKeys())
             {
                 return string.Join(", ", resourceFormat, p1, p2, p3);
@@ -147,7 +149,8 @@ namespace System
             IFormatProvider? provider,
             string resourceFormat,
             params object?[]? args
-        ) {
+        )
+        {
             if (args != null)
             {
                 if (UsingResourceKeys())

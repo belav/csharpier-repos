@@ -81,7 +81,8 @@ namespace Microsoft.AspNetCore.Mvc
             string path,
             string queryString,
             string expectedUrl
-        ) {
+        )
+        {
             // Arrange
             var requestContext = new DefaultHttpContext();
             requestContext.RequestServices = CreateServices();
@@ -125,7 +126,8 @@ namespace Microsoft.AspNetCore.Mvc
         [InlineData("DELETE")]
         public void OnAuthorization_SignalsBadRequestStatusCode_ForNonHttpsAndNonGetRequests(
             string method
-        ) {
+        )
+        {
             // Arrange
             var requestContext = new DefaultHttpContext();
             requestContext.RequestServices = CreateServices();
@@ -193,7 +195,8 @@ namespace Microsoft.AspNetCore.Mvc
             string url,
             int? sslPort,
             string expectedUrl
-        ) {
+        )
+        {
             // Arrange
             var options = Options.Create(new MvcOptions());
             var uri = new Uri(url);
@@ -227,7 +230,8 @@ namespace Microsoft.AspNetCore.Mvc
         public void OnAuthorization_RedirectsToHttpsEndpoint_WithSpecifiedStatusCodeAndRequireHttpsPermanentOption(
             bool? permanent,
             bool requireHttpsPermanent
-        ) {
+        )
+        {
             var requestContext = new DefaultHttpContext();
             requestContext.RequestServices = CreateServices(null, requireHttpsPermanent);
             requestContext.Request.Scheme = "http";
@@ -266,7 +270,8 @@ namespace Microsoft.AspNetCore.Mvc
         private static IServiceProvider CreateServices(
             int? sslPort = null,
             bool requireHttpsPermanent = false
-        ) {
+        )
+        {
             var options = Options.Create(new MvcOptions());
             options.Value.SslPort = sslPort;
             options.Value.RequireHttpsPermanent = requireHttpsPermanent;

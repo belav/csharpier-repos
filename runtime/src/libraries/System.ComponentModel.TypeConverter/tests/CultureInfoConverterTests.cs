@@ -139,7 +139,8 @@ namespace System.ComponentModel.Tests
         [InlineData(typeof(int))]
         public void ConvertTo_InstanceAndNullCulture_ThrowsNotSupportedException(
             Type destinationType
-        ) {
+        )
+        {
             Assert.Throws<NotSupportedException>(() => Converter.ConvertTo(null, destinationType));
         }
 
@@ -176,7 +177,8 @@ namespace System.ComponentModel.Tests
             string fixedValue,
             string text,
             CultureInfo expected
-        ) {
+        )
+        {
             var converter = new FixedCultureInfoConverter { FixedValue = fixedValue };
             Assert.Equal(expected, converter.ConvertFromString(text));
         }

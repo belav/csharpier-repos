@@ -87,7 +87,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
             {
                 fixed (char* destinationChars = &buffer[index])fixed (
                     byte* sourceBytes = &MemoryMarshal.GetReference(source)
-                ) {
+                )
+                {
                     _decoder.Convert(
                         sourceBytes,
                         source.Length,

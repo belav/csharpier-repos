@@ -73,7 +73,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
                         if (
                             assignmentExpression.IsCompoundAssignExpression()
                             && assignmentExpression.Left == node
-                        ) {
+                        )
+                        {
                             return node.Update(
                                 node.Identifier.WithAdditionalAnnotations(
                                     CreateConflictAnnotation()
@@ -88,7 +89,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
 
             public override SyntaxNode VisitParenthesizedExpression(
                 ParenthesizedExpressionSyntax node
-            ) {
+            )
+            {
                 var newNode = base.VisitParenthesizedExpression(node);
 
                 if (node != newNode && newNode.Kind() == SyntaxKind.ParenthesizedExpression)
@@ -103,7 +105,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
                 ExpressionSyntax initializer,
                 ILocalSymbol local,
                 SemanticModel semanticModel
-            ) {
+            )
+            {
                 var simplifier = new InitializerRewriter(local, semanticModel);
                 return (ExpressionSyntax)simplifier.Visit(initializer);
             }

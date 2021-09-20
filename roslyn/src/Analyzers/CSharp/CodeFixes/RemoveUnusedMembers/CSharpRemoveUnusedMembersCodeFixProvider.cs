@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedMembers
         protected override void AdjustAndAddAppropriateDeclaratorsToRemove(
             HashSet<FieldDeclarationSyntax> fieldDeclarators,
             HashSet<SyntaxNode> declarators
-        ) {
+        )
+        {
             foreach (var fieldDeclarator in fieldDeclarators)
             {
                 AdjustAndAddAppropriateDeclaratorsToRemove(

@@ -2087,7 +2087,8 @@ class Program
             IFoo<string> ifooStr,
             IFoo<object> ifooObj,
             IFoo<int> ifooInt
-        ) {
+        )
+        {
             var res = ifooStr.IMethod1<int>(1, 2);
             WriteLineWithVerification(res, s_IFooString);
 
@@ -3545,7 +3546,8 @@ public class GenBase<T, U> : IFoo<T> where T : new()
         U u1,
         U u2,
         U u3
-    ) {
+    )
+    {
         Assert.AreEqual(obj.m_fieldT.ToString(), s1);
         Assert.AreEqual(GenBase<T, U>.s_fieldT.ToString(), s2);
         Assert.AreEqual(GenBase<T, U>.st_fieldT.ToString(), s3);
@@ -3649,7 +3651,8 @@ public class GenBase<T, U> : IFoo<T> where T : new()
         MyGenClass1<KeyValuePair<T, U>> t,
         MyGenStruct1<Dictionary<T, U>> u,
         MyGenStruct1<Dictionary<T, U>>? u2
-    ) {
+    )
+    {
         return "BoxingAndNullableTest - " + this + "::(" + t + " - " + u + " - " + u2 + ")";
     }
 }
@@ -3722,7 +3725,8 @@ public class Base
         MyGenClass1<KeyValuePair<T, U>> t,
         MyGenStruct1<Dictionary<T, U>> u,
         MyGenStruct1<Dictionary<T, U>>? u2
-    ) {
+    )
+    {
         return "BoxingAndNullableTest - " + this + "::(" + t + " - " + u + " - " + u2 + ")";
     }
 }

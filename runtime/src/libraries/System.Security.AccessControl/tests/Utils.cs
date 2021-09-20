@@ -197,7 +197,8 @@ namespace System.Security.AccessControl.Tests
         public static int ComputeBinaryLength(
             CommonSecurityDescriptor commonSecurityDescriptor,
             bool needCountDacl
-        ) {
+        )
+        {
             int verifierBinaryLength = 0;
             if (commonSecurityDescriptor != null)
             {
@@ -228,7 +229,8 @@ namespace System.Security.AccessControl.Tests
             bool isContainer,
             bool isDS,
             DiscretionaryAcl dacl
-        ) {
+        )
+        {
             byte[] craftedBForm;
             byte[] binaryForm;
 
@@ -265,7 +267,8 @@ namespace System.Security.AccessControl.Tests
             int acl1EndAceIndex,
             int acl2StartAceIndex,
             int acl2EndAceIndex
-        ) {
+        )
+        {
             int index1 = 0;
             int index2 = 0;
             bool result = true;
@@ -280,7 +283,8 @@ namespace System.Security.AccessControl.Tests
                     || acl2EndAceIndex < 0
                     || acl2StartAceIndex > acl2.Count - 1
                     || acl2EndAceIndex > acl2.Count - 1
-                ) {
+                )
+                {
                     //the caller has garenteeed the index calculation is correct so if any above condition hold,
                     //that means the range of the index is invalid
                     return true;
@@ -295,7 +299,8 @@ namespace System.Security.AccessControl.Tests
                         index1 = acl1StartAceIndex, index2 = acl2StartAceIndex;
                         index1 <= acl1EndAceIndex;
                         index1++, index2++
-                    ) {
+                    )
+                    {
                         if (!Utils.IsAceEqual(acl1[index1], acl2[index2]))
                         {
                             result = false;
@@ -374,7 +379,8 @@ namespace System.Security.AccessControl.Tests
 
                     while (
                         isExplicit ? enumerator.MoveNext() : ((AceEnumerator)enumerator).MoveNext()
-                    ) {
+                    )
+                    {
                         if (
                             GenericAce.ReferenceEquals(
                                 (GenericAce)(
@@ -384,7 +390,8 @@ namespace System.Security.AccessControl.Tests
                                 ),
                                 gAce
                             )
-                        ) {
+                        )
+                        {
                             result = true;
                             break;
                         }

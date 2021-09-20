@@ -106,7 +106,8 @@ namespace Microsoft.CodeAnalysis
             Document document,
             TextSpan span,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (span.IsEmpty)
             {
                 return span;

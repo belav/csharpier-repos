@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.PEWriter
             foreach (
                 FieldInfo fi in typeof(OpCodes).GetFields(BindingFlags.Public | BindingFlags.Static)
                     .Where(f => !reserved.Contains(f.Name))
-            ) {
+            )
+            {
                 if (fi.FieldType != typeOfOpCode)
                 {
                     continue;

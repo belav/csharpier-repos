@@ -302,7 +302,8 @@ namespace System.Globalization
             int second,
             int millisecond,
             int era
-        ) {
+        )
+        {
             year = CheckYearMonthRange(year, month, era);
             int daysInMonth = InternalGetDaysInMonth(year, month);
             if (day < 1 || day > daysInMonth)
@@ -333,7 +334,8 @@ namespace System.Globalization
             out int lunarYear,
             out int lunarMonth,
             out int lunarDate
-        ) {
+        )
+        {
             bool isLeapYear = GregorianIsLeapYear(solarYear);
             int jan1Month;
             int jan1Date;
@@ -412,7 +414,8 @@ namespace System.Globalization
             out int solarYear,
             out int solarMonth,
             out int solarDay
-        ) {
+        )
+        {
             if (lunarDate < 1 || lunarDate > 30)
             {
                 solarYear = 0;

@@ -113,7 +113,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             Binder binder,
             object[] parameters,
             CultureInfo culture
-        ) {
+        )
+        {
             Debug.Assert(binder == null, "NYI");
             return Constructor.Invoke(
                 (System.Reflection.BindingFlags)invokeAttr,
@@ -129,7 +130,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             Binder binder,
             object[] parameters,
             CultureInfo culture
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 

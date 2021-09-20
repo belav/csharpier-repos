@@ -72,7 +72,8 @@ namespace Microsoft.CodeAnalysis.Text
         /// </summary>
         public static ImmutableArray<Document> GetRelatedDocuments(
             this SourceTextContainer container
-        ) {
+        )
+        {
             if (Workspace.TryGetWorkspace(container, out var workspace))
             {
                 var solution = workspace.CurrentSolution;
@@ -115,7 +116,8 @@ namespace Microsoft.CodeAnalysis.Text
         internal static Document? GetDocumentWithFrozenPartialSemantics(
             this SourceText text,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var document = text.GetOpenDocumentInCurrentContextWithChanges();
             return document?.WithFrozenPartialSemantics(cancellationToken);
         }

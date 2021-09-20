@@ -44,16 +44,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
             [Import(typeof(SAsyncServiceProvider))]
                 VSShell.IAsyncServiceProvider asyncServiceProvider,
             IThreadingContext threadingContext
-        ) : base(
-            csharpVBRequestDispatcherFactory,
-            workspace,
-            diagnosticService: null,
-            listenerProvider,
-            lspWorkspaceRegistrationService,
-            asyncServiceProvider,
-            threadingContext,
-            diagnosticsClientName: null
-        ) {
+        )
+            : base(
+                csharpVBRequestDispatcherFactory,
+                workspace,
+                diagnosticService: null,
+                listenerProvider,
+                lspWorkspaceRegistrationService,
+                asyncServiceProvider,
+                threadingContext,
+                diagnosticsClientName: null
+            )
+        {
             _defaultCapabilitiesProvider = defaultCapabilitiesProvider;
         }
 

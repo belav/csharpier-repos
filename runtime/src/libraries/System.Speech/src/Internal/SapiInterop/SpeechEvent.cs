@@ -19,7 +19,8 @@ namespace System.Speech.Internal.SapiInterop
             ulong ullAudioStreamOffset,
             IntPtr wParam,
             IntPtr lParam
-        ) {
+        )
+        {
             // We make a copy of the SPEVENTEX data but that's okay because the lParam will only be deleted once.
             _eventId = eEventId;
             _paramType = elParamType;
@@ -31,7 +32,8 @@ namespace System.Speech.Internal.SapiInterop
             if (
                 _paramType == SPEVENTLPARAMTYPE.SPET_LPARAM_IS_POINTER
                 || _paramType == SPEVENTLPARAMTYPE.SPET_LPARAM_IS_STRING
-            ) {
+            )
+            {
                 GC.AddMemoryPressure(_sizeMemoryPressure = Marshal.SizeOf(_lParam));
             }
         }
@@ -43,7 +45,8 @@ namespace System.Speech.Internal.SapiInterop
                 sapiEvent.ullAudioStreamOffset,
                 sapiEvent.wParam,
                 sapiEvent.lParam
-            ) {
+            )
+        {
             if (audioFormat == null || audioFormat.EncodingFormat == 0)
             {
                 _audioPosition = TimeSpan.Zero;
@@ -69,7 +72,8 @@ namespace System.Speech.Internal.SapiInterop
                 sapiEventEx.ullAudioStreamOffset,
                 sapiEventEx.wParam,
                 sapiEventEx.lParam
-            ) {
+            )
+        {
             _audioPosition = new TimeSpan((long)sapiEventEx.ullAudioTimeOffset);
         }
 
@@ -86,7 +90,8 @@ namespace System.Speech.Internal.SapiInterop
                 if (
                     _paramType == SPEVENTLPARAMTYPE.SPET_LPARAM_IS_TOKEN
                     || _paramType == SPEVENTLPARAMTYPE.SPET_LPARAM_IS_OBJECT
-                ) {
+                )
+                {
                     Marshal.Release((IntPtr)_lParam);
                 }
                 else
@@ -94,7 +99,8 @@ namespace System.Speech.Internal.SapiInterop
                     if (
                         _paramType == SPEVENTLPARAMTYPE.SPET_LPARAM_IS_POINTER
                         || _paramType == SPEVENTLPARAMTYPE.SPET_LPARAM_IS_STRING
-                    ) {
+                    )
+                    {
                         Marshal.FreeCoTaskMem((IntPtr)_lParam);
                     }
                 }
@@ -123,7 +129,8 @@ namespace System.Speech.Internal.SapiInterop
             ISpEventSource sapiEventSource,
             bool additionalSapiFeatures,
             SpeechAudioFormatInfo audioFormat
-        ) {
+        )
+        {
             uint fetched;
             SpeechEvent speechEvent = null;
             if (additionalSapiFeatures)

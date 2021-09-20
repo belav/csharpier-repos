@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
                     getArgumentsWithSeparators,
                     out var argumentIndex
                 )
-            ) {
+            )
+            {
                 var argumentNames = getArgumentNames(argumentList).ToList();
                 var argumentCount = argumentNames.Count;
 
@@ -136,7 +137,8 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
                 if (
                     isTriggerToken(token)
                     && !syntaxFacts.IsInNonUserCode(root.SyntaxTree, position, cancellationToken)
-                ) {
+                )
+                {
                     expression = token.GetAncestor<TSyntax>();
                     return true;
                 }
@@ -157,7 +159,8 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
                         position,
                         cancellationToken
                     )
-                ) {
+                )
+                {
                     expression = token.Parent?.AncestorsAndSelf()
                         .TakeWhile(n => !syntaxFacts.IsAnonymousFunction(n))
                         .OfType<TSyntax>()
@@ -177,7 +180,8 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
             Document document,
             SyntaxNode initializer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (initializer == null || initializer.Parent == null)
             {
                 return default;

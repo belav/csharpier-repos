@@ -86,7 +86,8 @@ namespace System.Net.Tests
             using (HttpListenerResponse response1 = await GetResponse())
             using (
                 HttpListenerResponse response2 = await new HttpListenerResponseTests().GetResponse()
-            ) {
+            )
+            {
                 // CopyFrom overrides old headers.
                 response2.Headers.Add("Name2", "Value2");
 
@@ -136,7 +137,8 @@ namespace System.Net.Tests
         public async Task Redirect_Invoke_SetsRedirectionProperties(
             string url,
             int expectedNumberOfBytes
-        ) {
+        )
+        {
             string expectedUrl = url?.Trim() ?? "";
 
             using (HttpListenerResponse response = await GetResponse())
@@ -301,7 +303,8 @@ namespace System.Net.Tests
         [InlineData(false)]
         public async Task CloseResponseEntity_AllContentLengthAlreadySent_DoesNotSendEntity(
             bool willBlock
-        ) {
+        )
+        {
             using (HttpListenerResponse response = await GetResponse())
             {
                 response.ContentLength64 = SimpleMessage.Length;
@@ -322,7 +325,8 @@ namespace System.Net.Tests
         [OuterLoop("Investigating reliability in CI.")]
         public async Task CloseResponseEntity_NotChunkedSentHeaders_SendsEntityWithoutModifyingContentLength(
             bool willBlock
-        ) {
+        )
+        {
             using (HttpListenerResponse response = await GetResponse())
             {
                 response.ContentLength64 = SimpleMessage.Length;
@@ -343,7 +347,8 @@ namespace System.Net.Tests
         [OuterLoop("Investigating reliability in CI.")]
         public async Task CloseResponseEntity_ChunkedNotSentHeaders_ModifiesContentLength(
             bool willBlock
-        ) {
+        )
+        {
             using (HttpListenerResponse response = await GetResponse())
             {
                 response.SendChunked = true;
@@ -362,7 +367,8 @@ namespace System.Net.Tests
         [OuterLoop("Investigating reliability in CI.")]
         public async Task CloseResponseEntity_ChunkedSentHeaders_DoesNotModifyContentLength(
             bool willBlock
-        ) {
+        )
+        {
             using (HttpListenerResponse response = await GetResponse())
             {
                 response.SendChunked = true;
@@ -402,7 +408,8 @@ namespace System.Net.Tests
         [InlineData(false)]
         public async Task CloseResponseEntity_SendMoreThanContentLength_ThrowsInvalidOperationException(
             bool willBlock
-        ) {
+        )
+        {
             HttpListenerResponse response = await GetResponse();
             try
             {

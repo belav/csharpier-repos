@@ -198,7 +198,8 @@ namespace System.Tests
             string name,
             bool ignoreCase,
             Type expected
-        ) {
+        )
+        {
             if (!ignoreCase)
             {
                 Assert.Equal(expected, type.GetInterface(name));

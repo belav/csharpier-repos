@@ -96,7 +96,8 @@ namespace Microsoft.DiaSymReader
                     foreach (
                         var method in typeof(Environment).GetTypeInfo()
                             .GetDeclaredMethods("GetEnvironmentVariable")
-                    ) {
+                    )
+                    {
                         var parameters = method.GetParameters();
                         if (parameters.Length == 1 && parameters[0].ParameterType == typeof(string))
                         {
@@ -195,7 +196,8 @@ namespace Microsoft.DiaSymReader
             bool useComRegistry,
             out string moduleName,
             out Exception loadException
-        ) {
+        )
+        {
             object instance = null;
             loadException = null;
             moduleName = null;

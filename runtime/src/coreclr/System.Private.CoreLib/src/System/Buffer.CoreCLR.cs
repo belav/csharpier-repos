@@ -35,7 +35,8 @@ namespace System
             ref byte destination,
             ref byte source,
             nuint byteCount
-        ) {
+        )
+        {
             if (byteCount <= BulkMoveWithWriteBarrierChunk)
                 __BulkMoveWithWriteBarrier(ref destination, ref source, byteCount);
             else
@@ -48,7 +49,8 @@ namespace System
             ref byte destination,
             ref byte source,
             nuint byteCount
-        ) {
+        )
+        {
             Debug.Assert(byteCount > BulkMoveWithWriteBarrierChunk);
 
             if (Unsafe.AreSame(ref source, ref destination))
@@ -113,7 +115,8 @@ namespace System
             byte[] src,
             int srcIndex,
             int len
-        ) {
+        )
+        {
             Debug.Assert(
                 (srcIndex >= 0) && (destIndex >= 0) && (len >= 0),
                 "Index and length must be non-negative!"

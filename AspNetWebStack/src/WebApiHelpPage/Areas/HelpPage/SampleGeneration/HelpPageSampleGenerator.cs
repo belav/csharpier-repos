@@ -97,7 +97,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
         public virtual IDictionary<MediaTypeHeaderValue, object> GetSample(
             ApiDescription api,
             SampleDirection sampleDirection
-        ) {
+        )
+        {
             if (api == null)
             {
                 throw new ArgumentNullException("api");
@@ -188,7 +189,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
             MediaTypeFormatter formatter,
             MediaTypeHeaderValue mediaType,
             SampleDirection sampleDirection
-        ) {
+        )
+        {
             object sample;
 
             // First, try to get the sample provided for the specified mediaType, sampleDirection, controllerName, actionName and parameterNames.
@@ -218,7 +220,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
                 )
                 || ActionSamples.TryGetValue(new HelpPageSampleKey(mediaType, type), out sample)
                 || ActionSamples.TryGetValue(new HelpPageSampleKey(mediaType), out sample)
-            ) {
+            )
+            {
                 return sample;
             }
 
@@ -247,7 +250,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
                 // No specific object available, try our factories.
                 foreach (
                     Func<HelpPageSampleGenerator, Type, object> factory in SampleObjectFactories
-                ) {
+                )
+                {
                     if (factory == null)
                     {
                         continue;
@@ -313,7 +317,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
             IEnumerable<string> parameterNames,
             SampleDirection sampleDirection,
             out Collection<MediaTypeFormatter> formatters
-        ) {
+        )
+        {
             if (!Enum.IsDefined(typeof(SampleDirection), sampleDirection))
             {
                 throw new InvalidEnumArgumentException(
@@ -346,7 +351,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
                     ),
                     out type
                 )
-            ) {
+            )
+            {
                 // Re-compute the supported formatters based on type
                 Collection<MediaTypeFormatter> newFormatters = new Collection<MediaTypeFormatter>();
                 foreach (var formatter in api.ActionDescriptor.Configuration.Formatters)
@@ -404,7 +410,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
             object value,
             Type type,
             MediaTypeHeaderValue mediaType
-        ) {
+        )
+        {
             if (formatter == null)
             {
                 throw new ArgumentNullException("formatter");
@@ -492,7 +499,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
         private static object DefaultSampleObjectFactory(
             HelpPageSampleGenerator sampleGenerator,
             Type type
-        ) {
+        )
+        {
             // Try to create a default sample object
             ObjectGenerator objectGenerator = new ObjectGenerator();
             return objectGenerator.GenerateObject(type);
@@ -540,7 +548,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
             SampleDirection sampleDirection,
             MediaTypeFormatter formatter,
             Type type
-        ) {
+        )
+        {
             switch (sampleDirection)
             {
                 case SampleDirection.Request:
@@ -556,7 +565,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
             string actionName,
             IEnumerable<string> parameterNames,
             SampleDirection sampleDirection
-        ) {
+        )
+        {
             HashSet<string> parameterNamesSet = new HashSet<string>(
                 parameterNames,
                 StringComparer.OrdinalIgnoreCase
@@ -580,7 +590,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
                         || parameterNamesSet.SetEquals(sampleKey.ParameterNames)
                     )
                     && sampleDirection == sampleKey.SampleDirection
-                ) {
+                )
+                {
                     yield return sample;
                 }
             }

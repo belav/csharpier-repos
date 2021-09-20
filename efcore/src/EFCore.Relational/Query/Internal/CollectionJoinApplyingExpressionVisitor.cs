@@ -30,7 +30,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         /// </summary>
         public CollectionJoinApplyingExpressionVisitor(
             RelationalQueryCompilationContext queryCompilationContext
-        ) {
+        )
+        {
             Check.NotNull(queryCompilationContext, nameof(queryCompilationContext));
 
             _splitQuery =
@@ -68,7 +69,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     || selectExpression.Limit != null
                     || selectExpression.Offset != null
                     || selectExpression.GroupBy.Count > 0
-                ) {
+                )
+                {
                     selectExpression.PushdownIntoSubquery();
                 }
 

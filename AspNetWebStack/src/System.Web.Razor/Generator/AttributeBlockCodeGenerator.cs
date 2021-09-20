@@ -14,7 +14,8 @@ namespace System.Web.Razor.Generator
             string name,
             LocationTagged<string> prefix,
             LocationTagged<string> suffix
-        ) {
+        )
+        {
             Name = name;
             Prefix = prefix;
             Suffix = suffix;

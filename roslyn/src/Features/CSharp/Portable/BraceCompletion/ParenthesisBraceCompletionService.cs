@@ -41,14 +41,16 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
             int position,
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxFactsService = document.GetRequiredLanguageService<ISyntaxFactsService>();
             if (
                 ParentIsSkippedTokensTriviaOrNull(syntaxFactsService, token)
                 || !IsValidOpeningBraceToken(token)
                 || token.SpanStart != position
                 || token.Parent == null
-            ) {
+            )
+            {
                 return false;
             }
 

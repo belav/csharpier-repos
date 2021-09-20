@@ -94,7 +94,8 @@ namespace Microsoft.AspNetCore.WebSockets.Test
             int count,
             AsyncCallback callback,
             object state
-        ) {
+        )
+        {
             return ReadStream.BeginRead(buffer, offset, count, callback, state);
         }
 
@@ -108,7 +109,8 @@ namespace Microsoft.AspNetCore.WebSockets.Test
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return ReadStream.ReadAsync(buffer, offset, count, cancellationToken);
         }
 
@@ -116,7 +118,8 @@ namespace Microsoft.AspNetCore.WebSockets.Test
             Stream destination,
             int bufferSize,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return ReadStream.CopyToAsync(destination, bufferSize, cancellationToken);
         }
 
@@ -146,7 +149,8 @@ namespace Microsoft.AspNetCore.WebSockets.Test
             int count,
             AsyncCallback callback,
             object state
-        ) {
+        )
+        {
             return WriteStream.BeginWrite(buffer, offset, count, callback, state);
         }
 
@@ -160,7 +164,8 @@ namespace Microsoft.AspNetCore.WebSockets.Test
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return WriteStream.WriteAsync(buffer, offset, count, cancellationToken);
         }
 

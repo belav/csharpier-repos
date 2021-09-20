@@ -181,7 +181,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
         ITypeSymbol IMethodSymbol.GetTypeInferredDuringReduction(
             ITypeParameterSymbol reducedFromTypeParameter
-        ) {
+        )
+        {
             return _underlying.GetTypeInferredDuringReduction(
                     reducedFromTypeParameter.EnsureCSharpSymbolOrNull(
                         nameof(reducedFromTypeParameter)
@@ -253,7 +254,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
         IMethodSymbol IMethodSymbol.Construct(
             ImmutableArray<ITypeSymbol> typeArguments,
             ImmutableArray<CodeAnalysis.NullableAnnotation> typeArgumentNullableAnnotations
-        ) {
+        )
+        {
             return _underlying.Construct(
                     ConstructTypeArguments(typeArguments, typeArgumentNullableAnnotations)
                 )

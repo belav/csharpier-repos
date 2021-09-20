@@ -97,7 +97,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
             public BasicBlockAnalysisData AnalyzeLocalFunctionInvocation(
                 IMethodSymbol localFunction,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Debug.Assert(localFunction.IsLocalFunction());
 
                 // Use the original definition of the local function for flow analysis.
@@ -122,7 +123,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
             public BasicBlockAnalysisData AnalyzeLambdaInvocation(
                 IFlowAnonymousFunctionOperation lambda,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (!LambdaOrLocalFunctionsBeingAnalyzed.Add(lambda.Symbol))
                 {
                     ResetState();
@@ -190,7 +192,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
             > UpdateSymbolsWriteMap(
                 PooledDictionary<(ISymbol Symbol, IOperation Write), bool> symbolsWriteMap,
                 ImmutableArray<IParameterSymbol> parameters
-            ) {
+            )
+            {
                 // Mark parameters as being written from the value provided at the call site.
                 // Note that the write operation is "null" as there is no corresponding IOperation for parameter definition.
                 foreach (var parameter in parameters)
@@ -241,7 +244,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                 IOperation operation,
                 bool maybeWritten,
                 bool isRef
-            ) {
+            )
+            {
                 var symbolAndWrite = (symbol, operation);
                 if (symbol.Kind == SymbolKind.Discard)
                 {

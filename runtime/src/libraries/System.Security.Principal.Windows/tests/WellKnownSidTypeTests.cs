@@ -141,7 +141,8 @@ public class WellKnownSidTypeTests
     [InlineData((WellKnownSidType)((int)WellKnownSidType.WinCapabilityRemovableStorageSid + 1))]
     public void CreatingSecurityIdentifierOutsideWellKnownSidTypeDefinedRangeThrowsException(
         WellKnownSidType sidType
-    ) {
+    )
+    {
         var currentDomainSid = WindowsIdentity.GetCurrent().Owner.AccountDomainSid;
         AssertExtensions.Throws<ArgumentException>(
             "sidType",

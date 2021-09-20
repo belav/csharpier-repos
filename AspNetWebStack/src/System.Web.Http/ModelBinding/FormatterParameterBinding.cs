@@ -75,7 +75,8 @@ namespace System.Web.Http.ModelBinding
             Type type,
             IEnumerable<MediaTypeFormatter> formatters,
             IFormatterLogger formatterLogger
-        ) {
+        )
+        {
             // Try to get the cancellation token if it is set earlier during the magic handshake
             // to maintain backward compatibility.
             object cancellationToken;
@@ -104,7 +105,8 @@ namespace System.Web.Http.ModelBinding
             IEnumerable<MediaTypeFormatter> formatters,
             IFormatterLogger formatterLogger,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             HttpContent content = request.Content;
             if (content == null)
             {
@@ -145,7 +147,8 @@ namespace System.Web.Http.ModelBinding
             ModelMetadataProvider metadataProvider,
             HttpActionContext actionContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             HttpParameterDescriptor paramFromBody = this.Descriptor;
             Type type = paramFromBody.ParameterType;
             HttpRequestMessage request = actionContext.ControllerContext.Request;
@@ -174,7 +177,8 @@ namespace System.Web.Http.ModelBinding
             HttpRequestMessage request,
             IFormatterLogger formatterLogger,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // pass the cancellation token through the request as we cannot call the ReadContentAsync overload that takes
             // CancellationToken for backword compatibility reasons.
             request.Properties[CancellationTokenKey] = cancellationToken;

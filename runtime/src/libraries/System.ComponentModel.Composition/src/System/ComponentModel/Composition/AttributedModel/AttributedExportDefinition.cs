@@ -67,7 +67,8 @@ namespace System.ComponentModel.Composition.AttributedModel
                         && partMetadata.ContainsKey(
                             CompositionConstants.PartCreationPolicyMetadataName
                         )
-                    ) {
+                    )
+                    {
                         metadata.Add(
                             CompositionConstants.PartCreationPolicyMetadataName,
                             partMetadata[CompositionConstants.PartCreationPolicyMetadataName]
@@ -78,7 +79,8 @@ namespace System.ComponentModel.Composition.AttributedModel
                         (_typeIdentityType != null)
                         && (_member.MemberType != MemberTypes.Method)
                         && _typeIdentityType.ContainsGenericParameters
-                    ) {
+                    )
+                    {
                         metadata.Add(
                             CompositionConstants.GenericExportParametersOrderMetadataName,
                             GenericServices.GetGenericParametersOrder(_typeIdentityType)

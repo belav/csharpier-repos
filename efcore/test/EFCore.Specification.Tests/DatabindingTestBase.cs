@@ -73,7 +73,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true)]
         public virtual void DbSet_Local_contains_Unchanged_Modified_and_Added_entities_but_not_Deleted_entities(
             bool toObservableCollection
-        ) {
+        )
+        {
             using var context = CreateF1Context();
             SetupContext(context);
 
@@ -94,7 +95,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true)]
         public virtual void Adding_entity_to_context_is_reflected_in_local_view(
             bool toObservableCollection
-        ) {
+        )
+        {
             using var context = CreateF1Context();
             var localView = context.Drivers.Local;
             var local = toObservableCollection
@@ -115,7 +117,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true)]
         public virtual void Attaching_entity_to_context_is_reflected_in_local_view(
             bool toObservableCollection
-        ) {
+        )
+        {
             using var context = CreateF1Context();
             var localView = context.Drivers.Local;
             var local = toObservableCollection
@@ -136,7 +139,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true)]
         public virtual void Entities_materialized_into_context_are_reflected_in_local_view(
             bool toObservableCollection
-        ) {
+        )
+        {
             using var context = CreateF1Context();
             var localView = context.Drivers.Local;
             var local = toObservableCollection
@@ -155,7 +159,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true)]
         public virtual void Entities_detached_from_context_are_removed_from_local_view(
             bool toObservableCollection
-        ) {
+        )
+        {
             using var context = CreateF1Context();
             SetupContext(context);
 
@@ -168,7 +173,8 @@ namespace Microsoft.EntityFrameworkCore
 
             foreach (
                 var driver in context.Drivers.Local.Where(d => d.TeamId == UnchangedTeam).ToList()
-            ) {
+            )
+            {
                 context.Entry(driver).State = EntityState.Detached;
             }
 
@@ -181,7 +187,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true)]
         public virtual void Entities_deleted_from_context_are_removed_from_local_view(
             bool toObservableCollection
-        ) {
+        )
+        {
             using var context = CreateF1Context();
             SetupContext(context);
 
@@ -194,7 +201,8 @@ namespace Microsoft.EntityFrameworkCore
 
             foreach (
                 var driver in context.Drivers.Local.Where(d => d.TeamId == UnchangedTeam).ToList()
-            ) {
+            )
+            {
                 context.Drivers.Remove(driver);
             }
 
@@ -207,7 +215,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true)]
         public virtual void Entities_with_state_changed_to_deleted_are_removed_from_local_view(
             bool toObservableCollection
-        ) {
+        )
+        {
             using var context = CreateF1Context();
             SetupContext(context);
 
@@ -220,7 +229,8 @@ namespace Microsoft.EntityFrameworkCore
 
             foreach (
                 var driver in context.Drivers.Local.Where(d => d.TeamId == UnchangedTeam).ToList()
-            ) {
+            )
+            {
                 context.Entry(driver).State = EntityState.Deleted;
             }
 
@@ -233,7 +243,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true)]
         public virtual void Entities_with_state_changed_to_detached_are_removed_from_local_view(
             bool toObservableCollection
-        ) {
+        )
+        {
             using var context = CreateF1Context();
             SetupContext(context);
 
@@ -246,7 +257,8 @@ namespace Microsoft.EntityFrameworkCore
 
             foreach (
                 var driver in context.Drivers.Local.Where(d => d.TeamId == UnchangedTeam).ToList()
-            ) {
+            )
+            {
                 context.Entry(driver).State = EntityState.Detached;
             }
 
@@ -259,7 +271,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true)]
         public virtual void Entities_with_state_changed_from_deleted_to_added_are_added_to_local_view(
             bool toObservableCollection
-        ) {
+        )
+        {
             using var context = CreateF1Context();
             SetupContext(context);
 
@@ -284,7 +297,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true)]
         public virtual void Entities_with_state_changed_from_deleted_to_unchanged_are_added_to_local_view(
             bool toObservableCollection
-        ) {
+        )
+        {
             using var context = CreateF1Context();
             SetupContext(context);
 
@@ -309,7 +323,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true)]
         public virtual void Entities_added_to_local_view_are_added_to_state_manager(
             bool toObservableCollection
-        ) {
+        )
+        {
             using var context = CreateF1Context();
             var localView = context.Drivers.Local;
             var local = toObservableCollection
@@ -341,7 +356,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true)]
         public virtual void Entities_and_owned_children_added_to_local_view_are_added_to_state_manager(
             bool toObservableCollection
-        ) {
+        )
+        {
             using var context = CreateF1Context();
             var localView = context.Teams.Local;
             var local = toObservableCollection
@@ -372,7 +388,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true)]
         public virtual void Entities_removed_from_the_local_view_are_marked_deleted_in_the_state_manager(
             bool toObservableCollection
-        ) {
+        )
+        {
             using var context = CreateF1Context();
             SetupContext(context);
 
@@ -419,7 +436,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true)]
         public virtual void Adding_entity_to_local_view_that_is_Deleted_in_the_state_manager_makes_entity_Added(
             bool toObservableCollection
-        ) {
+        )
+        {
             using var context = CreateF1Context();
             SetupContext(context);
 
@@ -456,7 +474,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true)]
         public virtual void Adding_entity_to_state_manager_of_different_type_than_local_keyless_type_has_no_effect_on_local_view(
             bool toObservableCollection
-        ) {
+        )
+        {
             using var context = CreateF1Context();
             SetupContext(context);
 
@@ -477,7 +496,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true)]
         public virtual void Adding_entity_to_state_manager_of_subtype_still_shows_up_in_local_view(
             bool toObservableCollection
-        ) {
+        )
+        {
             using var context = CreateF1Context();
             context.Drivers.Load();
 
@@ -539,7 +559,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true)]
         public void LocalView_is_initialized_with_entities_from_the_context(
             bool toObservableCollection
-        ) {
+        )
+        {
             using var context = CreateF1Context();
             context.Drivers.Load();
             context.Set<TestDriver>().Load();
@@ -637,7 +658,8 @@ namespace Microsoft.EntityFrameworkCore
 
             foreach (
                 var driver in context.Drivers.Local.Where(d => d.TeamId == UnchangedTeam).ToList()
-            ) {
+            )
+            {
                 context.Entry(driver).State = EntityState.Detached;
             }
 
@@ -656,7 +678,8 @@ namespace Microsoft.EntityFrameworkCore
 
             foreach (
                 var driver in context.Drivers.Local.Where(d => d.TeamId == UnchangedTeam).ToList()
-            ) {
+            )
+            {
                 context.Drivers.Remove(driver);
             }
 
@@ -873,7 +896,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(CascadeTiming.Never)]
         public virtual void Entity_removed_from_navigation_property_binding_list_is_removed_from_nav_property_but_not_marked_Deleted(
             CascadeTiming deleteOrphansTiming
-        ) {
+        )
+        {
             using var context = CreateF1Context();
             context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming;
 

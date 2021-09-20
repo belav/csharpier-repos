@@ -47,7 +47,8 @@ namespace Microsoft.EntityFrameworkCore.Utilities
         public static bool StructuralSequenceEqual<TSource>(
             this IEnumerable<TSource> first,
             IEnumerable<TSource> second
-        ) {
+        )
+        {
             if (ReferenceEquals(first, second))
             {
                 return true;
@@ -63,7 +64,8 @@ namespace Microsoft.EntityFrameworkCore.Utilities
                         firstEnumerator.Current,
                         secondEnumerator.Current
                     )
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -74,7 +76,8 @@ namespace Microsoft.EntityFrameworkCore.Utilities
         public static bool StartsWith<TSource>(
             this IEnumerable<TSource> first,
             IEnumerable<TSource> second
-        ) {
+        )
+        {
             if (ReferenceEquals(first, second))
             {
                 return true;
@@ -88,7 +91,8 @@ namespace Microsoft.EntityFrameworkCore.Utilities
                     if (
                         !firstEnumerator.MoveNext()
                         || !Equals(firstEnumerator.Current, secondEnumerator.Current)
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }
@@ -130,7 +134,8 @@ namespace Microsoft.EntityFrameworkCore.Utilities
         public static async Task<List<TSource>> ToListAsync<TSource>(
             this IAsyncEnumerable<TSource> source,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var list = new List<TSource>();
             await foreach (var element in source.WithCancellation(cancellationToken))
             {

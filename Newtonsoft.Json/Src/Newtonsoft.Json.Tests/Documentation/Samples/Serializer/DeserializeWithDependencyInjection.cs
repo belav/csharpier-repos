@@ -82,7 +82,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                         new TypedService(objectType),
                         out registration
                     )
-                ) {
+                )
+                {
                     Type viewType = (registration.Activator as ReflectionActivator)?.LimitType;
                     if (viewType != null)
                     {

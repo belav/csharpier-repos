@@ -61,7 +61,8 @@ namespace Microsoft.AspNetCore.Mvc
             RouteData routeData,
             ActionDescriptor actionDescriptor,
             ModelStateDictionary modelState
-        ) {
+        )
+        {
             if (httpContext == null)
             {
                 throw new ArgumentNullException(nameof(httpContext));

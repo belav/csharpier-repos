@@ -70,14 +70,16 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
         public static bool operator ==(
             in SeparatedSyntaxList<TNode> left,
             in SeparatedSyntaxList<TNode> right
-        ) {
+        )
+        {
             return left.Equals(right);
         }
 
         public static bool operator !=(
             in SeparatedSyntaxList<TNode> left,
             in SeparatedSyntaxList<TNode> right
-        ) {
+        )
+        {
             return !left.Equals(right);
         }
 
@@ -98,7 +100,8 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
 
         public static implicit operator SeparatedSyntaxList<GreenNode>(
             SeparatedSyntaxList<TNode> list
-        ) {
+        )
+        {
             return new SeparatedSyntaxList<GreenNode>(list.GetWithSeparators());
         }
 

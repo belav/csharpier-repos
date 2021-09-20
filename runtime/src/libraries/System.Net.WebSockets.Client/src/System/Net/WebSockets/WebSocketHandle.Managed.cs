@@ -45,7 +45,8 @@ namespace System.Net.WebSockets
             Uri uri,
             CancellationToken cancellationToken,
             ClientWebSocketOptions options
-        ) {
+        )
+        {
             HttpResponseMessage? response = null;
             SocketsHttpHandler? handler = null;
             bool disposeHandler = true;
@@ -75,7 +76,8 @@ namespace System.Net.WebSockets
                     && options.Cookies == null
                     && options.RemoteCertificateValidationCallback == null
                     && options._clientCertificates?.Count == 0
-                ) {
+                )
+                {
                     disposeHandler = false;
                     handler = s_defaultHandler;
                     if (handler == null)
@@ -88,7 +90,8 @@ namespace System.Net.WebSockets
                         };
                         if (
                             Interlocked.CompareExchange(ref s_defaultHandler, handler, null) != null
-                        ) {
+                        )
+                        {
                             handler.Dispose();
                             handler = s_defaultHandler;
                         }
@@ -182,7 +185,8 @@ namespace System.Net.WebSockets
                         HttpKnownHeaderNames.SecWebSocketProtocol,
                         out IEnumerable<string>? subprotocolEnumerableValues
                     )
-                ) {
+                )
+                {
                     Debug.Assert(subprotocolEnumerableValues is string[]);
                     string[] subprotocolArray = (string[])subprotocolEnumerableValues;
                     if (subprotocolArray.Length > 0 && !string.IsNullOrEmpty(subprotocolArray[0]))
@@ -196,7 +200,8 @@ namespace System.Net.WebSockets
                                         subprotocolArray[0],
                                         StringComparison.OrdinalIgnoreCase
                                     )
-                                ) {
+                                )
+                                {
                                     subprotocol = requestedProtocol;
                                     break;
                                 }
@@ -249,7 +254,8 @@ namespace System.Net.WebSockets
                         exc is OperationCanceledException
                         && cancellationToken.IsCancellationRequested
                     )
-                ) {
+                )
+                {
                     throw;
                 }
 
@@ -277,7 +283,8 @@ namespace System.Net.WebSockets
             HttpRequestMessage request,
             string secKey,
             ClientWebSocketOptions options
-        ) {
+        )
+        {
             request.Headers.TryAddWithoutValidation(
                 HttpKnownHeaderNames.Connection,
                 HttpKnownHeaderNames.Upgrade
@@ -392,7 +399,8 @@ namespace System.Net.WebSockets
             if (
                 array.Length != 1
                 || !string.Equals(array[0], expectedValue, StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 throw new WebSocketException(
                     WebSocketError.HeaderError,
                     SR.Format(

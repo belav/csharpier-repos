@@ -2346,7 +2346,8 @@ public class MyClass
                     FileAccess.Read,
                     FileShare.None
                 )
-            ) {
+            )
+            {
                 comp = CSharpCompilation.Create(
                     GetUniqueName(),
                     new[] { syntaxTree },

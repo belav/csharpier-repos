@@ -99,7 +99,8 @@ namespace System.IO.Pipelines
             int consumedIndex,
             BufferSegment? examinedSegment,
             int examinedIndex
-        ) {
+        )
+        {
             if (consumedSegment == null || examinedSegment == null)
             {
                 return;
@@ -204,7 +205,8 @@ namespace System.IO.Pipelines
         /// <inheritdoc />
         public override async ValueTask<ReadResult> ReadAsync(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             // TODO ReadyAsync needs to throw if there are overlapping reads.
             ThrowIfCompleted();
 
@@ -266,7 +268,8 @@ namespace System.IO.Pipelines
                     if (
                         tokenSource.IsCancellationRequested
                         && !cancellationToken.IsCancellationRequested
-                    ) {
+                    )
+                    {
                         // Catch cancellation and translate it into setting isCanceled = true
                         isCanceled = true;
                     }
@@ -309,7 +312,8 @@ namespace System.IO.Pipelines
             if (
                 isCancellationRequested
                 || _bufferedBytes > 0 && (!_examinedEverything || _isStreamCompleted)
-            ) {
+            )
+            {
                 if (isCancellationRequested)
                 {
                     ClearCancellationToken();

@@ -26,7 +26,8 @@ namespace System.Tests
             Object arg2,
             Object arg3,
             __arglist
-        ) {
+        )
+        {
             ArgIterator args = new ArgIterator(__arglist);
             int argCount = args.GetRemainingCount() + 4;
             object[] objArgs = new Object[argCount];

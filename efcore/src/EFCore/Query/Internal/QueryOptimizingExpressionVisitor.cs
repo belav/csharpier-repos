@@ -81,12 +81,14 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             if (
                 Equals(_startsWithMethodInfo, methodCallExpression.Method)
                 || Equals(_endsWithMethodInfo, methodCallExpression.Method)
-            ) {
+            )
+            {
                 if (
                     methodCallExpression.Arguments[0] is ConstantExpression constantArgument
                     && constantArgument.Value is string stringValue
                     && stringValue == string.Empty
-                ) {
+                )
+                {
                     // every string starts/ends with empty string.
                     return Expression.Constant(true);
                 }
@@ -127,7 +129,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     out var negated
                 )
                 && (left is ParameterExpression || right is ParameterExpression)
-            ) {
+            )
+            {
                 var nonParameterExpression = left is ParameterExpression ? right : left;
 
                 if (methodInfo.Equals(EnumerableMethods.AnyWithPredicate) && !negated)
@@ -164,7 +167,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 && methodCallExpression.Method.GetGenericMethodDefinition()
                     is MethodInfo containsMethodInfo
                 && containsMethodInfo.Equals(QueryableMethods.Contains)
-            ) {
+            )
+            {
                 var typeArgument = methodCallExpression.Method.GetGenericArguments()[0];
                 var anyMethod = QueryableMethods.AnyWithPredicate.MakeGenericMethod(typeArgument);
 
@@ -213,7 +217,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 && visited.Arguments[2] is ConstantExpression textCompareConstantExpression
                 && _stringCompareWithComparisonMethod != null
                 && _stringCompareWithoutComparisonMethod != null
-            ) {
+            )
+            {
                 return textCompareConstantExpression.Value is bool boolValue && boolValue
                   ? Expression.Call(
                         _stringCompareWithComparisonMethod,
@@ -253,12 +258,14 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     Equals(_startsWithMethodInfo, innerMethodCall.Method)
                     || Equals(_endsWithMethodInfo, innerMethodCall.Method)
                 )
-            ) {
+            )
+            {
                 if (
                     innerMethodCall.Arguments[0] is ConstantExpression constantArgument
                     && constantArgument.Value is string stringValue
                     && stringValue == string.Empty
-                ) {
+                )
+                {
                     // every string starts/ends with empty string.
                     return Expression.Constant(false);
                 }
@@ -300,7 +307,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 binaryExpression.NodeType != ExpressionType.Coalesce
                 && left.Type != right.Type
                 && left.Type.UnwrapNullableType() == right.Type.UnwrapNullableType()
-            ) {
+            )
+            {
                 if (left.Type.IsNullableValueType())
                 {
                     right = Expression.Convert(right, left.Type);
@@ -329,7 +337,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             if (
                 ifTrue.Type != ifFalse.Type
                 && ifTrue.Type.UnwrapNullableType() == ifFalse.Type.UnwrapNullableType()
-            ) {
+            )
+            {
                 if (ifTrue.Type.IsNullableValueType())
                 {
                     ifFalse = Expression.Convert(ifFalse, ifTrue.Type);
@@ -451,7 +460,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             [NotNullWhen(true)] out Expression? left,
             [NotNullWhen(true)] out Expression? right,
             out bool negated
-        ) {
+        )
+        {
             (left, right, negated) = (default, default, default);
 
             switch (expression)
@@ -480,7 +490,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         methodCallExpression.Arguments.Count == 1
                         && methodCallExpression.Object?.Type
                             == methodCallExpression.Arguments[0].Type
-                    ) {
+                    )
+                    {
                         (left, right) = (
                             methodCallExpression.Object,
                             methodCallExpression.Arguments[0]
@@ -492,7 +503,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         methodCallExpression.Arguments.Count == 2
                         && methodCallExpression.Arguments[0].Type
                             == methodCallExpression.Arguments[1].Type
-                    ) {
+                    )
+                    {
                         (left, right) = (
                             methodCallExpression.Arguments[0],
                             methodCallExpression.Arguments[1]
@@ -541,7 +553,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         || visitedMemberExpression.Member.Name == nameof(Nullable<int>.Value)
                     )
                 )
-            ) {
+            )
+            {
                 var isLeftNullConstant = IsNullConstant(binaryTest.Left);
                 var isRightNullConstant = IsNullConstant(binaryTest.Right);
 
@@ -557,7 +570,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                             && IsNullConstant(conditionalExpression.IfFalse)
                         )
                     )
-                ) {
+                )
+                {
                     var nonNullExpression =
                         binaryTest.NodeType == ExpressionType.Equal
                             ? conditionalExpression.IfFalse

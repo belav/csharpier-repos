@@ -359,7 +359,8 @@ namespace System.Speech.Recognition
             int maxRepeat,
             string minParamName,
             string maxParamName
-        ) {
+        )
+        {
             if (minRepeat < 0)
             {
                 throw new ArgumentOutOfRangeException(
@@ -376,7 +377,8 @@ namespace System.Speech.Recognition
         internal static void ValidateSubsetMatchingCriteriaArgument(
             SubsetMatchingMode subsetMatchingCriteria,
             string paramName
-        ) {
+        )
+        {
             switch (subsetMatchingCriteria)
             {
                 case SubsetMatchingMode.OrderedSubset:
@@ -492,7 +494,8 @@ namespace System.Speech.Recognition
                 IElement parent,
                 IRule rule,
                 IdentifierCollection ruleIds
-            ) {
+            )
+            {
                 Collection<RuleElement> newRules = new();
                 CalcCount(null);
                 Optimize(newRules);

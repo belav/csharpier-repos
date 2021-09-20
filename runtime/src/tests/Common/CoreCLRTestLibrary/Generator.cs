@@ -415,7 +415,8 @@ namespace TestLibrary
             Boolean validPath,
             Int32 minLength,
             Int32 maxLength
-        ) {
+        )
+        {
             Seed = new_seed;
             return GetString(validPath, minLength, maxLength);
         }
@@ -431,7 +432,8 @@ namespace TestLibrary
             Boolean allowNulls,
             Int32 minLength,
             Int32 maxLength
-        ) {
+        )
+        {
             Seed = new_seed;
             return GetString(validPath, allowNulls, minLength, maxLength);
         }
@@ -440,7 +442,8 @@ namespace TestLibrary
             Boolean allowNulls,
             Int32 minLength,
             Int32 maxLength
-        ) {
+        )
+        {
             return GetString(validPath, allowNulls, true, minLength, maxLength);
         }
 
@@ -452,7 +455,8 @@ namespace TestLibrary
             Boolean allowNoWeight,
             Int32 minLength,
             Int32 maxLength
-        ) {
+        )
+        {
             Seed = new_seed;
             return GetString(validPath, allowNulls, allowNoWeight, minLength, maxLength);
         }
@@ -462,7 +466,8 @@ namespace TestLibrary
             Boolean allowNoWeight,
             Int32 minLength,
             Int32 maxLength
-        ) {
+        )
+        {
             StringBuilder sVal = new StringBuilder();
             Char c;
             Int32 length;
@@ -518,7 +523,8 @@ namespace TestLibrary
             Boolean validPath,
             Int32 minLength,
             Int32 maxLength
-        ) {
+        )
+        {
             Seed = new_seed;
             return GetStrings(validPath, minLength, maxLength);
         }

@@ -77,7 +77,8 @@ namespace DelegateTest
                         identify_null.c_Working_null_false
                     )
                     != c_StartWrok + c_Working
-                ) {
+                )
+                {
                     TestLibrary.TestFramework.LogError(
                         "001",
                         "delegate combine is not successful "
@@ -110,7 +111,8 @@ namespace DelegateTest
                         identify_null.c_Start_null_true,
                         identify_null.c_Working_null_false
                     ) != c_Working
-                ) {
+                )
+                {
                     TestLibrary.TestFramework.LogError(
                         "003",
                         "delegate combine is not successful "
@@ -143,7 +145,8 @@ namespace DelegateTest
                         identify_null.c_Start_null_false,
                         identify_null.c_Working_null_true
                     ) != c_StartWrok
-                ) {
+                )
+                {
                     TestLibrary.TestFramework.LogError(
                         "005",
                         "delegate combine is not successful "
@@ -176,7 +179,8 @@ namespace DelegateTest
                         identify_null.c_Start_null_true,
                         identify_null.c_Working_null_true
                     ) != string.Empty
-                ) {
+                )
+                {
                     TestLibrary.TestFramework.LogError(
                         "007",
                         "delegate combine is not successful "

@@ -120,7 +120,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
 
         private EmitOptions GetEmitOptions(
             DependencyContextCompilationOptions dependencyContextOptions
-        ) {
+        )
+        {
             // Assume we're always producing pdbs unless DebugType = none
             _emitPdb = true;
             DebugInformationFormat debugInformationFormat;
@@ -166,7 +167,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
         private static CSharpCompilationOptions GetCompilationOptions(
             IWebHostEnvironment hostingEnvironment,
             DependencyContextCompilationOptions dependencyContextOptions
-        ) {
+        )
+        {
             var csharpCompilationOptions = new CSharpCompilationOptions(
                 OutputKind.DynamicallyLinkedLibrary
             );
@@ -221,7 +223,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
         private static CSharpParseOptions GetParseOptions(
             IWebHostEnvironment hostingEnvironment,
             DependencyContextCompilationOptions dependencyContextOptions
-        ) {
+        )
+        {
             var configurationSymbol = hostingEnvironment.IsDevelopment() ? "DEBUG" : "RELEASE";
             var defines = dependencyContextOptions.Defines.Concat(new[] { configurationSymbol });
 
@@ -237,7 +240,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
                     dependencyContextOptions.LanguageVersion,
                     out var languageVersion
                 )
-            ) {
+            )
+            {
                 parseOptions = parseOptions.WithLanguageVersion(languageVersion);
             }
             else

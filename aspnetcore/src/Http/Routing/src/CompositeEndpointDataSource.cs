@@ -33,9 +33,8 @@ namespace Microsoft.AspNetCore.Routing
             _lock = new object();
         }
 
-        internal CompositeEndpointDataSource(
-            ObservableCollection<EndpointDataSource> dataSources
-        ) : this()
+        internal CompositeEndpointDataSource(ObservableCollection<EndpointDataSource> dataSources)
+            : this()
         {
             dataSources.CollectionChanged += OnDataSourcesChanged;
 
@@ -47,9 +46,8 @@ namespace Microsoft.AspNetCore.Routing
         /// </summary>
         /// <param name="endpointDataSources">An collection of <see cref="EndpointDataSource" /> objects.</param>
         /// <returns>A <see cref="CompositeEndpointDataSource"/> </returns>
-        public CompositeEndpointDataSource(
-            IEnumerable<EndpointDataSource> endpointDataSources
-        ) : this()
+        public CompositeEndpointDataSource(IEnumerable<EndpointDataSource> endpointDataSources)
+            : this()
         {
             _dataSources = new List<EndpointDataSource>();
 

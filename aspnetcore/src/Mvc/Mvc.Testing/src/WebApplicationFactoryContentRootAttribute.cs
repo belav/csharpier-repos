@@ -48,7 +48,8 @@ namespace Microsoft.AspNetCore.Mvc.Testing
             string contentRootPath,
             string contentRootTest,
             string priority
-        ) {
+        )
+        {
             Key = key;
             ContentRootPath = contentRootPath;
             ContentRootTest = contentRootTest;
@@ -59,7 +60,8 @@ namespace Microsoft.AspNetCore.Mvc.Testing
                     CultureInfo.InvariantCulture,
                     out var parsedPriority
                 )
-            ) {
+            )
+            {
                 Priority = parsedPriority;
             }
         }

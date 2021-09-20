@@ -232,7 +232,8 @@ namespace Microsoft.AspNetCore.Authorization.Policy.Test
                 HttpContext context,
                 string scheme,
                 AuthenticationProperties properties
-            ) {
+            )
+            {
                 throw new System.NotImplementedException();
             }
 
@@ -240,7 +241,8 @@ namespace Microsoft.AspNetCore.Authorization.Policy.Test
                 HttpContext context,
                 string scheme,
                 AuthenticationProperties properties
-            ) {
+            )
+            {
                 throw new System.NotImplementedException();
             }
 
@@ -249,7 +251,8 @@ namespace Microsoft.AspNetCore.Authorization.Policy.Test
                 string scheme,
                 ClaimsPrincipal principal,
                 AuthenticationProperties properties
-            ) {
+            )
+            {
                 throw new System.NotImplementedException();
             }
 
@@ -257,7 +260,8 @@ namespace Microsoft.AspNetCore.Authorization.Policy.Test
                 HttpContext context,
                 string scheme,
                 AuthenticationProperties properties
-            ) {
+            )
+            {
                 throw new System.NotImplementedException();
             }
         }
@@ -280,7 +284,8 @@ namespace Microsoft.AspNetCore.Authorization.Policy.Test
                 HttpContext context,
                 string scheme,
                 AuthenticationProperties properties
-            ) {
+            )
+            {
                 throw new System.NotImplementedException();
             }
 
@@ -288,7 +293,8 @@ namespace Microsoft.AspNetCore.Authorization.Policy.Test
                 HttpContext context,
                 string scheme,
                 AuthenticationProperties properties
-            ) {
+            )
+            {
                 throw new System.NotImplementedException();
             }
 
@@ -297,7 +303,8 @@ namespace Microsoft.AspNetCore.Authorization.Policy.Test
                 string scheme,
                 ClaimsPrincipal principal,
                 AuthenticationProperties properties
-            ) {
+            )
+            {
                 throw new System.NotImplementedException();
             }
 
@@ -305,7 +312,8 @@ namespace Microsoft.AspNetCore.Authorization.Policy.Test
                 HttpContext context,
                 string scheme,
                 AuthenticationProperties properties
-            ) {
+            )
+            {
                 throw new System.NotImplementedException();
             }
         }

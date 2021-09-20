@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Completion
             int position,
             CompletionTrigger trigger,
             OptionSet options
-        ) {
+        )
+        {
             switch (trigger.Kind)
             {
                 case CompletionTriggerKind.Insertion when position > 0:
@@ -46,7 +47,8 @@ namespace Microsoft.CodeAnalysis.Completion
             Document document,
             CompletionItem item,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Get the actual description provided by whatever subclass we are.
             // Then, if we would commit text that could be expanded as a snippet,
             // put that information in the description so that the user knows.
@@ -68,7 +70,8 @@ namespace Microsoft.CodeAnalysis.Completion
             CompletionItem item,
             ImmutableArray<TaggedText> parts,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var languageServices = document.Project.LanguageServices;
             var snippetService = languageServices.GetService<ISnippetInfoService>();
             if (snippetService != null)
@@ -86,7 +89,8 @@ namespace Microsoft.CodeAnalysis.Completion
                 if (
                     snippetService != null
                     && snippetService.SnippetShortcutExists_NonBlocking(insertionText)
-                ) {
+                )
+                {
                     var note = string.Format(
                         FeaturesResources.Note_colon_Tab_twice_to_insert_the_0_snippet,
                         insertionText
@@ -108,7 +112,8 @@ namespace Microsoft.CodeAnalysis.Completion
             Document document,
             CompletionItem item,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return CommonCompletionItem.HasDescription(item)
               ? Task.FromResult(CommonCompletionItem.GetDescription(item))
               : Task.FromResult(CompletionDescription.Empty);
@@ -119,7 +124,8 @@ namespace Microsoft.CodeAnalysis.Completion
             CompletionItem item,
             char? commitKey = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var change =
                 (
                     await GetTextChangeAsync(document, item, commitKey, cancellationToken)
@@ -144,7 +150,8 @@ namespace Microsoft.CodeAnalysis.Completion
         protected static CompletionItem CreateSuggestionModeItem(
             string? displayText,
             string? description
-        ) {
+        )
+        {
             return CommonCompletionItem.Create(
                 displayText: displayText ?? string.Empty,
                 displayTextSuffix: "",

@@ -106,7 +106,8 @@ namespace System.ComponentModel.Composition.Primitives
             ImportDefinition definition,
             out Tuple<ComposablePartDefinition, ExportDefinition>? singleMatch,
             out IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>>? multipleMatches
-        ) {
+        )
+        {
             singleMatch = null;
             multipleMatches = null;
 

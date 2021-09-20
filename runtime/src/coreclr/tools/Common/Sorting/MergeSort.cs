@@ -25,7 +25,8 @@ namespace ILCompiler
         public static void MergeSortAllowDuplicates<T>(
             this List<T> listToSort,
             Comparison<T> comparison
-        ) {
+        )
+        {
             MergeSortCore<
                 T,
                 List<T>,
@@ -51,7 +52,8 @@ namespace ILCompiler
         public static void MergeSortAllowDuplicates<T>(
             this List<T> listToSort,
             IComparer<T> comparer
-        ) {
+        )
+        {
             MergeSortCore<
                 T,
                 List<T>,
@@ -77,7 +79,8 @@ namespace ILCompiler
         public static void MergeSortAllowDuplicates<T>(
             this T[] arrayToSort,
             Comparison<T> comparison
-        ) {
+        )
+        {
             MergeSortCore<
                 T,
                 T[],

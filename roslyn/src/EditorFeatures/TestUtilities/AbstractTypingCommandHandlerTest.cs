@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
             string initialMarkup,
             string expectedMarkup,
             Action<TestWorkspace> initializeWorkspace = null
-        ) {
+        )
+        {
             using (var workspace = CreateTestWorkspace(initialMarkup))
             {
                 initializeWorkspace?.Invoke(workspace);

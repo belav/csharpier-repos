@@ -382,7 +382,8 @@ namespace System.DirectoryServices.Protocols
             uint flags,
             IntPtr defaultsPtr,
             IntPtr interactPtr
-        ) {
+        )
+        {
             if (ldapHandle == IntPtr.Zero)
             {
                 return -9; // Parameter Error

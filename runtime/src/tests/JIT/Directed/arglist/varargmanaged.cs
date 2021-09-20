@@ -33,7 +33,8 @@ namespace NativeVarargTest
             int eight,
             int nine,
             __arglist
-        ) {
+        )
+        {
             return one + two + three + four + five + six + seven + eight + nine;
         }
 
@@ -49,7 +50,8 @@ namespace NativeVarargTest
             long eight,
             long nine,
             __arglist
-        ) {
+        )
+        {
             return one + two + three + four + five + six + seven + eight + nine;
         }
 
@@ -65,7 +67,8 @@ namespace NativeVarargTest
             float eight,
             float nine,
             __arglist
-        ) {
+        )
+        {
             return one + two + three + four + five + six + seven + eight + nine;
         }
 
@@ -81,7 +84,8 @@ namespace NativeVarargTest
             double eight,
             double nine,
             __arglist
-        ) {
+        )
+        {
             return one + two + three + four + five + six + seven + eight + nine;
         }
 
@@ -106,7 +110,8 @@ namespace NativeVarargTest
             float seventeen,
             float eighteen,
             __arglist
-        ) {
+        )
+        {
             float sum = one + two + three + four + five + six + seven + eight + nine;
             sum +=
                 ten
@@ -143,7 +148,8 @@ namespace NativeVarargTest
             int seventeen,
             int eighteen,
             __arglist
-        ) {
+        )
+        {
             float sum = one + two + three + four + five + six + seven + eight + nine;
             sum +=
                 ten
@@ -180,7 +186,8 @@ namespace NativeVarargTest
             double seventeen,
             double eighteen,
             __arglist
-        ) {
+        )
+        {
             double sum = one + two + three + four + five + six + seven + eight + nine;
             sum +=
                 ten
@@ -217,7 +224,8 @@ namespace NativeVarargTest
             int seventeen,
             int eighteen,
             __arglist
-        ) {
+        )
+        {
             double sum = one + two + three + four + five + six + seven + eight + nine;
             sum +=
                 ten
@@ -254,7 +262,8 @@ namespace NativeVarargTest
             float seventeen,
             float eighteen,
             __arglist
-        ) {
+        )
+        {
             float sum = one + two + three + four + five + six + seven + eight + nine;
             sum +=
                 ten
@@ -291,7 +300,8 @@ namespace NativeVarargTest
             long seventeen,
             long eighteen,
             __arglist
-        ) {
+        )
+        {
             float sum = one + two + three + four + five + six + seven + eight + nine;
             sum +=
                 ten
@@ -328,7 +338,8 @@ namespace NativeVarargTest
             double seventeen,
             double eighteen,
             __arglist
-        ) {
+        )
+        {
             double sum = one + two + three + four + five + six + seven + eight + nine;
             sum +=
                 ten
@@ -365,7 +376,8 @@ namespace NativeVarargTest
             long seventeen,
             long eighteen,
             __arglist
-        ) {
+        )
+        {
             double sum = one + two + three + four + five + six + seven + eight + nine;
             sum +=
                 ten
@@ -394,7 +406,8 @@ namespace NativeVarargTest
             TwoIntStruct nine,
             TwoIntStruct ten,
             __arglist
-        ) {
+        )
+        {
             int sum = one.a + one.b;
             sum += two.a + two.b;
             sum += three.a + three.b;
@@ -422,7 +435,8 @@ namespace NativeVarargTest
             FourIntStruct nine,
             FourIntStruct ten,
             __arglist
-        ) {
+        )
+        {
             int sum = one.a + one.b + one.c + one.d;
             sum += two.a + two.b + two.c + two.d;
             sum += three.a + three.b + three.c + three.d;
@@ -452,7 +466,8 @@ namespace NativeVarargTest
             TwoLongStruct nine,
             TwoLongStruct ten,
             __arglist
-        ) {
+        )
+        {
             long sum = one.a + one.b;
             sum += two.a + two.b;
             sum += three.a + three.b;
@@ -480,7 +495,8 @@ namespace NativeVarargTest
             TwoLongStruct nine,
             TwoLongStruct ten,
             __arglist
-        ) {
+        )
+        {
             long sum = one.a + one.b;
             sum += two.a + two.b;
             sum += three.a + three.b;
@@ -509,7 +525,8 @@ namespace NativeVarargTest
             TwoLongStruct nine,
             TwoLongStruct ten,
             __arglist
-        ) {
+        )
+        {
             long sum = one.a + one.b;
             sum += two.a + two.b;
             sum += three.a + three.b;
@@ -539,7 +556,8 @@ namespace NativeVarargTest
             FourLongStruct nine,
             FourLongStruct ten,
             __arglist
-        ) {
+        )
+        {
             long sum = one.a + one.b + one.c + one.d;
             sum += two.a + two.b + two.c + two.d;
             sum += three.a + three.b + three.c + three.d;
@@ -567,7 +585,8 @@ namespace NativeVarargTest
             TwoFloatStruct nine,
             TwoFloatStruct ten,
             __arglist
-        ) {
+        )
+        {
             float sum = one.a + one.b;
             sum += two.a + two.b;
             sum += three.a + three.b;
@@ -595,7 +614,8 @@ namespace NativeVarargTest
             FourFloatStruct nine,
             FourFloatStruct ten,
             __arglist
-        ) {
+        )
+        {
             float sum = one.a + one.b + one.c + one.d;
             sum += two.a + two.b + two.c + two.d;
             sum += three.a + three.b + three.c + three.d;
@@ -623,7 +643,8 @@ namespace NativeVarargTest
             TwoDoubleStruct nine,
             TwoDoubleStruct ten,
             __arglist
-        ) {
+        )
+        {
             double sum = one.a + one.b;
             sum += two.a + two.b;
             sum += three.a + three.b;
@@ -652,7 +673,8 @@ namespace NativeVarargTest
             TwoDoubleStruct nine,
             TwoDoubleStruct ten,
             __arglist
-        ) {
+        )
+        {
             double sum = one.a + one.b;
             sum += two.a + two.b;
             sum += three.a + three.b;
@@ -682,7 +704,8 @@ namespace NativeVarargTest
             FourDoubleStruct nine,
             FourDoubleStruct ten,
             __arglist
-        ) {
+        )
+        {
             double sum = one.a + one.b + one.c + one.d;
             sum += two.a + two.b + two.c + two.d;
             sum += three.a + three.b + three.c + three.d;
@@ -758,7 +781,8 @@ namespace NativeVarargTest
         public static OneLongStruct TestEchoOneLongStructManagedNoVararg(
             OneLongStruct arg,
             __arglist
-        ) {
+        )
+        {
             return arg;
         }
 
@@ -766,7 +790,8 @@ namespace NativeVarargTest
         public static TwoLongStruct TestEchoTwoLongStructManagedNoVararg(
             TwoLongStruct arg,
             __arglist
-        ) {
+        )
+        {
             return arg;
         }
 
@@ -774,7 +799,8 @@ namespace NativeVarargTest
         public static EightByteStruct TestEchoEightByteStructStructManagedNoVararg(
             EightByteStruct arg,
             __arglist
-        ) {
+        )
+        {
             return arg;
         }
 
@@ -782,7 +808,8 @@ namespace NativeVarargTest
         public static FourIntStruct TestEchoFourIntStructManagedNoVararg(
             FourIntStruct arg,
             __arglist
-        ) {
+        )
+        {
             return arg;
         }
 
@@ -790,7 +817,8 @@ namespace NativeVarargTest
         public static SixteenByteStruct TestEchoSixteenByteStructManagedNoVararg(
             SixteenByteStruct arg,
             __arglist
-        ) {
+        )
+        {
             return arg;
         }
 
@@ -798,7 +826,8 @@ namespace NativeVarargTest
         public static FourLongStruct TestEchoFourLongStructManagedNoVararg(
             FourLongStruct arg,
             __arglist
-        ) {
+        )
+        {
             return arg;
         }
 
@@ -806,7 +835,8 @@ namespace NativeVarargTest
         public static OneFloatStruct TestEchoOneFloatStructManagedNoVararg(
             OneFloatStruct arg,
             __arglist
-        ) {
+        )
+        {
             return arg;
         }
 
@@ -814,7 +844,8 @@ namespace NativeVarargTest
         public static TwoFloatStruct TestEchoTwoFloatStructManagedNoVararg(
             TwoFloatStruct arg,
             __arglist
-        ) {
+        )
+        {
             return arg;
         }
 
@@ -822,7 +853,8 @@ namespace NativeVarargTest
         public static OneDoubleStruct TestEchoOneDoubleStructManagedNoVararg(
             OneDoubleStruct arg,
             __arglist
-        ) {
+        )
+        {
             return arg;
         }
 
@@ -830,7 +862,8 @@ namespace NativeVarargTest
         public static TwoDoubleStruct TestEchoTwoDoubleStructManagedNoVararg(
             TwoDoubleStruct arg,
             __arglist
-        ) {
+        )
+        {
             return arg;
         }
 
@@ -838,7 +871,8 @@ namespace NativeVarargTest
         public static ThreeDoubleStruct TestEchoThreeDoubleStructManagedNoVararg(
             ThreeDoubleStruct arg,
             __arglist
-        ) {
+        )
+        {
             return arg;
         }
 
@@ -846,7 +880,8 @@ namespace NativeVarargTest
         public static FourFloatStruct TestEchoFourFloatStructManagedNoVararg(
             FourFloatStruct arg,
             __arglist
-        ) {
+        )
+        {
             return arg;
         }
 
@@ -854,7 +889,8 @@ namespace NativeVarargTest
         public static FourDoubleStruct TestEchoFourDoubleStructManagedNoVararg(
             FourDoubleStruct arg,
             __arglist
-        ) {
+        )
+        {
             return arg;
         }
 
@@ -975,7 +1011,8 @@ namespace NativeVarargTest
             int float_count,
             int double_count,
             __arglist
-        ) {
+        )
+        {
             ArgIterator it = new ArgIterator(__arglist);
 
             int count = float_count + double_count;
@@ -1371,7 +1408,8 @@ namespace NativeVarargTest
         public static EightByteStruct TestEchoEightByteStructStructManaged(
             EightByteStruct arg,
             __arglist
-        ) {
+        )
+        {
             ArgIterator it = new ArgIterator(__arglist);
             var varArg = __refvalue(it.GetNextArg(), EightByteStruct);
 
@@ -1391,7 +1429,8 @@ namespace NativeVarargTest
         public static SixteenByteStruct TestEchoSixteenByteStructManaged(
             SixteenByteStruct arg,
             __arglist
-        ) {
+        )
+        {
             ArgIterator it = new ArgIterator(__arglist);
             var varArg = __refvalue(it.GetNextArg(), SixteenByteStruct);
 
@@ -1447,7 +1486,8 @@ namespace NativeVarargTest
         public static ThreeDoubleStruct TestEchoThreeDoubleStructManaged(
             ThreeDoubleStruct arg,
             __arglist
-        ) {
+        )
+        {
             ArgIterator it = new ArgIterator(__arglist);
             var varArg = __refvalue(it.GetNextArg(), ThreeDoubleStruct);
 
@@ -1467,7 +1507,8 @@ namespace NativeVarargTest
         public static FourDoubleStruct TestEchoFourDoubleStructManaged(
             FourDoubleStruct arg,
             __arglist
-        ) {
+        )
+        {
             ArgIterator it = new ArgIterator(__arglist);
             var varArg = __refvalue(it.GetNextArg(), FourDoubleStruct);
 
@@ -1480,7 +1521,8 @@ namespace NativeVarargTest
         public static FourDoubleStruct TestEchoFourDoubleStructManagedViaAddress(
             FourDoubleStruct arg,
             __arglist
-        ) {
+        )
+        {
             ArgIterator it = new ArgIterator(__arglist);
             var varArg = __refvalue(it.GetNextArg(), FourDoubleStruct);
 
@@ -1493,7 +1535,8 @@ namespace NativeVarargTest
             ref double b,
             ref double c,
             ref double d
-        ) {
+        )
+        {
             return new FourDoubleStruct { a = a, b = b, c = c, d = d };
         }
     }

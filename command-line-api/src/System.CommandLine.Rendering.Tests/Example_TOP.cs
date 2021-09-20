@@ -279,7 +279,8 @@ PID    COMMAND      %CPU TIME     #TH   #WQ  #PORT MEM    PURG   CMPRS  PGRP  PP
             int uid,
             int faults,
             int copyOnWriteFaults
-        ) {
+        )
+        {
             ProcessId = processId;
             Command = command;
             CpuPercentage = cpuPercentage;

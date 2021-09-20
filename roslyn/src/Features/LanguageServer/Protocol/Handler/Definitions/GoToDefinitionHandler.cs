@@ -18,9 +18,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public GoToDefinitionHandler(
-            IMetadataAsSourceFileService metadataAsSourceFileService
-        ) : base(metadataAsSourceFileService) { }
+        public GoToDefinitionHandler(IMetadataAsSourceFileService metadataAsSourceFileService)
+            : base(metadataAsSourceFileService) { }
 
         public override string Method => LSP.Methods.TextDocumentDefinitionName;
 

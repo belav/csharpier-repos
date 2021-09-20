@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.SemanticModelReuse
             SemanticModel currentSemanticModel,
             SyntaxNode bodyNode,
             VersionStamp topLevelSementicVersion
-        ) {
+        )
+        {
             PreviousNonSpeculativeSemanticModel = previousNonSpeculativeSemanticModel;
             CurrentSemanticModel = currentSemanticModel;
             BodyNode = bodyNode;
@@ -101,7 +102,8 @@ namespace Microsoft.CodeAnalysis.SemanticModelReuse
                 Document document,
                 SyntaxNode node,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var reuseService =
                     document.GetRequiredLanguageService<ISemanticModelReuseLanguageService>();
 
@@ -131,7 +133,8 @@ namespace Microsoft.CodeAnalysis.SemanticModelReuse
                     && reuseInfoOpt.HasValue
                     && reuseInfoOpt.Value.PreviousNonSpeculativeSemanticModel.SyntaxTree
                         == bodyNode.SyntaxTree
-                ) {
+                )
+                {
                     return reuseInfoOpt.Value.PreviousNonSpeculativeSemanticModel;
                 }
 
@@ -160,7 +163,8 @@ namespace Microsoft.CodeAnalysis.SemanticModelReuse
                 Document document,
                 SyntaxNode bodyNode,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var linkedIds = document.GetLinkedDocumentIds();
 
                 // Get the current top level version for this document's project.  If it has changed, then we cannot
@@ -221,7 +225,8 @@ namespace Microsoft.CodeAnalysis.SemanticModelReuse
                 SyntaxNode bodyNode,
                 VersionStamp topLevelSemanticVersion,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // if this is asking about a doc we don't know about, we can't reuse anything.
                 if (!map.ContainsKey(document.Id))
                     return null;

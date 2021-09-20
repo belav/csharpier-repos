@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 //
 // Authors:
-//  Jordi Mas i Hern�ndez (jordi@ximian.com)
+//  Jordi Mas i Herni?1ndez (jordi@ximian.com)
 //  Sebastien Pouliot  <sebastien@ximian.com>
 //
 // (C) 2004 Ximian, Inc.  http://www.ximian.com
@@ -84,7 +84,8 @@ namespace System.Drawing.Imaging.Tests
             string mask,
             string pattern,
             string pattern2
-        ) {
+        )
+        {
             ImageCodecInfo encoder = GetEncoder(clsid);
             ImageCodecInfo decoder = GetDecoder(clsid);
 
@@ -137,7 +138,8 @@ namespace System.Drawing.Imaging.Tests
             string pattern,
             string pattern2,
             ImageCodecInfo codecInfo
-        ) {
+        )
+        {
             Regex extRegex = new Regex(
                 @"^(\*\.\w+(;(\*\.\w+))*;)?"
                     + Regex.Escape(FilenameExtension)
@@ -381,7 +383,8 @@ namespace System.Drawing.Imaging.Tests
             string mask,
             string pattern,
             string pattern2
-        ) {
+        )
+        {
             CheckDecoderAndEncoder(
                 clsid,
                 format,

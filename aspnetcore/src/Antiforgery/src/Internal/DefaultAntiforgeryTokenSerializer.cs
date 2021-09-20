@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Antiforgery
         public DefaultAntiforgeryTokenSerializer(
             IDataProtectionProvider provider,
             ObjectPool<AntiforgerySerializationContext> pool
-        ) {
+        )
+        {
             if (provider == null)
             {
                 throw new ArgumentNullException(nameof(provider));

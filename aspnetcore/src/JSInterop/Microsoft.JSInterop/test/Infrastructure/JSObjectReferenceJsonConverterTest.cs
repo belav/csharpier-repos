@@ -130,7 +130,8 @@ namespace Microsoft.JSInterop.Infrastructure
                 T0 arg0,
                 T1 arg1,
                 T2 arg2
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }

@@ -83,7 +83,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             public void RunStructFldScenario(
                 ScalarTernOpBinResTest__MultiplyNoFlagsUInt32 testClass
-            ) {
+            )
+            {
                 UInt32 buffer = 0;
                 var result = Bmi2.MultiplyNoFlags(_fld1, _fld2, &buffer);
                 testClass.ValidateResult(_fld1, _fld2, buffer, result);
@@ -252,7 +253,8 @@ namespace JIT.HardwareIntrinsics.X86
             UInt32 lower,
             UInt32 higher,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             var isUnexpectedResult = false;
 
             uint expectedHigher = 4294967294,

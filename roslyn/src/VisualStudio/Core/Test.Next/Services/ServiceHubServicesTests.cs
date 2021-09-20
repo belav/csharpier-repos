@@ -242,7 +242,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
                 DocumentId documentId,
                 ImmutableArray<TodoCommentData> data,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 _dataSource.SetResult((documentId, data));
                 return ValueTaskFactory.CompletedTask;
             }
@@ -253,7 +254,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             Workspace remoteWorkspace,
             Solution solution,
             Dictionary<Checksum, object> map = null
-        ) {
+        )
+        {
             // make sure checksum is calculated
             await solution.State.GetChecksumAsync(CancellationToken.None);
 
@@ -343,7 +345,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             public ValueTask ReportDesignerAttributeDataAsync(
                 ImmutableArray<DesignerAttributeData> infos,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 _infosSource.SetResult(infos);
                 return ValueTaskFactory.CompletedTask;
             }
@@ -507,7 +510,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             Solution solution,
             string csAddition,
             string vbAddition
-        ) {
+        )
+        {
             var remoteSolution = remoteWorkspace.CurrentSolution;
             var projectIds = solution.ProjectIds;
 
@@ -551,7 +555,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             Solution solution2,
             string projectName,
             string documentName
-        ) {
+        )
+        {
             Assert.True(solution1.Workspace is RemoteWorkspace);
             Assert.True(solution2.Workspace is RemoteWorkspace);
 
@@ -604,7 +609,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
         private static async Task VerifyAssetStorageAsync(
             InProcRemoteHostClient client,
             Solution solution
-        ) {
+        )
+        {
             var map = await solution.GetAssetMapAsync(CancellationToken.None);
 
             var storage = client.TestData.WorkspaceManager.SolutionAssetCache;
@@ -618,7 +624,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             string documentName,
             string csAddition,
             string vbAddition
-        ) {
+        )
+        {
             var (_, document) = GetProjectAndDocument(solution, projectName, documentName);
 
             return document.WithText(GetNewText(document, csAddition, vbAddition)).Project.Solution;
@@ -628,7 +635,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             Document document,
             string csAddition,
             string vbAddition
-        ) {
+        )
+        {
             if (document.Project.Language == LanguageNames.CSharp)
             {
                 return SourceText.From(
@@ -646,7 +654,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             Solution solution,
             string projectName,
             string documentName
-        ) {
+        )
+        {
             var project = solution.Projects.First(
                 p => string.Equals(p.Name, projectName, StringComparison.OrdinalIgnoreCase)
             );
@@ -719,7 +728,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             string[] documents,
             string[] additionalDocuments,
             ProjectId[] p2pReferences
-        ) {
+        )
+        {
             var projectName = $"Project{solution.ProjectIds.Count}";
             var project = solution.AddProject(projectName, $"{projectName}.dll", language)
                 .AddMetadataReference(

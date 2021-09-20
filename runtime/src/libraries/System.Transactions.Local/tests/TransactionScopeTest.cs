@@ -268,7 +268,8 @@ namespace System.Transactions.Tests
                     TransactionScope scope2 = new TransactionScope(
                         TransactionScopeOption.RequiresNew
                     )
-                ) {
+                )
+                {
                     irm2.Value = 20;
                     scope2.Complete();
                 }
@@ -304,7 +305,8 @@ namespace System.Transactions.Tests
                     TransactionScope scope2 = new TransactionScope(
                         TransactionScopeOption.RequiresNew
                     )
-                ) {
+                )
+                {
                     irm2.Value = 20;
                     /* Not completing
                      scope2.Complete();*/
@@ -341,7 +343,8 @@ namespace System.Transactions.Tests
 
                 using (
                     TransactionScope scope2 = new TransactionScope(TransactionScopeOption.Suppress)
-                ) {
+                )
+                {
                     /* Not transactional, so this WON'T get committed */
                     irm2.Value = 20;
                     scope2.Complete();
@@ -401,7 +404,8 @@ namespace System.Transactions.Tests
 
                 using (
                     TransactionScope scope2 = new TransactionScope(TransactionScopeOption.Suppress)
-                ) {
+                )
+                {
                     /* Not transactional, so this WON'T get committed */
                     irm2.Value = 4;
                     scope2.Complete();
@@ -412,7 +416,8 @@ namespace System.Transactions.Tests
                     TransactionScope scope3 = new TransactionScope(
                         TransactionScopeOption.RequiresNew
                     )
-                ) {
+                )
+                {
                     irm.Value = 6;
                     scope3.Complete();
                 }
@@ -488,7 +493,8 @@ namespace System.Transactions.Tests
                     TransactionScope scope3 = new TransactionScope(
                         TransactionScopeOption.RequiresNew
                     )
-                ) {
+                )
+                {
                     /* Using RequiresNew here, so outer transaction
                      * being aborted doesn't matter
                      */
@@ -576,7 +582,8 @@ namespace System.Transactions.Tests
                             TransactionScopeOption.Required,
                             new TimeSpan(0, 0, 10)
                         )
-                    ) {
+                    )
+                    {
                         irm.Value = 2;
                         irm2.Value = 20;
                         irm3.Value = 24;
@@ -733,7 +740,8 @@ namespace System.Transactions.Tests
                     TransactionScope scope = new TransactionScope(
                         TransactionScopeOption.RequiresNew
                     )
-                ) {
+                )
+                {
                     Assert.True(
                         ct != Transaction.Current,
                         "Scope with RequiresNew should have a new ambient transaction"

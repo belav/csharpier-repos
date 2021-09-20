@@ -258,7 +258,8 @@ namespace System.Web.Mvc
             private static ViewDataInfo EvalComplexExpression(
                 object indexableObject,
                 string expression
-            ) {
+            )
+            {
                 foreach (ExpressionPair expressionPair in GetRightToLeftExpressions(expression))
                 {
                     string subExpression = expressionPair.Left;

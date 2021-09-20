@@ -55,7 +55,8 @@ namespace CodeGenerator
             string http2ConnectionPath,
             string transportMultiplexedConnectionFeatureCollectionPath,
             string transportConnectionFeatureCollectionPath
-        ) {
+        )
+        {
             var knownHeadersContent = KnownHeaders.GeneratedFile();
             var httpProtocolFeatureCollectionContent = HttpProtocolFeatureCollection.GenerateFile();
             var httpUtilitiesContent = HttpUtilities.HttpUtilities.GeneratedFile();

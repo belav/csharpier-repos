@@ -34,7 +34,8 @@ namespace IntelHardwareIntrinsicTest
                         new double[4] { 22, -1, -50, 0 },
                         new double[4]
                     )
-                ) {
+                )
+                {
                     var vf1 = Unsafe.Read<Vector256<float>>(floatTable.inArray1Ptr);
                     var vf2 = Unsafe.Read<Vector256<float>>(floatTable.inArray2Ptr);
                     var vf3 = Avx.HorizontalSubtract(vf1, vf2);
@@ -52,7 +53,8 @@ namespace IntelHardwareIntrinsicTest
                                 && (left[6] - left[7] == result[5])
                                 && (right[6] - right[7] == result[7])
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("Avx HorizontalAdd failed on float:");
                         foreach (var item in floatTable.outArray)
                         {
@@ -75,7 +77,8 @@ namespace IntelHardwareIntrinsicTest
                                 && (left[2] - left[3] == result[2])
                                 && (right[2] - right[3] == result[3])
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("Avx HorizontalAdd failed on double:");
                         foreach (var item in doubleTable.outArray)
                         {

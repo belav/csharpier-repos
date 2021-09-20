@@ -26,14 +26,16 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
         protected override bool GetBindableNodeForTokenIndicatingLambda(
             SyntaxToken token,
             [NotNullWhen(returnValue: true)] out SyntaxNode? found
-        ) {
+        )
+        {
             if (
                 token.IsKind(SyntaxKind.EqualsGreaterThanToken)
                 && token.Parent.IsKind(
                     SyntaxKind.ParenthesizedLambdaExpression,
                     SyntaxKind.SimpleLambdaExpression
                 )
-            ) {
+            )
+            {
                 // () =>
                 found = token.Parent;
                 return true;
@@ -41,7 +43,8 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
             else if (
                 token.IsKind(SyntaxKind.DelegateKeyword)
                 && token.Parent.IsKind(SyntaxKind.AnonymousMethodExpression)
-            ) {
+            )
+            {
                 // delegate (...) { ... }
                 found = token.Parent;
                 return true;
@@ -54,11 +57,13 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
         protected override bool GetBindableNodeForTokenIndicatingPossibleIndexerAccess(
             SyntaxToken token,
             [NotNullWhen(returnValue: true)] out SyntaxNode? found
-        ) {
+        )
+        {
             if (
                 token.IsKind(SyntaxKind.CloseBracketToken, SyntaxKind.OpenBracketToken)
                 && token.Parent?.Parent.IsKind(SyntaxKind.ElementAccessExpression) == true
-            ) {
+            )
+            {
                 // Suppression is due to issue https://github.com/dotnet/roslyn/issues/41107
                 found = token.Parent.Parent!;
                 return true;
@@ -77,7 +82,8 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
             ISymbol symbol,
             SyntaxNode node,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Anything less than C# 8 we just won't show anything, even if the compiler could theoretically give analysis
             var parseOptions = (CSharpParseOptions)semanticModel.SyntaxTree!.Options;
             if (parseOptions.LanguageVersion < LanguageVersion.CSharp8)

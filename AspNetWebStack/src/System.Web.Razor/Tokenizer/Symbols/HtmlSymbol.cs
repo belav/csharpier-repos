@@ -11,18 +11,13 @@ namespace System.Web.Razor.Tokenizer.Symbols
     public class HtmlSymbol : SymbolBase<HtmlSymbolType>
     {
         // Helper constructor
-        public HtmlSymbol(
-            int offset,
-            int line,
-            int column,
-            string content,
-            HtmlSymbolType type
-        ) : this(
-            new SourceLocation(offset, line, column),
-            content,
-            type,
-            Enumerable.Empty<RazorError>()
-        ) { }
+        public HtmlSymbol(int offset, int line, int column, string content, HtmlSymbolType type)
+            : this(
+                new SourceLocation(offset, line, column),
+                content,
+                type,
+                Enumerable.Empty<RazorError>()
+            ) { }
 
         public HtmlSymbol(SourceLocation start, string content, HtmlSymbolType type)
             : base(start, content, type, Enumerable.Empty<RazorError>()) { }

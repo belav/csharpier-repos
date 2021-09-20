@@ -51,7 +51,8 @@ namespace System.Web.WebPages.Html
             string name,
             object value,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             if (String.IsNullOrEmpty(name))
             {
                 throw new ArgumentException(
@@ -102,7 +103,8 @@ namespace System.Web.WebPages.Html
             string name,
             object value,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             if (String.IsNullOrEmpty(name))
             {
                 throw new ArgumentException(
@@ -170,7 +172,8 @@ namespace System.Web.WebPages.Html
             string name,
             object value,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             if (String.IsNullOrEmpty(name))
             {
                 throw new ArgumentException(
@@ -194,7 +197,8 @@ namespace System.Web.WebPages.Html
             object value,
             bool isExplicitValue,
             IDictionary<string, object> attributes
-        ) {
+        )
+        {
             TagBuilder tagBuilder = new TagBuilder("input");
             // Implicit parameters
             tagBuilder.MergeAttribute("type", GetInputTypeString(type));

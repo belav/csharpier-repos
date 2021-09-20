@@ -79,7 +79,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
                 && this.TryGetService<SOleComponentManager, IOleComponentManager>(
                     out var componentManager
                 )
-            ) {
+            )
+            {
                 var componentRegistrationInfo = new[]
                 {
                     new OLECRINFO
@@ -223,7 +224,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
                 this.TryGetService<SVsUIShellOpenDocument, IVsUIShellOpenDocument>(
                     out var uishellOpenDocument
                 ) && this.TryGetService<SVsWindowFrame, IVsWindowFrame>(out var windowFrameOrig)
-            ) {
+            )
+            {
                 var logicalView = Guid.Empty;
                 var hr = uishellOpenDocument.OpenCopyOfStandardEditor(
                     windowFrameOrig,
@@ -284,7 +286,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
                 this.TryGetService<SOleComponentManager, IOleComponentManager>(
                     out var componentManager
                 )
-            ) {
+            )
+            {
                 _ = componentManager.FRevokeComponent(_componentId);
             }
 
@@ -336,7 +339,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
             int cmdID,
             EventHandler commandEvent,
             EventHandler queryEvent
-        ) {
+        )
+        {
             // Create the OleMenuCommand from the menu group, command ID, and command event
             var menuCommandID = new CommandID(menuGroup, cmdID);
             var command = new OleMenuCommand(commandEvent, menuCommandID);
@@ -386,7 +390,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
             uint dwCookie,
             IVsSearchQuery pSearchQuery,
             IVsSearchCallback pSearchCallback
-        ) {
+        )
+        {
             if (_control is not null)
             {
                 var tables = _control.GetTableControls();

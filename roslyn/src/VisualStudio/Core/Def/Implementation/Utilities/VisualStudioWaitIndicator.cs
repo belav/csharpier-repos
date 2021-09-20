@@ -38,7 +38,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
             bool allowCancel,
             bool showProgress,
             Action<IWaitContext> action
-        ) {
+        )
+        {
             using (
                 Logger.LogBlock(
                     FunctionId.Misc_VisualStudioWaitIndicator_Wait,
@@ -73,7 +74,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
             string message,
             bool allowCancel,
             bool showProgress
-        ) {
+        )
+        {
             var componentModel = (IComponentModel)_serviceProvider.GetService(
                 typeof(SComponentModel)
             );
@@ -104,7 +106,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
             string message,
             bool allowCancel,
             bool showProgress
-        ) {
+        )
+        {
             return StartWait(title, message, allowCancel, showProgress);
         }
     }

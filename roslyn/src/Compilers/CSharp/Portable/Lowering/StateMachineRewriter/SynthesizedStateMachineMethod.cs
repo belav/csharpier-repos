@@ -70,14 +70,15 @@ namespace Microsoft.CodeAnalysis.CSharp
         public SynthesizedStateMachineMoveNextMethod(
             MethodSymbol interfaceMethod,
             StateMachineTypeSymbol stateMachineType
-        ) : base(
-            WellKnownMemberNames.MoveNextMethodName,
-            interfaceMethod,
-            stateMachineType,
-            null,
-            generateDebugInfo: true,
-            hasMethodBodyDependency: true
-        ) { }
+        )
+            : base(
+                WellKnownMemberNames.MoveNextMethodName,
+                interfaceMethod,
+                stateMachineType,
+                null,
+                generateDebugInfo: true,
+                hasMethodBodyDependency: true
+            ) { }
 
         public override ImmutableArray<CSharpAttributeData> GetAttributes()
         {
@@ -108,7 +109,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             kickoffMethod,
                             AttributeDescription.DebuggerStepThroughAttribute
                         )
-                    ) {
+                    )
+                    {
                         if (builder == null)
                         {
                             builder = ArrayBuilder<CSharpAttributeData>.GetInstance(4); // only 4 different attributes are inherited at the moment
@@ -144,19 +146,21 @@ namespace Microsoft.CodeAnalysis.CSharp
             StateMachineTypeSymbol stateMachineType,
             PropertySymbol associatedProperty,
             bool hasMethodBodyDependency
-        ) : base(
-            name,
-            interfaceMethod,
-            stateMachineType,
-            associatedProperty,
-            generateDebugInfo: false,
-            hasMethodBodyDependency: hasMethodBodyDependency
-        ) { }
+        )
+            : base(
+                name,
+                interfaceMethod,
+                stateMachineType,
+                associatedProperty,
+                generateDebugInfo: false,
+                hasMethodBodyDependency: hasMethodBodyDependency
+            ) { }
 
         internal sealed override void AddSynthesizedAttributes(
             PEModuleBuilder moduleBuilder,
             ref ArrayBuilder<SynthesizedAttributeData> attributes
-        ) {
+        )
+        {
             var compilation = this.DeclaringCompilation;
             AddSynthesizedAttribute(
                 ref attributes,

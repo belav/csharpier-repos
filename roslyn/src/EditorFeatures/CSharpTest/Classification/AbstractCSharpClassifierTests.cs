@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
             string code,
             ParseOptions options,
             TestHost testHost
-        ) {
+        )
+        {
             var composition = EditorTestCompositions.EditorFeatures.WithTestHostParts(testHost);
             return TestWorkspace.CreateCSharp(
                 code,
@@ -33,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
             string allCode,
             TestHost testHost,
             FormattedClassification[] expected
-        ) {
+        )
+        {
             await TestAsync(code, allCode, testHost, parseOptions: null, expected);
             await TestAsync(code, allCode, testHost, parseOptions: Options.Script, expected);
         }

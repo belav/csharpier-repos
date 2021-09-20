@@ -55,13 +55,15 @@ namespace Microsoft.VisualStudio.LanguageServices.SymbolSearch
             IThreadingContext threadingContext,
             VisualStudioWorkspaceImpl workspace,
             VSShell.SVsServiceProvider serviceProvider
-        ) : base(
-            threadingContext,
-            workspace,
-            SymbolSearchOptions.Enabled,
-            SymbolSearchOptions.SuggestForTypesInReferenceAssemblies,
-            SymbolSearchOptions.SuggestForTypesInNuGetPackages
-        ) {
+        )
+            : base(
+                threadingContext,
+                workspace,
+                SymbolSearchOptions.Enabled,
+                SymbolSearchOptions.SuggestForTypesInReferenceAssemblies,
+                SymbolSearchOptions.SuggestForTypesInNuGetPackages
+            )
+        {
             _workspace = workspace;
             _installerService = workspace.Services.GetService<IPackageInstallerService>();
             _localSettingsDirectory = new ShellSettingsManager(
@@ -100,7 +102,8 @@ namespace Microsoft.VisualStudio.LanguageServices.SymbolSearch
 
         private async Task<ISymbolSearchUpdateEngine> GetEngineAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (await _gate.DisposableWaitAsync(cancellationToken).ConfigureAwait(false))
             {
                 return _lazyUpdateEngine ??=
@@ -116,7 +119,8 @@ namespace Microsoft.VisualStudio.LanguageServices.SymbolSearch
         private async Task UpdateSourceInBackgroundAsync(
             string sourceName,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var engine = await GetEngineAsync(cancellationToken).ConfigureAwait(false);
             await engine.UpdateContinuouslyAsync(
                     sourceName,
@@ -132,7 +136,8 @@ namespace Microsoft.VisualStudio.LanguageServices.SymbolSearch
             string name,
             int arity,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var engine = await GetEngineAsync(cancellationToken).ConfigureAwait(false);
             var allPackagesWithType = await engine.FindPackagesWithTypeAsync(
                     source,
@@ -151,7 +156,8 @@ namespace Microsoft.VisualStudio.LanguageServices.SymbolSearch
             string source,
             string assemblyName,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var engine = await GetEngineAsync(cancellationToken).ConfigureAwait(false);
             var allPackagesWithAssembly = await engine.FindPackagesWithAssemblyAsync(
                     source,
@@ -212,7 +218,8 @@ namespace Microsoft.VisualStudio.LanguageServices.SymbolSearch
             string name,
             int arity,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var engine = await GetEngineAsync(cancellationToken).ConfigureAwait(false);
             return await engine.FindReferenceAssembliesWithTypeAsync(name, arity, cancellationToken)
                 .ConfigureAwait(false);

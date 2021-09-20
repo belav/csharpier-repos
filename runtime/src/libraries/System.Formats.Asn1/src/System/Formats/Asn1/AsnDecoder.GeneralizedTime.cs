@@ -50,7 +50,8 @@ namespace System.Formats.Asn1
             AsnEncodingRules ruleSet,
             out int bytesConsumed,
             Asn1Tag? expectedTag = null
-        ) {
+        )
+        {
             byte[]? rented = null;
 
             // An X.509 time is 15 characters (yyyyMMddHHmmssZ), beyond that is fractions (no limit) or
@@ -82,7 +83,8 @@ namespace System.Formats.Asn1
         private static DateTimeOffset ParseGeneralizedTime(
             AsnEncodingRules ruleSet,
             ReadOnlySpan<byte> contentOctets
-        ) {
+        )
+        {
             // T-REC-X.680-201510 sec 46 defines a lot of formats for GeneralizedTime.
             //
             // All formats start with yyyyMMdd.
@@ -233,7 +235,8 @@ namespace System.Formats.Asn1
                         out int fracLength
                     )
                     || fracLength == 0
-                ) {
+                )
+                {
                     throw new AsnContentException();
                 }
 
@@ -256,7 +259,8 @@ namespace System.Formats.Asn1
                         out uint nonSemantic,
                         out fracLength
                     )
-                ) {
+                )
+                {
                     contents = contents.Slice(fracLength);
                     lastFracDigit = (byte)(nonSemantic % 10);
                 }

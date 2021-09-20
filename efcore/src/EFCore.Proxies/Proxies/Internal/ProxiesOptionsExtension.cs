@@ -118,7 +118,8 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
         public virtual ProxiesOptionsExtension WithChangeTracking(
             bool useChangeTrackingProxies = true,
             bool checkEquality = true
-        ) {
+        )
+        {
             var clone = Clone();
 
             clone._useChangeTrackingProxies = useChangeTrackingProxies;

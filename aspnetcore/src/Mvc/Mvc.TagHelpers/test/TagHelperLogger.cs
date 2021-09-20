@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             TState state,
             Exception exception,
             Func<TState, Exception, string> formatter
-        ) {
+        )
+        {
             Logged.Add(new LoggerData(logLevel, state));
         }
 

@@ -81,7 +81,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
         protected Task<ImmutableArray<CodeActionOperation>> GetOperationsAsync(
             IProgressTracker progressTracker,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return Task.Run(
                 () => CodeAction.GetOperationsAsync(progressTracker, cancellationToken),
                 cancellationToken
@@ -92,7 +93,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
             CodeActionWithOptions actionWithOptions,
             object options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return Task.Run(
                 () => actionWithOptions.GetOperationsAsync(options, cancellationToken),
                 cancellationToken
@@ -101,7 +103,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
 
         protected Task<ImmutableArray<CodeActionOperation>> GetPreviewOperationsAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return Task.Run(
                 () => CodeAction.GetPreviewOperationsAsync(cancellationToken),
                 cancellationToken
@@ -146,7 +149,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 SourceProvider.OperationListener.BeginAsyncOperation(
                     $"{nameof(SuggestedAction)}.{nameof(Invoke)}"
                 )
-            ) {
+            )
+            {
                 InnerInvoke(progressTracker, cancellationToken);
                 foreach (var actionCallback in SourceProvider.ActionCallbacks)
                     actionCallback.Value.OnSuggestedActionExecuted(this);
@@ -156,7 +160,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
         protected virtual void InnerInvoke(
             IProgressTracker progressTracker,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             AssertIsForeground();
 
             var snapshot = SubjectBuffer.CurrentSnapshot;
@@ -172,7 +177,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
             Func<Document> getFromDocument,
             IProgressTracker progressTracker,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             AssertIsForeground();
 
             var extensionManager = Workspace.Services.GetService<IExtensionManager>();
@@ -189,7 +195,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
             Func<Document> getFromDocument,
             IProgressTracker progressTracker,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             AssertIsForeground();
             IEnumerable<CodeActionOperation> operations = null;
             if (CodeAction is CodeActionWithOptions actionWithOptions)
@@ -221,7 +228,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                         KeyValueLogMessage.Create(LogType.UserAction, m => CreateLogProperties(m)),
                         cancellationToken
                     )
-                ) {
+                )
+                {
                     // Note: we want to block the UI thread here so the user cannot modify anything while the codefix applies
                     _isApplied = EditHandler.Apply(
                         Workspace,
@@ -278,7 +286,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
 
         protected async Task<SolutionPreviewResult> GetPreviewResultAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             // We will always invoke this from the UI thread.
@@ -324,7 +333,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                         if (
                             service.Value.TryGetImageMoniker(tags, out var moniker)
                             && !moniker.Equals(default(ImageMoniker))
-                        ) {
+                        )
+                        {
                             return moniker;
                         }
                     }

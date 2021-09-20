@@ -539,7 +539,8 @@ namespace System.Net.Mail
             string? subject,
             string? body,
             object? userToken
-        ) {
+        )
+        {
             if (_disposed)
             {
                 throw new ObjectDisposedException(GetType().FullName);
@@ -749,7 +750,8 @@ namespace System.Net.Mail
             string? subject,
             string? body,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var message = new MailMessage(from, recipients, subject, body);
             return SendMailAsync(message, cancellationToken);
         }
@@ -875,7 +877,8 @@ namespace System.Net.Mail
                         !(exception is SmtpFailedRecipientException)
                         || ((SmtpFailedRecipientException)exception).fatal
                     )
-                ) {
+                )
+                {
                     if (NetEventSource.Log.IsEnabled())
                         NetEventSource.Error(this, exception);
                     Abort();
@@ -1019,7 +1022,8 @@ namespace System.Net.Mail
             MailMessage message,
             MailAddressCollection recipients,
             bool allowUnicode
-        ) {
+        )
+        {
             // Check all recipients, to, from, sender, bcc, cc, etc...
             // GetSmtpAddress will throw if !allowUnicode and the username contains non-ascii
             foreach (MailAddress address in recipients)

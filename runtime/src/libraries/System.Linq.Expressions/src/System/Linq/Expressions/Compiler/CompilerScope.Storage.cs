@@ -105,11 +105,8 @@ namespace System.Linq.Expressions.Compiler
             private readonly Type _boxType;
             private readonly FieldInfo _boxValueField;
 
-            internal ElementBoxStorage(
-                Storage array,
-                int index,
-                ParameterExpression variable
-            ) : base(array.Compiler, variable)
+            internal ElementBoxStorage(Storage array, int index, ParameterExpression variable)
+                : base(array.Compiler, variable)
             {
                 _array = array;
                 _index = index;

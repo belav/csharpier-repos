@@ -29,7 +29,8 @@ namespace System.Formats.Asn1.Tests.Reader
             bool expectedValue,
             int expectedBytesRead,
             string inputHex
-        ) {
+        )
+        {
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
 
@@ -140,7 +141,8 @@ namespace System.Formats.Asn1.Tests.Reader
             string inputHex,
             TagClass tagClass,
             int tagValue
-        ) {
+        )
+        {
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
             bool val1 = reader.ReadBoolean(new Asn1Tag(tagClass, tagValue, true));
@@ -194,7 +196,8 @@ namespace System.Formats.Asn1.Tests.Reader
             string description,
             AsnEncodingRules ruleSet,
             string inputHex
-        ) {
+        )
+        {
             _ = description;
             byte[] inputData = inputHex.HexToByteArray();
 

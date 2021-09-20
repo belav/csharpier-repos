@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.DataProtection
     {
         public static InvalidOperationException CertificateXmlEncryptor_CertificateNotFound(
             string thumbprint
-        ) {
+        )
+        {
             var message = Resources.FormatCertificateXmlEncryptor_CertificateNotFound(thumbprint);
             return new InvalidOperationException(message);
         }
@@ -28,7 +29,8 @@ namespace Microsoft.AspNetCore.DataProtection
             string parameterName,
             int actualSize,
             int expectedSize
-        ) {
+        )
+        {
             var message = Resources.FormatCommon_BufferIncorrectlySized(actualSize, expectedSize);
             return new ArgumentException(message, parameterName);
         }
@@ -46,7 +48,8 @@ namespace Microsoft.AspNetCore.DataProtection
 
         public static InvalidOperationException Common_PropertyCannotBeNullOrEmpty(
             string propertyName
-        ) {
+        )
+        {
             var message = string.Format(
                 CultureInfo.CurrentCulture,
                 Resources.Common_PropertyCannotBeNullOrEmpty,
@@ -57,7 +60,8 @@ namespace Microsoft.AspNetCore.DataProtection
 
         public static InvalidOperationException Common_PropertyMustBeNonNegative(
             string propertyName
-        ) {
+        )
+        {
             var message = string.Format(
                 CultureInfo.CurrentCulture,
                 Resources.Common_PropertyMustBeNonNegative,

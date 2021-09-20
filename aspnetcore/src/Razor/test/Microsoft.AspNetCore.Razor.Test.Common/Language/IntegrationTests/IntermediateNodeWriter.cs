@@ -55,13 +55,15 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
 
         public override void VisitCSharpExpressionAttributeValue(
             CSharpExpressionAttributeValueIntermediateNode node
-        ) {
+        )
+        {
             WriteContentNode(node, node.Prefix);
         }
 
         public override void VisitCSharpCodeAttributeValue(
             CSharpCodeAttributeValueIntermediateNode node
-        ) {
+        )
+        {
             WriteContentNode(node, node.Prefix);
         }
 
@@ -155,7 +157,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
 
         public override void VisitTagHelperHtmlAttribute(
             TagHelperHtmlAttributeIntermediateNode node
-        ) {
+        )
+        {
             WriteContentNode(
                 node,
                 node.AttributeName,
@@ -169,7 +172,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
 
         public override void VisitTagHelperDirectiveAttribute(
             TagHelperDirectiveAttributeIntermediateNode node
-        ) {
+        )
+        {
             WriteContentNode(
                 node,
                 node.AttributeName,
@@ -184,7 +188,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
 
         public override void VisitTagHelperDirectiveAttributeParameter(
             TagHelperDirectiveAttributeParameterIntermediateNode node
-        ) {
+        )
+        {
             WriteContentNode(
                 node,
                 node.AttributeName,
@@ -227,7 +232,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
 
         public override void VisitComponentTypeInferenceMethod(
             ComponentTypeInferenceMethodIntermediateNode node
-        ) {
+        )
+        {
             WriteContentNode(node, node.FullTypeName, node.MethodName);
         }
 
@@ -253,7 +259,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
 
         void IExtensionIntermediateNodeVisitor<RouteAttributeExtensionNode>.VisitExtension(
             RouteAttributeExtensionNode node
-        ) {
+        )
+        {
             WriteContentNode(node, node.Template);
         }
 

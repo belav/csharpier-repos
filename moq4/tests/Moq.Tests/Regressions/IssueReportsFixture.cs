@@ -2120,7 +2120,8 @@ namespace Moq.Tests.Regressions
             private static void RegisterInvocations(
                 IMock<ITest> m,
                 System.Collections.Concurrent.ConcurrentQueue<int> invocationsQueue
-            ) {
+            )
+            {
                 int result;
                 do
                 {
@@ -2235,7 +2236,8 @@ namespace Moq.Tests.Regressions
             private void OnUnobservedTaskException(
                 object sender,
                 UnobservedTaskExceptionEventArgs e
-            ) {
+            )
+            {
                 _unobservedEventArgs = e;
             }
 

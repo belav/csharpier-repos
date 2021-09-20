@@ -68,7 +68,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Test
         )]
         public async Task CreateValueProviderAsync_ReturnsValueProvider_WithCurrentCulture(
             string contentType
-        ) {
+        )
+        {
             // Arrange
             var context = CreateContext(contentType, formValues: null);
             var factory = new JQueryFormValueProviderFactory();
@@ -217,7 +218,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Test
         private static ValueProviderFactoryContext CreateContext(
             string contentType,
             Dictionary<string, StringValues> formValues
-        ) {
+        )
+        {
             var context = new DefaultHttpContext();
             context.Request.ContentType = contentType;
 

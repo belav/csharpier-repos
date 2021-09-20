@@ -34,7 +34,8 @@ namespace System.Security.Cryptography
 
             private SafeNCryptSecretHandle DeriveSecretAgreementHandle(
                 ECDiffieHellmanPublicKey otherPartyPublicKey
-            ) {
+            )
+            {
                 if (otherPartyPublicKey == null)
                 {
                     throw new ArgumentNullException(nameof(otherPartyPublicKey));
@@ -49,7 +50,8 @@ namespace System.Security.Cryptography
                 )
                 using (
                     SafeNCryptKeyHandle otherPartyHandle = otherPartyCng.GetDuplicatedKeyHandle()
-                ) {
+                )
+                {
                     string? importedKeyAlgorithmGroup = CngKeyLite.GetPropertyAsString(
                         otherPartyHandle,
                         CngKeyLite.KeyPropertyName.AlgorithmGroup,

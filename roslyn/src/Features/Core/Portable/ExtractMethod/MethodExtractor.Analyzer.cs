@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 SelectionResult selectionResult,
                 bool localFunction,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Contract.ThrowIfNull(selectionResult);
 
                 SelectionResult = selectionResult;
@@ -219,7 +220,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             private (ITypeSymbol typeSymbol, bool hasAnonymousType, bool awaitTaskReturn) AdjustReturnType(
                 SemanticModel model,
                 ITypeSymbol returnType
-            ) {
+            )
+            {
                 // check whether return type contains anonymous type and if it does, fix it up by making it object
                 var returnTypeHasAnonymousType = returnType.ContainsAnonymousType();
                 returnType = returnTypeHasAnonymousType
@@ -247,7 +249,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 if (
                     !SelectionResult.ContainingScopeHasAsyncKeyword()
                     || !ContainsReturnStatementInSelectedCode(model)
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -276,7 +279,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 SemanticModel model,
                 ref ITypeSymbol returnType,
                 out bool awaitTaskReturn
-            ) {
+            )
+            {
                 awaitTaskReturn = false;
 
                 var taskType = model.Compilation.TaskType();
@@ -284,7 +288,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 if (
                     taskType is object
                     && returnType.Equals(model.Compilation.GetSpecialType(SpecialType.System_Void))
-                ) {
+                )
+                {
                     // convert void to Task type
                     awaitTaskReturn = true;
                     returnType = taskType;
@@ -294,7 +299,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 if (
                     !SelectionResult.SelectionInExpression
                     && ContainsReturnStatementInSelectedCode(model)
-                ) {
+                )
+                {
                     // check whether we will use return type as it is or not.
                     awaitTaskReturn = returnType.Equals(taskType);
                     return;
@@ -313,7 +319,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 DataFlowAnalysis dataFlowAnalysisData,
                 IDictionary<ISymbol, VariableInfo> variableInfoMap,
                 bool isInExpressionOrHasReturnStatement
-            ) {
+            )
+            {
                 var model = _semanticDocument.SemanticModel;
                 var compilation = model.Compilation;
                 if (isInExpressionOrHasReturnStatement)
@@ -377,7 +384,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 bool unsafeAddressTakenUsed,
                 bool returnTypeHasAnonymousType,
                 bool containsAnyLocalFunctionCallNotWithinSpan
-            ) {
+            )
+            {
                 var readonlyFieldStatus = CheckReadOnlyFields(model, symbolMap);
 
                 var namesWithAnonymousTypes = parameters.Where(
@@ -461,7 +469,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 SemanticDocument document,
                 IList<VariableInfo> variables,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var annotations = new List<Tuple<SyntaxToken, SyntaxAnnotation>>(variables.Count);
                 variables.Do(
                     v => v.AddIdentifierTokenAnnotationPair(annotations, cancellationToken)
@@ -496,7 +505,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             private static bool ContainsVariableUnsafeAddressTaken(
                 DataFlowAnalysis dataFlowAnalysisData,
                 IEnumerable<ISymbol> symbols
-            ) {
+            )
+            {
                 // check whether the selection contains "&" over a symbol exist
                 var map = new HashSet<ISymbol>(dataFlowAnalysisData.UnsafeAddressTaken);
                 return symbols.Any(s => map.Contains(s));
@@ -527,7 +537,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
 
             private ImmutableArray<VariableInfo> MarkVariableInfoToUseAsReturnValueIfPossible(
                 ImmutableArray<VariableInfo> variableInfo
-            ) {
+            )
+            {
                 var index = GetIndexOfVariableInfoToUseAsReturnValue(variableInfo);
                 if (index < 0)
                     return variableInfo;
@@ -540,7 +551,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
 
             private ImmutableArray<VariableInfo> GetMethodParameters(
                 ICollection<VariableInfo> variableInfo
-            ) {
+            )
+            {
                 using var _ = ArrayBuilder<VariableInfo>.GetInstance(
                     variableInfo.Count,
                     out var list
@@ -561,7 +573,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 Dictionary<ISymbol, List<SyntaxToken>> symbolMap,
                 out IDictionary<ISymbol, VariableInfo> variableInfoMap,
                 out List<ISymbol> failedVariables
-            ) {
+            )
+            {
                 Contract.ThrowIfNull(model);
                 Contract.ThrowIfNull(dataFlowAnalysisData);
 
@@ -667,7 +680,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                             unsafeAddressTaken,
                             out var variableStyle
                         )
-                    ) {
+                    )
+                    {
                         Contract.ThrowIfTrue(bestEffort, "Should never fail if bestEffort is true");
                         failedVariables.Add(symbol);
                         continue;
@@ -710,7 +724,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 bool writtenOutside,
                 bool unsafeAddressTaken,
                 out VariableStyle variableStyle
-            ) {
+            )
+            {
                 Contract.ThrowIfNull(model);
                 Contract.ThrowIfNull(type);
 
@@ -728,7 +743,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                         unsafeAddressTaken,
                         out variableStyle
                     )
-                ) {
+                )
+                {
                     Contract.ThrowIfTrue(bestEffort, "Should never fail if bestEffort is true");
                     return false;
                 }
@@ -741,7 +757,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 if (
                     UserDefinedValueType(model.Compilation, type)
                     && !SelectionResult.DontPutOutOrRefOnStruct
-                ) {
+                )
+                {
                     variableStyle = AlwaysReturn(variableStyle);
                     return true;
                 }
@@ -762,7 +779,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                         symbol,
                         writtenInside
                     )
-                ) {
+                )
+                {
                     return true;
                 }
 
@@ -781,7 +799,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 SemanticModel model,
                 ISymbol symbol,
                 bool writtenInside
-            ) {
+            )
+            {
                 if (!symbolMap.TryGetValue(symbol, out var tokens))
                 {
                     return writtenInside;
@@ -831,7 +850,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             private static bool WellKnownFrameworkValueType(
                 Compilation compilation,
                 ITypeSymbol type
-            ) {
+            )
+            {
                 if (!type.IsValueType)
                 {
                     return false;
@@ -920,7 +940,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             private static void AddTypeParametersToMap(
                 IEnumerable<ITypeParameterSymbol> typeParameters,
                 IDictionary<int, ITypeParameterSymbol> sortedMap
-            ) {
+            )
+            {
                 foreach (var typeParameter in typeParameters)
                 {
                     AddTypeParameterToMap(typeParameter, sortedMap);
@@ -930,12 +951,14 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             private static void AddTypeParameterToMap(
                 ITypeParameterSymbol typeParameter,
                 IDictionary<int, ITypeParameterSymbol> sortedMap
-            ) {
+            )
+            {
                 if (
                     typeParameter == null
                     || typeParameter.DeclaringMethod == null
                     || sortedMap.ContainsKey(typeParameter.Ordinal)
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -946,7 +969,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 SemanticModel model,
                 IDictionary<ISymbol, VariableInfo> variableInfoMap,
                 IDictionary<int, ITypeParameterSymbol> sortedMap
-            ) {
+            )
+            {
                 foreach (var symbol in variableInfoMap.Keys)
                 {
                     switch (symbol)
@@ -978,7 +1002,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
 
             private static void AppendMethodTypeParameterFromConstraint(
                 SortedDictionary<int, ITypeParameterSymbol> sortedMap
-            ) {
+            )
+            {
                 var typeParametersInConstraint = new List<ITypeParameterSymbol>();
 
                 // collect all type parameter appears in constraint
@@ -1007,14 +1032,16 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             private static void AppendMethodTypeParameterUsedDirectly(
                 IDictionary<ISymbol, List<SyntaxToken>> symbolMap,
                 IDictionary<int, ITypeParameterSymbol> sortedMap
-            ) {
+            )
+            {
                 foreach (var pair in symbolMap.Where(p => p.Key.Kind == SymbolKind.TypeParameter))
                 {
                     var typeParameter = (ITypeParameterSymbol)pair.Key;
                     if (
                         typeParameter.DeclaringMethod == null
                         || sortedMap.ContainsKey(typeParameter.Ordinal)
-                    ) {
+                    )
+                    {
                         continue;
                     }
 
@@ -1027,7 +1054,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 IDictionary<ISymbol, VariableInfo> variableInfoMap,
                 IDictionary<ISymbol, List<SyntaxToken>> symbolMap,
                 SortedDictionary<int, ITypeParameterSymbol> sortedMap
-            ) {
+            )
+            {
                 // find starting points
                 AppendMethodTypeVariableFromDataFlowAnalysis(model, variableInfoMap, sortedMap);
                 AppendMethodTypeParameterUsedDirectly(symbolMap, sortedMap);
@@ -1042,7 +1070,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
 
             private void AppendTypeParametersInConstraintsUsedByConstructedTypeWithItsOwnConstraints(
                 SortedDictionary<int, ITypeParameterSymbol> sortedMap
-            ) {
+            )
+            {
                 var visited = new HashSet<ITypeSymbol>();
                 var candidates = SpecializedCollections.EmptyEnumerable<ITypeParameterSymbol>();
 
@@ -1076,7 +1105,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             private IEnumerable<ITypeParameterSymbol> AppendTypeParametersInConstraintsUsedByConstructedTypeWithItsOwnConstraints(
                 ITypeSymbol type,
                 HashSet<ITypeSymbol> visited
-            ) {
+            )
+            {
                 if (visited.Contains(type))
                 {
                     return SpecializedCollections.EmptyEnumerable<ITypeParameterSymbol>();
@@ -1112,7 +1142,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                             && !parameter.HasReferenceTypeConstraint
                             && !parameter.HasValueTypeConstraint
                             && parameter.ConstraintTypes.IsDefaultOrEmpty
-                        ) {
+                        )
+                        {
                             continue;
                         }
 
@@ -1139,7 +1170,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             private static IEnumerable<ITypeParameterSymbol> GetMethodTypeParametersInDeclaration(
                 ITypeSymbol returnType,
                 SortedDictionary<int, ITypeParameterSymbol> sortedMap
-            ) {
+            )
+            {
                 // add return type to the map
                 AddTypeParametersToMap(TypeParameterCollector.Collect(returnType), sortedMap);
 
@@ -1151,7 +1183,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             private OperationStatus CheckReadOnlyFields(
                 SemanticModel semanticModel,
                 Dictionary<ISymbol, List<SyntaxToken>> symbolMap
-            ) {
+            )
+            {
                 if (ReadOnlyFieldAllowed())
                 {
                     return OperationStatus.Succeeded;
@@ -1178,7 +1211,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                                     CancellationToken
                                 )
                         )
-                    ) {
+                    )
+                    {
                         continue;
                     }
 

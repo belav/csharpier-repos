@@ -859,7 +859,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
         private static ControllerActionDescriptor GetControllerActionDescriptor(
             Type type,
             string name
-        ) {
+        )
+        {
             var method = type.GetMethod(name);
             var actionDescriptor = new ControllerActionDescriptor
             {

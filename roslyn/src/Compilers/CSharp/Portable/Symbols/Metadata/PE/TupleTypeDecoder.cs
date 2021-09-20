@@ -81,7 +81,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             TypeSymbol metadataType,
             EntityHandle targetHandle,
             PEModuleSymbol containingModule
-        ) {
+        )
+        {
             ImmutableArray<string?> elementNames;
             var hasTupleElementNamesAttribute =
                 containingModule.Module.HasTupleElementNamesAttribute(
@@ -107,7 +108,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             TypeWithAnnotations metadataType,
             EntityHandle targetHandle,
             PEModuleSymbol containingModule
-        ) {
+        )
+        {
             ImmutableArray<string?> elementNames;
             var hasTupleElementNamesAttribute =
                 containingModule.Module.HasTupleElementNamesAttribute(
@@ -140,7 +142,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         public static TypeSymbol DecodeTupleTypesIfApplicable(
             TypeSymbol metadataType,
             ImmutableArray<string?> elementNames
-        ) {
+        )
+        {
             return DecodeTupleTypesInternal(
                 metadataType,
                 elementNames,
@@ -152,7 +155,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             TypeSymbol metadataType,
             ImmutableArray<string?> elementNames,
             bool hasTupleElementNamesAttribute
-        ) {
+        )
+        {
             RoslynDebug.AssertNotNull(metadataType);
 
             var decoder = new TupleTypeDecoder(elementNames);
@@ -266,7 +270,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             if (
                 paramsModified
                 || !decodedReturnType.IsSameAs(type.Signature.ReturnTypeWithAnnotations)
-            ) {
+            )
+            {
                 return type.SubstituteTypeSymbol(
                     decodedReturnType,
                     parameterTypes,
@@ -338,7 +343,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
         private ImmutableArray<TypeWithAnnotations> DecodeTypeArguments(
             ImmutableArray<TypeWithAnnotations> typeArgs
-        ) {
+        )
+        {
             if (typeArgs.IsEmpty)
             {
                 return typeArgs;

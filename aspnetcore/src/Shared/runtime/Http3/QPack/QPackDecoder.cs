@@ -254,7 +254,8 @@ namespace System.Net.Http.QPack
                                     IndexedHeaderFieldPrefix,
                                     out intResult
                                 )
-                            ) {
+                            )
+                            {
                                 OnIndexedHeaderField(intResult, handler);
                             }
                             else
@@ -278,7 +279,8 @@ namespace System.Net.Http.QPack
                                     LiteralHeaderFieldPrefix,
                                     out intResult
                                 )
-                            ) {
+                            )
+                            {
                                 OnIndexedHeaderName(intResult);
                             }
                             else
@@ -296,7 +298,8 @@ namespace System.Net.Http.QPack
                                     LiteralHeaderFieldWithoutNameReferencePrefix,
                                     out intResult
                                 )
-                            ) {
+                            )
+                            {
                                 if (intResult == 0)
                                 {
                                     throw new QPackDecodingException(
@@ -318,7 +321,8 @@ namespace System.Net.Http.QPack
                                     PostBaseIndexPrefix,
                                     out intResult
                                 )
-                            ) {
+                            )
+                            {
                                 OnPostBaseIndex(intResult, handler);
                             }
                             else
@@ -334,7 +338,8 @@ namespace System.Net.Http.QPack
                                     LiteralHeaderFieldPostBasePrefix,
                                     out intResult
                                 )
-                            ) {
+                            )
+                            {
                                 OnIndexedHeaderNamePostBase(intResult);
                             }
                             else
@@ -386,7 +391,8 @@ namespace System.Net.Http.QPack
                             StringLengthPrefix,
                             out intResult
                         )
-                    ) {
+                    )
+                    {
                         OnStringLength(intResult, nextState: State.HeaderValue);
                         if (intResult == 0)
                         {

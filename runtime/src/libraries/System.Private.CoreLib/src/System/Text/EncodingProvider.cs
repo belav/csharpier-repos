@@ -19,7 +19,8 @@ namespace System.Text
             string name,
             EncoderFallback encoderFallback,
             DecoderFallback decoderFallback
-        ) {
+        )
+        {
             Encoding? enc = GetEncoding(name);
             if (enc != null)
             {
@@ -35,7 +36,8 @@ namespace System.Text
             int codepage,
             EncoderFallback encoderFallback,
             DecoderFallback decoderFallback
-        ) {
+        )
+        {
             Encoding? enc = GetEncoding(codepage);
             if (enc != null)
             {
@@ -68,7 +70,8 @@ namespace System.Text
                     null
                 )
                     is null
-            ) {
+            )
+            {
                 return;
             }
 
@@ -88,7 +91,8 @@ namespace System.Text
                 if (
                     Interlocked.CompareExchange(ref s_providers, newProviders, providers)
                     == providers
-                ) {
+                )
+                {
                     return;
                 }
             }
@@ -153,7 +157,8 @@ namespace System.Text
             int codepage,
             EncoderFallback enc,
             DecoderFallback dec
-        ) {
+        )
+        {
             if (s_providers == null)
                 return null;
 
@@ -172,7 +177,8 @@ namespace System.Text
             string encodingName,
             EncoderFallback enc,
             DecoderFallback dec
-        ) {
+        )
+        {
             if (s_providers == null)
                 return null;
 

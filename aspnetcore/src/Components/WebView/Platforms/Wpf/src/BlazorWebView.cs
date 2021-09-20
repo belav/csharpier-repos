@@ -175,7 +175,8 @@ namespace Microsoft.AspNetCore.Components.WebView.Wpf
         private void HandleRootComponentsCollectionChanged(
             object sender,
             NotifyCollectionChangedEventArgs eventArgs
-        ) {
+        )
+        {
             CheckDisposed();
 
             // If we haven't initialized yet, this is a no-op

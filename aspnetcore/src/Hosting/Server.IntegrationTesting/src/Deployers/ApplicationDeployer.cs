@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
         public ApplicationDeployer(
             DeploymentParameters deploymentParameters,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             DeploymentParameters = deploymentParameters;
             LoggerFactory = loggerFactory;
             Logger = LoggerFactory.CreateLogger(GetType().FullName);
@@ -47,7 +48,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
             if (
                 DeploymentParameters.RuntimeFlavor == RuntimeFlavor.None
                 && !string.IsNullOrEmpty(DeploymentParameters.TargetFramework)
-            ) {
+            )
+            {
                 DeploymentParameters.RuntimeFlavor = GetRuntimeFlavor(
                     DeploymentParameters.TargetFramework
                 );
@@ -171,7 +173,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
         protected void AddEnvironmentVariablesToProcess(
             ProcessStartInfo startInfo,
             IDictionary<string, string> environmentVariables
-        ) {
+        )
+        {
             var environment = startInfo.Environment;
             ProcessHelpers.SetEnvironmentVariable(
                 environment,

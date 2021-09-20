@@ -155,7 +155,8 @@ namespace Microsoft.Extensions.Caching.Distributed
             public Task<byte[]> GetAsync(
                 string key,
                 CancellationToken token = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -167,7 +168,8 @@ namespace Microsoft.Extensions.Caching.Distributed
             public Task RefreshAsync(
                 string key,
                 CancellationToken token = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -179,7 +181,8 @@ namespace Microsoft.Extensions.Caching.Distributed
             public Task RemoveAsync(
                 string key,
                 CancellationToken token = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -193,7 +196,8 @@ namespace Microsoft.Extensions.Caching.Distributed
                 byte[] value,
                 DistributedCacheEntryOptions options,
                 CancellationToken token = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 

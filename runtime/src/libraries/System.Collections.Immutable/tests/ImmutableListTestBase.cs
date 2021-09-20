@@ -477,7 +477,8 @@ namespace System.Collections.Immutable.Tests
             ImmutableArray<int> inputData,
             int sortedIndex,
             int sortedLength
-        ) {
+        )
+        {
             Requires.Range(sortedIndex >= 0, nameof(sortedIndex));
             Requires.Range(sortedLength > 0, nameof(sortedLength));
             inputData = inputData.Sort(sortedIndex, sortedLength, Comparer<int>.Default);
@@ -544,7 +545,8 @@ namespace System.Collections.Immutable.Tests
             Func<IList, object, object> operation,
             T1 item,
             T2 other
-        ) {
+        )
+        {
             this.AssertIListBaseline(operation, item, other);
             this.AssertIListBaseline(operation, other, item);
         }
@@ -567,7 +569,8 @@ namespace System.Collections.Immutable.Tests
             Func<IList, object, object> operation,
             T item,
             object other
-        ) {
+        )
+        {
             IList bclList = new List<T> { item };
             IList testedList = (IList)this.GetListQuery(ImmutableList.Create(item));
 

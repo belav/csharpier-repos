@@ -19,7 +19,8 @@ namespace System.Web.Http.ExceptionHandling
         Task IExceptionLogger.LogAsync(
             ExceptionLoggerContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException("context");
@@ -43,7 +44,8 @@ namespace System.Web.Http.ExceptionHandling
         public virtual Task LogAsync(
             ExceptionLoggerContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Log(context);
             return TaskHelpers.Completed();
         }

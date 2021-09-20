@@ -157,7 +157,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal static SingleLookupResult StaticInstanceMismatch(
             Symbol symbol,
             DiagnosticInfo error
-        ) {
+        )
+        {
             return new SingleLookupResult(LookupResultKind.StaticInstanceMismatch, symbol, error);
         }
 
@@ -170,7 +171,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Symbol unwrappedSymbol,
             Symbol symbol,
             bool diagnose
-        ) {
+        )
+        {
             var diagInfo = diagnose
                 ? new CSDiagnosticInfo(ErrorCode.ERR_NonInvocableMemberCalled, unwrappedSymbol)
                 : null;
@@ -191,7 +193,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Symbol unwrappedSymbol,
             Symbol symbol,
             bool diagnose
-        ) {
+        )
+        {
             // TODO: determine correct diagnosis
             var diagInfo = diagnose
                 ? new CSDiagnosticInfo(

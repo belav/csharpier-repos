@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.UnsealClass
                 && type.TypeKind == TypeKind.Class
                 && type.IsSealed
                 && !type.IsStatic
-            ) {
+            )
+            {
                 var definition = await SymbolFinder.FindSourceDefinitionAsync(
                         type,
                         document.Project.Solution,
@@ -73,12 +74,14 @@ namespace Microsoft.CodeAnalysis.UnsealClass
             Solution solution,
             ImmutableArray<SyntaxReference> declarationReferences,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             foreach (
                 var (documentId, syntaxReferences) in declarationReferences.GroupBy(
                     reference => solution.GetDocumentId(reference.SyntaxTree)
                 )
-            ) {
+            )
+            {
                 var document = solution.GetDocument(documentId);
                 var root = await document.GetSyntaxRootAsync(cancellationToken)
                     .ConfigureAwait(false);

@@ -98,7 +98,8 @@ namespace System.Web.WebPages.Administration
                     ConfigurationManager.AppSettings[AdminEnabledAppSettingsKey],
                     out enabled
                 )
-            ) {
+            )
+            {
                 return enabled;
             }
 
@@ -134,7 +135,8 @@ namespace System.Web.WebPages.Administration
             string startPageVirtualPath,
             string displayName,
             string description
-        ) {
+        )
+        {
             if (startPageVirtualPath == null)
             {
                 throw new ArgumentNullException("startPageVirtualPath");
@@ -235,7 +237,8 @@ namespace System.Web.WebPages.Administration
             HttpRequestBase request,
             string redirectUrl,
             Func<string, string> makeAppRelative
-        ) {
+        )
+        {
             // If there's already a return url then use it, otherwise the app relative url of the
             // current request to redirect to after signing in
             string returnUrl = GetReturnUrl(request) ?? makeAppRelative(request.RawUrl);

@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             bool writtenOutside,
             bool unsafeAddressTaken,
             out VariableStyle variableStyle
-        ) {
+        )
+        {
             // bug # 12258, 12114
             // use "out" if "&" is taken for the variable
             if (unsafeAddressTaken)
@@ -83,7 +84,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                     && variableDeclared
                     && !writtenInside
                     && readOutside
-                ) {
+                )
+                {
                     key = new Key(
                         dataFlowIn, /*dataFlowOut*/
                         true,

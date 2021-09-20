@@ -63,7 +63,8 @@ namespace System.Management
         internal static ManagementClass GetManagementClass(
             IWbemClassObjectFreeThreaded wbemObject,
             ManagementClass mgObj
-        ) {
+        )
+        {
             ManagementClass newClass = new ManagementClass();
             newClass.wbemObject = wbemObject;
 
@@ -112,7 +113,8 @@ namespace System.Management
         internal static ManagementClass GetManagementClass(
             IWbemClassObjectFreeThreaded wbemObject,
             ManagementScope scope
-        ) {
+        )
+        {
             ManagementClass newClass = new ManagementClass();
             newClass.path = new ManagementPath(ManagementPath.GetManagementPath(wbemObject));
 
@@ -238,11 +240,8 @@ namespace System.Management
         /// Dim c As New ManagementClass(s, p, o)
         ///    </code>
         /// </example>
-        public ManagementClass(
-            ManagementScope scope,
-            ManagementPath path,
-            ObjectGetOptions options
-        ) : base(scope, path, options) { }
+        public ManagementClass(ManagementScope scope, ManagementPath path, ObjectGetOptions options)
+            : base(scope, path, options) { }
 
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.ManagementClass'/> class for the specified WMI class, in the
@@ -1017,7 +1016,8 @@ namespace System.Management
             string relatedRole,
             string thisRole,
             EnumerationOptions options
-        ) {
+        )
+        {
             if ((null == Path) || (null == Path.Path) || (0 == Path.Path.Length))
                 throw new InvalidOperationException();
 
@@ -1117,7 +1117,8 @@ namespace System.Management
             string relatedRole,
             string thisRole,
             EnumerationOptions options
-        ) {
+        )
+        {
             if ((null == Path) || (null == Path.Path) || (0 == Path.Path.Length))
                 throw new InvalidOperationException();
 
@@ -1233,7 +1234,8 @@ namespace System.Management
             string relationshipQualifier,
             string thisRole,
             EnumerationOptions options
-        ) {
+        )
+        {
             if ((null == Path) || (null == Path.Path) || (0 == Path.Path.Length))
                 throw new InvalidOperationException();
 
@@ -1307,7 +1309,8 @@ namespace System.Management
         public void GetRelationshipClasses(
             ManagementOperationObserver watcher,
             string relationshipClass
-        ) {
+        )
+        {
             GetRelationshipClasses(watcher, relationshipClass, null, null, null);
         }
 
@@ -1326,7 +1329,8 @@ namespace System.Management
             string relationshipQualifier,
             string thisRole,
             EnumerationOptions options
-        ) {
+        )
+        {
             if ((null == Path) || (null == Path.Path) || (0 == Path.Path.Length))
                 throw new InvalidOperationException();
             if (null == watcher)
@@ -1442,7 +1446,8 @@ namespace System.Management
         public CodeTypeDeclaration GetStronglyTypedClassCode(
             bool includeSystemClassInClassDef,
             bool systemPropertyClass
-        ) {
+        )
+        {
             // Ensure that the object is valid
             Get();
             ManagementClassGenerator classGen = new ManagementClassGenerator(this);
@@ -1472,7 +1477,8 @@ namespace System.Management
             CodeLanguage lang,
             string filePath,
             string classNamespace
-        ) {
+        )
+        {
             // Ensure that the object is valid
             Get();
             ManagementClassGenerator classGen = new ManagementClassGenerator(this);

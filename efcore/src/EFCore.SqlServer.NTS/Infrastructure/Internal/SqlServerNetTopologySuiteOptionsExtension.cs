@@ -57,7 +57,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Infrastructure.Internal
                 >();
                 if (
                     plugins?.Any(s => s is SqlServerNetTopologySuiteTypeMappingSourcePlugin) != true
-                ) {
+                )
+                {
                     throw new InvalidOperationException(SqlServerNTSStrings.NTSServicesMissing);
                 }
             }

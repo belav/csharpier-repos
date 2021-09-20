@@ -345,7 +345,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 Debug.WriteLine(
                     "Verifying read method throws ArgumentExcpetion with a null NewLine string"
                 );
@@ -362,7 +363,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 Debug.WriteLine(
                     "Verifying read method throws ArgumentExcpetion with an empty NewLine string"
                 );
@@ -666,7 +668,8 @@ namespace System.IO.Ports.Tests
             int numBytesRead,
             int numNewLines,
             ReadDataFromEnum readDataFrom
-        ) {
+        )
+        {
             using (SerialPort com1 = TCSupport.InitFirstSerialPort())
             using (SerialPort com2 = TCSupport.InitSecondSerialPort(com1))
             {
@@ -749,7 +752,8 @@ namespace System.IO.Ports.Tests
             SerialPort com2,
             string strToWrite,
             string newLine
-        ) {
+        )
+        {
             VerifyReadTo(com1, com2, strToWrite, newLine);
         }
 
@@ -758,7 +762,8 @@ namespace System.IO.Ports.Tests
             SerialPort com2,
             string strToWrite,
             string newLine
-        ) {
+        )
+        {
             BufferData(com1, com2, strToWrite);
             PerformReadOnCom1FromCom2(com1, com2, strToWrite, newLine);
         }
@@ -768,7 +773,8 @@ namespace System.IO.Ports.Tests
             SerialPort com2,
             string strToWrite,
             string newLine
-        ) {
+        )
+        {
             BufferData(com1, com2, strToWrite);
             VerifyReadTo(com1, com2, strToWrite, strToWrite + strToWrite, newLine);
         }
@@ -795,7 +801,8 @@ namespace System.IO.Ports.Tests
             SerialPort com2,
             string strToWrite,
             string newLine
-        ) {
+        )
+        {
             VerifyReadTo(com1, com2, strToWrite, strToWrite, newLine);
         }
 
@@ -805,7 +812,8 @@ namespace System.IO.Ports.Tests
             string strToWrite,
             string expectedString,
             string newLine
-        ) {
+        )
+        {
             char[] charsToWrite = strToWrite.ToCharArray();
             byte[] bytesToWrite = com1.Encoding.GetBytes(charsToWrite);
 
@@ -821,7 +829,8 @@ namespace System.IO.Ports.Tests
             SerialPort com2,
             string strToWrite,
             string newLine
-        ) {
+        )
+        {
             StringBuilder strBldrRead = new StringBuilder();
             int newLineStringLength = newLine.Length;
             int numNewLineChars = newLine.ToCharArray().Length;

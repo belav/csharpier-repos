@@ -37,7 +37,8 @@ namespace Microsoft.Extensions.Logging
         public static bool operator ==(
             Microsoft.Extensions.Logging.EventId left,
             Microsoft.Extensions.Logging.EventId right
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator Microsoft.Extensions.Logging.EventId(int i)
@@ -47,7 +48,8 @@ namespace Microsoft.Extensions.Logging
         public static bool operator !=(
             Microsoft.Extensions.Logging.EventId left,
             Microsoft.Extensions.Logging.EventId right
-        ) {
+        )
+        {
             throw null;
         }
         public override string ToString()
@@ -94,7 +96,8 @@ namespace Microsoft.Extensions.Logging
             this Microsoft.Extensions.Logging.ILogger logger,
             string messageFormat,
             params object?[] args
-        ) {
+        )
+        {
             throw null;
         }
         public static void Log(
@@ -285,12 +288,14 @@ namespace Microsoft.Extensions.Logging
         public static Microsoft.Extensions.Logging.ILogger CreateLogger(
             this Microsoft.Extensions.Logging.ILoggerFactory factory,
             System.Type type
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Logging.ILogger<T> CreateLogger<T>(
             this Microsoft.Extensions.Logging.ILoggerFactory factory
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -300,7 +305,8 @@ namespace Microsoft.Extensions.Logging
             Microsoft.Extensions.Logging.LogLevel logLevel,
             Microsoft.Extensions.Logging.EventId eventId,
             string formatString
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Action<Microsoft.Extensions.Logging.ILogger, System.Exception?> Define(
@@ -308,7 +314,8 @@ namespace Microsoft.Extensions.Logging
             Microsoft.Extensions.Logging.EventId eventId,
             string formatString,
             bool skipEnabledCheck
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Func<
@@ -389,7 +396,8 @@ namespace Microsoft.Extensions.Logging
             Microsoft.Extensions.Logging.LogLevel logLevel,
             Microsoft.Extensions.Logging.EventId eventId,
             string formatString
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Action<
@@ -401,7 +409,8 @@ namespace Microsoft.Extensions.Logging
             Microsoft.Extensions.Logging.EventId eventId,
             string formatString,
             bool skipEnabledCheck
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Action<
@@ -413,7 +422,8 @@ namespace Microsoft.Extensions.Logging
             Microsoft.Extensions.Logging.LogLevel logLevel,
             Microsoft.Extensions.Logging.EventId eventId,
             string formatString
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Action<
@@ -426,7 +436,8 @@ namespace Microsoft.Extensions.Logging
             Microsoft.Extensions.Logging.EventId eventId,
             string formatString,
             bool skipEnabledCheck
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Action<
@@ -439,7 +450,8 @@ namespace Microsoft.Extensions.Logging
             Microsoft.Extensions.Logging.LogLevel logLevel,
             Microsoft.Extensions.Logging.EventId eventId,
             string formatString
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Action<
@@ -453,7 +465,8 @@ namespace Microsoft.Extensions.Logging
             Microsoft.Extensions.Logging.EventId eventId,
             string formatString,
             bool skipEnabledCheck
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Action<
@@ -467,7 +480,8 @@ namespace Microsoft.Extensions.Logging
             Microsoft.Extensions.Logging.LogLevel logLevel,
             Microsoft.Extensions.Logging.EventId eventId,
             string formatString
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Action<
@@ -482,7 +496,8 @@ namespace Microsoft.Extensions.Logging
             Microsoft.Extensions.Logging.EventId eventId,
             string formatString,
             bool skipEnabledCheck
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Action<
@@ -497,7 +512,8 @@ namespace Microsoft.Extensions.Logging
             Microsoft.Extensions.Logging.LogLevel logLevel,
             Microsoft.Extensions.Logging.EventId eventId,
             string formatString
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Action<
@@ -513,7 +529,8 @@ namespace Microsoft.Extensions.Logging
             Microsoft.Extensions.Logging.EventId eventId,
             string formatString,
             bool skipEnabledCheck
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Action<
@@ -529,7 +546,8 @@ namespace Microsoft.Extensions.Logging
             Microsoft.Extensions.Logging.LogLevel logLevel,
             Microsoft.Extensions.Logging.EventId eventId,
             string formatString
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Action<
@@ -546,7 +564,8 @@ namespace Microsoft.Extensions.Logging
             Microsoft.Extensions.Logging.EventId eventId,
             string formatString,
             bool skipEnabledCheck
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -561,7 +580,8 @@ namespace Microsoft.Extensions.Logging
         }
         bool Microsoft.Extensions.Logging.ILogger.IsEnabled(
             Microsoft.Extensions.Logging.LogLevel logLevel
-        ) {
+        )
+        {
             throw null;
         }
         void Microsoft.Extensions.Logging.ILogger.Log<TState>(
@@ -597,7 +617,8 @@ namespace Microsoft.Extensions.Logging.Abstractions
             TState state,
             System.Exception? exception,
             System.Func<TState, System.Exception?, string> formatter
-        ) {
+        )
+        {
             throw null;
         }
         public string Category

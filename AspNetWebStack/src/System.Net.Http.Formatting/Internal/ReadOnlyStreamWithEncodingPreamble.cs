@@ -152,7 +152,8 @@ namespace System.Net.Http.Internal
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (_remainingBytes.Array == null)
             {
                 return _innerStream.ReadAsync(buffer, offset, count, cancellationToken);

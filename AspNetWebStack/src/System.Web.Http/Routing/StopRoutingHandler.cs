@@ -22,7 +22,8 @@ namespace System.Web.Http.Routing
         protected override Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
     }

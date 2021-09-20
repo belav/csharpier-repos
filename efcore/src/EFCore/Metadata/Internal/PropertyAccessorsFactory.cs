@@ -52,7 +52,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         private static Func<IUpdateEntry, TProperty> CreateCurrentValueGetter<TProperty>(
             IPropertyBase propertyBase,
             bool useStoreGeneratedValues
-        ) {
+        )
+        {
             var entityClrType = propertyBase.DeclaringType.ClrType;
             var updateParameter = Expression.Parameter(typeof(IUpdateEntry), "entry");
             var entryParameter = Expression.Convert(updateParameter, typeof(InternalEntityEntry));
@@ -140,7 +141,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
         private static Func<IUpdateEntry, TProperty> CreateOriginalValueGetter<TProperty>(
             IProperty property
-        ) {
+        )
+        {
             var updateParameter = Expression.Parameter(typeof(IUpdateEntry), "entry");
             var entryParameter = Expression.Convert(updateParameter, typeof(InternalEntityEntry));
             var originalValuesIndex = property.GetOriginalValueIndex();
@@ -177,7 +179,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
         private static Func<IUpdateEntry, TProperty> CreateRelationshipSnapshotGetter<TProperty>(
             IPropertyBase propertyBase
-        ) {
+        )
+        {
             var updateParameter = Expression.Parameter(typeof(IUpdateEntry), "entry");
             var entryParameter = Expression.Convert(updateParameter, typeof(InternalEntityEntry));
             var relationshipIndex = (propertyBase as IProperty)?.GetRelationshipIndex() ?? -1;

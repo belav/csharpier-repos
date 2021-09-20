@@ -332,7 +332,8 @@ namespace System.Collections.Tests
             int enumerableLength,
             int numberOfMatchingElements,
             int numberOfDuplicateElements
-        ) {
+        )
+        {
             ISet<T> set = GenericISetFactory(setLength);
             IEnumerable<T> enumerable = CreateEnumerable(
                 enumerableType,
@@ -352,7 +353,8 @@ namespace System.Collections.Tests
             int enumerableLength,
             int numberOfMatchingElements,
             int numberOfDuplicateElements
-        ) {
+        )
+        {
             ISet<T> set = GenericISetFactory(setLength);
             IEnumerable<T> enumerable = CreateEnumerable(
                 enumerableType,
@@ -372,7 +374,8 @@ namespace System.Collections.Tests
             int enumerableLength,
             int numberOfMatchingElements,
             int numberOfDuplicateElements
-        ) {
+        )
+        {
             ISet<T> set = GenericISetFactory(setLength);
             IEnumerable<T> enumerable = CreateEnumerable(
                 enumerableType,
@@ -392,7 +395,8 @@ namespace System.Collections.Tests
             int enumerableLength,
             int numberOfMatchingElements,
             int numberOfDuplicateElements
-        ) {
+        )
+        {
             ISet<T> set = GenericISetFactory(setLength);
             IEnumerable<T> enumerable = CreateEnumerable(
                 enumerableType,
@@ -412,7 +416,8 @@ namespace System.Collections.Tests
             int enumerableLength,
             int numberOfMatchingElements,
             int numberOfDuplicateElements
-        ) {
+        )
+        {
             ISet<T> set = GenericISetFactory(setLength);
             IEnumerable<T> enumerable = CreateEnumerable(
                 enumerableType,
@@ -432,7 +437,8 @@ namespace System.Collections.Tests
             int enumerableLength,
             int numberOfMatchingElements,
             int numberOfDuplicateElements
-        ) {
+        )
+        {
             ISet<T> set = GenericISetFactory(setLength);
             IEnumerable<T> enumerable = CreateEnumerable(
                 enumerableType,
@@ -452,7 +458,8 @@ namespace System.Collections.Tests
             int enumerableLength,
             int numberOfMatchingElements,
             int numberOfDuplicateElements
-        ) {
+        )
+        {
             ISet<T> set = GenericISetFactory(setLength);
             IEnumerable<T> enumerable = CreateEnumerable(
                 enumerableType,
@@ -472,7 +479,8 @@ namespace System.Collections.Tests
             int enumerableLength,
             int numberOfMatchingElements,
             int numberOfDuplicateElements
-        ) {
+        )
+        {
             ISet<T> set = GenericISetFactory(setLength);
             IEnumerable<T> enumerable = CreateEnumerable(
                 enumerableType,
@@ -492,7 +500,8 @@ namespace System.Collections.Tests
             int enumerableLength,
             int numberOfMatchingElements,
             int numberOfDuplicateElements
-        ) {
+        )
+        {
             ISet<T> set = GenericISetFactory(setLength);
             IEnumerable<T> enumerable = CreateEnumerable(
                 enumerableType,
@@ -512,7 +521,8 @@ namespace System.Collections.Tests
             int enumerableLength,
             int numberOfMatchingElements,
             int numberOfDuplicateElements
-        ) {
+        )
+        {
             ISet<T> set = GenericISetFactory(setLength);
             IEnumerable<T> enumerable = CreateEnumerable(
                 enumerableType,
@@ -718,7 +728,8 @@ namespace System.Collections.Tests
             int enumerableLength,
             int numberOfMatchingElements,
             int numberOfDuplicateElements
-        ) {
+        )
+        {
             ISet<T> set = GenericISetFactory(setLength);
             T value = CreateT(532);
             if (!set.Contains(value))

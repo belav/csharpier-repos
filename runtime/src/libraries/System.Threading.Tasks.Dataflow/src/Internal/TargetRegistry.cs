@@ -398,7 +398,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
                 T messageValue,
                 ISourceBlock<T>? source,
                 bool consumeToAccept
-            ) {
+            )
+            {
                 Debug.Assert(
                     source == _owningSource,
                     "Only valid to be used with the source for which it was created."
@@ -411,7 +412,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
                 DataflowMessageHeader messageHeader,
                 ITargetBlock<T> target,
                 out bool messageConsumed
-            ) {
+            )
+            {
                 return _owningSource.ConsumeMessage(messageHeader, this, out messageConsumed);
             }
 
@@ -419,7 +421,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
             bool ISourceBlock<T>.ReserveMessage(
                 DataflowMessageHeader messageHeader,
                 ITargetBlock<T> target
-            ) {
+            )
+            {
                 return _owningSource.ReserveMessage(messageHeader, this);
             }
 
@@ -427,7 +430,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
             void ISourceBlock<T>.ReleaseReservation(
                 DataflowMessageHeader messageHeader,
                 ITargetBlock<T> target
-            ) {
+            )
+            {
                 _owningSource.ReleaseReservation(messageHeader, this);
             }
 
@@ -451,7 +455,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
             IDisposable ISourceBlock<T>.LinkTo(
                 ITargetBlock<T> target,
                 DataflowLinkOptions linkOptions
-            ) {
+            )
+            {
                 throw new NotSupportedException(SR.NotSupported_MemberNotNeeded);
             }
 

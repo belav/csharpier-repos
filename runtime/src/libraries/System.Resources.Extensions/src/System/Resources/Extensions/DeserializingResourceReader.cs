@@ -21,7 +21,8 @@ namespace System.Resources.Extensions
                     readerType,
                     PreserializedResourceWriter.DeserializingResourceReaderFullyQualifiedName
                 )
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -31,7 +32,8 @@ namespace System.Resources.Extensions
                     readerType,
                     PreserializedResourceWriter.ResourceReaderFullyQualifiedName
                 )
-            ) {
+            )
+            {
                 // we can read the default format, we just assume BinaryFormatter and don't
                 // read the SerializationFormat
                 _assumeBinaryFormatter = true;

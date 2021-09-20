@@ -140,7 +140,8 @@ namespace System.Web.Http.Owin
         private static void AssertEqual(
             ExceptionContextCatchBlock expected,
             ExceptionContextCatchBlock actual
-        ) {
+        )
+        {
             if (expected == null)
             {
                 Assert.Null(actual);

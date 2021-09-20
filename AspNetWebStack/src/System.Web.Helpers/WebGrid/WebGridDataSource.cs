@@ -35,7 +35,8 @@ namespace System.Web.Helpers
             Type elementType,
             bool canPage,
             bool canSort
-        ) {
+        )
+        {
             Debug.Assert(grid != null);
             Debug.Assert(values != null);
 
@@ -90,7 +91,8 @@ namespace System.Web.Helpers
             if (
                 !String.IsNullOrEmpty(sortInfo.SortColumn)
                 || ((DefaultSort != null) && !String.IsNullOrEmpty(DefaultSort.SortColumn))
-            ) {
+            )
+            {
                 return Sort(data, _elementType, sortInfo);
             }
             return data;
@@ -163,7 +165,8 @@ namespace System.Web.Helpers
                             (DefaultSort != null)
                             && !sort.Equals(DefaultSort)
                             && !String.IsNullOrEmpty(DefaultSort.SortColumn)
-                        ) {
+                        )
+                        {
                             return Sort(data, elementType, DefaultSort);
                         }
                         return data;
@@ -195,7 +198,8 @@ namespace System.Web.Helpers
             Expression body,
             ParameterExpression param,
             SortDirection sortDirection
-        ) {
+        )
+        {
             Debug.Assert(data != null);
             Debug.Assert(body != null);
             Debug.Assert(param != null);

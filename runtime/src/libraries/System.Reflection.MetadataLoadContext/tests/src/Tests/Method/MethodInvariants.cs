@@ -75,7 +75,8 @@ namespace System.Reflection.Tests
             if (
                 mb.IsAbstract
                 || (mb.GetMethodImplementationFlags() & MethodImplAttributes.InternalCall) != 0
-            ) {
+            )
+            {
                 Assert.Null(body);
             }
 

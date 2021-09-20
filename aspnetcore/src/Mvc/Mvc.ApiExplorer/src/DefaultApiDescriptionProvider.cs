@@ -45,7 +45,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             IModelMetadataProvider modelMetadataProvider,
             IActionResultTypeMapper mapper,
             IOptions<RouteOptions> routeOptions
-        ) {
+        )
+        {
             _mvcOptions = optionsAccessor.Value;
             _constraintResolver = constraintResolver;
             _modelMetadataProvider = modelMetadataProvider;
@@ -73,7 +74,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
                 if (
                     action.AttributeRouteInfo != null
                     && action.AttributeRouteInfo.SuppressPathMatching
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -98,7 +100,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             ControllerActionDescriptor action,
             string httpMethod,
             string groupName
-        ) {
+        )
+        {
             var parsedTemplate = ParseTemplate(action);
 
             var apiDescription = new ApiDescription()
@@ -178,7 +181,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
                         actionParameter
                             is ControllerParameterDescriptor controllerParameterDescriptor
                         && _modelMetadataProvider is ModelMetadataProvider provider
-                    ) {
+                    )
+                    {
                         // The default model metadata provider derives from ModelMetadataProvider
                         // and can therefore supply information about attributes applied to parameters.
                         metadata = provider.GetMetadataForParameter(
@@ -265,7 +269,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
                     parameter.Source == BindingSource.Path
                     || parameter.Source == BindingSource.ModelBinding
                     || parameter.Source == BindingSource.Custom
-                ) {
+                )
+                {
                     if (routeParameters.TryGetValue(parameter.Name, out var routeInfo))
                     {
                         parameter.RouteInfo = routeInfo;
@@ -274,7 +279,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
                         if (
                             parameter.Source == BindingSource.ModelBinding
                             && !parameter.RouteInfo.IsOptional
-                        ) {
+                        )
+                        {
                             // If we didn't see any information about the parameter, but we have
                             // a route parameter that matches, let's switch it to path.
                             parameter.Source = BindingSource.Path;
@@ -307,7 +313,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
                     if (
                         parameter.BindingInfo == null
                         || parameter.BindingInfo.EmptyBodyBehavior == EmptyBodyBehavior.Default
-                    ) {
+                    )
+                    {
                         parameter.IsRequired = !mvcOptions.AllowEmptyInputInBodyModelBinding;
                     }
                     else
@@ -327,7 +334,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
                     parameter.Source == BindingSource.Path
                     && parameter.RouteInfo != null
                     && !parameter.RouteInfo.IsOptional
-                ) {
+                )
+                {
                     parameter.IsRequired = true;
                 }
             }
@@ -350,7 +358,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
                             controllerParameter.ParameterInfo,
                             out var defaultValue
                         )
-                    ) {
+                    )
+                    {
                         parameter.DefaultValue = defaultValue;
                     }
                 }
@@ -434,7 +443,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
         private IReadOnlyList<ApiRequestFormat> GetSupportedFormats(
             MediaTypeCollection contentTypes,
             Type type
-        ) {
+        )
+        {
             if (contentTypes.Count == 0)
             {
                 contentTypes = new MediaTypeCollection { (string)null, };
@@ -447,7 +457,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
                 {
                     if (
                         formatter is IApiRequestFormatMetadataProvider requestFormatMetadataProvider
-                    ) {
+                    )
+                    {
                         var supportedTypes = requestFormatMetadataProvider.GetSupportedContentTypes(
                             contentType,
                             type
@@ -475,7 +486,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
 
         private static MediaTypeCollection GetDeclaredContentTypes(
             IApiRequestMetadataProvider[] requestMetadataAttributes
-        ) {
+        )
+        {
             // Walk through all 'filter' attributes in order, and allow each one to see or override
             // the results of the previous ones. This is similar to the execution path for content-negotiation.
             var contentTypes = new MediaTypeCollection();
@@ -492,7 +504,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
 
         private IApiRequestMetadataProvider[] GetRequestMetadataAttributes(
             ControllerActionDescriptor action
-        ) {
+        )
+        {
             if (action.FilterDescriptors == null)
             {
                 return null;
@@ -523,7 +536,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
                 ModelMetadata metadata,
                 BindingInfo bindingInfo,
                 string propertyName
-            ) {
+            )
+            {
                 // BindingMetadata can be null if the metadata represents properties.
                 return new ApiParameterDescriptionContext
                 {
@@ -541,7 +555,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             public PseudoModelBindingVisitor(
                 ApiParameterContext context,
                 ParameterDescriptor parameter
-            ) {
+            )
+            {
                 Context = context;
                 Parameter = parameter;
 
@@ -568,7 +583,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
                 ApiParameterDescriptionContext bindingContext,
                 BindingSource ambientSource,
                 string containerName
-            ) {
+            )
+            {
                 var source = bindingContext.BindingSource;
                 if (source != null && source.IsGreedy)
                 {
@@ -594,7 +610,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
                     modelMetadata.IsEnumerableType
                     || !modelMetadata.IsComplexType
                     || modelMetadata.Properties.Count == 0
-                ) {
+                )
+                {
                     Context.Results.Add(
                         CreateResult(bindingContext, source ?? ambientSource, containerName)
                     );
@@ -664,7 +681,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
                 ApiParameterDescriptionContext bindingContext,
                 BindingSource source,
                 string containerName
-            ) {
+            )
+            {
                 return new ApiParameterDescription()
                 {
                     ModelMetadata = bindingContext.ModelMetadata,
@@ -679,7 +697,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             private static string GetName(
                 string containerName,
                 ApiParameterDescriptionContext metadata
-            ) {
+            )
+            {
                 var propertyName = !string.IsNullOrEmpty(metadata.BinderModelName)
                     ? metadata.BinderModelName
                     : metadata.PropertyName;

@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             LSP.CompletionItem completionItem,
             RequestContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var document = context.Document;
             if (document == null)
             {
@@ -122,13 +123,15 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         private static bool MatchesLSPCompletionItem(
             LSP.CompletionItem lspCompletionItem,
             CompletionItem completionItem
-        ) {
+        )
+        {
             if (
                 !lspCompletionItem.Label.StartsWith(
                     completionItem.DisplayTextPrefix,
                     StringComparison.Ordinal
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -137,7 +140,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                     completionItem.DisplayTextSuffix,
                     StringComparison.Ordinal
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -150,7 +154,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                     completionItem.DisplayText.Length,
                     StringComparison.Ordinal
                 ) != 0
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -165,7 +170,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             CompletionItem selectedItem,
             bool snippetsSupported,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var documentText = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
 
             var completionChange = await completionService.GetChangeAsync(
@@ -210,7 +216,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 
         private CompletionListCache.CacheEntry? GetCompletionListCacheEntry(
             LSP.CompletionItem request
-        ) {
+        )
+        {
             Contract.ThrowIfNull(request.Data);
             var resolveData = ((JToken)request.Data).ToObject<CompletionResolveData>();
             if (resolveData?.ResultId == null)

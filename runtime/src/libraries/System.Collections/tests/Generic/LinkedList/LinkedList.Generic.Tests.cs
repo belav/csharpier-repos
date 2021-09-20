@@ -162,7 +162,8 @@ namespace System.Collections.Tests
             LinkedList<T> expectedList,
             LinkedListNode<T> expectedPrevious,
             LinkedListNode<T> expectedNext
-        ) {
+        )
+        {
             Assert.Equal(expectedValue, node.Value); //"Err_548ajoid Node Value"
             Assert.Equal(expectedList, node.List); //"Err_0821279 Node List"
 
@@ -179,7 +180,8 @@ namespace System.Collections.Tests
             LinkedList<T> expectedList,
             bool expectedPreviousNull,
             bool expectedNextNull
-        ) {
+        )
+        {
             Assert.Equal(expectedValue, node.Value); //"Err_548ajoid Expected Node Value"
             Assert.Equal(expectedList, node.List); //"Err_0821279 Expected Node List"
 
@@ -310,7 +312,8 @@ namespace System.Collections.Tests
                     if (
                         (expectedItems[i] == null && currentItem == null)
                         || (expectedItems[i] != null && expectedItems[i].Equals(currentItem))
-                    ) {
+                    )
+                    {
                         itemsVisited[i] = true;
                         itemFound = true;
                         break;
@@ -552,7 +555,8 @@ namespace System.Collections.Tests
             LinkedList<T> linkedList,
             LinkedListNode<T> node,
             T expectedValue
-        ) {
+        )
+        {
             LinkedListNode<T> tailNode = linkedList.Last;
 
             Assert.Null(node.List); //"Err_564898ajid Node.LinkedList returned non null"
@@ -573,7 +577,8 @@ namespace System.Collections.Tests
             T[] linkedListValues,
             LinkedListNode<T> node,
             T expectedValue
-        ) {
+        )
+        {
             LinkedListNode<T> tailNode = linkedList.Last;
 
             Assert.Null(node.List); //"Err_564898ajid Node.LinkedList returned non null"
@@ -607,7 +612,8 @@ namespace System.Collections.Tests
             int enumerableLength,
             int numberOfMatchingElements,
             int numberOfDuplicateElements
-        ) {
+        )
+        {
             _ = setLength;
             _ = numberOfMatchingElements;
             IEnumerable<T> enumerable = CreateEnumerable(

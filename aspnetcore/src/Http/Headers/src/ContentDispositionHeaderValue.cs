@@ -284,7 +284,8 @@ namespace Microsoft.Net.Http.Headers
         public static bool TryParse(
             StringSegment input,
             [NotNullWhen(true)] out ContentDispositionHeaderValue? parsedValue
-        ) {
+        )
+        {
             var index = 0;
             return Parser.TryParseValue(input, ref index, out parsedValue!);
         }
@@ -293,7 +294,8 @@ namespace Microsoft.Net.Http.Headers
             StringSegment input,
             int startIndex,
             out ContentDispositionHeaderValue? parsedValue
-        ) {
+        )
+        {
             Contract.Requires(startIndex >= 0);
 
             parsedValue = null;
@@ -344,7 +346,8 @@ namespace Microsoft.Net.Http.Headers
             StringSegment input,
             int startIndex,
             out StringSegment dispositionType
-        ) {
+        )
+        {
             Contract.Requires((input.Length > 0) && (startIndex < input.Length));
 
             // This method just parses the disposition type string, it does not parse parameters.
@@ -366,7 +369,8 @@ namespace Microsoft.Net.Http.Headers
         private static void CheckDispositionTypeFormat(
             StringSegment dispositionType,
             string parameterName
-        ) {
+        )
+        {
             if (StringSegment.IsNullOrEmpty(dispositionType))
             {
                 throw new ArgumentException("An empty string is not allowed.", parameterName);
@@ -381,7 +385,8 @@ namespace Microsoft.Net.Http.Headers
             if (
                 (dispositionTypeLength == 0)
                 || (tempDispositionType.Length != dispositionType.Length)
-            ) {
+            )
+            {
                 throw new FormatException(
                     string.Format(
                         CultureInfo.InvariantCulture,
@@ -637,7 +642,8 @@ namespace Microsoft.Net.Http.Headers
                 || parts[0] != "\"="
                 || parts[4] != "=\""
                 || !parts[2].Equals("b", StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 // Not encoded.
                 // This does not support multi-line encoding.
                 // Only base64 encoding is supported, not quoted printable
@@ -806,7 +812,8 @@ namespace Microsoft.Net.Http.Headers
                     || ((digit >= 'A') && (digit <= 'F'))
                     || ((digit >= 'a') && (digit <= 'f'))
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -816,7 +823,8 @@ namespace Microsoft.Net.Http.Headers
                     || ((next >= 'A') && (next <= 'F'))
                     || ((next >= 'a') && (next <= 'f'))
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -846,7 +854,8 @@ namespace Microsoft.Net.Http.Headers
                     || ((digit >= 'A') && (digit <= 'F'))
                     || ((digit >= 'a') && (digit <= 'f'))
                 )
-            ) {
+            )
+            {
                 throw new ArgumentException();
             }
 
@@ -861,7 +870,8 @@ namespace Microsoft.Net.Http.Headers
                     || ((next >= 'A') && (next <= 'F'))
                     || ((next >= 'a') && (next <= 'f'))
                 )
-            ) {
+            )
+            {
                 throw new ArgumentException();
             }
 

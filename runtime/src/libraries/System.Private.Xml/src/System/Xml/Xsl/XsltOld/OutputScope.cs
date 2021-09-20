@@ -74,7 +74,8 @@ namespace System.Xml.Xsl.XsltOld
             XmlSpace space,
             string lang,
             bool mixed
-        ) {
+        )
+        {
             this.scopes = null;
             _name = name;
             _nsUri = nspace;

@@ -15,14 +15,16 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static RazorProjectEngineBuilder AddTagHelpers(
             this RazorProjectEngineBuilder builder,
             params TagHelperDescriptor[] tagHelpers
-        ) {
+        )
+        {
             return AddTagHelpers(builder, (IEnumerable<TagHelperDescriptor>)tagHelpers);
         }
 
         public static RazorProjectEngineBuilder AddTagHelpers(
             this RazorProjectEngineBuilder builder,
             IEnumerable<TagHelperDescriptor> tagHelpers
-        ) {
+        )
+        {
             var feature = (TestTagHelperFeature)builder.Features.OfType<ITagHelperFeature>()
                 .FirstOrDefault();
             if (feature == null)
@@ -37,7 +39,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         public static RazorProjectEngineBuilder ConfigureDocumentClassifier(
             this RazorProjectEngineBuilder builder
-        ) {
+        )
+        {
             var feature = builder.Features.OfType<DefaultDocumentClassifierPassFeature>()
                 .FirstOrDefault();
             if (feature == null)

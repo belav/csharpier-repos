@@ -75,7 +75,8 @@ namespace Microsoft.Extensions.Internal
                     }
                     else if (
                         StringComparer.Ordinal.Compare(@interface.FullName, bestMatch.FullName) < 0
-                    ) {
+                    )
+                    {
                         bestMatch = @interface;
                     }
                     else

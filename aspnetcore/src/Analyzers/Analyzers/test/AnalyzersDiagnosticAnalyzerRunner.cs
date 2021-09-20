@@ -31,7 +31,8 @@ namespace Microsoft.AspNetCore.Analyzers
         public static Project CreateProjectWithReferencesInBinDir(
             Assembly testAssembly,
             params string[] source
-        ) {
+        )
+        {
             // The deps file in the project is incorrect and does not contain "compile" nodes for some references.
             // However these binaries are always present in the bin output. As a "temporary" workaround, we'll add
             // every dll file that's present in the test's build output as a metadatareference.
@@ -49,7 +50,8 @@ namespace Microsoft.AspNetCore.Analyzers
                                 StringComparison.OrdinalIgnoreCase
                             )
                     )
-                ) {
+                )
+                {
                     project = project.AddMetadataReference(
                         MetadataReference.CreateFromFile(assembly)
                     );

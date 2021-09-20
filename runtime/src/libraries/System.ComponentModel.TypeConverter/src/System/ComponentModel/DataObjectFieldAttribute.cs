@@ -23,7 +23,8 @@ namespace System.ComponentModel
             bool isIdentity,
             bool isNullable,
             int length
-        ) {
+        )
+        {
             PrimaryKey = primaryKey;
             IsIdentity = isIdentity;
             IsNullable = isNullable;

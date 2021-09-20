@@ -169,7 +169,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             object htmlAttributes,
             string tag,
             string expected
-        ) {
+        )
+        {
             // Arrange
             var model = new ValidationModel();
             var html = DefaultTemplatesUtilities.GetHtmlHelper(model);
@@ -193,7 +194,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             object htmlAttributes,
             string tag,
             string ignored
-        ) {
+        )
+        {
             // Arrange
             var model = new ValidationModel();
             var html = DefaultTemplatesUtilities.GetHtmlHelper(model);
@@ -217,7 +219,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             object htmlAttributes,
             string tag,
             string ignored
-        ) {
+        )
+        {
             // Arrange
             var model = new ValidationModel();
             var html = DefaultTemplatesUtilities.GetHtmlHelper(model);
@@ -242,7 +245,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             bool clientValidationEnabled,
             string expected,
             string ignored
-        ) {
+        )
+        {
             // Arrange
             var model = new ValidationModel();
             var html = DefaultTemplatesUtilities.GetHtmlHelper(model);
@@ -268,7 +272,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             bool clientValidationEnabled,
             string expected,
             string ignored
-        ) {
+        )
+        {
             // Arrange
             var model = new ValidationModel();
             var html = DefaultTemplatesUtilities.GetHtmlHelper(model);
@@ -298,7 +303,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             bool clientValidationEnabled,
             string ignored,
             string expected
-        ) {
+        )
+        {
             // Arrange
             var model = new ValidationModel();
             var html = DefaultTemplatesUtilities.GetHtmlHelper(model);
@@ -323,7 +329,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             bool excludePropertyErrors,
             string prefix,
             string expected
-        ) {
+        )
+        {
             // Arrange
             var model = new ValidationModel();
             var html = DefaultTemplatesUtilities.GetHtmlHelper(model);

@@ -1030,7 +1030,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedDecimalToByte(value, useInterpreter);
             }
         }
@@ -1047,7 +1048,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedDecimalToNullableByte(value, useInterpreter);
             }
         }
@@ -1064,7 +1066,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedDecimalToChar(value, useInterpreter);
             }
         }
@@ -1081,7 +1084,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedDecimalToNullableChar(value, useInterpreter);
             }
         }
@@ -1098,7 +1102,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedDecimalToDecimal(value, useInterpreter);
             }
         }
@@ -1115,7 +1120,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedDecimalToNullableDecimal(value, useInterpreter);
             }
         }
@@ -1132,7 +1138,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedDecimalToDouble(value, useInterpreter);
             }
         }
@@ -1149,7 +1156,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedDecimalToNullableDouble(value, useInterpreter);
             }
         }
@@ -1166,7 +1174,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedDecimalToFloat(value, useInterpreter);
             }
         }
@@ -1183,7 +1192,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedDecimalToNullableFloat(value, useInterpreter);
             }
         }
@@ -1200,7 +1210,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedDecimalToInt(value, useInterpreter);
             }
         }
@@ -1217,7 +1228,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedDecimalToNullableInt(value, useInterpreter);
             }
         }
@@ -1234,7 +1246,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedDecimalToLong(value, useInterpreter);
             }
         }
@@ -1251,7 +1264,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedDecimalToNullableLong(value, useInterpreter);
             }
         }
@@ -1268,7 +1282,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedDecimalToSByte(value, useInterpreter);
             }
         }
@@ -1285,7 +1300,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedDecimalToNullableSByte(value, useInterpreter);
             }
         }
@@ -1302,7 +1318,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedDecimalToShort(value, useInterpreter);
             }
         }
@@ -1319,7 +1336,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedDecimalToNullableShort(value, useInterpreter);
             }
         }
@@ -1336,7 +1354,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedDecimalToUInt(value, useInterpreter);
             }
         }
@@ -1353,7 +1372,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedDecimalToNullableUInt(value, useInterpreter);
             }
         }
@@ -1370,7 +1390,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedDecimalToULong(value, useInterpreter);
             }
         }
@@ -1387,7 +1408,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedDecimalToNullableULong(value, useInterpreter);
             }
         }
@@ -1404,7 +1426,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedDecimalToUShort(value, useInterpreter);
             }
         }
@@ -1421,7 +1444,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedDecimalToNullableUShort(value, useInterpreter);
             }
         }
@@ -1439,7 +1463,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableDecimalToByte(value, useInterpreter);
             }
         }
@@ -1457,7 +1482,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableDecimalToNullableByte(value, useInterpreter);
             }
         }
@@ -1475,7 +1501,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableDecimalToChar(value, useInterpreter);
             }
         }
@@ -1493,7 +1520,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableDecimalToNullableChar(value, useInterpreter);
             }
         }
@@ -1511,7 +1539,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableDecimalToDecimal(value, useInterpreter);
             }
         }
@@ -1529,7 +1558,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableDecimalToNullableDecimal(value, useInterpreter);
             }
         }
@@ -1547,7 +1577,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableDecimalToDouble(value, useInterpreter);
             }
         }
@@ -1565,7 +1596,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableDecimalToNullableDouble(value, useInterpreter);
             }
         }
@@ -1583,7 +1615,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableDecimalToFloat(value, useInterpreter);
             }
         }
@@ -1601,7 +1634,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableDecimalToNullableFloat(value, useInterpreter);
             }
         }
@@ -1619,7 +1653,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableDecimalToInt(value, useInterpreter);
             }
         }
@@ -1637,7 +1672,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableDecimalToNullableInt(value, useInterpreter);
             }
         }
@@ -1655,7 +1691,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableDecimalToLong(value, useInterpreter);
             }
         }
@@ -1673,7 +1710,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableDecimalToNullableLong(value, useInterpreter);
             }
         }
@@ -1691,7 +1729,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableDecimalToSByte(value, useInterpreter);
             }
         }
@@ -1709,7 +1748,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableDecimalToNullableSByte(value, useInterpreter);
             }
         }
@@ -1727,7 +1767,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableDecimalToShort(value, useInterpreter);
             }
         }
@@ -1745,7 +1786,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableDecimalToNullableShort(value, useInterpreter);
             }
         }
@@ -1763,7 +1805,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableDecimalToUInt(value, useInterpreter);
             }
         }
@@ -1781,7 +1824,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableDecimalToNullableUInt(value, useInterpreter);
             }
         }
@@ -1799,7 +1843,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableDecimalToULong(value, useInterpreter);
             }
         }
@@ -1817,7 +1862,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableDecimalToNullableULong(value, useInterpreter);
             }
         }
@@ -1835,7 +1881,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableDecimalToUShort(value, useInterpreter);
             }
         }
@@ -1853,7 +1900,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableDecimalToNullableUShort(value, useInterpreter);
             }
         }
@@ -1874,7 +1922,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedDoubleToByte(value, useInterpreter);
             }
         }
@@ -1895,7 +1944,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedDoubleToNullableByte(value, useInterpreter);
             }
         }
@@ -1916,7 +1966,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedDoubleToChar(value, useInterpreter);
             }
         }
@@ -1937,7 +1988,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedDoubleToNullableChar(value, useInterpreter);
             }
         }
@@ -1958,7 +2010,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedDoubleToDecimal(value, useInterpreter);
             }
         }
@@ -1979,7 +2032,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedDoubleToNullableDecimal(value, useInterpreter);
             }
         }
@@ -2000,7 +2054,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedDoubleToDouble(value, useInterpreter);
             }
         }
@@ -2021,7 +2076,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedDoubleToNullableDouble(value, useInterpreter);
             }
         }
@@ -2042,7 +2098,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedDoubleToEnum(value, useInterpreter);
             }
         }
@@ -2063,7 +2120,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedDoubleToNullableEnum(value, useInterpreter);
             }
         }
@@ -2084,7 +2142,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedDoubleToEnumLong(value, useInterpreter);
             }
         }
@@ -2105,7 +2164,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedDoubleToNullableEnumLong(value, useInterpreter);
             }
         }
@@ -2126,7 +2186,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedDoubleToFloat(value, useInterpreter);
             }
         }
@@ -2147,7 +2208,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedDoubleToNullableFloat(value, useInterpreter);
             }
         }
@@ -2168,7 +2230,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedDoubleToInt(value, useInterpreter);
             }
         }
@@ -2189,7 +2252,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedDoubleToNullableInt(value, useInterpreter);
             }
         }
@@ -2210,7 +2274,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedDoubleToLong(value, useInterpreter);
             }
         }
@@ -2231,7 +2296,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedDoubleToNullableLong(value, useInterpreter);
             }
         }
@@ -2252,7 +2318,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedDoubleToSByte(value, useInterpreter);
             }
         }
@@ -2273,7 +2340,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedDoubleToNullableSByte(value, useInterpreter);
             }
         }
@@ -2294,7 +2362,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedDoubleToShort(value, useInterpreter);
             }
         }
@@ -2315,7 +2384,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedDoubleToNullableShort(value, useInterpreter);
             }
         }
@@ -2336,7 +2406,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedDoubleToUInt(value, useInterpreter);
             }
         }
@@ -2357,7 +2428,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedDoubleToNullableUInt(value, useInterpreter);
             }
         }
@@ -2378,7 +2450,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedDoubleToULong(value, useInterpreter);
             }
         }
@@ -2399,7 +2472,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedDoubleToNullableULong(value, useInterpreter);
             }
         }
@@ -2420,7 +2494,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedDoubleToUShort(value, useInterpreter);
             }
         }
@@ -2441,7 +2516,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedDoubleToNullableUShort(value, useInterpreter);
             }
         }
@@ -2463,7 +2539,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableDoubleToByte(value, useInterpreter);
             }
         }
@@ -2485,7 +2562,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableDoubleToNullableByte(value, useInterpreter);
             }
         }
@@ -2507,7 +2585,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableDoubleToChar(value, useInterpreter);
             }
         }
@@ -2529,7 +2608,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableDoubleToNullableChar(value, useInterpreter);
             }
         }
@@ -2551,7 +2631,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableDoubleToDecimal(value, useInterpreter);
             }
         }
@@ -2573,7 +2654,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableDoubleToNullableDecimal(value, useInterpreter);
             }
         }
@@ -2595,7 +2677,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableDoubleToDouble(value, useInterpreter);
             }
         }
@@ -2617,7 +2700,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableDoubleToNullableDouble(value, useInterpreter);
             }
         }
@@ -2639,7 +2723,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableDoubleToEnum(value, useInterpreter);
             }
         }
@@ -2661,7 +2746,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableDoubleToNullableEnum(value, useInterpreter);
             }
         }
@@ -2683,7 +2769,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableDoubleToEnumLong(value, useInterpreter);
             }
         }
@@ -2705,7 +2792,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableDoubleToNullableEnumLong(value, useInterpreter);
             }
         }
@@ -2727,7 +2815,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableDoubleToFloat(value, useInterpreter);
             }
         }
@@ -2749,7 +2838,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableDoubleToNullableFloat(value, useInterpreter);
             }
         }
@@ -2771,7 +2861,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableDoubleToInt(value, useInterpreter);
             }
         }
@@ -2793,7 +2884,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableDoubleToNullableInt(value, useInterpreter);
             }
         }
@@ -2815,7 +2907,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableDoubleToLong(value, useInterpreter);
             }
         }
@@ -2837,7 +2930,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableDoubleToNullableLong(value, useInterpreter);
             }
         }
@@ -2859,7 +2953,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableDoubleToSByte(value, useInterpreter);
             }
         }
@@ -2881,7 +2976,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableDoubleToNullableSByte(value, useInterpreter);
             }
         }
@@ -2903,7 +2999,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableDoubleToShort(value, useInterpreter);
             }
         }
@@ -2925,7 +3022,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableDoubleToNullableShort(value, useInterpreter);
             }
         }
@@ -2947,7 +3045,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableDoubleToUInt(value, useInterpreter);
             }
         }
@@ -2969,7 +3068,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableDoubleToNullableUInt(value, useInterpreter);
             }
         }
@@ -2991,7 +3091,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableDoubleToULong(value, useInterpreter);
             }
         }
@@ -3013,7 +3114,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableDoubleToNullableULong(value, useInterpreter);
             }
         }
@@ -3035,7 +3137,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableDoubleToUShort(value, useInterpreter);
             }
         }
@@ -3057,7 +3160,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableDoubleToNullableUShort(value, useInterpreter);
             }
         }
@@ -3301,7 +3405,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableEnumToByte(value, useInterpreter);
             }
         }
@@ -3311,7 +3416,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableEnumToNullableByte(value, useInterpreter);
             }
         }
@@ -3321,7 +3427,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableEnumToChar(value, useInterpreter);
             }
         }
@@ -3331,7 +3438,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableEnumToNullableChar(value, useInterpreter);
             }
         }
@@ -3341,7 +3449,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableEnumToDouble(value, useInterpreter);
             }
         }
@@ -3351,7 +3460,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableEnumToNullableDouble(value, useInterpreter);
             }
         }
@@ -3361,7 +3471,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableEnumToEnum(value, useInterpreter);
             }
         }
@@ -3371,7 +3482,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableEnumToNullableEnum(value, useInterpreter);
             }
         }
@@ -3381,7 +3493,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableEnumToEnumLong(value, useInterpreter);
             }
         }
@@ -3391,7 +3504,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableEnumToNullableEnumLong(value, useInterpreter);
             }
         }
@@ -3401,7 +3515,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableEnumToFloat(value, useInterpreter);
             }
         }
@@ -3411,7 +3526,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableEnumToNullableFloat(value, useInterpreter);
             }
         }
@@ -3421,7 +3537,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableEnumToInt(value, useInterpreter);
             }
         }
@@ -3431,7 +3548,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableEnumToNullableInt(value, useInterpreter);
             }
         }
@@ -3441,7 +3559,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableEnumToLong(value, useInterpreter);
             }
         }
@@ -3451,7 +3570,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableEnumToNullableLong(value, useInterpreter);
             }
         }
@@ -3461,7 +3581,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableEnumToSByte(value, useInterpreter);
             }
         }
@@ -3471,7 +3592,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableEnumToNullableSByte(value, useInterpreter);
             }
         }
@@ -3481,7 +3603,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableEnumToShort(value, useInterpreter);
             }
         }
@@ -3491,7 +3614,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableEnumToNullableShort(value, useInterpreter);
             }
         }
@@ -3501,7 +3625,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableEnumToUInt(value, useInterpreter);
             }
         }
@@ -3511,7 +3636,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableEnumToNullableUInt(value, useInterpreter);
             }
         }
@@ -3521,7 +3647,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableEnumToULong(value, useInterpreter);
             }
         }
@@ -3531,7 +3658,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableEnumToNullableULong(value, useInterpreter);
             }
         }
@@ -3541,7 +3669,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableEnumToUShort(value, useInterpreter);
             }
         }
@@ -3551,7 +3680,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableEnumToNullableUShort(value, useInterpreter);
             }
         }
@@ -3561,7 +3691,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyCheckedEnumLongToByte(value, useInterpreter);
             }
         }
@@ -3571,7 +3702,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyCheckedEnumLongToNullableByte(value, useInterpreter);
             }
         }
@@ -3581,7 +3713,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyCheckedEnumLongToChar(value, useInterpreter);
             }
         }
@@ -3591,7 +3724,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyCheckedEnumLongToNullableChar(value, useInterpreter);
             }
         }
@@ -3601,7 +3735,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyCheckedEnumLongToDouble(value, useInterpreter);
             }
         }
@@ -3611,7 +3746,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyCheckedEnumLongToNullableDouble(value, useInterpreter);
             }
         }
@@ -3621,7 +3757,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyCheckedEnumLongToEnum(value, useInterpreter);
             }
         }
@@ -3631,7 +3768,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyCheckedEnumLongToNullableEnum(value, useInterpreter);
             }
         }
@@ -3641,7 +3779,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyCheckedEnumLongToEnumLong(value, useInterpreter);
             }
         }
@@ -3651,7 +3790,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyCheckedEnumLongToNullableEnumLong(value, useInterpreter);
             }
         }
@@ -3661,7 +3801,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyCheckedEnumLongToFloat(value, useInterpreter);
             }
         }
@@ -3671,7 +3812,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyCheckedEnumLongToNullableFloat(value, useInterpreter);
             }
         }
@@ -3681,7 +3823,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyCheckedEnumLongToInt(value, useInterpreter);
             }
         }
@@ -3691,7 +3834,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyCheckedEnumLongToNullableInt(value, useInterpreter);
             }
         }
@@ -3701,7 +3845,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyCheckedEnumLongToLong(value, useInterpreter);
             }
         }
@@ -3711,7 +3856,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyCheckedEnumLongToNullableLong(value, useInterpreter);
             }
         }
@@ -3721,7 +3867,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyCheckedEnumLongToSByte(value, useInterpreter);
             }
         }
@@ -3731,7 +3878,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyCheckedEnumLongToNullableSByte(value, useInterpreter);
             }
         }
@@ -3741,7 +3889,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyCheckedEnumLongToShort(value, useInterpreter);
             }
         }
@@ -3751,7 +3900,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyCheckedEnumLongToNullableShort(value, useInterpreter);
             }
         }
@@ -3761,7 +3911,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyCheckedEnumLongToUInt(value, useInterpreter);
             }
         }
@@ -3771,7 +3922,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyCheckedEnumLongToNullableUInt(value, useInterpreter);
             }
         }
@@ -3781,7 +3933,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyCheckedEnumLongToULong(value, useInterpreter);
             }
         }
@@ -3791,7 +3944,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyCheckedEnumLongToNullableULong(value, useInterpreter);
             }
         }
@@ -3801,7 +3955,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyCheckedEnumLongToUShort(value, useInterpreter);
             }
         }
@@ -3811,7 +3966,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
-            ) {
+            )
+            {
                 VerifyCheckedEnumLongToNullableUShort(value, useInterpreter);
             }
         }
@@ -3829,7 +3985,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableEnumLongToByte(value, useInterpreter);
             }
         }
@@ -3847,7 +4004,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableEnumLongToNullableByte(value, useInterpreter);
             }
         }
@@ -3865,7 +4023,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableEnumLongToChar(value, useInterpreter);
             }
         }
@@ -3883,7 +4042,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableEnumLongToNullableChar(value, useInterpreter);
             }
         }
@@ -3901,7 +4061,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableEnumLongToDouble(value, useInterpreter);
             }
         }
@@ -3919,7 +4080,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableEnumLongToNullableDouble(value, useInterpreter);
             }
         }
@@ -3937,7 +4099,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableEnumLongToEnum(value, useInterpreter);
             }
         }
@@ -3955,7 +4118,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableEnumLongToNullableEnum(value, useInterpreter);
             }
         }
@@ -3973,7 +4137,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableEnumLongToEnumLong(value, useInterpreter);
             }
         }
@@ -3991,7 +4156,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableEnumLongToNullableEnumLong(value, useInterpreter);
             }
         }
@@ -4009,7 +4175,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableEnumLongToFloat(value, useInterpreter);
             }
         }
@@ -4027,7 +4194,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableEnumLongToNullableFloat(value, useInterpreter);
             }
         }
@@ -4045,7 +4213,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableEnumLongToInt(value, useInterpreter);
             }
         }
@@ -4063,7 +4232,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableEnumLongToNullableInt(value, useInterpreter);
             }
         }
@@ -4081,7 +4251,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableEnumLongToLong(value, useInterpreter);
             }
         }
@@ -4099,7 +4270,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableEnumLongToNullableLong(value, useInterpreter);
             }
         }
@@ -4117,7 +4289,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableEnumLongToSByte(value, useInterpreter);
             }
         }
@@ -4135,7 +4308,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableEnumLongToNullableSByte(value, useInterpreter);
             }
         }
@@ -4153,7 +4327,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableEnumLongToShort(value, useInterpreter);
             }
         }
@@ -4171,7 +4346,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableEnumLongToNullableShort(value, useInterpreter);
             }
         }
@@ -4189,7 +4365,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableEnumLongToUInt(value, useInterpreter);
             }
         }
@@ -4207,7 +4384,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableEnumLongToNullableUInt(value, useInterpreter);
             }
         }
@@ -4225,7 +4403,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableEnumLongToULong(value, useInterpreter);
             }
         }
@@ -4243,7 +4422,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableEnumLongToNullableULong(value, useInterpreter);
             }
         }
@@ -4261,7 +4441,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableEnumLongToUShort(value, useInterpreter);
             }
         }
@@ -4279,7 +4460,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableEnumLongToNullableUShort(value, useInterpreter);
             }
         }
@@ -4300,7 +4482,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedFloatToByte(value, useInterpreter);
             }
         }
@@ -4321,7 +4504,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedFloatToNullableByte(value, useInterpreter);
             }
         }
@@ -4342,7 +4526,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedFloatToChar(value, useInterpreter);
             }
         }
@@ -4363,7 +4548,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedFloatToNullableChar(value, useInterpreter);
             }
         }
@@ -4384,7 +4570,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedFloatToDecimal(value, useInterpreter);
             }
         }
@@ -4405,7 +4592,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedFloatToNullableDecimal(value, useInterpreter);
             }
         }
@@ -4426,7 +4614,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedFloatToDouble(value, useInterpreter);
             }
         }
@@ -4447,7 +4636,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedFloatToNullableDouble(value, useInterpreter);
             }
         }
@@ -4468,7 +4658,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedFloatToEnum(value, useInterpreter);
             }
         }
@@ -4489,7 +4680,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedFloatToNullableEnum(value, useInterpreter);
             }
         }
@@ -4510,7 +4702,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedFloatToEnumLong(value, useInterpreter);
             }
         }
@@ -4531,7 +4724,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedFloatToNullableEnumLong(value, useInterpreter);
             }
         }
@@ -4552,7 +4746,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedFloatToFloat(value, useInterpreter);
             }
         }
@@ -4573,7 +4768,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedFloatToNullableFloat(value, useInterpreter);
             }
         }
@@ -4594,7 +4790,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedFloatToInt(value, useInterpreter);
             }
         }
@@ -4615,7 +4812,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedFloatToNullableInt(value, useInterpreter);
             }
         }
@@ -4636,7 +4834,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedFloatToLong(value, useInterpreter);
             }
         }
@@ -4657,7 +4856,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedFloatToNullableLong(value, useInterpreter);
             }
         }
@@ -4678,7 +4878,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedFloatToSByte(value, useInterpreter);
             }
         }
@@ -4699,7 +4900,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedFloatToNullableSByte(value, useInterpreter);
             }
         }
@@ -4720,7 +4922,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedFloatToShort(value, useInterpreter);
             }
         }
@@ -4741,7 +4944,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedFloatToNullableShort(value, useInterpreter);
             }
         }
@@ -4762,7 +4966,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedFloatToUInt(value, useInterpreter);
             }
         }
@@ -4783,7 +4988,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedFloatToNullableUInt(value, useInterpreter);
             }
         }
@@ -4804,7 +5010,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedFloatToULong(value, useInterpreter);
             }
         }
@@ -4825,7 +5032,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedFloatToNullableULong(value, useInterpreter);
             }
         }
@@ -4846,7 +5054,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedFloatToUShort(value, useInterpreter);
             }
         }
@@ -4867,7 +5076,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedFloatToNullableUShort(value, useInterpreter);
             }
         }
@@ -4889,7 +5099,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableFloatToByte(value, useInterpreter);
             }
         }
@@ -4911,7 +5122,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableFloatToNullableByte(value, useInterpreter);
             }
         }
@@ -4933,7 +5145,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableFloatToChar(value, useInterpreter);
             }
         }
@@ -4955,7 +5168,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableFloatToNullableChar(value, useInterpreter);
             }
         }
@@ -4977,7 +5191,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableFloatToDecimal(value, useInterpreter);
             }
         }
@@ -4999,7 +5214,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableFloatToNullableDecimal(value, useInterpreter);
             }
         }
@@ -5021,7 +5237,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableFloatToDouble(value, useInterpreter);
             }
         }
@@ -5043,7 +5260,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableFloatToNullableDouble(value, useInterpreter);
             }
         }
@@ -5065,7 +5283,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableFloatToEnum(value, useInterpreter);
             }
         }
@@ -5087,7 +5306,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableFloatToNullableEnum(value, useInterpreter);
             }
         }
@@ -5109,7 +5329,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableFloatToEnumLong(value, useInterpreter);
             }
         }
@@ -5131,7 +5352,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableFloatToNullableEnumLong(value, useInterpreter);
             }
         }
@@ -5153,7 +5375,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableFloatToFloat(value, useInterpreter);
             }
         }
@@ -5175,7 +5398,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableFloatToNullableFloat(value, useInterpreter);
             }
         }
@@ -5197,7 +5421,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableFloatToInt(value, useInterpreter);
             }
         }
@@ -5219,7 +5444,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableFloatToNullableInt(value, useInterpreter);
             }
         }
@@ -5241,7 +5467,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableFloatToLong(value, useInterpreter);
             }
         }
@@ -5263,7 +5490,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableFloatToNullableLong(value, useInterpreter);
             }
         }
@@ -5285,7 +5513,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableFloatToSByte(value, useInterpreter);
             }
         }
@@ -5307,7 +5536,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableFloatToNullableSByte(value, useInterpreter);
             }
         }
@@ -5329,7 +5559,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableFloatToShort(value, useInterpreter);
             }
         }
@@ -5351,7 +5582,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableFloatToNullableShort(value, useInterpreter);
             }
         }
@@ -5373,7 +5605,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableFloatToUInt(value, useInterpreter);
             }
         }
@@ -5395,7 +5628,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableFloatToNullableUInt(value, useInterpreter);
             }
         }
@@ -5417,7 +5651,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableFloatToULong(value, useInterpreter);
             }
         }
@@ -5439,7 +5674,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableFloatToNullableULong(value, useInterpreter);
             }
         }
@@ -5461,7 +5697,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableFloatToUShort(value, useInterpreter);
             }
         }
@@ -5483,7 +5720,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyCheckedNullableFloatToNullableUShort(value, useInterpreter);
             }
         }
@@ -6753,7 +6991,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableSByteToByte(value, useInterpreter);
             }
         }
@@ -6763,7 +7002,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableSByteToNullableByte(value, useInterpreter);
             }
         }
@@ -6773,7 +7013,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableSByteToChar(value, useInterpreter);
             }
         }
@@ -6783,7 +7024,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableSByteToNullableChar(value, useInterpreter);
             }
         }
@@ -6793,7 +7035,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableSByteToDecimal(value, useInterpreter);
             }
         }
@@ -6803,7 +7046,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableSByteToNullableDecimal(value, useInterpreter);
             }
         }
@@ -6813,7 +7057,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableSByteToDouble(value, useInterpreter);
             }
         }
@@ -6823,7 +7068,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableSByteToNullableDouble(value, useInterpreter);
             }
         }
@@ -6833,7 +7079,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableSByteToEnum(value, useInterpreter);
             }
         }
@@ -6843,7 +7090,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableSByteToNullableEnum(value, useInterpreter);
             }
         }
@@ -6853,7 +7101,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableSByteToEnumLong(value, useInterpreter);
             }
         }
@@ -6863,7 +7112,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableSByteToNullableEnumLong(value, useInterpreter);
             }
         }
@@ -6873,7 +7123,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableSByteToFloat(value, useInterpreter);
             }
         }
@@ -6883,7 +7134,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableSByteToNullableFloat(value, useInterpreter);
             }
         }
@@ -6893,7 +7145,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableSByteToInt(value, useInterpreter);
             }
         }
@@ -6903,7 +7156,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableSByteToNullableInt(value, useInterpreter);
             }
         }
@@ -6913,7 +7167,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableSByteToLong(value, useInterpreter);
             }
         }
@@ -6923,7 +7178,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableSByteToNullableLong(value, useInterpreter);
             }
         }
@@ -6933,7 +7189,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableSByteToSByte(value, useInterpreter);
             }
         }
@@ -6943,7 +7200,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableSByteToNullableSByte(value, useInterpreter);
             }
         }
@@ -6953,7 +7211,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableSByteToShort(value, useInterpreter);
             }
         }
@@ -6963,7 +7222,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableSByteToNullableShort(value, useInterpreter);
             }
         }
@@ -6973,7 +7233,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableSByteToUInt(value, useInterpreter);
             }
         }
@@ -6983,7 +7244,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableSByteToNullableUInt(value, useInterpreter);
             }
         }
@@ -6993,7 +7255,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableSByteToULong(value, useInterpreter);
             }
         }
@@ -7003,7 +7266,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableSByteToNullableULong(value, useInterpreter);
             }
         }
@@ -7013,7 +7277,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableSByteToUShort(value, useInterpreter);
             }
         }
@@ -7023,7 +7288,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableSByteToNullableUShort(value, useInterpreter);
             }
         }
@@ -7285,7 +7551,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableShortToByte(value, useInterpreter);
             }
         }
@@ -7295,7 +7562,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableShortToNullableByte(value, useInterpreter);
             }
         }
@@ -7305,7 +7573,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableShortToChar(value, useInterpreter);
             }
         }
@@ -7315,7 +7584,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableShortToNullableChar(value, useInterpreter);
             }
         }
@@ -7325,7 +7595,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableShortToDecimal(value, useInterpreter);
             }
         }
@@ -7335,7 +7606,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableShortToNullableDecimal(value, useInterpreter);
             }
         }
@@ -7345,7 +7617,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableShortToDouble(value, useInterpreter);
             }
         }
@@ -7355,7 +7628,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableShortToNullableDouble(value, useInterpreter);
             }
         }
@@ -7365,7 +7639,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableShortToEnum(value, useInterpreter);
             }
         }
@@ -7375,7 +7650,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableShortToNullableEnum(value, useInterpreter);
             }
         }
@@ -7385,7 +7661,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableShortToEnumLong(value, useInterpreter);
             }
         }
@@ -7395,7 +7672,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableShortToNullableEnumLong(value, useInterpreter);
             }
         }
@@ -7405,7 +7683,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableShortToFloat(value, useInterpreter);
             }
         }
@@ -7415,7 +7694,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableShortToNullableFloat(value, useInterpreter);
             }
         }
@@ -7425,7 +7705,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableShortToInt(value, useInterpreter);
             }
         }
@@ -7435,7 +7716,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableShortToNullableInt(value, useInterpreter);
             }
         }
@@ -7445,7 +7727,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableShortToLong(value, useInterpreter);
             }
         }
@@ -7455,7 +7738,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableShortToNullableLong(value, useInterpreter);
             }
         }
@@ -7465,7 +7749,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableShortToSByte(value, useInterpreter);
             }
         }
@@ -7475,7 +7760,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableShortToNullableSByte(value, useInterpreter);
             }
         }
@@ -7485,7 +7771,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableShortToShort(value, useInterpreter);
             }
         }
@@ -7495,7 +7782,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableShortToNullableShort(value, useInterpreter);
             }
         }
@@ -7505,7 +7793,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableShortToUInt(value, useInterpreter);
             }
         }
@@ -7515,7 +7804,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableShortToNullableUInt(value, useInterpreter);
             }
         }
@@ -7525,7 +7815,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableShortToULong(value, useInterpreter);
             }
         }
@@ -7535,7 +7826,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableShortToNullableULong(value, useInterpreter);
             }
         }
@@ -7545,7 +7837,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableShortToUShort(value, useInterpreter);
             }
         }
@@ -7555,7 +7848,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyCheckedNullableShortToNullableUShort(value, useInterpreter);
             }
         }
@@ -9419,7 +9713,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableByteToNullableByte(
             byte? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<byte?>> e = Expression.Lambda<Func<byte?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(byte?)), typeof(byte?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -9446,7 +9741,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableByteToNullableChar(
             byte? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<char?>> e = Expression.Lambda<Func<char?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(byte?)), typeof(char?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -9476,7 +9772,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableByteToNullableDecimal(
             byte? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(byte?)),
@@ -9509,7 +9806,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableByteToNullableDouble(
             byte? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(byte?)),
@@ -9539,7 +9837,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableByteToNullableEnum(
             byte? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<E?>> e = Expression.Lambda<Func<E?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(byte?)), typeof(E?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -9566,7 +9865,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableByteToNullableEnumLong(
             byte? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<El?>> e = Expression.Lambda<Func<El?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(byte?)), typeof(El?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -9593,7 +9893,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableByteToNullableFloat(
             byte? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<float?>> e = Expression.Lambda<Func<float?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(byte?)),
@@ -9648,7 +9949,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableByteToNullableLong(
             byte? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(byte?)), typeof(long?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -9681,7 +9983,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableByteToNullableSByte(
             byte? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(byte?)),
@@ -9716,7 +10019,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableByteToNullableShort(
             byte? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(byte?)),
@@ -9746,7 +10050,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableByteToNullableUInt(
             byte? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(byte?)), typeof(uint?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -9773,7 +10078,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableByteToNullableULong(
             byte? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(byte?)),
@@ -9806,7 +10112,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableByteToNullableUShort(
             byte? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(byte?)),
@@ -10176,7 +10483,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableCharToNullableByte(
             char? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<byte?>> e = Expression.Lambda<Func<byte?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(char?)), typeof(byte?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -10208,7 +10516,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableCharToNullableChar(
             char? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<char?>> e = Expression.Lambda<Func<char?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(char?)), typeof(char?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -10238,7 +10547,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableCharToNullableDecimal(
             char? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(char?)),
@@ -10271,7 +10581,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableCharToNullableDouble(
             char? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(char?)),
@@ -10301,7 +10612,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableCharToNullableEnum(
             char? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<E?>> e = Expression.Lambda<Func<E?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(char?)), typeof(E?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -10328,7 +10640,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableCharToNullableEnumLong(
             char? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<El?>> e = Expression.Lambda<Func<El?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(char?)), typeof(El?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -10355,7 +10668,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableCharToNullableFloat(
             char? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<float?>> e = Expression.Lambda<Func<float?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(char?)),
@@ -10410,7 +10724,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableCharToNullableLong(
             char? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(char?)), typeof(long?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -10443,7 +10758,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableCharToNullableSByte(
             char? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(char?)),
@@ -10480,7 +10796,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableCharToNullableShort(
             char? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(char?)),
@@ -10515,7 +10832,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableCharToNullableUInt(
             char? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(char?)), typeof(uint?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -10542,7 +10860,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableCharToNullableULong(
             char? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(char?)),
@@ -10575,7 +10894,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableCharToNullableUShort(
             char? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(char?)),
@@ -10705,7 +11025,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedDecimalToNullableDecimal(
             decimal value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(decimal)),
@@ -11154,7 +11475,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableDecimalToNullableByte(
             decimal? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<byte?>> e = Expression.Lambda<Func<byte?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(decimal?)),
@@ -11216,7 +11538,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableDecimalToNullableChar(
             decimal? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<char?>> e = Expression.Lambda<Func<char?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(decimal?)),
@@ -11248,7 +11571,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableDecimalToDecimal(
             decimal? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<decimal>> e = Expression.Lambda<Func<decimal>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(decimal?)),
@@ -11267,7 +11591,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableDecimalToNullableDecimal(
             decimal? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(decimal?)),
@@ -11283,7 +11608,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableDecimalToDouble(
             decimal? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<double>> e = Expression.Lambda<Func<double>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(decimal?)),
@@ -11302,7 +11628,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableDecimalToNullableDouble(
             decimal? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(decimal?)),
@@ -11335,7 +11662,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableDecimalToNullableFloat(
             decimal? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<float?>> e = Expression.Lambda<Func<float?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(decimal?)),
@@ -11381,7 +11709,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableDecimalToNullableInt(
             decimal? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<int?>> e = Expression.Lambda<Func<int?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(decimal?)),
@@ -11443,7 +11772,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableDecimalToNullableLong(
             decimal? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(decimal?)),
@@ -11505,7 +11835,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableDecimalToNullableSByte(
             decimal? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(decimal?)),
@@ -11567,7 +11898,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableDecimalToNullableShort(
             decimal? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(decimal?)),
@@ -11629,7 +11961,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableDecimalToNullableUInt(
             decimal? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(decimal?)),
@@ -11691,7 +12024,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableDecimalToNullableULong(
             decimal? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(decimal?)),
@@ -11723,7 +12057,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableDecimalToUShort(
             decimal? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<ushort>> e = Expression.Lambda<Func<ushort>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(decimal?)),
@@ -11755,7 +12090,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableDecimalToNullableUShort(
             decimal? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(decimal?)),
@@ -12443,7 +12779,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableDoubleToNullableByte(
             double? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<byte?>> e = Expression.Lambda<Func<byte?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(double?)),
@@ -12500,7 +12837,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableDoubleToNullableChar(
             double? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<char?>> e = Expression.Lambda<Func<char?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(double?)),
@@ -12557,7 +12895,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableDoubleToNullableDecimal(
             double? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(double?)),
@@ -12601,7 +12940,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableDoubleToNullableDouble(
             double? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(double?)),
@@ -12644,7 +12984,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableDoubleToNullableEnum(
             double? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<E?>> e = Expression.Lambda<Func<E?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(double?)), typeof(E?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -12668,7 +13009,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableDoubleToEnumLong(
             double? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<El>> e = Expression.Lambda<Func<El>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(double?)), typeof(El)),
                 Enumerable.Empty<ParameterExpression>()
@@ -12697,7 +13039,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableDoubleToNullableEnumLong(
             double? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<El?>> e = Expression.Lambda<Func<El?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(double?)), typeof(El?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -12738,7 +13081,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableDoubleToNullableFloat(
             double? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<float?>> e = Expression.Lambda<Func<float?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(double?)),
@@ -12781,7 +13125,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableDoubleToNullableInt(
             double? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<int?>> e = Expression.Lambda<Func<int?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(double?)),
@@ -12838,7 +13183,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableDoubleToNullableLong(
             double? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(double?)),
@@ -12895,7 +13241,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableDoubleToNullableSByte(
             double? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(double?)),
@@ -12952,7 +13299,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableDoubleToNullableShort(
             double? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(double?)),
@@ -13009,7 +13357,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableDoubleToNullableUInt(
             double? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(double?)),
@@ -13066,7 +13415,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableDoubleToNullableULong(
             double? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(double?)),
@@ -13123,7 +13473,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableDoubleToNullableUShort(
             double? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(double?)),
@@ -13606,7 +13957,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableEnumToNullableEnumLong(
             E? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<El?>> e = Expression.Lambda<Func<El?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(E?)), typeof(El?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -14222,7 +14574,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableEnumLongToNullableByte(
             El? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<byte?>> e = Expression.Lambda<Func<byte?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(El?)), typeof(byte?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -14256,7 +14609,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableEnumLongToNullableChar(
             El? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<char?>> e = Expression.Lambda<Func<char?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(El?)), typeof(char?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -14288,7 +14642,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableEnumLongToNullableDouble(
             El? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(El?)), typeof(double?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -14323,7 +14678,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableEnumLongToNullableEnum(
             El? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<E?>> e = Expression.Lambda<Func<E?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(El?)), typeof(E?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -14355,7 +14711,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableEnumLongToNullableEnumLong(
             El? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<El?>> e = Expression.Lambda<Func<El?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(El?)), typeof(El?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -14382,7 +14739,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableEnumLongToNullableFloat(
             El? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<float?>> e = Expression.Lambda<Func<float?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(El?)), typeof(float?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -14411,7 +14769,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableEnumLongToNullableInt(
             El? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<int?>> e = Expression.Lambda<Func<int?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(El?)), typeof(int?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -14443,7 +14802,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableEnumLongToNullableLong(
             El? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(El?)), typeof(long?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -14476,7 +14836,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableEnumLongToNullableSByte(
             El? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(El?)), typeof(sbyte?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -14510,7 +14871,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableEnumLongToNullableShort(
             El? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(El?)), typeof(short?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -14544,7 +14906,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableEnumLongToNullableUInt(
             El? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(El?)), typeof(uint?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -14578,7 +14941,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableEnumLongToNullableULong(
             El? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(El?)), typeof(ulong?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -14612,7 +14976,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableEnumLongToNullableUShort(
             El? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(El?)), typeof(ushort?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -15259,7 +15624,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableFloatToNullableByte(
             float? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<byte?>> e = Expression.Lambda<Func<byte?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(float?)),
@@ -15313,7 +15679,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableFloatToNullableChar(
             float? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<char?>> e = Expression.Lambda<Func<char?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(float?)),
@@ -15370,7 +15737,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableFloatToNullableDecimal(
             float? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(float?)),
@@ -15414,7 +15782,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableFloatToNullableDouble(
             float? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(float?)),
@@ -15457,7 +15826,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableFloatToNullableEnum(
             float? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<E?>> e = Expression.Lambda<Func<E?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(float?)), typeof(E?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -15508,7 +15878,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableFloatToNullableEnumLong(
             float? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<El?>> e = Expression.Lambda<Func<El?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(float?)), typeof(El?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -15549,7 +15920,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableFloatToNullableFloat(
             float? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<float?>> e = Expression.Lambda<Func<float?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(float?)),
@@ -15592,7 +15964,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableFloatToNullableInt(
             float? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<int?>> e = Expression.Lambda<Func<int?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(float?)), typeof(int?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -15643,7 +16016,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableFloatToNullableLong(
             float? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(float?)),
@@ -15700,7 +16074,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableFloatToNullableSByte(
             float? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(float?)),
@@ -15757,7 +16132,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableFloatToNullableShort(
             float? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(float?)),
@@ -15811,7 +16187,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableFloatToNullableUInt(
             float? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(float?)),
@@ -15868,7 +16245,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableFloatToNullableULong(
             float? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(float?)),
@@ -15925,7 +16303,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableFloatToNullableUShort(
             float? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(float?)),
@@ -16394,7 +16773,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableIntToNullableDecimal(
             int? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(int?)),
@@ -16424,7 +16804,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableIntToNullableDouble(
             int? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(int?)),
@@ -16479,7 +16860,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableIntToNullableEnumLong(
             int? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<El?>> e = Expression.Lambda<Func<El?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(int?)), typeof(El?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -16714,7 +17096,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableIntToNullableUShort(
             int? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(int?)),
@@ -17123,7 +17506,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableLongToNullableByte(
             long? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<byte?>> e = Expression.Lambda<Func<byte?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(long?)), typeof(byte?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -17157,7 +17541,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableLongToNullableChar(
             long? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<char?>> e = Expression.Lambda<Func<char?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(long?)), typeof(char?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -17192,7 +17577,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableLongToNullableDecimal(
             long? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(long?)),
@@ -17225,7 +17611,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableLongToNullableDouble(
             long? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(long?)),
@@ -17263,7 +17650,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableLongToNullableEnum(
             long? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<E?>> e = Expression.Lambda<Func<E?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(long?)), typeof(E?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -17295,7 +17683,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableLongToNullableEnumLong(
             long? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<El?>> e = Expression.Lambda<Func<El?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(long?)), typeof(El?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -17322,7 +17711,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableLongToNullableFloat(
             long? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<float?>> e = Expression.Lambda<Func<float?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(long?)),
@@ -17382,7 +17772,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableLongToNullableLong(
             long? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(long?)), typeof(long?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -17415,7 +17806,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableLongToNullableSByte(
             long? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(long?)),
@@ -17452,7 +17844,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableLongToNullableShort(
             long? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(long?)),
@@ -17487,7 +17880,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableLongToNullableUInt(
             long? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(long?)), typeof(uint?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -17519,7 +17913,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableLongToNullableULong(
             long? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(long?)),
@@ -17557,7 +17952,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableLongToNullableUShort(
             long? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(long?)),
@@ -17960,7 +18356,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableSByteToNullableByte(
             sbyte? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<byte?>> e = Expression.Lambda<Func<byte?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(sbyte?)),
@@ -17997,7 +18394,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableSByteToNullableChar(
             sbyte? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<char?>> e = Expression.Lambda<Func<char?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(sbyte?)),
@@ -18033,7 +18431,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableSByteToNullableDecimal(
             sbyte? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(sbyte?)),
@@ -18066,7 +18465,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableSByteToNullableDouble(
             sbyte? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(sbyte?)),
@@ -18096,7 +18496,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableSByteToNullableEnum(
             sbyte? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<E?>> e = Expression.Lambda<Func<E?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(sbyte?)), typeof(E?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -18123,7 +18524,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableSByteToNullableEnumLong(
             sbyte? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<El?>> e = Expression.Lambda<Func<El?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(sbyte?)), typeof(El?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -18153,7 +18555,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableSByteToNullableFloat(
             sbyte? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<float?>> e = Expression.Lambda<Func<float?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(sbyte?)),
@@ -18183,7 +18586,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableSByteToNullableInt(
             sbyte? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<int?>> e = Expression.Lambda<Func<int?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(sbyte?)), typeof(int?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -18210,7 +18614,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableSByteToNullableLong(
             sbyte? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(sbyte?)),
@@ -18243,7 +18648,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableSByteToNullableSByte(
             sbyte? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(sbyte?)),
@@ -18276,7 +18682,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableSByteToNullableShort(
             sbyte? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(sbyte?)),
@@ -18308,7 +18715,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableSByteToNullableUInt(
             sbyte? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(sbyte?)),
@@ -18346,7 +18754,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableSByteToNullableULong(
             sbyte? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(sbyte?)),
@@ -18387,7 +18796,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableSByteToNullableUShort(
             sbyte? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(sbyte?)),
@@ -18796,7 +19206,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableShortToNullableByte(
             short? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<byte?>> e = Expression.Lambda<Func<byte?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(short?)),
@@ -18833,7 +19244,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableShortToNullableChar(
             short? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<char?>> e = Expression.Lambda<Func<char?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(short?)),
@@ -18869,7 +19281,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableShortToNullableDecimal(
             short? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(short?)),
@@ -18902,7 +19315,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableShortToNullableDouble(
             short? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(short?)),
@@ -18932,7 +19346,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableShortToNullableEnum(
             short? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<E?>> e = Expression.Lambda<Func<E?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(short?)), typeof(E?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -18959,7 +19374,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableShortToNullableEnumLong(
             short? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<El?>> e = Expression.Lambda<Func<El?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(short?)), typeof(El?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -18989,7 +19405,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableShortToNullableFloat(
             short? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<float?>> e = Expression.Lambda<Func<float?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(short?)),
@@ -19019,7 +19436,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableShortToNullableInt(
             short? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<int?>> e = Expression.Lambda<Func<int?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(short?)), typeof(int?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -19046,7 +19464,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableShortToNullableLong(
             short? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(short?)),
@@ -19085,7 +19504,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableShortToNullableSByte(
             short? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(short?)),
@@ -19123,7 +19543,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableShortToNullableShort(
             short? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(short?)),
@@ -19155,7 +19576,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableShortToNullableUInt(
             short? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(short?)),
@@ -19193,7 +19615,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableShortToNullableULong(
             short? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(short?)),
@@ -19231,7 +19654,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableShortToNullableUShort(
             short? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(short?)),
@@ -19628,7 +20052,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableUIntToNullableByte(
             uint? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<byte?>> e = Expression.Lambda<Func<byte?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(uint?)), typeof(byte?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -19662,7 +20087,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableUIntToNullableChar(
             uint? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<char?>> e = Expression.Lambda<Func<char?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(uint?)), typeof(char?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -19695,7 +20121,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableUIntToNullableDecimal(
             uint? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(uint?)),
@@ -19728,7 +20155,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableUIntToNullableDouble(
             uint? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(uint?)),
@@ -19763,7 +20191,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableUIntToNullableEnum(
             uint? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<E?>> e = Expression.Lambda<Func<E?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(uint?)), typeof(E?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -19793,7 +20222,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableUIntToNullableEnumLong(
             uint? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<El?>> e = Expression.Lambda<Func<El?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(uint?)), typeof(El?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -19820,7 +20250,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableUIntToNullableFloat(
             uint? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<float?>> e = Expression.Lambda<Func<float?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(uint?)),
@@ -19880,7 +20311,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableUIntToNullableLong(
             uint? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(uint?)), typeof(long?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -19913,7 +20345,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableUIntToNullableSByte(
             uint? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(uint?)),
@@ -19950,7 +20383,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableUIntToNullableShort(
             uint? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(uint?)),
@@ -19983,7 +20417,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableUIntToNullableUInt(
             uint? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(uint?)), typeof(uint?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -20010,7 +20445,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableUIntToNullableULong(
             uint? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(uint?)),
@@ -20045,7 +20481,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableUIntToNullableUShort(
             uint? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(uint?)),
@@ -20481,7 +20918,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableULongToNullableByte(
             ulong? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<byte?>> e = Expression.Lambda<Func<byte?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(ulong?)),
@@ -20518,7 +20956,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableULongToNullableChar(
             ulong? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<char?>> e = Expression.Lambda<Func<char?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(ulong?)),
@@ -20554,7 +20993,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableULongToNullableDecimal(
             ulong? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(ulong?)),
@@ -20587,7 +21027,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableULongToNullableDouble(
             ulong? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(ulong?)),
@@ -20622,7 +21063,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableULongToNullableEnum(
             ulong? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<E?>> e = Expression.Lambda<Func<E?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(ulong?)), typeof(E?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -20657,7 +21099,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableULongToNullableEnumLong(
             ulong? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<El?>> e = Expression.Lambda<Func<El?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(ulong?)), typeof(El?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -20690,7 +21133,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableULongToNullableFloat(
             ulong? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<float?>> e = Expression.Lambda<Func<float?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(ulong?)),
@@ -20722,7 +21166,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableULongToNullableInt(
             ulong? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<int?>> e = Expression.Lambda<Func<int?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(ulong?)), typeof(int?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -20754,7 +21199,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableULongToNullableLong(
             ulong? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(ulong?)),
@@ -20796,7 +21242,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableULongToNullableSByte(
             ulong? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(ulong?)),
@@ -20836,7 +21283,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableULongToNullableShort(
             ulong? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(ulong?)),
@@ -20871,7 +21319,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableULongToNullableUInt(
             ulong? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(ulong?)),
@@ -20907,7 +21356,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableULongToNullableULong(
             ulong? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(ulong?)),
@@ -20942,7 +21392,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableULongToNullableUShort(
             ulong? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(ulong?)),
@@ -21360,7 +21811,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableUShortToNullableByte(
             ushort? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<byte?>> e = Expression.Lambda<Func<byte?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(ushort?)),
@@ -21400,7 +21852,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableUShortToNullableChar(
             ushort? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<char?>> e = Expression.Lambda<Func<char?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(ushort?)),
@@ -21433,7 +21886,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableUShortToNullableDecimal(
             ushort? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(ushort?)),
@@ -21466,7 +21920,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableUShortToNullableDouble(
             ushort? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(ushort?)),
@@ -21496,7 +21951,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableUShortToNullableEnum(
             ushort? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<E?>> e = Expression.Lambda<Func<E?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(ushort?)), typeof(E?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -21509,7 +21965,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableUShortToEnumLong(
             ushort? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<El>> e = Expression.Lambda<Func<El>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(ushort?)), typeof(El)),
                 Enumerable.Empty<ParameterExpression>()
@@ -21525,7 +21982,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableUShortToNullableEnumLong(
             ushort? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<El?>> e = Expression.Lambda<Func<El?>>(
                 Expression.ConvertChecked(Expression.Constant(value, typeof(ushort?)), typeof(El?)),
                 Enumerable.Empty<ParameterExpression>()
@@ -21555,7 +22013,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableUShortToNullableFloat(
             ushort? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<float?>> e = Expression.Lambda<Func<float?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(ushort?)),
@@ -21585,7 +22044,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableUShortToNullableInt(
             ushort? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<int?>> e = Expression.Lambda<Func<int?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(ushort?)),
@@ -21618,7 +22078,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableUShortToNullableLong(
             ushort? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(ushort?)),
@@ -21657,7 +22118,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableUShortToNullableSByte(
             ushort? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(ushort?)),
@@ -21697,7 +22159,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableUShortToNullableShort(
             ushort? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(ushort?)),
@@ -21733,7 +22196,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableUShortToNullableUInt(
             ushort? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(ushort?)),
@@ -21766,7 +22230,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableUShortToNullableULong(
             ushort? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(ushort?)),
@@ -21799,7 +22264,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyCheckedNullableUShortToNullableUShort(
             ushort? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
                 Expression.ConvertChecked(
                     Expression.Constant(value, typeof(ushort?)),
@@ -21877,7 +22343,8 @@ namespace System.Linq.Expressions.Tests
             object source,
             object result,
             bool useInterpreter
-        ) {
+        )
+        {
             LambdaExpression lambda = Expression.Lambda(
                 Expression.MakeUnary(
                     ExpressionType.ConvertChecked,

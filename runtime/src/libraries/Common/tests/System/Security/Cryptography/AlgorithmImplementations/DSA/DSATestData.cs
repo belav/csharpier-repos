@@ -155,7 +155,8 @@ namespace System.Security.Cryptography.Dsa.Tests
             out DSAParameters parameters,
             out byte[] signature,
             out byte[] data
-        ) {
+        )
+        {
             parameters = new DSAParameters()
             {
                 P = (

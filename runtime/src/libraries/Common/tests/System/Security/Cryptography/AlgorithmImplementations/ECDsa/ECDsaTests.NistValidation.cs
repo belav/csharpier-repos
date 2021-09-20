@@ -294,7 +294,8 @@ namespace System.Security.Cryptography.EcDsa.Tests
             byte[] msg,
             byte[] signature,
             HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             byte[] tamperedSignature = (byte[])signature.Clone();
             tamperedSignature[0] ^= 0xFF;
 

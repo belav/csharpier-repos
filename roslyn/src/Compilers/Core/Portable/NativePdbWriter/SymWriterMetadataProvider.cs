@@ -30,7 +30,8 @@ namespace Microsoft.Cci
             out string namespaceName,
             out string typeName,
             out TypeAttributes attributes
-        ) {
+        )
+        {
             if (typeDefinitionToken == 0)
             {
                 namespaceName = null;
@@ -74,7 +75,8 @@ namespace Microsoft.Cci
             int methodDefinitionToken,
             out string methodName,
             out int declaringTypeToken
-        ) {
+        )
+        {
             IMethodDefinition m = _writer.GetMethodDefinition(methodDefinitionToken);
             methodName = m.Name;
             declaringTypeToken = MetadataTokens.GetToken(

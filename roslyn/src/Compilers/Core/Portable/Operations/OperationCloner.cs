@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Operations
         public override IOperation VisitFlowAnonymousFunction(
             IFlowAnonymousFunctionOperation operation,
             object? argument
-        ) {
+        )
+        {
             var anonymous = (FlowAnonymousFunctionOperation)operation;
             return new FlowAnonymousFunctionOperation(
                 in anonymous.Context,
@@ -43,7 +44,8 @@ namespace Microsoft.CodeAnalysis.Operations
         public override IOperation VisitDynamicObjectCreation(
             IDynamicObjectCreationOperation operation,
             object? argument
-        ) {
+        )
+        {
             return new DynamicObjectCreationOperation(
                 Visit(operation.Initializer),
                 VisitArray(operation.Arguments),
@@ -59,7 +61,8 @@ namespace Microsoft.CodeAnalysis.Operations
         public override IOperation VisitDynamicInvocation(
             IDynamicInvocationOperation operation,
             object? argument
-        ) {
+        )
+        {
             return new DynamicInvocationOperation(
                 Visit(operation.Operation),
                 VisitArray(operation.Arguments),
@@ -75,7 +78,8 @@ namespace Microsoft.CodeAnalysis.Operations
         public override IOperation VisitDynamicIndexerAccess(
             IDynamicIndexerAccessOperation operation,
             object? argument
-        ) {
+        )
+        {
             return new DynamicIndexerAccessOperation(
                 Visit(operation.Operation),
                 VisitArray(operation.Arguments),
@@ -103,7 +107,8 @@ namespace Microsoft.CodeAnalysis.Operations
         public override IOperation VisitFlowCapture(
             IFlowCaptureOperation operation,
             object? argument
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
 
@@ -115,14 +120,16 @@ namespace Microsoft.CodeAnalysis.Operations
         public override IOperation VisitCaughtException(
             ICaughtExceptionOperation operation,
             object? argument
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
 
         public override IOperation VisitStaticLocalInitializationSemaphore(
             IStaticLocalInitializationSemaphoreOperation operation,
             object? argument
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
     }

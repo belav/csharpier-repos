@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.PipeW
             PipeWriter writer,
             ITimeoutControl? timeoutControl,
             IKestrelTrace log
-        ) {
+        )
+        {
             _writer = writer;
             _timeoutControl = timeoutControl;
             _log = log;
@@ -41,7 +42,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.PipeW
         public ValueTask<FlushResult> FlushAsync(
             IHttpOutputAborter? outputAborter,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return FlushAsync(
                 minRate: null,
                 count: 0,
@@ -60,7 +62,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.PipeW
             long count,
             IHttpOutputAborter? outputAborter,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (minRate is object)
             {
                 // Call BytesWrittenToBuffer before FlushAsync() to make testing easier, otherwise the Flush can cause test code to run before the timeout
@@ -90,7 +93,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.PipeW
             MinDataRate? minRate,
             IHttpOutputAborter? outputAborter,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (minRate is object)
             {
                 _timeoutControl!.StartTimingWrite();

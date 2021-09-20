@@ -46,7 +46,8 @@ namespace Microsoft.AspNetCore.Components.WebView
             Uri appBaseUri,
             IFileProvider fileProvider,
             string hostPageRelativePath
-        ) {
+        )
+        {
             _provider = provider ?? throw new ArgumentNullException(nameof(provider));
             _dispatcher = dispatcher ?? throw new ArgumentNullException(nameof(dispatcher));
             _appBaseUri = EnsureTrailingSlash(
@@ -98,7 +99,8 @@ namespace Microsoft.AspNetCore.Components.WebView
             Type componentType,
             string selector,
             ParameterView parameters
-        ) {
+        )
+        {
             var rootComponent = new RootComponent
             {
                 ComponentType = componentType,

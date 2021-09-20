@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             ExplicitInterfaceSpecifierSyntax explicitInterfaceSpecifier,
             SyntaxToken identifier,
             AccessorListSyntax accessorList
-        ) {
+        )
+        {
             return Update(
                 attributeLists,
                 modifiers,
@@ -39,7 +40,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             ExplicitInterfaceSpecifierSyntax explicitInterfaceSpecifier,
             SyntaxToken identifier,
             SyntaxToken semicolonToken
-        ) {
+        )
+        {
             return Update(
                 attributeLists,
                 modifiers,

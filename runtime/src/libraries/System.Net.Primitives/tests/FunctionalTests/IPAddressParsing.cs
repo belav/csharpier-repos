@@ -332,7 +332,8 @@ namespace System.Net.Primitives.Functional.Tests
         public void TryParseIPv6_ValidAddress_RoundtripMatchesExpected(
             string address,
             string expected
-        ) {
+        )
+        {
             Assert.True(TryParse(address, out IPAddress ip));
 
             // Validate the ToString of the parsed address matches the expected value
@@ -475,7 +476,8 @@ namespace System.Net.Primitives.Functional.Tests
         [MemberData(nameof(InvalidIpv6AddressesNoInner))]
         public void ParseIPv6_InvalidAddress_ThrowsFormatExceptionWithNoInnerExceptionInNetfx(
             string invalidAddress
-        ) {
+        )
+        {
             ParseInvalidAddress(
                 invalidAddress,
                 hasInnerSocketException: !PlatformDetection.IsNetFramework

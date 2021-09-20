@@ -124,7 +124,8 @@ namespace System.Threading.Tasks.Tests
                 Task task,
                 bool shouldBeCompleted,
                 string message
-            ) {
+            )
+            {
                 if (task.IsCompleted != shouldBeCompleted)
                 {
                     Assert.True(false, string.Format("    > FAILED.  {0}.", message));
@@ -1076,7 +1077,8 @@ namespace System.Threading.Tasks.Tests
                 Task ctask,
                 bool shouldBeCompleted,
                 string scenario
-            ) {
+            )
+            {
                 if (ctask.IsCompleted != shouldBeCompleted)
                 {
                     Assert.True(
@@ -2291,7 +2293,8 @@ namespace System.Threading.Tasks.Tests
             int numLeftover,
             int completeAfter,
             int cancelAfter
-        ) {
+        )
+        {
             //Debug.WriteLine("    - ContinueWithTortureTest(numCanceled={0}, numLeftover={1}, completeAfter={2}, cancelAfter={3})",
             //    numCanceled, numLeftover, completeAfter, cancelAfter);
 
@@ -2455,7 +2458,8 @@ namespace System.Threading.Tasks.Tests
             else if (
                 ((AggregateException)exception).InnerException.GetType()
                 != typeof(TaskCanceledException)
-            ) {
+            )
+            {
                 exception = ((AggregateException)exception).InnerException;
                 Assert.True(
                     false,
@@ -2502,7 +2506,8 @@ namespace System.Threading.Tasks.Tests
             CancellationTokenSource cts,
             TaskCompletionSource<int> result,
             TaskScheduler scheduler
-        ) {
+        )
+        {
             // If the cancellation token is already canceled, there is no need to create and link a target.
             // Instead, directly return a canceled task
             if (cts.IsCancellationRequested)

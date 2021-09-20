@@ -58,7 +58,8 @@ namespace System.Text.Json.Serialization.Converters
             ref Utf8JsonReader reader,
             JsonSerializerOptions options,
             out JsonParameterInfo? jsonParameterInfo
-        ) {
+        )
+        {
             JsonTypeInfo typeInfo = state.Current.JsonTypeInfo;
             ArgumentState? argState = state.Current.CtorArgumentState;
 

@@ -396,7 +396,8 @@ namespace Microsoft.JSInterop
             protected internal override void EndInvokeDotNet(
                 DotNetInvocationInfo invocationInfo,
                 in DotNetInvocationResult invocationResult
-            ) {
+            )
+            {
                 var resultOrError = invocationResult.Success
                     ? invocationResult.Result
                     : invocationResult.Exception;
@@ -421,7 +422,8 @@ namespace Microsoft.JSInterop
                 string? argsJson,
                 JSCallResultType resultType,
                 long targetInstanceId
-            ) {
+            )
+            {
                 BeginInvokeCalls.Add(
                     new BeginInvokeAsyncArgs
                     {

@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         internal override Task<ImmutableArray<CodeActionOperation>> ComputeOperationsAsync(
             IProgressTracker progressTracker,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             FixAllLogger.LogState(
                 FixAllState,
@@ -60,7 +61,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         internal sealed override Task<Solution> GetChangedSolutionAsync(
             IProgressTracker progressTracker,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             FixAllLogger.LogState(
                 FixAllState,

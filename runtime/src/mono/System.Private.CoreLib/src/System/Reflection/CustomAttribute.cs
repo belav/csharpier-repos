@@ -66,7 +66,8 @@ namespace System.Reflection
         internal static object[]? GetPseudoCustomAttributes(
             ICustomAttributeProvider obj,
             Type attributeType
-        ) {
+        )
+        {
             object[]? pseudoAttrs = null;
             /* FIXME: Add other types */
             if (obj is RuntimeMethodInfo monoMethod)
@@ -121,7 +122,8 @@ namespace System.Reflection
             ICustomAttributeProvider obj,
             Type? attributeType,
             bool inheritedOnly
-        ) {
+        )
+        {
             object[] attrs;
 
             if (IsUserCattrProvider(obj))
@@ -152,7 +154,8 @@ namespace System.Reflection
             ICustomAttributeProvider obj,
             Type attributeType,
             bool inherit
-        ) {
+        )
+        {
             if (obj == null)
                 throw new ArgumentNullException(nameof(obj));
             if (attributeType == null)
@@ -361,7 +364,8 @@ namespace System.Reflection
         internal static IList<CustomAttributeData> GetCustomAttributesData(
             ICustomAttributeProvider obj,
             bool inherit = false
-        ) {
+        )
+        {
             if (obj == null)
                 throw new ArgumentNullException(nameof(obj));
 
@@ -375,7 +379,8 @@ namespace System.Reflection
             ICustomAttributeProvider obj,
             Type? attributeType,
             bool inherit
-        ) {
+        )
+        {
             if (obj == null)
                 throw new ArgumentNullException(nameof(obj));
             if (attributeType == null)
@@ -524,7 +529,8 @@ namespace System.Reflection
             ICustomAttributeProvider obj,
             Type? attributeType,
             bool inheritedOnly
-        ) {
+        )
+        {
             CustomAttributeData[] attrsData;
             if (IsUserCattrProvider(obj))
             {
@@ -564,7 +570,8 @@ namespace System.Reflection
         internal static CustomAttributeData[]? GetPseudoCustomAttributesData(
             ICustomAttributeProvider obj,
             Type? attributeType
-        ) {
+        )
+        {
             CustomAttributeData[]? pseudoAttrsData = null;
 
             /* FIXME: Add other types */
@@ -628,7 +635,8 @@ namespace System.Reflection
             ICustomAttributeProvider obj,
             Type attributeType,
             bool inherit
-        ) {
+        )
+        {
             if (attributeType == null)
                 throw new ArgumentNullException(nameof(attributeType));
             if (

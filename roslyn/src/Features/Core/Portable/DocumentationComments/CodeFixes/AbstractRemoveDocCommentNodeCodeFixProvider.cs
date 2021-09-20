@@ -65,7 +65,8 @@ namespace Microsoft.CodeAnalysis.DiagnosticComments.CodeFixes
             Document document,
             TextSpan span,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             var paramNode = GetParamNode(root, span);
 
@@ -93,7 +94,8 @@ namespace Microsoft.CodeAnalysis.DiagnosticComments.CodeFixes
         private bool ShouldRemovePreviousSibling(
             List<SyntaxNode> paramNodeSiblings,
             int paramNodeIndex
-        ) {
+        )
+        {
             if (paramNodeIndex > 0)
             {
                 var previousNodeTextTrimmed = paramNodeSiblings[paramNodeIndex - 1].ToFullString()
@@ -102,7 +104,8 @@ namespace Microsoft.CodeAnalysis.DiagnosticComments.CodeFixes
                 if (
                     previousNodeTextTrimmed == string.Empty
                     || previousNodeTextTrimmed == DocCommentSignifierToken
-                ) {
+                )
+                {
                     // Only remove the preceding /// if this param node is also the only thing on this line.
                     if (paramNodeIndex + 1 < paramNodeSiblings.Count)
                     {
@@ -137,9 +140,8 @@ namespace Microsoft.CodeAnalysis.DiagnosticComments.CodeFixes
 
         private class MyCodeAction : CodeAction.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(FeaturesResources.Remove_tag, createChangedDocument) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(FeaturesResources.Remove_tag, createChangedDocument) { }
         }
     }
 }

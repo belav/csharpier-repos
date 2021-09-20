@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 AssetProvider assetService,
                 Solution baseSolution,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 _hostServices = hostServices;
                 _assetProvider = assetService;
                 _baseSolution = baseSolution;
@@ -111,7 +112,8 @@ namespace Microsoft.CodeAnalysis.Remote
                     if (
                         oldSolutionChecksums.Projects.Checksum
                         != newSolutionChecksums.Projects.Checksum
-                    ) {
+                    )
+                    {
                         solution = await UpdateProjectsAsync(
                                 solution,
                                 oldSolutionChecksums.Projects,
@@ -123,7 +125,8 @@ namespace Microsoft.CodeAnalysis.Remote
                     if (
                         oldSolutionChecksums.AnalyzerReferences.Checksum
                         != newSolutionChecksums.AnalyzerReferences.Checksum
-                    ) {
+                    )
+                    {
                         solution = solution.WithAnalyzerReferences(
                             await _assetProvider.CreateCollectionAsync<AnalyzerReference>(
                                     newSolutionChecksums.AnalyzerReferences,
@@ -151,7 +154,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 Solution solution,
                 ChecksumCollection oldChecksums,
                 ChecksumCollection newChecksums
-            ) {
+            )
+            {
                 using var olds = SharedPools.Default<HashSet<Checksum>>().GetPooledObject();
                 using var news = SharedPools.Default<HashSet<Checksum>>().GetPooledObject();
 
@@ -170,7 +174,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 Solution solution,
                 HashSet<Checksum> oldChecksums,
                 HashSet<Checksum> newChecksums
-            ) {
+            )
+            {
                 var oldMap = await GetProjectMapAsync(solution, oldChecksums).ConfigureAwait(false);
                 var newMap = await GetProjectMapAsync(_assetProvider, newChecksums)
                     .ConfigureAwait(false);
@@ -235,7 +240,8 @@ namespace Microsoft.CodeAnalysis.Remote
             private async Task SynchronizeAssetsAsync(
                 Dictionary<ProjectId, ProjectStateChecksums> oldMap,
                 Dictionary<ProjectId, ProjectStateChecksums> newMap
-            ) {
+            )
+            {
                 using var pooledObject = SharedPools.Default<HashSet<Checksum>>().GetPooledObject();
 
                 // added project
@@ -260,7 +266,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 Project project,
                 ProjectStateChecksums oldProjectChecksums,
                 ProjectStateChecksums newProjectChecksums
-            ) {
+            )
+            {
                 // changed info
                 if (oldProjectChecksums.Info != newProjectChecksums.Info)
                 {
@@ -271,7 +278,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 // changed compilation options
                 if (
                     oldProjectChecksums.CompilationOptions != newProjectChecksums.CompilationOptions
-                ) {
+                )
+                {
                     project = project.WithCompilationOptions(
                         project.State.ProjectInfo.Attributes.FixUpCompilationOptions(
                             await _assetProvider.GetAssetAsync<CompilationOptions>(
@@ -299,7 +307,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 if (
                     oldProjectChecksums.ProjectReferences.Checksum
                     != newProjectChecksums.ProjectReferences.Checksum
-                ) {
+                )
+                {
                     project = project.WithProjectReferences(
                         await _assetProvider.CreateCollectionAsync<ProjectReference>(
                                 newProjectChecksums.ProjectReferences,
@@ -313,7 +322,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 if (
                     oldProjectChecksums.MetadataReferences.Checksum
                     != newProjectChecksums.MetadataReferences.Checksum
-                ) {
+                )
+                {
                     project = project.WithMetadataReferences(
                         await _assetProvider.CreateCollectionAsync<MetadataReference>(
                                 newProjectChecksums.MetadataReferences,
@@ -327,7 +337,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 if (
                     oldProjectChecksums.AnalyzerReferences.Checksum
                     != newProjectChecksums.AnalyzerReferences.Checksum
-                ) {
+                )
+                {
                     project = project.WithAnalyzerReferences(
                         await _assetProvider.CreateCollectionAsync<AnalyzerReference>(
                                 newProjectChecksums.AnalyzerReferences,
@@ -340,7 +351,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 // changed analyzer references
                 if (
                     oldProjectChecksums.Documents.Checksum != newProjectChecksums.Documents.Checksum
-                ) {
+                )
+                {
                     project = await UpdateDocumentsAsync(
                             project,
                             project.State.DocumentStates.States,
@@ -356,7 +368,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 if (
                     oldProjectChecksums.AdditionalDocuments.Checksum
                     != newProjectChecksums.AdditionalDocuments.Checksum
-                ) {
+                )
+                {
                     project = await UpdateDocumentsAsync(
                             project,
                             project.State.AdditionalDocumentStates.States,
@@ -372,7 +385,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 if (
                     oldProjectChecksums.AnalyzerConfigDocuments.Checksum
                     != newProjectChecksums.AnalyzerConfigDocuments.Checksum
-                ) {
+                )
+                {
                     project = await UpdateDocumentsAsync(
                             project,
                             project.State.AnalyzerConfigDocumentStates.States,
@@ -391,7 +405,8 @@ namespace Microsoft.CodeAnalysis.Remote
             private async Task<Project> UpdateProjectInfoAsync(
                 Project project,
                 Checksum infoChecksum
-            ) {
+            )
+            {
                 var newProjectAttributes =
                     await _assetProvider.GetAssetAsync<ProjectInfo.ProjectAttributes>(
                             infoChecksum,
@@ -422,7 +437,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 if (
                     project.State.ProjectInfo.Attributes.AssemblyName
                     != newProjectAttributes.AssemblyName
-                ) {
+                )
+                {
                     project = project.Solution.WithProjectAssemblyName(
                             projectId,
                             newProjectAttributes.AssemblyName
@@ -442,7 +458,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 if (
                     project.State.ProjectInfo.Attributes.OutputFilePath
                     != newProjectAttributes.OutputFilePath
-                ) {
+                )
+                {
                     project = project.Solution.WithProjectOutputFilePath(
                             projectId,
                             newProjectAttributes.OutputFilePath
@@ -453,7 +470,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 if (
                     project.State.ProjectInfo.Attributes.OutputRefFilePath
                     != newProjectAttributes.OutputRefFilePath
-                ) {
+                )
+                {
                     project = project.Solution.WithProjectOutputRefFilePath(
                             projectId,
                             newProjectAttributes.OutputRefFilePath
@@ -464,7 +482,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 if (
                     project.State.ProjectInfo.Attributes.CompilationOutputInfo
                     != newProjectAttributes.CompilationOutputInfo
-                ) {
+                )
+                {
                     project = project.Solution.WithProjectCompilationOutputInfo(
                             project.Id,
                             newProjectAttributes.CompilationOutputInfo
@@ -475,7 +494,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 if (
                     project.State.ProjectInfo.Attributes.DefaultNamespace
                     != newProjectAttributes.DefaultNamespace
-                ) {
+                )
+                {
                     project = project.Solution.WithProjectDefaultNamespace(
                             projectId,
                             newProjectAttributes.DefaultNamespace
@@ -486,7 +506,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 if (
                     project.State.ProjectInfo.Attributes.HasAllInformation
                     != newProjectAttributes.HasAllInformation
-                ) {
+                )
+                {
                     project = project.Solution.WithHasAllInformation(
                             projectId,
                             newProjectAttributes.HasAllInformation
@@ -497,7 +518,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 if (
                     project.State.ProjectInfo.Attributes.RunAnalyzers
                     != newProjectAttributes.RunAnalyzers
-                ) {
+                )
+                {
                     project = project.Solution.WithRunAnalyzers(
                             projectId,
                             newProjectAttributes.RunAnalyzers
@@ -515,7 +537,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 ChecksumCollection newChecksums,
                 Func<Solution, ImmutableArray<DocumentInfo>, Solution> addDocuments,
                 Func<Solution, DocumentId, Solution> removeDocument
-            ) {
+            )
+            {
                 using var olds = SharedPools.Default<HashSet<Checksum>>().GetPooledObject();
                 using var news = SharedPools.Default<HashSet<Checksum>>().GetPooledObject();
 
@@ -599,7 +622,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 TextDocument document,
                 DocumentStateChecksums oldDocumentChecksums,
                 DocumentStateChecksums newDocumentChecksums
-            ) {
+            )
+            {
                 // changed info
                 if (oldDocumentChecksums.Info != newDocumentChecksums.Info)
                 {
@@ -646,7 +670,8 @@ namespace Microsoft.CodeAnalysis.Remote
             private async Task<TextDocument> UpdateDocumentInfoAsync(
                 TextDocument document,
                 Checksum infoChecksum
-            ) {
+            )
+            {
                 var newDocumentInfo =
                     await _assetProvider.GetAssetAsync<DocumentInfo.DocumentAttributes>(
                             infoChecksum,
@@ -695,7 +720,8 @@ namespace Microsoft.CodeAnalysis.Remote
             private async Task<Dictionary<DocumentId, DocumentStateChecksums>> GetDocumentMapAsync(
                 AssetProvider assetProvider,
                 HashSet<Checksum> documents
-            ) {
+            )
+            {
                 var map = new Dictionary<DocumentId, DocumentStateChecksums>();
 
                 var documentChecksums = await assetProvider.GetAssetsAsync<DocumentStateChecksums>(
@@ -725,7 +751,8 @@ namespace Microsoft.CodeAnalysis.Remote
             private async Task<Dictionary<DocumentId, DocumentStateChecksums>> GetDocumentMapAsync(
                 IEnumerable<TextDocumentState> states,
                 HashSet<Checksum> documents
-            ) {
+            )
+            {
                 var map = new Dictionary<DocumentId, DocumentStateChecksums>();
 
                 foreach (var state in states)
@@ -744,7 +771,8 @@ namespace Microsoft.CodeAnalysis.Remote
             private async Task<Dictionary<ProjectId, ProjectStateChecksums>> GetProjectMapAsync(
                 AssetProvider assetProvider,
                 HashSet<Checksum> projects
-            ) {
+            )
+            {
                 var map = new Dictionary<ProjectId, ProjectStateChecksums>();
 
                 var projectChecksums = await assetProvider.GetAssetsAsync<ProjectStateChecksums>(
@@ -774,7 +802,8 @@ namespace Microsoft.CodeAnalysis.Remote
             private async Task<Dictionary<ProjectId, ProjectStateChecksums>> GetProjectMapAsync(
                 Solution solution,
                 HashSet<Checksum> projects
-            ) {
+            )
+            {
                 var map = new Dictionary<ProjectId, ProjectStateChecksums>();
 
                 foreach (var (projectId, projectState) in solution.State.ProjectStates)
@@ -796,7 +825,8 @@ namespace Microsoft.CodeAnalysis.Remote
             private async Task ValidateChecksumAsync(
                 Checksum checksumFromRequest,
                 Solution incrementalSolutionBuilt
-            ) {
+            )
+            {
                 var currentSolutionChecksum = await incrementalSolutionBuilt.State.GetChecksumAsync(
                         CancellationToken.None
                     )

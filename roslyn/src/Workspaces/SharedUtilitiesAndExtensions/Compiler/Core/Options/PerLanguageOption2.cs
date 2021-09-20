@@ -78,7 +78,8 @@ namespace Microsoft.CodeAnalysis.Options
             string name,
             T defaultValue,
             ImmutableArray<OptionStorageLocation2> storageLocations
-        ) {
+        )
+        {
             if (string.IsNullOrWhiteSpace(feature))
             {
                 throw new ArgumentNullException(nameof(feature));

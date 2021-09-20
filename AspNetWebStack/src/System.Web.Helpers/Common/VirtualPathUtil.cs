@@ -78,7 +78,8 @@ namespace System.Web.Helpers
             ITemplateFile templateFile,
             HttpContextBase httpContext,
             string virtualPath
-        ) {
+        )
+        {
             Debug.Assert(!String.IsNullOrEmpty(virtualPath));
             string basePath;
             if (templateFile != null)

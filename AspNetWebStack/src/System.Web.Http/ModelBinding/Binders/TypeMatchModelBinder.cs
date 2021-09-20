@@ -73,7 +73,8 @@ namespace System.Web.Http.ModelBinding.Binders
 
         internal static ValueProviderResult GetCompatibleValueProviderResult(
             ModelBindingContext bindingContext
-        ) {
+        )
+        {
             ModelBindingHelper.ValidateBindingContext(bindingContext);
 
             ValueProviderResult valueProviderResult = bindingContext.ValueProvider.GetValue(
@@ -89,7 +90,8 @@ namespace System.Web.Http.ModelBinding.Binders
                     bindingContext.ModelType,
                     valueProviderResult.RawValue
                 )
-            ) {
+            )
+            {
                 return null; // value is of incompatible type
             }
 

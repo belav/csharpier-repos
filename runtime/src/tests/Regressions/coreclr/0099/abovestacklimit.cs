@@ -16230,7 +16230,8 @@ class Test
         long arg8096,
         long arg8097,
         long arg8098
-    ) {
+    )
+    {
         return 100;
     }
 }

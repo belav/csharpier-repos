@@ -38,7 +38,8 @@ namespace System.Security.Cryptography
         {
             using (
                 HashAlgorithm? hasher = CryptoConfig.CreateFromName(_hashNameValue) as HashAlgorithm
-            ) {
+            )
+            {
                 if (hasher is null)
                 {
                     throw new CryptographicException(

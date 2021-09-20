@@ -13,7 +13,8 @@ namespace System.Net
             this Task<TResult> task,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             TaskCompletionSource<TResult> tcs = new TaskCompletionSource<TResult>(state);
 
             task.ContinueWith(

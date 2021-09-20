@@ -69,7 +69,8 @@ namespace Moq.Protected
 
         public ISetupGetter<T, TProperty> SetupGet<TProperty>(
             Expression<Func<TAnalog, TProperty>> expression
-        ) {
+        )
+        {
             Guard.NotNull(expression, nameof(expression));
 
             Expression<Func<T, TProperty>> rewrittenExpression;
@@ -89,7 +90,8 @@ namespace Moq.Protected
         public Mock<T> SetupProperty<TProperty>(
             Expression<Func<TAnalog, TProperty>> expression,
             TProperty initialValue = default(TProperty)
-        ) {
+        )
+        {
             Guard.NotNull(expression, nameof(expression));
 
             Expression<Func<T, TProperty>> rewrittenExpression;
@@ -107,7 +109,8 @@ namespace Moq.Protected
 
         public ISetupSequentialResult<TResult> SetupSequence<TResult>(
             Expression<Func<TAnalog, TResult>> expression
-        ) {
+        )
+        {
             Guard.NotNull(expression, nameof(expression));
 
             Expression<Func<T, TResult>> rewrittenExpression;
@@ -146,7 +149,8 @@ namespace Moq.Protected
             Expression<Action<TAnalog>> expression,
             Times? times = null,
             string failMessage = null
-        ) {
+        )
+        {
             Guard.NotNull(expression, nameof(expression));
 
             Expression<Action<T>> rewrittenExpression;
@@ -166,7 +170,8 @@ namespace Moq.Protected
             Expression<Func<TAnalog, TResult>> expression,
             Times? times = null,
             string failMessage = null
-        ) {
+        )
+        {
             Guard.NotNull(expression, nameof(expression));
 
             Expression<Func<T, TResult>> rewrittenExpression;
@@ -186,7 +191,8 @@ namespace Moq.Protected
             Expression<Func<TAnalog, TProperty>> expression,
             Times? times = null,
             string failMessage = null
-        ) {
+        )
+        {
             Guard.NotNull(expression, nameof(expression));
 
             Expression<Func<T, TProperty>> rewrittenExpression;
@@ -337,7 +343,8 @@ namespace Moq.Protected
             private static bool IsCorrespondingMethod(
                 MethodInfo duckMethod,
                 MethodInfo candidateTargetMethod
-            ) {
+            )
+            {
                 if (candidateTargetMethod.Name != duckMethod.Name)
                 {
                     return false;
@@ -400,7 +407,8 @@ namespace Moq.Protected
             private static bool IsCorrespondingProperty(
                 PropertyInfo duckProperty,
                 PropertyInfo candidateTargetProperty
-            ) {
+            )
+            {
                 return candidateTargetProperty.Name == duckProperty.Name
                     && candidateTargetProperty.PropertyType == duckProperty.PropertyType
                     && candidateTargetProperty.CanRead(out _) == duckProperty.CanRead(out _)

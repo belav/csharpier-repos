@@ -63,7 +63,8 @@ namespace System.Net.Http.Tests
             int startIndex,
             string expectedResult,
             int expectedIndex
-        ) {
+        )
+        {
             HttpHeaderParser parser = GenericHeaderParser.HostParser;
             object result = null;
             Assert.True(

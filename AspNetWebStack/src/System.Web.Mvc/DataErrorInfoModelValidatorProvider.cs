@@ -12,7 +12,8 @@ namespace System.Web.Mvc
         public override IEnumerable<ModelValidator> GetValidators(
             ModelMetadata metadata,
             ControllerContext context
-        ) {
+        )
+        {
             if (metadata == null)
             {
                 throw new ArgumentNullException("metadata");
@@ -28,7 +29,8 @@ namespace System.Web.Mvc
         private static IEnumerable<ModelValidator> GetValidatorsImpl(
             ModelMetadata metadata,
             ControllerContext context
-        ) {
+        )
+        {
             // If the metadata describes a model that implements IDataErrorInfo, we should call its
             // Error property at the appropriate time.
             if (TypeImplementsIDataErrorInfo(metadata.ModelType))
@@ -91,7 +93,8 @@ namespace System.Web.Mvc
                         "error",
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     string errorMessage = castContainer[Metadata.PropertyName];
                     if (!String.IsNullOrEmpty(errorMessage))
                     {

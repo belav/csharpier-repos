@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         internal static void VerifyMemberSignatures(
             IRuntimeEnvironment appDomainHost,
             params SignatureDescription[] expectedSignatures
-        ) {
+        )
+        {
             Assert.NotNull(expectedSignatures);
             Assert.NotEmpty(expectedSignatures);
 
@@ -42,7 +43,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                         ref expectedSignature,
                         out var actualSignatures
                     )
-                ) {
+                )
+                {
                     succeeded = false;
                 }
 
@@ -83,7 +85,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             string memberName,
             ref string expectedSignature,
             out List<string> actualSignatures
-        ) {
+        )
+        {
             Assert.False(
                 string.IsNullOrWhiteSpace(fullyQualifiedTypeName),
                 "'fullyQualifiedTypeName' can't be null or empty"
@@ -160,7 +163,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         private static void TriggerSignatureMismatchFailure(
             List<string> expectedSignatures,
             List<string> actualSignatures
-        ) {
+        )
+        {
             var expectedText = string.Empty;
             var actualText = string.Empty;
             var distinctSignatures = new HashSet<string>();

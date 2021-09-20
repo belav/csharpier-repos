@@ -41,7 +41,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             IChangeDetector changeDetector,
             IModel model,
             IEntityEntryGraphIterator graphIterator
-        ) {
+        )
+        {
             _context = currentContext.Context;
             _stateManager = stateManager;
             _changeDetector = changeDetector;

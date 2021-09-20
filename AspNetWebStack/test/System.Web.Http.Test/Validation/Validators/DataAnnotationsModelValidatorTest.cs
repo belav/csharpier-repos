@@ -192,7 +192,8 @@ namespace System.Web.Http.Validation.Validators
         public void ValidateSetsMemberNamePropertyOfValidationContextForProperties(
             ModelMetadata metadata,
             string expectedMemberName
-        ) {
+        )
+        {
             // Arrange
             var attribute = new Mock<ValidationAttribute> { CallBase = true };
             attribute.Protected()
@@ -356,7 +357,8 @@ namespace System.Web.Http.Validation.Validators
         public void ValidateSetsDisplayNamePropertyOfValidationContextAsExpected(
             ModelMetadata metadata,
             string expectedDisplayName
-        ) {
+        )
+        {
             // Arrange
             var attribute = new Mock<ValidationAttribute> { CallBase = true, };
             attribute.Protected()

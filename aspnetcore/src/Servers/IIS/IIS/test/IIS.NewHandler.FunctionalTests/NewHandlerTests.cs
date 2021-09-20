@@ -32,7 +32,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
                 if (
                     handle.ModuleName == "aspnetcorev2.dll"
                     || handle.ModuleName == "aspnetcorev2_outofprocess.dll"
-                ) {
+                )
+                {
                     Assert.Equal("12.2.18316.0", handle.FileVersionInfo.FileVersion);
                     return;
                 }

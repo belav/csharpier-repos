@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             IImmutableSet<Document>? documents,
             FindReferencesSearchOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // TODO(cyrusn): We can be smarter with parameters.  They will either be found
             // within the method that they were declared on, or they will referenced
             // elsewhere as "paramName:" or "paramName:=".  We can narrow the search by
@@ -45,7 +46,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             SemanticModel semanticModel,
             FindReferencesSearchOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var symbolsMatchAsync = GetParameterSymbolsMatchFunction(
                 symbol,
                 document.Project.Solution,
@@ -70,7 +72,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             IParameterSymbol parameter,
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Get the standard function for comparing parameters.  This function will just
             // directly compare the parameter symbols for SymbolEquivalence.
             var standardFunction = GetStandardSymbolsMatchFunction(
@@ -132,7 +135,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             FindReferencesSearchOptions options,
             FindReferencesCascadeDirection cascadeDirection,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (parameter.IsThis)
             {
                 return ImmutableArray<(ISymbol symbol, FindReferencesCascadeDirection cascadeDirection)>.Empty;
@@ -167,7 +171,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             IParameterSymbol parameter,
             ArrayBuilder<ISymbol> results,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (parameter.ContainingSymbol.IsAnonymousFunction())
             {
                 var parameterNode = parameter.DeclaringSyntaxReferences.Select(
@@ -235,7 +240,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             ITypeSymbol convertedType1,
             ArrayBuilder<ISymbol> results,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
             foreach (var token in container.DescendantTokens())
             {
@@ -258,7 +264,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                             (IMethodSymbol)parameter.ContainingSymbol,
                             (IMethodSymbol)symbol.ContainingSymbol
                         )
-                    ) {
+                    )
+                    {
                         var lambdaNode = symbol.ContainingSymbol.DeclaringSyntaxReferences.Select(
                                 r => r.GetSyntax(cancellationToken)
                             )
@@ -279,7 +286,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             ISyntaxFactsService syntaxFacts,
             IMethodSymbol methodSymbol1,
             IMethodSymbol methodSymbol2
-        ) {
+        )
+        {
             for (var i = 0; i < methodSymbol1.Parameters.Length; i++)
             {
                 if (
@@ -287,7 +295,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                         methodSymbol1.Parameters[i].Name,
                         methodSymbol2.Parameters[i].Name
                     )
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -299,7 +308,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             SemanticModel semanticModel,
             SyntaxNode parameterNode,
             ISyntaxFactsService syntaxFactsService
-        ) {
+        )
+        {
             for (var current = parameterNode; current != null; current = current.Parent)
             {
                 var declaredSymbol = semanticModel.GetDeclaredSymbol(current);
@@ -307,7 +317,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 if (
                     declaredSymbol is IMethodSymbol method
                     && method.MethodKind != MethodKind.AnonymousFunction
-                ) {
+                )
+                {
                     return current;
                 }
             }
@@ -320,7 +331,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
         private static void CascadeBetweenPropertyAndAccessorParameters(
             IParameterSymbol parameter,
             ArrayBuilder<ISymbol> results
-        ) {
+        )
+        {
             var ordinal = parameter.Ordinal;
             var containingSymbol = parameter.ContainingSymbol;
             if (containingSymbol is IMethodSymbol containingMethod)
@@ -335,14 +347,16 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 if (
                     containingProperty.GetMethod != null
                     && ordinal < containingProperty.GetMethod.Parameters.Length
-                ) {
+                )
+                {
                     results.Add(containingProperty.GetMethod.Parameters[ordinal]);
                 }
 
                 if (
                     containingProperty.SetMethod != null
                     && ordinal < containingProperty.SetMethod.Parameters.Length
-                ) {
+                )
+                {
                     results.Add(containingProperty.SetMethod.Parameters[ordinal]);
                 }
             }
@@ -351,7 +365,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
         private static void CascadeBetweenDelegateMethodParameters(
             IParameterSymbol parameter,
             ArrayBuilder<ISymbol> results
-        ) {
+        )
+        {
             var ordinal = parameter.Ordinal;
             if (parameter.ContainingSymbol is IMethodSymbol containingMethod)
             {
@@ -371,7 +386,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                     else if (
                         containingMethod.ContainingType.IsDelegateType()
                         && containingMethod.Name == WellKnownMemberNames.DelegateBeginInvokeName
-                    ) {
+                    )
+                    {
                         // cascade to the corresponding parameter in the Invoke method.
                         AddParameterAtIndex(
                             results,
@@ -387,7 +403,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             ArrayBuilder<ISymbol> results,
             int ordinal,
             ImmutableArray<IParameterSymbol>? parameters
-        ) {
+        )
+        {
             if (parameters != null && ordinal < parameters.Value.Length)
             {
                 results.Add(parameters.Value[ordinal]);
@@ -397,7 +414,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
         private static void CascadeBetweenPartialMethodParameters(
             IParameterSymbol parameter,
             ArrayBuilder<ISymbol> results
-        ) {
+        )
+        {
             if (parameter.ContainingSymbol is IMethodSymbol)
             {
                 var ordinal = parameter.Ordinal;
@@ -405,14 +423,16 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 if (
                     method.PartialDefinitionPart != null
                     && ordinal < method.PartialDefinitionPart.Parameters.Length
-                ) {
+                )
+                {
                     results.Add(method.PartialDefinitionPart.Parameters[ordinal]);
                 }
 
                 if (
                     method.PartialImplementationPart != null
                     && ordinal < method.PartialImplementationPart.Parameters.Length
-                ) {
+                )
+                {
                     results.Add(method.PartialImplementationPart.Parameters[ordinal]);
                 }
             }

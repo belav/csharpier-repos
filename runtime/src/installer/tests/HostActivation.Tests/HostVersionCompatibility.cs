@@ -32,7 +32,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
 
         private void Latest_Host_Is_Backwards_Compatible_With_Older_Runtime(
             TestProjectFixture previousVersionFixture
-        ) {
+        )
+        {
             if (!IsRidSupported())
             {
                 return;
@@ -117,7 +118,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
 
         private void Old_Host_Is_Forward_Compatible_With_Latest_Runtime(
             TestProjectFixture previousVersionFixture
-        ) {
+        )
+        {
             if (!IsRidSupported())
             {
                 return;
@@ -216,7 +218,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 string testName,
                 string netCoreAppFramework,
                 string mnaVersion
-            ) {
+            )
+            {
                 var repoDirectories = new RepoDirectoriesProvider(
                     microsoftNETCoreAppVersion: mnaVersion
                 );

@@ -104,7 +104,8 @@ namespace System.Security.Claims
             if (
                 (mask & SerializationMask.OriginalIssuerEqualsIssuer)
                 == SerializationMask.OriginalIssuerEqualsIssuer
-            ) {
+            )
+            {
                 _originalIssuer = _issuer;
             }
             else if ((mask & SerializationMask.OriginalIssuer) == SerializationMask.OriginalIssuer)
@@ -274,7 +275,8 @@ namespace System.Security.Claims
             ClaimsIdentity? subject,
             string? propertyKey,
             string? propertyValue
-        ) {
+        )
+        {
             if (type == null)
             {
                 throw new ArgumentNullException(nameof(type));
@@ -512,7 +514,8 @@ namespace System.Security.Claims
             if (
                 ((mask & SerializationMask.NameClaimType) != SerializationMask.NameClaimType)
                 && ((mask & SerializationMask.RoleClaimType) != SerializationMask.RoleClaimType)
-            ) {
+            )
+            {
                 writer.Write(_type);
             }
 

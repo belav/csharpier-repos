@@ -34,7 +34,8 @@ namespace Microsoft.AspNetCore.SignalR.Common.Protocol.Tests
         [MemberData(nameof(HubProtocolNames))]
         public void DefaultHubProtocolResolverCreatesProtocolswhenSupoortedProtocolsIsNull(
             string protocolName
-        ) {
+        )
+        {
             var protocol = HubProtocolHelpers.GetHubProtocol(protocolName);
 
             List<string> supportedProtocols = null;

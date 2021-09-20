@@ -43,7 +43,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 Type contextType,
                 bool standAloneStateManager,
                 bool concurrencyDetectionEnabled
-            ) {
+            )
+            {
                 _queryContext = queryContext;
                 _innerEnumerable = innerEnumerable;
                 _shaper = shaper;
@@ -79,7 +80,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 public Enumerator(
                     QueryingEnumerable<T> queryingEnumerable,
                     CancellationToken cancellationToken = default
-                ) {
+                )
+                {
                     _queryContext = queryingEnumerable._queryContext;
                     _innerEnumerable = queryingEnumerable._innerEnumerable;
                     _shaper = queryingEnumerable._shaper;

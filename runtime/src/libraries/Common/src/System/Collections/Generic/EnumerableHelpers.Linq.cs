@@ -49,7 +49,8 @@ namespace System.Collections.Generic
             T[] array,
             int arrayIndex,
             int count
-        ) {
+        )
+        {
             Debug.Assert(source != null && !(source is ICollection<T>));
             Debug.Assert(arrayIndex >= 0);
             Debug.Assert(count >= 0);

@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.Tools.Formatters
             FormatOptions formatOptions,
             ILogger logger,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (formatOptions.SaveFormattedFiles)
             {
                 return await GetFormattedDocument(document, optionSet, cancellationToken)
@@ -53,7 +54,8 @@ namespace Microsoft.CodeAnalysis.Tools.Formatters
             Document document,
             OptionSet optionSet,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var formattedDocument = await Formatter.FormatAsync(
                     document,
                     optionSet,
@@ -71,7 +73,8 @@ namespace Microsoft.CodeAnalysis.Tools.Formatters
             SourceText sourceText,
             OptionSet optionSet,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             // Since we've already checked that formatable documents support syntax tree, we know the `root` is not null.
             var formattingTextChanges = Formatter.GetFormattedTextChanges(

@@ -281,7 +281,8 @@ namespace System.Xml.Linq
             Stream stream,
             LoadOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             XmlReaderSettings rs = GetXmlReaderSettings(options);
 
             rs.Async = true;
@@ -367,7 +368,8 @@ namespace System.Xml.Linq
             TextReader textReader,
             LoadOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             XmlReaderSettings rs = GetXmlReaderSettings(options);
 
             rs.Async = true;
@@ -449,7 +451,8 @@ namespace System.Xml.Linq
             XmlReader reader,
             LoadOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (reader == null)
                 throw new ArgumentNullException(nameof(reader));
             if (cancellationToken.IsCancellationRequested)
@@ -461,7 +464,8 @@ namespace System.Xml.Linq
             XmlReader reader,
             LoadOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (reader.ReadState == ReadState.Initial)
             {
                 await reader.ReadAsync().ConfigureAwait(false);
@@ -621,7 +625,8 @@ namespace System.Xml.Linq
             Stream stream,
             SaveOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             XmlWriterSettings ws = GetXmlWriterSettings(options);
 
             ws.Async = true;
@@ -707,7 +712,8 @@ namespace System.Xml.Linq
             TextWriter textWriter,
             SaveOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             XmlWriterSettings ws = GetXmlWriterSettings(options);
 
             ws.Async = true;
@@ -837,7 +843,8 @@ namespace System.Xml.Linq
         private async Task WriteToAsyncInternal(
             XmlWriter writer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Task tStart;
             if (_declaration != null && _declaration.Standalone == "yes")
             {
@@ -935,7 +942,8 @@ namespace System.Xml.Linq
             XNode? previous,
             XmlNodeType allowBefore,
             XmlNodeType allowAfter
-        ) {
+        )
+        {
             XNode? n = content as XNode;
             if (n != null)
             {

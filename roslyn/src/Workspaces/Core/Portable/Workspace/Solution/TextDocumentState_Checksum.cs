@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis
 
         private async Task<DocumentStateChecksums> ComputeChecksumsAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 using (
@@ -41,7 +42,8 @@ namespace Microsoft.CodeAnalysis
                         FilePath,
                         cancellationToken
                     )
-                ) {
+                )
+                {
                     var serializer =
                         solutionServices.Workspace.Services.GetRequiredService<ISerializerService>();
 

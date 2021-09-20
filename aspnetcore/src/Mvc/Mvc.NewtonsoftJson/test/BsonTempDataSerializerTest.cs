@@ -33,7 +33,8 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
         public void EnsureObjectCanBeSerialized_ThrowsException_OnInvalidType(
             object value,
             Type type
-        ) {
+        )
+        {
             // Arrange
             var testProvider = new BsonTempDataSerializer();
 
@@ -70,7 +71,8 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
         public void EnsureObjectCanBeSerialized_ThrowsException_OnInvalidDictionaryType(
             object value,
             Type type
-        ) {
+        )
+        {
             // Arrange
             var testProvider = new BsonTempDataSerializer();
 

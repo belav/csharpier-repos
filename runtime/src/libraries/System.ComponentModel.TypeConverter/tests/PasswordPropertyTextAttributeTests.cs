@@ -89,7 +89,8 @@ namespace System.ComponentModel.Tests
             PasswordPropertyTextAttribute attribute,
             object other,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, attribute.Equals(other));
             if (other is PasswordPropertyTextAttribute)
             {

@@ -25,7 +25,8 @@ namespace Microsoft.Extensions.DependencyInjection
             IEnumerable<ServiceDescriptor> serviceDescriptors,
             IServiceProviderEngine engine,
             ServiceProviderOptions options
-        ) {
+        )
+        {
             _engine = engine;
 
             if (options.ValidateScopes)

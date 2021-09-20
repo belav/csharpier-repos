@@ -582,7 +582,8 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
                 if (
                     _taskType == TaskType.TaskContinueWithTask
                     || _taskType == TaskType.TaskContinueWithTaskT
-                ) {
+                )
+                {
                     _taskInfos[i].Task = new Task(
                         () =>
                         {
@@ -897,7 +898,8 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             TaskContinuationOptions continuationOptions,
             bool withCancellation,
             TaskInfo[] allTasks
-        ) {
+        )
+        {
             Api = api;
             TaskType = taskType;
             ContinuationOptions = continuationOptions;

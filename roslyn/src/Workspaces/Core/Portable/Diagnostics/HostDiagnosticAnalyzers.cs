@@ -120,7 +120,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         > GetDiagnosticDescriptorsPerReference(
             DiagnosticAnalyzerInfoCache infoCache,
             Project project
-        ) {
+        )
+        {
             var descriptorPerReference = CreateDiagnosticDescriptorsPerReference(
                 infoCache,
                 CreateDiagnosticAnalyzersPerReference(project)
@@ -140,7 +141,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 ImmutableArray<DiagnosticDescriptor>
             > descriptorsPerReference,
             ImmutableDictionary<object, AnalyzerReference> map
-        ) {
+        )
+        {
             var builder = ImmutableDictionary.CreateBuilder<
                 string,
                 ImmutableArray<DiagnosticDescriptor>
@@ -242,7 +244,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         > CreateDiagnosticDescriptorsPerReference(
             DiagnosticAnalyzerInfoCache infoCache,
             ImmutableDictionary<object, ImmutableArray<DiagnosticAnalyzer>> analyzersMap
-        ) {
+        )
+        {
             var builder = ImmutableDictionary.CreateBuilder<
                 object,
                 ImmutableArray<DiagnosticDescriptor>
@@ -294,7 +297,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         private void UpdateCompilerAnalyzerMapIfNeeded(
             string language,
             ImmutableArray<DiagnosticAnalyzer> analyzers
-        ) {
+        )
+        {
             if (_compilerDiagnosticAnalyzerMap.ContainsKey(language))
             {
                 return;
@@ -320,7 +324,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         > CreateDiagnosticAnalyzersPerReferenceMap(
             IDictionary<object, AnalyzerReference> analyzerReferencesMap,
             string? language = null
-        ) {
+        )
+        {
             var builder = ImmutableDictionary.CreateBuilder<
                 object,
                 ImmutableArray<DiagnosticAnalyzer>
@@ -346,7 +351,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         private static ImmutableDictionary<object, AnalyzerReference> CreateAnalyzerReferencesMap(
             IEnumerable<AnalyzerReference> analyzerReferences
-        ) {
+        )
+        {
             var builder = ImmutableDictionary.CreateBuilder<object, AnalyzerReference>();
             foreach (var reference in analyzerReferences)
             {
@@ -370,7 +376,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         > MergeDiagnosticAnalyzerMap(
             ImmutableDictionary<object, ImmutableArray<DiagnosticAnalyzer>> map1,
             ImmutableDictionary<object, ImmutableArray<DiagnosticAnalyzer>> map2
-        ) {
+        )
+        {
             var current = map1;
             var seen = new HashSet<DiagnosticAnalyzer>(map1.Values.SelectMany(v => v));
 
@@ -393,7 +400,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public SkippedHostAnalyzersInfo GetSkippedAnalyzersInfo(
             Project project,
             DiagnosticAnalyzerInfoCache infoCache
-        ) {
+        )
+        {
             var box = _skippedHostAnalyzers.GetOrCreateValue(project.AnalyzerReferences);
 
             if (box.Value != null && box.Value.TryGetValue(project.Language, out var info))

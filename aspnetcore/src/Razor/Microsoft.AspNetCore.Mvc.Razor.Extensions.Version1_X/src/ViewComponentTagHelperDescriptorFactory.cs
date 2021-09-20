@@ -101,7 +101,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X
             INamedTypeSymbol type,
             out IMethodSymbol method,
             out RazorDiagnostic diagnostic
-        ) {
+        )
+        {
             var methods = type.GetMembers()
                 .OfType<IMethodSymbol>()
                 .Where(
@@ -147,7 +148,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X
                     ViewComponentTypes.AsyncMethodName,
                     StringComparison.Ordinal
                 )
-            ) {
+            )
+            {
                 // Will invoke asynchronously. Method must not return Task or Task<T>.
                 if (SymbolEqualityComparer.Default.Equals(returnType, _taskSymbol))
                 {
@@ -159,7 +161,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X
                         returnType.ConstructedFrom,
                         _genericTaskSymbol
                     )
-                ) {
+                )
+                {
                     // This is ok.
                 }
                 else
@@ -199,7 +202,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X
                         returnType.ConstructedFrom,
                         _genericTaskSymbol
                     )
-                ) {
+                )
+                {
                     diagnostic =
                         RazorExtensionsDiagnosticFactory.CreateViewComponent_SyncMethod_CannotReturnTask(
                             type.ToDisplayString(FullNameTypeDisplayFormat)
@@ -217,7 +221,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X
         private void AddRequiredAttributes(
             ImmutableArray<IParameterSymbol> methodParameters,
             TagMatchingRuleDescriptorBuilder builder
-        ) {
+        )
+        {
             foreach (var parameter in methodParameters)
             {
                 if (GetIndexerValueTypeName(parameter) == null)
@@ -239,7 +244,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X
             ImmutableArray<IParameterSymbol> methodParameters,
             string containingDisplayName,
             TagHelperDescriptorBuilder builder
-        ) {
+        )
+        {
             foreach (var parameter in methodParameters)
             {
                 var lowerKebabName = HtmlConventions.ToHtmlCase(parameter.Name);
@@ -287,7 +293,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X
                     (parameter.Type as INamedTypeSymbol)?.ConstructedFrom,
                     _iDictionarySymbol
                 )
-            ) {
+            )
+            {
                 dictionaryType = (INamedTypeSymbol)parameter.Type;
             }
             else if (
@@ -295,7 +302,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X
                     s =>
                         SymbolEqualityComparer.Default.Equals(s.ConstructedFrom, _iDictionarySymbol)
                 )
-            ) {
+            )
+            {
                 dictionaryType = parameter.Type.AllInterfaces.First(
                     s =>
                         SymbolEqualityComparer.Default.Equals(s.ConstructedFrom, _iDictionarySymbol)
@@ -309,7 +317,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X
             if (
                 dictionaryType == null
                 || dictionaryType.TypeArguments[0].SpecialType != SpecialType.System_String
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -360,7 +369,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X
                     ViewComponentTypes.ViewComponentSuffix,
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 return componentType.Name.Substring(
                     0,
                     componentType.Name.Length - ViewComponentTypes.ViewComponentSuffix.Length

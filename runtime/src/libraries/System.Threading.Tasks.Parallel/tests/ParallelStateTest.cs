@@ -283,7 +283,8 @@ namespace System.Threading.Tasks.Test
             int i,
             ParallelLoopState state,
             List<int> threadLocalValue
-        ) {
+        )
+        {
             Debug.WriteLine(
                 "WorkWithLocalState(int) on index {0}, StartIndex: {1}, real index {2}",
                 i,
@@ -305,7 +306,8 @@ namespace System.Threading.Tasks.Test
             int index,
             ParallelLoopState state,
             List<int> threadLocalValue
-        ) {
+        )
+        {
             Debug.WriteLine(
                 "WorkWithLocalState(int, index) on index {0}, StartIndex: {1}, real index {2}",
                 i,
@@ -339,7 +341,8 @@ namespace System.Threading.Tasks.Test
             long i,
             ParallelLoopState state,
             List<long> threadLocalValue
-        ) {
+        )
+        {
             Debug.WriteLine(
                 "WorkWithLocalState(long) on index {0}, StartIndex: {1}, real index {2}",
                 i,
@@ -635,7 +638,8 @@ namespace System.Threading.Tasks.Test
                 _lowestBreakIter.HasValue
                 && i < _lowestBreakIter.Value
                 && state.ShouldExitCurrentIteration
-            ) {
+            )
+            {
                 long lbi = _lowestBreakIter.Value;
                 // If we previously called Break() on the parallel state,
                 // we expect all lower iterations see the state's ShouldExitCurrentIteration to be false.
@@ -656,7 +660,8 @@ namespace System.Threading.Tasks.Test
             if (
                 !_lowestBreakIter.HasValue
                 || (_lowestBreakIter.HasValue && i < _lowestBreakIter.Value)
-            ) {
+            )
+            {
                 // If calls Break for the first time or if current iteration less than LowestBreakIteration,
                 // call Break() again, and make sure LowestBreakIteration value gets updated
                 try
@@ -724,7 +729,8 @@ namespace System.Threading.Tasks.Test
                     state.LowestBreakIteration.HasValue
                     && i < state.LowestBreakIteration.Value
                     && state.ShouldExitCurrentIteration
-                ) {
+                )
+                {
                     long lbi = state.LowestBreakIteration.Value;
 
                     // If we previously called Break() on the parallel state,

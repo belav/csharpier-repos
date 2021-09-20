@@ -37,7 +37,8 @@ namespace System.Web.Http
         public static void EnableCors(
             this HttpConfiguration httpConfiguration,
             bool rethrowExceptions
-        ) {
+        )
+        {
             EnableCors(httpConfiguration, null, rethrowExceptions);
         }
 
@@ -49,7 +50,8 @@ namespace System.Web.Http
         public static void EnableCors(
             this HttpConfiguration httpConfiguration,
             ICorsPolicyProvider defaultPolicyProvider
-        ) {
+        )
+        {
             EnableCors(httpConfiguration, defaultPolicyProvider, false);
         }
 
@@ -64,7 +66,8 @@ namespace System.Web.Http
             this HttpConfiguration httpConfiguration,
             ICorsPolicyProvider defaultPolicyProvider,
             bool rethrowExceptions
-        ) {
+        )
+        {
             if (httpConfiguration == null)
             {
                 throw new ArgumentNullException("httpConfiguration");
@@ -89,7 +92,8 @@ namespace System.Web.Http
         private static void AddCorsMessageHandler(
             this HttpConfiguration httpConfiguration,
             bool rethrowExceptions
-        ) {
+        )
+        {
             object corsEnabled;
             if (!httpConfiguration.Properties.TryGetValue(CorsEnabledKey, out corsEnabled))
             {
@@ -136,7 +140,8 @@ namespace System.Web.Http
         public static void SetCorsEngine(
             this HttpConfiguration httpConfiguration,
             ICorsEngine corsEngine
-        ) {
+        )
+        {
             if (httpConfiguration == null)
             {
                 throw new ArgumentNullException("httpConfiguration");
@@ -181,7 +186,8 @@ namespace System.Web.Http
         public static void SetCorsPolicyProviderFactory(
             this HttpConfiguration httpConfiguration,
             ICorsPolicyProviderFactory corsPolicyProviderFactory
-        ) {
+        )
+        {
             if (httpConfiguration == null)
             {
                 throw new ArgumentNullException("httpConfiguration");
@@ -202,7 +208,8 @@ namespace System.Web.Http
         /// <exception cref="System.ArgumentNullException">httpConfiguration</exception>
         public static ICorsPolicyProviderFactory GetCorsPolicyProviderFactory(
             this HttpConfiguration httpConfiguration
-        ) {
+        )
+        {
             if (httpConfiguration == null)
             {
                 throw new ArgumentNullException("httpConfiguration");

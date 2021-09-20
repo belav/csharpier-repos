@@ -14,7 +14,8 @@ namespace System.Linq
         public static IEnumerable<TSource> Distinct<TSource>(
             this IEnumerable<TSource> source,
             IEqualityComparer<TSource>? comparer
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -32,7 +33,8 @@ namespace System.Linq
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector,
             IEqualityComparer<TKey>? comparer
-        ) {
+        )
+        {
             if (source is null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -49,7 +51,8 @@ namespace System.Linq
             IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector,
             IEqualityComparer<TKey>? comparer
-        ) {
+        )
+        {
             using IEnumerator<TSource> enumerator = source.GetEnumerator();
 
             if (enumerator.MoveNext())
@@ -80,7 +83,8 @@ namespace System.Linq
             public DistinctIterator(
                 IEnumerable<TSource> source,
                 IEqualityComparer<TSource>? comparer
-            ) {
+            )
+            {
                 Debug.Assert(source != null);
                 _source = source;
                 _comparer = comparer;

@@ -76,7 +76,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
             Type objectType,
             object existingValue,
             JsonSerializer serializer
-        ) {
+        )
+        {
             var converter = GetConverter(objectType);
             return converter.ConvertFromInvariantString(reader.Value.ToString());
         }

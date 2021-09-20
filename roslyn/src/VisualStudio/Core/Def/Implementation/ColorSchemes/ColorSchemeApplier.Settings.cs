@@ -29,7 +29,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
             public ColorSchemeSettings(
                 IServiceProvider serviceProvider,
                 VisualStudioWorkspace visualStudioWorkspace
-            ) {
+            )
+            {
                 _serviceProvider = serviceProvider;
                 _workspace = visualStudioWorkspace;
             }
@@ -60,7 +61,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
             public void ApplyColorScheme(
                 SchemeName schemeName,
                 ImmutableArray<RegistryItem> registryItems
-            ) {
+            )
+            {
                 using var registryRoot = VSRegistry.RegistryRoot(
                     _serviceProvider,
                     __VsLocalRegistryType.RegType_Configuration,

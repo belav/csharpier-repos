@@ -16,7 +16,8 @@ namespace System.Linq
             this IEnumerable<TSource> first,
             IEnumerable<TSource> second,
             IEqualityComparer<TSource>? comparer
-        ) {
+        )
+        {
             if (first == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.first);

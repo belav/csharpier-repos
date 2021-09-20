@@ -123,7 +123,8 @@ namespace JitBench
                         string dirPath in Directory.EnumerateDirectories(
                             Path.Combine(DotNetDirPath, "shared", "Microsoft.NETCore.App")
                         )
-                    ) {
+                    )
+                    {
                         actualFrameworkVersion = Path.GetFileName(dirPath);
                         break;
                     }
@@ -248,7 +249,8 @@ namespace JitBench
             string version,
             OSPlatform os,
             Architecture arch
-        ) {
+        )
+        {
             return GetRuntimeDownloadLink(
                 azureFeed,
                 version,
@@ -262,7 +264,8 @@ namespace JitBench
             string version,
             string os,
             string arch
-        ) {
+        )
+        {
             return string.Format(
                 "{0}/Runtime/{1}/dotnet-runtime-{1}-{2}-{3}.{4}",
                 azureFeed,
@@ -283,7 +286,8 @@ namespace JitBench
             string version,
             OSPlatform os,
             Architecture arch
-        ) {
+        )
+        {
             return GetSDKDownloadLink(
                 azureFeed,
                 version,
@@ -297,7 +301,8 @@ namespace JitBench
             string version,
             string os,
             string arch
-        ) {
+        )
+        {
             return string.Format(
                 "{0}/Sdk/{1}/dotnet-sdk-{1}-{2}-{3}.{4}",
                 azureFeed,
@@ -347,7 +352,8 @@ namespace JitBench
 
         public static string GetCompatibleDefaultSDKVersionForRuntimeTFM(
             string targetFrameworkMoniker
-        ) {
+        )
+        {
             if (targetFrameworkMoniker == "netcoreapp3.0")
             {
                 return "3.0.100-alpha1-009410";
@@ -409,7 +415,8 @@ namespace JitBench
             string frameworkVersion,
             string sdkVersion,
             Architecture architecture
-        ) {
+        )
+        {
             DotNetDir = dotNetDir;
             FrameworkVersion = frameworkVersion;
             SdkVersion = sdkVersion;

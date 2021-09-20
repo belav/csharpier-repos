@@ -224,7 +224,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             string content,
             bool treatEmptyInputAsDefaultValue,
             bool expectedIsModelSet
-        ) {
+        )
+        {
             return base.ReadAsync_WithInputThatDeserializesToNull_SetsModelOnlyIfAllowingEmptyInput(
                 content,
                 treatEmptyInputAsDefaultValue,
@@ -258,7 +259,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             string content,
             string modelStateKey,
             string expectedMessage
-        ) {
+        )
+        {
             // Arrange
             var formatter = CreateFormatter(allowInputFormatterExceptionMessages: true);
 
@@ -477,14 +479,15 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             public TestableJsonInputFormatter(
                 JsonSerializerSettings settings,
                 ObjectPoolProvider objectPoolProvider
-            ) : base(
-                GetLogger(),
-                settings,
-                ArrayPool<char>.Shared,
-                objectPoolProvider,
-                new MvcOptions(),
-                new MvcNewtonsoftJsonOptions()
-            ) { }
+            )
+                : base(
+                    GetLogger(),
+                    settings,
+                    ArrayPool<char>.Shared,
+                    objectPoolProvider,
+                    new MvcOptions(),
+                    new MvcNewtonsoftJsonOptions()
+                ) { }
 
             public new JsonSerializerSettings SerializerSettings => base.SerializerSettings;
 
@@ -507,7 +510,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         private NewtonsoftJsonInputFormatter CreateFormatter(
             JsonSerializerSettings serializerSettings = null,
             bool allowInputFormatterExceptionMessages = false
-        ) {
+        )
+        {
             return new NewtonsoftJsonInputFormatter(
                 GetLogger(),
                 serializerSettings ?? _serializerSettings,
@@ -589,7 +593,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 short existingValue,
                 bool hasExistingValue,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 return short.Parse(reader.Value.ToString(), CultureInfo.InvariantCulture);
             }
 
@@ -597,7 +602,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 JsonWriter writer,
                 short value,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }

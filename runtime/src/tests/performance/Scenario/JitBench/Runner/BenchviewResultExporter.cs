@@ -10,7 +10,8 @@ namespace JitBench
         public static void ConvertRunResult(
             ScenarioBenchmark scenario,
             BenchmarkRunResult runResult
-        ) {
+        )
+        {
             scenario.Tests = new List<ScenarioTestModel>();
             scenario.Tests.AddRange(ConvertRunResult(runResult));
         }
@@ -28,7 +29,8 @@ namespace JitBench
                         out Metric newMetric,
                         out string newScenarioModelName
                     )
-                ) {
+                )
+                {
                     metrics.Remove(m);
                     testModels.Add(
                         ConvertRunResult(
@@ -60,7 +62,8 @@ namespace JitBench
             Func<Metric, Metric> metricMapping,
             string scenarioModelNamespace,
             string scenarioModelName
-        ) {
+        )
+        {
             var testModel = new ScenarioTestModel(scenarioModelName);
             testModel.Namespace = scenarioModelNamespace;
             testModel.Performance = new PerformanceModel();
@@ -108,7 +111,8 @@ namespace JitBench
         static IterationModel ConvertIterationResult(
             IterationResult iterationResult,
             Func<Metric, Metric> metricMapping
-        ) {
+        )
+        {
             IterationModel iterationModel = new IterationModel();
             iterationModel.Iteration = new Dictionary<string, double>();
             foreach (KeyValuePair<Metric, double> measurement in iterationResult.Measurements)
@@ -126,7 +130,8 @@ namespace JitBench
             string outputDir,
             string runId,
             ScenarioBenchmark benchmark
-        ) {
+        )
+        {
             return Path.Combine(outputDir, $"{runId}-{benchmark.Name}");
         }
     }

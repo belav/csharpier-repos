@@ -152,7 +152,8 @@ namespace System.Security.Cryptography.Encoding.Tests
             string expected,
             string data,
             ICryptoTransform transform
-        ) {
+        )
+        {
             byte[] inputBytes = Text.Encoding.ASCII.GetBytes(data);
             byte[] outputBytes = new byte[100];
 
@@ -267,7 +268,8 @@ namespace System.Security.Cryptography.Encoding.Tests
             int offset,
             int count,
             string expected
-        ) {
+        )
+        {
             using (var transform = new FromBase64Transform())
             {
                 byte[] inputBytes = Text.Encoding.ASCII.GetBytes(input);

@@ -206,7 +206,8 @@ namespace Microsoft.AspNetCore.Components.Routing
         public void ParseRouteParameter_ThrowsIf_ParameterContainsSpecialCharacters(
             string template,
             string expectedMessage
-        ) {
+        )
+        {
             // Act & Assert
             var ex = Assert.Throws<InvalidOperationException>(
                 () => TemplateParser.ParseTemplate(template)
@@ -358,7 +359,8 @@ namespace Microsoft.AspNetCore.Components.Routing
                             ySegment.Value,
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }

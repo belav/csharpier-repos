@@ -56,7 +56,8 @@ namespace System.Net
         protected override void GetObjectData(
             SerializationInfo serializationInfo,
             StreamingContext streamingContext
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -138,7 +139,8 @@ namespace System.Net
             if (
                 string.Equals(_method, "GET", StringComparison.OrdinalIgnoreCase)
                 || string.Equals(_method, "HEAD", StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 throw new ProtocolViolationException(SR.net_nouploadonget);
             }
 
@@ -307,7 +309,8 @@ namespace System.Net
                 Timeout != Threading.Timeout.Infinite
                 && !result.IsCompleted
                 && (!result.AsyncWaitHandle.WaitOne(Timeout, false) || !result.IsCompleted)
-            ) {
+            )
+            {
                 _stream?.Close();
                 throw new WebException(SR.net_webstatus_Timeout, WebExceptionStatus.Timeout);
             }
@@ -324,7 +327,8 @@ namespace System.Net
                 Timeout != Threading.Timeout.Infinite
                 && !result.IsCompleted
                 && (!result.AsyncWaitHandle.WaitOne(Timeout, false) || !result.IsCompleted)
-            ) {
+            )
+            {
                 _response?.Close();
                 throw new WebException(SR.net_webstatus_Timeout, WebExceptionStatus.Timeout);
             }
@@ -442,7 +446,8 @@ namespace System.Net
             int size,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             CheckAborted();
             try
             {
@@ -474,7 +479,8 @@ namespace System.Net
             int size,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             CheckAborted();
             try
             {
@@ -505,7 +511,8 @@ namespace System.Net
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             CheckAborted();
             try
             {
@@ -523,7 +530,8 @@ namespace System.Net
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             CheckAborted();
             try
             {
@@ -540,7 +548,8 @@ namespace System.Net
             Stream destination,
             int bufferSize,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             CheckAborted();
             try
             {

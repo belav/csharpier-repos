@@ -36,7 +36,8 @@ namespace Roslyn.Test.Utilities.Syntax
             char[] destination,
             int destinationIndex,
             int count
-        ) {
+        )
+        {
             for (var i = 0; i < count; i++)
             {
                 destination[destinationIndex + i] = this[sourceIndex + i];

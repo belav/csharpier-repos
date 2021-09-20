@@ -377,7 +377,8 @@ namespace System.Net.Http.Handlers
             ProgressMessageHandler progressMessageHandler = null,
             HttpRequestMessage request = null,
             HttpResponseMessage response = null
-        ) {
+        )
+        {
             Stream iStream = innerStream ?? new Mock<Stream>().Object;
             ProgressMessageHandler pHandler =
                 progressMessageHandler ?? new ProgressMessageHandler();

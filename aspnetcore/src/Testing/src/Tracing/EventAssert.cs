@@ -24,7 +24,8 @@ namespace Microsoft.AspNetCore.Testing.Tracing
         public static void Collection(
             IEnumerable<EventWrittenEventArgs> events,
             params EventAssert[] asserts
-        ) {
+        )
+        {
             Assert.Collection(events, asserts.Select(a => a.CreateAsserter()).ToArray());
         }
 

@@ -41,7 +41,8 @@ namespace Microsoft.VisualStudio.LanguageServices
         public HACK_ThemeColorFixer(
             IClassificationTypeRegistryService classificationTypeRegistryService,
             IClassificationFormatMapService classificationFormatMapService
-        ) {
+        )
+        {
             _classificationTypeRegistryService = classificationTypeRegistryService;
             _classificationFormatMapService = classificationFormatMapService;
 
@@ -72,7 +73,8 @@ namespace Microsoft.VisualStudio.LanguageServices
         private void UpdateForegroundColors(
             IClassificationFormatMap sourceFormatMap,
             IClassificationFormatMap targetFormatMap
-        ) {
+        )
+        {
             UpdateForegroundColor(
                 ClassificationTypeNames.Comment,
                 sourceFormatMap,
@@ -387,7 +389,8 @@ namespace Microsoft.VisualStudio.LanguageServices
             string classificationTypeName,
             IClassificationFormatMap sourceFormatMap,
             IClassificationFormatMap targetFormatMap
-        ) {
+        )
+        {
             var classificationType = _classificationTypeRegistryService.GetClassificationType(
                 classificationTypeName
             );
@@ -408,7 +411,8 @@ namespace Microsoft.VisualStudio.LanguageServices
             IWpfTextView textView,
             ConnectionReason reason,
             Collection<ITextBuffer> subjectBuffers
-        ) {
+        )
+        {
             // DevDiv https://devdiv.visualstudio.com/DevDiv/_workitems/edit/130129:
             //
             // This needs to be scheduled after editor has been composed. Otherwise

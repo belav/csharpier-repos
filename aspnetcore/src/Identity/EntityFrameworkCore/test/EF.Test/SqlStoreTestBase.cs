@@ -78,7 +78,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
             bool lockoutEnabled = false,
             DateTimeOffset? lockoutEnd = default(DateTimeOffset?),
             bool useNamePrefixAsUserName = false
-        ) {
+        )
+        {
             return new TUser
             {
                 UserName = useNamePrefixAsUserName
@@ -99,7 +100,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
         protected override TRole CreateTestRole(
             string roleNamePrefix = "",
             bool useRoleNamePrefixAsRoleName = false
-        ) {
+        )
+        {
             var roleName = useRoleNamePrefixAsRoleName
                 ? roleNamePrefix
                 : string.Format(

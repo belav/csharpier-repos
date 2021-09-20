@@ -17,7 +17,8 @@ namespace System.IO
         private static bool DirectoryExists(
             ReadOnlySpan<char> fullPath,
             out Interop.ErrorInfo errorInfo
-        ) {
+        )
+        {
             return FileExists(fullPath, Interop.Sys.FileTypes.S_IFDIR, out errorInfo);
         }
 
@@ -42,7 +43,8 @@ namespace System.IO
             ReadOnlySpan<char> fullPath,
             int fileType,
             out Interop.ErrorInfo errorInfo
-        ) {
+        )
+        {
             Debug.Assert(
                 fileType == Interop.Sys.FileTypes.S_IFREG
                     || fileType == Interop.Sys.FileTypes.S_IFDIR
@@ -57,7 +59,8 @@ namespace System.IO
             if (
                 Interop.Sys.Stat(fullPath, out fileinfo) < 0
                 && Interop.Sys.LStat(fullPath, out fileinfo) < 0
-            ) {
+            )
+            {
                 errorInfo = Interop.Sys.GetLastErrorInfo();
                 return false;
             }

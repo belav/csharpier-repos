@@ -41,7 +41,8 @@ namespace Microsoft.Extensions.Logging
         public static ILoggingBuilder AddEventLog(
             this ILoggingBuilder builder,
             EventLogSettings settings
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -68,7 +69,8 @@ namespace Microsoft.Extensions.Logging
         public static ILoggingBuilder AddEventLog(
             this ILoggingBuilder builder,
             Action<EventLogSettings> configure
-        ) {
+        )
+        {
             if (configure == null)
             {
                 throw new ArgumentNullException(nameof(configure));

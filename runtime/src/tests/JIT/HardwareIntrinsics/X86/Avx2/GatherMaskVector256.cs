@@ -59,7 +59,8 @@ namespace IntelHardwareIntrinsicTest
 
                 fixed (int* iptr = intIndexTable)fixed (long* lptr = longIndexTable)fixed (
                     int* i128ptr = vector128intIndexTable
-                ) {
+                )
+                {
                     indexi = Avx.LoadVector256(iptr);
                     indexl = Avx.LoadVector256(lptr);
                     indexi128 = Sse2.LoadVector128(i128ptr);
@@ -96,7 +97,8 @@ namespace IntelHardwareIntrinsicTest
                         floatSourceTable,
                         new float[8]
                     )
-                ) {
+                )
+                {
                     var vf = Avx2.GatherMaskVector256(
                         sourcef,
                         (float*)(floatTable.inArrayPtr),
@@ -113,7 +115,8 @@ namespace IntelHardwareIntrinsicTest
                                 == BitConverter.SingleToInt32Bits(y),
                             intIndexTable
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("AVX2 GatherMaskVector256 failed on float:");
                         foreach (var item in floatTable.outArray)
                         {
@@ -155,7 +158,8 @@ namespace IntelHardwareIntrinsicTest
                                 == BitConverter.SingleToInt32Bits(y),
                             intIndexTable
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "AVX2 GatherMaskVector256 failed with reflection on float:"
                         );
@@ -202,7 +206,8 @@ namespace IntelHardwareIntrinsicTest
                                 == BitConverter.SingleToInt32Bits(y),
                             intIndexTable
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "AVX2 GatherMaskVector256 failed on float with non-const scale (IMM):"
                         );
@@ -240,7 +245,8 @@ namespace IntelHardwareIntrinsicTest
                         doubleSourceTable,
                         new double[4]
                     )
-                ) {
+                )
+                {
                     var vd = Avx2.GatherMaskVector256(
                         sourced,
                         (double*)(doubletTable.inArrayPtr),
@@ -257,7 +263,8 @@ namespace IntelHardwareIntrinsicTest
                                 == BitConverter.DoubleToInt64Bits(y),
                             vector128intIndexTable
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("AVX2 GatherMaskVector256 failed on double:");
                         foreach (var item in doubletTable.outArray)
                         {
@@ -299,7 +306,8 @@ namespace IntelHardwareIntrinsicTest
                                 == BitConverter.DoubleToInt64Bits(y),
                             vector128intIndexTable
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "AVX2 GatherMaskVector256 failed with reflection on double:"
                         );
@@ -346,7 +354,8 @@ namespace IntelHardwareIntrinsicTest
                                 == BitConverter.DoubleToInt64Bits(y),
                             vector128intIndexTable
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "AVX2 GatherMaskVector256 failed on double with non-const scale (IMM):"
                         );
@@ -384,7 +393,8 @@ namespace IntelHardwareIntrinsicTest
                         intSourceTable,
                         new int[8]
                     )
-                ) {
+                )
+                {
                     var vf = Avx2.GatherMaskVector256(
                         sourcei,
                         (int*)(intTable.inArrayPtr),
@@ -510,7 +520,8 @@ namespace IntelHardwareIntrinsicTest
                         intSourceTable,
                         new int[8]
                     )
-                ) {
+                )
+                {
                     var vf = Avx2.GatherMaskVector256(
                         sourceui,
                         (uint*)(intTable.inArrayPtr),
@@ -634,7 +645,8 @@ namespace IntelHardwareIntrinsicTest
                         longSourceTable,
                         new long[4]
                     )
-                ) {
+                )
+                {
                     var vf = Avx2.GatherMaskVector256(
                         sourcel,
                         (long*)(longTable.inArrayPtr),
@@ -760,7 +772,8 @@ namespace IntelHardwareIntrinsicTest
                         longSourceTable,
                         new long[4]
                     )
-                ) {
+                )
+                {
                     var vf = Avx2.GatherMaskVector256(
                         sourceul,
                         (ulong*)(longTable.inArrayPtr),
@@ -886,7 +899,8 @@ namespace IntelHardwareIntrinsicTest
                         longSourceTable,
                         new long[4]
                     )
-                ) {
+                )
+                {
                     var vf = Avx2.GatherMaskVector256(
                         sourcel,
                         (long*)(longTable.inArrayPtr),
@@ -1014,7 +1028,8 @@ namespace IntelHardwareIntrinsicTest
                         longSourceTable,
                         new long[4]
                     )
-                ) {
+                )
+                {
                     var vf = Avx2.GatherMaskVector256(
                         sourceul,
                         (ulong*)(longTable.inArrayPtr),
@@ -1142,7 +1157,8 @@ namespace IntelHardwareIntrinsicTest
                         doubleSourceTable,
                         new double[4]
                     )
-                ) {
+                )
+                {
                     var vd = Avx2.GatherMaskVector256(
                         sourced,
                         (double*)(doubletTable.inArrayPtr),
@@ -1159,7 +1175,8 @@ namespace IntelHardwareIntrinsicTest
                                 == BitConverter.DoubleToInt64Bits(y),
                             longIndexTable
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "AVX2 GatherMaskVector256 failed on double with Vector256 long index:"
                         );
@@ -1203,7 +1220,8 @@ namespace IntelHardwareIntrinsicTest
                                 == BitConverter.DoubleToInt64Bits(y),
                             longIndexTable
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "AVX2 GatherMaskVector256 failed with reflection on double with Vector256 long index:"
                         );
@@ -1250,7 +1268,8 @@ namespace IntelHardwareIntrinsicTest
                                 == BitConverter.DoubleToInt64Bits(y),
                             longIndexTable
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine(
                             "AVX2 GatherMaskVector256 failed on double with non-const scale (IMM) and Vector256 long index:"
                         );
@@ -1315,7 +1334,8 @@ namespace IntelHardwareIntrinsicTest
                     if (
                         (take && !check(inArray[Convert.ToInt32(indexArray[i])], outArray[i]))
                         || (!take && !EqualityComparer<T>.Default.Equals(outArray[i], default(T)))
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }

@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
             IControllerActivatorProvider activatorProvider,
             IControllerFactory controllerFactory,
             IEnumerable<IControllerPropertyActivator> propertyActivators
-        ) {
+        )
+        {
             if (activatorProvider == null)
             {
                 throw new ArgumentNullException(nameof(activatorProvider));
@@ -47,7 +48,8 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
 
         public Func<ControllerContext, object> CreateControllerFactory(
             ControllerActionDescriptor descriptor
-        ) {
+        )
+        {
             if (descriptor == null)
             {
                 throw new ArgumentNullException(nameof(descriptor));
@@ -89,7 +91,8 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
 
         public Action<ControllerContext, object>? CreateControllerReleaser(
             ControllerActionDescriptor descriptor
-        ) {
+        )
+        {
             if (descriptor == null)
             {
                 throw new ArgumentNullException(nameof(descriptor));
@@ -117,7 +120,8 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
 
         public Func<ControllerContext, object, ValueTask>? CreateAsyncControllerReleaser(
             ControllerActionDescriptor descriptor
-        ) {
+        )
+        {
             if (descriptor == null)
             {
                 throw new ArgumentNullException(nameof(descriptor));
@@ -145,7 +149,8 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
 
         private Action<ControllerContext, object>[] GetPropertiesToActivate(
             ControllerActionDescriptor actionDescriptor
-        ) {
+        )
+        {
             var propertyActivators = new Action<ControllerContext, object>[
                 _propertyActivators.Length
             ];

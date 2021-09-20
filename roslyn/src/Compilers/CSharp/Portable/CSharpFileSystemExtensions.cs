@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string? win32ResourcesPath = null,
             IEnumerable<ResourceDescription>? manifestResources = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return FileSystemExtensions.Emit(
                 compilation,
                 outputPath,

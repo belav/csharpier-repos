@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             public FixAllDiagnosticProvider(
                 TestDiagnosticAnalyzerDriver testDriver,
                 ImmutableHashSet<string> diagnosticIds
-            ) {
+            )
+            {
                 _testDriver = testDriver;
                 _diagnosticIds = diagnosticIds;
             }
@@ -32,7 +33,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             public override async Task<IEnumerable<Diagnostic>> GetDocumentDiagnosticsAsync(
                 Document document,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var root = await document.GetSyntaxRootAsync(cancellationToken);
                 var diags = await _testDriver.GetDocumentDiagnosticsAsync(document, root.FullSpan);
                 diags = diags.Where(diag => _diagnosticIds.Contains(diag.Id));
@@ -52,7 +54,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             private async Task<IEnumerable<Diagnostic>> GetProjectDiagnosticsAsync(
                 Project project,
                 bool includeAllDocumentDiagnostics
-            ) {
+            )
+            {
                 var diags = includeAllDocumentDiagnostics
                     ? await _testDriver.GetAllDiagnosticsAsync(project)
                     : await _testDriver.GetProjectDiagnosticsAsync(project);

@@ -66,7 +66,8 @@ namespace System.IO
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             await Task.Delay(_millisecondsDelay, cancellationToken);
             return await _innerStream.ReadAsync(buffer, offset, count, cancellationToken);
         }
@@ -74,7 +75,8 @@ namespace System.IO
         public override async ValueTask<int> ReadAsync(
             Memory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             await Task.Delay(_millisecondsDelay, cancellationToken);
             return await _innerStream.ReadAsync(buffer, cancellationToken);
         }
@@ -84,7 +86,8 @@ namespace System.IO
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             await Task.Delay(_millisecondsDelay, cancellationToken);
             await _innerStream.WriteAsync(buffer, offset, count, cancellationToken);
         }
@@ -92,7 +95,8 @@ namespace System.IO
         public override async ValueTask WriteAsync(
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             await Task.Delay(_millisecondsDelay, cancellationToken);
             await _innerStream.WriteAsync(buffer, cancellationToken);
         }

@@ -21,7 +21,8 @@ namespace System.Security.Cryptography.X509Certificates
             X500DistinguishedName subject,
             PublicKey publicKey,
             IEnumerable<X501Attribute> attributes
-        ) {
+        )
+        {
             if (subject == null)
                 throw new ArgumentNullException(nameof(subject));
             if (publicKey == null)
@@ -39,7 +40,8 @@ namespace System.Security.Cryptography.X509Certificates
         internal byte[] ToPkcs10Request(
             X509SignatureGenerator signatureGenerator,
             HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             // State validation should be runtime checks if/when this becomes public API
             Debug.Assert(signatureGenerator != null);
             Debug.Assert(Subject != null);

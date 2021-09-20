@@ -149,7 +149,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 int index,
                 int repeat,
                 Func<T?[], IEnumerable<T?>> constructIEnumerable
-            ) {
+            )
+            {
                 SegmentedList<T?> list = new SegmentedList<T?>(constructIEnumerable(itemsX));
 
                 for (int i = 0; i < repeat; i++)
@@ -207,7 +208,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             public void InsertRangeValidations(
                 T?[] items,
                 Func<T?[], IEnumerable<T?>> constructIEnumerable
-            ) {
+            )
+            {
                 SegmentedList<T?> list = new SegmentedList<T?>(constructIEnumerable(items));
                 int[] bad = new int[]
                 {
@@ -952,7 +954,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
             foreach (
                 Func<int[], IEnumerable<int>> collectionGenerator in IntDriver.CollectionGenerators
-            ) {
+            )
+            {
                 IntDriver.InsertRangeIEnumerable(new int[0], intArr1, 0, 1, collectionGenerator);
                 IntDriver.InsertRangeIEnumerable(intArr1, intArr2, 0, 1, collectionGenerator);
                 IntDriver.InsertRangeIEnumerable(intArr1, intArr2, 1, 1, collectionGenerator);
@@ -974,7 +977,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                     string?[],
                     IEnumerable<string?>
                 > collectionGenerator in StringDriver.CollectionGenerators
-            ) {
+            )
+            {
                 StringDriver.InsertRangeIEnumerable(
                     new string[0],
                     stringArr1,

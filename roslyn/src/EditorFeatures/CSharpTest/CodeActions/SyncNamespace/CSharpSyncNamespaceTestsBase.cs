@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.SyncNamespa
         protected static (string folder, string filePath) CreateDocumentFilePath(
             string[] folder,
             string fileName = "DocumentA.cs"
-        ) {
+        )
+        {
             if (folder == null || folder.Length == 0)
             {
                 return (
@@ -70,7 +71,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.SyncNamespa
         protected async Task TestMoveFileToMatchNamespace(
             string initialMarkup,
             List<string[]> expectedFolders = null
-        ) {
+        )
+        {
             var testOptions = new TestParameters();
             using (var workspace = CreateWorkspaceFromOptions(initialMarkup, testOptions))
             {
@@ -136,7 +138,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.SyncNamespa
                 TestParameters parameters,
                 TestWorkspace workspace,
                 string expectedCode
-            ) {
+            )
+            {
                 var results = new List<Tuple<Solution, Solution>>();
 
                 var (actions, _) = await GetCodeActionsAsync(workspace, parameters);
@@ -168,7 +171,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.SyncNamespa
             string initialMarkUp,
             string expectedSourceOriginal,
             string expectedSourceReference = null
-        ) {
+        )
+        {
             var testOptions = new TestParameters();
             using (var workspace = CreateWorkspaceFromOptions(initialMarkUp, testOptions))
             {
@@ -286,7 +290,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.SyncNamespa
             async Task<Tuple<Solution, Solution>> TestOperationAsync(
                 TestParameters parameters,
                 TestWorkspace workspace
-            ) {
+            )
+            {
                 var (actions, _) = await GetCodeActionsAsync(workspace, parameters);
                 var changeNamespaceAction = actions.Single(
                     a => a is CodeAction.SolutionChangeAction

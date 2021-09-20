@@ -407,7 +407,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             object constraints = null,
             int order = 0,
             string[] hosts = null
-        ) {
+        )
+        {
             var metadata = new List<object>();
             if (hosts != null)
             {

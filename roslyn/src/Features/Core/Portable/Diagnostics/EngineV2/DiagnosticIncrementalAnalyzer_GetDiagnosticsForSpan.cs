@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             bool blockForData,
             Func<string, IDisposable?>? addOperationScope,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var getter = await LatestDiagnosticsForSpanGetter.CreateAsync(
                     this,
                     document,
@@ -51,7 +52,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             bool blockForData,
             Func<string, IDisposable?>? addOperationScope,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<DiagnosticData>.GetInstance(out var list);
             var result = await TryAppendDiagnosticsForSpanAsync(
                     document,
@@ -100,7 +102,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 bool includeSuppressedDiagnostics,
                 string? diagnosticId,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var stateSets = owner._stateManager.GetOrCreateStateSets(document.Project)
                     .Where(
                         s =>
@@ -154,7 +157,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 bool blockForData,
                 Func<string, IDisposable?>? addOperationScope,
                 bool includeSuppressedDiagnostics
-            ) {
+            )
+            {
                 _owner = owner;
                 _compilationWithAnalyzers = compilationWithAnalyzers;
                 _document = document;
@@ -169,7 +173,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             public async Task<bool> TryGetAsync(
                 ArrayBuilder<DiagnosticData> list,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 try
                 {
                     var containsFullResult = true;
@@ -194,7 +199,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                                     cancellationToken
                                 )
                                 .ConfigureAwait(false)
-                        ) {
+                        )
+                        {
                             syntaxAnalyzers.Add(stateSet.Analyzer);
                         }
 
@@ -206,7 +212,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                                     cancellationToken
                                 )
                                 .ConfigureAwait(false)
-                        ) {
+                        )
+                        {
                             // Check whether we want up-to-date document wide semantic diagnostics
                             var spanBased =
                                 stateSet.Analyzer.SupportsSpanBasedSemanticDiagnosticAnalysis();
@@ -266,7 +273,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 AnalysisKind kind,
                 ArrayBuilder<DiagnosticData> list,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (!stateSet.Analyzer.SupportAnalysisKind(kind))
                 {
                     return true;
@@ -299,7 +307,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 TextSpan? span,
                 ArrayBuilder<DiagnosticData> list,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (analyzers.IsEmpty)
                 {
                     return;
@@ -326,7 +335,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                                   cancellationToken
                               )
                             : default
-                    ) {
+                    )
+                    {
                         var dx = await executor.ComputeDiagnosticsAsync(analyzer, cancellationToken)
                             .ConfigureAwait(false);
                         if (dx != null)

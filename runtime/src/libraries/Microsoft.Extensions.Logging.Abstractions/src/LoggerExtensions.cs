@@ -30,7 +30,8 @@ namespace Microsoft.Extensions.Logging
             Exception? exception,
             string? message,
             params object?[] args
-        ) {
+        )
+        {
             logger.Log(LogLevel.Debug, eventId, exception, message, args);
         }
 
@@ -47,7 +48,8 @@ namespace Microsoft.Extensions.Logging
             EventId eventId,
             string? message,
             params object?[] args
-        ) {
+        )
+        {
             logger.Log(LogLevel.Debug, eventId, message, args);
         }
 
@@ -64,7 +66,8 @@ namespace Microsoft.Extensions.Logging
             Exception? exception,
             string? message,
             params object?[] args
-        ) {
+        )
+        {
             logger.Log(LogLevel.Debug, exception, message, args);
         }
 
@@ -97,7 +100,8 @@ namespace Microsoft.Extensions.Logging
             Exception? exception,
             string? message,
             params object?[] args
-        ) {
+        )
+        {
             logger.Log(LogLevel.Trace, eventId, exception, message, args);
         }
 
@@ -114,7 +118,8 @@ namespace Microsoft.Extensions.Logging
             EventId eventId,
             string? message,
             params object?[] args
-        ) {
+        )
+        {
             logger.Log(LogLevel.Trace, eventId, message, args);
         }
 
@@ -131,7 +136,8 @@ namespace Microsoft.Extensions.Logging
             Exception? exception,
             string? message,
             params object?[] args
-        ) {
+        )
+        {
             logger.Log(LogLevel.Trace, exception, message, args);
         }
 
@@ -164,7 +170,8 @@ namespace Microsoft.Extensions.Logging
             Exception? exception,
             string? message,
             params object?[] args
-        ) {
+        )
+        {
             logger.Log(LogLevel.Information, eventId, exception, message, args);
         }
 
@@ -181,7 +188,8 @@ namespace Microsoft.Extensions.Logging
             EventId eventId,
             string? message,
             params object?[] args
-        ) {
+        )
+        {
             logger.Log(LogLevel.Information, eventId, message, args);
         }
 
@@ -198,7 +206,8 @@ namespace Microsoft.Extensions.Logging
             Exception? exception,
             string? message,
             params object?[] args
-        ) {
+        )
+        {
             logger.Log(LogLevel.Information, exception, message, args);
         }
 
@@ -213,7 +222,8 @@ namespace Microsoft.Extensions.Logging
             this ILogger logger,
             string? message,
             params object?[] args
-        ) {
+        )
+        {
             logger.Log(LogLevel.Information, message, args);
         }
 
@@ -234,7 +244,8 @@ namespace Microsoft.Extensions.Logging
             Exception? exception,
             string? message,
             params object?[] args
-        ) {
+        )
+        {
             logger.Log(LogLevel.Warning, eventId, exception, message, args);
         }
 
@@ -251,7 +262,8 @@ namespace Microsoft.Extensions.Logging
             EventId eventId,
             string? message,
             params object?[] args
-        ) {
+        )
+        {
             logger.Log(LogLevel.Warning, eventId, message, args);
         }
 
@@ -268,7 +280,8 @@ namespace Microsoft.Extensions.Logging
             Exception? exception,
             string? message,
             params object?[] args
-        ) {
+        )
+        {
             logger.Log(LogLevel.Warning, exception, message, args);
         }
 
@@ -301,7 +314,8 @@ namespace Microsoft.Extensions.Logging
             Exception? exception,
             string? message,
             params object?[] args
-        ) {
+        )
+        {
             logger.Log(LogLevel.Error, eventId, exception, message, args);
         }
 
@@ -318,7 +332,8 @@ namespace Microsoft.Extensions.Logging
             EventId eventId,
             string? message,
             params object?[] args
-        ) {
+        )
+        {
             logger.Log(LogLevel.Error, eventId, message, args);
         }
 
@@ -335,7 +350,8 @@ namespace Microsoft.Extensions.Logging
             Exception? exception,
             string? message,
             params object?[] args
-        ) {
+        )
+        {
             logger.Log(LogLevel.Error, exception, message, args);
         }
 
@@ -368,7 +384,8 @@ namespace Microsoft.Extensions.Logging
             Exception? exception,
             string? message,
             params object?[] args
-        ) {
+        )
+        {
             logger.Log(LogLevel.Critical, eventId, exception, message, args);
         }
 
@@ -385,7 +402,8 @@ namespace Microsoft.Extensions.Logging
             EventId eventId,
             string? message,
             params object?[] args
-        ) {
+        )
+        {
             logger.Log(LogLevel.Critical, eventId, message, args);
         }
 
@@ -402,7 +420,8 @@ namespace Microsoft.Extensions.Logging
             Exception? exception,
             string? message,
             params object?[] args
-        ) {
+        )
+        {
             logger.Log(LogLevel.Critical, exception, message, args);
         }
 
@@ -430,7 +449,8 @@ namespace Microsoft.Extensions.Logging
             LogLevel logLevel,
             string? message,
             params object?[] args
-        ) {
+        )
+        {
             logger.Log(logLevel, 0, null, message, args);
         }
 
@@ -448,7 +468,8 @@ namespace Microsoft.Extensions.Logging
             EventId eventId,
             string? message,
             params object?[] args
-        ) {
+        )
+        {
             logger.Log(logLevel, eventId, null, message, args);
         }
 
@@ -466,7 +487,8 @@ namespace Microsoft.Extensions.Logging
             Exception? exception,
             string? message,
             params object?[] args
-        ) {
+        )
+        {
             logger.Log(logLevel, 0, exception, message, args);
         }
 
@@ -486,7 +508,8 @@ namespace Microsoft.Extensions.Logging
             Exception? exception,
             string? message,
             params object?[] args
-        ) {
+        )
+        {
             if (logger == null)
             {
                 throw new ArgumentNullException(nameof(logger));
@@ -519,7 +542,8 @@ namespace Microsoft.Extensions.Logging
             this ILogger logger,
             string messageFormat,
             params object?[] args
-        ) {
+        )
+        {
             if (logger == null)
             {
                 throw new ArgumentNullException(nameof(logger));

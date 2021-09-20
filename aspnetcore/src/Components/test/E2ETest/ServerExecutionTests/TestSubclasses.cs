@@ -33,11 +33,13 @@ namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests
             BrowserFixture browserFixture,
             ToggleExecutionModeServerFixture<Program> serverFixture,
             ITestOutputHelper output
-        ) : base(
-            browserFixture,
-            serverFixture.WithServerExecution().WithAdditionalArguments(GetAdditionalArguments()),
-            output
-        ) { }
+        )
+            : base(
+                browserFixture,
+                serverFixture.WithServerExecution()
+                    .WithAdditionalArguments(GetAdditionalArguments()),
+                output
+            ) { }
 
         private static string[] GetAdditionalArguments() =>
             new string[] { "--detailedErrors", "true" };

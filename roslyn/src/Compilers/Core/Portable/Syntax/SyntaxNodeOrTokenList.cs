@@ -284,7 +284,8 @@ namespace Microsoft.CodeAnalysis
         public SyntaxNodeOrTokenList InsertRange(
             int index,
             IEnumerable<SyntaxNodeOrToken> nodesAndTokens
-        ) {
+        )
+        {
             if (index < 0 || index > this.Count)
             {
                 throw new ArgumentOutOfRangeException(nameof(index));
@@ -362,7 +363,8 @@ namespace Microsoft.CodeAnalysis
         public SyntaxNodeOrTokenList Replace(
             SyntaxNodeOrToken nodeOrTokenInList,
             SyntaxNodeOrToken newNodeOrToken
-        ) {
+        )
+        {
             if (newNodeOrToken == default(SyntaxNodeOrToken))
             {
                 throw new ArgumentOutOfRangeException(nameof(newNodeOrToken));
@@ -379,7 +381,8 @@ namespace Microsoft.CodeAnalysis
         public SyntaxNodeOrTokenList ReplaceRange(
             SyntaxNodeOrToken nodeOrTokenInList,
             IEnumerable<SyntaxNodeOrToken> newNodesAndTokens
-        ) {
+        )
+        {
             var index = this.IndexOf(nodeOrTokenInList);
             if (index >= 0 && index < this.Count)
             {

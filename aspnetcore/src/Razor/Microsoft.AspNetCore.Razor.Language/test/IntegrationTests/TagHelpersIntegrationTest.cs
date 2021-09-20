@@ -105,7 +105,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
             string typeName,
             string assemblyName,
             IEnumerable<Action<BoundAttributeDescriptorBuilder>> attributes = null
-        ) {
+        )
+        {
             var builder = TagHelperDescriptorBuilder.Create(typeName, assemblyName);
             builder.TypeName(typeName);
 

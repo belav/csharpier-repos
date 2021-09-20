@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.CSharp.QualifyMemberAccess
         protected override bool CanMemberAccessBeQualified(
             ISymbol containingSymbol,
             SyntaxNode node
-        ) {
+        )
+        {
             if (node.GetAncestorOrThis<AttributeSyntax>() != null)
             {
                 return false;
@@ -54,7 +55,8 @@ namespace Microsoft.CodeAnalysis.CSharp.QualifyMemberAccess
         private static bool IsInPropertyOrFieldInitialization(
             ISymbol containingSymbol,
             SyntaxNode node
-        ) {
+        )
+        {
             return (
                     containingSymbol.Kind == SymbolKind.Field
                     || containingSymbol.Kind == SymbolKind.Property

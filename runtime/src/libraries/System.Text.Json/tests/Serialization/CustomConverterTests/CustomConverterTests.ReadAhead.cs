@@ -12,7 +12,8 @@ namespace System.Text.Json.Serialization.Tests
         private static void VerifyClassWithStringProperties(
             ClassWithStringProperties obj,
             int stringSize
-        ) {
+        )
+        {
             // The 10 properties will cause buffer boundary cases where the converter requires read-ahead.
             Assert.Equal(new string('0', stringSize), obj.MyString0);
             Assert.Equal(new string('1', stringSize), obj.MyString1);
@@ -29,7 +30,8 @@ namespace System.Text.Json.Serialization.Tests
         private static void VerifyExtensionDataStringProperties(
             ClassWithExtensionData obj,
             int stringSize
-        ) {
+        )
+        {
             // The 10 properties will cause buffer boundary cases where the converter requires read-ahead.
             Assert.Equal(
                 new string('0', stringSize),
@@ -294,7 +296,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 if (reader.TokenType != JsonTokenType.StartObject)
                 {
                     throw new JsonException();
@@ -364,7 +367,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 ClassWithStringProperties value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 writer.WriteStartObject();
 
                 writer.WriteString("MyString0", value.MyString0);

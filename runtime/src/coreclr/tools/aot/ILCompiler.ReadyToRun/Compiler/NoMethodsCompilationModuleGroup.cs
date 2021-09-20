@@ -22,14 +22,15 @@ namespace ILCompiler
             IEnumerable<EcmaModule> compilationModuleSet,
             IEnumerable<ModuleDesc> versionBubbleModuleSet,
             bool compileGenericDependenciesFromVersionBubbleModuleSet
-        ) : base(
-            context,
-            isCompositeBuildMode,
-            isInputBubble,
-            compilationModuleSet,
-            versionBubbleModuleSet,
-            compileGenericDependenciesFromVersionBubbleModuleSet
-        ) { }
+        )
+            : base(
+                context,
+                isCompositeBuildMode,
+                isInputBubble,
+                compilationModuleSet,
+                versionBubbleModuleSet,
+                compileGenericDependenciesFromVersionBubbleModuleSet
+            ) { }
 
         public override bool ContainsMethodBody(MethodDesc method, bool unboxingStub)
         {
@@ -38,7 +39,8 @@ namespace ILCompiler
 
         public override void ApplyProfilerGuidedCompilationRestriction(
             ProfileDataManager profileGuidedCompileRestriction
-        ) {
+        )
+        {
             return;
         }
 

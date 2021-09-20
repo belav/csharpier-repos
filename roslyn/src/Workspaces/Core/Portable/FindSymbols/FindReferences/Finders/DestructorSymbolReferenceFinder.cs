@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             IImmutableSet<Document>? documents,
             FindReferencesSearchOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return SpecializedTasks.EmptyImmutableArray<Document>();
         }
 
@@ -30,7 +31,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             SemanticModel semanticModel,
             FindReferencesSearchOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return new ValueTask<ImmutableArray<FinderLocation>>(
                 ImmutableArray<FinderLocation>.Empty
             );

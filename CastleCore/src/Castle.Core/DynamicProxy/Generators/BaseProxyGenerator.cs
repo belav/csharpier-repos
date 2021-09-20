@@ -47,7 +47,8 @@ namespace Castle.DynamicProxy.Generators
             Type targetType,
             Type[] interfaces,
             ProxyGenerationOptions proxyGenerationOptions
-        ) {
+        )
+        {
             CheckNotGenericTypeDefinition(targetType, nameof(targetType));
             CheckNotGenericTypeDefinitions(interfaces, nameof(interfaces));
 
@@ -117,7 +118,8 @@ namespace Castle.DynamicProxy.Generators
             Type @interface,
             ITypeContributor implementer,
             IDictionary<Type, ITypeContributor> mapping
-        ) {
+        )
+        {
             Debug.Assert(implementer != null, "implementer != null");
             Debug.Assert(@interface != null, "@interface != null");
             Debug.Assert(@interface.IsInterface, "@interface.IsInterface");
@@ -132,7 +134,8 @@ namespace Castle.DynamicProxy.Generators
         protected void AddMappingForISerializable(
             IDictionary<Type, ITypeContributor> typeImplementerMapping,
             ITypeContributor instance
-        ) {
+        )
+        {
             AddMapping(typeof(ISerializable), instance, typeImplementerMapping);
         }
 #endif
@@ -144,7 +147,8 @@ namespace Castle.DynamicProxy.Generators
             Type @interface,
             ITypeContributor implementer,
             IDictionary<Type, ITypeContributor> mapping
-        ) {
+        )
+        {
             mapping.Add(@interface, implementer);
         }
 
@@ -152,7 +156,8 @@ namespace Castle.DynamicProxy.Generators
             string typeName,
             Type parentType,
             IEnumerable<Type> interfaces
-        ) {
+        )
+        {
             CheckNotGenericTypeDefinition(parentType, nameof(parentType));
             CheckNotGenericTypeDefinitions(interfaces, nameof(interfaces));
 
@@ -249,7 +254,8 @@ namespace Castle.DynamicProxy.Generators
             ClassEmitter emitter,
             ConstructorInfo baseConstructor,
             params FieldReference[] fields
-        ) {
+        )
+        {
             ArgumentReference[] args;
             ParameterInfo[] baseConstructorParams = null;
 
@@ -292,7 +298,8 @@ namespace Castle.DynamicProxy.Generators
                     );
                     foreach (
                         var attribute in baseConstructorParams[i].GetNonInheritableAttributes()
-                    ) {
+                    )
+                    {
                         parameterBuilder.SetCustomAttribute(attribute.Builder);
                     }
                 }
@@ -330,7 +337,8 @@ namespace Castle.DynamicProxy.Generators
             ClassEmitter emitter,
             Type baseType,
             params FieldReference[] fields
-        ) {
+        )
+        {
             var constructors = baseType.GetConstructors(
                 BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
             );
@@ -357,7 +365,8 @@ namespace Castle.DynamicProxy.Generators
             ClassEmitter emitter,
             Type baseClass,
             FieldReference interceptorField
-        ) {
+        )
+        {
             // Check if the type actually has a default constructor
             var defaultConstructor = baseClass.GetConstructor(
                 BindingFlags.Public | BindingFlags.Instance,
@@ -477,7 +486,8 @@ namespace Castle.DynamicProxy.Generators
                 equalsMethod == null
                 || equalsMethod.DeclaringType == typeof(object)
                 || equalsMethod.IsAbstract
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -489,7 +499,8 @@ namespace Castle.DynamicProxy.Generators
                 getHashCodeMethod == null
                 || getHashCodeMethod.DeclaringType == typeof(object)
                 || getHashCodeMethod.IsAbstract
-            ) {
+            )
+            {
                 return false;
             }
 

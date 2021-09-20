@@ -39,7 +39,8 @@ namespace Microsoft.NET.HostModel.AppHost
             string appBinaryFilePath,
             bool windowsGraphicalUserInterface = false,
             string assemblyToCopyResorcesFrom = null
-        ) {
+        )
+        {
             var bytesToWrite = Encoding.UTF8.GetBytes(appBinaryFilePath);
             if (bytesToWrite.Length > 1024)
             {
@@ -133,7 +134,8 @@ namespace Microsoft.NET.HostModel.AppHost
                                     appHostDestinationFilePath,
                                     FileMode.Create
                                 )
-                            ) {
+                            )
+                            {
                                 BinaryUtils.WriteToStream(
                                     memoryMappedViewAccessor,
                                     fileStream,
@@ -318,7 +320,8 @@ namespace Microsoft.NET.HostModel.AppHost
                 {
                     using (
                         MemoryMappedViewAccessor accessor = memoryMappedFile.CreateViewAccessor()
-                    ) {
+                    )
+                    {
                         int position = BinaryUtils.SearchInFile(accessor, bundleSignature);
                         if (position == -1)
                         {

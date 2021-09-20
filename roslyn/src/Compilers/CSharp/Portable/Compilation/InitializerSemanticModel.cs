@@ -31,16 +31,18 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxTreeSemanticModel parentSemanticModelOpt = null,
             ImmutableDictionary<Symbol, Symbol> parentRemappedSymbolsOpt = null,
             int speculatedPosition = 0
-        ) : base(
-            syntax,
-            symbol,
-            rootBinder,
-            containingSemanticModelOpt,
-            parentSemanticModelOpt,
-            snapshotManagerOpt: null,
-            parentRemappedSymbolsOpt,
-            speculatedPosition
-        ) {
+        )
+            : base(
+                syntax,
+                symbol,
+                rootBinder,
+                containingSemanticModelOpt,
+                parentSemanticModelOpt,
+                snapshotManagerOpt: null,
+                parentRemappedSymbolsOpt,
+                speculatedPosition
+            )
+        {
             Debug.Assert(
                 !(
                     syntax is ConstructorInitializerSyntax
@@ -57,7 +59,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CSharpSyntaxNode syntax,
             FieldSymbol fieldSymbol,
             Binder rootBinder
-        ) {
+        )
+        {
             Debug.Assert(containingSemanticModel != null);
             Debug.Assert(
                 syntax.IsKind(SyntaxKind.VariableDeclarator)
@@ -79,7 +82,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CSharpSyntaxNode syntax,
             PropertySymbol propertySymbol,
             Binder rootBinder
-        ) {
+        )
+        {
             Debug.Assert(containingSemanticModel != null);
             Debug.Assert(syntax.IsKind(SyntaxKind.PropertyDeclaration));
             return new InitializerSemanticModel(
@@ -99,7 +103,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ParameterSymbol parameterSymbol,
             Binder rootBinder,
             ImmutableDictionary<Symbol, Symbol> parentRemappedSymbolsOpt
-        ) {
+        )
+        {
             Debug.Assert(containingSemanticModel != null);
             return new InitializerSemanticModel(
                 syntax,
@@ -121,7 +126,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Binder rootBinder,
             ImmutableDictionary<Symbol, Symbol> parentRemappedSymbolsOpt,
             int position
-        ) {
+        )
+        {
             Debug.Assert(parentSemanticModel != null);
             Debug.Assert(syntax != null);
             Debug.Assert(syntax.IsKind(SyntaxKind.EqualsValueClause));
@@ -179,7 +185,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Binder binder,
             CSharpSyntaxNode node,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             EqualsValueClauseSyntax equalsValue = null;
 
             switch (node.Kind())
@@ -217,7 +224,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Binder binder,
             EqualsValueClauseSyntax equalsValue,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             switch (this.MemberSymbol.Kind)
             {
                 case SymbolKind.Field:
@@ -295,7 +303,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             int position,
             EqualsValueClauseSyntax initializer,
             out SemanticModel speculativeModel
-        ) {
+        )
+        {
             var binder = this.GetEnclosingBinder(position);
             if (binder == null)
             {
@@ -320,7 +329,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             int position,
             ConstructorInitializerSyntax constructorInitializer,
             out SemanticModel speculativeModel
-        ) {
+        )
+        {
             speculativeModel = null;
             return false;
         }
@@ -330,7 +340,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             int position,
             PrimaryConstructorBaseTypeSyntax constructorInitializer,
             out SemanticModel speculativeModel
-        ) {
+        )
+        {
             speculativeModel = null;
             return false;
         }
@@ -340,7 +351,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             int position,
             ArrowExpressionClauseSyntax expressionBody,
             out SemanticModel speculativeModel
-        ) {
+        )
+        {
             speculativeModel = null;
             return false;
         }
@@ -350,7 +362,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             int position,
             StatementSyntax statement,
             out SemanticModel speculativeModel
-        ) {
+        )
+        {
             speculativeModel = null;
             return false;
         }
@@ -360,7 +373,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             int position,
             BaseMethodDeclarationSyntax method,
             out SemanticModel speculativeModel
-        ) {
+        )
+        {
             speculativeModel = null;
             return false;
         }
@@ -370,7 +384,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             int position,
             AccessorDeclarationSyntax accessor,
             out SemanticModel speculativeModel
-        ) {
+        )
+        {
             speculativeModel = null;
             return false;
         }
@@ -382,7 +397,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool createSnapshots,
             out NullableWalker.SnapshotManager snapshotManager,
             ref ImmutableDictionary<Symbol, Symbol> remappedSymbols
-        ) {
+        )
+        {
             // https://github.com/dotnet/roslyn/issues/46424
             // Bind and analyze preceding field initializers in order to give an accurate initial nullable state.
             return NullableWalker.AnalyzeAndRewrite(
@@ -403,7 +419,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Binder binder,
             DiagnosticBag diagnostics,
             bool createSnapshots
-        ) {
+        )
+        {
             NullableWalker.AnalyzeWithoutRewrite(
                 Compilation,
                 MemberSymbol,

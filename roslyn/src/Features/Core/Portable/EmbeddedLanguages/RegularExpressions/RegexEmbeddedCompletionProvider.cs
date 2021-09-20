@@ -59,11 +59,13 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
             int caretPosition,
             CompletionTrigger trigger,
             OptionSet options
-        ) {
+        )
+        {
             if (
                 trigger.Kind == CompletionTriggerKind.Invoke
                 || trigger.Kind == CompletionTriggerKind.InvokeAndCommitIfUnique
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -82,7 +84,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
                     RegularExpressionsOptions.ProvideRegexCompletions,
                     context.Document.Project.Language
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -90,7 +93,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
                 context.Trigger.Kind != CompletionTriggerKind.Invoke
                 && context.Trigger.Kind != CompletionTriggerKind.InvokeAndCommitIfUnique
                 && context.Trigger.Kind != CompletionTriggerKind.Insertion
-            ) {
+            )
+            {
                 return;
             }
 
@@ -106,7 +110,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
                 tree == null
                 || position <= stringToken.SpanStart
                 || position >= stringToken.Span.End
-            ) {
+            )
+            {
                 return;
             }
 
@@ -201,7 +206,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
         /// </summary>
         private void ProvideCompletionsBasedOffOfPrecedingCharacter(
             EmbeddedCompletionContext context
-        ) {
+        )
+        {
             var previousVirtualCharOpt = context.Tree.Text.FirstOrNull(
                 vc => vc.Span.Contains(context.Position - 1)
             );
@@ -255,7 +261,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
         private static void ProvideTopLevelCompletions(
             EmbeddedCompletionContext context,
             bool inCharacterClass
-        ) {
+        )
+        {
             if (inCharacterClass)
             {
                 // If we're in a character class, we have nothing top-level to offer.
@@ -389,7 +396,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
             EmbeddedCompletionContext context,
             RegexTree tree,
             VirtualChar previousVirtualChar
-        ) {
+        )
+        {
             // we only provide completions after `{` if the user wrote `\p{`.  In that case
             // we're providing the set of unicode categories that are legal there.
 
@@ -445,7 +453,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
             EmbeddedCompletionContext context,
             bool inCharacterClass,
             RegexNode parentOpt
-        ) {
+        )
+        {
             if (inCharacterClass)
             {
                 // Open paren doesn't complete to anything inside a character class.
@@ -577,7 +586,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
             EmbeddedCompletionContext context,
             bool inCharacterClass,
             RegexNode parentOpt
-        ) {
+        )
+        {
             if (inCharacterClass)
             {
                 // Open bracket doesn't complete to anything inside a character class.
@@ -630,7 +640,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
             EmbeddedCompletionContext context,
             bool inCharacterClass,
             RegexNode parentOpt
-        ) {
+        )
+        {
             if (parentOpt != null && !(parentOpt is RegexEscapeNode))
             {
                 return;
@@ -889,7 +900,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
             CompletionItem item,
             char? commitKey,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // These values have always been added by us.
             var startString = item.Properties[StartKey];
             var lengthString = item.Properties[LengthKey];
@@ -913,7 +925,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
             Document document,
             CompletionItem item,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!item.Properties.TryGetValue(DescriptionKey, out var description))
             {
                 return SpecializedTasks.Null<CompletionDescription>();

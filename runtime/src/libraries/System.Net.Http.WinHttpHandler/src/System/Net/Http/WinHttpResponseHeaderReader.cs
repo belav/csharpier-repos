@@ -58,7 +58,8 @@ namespace System.Net.Http
                         nameLength,
                         out name
                     )
-                ) {
+                )
+                {
                     name = new string(_buffer, startIndex, nameLength);
                 }
 

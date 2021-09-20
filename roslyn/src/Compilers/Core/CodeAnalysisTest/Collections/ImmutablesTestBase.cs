@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         internal static void CollectionAssertAreEquivalent<T>(
             ICollection<T> expected,
             ICollection<T> actual
-        ) {
+        )
+        {
             Assert.Equal(expected.Count, actual.Count);
             foreach (var value in expected)
             {
@@ -60,7 +61,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             if (
                 first is ImmutableSegmentedDictionary<TKey, TValue> firstSegmented
                 && second is ImmutableSegmentedDictionary<TKey, TValue> secondSegmented
-            ) {
+            )
+            {
                 return firstSegmented == secondSegmented;
             }
             else if (first.GetType() != second.GetType())
@@ -112,7 +114,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         protected static void ManuallyEnumerateTest<T>(
             IList<T> expectedResults,
             IEnumerator<T> enumerator
-        ) {
+        )
+        {
             T[] manualArray = new T[expectedResults.Count];
             int i = 0;
 

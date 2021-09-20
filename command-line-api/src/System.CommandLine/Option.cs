@@ -61,7 +61,8 @@ namespace System.CommandLine
             Type? argumentType,
             Func<object?>? getDefaultValue,
             IArgumentArity? arity
-        ) {
+        )
+        {
             if (argumentType is null && getDefaultValue is null && arity is null)
             {
                 return null;

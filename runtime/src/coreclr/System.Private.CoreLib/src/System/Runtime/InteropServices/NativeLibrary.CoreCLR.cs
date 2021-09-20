@@ -13,7 +13,8 @@ namespace System.Runtime.InteropServices
             Assembly assembly,
             DllImportSearchPath? searchPath,
             bool throwOnError
-        ) {
+        )
+        {
             RuntimeAssembly rtAsm = (RuntimeAssembly)assembly;
             return LoadByName(
                 libraryName,

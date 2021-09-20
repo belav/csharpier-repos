@@ -57,27 +57,28 @@ namespace AnalyzerRunner
             bool usePersistentStorage,
             bool fullSolutionAnalysis,
             ImmutableArray<string> incrementalAnalyzerNames
-        ) : this(
-            analyzerPath,
-            solutionPath,
-            analyzerIds,
-            refactoringNodes,
-            runConcurrent,
-            reportSuppressedDiagnostics,
-            applyChanges,
-            showStats: false,
-            showCompilerDiagnostics: false,
-            useAll,
-            iterations,
-            testDocuments: false,
-            testDocumentMatch: _ => false,
-            testDocumentIterations: 0,
-            logFileName: null,
-            profileRoot: null,
-            usePersistentStorage,
-            fullSolutionAnalysis,
-            incrementalAnalyzerNames
-        ) { }
+        )
+            : this(
+                analyzerPath,
+                solutionPath,
+                analyzerIds,
+                refactoringNodes,
+                runConcurrent,
+                reportSuppressedDiagnostics,
+                applyChanges,
+                showStats: false,
+                showCompilerDiagnostics: false,
+                useAll,
+                iterations,
+                testDocuments: false,
+                testDocumentMatch: _ => false,
+                testDocumentIterations: 0,
+                logFileName: null,
+                profileRoot: null,
+                usePersistentStorage,
+                fullSolutionAnalysis,
+                incrementalAnalyzerNames
+            ) { }
 
         internal Options(
             string analyzerPath,
@@ -99,7 +100,8 @@ namespace AnalyzerRunner
             bool usePersistentStorage,
             bool fullSolutionAnalysis,
             ImmutableArray<string> incrementalAnalyzerNames
-        ) {
+        )
+        {
             AnalyzerPath = analyzerPath;
             SolutionPath = solutionPath;
             AnalyzerNames = analyzerIds;

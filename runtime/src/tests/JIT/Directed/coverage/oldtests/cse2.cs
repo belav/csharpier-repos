@@ -375,7 +375,8 @@ internal unsafe class testout1
         int[,] arr2d_0_1_2_2_2,
         VT_0_1_2_2_2 vt_0_1_2_2_2,
         CL_0_1_2_2_2 cl_0_1_2_2_2
-    ) {
+    )
+    {
         double retval_0_1_2_2_2 = Convert.ToDouble(
             (
                 (

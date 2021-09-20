@@ -18,7 +18,8 @@ namespace System.Text.Tests
             int byteCount,
             char[] chars,
             int charIndex
-        ) {
+        )
+        {
             throw new Exception("The method or operation is not implemented.");
         }
     }

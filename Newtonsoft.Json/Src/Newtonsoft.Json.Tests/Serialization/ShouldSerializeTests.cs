@@ -677,7 +677,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         protected override JsonProperty CreateProperty(
             MemberInfo member,
             MemberSerialization memberSerialization
-        ) {
+        )
+        {
             JsonProperty property = base.CreateProperty(member, memberSerialization);
 
             MethodInfo shouldDeserializeMethodInfo = member.DeclaringType.GetMethod(

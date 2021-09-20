@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static string GetLeadingWhitespaceOfLineAtPosition(
             this SourceText text,
             int position
-        ) {
+        )
+        {
             Contract.ThrowIfNull(text);
 
             var line = text.Lines.GetLineFromPosition(position);
@@ -41,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             int position,
             out int lineNumber,
             out int offset
-        ) {
+        )
+        {
             var line = text.Lines.GetLineFromPosition(position);
 
             lineNumber = line.LineNumber;
@@ -61,7 +63,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             out int startOffset,
             out int endLineNumber,
             out int endOffset
-        ) {
+        )
+        {
             text.GetLineAndOffset(textSpan.Start, out startLineNumber, out startOffset);
             text.GetLineAndOffset(textSpan.End, out endLineNumber, out endOffset);
         }
@@ -69,7 +72,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static TextChangeRange GetEncompassingTextChangeRange(
             this SourceText newText,
             SourceText oldText
-        ) {
+        )
+        {
             var ranges = newText.GetChangeRanges(oldText);
             if (ranges.Count == 0)
             {
@@ -90,7 +94,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             string value,
             int startIndex,
             bool caseSensitive
-        ) {
+        )
+        {
             var length = text.Length - value.Length;
             var normalized = caseSensitive ? value : CaseInsensitiveComparison.ToLower(value);
 
@@ -125,7 +130,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             string value,
             int startIndex,
             bool caseSensitive
-        ) {
+        )
+        {
             var normalized = caseSensitive ? value : CaseInsensitiveComparison.ToLower(value);
             startIndex =
                 startIndex + normalized.Length > text.Length
@@ -201,7 +207,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this SourceText sourceText,
             ObjectWriter writer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Source length
             var length = sourceText.Length;
             writer.WriteInt32(length);
@@ -223,7 +230,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             ObjectWriter writer,
             int length,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // chunk size
             var buffer = SharedPools.CharArray.Allocate();
             writer.WriteInt32(buffer.Length);
@@ -273,7 +281,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             ObjectReader reader,
             Encoding? encoding,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var textReader = ObjectReaderTextReader.Create(reader);
 
             return textService.CreateText(textReader, encoding, cancellationToken);
@@ -314,11 +323,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 return new ObjectReaderTextReader(builder.ToImmutable(), chunkSize, length);
             }
 
-            private ObjectReaderTextReader(
-                ImmutableArray<char[]> chunks,
-                int chunkSize,
-                int length
-            ) : base(length)
+            private ObjectReaderTextReader(ImmutableArray<char[]> chunks, int chunkSize, int length)
+                : base(length)
             {
                 _chunks = chunks;
                 _chunkSize = chunkSize;

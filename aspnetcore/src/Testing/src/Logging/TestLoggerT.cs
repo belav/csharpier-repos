@@ -31,7 +31,8 @@ namespace Microsoft.Extensions.Logging.Testing
             TState state,
             Exception exception,
             Func<TState, Exception, string> formatter
-        ) {
+        )
+        {
             _logger.Log(logLevel, eventId, state, exception, formatter);
         }
     }

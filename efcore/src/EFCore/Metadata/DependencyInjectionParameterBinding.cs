@@ -45,7 +45,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         public override Expression BindToParameter(
             Expression materializationExpression,
             Expression entityTypeExpression
-        ) {
+        )
+        {
             Check.NotNull(materializationExpression, nameof(materializationExpression));
             Check.NotNull(entityTypeExpression, nameof(entityTypeExpression));
 

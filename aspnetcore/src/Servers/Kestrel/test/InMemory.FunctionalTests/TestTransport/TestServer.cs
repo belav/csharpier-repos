@@ -46,39 +46,42 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTrans
             RequestDelegate app,
             TestServiceContext context,
             ListenOptions listenOptions
-        ) : this(
-            app,
-            context,
-            options => options.CodeBackedListenOptions.Add(listenOptions),
-            _ => { }
-        ) { }
+        )
+            : this(
+                app,
+                context,
+                options => options.CodeBackedListenOptions.Add(listenOptions),
+                _ => { }
+            ) { }
 
         public TestServer(
             RequestDelegate app,
             TestServiceContext context,
             Action<ListenOptions> configureListenOptions
-        ) : this(
-            app,
-            context,
-            options =>
-            {
-                var listenOptions = new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0))
+        )
+            : this(
+                app,
+                context,
+                options =>
                 {
-                    KestrelServerOptions = options
-                };
+                    var listenOptions = new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0))
+                    {
+                        KestrelServerOptions = options
+                    };
 
-                configureListenOptions(listenOptions);
-                options.CodeBackedListenOptions.Add(listenOptions);
-            },
-            _ => { }
-        ) { }
+                    configureListenOptions(listenOptions);
+                    options.CodeBackedListenOptions.Add(listenOptions);
+                },
+                _ => { }
+            ) { }
 
         public TestServer(
             RequestDelegate app,
             TestServiceContext context,
             Action<KestrelServerOptions> configureKestrel,
             Action<IServiceCollection> configureServices
-        ) {
+        )
+        {
             _app = app;
             Context = context;
             _memoryPool = context.MemoryPoolFactory();
@@ -112,7 +115,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTrans
                             !services.Any(
                                 d => d.ServiceType == typeof(IMultiplexedConnectionListenerFactory)
                             )
-                        ) {
+                        )
+                        {
                             // Mock multiplexed connection listner is added so Kestrel doesn't error
                             // when a HTTP/3 endpoint is configured.
                             services.AddSingleton<IMultiplexedConnectionListenerFactory>(

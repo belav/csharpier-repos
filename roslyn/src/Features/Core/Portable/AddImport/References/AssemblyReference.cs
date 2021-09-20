@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                 bool placeSystemNamespaceFirst,
                 bool allowInHiddenRegions,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var textChanges = await GetTextChangesAsync(
                         document,
                         node,

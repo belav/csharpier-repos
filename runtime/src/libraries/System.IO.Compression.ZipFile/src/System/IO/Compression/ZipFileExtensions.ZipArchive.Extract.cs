@@ -71,7 +71,8 @@ namespace System.IO.Compression
             this ZipArchive source,
             string destinationDirectoryName,
             bool overwriteFiles
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
 

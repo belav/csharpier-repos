@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
         /// <param name="wrapperProviderFactories">List of <see cref="IWrapperProviderFactory"/>.</param>
         public EnumerableWrapperProviderFactory(
             IEnumerable<IWrapperProviderFactory> wrapperProviderFactories
-        ) {
+        )
+        {
             if (wrapperProviderFactories == null)
             {
                 throw new ArgumentNullException(nameof(wrapperProviderFactories));

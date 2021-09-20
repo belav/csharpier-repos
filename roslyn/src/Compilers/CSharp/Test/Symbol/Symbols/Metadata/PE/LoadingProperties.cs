@@ -222,7 +222,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             NamedTypeSymbol innerClass,
             string methodName,
             Symbol interfaceProperty
-        ) {
+        )
+        {
             var @interface = interfaceProperty.ContainingType;
 
             Assert.Equal(1, innerClass.Arity);

@@ -729,7 +729,8 @@ namespace System.Security.Cryptography.Dsa.Tests
             string r,
             string s,
             HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             // Public+Private key
             using (DSA dsa = DSAFactory.Create())
             {

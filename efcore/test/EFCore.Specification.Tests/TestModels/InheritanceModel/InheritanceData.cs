@@ -54,7 +54,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceModel
             IReadOnlyList<Country> countries,
             IReadOnlyList<Drink> drinks,
             IReadOnlyList<Plant> plants
-        ) {
+        )
+        {
             Animals = animals;
             AnimalQueries = animalQueries;
             Countries = countries;

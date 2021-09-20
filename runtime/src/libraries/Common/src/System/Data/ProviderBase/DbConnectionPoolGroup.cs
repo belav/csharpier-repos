@@ -47,7 +47,8 @@ namespace System.Data.ProviderBase
             DbConnectionOptions connectionOptions,
             DbConnectionPoolKey key,
             DbConnectionPoolGroupOptions poolGroupOptions
-        ) {
+        )
+        {
             Debug.Assert(null != connectionOptions, "null connection options");
 
             _connectionOptions = connectionOptions;

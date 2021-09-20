@@ -86,7 +86,8 @@ namespace Microsoft.CodeAnalysis
         internal static DiagnosticDescriptor GetDescriptor(
             int errorCode,
             CommonMessageProvider messageProvider
-        ) {
+        )
+        {
             var defaultSeverity = messageProvider.GetSeverity(errorCode);
             return GetOrCreateDescriptor(errorCode, defaultSeverity, messageProvider);
         }
@@ -95,7 +96,8 @@ namespace Microsoft.CodeAnalysis
             int errorCode,
             DiagnosticSeverity defaultSeverity,
             CommonMessageProvider messageProvider
-        ) {
+        )
+        {
             return ImmutableInterlocked.GetOrAdd(
                 ref s_errorCodeToDescriptorMap,
                 errorCode,
@@ -107,7 +109,8 @@ namespace Microsoft.CodeAnalysis
             int errorCode,
             DiagnosticSeverity defaultSeverity,
             CommonMessageProvider messageProvider
-        ) {
+        )
+        {
             var id = messageProvider.GetIdForErrorCode(errorCode);
             var title = messageProvider.GetTitle(errorCode);
             var description = messageProvider.GetDescription(errorCode);
@@ -456,7 +459,8 @@ namespace Microsoft.CodeAnalysis
 
             if (
                 other != null && other._errorCode == _errorCode && other.GetType() == this.GetType()
-            ) {
+            )
+            {
                 if (_arguments.Length == other._arguments.Length)
                 {
                     result = true;

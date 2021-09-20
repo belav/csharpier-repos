@@ -34,7 +34,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             OptionKey optionKey,
             object oldValue,
             object currentValue
-        ) {
+        )
+        {
             return KeyValueLogMessage.Create(
                 m =>
                 {

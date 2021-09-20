@@ -20,7 +20,8 @@ namespace Microsoft.Extensions.Primitives
         public System.IDisposable RegisterChangeCallback(
             System.Action<object> callback,
             object state
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -29,14 +30,16 @@ namespace Microsoft.Extensions.Primitives
         public static System.IDisposable OnChange(
             System.Func<Microsoft.Extensions.Primitives.IChangeToken> changeTokenProducer,
             System.Action changeTokenConsumer
-        ) {
+        )
+        {
             throw null;
         }
         public static System.IDisposable OnChange<TState>(
             System.Func<Microsoft.Extensions.Primitives.IChangeToken> changeTokenProducer,
             System.Action<TState> changeTokenConsumer,
             TState state
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -60,7 +63,8 @@ namespace Microsoft.Extensions.Primitives
         public System.IDisposable RegisterChangeCallback(
             System.Action<object> callback,
             object state
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -69,7 +73,8 @@ namespace Microsoft.Extensions.Primitives
         public static System.Text.StringBuilder Append(
             this System.Text.StringBuilder builder,
             Microsoft.Extensions.Primitives.StringSegment segment
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -130,7 +135,8 @@ namespace Microsoft.Extensions.Primitives
             Microsoft.Extensions.Primitives.StringSegment a,
             Microsoft.Extensions.Primitives.StringSegment b,
             System.StringComparison comparisonType
-        ) {
+        )
+        {
             throw null;
         }
         public bool EndsWith(string text, System.StringComparison comparisonType)
@@ -145,13 +151,15 @@ namespace Microsoft.Extensions.Primitives
             Microsoft.Extensions.Primitives.StringSegment a,
             Microsoft.Extensions.Primitives.StringSegment b,
             System.StringComparison comparisonType
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(
             Microsoft.Extensions.Primitives.StringSegment other,
             System.StringComparison comparisonType
-        ) {
+        )
+        {
             throw null;
         }
         public override bool Equals(object obj)
@@ -205,17 +213,20 @@ namespace Microsoft.Extensions.Primitives
         public static bool operator ==(
             Microsoft.Extensions.Primitives.StringSegment left,
             Microsoft.Extensions.Primitives.StringSegment right
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.ReadOnlyMemory<char>(
             Microsoft.Extensions.Primitives.StringSegment segment
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.ReadOnlySpan<char>(
             Microsoft.Extensions.Primitives.StringSegment segment
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator Microsoft.Extensions.Primitives.StringSegment(string value)
@@ -225,7 +236,8 @@ namespace Microsoft.Extensions.Primitives
         public static bool operator !=(
             Microsoft.Extensions.Primitives.StringSegment left,
             Microsoft.Extensions.Primitives.StringSegment right
-        ) {
+        )
+        {
             throw null;
         }
         public Microsoft.Extensions.Primitives.StringTokenizer Split(char[] chars)
@@ -285,13 +297,15 @@ namespace Microsoft.Extensions.Primitives
         public int Compare(
             Microsoft.Extensions.Primitives.StringSegment x,
             Microsoft.Extensions.Primitives.StringSegment y
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(
             Microsoft.Extensions.Primitives.StringSegment x,
             Microsoft.Extensions.Primitives.StringSegment y
-        ) {
+        )
+        {
             throw null;
         }
         public int GetHashCode(Microsoft.Extensions.Primitives.StringSegment obj)
@@ -308,7 +322,8 @@ namespace Microsoft.Extensions.Primitives
         public StringTokenizer(
             Microsoft.Extensions.Primitives.StringSegment value,
             char[] separators
-        ) {
+        )
+        {
             throw null;
         }
         public StringTokenizer(string value, char[] separators)
@@ -396,19 +411,22 @@ namespace Microsoft.Extensions.Primitives
         public static Microsoft.Extensions.Primitives.StringValues Concat(
             Microsoft.Extensions.Primitives.StringValues values1,
             Microsoft.Extensions.Primitives.StringValues values2
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Primitives.StringValues Concat(
             in Microsoft.Extensions.Primitives.StringValues values,
             string value
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Primitives.StringValues Concat(
             string value,
             in Microsoft.Extensions.Primitives.StringValues values
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(Microsoft.Extensions.Primitives.StringValues other)
@@ -418,7 +436,8 @@ namespace Microsoft.Extensions.Primitives
         public static bool Equals(
             Microsoft.Extensions.Primitives.StringValues left,
             Microsoft.Extensions.Primitives.StringValues right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool Equals(Microsoft.Extensions.Primitives.StringValues left, string right)
@@ -464,43 +483,50 @@ namespace Microsoft.Extensions.Primitives
         public static bool operator ==(
             Microsoft.Extensions.Primitives.StringValues left,
             Microsoft.Extensions.Primitives.StringValues right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator ==(
             Microsoft.Extensions.Primitives.StringValues left,
             object right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator ==(
             Microsoft.Extensions.Primitives.StringValues left,
             string right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator ==(
             Microsoft.Extensions.Primitives.StringValues left,
             string[] right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator ==(
             object left,
             Microsoft.Extensions.Primitives.StringValues right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator ==(
             string left,
             Microsoft.Extensions.Primitives.StringValues right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator ==(
             string[] left,
             Microsoft.Extensions.Primitives.StringValues right
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator string(Microsoft.Extensions.Primitives.StringValues values)
@@ -517,49 +543,57 @@ namespace Microsoft.Extensions.Primitives
         }
         public static implicit operator Microsoft.Extensions.Primitives.StringValues(
             string[] values
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             Microsoft.Extensions.Primitives.StringValues left,
             Microsoft.Extensions.Primitives.StringValues right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             Microsoft.Extensions.Primitives.StringValues left,
             object right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             Microsoft.Extensions.Primitives.StringValues left,
             string right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             Microsoft.Extensions.Primitives.StringValues left,
             string[] right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             object left,
             Microsoft.Extensions.Primitives.StringValues right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             string left,
             Microsoft.Extensions.Primitives.StringValues right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             string[] left,
             Microsoft.Extensions.Primitives.StringValues right
-        ) {
+        )
+        {
             throw null;
         }
         void System.Collections.Generic.ICollection<System.String>.Add(string item) { }

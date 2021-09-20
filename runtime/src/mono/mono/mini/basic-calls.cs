@@ -122,7 +122,8 @@ class Tests
         int h,
         int i,
         int j
-    ) {
+    )
+    {
         return a + b + c + d + e + f + g + h + i + j;
     }
 
@@ -175,7 +176,8 @@ class Tests
         sbyte h2,
         sbyte h3,
         sbyte h4
-    ) {
+    )
+    {
         return (int)(a + b + c + d + e + f + g + h1 + h2 + h3 + h4);
     }
 
@@ -202,7 +204,8 @@ class Tests
         double e,
         float f,
         double g
-    ) {
+    )
+    {
         return (int)(a + b + c + d + e + f + g);
     }
 
@@ -222,7 +225,8 @@ class Tests
         float h,
         float i,
         float j
-    ) {
+    )
+    {
         return a + b + c + d + e + f + g + h + i + j;
     }
 
@@ -253,7 +257,8 @@ class Tests
         ref long e,
         ref int f,
         ref long g
-    ) {
+    )
+    {
         return (int)(a + b + c + d + e + f + g);
     }
 
@@ -285,7 +290,8 @@ class Tests
         ref double e,
         ref float f,
         ref double g
-    ) {
+    )
+    {
         return (int)(a + b + c + d + e + f + g);
     }
 
@@ -297,7 +303,8 @@ class Tests
         double e,
         float f,
         double g
-    ) {
+    )
+    {
         return pass_byref_floats_doubles(ref a, ref b, ref c, ref d, ref e, ref f, ref g);
     }
 
@@ -452,7 +459,8 @@ class Tests
         object o7,
         bool foo,
         bool bar
-    ) {
+    )
+    {
         bool res1 = bar || foo;
         bool res2 = bar || foo;
         return res1 | res2;
@@ -468,7 +476,8 @@ class Tests
         object o7,
         sbyte foo,
         sbyte bar
-    ) {
+    )
+    {
         int res1 = bar + foo;
         int res2 = bar + foo;
         return res1 + res2;

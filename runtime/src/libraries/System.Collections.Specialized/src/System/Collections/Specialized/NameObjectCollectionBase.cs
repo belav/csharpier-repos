@@ -49,10 +49,8 @@ namespace System.Collections.Specialized
             Reset();
         }
 
-        protected NameObjectCollectionBase(
-            int capacity,
-            IEqualityComparer? equalityComparer
-        ) : this(equalityComparer)
+        protected NameObjectCollectionBase(int capacity, IEqualityComparer? equalityComparer)
+            : this(equalityComparer)
         {
             Reset(capacity);
         }
@@ -69,7 +67,8 @@ namespace System.Collections.Specialized
             int capacity,
             IHashCodeProvider? hashProvider,
             IComparer? comparer
-        ) {
+        )
+        {
             _keyComparer = new CompatibleComparer(hashProvider, comparer);
             Reset(capacity);
         }

@@ -24,7 +24,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 
         public LinkGenerationTests(
             MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting> fixture
-        ) {
+        )
+        {
             Client = fixture.CreateDefaultClient();
         }
 
@@ -55,7 +56,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task GeneratedLinksWithActionResults_AreRelativeLinks_WhenSetOnLocationHeader(
             string url,
             string expected
-        ) {
+        )
+        {
             // Act
             var response = await Client.GetAsync(url);
             var responseContent = await response.Content.ReadAsStringAsync();

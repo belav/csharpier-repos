@@ -65,7 +65,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration
                         node.NodeType != ExpressionType.Constant
                         || ((ConstantExpression)node)?.Value != null
                     )
-                ) {
+                )
+                {
                     FoundExpressions.Add(node);
                 }
 

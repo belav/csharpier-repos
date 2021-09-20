@@ -184,7 +184,8 @@ namespace System.Data
         internal override bool CanBeRemovedFromCollection(
             ConstraintCollection constraints,
             bool fThrowException
-        ) {
+        )
+        {
             if (Equals(constraints.Table._primaryKey))
             {
                 Debug.Assert(
@@ -203,7 +204,8 @@ namespace System.Data
                 );
                 cs.GetNext();
 
-            ) {
+            )
+            {
                 ForeignKeyConstraint constraint = cs.GetForeignKeyConstraint();
                 if (!_key.ColumnsEqual(constraint.ParentKey))
                     continue;
@@ -267,7 +269,8 @@ namespace System.Data
                     || action == DataRowAction.Change
                     || (action == DataRowAction.Rollback && row._tempRecord != -1)
                 )
-            ) {
+            )
+            {
                 if (row.HaveValuesChanged(ColumnsReference))
                 {
                     if (ConstraintIndex.IsKeyRecordInIndex(row.GetDefaultRecord()))

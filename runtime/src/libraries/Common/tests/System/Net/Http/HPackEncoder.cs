@@ -53,7 +53,8 @@ namespace System.Net.Test.Common
             string value,
             HPackFlags flags,
             Span<byte> headerBlock
-        ) {
+        )
+        {
             Debug.Assert(nameIdx > 0);
             return EncodeHeaderImpl(nameIdx, null, value, valueEncoding: null, flags, headerBlock);
         }
@@ -70,7 +71,8 @@ namespace System.Net.Test.Common
             string value,
             HPackFlags flags,
             Span<byte> headerBlock
-        ) {
+        )
+        {
             return EncodeHeader(name, value, valueEncoding: null, flags, headerBlock);
         }
 
@@ -80,7 +82,8 @@ namespace System.Net.Test.Common
             Encoding valueEncoding,
             HPackFlags flags,
             Span<byte> headerBlock
-        ) {
+        )
+        {
             return EncodeHeaderImpl(0, name, value, valueEncoding, flags, headerBlock);
         }
 
@@ -91,7 +94,8 @@ namespace System.Net.Test.Common
             Encoding valueEncoding,
             HPackFlags flags,
             Span<byte> headerBlock
-        ) {
+        )
+        {
             const HPackFlags IndexingMask =
                 HPackFlags.NeverIndexed | HPackFlags.NewIndexed | HPackFlags.WithoutIndexing;
 
@@ -151,7 +155,8 @@ namespace System.Net.Test.Common
             Encoding valueEncoding,
             Span<byte> headerBlock,
             bool huffmanEncode
-        ) {
+        )
+        {
             byte[] data = (valueEncoding ?? Encoding.ASCII).GetBytes(value);
             byte prefix;
 
@@ -185,7 +190,8 @@ namespace System.Net.Test.Common
             byte prefix,
             byte prefixMask,
             Span<byte> headerBlock
-        ) {
+        )
+        {
             byte prefixLimit = (byte)(~prefixMask);
 
             if (value < prefixLimit)

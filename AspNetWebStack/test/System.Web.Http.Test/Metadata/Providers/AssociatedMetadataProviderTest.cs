@@ -330,7 +330,8 @@ namespace System.Web.Http.Metadata.Providers
                 Type containerType,
                 Type modelType,
                 string propertyName
-            ) {
+            )
+            {
                 CreateMetadataPrototypeLog.Add(
                     new CreateMetadataPrototypeParams
                     {
@@ -347,7 +348,8 @@ namespace System.Web.Http.Metadata.Providers
             protected override ModelMetadata CreateMetadataFromPrototype(
                 ModelMetadata prototype,
                 Func<object> modelAccessor
-            ) {
+            )
+            {
                 CreateMetadataFromPrototypeLog.Add(
                     new CreateMetadataFromPrototypeParams
                     {

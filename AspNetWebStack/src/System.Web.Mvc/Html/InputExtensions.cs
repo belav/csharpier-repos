@@ -25,7 +25,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper htmlHelper,
             string name,
             bool isChecked
-        ) {
+        )
+        {
             return CheckBox(htmlHelper, name, isChecked, htmlAttributes: (object)null);
         }
 
@@ -34,7 +35,8 @@ namespace System.Web.Mvc.Html
             string name,
             bool isChecked,
             object htmlAttributes
-        ) {
+        )
+        {
             return CheckBox(
                 htmlHelper,
                 name,
@@ -47,7 +49,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper htmlHelper,
             string name,
             object htmlAttributes
-        ) {
+        )
+        {
             return CheckBox(
                 htmlHelper,
                 name,
@@ -59,7 +62,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper htmlHelper,
             string name,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             return CheckBoxHelper(
                 htmlHelper,
                 metadata: null,
@@ -74,7 +78,8 @@ namespace System.Web.Mvc.Html
             string name,
             bool isChecked,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             return CheckBoxHelper(
                 htmlHelper,
                 metadata: null,
@@ -92,7 +97,8 @@ namespace System.Web.Mvc.Html
         public static MvcHtmlString CheckBoxFor<TModel>(
             this HtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, bool>> expression
-        ) {
+        )
+        {
             return CheckBoxFor(htmlHelper, expression, htmlAttributes: null);
         }
 
@@ -105,7 +111,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, bool>> expression,
             object htmlAttributes
-        ) {
+        )
+        {
             return CheckBoxFor(
                 htmlHelper,
                 expression,
@@ -122,7 +129,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, bool>> expression,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             if (expression == null)
             {
                 throw new ArgumentNullException("expression");
@@ -157,7 +165,8 @@ namespace System.Web.Mvc.Html
             string name,
             bool? isChecked,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             RouteValueDictionary attributes = ToRouteValueDictionary(htmlAttributes);
 
             bool explicitValue = isChecked.HasValue;
@@ -198,7 +207,8 @@ namespace System.Web.Mvc.Html
             string name,
             object value,
             object htmlAttributes
-        ) {
+        )
+        {
             return Hidden(
                 htmlHelper,
                 name,
@@ -212,7 +222,8 @@ namespace System.Web.Mvc.Html
             string name,
             object value,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             return HiddenHelper(
                 htmlHelper,
                 metadata: null,
@@ -231,7 +242,8 @@ namespace System.Web.Mvc.Html
         public static MvcHtmlString HiddenFor<TModel, TProperty>(
             this HtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TProperty>> expression
-        ) {
+        )
+        {
             return HiddenFor(htmlHelper, expression, (IDictionary<string, object>)null);
         }
 
@@ -244,7 +256,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TProperty>> expression,
             object htmlAttributes
-        ) {
+        )
+        {
             return HiddenFor(
                 htmlHelper,
                 expression,
@@ -261,7 +274,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TProperty>> expression,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             ModelMetadata metadata = ModelMetadata.FromLambdaExpression(
                 expression,
                 htmlHelper.ViewData
@@ -283,7 +297,8 @@ namespace System.Web.Mvc.Html
             bool useViewData,
             string expression,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             Binary binaryValue = value as Binary;
             if (binaryValue != null)
             {
@@ -328,7 +343,8 @@ namespace System.Web.Mvc.Html
             string name,
             object value,
             object htmlAttributes
-        ) {
+        )
+        {
             return Password(
                 htmlHelper,
                 name,
@@ -342,7 +358,8 @@ namespace System.Web.Mvc.Html
             string name,
             object value,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             return PasswordHelper(
                 htmlHelper,
                 metadata: null,
@@ -360,7 +377,8 @@ namespace System.Web.Mvc.Html
         public static MvcHtmlString PasswordFor<TModel, TProperty>(
             this HtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TProperty>> expression
-        ) {
+        )
+        {
             return PasswordFor(htmlHelper, expression, htmlAttributes: null);
         }
 
@@ -373,7 +391,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TProperty>> expression,
             object htmlAttributes
-        ) {
+        )
+        {
             return PasswordFor(
                 htmlHelper,
                 expression,
@@ -395,7 +414,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TProperty>> expression,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             if (expression == null)
             {
                 throw new ArgumentNullException("expression");
@@ -416,7 +436,8 @@ namespace System.Web.Mvc.Html
             string name,
             object value,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             return InputHelper(
                 htmlHelper,
                 InputType.Password,
@@ -438,7 +459,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper htmlHelper,
             string name,
             object value
-        ) {
+        )
+        {
             return RadioButton(htmlHelper, name, value, htmlAttributes: (object)null);
         }
 
@@ -447,7 +469,8 @@ namespace System.Web.Mvc.Html
             string name,
             object value,
             object htmlAttributes
-        ) {
+        )
+        {
             return RadioButton(
                 htmlHelper,
                 name,
@@ -461,7 +484,8 @@ namespace System.Web.Mvc.Html
             string name,
             object value,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             // Determine whether or not to render the checked attribute based on the contents of ViewData.
             string valueString = Convert.ToString(value, CultureInfo.CurrentCulture);
             bool isChecked =
@@ -500,7 +524,8 @@ namespace System.Web.Mvc.Html
             string name,
             object value,
             bool isChecked
-        ) {
+        )
+        {
             return RadioButton(htmlHelper, name, value, isChecked, htmlAttributes: (object)null);
         }
 
@@ -510,7 +535,8 @@ namespace System.Web.Mvc.Html
             object value,
             bool isChecked,
             object htmlAttributes
-        ) {
+        )
+        {
             return RadioButton(
                 htmlHelper,
                 name,
@@ -526,7 +552,8 @@ namespace System.Web.Mvc.Html
             object value,
             bool isChecked,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             if (value == null)
             {
                 throw new ArgumentNullException("value");
@@ -558,7 +585,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TProperty>> expression,
             object value
-        ) {
+        )
+        {
             return RadioButtonFor(htmlHelper, expression, value, htmlAttributes: null);
         }
 
@@ -572,7 +600,8 @@ namespace System.Web.Mvc.Html
             Expression<Func<TModel, TProperty>> expression,
             object value,
             object htmlAttributes
-        ) {
+        )
+        {
             return RadioButtonFor(
                 htmlHelper,
                 expression,
@@ -591,7 +620,8 @@ namespace System.Web.Mvc.Html
             Expression<Func<TModel, TProperty>> expression,
             object value,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             ModelMetadata metadata = ModelMetadata.FromLambdaExpression(
                 expression,
                 htmlHelper.ViewData
@@ -616,7 +646,8 @@ namespace System.Web.Mvc.Html
             object value,
             bool? isChecked,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             if (value == null)
             {
                 throw new ArgumentNullException("value");
@@ -676,7 +707,8 @@ namespace System.Web.Mvc.Html
             string name,
             object value,
             string format
-        ) {
+        )
+        {
             return TextBox(htmlHelper, name, value, format, htmlAttributes: (object)null);
         }
 
@@ -685,7 +717,8 @@ namespace System.Web.Mvc.Html
             string name,
             object value,
             object htmlAttributes
-        ) {
+        )
+        {
             return TextBox(htmlHelper, name, value, format: null, htmlAttributes: htmlAttributes);
         }
 
@@ -695,7 +728,8 @@ namespace System.Web.Mvc.Html
             object value,
             string format,
             object htmlAttributes
-        ) {
+        )
+        {
             return TextBox(
                 htmlHelper,
                 name,
@@ -710,7 +744,8 @@ namespace System.Web.Mvc.Html
             string name,
             object value,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             return TextBox(htmlHelper, name, value, format: null, htmlAttributes: htmlAttributes);
         }
 
@@ -720,7 +755,8 @@ namespace System.Web.Mvc.Html
             object value,
             string format,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             return InputHelper(
                 htmlHelper,
                 InputType.Text,
@@ -744,7 +780,8 @@ namespace System.Web.Mvc.Html
         public static MvcHtmlString TextBoxFor<TModel, TProperty>(
             this HtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TProperty>> expression
-        ) {
+        )
+        {
             return htmlHelper.TextBoxFor(expression, format: null);
         }
 
@@ -757,7 +794,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TProperty>> expression,
             string format
-        ) {
+        )
+        {
             return htmlHelper.TextBoxFor(expression, format, (IDictionary<string, object>)null);
         }
 
@@ -770,7 +808,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TProperty>> expression,
             object htmlAttributes
-        ) {
+        )
+        {
             return htmlHelper.TextBoxFor(expression, format: null, htmlAttributes: htmlAttributes);
         }
 
@@ -784,7 +823,8 @@ namespace System.Web.Mvc.Html
             Expression<Func<TModel, TProperty>> expression,
             string format,
             object htmlAttributes
-        ) {
+        )
+        {
             return htmlHelper.TextBoxFor(
                 expression,
                 format: format,
@@ -801,7 +841,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TProperty>> expression,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             return htmlHelper.TextBoxFor(expression, format: null, htmlAttributes: htmlAttributes);
         }
 
@@ -815,7 +856,8 @@ namespace System.Web.Mvc.Html
             Expression<Func<TModel, TProperty>> expression,
             string format,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             ModelMetadata metadata = ModelMetadata.FromLambdaExpression(
                 expression,
                 htmlHelper.ViewData
@@ -837,7 +879,8 @@ namespace System.Web.Mvc.Html
             string expression,
             string format,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             return InputHelper(
                 htmlHelper,
                 InputType.Text,
@@ -867,7 +910,8 @@ namespace System.Web.Mvc.Html
             bool isExplicitValue,
             string format,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             string fullName = htmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(
                 name
             );
@@ -985,7 +1029,8 @@ namespace System.Web.Mvc.Html
 
         private static RouteValueDictionary ToRouteValueDictionary(
             IDictionary<string, object> dictionary
-        ) {
+        )
+        {
             return dictionary == null
               ? new RouteValueDictionary()
               : new RouteValueDictionary(dictionary);

@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             IImmutableSet<Document>? documents,
             FindReferencesSearchOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Look for documents that both contain an explicit cast in them as well as a reference to the type in the
             // explicit conversion.  i.e. if we have `public static explicit operator Goo(Bar b);` we want to find files
             // both with `Goo` `and `(...)` in them as we're looking for cases of `(Goo)...`.
@@ -81,7 +82,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             SemanticModel semanticModel,
             FindReferencesSearchOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
 
             return FindReferencesInDocumentAsync(

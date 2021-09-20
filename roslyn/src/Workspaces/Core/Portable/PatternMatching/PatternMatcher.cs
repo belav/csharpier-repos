@@ -50,7 +50,8 @@ namespace Microsoft.CodeAnalysis.PatternMatching
             bool includeMatchedSpans,
             CultureInfo culture,
             bool allowFuzzyMatching = false
-        ) {
+        )
+        {
             culture ??= CultureInfo.CurrentCulture;
 
             _compareInfo = culture.CompareInfo;
@@ -67,7 +68,8 @@ namespace Microsoft.CodeAnalysis.PatternMatching
             CultureInfo culture = null,
             bool includeMatchedSpans = false,
             bool allowFuzzyMatching = false
-        ) {
+        )
+        {
             return new SimplePatternMatcher(
                 pattern,
                 culture,
@@ -81,7 +83,8 @@ namespace Microsoft.CodeAnalysis.PatternMatching
             char[] containerSplitCharacters,
             CultureInfo culture = null,
             bool allowFuzzyMatching = false
-        ) {
+        )
+        {
             return new ContainerPatternMatcher(
                 patternParts,
                 containerSplitCharacters,
@@ -94,7 +97,8 @@ namespace Microsoft.CodeAnalysis.PatternMatching
             string pattern,
             CultureInfo culture = null,
             bool allowFuzzyMatching = false
-        ) {
+        )
+        {
             return CreateContainerPatternMatcher(
                 pattern.Split(s_dotCharacterArray, StringSplitOptions.RemoveEmptyEntries),
                 s_dotCharacterArray,
@@ -139,7 +143,8 @@ namespace Microsoft.CodeAnalysis.PatternMatching
             TextChunk patternChunk,
             bool punctuationStripped,
             bool fuzzyMatch
-        ) {
+        )
+        {
             return fuzzyMatch
               ? FuzzyMatchPatternChunk(candidate, patternChunk, punctuationStripped)
               : NonFuzzyMatchPatternChunk(candidate, patternChunk, punctuationStripped);
@@ -149,7 +154,8 @@ namespace Microsoft.CodeAnalysis.PatternMatching
             string candidate,
             TextChunk patternChunk,
             bool punctuationStripped
-        ) {
+        )
+        {
             if (patternChunk.SimilarityChecker.AreSimilar(candidate))
             {
                 return new PatternMatch(
@@ -167,7 +173,8 @@ namespace Microsoft.CodeAnalysis.PatternMatching
             string candidate,
             TextChunk patternChunk,
             bool punctuationStripped
-        ) {
+        )
+        {
             var candidateLength = candidate.Length;
 
             var caseInsensitiveIndex = _compareInfo.IndexOf(
@@ -289,7 +296,8 @@ namespace Microsoft.CodeAnalysis.PatternMatching
                                     patternChunk.Text,
                                     CompareOptions.IgnoreCase
                                 )
-                            ) {
+                            )
+                            {
                                 return new PatternMatch(
                                     PatternMatchKind.StartOfWordSubstring,
                                     punctuationStripped,
@@ -399,7 +407,8 @@ namespace Microsoft.CodeAnalysis.PatternMatching
             PatternSegment segment,
             ArrayBuilder<PatternMatch> matches,
             bool fuzzyMatch
-        ) {
+        )
+        {
             if (fuzzyMatch && !_allowFuzzyMatching)
             {
                 return false;
@@ -504,7 +513,8 @@ namespace Microsoft.CodeAnalysis.PatternMatching
             string pattern,
             TextSpan patternPart,
             CompareOptions compareOptions
-        ) {
+        )
+        {
             if (patternPart.Length > candidatePart.Length)
             {
                 // Pattern part is longer than the candidate part. There can never be a match.
@@ -550,7 +560,8 @@ namespace Microsoft.CodeAnalysis.PatternMatching
             bool punctuationStripped,
             bool isLowercase,
             ArrayBuilder<TextSpan> candidateHumps
-        ) {
+        )
+        {
             if (isLowercase)
             {
                 //   e) If the word was entirely lowercase, then attempt a special lower cased camel cased
@@ -621,7 +632,8 @@ namespace Microsoft.CodeAnalysis.PatternMatching
             ArrayBuilder<TextSpan> candidateHumps,
             TextChunk patternChunk,
             out ImmutableArray<TextSpan> matchedSpans
-        ) {
+        )
+        {
             var matcher = new AllLowerCamelCaseMatcher(
                 _includeMatchedSpans,
                 candidate,
@@ -638,7 +650,8 @@ namespace Microsoft.CodeAnalysis.PatternMatching
             TextChunk patternChunk,
             CompareOptions compareOption,
             out ImmutableArray<TextSpan> matchedSpans
-        ) {
+        )
+        {
             var patternHumps = patternChunk.PatternHumps;
 
             // Note: we may have more pattern parts than candidate parts.  This is because multiple
@@ -706,7 +719,8 @@ namespace Microsoft.CodeAnalysis.PatternMatching
                             || !char.IsUpper(
                                 patternChunk.Text[patternHumps[currentPatternHump].Start]
                             )
-                        ) {
+                        )
+                        {
                             break;
                         }
                     }
@@ -719,7 +733,8 @@ namespace Microsoft.CodeAnalysis.PatternMatching
                             patternChunkCharacterSpan,
                             compareOption
                         )
-                    ) {
+                    )
+                    {
                         break;
                     }
 

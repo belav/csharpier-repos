@@ -43,7 +43,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
             RemoveUnusedReferencesDialogProvider unusedReferenceDialogProvider,
             IUIThreadOperationExecutor threadOperationExecutor,
             VisualStudioWorkspace workspace
-        ) {
+        )
+        {
             _unusedReferenceDialogProvider = unusedReferenceDialogProvider;
             _threadOperationExecutor = threadOperationExecutor;
             _workspace = workspace;
@@ -123,7 +124,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
                     _serviceProvider,
                     out var hierarchy
                 )
-            ) {
+            )
+            {
                 Solution? solution = null;
                 string? projectFilePath = null;
                 ImmutableArray<ReferenceUpdate> referenceUpdates = default;
@@ -151,7 +153,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
                     solution is null
                     || projectFilePath is not string { Length: > 0 }
                     || referenceUpdates.IsEmpty
-                ) {
+                )
+                {
                     MessageDialog.Show(
                         ServicesVSResources.Remove_Unused_References,
                         ServicesVSResources.No_unused_references_were_found,
@@ -215,14 +218,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
         private (Solution?, string?, ImmutableArray<ReferenceUpdate>) GetUnusedReferencesForProjectHierarchy(
             IVsHierarchy projectHierarchy,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 !TryGetPropertyValue(
                     projectHierarchy,
                     ProjectAssetsFilePropertyName,
                     out var projectAssetsFile
                 )
-            ) {
+            )
+            {
                 return (null, null, ImmutableArray<ReferenceUpdate>.Empty);
             }
 
@@ -249,7 +254,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
             string projectFilePath,
             string projectAssetsFile,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var unusedReferences = ThreadHelper.JoinableTaskFactory.Run(
                 async () =>
                 {
@@ -291,7 +297,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
             string projectFilePath,
             ImmutableArray<ReferenceUpdate> referenceUpdates,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ThreadHelper.JoinableTaskFactory.Run(
                 () =>
                     UnusedReferencesRemover.UpdateReferencesAsync(
@@ -307,7 +314,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
             IVsHierarchy hierarchy,
             string propertyName,
             [NotNullWhen(returnValue: true)] out string? propertyValue
-        ) {
+        )
+        {
             if (hierarchy is not IVsBuildPropertyStorage storage)
             {
                 propertyValue = null;

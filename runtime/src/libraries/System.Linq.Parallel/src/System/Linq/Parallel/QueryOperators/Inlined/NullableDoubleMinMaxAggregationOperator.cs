@@ -31,10 +31,8 @@ namespace System.Linq.Parallel
         // Constructs a new instance of a min/max associative operator.
         //
 
-        internal NullableDoubleMinMaxAggregationOperator(
-            IEnumerable<double?> child,
-            int sign
-        ) : base(child)
+        internal NullableDoubleMinMaxAggregationOperator(IEnumerable<double?> child, int sign)
+            : base(child)
         {
             Debug.Assert(sign == -1 || sign == 1, "invalid sign");
             _sign = sign;
@@ -59,7 +57,8 @@ namespace System.Linq.Parallel
                     ParallelMergeOptions.FullyBuffered,
                     true
                 )
-            ) {
+            )
+            {
                 // Just return null right away for empty results.
                 if (!enumerator.MoveNext())
                 {
@@ -80,7 +79,8 @@ namespace System.Linq.Parallel
                             best == null
                             || current < best
                             || double.IsNaN(current.GetValueOrDefault())
-                        ) {
+                        )
+                        {
                             best = current;
                         }
                     }
@@ -94,7 +94,8 @@ namespace System.Linq.Parallel
                             continue;
                         if (
                             best == null || current > best || double.IsNaN(best.GetValueOrDefault())
-                        ) {
+                        )
+                        {
                             best = current;
                         }
                     }
@@ -114,7 +115,8 @@ namespace System.Linq.Parallel
             QueryOperatorEnumerator<double?, TKey> source,
             object? sharedData,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return new NullableDoubleMinMaxAggregationOperatorEnumerator<TKey>(
                 source,
                 index,
@@ -179,7 +181,8 @@ namespace System.Linq.Parallel
                                 currentElement == null
                                 || elem < currentElement
                                 || double.IsNaN(elem.GetValueOrDefault())
-                            ) {
+                            )
+                            {
                                 currentElement = elem;
                             }
                         }
@@ -198,7 +201,8 @@ namespace System.Linq.Parallel
                                 currentElement == null
                                 || elem > currentElement
                                 || double.IsNaN(currentElement.GetValueOrDefault())
-                            ) {
+                            )
+                            {
                                 currentElement = elem;
                             }
                         }

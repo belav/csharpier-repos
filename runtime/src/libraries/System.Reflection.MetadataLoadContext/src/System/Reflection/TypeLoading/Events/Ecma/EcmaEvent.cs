@@ -80,7 +80,8 @@ namespace System.Reflection.TypeLoading.Ecma
                     nonPublic
                     || (def.Attributes & MethodAttributes.MemberAccessMask)
                         == MethodAttributes.Public
-                ) {
+                )
+                {
                     MethodInfo methodInfo = others[i].ToMethod(
                         GetRoDeclaringType(),
                         GetRoDeclaringType()

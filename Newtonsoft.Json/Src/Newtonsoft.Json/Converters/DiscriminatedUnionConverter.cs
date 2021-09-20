@@ -72,7 +72,8 @@ namespace Newtonsoft.Json.Converters
                 PropertyInfo[] fields,
                 FSharpFunction fieldReader,
                 FSharpFunction constructor
-            ) {
+            )
+            {
                 Tag = tag;
                 Name = name;
                 Fields = fields;
@@ -201,7 +202,8 @@ namespace Newtonsoft.Json.Converters
             Type objectType,
             object? existingValue,
             JsonSerializer serializer
-        ) {
+        )
+        {
             if (reader.TokenType == JsonToken.Null)
             {
                 return null;
@@ -223,7 +225,8 @@ namespace Newtonsoft.Json.Converters
                         CasePropertyName,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     reader.ReadAndAssert();
 
                     Union union = UnionCache.Get(objectType);
@@ -249,7 +252,8 @@ namespace Newtonsoft.Json.Converters
                         FieldsPropertyName,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     reader.ReadAndAssert();
                     if (reader.TokenType != JsonToken.StartArray)
                     {

@@ -44,7 +44,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
             ILoggerFactory loggerFactory,
             bool autoNegotiate = true,
             bool handleFirstPoll = true
-        ) {
+        )
+        {
             _logger =
                 loggerFactory?.CreateLogger<TestHttpMessageHandler>()
                 ?? NullLoggerFactory.Instance.CreateLogger<TestHttpMessageHandler>();
@@ -81,10 +82,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
             }
         }
 
-        public TestHttpMessageHandler(
-            bool autoNegotiate = true,
-            bool handleFirstPoll = true
-        ) : this(NullLoggerFactory.Instance, autoNegotiate, handleFirstPoll) { }
+        public TestHttpMessageHandler(bool autoNegotiate = true, bool handleFirstPoll = true)
+            : this(NullLoggerFactory.Instance, autoNegotiate, handleFirstPoll) { }
 
         protected override void Dispose(bool disposing)
         {
@@ -95,7 +94,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
         protected override async Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _logger.LogDebug(
                 "Calling handlers for a '{Method}' going to '{Url}'.",
                 request.Method,
@@ -155,7 +155,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                     if (
                         request.Method.Equals(HttpMethod.Delete)
                         && request.RequestUri.PathAndQuery.Contains("id=")
-                    ) {
+                    )
+                    {
                         deleteCts.Cancel();
                         return Task.FromResult(
                             ResponseUtils.CreateResponse(HttpStatusCode.Accepted)
@@ -176,7 +177,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                 CancellationToken,
                 Task<HttpResponseMessage>
             > handler
-        ) {
+        )
+        {
             void OnRequestCore(Func<RequestDelegate, RequestDelegate> middleware)
             {
                 _middleware.Add(middleware);
@@ -230,7 +232,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
             HttpMethod method,
             string pathAndQuery,
             Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> handler
-        ) {
+        )
+        {
             OnRequest(
                 (request, next, cancellationToken) =>
                 {
@@ -238,7 +241,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                     if (
                         request.Method.Equals(method)
                         && string.Equals(request.RequestUri.PathAndQuery, pathAndQuery)
-                    ) {
+                    )
+                    {
                         return handler(request, cancellationToken);
                     }
                     else
@@ -258,7 +262,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
 
         public void OnNegotiate(
             Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> handler
-        ) {
+        )
+        {
             OnRequest(
                 (request, next, cancellationToken) =>
                 {
@@ -304,13 +309,15 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
 
         public void OnLongPoll(
             Func<HttpRequestMessage, CancellationToken, HttpResponseMessage> handler
-        ) {
+        )
+        {
             OnLongPoll((request, token) => Task.FromResult(handler(request, token)));
         }
 
         public void OnLongPoll(
             Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> handler
-        ) {
+        )
+        {
             OnRequest(
                 (request, next, cancellationToken) =>
                 {
@@ -352,7 +359,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
         private Task<HttpResponseMessage> BaseHandler(
             HttpRequestMessage request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return Task.FromException<HttpResponseMessage>(
                 new InvalidOperationException(
                     $"Http endpoint not implemented: {request.Method} {request.RequestUri}"

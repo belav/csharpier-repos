@@ -166,7 +166,8 @@ namespace Microsoft.AspNetCore.Routing
             if (
                 !string.IsNullOrEmpty(url)
                 && (_options.LowercaseUrls || _options.AppendTrailingSlash)
-            ) {
+            )
+            {
                 var indexOfSeparator = url.IndexOfAny(UrlQueryDelimiters);
                 var urlWithoutQueryString = url;
                 var queryString = string.Empty;
@@ -190,7 +191,8 @@ namespace Microsoft.AspNetCore.Routing
                 if (
                     _options.AppendTrailingSlash
                     && !urlWithoutQueryString.EndsWith("/", StringComparison.Ordinal)
-                ) {
+                )
+                {
                     urlWithoutQueryString += "/";
                 }
 

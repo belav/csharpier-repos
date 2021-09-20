@@ -99,7 +99,8 @@ namespace System.Net.Sockets.Tests
         [PlatformSpecific(TestPlatforms.Windows)]
         public void SocketCtr_InvalidProtocolInformation_ThrowsArgumentException(
             int? protocolInfoLength
-        ) {
+        )
+        {
             SocketInformation invalidInfo = new SocketInformation();
             if (protocolInfoLength != null)
             {
@@ -242,7 +243,8 @@ namespace System.Net.Sockets.Tests
                 // keep the child process alive until we're done validating that handles close as expected.
                 using (
                     RemoteExecutor.Invoke(ChildProcessBody, serverPipe.GetClientHandleAsString())
-                ) {
+                )
+                {
                     using Socket client = new Socket(
                         AddressFamily.InterNetwork,
                         SocketType.Stream,
@@ -375,7 +377,8 @@ namespace System.Net.Sockets.Tests
             public async Task DuplicateAndClose_TcpServerHandler(
                 AddressFamily addressFamily,
                 bool sameProcess
-            ) {
+            )
+            {
                 IPAddress address =
                     addressFamily == AddressFamily.InterNetwork
                         ? IPAddress.Loopback

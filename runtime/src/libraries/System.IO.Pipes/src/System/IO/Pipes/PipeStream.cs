@@ -52,7 +52,8 @@ namespace System.IO.Pipes
             PipeDirection direction,
             PipeTransmissionMode transmissionMode,
             int outBufferSize
-        ) {
+        )
+        {
             if (direction < PipeDirection.In || direction > PipeDirection.InOut)
             {
                 throw new ArgumentOutOfRangeException(
@@ -63,7 +64,8 @@ namespace System.IO.Pipes
             if (
                 transmissionMode < PipeTransmissionMode.Byte
                 || transmissionMode > PipeTransmissionMode.Message
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(
                     nameof(transmissionMode),
                     SR.ArgumentOutOfRange_TransmissionModeByteOrMsg
@@ -84,7 +86,8 @@ namespace System.IO.Pipes
             PipeDirection direction,
             PipeTransmissionMode transmissionMode,
             uint outBufferSize
-        ) {
+        )
+        {
             Debug.Assert(
                 direction >= PipeDirection.In && direction <= PipeDirection.InOut,
                 "invalid pipe direction"

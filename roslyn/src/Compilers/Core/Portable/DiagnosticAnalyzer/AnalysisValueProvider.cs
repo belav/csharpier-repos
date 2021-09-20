@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public AnalysisValueProvider(
             Func<TKey, TValue> computeValue,
             IEqualityComparer<TKey> keyComparer
-        ) {
+        )
+        {
             _computeValue = computeValue;
             KeyComparer = keyComparer ?? EqualityComparer<TKey>.Default;
             _valueCache = new ConditionalWeakTable<TKey, WrappedValue>();

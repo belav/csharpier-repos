@@ -111,7 +111,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             IFormatProvider provider,
             string format,
             params object[] args
-        ) {
+        )
+        {
             return this;
         }
 

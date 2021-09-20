@@ -18,7 +18,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
 
         protected override IServiceProvider CreateServiceProviderImpl(
             IServiceCollection serviceCollection
-        ) {
+        )
+        {
             var container = new Container();
             container.Configure(
                 config =>

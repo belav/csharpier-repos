@@ -528,7 +528,8 @@ namespace System.Numerics.Tests
                     int j = digits.Length;
                     (valid && (j > 0) && (j > digits.Length - expValue));
                     j--
-                ) {
+                )
+                {
                     if (digits[j - 1] != '0')
                     {
                         valid = false;
@@ -628,7 +629,8 @@ namespace System.Numerics.Tests
             string num1,
             NumberStyles ns,
             bool failureNotExpected
-        ) {
+        )
+        {
             VerifyParseToString(
                 num1,
                 ns,
@@ -642,7 +644,8 @@ namespace System.Numerics.Tests
             NumberStyles ns,
             bool failureNotExpected,
             string expected
-        ) {
+        )
+        {
             if (failureNotExpected)
             {
                 Eval(BigInteger.Parse(num1.AsSpan(), ns), expected);
@@ -683,7 +686,8 @@ namespace System.Numerics.Tests
             NumberStyles ns,
             bool failureNotExpected,
             string expected
-        ) {
+        )
+        {
             BigInteger test;
 
             if (failureNotExpected)
@@ -729,7 +733,8 @@ namespace System.Numerics.Tests
             NumberFormatInfo nfi,
             BigInteger expected,
             bool failureExpected
-        ) {
+        )
+        {
             if (!failureExpected)
             {
                 Assert.Equal(expected, BigInteger.Parse(num1.AsSpan(), provider: nfi));
@@ -758,7 +763,8 @@ namespace System.Numerics.Tests
             NumberFormatInfo nfi,
             BigInteger expected,
             bool failureExpected = false
-        ) {
+        )
+        {
             BigInteger test;
 
             if (!failureExpected)
@@ -793,7 +799,8 @@ namespace System.Numerics.Tests
             NumberFormatInfo nfi,
             BigInteger expected,
             bool failureExpected
-        ) {
+        )
+        {
             if (!failureExpected)
             {
                 Assert.Equal(expected, BigInteger.Parse(num1.AsSpan(), ns, nfi));
@@ -823,7 +830,8 @@ namespace System.Numerics.Tests
             NumberFormatInfo nfi,
             BigInteger expected,
             bool failureExpected = false
-        ) {
+        )
+        {
             BigInteger test;
 
             if (!failureExpected)

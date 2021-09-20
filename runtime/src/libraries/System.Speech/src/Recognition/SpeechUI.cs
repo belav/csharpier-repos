@@ -12,7 +12,8 @@ namespace System.Speech.Recognition
             RecognitionResult result,
             string feedback,
             bool isSuccessfulAction
-        ) {
+        )
+        {
             Helpers.ThrowIfNull(result, nameof(result));
             Helpers.ThrowIfEmptyOrNull(feedback, nameof(feedback));
 

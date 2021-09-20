@@ -41,7 +41,8 @@ namespace Microsoft.AspNetCore.Localization
             RequestDelegate next,
             IOptions<RequestLocalizationOptions> options,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -156,7 +157,8 @@ namespace Microsoft.AspNetCore.Localization
             IList<StringSegment> cultureNames,
             IList<CultureInfo> supportedCultures,
             bool fallbackToParentCultures
-        ) {
+        )
+        {
             foreach (var cultureName in cultureNames)
             {
                 // Allow empty string values as they map to InvariantCulture, whereas null culture values will throw in
@@ -182,7 +184,8 @@ namespace Microsoft.AspNetCore.Localization
         private static CultureInfo? GetCultureInfo(
             StringSegment name,
             IList<CultureInfo>? supportedCultures
-        ) {
+        )
+        {
             // Allow only known culture names as this API is called with input from users (HTTP requests) and
             // creating CultureInfo objects is expensive and we don't want it to throw either.
             if (name == null || supportedCultures == null)
@@ -211,14 +214,16 @@ namespace Microsoft.AspNetCore.Localization
             IList<CultureInfo> supportedCultures,
             bool fallbackToParentCultures,
             int currentDepth
-        ) {
+        )
+        {
             var culture = GetCultureInfo(cultureName, supportedCultures);
 
             if (
                 culture == null
                 && fallbackToParentCultures
                 && currentDepth < MaxCultureFallbackDepth
-            ) {
+            )
+            {
                 var lastIndexOfHyphen = cultureName.LastIndexOf('-');
 
                 if (lastIndexOfHyphen > 0)

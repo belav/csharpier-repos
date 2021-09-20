@@ -40,7 +40,8 @@ namespace System.Net.Mime
             byte[]? footer,
             int maxLineLength,
             int mimeHeaderLength
-        ) {
+        )
+        {
             _buffer = new byte[bufferSize];
             _header = header;
             _footer = footer;

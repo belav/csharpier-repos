@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                 string expectedMarkUpForFile2,
                 List<DiagnosticResult> diagnosticResults = null,
                 bool keepInlinedMethod = true
-            ) {
+            )
+            {
                 diagnosticResults ??= new List<DiagnosticResult>();
                 var test = new TestVerifier
                 {
@@ -62,7 +63,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                 string expectedMarkUp,
                 List<DiagnosticResult> diagnosticResults = null,
                 bool keepInlinedMethod = true
-            ) {
+            )
+            {
                 diagnosticResults ??= new List<DiagnosticResult>();
                 var test = new TestVerifier
                 {
@@ -83,14 +85,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                 string expectedMarkUpForCallee,
                 List<DiagnosticResult> diagnosticResultsWhenKeepInlinedMethod = null,
                 List<DiagnosticResult> diagnosticResultsWhenRemoveInlinedMethod = null
-            ) {
+            )
+            {
                 var firstMarkerIndex = expectedMarkUpForCallee.IndexOf(Marker);
                 var secondMarkerIndex = expectedMarkUpForCallee.LastIndexOf(Marker);
                 if (
                     firstMarkerIndex == -1
                     || secondMarkerIndex == -1
                     || firstMarkerIndex == secondMarkerIndex
-                ) {
+                )
+                {
                     Assert.True(false, "Can't find proper marks that contains inlined method.");
                 }
 
@@ -136,14 +140,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                 string expectedMarkUp,
                 List<DiagnosticResult> diagnosticResultsWhenKeepInlinedMethod = null,
                 List<DiagnosticResult> diagnosticResultsWhenRemoveInlinedMethod = null
-            ) {
+            )
+            {
                 var firstMarkerIndex = expectedMarkUp.IndexOf(Marker);
                 var secondMarkerIndex = expectedMarkUp.LastIndexOf(Marker);
                 if (
                     firstMarkerIndex == -1
                     || secondMarkerIndex == -1
                     || firstMarkerIndex == secondMarkerIndex
-                ) {
+                )
+                {
                     Assert.True(false, "Can't find proper marks that contains inlined method.");
                 }
 

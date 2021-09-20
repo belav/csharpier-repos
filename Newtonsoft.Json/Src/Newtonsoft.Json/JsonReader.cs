@@ -157,7 +157,8 @@ namespace Newtonsoft.Json
             {
                 if (
                     value < DateTimeZoneHandling.Local || value > DateTimeZoneHandling.RoundtripKind
-                ) {
+                )
+                {
                     throw new ArgumentOutOfRangeException(nameof(value));
                 }
 
@@ -181,7 +182,8 @@ namespace Newtonsoft.Json
 #else
                     value > DateParseHandling.DateTime
 #endif
-                ) {
+                )
+                {
                     throw new ArgumentOutOfRangeException(nameof(value));
                 }
 
@@ -261,7 +263,8 @@ namespace Newtonsoft.Json
                 if (
                     JsonTokenUtils.IsStartToken(TokenType)
                     || _currentPosition.Type == JsonContainerType.None
-                ) {
+                )
+                {
                     return depth;
                 }
                 else
@@ -721,7 +724,8 @@ namespace Newtonsoft.Json
                     Culture,
                     out double d
                 )
-            ) {
+            )
+            {
                 SetToken(JsonToken.Float, d, false);
                 return d;
             }
@@ -890,7 +894,8 @@ namespace Newtonsoft.Json
             else if (
                 ConvertUtils.DecimalTryParse(s.ToCharArray(), 0, s.Length, out d)
                 == ParseResult.Success
-            ) {
+            )
+            {
                 // This is to handle strings like "96.014e-05" that are not supported by traditional decimal.TryParse
                 SetToken(JsonToken.Float, d, false);
                 return d;
@@ -958,7 +963,8 @@ namespace Newtonsoft.Json
                     Culture,
                     out DateTime dt
                 )
-            ) {
+            )
+            {
                 dt = DateTimeUtils.EnsureDateTime(dt, DateTimeZoneHandling);
                 SetToken(JsonToken.Date, dt, false);
                 return dt;
@@ -1031,7 +1037,8 @@ namespace Newtonsoft.Json
                     Culture,
                     out DateTimeOffset dt
                 )
-            ) {
+            )
+            {
                 SetToken(JsonToken.Date, dt, false);
                 return dt;
             }
@@ -1075,7 +1082,8 @@ namespace Newtonsoft.Json
                 if (
                     Value != null
                     && Value.ToString().StartsWith("System.Byte[]", StringComparison.Ordinal)
-                ) {
+                )
+                {
                     ReaderReadAndAssert();
                     if (Value.ToString() == JsonTypeReflector.ValuePropertyName)
                     {

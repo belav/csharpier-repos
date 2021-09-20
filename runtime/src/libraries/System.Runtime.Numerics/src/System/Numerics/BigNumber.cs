@@ -311,7 +311,8 @@ namespace System.Numerics
         internal static bool TryValidateParseStyleInteger(
             NumberStyles style,
             [NotNullWhen(false)] out ArgumentException? e
-        ) {
+        )
+        {
             // Check for undefined flags
             if ((style & InvalidNumberStyles) != 0)
             {
@@ -337,7 +338,8 @@ namespace System.Numerics
             NumberStyles style,
             NumberFormatInfo info,
             out BigInteger result
-        ) {
+        )
+        {
             if (value == null)
             {
                 result = default(BigInteger);
@@ -352,7 +354,8 @@ namespace System.Numerics
             NumberStyles style,
             NumberFormatInfo info,
             out BigInteger result
-        ) {
+        )
+        {
             unsafe
             {
                 result = BigInteger.Zero;
@@ -396,7 +399,8 @@ namespace System.Numerics
             string value,
             NumberStyles style,
             NumberFormatInfo info
-        ) {
+        )
+        {
             if (value == null)
             {
                 throw new ArgumentNullException(nameof(value));
@@ -409,7 +413,8 @@ namespace System.Numerics
             ReadOnlySpan<char> value,
             NumberStyles style,
             NumberFormatInfo info
-        ) {
+        )
+        {
             ArgumentException? e;
             if (!TryValidateParseStyleInteger(style, out e))
                 throw e;
@@ -425,7 +430,8 @@ namespace System.Numerics
         private static unsafe bool HexNumberToBigInteger(
             ref BigNumberBuffer number,
             ref BigInteger value
-        ) {
+        )
+        {
             if (number.digits == null || number.digits.Length == 0)
                 return false;
 
@@ -468,7 +474,8 @@ namespace System.Numerics
         private static unsafe bool NumberToBigInteger(
             ref BigNumberBuffer number,
             ref BigInteger value
-        ) {
+        )
+        {
             int i = number.scale;
             int cur = 0;
 
@@ -541,7 +548,8 @@ namespace System.Numerics
             Span<char> destination,
             out int charsWritten,
             out bool spanSuccess
-        ) {
+        )
+        {
             Debug.Assert(format == 'x' || format == 'X');
 
             // Get the bytes that make up the BigInteger.
@@ -632,7 +640,8 @@ namespace System.Numerics
             BigInteger value,
             string? format,
             NumberFormatInfo info
-        ) {
+        )
+        {
             return FormatBigInteger(
                 targetSpan: false,
                 value,
@@ -651,7 +660,8 @@ namespace System.Numerics
             NumberFormatInfo info,
             Span<char> destination,
             out int charsWritten
-        ) {
+        )
+        {
             FormatBigInteger(
                 targetSpan: true,
                 value,
@@ -674,7 +684,8 @@ namespace System.Numerics
             Span<char> destination,
             out int charsWritten,
             out bool spanSuccess
-        ) {
+        )
+        {
             Debug.Assert(formatString == null || formatString.Length == formatSpan.Length);
 
             int digits = 0;

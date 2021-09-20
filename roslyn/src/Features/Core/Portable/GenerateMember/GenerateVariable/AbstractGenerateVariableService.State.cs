@@ -67,7 +67,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                 SemanticDocument document,
                 SyntaxNode interfaceNode,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var state = new State();
                 if (
                     !await state.TryInitializeAsync(
@@ -77,7 +78,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                             cancellationToken
                         )
                         .ConfigureAwait(false)
-                ) {
+                )
+                {
                     return null;
                 }
 
@@ -89,7 +91,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                 SemanticDocument document,
                 SyntaxNode node,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (service.IsIdentifierNameGeneration(node))
                 {
                     // Cases that we deal with currently:
@@ -104,7 +107,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                             (TSimpleNameSyntax)node,
                             cancellationToken
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }
@@ -153,7 +157,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                         IsStatic,
                         ClassInterfaceModuleStructTypes
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -202,7 +207,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                 SemanticDocument document,
                 SyntaxNode propertyDeclaration,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (
                     !service.TryInitializeExplicitInterfaceState(
                         document,
@@ -212,7 +218,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                         out var propertySymbol,
                         out var typeToGenerateIn
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -238,7 +245,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
 
                 if (
                     !ContainingType.Interfaces.OfType<INamedTypeSymbol>().Contains(TypeToGenerateIn)
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -257,7 +265,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                 SemanticDocument semanticDocument,
                 TSimpleNameSyntax simpleName,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (
                     !service.TryInitializeIdentifierNameState(
                         semanticDocument,
@@ -268,7 +277,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                         out var isInExecutableBlock,
                         out var isInConditionalAccessExpression
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -333,7 +343,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                         out var typeToGenerateIn,
                         out var isStatic
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -391,7 +402,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                 SemanticDocument semanticDocument,
                 SymbolKind symbolKind,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // See if we're being assigned to.  If so, look at the before/after statements
                 // to see if either is an assignment.  If so, we can use that to try to determine
                 // user patterns that can be used when generating the member.  For example,
@@ -459,7 +471,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                 ChildSyntaxList children,
                 int index,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var syntaxFacts =
                     semanticDocument.Document.GetLanguageService<ISyntaxFactsService>();
                 if (index >= 0 && index < children.Count)
@@ -484,7 +497,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                             if (
                                 symbol?.Kind == symbolKind
                                 && symbol.ContainingType.Equals(ContainingType)
-                            ) {
+                            )
+                            {
                                 return symbol;
                             }
                         }
@@ -516,7 +530,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
             private void DetermineFieldType(
                 SemanticDocument semanticDocument,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var typeInference =
                     semanticDocument.Document.GetLanguageService<ITypeInferenceService>();
                 var inferredType = typeInference.InferType(
@@ -574,7 +589,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                     enclosingMethodSymbol != null
                     && enclosingMethodSymbol.TypeParameters != null
                     && enclosingMethodSymbol.TypeParameters.Length != 0
-                ) {
+                )
+                {
                     using var _ = ArrayBuilder<ITypeParameterSymbol>.GetInstance(
                         out var combinedTypeParameters
                     );
@@ -594,7 +610,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
             private bool DetermineIsInConstructor(
                 SemanticDocument semanticDocument,
                 SyntaxNode simpleName
-            ) {
+            )
+            {
                 if (!ContainingType.OriginalDefinition.Equals(TypeToGenerateIn.OriginalDefinition))
                     return false;
 

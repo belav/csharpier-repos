@@ -18,7 +18,8 @@ namespace System.Security.Cryptography.X509Certificates
             X509Certificate2 certificate,
             X509ChainStatus[] chainElementStatus,
             string information
-        ) {
+        )
+        {
             Certificate = certificate;
             ChainElementStatus = chainElementStatus;
             Information = information;

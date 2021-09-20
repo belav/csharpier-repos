@@ -28,7 +28,8 @@ namespace R2RDumpTests
                         string test in (Environment.GetEnvironmentVariable("PATH") ?? "").Split(
                             Path.PathSeparator
                         )
-                    ) {
+                    )
+                    {
                         string path = test.Trim();
                         if (
                             !String.IsNullOrEmpty(path)

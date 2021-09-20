@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
         internal static T GetFeatureOnOffOption<T>(
             this ITextBuffer buffer,
             PerLanguageOption2<T> option
-        ) {
+        )
+        {
             // Add a FailFast to help diagnose 984249.  Hopefully this will let us know what the issue is.
             try
             {
@@ -56,7 +57,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
         internal static bool? GetOptionalFeatureOnOffOption(
             this ITextBuffer buffer,
             PerLanguageOption2<bool?> option
-        ) {
+        )
+        {
             // Add a FailFast to help diagnose 984249.  Hopefully this will let us know what the issue is.
             try
             {
@@ -125,7 +127,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
         private static bool TryGetSupportsFeatureService(
             ITextBuffer buffer,
             [NotNullWhen(true)] out ITextBufferSupportsFeatureService? service
-        ) {
+        )
+        {
             service = null;
             if (buffer.TryGetWorkspace(out var workspace))
             {

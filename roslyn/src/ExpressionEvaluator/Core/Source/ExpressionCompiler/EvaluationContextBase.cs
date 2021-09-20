@@ -68,7 +68,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             AssemblyIdentity linqLibrary,
             out bool useReferencedModulesOnly,
             out ImmutableArray<AssemblyIdentity> missingAssemblyIdentities
-        ) {
+        )
+        {
             var errors = diagnostics.AsEnumerable()
                 .Where(d => d.Severity == DiagnosticSeverity.Error);
             missingAssemblyIdentities = default;
@@ -95,7 +96,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             Diagnostic error,
             DiagnosticFormatter formatter,
             CultureInfo? preferredUICulture
-        ) {
+        )
+        {
             return (error is SimpleMessageDiagnostic simpleMessage)
               ? simpleMessage.GetMessage()
               : formatter.Format(error, preferredUICulture ?? CultureInfo.CurrentUICulture);

@@ -57,7 +57,8 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConsecutiveBracePlacement
             Document document,
             ImmutableArray<Diagnostic> diagnostics,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
             var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
@@ -79,7 +80,8 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConsecutiveBracePlacement
             Dictionary<SyntaxToken, SyntaxToken> tokenToToken,
             Diagnostic diagnostic,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             var token = root.FindToken(diagnostic.Location.SourceSpan.Start);
@@ -103,7 +105,8 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConsecutiveBracePlacement
                     out var secondBrace,
                     out var lastEndOfLineTrivia
                 )
-            ) {
+            )
+            {
                 Debug.Fail("Could not match analyzer pattern");
                 return;
             }
@@ -123,13 +126,12 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConsecutiveBracePlacement
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                CSharpCodeFixesResources.Remove_blank_lines_between_braces,
-                createChangedDocument,
-                CSharpCodeFixesResources.Remove_blank_lines_between_braces
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    CSharpCodeFixesResources.Remove_blank_lines_between_braces,
+                    createChangedDocument,
+                    CSharpCodeFixesResources.Remove_blank_lines_between_braces
+                ) { }
         }
     }
 }

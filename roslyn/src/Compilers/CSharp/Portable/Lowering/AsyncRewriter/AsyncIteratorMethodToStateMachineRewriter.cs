@@ -60,20 +60,22 @@ namespace Microsoft.CodeAnalysis.CSharp
             VariableSlotAllocator slotAllocatorOpt,
             int nextFreeHoistedLocalSlot,
             BindingDiagnosticBag diagnostics
-        ) : base(
-            method,
-            methodOrdinal,
-            asyncMethodBuilderMemberCollection,
-            F,
-            state,
-            builder,
-            hoistedVariables,
-            nonReusableLocalProxies,
-            synthesizedLocalOrdinals,
-            slotAllocatorOpt,
-            nextFreeHoistedLocalSlot,
-            diagnostics
-        ) {
+        )
+            : base(
+                method,
+                methodOrdinal,
+                asyncMethodBuilderMemberCollection,
+                F,
+                state,
+                builder,
+                hoistedVariables,
+                nonReusableLocalProxies,
+                synthesizedLocalOrdinals,
+                slotAllocatorOpt,
+                nextFreeHoistedLocalSlot,
+                diagnostics
+            )
+        {
             Debug.Assert(asyncIteratorInfo != null);
 
             _asyncIteratorInfo = asyncIteratorInfo;
@@ -413,7 +415,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         public override BoundNode VisitExtractedFinallyBlock(
             BoundExtractedFinallyBlock extractedFinally
-        ) {
+        )
+        {
             // Remove the wrapping and optionally append:
             //  if (disposeMode) goto currentDisposalLabel;
 

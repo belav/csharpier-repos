@@ -58,7 +58,8 @@ namespace Microsoft.CodeAnalysis.Razor
                 {
                     if (
                         compilation.GetAssemblyOrModuleSymbol(reference) is IAssemblySymbol assembly
-                    ) {
+                    )
+                    {
                         visitor.Visit(assembly.GlobalNamespace);
                     }
                 }
@@ -79,7 +80,8 @@ namespace Microsoft.CodeAnalysis.Razor
 
                 foreach (
                     var childContent in shortNameMatchingDescriptor.GetChildContentProperties()
-                ) {
+                )
+                {
                     // Synthesize a separate tag helper for each child content property that's declared.
                     context.Results.Add(
                         CreateChildContentDescriptor(
@@ -102,7 +104,8 @@ namespace Microsoft.CodeAnalysis.Razor
         private TagHelperDescriptor CreateShortNameMatchingDescriptor(
             ComponentSymbols symbols,
             INamedTypeSymbol type
-        ) {
+        )
+        {
             var builder = CreateDescriptorBuilder(symbols, type);
             builder.TagMatchingRule(
                 r =>
@@ -117,7 +120,8 @@ namespace Microsoft.CodeAnalysis.Razor
         private TagHelperDescriptor CreateFullyQualifiedNameMatchingDescriptor(
             ComponentSymbols symbols,
             INamedTypeSymbol type
-        ) {
+        )
+        {
             var builder = CreateDescriptorBuilder(symbols, type);
             var containingNamespace = type.ContainingNamespace.ToDisplayString();
             var fullName = $"{containingNamespace}.{type.Name}";
@@ -136,7 +140,8 @@ namespace Microsoft.CodeAnalysis.Razor
         private TagHelperDescriptorBuilder CreateDescriptorBuilder(
             ComponentSymbols symbols,
             INamedTypeSymbol type
-        ) {
+        )
+        {
             var typeName = type.ToDisplayString(FullNameTypeDisplayFormat);
             var assemblyName = type.ContainingAssembly.Identity.Name;
 
@@ -210,7 +215,8 @@ namespace Microsoft.CodeAnalysis.Razor
                             StringComparison.OrdinalIgnoreCase
                         )
                 )
-            ) {
+            )
+            {
                 // If we have any parameterized child content parameters, synthesize a 'Context' parameter to be
                 // able to set the variable name (for all child content). If the developer defined a 'Context' parameter
                 // already, then theirs wins.
@@ -224,7 +230,8 @@ namespace Microsoft.CodeAnalysis.Razor
             TagHelperDescriptorBuilder builder,
             IPropertySymbol property,
             PropertyKind kind
-        ) {
+        )
+        {
             builder.BindAttribute(
                 pb =>
                 {
@@ -311,7 +318,8 @@ namespace Microsoft.CodeAnalysis.Razor
                     if (
                         namedType.ContainingType != null
                         && HasTypeParameter(namedType.ContainingType)
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }
@@ -324,7 +332,8 @@ namespace Microsoft.CodeAnalysis.Razor
             TagHelperDescriptorBuilder builder,
             ITypeSymbol typeParameter,
             bool cascade
-        ) {
+        )
+        {
             builder.BindAttribute(
                 pb =>
                 {
@@ -351,7 +360,8 @@ namespace Microsoft.CodeAnalysis.Razor
             ComponentSymbols symbols,
             TagHelperDescriptor component,
             BoundAttributeDescriptor attribute
-        ) {
+        )
+        {
             var typeName = component.GetTypeName() + "." + attribute.Name;
             var assemblyName = component.AssemblyName;
 
@@ -408,7 +418,8 @@ namespace Microsoft.CodeAnalysis.Razor
         private void CreateContextParameter(
             TagHelperDescriptorBuilder builder,
             string childContentName
-        ) {
+        )
+        {
             builder.BindAttribute(
                 b =>
                 {
@@ -449,7 +460,8 @@ namespace Microsoft.CodeAnalysis.Razor
         private IEnumerable<(IPropertySymbol property, PropertyKind kind)> GetProperties(
             ComponentSymbols symbols,
             INamedTypeSymbol type
-        ) {
+        )
+        {
             var properties = new Dictionary<string, (IPropertySymbol, PropertyKind)>(
                 StringComparer.Ordinal
             );
@@ -517,7 +529,8 @@ namespace Microsoft.CodeAnalysis.Razor
                                         symbols.ParameterAttribute
                                     )
                             )
-                    ) {
+                    )
+                    {
                         if (property.IsOverride)
                         {
                             // This property does not contain [Parameter] attribute but it was overridden. Don't ignore it for now.
@@ -540,7 +553,8 @@ namespace Microsoft.CodeAnalysis.Razor
                             property.Type,
                             symbols.RenderFragment
                         )
-                    ) {
+                    )
+                    {
                         kind = PropertyKind.ChildContent;
                     }
 
@@ -552,7 +566,8 @@ namespace Microsoft.CodeAnalysis.Razor
                             namedType.ConstructedFrom,
                             symbols.RenderFragmentOfT
                         )
-                    ) {
+                    )
+                    {
                         kind = PropertyKind.ChildContent;
                     }
 
@@ -562,7 +577,8 @@ namespace Microsoft.CodeAnalysis.Razor
                             property.Type,
                             symbols.EventCallback
                         )
-                    ) {
+                    )
+                    {
                         kind = PropertyKind.EventCallback;
                     }
 
@@ -574,7 +590,8 @@ namespace Microsoft.CodeAnalysis.Razor
                             namedType2.ConstructedFrom,
                             symbols.EventCallbackOfT
                         )
-                    ) {
+                    )
+                    {
                         kind = PropertyKind.EventCallback;
                     }
 
@@ -738,7 +755,8 @@ namespace Microsoft.CodeAnalysis.Razor
                 if (
                     symbol.Name != null
                     && !symbol.Name.StartsWith("System.", StringComparison.Ordinal)
-                ) {
+                )
+                {
                     Visit(symbol.GlobalNamespace);
                 }
             }

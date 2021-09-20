@@ -49,7 +49,8 @@ namespace System.ServiceModel.Syndication
                 XmlDictionaryWriter writer = _contentBuffer.OpenSection(
                     XmlDictionaryReaderQuotas.Max
                 )
-            ) {
+            )
+            {
                 writer.WriteNode(reader, false);
             }
             _contentBuffer.CloseSection();
@@ -60,7 +61,8 @@ namespace System.ServiceModel.Syndication
             string type,
             object dataContractExtension,
             XmlObjectSerializer dataContractSerializer
-        ) {
+        )
+        {
             _type = string.IsNullOrEmpty(type) ? Atom10Constants.XmlMediaType : type;
             Extension = new SyndicationElementExtension(
                 dataContractExtension,
@@ -72,7 +74,8 @@ namespace System.ServiceModel.Syndication
             string type,
             object xmlSerializerExtension,
             XmlSerializer serializer
-        ) {
+        )
+        {
             _type = string.IsNullOrEmpty(type) ? Atom10Constants.XmlMediaType : type;
             Extension = new SyndicationElementExtension(xmlSerializerExtension, serializer);
         }

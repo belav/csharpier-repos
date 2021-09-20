@@ -39,7 +39,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
         protected override async Task InitializeAsync(
             CancellationToken cancellationToken,
             IProgress<ServiceProgressData> progress
-        ) {
+        )
+        {
             await base.InitializeAsync(cancellationToken, progress).ConfigureAwait(true);
 
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
@@ -81,7 +82,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
             Assembly assembly,
             Action<Exception> fatalHandler,
             Action<Exception> nonFatalHandler
-        ) {
+        )
+        {
             var type = assembly.GetType(
                     "Microsoft.VisualStudio.InteractiveWindow.FatalError",
                     throwOnError: true

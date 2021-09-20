@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 SyntaxReference declaration,
                 Func<DeclarationAnalysisData> computeDeclarationAnalysisData,
                 bool cacheAnalysisData
-            ) {
+            )
+            {
                 if (!cacheAnalysisData)
                 {
                     return computeDeclarationAnalysisData();

@@ -415,7 +415,8 @@ namespace Microsoft.AspNetCore.Routing
 
         private RouteValuesAddressScheme CreateAddressScheme(
             params EndpointDataSource[] dataSources
-        ) {
+        )
+        {
             return new RouteValuesAddressScheme(new CompositeEndpointDataSource(dataSources));
         }
 
@@ -426,7 +427,8 @@ namespace Microsoft.AspNetCore.Routing
             int order = 0,
             string routeName = null,
             EndpointMetadataCollection metadataCollection = null
-        ) {
+        )
+        {
             if (metadataCollection == null)
             {
                 var metadata = new List<object>();

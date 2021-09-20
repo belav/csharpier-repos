@@ -50,7 +50,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DebuggerIntelli
             IComponentModel componentModel,
             IServiceProvider serviceProvider,
             IContentType contentType
-        ) {
+        )
+        {
             _textView = wpfTextView;
             _debuggerTextLines = vsDebuggerTextLines;
             this.ContextBuffer = contextBuffer;
@@ -74,7 +75,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DebuggerIntelli
             IComponentModel componentModel,
             IContentType contentType,
             bool isImmediateWindow
-        ) {
+        )
+        {
             _textView = wpfTextView;
             this.ContextBuffer = contextBuffer;
             this.CurrentStatementSpan = currentStatementSpan[0];
@@ -272,7 +274,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DebuggerIntelli
 
         private ITrackingSpan CreateImmediateWindowProjectionMapping(
             out ImmediateWindowContext immediateWindowContext
-        ) {
+        )
+        {
             var caretLine = _textView.Caret.ContainingTextViewLine.Extent;
             var currentLineIndex = _textView.TextSnapshot.GetLineNumberFromPosition(
                 caretLine.Start.Position
@@ -336,7 +339,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DebuggerIntelli
             if (
                 _immediateWindowContext.QuestionIndex != questionIndex
                 || _immediateWindowContext.CurrentLineIndex != currentLineIndex
-            ) {
+            )
+            {
                 _immediateWindowContext.QuestionIndex = questionIndex;
                 _immediateWindowContext.CurrentLineIndex = currentLineIndex;
                 _immediateWindowContext.ProjectionBuffer.DeleteSpans(

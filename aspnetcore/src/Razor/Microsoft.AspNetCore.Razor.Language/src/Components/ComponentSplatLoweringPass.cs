@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         protected override void ExecuteCore(
             RazorCodeDocument codeDocument,
             DocumentIntermediateNode documentNode
-        ) {
+        )
+        {
             if (!IsComponentDocument(documentNode))
             {
                 return;
@@ -45,7 +46,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         private IntermediateNode RewriteUsage(
             IntermediateNode parent,
             TagHelperDirectiveAttributeIntermediateNode node
-        ) {
+        )
+        {
             var result = new SplatIntermediateNode() { Source = node.Source, };
 
             result.Children.AddRange(

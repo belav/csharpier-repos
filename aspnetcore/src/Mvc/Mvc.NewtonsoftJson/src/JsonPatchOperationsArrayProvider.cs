@@ -48,7 +48,8 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
                     if (
                         typeof(IJsonPatchDocument).GetTypeInfo()
                             .IsAssignableFrom(parameterDescription.Type)
-                    ) {
+                    )
+                    {
                         parameterDescription.Type = typeof(Operation[]);
                         parameterDescription.ModelMetadata =
                             _modelMetadataProvider.GetMetadataForType(typeof(Operation[]));

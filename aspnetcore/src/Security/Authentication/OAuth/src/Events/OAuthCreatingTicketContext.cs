@@ -95,7 +95,8 @@ namespace Microsoft.AspNetCore.Authentication.OAuth
                         CultureInfo.InvariantCulture,
                         out value
                     )
-                ) {
+                )
+                {
                     return TimeSpan.FromSeconds(value);
                 }
 

@@ -41,7 +41,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding
             IEnumerable<string> schemas,
             Action<DatabaseModel> asserter,
             string cleanupSql
-        ) {
+        )
+        {
             Fixture.TestStore.ExecuteNonQuery(createSql);
 
             try

@@ -23,7 +23,8 @@ namespace Microsoft.Extensions.Configuration
         public static IConfigurationBuilder AddIniFile(
             this IConfigurationBuilder builder,
             string path
-        ) {
+        )
+        {
             return AddIniFile(
                 builder,
                 provider: null,
@@ -45,7 +46,8 @@ namespace Microsoft.Extensions.Configuration
             this IConfigurationBuilder builder,
             string path,
             bool optional
-        ) {
+        )
+        {
             return AddIniFile(
                 builder,
                 provider: null,
@@ -69,7 +71,8 @@ namespace Microsoft.Extensions.Configuration
             string path,
             bool optional,
             bool reloadOnChange
-        ) {
+        )
+        {
             return AddIniFile(
                 builder,
                 provider: null,
@@ -95,7 +98,8 @@ namespace Microsoft.Extensions.Configuration
             string path,
             bool optional,
             bool reloadOnChange
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -137,7 +141,8 @@ namespace Microsoft.Extensions.Configuration
         public static IConfigurationBuilder AddIniStream(
             this IConfigurationBuilder builder,
             Stream stream
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));

@@ -79,7 +79,8 @@ namespace Internal.Cryptography.Pal
         internal static bool TryReadPkcs7Der(
             ReadOnlySpan<byte> rawData,
             out ICertificatePal? certPal
-        ) {
+        )
+        {
             List<ICertificatePal>? ignored;
 
             return TryReadPkcs7Der(rawData, true, out certPal, out ignored);
@@ -95,7 +96,8 @@ namespace Internal.Cryptography.Pal
         internal static bool TryReadPkcs7Der(
             ReadOnlySpan<byte> rawData,
             [NotNullWhen(true)] out List<ICertificatePal>? certPals
-        ) {
+        )
+        {
             ICertificatePal? ignored;
 
             return TryReadPkcs7Der(rawData, false, out ignored, out certPals);
@@ -104,7 +106,8 @@ namespace Internal.Cryptography.Pal
         internal static bool TryReadPkcs7Der(
             SafeBioHandle bio,
             [NotNullWhen(true)] out List<ICertificatePal>? certPals
-        ) {
+        )
+        {
             ICertificatePal? ignored;
 
             return TryReadPkcs7Der(bio, false, out ignored, out certPals);
@@ -115,7 +118,8 @@ namespace Internal.Cryptography.Pal
             bool single,
             out ICertificatePal? certPal,
             [NotNullWhen(true)] out List<ICertificatePal>? certPals
-        ) {
+        )
+        {
             using (SafePkcs7Handle pkcs7 = Interop.Crypto.DecodePkcs7(rawData))
             {
                 if (pkcs7.IsInvalid)
@@ -135,7 +139,8 @@ namespace Internal.Cryptography.Pal
             bool single,
             out ICertificatePal? certPal,
             [NotNullWhen(true)] out List<ICertificatePal>? certPals
-        ) {
+        )
+        {
             using (SafePkcs7Handle pkcs7 = Interop.Crypto.D2IPkcs7Bio(bio))
             {
                 if (pkcs7.IsInvalid)
@@ -153,7 +158,8 @@ namespace Internal.Cryptography.Pal
         internal static bool TryReadPkcs7Pem(
             ReadOnlySpan<byte> rawData,
             out ICertificatePal? certPal
-        ) {
+        )
+        {
             List<ICertificatePal>? ignored;
 
             return TryReadPkcs7Pem(rawData, true, out certPal, out ignored);
@@ -169,7 +175,8 @@ namespace Internal.Cryptography.Pal
         internal static bool TryReadPkcs7Pem(
             ReadOnlySpan<byte> rawData,
             [NotNullWhen(true)] out List<ICertificatePal>? certPals
-        ) {
+        )
+        {
             ICertificatePal? ignored;
 
             return TryReadPkcs7Pem(rawData, false, out ignored, out certPals);
@@ -178,7 +185,8 @@ namespace Internal.Cryptography.Pal
         internal static bool TryReadPkcs7Pem(
             SafeBioHandle bio,
             [NotNullWhen(true)] out List<ICertificatePal>? certPals
-        ) {
+        )
+        {
             ICertificatePal? ignored;
 
             return TryReadPkcs7Pem(bio, false, out ignored, out certPals);
@@ -189,7 +197,8 @@ namespace Internal.Cryptography.Pal
             bool single,
             out ICertificatePal? certPal,
             [NotNullWhen(true)] out List<ICertificatePal>? certPals
-        ) {
+        )
+        {
             using (SafeBioHandle bio = Interop.Crypto.CreateMemoryBio())
             {
                 Interop.Crypto.CheckValidOpenSslHandle(bio);
@@ -208,7 +217,8 @@ namespace Internal.Cryptography.Pal
             bool single,
             out ICertificatePal? certPal,
             [NotNullWhen(true)] out List<ICertificatePal>? certPals
-        ) {
+        )
+        {
             using (SafePkcs7Handle pkcs7 = Interop.Crypto.PemReadBioPkcs7(bio))
             {
                 if (pkcs7.IsInvalid)
@@ -228,7 +238,8 @@ namespace Internal.Cryptography.Pal
             bool single,
             out ICertificatePal? certPal,
             [NotNullWhen(true)] out List<ICertificatePal> certPals
-        ) {
+        )
+        {
             List<ICertificatePal>? readPals = single ? null : new List<ICertificatePal>();
 
             using (SafeSharedX509StackHandle certs = Interop.Crypto.GetPkcs7Certificates(pkcs7))
@@ -269,7 +280,8 @@ namespace Internal.Cryptography.Pal
             SafePasswordHandle password,
             [NotNullWhen(true)] out ICertificatePal? certPal,
             out Exception? openSslException
-        ) {
+        )
+        {
             List<ICertificatePal>? ignored;
 
             return TryReadPkcs12(
@@ -287,7 +299,8 @@ namespace Internal.Cryptography.Pal
             SafePasswordHandle password,
             [NotNullWhen(true)] out List<ICertificatePal>? certPals,
             out Exception? openSslException
-        ) {
+        )
+        {
             ICertificatePal? ignored;
 
             return TryReadPkcs12(
@@ -307,7 +320,8 @@ namespace Internal.Cryptography.Pal
             out ICertificatePal? readPal,
             out List<ICertificatePal>? readCerts,
             out Exception? openSslException
-        ) {
+        )
+        {
             // DER-PKCS12
             OpenSslPkcs12Reader? pfx;
 
@@ -330,7 +344,8 @@ namespace Internal.Cryptography.Pal
             bool single,
             out ICertificatePal? readPal,
             out List<ICertificatePal>? readCerts
-        ) {
+        )
+        {
             pfx.Decrypt(password);
 
             if (single)

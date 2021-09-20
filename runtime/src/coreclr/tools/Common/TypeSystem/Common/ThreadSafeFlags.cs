@@ -29,7 +29,8 @@ namespace Internal.TypeSystem
             while (
                 Interlocked.CompareExchange(ref _value, originalFlags | flagsToAdd, originalFlags)
                 != originalFlags
-            ) {
+            )
+            {
                 originalFlags = _value;
             }
         }

@@ -13,11 +13,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests.Account.Manage
         private readonly IHtmlAnchorElement _deleteLink;
         private readonly IHtmlFormElement _downloadForm;
 
-        public PersonalData(
-            HttpClient client,
-            IHtmlDocument personalData,
-            DefaultUIContext context
-        ) : base(client, personalData, context)
+        public PersonalData(HttpClient client, IHtmlDocument personalData, DefaultUIContext context)
+            : base(client, personalData, context)
         {
             _deleteLink = HtmlAssert.HasLink("#delete", personalData);
             _downloadForm = HtmlAssert.HasForm("#download-data", personalData);

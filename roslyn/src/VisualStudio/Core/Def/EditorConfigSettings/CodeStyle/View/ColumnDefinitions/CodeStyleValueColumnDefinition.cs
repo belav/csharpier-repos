@@ -33,7 +33,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.CodeStyle
             ITableEntryHandle entry,
             bool singleColumnView,
             out FrameworkElement? content
-        ) {
+        )
+        {
             if (!entry.TryGetValue(Value, out CodeStyleSetting severity))
             {
                 content = null;

@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.Interactive
                 InteractiveHostOptions options,
                 int instanceId,
                 bool skipInitialization
-            ) {
+            )
+            {
                 _lazyInitializedService = new AsyncLazy<InitializedRemoteService>(
                     TryStartAndInitializeProcessAsync,
                     cacheResult: true
@@ -70,7 +71,8 @@ namespace Microsoft.CodeAnalysis.Interactive
 
             private async Task<InitializedRemoteService> TryStartAndInitializeProcessAsync(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 try
                 {
                     var remoteService = await TryStartProcessAsync(
@@ -168,7 +170,8 @@ namespace Microsoft.CodeAnalysis.Interactive
                 string hostPath,
                 CultureInfo culture,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 int currentProcessId = Process.GetCurrentProcess().Id;
                 var pipeName = typeof(InteractiveHost).FullName + Guid.NewGuid();
 

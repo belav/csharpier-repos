@@ -27,7 +27,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             int startIndex,
             int endIndex,
             IVsTextView textView
-        ) {
+        )
+        {
             if (filters.TryGetValue(textView, out var filter))
             {
                 if (enable != 0)
@@ -49,7 +50,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             int install,
             IVsTextView textView,
             int initialEnable
-        ) {
+        )
+        {
             // We'll install a filter whenever the debugger asks, but it won't do anything but call
             // the next filter until the context is set. To ensure that we correctly install and
             // uninstall from the many possible textviews we can work on, we maintain a dictionary
@@ -90,7 +92,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             TextSpan[] currentStatementSpan,
             object punkContext,
             IVsTextView textView
-        ) {
+        )
+        {
             // The immediate window is always marked read-only and the language service is
             // responsible for asking the buffer to make itself writable. We'll have to do that for
             // commit, so we need to drag the IVsTextLines around, too.
@@ -151,7 +154,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             int enable,
             int startIndex,
             int endIndex
-        ) {
+        )
+        {
             Debug.Assert(false);
             return VSConstants.S_OK;
         }
@@ -159,7 +163,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
         int IVsImmediateStatementCompletion2.GetFilter(
             IVsTextView textView,
             out IVsTextViewFilter filter
-        ) {
+        )
+        {
             // They never even call this, so just make it compile
             Debug.Assert(false);
             filter = null;
@@ -170,7 +175,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             int enable,
             int startIndex,
             int endIndex
-        ) {
+        )
+        {
             Debug.Assert(false);
             return VSConstants.S_OK;
         }
@@ -179,7 +185,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             int install,
             IVsTextView textView,
             int initialEnable
-        ) {
+        )
+        {
             Debug.Assert(false);
             return VSConstants.S_OK;
         }
@@ -189,7 +196,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             IVsTextLines buffer,
             TextSpan[] currentStatementSpan,
             object punkContext
-        ) {
+        )
+        {
             Debug.Assert(false);
             return VSConstants.S_OK;
         }
@@ -199,7 +207,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             IVsTextLines buffer,
             TextSpan[] currentStatementSpan,
             object punkContext
-        ) {
+        )
+        {
             Debug.Assert(false);
             return VSConstants.S_OK;
         }

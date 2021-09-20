@@ -10,7 +10,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             int exitDestination,
             string text,
             int destination
-        ) {
+        )
+        {
             return new SingleEntryJumpTable(defaultDestination, exitDestination, text, destination);
         }
     }

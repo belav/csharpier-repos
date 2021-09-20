@@ -61,7 +61,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             CompletionItem completionItem,
             SyntaxTree tree,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var tokenSpanEnd = MemberInsertionCompletionItem.GetTokenSpanEnd(completionItem);
             return tree.FindTokenOnLeftOfPosition(tokenSpanEnd, cancellationToken);
         }
@@ -72,7 +73,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             CancellationToken cancellationToken,
             out ITypeSymbol returnType,
             out SyntaxToken nextToken
-        ) {
+        )
+        {
             nextToken = startToken;
             returnType = null;
             if (startToken.Parent is TypeSyntax typeSyntax)
@@ -83,7 +85,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 if (
                     typeSyntax is IdentifierNameSyntax identifierName
                     && identifierName.Identifier.IsKindOrHasMatchingText(SyntaxKind.PartialKeyword)
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -100,7 +103,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             int startLine,
             out Accessibility seenAccessibility,
             out DeclarationModifiers modifiers
-        ) {
+        )
+        {
             var token = startToken;
             modifiers = new DeclarationModifiers();
             seenAccessibility = Accessibility.NotApplicable;
@@ -111,7 +115,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 
             while (
                 IsOnStartLine(token.SpanStart, text, startLine) && !token.IsKind(SyntaxKind.None)
-            ) {
+            )
+            {
                 switch (token.Kind())
                 {
                     case SyntaxKind.UnsafeKeyword:
@@ -186,7 +191,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 if (
                     previousToken.IsKind(SyntaxKind.None)
                     || !IsOnStartLine(previousToken.SpanStart, text, startLine)
-                ) {
+                )
+                {
                     break;
                 }
 
@@ -207,7 +213,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             SyntaxTree tree,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var token = tree.FindTokenOnLeftOfPosition(position, cancellationToken);
             return token.GetPreviousTokenIfTouchingWord(position);
         }
@@ -215,7 +222,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
         public override ImmutableArray<ISymbol> FilterOverrides(
             ImmutableArray<ISymbol> members,
             ITypeSymbol returnType
-        ) {
+        )
+        {
             var filteredMembers = members.WhereAsArray(
                 m => SymbolEquivalenceComparer.Instance.Equals(GetReturnType(m), returnType)
             );
@@ -242,7 +250,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 if (
                     propertyDeclaration.AccessorList != null
                     && propertyDeclaration.AccessorList.Accessors.Any()
-                ) {
+                )
+                {
                     // move to the end of the last statement of the first accessor
                     var firstAccessor = propertyDeclaration.AccessorList.Accessors[0];
                     var firstAccessorStatement =

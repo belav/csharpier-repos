@@ -143,7 +143,8 @@ namespace System.Text.RegularExpressions
                 leadingSubstring.Length > 1
                 && // if it's <= 1, perf is better using leadingCharClasses
                 leadingSubstring.Length <= RegexBoyerMoore.MaxLimit
-            ) {
+            )
+            {
                 // Compute a Boyer-Moore prefix if we find a single string of sufficient length that always begins the expression.
                 CultureInfo culture =
                     (tree.Options & RegexOptions.CultureInvariant) != 0

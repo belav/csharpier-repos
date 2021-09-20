@@ -133,7 +133,8 @@ namespace JIT.HardwareIntrinsics.Arm
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfinArray2
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -212,7 +213,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario(
                 ImmBinaryOpTest__ShiftRightArithmeticRoundedAdd_Vector128_Int64_1 testClass
-            ) {
+            )
+            {
                 var result = AdvSimd.ShiftRightArithmeticRoundedAdd(_fld1, _fld2, 1);
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
@@ -221,7 +223,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario_Load(
                 ImmBinaryOpTest__ShiftRightArithmeticRoundedAdd_Vector128_Int64_1 testClass
-            ) {
+            )
+            {
                 fixed (Vector128<Int64>* pFld1 = &_fld1)fixed (Vector128<Int64>* pFld2 = &_fld2)
                 {
                     var result = AdvSimd.ShiftRightArithmeticRoundedAdd(
@@ -410,7 +413,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             fixed (Vector128<Int64>* pClsVar1 = &_clsVar1)fixed (
                 Vector128<Int64>* pClsVar2 = &_clsVar2
-            ) {
+            )
+            {
                 var result = AdvSimd.ShiftRightArithmeticRoundedAdd(
                     AdvSimd.LoadVector128((Int64*)(pClsVar1)),
                     AdvSimd.LoadVector128((Int64*)(pClsVar2)),
@@ -464,7 +468,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             fixed (Vector128<Int64>* pFld1 = &test._fld1)fixed (
                 Vector128<Int64>* pFld2 = &test._fld2
-            ) {
+            )
+            {
                 var result = AdvSimd.ShiftRightArithmeticRoundedAdd(
                     AdvSimd.LoadVector128((Int64*)(pFld1)),
                     AdvSimd.LoadVector128((Int64*)(pFld2)),
@@ -571,7 +576,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Vector128<Int64> secondOp,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Int64[] inArray1 = new Int64[Op1ElementCount];
             Int64[] inArray2 = new Int64[Op2ElementCount];
             Int64[] outArray = new Int64[RetElementCount];
@@ -592,7 +598,8 @@ namespace JIT.HardwareIntrinsics.Arm
             void* secondOp,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Int64[] inArray1 = new Int64[Op1ElementCount];
             Int64[] inArray2 = new Int64[Op2ElementCount];
             Int64[] outArray = new Int64[RetElementCount];
@@ -621,7 +628,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Int64[] secondOp,
             Int64[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             for (var i = 0; i < RetElementCount; i++)
@@ -629,7 +637,8 @@ namespace JIT.HardwareIntrinsics.Arm
                 if (
                     Helpers.ShiftRightArithmeticRoundedAdd(firstOp[i], secondOp[i], Imm)
                     != result[i]
-                ) {
+                )
+                {
                     succeeded = false;
                     break;
                 }

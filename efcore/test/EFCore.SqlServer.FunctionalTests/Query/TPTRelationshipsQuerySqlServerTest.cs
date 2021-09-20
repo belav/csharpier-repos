@@ -102,7 +102,8 @@ ORDER BY [b].[Id], [b0].[BaseInheritanceRelationshipEntityId], [b0].[Id], [d0].[
 
         public override async Task Include_collection_without_inheritance_with_filter_reverse(
             bool async
-        ) {
+        )
+        {
             await base.Include_collection_without_inheritance_with_filter_reverse(async);
 
             AssertSql(
@@ -208,7 +209,8 @@ ORDER BY [b].[Id], [b0].[BaseInheritanceRelationshipEntityId], [b0].[Id], [d0].[
 
         public override async Task Include_collection_with_inheritance_on_derived_reverse(
             bool async
-        ) {
+        )
+        {
             await base.Include_collection_with_inheritance_on_derived_reverse(async);
 
             AssertSql(
@@ -277,7 +279,8 @@ ORDER BY [b].[Id], [b0].[BaseInheritanceRelationshipEntityId], [b0].[Id], [d0].[
 
         public override async Task Include_collection_with_inheritance_with_filter_reverse(
             bool async
-        ) {
+        )
+        {
             await base.Include_collection_with_inheritance_with_filter_reverse(async);
 
             AssertSql(
@@ -349,7 +352,8 @@ ORDER BY [b].[Id], [r].[Id], [b0].[BaseInheritanceRelationshipEntityId], [b0].[I
 
         public override async Task Include_reference_without_inheritance_on_derived_reverse(
             bool async
-        ) {
+        )
+        {
             await base.Include_reference_without_inheritance_on_derived_reverse(async);
 
             AssertSql(
@@ -406,7 +410,8 @@ ORDER BY [b].[Id], [r].[Id], [b0].[BaseInheritanceRelationshipEntityId], [b0].[I
 
         public override async Task Include_reference_without_inheritance_with_filter_reverse(
             bool async
-        ) {
+        )
+        {
             await base.Include_reference_without_inheritance_with_filter_reverse(async);
 
             AssertSql(
@@ -533,7 +538,8 @@ ORDER BY [b].[Id], [t].[Id], [b1].[BaseInheritanceRelationshipEntityId], [b1].[I
 
         public override async Task Include_reference_with_inheritance_on_derived_with_filter1(
             bool async
-        ) {
+        )
+        {
             await base.Include_reference_with_inheritance_on_derived_with_filter1(async);
 
             AssertSql(
@@ -556,7 +562,8 @@ ORDER BY [b].[Id], [t].[Id], [b1].[BaseInheritanceRelationshipEntityId], [b1].[I
 
         public override async Task Include_reference_with_inheritance_on_derived_with_filter2(
             bool async
-        ) {
+        )
+        {
             await base.Include_reference_with_inheritance_on_derived_with_filter2(async);
 
             AssertSql(
@@ -579,7 +586,8 @@ ORDER BY [b].[Id], [t].[Id], [b1].[BaseInheritanceRelationshipEntityId], [b1].[I
 
         public override async Task Include_reference_with_inheritance_on_derived_with_filter4(
             bool async
-        ) {
+        )
+        {
             await base.Include_reference_with_inheritance_on_derived_with_filter4(async);
 
             AssertSql(
@@ -600,7 +608,8 @@ ORDER BY [b].[Id], [t].[Id], [b1].[BaseInheritanceRelationshipEntityId], [b1].[I
 
         public override async Task Include_reference_with_inheritance_on_derived_with_filter_reverse(
             bool async
-        ) {
+        )
+        {
             await base.Include_reference_with_inheritance_on_derived_with_filter_reverse(async);
 
             AssertSql(
@@ -670,7 +679,8 @@ ORDER BY [b].[Id], [t].[Id], [b1].[BaseInheritanceRelationshipEntityId], [b1].[I
 
         public override async Task Include_reference_with_inheritance_with_filter_reverse(
             bool async
-        ) {
+        )
+        {
             await base.Include_reference_with_inheritance_with_filter_reverse(async);
 
             AssertSql(
@@ -741,7 +751,8 @@ ORDER BY [b].[Id], [t].[Id], [b1].[BaseInheritanceRelationshipEntityId], [b1].[I
 
         public override async Task Nested_include_collection_reference_on_non_entity_base(
             bool async
-        ) {
+        )
+        {
             await base.Nested_include_collection_reference_on_non_entity_base(async);
 
             AssertSql(
@@ -788,7 +799,8 @@ ORDER BY [b].[Id], [b0].[BaseInheritanceRelationshipEntityId], [b0].[Id], [d0].[
 
         public override async Task Nested_include_with_inheritance_collection_collection_reverse(
             bool async
-        ) {
+        )
+        {
             await base.Nested_include_with_inheritance_collection_collection_reverse(async);
 
             AssertSql(
@@ -849,7 +861,8 @@ ORDER BY [b].[Id], [b0].[BaseInheritanceRelationshipEntityId], [b0].[Id], [d0].[
 
         public override async Task Nested_include_with_inheritance_collection_reference_reverse(
             bool async
-        ) {
+        )
+        {
             await base.Nested_include_with_inheritance_collection_reference_reverse(async);
 
             AssertSql(
@@ -910,7 +923,8 @@ ORDER BY [b].[Id], [t].[Id], [b1].[BaseInheritanceRelationshipEntityId], [b1].[I
 
         public override async Task Nested_include_with_inheritance_reference_collection_on_base(
             bool async
-        ) {
+        )
+        {
             await base.Nested_include_with_inheritance_reference_collection_on_base(async);
 
             AssertSql(
@@ -939,7 +953,8 @@ ORDER BY [b].[Id], [t].[Id], [b1].[BaseInheritanceRelationshipEntityId], [b1].[I
 
         public override async Task Nested_include_with_inheritance_reference_collection_reverse(
             bool async
-        ) {
+        )
+        {
             await base.Nested_include_with_inheritance_reference_collection_reverse(async);
 
             AssertSql(
@@ -1000,7 +1015,8 @@ ORDER BY [b].[Id], [t].[Id], [t0].[Id], [b1].[BaseInheritanceRelationshipEntityI
 
         public override async Task Nested_include_with_inheritance_reference_reference_on_base(
             bool async
-        ) {
+        )
+        {
             await base.Nested_include_with_inheritance_reference_reference_on_base(async);
 
             AssertSql(
@@ -1029,7 +1045,8 @@ ORDER BY [b].[Id], [t].[Id], [t0].[Id], [b1].[BaseInheritanceRelationshipEntityI
 
         public override async Task Nested_include_with_inheritance_reference_reference_reverse(
             bool async
-        ) {
+        )
+        {
             await base.Nested_include_with_inheritance_reference_reference_reverse(async);
 
             AssertSql(
@@ -1191,7 +1208,8 @@ ORDER BY [b].[Id]"
 
         public override async Task Include_collection_with_inheritance_with_filter_reverse_split(
             bool async
-        ) {
+        )
+        {
             await base.Include_collection_with_inheritance_with_filter_reverse_split(async);
 
             AssertSql(
@@ -1299,7 +1317,8 @@ ORDER BY [c].[Id], [t].[Id]"
 
         public override async Task Include_collection_without_inheritance_with_filter_split(
             bool async
-        ) {
+        )
+        {
             await base.Include_collection_without_inheritance_with_filter_split(async);
 
             AssertSql(
@@ -1333,7 +1352,8 @@ ORDER BY [b].[Id]"
 
         public override async Task Include_collection_without_inheritance_with_filter_reverse_split(
             bool async
-        ) {
+        )
+        {
             await base.Include_collection_without_inheritance_with_filter_reverse_split(async);
 
             AssertSql(
@@ -1479,7 +1499,8 @@ ORDER BY [b].[Id]"
 
         public override async Task Include_collection_with_inheritance_on_derived_reverse_split(
             bool async
-        ) {
+        )
+        {
             await base.Include_collection_with_inheritance_on_derived_reverse_split(async);
 
             AssertSql(
@@ -1519,7 +1540,8 @@ ORDER BY [b].[Id], [t].[Id]"
 
         public override async Task Nested_include_with_inheritance_reference_collection_split(
             bool async
-        ) {
+        )
+        {
             await base.Nested_include_with_inheritance_reference_collection_split(async);
 
             AssertSql(
@@ -1574,7 +1596,8 @@ ORDER BY [b].[Id], [t].[Id]"
 
         public override async Task Nested_include_with_inheritance_reference_collection_on_base_split(
             bool async
-        ) {
+        )
+        {
             await base.Nested_include_with_inheritance_reference_collection_on_base_split(async);
 
             AssertSql(
@@ -1630,7 +1653,8 @@ ORDER BY [b].[Id], [t].[Id]"
 
         public override async Task Nested_include_with_inheritance_reference_collection_reverse_split(
             bool async
-        ) {
+        )
+        {
             await base.Nested_include_with_inheritance_reference_collection_reverse_split(async);
 
             AssertSql(
@@ -1685,7 +1709,8 @@ ORDER BY [n].[Id], [t].[Id], [t0].[Id]"
 
         public override async Task Nested_include_with_inheritance_collection_reference_split(
             bool async
-        ) {
+        )
+        {
             await base.Nested_include_with_inheritance_collection_reference_split(async);
 
             AssertSql(
@@ -1728,7 +1753,8 @@ ORDER BY [b].[Id]"
 
         public override async Task Nested_include_with_inheritance_collection_reference_reverse_split(
             bool async
-        ) {
+        )
+        {
             await base.Nested_include_with_inheritance_collection_reference_reverse_split(async);
 
             AssertSql(
@@ -1783,7 +1809,8 @@ ORDER BY [n].[Id], [t].[Id], [t0].[Id]"
 
         public override async Task Nested_include_with_inheritance_collection_collection_split(
             bool async
-        ) {
+        )
+        {
             await base.Nested_include_with_inheritance_collection_collection_split(async);
 
             AssertSql(
@@ -1834,7 +1861,8 @@ ORDER BY [b].[Id], [t].[Id]"
 
         public override async Task Nested_include_with_inheritance_collection_collection_reverse_split(
             bool async
-        ) {
+        )
+        {
             await base.Nested_include_with_inheritance_collection_collection_reverse_split(async);
 
             AssertSql(
@@ -1889,7 +1917,8 @@ ORDER BY [n].[Id], [t].[Id], [t0].[Id]"
 
         public override async Task Nested_include_collection_reference_on_non_entity_base_split(
             bool async
-        ) {
+        )
+        {
             await base.Nested_include_collection_reference_on_non_entity_base_split(async);
 
             AssertSql(

@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             string code,
             MetadataReference metadataReference,
             params ProjectId[] projectReferences
-        ) {
+        )
+        {
             var suffix = languageName == LanguageNames.CSharp ? "cs" : "vb";
             var pid = ProjectId.CreateNewId();
             var did = DocumentId.CreateNewId(pid);
@@ -53,7 +54,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Workspace workspace,
             string sourceText,
             string languageName = LanguageNames.CSharp
-        ) {
+        )
+        {
             var pid = ProjectId.CreateNewId();
             var did = DocumentId.CreateNewId(pid);
             return workspace.CurrentSolution.AddProject(pid, "goo", "goo", languageName)
@@ -64,7 +66,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         private static Solution GetMultipleDocumentSolution(
             Workspace workspace,
             string[] sourceTexts
-        ) {
+        )
+        {
             var pid = ProjectId.CreateNewId();
 
             var solution = workspace.CurrentSolution.AddProject(

@@ -371,7 +371,8 @@ namespace System.Net.Http.Tests
             int startIndex,
             int expectedLength,
             HttpParseResult expectedResult
-        ) {
+        )
+        {
             int length = 0;
             HttpParseResult result = HttpRuleParser.GetQuotedPairLength(
                 input,
@@ -388,7 +389,8 @@ namespace System.Net.Http.Tests
             int startIndex,
             int expectedLength,
             HttpParseResult expectedResult
-        ) {
+        )
+        {
             int length = 0;
             HttpParseResult result = HttpRuleParser.GetQuotedStringLength(
                 input,
@@ -405,7 +407,8 @@ namespace System.Net.Http.Tests
             int startIndex,
             int expectedLength,
             HttpParseResult expectedResult
-        ) {
+        )
+        {
             int length = 0;
             HttpParseResult result = HttpRuleParser.GetCommentLength(input, startIndex, out length);
 
@@ -419,7 +422,8 @@ namespace System.Net.Http.Tests
             int expectedLength,
             bool allowToken,
             string expectedResult
-        ) {
+        )
+        {
             string result = null;
             Assert.Equal(
                 expectedLength,

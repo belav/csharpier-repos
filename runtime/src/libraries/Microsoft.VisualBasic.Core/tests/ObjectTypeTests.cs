@@ -294,7 +294,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             object right,
             object expectedBinaryCompare,
             object expectedTextCompare
-        ) {
+        )
+        {
             Assert.Equal(
                 expectedBinaryCompare,
                 ObjectType.LikeObj(left, right, CompareMethod.Binary)

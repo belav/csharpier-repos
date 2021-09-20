@@ -34,7 +34,8 @@ namespace Internal.Cryptography
             ReadOnlySpan<byte> source,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             if (source.TryCopyTo(destination))
             {
                 bytesWritten = source.Length;

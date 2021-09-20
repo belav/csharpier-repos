@@ -167,13 +167,12 @@ namespace System
         /// is null.</exception>
         /// <exception cref="System.ArgumentException">An element of <paramref name="innerExceptionInfos"/> is
         /// null.</exception>
-        internal AggregateException(
-            string message,
-            List<ExceptionDispatchInfo> innerExceptionInfos
-        ) : base(
-            message,
-            innerExceptionInfos.Count != 0 ? innerExceptionInfos[0].SourceException : null
-        ) {
+        internal AggregateException(string message, List<ExceptionDispatchInfo> innerExceptionInfos)
+            : base(
+                message,
+                innerExceptionInfos.Count != 0 ? innerExceptionInfos[0].SourceException : null
+            )
+        {
             _innerExceptions = new Exception[innerExceptionInfos.Count];
 
             for (int i = 0; i < _innerExceptions.Length; i++)

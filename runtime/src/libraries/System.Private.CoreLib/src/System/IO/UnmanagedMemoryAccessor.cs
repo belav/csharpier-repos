@@ -43,7 +43,8 @@ namespace System.IO
             long offset,
             long capacity,
             FileAccess access
-        ) {
+        )
+        {
             Initialize(buffer, offset, capacity, access);
         }
 

@@ -117,7 +117,8 @@ namespace System.CommandLine.Rendering.Tests
             int top,
             int width,
             int height
-        ) {
+        )
+        {
             var writer = new ConsoleRenderer(_terminal, OutputMode.NonAnsi);
 
             var region = new Region(left, top, width, height);
@@ -207,7 +208,8 @@ namespace System.CommandLine.Rendering.Tests
             int top,
             int width,
             int height
-        ) {
+        )
+        {
             var writer = new ConsoleRenderer(_terminal, OutputMode.NonAnsi);
 
             var region = new Region(left, top, width, height);

@@ -67,7 +67,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.QuickInfo
         private static void EqualContainerElement(
             ContainerElement expected,
             ContainerElement actual
-        ) {
+        )
+        {
             Assert.Equal(expected.Style, actual.Style);
             Assert.Equal(expected.Elements.Count(), actual.Elements.Count());
             foreach (
@@ -75,7 +76,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.QuickInfo
                     actual.Elements,
                     (expectedElement, actualElement) => (expectedElement, actualElement)
                 )
-            ) {
+            )
+            {
                 EqualContent(expectedElement, actualElement);
             }
         }
@@ -90,14 +92,16 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.QuickInfo
         private static void EqualClassifiedTextElement(
             ClassifiedTextElement expected,
             ClassifiedTextElement actual
-        ) {
+        )
+        {
             Assert.Equal(expected.Runs.Count(), actual.Runs.Count());
             foreach (
                 var (expectedRun, actualRun) in expected.Runs.Zip(
                     actual.Runs,
                     (expectedRun, actualRun) => (expectedRun, actualRun)
                 )
-            ) {
+            )
+            {
                 EqualClassifiedTextRun(expectedRun, actualRun);
             }
         }
@@ -105,7 +109,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.QuickInfo
         private static void EqualClassifiedTextRun(
             ClassifiedTextRun expected,
             ClassifiedTextRun actual
-        ) {
+        )
+        {
             Assert.Equal(expected.ClassificationTypeName, actual.ClassificationTypeName);
             Assert.Equal(expected.Text, actual.Text);
             Assert.Equal(expected.Tooltip, actual.Tooltip);
@@ -199,7 +204,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.QuickInfo
                 if (
                     classifiedTextRun.NavigationAction is object
                     || !string.IsNullOrEmpty(classifiedTextRun.Tooltip)
-                ) {
+                )
+                {
                     var tooltip =
                         classifiedTextRun.Tooltip is object
                             ? $"\"{classifiedTextRun.Tooltip.Replace("\"", "\"\"")}\""

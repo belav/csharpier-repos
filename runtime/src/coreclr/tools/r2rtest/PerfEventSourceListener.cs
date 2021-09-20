@@ -35,7 +35,8 @@ public sealed class PerfEventSourceListener
         TraceEventSession traceEventSession,
         int totalWarmups,
         int totalRealRuns
-    ) {
+    )
+    {
         _totalRealRuns = totalRealRuns;
         traceEventSession.EnableProvider(providerName, TraceEventLevel.Verbose);
         traceEventSession.EnableProvider(graphProviderName, TraceEventLevel.Verbose);

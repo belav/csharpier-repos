@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
             Document document,
             TextSpan textSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 var tree = await document.GetSyntaxTreeAsync(cancellationToken)
@@ -48,7 +49,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
                         cancellationToken,
                         out var span
                     )
-                ) {
+                )
+                {
                     return null;
                 }
 

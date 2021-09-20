@@ -652,7 +652,8 @@ namespace System.Web.Helpers.Test
         private MockObjectVisitor CreateObjectVisitor(
             int recursionLimit = 10,
             int enumerationLimit = 1000
-        ) {
+        )
+        {
             return new MockObjectVisitor(recursionLimit, enumerationLimit);
         }
 

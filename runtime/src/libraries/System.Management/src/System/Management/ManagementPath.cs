@@ -155,7 +155,8 @@ namespace System.Management
         internal static ManagementPath _Clone(
             ManagementPath path,
             IdentifierChangedEventHandler handler
-        ) {
+        )
+        {
             ManagementPath pathTmp = new ManagementPath();
 
             // Wire up change handler chain. Use supplied handler, if specified;
@@ -742,7 +743,8 @@ namespace System.Management
                 status >= 0
                 && nsPath.Length > 1
                 && (nsPath[0] == '\\' && nsPath[1] == '\\' || nsPath[0] == '/' && nsPath[1] == '/')
-            ) {
+            )
+            {
                 uint uLen = 0;
                 status = wmiPathTmp.GetServer_(ref uLen, null);
 
@@ -1118,7 +1120,8 @@ namespace System.Management
             CultureInfo culture,
             object value,
             Type destinationType
-        ) {
+        )
+        {
             if (destinationType == null)
             {
                 throw new ArgumentNullException(nameof(destinationType));

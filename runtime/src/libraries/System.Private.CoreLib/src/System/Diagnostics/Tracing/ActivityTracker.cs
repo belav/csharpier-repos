@@ -59,7 +59,8 @@ namespace System.Diagnostics.Tracing
             ref Guid relatedActivityId,
             EventActivityOptions options,
             bool useTplSource = true
-        ) {
+        )
+        {
             if (m_current == null) // We are not enabled
             {
                 // We  used to rely on the TPL provider turning us on, but that has the disadvantage that you don't get Start-Stop tracking
@@ -171,7 +172,8 @@ namespace System.Diagnostics.Tracing
             int task,
             ref Guid activityId,
             bool useTplSource = true
-        ) {
+        )
+        {
             if (m_current == null) // We are not enabled
                 return;
 
@@ -313,7 +315,8 @@ namespace System.Diagnostics.Tracing
             string providerName,
             string activityName,
             int task
-        ) {
+        )
+        {
             // We use provider name to distinguish between activities from different providers.
 
             if (activityName.EndsWith(EventSource.s_ActivityStartSuffix, StringComparison.Ordinal))
@@ -338,7 +341,8 @@ namespace System.Diagnostics.Tracing
             }
             else if (
                 activityName.EndsWith(EventSource.s_ActivityStopSuffix, StringComparison.Ordinal)
-            ) {
+            )
+            {
 #if ES_BUILD_STANDALONE
                 return string.Concat(
                     providerName,
@@ -386,7 +390,8 @@ namespace System.Diagnostics.Tracing
                 ActivityInfo? creator,
                 Guid activityIDToRestore,
                 EventActivityOptions options
-            ) {
+            )
+            {
                 m_name = name;
                 m_eventOptions = options;
                 m_creator = creator;
@@ -450,7 +455,8 @@ namespace System.Diagnostics.Tracing
             private unsafe void CreateActivityPathGuid(
                 out Guid idRet,
                 out int activityPathGuidOffset
-            ) {
+            )
+            {
                 fixed (Guid* outPtr = &idRet)
                 {
                     int activityPathGuidOffsetStart = 0;
@@ -499,7 +505,8 @@ namespace System.Diagnostics.Tracing
                     ActivityInfo? ancestor = m_creator;
                     ancestor != null;
                     ancestor = ancestor.m_creator
-                ) {
+                )
+                {
                     if (ancestor.m_activityPathGuidOffset <= 10) // we need at least 2 bytes.
                     {
                         uint id = unchecked(
@@ -554,7 +561,8 @@ namespace System.Diagnostics.Tracing
                 int whereToAddId,
                 uint id,
                 bool overflow = false
-            ) {
+            )
+            {
                 byte* ptr = (byte*)outPtr;
                 byte* endPtr = ptr + 12;
                 ptr += whereToAddId;

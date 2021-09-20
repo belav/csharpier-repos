@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         public CompletionHandler(
             IEnumerable<Lazy<CompletionProvider, CompletionProviderMetadata>> completionProviders,
             CompletionListCache completionListCache
-        ) {
+        )
+        {
             _csharpTriggerCharacters = completionProviders.Where(
                     lz => lz.Metadata.Language == LanguageNames.CSharp
                 )
@@ -64,7 +65,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             LSP.CompletionParams request,
             RequestContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var document = context.Document;
             if (document == null)
             {
@@ -80,7 +82,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 && !char.TryParse(request.Context.TriggerCharacter, out var triggerCharacter)
                 && !char.IsLetterOrDigit(triggerCharacter)
                 && !IsValidTriggerCharacterForDocument(document, triggerCharacter)
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -237,7 +240,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 TextSpan? defaultSpan,
                 LSP.Range? defaultRange,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (useVSCompletionItem)
                 {
                     var vsCompletionItem = await CreateCompletionItemAsync<LSP.VSCompletionItem>(
@@ -377,7 +381,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                     TextSpan? defaultSpan,
                     LSP.Range? defaultRange,
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     Contract.ThrowIfNull(documentText);
                     Contract.ThrowIfNull(defaultSpan);
                     Contract.ThrowIfNull(defaultRange);
@@ -412,7 +417,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                     ImmutableArray<CharacterSetModificationRule>,
                     ImmutableArray<string>
                 > currentRuleCache
-            ) {
+            )
+            {
                 var commitCharacterRules = item.Rules.CommitCharacterRules;
 
                 // If the item doesn't have any special rules, just use the default commit characters.
@@ -465,7 +471,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         internal static async Task<OptionSet> GetCompletionOptionsAsync(
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Filter out snippets as they are not supported in the LSP client
             // https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1139740
             // Filter out unimported types for now as there are two issues with providing them:
@@ -495,7 +502,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                         tag,
                         out var completionItemKind
                     )
-                ) {
+                )
+                {
                     return completionItemKind;
                 }
             }

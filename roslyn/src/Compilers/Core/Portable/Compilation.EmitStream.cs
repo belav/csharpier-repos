@@ -59,7 +59,8 @@ namespace Microsoft.CodeAnalysis
                 EmitStreamProvider emitStreamProvider,
                 EmitStreamSignKind emitStreamSignKind,
                 StrongNameProvider? strongNameProvider
-            ) {
+            )
+            {
                 RoslynDebug.Assert(emitStreamProvider != null);
                 RoslynDebug.Assert(
                     strongNameProvider != null || emitStreamSignKind == EmitStreamSignKind.None
@@ -169,7 +170,8 @@ namespace Microsoft.CodeAnalysis
                 StrongNameKeys strongNameKeys,
                 CommonMessageProvider messageProvider,
                 DiagnosticBag diagnostics
-            ) {
+            )
+            {
                 RoslynDebug.Assert(_stream != null);
                 RoslynDebug.Assert(
                     _emitStreamSignKind != EmitStreamSignKind.SignedWithFile || _tempInfo.HasValue

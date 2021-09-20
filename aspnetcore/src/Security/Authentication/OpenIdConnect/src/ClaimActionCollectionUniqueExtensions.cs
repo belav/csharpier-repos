@@ -24,7 +24,8 @@ namespace Microsoft.AspNetCore.Authentication
             this ClaimActionCollection collection,
             string claimType,
             string jsonKey
-        ) {
+        )
+        {
             collection.MapUniqueJsonKey(claimType, jsonKey, ClaimValueTypes.String);
         }
 
@@ -42,7 +43,8 @@ namespace Microsoft.AspNetCore.Authentication
             string claimType,
             string jsonKey,
             string valueType
-        ) {
+        )
+        {
             collection.Add(new UniqueJsonKeyClaimAction(claimType, valueType, jsonKey));
         }
     }

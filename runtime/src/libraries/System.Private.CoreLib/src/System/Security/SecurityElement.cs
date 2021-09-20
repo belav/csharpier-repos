@@ -423,7 +423,8 @@ namespace System.Security
                     length <= maxCompareLength
                     && string.Compare(strEscValue, 0, str, index, length, StringComparison.Ordinal)
                         == 0
-                ) {
+                )
+                {
                     newIndex = index + strEscValue.Length;
                     return strEscSeq;
                 }

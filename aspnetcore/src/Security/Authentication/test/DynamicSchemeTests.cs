@@ -163,7 +163,8 @@ namespace Microsoft.AspNetCore.Authentication
 
         private static async Task<IHost> CreateHost(
             Action<IServiceCollection> configureServices = null
-        ) {
+        )
+        {
             var host = new HostBuilder().ConfigureWebHost(
                     builder =>
                         builder.UseTestServer()
@@ -181,7 +182,8 @@ namespace Microsoft.AspNetCore.Authentication
                                                     new PathString("/add"),
                                                     out var remainder
                                                 )
-                                            ) {
+                                            )
+                                            {
                                                 var name = remainder.Value.Substring(1);
                                                 var auth =
                                                     context.RequestServices.GetRequiredService<IAuthenticationSchemeProvider>();
@@ -197,7 +199,8 @@ namespace Microsoft.AspNetCore.Authentication
                                                     new PathString("/auth"),
                                                     out remainder
                                                 )
-                                            ) {
+                                            )
+                                            {
                                                 var name =
                                                     (remainder.Value.Length > 0)
                                                         ? remainder.Value.Substring(1)
@@ -210,7 +213,8 @@ namespace Microsoft.AspNetCore.Authentication
                                                     new PathString("/remove"),
                                                     out remainder
                                                 )
-                                            ) {
+                                            )
+                                            {
                                                 var name = remainder.Value.Substring(1);
                                                 var auth =
                                                     context.RequestServices.GetRequiredService<IAuthenticationSchemeProvider>();

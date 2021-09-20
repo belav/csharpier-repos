@@ -17,7 +17,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
             ObjectWriter objectWriter,
             out object? typeInformation,
             out int assemId
-        ) {
+        )
+        {
             BinaryTypeEnum binaryTypeEnum;
 
             assemId = 0;
@@ -30,7 +31,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
             else if (
                 ((objectInfo == null) || ((objectInfo != null) && !objectInfo._isSi))
                 && (ReferenceEquals(type, Converter.s_typeofObject))
-            ) {
+            )
+            {
                 // If objectInfo.Si then can be a surrogate which will change the type
                 binaryTypeEnum = BinaryTypeEnum.Object;
             }
@@ -68,7 +70,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
                         if (
                             assembly.Equals(Converter.s_urtAssemblyString)
                             || assembly.Equals(Converter.s_urtAlternativeAssemblyString)
-                        ) {
+                        )
+                        {
                             binaryTypeEnum = BinaryTypeEnum.ObjectUrt;
                             assemId = 0;
                         }
@@ -102,7 +105,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
         internal static BinaryTypeEnum GetParserBinaryTypeInfo(
             Type type,
             out object? typeInformation
-        ) {
+        )
+        {
             BinaryTypeEnum binaryTypeEnum;
             typeInformation = null;
 
@@ -154,7 +158,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
             object? typeInformation,
             int assemId,
             BinaryFormatterWriter output
-        ) {
+        )
+        {
             switch (binaryTypeEnum)
             {
                 case BinaryTypeEnum.Primitive:
@@ -197,7 +202,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
             BinaryTypeEnum binaryTypeEnum,
             BinaryParser input,
             out int assemId
-        ) {
+        )
+        {
             object var = null!;
             int readAssemId = 0;
 
@@ -239,7 +245,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
             out string? typeString,
             out Type? type,
             out bool isVariant
-        ) {
+        )
+        {
             isVariant = false;
             primitiveTypeEnum = InternalPrimitiveTypeE.Invalid;
             typeString = null;

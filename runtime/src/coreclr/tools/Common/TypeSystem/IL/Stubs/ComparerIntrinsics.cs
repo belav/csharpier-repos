@@ -55,7 +55,8 @@ namespace Internal.IL.Stubs
             MethodDesc methodBeingGenerated,
             string flavor,
             string interfaceName
-        ) {
+        )
+        {
             // We expect the method to be fully instantiated
             Debug.Assert(!methodBeingGenerated.IsTypicalMethodDefinition);
 
@@ -118,13 +119,15 @@ namespace Internal.IL.Stubs
             TypeDesc type,
             string flavor,
             string interfaceName
-        ) {
+        )
+        {
             TypeSystemContext context = type.Context;
 
             if (
                 context.IsCanonicalDefinitionType(type, CanonicalFormKind.Any)
                 || (type.IsRuntimeDeterminedSubtype && !type.HasInstantiation)
-            ) {
+            )
+            {
                 // The comparer will be determined at runtime. We can't tell the exact type at compile time.
                 return null;
             }
@@ -188,7 +191,8 @@ namespace Internal.IL.Stubs
             TypeDesc type,
             string flavor,
             string interfaceName
-        ) {
+        )
+        {
             Debug.Assert(type.IsCanonicalSubtype(CanonicalFormKind.Any));
 
             TypeDesc exactComparer = GetComparerForType(type, flavor, interfaceName);

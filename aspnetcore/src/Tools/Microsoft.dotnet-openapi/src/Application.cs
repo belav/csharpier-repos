@@ -23,7 +23,8 @@ namespace Microsoft.DotNet.OpenApi
             IHttpClientWrapper httpClient,
             TextWriter output = null,
             TextWriter error = null
-        ) {
+        )
+        {
             Out = output ?? Out;
             Error = error ?? Error;
 

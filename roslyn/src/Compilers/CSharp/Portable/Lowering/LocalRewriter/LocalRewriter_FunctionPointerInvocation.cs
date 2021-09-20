@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         public override BoundNode? VisitFunctionPointerInvocation(
             BoundFunctionPointerInvocation node
-        ) {
+        )
+        {
             var rewrittenExpression = VisitExpression(node.InvokedExpression);
             var rewrittenArgs = VisitList(node.Arguments);
 

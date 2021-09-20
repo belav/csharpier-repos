@@ -246,7 +246,8 @@ namespace System
         private static bool GetStaticNonPublicBooleanPropertyValue(
             string typeName,
             string propertyName
-        ) {
+        )
+        {
             Type globalizationMode = Type.GetType(typeName);
             if (globalizationMode != null)
             {

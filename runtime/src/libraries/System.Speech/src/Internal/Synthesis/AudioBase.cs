@@ -240,7 +240,8 @@ namespace System.Speech.Internal.Synthesis
             WAVEFORMATEX waveEx,
             long position,
             int cData
-        ) {
+        )
+        {
             RIFFHDR riff = new(0);
             BLOCKHDR block = new(0);
             DATAHDR dataHdr = new(0);
@@ -411,7 +412,8 @@ namespace System.Speech.Internal.Synthesis
             byte[] waveHeader,
             out int avgBytesPerSec,
             out int nBlockAlign
-        ) {
+        )
+        {
             // Hardcode the value of the size for the structure element
             // as the C# compiler pads the structure to the closest 4 or 8 bytes
             GCHandle gc = GCHandle.Alloc(waveHeader, GCHandleType.Pinned);

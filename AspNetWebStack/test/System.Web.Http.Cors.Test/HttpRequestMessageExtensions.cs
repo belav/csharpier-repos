@@ -12,7 +12,8 @@ namespace System.Web.Http.Cors
         public static void SetActionDescriptor(
             this HttpRequestMessage request,
             HttpActionDescriptor actionDescriptor
-        ) {
+        )
+        {
             if (request == null)
             {
                 throw new ArgumentNullException("request");

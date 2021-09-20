@@ -315,7 +315,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 var registeredInstallLocationOverride = new RegisteredInstallLocationOverride(
                     appExe
                 )
-            ) {
+            )
+            {
                 string architecture = fixture.CurrentRid.Split('-')[1];
                 if (useRegisteredLocation)
                 {
@@ -456,7 +457,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         [InlineData(false)]
         public void AppHost_CLI_FrameworkDependent_MissingRuntimeFramework_ErrorReportedInDialog(
             bool missingHostfxr
-        ) {
+        )
+        {
             var fixture = sharedTestState.PortableAppFixture_Built.Copy();
 
             string appExe = fixture.TestProject.AppExe;
@@ -516,7 +518,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         [InlineData(false)]
         public void AppHost_GUI_FrameworkDependent_MissingRuntimeFramework_ErrorReportedInDialog(
             bool missingHostfxr
-        ) {
+        )
+        {
             if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
                 // GUI app host is only supported on Windows.

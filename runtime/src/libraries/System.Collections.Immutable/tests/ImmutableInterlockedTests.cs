@@ -803,7 +803,8 @@ namespace System.Collections.Immutable.Tests
         private static bool UpdateArrayWrapper<T>(
             ref ImmutableArray<T> location,
             Func<ImmutableArray<T>, ImmutableArray<T>> transformer
-        ) {
+        )
+        {
             return ImmutableInterlocked.Update<T, int>(
                 ref location,
                 (t, arg) =>

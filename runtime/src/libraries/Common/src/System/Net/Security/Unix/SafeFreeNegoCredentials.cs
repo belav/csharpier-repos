@@ -57,7 +57,8 @@ namespace System.Net.Security
                 index > 0
                 && username.IndexOf(Backwhack, index + 1) < 0
                 && string.IsNullOrEmpty(domain)
-            ) {
+            )
+            {
                 domain = username.Substring(0, index);
                 username = username.Substring(index + 1);
             }

@@ -33,26 +33,28 @@ namespace System.IO.Pipes
             System.Security.Principal.IdentityReference identity,
             System.IO.Pipes.PipeAccessRights rights,
             System.Security.AccessControl.AccessControlType type
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(int),
-            default(bool),
-            default(System.Security.AccessControl.InheritanceFlags),
-            default(System.Security.AccessControl.PropagationFlags),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(int),
+                default(bool),
+                default(System.Security.AccessControl.InheritanceFlags),
+                default(System.Security.AccessControl.PropagationFlags),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
         public PipeAccessRule(
             string identity,
             System.IO.Pipes.PipeAccessRights rights,
             System.Security.AccessControl.AccessControlType type
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(int),
-            default(bool),
-            default(System.Security.AccessControl.InheritanceFlags),
-            default(System.Security.AccessControl.PropagationFlags),
-            default(System.Security.AccessControl.AccessControlType)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(int),
+                default(bool),
+                default(System.Security.AccessControl.InheritanceFlags),
+                default(System.Security.AccessControl.PropagationFlags),
+                default(System.Security.AccessControl.AccessControlType)
+            ) { }
         public System.IO.Pipes.PipeAccessRights PipeAccessRights
         {
             get { throw null; }
@@ -64,26 +66,28 @@ namespace System.IO.Pipes
             System.Security.Principal.IdentityReference identity,
             System.IO.Pipes.PipeAccessRights rights,
             System.Security.AccessControl.AuditFlags flags
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(int),
-            default(bool),
-            default(System.Security.AccessControl.InheritanceFlags),
-            default(System.Security.AccessControl.PropagationFlags),
-            default(System.Security.AccessControl.AuditFlags)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(int),
+                default(bool),
+                default(System.Security.AccessControl.InheritanceFlags),
+                default(System.Security.AccessControl.PropagationFlags),
+                default(System.Security.AccessControl.AuditFlags)
+            ) { }
         public PipeAuditRule(
             string identity,
             System.IO.Pipes.PipeAccessRights rights,
             System.Security.AccessControl.AuditFlags flags
-        ) : base(
-            default(System.Security.Principal.IdentityReference),
-            default(int),
-            default(bool),
-            default(System.Security.AccessControl.InheritanceFlags),
-            default(System.Security.AccessControl.PropagationFlags),
-            default(System.Security.AccessControl.AuditFlags)
-        ) { }
+        )
+            : base(
+                default(System.Security.Principal.IdentityReference),
+                default(int),
+                default(bool),
+                default(System.Security.AccessControl.InheritanceFlags),
+                default(System.Security.AccessControl.PropagationFlags),
+                default(System.Security.AccessControl.AuditFlags)
+            ) { }
         public System.IO.Pipes.PipeAccessRights PipeAccessRights
         {
             get { throw null; }
@@ -93,7 +97,8 @@ namespace System.IO.Pipes
     {
         public static System.IO.Pipes.PipeSecurity GetAccessControl(
             this System.IO.Pipes.PipeStream stream
-        ) {
+        )
+        {
             throw null;
         }
         public static void SetAccessControl(
@@ -124,7 +129,8 @@ namespace System.IO.Pipes
             System.Security.AccessControl.InheritanceFlags inheritanceFlags,
             System.Security.AccessControl.PropagationFlags propagationFlags,
             System.Security.AccessControl.AccessControlType type
-        ) {
+        )
+        {
             throw null;
         }
         public void AddAccessRule(System.IO.Pipes.PipeAccessRule rule) { }
@@ -136,7 +142,8 @@ namespace System.IO.Pipes
             System.Security.AccessControl.InheritanceFlags inheritanceFlags,
             System.Security.AccessControl.PropagationFlags propagationFlags,
             System.Security.AccessControl.AuditFlags flags
-        ) {
+        )
+        {
             throw null;
         }
         protected internal void Persist(System.Runtime.InteropServices.SafeHandle handle) { }
@@ -164,7 +171,8 @@ namespace System.IO.Pipes
             System.IO.HandleInheritability inheritability,
             int bufferSize,
             System.IO.Pipes.PipeSecurity? pipeSecurity
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -182,7 +190,8 @@ namespace System.IO.Pipes
             System.IO.Pipes.PipeSecurity? pipeSecurity,
             System.IO.HandleInheritability inheritability = System.IO.HandleInheritability.None,
             System.IO.Pipes.PipeAccessRights additionalAccessRights = default
-        ) {
+        )
+        {
             throw null;
         }
     }

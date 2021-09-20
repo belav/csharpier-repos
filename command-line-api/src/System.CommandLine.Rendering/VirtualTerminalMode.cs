@@ -24,7 +24,8 @@ namespace System.CommandLine.Rendering
             uint originalOutputMode,
             IntPtr stdInHandle,
             uint originalInputMode
-        ) {
+        )
+        {
             IsEnabled = true;
 
             _stdOutHandle = stdOutHandle;

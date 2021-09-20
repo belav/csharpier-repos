@@ -122,7 +122,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             bool useSecretAgreementAsHmac,
             bool prepend,
             bool append
-        ) {
+        )
+        {
             using (ECDiffieHellmanCng ecdh = NewDefaultECDHCng())
             using (ECDiffieHellmanPublicKey publicKey = ecdh.PublicKey)
             {

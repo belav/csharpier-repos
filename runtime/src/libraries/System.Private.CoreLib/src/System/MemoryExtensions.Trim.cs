@@ -746,7 +746,8 @@ namespace System
         public static ReadOnlySpan<char> TrimStart(
             this ReadOnlySpan<char> span,
             ReadOnlySpan<char> trimChars
-        ) {
+        )
+        {
             if (trimChars.IsEmpty)
             {
                 return span.TrimStart();
@@ -780,7 +781,8 @@ namespace System
         public static ReadOnlySpan<char> TrimEnd(
             this ReadOnlySpan<char> span,
             ReadOnlySpan<char> trimChars
-        ) {
+        )
+        {
             if (trimChars.IsEmpty)
             {
                 return span.TrimEnd();

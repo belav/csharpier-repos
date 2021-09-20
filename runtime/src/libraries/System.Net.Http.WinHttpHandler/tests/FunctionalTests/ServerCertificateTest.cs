@@ -27,7 +27,8 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
                 HttpResponseMessage response = await client.GetAsync(
                     Test.Common.Configuration.Http.SecureRemoteEchoServer
                 )
-            ) {
+            )
+            {
                 Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                 Assert.False(_validationCallbackHistory.WasCalled);
             }
@@ -44,7 +45,8 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
                 HttpResponseMessage response = await client.GetAsync(
                     Test.Common.Configuration.Http.RemoteEchoServer
                 )
-            ) {
+            )
+            {
                 Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                 Assert.False(_validationCallbackHistory.WasCalled);
             }
@@ -61,7 +63,8 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
                 HttpResponseMessage response = await client.GetAsync(
                     System.Net.Test.Common.Configuration.Http.SecureRemoteEchoServer
                 )
-            ) {
+            )
+            {
                 Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                 Assert.True(_validationCallbackHistory.WasCalled);
 

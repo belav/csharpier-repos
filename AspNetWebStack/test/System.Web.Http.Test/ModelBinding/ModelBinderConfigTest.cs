@@ -123,7 +123,8 @@ namespace System.Web.Http.ModelBinding
             HttpActionContext actionContext,
             ModelMetadata modelMetadata,
             object incomingValue
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 

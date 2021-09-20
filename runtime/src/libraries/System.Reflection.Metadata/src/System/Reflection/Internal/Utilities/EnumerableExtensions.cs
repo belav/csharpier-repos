@@ -16,7 +16,8 @@ namespace System.Reflection.Internal
         public static T? FirstOrDefault<T>(
             this ImmutableArray<T> collection,
             Func<T, bool> predicate
-        ) {
+        )
+        {
             foreach (var item in collection)
             {
                 if (predicate(item))
@@ -32,7 +33,8 @@ namespace System.Reflection.Internal
         public static IEnumerable<TResult> Select<TSource, TResult>(
             this IEnumerable<TSource> source,
             Func<TSource, TResult> selector
-        ) {
+        )
+        {
             foreach (var item in source)
             {
                 yield return selector(item);

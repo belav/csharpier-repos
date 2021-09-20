@@ -15,7 +15,8 @@ namespace System.Web.Http.ValueProviders.Providers
         public void ContainsPrefix_ReturnsTrue_IfElementNameStartsWithPrefix(
             string elementName,
             string prefix
-        ) {
+        )
+        {
             // Arrange
             CultureInfo culture = new CultureInfo("en-US");
             ElementalValueProvider elementalValueProvider = new ElementalValueProvider(
@@ -38,7 +39,8 @@ namespace System.Web.Http.ValueProviders.Providers
         public void ContainsPrefix_ReturnsFalse_IfElementCannotSpecifyValuesForPrefix(
             string elementName,
             string prefix
-        ) {
+        )
+        {
             // Arrange
             CultureInfo culture = new CultureInfo("en-US");
             ElementalValueProvider elementalValueProvider = new ElementalValueProvider(

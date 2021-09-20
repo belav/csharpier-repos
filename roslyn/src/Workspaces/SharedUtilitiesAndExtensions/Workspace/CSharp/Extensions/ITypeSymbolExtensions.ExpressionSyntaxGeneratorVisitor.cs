@@ -116,7 +116,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 ISymbol symbol,
                 ExpressionSyntax container,
                 SimpleNameSyntax syntax
-            ) {
+            )
+            {
                 return AddInformationTo(
                     SyntaxFactory.MemberAccessExpression(
                         SyntaxKind.SimpleMemberAccessExpression,

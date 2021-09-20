@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Editing
             ISymbol symbol,
             ITypeSymbol baseOrInterfaceType,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (baseOrInterfaceType == null)
             {
                 throw new ArgumentNullException(nameof(baseOrInterfaceType));
@@ -68,7 +69,8 @@ namespace Microsoft.CodeAnalysis.Editing
             INamedTypeSymbol symbol,
             Func<SyntaxGenerator, SyntaxNode> getNewBaseType,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var baseType = symbol.BaseType;
 
             if (baseType != null)
@@ -116,7 +118,8 @@ namespace Microsoft.CodeAnalysis.Editing
             INamedTypeSymbol symbol,
             ITypeSymbol newBaseType,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return editor.SetBaseTypeAsync(
                 symbol,
                 g => newBaseType != null ? g.TypeExpression(newBaseType) : null,

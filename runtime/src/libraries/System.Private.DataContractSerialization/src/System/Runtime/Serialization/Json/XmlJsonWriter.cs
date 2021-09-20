@@ -299,7 +299,8 @@ namespace System.Runtime.Serialization.Json
             bool[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.JsonWriteArrayNotSupported);
         }
 
@@ -310,7 +311,8 @@ namespace System.Runtime.Serialization.Json
             short[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.JsonWriteArrayNotSupported);
         }
 
@@ -321,7 +323,8 @@ namespace System.Runtime.Serialization.Json
             int[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.JsonWriteArrayNotSupported);
         }
 
@@ -332,7 +335,8 @@ namespace System.Runtime.Serialization.Json
             long[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.JsonWriteArrayNotSupported);
         }
 
@@ -343,7 +347,8 @@ namespace System.Runtime.Serialization.Json
             float[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.JsonWriteArrayNotSupported);
         }
 
@@ -354,7 +359,8 @@ namespace System.Runtime.Serialization.Json
             double[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.JsonWriteArrayNotSupported);
         }
 
@@ -365,7 +371,8 @@ namespace System.Runtime.Serialization.Json
             decimal[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.JsonWriteArrayNotSupported);
         }
 
@@ -376,7 +383,8 @@ namespace System.Runtime.Serialization.Json
             DateTime[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.JsonWriteArrayNotSupported);
         }
 
@@ -387,7 +395,8 @@ namespace System.Runtime.Serialization.Json
             Guid[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.JsonWriteArrayNotSupported);
         }
 
@@ -398,7 +407,8 @@ namespace System.Runtime.Serialization.Json
             TimeSpan[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.JsonWriteArrayNotSupported);
         }
 
@@ -409,7 +419,8 @@ namespace System.Runtime.Serialization.Json
             bool[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.JsonWriteArrayNotSupported);
         }
 
@@ -420,7 +431,8 @@ namespace System.Runtime.Serialization.Json
             decimal[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.JsonWriteArrayNotSupported);
         }
 
@@ -431,7 +443,8 @@ namespace System.Runtime.Serialization.Json
             double[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.JsonWriteArrayNotSupported);
         }
 
@@ -442,7 +455,8 @@ namespace System.Runtime.Serialization.Json
             float[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.JsonWriteArrayNotSupported);
         }
 
@@ -453,7 +467,8 @@ namespace System.Runtime.Serialization.Json
             int[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.JsonWriteArrayNotSupported);
         }
 
@@ -464,7 +479,8 @@ namespace System.Runtime.Serialization.Json
             long[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.JsonWriteArrayNotSupported);
         }
 
@@ -475,7 +491,8 @@ namespace System.Runtime.Serialization.Json
             short[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.JsonWriteArrayNotSupported);
         }
 
@@ -486,7 +503,8 @@ namespace System.Runtime.Serialization.Json
             DateTime[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.JsonWriteArrayNotSupported);
         }
 
@@ -497,7 +515,8 @@ namespace System.Runtime.Serialization.Json
             Guid[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.JsonWriteArrayNotSupported);
         }
 
@@ -508,7 +527,8 @@ namespace System.Runtime.Serialization.Json
             TimeSpan[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.JsonWriteArrayNotSupported);
         }
 
@@ -697,7 +717,8 @@ namespace System.Runtime.Serialization.Json
                 if (
                     (!IsWritingNameWithMapping || WrittenNameWithMapping)
                     && _dataType == JsonDataType.Object
-                ) {
+                )
+                {
                     WriteServerTypeAttribute();
                 }
             }
@@ -979,7 +1000,8 @@ namespace System.Runtime.Serialization.Json
                     IsWritingNameWithMapping
                     && ns == xmlnsNamespace
                     && localName != JsonGlobals.xmlnsPrefix
-                ) {
+                )
+                {
                     prefix = JsonGlobals.xmlnsPrefix;
                 }
             }
@@ -993,7 +1015,8 @@ namespace System.Runtime.Serialization.Json
                     string.IsNullOrEmpty(prefix)
                     && localName == JsonGlobals.xmlnsPrefix
                     && ns == xmlnsNamespace
-                ) {
+                )
+                {
                     prefix = JsonGlobals.xmlnsPrefix;
                     _isWritingXmlnsAttributeDefaultNs = true;
                 }
@@ -1269,7 +1292,8 @@ namespace System.Runtime.Serialization.Json
                             || _nodeType == JsonNodeType.EndElement
                         ) && XmlConverter.IsWhitespace(text)
                     )
-                ) {
+                )
+                {
                     StartText();
                     WriteEscapedJsonString(text);
                 }
@@ -1413,7 +1437,8 @@ namespace System.Runtime.Serialization.Json
         public override void WriteXmlAttribute(
             XmlDictionaryString localName,
             XmlDictionaryString? value
-        ) {
+        )
+        {
             throw new NotSupportedException(
                 SR.Format(SR.JsonMethodNotSupported, "WriteXmlAttribute")
             );
@@ -1469,7 +1494,8 @@ namespace System.Runtime.Serialization.Json
             if (
                 (nextNodeType == JsonNodeType.StandaloneText)
                 && (_nodeType == JsonNodeType.QuotedText)
-            ) {
+            )
+            {
                 throw new XmlException(SR.JsonCannotWriteStandaloneTextAfterQuotedText);
             }
         }
@@ -1703,7 +1729,8 @@ namespace System.Runtime.Serialization.Json
                     else if (
                         (ch >= HIGH_SURROGATE_START && (ch <= LOW_SURROGATE_END || ch >= MAX_CHAR))
                         || IsUnicodeNewlineCharacter(ch)
-                    ) {
+                    )
+                    {
                         _nodeWriter.WriteChars(chars + i, j - i);
                         _nodeWriter.WriteText(BACK_SLASH);
                         _nodeWriter.WriteText('u');

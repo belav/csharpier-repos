@@ -54,7 +54,8 @@ namespace System.Linq.Expressions.Compiler
         internal override BlockExpression Rewrite(
             ReadOnlyCollection<ParameterExpression>? variables,
             Expression[] args
-        ) {
+        )
+        {
             throw ContractUtils.Unreachable;
         }
     }

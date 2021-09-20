@@ -13,7 +13,8 @@ namespace System.Net.NetworkInformation
             IPEndPoint localEndPoint,
             IPEndPoint remoteEndPoint,
             TcpState state
-        ) {
+        )
+        {
             _localEndPoint = localEndPoint;
             _remoteEndPoint = remoteEndPoint;
             _state = state;

@@ -144,7 +144,8 @@ namespace System.Tests
 
         private static string GetSwitchName(
             [Runtime.CompilerServices.CallerLineNumber] int sourceLine = -1
-        ) {
+        )
+        {
             Assert.True(sourceLine != -1, "The 'sourceLine' should have retrieved from its caller");
             return "Switch.Line" + sourceLine;
         }

@@ -34,7 +34,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Server
         public ContentEncodingNegotiator(
             RequestDelegate next,
             IWebHostEnvironment webHostEnvironment
-        ) {
+        )
+        {
             _next = next;
             _webHostEnvironment = webHostEnvironment;
         }
@@ -57,7 +58,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Server
             if (
                 !StringWithQualityHeaderValue.TryParseList(accept, out var encodings)
                 || encodings.Count == 0
-            ) {
+            )
+            {
                 return;
             }
 
@@ -82,7 +84,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Server
                     else if (
                         _encodingExtensionMap.TryGetValue(encodingName, out var encodingExtension)
                         && ResourceExists(context, encodingExtension)
-                    ) {
+                    )
+                    {
                         selectedEncoding = encodingName;
                         selectedEncodingQuality = quality;
                     }
@@ -100,7 +103,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Server
                             encodingName,
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         selectedEncoding = StringSegment.Empty;
                         selectedEncodingQuality = quality;
                     }
@@ -120,7 +124,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Server
                 HttpContext context,
                 StringSegment selectedEncoding,
                 StringWithQualityHeaderValue encoding
-            ) {
+            )
+            {
                 foreach (var preferredEncoding in _preferredEncodings)
                 {
                     if (preferredEncoding == selectedEncoding)
@@ -131,7 +136,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Server
                     if (
                         (preferredEncoding == encoding.Value || encoding.Value == "*")
                         && ResourceExists(context, _encodingExtensionMap[preferredEncoding])
-                    ) {
+                    )
+                    {
                         return preferredEncoding;
                     }
                 }

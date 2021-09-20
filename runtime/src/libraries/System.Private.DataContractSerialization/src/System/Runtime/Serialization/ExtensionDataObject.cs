@@ -189,7 +189,8 @@ namespace System.Runtime.Serialization
             string elementNs,
             string valueName,
             string? valueNs
-        ) {
+        )
+        {
             string prefix = ExtensionDataReader.GetPrefix(valueNs);
             element.AddAttribute(elementPrefix, elementNs, elementName, prefix + ":" + valueName);
 
@@ -203,7 +204,8 @@ namespace System.Runtime.Serialization
                         attribute != null
                         && attribute.prefix == Globals.XmlnsPrefix
                         && attribute.localName == prefix
-                    ) {
+                    )
+                    {
                         prefixDeclaredOnElement = true;
                         break;
                     }

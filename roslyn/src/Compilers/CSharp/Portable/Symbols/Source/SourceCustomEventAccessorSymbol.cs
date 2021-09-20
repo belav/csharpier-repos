@@ -27,16 +27,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             string aliasQualifierOpt,
             bool isNullableAnalysisEnabled,
             BindingDiagnosticBag diagnostics
-        ) : base(
-            @event,
-            syntax.GetReference(),
-            ImmutableArray.Create(syntax.Keyword.GetLocation()),
-            explicitlyImplementedEventOpt,
-            aliasQualifierOpt,
-            isAdder: syntax.Kind() == SyntaxKind.AddAccessorDeclaration,
-            isIterator: SyntaxFacts.HasYieldOperations(syntax.Body),
-            isNullableAnalysisEnabled: isNullableAnalysisEnabled
-        ) {
+        )
+            : base(
+                @event,
+                syntax.GetReference(),
+                ImmutableArray.Create(syntax.Keyword.GetLocation()),
+                explicitlyImplementedEventOpt,
+                aliasQualifierOpt,
+                isAdder: syntax.Kind() == SyntaxKind.AddAccessorDeclaration,
+                isIterator: SyntaxFacts.HasYieldOperations(syntax.Body),
+                isNullableAnalysisEnabled: isNullableAnalysisEnabled
+            )
+        {
             Debug.Assert(syntax != null);
             Debug.Assert(
                 syntax.Kind() == SyntaxKind.AddAccessorDeclaration

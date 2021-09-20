@@ -321,7 +321,8 @@ namespace System.CodeDom.Compiler
             if (
                 e.Parameters.Count > 0
                 && string.Equals(e.Name, "Item", StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 ValidateParameters(e.Parameters);
             }
             else
@@ -336,7 +337,8 @@ namespace System.CodeDom.Compiler
                         IsCurrentInterface
                         || (e.Attributes & MemberAttributes.ScopeMask) == MemberAttributes.Abstract
                     )
-                ) {
+                )
+                {
                     ValidateStatements(e.GetStatements);
                 }
             }
@@ -348,7 +350,8 @@ namespace System.CodeDom.Compiler
                         IsCurrentInterface
                         || (e.Attributes & MemberAttributes.ScopeMask) == MemberAttributes.Abstract
                     )
-                ) {
+                )
+                {
                     ValidateStatements(e.SetStatements);
                 }
             }
@@ -409,7 +412,8 @@ namespace System.CodeDom.Compiler
             if (
                 !IsCurrentInterface
                 && (e.Attributes & MemberAttributes.ScopeMask) != MemberAttributes.Abstract
-            ) {
+            )
+            {
                 ValidateStatements(e.Statements);
             }
         }

@@ -37,7 +37,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             ApplicationPartManager applicationPartManager,
             IOptions<MvcOptions> mvcOptions,
             IOptions<RazorPagesOptions> pageOptions
-        ) {
+        )
+        {
             _pageActionDescriptorProvider = new PageActionDescriptorProvider(
                 pageRouteModelProviders,
                 mvcOptions,
@@ -84,7 +85,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                         pageActionDescriptor.RelativePath,
                         out var compiledViewDescriptor
                     )
-                ) {
+                )
+                {
                     throw new InvalidOperationException(
                         $"A descriptor for '{pageActionDescriptor.RelativePath}' was not found."
                     );

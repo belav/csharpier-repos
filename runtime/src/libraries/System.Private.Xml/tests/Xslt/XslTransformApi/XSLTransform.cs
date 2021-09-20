@@ -281,7 +281,8 @@ namespace System.Xml.Tests
             string assembly,
             string res,
             string[] strParams
-        ) {
+        )
+        {
             CExceptionHandler handler = new CExceptionHandler(
                 Path.Combine(_strPath, "Exceptions.xml"),
                 assembly,
@@ -303,7 +304,8 @@ namespace System.Xml.Tests
             string res,
             string[] strParams,
             LineInfo lInfo
-        ) {
+        )
+        {
             CExceptionHandler handler = new CExceptionHandler(
                 Path.Combine(_strPath, "Exceptions.xml"),
                 assembly,
@@ -455,7 +457,8 @@ namespace System.Xml.Tests
             XmlResolver xr,
             InputType inputType,
             ReaderType readerType
-        ) {
+        )
+        {
             _strXslFile = FullFilePath(_strXslFile);
 #pragma warning disable 0618
             xslt = new XslTransform();
@@ -610,7 +613,8 @@ namespace System.Xml.Tests
             string szFullFilename,
             string _strOutFile,
             XmlResolver resolver
-        ) {
+        )
+        {
             lock (s_outFileMemoryLock)
             {
                 xslt.Transform(szFullFilename, _strOutFile, resolver);
@@ -629,7 +633,8 @@ namespace System.Xml.Tests
             bool errorCase,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             lock (s_outFileMemoryLock)
             {
                 szXmlFile = FullFilePath(szXmlFile);
@@ -725,7 +730,8 @@ namespace System.Xml.Tests
                                     FileMode.Create,
                                     FileAccess.Write
                                 )
-                            ) {
+                            )
+                            {
                                 tw = new StreamWriter(outFile, Encoding.UTF8);
                                 xslt.Transform(xd, null, tw);
                             }
@@ -755,7 +761,8 @@ namespace System.Xml.Tests
             bool errorCase,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             lock (s_outFileMemoryLock)
             {
                 szXmlFile = FullFilePath(szXmlFile);
@@ -851,7 +858,8 @@ namespace System.Xml.Tests
                                     FileMode.Create,
                                     FileAccess.Write
                                 )
-                            ) {
+                            )
+                            {
                                 tw = new StreamWriter(outFile, Encoding.UTF8);
                                 xslt.Transform(xd, m_xsltArg, tw);
                             }
@@ -875,7 +883,8 @@ namespace System.Xml.Tests
             TransformType transformType,
             DocType docType,
             XmlResolver xr
-        ) {
+        )
+        {
             // Default value of errorCase is false
             return TransformResolver(szXmlFile, xr, false, transformType, docType);
         }
@@ -886,7 +895,8 @@ namespace System.Xml.Tests
             bool errorCase,
             TransformType transformType,
             DocType docType
-        ) {
+        )
+        {
             lock (s_outFileMemoryLock)
             {
                 szXmlFile = FullFilePath(szXmlFile);
@@ -983,7 +993,8 @@ namespace System.Xml.Tests
                                     FileMode.Create,
                                     FileAccess.Write
                                 )
-                            ) {
+                            )
+                            {
                                 tw = new StreamWriter(outFile, Encoding.UTF8);
                                 xslt.Transform(xd, null, tw, xr);
                             }

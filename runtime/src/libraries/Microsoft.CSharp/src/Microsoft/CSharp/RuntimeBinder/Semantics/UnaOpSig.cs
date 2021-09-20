@@ -19,7 +19,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 int cuosSkip,
                 PfnBindUnaOp pfn,
                 UnaOpFuncKind fnkind
-            ) {
+            )
+            {
                 this.pt = pt;
                 this.grfuom = grfuom;
                 this.cuosSkip = cuosSkip;

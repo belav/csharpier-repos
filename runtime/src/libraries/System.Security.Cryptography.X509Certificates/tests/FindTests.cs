@@ -21,7 +21,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
         private static void RunTest(
             Action<X509Certificate2, X509Certificate2, X509Certificate2Collection> test
-        ) {
+        )
+        {
             using (var msCer = new X509Certificate2(TestData.MsCertificate))
             using (var pfxCer = new X509Certificate2(TestData.PfxData, TestData.PfxDataPassword))
             {
@@ -90,7 +91,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             X509Certificate2Collection col1,
             X509FindType findType,
             object findValue
-        ) {
+        )
+        {
             X509Certificate2Collection col2 = col1.Find(findType, findValue, validOnly: false);
 
             using (new ImportedCollection(col2))
@@ -257,7 +259,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         {
             using (
                 X509Store machineRoot = new X509Store(StoreName.Root, StoreLocation.LocalMachine)
-            ) {
+            )
+            {
                 machineRoot.Open(OpenFlags.ReadOnly);
 
                 using (var watchedStoreCerts = new ImportedCollection(machineRoot.Certificates))
@@ -302,7 +305,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                         if (
                             keyUsageExtension != null
                             && (keyUsageExtension.KeyUsages & RequiredFlags) != RequiredFlags
-                        ) {
+                        )
+                        {
                             // Not a valid KeyUsage, skip.
                             continue;
                         }
@@ -870,7 +874,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         )]
         public static void TestBySubjectKeyIdentifier_ExtensionPresentWithLTM(
             string subjectKeyIdentifier
-        ) {
+        )
+        {
             RunSingleMatchTest_MsCer(X509FindType.FindBySubjectKeyIdentifier, subjectKeyIdentifier);
         }
 

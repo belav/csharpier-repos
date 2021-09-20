@@ -23,7 +23,8 @@ namespace System.Web.Http
         /// <returns>The <see cref="SystemDiagnosticsTraceWriter"/> which was created and registered.</returns>
         public static SystemDiagnosticsTraceWriter EnableSystemDiagnosticsTracing(
             this HttpConfiguration configuration
-        ) {
+        )
+        {
             if (configuration == null)
             {
                 throw new ArgumentNullException("configuration");

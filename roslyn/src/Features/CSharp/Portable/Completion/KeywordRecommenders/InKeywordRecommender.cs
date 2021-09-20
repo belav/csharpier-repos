@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             int position,
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxTree = context.SyntaxTree;
             return IsValidContextInForEachClause(context)
                 || IsValidContextInFromClause(context, cancellationToken)
@@ -42,7 +43,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                     out var parameterIndex,
                     out var previousModifier
                 )
-            ) {
+            )
+            {
                 if (previousModifier == SyntaxKind.None)
                 {
                     return true;
@@ -52,7 +54,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                     previousModifier == SyntaxKind.ThisKeyword
                     && parameterIndex == 0
                     && context.SyntaxTree.IsPossibleExtensionMethodContext(context.LeftToken)
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -74,7 +77,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                 if (
                     token.Parent is ForEachStatementSyntax statement
                     && token == statement.Identifier
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -93,7 +97,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
         private static bool IsValidContextInFromClause(
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var token = context.TargetToken;
 
             if (token.Kind() == SyntaxKind.IdentifierToken)
@@ -103,7 +108,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                 if (
                     token.GetPreviousToken(includeSkipped: true)
                         .IsKindOrHasMatchingText(SyntaxKind.FromKeyword)
-                ) {
+                )
+                {
                     var typeSyntax = token.Parent as TypeSyntax;
                     if (!typeSyntax.IsPotentialTypeName(context.SemanticModel, cancellationToken))
                     {
@@ -128,7 +134,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
         private static bool IsValidContextInJoinClause(
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var token = context.TargetToken;
 
             if (token.Kind() == SyntaxKind.IdentifierToken)
@@ -156,7 +163,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                             context.SemanticModel,
                             cancellationToken
                         )
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }

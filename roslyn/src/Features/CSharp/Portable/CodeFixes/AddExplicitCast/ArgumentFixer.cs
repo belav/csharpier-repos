@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.AddExplicitCast
             protected override SymbolInfo GetSpeculativeSymbolInfo(
                 SemanticModel semanticModel,
                 ArgumentListSyntax newArgumentList
-            ) {
+            )
+            {
                 var newInvocation = newArgumentList.Parent!;
                 return semanticModel.GetSpeculativeSymbolInfo(
                     newInvocation.SpanStart,

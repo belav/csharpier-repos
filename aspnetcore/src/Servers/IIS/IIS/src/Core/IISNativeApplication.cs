@@ -52,7 +52,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
             delegate* unmanaged<IntPtr, void> requestsDrainedHandler,
             IntPtr pvRequestContext,
             IntPtr pvShutdownContext
-        ) {
+        )
+        {
             NativeMethods.HttpRegisterCallbacks(
                 _nativeApplication,
                 requestCallback,

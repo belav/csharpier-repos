@@ -397,7 +397,8 @@ namespace System.Net.Tests
             HTTP_SERVER_PROPERTY property,
             IntPtr info,
             uint infosize
-        ) {
+        )
+        {
             uint statusCode = HttpQueryUrlGroupProperty(
                 urlGroupId,
                 HTTP_SERVER_PROPERTY.HttpServerTimeoutsProperty,

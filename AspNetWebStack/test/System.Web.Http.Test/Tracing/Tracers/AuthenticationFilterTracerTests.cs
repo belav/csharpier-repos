@@ -358,7 +358,8 @@ namespace System.Web.Http.Tracing.Tracers
         private static HttpAuthenticationContext CreateAuthenticationContext(
             HttpRequestMessage request,
             bool isPrincipalSet = true
-        ) {
+        )
+        {
             HttpActionContext actionContext = CreateActionContext(request);
             IPrincipal principal = (isPrincipalSet) ? CreateDummyPrincipal() : null;
             return new HttpAuthenticationContext(actionContext, principal);
@@ -379,7 +380,8 @@ namespace System.Web.Http.Tracing.Tracers
         private static HttpAuthenticationChallengeContext CreateChallengeContext(
             HttpRequestMessage request,
             IHttpActionResult result
-        ) {
+        )
+        {
             HttpActionContext actionContext = CreateActionContext(request);
             return new HttpAuthenticationChallengeContext(actionContext, result);
         }
@@ -422,7 +424,8 @@ namespace System.Web.Http.Tracing.Tracers
         private static AuthenticationFilterTracer CreateProductUnderTest(
             IAuthenticationFilter innerFilter,
             ITraceWriter traceWriter
-        ) {
+        )
+        {
             return new AuthenticationFilterTracer(innerFilter, traceWriter);
         }
 

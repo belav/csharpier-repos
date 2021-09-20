@@ -79,7 +79,8 @@ namespace System.Xml.Serialization
             Type[] argTypes,
             string[] argNames,
             MethodAttributes methodAttributes
-        ) {
+        )
+        {
             _methodBuilder = _typeBuilder.DefineMethod(
                 methodName,
                 methodAttributes,
@@ -100,7 +101,8 @@ namespace System.Xml.Serialization
             Type[] argTypes,
             string[] argNames,
             MethodAttributes methodAttributes
-        ) {
+        )
+        {
 #if DEBUG
             methodBuilderInfo.Validate(returnType, argTypes, methodAttributes);
 #endif
@@ -261,7 +263,8 @@ namespace System.Xml.Serialization
             Type type,
             string name,
             [NotNullWhen(true)] out LocalBuilder? local
-        ) {
+        )
+        {
             // This method can only be called between BeginMethod and EndMethod (i.e.
             // while we are emitting code for a method
             Debug.Assert(_freeLocals != null);
@@ -530,7 +533,8 @@ namespace System.Xml.Serialization
         private static MethodInfo? GetPropertyMethodFromBaseType(
             PropertyInfo propertyInfo,
             bool isGetter
-        ) {
+        )
+        {
             // we only invoke this when the propertyInfo does not have a GET or SET method on it
 
             Type? currentType = propertyInfo.DeclaringType!.BaseType;
@@ -1333,7 +1337,8 @@ namespace System.Xml.Serialization
         internal static ModuleBuilder CreateModuleBuilder(
             AssemblyBuilder assemblyBuilder,
             string name
-        ) {
+        )
+        {
             return assemblyBuilder.DefineDynamicModule(name);
         }
 
@@ -1343,7 +1348,8 @@ namespace System.Xml.Serialization
             TypeAttributes attributes,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type parent,
             Type[] interfaces
-        ) {
+        )
+        {
             // parent is nullable if no base class
             return moduleBuilder.DefineType(
                 TempAssembly.GeneratedAssemblyNamespace + "." + name,

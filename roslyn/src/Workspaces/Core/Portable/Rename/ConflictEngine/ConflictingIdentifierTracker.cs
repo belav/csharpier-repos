@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
         public ConflictingIdentifierTracker(
             SyntaxToken tokenBeingRenamed,
             IEqualityComparer<string> identifierComparer
-        ) {
+        )
+        {
             _currentIdentifiersInScope = new Dictionary<string, List<SyntaxToken>>(
                 identifierComparer
             );

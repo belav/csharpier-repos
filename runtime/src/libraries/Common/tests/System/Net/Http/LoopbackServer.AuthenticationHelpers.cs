@@ -20,7 +20,8 @@ namespace System.Net.Test.Common
 
         public async Task<List<string>> AcceptConnectionPerformAuthenticationAndCloseAsync(
             string authenticateHeaders
-        ) {
+        )
+        {
             List<string> lines = null;
             await AcceptConnectionAsync(
                     async connection =>
@@ -113,7 +114,8 @@ namespace System.Net.Test.Common
         internal static bool IsBasicAuthTokenValid(
             string clientResponse,
             LoopbackServer.Options options
-        ) {
+        )
+        {
             string clientHash = clientResponse.Substring(
                     clientResponse.IndexOf(
                         nameof(AuthenticationProtocols.Basic),
@@ -131,7 +133,8 @@ namespace System.Net.Test.Common
             string clientResponse,
             string requestMethod,
             LoopbackServer.Options options
-        ) {
+        )
+        {
             string clientHash = clientResponse.Substring(
                     clientResponse.IndexOf(
                         nameof(AuthenticationProtocols.Digest),

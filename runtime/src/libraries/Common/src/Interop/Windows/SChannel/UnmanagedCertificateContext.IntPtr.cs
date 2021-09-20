@@ -12,7 +12,8 @@ namespace System.Net
     {
         internal static unsafe X509Certificate2Collection GetRemoteCertificatesFromStoreContext(
             IntPtr certContext
-        ) {
+        )
+        {
             X509Certificate2Collection result = new X509Certificate2Collection();
 
             if (certContext == IntPtr.Zero)

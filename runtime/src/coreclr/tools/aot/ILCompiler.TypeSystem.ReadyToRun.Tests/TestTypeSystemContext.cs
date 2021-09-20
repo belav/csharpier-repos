@@ -63,7 +63,8 @@ namespace TypeSystemTests
         public override ModuleDesc ResolveAssembly(
             System.Reflection.AssemblyName name,
             bool throwIfNotFound
-        ) {
+        )
+        {
             return GetModuleForSimpleName(name.Name);
         }
 
@@ -77,7 +78,8 @@ namespace TypeSystemTests
 
         protected override RuntimeInterfacesAlgorithm GetRuntimeInterfacesAlgorithmForNonPointerArrayType(
             ArrayType type
-        ) {
+        )
+        {
             if (_arrayOfTRuntimeInterfacesAlgorithm == null)
             {
                 _arrayOfTRuntimeInterfacesAlgorithm = new ArrayOfTRuntimeInterfacesAlgorithm(
@@ -89,7 +91,8 @@ namespace TypeSystemTests
 
         protected override RuntimeInterfacesAlgorithm GetRuntimeInterfacesAlgorithmForDefType(
             DefType type
-        ) {
+        )
+        {
             return _metadataRuntimeInterfacesAlgorithm;
         }
 
@@ -102,7 +105,8 @@ namespace TypeSystemTests
             Instantiation instantiation,
             CanonicalFormKind kind,
             out bool changed
-        ) {
+        )
+        {
             if (CanonMode == CanonicalizationMode.Standard)
                 return StandardCanonicalizationAlgorithm.ConvertInstantiationToCanonForm(
                     instantiation,
@@ -131,7 +135,8 @@ namespace TypeSystemTests
         protected override TypeDesc ConvertToCanon(
             TypeDesc typeToConvert,
             ref CanonicalFormKind kind
-        ) {
+        )
+        {
             if (CanonMode == CanonicalizationMode.Standard)
                 return StandardCanonicalizationAlgorithm.ConvertToCanon(typeToConvert, kind);
             else

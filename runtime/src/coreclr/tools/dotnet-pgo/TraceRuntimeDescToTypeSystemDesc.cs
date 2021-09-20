@@ -30,7 +30,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 long typeID,
                 int methodToken,
                 long[] typeParameters
-            ) {
+            )
+            {
                 LoaderModuleID = loaderModuleID;
                 MethodToken = methodToken;
                 TypeParameters = typeParameters;
@@ -65,7 +66,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 byte corElementType,
                 long[] typeParameters,
                 string name
-            ) {
+            )
+            {
                 ModuleID = moduleID;
                 TypeNameID = typeNameID;
                 Flags = flags;
@@ -133,14 +135,16 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             TraceProcess traceProcess,
             TypeSystemContext context,
             int clrInstanceID
-        ) {
+        )
+        {
             _traceProcess = traceProcess;
             _context = context;
             _clrInstanceID = clrInstanceID;
 
             foreach (
                 var methodIDDetailsData in traceProcess.EventsInProcess.ByEventType<MethodDetailsTraceData>()
-            ) {
+            )
+            {
                 MethodDescInfo currentInfo;
                 if (_methods.TryGetValue(methodIDDetailsData.MethodID, out currentInfo))
                 {
@@ -209,7 +213,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
 
             foreach (
                 var bulkTypeTrace in traceProcess.EventsInProcess.ByEventType<GCBulkTypeTraceData>()
-            ) {
+            )
+            {
                 s_bulkTypeEvents++;
 
                 if (bulkTypeTrace.ClrInstanceID != _clrInstanceID)
@@ -290,7 +295,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             Dictionary<long, int> assemblyToCLRInstanceIDMap = new Dictionary<long, int>();
             foreach (
                 var assemblyLoadTrace in _traceProcess.EventsInProcess.ByEventType<AssemblyLoadUnloadTraceData>()
-            ) {
+            )
+            {
                 assemblyToCLRInstanceIDMap[assemblyLoadTrace.AssemblyID] =
                     assemblyLoadTrace.ClrInstanceID;
             }
@@ -349,7 +355,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                         !File.Exists(minfo.TraceManagedModule.FilePath)
                         && minfo.TraceManagedModule.FilePath.EndsWith(".il.dll")
                         && simpleName.EndsWith(".il")
-                    ) {
+                    )
+                    {
                         simpleName = simpleName.Substring(0, simpleName.Length - 3);
                     }
 
@@ -383,7 +390,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                             tinfo.TypeValue.Flags
                             & Microsoft.Diagnostics.Tracing.Parsers.Clr.TypeFlags.Array
                         ) != 0
-                    ) {
+                    )
+                    {
                         if (tinfo.TypeValue.TypeParameters.Length != 1)
                         {
                             throw new Exception("Bad format for BulkType");
@@ -440,7 +448,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     }
                     else if (
                         tinfo.TypeValue.CorElementType == (byte)SignatureTypeCode.FunctionPointer
-                    ) {
+                    )
+                    {
                         tinfo.Type = null;
                     }
                     else
@@ -474,11 +483,13 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                         if (
                             (tinfo.TypeValue.TypeParameters.Length != 0)
                             && uninstantiatedType != null
-                        ) {
+                        )
+                        {
                             if (
                                 uninstantiatedType.Instantiation.Length
                                 != tinfo.TypeValue.TypeParameters.Length
-                            ) {
+                            )
+                            {
                                 throw new Exception(
                                     $"Invalid TypeParameterCount {tinfo.TypeValue.TypeParameters.Length} expected {uninstantiatedType.Instantiation.Length} as needed by '{uninstantiatedType}'"
                                 );
@@ -510,7 +521,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                                     uninstantiatedType.Module
                                     == uninstantiatedType.Context.SystemModule
                                 )
-                            ) {
+                            )
+                            {
                                 tinfo.Type = uninstantiatedType.Context.CanonType;
                             }
                             else
@@ -603,7 +615,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                         if (
                             uninstantiatedMethod.Instantiation.Length
                             != minfo.MethodDetailsTraceData.TypeParameters.Length
-                        ) {
+                        )
+                        {
                             throw new Exception(
                                 $"Invalid TypeParameterCount {minfo.MethodDetailsTraceData.TypeParameters.Length} expected {uninstantiatedMethod.Instantiation.Length} as needed by '{uninstantiatedMethod}'"
                             );

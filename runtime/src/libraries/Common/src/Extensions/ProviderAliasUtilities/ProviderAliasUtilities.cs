@@ -25,7 +25,8 @@ namespace Microsoft.Extensions.Logging
                 if (
                     attributeData.AttributeType.FullName == AliasAttibuteTypeFullName
                     && attributeData.ConstructorArguments.Count > 0
-                ) {
+                )
+                {
                     CustomAttributeTypedArgument arg = attributeData.ConstructorArguments[0];
 
                     Debug.Assert(arg.ArgumentType == typeof(string));

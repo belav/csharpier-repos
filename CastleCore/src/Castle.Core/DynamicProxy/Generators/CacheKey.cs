@@ -39,7 +39,8 @@ namespace Castle.DynamicProxy.Generators
             Type type,
             Type[] interfaces,
             ProxyGenerationOptions options
-        ) {
+        )
+        {
             this.target = target;
             this.type = type;
             this.interfaces = interfaces ?? Type.EmptyTypes;

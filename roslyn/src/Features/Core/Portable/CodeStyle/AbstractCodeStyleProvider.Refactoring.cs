@@ -71,7 +71,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
             CodeRefactoringContext context,
             TOptionKind option,
             bool analyzerActive
-        ) {
+        )
+        {
             var (document, span, cancellationToken) = context;
 
             var computationTask = analyzerActive

@@ -150,7 +150,8 @@ namespace System.Web.Razor.Tokenizer
             string content,
             CSharpSymbolType type,
             IEnumerable<RazorError> errors
-        ) {
+        )
+        {
             return new CSharpSymbol(start, content, type, errors);
         }
 
@@ -309,7 +310,8 @@ namespace System.Web.Razor.Tokenizer
             CSharpSymbolType typeIfOnlyFirst,
             char second,
             CSharpSymbolType typeIfBoth
-        ) {
+        )
+        {
             return () =>
             {
                 if (CurrentCharacter == second)
@@ -327,7 +329,8 @@ namespace System.Web.Razor.Tokenizer
             CSharpSymbolType typeIfOption1,
             char option2,
             CSharpSymbolType typeIfOption2
-        ) {
+        )
+        {
             return () =>
             {
                 if (CurrentCharacter == option1)
@@ -463,7 +466,8 @@ namespace System.Web.Razor.Tokenizer
                 CSharpHelpers.IsRealLiteralSuffix(CurrentCharacter)
                 || CurrentCharacter == 'E'
                 || CurrentCharacter == 'e'
-            ) {
+            )
+            {
                 return RealLiteralExponentPart();
             }
             else

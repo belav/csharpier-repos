@@ -35,7 +35,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
                     Interlocked.CompareExchange(ref _callback, continuation, null),
                     _callbackCompleted
                 )
-            ) {
+            )
+            {
                 Task.Run(continuation);
             }
         }

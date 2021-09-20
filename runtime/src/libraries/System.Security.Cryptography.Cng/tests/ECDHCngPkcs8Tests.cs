@@ -18,7 +18,8 @@ namespace System.Security.Cryptography.Cng.Tests
         protected override void VerifyMatch(
             ECDiffieHellmanCng exported,
             ECDiffieHellmanCng imported
-        ) {
+        )
+        {
             using (
                 ECDiffieHellmanCng other = new ECDiffieHellmanCng(
                     exported.ExportParameters(false).Curve

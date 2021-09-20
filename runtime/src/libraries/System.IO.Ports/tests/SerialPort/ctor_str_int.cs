@@ -173,7 +173,8 @@ namespace System.IO.Ports.Tests
             int baudRate,
             Type expectedException,
             ThrowAt throwAt
-        ) {
+        )
+        {
             SerialPortProperties serPortProp = new SerialPortProperties();
 
             Debug.WriteLine(

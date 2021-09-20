@@ -94,7 +94,8 @@ namespace FunctionalTests
                                 if (
                                     endpoint != null
                                     && endpoint.Metadata.GetMetadata<HubMetadata>() != null
-                                ) {
+                                )
+                                {
                                     var request = context.HttpContext.Request;
                                     string token = request.Headers["Authorization"];
 
@@ -105,7 +106,8 @@ namespace FunctionalTests
                                                 "Bearer ",
                                                 StringComparison.OrdinalIgnoreCase
                                             )
-                                        ) {
+                                        )
+                                        {
                                             token = token.Substring("Bearer ".Length).Trim();
                                         }
                                     }
@@ -128,7 +130,8 @@ namespace FunctionalTests
             IApplicationBuilder app,
             IWebHostEnvironment env,
             ILogger<Startup> logger
-        ) {
+        )
+        {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

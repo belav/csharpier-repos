@@ -43,7 +43,8 @@ namespace System.Reflection.Internal
             object accessor,
             out SafeBuffer safeBuffer,
             out long offset
-        ) {
+        )
+        {
             var viewAccessor = (MemoryMappedViewAccessor)accessor;
             safeBuffer = viewAccessor.SafeMemoryMappedViewHandle;
             offset = viewAccessor.PointerOffset;

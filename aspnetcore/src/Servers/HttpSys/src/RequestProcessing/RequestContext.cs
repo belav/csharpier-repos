@@ -219,7 +219,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
 
         internal CancellationTokenRegistration RegisterForCancellation(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return cancellationToken.Register(AbortDelegate, this);
         }
 

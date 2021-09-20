@@ -49,7 +49,8 @@ namespace Microsoft.AspNetCore.StaticFiles
             IWebHostEnvironment hostingEnv,
             HtmlEncoder encoder,
             IOptions<DirectoryBrowserOptions> options
-        ) {
+        )
+        {
             if (next == null)
             {
                 throw new ArgumentNullException(nameof(next));
@@ -95,13 +96,15 @@ namespace Microsoft.AspNetCore.StaticFiles
                     subpath: out var subpath
                 )
                 && TryGetDirectoryInfo(subpath, out var contents)
-            ) {
+            )
+            {
                 // If the path matches a directory but does not end in a slash, redirect to add the slash.
                 // This prevents relative links from breaking.
                 if (
                     _options.RedirectToAppendTrailingSlash
                     && !Helpers.PathEndsInSlash(context.Request.Path)
-                ) {
+                )
+                {
                     Helpers.RedirectToPathWithSlash(context);
                     return Task.CompletedTask;
                 }

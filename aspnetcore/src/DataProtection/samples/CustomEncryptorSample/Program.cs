@@ -22,7 +22,8 @@ namespace CustomEncryptorSample
                     .PersistKeysToFileSystem(new DirectoryInfo(keysFolder))
                     .UseXmlEncryptor(s => new CustomXmlEncryptor(s))
                     .Services.BuildServiceProvider()
-            ) {
+            )
+            {
                 var protector = services.GetDataProtector("SamplePurpose");
 
                 // protect the payload

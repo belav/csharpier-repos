@@ -38,7 +38,8 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client.Projects
         public RoslynRemoteProjectInfoProvider(
             CSharpLspClientServiceFactory roslynLspClientServiceFactory,
             RemoteLanguageServiceWorkspace remoteLanguageServiceWorkspace
-        ) {
+        )
+        {
             _roslynLspClientServiceFactory =
                 roslynLspClientServiceFactory
                 ?? throw new ArgumentNullException(nameof(roslynLspClientServiceFactory));
@@ -49,7 +50,8 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client.Projects
 
         public async Task<ImmutableArray<ProjectInfo>> GetRemoteProjectInfosAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!_remoteLanguageServiceWorkspace.IsRemoteSession)
             {
                 return ImmutableArray<ProjectInfo>.Empty;
@@ -118,7 +120,8 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client.Projects
             string projectName,
             string language,
             ImmutableArray<string> files
-        ) {
+        )
+        {
             var projectId = ProjectId.CreateNewId();
             var docInfos = ImmutableArray.CreateBuilder<DocumentInfo>();
 

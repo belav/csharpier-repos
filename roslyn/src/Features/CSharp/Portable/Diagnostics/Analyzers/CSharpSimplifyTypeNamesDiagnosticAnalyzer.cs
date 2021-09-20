@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.SimplifyTypeNames
 
         protected override ImmutableArray<Diagnostic> AnalyzeCodeBlock(
             CodeBlockAnalysisContext context
-        ) {
+        )
+        {
             var semanticModel = context.SemanticModel;
             var cancellationToken = context.CancellationToken;
 
@@ -68,7 +69,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.SimplifyTypeNames
         protected override ImmutableArray<Diagnostic> AnalyzeSemanticModel(
             SemanticModelAnalysisContext context,
             SimpleIntervalTree<TextSpan, TextSpanIntervalIntrospector>? codeBlockIntervalTree
-        ) {
+        )
+        {
             var semanticModel = context.SemanticModel;
             var cancellationToken = context.CancellationToken;
 
@@ -98,7 +100,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.SimplifyTypeNames
             out string diagnosticId,
             out bool inDeclaration,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             inDeclaration = false;
             issueSpan = default;
             diagnosticId = IDEDiagnosticIds.SimplifyNamesDiagnosticId;
@@ -106,7 +109,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.SimplifyTypeNames
             if (
                 node is MemberAccessExpressionSyntax memberAccess
                 && memberAccess.Expression.IsKind(SyntaxKind.ThisExpression)
-            ) {
+            )
+            {
                 // don't bother analyzing "this.Goo" expressions.  They will be analyzed by
                 // the CSharpSimplifyThisOrMeDiagnosticAnalyzer.
                 return false;
@@ -156,7 +160,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.SimplifyTypeNames
                 replacementSyntax.HasAnnotations(
                     nameof(CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration)
                 )
-            ) {
+            )
+            {
                 inDeclaration = true;
                 diagnosticId = IDEDiagnosticIds.PreferBuiltInOrFrameworkTypeDiagnosticId;
             }
@@ -164,7 +169,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.SimplifyTypeNames
                 replacementSyntax.HasAnnotations(
                     nameof(CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess)
                 )
-            ) {
+            )
+            {
                 inDeclaration = false;
                 diagnosticId = IDEDiagnosticIds.PreferBuiltInOrFrameworkTypeDiagnosticId;
             }

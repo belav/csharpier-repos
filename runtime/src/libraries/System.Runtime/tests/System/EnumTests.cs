@@ -597,7 +597,8 @@ namespace System.Tests
             string value,
             bool ignoreCase,
             Type exceptionType
-        ) {
+        )
+        {
             Type typeArgument =
                 enumType == null || !enumType.GetTypeInfo().IsEnum ? typeof(SimpleEnum) : enumType;
             MethodInfo parseMethod = typeof(EnumTests).GetTypeInfo()
@@ -940,7 +941,8 @@ namespace System.Tests
             Type enumType,
             object value,
             string expected
-        ) {
+        )
+        {
             // Despite what MSDN says, GetName() does not require passing in the exact integral type.
             // For the purposes of comparison:
             //  - The enum member value are normalized as follows:
@@ -1644,7 +1646,8 @@ namespace System.Tests
         public static void ToObject_InvalidEnumType_ThrowsException(
             Type enumType,
             Type exceptionType
-        ) {
+        )
+        {
             Assert.Throws(exceptionType, () => Enum.ToObject(enumType, 5));
             Assert.Throws(exceptionType, () => Enum.ToObject(enumType, (sbyte)5));
             Assert.Throws(exceptionType, () => Enum.ToObject(enumType, (short)5));
@@ -1687,7 +1690,8 @@ namespace System.Tests
             Type enumType,
             object value,
             Type exceptionType
-        ) {
+        )
+        {
             if (exceptionType == typeof(ArgumentNullException))
                 AssertExtensions.Throws<ArgumentNullException>(
                     "value",
@@ -3182,7 +3186,8 @@ namespace System.Tests
         public static void IsDefined_UnsupportedEnumType_ThrowsInvalidOperationException(
             Type enumType,
             object value
-        ) {
+        )
+        {
             Exception ex = Assert.ThrowsAny<Exception>(() => Enum.IsDefined(enumType, value));
             string exName = ex.GetType().Name;
             Assert.True(
@@ -3221,7 +3226,8 @@ namespace System.Tests
         public static void Format_UnsupportedEnumType_ThrowsArgumentException(
             Type enumType,
             object value
-        ) {
+        )
+        {
             Exception formatGException = Assert.ThrowsAny<Exception>(
                 () => Enum.Format(enumType, value, "G")
             );

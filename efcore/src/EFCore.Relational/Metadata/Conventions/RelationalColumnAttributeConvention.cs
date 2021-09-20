@@ -36,7 +36,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             ColumnAttribute attribute,
             MemberInfo clrMember,
             IConventionContext context
-        ) {
+        )
+        {
             if (!string.IsNullOrWhiteSpace(attribute.Name))
             {
                 propertyBuilder.HasColumnName(attribute.Name, fromDataAnnotation: true);

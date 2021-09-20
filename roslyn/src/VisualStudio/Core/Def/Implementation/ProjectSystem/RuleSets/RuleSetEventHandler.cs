@@ -33,7 +33,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.R
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public RuleSetEventHandler(
             [Import(typeof(SVsServiceProvider))] IServiceProvider serviceProvider
-        ) {
+        )
+        {
             _serviceProvider = serviceProvider;
         }
 
@@ -49,7 +50,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.R
                     ErrorHandler.Succeeded(
                         trackProjectDocuments.AdviseTrackProjectDocumentsEvents(this, out _cookie)
                     )
-                ) {
+                )
+                {
                     _eventsHookedUp = true;
                 }
             }
@@ -67,7 +69,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.R
                     ErrorHandler.Succeeded(
                         trackProjectDocuments.UnadviseTrackProjectDocumentsEvents(_cookie)
                     )
-                ) {
+                )
+                {
                     _eventsHookedUp = false;
                     _cookie = 0;
                 }
@@ -128,7 +131,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.R
             string[] rgszMkOldNames,
             string[] rgszMkNewNames,
             VSRENAMEFILEFLAGS[] rgFlags
-        ) {
+        )
+        {
             var ruleSetRenames = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
             for (var i = 0; i < rgszMkOldNames.Length; i++)
@@ -137,7 +141,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.R
                 if (
                     Path.GetExtension(oldFileFullPath)
                         .Equals(".ruleset", StringComparison.OrdinalIgnoreCase)
-                ) {
+                )
+                {
                     var newFileFullPath = rgszMkNewNames[i];
                     ruleSetRenames[oldFileFullPath] = newFileFullPath;
                 }
@@ -270,7 +275,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.R
             int[] rgFirstIndices,
             string[] rgpszMkDocuments,
             uint[] rgFlags
-        ) {
+        )
+        {
             // First, handle the files that have been removed from projects (rather than deleted).
             // Here we only want to update the projects from which the file was removed.
 
@@ -288,7 +294,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.R
                     var j = indexOfFirstDocumentInProject;
                     j < indexOfFirstDocumentInNextProject;
                     j++
-                ) {
+                )
+                {
                     var fileFullPath = rgpszMkDocuments[j];
                     var removed =
                         (
@@ -299,11 +306,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.R
                         removed
                         && Path.GetExtension(fileFullPath)
                             .Equals(".ruleset", StringComparison.OrdinalIgnoreCase)
-                    ) {
+                    )
+                    {
                         if (
                             rgpProjects[i] is IVsHierarchy hierarchy
                             && hierarchy.TryGetProject(out var project)
-                        ) {
+                        )
+                        {
                             UpdateCodeAnalysisRuleSetPropertiesInProject(project, string.Empty);
                         }
                     }
@@ -326,7 +335,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.R
                     deleted
                     && Path.GetExtension(fileFullPath)
                         .Equals(".ruleset", StringComparison.OrdinalIgnoreCase)
-                ) {
+                )
+                {
                     ruleSetDeletions.Add(fileFullPath);
                 }
             }
@@ -360,11 +370,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.R
         private static void UpdateCodeAnalysisRuleSetPropertiesInProject(
             EnvDTE.Project project,
             string newRuleSetFilePath
-        ) {
+        )
+        {
             if (
                 project.Kind == PrjKind.prjKindCSharpProject
                 || project.Kind == PrjKind.prjKindVBProject
-            ) {
+            )
+            {
                 var projectFullName = project.FullName;
                 if (!string.IsNullOrWhiteSpace(projectFullName))
                 {
@@ -385,7 +397,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.R
             EnvDTE.Configuration config,
             string newRuleSetFilePath,
             string projectDirectoryFullPath
-        ) {
+        )
+        {
             var properties = config.Properties;
             try
             {
@@ -413,7 +426,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.R
                                 oldRuleSetFilePath,
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             var newRuleSetRelativePath = PathUtilities.GetRelativePath(
                                 projectDirectoryFullPath,
                                 newRuleSetFilePath
@@ -434,7 +448,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.R
         private static int IndexOfFirstDocumentInProject(
             int projectIndex,
             int[] firstDocumentIndices
-        ) {
+        )
+        {
             if (projectIndex >= firstDocumentIndices.Length)
             {
                 return firstDocumentIndices.Length;

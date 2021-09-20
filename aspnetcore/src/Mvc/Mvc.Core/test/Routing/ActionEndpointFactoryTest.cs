@@ -507,7 +507,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         private RouteEndpoint CreateConventionalRoutedEndpoint(
             ActionDescriptor action,
             string template
-        ) {
+        )
+        {
             return CreateConventionalRoutedEndpoint(
                 action,
                 new ConventionalRouteEntry(
@@ -525,7 +526,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         private RouteEndpoint CreateConventionalRoutedEndpoint(
             ActionDescriptor action,
             ConventionalRouteEntry route
-        ) {
+        )
+        {
             Assert.NotNull(action.RouteValues);
 
             var endpoints = new List<Endpoint>();
@@ -551,7 +553,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         private IReadOnlyList<Endpoint> CreateConventionalRoutedEndpoints(
             ActionDescriptor action,
             ConventionalRouteEntry route
-        ) {
+        )
+        {
             return CreateConventionalRoutedEndpoints(action, new[] { route, });
         }
 
@@ -559,7 +562,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             ActionDescriptor action,
             IReadOnlyList<ConventionalRouteEntry> routes,
             bool createInertEndpoints = false
-        ) {
+        )
+        {
             var endpoints = new List<Endpoint>();
             Factory.AddEndpoints(
                 endpoints,
@@ -580,7 +584,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             RouteValueDictionary dataTokens = null,
             int order = 0,
             List<Action<EndpointBuilder>> conventions = null
-        ) {
+        )
+        {
             conventions ??= new List<Action<EndpointBuilder>>();
             return new ConventionalRouteEntry(
                 routeName,
@@ -597,7 +602,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             object requiredValues,
             string pattern = null,
             IList<object> metadata = null
-        ) {
+        )
+        {
             var actionDescriptor = new ActionDescriptor();
             var routeValues = new RouteValueDictionary(requiredValues);
             foreach (var kvp in routeValues)
@@ -621,7 +627,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         private void AssertIsSubset(
             IReadOnlyDictionary<string, object> subset,
             IReadOnlyDictionary<string, object> fullSet
-        ) {
+        )
+        {
             foreach (var subsetPair in subset)
             {
                 var isPresent = fullSet.TryGetValue(subsetPair.Key, out var fullSetPairValue);

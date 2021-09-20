@@ -51,7 +51,8 @@ namespace BasicEventSourceTests
             Listener listener,
             EventSource source,
             FilteringOptions options = null
-        ) {
+        )
+        {
             int expectedTestNumber = 0;
             SubTest currentTest = null;
             List<Event> replies = new List<Event>(2);

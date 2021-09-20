@@ -157,7 +157,8 @@ namespace System.Composition.Hosting.Core
             int sharingId,
             CompositionOperation operation,
             CompositeActivator creator
-        ) {
+        )
+        {
             object result;
             if (
                 _sharedPartInstances != null

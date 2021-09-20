@@ -46,15 +46,17 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             PageActionInvokerCacheEntry cacheEntry,
             ITempDataDictionaryFactory tempDataFactory,
             HtmlHelperOptions htmlHelperOptions
-        ) : base(
-            diagnosticListener,
-            logger,
-            actionContextAccessor,
-            mapper,
-            pageContext,
-            filterMetadata,
-            pageContext.ValueProviderFactories
-        ) {
+        )
+            : base(
+                diagnosticListener,
+                logger,
+                actionContextAccessor,
+                mapper,
+                pageContext,
+                filterMetadata,
+                pageContext.ValueProviderFactories
+            )
+        {
             _selector = handlerMethodSelector;
             _pageContext = pageContext;
             CacheEntry = cacheEntry;
@@ -189,7 +191,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             if (
                 _actionDescriptor.BoundProperties.Count == 0
                 && (_handler == null || _handler.Parameters.Count == 0)
-            ) {
+            )
+            {
                 return Task.CompletedTask;
             }
 
@@ -223,7 +226,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         private static object[] PrepareArguments(
             IDictionary<string, object> argumentsInDictionary,
             HandlerMethodDescriptor handler
-        ) {
+        )
+        {
             if (handler.Parameters.Count == 0)
             {
                 return null;
@@ -241,7 +245,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 else if (
                     !ParameterDefaultValue.TryGetDefaultValue(parameter.ParameterInfo, out value)
                     && parameter.ParameterInfo.ParameterType.IsValueType
-                ) {
+                )
+                {
                     value = Activator.CreateInstance(parameter.ParameterInfo.ParameterType);
                 }
 

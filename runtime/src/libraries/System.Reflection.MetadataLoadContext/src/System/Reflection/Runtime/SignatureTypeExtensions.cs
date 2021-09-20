@@ -114,7 +114,8 @@ namespace System.Reflection
         internal static Type? TryResolveAgainstGenericMethod(
             this Type signatureType,
             MethodInfo genericMethod
-        ) {
+        )
+        {
             Debug.Assert(signatureType.IsSignatureType());
             return signatureType.TryResolve(genericMethod.GetGenericArguments());
         }

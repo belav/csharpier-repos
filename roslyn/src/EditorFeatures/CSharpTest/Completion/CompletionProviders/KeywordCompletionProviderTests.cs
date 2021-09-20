@@ -493,7 +493,8 @@ class C
         public async Task SuggestReadonlyBeforePropertyAccessor(
             string declarationType,
             bool present
-        ) {
+        )
+        {
             var markup =
                 $@"{declarationType} C {{
     int X {{

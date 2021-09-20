@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineMethod
 
         protected override ExpressionSyntax? GetRawInlineExpression(
             BaseMethodDeclarationSyntax methodDeclarationSyntax
-        ) {
+        )
+        {
             var blockSyntaxNode = methodDeclarationSyntax.Body;
             if (blockSyntaxNode != null)
             {
@@ -85,7 +86,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineMethod
 
         protected override bool IsValidExpressionUnderExpressionStatement(
             ExpressionSyntax expressionNode
-        ) {
+        )
+        {
             // C# Expression Statements defined in the language reference
             // expression_statement
             //     : statement_expression ';'
@@ -134,7 +136,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineMethod
             if (
                 parent is BinaryExpressionSyntax binaryExpressionSyntax
                 && binaryExpressionSyntax.IsKind(SyntaxKind.CoalesceExpression)
-            ) {
+            )
+            {
                 return syntaxNode.Equals(binaryExpressionSyntax.Right);
             }
 
@@ -153,7 +156,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineMethod
             if (
                 expressionSyntax
                 is ConditionalAccessExpressionSyntax conditionalAccessExpressionSyntax
-            ) {
+            )
+            {
                 var whenNotNull = conditionalAccessExpressionSyntax.WhenNotNull;
                 // If the expression is ended with an invocation
                 // (if the expressions in the middle are not ConditionalAccessExpressionSyntax),

@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             int position,
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return context.IsGlobalStatementContext
                 || ValidTypeContext(context)
                 || IsAfterAsyncKeywordInExpressionContext(context, cancellationToken)
@@ -50,7 +51,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
         private static bool IsAfterAsyncKeywordInExpressionContext(
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return context.TargetToken.IsKindOrHasMatchingText(SyntaxKind.AsyncKeyword)
                 && context.SyntaxTree.IsExpressionContext(
                     context.TargetToken.SpanStart,

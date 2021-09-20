@@ -103,7 +103,8 @@ namespace Microsoft.CodeAnalysis
             bool hasPublicKey = false,
             bool isRetargetable = false,
             AssemblyContentType contentType = AssemblyContentType.Default
-        ) {
+        )
+        {
             if (!IsValid(contentType))
             {
                 throw new ArgumentOutOfRangeException(
@@ -149,7 +150,8 @@ namespace Microsoft.CodeAnalysis
                 if (
                     !publicKeyOrToken.IsDefaultOrEmpty
                     && publicKeyOrToken.Length != PublicKeyTokenSize
-                ) {
+                )
+                {
                     throw new ArgumentException(
                         CodeAnalysisResources.InvalidSizeOfPublicKeyToken,
                         nameof(publicKeyOrToken)
@@ -180,7 +182,8 @@ namespace Microsoft.CodeAnalysis
             string? cultureName,
             ImmutableArray<byte> publicKeyOrToken,
             bool hasPublicKey
-        ) {
+        )
+        {
             Debug.Assert(name != null);
             Debug.Assert(IsValid(version));
             Debug.Assert(IsValidCultureName(cultureName));
@@ -213,7 +216,8 @@ namespace Microsoft.CodeAnalysis
             bool hasPublicKey = false,
             bool isRetargetable = false,
             AssemblyContentType contentType = AssemblyContentType.Default
-        ) {
+        )
+        {
             Debug.Assert(name != null);
             Debug.Assert(
                 (hasPublicKey && MetadataHelpers.IsValidPublicKey(publicKeyOrToken))
@@ -262,7 +266,8 @@ namespace Microsoft.CodeAnalysis
             bool hasPublicKey,
             out ImmutableArray<byte> publicKey,
             out ImmutableArray<byte> publicKeyToken
-        ) {
+        )
+        {
             if (hasPublicKey)
             {
                 publicKey = publicKeyOrToken;

@@ -88,7 +88,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
             NormalizedSnapshotSpanCollection selectedSpans,
             ValueTuple command,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (
                 Logger.LogBlock(
                     FunctionId.CommandHandler_ToggleBlockComment,
@@ -102,7 +103,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
                     ),
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 var navigator = _navigatorSelectorService.GetTextStructureNavigator(subjectBuffer);
 
                 var commentInfo = await service.GetInfoAsync(
@@ -133,7 +135,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
             ITextStructureNavigator navigator,
             NormalizedSnapshotSpanCollection selectedSpans,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var firstLineAroundSelection = selectedSpans.First().Start.GetContainingLine().Start;
             var lastLineAroundSelection = selectedSpans.Last().End.GetContainingLine().End;
             var linesContainingSelection = TextSpan.FromBounds(
@@ -169,7 +172,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
                         trackingSpans,
                         commentInfo
                     )
-                ) {
+                )
+                {
                     returnOperation = Operation.Comment;
                     break;
                 }
@@ -204,7 +208,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
             ArrayBuilder<TextChange> textChanges,
             ArrayBuilder<CommentTrackingSpan> trackingSpans,
             CommentSelectionInfo commentInfo
-        ) {
+        )
+        {
             // If the selection is just a caret, try and uncomment blocks on the same line with only whitespace on the line.
             if (
                 blockCommentSelection.SelectedSpan.IsEmpty
@@ -212,7 +217,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
                     blockCommentedSpans,
                     out var blockCommentOnSameLine
                 )
-            ) {
+            )
+            {
                 DeleteBlockComment(
                     blockCommentSelection,
                     blockCommentOnSameLine,
@@ -255,7 +261,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
             ArrayBuilder<TextChange> textChanges,
             ArrayBuilder<CommentTrackingSpan> trackingSpans,
             CommentSelectionInfo commentInfo
-        ) {
+        )
+        {
             // Add sequential block comments if the selection contains any intersecting comments.
             if (blockCommentSelection.HasIntersectingBlockComments())
             {
@@ -290,7 +297,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
         private static int GetCaretLocationAfterToken(
             ITextStructureNavigator navigator,
             BlockCommentSelectionHelper blockCommentSelection
-        ) {
+        )
+        {
             var snapshotSpan = blockCommentSelection.SnapshotSpan;
             if (navigator == null)
             {
@@ -309,7 +317,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
                 blockCommentSelection.IsSpanWhitespace(
                     TextSpan.FromBounds(extent.Span.Start, extent.Span.End)
                 )
-            ) {
+            )
+            {
                 locationAfterToken = snapshotSpan.Start;
             }
 
@@ -325,7 +334,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
             ArrayBuilder<TextChange> textChanges,
             ArrayBuilder<CommentTrackingSpan> trackingSpans,
             CommentSelectionInfo commentInfo
-        ) {
+        )
+        {
             var selectedSpan = blockCommentSelection.SelectedSpan;
 
             var amountToAddToStart = 0;
@@ -347,7 +357,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
             if (
                 blockCommentSelection.IsLocationCommented(selectedSpan.Start)
                 && !startsWithCommentMarker
-            ) {
+            )
+            {
                 InsertText(textChanges, selectedSpan.Start, commentInfo.BlockCommentEndString);
                 InsertText(textChanges, selectedSpan.Start, commentInfo.BlockCommentStartString);
                 // Shrink the tracking so the previous comment start marker is not included in selection.
@@ -358,7 +369,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
             if (
                 blockCommentSelection.IsLocationCommented(selectedSpan.End)
                 && !endsWithCommentMarker
-            ) {
+            )
+            {
                 InsertText(textChanges, selectedSpan.End, commentInfo.BlockCommentEndString);
                 InsertText(textChanges, selectedSpan.End, commentInfo.BlockCommentStartString);
                 // Shrink the tracking span so the next comment start marker is not included in selection.
@@ -374,7 +386,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
             CommentSelectionInfo commentInfo,
             TextSpan span,
             ArrayBuilder<TextChange> textChanges
-        ) {
+        )
+        {
             InsertText(textChanges, span.Start, commentInfo.BlockCommentStartString);
             InsertText(textChanges, span.End, commentInfo.BlockCommentEndString);
         }
@@ -384,7 +397,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
             TextSpan spanToRemove,
             ArrayBuilder<TextChange> textChanges,
             CommentSelectionInfo commentInfo
-        ) {
+        )
+        {
             DeleteText(
                 textChanges,
                 new TextSpan(spanToRemove.Start, commentInfo.BlockCommentStartString.Length)
@@ -399,7 +413,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
                     ),
                     commentInfo.BlockCommentEndString
                 )
-            ) {
+            )
+            {
                 DeleteText(
                     textChanges,
                     new TextSpan(endMarkerPosition, commentInfo.BlockCommentEndString.Length)
@@ -425,7 +440,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
             public BlockCommentSelectionHelper(
                 ImmutableArray<TextSpan> allBlockComments,
                 SnapshotSpan selectedSnapshotSpan
-            ) {
+            )
+            {
                 _trimmedText = selectedSnapshotSpan.GetText().Trim();
                 SnapshotSpan = selectedSnapshotSpan;
 
@@ -516,7 +532,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
             public bool TryGetBlockCommentOnSameLine(
                 ImmutableArray<TextSpan> allBlockComments,
                 out TextSpan commentedSpanOnSameLine
-            ) {
+            )
+            {
                 var snapshot = SnapshotSpan.Snapshot;
                 var selectedLine = snapshot.GetLineFromPosition(SelectedSpan.Start);
                 var lineStartToCaretIsWhitespace = IsSpanWhitespace(
@@ -531,12 +548,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
                         lineStartToCaretIsWhitespace
                         && SelectedSpan.Start < blockComment.Start
                         && snapshot.AreOnSameLine(SelectedSpan.Start, blockComment.Start)
-                    ) {
+                    )
+                    {
                         if (
                             IsSpanWhitespace(
                                 TextSpan.FromBounds(SelectedSpan.Start, blockComment.Start)
                             )
-                        ) {
+                        )
+                        {
                             commentedSpanOnSameLine = blockComment;
                             return true;
                         }
@@ -545,12 +564,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
                         caretToLineEndIsWhitespace
                         && SelectedSpan.Start > blockComment.End
                         && snapshot.AreOnSameLine(SelectedSpan.Start, blockComment.End)
-                    ) {
+                    )
+                    {
                         if (
                             IsSpanWhitespace(
                                 TextSpan.FromBounds(blockComment.End, SelectedSpan.Start)
                             )
-                        ) {
+                        )
+                        {
                             commentedSpanOnSameLine = blockComment;
                             return true;
                         }

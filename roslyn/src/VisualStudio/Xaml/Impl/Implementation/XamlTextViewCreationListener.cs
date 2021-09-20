@@ -36,7 +36,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
         public XamlTextViewCreationListener(
             [Import(typeof(SVsServiceProvider))] IServiceProvider serviceProvider,
             XamlProjectService projectService
-        ) {
+        )
+        {
             _serviceProvider = serviceProvider;
             _projectService = projectService;
             _serverUIContext = UIContext.FromUIContextGuid(s_serverUIContextGuid);

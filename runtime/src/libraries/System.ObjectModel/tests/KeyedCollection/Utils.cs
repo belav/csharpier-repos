@@ -151,7 +151,8 @@ namespace System.Collections.ObjectModel.Tests
     {
         public static IDictionary<TKey, TValue> GetDictionary<TKey, TValue>(
             this KeyedCollection<TKey, TValue> collection
-        ) {
+        )
+        {
             if (collection == null)
             {
                 throw new ArgumentNullException(nameof(collection));
@@ -175,7 +176,8 @@ namespace System.Collections.ObjectModel.Tests
             this KeyedCollectionGetKeyedValue<T1, T2> function,
             Func<T2> val1,
             Func<T2, T1> val2
-        ) {
+        )
+        {
             return () => function(val1, val2);
         }
 
@@ -184,7 +186,8 @@ namespace System.Collections.ObjectModel.Tests
             TKey[] expectedKeys,
             TValue[] expectedItems,
             TValue[] expectedItemsWithKeys
-        ) {
+        )
+        {
             if (expectedItemsWithKeys.Length != expectedKeys.Length)
             {
                 throw new ArgumentException(
@@ -222,7 +225,8 @@ namespace System.Collections.ObjectModel.Tests
             out TKey[] keys,
             out TValue[] items,
             out TValue[] itemsWithKeys
-        ) {
+        )
+        {
             items = new TValue[numItems];
             keys = new TKey[numItems];
             itemsWithKeys = new TValue[numItems];
@@ -256,7 +260,8 @@ namespace System.Collections.ObjectModel.Tests
             out TKey[] keys,
             out TValue[] items,
             out TValue[] itemsWithKeys
-        ) {
+        )
+        {
             items = new TValue[numItems];
             keys = new TKey[numItems];
             itemsWithKeys = new TValue[numItems];
@@ -290,7 +295,8 @@ namespace System.Collections.ObjectModel.Tests
             out TKey[] keys,
             out TValue[] items,
             out TValue[] itemsWithKeys
-        ) {
+        )
+        {
             items = new TValue[numItems];
             keys = new TKey[numItems];
             itemsWithKeys = new TValue[numItems];
@@ -324,7 +330,8 @@ namespace System.Collections.ObjectModel.Tests
             out TKey[] keys,
             out TValue[] items,
             out TValue[] itemsWithKeys
-        ) {
+        )
+        {
             items = new TValue[numItems];
             keys = new TKey[numItems];
             itemsWithKeys = new TValue[numItems];

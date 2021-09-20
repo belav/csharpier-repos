@@ -190,7 +190,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual ForeignKey? SetForeignKey(
             ForeignKey? foreignKey,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             EnsureMutable();
 
             var oldForeignKey = ForeignKey;
@@ -292,7 +293,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual SkipNavigation? SetInverse(
             SkipNavigation? inverse,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             EnsureMutable();
 
             var oldInverse = Inverse;
@@ -327,7 +329,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 inverse.JoinEntityType != null
                 && JoinEntityType != null
                 && inverse.JoinEntityType != JoinEntityType
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     CoreStrings.SkipInverseMismatchedJoinType(
                         inverse.Name,

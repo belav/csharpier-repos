@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 
         public JsonResultWithSystemTextJsonTest(
             MvcTestFixture<BasicWebSite.StartupWithSystemTextJson> fixture
-        ) {
+        )
+        {
             var factory =
                 fixture.Factories.FirstOrDefault()
                 ?? fixture.WithWebHostBuilder(

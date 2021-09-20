@@ -40,7 +40,8 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
                                 Version = HttpVersion20.Value
                             }
                         )
-                    ) {
+                    )
+                    {
                         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                         Assert.True(_validationCallbackHistory.WasCalled);
                         Assert.NotEmpty(_validationCallbackHistory.CertificateChain);
@@ -55,7 +56,8 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
                     using (
                         LoopbackServer.Connection connection = await s.EstablishConnectionAsync()
                             .ConfigureAwait(false)
-                    ) {
+                    )
+                    {
                         SslStream sslStream = connection.Stream as SslStream;
                         Assert.NotNull(sslStream);
                         Assert.True(sslStream.IsMutuallyAuthenticated);
@@ -93,7 +95,8 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
                                 Version = HttpVersion20.Value
                             }
                         )
-                    ) {
+                    )
+                    {
                         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                         Assert.True(_validationCallbackHistory.WasCalled);
                         Assert.NotEmpty(_validationCallbackHistory.CertificateChain);
@@ -108,7 +111,8 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
                     using (
                         Http2LoopbackConnection connection = await s.EstablishConnectionAsync()
                             .ConfigureAwait(false)
-                    ) {
+                    )
+                    {
                         SslStream sslStream = connection.Stream as SslStream;
                         Assert.NotNull(sslStream);
                         Assert.True(sslStream.IsMutuallyAuthenticated);

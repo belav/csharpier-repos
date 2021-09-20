@@ -40,7 +40,8 @@ namespace System.Text.Unicode.Tests
             string input,
             int expectedRuneCount,
             int expectedSurrogatePairCount
-        ) {
+        )
+        {
             // These test cases are for the "slow processing" code path at the end of GetIndexOfFirstInvalidUtf8Sequence,
             // so inputs should be less than 4 bytes.
 
@@ -79,7 +80,8 @@ namespace System.Text.Unicode.Tests
             int expectedRetVal,
             int expectedRuneCount,
             int expectedSurrogatePairCount
-        ) {
+        )
+        {
             // These test cases are for the "slow processing" code path at the end of GetIndexOfFirstInvalidUtf8Sequence,
             // so inputs should be less than 4 bytes.
 
@@ -125,7 +127,8 @@ namespace System.Text.Unicode.Tests
             string input,
             int expectedRuneCount,
             int expectedSurrogatePairCount
-        ) {
+        )
+        {
             // These test cases are for the "fast processing" code which is the main loop of GetIndexOfFirstInvalidUtf8Sequence,
             // so inputs should be less >= 4 bytes.
 
@@ -176,7 +179,8 @@ namespace System.Text.Unicode.Tests
             int expectedRetVal,
             int expectedRuneCount,
             int expectedSurrogatePairCount
-        ) {
+        )
+        {
             // These test cases are for the "fast processing" code which is the main loop of GetIndexOfFirstInvalidUtf8Sequence,
             // so inputs should be less >= 4 bytes.
 
@@ -408,7 +412,8 @@ namespace System.Text.Unicode.Tests
             int expectedRetVal,
             int expectedRuneCount,
             int expectedSurrogatePairCount
-        ) {
+        )
+        {
             byte[] inputBytes = Utf8Tests.DecodeHex(inputHex);
 
             // Run the test normally
@@ -443,7 +448,8 @@ namespace System.Text.Unicode.Tests
             int expectedRetVal,
             int expectedRuneCount,
             int expectedSurrogatePairCount
-        ) {
+        )
+        {
             // Arrange
 
             using BoundedMemory<byte> boundedMemory = BoundedMemory.AllocateFromExistingData(input);

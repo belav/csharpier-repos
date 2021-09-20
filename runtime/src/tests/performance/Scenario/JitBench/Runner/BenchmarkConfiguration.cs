@@ -43,7 +43,8 @@ namespace JitBench
             string modifier,
             string variableName,
             string variableValue
-        ) {
+        )
+        {
             if (IsDefault)
             {
                 Name = modifier;

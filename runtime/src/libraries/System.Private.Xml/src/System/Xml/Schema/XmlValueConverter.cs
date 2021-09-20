@@ -560,7 +560,8 @@ namespace System.Xml.Schema
             string value,
             Type destinationType,
             IXmlNamespaceResolver? nsResolver
-        ) {
+        )
+        {
             return (object)ChangeType((object)value, destinationType, nsResolver);
         }
         public override object ChangeType(object value, Type destinationType)
@@ -697,7 +698,8 @@ namespace System.Xml.Schema
             object value,
             Type destinationType,
             IXmlNamespaceResolver? nsResolver
-        ) {
+        )
+        {
             throw CreateInvalidClrMappingException(value.GetType(), destinationType);
         }
 
@@ -810,7 +812,8 @@ namespace System.Xml.Schema
         protected static XmlQualifiedName StringToQName(
             string value,
             IXmlNamespaceResolver? nsResolver
-        ) {
+        )
+        {
             string prefix,
                 localName;
             string? ns;
@@ -963,7 +966,8 @@ namespace System.Xml.Schema
         protected static string QNameToString(
             XmlQualifiedName qname,
             IXmlNamespaceResolver? nsResolver
-        ) {
+        )
+        {
             string? prefix;
 
             if (nsResolver == null)
@@ -1361,7 +1365,8 @@ namespace System.Xml.Schema
             string value,
             Type destinationType,
             IXmlNamespaceResolver? nsResolver
-        ) {
+        )
+        {
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
             if (destinationType == null)
@@ -1389,7 +1394,8 @@ namespace System.Xml.Schema
             object value,
             Type destinationType,
             IXmlNamespaceResolver? nsResolver
-        ) {
+        )
+        {
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
             if (destinationType == null)
@@ -1469,7 +1475,8 @@ namespace System.Xml.Schema
             object value,
             Type destinationType,
             IXmlNamespaceResolver? nsResolver
-        ) {
+        )
+        {
             Type sourceType = value.GetType();
 
             if (sourceType == ByteType)
@@ -1491,7 +1498,8 @@ namespace System.Xml.Schema
             object value,
             Type destinationType,
             IXmlNamespaceResolver? nsResolver
-        ) {
+        )
+        {
             if (destinationType == ByteType)
                 return Int32ToByte(this.ToInt32(value));
             if (destinationType == Int16Type)
@@ -1662,7 +1670,8 @@ namespace System.Xml.Schema
             string value,
             Type destinationType,
             IXmlNamespaceResolver? nsResolver
-        ) {
+        )
+        {
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
             if (destinationType == null)
@@ -1688,7 +1697,8 @@ namespace System.Xml.Schema
             object value,
             Type destinationType,
             IXmlNamespaceResolver? nsResolver
-        ) {
+        )
+        {
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
             if (destinationType == null)
@@ -1943,7 +1953,8 @@ namespace System.Xml.Schema
             string value,
             Type destinationType,
             IXmlNamespaceResolver? nsResolver
-        ) {
+        )
+        {
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
             if (destinationType == null)
@@ -1969,7 +1980,8 @@ namespace System.Xml.Schema
             object value,
             Type destinationType,
             IXmlNamespaceResolver? nsResolver
-        ) {
+        )
+        {
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
             if (destinationType == null)
@@ -2141,7 +2153,8 @@ namespace System.Xml.Schema
             string value,
             Type destinationType,
             IXmlNamespaceResolver? nsResolver
-        ) {
+        )
+        {
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
             if (destinationType == null)
@@ -2165,7 +2178,8 @@ namespace System.Xml.Schema
             object value,
             Type destinationType,
             IXmlNamespaceResolver? nsResolver
-        ) {
+        )
+        {
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
             if (destinationType == null)
@@ -2269,7 +2283,8 @@ namespace System.Xml.Schema
             string value,
             Type destinationType,
             IXmlNamespaceResolver? nsResolver
-        ) {
+        )
+        {
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
             if (destinationType == null)
@@ -2324,7 +2339,8 @@ namespace System.Xml.Schema
             object value,
             Type destinationType,
             IXmlNamespaceResolver? nsResolver
-        ) {
+        )
+        {
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
             if (destinationType == null)
@@ -2481,7 +2497,8 @@ namespace System.Xml.Schema
             object value,
             Type destinationType,
             IXmlNamespaceResolver? nsResolver
-        ) {
+        )
+        {
             Type sourceType = value.GetType();
 
             if (sourceType == XmlAtomicValueType)
@@ -2494,7 +2511,8 @@ namespace System.Xml.Schema
             object value,
             Type destinationType,
             IXmlNamespaceResolver? nsResolver
-        ) {
+        )
+        {
             if (destinationType == XPathItemType)
                 return ((XPathItem)this.ChangeType(value, XmlAtomicValueType, nsResolver));
 
@@ -2536,7 +2554,8 @@ namespace System.Xml.Schema
             string value,
             Type destinationType,
             IXmlNamespaceResolver? nsResolver
-        ) {
+        )
+        {
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
             if (destinationType == null)
@@ -2558,7 +2577,8 @@ namespace System.Xml.Schema
             object value,
             Type destinationType,
             IXmlNamespaceResolver? nsResolver
-        ) {
+        )
+        {
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
             if (destinationType == null)
@@ -2596,10 +2616,8 @@ namespace System.Xml.Schema
 
         private XmlUntypedConverter() : base(DatatypeImplementation.UntypedAtomicType) { }
 
-        private XmlUntypedConverter(
-            XmlUntypedConverter atomicConverter,
-            bool allowListToList
-        ) : base(atomicConverter, allowListToList ? StringArrayType : StringType)
+        private XmlUntypedConverter(XmlUntypedConverter atomicConverter, bool allowListToList)
+            : base(atomicConverter, allowListToList ? StringArrayType : StringType)
         {
             _allowListToList = allowListToList;
         }
@@ -2981,7 +2999,8 @@ namespace System.Xml.Schema
             string value,
             Type destinationType,
             IXmlNamespaceResolver? nsResolver
-        ) {
+        )
+        {
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
             if (destinationType == null)
@@ -3039,7 +3058,8 @@ namespace System.Xml.Schema
             object value,
             Type destinationType,
             IXmlNamespaceResolver? nsResolver
-        ) {
+        )
+        {
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
             if (destinationType == null)
@@ -3173,7 +3193,8 @@ namespace System.Xml.Schema
             object value,
             Type destinationType,
             IXmlNamespaceResolver? nsResolver
-        ) {
+        )
+        {
             Type sourceType = value.GetType();
 
             if (sourceType == XmlAtomicValueType)
@@ -3185,7 +3206,8 @@ namespace System.Xml.Schema
             object value,
             Type destinationType,
             IXmlNamespaceResolver? nsResolver
-        ) {
+        )
+        {
             if (destinationType == XmlAtomicValueType)
                 return (new XmlAtomicValue(SchemaType!, this.ToString(value, nsResolver)));
             if (destinationType == XPathItemType)
@@ -3204,7 +3226,8 @@ namespace System.Xml.Schema
             object value,
             Type destinationType,
             IXmlNamespaceResolver? nsResolver
-        ) {
+        )
+        {
             Type sourceType = value.GetType();
 
             // 1. If there is no nested atomic converter, then do not support lists at all
@@ -3212,7 +3235,8 @@ namespace System.Xml.Schema
             if (
                 (this.atomicConverter == null)
                 || (!_allowListToList && sourceType != StringType && destinationType != StringType)
-            ) {
+            )
+            {
                 if (SupportsType(sourceType))
                     throw new InvalidCastException(
                         SR.Format(SR.XmlConvert_TypeToString, XmlTypeName, sourceType.Name)
@@ -3542,7 +3566,8 @@ namespace System.Xml.Schema
             string value,
             Type destinationType,
             IXmlNamespaceResolver? nsResolver
-        ) {
+        )
+        {
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
             if (destinationType == null)
@@ -3565,7 +3590,8 @@ namespace System.Xml.Schema
             object value,
             Type destinationType,
             IXmlNamespaceResolver? nsResolver
-        ) {
+        )
+        {
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
             if (destinationType == null)
@@ -3782,7 +3808,8 @@ namespace System.Xml.Schema
             object value,
             Type destinationType,
             IXmlNamespaceResolver? nsResolver
-        ) {
+        )
+        {
             Type sourceType = value.GetType();
 
             if (sourceType == XmlAtomicValueType)
@@ -3794,7 +3821,8 @@ namespace System.Xml.Schema
             object value,
             Type destinationType,
             IXmlNamespaceResolver? nsResolver
-        ) {
+        )
+        {
             if (destinationType == XPathItemType)
                 return ((XPathItem)this.ChangeType(value, XmlAtomicValueType, nsResolver));
 
@@ -3833,7 +3861,8 @@ namespace System.Xml.Schema
             object value,
             Type destinationType,
             IXmlNamespaceResolver? nsResolver
-        ) {
+        )
+        {
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
             if (destinationType == null)
@@ -3844,7 +3873,8 @@ namespace System.Xml.Schema
                 !(value is IEnumerable)
                 || value.GetType() == StringType
                 || value.GetType() == ByteArrayType
-            ) {
+            )
+            {
                 // Then create a list from it
                 value = new object[] { value };
             }
@@ -3898,7 +3928,8 @@ namespace System.Xml.Schema
             object value,
             Type destinationType,
             IXmlNamespaceResolver? nsResolver
-        ) {
+        )
+        {
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
             if (destinationType == null)
@@ -3915,7 +3946,8 @@ namespace System.Xml.Schema
             object value,
             Type destinationType,
             IXmlNamespaceResolver? nsResolver
-        ) {
+        )
+        {
             Type sourceType = value.GetType();
 
             if (destinationType == ObjectType)
@@ -4137,7 +4169,8 @@ namespace System.Xml.Schema
         private new Exception CreateInvalidClrMappingException(
             Type sourceType,
             Type destinationType
-        ) {
+        )
+        {
             if (sourceType == destinationType)
                 return new InvalidCastException(
                     SR.Format(SR.XmlConvert_TypeListBadMapping, XmlTypeName, sourceType.Name)
@@ -4198,7 +4231,8 @@ namespace System.Xml.Schema
             object value,
             Type destinationType,
             IXmlNamespaceResolver? nsResolver
-        ) {
+        )
+        {
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
             if (destinationType == null)

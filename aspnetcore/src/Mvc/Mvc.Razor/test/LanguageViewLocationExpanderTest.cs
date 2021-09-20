@@ -118,7 +118,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             LanguageViewLocationExpanderFormat format,
             IEnumerable<string> viewLocations,
             IEnumerable<string> expectedViewLocations
-        ) {
+        )
+        {
             // Arrange
             var viewLocationExpanderContext = new ViewLocationExpanderContext(
                 new ActionContext(),
@@ -180,7 +181,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
         [MemberData(nameof(ViewLocationExpanderTestData))]
         public void ExpandViewLocations_IncorrectLocaleContextValue(
             IEnumerable<string> viewLocations
-        ) {
+        )
+        {
             // Arrange
             var viewLocationExpanderContext = new ViewLocationExpanderContext(
                 new ActionContext(),

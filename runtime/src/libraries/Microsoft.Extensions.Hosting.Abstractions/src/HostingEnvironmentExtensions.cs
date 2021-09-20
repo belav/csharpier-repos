@@ -65,7 +65,8 @@ namespace Microsoft.Extensions.Hosting
         public static bool IsEnvironment(
             this IHostingEnvironment hostingEnvironment,
             string environmentName
-        ) {
+        )
+        {
             if (hostingEnvironment == null)
             {
                 throw new ArgumentNullException(nameof(hostingEnvironment));

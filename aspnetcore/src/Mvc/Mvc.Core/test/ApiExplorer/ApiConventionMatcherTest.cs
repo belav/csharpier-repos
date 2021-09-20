@@ -322,7 +322,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
         public void IsNameMatch_WithSuffix_ReturnFalse_IfNameIsNotProperSuffix(
             string name,
             string conventionName
-        ) {
+        )
+        {
             // Act
             var result = ApiConventionMatcher.IsNameMatch(
                 name,

@@ -133,7 +133,8 @@ public class IcallTableGenerator : Task
                     | BindingFlags.Static
                     | BindingFlags.Instance
             )
-        ) {
+        )
+        {
             if ((method.GetMethodImplementationFlags() & MethodImplAttributes.InternalCall) == 0)
                 continue;
 

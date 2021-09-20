@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             ContextInfo contextInfo,
             DeclarationInfo declarationInfo,
             ExtensionMethodInfo extensionMethodInfo
-        ) {
+        )
+        {
             this.Checksum = checksum;
             _literalInfo = literalInfo;
             _identifierInfo = identifierInfo;
@@ -50,7 +51,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         public static async Task PrecalculateAsync(
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (Logger.LogBlock(FunctionId.SyntaxTreeIndex_Precalculate, cancellationToken))
             {
                 Debug.Assert(document.IsFromPrimaryBranch());
@@ -62,7 +64,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 if (
                     await PrecalculatedAsync(document, checksum, cancellationToken)
                         .ConfigureAwait(false)
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -71,7 +74,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                         FunctionId.SyntaxTreeIndex_Precalculate_Create,
                         cancellationToken
                     )
-                ) {
+                )
+                {
                     // If not, create and save the index.
                     var data = await CreateIndexAsync(document, checksum, cancellationToken)
                         .ConfigureAwait(false);
@@ -83,7 +87,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         public static async ValueTask<SyntaxTreeIndex> GetRequiredIndexAsync(
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var index = await GetIndexAsync(document, cancellationToken).ConfigureAwait(false);
             Contract.ThrowIfNull(index);
             return index;
@@ -102,7 +107,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             Document document,
             bool loadOnly,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // See if we already cached an index with this direct document index.  If so we can just
             // return it with no additional work.
             if (!s_documentToIndex.TryGetValue(document, out var index))
@@ -132,7 +138,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             Document document,
             bool loadOnly,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var checksum = await GetChecksumAsync(document, cancellationToken)
                 .ConfigureAwait(false);
 
@@ -141,7 +148,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             if (
                 s_documentIdToIndex.TryGetValue(document.Id, out var index)
                 && index?.Checksum == checksum
-            ) {
+            )
+            {
                 // The previous index we stored with this documentId is still valid.  Just
                 // return that.
                 return index;

@@ -127,7 +127,8 @@ namespace System.ComponentModel.Design.Serialization
             SerializationStore store,
             IContainer container,
             bool validateRecycledTypes
-        ) {
+        )
+        {
             DeserializeTo(store, container, validateRecycledTypes, applyDefaults: true);
         }
     }

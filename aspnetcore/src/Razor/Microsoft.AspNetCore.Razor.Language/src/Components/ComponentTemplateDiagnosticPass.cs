@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         protected override void ExecuteCore(
             RazorCodeDocument codeDocument,
             DocumentIntermediateNode documentNode
-        ) {
+        )
+        {
             if (!IsComponentDocument(documentNode))
             {
                 return;
@@ -66,7 +67,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                         ||
                         // Inside a directive attribute
                         ancestor is TagHelperDirectiveAttributeIntermediateNode
-                    ) {
+                    )
+                    {
                         Candidates.Add(new IntermediateNodeReference(Parent, node));
                     }
                 }

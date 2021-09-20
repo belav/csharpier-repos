@@ -46,11 +46,8 @@ namespace System
             HResult = HResults.COR_E_ARGUMENT;
         }
 
-        public ArgumentException(
-            string? message,
-            string? paramName,
-            Exception? innerException
-        ) : base(message, innerException)
+        public ArgumentException(string? message, string? paramName, Exception? innerException)
+            : base(message, innerException)
         {
             _paramName = paramName;
             HResult = HResults.COR_E_ARGUMENT;

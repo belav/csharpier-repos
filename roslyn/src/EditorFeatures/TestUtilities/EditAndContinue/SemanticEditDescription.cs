@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             Func<Compilation, ITypeSymbol>? partialType,
             IEnumerable<KeyValuePair<TextSpan, TextSpan>>? syntaxMap,
             bool hasSyntaxMap
-        ) {
+        )
+        {
             Kind = kind;
             SymbolProvider = symbolProvider;
             SyntaxMap = syntaxMap;

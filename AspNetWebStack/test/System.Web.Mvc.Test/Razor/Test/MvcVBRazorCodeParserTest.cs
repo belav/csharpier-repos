@@ -282,7 +282,8 @@ namespace System.Web.Mvc.Razor.Test
             string documentContents,
             List<RazorError> errors = null,
             bool designTimeMode = false
-        ) {
+        )
+        {
             errors = errors ?? new List<RazorError>();
             var markupParser = new HtmlMarkupParser();
             var codeParser = new MvcVBRazorCodeParser();

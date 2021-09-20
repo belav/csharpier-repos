@@ -38,18 +38,16 @@ namespace System.Net.Http.Headers
         public ViaHeaderValue(string protocolVersion, string receivedBy)
             : this(protocolVersion, receivedBy, null, null) { }
 
-        public ViaHeaderValue(
-            string protocolVersion,
-            string receivedBy,
-            string? protocolName
-        ) : this(protocolVersion, receivedBy, protocolName, null) { }
+        public ViaHeaderValue(string protocolVersion, string receivedBy, string? protocolName)
+            : this(protocolVersion, receivedBy, protocolName, null) { }
 
         public ViaHeaderValue(
             string protocolVersion,
             string receivedBy,
             string? protocolName,
             string? comment
-        ) {
+        )
+        {
             HeaderUtilities.CheckValidToken(protocolVersion, nameof(protocolVersion));
             CheckReceivedBy(receivedBy);
 
@@ -159,7 +157,8 @@ namespace System.Net.Http.Headers
         public static bool TryParse(
             [NotNullWhen(true)] string? input,
             [NotNullWhen(true)] out ViaHeaderValue? parsedValue
-        ) {
+        )
+        {
             int index = 0;
             parsedValue = null;
 
@@ -170,7 +169,8 @@ namespace System.Net.Http.Headers
                     ref index,
                     out object? output
                 )
-            ) {
+            )
+            {
                 parsedValue = (ViaHeaderValue)output!;
                 return true;
             }
@@ -228,7 +228,8 @@ namespace System.Net.Http.Headers
                 if (
                     HttpRuleParser.GetCommentLength(input, current, out commentLength)
                     != HttpParseResult.Parsed
-                ) {
+                )
+                {
                     return 0; // We found a '(' character but it wasn't a valid comment. Abort.
                 }
 
@@ -247,7 +248,8 @@ namespace System.Net.Http.Headers
             int startIndex,
             out string? protocolName,
             out string? protocolVersion
-        ) {
+        )
+        {
             // We have a string of the form '[<protocolName>/]<protocolVersion> <receivedBy> [<comment>]'. The first
             // token may either be the protocol name or protocol version. We'll only find out after reading the token
             // and by looking at the following character: If it is a '/' we just parsed the protocol name, otherwise
@@ -323,7 +325,8 @@ namespace System.Net.Http.Headers
             if (
                 HttpRuleParser.GetHostLength(receivedBy, 0, true, out string? host)
                 != receivedBy.Length
-            ) {
+            )
+            {
                 throw new FormatException(
                     SR.Format(
                         System.Globalization.CultureInfo.InvariantCulture,

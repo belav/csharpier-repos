@@ -30,7 +30,8 @@ class Program
             || provider.GetService<IServiceC>() is null
             || provider.GetService<IServiceF>()?.ServiceE?.ServiceD is null
             || provider.GetService<Logger<IServiceG>>() is null
-        ) {
+        )
+        {
             return -1;
         }
 

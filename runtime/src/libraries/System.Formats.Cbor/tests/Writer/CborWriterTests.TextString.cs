@@ -19,7 +19,8 @@ namespace System.Formats.Cbor.Tests
         public static void WriteTextString_SingleValue_HappyPath(
             string input,
             string hexExpectedEncoding
-        ) {
+        )
+        {
             byte[] expectedEncoding = hexExpectedEncoding.HexToByteArray();
             var writer = new CborWriter();
             writer.WriteTextString(input);
@@ -34,7 +35,8 @@ namespace System.Formats.Cbor.Tests
         public static void WriteTextString_IndefiniteLength_NoPatching_SingleValue_HappyPath(
             string[] chunkInputs,
             string hexExpectedEncoding
-        ) {
+        )
+        {
             byte[] expectedEncoding = hexExpectedEncoding.HexToByteArray();
             var writer = new CborWriter(convertIndefiniteLengthEncodings: false);
             Helpers.WriteChunkedTextString(writer, chunkInputs);
@@ -49,7 +51,8 @@ namespace System.Formats.Cbor.Tests
         public static void WriteTextString_IndefiniteLength_WithPatching_SingleValue_HappyPath(
             string[] chunkInputs,
             string hexExpectedEncoding
-        ) {
+        )
+        {
             byte[] expectedEncoding = hexExpectedEncoding.HexToByteArray();
             var writer = new CborWriter(convertIndefiniteLengthEncodings: true);
             Helpers.WriteChunkedTextString(writer, chunkInputs);
@@ -67,7 +70,8 @@ namespace System.Formats.Cbor.Tests
         [InlineData(CborConformanceMode.Lax)]
         public static void WriteTextString_InvalidUnicodeString_LaxConformance_ShouldSucceed(
             CborConformanceMode conformanceMode
-        ) {
+        )
+        {
             string invalidUnicodeString = "\ud800";
             byte[] expectedEncoding = { 0x63, 0xef, 0xbf, 0xbd };
 
@@ -82,7 +86,8 @@ namespace System.Formats.Cbor.Tests
         [InlineData(CborConformanceMode.Ctap2Canonical)]
         public static void WriteTextString_InvalidUnicodeString_StrictConformance_ShouldThrowArgumentException(
             CborConformanceMode conformanceMode
-        ) {
+        )
+        {
             // NB Xunit's InlineDataAttribute will corrupt string literals containing invalid unicode
             string invalidUnicodeString = "\ud800";
             var writer = new CborWriter(conformanceMode);
@@ -102,7 +107,8 @@ namespace System.Formats.Cbor.Tests
         [InlineData(nameof(CborWriter.WriteStartMap))]
         public static void WriteTextString_IndefiniteLength_NestedWrites_ShouldThrowInvalidOperationException(
             string opName
-        ) {
+        )
+        {
             var writer = new CborWriter();
             writer.WriteStartIndefiniteLengthTextString();
             Assert.Throws<InvalidOperationException>(() => Helpers.ExecOperation(writer, opName));
@@ -114,7 +120,8 @@ namespace System.Formats.Cbor.Tests
         [InlineData(nameof(CborWriter.WriteEndMap))]
         public static void WriteTextString_IndefiniteLength_ImbalancedWrites_ShouldThrowInvalidOperationException(
             string opName
-        ) {
+        )
+        {
             var writer = new CborWriter();
             writer.WriteStartIndefiniteLengthTextString();
             Assert.Throws<InvalidOperationException>(() => Helpers.ExecOperation(writer, opName));
@@ -125,7 +132,8 @@ namespace System.Formats.Cbor.Tests
         [InlineData(CborConformanceMode.Ctap2Canonical)]
         public static void WriteStartTextStringIndefiniteLength_NoPatching_UnsupportedConformance_ShouldThrowInvalidOperationException(
             CborConformanceMode conformanceMode
-        ) {
+        )
+        {
             var writer = new CborWriter(conformanceMode, convertIndefiniteLengthEncodings: false);
             Assert.Throws<InvalidOperationException>(
                 () => writer.WriteStartIndefiniteLengthTextString()

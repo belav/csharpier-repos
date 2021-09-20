@@ -2762,7 +2762,8 @@ return;
             int expectedIndentation,
             CSharpParseOptions options = null,
             IndentStyle indentStyle = IndentStyle.Smart
-        ) {
+        )
+        {
             AssertSmartIndentInProjection(
                 markup,
                 expectedIndentation,
@@ -2785,7 +2786,8 @@ return;
             bool useTabs,
             CSharpParseOptions options,
             IndentStyle indentStyle
-        ) {
+        )
+        {
             var optionsSet =
                 options != null ? new[] { options } : new[] { Options.Regular, Options.Script };
 
@@ -2844,7 +2846,8 @@ return;
             int? expectedIndentation,
             CSharpParseOptions options = null,
             IndentStyle indentStyle = IndentStyle.Smart
-        ) {
+        )
+        {
             AssertSmartIndent(
                 code,
                 indentationLine,
@@ -2870,7 +2873,8 @@ return;
             bool useTabs,
             CSharpParseOptions options,
             IndentStyle indentStyle
-        ) {
+        )
+        {
             var optionsSet =
                 options != null ? new[] { options } : new[] { Options.Regular, Options.Script };
 
@@ -2897,7 +2901,8 @@ return;
             int? expectedIndentation,
             CSharpParseOptions options = null,
             IndentStyle indentStyle = IndentStyle.Smart
-        ) {
+        )
+        {
             AssertSmartIndent(code, expectedIndentation, useTabs: false, options, indentStyle);
             AssertSmartIndent(
                 code.Replace("    ", "\t"),
@@ -2914,7 +2919,8 @@ return;
             bool useTabs,
             CSharpParseOptions options,
             IndentStyle indentStyle
-        ) {
+        )
+        {
             var optionsSet =
                 options != null ? new[] { options } : new[] { Options.Regular, Options.Script };
 

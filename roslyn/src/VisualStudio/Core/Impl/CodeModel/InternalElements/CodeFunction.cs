@@ -31,7 +31,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             FileCodeModel fileCodeModel,
             SyntaxNodeKey nodeKey,
             int? nodeKind
-        ) {
+        )
+        {
             var element = new CodeFunction(state, fileCodeModel, nodeKey, nodeKind);
             var result = (EnvDTE.CodeFunction)ComAggregate.CreateAggregatedObject(element);
 
@@ -45,7 +46,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             FileCodeModel fileCodeModel,
             int nodeKind,
             string name
-        ) {
+        )
+        {
             var element = new CodeFunction(state, fileCodeModel, nodeKind, name);
             return (EnvDTE.CodeFunction)ComAggregate.CreateAggregatedObject(element);
         }
@@ -115,7 +117,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
                 if (
                     symbol.MethodKind != MethodKind.Ordinary
                     && symbol.MethodKind != MethodKind.Constructor
-                ) {
+                )
+                {
                     return false;
                 }
 

@@ -41,7 +41,8 @@ namespace System.IO
             Action<byte[], int, int> writeFunc = null,
             Func<byte[], int, int, CancellationToken, Task> writeAsyncFunc = null,
             Action<bool> disposeFunc = null
-        ) {
+        )
+        {
             _canReadFunc = canReadFunc ?? (() => false);
             _canSeekFunc = canSeekFunc ?? (() => false);
             _canWriteFunc = canWriteFunc ?? (() => false);
@@ -157,7 +158,8 @@ namespace System.IO
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _readAsyncFunc(buffer, offset, count, cancellationToken);
         }
 
@@ -179,7 +181,8 @@ namespace System.IO
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _writeAsyncFunc(buffer, offset, count, cancellationToken);
         }
 

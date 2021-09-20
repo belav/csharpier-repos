@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             bool explicitFormat,
             IIndentationManagerService indentationManagerService,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var options = await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
             var snapshot = text.FindCorrespondingEditorTextSnapshot();

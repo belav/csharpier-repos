@@ -147,7 +147,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
                         out var accessControlRequestMethod
                     )
                     && !StringValues.IsNullOrEmpty(accessControlRequestMethod)
-                ) {
+                )
+                {
                     needs405Endpoint = false; // We don't return a 405 for a CORS preflight request when the endpoints accept CORS preflight.
                     httpMethod = accessControlRequestMethod;
                 }
@@ -345,7 +346,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
         public PolicyJumpTable BuildJumpTable(
             int exitDestination,
             IReadOnlyList<PolicyJumpTableEdge> edges
-        ) {
+        )
+        {
             Dictionary<string, int>? destinations = null;
             Dictionary<string, int>? corsPreflightDestinations = null;
             for (var i = 0; i < edges.Count; i++)
@@ -380,7 +382,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             if (
                 corsPreflightDestinations != null
                 && corsPreflightDestinations.TryGetValue(AnyMethod, out var matchesAnyVerb)
-            ) {
+            )
+            {
                 // If we have endpoints that match any HTTP method, use that as the exit.
                 corsPreflightExitDestination = matchesAnyVerb;
                 corsPreflightDestinations.Remove(AnyMethod);
@@ -475,7 +478,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             HttpContext httpContext,
             string httpMethod,
             out StringValues accessControlRequestMethod
-        ) {
+        )
+        {
             accessControlRequestMethod = default;
             var headers = httpContext.Request.Headers;
 

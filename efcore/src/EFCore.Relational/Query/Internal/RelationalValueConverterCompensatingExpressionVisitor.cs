@@ -27,7 +27,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         /// </summary>
         public RelationalValueConverterCompensatingExpressionVisitor(
             ISqlExpressionFactory sqlExpressionFactory
-        ) {
+        )
+        {
             _sqlExpressionFactory = sqlExpressionFactory;
         }
 
@@ -175,7 +176,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 sqlExpression is ColumnExpression columnExpression
                 && columnExpression.TypeMapping!.ClrType == typeof(bool)
                 && columnExpression.TypeMapping.Converter != null
-            ) {
+            )
+            {
                 return _sqlExpressionFactory.Equal(
                     sqlExpression,
                     _sqlExpressionFactory.Constant(true, sqlExpression.TypeMapping)
@@ -195,7 +197,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     sqlBinaryExpression.OperatorType == ExpressionType.AndAlso
                     || sqlBinaryExpression.OperatorType == ExpressionType.OrElse
                 )
-            ) {
+            )
+            {
                 return sqlBinaryExpression.Update(
                     TryCompensateForBoolWithValueConverter(sqlBinaryExpression.Left),
                     TryCompensateForBoolWithValueConverter(sqlBinaryExpression.Right)

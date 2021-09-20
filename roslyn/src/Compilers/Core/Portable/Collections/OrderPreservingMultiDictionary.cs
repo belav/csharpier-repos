@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.Collections
 
         private OrderPreservingMultiDictionary(
             ObjectPool<OrderPreservingMultiDictionary<K, V>> pool
-        ) {
+        )
+        {
             _pool = pool;
         }
 
@@ -114,7 +115,8 @@ namespace Microsoft.CodeAnalysis.Collections
             Func<V, TArg, bool> predicate,
             TArg arg,
             [MaybeNullWhen(false)] out V value
-        ) {
+        )
+        {
             if (_dictionary is not null && _dictionary.TryGetValue(key, out var valueSet))
             {
                 Debug.Assert(valueSet.Count >= 1);
@@ -230,7 +232,8 @@ namespace Microsoft.CodeAnalysis.Collections
                 Func<V, TArg, bool> predicate,
                 TArg arg,
                 [MaybeNullWhen(false)] out V value
-            ) {
+            )
+            {
                 Debug.Assert(this.Count >= 1);
                 var arrayBuilder = _value as ArrayBuilder<V>;
                 if (arrayBuilder is not null)

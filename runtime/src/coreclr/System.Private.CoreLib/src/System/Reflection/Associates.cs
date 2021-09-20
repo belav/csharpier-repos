@@ -44,7 +44,8 @@ namespace System.Reflection
             int tkMethod,
             RuntimeType declaredType,
             RuntimeType reflectedType
-        ) {
+        )
+        {
             if (MetadataToken.IsNullToken(tkMethod))
                 return null;
 
@@ -142,7 +143,8 @@ namespace System.Reflection
             out MethodInfo[]? other,
             out bool composedOfAllPrivateMethods,
             out BindingFlags bindingFlags
-        ) {
+        )
+        {
             addOn = removeOn = fireOn = getter = setter = null;
 
             Attributes attributes =

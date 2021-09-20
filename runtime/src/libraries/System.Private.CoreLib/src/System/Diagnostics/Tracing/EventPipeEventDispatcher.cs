@@ -55,7 +55,8 @@ namespace System.Diagnostics.Tracing
             bool enable,
             EventLevel level,
             EventKeywords matchAnyKeywords
-        ) {
+        )
+        {
             if (command == EventCommand.Update && enable)
             {
                 lock (m_dispatchControlLock)
@@ -206,7 +207,8 @@ namespace System.Diagnostics.Tracing
                 while (
                     !m_stopDispatchTask
                     && EventPipeInternal.GetNextEvent(m_sessionID, &instanceData)
-                ) {
+                )
+                {
                     eventsReceived = true;
 
                     // Filter based on provider.

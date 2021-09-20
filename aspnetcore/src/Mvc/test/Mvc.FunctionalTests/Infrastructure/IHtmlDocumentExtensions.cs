@@ -38,7 +38,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
                 if (
                     name == "__RequestVerificationToken"
                     || name == "HtmlEncode[[__RequestVerificationToken]]"
-                ) {
+                )
+                {
                     return input.GetAttribute("value");
                 }
             }

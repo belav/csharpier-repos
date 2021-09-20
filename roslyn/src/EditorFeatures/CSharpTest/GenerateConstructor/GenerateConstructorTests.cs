@@ -4154,7 +4154,8 @@ class D
         public async Task GenerateConstructor_ArgumentHasCommonPrefix(
             string argumentName,
             string fieldName
-        ) {
+        )
+        {
             await TestInRegularAndScriptAsync(
                 $@"
 class Program

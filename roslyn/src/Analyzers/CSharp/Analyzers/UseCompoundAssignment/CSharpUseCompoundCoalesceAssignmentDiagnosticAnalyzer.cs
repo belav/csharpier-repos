@@ -89,7 +89,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCompoundAssignment
                     semanticModel,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 return;
             }
 

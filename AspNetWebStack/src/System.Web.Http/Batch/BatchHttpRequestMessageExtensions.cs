@@ -37,7 +37,8 @@ namespace System.Web.Http.Batch
         public static void CopyBatchRequestProperties(
             this HttpRequestMessage subRequest,
             HttpRequestMessage batchRequest
-        ) {
+        )
+        {
             if (subRequest == null)
             {
                 throw new ArgumentNullException("subRequest");

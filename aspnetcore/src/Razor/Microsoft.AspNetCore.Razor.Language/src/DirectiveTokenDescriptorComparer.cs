@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public bool Equals(
             DirectiveTokenDescriptor descriptorX,
             DirectiveTokenDescriptor descriptorY
-        ) {
+        )
+        {
             if (descriptorX == descriptorY)
             {
                 return true;

@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.Rename
                 Document document,
                 OptionSet optionSet,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var solution = document.Project.Solution;
 
                 // Get only types matching the original document name by
@@ -89,7 +90,8 @@ namespace Microsoft.CodeAnalysis.Rename
             private static async Task<SyntaxNode?> GetMatchingTypeDeclarationAsync(
                 Document document,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var syntaxRoot = await document.GetRequiredSyntaxRootAsync(cancellationToken)
                     .ConfigureAwait(false);
                 var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
@@ -108,7 +110,8 @@ namespace Microsoft.CodeAnalysis.Rename
                 Document document,
                 string newName,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var analysis = await AnalyzeAsync(document, newName, cancellationToken)
                     .ConfigureAwait(false);
 
@@ -119,7 +122,8 @@ namespace Microsoft.CodeAnalysis.Rename
                 Document document,
                 string newDocumentName,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // TODO: Detect naming conflicts ahead of time
                 var documentWithNewName = document.WithName(newDocumentName);
                 var originalSymbolName = WorkspacePathUtilities.GetTypeNameFromDocumentName(
@@ -158,7 +162,8 @@ namespace Microsoft.CodeAnalysis.Rename
                         documentWithNewName,
                         symbol.Name
                     )
-                ) {
+                )
+                {
                     return null;
                 }
 
@@ -192,7 +197,8 @@ namespace Microsoft.CodeAnalysis.Rename
                     string newDocumentName,
                     string newSymbolName,
                     string originalSymbolName
-                ) {
+                )
+                {
                     OriginalDocumentName = document.Name;
                     NewDocumentName = newDocumentName;
                     NewSymbolName = newSymbolName;

@@ -11,7 +11,8 @@ namespace System.Security.Cryptography
             byte[] ecBlob,
             string curveName,
             bool includePrivateParameters
-        ) {
+        )
+        {
             CngKeyBlobFormat blobFormat = includePrivateParameters
                 ? CngKeyBlobFormat.EccPrivateBlob
                 : CngKeyBlobFormat.EccPublicBlob;
@@ -53,7 +54,8 @@ namespace System.Security.Cryptography
             bool includePrivateParameters,
             out CngKeyBlobFormat format,
             out string? curveName
-        ) {
+        )
+        {
             curveName = key.GetCurveName(out _);
             bool forceGenericBlob = false;
 

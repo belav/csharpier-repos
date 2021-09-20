@@ -13,7 +13,8 @@ namespace System.Net.WebSockets
             int count,
             System.Net.WebSockets.WebSocketMessageType messageType,
             bool endOfMessage
-        ) {
+        )
+        {
             throw null;
         }
         public int Count
@@ -54,7 +55,8 @@ namespace System.Net.WebSockets
         public static System.ArraySegment<byte> CreateClientBuffer(
             int receiveBufferSize,
             int sendBufferSize
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -68,7 +70,8 @@ namespace System.Net.WebSockets
             System.TimeSpan keepAliveInterval,
             bool useZeroMaskingKey,
             System.ArraySegment<byte> internalBuffer
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Net.WebSockets.WebSocket CreateFromStream(
@@ -76,7 +79,8 @@ namespace System.Net.WebSockets
             bool isServer,
             string? subProtocol,
             System.TimeSpan keepAliveInterval
-        ) {
+        )
+        {
             throw null;
         }
         public static System.ArraySegment<byte> CreateServerBuffer(int receiveBufferSize)
@@ -105,7 +109,8 @@ namespace System.Net.WebSockets
         public virtual System.Threading.Tasks.ValueTask<System.Net.WebSockets.ValueWebSocketReceiveResult> ReceiveAsync(
             System.Memory<byte> buffer,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -123,7 +128,8 @@ namespace System.Net.WebSockets
             System.Net.WebSockets.WebSocketMessageType messageType,
             bool endOfMessage,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         protected static void ThrowOnInvalidState(

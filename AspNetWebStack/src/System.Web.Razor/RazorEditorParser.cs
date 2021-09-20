@@ -239,7 +239,8 @@ namespace System.Web.Razor
             if (
                 _lastChangeOwner != null
                 && _lastChangeOwner.EditHandler.OwnsChange(_lastChangeOwner, change)
-            ) {
+            )
+            {
                 EditResult editResult = _lastChangeOwner.EditHandler.ApplyChange(
                     _lastChangeOwner,
                     change

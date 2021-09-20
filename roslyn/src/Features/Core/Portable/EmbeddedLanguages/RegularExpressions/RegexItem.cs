@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
                 string inlineDescription,
                 string fullDescription,
                 CompletionChange change
-            ) {
+            )
+            {
                 DisplayText = displayText;
                 InlineDescription = inlineDescription;
                 FullDescription = fullDescription;

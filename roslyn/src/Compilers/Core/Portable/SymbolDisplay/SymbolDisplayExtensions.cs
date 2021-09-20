@@ -62,7 +62,8 @@ namespace Microsoft.CodeAnalysis
         internal static bool IncludesOption(
             this SymbolDisplayCompilerInternalOptions options,
             SymbolDisplayCompilerInternalOptions flag
-        ) {
+        )
+        {
             return (options & flag) == flag;
         }
 
@@ -75,7 +76,8 @@ namespace Microsoft.CodeAnalysis
         internal static bool IncludesOption(
             this SymbolDisplayGenericsOptions options,
             SymbolDisplayGenericsOptions flag
-        ) {
+        )
+        {
             return (options & flag) == flag;
         }
 
@@ -88,7 +90,8 @@ namespace Microsoft.CodeAnalysis
         internal static bool IncludesOption(
             this SymbolDisplayMemberOptions options,
             SymbolDisplayMemberOptions flag
-        ) {
+        )
+        {
             return (options & flag) == flag;
         }
 
@@ -101,7 +104,8 @@ namespace Microsoft.CodeAnalysis
         internal static bool IncludesOption(
             this SymbolDisplayMiscellaneousOptions options,
             SymbolDisplayMiscellaneousOptions flag
-        ) {
+        )
+        {
             return (options & flag) == flag;
         }
 
@@ -114,7 +118,8 @@ namespace Microsoft.CodeAnalysis
         internal static bool IncludesOption(
             this SymbolDisplayParameterOptions options,
             SymbolDisplayParameterOptions flag
-        ) {
+        )
+        {
             return (options & flag) == flag;
         }
 
@@ -127,7 +132,8 @@ namespace Microsoft.CodeAnalysis
         internal static bool IncludesOption(
             this SymbolDisplayKindOptions options,
             SymbolDisplayKindOptions flag
-        ) {
+        )
+        {
             return (options & flag) == flag;
         }
 
@@ -140,7 +146,8 @@ namespace Microsoft.CodeAnalysis
         internal static bool IncludesOption(
             this SymbolDisplayLocalOptions options,
             SymbolDisplayLocalOptions flag
-        ) {
+        )
+        {
             return (options & flag) == flag;
         }
     }

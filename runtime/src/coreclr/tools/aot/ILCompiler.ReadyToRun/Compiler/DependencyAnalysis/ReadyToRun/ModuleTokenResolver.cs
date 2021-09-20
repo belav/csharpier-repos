@@ -40,7 +40,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         public ModuleTokenResolver(
             CompilationModuleGroup compilationModuleGroup,
             CompilerTypeSystemContext typeSystemContext
-        ) {
+        )
+        {
             _compilationModuleGroup = compilationModuleGroup;
             CompilerContext = typeSystemContext;
         }
@@ -90,7 +91,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             if (
                 _compilationModuleGroup.VersionsWithMethodBody(method)
                 && method.GetTypicalMethodDefinition() is EcmaMethod ecmaMethod
-            ) {
+            )
+            {
                 return new ModuleToken(ecmaMethod.Module, ecmaMethod.Handle);
             }
 
@@ -110,7 +112,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             if (
                 _compilationModuleGroup.VersionsWithType(field.OwningType)
                 && field is EcmaField ecmaField
-            ) {
+            )
+            {
                 return new ModuleToken(ecmaField.Module, ecmaField.Handle);
             }
 
@@ -190,7 +193,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             if (
                 _compilationModuleGroup.VersionsWithType(field.OwningType)
                 && field.OwningType is EcmaType
-            ) {
+            )
+            {
                 // We don't need to store handles within the current compilation group
                 // as we can read them directly from the ECMA objects.
                 return;
@@ -227,7 +231,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             ConcurrentDictionary<T, ModuleToken> dictionary,
             T tse,
             ModuleToken token
-        ) {
+        )
+        {
             if (!dictionary.TryAdd(tse, token))
             {
                 ModuleToken oldToken;
@@ -271,7 +276,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 if (
                     token.TokenType == CorTokenType.mdtTypeDef
                     || token.TokenType == CorTokenType.mdtTypeRef
-                ) {
+                )
+                {
                     SetModuleTokenForTypeSystemEntity(_typeToRefTokens, ecmaType, token);
                 }
             }
@@ -328,21 +334,24 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             public DummyTypeInfo GetGenericInstantiation(
                 DummyTypeInfo genericType,
                 ImmutableArray<DummyTypeInfo> typeArguments
-            ) {
+            )
+            {
                 return DummyTypeInfo.Instance;
             }
 
             public DummyTypeInfo GetGenericMethodParameter(
                 ModuleTokenResolver genericContext,
                 int index
-            ) {
+            )
+            {
                 return DummyTypeInfo.Instance;
             }
 
             public DummyTypeInfo GetGenericTypeParameter(
                 ModuleTokenResolver genericContext,
                 int index
-            ) {
+            )
+            {
                 return DummyTypeInfo.Instance;
             }
 
@@ -350,7 +359,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 DummyTypeInfo modifier,
                 DummyTypeInfo unmodifiedType,
                 bool isRequired
-            ) {
+            )
+            {
                 return DummyTypeInfo.Instance;
             }
 
@@ -378,7 +388,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 MetadataReader reader,
                 TypeDefinitionHandle handle,
                 byte rawTypeKind
-            ) {
+            )
+            {
                 // Type definition tokens outside of the versioning bubble are useless.
                 return DummyTypeInfo.Instance;
             }
@@ -387,7 +398,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 MetadataReader reader,
                 TypeReferenceHandle handle,
                 byte rawTypeKind
-            ) {
+            )
+            {
                 _resolver.AddModuleTokenForType(
                     (TypeDesc)_contextModule.GetObject(handle),
                     new ModuleToken(_contextModule, handle)
@@ -400,7 +412,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 ModuleTokenResolver genericContext,
                 TypeSpecificationHandle handle,
                 byte rawTypeKind
-            ) {
+            )
+            {
                 TypeSpecification typeSpec = reader.GetTypeSpecification(handle);
                 typeSpec.DecodeSignature(this, genericContext);
                 return DummyTypeInfo.Instance;

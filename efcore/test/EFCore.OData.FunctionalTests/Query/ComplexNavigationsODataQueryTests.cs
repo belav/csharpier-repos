@@ -14,9 +14,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         : ODataQueryTestBase,
           IClassFixture<ComplexNavigationsODataQueryTestFixture>
     {
-        public ComplexNavigationsODataQueryTests(
-            ComplexNavigationsODataQueryTestFixture fixture
-        ) : base(fixture) { }
+        public ComplexNavigationsODataQueryTests(ComplexNavigationsODataQueryTestFixture fixture)
+            : base(fixture) { }
 
         [ConditionalFact]
         public async Task Query_level_ones()

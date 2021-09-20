@@ -34,7 +34,8 @@ namespace IntelHardwareIntrinsicTest
                         new double[4] { 1, 1, 50, 0 },
                         new double[4]
                     )
-                ) {
+                )
+                {
                     var vf1 = Unsafe.Read<Vector128<float>>(floatTable.inArray1Ptr);
                     var vf2 = Unsafe.Read<Vector128<float>>(floatTable.inArray2Ptr);
                     var vf3 = Avx.CompareScalar(
@@ -56,7 +57,8 @@ namespace IntelHardwareIntrinsicTest
                     if (
                         BitConverter.SingleToInt32Bits(floatTable.outArray[0])
                         != (floatTable.inArray1[0] == floatTable.inArray2[0] ? -1 : 0)
-                    ) {
+                    )
+                    {
                         Console.WriteLine("Avx CompareScalar failed on float:");
                         foreach (var item in floatTable.outArray)
                         {
@@ -82,7 +84,8 @@ namespace IntelHardwareIntrinsicTest
                     if (
                         BitConverter.DoubleToInt64Bits(doubleTable.outArray[0])
                         != (doubleTable.inArray1[0] == doubleTable.inArray2[0] ? -1 : 0)
-                    ) {
+                    )
+                    {
                         Console.WriteLine("Avx CompareScalar failed on double:");
                         foreach (var item in doubleTable.outArray)
                         {

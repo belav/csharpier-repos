@@ -498,7 +498,8 @@ namespace System.Diagnostics.Tests
         private string[] ExecuteProcessAndReturnParsedOutput(
             Dictionary<string, string> envVars,
             Func<int> processWork
-        ) {
+        )
+        {
             // Schedule a process to see what env vars it gets.  Have it write out those variables
             // to its output stream so we can read them.
             Process p = CreateProcess(processWork);
@@ -954,7 +955,8 @@ namespace System.Diagnostics.Tests
                     Registry.ClassesRoot,
                     SubKeyValue + "\\shell"
                 )
-            ) {
+            )
+            {
                 if (extensionKey.Key == null)
                 {
                     // Skip this test if the user doesn't have permission to
@@ -1252,7 +1254,8 @@ namespace System.Diagnostics.Tests
         [InlineData(ProcessWindowStyle.Maximized + 1)]
         public void WindowStyle_SetNoSuchWindowStyle_ThrowsInvalidEnumArgumentException(
             ProcessWindowStyle style
-        ) {
+        )
+        {
             var info = new ProcessStartInfo();
             Assert.Throws<InvalidEnumArgumentException>(() => info.WindowStyle = style);
         }
@@ -1402,7 +1405,8 @@ namespace System.Diagnostics.Tests
             int str,
             string pszAssoc,
             string pszExtra
-        ) {
+        )
+        {
             uint count = 0;
             int result = AssocQueryStringW(flags, str, pszAssoc, pszExtra, null, ref count);
             if (result != 1)

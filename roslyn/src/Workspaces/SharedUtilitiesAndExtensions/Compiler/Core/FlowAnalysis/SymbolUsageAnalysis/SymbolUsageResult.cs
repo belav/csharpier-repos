@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
         public SymbolUsageResult(
             ImmutableDictionary<(ISymbol symbol, IOperation write), bool> symbolWritesMap,
             ImmutableHashSet<ISymbol> symbolsRead
-        ) {
+        )
+        {
             SymbolWritesMap = symbolWritesMap;
             SymbolsRead = symbolsRead;
         }

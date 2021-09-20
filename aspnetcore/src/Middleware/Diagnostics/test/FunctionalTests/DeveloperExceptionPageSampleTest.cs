@@ -13,7 +13,8 @@ namespace Microsoft.AspNetCore.Diagnostics.FunctionalTests
     {
         public DeveloperExceptionPageSampleTest(
             TestFixture<DeveloperExceptionPageSample.Startup> fixture
-        ) {
+        )
+        {
             Client = fixture.Client;
         }
 

@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmInspectionContext inspectionContext,
             DkmClrValue value,
             ResultProvider resultProvider
-        ) {
+        )
+        {
             var enumerableType = GetEnumerableType(value);
             if (enumerableType == null)
             {
@@ -40,7 +41,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmClrCustomTypeInfo declaredTypeInfo,
             DkmClrValue value,
             ResultProvider resultProvider
-        ) {
+        )
+        {
             string errorMessage;
             if (value.IsError())
             {
@@ -99,7 +101,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmClrCustomTypeInfo declaredTypeInfo,
             DkmClrValue value,
             ResultProvider resultProvider
-        ) {
+        )
+        {
             if ((value.ValueFlags & DkmClrValueFlags.Synthetic) == 0)
             {
                 return null;
@@ -163,7 +166,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmClrValue value,
             DkmClrType valueType,
             bool requireExactInterface
-        ) {
+        )
+        {
             if (!IsEnumerableCandidate(value))
             {
                 return null;
@@ -196,7 +200,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmClrValue value,
             DkmClrType enumerableType,
             ResultProvider resultProvider
-        ) {
+        )
+        {
             var proxyValue = value.InstantiateResultsViewProxy(inspectionContext, enumerableType);
             // InstantiateResultsViewProxy may return null (if required assembly is missing, for instance).
             if (proxyValue == null)
@@ -239,7 +244,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             int count,
             bool visitAll,
             ref int index
-        ) {
+        )
+        {
             if (InRange(startIndex, count, index))
             {
                 rows.Add(
@@ -254,7 +260,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmInspectionContext inspectionContext,
             EvalResultDataItem parent,
             IDkmClrFullNameProvider fullNameProvider
-        ) {
+        )
+        {
             Debug.Assert(parent != null);
             var proxyTypeAndInfo = new TypeAndCustomInfo(_proxyValue.Type);
             var fullName = parent.ChildFullNamePrefix;
@@ -300,7 +307,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmClrValue value,
             bool includeResultsFormatSpecifier,
             IDkmClrFullNameProvider fullNameProvider
-        ) {
+        )
+        {
             if (includeResultsFormatSpecifier)
             {
                 formatSpecifiers = Formatter.AddFormatSpecifier(
@@ -355,7 +363,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 int count,
                 bool visitAll,
                 ref int index
-            ) {
+            )
+            {
                 _expansion.GetRows(
                     resultProvider,
                     rows,

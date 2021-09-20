@@ -193,7 +193,8 @@ namespace DebuggerTests
             DateTime[] dts,
             ClassForToStringTests obj,
             StructForToStringTests sst
-        ) {
+        )
+        {
             Console.WriteLine(
                 $"MethodWithArgumentsForToStringTest: {dt0}, {dt1}, {ts}, {dec}, {guid}, {dts[0]}, {obj.DT}, {sst.DT}"
             );
@@ -260,7 +261,8 @@ namespace DebuggerTests
             DateTime[] dts,
             ClassForToStringTests obj,
             StructForToStringTests sst
-        ) {
+        )
+        {
             Console.WriteLine(
                 $"MethodWithArgumentsForToStringTest: {dt0}, {dt1}, {ts}, {dec}, {guid}, {dts[0]}, {obj.DT}, {sst.DT}"
             );

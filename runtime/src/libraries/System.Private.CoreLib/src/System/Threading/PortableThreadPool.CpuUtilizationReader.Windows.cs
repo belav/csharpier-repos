@@ -24,7 +24,8 @@ namespace System.Threading
                             out long kernelTime,
                             out long userTime
                         )
-                    ) {
+                    )
+                    {
                         return 0;
                     }
 

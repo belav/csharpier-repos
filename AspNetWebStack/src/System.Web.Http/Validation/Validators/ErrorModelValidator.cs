@@ -29,7 +29,8 @@ namespace System.Web.Http.Validation.Validators
         public override IEnumerable<ModelValidationResult> Validate(
             ModelMetadata metadata,
             object container
-        ) {
+        )
+        {
             throw Error.InvalidOperation(_errorMessage);
         }
     }

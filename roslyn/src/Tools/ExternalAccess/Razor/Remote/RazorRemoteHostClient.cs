@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
             ServiceHubRemoteHostClient client,
             RazorServiceDescriptorsWrapper serviceDescriptors,
             RazorRemoteServiceCallbackDispatcherRegistry callbackDispatchers
-        ) {
+        )
+        {
             _client = client;
             _serviceDescriptors = serviceDescriptors;
             _callbackDispatchers = callbackDispatchers;
@@ -35,7 +36,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
         public static async Task<RazorRemoteHostClient?> CreateAsync(
             Workspace workspace,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var client = await RemoteHostClient.TryGetClientAsync(
                     workspace.Services,
                     cancellationToken
@@ -79,7 +81,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
             RazorServiceDescriptorsWrapper serviceDescriptors,
             RazorRemoteServiceCallbackDispatcherRegistry callbackDispatchers,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var client = await RemoteHostClient.TryGetClientAsync(services, cancellationToken)
                 .ConfigureAwait(false);
             if (client is null)

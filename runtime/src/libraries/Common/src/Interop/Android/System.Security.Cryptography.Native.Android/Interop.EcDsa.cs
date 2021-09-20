@@ -37,7 +37,8 @@ internal static partial class Interop
             ReadOnlySpan<byte> dgst,
             ReadOnlySpan<byte> sigbuf,
             SafeEcKeyHandle ecKey
-        ) {
+        )
+        {
             int ret = EcDsaVerify(
                 ref MemoryMarshal.GetReference(dgst),
                 dgst.Length,

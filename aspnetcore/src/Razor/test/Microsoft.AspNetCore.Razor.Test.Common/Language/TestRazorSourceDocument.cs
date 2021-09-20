@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             Type type,
             Encoding encoding = null,
             bool normalizeNewLines = false
-        ) {
+        )
+        {
             return CreateResource(
                 resourcePath,
                 type.GetTypeInfo().Assembly,
@@ -30,7 +31,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             Assembly assembly,
             Encoding encoding = null,
             bool normalizeNewLines = false
-        ) {
+        )
+        {
             var file = TestFile.Create(resourcePath, assembly);
 
             using (var input = file.OpenRead())
@@ -53,7 +55,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             Encoding encoding,
             RazorSourceDocumentProperties properties,
             bool normalizeNewLines = false
-        ) {
+        )
+        {
             var file = TestFile.Create(path, assembly);
 
             using (var input = file.OpenRead())
@@ -73,12 +76,14 @@ namespace Microsoft.AspNetCore.Razor.Language
             string content = "Hello, World!",
             Encoding encoding = null,
             bool normalizeNewLines = false
-        ) {
+        )
+        {
             var stream = new MemoryStream();
             encoding = encoding ?? Encoding.UTF8;
             using (
                 var writer = new StreamWriter(stream, encoding, bufferSize: 1024, leaveOpen: true)
-            ) {
+            )
+            {
                 if (normalizeNewLines)
                 {
                     content = NormalizeNewLines(content);
@@ -98,7 +103,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             bool normalizeNewLines = false,
             string filePath = "test.cshtml",
             string relativePath = "test.cshtml"
-        ) {
+        )
+        {
             if (normalizeNewLines)
             {
                 content = NormalizeNewLines(content);
@@ -113,7 +119,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             RazorSourceDocumentProperties properties,
             Encoding encoding = null,
             bool normalizeNewLines = false
-        ) {
+        )
+        {
             if (normalizeNewLines)
             {
                 content = NormalizeNewLines(content);

@@ -121,7 +121,8 @@ namespace Internal.TypeSystem
                 _methodsRequiringSlotUnificationCount++;
                 if (
                     _methodsRequiringSlotUnificationCount >= _methodsRequiringSlotUnification.Length
-                ) {
+                )
+                {
                     Array.Resize(
                         ref _methodsRequiringSlotUnification,
                         Math.Max(_methodsRequiringSlotUnification.Length * 2, 2)
@@ -217,7 +218,8 @@ namespace Internal.TypeSystem
         public override MethodDesc FindVirtualFunctionTargetMethodOnObjectType(
             MethodDesc targetMethod,
             TypeDesc objectType
-        ) {
+        )
+        {
             return FindVirtualFunctionTargetMethodOnObjectType(
                 targetMethod,
                 (MetadataType)objectType
@@ -233,7 +235,8 @@ namespace Internal.TypeSystem
         private static MethodDesc FindVirtualFunctionTargetMethodOnObjectType(
             MethodDesc targetMethod,
             MetadataType objectType
-        ) {
+        )
+        {
             // Step 1, convert objectType to uninstantiated form
             MetadataType uninstantiatedType = objectType;
             MethodDesc initialTargetMethod = targetMethod;
@@ -287,7 +290,8 @@ namespace Internal.TypeSystem
         private static bool IsInterfaceImplementedOnType(
             MetadataType type,
             MetadataType interfaceType
-        ) {
+        )
+        {
             foreach (TypeDesc iface in type.RuntimeInterfaces)
             {
                 if (iface == interfaceType)
@@ -299,7 +303,8 @@ namespace Internal.TypeSystem
         private static MethodDesc FindImplFromDeclFromMethodImpls(
             MetadataType type,
             MethodDesc decl
-        ) {
+        )
+        {
             MethodImplRecord[] foundMethodImpls = type.FindMethodsImplWithMatchingDeclName(
                 decl.Name
             );
@@ -331,7 +336,8 @@ namespace Internal.TypeSystem
         private static bool IsInterfaceExplicitlyImplementedOnType(
             MetadataType type,
             MetadataType interfaceType
-        ) {
+        )
+        {
             foreach (TypeDesc iface in type.ExplicitlyImplementedInterfaces)
             {
                 if (iface == interfaceType)
@@ -356,7 +362,8 @@ namespace Internal.TypeSystem
             DefType currentType,
             bool reverseMethodSearch,
             Func<MethodDesc, MethodDesc, bool> nameSigMatchMethodIsValidCandidate
-        ) {
+        )
+        {
             string name = targetMethod.Name;
             MethodSignature sig = targetMethod.Signature;
 
@@ -373,7 +380,8 @@ namespace Internal.TypeSystem
                         if (
                             nameSigMatchMethodIsValidCandidate == null
                             || nameSigMatchMethodIsValidCandidate(targetMethod, candidate)
-                        ) {
+                        )
+                        {
                             implMethod = candidate;
 
                             // If reverseMethodSearch is enabled, we want to find the last match on this type, not the first
@@ -395,7 +403,8 @@ namespace Internal.TypeSystem
         private static MethodDesc FindNameSigOverrideForVirtualMethod(
             MethodDesc targetMethod,
             MetadataType currentType
-        ) {
+        )
+        {
             while (currentType != null)
             {
                 MethodDesc nameSigOverride =
@@ -462,7 +471,8 @@ namespace Internal.TypeSystem
             MethodDesc method,
             DefType currentType,
             bool reverseMethodSearch
-        ) {
+        )
+        {
             return FindMatchingVirtualMethodOnTypeByNameAndSig(
                 method,
                 currentType,
@@ -478,7 +488,8 @@ namespace Internal.TypeSystem
         private static bool VerifyMethodsHaveTheSameVirtualSlot(
             MethodDesc slotDefiningMethod,
             MethodDesc methodToVerify
-        ) {
+        )
+        {
             MethodDesc slotDefiningMethodOfMethodToVerify = FindSlotDefiningMethodForVirtualMethod(
                 methodToVerify
             );
@@ -488,7 +499,8 @@ namespace Internal.TypeSystem
         private static void FindBaseUnificationGroup(
             MetadataType currentType,
             UnificationGroup unificationGroup
-        ) {
+        )
+        {
             MethodDesc originalDefiningMethod = unificationGroup.DefiningMethod;
 
             MethodDesc methodImpl = FindImplFromDeclFromMethodImpls(
@@ -552,7 +564,8 @@ namespace Internal.TypeSystem
                     MethodDesc seperatedMethod in MethodDescHashtable.Enumerator.Get(
                         separatedMethods
                     )
-                ) {
+                )
+                {
                     unificationGroup.RemoveFromGroup(seperatedMethod);
                 }
             }
@@ -566,7 +579,8 @@ namespace Internal.TypeSystem
                 if (
                     unificationGroup.IsInGroup(declSlot)
                     && !unificationGroup.IsInGroupOrIsDefiningSlot(implSlot)
-                ) {
+                )
+                {
                     unificationGroup.RemoveFromGroup(declSlot);
 
                     if (separatedMethods == null)
@@ -576,12 +590,14 @@ namespace Internal.TypeSystem
                     if (
                         unificationGroup.RequiresSlotUnification(declSlot)
                         || implSlot.RequiresSlotUnification()
-                    ) {
+                    )
+                    {
                         if (
                             implSlot.Signature.EqualsWithCovariantReturnType(
                                 unificationGroup.DefiningMethod.Signature
                             )
-                        ) {
+                        )
+                        {
                             unificationGroup.AddMethodRequiringSlotUnification(declSlot);
                             unificationGroup.AddMethodRequiringSlotUnification(implSlot);
                             unificationGroup.SetDefiningMethod(implSlot);
@@ -610,7 +626,8 @@ namespace Internal.TypeSystem
 
                         foreach (
                             MethodDesc methodImplRequiredToRemainInEffect in addDeclGroup.MethodsRequiringSlotUnification
-                        ) {
+                        )
+                        {
                             unificationGroup.AddMethodRequiringSlotUnification(
                                 methodImplRequiredToRemainInEffect
                             );
@@ -621,7 +638,8 @@ namespace Internal.TypeSystem
                         if (
                             separatedMethods == null
                             || !separatedMethods.Contains(addDeclGroup.DefiningMethod)
-                        ) {
+                        )
+                        {
                             unificationGroup.AddToGroup(addDeclGroup.DefiningMethod);
                         }
 
@@ -630,7 +648,8 @@ namespace Internal.TypeSystem
                             if (
                                 separatedMethods == null
                                 || !separatedMethods.Contains(addDeclGroupMemberMethod)
-                            ) {
+                            )
+                            {
                                 unificationGroup.AddToGroup(addDeclGroupMemberMethod);
                             }
                         }
@@ -642,7 +661,8 @@ namespace Internal.TypeSystem
                         else if (
                             implSlot == unificationGroup.DefiningMethod
                             && implSlot.RequiresSlotUnification()
-                        ) {
+                        )
+                        {
                             unificationGroup.AddMethodRequiringSlotUnification(declSlot);
                             unificationGroup.AddMethodRequiringSlotUnification(implSlot);
                         }
@@ -653,7 +673,8 @@ namespace Internal.TypeSystem
                             implSlot.Signature.EqualsWithCovariantReturnType(
                                 unificationGroup.DefiningMethod.Signature
                             )
-                        ) {
+                        )
+                        {
                             unificationGroup.AddMethodRequiringSlotUnification(implSlot);
                             unificationGroup.SetDefiningMethod(implSlot);
                         }
@@ -665,7 +686,8 @@ namespace Internal.TypeSystem
         public override MethodDesc ResolveInterfaceMethodToVirtualMethodOnType(
             MethodDesc interfaceMethod,
             TypeDesc currentType
-        ) {
+        )
+        {
             return ResolveInterfaceMethodToVirtualMethodOnType(
                 interfaceMethod,
                 (MetadataType)currentType
@@ -675,7 +697,8 @@ namespace Internal.TypeSystem
         public override MethodDesc ResolveVariantInterfaceMethodToVirtualMethodOnType(
             MethodDesc interfaceMethod,
             TypeDesc currentType
-        ) {
+        )
+        {
             return ResolveVariantInterfaceMethodToVirtualMethodOnType(
                 interfaceMethod,
                 (MetadataType)currentType
@@ -699,7 +722,8 @@ namespace Internal.TypeSystem
         private static MethodDesc ResolveInterfaceMethodToVirtualMethodOnType(
             MethodDesc interfaceMethod,
             MetadataType currentType
-        ) {
+        )
+        {
             MethodDesc methodImpl = FindImplFromDeclFromMethodImpls(currentType, interfaceMethod);
             if (methodImpl != null)
                 return methodImpl;
@@ -732,7 +756,8 @@ namespace Internal.TypeSystem
                         ResolveInterfaceMethodToVirtualMethodOnType(interfaceMethod, baseType)
                         == null
                     )
-                ) {
+                )
+                {
                     // TODO! Does this handle the case where the base type explicitly implements the interface, but is abstract
                     // and doesn't actually have an implementation?
                     if (!IsInterfaceImplementedOnType(baseType, interfaceType))
@@ -788,7 +813,8 @@ namespace Internal.TypeSystem
         public static MethodDesc ResolveVariantInterfaceMethodToVirtualMethodOnType(
             MethodDesc interfaceMethod,
             MetadataType currentType
-        ) {
+        )
+        {
             MetadataType interfaceType = (MetadataType)interfaceMethod.OwningType;
             bool foundInterface = IsInterfaceImplementedOnType(currentType, interfaceType);
             MethodDesc implMethod;
@@ -825,7 +851,8 @@ namespace Internal.TypeSystem
         private static MethodDesc ResolveInterfaceMethodToVirtualMethodOnTypeRecursive(
             MethodDesc interfaceMethod,
             MetadataType currentType
-        ) {
+        )
+        {
             while (true)
             {
                 if (currentType == null)
@@ -852,7 +879,8 @@ namespace Internal.TypeSystem
         private static MethodDesc FindNameSigOverrideForInterfaceMethodRecursive(
             MethodDesc interfaceMethod,
             MetadataType currentType
-        ) {
+        )
+        {
             while (true)
             {
                 if (currentType == null)

@@ -26,7 +26,8 @@ namespace Microsoft.EntityFrameworkCore
             this PropertyBuilder propertyBuilder,
             string? name = null,
             string? schema = null
-        ) {
+        )
+        {
             Check.NotNull(propertyBuilder, nameof(propertyBuilder));
             Check.NullButNotEmpty(name, nameof(name));
             Check.NullButNotEmpty(schema, nameof(schema));
@@ -80,7 +81,8 @@ namespace Microsoft.EntityFrameworkCore
             string? name,
             string? schema,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             if (!propertyBuilder.CanSetHiLoSequence(name, schema, fromDataAnnotation))
             {
                 return null;
@@ -111,7 +113,8 @@ namespace Microsoft.EntityFrameworkCore
             string? name,
             string? schema,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             Check.NotNull(propertyBuilder, nameof(propertyBuilder));
             Check.NullButNotEmpty(name, nameof(name));
             Check.NullButNotEmpty(schema, nameof(schema));
@@ -140,7 +143,8 @@ namespace Microsoft.EntityFrameworkCore
             this PropertyBuilder propertyBuilder,
             int seed = 1,
             int increment = 1
-        ) {
+        )
+        {
             Check.NotNull(propertyBuilder, nameof(propertyBuilder));
 
             var property = propertyBuilder.Metadata;
@@ -187,7 +191,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionPropertyBuilder propertyBuilder,
             int? seed,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             if (propertyBuilder.CanSetIdentityColumnSeed(seed, fromDataAnnotation))
             {
                 propertyBuilder.Metadata.SetIdentitySeed(seed, fromDataAnnotation);
@@ -208,7 +213,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionPropertyBuilder propertyBuilder,
             int? seed,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             Check.NotNull(propertyBuilder, nameof(propertyBuilder));
 
             return propertyBuilder.CanSetAnnotation(
@@ -232,7 +238,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionPropertyBuilder propertyBuilder,
             int? increment,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             if (propertyBuilder.CanSetIdentityColumnIncrement(increment, fromDataAnnotation))
             {
                 propertyBuilder.Metadata.SetIdentityIncrement(increment, fromDataAnnotation);
@@ -253,7 +260,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionPropertyBuilder propertyBuilder,
             int? increment,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             Check.NotNull(propertyBuilder, nameof(propertyBuilder));
 
             return propertyBuilder.CanSetAnnotation(
@@ -277,14 +285,16 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionPropertyBuilder propertyBuilder,
             SqlServerValueGenerationStrategy? valueGenerationStrategy,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             if (
                 propertyBuilder.CanSetAnnotation(
                     SqlServerAnnotationNames.ValueGenerationStrategy,
                     valueGenerationStrategy,
                     fromDataAnnotation
                 )
-            ) {
+            )
+            {
                 propertyBuilder.Metadata.SetValueGenerationStrategy(
                     valueGenerationStrategy,
                     fromDataAnnotation
@@ -317,7 +327,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionPropertyBuilder propertyBuilder,
             SqlServerValueGenerationStrategy? valueGenerationStrategy,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             Check.NotNull(propertyBuilder, nameof(propertyBuilder));
 
             return (
@@ -343,7 +354,8 @@ namespace Microsoft.EntityFrameworkCore
         public static PropertyBuilder IsSparse(
             this PropertyBuilder propertyBuilder,
             bool sparse = true
-        ) {
+        )
+        {
             Check.NotNull(propertyBuilder, nameof(propertyBuilder));
 
             propertyBuilder.Metadata.SetIsSparse(sparse);
@@ -375,7 +387,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionPropertyBuilder propertyBuilder,
             bool? sparse,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             if (propertyBuilder.CanSetIsSparse(sparse, fromDataAnnotation))
             {
                 propertyBuilder.Metadata.SetIsSparse(sparse, fromDataAnnotation);
@@ -401,7 +414,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionPropertyBuilder property,
             bool? sparse,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             Check.NotNull(property, nameof(property));
 
             return property.CanSetAnnotation(

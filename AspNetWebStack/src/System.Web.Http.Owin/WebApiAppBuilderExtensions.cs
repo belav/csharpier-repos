@@ -36,7 +36,8 @@ namespace Owin
         public static IAppBuilder UseWebApi(
             this IAppBuilder builder,
             HttpConfiguration configuration
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException("builder");
@@ -87,7 +88,8 @@ namespace Owin
         private static IAppBuilder UseMessageHandler(
             this IAppBuilder builder,
             HttpMessageHandlerOptions options
-        ) {
+        )
+        {
             Contract.Assert(builder != null);
             Contract.Assert(options != null);
 
@@ -98,7 +100,8 @@ namespace Owin
             IAppBuilder builder,
             HttpServer server,
             HttpConfiguration configuration
-        ) {
+        )
+        {
             Contract.Assert(builder != null);
             Contract.Assert(server != null);
             Contract.Assert(configuration != null);

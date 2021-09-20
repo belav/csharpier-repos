@@ -340,7 +340,8 @@ namespace System.Management
                 ManagementBaseObject parent,
                 string propertyOrMethodName,
                 QualifierType qualifierType
-            ) {
+            )
+            {
                 this.parent = parent;
                 this.propertyOrMethodName = propertyOrMethodName;
                 this.qualifierType = qualifierType;
@@ -514,7 +515,8 @@ namespace System.Management
             bool propagatesToInstance,
             bool propagatesToSubclass,
             bool isOverridable
-        ) {
+        )
+        {
             //Build the flavors bitmask and call the internal Add that takes a bitmask
             int qualFlavor = 0;
             if (isAmended)

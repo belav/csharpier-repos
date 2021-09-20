@@ -23,7 +23,8 @@ namespace System
                         (uint)builder.Capacity
                     )
                 ) > builder.Capacity
-            ) {
+            )
+            {
                 builder.EnsureCapacity((int)length);
             }
 

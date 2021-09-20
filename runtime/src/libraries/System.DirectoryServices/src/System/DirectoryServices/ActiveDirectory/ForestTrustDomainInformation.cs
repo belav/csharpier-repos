@@ -24,7 +24,8 @@ namespace System.DirectoryServices.ActiveDirectory
             int flag,
             LSA_FOREST_TRUST_DOMAIN_INFO domainInfo,
             LARGE_INTEGER time
-        ) {
+        )
+        {
             _status = (ForestTrustDomainStatus)flag;
             DnsName = Marshal.PtrToStringUni(
                 domainInfo.DNSNameBuffer,

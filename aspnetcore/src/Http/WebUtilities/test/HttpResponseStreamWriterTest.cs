@@ -430,7 +430,8 @@ namespace Microsoft.AspNetCore.WebUtilities
         public async Task WriteLineReadOnlyMemoryAsync_WritesToStream(
             int byteLength,
             int newLineLength
-        ) {
+        )
+        {
             // Arrange
             var stream = new TestMemoryStream();
             var writer = new HttpResponseStreamWriter(stream, Encoding.UTF8);
@@ -508,7 +509,8 @@ namespace Microsoft.AspNetCore.WebUtilities
             char character,
             int charCount,
             string encodingName
-        ) {
+        )
+        {
             // Arrange
             var encoding = Encoding.GetEncoding(encodingName);
             string data = new string(character, charCount);
@@ -547,7 +549,8 @@ namespace Microsoft.AspNetCore.WebUtilities
                     ArrayPool<byte>.Shared,
                     ArrayPool<char>.Shared
                 )
-            ) {
+            )
+            {
                 // Act
                 writer.Write("Hello, World!");
             }
@@ -562,7 +565,8 @@ namespace Microsoft.AspNetCore.WebUtilities
         [InlineData(DefaultCharacterChunkSize * 3)]
         public async Task HttpResponseStreamWriter_WritesDataCorrectly_ForCharactersHavingSurrogatePairs(
             int characterSize
-        ) {
+        )
+        {
             // Arrange
             // Here "𐐀" (called Deseret Long I) actually represents 2 characters. Try to make this character split across
             // the boundary
@@ -588,7 +592,8 @@ namespace Microsoft.AspNetCore.WebUtilities
             Encoding encoding,
             ArrayPool<byte> bytePool,
             ArrayPool<char> charPool
-        ) {
+        )
+        {
             Assert.Throws<ArgumentNullException>(
                 () =>
                 {
@@ -645,7 +650,8 @@ namespace Microsoft.AspNetCore.WebUtilities
         [MemberData(nameof(HttpResponseDisposeData))]
         public static void StreamDisposed_ExpectedObjectDisposedException(
             Action<HttpResponseStreamWriter> action
-        ) {
+        )
+        {
             var httpResponseStreamWriter = new HttpResponseStreamWriter(
                 new MemoryStream(),
                 Encoding.UTF8,
@@ -667,7 +673,8 @@ namespace Microsoft.AspNetCore.WebUtilities
         [MemberData(nameof(HttpResponseDisposeDataAsync))]
         public static async Task StreamDisposed_ExpectedObjectDisposedExceptionAsync(
             Func<HttpResponseStreamWriter, Task> function
-        ) {
+        )
+        {
             var httpResponseStreamWriter = new HttpResponseStreamWriter(
                 new MemoryStream(),
                 Encoding.UTF8,
@@ -728,7 +735,8 @@ namespace Microsoft.AspNetCore.WebUtilities
                 int offset,
                 int count,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 WriteAsyncCallCount++;
                 if (ThrowOnWrite)
                 {

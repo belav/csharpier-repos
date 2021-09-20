@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             public UnavailableTypeParameterRemover(
                 Compilation compilation,
                 ISet<string> availableTypeParameterNames
-            ) {
+            )
+            {
                 _compilation = compilation;
                 _availableTypeParameterNames = availableTypeParameterNames;
             }

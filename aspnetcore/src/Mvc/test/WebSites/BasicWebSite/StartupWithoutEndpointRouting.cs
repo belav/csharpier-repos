@@ -64,7 +64,8 @@ namespace BasicWebSite
         // This needs to be changed to match the site host
         private WeatherForecastService CreateWeatherForecastService(
             IServiceProvider serviceProvider
-        ) {
+        )
+        {
             var contextAccessor = serviceProvider.GetRequiredService<IHttpContextAccessor>();
             var httpContext = contextAccessor.HttpContext;
             if (httpContext == null)

@@ -103,7 +103,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             TextSpan span,
             ImmutableArray<string> inheritanceNames,
             uint flags
-        ) {
+        )
+        {
             Name = name;
             NameSuffix = nameSuffix;
             ContainerDisplayName = containerDisplayName;
@@ -127,7 +128,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             bool isNestedType = false,
             int parameterCount = 0,
             int typeParameterCount = 0
-        ) {
+        )
+        {
             const uint MaxFlagValue = 0b1111;
 
             Contract.ThrowIfTrue((uint)accessibility > MaxFlagValue);
@@ -194,7 +196,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         internal static DeclaredSymbolInfo ReadFrom_ThrowsOnFailure(
             StringTable stringTable,
             ObjectReader reader
-        ) {
+        )
+        {
             var name = reader.ReadString();
             var nameSuffix = reader.ReadString();
             var containerDisplayName = reader.ReadString();

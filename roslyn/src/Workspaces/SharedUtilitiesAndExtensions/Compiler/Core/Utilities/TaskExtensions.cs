@@ -50,7 +50,8 @@ namespace Roslyn.Utilities
         public static T WaitAndGetResult_CanCallOnBackground<T>(
             this Task<T> task,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 task.Wait(cancellationToken);
@@ -93,7 +94,8 @@ namespace Roslyn.Utilities
             CancellationToken cancellationToken,
             TaskContinuationOptions continuationOptions,
             TaskScheduler scheduler
-        ) {
+        )
+        {
             Contract.ThrowIfNull(continuationAction, nameof(continuationAction));
 
             bool continuationFunction(Task antecedent)
@@ -120,7 +122,8 @@ namespace Roslyn.Utilities
             Func<Task<TInput>, TResult> continuationFunction,
             CancellationToken cancellationToken,
             TaskScheduler scheduler
-        ) {
+        )
+        {
             return SafeContinueWith<TInput, TResult>(
                 task,
                 continuationFunction,
@@ -141,7 +144,8 @@ namespace Roslyn.Utilities
             CancellationToken cancellationToken,
             TaskContinuationOptions continuationOptions,
             TaskScheduler scheduler
-        ) {
+        )
+        {
             Contract.ThrowIfNull(continuationFunction, nameof(continuationFunction));
 
             return task.SafeContinueWith<TResult>(
@@ -163,7 +167,8 @@ namespace Roslyn.Utilities
             CancellationToken cancellationToken,
             TaskContinuationOptions continuationOptions,
             TaskScheduler scheduler
-        ) {
+        )
+        {
             Contract.ThrowIfNull(continuationAction, nameof(continuationAction));
 
             return task.SafeContinueWith(
@@ -185,7 +190,8 @@ namespace Roslyn.Utilities
             CancellationToken cancellationToken,
             TaskContinuationOptions continuationOptions,
             TaskScheduler scheduler
-        ) {
+        )
+        {
             // So here's the deal.  Say you do the following:
 #if false
             // CancellationToken ct1 = ..., ct2 = ...;
@@ -237,7 +243,8 @@ namespace Roslyn.Utilities
             Func<Task, TResult> continuationFunction,
             CancellationToken cancellationToken,
             TaskScheduler scheduler
-        ) {
+        )
+        {
             return task.SafeContinueWith(
                 continuationFunction,
                 cancellationToken,
@@ -255,7 +262,8 @@ namespace Roslyn.Utilities
             this Task task,
             Action<Task> continuationAction,
             TaskScheduler scheduler
-        ) {
+        )
+        {
             return task.SafeContinueWith(
                 continuationAction,
                 CancellationToken.None,
@@ -273,7 +281,8 @@ namespace Roslyn.Utilities
             this Task<TInput> task,
             Action<Task<TInput>> continuationFunction,
             TaskScheduler scheduler
-        ) {
+        )
+        {
             return task.SafeContinueWith(
                 continuationFunction,
                 CancellationToken.None,
@@ -291,7 +300,8 @@ namespace Roslyn.Utilities
             this Task<TInput> task,
             Func<Task<TInput>, TResult> continuationFunction,
             TaskScheduler scheduler
-        ) {
+        )
+        {
             return task.SafeContinueWith(
                 continuationFunction,
                 CancellationToken.None,
@@ -310,7 +320,8 @@ namespace Roslyn.Utilities
             Action<Task> continuationAction,
             CancellationToken cancellationToken,
             TaskScheduler scheduler
-        ) {
+        )
+        {
             return task.SafeContinueWith(
                 continuationAction,
                 cancellationToken,
@@ -332,7 +343,8 @@ namespace Roslyn.Utilities
             int millisecondsDelay,
             TaskContinuationOptions taskContinuationOptions,
             TaskScheduler scheduler
-        ) {
+        )
+        {
             Contract.ThrowIfNull(continuationFunction, nameof(continuationFunction));
 
             return task.SafeContinueWith(
@@ -363,7 +375,8 @@ namespace Roslyn.Utilities
             int millisecondsDelay,
             TaskContinuationOptions taskContinuationOptions,
             TaskScheduler scheduler
-        ) {
+        )
+        {
             Contract.ThrowIfNull(continuationFunction, nameof(continuationFunction));
 
             return task.SafeContinueWith(
@@ -394,7 +407,8 @@ namespace Roslyn.Utilities
             int millisecondsDelay,
             TaskContinuationOptions taskContinuationOptions,
             TaskScheduler scheduler
-        ) {
+        )
+        {
             Contract.ThrowIfNull(continuationFunction, nameof(continuationFunction));
 
             return task.SafeContinueWith(
@@ -425,7 +439,8 @@ namespace Roslyn.Utilities
             int millisecondsDelay,
             TaskContinuationOptions taskContinuationOptions,
             TaskScheduler scheduler
-        ) {
+        )
+        {
             Contract.ThrowIfNull(continuationAction, nameof(continuationAction));
 
             return task.SafeContinueWith(
@@ -450,7 +465,8 @@ namespace Roslyn.Utilities
             CancellationToken cancellationToken,
             TaskContinuationOptions continuationOptions,
             TaskScheduler scheduler
-        ) {
+        )
+        {
             Contract.ThrowIfNull(continuationFunction, nameof(continuationFunction));
 
             return task.SafeContinueWithFromAsync<TResult>(
@@ -467,7 +483,8 @@ namespace Roslyn.Utilities
             CancellationToken cancellationToken,
             TaskContinuationOptions continuationOptions,
             TaskScheduler scheduler
-        ) {
+        )
+        {
             // So here's the deal.  Say you do the following:
 #if false
             // CancellationToken ct1 = ..., ct2 = ...;
@@ -511,7 +528,8 @@ namespace Roslyn.Utilities
             Func<Task, Task> continuationFunction,
             CancellationToken cancellationToken,
             TaskScheduler scheduler
-        ) {
+        )
+        {
             return task.SafeContinueWithFromAsync(
                 continuationFunction,
                 cancellationToken,
@@ -526,7 +544,8 @@ namespace Roslyn.Utilities
             CancellationToken cancellationToken,
             TaskContinuationOptions continuationOptions,
             TaskScheduler scheduler
-        ) {
+        )
+        {
             // So here's the deal.  Say you do the following:
 #if false
             // CancellationToken ct1 = ..., ct2 = ...;
@@ -561,7 +580,8 @@ namespace Roslyn.Utilities
             Func<Task<TInput>, Task> continuationFunction,
             CancellationToken cancellationToken,
             TaskScheduler scheduler
-        ) {
+        )
+        {
             return task.SafeContinueWithFromAsync(
                 continuationFunction,
                 cancellationToken,
@@ -576,7 +596,8 @@ namespace Roslyn.Utilities
             CancellationToken cancellationToken,
             TaskContinuationOptions continuationOptions,
             TaskScheduler scheduler
-        ) {
+        )
+        {
             // So here's the deal.  Say you do the following:
 #if false
             // CancellationToken ct1 = ..., ct2 = ...;
@@ -613,7 +634,8 @@ namespace Roslyn.Utilities
             int millisecondsDelay,
             TaskContinuationOptions taskContinuationOptions,
             TaskScheduler scheduler
-        ) {
+        )
+        {
             Contract.ThrowIfNull(continuationFunction, nameof(continuationFunction));
 
             return task.SafeContinueWith(
@@ -639,7 +661,8 @@ namespace Roslyn.Utilities
             int millisecondsDelay,
             TaskContinuationOptions taskContinuationOptions,
             TaskScheduler scheduler
-        ) {
+        )
+        {
             Contract.ThrowIfNull(continuationFunction, nameof(continuationFunction));
 
             return task.SafeContinueWith(
@@ -665,7 +688,8 @@ namespace Roslyn.Utilities
             int millisecondsDelay,
             TaskContinuationOptions taskContinuationOptions,
             TaskScheduler scheduler
-        ) {
+        )
+        {
             Contract.ThrowIfNull(continuationFunction, nameof(continuationFunction));
 
             return task.SafeContinueWith(
@@ -691,7 +715,8 @@ namespace Roslyn.Utilities
             int millisecondsDelay,
             TaskContinuationOptions taskContinuationOptions,
             TaskScheduler scheduler
-        ) {
+        )
+        {
             Contract.ThrowIfNull(continuationFunction, nameof(continuationFunction));
 
             return task.SafeContinueWith(
@@ -718,7 +743,8 @@ namespace Roslyn.Utilities
             IExpeditableDelaySource delaySource,
             TaskContinuationOptions taskContinuationOptions,
             TaskScheduler scheduler
-        ) {
+        )
+        {
             Contract.ThrowIfNull(continuationFunction, nameof(continuationFunction));
 
             return task.SafeContinueWith(

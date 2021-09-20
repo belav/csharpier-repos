@@ -52,7 +52,8 @@ namespace Microsoft.Extensions.CommandLineUtils
                     fileName,
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 return mainModule;
             }
 

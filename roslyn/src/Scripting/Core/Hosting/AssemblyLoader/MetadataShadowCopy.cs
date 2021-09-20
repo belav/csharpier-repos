@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             FileShadowCopy primaryModule,
             FileShadowCopy documentationFileOpt,
             Metadata metadataCopy
-        ) {
+        )
+        {
             Debug.Assert(primaryModule != null);
             Debug.Assert(metadataCopy != null);
             ////Debug.Assert(!metadataCopy.IsImageOwner); property is now internal

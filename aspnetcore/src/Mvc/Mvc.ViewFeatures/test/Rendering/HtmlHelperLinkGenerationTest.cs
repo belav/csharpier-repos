@@ -75,7 +75,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string hostname,
             string fragment,
             object htmlAttributes
-        ) {
+        )
+        {
             //Arrange
             var expectedLink = string.Format(
                 CultureInfo.InvariantCulture,
@@ -177,7 +178,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string hostname,
             string fragment,
             object htmlAttributes
-        ) {
+        )
+        {
             //Arrange
             var expectedLink = string.Format(
                 CultureInfo.InvariantCulture,

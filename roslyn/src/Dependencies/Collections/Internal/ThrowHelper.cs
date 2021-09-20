@@ -167,7 +167,8 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
         internal static void ThrowArgumentOutOfRangeException(
             ExceptionArgument argument,
             ExceptionResource resource
-        ) {
+        )
+        {
             throw GetArgumentOutOfRangeException(argument, resource);
         }
 
@@ -217,7 +218,8 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
         private static ArgumentException GetWrongKeyTypeArgumentException(
             object? key,
             Type targetType
-        ) {
+        )
+        {
             return new ArgumentException(
                 string.Format(SR.Arg_WrongType, key, targetType),
                 nameof(key)
@@ -227,7 +229,8 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
         private static ArgumentException GetWrongValueTypeArgumentException(
             object? value,
             Type targetType
-        ) {
+        )
+        {
             return new ArgumentException(
                 string.Format(SR.Arg_WrongType, value, targetType),
                 nameof(value)
@@ -242,7 +245,8 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
         private static ArgumentOutOfRangeException GetArgumentOutOfRangeException(
             ExceptionArgument argument,
             ExceptionResource resource
-        ) {
+        )
+        {
             return new ArgumentOutOfRangeException(
                 GetArgumentName(argument),
                 GetResourceString(resource)
@@ -256,7 +260,8 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
         internal static void IfNullAndNullsAreIllegalThenThrow<T>(
             object? value,
             ExceptionArgument argName
-        ) {
+        )
+        {
             // Note that default(T) is not equal to null for value types except when T is Nullable<U>.
             if (!(default(T) == null) && value == null)
                 ThrowHelper.ThrowArgumentNullException(argName);

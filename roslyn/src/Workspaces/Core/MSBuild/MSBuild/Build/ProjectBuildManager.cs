@@ -72,7 +72,8 @@ namespace Microsoft.CodeAnalysis.MSBuild.Build
         public ProjectBuildManager(
             ImmutableDictionary<string, string> additionalGlobalProperties,
             ILogger? msbuildLogger = null
-        ) {
+        )
+        {
             _additionalGlobalProperties =
                 additionalGlobalProperties ?? ImmutableDictionary<string, string>.Empty;
             _msbuildLogger = msbuildLogger;
@@ -85,7 +86,8 @@ namespace Microsoft.CodeAnalysis.MSBuild.Build
             string path,
             MSB.Evaluation.ProjectCollection? projectCollection,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var log = new DiagnosticLog();
 
             try
@@ -130,7 +132,8 @@ namespace Microsoft.CodeAnalysis.MSBuild.Build
         public Task<(MSB.Evaluation.Project? project, DiagnosticLog log)> LoadProjectAsync(
             string path,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (BatchBuildStarted)
             {
                 return LoadProjectAsync(path, _batchBuildProjectCollection, cancellationToken);
@@ -154,7 +157,8 @@ namespace Microsoft.CodeAnalysis.MSBuild.Build
         public async Task<string?> TryGetOutputFilePathAsync(
             string path,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(BatchBuildStarted);
 
             // This tries to get the project output path and retrieving the evaluated $(TargetPath) property.
@@ -214,7 +218,8 @@ namespace Microsoft.CodeAnalysis.MSBuild.Build
             MSB.Evaluation.Project project,
             DiagnosticLog log,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(BatchBuildStarted);
 
             var targets = new[] { TargetNames.Compile, TargetNames.CoreCompile };
@@ -227,7 +232,8 @@ namespace Microsoft.CodeAnalysis.MSBuild.Build
             string[] targets,
             DiagnosticLog log,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // create a project instance to be executed by build engine.
             // The executed project will hold the final model of the project after execution via msbuild.
             var projectInstance = project.CreateProjectInstance();
@@ -272,12 +278,14 @@ namespace Microsoft.CodeAnalysis.MSBuild.Build
         private static async Task<MSB.Execution.BuildResult> BuildAsync(
             MSB.Execution.BuildRequestData requestData,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // only allow one build to use the default build manager at a time
             using (
                 await s_buildManagerLock.DisposableWaitAsync(cancellationToken)
                     .ConfigureAwait(false)
-            ) {
+            )
+            {
                 return await BuildAsync(
                         MSB.Execution.BuildManager.DefaultBuildManager,
                         requestData,
@@ -291,7 +299,8 @@ namespace Microsoft.CodeAnalysis.MSBuild.Build
             MSB.Execution.BuildManager buildManager,
             MSB.Execution.BuildRequestData requestData,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var taskSource = new TaskCompletionSource<MSB.Execution.BuildResult>();
 
             // enable cancellation of build

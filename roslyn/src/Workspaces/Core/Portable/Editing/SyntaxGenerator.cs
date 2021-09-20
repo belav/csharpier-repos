@@ -173,7 +173,8 @@ namespace Microsoft.CodeAnalysis.Editing
             IMethodSymbol method,
             string name,
             IEnumerable<SyntaxNode> statements = null
-        ) {
+        )
+        {
             var decl = MethodDeclaration(
                 name,
                 parameters: method.Parameters.Select(p => ParameterDeclaration(p)),
@@ -211,7 +212,8 @@ namespace Microsoft.CodeAnalysis.Editing
             Accessibility accessibility = Accessibility.NotApplicable,
             DeclarationModifiers modifiers = default,
             IEnumerable<SyntaxNode> statements = null
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -221,7 +223,8 @@ namespace Microsoft.CodeAnalysis.Editing
         public SyntaxNode OperatorDeclaration(
             IMethodSymbol method,
             IEnumerable<SyntaxNode> statements = null
-        ) {
+        )
+        {
             if (method.MethodKind != MethodKind.UserDefinedOperator)
             {
                 throw new ArgumentException("Method is not an operator.");
@@ -290,7 +293,8 @@ namespace Microsoft.CodeAnalysis.Editing
         public SyntaxNode ParameterDeclaration(
             IParameterSymbol symbol,
             SyntaxNode initializer = null
-        ) {
+        )
+        {
             return ParameterDeclaration(
                 symbol.Name,
                 TypeExpression(symbol.Type),
@@ -328,7 +332,8 @@ namespace Microsoft.CodeAnalysis.Editing
             IPropertySymbol property,
             IEnumerable<SyntaxNode> getAccessorStatements = null,
             IEnumerable<SyntaxNode> setAccessorStatements = null
-        ) {
+        )
+        {
             return PropertyDeclaration(
                 property.Name,
                 TypeExpression(property.Type),
@@ -378,7 +383,8 @@ namespace Microsoft.CodeAnalysis.Editing
             IPropertySymbol indexer,
             IEnumerable<SyntaxNode> getAccessorStatements = null,
             IEnumerable<SyntaxNode> setAccessorStatements = null
-        ) {
+        )
+        {
             return IndexerDeclaration(
                 indexer.Parameters.Select(p => this.ParameterDeclaration(p)),
                 TypeExpression(indexer.Type),
@@ -442,7 +448,8 @@ namespace Microsoft.CodeAnalysis.Editing
             IEventSymbol symbol,
             IEnumerable<SyntaxNode> addAccessorStatements = null,
             IEnumerable<SyntaxNode> removeAccessorStatements = null
-        ) {
+        )
+        {
             var invoke =
                 symbol.Type.GetMembers("Invoke").FirstOrDefault(m => m.Kind == SymbolKind.Method)
                 as IMethodSymbol;
@@ -478,7 +485,8 @@ namespace Microsoft.CodeAnalysis.Editing
             IMethodSymbol constructorMethod,
             IEnumerable<SyntaxNode> baseConstructorArguments = null,
             IEnumerable<SyntaxNode> statements = null
-        ) {
+        )
+        {
             return ConstructorDeclaration(
                 constructorMethod.ContainingType != null
                   ? constructorMethod.ContainingType.Name
@@ -762,7 +770,8 @@ namespace Microsoft.CodeAnalysis.Editing
         private SyntaxNode WithTypeParametersAndConstraints(
             SyntaxNode declaration,
             ImmutableArray<ITypeParameterSymbol> typeParameters
-        ) {
+        )
+        {
             if (typeParameters.Length > 0)
             {
                 declaration = WithTypeParameters(declaration, typeParameters.Select(tp => tp.Name));
@@ -774,7 +783,8 @@ namespace Microsoft.CodeAnalysis.Editing
                         || tp.HasReferenceTypeConstraint
                         || tp.HasValueTypeConstraint
                         || tp.ConstraintTypes.Length > 0
-                    ) {
+                    )
+                    {
                         declaration = this.WithTypeConstraint(
                             declaration,
                             tp.Name,
@@ -1430,7 +1440,8 @@ namespace Microsoft.CodeAnalysis.Editing
             SyntaxNode root,
             SyntaxNode node,
             SyntaxNode newDeclaration
-        ) {
+        )
+        {
             if (newDeclaration != null)
             {
                 return root.ReplaceNode(node, newDeclaration);
@@ -1566,7 +1577,8 @@ namespace Microsoft.CodeAnalysis.Editing
             SyntaxNode root,
             SyntaxNode original,
             SyntaxNode replacement
-        ) {
+        )
+        {
             var combinedTriviaReplacement = replacement.WithLeadingTrivia(
                     original.GetLeadingTrivia().AddRange(replacement.GetLeadingTrivia())
                 )
@@ -1590,7 +1602,8 @@ namespace Microsoft.CodeAnalysis.Editing
             SyntaxNode root,
             SyntaxToken original,
             SyntaxToken replacement
-        ) {
+        )
+        {
             var combinedTriviaReplacement = replacement.WithLeadingTrivia(
                     original.LeadingTrivia.AddRange(replacement.LeadingTrivia)
                 )
@@ -1623,7 +1636,8 @@ namespace Microsoft.CodeAnalysis.Editing
             SyntaxNode root,
             SyntaxNode node,
             IEnumerable<SyntaxNode> replacements
-        ) {
+        )
+        {
             var first = replacements.First();
             var trackedFirst = first.TrackNodes(first);
             var newRoot = root.ReplaceNode(node, trackedFirst);
@@ -2170,7 +2184,8 @@ namespace Microsoft.CodeAnalysis.Editing
         public SyntaxNode TupleTypeExpression(
             IEnumerable<ITypeSymbol> elementTypes,
             IEnumerable<string> elementNames = null
-        ) {
+        )
+        {
             if (elementTypes == null)
             {
                 throw new ArgumentNullException(nameof(elementTypes));
@@ -2364,7 +2379,8 @@ namespace Microsoft.CodeAnalysis.Editing
         public virtual SyntaxNode MemberAccessExpression(
             SyntaxNode expression,
             SyntaxNode memberName
-        ) {
+        )
+        {
             return MemberAccessExpressionWorker(expression, memberName)
                 .WithAdditionalAnnotations(Simplification.Simplifier.Annotation);
         }

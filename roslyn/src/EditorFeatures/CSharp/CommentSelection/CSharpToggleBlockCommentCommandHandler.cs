@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.CommentSelection
             TextSpan linesContainingSelections,
             CommentSelectionInfo commentInfo,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             // Only search for block comments intersecting the lines in the selections.
             return root.DescendantTrivia(linesContainingSelections)

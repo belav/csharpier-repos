@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.Editor.Extensibility.NavigationBar
         public async Task<IList<NavigationBarItem>?> GetItemsAsync(
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var service =
                 document.GetRequiredLanguageService<CodeAnalysis.NavigationBar.INavigationBarItemService>();
             var workspaceSupportsDocumentChanges =
@@ -80,7 +81,8 @@ namespace Microsoft.CodeAnalysis.Editor.Extensibility.NavigationBar
             Document document,
             RoslynNavigationBarItem.SymbolItem item,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfFalse(item.Kind == RoslynNavigationBarItemKind.Symbol);
             var symbolNavigationService =
                 document.Project.Solution.Workspace.Services.GetRequiredService<ISymbolNavigationService>();
@@ -105,7 +107,8 @@ namespace Microsoft.CodeAnalysis.Editor.Extensibility.NavigationBar
                         cancellationToken
                     )
                     .ConfigureAwait(false)
-            ) {
+            )
+            {
                 return;
             }
 
@@ -132,7 +135,8 @@ namespace Microsoft.CodeAnalysis.Editor.Extensibility.NavigationBar
             Solution solution,
             VirtualTreePoint navigationPoint,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             this.AssertIsForeground();
             var documentToNavigate = solution.GetRequiredDocument(navigationPoint.Tree);
             var workspace = solution.Workspace;
@@ -147,7 +151,8 @@ namespace Microsoft.CodeAnalysis.Editor.Extensibility.NavigationBar
                     navigationPoint.VirtualSpaces,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 navigationService.TryNavigateToPosition(
                     workspace,
                     documentToNavigate.Id,
@@ -174,7 +179,8 @@ namespace Microsoft.CodeAnalysis.Editor.Extensibility.NavigationBar
             Document document,
             RoslynNavigationBarItem.SymbolItem item,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfFalse(item.Kind == RoslynNavigationBarItemKind.Symbol);
             var compilation = await document.Project.GetRequiredCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);

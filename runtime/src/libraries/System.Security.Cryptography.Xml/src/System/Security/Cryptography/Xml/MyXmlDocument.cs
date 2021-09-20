@@ -11,7 +11,8 @@ namespace System.Security.Cryptography.Xml
             string prefix,
             string localName,
             string namespaceURI
-        ) {
+        )
+        {
             return CreateAttribute(prefix, localName, namespaceURI);
         }
     }

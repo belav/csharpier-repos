@@ -76,7 +76,8 @@ namespace System.Text.Json.Serialization.Tests
                     ref Utf8JsonReader reader,
                     Type typeToConvert,
                     JsonSerializerOptions options
-                ) {
+                )
+                {
                     if (reader.TokenType != JsonTokenType.StartObject)
                     {
                         throw new JsonException();
@@ -103,7 +104,8 @@ namespace System.Text.Json.Serialization.Tests
                         if (
                             !Enum.TryParse(propertyName, ignoreCase: false, out TKey key)
                             && !Enum.TryParse(propertyName, ignoreCase: true, out key)
-                        ) {
+                        )
+                        {
                             throw new JsonException(
                                 $"Unable to convert \"{propertyName}\" to Enum \"{_keyType}\"."
                             );
@@ -132,7 +134,8 @@ namespace System.Text.Json.Serialization.Tests
                     Utf8JsonWriter writer,
                     Dictionary<TKey, TValue> value,
                     JsonSerializerOptions options
-                ) {
+                )
+                {
                     writer.WriteStartObject();
 
                     foreach (KeyValuePair<TKey, TValue> kvp in value)

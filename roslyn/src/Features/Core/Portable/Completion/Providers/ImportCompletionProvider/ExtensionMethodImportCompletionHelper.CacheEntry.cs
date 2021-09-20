@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 Checksum checksum,
                 string language,
                 MultiDictionary<string, DeclaredSymbolInfo> receiverTypeNameToExtensionMethodMap
-            ) {
+            )
+            {
                 Checksum = checksum;
                 Language = language;
                 ReceiverTypeNameToExtensionMethodMap = receiverTypeNameToExtensionMethodMap;
@@ -54,7 +55,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                     Checksum checksum,
                     string langauge,
                     IEqualityComparer<string> comparer
-                ) {
+                )
+                {
                     _checksum = checksum;
                     _language = langauge;
 
@@ -73,7 +75,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                             receiverType,
                             symbolInfoIndices
                         ) in syntaxIndex.ReceiverTypeNameToExtensionMethodMap
-                    ) {
+                    )
+                    {
                         foreach (var index in symbolInfoIndices)
                         {
                             _mapBuilder.Add(receiverType, syntaxIndex.DeclaredSymbolInfos[index]);
@@ -113,7 +116,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             bool loadOnly,
             IImportCompletionCacheService<CacheEntry, object> cacheService,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // While we are caching data from SyntaxTreeInfo, all the things we cared about here are actually based on sources symbols.
             // So using source symbol checksum would suffice.
             var checksum = await SymbolTreeInfo.GetSourceSymbolsChecksumAsync(
@@ -127,7 +131,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 !cacheService.ProjectItemsCache.TryGetValue(project.Id, out var cacheEntry)
                 || cacheEntry.Checksum != checksum
                 || cacheEntry.Language != project.Language
-            ) {
+            )
+            {
                 var syntaxFacts =
                     project.LanguageServices.GetRequiredService<ISyntaxFactsService>();
                 var builder = new CacheEntry.Builder(

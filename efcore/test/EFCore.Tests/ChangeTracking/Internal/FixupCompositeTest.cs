@@ -23,7 +23,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_many_FK_set_both_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Category { Id1 = 77, Id2 = Guid77 };
             var dependent = new Product
@@ -59,7 +60,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_many_FK_not_set_both_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Category { Id1 = 77, Id2 = Guid77 };
             var dependent = new Product { Id1 = 78, Id2 = Guid78, Category = principal };
@@ -88,7 +90,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_many_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Category { Id1 = 77, Id2 = Guid77 };
             var dependent = new Product
@@ -122,7 +125,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_many_FK_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Category { Id1 = 77, Id2 = Guid77 };
             var dependent = new Product
@@ -157,7 +161,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_many_FK_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Category { Id1 = 77, Id2 = Guid77 };
             var dependent = new Product
@@ -192,7 +197,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_many_FK_not_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Category { Id1 = 77, Id2 = Guid77 };
             var dependent = new Product { Id1 = 78, Id2 = Guid78 };
@@ -221,7 +227,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_many_FK_not_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Category { Id1 = 77, Id2 = Guid77 };
             var dependent = new Product { Id1 = 78, Id2 = Guid78, Category = principal };
@@ -249,7 +256,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_many_FK_set_both_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Category { Id1 = 77, Id2 = Guid77 };
             var dependent = new Product
@@ -285,7 +293,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_many_FK_not_set_both_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Category { Id1 = 77, Id2 = Guid77 };
             var dependent = new Product { Id1 = 78, Id2 = Guid78, Category = principal };
@@ -314,7 +323,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_many_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Category { Id1 = 77, Id2 = Guid77 };
             var dependent = new Product
@@ -348,7 +358,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_many_FK_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Category { Id1 = 77, Id2 = Guid77 };
             var dependent = new Product
@@ -383,7 +394,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_many_FK_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Category { Id1 = 77, Id2 = Guid77 };
             var dependent = new Product
@@ -418,7 +430,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_many_FK_not_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Category { Id1 = 77, Id2 = Guid77 };
             var dependent = new Product { Id1 = 78, Id2 = Guid78 };
@@ -447,7 +460,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_many_FK_not_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Category { Id1 = 77, Id2 = Guid77 };
             var dependent = new Product { Id1 = 78, Id2 = Guid78, Category = principal };
@@ -475,7 +489,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_many_prin_uni_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new CategoryPN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ProductPN
@@ -508,7 +523,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_many_prin_uni_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new CategoryPN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ProductPN
@@ -541,7 +557,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_many_prin_uni_FK_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new CategoryPN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ProductPN
@@ -575,7 +592,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_many_prin_uni_FK_not_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new CategoryPN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ProductPN { Id1 = 78, Id2 = Guid78 };
@@ -603,7 +621,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_many_prin_uni_FK_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new CategoryPN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ProductPN
@@ -637,7 +656,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_many_prin_uni_FK_not_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new CategoryPN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ProductPN { Id1 = 78, Id2 = Guid78 };
@@ -665,7 +685,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_many_dep_uni_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new CategoryDN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ProductDN
@@ -698,7 +719,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_many_dep_uni_FK_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new CategoryDN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ProductDN
@@ -732,7 +754,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_many_dep_uni_FK_not_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new CategoryDN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ProductDN { Id1 = 78, Id2 = Guid78, Category = principal };
@@ -759,7 +782,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_many_dep_uni_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new CategoryDN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ProductDN
@@ -792,7 +816,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_many_dep_uni_FK_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new CategoryDN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ProductDN
@@ -826,7 +851,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_many_dep_uni_FK_not_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new CategoryDN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ProductDN { Id1 = 78, Id2 = Guid78, Category = principal };
@@ -853,7 +879,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_many_no_navs_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new CategoryNN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ProductNN
@@ -885,7 +912,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_many_no_navs_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new CategoryNN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ProductNN
@@ -917,7 +945,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_one_FK_set_both_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Parent { Id1 = 77, Id2 = Guid77 };
             var dependent = new Child
@@ -953,7 +982,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_one_FK_not_set_both_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Parent { Id1 = 77, Id2 = Guid77 };
             var dependent = new Child { Id1 = 78, Id2 = Guid78, Parent = principal };
@@ -982,7 +1012,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_one_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Parent { Id1 = 77, Id2 = Guid77 };
             var dependent = new Child
@@ -1016,7 +1047,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_one_FK_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Parent { Id1 = 77, Id2 = Guid77 };
             var dependent = new Child
@@ -1051,7 +1083,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_one_FK_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Parent { Id1 = 77, Id2 = Guid77 };
             var dependent = new Child
@@ -1086,7 +1119,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_one_FK_not_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Parent { Id1 = 77, Id2 = Guid77 };
             var dependent = new Child { Id1 = 78, Id2 = Guid78 };
@@ -1115,7 +1149,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_one_FK_not_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Parent { Id1 = 77, Id2 = Guid77 };
             var dependent = new Child { Id1 = 78, Id2 = Guid78, Parent = principal };
@@ -1143,7 +1178,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_one_FK_set_both_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Parent { Id1 = 77, Id2 = Guid77 };
             var dependent = new Child
@@ -1179,7 +1215,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_one_FK_not_set_both_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Parent { Id1 = 77, Id2 = Guid77 };
             var dependent = new Child { Id1 = 78, Id2 = Guid78, Parent = principal };
@@ -1208,7 +1245,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_one_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Parent { Id1 = 77, Id2 = Guid77 };
             var dependent = new Child
@@ -1242,7 +1280,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_one_FK_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Parent { Id1 = 77, Id2 = Guid77 };
             var dependent = new Child
@@ -1277,7 +1316,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_one_FK_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Parent { Id1 = 77, Id2 = Guid77 };
             var dependent = new Child
@@ -1312,7 +1352,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_one_FK_not_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Parent { Id1 = 77, Id2 = Guid77 };
             var dependent = new Child { Id1 = 78, Id2 = Guid78 };
@@ -1341,7 +1382,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_one_FK_not_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Parent { Id1 = 77, Id2 = Guid77 };
             var dependent = new Child { Id1 = 78, Id2 = Guid78, Parent = principal };
@@ -1369,7 +1411,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_one_prin_uni_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new ParentPN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ChildPN
@@ -1402,7 +1445,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_one_prin_uni_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new ParentPN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ChildPN
@@ -1435,7 +1479,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_one_prin_uni_FK_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new ParentPN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ChildPN
@@ -1469,7 +1514,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_one_prin_uni_FK_not_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new ParentPN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ChildPN { Id1 = 78, Id2 = Guid78 };
@@ -1497,7 +1543,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_one_prin_uni_FK_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new ParentPN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ChildPN
@@ -1531,7 +1578,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_one_prin_uni_FK_not_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new ParentPN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ChildPN { Id1 = 78, Id2 = Guid78 };
@@ -1559,7 +1607,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_one_dep_uni_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new ParentDN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ChildDN
@@ -1592,7 +1641,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_one_dep_uni_FK_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new ParentDN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ChildDN
@@ -1626,7 +1676,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_one_dep_uni_FK_not_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new ParentDN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ChildDN { Id1 = 78, Id2 = Guid78, Parent = principal };
@@ -1653,7 +1704,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_one_dep_uni_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new ParentDN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ChildDN
@@ -1686,7 +1738,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_one_dep_uni_FK_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new ParentDN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ChildDN
@@ -1720,7 +1773,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_one_dep_uni_FK_not_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new ParentDN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ChildDN { Id1 = 78, Id2 = Guid78, Parent = principal };
@@ -1747,7 +1801,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_then_principal_one_to_one_no_navs_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new ParentNN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ChildNN
@@ -1779,7 +1834,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_then_dependent_one_to_one_no_navs_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new ParentNN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ChildNN
@@ -1811,7 +1867,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_many_FK_set_both_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Category { Id1 = 77, Id2 = Guid77 };
             var dependent = new Product { Id1 = 78, Id2 = Guid78 };
@@ -1848,7 +1905,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_many_FK_not_set_both_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Category { Id1 = 77, Id2 = Guid77 };
             var dependent = new Product { Id1 = 78, Id2 = Guid78 };
@@ -1883,7 +1941,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_many_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Category { Id1 = 77, Id2 = Guid77 };
             var dependent = new Product { Id1 = 78, Id2 = Guid78 };
@@ -1918,7 +1977,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_many_FK_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Category { Id1 = 77, Id2 = Guid77 };
             var dependent = new Product { Id1 = 78, Id2 = Guid78 };
@@ -1954,7 +2014,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_many_FK_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Category { Id1 = 77, Id2 = Guid77 };
             var dependent = new Product { Id1 = 78, Id2 = Guid78 };
@@ -1990,7 +2051,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_many_FK_not_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Category { Id1 = 77, Id2 = Guid77 };
             var dependent = new Product { Id1 = 78, Id2 = Guid78 };
@@ -2020,7 +2082,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_many_FK_not_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Category { Id1 = 77, Id2 = Guid77 };
             var dependent = new Product { Id1 = 78, Id2 = Guid78 };
@@ -2054,7 +2117,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_many_FK_set_both_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Category { Id1 = 77, Id2 = Guid77 };
             var dependent = new Product { Id1 = 78, Id2 = Guid78 };
@@ -2088,7 +2152,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_many_FK_not_set_both_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Category { Id1 = 77, Id2 = Guid77 };
             var dependent = new Product { Id1 = 78, Id2 = Guid78 };
@@ -2120,7 +2185,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_many_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Category { Id1 = 77, Id2 = Guid77 };
             var dependent = new Product { Id1 = 78, Id2 = Guid78 };
@@ -2152,7 +2218,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_many_FK_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Category { Id1 = 77, Id2 = Guid77 };
             var dependent = new Product { Id1 = 78, Id2 = Guid78 };
@@ -2185,7 +2252,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_many_FK_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Category { Id1 = 77, Id2 = Guid77 };
             var dependent = new Product { Id1 = 78, Id2 = Guid78 };
@@ -2218,7 +2286,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_many_FK_not_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Category { Id1 = 77, Id2 = Guid77 };
             var dependent = new Product { Id1 = 78, Id2 = Guid78 };
@@ -2251,7 +2320,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_many_FK_not_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Category { Id1 = 77, Id2 = Guid77 };
             var dependent = new Product { Id1 = 78, Id2 = Guid78 };
@@ -2281,7 +2351,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_many_prin_uni_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new CategoryPN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ProductPN { Id1 = 78, Id2 = Guid78 };
@@ -2315,7 +2386,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_many_prin_uni_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new CategoryPN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ProductPN { Id1 = 78, Id2 = Guid78 };
@@ -2346,7 +2418,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_many_prin_uni_FK_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new CategoryPN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ProductPN { Id1 = 78, Id2 = Guid78 };
@@ -2381,7 +2454,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_many_prin_uni_FK_not_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new CategoryPN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ProductPN { Id1 = 78, Id2 = Guid78 };
@@ -2410,7 +2484,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_many_prin_uni_FK_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new CategoryPN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ProductPN { Id1 = 78, Id2 = Guid78 };
@@ -2442,7 +2517,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_many_prin_uni_FK_not_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new CategoryPN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ProductPN { Id1 = 78, Id2 = Guid78 };
@@ -2472,7 +2548,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_many_dep_uni_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new CategoryDN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ProductDN { Id1 = 78, Id2 = Guid78 };
@@ -2506,7 +2583,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_many_dep_uni_FK_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new CategoryDN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ProductDN { Id1 = 78, Id2 = Guid78 };
@@ -2541,7 +2619,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_many_dep_uni_FK_not_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new CategoryDN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ProductDN { Id1 = 78, Id2 = Guid78 };
@@ -2574,7 +2653,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_many_dep_uni_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new CategoryDN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ProductDN { Id1 = 78, Id2 = Guid78 };
@@ -2605,7 +2685,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_many_dep_uni_FK_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new CategoryDN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ProductDN { Id1 = 78, Id2 = Guid78 };
@@ -2637,7 +2718,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_many_dep_uni_FK_not_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new CategoryDN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ProductDN { Id1 = 78, Id2 = Guid78 };
@@ -2666,7 +2748,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_many_no_navs_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new CategoryNN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ProductNN { Id1 = 78, Id2 = Guid78 };
@@ -2699,7 +2782,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_many_no_navs_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new CategoryNN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ProductNN { Id1 = 78, Id2 = Guid78 };
@@ -2729,7 +2813,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_one_FK_set_both_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Parent { Id1 = 77, Id2 = Guid77 };
             var dependent = new Child { Id1 = 78, Id2 = Guid78 };
@@ -2766,7 +2851,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_one_FK_not_set_both_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Parent { Id1 = 77, Id2 = Guid77 };
             var dependent = new Child { Id1 = 78, Id2 = Guid78 };
@@ -2801,7 +2887,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_one_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Parent { Id1 = 77, Id2 = Guid77 };
             var dependent = new Child { Id1 = 78, Id2 = Guid78 };
@@ -2836,7 +2923,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_one_FK_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Parent { Id1 = 77, Id2 = Guid77 };
             var dependent = new Child { Id1 = 78, Id2 = Guid78 };
@@ -2872,7 +2960,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_one_FK_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Parent { Id1 = 77, Id2 = Guid77 };
             var dependent = new Child { Id1 = 78, Id2 = Guid78 };
@@ -2908,7 +2997,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_one_FK_not_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Parent { Id1 = 77, Id2 = Guid77 };
             var dependent = new Child { Id1 = 78, Id2 = Guid78 };
@@ -2938,7 +3028,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_one_FK_not_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Parent { Id1 = 77, Id2 = Guid77 };
             var dependent = new Child { Id1 = 78, Id2 = Guid78 };
@@ -2972,7 +3063,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_one_FK_set_both_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Parent { Id1 = 77, Id2 = Guid77 };
             var dependent = new Child { Id1 = 78, Id2 = Guid78 };
@@ -3006,7 +3098,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_one_FK_not_set_both_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Parent { Id1 = 77, Id2 = Guid77 };
             var dependent = new Child { Id1 = 78, Id2 = Guid78 };
@@ -3038,7 +3131,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_one_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Parent { Id1 = 77, Id2 = Guid77 };
             var dependent = new Child { Id1 = 78, Id2 = Guid78 };
@@ -3070,7 +3164,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_one_FK_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Parent { Id1 = 77, Id2 = Guid77 };
             var dependent = new Child { Id1 = 78, Id2 = Guid78 };
@@ -3103,7 +3198,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_one_FK_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Parent { Id1 = 77, Id2 = Guid77 };
             var dependent = new Child { Id1 = 78, Id2 = Guid78 };
@@ -3136,7 +3232,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_one_FK_not_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Parent { Id1 = 77, Id2 = Guid77 };
             var dependent = new Child { Id1 = 78, Id2 = Guid78 };
@@ -3167,7 +3264,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_one_FK_not_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new Parent { Id1 = 77, Id2 = Guid77 };
             var dependent = new Child { Id1 = 78, Id2 = Guid78 };
@@ -3197,7 +3295,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_one_prin_uni_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new ParentPN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ChildPN { Id1 = 78, Id2 = Guid78 };
@@ -3231,7 +3330,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_one_prin_uni_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new ParentPN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ChildPN { Id1 = 78, Id2 = Guid78 };
@@ -3262,7 +3362,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_one_prin_uni_FK_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new ParentPN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ChildPN { Id1 = 78, Id2 = Guid78 };
@@ -3297,7 +3398,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_one_prin_uni_FK_not_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new ParentPN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ChildPN { Id1 = 78, Id2 = Guid78 };
@@ -3326,7 +3428,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_one_prin_uni_FK_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new ParentPN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ChildPN { Id1 = 78, Id2 = Guid78 };
@@ -3358,7 +3461,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_one_prin_uni_FK_not_set_principal_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new ParentPN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ChildPN { Id1 = 78, Id2 = Guid78 };
@@ -3388,7 +3492,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_one_dep_uni_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new ParentDN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ChildDN { Id1 = 78, Id2 = Guid78 };
@@ -3422,7 +3527,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_one_dep_uni_FK_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new ParentDN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ChildDN { Id1 = 78, Id2 = Guid78 };
@@ -3457,7 +3563,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_one_dep_uni_FK_not_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new ParentDN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ChildDN { Id1 = 78, Id2 = Guid78 };
@@ -3490,7 +3597,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_one_dep_uni_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new ParentDN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ChildDN { Id1 = 78, Id2 = Guid78 };
@@ -3521,7 +3629,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_one_dep_uni_FK_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new ParentDN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ChildDN { Id1 = 78, Id2 = Guid78 };
@@ -3553,7 +3662,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_one_dep_uni_FK_not_set_dependent_nav_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new ParentDN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ChildDN { Id1 = 78, Id2 = Guid78 };
@@ -3582,7 +3692,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_dependent_but_not_principal_one_to_one_no_navs_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new ParentNN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ChildNN { Id1 = 78, Id2 = Guid78 };
@@ -3615,7 +3726,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Unchanged)]
         public void Add_principal_but_not_dependent_one_to_one_no_navs_FK_set_no_navs_set(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new FixupContext();
             var principal = new ParentNN { Id1 = 77, Id2 = Guid77 };
             var dependent = new ChildNN { Id1 = 78, Id2 = Guid78 };

@@ -35,7 +35,8 @@ namespace Castle.DynamicProxy.Contributors
             Type delegateType,
             MetaMethod method,
             Reference targetReference
-        ) {
+        )
+        {
             Debug.Assert(delegateType.IsGenericType, "delegateType.IsGenericType");
             this.delegateType = delegateType;
             this.method = method;
@@ -45,7 +46,8 @@ namespace Castle.DynamicProxy.Contributors
         public ConstructorEmitter CreateConstructor(
             ArgumentReference[] baseCtorArguments,
             AbstractTypeEmitter invocation
-        ) {
+        )
+        {
             return invocation.CreateConstructor(baseCtorArguments);
         }
 
@@ -59,7 +61,8 @@ namespace Castle.DynamicProxy.Contributors
             IExpression[] args,
             Reference targetField,
             MethodEmitter invokeMethodOnTarget
-        ) {
+        )
+        {
             var @delegate = GetDelegate(invocation, invokeMethodOnTarget);
             return new MethodInvocationExpression(@delegate, GetCallbackMethod(), args);
         }
@@ -67,14 +70,16 @@ namespace Castle.DynamicProxy.Contributors
         public IExpression[] GetConstructorInvocationArguments(
             IExpression[] arguments,
             ClassEmitter proxy
-        ) {
+        )
+        {
             return arguments;
         }
 
         private Reference GetDelegate(
             AbstractTypeEmitter invocation,
             MethodEmitter invokeMethodOnTarget
-        ) {
+        )
+        {
             var genericTypeParameters = invocation.GenericTypeParams.AsTypeArray();
             var closedDelegateType = delegateType.MakeGenericType(genericTypeParameters);
             var localReference = invokeMethodOnTarget.CodeBuilder.DeclareLocal(closedDelegateType);
@@ -97,7 +102,8 @@ namespace Castle.DynamicProxy.Contributors
             Reference localTarget,
             Type closedDelegateType,
             MethodInfo closedMethodOnTarget
-        ) {
+        )
+        {
             var delegateCreateDelegate = new MethodInvocationExpression(
                 null,
                 DelegateMethods.CreateDelegate,

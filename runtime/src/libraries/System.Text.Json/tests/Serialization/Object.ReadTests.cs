@@ -44,7 +44,8 @@ namespace System.Text.Json.Serialization.Tests
         public static void ReadSimpleClassIgnoresLeadingOrTrailingTrivia(
             string leadingTrivia,
             string trailingTrivia
-        ) {
+        )
+        {
             var options = new JsonSerializerOptions();
             options.ReadCommentHandling = JsonCommentHandling.Skip;
 
@@ -87,7 +88,8 @@ namespace System.Text.Json.Serialization.Tests
         public static void ReadClassWithCommentsThrowsIfDisallowed(
             string leadingTrivia,
             string trailingTrivia
-        ) {
+        )
+        {
             Assert.Throws<JsonException>(
                 () =>
                     JsonSerializer.Deserialize<ClassWithComplexObjects>(
@@ -189,7 +191,8 @@ namespace System.Text.Json.Serialization.Tests
         public static void ReadComplexClassIgnoresLeadingOrTrailingTrivia(
             string leadingTrivia,
             string trailingTrivia
-        ) {
+        )
+        {
             var options = new JsonSerializerOptions();
             options.ReadCommentHandling = JsonCommentHandling.Skip;
 

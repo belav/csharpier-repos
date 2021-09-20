@@ -24,7 +24,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                     "Microsoft.AspNetCore.Razor.Language.Test",
                     StringComparison.Ordinal
                 )
-            ) {
+            )
+            {
                 projectDirectory = Path.Combine(
                     repoRoot,
                     "src",
@@ -53,7 +54,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                     "Microsoft.AspNetCore.Razor.Language.Test",
                     StringComparison.Ordinal
                 )
-            ) {
+            )
+            {
                 projectDirectory = Path.Combine(
                     repoRoot,
                     "src",

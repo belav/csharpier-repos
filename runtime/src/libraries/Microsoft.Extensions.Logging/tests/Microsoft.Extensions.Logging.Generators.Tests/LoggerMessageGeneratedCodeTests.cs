@@ -422,7 +422,8 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
         private static void AssertLastState(
             MockLogger logger,
             params KeyValuePair<string, object?>[] expected
-        ) {
+        )
+        {
             var rol = (IReadOnlyList<KeyValuePair<string, object?>>)logger.LastState!;
             int count = 0;
             foreach (var kvp in expected)

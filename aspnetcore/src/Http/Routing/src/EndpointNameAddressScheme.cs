@@ -98,7 +98,8 @@ namespace Microsoft.AspNetCore.Routing
                 if (
                     endpoint.Metadata.GetMetadata<ISuppressLinkGenerationMetadata>()?.SuppressLinkGeneration
                     == true
-                ) {
+                )
+                {
                     // Skip anything that's suppressed for linking.
                     return null;
                 }

@@ -117,7 +117,8 @@ namespace System.Web.Http.Cors.Test
         public async Task GetCorsPolicyAsync_RetunsExpectedExposeHeaders(
             string exposedHeaders,
             string[] expectedResults
-        ) {
+        )
+        {
             EnableCorsAttribute enableCors = new EnableCorsAttribute(
                 origins: "*",
                 headers: "*",
@@ -143,7 +144,8 @@ namespace System.Web.Http.Cors.Test
         public async Task GetCorsPolicyAsync_RetunsExpectedHeaders(
             string headers,
             string[] expectedResults
-        ) {
+        )
+        {
             EnableCorsAttribute enableCors = new EnableCorsAttribute(
                 origins: "*",
                 headers: headers,
@@ -168,7 +170,8 @@ namespace System.Web.Http.Cors.Test
         public async Task GetCorsPolicyAsync_RetunsExpectedMethods(
             string methods,
             string[] expectedResults
-        ) {
+        )
+        {
             EnableCorsAttribute enableCors = new EnableCorsAttribute(
                 origins: "*",
                 headers: "*",
@@ -202,7 +205,8 @@ namespace System.Web.Http.Cors.Test
         public async Task GetCorsPolicyAsync_RetunsExpectedOrigins(
             string origins,
             string[] expectedResults
-        ) {
+        )
+        {
             EnableCorsAttribute enableCors = new EnableCorsAttribute(
                 origins: origins,
                 headers: "*",
@@ -245,7 +249,8 @@ namespace System.Web.Http.Cors.Test
         public Task GetCorsPolicyAsync_InvalidOrigin_Throws(
             string origin,
             string expectedErrorMessage
-        ) {
+        )
+        {
             EnableCorsAttribute enableCors = new EnableCorsAttribute(
                 origins: origin,
                 headers: "*",
@@ -265,7 +270,8 @@ namespace System.Web.Http.Cors.Test
         public Task GetCorsPolicyAsync_NullEmptyOrigin_Throws(
             string origin,
             string expectedErrorMessage
-        ) {
+        )
+        {
             EnableCorsAttribute enableCors = new EnableCorsAttribute(
                 origins: "http://localhost",
                 headers: "*",

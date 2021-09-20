@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public static bool IsRuntimeFinalizer(
             this MethodSymbol method,
             bool skipFirstMethodKindCheck = false
-        ) {
+        )
+        {
             // Note: Flipping the metadata-virtual bit on a method can't change it from not-a-runtime-finalize
             // to runtime-finalizer (since it will also be marked newslot), so it is safe to use
             // IsMetadataVirtualIgnoringInterfaceImplementationChanges.  This also has the advantage of making
@@ -55,7 +56,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 || method.ParameterCount != 0
                 || method.Arity != 0
                 || !method.IsMetadataVirtual(ignoreInterfaceImplementationChanges: true)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -95,7 +97,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public static MethodSymbol ConstructIfGeneric(
             this MethodSymbol method,
             ImmutableArray<TypeWithAnnotations> typeArguments
-        ) {
+        )
+        {
             Debug.Assert(method.IsGenericMethod == (typeArguments.Length > 0));
             return method.IsGenericMethod ? method.Construct(typeArguments) : method;
         }
@@ -108,7 +111,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public static bool CanBeHiddenByMemberKind(
             this MethodSymbol hiddenMethod,
             SymbolKind hidingMemberKind
-        ) {
+        )
+        {
             Debug.Assert((object)hiddenMethod != null);
 
             // Nothing can hide a destructor (see SymbolPreparer::ReportHiding)
@@ -171,7 +175,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public static bool IsAsyncReturningTask(
             this MethodSymbol method,
             CSharpCompilation compilation
-        ) {
+        )
+        {
             return method.IsAsync && method.ReturnType.IsNonGenericTaskType(compilation);
         }
 
@@ -181,7 +186,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public static bool IsAsyncReturningGenericTask(
             this MethodSymbol method,
             CSharpCompilation compilation
-        ) {
+        )
+        {
             return method.IsAsync && method.ReturnType.IsGenericTaskType(compilation);
         }
 
@@ -191,7 +197,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public static bool IsAsyncReturningIAsyncEnumerable(
             this MethodSymbol method,
             CSharpCompilation compilation
-        ) {
+        )
+        {
             return method.IsAsync && method.ReturnType.IsIAsyncEnumerableType(compilation);
         }
 
@@ -201,7 +208,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public static bool IsAsyncReturningIAsyncEnumerator(
             this MethodSymbol method,
             CSharpCompilation compilation
-        ) {
+        )
+        {
             return method.IsAsync && method.ReturnType.IsIAsyncEnumeratorType(compilation);
         }
 

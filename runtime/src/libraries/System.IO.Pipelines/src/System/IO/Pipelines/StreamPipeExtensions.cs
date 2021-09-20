@@ -18,7 +18,8 @@ namespace System.IO.Pipelines
             this Stream source,
             PipeWriter destination,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (source == null)
             {
                 throw new ArgumentNullException(nameof(source));

@@ -614,7 +614,8 @@ class C
         public async Task TestConversion2_Throw1(
             LanguageVersion languageVersion,
             string expectedFalseExpression
-        ) {
+        )
+        {
             await TestInRegularAndScript1Async(
                 @"
 class C
@@ -684,7 +685,8 @@ class C
         public async Task TestConversion3(
             LanguageVersion languageVersion,
             string expectedFalseExpression
-        ) {
+        )
+        {
             await TestInRegularAndScript1Async(
                 @"
 class C
@@ -724,7 +726,8 @@ class C
         public async Task TestConversion3_Throw1(
             LanguageVersion languageVersion,
             string expectedFalseExpression
-        ) {
+        )
+        {
             await TestInRegularAndScript1Async(
                 @"
 class C
@@ -764,7 +767,8 @@ class C
         public async Task TestConversion3_Throw2(
             LanguageVersion languageVersion,
             string expectedTrue
-        ) {
+        )
+        {
             await TestInRegularAndScript1Async(
                 @"
 class C

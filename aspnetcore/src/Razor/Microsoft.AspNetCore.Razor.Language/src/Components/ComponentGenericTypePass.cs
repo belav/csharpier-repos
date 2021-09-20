@@ -40,7 +40,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         protected override void ExecuteCore(
             RazorCodeDocument codeDocument,
             DocumentIntermediateNode documentNode
-        ) {
+        )
+        {
             if (!IsComponentDocument(documentNode))
             {
                 return;
@@ -156,7 +157,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                     if (
                         attribute != null
                         && TryFindGenericTypeNames(attribute.BoundAttribute, out var typeParameters)
-                    ) {
+                    )
+                    {
                         var attributeValueIsLambda = _pass.TypeNameFeature.IsLambda(
                             GetContent(attribute)
                         );
@@ -182,7 +184,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                                         out var existingValue
                                     )
                                     || existingValue.GenericTypeNames.Count > typeParameters.Count
-                                ) {
+                                )
+                                {
                                     node.ProvidesCascadingGenericTypes[typeName] =
                                         provideCascadingGenericTypes;
                                 }
@@ -223,7 +226,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                                 uncoveredBindingKey,
                                 out var genericTypeProvider
                             )
-                        ) {
+                        )
+                        {
                             // If the parameter value is an expression that includes multiple generic types, we only want
                             // to use it if we want *all* those generic types. That is, a parameter of type MyType<T0, T1>
                             // can supply types to a Child<T0, T1>, but not to a Child<T0>.
@@ -306,7 +310,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             private bool TryFindGenericTypeNames(
                 BoundAttributeDescriptor boundAttribute,
                 out IReadOnlyList<string> typeParameters
-            ) {
+            )
+            {
                 if (boundAttribute == null)
                 {
                     // Will be null for attributes set on the component that don't match a declared component parameter
@@ -356,14 +361,16 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             private static bool ValidateTypeArguments(
                 ComponentIntermediateNode node,
                 Dictionary<string, Binding> bindings
-            ) {
+            )
+            {
                 var missing = new List<BoundAttributeDescriptor>();
                 foreach (var binding in bindings)
                 {
                     if (
                         binding.Value.Node == null
                         || string.IsNullOrWhiteSpace(binding.Value.Content)
-                    ) {
+                    )
+                    {
                         missing.Add(binding.Value.Attribute);
                     }
                 }
@@ -404,7 +411,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                     if (
                         attribute.BoundAttribute?.IsGenericTypedProperty()
                         ?? false && attribute.TypeName != null
-                    ) {
+                    )
+                    {
                         // If we know the type name, then replace any generic type parameter inside it with
                         // the known types.
                         attribute.TypeName = globallyQualifiedTypeName;
@@ -412,14 +420,16 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                     else if (
                         attribute.TypeName == null
                         && (attribute.BoundAttribute?.IsDelegateProperty() ?? false)
-                    ) {
+                    )
+                    {
                         // This is a weakly typed delegate, treat it as Action<object>
                         attribute.TypeName = "System.Action<System.Object>";
                     }
                     else if (
                         attribute.TypeName == null
                         && (attribute.BoundAttribute?.IsEventCallbackProperty() ?? false)
-                    ) {
+                    )
+                    {
                         // This is a weakly typed event-callback, treat it as EventCallback (non-generic)
                         attribute.TypeName = ComponentsApi.EventCallback.FullTypeName;
                     }
@@ -449,7 +459,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                     if (
                         childContent.BoundAttribute?.IsGenericTypedProperty()
                         ?? false && childContent.TypeName != null
-                    ) {
+                    )
+                    {
                         // If we know the type name, then replace any generic type parameter inside it with
                         // the known types.
                         childContent.TypeName = rewriter.Rewrite(childContent.TypeName);
@@ -470,7 +481,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 DocumentIntermediateNode documentNode,
                 ComponentIntermediateNode node,
                 List<CascadingGenericTypeParameter> receivesCascadingGenericTypes
-            ) {
+            )
+            {
                 var @namespace = documentNode.FindPrimaryNamespace().Content;
                 @namespace = string.IsNullOrEmpty(@namespace)
                     ? "__Blazor"

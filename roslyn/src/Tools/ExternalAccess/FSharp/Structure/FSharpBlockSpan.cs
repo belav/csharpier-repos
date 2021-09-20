@@ -51,15 +51,16 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Structure
             string bannerText = Ellipses,
             bool autoCollapse = false,
             bool isDefaultCollapsed = false
-        ) : this(
-            type,
-            isCollapsible,
-            textSpan,
-            textSpan,
-            bannerText,
-            autoCollapse,
-            isDefaultCollapsed
-        ) { }
+        )
+            : this(
+                type,
+                isCollapsible,
+                textSpan,
+                textSpan,
+                bannerText,
+                autoCollapse,
+                isDefaultCollapsed
+            ) { }
 
         public FSharpBlockSpan(
             string type,
@@ -69,7 +70,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Structure
             string bannerText = Ellipses,
             bool autoCollapse = false,
             bool isDefaultCollapsed = false
-        ) {
+        )
+        {
             TextSpan = textSpan;
             BannerText = bannerText;
             HintSpan = hintSpan;

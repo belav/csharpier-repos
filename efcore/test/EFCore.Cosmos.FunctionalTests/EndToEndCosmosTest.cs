@@ -881,9 +881,8 @@ OFFSET 0 LIMIT 1"
 
         private class PartitionKeyContextEntityWithNoPartitionKey : DbContext
         {
-            public PartitionKeyContextEntityWithNoPartitionKey(
-                DbContextOptions dbContextOptions
-            ) : base(dbContextOptions) { }
+            public PartitionKeyContextEntityWithNoPartitionKey(DbContextOptions dbContextOptions)
+                : base(dbContextOptions) { }
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
@@ -893,9 +892,8 @@ OFFSET 0 LIMIT 1"
 
         private class PartitionKeyContextCustomValueGenerator : DbContext
         {
-            public PartitionKeyContextCustomValueGenerator(
-                DbContextOptions dbContextOptions
-            ) : base(dbContextOptions) { }
+            public PartitionKeyContextCustomValueGenerator(DbContextOptions dbContextOptions)
+                : base(dbContextOptions) { }
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
@@ -973,9 +971,8 @@ OFFSET 0 LIMIT 1"
 
         private class PartitionKeyContextWithPrimaryKeyResourceId : DbContext
         {
-            public PartitionKeyContextWithPrimaryKeyResourceId(
-                DbContextOptions dbContextOptions
-            ) : base(dbContextOptions) { }
+            public PartitionKeyContextWithPrimaryKeyResourceId(DbContextOptions dbContextOptions)
+                : base(dbContextOptions) { }
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {

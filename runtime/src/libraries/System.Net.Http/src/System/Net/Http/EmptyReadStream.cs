@@ -37,7 +37,8 @@ namespace System.Net.Http
             Stream destination,
             int bufferSize,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ValidateCopyToArguments(destination, bufferSize);
             return NopAsync(cancellationToken);
         }

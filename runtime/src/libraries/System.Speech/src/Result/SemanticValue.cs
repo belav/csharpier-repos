@@ -39,7 +39,8 @@ namespace System.Speech.Recognition
                 || refObj.Count != Count
                 || refObj.Value == null && Value != null
                 || (refObj.Value != null && !refObj.Value.Equals(Value))
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -102,7 +103,8 @@ namespace System.Speech.Recognition
         // Read-only collection so throw on these methods. Also make then hidden through explicit interface declaration.
         void ICollection<KeyValuePair<string, SemanticValue>>.Add(
             KeyValuePair<string, SemanticValue> key
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.Get(SRID.CollectionReadOnly));
         }
 
@@ -118,7 +120,8 @@ namespace System.Speech.Recognition
 
         bool ICollection<KeyValuePair<string, SemanticValue>>.Remove(
             KeyValuePair<string, SemanticValue> key
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.Get(SRID.CollectionReadOnly));
         }
 
@@ -129,7 +132,8 @@ namespace System.Speech.Recognition
         void ICollection<KeyValuePair<string, SemanticValue>>.CopyTo(
             KeyValuePair<string, SemanticValue>[] array,
             int index
-        ) {
+        )
+        {
             ((ICollection<KeyValuePair<string, SemanticValue>>)_dictionary).CopyTo(array, index);
         }
         IEnumerator<KeyValuePair<string, SemanticValue>> IEnumerable<

@@ -22,7 +22,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             CodeModelState state,
             CodeAttribute parent,
             int index
-        ) {
+        )
+        {
             Debug.Assert(parent != null);
             Debug.Assert(index >= 0);
 
@@ -69,7 +70,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
                     _index,
                     out var attributeArgumentNode
                 )
-            ) {
+            )
+            {
                 return false;
             }
 

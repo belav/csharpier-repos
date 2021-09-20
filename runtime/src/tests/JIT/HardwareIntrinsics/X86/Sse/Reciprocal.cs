@@ -26,7 +26,8 @@ namespace IntelHardwareIntrinsicTest
                         new float[4] { 1, -5, 100, 0 },
                         new float[4]
                     )
-                ) {
+                )
+                {
                     var vf1 = Unsafe.Read<Vector128<float>>(floatTable.inArrayPtr);
                     var vf2 = Sse.Reciprocal(vf1);
                     Unsafe.Write(floatTable.outArrayPtr, vf2);
@@ -48,7 +49,8 @@ namespace IntelHardwareIntrinsicTest
                                     );
                             }
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("SSE Reciprocal failed on float:");
                         foreach (var item in floatTable.outArray)
                         {

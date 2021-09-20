@@ -190,7 +190,8 @@ Captured output lines:
             Process process,
             string sentinelFile,
             int timeout
-        ) {
+        )
+        {
             // This sentinel process will start and will kill any rouge sauce connect server that wasn't torn down via normal means.
             var psi = new ProcessStartInfo
             {
@@ -236,7 +237,8 @@ Captured output lines:
             ITestOutputHelper output,
             string trackingFolder,
             Process process
-        ) {
+        )
+        {
             var pidFile = Path.Combine(trackingFolder, $"{process.Id}.{Guid.NewGuid()}.pid");
             for (var i = 0; i < 3; i++)
             {

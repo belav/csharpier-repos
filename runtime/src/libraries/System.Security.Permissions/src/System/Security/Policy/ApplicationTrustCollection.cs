@@ -39,7 +39,8 @@ namespace System.Security.Policy
         public ApplicationTrustCollection Find(
             ApplicationIdentity applicationIdentity,
             ApplicationVersionMatch versionMatch
-        ) {
+        )
+        {
             return default(ApplicationTrustCollection);
         }
         public ApplicationTrustEnumerator GetEnumerator()

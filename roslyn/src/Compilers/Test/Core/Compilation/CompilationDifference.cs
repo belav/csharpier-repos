@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             CompilationTestData testData,
             EmitDifferenceResult result,
             ImmutableArray<MethodDefinitionHandle> methodHandles
-        ) {
+        )
+        {
             MetadataDelta = metadata;
             ILDelta = il;
             PdbDelta = pdb;
@@ -60,7 +61,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             string expectedIL,
             [CallerLineNumber] int callerLine = 0,
             [CallerFilePath] string callerPath = null
-        ) {
+        )
+        {
             string actualIL = ILDelta.GetMethodIL();
             AssertEx.AssertEqualToleratingWhitespaceDifferences(
                 expectedIL,
@@ -76,7 +78,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             string expectedSignature,
             [CallerLineNumber] int callerLine = 0,
             [CallerFilePath] string callerPath = null
-        ) {
+        )
+        {
             var ilBuilder = TestData.GetMethodData(qualifiedMethodName).ILBuilder;
             string actualSignature = ILBuilderVisualizer.LocalSignatureToString(
                 ilBuilder,
@@ -98,7 +101,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             MethodDefinitionHandle methodToken = default,
             [CallerFilePath] string callerPath = null,
             [CallerLineNumber] int callerLine = 0
-        ) {
+        )
+        {
             var ilBuilder = TestData.GetMethodData(qualifiedMethodName).ILBuilder;
 
             Dictionary<int, string> sequencePointMarkers = null;
@@ -178,7 +182,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
         public void VerifySynthesizedMembers(
             params string[] expectedSynthesizedTypesAndMemberCounts
-        ) {
+        )
+        {
             var actual = EmitResult.Baseline.SynthesizedMembers.Select(
                 e => e.Key.ToString() + ": {" + string.Join(", ", e.Value.Select(v => v.Name)) + "}"
             );
@@ -192,7 +197,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         public void VerifySynthesizedFields(
             string typeName,
             params string[] expectedSynthesizedTypesAndMemberCounts
-        ) {
+        )
+        {
             var actual = EmitResult.Baseline.SynthesizedMembers.Single(
                     e => e.Key.ToString() == typeName
                 )

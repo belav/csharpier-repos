@@ -40,7 +40,8 @@ namespace System.IO.Tests.Enumeration
                         AttributesToSkip = 0
                     }
                 )
-            ) {
+            )
+            {
                 List<string> results = new List<string>();
                 while (recursed.MoveNext())
                     results.Add(recursed.Current);

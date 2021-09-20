@@ -22,12 +22,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.Graph
         /// </remarks>
         public string? Contents { get; }
 
-        public LsifDocument(
-            Uri uri,
-            string languageId,
-            string? contents,
-            IdFactory idFactory
-        ) : base(label: "document", idFactory)
+        public LsifDocument(Uri uri, string languageId, string? contents, IdFactory idFactory)
+            : base(label: "document", idFactory)
         {
             this.Uri = uri;
             this.LanguageId = languageId;

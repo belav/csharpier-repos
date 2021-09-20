@@ -26,7 +26,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             PageHandlerBinderDelegate[] handlerBinders,
             IReadOnlyList<Func<IRazorPage>> viewStartFactories,
             FilterItem[] cacheableFilters
-        ) {
+        )
+        {
             ActionDescriptor = actionDescriptor;
             ViewDataFactory = viewDataFactory;
             PageFactory = pageFactory;

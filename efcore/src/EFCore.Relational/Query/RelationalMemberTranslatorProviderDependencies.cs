@@ -55,7 +55,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         public RelationalMemberTranslatorProviderDependencies(
             ISqlExpressionFactory sqlExpressionFactory,
             IEnumerable<IMemberTranslatorPlugin> plugins
-        ) {
+        )
+        {
             Check.NotNull(sqlExpressionFactory, nameof(sqlExpressionFactory));
             Check.NotNull(plugins, nameof(plugins));
 

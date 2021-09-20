@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.GoToDefinition
             Document document,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var symbolService = document.GetRequiredLanguageService<IGoToDefinitionSymbolService>();
             var (symbol, _) = await symbolService.GetSymbolAndBoundSpanAsync(
                     document,

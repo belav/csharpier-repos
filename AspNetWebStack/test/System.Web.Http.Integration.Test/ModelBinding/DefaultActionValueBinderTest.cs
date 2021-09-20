@@ -1419,7 +1419,8 @@ namespace System.Web.Http.ModelBinding
             int id = 0,
             string firstName = "DefaultFirstName",
             string lastName = "DefaultLastName"
-        ) {
+        )
+        {
             return new ActionValueItem() { Id = id, FirstName = firstName, LastName = lastName };
         }
 
@@ -1428,7 +1429,8 @@ namespace System.Web.Http.ModelBinding
             [FromUri] int id = 0,
             [FromUri] string firstName = "DefaultFirstName",
             [FromUri] string lastName = "DefaultLastName"
-        ) {
+        )
+        {
             return new ActionValueItem() { Id = id, FirstName = firstName, LastName = lastName };
         }
 
@@ -1449,7 +1451,8 @@ namespace System.Web.Http.ModelBinding
             [FromUri(Name = "custID")] int id,
             [FromUri(Name = "first")] string firstName,
             [FromUri(Name = "last")] string lastName
-        ) {
+        )
+        {
             return new ActionValueItem() { Id = id, FirstName = firstName, LastName = lastName };
         }
 
@@ -1468,7 +1471,8 @@ namespace System.Web.Http.ModelBinding
                 Name = "customLastName"
             )]
                 string lastName
-        ) {
+        )
+        {
             return new ActionValueItem() { Id = id, FirstName = firstName, LastName = lastName };
         }
 
@@ -1536,7 +1540,8 @@ namespace System.Web.Http.ModelBinding
         // Demonstrates binding to ObjectContent<T> from request body
         public Task<ActionValueItem> PostObjectContentOfItemAsync(
             ObjectContent<ActionValueItem> item
-        ) {
+        )
+        {
             return item.ReadAsAsync<ActionValueItem>();
         }
 
@@ -1568,7 +1573,8 @@ namespace System.Web.Http.ModelBinding
             this DefaultActionValueBinder binder,
             HttpActionContext actionContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             HttpActionBinding binding = binder.GetBinding(actionContext.ActionDescriptor);
             return binding.ExecuteBindingAsync(actionContext, cancellationToken);
         }

@@ -65,7 +65,8 @@ namespace System.IO.MemoryMappedFiles.Tests
             MemoryMappedFileAccess access = MemoryMappedFileAccess.ReadWrite,
             [CallerMemberName] string fileName = null,
             [CallerLineNumber] int lineNumber = 0
-        ) {
+        )
+        {
             yield return MemoryMappedFile.CreateNew(null, capacity, access);
             yield return MemoryMappedFile.CreateFromFile(
                 Path.Combine(TestDirectory, Guid.NewGuid().ToString("N")),
@@ -110,7 +111,8 @@ namespace System.IO.MemoryMappedFiles.Tests
             long expectedCapacity,
             MemoryMappedFileAccess expectedAccess = MemoryMappedFileAccess.ReadWrite,
             HandleInheritability expectedInheritability = HandleInheritability.None
-        ) {
+        )
+        {
             // Validate that we got a MemoryMappedFile object and that its handle is valid
             Assert.NotNull(mmf);
             Assert.NotNull(mmf.SafeMemoryMappedFileHandle);
@@ -161,7 +163,8 @@ namespace System.IO.MemoryMappedFiles.Tests
             MemoryMappedFile mmf,
             long capacity,
             MemoryMappedFileAccess access
-        ) {
+        )
+        {
             using (MemoryMappedViewAccessor accessor = mmf.CreateViewAccessor(0, capacity, access))
             {
                 ValidateMemoryMappedViewAccessor(accessor, capacity, access);
@@ -180,7 +183,8 @@ namespace System.IO.MemoryMappedFiles.Tests
             MemoryMappedViewAccessor accessor,
             long capacity,
             MemoryMappedFileAccess access
-        ) {
+        )
+        {
             // Validate the accessor and its handle
             Assert.NotNull(accessor);
             Assert.NotNull(accessor.SafeMemoryMappedViewHandle);
@@ -239,7 +243,8 @@ namespace System.IO.MemoryMappedFiles.Tests
             MemoryMappedViewStream stream,
             long capacity,
             MemoryMappedFileAccess access
-        ) {
+        )
+        {
             // Validate the stream and its handle
             Assert.NotNull(stream);
             Assert.NotNull(stream.SafeMemoryMappedViewHandle);

@@ -56,7 +56,8 @@ namespace System.Web.Http.Cors
         protected async override Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             CorsRequestContext corsRequestContext = request.GetCorsRequestContext();
             if (corsRequestContext != null)
             {
@@ -111,7 +112,8 @@ namespace System.Web.Http.Cors
             HttpRequestMessage request,
             CorsRequestContext corsRequestContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (request == null)
             {
                 throw new ArgumentNullException("request");
@@ -153,7 +155,8 @@ namespace System.Web.Http.Cors
             HttpRequestMessage request,
             CorsRequestContext corsRequestContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (request == null)
             {
                 throw new ArgumentNullException("request");
@@ -224,7 +227,8 @@ namespace System.Web.Http.Cors
         private static HttpResponseMessage HandleException(
             HttpRequestMessage request,
             Exception exception
-        ) {
+        )
+        {
             HttpResponseException httpResponseException = exception as HttpResponseException;
 
             if (httpResponseException != null)
@@ -238,7 +242,8 @@ namespace System.Web.Http.Cors
         private async Task<CorsPolicy> GetCorsPolicyAsync(
             HttpRequestMessage request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             CorsPolicy corsPolicy = null;
             ICorsPolicyProviderFactory corsPolicyProviderFactory =
                 _httpConfiguration.GetCorsPolicyProviderFactory();
@@ -258,7 +263,8 @@ namespace System.Web.Http.Cors
             CorsRequestContext requestContext,
             CorsPolicy corsPolicy,
             out CorsResult corsResult
-        ) {
+        )
+        {
             ICorsEngine engine = _httpConfiguration.GetCorsEngine();
             corsResult = engine.EvaluatePolicy(requestContext, corsPolicy);
             return corsResult != null && corsResult.IsValid;

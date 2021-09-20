@@ -111,7 +111,8 @@ namespace System.Web.Mvc.Html.Test
             Func<object> modelAccessor,
             Type containerType,
             string propertyName
-        ) {
+        )
+        {
             var propertyMetadata = _oldMetadataProvider.GetMetadataForProperty(
                 modelAccessor,
                 containerType,

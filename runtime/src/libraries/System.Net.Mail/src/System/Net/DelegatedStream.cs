@@ -75,7 +75,8 @@ namespace System.Net
             int count,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             if (!CanRead)
                 throw new NotSupportedException(SR.ReadNotSupported);
 
@@ -88,7 +89,8 @@ namespace System.Net
             int count,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             if (!CanWrite)
                 throw new NotSupportedException(SR.WriteNotSupported);
 
@@ -143,7 +145,8 @@ namespace System.Net
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!CanRead)
                 throw new NotSupportedException(SR.ReadNotSupported);
 
@@ -180,7 +183,8 @@ namespace System.Net
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!CanWrite)
                 throw new NotSupportedException(SR.WriteNotSupported);
 

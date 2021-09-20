@@ -58,7 +58,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 IForegroundNotificationService notificationService,
                 TagSource tagSource,
                 ITextBuffer subjectBuffer
-            ) {
+            )
+            {
                 Contract.ThrowIfNull(subjectBuffer);
 
                 _subjectBuffer = subjectBuffer;
@@ -133,7 +134,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
             private void OnTagsChangedForBuffer(
                 ICollection<KeyValuePair<ITextBuffer, DiffResult>> changes,
                 bool initialTags
-            ) {
+            )
+            {
                 _tagSource.AssertIsForeground();
 
                 // Note: This operation is uncancellable. Once we've been notified here, our cached tags
@@ -201,7 +203,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                         FunctionId.Tagger_BatchChangeNotifier_NotifyEditorNow,
                         CancellationToken.None
                     )
-                ) {
+                )
+                {
                     if (normalizedSpans.Count == 0)
                     {
                         return;
@@ -225,7 +228,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
 
             internal static NormalizedSnapshotSpanCollection CoalesceSpans(
                 NormalizedSnapshotSpanCollection normalizedSpans
-            ) {
+            )
+            {
                 var snapshot = normalizedSpans.First().Snapshot;
 
                 // Coalesce the spans if there are a lot of them.
@@ -263,7 +267,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 NormalizedSnapshotSpanCollection requestedSpans,
                 bool accurate,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (requestedSpans.Count == 0)
                 {
                     return SpecializedCollections.EmptyEnumerable<ITagSpan<TTag>>();

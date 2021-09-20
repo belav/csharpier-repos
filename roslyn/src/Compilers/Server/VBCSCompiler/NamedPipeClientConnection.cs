@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer
         internal NamedPipeClientConnection(
             NamedPipeServerStream stream,
             ICompilerServerLogger logger
-        ) {
+        )
+        {
             Stream = stream;
             Logger = logger;
         }

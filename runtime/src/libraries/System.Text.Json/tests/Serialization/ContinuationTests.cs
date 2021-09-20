@@ -67,7 +67,8 @@ namespace System.Text.Json.Serialization.Tests
                 (ITestObject TestObject, INestedObject Nested) in TestObjects.Take(
                     enumeratePayloadTweaks ? 1 : TestObjects.Count()
                 )
-            ) {
+            )
+            {
                 Type testObjectType = TestObject.GetType();
                 TestObject.Initialize(Nested);
 
@@ -86,7 +87,8 @@ namespace System.Text.Json.Serialization.Tests
                         > Position, int Offset) tweak in enumeratePayloadTweaks
                             ? s_payloadTweaks.Skip(1)
                             : s_payloadTweaks.Take(1)
-                    ) {
+                    )
+                    {
                         string tweaked = tweak.Tweak(payload);
 
                         // Wrap the payload inside an array to have something to read before/after.
@@ -113,7 +115,8 @@ namespace System.Text.Json.Serialization.Tests
                                 minPaddingLength,
                                 maxPaddingLength - minPaddingLength + 1
                             )
-                        ) {
+                        )
+                        {
                             (int Line, int Col) paddedFailurePosition = failurePosition;
                             if (failurePosition != default && failurePosition.Line == 0)
                                 paddedFailurePosition = (
@@ -176,7 +179,8 @@ namespace System.Text.Json.Serialization.Tests
             Type type,
             bool ignoreNullValues,
             (int Line, int Column) expectedFailure
-        ) {
+        )
+        {
             var stream = new MemoryStream(Encoding.UTF8.GetBytes(json));
             {
                 var readOptions = new JsonSerializerOptions
@@ -214,7 +218,8 @@ namespace System.Text.Json.Serialization.Tests
             Type type,
             bool ignoreNullValues,
             (int Line, int Column) expectedFailure
-        ) {
+        )
+        {
             if (expectedFailure == default)
             {
                 // The tweak didn't find something to tweak in the payload
@@ -257,7 +262,8 @@ namespace System.Text.Json.Serialization.Tests
             Type type,
             bool ignoreNullValues,
             (int Line, int Column) expectedFailure
-        ) {
+        )
+        {
             var readOptions = new JsonSerializerOptions { IgnoreNullValues = ignoreNullValues, };
 
             var chunk = new Chunk(json, bufferSize);
@@ -293,7 +299,8 @@ namespace System.Text.Json.Serialization.Tests
             Type type,
             bool ignoreNullValues,
             (int Line, int Column) expectedFailure
-        ) {
+        )
+        {
             if (expectedFailure == default)
             {
                 // The tweak didn't find something to tweak in the payload

@@ -114,7 +114,8 @@ namespace SslStress
 
             static async Task WaitUntilMaxExecutionTimeElapsedOrKeyboardInterrupt(
                 TimeSpan? maxExecutionTime = null
-            ) {
+            )
+            {
                 var tcs = new TaskCompletionSource<bool>();
                 Console.CancelKeyPress += (sender, args) =>
                 {
@@ -146,7 +147,8 @@ namespace SslStress
         private static bool TryParseCli(
             string[] args,
             [NotNullWhen(true)] out Configuration? config
-        ) {
+        )
+        {
             var cmd = new RootCommand();
             cmd.AddOption(new Option(new[] { "--help", "-h" }, "Display this help text."));
             cmd.AddOption(

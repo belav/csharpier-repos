@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
         private void OnActiveSessionChanged(
             object sender,
             InlineRenameService.ActiveSessionChangedEventArgs e
-        ) {
+        )
+        {
             if (e.PreviousSession != null)
             {
                 DetachFromSession();

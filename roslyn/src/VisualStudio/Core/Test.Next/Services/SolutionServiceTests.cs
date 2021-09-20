@@ -634,7 +634,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
                 RemoteWorkspace remoteWorkspace,
                 AssetProvider assetProvider,
                 Solution solution
-            ) {
+            )
+            {
                 // set up initial solution
                 var solutionChecksum = await solution.State.GetChecksumAsync(
                     CancellationToken.None
@@ -660,7 +661,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
                 Solution givenSolution,
                 Solution remoteSolution,
                 bool expectRemoteSolutionToCurrent
-            ) {
+            )
+            {
                 // verify we got solution expected
                 Assert.Equal(
                     await givenSolution.State.GetChecksumAsync(CancellationToken.None),
@@ -753,7 +755,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
         private static async Task VerifySolutionUpdate(
             string code,
             Func<Solution, Solution> newSolutionGetter
-        ) {
+        )
+        {
             using var workspace = TestWorkspace.CreateCSharp(code);
             await VerifySolutionUpdate(workspace, newSolutionGetter);
         }
@@ -763,7 +766,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             Func<Solution, Solution> newSolutionGetter,
             Action<Solution> oldSolutionValidator = null,
             Action<Solution> newSolutionValidator = null
-        ) {
+        )
+        {
             var solution = workspace.CurrentSolution;
             oldSolutionValidator?.Invoke(solution);
 
@@ -853,7 +857,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             RemoteWorkspace remoteWorkspace,
             Solution solution,
             Dictionary<Checksum, object> map = null
-        ) {
+        )
+        {
             // make sure checksum is calculated
             await solution.State.GetChecksumAsync(CancellationToken.None);
 
@@ -893,7 +898,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
                     SyntaxNode bodyOpt,
                     InvocationReasons reasons,
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     _source.SetResult(true);
                     return Task.CompletedTask;
                 }

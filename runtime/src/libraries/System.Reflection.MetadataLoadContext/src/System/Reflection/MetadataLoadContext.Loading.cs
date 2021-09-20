@@ -37,7 +37,8 @@ namespace System.Reflection
                     pkt.Length == 0
                     && defNameData.PublicKey != null
                     && defNameData.PublicKey.Length != 0
-                ) {
+                )
+                {
                     pkt = defNameData.PublicKey.ComputePublicKeyToken()!;
                 }
                 RoAssemblyName defName = new RoAssemblyName(

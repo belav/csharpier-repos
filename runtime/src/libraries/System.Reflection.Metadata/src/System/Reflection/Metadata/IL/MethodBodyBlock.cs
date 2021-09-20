@@ -25,7 +25,8 @@ namespace System.Reflection.Metadata
             MemoryBlock il,
             ImmutableArray<ExceptionRegion> exceptionRegions,
             int size
-        ) {
+        )
+        {
             Debug.Assert(!exceptionRegions.IsDefault);
 
             _localVariablesInitialized = localVariablesInitialized;
@@ -199,7 +200,8 @@ namespace System.Reflection.Metadata
         private static ImmutableArray<ExceptionRegion> ReadSmallExceptionHandlers(
             ref BlobReader memReader,
             int count
-        ) {
+        )
+        {
             var result = new ExceptionRegion[count];
             for (int i = 0; i < result.Length; i++)
             {
@@ -225,7 +227,8 @@ namespace System.Reflection.Metadata
         private static ImmutableArray<ExceptionRegion> ReadFatExceptionHandlers(
             ref BlobReader memReader,
             int count
-        ) {
+        )
+        {
             var result = new ExceptionRegion[count];
             for (int i = 0; i < result.Length; i++)
             {

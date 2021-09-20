@@ -24,7 +24,8 @@ namespace System.Net
         public void AcquireDefaultCredential(
             string packageName,
             Interop.SspiCli.CredentialUse intent
-        ) {
+        )
+        {
             if (IsEnabled())
             {
                 WriteEvent(AcquireDefaultCredentialId, packageName, intent);
@@ -36,7 +37,8 @@ namespace System.Net
             string packageName,
             Interop.SspiCli.CredentialUse intent,
             object authdata
-        ) {
+        )
+        {
             if (IsEnabled())
             {
                 AcquireCredentialsHandle(packageName, intent, IdOf(authdata));
@@ -52,7 +54,8 @@ namespace System.Net
             string packageName,
             Interop.SspiCli.CredentialUse intent,
             string authdata
-        ) {
+        )
+        {
             if (IsEnabled())
             {
                 WriteEvent(AcquireCredentialsHandleId, packageName, (int)intent, authdata);
@@ -65,7 +68,8 @@ namespace System.Net
             SafeDeleteContext? context,
             string? targetName,
             Interop.SspiCli.ContextFlags inFlags
-        ) {
+        )
+        {
             if (IsEnabled())
             {
                 InitializeSecurityContext(IdOf(credential), IdOf(context), targetName, inFlags);
@@ -88,7 +92,8 @@ namespace System.Net
             SafeFreeCredentials? credential,
             SafeDeleteContext? context,
             Interop.SspiCli.ContextFlags inFlags
-        ) {
+        )
+        {
             if (IsEnabled())
             {
                 AcceptSecurityContext(IdOf(credential), IdOf(context), inFlags);
@@ -135,7 +140,8 @@ namespace System.Net
             int inputBufferSize,
             int outputBufferSize,
             Interop.SECURITY_STATUS errorCode
-        ) {
+        )
+        {
             if (IsEnabled())
             {
                 WriteEvent(
@@ -158,7 +164,8 @@ namespace System.Net
             int inputBuffersSize,
             int outputBufferSize,
             Interop.SECURITY_STATUS errorCode
-        ) {
+        )
+        {
             if (IsEnabled())
             {
                 WriteEvent(

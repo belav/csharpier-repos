@@ -140,7 +140,8 @@ namespace System.Data.Common
         // DBDataPermissionAttribute.KeyRestrictionBehavior
         internal static ArgumentOutOfRangeException InvalidKeyRestrictionBehavior(
             KeyRestrictionBehavior value
-        ) {
+        )
+        {
 #if DEBUG
             switch (value)
             {
@@ -156,7 +157,8 @@ namespace System.Data.Common
         // IDataParameter.Direction
         internal static ArgumentOutOfRangeException InvalidParameterDirection(
             ParameterDirection value
-        ) {
+        )
+        {
 #if DEBUG
             switch (value)
             {
@@ -266,7 +268,8 @@ namespace System.Data.Common
         internal static InvalidOperationException OpenConnectionRequired(
             string method,
             ConnectionState state
-        ) {
+        )
+        {
             return InvalidOperation(
                 SR.GetString(SR.ADP_OpenConnectionRequired, method, ADP.ConnectionStateMsg(state))
             );
@@ -445,7 +448,8 @@ namespace System.Data.Common
             object value,
             Type destType,
             Exception inner
-        ) { // WebData 75433
+        )
+        { // WebData 75433
             Debug.Assert(null != value, "null value on conversion failure");
             Debug.Assert(null != inner, "null inner on conversion failure");
 
@@ -485,14 +489,16 @@ namespace System.Data.Common
         internal static Exception ParametersMappingIndex(
             int index,
             IDataParameterCollection collection
-        ) {
+        )
+        {
             return CollectionIndexInt32(index, collection.GetType(), collection.Count);
         }
         internal static Exception ParametersSourceIndex(
             string parameterName,
             IDataParameterCollection collection,
             Type parameterType
-        ) {
+        )
+        {
             return CollectionIndexString(
                 parameterType,
                 ADP.ParameterName,
@@ -504,14 +510,16 @@ namespace System.Data.Common
             string parameter,
             IDataParameterCollection collection,
             Type parameterType
-        ) {
+        )
+        {
             return CollectionNullValue(parameter, collection.GetType(), parameterType);
         }
         internal static Exception InvalidParameterType(
             IDataParameterCollection collection,
             Type parameterType,
             object invalidValue
-        ) {
+        )
+        {
             return CollectionInvalidType(collection.GetType(), parameterType, invalidValue);
         }
 
@@ -561,7 +569,8 @@ namespace System.Data.Common
             string collectionName,
             string restrictionName,
             string? restrictionValue
-        ) {
+        )
+        {
             return ADP.Argument(
                 SR.GetString(
                     SR.MDF_InvalidRestrictionValue,
@@ -725,7 +734,8 @@ namespace System.Data.Common
         internal static void EscapeSpecialCharacters(
             string unescapedString,
             StringBuilder escapedString
-        ) {
+        )
+        {
             // note special characters list is from character escapes
             // in the MSDN regular expression language elements documentation
             // added ] since escaping it seems necessary

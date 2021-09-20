@@ -43,7 +43,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             IServiceProvider serviceProvider,
             HostLanguageServices languageServices,
             VisualStudioWorkspace workspace
-        ) {
+        )
+        {
             _state = new CodeModelState(
                 threadingContext,
                 serviceProvider,
@@ -74,7 +75,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
         public ComHandle<EnvDTE80.FileCodeModel2, FileCodeModel> GetOrCreateFileCodeModel(
             string filePath
-        ) {
+        )
+        {
             // First try
             {
                 var cacheEntry = GetCacheEntry(filePath);
@@ -99,7 +101,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
         public ComHandle<EnvDTE80.FileCodeModel2, FileCodeModel>? GetComHandleForFileCodeModel(
             string filePath
-        ) {
+        )
+        {
             var cacheEntry = GetCacheEntry(filePath);
 
             return cacheEntry?.ComHandle;
@@ -108,7 +111,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         public ComHandle<EnvDTE80.FileCodeModel2, FileCodeModel> GetOrCreateFileCodeModel(
             string filePath,
             object parent
-        ) {
+        )
+        {
             // First try
             {
                 var cacheEntry = GetCacheEntry(filePath);

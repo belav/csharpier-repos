@@ -68,7 +68,8 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.Orders
             List<Customer> customers,
             int ordersPerCustomer,
             bool setPrimaryKeys
-        ) {
+        )
+        {
             var orders = new List<Order>();
             for (var c = 0; c < customers.Count; c++)
             {
@@ -102,7 +103,8 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.Orders
             List<Order> orders,
             int linesPerOrder,
             bool setPrimaryKeys
-        ) {
+        )
+        {
             var lines = new List<OrderLine>();
             for (var o = 0; o < orders.Count; o++)
             {

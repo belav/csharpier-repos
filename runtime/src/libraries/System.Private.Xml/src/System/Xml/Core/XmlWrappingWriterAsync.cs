@@ -33,7 +33,8 @@ namespace System.Xml
             string? pubid,
             string? sysid,
             string? subset
-        ) {
+        )
+        {
             return writer.WriteDocTypeAsync(name, pubid, sysid, subset);
         }
 
@@ -56,7 +57,8 @@ namespace System.Xml
             string? prefix,
             string localName,
             string? ns
-        ) {
+        )
+        {
             return writer.WriteStartAttributeAsync(prefix, localName, ns);
         }
 

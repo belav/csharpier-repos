@@ -16,8 +16,9 @@ namespace Microsoft.CodeAnalysis.AddImports
             TRootSyntax root,
             SyntaxList<TImportDirectiveSyntax> existingImports,
             List<TImportDirectiveSyntax> newImports
-        ) where TRootSyntax : SyntaxNode
-          where TImportDirectiveSyntax : SyntaxNode
+        )
+            where TRootSyntax : SyntaxNode
+            where TImportDirectiveSyntax : SyntaxNode
         {
             if (existingImports.Count == 0)
             {
@@ -60,7 +61,8 @@ namespace Microsoft.CodeAnalysis.AddImports
                         !syntaxFacts.IsEndOfLineTrivia(
                             trailingTrivia.Count == 0 ? default : trailingTrivia[^1]
                         )
-                    ) {
+                    )
+                    {
                         newImports[0] = newImports[0].WithAppendedTrailingTrivia(
                             syntaxFacts.ElasticCarriageReturnLineFeed
                         );

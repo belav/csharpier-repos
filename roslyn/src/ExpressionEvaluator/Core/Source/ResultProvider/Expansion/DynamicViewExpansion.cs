@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmInspectionContext inspectionContext,
             DkmClrValue value,
             ResultProvider resultProvider
-        ) {
+        )
+        {
             if (value.IsError() || value.IsNull || value.HasExceptionThrown())
             {
                 return null;
@@ -61,7 +62,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             string name,
             DkmClrValue value,
             ResultProvider resultProvider
-        ) {
+        )
+        {
             var expansion = CreateExpansion(inspectionContext, value, resultProvider);
             return (expansion != null)
               ? expansion.CreateDynamicViewRow(
@@ -95,7 +97,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             int count,
             bool visitAll,
             ref int index
-        ) {
+        )
+        {
             if (InRange(startIndex, count, index))
             {
                 rows.Add(
@@ -116,7 +119,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             string name,
             EvalResultDataItem parent,
             IDkmClrFullNameProvider fullNameProvider
-        ) {
+        )
+        {
             var proxyTypeAndInfo = new TypeAndCustomInfo(_proxyValue.Type);
             var isRootExpression = parent == null;
             var fullName = isRootExpression ? name : parent.ChildFullNamePrefix;

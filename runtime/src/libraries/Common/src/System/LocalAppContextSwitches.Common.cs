@@ -31,7 +31,8 @@ namespace System
         private static bool GetCachedSwitchValueInternal(
             string switchName,
             ref int cachedSwitchValue
-        ) {
+        )
+        {
             bool hasSwitch = AppContext.TryGetSwitch(switchName, out bool isSwitchEnabled);
             if (!hasSwitch)
             {
@@ -64,7 +65,8 @@ namespace System
             if (
                 switchName
                 == "System.Runtime.Serialization.EnableUnsafeBinaryFormatterSerialization"
-            ) {
+            )
+            {
                 return true;
             }
 

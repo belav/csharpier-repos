@@ -33,7 +33,8 @@ namespace HttpStress
         public StressClient(
             (string name, Func<RequestContext, Task> operation)[] clientOperations,
             Configuration configuration
-        ) {
+        )
+        {
             _clientOperations = clientOperations;
             _config = configuration;
             _baseAddress = new Uri(configuration.ServerUri);
@@ -338,7 +339,8 @@ namespace HttpStress
                 bool isCancelled,
                 int taskNum,
                 long iteration
-            ) {
+            )
+            {
                 DateTime timestamp = DateTime.Now;
 
                 Interlocked.Increment(ref _totalRequests);
@@ -366,7 +368,8 @@ namespace HttpStress
                                 operationIndex,
                                 out List<(DateTime timestamp, TimeSpan duration, bool isCancelled)>? details
                             )
-                        ) {
+                        )
+                        {
                             details =
                                 new List<(DateTime timestamp, TimeSpan duration, bool isCancelled)>();
                             failureType.Failures.Add(operationIndex, details);
@@ -377,7 +380,8 @@ namespace HttpStress
 
                     (Type exception, string message, string callSite)[] ClassifyFailure(
                         Exception exn
-                    ) {
+                    )
+                    {
                         var acc = new List<(Type exception, string message, string callSite)>();
 
                         for (Exception? e = exn; e != null;)
@@ -402,7 +406,8 @@ namespace HttpStress
                         exn is HttpRequestException hre
                         && hre.InnerException is SocketException se
                         && se.SocketErrorCode == SocketError.AddressAlreadyInUse
-                    ) {
+                    )
+                    {
                         Interlocked.Increment(ref _reuseAddressFailures);
                     }
                     else
@@ -528,7 +533,8 @@ namespace HttpStress
                     StressFailureType failure in _failureTypes.Values.OrderByDescending(
                         x => x.FailureCount
                     )
-                ) {
+                )
+                {
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine($"Failure Type {++i}/{_failureTypes.Count}:");
                     Console.ResetColor();
@@ -540,7 +546,8 @@ namespace HttpStress
                             int,
                             List<(DateTime timestamp, TimeSpan duration, bool isCancelled)>
                         > operation in failure.Failures
-                    ) {
+                    )
+                    {
                         Console.ForegroundColor = ConsoleColor.Cyan;
                         Console.Write($"\t{_operationNames[operation.Key].PadRight(30)}");
                         Console.ResetColor();

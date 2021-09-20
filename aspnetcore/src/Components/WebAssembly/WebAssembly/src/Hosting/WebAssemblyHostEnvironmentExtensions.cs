@@ -63,7 +63,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting
         public static bool IsEnvironment(
             this IWebAssemblyHostEnvironment hostingEnvironment,
             string environmentName
-        ) {
+        )
+        {
             if (hostingEnvironment == null)
             {
                 throw new ArgumentNullException(nameof(hostingEnvironment));

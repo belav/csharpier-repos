@@ -31,7 +31,8 @@ namespace System.Xml.Xsl.Runtime
             string value,
             int index,
             XmlQueryRuntime runtime
-        ) {
+        )
+        {
             return new XmlAtomicValue(runtime.GetXmlType(index).SchemaType, value);
         }
 
@@ -39,7 +40,8 @@ namespace System.Xml.Xsl.Runtime
             decimal value,
             int index,
             XmlQueryRuntime runtime
-        ) {
+        )
+        {
             return new XmlAtomicValue(runtime.GetXmlType(index).SchemaType, value);
         }
 
@@ -47,7 +49,8 @@ namespace System.Xml.Xsl.Runtime
             long value,
             int index,
             XmlQueryRuntime runtime
-        ) {
+        )
+        {
             return new XmlAtomicValue(runtime.GetXmlType(index).SchemaType, value);
         }
 
@@ -55,7 +58,8 @@ namespace System.Xml.Xsl.Runtime
             int value,
             int index,
             XmlQueryRuntime runtime
-        ) {
+        )
+        {
             return new XmlAtomicValue(runtime.GetXmlType(index).SchemaType, value);
         }
 
@@ -63,7 +67,8 @@ namespace System.Xml.Xsl.Runtime
             bool value,
             int index,
             XmlQueryRuntime runtime
-        ) {
+        )
+        {
             return new XmlAtomicValue(runtime.GetXmlType(index).SchemaType, value);
         }
 
@@ -71,7 +76,8 @@ namespace System.Xml.Xsl.Runtime
             double value,
             int index,
             XmlQueryRuntime runtime
-        ) {
+        )
+        {
             return new XmlAtomicValue(runtime.GetXmlType(index).SchemaType, value);
         }
 
@@ -79,7 +85,8 @@ namespace System.Xml.Xsl.Runtime
             float value,
             int index,
             XmlQueryRuntime runtime
-        ) {
+        )
+        {
             return new XmlAtomicValue(runtime.GetXmlType(index).SchemaType, value);
         }
 
@@ -87,7 +94,8 @@ namespace System.Xml.Xsl.Runtime
             DateTime value,
             int index,
             XmlQueryRuntime runtime
-        ) {
+        )
+        {
             return new XmlAtomicValue(runtime.GetXmlType(index).SchemaType, value);
         }
 
@@ -95,7 +103,8 @@ namespace System.Xml.Xsl.Runtime
             XmlQualifiedName value,
             int index,
             XmlQueryRuntime runtime
-        ) {
+        )
+        {
             return new XmlAtomicValue(runtime.GetXmlType(index).SchemaType, value);
         }
 
@@ -103,7 +112,8 @@ namespace System.Xml.Xsl.Runtime
             TimeSpan value,
             int index,
             XmlQueryRuntime runtime
-        ) {
+        )
+        {
             return new XmlAtomicValue(runtime.GetXmlType(index).SchemaType, value);
         }
 
@@ -111,7 +121,8 @@ namespace System.Xml.Xsl.Runtime
             byte[] value,
             int index,
             XmlQueryRuntime runtime
-        ) {
+        )
+        {
             return new XmlAtomicValue(runtime.GetXmlType(index).SchemaType, value);
         }
 

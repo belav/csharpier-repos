@@ -47,7 +47,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 CompilationModuleGroup compilationGroup,
                 ReadyToRunSymbolNodeFactory factory,
                 bool actuallyCaptureOutput
-            ) {
+            )
+            {
                 _compilationGroup = compilationGroup;
                 _symbolFactory = factory;
                 _actuallyCaptureOutput = actuallyCaptureOutput;
@@ -91,7 +92,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             public void EmitType(
                 TypeSystemEntityOrUnknown type,
                 TypeSystemEntityOrUnknown previousValue
-            ) {
+            )
+            {
                 EmitLong(TypeToInt(type), TypeToInt(previousValue));
             }
 
@@ -249,7 +251,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                         encodedInstrumentationData,
                         out instrumentationDataBlob
                     )
-                ) {
+                )
+                {
                     instrumentationDataBlob = new BlobVertex(encodedInstrumentationData);
                     hashtableSection.Place(instrumentationDataBlob);
                     uniqueInstrumentationData.Add(

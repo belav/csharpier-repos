@@ -64,7 +64,8 @@ namespace Castle.DynamicProxy.Generators
 
         protected override CompositeTypeContributor GetProxyTargetContributor(
             INamingScope namingScope
-        ) {
+        )
+        {
             return new ClassProxyWithTargetTargetContributor(targetType, namingScope)
             {
                 Logger = Logger

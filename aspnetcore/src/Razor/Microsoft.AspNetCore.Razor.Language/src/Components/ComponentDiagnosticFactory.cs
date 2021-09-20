@@ -44,7 +44,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public static RazorDiagnostic Create_CodeBlockInAttribute(
             SourceSpan? source,
             string expression
-        ) {
+        )
+        {
             var diagnostic = RazorDiagnostic.Create(
                 CodeBlockInAttribute,
                 source ?? SourceSpan.Undefined,
@@ -92,7 +93,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public static RazorDiagnostic Create_UnexpectedClosingTagForVoidElement(
             SourceSpan? span,
             string tagName
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(
                 UnexpectedClosingTagForVoidElement,
                 span ?? SourceSpan.Undefined,
@@ -123,7 +125,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             SourceSpan? span,
             string tagName,
             IEnumerable<TagHelperDescriptor> components
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(
                 MultipleComponents,
                 span ?? SourceSpan.Undefined,
@@ -143,7 +146,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public static RazorDiagnostic Create_UnsupportedComplexContent(
             IntermediateNode node,
             string attributeName
-        ) {
+        )
+        {
             var content = string.Join(
                 "",
                 node.FindDescendantNodes<IntermediateToken>().Select(t => t.Content)
@@ -204,7 +208,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             SourceSpan? source,
             string attribute,
             TagHelperDirectiveAttributeIntermediateNode[] attributes
-        ) {
+        )
+        {
             var diagnostic = RazorDiagnostic.Create(
                 BindAttribute_Duplicates,
                 source ?? SourceSpan.Undefined,
@@ -230,7 +235,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             SourceSpan? source,
             string attribute,
             TagHelperDirectiveAttributeIntermediateNode[] attributes
-        ) {
+        )
+        {
             var diagnostic = RazorDiagnostic.Create(
                 EventHandler_Duplicates,
                 source ?? SourceSpan.Undefined,
@@ -256,7 +262,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public static RazorDiagnostic CreateBindAttribute_InvalidSyntax(
             SourceSpan? source,
             string attribute
-        ) {
+        )
+        {
             var diagnostic = RazorDiagnostic.Create(
                 BindAttribute_InvalidSyntax,
                 source ?? SourceSpan.Undefined,
@@ -307,7 +314,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public static RazorDiagnostic Create_ChildContentSetByAttributeAndBody(
             SourceSpan? source,
             string attribute
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(
                 ChildContentSetByAttributeAndBody,
                 source ?? SourceSpan.Undefined,
@@ -327,7 +335,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public static RazorDiagnostic Create_ChildContentMixedWithExplicitChildContent(
             SourceSpan? source,
             ComponentIntermediateNode component
-        ) {
+        )
+        {
             var supportedElements = string.Join(
                 ", ",
                 component.Component.GetChildContentProperties().Select(p => $"'{p.Name}'")
@@ -351,7 +360,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             SourceSpan? source,
             string attribute,
             string element
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(
                 ChildContentHasInvalidAttribute,
                 source ?? SourceSpan.Undefined,
@@ -372,7 +382,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             SourceSpan? source,
             string attribute,
             string element
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(
                 ChildContentHasInvalidParameter,
                 source ?? SourceSpan.Undefined,
@@ -396,7 +407,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             ComponentIntermediateNode component1,
             ComponentChildContentIntermediateNode childContent2,
             ComponentIntermediateNode component2
-        ) {
+        )
+        {
             Debug.Assert(childContent1.ParameterName == childContent2.ParameterName);
             Debug.Assert(childContent1.IsParameterized);
             Debug.Assert(childContent2.IsParameterized);
@@ -424,7 +436,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             SourceSpan? source,
             ComponentIntermediateNode component,
             IEnumerable<BoundAttributeDescriptor> attributes
-        ) {
+        )
+        {
             Debug.Assert(component.Component.IsGenericTypedComponent());
 
             var attributesText = string.Join(", ", attributes.Select(a => $"'{a.Name}'"));
@@ -449,7 +462,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             SourceSpan? source,
             ComponentIntermediateNode component,
             IEnumerable<BoundAttributeDescriptor> attributes
-        ) {
+        )
+        {
             Debug.Assert(component.Component.IsGenericTypedComponent());
 
             var attributesText = string.Join(", ", attributes.Select(a => $"'{a.Name}'"));
@@ -473,7 +487,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             SourceSpan? source,
             string attribute,
             string element
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(
                 ChildContentHasInvalidParameterOnComponent,
                 source ?? SourceSpan.Undefined,
@@ -508,7 +523,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public static RazorDiagnostic CreateBindAttributeParameter_MissingBind(
             SourceSpan? source,
             string attribute
-        ) {
+        )
+        {
             var diagnostic = RazorDiagnostic.Create(
                 BindAttributeParameter_MissingBind,
                 source ?? SourceSpan.Undefined,
@@ -528,7 +544,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public static RazorDiagnostic Create_DuplicateMarkupAttribute(
             string attributeName,
             SourceSpan? source = null
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(
                 DuplicateMarkupAttribute,
                 source ?? SourceSpan.Undefined,
@@ -549,7 +566,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             string attributeName,
             string directiveAttributeName,
             SourceSpan? source = null
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(
                 DuplicateMarkupAttributeDirective,
                 source ?? SourceSpan.Undefined,
@@ -569,7 +587,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public static RazorDiagnostic Create_DuplicateComponentParameter(
             string attributeName,
             SourceSpan? source = null
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(
                 DuplicateComponentParameter,
                 source ?? SourceSpan.Undefined,
@@ -590,7 +609,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             string attributeName,
             string directiveAttributeName,
             SourceSpan? source = null
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(
                 DuplicateComponentParameterDirective,
                 source ?? SourceSpan.Undefined,
@@ -610,7 +630,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public static RazorDiagnostic Create_ComponentNamesCannotStartWithLowerCase(
             string componentName,
             SourceSpan? source = null
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(
                 ComponentNamesCannotStartWithLowerCase,
                 source ?? SourceSpan.Undefined,
@@ -629,7 +650,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public static RazorDiagnostic Create_UnexpectedMarkupElement(
             string elementName,
             SourceSpan? source = null
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(
                 UnexpectedMarkupElement,
                 source ?? SourceSpan.Undefined,
@@ -649,7 +671,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             string startTagName,
             string endTagName,
             SourceSpan? source = null
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(
                 InconsistentStartAndEndTagName,
                 source ?? SourceSpan.Undefined,
@@ -670,7 +693,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             SourceSpan? source,
             string attribute,
             TagHelperDirectiveAttributeParameterIntermediateNode[] attributes
-        ) {
+        )
+        {
             var diagnostic = RazorDiagnostic.Create(
                 EventHandlerParameter_Duplicates,
                 source ?? SourceSpan.Undefined,

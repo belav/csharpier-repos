@@ -56,7 +56,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             int count,
             bool visitAll,
             ref int index
-        ) {
+        )
+        {
             foreach (var expansion in _expansions)
             {
                 expansion.GetRows(

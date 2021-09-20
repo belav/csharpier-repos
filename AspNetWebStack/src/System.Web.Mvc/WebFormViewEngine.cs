@@ -42,7 +42,8 @@ namespace System.Web.Mvc
         protected override IView CreatePartialView(
             ControllerContext controllerContext,
             string partialPath
-        ) {
+        )
+        {
             return new WebFormView(controllerContext, partialPath, null, ViewPageActivator);
         }
 
@@ -50,7 +51,8 @@ namespace System.Web.Mvc
             ControllerContext controllerContext,
             string viewPath,
             string masterPath
-        ) {
+        )
+        {
             return new WebFormView(controllerContext, viewPath, masterPath, ViewPageActivator);
         }
     }

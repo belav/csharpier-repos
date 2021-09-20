@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         internal MetadataContext(
             ImmutableArray<MetadataBlock> metadataBlocks,
             ImmutableDictionary<MetadataContextId, TAssemblyContext> assemblyContexts
-        ) {
+        )
+        {
             MetadataBlocks = metadataBlocks;
             AssemblyContexts = assemblyContexts;
         }

@@ -21,20 +21,19 @@ namespace Microsoft.Extensions.DependencyModel.Resolution
             string[] fallbackSearchPaths
         ) : this(FileSystemWrapper.Default, defaultReferenceAssembliesPath, fallbackSearchPaths) { }
 
-        internal ReferenceAssemblyPathResolver(
-            IFileSystem fileSystem,
-            IEnvironment environment
-        ) : this(
-            fileSystem,
-            GetDefaultReferenceAssembliesPath(fileSystem, environment),
-            GetFallbackSearchPaths(fileSystem, environment)
-        ) { }
+        internal ReferenceAssemblyPathResolver(IFileSystem fileSystem, IEnvironment environment)
+            : this(
+                fileSystem,
+                GetDefaultReferenceAssembliesPath(fileSystem, environment),
+                GetFallbackSearchPaths(fileSystem, environment)
+            ) { }
 
         internal ReferenceAssemblyPathResolver(
             IFileSystem fileSystem,
             string defaultReferenceAssembliesPath,
             string[] fallbackSearchPaths
-        ) {
+        )
+        {
             _fileSystem = fileSystem;
             _defaultReferenceAssembliesPath = defaultReferenceAssembliesPath;
             _fallbackSearchPaths = fallbackSearchPaths;
@@ -48,7 +47,8 @@ namespace Microsoft.Extensions.DependencyModel.Resolution
                     "referenceassembly",
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 return false;
             }
             foreach (string assembly in library.Assemblies)
@@ -100,7 +100,8 @@ namespace Microsoft.Extensions.DependencyModel.Resolution
         internal static string[] GetFallbackSearchPaths(
             IFileSystem fileSystem,
             IEnvironment environment
-        ) {
+        )
+        {
             if (!environment.IsWindows())
             {
                 return Array.Empty<string>();
@@ -123,7 +124,8 @@ namespace Microsoft.Extensions.DependencyModel.Resolution
         internal static string GetDefaultReferenceAssembliesPath(
             IFileSystem fileSystem,
             IEnvironment environment
-        ) {
+        )
+        {
             // Allow setting the reference assemblies path via an environment variable
             string referenceAssembliesPath = DotNetReferenceAssembliesPathResolver.Resolve(
                 environment,

@@ -227,7 +227,8 @@ namespace System.Security.Authentication.ExtendedProtection
                             CultureInfo.InvariantCulture,
                             out portValue
                         )
-                    ) {
+                    )
+                    {
                         return inputServiceName;
                     }
 
@@ -258,7 +259,8 @@ namespace System.Security.Authentication.ExtendedProtection
                     UriKind.Absolute,
                     out constructedUri
                 )
-            ) {
+            )
+            {
                 return inputServiceName;
             }
 
@@ -276,7 +278,8 @@ namespace System.Security.Authentication.ExtendedProtection
                     normalizedServiceName,
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 return inputServiceName;
             }
 

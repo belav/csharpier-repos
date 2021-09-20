@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             AttributeSyntax node,
             NamedTypeSymbol boundAttributeType,
             out bool generatedDiagnostics
-        ) {
+        )
+        {
             var dummyDiagnosticBag = new BindingDiagnosticBag(DiagnosticBag.GetInstance());
             var boundAttribute = base.GetAttribute(node, boundAttributeType, dummyDiagnosticBag);
             generatedDiagnostics = !dummyDiagnosticBag.DiagnosticBag.IsEmptyWithoutResolution;
@@ -43,7 +44,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             AttributeSyntax node,
             NamedTypeSymbol boundAttributeType,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             Debug.Assert(false, "Don't call this overload.");
             diagnostics.Add(ErrorCode.ERR_InternalError, node.Location);
             return base.GetAttribute(node, boundAttributeType, diagnostics);

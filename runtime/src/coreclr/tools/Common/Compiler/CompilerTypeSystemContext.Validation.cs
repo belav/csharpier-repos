@@ -155,7 +155,8 @@ namespace ILCompiler
                 // Make sure instantiation length matches the expectation
                 if (
                     defType.Instantiation.Length != defType.GetTypeDefinition().Instantiation.Length
-                ) {
+                )
+                {
                     ThrowHelper.ThrowTypeLoadException(ExceptionStringID.ClassLoadGeneral, type);
                 }
 
@@ -168,7 +169,8 @@ namespace ILCompiler
                         || typeArg.IsFunctionPointer
                         || typeArg.IsVoid
                         || typeArg.IsByRefLike
-                    ) {
+                    )
+                    {
                         ThrowHelper.ThrowTypeLoadException(
                             ExceptionStringID.ClassLoadGeneral,
                             type

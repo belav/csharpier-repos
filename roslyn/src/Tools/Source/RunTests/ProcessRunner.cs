@@ -24,7 +24,8 @@ namespace RunTests
             int exitCode,
             ReadOnlyCollection<string> outputLines,
             ReadOnlyCollection<string> errorLines
-        ) {
+        )
+        {
             Process = process;
             ExitCode = exitCode;
             OutputLines = outputLines;
@@ -91,7 +92,8 @@ namespace RunTests
             Action<Process>? onProcessStartHandler = null,
             Action<DataReceivedEventArgs>? onOutputDataReceived = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var errorLines = new List<string>();
             var outputLines = new List<string>();
             var process = new Process();
@@ -187,7 +189,8 @@ namespace RunTests
             bool captureOutput = false,
             bool displayWindow = true,
             Dictionary<string, string>? environmentVariables = null
-        ) {
+        )
+        {
             var processStartInfo = new ProcessStartInfo(executable, arguments);
 
             if (!string.IsNullOrEmpty(workingDirectory))

@@ -116,7 +116,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
         private void Show_completion_list_after_a_character_is_typed_Unchecked(
             object sender,
             RoutedEventArgs e
-        ) {
+        )
+        {
             Show_completion_list_after_a_character_is_deleted.IsEnabled =
                 Show_completion_list_after_a_character_is_typed.IsChecked == true;
             Show_completion_list_after_a_character_is_deleted.IsChecked = false;
@@ -146,7 +147,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
         private void Show_items_from_unimported_namespaces_CheckedChanged(
             object sender,
             RoutedEventArgs e
-        ) {
+        )
+        {
             Show_items_from_unimported_namespaces.IsThreeState = false;
             this.OptionStore.SetOption(
                 CompletionOptions.ShowItemsFromUnimportedNamespaces,

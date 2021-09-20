@@ -43,7 +43,8 @@ namespace Microsoft.Extensions.Configuration
         public static T Get<T>(
             this IConfiguration configuration,
             Action<BinderOptions> configureOptions
-        ) {
+        )
+        {
             if (configuration == null)
             {
                 throw new ArgumentNullException(nameof(configuration));
@@ -81,7 +82,8 @@ namespace Microsoft.Extensions.Configuration
             this IConfiguration configuration,
             Type type,
             Action<BinderOptions> configureOptions
-        ) {
+        )
+        {
             if (configuration == null)
             {
                 throw new ArgumentNullException(nameof(configuration));
@@ -119,7 +121,8 @@ namespace Microsoft.Extensions.Configuration
             this IConfiguration configuration,
             object instance,
             Action<BinderOptions> configureOptions
-        ) {
+        )
+        {
             if (configuration == null)
             {
                 throw new ArgumentNullException(nameof(configuration));
@@ -183,7 +186,8 @@ namespace Microsoft.Extensions.Configuration
             Type type,
             string key,
             object defaultValue
-        ) {
+        )
+        {
             IConfigurationSection section = configuration.GetSection(key);
             string value = section.Value;
             if (value != null)
@@ -197,7 +201,8 @@ namespace Microsoft.Extensions.Configuration
             this IConfiguration configuration,
             object instance,
             BinderOptions options
-        ) {
+        )
+        {
             if (instance != null)
             {
                 foreach (PropertyInfo property in GetAllProperties(instance.GetType()))
@@ -212,13 +217,15 @@ namespace Microsoft.Extensions.Configuration
             object instance,
             IConfiguration config,
             BinderOptions options
-        ) {
+        )
+        {
             // We don't support set only, non public, or indexer properties
             if (
                 property.GetMethod == null
                 || (!options.BindNonPublicProperties && !property.GetMethod.IsPublic)
                 || property.GetMethod.GetParameters().Length > 0
-            ) {
+            )
+            {
                 return;
             }
 
@@ -246,7 +253,8 @@ namespace Microsoft.Extensions.Configuration
             Type type,
             IConfiguration config,
             BinderOptions options
-        ) {
+        )
+        {
             Type genericType = typeof(List<>).MakeGenericType(type.GenericTypeArguments[0]);
             object instance = Activator.CreateInstance(genericType);
             BindCollection(instance, genericType, config, options);
@@ -258,7 +266,8 @@ namespace Microsoft.Extensions.Configuration
             Type type,
             IConfiguration config,
             BinderOptions options
-        ) {
+        )
+        {
             if (!type.IsInterface)
             {
                 return null;
@@ -325,7 +334,8 @@ namespace Microsoft.Extensions.Configuration
             object instance,
             IConfiguration config,
             BinderOptions options
-        ) {
+        )
+        {
             // if binding IConfigurationSection, break early
             if (type == typeof(IConfigurationSection))
             {
@@ -339,7 +349,8 @@ namespace Microsoft.Extensions.Configuration
             if (
                 configValue != null
                 && TryConvertValue(type, configValue, section.Path, out convertedValue, out error)
-            ) {
+            )
+            {
                 if (error != null)
                 {
                     throw error;
@@ -441,7 +452,8 @@ namespace Microsoft.Extensions.Configuration
             Type dictionaryType,
             IConfiguration config,
             BinderOptions options
-        ) {
+        )
+        {
             // IDictionary<K,V> is guaranteed to have exactly two parameters
             Type keyType = dictionaryType.GenericTypeArguments[0];
             Type valueType = dictionaryType.GenericTypeArguments[1];
@@ -483,7 +495,8 @@ namespace Microsoft.Extensions.Configuration
             Type collectionType,
             IConfiguration config,
             BinderOptions options
-        ) {
+        )
+        {
             // ICollection<T> is guaranteed to have exactly one parameter
             Type itemType = collectionType.GenericTypeArguments[0];
             MethodInfo addMethod = collectionType.GetMethod("Add", DeclaredOnlyLookup);
@@ -547,7 +560,8 @@ namespace Microsoft.Extensions.Configuration
             string path,
             out object result,
             out Exception error
-        ) {
+        )
+        {
             error = null;
             result = null;
             if (type == typeof(object))
@@ -632,7 +646,8 @@ namespace Microsoft.Extensions.Configuration
                 if (
                     interfaceType.IsGenericType
                     && interfaceType.GetGenericTypeDefinition() == expected
-                ) {
+                )
+                {
                     return interfaceType;
                 }
             }
@@ -657,7 +672,8 @@ namespace Microsoft.Extensions.Configuration
             object instance,
             IConfiguration config,
             BinderOptions options
-        ) {
+        )
+        {
             string propertyName = GetPropertyName(property);
             return BindInstance(
                 property.PropertyType,

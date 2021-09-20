@@ -65,7 +65,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             ITypeSymbol type,
             object value,
             bool canUseFieldReference
-        ) {
+        )
+        {
             if (value != null)
             {
                 if (type.TypeKind == TypeKind.Enum)
@@ -295,7 +296,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             ITypeSymbol type,
             double value,
             bool canUseFieldReference
-        ) {
+        )
+        {
             if (!canUseFieldReference)
             {
                 if (double.IsNaN(value))
@@ -344,7 +346,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             ITypeSymbol type,
             float value,
             bool canUseFieldReference
-        ) {
+        )
+        {
             if (!canUseFieldReference)
             {
                 if (float.IsNaN(value))
@@ -460,7 +463,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             ITypeSymbol type,
             T value,
             IEnumerable<KeyValuePair<T, string>> constants
-        ) {
+        )
+        {
             foreach (var constant in constants)
             {
                 if (constant.Key.Equals(value))

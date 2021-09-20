@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis
             public static SymbolKeyResolution Resolve(
                 SymbolKeyReader reader,
                 out string? failureReason
-            ) {
+            )
+            {
                 var metadataName = reader.ReadString()!;
                 var containingSymbolResolution = reader.ReadSymbolKey(
                     out var containingSymbolFailureReason
@@ -70,7 +71,8 @@ namespace Microsoft.CodeAnalysis
                 using var result = PooledArrayBuilder<INamedTypeSymbol>.GetInstance();
                 foreach (
                     var nsOrType in containingSymbolResolution.OfType<INamespaceOrTypeSymbol>()
-                ) {
+                )
+                {
                     Resolve(
                         result,
                         nsOrType,
@@ -95,7 +97,8 @@ namespace Microsoft.CodeAnalysis
                 int arity,
                 bool isUnboundGenericType,
                 ITypeSymbol[] typeArguments
-            ) {
+            )
+            {
                 foreach (var type in container.GetTypeMembers(GetName(metadataName), arity))
                 {
                     var currentType =

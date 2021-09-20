@@ -98,7 +98,8 @@ namespace System.Net.Http.Headers
         public static bool TryParse(
             [NotNullWhen(true)] string? input,
             [NotNullWhen(true)] out RetryConditionHeaderValue? parsedValue
-        ) {
+        )
+        {
             int index = 0;
             parsedValue = null;
 
@@ -109,7 +110,8 @@ namespace System.Net.Http.Headers
                     ref index,
                     out object? output
                 )
-            ) {
+            )
+            {
                 parsedValue = (RetryConditionHeaderValue)output!;
                 return true;
             }
@@ -120,7 +122,8 @@ namespace System.Net.Http.Headers
             string? input,
             int startIndex,
             out object? parsedValue
-        ) {
+        )
+        {
             Debug.Assert(startIndex >= 0);
 
             parsedValue = null;
@@ -167,7 +170,8 @@ namespace System.Net.Http.Headers
                         deltaLength,
                         out deltaSeconds
                     )
-                ) {
+                )
+                {
                     return 0; // int.TryParse() may return 'false' if the value has 10 digits and is > Int32.MaxValue.
                 }
             }

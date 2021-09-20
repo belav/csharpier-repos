@@ -24,7 +24,8 @@ namespace System.Configuration
             out string locationConfigPath,
             IInternalConfigRoot configRoot,
             params object[] hostInitConfigurationParams
-        ) {
+        )
+        {
             // Stash the filemap so we can see if the machine config was explicitly specified
             GetFileMap(hostInitConfigurationParams);
             base.InitForConfiguration(
@@ -60,7 +61,8 @@ namespace System.Configuration
             if (
                 ConfigPathUtility.GetName(configPath) == ClientConfigurationHost.MachineConfigName
                 && (_fileMap?.IsMachinePathDefault ?? true)
-            ) {
+            )
+            {
                 // The machine config was asked for and wasn't explicitly
                 // specified, stash the "default" machine.config path
                 _machineStreamName = name;

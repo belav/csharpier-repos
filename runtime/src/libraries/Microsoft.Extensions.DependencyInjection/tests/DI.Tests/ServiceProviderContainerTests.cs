@@ -108,7 +108,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
         public void CreatingServiceProviderWithUnresolvableTypesThrows(
             Type serviceType,
             Type implementationType
-        ) {
+        )
+        {
             // Arrange
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddTransient(serviceType, implementationType);
@@ -398,7 +399,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
         [InlineData(false)]
         public async Task AddDisposablesAndAsyncDisposables_DisposeAsync_AllDisposed(
             bool includeDelayedAsyncDisposable
-        ) {
+        )
+        {
             var services = new ServiceCollection();
             services.AddSingleton<AsyncDisposable>();
             services.AddSingleton<Disposable>();
@@ -434,7 +436,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             public DisposeServiceProviderInCtorAsyncDisposable(
                 AsyncDisposable asyncDisposable,
                 IServiceProvider sp
-            ) {
+            )
+            {
                 _asyncDisposable = asyncDisposable;
                 (sp as IAsyncDisposable).DisposeAsync();
             }
@@ -452,7 +455,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             public DisposeServiceProviderInCtorDisposable(
                 Disposable disposable,
                 IServiceProvider sp
-            ) {
+            )
+            {
                 _disposable = disposable;
                 (sp as IDisposable).Dispose();
             }

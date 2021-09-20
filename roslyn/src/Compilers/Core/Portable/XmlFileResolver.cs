@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 baseDirectory != null
                 && PathUtilities.GetPathKind(baseDirectory) != PathKind.Absolute
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     CodeAnalysisResources.AbsolutePathExpected,
                     nameof(baseDirectory)

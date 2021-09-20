@@ -274,7 +274,8 @@ namespace System.CodeDom.Compiler
             CodeTypeDeclaration e,
             TextWriter w,
             CodeGeneratorOptions o
-        ) {
+        )
+        {
             bool setLocal = false;
             if (_output != null && w != _output.InnerWriter)
             {
@@ -306,7 +307,8 @@ namespace System.CodeDom.Compiler
             CodeExpression e,
             TextWriter w,
             CodeGeneratorOptions o
-        ) {
+        )
+        {
             bool setLocal = false;
             if (_output != null && w != _output.InnerWriter)
             {
@@ -338,7 +340,8 @@ namespace System.CodeDom.Compiler
             CodeCompileUnit e,
             TextWriter w,
             CodeGeneratorOptions o
-        ) {
+        )
+        {
             bool setLocal = false;
             if (_output != null && w != _output.InnerWriter)
             {
@@ -377,7 +380,8 @@ namespace System.CodeDom.Compiler
             CodeNamespace e,
             TextWriter w,
             CodeGeneratorOptions o
-        ) {
+        )
+        {
             bool setLocal = false;
             if (_output != null && w != _output.InnerWriter)
             {
@@ -409,7 +413,8 @@ namespace System.CodeDom.Compiler
             CodeStatement e,
             TextWriter w,
             CodeGeneratorOptions o
-        ) {
+        )
+        {
             bool setLocal = false;
             if (_output != null && w != _output.InnerWriter)
             {
@@ -441,7 +446,8 @@ namespace System.CodeDom.Compiler
             CodeTypeMember member,
             TextWriter writer,
             CodeGeneratorOptions options
-        ) {
+        )
+        {
             if (member == null)
             {
                 throw new ArgumentNullException(nameof(member));
@@ -792,7 +798,8 @@ namespace System.CodeDom.Compiler
                     current is CodeMemberMethod
                     && !(current is CodeTypeConstructor)
                     && !(current is CodeConstructor)
-                ) {
+                )
+                {
                     _currentMember = current;
 
                     if (_options.BlankLinesBetweenMembers)
@@ -1049,7 +1056,8 @@ namespace System.CodeDom.Compiler
 
         protected virtual void OutputAttributeDeclarations(
             CodeAttributeDeclarationCollection attributes
-        ) {
+        )
+        {
             if (attributes == null)
             {
                 throw new ArgumentNullException(nameof(attributes));
@@ -1222,7 +1230,8 @@ namespace System.CodeDom.Compiler
             TypeAttributes attributes,
             bool isStruct,
             bool isEnum
-        ) {
+        )
+        {
             switch (attributes & TypeAttributes.VisibilityMask)
             {
                 case TypeAttributes.Public:
@@ -1281,7 +1290,8 @@ namespace System.CodeDom.Compiler
         protected virtual void OutputExpressionList(
             CodeExpressionCollection expressions,
             bool newlineBetweenItems
-        ) {
+        )
+        {
             bool first = true;
             Indent++;
             foreach (CodeExpression current in expressions)
@@ -1366,7 +1376,8 @@ namespace System.CodeDom.Compiler
 
         protected virtual void OutputParameters(
             CodeParameterDeclarationExpressionCollection parameters
-        ) {
+        )
+        {
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -1465,7 +1476,8 @@ namespace System.CodeDom.Compiler
 
         protected virtual void GenerateParameterDeclarationExpression(
             CodeParameterDeclarationExpression e
-        ) {
+        )
+        {
             if (e == null)
             {
                 throw new ArgumentNullException(nameof(e));

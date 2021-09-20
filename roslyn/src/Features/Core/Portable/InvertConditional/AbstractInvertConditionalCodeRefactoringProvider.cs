@@ -55,7 +55,8 @@ namespace Microsoft.CodeAnalysis.InvertConditional
             Document document,
             TextSpan span,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var conditional = await FindConditionalAsync(document, span, cancellationToken)
                 .ConfigureAwait(false);
 

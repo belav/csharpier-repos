@@ -403,7 +403,8 @@ namespace System.DirectoryServices.AccountManagement
             string urnScheme,
             string urnValue,
             DateTime referenceDate
-        ) {
+        )
+        {
             // Perform the appropriate action based on the type of the UrnScheme
             if (urnScheme == UrnScheme.SidScheme)
             {
@@ -426,7 +427,8 @@ namespace System.DirectoryServices.AccountManagement
                     if (
                         UnsafeNativeMethods.IsValidSid(pSid)
                         && (Utils.ClassifySID(pSid) == SidType.FakeObject)
-                    ) {
+                    )
+                    {
                         GlobalDebug.WriteLineIf(
                             GlobalDebug.Info,
                             "SAMStoreCtx",
@@ -487,7 +489,8 @@ namespace System.DirectoryServices.AccountManagement
                         principalType == typeof(Principal)
                         || principalType == typeof(GroupPrincipal)
                         || principalType.IsSubclassOf(typeof(GroupPrincipal))
-                    ) {
+                    )
+                    {
                         // They passed in a hex string, is it a valid SID, and if so, does it correspond to a fake
                         // principal?
                         IntPtr pSid = IntPtr.Zero;
@@ -499,7 +502,8 @@ namespace System.DirectoryServices.AccountManagement
                             if (
                                 UnsafeNativeMethods.IsValidSid(pSid)
                                 && (Utils.ClassifySID(pSid) == SidType.FakeObject)
-                            ) {
+                            )
+                            {
                                 GlobalDebug.WriteLineIf(
                                     GlobalDebug.Info,
                                     "SAMStoreCtx",
@@ -616,7 +620,8 @@ namespace System.DirectoryServices.AccountManagement
             // Valid SID, but not for our context (machine).  No match.
             if (
                 !string.Equals(domainName, this.MachineFlatName, StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 GlobalDebug.WriteLineIf(
                     GlobalDebug.Warn,
                     "SAMStoreCtx",
@@ -669,21 +674,24 @@ namespace System.DirectoryServices.AccountManagement
             if (
                 principalType == typeof(UserPrincipal)
                 || principalType.IsSubclassOf(typeof(UserPrincipal))
-            ) {
+            )
+            {
                 principalHint = ",user";
                 principalType = typeof(UserPrincipal);
             }
             else if (
                 principalType == typeof(GroupPrincipal)
                 || principalType.IsSubclassOf(typeof(GroupPrincipal))
-            ) {
+            )
+            {
                 principalHint = ",group";
                 principalType = typeof(GroupPrincipal);
             }
             else if (
                 principalType == typeof(ComputerPrincipal)
                 || principalType.IsSubclassOf(typeof(ComputerPrincipal))
-            ) {
+            )
+            {
                 principalHint = ",computer";
                 principalType = typeof(ComputerPrincipal);
             }
@@ -730,7 +738,8 @@ namespace System.DirectoryServices.AccountManagement
                     (e.ErrorCode == unchecked((int)0x80070035))
                     || // bad net path
                     (e.ErrorCode == unchecked((int)0x800708AD))
-                ) {
+                )
+                {
                     return null;
                 }
 
@@ -1240,7 +1249,8 @@ namespace System.DirectoryServices.AccountManagement
             string suggestedWinNTProperty,
             Principal p,
             string propertyName
-        ) {
+        )
+        {
             PropertyValueCollection values = de.Properties[suggestedWinNTProperty];
 
             // The WinNT provider represents some string attributes that haven't been set as an empty string.
@@ -1261,7 +1271,8 @@ namespace System.DirectoryServices.AccountManagement
             string suggestedWinNTProperty,
             Principal p,
             string propertyName
-        ) {
+        )
+        {
             byte[] sid = (byte[])de.Properties["objectSid"][0];
 
             string sddlSid = Utils.ConvertSidToSDDL(sid);
@@ -1274,7 +1285,8 @@ namespace System.DirectoryServices.AccountManagement
             string suggestedWinNTProperty,
             Principal p,
             string propertyName
-        ) {
+        )
+        {
             Debug.Assert(de.Properties["Name"].Count == 1);
 
             string samAccountName = (string)de.Properties["Name"][0];
@@ -1294,7 +1306,8 @@ namespace System.DirectoryServices.AccountManagement
             string suggestedWinNTProperty,
             Principal p,
             string propertyName
-        ) {
+        )
+        {
             // ValueCollection<string> is Load'ed from a List<string>
             SDSUtils.MultiScalarFromDirectoryEntry<string>(
                 new dSPropertyCollection(de.Properties),
@@ -1309,7 +1322,8 @@ namespace System.DirectoryServices.AccountManagement
             string suggestedWinNTProperty,
             Principal p,
             string propertyName
-        ) {
+        )
+        {
             SDSUtils.SingleScalarFromDirectoryEntry<int>(
                 new dSPropertyCollection(de.Properties),
                 suggestedWinNTProperty,
@@ -1323,7 +1337,8 @@ namespace System.DirectoryServices.AccountManagement
             string suggestedWinNTProperty,
             Principal p,
             string propertyName
-        ) {
+        )
+        {
             SDSUtils.SingleScalarFromDirectoryEntry<byte[]>(
                 new dSPropertyCollection(de.Properties),
                 suggestedWinNTProperty,
@@ -1344,7 +1359,8 @@ namespace System.DirectoryServices.AccountManagement
             string suggestedWinNTProperty,
             Principal p,
             string propertyName
-        ) {
+        )
+        {
             // Groups are always enabled in SAM.  There is no such thing as a distribution group.
             p.LoadValueIntoProperty(PropertyNames.GroupIsSecurityGroup, (object)true);
 
@@ -1386,7 +1402,8 @@ namespace System.DirectoryServices.AccountManagement
             string suggestedWinNTProperty,
             Principal p,
             string propertyName
-        ) {
+        )
+        {
             // These properties are expressed as "seconds passed since the event of interest".  So to convert
             // to a DateTime, we substract them from DateTime.UtcNow.
 
@@ -1411,7 +1428,8 @@ namespace System.DirectoryServices.AccountManagement
             string suggestedWinNTProperty,
             Principal p,
             string propertyName
-        ) {
+        )
+        {
             PropertyValueCollection values = de.Properties[suggestedWinNTProperty];
 
             if (values.Count != 0)
@@ -1431,7 +1449,8 @@ namespace System.DirectoryServices.AccountManagement
             string suggestedWinNTProperty,
             Principal p,
             string propertyName
-        ) {
+        )
+        {
             Debug.Assert(
                 string.Equals(
                     suggestedWinNTProperty,
@@ -1459,7 +1478,8 @@ namespace System.DirectoryServices.AccountManagement
             DirectoryEntry de,
             string suggestedWinNTProperty,
             bool isLSAM
-        ) {
+        )
+        {
             throw new InvalidOperationException(
                 SR.Format(
                     SR.PrincipalUnsupportPropertyForType,
@@ -1475,7 +1495,8 @@ namespace System.DirectoryServices.AccountManagement
             DirectoryEntry de,
             string suggestedWinNTProperty,
             bool isLSAM
-        ) {
+        )
+        {
             string value = (string)p.GetValueForProperty(propertyName);
 
             if (p.unpersisted && value == null)
@@ -1493,7 +1514,8 @@ namespace System.DirectoryServices.AccountManagement
             DirectoryEntry de,
             string suggestedWinNTProperty,
             bool isLSAM
-        ) {
+        )
+        {
             SDSUtils.MultiStringToDirectoryEntryConverter(
                 p,
                 propertyName,
@@ -1508,7 +1530,8 @@ namespace System.DirectoryServices.AccountManagement
             DirectoryEntry de,
             string suggestedWinNTProperty,
             bool isLSAM
-        ) {
+        )
+        {
             Debug.Assert(propertyName == PropertyNames.AcctInfoPermittedLogonTimes);
 
             byte[] value = (byte[])p.GetValueForProperty(propertyName);
@@ -1561,7 +1584,8 @@ namespace System.DirectoryServices.AccountManagement
             DirectoryEntry de,
             string suggestedWinNTProperty,
             bool isLSAM
-        ) {
+        )
+        {
             if (!isLSAM)
                 throw new InvalidOperationException(
                     SR.Format(
@@ -1577,7 +1601,8 @@ namespace System.DirectoryServices.AccountManagement
             DirectoryEntry de,
             string suggestedWinNTProperty,
             bool isLSAM
-        ) {
+        )
+        {
             if (propertyName == PropertyNames.GroupIsSecurityGroup)
             {
                 if (!isLSAM)
@@ -1606,7 +1631,8 @@ namespace System.DirectoryServices.AccountManagement
             DirectoryEntry de,
             string suggestedWinNTProperty,
             bool isLSAM
-        ) {
+        )
+        {
             if (!isLSAM)
                 throw new InvalidOperationException(
                     SR.Format(
@@ -1622,7 +1648,8 @@ namespace System.DirectoryServices.AccountManagement
             DirectoryEntry de,
             string suggestedWinNTProperty,
             bool isLSAM
-        ) {
+        )
+        {
             Nullable<DateTime> value = (Nullable<DateTime>)p.GetValueForProperty(propertyName);
 
             if (p.unpersisted && value == null)
@@ -1641,7 +1668,8 @@ namespace System.DirectoryServices.AccountManagement
             DirectoryEntry de,
             string suggestedWinNTProperty,
             bool isLSAM
-        ) {
+        )
+        {
             Debug.Assert(
                 string.Equals(
                     suggestedWinNTProperty,
@@ -1665,7 +1693,8 @@ namespace System.DirectoryServices.AccountManagement
             DirectoryEntry de,
             NetCred credentials,
             AuthenticationTypes authTypes
-        ) {
+        )
+        {
             Debug.Assert(group.fakePrincipal == false);
 
             PrincipalCollection members = (PrincipalCollection)group.GetValueForProperty(
@@ -1752,7 +1781,8 @@ namespace System.DirectoryServices.AccountManagement
                         && (!memberType.IsSubclassOf(typeof(ComputerPrincipal)))
                         && (memberType != typeof(GroupPrincipal))
                         && (!memberType.IsSubclassOf(typeof(GroupPrincipal)))
-                    ) {
+                    )
+                    {
                         throw new InvalidOperationException(
                             SR.Format(SR.StoreCtxUnsupportedPrincipalTypeForGroupInsert, memberType)
                         );

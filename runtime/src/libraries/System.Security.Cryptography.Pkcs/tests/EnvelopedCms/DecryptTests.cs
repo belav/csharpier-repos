@@ -1043,7 +1043,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             string algorithmOidValue,
             SubjectIdentifierType type,
             ContentInfo expectedContentInfo = null
-        ) {
+        )
+        {
             // Deep-copy the contentInfo since the real ContentInfo doesn't do this. This defends against a bad implementation changing
             // our "expectedContentInfo" to match what it produces.
             expectedContentInfo =
@@ -1079,7 +1080,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             byte[] encodedMessage,
             CertLoader certLoader,
             ContentInfo expectedContent
-        ) {
+        )
+        {
             EnvelopedCms ecms = new EnvelopedCms();
             ecms.Decode(encodedMessage);
 

@@ -44,7 +44,8 @@ namespace Microsoft.AspNetCore.Mvc.Localization
             string value,
             bool isResourceNotFound,
             params object[] arguments
-        ) {
+        )
+        {
             if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));

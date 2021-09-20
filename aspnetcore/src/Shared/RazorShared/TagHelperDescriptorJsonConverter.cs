@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.Razor.Serialization
             Type objectType,
             object existingValue,
             JsonSerializer serializer
-        ) {
+        )
+        {
             if (reader.TokenType != JsonToken.StartObject)
             {
                 return null;
@@ -161,7 +162,8 @@ namespace Microsoft.CodeAnalysis.Razor.Serialization
             JsonWriter writer,
             AllowedChildTagDescriptor allowedChildTag,
             JsonSerializer serializer
-        ) {
+        )
+        {
             writer.WriteStartObject();
 
             writer.WritePropertyName(nameof(AllowedChildTagDescriptor.Name));
@@ -180,7 +182,8 @@ namespace Microsoft.CodeAnalysis.Razor.Serialization
             JsonWriter writer,
             BoundAttributeDescriptor boundAttribute,
             JsonSerializer serializer
-        ) {
+        )
+        {
             writer.WriteStartObject();
 
             writer.WritePropertyName(nameof(BoundAttributeDescriptor.Kind));
@@ -228,7 +231,8 @@ namespace Microsoft.CodeAnalysis.Razor.Serialization
             if (
                 boundAttribute.BoundAttributeParameters != null
                 && boundAttribute.BoundAttributeParameters.Count > 0
-            ) {
+            )
+            {
                 writer.WritePropertyName(nameof(BoundAttributeDescriptor.BoundAttributeParameters));
                 writer.WriteStartArray();
                 foreach (var boundAttributeParameter in boundAttribute.BoundAttributeParameters)
@@ -245,7 +249,8 @@ namespace Microsoft.CodeAnalysis.Razor.Serialization
             JsonWriter writer,
             BoundAttributeParameterDescriptor boundAttributeParameter,
             JsonSerializer serializer
-        ) {
+        )
+        {
             writer.WriteStartObject();
 
             writer.WritePropertyName(nameof(BoundAttributeParameterDescriptor.Name));
@@ -269,7 +274,8 @@ namespace Microsoft.CodeAnalysis.Razor.Serialization
             if (
                 boundAttributeParameter.Diagnostics != null
                 && boundAttributeParameter.Diagnostics.Count > 0
-            ) {
+            )
+            {
                 writer.WritePropertyName(nameof(BoundAttributeParameterDescriptor.Diagnostics));
                 serializer.Serialize(writer, boundAttributeParameter.Diagnostics);
             }
@@ -283,7 +289,8 @@ namespace Microsoft.CodeAnalysis.Razor.Serialization
         private static void WriteMetadata(
             JsonWriter writer,
             IReadOnlyDictionary<string, string> metadata
-        ) {
+        )
+        {
             writer.WriteStartObject();
             foreach (var kvp in metadata)
             {
@@ -297,7 +304,8 @@ namespace Microsoft.CodeAnalysis.Razor.Serialization
             JsonWriter writer,
             TagMatchingRuleDescriptor ruleDescriptor,
             JsonSerializer serializer
-        ) {
+        )
+        {
             writer.WriteStartObject();
 
             writer.WritePropertyName(nameof(TagMatchingRuleDescriptor.TagName));
@@ -339,7 +347,8 @@ namespace Microsoft.CodeAnalysis.Razor.Serialization
             JsonWriter writer,
             RequiredAttributeDescriptor requiredAttribute,
             JsonSerializer serializer
-        ) {
+        )
+        {
             writer.WriteStartObject();
 
             writer.WritePropertyName(nameof(RequiredAttributeDescriptor.Name));
@@ -381,7 +390,8 @@ namespace Microsoft.CodeAnalysis.Razor.Serialization
         private static void ReadBoundAttributes(
             JsonReader reader,
             TagHelperDescriptorBuilder builder
-        ) {
+        )
+        {
             if (!reader.Read())
             {
                 return;
@@ -401,7 +411,8 @@ namespace Microsoft.CodeAnalysis.Razor.Serialization
         private static void ReadBoundAttribute(
             JsonReader reader,
             TagHelperDescriptorBuilder builder
-        ) {
+        )
+        {
             if (!reader.Read())
             {
                 return;
@@ -490,7 +501,8 @@ namespace Microsoft.CodeAnalysis.Razor.Serialization
         private static void ReadBoundAttributeParameters(
             JsonReader reader,
             BoundAttributeDescriptorBuilder builder
-        ) {
+        )
+        {
             if (!reader.Read())
             {
                 return;
@@ -510,7 +522,8 @@ namespace Microsoft.CodeAnalysis.Razor.Serialization
         private static void ReadBoundAttributeParameter(
             JsonReader reader,
             BoundAttributeDescriptorBuilder builder
-        ) {
+        )
+        {
             if (!reader.Read())
             {
                 return;
@@ -573,7 +586,8 @@ namespace Microsoft.CodeAnalysis.Razor.Serialization
         private static void ReadTagMatchingRules(
             JsonReader reader,
             TagHelperDescriptorBuilder builder
-        ) {
+        )
+        {
             if (!reader.Read())
             {
                 return;
@@ -593,7 +607,8 @@ namespace Microsoft.CodeAnalysis.Razor.Serialization
         private static void ReadTagMatchingRule(
             JsonReader reader,
             TagHelperDescriptorBuilder builder
-        ) {
+        )
+        {
             if (!reader.Read())
             {
                 return;
@@ -645,7 +660,8 @@ namespace Microsoft.CodeAnalysis.Razor.Serialization
         private static void ReadRequiredAttributeValues(
             JsonReader reader,
             TagMatchingRuleDescriptorBuilder builder
-        ) {
+        )
+        {
             if (!reader.Read())
             {
                 return;
@@ -665,7 +681,8 @@ namespace Microsoft.CodeAnalysis.Razor.Serialization
         private static void ReadRequiredAttribute(
             JsonReader reader,
             TagMatchingRuleDescriptorBuilder builder
-        ) {
+        )
+        {
             if (!reader.Read())
             {
                 return;
@@ -724,7 +741,8 @@ namespace Microsoft.CodeAnalysis.Razor.Serialization
         private static void ReadAllowedChildTags(
             JsonReader reader,
             TagHelperDescriptorBuilder builder
-        ) {
+        )
+        {
             if (!reader.Read())
             {
                 return;
@@ -744,7 +762,8 @@ namespace Microsoft.CodeAnalysis.Razor.Serialization
         private static void ReadAllowedChildTag(
             JsonReader reader,
             TagHelperDescriptorBuilder builder
-        ) {
+        )
+        {
             if (!reader.Read())
             {
                 return;
@@ -814,7 +833,8 @@ namespace Microsoft.CodeAnalysis.Razor.Serialization
         private static void ReadDiagnostics(
             JsonReader reader,
             RazorDiagnosticCollection diagnostics
-        ) {
+        )
+        {
             if (!reader.Read())
             {
                 return;

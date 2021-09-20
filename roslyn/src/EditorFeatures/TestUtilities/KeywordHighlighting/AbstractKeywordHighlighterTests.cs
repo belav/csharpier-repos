@@ -73,7 +73,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.KeywordHighlighting
             SyntaxTree tree,
             IList<TextSpan> expectedHighlightSpans,
             List<TextSpan> highlightSpans
-        ) {
+        )
+        {
             for (var j = 0; j < Math.Max(highlightSpans.Count, expectedHighlightSpans.Count); j++)
             {
                 if (j >= expectedHighlightSpans.Count)

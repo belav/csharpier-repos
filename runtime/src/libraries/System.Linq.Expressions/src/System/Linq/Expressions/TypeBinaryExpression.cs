@@ -18,7 +18,8 @@ namespace System.Linq.Expressions
             Expression expression,
             Type typeOperand,
             ExpressionType nodeType
-        ) {
+        )
+        {
             Expression = expression;
             TypeOperand = typeOperand;
             NodeType = nodeType;

@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             DkmClrCustomTypeInfo typeInfo = null,
             bool escapeKeywordIdentifiers = false,
             DkmInspectionContext inspectionContext = null
-        ) {
+        )
+        {
             var formatter = new CSharpFormatter();
             var clrType = new DkmClrType((TypeImpl)type);
             if (inspectionContext == null)

@@ -47,7 +47,8 @@ namespace Microsoft.AspNetCore.Mvc.Testing.Handlers
         protected override async Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var remainingRedirects = MaxRedirects;
             var redirectRequest = new HttpRequestMessage();
             var originalRequestContent = HasBody(request)
@@ -92,7 +93,8 @@ namespace Microsoft.AspNetCore.Mvc.Testing.Handlers
             HttpContent originalRequestContent,
             HttpContent newRequestContent,
             HttpContent contentCopy
-        ) {
+        )
+        {
             foreach (var header in originalRequestContent.Headers)
             {
                 contentCopy.Headers.TryAddWithoutValidation(header.Key, header.Value);
@@ -103,7 +105,8 @@ namespace Microsoft.AspNetCore.Mvc.Testing.Handlers
         private static void CopyRequestHeaders(
             HttpRequestHeaders originalRequestHeaders,
             HttpRequestHeaders newRequestHeaders
-        ) {
+        )
+        {
             foreach (var header in originalRequestHeaders)
             {
                 newRequestHeaders.TryAddWithoutValidation(header.Key, header.Value);
@@ -112,7 +115,8 @@ namespace Microsoft.AspNetCore.Mvc.Testing.Handlers
 
         private static async Task<(Stream originalBody, Stream copy)> CopyBody(
             HttpRequestMessage request
-        ) {
+        )
+        {
             var originalBody = await request.Content.ReadAsStreamAsync();
             var bodyCopy = new MemoryStream();
             await originalBody.CopyToAsync(bodyCopy);
@@ -136,7 +140,8 @@ namespace Microsoft.AspNetCore.Mvc.Testing.Handlers
             HttpResponseMessage response,
             HttpRequestMessage redirect,
             HttpContent originalContent
-        ) {
+        )
+        {
             var location = response.Headers.Location;
             if (location != null)
             {

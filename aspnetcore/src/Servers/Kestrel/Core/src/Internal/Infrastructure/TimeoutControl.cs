@@ -110,7 +110,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
                 if (
                     _minReadRate.BytesPerSecond > 0
                     && _readTimingElapsedTicks > _minReadRate.GracePeriod.Ticks
-                ) {
+                )
+                {
                     var elapsedSeconds = (double)_readTimingElapsedTicks / TimeSpan.TicksPerSecond;
                     var rate = _readTimingBytesRead / elapsedSeconds;
 

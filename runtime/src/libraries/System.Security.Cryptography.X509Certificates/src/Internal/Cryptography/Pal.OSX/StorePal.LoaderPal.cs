@@ -20,7 +20,8 @@ namespace Internal.Cryptography.Pal
             public AppleCertLoader(
                 SafeCFArrayHandle collectionHandle,
                 SafeTemporaryKeychainHandle? tmpKeychain
-            ) {
+            )
+            {
                 _collectionHandle = collectionHandle;
                 _tmpKeychain = tmpKeychain;
             }
@@ -77,7 +78,8 @@ namespace Internal.Cryptography.Pal
                 SafeKeychainHandle keychain,
                 SafePasswordHandle password,
                 bool exportable
-            ) {
+            )
+            {
                 _pkcs12 = pkcs12;
                 _keychain = keychain;
                 _exportable = exportable;

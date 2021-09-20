@@ -23,7 +23,8 @@ namespace System.Security.AccessControl.Tests
             byte[] expectedBinaryForm,
             byte[] resultBinaryForm,
             int resultOffset
-        ) {
+        )
+        {
             Assert.Equal(expectedBinaryForm, resultBinaryForm.Skip(resultOffset));
         }
     }

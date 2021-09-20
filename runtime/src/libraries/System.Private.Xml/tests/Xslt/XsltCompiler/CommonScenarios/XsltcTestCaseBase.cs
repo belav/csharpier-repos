@@ -83,7 +83,8 @@ namespace System.Xml.Tests
             Stream expectedStream,
             Stream actualStream,
             int count = 0
-        ) {
+        )
+        {
             actualStream.Seek(0, SeekOrigin.Begin);
 
             using (var expectedReader = new StreamReader(expectedStream))
@@ -117,7 +118,8 @@ namespace System.Xml.Tests
             string typeName,
             string baselineFile,
             bool pdb
-        ) {
+        )
+        {
             var other = (AssemblyLoader)Activator.CreateInstance(
                 typeof(AssemblyLoader),
                 typeof(AssemblyLoader).FullName
@@ -152,7 +154,8 @@ namespace System.Xml.Tests
             string typeName,
             string baselineFile,
             bool loadFromFile
-        ) {
+        )
+        {
             VerifyTest(
                 cmdLine,
                 asmName,
@@ -174,7 +177,8 @@ namespace System.Xml.Tests
             bool pdbCreated,
             string baselineFile,
             bool loadFromFile
-        ) {
+        )
+        {
             VerifyTest(
                 cmdLine,
                 asmName,
@@ -198,7 +202,8 @@ namespace System.Xml.Tests
             string baselineFile,
             bool runAssemblyVerification,
             bool loadFromFile
-        ) {
+        )
+        {
             string targetDirectory = XsltcModule.TargetDirectory;
 
             string output = asmCreated
@@ -242,7 +247,8 @@ namespace System.Xml.Tests
                         baselineFile,
                         pdbCreated
                     )
-                ) {
+                )
+                {
                     throw new CTestFailedException("Assembly loaded failed");
                 }
             }
@@ -256,7 +262,8 @@ namespace System.Xml.Tests
                         FileMode.Open,
                         FileAccess.Read
                     )
-                ) {
+                )
+                {
                     sw.Write(output);
                     CompareOutput(expected, ms, 4);
                 }
@@ -324,7 +331,8 @@ namespace System.Xml.Tests
             bool createFromInputFile,
             bool expectedToSucceed,
             string targetDirectory
-        ) {
+        )
+        {
             // If createFromInputFile is specified, create an input file now that the compiler can consume.
             string processArguments = createFromInputFile
                 ? "@" + CreateInputFile(commandLine)
@@ -409,7 +417,8 @@ namespace System.Xml.Tests
                                 Path.Combine(XsltcModule.TargetDirectory, baselineFile),
                                 stream
                             )
-                        ) {
+                        )
+                        {
                             //_output.WriteLine("Baseline file comparison failed");
                             return false;
                         }

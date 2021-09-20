@@ -13,7 +13,8 @@ namespace System.Linq.Tests
             IQueryable<TKey> keys,
             IQueryable<TElement> elements,
             IQueryable<IGrouping<TKey, TElement>> grouping
-        ) {
+        )
+        {
             AssertGroupingCorrect<TKey, TElement>(
                 keys,
                 elements,
@@ -27,7 +28,8 @@ namespace System.Linq.Tests
             IQueryable<TElement> elements,
             IQueryable<IGrouping<TKey, TElement>> grouping,
             IEqualityComparer<TKey> keyComparer
-        ) {
+        )
+        {
             if (grouping == null)
             {
                 Assert.Null(elements);

@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions.ContextQuery
             bool isRightSideOfNumericType,
             bool isOnArgumentListBracketOrComma,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             this.Workspace = workspace;
             this.SemanticModel = semanticModel;
             this.SyntaxTree = semanticModel.SyntaxTree;
@@ -143,7 +144,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions.ContextQuery
             SemanticModel semanticModel,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var typeInferenceService =
                 workspace?.Services.GetLanguageService<ITypeInferenceService>(
                     semanticModel.Language

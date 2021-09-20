@@ -141,14 +141,16 @@ namespace System.Net.WebSockets.Client.Tests
         [ConditionalTheory(nameof(WebSocketsSupported)), MemberData(nameof(EchoServers))]
         public async Task ReceiveAsync_CancelThenReceive_ThrowsOperationCanceledException(
             Uri server
-        ) {
+        )
+        {
             using (
                 ClientWebSocket cws = await WebSocketHelper.GetConnectedWebSocket(
                     server,
                     TimeOutMilliseconds,
                     _output
                 )
-            ) {
+            )
+            {
                 var recvBuffer = new byte[100];
                 var segment = new ArraySegment<byte>(recvBuffer);
                 var cts = new CancellationTokenSource();
@@ -163,14 +165,16 @@ namespace System.Net.WebSockets.Client.Tests
         [ConditionalTheory(nameof(WebSocketsSupported)), MemberData(nameof(EchoServers))]
         public async Task ReceiveAsync_ReceiveThenCancel_ThrowsOperationCanceledException(
             Uri server
-        ) {
+        )
+        {
             using (
                 ClientWebSocket cws = await WebSocketHelper.GetConnectedWebSocket(
                     server,
                     TimeOutMilliseconds,
                     _output
                 )
-            ) {
+            )
+            {
                 var recvBuffer = new byte[100];
                 var segment = new ArraySegment<byte>(recvBuffer);
                 var cts = new CancellationTokenSource();
@@ -185,14 +189,16 @@ namespace System.Net.WebSockets.Client.Tests
         [ConditionalTheory(nameof(WebSocketsSupported)), MemberData(nameof(EchoServers))]
         public async Task ReceiveAsync_AfterCancellationDoReceiveAsync_ThrowsWebSocketException(
             Uri server
-        ) {
+        )
+        {
             using (
                 ClientWebSocket cws = await WebSocketHelper.GetConnectedWebSocket(
                     server,
                     TimeOutMilliseconds,
                     _output
                 )
-            ) {
+            )
+            {
                 var recvBuffer = new byte[100];
                 var segment = new ArraySegment<byte>(recvBuffer);
                 var cts = new CancellationTokenSource();

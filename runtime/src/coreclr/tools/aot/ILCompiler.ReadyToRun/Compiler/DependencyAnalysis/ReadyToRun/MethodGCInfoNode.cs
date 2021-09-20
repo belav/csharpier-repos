@@ -47,7 +47,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     this,
                     out var deduplicatedResult
                 )
-            ) {
+            )
+            {
                 throw new Exception("Did not properly initialize deduplicator");
             }
             int offset = deduplicatedResult.OffsetFromBeginningOfArray;
@@ -55,7 +56,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 int frameInfoIndex = 0;
                 frameInfoIndex < deduplicatedResult._methodNode.FrameInfos.Length;
                 frameInfoIndex++
-            ) {
+            )
+            {
                 offsets[frameInfoIndex] = offset;
                 offset += deduplicatedResult._methodNode.FrameInfos[frameInfoIndex].BlobData.Length;
                 offset += (-offset & 3); // 4-alignment for the personality routine
@@ -137,7 +139,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 int frameInfoIndex = 0;
                 frameInfoIndex < _methodNode.FrameInfos.Length;
                 frameInfoIndex++
-            ) {
+            )
+            {
                 byte[] unwindInfo = _methodNode.FrameInfos[frameInfoIndex].BlobData;
 
                 if (targetArch == TargetArchitecture.X64)
@@ -153,7 +156,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 else if (
                     (targetArch == TargetArchitecture.ARM)
                     || (targetArch == TargetArchitecture.ARM64)
-                ) {
+                )
+                {
                     // Set the 'X' bit to indicate that there is a personality routine associated with this method
                     unwindInfo[2] |= 1 << 4;
                 }
@@ -212,7 +216,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             ref ObjectDataBuilder dataBuilder,
             NodeFactory factory,
             bool relocsOnly
-        ) {
+        )
+        {
             if (relocsOnly)
             {
                 return;

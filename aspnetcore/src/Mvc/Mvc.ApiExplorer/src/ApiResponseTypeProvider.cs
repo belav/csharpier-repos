@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             IModelMetadataProvider modelMetadataProvider,
             IActionResultTypeMapper mapper,
             MvcOptions mvcOptions
-        ) {
+        )
+        {
             _modelMetadataProvider = modelMetadataProvider;
             _mapper = mapper;
             _mvcOptions = mvcOptions;
@@ -41,7 +42,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             if (
                 !HasSignificantMetadataProvider(responseMetadataAttributes)
                 && action.Properties.TryGetValue(typeof(ApiConventionResult), out var result)
-            ) {
+            )
+            {
                 // Action does not have any conventions. Use conventions on it if present.
                 var apiConventionResult = (ApiConventionResult)result;
                 responseMetadataAttributes.AddRange(apiConventionResult.ResponseMetadataProviders);
@@ -53,7 +55,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
                     typeof(ProducesErrorResponseTypeAttribute),
                     out result
                 )
-            ) {
+            )
+            {
                 defaultErrorType = ((ProducesErrorResponseTypeAttribute)result).Type;
             }
 
@@ -67,7 +70,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
 
         private static List<IApiResponseMetadataProvider> GetResponseMetadataAttributes(
             ControllerActionDescriptor action
-        ) {
+        )
+        {
             if (action.FilterDescriptors == null)
             {
                 return new List<IApiResponseMetadataProvider>();
@@ -86,7 +90,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             IReadOnlyList<IApiResponseMetadataProvider> responseMetadataAttributes,
             Type type,
             Type defaultErrorType
-        ) {
+        )
+        {
             var results = new Dictionary<int, ApiResponseType>();
 
             // Get the content type that the action explicitly set to support.
@@ -117,7 +122,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
                                 statusCode == StatusCodes.Status200OK
                                 || statusCode == StatusCodes.Status201Created
                             )
-                        ) {
+                        )
+                        {
                             // ProducesResponseTypeAttribute's constructor defaults to setting "Type" to void when no value is specified.
                             // In this event, use the action's return type for 200 or 201 status codes. This lets you decorate an action with a
                             // [ProducesResponseType(201)] instead of [ProducesResponseType(201, typeof(Person)] when typeof(Person) can be inferred
@@ -179,7 +185,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
         private void CalculateResponseFormats(
             ICollection<ApiResponseType> responseTypes,
             MediaTypeCollection declaredContentTypes
-        ) {
+        )
+        {
             var responseTypeMetadataProviders =
                 _mvcOptions.OutputFormatters.OfType<IApiResponseTypeMetadataProvider>();
 
@@ -223,7 +230,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
 
                         foreach (
                             var formatterSupportedContentType in formatterSupportedContentTypes
-                        ) {
+                        )
+                        {
                             apiResponse.ApiResponseFormats.Add(
                                 new ApiResponseFormat
                                 {
@@ -252,7 +260,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
                 declaredReturnType == typeof(void)
                 || declaredReturnType == typeof(Task)
                 || declaredReturnType == typeof(ValueTask)
-            ) {
+            )
+            {
                 return typeof(void);
             }
 
@@ -264,7 +273,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
                     declaredReturnType.GetGenericTypeDefinition() == typeof(Task<>)
                     || declaredReturnType.GetGenericTypeDefinition() == typeof(ValueTask<>)
                 )
-            ) {
+            )
+            {
                 unwrappedType = declaredReturnType.GetGenericArguments()[0];
             }
 
@@ -304,7 +314,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
 
         private static bool HasSignificantMetadataProvider(
             IReadOnlyList<IApiResponseMetadataProvider> providers
-        ) {
+        )
+        {
             for (var i = 0; i < providers.Count; i++)
             {
                 var provider = providers[i];
@@ -312,7 +323,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
                 if (
                     provider is ProducesAttribute producesAttribute
                     && producesAttribute.Type is null
-                ) {
+                )
+                {
                     // ProducesAttribute that does not specify type is considered not significant.
                     continue;
                 }

@@ -17,7 +17,8 @@ namespace System.DirectoryServices
         internal SearchResult(
             NetworkCredential? parentCredentials,
             AuthenticationTypes parentAuthenticationType
-        ) {
+        )
+        {
             _parentCredentials = parentCredentials;
             _parentAuthenticationType = parentAuthenticationType;
         }

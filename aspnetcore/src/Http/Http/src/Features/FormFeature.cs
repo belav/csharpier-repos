@@ -176,7 +176,8 @@ namespace Microsoft.AspNetCore.Http.Features
                     (state) => ((HttpContext)state!).Abort(),
                     _request.HttpContext
                 )
-            ) {
+            )
+            {
                 var contentType = ContentType;
                 // Check the content-type
                 if (HasApplicationFormContentType(contentType))
@@ -212,7 +213,8 @@ namespace Microsoft.AspNetCore.Http.Features
                                 section.ContentDisposition,
                                 out var contentDisposition
                             )
-                        ) {
+                        )
+                        {
                             throw new InvalidDataException(
                                 "Form section has invalid Content-Disposition value: "
                                     + section.ContentDisposition
@@ -350,7 +352,8 @@ namespace Microsoft.AspNetCore.Http.Features
 
         private bool HasApplicationFormContentType(
             [NotNullWhen(true)] MediaTypeHeaderValue? contentType
-        ) {
+        )
+        {
             // Content-Type: application/x-www-form-urlencoded; charset=utf-8
             return contentType != null
                 && contentType.MediaType.Equals(
@@ -361,7 +364,8 @@ namespace Microsoft.AspNetCore.Http.Features
 
         private bool HasMultipartFormContentType(
             [NotNullWhen(true)] MediaTypeHeaderValue? contentType
-        ) {
+        )
+        {
             // Content-Type: multipart/form-data; boundary=----WebKitFormBoundarymx2fSWqWSd0OxQqq
             return contentType != null
                 && contentType.MediaType.Equals(

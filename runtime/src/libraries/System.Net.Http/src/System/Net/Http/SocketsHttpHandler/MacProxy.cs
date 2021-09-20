@@ -52,12 +52,14 @@ namespace System.Net.Http
                                     proxyValue,
                                     false
                                 )
-                            ) {
+                            )
+                            {
                                 CFProxy proxy = new CFProxy(proxyDict);
                                 if (
                                     proxy.ProxyType == CFProxy.kCFProxyTypeHTTP
                                     || proxy.ProxyType == CFProxy.kCFProxyTypeHTTPS
-                                ) {
+                                )
+                                {
                                     result = GetProxyUri("http", proxy);
                                     break;
                                 }
@@ -103,7 +105,8 @@ namespace System.Net.Http
             using (SafeCreateHandle cfurl = CFURLCreateWithString(targetUri.AbsoluteUri))
             using (
                 SafeCFArrayHandle proxies = CFNetworkCopyProxiesForURL(cfurl, systemProxySettings)
-            ) {
+            )
+            {
                 long proxyCount = CFArrayGetCount(proxies);
                 for (int i = 0; i < proxyCount; i++)
                 {
@@ -113,13 +116,15 @@ namespace System.Net.Http
                             proxyValue,
                             false
                         )
-                    ) {
+                    )
+                    {
                         CFProxy proxy = new CFProxy(proxyDict);
 
                         if (
                             proxy.ProxyType == CFProxy.kCFProxyTypeAutoConfigurationURL
                             || proxy.ProxyType == CFProxy.kCFProxyTypeAutoConfigurationJavaScript
-                        ) {
+                        )
+                        {
                             Uri? result = ExecuteProxyAutoConfiguration(cfurl, proxy);
                             if (result != null)
                                 return result;
@@ -127,7 +132,8 @@ namespace System.Net.Http
                         else if (
                             proxy.ProxyType == CFProxy.kCFProxyTypeHTTP
                             || proxy.ProxyType == CFProxy.kCFProxyTypeHTTPS
-                        ) {
+                        )
+                        {
                             return GetProxyUri("http", proxy);
                         }
                     }

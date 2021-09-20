@@ -24,7 +24,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
             ISystemClock systemClock,
             IDebugger debugger,
             IKestrelTrace trace
-        ) {
+        )
+        {
             _callbacks = callbacks;
             _systemClock = systemClock;
             _debugger = debugger;

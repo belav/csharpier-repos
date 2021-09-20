@@ -268,7 +268,8 @@ namespace System.Data.Common
             SchemaType schemaType,
             string srcTable,
             IDataReader dataReader
-        ) {
+        )
+        {
             long logScopeId = DataCommonEventSource.Log.EnterScope(
                 "<comm.DataAdapter.FillSchema|API> {0}, dataSet, schemaType={1}, srcTable, dataReader",
                 ObjectID,
@@ -314,7 +315,8 @@ namespace System.Data.Common
             DataTable dataTable,
             SchemaType schemaType,
             IDataReader dataReader
-        ) {
+        )
+        {
             long logScopeId = DataCommonEventSource.Log.EnterScope(
                 "<comm.DataAdapter.FillSchema|API> {0}, dataTable, schemaType, dataReader",
                 ObjectID
@@ -351,7 +353,8 @@ namespace System.Data.Common
             SchemaType schemaType,
             string? srcTable,
             IDataReader dataReader
-        ) {
+        )
+        {
             DataTable[]? dataTables = null;
             int schemaCount = 0;
             do
@@ -423,7 +426,8 @@ namespace System.Data.Common
             IDataReader dataReader,
             int startRecord,
             int maxRecords
-        ) {
+        )
+        {
             long logScopeId = DataCommonEventSource.Log.EnterScope(
                 "<comm.DataAdapter.Fill|API> {0}, dataSet, srcTable, dataReader, startRecord, maxRecords",
                 ObjectID
@@ -488,7 +492,8 @@ namespace System.Data.Common
             IDataReader dataReader,
             int startRecord,
             int maxRecords
-        ) {
+        )
+        {
             long logScopeId = DataCommonEventSource.Log.EnterScope(
                 "<comm.DataAdapter.Fill|API> {0}, dataTables[], dataReader, startRecord, maxRecords",
                 ObjectID
@@ -603,7 +608,8 @@ namespace System.Data.Common
             int maxRecords,
             DataColumn? parentChapterColumn,
             object? parentChapterValue
-        ) {
+        )
+        {
             int rowsAddedToDataSet = 0;
             int schemaCount = 0;
             do
@@ -760,7 +766,8 @@ namespace System.Data.Common
             int schemaCount,
             DataColumn? parentChapterColumn,
             object? parentChapterValue
-        ) {
+        )
+        {
             bool withKeyInfo = (Data.MissingSchemaAction.AddWithKey == MissingSchemaAction);
             string? tmp = null;
             if (null != dataset)
@@ -789,7 +796,8 @@ namespace System.Data.Common
             int schemaCount,
             DataColumn? parentChapterColumn,
             object? parentChapterValue
-        ) {
+        )
+        {
             SchemaMapping? mapping = null;
             if (_hasFillErrorHandler)
             {
@@ -859,7 +867,8 @@ namespace System.Data.Common
             string sourceTableName,
             string dataSetTableName,
             MissingMappingAction mappingAction
-        ) {
+        )
+        {
             return DataTableMappingCollection.GetTableMappingBySchemaAction(
                 _tableMappings,
                 sourceTableName,
@@ -943,7 +952,8 @@ namespace System.Data.Common
             IDataReader dataReader,
             int startRecord,
             int maxRecords
-        ) {
+        )
+        {
             return Fill(dataTables, dataReader, startRecord, maxRecords);
         }
     }

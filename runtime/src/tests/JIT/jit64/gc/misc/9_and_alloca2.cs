@@ -36,7 +36,8 @@ class T
         string s9,
         string s10,
         string s11
-    ) {
+    )
+    {
         Console.WriteLine(s8);
         Console.WriteLine(s9);
         Console.WriteLine(s10 + s11);

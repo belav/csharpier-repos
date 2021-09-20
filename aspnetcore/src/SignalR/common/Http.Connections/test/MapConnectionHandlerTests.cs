@@ -44,7 +44,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
                     "/auth",
                     options => authCount += options.AuthorizationData.Count
                 )
-            ) {
+            )
+            {
                 host.Start();
 
                 var dataSource = host.Services.GetRequiredService<EndpointDataSource>();
@@ -76,7 +77,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
                     "/auth",
                     options => authCount += options.AuthorizationData.Count
                 )
-            ) {
+            )
+            {
                 host.Start();
 
                 var dataSource = host.Services.GetRequiredService<EndpointDataSource>();
@@ -108,7 +110,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
                     "/auth",
                     options => authCount += options.AuthorizationData.Count
                 )
-            ) {
+            )
+            {
                 host.Start();
 
                 var dataSource = host.Services.GetRequiredService<EndpointDataSource>();
@@ -150,7 +153,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
                         options.AuthorizationData.Add(new AuthorizeAttribute());
                     }
                 )
-            ) {
+            )
+            {
                 host.Start();
 
                 var dataSource = host.Services.GetRequiredService<EndpointDataSource>();
@@ -191,7 +195,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
                         authCount += options.AuthorizationData.Count;
                     }
                 )
-            ) {
+            )
+            {
                 host.Start();
 
                 var dataSource = host.Services.GetRequiredService<EndpointDataSource>();
@@ -227,7 +232,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
                         options.AuthorizationData.Add(new AuthorizeAttribute());
                     }
                 )
-            ) {
+            )
+            {
                 host.Start();
 
                 var dataSource = host.Services.GetRequiredService<EndpointDataSource>();

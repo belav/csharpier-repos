@@ -22,13 +22,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             EmitOptions emitOptions,
             Cci.ModulePropertiesForSerialization serializationProperties,
             IEnumerable<ResourceDescription> manifestResources
-        ) : base(
-            sourceModule,
-            emitOptions,
-            OutputKind.NetModule,
-            serializationProperties,
-            manifestResources
-        ) { }
+        )
+            : base(
+                sourceModule,
+                emitOptions,
+                OutputKind.NetModule,
+                serializationProperties,
+                manifestResources
+            ) { }
 
         internal override SynthesizedAttributeData SynthesizeEmbeddedAttribute()
         {
@@ -39,7 +40,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
         protected override void AddEmbeddedResourcesFromAddedModules(
             ArrayBuilder<Cci.ManagedResource> builder,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
 

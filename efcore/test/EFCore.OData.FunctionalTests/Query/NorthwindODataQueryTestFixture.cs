@@ -82,7 +82,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     StringComparison.OrdinalIgnoreCase
                 )
                 && ((EntitySetSegment)odataPath.Segments[0]).EntitySet.Name == "Order Details"
-            ) {
+            )
+            {
                 return routeContext.HttpContext.RequestServices.GetRequiredService<IActionDescriptorCollectionProvider>()
                     .ActionDescriptors.Items.OfType<ControllerActionDescriptor>()
                     .Where(c => c.ControllerName == "OrderDetails" && c.ActionName == "Get");

@@ -122,7 +122,8 @@ namespace System.Xml.Tests
             char[] ach,
             int offset,
             int length
-        ) {
+        )
+        {
             VerifyNameTableGet(objActual, str, ach, offset, length);
             VerifyNameTableAdd(objActual, str, ach, offset, length);
         }
@@ -133,7 +134,8 @@ namespace System.Xml.Tests
             char[] ach,
             int offset,
             int length
-        ) {
+        )
+        {
             object objExpected = null;
 
             if (NameTableVer == ENAMETABLE_VER.VERIFY_WITH_GETSTR)
@@ -156,7 +158,8 @@ namespace System.Xml.Tests
             char[] ach,
             int offset,
             int length
-        ) {
+        )
+        {
             object objExpected = null;
 
             if (NameTableVer == ENAMETABLE_VER.VERIFY_WITH_ADDSTR)

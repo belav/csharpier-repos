@@ -31,7 +31,8 @@ namespace System.Reflection.Metadata.Ecma335
                 ILOpCode branchOpCode,
                 int branchILOffset,
                 bool isShortBranch
-            ) {
+            )
+            {
                 int labelTargetOffset = labels[Label.Id - 1];
                 if (labelTargetOffset < 0)
                 {
@@ -79,7 +80,8 @@ namespace System.Reflection.Metadata.Ecma335
                 LabelHandle handlerEnd,
                 LabelHandle filterStart,
                 EntityHandle catchType
-            ) {
+            )
+            {
                 Kind = kind;
                 TryStart = tryStart;
                 TryEnd = tryEnd;
@@ -215,7 +217,8 @@ namespace System.Reflection.Metadata.Ecma335
             LabelHandle handlerStart,
             LabelHandle handlerEnd,
             EntityHandle catchType
-        ) {
+        )
+        {
             if (!ExceptionRegionEncoder.IsValidCatchTypeHandle(catchType))
             {
                 Throw.InvalidArgument_Handle(nameof(catchType));
@@ -247,7 +250,8 @@ namespace System.Reflection.Metadata.Ecma335
             LabelHandle handlerStart,
             LabelHandle handlerEnd,
             LabelHandle filterStart
-        ) {
+        )
+        {
             ValidateLabel(filterStart, nameof(filterStart));
             AddExceptionRegion(
                 ExceptionRegionKind.Filter,
@@ -267,7 +271,8 @@ namespace System.Reflection.Metadata.Ecma335
             LabelHandle handlerEnd,
             LabelHandle filterStart = default(LabelHandle),
             EntityHandle catchType = default(EntityHandle)
-        ) {
+        )
+        {
             ValidateLabel(tryStart, nameof(tryStart));
             ValidateLabel(tryEnd, nameof(tryEnd));
             ValidateLabel(handlerStart, nameof(handlerStart));
@@ -480,7 +485,8 @@ namespace System.Reflection.Metadata.Ecma335
                         GetLabelOffsetChecked(handler.HandlerStart),
                         GetLabelOffsetChecked(handler.HandlerEnd)
                     )
-                ) {
+                )
+                {
                     return false;
                 }
             }

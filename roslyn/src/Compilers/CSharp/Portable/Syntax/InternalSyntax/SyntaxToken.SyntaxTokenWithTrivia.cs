@@ -24,11 +24,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             protected readonly GreenNode LeadingField;
             protected readonly GreenNode TrailingField;
 
-            internal SyntaxTokenWithTrivia(
-                SyntaxKind kind,
-                GreenNode leading,
-                GreenNode trailing
-            ) : base(kind)
+            internal SyntaxTokenWithTrivia(SyntaxKind kind, GreenNode leading, GreenNode trailing)
+                : base(kind)
             {
                 if (leading != null)
                 {

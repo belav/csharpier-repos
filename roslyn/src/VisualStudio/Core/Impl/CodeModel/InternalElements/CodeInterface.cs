@@ -22,7 +22,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             FileCodeModel fileCodeModel,
             SyntaxNodeKey nodeKey,
             int? nodeKind
-        ) {
+        )
+        {
             var element = new CodeInterface(state, fileCodeModel, nodeKey, nodeKind);
             var result = (EnvDTE.CodeInterface)ComAggregate.CreateAggregatedObject(element);
 
@@ -36,7 +37,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             FileCodeModel fileCodeModel,
             int nodeKind,
             string name
-        ) {
+        )
+        {
             var element = new CodeInterface(state, fileCodeModel, nodeKind, name);
             return (EnvDTE.CodeInterface)ComAggregate.CreateAggregatedObject(element);
         }
@@ -66,7 +68,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             object type,
             object position,
             EnvDTE.vsCMAccess access
-        ) {
+        )
+        {
             return FileCodeModel.EnsureEditor(
                 () =>
                 {
@@ -89,7 +92,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             object position,
             EnvDTE.vsCMAccess access,
             object location
-        ) {
+        )
+        {
             return FileCodeModel.EnsureEditor(
                 () =>
                 {
@@ -111,7 +115,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             bool createPropertyStyleEvent,
             object position,
             EnvDTE.vsCMAccess access
-        ) {
+        )
+        {
             return FileCodeModel.EnsureEditor(
                 () =>
                 {

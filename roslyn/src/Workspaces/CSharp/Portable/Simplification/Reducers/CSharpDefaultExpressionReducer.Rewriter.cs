@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                 SemanticModel semanticModel,
                 OptionSet optionSet,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var preferSimpleDefaultExpression =
                     optionSet.GetOption(CSharpCodeStyleOptions.PreferSimpleDefaultExpression).Value;
 
@@ -47,7 +48,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                         semanticModel,
                         cancellationToken
                     )
-                ) {
+                )
+                {
                     return SyntaxFactory.LiteralExpression(SyntaxKind.DefaultLiteralExpression)
                         .WithTriviaFrom(node);
                 }

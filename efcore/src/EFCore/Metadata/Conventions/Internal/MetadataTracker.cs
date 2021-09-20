@@ -29,7 +29,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
         public virtual void Update(
             IConventionForeignKey oldForeignKey,
             IConventionForeignKey newForeignKey
-        ) {
+        )
+        {
             Check.DebugAssert(
                 !oldForeignKey.IsInModel && newForeignKey.IsInModel,
                 $"{nameof(oldForeignKey)} is in the model or {nameof(newForeignKey)} isn't"
@@ -71,7 +72,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
         /// </summary>
         void IReferenceRoot<IConventionForeignKey>.Release(
             Reference<IConventionForeignKey> foreignKeyReference
-        ) {
+        )
+        {
             _trackedForeignKeys.Remove(foreignKeyReference.Object);
         }
     }

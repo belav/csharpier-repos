@@ -127,7 +127,8 @@ namespace System.Net
             int port,
             HttpListener listener,
             bool secure
-        ) {
+        )
+        {
             IPAddress addr;
             if (host == "*" || host == "+")
             {

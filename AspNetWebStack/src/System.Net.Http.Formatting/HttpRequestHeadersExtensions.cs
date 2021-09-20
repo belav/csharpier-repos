@@ -75,7 +75,8 @@ namespace System.Net.Http
         public static Collection<CookieHeaderValue> GetCookies(
             this HttpRequestHeaders headers,
             string name
-        ) {
+        )
+        {
             if (name == null)
             {
                 throw Error.ArgumentNull("name");

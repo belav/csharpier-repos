@@ -17,7 +17,8 @@ namespace System.Net.Http
             Stream stream,
             TransportContext? context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             stream.Write(_content.Span);
         }
 

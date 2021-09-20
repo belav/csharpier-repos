@@ -551,7 +551,8 @@ some_prop = some_val"
             string[] expected,
             bool findEditorConfigs = true,
             bool findGlobalConfigs = true
-        ) {
+        )
+        {
             List<string> foundConfigs = new List<string>();
             var dir = Directory.GetParent(ProjectDir.Path);
             while (dir is object && dir.Exists)

@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Editor.Xaml
                     typeof(ITextDocument),
                     out var textDoc
                 )
-            ) {
+            )
+            {
                 return textDoc.FilePath;
             }
 

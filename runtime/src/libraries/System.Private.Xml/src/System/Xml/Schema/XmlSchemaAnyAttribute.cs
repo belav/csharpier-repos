@@ -82,7 +82,8 @@ namespace System.Xml.Schema
             XmlSchemaAnyAttribute o1,
             XmlSchemaAnyAttribute o2,
             bool v1Compat
-        ) {
+        )
+        {
             NamespaceList? nsl = NamespaceList.Intersection(
                 o1.NamespaceList!,
                 o2.NamespaceList!,
@@ -107,7 +108,8 @@ namespace System.Xml.Schema
             XmlSchemaAnyAttribute o1,
             XmlSchemaAnyAttribute o2,
             bool v1Compat
-        ) {
+        )
+        {
             NamespaceList? nsl = NamespaceList.Union(
                 o1.NamespaceList!,
                 o2.NamespaceList!,

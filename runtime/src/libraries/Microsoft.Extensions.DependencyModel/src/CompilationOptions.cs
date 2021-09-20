@@ -62,7 +62,8 @@ namespace Microsoft.Extensions.DependencyModel
             string debugType,
             bool? emitEntryPoint,
             bool? generateXmlDocumentation
-        ) {
+        )
+        {
             if (defines == null)
             {
                 throw new ArgumentNullException(nameof(defines));

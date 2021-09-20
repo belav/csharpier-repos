@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.SignatureHelp
     {
         public static FSharpSignatureHelpTriggerReason ConvertFrom(
             SignatureHelpTriggerReason triggerReason
-        ) {
+        )
+        {
             switch (triggerReason)
             {
                 case SignatureHelpTriggerReason.InvokeSignatureHelpCommand:

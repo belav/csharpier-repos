@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.Internal.Log
             int uniquePairId,
             int delta,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (cancellationToken.IsCancellationRequested)
             {
                 _source.BlockCanceled(functionId, delta, uniquePairId);

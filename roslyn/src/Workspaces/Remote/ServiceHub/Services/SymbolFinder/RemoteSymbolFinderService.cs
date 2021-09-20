@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.Remote
             ImmutableArray<DocumentId> documentArgs,
             FindReferencesSearchOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 async cancellationToken =>
                 {
@@ -104,7 +105,8 @@ namespace Microsoft.CodeAnalysis.Remote
             object value,
             TypeCode typeCode,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 async cancellationToken =>
                 {
@@ -133,7 +135,8 @@ namespace Microsoft.CodeAnalysis.Remote
             ImmutableArray<ISymbol> items,
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<SerializableSymbolAndProjectId>.GetInstance(out var result);
 
             foreach (var item in items)
@@ -153,7 +156,8 @@ namespace Microsoft.CodeAnalysis.Remote
             SearchKind searchKind,
             SymbolFilter criteria,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 async cancellationToken =>
                 {
@@ -186,7 +190,8 @@ namespace Microsoft.CodeAnalysis.Remote
             bool ignoreCase,
             SymbolFilter criteria,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 async cancellationToken =>
                 {
@@ -217,7 +222,8 @@ namespace Microsoft.CodeAnalysis.Remote
             bool ignoreCase,
             SymbolFilter criteria,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 async cancellationToken =>
                 {
@@ -248,7 +254,8 @@ namespace Microsoft.CodeAnalysis.Remote
             string pattern,
             SymbolFilter criteria,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 async cancellationToken =>
                 {
@@ -278,7 +285,8 @@ namespace Microsoft.CodeAnalysis.Remote
             string pattern,
             SymbolFilter criteria,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 async cancellationToken =>
                 {
@@ -315,7 +323,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 RemoteCallback<IRemoteSymbolFinderService.ICallback> callback,
                 RemoteServiceCallbackId callbackId,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 _callback = callback;
                 _callbackId = callbackId;
                 _cancellationToken = cancellationToken;
@@ -360,7 +369,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 RemoteCallback<IRemoteSymbolFinderService.ICallback> callback,
                 RemoteServiceCallbackId callbackId,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 _solution = solution;
                 _callback = callback;
                 _callbackId = callbackId;
@@ -412,7 +422,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 SymbolGroup group,
                 ISymbol definition,
                 ReferenceLocation reference
-            ) {
+            )
+            {
                 var dehydratedGroup = SerializableSymbolGroup.Dehydrate(
                     _solution,
                     group,

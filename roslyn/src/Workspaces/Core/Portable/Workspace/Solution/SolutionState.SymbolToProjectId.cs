@@ -85,7 +85,8 @@ namespace Microsoft.CodeAnalysis
         private ProjectId? GetProjectIdDirectly(
             ISymbol symbol,
             ConditionalWeakTable<ISymbol, ProjectId?> unrootedSymbolToProjectId
-        ) {
+        )
+        {
             if (symbol.IsKind(SymbolKind.Namespace, out INamespaceSymbol? ns))
             {
                 if (ns.ContainingCompilation != null)
@@ -100,7 +101,8 @@ namespace Microsoft.CodeAnalysis
                 symbol.IsKind(SymbolKind.Assembly)
                 || symbol.IsKind(SymbolKind.NetModule)
                 || symbol.IsKind(SymbolKind.DynamicType)
-            ) {
+            )
+            {
                 if (!unrootedSymbolToProjectId.TryGetValue(symbol, out var projectId))
                 {
                     // First, look through all the projects, and see if this symbol came from the primary assembly for
@@ -133,7 +135,8 @@ namespace Microsoft.CodeAnalysis
             else if (
                 symbol.IsKind(SymbolKind.TypeParameter, out ITypeParameterSymbol? typeParameter)
                 && typeParameter.TypeParameterKind == TypeParameterKind.Cref
-            ) {
+            )
+            {
                 // Cref type parameters don't belong to any containing symbol.  But we can map them to a doc/project
                 // using the declaring syntax of the type parameter itself.
                 var tree = typeParameter.Locations[0].SourceTree;

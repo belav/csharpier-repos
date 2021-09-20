@@ -31,7 +31,8 @@ namespace System.Linq.Expressions.Compiler
                 MemberBinding binding,
                 StackSpiller spiller,
                 Stack stack
-            ) {
+            )
+            {
                 switch (binding.BindingType)
                 {
                     case MemberBindingType.Assignment:

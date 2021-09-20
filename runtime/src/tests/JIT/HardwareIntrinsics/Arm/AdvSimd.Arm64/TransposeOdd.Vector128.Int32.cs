@@ -133,7 +133,8 @@ namespace JIT.HardwareIntrinsics.Arm
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfinArray2
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -212,7 +213,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario(
                 SimpleBinaryOpTest__TransposeOdd_Vector128_Int32 testClass
-            ) {
+            )
+            {
                 var result = AdvSimd.Arm64.TransposeOdd(_fld1, _fld2);
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
@@ -221,7 +223,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario_Load(
                 SimpleBinaryOpTest__TransposeOdd_Vector128_Int32 testClass
-            ) {
+            )
+            {
                 fixed (Vector128<Int32>* pFld1 = &_fld1)fixed (Vector128<Int32>* pFld2 = &_fld2)
                 {
                     var result = AdvSimd.Arm64.TransposeOdd(
@@ -404,7 +407,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             fixed (Vector128<Int32>* pClsVar1 = &_clsVar1)fixed (
                 Vector128<Int32>* pClsVar2 = &_clsVar2
-            ) {
+            )
+            {
                 var result = AdvSimd.Arm64.TransposeOdd(
                     AdvSimd.LoadVector128((Int32*)(pClsVar1)),
                     AdvSimd.LoadVector128((Int32*)(pClsVar2))
@@ -458,7 +462,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             fixed (Vector128<Int32>* pFld1 = &test._fld1)fixed (
                 Vector128<Int32>* pFld2 = &test._fld2
-            ) {
+            )
+            {
                 var result = AdvSimd.Arm64.TransposeOdd(
                     AdvSimd.LoadVector128((Int32*)(pFld1)),
                     AdvSimd.LoadVector128((Int32*)(pFld2))
@@ -562,7 +567,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Vector128<Int32> op2,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Int32[] inArray1 = new Int32[Op1ElementCount];
             Int32[] inArray2 = new Int32[Op2ElementCount];
             Int32[] outArray = new Int32[RetElementCount];
@@ -583,7 +589,8 @@ namespace JIT.HardwareIntrinsics.Arm
             void* op2,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Int32[] inArray1 = new Int32[Op1ElementCount];
             Int32[] inArray2 = new Int32[Op2ElementCount];
             Int32[] outArray = new Int32[RetElementCount];
@@ -612,7 +619,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Int32[] right,
             Int32[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             int index = 0;

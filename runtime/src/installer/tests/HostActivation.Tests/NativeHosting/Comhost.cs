@@ -204,7 +204,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 )
                 using (
                     var peReader = new System.Reflection.PortableExecutable.PEReader(assemblyStream)
-                ) {
+                )
+                {
                     if (peReader.HasMetadata)
                     {
                         MetadataReader reader = peReader.GetMetadataReader();

@@ -20,7 +20,8 @@ namespace Roslyn.Test.Utilities
                 if (
                     currentUICultureName.Length == 0
                     || currentUICultureName.StartsWith("en", StringComparison.OrdinalIgnoreCase)
-                ) {
+                )
+                {
                     return null;
                 }
 

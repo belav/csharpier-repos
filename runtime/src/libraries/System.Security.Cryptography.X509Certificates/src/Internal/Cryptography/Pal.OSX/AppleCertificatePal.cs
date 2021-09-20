@@ -42,7 +42,8 @@ namespace Internal.Cryptography.Pal
                     out certHandle,
                     out identityHandle
                 )
-            ) {
+            )
+            {
                 Debug.Assert(
                     certHandle.IsInvalid != identityHandle.IsInvalid,
                     $"certHandle.IsInvalid ({certHandle.IsInvalid}) should differ from identityHandle.IsInvalid ({identityHandle.IsInvalid})"
@@ -82,7 +83,8 @@ namespace Internal.Cryptography.Pal
             ReadOnlySpan<byte> rawData,
             SafePasswordHandle password,
             X509KeyStorageFlags keyStorageFlags
-        ) {
+        )
+        {
             Debug.Assert(password != null);
 
             X509ContentType contentType = X509Certificate2.GetCertContentType(rawData);
@@ -104,7 +106,8 @@ namespace Internal.Cryptography.Pal
                 if (
                     (keyStorageFlags & X509KeyStorageFlags.EphemeralKeySet)
                     == X509KeyStorageFlags.EphemeralKeySet
-                ) {
+                )
+                {
                     throw new PlatformNotSupportedException(SR.Cryptography_X509_NoEphemeralPfx);
                 }
 
@@ -166,7 +169,8 @@ namespace Internal.Cryptography.Pal
             string fileName,
             SafePasswordHandle password,
             X509KeyStorageFlags keyStorageFlags
-        ) {
+        )
+        {
             Debug.Assert(password != null);
 
             byte[] fileBytes = System.IO.File.ReadAllBytes(fileName);
@@ -438,7 +442,8 @@ namespace Internal.Cryptography.Pal
                 SafeSecKeyRefHandle key = Interop.AppleCrypto.X509GetPrivateKeyFromIdentity(
                     _identityHandle
                 )
-            ) {
+            )
+            {
                 return ExportPkcs8(key, password);
             }
         }
@@ -446,14 +451,16 @@ namespace Internal.Cryptography.Pal
         internal static unsafe byte[] ExportPkcs8(
             SafeSecKeyRefHandle key,
             ReadOnlySpan<char> password
-        ) {
+        )
+        {
             using (
                 SafeCFDataHandle data = Interop.AppleCrypto.SecKeyExportData(
                     key,
                     exportPrivate: true,
                     password
                 )
-            ) {
+            )
+            {
                 ReadOnlySpan<byte> systemExport = Interop.CoreFoundation.CFDataDangerousGetSpan(
                     data
                 );
@@ -465,7 +472,8 @@ namespace Internal.Cryptography.Pal
                             ptr,
                             systemExport.Length
                         )
-                    ) {
+                    )
+                    {
                         // Apple's PKCS8 export exports using PBES2, which Win7, Win8.1, and Apple all fail to
                         // understand in their PKCS12 readers, so re-encrypt using the Win7 PKCS12-PBE parameters.
                         //
@@ -640,7 +648,8 @@ namespace Internal.Cryptography.Pal
         internal AppleCertificatePal? MoveToKeychain(
             SafeKeychainHandle keychain,
             SafeSecKeyRefHandle? privateKey
-        ) {
+        )
+        {
             SafeSecIdentityHandle? identity = Interop.AppleCrypto.X509MoveToKeychain(
                 _certHandle,
                 keychain,

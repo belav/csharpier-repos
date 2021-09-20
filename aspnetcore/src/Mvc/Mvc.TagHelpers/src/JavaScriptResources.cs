@@ -36,7 +36,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             string resourceName,
             Func<string, Stream> getManifestResourceStream,
             ConcurrentDictionary<string, string> cache
-        ) {
+        )
+        {
             return cache.GetOrAdd(
                 resourceName,
                 key =>

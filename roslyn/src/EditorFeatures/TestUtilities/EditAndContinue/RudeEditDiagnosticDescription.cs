@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             string squiggle,
             string[] arguments,
             string firstLine
-        ) {
+        )
+        {
             _rudeEditKind = rudeEditKind;
             _squiggle = squiggle;
             _firstLine = firstLine;

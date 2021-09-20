@@ -103,7 +103,8 @@ namespace Microsoft.CodeAnalysis.UseExplicitTupleName
             INamedTypeSymbol containingType,
             IFieldSymbol unnamedField,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             foreach (var member in containingType.GetMembers())
             {
                 cancellationToken.ThrowIfCancellationRequested();
@@ -114,7 +115,8 @@ namespace Microsoft.CodeAnalysis.UseExplicitTupleName
                     if (
                         unnamedField.Equals(fieldSymbol.CorrespondingTupleField)
                         && !fieldSymbol.Name.Equals(unnamedField.Name)
-                    ) {
+                    )
+                    {
                         return fieldSymbol;
                     }
                 }

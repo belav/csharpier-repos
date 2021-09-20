@@ -35,7 +35,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
             Solution solution,
             string projectFilePath,
             ImmutableArray<ReferenceUpdate> referenceUpdates
-        ) {
+        )
+        {
             bool? result = null;
 
             try

@@ -163,7 +163,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<sbyte> left,
             Vector256<sbyte> right,
             byte mask
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -175,7 +176,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<byte> left,
             Vector256<byte> right,
             byte mask
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -188,7 +190,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<short> left,
             Vector256<short> right,
             byte mask
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -201,7 +204,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<ushort> left,
             Vector256<ushort> right,
             byte mask
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -214,7 +218,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<int> left,
             Vector256<int> right,
             byte mask
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -227,7 +232,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<uint> left,
             Vector256<uint> right,
             byte mask
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -240,7 +246,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<long> left,
             Vector256<long> right,
             byte mask
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -253,7 +260,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<ulong> left,
             Vector256<ulong> right,
             byte mask
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -420,7 +428,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<uint> left,
             Vector128<uint> right,
             byte control
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -431,7 +440,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<short> left,
             Vector256<short> right,
             byte control
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -442,7 +452,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<ushort> left,
             Vector256<ushort> right,
             byte control
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -461,7 +472,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<uint> left,
             Vector256<uint> right,
             byte control
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -473,7 +485,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<sbyte> left,
             Vector256<sbyte> right,
             Vector256<sbyte> mask
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -484,7 +497,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<byte> left,
             Vector256<byte> right,
             Vector256<byte> mask
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -497,7 +511,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<short> left,
             Vector256<short> right,
             Vector256<short> mask
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -509,7 +524,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<ushort> left,
             Vector256<ushort> right,
             Vector256<ushort> mask
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -522,7 +538,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<int> left,
             Vector256<int> right,
             Vector256<int> mask
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -534,7 +551,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<uint> left,
             Vector256<uint> right,
             Vector256<uint> mask
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -547,7 +565,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<long> left,
             Vector256<long> right,
             Vector256<long> mask
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -559,7 +578,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<ulong> left,
             Vector256<ulong> right,
             Vector256<ulong> mask
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -1000,7 +1020,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector256<ushort> CompareEqual(
             Vector256<ushort> left,
             Vector256<ushort> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1043,7 +1064,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector256<sbyte> CompareGreaterThan(
             Vector256<sbyte> left,
             Vector256<sbyte> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1053,7 +1075,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector256<short> CompareGreaterThan(
             Vector256<short> left,
             Vector256<short> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1071,7 +1094,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector256<long> CompareGreaterThan(
             Vector256<long> left,
             Vector256<long> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -1367,7 +1391,8 @@ namespace System.Runtime.Intrinsics.X86
             int* baseAddress,
             Vector128<int> index,
             byte scale
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1379,7 +1404,8 @@ namespace System.Runtime.Intrinsics.X86
             uint* baseAddress,
             Vector128<int> index,
             byte scale
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1391,7 +1417,8 @@ namespace System.Runtime.Intrinsics.X86
             long* baseAddress,
             Vector128<int> index,
             byte scale
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1403,7 +1430,8 @@ namespace System.Runtime.Intrinsics.X86
             ulong* baseAddress,
             Vector128<int> index,
             byte scale
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1415,7 +1443,8 @@ namespace System.Runtime.Intrinsics.X86
             float* baseAddress,
             Vector128<int> index,
             byte scale
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1427,7 +1456,8 @@ namespace System.Runtime.Intrinsics.X86
             double* baseAddress,
             Vector128<int> index,
             byte scale
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1439,7 +1469,8 @@ namespace System.Runtime.Intrinsics.X86
             int* baseAddress,
             Vector128<long> index,
             byte scale
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1451,7 +1482,8 @@ namespace System.Runtime.Intrinsics.X86
             uint* baseAddress,
             Vector128<long> index,
             byte scale
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1463,7 +1495,8 @@ namespace System.Runtime.Intrinsics.X86
             long* baseAddress,
             Vector128<long> index,
             byte scale
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1475,7 +1508,8 @@ namespace System.Runtime.Intrinsics.X86
             ulong* baseAddress,
             Vector128<long> index,
             byte scale
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1487,7 +1521,8 @@ namespace System.Runtime.Intrinsics.X86
             float* baseAddress,
             Vector128<long> index,
             byte scale
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1499,7 +1534,8 @@ namespace System.Runtime.Intrinsics.X86
             double* baseAddress,
             Vector128<long> index,
             byte scale
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1511,7 +1547,8 @@ namespace System.Runtime.Intrinsics.X86
             int* baseAddress,
             Vector256<int> index,
             byte scale
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1523,7 +1560,8 @@ namespace System.Runtime.Intrinsics.X86
             uint* baseAddress,
             Vector256<int> index,
             byte scale
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1535,7 +1573,8 @@ namespace System.Runtime.Intrinsics.X86
             long* baseAddress,
             Vector128<int> index,
             byte scale
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1547,7 +1586,8 @@ namespace System.Runtime.Intrinsics.X86
             ulong* baseAddress,
             Vector128<int> index,
             byte scale
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1559,7 +1599,8 @@ namespace System.Runtime.Intrinsics.X86
             float* baseAddress,
             Vector256<int> index,
             byte scale
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1571,7 +1612,8 @@ namespace System.Runtime.Intrinsics.X86
             double* baseAddress,
             Vector128<int> index,
             byte scale
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1583,7 +1625,8 @@ namespace System.Runtime.Intrinsics.X86
             int* baseAddress,
             Vector256<long> index,
             byte scale
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1595,7 +1638,8 @@ namespace System.Runtime.Intrinsics.X86
             uint* baseAddress,
             Vector256<long> index,
             byte scale
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1607,7 +1651,8 @@ namespace System.Runtime.Intrinsics.X86
             long* baseAddress,
             Vector256<long> index,
             byte scale
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1619,7 +1664,8 @@ namespace System.Runtime.Intrinsics.X86
             ulong* baseAddress,
             Vector256<long> index,
             byte scale
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1631,7 +1677,8 @@ namespace System.Runtime.Intrinsics.X86
             float* baseAddress,
             Vector256<long> index,
             byte scale
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1643,7 +1690,8 @@ namespace System.Runtime.Intrinsics.X86
             double* baseAddress,
             Vector256<long> index,
             byte scale
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -1658,7 +1706,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<int> index,
             Vector128<int> mask,
             byte scale
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1672,7 +1721,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<int> index,
             Vector128<uint> mask,
             byte scale
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1686,7 +1736,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<int> index,
             Vector128<long> mask,
             byte scale
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1700,7 +1751,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<int> index,
             Vector128<ulong> mask,
             byte scale
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1714,7 +1766,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<int> index,
             Vector128<float> mask,
             byte scale
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1728,7 +1781,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<int> index,
             Vector128<double> mask,
             byte scale
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1742,7 +1796,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<long> index,
             Vector128<int> mask,
             byte scale
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1756,7 +1811,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<long> index,
             Vector128<uint> mask,
             byte scale
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1770,7 +1826,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<long> index,
             Vector128<long> mask,
             byte scale
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1784,7 +1841,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<long> index,
             Vector128<ulong> mask,
             byte scale
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1798,7 +1856,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<long> index,
             Vector128<float> mask,
             byte scale
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1812,7 +1871,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<long> index,
             Vector128<double> mask,
             byte scale
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1826,7 +1886,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<int> index,
             Vector256<int> mask,
             byte scale
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1840,7 +1901,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<int> index,
             Vector256<uint> mask,
             byte scale
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1854,7 +1916,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<int> index,
             Vector256<long> mask,
             byte scale
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1868,7 +1931,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<int> index,
             Vector256<ulong> mask,
             byte scale
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1882,7 +1946,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<int> index,
             Vector256<float> mask,
             byte scale
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1896,7 +1961,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<int> index,
             Vector256<double> mask,
             byte scale
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1910,7 +1976,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<long> index,
             Vector128<int> mask,
             byte scale
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1924,7 +1991,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<long> index,
             Vector128<uint> mask,
             byte scale
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1938,7 +2006,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<long> index,
             Vector256<long> mask,
             byte scale
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1952,7 +2021,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<long> index,
             Vector256<ulong> mask,
             byte scale
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1966,7 +2036,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<long> index,
             Vector128<float> mask,
             byte scale
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1980,7 +2051,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<long> index,
             Vector256<double> mask,
             byte scale
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -2008,7 +2080,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector256<short> HorizontalAddSaturate(
             Vector256<short> left,
             Vector256<short> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -2019,7 +2092,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector256<short> HorizontalSubtract(
             Vector256<short> left,
             Vector256<short> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -2038,7 +2112,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector256<short> HorizontalSubtractSaturate(
             Vector256<short> left,
             Vector256<short> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -2050,7 +2125,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<sbyte> value,
             Vector128<sbyte> data,
             byte index
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -2062,7 +2138,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<byte> value,
             Vector128<byte> data,
             byte index
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -2074,7 +2151,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<short> value,
             Vector128<short> data,
             byte index
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -2086,7 +2164,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<ushort> value,
             Vector128<ushort> data,
             byte index
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -2098,7 +2177,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<int> value,
             Vector128<int> data,
             byte index
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -2110,7 +2190,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<uint> value,
             Vector128<uint> data,
             byte index
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -2122,7 +2203,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<long> value,
             Vector128<long> data,
             byte index
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -2134,7 +2216,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<ulong> value,
             Vector128<ulong> data,
             byte index
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -2277,7 +2360,8 @@ namespace System.Runtime.Intrinsics.X86
             int* address,
             Vector128<int> mask,
             Vector128<int> source
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -2288,7 +2372,8 @@ namespace System.Runtime.Intrinsics.X86
             uint* address,
             Vector128<uint> mask,
             Vector128<uint> source
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -2299,7 +2384,8 @@ namespace System.Runtime.Intrinsics.X86
             long* address,
             Vector128<long> mask,
             Vector128<long> source
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -2310,7 +2396,8 @@ namespace System.Runtime.Intrinsics.X86
             ulong* address,
             Vector128<ulong> mask,
             Vector128<ulong> source
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -2322,7 +2409,8 @@ namespace System.Runtime.Intrinsics.X86
             int* address,
             Vector256<int> mask,
             Vector256<int> source
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -2333,7 +2421,8 @@ namespace System.Runtime.Intrinsics.X86
             uint* address,
             Vector256<uint> mask,
             Vector256<uint> source
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -2344,7 +2433,8 @@ namespace System.Runtime.Intrinsics.X86
             long* address,
             Vector256<long> mask,
             Vector256<long> source
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -2355,7 +2445,8 @@ namespace System.Runtime.Intrinsics.X86
             ulong* address,
             Vector256<ulong> mask,
             Vector256<ulong> source
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -2366,7 +2457,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector256<int> MultiplyAddAdjacent(
             Vector256<short> left,
             Vector256<short> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -2377,7 +2469,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector256<short> MultiplyAddAdjacent(
             Vector256<byte> left,
             Vector256<sbyte> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -2504,7 +2597,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<byte> left,
             Vector256<byte> right,
             byte mask
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -2540,7 +2634,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector256<ushort> MultiplyHigh(
             Vector256<ushort> left,
             Vector256<ushort> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -2551,7 +2646,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector256<short> MultiplyHighRoundScale(
             Vector256<short> left,
             Vector256<short> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -2661,7 +2757,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector256<sbyte> PackSignedSaturate(
             Vector256<short> left,
             Vector256<short> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -2679,7 +2776,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector256<byte> PackUnsignedSaturate(
             Vector256<short> left,
             Vector256<short> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -2689,7 +2787,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector256<ushort> PackUnsignedSaturate(
             Vector256<int> left,
             Vector256<int> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -2701,7 +2800,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<sbyte> left,
             Vector256<sbyte> right,
             byte control
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -2712,7 +2812,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<byte> left,
             Vector256<byte> right,
             byte control
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -2723,7 +2824,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<short> left,
             Vector256<short> right,
             byte control
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -2734,7 +2836,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<ushort> left,
             Vector256<ushort> right,
             byte control
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -2745,7 +2848,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<int> left,
             Vector256<int> right,
             byte control
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -2756,7 +2860,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<uint> left,
             Vector256<uint> right,
             byte control
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -2767,7 +2872,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<long> left,
             Vector256<long> right,
             byte control
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -2778,7 +2884,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<ulong> left,
             Vector256<ulong> right,
             byte control
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -2839,7 +2946,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector256<short> ShiftLeftLogical(
             Vector256<short> value,
             Vector128<short> count
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -2849,7 +2957,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector256<ushort> ShiftLeftLogical(
             Vector256<ushort> value,
             Vector128<ushort> count
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -2883,7 +2992,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector256<ulong> ShiftLeftLogical(
             Vector256<ulong> value,
             Vector128<ulong> count
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -2943,7 +3053,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector256<sbyte> ShiftLeftLogical128BitLane(
             Vector256<sbyte> value,
             byte numBytes
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -2953,7 +3064,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector256<byte> ShiftLeftLogical128BitLane(
             Vector256<byte> value,
             byte numBytes
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -2963,7 +3075,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector256<short> ShiftLeftLogical128BitLane(
             Vector256<short> value,
             byte numBytes
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -2973,7 +3086,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector256<ushort> ShiftLeftLogical128BitLane(
             Vector256<ushort> value,
             byte numBytes
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -2991,7 +3105,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector256<uint> ShiftLeftLogical128BitLane(
             Vector256<uint> value,
             byte numBytes
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -3001,7 +3116,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector256<long> ShiftLeftLogical128BitLane(
             Vector256<long> value,
             byte numBytes
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -3011,7 +3127,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector256<ulong> ShiftLeftLogical128BitLane(
             Vector256<ulong> value,
             byte numBytes
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -3022,7 +3139,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector256<int> ShiftLeftLogicalVariable(
             Vector256<int> value,
             Vector256<uint> count
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -3032,7 +3150,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector256<uint> ShiftLeftLogicalVariable(
             Vector256<uint> value,
             Vector256<uint> count
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -3042,7 +3161,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector256<long> ShiftLeftLogicalVariable(
             Vector256<long> value,
             Vector256<ulong> count
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -3052,7 +3172,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector256<ulong> ShiftLeftLogicalVariable(
             Vector256<ulong> value,
             Vector256<ulong> count
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -3063,7 +3184,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<int> ShiftLeftLogicalVariable(
             Vector128<int> value,
             Vector128<uint> count
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -3073,7 +3195,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<uint> ShiftLeftLogicalVariable(
             Vector128<uint> value,
             Vector128<uint> count
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -3083,7 +3206,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<long> ShiftLeftLogicalVariable(
             Vector128<long> value,
             Vector128<ulong> count
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -3093,7 +3217,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<ulong> ShiftLeftLogicalVariable(
             Vector128<ulong> value,
             Vector128<ulong> count
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -3104,7 +3229,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector256<short> ShiftRightArithmetic(
             Vector256<short> value,
             Vector128<short> count
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -3114,7 +3240,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector256<int> ShiftRightArithmetic(
             Vector256<int> value,
             Vector128<int> count
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -3142,7 +3269,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector256<int> ShiftRightArithmeticVariable(
             Vector256<int> value,
             Vector256<uint> count
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -3153,7 +3281,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<int> ShiftRightArithmeticVariable(
             Vector128<int> value,
             Vector128<uint> count
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -3164,7 +3293,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector256<short> ShiftRightLogical(
             Vector256<short> value,
             Vector128<short> count
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -3174,7 +3304,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector256<ushort> ShiftRightLogical(
             Vector256<ushort> value,
             Vector128<ushort> count
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -3192,7 +3323,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector256<uint> ShiftRightLogical(
             Vector256<uint> value,
             Vector128<uint> count
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -3202,7 +3334,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector256<long> ShiftRightLogical(
             Vector256<long> value,
             Vector128<long> count
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -3212,7 +3345,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector256<ulong> ShiftRightLogical(
             Vector256<ulong> value,
             Vector128<ulong> count
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -3272,7 +3406,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector256<sbyte> ShiftRightLogical128BitLane(
             Vector256<sbyte> value,
             byte numBytes
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -3282,7 +3417,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector256<byte> ShiftRightLogical128BitLane(
             Vector256<byte> value,
             byte numBytes
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -3292,7 +3428,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector256<short> ShiftRightLogical128BitLane(
             Vector256<short> value,
             byte numBytes
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -3302,7 +3439,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector256<ushort> ShiftRightLogical128BitLane(
             Vector256<ushort> value,
             byte numBytes
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -3312,7 +3450,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector256<int> ShiftRightLogical128BitLane(
             Vector256<int> value,
             byte numBytes
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -3322,7 +3461,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector256<uint> ShiftRightLogical128BitLane(
             Vector256<uint> value,
             byte numBytes
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -3332,7 +3472,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector256<long> ShiftRightLogical128BitLane(
             Vector256<long> value,
             byte numBytes
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -3342,7 +3483,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector256<ulong> ShiftRightLogical128BitLane(
             Vector256<ulong> value,
             byte numBytes
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -3353,7 +3495,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector256<int> ShiftRightLogicalVariable(
             Vector256<int> value,
             Vector256<uint> count
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -3363,7 +3506,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector256<uint> ShiftRightLogicalVariable(
             Vector256<uint> value,
             Vector256<uint> count
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -3373,7 +3517,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector256<long> ShiftRightLogicalVariable(
             Vector256<long> value,
             Vector256<ulong> count
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -3383,7 +3528,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector256<ulong> ShiftRightLogicalVariable(
             Vector256<ulong> value,
             Vector256<ulong> count
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -3394,7 +3540,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<int> ShiftRightLogicalVariable(
             Vector128<int> value,
             Vector128<uint> count
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -3404,7 +3551,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<uint> ShiftRightLogicalVariable(
             Vector128<uint> value,
             Vector128<uint> count
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -3414,7 +3562,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<long> ShiftRightLogicalVariable(
             Vector128<long> value,
             Vector128<ulong> count
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -3424,7 +3573,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<ulong> ShiftRightLogicalVariable(
             Vector128<ulong> value,
             Vector128<ulong> count
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -3592,7 +3742,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector256<sbyte> SubtractSaturate(
             Vector256<sbyte> left,
             Vector256<sbyte> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -3602,7 +3753,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector256<short> SubtractSaturate(
             Vector256<short> left,
             Vector256<short> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -3620,7 +3772,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector256<ushort> SubtractSaturate(
             Vector256<ushort> left,
             Vector256<ushort> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -3631,7 +3784,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector256<ushort> SumAbsoluteDifferences(
             Vector256<byte> left,
             Vector256<byte> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 

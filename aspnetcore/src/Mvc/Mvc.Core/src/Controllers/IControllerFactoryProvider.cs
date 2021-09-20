@@ -36,7 +36,8 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
         /// <returns>The delegate used to release the created controller asynchronously.</returns>
         Func<ControllerContext, object, ValueTask>? CreateAsyncControllerReleaser(
             ControllerActionDescriptor descriptor
-        ) {
+        )
+        {
             var releaser = CreateControllerReleaser(descriptor);
             if (releaser is null)
             {

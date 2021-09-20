@@ -131,7 +131,8 @@ namespace System.Text
             int byteCount,
             char[] chars,
             int charIndex
-        ) {
+        )
+        {
             return GetChars(bytes, byteIndex, byteCount, chars, charIndex, false);
         }
 
@@ -142,7 +143,8 @@ namespace System.Text
             char[] chars,
             int charIndex,
             bool flush
-        ) {
+        )
+        {
             // Validate Parameters
             if (bytes == null || chars == null)
                 throw new ArgumentNullException(
@@ -188,7 +190,8 @@ namespace System.Text
             char* chars,
             int charCount,
             bool flush
-        ) {
+        )
+        {
             // Validate parameters
             if (chars == null || bytes == null)
                 throw new ArgumentNullException(
@@ -223,7 +226,8 @@ namespace System.Text
             out int bytesUsed,
             out int charsUsed,
             out bool completed
-        ) {
+        )
+        {
             // Validate parameters
             if (bytes == null || chars == null)
                 throw new ArgumentNullException(
@@ -291,7 +295,8 @@ namespace System.Text
             out int bytesUsed,
             out int charsUsed,
             out bool completed
-        ) {
+        )
+        {
             // Validate input parameters
             if (chars == null || bytes == null)
                 throw new ArgumentNullException(

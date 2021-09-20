@@ -51,7 +51,8 @@ namespace System.Management.Tests
                 var mofStream = new StreamReader(
                     _assembly.GetManifestResourceStream(mofResourceName)
                 )
-            ) {
+            )
+            {
                 string mofContent = mofStream.ReadToEnd();
                 File.WriteAllText(mofFilePath, mofContent);
             }

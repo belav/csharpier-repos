@@ -21,7 +21,8 @@ namespace Moq.Tests.Matchers
             object first,
             object second,
             bool shouldMatch
-        ) {
+        )
+        {
             var seconds = new List<string>();
             var methodCallExpr = (MethodCallExpression)ToExpression<IX>(
                 x => x.Method(It.IsAny<int>(), Capture.In(seconds))

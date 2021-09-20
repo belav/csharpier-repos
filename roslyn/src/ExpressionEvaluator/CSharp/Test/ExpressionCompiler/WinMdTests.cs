@@ -254,7 +254,8 @@ class C
             ImmutableArray<MetadataReference> compileReferences,
             ImmutableArray<MetadataReference> runtimeReferences,
             string storageAssemblyName
-        ) {
+        )
+        {
             var source =
                 @"class C
 {
@@ -332,7 +333,8 @@ class C
                         var metadata = ModuleMetadata.CreateFromImage(
                             ImmutableArray.CreateRange(assembly)
                         )
-                    ) {
+                    )
+                    {
                         var reader = metadata.MetadataReader;
                         var typeDef = reader.GetTypeDef("<>x");
                         var methodHandle = reader.GetMethodDefHandle(typeDef, "<>m0");

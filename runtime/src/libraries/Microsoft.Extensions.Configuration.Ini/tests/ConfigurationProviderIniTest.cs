@@ -12,7 +12,8 @@ namespace Microsoft.Extensions.Configuration.Ini.Test
     {
         protected override (IConfigurationProvider Provider, Action Initializer) LoadThroughProvider(
             TestSection testConfig
-        ) {
+        )
+        {
             var iniBuilder = new StringBuilder();
             SectionToIni(iniBuilder, "", testConfig);
 

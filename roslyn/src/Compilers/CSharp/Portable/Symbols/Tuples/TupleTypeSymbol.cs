@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ImmutableArray<bool> errorPositions,
             CSharpSyntaxNode? syntax = null,
             BindingDiagnosticBag? diagnostics = null
-        ) {
+        )
+        {
             Debug.Assert(!shouldCheckConstraints || syntax is object);
             Debug.Assert(
                 elementNames.IsDefault || elementTypesWithAnnotations.Length == elementNames.Length
@@ -61,7 +62,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 numElements >= ValueTupleRestPosition
                 && diagnostics != null
                 && !underlyingType.IsErrorType()
-            ) {
+            )
+            {
                 WellKnownMember wellKnownTupleRest = GetTupleTypeMember(
                     ValueTupleRestPosition,
                     ValueTupleRestPosition
@@ -77,7 +79,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (
                 diagnostics?.DiagnosticBag is object
                 && ((SourceModuleSymbol)compilation.SourceModule).AnyReferencedAssembliesAreLinked
-            ) {
+            )
+            {
                 // Complain about unembeddable types from linked assemblies.
                 Emit.NoPia.EmbeddedTypesManager.IsValidEmbeddableType(
                     underlyingType,
@@ -122,7 +125,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 CSharpSyntaxNode? syntax,
                 CSharpCompilation compilation,
                 BindingDiagnosticBag? diagnostics
-            ) {
+            )
+            {
                 int numElements = elementTypes.Length;
                 int remainder;
                 int chainLength = NumberOfValueTuples(numElements, out remainder);
@@ -157,7 +161,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ImmutableArray<bool> errorPositions = default,
             ImmutableArray<Location?> elementLocations = default,
             ImmutableArray<Location> locations = default
-        ) {
+        )
+        {
             Debug.Assert(tupleCompatibleType.IsTupleType);
             return tupleCompatibleType.WithElementNames(
                 elementNames,
@@ -173,7 +178,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 !IsTupleType
                 || (original._lazyTupleData == null && this._lazyTupleData == null)
                 || TupleData!.EqualsIgnoringTupleUnderlyingType(original.TupleData)
-            ) {
+            )
+            {
                 return this;
             }
 
@@ -195,7 +201,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         internal NamedTypeSymbol WithElementTypes(
             ImmutableArray<TypeWithAnnotations> newElementTypes
-        ) {
+        )
+        {
             Debug.Assert(TupleElementTypesWithAnnotations.Length == newElementTypes.Length);
             Debug.Assert(newElementTypes.All(t => t.HasType));
 
@@ -240,7 +247,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ImmutableArray<Location?> newElementLocations,
             ImmutableArray<bool> errorPositions,
             ImmutableArray<Location> locations
-        ) {
+        )
+        {
             Debug.Assert(IsTupleType);
             Debug.Assert(
                 newElementNames.IsDefault
@@ -294,7 +302,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal static void GetUnderlyingTypeChain(
             NamedTypeSymbol underlyingTupleType,
             ArrayBuilder<NamedTypeSymbol> underlyingTupleTypeChain
-        ) {
+        )
+        {
             NamedTypeSymbol currentType = underlyingTupleType;
 
             while (true)
@@ -328,7 +337,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             NamedTypeSymbol firstTupleType,
             NamedTypeSymbol? chainedTupleTypeOpt,
             ImmutableArray<TypeWithAnnotations> elementTypes
-        ) {
+        )
+        {
             Debug.Assert(
                 chainedTupleTypeOpt is null == elementTypes.Length < ValueTupleRestPosition
             );
@@ -364,7 +374,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             CSharpSyntaxNode? syntax,
             BindingDiagnosticBag diagnostics,
             NamedTypeSymbol firstTupleType
-        ) {
+        )
+        {
             Binder.ReportUseSite(firstTupleType, diagnostics, syntax);
             Binder.ReportDiagnosticsIfObsoleteInternal(
                 diagnostics,
@@ -383,7 +394,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             CSharpSyntaxNode? syntax,
             CSharpCompilation compilation,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             RoslynDebug.Assert(diagnostics is object && syntax is object);
 
             int remainder;
@@ -405,7 +417,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             TypeSymbol destination,
             BoundTupleLiteral literal,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var sourceNames = literal.ArgumentNamesOpt;
             if (sourceNames.IsDefault)
             {
@@ -428,7 +441,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     sourceName != null
                     && !wasInferred
                     && (allMissing || string.CompareOrdinal(destinationNames[i], sourceName) != 0)
-                ) {
+                )
+                {
                     diagnostics.Add(
                         ErrorCode.WRN_TupleLiteralNameMismatch,
                         literal.Arguments[i].Syntax.Parent!.Location,
@@ -625,7 +639,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 TupleMemberName(number),
                                 StringComparison.Ordinal
                             )
-                        ) {
+                        )
+                        {
                             return number;
                         }
                     }
@@ -643,7 +658,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             WellKnownMember relativeMember,
             BindingDiagnosticBag diagnostics,
             SyntaxNode? syntax
-        ) {
+        )
+        {
             Symbol? member = GetWellKnownMemberInType(type, relativeMember);
 
             if (member is null)
@@ -683,7 +699,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             static Symbol? GetWellKnownMemberInType(
                 NamedTypeSymbol type,
                 WellKnownMember relativeMember
-            ) {
+            )
+            {
                 Debug.Assert(
                     relativeMember >= WellKnownMember.System_ValueTuple_T1__Item1
                         && relativeMember <= WellKnownMember.System_ValueTuple_TRest__ctor
@@ -909,7 +926,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                                 if (
                                     defaultImplicitlyDeclared && !string.IsNullOrEmpty(providedName)
-                                ) {
+                                )
+                                {
                                     var errorPositions = TupleErrorPositions;
                                     var isError = errorPositions.IsDefault
                                         ? false
@@ -1072,7 +1090,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             static NamedTypeSymbol getNestedTupleUnderlyingType(
                 NamedTypeSymbol topLevelUnderlyingType,
                 int depth
-            ) {
+            )
+            {
                 NamedTypeSymbol found = topLevelUnderlyingType;
                 for (int i = 0; i < depth; i++)
                 {
@@ -1088,7 +1107,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 int arity,
                 ImmutableArray<Symbol> members,
                 ArrayBuilder<FieldSymbol?> fieldsForElements
-            ) {
+            )
+            {
                 int fieldsPerType = Math.Min(arity, ValueTupleRestPosition - 1);
 
                 for (int i = 0; i < fieldsPerType; i++)
@@ -1103,7 +1123,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             static Symbol? GetWellKnownMemberInType(
                 ImmutableArray<Symbol> members,
                 WellKnownMember relativeMember
-            ) {
+            )
+            {
                 Debug.Assert(
                     relativeMember >= WellKnownMember.System_ValueTuple_T1__Item1
                         && relativeMember <= WellKnownMember.System_ValueTuple_TRest__ctor
@@ -1146,7 +1167,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             static ImmutableArray<Location> getElementLocations(
                 in ImmutableArray<Location?> elementLocations,
                 int tupleFieldIndex
-            ) {
+            )
+            {
                 if (elementLocations.IsDefault)
                 {
                     return ImmutableArray<Location>.Empty;
@@ -1274,7 +1296,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     && this.ElementNames.IsDefault
                     && this.ElementLocations.IsDefault
                     && this.ErrorPositions.IsDefault
-                ) {
+                )
+                {
                     return true;
                 }
 
@@ -1301,7 +1324,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             public ImmutableArray<TypeWithAnnotations> TupleElementTypesWithAnnotations(
                 NamedTypeSymbol tuple
-            ) {
+            )
+            {
                 Debug.Assert(tuple.Equals(TupleUnderlyingType, TypeCompareKind.IgnoreTupleNames));
                 if (_lazyElementTypes.IsDefault)
                 {
@@ -1315,7 +1339,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 static ImmutableArray<TypeWithAnnotations> collectTupleElementTypesWithAnnotations(
                     NamedTypeSymbol tuple
-                ) {
+                )
+                {
                     ImmutableArray<TypeWithAnnotations> elementTypes;
 
                     if (tuple.Arity == ValueTupleRestPosition)
@@ -1397,7 +1422,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             internal SmallDictionary<FieldSymbol, int> GetFieldDefinitionsToIndexMap(
                 NamedTypeSymbol tuple
-            ) {
+            )
+            {
                 Debug.Assert(tuple.IsTupleType);
                 Debug.Assert(tuple.IsDefinition); // we only store a map for definitions
                 if (_lazyFieldDefinitionsToIndexMap is null)
@@ -1506,13 +1532,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         TupleUnderlyingType.OriginalDefinition,
                         TypeCompareKind.ConsiderEverything
                     )
-                ) {
+                )
+                {
                     if (
                         UnderlyingDefinitionToMemberMap.TryGetValue(
                             underlyingMemberDefinition,
                             out Symbol? result
                         )
-                    ) {
+                    )
+                    {
                         return (TMember)result;
                     }
                 }

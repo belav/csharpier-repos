@@ -333,7 +333,8 @@ namespace System.Net.Test.Common
                 int i = 0;
                 i < s_decodingTable.Length && s_decodingTable[i].codeLength <= validBits;
                 i++
-            ) {
+            )
+            {
                 (int codeLength, int[] codes) = s_decodingTable[i];
 
                 if (i > 0)

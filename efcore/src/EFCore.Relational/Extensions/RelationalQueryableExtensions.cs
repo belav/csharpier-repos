@@ -51,7 +51,8 @@ namespace Microsoft.EntityFrameworkCore
             if (
                 source.Provider.Execute<IEnumerable>(source.Expression)
                 is IRelationalQueryingEnumerable queryingEnumerable
-            ) {
+            )
+            {
                 return queryingEnumerable.CreateDbCommand();
             }
 
@@ -149,14 +150,16 @@ namespace Microsoft.EntityFrameworkCore
             string sql,
             object?[] arguments,
             [CallerMemberName] string memberName = null!
-        ) {
+        )
+        {
             var queryRootExpression = (QueryRootExpression)source.Expression;
 
             var entityType = queryRootExpression.EntityType;
             if (
                 (entityType.BaseType != null || entityType.GetDirectlyDerivedTypes().Any())
                 && entityType.FindDiscriminatorProperty() == null
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     RelationalStrings.MethodOnNonTPHRootNotSupported(
                         memberName,

@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static IEnumerable<SyntaxNode> GetAncestors(
             this SyntaxToken token,
             Func<SyntaxNode, bool> predicate
-        ) {
+        )
+        {
             return token.Parent != null
               ? token.Parent.AncestorsAndSelf().Where(predicate)
               : SpecializedCollections.EmptyEnumerable<SyntaxNode>();
@@ -70,7 +71,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             int position,
             bool includeZeroWidth = true,
             bool findInsideTrivia = false
-        ) {
+        )
+        {
             var token = root.FindToken(position, findInsideTrivia);
             var previousToken = token.GetPreviousToken(
                 includeZeroWidth,
@@ -83,7 +85,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 token.SpanStart == position
                 && previousToken.RawKind != 0
                 && previousToken.Span.End == position
-            ) {
+            )
+            {
                 return previousToken;
             }
 
@@ -96,7 +99,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             bool includeSkipped = false,
             bool includeDirectives = false,
             bool includeDocumentationComments = false
-        ) {
+        )
+        {
             var nextToken = token.GetNextToken(
                 includeZeroWidth,
                 includeSkipped,
@@ -132,7 +136,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static SyntaxToken WithPrependedLeadingTrivia(
             this SyntaxToken token,
             params SyntaxTrivia[] trivia
-        ) {
+        )
+        {
             if (trivia.Length == 0)
             {
                 return token;
@@ -144,7 +149,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static SyntaxToken WithPrependedLeadingTrivia(
             this SyntaxToken token,
             SyntaxTriviaList trivia
-        ) {
+        )
+        {
             if (trivia.Count == 0)
             {
                 return token;
@@ -156,7 +162,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static SyntaxToken WithPrependedLeadingTrivia(
             this SyntaxToken token,
             IEnumerable<SyntaxTrivia> trivia
-        ) {
+        )
+        {
             var list = new SyntaxTriviaList();
             list = list.AddRange(trivia);
 
@@ -166,14 +173,16 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static SyntaxToken WithAppendedTrailingTrivia(
             this SyntaxToken token,
             params SyntaxTrivia[] trivia
-        ) {
+        )
+        {
             return token.WithAppendedTrailingTrivia((IEnumerable<SyntaxTrivia>)trivia);
         }
 
         public static SyntaxToken WithAppendedTrailingTrivia(
             this SyntaxToken token,
             IEnumerable<SyntaxTrivia> trivia
-        ) {
+        )
+        {
             return token.WithTrailingTrivia(token.TrailingTrivia.Concat(trivia));
         }
 

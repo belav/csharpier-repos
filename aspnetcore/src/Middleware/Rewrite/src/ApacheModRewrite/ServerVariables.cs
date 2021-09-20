@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Rewrite.ApacheModRewrite
         public static PatternSegment FindServerVariable(
             string serverVariable,
             ParserContext context
-        ) {
+        )
+        {
             switch (serverVariable)
             {
                 case "HTTP_ACCEPT":

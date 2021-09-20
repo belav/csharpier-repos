@@ -37,7 +37,8 @@ namespace System.DirectoryServices.AccountManagement.Tests
                     DomainContext,
                     "TestLargeGroup"
                 )
-            ) {
+            )
+            {
                 Assert.True(
                     UserPrincipal.FindByIdentity(DomainContext, "user1499-LargeGroup")
                         .IsMemberOf(group)

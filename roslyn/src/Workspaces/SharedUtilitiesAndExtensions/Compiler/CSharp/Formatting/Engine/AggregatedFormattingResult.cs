@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
         protected override SyntaxNode Rewriter(
             Dictionary<ValueTuple<SyntaxToken, SyntaxToken>, TriviaData> map,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var rewriter = new TriviaRewriter(
                 this.Node,
                 GetFormattingSpans(),

@@ -45,7 +45,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
 
         private static IReadOnlyList<IModelBinder> GetParameterBinders(
             ModelBinderProviderContext context
-        ) {
+        )
+        {
             var boundConstructor = context.Metadata.BoundConstructor;
             if (boundConstructor is null)
             {

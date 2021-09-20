@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
             IModelMetadataProvider modelMetadataProvider,
             ControllerActionDescriptor actionDescriptor,
             MvcOptions mvcOptions
-        ) {
+        )
+        {
             if (parameterBinder == null)
             {
                 throw new ArgumentNullException(nameof(parameterBinder));
@@ -80,7 +81,8 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
                 ControllerContext controllerContext,
                 object controller,
                 Dictionary<string, object?> arguments
-            ) {
+            )
+            {
                 var (success, valueProvider) = await CompositeValueProvider.TryCreateAsync(
                     controllerContext,
                     controllerContext.ValueProviderFactories
@@ -156,7 +158,8 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
             IModelBinderFactory modelBinderFactory,
             IModelMetadataProvider modelMetadataProvider,
             ControllerActionDescriptor actionDescriptor
-        ) {
+        )
+        {
             var parameters = actionDescriptor.Parameters;
             if (parameters.Count == 0)
             {
@@ -172,7 +175,8 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
                 if (
                     modelMetadataProvider is ModelMetadataProvider modelMetadataProviderBase
                     && parameter is ControllerParameterDescriptor controllerParameterDescriptor
-                ) {
+                )
+                {
                     // The default model metadata provider derives from ModelMetadataProvider
                     // and can therefore supply information about attributes applied to parameters.
                     metadata = modelMetadataProviderBase.GetMetadataForParameter(
@@ -207,7 +211,8 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
             IModelBinderFactory modelBinderFactory,
             IModelMetadataProvider modelMetadataProvider,
             ControllerActionDescriptor actionDescriptor
-        ) {
+        )
+        {
             var properties = actionDescriptor.BoundProperties;
             if (properties.Count == 0)
             {

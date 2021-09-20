@@ -236,7 +236,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.CodeActions
             CodeActionsCache cache,
             LSP.Location caretLocation,
             Document document
-        ) {
+        )
+        {
             await RunGetCodeActionsAsync(testLspServer, caretLocation);
             var cacheResults = await cache.GetActionSetsAsync(
                 document,
@@ -250,7 +251,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.CodeActions
             LSP.Range range,
             Document document,
             (Document Document, LSP.Range Range) actualDocAndRange
-        ) {
+        )
+        {
             Assert.Equal(document, actualDocAndRange.Document);
             Assert.Equal(range.Start, actualDocAndRange.Range.Start);
             Assert.Equal(range.End, actualDocAndRange.Range.End);
@@ -260,7 +262,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.CodeActions
             TestLspServer testLspServer,
             LSP.Location caret,
             LSP.ClientCapabilities clientCapabilities = null
-        ) {
+        )
+        {
             var result = await testLspServer.ExecuteRequestAsync<
                 LSP.CodeActionParams,
                 LSP.VSCodeAction[]
@@ -297,7 +300,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.CodeActions
             LSP.Range applicableRange,
             LSP.WorkspaceEdit edit = null,
             LSP.Command command = null
-        ) {
+        )
+        {
             var action = new LSP.VSCodeAction
             {
                 Title = title,
@@ -330,7 +334,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.CodeActions
         private static Document GetDocument(
             Workspace workspace,
             LSP.TextDocumentIdentifier textDocument
-        ) {
+        )
+        {
             return workspace.CurrentSolution.GetDocument(textDocument);
         }
     }

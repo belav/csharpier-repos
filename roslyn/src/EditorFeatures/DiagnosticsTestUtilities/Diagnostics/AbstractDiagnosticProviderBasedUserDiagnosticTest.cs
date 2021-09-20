@@ -35,9 +35,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             (DiagnosticAnalyzer, CodeFixProvider)
         > _analyzerAndFixerMap = new();
 
-        protected AbstractDiagnosticProviderBasedUserDiagnosticTest(
-            ITestOutputHelper logger
-        ) : base(logger) { }
+        protected AbstractDiagnosticProviderBasedUserDiagnosticTest(ITestOutputHelper logger)
+            : base(logger) { }
 
         internal abstract (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace
@@ -51,7 +50,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
         private (DiagnosticAnalyzer, CodeFixProvider) GetOrCreateDiagnosticProviderAndFixer(
             Workspace workspace,
             TestParameters parameters
-        ) {
+        )
+        {
             return parameters.fixProviderData == null
               ? _analyzerAndFixerMap.GetOrAdd(workspace, CreateDiagnosticProviderAndFixer)
               : CreateDiagnosticProviderAndFixer(workspace, parameters);
@@ -59,13 +59,15 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
 
         internal virtual bool ShouldSkipMessageDescriptionVerification(
             DiagnosticDescriptor descriptor
-        ) {
+        )
+        {
             if (descriptor.CustomTags.Contains(WellKnownDiagnosticTags.NotConfigurable))
             {
                 if (
                     !descriptor.IsEnabledByDefault
                     || descriptor.DefaultSeverity == DiagnosticSeverity.Hidden
-                ) {
+                )
+                {
                     // The message only displayed if either enabled and not hidden, or configurable
                     return true;
                 }
@@ -141,7 +143,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
         internal override async Task<IEnumerable<Diagnostic>> GetDiagnosticsAsync(
             TestWorkspace workspace,
             TestParameters parameters
-        ) {
+        )
+        {
             var (analyzer, _) = GetOrCreateDiagnosticProviderAndFixer(workspace, parameters);
             AddAnalyzerToWorkspace(workspace, analyzer, parameters);
 
@@ -158,7 +161,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
         internal override async Task<(ImmutableArray<Diagnostic>, ImmutableArray<CodeAction>, CodeAction actionToInvoke)> GetDiagnosticAndFixesAsync(
             TestWorkspace workspace,
             TestParameters parameters
-        ) {
+        )
+        {
             var (analyzer, fixer) = GetOrCreateDiagnosticProviderAndFixer(workspace, parameters);
             AddAnalyzerToWorkspace(workspace, analyzer, parameters);
 
@@ -209,7 +213,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             string diagnosticId,
             DiagnosticSeverity diagnosticSeverity,
             LocalizableString diagnosticMessage = null
-        ) {
+        )
+        {
             await TestDiagnosticInfoAsync(
                 initialMarkup,
                 null,
@@ -238,7 +243,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             string diagnosticId,
             DiagnosticSeverity diagnosticSeverity,
             LocalizableString diagnosticMessage = null
-        ) {
+        )
+        {
             var testOptions = new TestParameters(parseOptions, compilationOptions, options);
             using (var workspace = CreateWorkspaceFromOptions(initialMarkup, testOptions))
             {

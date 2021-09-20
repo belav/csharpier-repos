@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         private static void CheckCompilationSyntaxTrees(
             CSharpCompilation compilation,
             params SyntaxTree[] expectedSyntaxTrees
-        ) {
+        )
+        {
             ImmutableArray<SyntaxTree> actualSyntaxTrees = compilation.SyntaxTrees;
 
             int numTrees = expectedSyntaxTrees.Length;
@@ -108,7 +109,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     i == (int)SpecialType.System_Runtime_CompilerServices_RuntimeFeature
                     || i
                         == (int)SpecialType.System_Runtime_CompilerServices_PreserveBaseOverridesAttribute
-                ) {
+                )
+                {
                     Assert.True(type.IsErrorType()); // Not available
                 }
                 else
@@ -4312,7 +4314,8 @@ class Module1
                 string reference,
                 string baseFilePath,
                 MetadataReferenceProperties properties
-            ) {
+            )
+            {
                 switch (reference)
                 {
                     case "System.Data":
@@ -4450,7 +4453,8 @@ System.Diagnostics.Process.GetCurrentProcess();
                 string reference,
                 string baseFilePath,
                 MetadataReferenceProperties properties
-            ) {
+            )
+            {
                 var path = reference.EndsWith("-resolve", StringComparison.Ordinal)
                     ? _targetDll
                     : reference;

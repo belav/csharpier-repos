@@ -953,7 +953,8 @@ namespace System.Net.Http.Headers
                 if (
                     candidate != null
                     && ByteArrayHelpers.EqualsOrdinalAsciiIgnoreCase(candidate.Name, name)
-                ) {
+                )
+                {
                     return candidate;
                 }
             }

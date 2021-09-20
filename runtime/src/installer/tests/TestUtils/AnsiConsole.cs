@@ -84,7 +84,8 @@ namespace Microsoft.DotNet.Cli.Build.Framework
                         endIndex != message.Length
                         && message[endIndex] >= 0x20
                         && message[endIndex] <= 0x3f
-                    ) {
+                    )
+                    {
                         endIndex += 1;
                     }
 
@@ -104,7 +105,8 @@ namespace Microsoft.DotNet.Cli.Build.Framework
                                     message.Substring(startIndex, endIndex - startIndex),
                                     out value
                                 )
-                            ) {
+                            )
+                            {
                                 switch (value)
                                 {
                                     case 1:

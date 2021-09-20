@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Rewrite.ApacheModRewrite
             ConditionType conditionType,
             OperationType operationType,
             string? operand
-        ) {
+        )
+        {
             Invert = invert;
             ConditionType = conditionType;
             OperationType = operationType;

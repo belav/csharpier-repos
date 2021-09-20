@@ -33,22 +33,24 @@ namespace Microsoft.CodeAnalysis.CSharp
             MethodSymbol originalMethod,
             SyntaxReference blockSyntax,
             DebugId lambdaId
-        ) : base(
-            containingType,
-            originalMethod,
-            blockSyntax,
-            originalMethod.DeclaringSyntaxReferences[0].GetLocation(),
-            originalMethod is LocalFunctionSymbol
-              ? MakeName(
-                    topLevelMethod.Name,
-                    originalMethod.Name,
-                    topLevelMethodId,
-                    closureKind,
-                    lambdaId
-                )
-              : MakeName(topLevelMethod.Name, topLevelMethodId, closureKind, lambdaId),
-            MakeDeclarationModifiers(closureKind, originalMethod)
-        ) {
+        )
+            : base(
+                containingType,
+                originalMethod,
+                blockSyntax,
+                originalMethod.DeclaringSyntaxReferences[0].GetLocation(),
+                originalMethod is LocalFunctionSymbol
+                  ? MakeName(
+                        topLevelMethod.Name,
+                        originalMethod.Name,
+                        topLevelMethodId,
+                        closureKind,
+                        lambdaId
+                    )
+                  : MakeName(topLevelMethod.Name, topLevelMethodId, closureKind, lambdaId),
+                MakeDeclarationModifiers(closureKind, originalMethod)
+            )
+        {
             TopLevelMethod = topLevelMethod;
             ClosureKind = closureKind;
             LambdaId = lambdaId;
@@ -121,7 +123,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static DeclarationModifiers MakeDeclarationModifiers(
             ClosureKind closureKind,
             MethodSymbol originalMethod
-        ) {
+        )
+        {
             var mods =
                 closureKind == ClosureKind.ThisOnly
                     ? DeclarationModifiers.Private
@@ -151,7 +154,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             DebugId topLevelMethodId,
             ClosureKind closureKind,
             DebugId lambdaId
-        ) {
+        )
+        {
             return GeneratedNames.MakeLocalFunctionName(
                 topLevelMethodName,
                 localFunctionName,
@@ -167,7 +171,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             DebugId topLevelMethodId,
             ClosureKind closureKind,
             DebugId lambdaId
-        ) {
+        )
+        {
             // Lambda method name must contain the declaring method ordinal to be unique unless the method is emitted into a closure class exclusive to the declaring method.
             // Lambdas that only close over "this" are emitted directly into the top-level method containing type.
             // Lambdas that don't close over anything (static) are emitted into a shared closure singleton.

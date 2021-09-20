@@ -107,7 +107,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <returns> The same builder instance so that multiple calls can be chained. </returns>
         public virtual WarningsConfigurationBuilder Log(
             params (EventId Id, LogLevel Level)[] eventsAndLevels
-        ) {
+        )
+        {
             Check.NotNull(eventsAndLevels, nameof(eventsAndLevels));
 
             return WithOption(e => e.WithExplicit(eventsAndLevels));
@@ -136,7 +137,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
 
         private WarningsConfigurationBuilder WithOption(
             Func<WarningsConfiguration, WarningsConfiguration> withFunc
-        ) {
+        )
+        {
             var coreOptionsExtension =
                 _optionsBuilder.Options.FindExtension<CoreOptionsExtension>()
                 ?? new CoreOptionsExtension();

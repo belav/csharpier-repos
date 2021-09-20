@@ -47,7 +47,8 @@ namespace Microsoft.AspNetCore.Testing
             ITestFrameworkDiscoveryOptions discoveryOptions,
             ITestMethod testMethod,
             IAttributeInfo theoryAttribute
-        ) {
+        )
+        {
             var skipReason = testMethod.EvaluateSkipConditions();
             return skipReason != null
               ? new[]
@@ -68,7 +69,8 @@ namespace Microsoft.AspNetCore.Testing
             ITestMethod testMethod,
             IAttributeInfo theoryAttribute,
             object[] dataRow
-        ) {
+        )
+        {
             var skipReason = testMethod.EvaluateSkipConditions();
             if (skipReason == null && dataRow?.Length > 0)
             {
@@ -106,7 +108,8 @@ namespace Microsoft.AspNetCore.Testing
             IAttributeInfo theoryAttribute,
             object[] dataRow,
             string skipReason
-        ) {
+        )
+        {
             return new[]
             {
                 new WORKAROUND_SkippedDataRowTestCase(
@@ -127,7 +130,8 @@ namespace Microsoft.AspNetCore.Testing
             IAttributeInfo theoryAttribute,
             object[] dataRow,
             string skipReason
-        ) {
+        )
+        {
             return new WORKAROUND_SkippedDataRowTestCase(
                 DiagnosticMessageSink,
                 discoveryOptions.MethodDisplayOrDefault(),

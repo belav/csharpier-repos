@@ -85,7 +85,8 @@ namespace System.Web.WebPages
             Assembly assembly,
             string baseVirtualPath,
             string virtualPath
-        ) {
+        )
+        {
             if (_partRegistry == null)
             {
                 // This was called without registering a part.
@@ -151,7 +152,8 @@ namespace System.Web.WebPages
             string applicationRoot,
             string baseVirtualPath,
             string virtualPath
-        ) {
+        )
+        {
             // If it starts with @/, replace that with the package root
             // e.g. @/Sub Folder/foo.jpg ==> ~/admin/Debugger/Sub Folder/foo.jpg
             if (virtualPath.StartsWith(ModuleRootSyntax, StringComparison.OrdinalIgnoreCase))
@@ -228,7 +230,8 @@ namespace System.Web.WebPages
             string moduleName,
             string moduleRoot,
             string virtualPath
-        ) {
+        )
+        {
             // The path should always start with the root of the module. Skip it.
             Debug.Assert(virtualPath.StartsWith(moduleRoot, StringComparison.OrdinalIgnoreCase));
             virtualPath = virtualPath.Substring(moduleRoot.Length).TrimStart('/');

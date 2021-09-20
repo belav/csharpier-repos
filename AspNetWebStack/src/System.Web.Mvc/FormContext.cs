@@ -58,7 +58,8 @@ namespace System.Web.Mvc
         public FieldValidationMetadata GetValidationMetadataForField(
             string fieldName,
             bool createIfNotFound
-        ) {
+        )
+        {
             if (String.IsNullOrEmpty(fieldName))
             {
                 throw Error.ParameterCannotBeNullOrEmpty("fieldName");

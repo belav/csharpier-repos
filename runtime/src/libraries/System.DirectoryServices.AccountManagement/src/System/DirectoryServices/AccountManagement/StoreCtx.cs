@@ -365,7 +365,8 @@ namespace System.DirectoryServices.AccountManagement
                 if (
                     p.GetChangeStatusForProperty(PropertyNames.AcctInfoExpirationDate)
                     && p.GetChangeStatusForProperty(PropertyNames.AcctInfoExpiredAccount)
-                ) {
+                )
+                {
                     throw new InvalidOperationException(
                         SR.Format(
                             SR.StoreCtxMultipleFiltersForPropertyUnsupported,
@@ -394,7 +395,8 @@ namespace System.DirectoryServices.AccountManagement
             Principal p,
             string[] propertySet,
             QbeFilterDescription qbeFilterDescription
-        ) {
+        )
+        {
             foreach (string propertyName in propertySet)
             {
                 if (p.GetChangeStatusForProperty(propertyName))

@@ -20,7 +20,8 @@ namespace System.Data
             DataSet dataSet,
             bool preserveChanges,
             MissingSchemaAction missingSchemaAction
-        ) {
+        )
+        {
             _dataSet = dataSet;
             _preserveChanges = preserveChanges;
 
@@ -35,7 +36,8 @@ namespace System.Data
             DataTable dataTable,
             bool preserveChanges,
             MissingSchemaAction missingSchemaAction
-        ) {
+        )
+        {
             _isStandAlonetable = true;
             _dataTable = dataTable;
             _preserveChanges = preserveChanges;
@@ -164,7 +166,8 @@ namespace System.Data
                     _dataTable!.DataSet == null
                     || src.DataSet == null
                     || src.DataSet._namespaceURI != _dataTable.DataSet._namespaceURI
-                ) {
+                )
+                {
                     _IgnoreNSforTableLookup = true;
                 }
             }
@@ -338,7 +341,8 @@ namespace System.Data
                 if (
                     targetRow.Table._dependentColumns != null
                     && targetRow.Table._dependentColumns.Count > 0
-                ) {
+                )
+                {
                     targetRow.Table.EvaluateExpressions(targetRow, DataRowAction.Change, null);
                 }
             }
@@ -446,7 +450,8 @@ namespace System.Data
                                         != DataSetDateTime.Unspecified
                                     )
                                 )
-                            ) {
+                            )
+                            {
                                 if (!_isStandAlonetable)
                                     _dataSet!.RaiseMergeFailed(
                                         targetTable,
@@ -512,7 +517,8 @@ namespace System.Data
                                     false,
                                     targetTable.Locale
                                 ) != 0
-                            ) {
+                            )
+                            {
                                 _dataSet!.RaiseMergeFailed(
                                     table,
                                     SR.Format(
@@ -644,7 +650,8 @@ namespace System.Data
                 if (
                     relation.ParentKey.ColumnsReference.Length
                     != destRelation.ParentKey.ColumnsReference.Length
-                ) {
+                )
+                {
                     _dataSet.RaiseMergeFailed(
                         null,
                         SR.Format(SR.DataMerge_MissingDefinition, relation.RelationName),
@@ -664,7 +671,8 @@ namespace System.Data
                             false,
                             dest.Table!.Locale
                         )
-                    ) {
+                    )
+                    {
                         _dataSet.RaiseMergeFailed(
                             null,
                             SR.Format(
@@ -686,7 +694,8 @@ namespace System.Data
                             false,
                             dest.Table!.Locale
                         )
-                    ) {
+                    )
+                    {
                         _dataSet.RaiseMergeFailed(
                             null,
                             SR.Format(

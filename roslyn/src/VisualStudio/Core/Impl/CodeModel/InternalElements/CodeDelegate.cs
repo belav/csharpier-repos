@@ -24,7 +24,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             FileCodeModel fileCodeModel,
             SyntaxNodeKey nodeKey,
             int? nodeKind
-        ) {
+        )
+        {
             var element = new CodeDelegate(state, fileCodeModel, nodeKey, nodeKind);
             var result = (EnvDTE.CodeDelegate)ComAggregate.CreateAggregatedObject(element);
 
@@ -38,7 +39,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             FileCodeModel fileCodeModel,
             int nodeKind,
             string name
-        ) {
+        )
+        {
             var element = new CodeDelegate(state, fileCodeModel, nodeKind, name);
             return (EnvDTE.CodeDelegate)ComAggregate.CreateAggregatedObject(element);
         }

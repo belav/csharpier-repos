@@ -21,11 +21,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public ViewColumnMapping(
-            IProperty property,
-            ViewColumn column,
-            ViewMapping viewMapping
-        ) : base(property, column, viewMapping) { }
+        public ViewColumnMapping(IProperty property, ViewColumn column, ViewMapping viewMapping)
+            : base(property, column, viewMapping) { }
 
         /// <inheritdoc />
         public virtual IViewMapping ViewMapping => (IViewMapping)TableMapping;

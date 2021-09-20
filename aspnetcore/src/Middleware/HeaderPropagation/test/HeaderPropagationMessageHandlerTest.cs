@@ -208,7 +208,8 @@ namespace Microsoft.AspNetCore.HeaderPropagation.Tests
         public async Task HeaderInState_HeaderAlreadyInOutgoingRequest_DoesNotOverrideIt(
             string outgoingValue,
             string[] expectedValues
-        ) {
+        )
+        {
             // Arrange
             State.Headers.Add("inout", "test");
             Configuration.Headers.Add("inout");
@@ -283,7 +284,8 @@ namespace Microsoft.AspNetCore.HeaderPropagation.Tests
             protected override Task<HttpResponseMessage> SendAsync(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Headers = request.Headers;
                 Content = request.Content;
                 return Task.FromResult(new HttpResponseMessage());

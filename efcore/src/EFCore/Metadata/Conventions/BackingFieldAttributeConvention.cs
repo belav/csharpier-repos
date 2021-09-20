@@ -34,7 +34,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             BackingFieldAttribute attribute,
             MemberInfo clrMember,
             IConventionContext context
-        ) {
+        )
+        {
             propertyBuilder.HasField(attribute.Name, fromDataAnnotation: true);
         }
     }

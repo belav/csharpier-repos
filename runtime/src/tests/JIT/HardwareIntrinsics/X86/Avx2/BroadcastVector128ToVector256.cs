@@ -26,7 +26,8 @@ namespace IntelHardwareIntrinsicTest
                         new int[8] { 1, -5, 100, 0, 1, 2, 3, 4 },
                         new int[8]
                     )
-                ) {
+                )
+                {
                     var vf = Avx2.BroadcastVector128ToVector256((int*)(intTable.inArrayPtr));
                     Unsafe.Write(intTable.outArrayPtr, vf);
 
@@ -47,7 +48,8 @@ namespace IntelHardwareIntrinsicTest
                         new uint[8] { 1, 5, 100, 0, 1, 2, 3, 4 },
                         new uint[8]
                     )
-                ) {
+                )
+                {
                     var vf = Avx2.BroadcastVector128ToVector256((uint*)(uintTable.inArrayPtr));
                     Unsafe.Write(uintTable.outArrayPtr, vf);
 
@@ -68,7 +70,8 @@ namespace IntelHardwareIntrinsicTest
                         new long[4] { 1, -5, 100, 0 },
                         new long[4]
                     )
-                ) {
+                )
+                {
                     var vf = Avx2.BroadcastVector128ToVector256((long*)(longTable.inArrayPtr));
                     Unsafe.Write(longTable.outArrayPtr, vf);
 
@@ -89,7 +92,8 @@ namespace IntelHardwareIntrinsicTest
                         new ulong[4] { 1, 5, 100, 0 },
                         new ulong[4]
                     )
-                ) {
+                )
+                {
                     var vf = Avx2.BroadcastVector128ToVector256((ulong*)(ulongTable.inArrayPtr));
                     Unsafe.Write(ulongTable.outArrayPtr, vf);
 

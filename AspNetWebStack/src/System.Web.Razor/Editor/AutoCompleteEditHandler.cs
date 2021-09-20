@@ -36,7 +36,8 @@ namespace System.Web.Razor.Parser.SyntaxTree
         protected override PartialParseResult CanAcceptChange(
             Span target,
             TextChange normalizedChange
-        ) {
+        )
+        {
             if (
                 (
                     (AutoCompleteAtEndOfSpan && IsAtEndOfSpan(target, normalizedChange))
@@ -45,7 +46,8 @@ namespace System.Web.Razor.Parser.SyntaxTree
                 && normalizedChange.IsInsert
                 && ParserHelpers.IsNewLine(normalizedChange.NewText)
                 && AutoCompleteString != null
-            ) {
+            )
+            {
                 return PartialParseResult.Rejected | PartialParseResult.AutoCompleteBlock;
             }
             return PartialParseResult.Rejected;

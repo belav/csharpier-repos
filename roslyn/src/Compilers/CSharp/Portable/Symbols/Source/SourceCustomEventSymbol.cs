@@ -28,15 +28,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Binder binder,
             EventDeclarationSyntax syntax,
             BindingDiagnosticBag diagnostics
-        ) : base(
-            containingType,
-            syntax,
-            syntax.Modifiers,
-            isFieldLike: false,
-            interfaceSpecifierSyntaxOpt: syntax.ExplicitInterfaceSpecifier,
-            nameTokenSyntax: syntax.Identifier,
-            diagnostics: diagnostics
-        ) {
+        )
+            : base(
+                containingType,
+                syntax,
+                syntax.Modifiers,
+                isFieldLike: false,
+                interfaceSpecifierSyntaxOpt: syntax.ExplicitInterfaceSpecifier,
+                nameTokenSyntax: syntax.Identifier,
+                diagnostics: diagnostics
+            )
+        {
             ExplicitInterfaceSpecifierSyntax? interfaceSpecifier =
                 syntax.ExplicitInterfaceSpecifier;
             SyntaxToken nameToken = syntax.Identifier;
@@ -161,7 +163,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         && accessor.Body == null
                         && accessor.ExpressionBody == null
                         && accessor.SemicolonToken.Kind() == SyntaxKind.SemicolonToken
-                    ) {
+                    )
+                    {
                         diagnostics.Add(
                             ErrorCode.ERR_AddRemoveMustHaveBody,
                             accessor.SemicolonToken.GetLocation()
@@ -186,7 +189,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         !syntax.AccessorList.OpenBraceToken.IsMissing
                         || !isExplicitInterfaceImplementation
                     )
-                ) {
+                )
+                {
                     diagnostics.Add(ErrorCode.ERR_EventNeedsBothAccessors, this.Locations[0], this);
                 }
             }
@@ -297,7 +301,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void AfterAddingTypeMembersChecks(
             ConversionsBase conversions,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             base.AfterAddingTypeMembersChecks(conversions, diagnostics);
 
             if ((object)_explicitInterfaceType != null)
@@ -333,7 +338,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             EventSymbol? explicitlyImplementedEventOpt,
             string? aliasQualifierOpt,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             if (syntaxOpt == null)
             {
                 return null;

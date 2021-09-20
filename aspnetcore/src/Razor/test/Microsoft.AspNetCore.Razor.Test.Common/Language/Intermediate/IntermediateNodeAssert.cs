@@ -47,7 +47,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
         public static void Children(
             IntermediateNode node,
             params Action<IntermediateNode>[] validators
-        ) {
+        )
+        {
             var i = 0;
             for (; i < validators.Length; i++)
             {
@@ -162,7 +163,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
             string expectedName,
             IntermediateNode node,
             params Action<IntermediateNode>[] childValidators
-        ) {
+        )
+        {
             try
             {
                 var directive = Assert.IsType<DirectiveIntermediateNode>(node);
@@ -180,7 +182,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
             DirectiveTokenKind expectedKind,
             string expectedContent,
             IntermediateNode node
-        ) {
+        )
+        {
             try
             {
                 var token = Assert.IsType<DirectiveTokenIntermediateNode>(node);
@@ -212,7 +215,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
             string suffix,
             IntermediateNode node,
             params Action<IntermediateNode>[] valueValidators
-        ) {
+        )
+        {
             var attribute = Assert.IsType<HtmlAttributeIntermediateNode>(node);
 
             try
@@ -238,7 +242,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
             string prefix,
             string expected,
             IntermediateNode node
-        ) {
+        )
+        {
             var attributeValue = Assert.IsType<CSharpExpressionAttributeValueIntermediateNode>(
                 node
             );
@@ -273,7 +278,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
             string prefix,
             string expected,
             IntermediateNode node
-        ) {
+        )
+        {
             var attributeValue = Assert.IsType<HtmlAttributeValueIntermediateNode>(node);
 
             try
@@ -378,7 +384,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
             string attributeName,
             string value,
             AttributeStructure valueStyle
-        ) {
+        )
+        {
             var propertyValueNode =
                 Assert.IsType<PreallocatedTagHelperPropertyValueIntermediateNode>(node);
 
@@ -400,7 +407,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
             IEnumerable<TagHelperDescriptor> tagHelpers,
             IntermediateNode node,
             params Action<IntermediateNode>[] childValidators
-        ) {
+        )
+        {
             var tagHelperNode = Assert.IsType<TagHelperIntermediateNode>(node);
 
             try
@@ -427,7 +435,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
             AttributeStructure valueStyle,
             IntermediateNode node,
             params Action<IntermediateNode>[] valueValidators
-        ) {
+        )
+        {
             var tagHelperHtmlAttribute = Assert.IsType<TagHelperHtmlAttributeIntermediateNode>(
                 node
             );
@@ -453,7 +462,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
             IntermediateNode node,
             string attributeName,
             string propertyName
-        ) {
+        )
+        {
             var setPreallocatedTagHelperProperty =
                 Assert.IsType<PreallocatedTagHelperPropertyIntermediateNode>(node);
 
@@ -477,7 +487,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
             AttributeStructure valueStyle,
             IntermediateNode node,
             params Action<IntermediateNode>[] valueValidators
-        ) {
+        )
+        {
             var propertyNode = Assert.IsType<TagHelperPropertyIntermediateNode>(node);
 
             try
@@ -500,10 +511,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
 
         private class IntermediateNodeAssertException : XunitException
         {
-            public IntermediateNodeAssertException(
-                IntermediateNode node,
-                string userMessage
-            ) : base(Format(node, null, null, userMessage))
+            public IntermediateNodeAssertException(IntermediateNode node, string userMessage)
+                : base(Format(node, null, null, userMessage))
             {
                 Node = node;
             }
@@ -542,7 +551,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
                 IntermediateNode[] ancestors,
                 IEnumerable<IntermediateNode> nodes,
                 string userMessage
-            ) {
+            )
+            {
                 var builder = new StringBuilder();
                 builder.AppendLine(userMessage);
                 builder.AppendLine();

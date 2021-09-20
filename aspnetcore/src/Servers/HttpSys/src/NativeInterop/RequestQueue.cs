@@ -50,7 +50,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             RequestQueueMode mode,
             ILogger logger,
             bool receiver
-        ) {
+        )
+        {
             _mode = mode;
             UrlGroup = urlGroup;
             _logger = logger;
@@ -79,7 +80,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             if (
                 _mode == RequestQueueMode.CreateOrAttach
                 && statusCode == UnsafeNclNativeMethods.ErrorCodes.ERROR_ALREADY_EXISTS
-            ) {
+            )
+            {
                 // Tried to create, but it already exists so attach to it instead.
                 Created = false;
                 flags = HttpApiTypes.HTTP_CREATE_REQUEST_QUEUE_FLAG.OpenExisting;
@@ -95,7 +97,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             if (
                 flags.HasFlag(HttpApiTypes.HTTP_CREATE_REQUEST_QUEUE_FLAG.OpenExisting)
                 && statusCode == UnsafeNclNativeMethods.ErrorCodes.ERROR_FILE_NOT_FOUND
-            ) {
+            )
+            {
                 throw new HttpSysException(
                     (int)statusCode,
                     $"Failed to attach to the given request queue '{requestQueueName}', the queue could not be found."
@@ -121,7 +124,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     UnsafeNclNativeMethods.FileCompletionNotificationModes.SkipCompletionPortOnSuccess
                         | UnsafeNclNativeMethods.FileCompletionNotificationModes.SkipSetEventOnHandle
                 )
-            ) {
+            )
+            {
                 requestQueueHandle.Dispose();
                 throw new HttpSysException(Marshal.GetLastWin32Error());
             }

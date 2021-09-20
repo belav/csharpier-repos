@@ -27,7 +27,8 @@ namespace System.Xml.Tests
             InsertType insertType,
             XmlNodeType nodeType,
             bool deleteFirst
-        ) {
+        )
+        {
             var xmlDocument = new XmlDocument { PreserveWhitespace = true };
             xmlDocument.LoadXml(xml);
 

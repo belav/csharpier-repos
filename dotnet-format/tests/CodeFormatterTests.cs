@@ -610,7 +610,8 @@ namespace Microsoft.CodeAnalysis.Tools.Tests
             DiagnosticSeverity analyzerSeverity = DiagnosticSeverity.Error,
             string[] diagnostics = null,
             bool noRestore = false
-        ) {
+        )
+        {
             var currentDirectory = Environment.CurrentDirectory;
             Environment.CurrentDirectory = TestProjectsPathHelper.GetProjectsDirectory();
 

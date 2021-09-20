@@ -23,7 +23,8 @@ internal static partial class Interop
                     ref cancel,
                     copyFlags
                 )
-            ) {
+            )
+            {
                 return Marshal.GetLastWin32Error();
             }
 

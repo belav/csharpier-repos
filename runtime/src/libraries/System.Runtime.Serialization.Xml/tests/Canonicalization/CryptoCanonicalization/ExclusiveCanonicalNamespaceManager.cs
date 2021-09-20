@@ -131,7 +131,8 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
             string prefix,
             bool searchOuterContext,
             IAncestralNamespaceContextProvider context
-        ) {
+        )
+        {
             MarkToRender(prefix, searchOuterContext, context, true);
         }
 
@@ -139,7 +140,8 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
             string prefix,
             bool searchOuterContext,
             IAncestralNamespaceContextProvider context
-        ) {
+        )
+        {
             if (!MarkToRender(prefix, searchOuterContext, context, false))
             {
                 string nodeName = context != null ? context.CurrentNodeName : null;
@@ -154,7 +156,8 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
             bool searchOuterContext,
             IAncestralNamespaceContextProvider context,
             bool isInclusivePrefix
-        ) {
+        )
+        {
             if (prefix == "xml")
             {
                 return true;

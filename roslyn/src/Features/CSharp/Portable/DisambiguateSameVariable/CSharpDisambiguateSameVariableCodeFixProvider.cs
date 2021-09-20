@@ -73,7 +73,8 @@ namespace Microsoft.CodeAnalysis.CSharp.DisambiguateSameVariable
             [NotNullWhen(true)] out SimpleNameSyntax? leftName,
             [NotNullWhen(true)] out ISymbol? matchingMember,
             [NotNullWhen(true)] out string? title
-        ) {
+        )
+        {
             leftName = null;
             matchingMember = null;
             title = null;
@@ -112,7 +113,8 @@ namespace Microsoft.CodeAnalysis.CSharp.DisambiguateSameVariable
                 && leftSymbol.Kind != SymbolKind.Parameter
                 && leftSymbol.Kind != SymbolKind.Field
                 && leftSymbol.Kind != SymbolKind.Property
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -166,7 +168,8 @@ namespace Microsoft.CodeAnalysis.CSharp.DisambiguateSameVariable
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxFacts = CSharpSyntaxFacts.Instance;
             var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
@@ -182,7 +185,8 @@ namespace Microsoft.CodeAnalysis.CSharp.DisambiguateSameVariable
                         out var matchingMember,
                         out _
                     )
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -191,7 +195,8 @@ namespace Microsoft.CodeAnalysis.CSharp.DisambiguateSameVariable
                 if (
                     !syntaxFacts.IsNameOfSimpleMemberAccessExpression(nameNode)
                     && !syntaxFacts.IsNameOfMemberBindingExpression(nameNode)
-                ) {
+                )
+                {
                     newExpr = MemberAccessExpression(
                             SyntaxKind.SimpleMemberAccessExpression,
                             ThisExpression(),
@@ -210,11 +215,12 @@ namespace Microsoft.CodeAnalysis.CSharp.DisambiguateSameVariable
             public MyCodeAction(
                 string title,
                 Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                title,
-                createChangedDocument,
-                nameof(CSharpDisambiguateSameVariableCodeFixProvider)
-            ) { }
+            )
+                : base(
+                    title,
+                    createChangedDocument,
+                    nameof(CSharpDisambiguateSameVariableCodeFixProvider)
+                ) { }
         }
     }
 }

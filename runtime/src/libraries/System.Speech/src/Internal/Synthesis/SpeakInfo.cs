@@ -41,7 +41,8 @@ namespace System.Speech.Internal.Synthesis
             VoiceGender gender,
             VoiceAge age,
             int variant
-        ) {
+        )
+        {
             TTSVoice ttsVoice = _voiceSynthesis.GetEngine(
                 name,
                 culture,

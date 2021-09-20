@@ -50,7 +50,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             ObjectPoolProvider objectPoolProvider,
             MvcOptions options,
             MvcNewtonsoftJsonOptions jsonOptions
-        ) {
+        )
+        {
             if (logger == null)
             {
                 throw new ArgumentNullException(nameof(logger));
@@ -112,7 +113,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         public override async Task<InputFormatterResult> ReadRequestBodyAsync(
             InputFormatterContext context,
             Encoding encoding
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -212,7 +214,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             if (
                 exception is not null
                 && exception is not (JsonException or OverflowException or FormatException)
-            ) {
+            )
+            {
                 // At this point we've already recorded all exceptions as an entry in the ModelStateDictionary.
                 // We only need to rethrow an exception if we believe it needs to be handled by something further up
                 // the stack.
@@ -229,7 +232,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             void ErrorHandler(
                 object? sender,
                 Newtonsoft.Json.Serialization.ErrorEventArgs eventArgs
-            ) {
+            )
+            {
                 successful = false;
 
                 // When ErrorContext.Path does not include ErrorContext.Member, add Member to form full path.

@@ -84,7 +84,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 string.IsNullOrWhiteSpace(Names)
                 && string.IsNullOrWhiteSpace(Include)
                 && string.IsNullOrWhiteSpace(Exclude)
-            ) {
+            )
+            {
                 // No names specified, do nothing
                 return;
             }
@@ -109,7 +110,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                                 currentEnvironmentName,
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             // Matching environment name found, suppress output
                             output.SuppressOutput();
                             return;
@@ -133,7 +135,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                                 currentEnvironmentName,
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             // Matching environment name found, do nothing
                             return;
                         }
@@ -155,7 +158,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                                 currentEnvironmentName,
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             // Matching environment name found, do nothing
                             return;
                         }

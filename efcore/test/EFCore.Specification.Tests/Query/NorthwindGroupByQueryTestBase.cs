@@ -38,7 +38,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task GroupBy_Property_Select_Average_with_group_enumerable_projected(
             bool async
-        ) {
+        )
+        {
             return AssertQueryScalar(
                 async,
                 ss =>
@@ -314,7 +315,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task GroupBy_aggregate_projecting_conditional_expression_based_on_group_key(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -457,7 +459,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Where_select_function_groupby_followed_by_another_select_with_aggregates(
             bool async
-        ) {
+        )
+        {
             await AssertQuery(
                 async,
                 ss =>
@@ -1108,7 +1111,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task GroupBy_Constant_with_element_selector_Select_Sum_Min_Key_Max_Avg(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -1123,7 +1127,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task GroupBy_constant_with_where_on_grouping_with_aggregate_operators(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -1221,7 +1226,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task GroupBy_param_with_element_selector_Select_Sum_Min_Key_Max_Avg(
             bool async
-        ) {
+        )
+        {
             var a = 2;
 
             return AssertQuery(
@@ -1550,7 +1556,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Element_selector_with_case_block_repeated_inside_another_case_block_in_projection(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -1978,7 +1985,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task GroupBy_after_anonymous_projection_and_distinct_followed_by_another_anonymous_projection(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2432,7 +2440,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Select_uncorrelated_collection_with_groupby_multiple_collections_work(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -3154,7 +3163,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task GroupBy_with_orderby_take_skip_distinct_followed_by_group_key_projection(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -3301,7 +3311,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task GroupBy_with_group_key_being_navigation_with_entity_key_projection(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss => ss.Set<OrderDetail>().GroupBy(od => od.Order).Select(g => g.Key)
@@ -3312,7 +3323,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task GroupBy_with_group_key_being_navigation_with_complex_projection(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -3717,7 +3729,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Select_uncorrelated_collection_with_groupby_when_outer_is_distinct(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -3752,7 +3765,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Select_correlated_collection_after_GroupBy_aggregate_when_identifier_does_not_change(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -3782,7 +3796,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Select_correlated_collection_after_GroupBy_aggregate_when_identifier_changes(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -3812,7 +3827,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Select_correlated_collection_after_GroupBy_aggregate_when_identifier_changes_to_complex(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>

@@ -35,7 +35,8 @@ namespace System.Formats.Cbor.Tests
                     NonEmptyArray<CborDocument> shrunkDoc in documentArb.Shrinker(
                         nonEmptyArrayInput
                     )
-                ) {
+                )
+                {
                     yield return CborPropertyTestContextHelper.create(
                         input.ConformanceMode,
                         input.ConvertIndefiniteLengthItems,

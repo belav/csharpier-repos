@@ -461,7 +461,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Vector128<Double> op1,
             Double result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Double[] inArray1 = new Double[Op1ElementCount];
 
             Unsafe.WriteUnaligned(ref Unsafe.As<Double, byte>(ref inArray1[0]), op1);
@@ -486,13 +487,15 @@ namespace JIT.HardwareIntrinsics.Arm
             Double[] firstOp,
             Double result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (
                 BitConverter.DoubleToInt64Bits(firstOp[ElementIndex])
                 != BitConverter.DoubleToInt64Bits(result)
-            ) {
+            )
+            {
                 succeeded = false;
             }
 

@@ -359,7 +359,8 @@ namespace System.Web.Mvc.Ajax.Test
         public void ToUnobtrusiveHtmlAttributesEscapesClientSideIdentifiers(
             string id,
             string expected
-        ) {
+        )
+        {
             // Arrange
             AjaxOptions options = new AjaxOptions { UpdateTargetId = id, LoadingElementId = id };
 
@@ -377,7 +378,8 @@ namespace System.Web.Mvc.Ajax.Test
         public void ToUnobtrusiveHtmlAttributesWithUpdateTargetIdAndExplicitInsertionMode(
             InsertionMode mode,
             string expectedMode
-        ) {
+        )
+        {
             // Arrange
             AjaxOptions options = new AjaxOptions
             {

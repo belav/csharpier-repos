@@ -44,7 +44,8 @@ namespace Newtonsoft.Json.Tests.Utilities
             string s,
             ParseResult expectedResult,
             double? expectedValue
-        ) {
+        )
+        {
             double d;
             char[] c = s.ToCharArray();
             ParseResult result = ConvertUtils.DoubleTryParse(c, 0, c.Length, out d);
@@ -194,7 +195,8 @@ namespace Newtonsoft.Json.Tests.Utilities
             string s,
             ParseResult expectedResult,
             decimal? expectedValue
-        ) {
+        )
+        {
             decimal d;
             char[] c = s.ToCharArray();
             ParseResult result = ConvertUtils.DecimalTryParse(c, 0, c.Length, out d);

@@ -57,7 +57,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             PEMethodSymbol addMethod,
             PEMethodSymbol removeMethod,
             MultiDictionary<string, PEFieldSymbol> privateFieldNameToSymbols
-        ) {
+        )
+        {
             RoslynDebug.Assert((object)moduleSymbol != null);
             RoslynDebug.Assert((object)containingType != null);
             Debug.Assert(!handle.IsNil);
@@ -178,7 +179,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         private PEFieldSymbol? GetAssociatedField(
             MultiDictionary<string, PEFieldSymbol> privateFieldNameToSymbols,
             bool isWindowsRuntimeEvent
-        ) {
+        )
+        {
             // NOTE: Neither the name nor the accessibility of a PEFieldSymbol is lazy.
             foreach (PEFieldSymbol candidateAssociatedField in privateFieldNameToSymbols[_name])
             {
@@ -207,7 +209,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                             ).TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[0].Type,
                             TypeCompareKind.ConsiderEverything2
                         )
-                    ) {
+                    )
+                    {
                         return candidateAssociatedField;
                     }
                 }
@@ -219,7 +222,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                             _eventTypeWithAnnotations.Type,
                             TypeCompareKind.ConsiderEverything2
                         )
-                    ) {
+                    )
+                    {
                         return candidateAssociatedField;
                     }
                 }
@@ -414,7 +418,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
         internal override IEnumerable<CSharpAttributeData> GetCustomAttributesToEmit(
             PEModuleBuilder moduleBuilder
-        ) {
+        )
+        {
             return GetAttributes();
         }
 
@@ -429,7 +434,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 if (
                     _addMethod.ExplicitInterfaceImplementations.Length == 0
                     && _removeMethod.ExplicitInterfaceImplementations.Length == 0
-                ) {
+                )
+                {
                     return ImmutableArray<EventSymbol>.Empty;
                 }
 
@@ -462,7 +468,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             TypeSymbol eventType,
             PEMethodSymbol addMethod,
             PEMethodSymbol removeMethod
-        ) {
+        )
+        {
             return (eventType.IsDelegateType() || eventType.IsErrorType())
                 && DoesSignatureMatch(moduleSymbol, eventType, addMethod)
                 && DoesSignatureMatch(moduleSymbol, eventType, removeMethod)
@@ -487,7 +494,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             PEModuleSymbol moduleSymbol,
             TypeSymbol eventType,
             PEMethodSymbol method
-        ) {
+        )
+        {
             // CONSIDER: It would be nice if we could reuse this signature information in the PEMethodSymbol.
             var metadataDecoder = new MetadataDecoder(moduleSymbol, method);
             SignatureHeader signatureHeader;
@@ -511,7 +519,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             CultureInfo? preferredCulture = null,
             bool expandIncludes = false,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return PEDocumentationCommentUtils.GetDocumentationComment(
                 this,
                 _containingType.ContainingPEModule,

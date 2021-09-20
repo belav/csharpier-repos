@@ -95,7 +95,8 @@ namespace Microsoft.CodeAnalysis
             int size,
             bool includeEmbeddedInteropTypes,
             bool ignoreAssemblyRefs = false
-        ) {
+        )
+        {
             Debug.Assert(metadata != IntPtr.Zero);
             Debug.Assert(size > 0);
             return new ModuleMetadata(
@@ -217,7 +218,8 @@ namespace Microsoft.CodeAnalysis
                 peStream.Length == 0
                 && (options & PEStreamOptions.PrefetchEntireImage) != 0
                 && (options & PEStreamOptions.PrefetchMetadata) != 0
-            ) {
+            )
+            {
                 // throws BadImageFormatException:
                 new PEHeaders(peStream);
             }
@@ -363,7 +365,8 @@ namespace Microsoft.CodeAnalysis
             DocumentationProvider? documentation = null,
             string? filePath = null,
             string? display = null
-        ) {
+        )
+        {
             return new MetadataImageReference(
                 this,
                 MetadataReferenceProperties.Module,

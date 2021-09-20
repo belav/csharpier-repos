@@ -13,16 +13,18 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             ITypeSymbol elementType,
             int rank,
             NullableAnnotation nullableAnnotation
-        ) : base(
-            null,
-            null,
-            default,
-            Accessibility.NotApplicable,
-            default,
-            string.Empty,
-            SpecialType.None,
-            nullableAnnotation
-        ) {
+        )
+            : base(
+                null,
+                null,
+                default,
+                Accessibility.NotApplicable,
+                default,
+                string.Empty,
+                SpecialType.None,
+                nullableAnnotation
+            )
+        {
             this.ElementType = elementType;
             this.Rank = rank;
         }

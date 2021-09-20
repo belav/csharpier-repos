@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         protected AbstractEmbeddedLanguageCompletionProvider(
             IEnumerable<Lazy<ILanguageService, LanguageServiceMetadata>> languageServices,
             string languageName
-        ) {
+        )
+        {
             var embeddedLanguageServiceType =
                 typeof(IEmbeddedLanguagesProvider).AssemblyQualifiedName;
             TriggerCharacters = languageServices.Where(
@@ -55,7 +56,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 
         private static ImmutableHashSet<char> GetTriggerCharactersForEmbeddedLanguage(
             IEmbeddedLanguage language
-        ) {
+        )
+        {
             var completionProvider = (language as IEmbeddedLanguageFeatures)?.CompletionProvider;
             if (completionProvider is LSPCompletionProvider lspCompletionProvider)
             {
@@ -69,14 +71,16 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             Lazy<ILanguageService, LanguageServiceMetadata> lazyLanguageService,
             string languageName,
             string? embeddedLanguageServiceType
-        ) {
+        )
+        {
             return lazyLanguageService.Metadata.Language == languageName
                 && lazyLanguageService.Metadata.ServiceType == embeddedLanguageServiceType;
         }
 
         protected ImmutableArray<IEmbeddedLanguage> GetLanguageProviders(
             HostLanguageServices? languageServices
-        ) {
+        )
+        {
             if (_languageProviders.IsDefault)
             {
                 var languagesProvider = languageServices?.GetService<IEmbeddedLanguagesProvider>();
@@ -97,7 +101,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             int caretPosition,
             CompletionTrigger trigger,
             OptionSet options
-        ) {
+        )
+        {
             foreach (var language in GetLanguageProviders(languageServices))
             {
                 var completionProvider = (
@@ -112,7 +117,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                             trigger,
                             options
                         )
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }
@@ -125,7 +131,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         {
             foreach (
                 var language in GetLanguageProviders(context.Document.Project.LanguageServices)
-            ) {
+            )
+            {
                 var completionProvider = (
                     language as IEmbeddedLanguageFeatures
                 )?.CompletionProvider;

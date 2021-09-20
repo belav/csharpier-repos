@@ -83,7 +83,8 @@ namespace System.Text.Json.Serialization.Tests
                 MemoryStream stream = new MemoryStream(
                     Encoding.UTF8.GetBytes(" 1\t// Comment\r\n/* Multi\r\nLine */")
                 )
-            ) {
+            )
+            {
                 JsonSerializerOptions options = new JsonSerializerOptions
                 {
                     DefaultBufferSize = 1,
@@ -263,7 +264,8 @@ namespace System.Text.Json.Serialization.Tests
             byte[] utf8BomAndValueArray,
             JsonSerializerOptions options,
             ulong expected
-        ) {
+        )
+        {
             ulong value;
             using (Stream stream = new MemoryStream(utf8BomAndValueArray))
             {
@@ -346,7 +348,8 @@ namespace System.Text.Json.Serialization.Tests
             int count,
             int expectedStreamLength,
             int bufferSize
-        ) {
+        )
+        {
             JsonElement[] value;
 
             JsonSerializerOptions options = new JsonSerializerOptions()

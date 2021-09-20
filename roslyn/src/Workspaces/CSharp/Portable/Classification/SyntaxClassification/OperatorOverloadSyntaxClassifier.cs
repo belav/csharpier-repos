@@ -29,12 +29,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
             SemanticModel semanticModel,
             ArrayBuilder<ClassifiedSpan> result,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var symbolInfo = semanticModel.GetSymbolInfo(syntax, cancellationToken);
             if (
                 symbolInfo.Symbol is IMethodSymbol methodSymbol
                 && methodSymbol.MethodKind == MethodKind.UserDefinedOperator
-            ) {
+            )
+            {
                 var operatorSpan = GetOperatorTokenSpan(syntax);
                 if (!operatorSpan.IsEmpty)
                 {

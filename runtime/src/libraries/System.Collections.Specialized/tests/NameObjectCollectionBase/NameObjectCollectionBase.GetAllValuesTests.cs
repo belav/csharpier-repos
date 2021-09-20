@@ -26,7 +26,8 @@ namespace System.Collections.Specialized.Tests
         private static void VerifyGetAllValues(
             NameObjectCollectionBase nameObjectCollection,
             Array values
-        ) {
+        )
+        {
             Assert.Equal(nameObjectCollection.Count, values.Length);
 
             for (int i = 0; i < values.Length; i++)

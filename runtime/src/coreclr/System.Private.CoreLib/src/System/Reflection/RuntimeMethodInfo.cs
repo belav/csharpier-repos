@@ -51,7 +51,8 @@ namespace System.Reflection
                             (CallingConvention & CallingConventions.VarArgs)
                             == CallingConventions.VarArgs
                         )
-                    ) {
+                    )
+                    {
                         // We don't need other flags if this method cannot be invoked
                         invocationFlags = INVOCATION_FLAGS.INVOCATION_FLAGS_NO_INVOKE;
                     }
@@ -98,7 +99,8 @@ namespace System.Reflection
             MethodAttributes methodAttributes,
             BindingFlags bindingFlags,
             object? keepalive
-        ) {
+        )
+        {
             Debug.Assert(!handle.IsNullHandle());
             Debug.Assert(methodAttributes == RuntimeMethodHandle.GetAttributes(handle));
 
@@ -451,7 +453,8 @@ namespace System.Reflection
             Binder? binder,
             object?[]? parameters,
             CultureInfo? culture
-        ) {
+        )
+        {
             StackAllocedArguments stackArgs = default; // try to avoid intermediate array allocation if possible
             Span<object?> arguments = InvokeArgumentsCheck(
                 ref stackArgs,
@@ -488,7 +491,8 @@ namespace System.Reflection
             Binder? binder,
             object?[]? parameters,
             CultureInfo? culture
-        ) {
+        )
+        {
             Signature sig = Signature;
 
             // get the signature
@@ -607,7 +611,8 @@ namespace System.Reflection
             Type delegateType,
             object? firstArgument,
             DelegateBindingFlags bindingFlags
-        ) {
+        )
+        {
             // Validate the parameters.
             if (delegateType == null)
                 throw new ArgumentNullException(nameof(delegateType));

@@ -202,7 +202,8 @@ namespace System.Xml
                 if (
                     string.Equals(_nsdecls[declIndex].uri, uri)
                     && _nsdecls[declIndex].scopeId == _scopeId
-                ) {
+                )
+                {
                     _nsdecls[declIndex].uri = null;
                 }
                 declIndex = _nsdecls[declIndex].previousNsIndex;
@@ -308,7 +309,8 @@ namespace System.Xml
                     if (
                         (object)_nsdecls[thisDecl].prefix == (object)prefix
                         && _nsdecls[thisDecl].uri != null
-                    ) {
+                    )
+                    {
                         return thisDecl;
                     }
                 }
@@ -319,7 +321,8 @@ namespace System.Xml
                     if (
                         string.Equals(_nsdecls[thisDecl].prefix, prefix)
                         && _nsdecls[thisDecl].uri != null
-                    ) {
+                    )
+                    {
                         return thisDecl;
                     }
                 }
@@ -356,7 +359,8 @@ namespace System.Xml
                 if (
                     string.Equals(_nsdecls[thisDecl].prefix, prefix)
                     && _nsdecls[thisDecl].uri != null
-                ) {
+                )
+                {
                     if (prefix.Length > 0 || _nsdecls[thisDecl].uri!.Length > 0)
                     {
                         return true;
@@ -371,7 +375,8 @@ namespace System.Xml
             int idx,
             [NotNullWhen(true)] out string? prefix,
             out string? uri
-        ) {
+        )
+        {
             idx = _lastDecl - idx;
             if (idx < 0)
             {

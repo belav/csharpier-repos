@@ -129,7 +129,8 @@ namespace System.PrivateUri.Tests
             string expectedHost,
             string expectedDnsSafeHost,
             string expectedIdnHost
-        ) {
+        )
+        {
             Assert.True(Uri.TryCreate(scheme + "://" + host, UriKind.Absolute, out Uri uri));
             Assert.Equal(expectedHost, uri.Host);
             Assert.Equal(expectedDnsSafeHost, uri.DnsSafeHost);

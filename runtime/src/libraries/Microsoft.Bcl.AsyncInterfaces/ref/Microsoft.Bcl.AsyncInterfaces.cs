@@ -35,13 +35,15 @@ namespace System.Runtime.CompilerServices
         public void AwaitOnCompleted<TAwaiter, TStateMachine>(
             ref TAwaiter awaiter,
             ref TStateMachine stateMachine
-        ) where TAwaiter : System.Runtime.CompilerServices.INotifyCompletion
-          where TStateMachine : System.Runtime.CompilerServices.IAsyncStateMachine { }
+        )
+            where TAwaiter : System.Runtime.CompilerServices.INotifyCompletion
+            where TStateMachine : System.Runtime.CompilerServices.IAsyncStateMachine { }
         public void AwaitUnsafeOnCompleted<TAwaiter, TStateMachine>(
             ref TAwaiter awaiter,
             ref TStateMachine stateMachine
-        ) where TAwaiter : System.Runtime.CompilerServices.ICriticalNotifyCompletion
-          where TStateMachine : System.Runtime.CompilerServices.IAsyncStateMachine { }
+        )
+            where TAwaiter : System.Runtime.CompilerServices.ICriticalNotifyCompletion
+            where TStateMachine : System.Runtime.CompilerServices.IAsyncStateMachine { }
         public void Complete() { }
         public static System.Runtime.CompilerServices.AsyncIteratorMethodBuilder Create()
         {
@@ -76,7 +78,8 @@ namespace System.Runtime.CompilerServices
         private readonly int _dummyPrimitive;
         public System.Runtime.CompilerServices.ConfiguredCancelableAsyncEnumerable<T> ConfigureAwait(
             bool continueOnCapturedContext
-        ) {
+        )
+        {
             throw null;
         }
         public System.Runtime.CompilerServices.ConfiguredCancelableAsyncEnumerable<T>.Enumerator GetAsyncEnumerator()
@@ -85,7 +88,8 @@ namespace System.Runtime.CompilerServices
         }
         public System.Runtime.CompilerServices.ConfiguredCancelableAsyncEnumerable<T> WithCancellation(
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public readonly partial struct Enumerator
@@ -119,19 +123,22 @@ namespace System.Threading.Tasks
         public static System.Runtime.CompilerServices.ConfiguredAsyncDisposable ConfigureAwait(
             this System.IAsyncDisposable source,
             bool continueOnCapturedContext
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Runtime.CompilerServices.ConfiguredCancelableAsyncEnumerable<T> ConfigureAwait<T>(
             this System.Collections.Generic.IAsyncEnumerable<T> source,
             bool continueOnCapturedContext
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Runtime.CompilerServices.ConfiguredCancelableAsyncEnumerable<T> WithCancellation<T>(
             this System.Collections.Generic.IAsyncEnumerable<T> source,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
     }

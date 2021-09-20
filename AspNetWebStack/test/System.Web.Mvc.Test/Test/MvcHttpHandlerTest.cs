@@ -63,7 +63,8 @@ namespace System.Web.Mvc.Test
             public void PublicVerifyAndProcessRequest(
                 IHttpHandler httpHandler,
                 HttpContextBase httpContext
-            ) {
+            )
+            {
                 base.VerifyAndProcessRequest(httpHandler, httpContext);
             }
         }

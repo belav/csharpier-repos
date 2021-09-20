@@ -41,7 +41,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public static string DisplayNameFor<TModelItem, TResult>(
             this IHtmlHelper<IEnumerable<TModelItem>> htmlHelper,
             Expression<Func<TModelItem, TResult>> expression
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));

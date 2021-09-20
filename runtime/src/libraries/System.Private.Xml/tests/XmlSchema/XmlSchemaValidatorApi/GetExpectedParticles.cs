@@ -431,7 +431,8 @@ namespace System.Xml.Tests
         [InlineData("after")]
         public void CallForSequenceWithChoiceGroup_Before_After_ValidatingGroupMembers(
             string callOrder
-        ) {
+        )
+        {
             XmlSchemaValidator val = CreateValidator(XSDFILE_GET_EXPECTED_PARTICLES);
             XmlSchemaInfo info = new XmlSchemaInfo();
             XmlQualifiedName[] names;
@@ -466,7 +467,8 @@ namespace System.Xml.Tests
         [InlineData("after")]
         public void CallForChoiceWithSequenceGroup_Before_After_ValidatingGroupMembers(
             string callOrder
-        ) {
+        )
+        {
             XmlSchemaValidator val = CreateValidator(XSDFILE_GET_EXPECTED_PARTICLES);
             XmlSchemaInfo info = new XmlSchemaInfo();
             XmlQualifiedName[] names;
@@ -501,7 +503,8 @@ namespace System.Xml.Tests
         [InlineData("after")]
         public void CallForExtendedSequence_Before_After_ValidatingSeqOrAllBaseElements(
             string callOrder
-        ) {
+        )
+        {
             XmlSchemaValidator val = CreateValidator(XSDFILE_GET_EXPECTED_PARTICLES);
             XmlSchemaInfo info = new XmlSchemaInfo();
 
@@ -579,7 +582,8 @@ namespace System.Xml.Tests
         public void CallForRestricted_Sequence_Choice_All__Before_After_ValidatingSeqElements(
             string restrType,
             string callOrder
-        ) {
+        )
+        {
             XmlSchemaValidator val = CreateValidator(XSDFILE_GET_EXPECTED_PARTICLES);
             XmlSchemaInfo info = new XmlSchemaInfo();
 

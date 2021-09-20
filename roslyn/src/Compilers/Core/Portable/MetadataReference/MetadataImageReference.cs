@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis
 
         protected override PortableExecutableReference WithPropertiesImpl(
             MetadataReferenceProperties properties
-        ) {
+        )
+        {
             return new MetadataImageReference(
                 _metadata,
                 properties,

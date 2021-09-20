@@ -33,7 +33,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             object model,
             Type modelType,
             string expectedResult
-        ) {
+        )
+        {
             // Arrange
             var provider = new EmptyModelMetadataProvider();
             var modelExplorer = provider.GetModelExplorerForType(modelType, model);

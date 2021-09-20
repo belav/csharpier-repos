@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X
         public static string Serialize(
             RazorCSharpDocument csharpDocument,
             RazorSourceDocument sourceDocument
-        ) {
+        )
+        {
             var builder = new StringBuilder();
             var sourceFilePath = sourceDocument.FilePath;
             var charBuffer = new char[sourceDocument.Length];
@@ -28,7 +29,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X
                         sourceFilePath,
                         StringComparison.Ordinal
                     )
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -52,7 +54,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X
             StringBuilder builder,
             SourceSpan location,
             string content
-        ) {
+        )
+        {
             builder.AppendLine(location.ToString()).Append("|");
 
             for (var i = 0; i < location.Length; i++)

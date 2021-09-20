@@ -244,7 +244,8 @@ namespace System.Diagnostics.Tracing
             long allKeyword,
             Interop.Advapi32.EVENT_FILTER_DESCRIPTOR* filterData,
             void* callbackContext
-        ) {
+        )
+        {
             // This is an optional callback API. We will therefore ignore any failures that happen as a
             // result of turning on this provider as to not crash the app.
             // EventSource has code to validate whether initialization it expected to occur actually occurred
@@ -300,7 +301,8 @@ namespace System.Diagnostics.Tracing
                                 out byte[]? data,
                                 out int keyIndex
                             )
-                        ) {
+                        )
+                        {
                             args = new Dictionary<string, string?>(4);
                             // data can be null if the filterArgs had a very large size which failed our sanity check
                             if (data != null)
@@ -461,7 +463,8 @@ namespace System.Diagnostics.Tracing
             int etwSessionId,
             long matchAllKeywords,
             ref List<SessionInfo>? sessionList
-        ) {
+        )
+        {
             uint sessionIdBitMask = (uint)SessionMask.FromEventKeywords(
                 unchecked((ulong)matchAllKeywords)
             );
@@ -501,7 +504,8 @@ namespace System.Diagnostics.Tracing
         private unsafe void GetSessionInfo(
             SessionInfoCallback action,
             ref List<SessionInfo>? sessionList
-        ) {
+        )
+        {
             // We wish the EventSource package to be legal for Windows Store applications.
             // Currently EnumerateTraceGuidsEx is not an allowed API, so we avoid its use here
             // and use the information in the registry instead.  This means that ETW controllers
@@ -613,7 +617,8 @@ namespace System.Diagnostics.Tracing
                                 "ControllerData_Session_",
                                 StringComparison.Ordinal
                             )
-                        ) {
+                        )
+                        {
                             string strId = valueName.Substring(23); // strip of the ControllerData_Session_
                             int etwSessionId;
                             if (int.TryParse(strId, out etwSessionId))
@@ -692,7 +697,8 @@ namespace System.Diagnostics.Tracing
             out ControllerCommand command,
             out byte[]? data,
             out int dataStart
-        ) {
+        )
+        {
             data = null;
             dataStart = 0;
             if (filterData == null)
@@ -782,7 +788,8 @@ namespace System.Diagnostics.Tracing
                         ((keywords & m_anyKeywordMask) != 0)
                         && ((keywords & m_allKeywordMask) == m_allKeywordMask)
                     )
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -1076,7 +1083,8 @@ namespace System.Diagnostics.Tracing
             Guid* activityID,
             Guid* childActivityID,
             params object?[] eventPayload
-        ) {
+        )
+        {
             WriteEventErrorCode status = WriteEventErrorCode.NoError;
 
             if (IsEnabled(eventDescriptor.Level, eventDescriptor.Keywords))
@@ -1178,7 +1186,8 @@ namespace System.Diagnostics.Tracing
                             v5 = (string?)dataRefObj[5],
                             v6 = (string?)dataRefObj[6],
                             v7 = (string?)dataRefObj[7]
-                    ) {
+                    )
+                    {
                         userDataPtr = (EventData*)userData;
                         if (dataRefObj[0] != null)
                         {
@@ -1307,7 +1316,8 @@ namespace System.Diagnostics.Tracing
             Guid* childActivityID,
             int dataCount,
             IntPtr data
-        ) {
+        )
+        {
             if (childActivityID != null)
             {
                 // activity transfers are supported only for events that specify the Send or Receive opcode
@@ -1344,7 +1354,8 @@ namespace System.Diagnostics.Tracing
             Guid* relatedActivityID,
             int dataCount,
             IntPtr data
-        ) {
+        )
+        {
             WriteEventErrorCode status = m_eventProvider.EventWriteTransfer(
                 m_regHandle,
                 in eventDescriptor,
@@ -1369,7 +1380,8 @@ namespace System.Diagnostics.Tracing
         private unsafe uint EventRegister(
             EventSource eventSource,
             Interop.Advapi32.EtwEnableCallback enableCallback
-        ) {
+        )
+        {
             m_providerName = eventSource.Name;
             m_providerId = eventSource.Guid;
             m_etwCallback = enableCallback;
@@ -1391,7 +1403,8 @@ namespace System.Diagnostics.Tracing
             Interop.Advapi32.EVENT_INFO_CLASS eventInfoClass,
             void* data,
             uint dataSize
-        ) {
+        )
+        {
             int status = Interop.Errors.ERROR_NOT_SUPPORTED;
 
             if (!m_setInformationMissing)
@@ -1427,7 +1440,8 @@ namespace System.Diagnostics.Tracing
             Interop.Advapi32.EtwEnableCallback enableCallback,
             void* callbackContext,
             ref long registrationHandle
-        ) {
+        )
+        {
             Guid providerId = eventSource.Guid;
             return Interop.Advapi32.EventRegister(
                 in providerId,
@@ -1452,7 +1466,8 @@ namespace System.Diagnostics.Tracing
             Guid* relatedActivityId,
             int userDataCount,
             EventProvider.EventData* userData
-        ) {
+        )
+        {
             int error = Interop.Advapi32.EventWriteTransfer(
                 registrationHandle,
                 in eventDescriptor,
@@ -1478,7 +1493,8 @@ namespace System.Diagnostics.Tracing
         int IEventProvider.EventActivityIdControl(
             Interop.Advapi32.ActivityControl ControlCode,
             ref Guid ActivityId
-        ) {
+        )
+        {
             return Interop.Advapi32.EventActivityIdControl(ControlCode, ref ActivityId);
         }
 
@@ -1491,7 +1507,8 @@ namespace System.Diagnostics.Tracing
             uint level,
             byte* pMetadata,
             uint metadataLength
-        ) {
+        )
+        {
             throw new System.NotSupportedException();
         }
     }
@@ -1504,7 +1521,8 @@ namespace System.Diagnostics.Tracing
             Interop.Advapi32.EtwEnableCallback enableCallback,
             void* callbackContext,
             ref long registrationHandle
-        ) {
+        )
+        {
             return 0;
         }
 
@@ -1521,14 +1539,16 @@ namespace System.Diagnostics.Tracing
             Guid* relatedActivityId,
             int userDataCount,
             EventProvider.EventData* userData
-        ) {
+        )
+        {
             return EventProvider.WriteEventErrorCode.NoError;
         }
 
         int IEventProvider.EventActivityIdControl(
             Interop.Advapi32.ActivityControl ControlCode,
             ref Guid ActivityId
-        ) {
+        )
+        {
             return 0;
         }
 
@@ -1541,7 +1561,8 @@ namespace System.Diagnostics.Tracing
             uint level,
             byte* pMetadata,
             uint metadataLength
-        ) {
+        )
+        {
             return IntPtr.Zero;
         }
     }

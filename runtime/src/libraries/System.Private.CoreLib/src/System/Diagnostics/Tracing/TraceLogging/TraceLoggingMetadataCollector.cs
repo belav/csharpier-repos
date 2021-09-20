@@ -36,7 +36,8 @@ namespace System.Diagnostics.Tracing
         private TraceLoggingMetadataCollector(
             TraceLoggingMetadataCollector other,
             FieldMetadata group
-        ) {
+        )
+        {
             this.impl = other.impl;
             this.currentGroup = group;
         }

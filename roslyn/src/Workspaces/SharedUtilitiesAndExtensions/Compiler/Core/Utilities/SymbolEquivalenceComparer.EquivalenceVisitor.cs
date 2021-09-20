@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 SymbolEquivalenceComparer symbolEquivalenceComparer,
                 bool compareMethodTypeParametersByIndex,
                 bool objectAndDynamicCompareEqually
-            ) {
+            )
+            {
                 _symbolEquivalenceComparer = symbolEquivalenceComparer;
                 _compareMethodTypeParametersByIndex = compareMethodTypeParametersByIndex;
                 _objectAndDynamicCompareEqually = objectAndDynamicCompareEqually;
@@ -41,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                     INamedTypeSymbol,
                     INamedTypeSymbol
                 >? equivalentTypesWithDifferingAssemblies
-            ) {
+            )
+            {
 #if TRACKDEPTH
                 try
                 {
@@ -128,7 +130,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                     INamedTypeSymbol,
                     INamedTypeSymbol
                 >? equivalentTypesWithDifferingAssemblies
-            ) {
+            )
+            {
                 Debug.Assert(!x.IsDefault && !y.IsDefault);
                 if (x.Length != y.Length)
                 {
@@ -154,7 +157,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                     INamedTypeSymbol,
                     INamedTypeSymbol
                 >? equivalentTypesWithDifferingAssemblies
-            ) {
+            )
+            {
                 Debug.Assert(x.Kind == y.Kind && x.Kind == k);
                 return k switch
                 {
@@ -258,7 +262,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                     INamedTypeSymbol,
                     INamedTypeSymbol
                 >? equivalentTypesWithDifferingAssemblies
-            ) {
+            )
+            {
                 return x.Rank == y.Rank
                     && AreEquivalent(
                         x.CustomModifiers,
@@ -282,7 +287,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                     INamedTypeSymbol,
                     INamedTypeSymbol
                 >? equivalentTypesWithDifferingAssemblies
-            ) {
+            )
+            {
                 return x.Name == y.Name
                     && AreEquivalent(
                         x.CustomModifiers,
@@ -312,7 +318,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                     INamedTypeSymbol
                 >? equivalentTypesWithDifferingAssemblies,
                 bool considerReturnRefKinds = false
-            ) {
+            )
+            {
                 if (!AreCompatibleMethodKinds(x.MethodKind, y.MethodKind))
                 {
                     return false;
@@ -336,7 +343,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                             y.ReceiverType,
                             equivalentTypesWithDifferingAssemblies
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }
@@ -345,7 +353,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                     if (
                         x.MethodKind == MethodKind.AnonymousFunction
                         || x.MethodKind == MethodKind.LocalFunction
-                    ) {
+                    )
+                    {
                         // Treat local and anonymous functions just like we do ILocalSymbols.
                         // They're only equivalent if they have the same location.
                         return HaveSameLocation(x, y);
@@ -360,7 +369,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                         || x.Arity != y.Arity
                         || x.Parameters.Length != y.Parameters.Length
                         || x.Name != y.Name
-                    ) {
+                    )
+                    {
                         return false;
                     }
 
@@ -373,7 +383,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                                 y.ContainingSymbol,
                                 equivalentTypesWithDifferingAssemblies
                             )
-                        ) {
+                        )
+                        {
                             return false;
                         }
                     }
@@ -384,7 +395,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                             y.Parameters,
                             equivalentTypesWithDifferingAssemblies
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
 
@@ -400,7 +412,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                             y.RefKind,
                             distinguishRefFromOut: false
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }
@@ -428,7 +441,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 if (
                     (kind1 == MethodKind.Ordinary && kind2.IsPropertyAccessor())
                     || (kind1.IsPropertyAccessor() && kind2 == MethodKind.Ordinary)
-                ) {
+                )
+                {
                     return true;
                 }
 
@@ -439,7 +453,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                         kind1 == MethodKind.UserDefinedOperator
                         && kind2 == MethodKind.BuiltinOperator
                     )
-                ) {
+                )
+                {
                     return true;
                 }
 
@@ -464,7 +479,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                     INamedTypeSymbol,
                     INamedTypeSymbol
                 >? equivalentTypesWithDifferingAssemblies
-            ) {
+            )
+            {
                 // PERF: Avoid multiple virtual calls to fetch the TypeKind property
                 var xTypeKind = GetTypeKind(x);
                 var yTypeKind = GetTypeKind(y);
@@ -494,7 +510,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                     INamedTypeSymbol,
                     INamedTypeSymbol
                 >? equivalentTypesWithDifferingAssemblies
-            ) {
+            )
+            {
                 foreach (var type1 in Unwrap(x))
                 {
                     var typeKind1 = GetTypeKind(type1);
@@ -508,7 +525,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                                 type2,
                                 equivalentTypesWithDifferingAssemblies
                             )
-                        ) {
+                        )
+                        {
                             return true;
                         }
                     }
@@ -535,7 +553,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                     INamedTypeSymbol,
                     INamedTypeSymbol
                 >? equivalentTypesWithDifferingAssemblies
-            ) {
+            )
+            {
                 Debug.Assert(GetTypeKind(x) == GetTypeKind(y));
 
                 if (
@@ -545,7 +564,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                     || x.IsAnonymousType != y.IsAnonymousType
                     || x.IsUnboundGenericType != y.IsUnboundGenericType
                     || x.IsTupleType != y.IsTupleType
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -556,7 +576,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                     x.Kind == SymbolKind.ErrorType
                     && x.ContainingSymbol is INamespaceSymbol xNamespace
                     && y.ContainingSymbol is INamespaceSymbol yNamespace
-                ) {
+                )
+                {
                     Debug.Assert(y.Kind == SymbolKind.ErrorType);
 
                     // For error types, we just ensure that the containing namespaces are equivalent up to the root.
@@ -597,7 +618,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                             y.ContainingAssembly.Name
                         )
                         && !equivalentTypesWithDifferingAssemblies.ContainsKey(x)
-                    ) {
+                    )
+                    {
                         equivalentTypesWithDifferingAssemblies.Add(x, y);
                     }
                 }
@@ -624,7 +646,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                     INamedTypeSymbol,
                     INamedTypeSymbol
                 >? equivalentTypesWithDifferingAssemblies
-            ) {
+            )
+            {
                 Debug.Assert(y.IsTupleType);
 
                 var xElements = x.TupleElements;
@@ -680,7 +703,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 >? equivalentTypesWithDifferingAssemblies,
                 bool compareParameterName = false,
                 bool isParameterNameCaseSensitive = false
-            ) {
+            )
+            {
                 // Note the special parameter comparer we pass in.  We do this so we don't end up
                 // infinitely looping between parameters -> type parameters -> methods -> parameters
                 var count = xParameters.Length;
@@ -699,7 +723,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                             compareParameterName,
                             isParameterNameCaseSensitive
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }
@@ -714,7 +739,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                     INamedTypeSymbol,
                     INamedTypeSymbol
                 >? equivalentTypesWithDifferingAssemblies = null
-            ) {
+            )
+            {
                 return _symbolEquivalenceComparer.SignatureTypeEquivalenceComparer.Equals(
                         x.ReturnType,
                         y.ReturnType,
@@ -734,7 +760,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                     INamedTypeSymbol,
                     INamedTypeSymbol
                 >? equivalentTypesWithDifferingAssemblies
-            ) {
+            )
+            {
                 var count = xTypeArguments.Length;
                 if (yTypeArguments.Length != count)
                 {
@@ -749,7 +776,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                             yTypeArguments[i],
                             equivalentTypesWithDifferingAssemblies
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }
@@ -764,7 +792,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                     INamedTypeSymbol,
                     INamedTypeSymbol
                 >? equivalentTypesWithDifferingAssemblies
-            ) {
+            )
+            {
                 if (x.TypeKind == TypeKind.Delegate)
                 {
                     return AreEquivalent(
@@ -799,7 +828,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                                 p2.Type,
                                 equivalentTypesWithDifferingAssemblies
                             )
-                        ) {
+                        )
+                        {
                             return false;
                         }
                     }
@@ -815,7 +845,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                     INamedTypeSymbol,
                     INamedTypeSymbol
                 >? equivalentTypesWithDifferingAssemblies
-            ) {
+            )
+            {
                 if (x.IsGlobalNamespace != y.IsGlobalNamespace || x.Name != y.Name)
                 {
                     return false;
@@ -841,7 +872,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                     INamedTypeSymbol,
                     INamedTypeSymbol
                 >? equivalentTypesWithDifferingAssemblies
-            ) {
+            )
+            {
                 return x.IsRefOrOut() == y.IsRefOrOut()
                     && x.Name == y.Name
                     && AreEquivalent(
@@ -864,7 +896,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                     INamedTypeSymbol,
                     INamedTypeSymbol
                 >? equivalentTypesWithDifferingAssemblies
-            ) {
+            )
+            {
                 return AreEquivalent(
                         x.CustomModifiers,
                         y.CustomModifiers,
@@ -898,7 +931,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                     INamedTypeSymbol,
                     INamedTypeSymbol
                 >? equivalentTypesWithDifferingAssemblies
-            ) {
+            )
+            {
                 if (x.ContainingType.IsAnonymousType && y.ContainingType.IsAnonymousType)
                 {
                     // We can short circuit here and just use the symbols themselves to determine
@@ -933,7 +967,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                     INamedTypeSymbol,
                     INamedTypeSymbol
                 >? equivalentTypesWithDifferingAssemblies
-            ) {
+            )
+            {
                 return x.Name == y.Name
                     && AreEquivalent(
                         x.ContainingSymbol,
@@ -949,7 +984,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                     INamedTypeSymbol,
                     INamedTypeSymbol
                 >? equivalentTypesWithDifferingAssemblies
-            ) {
+            )
+            {
                 Debug.Assert(
                     (
                         x.TypeParameterKind == TypeParameterKind.Method
@@ -984,14 +1020,16 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 if (
                     x.TypeParameterKind == TypeParameterKind.Method
                     && _compareMethodTypeParametersByIndex
-                ) {
+                )
+                {
                     return true;
                 }
 
                 if (
                     x.TypeParameterKind == TypeParameterKind.Type
                     && x.ContainingType.IsAnonymousType
-                ) {
+                )
+                {
                     // Anonymous type type parameters compare by index as well to prevent
                     // recursion.
                     return true;

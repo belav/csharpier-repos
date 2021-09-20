@@ -72,7 +72,8 @@ namespace Newtonsoft.Json.Linq
                 if (
                     value < DuplicatePropertyNameHandling.Replace
                     || value > DuplicatePropertyNameHandling.Error
-                ) {
+                )
+                {
                     throw new ArgumentOutOfRangeException(nameof(value));
                 }
 

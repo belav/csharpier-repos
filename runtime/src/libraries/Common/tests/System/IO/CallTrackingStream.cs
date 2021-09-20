@@ -110,7 +110,8 @@ namespace System.IO
             Stream destination,
             int bufferSize,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             UpdateCallCount();
             CopyToAsyncDestination = destination;
             CopyToAsyncBufferSize = bufferSize;
@@ -147,7 +148,8 @@ namespace System.IO
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             UpdateCallCount();
             ReadAsyncBuffer = buffer;
             ReadAsyncOffset = offset;
@@ -191,7 +193,8 @@ namespace System.IO
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             UpdateCallCount();
             WriteAsyncBuffer = buffer;
             WriteAsyncOffset = offset;

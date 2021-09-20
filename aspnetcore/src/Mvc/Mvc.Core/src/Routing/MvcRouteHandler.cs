@@ -24,7 +24,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             IActionSelector actionSelector,
             DiagnosticListener diagnosticListener,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             _actionInvokerFactory = actionInvokerFactory;
             _actionSelector = actionSelector;
             _diagnosticListener = diagnosticListener;

@@ -75,7 +75,8 @@ namespace System.Net.Sockets
             uint errorCode,
             uint numBytes,
             NativeOverlapped* nativeOverlapped
-        ) {
+        )
+        {
             Debug.Assert(OperatingSystem.IsWindows());
             BaseOverlappedAsyncResult asyncResult =
                 (BaseOverlappedAsyncResult)ThreadPoolBoundHandle.GetNativeOverlappedState(

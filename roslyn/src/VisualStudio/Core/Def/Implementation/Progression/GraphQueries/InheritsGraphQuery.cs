@@ -25,7 +25,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             Solution solution,
             IGraphContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var graphBuilder = await GraphBuilder.CreateForInputNodesAsync(
                     solution,
                     context.InputNodes,
@@ -61,10 +62,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                         else if (
                             namedType.TypeKind == TypeKind.Interface
                             && !namedType.OriginalDefinition.AllInterfaces.IsEmpty
-                        ) {
+                        )
+                        {
                             foreach (
                                 var baseNode in namedType.OriginalDefinition.AllInterfaces.Distinct()
-                            ) {
+                            )
+                            {
                                 var baseTypeNode = await graphBuilder.AddNodeAsync(
                                         baseNode,
                                         relatedNode: node

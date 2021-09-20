@@ -49,7 +49,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
             Type declaredType,
             object objectToBeWrapped,
             Type expectedWrappingType
-        ) {
+        )
+        {
             // Arrange
             var wrapperProviderFactories = GetWrapperProviderFactories();
             var enumerableWrapperProviderFactory = new EnumerableWrapperProviderFactory(
@@ -109,7 +110,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
             Type declaredType,
             object objectToBeWrapped,
             Type expectedWrappingType
-        ) {
+        )
+        {
             // Arrange
             var wrapperProviderFactories = GetWrapperProviderFactories();
             var enumerableWrapperProviderFactory = new EnumerableWrapperProviderFactory(
@@ -159,7 +161,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
         public void DoesNot_CreateWrapperProvider_ForConcrete_EnumerableOfTImplementations(
             Type declaredType,
             object objectToBeWrapped
-        ) {
+        )
+        {
             // Arrange
             var wrapperProviderFactories = GetWrapperProviderFactories();
             var enumerableWrapperProviderFactory = new EnumerableWrapperProviderFactory(

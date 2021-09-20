@@ -57,7 +57,8 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.EmbeddedStatementPlacement
             Document document,
             ImmutableArray<Diagnostic> diagnostics,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
             var editor = new SyntaxEditor(root, document.Project.Solution.Workspace);
@@ -86,7 +87,8 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.EmbeddedStatementPlacement
             Diagnostic diagnostic,
             SyntaxTrivia endOfLineTrivia,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             var root = editor.OriginalRoot;
@@ -121,7 +123,8 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.EmbeddedStatementPlacement
                         if (
                             updatedStatement is BlockSyntax blockSyntax
                             && blockSyntax.Statements.Count == 0
-                        ) {
+                        )
+                        {
                             updatedStatement = blockSyntax.WithCloseBraceToken(
                                 AddLeadingTrivia(
                                     blockSyntax.CloseBraceToken,
@@ -153,7 +156,8 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.EmbeddedStatementPlacement
                                 previousToken,
                                 openBrace
                             )
-                        ) {
+                        )
+                        {
                             currentBlock = currentBlock.WithOpenBraceToken(
                                 AddLeadingTrivia(
                                     currentBlock.OpenBraceToken,
@@ -188,13 +192,12 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.EmbeddedStatementPlacement
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                CSharpCodeFixesResources.Place_statement_on_following_line,
-                createChangedDocument,
-                CSharpCodeFixesResources.Place_statement_on_following_line
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    CSharpCodeFixesResources.Place_statement_on_following_line,
+                    createChangedDocument,
+                    CSharpCodeFixesResources.Place_statement_on_following_line
+                ) { }
         }
     }
 }

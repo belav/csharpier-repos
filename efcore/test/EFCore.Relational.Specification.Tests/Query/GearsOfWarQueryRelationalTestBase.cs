@@ -20,7 +20,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public override async Task Correlated_collection_with_groupby_with_complex_grouping_key_not_projecting_identifier_column_with_group_aggregate_in_final_projection(
             bool async
-        ) {
+        )
+        {
             var message =
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(
@@ -41,7 +42,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public override async Task Correlated_collection_with_distinct_not_projecting_identifier_column_also_projecting_complex_expressions(
             bool async
-        ) {
+        )
+        {
             var message =
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(
@@ -79,7 +81,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         public override Task Client_member_and_unsupported_string_Equals_in_the_same_query(
             bool async
-        ) {
+        )
+        {
             return AssertTranslationFailedWithDetails(
                 () => base.Client_member_and_unsupported_string_Equals_in_the_same_query(async),
                 CoreStrings.QueryUnableToTranslateStringEqualsWithStringComparison
@@ -90,7 +93,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         public override Task Client_side_equality_with_parameter_works_with_optional_navigations(
             bool async
-        ) {
+        )
+        {
             return AssertTranslationFailed(
                 () =>
                     base.Client_side_equality_with_parameter_works_with_optional_navigations(async)
@@ -99,7 +103,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         public override Task Correlated_collection_order_by_constant_null_of_non_mapped_type(
             bool async
-        ) {
+        )
+        {
             return AssertTranslationFailed(
                 () => base.Correlated_collection_order_by_constant_null_of_non_mapped_type(async)
             );
@@ -231,7 +236,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public override async Task Projecting_some_properties_as_well_as_correlated_collection_followed_by_Distinct(
             bool async
-        ) {
+        )
+        {
             var message =
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(
@@ -249,7 +255,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public override async Task Projecting_entity_as_well_as_correlated_collection_followed_by_Distinct(
             bool async
-        ) {
+        )
+        {
             var message =
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(
@@ -267,7 +274,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public override async Task Projecting_entity_as_well_as_complex_correlated_collection_followed_by_Distinct(
             bool async
-        ) {
+        )
+        {
             var message =
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(
@@ -285,7 +293,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public override async Task Projecting_entity_as_well_as_correlated_collection_of_scalars_followed_by_Distinct(
             bool async
-        ) {
+        )
+        {
             var message =
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(

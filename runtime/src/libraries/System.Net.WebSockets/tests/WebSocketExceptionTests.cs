@@ -91,7 +91,8 @@ namespace System.Net.WebSockets.Tests
             int nativeError,
             WebSocketError webSocketError,
             int expectedHResult
-        ) {
+        )
+        {
             var wse = new WebSocketException(nativeError);
             Assert.Equal(expectedHResult, wse.HResult);
             Assert.Equal(webSocketError, wse.WebSocketErrorCode);
@@ -104,7 +105,8 @@ namespace System.Net.WebSockets.Tests
             int nativeError,
             WebSocketError webSocketError,
             int expectedHResult
-        ) {
+        )
+        {
             const string Message = "Message";
             var wse = new WebSocketException(nativeError, Message);
             Assert.Equal(expectedHResult, wse.HResult);
@@ -118,7 +120,8 @@ namespace System.Net.WebSockets.Tests
             int nativeError,
             WebSocketError webSocketError,
             int expectedHResult
-        ) {
+        )
+        {
             var inner = new Exception();
             var wse = new WebSocketException(nativeError, inner);
             Assert.Equal(expectedHResult, wse.HResult);
@@ -132,7 +135,8 @@ namespace System.Net.WebSockets.Tests
             int nativeError,
             WebSocketError error,
             int expectedHResult
-        ) {
+        )
+        {
             var wse = new WebSocketException(error, nativeError);
             Assert.Equal(expectedHResult, wse.HResult);
             Assert.Equal(error, wse.WebSocketErrorCode);
@@ -145,7 +149,8 @@ namespace System.Net.WebSockets.Tests
             int nativeError,
             WebSocketError error,
             int expectedHResult
-        ) {
+        )
+        {
             const string Message = "Message";
             var wse = new WebSocketException(error, nativeError, Message);
             Assert.Equal(expectedHResult, wse.HResult);
@@ -159,7 +164,8 @@ namespace System.Net.WebSockets.Tests
             int nativeError,
             WebSocketError error,
             int expectedHResult
-        ) {
+        )
+        {
             var inner = new Exception();
             var wse = new WebSocketException(error, nativeError, inner);
             Assert.Equal(expectedHResult, wse.HResult);
@@ -173,7 +179,8 @@ namespace System.Net.WebSockets.Tests
             int nativeError,
             WebSocketError error,
             int expectedHResult
-        ) {
+        )
+        {
             const string Message = "Message";
             var inner = new Exception();
             var wse = new WebSocketException(error, nativeError, Message, inner);

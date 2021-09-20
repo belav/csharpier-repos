@@ -229,7 +229,8 @@ namespace Microsoft.Net.Http.Headers
         public static bool TryParse(
             StringSegment input,
             [NotNullWhen(true)] out ContentRangeHeaderValue parsedValue
-        ) {
+        )
+        {
             var index = 0;
             return Parser.TryParseValue(input, ref index, out parsedValue!);
         }
@@ -238,7 +239,8 @@ namespace Microsoft.Net.Http.Headers
             StringSegment input,
             int startIndex,
             out ContentRangeHeaderValue? parsedValue
-        ) {
+        )
+        {
             Contract.Requires(startIndex >= 0);
 
             parsedValue = null;
@@ -285,7 +287,8 @@ namespace Microsoft.Net.Http.Headers
                     out toStartIndex,
                     out toLength
                 )
-            ) {
+            )
+            {
                 return 0;
             }
 
@@ -323,7 +326,8 @@ namespace Microsoft.Net.Http.Headers
                     lengthLength,
                     out parsedValue
                 )
-            ) {
+            )
+            {
                 return 0;
             }
 
@@ -334,7 +338,8 @@ namespace Microsoft.Net.Http.Headers
             StringSegment input,
             ref int current,
             out int lengthLength
-        ) {
+        )
+        {
             lengthLength = 0;
 
             if (input[current] == '*')
@@ -364,7 +369,8 @@ namespace Microsoft.Net.Http.Headers
             out int fromLength,
             out int toStartIndex,
             out int toLength
-        ) {
+        )
+        {
             fromLength = 0;
             toStartIndex = 0;
             toLength = 0;
@@ -429,7 +435,8 @@ namespace Microsoft.Net.Http.Headers
             int lengthStartIndex,
             int lengthLength,
             [NotNullWhen(true)] out ContentRangeHeaderValue? parsedValue
-        ) {
+        )
+        {
             parsedValue = null;
 
             long from = 0;
@@ -439,7 +446,8 @@ namespace Microsoft.Net.Http.Headers
                     input.Subsegment(fromStartIndex, fromLength),
                     out from
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -450,7 +458,8 @@ namespace Microsoft.Net.Http.Headers
                     input.Subsegment(toStartIndex, toLength),
                     out to
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -467,7 +476,8 @@ namespace Microsoft.Net.Http.Headers
                     input.Subsegment(lengthStartIndex, lengthLength),
                     out length
                 )
-            ) {
+            )
+            {
                 return false;
             }
 

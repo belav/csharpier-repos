@@ -22,7 +22,8 @@ namespace System.Web.Http.Validation.Providers
         public override IEnumerable<ModelValidator> GetValidators(
             ModelMetadata metadata,
             IEnumerable<ModelValidatorProvider> validatorProviders
-        ) {
+        )
+        {
             string propertyName = metadata.PropertyName;
             // if we're validating a property and not a type
             if (propertyName != null)

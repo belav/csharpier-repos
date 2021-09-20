@@ -666,7 +666,8 @@ namespace System.Xml.Xsl.Qil
             QilNode definition,
             QilNode sideEffects,
             XmlQueryType xmlType
-        ) {
+        )
+        {
             QilFunction n = new QilFunction(
                 QilNodeType.Function,
                 arguments,
@@ -1020,7 +1021,8 @@ namespace System.Xml.Xsl.Qil
             QilNode clrMethod,
             QilNode arguments,
             XmlQueryType xmlType
-        ) {
+        )
+        {
             QilInvokeEarlyBound n = new QilInvokeEarlyBound(
                 QilNodeType.XsltInvokeEarlyBound,
                 name,

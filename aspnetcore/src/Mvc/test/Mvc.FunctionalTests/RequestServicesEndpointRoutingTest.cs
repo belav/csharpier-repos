@@ -11,9 +11,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 {
     public class RequestServicesEndpointRoutingTest : RequestServicesTestBase<BasicWebSite.Startup>
     {
-        public RequestServicesEndpointRoutingTest(
-            MvcTestFixture<BasicWebSite.Startup> fixture
-        ) : base(fixture) { }
+        public RequestServicesEndpointRoutingTest(MvcTestFixture<BasicWebSite.Startup> fixture)
+            : base(fixture) { }
 
         [Fact]
         public async override Task HasEndpointMatch()

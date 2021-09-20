@@ -219,7 +219,8 @@ namespace System.Web.Razor.Text
                 && NewLength > OldLength
                 && NewText.StartsWith(OldText, StringComparison.Ordinal)
                 && NewPosition == OldPosition
-            ) {
+            )
+            {
                 // Normalize the change into an insertion of the uncommon suffix (i.e. strip out the common prefix)
                 return new TextChange(
                     oldPosition: OldPosition + OldLength,

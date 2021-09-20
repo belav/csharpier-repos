@@ -49,11 +49,8 @@ namespace Microsoft.AspNetCore.Mvc
         /// <param name="pageName">The page to redirect to.</param>
         /// <param name="pageHandler">The page handler to redirect to.</param>
         /// <param name="routeValues">The parameters for the route.</param>
-        public RedirectToPageResult(
-            string? pageName,
-            string? pageHandler,
-            object? routeValues
-        ) : this(pageName, pageHandler, routeValues, permanent: false) { }
+        public RedirectToPageResult(string? pageName, string? pageHandler, object? routeValues)
+            : this(pageName, pageHandler, routeValues, permanent: false) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RedirectToPageResult"/> with the values
@@ -116,14 +113,15 @@ namespace Microsoft.AspNetCore.Mvc
             object? routeValues,
             bool permanent,
             string? fragment
-        ) : this(
-            pageName,
-            pageHandler,
-            routeValues,
-            permanent,
-            preserveMethod: false,
-            fragment: fragment
-        ) { }
+        )
+            : this(
+                pageName,
+                pageHandler,
+                routeValues,
+                permanent,
+                preserveMethod: false,
+                fragment: fragment
+            ) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RedirectToPageResult"/> with the values
@@ -142,7 +140,8 @@ namespace Microsoft.AspNetCore.Mvc
             bool permanent,
             bool preserveMethod,
             string? fragment
-        ) {
+        )
+        {
             PageName = pageName;
             PageHandler = pageHandler;
             RouteValues = routeValues == null ? null : new RouteValueDictionary(routeValues);

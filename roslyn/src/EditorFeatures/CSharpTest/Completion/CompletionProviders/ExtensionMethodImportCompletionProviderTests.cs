@@ -78,7 +78,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
 
         private static IEnumerable<object[]> CombineWithReferenceTypeData(
             IEnumerable<List<object>> data
-        ) {
+        )
+        {
             foreach (var refKind in Enum.GetValues(typeof(ReferenceType)))
             {
                 foreach (var d in data)
@@ -363,7 +364,8 @@ namespace Baz
         [Theory, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task UsingAliasInDeclaration_RegularTypeWithSameSimpleName(
             ReferenceType refType
-        ) {
+        )
+        {
             var file1 =
                 @"
 using DataTime = System.Exception;
@@ -1173,7 +1175,8 @@ namespace Baz
             string type,
             string expectedMethodname,
             string expectedNamespace
-        ) {
+        )
+        {
             var file1 =
                 @"
 using X = System.String;
@@ -1365,7 +1368,8 @@ namespace Baz
         public async Task TestExtensionMethodsInConflictingTypes(
             ReferenceType refType,
             string accessibility
-        ) {
+        )
+        {
             var refDoc =
                 $@"
 [assembly: System.Runtime.CompilerServices.InternalsVisibleTo(""Project1"")]
@@ -1509,7 +1513,8 @@ namespace Baz
             string containerAccessibility,
             string methodAccessibility,
             bool isAvailable
-        ) {
+        )
+        {
             var file1 =
                 $@"
 using System;
@@ -1579,7 +1584,8 @@ namespace Baz
             ReferenceType refType,
             string rank,
             string expectedName
-        ) {
+        )
+        {
             var refDoc =
                 $@"
 [assembly: System.Runtime.CompilerServices.InternalsVisibleTo(""Project1"")]
@@ -1657,7 +1663,8 @@ namespace Baz
             ReferenceType refType,
             string rank,
             string expectedName
-        ) {
+        )
+        {
             var refDoc =
                 $@"
 [assembly: System.Runtime.CompilerServices.InternalsVisibleTo(""Project1"")]
@@ -2371,7 +2378,8 @@ namespace Baz
             string targetType,
             bool matchTargetType,
             string expectedParameterList
-        ) {
+        )
+        {
             var refDoc =
                 @"
 using System;

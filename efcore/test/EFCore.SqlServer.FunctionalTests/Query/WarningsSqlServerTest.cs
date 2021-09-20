@@ -8,8 +8,7 @@ namespace Microsoft.EntityFrameworkCore.Query
     public class WarningsSqlServerTest
         : WarningsTestBase<NorthwindQuerySqlServerFixture<NoopModelCustomizer>>
     {
-        public WarningsSqlServerTest(
-            NorthwindQuerySqlServerFixture<NoopModelCustomizer> fixture
-        ) : base(fixture) { }
+        public WarningsSqlServerTest(NorthwindQuerySqlServerFixture<NoopModelCustomizer> fixture)
+            : base(fixture) { }
     }
 }

@@ -112,7 +112,8 @@ namespace Templates.Test
             string languageOverride,
             string auth,
             string[] args
-        ) {
+        )
+        {
             var project = await FactoryFixture.GetOrCreateProject(
                 "webapi"
                     + (languageOverride == "F#" ? "fsharp" : "csharp")

@@ -410,7 +410,8 @@ namespace System.IO
             WatcherChangeTypes action,
             ReadOnlySpan<char> name,
             ReadOnlySpan<char> oldName
-        ) {
+        )
+        {
             // filter if there's no handler or neither new name or old name match a specified pattern
             RenamedEventHandler? handler = _onRenamedHandler;
             if (handler != null && (MatchPattern(name) || MatchPattern(oldName)))
@@ -449,7 +450,8 @@ namespace System.IO
         private void NotifyFileSystemEventArgs(
             WatcherChangeTypes changeType,
             ReadOnlySpan<char> name
-        ) {
+        )
+        {
             FileSystemEventHandler? handler = GetHandler(changeType);
 
             if (handler != null && MatchPattern(name.IsEmpty ? _directory : name))
@@ -569,7 +571,8 @@ namespace System.IO
                         | WatcherChangeTypes.Changed
                     )
                 ) != 0
-            ) {
+            )
+            {
                 fseh = (s, e) =>
                 {
                     if ((e.ChangeType & changeType) != 0)

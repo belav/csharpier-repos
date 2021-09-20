@@ -36,7 +36,8 @@ namespace System.Web.Mvc
         public static void MapMvcAttributeRoutes(
             this RouteCollection routes,
             IInlineConstraintResolver constraintResolver
-        ) {
+        )
+        {
             if (routes == null)
             {
                 throw new ArgumentNullException("routes");
@@ -60,7 +61,8 @@ namespace System.Web.Mvc
         public static void MapMvcAttributeRoutes(
             this RouteCollection routes,
             IDirectRouteProvider directRouteProvider
-        ) {
+        )
+        {
             if (routes == null)
             {
                 throw new ArgumentNullException("routes");
@@ -92,7 +94,8 @@ namespace System.Web.Mvc
             this RouteCollection routes,
             IInlineConstraintResolver constraintResolver,
             IDirectRouteProvider directRouteProvider
-        ) {
+        )
+        {
             if (routes == null)
             {
                 throw new ArgumentNullException("routes");

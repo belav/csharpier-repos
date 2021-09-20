@@ -399,7 +399,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             fixed (Vector128<Byte>* pClsVar1 = &_clsVar1)fixed (
                 Vector128<Byte>* pClsVar2 = &_clsVar2
-            ) {
+            )
+            {
                 var result = Aes.Decrypt(
                     Aes.LoadVector128((Byte*)(pClsVar1)),
                     Aes.LoadVector128((Byte*)(pClsVar2))

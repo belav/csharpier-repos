@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
             this IFaultUtility fault,
             Exception exception,
             bool emptyCallstack
-        ) {
+        )
+        {
             if (emptyCallstack)
             {
                 // if exception we got started with empty callstack, put hash of runtime

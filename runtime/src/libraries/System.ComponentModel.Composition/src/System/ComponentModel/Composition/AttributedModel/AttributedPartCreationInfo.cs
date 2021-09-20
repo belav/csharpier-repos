@@ -29,7 +29,8 @@ namespace System.ComponentModel.Composition.AttributedModel
             PartCreationPolicyAttribute? partCreationPolicy,
             bool ignoreConstructorImports,
             ICompositionElement? origin
-        ) {
+        )
+        {
             if (type == null)
             {
                 throw new ArgumentNullException(nameof(type));
@@ -129,7 +130,8 @@ namespace System.ComponentModel.Composition.AttributedModel
                 // each member should have the same arity
                 foreach (
                     MemberInfo member in GetExportMembers(_type).Concat(GetInheritedExports(_type))
-                ) {
+                )
+                {
                     if (member.MemberType == MemberTypes.Method)
                     {
                         // open generics are unsupported on methods
@@ -282,14 +284,16 @@ namespace System.ComponentModel.Composition.AttributedModel
                     if (
                         exportAttribute.GetType()
                         == CompositionServices.InheritedExportAttributeType
-                    ) {
+                    )
+                    {
                         // Any InheritedExports on the type itself are contributed during this pass
                         // and we need to do the book keeping for those.
                         if (
                             !_contractNamesOnNonInterfaces.Contains(
                                 attributedExportDefinition.ContractName
                             )
-                        ) {
+                        )
+                        {
                             exports.Add(
                                 new ReflectionMemberExportDefinition(
                                     member.ToLazyMember(),
@@ -325,7 +329,8 @@ namespace System.ComponentModel.Composition.AttributedModel
             {
                 foreach (
                     InheritedExportAttribute exportAttribute in type.GetAttributes<InheritedExportAttribute>()
-                ) {
+                )
+                {
                     AttributedExportDefinition attributedExportDefinition = CreateExportDefinition(
                         type,
                         exportAttribute
@@ -335,7 +340,8 @@ namespace System.ComponentModel.Composition.AttributedModel
                         !_contractNamesOnNonInterfaces.Contains(
                             attributedExportDefinition.ContractName
                         )
-                    ) {
+                    )
+                    {
                         exports.Add(
                             new ReflectionMemberExportDefinition(
                                 type.ToLazyMember(),
@@ -362,7 +368,8 @@ namespace System.ComponentModel.Composition.AttributedModel
         private AttributedExportDefinition CreateExportDefinition(
             MemberInfo member,
             ExportAttribute exportAttribute
-        ) {
+        )
+        {
             member.GetContractInfoFromExport(
                 exportAttribute,
                 out Type? typeIdentityType,
@@ -452,7 +459,8 @@ namespace System.ComponentModel.Composition.AttributedModel
             while (
                 currentType != null
                 && currentType.UnderlyingSystemType != CompositionServices.ObjectType
-            ) {
+            )
+            {
                 if (IsInheritedExport(currentType))
                 {
                     yield return currentType;
@@ -528,7 +536,8 @@ namespace System.ComponentModel.Composition.AttributedModel
                 while (
                     baseType != null
                     && baseType.UnderlyingSystemType != CompositionServices.ObjectType
-                ) {
+                )
+                {
                     foreach (MemberInfo member in GetDeclaredOnlyImportMembers(baseType))
                     {
                         yield return member;

@@ -2802,7 +2802,8 @@ End Class
             if (
                 service.GetProvider(completionItem)
                 is ICustomCommitCompletionProvider customCommitCompletionProvider
-            ) {
+            )
+            {
                 var textView = testWorkspace.GetTestDocument(documentId).GetTextView();
                 customCommitCompletionProvider.Commit(
                     completionItem,
@@ -3125,7 +3126,8 @@ int bar;
             if (
                 service.GetProvider(completionItem)
                 is ICustomCommitCompletionProvider customCommitCompletionProvider
-            ) {
+            )
+            {
                 var textView = testWorkspace.GetTestDocument(documentId).GetTextView();
                 customCommitCompletionProvider.Commit(
                     completionItem,
@@ -3211,7 +3213,8 @@ int bar;
             if (
                 service.GetProvider(completionItem)
                 is ICustomCommitCompletionProvider customCommitCompletionProvider
-            ) {
+            )
+            {
                 var textView = testWorkspace.GetTestDocument(documentId).GetTextView();
                 customCommitCompletionProvider.Commit(
                     completionItem,

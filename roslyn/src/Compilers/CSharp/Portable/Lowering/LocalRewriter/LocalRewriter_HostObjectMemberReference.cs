@@ -10,7 +10,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         public override BoundNode VisitHostObjectMemberReference(
             BoundHostObjectMemberReference node
-        ) {
+        )
+        {
             Debug.Assert(_previousSubmissionFields != null);
             Debug.Assert(_factory.TopLevelMethod is { IsStatic: false });
             Debug.Assert(_factory.CurrentType is { });

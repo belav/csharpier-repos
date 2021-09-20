@@ -28,7 +28,8 @@ namespace Microsoft.EntityFrameworkCore.Update
         public static object? GetCurrentProviderValue(
             this IUpdateEntry updateEntry,
             IProperty property
-        ) {
+        )
+        {
             var value = updateEntry.GetCurrentValue(property);
             var typeMapping = property.GetTypeMapping();
             value =
@@ -63,7 +64,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             this IUpdateEntry updateEntry,
             ChangeTrackerDebugStringOptions options = ChangeTrackerDebugStringOptions.LongDefault,
             int indent = 0
-        ) {
+        )
+        {
             var builder = new StringBuilder();
             var indentString = new string(' ', indent);
 
@@ -130,7 +132,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             {
                 foreach (
                     var alternateKey in entry.EntityType.GetKeys().Where(k => !k.IsPrimaryKey())
-                ) {
+                )
+                {
                     builder.Append(" AK ")
                         .Append(entry.BuildCurrentValuesString(alternateKey.Properties));
                 }
@@ -147,7 +150,8 @@ namespace Microsoft.EntityFrameworkCore.Update
                 foreach (
                     var navigation in entry.EntityType.GetNavigations()
                         .Concat<INavigationBase>(entry.EntityType.GetSkipNavigations())
-                ) {
+                )
+                {
                     builder.AppendLine().Append(indentString);
 
                     var currentValue = entry.GetCurrentValue(navigation);

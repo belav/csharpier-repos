@@ -28,7 +28,8 @@ namespace EchoApp
             IApplicationBuilder app,
             IWebHostEnvironment env,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -109,7 +110,8 @@ namespace EchoApp
             WebSocket webSocket,
             ValueWebSocketReceiveResult frame,
             byte[] buffer
-        ) {
+        )
+        {
             var close = frame.MessageType == WebSocketMessageType.Close;
             string message;
             if (close)

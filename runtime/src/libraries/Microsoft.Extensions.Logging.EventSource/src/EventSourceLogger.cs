@@ -31,7 +31,8 @@ namespace Microsoft.Extensions.Logging.EventSource
             int factoryID,
             LoggingEventSource eventSource,
             EventSourceLogger next
-        ) {
+        )
+        {
             CategoryName = categoryName;
 
             // Default is to turn on all the logging
@@ -60,7 +61,8 @@ namespace Microsoft.Extensions.Logging.EventSource
             TState state,
             Exception exception,
             Func<TState, Exception, string> formatter
-        ) {
+        )
+        {
             if (!IsEnabled(logLevel))
             {
                 return;
@@ -73,7 +75,8 @@ namespace Microsoft.Extensions.Logging.EventSource
                     EventLevel.Critical,
                     LoggingEventSource.Keywords.FormattedMessage
                 )
-            ) {
+            )
+            {
                 message = formatter(state, exception);
                 _eventSource.FormattedMessage(
                     logLevel,
@@ -105,7 +108,8 @@ namespace Microsoft.Extensions.Logging.EventSource
             // See if they want the json message
             if (
                 _eventSource.IsEnabled(EventLevel.Critical, LoggingEventSource.Keywords.JsonMessage)
-            ) {
+            )
+            {
                 string exceptionJson = "{}";
                 if (exception != null)
                 {
@@ -152,7 +156,8 @@ namespace Microsoft.Extensions.Logging.EventSource
             // If JsonMessage is on, use JSON format
             if (
                 _eventSource.IsEnabled(EventLevel.Critical, LoggingEventSource.Keywords.JsonMessage)
-            ) {
+            )
+            {
                 IReadOnlyList<KeyValuePair<string, string>> arguments = GetProperties(state);
                 _eventSource.ActivityJsonStart(id, _factoryID, CategoryName, ToJson(arguments));
                 return new ActivityScope(_eventSource, CategoryName, id, _factoryID, true);
@@ -164,7 +169,8 @@ namespace Microsoft.Extensions.Logging.EventSource
                     EventLevel.Critical,
                     LoggingEventSource.Keywords.FormattedMessage
                 )
-            ) {
+            )
+            {
                 IReadOnlyList<KeyValuePair<string, string>> arguments = GetProperties(state);
                 _eventSource.ActivityStart(id, _factoryID, CategoryName, arguments);
                 return new ActivityScope(_eventSource, CategoryName, id, _factoryID, false);
@@ -191,7 +197,8 @@ namespace Microsoft.Extensions.Logging.EventSource
                 int activityID,
                 int factoryID,
                 bool isJsonStop
-            ) {
+            )
+            {
                 _categoryName = categoryName;
                 _activityID = activityID;
                 _factoryID = factoryID;

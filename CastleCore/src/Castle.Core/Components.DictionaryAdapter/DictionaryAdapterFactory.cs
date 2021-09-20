@@ -123,7 +123,8 @@ namespace Castle.Components.DictionaryAdapter
             Type type,
             PropertyDescriptor descriptor,
             DictionaryAdapterMeta other
-        ) {
+        )
+        {
             if (type == null)
                 throw new ArgumentNullException(nameof(type));
             if (type.IsInterface == false)
@@ -151,7 +152,8 @@ namespace Castle.Components.DictionaryAdapter
             Type type,
             IDictionary dictionary,
             PropertyDescriptor descriptor
-        ) {
+        )
+        {
             var meta = InternalGetAdapterMeta(type, descriptor, null);
             return meta.CreateInstance(dictionary, descriptor);
         }
@@ -203,7 +205,8 @@ namespace Castle.Components.DictionaryAdapter
             Type type,
             TypeBuilder typeBuilder,
             PropertyDescriptor descriptor
-        ) {
+        )
+        {
             var binding = FieldAttributes.Public | FieldAttributes.Static;
             var metaField = typeBuilder.DefineField(
                 "__meta",
@@ -283,7 +286,8 @@ namespace Castle.Components.DictionaryAdapter
         private static void CreateAdapterFactoryMethod(
             TypeBuilder typeBuilder,
             ConstructorInfo constructor
-        ) {
+        )
+        {
             var factoryBuilder = typeBuilder.DefineMethod(
                 "__Create",
                 MethodAttributes.Public | MethodAttributes.Static | MethodAttributes.HideBySig,
@@ -312,7 +316,8 @@ namespace Castle.Components.DictionaryAdapter
             TypeBuilder typeBuilder,
             PropertyInfo prop,
             FieldInfo field
-        ) {
+        )
+        {
             const MethodAttributes propAttribs =
                 MethodAttributes.Public
                 | MethodAttributes.SpecialName
@@ -346,7 +351,8 @@ namespace Castle.Components.DictionaryAdapter
         private static void CreateAdapterProperty(
             TypeBuilder typeBuilder,
             PropertyDescriptor descriptor
-        ) {
+        )
+        {
             var property = descriptor.Property;
             var propertyBuilder = typeBuilder.DefineProperty(
                 property.Name,
@@ -374,7 +380,8 @@ namespace Castle.Components.DictionaryAdapter
         private static void PreparePropertyMethod(
             PropertyDescriptor descriptor,
             ILGenerator propILGenerator
-        ) {
+        )
+        {
             propILGenerator.DeclareLocal(typeof(string));
             propILGenerator.DeclareLocal(typeof(object));
 
@@ -392,7 +399,8 @@ namespace Castle.Components.DictionaryAdapter
             PropertyBuilder propertyBuilder,
             PropertyDescriptor descriptor,
             MethodAttributes propAttribs
-        ) {
+        )
+        {
             var getMethodBuilder = typeBuilder.DefineMethod(
                 "get_" + descriptor.PropertyName,
                 propAttribs,
@@ -451,7 +459,8 @@ namespace Castle.Components.DictionaryAdapter
             PropertyBuilder propertyBuilder,
             PropertyDescriptor descriptor,
             MethodAttributes propAttribs
-        ) {
+        )
+        {
             var setMethodBuilder = typeBuilder.DefineMethod(
                 "set_" + descriptor.PropertyName,
                 propAttribs,
@@ -490,7 +499,8 @@ namespace Castle.Components.DictionaryAdapter
             Type type,
             PropertyDescriptor initializers,
             out object[] typeBehaviors
-        ) {
+        )
+        {
             var propertyMap = new Dictionary<string, PropertyDescriptor>();
             var interfaceBehaviors = typeBehaviors = ExpandBehaviors(
                     InterfaceAttributeUtil.GetAttributes(type, true)
@@ -535,7 +545,8 @@ namespace Castle.Components.DictionaryAdapter
 
                     foreach (
                         var descriptorInitializer in propertyDescriptor.Behaviors.OfType<IPropertyDescriptorInitializer>()
-                    ) {
+                    )
+                    {
                         descriptorInitializer.Initialize(propertyDescriptor, propertyBehaviors);
                     }
 
@@ -583,7 +594,8 @@ namespace Castle.Components.DictionaryAdapter
         private static void CollectProperties(
             Type currentType,
             Action<PropertyInfo, Type> onProperty
-        ) {
+        )
+        {
             var types = new List<Type>();
             types.Add(currentType);
             types.AddRange(currentType.GetInterfaces());

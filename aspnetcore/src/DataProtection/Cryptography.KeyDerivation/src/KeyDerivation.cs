@@ -30,7 +30,8 @@ namespace Microsoft.AspNetCore.Cryptography.KeyDerivation
             KeyDerivationPrf prf,
             int iterationCount,
             int numBytesRequested
-        ) {
+        )
+        {
             if (password == null)
             {
                 throw new ArgumentNullException(nameof(password));

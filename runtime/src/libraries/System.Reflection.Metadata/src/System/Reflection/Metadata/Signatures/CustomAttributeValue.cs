@@ -13,7 +13,8 @@ namespace System.Reflection.Metadata
         public CustomAttributeValue(
             ImmutableArray<CustomAttributeTypedArgument<TType>> fixedArguments,
             ImmutableArray<CustomAttributeNamedArgument<TType>> namedArguments
-        ) {
+        )
+        {
             FixedArguments = fixedArguments;
             NamedArguments = namedArguments;
         }

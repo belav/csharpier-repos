@@ -56,7 +56,8 @@ namespace Microsoft.CodeAnalysis.Collections
             Func<TKey, ImmutableArray<TElement>> getElementsOfKey,
             Func<IEqualityComparer<TKey>, HashSet<TKey>> getKeys,
             IEqualityComparer<TKey> comparer
-        ) {
+        )
+        {
             _getElementsOfKey = getElementsOfKey;
             _getKeys = getKeys;
             _comparer = comparer;
@@ -131,7 +132,8 @@ namespace Microsoft.CodeAnalysis.Collections
         /// <returns>A new, empty dictionary, suitable for use as the fully populated map.</returns>
         private IDictionary<TKey, ImmutableArray<TElement>> CreateDictionaryForFullyPopulatedMap(
             int capacity
-        ) {
+        )
+        {
             // CONSIDER: If capacity is small, consider using a more frugal data structure.
             return new Dictionary<TKey, ImmutableArray<TElement>>(capacity, _comparer);
         }
@@ -181,7 +183,8 @@ namespace Microsoft.CodeAnalysis.Collections
         private ImmutableArray<TElement> AddToConcurrentMap(
             ConcurrentDictionary<TKey, ImmutableArray<TElement>> map,
             TKey key
-        ) {
+        )
+        {
             var elements = _getElementsOfKey(key);
 
             if (elements.IsDefaultOrEmpty)
@@ -202,7 +205,8 @@ namespace Microsoft.CodeAnalysis.Collections
         private static bool IsNotFullyPopulatedMap(
             [NotNullWhen(returnValue: false)]
                 IDictionary<TKey, ImmutableArray<TElement>>? existingMap
-        ) {
+        )
+        {
             return existingMap == null
                 || existingMap is ConcurrentDictionary<TKey, ImmutableArray<TElement>>;
         }
@@ -214,7 +218,8 @@ namespace Microsoft.CodeAnalysis.Collections
         /// <returns></returns>
         private IDictionary<TKey, ImmutableArray<TElement>> CreateFullyPopulatedMap(
             IDictionary<TKey, ImmutableArray<TElement>>? existingMap
-        ) {
+        )
+        {
             Debug.Assert(IsNotFullyPopulatedMap(existingMap));
 
             // Enumerate all the keys and attempt to generate values for all of them.

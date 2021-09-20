@@ -50,7 +50,8 @@ WHERE ((c[""Discriminator""] = ""LeafB"") OR ((c[""Discriminator""] = ""LeafA"")
         [ConditionalTheory(Skip = "Issue#16926")]
         public override async Task Navigation_rewrite_on_owned_collection_with_composition(
             bool async
-        ) {
+        )
+        {
             await base.Navigation_rewrite_on_owned_collection_with_composition(async);
 
             AssertSql(" ");
@@ -59,7 +60,8 @@ WHERE ((c[""Discriminator""] = ""LeafB"") OR ((c[""Discriminator""] = ""LeafA"")
         [ConditionalTheory(Skip = "Issue#16926")]
         public override async Task Navigation_rewrite_on_owned_collection_with_composition_complex(
             bool async
-        ) {
+        )
+        {
             await base.Navigation_rewrite_on_owned_collection_with_composition_complex(async);
 
             AssertSql(" ");
@@ -67,7 +69,8 @@ WHERE ((c[""Discriminator""] = ""LeafB"") OR ((c[""Discriminator""] = ""LeafA"")
 
         public override async Task Navigation_rewrite_on_owned_reference_projecting_entity(
             bool async
-        ) {
+        )
+        {
             await base.Navigation_rewrite_on_owned_reference_projecting_entity(async);
 
             AssertSql(
@@ -79,7 +82,8 @@ WHERE (c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"
 
         public override async Task Navigation_rewrite_on_owned_reference_projecting_scalar(
             bool async
-        ) {
+        )
+        {
             await base.Navigation_rewrite_on_owned_reference_projecting_scalar(async);
 
             AssertSql(
@@ -136,7 +140,8 @@ WHERE (c[""Discriminator""] = ""LeafA"")"
         [ConditionalTheory(Skip = "LeftJoin #17314")]
         public override Task Filter_owned_entity_chained_with_regular_entity_followed_by_projecting_owned_collection(
             bool async
-        ) {
+        )
+        {
             return base.Filter_owned_entity_chained_with_regular_entity_followed_by_projecting_owned_collection(
                 async
             );
@@ -145,14 +150,16 @@ WHERE (c[""Discriminator""] = ""LeafA"")"
         [ConditionalTheory(Skip = "LeftJoin #17314")]
         public override Task Navigation_rewrite_on_owned_reference_followed_by_regular_entity(
             bool async
-        ) {
+        )
+        {
             return base.Navigation_rewrite_on_owned_reference_followed_by_regular_entity(async);
         }
 
         [ConditionalTheory(Skip = "LeftJoin #17314")]
         public override Task Navigation_rewrite_on_owned_reference_followed_by_regular_entity_filter(
             bool async
-        ) {
+        )
+        {
             return base.Navigation_rewrite_on_owned_reference_followed_by_regular_entity_filter(
                 async
             );
@@ -161,7 +168,8 @@ WHERE (c[""Discriminator""] = ""LeafA"")"
         [ConditionalTheory(Skip = "LeftJoin #17314")]
         public override Task Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_another_reference(
             bool async
-        ) {
+        )
+        {
             return base.Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_another_reference(
                 async
             );
@@ -170,7 +178,8 @@ WHERE (c[""Discriminator""] = ""LeafA"")"
         [ConditionalTheory(Skip = "LeftJoin #17314")]
         public override Task Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_another_reference_and_scalar(
             bool async
-        ) {
+        )
+        {
             return base.Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_another_reference_and_scalar(
                 async
             );
@@ -179,7 +188,8 @@ WHERE (c[""Discriminator""] = ""LeafA"")"
         [ConditionalTheory(Skip = "LeftJoin #17314")]
         public override Task Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_collection(
             bool async
-        ) {
+        )
+        {
             return base.Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_collection(
                 async
             );
@@ -188,7 +198,8 @@ WHERE (c[""Discriminator""] = ""LeafA"")"
         [ConditionalTheory(Skip = "LeftJoin #17314")]
         public override Task Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_collection_count(
             bool async
-        ) {
+        )
+        {
             return base.Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_collection_count(
                 async
             );
@@ -197,7 +208,8 @@ WHERE (c[""Discriminator""] = ""LeafA"")"
         [ConditionalTheory(Skip = "LeftJoin #17314")]
         public override Task Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_property(
             bool async
-        ) {
+        )
+        {
             return base.Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_property(
                 async
             );
@@ -206,7 +218,8 @@ WHERE (c[""Discriminator""] = ""LeafA"")"
         [ConditionalTheory(Skip = "LeftJoin #17314")]
         public override Task Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_another_reference_in_predicate_and_projection(
             bool async
-        ) {
+        )
+        {
             return base.Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_another_reference_in_predicate_and_projection(
                 async
             );
@@ -221,7 +234,8 @@ WHERE (c[""Discriminator""] = ""LeafA"")"
         [ConditionalTheory(Skip = "LeftJoin #17314")]
         public override Task Project_multiple_owned_navigations_with_expansion_on_owned_collections(
             bool async
-        ) {
+        )
+        {
             return base.Project_multiple_owned_navigations_with_expansion_on_owned_collections(
                 async
             );
@@ -236,7 +250,8 @@ WHERE (c[""Discriminator""] = ""LeafA"")"
         [ConditionalTheory(Skip = "SelectMany #17246")]
         public override Task SelectMany_on_owned_reference_followed_by_regular_entity_and_collection(
             bool async
-        ) {
+        )
+        {
             return base.SelectMany_on_owned_reference_followed_by_regular_entity_and_collection(
                 async
             );
@@ -245,7 +260,8 @@ WHERE (c[""Discriminator""] = ""LeafA"")"
         [ConditionalTheory(Skip = "SelectMany #17246")]
         public override Task SelectMany_on_owned_reference_with_entity_in_between_ending_in_owned_collection(
             bool async
-        ) {
+        )
+        {
             return base.SelectMany_on_owned_reference_with_entity_in_between_ending_in_owned_collection(
                 async
             );
@@ -265,7 +281,8 @@ WHERE (c[""Discriminator""] = ""LeafA"")"
 
         public override async Task Query_with_OfType_eagerly_loads_correct_owned_navigations(
             bool async
-        ) {
+        )
+        {
             await base.Query_with_OfType_eagerly_loads_correct_owned_navigations(async);
 
             AssertSql(
@@ -332,7 +349,8 @@ WHERE (c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"
         [ConditionalTheory(Skip = "Issue #16146")]
         public override Task GroupBy_with_multiple_aggregates_on_owned_navigation_properties(
             bool async
-        ) {
+        )
+        {
             return base.GroupBy_with_multiple_aggregates_on_owned_navigation_properties(async);
         }
 
@@ -360,7 +378,8 @@ WHERE (c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"
 
         public override async Task Can_query_on_indexer_property_when_property_name_from_closure(
             bool async
-        ) {
+        )
+        {
             await base.Can_query_on_indexer_property_when_property_name_from_closure(async);
 
             AssertSql(
@@ -493,7 +512,8 @@ WHERE c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA""
 
         public override async Task Projecting_indexer_property_ignores_include_converted(
             bool isAsync
-        ) {
+        )
+        {
             await base.Projecting_indexer_property_ignores_include_converted(isAsync);
 
             AssertSql(
@@ -524,7 +544,8 @@ WHERE c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA""
         )]
         public override Task NoTracking_Include_with_cycles_does_not_throw_when_performing_identity_resolution(
             bool async
-        ) {
+        )
+        {
             return base.NoTracking_Include_with_cycles_does_not_throw_when_performing_identity_resolution(
                 async
             );
@@ -541,7 +562,8 @@ WHERE c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA""
         [ConditionalTheory(Skip = "Composition over owned collection #17246")]
         public override async Task Query_on_collection_entry_works_for_owned_collection(
             bool isAsync
-        ) {
+        )
+        {
             await base.Query_on_collection_entry_works_for_owned_collection(isAsync);
 
             AssertSql(" ");
@@ -550,7 +572,8 @@ WHERE c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA""
         [ConditionalTheory(Skip = "issue #17246")]
         public override async Task Projecting_collection_correlated_with_keyless_entity_after_navigation_works_using_parent_identifiers(
             bool isAsync
-        ) {
+        )
+        {
             await base.Projecting_collection_correlated_with_keyless_entity_after_navigation_works_using_parent_identifiers(
                 isAsync
             );

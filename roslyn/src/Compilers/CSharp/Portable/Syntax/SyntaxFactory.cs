@@ -249,7 +249,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxTriviaList leading,
             SyntaxKind kind,
             SyntaxTriviaList trailing
-        ) {
+        )
+        {
             return new SyntaxToken(
                 Syntax.InternalSyntax.SyntaxFactory.Token(leading.Node, kind, trailing.Node)
             );
@@ -273,7 +274,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string text,
             string valueText,
             SyntaxTriviaList trailing
-        ) {
+        )
+        {
             switch (kind)
             {
                 case SyntaxKind.IdentifierToken:
@@ -336,7 +338,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxTriviaList leading,
             SyntaxKind kind,
             SyntaxTriviaList trailing
-        ) {
+        )
+        {
             return new SyntaxToken(
                 Syntax.InternalSyntax.SyntaxFactory.MissingToken(leading.Node, kind, trailing.Node)
             );
@@ -369,7 +372,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxTriviaList leading,
             string text,
             SyntaxTriviaList trailing
-        ) {
+        )
+        {
             return new SyntaxToken(
                 Syntax.InternalSyntax.SyntaxFactory.Identifier(leading.Node, text, trailing.Node)
             );
@@ -388,7 +392,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string text,
             string valueText,
             SyntaxTriviaList trailing
-        ) {
+        )
+        {
             if (text.StartsWith("@", StringComparison.Ordinal))
             {
                 throw new ArgumentException("text should not start with an @ character.");
@@ -422,7 +427,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string text,
             string valueText,
             SyntaxTriviaList trailing
-        ) {
+        )
+        {
             return new SyntaxToken(
                 InternalSyntax.SyntaxFactory.Identifier(
                     contextualKind,
@@ -472,7 +478,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string text,
             int value,
             SyntaxTriviaList trailing
-        ) {
+        )
+        {
             return new SyntaxToken(
                 Syntax.InternalSyntax.SyntaxFactory.Literal(
                     leading.Node,
@@ -524,7 +531,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string text,
             uint value,
             SyntaxTriviaList trailing
-        ) {
+        )
+        {
             return new SyntaxToken(
                 Syntax.InternalSyntax.SyntaxFactory.Literal(
                     leading.Node,
@@ -576,7 +584,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string text,
             long value,
             SyntaxTriviaList trailing
-        ) {
+        )
+        {
             return new SyntaxToken(
                 Syntax.InternalSyntax.SyntaxFactory.Literal(
                     leading.Node,
@@ -628,7 +637,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string text,
             ulong value,
             SyntaxTriviaList trailing
-        ) {
+        )
+        {
             return new SyntaxToken(
                 Syntax.InternalSyntax.SyntaxFactory.Literal(
                     leading.Node,
@@ -680,7 +690,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string text,
             float value,
             SyntaxTriviaList trailing
-        ) {
+        )
+        {
             return new SyntaxToken(
                 Syntax.InternalSyntax.SyntaxFactory.Literal(
                     leading.Node,
@@ -729,7 +740,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string text,
             double value,
             SyntaxTriviaList trailing
-        ) {
+        )
+        {
             return new SyntaxToken(
                 Syntax.InternalSyntax.SyntaxFactory.Literal(
                     leading.Node,
@@ -781,7 +793,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string text,
             decimal value,
             SyntaxTriviaList trailing
-        ) {
+        )
+        {
             return new SyntaxToken(
                 Syntax.InternalSyntax.SyntaxFactory.Literal(
                     leading.Node,
@@ -830,7 +843,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string text,
             string value,
             SyntaxTriviaList trailing
-        ) {
+        )
+        {
             return new SyntaxToken(
                 Syntax.InternalSyntax.SyntaxFactory.Literal(
                     leading.Node,
@@ -886,7 +900,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string text,
             char value,
             SyntaxTriviaList trailing
-        ) {
+        )
+        {
             return new SyntaxToken(
                 Syntax.InternalSyntax.SyntaxFactory.Literal(
                     leading.Node,
@@ -907,7 +922,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxTriviaList leading,
             string text,
             SyntaxTriviaList trailing
-        ) {
+        )
+        {
             return new SyntaxToken(
                 Syntax.InternalSyntax.SyntaxFactory.BadToken(leading.Node, text, trailing.Node)
             );
@@ -925,7 +941,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string text,
             string value,
             SyntaxTriviaList trailing
-        ) {
+        )
+        {
             return new SyntaxToken(
                 Syntax.InternalSyntax.SyntaxFactory.XmlTextLiteral(
                     leading.Node,
@@ -948,7 +965,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string text,
             string value,
             SyntaxTriviaList trailing
-        ) {
+        )
+        {
             return new SyntaxToken(
                 Syntax.InternalSyntax.SyntaxFactory.XmlEntity(
                     leading.Node,
@@ -968,7 +986,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </param>
         public static DocumentationCommentTriviaSyntax DocumentationComment(
             params XmlNodeSyntax[] content
-        ) {
+        )
+        {
             return DocumentationCommentTrivia(
                     SyntaxKind.SingleLineDocumentationCommentTrivia,
                     List(content)
@@ -1023,7 +1042,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static XmlElementSyntax XmlSeeAlsoElement(
             Uri linkAddress,
             SyntaxList<XmlNodeSyntax> linkText
-        ) {
+        )
+        {
             XmlElementSyntax element = XmlElement(
                 DocumentationCommentXmlNames.SeeAlsoElementName,
                 linkText
@@ -1177,7 +1197,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static XmlElementSyntax XmlExceptionElement(
             CrefSyntax cref,
             params XmlNodeSyntax[] content
-        ) {
+        )
+        {
             return XmlExceptionElement(cref, List(content));
         }
 
@@ -1189,7 +1210,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static XmlElementSyntax XmlExceptionElement(
             CrefSyntax cref,
             SyntaxList<XmlNodeSyntax> content
-        ) {
+        )
+        {
             XmlElementSyntax element = XmlElement(
                 DocumentationCommentXmlNames.ExceptionElementName,
                 content
@@ -1205,7 +1227,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static XmlElementSyntax XmlPermissionElement(
             CrefSyntax cref,
             params XmlNodeSyntax[] content
-        ) {
+        )
+        {
             return XmlPermissionElement(cref, List(content));
         }
 
@@ -1217,7 +1240,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static XmlElementSyntax XmlPermissionElement(
             CrefSyntax cref,
             SyntaxList<XmlNodeSyntax> content
-        ) {
+        )
+        {
             XmlElementSyntax element = XmlElement(
                 DocumentationCommentXmlNames.PermissionElementName,
                 content
@@ -1275,7 +1299,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static XmlElementSyntax XmlParamElement(
             string parameterName,
             params XmlNodeSyntax[] content
-        ) {
+        )
+        {
             return XmlParamElement(parameterName, List(content));
         }
 
@@ -1289,7 +1314,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static XmlElementSyntax XmlParamElement(
             string parameterName,
             SyntaxList<XmlNodeSyntax> content
-        ) {
+        )
+        {
             XmlElementSyntax element = XmlElement(
                 DocumentationCommentXmlNames.ParameterElementName,
                 content
@@ -1367,7 +1393,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static XmlElementSyntax XmlElement(
             string localName,
             SyntaxList<XmlNodeSyntax> content
-        ) {
+        )
+        {
             return XmlElement(XmlName(localName), content);
         }
 
@@ -1379,7 +1406,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static XmlElementSyntax XmlElement(
             XmlNameSyntax name,
             SyntaxList<XmlNodeSyntax> content
-        ) {
+        )
+        {
             return XmlElement(XmlElementStartTag(name), content, XmlElementEndTag(name));
         }
 
@@ -1401,7 +1429,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static XmlTextAttributeSyntax XmlTextAttribute(
             string name,
             params SyntaxToken[] textTokens
-        ) {
+        )
+        {
             return XmlTextAttribute(
                 XmlName(name),
                 SyntaxKind.DoubleQuoteToken,
@@ -1419,7 +1448,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string name,
             SyntaxKind quoteKind,
             SyntaxTokenList textTokens
-        ) {
+        )
+        {
             return XmlTextAttribute(XmlName(name), quoteKind, textTokens);
         }
 
@@ -1433,7 +1463,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             XmlNameSyntax name,
             SyntaxKind quoteKind,
             SyntaxTokenList textTokens
-        ) {
+        )
+        {
             return XmlTextAttribute(name, Token(quoteKind), textTokens, Token(quoteKind))
                 .WithLeadingTrivia(Whitespace(" "));
         }
@@ -1446,7 +1477,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static XmlElementSyntax XmlMultiLineElement(
             string localName,
             SyntaxList<XmlNodeSyntax> content
-        ) {
+        )
+        {
             return XmlMultiLineElement(XmlName(localName), content);
         }
 
@@ -1458,7 +1490,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static XmlElementSyntax XmlMultiLineElement(
             XmlNameSyntax name,
             SyntaxList<XmlNodeSyntax> content
-        ) {
+        )
+        {
             return XmlElement(XmlElementStartTag(name), content, XmlElementEndTag(name));
         }
 
@@ -1494,7 +1527,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string text,
             string value,
             SyntaxTriviaList trailing
-        ) {
+        )
+        {
             return new SyntaxToken(
                 InternalSyntax.SyntaxFactory.XmlTextNewLine(
                     leading.Node,
@@ -1589,7 +1623,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static SyntaxToken XmlReplaceBracketTokens(
             SyntaxToken originalToken,
             SyntaxToken rewrittenToken
-        ) {
+        )
+        {
             if (
                 rewrittenToken.IsKind(SyntaxKind.LessThanToken)
                 && string.Equals("<", rewrittenToken.Text, StringComparison.Ordinal)
@@ -1944,7 +1979,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <param name="nodesAndTokens">The sequence of nodes and tokens</param>
         public static SyntaxNodeOrTokenList NodeOrTokenList(
             IEnumerable<SyntaxNodeOrToken> nodesAndTokens
-        ) {
+        )
+        {
             return new SyntaxNodeOrTokenList(nodesAndTokens);
         }
 
@@ -1954,7 +1990,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <param name="nodesAndTokens">The nodes and tokens</param>
         public static SyntaxNodeOrTokenList NodeOrTokenList(
             params SyntaxNodeOrToken[] nodesAndTokens
-        ) {
+        )
+        {
             return new SyntaxNodeOrTokenList(nodesAndTokens);
         }
 
@@ -1977,7 +2014,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ParseOptions? options = null,
             string path = "",
             Encoding? encoding = null
-        ) {
+        )
+        {
             return CSharpSyntaxTree.Create(
                 (CSharpSyntaxNode)root,
                 (CSharpParseOptions?)options,
@@ -1996,7 +2034,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string path = "",
             Encoding? encoding = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return CSharpSyntaxTree.ParseText(
                 text,
                 (CSharpParseOptions?)options,
@@ -2012,7 +2051,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ParseOptions? options = null,
             string path = "",
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return CSharpSyntaxTree.ParseText(
                 text,
                 (CSharpParseOptions?)options,
@@ -2039,7 +2079,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string text,
             CSharpParseOptions? options,
             int offset = 0
-        ) {
+        )
+        {
             using (var lexer = new InternalSyntax.Lexer(MakeSourceText(text, offset), options))
             {
                 return lexer.LexSyntaxLeadingTrivia();
@@ -2056,7 +2097,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     MakeSourceText(text, offset),
                     CSharpParseOptions.Default
                 )
-            ) {
+            )
+            {
                 return lexer.LexSyntaxTrailingTrivia();
             }
         }
@@ -2103,7 +2145,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     MakeSourceText(text, offset),
                     CSharpParseOptions.Default
                 )
-            ) {
+            )
+            {
                 return new SyntaxToken(lexer.Lex(InternalSyntax.LexerMode.Syntax));
             }
         }
@@ -2120,13 +2163,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             int offset = 0,
             int initialTokenPosition = 0,
             CSharpParseOptions? options = null
-        ) {
+        )
+        {
             using (
                 var lexer = new InternalSyntax.Lexer(
                     MakeSourceText(text, offset),
                     options ?? CSharpParseOptions.Default
                 )
-            ) {
+            )
+            {
                 var position = initialTokenPosition;
                 while (true)
                 {
@@ -2181,7 +2226,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             int offset = 0,
             ParseOptions? options = null,
             bool consumeFullText = true
-        ) {
+        )
+        {
             using (var lexer = MakeLexer(text, offset, (CSharpParseOptions?)options))
             using (var parser = MakeParser(lexer))
             {
@@ -2205,7 +2251,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             int offset = 0,
             ParseOptions? options = null,
             bool consumeFullText = true
-        ) {
+        )
+        {
             using (var lexer = MakeLexer(text, offset, (CSharpParseOptions?)options))
             using (var parser = MakeParser(lexer))
             {
@@ -2229,7 +2276,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             int offset = 0,
             ParseOptions? options = null,
             bool consumeFullText = true
-        ) {
+        )
+        {
             using (var lexer = MakeLexer(text, offset, (CSharpParseOptions?)options))
             using (var parser = MakeParser(lexer))
             {
@@ -2254,7 +2302,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             int offset = 0,
             ParseOptions? options = null,
             bool consumeFullText = true
-        ) {
+        )
+        {
             using (var lexer = MakeLexer(text, offset, (CSharpParseOptions?)options))
             using (var parser = MakeParser(lexer))
             {
@@ -2282,7 +2331,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string text,
             int offset = 0,
             CSharpParseOptions? options = null
-        ) {
+        )
+        {
             // note that we do not need a "consumeFullText" parameter, because parsing a compilation unit always must
             // consume input until the end-of-file
             using (var lexer = MakeLexer(text, offset, options))
@@ -2306,7 +2356,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             int offset = 0,
             ParseOptions? options = null,
             bool consumeFullText = true
-        ) {
+        )
+        {
             using (var lexer = MakeLexer(text, offset, (CSharpParseOptions?)options))
             using (var parser = MakeParser(lexer))
             {
@@ -2330,7 +2381,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             int offset = 0,
             ParseOptions? options = null,
             bool consumeFullText = true
-        ) {
+        )
+        {
             using (var lexer = MakeLexer(text, offset, (CSharpParseOptions?)options))
             using (var parser = MakeParser(lexer))
             {
@@ -2354,7 +2406,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             int offset = 0,
             ParseOptions? options = null,
             bool consumeFullText = true
-        ) {
+        )
+        {
             using (var lexer = MakeLexer(text, offset, (CSharpParseOptions?)options))
             using (var parser = MakeParser(lexer))
             {
@@ -2378,7 +2431,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             int offset = 0,
             ParseOptions? options = null,
             bool consumeFullText = true
-        ) {
+        )
+        {
             using (var lexer = MakeLexer(text, offset, (CSharpParseOptions?)options))
             using (var parser = MakeParser(lexer))
             {
@@ -2402,7 +2456,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             int offset = 0,
             ParseOptions? options = null,
             bool consumeFullText = true
-        ) {
+        )
+        {
             using (var lexer = MakeLexer(text, offset, (CSharpParseOptions?)options))
             using (var parser = MakeParser(lexer))
             {
@@ -2425,7 +2480,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string text,
             int offset,
             CSharpParseOptions? options = null
-        ) {
+        )
+        {
             return new InternalSyntax.Lexer(
                 text: MakeSourceText(text, offset),
                 options: options ?? CSharpParseOptions.Default
@@ -2500,7 +2556,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxNode? oldNode,
             SyntaxNode? newNode,
             Func<SyntaxKind, bool>? ignoreChildNode = null
-        ) {
+        )
+        {
             return SyntaxEquivalence.AreEquivalent(
                 oldNode,
                 newNode,
@@ -2624,7 +2681,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         node.Kind() == SyntaxKind.IdentifierName
                         || node.Kind() == SyntaxKind.GenericName
                     )
-                ) {
+                )
+                {
                     switch (parent.Kind())
                     {
                         case SyntaxKind.QualifiedName:
@@ -2761,7 +2819,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (
                         node.Kind() == SyntaxKind.NullableType
                         && ((ObjectCreationExpressionSyntax)parent).Type == node
-                    ) {
+                    )
+                    {
                         return parent;
                     }
                     break;
@@ -2789,7 +2848,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         internal static ConditionalAccessExpressionSyntax? FindConditionalAccessNodeForBinding(
             CSharpSyntaxNode node
-        ) {
+        )
+        {
             var currentNode = node;
 
             Debug.Assert(
@@ -2922,7 +2982,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 lastNode.HasTrailingTrivia
                 && lastNode.ContainsDiagnostics
                 && HasUnterminatedMultiLineComment(lastNode.GetTrailingTrivia())
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -2959,7 +3020,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     tree.Options.Kind == SourceCodeKind.Regular
                     || !globalStatement.Statement.IsKind(SyntaxKind.ExpressionStatement)
                     || !token.IsKind(SyntaxKind.SemicolonToken)
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -2999,7 +3061,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 if (
                     trivia.ContainsDiagnostics && trivia.Kind() == SyntaxKind.MultiLineCommentTrivia
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -3045,7 +3108,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ExplicitInterfaceSpecifierSyntax explicitInterfaceSpecifier,
             SyntaxToken identifier,
             AccessorListSyntax accessorList
-        ) {
+        )
+        {
             return SyntaxFactory.PropertyDeclaration(
                 attributeLists,
                 modifiers,
@@ -3067,7 +3131,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ParameterListSyntax parameterList,
             BlockSyntax body,
             SyntaxToken semicolonToken
-        ) {
+        )
+        {
             return SyntaxFactory.ConversionOperatorDeclaration(
                 attributeLists: attributeLists,
                 modifiers: modifiers,
@@ -3090,7 +3155,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ParameterListSyntax parameterList,
             BlockSyntax body,
             SyntaxToken semicolonToken
-        ) {
+        )
+        {
             return SyntaxFactory.OperatorDeclaration(
                 attributeLists: attributeLists,
                 modifiers: modifiers,
@@ -3120,7 +3186,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static ClassOrStructConstraintSyntax ClassOrStructConstraint(
             SyntaxKind kind,
             SyntaxToken classOrStructKeyword
-        ) {
+        )
+        {
             return ClassOrStructConstraint(
                 kind,
                 classOrStructKeyword,
@@ -3243,7 +3310,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ExplicitInterfaceSpecifierSyntax explicitInterfaceSpecifier,
             SyntaxToken identifier,
             AccessorListSyntax accessorList
-        ) {
+        )
+        {
             return EventDeclaration(
                 attributeLists,
                 modifiers,
@@ -3265,7 +3333,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ExplicitInterfaceSpecifierSyntax explicitInterfaceSpecifier,
             SyntaxToken identifier,
             SyntaxToken semicolonToken
-        ) {
+        )
+        {
             return EventDeclaration(
                 attributeLists,
                 modifiers,
@@ -3282,7 +3351,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static SwitchStatementSyntax SwitchStatement(
             ExpressionSyntax expression,
             SyntaxList<SwitchSectionSyntax> sections
-        ) {
+        )
+        {
             bool needsParens = !(expression is TupleExpressionSyntax);
             var openParen = needsParens ? SyntaxFactory.Token(SyntaxKind.OpenParenToken) : default;
             var closeParen = needsParens
@@ -3414,7 +3484,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Encoding? encoding,
             ImmutableDictionary<string, ReportDiagnostic>? diagnosticOptions,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return ParseSyntaxTree(
                 SourceText.From(text, encoding),
                 options,
@@ -3437,7 +3508,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string path,
             ImmutableDictionary<string, ReportDiagnostic>? diagnosticOptions,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return CSharpSyntaxTree.ParseText(
                 text,
                 (CSharpParseOptions?)options,
@@ -3462,7 +3534,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableDictionary<string, ReportDiagnostic>? diagnosticOptions,
             bool? isGeneratedCode,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return ParseSyntaxTree(
                 SourceText.From(text, encoding),
                 options,
@@ -3486,7 +3559,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableDictionary<string, ReportDiagnostic>? diagnosticOptions,
             bool? isGeneratedCode,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return CSharpSyntaxTree.ParseText(
                 text,
                 (CSharpParseOptions?)options,

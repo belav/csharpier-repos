@@ -83,7 +83,8 @@ namespace Microsoft.AspNetCore.TestHost
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             VerifyBuffer(buffer, offset, count);
             CheckAborted();
 

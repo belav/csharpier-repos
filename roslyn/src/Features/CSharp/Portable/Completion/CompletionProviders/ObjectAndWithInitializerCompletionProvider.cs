@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             Document document,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // We're exclusive if this context could only be an object initializer and not also a
             // collection initializer. If we're initializing something that could be initialized as
             // an object or as a collection, say we're not exclusive. That way the rest of
@@ -128,7 +129,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             SemanticModel semanticModel,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var tree = semanticModel.SyntaxTree;
             if (tree.IsInNonUserCode(position, cancellationToken))
             {
@@ -155,7 +157,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     SyntaxKind.ObjectInitializerExpression,
                     SyntaxKind.WithInitializerExpression
                 )
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -173,7 +176,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             Document document,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var parent = token.Parent.Parent;
 
             // new() { $$
@@ -183,7 +187,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     SyntaxKind.ObjectCreationExpression,
                     SyntaxKind.ImplicitObjectCreationExpression
                 )
-            ) {
+            )
+            {
                 return semanticModel.GetTypeInfo(parent, cancellationToken).Type;
             }
 
@@ -214,7 +219,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             SyntaxTree tree,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var token = tree.FindTokenOnLeftOfPosition(position, cancellationToken)
                 .GetPreviousTokenIfTouchingWord(position);
 

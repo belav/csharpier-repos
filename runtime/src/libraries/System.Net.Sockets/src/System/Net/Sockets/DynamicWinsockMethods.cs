@@ -20,7 +20,8 @@ namespace System.Net.Sockets
             AddressFamily addressFamily,
             SocketType socketType,
             ProtocolType protocolType
-        ) {
+        )
+        {
             lock (s_methodTable)
             {
                 DynamicWinsockMethods methods;
@@ -32,7 +33,8 @@ namespace System.Net.Sockets
                         methods._addressFamily == addressFamily
                         && methods._socketType == socketType
                         && methods._protocolType == protocolType
-                    ) {
+                    )
+                    {
                         return methods;
                     }
                 }
@@ -58,7 +60,8 @@ namespace System.Net.Sockets
             AddressFamily addressFamily,
             SocketType socketType,
             ProtocolType protocolType
-        ) {
+        )
+        {
             _addressFamily = addressFamily;
             _socketType = socketType;
             _protocolType = protocolType;

@@ -131,7 +131,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddRouting(
             this IServiceCollection services,
             Action<RouteOptions> configureOptions
-        ) {
+        )
+        {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));

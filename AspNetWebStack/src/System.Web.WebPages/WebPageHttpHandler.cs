@@ -83,7 +83,8 @@ namespace System.Web.WebPages
         internal static IHttpHandler CreateFromVirtualPath(
             string virtualPath,
             IVirtualPathFactory virtualPathFactory
-        ) {
+        )
+        {
             // We will try to create a WebPage from our factory. If this fails, we assume that the virtual path maps to an IHttpHandler.
             // Instantiate the page from the virtual path
             WebPage page = virtualPathFactory.CreateInstance<WebPage>(virtualPath);

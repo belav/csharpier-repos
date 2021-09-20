@@ -62,11 +62,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 LambdaExpression equalsExpression,
                 LambdaExpression hashCodeExpression,
                 LambdaExpression snapshotExpression
-            ) : base(
-                (Expression<Func<T?, T?, bool>>)equalsExpression,
-                (Expression<Func<T, int>>)hashCodeExpression,
-                (Expression<Func<T?, T?>>)snapshotExpression
-            ) { }
+            )
+                : base(
+                    (Expression<Func<T?, T?, bool>>)equalsExpression,
+                    (Expression<Func<T, int>>)hashCodeExpression,
+                    (Expression<Func<T?, T?>>)snapshotExpression
+                ) { }
         }
     }
 }

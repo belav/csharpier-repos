@@ -136,7 +136,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
             Document document,
             SyntaxNode node,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (Logger.LogBlock(FunctionId.Refactoring_GenerateType, cancellationToken))
             {
                 var semanticDocument = await SemanticDocument.CreateAsync(
@@ -181,7 +182,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
             SyntaxNode node,
             State state,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<CodeAction>.GetInstance(out var result);
 
             var generateNewTypeInDialog = false;
@@ -217,7 +219,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
                 if (
                     (isSimpleName || generateIntoContaining)
                     && CanGenerateIntoContainingNamespace(document, node, cancellationToken)
-                ) {
+                )
+                {
                     result.Add(
                         new GenerateTypeCodeAction(
                             (TService)this,
@@ -253,7 +256,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
             SemanticDocument semanticDocument,
             SyntaxNode node,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var containingNamespace = semanticDocument.SemanticModel.GetEnclosingNamespace(
                 node.SpanStart,
                 cancellationToken
@@ -278,7 +282,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
             SyntaxNode node,
             State state,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var containingNamespace = document.SemanticModel.GetEnclosingNamespace(
                 node.SpanStart,
                 cancellationToken
@@ -309,7 +314,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
             SemanticModel semanticModel,
             IEnumerable<SyntaxNode> typeArguments,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var arguments = typeArguments.ToList();
             var arity = arguments.Count;
             using var _ = ArrayBuilder<ITypeParameterSymbol>.GetInstance(out var typeParameters);
@@ -367,7 +373,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
             SemanticModel semanticModel,
             bool intoNamespace,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (state.IsPublicAccessibilityForTypeGeneration)
             {
                 return Accessibility.Public;
@@ -385,7 +392,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
                 if (
                     outerTypeSymbol != null
                     && outerTypeSymbol.IsContainedWithin(state.TypeToGenerateInOpt)
-                ) {
+                )
+                {
                     return Accessibility.Private;
                 }
             }
@@ -398,7 +406,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
             SemanticModel semanticModel,
             bool intoNamespace,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var availableInnerTypeParameters = GetTypeParameters(
                 state,
                 semanticModel,
@@ -417,7 +426,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
             int triggeringPosition,
             string includeUsingsOrImports,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
             if (semanticModel != null)
@@ -430,7 +440,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
                     namespaceSymbol != null
                     && namespaceSymbol.ToDisplayString()
                         .StartsWith(includeUsingsOrImports, StringComparison.Ordinal)
-                ) {
+                )
+                {
                     return true;
                 }
             }

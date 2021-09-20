@@ -71,7 +71,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual GroupByShaperExpression Update(
             Expression keySelector,
             Expression elementSelector
-        ) {
+        )
+        {
             Check.NotNull(keySelector, nameof(keySelector));
             Check.NotNull(elementSelector, nameof(elementSelector));
 

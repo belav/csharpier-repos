@@ -61,7 +61,8 @@ namespace System.Text.Encodings.Web.Tests
         public void EncodeUtf8_WellFormedInput_DoesNotRequireEncoding_CopiedToDestinationCorrectly(
             int destinationSize,
             int expectedBytesCopied
-        ) {
+        )
+        {
             // This test considers input which is well-formed and doesn't need to be encoded.
             // If the destination buffer is large enough, the data should be copied in its entirety.
             // If the destination buffer is too small, only complete UTF-8 subsequences should be copied.
@@ -179,7 +180,8 @@ namespace System.Text.Encodings.Web.Tests
                             expectedOutputBytesSoFar.Count,
                             expectedOutputBytesSoFar.Count + 1024
                         }
-                    ) {
+                    )
+                    {
                         destination = new byte[destinationLength];
 
                         Assert.Equal(
@@ -283,7 +285,8 @@ namespace System.Text.Encodings.Web.Tests
                         expectedOutputBytesSoFar.Count,
                         expectedOutputBytesSoFar.Count + 1024
                     }
-                ) {
+                )
+                {
                     destination = new byte[destinationLength];
 
                     Assert.Equal(
@@ -416,7 +419,8 @@ namespace System.Text.Encodings.Web.Tests
         public void FindFirstCharToEncodeUtf8_IllFormedData_ReturnsIndexOfIllFormedSubsequence(
             byte[] utf8Data,
             int expectedIndex
-        ) {
+        )
+        {
             // Arrange
 
             var encoder = new ConfigurableScalarTextEncoder(
@@ -449,7 +453,8 @@ namespace System.Text.Encodings.Web.Tests
             string expectedOutput,
             int expectedCharsConsumed,
             OperationStatus expectedResult
-        ) {
+        )
+        {
             // Arrange
 
             var encoder = new ConfigurableScalarTextEncoder(
@@ -488,7 +493,8 @@ namespace System.Text.Encodings.Web.Tests
             string expectedOutput,
             int expectedCharsConsumed,
             OperationStatus expectedResult
-        ) {
+        )
+        {
             // Arrange
 
             var encoder = new ConfigurableScalarTextEncoder(_ => true); // allow all well-formed scalars
@@ -576,7 +582,8 @@ namespace System.Text.Encodings.Web.Tests
             string expectedOutput,
             int expectedCharsConsumed,
             OperationStatus expectedResult
-        ) {
+        )
+        {
             // Arrange
 
             var encoder = new ConfigurableScalarTextEncoder(_ => true); // allow all well-formed scalars

@@ -156,7 +156,8 @@ class ExactSpellingTest
         int expectedParameterValue,
         int actualReturnValue,
         int actualParameterValue
-    ) {
+    )
+    {
         Assert.AreEqual(expectedReturnValue, actualReturnValue);
         Assert.AreEqual(expectedParameterValue, actualParameterValue);
     }

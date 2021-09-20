@@ -41,7 +41,8 @@ namespace System
             int start,
             ref int returnedEnd,
             bool notImplicitFile
-        ) {
+        )
+        {
             int end = returnedEnd;
 
             if (start == end)
@@ -57,7 +58,8 @@ namespace System
                     name[i] == '/'
                     || name[i] == '\\'
                     || (notImplicitFile && (name[i] == ':' || name[i] == '?' || name[i] == '#'))
-                ) {
+                )
+                {
                     end = i;
                     break;
                 }
@@ -87,7 +89,8 @@ namespace System
                     name[i] == '/'
                     || name[i] == '\\'
                     || (notImplicitFile && (name[i] == ':' || name[i] == '?' || name[i] == '#'))
-                ) {
+                )
+                {
                     end = i;
                     break;
                 }

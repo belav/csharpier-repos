@@ -76,7 +76,8 @@ namespace System.Speech.Internal.SrgsCompiler
                 start.IsEpsilonTransition & start.IsPropertylessTransition
                 && startEndState != null
                 && startEndState.InArcs.IsEmpty
-            ) {
+            )
+            {
                 System.Diagnostics.Debug.Assert(start.End == startEndState);
                 start.End = null;
                 _backend.MoveOutputTransitionsAndDeleteState(startEndState, _startState);
@@ -91,7 +92,8 @@ namespace System.Speech.Internal.SrgsCompiler
                 end.IsEpsilonTransition & end.IsPropertylessTransition
                 && endStartState != null
                 && endStartState.OutArcs.IsEmpty
-            ) {
+            )
+            {
                 System.Diagnostics.Debug.Assert(end.Start == endStartState);
                 end.Start = null;
                 _backend.MoveInputTransitionsAndDeleteState(endStartState, _endState);

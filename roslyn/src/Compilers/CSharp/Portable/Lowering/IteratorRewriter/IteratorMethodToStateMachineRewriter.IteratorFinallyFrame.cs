@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 int finalizeState,
                 IteratorFinallyMethodSymbol handler,
                 HashSet<LabelSymbol> labels
-            ) {
+            )
+            {
                 Debug.Assert(parent != null, "non root frame must have a parent");
                 Debug.Assert((object)handler != null, "non root frame must have a handler");
 

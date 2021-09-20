@@ -26,19 +26,21 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 ITextBuffer subjectBuffer,
                 object provider,
                 PreviewChangesCodeAction codeAction
-            ) : base(
-                threadingContext,
-                sourceProvider,
-                workspace,
-                subjectBuffer,
-                provider,
-                codeAction
-            ) { }
+            )
+                : base(
+                    threadingContext,
+                    sourceProvider,
+                    workspace,
+                    subjectBuffer,
+                    provider,
+                    codeAction
+                ) { }
 
             public static async Task<SuggestedAction> CreateAsync(
                 SuggestedActionWithNestedFlavors suggestedAction,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var previewResult = await suggestedAction.GetPreviewResultAsync(cancellationToken)
                     .ConfigureAwait(true);
                 if (previewResult == null)

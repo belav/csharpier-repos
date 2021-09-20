@@ -51,7 +51,8 @@ namespace System.Data
             string? constraintName,
             DataColumn parentColumn,
             DataColumn childColumn
-        ) {
+        )
+        {
             DataColumn[] parentColumns = new DataColumn[] { parentColumn };
             DataColumn[] childColumns = new DataColumn[] { childColumn };
             Create(constraintName, parentColumns, childColumns);
@@ -72,7 +73,8 @@ namespace System.Data
             string? constraintName,
             DataColumn[] parentColumns,
             DataColumn[] childColumns
-        ) {
+        )
+        {
             Create(constraintName, parentColumns, childColumns);
         }
 
@@ -86,7 +88,8 @@ namespace System.Data
             AcceptRejectRule acceptRejectRule,
             Rule deleteRule,
             Rule updateRule
-        ) {
+        )
+        {
             _constraintName = constraintName;
             _parentColumnNames = parentColumnNames;
             _childColumnNames = childColumnNames;
@@ -107,7 +110,8 @@ namespace System.Data
             AcceptRejectRule acceptRejectRule,
             Rule deleteRule,
             Rule updateRule
-        ) {
+        )
+        {
             _constraintName = constraintName;
             _parentColumnNames = parentColumnNames;
             _childColumnNames = childColumnNames;
@@ -169,7 +173,8 @@ namespace System.Data
             if (
                 Table.Locale.LCID != RelatedTable.Locale.LCID
                 || Table.CaseSensitive != RelatedTable.CaseSensitive
-            ) {
+            )
+            {
                 throw ExceptionBuilder.CaseLocaleMismatch();
             }
         }
@@ -569,7 +574,8 @@ namespace System.Data
             if (
                 DataRelation.GetChildRows(ParentKey, ChildKey, row, DataRowVersion.Default).Length
                 > 0
-            ) {
+            )
+            {
                 throw ExceptionBuilder.RemoveParentRow(this);
             }
         }
@@ -634,7 +640,8 @@ namespace System.Data
                 && Table!.DataSet != null
                 && Table.DataSet.EnforceConstraints
                 && childRow.HasKeyChanged(_childKey)
-            ) {
+            )
+            {
                 // This branch is for cascading case verification.
                 DataRowVersion version =
                     (action == DataRowAction.Rollback)
@@ -910,7 +917,8 @@ namespace System.Data
             string? relationName,
             DataColumn[] parentColumns,
             DataColumn[] childColumns
-        ) {
+        )
+        {
             if (parentColumns.Length == 0 || childColumns.Length == 0)
             {
                 throw ExceptionBuilder.KeyLengthZero();

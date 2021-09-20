@@ -60,7 +60,8 @@ namespace Roslyn.VisualStudio.IntegrationTests
                     _projectTemplate != WellKnownProjectTemplates.WinFormsApplication
                     && _projectTemplate != WellKnownProjectTemplates.WpfApplication
                     && _projectTemplate != WellKnownProjectTemplates.CSharpNetCoreClassLibrary
-                ) {
+                )
+                {
                     VisualStudio.Editor.SetUseSuggestionMode(false);
                     ClearEditor();
                 }

@@ -112,7 +112,8 @@ namespace System.Net.Mail
             object? state,
             string host,
             int port
-        ) {
+        )
+        {
             IAsyncResult? result = null;
             try
             {
@@ -155,7 +156,8 @@ namespace System.Net.Mail
             bool allowUnicode,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             if (sender == null)
             {
                 throw new ArgumentNullException(nameof(sender));
@@ -215,7 +217,8 @@ namespace System.Net.Mail
             string deliveryNotify,
             bool allowUnicode,
             out SmtpFailedRecipientException? exception
-        ) {
+        )
+        {
             if (sender == null)
             {
                 throw new ArgumentNullException(nameof(sender));
@@ -329,7 +332,8 @@ namespace System.Net.Mail
                     !(sendMailResult is SmtpFailedRecipientException)
                     || ((SmtpFailedRecipientException)sendMailResult).fatal
                 )
-            ) {
+            )
+            {
                 ExceptionDispatchInfo.Throw(e);
             }
 

@@ -39,12 +39,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal SubstitutedMethodSymbol(
             NamedTypeSymbol containingSymbol,
             MethodSymbol originalDefinition
-        ) : this(
-            containingSymbol,
-            containingSymbol.TypeSubstitution,
-            originalDefinition,
-            constructedFrom: null
-        ) {
+        )
+            : this(
+                containingSymbol,
+                containingSymbol.TypeSubstitution,
+                originalDefinition,
+                constructedFrom: null
+            )
+        {
             Debug.Assert(
                 containingSymbol is SubstitutedNamedTypeSymbol
                     || containingSymbol is SubstitutedErrorTypeSymbol
@@ -63,7 +65,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             TypeMap map,
             MethodSymbol originalDefinition,
             MethodSymbol constructedFrom
-        ) {
+        )
+        {
             Debug.Assert((object)originalDefinition != null);
             Debug.Assert(originalDefinition.IsDefinition);
             _containingType = containingSymbol;
@@ -187,7 +190,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override TypeSymbol GetTypeInferredDuringReduction(
             TypeParameterSymbol reducedFromTypeParameter
-        ) {
+        )
+        {
             // This will throw if API shouldn't be supported or there is a problem with the argument.
             var notUsed = OriginalDefinition.GetTypeInferredDuringReduction(
                 reducedFromTypeParameter
@@ -396,7 +400,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (
                 containingHashCode == this.OriginalDefinition.ContainingType.GetHashCode()
                 && wasConstructedForAnnotations(this)
-            ) {
+            )
+            {
                 return code;
             }
 
@@ -442,7 +447,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             typeArguments[i].Type,
                             TypeCompareKind.ConsiderEverything
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }
@@ -460,7 +466,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (
                 (object)this.OriginalDefinition != (object)other.OriginalDefinition
                 && this.OriginalDefinition != other.OriginalDefinition
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -488,7 +495,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         other.TypeArgumentsWithAnnotations[i],
                         compareKind
                     )
-                ) {
+                )
+                {
                     return false;
                 }
             }

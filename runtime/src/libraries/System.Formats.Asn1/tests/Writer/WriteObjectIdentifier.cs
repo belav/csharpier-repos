@@ -14,7 +14,8 @@ namespace System.Formats.Asn1.Tests.Writer
             AsnEncodingRules ruleSet,
             string oidValue,
             string expectedHex
-        ) {
+        )
+        {
             AsnWriter writer = new AsnWriter(ruleSet);
             writer.WriteObjectIdentifier(oidValue);
 
@@ -27,7 +28,8 @@ namespace System.Formats.Asn1.Tests.Writer
             AsnEncodingRules ruleSet,
             string oidValue,
             string expectedHex
-        ) {
+        )
+        {
             AsnWriter writer = new AsnWriter(ruleSet);
             writer.WriteObjectIdentifier(oidValue.AsSpan());
 
@@ -40,7 +42,8 @@ namespace System.Formats.Asn1.Tests.Writer
             string description,
             AsnEncodingRules ruleSet,
             string nonOidValue
-        ) {
+        )
+        {
             _ = description;
             AsnWriter writer = new AsnWriter(ruleSet);
 
@@ -66,7 +69,8 @@ namespace System.Formats.Asn1.Tests.Writer
             string description,
             AsnEncodingRules ruleSet,
             string nonOidValue
-        ) {
+        )
+        {
             _ = description;
             AsnWriter writer = new AsnWriter(ruleSet);
 

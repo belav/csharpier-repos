@@ -4021,7 +4021,8 @@ Deconstructing (1, hello)
             SemanticModel model,
             SingleVariableDesignationSyntax decl,
             params IdentifierNameSyntax[] references
-        ) {
+        )
+        {
             VerifyModelForDeconstruction(
                 model,
                 decl,
@@ -4035,7 +4036,8 @@ Deconstructing (1, hello)
             SingleVariableDesignationSyntax decl,
             LocalDeclarationKind kind,
             params IdentifierNameSyntax[] references
-        ) {
+        )
+        {
             VerifyModelForDeconstruction(model, decl, kind, references);
         }
 
@@ -4043,7 +4045,8 @@ Deconstructing (1, hello)
             SemanticModel model,
             SingleVariableDesignationSyntax decl,
             params IdentifierNameSyntax[] references
-        ) {
+        )
+        {
             VerifyModelForDeconstruction(
                 model,
                 decl,
@@ -4057,7 +4060,8 @@ Deconstructing (1, hello)
             SingleVariableDesignationSyntax decl,
             LocalDeclarationKind kind,
             params IdentifierNameSyntax[] references
-        ) {
+        )
+        {
             var symbol = model.GetDeclaredSymbol(decl);
             Assert.Equal(decl.Identifier.ValueText, symbol.Name);
             Assert.Equal(kind, symbol.GetSymbol<LocalSymbol>().DeclarationKind);
@@ -4104,7 +4108,8 @@ Deconstructing (1, hello)
             SemanticModel model,
             SingleVariableDesignationSyntax decl,
             params IdentifierNameSyntax[] references
-        ) {
+        )
+        {
             var field = (IFieldSymbol)model.GetDeclaredSymbol(decl);
             Assert.Equal(decl.Identifier.ValueText, field.Name);
             Assert.Equal(SymbolKind.Field, field.Kind);
@@ -4139,7 +4144,8 @@ Deconstructing (1, hello)
         private static SingleVariableDesignationSyntax GetDeconstructionVariable(
             SyntaxTree tree,
             string name
-        ) {
+        )
+        {
             return tree.GetRoot()
                 .DescendantNodes()
                 .OfType<SingleVariableDesignationSyntax>()

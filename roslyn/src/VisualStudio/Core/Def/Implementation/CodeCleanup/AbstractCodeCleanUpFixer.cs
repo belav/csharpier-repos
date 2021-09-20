@@ -47,7 +47,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
             IThreadingContext threadingContext,
             VisualStudioWorkspaceImpl workspace,
             IVsHierarchyItemManager vsHierarchyItemManager
-        ) {
+        )
+        {
             _threadingContext = threadingContext;
             _workspace = workspace;
             _vsHierarchyItemManager = vsHierarchyItemManager;
@@ -66,7 +67,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
         private async Task<bool> FixHierarchyContentAsync(
             IVsHierarchyCodeCleanupScope hierarchyContent,
             ICodeCleanUpExecutionContext context
-        ) {
+        )
+        {
             var hierarchy = hierarchyContent.Hierarchy;
             if (hierarchy == null)
             {
@@ -93,7 +95,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
                         out var contextProjectNameObject
                     )
                 ) && contextProjectNameObject is string contextProjectName
-            ) {
+            )
+            {
                 projectId = _workspace.GetProjectWithHierarchyAndName(
                     hierarchy,
                     contextProjectName
@@ -112,7 +115,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
                         targetFrameworkMoniker: null,
                         out projectId
                     )
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -168,7 +172,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
             Task<Solution> ApplyFixAsync(
                 ProgressTracker progressTracker,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return FixSolutionAsync(
                     solution,
                     context.EnabledFixIds,
@@ -186,7 +191,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
             async Task<Solution> ApplyFixAsync(
                 ProgressTracker progressTracker,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var newProject = await FixProjectAsync(
                         project,
                         context.EnabledFixIds,
@@ -207,7 +213,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
             async Task<Solution> ApplyFixAsync(
                 ProgressTracker progressTracker,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var newDocument = await FixDocumentAsync(
                         document,
                         context.EnabledFixIds,
@@ -222,7 +229,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
         private Task<bool> FixTextBufferAsync(
             TextBufferCodeCleanUpScope textBufferScope,
             ICodeCleanUpExecutionContext context
-        ) {
+        )
+        {
             var buffer = textBufferScope.SubjectBuffer;
 
             // Let LSP handle code cleanup in the cloud scenario
@@ -245,7 +253,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
             async Task<Solution> ApplyFixAsync(
                 ProgressTracker progressTracker,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var document = buffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
                 Contract.ThrowIfNull(document);
                 var newDoc = await FixDocumentAsync(
@@ -263,13 +272,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
             Workspace workspace,
             Func<ProgressTracker, CancellationToken, Task<Solution>> applyFixAsync,
             ICodeCleanUpExecutionContext context
-        ) {
+        )
+        {
             using (
                 var scope = context.OperationContext.AddScope(
                     allowCancellation: true,
                     EditorFeaturesResources.Waiting_for_background_work_to_finish
                 )
-            ) {
+            )
+            {
                 var workspaceStatusService =
                     workspace.Services.GetService<IWorkspaceStatusService>();
                 if (workspaceStatusService != null)
@@ -286,7 +297,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
                     allowCancellation: true,
                     description: EditorFeaturesResources.Applying_changes
                 )
-            ) {
+            )
+            {
                 var cancellationToken = context.OperationContext.UserCancellationToken;
                 var progressTracker = new ProgressTracker(
                     (description, completed, total) =>
@@ -317,7 +329,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
             FixIdContainer enabledFixIds,
             ProgressTracker progressTracker,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Prepopulate the solution progress tracker with the total number of documents to process
             foreach (var projectId in solution.ProjectIds)
             {
@@ -355,7 +368,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
             ProgressTracker progressTracker,
             bool addProgressItemsForDocuments,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!CanCleanupProject(project))
             {
                 return project;
@@ -399,7 +413,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
             FixIdContainer enabledFixIds,
             ProgressTracker progressTracker,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (document.IsGeneratedCode(cancellationToken))
             {
                 return document;

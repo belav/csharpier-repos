@@ -26,14 +26,16 @@ namespace System.Net.Sockets.Tests
                     listenAt,
                     out port
                 )
-            ) {
+            )
+            {
                 using (
                     Socket client = new Socket(
                         listenAt.AddressFamily,
                         SocketType.Stream,
                         ProtocolType.Tcp
                     )
-                ) {
+                )
+                {
                     Task connectTask = ConnectAsync(client, new IPEndPoint(listenAt, port));
                     await connectTask;
                     Assert.True(client.Connected);
@@ -81,14 +83,16 @@ namespace System.Net.Sockets.Tests
                     listenAt,
                     out port
                 )
-            ) {
+            )
+            {
                 using (
                     Socket client = new Socket(
                         listenAt.AddressFamily,
                         SocketType.Stream,
                         ProtocolType.Tcp
                     )
-                ) {
+                )
+                {
                     Task connectTask = ConnectAsync(client, new DnsEndPoint("localhost", port));
                     await connectTask;
                     Assert.True(client.Connected);
@@ -118,7 +122,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 Task connectTask = MultiConnectAsync(
                     client,
                     new IPAddress[] { IPAddress.Loopback, IPAddress.IPv6Loopback },
@@ -146,7 +151,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 await ConnectAsync(client, new IPEndPoint(IPAddress.Loopback, port));
 
                 // In the sync case, we throw a derived exception here, so need to use ThrowsAnyAsync
@@ -176,7 +182,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 await ConnectAsync(client, new IPEndPoint(IPAddress.Loopback, port));
                 client.Disconnect(reuseSocket: false);
 
@@ -321,7 +328,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 var cts = new CancellationTokenSource();
                 cts.Cancel();
 
@@ -340,7 +348,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 var cts = new CancellationTokenSource();
                 cts.Cancel();
 
@@ -359,7 +368,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 var cts = new CancellationTokenSource();
                 cts.Cancel();
 
@@ -387,7 +397,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 var cts = new CancellationTokenSource();
                 cts.Cancel();
 
@@ -410,7 +421,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 var cts = new CancellationTokenSource();
 
                 ValueTask t = client.ConnectAsync(ep, cts.Token);
@@ -433,7 +445,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 var cts = new CancellationTokenSource();
 
                 ValueTask t = client.ConnectAsync(IPAddress.Parse("1.2.3.4"), 1, cts.Token);
@@ -456,7 +469,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 var cts = new CancellationTokenSource();
 
                 ValueTask t = client.ConnectAsync(
@@ -483,7 +497,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 var cts = new CancellationTokenSource();
 
                 ValueTask t = client.ConnectAsync("1.2.3.4", 1, cts.Token);

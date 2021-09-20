@@ -87,7 +87,8 @@ namespace Roslyn.Test.Utilities
         public static TestableFileSystem CreateForExistingPaths(
             IEnumerable<string> existingPaths,
             StringComparer? comparer = null
-        ) {
+        )
+        {
             comparer ??= StringComparer.OrdinalIgnoreCase;
             var set = new HashSet<string>(existingPaths, comparer);
             return new TestableFileSystem() { FileExistsFunc = filePath => set.Contains(filePath) };

@@ -313,7 +313,8 @@ class C
         {
             foreach (
                 var member in typeSymbol.GetMembers(WellKnownMemberNames.StaticConstructorName)
-            ) {
+            )
+            {
                 if (member.IsImplicitlyDeclared)
                 {
                     return true;

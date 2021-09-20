@@ -21,7 +21,8 @@ namespace System.Net.Http.Functional.Tests
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             for (int i = 0; i < count; i++)
             {
                 await _wrapped.WriteAsync(buffer, offset + i, 1);

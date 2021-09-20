@@ -241,7 +241,8 @@ STDOUT: {_synchronizedOutput}
             string assemblyName,
             string source,
             params MetadataReference[] references
-        ) {
+        )
+        {
             var file = dir.CreateFile(fileName);
             var compilation = CreateEmptyCompilation(
                 new[] { source },

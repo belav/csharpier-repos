@@ -130,7 +130,8 @@ namespace XLinqTests
             XContainer elem,
             XNode toReplace,
             IEnumerable<object> replacement
-        ) {
+        )
+        {
             foreach (XNode n in elem.Nodes())
             {
                 if (n != toReplace)

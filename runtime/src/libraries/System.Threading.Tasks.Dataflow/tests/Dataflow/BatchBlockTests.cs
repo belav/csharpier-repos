@@ -463,7 +463,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
                             DataflowMessageHeader header,
                             ITargetBlock<int> target,
                             out bool messageConsumed
-                        ) {
+                        )
+                        {
                             if (exceptionalConsume)
                             {
                                 throw new FormatException(); // throw when attempting to consume reserved message
@@ -892,7 +893,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 int numPostponedMessages = 1;
                 numPostponedMessages < BatchSize;
                 numPostponedMessages++
-            ) {
+            )
+            {
                 var b = new BatchBlock<int>(BatchSize, dbo);
                 Assert.Equal(expected: 0, actual: b.OutputCount);
                 for (int i = 0; i < numPostponedMessages; i++)

@@ -28,7 +28,8 @@ namespace System.ServiceModel.Syndication.Tests
             string text,
             TextSyndicationContentKind textKind,
             string type
-        ) {
+        )
+        {
             var content = new TextSyndicationContent(text, textKind);
             Assert.Empty(content.AttributeExtensions);
             Assert.Equal(text, content.Text);
@@ -40,7 +41,8 @@ namespace System.ServiceModel.Syndication.Tests
         [InlineData(TextSyndicationContentKind.XHtml + 1)]
         public void Ctor_InvalidTextKind_ThrowsArgumentOutOfRangeException(
             TextSyndicationContentKind textKind
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "textKind",
                 () => new TextSyndicationContent(null, textKind)

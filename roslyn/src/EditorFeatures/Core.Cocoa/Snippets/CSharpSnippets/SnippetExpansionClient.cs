@@ -23,13 +23,14 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
             ITextView textView,
             ITextBuffer subjectBuffer,
             IExpansionServiceProvider expansionServiceProvider
-        ) : base(
-            threadingContext,
-            languageServiceGuid,
-            textView,
-            subjectBuffer,
-            expansionServiceProvider
-        ) { }
+        )
+            : base(
+                threadingContext,
+                languageServiceGuid,
+                textView,
+                subjectBuffer,
+                expansionServiceProvider
+            ) { }
 
         /// <returns>The tracking span of the inserted "/**/" if there is an $end$ location, null
         /// otherwise.</returns>
@@ -58,14 +59,16 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
         public override IExpansionFunction? GetExpansionFunction(
             XElement xmlFunctionNode,
             string fieldName
-        ) {
+        )
+        {
             if (
                 !TryGetSnippetFunctionInfo(
                     xmlFunctionNode,
                     out var snippetFunctionName,
                     out var param
                 )
-            ) {
+            )
+            {
                 throw new ArgumentException();
             }
 

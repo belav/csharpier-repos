@@ -393,7 +393,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             SyntaxNode oldRoot,
             SyntaxNode newRoot,
             List<SyntaxAnnotation> annotations
-        ) {
+        )
+        {
             foreach (var annotation in annotations)
             {
                 // Verify annotations in Nodes or Tokens
@@ -461,7 +462,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
                 while (
                     sourceNodeOrTokenEnumerator.MoveNext() && destNodeOrTokenEnumerator.MoveNext()
-                ) {
+                )
+                {
                     Assert.True(
                         sourceNodeOrTokenEnumerator.Current.IsEquivalentTo(
                             destNodeOrTokenEnumerator.Current
@@ -500,7 +502,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             while (
                 sourceTreeNodeOrTokenEnumerator.MoveNext()
                 && destTreeNodeOrTokenEnumerator.MoveNext()
-            ) {
+            )
+            {
                 if (sourceTreeNodeOrTokenEnumerator.Current.IsNode)
                 {
                     var oldNode = destTreeNodeOrTokenEnumerator.Current.AsNode();
@@ -623,14 +626,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public SyntaxNodeOrToken AddAnnotationTo(
             SyntaxAnnotation annotation,
             SyntaxNodeOrToken nodeOrToken
-        ) {
+        )
+        {
             return nodeOrToken.WithAdditionalAnnotations(annotation);
         }
 
         private void TestAnnotations(
             List<Tuple<SyntaxAnnotation, SyntaxNodeOrToken>> annotations,
             SyntaxNode currentRoot
-        ) {
+        )
+        {
             // check every annotations
             foreach (var pair in annotations)
             {
@@ -687,7 +692,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             SyntaxAnnotation annotation,
             SyntaxNode root,
             SyntaxNodeOrToken oldNodeOrToken
-        ) {
+        )
+        {
             // Test for existence of exactly one annotation
             if (oldNodeOrToken.IsToken)
             {
@@ -702,7 +708,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             SyntaxAnnotation annotation,
             SyntaxNode root,
             SyntaxNode oldNode
-        ) {
+        )
+        {
             var results = root.GetAnnotatedNodesAndTokens(annotation);
 
             Assert.Equal(1, results.Count());
@@ -719,7 +726,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             SyntaxAnnotation annotation,
             SyntaxNode root,
             SyntaxToken oldToken
-        ) {
+        )
+        {
             var results = root.GetAnnotatedNodesAndTokens(annotation);
 
             Assert.Equal(1, results.Count());
@@ -736,7 +744,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             SyntaxAnnotation annotation,
             SyntaxNode root,
             SyntaxTrivia oldTrivia
-        ) {
+        )
+        {
             var results = root.GetAnnotatedTrivia(annotation);
 
             Assert.Equal(1, results.Count());

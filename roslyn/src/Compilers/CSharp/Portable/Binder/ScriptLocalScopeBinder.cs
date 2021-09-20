@@ -38,13 +38,15 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal override ImmutableArray<LocalSymbol> GetDeclaredLocalsForScope(
             SyntaxNode scopeDesignator
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
 
         internal override ImmutableArray<LocalFunctionSymbol> GetDeclaredLocalFunctionsForScope(
             CSharpSyntaxNode scopeDesignator
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
 
@@ -58,7 +60,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             internal Labels(
                 SynthesizedInteractiveInitializerMethod scriptInitializer,
                 CompilationUnitSyntax syntax
-            ) {
+            )
+            {
                 _scriptInitializer = scriptInitializer;
                 _syntax = syntax;
             }
@@ -83,7 +86,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             private static ImmutableArray<LabelSymbol> GetLabels(
                 SynthesizedInteractiveInitializerMethod scriptInitializer,
                 CompilationUnitSyntax syntax
-            ) {
+            )
+            {
                 var builder = ArrayBuilder<LabelSymbol>.GetInstance();
                 foreach (var member in syntax.Members)
                 {

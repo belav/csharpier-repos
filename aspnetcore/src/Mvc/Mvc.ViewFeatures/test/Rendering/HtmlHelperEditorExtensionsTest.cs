@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public void Display_UsesTemplateUnFormatted(
             HtmlHelperDisplayExtensionsTest.FormatModel model,
             string expectedResult
-        ) {
+        )
+        {
             // Arrange
             var view = new Mock<IView>();
             view.Setup(v => v.RenderAsync(It.IsAny<ViewContext>()))
@@ -65,7 +66,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public void Display_UsesTemplateFormatted(
             HtmlHelperDisplayExtensionsTest.FormatModel model,
             string expectedResult
-        ) {
+        )
+        {
             // Arrange
             var view = new Mock<IView>();
             view.Setup(v => v.RenderAsync(It.IsAny<ViewContext>()))

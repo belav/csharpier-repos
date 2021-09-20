@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
             TextSpan textSpan,
             bool overriddenFromMetadata,
             int declaringSyntaxReferencesCount
-        ) {
+        )
+        {
             this.DocumentId = documentId;
             this.TextSpan = textSpan;
             this.Name = null;

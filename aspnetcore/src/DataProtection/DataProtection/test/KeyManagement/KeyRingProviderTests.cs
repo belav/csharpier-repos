@@ -823,7 +823,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
                 Tuple<DateTimeOffset, IEnumerable<IKey>, DefaultKeyResolution>
             > resolveDefaultKeyPolicyReturnValues,
             KeyManagementOptions keyManagementOptions = null
-        ) {
+        )
+        {
             var getCacheExpirationTokenReturnValuesEnumerator =
                 getCacheExpirationTokenReturnValues.GetEnumerator();
             var mockKeyManager = new Mock<IKeyManager>(MockBehavior.Strict);
@@ -908,7 +909,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
 
         private static KeyRingProvider CreateKeyRingProvider(
             ICacheableKeyRingProvider cacheableKeyRingProvider
-        ) {
+        )
+        {
             var mockEncryptorFactory = new Mock<IAuthenticatedEncryptorFactory>();
             mockEncryptorFactory.Setup(m => m.CreateEncryptorInstance(It.IsAny<IKey>()))
                 .Returns(new Mock<IAuthenticatedEncryptor>().Object);
@@ -929,7 +931,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             IKeyManager keyManager,
             IDefaultKeyResolver defaultKeyResolver,
             KeyManagementOptions keyManagementOptions = null
-        ) {
+        )
+        {
             var mockEncryptorFactory = new Mock<IAuthenticatedEncryptorFactory>();
             mockEncryptorFactory.Setup(m => m.CreateEncryptorInstance(It.IsAny<IKey>()))
                 .Returns(new Mock<IAuthenticatedEncryptor>().Object);
@@ -972,7 +975,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             string activationDate,
             string expirationDate,
             bool isRevoked = false
-        ) {
+        )
+        {
             var mockKey = new Mock<IKey>();
             mockKey.Setup(o => o.KeyId).Returns(Guid.NewGuid());
             mockKey.Setup(o => o.ActivationDate)

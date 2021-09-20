@@ -684,7 +684,8 @@ namespace System.Composition.Convention.Tests
             ConventionBuilder builder,
             Type type,
             string member
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(member))
             {
                 Attribute[] list = builder.GetDeclaredAttributes(null, type.GetTypeInfo());

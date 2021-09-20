@@ -362,7 +362,8 @@ namespace System.ComponentModel.Design.Tests
             CommandID command,
             int expectedId,
             Guid expectedGuid
-        ) {
+        )
+        {
             Assert.Equal(expectedId, command.ID);
             Assert.Equal(expectedGuid, command.Guid);
         }

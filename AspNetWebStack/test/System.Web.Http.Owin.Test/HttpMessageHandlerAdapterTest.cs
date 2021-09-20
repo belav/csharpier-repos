@@ -667,7 +667,8 @@ namespace System.Web.Http.Owin
                 HttpMessageHandlerAdapter product = CreateProductUnderTest(
                     CreateValidOptions(messageHandler, bufferPolicySelector)
                 )
-            ) {
+            )
+            {
                 bool bufferingDisabled = false;
                 Action disableBuffering = () => bufferingDisabled = true;
                 IOwinRequest owinRequest = CreateFakeOwinRequest(disableBuffering);
@@ -697,7 +698,8 @@ namespace System.Web.Http.Owin
                 HttpMessageHandlerAdapter product = CreateProductUnderTest(
                     CreateValidOptions(messageHandler, bufferPolicySelector)
                 )
-            ) {
+            )
+            {
                 bool bufferingDisabled = false;
                 Action disableBuffering = () => bufferingDisabled = true;
                 IOwinRequest owinRequest = CreateFakeOwinRequest(disableBuffering);
@@ -762,7 +764,8 @@ namespace System.Web.Http.Owin
                     HttpMessageHandlerAdapter product = CreateProductUnderTest(
                         CreateValidOptions(messageHandler, bufferPolicySelector)
                     )
-                ) {
+                )
+                {
                     IOwinRequest owinRequest = CreateFakeOwinRequest();
                     IOwinResponse owinResponse = CreateFakeOwinResponse();
                     IOwinContext expectedContext = CreateStubOwinContext(owinRequest, owinResponse);
@@ -788,7 +791,8 @@ namespace System.Web.Http.Owin
         public async Task Invoke_SetsRequestIsLocalProperty(
             bool? isLocal,
             bool expectedRequestLocal
-        ) {
+        )
+        {
             var handler = CreateOKHandlerStub();
             var bufferPolicySelector = CreateBufferPolicySelector(
                 bufferInput: false,
@@ -1143,7 +1147,8 @@ namespace System.Web.Http.Owin
                 HttpMessageHandlerAdapter product = CreateProductUnderTest(
                     CreateValidOptions(messageHandler, bufferPolicySelector)
                 )
-            ) {
+            )
+            {
                 IOwinRequest owinRequest = CreateFakeOwinRequest();
                 bool bufferingDisabled = false;
                 Action disableBuffering = () => bufferingDisabled = true;
@@ -1173,7 +1178,8 @@ namespace System.Web.Http.Owin
                 HttpMessageHandlerAdapter product = CreateProductUnderTest(
                     CreateValidOptions(messageHandler, bufferPolicySelector)
                 )
-            ) {
+            )
+            {
                 IOwinRequest owinRequest = CreateFakeOwinRequest();
                 bool bufferingDisabled = false;
                 Action disableBuffering = () => bufferingDisabled = true;
@@ -1259,7 +1265,8 @@ namespace System.Web.Http.Owin
                 HttpMessageHandlerAdapter product = CreateProductUnderTest(
                     CreateValidOptions(messageHandler, bufferPolicy)
                 )
-            ) {
+            )
+            {
                 response.Headers.TransferEncodingChunked = true;
 
                 IOwinRequest owinRequest = CreateFakeOwinRequest();
@@ -1289,7 +1296,8 @@ namespace System.Web.Http.Owin
                 HttpMessageHandlerAdapter product = CreateProductUnderTest(
                     CreateValidOptions(messageHandler, bufferPolicy)
                 )
-            ) {
+            )
+            {
                 response.Headers.TransferEncoding.Add(new TransferCodingHeaderValue("identity"));
 
                 IOwinRequest owinRequest = CreateFakeOwinRequest();
@@ -1320,7 +1328,8 @@ namespace System.Web.Http.Owin
                 HttpMessageHandlerAdapter product = CreateProductUnderTest(
                     CreateValidOptions(messageHandler, bufferPolicy)
                 )
-            ) {
+            )
+            {
                 response.Headers.TransferEncoding.Add(new TransferCodingHeaderValue("identity"));
                 response.Headers.TransferEncodingChunked = true;
                 Assert.Equal("identity, chunked", response.Headers.TransferEncoding.ToString()); // Guard
@@ -1651,7 +1660,8 @@ namespace System.Web.Http.Owin
                         HttpStatusCode.InternalServerError,
                         expectedException
                     )
-                ) {
+                )
+                {
                     string expectedContents = await expectedResponse.Content.ReadAsStringAsync();
                     Assert.Equal(expectedContents, Encoding.UTF8.GetString(output.ToArray()));
                 }
@@ -1945,7 +1955,8 @@ namespace System.Web.Http.Owin
                 HttpMessageHandlerAdapter product = CreateProductUnderTest(
                     CreateValidOptions(messageHandler, bufferPolicySelector)
                 )
-            ) {
+            )
+            {
                 IOwinRequest owinRequest = CreateFakeOwinRequest();
                 IOwinResponse owinResponse = CreateFakeOwinResponse();
 
@@ -2186,7 +2197,8 @@ namespace System.Web.Http.Owin
         private static IHostBufferPolicySelector CreateBufferPolicySelector(
             bool bufferInput,
             bool bufferOutput
-        ) {
+        )
+        {
             var mock = new Mock<IHostBufferPolicySelector>();
             mock.Setup(bps => bps.UseBufferedInputStream(It.IsAny<object>())).Returns(bufferInput);
             mock.Setup(bps => bps.UseBufferedOutputStream(It.IsAny<HttpResponseMessage>()))
@@ -2223,7 +2235,8 @@ namespace System.Web.Http.Owin
 
         private static HttpMessageHandlerOptions CreateDummyOptions(
             HttpMessageHandler messageHandler
-        ) {
+        )
+        {
             return new HttpMessageHandlerOptions
             {
                 MessageHandler = messageHandler,
@@ -2299,7 +2312,8 @@ namespace System.Web.Http.Owin
 
         private static Mock<IOwinRequest> CreateFakeOwinRequestMock(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Mock<IHeaderDictionary> headersMock = new Mock<IHeaderDictionary>(MockBehavior.Strict);
             headersMock.Setup(h => h.GetEnumerator())
                 .Returns(new Mock<IEnumerator<KeyValuePair<string, string[]>>>().Object);
@@ -2405,7 +2419,8 @@ namespace System.Web.Http.Owin
 
         private static HttpMessageHandler CreateLambdaMessageHandler(
             Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> sendAsync
-        ) {
+        )
+        {
             return new LambdaHttpMessageHandler(sendAsync);
         }
 
@@ -2421,7 +2436,8 @@ namespace System.Web.Http.Owin
             string hostHeaderValue,
             string pathBase,
             string path
-        ) {
+        )
+        {
             var environment = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
             environment["owin.RequestMethod"] = method;
             environment["owin.RequestScheme"] = scheme;
@@ -2444,14 +2460,16 @@ namespace System.Web.Http.Owin
 
         private static HttpMessageHandlerAdapter CreateProductUnderTest(
             HttpMessageHandlerOptions options
-        ) {
+        )
+        {
             return CreateProductUnderTest(next: null, options: options);
         }
 
         private static HttpMessageHandlerAdapter CreateProductUnderTest(
             OwinMiddleware next,
             HttpMessageHandlerOptions options
-        ) {
+        )
+        {
             return new HttpMessageHandlerAdapter(next, options);
         }
 
@@ -2520,7 +2538,8 @@ namespace System.Web.Http.Owin
         private static IOwinContext CreateStubOwinContext(
             IOwinRequest request,
             IOwinResponse response
-        ) {
+        )
+        {
             Mock<IOwinContext> mock = new Mock<IOwinContext>(MockBehavior.Strict);
             mock.Setup(c => c.Request).Returns(request);
             mock.Setup(c => c.Response).Returns(response);
@@ -2531,7 +2550,8 @@ namespace System.Web.Http.Owin
             IOwinRequest request,
             IOwinResponse response,
             bool isLocal
-        ) {
+        )
+        {
             Mock<IOwinContext> mock = new Mock<IOwinContext>(MockBehavior.Strict);
             mock.Setup(c => c.Request).Returns(request);
             mock.Setup(c => c.Response).Returns(response);
@@ -2546,7 +2566,8 @@ namespace System.Web.Http.Owin
 
         private static HttpMessageHandlerOptions CreateValidOptions(
             HttpMessageHandler messageHandler
-        ) {
+        )
+        {
             IHostBufferPolicySelector bufferPolicy = CreateBufferPolicySelector(
                 bufferInput: false,
                 bufferOutput: false
@@ -2557,7 +2578,8 @@ namespace System.Web.Http.Owin
         private static HttpMessageHandlerOptions CreateValidOptions(
             HttpMessageHandler messageHandler,
             IHostBufferPolicySelector bufferPolicySelector
-        ) {
+        )
+        {
             return new HttpMessageHandlerOptions
             {
                 MessageHandler = messageHandler,
@@ -2578,7 +2600,8 @@ namespace System.Web.Http.Owin
             protected override Task<HttpResponseMessage> SendAsync(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Request = request;
                 CancellationToken = cancellationToken;
                 User = Thread.CurrentPrincipal;
@@ -2602,14 +2625,16 @@ namespace System.Web.Http.Owin
 
             public LambdaHttpMessageHandler(
                 Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> sendAsync
-            ) {
+            )
+            {
                 _sendAsync = sendAsync;
             }
 
             protected override Task<HttpResponseMessage> SendAsync(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return _sendAsync.Invoke(request, cancellationToken);
             }
         }
@@ -2671,7 +2696,8 @@ namespace System.Web.Http.Owin
             protected override Task<HttpResponseMessage> SendAsync(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 

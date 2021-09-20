@@ -2830,7 +2830,8 @@ namespace System.ComponentModel.Composition
                 {
                     using (
                         CompositionContainer innerContainer = new CompositionContainer(container)
-                    ) {
+                    )
+                    {
                         CompositionBatch nestedBatch = new CompositionBatch();
                         nestedBatch.AddPart(innerImporter);
                         innerContainer.Compose(nestedBatch);
@@ -3063,7 +3064,8 @@ namespace System.ComponentModel.Composition
         }
         private static Expression<Func<ExportDefinition, bool>> ConstraintFromContract(
             string contractName
-        ) {
+        )
+        {
             return ConstraintFactory.Create(contractName);
         }
 

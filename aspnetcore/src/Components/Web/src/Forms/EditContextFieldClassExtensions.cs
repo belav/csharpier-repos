@@ -35,7 +35,8 @@ namespace Microsoft.AspNetCore.Components.Forms
         public static string FieldCssClass(
             this EditContext editContext,
             in FieldIdentifier fieldIdentifier
-        ) {
+        )
+        {
             var provider = editContext.Properties.TryGetValue(
                 FieldCssClassProviderKey,
                 out var customProvider
@@ -55,7 +56,8 @@ namespace Microsoft.AspNetCore.Components.Forms
         public static void SetFieldCssClassProvider(
             this EditContext editContext,
             FieldCssClassProvider fieldCssClassProvider
-        ) {
+        )
+        {
             if (fieldCssClassProvider is null)
             {
                 throw new ArgumentNullException(nameof(fieldCssClassProvider));

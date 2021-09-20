@@ -831,7 +831,8 @@ namespace Microsoft.EntityFrameworkCore
         protected static void AssertEntries(
             IReadOnlyList<EntityEntry> expectedEntries,
             IReadOnlyList<EntityEntry> actualEntries
-        ) {
+        )
+        {
             var newEntities = new HashSet<object>(actualEntries.Select(ne => ne.Entity));
             var missingEntities = expectedEntries.Select(e => e.Entity)
                 .Where(e => !newEntities.Contains(e))
@@ -3263,7 +3264,8 @@ namespace Microsoft.EntityFrameworkCore
                 T value,
                 ref T field,
                 [CallerMemberName] string propertyName = ""
-            ) {
+            )
+            {
                 NotifyChanging(propertyName);
                 field = value;
                 NotifyChanged(propertyName);

@@ -58,7 +58,8 @@ namespace System.Web.Http.Routing
         public void Constructor_AcceptsDictionaryValues(
             Dictionary<string, object> input,
             Dictionary<string, object> expectedOutput
-        ) {
+        )
+        {
             HttpRouteValueDictionary routeValues = new HttpRouteValueDictionary(input);
             Assert.True(expectedOutput.SequenceEqual(routeValues));
         }
@@ -68,7 +69,8 @@ namespace System.Web.Http.Routing
         public void Constructor_AcceptsObjectValues(
             object input,
             Dictionary<string, object> expectedOutput
-        ) {
+        )
+        {
             HttpRouteValueDictionary routeValues = new HttpRouteValueDictionary(input);
             Assert.True(expectedOutput.SequenceEqual(routeValues));
         }

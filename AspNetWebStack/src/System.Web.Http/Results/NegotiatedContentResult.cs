@@ -35,11 +35,12 @@ namespace System.Web.Http.Results
             IContentNegotiator contentNegotiator,
             HttpRequestMessage request,
             IEnumerable<MediaTypeFormatter> formatters
-        ) : this(
-            statusCode,
-            content,
-            new DirectDependencyProvider(contentNegotiator, request, formatters)
-        ) { }
+        )
+            : this(
+                statusCode,
+                content,
+                new DirectDependencyProvider(contentNegotiator, request, formatters)
+            ) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NegotiatedContentResult{T}"/> class with the values provided.
@@ -57,7 +58,8 @@ namespace System.Web.Http.Results
             HttpStatusCode statusCode,
             T content,
             IDependencyProvider dependencies
-        ) {
+        )
+        {
             Contract.Assert(dependencies != null);
 
             _statusCode = statusCode;
@@ -118,7 +120,8 @@ namespace System.Web.Http.Results
             IContentNegotiator contentNegotiator,
             HttpRequestMessage request,
             IEnumerable<MediaTypeFormatter> formatters
-        ) {
+        )
+        {
             Contract.Assert(contentNegotiator != null);
             Contract.Assert(request != null);
             Contract.Assert(formatters != null);
@@ -188,7 +191,8 @@ namespace System.Web.Http.Results
                 IContentNegotiator contentNegotiator,
                 HttpRequestMessage request,
                 IEnumerable<MediaTypeFormatter> formatters
-            ) {
+            )
+            {
                 if (contentNegotiator == null)
                 {
                     throw new ArgumentNullException("contentNegotiator");

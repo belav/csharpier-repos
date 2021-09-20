@@ -57,7 +57,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             IHttpRequestStreamReaderFactory readerFactory,
             ILoggerFactory loggerFactory,
             MvcOptions? options
-        ) {
+        )
+        {
             if (formatters == null)
             {
                 throw new ArgumentNullException(nameof(formatters));
@@ -85,7 +86,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             if (
                 context.BindingInfo.BindingSource != null
                 && context.BindingInfo.BindingSource.CanAcceptDataFrom(BindingSource.Body)
-            ) {
+            )
+            {
                 if (_formatters.Count == 0)
                 {
                     throw new InvalidOperationException(
@@ -114,7 +116,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         internal static bool CalculateAllowEmptyBody(
             EmptyBodyBehavior emptyBodyBehavior,
             MvcOptions? options
-        ) {
+        )
+        {
             if (emptyBodyBehavior == EmptyBodyBehavior.Default)
             {
                 return options?.AllowEmptyInputInBodyModelBinding ?? false;

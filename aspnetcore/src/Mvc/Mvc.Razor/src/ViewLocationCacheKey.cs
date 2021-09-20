@@ -42,7 +42,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             string? pageName,
             bool isMainPage,
             IReadOnlyDictionary<string, string?>? values
-        ) {
+        )
+        {
             ViewName = viewName;
             ControllerName = controllerName;
             AreaName = areaName;
@@ -90,7 +91,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                 || !string.Equals(ControllerName, y.ControllerName, StringComparison.Ordinal)
                 || !string.Equals(AreaName, y.AreaName, StringComparison.Ordinal)
                 || !string.Equals(PageName, y.PageName, StringComparison.Ordinal)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -103,7 +105,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                 ViewLocationExpanderValues == null
                 || y.ViewLocationExpanderValues == null
                 || (ViewLocationExpanderValues.Count != y.ViewLocationExpanderValues.Count)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -112,7 +115,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                 if (
                     !y.ViewLocationExpanderValues.TryGetValue(item.Key, out var yValue)
                     || !string.Equals(item.Value, yValue, StringComparison.Ordinal)
-                ) {
+                )
+                {
                     return false;
                 }
             }

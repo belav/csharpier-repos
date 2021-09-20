@@ -151,7 +151,8 @@ namespace System.Runtime.Serialization.Json
         internal static DateTime ParseJsonDate(
             string originalDateTimeValue,
             DateTimeFormat? dateTimeFormat
-        ) {
+        )
+        {
             if (dateTimeFormat == null)
             {
                 return ParseJsonDateInDefaultFormat(originalDateTimeValue);
@@ -193,7 +194,8 @@ namespace System.Runtime.Serialization.Json
                     JsonGlobals.DateTimeEndGuardReader,
                     StringComparison.Ordinal
                 )
-            ) {
+            )
+            {
                 throw new FormatException(
                     SR.Format(
                         SR.JsonInvalidDateTimeString,
@@ -278,7 +280,8 @@ namespace System.Runtime.Serialization.Json
             XmlDictionaryString itemNamespace,
             int arrayLength,
             [NotNullWhen(true)] out DateTime[]? array
-        ) {
+        )
+        {
             return TryReadJsonDateTimeArray(
                 context,
                 itemName,
@@ -294,7 +297,8 @@ namespace System.Runtime.Serialization.Json
             XmlDictionaryString itemNamespace,
             int arrayLength,
             [NotNullWhen(true)] out DateTime[]? array
-        ) {
+        )
+        {
             if ((dictionaryReader == null) || (arrayLength != -1))
             {
                 array = null;
@@ -328,12 +332,14 @@ namespace System.Runtime.Serialization.Json
                 DateTime[] array,
                 int offset,
                 int count
-            ) {
+            )
+            {
                 XmlJsonReader.CheckArray(array, offset, count);
                 int actual = 0;
                 while (
                     actual < count && reader.IsStartElement(JsonGlobals.itemString, string.Empty)
-                ) {
+                )
+                {
                     array[offset + actual] = JsonReaderDelegator.ParseJsonDate(
                         reader.ReadElementContentAsString(),
                         _dateTimeFormat
@@ -351,7 +357,8 @@ namespace System.Runtime.Serialization.Json
                 DateTime[] array,
                 int offset,
                 int count
-            ) {
+            )
+            {
                 throw NotImplemented.ByDesign;
             }
         }

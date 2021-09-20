@@ -165,7 +165,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
 
         protected private ActionEndpointDataSourceBase CreateDataSource(
             IActionDescriptorCollectionProvider actions = null
-        ) {
+        )
+        {
             if (actions == null)
             {
                 actions = new DefaultActionDescriptorCollectionProvider(

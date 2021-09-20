@@ -59,7 +59,8 @@ namespace System.Net.Tests
         public async Task AcceptWebSocketAsync_ValidSubProtocol_Success(
             string[] clientProtocols,
             string serverProtocol
-        ) {
+        )
+        {
             HttpListenerContext context = await GetWebSocketContext(clientProtocols);
             HttpListenerWebSocketContext socketContext = await context.AcceptWebSocketAsync(
                 serverProtocol
@@ -177,7 +178,8 @@ namespace System.Net.Tests
         [InlineData("UnknownHeader: random")]
         public async Task AcceptWebSocketAsync_InvalidHeaders_ThrowsWebSocketException(
             string headers
-        ) {
+        )
+        {
             await GetSocketContext(
                 new string[] { headers },
                 async context =>
@@ -213,7 +215,8 @@ namespace System.Net.Tests
         [InlineData("\x7f")]
         public async Task AcceptWebSocketAsync_InvalidSubProtocol_ThrowsArgumentException(
             string subProtocol
-        ) {
+        )
+        {
             HttpListenerContext context = await GetWebSocketContext();
             await AssertExtensions.ThrowsAsync<ArgumentException>(
                 "subProtocol",
@@ -227,7 +230,8 @@ namespace System.Net.Tests
         [InlineData("YouDontKnowMe")]
         public async Task AcceptWebSocketAsync_NoSuchSubProtocol_ThrowsWebSocketException(
             string subProtocol
-        ) {
+        )
+        {
             HttpListenerContext context = await GetWebSocketContext();
             await Assert.ThrowsAsync<WebSocketException>(
                 () => context.AcceptWebSocketAsync(subProtocol)
@@ -253,7 +257,8 @@ namespace System.Net.Tests
         [InlineData(64 * 1024 + 1)]
         public async Task AcceptWebSocketAsync_InvalidReceiveBufferSize_ThrowsWebSocketException(
             int receiveBufferSize
-        ) {
+        )
+        {
             HttpListenerContext context = await GetWebSocketContext();
             await Assert.ThrowsAsync<ArgumentOutOfRangeException>(
                 "receiveBufferSize",
@@ -278,7 +283,8 @@ namespace System.Net.Tests
         [InlineData(11)]
         public async Task AcceptWebSocketAsync_InvalidOffsetInArraySegment_ThrowsArgumentNullException(
             int offset
-        ) {
+        )
+        {
             HttpListenerContext context = await GetWebSocketContext();
 
             ArraySegment<byte> internalBuffer = new FakeArraySegment()
@@ -300,7 +306,8 @@ namespace System.Net.Tests
         public async Task AcceptWebSocketAsync_InvalidCountInArraySegment_ThrowsArgumentNullException(
             int offset,
             int count
-        ) {
+        )
+        {
             HttpListenerContext context = await GetWebSocketContext();
 
             ArraySegment<byte> internalBuffer = new FakeArraySegment()
@@ -318,7 +325,8 @@ namespace System.Net.Tests
         private async Task GetSocketContext(
             string[] headers,
             Func<HttpListenerContext, Task> contextAction
-        ) {
+        )
+        {
             using (Socket client = Factory.GetConnectedSocket())
             {
                 client.Send(Factory.GetContent("1.1", "POST", null, "Text", headers, true));

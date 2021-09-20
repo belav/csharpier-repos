@@ -75,7 +75,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.CustomProtocol
             int position,
             IMetadataAsSourceFileService metadataAsSourceFileService,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _progress = progress;
             _document = document;
             _position = position;
@@ -203,7 +204,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.CustomProtocol
             SymbolUsageInfo? symbolUsageInfo,
             bool isWrittenTo,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var location = await ComputeLocationAsync(
                     document,
                     position,
@@ -282,7 +284,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.CustomProtocol
                 DocumentSpan documentSpan,
                 IMetadataAsSourceFileService metadataAsSourceFileService,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // If we have no document span, our location may be in metadata.
                 if (documentSpan != default)
                 {
@@ -305,7 +308,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.CustomProtocol
                     symbol == null
                     || symbol.Locations.IsEmpty
                     || symbol.Kind == SymbolKind.Namespace
-                ) {
+                )
+                {
                     // Either:
                     // (1) We couldn't find the location in metadata and it's not in any of our known documents.
                     // (2) The symbol is a namespace (and therefore has no location).
@@ -349,7 +353,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.CustomProtocol
                 ClassifiedTextElement? definitionText,
                 bool isWrittenTo,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // General case
                 if (documentSpan != default)
                 {
@@ -389,7 +394,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.CustomProtocol
                     bool isWrittenTo,
                     ImmutableArray<ClassifiedSpan> classifiedSpans,
                     SourceText docText
-                ) {
+                )
+                {
                     using var _ = ArrayBuilder<ClassifiedTextRun>.GetInstance(
                         out var classifiedTextRuns
                     );
@@ -438,7 +444,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.CustomProtocol
         private Task ReportReferencesAsync(
             ImmutableArray<VSReferenceItem> referencesToReport,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // We can report outside of the lock here since _progress is thread-safe.
             _progress.Report(referencesToReport.ToArray());
             return Task.CompletedTask;

@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static bool TryGetPredefinedComparisonOperator(
             this IMethodSymbol symbol,
             out PredefinedOperator op
-        ) {
+        )
+        {
             if (symbol.MethodKind == MethodKind.BuiltinOperator)
             {
                 op = symbol.GetPredefinedOperator();

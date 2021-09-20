@@ -69,7 +69,8 @@ namespace System.Net.Http
         public static Task<NameValueCollection> ReadAsFormDataAsync(
             this HttpContent content,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (content == null)
             {
                 throw Error.ArgumentNull("content");
@@ -86,7 +87,8 @@ namespace System.Net.Http
             HttpContent content,
             MediaTypeFormatter[] formatters,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             FormDataCollection formData = await content.ReadAsAsync<FormDataCollection>(
                 formatters,
                 cancellationToken

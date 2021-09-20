@@ -27,7 +27,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets.SnippetFunctio
             CancellationToken cancellationToken,
             ref string value,
             ref int hasDefaultValue
-        ) {
+        )
+        {
             // Find the nearest enclosing type declaration and use its name
             var syntaxTree = document.GetSyntaxTreeSynchronously(cancellationToken);
             var type = syntaxTree.FindTokenOnLeftOfPosition(

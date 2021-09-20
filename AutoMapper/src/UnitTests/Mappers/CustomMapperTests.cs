@@ -71,7 +71,8 @@ namespace AutoMapper.UnitTests.Mappers
                 Type sourceType,
                 Type destinationType,
                 ResolutionContext context
-            ) {
+            )
+            {
                 var typeConverter = GetConverter(sourceType);
                 return typeConverter.CanConvertTo(destinationType)
                   ? typeConverter.ConvertTo(source, destinationType)
@@ -118,7 +119,8 @@ namespace AutoMapper.UnitTests.Mappers
                 MemberMap memberMap,
                 Expression sourceExpression,
                 Expression destExpression
-            ) {
+            )
+            {
                 Expression<Func<DestinationType>> expr = () => new DestinationType();
 
                 return expr.Body;
@@ -182,7 +184,8 @@ namespace AutoMapper.UnitTests.Mappers
                 Type sourceType,
                 Type destinationType,
                 ResolutionContext context
-            ) {
+            )
+            {
                 source.ShouldNotBeNull();
                 destination.ShouldNotBeNull();
                 context.ShouldNotBeNull();
@@ -242,7 +245,8 @@ namespace AutoMapper.UnitTests.Mappers
                 Type sourceType,
                 Type destinationType,
                 ResolutionContext context
-            ) {
+            )
+            {
                 sourceType.ShouldBe(typeof(ConsoleColor?));
                 destinationType.ShouldBe(typeof(string));
                 return "Test";

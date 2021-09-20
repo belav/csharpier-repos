@@ -135,7 +135,8 @@ namespace System.Security.Cryptography.X509Certificates
         public static PublicKey CreateFromSubjectPublicKeyInfo(
             ReadOnlySpan<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             int read = DecodeSubjectPublicKeyInfo(
                 source,
                 out Oid localOid,
@@ -169,10 +170,12 @@ namespace System.Security.Cryptography.X509Certificates
             out Oid oid,
             out AsnEncodedData parameters,
             out AsnEncodedData keyValue
-        ) {
+        )
+        {
             fixed (byte* ptr = &MemoryMarshal.GetReference(source))using (
                 MemoryManager<byte> manager = new PointerMemoryManager<byte>(ptr, source.Length)
-            ) {
+            )
+            {
                 AsnValueReader reader = new AsnValueReader(source, AsnEncodingRules.DER);
 
                 int read;

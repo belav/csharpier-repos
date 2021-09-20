@@ -140,7 +140,8 @@ namespace System.Drawing
             ITypeDescriptorContext context,
             CultureInfo culture,
             object value
-        ) {
+        )
+        {
             string strValue = value as string;
             if (strValue != null)
             {
@@ -179,7 +180,8 @@ namespace System.Drawing
                                 text.Length >= 2
                                 && (text[0] == '\'' || text[0] == '"')
                                 && text[0] == text[text.Length - 1]
-                            ) {
+                            )
+                            {
                                 // In quotes means a named value
                                 string colorName = text.Substring(1, text.Length - 2);
                                 obj = Color.FromName(colorName);
@@ -195,7 +197,8 @@ namespace System.Drawing
                                     text.Length == 8
                                     && (text.StartsWith("&h") || text.StartsWith("&H"))
                                 )
-                            ) {
+                            )
+                            {
                                 // Note: ConvertFromString will raise exception if value cannot be converted.
                                 obj = Color.FromArgb(
                                     unchecked(
@@ -296,7 +299,8 @@ namespace System.Drawing
             CultureInfo culture,
             object value,
             Type destinationType
-        ) {
+        )
+        {
             if (destinationType == null)
             {
                 throw new ArgumentNullException(nameof(destinationType));

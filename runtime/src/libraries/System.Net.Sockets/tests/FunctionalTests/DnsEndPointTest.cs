@@ -39,7 +39,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 sock.Connect(new DnsEndPoint("localhost", port));
             }
         }
@@ -50,7 +51,8 @@ namespace System.Net.Sockets.Tests
         [InlineData(SocketImplementationType.Async)]
         public void Socket_ConnectDnsEndPoint_SetSocketProperties_Success(
             SocketImplementationType type
-        ) {
+        )
+        {
             int port;
             using (
                 SocketTestServer server = SocketTestServer.SocketTestServerFactory(
@@ -65,7 +67,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 sock.LingerState = new LingerOption(false, 0);
                 sock.NoDelay = true;
                 sock.ReceiveBufferSize = 1024;
@@ -86,7 +89,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 SocketException ex = Assert.ThrowsAny<SocketException>(
                     () =>
                     {
@@ -123,7 +127,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Dgram,
                     ProtocolType.Udp
                 )
-            ) {
+            )
+            {
                 AssertExtensions.Throws<ArgumentException>(
                     "remoteEP",
                     () =>
@@ -144,7 +149,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Dgram,
                     ProtocolType.Udp
                 )
-            ) {
+            )
+            {
                 int port = sock.BindToAnonymousPort(IPAddress.Loopback);
                 EndPoint endpoint = new DnsEndPoint("localhost", port);
 
@@ -178,7 +184,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 IAsyncResult result = sock.BeginConnect(
                     new DnsEndPoint("localhost", port),
                     null,
@@ -195,7 +202,8 @@ namespace System.Net.Sockets.Tests
         [InlineData(SocketImplementationType.Async)]
         public void Socket_BeginConnectDnsEndPoint_SetSocketProperties_Success(
             SocketImplementationType type
-        ) {
+        )
+        {
             int port;
             using (
                 SocketTestServer server = SocketTestServer.SocketTestServerFactory(
@@ -210,7 +218,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 sock.LingerState = new LingerOption(false, 0);
                 sock.NoDelay = true;
                 sock.ReceiveBufferSize = 1024;
@@ -236,7 +245,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 SocketException ex = Assert.ThrowsAny<SocketException>(
                     () =>
                     {
@@ -281,7 +291,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Dgram,
                     ProtocolType.Udp
                 )
-            ) {
+            )
+            {
                 AssertExtensions.Throws<ArgumentException>(
                     "remoteEP",
                     () =>
@@ -323,7 +334,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 SocketAsyncEventArgs args = new SocketAsyncEventArgs();
                 args.RemoteEndPoint = new DnsEndPoint("localhost", port);
                 args.Completed += OnConnectAsyncCompleted;
@@ -353,7 +365,8 @@ namespace System.Net.Sockets.Tests
         [Trait("IPv4", "true")]
         public void Socket_ConnectAsyncDnsEndPoint_SetSocketProperties_Success(
             SocketImplementationType type
-        ) {
+        )
+        {
             Assert.True(Capability.IPv4Support());
 
             int port;
@@ -370,7 +383,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 sock.LingerState = new LingerOption(false, 0);
                 sock.NoDelay = true;
                 sock.ReceiveBufferSize = 1024;
@@ -417,7 +431,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 ManualResetEvent complete = new ManualResetEvent(false);
                 args.UserToken = complete;
 
@@ -452,7 +467,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 ManualResetEvent complete = new ManualResetEvent(false);
                 args.UserToken = complete;
 
@@ -500,7 +516,8 @@ namespace System.Net.Sockets.Tests
                     IPAddress.IPv6Loopback,
                     out port6
                 )
-            ) {
+            )
+            {
                 SocketAsyncEventArgs args = new SocketAsyncEventArgs();
                 args.RemoteEndPoint = new DnsEndPoint("localhost", port4);
                 args.Completed += OnConnectAsyncCompleted;

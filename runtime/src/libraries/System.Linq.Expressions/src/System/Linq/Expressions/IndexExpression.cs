@@ -24,7 +24,8 @@ namespace System.Linq.Expressions
             Expression? instance,
             PropertyInfo? indexer,
             IReadOnlyList<Expression> arguments
-        ) {
+        )
+        {
             if (indexer == null)
             {
                 Debug.Assert(instance != null && instance.Type.IsArray);
@@ -139,7 +140,8 @@ namespace System.Linq.Expressions
             Expression instance,
             PropertyInfo? indexer,
             IEnumerable<Expression>? arguments
-        ) {
+        )
+        {
             if (indexer != null)
             {
                 return Property(instance, indexer, arguments);
@@ -176,7 +178,8 @@ namespace System.Linq.Expressions
         public static IndexExpression ArrayAccess(
             Expression array,
             IEnumerable<Expression>? indexes
-        ) {
+        )
+        {
             ExpressionUtils.RequiresCanRead(array, nameof(array));
 
             Type arrayType = array.Type;
@@ -219,7 +222,8 @@ namespace System.Linq.Expressions
             Expression instance,
             string propertyName,
             params Expression[]? arguments
-        ) {
+        )
+        {
             ExpressionUtils.RequiresCanRead(instance, nameof(instance));
             ContractUtils.RequiresNotNull(propertyName, nameof(propertyName));
             PropertyInfo pi = FindInstanceProperty(instance.Type, propertyName, arguments);
@@ -240,7 +244,8 @@ namespace System.Linq.Expressions
                 Type type,
             string propertyName,
             Expression[]? arguments
-        ) {
+        )
+        {
             // bind to public names first
             BindingFlags flags =
                 BindingFlags.Instance
@@ -304,7 +309,8 @@ namespace System.Linq.Expressions
             string propertyName,
             Expression[]? arguments,
             BindingFlags flags
-        ) {
+        )
+        {
             PropertyInfo? property = null;
 
             foreach (PropertyInfo pi in type.GetProperties(flags))
@@ -312,7 +318,8 @@ namespace System.Linq.Expressions
                 if (
                     pi.Name.Equals(propertyName, StringComparison.OrdinalIgnoreCase)
                     && IsCompatible(pi, arguments)
-                ) {
+                )
+                {
                     if (property == null)
                     {
                         property = pi;
@@ -384,7 +391,8 @@ namespace System.Linq.Expressions
             Expression? instance,
             PropertyInfo indexer,
             params Expression[]? arguments
-        ) {
+        )
+        {
             return Property(instance, indexer, (IEnumerable<Expression>?)arguments);
         }
 
@@ -406,7 +414,8 @@ namespace System.Linq.Expressions
             PropertyInfo indexer,
             string paramName,
             ReadOnlyCollection<Expression> argList
-        ) {
+        )
+        {
             ValidateIndexedProperty(instance, indexer, paramName, ref argList);
             return new IndexExpression(instance, indexer, argList);
         }
@@ -421,7 +430,8 @@ namespace System.Linq.Expressions
             PropertyInfo indexer,
             string paramName,
             ref ReadOnlyCollection<Expression> argList
-        ) {
+        )
+        {
             // If both getter and setter specified, all their parameter types
             // should match, with exception of the last setter parameter which
             // should match the type returned by the get method.
@@ -516,7 +526,8 @@ namespace System.Linq.Expressions
             ParameterInfo[] indexes,
             ref ReadOnlyCollection<Expression> arguments,
             string? paramName
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(arguments, nameof(arguments));
 
             ValidateMethodInfo(method, nameof(method));
@@ -551,7 +562,8 @@ namespace System.Linq.Expressions
             ParameterInfo[] indexes,
             ref ReadOnlyCollection<Expression> arguments,
             string? paramName
-        ) {
+        )
+        {
             if (indexes.Length > 0)
             {
                 if (indexes.Length != arguments.Count)

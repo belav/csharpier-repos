@@ -310,7 +310,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public virtual InternalEntityEntry CreateEntry(
             IDictionary<string, object?> values,
             IEntityType entityType
-        ) {
+        )
+        {
             var i = 0;
             var valuesArray = new object?[entityType.PropertyCount()];
             var shadowPropertyValuesArray = new object?[entityType.ShadowPropertyCount()];
@@ -353,7 +354,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             InternalEntityEntry entry,
             EntityState state,
             EntityState? oldState
-        ) {
+        )
+        {
             var entityType = entry.EntityType;
             if (entityType.HasSharedClrType)
             {
@@ -361,7 +363,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 foreach (
                     var otherType in _model.FindEntityTypes(entityType.ClrType)
                         .Where(et => et != entityType && TryGetEntry(mapKey, et) != null)
-                ) {
+                )
+                {
                     UpdateLogger.DuplicateDependentEntityTypeInstanceWarning(entityType, otherType);
                 }
             }
@@ -379,7 +382,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             IEntityType baseEntityType,
             object entity,
             in ValueBuffer valueBuffer
-        ) {
+        )
+        {
             var existingEntry = TryGetEntry(entity);
             if (existingEntry != null)
             {
@@ -779,7 +783,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             object referencedEntity,
             INavigationBase navigation,
             InternalEntityEntry referencedFromEntry
-        ) {
+        )
+        {
             _referencedUntrackedEntities ??= new Dictionary<
                 object,
                 IList<Tuple<INavigationBase, InternalEntityEntry>>
@@ -807,7 +812,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             if (
                 _referencedUntrackedEntities != null
                 && _referencedUntrackedEntities.TryGetValue(referencedEntity, out var danglers)
-            ) {
+            )
+            {
                 if (clear)
                 {
                     _referencedUntrackedEntities.Remove(referencedEntity);
@@ -929,7 +935,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public virtual IEnumerable<IUpdateEntry> GetDependents(
             IUpdateEntry principalEntry,
             IForeignKey foreignKey
-        ) {
+        )
+        {
             var dependentIdentityMap = FindIdentityMap(
                 foreignKey.DeclaringEntityType.FindPrimaryKey()
             );
@@ -949,7 +956,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public virtual IEnumerable<IUpdateEntry> GetDependentsUsingRelationshipSnapshot(
             IUpdateEntry principalEntry,
             IForeignKey foreignKey
-        ) {
+        )
+        {
             var dependentIdentityMap = FindIdentityMap(
                 foreignKey.DeclaringEntityType.FindPrimaryKey()
             );
@@ -968,7 +976,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public virtual IEnumerable<IUpdateEntry>? GetDependentsFromNavigation(
             IUpdateEntry principalEntry,
             IForeignKey foreignKey
-        ) {
+        )
+        {
             var navigation = foreignKey.PrincipalToDependent;
             if (navigation == null || navigation.IsShadowProperty())
             {
@@ -1082,7 +1091,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             InternalEntityEntry entry,
             bool force,
             IEnumerable<IForeignKey>? foreignKeys = null
-        ) {
+        )
+        {
             var doCascadeDelete = force || CascadeDeleteTiming != CascadeTiming.Never;
             var principalIsDetached = entry.EntityState == EntityState.Detached;
             if (!_changeDetectorInitialized)
@@ -1107,7 +1117,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     InternalEntityEntry dependent in (
                         GetDependentsFromNavigation(entry, fk) ?? GetDependents(entry, fk)
                     ).ToList()
-                ) {
+                )
+                {
                     if (dependent.SharedIdentityEntry == entry)
                     {
                         continue;
@@ -1122,13 +1133,15 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                             dependent.EntityState == EntityState.Added
                             || KeysEqual(entry, fk, dependent)
                         )
-                    ) {
+                    )
+                    {
                         if (
                             (
                                 fk.DeleteBehavior == DeleteBehavior.Cascade
                                 || fk.DeleteBehavior == DeleteBehavior.ClientCascade
                             ) && doCascadeDelete
-                        ) {
+                        )
+                        {
                             var cascadeState =
                                 principalIsDetached || dependent.EntityState == EntityState.Added
                                     ? EntityState.Detached
@@ -1183,7 +1196,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             InternalEntityEntry entry,
             IForeignKey fk,
             InternalEntityEntry dependent
-        ) {
+        )
+        {
             for (var i = 0; i < fk.Properties.Count; i++)
             {
                 var principalProperty = fk.PrincipalKey.Properties[i];
@@ -1195,7 +1209,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                         entry[principalProperty],
                         dependent[dependentProperty]
                     )
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -1243,7 +1258,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         protected virtual async Task<int> SaveChangesAsync(
             IList<IUpdateEntry> entriesToSave,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             _concurrencyDetector?.EnterCriticalSection();
 
             try
@@ -1351,7 +1367,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             StateManager stateManager,
             bool acceptAllChangesOnSuccess,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (stateManager.ChangedCount == 0)
             {
                 return 0;
@@ -1459,7 +1476,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public virtual void OnStateChanged(
             InternalEntityEntry internalEntityEntry,
             EntityState oldState
-        ) {
+        )
+        {
             var @event = StateChanged;
             var newState = internalEntityEntry.EntityState;
 

@@ -36,7 +36,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
             ServiceContext serviceContext,
             TransportConnectionManager transportConnectionManager,
             IKestrelTrace logger
-        ) {
+        )
+        {
             _id = id;
             _serviceContext = serviceContext;
             _transportConnectionManager = transportConnectionManager;
@@ -115,7 +116,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
 
         private Task CompleteAsyncMayAwait(
             Stack<KeyValuePair<Func<object, Task>, object>> onCompleted
-        ) {
+        )
+        {
             while (onCompleted.TryPop(out var entry))
             {
                 try
@@ -141,7 +143,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
         private async Task CompleteAsyncAwaited(
             Task currentTask,
             Stack<KeyValuePair<Func<object, Task>, object>> onCompleted
-        ) {
+        )
+        {
             try
             {
                 await currentTask;

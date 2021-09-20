@@ -250,7 +250,8 @@ namespace System.Web.Mvc.Test
             protected override bool FileExists(
                 ControllerContext controllerContext,
                 string virtualPath
-            ) {
+            )
+            {
                 return base.FileExists(controllerContext, virtualPath);
             }
         }

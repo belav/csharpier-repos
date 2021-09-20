@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.SignalR
             HubCallerContext context,
             IServiceProvider serviceProvider,
             Hub hub
-        ) {
+        )
+        {
             Hub = hub;
             ServiceProvider = serviceProvider;
             Context = context;

@@ -103,13 +103,15 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             IModelMetadataProvider metadataProvider,
             ModelStateDictionary modelState,
             Type declaredModelType
-        ) : this(
-            metadataProvider,
-            modelState,
-            declaredModelType,
-            data: new Dictionary<string, object?>(StringComparer.OrdinalIgnoreCase),
-            templateInfo: new TemplateInfo()
-        ) {
+        )
+            : this(
+                metadataProvider,
+                modelState,
+                declaredModelType,
+                data: new Dictionary<string, object?>(StringComparer.OrdinalIgnoreCase),
+                templateInfo: new TemplateInfo()
+            )
+        {
             if (metadataProvider == null)
             {
                 throw new ArgumentNullException(nameof(metadataProvider));
@@ -181,16 +183,18 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             ViewDataDictionary source,
             object? model,
             Type declaredModelType
-        ) : this(
-            source._metadataProvider,
-            source.ModelState,
-            declaredModelType,
-            data: new CopyOnWriteDictionary<string, object?>(
-                source,
-                StringComparer.OrdinalIgnoreCase
-            ),
-            templateInfo: new TemplateInfo(source.TemplateInfo)
-        ) {
+        )
+            : this(
+                source._metadataProvider,
+                source.ModelState,
+                declaredModelType,
+                data: new CopyOnWriteDictionary<string, object?>(
+                    source,
+                    StringComparer.OrdinalIgnoreCase
+                ),
+                templateInfo: new TemplateInfo(source.TemplateInfo)
+            )
+        {
             if (source == null)
             {
                 throw new ArgumentNullException(nameof(source));
@@ -211,7 +215,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 source.ModelMetadata.MetadataKind == ModelMetadataKind.Type
                 && source.ModelMetadata.ModelType == typeof(object)
                 && modelOrDeclaredType != typeof(object)
-            ) {
+            )
+            {
                 // Base ModelMetadata on new type when there's no property information to preserve and type changes to
                 // something besides typeof(object).
                 ModelExplorer = _metadataProvider.GetModelExplorerForType(
@@ -229,7 +234,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             }
             else if (
                 modelType != null && !source.ModelMetadata.ModelType.IsAssignableFrom(modelType)
-            ) {
+            )
+            {
                 // Base ModelMetadata on new type when new model is incompatible with the existing metadata.
                 ModelExplorer = _metadataProvider.GetModelExplorerForType(modelType, model);
             }
@@ -267,7 +273,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             Type declaredModelType,
             IDictionary<string, object?> data,
             TemplateInfo templateInfo
-        ) {
+        )
+        {
             _metadataProvider = metadataProvider;
             ModelState = modelState;
             _declaredModelType = declaredModelType;
@@ -455,7 +462,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 && ModelMetadata.ModelType == typeof(object)
                 && modelType != null
                 && modelType != typeof(object)
-            ) {
+            )
+            {
                 // Base ModelMetadata on new type when there's no property information to preserve and type changes to
                 // something besides typeof(object).
                 ModelExplorer = _metadataProvider.GetModelExplorerForType(modelType, value);
@@ -475,7 +483,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                     value == null
                     && !ModelMetadata.IsReferenceOrNullableType
                     && _declaredModelType != ModelMetadata.ModelType
-                ) {
+                )
+                {
                     // Base ModelMetadata on declared type when setting Model to null, source VDD's Model was never
                     // set, and source VDD had a non-Nullable value type. Though _declaredModelType might also be a
                     // non-Nullable value type, would need to duplicate logic behind

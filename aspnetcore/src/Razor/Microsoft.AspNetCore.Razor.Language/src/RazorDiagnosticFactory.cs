@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             );
         public static RazorDiagnostic CreateDirective_BlockDirectiveCannotBeImported(
             string directive
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(
                 Directive_BlockDirectiveCannotBeImported,
                 SourceSpan.Undefined,
@@ -81,7 +82,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             );
         public static RazorDiagnostic CreateParsing_UnexpectedWhiteSpaceAtStartOfCodeBlock(
             SourceSpan location
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(Parsing_UnexpectedWhiteSpaceAtStartOfCodeBlock, location);
         }
 
@@ -93,7 +95,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             );
         public static RazorDiagnostic CreateParsing_UnexpectedEndOfFileAtStartOfCodeBlock(
             SourceSpan location
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(Parsing_UnexpectedEndOfFileAtStartOfCodeBlock, location);
         }
 
@@ -106,7 +109,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static RazorDiagnostic CreateParsing_UnexpectedCharacterAtStartOfCodeBlock(
             SourceSpan location,
             string content
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(
                 Parsing_UnexpectedCharacterAtStartOfCodeBlock,
                 location,
@@ -125,7 +129,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             string blockName,
             string closeBlock,
             string openBlock
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(
                 Parsing_ExpectedEndOfBlockBeforeEOF,
                 location,
@@ -144,7 +149,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static RazorDiagnostic CreateParsing_ReservedWord(
             SourceSpan location,
             string content
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(Parsing_ReservedWord, location, content);
         }
 
@@ -156,7 +162,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             );
         public static RazorDiagnostic CreateParsing_SingleLineControlFlowStatementsCannotContainMarkup(
             SourceSpan location
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(
                 Parsing_SingleLineControlFlowStatementsNotAllowed,
                 location
@@ -172,7 +179,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             );
         public static RazorDiagnostic CreateParsing_AtInCodeMustBeFollowedByColonParenOrIdentifierStart(
             SourceSpan location
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(
                 Parsing_AtInCodeMustBeFollowedByColonParenOrIdentifierStart,
                 location
@@ -199,7 +207,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static RazorDiagnostic CreateParsing_DirectiveTokensMustBeSeparatedByWhitespace(
             SourceSpan location,
             string directiveName
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(
                 Parsing_DirectiveTokensMustBeSeparatedByWhitespace,
                 location,
@@ -217,7 +226,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             SourceSpan location,
             string directiveName,
             string expectedToken
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(
                 Parsing_UnexpectedEOFAfterDirective,
                 location,
@@ -235,7 +245,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static RazorDiagnostic CreateParsing_DirectiveExpectsTypeName(
             SourceSpan location,
             string directiveName
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(
                 Parsing_DirectiveExpectsTypeName,
                 location,
@@ -252,7 +263,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static RazorDiagnostic CreateParsing_DirectiveExpectsNamespace(
             SourceSpan location,
             string directiveName
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(
                 Parsing_DirectiveExpectsNamespace,
                 location,
@@ -269,7 +281,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static RazorDiagnostic CreateParsing_DirectiveExpectsIdentifier(
             SourceSpan location,
             string directiveName
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(
                 Parsing_DirectiveExpectsIdentifier,
                 location,
@@ -286,7 +299,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static RazorDiagnostic CreateParsing_DirectiveExpectsQuotedStringLiteral(
             SourceSpan location,
             string directiveName
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(
                 Parsing_DirectiveExpectsQuotedStringLiteral,
                 location,
@@ -304,7 +318,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             SourceSpan location,
             string directiveName,
             string expected
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(
                 Parsing_UnexpectedDirectiveLiteral,
                 location,
@@ -322,7 +337,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static RazorDiagnostic CreateParsing_DirectiveMustHaveValue(
             SourceSpan location,
             string directiveName
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(Parsing_DirectiveMustHaveValue, location, directiveName);
         }
 
@@ -335,7 +351,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static RazorDiagnostic CreateParsing_IncompleteQuotesAroundDirective(
             SourceSpan location,
             string directiveName
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(
                 Parsing_IncompleteQuotesAroundDirective,
                 location,
@@ -354,7 +371,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             string directiveName,
             char character,
             string prefix
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(
                 Parsing_InvalidTagHelperPrefixValue,
                 location,
@@ -394,7 +412,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             );
         public static RazorDiagnostic CreateParsing_TextTagCannotContainAttributes(
             SourceSpan location
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(Parsing_TextTagCannotContainAttributes, location);
         }
 
@@ -407,7 +426,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static RazorDiagnostic CreateParsing_UnfinishedTag(
             SourceSpan location,
             string tagName
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(Parsing_UnfinishedTag, location, tagName);
         }
 
@@ -420,7 +440,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static RazorDiagnostic CreateParsing_MissingEndTag(
             SourceSpan location,
             string tagName
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(Parsing_MissingEndTag, location, tagName);
         }
 
@@ -433,7 +454,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static RazorDiagnostic CreateParsing_UnexpectedEndTag(
             SourceSpan location,
             string tagName
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(Parsing_UnexpectedEndTag, location, tagName);
         }
 
@@ -447,7 +469,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             SourceSpan location,
             string openBrace,
             string closeBrace
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(
                 Parsing_ExpectedCloseBracketBeforeEOF,
                 location,
@@ -477,7 +500,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             SourceSpan location,
             string attributeName,
             string tagName
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(
                 Parsing_TagHelperIndexerAttributeNameMustIncludeKey,
                 location,
@@ -494,7 +518,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             );
         public static RazorDiagnostic CreateParsing_TagHelperAttributeListMustBeWellFormed(
             SourceSpan location
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(Parsing_TagHelperAttributeListMustBeWellFormed, location);
         }
 
@@ -507,7 +532,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static RazorDiagnostic CreateParsing_TagHelpersCannotHaveCSharpInTagDeclaration(
             SourceSpan location,
             string tagName
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(
                 Parsing_TagHelpersCannotHaveCSharpInTagDeclaration,
                 location,
@@ -524,7 +550,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static RazorDiagnostic CreateParsing_TagHelperAttributesMustHaveAName(
             SourceSpan location,
             string tagName
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(
                 Parsing_TagHelperAttributesMustHaveAName,
                 location,
@@ -543,7 +570,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             string tagName,
             string displayName,
             TagStructure tagStructure
-        ) {
+        )
+        {
             var diagnostic = RazorDiagnostic.Create(
                 Parsing_TagHelperMustNotHaveAnEndTag,
                 location,
@@ -564,7 +592,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static RazorDiagnostic CreateParsing_TagHelperFoundMalformedTagHelper(
             SourceSpan location,
             string tagName
-        ) {
+        )
+        {
             var diagnostic = RazorDiagnostic.Create(
                 Parsing_TagHelperFoundMalformedTagHelper,
                 location,
@@ -583,7 +612,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static RazorDiagnostic CreateParsing_TagHelperMissingCloseAngle(
             SourceSpan location,
             string tagName
-        ) {
+        )
+        {
             var diagnostic = RazorDiagnostic.Create(
                 Parsing_TagHelperMissingCloseAngle,
                 location,
@@ -602,7 +632,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static RazorDiagnostic CreateParsing_InvalidTagHelperLookupText(
             SourceSpan location,
             string lookupText
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(Parsing_InvalidTagHelperLookupText, location, lookupText);
         }
 
@@ -615,7 +646,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static RazorDiagnostic CreateParsing_DirectiveExpectsCSharpAttribute(
             SourceSpan location,
             string directiveName
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(
                 Parsing_DirectiveExpectsCSharpAttribute,
                 location,
@@ -632,7 +664,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static RazorDiagnostic CreateParsing_DirectiveExpectsBooleanLiteral(
             SourceSpan location,
             string directiveName
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(
                 Parsing_DirectiveExpectsBooleanLiteral,
                 location,
@@ -651,7 +684,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             string directiveName,
             string constraintIdentifier,
             string originalMember
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(
                 Parsing_GenericTypeParameterIdentifierMismatch,
                 location,
@@ -671,7 +705,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             SourceSpan location,
             string content,
             params string[] options
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(
                 Parsing_UnexpectedIdentifier,
                 location,
@@ -694,7 +729,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static RazorDiagnostic CreateCodeTarget_UnsupportedExtension(
             string documentKind,
             Type extensionType
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(
                 CodeTarget_UnsupportedExtension,
                 SourceSpan.Undefined,
@@ -712,7 +748,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static RazorDiagnostic CreateParsing_DuplicateDirective(
             SourceSpan location,
             string directive
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(Parsing_DuplicateDirective, location, directive);
         }
 
@@ -739,7 +776,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             );
         public static RazorDiagnostic CreateParsing_InlineMarkupBlocksCannotBeNested(
             SourceSpan location
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(Parsing_InlineMarkupBlocksCannotBeNested, location);
         }
 
@@ -752,7 +790,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             );
         public static RazorDiagnostic CreateParsing_NamespaceImportAndTypeAliasCannotExistWithinCodeBlock(
             SourceSpan location
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(
                 Parsing_NamespaceImportAndTypeAliasCannotExistWithinCodeBlock,
                 location
@@ -768,7 +807,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static RazorDiagnostic CreateParsing_DirectiveMustAppearAtStartOfLine(
             SourceSpan location,
             string directiveName
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(
                 Parsing_DirectiveMustAppearAtStartOfLine,
                 location,
@@ -784,7 +824,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             );
         public static RazorDiagnostic CreateTagHelper_CodeBlocksNotSupportedInAttributes(
             SourceSpan location
-        ) {
+        )
+        {
             var diagnostic = RazorDiagnostic.Create(
                 TagHelper_CodeBlocksNotSupportedInAttributes,
                 location
@@ -801,7 +842,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static RazorDiagnostic CreateTagHelper_InlineMarkupBlocksNotSupportedInAttributes(
             SourceSpan location,
             string expectedTypeName
-        ) {
+        )
+        {
             var diagnostic = RazorDiagnostic.Create(
                 TagHelper_InlineMarkupBlocksNotSupportedInAttributes,
                 location,
@@ -822,7 +864,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             string attributeName,
             string tagName,
             string propertyTypeName
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(
                 TagHelper_EmptyBoundAttribute,
                 location,
@@ -842,7 +885,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             SourceSpan location,
             string tagName,
             string allowedChildren
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(
                 TagHelper_CannotHaveNonTagContent,
                 location,
@@ -862,7 +906,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             string tagName,
             string parent,
             string allowedChildren
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(
                 TagHelper_InvalidNestedTag,
                 location,
@@ -883,7 +928,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             string firstDescriptor,
             string secondDescriptor,
             string tagName
-        ) {
+        )
+        {
             return RazorDiagnostic.Create(
                 TagHelper_InconsistentTagStructure,
                 location,
@@ -909,7 +955,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         public static RazorDiagnostic CreateTagHelper_InvalidRestrictedChildNullOrWhitespace(
             string tagHelperDisplayName
-        ) {
+        )
+        {
             var diagnostic = RazorDiagnostic.Create(
                 TagHelper_InvalidRestrictedChildNullOrWhitespace,
                 new SourceSpan(SourceLocation.Undefined, contentLength: 0),
@@ -929,7 +976,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             string tagHelperDisplayName,
             string restrictedChild,
             char invalidCharacter
-        ) {
+        )
+        {
             var diagnostic = RazorDiagnostic.Create(
                 TagHelper_InvalidRestrictedChild,
                 new SourceSpan(SourceLocation.Undefined, contentLength: 0),
@@ -950,7 +998,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static RazorDiagnostic CreateTagHelper_InvalidBoundAttributeNullOrWhitespace(
             string tagHelperDisplayName,
             string propertyDisplayName
-        ) {
+        )
+        {
             var diagnostic = RazorDiagnostic.Create(
                 TagHelper_InvalidBoundAttributeNullOrWhitespace,
                 new SourceSpan(SourceLocation.Undefined, contentLength: 0),
@@ -972,7 +1021,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             string propertyDisplayName,
             string invalidName,
             char invalidCharacter
-        ) {
+        )
+        {
             var diagnostic = RazorDiagnostic.Create(
                 TagHelper_InvalidBoundAttributeName,
                 new SourceSpan(SourceLocation.Undefined, contentLength: 0),
@@ -995,7 +1045,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             string tagHelperDisplayName,
             string propertyDisplayName,
             string invalidName
-        ) {
+        )
+        {
             var diagnostic = RazorDiagnostic.Create(
                 TagHelper_InvalidBoundAttributeNameStartsWith,
                 new SourceSpan(SourceLocation.Undefined, contentLength: 0),
@@ -1019,7 +1070,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             string propertyDisplayName,
             string invalidName,
             char invalidCharacter
-        ) {
+        )
+        {
             var diagnostic = RazorDiagnostic.Create(
                 TagHelper_InvalidBoundAttributePrefix,
                 new SourceSpan(SourceLocation.Undefined, contentLength: 0),
@@ -1042,7 +1094,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             string tagHelperDisplayName,
             string propertyDisplayName,
             string invalidName
-        ) {
+        )
+        {
             var diagnostic = RazorDiagnostic.Create(
                 TagHelper_InvalidBoundAttributePrefixStartsWith,
                 new SourceSpan(SourceLocation.Undefined, contentLength: 0),
@@ -1080,7 +1133,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static RazorDiagnostic CreateTagHelper_InvalidTargetedTagName(
             string invalidTagName,
             char invalidCharacter
-        ) {
+        )
+        {
             var diagnostic = RazorDiagnostic.Create(
                 TagHelper_InvalidTargetedTagName,
                 new SourceSpan(SourceLocation.Undefined, contentLength: 0),
@@ -1116,7 +1170,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static RazorDiagnostic CreateTagHelper_InvalidTargetedParentTagName(
             string invalidTagName,
             char invalidCharacter
-        ) {
+        )
+        {
             var diagnostic = RazorDiagnostic.Create(
                 TagHelper_InvalidTargetedParentTagName,
                 new SourceSpan(SourceLocation.Undefined, contentLength: 0),
@@ -1152,7 +1207,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static RazorDiagnostic CreateTagHelper_InvalidTargetedAttributeName(
             string invalidAttributeName,
             char invalidCharacter
-        ) {
+        )
+        {
             var diagnostic = RazorDiagnostic.Create(
                 TagHelper_InvalidTargetedAttributeName,
                 new SourceSpan(SourceLocation.Undefined, contentLength: 0),
@@ -1171,7 +1227,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             );
         public static RazorDiagnostic CreateTagHelper_InvalidBoundAttributeParameterNullOrWhitespace(
             string attributeName
-        ) {
+        )
+        {
             var diagnostic = RazorDiagnostic.Create(
                 TagHelper_InvalidBoundAttributeParameterNullOrWhitespace,
                 new SourceSpan(SourceLocation.Undefined, contentLength: 0),
@@ -1191,7 +1248,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             string attributeName,
             string invalidName,
             char invalidCharacter
-        ) {
+        )
+        {
             var diagnostic = RazorDiagnostic.Create(
                 TagHelper_InvalidBoundAttributeParameterName,
                 new SourceSpan(SourceLocation.Undefined, contentLength: 0),
@@ -1213,7 +1271,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             string tagHelperDisplayName,
             string propertyDisplayName,
             string invalidName
-        ) {
+        )
+        {
             var diagnostic = RazorDiagnostic.Create(
                 TagHelper_InvalidBoundDirectiveAttributeName,
                 new SourceSpan(SourceLocation.Undefined, contentLength: 0),
@@ -1235,7 +1294,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             string tagHelperDisplayName,
             string propertyDisplayName,
             string invalidName
-        ) {
+        )
+        {
             var diagnostic = RazorDiagnostic.Create(
                 TagHelper_InvalidBoundDirectiveAttributePrefix,
                 new SourceSpan(SourceLocation.Undefined, contentLength: 0),
@@ -1256,7 +1316,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static RazorDiagnostic CreateTagHelper_InvalidRequiredDirectiveAttributeName(
             string propertyDisplayName,
             string invalidName
-        ) {
+        )
+        {
             var diagnostic = RazorDiagnostic.Create(
                 TagHelper_InvalidRequiredDirectiveAttributeName,
                 new SourceSpan(SourceLocation.Undefined, contentLength: 0),

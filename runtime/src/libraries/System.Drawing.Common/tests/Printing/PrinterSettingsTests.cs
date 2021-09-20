@@ -384,7 +384,8 @@ namespace System.Drawing.Printing.Tests
         [MemberData(nameof(IsDirectPrintingSupported_ImageFormatSupported_TestData))]
         public void IsDirectPrintingSupported_ImageFormatSupported_ReturnsExpected(
             ImageFormat imageFormat
-        ) {
+        )
+        {
             var printerSettings = new PrinterSettings();
             bool supported = printerSettings.IsDirectPrintingSupported(imageFormat);
         }
@@ -406,7 +407,8 @@ namespace System.Drawing.Printing.Tests
         [MemberData(nameof(IsDirectPrintingSupported_ImageFormatNotSupported_TestData))]
         public void IsDirectPrintingSupported_ImageFormatNotSupported_ReturnsExpected(
             ImageFormat imageFormat
-        ) {
+        )
+        {
             var printerSettings = new PrinterSettings();
             Assert.False(printerSettings.IsDirectPrintingSupported(imageFormat));
         }

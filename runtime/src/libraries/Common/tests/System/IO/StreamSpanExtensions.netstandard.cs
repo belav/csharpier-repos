@@ -26,7 +26,8 @@ internal static class StreamSpanExtensions
         this Stream stream,
         Memory<byte> destination,
         CancellationToken cancellationToken = default(CancellationToken)
-    ) {
+    )
+    {
         byte[] array = new byte[destination.Length];
         return new ValueTask<int>(
             stream.ReadAsync(array, 0, array.Length, cancellationToken)

@@ -42,7 +42,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.Internal
         public override void AddDbParameter(
             DbCommand command,
             IReadOnlyDictionary<string, object?> parameterValues
-        ) {
+        )
+        {
             AddDbParameter(command, _parameter);
         }
 
@@ -63,7 +64,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.Internal
                 value is DbParameter dbParameter
                 && dbParameter.Direction == ParameterDirection.Input
                 && value is ICloneable cloneable
-            ) {
+            )
+            {
                 value = cloneable.Clone();
             }
 

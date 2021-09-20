@@ -35,7 +35,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             if (
                 EndOfFile
                 || (_visitedFirstTokenStart && _firstTokenVisitLocation != CurrentLocation)
-            ) {
+            )
+            {
                 // We also need to make sure we are currently past the position where we found the first token.
                 // If the position is equal, that means the parser put the token back for later parsing.
                 return null;

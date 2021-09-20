@@ -15,7 +15,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
         int IVsSolutionEvents.OnAfterLoadProject(
             IVsHierarchy pStubHierarchy,
             IVsHierarchy pRealHierarchy
-        ) {
+        )
+        {
             return VSConstants.E_NOTIMPL;
         }
 
@@ -33,7 +34,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
             IVsHierarchy pHierarchy,
             int fRemoving,
             ref int pfCancel
-        ) {
+        )
+        {
             return VSConstants.E_NOTIMPL;
         }
 
@@ -52,7 +54,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
         int IVsSolutionEvents.OnBeforeUnloadProject(
             IVsHierarchy pRealHierarchy,
             IVsHierarchy pStubHierarchy
-        ) {
+        )
+        {
             return VSConstants.E_NOTIMPL;
         }
 

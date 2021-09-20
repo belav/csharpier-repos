@@ -35,7 +35,8 @@ namespace Castle.DynamicProxy.Contributors
             ArgumentReference serializationInfo,
             ArgumentReference streamingContext,
             ClassEmitter emitter
-        ) {
+        )
+        {
             var targetField = emitter.GetField("__target");
 
             codebuilder.AddStatement(

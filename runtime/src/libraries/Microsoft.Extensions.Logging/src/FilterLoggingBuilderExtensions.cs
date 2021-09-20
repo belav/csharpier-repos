@@ -258,7 +258,8 @@ namespace Microsoft.Extensions.Logging
         private static ILoggingBuilder ConfigureFilter(
             this ILoggingBuilder builder,
             Action<LoggerFilterOptions> configureOptions
-        ) {
+        )
+        {
             builder.Services.Configure(configureOptions);
             return builder;
         }
@@ -269,7 +270,8 @@ namespace Microsoft.Extensions.Logging
             string category = null,
             LogLevel? level = null,
             Func<string, string, LogLevel, bool> filter = null
-        ) {
+        )
+        {
             options.Rules.Add(new LoggerFilterRule(type, category, level, filter));
             return options;
         }

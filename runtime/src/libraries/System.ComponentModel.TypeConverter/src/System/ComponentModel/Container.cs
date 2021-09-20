@@ -246,7 +246,8 @@ namespace System.ComponentModel
                         s?.Name != null
                         && string.Equals(s.Name, name, StringComparison.OrdinalIgnoreCase)
                         && s.Component != component
-                    ) {
+                    )
+                    {
                         InheritanceAttribute inheritanceAttribute =
                             (InheritanceAttribute)TypeDescriptor.GetAttributes(s.Component)[
                                 typeof(InheritanceAttribute)
@@ -254,7 +255,8 @@ namespace System.ComponentModel
                         if (
                             inheritanceAttribute.InheritanceLevel
                             != InheritanceLevel.InheritedReadOnly
-                        ) {
+                        )
+                        {
                             throw new ArgumentException(SR.Format(SR.DuplicateComponentName, name));
                         }
                     }

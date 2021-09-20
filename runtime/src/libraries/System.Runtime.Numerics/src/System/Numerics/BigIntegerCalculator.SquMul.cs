@@ -20,7 +20,8 @@ namespace System.Numerics
             fixed (
                 uint* v = value,
                     b = bits
-            ) {
+            )
+            {
                 Square(v, value.Length, b, bits.Length);
             }
 
@@ -141,7 +142,8 @@ namespace System.Numerics
                     fixed (
                         uint* fold = new uint[foldLength],
                             core = new uint[coreLength]
-                    ) {
+                    )
+                    {
                         // ... compute z_a = a_1 + a_0 (call it fold...)
                         Add(valueHigh, valueHighLength, valueLow, valueLowLength, fold, foldLength);
 
@@ -202,7 +204,8 @@ namespace System.Numerics
                 uint* l = left,
                     r = right,
                     b = bits
-            ) {
+            )
+            {
                 Multiply(l, left.Length, r, right.Length, b, bits.Length);
             }
 
@@ -219,7 +222,8 @@ namespace System.Numerics
             int rightLength,
             uint* bits,
             int bitsLength
-        ) {
+        )
+        {
             Debug.Assert(leftLength >= 0);
             Debug.Assert(rightLength >= 0);
             Debug.Assert(leftLength >= rightLength);
@@ -356,7 +360,8 @@ namespace System.Numerics
                         uint* leftFold = new uint[leftFoldLength],
                             rightFold = new uint[rightFoldLength],
                             core = new uint[coreLength]
-                    ) {
+                    )
+                    {
                         // ... compute z_a = a_1 + a_0 (call it fold...)
                         Add(
                             leftHigh,
@@ -409,7 +414,8 @@ namespace System.Numerics
             int rightLength,
             uint* core,
             int coreLength
-        ) {
+        )
+        {
             Debug.Assert(leftLength >= 0);
             Debug.Assert(rightLength >= 0);
             Debug.Assert(coreLength >= 0);

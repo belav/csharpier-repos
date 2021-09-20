@@ -14,7 +14,8 @@ namespace System.Linq.Parallel.Tests
         public static void Aggregate_AggregateException(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             AssertThrows.Wrapped<DeliberateTestException>(
                 () => operation.Item(DefaultStart, DefaultSize, source.Item).Aggregate((x, y) => x)
             );
@@ -46,7 +47,8 @@ namespace System.Linq.Parallel.Tests
         public static void All_AggregateException(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             AssertThrows.Wrapped<DeliberateTestException>(
                 () => operation.Item(DefaultStart, DefaultSize, source.Item).All(x => true)
             );
@@ -58,7 +60,8 @@ namespace System.Linq.Parallel.Tests
         public static void Any_AggregateException(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             AssertThrows.Wrapped<DeliberateTestException>(
                 () => operation.Item(DefaultStart, DefaultSize, source.Item).Any(x => false)
             );
@@ -70,7 +73,8 @@ namespace System.Linq.Parallel.Tests
         public static void Average_AggregateException(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             AssertThrows.Wrapped<DeliberateTestException>(
                 () => operation.Item(DefaultStart, DefaultSize, source.Item).Average()
             );
@@ -82,7 +86,8 @@ namespace System.Linq.Parallel.Tests
         public static void Contains_AggregateException(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             AssertThrows.Wrapped<DeliberateTestException>(
                 () =>
                     operation.Item(DefaultStart, DefaultSize, source.Item)
@@ -96,7 +101,8 @@ namespace System.Linq.Parallel.Tests
         public static void Count_AggregateException(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             AssertThrows.Wrapped<DeliberateTestException>(
                 () => operation.Item(DefaultStart, DefaultSize, source.Item).Count()
             );
@@ -112,7 +118,8 @@ namespace System.Linq.Parallel.Tests
         public static void ElementAt_AggregateException(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             AssertThrows.Wrapped<DeliberateTestException>(
                 () =>
                     operation.Item(DefaultStart, DefaultSize, source.Item)
@@ -127,7 +134,8 @@ namespace System.Linq.Parallel.Tests
         public static void ElementAtOrDefault_AggregateException(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             AssertThrows.Wrapped<DeliberateTestException>(
                 () =>
                     operation.Item(DefaultStart, DefaultSize, source.Item)
@@ -146,7 +154,8 @@ namespace System.Linq.Parallel.Tests
         public static void First_Predicate_None(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             Assert.Throws<InvalidOperationException>(
                 () => operation.Item(DefaultStart, DefaultSize, source.Item).First(x => false)
             );
@@ -159,7 +168,8 @@ namespace System.Linq.Parallel.Tests
         public static void First_AggregateException(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             if (operation.ToString().Contains("Concat-Left"))
             {
                 // The vast majority of the time, the operation returns a result instead of failing.
@@ -202,7 +212,8 @@ namespace System.Linq.Parallel.Tests
         public static void FirstOrDefault_AggregateException(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             if (operation.ToString().Contains("Concat-Left"))
             {
                 // The vast majority of the time, the operation returns a result instead of failing.
@@ -247,7 +258,8 @@ namespace System.Linq.Parallel.Tests
         public static void ForAll_AggregateException(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             AssertThrows.Wrapped<DeliberateTestException>(
                 () => operation.Item(DefaultStart, DefaultSize, source.Item).ForAll(x => { })
             );
@@ -260,7 +272,8 @@ namespace System.Linq.Parallel.Tests
         public static void GetEnumerator_AggregateException(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             IEnumerator<int> enumerator = operation.Item(DefaultStart, DefaultSize, source.Item)
                 .GetEnumerator();
             // Spin until concat hits
@@ -268,7 +281,8 @@ namespace System.Linq.Parallel.Tests
             if (
                 operation.ToString().StartsWith("Concat")
                 || operation.ToString().StartsWith("Union-Left")
-            ) {
+            )
+            {
                 AssertThrows.Wrapped<DeliberateTestException>(
                     () =>
                     {
@@ -285,7 +299,8 @@ namespace System.Linq.Parallel.Tests
             if (
                 operation.ToString().StartsWith("OrderBy")
                 || operation.ToString().StartsWith("ThenBy")
-            ) {
+            )
+            {
                 Assert.Throws<InvalidOperationException>(() => enumerator.MoveNext());
             }
             else
@@ -300,7 +315,8 @@ namespace System.Linq.Parallel.Tests
         public static void Last_Predicate_None(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             Assert.Throws<InvalidOperationException>(
                 () => operation.Item(DefaultStart, DefaultSize, source.Item).Last(x => false)
             );
@@ -313,7 +329,8 @@ namespace System.Linq.Parallel.Tests
         public static void Last_AggregateException(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             AssertThrows.Wrapped<DeliberateTestException>(
                 () => operation.Item(DefaultStart, DefaultSize, source.Item).Last()
             );
@@ -329,7 +346,8 @@ namespace System.Linq.Parallel.Tests
         public static void LastOrDefault_AggregateException(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             AssertThrows.Wrapped<DeliberateTestException>(
                 () => operation.Item(DefaultStart, DefaultSize, source.Item).LastOrDefault()
             );
@@ -345,7 +363,8 @@ namespace System.Linq.Parallel.Tests
         public static void LongCount_AggregateException(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             AssertThrows.Wrapped<DeliberateTestException>(
                 () => operation.Item(DefaultStart, DefaultSize, source.Item).LongCount()
             );
@@ -360,7 +379,8 @@ namespace System.Linq.Parallel.Tests
         public static void Max_AggregateException(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             AssertThrows.Wrapped<DeliberateTestException>(
                 () => operation.Item(DefaultStart, DefaultSize, source.Item).Max()
             );
@@ -372,7 +392,8 @@ namespace System.Linq.Parallel.Tests
         public static void Min_AggregateException(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             AssertThrows.Wrapped<DeliberateTestException>(
                 () => operation.Item(DefaultStart, DefaultSize, source.Item).Min()
             );
@@ -385,7 +406,8 @@ namespace System.Linq.Parallel.Tests
         public static void SequenceEqual_AggregateException(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             // Sequence equal double wraps queries that throw.
             ThrowsWrapped(
                 () =>
@@ -416,7 +438,8 @@ namespace System.Linq.Parallel.Tests
         public static void Single_AggregateException(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             AssertThrows.Wrapped<DeliberateTestException>(
                 () => operation.Item(DefaultStart, 2, source.Item).Single()
             );
@@ -431,7 +454,8 @@ namespace System.Linq.Parallel.Tests
         public static void SingleOrDefault_AggregateException(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             AssertThrows.Wrapped<DeliberateTestException>(
                 () => operation.Item(DefaultStart, 2, source.Item).SingleOrDefault()
             );
@@ -446,7 +470,8 @@ namespace System.Linq.Parallel.Tests
         public static void Sum_AggregateException(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             AssertThrows.Wrapped<DeliberateTestException>(
                 () => operation.Item(DefaultStart, DefaultSize, source.Item).Sum()
             );
@@ -459,7 +484,8 @@ namespace System.Linq.Parallel.Tests
         public static void ToArray_AggregateException(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             AssertThrows.Wrapped<DeliberateTestException>(
                 () => operation.Item(DefaultStart, DefaultSize, source.Item).ToArray()
             );
@@ -472,7 +498,8 @@ namespace System.Linq.Parallel.Tests
         public static void ToDictionary_AggregateException(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             AssertThrows.Wrapped<DeliberateTestException>(
                 () => operation.Item(DefaultStart, DefaultSize, source.Item).ToDictionary(x => x)
             );
@@ -490,7 +517,8 @@ namespace System.Linq.Parallel.Tests
         public static void ToList_AggregateException(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             AssertThrows.Wrapped<DeliberateTestException>(
                 () => operation.Item(DefaultStart, DefaultSize, source.Item).ToList()
             );
@@ -503,7 +531,8 @@ namespace System.Linq.Parallel.Tests
         public static void ToLookup_AggregateException(
             Labeled<Operation> source,
             Labeled<Operation> operation
-        ) {
+        )
+        {
             AssertThrows.Wrapped<DeliberateTestException>(
                 () => operation.Item(DefaultStart, DefaultSize, source.Item).ToLookup(x => x)
             );

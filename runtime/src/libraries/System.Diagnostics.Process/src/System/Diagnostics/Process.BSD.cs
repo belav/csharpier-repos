@@ -30,7 +30,8 @@ namespace System.Diagnostics
                         procs[i].ProcessName,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     list.Add(procs[i]);
                 }
                 else
@@ -91,7 +92,8 @@ namespace System.Diagnostics
             IntPtr? newMax,
             out IntPtr resultingMin,
             out IntPtr resultingMax
-        ) {
+        )
+        {
             // We can only do this for the current process on OS X
             if (_processId != Environment.ProcessId)
                 throw new PlatformNotSupportedException(

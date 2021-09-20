@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis
             VersionStamp version,
             string? filePath,
             Diagnostic? loadDiagnostic
-        ) {
+        )
+        {
             Text = text;
             Version = version;
             FilePath = filePath ?? string.Empty;
@@ -70,7 +71,8 @@ namespace Microsoft.CodeAnalysis
             VersionStamp version,
             string? filePath,
             Diagnostic? loadDiagnostic
-        ) {
+        )
+        {
             if (text == null)
             {
                 throw new ArgumentNullException(nameof(text));

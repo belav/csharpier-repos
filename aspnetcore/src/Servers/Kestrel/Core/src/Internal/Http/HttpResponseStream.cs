@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
         public HttpResponseStream(
             IHttpBodyControlFeature bodyControl,
             HttpResponsePipeWriter pipeWriter
-        ) {
+        )
+        {
             _bodyControl = bodyControl;
             _pipeWriter = pipeWriter;
         }
@@ -94,7 +95,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             int count,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             return TaskToApm.Begin(WriteAsync(buffer, offset, count), callback, state);
         }
 
@@ -108,7 +110,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _pipeWriter.WriteAsync(
                     new ReadOnlyMemory<byte>(buffer, offset, count),
                     cancellationToken
@@ -119,7 +122,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
         public override ValueTask WriteAsync(
             ReadOnlyMemory<byte> source,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return _pipeWriter.WriteAsync(source, cancellationToken).GetAsValueTask();
         }
     }

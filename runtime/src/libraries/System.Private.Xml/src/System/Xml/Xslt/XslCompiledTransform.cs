@@ -99,7 +99,8 @@ namespace System.Xml.Xsl
             XmlReader stylesheet,
             XsltSettings? settings,
             XmlResolver? stylesheetResolver
-        ) {
+        )
+        {
             Reset();
             LoadInternal(stylesheet, settings, stylesheetResolver);
         }
@@ -118,7 +119,8 @@ namespace System.Xml.Xsl
             IXPathNavigable stylesheet,
             XsltSettings? settings,
             XmlResolver? stylesheetResolver
-        ) {
+        )
+        {
             Reset();
             LoadInternal(stylesheet, settings, stylesheetResolver);
         }
@@ -137,7 +139,8 @@ namespace System.Xml.Xsl
             string stylesheetUri,
             XsltSettings? settings,
             XmlResolver? stylesheetResolver
-        ) {
+        )
+        {
             Reset();
             if (stylesheetUri == null)
             {
@@ -150,7 +153,8 @@ namespace System.Xml.Xsl
             object stylesheet,
             XsltSettings? settings,
             XmlResolver? stylesheetResolver
-        ) {
+        )
+        {
             if (stylesheet == null)
             {
                 throw new ArgumentNullException(nameof(stylesheet));
@@ -178,7 +182,8 @@ namespace System.Xml.Xsl
             object stylesheet,
             XsltSettings settings,
             XmlResolver? stylesheetResolver
-        ) {
+        )
+        {
             _compilerErrorColl = new Compiler(settings, _enableDebug, null).Compile(
                 stylesheet,
                 stylesheetResolver,
@@ -234,7 +239,8 @@ namespace System.Xml.Xsl
             if (
                 generatedCodeAttr != null
                 && generatedCodeAttr.Tool == typeof(XslCompiledTransform).FullName
-            ) {
+            )
+            {
                 if (s_version < Version.Parse(generatedCodeAttr.Version!))
                 {
                     throw new ArgumentException(
@@ -335,7 +341,8 @@ namespace System.Xml.Xsl
             IXPathNavigable input,
             XsltArgumentList? arguments,
             TextWriter results
-        ) {
+        )
+        {
             CheckArguments(input, results);
             using (XmlWriter writer = XmlWriter.Create(results, OutputSettings))
             {
@@ -465,7 +472,8 @@ namespace System.Xml.Xsl
             XsltArgumentList? arguments,
             XmlWriter results,
             XmlResolver? documentResolver
-        ) {
+        )
+        {
             CheckArguments(input, results);
             CheckCommand();
             _command.Execute((object)input, documentResolver, arguments, results);
@@ -478,7 +486,8 @@ namespace System.Xml.Xsl
             XsltArgumentList? arguments,
             XmlWriter results,
             XmlResolver? documentResolver
-        ) {
+        )
+        {
             CheckArguments(input, results);
             CheckCommand();
             _command.Execute(
@@ -540,7 +549,8 @@ namespace System.Xml.Xsl
             object stylesheet,
             XsltSettings settings,
             XmlResolver stylesheetResolver
-        ) {
+        )
+        {
             Reset();
             CompileXsltToQil(stylesheet, settings, stylesheetResolver);
             return _qil;
@@ -557,7 +567,8 @@ namespace System.Xml.Xsl
             XsltArgumentList? arguments,
             XmlWriter results,
             XmlResolver documentResolver
-        ) {
+        )
+        {
             _command!.Execute(inputUri, documentResolver, arguments, results);
         }
     }

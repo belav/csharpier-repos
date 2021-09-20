@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateEqualsAndGetHashCodeFromMembers
         protected override bool TryWrapWithUnchecked(
             ImmutableArray<SyntaxNode> statements,
             out ImmutableArray<SyntaxNode> wrappedStatements
-        ) {
+        )
+        {
             wrappedStatements = ImmutableArray.Create<SyntaxNode>(
                 SyntaxFactory.CheckedStatement(
                     SyntaxKind.UncheckedStatement,

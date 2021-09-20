@@ -9,7 +9,8 @@ namespace System.Buffers.Text
             ReadOnlySpan<byte> source,
             out sbyte value,
             out int bytesConsumed
-        ) {
+        )
+        {
             if (source.Length < 1)
                 goto FalseExit;
 
@@ -103,7 +104,8 @@ namespace System.Buffers.Text
             ReadOnlySpan<byte> source,
             out short value,
             out int bytesConsumed
-        ) {
+        )
+        {
             if (source.Length < 1)
                 goto FalseExit;
 
@@ -197,7 +199,8 @@ namespace System.Buffers.Text
             ReadOnlySpan<byte> source,
             out int value,
             out int bytesConsumed
-        ) {
+        )
+        {
             if (source.Length < 1)
                 goto FalseExit;
 
@@ -294,7 +297,8 @@ namespace System.Buffers.Text
             ReadOnlySpan<byte> source,
             out long value,
             out int bytesConsumed
-        ) {
+        )
+        {
             if (source.Length < 1)
                 goto FalseExit;
 

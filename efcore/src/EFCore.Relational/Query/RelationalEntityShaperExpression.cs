@@ -60,14 +60,16 @@ namespace Microsoft.EntityFrameworkCore.Query
         protected override LambdaExpression GenerateMaterializationCondition(
             IEntityType entityType,
             bool nullable
-        ) {
+        )
+        {
             Check.NotNull(entityType, nameof(EntityType));
 
             LambdaExpression baseCondition;
             if (
                 entityType.FindDiscriminatorProperty() == null
                 && entityType.GetDirectlyDerivedTypes().Any()
-            ) {
+            )
+            {
                 // TPT
                 var valueBufferParameter = Parameter(typeof(ValueBuffer));
                 var discriminatorValueVariable = Variable(typeof(string), "discriminator");
@@ -151,7 +153,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     if (
                         allNonPrincipalSharedNonPkProperties.Count != 0
                         && allNonPrincipalSharedNonPkProperties.All(p => p.IsNullable)
-                    ) {
+                    )
+                    {
                         var atLeastOneNonNullValueInNullablePropertyCondition =
                             allNonPrincipalSharedNonPkProperties.Select(
                                     p =>

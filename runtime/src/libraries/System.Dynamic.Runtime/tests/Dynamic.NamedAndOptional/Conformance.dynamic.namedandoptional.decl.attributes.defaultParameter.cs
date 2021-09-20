@@ -445,7 +445,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
         public int Foo(
             [Optional, DefaultParameterValue("foo")] dynamic i,
             [Optional, DefaultParameterValue("boo")] string str
-        ) {
+        )
+        {
             if (i == "foo" && str == "boo")
                 return 0;
             return 1;
@@ -483,7 +484,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
         public int Foo(
             [Optional, DefaultParameterValue(10)] dynamic i,
             [Optional, DefaultParameterValue("boo")] dynamic str
-        ) {
+        )
+        {
             if (i == null && str == null)
                 return 0;
             return 1;
@@ -521,7 +523,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
         public int Foo(
             [Optional, DefaultParameterValue("foo")] dynamic i,
             [Optional, DefaultParameterValue(null)] dynamic str
-        ) {
+        )
+        {
             if (i == 5 && str == null)
                 return 0;
             return 1;
@@ -559,7 +562,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
         public int Foo(
             [Optional, DefaultParameterValue("foo")] dynamic i,
             [Optional, DefaultParameterValue("boo")] string str
-        ) {
+        )
+        {
             if (i == 10 && str == "bar")
                 return 0;
             return 1;
@@ -597,7 +601,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
         public int Foo(
             [Optional, DefaultParameterValue("foo")] string i,
             [Optional, DefaultParameterValue("boo")] dynamic str
-        ) {
+        )
+        {
             if (i == "test" && str == typeof(int))
                 return 0;
             return 1;
@@ -634,7 +639,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
         public int Foo(
             [Optional, DefaultParameterValue("foo")] dynamic i,
             [Optional, DefaultParameterValue("boo")] dynamic str
-        ) {
+        )
+        {
             if (i == "test" && str == "bar")
                 return 0;
             return 1;
@@ -672,7 +678,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
         public int Foo(
             [Optional, DefaultParameterValue("foo")] string i,
             [Optional, DefaultParameterValue("boo")] string str
-        ) {
+        )
+        {
             if (i == "test" && str == "bar")
                 return 0;
             return 1;

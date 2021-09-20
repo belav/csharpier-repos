@@ -443,7 +443,8 @@ namespace System.Linq.Tests
         public void ParameterizedTests(
             IEnumerable<int> source,
             Func<int, IEnumerable<int>> selector
-        ) {
+        )
+        {
             var expected = source.Select(i => selector(i)).Aggregate((l, r) => l.Concat(r));
             var actual = source.SelectMany(selector);
 

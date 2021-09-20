@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         public static IList<bool> GetInsertionIndices(
             this TypeDeclarationSyntax destination,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var members = destination.Members;
 
             var indices = new List<bool>();
@@ -92,7 +93,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this TypeDeclarationSyntax typeNode,
             SemanticModel model,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(typeNode);
 
             var baseListTypes = SpecializedCollections.EmptyEnumerable<BaseTypeSyntax>();
@@ -108,7 +110,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                         if (
                             syntaxRef.GetSyntax(cancellationToken) is TypeDeclarationSyntax typeDecl
                             && typeDecl.BaseList != null
-                        ) {
+                        )
+                        {
                             baseListTypes = baseListTypes.Concat(typeDecl.BaseList.Types);
                         }
                     }
@@ -127,7 +130,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             SyntaxKind kind,
             bool prependNewLineIfMissing = false,
             bool appendNewLineIfMissing = false
-        ) {
+        )
+        {
             if (token.IsMissing || token.IsKind(SyntaxKind.None))
             {
                 var leadingTrivia = prependNewLineIfMissing
@@ -146,7 +150,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         private static BaseTypeDeclarationSyntax EnsureHasBraces(
             BaseTypeDeclarationSyntax typeDeclaration,
             bool hasMembers
-        ) {
+        )
+        {
             var openBrace = EnsureToken(typeDeclaration.OpenBraceToken, SyntaxKind.OpenBraceToken);
             var closeBrace = EnsureToken(
                 typeDeclaration.CloseBraceToken,
@@ -191,7 +196,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
         public static TypeDeclarationSyntax EnsureOpenAndCloseBraceTokens(
             this TypeDeclarationSyntax typeDeclaration
-        ) {
+        )
+        {
             return (TypeDeclarationSyntax)EnsureHasBraces(
                 typeDeclaration,
                 typeDeclaration.Members.Count > 0
@@ -200,7 +206,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
         public static EnumDeclarationSyntax EnsureOpenAndCloseBraceTokens(
             this EnumDeclarationSyntax typeDeclaration
-        ) {
+        )
+        {
             return (EnumDeclarationSyntax)EnsureHasBraces(
                 typeDeclaration,
                 typeDeclaration.Members.Count > 0

@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis
             GreenNode? node,
             int position,
             int index = 0
-        ) {
+        )
+        {
             Token = token;
             Node = node;
             Position = position;
@@ -406,7 +407,8 @@ namespace Microsoft.CodeAnalysis
         public SyntaxTriviaList ReplaceRange(
             SyntaxTrivia triviaInList,
             IEnumerable<SyntaxTrivia> newTrivia
-        ) {
+        )
+        {
             var index = this.IndexOf(triviaInList);
             if (index >= 0 && index < this.Count)
             {

@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public override bool AnalyzeBlock(
             BasicBlock basicBlock,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             SetCurrentAnalysisData(basicBlock, isReachable: true, cancellationToken);
             return true;
         }
@@ -42,7 +43,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             BasicBlock basicBlock,
             bool currentIsReachable,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Feasibility of control flow branches is analyzed by the core CustomDataFlowAnalysis
             // walker. If it identifies a branch as infeasible, it never invokes
             // this callback.
@@ -56,7 +58,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             BasicBlock basicBlock,
             bool currentIsReachable,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Feasibility of control flow branches is analyzed by the core CustomDataFlowAnalysis
             // walker. If it identifies a branch as infeasible, it never invokes
             // this callback.
@@ -71,7 +74,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             BasicBlock basicBlock,
             bool isReachable,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _visited[basicBlock.Ordinal] = isReachable;
         }
 

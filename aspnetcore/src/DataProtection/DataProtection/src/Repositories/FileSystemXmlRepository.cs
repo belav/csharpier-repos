@@ -85,7 +85,8 @@ namespace Microsoft.AspNetCore.DataProtection.Repositories
                     "*.xml",
                     SearchOption.TopDirectoryOnly
                 )
-            ) {
+            )
+            {
                 yield return ReadElementFromFile(fileSystemInfo.FullName);
             }
         }

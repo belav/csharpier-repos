@@ -51,7 +51,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             DiagnosticAnalyzer analyzer,
             Diagnostic diagnostic,
             ProjectId? projectId
-        ) {
+        )
+        {
             // check whether we are reporting project specific diagnostic or workspace wide diagnostic
             var project =
                 (projectId != null) ? Workspace.CurrentSolution.GetProject(projectId) : null;
@@ -76,7 +77,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             DiagnosticAnalyzer analyzer,
             DiagnosticData diagnosticData,
             Project? project
-        ) {
+        )
+        {
             var raiseDiagnosticsUpdated = true;
 
             var dxs = ImmutableInterlocked.AddOrUpdate(
@@ -101,7 +103,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             AnalyzerFileReference analyzerReference,
             string language,
             ProjectId projectId
-        ) {
+        )
+        {
             var analyzers = analyzerReference.GetAnalyzers(language);
             ClearAnalyzerDiagnostics(analyzers, projectId);
         }
@@ -109,7 +112,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public void ClearAnalyzerDiagnostics(
             ImmutableArray<DiagnosticAnalyzer> analyzers,
             ProjectId projectId
-        ) {
+        )
+        {
             foreach (var analyzer in analyzers)
             {
                 ClearAnalyzerDiagnostics(analyzer, projectId);
@@ -146,7 +150,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                         newDiags,
                         existing
                     )
-                ) {
+                )
+                {
                     var project = Workspace.CurrentSolution.GetProject(projectId);
                     RaiseDiagnosticsUpdated(MakeRemovedArgs(analyzer, project));
                 }
@@ -157,7 +162,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     analyzer,
                     out existing
                 )
-            ) {
+            )
+            {
                 var project = Workspace.CurrentSolution.GetProject(projectId);
                 RaiseDiagnosticsUpdated(MakeRemovedArgs(analyzer, project));
 
@@ -172,7 +178,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             DiagnosticAnalyzer analyzer,
             ImmutableHashSet<DiagnosticData> items,
             Project? project
-        ) {
+        )
+        {
             return DiagnosticsUpdatedArgs.DiagnosticsCreated(
                 CreateId(analyzer, project),
                 Workspace,
@@ -186,7 +193,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         private DiagnosticsUpdatedArgs MakeRemovedArgs(
             DiagnosticAnalyzer analyzer,
             Project? project
-        ) {
+        )
+        {
             return DiagnosticsUpdatedArgs.DiagnosticsRemoved(
                 CreateId(analyzer, project),
                 Workspace,
@@ -215,13 +223,15 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
             internal ImmutableHashSet<DiagnosticData> GetReportedDiagnostics(
                 DiagnosticAnalyzer analyzer
-            ) {
+            )
+            {
                 if (
                     !_abstractHostDiagnosticUpdateSource._analyzerHostDiagnosticsMap.TryGetValue(
                         analyzer,
                         out var diagnostics
                     )
-                ) {
+                )
+                {
                     diagnostics = ImmutableHashSet<DiagnosticData>.Empty;
                 }
 

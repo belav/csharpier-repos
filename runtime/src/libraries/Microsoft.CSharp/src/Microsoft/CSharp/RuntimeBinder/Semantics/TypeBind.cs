@@ -86,7 +86,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     (flags & CheckConstraintsFlags.Outer) != 0
                     || !ats.OuterType.ConstraintError.HasValue
                 )
-            ) {
+            )
+            {
                 if (!CheckConstraints(ats.OuterType, flags))
                 {
                     ats.ConstraintError = true;
@@ -105,7 +106,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         null,
                         flags & CheckConstraintsFlags.NoErrors
                     )
-                ) {
+                )
+                {
                     ats.ConstraintError = true;
                     return false;
                 }
@@ -164,7 +166,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             TypeArray typeArgsCls,
             TypeArray typeArgsMeth,
             CheckConstraintsFlags flags
-        ) {
+        )
+        {
             Debug.Assert(typeVars.Count == typeArgs.Count);
             Debug.Assert(typeVars.Count > 0);
             Debug.Assert(
@@ -194,7 +197,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             TypeArray typeArgsCls,
             TypeArray typeArgsMeth,
             CheckConstraintsFlags flags
-        ) {
+        )
+        {
             Debug.Assert(!(arg is PointerType));
             Debug.Assert(!arg.IsStaticClass);
 
@@ -284,7 +288,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                             if (
                                 typeBnd.IsPredefType(PredefinedType.PT_ENUM)
                                 || nubArg.UnderlyingType == typeBnd
-                            ) {
+                            )
+                            {
                                 // Nullable types don't satisfy bounds of EnumType, or the underlying type of the enum
                                 // even though the conversion from Nullable to these types is a boxing conversion
                                 // This is a rare case, because these bounds can never be directly stated ...

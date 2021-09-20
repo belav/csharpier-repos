@@ -408,7 +408,8 @@ namespace System.Xml.Tests
                     Path.Combine(TestData._Root, "EmployeesDefaultPrefix.xml"),
                     settings
                 )
-            ) {
+            )
+            {
                 while (reader.Read())
                     ;
             }
@@ -453,7 +454,8 @@ namespace System.Xml.Tests
                     Path.Combine(TestData._Root, "EmployeesDefaultPrefix.xml"),
                     settings
                 )
-            ) {
+            )
+            {
                 while (reader.Read())
                     ;
             }
@@ -466,13 +468,15 @@ namespace System.Xml.Tests
         {
             using (
                 XmlReader r = XmlReader.Create(Path.Combine(TestData._Root, @"bug264908_v1.xsd"))
-            ) {
+            )
+            {
                 XmlSchema s = XmlSchema.Read(r, null);
                 using (
                     XmlReader r2 = XmlReader.Create(
                         Path.Combine(TestData._Root, @"bug264908_v1a.xsd")
                     )
-                ) {
+                )
+                {
                     XmlSchema s2 = XmlSchema.Read(r2, null);
                     XmlSchemaSet set = new XmlSchemaSet();
 

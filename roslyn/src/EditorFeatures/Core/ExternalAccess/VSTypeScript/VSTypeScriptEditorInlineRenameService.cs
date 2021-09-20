@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public VSTypeScriptEditorInlineRenameService(
             Lazy<IVSTypeScriptEditorInlineRenameService> service
-        ) {
+        )
+        {
             Contract.ThrowIfNull(service);
             _service = service;
         }
@@ -34,7 +35,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
             Document document,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var info = await _service.Value.GetRenameInfoAsync(
                     document,
                     position,

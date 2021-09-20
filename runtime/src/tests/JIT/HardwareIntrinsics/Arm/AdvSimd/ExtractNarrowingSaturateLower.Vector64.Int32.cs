@@ -129,7 +129,8 @@ namespace JIT.HardwareIntrinsics.Arm
                     (alignment != 16 && alignment != 8)
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -188,7 +189,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario(
                 SimpleUnaryOpTest__ExtractNarrowingSaturateLower_Vector64_Int32 testClass
-            ) {
+            )
+            {
                 var result = AdvSimd.ExtractNarrowingSaturateLower(_fld1);
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
@@ -197,7 +199,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario_Load(
                 SimpleUnaryOpTest__ExtractNarrowingSaturateLower_Vector64_Int32 testClass
-            ) {
+            )
+            {
                 fixed (Vector128<Int64>* pFld1 = &_fld1)
                 {
                     var result = AdvSimd.ExtractNarrowingSaturateLower(
@@ -486,7 +489,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Vector128<Int64> op1,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Int64[] inArray1 = new Int64[Op1ElementCount];
             Int32[] outArray = new Int32[RetElementCount];
 
@@ -523,7 +527,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Int64[] firstOp,
             Int32[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             for (var i = 0; i < RetElementCount; i++)

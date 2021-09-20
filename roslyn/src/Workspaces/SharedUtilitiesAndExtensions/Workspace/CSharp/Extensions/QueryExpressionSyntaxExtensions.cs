@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         public static QueryExpressionSyntax WithAllClauses(
             this QueryExpressionSyntax query,
             IList<SyntaxNode> allClauses
-        ) {
+        )
+        {
             var fromClause = (FromClauseSyntax)allClauses.First();
             return query.WithFromClause(fromClause)
                 .WithBody(query.Body.WithAllClauses(allClauses.Skip(1)));
@@ -39,7 +40,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         public static QueryBodySyntax WithAllClauses(
             this QueryBodySyntax body,
             IEnumerable<SyntaxNode> allClauses
-        ) {
+        )
+        {
             var clauses = SyntaxFactory.List(
                 allClauses.Take(allClauses.Count() - 1).Cast<QueryClauseSyntax>()
             );

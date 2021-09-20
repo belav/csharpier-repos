@@ -142,7 +142,8 @@ namespace JIT.HardwareIntrinsics.X86
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfinArray2
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -221,7 +222,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             public void RunStructFldScenario(
                 SimpleBinaryOpTest__CompareLessThanOrEqualSingle testClass
-            ) {
+            )
+            {
                 var result = Avx.CompareLessThanOrEqual(_fld1, _fld2);
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
@@ -230,7 +232,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             public void RunStructFldScenario_Load(
                 SimpleBinaryOpTest__CompareLessThanOrEqualSingle testClass
-            ) {
+            )
+            {
                 fixed (Vector256<Single>* pFld1 = &_fld1)fixed (Vector256<Single>* pFld2 = &_fld2)
                 {
                     var result = Avx.CompareLessThanOrEqual(
@@ -447,7 +450,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             fixed (Vector256<Single>* pClsVar1 = &_clsVar1)fixed (
                 Vector256<Single>* pClsVar2 = &_clsVar2
-            ) {
+            )
+            {
                 var result = Avx.CompareLessThanOrEqual(
                     Avx.LoadVector256((Single*)(pClsVar1)),
                     Avx.LoadVector256((Single*)(pClsVar2))
@@ -513,7 +517,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             fixed (Vector256<Single>* pFld1 = &test._fld1)fixed (
                 Vector256<Single>* pFld2 = &test._fld2
-            ) {
+            )
+            {
                 var result = Avx.CompareLessThanOrEqual(
                     Avx.LoadVector256((Single*)(pFld1)),
                     Avx.LoadVector256((Single*)(pFld2))
@@ -617,7 +622,8 @@ namespace JIT.HardwareIntrinsics.X86
             Vector256<Single> op2,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Single[] inArray1 = new Single[Op1ElementCount];
             Single[] inArray2 = new Single[Op2ElementCount];
             Single[] outArray = new Single[RetElementCount];
@@ -638,7 +644,8 @@ namespace JIT.HardwareIntrinsics.X86
             void* op2,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Single[] inArray1 = new Single[Op1ElementCount];
             Single[] inArray2 = new Single[Op2ElementCount];
             Single[] outArray = new Single[RetElementCount];
@@ -667,7 +674,8 @@ namespace JIT.HardwareIntrinsics.X86
             Single[] right,
             Single[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (BitConverter.SingleToInt32Bits(result[0]) != ((left[0] <= right[0]) ? -1 : 0))
@@ -681,7 +689,8 @@ namespace JIT.HardwareIntrinsics.X86
                     if (
                         BitConverter.SingleToInt32Bits(result[i])
                         != ((left[i] <= right[i]) ? -1 : 0)
-                    ) {
+                    )
+                    {
                         succeeded = false;
                         break;
                     }

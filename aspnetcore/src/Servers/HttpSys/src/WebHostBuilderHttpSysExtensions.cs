@@ -66,7 +66,8 @@ namespace Microsoft.AspNetCore.Hosting
         public static IWebHostBuilder UseHttpSys(
             this IWebHostBuilder hostBuilder,
             Action<HttpSysOptions> options
-        ) {
+        )
+        {
             return hostBuilder.UseHttpSys()
                 .ConfigureServices(
                     services =>

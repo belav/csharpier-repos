@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.Utilities
             Document document,
             SyntaxNode typeDeclaration,
             ISyntaxFacts syntaxFacts
-        ) {
+        )
+        {
             var name = syntaxFacts.GetDisplayName(typeDeclaration, DisplayNameOptions.None);
             return name != null && TypeNameMatchesDocumentName(document, name);
         }

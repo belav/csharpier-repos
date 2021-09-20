@@ -73,7 +73,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PullMemberUp.Ma
         private void Destination_SelectedItemChanged(
             object sender,
             RoutedPropertyChangedEventArgs<object> e
-        ) {
+        )
+        {
             if (DestinationTreeView.SelectedItem is BaseTypeTreeNodeViewModel memberGraphNode)
             {
                 ViewModel.SelectedDestination = memberGraphNode;

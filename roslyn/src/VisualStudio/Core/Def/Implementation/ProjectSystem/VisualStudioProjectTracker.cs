@@ -34,7 +34,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             Workspace workspace,
             VisualStudioProjectFactory projectFactory,
             IThreadingContext threadingContext
-        ) {
+        )
+        {
             _workspace = workspace;
             _projectFactory = projectFactory;
             ThreadingContext = threadingContext;
@@ -139,7 +140,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     null,
                     null,
                     null
-                ) {
+                )
+            {
                 _id = project.Id;
             }
 

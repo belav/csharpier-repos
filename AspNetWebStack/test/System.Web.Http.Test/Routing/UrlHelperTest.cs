@@ -58,7 +58,8 @@ namespace System.Web.Http.Routing
             string controller,
             int? id,
             string expectedUrl
-        ) {
+        )
+        {
             var url = GetUrlHelperForApi();
             object routeValues = GetRouteValuesAsObject(controller, id);
 
@@ -73,7 +74,8 @@ namespace System.Web.Http.Routing
             string controller,
             int? id,
             string expectedUrl
-        ) {
+        )
+        {
             var url = GetUrlHelperForApi();
             Dictionary<string, object> routeValues = GetRouteValuesAsDictionary(controller, id);
 
@@ -116,7 +118,8 @@ namespace System.Web.Http.Routing
             int? id,
             string expectedUrl,
             string requestUrl
-        ) {
+        )
+        {
             var urlHelper = GetUrlHelperForApi();
             urlHelper.Request.RequestUri = new Uri(requestUrl);
             Dictionary<string, object> routeValues = GetRouteValuesAsDictionary(controller, id);
@@ -139,7 +142,8 @@ namespace System.Web.Http.Routing
             int? id,
             string expectedUrl,
             string requestUrl
-        ) {
+        )
+        {
             var urlHelper = GetUrlHelperForApi();
             urlHelper.Request.Method = HttpMethod.Get;
             urlHelper.Request.RequestUri = new Uri(requestUrl);
@@ -279,7 +283,8 @@ namespace System.Web.Http.Routing
         private static Dictionary<string, object> GetRouteValuesAsDictionary(
             string controller,
             int? id
-        ) {
+        )
+        {
             Dictionary<string, object> routeValues = new Dictionary<string, object>();
             if (controller == null)
             {

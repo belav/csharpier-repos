@@ -113,7 +113,8 @@ namespace Microsoft.CodeAnalysis.AddImport
             string packageSource = null,
             string packageName = null,
             string packageVersionOpt = null
-        ) {
+        )
+        {
             Kind = kind;
             TextChanges = textChanges;
             Title = title;

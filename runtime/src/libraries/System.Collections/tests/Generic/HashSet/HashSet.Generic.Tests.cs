@@ -87,7 +87,8 @@ namespace System.Collections.Tests
             int enumerableLength,
             int numberOfMatchingElements,
             int numberOfDuplicateElements
-        ) {
+        )
+        {
             _ = setLength;
             _ = numberOfMatchingElements;
             IEnumerable<T> enumerable = CreateEnumerable(
@@ -144,7 +145,8 @@ namespace System.Collections.Tests
             int enumerableLength,
             int numberOfMatchingElements,
             int numberOfDuplicateElements
-        ) {
+        )
+        {
             _ = setLength;
             _ = numberOfMatchingElements;
             _ = numberOfDuplicateElements;
@@ -306,7 +308,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void HashSet_Generic_CopyTo_NegativeCount_ThrowsArgumentOutOfRangeException(
             int count
-        ) {
+        )
+        {
             HashSet<T> set = (HashSet<T>)GenericISetFactory(count);
             T[] arr = new T[count];
             Assert.Throws<ArgumentOutOfRangeException>(() => set.CopyTo(arr, 0, -1));
@@ -480,7 +483,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void HashSet_Generic_Constructor_int_IEqualityComparer_AddUpToAndBeyondCapacity(
             int capacity
-        ) {
+        )
+        {
             IEqualityComparer<T> comparer = GetIEqualityComparer();
             HashSet<T> set = new HashSet<T>(capacity, comparer);
 
@@ -567,7 +571,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void EnsureCapacity_Generic_RequestingLargerCapacity_DoesNotInvalidateEnumeration(
             int setLength
-        ) {
+        )
+        {
             HashSet<T> set = (HashSet<T>)(GenericISetFactory(setLength));
             var capacity = set.EnsureCapacity(0);
             IEnumerator valuesEnum = set.GetEnumerator();
@@ -606,7 +611,8 @@ namespace System.Collections.Tests
         [InlineData(4)]
         public void EnsureCapacity_Generic_HashsetNotInitialized_RequestedNonZero_CapacityIsSetToAtLeastTheRequested(
             int requestedCapacity
-        ) {
+        )
+        {
             var set = new HashSet<T>();
             Assert.InRange(set.EnsureCapacity(requestedCapacity), requestedCapacity, int.MaxValue);
         }
@@ -616,7 +622,8 @@ namespace System.Collections.Tests
         [InlineData(7)]
         public void EnsureCapacity_Generic_RequestedCapacitySmallerThanCurrent_CapacityUnchanged(
             int currentCapacity
-        ) {
+        )
+        {
             HashSet<T> set;
 
             // assert capacity remains the same when ensuring a capacity smaller or equal than existing
@@ -667,7 +674,8 @@ namespace System.Collections.Tests
         [InlineData(8)]
         public void EnsureCapacity_Generic_HashsetNotEmpty_RequestedSmallerThanCount_ReturnsAtLeastSizeOfCount(
             int setLength
-        ) {
+        )
+        {
             HashSet<T> set = (HashSet<T>)GenericISetFactory(setLength);
             Assert.InRange(set.EnsureCapacity(setLength - 1), setLength, int.MaxValue);
         }
@@ -773,7 +781,8 @@ namespace System.Collections.Tests
             static void TestComparerSerialization<TCompared>(
                 IEqualityComparer<TCompared> equalityComparer,
                 string internalTypeName = null
-            ) {
+            )
+            {
                 var bf = new BinaryFormatter();
                 var s = new MemoryStream();
 

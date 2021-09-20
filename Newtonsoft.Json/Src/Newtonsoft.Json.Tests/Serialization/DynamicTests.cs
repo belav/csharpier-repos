@@ -409,7 +409,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             if (
                 targetType == typeof(IDictionary<string, object>)
                 || targetType == typeof(IDictionary)
-            ) {
+            )
+            {
                 result = new Dictionary<string, object>(_members);
                 return true;
             }

@@ -21,7 +21,8 @@ namespace ApiExplorerWebSite
             if (
                 action.Attributes.OfType<ReloadAttribute>().Any()
                 && ChangeToken.TokenSource.IsCancellationRequested
-            ) {
+            )
+            {
                 action.ActionName = "NewIndex";
                 action.Selectors.Clear();
                 action.Selectors.Add(

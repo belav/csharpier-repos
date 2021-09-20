@@ -78,7 +78,8 @@ namespace System.Web.Mvc.Test
         [InlineData(true)]
         public void OnAuthorizationRedirectsIfPermanentConstructorParameterIsAndRequestIsNotSecureAndMethodIsGet(
             bool permanent
-        ) {
+        )
+        {
             // Arrange
             Mock<AuthorizationContext> mockAuthContext = new Mock<AuthorizationContext>();
             mockAuthContext.Setup(c => c.HttpContext.Request.HttpMethod).Returns("get");

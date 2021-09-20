@@ -47,14 +47,16 @@ namespace System.ServiceModel.Syndication
         protected virtual System.ServiceModel.Syndication.SyndicationItem ReadItem(
             System.Xml.XmlReader reader,
             System.ServiceModel.Syndication.SyndicationFeed feed
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual System.Collections.Generic.IEnumerable<System.ServiceModel.Syndication.SyndicationItem> ReadItems(
             System.Xml.XmlReader reader,
             System.ServiceModel.Syndication.SyndicationFeed feed,
             out bool areAllItemsRead
-        ) {
+        )
+        {
             throw null;
         }
         System.Xml.Schema.XmlSchema System.Xml.Serialization.IXmlSerializable.GetSchema()
@@ -267,19 +269,22 @@ namespace System.ServiceModel.Syndication
         }
         public static System.ServiceModel.Syndication.InlineCategoriesDocument Create(
             System.Collections.ObjectModel.Collection<System.ServiceModel.Syndication.SyndicationCategory> categories
-        ) {
+        )
+        {
             throw null;
         }
         public static System.ServiceModel.Syndication.InlineCategoriesDocument Create(
             System.Collections.ObjectModel.Collection<System.ServiceModel.Syndication.SyndicationCategory> categories,
             bool isFixed,
             string scheme
-        ) {
+        )
+        {
             throw null;
         }
         public static System.ServiceModel.Syndication.ReferencedCategoriesDocument Create(
             System.Uri linkToCategoriesDocument
-        ) {
+        )
+        {
             throw null;
         }
         public System.ServiceModel.Syndication.CategoriesDocumentFormatter GetFormatter()
@@ -288,7 +293,8 @@ namespace System.ServiceModel.Syndication
         }
         public static System.ServiceModel.Syndication.CategoriesDocument Load(
             System.Xml.XmlReader reader
-        ) {
+        )
+        {
             throw null;
         }
         public void Save(System.Xml.XmlWriter writer) { }
@@ -297,7 +303,8 @@ namespace System.ServiceModel.Syndication
             string ns,
             string value,
             string version
-        ) {
+        )
+        {
             throw null;
         }
         protected internal virtual bool TryParseElement(System.Xml.XmlReader reader, string version)
@@ -449,7 +456,8 @@ namespace System.ServiceModel.Syndication
             string ns,
             string value,
             string version
-        ) {
+        )
+        {
             throw null;
         }
         protected internal virtual bool TryParseElement(System.Xml.XmlReader reader, string version)
@@ -512,14 +520,16 @@ namespace System.ServiceModel.Syndication
         protected virtual System.ServiceModel.Syndication.SyndicationItem ReadItem(
             System.Xml.XmlReader reader,
             System.ServiceModel.Syndication.SyndicationFeed feed
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual System.Collections.Generic.IEnumerable<System.ServiceModel.Syndication.SyndicationItem> ReadItems(
             System.Xml.XmlReader reader,
             System.ServiceModel.Syndication.SyndicationFeed feed,
             out bool areAllItemsRead
-        ) {
+        )
+        {
             throw null;
         }
         protected internal override void SetFeed(
@@ -663,7 +673,8 @@ namespace System.ServiceModel.Syndication
         }
         public static System.ServiceModel.Syndication.ServiceDocument Load(
             System.Xml.XmlReader reader
-        ) {
+        )
+        {
             throw null;
         }
         public static TServiceDocument Load<TServiceDocument>(System.Xml.XmlReader reader)
@@ -677,7 +688,8 @@ namespace System.ServiceModel.Syndication
             string ns,
             string value,
             string version
-        ) {
+        )
+        {
             throw null;
         }
         protected internal virtual bool TryParseElement(System.Xml.XmlReader reader, string version)
@@ -708,12 +720,14 @@ namespace System.ServiceModel.Syndication
         public abstract bool CanRead(System.Xml.XmlReader reader);
         protected static System.ServiceModel.Syndication.SyndicationCategory CreateCategory(
             System.ServiceModel.Syndication.InlineCategoriesDocument inlineCategories
-        ) {
+        )
+        {
             throw null;
         }
         protected static System.ServiceModel.Syndication.ResourceCollectionInfo CreateCollection(
             System.ServiceModel.Syndication.Workspace workspace
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual System.ServiceModel.Syndication.ServiceDocument CreateDocumentInstance()
@@ -722,17 +736,20 @@ namespace System.ServiceModel.Syndication
         }
         protected static System.ServiceModel.Syndication.InlineCategoriesDocument CreateInlineCategories(
             System.ServiceModel.Syndication.ResourceCollectionInfo collection
-        ) {
+        )
+        {
             throw null;
         }
         protected static System.ServiceModel.Syndication.ReferencedCategoriesDocument CreateReferencedCategories(
             System.ServiceModel.Syndication.ResourceCollectionInfo collection
-        ) {
+        )
+        {
             throw null;
         }
         protected static System.ServiceModel.Syndication.Workspace CreateWorkspace(
             System.ServiceModel.Syndication.ServiceDocument document
-        ) {
+        )
+        {
             throw null;
         }
         protected static void LoadElementExtensions(
@@ -765,7 +782,8 @@ namespace System.ServiceModel.Syndication
             string value,
             System.ServiceModel.Syndication.CategoriesDocument categories,
             string version
-        ) {
+        )
+        {
             throw null;
         }
         protected static bool TryParseAttribute(
@@ -774,7 +792,8 @@ namespace System.ServiceModel.Syndication
             string value,
             System.ServiceModel.Syndication.ResourceCollectionInfo collection,
             string version
-        ) {
+        )
+        {
             throw null;
         }
         protected static bool TryParseAttribute(
@@ -783,7 +802,8 @@ namespace System.ServiceModel.Syndication
             string value,
             System.ServiceModel.Syndication.ServiceDocument document,
             string version
-        ) {
+        )
+        {
             throw null;
         }
         protected static bool TryParseAttribute(
@@ -792,35 +812,40 @@ namespace System.ServiceModel.Syndication
             string value,
             System.ServiceModel.Syndication.Workspace workspace,
             string version
-        ) {
+        )
+        {
             throw null;
         }
         protected static bool TryParseElement(
             System.Xml.XmlReader reader,
             System.ServiceModel.Syndication.CategoriesDocument categories,
             string version
-        ) {
+        )
+        {
             throw null;
         }
         protected static bool TryParseElement(
             System.Xml.XmlReader reader,
             System.ServiceModel.Syndication.ResourceCollectionInfo collection,
             string version
-        ) {
+        )
+        {
             throw null;
         }
         protected static bool TryParseElement(
             System.Xml.XmlReader reader,
             System.ServiceModel.Syndication.ServiceDocument document,
             string version
-        ) {
+        )
+        {
             throw null;
         }
         protected static bool TryParseElement(
             System.Xml.XmlReader reader,
             System.ServiceModel.Syndication.Workspace workspace,
             string version
-        ) {
+        )
+        {
             throw null;
         }
         protected static void WriteAttributeExtensions(
@@ -907,7 +932,8 @@ namespace System.ServiceModel.Syndication
             string ns,
             string value,
             string version
-        ) {
+        )
+        {
             throw null;
         }
         protected internal virtual bool TryParseElement(System.Xml.XmlReader reader, string version)
@@ -938,45 +964,53 @@ namespace System.ServiceModel.Syndication
         public abstract System.ServiceModel.Syndication.SyndicationContent Clone();
         public static System.ServiceModel.Syndication.TextSyndicationContent CreateHtmlContent(
             string content
-        ) {
+        )
+        {
             throw null;
         }
         public static System.ServiceModel.Syndication.TextSyndicationContent CreatePlaintextContent(
             string content
-        ) {
+        )
+        {
             throw null;
         }
         public static System.ServiceModel.Syndication.UrlSyndicationContent CreateUrlContent(
             System.Uri url,
             string mediaType
-        ) {
+        )
+        {
             throw null;
         }
         public static System.ServiceModel.Syndication.TextSyndicationContent CreateXhtmlContent(
             string content
-        ) {
+        )
+        {
             throw null;
         }
         public static System.ServiceModel.Syndication.XmlSyndicationContent CreateXmlContent(
             object dataContractObject
-        ) {
+        )
+        {
             throw null;
         }
         public static System.ServiceModel.Syndication.XmlSyndicationContent CreateXmlContent(
             object dataContractObject,
             System.Runtime.Serialization.XmlObjectSerializer dataContractSerializer
-        ) {
+        )
+        {
             throw null;
         }
         public static System.ServiceModel.Syndication.XmlSyndicationContent CreateXmlContent(
             object xmlSerializerObject,
             System.Xml.Serialization.XmlSerializer serializer
-        ) {
+        )
+        {
             throw null;
         }
         public static System.ServiceModel.Syndication.XmlSyndicationContent CreateXmlContent(
             System.Xml.XmlReader xmlReader
-        ) {
+        )
+        {
             throw null;
         }
         protected abstract void WriteContentsTo(System.Xml.XmlWriter writer);
@@ -1023,7 +1057,8 @@ namespace System.ServiceModel.Syndication
         }
         public TExtension GetObject<TExtension>(
             System.Runtime.Serialization.XmlObjectSerializer serializer
-        ) {
+        )
+        {
             throw null;
         }
         public TExtension GetObject<TExtension>(System.Xml.Serialization.XmlSerializer serializer)
@@ -1069,21 +1104,24 @@ namespace System.ServiceModel.Syndication
         public System.Collections.ObjectModel.Collection<TExtension> ReadElementExtensions<TExtension>(
             string extensionName,
             string extensionNamespace
-        ) {
+        )
+        {
             throw null;
         }
         public System.Collections.ObjectModel.Collection<TExtension> ReadElementExtensions<TExtension>(
             string extensionName,
             string extensionNamespace,
             System.Runtime.Serialization.XmlObjectSerializer serializer
-        ) {
+        )
+        {
             throw null;
         }
         public System.Collections.ObjectModel.Collection<TExtension> ReadElementExtensions<TExtension>(
             string extensionName,
             string extensionNamespace,
             System.Xml.Serialization.XmlSerializer serializer
-        ) {
+        )
+        {
             throw null;
         }
         protected override void RemoveItem(int index) { }
@@ -1231,12 +1269,14 @@ namespace System.ServiceModel.Syndication
         }
         public System.ServiceModel.Syndication.Rss20FeedFormatter GetRss20Formatter(
             bool serializeExtensionsAsAtom
-        ) {
+        )
+        {
             throw null;
         }
         public static System.ServiceModel.Syndication.SyndicationFeed Load(
             System.Xml.XmlReader reader
-        ) {
+        )
+        {
             throw null;
         }
         public static TSyndicationFeed Load<TSyndicationFeed>(System.Xml.XmlReader reader)
@@ -1251,7 +1291,8 @@ namespace System.ServiceModel.Syndication
             string ns,
             string value,
             string version
-        ) {
+        )
+        {
             throw null;
         }
         protected internal virtual bool TryParseElement(System.Xml.XmlReader reader, string version)
@@ -1282,38 +1323,45 @@ namespace System.ServiceModel.Syndication
         public abstract bool CanRead(System.Xml.XmlReader reader);
         protected internal static System.ServiceModel.Syndication.SyndicationCategory CreateCategory(
             System.ServiceModel.Syndication.SyndicationFeed feed
-        ) {
+        )
+        {
             throw null;
         }
         protected internal static System.ServiceModel.Syndication.SyndicationCategory CreateCategory(
             System.ServiceModel.Syndication.SyndicationItem item
-        ) {
+        )
+        {
             throw null;
         }
         protected abstract System.ServiceModel.Syndication.SyndicationFeed CreateFeedInstance();
         protected internal static System.ServiceModel.Syndication.SyndicationItem CreateItem(
             System.ServiceModel.Syndication.SyndicationFeed feed
-        ) {
+        )
+        {
             throw null;
         }
         protected internal static System.ServiceModel.Syndication.SyndicationLink CreateLink(
             System.ServiceModel.Syndication.SyndicationFeed feed
-        ) {
+        )
+        {
             throw null;
         }
         protected internal static System.ServiceModel.Syndication.SyndicationLink CreateLink(
             System.ServiceModel.Syndication.SyndicationItem item
-        ) {
+        )
+        {
             throw null;
         }
         protected internal static System.ServiceModel.Syndication.SyndicationPerson CreatePerson(
             System.ServiceModel.Syndication.SyndicationFeed feed
-        ) {
+        )
+        {
             throw null;
         }
         protected internal static System.ServiceModel.Syndication.SyndicationPerson CreatePerson(
             System.ServiceModel.Syndication.SyndicationItem item
-        ) {
+        )
+        {
             throw null;
         }
         protected internal static void LoadElementExtensions(
@@ -1355,7 +1403,8 @@ namespace System.ServiceModel.Syndication
             string value,
             System.ServiceModel.Syndication.SyndicationCategory category,
             string version
-        ) {
+        )
+        {
             throw null;
         }
         protected internal static bool TryParseAttribute(
@@ -1364,7 +1413,8 @@ namespace System.ServiceModel.Syndication
             string value,
             System.ServiceModel.Syndication.SyndicationFeed feed,
             string version
-        ) {
+        )
+        {
             throw null;
         }
         protected internal static bool TryParseAttribute(
@@ -1373,7 +1423,8 @@ namespace System.ServiceModel.Syndication
             string value,
             System.ServiceModel.Syndication.SyndicationItem item,
             string version
-        ) {
+        )
+        {
             throw null;
         }
         protected internal static bool TryParseAttribute(
@@ -1382,7 +1433,8 @@ namespace System.ServiceModel.Syndication
             string value,
             System.ServiceModel.Syndication.SyndicationLink link,
             string version
-        ) {
+        )
+        {
             throw null;
         }
         protected internal static bool TryParseAttribute(
@@ -1391,7 +1443,8 @@ namespace System.ServiceModel.Syndication
             string value,
             System.ServiceModel.Syndication.SyndicationPerson person,
             string version
-        ) {
+        )
+        {
             throw null;
         }
         protected internal static bool TryParseContent(
@@ -1400,42 +1453,48 @@ namespace System.ServiceModel.Syndication
             string contentType,
             string version,
             out System.ServiceModel.Syndication.SyndicationContent content
-        ) {
+        )
+        {
             throw null;
         }
         protected internal static bool TryParseElement(
             System.Xml.XmlReader reader,
             System.ServiceModel.Syndication.SyndicationCategory category,
             string version
-        ) {
+        )
+        {
             throw null;
         }
         protected internal static bool TryParseElement(
             System.Xml.XmlReader reader,
             System.ServiceModel.Syndication.SyndicationFeed feed,
             string version
-        ) {
+        )
+        {
             throw null;
         }
         protected internal static bool TryParseElement(
             System.Xml.XmlReader reader,
             System.ServiceModel.Syndication.SyndicationItem item,
             string version
-        ) {
+        )
+        {
             throw null;
         }
         protected internal static bool TryParseElement(
             System.Xml.XmlReader reader,
             System.ServiceModel.Syndication.SyndicationLink link,
             string version
-        ) {
+        )
+        {
             throw null;
         }
         protected internal static bool TryParseElement(
             System.Xml.XmlReader reader,
             System.ServiceModel.Syndication.SyndicationPerson person,
             string version
-        ) {
+        )
+        {
             throw null;
         }
         protected internal static void WriteAttributeExtensions(
@@ -1608,12 +1667,14 @@ namespace System.ServiceModel.Syndication
         }
         public System.ServiceModel.Syndication.Rss20ItemFormatter GetRss20Formatter(
             bool serializeExtensionsAsAtom
-        ) {
+        )
+        {
             throw null;
         }
         public static System.ServiceModel.Syndication.SyndicationItem Load(
             System.Xml.XmlReader reader
-        ) {
+        )
+        {
             throw null;
         }
         public static TSyndicationItem Load<TSyndicationItem>(System.Xml.XmlReader reader)
@@ -1628,7 +1689,8 @@ namespace System.ServiceModel.Syndication
             string ns,
             string value,
             string version
-        ) {
+        )
+        {
             throw null;
         }
         protected internal virtual bool TryParseContent(
@@ -1636,7 +1698,8 @@ namespace System.ServiceModel.Syndication
             string contentType,
             string version,
             out System.ServiceModel.Syndication.SyndicationContent content
-        ) {
+        )
+        {
             throw null;
         }
         protected internal virtual bool TryParseElement(System.Xml.XmlReader reader, string version)
@@ -1667,18 +1730,21 @@ namespace System.ServiceModel.Syndication
         public abstract bool CanRead(System.Xml.XmlReader reader);
         protected static System.ServiceModel.Syndication.SyndicationCategory CreateCategory(
             System.ServiceModel.Syndication.SyndicationItem item
-        ) {
+        )
+        {
             throw null;
         }
         protected abstract System.ServiceModel.Syndication.SyndicationItem CreateItemInstance();
         protected static System.ServiceModel.Syndication.SyndicationLink CreateLink(
             System.ServiceModel.Syndication.SyndicationItem item
-        ) {
+        )
+        {
             throw null;
         }
         protected static System.ServiceModel.Syndication.SyndicationPerson CreatePerson(
             System.ServiceModel.Syndication.SyndicationItem item
-        ) {
+        )
+        {
             throw null;
         }
         protected static void LoadElementExtensions(
@@ -1715,7 +1781,8 @@ namespace System.ServiceModel.Syndication
             string value,
             System.ServiceModel.Syndication.SyndicationCategory category,
             string version
-        ) {
+        )
+        {
             throw null;
         }
         protected static bool TryParseAttribute(
@@ -1724,7 +1791,8 @@ namespace System.ServiceModel.Syndication
             string value,
             System.ServiceModel.Syndication.SyndicationItem item,
             string version
-        ) {
+        )
+        {
             throw null;
         }
         protected static bool TryParseAttribute(
@@ -1733,7 +1801,8 @@ namespace System.ServiceModel.Syndication
             string value,
             System.ServiceModel.Syndication.SyndicationLink link,
             string version
-        ) {
+        )
+        {
             throw null;
         }
         protected static bool TryParseAttribute(
@@ -1742,7 +1811,8 @@ namespace System.ServiceModel.Syndication
             string value,
             System.ServiceModel.Syndication.SyndicationPerson person,
             string version
-        ) {
+        )
+        {
             throw null;
         }
         protected static bool TryParseContent(
@@ -1751,35 +1821,40 @@ namespace System.ServiceModel.Syndication
             string contentType,
             string version,
             out System.ServiceModel.Syndication.SyndicationContent content
-        ) {
+        )
+        {
             throw null;
         }
         protected static bool TryParseElement(
             System.Xml.XmlReader reader,
             System.ServiceModel.Syndication.SyndicationCategory category,
             string version
-        ) {
+        )
+        {
             throw null;
         }
         protected static bool TryParseElement(
             System.Xml.XmlReader reader,
             System.ServiceModel.Syndication.SyndicationItem item,
             string version
-        ) {
+        )
+        {
             throw null;
         }
         protected static bool TryParseElement(
             System.Xml.XmlReader reader,
             System.ServiceModel.Syndication.SyndicationLink link,
             string version
-        ) {
+        )
+        {
             throw null;
         }
         protected static bool TryParseElement(
             System.Xml.XmlReader reader,
             System.ServiceModel.Syndication.SyndicationPerson person,
             string version
-        ) {
+        )
+        {
             throw null;
         }
         protected static void WriteAttributeExtensions(
@@ -1883,20 +1958,23 @@ namespace System.ServiceModel.Syndication
         }
         public static System.ServiceModel.Syndication.SyndicationLink CreateAlternateLink(
             System.Uri uri
-        ) {
+        )
+        {
             throw null;
         }
         public static System.ServiceModel.Syndication.SyndicationLink CreateAlternateLink(
             System.Uri uri,
             string mediaType
-        ) {
+        )
+        {
             throw null;
         }
         public static System.ServiceModel.Syndication.SyndicationLink CreateMediaEnclosureLink(
             System.Uri uri,
             string mediaType,
             long length
-        ) {
+        )
+        {
             throw null;
         }
         public static System.ServiceModel.Syndication.SyndicationLink CreateSelfLink(System.Uri uri)
@@ -1906,7 +1984,8 @@ namespace System.ServiceModel.Syndication
         public static System.ServiceModel.Syndication.SyndicationLink CreateSelfLink(
             System.Uri uri,
             string mediaType
-        ) {
+        )
+        {
             throw null;
         }
         public System.Uri GetAbsoluteUri()
@@ -1918,7 +1997,8 @@ namespace System.ServiceModel.Syndication
             string ns,
             string value,
             string version
-        ) {
+        )
+        {
             throw null;
         }
         protected internal virtual bool TryParseElement(System.Xml.XmlReader reader, string version)
@@ -1975,7 +2055,8 @@ namespace System.ServiceModel.Syndication
             string ns,
             string value,
             string version
-        ) {
+        )
+        {
             throw null;
         }
         protected internal virtual bool TryParseElement(System.Xml.XmlReader reader, string version)
@@ -2091,7 +2172,8 @@ namespace System.ServiceModel.Syndication
             string ns,
             string value,
             string version
-        ) {
+        )
+        {
             throw null;
         }
         protected internal virtual bool TryParseElement(System.Xml.XmlReader reader, string version)
@@ -2149,7 +2231,8 @@ namespace System.ServiceModel.Syndication
         }
         public TContent ReadContent<TContent>(
             System.Runtime.Serialization.XmlObjectSerializer dataContractSerializer
-        ) {
+        )
+        {
             throw null;
         }
         public TContent ReadContent<TContent>(System.Xml.Serialization.XmlSerializer serializer)

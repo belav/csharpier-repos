@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Conversion targetConversion,
             TypeSymbol fromType,
             TypeSymbol toType
-        ) {
+        )
+        {
             return new UserDefinedConversionAnalysis(
                 UserDefinedConversionAnalysisKind.ApplicableInNormalForm,
                 op,
@@ -49,7 +50,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Conversion targetConversion,
             TypeSymbol fromType,
             TypeSymbol toType
-        ) {
+        )
+        {
             return new UserDefinedConversionAnalysis(
                 UserDefinedConversionAnalysisKind.ApplicableInLiftedForm,
                 op,
@@ -67,7 +69,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Conversion targetConversion,
             TypeSymbol fromType,
             TypeSymbol toType
-        ) {
+        )
+        {
             this.Kind = kind;
             this.Operator = op;
             this.SourceConversion = sourceConversion;

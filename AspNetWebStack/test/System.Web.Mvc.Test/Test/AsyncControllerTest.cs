@@ -321,7 +321,8 @@ namespace System.Web.Mvc.Test
                 public void SaveTempData(
                     ControllerContext controllerContext,
                     IDictionary<string, object> values
-                ) {
+                )
+                {
                     ((EmptyController)controllerContext.Controller).TempDataSaved = true;
                 }
             }

@@ -52,7 +52,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeStructFieldsWritable
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             foreach (var diagnostic in diagnostics)
             {
                 var diagnosticNode = diagnostic.Location.FindNode(cancellationToken);
@@ -86,10 +87,11 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeStructFieldsWritable
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(CSharpAnalyzersResources.Make_readonly_fields_writable, createChangedDocument)
-            { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    CSharpAnalyzersResources.Make_readonly_fields_writable,
+                    createChangedDocument
+                ) { }
         }
     }
 }

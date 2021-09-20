@@ -45,7 +45,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         protected override List<Endpoint> CreateEndpoints(
             IReadOnlyList<ActionDescriptor> actions,
             IReadOnlyList<Action<EndpointBuilder>> conventions
-        ) {
+        )
+        {
             var endpoints = new List<Endpoint>();
             var routeNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
             for (var i = 0; i < actions.Count; i++)
@@ -72,7 +73,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             Type transformerType,
             object state,
             int? order = null
-        ) {
+        )
+        {
             CreateInertEndpoints = true;
             lock (Lock)
             {

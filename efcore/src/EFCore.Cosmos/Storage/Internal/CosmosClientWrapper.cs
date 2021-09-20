@@ -83,7 +83,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
             IDbContextOptions dbContextOptions,
             IExecutionStrategyFactory executionStrategyFactory,
             IDiagnosticsLogger<DbLoggerCategory.Database.Command> commandLogger
-        ) {
+        )
+        {
             var options = dbContextOptions.FindExtension<CosmosOptionsExtension>();
 
             _singletonWrapper = singletonWrapper;
@@ -141,7 +142,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
             DbContext? _,
             object? __,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var response = await Client.CreateDatabaseIfNotExistsAsync(
                     _databaseId,
                     cancellationToken: cancellationToken
@@ -191,7 +193,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
             DbContext? _,
             object? __,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             using var response = await Client.GetDatabase(_databaseId)
                 .DeleteStreamAsync(cancellationToken: cancellationToken)
                 .ConfigureAwait(false);
@@ -242,7 +245,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
             DbContext _,
             (string ContainerId, string PartitionKey) parameters,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             using var response = await Client.GetDatabase(_databaseId)
                 .CreateContainerStreamAsync(
                     new ContainerProperties(parameters.ContainerId, "/" + parameters.PartitionKey)
@@ -300,7 +304,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
             DbContext _,
             (string ContainerId, JToken Document, IUpdateEntry Entry) parameters,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             await using var stream = new MemoryStream();
             await using var writer = new StreamWriter(
                 stream,
@@ -374,7 +379,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
             DbContext _,
             (string ContainerId, string ItemId, JObject Document, IUpdateEntry Entry) parameters,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             using var stream = new MemoryStream();
             using var writer = new StreamWriter(
                 stream,
@@ -455,7 +461,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
             DbContext? _,
             (string ContainerId, string DocumentId, IUpdateEntry Entry) parameters,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var entry = parameters.Entry;
             var items = Client.GetDatabase(_databaseId).GetContainer(parameters.ContainerId);
 
@@ -539,7 +546,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
                 jObjectProperty != null
                 && jObjectProperty.ValueGenerated == ValueGenerated.OnAddOrUpdate
                 && response.Content != null
-            ) {
+            )
+            {
                 using var responseStream = response.Content;
                 using var reader = new StreamReader(responseStream);
                 using var jsonReader = new JsonTextReader(reader);
@@ -560,7 +568,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
             string containerId,
             string? partitionKey,
             CosmosSqlQuery query
-        ) {
+        )
+        {
             _commandLogger.ExecutingSqlQuery(containerId, partitionKey, query);
 
             return new DocumentEnumerable(this, containerId, partitionKey, query);
@@ -576,7 +585,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
             string containerId,
             string? partitionKey,
             CosmosSqlQuery query
-        ) {
+        )
+        {
             _commandLogger.ExecutingSqlQuery(containerId, partitionKey, query);
 
             return new DocumentAsyncEnumerable(this, containerId, partitionKey, query);
@@ -592,7 +602,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
             string containerId,
             string? partitionKey,
             string resourceId
-        ) {
+        )
+        {
             _commandLogger.ExecutingReadItem(containerId, partitionKey, resourceId);
 
             var responseMessage = CreateSingleItemQuery(containerId, partitionKey, resourceId)
@@ -613,7 +624,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
             string? partitionKey,
             string resourceId,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             _commandLogger.ExecutingReadItem(containerId, partitionKey, resourceId);
 
             var responseMessage = await CreateSingleItemQuery(
@@ -650,7 +662,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
             string containerId,
             string? partitionKey,
             CosmosSqlQuery query
-        ) {
+        )
+        {
             var container = Client.GetDatabase(_databaseId).GetContainer(containerId);
             var queryDefinition = new QueryDefinition(query.Query);
 
@@ -680,7 +693,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
             string? partitionKey,
             string resourceId,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var container = Client.GetDatabase(_databaseId).GetContainer(containerId);
 
             return await container.ReadItemStreamAsync(
@@ -719,7 +733,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
         private static bool TryReadJObject(
             JsonTextReader jsonReader,
             [NotNullWhen(true)] out JObject? jObject
-        ) {
+        )
+        {
             jObject = null;
 
             while (jsonReader.Read())
@@ -745,7 +760,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
                 string containerId,
                 string? partitionKey,
                 CosmosSqlQuery cosmosSqlQuery
-            ) {
+            )
+            {
                 _cosmosClient = cosmosClient;
                 _containerId = containerId;
                 _partitionKey = partitionKey;
@@ -854,7 +870,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
                 string containerId,
                 string? partitionKey,
                 CosmosSqlQuery cosmosSqlQuery
-            ) {
+            )
+            {
                 _cosmosClient = cosmosClient;
                 _containerId = containerId;
                 _partitionKey = partitionKey;
@@ -886,7 +903,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
                 public AsyncEnumerator(
                     DocumentAsyncEnumerable documentEnumerable,
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     _cosmosClientWrapper = documentEnumerable._cosmosClient;
                     _containerId = documentEnumerable._containerId;
                     _partitionKey = documentEnumerable._partitionKey;

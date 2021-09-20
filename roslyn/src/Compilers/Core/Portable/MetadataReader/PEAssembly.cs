@@ -152,7 +152,8 @@ namespace Microsoft.CodeAnalysis
 
         internal IEnumerable<ImmutableArray<byte>> GetInternalsVisibleToPublicKeys(
             string simpleName
-        ) {
+        )
+        {
             if (_lazyInternalsVisibleToMap == null)
                 Interlocked.CompareExchange(
                     ref _lazyInternalsVisibleToMap,

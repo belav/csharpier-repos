@@ -84,7 +84,8 @@ namespace System.ComponentModel.DataAnnotations
             object instance,
             IServiceProvider? serviceProvider,
             IDictionary<object, object?>? items
-        ) {
+        )
+        {
             if (instance == null)
             {
                 throw new ArgumentNullException(nameof(instance));

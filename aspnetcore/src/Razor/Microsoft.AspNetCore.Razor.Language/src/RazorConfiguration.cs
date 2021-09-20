@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             string configurationName,
             IEnumerable<RazorExtension> extensions,
             bool useConsolidatedMvcViews = false
-        ) {
+        )
+        {
             if (languageVersion == null)
             {
                 throw new ArgumentNullException(nameof(languageVersion));
@@ -118,7 +119,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 string configurationName,
                 RazorExtension[] extensions,
                 bool useConsolidatedMvcViews = false
-            ) {
+            )
+            {
                 LanguageVersion = languageVersion;
                 ConfigurationName = configurationName;
                 Extensions = extensions;

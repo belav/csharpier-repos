@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static IRazorEngineBuilder AddDirective(
             this IRazorEngineBuilder builder,
             DirectiveDescriptor directive
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -53,7 +54,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static IRazorEngineBuilder AddTargetExtension(
             this IRazorEngineBuilder builder,
             ICodeTargetExtension extension
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -79,7 +81,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static IRazorEngineBuilder SetBaseType(
             this IRazorEngineBuilder builder,
             string baseType
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -102,7 +105,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static IRazorEngineBuilder ConfigureClass(
             this IRazorEngineBuilder builder,
             Action<RazorCodeDocument, ClassDeclarationIntermediateNode> configureClass
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -127,7 +131,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static IRazorEngineBuilder SetNamespace(
             this IRazorEngineBuilder builder,
             string namespaceName
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -155,7 +160,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         private static IRazorTargetExtensionFeature GetTargetExtensionFeature(
             IRazorEngineBuilder builder
-        ) {
+        )
+        {
             var targetExtensionFeature = builder.Features.OfType<IRazorTargetExtensionFeature>()
                 .FirstOrDefault();
             if (targetExtensionFeature == null)
@@ -169,7 +175,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         private static DefaultDocumentClassifierPassFeature GetDefaultDocumentClassifierPassFeature(
             IRazorEngineBuilder builder
-        ) {
+        )
+        {
             var configurationFeature =
                 builder.Features.OfType<DefaultDocumentClassifierPassFeature>().FirstOrDefault();
             if (configurationFeature == null)

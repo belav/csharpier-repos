@@ -33,7 +33,8 @@ namespace System.Linq.Parallel
             IEnumerable<T> source,
             int partitionCount,
             bool useStriping
-        ) {
+        )
+        {
             // The partitioned stream to return.
             PartitionedStream<T, int> returnValue;
 
@@ -106,7 +107,8 @@ namespace System.Linq.Parallel
             IEqualityComparer<THashKey>? keyComparer,
             IEqualityComparer<TElement>? elementComparer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             TraceHelpers.TraceInfo(
                 "PartitionStream<..>.HashRepartitionStream(..):: creating **RE**partitioned stream for nested operator"
             );
@@ -128,7 +130,8 @@ namespace System.Linq.Parallel
             IEqualityComparer<THashKey>? keyComparer,
             IEqualityComparer<TElement>? elementComparer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             TraceHelpers.TraceInfo(
                 "PartitionStream<..>.HashRepartitionStream(..):: creating **RE**partitioned stream for nested operator"
             );
@@ -150,7 +153,8 @@ namespace System.Linq.Parallel
         internal static OrdinalIndexState Worse(
             this OrdinalIndexState state1,
             OrdinalIndexState state2
-        ) {
+        )
+        {
             return state1 > state2 ? state1 : state2;
         }
 

@@ -127,7 +127,8 @@ namespace System.Reflection.Tests
 
             foreach (
                 MethodBase constructor in TypeExtensions.GetConstructors(typeof(GenericClass<>))
-            ) {
+            )
+            {
                 // ContainsGenericParameters should behave same for both methods and constructors.
                 // If method/ctor or the declaring type contains uninstantiated open generic parameter,
                 // ContainsGenericParameters should return true. (Which also means we can't invoke that type)
@@ -136,7 +137,8 @@ namespace System.Reflection.Tests
 
             foreach (
                 MethodBase constructor in TypeExtensions.GetConstructors(typeof(GenericClass<int>))
-            ) {
+            )
+            {
                 yield return new object[] { constructor, false };
             }
         }

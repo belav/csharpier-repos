@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         protected override void ExecuteCore(
             RazorCodeDocument codeDocument,
             DocumentIntermediateNode documentNode
-        ) {
+        )
+        {
             if (!IsComponentDocument(documentNode))
             {
                 return;
@@ -53,7 +54,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
 
             public override void VisitComponentChildContent(
                 ComponentChildContentIntermediateNode node
-            ) {
+            )
+            {
                 // Check that each child content has a unique parameter name within its scope. This is important
                 // because the parameter name can be implicit, and it doesn't work well when nested.
                 if (node.IsParameterized)
@@ -69,7 +71,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                                 ancestor.ParameterName,
                                 StringComparison.Ordinal
                             )
-                        ) {
+                        )
+                        {
                             // Duplicate name. We report an error because this will almost certainly also lead to an error
                             // from the C# compiler that's way less clear.
                             node.Diagnostics.Add(

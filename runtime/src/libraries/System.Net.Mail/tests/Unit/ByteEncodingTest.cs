@@ -36,7 +36,8 @@ namespace System.Net.Mime.Tests
         public void EncoderAndDecoder_ShouldEncodeAndDecode(
             string testHeader,
             int expectedFoldedCount
-        ) {
+        )
+        {
             string result = MimeBasePart.EncodeHeaderValue(testHeader, Encoding.UTF8, true);
             Assert.StartsWith("=?utf-8?B?", result, StringComparison.Ordinal);
             Assert.EndsWith("?=", result, StringComparison.Ordinal);
@@ -60,7 +61,8 @@ namespace System.Net.Mime.Tests
         public void EncoderAndDecoder_WithQEncodedString_AndNoUnicode_AndShortHeader_ShouldEncodeAndDecode(
             string testHeader,
             int expectedFoldedCount
-        ) {
+        )
+        {
             string result = MimeBasePart.EncodeHeaderValue(testHeader, Encoding.UTF8, false);
 
             string[] foldedHeaders = result.Split(
@@ -150,7 +152,8 @@ namespace System.Net.Mime.Tests
         public void EncodeString_IsSameAsEncodeBytes_IfOneByteCodepointOnLineWrap(
             bool useBase64Encoding,
             string value
-        ) {
+        )
+        {
             var factory = new EncodedStreamFactory();
             IEncodableStream streamForEncodeString = factory.GetEncoderForHeader(
                 Encoding.UTF8,

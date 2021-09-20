@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression left,
             BoundExpression right,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             TupleBinaryOperatorInfo.Multiple operators = BindTupleBinaryOperatorNestedInfo(
                 node,
                 kind,
@@ -67,7 +68,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TupleBinaryOperatorInfo @operator,
             bool isRight,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             TypeSymbol convertedType = isRight
                 ? @operator.RightConvertedTypeOpt
                 : @operator.LeftConvertedTypeOpt;
@@ -78,7 +80,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     @operator.InfoKind == TupleBinaryOperatorInfoKind.Multiple
                     && expr is BoundTupleLiteral tuple
-                ) {
+                )
+                {
                     // Although the tuple will remain typeless, we'll give elements converted types as possible
                     var multiple = (TupleBinaryOperatorInfo.Multiple)@operator;
                     if (multiple.Operators.Length == 0)
@@ -135,14 +138,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression left,
             BoundExpression right,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             TypeSymbol leftType = left.Type;
             TypeSymbol rightType = right.Type;
 
             if (
                 (object)leftType != null && leftType.IsDynamic()
                 || (object)rightType != null && rightType.IsDynamic()
-            ) {
+            )
+            {
                 return BindTupleDynamicBinaryOperatorSingleInfo(
                     node,
                     kind,
@@ -200,7 +205,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics,
             out Conversion conversionForBool,
             out UnaryOperatorSignature boolOperator
-        ) {
+        )
+        {
             // Is the operand implicitly convertible to bool?
 
             CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
@@ -275,7 +281,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression left,
             BoundExpression right,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             // This method binds binary == and != operators where one or both of the operands are dynamic.
             Debug.Assert(
                 (object)left.Type != null && left.Type.IsDynamic()
@@ -320,14 +327,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression left,
             BoundExpression right,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             left = GiveTupleTypeToDefaultLiteralIfNeeded(left, right.Type);
             right = GiveTupleTypeToDefaultLiteralIfNeeded(right, left.Type);
 
             if (
                 left.IsLiteralDefaultOrImplicitObjectCreation()
                 || right.IsLiteralDefaultOrImplicitObjectCreation()
-            ) {
+            )
+            {
                 ReportBinaryOperatorError(
                     node,
                     diagnostics,
@@ -427,7 +436,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<string> leftNames,
             ImmutableArray<string> rightNames,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             bool leftIsTupleLiteral = left is BoundTupleExpression;
             bool rightIsTupleLiteral = right is BoundTupleExpression;
 
@@ -500,7 +510,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal static BoundExpression GiveTupleTypeToDefaultLiteralIfNeeded(
             BoundExpression expr,
             TypeSymbol targetType
-        ) {
+        )
+        {
             if (!expr.IsLiteralDefault() || targetType is null)
             {
                 return expr;
@@ -551,7 +562,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         private static (ImmutableArray<BoundExpression> Elements, ImmutableArray<string> Names) GetTupleArgumentsOrPlaceholders(
             BoundExpression expr
-        ) {
+        )
+        {
             if (expr is BoundTupleExpression tuple)
             {
                 return (tuple.Arguments, tuple.ArgumentNamesOpt);
@@ -581,7 +593,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool isNullable,
             CSharpCompilation compilation,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             foreach (var convertedType in convertedTypes)
             {
                 if (convertedType is null)

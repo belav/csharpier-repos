@@ -172,7 +172,8 @@ namespace System.Drawing.Imaging
             ColorMatrix newColorMatrix,
             ColorMatrixFlag mode,
             ColorAdjustType type
-        ) {
+        )
+        {
             int status = Gdip.GdipSetImageAttributesColorMatrix(
                 new HandleRef(this, nativeImageAttributes),
                 type,
@@ -229,7 +230,8 @@ namespace System.Drawing.Imaging
             ColorMatrix newColorMatrix,
             ColorMatrix? grayMatrix,
             ColorMatrixFlag flags
-        ) {
+        )
+        {
             SetColorMatrices(newColorMatrix, grayMatrix, flags, ColorAdjustType.Default);
         }
 
@@ -238,7 +240,8 @@ namespace System.Drawing.Imaging
             ColorMatrix? grayMatrix,
             ColorMatrixFlag mode,
             ColorAdjustType type
-        ) {
+        )
+        {
             int status = Gdip.GdipSetImageAttributesColorMatrix(
                 new HandleRef(this, nativeImageAttributes),
                 type,

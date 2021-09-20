@@ -14,7 +14,8 @@ namespace System.Buffers.Text
             Span<byte> destination,
             bool insertNegationSign,
             out int bytesWritten
-        ) {
+        )
+        {
             // Calculate the actual digit count and the number of padding zeroes requested.
             // From all of this we can get the required buffer length.
 

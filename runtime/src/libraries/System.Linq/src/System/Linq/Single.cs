@@ -21,7 +21,8 @@ namespace System.Linq
         public static TSource Single<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, bool> predicate
-        ) {
+        )
+        {
             TSource? single = source.TryGetSingle(predicate, out bool found);
             if (!found)
             {
@@ -37,7 +38,8 @@ namespace System.Linq
         public static TSource SingleOrDefault<TSource>(
             this IEnumerable<TSource> source,
             TSource defaultValue
-        ) {
+        )
+        {
             var single = source.TryGetSingle(out bool found);
             return found ? single! : defaultValue;
         }
@@ -51,7 +53,8 @@ namespace System.Linq
             this IEnumerable<TSource> source,
             Func<TSource, bool> predicate,
             TSource defaultValue
-        ) {
+        )
+        {
             var single = source.TryGetSingle(predicate, out bool found);
             return found ? single! : defaultValue;
         }
@@ -59,7 +62,8 @@ namespace System.Linq
         private static TSource? TryGetSingle<TSource>(
             this IEnumerable<TSource> source,
             out bool found
-        ) {
+        )
+        {
             if (source is null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -105,7 +109,8 @@ namespace System.Linq
             this IEnumerable<TSource> source,
             Func<TSource, bool> predicate,
             out bool found
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);

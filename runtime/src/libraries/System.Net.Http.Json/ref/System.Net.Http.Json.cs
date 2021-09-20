@@ -15,7 +15,8 @@ namespace System.Net.Http.Json
             System.Text.Json.JsonSerializerOptions? options,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task<object?> GetFromJsonAsync(
@@ -24,7 +25,8 @@ namespace System.Net.Http.Json
             System.Type type,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task<object?> GetFromJsonAsync(
@@ -34,7 +36,8 @@ namespace System.Net.Http.Json
             System.Text.Json.JsonSerializerOptions? options,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task<object?> GetFromJsonAsync(
@@ -43,7 +46,8 @@ namespace System.Net.Http.Json
             System.Type type,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task<TValue?> GetFromJsonAsync<TValue>(
@@ -52,7 +56,8 @@ namespace System.Net.Http.Json
             System.Text.Json.JsonSerializerOptions? options,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task<TValue?> GetFromJsonAsync<TValue>(
@@ -60,7 +65,8 @@ namespace System.Net.Http.Json
             string? requestUri,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task<TValue?> GetFromJsonAsync<TValue>(
@@ -69,7 +75,8 @@ namespace System.Net.Http.Json
             System.Text.Json.JsonSerializerOptions? options,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task<TValue?> GetFromJsonAsync<TValue>(
@@ -77,7 +84,8 @@ namespace System.Net.Http.Json
             System.Uri? requestUri,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> PostAsJsonAsync<TValue>(
@@ -87,7 +95,8 @@ namespace System.Net.Http.Json
             System.Text.Json.JsonSerializerOptions? options = null,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> PostAsJsonAsync<TValue>(
@@ -95,7 +104,8 @@ namespace System.Net.Http.Json
             string? requestUri,
             TValue value,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> PostAsJsonAsync<TValue>(
@@ -105,7 +115,8 @@ namespace System.Net.Http.Json
             System.Text.Json.JsonSerializerOptions? options = null,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> PostAsJsonAsync<TValue>(
@@ -113,7 +124,8 @@ namespace System.Net.Http.Json
             System.Uri? requestUri,
             TValue value,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> PutAsJsonAsync<TValue>(
@@ -123,7 +135,8 @@ namespace System.Net.Http.Json
             System.Text.Json.JsonSerializerOptions? options = null,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> PutAsJsonAsync<TValue>(
@@ -131,7 +144,8 @@ namespace System.Net.Http.Json
             string? requestUri,
             TValue value,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> PutAsJsonAsync<TValue>(
@@ -141,7 +155,8 @@ namespace System.Net.Http.Json
             System.Text.Json.JsonSerializerOptions? options = null,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> PutAsJsonAsync<TValue>(
@@ -149,7 +164,8 @@ namespace System.Net.Http.Json
             System.Uri? requestUri,
             TValue value,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -161,7 +177,8 @@ namespace System.Net.Http.Json
             System.Text.Json.JsonSerializerOptions? options = null,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task<T?> ReadFromJsonAsync<T>(
@@ -169,7 +186,8 @@ namespace System.Net.Http.Json
             System.Text.Json.JsonSerializerOptions? options = null,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -189,20 +207,23 @@ namespace System.Net.Http.Json
             System.Type inputType,
             System.Net.Http.Headers.MediaTypeHeaderValue? mediaType = null,
             System.Text.Json.JsonSerializerOptions? options = null
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Net.Http.Json.JsonContent Create<T>(
             T inputValue,
             System.Net.Http.Headers.MediaTypeHeaderValue? mediaType = null,
             System.Text.Json.JsonSerializerOptions? options = null
-        ) {
+        )
+        {
             throw null;
         }
         protected override System.Threading.Tasks.Task SerializeToStreamAsync(
             System.IO.Stream stream,
             System.Net.TransportContext? context
-        ) {
+        )
+        {
             throw null;
         }
         protected override bool TryComputeLength(out long length)

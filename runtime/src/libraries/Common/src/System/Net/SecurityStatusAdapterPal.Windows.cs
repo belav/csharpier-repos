@@ -114,7 +114,8 @@ namespace System.Net
         internal static SecurityStatusPal GetSecurityStatusPalFromInterop(
             Interop.SECURITY_STATUS win32SecurityStatus,
             bool attachException = false
-        ) {
+        )
+        {
             SecurityStatusPalErrorCode statusCode;
 
             if (!s_statusDictionary.TryGetForward(win32SecurityStatus, out statusCode))
@@ -138,7 +139,8 @@ namespace System.Net
 
         internal static Interop.SECURITY_STATUS GetInteropFromSecurityStatusPal(
             SecurityStatusPal status
-        ) {
+        )
+        {
             Interop.SECURITY_STATUS interopStatus;
             if (!s_statusDictionary.TryGetBackward(status.ErrorCode, out interopStatus))
             {

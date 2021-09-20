@@ -66,7 +66,8 @@ namespace Microsoft.CodeAnalysis.AddAnonymousTypeMemberName
             Document document,
             Diagnostic diagnostic,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var span = diagnostic.Location.SourceSpan;
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             var node = root.FindNode(span, getInnermostNodeForTie: true) as TExpressionSyntax;
@@ -99,7 +100,8 @@ namespace Microsoft.CodeAnalysis.AddAnonymousTypeMemberName
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // If we're only introducing one name, then add the rename annotation to
             // it so the user can pick a better name if they want.
             var annotation = diagnostics.Length == 1 ? RenameAnnotation.Create() : null;
@@ -127,7 +129,8 @@ namespace Microsoft.CodeAnalysis.AddAnonymousTypeMemberName
             SyntaxEditor editor,
             SyntaxAnnotation annotation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var declarator = await GetMemberDeclaratorAsync(document, diagnostic, cancellationToken)
                 .ConfigureAwait(false);
             if (declarator == null)
@@ -175,9 +178,8 @@ namespace Microsoft.CodeAnalysis.AddAnonymousTypeMemberName
 
         private class MyCodeAction : CodeAction.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(FeaturesResources.Add_member_name, createChangedDocument) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(FeaturesResources.Add_member_name, createChangedDocument) { }
         }
     }
 }

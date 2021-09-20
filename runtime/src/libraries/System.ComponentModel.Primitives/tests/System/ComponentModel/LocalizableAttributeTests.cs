@@ -39,7 +39,8 @@ namespace System.ComponentModel.Tests
             LocalizableAttribute attribute,
             object other,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, attribute.Equals(other));
             if (other is LocalizableAttribute)
             {
@@ -59,7 +60,8 @@ namespace System.ComponentModel.Tests
         public void DefaultProperties_GetLocalizable_ReturnsExpected(
             LocalizableAttribute attribute,
             bool expectedLocalizable
-        ) {
+        )
+        {
             Assert.Equal(expectedLocalizable, attribute.IsLocalizable);
             Assert.Equal(!expectedLocalizable, attribute.IsDefaultAttribute());
         }

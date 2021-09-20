@@ -260,7 +260,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             object value,
             string position,
             IList expected
-        ) {
+        )
+        {
             // Arrange
             var resolver = new DefaultContractResolver();
             var listAdapter = new ListAdapter();
@@ -325,7 +326,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             object value,
             string position,
             IList expected
-        ) {
+        )
+        {
             // Arrange
             var resolver = new DefaultContractResolver();
             var listAdapter = new ListAdapter();

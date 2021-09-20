@@ -296,7 +296,8 @@ namespace System.ComponentModel.Composition.Hosting
             PartManager partManager,
             ComposablePart part,
             AtomicComposition? atomicComposition
-        ) {
+        )
+        {
             var result = CompositionResult.SucceededResult;
 
             if (partManager.State == ImportState.ImportsPreviewing)
@@ -337,7 +338,8 @@ namespace System.ComponentModel.Composition.Hosting
         private CompositionResult TrySatisfyImportsStateMachine(
             PartManager partManager,
             ComposablePart part
-        ) {
+        )
+        {
             var result = CompositionResult.SucceededResult;
 
             while (partManager.State < ImportState.Composed)
@@ -429,7 +431,8 @@ namespace System.ComponentModel.Composition.Hosting
             PartManager partManager,
             ComposablePart part,
             bool shouldTrackImports
-        ) {
+        )
+        {
             if (part == null)
             {
                 throw new ArgumentNullException(nameof(part));
@@ -475,7 +478,8 @@ namespace System.ComponentModel.Composition.Hosting
             PartManager partManager,
             IEnumerable<ImportDefinition> imports,
             AtomicComposition? atomicComposition
-        ) {
+        )
+        {
             CompositionResult result = CompositionResult.SucceededResult;
 
             var part = partManager.Part;
@@ -553,7 +557,8 @@ namespace System.ComponentModel.Composition.Hosting
             PartManager partManager,
             IEnumerable<ExportDefinition> changedExports,
             AtomicComposition? atomicComposition
-        ) {
+        )
+        {
             var result = CompositionResult.SucceededResult;
 
             switch (partManager.State)
@@ -613,7 +618,8 @@ namespace System.ComponentModel.Composition.Hosting
             bool partComposed,
             ImportDefinition import,
             AtomicComposition? atomicComposition
-        ) {
+        )
+        {
             if (partComposed && !import.IsRecomposable)
             {
                 return new CompositionResult(
@@ -662,7 +668,8 @@ namespace System.ComponentModel.Composition.Hosting
         private void StartSatisfyingImports(
             PartManager partManager,
             AtomicComposition? atomicComposition
-        ) {
+        )
+        {
             // When not running in a atomicCompositional state, schedule reindexing after ensuring
             // that this isn't a redundant addition
             if (atomicComposition == null)
@@ -684,7 +691,8 @@ namespace System.ComponentModel.Composition.Hosting
         private void StopSatisfyingImports(
             PartManager partManager,
             AtomicComposition? atomicComposition
-        ) {
+        )
+        {
             // When not running in a atomicCompositional state, schedule reindexing after ensuring
             // that this isn't a redundant removal
             if (atomicComposition == null)
@@ -802,7 +810,8 @@ namespace System.ComponentModel.Composition.Hosting
             ComposablePart part,
             ImportDefinition definition,
             AtomicComposition? atomicComposition
-        ) {
+        )
+        {
             try
             {
                 IEnumerable<Export>? exports = null;

@@ -54,7 +54,8 @@ namespace System.Text.Unicode
             out int bytesWritten,
             bool replaceInvalidSequences = true,
             bool isFinalBlock = true
-        ) {
+        )
+        {
             // Throwaway span accesses - workaround for https://github.com/dotnet/runtime/issues/12332
 
             _ = source.Length;
@@ -62,7 +63,8 @@ namespace System.Text.Unicode
 
             fixed (char* pOriginalSource = &MemoryMarshal.GetReference(source))fixed (
                 byte* pOriginalDestination = &MemoryMarshal.GetReference(destination)
-            ) {
+            )
+            {
                 // We're going to bulk transcode as much as we can in a loop, iterating
                 // every time we see bad data that requires replacement.
 
@@ -95,7 +97,8 @@ namespace System.Text.Unicode
                     if (
                         operationStatus <= OperationStatus.DestinationTooSmall
                         || (operationStatus == OperationStatus.NeedMoreData && !isFinalBlock)
-                    ) {
+                    )
+                    {
                         break;
                     }
 
@@ -171,7 +174,8 @@ namespace System.Text.Unicode
             out int charsWritten,
             bool replaceInvalidSequences = true,
             bool isFinalBlock = true
-        ) {
+        )
+        {
             // Throwaway span accesses - workaround for https://github.com/dotnet/runtime/issues/12332
 
             _ = source.Length;
@@ -181,7 +185,8 @@ namespace System.Text.Unicode
 
             fixed (byte* pOriginalSource = &MemoryMarshal.GetReference(source))fixed (
                 char* pOriginalDestination = &MemoryMarshal.GetReference(destination)
-            ) {
+            )
+            {
                 // We're going to bulk transcode as much as we can in a loop, iterating
                 // every time we see bad data that requires replacement.
 
@@ -214,7 +219,8 @@ namespace System.Text.Unicode
                     if (
                         operationStatus <= OperationStatus.DestinationTooSmall
                         || (operationStatus == OperationStatus.NeedMoreData && !isFinalBlock)
-                    ) {
+                    )
+                    {
                         break;
                     }
 

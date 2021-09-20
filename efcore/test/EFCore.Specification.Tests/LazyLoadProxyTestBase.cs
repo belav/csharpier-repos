@@ -59,7 +59,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(EntityState.Deleted)]
         public virtual void Lazy_load_one_to_one_reference_with_recursive_property(
             EntityState state
-        ) {
+        )
+        {
             using (var context = CreateContext(lazyLoadingEnabled: true))
             {
                 var child = context.Set<WithRecursiveProperty>().Single();
@@ -97,7 +98,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Attached_references_to_principal_are_marked_as_loaded(
             EntityState state,
             bool lazy
-        ) {
+        )
+        {
             using var context = CreateContext(lazy);
             var parent = context.CreateProxy<Parent>();
             parent.Id = 707;
@@ -156,7 +158,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Attached_references_to_dependents_are_marked_as_loaded(
             EntityState state,
             bool lazy
-        ) {
+        )
+        {
             using var context = CreateContext(lazy);
             var parent = context.CreateProxy<Parent>();
             parent.Id = 707;
@@ -215,7 +218,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Attached_collections_are_not_marked_as_loaded(
             EntityState state,
             bool lazy
-        ) {
+        )
+        {
             using var context = CreateContext(lazy);
             var parent = context.CreateProxy<Parent>();
             parent.Id = 707;
@@ -260,7 +264,8 @@ namespace Microsoft.EntityFrameworkCore
                         .Concat(parent.ChildrenAk)
                         .Concat(parent.ChildrenShadowFk)
                         .Concat(parent.ChildrenCompositeKey)
-                ) {
+                )
+                {
                     context.Entry(child).State = state;
                 }
 
@@ -367,7 +372,8 @@ namespace Microsoft.EntityFrameworkCore
             EntityState state,
             bool useAttach,
             bool useDetach
-        ) {
+        )
+        {
             Child child = null;
 
             if (useAttach)
@@ -450,7 +456,8 @@ namespace Microsoft.EntityFrameworkCore
             EntityState state,
             bool useAttach,
             bool useDetach
-        ) {
+        )
+        {
             Single single = null;
 
             if (useAttach)
@@ -533,7 +540,8 @@ namespace Microsoft.EntityFrameworkCore
             EntityState state,
             bool useAttach,
             bool useDetach
-        ) {
+        )
+        {
             Parent parent = null;
 
             if (useAttach)
@@ -873,7 +881,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(EntityState.Deleted)]
         public virtual void Lazy_load_many_to_one_reference_to_principal_changed_non_found_FK(
             EntityState state
-        ) {
+        )
+        {
             using var context = CreateContext(lazyLoadingEnabled: true);
             var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
 
@@ -920,7 +929,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(EntityState.Deleted)]
         public virtual void Lazy_load_many_to_one_reference_to_principal_changed_found_FK(
             EntityState state
-        ) {
+        )
+        {
             using var context = CreateContext(lazyLoadingEnabled: true);
             var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
 
@@ -1015,7 +1025,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(EntityState.Deleted)]
         public virtual void Lazy_load_many_to_one_reference_to_principal_not_found(
             EntityState state
-        ) {
+        )
+        {
             using var context = CreateContext(lazyLoadingEnabled: true);
             var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
 
@@ -1139,7 +1150,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Lazy_load_collection_already_loaded(
             EntityState state,
             CascadeTiming cascadeDeleteTiming
-        ) {
+        )
+        {
             using var context = CreateContext(lazyLoadingEnabled: true);
             context.ChangeTracker.CascadeDeleteTiming = cascadeDeleteTiming;
 
@@ -1193,7 +1205,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Lazy_load_many_to_one_reference_to_principal_already_loaded(
             EntityState state,
             CascadeTiming cascadeDeleteTiming
-        ) {
+        )
+        {
             using var context = CreateContext(lazyLoadingEnabled: true);
             context.ChangeTracker.CascadeDeleteTiming = cascadeDeleteTiming;
 
@@ -1234,7 +1247,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(EntityState.Deleted)]
         public virtual void Lazy_load_one_to_one_reference_to_principal_already_loaded(
             EntityState state
-        ) {
+        )
+        {
             using var context = CreateContext(lazyLoadingEnabled: true);
             var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
 
@@ -1280,7 +1294,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Lazy_load_one_to_one_reference_to_dependent_already_loaded(
             EntityState state,
             CascadeTiming cascadeDeleteTiming
-        ) {
+        )
+        {
             using var context = CreateContext(lazyLoadingEnabled: true);
             context.ChangeTracker.CascadeDeleteTiming = cascadeDeleteTiming;
 
@@ -1330,7 +1345,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(EntityState.Deleted)]
         public virtual void Lazy_load_one_to_one_PK_to_PK_reference_to_principal_already_loaded(
             EntityState state
-        ) {
+        )
+        {
             using var context = CreateContext(lazyLoadingEnabled: true);
             var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
 
@@ -1369,7 +1385,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(EntityState.Deleted)]
         public virtual void Lazy_load_one_to_one_PK_to_PK_reference_to_dependent_already_loaded(
             EntityState state
-        ) {
+        )
+        {
             using var context = CreateContext(lazyLoadingEnabled: true);
             var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
 
@@ -1408,7 +1425,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(EntityState.Deleted)]
         public virtual void Lazy_load_many_to_one_reference_to_principal_alternate_key(
             EntityState state
-        ) {
+        )
+        {
             using var context = CreateContext(lazyLoadingEnabled: true);
             var child = context.Set<ChildAk>().Single(e => e.Id == 32);
 
@@ -1441,7 +1459,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(EntityState.Deleted)]
         public virtual void Lazy_load_one_to_one_reference_to_principal_alternate_key(
             EntityState state
-        ) {
+        )
+        {
             using var context = CreateContext(lazyLoadingEnabled: true);
             var single = context.Set<SingleAk>().Single();
 
@@ -1474,7 +1493,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(EntityState.Deleted)]
         public virtual void Lazy_load_one_to_one_reference_to_dependent_alternate_key(
             EntityState state
-        ) {
+        )
+        {
             using var context = CreateContext(lazyLoadingEnabled: true);
             var parent = context.Set<Parent>().Single();
 
@@ -1507,7 +1527,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(EntityState.Deleted)]
         public virtual void Lazy_load_many_to_one_reference_to_principal_null_FK_alternate_key(
             EntityState state
-        ) {
+        )
+        {
             using var context = CreateContext(lazyLoadingEnabled: true);
             var child = context.CreateProxy<ChildAk>();
             child.Id = 767;
@@ -1539,7 +1560,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(EntityState.Deleted)]
         public virtual void Lazy_load_one_to_one_reference_to_principal_null_FK_alternate_key(
             EntityState state
-        ) {
+        )
+        {
             using var context = CreateContext(lazyLoadingEnabled: true);
             var single = context.CreateProxy<SingleAk>();
             single.Id = 767;
@@ -1602,7 +1624,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(EntityState.Deleted)]
         public virtual void Lazy_load_many_to_one_reference_to_principal_shadow_fk(
             EntityState state
-        ) {
+        )
+        {
             using var context = CreateContext(lazyLoadingEnabled: true);
             var child = context.Set<ChildShadowFk>().Single(e => e.Id == 52);
 
@@ -1699,7 +1722,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(EntityState.Deleted)]
         public virtual void Lazy_load_many_to_one_reference_to_principal_null_FK_shadow_fk(
             EntityState state
-        ) {
+        )
+        {
             using var context = CreateContext(lazyLoadingEnabled: true);
             var child = context.CreateProxy<ChildShadowFk>();
             child.Id = 767;
@@ -1731,7 +1755,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(EntityState.Deleted)]
         public virtual void Lazy_load_one_to_one_reference_to_principal_null_FK_shadow_fk(
             EntityState state
-        ) {
+        )
+        {
             using var context = CreateContext(lazyLoadingEnabled: true);
             var single = context.CreateProxy<SingleShadowFk>();
             single.Id = 767;
@@ -1797,7 +1822,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(EntityState.Deleted)]
         public virtual void Lazy_load_many_to_one_reference_to_principal_composite_key(
             EntityState state
-        ) {
+        )
+        {
             using var context = CreateContext(lazyLoadingEnabled: true);
             var child = context.Set<ChildCompositeKey>().Single(e => e.Id == 52);
 
@@ -1830,7 +1856,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(EntityState.Deleted)]
         public virtual void Lazy_load_one_to_one_reference_to_principal_composite_key(
             EntityState state
-        ) {
+        )
+        {
             using var context = CreateContext(lazyLoadingEnabled: true);
             var single = context.Set<SingleCompositeKey>().Single();
 
@@ -1863,7 +1890,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(EntityState.Deleted)]
         public virtual void Lazy_load_one_to_one_reference_to_dependent_composite_key(
             EntityState state
-        ) {
+        )
+        {
             using var context = CreateContext(lazyLoadingEnabled: true);
             var parent = context.Set<Parent>().Single();
 
@@ -1896,7 +1924,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(EntityState.Deleted)]
         public virtual void Lazy_load_many_to_one_reference_to_principal_null_FK_composite_key(
             EntityState state
-        ) {
+        )
+        {
             using var context = CreateContext(lazyLoadingEnabled: true);
             var child = context.CreateProxy<ChildCompositeKey>();
             child.Id = 767;
@@ -1929,7 +1958,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(EntityState.Deleted)]
         public virtual void Lazy_load_one_to_one_reference_to_principal_null_FK_composite_key(
             EntityState state
-        ) {
+        )
+        {
             using var context = CreateContext(lazyLoadingEnabled: true);
             var single = context.CreateProxy<SingleCompositeKey>();
             single.Id = 767;

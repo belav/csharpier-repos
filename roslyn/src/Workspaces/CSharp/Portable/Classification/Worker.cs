@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
             TextSpan textSpan,
             ArrayBuilder<ClassifiedSpan> result,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _result = result;
             _textSpan = textSpan;
             _cancellationToken = cancellationToken;
@@ -39,7 +40,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
             TextSpan textSpan,
             ArrayBuilder<ClassifiedSpan> result,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var worker = new Worker(textSpan, result, cancellationToken);
             foreach (var tk in tokens)
             {
@@ -52,7 +54,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
             TextSpan textSpan,
             ArrayBuilder<ClassifiedSpan> result,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var worker = new Worker(textSpan, result, cancellationToken);
             worker.ClassifyNode(node);
         }
@@ -111,7 +114,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
                     if (
                         token.Kind() == SyntaxKind.IdentifierToken
                         && ClassificationHelpers.IsStaticallyDeclared(token)
-                    ) {
+                    )
+                    {
                         AddClassification(span, ClassificationTypeNames.StaticSymbol);
                     }
                 }
@@ -248,7 +252,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
                 index >= 2
                 && triviaList[index - 1].Kind() == SyntaxKind.EndOfLineTrivia
                 && triviaList[index - 2].Kind() == SyntaxKind.ConflictMarkerTrivia
-            ) {
+            )
+            {
                 // for the ======== add a comment for the first line, and then lex all
                 // subsequent lines up until the end of the conflict marker.
                 foreach (
@@ -256,7 +261,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
                         text: trivia.ToFullString(),
                         initialTokenPosition: trivia.SpanStart
                     )
-                ) {
+                )
+                {
                     ClassifyToken(token);
                 }
             }

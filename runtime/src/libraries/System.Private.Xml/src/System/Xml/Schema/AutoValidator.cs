@@ -106,7 +106,8 @@ namespace System.Xml.Schema
                         else if (
                             Ref.Equal(objectNs, SchemaNames.QnDtDt.Namespace)
                             && Ref.Equal(objectName, SchemaNames.QnDtDt.Name)
-                        ) {
+                        )
+                        {
                             reader.SchemaTypeObject = XmlSchemaDatatype.FromXdrName(reader.Value);
                             reader.MoveToElement();
                             return ValidationType.XDR;

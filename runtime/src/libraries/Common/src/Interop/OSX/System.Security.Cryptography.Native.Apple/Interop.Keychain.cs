@@ -173,7 +173,8 @@ internal static partial class Interop
 
         internal static SafeCFArrayHandle KeychainEnumerateIdentities(
             SafeKeychainHandle keychainHandle
-        ) {
+        )
+        {
             SafeCFArrayHandle matches;
             int osStatus;
             int result = AppleCryptoNative_SecKeychainEnumerateIdentities(
@@ -201,7 +202,8 @@ internal static partial class Interop
         internal static SafeKeychainHandle CreateOrOpenKeychain(
             string keychainPath,
             bool createAllowed
-        ) {
+        )
+        {
             const int errSecAuthFailed = -25293;
             const int errSecDuplicateKeychain = -25296;
 
@@ -373,7 +375,8 @@ namespace System.Security.Cryptography.Apple
             if (
                 disposing
                 && SafeHandleCache<SafeTemporaryKeychainHandle>.IsCachedInvalidHandle(this)
-            ) {
+            )
+            {
                 return;
             }
 
@@ -409,7 +412,8 @@ namespace System.Security.Cryptography.Apple
                 SafeKeychainHandle keychain = Interop.AppleCrypto.SecKeychainItemCopyKeychain(
                     keychainItem
                 )
-            ) {
+            )
+            {
                 if (keychain.IsInvalid)
                 {
                     return;
@@ -434,7 +438,8 @@ namespace System.Security.Cryptography.Apple
                 SafeKeychainHandle keychain = Interop.AppleCrypto.SecKeychainItemCopyKeychain(
                     keychainItem
                 )
-            ) {
+            )
+            {
                 if (keychain.IsInvalid)
                 {
                     return;

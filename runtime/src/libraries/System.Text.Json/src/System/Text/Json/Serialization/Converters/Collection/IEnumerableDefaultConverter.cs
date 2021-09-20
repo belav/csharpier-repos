@@ -48,7 +48,8 @@ namespace System.Text.Json.Serialization.Converters
             JsonSerializerOptions options,
             ref ReadStack state,
             [MaybeNullWhen(false)] out TCollection value
-        ) {
+        )
+        {
             JsonTypeInfo elementTypeInfo = state.Current.JsonTypeInfo.ElementTypeInfo!;
 
             if (state.UseFastPath)
@@ -65,7 +66,8 @@ namespace System.Text.Json.Serialization.Converters
                 JsonConverter<TElement> elementConverter = GetElementConverter(elementTypeInfo);
                 if (
                     elementConverter.CanUseDirectReadOrWrite && state.Current.NumberHandling == null
-                ) {
+                )
+                {
                     // Fast path that avoids validation and extra indirection.
                     while (true)
                     {
@@ -142,14 +144,16 @@ namespace System.Text.Json.Serialization.Converters
                 if (
                     preserveReferences
                     && state.Current.ObjectState < StackFrameObjectState.PropertyValue
-                ) {
+                )
+                {
                     if (
                         JsonSerializer.ResolveMetadataForJsonArray<TCollection>(
                             ref reader,
                             ref state,
                             options
                         )
-                    ) {
+                    )
+                    {
                         if (state.Current.ObjectState == StackFrameObjectState.ReadRefEndObject)
                         {
                             // This will never throw since it was previously validated in ResolveMetadataForJsonArray.
@@ -189,7 +193,8 @@ namespace System.Text.Json.Serialization.Converters
                                     ref reader,
                                     ref state
                                 )
-                            ) {
+                            )
+                            {
                                 value = default;
                                 return false;
                             }
@@ -216,7 +221,8 @@ namespace System.Text.Json.Serialization.Converters
                                     ref state,
                                     out TElement? element
                                 )
-                            ) {
+                            )
+                            {
                                 value = default;
                                 return false;
                             }
@@ -273,7 +279,8 @@ namespace System.Text.Json.Serialization.Converters
             TCollection value,
             JsonSerializerOptions options,
             ref WriteStack state
-        ) {
+        )
+        {
             bool success;
 
             if (value == null)

@@ -42,7 +42,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         public void CanWriteResult_OnlyActsOnStreams_IgnoringContentType(
             Type type,
             string contentType
-        ) {
+        )
+        {
             // Arrange
             var formatter = new StreamOutputFormatter();
             var contentTypeHeader =

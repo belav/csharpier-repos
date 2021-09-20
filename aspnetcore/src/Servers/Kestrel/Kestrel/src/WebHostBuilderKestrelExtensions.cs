@@ -59,7 +59,8 @@ namespace Microsoft.AspNetCore.Hosting
         public static IWebHostBuilder UseKestrel(
             this IWebHostBuilder hostBuilder,
             Action<KestrelServerOptions> options
-        ) {
+        )
+        {
             return hostBuilder.UseKestrel().ConfigureKestrel(options);
         }
 
@@ -78,7 +79,8 @@ namespace Microsoft.AspNetCore.Hosting
         public static IWebHostBuilder ConfigureKestrel(
             this IWebHostBuilder hostBuilder,
             Action<KestrelServerOptions> options
-        ) {
+        )
+        {
             return hostBuilder.ConfigureServices(
                 services =>
                 {
@@ -100,7 +102,8 @@ namespace Microsoft.AspNetCore.Hosting
         public static IWebHostBuilder UseKestrel(
             this IWebHostBuilder hostBuilder,
             Action<WebHostBuilderContext, KestrelServerOptions> configureOptions
-        ) {
+        )
+        {
             return hostBuilder.UseKestrel().ConfigureKestrel(configureOptions);
         }
 
@@ -117,7 +120,8 @@ namespace Microsoft.AspNetCore.Hosting
         public static IWebHostBuilder ConfigureKestrel(
             this IWebHostBuilder hostBuilder,
             Action<WebHostBuilderContext, KestrelServerOptions> configureOptions
-        ) {
+        )
+        {
             if (configureOptions == null)
             {
                 throw new ArgumentNullException(nameof(configureOptions));

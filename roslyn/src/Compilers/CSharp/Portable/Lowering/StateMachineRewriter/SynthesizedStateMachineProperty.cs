@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal SynthesizedStateMachineProperty(
             MethodSymbol interfacePropertyGetter,
             StateMachineTypeSymbol stateMachineType
-        ) {
+        )
+        {
             _name = ExplicitInterfaceHelpers.GetMemberName(
                 interfacePropertyGetter.AssociatedSymbol.Name,
                 interfacePropertyGetter.ContainingType,

@@ -76,7 +76,8 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
             object? tag = null,
             [CallerFilePath] string filePath = "",
             [CallerLineNumber] int lineNumber = 0
-        ) {
+        )
+        {
             using (_gate.DisposableWait(CancellationToken.None))
             {
                 IAsyncToken asyncToken;
@@ -173,7 +174,8 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
 
         public async Task WaitUntilConditionIsMetAsync(
             Func<IEnumerable<DiagnosticAsyncToken>, bool> condition
-        ) {
+        )
+        {
             Contract.ThrowIfFalse(TrackActiveTokens);
 
             while (true)

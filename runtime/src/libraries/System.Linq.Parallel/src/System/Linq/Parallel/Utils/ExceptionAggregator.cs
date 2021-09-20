@@ -28,7 +28,8 @@ namespace System.Linq.Parallel
         internal static IEnumerable<TElement> WrapEnumerable<TElement>(
             IEnumerable<TElement> source,
             CancellationState cancellationState
-        ) {
+        )
+        {
             using (IEnumerator<TElement> enumerator = source.GetEnumerator())
             {
                 while (true)
@@ -59,7 +60,8 @@ namespace System.Linq.Parallel
         internal static IEnumerable<TElement> WrapQueryEnumerator<TElement, TIgnoreKey>(
             QueryOperatorEnumerator<TElement, TIgnoreKey> source,
             CancellationState cancellationState
-        ) {
+        )
+        {
             TElement elem = default(TElement)!;
             TIgnoreKey ignoreKey = default(TIgnoreKey)!;
 
@@ -101,7 +103,8 @@ namespace System.Linq.Parallel
         internal static void ThrowOCEorAggregateException(
             Exception ex,
             CancellationState cancellationState
-        ) {
+        )
+        {
             if (ThrowAnOCE(ex, cancellationState))
             {
                 CancellationState.ThrowWithStandardMessageIfCanceled(
@@ -153,7 +156,8 @@ namespace System.Linq.Parallel
                 if (
                     cancelEx.CancellationToken == cancellationState.ExternalCancellationToken
                     && cancellationState.ExternalCancellationToken.IsCancellationRequested
-                ) {
+                )
+                {
                     return true; // let the OCE(extCT) be rethrown.
                 }
 
@@ -162,7 +166,8 @@ namespace System.Linq.Parallel
                     cancelEx.CancellationToken == cancellationState.MergedCancellationToken
                     && cancellationState.MergedCancellationToken.IsCancellationRequested
                     && cancellationState.ExternalCancellationToken.IsCancellationRequested
-                ) {
+                )
+                {
                     return true; // convert internal cancellation back to OCE(extCT).
                 }
             }

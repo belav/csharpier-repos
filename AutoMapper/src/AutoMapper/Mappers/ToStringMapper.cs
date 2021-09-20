@@ -16,7 +16,8 @@ namespace AutoMapper.Internal.Mappers
             MemberMap memberMap,
             Expression sourceExpression,
             Expression destExpression
-        ) {
+        )
+        {
             var sourceType = sourceExpression.Type;
             Expression toStringCall = Call(sourceExpression, ExpressionBuilder.ObjectToString);
             return sourceType.IsEnum
@@ -27,7 +28,8 @@ namespace AutoMapper.Internal.Mappers
             Expression sourceExpression,
             Type sourceType,
             Expression toStringCall
-        ) {
+        )
+        {
             List<SwitchCase> switchCases = null;
             foreach (var memberInfo in sourceType.GetFields(TypeExtensions.StaticFlags))
             {

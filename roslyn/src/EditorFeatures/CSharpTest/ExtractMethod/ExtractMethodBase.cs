@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
             string codeWithMarker,
             bool dontPutOutOrRefOnStruct = true,
             string[] features = null
-        ) {
+        )
+        {
             ParseOptions parseOptions = null;
             if (features != null)
             {
@@ -56,7 +57,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
             string expected,
             bool dontPutOutOrRefOnStruct = true,
             CSharpParseOptions parseOptions = null
-        ) {
+        )
+        {
             using var workspace = TestWorkspace.CreateCSharp(
                 codeWithMarker,
                 parseOptions: parseOptions
@@ -106,7 +108,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
             bool dontPutOutOrRefOnStruct = true,
             bool allowBestEffort = false,
             CSharpParseOptions parseOptions = null
-        ) {
+        )
+        {
             using var workspace = TestWorkspace.CreateCSharp(
                 codeWithMarker,
                 parseOptions: parseOptions
@@ -152,7 +155,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
             bool succeed = true,
             bool dontPutOutOrRefOnStruct = true,
             bool allowBestEffort = false
-        ) {
+        )
+        {
             var document = workspace.CurrentSolution.GetDocument(testDocument.Id);
             Assert.NotNull(document);
 
@@ -204,7 +208,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
             bool expectedFail = false,
             CSharpParseOptions parseOptions = null,
             TextSpan? textSpanOverride = null
-        ) {
+        )
+        {
             using var workspace = TestWorkspace.CreateCSharp(
                 codeWithMarker,
                 parseOptions: parseOptions
@@ -233,7 +238,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
             if (
                 (result.Status.Succeeded() || result.Status.Flag.HasBestEffort())
                 && result.Status.Flag.HasSuggestion()
-            ) {
+            )
+            {
                 Assert.Equal(namedSpans["r"].Single(), result.FinalSpan);
             }
         }

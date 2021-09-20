@@ -40,7 +40,8 @@ namespace Internal.Cryptography.Pal
             X509RevocationMode revocationMode,
             X509Certificate2Collection customTrustStore,
             X509ChainTrustMode trustMode
-        ) {
+        )
+        {
             _revocationMode = revocationMode;
             SafeCreateHandle policiesArray = PreparePoliciesArray(
                 revocationMode != X509RevocationMode.NoCheck
@@ -167,7 +168,8 @@ namespace Internal.Cryptography.Pal
             X509Certificate2Collection? extraStore,
             X509Certificate2Collection customTrustStore,
             X509ChainTrustMode trustMode
-        ) {
+        )
+        {
             List<SafeHandle> safeHandles = new List<SafeHandle>
             {
                 ((AppleCertificatePal)cert).CertificateHandle
@@ -191,7 +193,8 @@ namespace Internal.Cryptography.Pal
                         !customTrustStore[i].SubjectName.RawData.ContentsEqual(
                             customTrustStore[i].IssuerName.RawData
                         )
-                    ) {
+                    )
+                    {
                         safeHandles.Add(
                             ((AppleCertificatePal)customTrustStore[i].Pal).CertificateHandle
                         );
@@ -204,7 +207,8 @@ namespace Internal.Cryptography.Pal
 
         private SafeCreateHandle PrepareCustomCertsArray(
             X509Certificate2Collection customTrustStore
-        ) {
+        )
+        {
             List<SafeHandle> rootCertificates = new List<SafeHandle>();
             foreach (X509Certificate2 cert in customTrustStore)
             {
@@ -258,7 +262,8 @@ namespace Internal.Cryptography.Pal
             OidCollection applicationPolicy,
             OidCollection certificatePolicy,
             X509RevocationFlag revocationFlag
-        ) {
+        )
+        {
             int osStatus;
 
             // Save the time code for determining which message to load for NotTimeValid.
@@ -269,7 +274,8 @@ namespace Internal.Cryptography.Pal
                 SafeCFDateHandle cfEvaluationTime = Interop.CoreFoundation.CFDateCreate(
                     verificationTime
                 )
-            ) {
+            )
+            {
                 ret = Interop.AppleCrypto.AppleCryptoNative_X509ChainEvaluate(
                     _chainHandle!,
                     cfEvaluationTime,
@@ -310,7 +316,8 @@ namespace Internal.Cryptography.Pal
         private static (X509Certificate2, int)[] ParseResults(
             SafeX509ChainHandle chainHandle,
             X509RevocationMode revocationMode
-        ) {
+        )
+        {
             long elementCount = Interop.AppleCrypto.X509ChainGetChainSize(chainHandle);
             var elements = new (X509Certificate2, int)[elementCount];
 
@@ -353,7 +360,8 @@ namespace Internal.Cryptography.Pal
             (X509Certificate2, int)[] elements,
             OidCollection applicationPolicy,
             OidCollection certificatePolicy
-        ) {
+        )
+        {
             if (applicationPolicy?.Count > 0 || certificatePolicy?.Count > 0)
             {
                 List<X509Certificate2> certsToRead = new List<X509Certificate2>();
@@ -407,7 +415,8 @@ namespace Internal.Cryptography.Pal
         private static void FixupRevocationStatus(
             (X509Certificate2, int)[] elements,
             X509RevocationFlag revocationFlag
-        ) {
+        )
+        {
             if (revocationFlag == X509RevocationFlag.ExcludeRoot)
             {
                 // When requested
@@ -445,7 +454,8 @@ namespace Internal.Cryptography.Pal
             X509Certificate2 cert,
             X509RevocationMode revocationMode,
             ref int dwStatus
-        ) {
+        )
+        {
             X509ChainStatusFlags flags = (X509ChainStatusFlags)dwStatus;
 
             if ((flags & X509ChainStatusFlags.UntrustedRoot) != 0)
@@ -644,7 +654,8 @@ namespace Internal.Cryptography.Pal
             DateTime verificationTime,
             TimeSpan timeout,
             bool disableAia
-        ) {
+        )
+        {
             // If the time was given in Universal, it will stay Universal.
             // If the time was given in Local, it will be converted.
             // If the time was given in Unspecified, it will be assumed local, and converted.

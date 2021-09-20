@@ -39,7 +39,8 @@ namespace Microsoft.AspNetCore.TestHost
             ApplicationWrapper application,
             bool allowSynchronousIO,
             bool preserveExecutionContext
-        ) {
+        )
+        {
             _application = application ?? throw new ArgumentNullException(nameof(application));
             AllowSynchronousIO = allowSynchronousIO;
             _preserveExecutionContext = preserveExecutionContext;
@@ -100,7 +101,8 @@ namespace Microsoft.AspNetCore.TestHost
 
         internal void RegisterResponseReadCompleteCallback(
             Action<HttpContext> responseReadCompleteCallback
-        ) {
+        )
+        {
             _responseReadCompleteCallback = responseReadCompleteCallback;
         }
 

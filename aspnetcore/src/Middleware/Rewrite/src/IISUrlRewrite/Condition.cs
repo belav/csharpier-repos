@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite
             RewriteContext context,
             BackReferenceCollection? ruleBackReferences,
             BackReferenceCollection? conditionBackReferences
-        ) {
+        )
+        {
             var pattern = Input.Evaluate(context, ruleBackReferences, conditionBackReferences);
             return Match.Evaluate(pattern, context);
         }

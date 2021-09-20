@@ -86,7 +86,8 @@ namespace System.Diagnostics
             [DoesNotReturnIf(false)] bool condition,
             string? message,
             string? detailMessage
-        ) {
+        )
+        {
             if (!condition)
             {
                 Fail(message, detailMessage);
@@ -97,7 +98,8 @@ namespace System.Diagnostics
             string message,
             string detailMessage,
             string failureKindMessage
-        ) {
+        )
+        {
             string stackTrace;
             try
             {

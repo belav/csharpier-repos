@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             string resourceId,
             string resourceType,
             out uint size
-        ) {
+        )
+        {
             IntPtr hrsrc = FindResource(lib, resourceId, resourceType);
             if (hrsrc == IntPtr.Zero)
                 throw new Win32Exception(Marshal.GetLastWin32Error());
@@ -53,7 +54,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             int offset,
             int length,
             Encoding encoding
-        ) {
+        )
+        {
             byte[] fullmanif = new byte[length];
             Marshal.Copy((IntPtr)(ptr.ToInt64() + offset), fullmanif, 0, length);
             return encoding.GetString(fullmanif, 0, length);
@@ -145,7 +147,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         public static IEnumerable<Tuple<string, string>> ReadStringFileInfo(
             BinaryReader reader,
             int sizeTotalStringFileInfo
-        ) {
+        )
+        {
             var result = new List<Tuple<string, string>>();
             int sizeConsumed = 2 + 2 + 2 + (16 * 2);
             long startPosition = reader.BaseStream.Position;
@@ -160,7 +163,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
             while (
                 reader.BaseStream.Position - startPosition + sizeConsumed < sizeTotalStringFileInfo
-            ) {
+            )
+            {
                 result.Add(GetVerStringPair(reader));
                 reader.BaseStream.Position = (reader.BaseStream.Position + 3) & ~3; //round up to 32bit boundary
             }

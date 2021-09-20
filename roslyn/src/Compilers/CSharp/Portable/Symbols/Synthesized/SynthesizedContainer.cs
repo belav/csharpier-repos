@@ -56,7 +56,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             string name,
             ImmutableArray<TypeParameterSymbol> typeParameters,
             TypeMap typeMap
-        ) {
+        )
+        {
             Debug.Assert(name != null);
             Debug.Assert(!typeParameters.IsDefault);
             Debug.Assert(typeMap != null);
@@ -69,7 +70,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private ImmutableArray<TypeParameterSymbol> CreateTypeParameters(
             int parameterCount,
             bool returnsVoid
-        ) {
+        )
+        {
             var typeParameters = ArrayBuilder<TypeParameterSymbol>.GetInstance(
                 parameterCount + (returnsVoid ? 0 : 1)
             );
@@ -103,7 +105,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void AddSynthesizedAttributes(
             PEModuleBuilder moduleBuilder,
             ref ArrayBuilder<SynthesizedAttributeData> attributes
-        ) {
+        )
+        {
             base.AddSynthesizedAttributes(moduleBuilder, ref attributes);
 
             if (
@@ -112,7 +115,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     ContainingSymbol.IsImplicitlyDeclared
                     || ContainingSymbol is SimpleProgramNamedTypeSymbol
                 )
-            ) {
+            )
+            {
                 return;
             }
 

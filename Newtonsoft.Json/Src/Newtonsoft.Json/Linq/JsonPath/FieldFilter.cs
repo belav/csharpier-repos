@@ -17,7 +17,8 @@ namespace Newtonsoft.Json.Linq.JsonPath
             JToken root,
             IEnumerable<JToken> current,
             JsonSelectSettings? settings
-        ) {
+        )
+        {
             foreach (JToken t in current)
             {
                 if (t is JObject o)

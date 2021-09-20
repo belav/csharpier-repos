@@ -114,7 +114,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static LookupResultKind WorseResultKind(
             this LookupResultKind resultKind1,
             LookupResultKind resultKind2
-        ) {
+        )
+        {
             if (resultKind1 == LookupResultKind.Empty)
                 return resultKind2;
             if (resultKind2 == LookupResultKind.Empty)

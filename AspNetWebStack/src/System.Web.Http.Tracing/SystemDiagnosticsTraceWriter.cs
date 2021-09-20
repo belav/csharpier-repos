@@ -104,7 +104,8 @@ namespace System.Web.Http.Tracing
             string category,
             TraceLevel level,
             Action<TraceRecord> traceAction
-        ) {
+        )
+        {
             if (category == null)
             {
                 throw Error.ArgumentNull("category");
@@ -160,7 +161,8 @@ namespace System.Web.Http.Tracing
                     SystemWebHttpRequestCategory,
                     StringComparison.Ordinal
                 )
-            ) {
+            )
+            {
                 return FormatRequestEnvelope(traceRecord);
             }
 

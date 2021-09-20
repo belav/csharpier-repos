@@ -228,7 +228,8 @@ namespace System.IO
             uint errorCode,
             uint numBytes,
             AsyncReadState state
-        ) {
+        )
+        {
             try
             {
                 if (IsHandleInvalid(state.DirectoryHandle))
@@ -411,7 +412,8 @@ namespace System.IO
                 SafeFileHandle handle,
                 ThreadPoolBoundHandle binding,
                 FileSystemWatcher parent
-            ) {
+            )
+            {
                 Debug.Assert(buffer != null);
                 Debug.Assert(buffer.Length > 0);
                 Debug.Assert(handle != null);

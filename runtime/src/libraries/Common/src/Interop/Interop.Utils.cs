@@ -17,7 +17,8 @@ internal static partial class Interop
         TArg2 arg2,
         TArg3 arg3,
         out string? result
-    ) {
+    )
+    {
         const int InitialSize = 256; // arbitrary stack allocation size
         const int MaxHeapSize = 1280; // max from previous version of the code, starting at 80 and doubling four times
 

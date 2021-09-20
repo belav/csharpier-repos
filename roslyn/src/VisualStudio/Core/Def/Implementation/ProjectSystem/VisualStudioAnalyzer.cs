@@ -38,7 +38,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             HostDiagnosticUpdateSource hostDiagnosticUpdateSource,
             ProjectId projectId,
             string language
-        ) {
+        )
+        {
             FullPath = fullPath;
             _hostDiagnosticUpdateSource = hostDiagnosticUpdateSource;
             _projectId = projectId;
@@ -112,7 +113,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         private void ResetReferenceAndErrors(
             out AnalyzerReference? reference,
             out ImmutableArray<DiagnosticData> loadErrors
-        ) {
+        )
+        {
             lock (_gate)
             {
                 loadErrors = _analyzerLoadErrors;

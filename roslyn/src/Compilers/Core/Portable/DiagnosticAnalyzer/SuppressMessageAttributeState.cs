@@ -85,13 +85,15 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 string id,
                 bool isImmediatelyContainingSymbol,
                 out SuppressMessageInfo info
-            ) {
+            )
+            {
                 Debug.Assert(symbol != null);
                 Dictionary<string, SuppressMessageInfo>? suppressions;
                 if (
                     _globalSymbolSuppressions.TryGetValue(symbol, out suppressions)
                     && suppressions.TryGetValue(id, out info)
-                ) {
+                )
+                {
                     if (symbol.Kind != SymbolKind.Namespace)
                     {
                         return true;
@@ -147,7 +149,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public bool IsDiagnosticSuppressed(
             Diagnostic diagnostic,
             [NotNullWhen(true)] out AttributeData? suppressingAttribute
-        ) {
+        )
+        {
             SuppressMessageInfo info;
             if (IsDiagnosticSuppressed(diagnostic, out info))
             {
@@ -179,7 +182,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     isImmediatelyContainingSymbol: false,
                     info: out info
                 )
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -194,7 +198,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                         .FindNode(location.SourceSpan, getInnermostNodeForTie: true);
                     node != null;
                     node = node.Parent
-                ) {
+                )
+                {
                     var declaredSymbols = model.GetDeclaredSymbolsForNode(node);
                     Debug.Assert(declaredSymbols != null);
 
@@ -215,7 +220,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                                 inImmediatelyContainingSymbol,
                                 out info
                             )
-                        ) {
+                        )
+                        {
                             return true;
                         }
                     }
@@ -232,7 +238,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             bool hasNamespaceSuppression(
                 INamespaceSymbol namespaceSymbol,
                 bool inImmediatelyContainingSymbol
-            ) {
+            )
+            {
                 do
                 {
                     if (
@@ -242,7 +249,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                             inImmediatelyContainingSymbol,
                             out _
                         )
-                    ) {
+                    )
+                    {
                         return true;
                     }
 
@@ -259,7 +267,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             ISymbol? symbolOpt,
             bool isImmediatelyContainingSymbol,
             out SuppressMessageInfo info
-        ) {
+        )
+        {
             var globalSuppressions = this.DecodeGlobalSuppressMessageAttributes();
             return globalSuppressions.HasCompilationWideSuppression(id, out info)
                 || symbolOpt != null
@@ -275,7 +284,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             string id,
             ISymbol symbol,
             out SuppressMessageInfo info
-        ) {
+        )
+        {
             var suppressions = _localSuppressionsBySymbol.GetOrAdd(
                 symbol,
                 this.DecodeLocalSuppressMessageAttributes
@@ -365,7 +375,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         > DecodeLocalSuppressMessageAttributes(
             ISymbol symbol,
             IEnumerable<AttributeData> attributes
-        ) {
+        )
+        {
             var builder = ImmutableDictionary.CreateBuilder<string, SuppressMessageInfo>();
             foreach (var attribute in attributes)
             {
@@ -384,7 +395,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         private static void AddOrUpdate(
             SuppressMessageInfo info,
             IDictionary<string, SuppressMessageInfo> builder
-        ) {
+        )
+        {
             // TODO: How should we deal with multiple SuppressMessage attributes, with different suppression info/states?
             // For now, we just pick the last attribute, if not suppressed.
             SuppressMessageInfo currentInfo;
@@ -398,7 +410,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Compilation compilation,
             ISymbol symbol,
             GlobalSuppressions globalSuppressions
-        ) {
+        )
+        {
             Debug.Assert(symbol is IAssemblySymbol || symbol is IModuleSymbol);
 
             var attributes = symbol.GetAttributes().Where(a => IsSuppressionAttribute(a));
@@ -415,7 +428,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             ISymbol symbol,
             GlobalSuppressions globalSuppressions,
             IEnumerable<AttributeData> attributes
-        ) {
+        )
+        {
             foreach (var instance in attributes)
             {
                 SuppressMessageInfo info;
@@ -429,7 +443,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     if (
                         (scope == TargetScope.Module || scope == TargetScope.None)
                         && info.Target == null
-                    ) {
+                    )
+                    {
                         // This suppression is applies to the entire compilation
                         globalSuppressions.AddCompilationWideSuppression(info);
                         continue;
@@ -458,7 +473,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Compilation compilation,
             string target,
             TargetScope scope
-        ) {
+        )
+        {
             switch (scope)
             {
                 case TargetScope.Namespace:
@@ -477,7 +493,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         private static bool TryDecodeSuppressMessageAttributeData(
             AttributeData attribute,
             out SuppressMessageInfo info
-        ) {
+        )
+        {
             info = default(SuppressMessageInfo);
 
             // We need at least the Category and Id to decode the diagnostic to suppress.

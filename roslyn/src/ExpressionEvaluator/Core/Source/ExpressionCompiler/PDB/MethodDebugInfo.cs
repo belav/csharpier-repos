@@ -54,7 +54,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             ImmutableArray<string> localVariableNames,
             ImmutableArray<TLocalSymbol> localConstants,
             ILSpan reuseSpan
-        ) {
+        )
+        {
             RoslynDebug.Assert(!importRecordGroups.IsDefault);
             RoslynDebug.Assert(!externAliasRecords.IsDefault);
             RoslynDebug.AssertNotNull(defaultNamespaceName);
@@ -76,7 +77,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         public ImmutableSortedSet<int> GetInScopeHoistedLocalIndices(
             int ilOffset,
             ref ILSpan methodContextReuseSpan
-        ) {
+        )
+        {
             if (HoistedLocalScopeRecords.IsDefaultOrEmpty)
             {
                 return ImmutableSortedSet<int>.Empty;

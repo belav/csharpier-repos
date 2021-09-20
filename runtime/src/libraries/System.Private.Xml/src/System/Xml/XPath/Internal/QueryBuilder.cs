@@ -75,7 +75,8 @@ namespace MS.Internal.Xml.XPath
                                 root.TypeOfAxis == Axis.AxisType.Child
                                 && input.TypeOfAxis == Axis.AxisType.DescendantOrSelf
                                 && input.NodeType == XPathNodeType.All
-                            ) {
+                            )
+                            {
                                 Query qyGrandInput;
                                 if (input.Input != null)
                                 {
@@ -109,7 +110,8 @@ namespace MS.Internal.Xml.XPath
                         if (
                             root.TypeOfAxis == Axis.AxisType.Descendant
                             || root.TypeOfAxis == Axis.AxisType.DescendantOrSelf
-                        ) {
+                        )
+                        {
                             inputFlags |= Flags.SmartDesc;
                         }
                     }
@@ -253,7 +255,8 @@ namespace MS.Internal.Xml.XPath
                             || root.NodeType == XPathNodeType.Attribute
                         )
                         && root.Prefix.Length == 0
-                    ) {
+                    )
+                    {
                         result = new NamespaceQuery(qyInput, root.Name, root.Prefix, root.NodeType);
                     }
                     else
@@ -315,7 +318,8 @@ namespace MS.Internal.Xml.XPath
                     qyFilter != null
                     && (propsCond & Props.HasPosition) == 0
                     && qyFilter.Condition.StaticType != XPathResultType.Any
-                ) {
+                )
+                {
                     Query prevCond = qyFilter.Condition;
                     if (prevCond.StaticType == XPathResultType.Number)
                     {

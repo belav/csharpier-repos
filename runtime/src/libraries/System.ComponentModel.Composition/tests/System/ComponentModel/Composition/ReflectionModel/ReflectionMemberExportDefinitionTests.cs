@@ -19,7 +19,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
             LazyMemberInfo exportMember,
             string contractname,
             IDictionary<string, object> metadata
-        ) {
+        )
+        {
             return CreateReflectionExportDefinition(exportMember, contractname, metadata, null);
         }
 
@@ -28,7 +29,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
             string contractname,
             IDictionary<string, object> metadata,
             ICompositionElement origin
-        ) {
+        )
+        {
             return (ReflectionMemberExportDefinition)ReflectionModelServices.CreateExportDefinition(
                 exportMember,
                 contractname,
@@ -39,7 +41,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
         private static Lazy<IDictionary<string, object>> CreateLazyMetadata(
             IDictionary<string, object> metadata
-        ) {
+        )
+        {
             return new Lazy<IDictionary<string, object>>(() => metadata, false);
         }
 

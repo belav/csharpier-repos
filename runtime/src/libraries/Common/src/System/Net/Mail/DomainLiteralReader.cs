@@ -33,7 +33,8 @@ namespace System.Net.Mail
             int index,
             out int outIndex,
             bool throwExceptionIfFail
-        ) {
+        )
+        {
             Debug.Assert(
                 0 <= index && index < data.Length,
                 "index was outside the bounds of the string: " + index
@@ -56,7 +57,8 @@ namespace System.Net.Mail
                         out index,
                         throwExceptionIfFail
                     )
-                ) {
+                )
+                {
                     outIndex = default;
                     return false;
                 }
@@ -75,7 +77,8 @@ namespace System.Net.Mail
                         out int quotedCharCount,
                         throwExceptionIfFail
                     )
-                ) {
+                )
+                {
                     outIndex = default;
                     return false;
                 }
@@ -96,7 +99,8 @@ namespace System.Net.Mail
                 else if (
                     data[index] > MailBnfHelper.Ascii7bitMaxValue
                     || !MailBnfHelper.Dtext[data[index]]
-                ) {
+                )
+                {
                     if (throwExceptionIfFail)
                     {
                         throw new FormatException(

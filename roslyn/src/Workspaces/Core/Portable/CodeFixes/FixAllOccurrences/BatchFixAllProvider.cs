@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         private async Task<Solution?> FixAllContextsAsync(
             FixAllContext originalFixAllContext,
             ImmutableArray<FixAllContext> fixAllContexts
-        ) {
+        )
+        {
             var cancellationToken = originalFixAllContext.CancellationToken;
             var progressTracker = originalFixAllContext.GetProgressTracker();
             progressTracker.Description = FixAllContextHelper.GetDefaultFixAllTitle(
@@ -84,7 +85,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             FixAllContext fixAllContext,
             IProgressTracker progressTracker,
             Dictionary<DocumentId, TextChangeMerger> docIdToTextMerger
-        ) {
+        )
+        {
             // First, determine the diagnostics to fix for that context.
             var documentToDiagnostics = await DetermineDiagnosticsAsync(
                     fixAllContext,
@@ -132,7 +134,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             IProgressTracker progressTracker,
             Dictionary<DocumentId, TextChangeMerger> docIdToTextMerger,
             ImmutableDictionary<Document, ImmutableArray<Diagnostic>> documentToDiagnostics
-        ) {
+        )
+        {
             using var _ = progressTracker.ItemCompletedScope();
 
             // First, order the diagnostics so we process them in a consistent manner and get the same results given the
@@ -171,7 +174,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         > GetAllChangedDocumentsInDiagnosticsOrderAsync(
             FixAllContext fixAllContext,
             ImmutableArray<Diagnostic> orderedDiagnostics
-        ) {
+        )
+        {
             var solution = fixAllContext.Solution;
             var cancellationToken = fixAllContext.CancellationToken;
 
@@ -261,7 +265,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             FixAllContext fixAllContext,
             ImmutableArray<Document> allChangedDocumentsInDiagnosticsOrder,
             Dictionary<DocumentId, TextChangeMerger> docIdToTextMerger
-        ) {
+        )
+        {
             var cancellationToken = fixAllContext.CancellationToken;
 
             // Now for each document that is changed, grab all the documents it was changed to (remember, many code
@@ -299,7 +304,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         private static Action<CodeAction, ImmutableArray<Diagnostic>> GetRegisterCodeFixAction(
             string? codeActionEquivalenceKey,
             ArrayBuilder<CodeAction> codeActions
-        ) {
+        )
+        {
             return (action, diagnostics) =>
             {
                 using var _ = ArrayBuilder<CodeAction>.GetInstance(out var builder);
@@ -310,7 +316,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                     if (
                         currentAction is { EquivalenceKey: var equivalenceKey }
                         && codeActionEquivalenceKey == equivalenceKey
-                    ) {
+                    )
+                    {
                         lock (codeActions)
                             codeActions.Add(currentAction);
                     }
@@ -325,7 +332,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             Solution currentSolution,
             ImmutableArray<(DocumentId, TextChangeMerger)> docIdsAndMerger,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             foreach (var (documentId, textMerger) in docIdsAndMerger)
             {
                 var newText = await textMerger.GetFinalMergedTextAsync(cancellationToken)

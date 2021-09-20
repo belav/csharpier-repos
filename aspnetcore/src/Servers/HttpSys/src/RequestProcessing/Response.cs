@@ -296,7 +296,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             ResponseStreamAsyncResult? asyncResult,
             HttpApiTypes.HTTP_FLAGS flags,
             bool isOpaqueUpgrade
-        ) {
+        )
+        {
             Debug.Assert(!HasStarted, "HttpListenerResponse::SendHeaders()|SentHeaders is true.");
 
             _responseState = ResponseState.Started;
@@ -367,7 +368,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         if (
                             statusCode == ErrorCodes.ERROR_INVALID_PARAMETER
                             && (flags & HttpApiTypes.HTTP_FLAGS.HTTP_SEND_RESPONSE_FLAG_GOAWAY) != 0
-                        ) {
+                        )
+                        {
                             flags &= ~HttpApiTypes.HTTP_FLAGS.HTTP_SEND_RESPONSE_FLAG_GOAWAY;
                             statusCode = HttpApi.HttpSendHttpResponse(
                                 RequestContext.Server.RequestQueue.Handle,
@@ -395,7 +397,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                             asyncResult != null
                             && statusCode == ErrorCodes.ERROR_SUCCESS
                             && HttpSysListener.SkipIOCPCallbackOnSuccess
-                        ) {
+                        )
+                        {
                             asyncResult.BytesSent = bytesSent;
                             // The caller will invoke IOCompleted
                         }
@@ -445,7 +448,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                 requestVersion <= Constants.V1_0 // Http.Sys does not support "Keep-Alive: true" or "Connection: Keep-Alive"
                 || (requestVersion == Constants.V1_1 && requestCloseSet)
                 || responseCloseSet
-            ) {
+            )
+            {
                 keepConnectionAlive = false;
             }
 
@@ -552,7 +556,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         && lookup
                             == (int)HttpApiTypes.HTTP_RESPONSE_HEADER_ID.Enum.HttpHeaderConnection
                     )
-                ) {
+                )
+                {
                     numUnknownHeaders += headerPair.Value.Count;
                 }
                 else if (headerPair.Value.Count > 1)
@@ -567,7 +572,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                 fixed (
                     HttpApiTypes.HTTP_KNOWN_HEADER* pKnownHeaders =
                         &_nativeResponse.Response_V1.Headers.KnownHeaders
-                ) {
+                )
+                {
                     foreach (var headerPair in Headers)
                     {
                         if (headerPair.Value.Count == 0)
@@ -588,7 +594,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                                 && lookup
                                     == (int)HttpApiTypes.HTTP_RESPONSE_HEADER_ID.Enum.HttpHeaderConnection
                             )
-                        ) {
+                        )
+                        {
                             if (unknownHeaders == null)
                             {
                                 unknownHeaders = new HttpApiTypes.HTTP_UNKNOWN_HEADER[
@@ -604,7 +611,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                                 int headerValueIndex = 0;
                                 headerValueIndex < headerValues.Count;
                                 headerValueIndex++
-                            ) {
+                            )
+                            {
                                 // Add Name
                                 bytes = HeaderEncoding.GetBytes(headerName);
                                 unknownHeaders[
@@ -674,7 +682,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                                 int headerValueIndex = 0;
                                 headerValueIndex < headerValues.Count;
                                 headerValueIndex++
-                            ) {
+                            )
+                            {
                                 // Add Value
                                 headerValue = headerValues[headerValueIndex] ?? string.Empty;
                                 bytes = HeaderEncoding.GetBytes(headerValue);
@@ -724,7 +733,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             HttpApiTypes.HTTP_DATA_CHUNK[] dataChunks,
             int currentChunk,
             List<GCHandle> pins
-        ) {
+        )
+        {
             Debug.Assert(currentChunk == dataChunks.Length - 1);
             Debug.Assert(HasTrailers);
             MakeTrailersReadOnly();
@@ -763,7 +773,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         int headerValueIndex = 0;
                         headerValueIndex < headerValues.Count;
                         headerValueIndex++
-                    ) {
+                    )
+                    {
                         // Add Name
                         var bytes = HeaderEncoding.GetBytes(headerName);
                         unknownHeaders[unknownHeadersOffset].NameLength = (ushort)bytes.Length;

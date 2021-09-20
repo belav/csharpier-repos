@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
     {
         private static CompilationReference TaskFacadeAssembly(
             bool includeNamespaceAroundTaskExtension = true
-        ) {
+        )
+        {
             var taskAssembly =
                 @"
 namespace System.Runtime.CompilerServices {

@@ -29,7 +29,8 @@ namespace System.Security.Cryptography
             HashAlgorithmName hashAlgorithmName,
             byte[] ikm,
             byte[]? salt = null
-        ) {
+        )
+        {
             if (ikm == null)
                 throw new ArgumentNullException(nameof(ikm));
 
@@ -54,7 +55,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> ikm,
             ReadOnlySpan<byte> salt,
             Span<byte> prk
-        ) {
+        )
+        {
             int hashLength = HashLength(hashAlgorithmName);
 
             if (prk.Length < hashLength)
@@ -80,7 +82,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> ikm,
             ReadOnlySpan<byte> salt,
             Span<byte> prk
-        ) {
+        )
+        {
             Debug.Assert(HashLength(hashAlgorithmName) == hashLength);
 
             using (IncrementalHash hmac = IncrementalHash.CreateHMAC(hashAlgorithmName, salt))
@@ -104,7 +107,8 @@ namespace System.Security.Cryptography
             byte[] prk,
             int outputLength,
             byte[]? info = null
-        ) {
+        )
+        {
             if (prk == null)
                 throw new ArgumentNullException(nameof(prk));
 
@@ -137,7 +141,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> prk,
             Span<byte> output,
             ReadOnlySpan<byte> info
-        ) {
+        )
+        {
             int hashLength = HashLength(hashAlgorithmName);
 
             // Constant comes from section 2.3 (the constraint on L in the Inputs section)
@@ -157,7 +162,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> prk,
             Span<byte> output,
             ReadOnlySpan<byte> info
-        ) {
+        )
+        {
             Debug.Assert(HashLength(hashAlgorithmName) == hashLength);
 
             if (prk.Length < hashLength)
@@ -219,7 +225,8 @@ namespace System.Security.Cryptography
             int outputLength,
             byte[]? salt = null,
             byte[]? info = null
-        ) {
+        )
+        {
             if (ikm == null)
                 throw new ArgumentNullException(nameof(ikm));
 
@@ -261,7 +268,8 @@ namespace System.Security.Cryptography
             Span<byte> output,
             ReadOnlySpan<byte> salt,
             ReadOnlySpan<byte> info
-        ) {
+        )
+        {
             int hashLength = HashLength(hashAlgorithmName);
 
             // Constant comes from section 2.3 (the constraint on L in the Inputs section)

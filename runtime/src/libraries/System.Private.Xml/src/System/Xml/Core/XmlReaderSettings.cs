@@ -310,7 +310,8 @@ namespace System.Xml
                         | XmlSchemaValidationFlags.ProcessIdentityConstraints
                         | XmlSchemaValidationFlags.AllowXmlAttributes
                     )
-                ) {
+                )
+                {
                     throw new ArgumentOutOfRangeException(nameof(value));
                 }
                 _validationFlags = value;
@@ -408,7 +409,8 @@ namespace System.Xml
             Uri? baseUri,
             string? baseUriString,
             XmlParserContext? inputContext
-        ) {
+        )
+        {
             if (input == null)
             {
                 throw new ArgumentNullException(nameof(input));
@@ -456,7 +458,8 @@ namespace System.Xml
             TextReader input,
             string? baseUriString,
             XmlParserContext? inputContext
-        ) {
+        )
+        {
             if (input == null)
             {
                 throw new ArgumentNullException(nameof(input));
@@ -590,7 +593,8 @@ namespace System.Xml
             XmlReader reader,
             XmlResolver? resolver,
             bool addConformanceWrapper
-        ) {
+        )
+        {
             // We have to avoid calling the _addValidationFunc delegate if there's no validation to setup
             // since it would not be initialized (to allow AOT compilers to reduce it away).
             // So if that's the case and we still need conformance wrapper add it here directly.
@@ -616,7 +620,8 @@ namespace System.Xml
             XmlReader reader,
             XmlResolver? resolver,
             bool addConformanceWrapper
-        ) {
+        )
+        {
             // wrap with DTD validating reader
             if (_validationType == ValidationType.DTD)
             {
@@ -664,7 +669,8 @@ namespace System.Xml
                 if (
                     _conformanceLevel != ConformanceLevel.Auto
                     && _conformanceLevel != XmlReader.GetV1ConformanceLevel(baseReader)
-                ) {
+                )
+                {
                     throw new InvalidOperationException(
                         SR.Format(SR.Xml_IncompatibleConformanceLevel, _conformanceLevel.ToString())
                     );
@@ -723,7 +729,8 @@ namespace System.Xml
                         _dtdProcessing == DtdProcessing.Ignore
                         && baseDtdProcessing == DtdProcessing.Parse
                     )
-                ) {
+                )
+                {
                     dtdProc = _dtdProcessing;
                     needWrap = true;
                 }
@@ -734,7 +741,8 @@ namespace System.Xml
                 if (
                     _conformanceLevel != baseReaderSettings.ConformanceLevel
                     && _conformanceLevel != ConformanceLevel.Auto
-                ) {
+                )
+                {
                     throw new InvalidOperationException(
                         SR.Format(SR.Xml_IncompatibleConformanceLevel, _conformanceLevel.ToString())
                     );
@@ -769,7 +777,8 @@ namespace System.Xml
                         _dtdProcessing == DtdProcessing.Ignore
                         && baseReaderSettings.DtdProcessing == DtdProcessing.Parse
                     )
-                ) {
+                )
+                {
                     dtdProc = _dtdProcessing;
                     needWrap = true;
                 }

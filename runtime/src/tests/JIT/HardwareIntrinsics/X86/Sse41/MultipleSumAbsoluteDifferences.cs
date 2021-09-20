@@ -408,7 +408,8 @@ namespace JIT.HardwareIntrinsics.X86
             byte imm8,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Byte[] inArray1 = new Byte[Op1ElementCount];
             Byte[] inArray2 = new Byte[Op2ElementCount];
             UInt16[] outArray = new UInt16[RetElementCount];
@@ -430,7 +431,8 @@ namespace JIT.HardwareIntrinsics.X86
             byte imm8,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Byte[] inArray1 = new Byte[Op1ElementCount];
             Byte[] inArray2 = new Byte[Op2ElementCount];
             UInt16[] outArray = new UInt16[RetElementCount];
@@ -460,7 +462,8 @@ namespace JIT.HardwareIntrinsics.X86
             byte imm8,
             UInt16[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             var srcOffset = ((imm8 & 0x3) * 32) / 8;
             var dstOffset = (((imm8 & 0x4) >> 2) * 32) / 8;
 
@@ -470,7 +473,8 @@ namespace JIT.HardwareIntrinsics.X86
                     + Math.Abs(left[dstOffset + 1] - right[srcOffset + 1])
                     + Math.Abs(left[dstOffset + 2] - right[srcOffset + 2])
                     + Math.Abs(left[dstOffset + 3] - right[srcOffset + 3])
-            ) {
+            )
+            {
                 Succeeded = false;
             }
             else if (
@@ -479,7 +483,8 @@ namespace JIT.HardwareIntrinsics.X86
                     + Math.Abs(left[dstOffset + 2] - right[srcOffset + 1])
                     + Math.Abs(left[dstOffset + 3] - right[srcOffset + 2])
                     + Math.Abs(left[dstOffset + 4] - right[srcOffset + 3])
-            ) {
+            )
+            {
                 Succeeded = false;
             }
             else if (
@@ -488,7 +493,8 @@ namespace JIT.HardwareIntrinsics.X86
                     + Math.Abs(left[dstOffset + 3] - right[srcOffset + 1])
                     + Math.Abs(left[dstOffset + 4] - right[srcOffset + 2])
                     + Math.Abs(left[dstOffset + 5] - right[srcOffset + 3])
-            ) {
+            )
+            {
                 Succeeded = false;
             }
             else if (
@@ -497,7 +503,8 @@ namespace JIT.HardwareIntrinsics.X86
                     + Math.Abs(left[dstOffset + 4] - right[srcOffset + 1])
                     + Math.Abs(left[dstOffset + 5] - right[srcOffset + 2])
                     + Math.Abs(left[dstOffset + 6] - right[srcOffset + 3])
-            ) {
+            )
+            {
                 Succeeded = false;
             }
             else if (
@@ -506,7 +513,8 @@ namespace JIT.HardwareIntrinsics.X86
                     + Math.Abs(left[dstOffset + 5] - right[srcOffset + 1])
                     + Math.Abs(left[dstOffset + 6] - right[srcOffset + 2])
                     + Math.Abs(left[dstOffset + 7] - right[srcOffset + 3])
-            ) {
+            )
+            {
                 Succeeded = false;
             }
             else if (
@@ -515,7 +523,8 @@ namespace JIT.HardwareIntrinsics.X86
                     + Math.Abs(left[dstOffset + 6] - right[srcOffset + 1])
                     + Math.Abs(left[dstOffset + 7] - right[srcOffset + 2])
                     + Math.Abs(left[dstOffset + 8] - right[srcOffset + 3])
-            ) {
+            )
+            {
                 Succeeded = false;
             }
             else if (
@@ -524,7 +533,8 @@ namespace JIT.HardwareIntrinsics.X86
                     + Math.Abs(left[dstOffset + 7] - right[srcOffset + 1])
                     + Math.Abs(left[dstOffset + 8] - right[srcOffset + 2])
                     + Math.Abs(left[dstOffset + 9] - right[srcOffset + 3])
-            ) {
+            )
+            {
                 Succeeded = false;
             }
             else if (
@@ -533,7 +543,8 @@ namespace JIT.HardwareIntrinsics.X86
                     + Math.Abs(left[dstOffset + 8] - right[srcOffset + 1])
                     + Math.Abs(left[dstOffset + 9] - right[srcOffset + 2])
                     + Math.Abs(left[dstOffset + 10] - right[srcOffset + 3])
-            ) {
+            )
+            {
                 Succeeded = false;
             }
 

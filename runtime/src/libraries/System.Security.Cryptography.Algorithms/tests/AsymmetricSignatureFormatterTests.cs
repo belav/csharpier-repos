@@ -22,7 +22,8 @@ namespace System.Security.Cryptography.Tests
 
         protected static void InvalidDeformatterArguments(
             AsymmetricSignatureDeformatter deformatter
-        ) {
+        )
+        {
             Assert.Throws<ArgumentNullException>(() => deformatter.SetKey(null));
             Assert.Throws<ArgumentNullException>(
                 () => deformatter.VerifySignature((byte[])null, new byte[] { 0, 1, 2 })

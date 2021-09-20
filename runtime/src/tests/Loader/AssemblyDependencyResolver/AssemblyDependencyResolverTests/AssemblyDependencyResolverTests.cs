@@ -43,11 +43,13 @@ namespace AssemblyDependencyResolverTests
             using (
                 HostPolicyMock.MockValues_corehost_set_error_writer errorWriterMock =
                     HostPolicyMock.Mock_corehost_set_error_writer()
-            ) {
+            )
+            {
                 using (
                     HostPolicyMock.MockValues_corehost_resolve_component_dependencies resolverMock =
                         HostPolicyMock.Mock_corehost_resolve_component_dependencies(134, "", "", "")
-                ) {
+                )
+                {
                     // When the resolver is called, emulate error behavior
                     // which is to write to the error writer some error message.
                     resolverMock.Callback = (string componentAssemblyPath) =>
@@ -95,11 +97,13 @@ namespace AssemblyDependencyResolverTests
             using (
                 HostPolicyMock.MockValues_corehost_set_error_writer errorWriterMock =
                     HostPolicyMock.Mock_corehost_set_error_writer(previousWriter)
-            ) {
+            )
+            {
                 using (
                     HostPolicyMock.MockValues_corehost_resolve_component_dependencies resolverMock =
                         HostPolicyMock.Mock_corehost_resolve_component_dependencies(134, "", "", "")
-                ) {
+                )
+                {
                     Assert.Throws<InvalidOperationException>(
                         () =>
                         {
@@ -132,7 +136,8 @@ namespace AssemblyDependencyResolverTests
             using (
                 HostPolicyMock.MockValues_corehost_set_error_writer errorWriterMock =
                     HostPolicyMock.Mock_corehost_set_error_writer(previousWriter)
-            ) {
+            )
+            {
                 using (
                     HostPolicyMock.Mock_corehost_resolve_component_dependencies(
                         0,
@@ -140,7 +145,8 @@ namespace AssemblyDependencyResolverTests
                         "",
                         ""
                     )
-                ) {
+                )
+                {
                     AssemblyDependencyResolver resolver = new AssemblyDependencyResolver(
                         Path.Combine(TestBasePath, _componentAssemblyPath)
                     );
@@ -183,7 +189,8 @@ namespace AssemblyDependencyResolverTests
                     "",
                     ""
                 )
-            ) {
+            )
+            {
                 AssemblyDependencyResolver resolver = new AssemblyDependencyResolver(
                     Path.Combine(TestBasePath, _componentAssemblyPath)
                 );
@@ -206,7 +213,8 @@ namespace AssemblyDependencyResolverTests
                     "",
                     _componentDirectory
                 )
-            ) {
+            )
+            {
                 AssemblyDependencyResolver resolver = new AssemblyDependencyResolver(
                     Path.Combine(TestBasePath, _componentAssemblyPath)
                 );
@@ -235,7 +243,8 @@ namespace AssemblyDependencyResolverTests
                     "",
                     _componentDirectory
                 )
-            ) {
+            )
+            {
                 AssemblyDependencyResolver resolver = new AssemblyDependencyResolver(
                     Path.Combine(TestBasePath, _componentAssemblyPath)
                 );
@@ -270,7 +279,8 @@ namespace AssemblyDependencyResolverTests
                     "",
                     $"{_componentDirectory}{Path.PathSeparator}{Path.GetDirectoryName(Path.GetDirectoryName(frResourcePath))}"
                 )
-            ) {
+            )
+            {
                 AssemblyDependencyResolver resolver = new AssemblyDependencyResolver(
                     Path.Combine(TestBasePath, _componentAssemblyPath)
                 );
@@ -300,7 +310,8 @@ namespace AssemblyDependencyResolverTests
                     "",
                     ""
                 )
-            ) {
+            )
+            {
                 AssemblyDependencyResolver resolver = new AssemblyDependencyResolver(
                     Path.Combine(TestBasePath, _componentAssemblyPath)
                 );
@@ -325,7 +336,8 @@ namespace AssemblyDependencyResolverTests
                     Path.GetDirectoryName(nativeLibraryPath),
                     ""
                 )
-            ) {
+            )
+            {
                 AssemblyDependencyResolver resolver = new AssemblyDependencyResolver(
                     Path.Combine(TestBasePath, _componentAssemblyPath)
                 );
@@ -352,7 +364,8 @@ namespace AssemblyDependencyResolverTests
                     $"{Path.GetDirectoryName(oneNativeLibraryPath)}{Path.PathSeparator}{Path.GetDirectoryName(twoNativeLibraryPath)}",
                     ""
                 )
-            ) {
+            )
+            {
                 AssemblyDependencyResolver resolver = new AssemblyDependencyResolver(
                     Path.Combine(TestBasePath, _componentAssemblyPath)
                 );

@@ -33,7 +33,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             IMutableEntityType rightEntityType,
             IMutableSkipNavigation leftNavigation,
             IMutableSkipNavigation rightNavigation
-        ) {
+        )
+        {
             Check.DebugAssert(((IConventionEntityType)leftEntityType).IsInModel, "Not in model");
             Check.DebugAssert(((IConventionEntityType)rightEntityType).IsInModel, "Not in model");
             Check.DebugAssert(
@@ -96,7 +97,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns> The builder for the originating entity type so that multiple configuration calls can be chained. </returns>
         public virtual EntityTypeBuilder UsingEntity(
             Action<EntityTypeBuilder> configureJoinEntityType
-        ) {
+        )
+        {
             Check.DebugAssert(
                 LeftNavigation.JoinEntityType != null,
                 "LeftNavigation.JoinEntityType is null"
@@ -127,7 +129,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             Type joinEntityType,
             Func<EntityTypeBuilder, ReferenceCollectionBuilder> configureRight,
             Func<EntityTypeBuilder, ReferenceCollectionBuilder> configureLeft
-        ) {
+        )
+        {
             Check.NotNull(joinEntityType, nameof(joinEntityType));
             Check.NotNull(configureRight, nameof(configureRight));
             Check.NotNull(configureLeft, nameof(configureLeft));
@@ -142,7 +145,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
                 if (
                     existingJoinEntityType.ClrType == joinEntityType
                     && !existingJoinEntityType.HasSharedClrType
-                ) {
+                )
+                {
                     newJoinEntityType = existingJoinEntityType;
                 }
                 else
@@ -180,7 +184,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             Type joinEntityType,
             Func<EntityTypeBuilder, ReferenceCollectionBuilder> configureRight,
             Func<EntityTypeBuilder, ReferenceCollectionBuilder> configureLeft
-        ) {
+        )
+        {
             Check.NotEmpty(joinEntityName, nameof(joinEntityName));
             Check.NotNull(joinEntityType, nameof(joinEntityType));
             Check.NotNull(configureRight, nameof(configureRight));
@@ -200,7 +205,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
                         joinEntityName,
                         StringComparison.Ordinal
                     )
-                ) {
+                )
+                {
                     newJoinEntityType = existingJoinEntityType;
                 }
                 else
@@ -257,7 +263,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             Func<EntityTypeBuilder, ReferenceCollectionBuilder> configureRight,
             Func<EntityTypeBuilder, ReferenceCollectionBuilder> configureLeft,
             Action<EntityTypeBuilder> configureJoinEntityType
-        ) {
+        )
+        {
             Check.NotNull(joinEntityType, nameof(joinEntityType));
             Check.NotNull(configureRight, nameof(configureRight));
             Check.NotNull(configureLeft, nameof(configureLeft));
@@ -284,7 +291,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             Func<EntityTypeBuilder, ReferenceCollectionBuilder> configureRight,
             Func<EntityTypeBuilder, ReferenceCollectionBuilder> configureLeft,
             Action<EntityTypeBuilder> configureJoinEntityType
-        ) {
+        )
+        {
             Check.NotEmpty(joinEntityName, nameof(joinEntityName));
             Check.NotNull(joinEntityType, nameof(joinEntityType));
             Check.NotNull(configureRight, nameof(configureRight));
@@ -312,7 +320,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         protected virtual void Using(
             IMutableForeignKey rightForeignKey,
             IMutableForeignKey leftForeignKey
-        ) {
+        )
+        {
             var leftBuilder = ((SkipNavigation)LeftNavigation).Builder;
             var rightBuilder = ((SkipNavigation)RightNavigation).Builder;
 

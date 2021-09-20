@@ -347,7 +347,8 @@ namespace System.IO.Tests
         private void FileMove_NestedDirectory(
             WatcherChangeTypes eventType,
             bool includeSubdirectories
-        ) {
+        )
+        {
             using (var dir = new TempDirectory(GetTestFilePath()))
             using (var firstDir = new TempDirectory(Path.Combine(dir.Path, "dir1")))
             using (var nestedDir = new TempDirectory(Path.Combine(firstDir.Path, "nested")))
@@ -387,7 +388,8 @@ namespace System.IO.Tests
             using (var file = new TempFile(Path.Combine(testDirectory.Path, "file")))
             using (
                 var watcher = new FileSystemWatcher(testDirectory.Path, Path.GetFileName(file.Path))
-            ) {
+            )
+            {
                 watcher.NotifyFilter = NotifyFilters.FileName;
                 string sourcePath = file.Path;
                 string targetPath = Path.Combine(testDirectory.Path, "target");

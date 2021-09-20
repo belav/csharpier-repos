@@ -26,7 +26,8 @@ namespace Microsoft.AspNetCore.Builder
             this IRouteBuilder routeBuilder,
             string? name,
             string? template
-        ) {
+        )
+        {
             MapRoute(routeBuilder, name, template, defaults: null);
             return routeBuilder;
         }
@@ -47,7 +48,8 @@ namespace Microsoft.AspNetCore.Builder
             string? name,
             string? template,
             object? defaults
-        ) {
+        )
+        {
             return MapRoute(routeBuilder, name, template, defaults, constraints: null);
         }
 
@@ -73,7 +75,8 @@ namespace Microsoft.AspNetCore.Builder
             string? template,
             object? defaults,
             object? constraints
-        ) {
+        )
+        {
             return MapRoute(routeBuilder, name, template, defaults, constraints, dataTokens: null);
         }
 
@@ -104,7 +107,8 @@ namespace Microsoft.AspNetCore.Builder
             object? defaults,
             object? constraints,
             object? dataTokens
-        ) {
+        )
+        {
             if (routeBuilder.DefaultHandler == null)
             {
                 throw new RouteCreationException(
@@ -129,7 +133,8 @@ namespace Microsoft.AspNetCore.Builder
 
         private static IInlineConstraintResolver CreateInlineConstraintResolver(
             IServiceProvider serviceProvider
-        ) {
+        )
+        {
             var inlineConstraintResolver =
                 serviceProvider.GetRequiredService<IInlineConstraintResolver>();
 
@@ -152,7 +157,8 @@ namespace Microsoft.AspNetCore.Builder
             public BackCompatInlineConstraintResolver(
                 IInlineConstraintResolver inner,
                 ParameterPolicyFactory parameterPolicyFactory
-            ) {
+            )
+            {
                 _inner = inner;
                 _parameterPolicyFactory = parameterPolicyFactory;
             }

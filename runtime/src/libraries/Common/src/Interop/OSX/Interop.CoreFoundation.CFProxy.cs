@@ -127,7 +127,8 @@ internal static partial class Interop
                         LoadSymbol(lib, name),
                         false
                     )
-                ) {
+                )
+                {
                     Debug.Assert(!cfString.IsInvalid);
                     return Interop.CoreFoundation.CFStringToString(cfString);
                 }
@@ -160,7 +161,8 @@ internal static partial class Interop
                         dictValue != IntPtr.Zero
                         && CFNumberGetValue(dictValue, CFNumberType.kCFNumberIntType, out int value)
                             > 0
-                    ) {
+                    )
+                    {
                         return value;
                     }
                     return -1;

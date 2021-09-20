@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
             ProjectKey project,
             string name,
             out long dataId
-        ) {
+        )
+        {
             dataId = 0;
 
             var projectId = TryGetProjectId(connection, project);

@@ -154,7 +154,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public void DisplayName_ReturnsRightmostExpressionSegment_IfPropertiesNotFound(
             string expression,
             string expectedResult
-        ) {
+        )
+        {
             // Arrange
             var helper = DefaultTemplatesUtilities.GetHtmlHelper();
 

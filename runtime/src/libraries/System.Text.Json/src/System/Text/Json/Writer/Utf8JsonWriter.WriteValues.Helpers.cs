@@ -51,7 +51,8 @@ namespace System.Text.Json
             ReadOnlySpan<byte> bytes,
             Span<byte> output,
             int encodingLength
-        ) {
+        )
+        {
             byte[]? outputText = null;
 
             Span<byte> encodedBytes =

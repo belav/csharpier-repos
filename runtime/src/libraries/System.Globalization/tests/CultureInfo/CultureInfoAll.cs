@@ -491,7 +491,8 @@ namespace System.Globalization.Tests
             if (
                 GetCalendarInfoEx(ci.Name, calendar, IntPtr.Zero, calType, sb, 400, IntPtr.Zero)
                 <= 0
-            ) {
+            )
+            {
                 Assert.False(
                     throwInFail,
                     string.Format(
@@ -512,7 +513,8 @@ namespace System.Globalization.Tests
             int calendar,
             string pReserved,
             IntPtr lParam
-        ) {
+        )
+        {
             _optionalCals.Add(calendar);
             return true;
         }
@@ -541,7 +543,8 @@ namespace System.Globalization.Tests
             int calendar,
             string pReserved,
             IntPtr lParam
-        ) {
+        )
+        {
             _calPatterns.Add(ReescapeWin32String(lpCalendarInfoString));
             return true;
         }
@@ -2044,7 +2047,8 @@ namespace System.Globalization.Tests
             string alternativeCultureName,
             string consoleUICultureName,
             bool expectToThrowOnBrowser = false
-        ) {
+        )
+        {
             if (!expectToThrowOnBrowser || PlatformDetection.IsNotBrowser)
             {
                 _ = alternativeCultureName;
@@ -2205,7 +2209,8 @@ namespace System.Globalization.Tests
             string alternativeCultureName,
             string consoleUICultureName,
             bool expectToThrowOnBrowser = false
-        ) {
+        )
+        {
             if (!expectToThrowOnBrowser || PlatformDetection.IsNotBrowser)
             {
                 _ = lcid;

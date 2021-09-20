@@ -73,7 +73,8 @@ namespace Internal.NativeCrypto
             string pszAlgId,
             string? pszImplementation,
             OpenAlgorithmProviderFlags dwFlags
-        ) {
+        )
+        {
             SafeAlgorithmHandle hAlgorithm;
             NTSTATUS ntStatus = Interop.BCryptOpenAlgorithmProvider(
                 out hAlgorithm,
@@ -120,7 +121,8 @@ namespace Internal.NativeCrypto
         public static void SetEffectiveKeyLength(
             this SafeAlgorithmHandle hAlg,
             int effectiveKeyLength
-        ) {
+        )
+        {
             NTSTATUS ntStatus = Interop.BCryptSetIntProperty(
                 hAlg,
                 BCryptPropertyStrings.BCRYPT_EFFECTIVE_KEY_LENGTH,
@@ -180,7 +182,8 @@ namespace Internal.NativeCrypto
                 string pszProperty,
                 ref int pdwInput,
                 int dwFlags
-            ) {
+            )
+            {
                 return BCryptSetIntPropertyPrivate(
                     hObject,
                     pszProperty,

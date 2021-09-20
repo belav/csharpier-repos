@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.WebSockets.Test
             out int port,
             Func<HttpContext, Task> app,
             Action<WebSocketOptions> configure = null
-        ) {
+        )
+        {
             configure = configure ?? (o => { });
             Action<IApplicationBuilder> startup = builder =>
             {

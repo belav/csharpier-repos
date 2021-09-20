@@ -35,11 +35,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             base.Free();
         }
 
-        internal ControlFlowPass(
-            CSharpCompilation compilation,
-            Symbol member,
-            BoundNode node
-        ) : base(compilation, member, node) { }
+        internal ControlFlowPass(CSharpCompilation compilation, Symbol member, BoundNode node)
+            : base(compilation, member, node) { }
 
         internal ControlFlowPass(
             CSharpCompilation compilation,
@@ -163,7 +160,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Symbol member,
             BoundBlock block,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             var walker = new ControlFlowPass(compilation, member, block);
 
             if (diagnostics != null)
@@ -281,7 +279,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 && !this.State.Reported
                 && !statement.WasCompilerGenerated
                 && statement.Syntax.Span.Length != 0
-            ) {
+            )
+            {
                 var firstToken = statement.Syntax.GetFirstToken();
                 Diagnostics.Add(ErrorCode.WRN_UnreachableCode, new SourceLocation(firstToken));
                 this.State.Reported = true;
@@ -292,7 +291,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundStatement tryBlock,
             BoundTryStatement node,
             ref LocalState tryState
-        ) {
+        )
+        {
             if (node.CatchBlocks.IsEmpty)
             {
                 base.VisitTryBlock(tryBlock, node, ref tryState);
@@ -307,7 +307,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         protected override void VisitCatchBlock(
             BoundCatchBlock catchBlock,
             ref LocalState finallyState
-        ) {
+        )
+        {
             var oldPending = SavePending(); // we do not support branches into a catch block
             base.VisitCatchBlock(catchBlock, ref finallyState);
             RestorePending(oldPending);
@@ -316,7 +317,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         protected override void VisitFinallyBlock(
             BoundStatement finallyBlock,
             ref LocalState endState
-        ) {
+        )
+        {
             var oldPending1 = SavePending(); // we do not support branches into a finally block
             var oldPending2 = SavePending(); // track only the branches out of the finally block
             base.VisitFinallyBlock(finallyBlock, ref endState);

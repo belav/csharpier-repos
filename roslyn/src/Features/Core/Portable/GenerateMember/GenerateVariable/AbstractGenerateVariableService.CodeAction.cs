@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                 bool isReadonly,
                 bool isConstant,
                 RefKind refKind
-            ) {
+            )
+            {
                 _semanticDocument = document;
                 _state = state;
                 _generateProperty = generateProperty;
@@ -52,7 +53,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
 
             protected override async Task<Document> GetChangedDocumentAsync(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var solution = _semanticDocument.Project.Solution;
                 var generateUnsafe =
                     _state.TypeMemberType.RequiresUnsafeModifier()
@@ -179,7 +181,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                 if (
                     AccessibilityUtilities.Minimum(effectiveAccessibility, returnTypeAccessibility)
                     != effectiveAccessibility
-                ) {
+                )
+                {
                     return returnTypeAccessibility;
                 }
 
@@ -201,7 +204,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                     syntaxFacts.IsAttributeNamedArgumentIdentifier(
                         state.SimpleNameOrMemberAccessExpressionOpt
                     )
-                ) {
+                )
+                {
                     return Accessibility.Public;
                 }
                 else if (state.ContainingType.IsContainedWithin(state.TypeToGenerateIn))
@@ -232,7 +236,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                     state.ContainingType.ContainingAssembly.IsSameAssemblyOrHasFriendAccessTo(
                         state.TypeToGenerateIn.ContainingAssembly
                     )
-                ) {
+                )
+                {
                     return Accessibility.Internal;
                 }
                 else

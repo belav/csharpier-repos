@@ -402,7 +402,8 @@ namespace System.Data.OleDb
         private unsafe void ApplyParameterBindings(
             UnsafeNativeMethods.ICommandWithParameters commandWithParameters,
             tagDBPARAMBINDINFO[] bindInfo
-        ) {
+        )
+        {
             IntPtr[] ordinals = new IntPtr[bindInfo.Length];
             for (int i = 0; i < ordinals.Length; ++i)
             {
@@ -862,7 +863,8 @@ namespace System.Data.OleDb
                 if (
                     (0 == (CommandBehavior.SingleResult & this.commandBehavior))
                     && _connection!.SupportMultipleResults()
-                ) {
+                )
+                {
                     retcode = ExecuteCommandTextForMultpleResults(dbParams!, out executeResult);
                 }
                 else if (0 == (CommandBehavior.SingleRow & this.commandBehavior) || !_executeQuery)
@@ -888,7 +890,8 @@ namespace System.Data.OleDb
         private int ExecuteCommandTextForMultpleResults(
             tagDBPARAMS dbParams,
             out object executeResult
-        ) {
+        )
+        {
             Debug.Assert(
                 0 == (CommandBehavior.SingleRow & this.commandBehavior),
                 "SingleRow implies SingleResult"
@@ -914,7 +917,8 @@ namespace System.Data.OleDb
         private int ExecuteCommandTextForSingleResult(
             tagDBPARAMS dbParams,
             out object executeResult
-        ) {
+        )
+        {
             OleDbHResult hr;
 
             // (Microsoft.Jet.OLEDB.4.0 returns 0 for recordsAffected instead of -1)
@@ -990,7 +994,8 @@ namespace System.Data.OleDb
             if (
                 ((OleDbHResult.DB_E_ERRORSOCCURRED == hr) || (OleDbHResult.DB_E_BADBINDINFO == hr))
                 && (null != _dbBindings)
-            ) {
+            )
+            {
                 //
                 // this code exist to try for a better user error message by post-morten detection
                 // of invalid parameter types being passed to a provider that doesn't understand
@@ -1021,7 +1026,8 @@ namespace System.Data.OleDb
                     CommandBehavior.Default,
                     ADP.ExecuteScalar
                 )!
-            ) {
+            )
+            {
                 if (reader.Read() && (0 < reader.FieldCount))
                 {
                     value = reader.GetValue(0);
@@ -1235,7 +1241,8 @@ namespace System.Data.OleDb
             if (
                 (0 != (CommandBehavior.KeyInfo & (this.commandBehavior ^ behavior)))
                 || (_lastChangeID != changeid)
-            ) {
+            )
+            {
                 CloseInternalParameters(); // could optimize out
                 CloseInternalCommand();
             }

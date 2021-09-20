@@ -89,7 +89,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.FixReturnType
             Document document,
             ImmutableArray<Diagnostic> diagnostics,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(diagnostics.Length == 1);
             var location = diagnostics[0].Location;
             var node = location.FindNode(getInnermostNodeForTie: true, cancellationToken);
@@ -142,7 +143,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.FixReturnType
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var (declarationTypeToFix, fixedDeclaration) = await TryGetOldAndNewReturnTypeAsync(
                     document,
                     diagnostics,
@@ -162,7 +164,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.FixReturnType
             // Local functions
             static (TypeSyntax type, bool useTask) TryGetReturnTypeToFix(
                 SyntaxNode containingMember
-            ) {
+            )
+            {
                 switch (containingMember)
                 {
                     case MethodDeclarationSyntax method:
@@ -188,13 +191,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.FixReturnType
 
         private class MyCodeAction : CodeAction.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                CSharpFeaturesResources.Fix_return_type,
-                createChangedDocument,
-                CSharpFeaturesResources.Fix_return_type
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    CSharpFeaturesResources.Fix_return_type,
+                    createChangedDocument,
+                    CSharpFeaturesResources.Fix_return_type
+                ) { }
         }
     }
 }

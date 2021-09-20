@@ -2347,7 +2347,8 @@ namespace System.Text.Tests
         public void Decode_InvalidChars_WithCustomReplacementFallback(
             string replacementString,
             string expected
-        ) {
+        )
+        {
             byte[] utf8Input = new byte[]
             {
                 0xC0, // always an invalid byte

@@ -47,7 +47,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
         public DefaultKeyResolver(
             IOptions<KeyManagementOptions> keyManagementOptions,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             _keyPropagationWindow = keyManagementOptions.Value.KeyPropagationWindow;
             _maxServerToServerClockSkew = keyManagementOptions.Value.MaxServerClockSkew;
             _logger = loggerFactory.CreateLogger<DefaultKeyResolver>();
@@ -83,7 +84,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             IEnumerable<IKey> allKeys,
             out IKey? fallbackKey,
             out bool callerShouldGenerateNewKey
-        ) {
+        )
+        {
             // find the preferred default key (allowing for server-to-server clock skew)
             var preferredDefaultKey = (
                 from key in allKeys
@@ -104,7 +106,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
                     preferredDefaultKey.IsRevoked
                     || preferredDefaultKey.IsExpired(now)
                     || !CanCreateAuthenticatedEncryptor(preferredDefaultKey)
-                ) {
+                )
+                {
                     _logger.KeyIsNoLongerUnderConsiderationAsDefault(preferredDefaultKey.KeyId);
                     preferredDefaultKey = null;
                 }
@@ -163,7 +166,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
         public DefaultKeyResolution ResolveDefaultKeyPolicy(
             DateTimeOffset now,
             IEnumerable<IKey> allKeys
-        ) {
+        )
+        {
             var retVal = default(DefaultKeyResolution);
             retVal.DefaultKey = FindDefaultKey(
                 now,

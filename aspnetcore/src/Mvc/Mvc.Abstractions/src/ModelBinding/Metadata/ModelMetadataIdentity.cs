@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
             Type? containerType = null,
             object? fieldInfo = null,
             ConstructorInfo? constructorInfo = null
-        ) {
+        )
+        {
             ModelType = modelType;
             Name = name;
             ContainerType = containerType;
@@ -55,7 +56,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
             Type modelType,
             string name,
             Type containerType
-        ) {
+        )
+        {
             if (modelType == null)
             {
                 throw new ArgumentNullException(nameof(modelType));
@@ -85,7 +87,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
             PropertyInfo propertyInfo,
             Type modelType,
             Type containerType
-        ) {
+        )
+        {
             if (propertyInfo == null)
             {
                 throw new ArgumentNullException(nameof(propertyInfo));
@@ -149,7 +152,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
         public static ModelMetadataIdentity ForConstructor(
             ConstructorInfo constructor,
             Type modelType
-        ) {
+        )
+        {
             if (constructor == null)
             {
                 throw new ArgumentNullException(nameof(constructor));

@@ -43,7 +43,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.PatternContexts
             string[] pushDirectory,
             string expectSegment,
             bool expectLast
-        ) {
+        )
+        {
             var pattern = MockLinearPatternBuilder.New().Add(testSegments).Build();
             var context = new PatternContextLinearInclude(pattern);
             PatternContextHelper.PushDirectory(context, pushDirectory);
@@ -68,7 +69,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.PatternContexts
         public void PredictNotCallBackWhenEnterUnmatchDirectory(
             string[] testSegments,
             string[] pushDirectory
-        ) {
+        )
+        {
             var pattern = MockLinearPatternBuilder.New().Add(testSegments).Build();
             var context = new PatternContextLinearInclude(pattern);
             PatternContextHelper.PushDirectory(context, pushDirectory);
@@ -96,7 +98,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.PatternContexts
             string[] pushDirectory,
             string filename,
             bool expectResult
-        ) {
+        )
+        {
             var pattern = MockLinearPatternBuilder.New().Add(testSegments).Build();
             var context = new PatternContextLinearInclude(pattern);
             PatternContextHelper.PushDirectory(context, pushDirectory);
@@ -121,7 +124,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.PatternContexts
             string[] pushDirectory,
             string filename,
             bool expectResult
-        ) {
+        )
+        {
             var pattern = MockLinearPatternBuilder.New().Add(testSegments).Build();
             var context = new PatternContextLinearExclude(pattern);
             PatternContextHelper.PushDirectory(context, pushDirectory);
@@ -141,7 +145,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.PatternContexts
             string[] pushDirectory,
             string directoryName,
             bool expectResult
-        ) {
+        )
+        {
             var pattern = MockLinearPatternBuilder.New().Add(testSegments).Build();
             var context = new PatternContextLinearInclude(pattern);
             PatternContextHelper.PushDirectory(context, pushDirectory);
@@ -161,7 +166,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.PatternContexts
             string[] pushDirectory,
             string directoryName,
             bool expectResult
-        ) {
+        )
+        {
             var pattern = MockLinearPatternBuilder.New().Add(testSegments).Build();
             var context = new PatternContextLinearExclude(pattern);
             PatternContextHelper.PushDirectory(context, pushDirectory);

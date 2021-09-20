@@ -119,7 +119,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     TestData.PfxDataPassword,
                     X509KeyStorageFlags.Exportable
                 )
-            ) {
+            )
+            {
                 Assert.True(cert.HasPrivateKey, "cert.HasPrivateKey");
                 const string password = "PLACEHOLDER";
 
@@ -146,7 +147,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     TestData.PfxDataPassword,
                     X509KeyStorageFlags.Exportable
                 )
-            ) {
+            )
+            {
                 Assert.True(cert.HasPrivateKey, "cert.HasPrivateKey");
 
                 byte[] pfxBytes = cert.Export(X509ContentType.Pkcs12);
@@ -231,7 +233,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                         ImportedCollection matches = new ImportedCollection(
                             coll.Find(X509FindType.FindBySubjectName, commonName, false)
                         )
-                    ) {
+                    )
+                    {
                         foreach (X509Certificate2 cert in matches.Collection)
                         {
                             cuMy.Remove(cert);

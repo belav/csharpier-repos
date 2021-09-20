@@ -17,7 +17,8 @@ namespace Internal.Cryptography
             int paddingSize,
             int feedbackSize,
             bool encrypting
-        ) {
+        )
+        {
             SafeAlgorithmHandle algorithm = TripleDesBCryptModes.GetSharedHandle(
                 cipherMode,
                 feedbackSize

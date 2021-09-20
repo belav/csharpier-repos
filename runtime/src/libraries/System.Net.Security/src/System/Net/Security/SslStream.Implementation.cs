@@ -52,7 +52,8 @@ namespace System.Net.Security
             SslClientAuthenticationOptions sslClientAuthenticationOptions,
             RemoteCertificateValidationCallback? remoteCallback,
             LocalCertSelectionCallback? localCallback
-        ) {
+        )
+        {
             ThrowIfExceptional();
 
             if (_context != null && _context.IsValidContext)
@@ -178,7 +179,8 @@ namespace System.Net.Security
             ReadOnlyMemory<byte> buffer,
             ref byte[] outBuffer,
             out int outSize
-        ) {
+        )
+        {
             ThrowIfExceptionalOrNotAuthenticated();
 
             lock (_handshakeLock)
@@ -217,7 +219,8 @@ namespace System.Net.Security
             bool isAsync = false,
             bool isApm = false,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             ThrowIfExceptional();
 
             if (NetSecurityTelemetry.Log.IsEnabled())
@@ -253,7 +256,8 @@ namespace System.Net.Security
             bool isAsync,
             bool isApm,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             NetSecurityTelemetry.Log.HandshakeStart(
                 _context!.IsServer,
                 _sslAuthenticationOptions!.TargetHost
@@ -441,7 +445,8 @@ namespace System.Net.Security
                             _lastFrame.Header.Type == TlsContentType.Handshake
                             || _lastFrame.Header.Type == TlsContentType.ChangeCipherSpec
                         )
-                    ) {
+                    )
+                    {
                         // If we failed without OS sending out alert, inject one here to be consistent across platforms.
                         payload = TlsFrameHelper.CreateAlertFrame(
                             _lastFrame.Header.Version,
@@ -469,7 +474,8 @@ namespace System.Net.Security
                             _lastFrame.Header.Type == TlsContentType.Alert
                             && _lastFrame.AlertDescription != TlsAlertDescription.CloseNotify
                             && message.Status.ErrorCode == SecurityStatusPalErrorCode.IllegalMessage
-                        ) {
+                        )
+                        {
                             // Improve generic message and show details if we failed because of TLS Alert.
                             throw new AuthenticationException(
                                 SR.Format(
@@ -504,7 +510,8 @@ namespace System.Net.Security
                         out SslPolicyErrors sslPolicyErrors,
                         out X509ChainStatusFlags chainStatus
                     )
-                ) {
+                )
+                {
                     if (_sslAuthenticationOptions!.CertValidationDelegate != null)
                     {
                         // there may be some chain errors but the decision was made by custom callback. Details should be tracing if enabled.
@@ -521,7 +528,8 @@ namespace System.Net.Security
                     else if (
                         sslPolicyErrors == SslPolicyErrors.RemoteCertificateChainErrors
                         && chainStatus != X509ChainStatusFlags.NoError
-                    ) {
+                    )
+                    {
                         // We failed only because of chain and we have some insight.
                         SendAuthResetSignal(
                             alertToken,
@@ -625,7 +633,8 @@ namespace System.Net.Security
                         _handshakeBuffer.ActiveReadOnlySpan,
                         ref _lastFrame
                     )
-                ) {
+                )
+                {
                     if (
                         NetEventSource.Log.IsEnabled()
                         && _lastFrame.AlertDescription != TlsAlertDescription.CloseNotify
@@ -645,7 +654,8 @@ namespace System.Net.Security
                         _sslAuthenticationOptions!.ServerCertSelectionDelegate != null
                         || _sslAuthenticationOptions!.ServerOptionDelegate != null
                     )
-                ) {
+                )
+                {
                     TlsFrameHelper.ProcessingOptions options = NetEventSource.Log.IsEnabled()
                         ? TlsFrameHelper.ProcessingOptions.All
                         : TlsFrameHelper.ProcessingOptions.ServerName;
@@ -657,7 +667,8 @@ namespace System.Net.Security
                             ref _lastFrame,
                             options
                         )
-                    ) {
+                    )
+                    {
                         if (NetEventSource.Log.IsEnabled())
                             NetEventSource.Error(this, $"Failed to parse TLS hello.");
                     }
@@ -719,7 +730,8 @@ namespace System.Net.Security
                             _handshakeBuffer.ActiveReadOnlySpan,
                             ref nextHeader
                         )
-                    ) {
+                    )
+                    {
                         break;
                     }
 
@@ -731,7 +743,8 @@ namespace System.Net.Security
                             && nextHeader.Type != TlsContentType.ChangeCipherSpec
                         )
                         || frameSize > _handshakeBuffer.ActiveLength
-                    ) {
+                    )
+                    {
                         // We don't have full frame left or we already have app data which needs to be processed by decrypt.
                         break;
                     }
@@ -777,7 +790,8 @@ namespace System.Net.Security
             ref ProtocolToken? alertToken,
             out SslPolicyErrors sslPolicyErrors,
             out X509ChainStatusFlags chainStatus
-        ) {
+        )
+        {
             _context!.ProcessHandshakeSuccess();
 
             if (
@@ -787,7 +801,8 @@ namespace System.Net.Security
                     out sslPolicyErrors,
                     out chainStatus
                 )
-            ) {
+            )
+            {
                 _handshakeCompleted = false;
                 return false;
             }
@@ -871,7 +886,8 @@ namespace System.Net.Security
                 ReadOnlyMemory<byte> buffer,
                 Task waitTask,
                 byte[] rentedBuffer
-            ) {
+            )
+            {
                 byte[]? bufferToReturn = rentedBuffer;
                 byte[] outBuffer = rentedBuffer;
                 try
@@ -1053,7 +1069,8 @@ namespace System.Net.Security
                             if (
                                 _sslAuthenticationOptions!.AllowRenegotiation
                                 || SslProtocol == SslProtocols.Tls13
-                            ) {
+                            )
+                            {
                                 // create TCS only if we plan to proceed. If not, we will throw in block bellow outside of the lock.
                                 // Tls1.3 does not have renegotiation. However on Windows this error code is used
                                 // for session management e.g. anything lsass needs to see.
@@ -1119,7 +1136,8 @@ namespace System.Net.Security
                         e is OperationCanceledException
                         && adapter.CancellationToken.IsCancellationRequested
                     )
-                ) {
+                )
+                {
                     throw;
                 }
 
@@ -1168,7 +1186,8 @@ namespace System.Net.Security
                 TIOAdapter adap,
                 ValueTask<int> task,
                 int minSize
-            ) {
+            )
+            {
                 while (true)
                 {
                     int bytesRead = await task.ConfigureAwait(false);
@@ -1247,7 +1266,8 @@ namespace System.Net.Security
                         e is OperationCanceledException
                         && writeAdapter.CancellationToken.IsCancellationRequested
                     )
-                ) {
+                )
+                {
                     throw;
                 }
 
@@ -1400,7 +1420,8 @@ namespace System.Net.Security
                 bytes[0] == (byte)TlsContentType.Handshake
                 || bytes[0] == (byte)TlsContentType.AppData
                 || bytes[0] == (byte)TlsContentType.Alert
-            ) {
+            )
+            {
                 if (bytes.Length < 3)
                 {
                     return Framing.Invalid;

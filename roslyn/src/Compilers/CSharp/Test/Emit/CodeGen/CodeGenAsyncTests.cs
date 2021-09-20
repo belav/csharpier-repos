@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
             string source,
             IEnumerable<MetadataReference> references = null,
             CSharpCompilationOptions options = null
-        ) {
+        )
+        {
             options = options ?? TestOptions.ReleaseExe;
 
             IEnumerable<MetadataReference> asyncRefs = new[]
@@ -47,7 +48,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
             IEnumerable<MetadataReference> references = null,
             CSharpCompilationOptions options = null,
             Verification verify = Verification.Passes
-        ) {
+        )
+        {
             var compilation = CreateCompilation(source, references: references, options: options);
             return base.CompileAndVerify(
                 compilation,
@@ -3408,7 +3410,8 @@ class C
             string tasklikeTypeName,
             string genericTypeParameter = null,
             bool isStruct = false
-        ) {
+        )
+        {
             string ofT = genericTypeParameter == null ? "" : "<" + genericTypeParameter + ">";
             return $@"
 public {(isStruct ? "struct" : "class")} {builderTypeName}{ofT}

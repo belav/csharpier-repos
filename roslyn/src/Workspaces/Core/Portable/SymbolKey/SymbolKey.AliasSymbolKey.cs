@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis
             public static SymbolKeyResolution Resolve(
                 SymbolKeyReader reader,
                 out string? failureReason
-            ) {
+            )
+            {
                 var name = reader.ReadString()!;
                 var targetResolution = reader.ReadSymbolKey(out var targetFailureReason);
                 var filePath = reader.ReadString()!;
@@ -68,7 +69,8 @@ namespace Microsoft.CodeAnalysis
                 string name,
                 ISymbol target,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var symbol = semanticModel.GetDeclaredSymbol(syntaxNode, cancellationToken);
                 if (symbol != null)
                 {
@@ -78,7 +80,8 @@ namespace Microsoft.CodeAnalysis
                         if (
                             aliasSymbol.Name == name
                             && SymbolEquivalenceComparer.Instance.Equals(aliasSymbol.Target, target)
-                        ) {
+                        )
+                        {
                             return new SymbolKeyResolution(aliasSymbol);
                         }
                     }

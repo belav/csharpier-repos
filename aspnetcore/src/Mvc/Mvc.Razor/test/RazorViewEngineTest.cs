@@ -400,7 +400,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
         [InlineData("/Home/Test-View.cshtml")]
         public void GetView_DoesNotUseViewLocationFormat_WithRelativePath_IfRouteDoesNotContainArea(
             string viewName
-        ) {
+        )
+        {
             // Arrange
             var expectedViewName = "/Home/Test-View.cshtml";
             var pageFactory = new Mock<IRazorPageFactoryProvider>();
@@ -424,7 +425,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
         [InlineData("/Home/Test-View.cshtml")]
         public void GetView_DoesNotUseViewLocationFormat_WithRelativePath_IfRouteContainArea(
             string viewName
-        ) {
+        )
+        {
             // Arrange
             var expectedViewName = "/Home/Test-View.cshtml";
             var pageFactory = new Mock<IRazorPageFactoryProvider>();
@@ -504,7 +506,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
         [InlineData("Path1/Path2/Test-View.cshtml")]
         public void GetView_ResolvesRelativeToAppRoot_WithRelativePath_IfNoPageExecuting(
             string viewName
-        ) {
+        )
+        {
             // Arrange
             var expectedViewName = $"/{viewName}";
             var pageFactory = new Mock<IRazorPageFactoryProvider>();
@@ -534,7 +537,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
         [InlineData(true)]
         public void FindView_CreatesDifferentCacheEntries_ForAreaViewsAndNonAreaViews(
             bool isMainPage
-        ) {
+        )
+        {
             // Arrange
             var pageFactory = new Mock<IRazorPageFactoryProvider>();
             var areaPage = Mock.Of<IRazorPage>();
@@ -1491,7 +1495,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
         [InlineData("Path1/Path2/Test-View.cshtml")]
         public void GetPage_ResolvesRelativeToAppRoot_WithRelativePath_IfNoPageExecuting(
             string pageName
-        ) {
+        )
+        {
             // Arrange
             var expectedPageName = $"/{pageName}";
             var pageFactory = new Mock<IRazorPageFactoryProvider>();
@@ -1524,7 +1529,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
         public void GetAbsolutePath_ReturnsPagePathUnchanged_IfNotAPath(
             string executingFilePath,
             string pagePath
-        ) {
+        )
+        {
             // Arrange
             var viewEngine = CreateViewEngine();
 
@@ -1547,7 +1553,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
         public void GetAbsolutePath_ResolvesPathTraversals(
             string executingFilePath,
             string pagePath
-        ) {
+        )
+        {
             // Arrange
             var viewEngine = CreateViewEngine();
 
@@ -1584,7 +1591,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
         public void GetAbsolutePath_ReturnsPagePathUnchanged_IfAppRelative(
             string executingFilePath,
             string pagePath
-        ) {
+        )
+        {
             // Arrange
             var viewEngine = CreateViewEngine();
 
@@ -2036,7 +2044,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             Func<IRazorPage> factory,
             IList<IChangeToken> changeTokens = null,
             string path = "/Views/Home/Index.cshtml"
-        ) {
+        )
+        {
             var descriptor = new CompiledViewDescriptor
             {
                 ExpirationTokens = changeTokens ?? Array.Empty<IChangeToken>(),
@@ -2049,7 +2058,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
         private TestableRazorViewEngine CreateViewEngine(
             IRazorPageFactoryProvider pageFactory = null,
             IEnumerable<IViewLocationExpander> expanders = null
-        ) {
+        )
+        {
             pageFactory = pageFactory ?? Mock.Of<IRazorPageFactoryProvider>();
             return new TestableRazorViewEngine(pageFactory, GetOptionsAccessor(expanders));
         }
@@ -2059,7 +2069,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             IEnumerable<string> viewLocationFormats = null,
             IEnumerable<string> areaViewLocationFormats = null,
             IEnumerable<string> pageViewLocationFormats = null
-        ) {
+        )
+        {
             var optionsSetup = new RazorViewEngineOptionsSetup();
 
             var options = new RazorViewEngineOptions();
@@ -2126,7 +2137,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
         private static ActionContext GetActionContextWithActionDescriptor(
             IDictionary<string, object> routeValues,
             IDictionary<string, string> actionRouteValues
-        ) {
+        )
+        {
             var httpContext = new DefaultHttpContext();
             var routeData = new RouteData();
             foreach (var kvp in routeValues)
@@ -2149,14 +2161,15 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             public TestableRazorViewEngine(
                 IRazorPageFactoryProvider pageFactory,
                 IOptions<RazorViewEngineOptions> optionsAccessor
-            ) : base(
-                pageFactory,
-                Mock.Of<IRazorPageActivator>(),
-                new HtmlTestEncoder(),
-                optionsAccessor,
-                NullLoggerFactory.Instance,
-                new DiagnosticListener("Microsoft.AspNetCore.Mvc.Razor")
-            ) { }
+            )
+                : base(
+                    pageFactory,
+                    Mock.Of<IRazorPageActivator>(),
+                    new HtmlTestEncoder(),
+                    optionsAccessor,
+                    NullLoggerFactory.Instance,
+                    new DiagnosticListener("Microsoft.AspNetCore.Mvc.Razor")
+                ) { }
 
             public IMemoryCache ViewLookupCachePublic => ViewLookupCache;
         }

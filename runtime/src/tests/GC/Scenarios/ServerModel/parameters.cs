@@ -244,7 +244,8 @@ namespace ServerSimulator
                                 str.Substring("/finalizablerate:".Length),
                                 out finalizableRate
                             )
-                        ) {
+                        )
+                        {
                             Console.WriteLine("Invalid finalizablerate");
                             return false;
                         }
@@ -262,7 +263,8 @@ namespace ServerSimulator
                                 str.Substring("/cachereplacementrate:".Length),
                                 out cacheReplacementRate
                             )
-                        ) {
+                        )
+                        {
                             Console.WriteLine("Invalid cachereplacementrate");
                             return false;
                         }
@@ -280,7 +282,8 @@ namespace ServerSimulator
                                 str.Substring("/survivalrate:".Length),
                                 out survivalRate
                             )
-                        ) {
+                        )
+                        {
                             Console.WriteLine("Invalid survivalrate");
                             return false;
                         }
@@ -312,7 +315,8 @@ namespace ServerSimulator
                                 str.Substring("/allocationvolume:".Length),
                                 out allocationVolume
                             )
-                        ) {
+                        )
+                        {
                             Console.WriteLine("Invalid allocationvolume");
                             return false;
                         }
@@ -344,7 +348,8 @@ namespace ServerSimulator
                                 str.Substring("/steadystatefactor:".Length),
                                 out steadyStateFactor
                             )
-                        ) {
+                        )
+                        {
                             Console.WriteLine("Invalid steadystatefactor");
                             return false;
                         }
@@ -376,7 +381,8 @@ namespace ServerSimulator
                                 str.Substring("/staticdatavolume:".Length),
                                 out staticDataVolume
                             )
-                        ) {
+                        )
+                        {
                             Console.WriteLine("Invalid staticdatavolume");
                             return false;
                         }

@@ -29,7 +29,8 @@ namespace System.Configuration
             string locationSubPath,
             Type typeConfigHost,
             params object[] hostInitConfigurationParams
-        ) {
+        )
+        {
             _typeConfigHost = typeConfigHost;
             _hostInitConfigurationParams = hostInitConfigurationParams;
 

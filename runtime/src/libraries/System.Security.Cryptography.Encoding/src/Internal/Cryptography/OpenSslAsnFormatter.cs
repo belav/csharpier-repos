@@ -44,7 +44,8 @@ namespace Internal.Cryptography
                             false,
                             octetString
                         )
-                    ) {
+                    )
+                    {
                         if (bio.IsInvalid || x509Ext.IsInvalid)
                         {
                             return null;

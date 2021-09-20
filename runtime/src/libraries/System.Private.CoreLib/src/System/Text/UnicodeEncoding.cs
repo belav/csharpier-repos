@@ -159,7 +159,8 @@ namespace System.Text
             int charCount,
             byte[] bytes,
             int byteIndex
-        ) {
+        )
+        {
             if (s == null || bytes == null)
                 throw new ArgumentNullException(
                     s == null ? nameof(s) : nameof(bytes),
@@ -208,7 +209,8 @@ namespace System.Text
             int charCount,
             byte[] bytes,
             int byteIndex
-        ) {
+        )
+        {
             // Validate parameters
             if (chars == null || bytes == null)
                 throw new ArgumentNullException(
@@ -336,7 +338,8 @@ namespace System.Text
             int byteCount,
             char[] chars,
             int charIndex
-        ) {
+        )
+        {
             // Validate Parameters
             if (bytes == null || chars == null)
                 throw new ArgumentNullException(
@@ -443,7 +446,8 @@ namespace System.Text
             char* chars,
             int count,
             EncoderNLS? encoder
-        ) {
+        )
+        {
             Debug.Assert(chars != null, "[UnicodeEncoding.GetByteCount]chars!=null");
             Debug.Assert(count >= 0, "[UnicodeEncoding.GetByteCount]count >=0");
 
@@ -504,7 +508,8 @@ namespace System.Text
                     != 0
                 )
                 || chars < charEnd
-            ) {
+            )
+            {
                 // First unwind any fallback
                 if (ch == 0)
                 {
@@ -524,7 +529,8 @@ namespace System.Text
                         &&
 #endif
                         charLeftOver == 0
-                    ) {
+                    )
+                    {
                         // Need -1 to check 2 at a time.  If we have an even #, longChars will go
                         // from longEnd - 1/2 long to longEnd + 1/2 long.  If we're odd, longChars
                         // will go from longEnd - 1 long to longEnd. (Might not get to use this)
@@ -556,7 +562,8 @@ namespace System.Text
                                     || (uTemp & 0x0000FFFF00000000) == 0
                                     || (uTemp & 0x00000000FFFF0000) == 0
                                     || (uTemp & 0x000000000000FFFF) == 0
-                                ) {
+                                )
+                                {
                                     // It has at least 1 surrogate, but we don't know if they're high or low surrogates,
                                     // or if there's 1 or 4 surrogates
 
@@ -569,7 +576,8 @@ namespace System.Text
                                                 ? (ulong)0xdc00d800dc00d800
                                                 : (ulong)0xd800dc00d800dc00
                                         )
-                                    ) {
+                                    )
+                                    {
                                         // Either there weren't 4 surrogates, or the 0x0400 bit was set when a high
                                         // was hoped for or the 0x0400 bit wasn't set where a low was hoped for.
 
@@ -778,7 +786,8 @@ namespace System.Text
             byte* bytes,
             int byteCount,
             EncoderNLS? encoder
-        ) {
+        )
+        {
             Debug.Assert(chars != null, "[UnicodeEncoding.GetBytes]chars!=null");
             Debug.Assert(byteCount >= 0, "[UnicodeEncoding.GetBytes]byteCount >=0");
             Debug.Assert(charCount >= 0, "[UnicodeEncoding.GetBytes]charCount >=0");
@@ -828,7 +837,8 @@ namespace System.Text
                     != 0
                 )
                 || chars < charEnd
-            ) {
+            )
+            {
                 // First unwind any fallback
                 if (ch == 0)
                 {
@@ -848,7 +858,8 @@ namespace System.Text
                         &&
 #endif
                         charLeftOver == 0
-                    ) {
+                    )
+                    {
                         // Need -1 to check 2 at a time.  If we have an even #, longChars will go
                         // from longEnd - 1/2 long to longEnd + 1/2 long.  If we're odd, longChars
                         // will go from longEnd - 1 long to longEnd. (Might not get to use this)
@@ -889,7 +900,8 @@ namespace System.Text
                                     || (uTemp & 0x0000FFFF00000000) == 0
                                     || (uTemp & 0x00000000FFFF0000) == 0
                                     || (uTemp & 0x000000000000FFFF) == 0
-                                ) {
+                                )
+                                {
                                     // It has at least 1 surrogate, but we don't know if they're high or low surrogates,
                                     // or if there's 1 or 4 surrogates
 
@@ -902,7 +914,8 @@ namespace System.Text
                                                 ? (ulong)0xdc00d800dc00d800
                                                 : (ulong)0xd800dc00d800dc00
                                         )
-                                    ) {
+                                    )
+                                    {
                                         // Either there weren't 4 surrogates, or the 0x0400 bit was set when a high
                                         // was hoped for or the 0x0400 bit wasn't set where a low was hoped for.
 
@@ -1184,7 +1197,8 @@ namespace System.Text
             byte* bytes,
             int count,
             DecoderNLS? baseDecoder
-        ) {
+        )
+        {
             Debug.Assert(bytes != null, "[UnicodeEncoding.GetCharCount]bytes!=null");
             Debug.Assert(count >= 0, "[UnicodeEncoding.GetCharCount]count >=0");
 
@@ -1245,7 +1259,8 @@ namespace System.Text
 #endif // TARGET_64BIT
                     lastByte == -1
                     && lastChar == 0
-                ) {
+                )
+                {
                     // Need -1 to check 2 at a time.  If we have an even #, longBytes will go
                     // from longEnd - 1/2 long to longEnd + 1/2 long.  If we're odd, longBytes
                     // will go from longEnd - 1 long to longEnd. (Might not get to use this)
@@ -1276,7 +1291,8 @@ namespace System.Text
                                 || (uTemp & 0x0000FFFF00000000) == 0
                                 || (uTemp & 0x00000000FFFF0000) == 0
                                 || (uTemp & 0x000000000000FFFF) == 0
-                            ) {
+                            )
+                            {
                                 // It has at least 1 surrogate, but we don't know if they're high or low surrogates,
                                 // or if there's 1 or 4 surrogates
 
@@ -1289,7 +1305,8 @@ namespace System.Text
                                             ? (ulong)0xdc00d800dc00d800
                                             : (ulong)0xd800dc00d800dc00
                                     )
-                                ) {
+                                )
+                                {
                                     // Either there weren't 4 surrogates, or the 0x0400 bit was set when a high
                                     // was hoped for or the 0x0400 bit wasn't set where a low was hoped for.
 
@@ -1559,7 +1576,8 @@ namespace System.Text
             char* chars,
             int charCount,
             DecoderNLS? baseDecoder
-        ) {
+        )
+        {
             Debug.Assert(chars != null, "[UnicodeEncoding.GetChars]chars!=null");
             Debug.Assert(byteCount >= 0, "[UnicodeEncoding.GetChars]byteCount >=0");
             Debug.Assert(charCount >= 0, "[UnicodeEncoding.GetChars]charCount >=0");
@@ -1613,7 +1631,8 @@ namespace System.Text
 #endif
                     lastByte == -1
                     && lastChar == 0
-                ) {
+                )
+                {
                     // Need -1 to check 2 at a time.  If we have an even #, longChars will go
                     // from longEnd - 1/2 long to longEnd + 1/2 long.  If we're odd, longChars
                     // will go from longEnd - 1 long to longEnd. (Might not get to use this)
@@ -1653,7 +1672,8 @@ namespace System.Text
                                 || (uTemp & 0x0000FFFF00000000) == 0
                                 || (uTemp & 0x00000000FFFF0000) == 0
                                 || (uTemp & 0x000000000000FFFF) == 0
-                            ) {
+                            )
+                            {
                                 // It has at least 1 surrogate, but we don't know if they're high or low surrogates,
                                 // or if there's 1 or 4 surrogates
 
@@ -1666,7 +1686,8 @@ namespace System.Text
                                             ? (ulong)0xdc00d800dc00d800
                                             : (ulong)0xd800dc00d800dc00
                                     )
-                                ) {
+                                )
+                                {
                                     // Either there weren't 4 surrogates, or the 0x0400 bit was set when a high
                                     // was hoped for or the 0x0400 bit wasn't set where a low was hoped for.
 

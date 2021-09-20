@@ -14,7 +14,8 @@ namespace System.Composition.Hosting.Providers.CurrentScope
         public override IEnumerable<ExportDescriptorPromise> GetExportDescriptors(
             CompositionContract contract,
             DependencyAccessor definitionAccessor
-        ) {
+        )
+        {
             if (!contract.Equals(s_currentScopeContract))
                 return NoExportDescriptors;
 

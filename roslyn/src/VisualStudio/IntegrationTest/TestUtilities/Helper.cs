@@ -128,7 +128,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
             Func<T> action,
             TimeSpan delay,
             int retryCount = -1
-        ) {
+        )
+        {
             return RetryHelper(
                 () =>
                 {

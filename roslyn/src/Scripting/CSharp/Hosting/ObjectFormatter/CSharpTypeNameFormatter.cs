@@ -73,7 +73,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting
                     GeneratedNameKind.StateMachineType,
                     out stateMachineName
                 )
-            ) {
+            )
+            {
                 return stateMachineName;
             }
 

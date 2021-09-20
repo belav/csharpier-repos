@@ -34,7 +34,8 @@ namespace Microsoft.Extensions.FileProviders
         ~PhysicalFileProvider() { }
         public Microsoft.Extensions.FileProviders.IDirectoryContents GetDirectoryContents(
             string subpath
-        ) {
+        )
+        {
             throw null;
         }
         public Microsoft.Extensions.FileProviders.IFileInfo GetFileInfo(string subpath)
@@ -183,7 +184,8 @@ namespace Microsoft.Extensions.FileProviders.Physical
         public System.IDisposable RegisterChangeCallback(
             System.Action<object> callback,
             object state
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -205,7 +207,8 @@ namespace Microsoft.Extensions.FileProviders.Physical
         System.IDisposable Microsoft.Extensions.Primitives.IChangeToken.RegisterChangeCallback(
             System.Action<object> callback,
             object state
-        ) {
+        )
+        {
             throw null;
         }
     }

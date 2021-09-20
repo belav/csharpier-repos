@@ -31,7 +31,8 @@ namespace System.Web.Razor.Test.Text
             string input,
             SourceLocation expected,
             Action<LookaheadTextReader> readerAction
-        ) {
+        )
+        {
             // Arrange
             LookaheadTextReader reader = CreateReader(input);
             readerAction(reader);
@@ -91,7 +92,8 @@ namespace System.Web.Razor.Test.Text
 
         protected Action<StringBuilder, LookaheadTextReader> CaptureSourceLocation(
             Action<SourceLocation> capture
-        ) {
+        )
+        {
             return (_, reader) =>
             {
                 capture(reader.CurrentLocation);
@@ -126,7 +128,8 @@ namespace System.Web.Razor.Test.Text
 
         protected Action<StringBuilder, LookaheadTextReader> Lookahead(
             params Action<StringBuilder, LookaheadTextReader>[] readerCommands
-        ) {
+        )
+        {
             return (builder, reader) =>
             {
                 using (reader.BeginLookahead())
@@ -140,7 +143,8 @@ namespace System.Web.Razor.Test.Text
             string input,
             string expected,
             params Action<StringBuilder, LookaheadTextReader>[] readerCommands
-        ) {
+        )
+        {
             // Arrange
             StringBuilder builder = new StringBuilder();
             using (LookaheadTextReader reader = CreateReader(input))
@@ -159,7 +163,8 @@ namespace System.Web.Razor.Test.Text
             int expectedRaw,
             int expectedChar,
             int expectedLine
-        ) {
+        )
+        {
             // Arrange
             LookaheadTextReader reader = CreateReader("a\r\nbcd\r\nefg");
 
@@ -189,7 +194,8 @@ namespace System.Web.Razor.Test.Text
 
         protected void RunBufferReadTest(
             Func<LookaheadTextReader, char[], int, int, int> readMethod
-        ) {
+        )
+        {
             // Arrange
             LookaheadTextReader reader = CreateReader("abcdefg");
 
@@ -220,7 +226,8 @@ namespace System.Web.Razor.Test.Text
             Action<StringBuilder, LookaheadTextReader>[] readerCommands,
             StringBuilder builder,
             LookaheadTextReader reader
-        ) {
+        )
+        {
             foreach (Action<StringBuilder, LookaheadTextReader> readerCommand in readerCommands)
             {
                 readerCommand(builder, reader);
@@ -273,7 +280,8 @@ namespace System.Web.Razor.Test.Text
             string input,
             int expectedOffset,
             string methodName
-        ) {
+        )
+        {
             if (expectedOffset < input.Length)
             {
                 Assert.Equal(input[expectedOffset], actual);

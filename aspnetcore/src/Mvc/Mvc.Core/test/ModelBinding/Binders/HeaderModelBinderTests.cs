@@ -71,7 +71,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         [InlineData(typeof(StringList))]
         public async Task HeaderBinder_BindsHeaders_ForCollectionsItCanCreate_WithoutInnerModelBinder(
             Type destinationType
-        ) {
+        )
+        {
             // Arrange
             var header = "Accept";
             var headerValue = "application/json,text/json";
@@ -144,7 +145,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             string headerValue,
             Type modelType,
             object expectedModel
-        ) {
+        )
+        {
             // Arrange
             var bindingContext = CreateContext(modelType);
             var binder = CreateBinder(bindingContext);
@@ -184,7 +186,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         [InlineData(typeof(IEnumerable<string>))]
         public async Task HeaderBinder_DoesNotCreateEmptyCollection_ForNonTopLevelObjects(
             Type modelType
-        ) {
+        )
+        {
             // Arrange
             var bindingContext = CreateContext(modelType);
             bindingContext.IsTopLevelObject = false;
@@ -294,7 +297,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         public async Task HeaderBinder_BindModelAsync_AddsErrorToModelState_OnInvalidInput(
             Type modelType,
             string headerValue
-        ) {
+        )
+        {
             // Arrange
             var bindingContext = CreateContext(modelType);
             var binder = CreateBinder(bindingContext);
@@ -317,7 +321,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         public async Task HeaderBinder_BindModelAsync_AddsErrorToModelState_OnInvalid_CollectionInput(
             Type modelType,
             string headerValue
-        ) {
+        )
+        {
             // Arrange
             var headerValues = headerValue.Split(',').Select(s => s.Trim()).ToArray();
             var bindingContext = CreateContext(modelType);
@@ -349,7 +354,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         private static DefaultModelBindingContext CreateContext(
             ModelMetadata metadata,
             IValueProvider valueProvider = null
-        ) {
+        )
+        {
             if (valueProvider == null)
             {
                 valueProvider = Mock.Of<IValueProvider>();

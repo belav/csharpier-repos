@@ -54,7 +54,8 @@ internal class Xcode
         bool invariantGlobalization,
         bool stripDebugSymbols,
         string? nativeMainSource = null
-    ) {
+    )
+    {
         // bundle everything as resources excluding native files
         var excludes = new List<string>
         {
@@ -155,7 +156,8 @@ internal class Xcode
             (Target == TargetNames.iOS)
             || (Target == TargetNames.iOSsim)
             || (Target == TargetNames.MacCatalyst)
-        ) {
+        )
+        {
             frameworks = "\"-framework GSS\"";
         }
 
@@ -290,7 +292,8 @@ internal class Xcode
         string architecture,
         bool optimized,
         string? devTeamProvisioning = null
-    ) {
+    )
+    {
         string sdk = "";
         var args = new StringBuilder();
         args.Append("ONLY_ACTIVE_ARCH=YES");

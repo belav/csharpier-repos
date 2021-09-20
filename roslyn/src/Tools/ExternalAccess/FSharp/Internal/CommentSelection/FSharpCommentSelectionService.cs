@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.CommentSelection
             Document document,
             ImmutableArray<TextSpan> changes,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return Task.FromResult(document);
         }
 
@@ -35,7 +36,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.CommentSelection
             Document document,
             TextSpan textSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return Task.FromResult(
                 new CommentSelectionInfo(
                     supportsSingleLineComment: true,

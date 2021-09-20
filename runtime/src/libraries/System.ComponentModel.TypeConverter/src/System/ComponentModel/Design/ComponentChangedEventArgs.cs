@@ -36,7 +36,8 @@ namespace System.ComponentModel.Design
             MemberDescriptor member,
             object oldValue,
             object newValue
-        ) {
+        )
+        {
             Component = component;
             Member = member;
             OldValue = oldValue;

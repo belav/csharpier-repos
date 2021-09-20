@@ -29,14 +29,16 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             IEnumerable<string> drives,
             IEnumerable<string> directories,
             IEnumerable<string> files
-        ) : base(
-            Glyph.OpenFolder,
-            Glyph.CSharpFile,
-            searchPaths,
-            baseDirectoryOpt,
-            allowableExtensions,
-            CompletionRules
-        ) {
+        )
+            : base(
+                Glyph.OpenFolder,
+                Glyph.CSharpFile,
+                searchPaths,
+                baseDirectoryOpt,
+                allowableExtensions,
+                CompletionRules
+            )
+        {
             Assert.True(drives.All(d => d.EndsWith(PathUtilities.DirectorySeparatorStr)));
             Assert.True(directories.All(d => !d.EndsWith(PathUtilities.DirectorySeparatorStr)));
 
@@ -62,7 +64,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
         private static IEnumerable<string> Enumerate(
             ImmutableArray<string> entries,
             string fullDirectoryPath
-        ) {
+        )
+        {
             var withTrailingSeparator =
                 fullDirectoryPath.TrimEnd(PathUtilities.DirectorySeparatorChar)
                 + PathUtilities.DirectorySeparatorChar;

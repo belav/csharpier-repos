@@ -25,7 +25,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
         internal async ValueTask<int> ReadAsync(
             Memory<byte> memory,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!HasStartedConsumingRequestBody)
             {
                 InitializeRequestIO();
@@ -76,7 +77,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
         internal Task WriteAsync(
             ReadOnlyMemory<byte> memory,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             async Task WriteFirstAsync()
             {
                 await InitializeResponse(flushHeaders: false);

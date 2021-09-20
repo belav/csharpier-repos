@@ -45,7 +45,8 @@ namespace System.Xml.Serialization
             if (
                 mapping.Members!.Length == 1
                 && mapping.Members[0].Elements![0].Mapping is SpecialMapping
-            ) {
+            )
+            {
                 SpecialMapping special = (SpecialMapping)mapping.Members[0].Elements![0].Mapping!;
                 XmlSchemaType? type = ExportSpecialMapping(
                     special,
@@ -77,7 +78,8 @@ namespace System.Xml.Serialization
         public void ExportMembersMapping(
             XmlMembersMapping xmlMembersMapping,
             bool exportEnclosingType
-        ) {
+        )
+        {
             xmlMembersMapping.CheckShallow();
             MembersMapping mapping = (MembersMapping)xmlMembersMapping.Accessor.Mapping!;
             CheckScope(xmlMembersMapping.Scope);
@@ -422,7 +424,8 @@ namespace System.Xml.Serialization
             Mapping mapping,
             string? ns,
             bool isAny
-        ) {
+        )
+        {
             if (mapping is ArrayMapping)
                 ExportArrayMapping((ArrayMapping)mapping, ns, element);
             else if (mapping is PrimitiveMapping)
@@ -472,7 +475,8 @@ namespace System.Xml.Serialization
             string? ns,
             bool isAny,
             XmlSchemaElement? element
-        ) {
+        )
+        {
             switch (mapping.TypeDesc!.Kind)
             {
                 case TypeKind.Node:
@@ -531,7 +535,8 @@ namespace System.Xml.Serialization
                     }
                     else if (
                         serializableMapping.XsiType != null || serializableMapping.XsdType != null
-                    ) {
+                    )
+                    {
                         XmlSchemaType? type = serializableMapping.XsdType;
                         // for performance reasons we need to postpone merging of the serializable schemas
                         foreach (XmlSchema schema in serializableMapping.Schemas!.Schemas())
@@ -739,7 +744,8 @@ namespace System.Xml.Serialization
             bool repeats,
             bool valueTypeOptional,
             string? ns
-        ) {
+        )
+        {
             if (accessors.Length == 0)
                 return;
             if (accessors.Length == 1)
@@ -764,7 +770,8 @@ namespace System.Xml.Serialization
             AttributeAccessor? accessor,
             bool valueTypeOptional,
             string? ns
-        ) {
+        )
+        {
             if (accessor == null)
                 return;
             XmlSchemaObjectCollection attributes;
@@ -838,7 +845,8 @@ namespace System.Xml.Serialization
                     !accessor.HasDefault
                     && !valueTypeOptional
                     && accessor.Mapping!.TypeDesc!.IsValueType
-                ) {
+                )
+                {
                     attribute.Use = XmlSchemaUse.Required;
                 }
                 attribute.Name = accessor.Name;
@@ -932,7 +940,8 @@ namespace System.Xml.Serialization
             bool repeats,
             bool valueTypeOptional,
             string? ns
-        ) {
+        )
+        {
             if (accessor.Any && accessor.Name.Length == 0)
             {
                 XmlSchemaAny any = new XmlSchemaAny();
@@ -1147,7 +1156,8 @@ namespace System.Xml.Serialization
             StructMapping mapping,
             string? ns,
             XmlSchemaElement? element
-        ) {
+        )
+        {
             if (mapping.TypeDesc!.IsRoot)
             {
                 _needToExportRoot = true;
@@ -1269,7 +1279,8 @@ namespace System.Xml.Serialization
             string? ns,
             bool hasSimpleContent,
             bool openModel
-        ) {
+        )
+        {
             XmlSchemaGroupBase seq = new XmlSchemaSequence();
             TypeMapping? textMapping = null;
 
@@ -1400,7 +1411,8 @@ namespace System.Xml.Serialization
                 StructMapping? derived = mapping.DerivedMappings;
                 derived != null;
                 derived = derived.NextDerivedMapping
-            ) {
+            )
+            {
                 if (derived.IncludeInSchema)
                     ExportStructMapping(derived, derived.Namespace, null);
             }

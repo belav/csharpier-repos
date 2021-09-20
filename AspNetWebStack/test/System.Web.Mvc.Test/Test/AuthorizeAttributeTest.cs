@@ -430,13 +430,15 @@ namespace System.Web.Mvc.Test
 
             public virtual HttpValidationStatus PublicOnCacheAuthorization(
                 HttpContextBase httpContext
-            ) {
+            )
+            {
                 return base.OnCacheAuthorization(httpContext);
             }
 
             protected override HttpValidationStatus OnCacheAuthorization(
                 HttpContextBase httpContext
-            ) {
+            )
+            {
                 return PublicOnCacheAuthorization(httpContext);
             }
         }

@@ -282,7 +282,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         private static void AssertChangedTextLinesHelper(
             string originalText,
             params TextChange[] changes
-        ) {
+        )
+        {
             var changedText = SourceText.From(originalText).WithChanges(changes);
             Assert.Equal(
                 SourceText.From(changedText.ToString()).Lines,
@@ -1401,7 +1402,8 @@ void Method()
             SourceText original,
             Func<SourceText, SourceText> fnChange1,
             Func<SourceText, SourceText> fnChange2
-        ) {
+        )
+        {
             WeakReference change1;
             SourceText change2;
             GetChangesWithoutMiddle_Helper(
@@ -1427,7 +1429,8 @@ void Method()
             Func<SourceText, SourceText> fnChange2,
             out WeakReference change1,
             out SourceText change2
-        ) {
+        )
+        {
             var c1 = fnChange1(original);
             change1 = new WeakReference(c1);
             change2 = fnChange2(c1);

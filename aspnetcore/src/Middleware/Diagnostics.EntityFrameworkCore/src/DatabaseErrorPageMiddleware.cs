@@ -60,7 +60,8 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore
             RequestDelegate next,
             ILoggerFactory loggerFactory,
             IOptions<DatabaseErrorPageOptions> options
-        ) {
+        )
+        {
             if (next == null)
             {
                 throw new ArgumentNullException(nameof(next));
@@ -126,7 +127,8 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore
                             && (
                                 details.PendingModelChanges || details.PendingMigrations.Count() > 0
                             )
-                        ) {
+                        )
+                        {
                             var page = new DatabaseErrorPage
                             {
                                 Model = new DatabaseErrorPageModel(
@@ -194,7 +196,8 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore
 
         void IObserver<KeyValuePair<string, object?>>.OnNext(
             KeyValuePair<string, object?> keyValuePair
-        ) {
+        )
+        {
             switch (keyValuePair.Value)
             {
                 // NB: _localDiagnostic.Value can be null when this middleware has been leaked.

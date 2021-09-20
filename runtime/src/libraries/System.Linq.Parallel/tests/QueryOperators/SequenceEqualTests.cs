@@ -19,7 +19,8 @@ namespace System.Linq.Parallel.Tests
         {
             foreach (
                 object[] left in Sources.Ranges(counts.DefaultIfEmpty(Sources.OuterLoopCount / 4))
-            ) {
+            )
+            {
                 foreach (object[] right in Sources.Ranges(new[] { (int)left[1] }))
                 {
                     yield return new object[] { left[0], right[0], right[1] };
@@ -31,12 +32,14 @@ namespace System.Linq.Parallel.Tests
         {
             foreach (
                 object[] left in Sources.Ranges(counts.DefaultIfEmpty(Sources.OuterLoopCount / 4))
-            ) {
+            )
+            {
                 foreach (
                     object[] right in Sources.Ranges(
                         new[] { 1, ((int)left[1] - 1) / 2 + 1, (int)left[1] * 2 + 1 }.Distinct()
                     )
-                ) {
+                )
+                {
                     yield return new object[] { left[0], left[1], right[0], right[1] };
                 }
             }
@@ -46,7 +49,8 @@ namespace System.Linq.Parallel.Tests
         {
             foreach (
                 object[] left in Sources.Ranges(counts.DefaultIfEmpty(Sources.OuterLoopCount / 4))
-            ) {
+            )
+            {
                 Func<int, IEnumerable<int>> items = x =>
                     new[] { 0, x / 8, x / 2, x * 7 / 8, x - 1 }.Distinct();
                 foreach (object[] right in Sources.Ranges(new[] { (int)left[1] }, items))
@@ -62,7 +66,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> left,
             Labeled<ParallelQuery<int>> right,
             int count
-        ) {
+        )
+        {
             _ = count;
             ParallelQuery<int> leftQuery = left.Item;
             ParallelQuery<int> rightQuery = right.Item;
@@ -84,7 +89,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> left,
             Labeled<ParallelQuery<int>> right,
             int count
-        ) {
+        )
+        {
             SequenceEqual(left, right, count);
         }
 
@@ -94,7 +100,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> left,
             Labeled<ParallelQuery<int>> right,
             int count
-        ) {
+        )
+        {
             ParallelQuery<int> leftQuery = left.Item;
             ParallelQuery<int> rightQuery = right.Item;
             Assert.True(
@@ -142,7 +149,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> left,
             Labeled<ParallelQuery<int>> right,
             int count
-        ) {
+        )
+        {
             SequenceEqual_CustomComparator(left, right, count);
         }
 
@@ -153,7 +161,8 @@ namespace System.Linq.Parallel.Tests
             int leftCount,
             Labeled<ParallelQuery<int>> right,
             int rightCount
-        ) {
+        )
+        {
             _ = leftCount;
             _ = rightCount;
             ParallelQuery<int> leftQuery = left.Item;
@@ -178,7 +187,8 @@ namespace System.Linq.Parallel.Tests
             int leftCount,
             Labeled<ParallelQuery<int>> right,
             int rightCount
-        ) {
+        )
+        {
             SequenceEqual_UnequalSize(left, leftCount, right, rightCount);
         }
 
@@ -189,7 +199,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> right,
             int count,
             int item
-        ) {
+        )
+        {
             _ = count;
             ParallelQuery<int> leftQuery = left.Item;
             ParallelQuery<int> rightQuery = right.Item.Select(x => x == item ? -1 : x);
@@ -213,7 +224,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> right,
             int count,
             int item
-        ) {
+        )
+        {
             SequenceEqual_Unequal(left, right, count, item);
         }
 
@@ -321,7 +333,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> left,
             Labeled<ParallelQuery<int>> right,
             int count
-        ) {
+        )
+        {
             _ = count;
             AssertThrows.Wrapped<DeliberateTestException>(
                 () => left.Item.SequenceEqual(right.Item, new FailingEqualityComparer<int>())
@@ -398,7 +411,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> left,
             Labeled<ParallelQuery<int>> right,
             int count
-        ) {
+        )
+        {
             _ = count;
             ParallelQuery<int> leftQuery = left.Item;
             ParallelQuery<int> rightQuery = right.Item;

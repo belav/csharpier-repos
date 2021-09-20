@@ -31,7 +31,8 @@ namespace Microsoft.AspNetCore.Analyzers
 
             foreach (
                 var middlewareAnalysis in _context.GetRelatedAnalyses<MiddlewareAnalysis>(type)
-            ) {
+            )
+            {
                 MiddlewareItem? useAuthorizationItem = default;
                 MiddlewareItem? useRoutingItem = default;
                 MiddlewareItem? useEndpoint = default;

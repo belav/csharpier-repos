@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             bool designTime,
             RazorLanguageVersion version,
             string fileKind
-        ) {
+        )
+        {
             _designTime = designTime;
             _version = version;
             _fileKind = fileKind;

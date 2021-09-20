@@ -55,7 +55,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             ModelExplorer modelExplorer,
             string expression,
             IDictionary<string, string> attributes
-        ) {
+        )
+        {
             if (viewContext == null)
             {
                 throw new ArgumentNullException(nameof(viewContext));

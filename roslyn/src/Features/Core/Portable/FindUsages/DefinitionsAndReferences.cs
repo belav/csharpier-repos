@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.FindUsages
         public DefinitionsAndReferences(
             ImmutableArray<DefinitionItem> definitions,
             ImmutableArray<SourceReferenceItem> references
-        ) {
+        )
+        {
             var definitionSet = definitions.ToSet();
             for (int i = 0, n = references.Length; i < n; i++)
             {

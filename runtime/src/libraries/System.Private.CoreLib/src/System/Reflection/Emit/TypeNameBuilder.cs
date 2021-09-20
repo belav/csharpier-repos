@@ -325,7 +325,8 @@ namespace System.Reflection.Emit
             if (
                 rootType.IsGenericType
                 && (!rootType.IsGenericTypeDefinition || format == Format.ToString)
-            ) {
+            )
+            {
                 Type[] genericArguments = rootType.GetGenericArguments();
 
                 OpenGenericArguments();

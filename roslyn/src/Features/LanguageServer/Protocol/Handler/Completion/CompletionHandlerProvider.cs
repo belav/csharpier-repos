@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 IEnumerable<
                 Lazy<CompletionProvider, CompletionProviderMetadata>
             > completionProviders
-        ) {
+        )
+        {
             _completionProviders = completionProviders;
         }
 

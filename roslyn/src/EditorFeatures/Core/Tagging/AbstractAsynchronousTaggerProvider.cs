@@ -149,7 +149,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
             ITextView textViewOpt,
             ITextBuffer subjectBuffer,
             [NotNullWhen(true)] out TagSource? tagSource
-        ) {
+        )
+        {
             return textViewOpt != null
               ? textViewOpt.TryGetPerSubjectBufferProperty(subjectBuffer, _uniqueKey, out tagSource)
               : subjectBuffer.Properties.TryGetProperty(_uniqueKey, out tagSource);
@@ -174,7 +175,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
             ITextView textViewOpt,
             ITextBuffer subjectBuffer,
             TagSource tagSource
-        ) {
+        )
+        {
             if (textViewOpt != null)
             {
                 textViewOpt.AddPerSubjectBufferProperty(subjectBuffer, _uniqueKey, tagSource);
@@ -208,7 +210,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
         protected virtual IEnumerable<SnapshotSpan> GetSpansToTag(
             ITextView textViewOpt,
             ITextBuffer subjectBuffer
-        ) {
+        )
+        {
             // For a standard tagger, the spans to tag is the span of the entire snapshot.
             return SpecializedCollections.SingletonEnumerable(
                 subjectBuffer.CurrentSnapshot.GetFullSpan()
@@ -262,7 +265,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
         private static int? GetCaretPosition(
             SnapshotPoint? caretPosition,
             SnapshotSpan snapshotSpan
-        ) {
+        )
+        {
             return caretPosition.HasValue && caretPosition.Value.Snapshot == snapshotSpan.Snapshot
               ? caretPosition.Value.Position
               : (int?)null;
@@ -278,7 +282,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
             TaggerContext<TTag> context,
             DocumentSnapshotSpan spanToTag,
             int? caretPosition
-        ) {
+        )
+        {
             // By default we implement the sync version of this by blocking on the async version.
             //
             // The benefit of this is that all taggers can implicitly be used as IAccurateTaggers

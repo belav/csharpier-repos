@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.RequestOrdering
             TestRequest request,
             RequestContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             await Task.Delay(Delay, cancellationToken).ConfigureAwait(false);
 
             throw new InvalidOperationException();

@@ -69,7 +69,8 @@ namespace System
         internal static string ConstructInstantiation(
             RuntimeMethodInfo method,
             TypeNameFormatFlags format
-        ) {
+        )
+        {
             var sb = new StringBuilder();
             Type[]? gen_params = method.GetGenericArguments();
             sb.Append('[');

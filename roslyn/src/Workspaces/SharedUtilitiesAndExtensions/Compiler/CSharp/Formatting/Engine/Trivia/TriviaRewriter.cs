@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             SimpleIntervalTree<TextSpan, TextSpanIntervalIntrospector> spanToFormat,
             Dictionary<ValueTuple<SyntaxToken, SyntaxToken>, TriviaData> map,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(node);
             Contract.ThrowIfNull(map);
 
@@ -49,7 +50,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
         private void PreprocessTriviaListMap(
             Dictionary<ValueTuple<SyntaxToken, SyntaxToken>, TriviaData> map,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             foreach (var pair in map)
             {
                 cancellationToken.ThrowIfCancellationRequested();
@@ -74,7 +76,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
         private (SyntaxTriviaList trailingTrivia, SyntaxTriviaList leadingTrivia) GetTrailingAndLeadingTrivia(
             KeyValuePair<ValueTuple<SyntaxToken, SyntaxToken>, TriviaData> pair,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (pair.Key.Item1.RawKind == 0)
             {
                 return (
@@ -148,7 +151,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             ValueTuple<SyntaxToken, SyntaxToken> pair,
             TriviaData triviaData,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (triviaData is TriviaDataWithList csharpTriviaData)
             {
                 return csharpTriviaData.GetTriviaList(cancellationToken);

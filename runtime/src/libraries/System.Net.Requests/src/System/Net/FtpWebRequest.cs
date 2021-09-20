@@ -59,7 +59,8 @@ namespace System.Net
             FtpOperation operation,
             FtpMethodFlags flags,
             string? httpCommand
-        ) {
+        )
+        {
             Method = method;
             Operation = operation;
             Flags = flags;
@@ -948,7 +949,8 @@ namespace System.Net
                     webException.InnerException is IOException ioEx
                     && ioEx.InnerException is SocketException sEx
                     && sEx.SocketErrorCode == SocketError.TimedOut
-                ) {
+                )
+                {
                     SetException(
                         ExceptionDispatchInfo.SetCurrentStackTrace(
                             new WebException(SR.net_timeout, WebExceptionStatus.Timeout)
@@ -1052,7 +1054,8 @@ namespace System.Net
                 if (
                     !(exception is SocketException || exception is ObjectDisposedException)
                     || !timer.HasExpired
-                ) {
+                )
+                {
                     timer.Cancel();
                     throw;
                 }
@@ -1125,7 +1128,8 @@ namespace System.Net
                 || _timedOut
                 || _connection == null
                 || !_connection.RecoverableFailure
-            ) {
+            )
+            {
                 return false;
             }
             _onceFailed = true;
@@ -1435,7 +1439,8 @@ namespace System.Net
                 if (
                     prev == RequestStage.ReleaseConnection
                     && stage == RequestStage.ReleaseConnection
-                ) {
+                )
+                {
                     return RequestStage.ReleaseConnection;
                 }
 
@@ -1457,7 +1462,8 @@ namespace System.Net
                         && prev != RequestStage.ReadReady
                         && _methodInfo.IsDownload
                         && !_ftpWebResponse!.IsFromCache
-                    ) {
+                    )
+                    {
                         return prev;
                     }
 
@@ -1474,7 +1480,8 @@ namespace System.Net
                         || prev == RequestStage.ReleaseConnection
                     )
                     && connection != null
-                ) {
+                )
+                {
                     try
                     {
                         if (_exception != null)
@@ -1726,7 +1733,8 @@ namespace System.Net
                     _ftpWebResponse.GetResponseStream() is FtpWebResponse.EmptyStream
                     && _stream != null
                 )
-            ) {
+            )
+            {
                 lock (_syncObject)
                 {
                     if (
@@ -1735,7 +1743,8 @@ namespace System.Net
                             _ftpWebResponse.GetResponseStream() is FtpWebResponse.EmptyStream
                             && _stream != null
                         )
-                    ) {
+                    )
+                    {
                         Stream? responseStream = _stream;
 
                         if (_methodInfo.IsUpload)

@@ -25,7 +25,8 @@ namespace System.Security.Cryptography
             Span<byte> ciphertext,
             Span<byte> tag,
             ReadOnlySpan<byte> associatedData = default
-        ) {
+        )
+        {
             AesAEAD.Encrypt(
                 s_aesCcm,
                 _keyHandle,
@@ -43,7 +44,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> tag,
             Span<byte> plaintext,
             ReadOnlySpan<byte> associatedData = default
-        ) {
+        )
+        {
             // BCrypt implementation of CCM clears plaintext for you on failure
             AesAEAD.Decrypt(
                 s_aesCcm,

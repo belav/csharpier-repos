@@ -113,7 +113,8 @@ namespace System.Net
             WebRequest request,
             bool isAsync,
             bool readInitalResponseOnConnect
-        ) {
+        )
+        {
             ClearState();
             PipelineEntry[]? commands = BuildCommandsList(request);
             InitCommandPipeline(request, commands, isAsync);
@@ -139,7 +140,8 @@ namespace System.Net
             string message,
             WebExceptionStatus status,
             Exception? innerException
-        ) {
+        )
+        {
             return new WebException(
                 message,
                 innerException,
@@ -152,7 +154,8 @@ namespace System.Net
             FtpStatusCode code,
             string? statusDescription,
             Exception? innerException
-        ) {
+        )
+        {
             return new WebException(
                 SR.Format(
                     SR.net_ftp_servererror,
@@ -168,7 +171,8 @@ namespace System.Net
             WebRequest? request,
             PipelineEntry[]? commands,
             bool isAsync
-        ) {
+        )
+        {
             _commands = commands;
             _index = 0;
             _request = request;
@@ -439,7 +443,8 @@ namespace System.Net
             ResponseDescription? response,
             bool timeout,
             ref Stream? stream
-        ) {
+        )
+        {
             return PipelineInstruction.Abort;
         }
 
@@ -532,7 +537,8 @@ namespace System.Net
             ResponseDescription response,
             ref int validThrough,
             ref int completeLength
-        ) {
+        )
+        {
             return false;
         }
 

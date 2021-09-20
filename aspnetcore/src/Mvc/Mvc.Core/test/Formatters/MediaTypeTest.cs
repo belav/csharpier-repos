@@ -52,7 +52,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             string mediaType,
             string expectedSubTypeWithoutSuffix,
             string expectedSubtypeSuffix
-        ) {
+        )
+        {
             // Arrange & Act
             var result = new MediaType(mediaType);
 
@@ -348,7 +349,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         public void MatchesAllSubTypesWithoutSuffix_ReturnsExpectedResult(
             string value,
             bool expectedReturnValue
-        ) {
+        )
+        {
             // Arrange
             var mediaType = new MediaType(value);
 

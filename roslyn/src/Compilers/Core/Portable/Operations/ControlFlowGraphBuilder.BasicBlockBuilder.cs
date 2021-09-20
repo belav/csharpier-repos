@@ -228,7 +228,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 
             public ImmutableArray<ControlFlowBranch> ConvertPredecessorsToBranches(
                 ArrayBuilder<BasicBlock> blocks
-            ) {
+            )
+            {
                 if (!HasPredecessors)
                 {
                     _predecessors?.Free();

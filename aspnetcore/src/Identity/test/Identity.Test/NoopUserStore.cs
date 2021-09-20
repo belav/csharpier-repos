@@ -12,14 +12,16 @@ namespace Microsoft.AspNetCore.Identity.Test
         public Task<string> GetUserIdAsync(
             PocoUser user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return Task.FromResult(user.Id);
         }
 
         public Task<string> GetUserNameAsync(
             PocoUser user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return Task.FromResult(user.UserName);
         }
 
@@ -27,35 +29,40 @@ namespace Microsoft.AspNetCore.Identity.Test
             PocoUser user,
             string userName,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return Task.FromResult(0);
         }
 
         public Task<IdentityResult> CreateAsync(
             PocoUser user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return Task.FromResult(IdentityResult.Success);
         }
 
         public Task<IdentityResult> UpdateAsync(
             PocoUser user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return Task.FromResult(IdentityResult.Success);
         }
 
         public Task<PocoUser> FindByIdAsync(
             string userId,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return Task.FromResult<PocoUser>(null);
         }
 
         public Task<PocoUser> FindByNameAsync(
             string userName,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return Task.FromResult<PocoUser>(null);
         }
 
@@ -64,14 +71,16 @@ namespace Microsoft.AspNetCore.Identity.Test
         public Task<IdentityResult> DeleteAsync(
             PocoUser user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return Task.FromResult(IdentityResult.Success);
         }
 
         public Task<string> GetNormalizedUserNameAsync(
             PocoUser user,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return Task.FromResult<string>(null);
         }
 
@@ -79,7 +88,8 @@ namespace Microsoft.AspNetCore.Identity.Test
             PocoUser user,
             string userName,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return Task.FromResult(0);
         }
     }

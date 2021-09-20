@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BinaryOperatorSignature signature,
             Conversion leftConversion,
             Conversion rightConversion
-        ) {
+        )
+        {
             this.Kind = kind;
             this.Signature = signature;
             this.LeftConversion = leftConversion;
@@ -55,7 +56,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BinaryOperatorSignature signature,
             Conversion leftConversion,
             Conversion rightConversion
-        ) {
+        )
+        {
             return new BinaryOperatorAnalysisResult(
                 OperatorAnalysisResultKind.Applicable,
                 signature,
@@ -68,7 +70,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BinaryOperatorSignature signature,
             Conversion leftConversion,
             Conversion rightConversion
-        ) {
+        )
+        {
             return new BinaryOperatorAnalysisResult(
                 OperatorAnalysisResultKind.Inapplicable,
                 signature,

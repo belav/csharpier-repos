@@ -177,7 +177,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 ITypeDescriptorContext context,
                 CultureInfo culture,
                 object value
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     String.Format("From DummyTypeConverter: {0}", value)
                 );

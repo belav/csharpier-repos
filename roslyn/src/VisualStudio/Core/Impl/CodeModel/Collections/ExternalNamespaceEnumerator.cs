@@ -22,7 +22,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
             CodeModelState state,
             ProjectId projectId,
             SymbolKey namespaceSymbolId
-        ) {
+        )
+        {
             var newEnumerator = new ExternalNamespaceEnumerator(
                 state,
                 projectId,
@@ -35,7 +36,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
             CodeModelState state,
             ProjectId projectId,
             SymbolKey namespaceSymbolId
-        ) {
+        )
+        {
             _state = state;
             _projectId = projectId;
             _namespaceSymbolId = namespaceSymbolId;
@@ -65,7 +67,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
             CodeModelState state,
             ProjectId projectId,
             SymbolKey namespaceSymbolId
-        ) {
+        )
+        {
             var project = state.Workspace.CurrentSolution.GetProject(projectId);
             if (project == null)
             {
@@ -77,7 +80,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
                     namespaceSymbolId.Resolve(project.GetCompilationAsync().Result).Symbol
                     is INamespaceSymbol namespaceSymbol
                 )
-            ) {
+            )
+            {
                 throw Exceptions.ThrowEFail();
             }
 

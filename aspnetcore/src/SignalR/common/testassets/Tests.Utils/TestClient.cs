@@ -50,7 +50,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             IInvocationBinder invocationBinder = null,
             string userIdentifier = null,
             long pauseWriterThreshold = 32768
-        ) {
+        )
+        {
             var options = new PipeOptions(
                 readerScheduler: PipeScheduler.Inline,
                 writerScheduler: PipeScheduler.Inline,
@@ -89,7 +90,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             Connections.ConnectionHandler handler,
             bool sendHandshakeRequestMessage = true,
             bool expectedHandshakeResponseMessage = true
-        ) {
+        )
+        {
             if (sendHandshakeRequestMessage)
             {
                 await Connection.Application.Output.WriteAsync(GetHandshakeRequestMessage());
@@ -118,7 +120,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             string methodName,
             string[] streamIds,
             params object[] args
-        ) {
+        )
+        {
             var invocationId = await SendStreamInvocationAsync(methodName, streamIds, args);
 
             var messages = new List<HubMessage>();
@@ -134,7 +137,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 if (
                     message is HubInvocationMessage hubInvocationMessage
                     && !string.Equals(hubInvocationMessage.InvocationId, invocationId)
-                ) {
+                )
+                {
                     throw new NotSupportedException(
                         "TestClient does not support multiple outgoing invocations!"
                     );
@@ -177,7 +181,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 if (
                     message is HubInvocationMessage hubInvocationMessage
                     && !string.Equals(hubInvocationMessage.InvocationId, invocationId)
-                ) {
+                )
+                {
                     throw new NotSupportedException(
                         "TestClient does not support multiple outgoing invocations!"
                     );
@@ -212,7 +217,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             string methodName,
             bool nonBlocking,
             params object[] args
-        ) {
+        )
+        {
             var invocationId = nonBlocking ? null : GetInvocationId();
             return SendHubMessageAsync(new InvocationMessage(invocationId, methodName, args));
         }
@@ -226,7 +232,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             string methodName,
             string[] streamIds,
             params object[] args
-        ) {
+        )
+        {
             var invocationId = GetInvocationId();
             return SendHubMessageAsync(
                 new StreamInvocationMessage(invocationId, methodName, args, streamIds)
@@ -238,7 +245,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             string methodName,
             string[] streamIds,
             params object[] args
-        ) {
+        )
+        {
             var message = new InvocationMessage(invocationId, methodName, args, streamIds);
             return SendHubMessageAsync(message);
         }
@@ -313,7 +321,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                             ref buffer,
                             out var responseMessage
                         )
-                    ) {
+                    )
+                    {
                         return responseMessage;
                     }
                 }

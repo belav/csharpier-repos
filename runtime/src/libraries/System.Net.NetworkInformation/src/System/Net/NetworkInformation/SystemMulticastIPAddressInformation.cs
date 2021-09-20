@@ -65,7 +65,8 @@ namespace System.Net.NetworkInformation
 
         internal static MulticastIPAddressInformationCollection ToMulticastIpAddressInformationCollection(
             IPAddressInformationCollection addresses
-        ) {
+        )
+        {
             MulticastIPAddressInformationCollection multicastList =
                 new MulticastIPAddressInformationCollection();
             foreach (IPAddressInformation addressInfo in addresses)

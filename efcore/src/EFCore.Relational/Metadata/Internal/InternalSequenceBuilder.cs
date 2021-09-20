@@ -25,10 +25,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public InternalSequenceBuilder(
-            Sequence sequence,
-            IConventionModelBuilder modelBuilder
-        ) : base(sequence, modelBuilder) { }
+        public InternalSequenceBuilder(Sequence sequence, IConventionModelBuilder modelBuilder)
+            : base(sequence, modelBuilder) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -39,11 +37,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders.Internal
         public virtual IConventionSequenceBuilder? HasType(
             Type? type,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             if (
                 configurationSource.Overrides(Metadata.GetTypeConfigurationSource())
                 || Metadata.Type == type
-            ) {
+            )
+            {
                 Metadata.SetType(type, configurationSource);
                 return this;
             }
@@ -73,7 +73,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders.Internal
         public virtual IConventionSequenceBuilder? IncrementsBy(
             int? increment,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             if (CanSetIncrementsBy(increment, configurationSource))
             {
                 Metadata.SetIncrementBy(increment, configurationSource);
@@ -105,7 +106,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders.Internal
         public virtual IConventionSequenceBuilder? StartsAt(
             long? startValue,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             if (CanSetStartsAt(startValue, configurationSource))
             {
                 Metadata.SetStartValue(startValue, configurationSource);
@@ -137,7 +139,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders.Internal
         public virtual IConventionSequenceBuilder? HasMax(
             long? maximum,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             if (CanSetMax(maximum, configurationSource))
             {
                 Metadata.SetMaxValue(maximum, configurationSource);
@@ -166,7 +169,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders.Internal
         public virtual IConventionSequenceBuilder? HasMin(
             long? minimum,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             if (CanSetMin(minimum, configurationSource))
             {
                 Metadata.SetMinValue(minimum, configurationSource);
@@ -195,7 +199,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders.Internal
         public virtual IConventionSequenceBuilder? IsCyclic(
             bool? cyclic,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             if (CanSetIsCyclic(cyclic, configurationSource))
             {
                 Metadata.SetIsCyclic(cyclic, configurationSource);

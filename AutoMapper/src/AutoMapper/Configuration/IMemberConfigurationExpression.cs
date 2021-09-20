@@ -33,12 +33,13 @@ namespace AutoMapper
         /// <typeparam name="TSourceMember">Source member to supply</typeparam>
         void MapFrom<TValueResolver, TSourceMember>(
             Expression<Func<TSource, TSourceMember>> sourceMember
-        ) where TValueResolver : IMemberValueResolver<
-                  TSource,
-                  TDestination,
-                  TSourceMember,
-                  TMember
-              >;
+        )
+            where TValueResolver : IMemberValueResolver<
+                    TSource,
+                    TDestination,
+                    TSourceMember,
+                    TMember
+                >;
         /// <summary>
         /// Map destination member using a custom member value resolver supplied from a source member name
         /// </summary>

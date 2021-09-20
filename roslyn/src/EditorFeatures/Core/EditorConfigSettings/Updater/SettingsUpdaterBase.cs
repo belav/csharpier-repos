@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
         public async Task<SourceText?> GetChangedEditorConfigAsync(
             AnalyzerConfigDocument analyzerConfigDocument,
             CancellationToken token
-        ) {
+        )
+        {
             if (analyzerConfigDocument is null)
                 return null;
 
@@ -67,7 +68,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
 
         public async Task<IReadOnlyList<TextChange>?> GetChangedEditorConfigAsync(
             CancellationToken token
-        ) {
+        )
+        {
             var solution = Workspace.CurrentSolution;
             var analyzerConfigDocument = solution.Projects.SelectMany(
                     p => p.AnalyzerConfigDocuments
@@ -88,7 +90,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
         public async Task<SourceText?> GetChangedEditorConfigAsync(
             SourceText originalText,
             CancellationToken token
-        ) {
+        )
+        {
             using (await _guard.DisposableWaitAsync(token).ConfigureAwait(false))
             {
                 var newText = GetNewText(originalText, _queue, token);

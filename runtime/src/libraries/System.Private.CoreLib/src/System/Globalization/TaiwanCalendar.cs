@@ -101,7 +101,8 @@ namespace System.Globalization
             DateTime time,
             CalendarWeekRule rule,
             DayOfWeek firstDayOfWeek
-        ) {
+        )
+        {
             return _helper.GetWeekOfYear(time, rule, firstDayOfWeek);
         }
 
@@ -149,7 +150,8 @@ namespace System.Globalization
             int second,
             int millisecond,
             int era
-        ) {
+        )
+        {
             return _helper.ToDateTime(year, month, day, hour, minute, second, millisecond, era);
         }
 

@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public async Task SynchronizeAssetsAsync(
             IEnumerable<Checksum> checksums,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (await s_gate.DisposableWaitAsync(cancellationToken).ConfigureAwait(false))
             {
                 await SynchronizeAssets_NoLockAsync(checksums, cancellationToken)
@@ -34,7 +35,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public async Task SynchronizeSolutionAssetsAsync(
             Checksum solutionChecksum,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (await s_gate.DisposableWaitAsync(cancellationToken).ConfigureAwait(false))
             {
                 // this will make 4 round trip to data source (VS) to get all assets that belong to the given solution checksum
@@ -66,7 +68,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public async Task SynchronizeProjectAssetsAsync(
             IEnumerable<Checksum> projectChecksums,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (await s_gate.DisposableWaitAsync(cancellationToken).ConfigureAwait(false))
             {
                 await SynchronizeProjectAssets_NoLockAsync(projectChecksums, cancellationToken)
@@ -77,7 +80,8 @@ namespace Microsoft.CodeAnalysis.Remote
         private async Task SynchronizeProjectAssets_NoLockAsync(
             IEnumerable<Checksum> projectChecksums,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // get children of project checksum objects at once
             await SynchronizeProjectsAsync(projectChecksums, cancellationToken)
                 .ConfigureAwait(false);
@@ -122,7 +126,8 @@ namespace Microsoft.CodeAnalysis.Remote
         private async Task SynchronizeProjectsAsync(
             IEnumerable<Checksum> projectChecksums,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // get children of project checksum objects at once
             using var pooledObject = SharedPools.Default<HashSet<Checksum>>().GetPooledObject();
             var checksums = pooledObject.Object;
@@ -136,7 +141,8 @@ namespace Microsoft.CodeAnalysis.Remote
         private async Task SynchronizeAssets_NoLockAsync(
             IEnumerable<object> checksumOrCollections,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // get children of solution checksum object at once
             using var pooledObject = SharedPools.Default<HashSet<Checksum>>().GetPooledObject();
             var checksums = pooledObject.Object;
@@ -150,7 +156,8 @@ namespace Microsoft.CodeAnalysis.Remote
             HashSet<Checksum> set,
             IEnumerable<Checksum> checksums,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             foreach (var checksum in checksums)
             {
                 var checksumObject = await _assetProvider.GetAssetAsync<ChecksumWithChildren>(
@@ -165,7 +172,8 @@ namespace Microsoft.CodeAnalysis.Remote
         private void AddIfNeeded(
             HashSet<Checksum> checksums,
             IEnumerable<object> checksumOrCollections
-        ) {
+        )
+        {
             foreach (var checksumOrCollection in checksumOrCollections)
             {
                 switch (checksumOrCollection)

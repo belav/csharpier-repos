@@ -58,7 +58,8 @@ namespace System.Net.Mail
             string content,
             Encoding? contentEncoding,
             string? mediaType
-        ) {
+        )
+        {
             AlternateView a = new AlternateView();
             a.SetContentFromString(content, contentEncoding, mediaType);
             return a;
@@ -67,7 +68,8 @@ namespace System.Net.Mail
         public static AlternateView CreateAlternateViewFromString(
             string content,
             ContentType? contentType
-        ) {
+        )
+        {
             AlternateView a = new AlternateView();
             a.SetContentFromString(content, contentType);
             return a;

@@ -67,7 +67,8 @@ namespace System.Net.Tests
                                 d.ToOffset(TimeSpan.FromHours(-5))
                             }
                     )
-                ) {
+                )
+                {
                     var formatted = date.ToString(format, CultureInfo.InvariantCulture);
                     var expected = date.LocalDateTime;
                     yield return new object[] { formatted, expected };
@@ -214,7 +215,8 @@ namespace System.Net.Tests
         [InlineData("TypeAndNoSubType")]
         public async Task ContentType_ServerResponseHasContentTypeHeader_ContentTypeReceivedCorrectly(
             string expectedContentType
-        ) {
+        )
+        {
             await LoopbackServer.CreateServerAsync(
                 async (server, url) =>
                 {

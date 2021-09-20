@@ -38,7 +38,8 @@ namespace Microsoft.EntityFrameworkCore
             this IReadOnlyForeignKey foreignKey,
             in StoreObjectIdentifier storeObject,
             in StoreObjectIdentifier principalStoreObject
-        ) {
+        )
+        {
             var annotation = foreignKey.FindAnnotation(RelationalAnnotationNames.Name);
             return annotation != null
               ? (string?)annotation.Value
@@ -81,7 +82,8 @@ namespace Microsoft.EntityFrameworkCore
             this IReadOnlyForeignKey foreignKey,
             in StoreObjectIdentifier storeObject,
             in StoreObjectIdentifier principalStoreObject
-        ) {
+        )
+        {
             var propertyNames = foreignKey.Properties.GetColumnNames(storeObject);
             var principalPropertyNames = foreignKey.PrincipalKey.Properties.GetColumnNames(
                 principalStoreObject
@@ -99,20 +101,23 @@ namespace Microsoft.EntityFrameworkCore
                 var i = 0;
                 i < Metadata.Internal.RelationalEntityTypeExtensions.MaxEntityTypesSharingTable;
                 i++
-            ) {
+            )
+            {
                 IReadOnlyForeignKey? linkedForeignKey = null;
                 foreach (
                     var otherForeignKey in rootForeignKey.DeclaringEntityType.FindRowInternalForeignKeys(
                             storeObject
                         )
                         .SelectMany(fk => fk.PrincipalEntityType.GetForeignKeys())
-                ) {
+                )
+                {
                     if (
                         principalStoreObject.Name
                             == otherForeignKey.PrincipalEntityType.GetTableName()
                         && principalStoreObject.Schema
                             == otherForeignKey.PrincipalEntityType.GetSchema()
-                    ) {
+                    )
+                    {
                         var otherColumnNames = otherForeignKey.Properties.GetColumnNames(
                             storeObject
                         );
@@ -125,7 +130,8 @@ namespace Microsoft.EntityFrameworkCore
                             && otherPrincipalColumnNames != null
                             && propertyNames.SequenceEqual(otherColumnNames)
                             && principalPropertyNames.SequenceEqual(otherPrincipalColumnNames)
-                        ) {
+                        )
+                        {
                             linkedForeignKey = otherForeignKey;
                             break;
                         }
@@ -181,7 +187,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionForeignKey foreignKey,
             string? value,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             foreignKey.SetOrRemoveAnnotation(
                 RelationalAnnotationNames.Name,
                 Check.NullButNotEmpty(value, nameof(value)),
@@ -227,7 +234,8 @@ namespace Microsoft.EntityFrameworkCore
         public static IReadOnlyForeignKey? FindSharedObjectRootForeignKey(
             this IReadOnlyForeignKey foreignKey,
             in StoreObjectIdentifier storeObject
-        ) {
+        )
+        {
             Check.NotNull(foreignKey, nameof(foreignKey));
 
             var foreignKeyName = foreignKey.GetConstraintName(
@@ -245,14 +253,16 @@ namespace Microsoft.EntityFrameworkCore
                 var i = 0;
                 i < Metadata.Internal.RelationalEntityTypeExtensions.MaxEntityTypesSharingTable;
                 i++
-            ) {
+            )
+            {
                 IReadOnlyForeignKey? linkedForeignKey = null;
                 foreach (
                     var otherForeignKey in rootForeignKey.DeclaringEntityType.FindRowInternalForeignKeys(
                             storeObject
                         )
                         .SelectMany(fk => fk.PrincipalEntityType.GetForeignKeys())
-                ) {
+                )
+                {
                     if (
                         otherForeignKey.GetConstraintName(
                             storeObject,
@@ -261,7 +271,8 @@ namespace Microsoft.EntityFrameworkCore
                                 otherForeignKey.PrincipalEntityType.GetSchema()
                             )
                         ) == foreignKeyName
-                    ) {
+                    )
+                    {
                         linkedForeignKey = otherForeignKey;
                         break;
                     }

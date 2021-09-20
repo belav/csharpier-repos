@@ -28,7 +28,8 @@ namespace Microsoft.JSInterop.Implementation
         public TValue Invoke<[DynamicallyAccessedMembers(JsonSerialized)] TValue>(
             string identifier,
             params object?[]? args
-        ) {
+        )
+        {
             ThrowIfDisposed();
 
             return _jsRuntime.Invoke<TValue>(identifier, Id, args);

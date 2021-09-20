@@ -18,7 +18,8 @@ namespace System.Net.Http
             out long a,
             out long b,
             out int bytesRead
-        ) {
+        )
+        {
             if (VariableLengthIntegerHelper.TryRead(buffer, out a, out int aLength))
             {
                 buffer = buffer.Slice(aLength);
@@ -48,7 +49,8 @@ namespace System.Net.Http
             long payloadLength,
             Span<byte> buffer,
             out int bytesWritten
-        ) {
+        )
+        {
             Debug.Assert(
                 VariableLengthIntegerHelper.GetByteCount((long)frameType) == 1,
                 $"{nameof(TryWriteFrameEnvelope)} assumes {nameof(frameType)} will fit within a single byte varint."
@@ -65,7 +67,8 @@ namespace System.Net.Http
                         payloadLength,
                         out int payloadLengthEncodedLength
                     )
-                ) {
+                )
+                {
                     bytesWritten = payloadLengthEncodedLength + 1;
                     return true;
                 }

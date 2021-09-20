@@ -70,7 +70,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             Document document,
             Checksum checksum,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var project = document.Project;
             var stringTable = GetStringTable(project);
 
@@ -119,7 +120,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
                     foreach (
                         var current in root.DescendantNodesAndTokensAndSelf(descendIntoTrivia: true)
-                    ) {
+                    )
+                    {
                         if (current.IsNode)
                         {
                             var node = (SyntaxNode)current;
@@ -162,7 +164,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                                     node,
                                     out var aliases
                                 )
-                            ) {
+                            )
+                            {
                                 foreach (var (aliasName, name) in aliases)
                                 {
                                     // In C#, it's valid to declare two alias with identical name,
@@ -205,7 +208,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                                     rootNamespace,
                                     out var declaredSymbolInfo
                                 )
-                            ) {
+                            )
+                            {
                                 if (root.FullSpan.Contains(declaredSymbolInfo.Span))
                                 {
                                     var declaredSymbolInfoIndex = declaredSymbolInfos.Count;
@@ -247,7 +251,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                             if (
                                 syntaxFacts.IsIdentifier(token)
                                 || syntaxFacts.IsGlobalNamespaceKeyword(token)
-                            ) {
+                            )
+                            {
                                 var valueText = token.ValueText;
 
                                 identifiers.Add(valueText);
@@ -267,7 +272,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                                     token,
                                     out var predefinedOperator
                                 )
-                            ) {
+                            )
+                            {
                                 predefinedOperators |= (int)predefinedOperator;
                             }
 
@@ -368,7 +374,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             int declaredSymbolInfoIndex,
             DeclaredSymbolInfo declaredSymbolInfo,
             PooledDictionary<string, ArrayBuilder<int>> extensionMethodsInfoBuilder
-        ) {
+        )
+        {
             if (declaredSymbolInfo.Kind != DeclaredSymbolInfoKind.ExtensionMethod)
             {
                 return;
@@ -408,7 +415,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             bool ignoreCase,
             out HashSet<string> identifiers,
             out HashSet<string> escapedIdentifiers
-        ) {
+        )
+        {
             if (ignoreCase)
             {
                 identifiers = SharedPools.StringIgnoreCaseHashSet.AllocateAndClear();
@@ -430,7 +438,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             bool ignoreCase,
             HashSet<string> identifiers,
             HashSet<string> escapedIdentifiers
-        ) {
+        )
+        {
             if (ignoreCase)
             {
                 Debug.Assert(identifiers.Comparer == StringComparer.OrdinalIgnoreCase);

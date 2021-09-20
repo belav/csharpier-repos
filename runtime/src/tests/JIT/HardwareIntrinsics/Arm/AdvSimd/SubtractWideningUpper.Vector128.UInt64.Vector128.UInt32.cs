@@ -134,7 +134,8 @@ namespace JIT.HardwareIntrinsics.Arm
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfinArray2
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -213,7 +214,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario(
                 SimpleBinaryOpTest__SubtractWideningUpper_Vector128_UInt64_Vector128_UInt32 testClass
-            ) {
+            )
+            {
                 var result = AdvSimd.SubtractWideningUpper(_fld1, _fld2);
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
@@ -222,7 +224,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario_Load(
                 SimpleBinaryOpTest__SubtractWideningUpper_Vector128_UInt64_Vector128_UInt32 testClass
-            ) {
+            )
+            {
                 fixed (Vector128<UInt64>* pFld1 = &_fld1)fixed (Vector128<UInt32>* pFld2 = &_fld2)
                 {
                     var result = AdvSimd.SubtractWideningUpper(
@@ -405,7 +408,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             fixed (Vector128<UInt64>* pClsVar1 = &_clsVar1)fixed (
                 Vector128<UInt32>* pClsVar2 = &_clsVar2
-            ) {
+            )
+            {
                 var result = AdvSimd.SubtractWideningUpper(
                     AdvSimd.LoadVector128((UInt64*)(pClsVar1)),
                     AdvSimd.LoadVector128((UInt32*)(pClsVar2))
@@ -461,7 +465,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             fixed (Vector128<UInt64>* pFld1 = &test._fld1)fixed (
                 Vector128<UInt32>* pFld2 = &test._fld2
-            ) {
+            )
+            {
                 var result = AdvSimd.SubtractWideningUpper(
                     AdvSimd.LoadVector128((UInt64*)(pFld1)),
                     AdvSimd.LoadVector128((UInt32*)(pFld2))
@@ -565,7 +570,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Vector128<UInt32> op2,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             UInt64[] inArray1 = new UInt64[Op1ElementCount];
             UInt32[] inArray2 = new UInt32[Op2ElementCount];
             UInt64[] outArray = new UInt64[RetElementCount];
@@ -586,7 +592,8 @@ namespace JIT.HardwareIntrinsics.Arm
             void* op2,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             UInt64[] inArray1 = new UInt64[Op1ElementCount];
             UInt32[] inArray2 = new UInt32[Op2ElementCount];
             UInt64[] outArray = new UInt64[RetElementCount];
@@ -615,7 +622,8 @@ namespace JIT.HardwareIntrinsics.Arm
             UInt32[] right,
             UInt64[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             for (var i = 0; i < RetElementCount; i++)

@@ -78,7 +78,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             string originalString,
             int lineBreaks,
             int spaces
-        ) {
+        )
+        {
             Contract.ThrowIfNull(context);
             Contract.ThrowIfNull(formattingRules);
             Contract.ThrowIfNull(originalString);
@@ -309,7 +310,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             WhitespaceAppender<T> whitespaceAdder,
             ArrayBuilder<T> changes,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var lineColumn = this.InitialLineColumn;
 
             var existingWhitespaceDelta = LineColumnDelta.Default;
@@ -391,7 +393,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             ArrayBuilder<T> changes,
             bool implicitLineBreak,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var lineColumnAfterTrivia1 =
                 trivia1.RawKind == 0
                     ? lineColumnBeforeTrivia1
@@ -428,7 +431,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             LineColumnDelta existingWhitespaceBetween,
             bool implicitLineBreak,
             SyntaxTrivia trivia2
-        ) {
+        )
+        {
             var defaultRule = GetLineColumnRuleBetween(
                 trivia1,
                 existingWhitespaceBetween,
@@ -496,7 +500,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             if (
                 spaceOperation.Option == AdjustSpacesOption.DefaultSpacesIfOnSingleLine
                 && spaceOperation.Space == 1
-            ) {
+            )
+            {
                 return defaultRule;
             }
 
@@ -512,7 +517,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             SyntaxTrivia trivia2,
             out SyntaxToken token1,
             out SyntaxToken token2
-        ) {
+        )
+        {
             token1 = default;
             if (trivia1.RawKind == 0)
             {
@@ -596,13 +602,15 @@ namespace Microsoft.CodeAnalysis.Formatting
             LineColumnDelta existingWhitespaceBetween,
             SyntaxTrivia trivia2,
             LineColumnRule rule
-        ) {
+        )
+        {
             // we do not touch spaces adjacent to missing token
             // [missing token] [whitespace] [trivia] or [trivia] [whitespace] [missing token] case
             if (
                 (this.Token1.IsMissing && trivia1.RawKind == 0)
                 || (trivia2.RawKind == 0 && this.Token2.IsMissing)
-            ) {
+            )
+            {
                 // leave things as it is
                 return existingWhitespaceBetween;
             }
@@ -630,7 +638,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             LineColumnDelta existingWhitespaceBetween,
             SyntaxTrivia trivia2,
             LineColumnRule rule
-        ) {
+        )
+        {
             var lineColumnAfterExistingWhitespace = lineColumnAfterTrivia1.With(
                 existingWhitespaceBetween
             );
@@ -669,7 +678,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             LineColumnRule rule,
             LineColumn lineColumnAfterTrivia1,
             LineColumnDelta existingWhitespaceBetween
-        ) {
+        )
+        {
             var adjustedRuleLines = Math.Max(
                 0,
                 rule.Lines - GetTrailingLinesAtEndOfTrivia1(lineColumnAfterTrivia1)
@@ -855,7 +865,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             LineColumn lineColumn,
             LineColumnDelta delta,
             ArrayBuilder<SyntaxTrivia> changes
-        ) {
+        )
+        {
             AddWhitespaceTrivia(lineColumn, delta, default, changes);
         }
 
@@ -864,7 +875,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             LineColumnDelta delta,
             TextSpan notUsed,
             ArrayBuilder<SyntaxTrivia> changes
-        ) {
+        )
+        {
             if (delta.Lines == 0 && delta.Spaces == 0)
             {
                 // remove trivia
@@ -938,7 +950,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             LineColumnDelta delta,
             TextSpan span,
             ArrayBuilder<TextChange> changes
-        ) {
+        )
+        {
             var newText = GetWhitespaceString(lineColumn, delta);
             changes.Add(new TextChange(span, newText));
         }
@@ -967,7 +980,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             SyntaxTrivia trivia1,
             LineColumnDelta whitespaceBetween,
             SyntaxTrivia trivia2
-        ) {
+        )
+        {
             Debug.Assert(IsWhitespaceOrEndOfLine(trivia2));
 
             // treat elastic as new line as long as its previous trivia is not elastic or

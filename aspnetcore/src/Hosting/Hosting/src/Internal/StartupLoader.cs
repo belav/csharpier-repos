@@ -44,7 +44,8 @@ namespace Microsoft.AspNetCore.Hosting
             [DynamicallyAccessedMembers(StartupLinkerOptions.Accessibility)] Type startupType,
             string environmentName,
             object? instance = null
-        ) {
+        )
+        {
             var configureMethod = FindConfigureDelegate(startupType, environmentName);
 
             var servicesMethod = FindConfigureServicesDelegate(startupType, environmentName);
@@ -59,7 +60,8 @@ namespace Microsoft.AspNetCore.Hosting
                     !configureMethod.MethodInfo.IsStatic
                     || (servicesMethod?.MethodInfo != null && !servicesMethod.MethodInfo.IsStatic)
                 )
-            ) {
+            )
+            {
                 instance = ActivatorUtilities.GetServiceOrCreateInstance(
                     hostingServiceProvider,
                     startupType
@@ -97,7 +99,8 @@ namespace Microsoft.AspNetCore.Hosting
                 ConfigureServicesBuilder configureServicesBuilder,
                 ConfigureContainerBuilder configureContainerBuilder,
                 object instance
-            ) {
+            )
+            {
                 HostingServiceProvider = hostingServiceProvider;
                 ConfigureServicesBuilder = configureServicesBuilder;
                 ConfigureContainerBuilder = configureContainerBuilder;
@@ -140,12 +143,14 @@ namespace Microsoft.AspNetCore.Hosting
             Func<IServiceCollection, IServiceProvider> ConfigureServices(
                 Func<IServiceCollection, IServiceProvider?> configureServicesCallback,
                 Action<object> configureContainerCallback
-            ) {
+            )
+            {
                 return ConfigureServicesWithContainerConfiguration;
 
                 IServiceProvider ConfigureServicesWithContainerConfiguration(
                     IServiceCollection services
-                ) {
+                )
+                {
                     // Call ConfigureServices, if that returned an IServiceProvider, we're done
                     var applicationServiceProvider = configureServicesCallback.Invoke(services);
 
@@ -184,7 +189,8 @@ namespace Microsoft.AspNetCore.Hosting
 
             private Func<IServiceCollection, IServiceProvider?> BuildStartupServicesFilterPipeline(
                 Func<IServiceCollection, IServiceProvider?> startup
-            ) {
+            )
+            {
                 return RunPipeline;
 
                 IServiceProvider? RunPipeline(IServiceCollection services)
@@ -234,7 +240,8 @@ namespace Microsoft.AspNetCore.Hosting
 
             private Action<TContainerBuilder> BuildStartupConfigureContainerFiltersPipeline(
                 Action<TContainerBuilder> configureContainer
-            ) {
+            )
+            {
                 return RunPipeline;
 
                 void RunPipeline(TContainerBuilder containerBuilder)
@@ -336,7 +343,8 @@ namespace Microsoft.AspNetCore.Hosting
         internal static ConfigureBuilder FindConfigureDelegate(
             [DynamicallyAccessedMembers(StartupLinkerOptions.Accessibility)] Type startupType,
             string environmentName
-        ) {
+        )
+        {
             var configureMethod = FindMethod(
                 startupType,
                 "Configure{0}",
@@ -350,7 +358,8 @@ namespace Microsoft.AspNetCore.Hosting
         internal static ConfigureContainerBuilder FindConfigureContainerDelegate(
             [DynamicallyAccessedMembers(StartupLinkerOptions.Accessibility)] Type startupType,
             string environmentName
-        ) {
+        )
+        {
             var configureMethod = FindMethod(
                 startupType,
                 "Configure{0}Container",
@@ -364,7 +373,8 @@ namespace Microsoft.AspNetCore.Hosting
         internal static bool HasConfigureServicesIServiceProviderDelegate(
             [DynamicallyAccessedMembers(StartupLinkerOptions.Accessibility)] Type startupType,
             string environmentName
-        ) {
+        )
+        {
             return null
                 != FindMethod(
                     startupType,
@@ -378,7 +388,8 @@ namespace Microsoft.AspNetCore.Hosting
         internal static ConfigureServicesBuilder FindConfigureServicesDelegate(
             [DynamicallyAccessedMembers(StartupLinkerOptions.Accessibility)] Type startupType,
             string environmentName
-        ) {
+        )
+        {
             var servicesMethod =
                 FindMethod(
                     startupType,
@@ -403,7 +414,8 @@ namespace Microsoft.AspNetCore.Hosting
             string environmentName,
             Type? returnType = null,
             bool required = true
-        ) {
+        )
+        {
             var methodNameWithEnv = string.Format(
                 CultureInfo.InvariantCulture,
                 methodName,

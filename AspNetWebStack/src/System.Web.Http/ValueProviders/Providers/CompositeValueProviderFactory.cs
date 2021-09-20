@@ -26,7 +26,8 @@ namespace System.Web.Http.ValueProviders.Providers
         internal static IValueProvider GetValueProvider(
             HttpActionContext actionContext,
             ValueProviderFactory[] factories
-        ) {
+        )
+        {
             // Fast-path the case of just one factory
             if (factories.Length == 1)
             {

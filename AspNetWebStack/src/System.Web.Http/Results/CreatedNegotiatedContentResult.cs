@@ -37,15 +37,16 @@ namespace System.Web.Http.Results
             IContentNegotiator contentNegotiator,
             HttpRequestMessage request,
             IEnumerable<MediaTypeFormatter> formatters
-        ) : this(
-            location,
-            content,
-            new NegotiatedContentResult<T>.DirectDependencyProvider(
-                contentNegotiator,
-                request,
-                formatters
-            )
-        ) { }
+        )
+            : this(
+                location,
+                content,
+                new NegotiatedContentResult<T>.DirectDependencyProvider(
+                    contentNegotiator,
+                    request,
+                    formatters
+                )
+            ) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CreatedNegotiatedContentResult{T}"/> class with the values
@@ -54,21 +55,19 @@ namespace System.Web.Http.Results
         /// <param name="location">The location at which the content has been created.</param>
         /// <param name="content">The content value to negotiate and format in the entity body.</param>
         /// <param name="controller">The controller from which to obtain the dependencies needed for execution.</param>
-        public CreatedNegotiatedContentResult(
-            Uri location,
-            T content,
-            ApiController controller
-        ) : this(
-            location,
-            content,
-            new NegotiatedContentResult<T>.ApiControllerDependencyProvider(controller)
-        ) { }
+        public CreatedNegotiatedContentResult(Uri location, T content, ApiController controller)
+            : this(
+                location,
+                content,
+                new NegotiatedContentResult<T>.ApiControllerDependencyProvider(controller)
+            ) { }
 
         private CreatedNegotiatedContentResult(
             Uri location,
             T content,
             NegotiatedContentResult<T>.IDependencyProvider dependencies
-        ) {
+        )
+        {
             if (location == null)
             {
                 throw new ArgumentNullException("location");

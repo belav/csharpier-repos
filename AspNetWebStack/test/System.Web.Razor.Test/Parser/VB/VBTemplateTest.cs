@@ -288,7 +288,8 @@ namespace System.Web.Razor.Test.Parser.VB
             int absoluteIndex,
             int lineIndex,
             int characterIndex
-        ) {
+        )
+        {
             return new RazorError(
                 RazorResources.ParseError_InlineMarkup_Blocks_Cannot_Be_Nested,
                 absoluteIndex,

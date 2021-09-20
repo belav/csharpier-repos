@@ -15,7 +15,8 @@ namespace System.Reflection.Metadata.Tests
             byte[] peImage,
             Action<PEReader> validator,
             bool useStream = false
-        ) {
+        )
+        {
             using (var tempFile = new TempFile(Path.GetTempFileName()))
             {
                 File.WriteAllBytes(tempFile.Path, peImage);
@@ -26,7 +27,8 @@ namespace System.Reflection.Metadata.Tests
                         IntPtr.Zero,
                         0
                     )
-                ) {
+                )
+                {
                     byte* peImagePtr = (byte*)global::Interop.Kernel32.GetModuleHandle(
                         Path.GetFileName(tempFile.Path)
                     );
@@ -42,7 +44,8 @@ namespace System.Reflection.Metadata.Tests
                                   PEStreamOptions.IsLoadedImage
                               )
                             : new PEReader(peImagePtr, int.MaxValue, isLoadedImage: true)
-                    ) {
+                    )
+                    {
                         validator(peReader);
                     }
                 }

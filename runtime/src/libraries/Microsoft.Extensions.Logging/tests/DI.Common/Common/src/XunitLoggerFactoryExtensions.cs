@@ -13,7 +13,8 @@ namespace Microsoft.Extensions.Logging
         public static ILoggingBuilder AddXunit(
             this ILoggingBuilder builder,
             ITestOutputHelper output
-        ) {
+        )
+        {
             builder.Services.AddSingleton<ILoggerProvider>(new XunitLoggerProvider(output));
             return builder;
         }
@@ -22,7 +23,8 @@ namespace Microsoft.Extensions.Logging
             this ILoggingBuilder builder,
             ITestOutputHelper output,
             LogLevel minLevel
-        ) {
+        )
+        {
             builder.Services.AddSingleton<ILoggerProvider>(
                 new XunitLoggerProvider(output, minLevel)
             );
@@ -34,7 +36,8 @@ namespace Microsoft.Extensions.Logging
             ITestOutputHelper output,
             LogLevel minLevel,
             DateTimeOffset? logStart
-        ) {
+        )
+        {
             builder.Services.AddSingleton<ILoggerProvider>(
                 new XunitLoggerProvider(output, minLevel, logStart)
             );
@@ -44,7 +47,8 @@ namespace Microsoft.Extensions.Logging
         public static ILoggerFactory AddXunit(
             this ILoggerFactory loggerFactory,
             ITestOutputHelper output
-        ) {
+        )
+        {
             loggerFactory.AddProvider(new XunitLoggerProvider(output));
             return loggerFactory;
         }
@@ -53,7 +57,8 @@ namespace Microsoft.Extensions.Logging
             this ILoggerFactory loggerFactory,
             ITestOutputHelper output,
             LogLevel minLevel
-        ) {
+        )
+        {
             loggerFactory.AddProvider(new XunitLoggerProvider(output, minLevel));
             return loggerFactory;
         }
@@ -63,7 +68,8 @@ namespace Microsoft.Extensions.Logging
             ITestOutputHelper output,
             LogLevel minLevel,
             DateTimeOffset? logStart
-        ) {
+        )
+        {
             loggerFactory.AddProvider(new XunitLoggerProvider(output, minLevel, logStart));
             return loggerFactory;
         }

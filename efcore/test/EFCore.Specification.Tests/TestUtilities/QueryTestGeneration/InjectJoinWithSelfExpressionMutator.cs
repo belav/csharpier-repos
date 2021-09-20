@@ -79,7 +79,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration
                     node?.Method.Name == nameof(Queryable.ThenBy)
                     || node?.Method.Name == nameof(Queryable.ThenByDescending)
                     || node?.Method.Name == nameof(EntityFrameworkQueryableExtensions.ThenInclude)
-                ) {
+                )
+                {
                     return node;
                 }
 
@@ -93,7 +94,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration
                     && !_insideThenBy
                     && IsQueryableResult(node)
                     && _mutator.IsEntityType(node.Type.GetGenericArguments()[0])
-                ) {
+                )
+                {
                     FoundExpressions.Add(node);
                 }
 

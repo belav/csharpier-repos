@@ -142,7 +142,8 @@ namespace JIT.HardwareIntrinsics.X86
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfinArray2
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -445,7 +446,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             fixed (Vector128<SByte>* pClsVar1 = &_clsVar1)fixed (
                 Vector128<SByte>* pClsVar2 = &_clsVar2
-            ) {
+            )
+            {
                 var result = Sse2.UnpackLow(
                     Sse2.LoadVector128((SByte*)(pClsVar1)),
                     Sse2.LoadVector128((SByte*)(pClsVar2))
@@ -511,7 +513,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             fixed (Vector128<SByte>* pFld1 = &test._fld1)fixed (
                 Vector128<SByte>* pFld2 = &test._fld2
-            ) {
+            )
+            {
                 var result = Sse2.UnpackLow(
                     Sse2.LoadVector128((SByte*)(pFld1)),
                     Sse2.LoadVector128((SByte*)(pFld2))
@@ -615,7 +618,8 @@ namespace JIT.HardwareIntrinsics.X86
             Vector128<SByte> op2,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             SByte[] inArray1 = new SByte[Op1ElementCount];
             SByte[] inArray2 = new SByte[Op2ElementCount];
             SByte[] outArray = new SByte[RetElementCount];
@@ -636,7 +640,8 @@ namespace JIT.HardwareIntrinsics.X86
             void* op2,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             SByte[] inArray1 = new SByte[Op1ElementCount];
             SByte[] inArray2 = new SByte[Op2ElementCount];
             SByte[] outArray = new SByte[RetElementCount];
@@ -665,7 +670,8 @@ namespace JIT.HardwareIntrinsics.X86
             SByte[] right,
             SByte[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (result[0] != left[0])

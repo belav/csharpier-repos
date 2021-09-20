@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.DateAndTime.LanguageServices
             Document document,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
 
             var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
@@ -41,7 +42,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.DateAndTime.LanguageServices
                     out _
                 )
                 && token.RawKind != syntaxFacts.SyntaxKinds.InterpolatedStringTextToken
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -59,7 +61,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.DateAndTime.LanguageServices
             ISyntaxFactsService syntaxFacts,
             SyntaxNode root,
             int position
-        ) {
+        )
+        {
             var token = root.FindToken(position);
             var syntaxKinds = syntaxFacts.SyntaxKinds;
 

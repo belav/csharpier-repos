@@ -24,7 +24,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
             CodeModelState state,
             ProjectId projectId,
             ITypeSymbol typeSymbol
-        ) {
+        )
+        {
             var element = new ExternalCodeStruct(state, projectId, typeSymbol);
             return (EnvDTE.CodeStruct)ComAggregate.CreateAggregatedObject(element);
         }

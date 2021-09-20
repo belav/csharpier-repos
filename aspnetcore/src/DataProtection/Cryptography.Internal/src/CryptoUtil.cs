@@ -99,7 +99,8 @@ namespace Microsoft.AspNetCore.Cryptography
             byte[] bufB,
             int offsetB,
             int countB
-        ) {
+        )
+        {
             // Technically this is an early exit scenario, but it means that the caller did something bizarre.
             // An error at the call site isn't usable for timing attacks.
             Assert(countA == countB, "countA == countB");

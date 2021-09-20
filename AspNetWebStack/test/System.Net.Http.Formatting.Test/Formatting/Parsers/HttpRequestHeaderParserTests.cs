@@ -246,7 +246,8 @@ namespace System.Net.Http.Formatting.Parsers
             string address,
             string version,
             Dictionary<string, string> headers
-        ) {
+        )
+        {
             const string SP = " ";
             const string CRLF = "\r\n";
             string lws = SP;
@@ -270,7 +271,8 @@ namespace System.Net.Http.Formatting.Parsers
             byte[] buffer,
             int readsize,
             out int totalBytesConsumed
-        ) {
+        )
+        {
             ParserState state = ParserState.Invalid;
             totalBytesConsumed = 0;
             while (totalBytesConsumed <= buffer.Length)
@@ -298,7 +300,8 @@ namespace System.Net.Http.Formatting.Parsers
             string requestUri,
             Version version,
             Dictionary<string, string> headers
-        ) {
+        )
+        {
             Assert.Equal(new HttpMethod(method), requestLine.Method);
             Assert.Equal(requestUri, requestLine.RequestUri);
             Assert.Equal(version, requestLine.Version);

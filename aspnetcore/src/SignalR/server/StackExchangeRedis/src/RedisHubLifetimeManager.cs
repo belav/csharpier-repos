@@ -65,7 +65,8 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis
             IHubProtocolResolver hubProtocolResolver,
             IOptions<HubOptions>? globalHubOptions,
             IOptions<HubOptions<THub>>? hubOptions
-        ) {
+        )
+        {
             _logger = logger;
             _options = options.Value;
             _ackHandler = new AckHandler();
@@ -158,7 +159,8 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis
             string methodName,
             object?[] args,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var message = _protocol.WriteInvocation(methodName, args);
             return PublishAsync(_channels.All, message);
         }
@@ -169,7 +171,8 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis
             object?[] args,
             IReadOnlyList<string> excludedConnectionIds,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var message = _protocol.WriteInvocation(methodName, args, excludedConnectionIds);
             return PublishAsync(_channels.All, message);
         }
@@ -180,7 +183,8 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis
             string methodName,
             object?[] args,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (connectionId == null)
             {
                 throw new ArgumentNullException(nameof(connectionId));
@@ -204,7 +208,8 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis
             string methodName,
             object?[] args,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (groupName == null)
             {
                 throw new ArgumentNullException(nameof(groupName));
@@ -221,7 +226,8 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis
             object?[] args,
             IReadOnlyList<string> excludedConnectionIds,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (groupName == null)
             {
                 throw new ArgumentNullException(nameof(groupName));
@@ -237,7 +243,8 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis
             string methodName,
             object?[] args,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var message = _protocol.WriteInvocation(methodName, args);
             return PublishAsync(_channels.User(userId), message);
         }
@@ -247,7 +254,8 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis
             string connectionId,
             string groupName,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (connectionId == null)
             {
                 throw new ArgumentNullException(nameof(connectionId));
@@ -273,7 +281,8 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis
             string connectionId,
             string groupName,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (connectionId == null)
             {
                 throw new ArgumentNullException(nameof(connectionId));
@@ -300,7 +309,8 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis
             string methodName,
             object?[] args,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (connectionIds == null)
             {
                 throw new ArgumentNullException(nameof(connectionIds));
@@ -323,7 +333,8 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis
             string methodName,
             object?[] args,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (groupNames == null)
             {
                 throw new ArgumentNullException(nameof(groupNames));
@@ -348,7 +359,8 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis
             string methodName,
             object?[] args,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (userIds.Count > 0)
             {
                 var payload = _protocol.WriteInvocation(methodName, args);
@@ -425,7 +437,8 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis
             string connectionId,
             string groupName,
             GroupAction action
-        ) {
+        )
+        {
             var id = Interlocked.Increment(ref _internalId);
             var ack = _ackHandler.CreateAck(id);
             // Send Add/Remove Group to other servers and wait for an ack or timeout
@@ -484,7 +497,8 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis
                                 || !invocation.ExcludedConnectionIds.Contains(
                                     connection.ConnectionId
                                 )
-                            ) {
+                            )
+                            {
                                 tasks.Add(connection.WriteAsync(invocation.Message).AsTask());
                             }
                         }
@@ -614,7 +628,8 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis
         private async Task SubscribeToGroupAsync(
             string groupChannel,
             HubConnectionStore groupConnections
-        ) {
+        )
+        {
             RedisLog.Subscribing(_logger, groupChannel);
             var channel = await _bus!.SubscribeAsync(groupChannel);
             channel.OnMessage(
@@ -631,7 +646,8 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis
                                 invocation.ExcludedConnectionIds?.Contains(
                                     groupConnection.ConnectionId
                                 ) == true
-                            ) {
+                            )
+                            {
                                 continue;
                             }
 

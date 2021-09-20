@@ -32,7 +32,8 @@ namespace Microsoft.Extensions.Logging
         internal static ILoggingBuilder AddAzureWebAppDiagnostics(
             this ILoggingBuilder builder,
             IWebAppContext context
-        ) {
+        )
+        {
             if (!context.IsRunningInAzureWebApp)
             {
                 return builder;
@@ -100,7 +101,8 @@ namespace Microsoft.Extensions.Logging
         private static bool TryAddEnumerable(
             IServiceCollection collection,
             ServiceDescriptor descriptor
-        ) {
+        )
+        {
             var beforeCount = collection.Count;
             collection.TryAddEnumerable(descriptor);
             return beforeCount != collection.Count;
@@ -108,7 +110,8 @@ namespace Microsoft.Extensions.Logging
 
         private static ConfigurationBasedLevelSwitcher CreateBlobFilterConfigureOptions(
             IConfiguration config
-        ) {
+        )
+        {
             return new ConfigurationBasedLevelSwitcher(
                 configuration: config,
                 provider: typeof(BlobLoggerProvider),
@@ -118,7 +121,8 @@ namespace Microsoft.Extensions.Logging
 
         private static ConfigurationBasedLevelSwitcher CreateFileFilterConfigureOptions(
             IConfiguration config
-        ) {
+        )
+        {
             return new ConfigurationBasedLevelSwitcher(
                 configuration: config,
                 provider: typeof(FileLoggerProvider),

@@ -53,7 +53,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [EntityFrameworkInternal]
         public QueryTranslationPreprocessorDependencies(
             IEvaluatableExpressionFilter evaluatableExpressionFilter
-        ) {
+        )
+        {
             Check.NotNull(evaluatableExpressionFilter, nameof(evaluatableExpressionFilter));
 
             EvaluatableExpressionFilter = evaluatableExpressionFilter;

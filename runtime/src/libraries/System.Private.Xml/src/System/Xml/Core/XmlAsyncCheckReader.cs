@@ -277,7 +277,8 @@ namespace System.Xml
         public override object ReadContentAs(
             Type returnType,
             IXmlNamespaceResolver? namespaceResolver
-        ) {
+        )
+        {
             CheckAsync();
             return _coreReader.ReadContentAs(returnType, namespaceResolver);
         }
@@ -399,7 +400,8 @@ namespace System.Xml
         public override object ReadElementContentAs(
             Type returnType,
             IXmlNamespaceResolver namespaceResolver
-        ) {
+        )
+        {
             CheckAsync();
             return _coreReader.ReadElementContentAs(returnType, namespaceResolver);
         }
@@ -409,7 +411,8 @@ namespace System.Xml
             IXmlNamespaceResolver namespaceResolver,
             string localName,
             string namespaceURI
-        ) {
+        )
+        {
             CheckAsync();
             return _coreReader.ReadElementContentAs(
                 returnType,
@@ -813,7 +816,8 @@ namespace System.Xml
         public override Task<object> ReadContentAsAsync(
             Type returnType,
             IXmlNamespaceResolver? namespaceResolver
-        ) {
+        )
+        {
             CheckAsync();
             var task = _coreReader.ReadContentAsAsync(returnType, namespaceResolver);
             _lastTask = task;
@@ -839,7 +843,8 @@ namespace System.Xml
         public override Task<object> ReadElementContentAsAsync(
             Type returnType,
             IXmlNamespaceResolver namespaceResolver
-        ) {
+        )
+        {
             CheckAsync();
             var task = _coreReader.ReadElementContentAsAsync(returnType, namespaceResolver);
             _lastTask = task;
@@ -874,7 +879,8 @@ namespace System.Xml
             byte[] buffer,
             int index,
             int count
-        ) {
+        )
+        {
             CheckAsync();
             var task = _coreReader.ReadElementContentAsBase64Async(buffer, index, count);
             _lastTask = task;
@@ -893,7 +899,8 @@ namespace System.Xml
             byte[] buffer,
             int index,
             int count
-        ) {
+        )
+        {
             CheckAsync();
             var task = _coreReader.ReadElementContentAsBinHexAsync(buffer, index, count);
             _lastTask = task;
@@ -946,7 +953,8 @@ namespace System.Xml
         #region IXmlNamespaceResolver members
         IDictionary<string, string> IXmlNamespaceResolver.GetNamespacesInScope(
             XmlNamespaceScope scope
-        ) {
+        )
+        {
             return _readerAsIXmlNamespaceResolver.GetNamespacesInScope(scope);
         }
 
@@ -1003,7 +1011,8 @@ namespace System.Xml
         #region IXmlNamespaceResolver members
         IDictionary<string, string> IXmlNamespaceResolver.GetNamespacesInScope(
             XmlNamespaceScope scope
-        ) {
+        )
+        {
             return _readerAsIXmlNamespaceResolver.GetNamespacesInScope(scope);
         }
 

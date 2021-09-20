@@ -27,7 +27,8 @@ namespace System.Text.Unicode
             int outputCharsRemaining,
             out byte* pInputBufferRemaining,
             out char* pOutputBufferRemaining
-        ) {
+        )
+        {
             Debug.Assert(inputLength >= 0, "Input length must not be negative.");
             Debug.Assert(
                 pInputBuffer != null || inputLength == 0,
@@ -326,7 +327,8 @@ namespace System.Text.Unicode
                                 && !UInt32EndsWithOverlongUtf8TwoByteSequence(thisDWord)
                             )
                         )
-                    ) {
+                    )
+                    {
                         // We have two runs of two bytes each.
 
                         if (outputCharsRemaining < 2)
@@ -505,7 +507,8 @@ namespace System.Text.Unicode
                         if (
                             ((thisDWord & 0x0000_200Fu) == 0)
                             || (((thisDWord - 0x0000_200Du) & 0x0000_200Fu) == 0)
-                        ) {
+                        )
+                        {
                             goto Error; // overlong or surrogate
                         }
                     }
@@ -514,7 +517,8 @@ namespace System.Text.Unicode
                         if (
                             ((thisDWord & 0x0F20_0000u) == 0)
                             || (((thisDWord - 0x0D20_0000u) & 0x0F20_0000u) == 0)
-                        ) {
+                        )
+                        {
                             goto Error; // overlong or surrogate
                         }
                     }
@@ -546,7 +550,8 @@ namespace System.Text.Unicode
                                     ref *pInputBuffer,
                                     ref *pFinalPosWhereCanReadDWordFromInputBuffer
                                 ) >= 3
-                            ) {
+                            )
+                            {
                                 // We're going to attempt to read a second 3-byte sequence and write them both out one after the other.
                                 // We need to check the continuation bit mask on the remaining two bytes (and we may as well check the leading
                                 // byte mask again since it's free), then perform overlong + surrogate checks. If the overlong or surrogate
@@ -560,7 +565,8 @@ namespace System.Text.Unicode
                                     UInt32BeginsWithUtf8ThreeByteMask(secondDWord)
                                     && ((secondDWord & 0x0000_200Fu) != 0)
                                     && (((secondDWord - 0x0000_200Du) & 0x0000_200Fu) != 0)
-                                ) {
+                                )
+                                {
                                     pOutputBuffer[0] = (char)ExtractCharFromFirstThreeByteSequence(
                                         thisDWord
                                     );
@@ -683,7 +689,8 @@ namespace System.Text.Unicode
                                 0xF090_0000u,
                                 0xF48F_FFFFu
                             )
-                        ) {
+                        )
+                        {
                             goto Error;
                         }
                     }
@@ -778,7 +785,8 @@ namespace System.Text.Unicode
                         if (
                             !IsLowByteUtf8ContinuationByte(secondByte)
                             || !IsLowByteUtf8ContinuationByte(thirdByte)
-                        ) {
+                        )
+                        {
                             goto Error; // 3-byte marker not followed by 2 continuation bytes
                         }
 
@@ -794,7 +802,8 @@ namespace System.Text.Unicode
                         partialChar -= ((0xEDu - 0xC2u) << 12) + (0xA0u << 6); // if partialChar = 0, we're at beginning of UTF-16 surrogate code point range
                         if (
                             partialChar < 0x0800u /* number of code points in UTF-16 surrogate code point range */
-                        ) {
+                        )
+                        {
                             goto Error; // attempted to encode a UTF-16 surrogate code point; fail
                         }
 
@@ -839,7 +848,8 @@ namespace System.Text.Unicode
                                 ((0xEDu - 0xC2u) << 6) + 0xA0u,
                                 ((0xEEu - 0xC2u) << 6) + 0x7Fu
                             )
-                        ) {
+                        )
+                        {
                             goto Error; // failed surrogate check
                         }
                     }
@@ -868,7 +878,8 @@ namespace System.Text.Unicode
                             ((0xF0u - 0xC2u) << 6) + 0x90u,
                             ((0xF4u - 0xC2u) << 6) + 0x8Fu
                         )
-                    ) {
+                    )
+                    {
                         goto Error; // failed overlong / out-of-range check
                     }
 
@@ -934,7 +945,8 @@ namespace System.Text.Unicode
             int outputBytesRemaining,
             out char* pInputBufferRemaining,
             out byte* pOutputBufferRemaining
-        ) {
+        )
+        {
             const int CharsPerDWord = sizeof(uint) / sizeof(char);
 
             Debug.Assert(inputLength >= 0, "Input length must not be negative.");
@@ -1057,7 +1069,8 @@ namespace System.Text.Unicode
                     if (
                         Sse41.X64.IsSupported
                         || (AdvSimd.Arm64.IsSupported && BitConverter.IsLittleEndian)
-                    ) {
+                    )
+                    {
                         // Try reading and writing 8 elements per iteration.
                         uint maxIters = minElementsRemaining / 8;
                         ulong possibleNonAsciiQWord;

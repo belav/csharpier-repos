@@ -47,7 +47,8 @@ namespace System.Globalization.Tests
         public void GetAbbreviatedDayName_Invoke_ReturnsExpected(
             DateTimeFormatInfo info,
             string[] expected
-        ) {
+        )
+        {
             DayOfWeek[] values = new DayOfWeek[]
             {
                 DayOfWeek.Sunday,
@@ -70,7 +71,8 @@ namespace System.Globalization.Tests
         [InlineData(DayOfWeek.Saturday + 1)]
         public void GetAbbreviatedDayName_Invalid_ThrowsArgumentOutOfRangeException(
             DayOfWeek dayofweek
-        ) {
+        )
+        {
             var format = new DateTimeFormatInfo();
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "dayofweek",

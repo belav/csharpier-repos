@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
             TextSpan span,
             ParseOptions options,
             TestHost testHost
-        ) {
+        )
+        {
             using var workspace = CreateWorkspace(code, options, testHost);
             var document = workspace.CurrentSolution.GetDocument(workspace.Documents.First().Id);
 
@@ -2154,7 +2155,8 @@ namespace Roslyn.Compilers.Internal
         [CombinatorialData]
         public async Task NestedTypeCantHaveSameNameAsParentTypeWithGlobalNamespaceAlias(
             TestHost testHost
-        ) {
+        )
+        {
             var code =
                 @"class Program
 {
@@ -2177,7 +2179,8 @@ namespace Roslyn.Compilers.Internal
         [CombinatorialData]
         public async Task InteractiveNestedTypeCantHaveSameNameAsParentTypeWithGlobalNamespaceAlias(
             TestHost testHost
-        ) {
+        )
+        {
             var code =
                 @"class Program
 {
@@ -2603,7 +2606,8 @@ public class C1
         [CombinatorialData]
         public async Task EnumTypeAssignedToNamedPropertyOfSameNameInAttributeCtor(
             TestHost testHost
-        ) {
+        )
+        {
             await TestAsync(
                 @"using System;
 using System.Runtime.InteropServices;
@@ -2828,7 +2832,8 @@ class MyClass
         [WorkItem(633, "https://github.com/dotnet/roslyn/issues/633")]
         public async Task InXmlDocCref_WhenConstructorOnlyIsSpecified_NothingIsClassified(
             TestHost testHost
-        ) {
+        )
+        {
             await TestAsync(
                 @"/// <summary>
 /// <see cref=""MyClass(int)""/>
@@ -2849,7 +2854,8 @@ class MyClass
         [WorkItem(633, "https://github.com/dotnet/roslyn/issues/633")]
         public async Task InXmlDocCref_WhenTypeAndConstructorSpecified_OnlyTypeIsClassified(
             TestHost testHost
-        ) {
+        )
+        {
             await TestAsync(
                 @"/// <summary>
 /// <see cref=""MyClass.MyClass(int)""/>
@@ -3024,7 +3030,8 @@ class X<T> where T : unmanaged { }",
         [CombinatorialData]
         public async Task TestUnmanagedConstraint_Type_ExistingInterfaceButOutOfScope(
             TestHost testHost
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 namespace OtherScope
@@ -3076,7 +3083,8 @@ class X
         [CombinatorialData]
         public async Task TestUnmanagedConstraint_Method_ExistingInterfaceButOutOfScope(
             TestHost testHost
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 namespace OtherScope
@@ -3124,7 +3132,8 @@ delegate void D<T>() where T : unmanaged;",
         [CombinatorialData]
         public async Task TestUnmanagedConstraint_Delegate_ExistingInterfaceButOutOfScope(
             TestHost testHost
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 namespace OtherScope
@@ -3651,7 +3660,8 @@ class Program
         [CombinatorialData]
         public async Task TestIncompleteRegexLeadingToStringInsideSkippedTokensInsideADirective(
             TestHost testHost
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 using System.Text.RegularExpressions;
@@ -3723,7 +3733,8 @@ class X
         [CombinatorialData]
         public async Task TestUnmanagedConstraint_LocalFunction_ExistingInterfaceButOutOfScope(
             TestHost testHost
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 namespace OtherScope
@@ -4108,7 +4119,8 @@ class X<T> where T : notnull { }",
         [CombinatorialData]
         public async Task TestNotNullConstraint_Type_ExistingInterfaceButOutOfScope(
             TestHost testHost
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 namespace OtherScope
@@ -4160,7 +4172,8 @@ class X
         [CombinatorialData]
         public async Task TestNotNullConstraint_Method_ExistingInterfaceButOutOfScope(
             TestHost testHost
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 namespace OtherScope
@@ -4208,7 +4221,8 @@ delegate void D<T>() where T : notnull;",
         [CombinatorialData]
         public async Task TestNotNullConstraint_Delegate_ExistingInterfaceButOutOfScope(
             TestHost testHost
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 namespace OtherScope
@@ -4266,7 +4280,8 @@ class X
         [CombinatorialData]
         public async Task TestNotNullConstraint_LocalFunction_ExistingInterfaceButOutOfScope(
             TestHost testHost
-        ) {
+        )
+        {
             await TestAsync(
                 @"
 namespace OtherScope

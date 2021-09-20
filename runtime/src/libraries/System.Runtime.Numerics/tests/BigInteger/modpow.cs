@@ -297,7 +297,8 @@ namespace System.Numerics.Tests
             string exponent,
             string modulus,
             string expected
-        ) {
+        )
+        {
             BigInteger valueInt = BigInteger.Parse(value);
             BigInteger exponentInt = BigInteger.Parse(exponent);
             BigInteger modulusInt = BigInteger.Parse(modulus);

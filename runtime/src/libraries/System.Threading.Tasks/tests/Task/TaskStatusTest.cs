@@ -184,7 +184,8 @@ namespace System.Threading.Tasks.Tests.Status
                             && _childCreationOptions == MyTaskCreationOptions.AttachedToParent
                             && _childTask.Status != TaskStatus.RanToCompletion
                             && _childTask.Status != TaskStatus.Faulted
-                        ) {
+                        )
+                        {
                             //we may have reach this point too soon, let's keep spinning until the status changes.
                             while (_task.Status == TaskStatus.Running)
                             {
@@ -200,7 +201,8 @@ namespace System.Threading.Tasks.Tests.Status
                             if (
                                 _task.Status != TaskStatus.WaitingForChildrenToComplete
                                 && !_childTask.IsCompleted
-                            ) {
+                            )
+                            {
                                 Assert.True(
                                     false,
                                     string.Format(
@@ -222,7 +224,8 @@ namespace System.Threading.Tasks.Tests.Status
                             || _testAction == TestAction.CancelCreatedTask
                         )
                         && exp.Flatten().InnerException.GetType() == typeof(TaskCanceledException)
-                    ) {
+                    )
+                    {
                         Debug.WriteLine("TaskCanceledException Exception was thrown as expected");
                     }
                     else if (
@@ -232,7 +235,8 @@ namespace System.Threading.Tasks.Tests.Status
                         )
                         && _task.IsFaulted
                         && exp.Flatten().InnerException.GetType() == typeof(StatusTestException)
-                    ) {
+                    )
+                    {
                         Debug.WriteLine("StatusTestException Exception was thrown as expected");
                     }
                     else
@@ -258,7 +262,8 @@ namespace System.Threading.Tasks.Tests.Status
                             || _testAction == TestAction.CancelTaskAndAcknowledge
                             || _testAction == TestAction.FailedTask
                         )
-                    ) {
+                    )
+                    {
                         _childTask.Wait();
                     }
                 }
@@ -274,14 +279,16 @@ namespace System.Threading.Tasks.Tests.Status
                                 == MyTaskCreationOptions.RespectParentCancellation
                         )
                         && exp.Flatten().InnerException.GetType() == typeof(TaskCanceledException)
-                    ) {
+                    )
+                    {
                         Debug.WriteLine("TaskCanceledException Exception was thrown as expected");
                     }
                     else if (
                         _testAction == TestAction.FailedChildTask
                         && _childTask.IsFaulted
                         && exp.Flatten().InnerException.GetType() == typeof(StatusTestException)
-                    ) {
+                    )
+                    {
                         Debug.WriteLine("StatusTestException Exception was thrown as expected");
                     }
                     else
@@ -347,7 +354,8 @@ namespace System.Threading.Tasks.Tests.Status
                 _childTask != null
                 && _childTask.Status == TaskStatus.Canceled
                 && _childTask.IsCanceled != true
-            ) {
+            )
+            {
                 Assert.True(
                     false,
                     string.Format(
@@ -424,7 +432,8 @@ namespace System.Threading.Tasks.Tests.Status
                     if (
                         _testAction != TestAction.CancelTask
                         && _testAction != TestAction.CancelTaskAndAcknowledge
-                    ) {
+                    )
+                    {
                         //
                         // if cancel action, release the child task after calling Cancel()
                         //

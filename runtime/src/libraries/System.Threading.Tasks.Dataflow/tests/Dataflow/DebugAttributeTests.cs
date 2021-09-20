@@ -488,7 +488,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 T messageValue,
                 ISourceBlock<T> source,
                 bool consumeToAccept
-            ) {
+            )
+            {
                 if (source != null)
                 {
                     _m_offeringSource.TrySetResult(source);
@@ -546,7 +547,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 DataflowMessageHeader messageHeader,
                 ITargetBlock<T> target,
                 out bool messageConsumed
-            ) {
+            )
+            {
                 messageConsumed = true;
                 return default(T);
             }

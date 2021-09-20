@@ -34,7 +34,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             DiagnosticSource diagnosticSource,
             HtmlEncoder htmlEncoder,
             IModelExpressionProvider modelExpressionProvider
-        ) {
+        )
+        {
             _activationInfo = new ConcurrentDictionary<CacheKey, RazorPagePropertyActivator>();
             _metadataProvider = metadataProvider;
 

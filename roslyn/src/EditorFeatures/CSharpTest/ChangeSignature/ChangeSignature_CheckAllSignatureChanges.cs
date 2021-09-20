@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
         public async Task TestAllSignatureChanges_1This_3Regular_2Default_1Params(
             int totalParameters,
             int[] signature
-        ) {
+        )
+        {
             var markup =
                 @"
 static class Ext
@@ -95,7 +96,8 @@ static class Ext
         public async Task TestAllSignatureChanges_OnDelegate_3Regular(
             int totalParameters,
             int[] signature
-        ) {
+        )
+        {
             var markup =
                 @"
 using System;

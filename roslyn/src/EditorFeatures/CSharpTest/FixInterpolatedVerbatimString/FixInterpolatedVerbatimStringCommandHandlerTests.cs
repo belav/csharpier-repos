@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.FixInterpolatedVerbatim
 
         private static (string quoteCharSnapshotText, int quoteCharCaretPosition) TypeQuoteChar(
             TestWorkspace workspace
-        ) {
+        )
+        {
             var view = workspace.Documents.Single().GetTextView();
             var commandHandler =
                 workspace.ExportProvider.GetCommandHandler<FixInterpolatedVerbatimStringCommandHandler>(

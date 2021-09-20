@@ -17,7 +17,8 @@ namespace System.IO.Compression.Tests
             //add file
             using (
                 TempFile testArchive = CreateTempCopyFile(zfile("normal.zip"), GetTestFilePath())
-            ) {
+            )
+            {
                 using (ZipArchive archive = ZipFile.Open(testArchive.Path, ZipArchiveMode.Update))
                 {
                     string entryName = "added.txt";

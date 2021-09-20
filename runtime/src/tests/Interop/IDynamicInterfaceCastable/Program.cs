@@ -167,7 +167,8 @@ namespace IDynamicInterfaceCastableTests
         public bool IsInterfaceImplemented(
             RuntimeTypeHandle interfaceType,
             bool throwIfNotImplemented
-        ) {
+        )
+        {
             if (
                 interfaceToImplMap != null
                 && interfaceToImplMap.ContainsKey(Type.GetTypeFromHandle(interfaceType))
@@ -221,7 +222,8 @@ namespace IDynamicInterfaceCastableTests
         public bool IsInterfaceImplemented(
             RuntimeTypeHandle interfaceType,
             bool throwIfNotImplemented
-        ) {
+        )
+        {
             if (InvalidImplementation == InvalidReturn.ThrowException)
                 throw new DynamicInterfaceCastableException(interfaceType);
 

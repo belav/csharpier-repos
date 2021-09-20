@@ -118,7 +118,8 @@ namespace JIT.HardwareIntrinsics.General
             SByte result,
             SByte[] values,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             if (result != values[0])
             {
                 TestLibrary.TestFramework.LogInformation(

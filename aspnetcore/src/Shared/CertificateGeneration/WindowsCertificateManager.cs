@@ -38,7 +38,8 @@ namespace Microsoft.AspNetCore.Certificates.Generation
         internal override CheckCertificateStateResult CheckCertificateState(
             X509Certificate2 candidate,
             bool interactive
-        ) {
+        )
+        {
             // Return true as we don't perform any check.
             return new CheckCertificateStateResult(true, null);
         }
@@ -146,7 +147,8 @@ namespace Microsoft.AspNetCore.Certificates.Generation
         protected override IList<X509Certificate2> GetCertificatesToRemove(
             StoreName storeName,
             StoreLocation storeLocation
-        ) {
+        )
+        {
             return ListCertificates(storeName, storeLocation, isValid: false);
         }
     }

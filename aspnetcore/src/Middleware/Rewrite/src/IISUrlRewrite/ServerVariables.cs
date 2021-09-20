@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite
             ParserContext context,
             UriMatchPart uriMatchPart,
             bool alwaysUseManagedServerVariables
-        ) {
+        )
+        {
             Func<PatternSegment>? managedVariableThunk = default;
 
             switch (serverVariable)

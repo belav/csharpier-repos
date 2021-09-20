@@ -22,7 +22,8 @@ namespace System.DirectoryServices.AccountManagement
             int sizeLimit,
             SAMStoreCtx storeCtx,
             SAMMatcher samMatcher
-        ) {
+        )
+        {
             GlobalDebug.WriteLineIf(
                 GlobalDebug.Info,
                 "SAMQuerySet",
@@ -394,7 +395,8 @@ namespace System.DirectoryServices.AccountManagement
             FilterBase filter,
             string wildcardFilter,
             string property
-        ) {
+        )
+        {
             // Build a Regex that matches valueToMatch, and store it on the Filter (so that we don't have
             // to have the CLR constantly reparse the regex string).
             // Ideally, we'd like to use a compiled Regex (RegexOptions.Compiled) for performance,
@@ -426,7 +428,8 @@ namespace System.DirectoryServices.AccountManagement
             FilterBase filter,
             string winNTPropertyName,
             DirectoryEntry de
-        ) {
+        )
+        {
             QbeMatchType valueToMatch = (QbeMatchType)filter.Value;
 
             if (null == valueToMatch.Value)
@@ -445,7 +448,8 @@ namespace System.DirectoryServices.AccountManagement
                 if (
                     de.Properties.Contains(winNTPropertyName)
                     && (de.Properties[winNTPropertyName].Value != null)
-                ) {
+                )
+                {
                     DateTime value;
 
                     if (winNTPropertyName == "PasswordAge")
@@ -495,7 +499,8 @@ namespace System.DirectoryServices.AccountManagement
             FilterBase filter,
             string winNTPropertyName,
             DirectoryEntry de
-        ) {
+        )
+        {
             string valueToMatch = (string)filter.Value;
 
             if (valueToMatch == null)
@@ -527,7 +532,8 @@ namespace System.DirectoryServices.AccountManagement
             FilterBase filter,
             string winNTPropertyName,
             DirectoryEntry de
-        ) {
+        )
+        {
             QbeMatchType valueToMatch = (QbeMatchType)filter.Value;
             bool result = false;
 
@@ -567,7 +573,8 @@ namespace System.DirectoryServices.AccountManagement
             FilterBase filter,
             string winNTPropertyName,
             DirectoryEntry de
-        ) {
+        )
+        {
             string samToMatch = (string)filter.Value;
 
             int index = samToMatch.IndexOf('\\');
@@ -603,7 +610,8 @@ namespace System.DirectoryServices.AccountManagement
             FilterBase filter,
             string winNTPropertyName,
             DirectoryEntry de
-        ) {
+        )
+        {
             byte[] sidToMatch = Utils.StringToByteArray((string)filter.Value);
 
             if (sidToMatch == null)
@@ -621,7 +629,8 @@ namespace System.DirectoryServices.AccountManagement
             FilterBase filter,
             string winNTPropertyName,
             DirectoryEntry de
-        ) {
+        )
+        {
             Debug.Assert(winNTPropertyName == "UserFlags");
 
             bool valueToMatch = (bool)filter.Value;
@@ -685,7 +694,8 @@ namespace System.DirectoryServices.AccountManagement
             FilterBase filter,
             string winNTPropertyName,
             DirectoryEntry de
-        ) {
+        )
+        {
             string valueToMatch = (string)filter.Value;
 
             if (valueToMatch == null)
@@ -702,7 +712,8 @@ namespace System.DirectoryServices.AccountManagement
                 if (
                     de.Properties.Contains(winNTPropertyName)
                     && (de.Properties[winNTPropertyName].Count != 0)
-                ) {
+                )
+                {
                     foreach (string value in de.Properties[winNTPropertyName])
                     {
                         if (value != null)
@@ -720,7 +731,8 @@ namespace System.DirectoryServices.AccountManagement
             FilterBase filter,
             string winNTPropertyName,
             DirectoryEntry de
-        ) {
+        )
+        {
             byte[] valueToMatch = (byte[])filter.Value;
 
             if (valueToMatch == null)
@@ -750,7 +762,8 @@ namespace System.DirectoryServices.AccountManagement
             FilterBase filter,
             string winNTPropertyName,
             DirectoryEntry de
-        ) {
+        )
+        {
             Debug.Assert(filter is ExpirationDateFilter);
             Debug.Assert(winNTPropertyName == "AccountExpirationDate");
 
@@ -770,7 +783,8 @@ namespace System.DirectoryServices.AccountManagement
                 if (
                     de.Properties.Contains(winNTPropertyName)
                     && (de.Properties[winNTPropertyName].Value != null)
-                ) {
+                )
+                {
                     DateTime value = (DateTime)de.Properties[winNTPropertyName].Value;
 
                     if (value.Equals(valueToCompare.Value))
@@ -785,7 +799,8 @@ namespace System.DirectoryServices.AccountManagement
             FilterBase filter,
             string winNTPropertyName,
             DirectoryEntry de
-        ) {
+        )
+        {
             Debug.Assert(winNTPropertyName == "groupType");
             Debug.Assert(filter is GroupScopeFilter);
 
@@ -972,7 +987,8 @@ namespace System.DirectoryServices.AccountManagement
             if (
                 groupDE.Properties["objectSid"] == null
                 || groupDE.Properties["objectSid"].Count == 0
-            ) {
+            )
+            {
                 GlobalDebug.WriteLineIf(
                     GlobalDebug.Info,
                     "SAMQuerySet",
@@ -997,7 +1013,8 @@ namespace System.DirectoryServices.AccountManagement
                 if (
                     memberDE.Properties["objectSid"] == null
                     || memberDE.Properties["objectSid"].Count == 0
-                ) {
+                )
+                {
                     GlobalDebug.WriteLineIf(
                         GlobalDebug.Info,
                         "SAMQuerySet",

@@ -75,7 +75,8 @@ namespace Microsoft.CodeAnalysis
         public IOperation? GetOperation(
             SyntaxNode node,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             try
             {
                 return GetOperationCore(node, cancellationToken);
@@ -111,7 +112,8 @@ namespace Microsoft.CodeAnalysis
         internal SymbolInfo GetSymbolInfo(
             SyntaxNode node,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return GetSymbolInfoCore(node, cancellationToken);
         }
 
@@ -148,7 +150,8 @@ namespace Microsoft.CodeAnalysis
             int position,
             SyntaxNode expression,
             SpeculativeBindingOption bindingOption
-        ) {
+        )
+        {
             return GetSpeculativeSymbolInfoCore(position, expression, bindingOption);
         }
 
@@ -198,7 +201,8 @@ namespace Microsoft.CodeAnalysis
             int position,
             SyntaxNode expression,
             SpeculativeBindingOption bindingOption
-        ) {
+        )
+        {
             return GetSpeculativeTypeInfoCore(position, expression, bindingOption);
         }
 
@@ -235,7 +239,8 @@ namespace Microsoft.CodeAnalysis
         internal TypeInfo GetTypeInfo(
             SyntaxNode node,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return GetTypeInfoCore(node, cancellationToken);
         }
 
@@ -260,7 +265,8 @@ namespace Microsoft.CodeAnalysis
         internal IAliasSymbol? GetAliasInfo(
             SyntaxNode nameSyntax,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return GetAliasInfoCore(nameSyntax, cancellationToken);
         }
 
@@ -329,7 +335,8 @@ namespace Microsoft.CodeAnalysis
             int position,
             SyntaxNode nameSyntax,
             SpeculativeBindingOption bindingOption
-        ) {
+        )
+        {
             return GetSpeculativeAliasInfoCore(position, nameSyntax, bindingOption);
         }
 
@@ -434,7 +441,8 @@ namespace Microsoft.CodeAnalysis
         internal ISymbol? GetDeclaredSymbolForNode(
             SyntaxNode declaration,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return GetDeclaredSymbolCore(declaration, cancellationToken);
         }
 
@@ -466,7 +474,8 @@ namespace Microsoft.CodeAnalysis
         internal ImmutableArray<ISymbol> GetDeclaredSymbolsForNode(
             SyntaxNode declaration,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return GetDeclaredSymbolsCore(declaration, cancellationToken);
         }
 
@@ -512,7 +521,8 @@ namespace Microsoft.CodeAnalysis
             INamespaceOrTypeSymbol? container = null,
             string? name = null,
             bool includeReducedExtensionMethods = false
-        ) {
+        )
+        {
             return LookupSymbolsCore(position, container, name, includeReducedExtensionMethods);
         }
 
@@ -598,7 +608,8 @@ namespace Microsoft.CodeAnalysis
             int position,
             INamespaceOrTypeSymbol? container = null,
             string? name = null
-        ) {
+        )
+        {
             return LookupStaticMembersCore(position, container, name);
         }
 
@@ -633,7 +644,8 @@ namespace Microsoft.CodeAnalysis
             int position,
             INamespaceOrTypeSymbol? container = null,
             string? name = null
-        ) {
+        )
+        {
             return LookupNamespacesAndTypesCore(position, container, name);
         }
 
@@ -684,7 +696,8 @@ namespace Microsoft.CodeAnalysis
         internal ControlFlowAnalysis AnalyzeControlFlow(
             SyntaxNode firstStatement,
             SyntaxNode lastStatement
-        ) {
+        )
+        {
             return AnalyzeControlFlowCore(firstStatement, lastStatement);
         }
 
@@ -745,7 +758,8 @@ namespace Microsoft.CodeAnalysis
         internal DataFlowAnalysis AnalyzeDataFlow(
             SyntaxNode firstStatement,
             SyntaxNode lastStatement
-        ) {
+        )
+        {
             return AnalyzeDataFlowCore(firstStatement, lastStatement);
         }
 
@@ -800,7 +814,8 @@ namespace Microsoft.CodeAnalysis
         public Optional<object?> GetConstantValue(
             SyntaxNode node,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return GetConstantValueCore(node, cancellationToken);
         }
 
@@ -822,7 +837,8 @@ namespace Microsoft.CodeAnalysis
         internal ImmutableArray<ISymbol> GetMemberGroup(
             SyntaxNode node,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return GetMemberGroupCore(node, cancellationToken);
         }
 
@@ -843,7 +859,8 @@ namespace Microsoft.CodeAnalysis
         public ISymbol? GetEnclosingSymbol(
             int position,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return GetEnclosingSymbolCore(position, cancellationToken);
         }
 
@@ -971,7 +988,8 @@ namespace Microsoft.CodeAnalysis
         protected internal virtual SyntaxNode GetTopmostNodeForDiagnosticAnalysis(
             ISymbol symbol,
             SyntaxNode declaringSyntax
-        ) {
+        )
+        {
             return declaringSyntax;
         }
 

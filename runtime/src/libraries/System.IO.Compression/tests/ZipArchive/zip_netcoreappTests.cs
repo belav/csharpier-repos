@@ -21,7 +21,8 @@ namespace System.IO.Compression.Tests
                     await StreamHelpers.CreateTempCopyStream(compat(zipName)),
                     ZipArchiveMode.Read
                 )
-            ) {
+            )
+            {
                 foreach (ZipArchiveEntry e in archive.Entries)
                 {
                     Assert.Equal(expectedAttr, ((uint)e.ExternalAttributes) >> 16);

@@ -1532,7 +1532,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
         private InternalForeignKeyBuilder RunConvention(
             InternalForeignKeyBuilder relationshipBuilder
-        ) {
+        )
+        {
             var convention = CreateForeignKeyPropertyDiscoveryConvention();
             var context = new ConventionContext<IConventionForeignKeyBuilder>(
                 relationshipBuilder.Metadata.DeclaringEntityType.Model.ConventionDispatcher

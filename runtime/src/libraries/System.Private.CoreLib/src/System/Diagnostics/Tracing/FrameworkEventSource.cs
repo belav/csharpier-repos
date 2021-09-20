@@ -58,7 +58,8 @@ namespace System.Diagnostics.Tracing
             bool arg4,
             int arg5,
             int arg6
-        ) {
+        )
+        {
             if (IsEnabled())
             {
                 arg3 ??= "";
@@ -179,7 +180,8 @@ namespace System.Diagnostics.Tracing
             bool multiDequeues,
             int intInfo1,
             int intInfo2
-        ) {
+        )
+        {
             WriteEvent(150, id, kind, info, multiDequeues, intInfo1, intInfo2);
         }
 

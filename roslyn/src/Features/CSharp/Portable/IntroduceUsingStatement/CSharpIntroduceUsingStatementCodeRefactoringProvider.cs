@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceUsingStatement
 
         protected override SyntaxList<StatementSyntax> GetStatements(
             SyntaxNode parentOfStatementsToSurround
-        ) {
+        )
+        {
             return parentOfStatementsToSurround is BlockSyntax block
               ? block.Statements
               : parentOfStatementsToSurround is SwitchSectionSyntax switchSection
@@ -57,7 +58,8 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceUsingStatement
         protected override SyntaxNode WithStatements(
             SyntaxNode parentOfStatementsToSurround,
             SyntaxList<StatementSyntax> statements
-        ) {
+        )
+        {
             return parentOfStatementsToSurround is BlockSyntax block
               ? block.WithStatements(statements) as SyntaxNode
               : parentOfStatementsToSurround is SwitchSectionSyntax switchSection
@@ -69,7 +71,8 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceUsingStatement
             LocalDeclarationStatementSyntax declarationStatement,
             SyntaxTriviaList sameLineTrivia,
             SyntaxList<StatementSyntax> statementsToSurround
-        ) {
+        )
+        {
             var usingStatement = SyntaxFactory.UsingStatement(
                 declaration: declarationStatement.Declaration.WithoutTrivia(),
                 expression: null, // Declaration already has equals token and expression

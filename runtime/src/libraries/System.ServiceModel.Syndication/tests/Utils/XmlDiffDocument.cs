@@ -191,7 +191,8 @@ namespace System.ServiceModel.Syndication.Tests
                 if (
                     IgnoreNS
                     || (nCompare = CompareText(elem2.NamespaceURI, elem1.NamespaceURI)) == 0
-                ) {
+                )
+                {
                     if (IgnorePrefix || (nCompare = CompareText(elem2.Prefix, elem1.Prefix)) == 0)
                     {
                         if ((nCompare = CompareText(elem2.Value, elem1.Value)) == 0)
@@ -235,11 +236,13 @@ namespace System.ServiceModel.Syndication.Tests
                             || (
                                 nCompare = CompareText(current2.NamespaceURI, current1.NamespaceURI)
                             ) == 0
-                        ) {
+                        )
+                        {
                             if (
                                 IgnorePrefix
                                 || (nCompare = CompareText(current2.Prefix, current1.Prefix)) == 0
-                            ) {
+                            )
+                            {
                                 if ((nCompare = CompareText(current2.Value, current1.Value)) == 0)
                                 {
                                     //do nothing!
@@ -270,7 +273,8 @@ namespace System.ServiceModel.Syndication.Tests
                 if (
                     IgnoreNS
                     || (nCompare = CompareText(attr2.NamespaceURI, attr1.NamespaceURI)) == 0
-                ) {
+                )
+                {
                     if (IgnorePrefix || (nCompare = CompareText(attr2.Prefix, attr1.Prefix)) == 0)
                     {
                         if ((nCompare = CompareText(attr2.Value, attr1.Value)) == 0)
@@ -303,7 +307,8 @@ namespace System.ServiceModel.Syndication.Tests
         private NodePosition ComparePIs(
             XmlDiffProcessingInstruction pi1,
             XmlDiffProcessingInstruction pi2
-        ) {
+        )
+        {
             Debug.Assert(pi1 != null);
             Debug.Assert(pi2 != null);
 
@@ -428,7 +433,8 @@ namespace System.ServiceModel.Syndication.Tests
                                     reader.NodeType == XmlNodeType.Text
                                     || reader.NodeType == XmlNodeType.CDATA
                                 )
-                            ) {
+                            )
+                            {
                                 text.Append(reader.Value);
                             }
                             LoadTextNode(parent, text.ToString(), pInfo, XmlDiffNodeType.Text);
@@ -456,7 +462,8 @@ namespace System.ServiceModel.Syndication.Tests
                                     reader.NodeType == XmlNodeType.Text
                                     || reader.NodeType == XmlNodeType.CDATA
                                 )
-                            ) {
+                            )
+                            {
                                 text.Append(reader.Value);
                             }
                             string txt = text.ToString();
@@ -553,7 +560,8 @@ namespace System.ServiceModel.Syndication.Tests
             XmlReader reader,
             PositionInfo pInfo,
             XmlDiffNodeType nt
-        ) {
+        )
+        {
             LoadTextNode(parent, reader.Value, pInfo, nt);
         }
 
@@ -562,7 +570,8 @@ namespace System.ServiceModel.Syndication.Tests
             string text,
             PositionInfo pInfo,
             XmlDiffNodeType nt
-        ) {
+        )
+        {
             if (!IgnoreEmptyTextNodes || !string.IsNullOrEmpty(text))
             {
                 XmlDiffCharacterData textNode = new XmlDiffCharacterData(text, nt, NormalizeNewline)
@@ -579,7 +588,8 @@ namespace System.ServiceModel.Syndication.Tests
             string text,
             PositionInfo pInfo,
             XmlDiffNodeType nt
-        ) {
+        )
+        {
             XmlDiffCharacterData textNode = new XmlDiffCharacterData(text, nt, NormalizeNewline)
             {
                 LineNumber = pInfo.LineNumber,
@@ -637,14 +647,16 @@ namespace System.ServiceModel.Syndication.Tests
         private void InsertTopLevelAttributeAsText(
             XmlDiffNode parent,
             XmlDiffCharacterData newChild
-        ) {
+        )
+        {
             if (
                 parent.LastChild != null
                 && (
                     parent.LastChild.NodeType == XmlDiffNodeType.Text
                     || parent.LastChild.NodeType == XmlDiffNodeType.WS
                 )
-            ) {
+            )
+            {
                 ((XmlDiffCharacterData)parent.LastChild).Value =
                     ((XmlDiffCharacterData)parent.LastChild).Value + " " + newChild.Value;
             }
@@ -823,7 +835,8 @@ namespace System.ServiceModel.Syndication.Tests
                     if (
                         targetNode.LineNumber + targetNode.LinePosition
                         > CurrentNode.LinePosition + CurrentNode.LineNumber
-                    ) {
+                    )
+                    {
                         return XmlNodeOrder.After;
                     }
                     return XmlNodeOrder.Before;
@@ -929,7 +942,8 @@ namespace System.ServiceModel.Syndication.Tests
             if (
                 (CurrentNode is XmlDiffDocument || CurrentNode is XmlDiffElement)
                 && CurrentNode.FirstChild != null
-            ) {
+            )
+            {
                 CurrentNode = CurrentNode.FirstChild;
                 return true;
             }
@@ -1556,7 +1570,8 @@ namespace System.ServiceModel.Syndication.Tests
                             _current is XmlDiffCharacterData
                             && _current.NodeType != XmlDiffNodeType.Comment
                             && _current.NodeType != XmlDiffNodeType.PI
-                        ) {
+                        )
+                        {
                             _bldr.Append(((XmlDiffCharacterData)_current).Value);
                         }
                         else if (_current is XmlDiffElement)
@@ -1683,11 +1698,8 @@ namespace System.ServiceModel.Syndication.Tests
         private string _value;
         private XmlDiffNodeType _nodetype;
 
-        public XmlDiffCharacterData(
-            string value,
-            XmlDiffNodeType nt,
-            bool NormalizeNewline
-        ) : base()
+        public XmlDiffCharacterData(string value, XmlDiffNodeType nt, bool NormalizeNewline)
+            : base()
         {
             _value = value;
             if (NormalizeNewline)

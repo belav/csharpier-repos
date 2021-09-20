@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ExplicitInterfaceSpecifierSyntax explicitInterfaceSpecifier,
             BracketedParameterListSyntax parameterList,
             AccessorListSyntax accessorList
-        ) {
+        )
+        {
             return SyntaxFactory.IndexerDeclaration(
                 attributeLists: attributeLists,
                 modifiers: modifiers,

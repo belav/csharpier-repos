@@ -84,7 +84,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
                 if (
                     value < Http2PeerSettings.MinAllowedMaxFrameSize
                     || value > Http2PeerSettings.MaxAllowedMaxFrameSize
-                ) {
+                )
+                {
                     throw new ArgumentOutOfRangeException(
                         nameof(value),
                         value,
@@ -138,7 +139,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
                 if (
                     value < Http2PeerSettings.DefaultInitialWindowSize
                     || value > Http2PeerSettings.MaxWindowSize
-                ) {
+                )
+                {
                     throw new ArgumentOutOfRangeException(
                         nameof(value),
                         value,
@@ -168,7 +170,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
                 if (
                     value < Http2PeerSettings.DefaultInitialWindowSize
                     || value > Http2PeerSettings.MaxWindowSize
-                ) {
+                )
+                {
                     throw new ArgumentOutOfRangeException(
                         nameof(value),
                         value,

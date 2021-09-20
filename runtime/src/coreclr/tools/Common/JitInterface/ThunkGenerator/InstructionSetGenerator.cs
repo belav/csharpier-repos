@@ -29,7 +29,8 @@ namespace Thunkerator
                 string r2rNumericValue,
                 string jitName,
                 string commandLineName
-            ) {
+            )
+            {
                 Architecture = architecture;
                 ManagedName = managedName;
                 R2rName = String.IsNullOrEmpty(r2rName) ? managedName : r2rName;
@@ -74,7 +75,8 @@ namespace Thunkerator
                 string architecture,
                 string jitName,
                 string impliedJitName
-            ) {
+            )
+            {
                 Architecture = architecture;
                 JitName = jitName;
                 ImpliedJitName = impliedJitName;
@@ -83,7 +85,8 @@ namespace Thunkerator
             public InstructionSetImplication(
                 string architecture,
                 InstructionSetImplication similarInstructionSet
-            ) {
+            )
+            {
                 Architecture = architecture;
                 ImpliedJitName = similarInstructionSet.ImpliedJitName;
                 JitName = similarInstructionSet.JitName;
@@ -143,7 +146,8 @@ namespace Thunkerator
                 string currentLine = tr.ReadLine();
                 currentLine != null;
                 currentLine = tr.ReadLine(), currentLineIndex++
-            ) {
+            )
+            {
                 try
                 {
                     if (currentLine.Length == 0)
@@ -535,7 +539,8 @@ namespace Internal.JitInterface
                     if (
                         _64BitArchitectures.Contains(architecture)
                         && _64bitVariants[architecture].Contains(instructionSet.JitName)
-                    ) {
+                    )
+                    {
                         AddImplication(
                             architecture,
                             instructionSet.JitName,
@@ -694,7 +699,8 @@ namespace Internal.JitInterface
                     if (
                         _64BitArchitectures.Contains(architecture)
                         && _64bitVariants[architecture].Contains(instructionSet.JitName)
-                    ) {
+                    )
+                    {
                         tr.WriteLine(
                             $"                    if (HasInstructionSet(InstructionSet.{architecture}_{instructionSet.JitName}))"
                         );
@@ -854,7 +860,8 @@ public:
                     if (
                         _64BitArchitectures.Contains(architecture)
                         && _64bitVariants[architecture].Contains(instructionSet.JitName)
-                    ) {
+                    )
+                    {
                         tr.WriteLine(
                             $"        if (HasInstructionSet(InstructionSet_{instructionSet.JitName}))"
                         );
@@ -900,7 +907,8 @@ inline CORINFO_InstructionSetFlags EnsureInstructionSetFlagsAreValid(CORINFO_Ins
                     if (
                         _64BitArchitectures.Contains(architecture)
                         && _64bitVariants[architecture].Contains(instructionSet.JitName)
-                    ) {
+                    )
+                    {
                         AddImplication(
                             architecture,
                             instructionSet.JitName,
@@ -950,7 +958,8 @@ inline const char *InstructionSetToString(CORINFO_InstructionSet instructionSet)
                     if (
                         _64BitArchitectures.Contains(architecture)
                         && _64bitVariants[architecture].Contains(instructionSet.JitName)
-                    ) {
+                    )
+                    {
                         tr.WriteLine(
                             $"        case InstructionSet_{instructionSet.JitName}_{ArchToInstructionSetSuffixArch(architecture)} :"
                         );

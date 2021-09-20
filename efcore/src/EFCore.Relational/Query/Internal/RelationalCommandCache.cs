@@ -39,7 +39,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             SelectExpression selectExpression,
             IReadOnlyList<ReaderColumn>? readerColumns,
             bool useRelationalNulls
-        ) {
+        )
+        {
             _memoryCache = memoryCache;
             _querySqlGeneratorFactory = querySqlGeneratorFactory;
             _selectExpression = selectExpression;
@@ -64,7 +65,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         /// </summary>
         public virtual IRelationalCommand GetRelationalCommand(
             IReadOnlyDictionary<string, object?> parameters
-        ) {
+        )
+        {
             var cacheKey = new CommandCacheKey(_selectExpression, parameters);
 
             if (_memoryCache.TryGetValue(cacheKey, out IRelationalCommand relationalCommand))
@@ -135,7 +137,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             public CommandCacheKey(
                 SelectExpression selectExpression,
                 IReadOnlyDictionary<string, object?> parameterValues
-            ) {
+            )
+            {
                 _selectExpression = selectExpression;
                 _parameterValues = parameterValues;
             }
@@ -160,7 +163,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                                 parameterValue.Key,
                                 out var otherValue
                             )
-                        ) {
+                        )
+                        {
                             return false;
                         }
 

@@ -132,7 +132,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             Stream stream,
             string fileName,
             Encoding encoding
-        ) {
+        )
+        {
             if (stream == null)
             {
                 throw new ArgumentNullException(nameof(stream));
@@ -158,7 +159,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             Stream stream,
             Encoding encoding,
             RazorSourceDocumentProperties properties
-        ) {
+        )
+        {
             if (stream == null)
             {
                 throw new ArgumentNullException(nameof(stream));
@@ -248,7 +250,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static RazorSourceDocument Create(
             string content,
             RazorSourceDocumentProperties properties
-        ) {
+        )
+        {
             if (content == null)
             {
                 throw new ArgumentNullException(nameof(content));
@@ -296,7 +299,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             string content,
             Encoding encoding,
             RazorSourceDocumentProperties properties
-        ) {
+        )
+        {
             if (content == null)
             {
                 throw new ArgumentNullException(nameof(content));

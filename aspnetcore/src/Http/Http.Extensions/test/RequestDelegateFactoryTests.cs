@@ -485,7 +485,8 @@ namespace Microsoft.AspNetCore.Routing.Internal
             Delegate action,
             string? routeValue,
             object? expectedParameterValue
-        ) {
+        )
+        {
             var httpContext = new DefaultHttpContext();
             httpContext.Request.RouteValues["tryParsable"] = routeValue;
 
@@ -502,7 +503,8 @@ namespace Microsoft.AspNetCore.Routing.Internal
             Delegate action,
             string? routeValue,
             object? expectedParameterValue
-        ) {
+        )
+        {
             var httpContext = new DefaultHttpContext();
             httpContext.Request.Query = new QueryCollection(
                 new Dictionary<string, StringValues> { ["tryParsable"] = routeValue }
@@ -561,7 +563,8 @@ namespace Microsoft.AspNetCore.Routing.Internal
         [MemberData(nameof(DelegatesWithAttributesOnNotTryParsableParameters))]
         public void CreateThrowsInvalidOperationExceptionWhenAttributeRequiresTryParseMethodThatDoesNotExist(
             Delegate action
-        ) {
+        )
+        {
             var ex = Assert.Throws<InvalidOperationException>(
                 () => RequestDelegateFactory.Create(action)
             );
@@ -884,14 +887,16 @@ namespace Microsoft.AspNetCore.Routing.Internal
                 void TestExplicitFromService(
                     HttpContext httpContext,
                     [FromService] MyService myService
-                ) {
+                )
+                {
                     httpContext.Items.Add("service", myService);
                 }
 
                 void TestExplicitFromIEnumerableService(
                     HttpContext httpContext,
                     [FromService] IEnumerable<MyService> myServices
-                ) {
+                )
+                {
                     httpContext.Items.Add("service", myServices.Single());
                 }
 
@@ -903,7 +908,8 @@ namespace Microsoft.AspNetCore.Routing.Internal
                 void TestImpliedIEnumerableFromService(
                     HttpContext httpContext,
                     IEnumerable<MyService> myServices
-                ) {
+                )
+                {
                     httpContext.Items.Add("service", myServices.Single());
                 }
 
@@ -933,7 +939,8 @@ namespace Microsoft.AspNetCore.Routing.Internal
         [MemberData(nameof(FromServiceActions))]
         public async Task RequestDelegatePopulatesParametersFromServiceWithAndWithoutAttribute(
             Delegate action
-        ) {
+        )
+        {
             var myOriginalService = new MyService();
 
             var serviceCollection = new ServiceCollection();
@@ -1035,7 +1042,8 @@ namespace Microsoft.AspNetCore.Routing.Internal
         [MemberData(nameof(ComplexResult))]
         public async Task RequestDelegateWritesComplexReturnValueAsJsonResponseBody(
             Delegate @delegate
-        ) {
+        )
+        {
             var httpContext = new DefaultHttpContext();
             var responseBodyStream = new MemoryStream();
             httpContext.Response.Body = responseBodyStream;
@@ -1137,7 +1145,8 @@ namespace Microsoft.AspNetCore.Routing.Internal
         [MemberData(nameof(StringResult))]
         public async Task RequestDelegateWritesStringReturnValueAsJsonResponseBody(
             Delegate @delegate
-        ) {
+        )
+        {
             var httpContext = new DefaultHttpContext();
             var responseBodyStream = new MemoryStream();
             httpContext.Response.Body = responseBodyStream;

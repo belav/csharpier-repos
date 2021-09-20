@@ -31,7 +31,8 @@ namespace Microsoft.AspNetCore.Mvc.Cors
         public void HttpMethodActionConstraint_Accept_Preflight_CaseInsensitive(
             IEnumerable<string> httpMethods,
             string accessControlMethod
-        ) {
+        )
+        {
             // Arrange
             var constraint =
                 new CorsHttpMethodActionConstraint(new HttpMethodActionConstraint(httpMethods))
@@ -69,7 +70,8 @@ namespace Microsoft.AspNetCore.Mvc.Cors
         public void HttpMethodActionConstraint_Accept_CaseInsensitive(
             IEnumerable<string> httpMethods,
             string expectedMethod
-        ) {
+        )
+        {
             // Arrange
             var constraint =
                 new CorsHttpMethodActionConstraint(new HttpMethodActionConstraint(httpMethods))
@@ -86,7 +88,8 @@ namespace Microsoft.AspNetCore.Mvc.Cors
 
         private static ActionConstraintContext CreateActionConstraintContext(
             IActionConstraint constraint
-        ) {
+        )
+        {
             var context = new ActionConstraintContext();
 
             var actionSelectorCandidate = new ActionSelectorCandidate(
@@ -103,7 +106,8 @@ namespace Microsoft.AspNetCore.Mvc.Cors
         private static RouteContext CreateRouteContext(
             string requestedMethod,
             string accessControlMethod = null
-        ) {
+        )
+        {
             var httpContext = new DefaultHttpContext();
 
             httpContext.Request.Method = requestedMethod;

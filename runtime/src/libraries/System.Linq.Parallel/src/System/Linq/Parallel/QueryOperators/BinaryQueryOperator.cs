@@ -35,10 +35,11 @@ namespace System.Linq.Parallel
         internal BinaryQueryOperator(
             ParallelQuery<TLeftInput> leftChild,
             ParallelQuery<TRightInput> rightChild
-        ) : this(
-            QueryOperator<TLeftInput>.AsQueryOperator(leftChild),
-            QueryOperator<TRightInput>.AsQueryOperator(rightChild)
-        ) { }
+        )
+            : this(
+                QueryOperator<TLeftInput>.AsQueryOperator(leftChild),
+                QueryOperator<TRightInput>.AsQueryOperator(rightChild)
+            ) { }
 
         internal BinaryQueryOperator(
             QueryOperator<TLeftInput> leftChild,
@@ -103,7 +104,8 @@ namespace System.Linq.Parallel
                 BinaryQueryOperator<TLeftInput, TRightInput, TOutput> op,
                 QuerySettings settings,
                 bool preferStriping
-            ) {
+            )
+            {
                 _leftChildQueryResults = leftChildQueryResults;
                 _rightChildQueryResults = rightChildQueryResults;
                 _op = op;
@@ -113,14 +115,16 @@ namespace System.Linq.Parallel
 
             internal override void GivePartitionedStream(
                 IPartitionedStreamRecipient<TOutput> recipient
-            ) {
+            )
+            {
                 Debug.Assert(IsIndexible == (_op.OrdinalIndexState == OrdinalIndexState.Indexable));
                 Debug.Assert(_settings.ExecutionMode != null);
 
                 if (
                     _settings.ExecutionMode.Value == ParallelExecutionMode.Default
                     && _op.LimitsParallelism
-                ) {
+                )
+                {
                     Debug.Assert(_settings.DegreeOfParallelism != null);
                     // We need to run the query sequentially up to and including this operator
                     IEnumerable<TOutput> opSequential = _op.AsSequentialQuery(
@@ -171,7 +175,8 @@ namespace System.Linq.Parallel
                     BinaryQueryOperatorResults results,
                     bool preferStriping,
                     QuerySettings settings
-                ) {
+                )
+                {
                     _outputRecipient = outputRecipient;
                     _results = results;
                     _preferStriping = preferStriping;
@@ -216,7 +221,8 @@ namespace System.Linq.Parallel
                     PartitionedStream<TLeftInput, TLeftKey> leftPartitionedStream,
                     bool preferStriping,
                     QuerySettings settings
-                ) {
+                )
+                {
                     _outputRecipient = outputRecipient;
                     _op = op;
                     _preferStriping = preferStriping;
@@ -226,7 +232,8 @@ namespace System.Linq.Parallel
 
                 public void Receive<TRightKey>(
                     PartitionedStream<TRightInput, TRightKey> rightPartitionedStream
-                ) {
+                )
+                {
                     _op.WrapPartitionedStream(
                         _leftPartitionedStream,
                         rightPartitionedStream,

@@ -54,7 +54,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var declarators = new HashSet<SyntaxNode>();
             var fieldDeclarators = new HashSet<TFieldDeclarationSyntax>();
             var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
@@ -112,7 +113,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
             SyntaxNode parentDeclaration,
             IEnumerable<SyntaxNode> childDeclarators,
             HashSet<SyntaxNode> declarators
-        ) {
+        )
+        {
             if (declarators.Contains(parentDeclaration))
             {
                 Debug.Assert(childDeclarators.All(c => !declarators.Contains(c)));
@@ -139,9 +141,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(AnalyzersResources.Remove_unused_member, createChangedDocument) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(AnalyzersResources.Remove_unused_member, createChangedDocument) { }
         }
     }
 }

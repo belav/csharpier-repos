@@ -27,7 +27,8 @@ namespace System.ComponentModel.Design.Serialization
             Type serializerType,
             Type baseSerializerType,
             bool reloadable
-        ) {
+        )
+        {
             if (serializerType == null)
             {
                 throw new ArgumentNullException(nameof(serializerType));
@@ -49,7 +50,8 @@ namespace System.ComponentModel.Design.Serialization
             string serializerTypeName,
             Type baseSerializerType,
             bool reloadable
-        ) {
+        )
+        {
             if (baseSerializerType == null)
             {
                 throw new ArgumentNullException(nameof(baseSerializerType));
@@ -67,7 +69,8 @@ namespace System.ComponentModel.Design.Serialization
             string serializerTypeName,
             string baseSerializerTypeName,
             bool reloadable
-        ) {
+        )
+        {
             SerializerTypeName = serializerTypeName;
             SerializerBaseTypeName = baseSerializerTypeName;
             Reloadable = reloadable;

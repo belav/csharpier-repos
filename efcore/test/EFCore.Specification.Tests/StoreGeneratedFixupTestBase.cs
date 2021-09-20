@@ -528,7 +528,8 @@ namespace Microsoft.EntityFrameworkCore
             DbContext context,
             CategoryPN principal,
             ProductPN dependent
-        ) {
+        )
+        {
             AssertFixup(
                 context,
                 () =>
@@ -700,7 +701,8 @@ namespace Microsoft.EntityFrameworkCore
             DbContext context,
             CategoryDN principal,
             ProductDN dependent
-        ) {
+        )
+        {
             AssertFixup(
                 context,
                 () =>
@@ -782,7 +784,8 @@ namespace Microsoft.EntityFrameworkCore
             DbContext context,
             CategoryNN principal,
             ProductNN dependent
-        ) {
+        )
+        {
             AssertFixup(
                 context,
                 () =>
@@ -4601,7 +4604,8 @@ namespace Microsoft.EntityFrameworkCore
                     "InMemory",
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 tempKeys = false;
             }
 

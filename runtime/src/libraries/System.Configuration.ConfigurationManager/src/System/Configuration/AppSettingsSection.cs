@@ -93,7 +93,8 @@ namespace System.Configuration
         protected internal override void DeserializeElement(
             XmlReader reader,
             bool serializeCollectionKey
-        ) {
+        )
+        {
             string elementName = reader.Name;
 
             base.DeserializeElement(reader, serializeCollectionKey);

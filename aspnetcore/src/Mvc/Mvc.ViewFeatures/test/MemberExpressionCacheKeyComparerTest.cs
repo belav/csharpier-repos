@@ -193,7 +193,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
         private static MemberExpressionCacheKey GetKey<TModel, TResult>(
             Expression<Func<TModel, TResult>> expression
-        ) {
+        )
+        {
             var memberExpression = Assert.IsAssignableFrom<MemberExpression>(expression.Body);
             return new MemberExpressionCacheKey(typeof(TModel), memberExpression);
         }

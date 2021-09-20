@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             int correlationId,
             Workspace workspace,
             DiagnosticAnalyzerInfoCache analyzerInfoCache
-        ) {
+        )
+        {
             Contract.ThrowIfNull(analyzerService);
 
             AnalyzerService = analyzerService;
@@ -104,7 +105,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
         private void OnProjectAnalyzerReferenceChanged(
             object? sender,
             ProjectAnalyzerReferenceChangedEventArgs e
-        ) {
+        )
+        {
             if (e.Removed.Length == 0)
             {
                 // nothing to refresh
@@ -189,7 +191,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             StateSet stateSet,
             ImmutableArray<DiagnosticData> items,
             Action<DiagnosticsUpdatedArgs> raiseEvents
-        ) {
+        )
+        {
             Contract.ThrowIfFalse(project.Solution.Workspace == Workspace);
 
             raiseEvents(
@@ -209,7 +212,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             Solution? solution,
             StateSet stateSet,
             Action<DiagnosticsUpdatedArgs> raiseEvents
-        ) {
+        )
+        {
             Contract.ThrowIfFalse(solution == null || solution.Workspace == Workspace);
 
             raiseEvents(
@@ -229,7 +233,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             AnalysisKind kind,
             ImmutableArray<DiagnosticData> items,
             Action<DiagnosticsUpdatedArgs> raiseEvents
-        ) {
+        )
+        {
             Contract.ThrowIfFalse(document.Project.Solution.Workspace == Workspace);
 
             raiseEvents(
@@ -250,7 +255,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             StateSet stateSet,
             AnalysisKind kind,
             Action<DiagnosticsUpdatedArgs> raiseEvents
-        ) {
+        )
+        {
             Contract.ThrowIfFalse(solution == null || solution.Workspace == Workspace);
 
             raiseEvents(
@@ -294,7 +300,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             DiagnosticAnalyzer analyzer,
             ProjectId projectId,
             VersionStamp version
-        ) {
+        )
+        {
             if (map.TryGetValue(analyzer, out var result))
             {
                 return result;

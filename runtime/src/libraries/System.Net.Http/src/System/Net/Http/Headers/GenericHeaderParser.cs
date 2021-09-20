@@ -121,7 +121,8 @@ namespace System.Net.Http.Headers
             int startIndex,
             object? storeValue,
             out object? parsedValue
-        ) {
+        )
+        {
             return _getParsedValueLength(value, startIndex, out parsedValue);
         }
 
@@ -155,7 +156,8 @@ namespace System.Net.Http.Headers
             string value,
             int startIndex,
             out object? parsedValue
-        ) {
+        )
+        {
             parsedValue = null;
 
             int resultLength = EntityTagHeaderValue.GetEntityTagLength(
@@ -182,7 +184,8 @@ namespace System.Net.Http.Headers
             string value,
             int startIndex,
             out object? parsedValue
-        ) {
+        )
+        {
             int resultLength = EntityTagHeaderValue.GetEntityTagLength(
                 value,
                 startIndex,

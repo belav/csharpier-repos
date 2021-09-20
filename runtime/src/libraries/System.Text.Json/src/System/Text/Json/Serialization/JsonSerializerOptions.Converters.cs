@@ -90,7 +90,8 @@ namespace System.Text.Json
             Type? parentClassType,
             Type runtimePropertyType,
             MemberInfo? memberInfo
-        ) {
+        )
+        {
             JsonConverter converter = null!;
 
             // Priority 1: attempt to get converter from JsonConverterAttribute on property.
@@ -209,7 +210,8 @@ namespace System.Text.Json
                         typeToConvert,
                         out JsonConverter? foundConverter
                     )
-                ) {
+                )
+                {
                     Debug.Assert(foundConverter != null);
                     converter = foundConverter;
                 }
@@ -243,7 +245,8 @@ namespace System.Text.Json
             if (
                 !converterTypeToConvert.IsAssignableFromInternal(typeToConvert)
                 && !typeToConvert.IsAssignableFromInternal(converterTypeToConvert)
-            ) {
+            )
+            {
                 ThrowHelper.ThrowInvalidOperationException_SerializationConverterNotCompatible(
                     converter.GetType(),
                     typeToConvert
@@ -267,7 +270,8 @@ namespace System.Text.Json
             Type typeToConvert,
             Type classTypeAttributeIsOn,
             MemberInfo? memberInfo
-        ) {
+        )
+        {
             JsonConverter? converter;
 
             Type? type = converterAttribute.ConverterType;
@@ -327,7 +331,8 @@ namespace System.Text.Json
             Type classType,
             Type attributeType,
             MemberInfo memberInfo
-        ) {
+        )
+        {
             object[] attributes = memberInfo.GetCustomAttributes(attributeType, inherit: false);
             return GetAttributeThatCanHaveMultiple(
                 attributeType,
@@ -340,7 +345,8 @@ namespace System.Text.Json
         internal static Attribute? GetAttributeThatCanHaveMultiple(
             Type classType,
             Type attributeType
-        ) {
+        )
+        {
             object[] attributes = classType.GetCustomAttributes(attributeType, inherit: false);
             return GetAttributeThatCanHaveMultiple(attributeType, classType, null, attributes);
         }
@@ -350,7 +356,8 @@ namespace System.Text.Json
             Type classType,
             MemberInfo? memberInfo,
             object[] attributes
-        ) {
+        )
+        {
             if (attributes.Length == 0)
             {
                 return null;

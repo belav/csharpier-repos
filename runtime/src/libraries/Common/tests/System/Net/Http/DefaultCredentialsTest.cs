@@ -87,7 +87,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task UseDefaultCredentials_SetTrue_ConnectAsCurrentIdentity(
             string uri,
             bool useProxy
-        ) {
+        )
+        {
             HttpClientHandler handler = CreateHttpClientHandler();
             handler.UseProxy = useProxy;
             handler.UseDefaultCredentials = true;
@@ -110,7 +111,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task Credentials_SetToWrappedDefaultCredential_ConnectAsCurrentIdentity(
             string uri,
             bool useProxy
-        ) {
+        )
+        {
             HttpClientHandler handler = CreateHttpClientHandler();
             handler.UseProxy = useProxy;
             handler.Credentials = new CredentialWrapper
@@ -153,7 +155,8 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(true)]
         public async Task Credentials_SetToSpecificCredential_ConnectAsSpecificIdentity(
             bool useProxy
-        ) {
+        )
+        {
             HttpClientHandler handler = CreateHttpClientHandler();
             handler.UseProxy = useProxy;
             handler.UseDefaultCredentials = false;
@@ -186,7 +189,8 @@ namespace System.Net.Http.Functional.Tests
                 HttpResponseMessage response = await client.GetAsync(
                     Configuration.Http.RemoteEchoServer
                 )
-            ) {
+            )
+            {
                 Assert.Equal(HttpStatusCode.ProxyAuthenticationRequired, response.StatusCode);
             }
         }
@@ -204,7 +208,8 @@ namespace System.Net.Http.Functional.Tests
                 HttpResponseMessage response = await client.GetAsync(
                     Configuration.Http.RemoteEchoServer
                 )
-            ) {
+            )
+            {
                 Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             }
         }
@@ -226,7 +231,8 @@ namespace System.Net.Http.Functional.Tests
                 HttpResponseMessage response = await client.GetAsync(
                     Configuration.Http.RemoteEchoServer
                 )
-            ) {
+            )
+            {
                 Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             }
         }
@@ -388,7 +394,8 @@ namespace System.Net.Http.Functional.Tests
             private HttpListenerAuthenticatedLoopbackServer(
                 string uri,
                 AuthenticationSchemes authenticationSchemes
-            ) {
+            )
+            {
                 _uri = uri;
 
                 _listener = new HttpListener();

@@ -33,7 +33,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                             compilationStartAnalysisContext.Compilation,
                             out var symbolCache
                         )
-                    ) {
+                    )
+                    {
                         // No-op if we can't find types we care about.
                         return;
                     }
@@ -46,7 +47,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
         private void InitializeWorker(
             CompilationStartAnalysisContext compilationStartAnalysisContext,
             ApiControllerSymbolCache symbolCache
-        ) {
+        )
+        {
             compilationStartAnalysisContext.RegisterSyntaxNodeAction(
                 syntaxNodeContext =>
                 {
@@ -87,7 +89,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                                 declaredResponseMetadata,
                                 actualMetadata
                             )
-                        ) {
+                        )
+                        {
                             hasUndocumentedStatusCodes = true;
                             if (actualMetadata.IsDefaultResponse)
                             {
@@ -140,7 +143,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
         internal static bool Contains(
             IList<ActualApiResponseMetadata> actualResponseMetadata,
             DeclaredApiResponseMetadata declaredMetadata
-        ) {
+        )
+        {
             for (var i = 0; i < actualResponseMetadata.Count; i++)
             {
                 if (declaredMetadata.Matches(actualResponseMetadata[i]))

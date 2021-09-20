@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.Options
             object? defaultValue,
             Type type,
             bool isPerLanguage
-        ) {
+        )
+        {
             if (string.IsNullOrWhiteSpace(feature))
             {
                 throw new ArgumentNullException(nameof(feature));

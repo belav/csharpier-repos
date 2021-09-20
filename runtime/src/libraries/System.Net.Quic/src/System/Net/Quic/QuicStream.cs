@@ -64,7 +64,8 @@ namespace System.Net.Quic
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ValidateBufferArguments(buffer, offset, count);
             return ReadAsync(new Memory<byte>(buffer, offset, count), cancellationToken).AsTask();
         }
@@ -80,7 +81,8 @@ namespace System.Net.Quic
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ValidateBufferArguments(buffer, offset, count);
             return WriteAsync(new ReadOnlyMemory<byte>(buffer, offset, count), cancellationToken)
                 .AsTask();

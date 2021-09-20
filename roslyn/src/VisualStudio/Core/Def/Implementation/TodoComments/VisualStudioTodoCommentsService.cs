@@ -162,7 +162,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TodoComments
         private Task ProcessTodoCommentInfosAsync(
             ImmutableArray<DocumentAndComments> docAndCommentsArray,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             using var _1 = ArrayBuilder<DocumentAndComments>.GetInstance(out var filteredArray);
@@ -212,7 +213,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TodoComments
         private void AddFilteredInfos(
             ImmutableArray<DocumentAndComments> array,
             ArrayBuilder<DocumentAndComments> filteredArray
-        ) {
+        )
+        {
             using var _ = PooledHashSet<DocumentId>.GetInstance(out var seenDocumentIds);
 
             // Walk the list of todo comments in reverse, and skip any items for a document once
@@ -230,7 +232,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TodoComments
             Workspace workspace,
             DocumentId documentId,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _documentToInfos.TryGetValue(documentId, out var values)
               ? values
               : ImmutableArray<TodoCommentData>.Empty;
@@ -243,7 +246,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TodoComments
             DocumentId documentId,
             ImmutableArray<TodoCommentData> infos,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 var workQueue = await _workQueueSource.Task.ConfigureAwait(false);
@@ -262,7 +266,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TodoComments
             Document document,
             ImmutableArray<TodoComment> todoComments,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<TodoCommentData>.GetInstance(out var converted);
 
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);

@@ -26,14 +26,15 @@ namespace Microsoft.CodeAnalysis.CompilerServer
             BuildPaths buildPaths,
             string? libDirectory,
             IAnalyzerAssemblyLoader analyzerLoader
-        ) : this(
-            metadataProvider,
-            Path.Combine(buildPaths.ClientDirectory, ResponseFileName),
-            args,
-            buildPaths,
-            libDirectory,
-            analyzerLoader
-        ) { }
+        )
+            : this(
+                metadataProvider,
+                Path.Combine(buildPaths.ClientDirectory, ResponseFileName),
+                args,
+                buildPaths,
+                libDirectory,
+                analyzerLoader
+            ) { }
 
         internal CSharpCompilerServer(
             Func<string, MetadataReferenceProperties, PortableExecutableReference> metadataProvider,
@@ -42,14 +43,16 @@ namespace Microsoft.CodeAnalysis.CompilerServer
             BuildPaths buildPaths,
             string? libDirectory,
             IAnalyzerAssemblyLoader analyzerLoader
-        ) : base(
-            CSharpCommandLineParser.Default,
-            responseFile,
-            args,
-            buildPaths,
-            libDirectory,
-            analyzerLoader
-        ) {
+        )
+            : base(
+                CSharpCommandLineParser.Default,
+                responseFile,
+                args,
+                buildPaths,
+                libDirectory,
+                analyzerLoader
+            )
+        {
             _metadataProvider = metadataProvider;
         }
 

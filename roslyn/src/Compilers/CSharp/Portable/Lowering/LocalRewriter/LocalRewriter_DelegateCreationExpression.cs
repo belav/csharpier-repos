@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         public override BoundNode VisitDelegateCreationExpression(
             BoundDelegateCreationExpression node
-        ) {
+        )
+        {
             if (node.Argument.HasDynamicType())
             {
                 var loweredArgument = VisitExpression(node.Argument);

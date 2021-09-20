@@ -12,7 +12,8 @@ namespace System.ComponentModel.Composition.Registration.Tests
             this ExportBuilder builder,
             Type type,
             ref List<Attribute> attributes
-        ) {
+        )
+        {
             builder.GetType()
                 .GetMethod(nameof(BuildAttributes), BindingFlags.NonPublic | BindingFlags.Instance)
                 .Invoke(builder, new object[] { type, attributes });
@@ -22,7 +23,8 @@ namespace System.ComponentModel.Composition.Registration.Tests
             this ImportBuilder builder,
             Type type,
             ref List<Attribute> attributes
-        ) {
+        )
+        {
             builder.GetType()
                 .GetMethod(nameof(BuildAttributes), BindingFlags.NonPublic | BindingFlags.Instance)
                 .Invoke(builder, new object[] { type, attributes });
@@ -53,7 +55,8 @@ namespace System.ComponentModel.Composition.Registration.Tests
         public static IEnumerable<Attribute> BuildTypeAttributes(
             this PartBuilder builder,
             Type type
-        ) {
+        )
+        {
             return (IEnumerable<Attribute>)builder.GetType()
                 .GetMethod(
                     nameof(BuildTypeAttributes),
@@ -66,7 +69,8 @@ namespace System.ComponentModel.Composition.Registration.Tests
             this PartBuilder builder,
             Type type,
             ref List<Tuple<object, List<Attribute>>> configuredMembers
-        ) {
+        )
+        {
             return (bool)builder.GetType()
                 .GetMethod(
                     nameof(BuildConstructorAttributes),
@@ -79,7 +83,8 @@ namespace System.ComponentModel.Composition.Registration.Tests
             this PartBuilder builder,
             Type type,
             ref List<Tuple<object, List<Attribute>>> configuredMembers
-        ) {
+        )
+        {
             builder.GetType()
                 .GetMethod(
                     nameof(BuildPropertyAttributes),
@@ -91,7 +96,8 @@ namespace System.ComponentModel.Composition.Registration.Tests
         public static void PartBuilder_BuildDefaultConstructorAttributes(
             Type type,
             ref List<Tuple<object, List<Attribute>>> configuredMembers
-        ) {
+        )
+        {
             typeof(PartBuilder).GetMethod(
                     "BuildDefaultConstructorAttributes",
                     BindingFlags.NonPublic | BindingFlags.Static

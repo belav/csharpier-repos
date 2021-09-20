@@ -613,7 +613,8 @@ namespace BinderTracingTests
                     HandlerReturn.RequestedAssembly,
                     AssemblyLoadContext.Default
                 )
-            ) {
+            )
+            {
                 Assembly asm = AssemblyLoadContext.Default.LoadFromAssemblyName(assemblyName);
 
                 return new BindOperation()
@@ -731,7 +732,8 @@ namespace BinderTracingTests
             var assemblyName = new AssemblyName(SubdirectoryAssemblyName);
             using (
                 var handlers = new Handlers(HandlerReturn.Exception, AssemblyLoadContext.Default)
-            ) {
+            )
+            {
                 Assert.Throws<FileLoadException, BinderTestException>(
                     () => AssemblyLoadContext.Default.LoadFromAssemblyName(assemblyName)
                 );
@@ -1105,7 +1107,8 @@ namespace BinderTracingTests
             ResolutionStage stage,
             AssemblyLoadContext alc,
             string exceptionMessage
-        ) {
+        )
+        {
             return GetResolutionAttempt(
                 assemblyName,
                 stage,
@@ -1123,7 +1126,8 @@ namespace BinderTracingTests
             AssemblyLoadContext alc,
             ResolutionResult result,
             Assembly resultAssembly = null
-        ) {
+        )
+        {
             AssemblyName resultAssemblyName = null;
             string resultAssemblyPath = string.Empty;
             if (resultAssembly != null)
@@ -1150,7 +1154,8 @@ namespace BinderTracingTests
             AssemblyName resultAssemblyName,
             string resultAssemblyPath,
             string errorMessage = null
-        ) {
+        )
+        {
             var attempt = new ResolutionAttempt()
             {
                 AssemblyName = assemblyName,

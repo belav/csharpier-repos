@@ -486,7 +486,8 @@ namespace Microsoft.AspNetCore.Routing
         private DefaultParameterPolicyFactory GetParameterPolicyFactory(
             RouteOptions options = null,
             ServiceCollection services = null
-        ) {
+        )
+        {
             if (options == null)
             {
                 options = new RouteOptions();
@@ -524,7 +525,8 @@ namespace Microsoft.AspNetCore.Routing
                 string routeKey,
                 RouteValueDictionary values,
                 RouteDirection routeDirection
-            ) {
+            )
+            {
                 HttpContext = httpContext;
                 Route = route;
                 RouteKey = routeKey;
@@ -590,7 +592,8 @@ namespace Microsoft.AspNetCore.Routing
             ITestService testService1,
             int second,
             ITestService testService2
-        ) {
+        )
+        {
             First = first;
             TestService1 = testService1;
             Second = second;
@@ -608,7 +611,8 @@ namespace Microsoft.AspNetCore.Routing
         public CustomParameterPolicyWithOnlyServiceArguments(
             ITestService testService1,
             ITestService testService2
-        ) {
+        )
+        {
             TestService1 = testService1;
             TestService2 = testService2;
         }
@@ -627,10 +631,8 @@ namespace Microsoft.AspNetCore.Routing
 
     public class RegexInlineRouteConstraintWithService : RegexRouteConstraint
     {
-        public RegexInlineRouteConstraintWithService(
-            string regexPattern,
-            ITestService testService
-        ) : base(regexPattern)
+        public RegexInlineRouteConstraintWithService(string regexPattern, ITestService testService)
+            : base(regexPattern)
         {
             TestService = testService;
         }

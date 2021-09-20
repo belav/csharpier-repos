@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.DesignerAttribute
         public override async Task RemoveProjectAsync(
             ProjectId projectId,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             await ReportProjectRemovedAsync(projectId, cancellationToken).ConfigureAwait(false);
 
             foreach (var docId in _documentToLastReportedInformation.Keys)
@@ -58,7 +59,8 @@ namespace Microsoft.CodeAnalysis.DesignerAttribute
         public override Task RemoveDocumentAsync(
             DocumentId documentId,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _documentToLastReportedInformation.TryRemove(documentId, out _);
             return Task.CompletedTask;
         }
@@ -75,7 +77,8 @@ namespace Microsoft.CodeAnalysis.DesignerAttribute
             SyntaxNode? body,
             InvocationReasons reasons,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // don't need to reanalyze file if just a method body was edited.  That can't
             // affect designer attributes.
             if (body != null)
@@ -94,7 +97,8 @@ namespace Microsoft.CodeAnalysis.DesignerAttribute
             Project project,
             Document? specificDocument,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!project.SupportsCompilation)
                 return;
 
@@ -147,7 +151,8 @@ namespace Microsoft.CodeAnalysis.DesignerAttribute
             Document? specificDocument,
             VersionStamp projectVersion,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var compilation = await project.GetRequiredCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
             var designerCategoryType = compilation.DesignerCategoryAttributeType();
@@ -174,7 +179,8 @@ namespace Microsoft.CodeAnalysis.DesignerAttribute
                         out var existingInfo
                     )
                     && existingInfo.projectVersion == projectVersion
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -194,7 +200,8 @@ namespace Microsoft.CodeAnalysis.DesignerAttribute
             INamedTypeSymbol? designerCategoryType,
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 Contract.ThrowIfNull(document.FilePath);

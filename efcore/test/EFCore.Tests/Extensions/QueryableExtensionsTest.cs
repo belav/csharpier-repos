@@ -250,7 +250,8 @@ namespace Microsoft.EntityFrameworkCore
 
         private static void VerifyProducedExpression<TElement, TResult>(
             Expression<Func<IQueryable<TElement>, Task<TResult>>> testExpression
-        ) {
+        )
+        {
             var provider = new FakeAsyncQueryProvider((MethodCallExpression)testExpression.Body);
             var queryable = new FakeQueryable<TElement>(provider);
             queryable.Expression = Expression.Constant(queryable, typeof(IQueryable<TElement>));
@@ -270,7 +271,8 @@ namespace Microsoft.EntityFrameworkCore
             public TResult ExecuteAsync<TResult>(
                 Expression expression,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var actualMethodCall = (MethodCallExpression)expression;
 
                 Assert.Equal(

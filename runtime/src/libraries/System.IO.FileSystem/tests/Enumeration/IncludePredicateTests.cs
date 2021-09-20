@@ -14,7 +14,8 @@ namespace System.IO.Tests.Enumeration
             string directory,
             bool recursive,
             params string[] extensions
-        ) {
+        )
+        {
             return new FileSystemEnumerable<string>(
                 directory,
                 (ref FileSystemEntry entry) => entry.ToFullPath(),

@@ -22,7 +22,8 @@ namespace System.Text.Json.Serialization.Converters
             ref Utf8JsonReader reader,
             ref ReadStack state,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             if (!TypeToConvert.IsAssignableFrom(RuntimeType))
             {
                 ThrowHelper.ThrowNotSupportedException_CannotPopulateCollection(
@@ -40,7 +41,8 @@ namespace System.Text.Json.Serialization.Converters
             TCollection value,
             JsonSerializerOptions options,
             ref WriteStack state
-        ) {
+        )
+        {
             IEnumerator<TElement> enumerator;
             if (state.Current.CollectionEnumerator == null)
             {

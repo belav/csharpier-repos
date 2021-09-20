@@ -377,7 +377,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Infrastructure.Internal
         /// </summary>
         public virtual CosmosOptionsExtension WithGatewayModeMaxConnectionLimit(
             int? connectionLimit
-        ) {
+        )
+        {
             var clone = Clone();
 
             clone._gatewayModeMaxConnectionLimit = connectionLimit;
@@ -471,7 +472,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Infrastructure.Internal
         /// <returns> A new instance with the option changed. </returns>
         public virtual CosmosOptionsExtension WithExecutionStrategyFactory(
             Func<ExecutionStrategyDependencies, IExecutionStrategy>? executionStrategyFactory
-        ) {
+        )
+        {
             var clone = Clone();
 
             clone._executionStrategyFactory = executionStrategyFactory;

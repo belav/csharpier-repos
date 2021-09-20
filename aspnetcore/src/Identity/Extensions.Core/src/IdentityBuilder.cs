@@ -133,7 +133,8 @@ namespace Microsoft.AspNetCore.Identity
             if (
                 !typeof(IUserTwoFactorTokenProvider<>).MakeGenericType(UserType)
                     .IsAssignableFrom(provider)
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     Resources.FormatInvalidManagerType(
                         provider.Name,

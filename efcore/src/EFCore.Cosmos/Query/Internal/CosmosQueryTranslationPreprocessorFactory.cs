@@ -32,7 +32,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         /// </summary>
         public CosmosQueryTranslationPreprocessorFactory(
             QueryTranslationPreprocessorDependencies dependencies
-        ) {
+        )
+        {
             Check.NotNull(dependencies, nameof(dependencies));
             _dependencies = dependencies;
         }

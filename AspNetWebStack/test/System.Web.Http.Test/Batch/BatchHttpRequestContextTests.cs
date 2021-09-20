@@ -109,7 +109,8 @@ namespace System.Web.Http.Batch
         [InlineData(false)]
         public void IncludeErrorDetailGet_ReturnsBatchContextIncludeErrorDetail(
             bool expectedIncludeErrorDetail
-        ) {
+        )
+        {
             // Arrange
             HttpRequestContext batchContext = CreateContext();
             batchContext.IncludeErrorDetail = expectedIncludeErrorDetail;
@@ -127,7 +128,8 @@ namespace System.Web.Http.Batch
         [InlineData(false)]
         public void IncludeErrorDetailSet_UpdatesBatchContextIncludeErrorDetail(
             bool expectedIncludeErrorDetail
-        ) {
+        )
+        {
             // Arrange
             HttpRequestContext batchContext = CreateContext();
             HttpRequestContext context = CreateProductUnderTest(batchContext);
@@ -339,7 +341,8 @@ namespace System.Web.Http.Batch
 
         private static BatchHttpRequestContext CreateProductUnderTest(
             HttpRequestContext batchContext
-        ) {
+        )
+        {
             return new BatchHttpRequestContext(batchContext);
         }
     }

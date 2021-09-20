@@ -54,7 +54,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 if (
                     recipients[index].Certificate.Issuer
                     == ((X509IssuerSerial)(me.RecipientIdentifier.Value)).IssuerName
-                ) {
+                )
+                {
                     matchingCertLoader = certLoaders[index];
                     break;
                 }
@@ -80,7 +81,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             using (
                 X509Certificate2 wrongRecipient =
                     Certificates.RSAKeyTransfer5_ExplicitSkiOfRSAKeyTransfer4.TryGetCertificateWithPrivateKey()
-            ) {
+            )
+            {
                 // This is an enveloped CMS that is encrypted with one RSA key recipient
                 // but does not fail when decrypting the content encryption key (CEK).
                 // Though it did not fail, the CEK is wrong and cannot decrypt the data
@@ -146,7 +148,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             using (
                 X509Certificate2 realRecipientCert =
                     Certificates.RSAKeyTransfer4_ExplicitSki.TryGetCertificateWithPrivateKey()
-            ) {
+            )
+            {
                 Assert.Equal(recipientCert, realRecipientCert);
                 Assert.NotEqual(recipientCert, otherRecipientWithSameSki);
                 Assert.Equal(

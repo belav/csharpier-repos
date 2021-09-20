@@ -20,7 +20,8 @@ namespace System.Diagnostics.Tests
         {
             using (
                 var session = usingDefaultCtor ? new EventLogSession() : new EventLogSession(null)
-            ) {
+            )
+            {
                 Assert.NotEmpty(session.GetProviderNames());
                 Assert.NotEmpty(session.GetLogNames());
             }
@@ -33,7 +34,8 @@ namespace System.Diagnostics.Tests
         {
             using (
                 var session = usingDefaultCtor ? new EventLogSession() : new EventLogSession(null)
-            ) {
+            )
+            {
                 Assert.Throws<ArgumentNullException>(
                     () =>
                         session.ExportLogAndMessages(
@@ -64,7 +66,8 @@ namespace System.Diagnostics.Tests
         {
             using (
                 var session = usingDefaultCtor ? new EventLogSession() : new EventLogSession(null)
-            ) {
+            )
+            {
                 Assert.Throws<ArgumentNullException>(
                     () => session.ExportLog(null, PathType.LogName, LogName, GetTestFilePath())
                 );
@@ -102,7 +105,8 @@ namespace System.Diagnostics.Tests
                     password,
                     SessionAuthentication.Default
                 )
-            ) {
+            )
+            {
                 Assert.Throws<UnauthorizedAccessException>(() => session.GetProviderNames());
             }
         }

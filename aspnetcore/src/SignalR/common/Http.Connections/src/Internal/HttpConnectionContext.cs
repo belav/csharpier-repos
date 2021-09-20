@@ -68,7 +68,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
             ILogger logger,
             IDuplexPipe transport,
             IDuplexPipe application
-        ) {
+        )
+        {
             Transport = transport;
             _applicationStream = new PipeWriterStream(application.Output);
             _application = application;
@@ -274,7 +275,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
             Task applicationTask,
             Task transportTask,
             bool closeGracefully
-        ) {
+        )
+        {
             try
             {
                 // Closing gracefully means we're only going to close the finished sides of the pipe
@@ -398,7 +400,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
             IHttpTransport transport,
             HttpContext context,
             ILogger dispatcherLogger
-        ) {
+        )
+        {
             lock (_stateLock)
             {
                 if (Status == HttpConnectionStatus.Inactive)
@@ -429,7 +432,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
             Task currentRequestTask,
             ILoggerFactory loggerFactory,
             ILogger dispatcherLogger
-        ) {
+        )
+        {
             lock (_stateLock)
             {
                 if (Status == HttpConnectionStatus.Inactive)
@@ -503,7 +507,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
         private void FailActivationUnsynchronized(
             HttpContext nonClonedContext,
             ILogger dispatcherLogger
-        ) {
+        )
+        {
             if (Status == HttpConnectionStatus.Active)
             {
                 HttpConnectionDispatcher.Log.ConnectionAlreadyActive(
@@ -755,7 +760,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
             public static void ShuttingDownTransportAndApplication(
                 ILogger logger,
                 HttpTransportType transportType
-            ) {
+            )
+            {
                 if (logger == null)
                 {
                     return;
@@ -767,7 +773,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
             public static void WaitingForTransportAndApplication(
                 ILogger logger,
                 HttpTransportType transportType
-            ) {
+            )
+            {
                 if (logger == null)
                 {
                     return;
@@ -779,7 +786,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
             public static void TransportAndApplicationComplete(
                 ILogger logger,
                 HttpTransportType transportType
-            ) {
+            )
+            {
                 if (logger == null)
                 {
                     return;

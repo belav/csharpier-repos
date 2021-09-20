@@ -67,7 +67,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             VariableSlotAllocator slotAllocatorOpt,
             TypeCompilationState compilationState,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             Debug.Assert(compilationState != null);
             Debug.Assert(diagnostics != null);
             Debug.Assert(diagnostics.DiagnosticBag != null);
@@ -87,7 +88,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         protected void RewriteLocals(
             ImmutableArray<LocalSymbol> locals,
             ArrayBuilder<LocalSymbol> newLocals
-        ) {
+        )
+        {
             foreach (var local in locals)
             {
                 LocalSymbol newLocal;
@@ -294,7 +296,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (
                 BaseReferenceInReceiverWasRewritten(node.ReceiverOpt, rewrittenReceiver)
                 && node.Method.IsMetadataVirtual()
-            ) {
+            )
+            {
                 rewrittenMethodSymbol = GetMethodWrapperForBaseNonVirtualCall(
                     rewrittenMethodSymbol,
                     node.Syntax
@@ -320,7 +323,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private MethodSymbol GetMethodWrapperForBaseNonVirtualCall(
             MethodSymbol methodBeingCalled,
             SyntaxNode syntax
-        ) {
+        )
+        {
             var newMethod = GetOrCreateBaseFunctionWrapper(methodBeingCalled, syntax);
             if (!newMethod.IsGenericMethod)
             {
@@ -346,7 +350,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private MethodSymbol GetOrCreateBaseFunctionWrapper(
             MethodSymbol methodBeingWrapped,
             SyntaxNode syntax
-        ) {
+        )
+        {
             methodBeingWrapped = methodBeingWrapped.ConstructedFrom;
 
             MethodSymbol wrapper = this.CompilationState.GetMethodWrapper(methodBeingWrapped);
@@ -386,7 +391,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Symbol parameterOrLocal,
             SyntaxNode syntax,
             out BoundNode replacement
-        ) {
+        )
+        {
             CapturedSymbolReplacement proxy;
             if (proxies.TryGetValue(parameterOrLocal, out proxy))
             {
@@ -480,7 +486,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override BoundNode VisitAwaitableValuePlaceholder(
             BoundAwaitableValuePlaceholder node
-        ) {
+        )
+        {
             return _placeholderMap[node];
         }
 
@@ -501,7 +508,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 leftLocal.LocalSymbol.RefKind != RefKind.None
                 && node.IsRef
                 && NeedsProxy(leftLocal.LocalSymbol)
-            ) {
+            )
+            {
                 Debug.Assert(!proxies.ContainsKey(leftLocal.LocalSymbol));
                 Debug.Assert(originalRight.Kind != BoundKind.ConvertedStackAllocExpression);
                 //spilling ref local variables
@@ -528,7 +536,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (
                 rewrittenLeft.Kind != BoundKind.Local
                 && originalRight.Kind == BoundKind.ConvertedStackAllocExpression
-            ) {
+            )
+            {
                 // From ILGENREC::genAssign:
                 // DevDiv Bugs 59454: Handle hoisted local initialized with a stackalloc
                 // NOTE: Need to check for cast of stackalloc on RHS.
@@ -593,7 +602,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (
                 !TypeSymbol.Equals(rewritten.Type, node.Type, TypeCompareKind.ConsiderEverything2)
                 && (object)node.Constructor != null
-            ) {
+            )
+            {
                 MethodSymbol ctor = VisitMethodSymbol(node.Constructor);
                 rewritten = rewritten.Update(
                     ctor,
@@ -614,7 +624,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override BoundNode VisitDelegateCreationExpression(
             BoundDelegateCreationExpression node
-        ) {
+        )
+        {
             BoundExpression originalArgument = node.Argument;
             BoundExpression rewrittenArgument = (BoundExpression)this.Visit(originalArgument);
             MethodSymbol method = node.MethodOpt;
@@ -624,7 +635,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (
                 BaseReferenceInReceiverWasRewritten(originalArgument, rewrittenArgument)
                 && method.IsMetadataVirtual()
-            ) {
+            )
+            {
                 method = GetMethodWrapperForBaseNonVirtualCall(method, originalArgument.Syntax);
             }
             method = VisitMethodSymbol(method);
@@ -784,7 +796,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private static bool BaseReferenceInReceiverWasRewritten(
             BoundExpression originalReceiver,
             BoundExpression rewrittenReceiver
-        ) {
+        )
+        {
             return originalReceiver != null
                 && originalReceiver.Kind == BoundKind.BaseReference
                 && rewrittenReceiver != null
@@ -802,14 +815,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 MethodSymbol methodBeingWrapped,
                 SyntaxNode syntax,
                 string name
-            ) : base(
-                containingType,
-                methodBeingWrapped,
-                syntax.SyntaxTree.GetReference(syntax),
-                syntax.GetLocation(),
-                name,
-                DeclarationModifiers.Private
-            ) {
+            )
+                : base(
+                    containingType,
+                    methodBeingWrapped,
+                    syntax.SyntaxTree.GetReference(syntax),
+                    syntax.GetLocation(),
+                    name,
+                    DeclarationModifiers.Private
+                )
+            {
                 Debug.Assert(containingType.ContainingModule is SourceModuleSymbol);
                 Debug.Assert(
                     ReferenceEquals(methodBeingWrapped, methodBeingWrapped.ConstructedFrom)
@@ -842,7 +857,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             internal override void AddSynthesizedAttributes(
                 PEModuleBuilder moduleBuilder,
                 ref ArrayBuilder<SynthesizedAttributeData> attributes
-            ) {
+            )
+            {
                 base.AddSynthesizedAttributes(moduleBuilder, ref attributes);
 
                 AddSynthesizedAttribute(

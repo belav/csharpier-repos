@@ -711,11 +711,8 @@ namespace System.DirectoryServices.Protocols
         public SortRequestControl(string attributeName, bool reverseOrder)
             : this(attributeName, null, reverseOrder) { }
 
-        public SortRequestControl(
-            string attributeName,
-            string matchingRule,
-            bool reverseOrder
-        ) : base("1.2.840.113556.1.4.473", null, true, true)
+        public SortRequestControl(string attributeName, string matchingRule, bool reverseOrder)
+            : base("1.2.840.113556.1.4.473", null, true, true)
         {
             SortKey key = new SortKey(attributeName, matchingRule, reverseOrder);
             _keys = new SortKey[] { key };

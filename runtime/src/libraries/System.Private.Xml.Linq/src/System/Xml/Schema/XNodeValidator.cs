@@ -41,7 +41,8 @@ namespace System.Xml.Schema
             XObject source,
             XmlSchemaObject? partialValidationType,
             bool addSchemaInfo
-        ) {
+        )
+        {
             this.source = source;
             this.addSchemaInfo = addSchemaInfo;
             XmlSchemaValidationFlags validationFlags = XmlSchemaValidationFlags.AllowXmlAttributes;
@@ -117,7 +118,8 @@ namespace System.Xml.Schema
                     XmlSchemaSimpleType mt in (
                         (XmlSchemaSimpleTypeUnion)st.Content
                     ).BaseMemberTypes!
-                ) {
+                )
+                {
                     object? typedValue = null;
                     try
                     {
@@ -508,7 +510,8 @@ namespace System.Xml.Schema
             this XDocument source,
             XmlSchemaSet schemas,
             ValidationEventHandler? validationEventHandler
-        ) {
+        )
+        {
             source.Validate(schemas, validationEventHandler, false);
         }
 
@@ -528,7 +531,8 @@ namespace System.Xml.Schema
             XmlSchemaSet schemas,
             ValidationEventHandler? validationEventHandler,
             bool addSchemaInfo
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
             if (schemas == null)
@@ -556,7 +560,8 @@ namespace System.Xml.Schema
             XmlSchemaObject partialValidationType,
             XmlSchemaSet schemas,
             ValidationEventHandler? validationEventHandler
-        ) {
+        )
+        {
             source.Validate(partialValidationType, schemas, validationEventHandler, false);
         }
 
@@ -580,7 +585,8 @@ namespace System.Xml.Schema
             XmlSchemaSet schemas,
             ValidationEventHandler? validationEventHandler,
             bool addSchemaInfo
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
             if (partialValidationType == null)
@@ -610,7 +616,8 @@ namespace System.Xml.Schema
             XmlSchemaObject partialValidationType,
             XmlSchemaSet schemas,
             ValidationEventHandler? validationEventHandler
-        ) {
+        )
+        {
             source.Validate(partialValidationType, schemas, validationEventHandler, false);
         }
 
@@ -634,7 +641,8 @@ namespace System.Xml.Schema
             XmlSchemaSet schemas,
             ValidationEventHandler? validationEventHandler,
             bool addSchemaInfo
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
             if (partialValidationType == null)

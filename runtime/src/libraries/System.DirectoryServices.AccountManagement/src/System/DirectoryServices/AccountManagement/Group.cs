@@ -210,7 +210,8 @@ namespace System.DirectoryServices.AccountManagement
         public static new GroupPrincipal FindByIdentity(
             PrincipalContext context,
             string identityValue
-        ) {
+        )
+        {
             return (GroupPrincipal)FindByIdentityWithType(
                 context,
                 typeof(GroupPrincipal),
@@ -222,7 +223,8 @@ namespace System.DirectoryServices.AccountManagement
             PrincipalContext context,
             IdentityType identityType,
             string identityValue
-        ) {
+        )
+        {
             return (GroupPrincipal)FindByIdentityWithType(
                 context,
                 typeof(GroupPrincipal),
@@ -460,7 +462,8 @@ namespace System.DirectoryServices.AccountManagement
                         new string[] { "member" },
                         SearchScope.Base
                     )
-                ) {
+                )
+                {
                     SearchResult sr = ds.FindOne();
                     if (sr != null)
                     {
@@ -472,7 +475,8 @@ namespace System.DirectoryServices.AccountManagement
                                     "member;range=",
                                     StringComparison.OrdinalIgnoreCase
                                 )
-                            ) {
+                            )
+                            {
                                 rangePropertyFound = true;
                                 break;
                             }

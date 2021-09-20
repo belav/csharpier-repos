@@ -18,7 +18,8 @@ namespace System.Web.Http.Cors
         public Task<CorsPolicy> GetCorsPolicyAsync(
             HttpRequestMessage request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return Task.FromResult<CorsPolicy>(null);
         }
     }

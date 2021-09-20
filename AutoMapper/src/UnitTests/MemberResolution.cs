@@ -1029,7 +1029,8 @@ namespace AutoMapper.UnitTests
                     string source,
                     string dest,
                     ResolutionContext context
-                ) {
+                )
+                {
                     return source.ToUpper();
                 }
             }
@@ -1042,7 +1043,8 @@ namespace AutoMapper.UnitTests
                     string source,
                     string dest,
                     ResolutionContext context
-                ) {
+                )
+                {
                     return source.ToLower();
                 }
             }
@@ -1062,7 +1064,8 @@ namespace AutoMapper.UnitTests
                     string source,
                     string dest,
                     ResolutionContext context
-                ) {
+                )
+                {
                     return source.PadLeft(_desiredLength);
                 }
             }

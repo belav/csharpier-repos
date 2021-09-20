@@ -441,7 +441,8 @@ namespace System.Text.Encodings.Tests
             byte[] firstPayload,
             byte[] secondPayload,
             int expectedIndex
-        ) {
+        )
+        {
             UTF8Encoding encoding = new UTF8Encoding(
                 encoderShouldEmitUTF8Identifier: false,
                 throwOnInvalidBytes: true

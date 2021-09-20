@@ -344,7 +344,8 @@ namespace System.Threading.Tasks
                         | TaskCreationOptions.RunContinuationsAsynchronously
                     )
                 ) != 0
-            ) {
+            )
+            {
                 ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.creationOptions);
             }
 
@@ -454,15 +455,16 @@ namespace System.Threading.Tasks
             Action action,
             CancellationToken cancellationToken,
             TaskCreationOptions creationOptions
-        ) : this(
-            action,
-            null,
-            Task.InternalCurrentIfAttached(creationOptions),
-            cancellationToken,
-            creationOptions,
-            InternalTaskOptions.None,
-            null
-        ) { }
+        )
+            : this(
+                action,
+                null,
+                Task.InternalCurrentIfAttached(creationOptions),
+                cancellationToken,
+                creationOptions,
+                InternalTaskOptions.None,
+                null
+            ) { }
 
         /// <summary>
         /// Initializes a new <see cref="Task"/> with the specified action and state.
@@ -495,19 +497,16 @@ namespace System.Threading.Tasks
         /// <exception cref="System.ObjectDisposedException">The provided <see cref="System.Threading.CancellationToken">CancellationToken</see>
         /// has already been disposed.
         /// </exception>
-        public Task(
-            Action<object?> action,
-            object? state,
-            CancellationToken cancellationToken
-        ) : this(
-            action,
-            state,
-            null,
-            cancellationToken,
-            TaskCreationOptions.None,
-            InternalTaskOptions.None,
-            null
-        ) { }
+        public Task(Action<object?> action, object? state, CancellationToken cancellationToken)
+            : this(
+                action,
+                state,
+                null,
+                cancellationToken,
+                TaskCreationOptions.None,
+                InternalTaskOptions.None,
+                null
+            ) { }
 
         /// <summary>
         /// Initializes a new <see cref="Task"/> with the specified action, state, and options.
@@ -525,19 +524,16 @@ namespace System.Threading.Tasks
         /// The <paramref name="creationOptions"/> argument specifies an invalid value for <see
         /// cref="System.Threading.Tasks.TaskCreationOptions"/>.
         /// </exception>
-        public Task(
-            Action<object?> action,
-            object? state,
-            TaskCreationOptions creationOptions
-        ) : this(
-            action,
-            state,
-            Task.InternalCurrentIfAttached(creationOptions),
-            default,
-            creationOptions,
-            InternalTaskOptions.None,
-            null
-        ) { }
+        public Task(Action<object?> action, object? state, TaskCreationOptions creationOptions)
+            : this(
+                action,
+                state,
+                Task.InternalCurrentIfAttached(creationOptions),
+                default,
+                creationOptions,
+                InternalTaskOptions.None,
+                null
+            ) { }
 
         /// <summary>
         /// Initializes a new <see cref="Task"/> with the specified action, state, and options.
@@ -564,15 +560,16 @@ namespace System.Threading.Tasks
             object? state,
             CancellationToken cancellationToken,
             TaskCreationOptions creationOptions
-        ) : this(
-            action,
-            state,
-            Task.InternalCurrentIfAttached(creationOptions),
-            cancellationToken,
-            creationOptions,
-            InternalTaskOptions.None,
-            null
-        ) { }
+        )
+            : this(
+                action,
+                state,
+                Task.InternalCurrentIfAttached(creationOptions),
+                cancellationToken,
+                creationOptions,
+                InternalTaskOptions.None,
+                null
+            ) { }
 
         /// <summary>
         /// An internal constructor used by the factory methods on task and its descendent(s).
@@ -592,7 +589,8 @@ namespace System.Threading.Tasks
             TaskCreationOptions creationOptions,
             InternalTaskOptions internalOptions,
             TaskScheduler? scheduler
-        ) {
+        )
+        {
             if (action == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.action);
@@ -638,7 +636,8 @@ namespace System.Threading.Tasks
             TaskCreationOptions creationOptions,
             InternalTaskOptions internalOptions,
             TaskScheduler? scheduler
-        ) {
+        )
+        {
             m_action = action;
             m_stateObject = state;
             m_taskScheduler = scheduler;
@@ -656,7 +655,8 @@ namespace System.Threading.Tasks
                         | TaskCreationOptions.RunContinuationsAsynchronously
                     )
                 ) != 0
-            ) {
+            )
+            {
                 ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.creationOptions);
             }
 
@@ -702,7 +702,8 @@ namespace System.Threading.Tasks
                     parent != null
                     && ((creationOptions & TaskCreationOptions.AttachedToParent) != 0)
                     && ((parent.CreationOptions & TaskCreationOptions.DenyChildAttach) == 0)
-                ) {
+                )
+                {
                     parent.AddNewChild();
                 }
             }
@@ -728,7 +729,8 @@ namespace System.Threading.Tasks
             CancellationToken cancellationToken,
             Task? antecedent,
             TaskContinuation? continuation
-        ) {
+        )
+        {
             // There is no need to worry about concurrency issues here because we are in the constructor path of the task --
             // there should not be any race conditions to set m_contingentProperties at this point.
             ContingentProperties props = EnsureContingentPropertiesInitializedUnsafe();
@@ -749,7 +751,8 @@ namespace System.Threading.Tasks
                             | InternalTaskOptions.LazyCancellation
                         )
                     ) == 0
-                ) {
+                )
+                {
                     if (cancellationToken.IsCancellationRequested)
                     {
                         // Fast path for an already-canceled cancellationToken
@@ -807,7 +810,8 @@ namespace System.Threading.Tasks
                     (parent != null)
                     && ((Options & TaskCreationOptions.AttachedToParent) != 0)
                     && ((parent.Options & TaskCreationOptions.DenyChildAttach) == 0)
-                ) {
+                )
+                {
                     parent.DisregardChild();
                 }
                 throw;
@@ -1349,7 +1353,8 @@ namespace System.Threading.Tasks
             TaskScheduler scheduler,
             TaskCreationOptions options,
             InternalTaskOptions internalOptions
-        ) {
+        )
+        {
             // Validate arguments.
             if (scheduler == null)
             {
@@ -1733,7 +1738,8 @@ namespace System.Threading.Tasks
                             newMre,
                             null
                         ) != null
-                    ) {
+                    )
+                    {
                         // Someone else already set the value, so we will just close the event right away.
                         newMre.Dispose();
                     }
@@ -1787,7 +1793,8 @@ namespace System.Threading.Tasks
                 if (
                     (m_stateFlags & TASK_STATE_EXECUTIONCONTEXT_IS_NULL)
                     == TASK_STATE_EXECUTIONCONTEXT_IS_NULL
-                ) {
+                )
+                {
                     return null;
                 }
                 else
@@ -1939,7 +1946,8 @@ namespace System.Threading.Tasks
             if (
                 TplEventSource.Log.IsEnabled()
                 && (Options & (TaskCreationOptions)InternalTaskOptions.ContinuationTask) == 0
-            ) {
+            )
+            {
                 // For all other task than TaskContinuations we want to log. TaskContinuations log in their constructor
                 Debug.Assert(m_action != null, "Must have a delegate to be in ScheduleAndStart");
                 TplEventSource.Log.TraceOperationBegin(this.Id, "Task: " + m_action.Method.Name, 0);
@@ -2233,7 +2241,8 @@ namespace System.Threading.Tasks
                 && ((Options & TaskCreationOptions.AttachedToParent) != 0)
                 && ((parent.CreationOptions & TaskCreationOptions.DenyChildAttach) == 0)
                 && Task.InternalCurrent == parent
-            ) {
+            )
+            {
                 m_stateFlags |= TASK_STATE_EXCEPTIONOBSERVEDBYPARENT;
             }
         }
@@ -2437,7 +2446,8 @@ namespace System.Threading.Tasks
                     ((TaskCreationOptions)(m_stateFlags & OptionsMask))
                     & TaskCreationOptions.AttachedToParent
                 ) != 0
-            ) {
+            )
+            {
                 parent.ProcessChildCompletion(this);
             }
         }
@@ -2560,7 +2570,8 @@ namespace System.Threading.Tasks
                     ref previousState
                 )
                 && (previousState & TASK_STATE_CANCELED) == 0
-            ) {
+            )
+            {
                 // This task has already been invoked.  Don't invoke it again.
                 return false;
             }
@@ -2620,7 +2631,8 @@ namespace System.Threading.Tasks
         private void ExecuteWithThreadLocal(
             ref Task? currentTaskSlot,
             Thread? threadPoolThread = null
-        ) {
+        )
+        {
             // Remember the current task so we can restore it after running, and then
             Task? previousTask = currentTaskSlot;
 
@@ -2753,7 +2765,8 @@ namespace System.Threading.Tasks
                 unhandledException is OperationCanceledException exceptionAsOce
                 && IsCancellationRequested
                 && m_contingentProperties!.m_cancellationToken == exceptionAsOce.CancellationToken
-            ) {
+            )
+            {
                 // All conditions are satisfied for us to go into canceled state in Finish().
                 // Mark the acknowledgement.  The exception is also stored to enable it to be
                 // the exception propagated from an await.
@@ -2805,7 +2818,8 @@ namespace System.Threading.Tasks
             Action continuationAction,
             bool continueOnCapturedContext,
             bool flowExecutionContext
-        ) {
+        )
+        {
             Debug.Assert(continuationAction != null);
 
             // Create the best AwaitTaskContinuation object given the request.
@@ -2889,7 +2903,8 @@ namespace System.Threading.Tasks
         internal void UnsafeSetContinuationForAwait(
             IAsyncStateMachineBox stateMachineBox,
             bool continueOnCapturedContext
-        ) {
+        )
+        {
             Debug.Assert(stateMachineBox != null);
 
             // This code path doesn't emit all expected TPL-related events, such as for continuations.
@@ -3137,7 +3152,8 @@ namespace System.Threading.Tasks
                     !cancellationToken.CanBeCanceled
                     && millisecondsTimeout == Timeout.UnsignedInfinite
                 )
-            ) {
+            )
+            {
                 return this;
             }
 
@@ -3174,7 +3190,8 @@ namespace System.Threading.Tasks
                 Task source,
                 uint millisecondsDelay,
                 CancellationToken token
-            ) {
+            )
+            {
                 Debug.Assert(source != null);
                 Debug.Assert(millisecondsDelay != 0);
 
@@ -3386,7 +3403,8 @@ namespace System.Threading.Tasks
         private bool SpinThenBlockingWait(
             int millisecondsTimeout,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             bool infiniteWait = millisecondsTimeout == Timeout.Infinite;
             uint startTimeTicks = infiniteWait ? 0 : (uint)Environment.TickCount;
             bool returnValue = SpinWait(millisecondsTimeout);
@@ -3579,7 +3597,8 @@ namespace System.Threading.Tasks
         internal void RecordInternalCancellationRequest(
             CancellationToken tokenToRecord,
             object? cancellationException
-        ) {
+        )
+        {
             Debug.Assert(
                 (Options & (TaskCreationOptions)InternalTaskOptions.PromiseTask) != 0,
                 "Task.RecordInternalCancellationRequest(CancellationToken) only valid for promise-style task"
@@ -3682,7 +3701,8 @@ namespace System.Threading.Tasks
                         | TASK_STATE_FAULTED
                         | TASK_STATE_CANCELED
                 )
-            ) {
+            )
+            {
                 ContingentProperties? props = m_contingentProperties;
                 if (props != null)
                 {
@@ -3738,7 +3758,8 @@ namespace System.Threading.Tasks
                         | TASK_STATE_FAULTED
                         | TASK_STATE_CANCELED
                 )
-            ) {
+            )
+            {
                 AddException(exceptionObject); // handles singleton exception or exception collection
                 Finish(false);
                 returnValue = true;
@@ -3785,7 +3806,8 @@ namespace System.Threading.Tasks
                         | TASK_STATE_FAULTED
                         | TASK_STATE_RAN_TO_COMPLETION
                 )
-            ) {
+            )
+            {
                 RecordInternalCancellationRequest(tokenToRecord, cancellationException);
                 CancellationCleanupLogic(); // perform cancellation cleanup actions
                 returnValue = true;
@@ -3989,7 +4011,8 @@ namespace System.Threading.Tasks
         private void RunOrQueueCompletionAction(
             ITaskCompletionAction completionAction,
             bool allowInlining
-        ) {
+        )
+        {
             if (allowInlining || !completionAction.InvokeMayRunArbitraryCode)
             {
                 completionAction.Invoke(this);
@@ -4063,7 +4086,8 @@ namespace System.Threading.Tasks
         public Task ContinueWith(
             Action<Task> continuationAction,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return ContinueWith(
                 continuationAction,
                 TaskScheduler.Current,
@@ -4135,7 +4159,8 @@ namespace System.Threading.Tasks
         public Task ContinueWith(
             Action<Task> continuationAction,
             TaskContinuationOptions continuationOptions
-        ) {
+        )
+        {
             return ContinueWith(
                 continuationAction,
                 TaskScheduler.Current,
@@ -4187,7 +4212,8 @@ namespace System.Threading.Tasks
             CancellationToken cancellationToken,
             TaskContinuationOptions continuationOptions,
             TaskScheduler scheduler
-        ) {
+        )
+        {
             return ContinueWith(
                 continuationAction,
                 scheduler,
@@ -4202,7 +4228,8 @@ namespace System.Threading.Tasks
             TaskScheduler scheduler,
             CancellationToken cancellationToken,
             TaskContinuationOptions continuationOptions
-        ) {
+        )
+        {
             // Throw on continuation with null action
             if (continuationAction == null)
             {
@@ -4292,7 +4319,8 @@ namespace System.Threading.Tasks
             Action<Task, object?> continuationAction,
             object? state,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return ContinueWith(
                 continuationAction,
                 state,
@@ -4329,7 +4357,8 @@ namespace System.Threading.Tasks
             Action<Task, object?> continuationAction,
             object? state,
             TaskScheduler scheduler
-        ) {
+        )
+        {
             return ContinueWith(
                 continuationAction,
                 state,
@@ -4372,7 +4401,8 @@ namespace System.Threading.Tasks
             Action<Task, object?> continuationAction,
             object? state,
             TaskContinuationOptions continuationOptions
-        ) {
+        )
+        {
             return ContinueWith(
                 continuationAction,
                 state,
@@ -4427,7 +4457,8 @@ namespace System.Threading.Tasks
             CancellationToken cancellationToken,
             TaskContinuationOptions continuationOptions,
             TaskScheduler scheduler
-        ) {
+        )
+        {
             return ContinueWith(
                 continuationAction,
                 state,
@@ -4444,7 +4475,8 @@ namespace System.Threading.Tasks
             TaskScheduler scheduler,
             CancellationToken cancellationToken,
             TaskContinuationOptions continuationOptions
-        ) {
+        )
+        {
             // Throw on continuation with null action
             if (continuationAction == null)
             {
@@ -4537,7 +4569,8 @@ namespace System.Threading.Tasks
         public Task<TResult> ContinueWith<TResult>(
             Func<Task, TResult> continuationFunction,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return ContinueWith<TResult>(
                 continuationFunction,
                 TaskScheduler.Current,
@@ -4574,7 +4607,8 @@ namespace System.Threading.Tasks
         public Task<TResult> ContinueWith<TResult>(
             Func<Task, TResult> continuationFunction,
             TaskScheduler scheduler
-        ) {
+        )
+        {
             return ContinueWith<TResult>(
                 continuationFunction,
                 scheduler,
@@ -4617,7 +4651,8 @@ namespace System.Threading.Tasks
         public Task<TResult> ContinueWith<TResult>(
             Func<Task, TResult> continuationFunction,
             TaskContinuationOptions continuationOptions
-        ) {
+        )
+        {
             return ContinueWith<TResult>(
                 continuationFunction,
                 TaskScheduler.Current,
@@ -4672,7 +4707,8 @@ namespace System.Threading.Tasks
             CancellationToken cancellationToken,
             TaskContinuationOptions continuationOptions,
             TaskScheduler scheduler
-        ) {
+        )
+        {
             return ContinueWith<TResult>(
                 continuationFunction,
                 scheduler,
@@ -4687,7 +4723,8 @@ namespace System.Threading.Tasks
             TaskScheduler scheduler,
             CancellationToken cancellationToken,
             TaskContinuationOptions continuationOptions
-        ) {
+        )
+        {
             // Throw on continuation with null function
             if (continuationFunction == null)
             {
@@ -4747,7 +4784,8 @@ namespace System.Threading.Tasks
         public Task<TResult> ContinueWith<TResult>(
             Func<Task, object?, TResult> continuationFunction,
             object? state
-        ) {
+        )
+        {
             return ContinueWith<TResult>(
                 continuationFunction,
                 state,
@@ -4785,7 +4823,8 @@ namespace System.Threading.Tasks
             Func<Task, object?, TResult> continuationFunction,
             object? state,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return ContinueWith<TResult>(
                 continuationFunction,
                 state,
@@ -4825,7 +4864,8 @@ namespace System.Threading.Tasks
             Func<Task, object?, TResult> continuationFunction,
             object? state,
             TaskScheduler scheduler
-        ) {
+        )
+        {
             return ContinueWith<TResult>(
                 continuationFunction,
                 state,
@@ -4871,7 +4911,8 @@ namespace System.Threading.Tasks
             Func<Task, object?, TResult> continuationFunction,
             object? state,
             TaskContinuationOptions continuationOptions
-        ) {
+        )
+        {
             return ContinueWith<TResult>(
                 continuationFunction,
                 state,
@@ -4929,7 +4970,8 @@ namespace System.Threading.Tasks
             CancellationToken cancellationToken,
             TaskContinuationOptions continuationOptions,
             TaskScheduler scheduler
-        ) {
+        )
+        {
             return ContinueWith<TResult>(
                 continuationFunction,
                 state,
@@ -4946,7 +4988,8 @@ namespace System.Threading.Tasks
             TaskScheduler scheduler,
             CancellationToken cancellationToken,
             TaskContinuationOptions continuationOptions
-        ) {
+        )
+        {
             // Throw on continuation with null function
             if (continuationFunction == null)
             {
@@ -4992,7 +5035,8 @@ namespace System.Threading.Tasks
             TaskContinuationOptions continuationOptions,
             out TaskCreationOptions creationOptions,
             out InternalTaskOptions internalOptions
-        ) {
+        )
+        {
             // This is used a couple of times below
             const TaskContinuationOptions NotOnAnything =
                 TaskContinuationOptions.NotOnCanceled
@@ -5029,7 +5073,8 @@ namespace System.Threading.Tasks
                         | TaskContinuationOptions.ExecuteSynchronously
                     )
                 ) != 0
-            ) {
+            )
+            {
                 ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.continuationOptions);
             }
 
@@ -5064,7 +5109,8 @@ namespace System.Threading.Tasks
             TaskScheduler scheduler,
             CancellationToken cancellationToken,
             TaskContinuationOptions options
-        ) {
+        )
+        {
             Debug.Assert(
                 continuationTask != null,
                 "Task.ContinueWithCore(): null continuationTask"
@@ -5130,7 +5176,8 @@ namespace System.Threading.Tasks
                 if (
                     (this.Options & (TaskCreationOptions)InternalTaskOptions.PromiseTask) != 0
                     && !(this is ITaskCompletionAction)
-                ) {
+                )
+                {
                     TplEventSource log = TplEventSource.Log;
                     if (log.IsEnabled())
                     {
@@ -5158,7 +5205,8 @@ namespace System.Threading.Tasks
         internal void AddCompletionAction(
             ITaskCompletionAction action,
             bool addBeforeOthers = false
-        ) {
+        )
+        {
             if (!AddTaskContinuation(action, addBeforeOthers))
                 action.Invoke(this); // run the action directly if we failed to queue the continuation (i.e., the task completed)
         }
@@ -5243,7 +5291,8 @@ namespace System.Threading.Tasks
             if (
                 (m_continuationObject != null)
                 || (Interlocked.CompareExchange(ref m_continuationObject, tc, null) != null)
-            ) {
+            )
+            {
                 // If we get here, it means that we failed to CAS tc into m_continuationObject.
                 // Therefore, we must go the more complicated route.
                 return AddTaskContinuationComplex(tc, addBeforeOthers);
@@ -5274,7 +5323,8 @@ namespace System.Threading.Tasks
                         new List<object?>(),
                         continuationObject
                     ) != continuationObject
-                ) {
+                )
+                {
                     // If we fail it means that either AddContinuationComplex won the race condition and m_continuationObject is now a List
                     // that contains the element we want to remove. Or FinishContinuations set the s_taskCompletionSentinel.
                     // So we should try to get a list one more time
@@ -5496,7 +5546,8 @@ namespace System.Threading.Tasks
             Task[] tasks,
             int millisecondsTimeout,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (tasks == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.tasks);
@@ -5656,7 +5707,8 @@ namespace System.Threading.Tasks
             List<Task> tasks,
             int millisecondsTimeout,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(tasks != null, "Expected a non-null list of tasks");
             Debug.Assert(tasks.Count > 0, "Expected at least one task");
 
@@ -5898,7 +5950,8 @@ namespace System.Threading.Tasks
             Task[] tasks,
             int millisecondsTimeout,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (tasks == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.tasks);
@@ -6000,7 +6053,8 @@ namespace System.Threading.Tasks
                     if (
                         (uint)(value - TaskCache.InclusiveInt32Min)
                         < (TaskCache.ExclusiveInt32Max - TaskCache.InclusiveInt32Min)
-                    ) {
+                    )
+                    {
                         Task<int> task = TaskCache.s_int32Tasks[
                             value - TaskCache.InclusiveInt32Min
                         ];
@@ -6027,7 +6081,8 @@ namespace System.Threading.Tasks
                     )
                     || (typeof(TResult) == typeof(IntPtr) && default == (IntPtr)(object)result!)
                     || (typeof(TResult) == typeof(UIntPtr) && default == (UIntPtr)(object)result!)
-                ) {
+                )
+                {
                     return Task<TResult>.s_defaultResultTask;
                 }
             }
@@ -6198,7 +6253,8 @@ namespace System.Threading.Tasks
         public static Task<TResult> Run<TResult>(
             Func<TResult> function,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return Task<TResult>.StartNew(
                 null,
                 function,
@@ -6293,7 +6349,8 @@ namespace System.Threading.Tasks
         public static Task<TResult> Run<TResult>(
             Func<Task<TResult>?> function,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Check arguments
             if (function == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.function);
@@ -6485,10 +6542,8 @@ namespace System.Threading.Tasks
         {
             private readonly CancellationTokenRegistration _registration;
 
-            internal DelayPromiseWithCancellation(
-                uint millisecondsDelay,
-                CancellationToken token
-            ) : base(millisecondsDelay)
+            internal DelayPromiseWithCancellation(uint millisecondsDelay, CancellationToken token)
+                : base(millisecondsDelay)
             {
                 Debug.Assert(token.CanBeCanceled);
 
@@ -7870,7 +7925,8 @@ namespace System.Threading.Tasks
                         && edis.Count > 0
                         && (oceEdi = edis[0]) != null
                         && oceEdi.SourceException is OperationCanceledException oce
-                    ) {
+                    )
+                    {
                         result = TrySetCanceled(oce.CancellationToken, oceEdi);
                     }
                     else

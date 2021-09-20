@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.Hosting.StaticWebAssets
                     ManifestRootElementName,
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     $"Invalid manifest format. Manifest root must be '{ManifestRootElementName}'"
                 );
@@ -52,7 +53,8 @@ namespace Microsoft.AspNetCore.Hosting.StaticWebAssets
                         ContentRootElementName,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     throw new InvalidOperationException(
                         $"Invalid manifest format. Invalid element '{element.Name.LocalName}'. All {StaticWebAssetsLoader.StaticWebAssetsManifestName} child elements must be '{ContentRootElementName}' elements."
                     );

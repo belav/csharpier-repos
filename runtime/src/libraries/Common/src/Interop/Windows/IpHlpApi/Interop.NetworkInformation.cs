@@ -108,7 +108,8 @@ internal static partial class Interop
 
             internal static IPAddressInformationCollection MarshalIpAddressInformationCollection(
                 IntPtr ptr
-            ) {
+            )
+            {
                 IPAddressInformationCollection addressList = new IPAddressInformationCollection();
 
                 while (ptr != IntPtr.Zero)

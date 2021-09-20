@@ -28,7 +28,8 @@ namespace System.Web.Mvc.Html
         public static MvcHtmlString IdFor<TModel, TProperty>(
             this HtmlHelper<TModel> html,
             Expression<Func<TModel, TProperty>> expression
-        ) {
+        )
+        {
             return Id(html, ExpressionHelper.GetExpressionText(expression));
         }
 
@@ -63,7 +64,8 @@ namespace System.Web.Mvc.Html
         public static MvcHtmlString NameFor<TModel, TProperty>(
             this HtmlHelper<TModel> html,
             Expression<Func<TModel, TProperty>> expression
-        ) {
+        )
+        {
             return Name(html, ExpressionHelper.GetExpressionText(expression));
         }
 

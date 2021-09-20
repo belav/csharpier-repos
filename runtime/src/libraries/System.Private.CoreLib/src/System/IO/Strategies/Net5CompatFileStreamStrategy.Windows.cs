@@ -591,7 +591,8 @@ namespace System.IO.Strategies
             long offset,
             SeekOrigin origin,
             bool closeInvalidHandle = false
-        ) {
+        )
+        {
             Debug.Assert(!fileHandle.IsClosed && _canSeek, "!fileHandle.IsClosed && _canSeek");
 
             return _filePosition = FileStreamHelpers.Seek(
@@ -728,7 +729,8 @@ namespace System.IO.Strategies
             Memory<byte> destination,
             CancellationToken cancellationToken,
             out int synchronousResult
-        ) {
+        )
+        {
             Debug.Assert(_useAsyncIO);
             if (!CanRead)
                 ThrowHelper.ThrowNotSupportedException_UnreadableStream();
@@ -847,7 +849,8 @@ namespace System.IO.Strategies
             Memory<byte> destination,
             int numBufferedBytesRead,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             AssertCanRead();
             Debug.Assert(_useAsyncIO, "ReadNativeAsync doesn't work on synchronous file streams!");
 
@@ -964,7 +967,8 @@ namespace System.IO.Strategies
         private ValueTask WriteAsyncInternal(
             ReadOnlyMemory<byte> source,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(_useAsyncIO);
             Debug.Assert(
                 (_readPos == 0 && _readLength == 0 && _writePos >= 0)
@@ -1006,7 +1010,8 @@ namespace System.IO.Strategies
                     source.Length < _bufferLength
                     && !HasActiveBufferOperation
                     && source.Length <= remainingBuffer
-                ) {
+                )
+                {
                     source.Span.CopyTo(new Span<byte>(GetBuffer(), _writePos, source.Length));
                     _writePos += source.Length;
                     writeDataStoredInBuffer = true;
@@ -1084,7 +1089,8 @@ namespace System.IO.Strategies
         private unsafe Task WriteAsyncInternalCore(
             ReadOnlyMemory<byte> source,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(!_fileHandle.IsClosed, "!_handle.IsClosed");
             Debug.Assert(CanWrite, "_parent.CanWrite");
             Debug.Assert(_readPos == _readLength, "_readPos == _readLen");
@@ -1193,7 +1199,8 @@ namespace System.IO.Strategies
             Span<byte> bytes,
             NativeOverlapped* overlapped,
             out int errorCode
-        ) {
+        )
+        {
             Debug.Assert(
                 (_useAsyncIO && overlapped != null) || (!_useAsyncIO && overlapped == null),
                 "Async IO and overlapped parameters inconsistent in call to ReadFileNative."
@@ -1213,7 +1220,8 @@ namespace System.IO.Strategies
             ReadOnlySpan<byte> buffer,
             NativeOverlapped* overlapped,
             out int errorCode
-        ) {
+        )
+        {
             Debug.Assert(
                 (_useAsyncIO && overlapped != null) || (!_useAsyncIO && overlapped == null),
                 "Async IO and overlapped parameters inconsistent in call to WriteFileNative."
@@ -1232,7 +1240,8 @@ namespace System.IO.Strategies
             Stream destination,
             int bufferSize,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // If we're in sync mode, just use the shared CopyToAsync implementation that does
             // typical read/write looping.
             if (!_useAsyncIO)
@@ -1271,7 +1280,8 @@ namespace System.IO.Strategies
             Stream destination,
             int bufferSize,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(_useAsyncIO, "This implementation is for async mode only");
             Debug.Assert(!_fileHandle.IsClosed, "!_handle.IsClosed");
             Debug.Assert(CanRead, "_parent.CanRead");

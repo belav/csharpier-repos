@@ -115,7 +115,8 @@ namespace System.Xml.XPath
             XPathNavigator navToRead,
             IXmlLineInfo? xli,
             IXmlSchemaInfo? xsi
-        ) {
+        )
+        {
             // Need clone that can be moved independently of original navigator
             _navToRead = navToRead;
             this.lineInfo = xli;
@@ -146,7 +147,8 @@ namespace System.Xml.XPath
 
         IDictionary<string, string> IXmlNamespaceResolver.GetNamespacesInScope(
             XmlNamespaceScope scope
-        ) {
+        )
+        {
             return _nav.GetNamespacesInScope(scope);
         }
 
@@ -717,7 +719,8 @@ namespace System.Xml.XPath
             if (
                 (IsXmlnsNoPrefix = (0 == prefix.Length && localname == "xmlns"))
                 || (prefix == "xmlns")
-            ) {
+            )
+            {
                 if (IsXmlnsNoPrefix)
                     localname = string.Empty;
                 if (nav.MoveToFirstNamespace(XPathNamespaceScope.Local))

@@ -68,7 +68,8 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
         public static void WriteRequestMessage(
             HandshakeRequestMessage requestMessage,
             IBufferWriter<byte> output
-        ) {
+        )
+        {
             var reusableWriter = ReusableUtf8JsonWriter.Get(output);
 
             try
@@ -99,7 +100,8 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
         public static void WriteResponseMessage(
             HandshakeResponseMessage responseMessage,
             IBufferWriter<byte> output
-        ) {
+        )
+        {
             var reusableWriter = ReusableUtf8JsonWriter.Get(output);
 
             try
@@ -134,7 +136,8 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
         public static bool TryParseResponseMessage(
             ref ReadOnlySequence<byte> buffer,
             [NotNullWhen(true)] out HandshakeResponseMessage? responseMessage
-        ) {
+        )
+        {
             if (!TextMessageParser.TryParseMessage(ref buffer, out var payload))
             {
                 responseMessage = null;
@@ -195,7 +198,8 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
         public static bool TryParseRequestMessage(
             ref ReadOnlySequence<byte> buffer,
             [NotNullWhen(true)] out HandshakeRequestMessage? requestMessage
-        ) {
+        )
+        {
             if (!TextMessageParser.TryParseMessage(ref buffer, out var payload))
             {
                 requestMessage = null;
@@ -220,7 +224,8 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
                     }
                     else if (
                         reader.ValueTextEquals(ProtocolVersionPropertyNameBytes.EncodedUtf8Bytes)
-                    ) {
+                    )
+                    {
                         protocolVersion = reader.ReadAsInt32(ProtocolVersionPropertyName);
                     }
                     else

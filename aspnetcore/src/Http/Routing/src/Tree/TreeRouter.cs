@@ -51,7 +51,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
             ILogger routeLogger,
             ILogger constraintLogger,
             int version
-        ) {
+        )
+        {
             if (trees == null)
             {
                 throw new ArgumentNullException(nameof(trees));
@@ -117,7 +118,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
                         entry.RouteTemplate.TemplateText,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     throw new ArgumentException(
                         Resources.FormatAttributeRoute_DifferentLinkGenerationEntries_SameName(
                             entry.RouteName
@@ -217,7 +219,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
                                     context.HttpContext.Request.Path,
                                     context.RouteData.Values
                                 )
-                            ) {
+                            )
+                            {
                                 continue;
                             }
 
@@ -230,7 +233,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
                                     RouteDirection.IncomingRequest,
                                     _constraintLogger
                                 )
-                            ) {
+                            )
+                            {
                                 continue;
                             }
 
@@ -277,7 +281,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
             VirtualPathContext context,
             OutboundRouteEntry entry,
             TemplateBinder binder
-        ) {
+        )
+        {
             // In attribute the context includes the values that are used to select this entry - typically
             // these will be the standard 'action', 'controller' and maybe 'area' tokens. However, we don't
             // want to pass these to the link generation code, or else they will end up as query parameters.

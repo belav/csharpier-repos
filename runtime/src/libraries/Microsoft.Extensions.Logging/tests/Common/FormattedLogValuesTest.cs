@@ -269,7 +269,8 @@ namespace Microsoft.Extensions.Logging.Test
             string messageFormat,
             object[] arguments,
             string expected
-        ) {
+        )
+        {
             var logValues = new FormattedLogValues(messageFormat, arguments);
 
             Assert.Equal(expected, logValues.ToString());

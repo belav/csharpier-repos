@@ -22,7 +22,8 @@ namespace System.Threading.Tasks
             this Task task,
             TimeSpan timeout,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var tcs = new TaskCompletionSource<bool>();
             using (
                 new Timer(
@@ -37,7 +38,8 @@ namespace System.Threading.Tasks
                     s => ((TaskCompletionSource<bool>)s).TrySetCanceled(),
                     tcs
                 )
-            ) {
+            )
+            {
                 await (await Task.WhenAny(task, tcs.Task).ConfigureAwait(false)).ConfigureAwait(
                     false
                 );
@@ -56,7 +58,8 @@ namespace System.Threading.Tasks
             this Task<TResult> task,
             TimeSpan timeout,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var tcs = new TaskCompletionSource<TResult>();
             using (
                 new Timer(
@@ -71,7 +74,8 @@ namespace System.Threading.Tasks
                     s => ((TaskCompletionSource<TResult>)s).TrySetCanceled(),
                     tcs
                 )
-            ) {
+            )
+            {
                 return await (
                     await Task.WhenAny(task, tcs.Task).ConfigureAwait(false)
                 ).ConfigureAwait(false);

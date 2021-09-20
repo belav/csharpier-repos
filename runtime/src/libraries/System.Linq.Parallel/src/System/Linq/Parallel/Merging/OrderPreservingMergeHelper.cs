@@ -41,7 +41,8 @@ namespace System.Linq.Parallel
             TaskScheduler taskScheduler,
             CancellationState cancellationState,
             int queryId
-        ) {
+        )
+        {
             Debug.Assert(partitions != null);
 
             TraceHelpers.TraceInfo(

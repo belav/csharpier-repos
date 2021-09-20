@@ -99,7 +99,8 @@ namespace System.Formats.Asn1.Tests.Writer
             AsnEncodingRules ruleSet,
             int payloadLength,
             bool expectConstructed
-        ) {
+        )
+        {
             byte[] data = new byte[payloadLength];
 
             Asn1Tag[] tagsToTry =

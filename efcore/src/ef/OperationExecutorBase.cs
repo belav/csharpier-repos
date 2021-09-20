@@ -33,7 +33,8 @@ namespace Microsoft.EntityFrameworkCore.Tools
             string? rootNamespace,
             string? language,
             string[] remainingArguments
-        ) {
+        )
+        {
             AssemblyFileName = Path.GetFileNameWithoutExtension(assembly);
             StartupAssemblyFileName =
                 startupAssembly == null

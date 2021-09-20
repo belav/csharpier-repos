@@ -16,7 +16,8 @@ namespace System.ComponentModel.Composition.Hosting
             public ScopeManager(
                 CatalogExportProvider catalogExportProvider,
                 CompositionScopeDefinition scopeDefinition
-            ) {
+            )
+            {
                 if (catalogExportProvider == null)
                 {
                     throw new ArgumentNullException(nameof(catalogExportProvider));
@@ -33,7 +34,8 @@ namespace System.ComponentModel.Composition.Hosting
             protected override IEnumerable<Export> GetExportsCore(
                 ImportDefinition definition,
                 AtomicComposition? atomicComposition
-            ) {
+            )
+            {
                 List<Export> exports = new List<Export>();
 
                 ImportDefinition? queryImport = TranslateImport(definition);
@@ -49,7 +51,8 @@ namespace System.ComponentModel.Composition.Hosting
                         var partDefinitionAndExportDefinition in childCatalog.GetExportsFromPublicSurface(
                             queryImport
                         )
-                    ) {
+                    )
+                    {
                         // We found a match in the child catalog. Now we need to check that it doesn't get rejected.
                         // if the rejetecion is enabled and atomic composition is present, we will actually have to do the work, if not - we just use what we have
                         bool isChildPartRejected = false;
@@ -64,7 +67,8 @@ namespace System.ComponentModel.Composition.Hosting
                                     var localAtomicComposition = new AtomicComposition(
                                         atomicComposition
                                     )
-                                ) {
+                                )
+                                {
                                     isChildPartRejected =
                                         container.CatalogExportProvider!.DetermineRejection(
                                             partDefinitionAndExportDefinition.Item1,
@@ -95,7 +99,8 @@ namespace System.ComponentModel.Composition.Hosting
                 CompositionScopeDefinition childCatalog,
                 ComposablePartDefinition partDefinition,
                 ExportDefinition exportDefinition
-            ) {
+            )
+            {
                 return new ScopeFactoryExport(this, childCatalog, partDefinition, exportDefinition);
             }
 

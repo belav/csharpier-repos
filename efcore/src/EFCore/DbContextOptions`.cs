@@ -30,9 +30,8 @@ namespace Microsoft.EntityFrameworkCore
         ///     to create instances of this class and it is not designed to be directly constructed in your application code.
         /// </summary>
         /// <param name="extensions"> The extensions that store the configured options. </param>
-        public DbContextOptions(
-            IReadOnlyDictionary<Type, IDbContextOptionsExtension> extensions
-        ) : base(extensions) { }
+        public DbContextOptions(IReadOnlyDictionary<Type, IDbContextOptionsExtension> extensions)
+            : base(extensions) { }
 
         /// <summary>
         ///     Adds the given extension to the underlying options and creates a new

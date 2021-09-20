@@ -1516,7 +1516,8 @@ namespace System.Linq.Expressions.Tests
 
                 foreach (
                     var str in values.Skip(i).Concat(new[] { default(string), "whatever", "FOO" })
-                ) {
+                )
+                {
                     Assert.Equal(-1, f(str));
                     k++;
                 }

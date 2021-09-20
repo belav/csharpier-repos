@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Notification
                 string message,
                 string title = null,
                 NotificationSeverity severity = NotificationSeverity.Warning
-            ) {
+            )
+            {
                 var callback = NotificationCallback;
                 if (callback != null)
                 {
@@ -67,7 +68,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Notification
                 string message,
                 string title = null,
                 NotificationSeverity severity = NotificationSeverity.Warning
-            ) {
+            )
+            {
                 var callback = NotificationCallback;
                 if (callback != null)
                 {

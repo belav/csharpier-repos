@@ -34,7 +34,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         public void FormatFilter_ContextContainsFormat_DefaultFormat(
             string format,
             FormatSource place
-        ) {
+        )
+        {
             // Arrange
             var mediaType = new StringSegment("application/json");
             var mockObjects = new MockObjects(format, place);
@@ -115,7 +116,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             string format,
             FormatSource place,
             string contentType
-        ) {
+        )
+        {
             // Arrange
             var mediaType = new StringSegment(contentType);
 
@@ -188,7 +190,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             string format,
             FormatSource place,
             string contentType
-        ) {
+        )
+        {
             // Arrange
             var produces = new ProducesAttribute(
                 contentType,
@@ -263,7 +266,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         public void FormatFilter_ContextContainsFormat_ContainsProducesFilter_Conflicting(
             string format,
             FormatSource place
-        ) {
+        )
+        {
             // Arrange
             var produces = new ProducesAttribute(
                 "application/xml",
@@ -455,7 +459,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
 
             public ResourceExecutingContext CreateResourceExecutingContext(
                 IFilterMetadata[] filters
-            ) {
+            )
+            {
                 var context = new ResourceExecutingContext(
                     MockActionContext,
                     filters,
@@ -478,7 +483,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 Mock<HttpContext> httpContext,
                 string format,
                 FormatSource? place
-            ) {
+            )
+            {
                 var data = new RouteData();
 
                 if (place == FormatSource.RouteData || place == FormatSource.RouteAndQueryData)
@@ -504,7 +510,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 Mock<HttpContext> httpContext,
                 string format = null,
                 FormatSource? place = null
-            ) {
+            )
+            {
                 OptionsManager = Options.Create(new MvcOptions());
 
                 // Setup options on mock service provider

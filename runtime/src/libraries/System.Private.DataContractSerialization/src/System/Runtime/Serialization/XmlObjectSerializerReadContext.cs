@@ -93,7 +93,8 @@ namespace System.Runtime.Serialization
             DataContractSerializer serializer,
             DataContract rootTypeDataContract,
             DataContractResolver? dataContractResolver
-        ) {
+        )
+        {
             return (
                 serializer.PreserveObjectReferences
                 || serializer.SerializationSurrogateProvider != null
@@ -132,7 +133,8 @@ namespace System.Runtime.Serialization
             RuntimeTypeHandle declaredTypeHandle,
             string name,
             string ns
-        ) {
+        )
+        {
             DataContract dataContract = GetDataContract(id, declaredTypeHandle);
             return InternalDeserialize(
                 xmlReader,
@@ -148,7 +150,8 @@ namespace System.Runtime.Serialization
             Type declaredType,
             string name,
             string ns
-        ) {
+        )
+        {
             DataContract dataContract = GetDataContract(declaredType);
             return InternalDeserialize(xmlReader, name, ns, declaredType, ref dataContract);
         }
@@ -159,7 +162,8 @@ namespace System.Runtime.Serialization
             DataContract? dataContract,
             string? name,
             string? ns
-        ) {
+        )
+        {
             if (dataContract == null)
                 dataContract = GetDataContract(declaredType);
             return InternalDeserialize(xmlReader, name, ns, declaredType, ref dataContract);
@@ -171,7 +175,8 @@ namespace System.Runtime.Serialization
             string? name,
             string? ns,
             ref object? retObj
-        ) {
+        )
+        {
             ReadAttributes(reader);
 
             if (attributes.Ref != Globals.NewObjectId)
@@ -212,7 +217,8 @@ namespace System.Runtime.Serialization
             string? ns,
             Type declaredType,
             ref DataContract dataContract
-        ) {
+        )
+        {
             object? retObj = null;
             if (TryHandleNullOrRef(reader, dataContract.UnderlyingType, name, ns, ref retObj))
                 return retObj;
@@ -325,7 +331,8 @@ namespace System.Runtime.Serialization
         private bool ReplaceScopedKnownTypesTop(
             DataContractDictionary? knownDataContracts,
             bool knownTypesAddedInCurrentScope
-        ) {
+        )
+        {
             if (knownTypesAddedInCurrentScope)
             {
                 scopedKnownTypes.Pop();
@@ -350,7 +357,8 @@ namespace System.Runtime.Serialization
             XmlDictionaryString[] memberNamespaces,
             int memberIndex,
             ExtensionDataObject? extensionData
-        ) {
+        )
+        {
             for (int i = memberIndex + 1; i < memberNames.Length; i++)
             {
                 if (xmlReader.IsStartElement(memberNames[i], memberNamespaces[i]))
@@ -367,7 +375,8 @@ namespace System.Runtime.Serialization
             int memberIndex,
             int requiredIndex,
             ExtensionDataObject? extensionData
-        ) {
+        )
+        {
             for (int i = memberIndex + 1; i < memberNames.Length; i++)
             {
                 if (xmlReader.IsStartElement(memberNames[i], memberNamespaces[i]))
@@ -392,7 +401,8 @@ namespace System.Runtime.Serialization
             int memberIndex,
             int requiredIndex,
             XmlDictionaryString[] memberNames
-        ) {
+        )
+        {
             StringBuilder stringBuilder = new StringBuilder();
             if (requiredIndex == memberNames.Length)
                 requiredIndex--;
@@ -422,7 +432,8 @@ namespace System.Runtime.Serialization
             XmlReaderDelegator xmlReader,
             ExtensionDataObject? extensionData,
             int memberIndex
-        ) {
+        )
+        {
             xmlReader.MoveToContent();
             if (xmlReader.NodeType != XmlNodeType.Element)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
@@ -439,7 +450,8 @@ namespace System.Runtime.Serialization
             XmlReaderDelegator xmlReader,
             ExtensionDataObject extensionData,
             int memberIndex
-        ) {
+        )
+        {
             if (extensionData.Members == null)
                 extensionData.Members = new List<ExtensionDataMember>();
             extensionData.Members.Add(ReadExtensionDataMember(xmlReader, memberIndex));
@@ -455,7 +467,8 @@ namespace System.Runtime.Serialization
             XmlReaderDelegator xmlReader,
             Type memberType,
             bool isMemberTypeSerializable
-        ) {
+        )
+        {
             Debug.Assert(attributes != null);
 
             if (attributes.Ref != Globals.NewObjectId)
@@ -603,7 +616,8 @@ namespace System.Runtime.Serialization
             out string name,
             out string? ns,
             out string prefix
-        ) {
+        )
+        {
             int colon = qname.IndexOf(':');
             prefix = "";
             if (colon >= 0)
@@ -652,7 +666,8 @@ namespace System.Runtime.Serialization
             int arraySize,
             XmlDictionaryString itemName,
             XmlDictionaryString itemNamespace
-        ) {
+        )
+        {
             if (xmlReader.NodeType == XmlNodeType.EndElement)
                 return;
             while (xmlReader.IsStartElement())
@@ -680,7 +695,8 @@ namespace System.Runtime.Serialization
             XmlReaderDelegator xmlReader,
             XmlDataContract xmlDataContract,
             bool isMemberType
-        ) {
+        )
+        {
             if (_xmlSerializableReader == null)
                 _xmlSerializableReader = new XmlSerializableReader();
             return ReadIXmlSerializable(
@@ -695,7 +711,8 @@ namespace System.Runtime.Serialization
             XmlReaderDelegator xmlReader,
             XmlDataContract xmlDataContract,
             bool isMemberType
-        ) {
+        )
+        {
             return ReadIXmlSerializable(
                 new XmlSerializableReader(),
                 xmlReader,
@@ -709,7 +726,8 @@ namespace System.Runtime.Serialization
             XmlReaderDelegator xmlReader,
             XmlDataContract xmlDataContract,
             bool isMemberType
-        ) {
+        )
+        {
             object? obj = null;
             xmlSerializableReader.BeginRead(xmlReader);
             if (isMemberType && !xmlDataContract.HasRoot)
@@ -808,7 +826,8 @@ namespace System.Runtime.Serialization
         private ExtensionDataMember ReadExtensionDataMember(
             XmlReaderDelegator xmlReader,
             int memberIndex
-        ) {
+        )
+        {
             var member = new ExtensionDataMember(xmlReader.LocalName, xmlReader.NamespaceURI)
             {
                 MemberIndex = memberIndex
@@ -971,7 +990,8 @@ namespace System.Runtime.Serialization
             XmlReaderDelegator xmlReader,
             string? dataContractName,
             string? dataContractNamespace
-        ) {
+        )
+        {
             Debug.Assert(attributes != null);
 
             StartReadExtensionDataValue(xmlReader);
@@ -1037,7 +1057,8 @@ namespace System.Runtime.Serialization
             XmlReaderDelegator xmlReader,
             string? dataContractName,
             string? dataContractNamespace
-        ) {
+        )
+        {
             Type valueType = xmlReader.ValueType;
             if (valueType == Globals.TypeOfString)
             {
@@ -1063,7 +1084,8 @@ namespace System.Runtime.Serialization
             IDataNode dataNode,
             string? dataContractName,
             string? dataContractNamespace
-        ) {
+        )
+        {
             Debug.Assert(attributes != null);
 
             dataNode.DataContractName = dataContractName;
@@ -1079,7 +1101,8 @@ namespace System.Runtime.Serialization
             Type type,
             string? dataContractName,
             string? dataContractNamespace
-        ) {
+        )
+        {
             IDataNode dataNode = xmlReader.ReadExtensionData(type);
             InitializeExtensionDataNode(dataNode, dataContractName, dataContractNamespace);
             return dataNode;
@@ -1089,7 +1112,8 @@ namespace System.Runtime.Serialization
             XmlReaderDelegator xmlReader,
             string? dataContractName,
             string? dataContractNamespace
-        ) {
+        )
+        {
             var dataNode = new ClassDataNode();
             InitializeExtensionDataNode(dataNode, dataContractName, dataContractNamespace);
 
@@ -1114,7 +1138,8 @@ namespace System.Runtime.Serialization
             XmlReaderDelegator xmlReader,
             string? dataContractName,
             string? dataContractNamespace
-        ) {
+        )
+        {
             Debug.Assert(attributes != null);
 
             var dataNode = new CollectionDataNode();
@@ -1187,7 +1212,8 @@ namespace System.Runtime.Serialization
             XmlReaderDelegator xmlReader,
             string? dataContractName,
             string? dataContractNamespace
-        ) {
+        )
+        {
             Debug.Assert(attributes != null);
 
             var dataNode = new ISerializableDataNode();
@@ -1224,7 +1250,8 @@ namespace System.Runtime.Serialization
             XmlReaderDelegator xmlReader,
             string? dataContractName,
             string? dataContractNamespace
-        ) {
+        )
+        {
             XmlDataNode dataNode = new XmlDataNode();
             InitializeExtensionDataNode(dataNode, dataContractName, dataContractNamespace);
             dataNode.OwnerDocument = Document;
@@ -1244,7 +1271,8 @@ namespace System.Runtime.Serialization
                     if (
                         ns != Globals.SerializationNamespace
                         && ns != Globals.SchemaInstanceNamespace
-                    ) {
+                    )
+                    {
                         if (xmlAttributes == null)
                             xmlAttributes = new List<XmlAttribute>();
                         xmlAttributes.Add(
@@ -1282,7 +1310,8 @@ namespace System.Runtime.Serialization
             IDictionary<string, string>? namespaces,
             string? dataContractName,
             string? dataContractNamespace
-        ) {
+        )
+        {
             bool couldBeISerializableData = true;
             bool couldBeCollectionData = true;
             bool couldBeClassData = true;
@@ -1404,7 +1433,8 @@ namespace System.Runtime.Serialization
         internal XmlReaderDelegator CreateReaderOverChildNodes(
             IList<XmlAttribute>? xmlAttributes,
             IList<XmlNode> xmlChildNodes
-        ) {
+        )
+        {
             XmlNode wrapperElement = CreateWrapperXmlElement(
                 Document,
                 xmlAttributes,
@@ -1428,7 +1458,8 @@ namespace System.Runtime.Serialization
             string? prefix,
             string? localName,
             string? ns
-        ) {
+        )
+        {
             localName = localName ?? "wrapper";
             ns = ns ?? string.Empty;
             XmlElement wrapperElement = document.CreateElement(prefix, localName, ns);
@@ -1462,7 +1493,8 @@ namespace System.Runtime.Serialization
         internal static Exception CreateUnexpectedStateException(
             XmlNodeType expectedState,
             XmlReaderDelegator xmlReader
-        ) {
+        )
+        {
             return XmlObjectSerializer.CreateSerializationExceptionWithReaderDetails(
                 SR.Format(SR.ExpectingState, expectedState),
                 xmlReader
@@ -1478,7 +1510,8 @@ namespace System.Runtime.Serialization
         protected virtual object? ReadDataContractValue(
             DataContract dataContract,
             XmlReaderDelegator reader
-        ) {
+        )
+        {
             return dataContract.ReadXmlValue(reader, this);
         }
 

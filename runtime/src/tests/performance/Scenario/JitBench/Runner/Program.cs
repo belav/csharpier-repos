@@ -108,7 +108,8 @@ namespace JitBench
                 }
                 else if (
                     options.TargetArchitecture.Equals("x86", StringComparison.OrdinalIgnoreCase)
-                ) {
+                )
+                {
                     run.Architecture = Architecture.X86;
                 }
                 else
@@ -174,7 +175,8 @@ namespace JitBench
 
         static IEnumerable<BenchmarkConfiguration> GetBenchmarkConfigurations(
             CommandLineOptions options
-        ) {
+        )
+        {
             string tieredEnv = Environment.GetEnvironmentVariable("COMPlus_TieredCompilation");
             string minoptsEnv = Environment.GetEnvironmentVariable("COMPlus_JitMinopts");
             string r2rEnv = Environment.GetEnvironmentVariable("COMPlus_ReadyToRun");

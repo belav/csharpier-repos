@@ -65,7 +65,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
             CodeLensDescriptor descriptor,
             CodeLensDescriptorContext descriptorContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (descriptorContext != null && descriptorContext.ApplicableSpan.HasValue)
             {
                 // we allow all reference points.
@@ -80,7 +81,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
             CodeLensDescriptor descriptor,
             CodeLensDescriptorContext descriptorContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var dataPoint = new DataPoint(this, _lazyCodeLensCallbackService.Value, descriptor);
 
             AddDataPoint(dataPoint);
@@ -122,7 +124,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
                         if (
                             _dataPoints.TryGetValue(projectGuid, out var oldVersionedPoints)
                             && newVersion != oldVersionedPoints.version
-                        ) {
+                        )
+                        {
                             foreach (var dataPoint in oldVersionedPoints.dataPoints)
                                 dataPoint.Invalidate();
 
@@ -162,7 +165,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
                     _dataPoints.TryGetValue(dataPoint.Descriptor.ProjectGuid, out var points)
                     && points.dataPoints.Remove(dataPoint)
                     && points.dataPoints.Count == 0
-                ) {
+                )
+                {
                     _dataPoints.Remove(dataPoint.Descriptor.ProjectGuid);
                 }
             }
@@ -232,7 +236,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
                 ReferenceCodeLensProvider owner,
                 ICodeLensCallbackService callbackService,
                 CodeLensDescriptor descriptor
-            ) {
+            )
+            {
                 _owner = owner;
                 _callbackService = callbackService;
 
@@ -251,7 +256,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
             public async Task<CodeLensDataPointDescriptor?> GetDataAsync(
                 CodeLensDescriptorContext descriptorContext,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var codeElementKind = GetCodeElementKindsString(Descriptor.Kind);
 
                 // we always get data through VS rather than Roslyn OOP directly since we want final data rather than
@@ -312,7 +318,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
             public async Task<CodeLensDetailsDescriptor> GetDetailsAsync(
                 CodeLensDescriptorContext descriptorContext,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // we always get data through VS rather than Roslyn OOP directly since we want final data rather than
                 // raw data from Roslyn OOP such as razor find all reference results
                 var referenceLocationDescriptors =

@@ -236,7 +236,8 @@ namespace System.Text
             byte* bytes,
             int byteCount,
             EncoderNLS? baseEncoder
-        ) {
+        )
+        {
             // Just need to ASSERT, this is called by something else internal that checked parameters already
             Debug.Assert(chars != null, "[ISO2022Encoding.GetBytes]chars is null");
             Debug.Assert(byteCount >= 0, "[ISO2022Encoding.GetBytes]byteCount is negative");
@@ -294,7 +295,8 @@ namespace System.Text
             char* chars,
             int charCount,
             DecoderNLS? baseDecoder
-        ) {
+        )
+        {
             // Just need to ASSERT, this is called by something else internal that checked parameters already
             Debug.Assert(bytes != null, "[ISO2022Encoding.GetChars]bytes is null");
             Debug.Assert(byteCount >= 0, "[ISO2022Encoding.GetChars]byteCount is negative");
@@ -369,7 +371,8 @@ namespace System.Text
             byte* bytes,
             int byteCount,
             ISO2022Encoder? encoder
-        ) {
+        )
+        {
             // prepare our helpers
             EncodingByteBuffer buffer = new EncodingByteBuffer(
                 this,
@@ -428,7 +431,8 @@ namespace System.Text
                         if (
                             bTrailByte < 0x21
                             || bTrailByte >= 0x21 + s_HalfToFullWidthKanaTable.Length
-                        ) {
+                        )
+                        {
                             buffer.Fallback(ch);
                             continue;
                         }
@@ -573,7 +577,8 @@ namespace System.Text
                 if (
                     currentMode != ISO2022Modes.ModeASCII
                     && (CodePage != 50222 || currentMode != ISO2022Modes.ModeHalfwidthKatakana)
-                ) {
+                )
+                {
                     // only shift if it was successful
                     if (buffer.AddByte(ESCAPE, unchecked((byte)'('), unchecked((byte)'B')))
                         currentMode = ISO2022Modes.ModeASCII;
@@ -632,7 +637,8 @@ namespace System.Text
             byte* bytes,
             int byteCount,
             ISO2022Encoder? encoder
-        ) {
+        )
+        {
             // prepare our helpers
             EncodingByteBuffer buffer = new EncodingByteBuffer(
                 this,
@@ -803,7 +809,8 @@ namespace System.Text
             byte* bytes,
             int byteCount,
             ISO2022Encoder? encoder
-        ) {
+        )
+        {
             // prepare our helpers
             EncodingByteBuffer buffer = new EncodingByteBuffer(
                 this,
@@ -868,7 +875,8 @@ namespace System.Text
                             || bTrailByte > 0xfe
                         )
                     ) || (bLeadByte == 0 && bTrailByte > 0x80 && bTrailByte != 0xff)
-                ) {
+                )
+                {
                     // Illegal character, in 936 code page, but not in HZ subset, get fallback for it
                     buffer.Fallback(ch);
                     continue;
@@ -960,7 +968,8 @@ namespace System.Text
             char* chars,
             int charCount,
             ISO2022Decoder? decoder
-        ) {
+        )
+        {
             // Get our info.
             EncodingCharBuffer buffer = new EncodingCharBuffer(
                 this,
@@ -1302,7 +1311,8 @@ namespace System.Text
             char* chars,
             int charCount,
             ISO2022Decoder? decoder
-        ) {
+        )
+        {
             // Get our info.
             EncodingCharBuffer buffer = new EncodingCharBuffer(
                 this,
@@ -1553,7 +1563,8 @@ namespace System.Text
             char* chars,
             int charCount,
             ISO2022Decoder? decoder
-        ) {
+        )
+        {
             Debug.Assert(byteCount >= 0, "[ISO2022Encoding.GetCharsCP52936]count >=0");
             Debug.Assert(bytes != null, "[ISO2022Encoding.GetCharsCP52936]bytes!=null");
 
@@ -1726,7 +1737,8 @@ namespace System.Text
                         &&
                         // Everett allowed high bit mappings for same characters (but only if both bits set)
                         (ch < 0xa1 || ch > 0xf7 || ch2 < 0xa1 || ch2 > 0xfe)
-                    ) {
+                    )
+                    {
                         // For some reason Everett allowed XX20 to become unicode 3000... (ideo sp)
                         if (ch2 == 0x20 && 0x21 <= ch && ch <= 0x7d)
                         {

@@ -35,7 +35,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
             DkmCompiledVisualizationData AdditionalVisualizationData,
             DkmCompiledVisualizationDataPriority AdditionalVisualizationDataPriority,
             ReadOnlyCollection<DkmRawReturnValueContainer> ReturnValues
-        ) {
+        )
+        {
             return new DkmInspectionContext(
                 InspectionSession,
                 EvaluationFlags,
@@ -49,7 +50,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
             DkmEvaluationFlags evaluationFlags,
             uint radix,
             DkmRuntimeInstance runtimeInstance
-        ) {
+        )
+        {
             this.InspectionSession = inspectionSession;
             this.EvaluationFlags = evaluationFlags;
             this.Radix = radix;
@@ -73,7 +75,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
             DkmClrType ClrType,
             DkmClrCustomTypeInfo CustomTypeInfo,
             ReadOnlyCollection<string> FormatSpecifiers
-        ) {
+        )
+        {
             return InspectionSession.InvokeFormatter(
                 this,
                 MethodId.GetTypeName,

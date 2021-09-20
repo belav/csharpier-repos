@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeWithAnnotations type,
             Binder binder,
             bool success
-        ) {
+        )
+        {
             Debug.Assert(Placeholder is null);
 
             // The val escape scope for this placeholder won't be used, so defaulting to narrowest scope

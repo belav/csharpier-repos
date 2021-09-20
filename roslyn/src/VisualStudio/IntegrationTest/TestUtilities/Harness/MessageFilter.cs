@@ -36,7 +36,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Harness
             IntPtr htaskCaller,
             uint dwTickCount,
             INTERFACEINFO[] lpInterfaceInfo
-        ) {
+        )
+        {
             return (uint)SERVERCALL.SERVERCALL_ISHANDLED;
         }
 
@@ -45,7 +46,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Harness
             if (
                 (SERVERCALL)dwRejectType != SERVERCALL.SERVERCALL_RETRYLATER
                 && (SERVERCALL)dwRejectType != SERVERCALL.SERVERCALL_REJECTED
-            ) {
+            )
+            {
                 return CancelCall;
             }
 

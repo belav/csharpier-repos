@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
         private static Task<Document> RemoveUnnecessaryImportsAsync(
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var service = document.GetLanguageService<IRemoveUnnecessaryImportsService>();
             return service.RemoveUnnecessaryImportsAsync(document, cancellationToken);
         }

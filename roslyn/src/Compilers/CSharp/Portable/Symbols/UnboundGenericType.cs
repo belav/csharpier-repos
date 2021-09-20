@@ -56,7 +56,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ImmutableArray<TypeParameterSymbol> typeParameters,
             int n,
             DiagnosticInfo errorInfo
-        ) {
+        )
+        {
             var result = ArrayBuilder<TypeWithAnnotations>.GetInstance();
             for (int i = 0; i < n; i++)
             {

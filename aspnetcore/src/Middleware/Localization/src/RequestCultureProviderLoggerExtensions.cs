@@ -41,7 +41,8 @@ namespace Microsoft.AspNetCore.Localization
             this ILogger logger,
             string requestCultureProvider,
             IList<StringSegment> cultures
-        ) {
+        )
+        {
             _unsupportedCulture(logger, requestCultureProvider, cultures, null);
         }
 
@@ -49,7 +50,8 @@ namespace Microsoft.AspNetCore.Localization
             this ILogger logger,
             string requestCultureProvider,
             IList<StringSegment> uiCultures
-        ) {
+        )
+        {
             _unsupportedUICulture(logger, requestCultureProvider, uiCultures, null);
         }
     }

@@ -118,7 +118,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 && IntegerUtilities.HasOneBitSet(existingConstants[0])
                 && Multiply(existingConstants[0], 2).CompareTo(existingConstants[0]) > 0
                 && existingConstants.All(GreaterThanOrEqualsZero)
-            ) {
+            )
+            {
                 if (existingConstants.Count == 1)
                 {
                     return true;
@@ -135,7 +136,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                         && existingConstants[1].Equals(
                             Convert.ChangeType(1, existingConstants[1].GetType())
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
 

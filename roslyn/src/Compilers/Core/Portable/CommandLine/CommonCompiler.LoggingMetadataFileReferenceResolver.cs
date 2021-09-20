@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis
                 RelativePathResolver pathResolver,
                 Func<string, MetadataReferenceProperties, PortableExecutableReference> provider,
                 TouchedFileLogger? logger
-            ) {
+            )
+            {
                 Debug.Assert(pathResolver != null);
                 Debug.Assert(provider != null);
 
@@ -39,7 +40,8 @@ namespace Microsoft.CodeAnalysis
                 string reference,
                 string? baseFilePath,
                 MetadataReferenceProperties properties
-            ) {
+            )
+            {
                 string fullPath = _pathResolver.ResolvePath(reference, baseFilePath);
 
                 if (fullPath != null)

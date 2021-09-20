@@ -19,7 +19,8 @@ namespace Microsoft.Cci
         public ModifiedTypeReference(
             ITypeReference modifiedType,
             ImmutableArray<ICustomModifier> customModifiers
-        ) {
+        )
+        {
             RoslynDebug.Assert(modifiedType != null);
             Debug.Assert(!customModifiers.IsDefault);
 

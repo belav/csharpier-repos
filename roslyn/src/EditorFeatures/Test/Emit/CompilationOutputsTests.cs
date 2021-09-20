@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.Emit.UnitTests
             public TestCompilationOutputs(
                 Func<Stream?>? openAssemblyStream = null,
                 Func<Stream?>? openPdbStream = null
-            ) {
+            )
+            {
                 _openAssemblyStream = openAssemblyStream;
                 _openPdbStream = openPdbStream;
             }

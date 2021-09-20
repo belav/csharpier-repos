@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.Text
             Encoding? encoding,
             SourceHashAlgorithm checksumAlgorithm,
             int length
-        ) {
+        )
+        {
             if (length < SourceText.LargeObjectHeapLimitInChars)
             {
                 return new StringTextWriter(encoding, checksumAlgorithm, length);

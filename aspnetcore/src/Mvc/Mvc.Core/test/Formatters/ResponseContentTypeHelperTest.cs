@@ -76,7 +76,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             MediaTypeHeaderValue contentType,
             string responseContentType,
             string expectedContentType
-        ) {
+        )
+        {
             // Arrange
             var defaultContentType = "text/default; p1=p1-value; charset=utf-8";
 

@@ -32,7 +32,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
         public static Expression MakeHasDefaultValue(
             this Expression currentValueExpression,
             IReadOnlyPropertyBase? propertyBase
-        ) {
+        )
+        {
             if (!currentValueExpression.Type.IsValueType)
             {
                 return Expression.ReferenceEqual(
@@ -44,7 +45,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
             if (
                 currentValueExpression.Type.IsGenericType
                 && currentValueExpression.Type.GetGenericTypeDefinition() == typeof(Nullable<>)
-            ) {
+            )
+            {
                 return Expression.Not(
                     Expression.Call(
                         currentValueExpression,
@@ -214,7 +216,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
                     expression.NodeType == ExpressionType.Convert
                     || expression.NodeType == ExpressionType.ConvertChecked
                 )
-            ) {
+            )
+            {
                 return RemoveConvert(unaryExpression.Operand);
             }
 
@@ -237,7 +240,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
             IReadOnlyList<IReadOnlyProperty> keyProperties,
             ValueBuffer keyValues,
             ParameterExpression entityParameter
-        ) {
+        )
+        {
             var keyValuesConstant = Expression.Constant(keyValues);
 
             var predicate = GenerateEqualExpression(

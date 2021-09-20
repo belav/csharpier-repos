@@ -61,7 +61,8 @@ namespace System.Web.Http.SelfHost.Channels
             TimeSpan timeout,
             AsyncCallback callback,
             object state
-        ) {
+        )
+        {
             ConfigureResponseMessage(message);
             return _innerContext.BeginReply(message, timeout, callback, state);
         }
@@ -70,7 +71,8 @@ namespace System.Web.Http.SelfHost.Channels
             Message message,
             AsyncCallback callback,
             object state
-        ) {
+        )
+        {
             ConfigureResponseMessage(message);
             return _innerContext.BeginReply(message, callback, state);
         }
@@ -161,7 +163,8 @@ namespace System.Web.Http.SelfHost.Channels
         private static void CopyHeadersToNameValueCollection(
             HttpHeaders headers,
             NameValueCollection nameValueCollection
-        ) {
+        )
+        {
             foreach (KeyValuePair<string, IEnumerable<string>> header in headers)
             {
                 foreach (string value in header.Value)
@@ -189,7 +192,8 @@ namespace System.Web.Http.SelfHost.Channels
                     HttpRequestMessageProperty.Name,
                     out requestProperty
                 )
-            ) {
+            )
+            {
                 throw Error.InvalidOperation(
                     SRResources.RequestMissingHttpRequestMessageProperty,
                     HttpRequestMessageProperty.Name,
@@ -285,7 +289,8 @@ namespace System.Web.Http.SelfHost.Channels
                 if (
                     httpResponseMessage.ReasonPhrase != null
                     && httpResponseMessage.ReasonPhrase != DefaultReasonPhrase
-                ) {
+                )
+                {
                     responseProperty.StatusDescription = httpResponseMessage.ReasonPhrase;
                 }
 

@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
             TextSpan originalSpan,
             TextSpan newSpan,
             ImmutableArray<(TextSpan oldSpan, TextSpan newSpan)> modifiedSubSpans
-        ) {
+        )
+        {
             OriginalSpan = originalSpan;
             NewSpan = newSpan;
             ModifiedSubSpans = modifiedSubSpans;

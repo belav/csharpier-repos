@@ -69,7 +69,8 @@ namespace System.Data.OleDb.Tests
                             @"SELECT * FROM " + tableName,
                             ConnectionString
                         )
-                    ) {
+                    )
+                    {
                         DataSet ds = new DataSet();
                         adapter.Fill(ds);
                         Assert.Equal(1, ds.Tables.Count);
@@ -97,7 +98,8 @@ namespace System.Data.OleDb.Tests
                             @"SELECT * FROM " + tableName,
                             connection
                         )
-                    ) {
+                    )
+                    {
                         Assert.Throws<ArgumentNullException>(() => adapter.Fill(null));
                         Assert.Throws<ArgumentNullException>(
                             () => adapter.Fill(new DataTable(), null)
@@ -133,7 +135,8 @@ namespace System.Data.OleDb.Tests
                                 + @" SET Nickname = @Nickname WHERE Firstname = @Firstname",
                             connection
                         )
-                    ) {
+                    )
+                    {
                         adapter.SelectCommand = cmd;
                         var selectParam = new OleDbParameter(
                             "@Nickname",
@@ -236,7 +239,8 @@ namespace System.Data.OleDb.Tests
         private void RunTest(
             Action<OleDbCommand, string> testAction,
             [CallerMemberName] string memberName = null
-        ) {
+        )
+        {
             string tableName = Helpers.GetTableName(memberName);
             Assert.False(File.Exists(Path.Combine(TestDirectory, tableName)));
             command.CommandText =

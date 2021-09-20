@@ -68,7 +68,8 @@ namespace System.Collections.Immutable
             /// <returns>The new collection.</returns>
             internal ImmutableDictionary<TKey, TValue> Finalize(
                 ImmutableDictionary<TKey, TValue> priorMap
-            ) {
+            )
+            {
                 Requires.NotNull(priorMap, nameof(priorMap));
                 return priorMap.Wrap(this.Root, priorMap._count + this.CountAdjustment);
             }

@@ -210,7 +210,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             protected ClassWithNestedDeserialization(
                 SerializationInfo info,
                 StreamingContext context
-            ) {
+            )
+            {
                 byte[] serializedData = (byte[])info.GetValue("SomeField", typeof(byte[]));
                 MemoryStream ms = new MemoryStream(serializedData);
                 BinaryFormatter formatter = new BinaryFormatter();

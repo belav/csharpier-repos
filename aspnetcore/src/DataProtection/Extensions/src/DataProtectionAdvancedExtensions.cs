@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.DataProtection
             this ITimeLimitedDataProtector protector,
             byte[] plaintext,
             TimeSpan lifetime
-        ) {
+        )
+        {
             if (protector == null)
             {
                 throw new ArgumentNullException(nameof(protector));
@@ -48,7 +49,8 @@ namespace Microsoft.AspNetCore.DataProtection
             this ITimeLimitedDataProtector protector,
             string plaintext,
             DateTimeOffset expiration
-        ) {
+        )
+        {
             if (protector == null)
             {
                 throw new ArgumentNullException(nameof(protector));
@@ -78,7 +80,8 @@ namespace Microsoft.AspNetCore.DataProtection
             this ITimeLimitedDataProtector protector,
             string plaintext,
             TimeSpan lifetime
-        ) {
+        )
+        {
             if (protector == null)
             {
                 throw new ArgumentNullException(nameof(protector));
@@ -100,7 +103,8 @@ namespace Microsoft.AspNetCore.DataProtection
         /// <returns>An <see cref="ITimeLimitedDataProtector"/>.</returns>
         public static ITimeLimitedDataProtector ToTimeLimitedDataProtector(
             this IDataProtector protector
-        ) {
+        )
+        {
             if (protector == null)
             {
                 throw new ArgumentNullException(nameof(protector));
@@ -125,7 +129,8 @@ namespace Microsoft.AspNetCore.DataProtection
             this ITimeLimitedDataProtector protector,
             string protectedData,
             out DateTimeOffset expiration
-        ) {
+        )
+        {
             if (protector == null)
             {
                 throw new ArgumentNullException(nameof(protector));

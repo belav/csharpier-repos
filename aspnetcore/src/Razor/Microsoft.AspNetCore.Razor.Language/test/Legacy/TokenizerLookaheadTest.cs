@@ -205,7 +205,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 string content,
                 SyntaxKind type,
                 RazorDiagnostic[] errors
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -224,7 +225,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
             internal new bool LookaheadUntil(
                 Func<SyntaxToken, IEnumerable<SyntaxToken>, bool> condition
-            ) {
+            )
+            {
                 return base.LookaheadUntil(condition);
             }
         }

@@ -34,7 +34,8 @@ public class Runtime_49101
         float f8,
         float f9,
         Vector3 v
-    ) {
+    )
+    {
         Debug.Assert(v == Vector3.One);
         if (v == Vector3.One)
         {

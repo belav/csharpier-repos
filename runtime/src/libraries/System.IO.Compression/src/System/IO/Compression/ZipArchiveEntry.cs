@@ -465,7 +465,8 @@ namespace System.IO.Compression
 #if DEBUG_FORCE_ZIP64
                 || _archive._forceZip64
 #endif
-            ) {
+            )
+            {
                 zip64Needed = true;
                 compressedSizeTruncated = ZipHelper.Mask32Bit;
                 uncompressedSizeTruncated = ZipHelper.Mask32Bit;
@@ -485,7 +486,8 @@ namespace System.IO.Compression
 #if DEBUG_FORCE_ZIP64
                 || _archive._forceZip64
 #endif
-            ) {
+            )
+            {
                 zip64Needed = true;
                 offsetOfLocalHeaderTruncated = ZipHelper.Mask32Bit;
 
@@ -612,7 +614,8 @@ namespace System.IO.Compression
             Stream backingStream,
             bool leaveBackingStreamOpen,
             EventHandler? onClose
-        ) {
+        )
+        {
             // stream stack: backingStream -> DeflateStream -> CheckSumWriteStream
 
             // By default we compress with deflate, except if compression level is set to NoCompression then stored is used.
@@ -766,7 +769,8 @@ namespace System.IO.Compression
             bool needToUncompress,
             bool needToLoadIntoMemory,
             out string? message
-        ) {
+        )
+        {
             message = null;
 
             if (_originallyInArchive)
@@ -777,7 +781,8 @@ namespace System.IO.Compression
                         CompressionMethod != CompressionMethodValues.Stored
                         && CompressionMethod != CompressionMethodValues.Deflate
                         && CompressionMethod != CompressionMethodValues.Deflate64
-                    ) {
+                    )
+                    {
                         switch (CompressionMethod)
                         {
                             case CompressionMethodValues.BZip2:
@@ -873,7 +878,8 @@ namespace System.IO.Compression
                     _archive.Mode == ZipArchiveMode.Create
                     && _archive.ArchiveStream.CanSeek == false
                     && !isEmptyFile
-                ) {
+                )
+                {
                     _generalPurposeBitFlag |= BitFlagValues.DataDescriptor;
                     zip64Used = false;
                     compressedSizeTruncated = 0;
@@ -890,7 +896,8 @@ namespace System.IO.Compression
 #if DEBUG_FORCE_ZIP64
                         || (_archive._forceZip64 && _archive.Mode == ZipArchiveMode.Update)
 #endif
-                    ) {
+                    )
+                    {
                         zip64Used = true;
                         compressedSizeTruncated = ZipHelper.Mask32Bit;
                         uncompressedSizeTruncated = ZipHelper.Mask32Bit;
@@ -970,7 +977,8 @@ namespace System.IO.Compression
                             GetDataCompressor(_archive.ArchiveStream, true, null),
                             this
                         )
-                    ) {
+                    )
+                    {
                         _storedUncompressedData.Seek(0, SeekOrigin.Begin);
                         _storedUncompressedData.CopyTo(entryWriter);
                         _storedUncompressedData.Dispose();
@@ -1207,7 +1215,8 @@ namespace System.IO.Compression
             public DirectToArchiveWriterStream(
                 CheckSumAndSizeWriteStream crcSizeStream,
                 ZipArchiveEntry entry
-            ) {
+            )
+            {
                 _position = 0;
                 _crcSizeStream = crcSizeStream;
                 _everWritten = false;

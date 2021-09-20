@@ -110,11 +110,13 @@ namespace Microsoft.CodeAnalysis.Rebuild
 
         internal bool TryGetMetadataCompilationOptions(
             [NotNullWhen(true)] out MetadataCompilationOptions? options
-        ) {
+        )
+        {
             if (
                 _metadataCompilationOptions is null
                 && TryGetMetadataCompilationOptionsBlobReader(out var optionsBlob)
-            ) {
+            )
+            {
                 _metadataCompilationOptions = new MetadataCompilationOptions(
                     ParseCompilationOptions(optionsBlob)
                 );
@@ -148,7 +150,8 @@ namespace Microsoft.CodeAnalysis.Rebuild
                     CompilationOptionNames.Language,
                     out var language
                 )
-            ) {
+            )
+            {
                 throw new Exception("Invalid language name");
             }
 
@@ -184,7 +187,8 @@ namespace Microsoft.CodeAnalysis.Rebuild
             if (
                 _sourceLinkUTF8 is null
                 && TryGetCustomDebugInformationBlobReader(SourceLinkGuid, out var optionsBlob)
-            ) {
+            )
+            {
                 _sourceLinkUTF8 = optionsBlob.ReadBytes(optionsBlob.Length);
             }
             return _sourceLinkUTF8;
@@ -265,7 +269,8 @@ namespace Microsoft.CodeAnalysis.Rebuild
         private EmbeddedSourceTextInfo? ResolveEmbeddedSource(
             DocumentHandle document,
             SourceTextInfo sourceTextInfo
-        ) {
+        )
+        {
             byte[] bytes = (
                 from handle in PdbReader.GetCustomDebugInformation(document)
                 let cdi = PdbReader.GetCustomDebugInformation(handle)
@@ -348,7 +353,8 @@ namespace Microsoft.CodeAnalysis.Rebuild
                     corHeader.ResourcesDirectory,
                     out var resourcesOffset
                 )
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -383,7 +389,8 @@ namespace Microsoft.CodeAnalysis.Rebuild
         public (ImmutableArray<SyntaxTree> SyntaxTrees, ImmutableArray<MetadataReference> MetadataReferences) ResolveArtifacts(
             IRebuildArtifactResolver resolver,
             Func<string, SourceText, SyntaxTree> createSyntaxTreeFunc
-        ) {
+        )
+        {
             var syntaxTrees = ResolveSyntaxTrees();
             var metadataReferences = ResolveMetadataReferences();
             return (syntaxTrees, metadataReferences);
@@ -398,7 +405,8 @@ namespace Microsoft.CodeAnalysis.Rebuild
                     if (
                         ResolveEmbeddedSource(documentHandle, sourceTextInfo) is
                         { } embeddedSourceTextInfo
-                    ) {
+                    )
+                    {
                         sourceText = embeddedSourceTextInfo.SourceText;
                     }
                     else
@@ -431,7 +439,8 @@ namespace Microsoft.CodeAnalysis.Rebuild
                     if (
                         metadataReference.Properties.EmbedInteropTypes
                         != metadataReferenceInfo.EmbedInteropTypes
-                    ) {
+                    )
+                    {
                         throw new InvalidOperationException();
                     }
 
@@ -446,7 +455,8 @@ namespace Microsoft.CodeAnalysis.Rebuild
                                 == metadataReference.Properties.Aliases.SingleOrDefault()
                             )
                         )
-                    ) {
+                    )
+                    {
                         throw new InvalidOperationException();
                     }
 
@@ -464,7 +474,8 @@ namespace Microsoft.CodeAnalysis.Rebuild
                     MetadataReferenceInfoGuid,
                     out var blobReader
                 )
-            ) {
+            )
+            {
                 throw new InvalidOperationException();
             }
 
@@ -548,7 +559,8 @@ namespace Microsoft.CodeAnalysis.Rebuild
         private bool TryGetCustomDebugInformationBlobReader(
             Guid infoGuid,
             out BlobReader blobReader
-        ) {
+        )
+        {
             var blobs =
                 from cdiHandle in PdbReader.GetCustomDebugInformation(EntityHandle.ModuleDefinition)
                 let cdi = PdbReader.GetCustomDebugInformation(cdiHandle)
@@ -571,7 +583,8 @@ namespace Microsoft.CodeAnalysis.Rebuild
 
         private static ImmutableArray<(string, string)> ParseCompilationOptions(
             BlobReader blobReader
-        ) {
+        )
+        {
             // Compiler flag bytes are UTF-8 null-terminated key-value pairs
             string? key = null;
             List<(string, string)> options = new List<(string, string)>();

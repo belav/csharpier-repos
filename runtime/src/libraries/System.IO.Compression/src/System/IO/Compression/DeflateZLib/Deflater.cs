@@ -208,7 +208,8 @@ namespace System.IO.Compression
             byte[] outputBuffer,
             ZFlushCode flushCode,
             out int bytesRead
-        ) {
+        )
+        {
             Debug.Assert(outputBuffer?.Length > 0);
 
             lock (SyncLock)

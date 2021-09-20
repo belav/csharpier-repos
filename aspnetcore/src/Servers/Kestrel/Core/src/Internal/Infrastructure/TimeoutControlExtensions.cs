@@ -9,7 +9,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
             this ITimeoutControl timeoutControl,
             MinDataRate? minDataRate,
             long? maxResponseBufferSize
-        ) {
+        )
+        {
             // If maxResponseBufferSize has no value, there's no backpressure and we can't reasonably time out draining.
             if (minDataRate == null || maxResponseBufferSize == null)
             {

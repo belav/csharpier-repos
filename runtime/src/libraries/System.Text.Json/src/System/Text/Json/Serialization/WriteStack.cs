@@ -92,7 +92,8 @@ namespace System.Text.Json
             Type type,
             JsonSerializerOptions options,
             bool supportContinuation
-        ) {
+        )
+        {
             JsonTypeInfo jsonTypeInfo = options.GetOrAddClassForRootType(type);
 
             Current.JsonTypeInfo = jsonTypeInfo;
@@ -322,7 +323,8 @@ namespace System.Text.Json
                 IEnumerator? collectionEnumerator,
                 IAsyncDisposable? asyncDisposable,
                 Exception? exception
-            ) {
+            )
+            {
                 Debug.Assert(!(collectionEnumerator is not null && asyncDisposable is not null));
 
                 try

@@ -99,7 +99,8 @@ namespace System.Net
             string? spn,
             ContextFlagsPal requestedContextFlags,
             ChannelBinding? channelBinding
-        ) {
+        )
+        {
             Initialize(isServer, package, credential, spn, requestedContextFlags, channelBinding);
         }
 
@@ -111,7 +112,8 @@ namespace System.Net
             string? spn,
             ContextFlagsPal requestedContextFlags,
             ChannelBinding? channelBinding
-        ) {
+        )
+        {
             if (NetEventSource.Log.IsEnabled())
                 NetEventSource.Info(
                     this,
@@ -191,7 +193,8 @@ namespace System.Net
             int offset,
             int count,
             [AllowNull] ref byte[] output
-        ) {
+        )
+        {
             return NegotiateStreamPal.MakeSignature(
                 _securityContext!,
                 buffer,
@@ -247,7 +250,8 @@ namespace System.Net
             byte[]? incomingBlob,
             bool throwOnError,
             out SecurityStatusPal statusCode
-        ) {
+        )
+        {
             byte[]? result = new byte[_tokenSize];
 
             bool firstTime = _securityContext == null;
@@ -345,7 +349,8 @@ namespace System.Net
             if (
                 statusCode.ErrorCode == SecurityStatusPalErrorCode.OK
                 || (_isServer && statusCode.ErrorCode == SecurityStatusPalErrorCode.CompleteNeeded)
-            ) {
+            )
+            {
                 // Success.
                 _isCompleted = true;
             }

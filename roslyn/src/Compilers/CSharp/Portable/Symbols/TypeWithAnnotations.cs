@@ -51,7 +51,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             TypeSymbol defaultType,
             NullableAnnotation nullableAnnotation,
             Extensions extensions
-        ) {
+        )
+        {
             Debug.Assert(
                 defaultType?.IsNullableType() != true
                     || nullableAnnotation == NullableAnnotation.Annotated
@@ -84,7 +85,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             bool isNullableEnabled,
             TypeSymbol typeSymbol,
             bool isAnnotated = false
-        ) {
+        )
+        {
             if (typeSymbol is null)
             {
                 return default;
@@ -104,7 +106,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             TypeSymbol typeSymbol,
             NullableAnnotation nullableAnnotation = NullableAnnotation.Oblivious,
             ImmutableArray<CustomModifier> customModifiers = default
-        ) {
+        )
+        {
             if (typeSymbol is null && nullableAnnotation == 0)
             {
                 return default;
@@ -192,7 +195,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             TypeSymbol typeSymbol,
             NullableAnnotation nullableAnnotation,
             ImmutableArray<CustomModifier> customModifiers
-        ) {
+        )
+        {
             return new TypeWithAnnotations(
                 typeSymbol,
                 nullableAnnotation,
@@ -203,7 +207,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private static TypeWithAnnotations CreateLazyNullableType(
             CSharpCompilation compilation,
             TypeWithAnnotations underlying
-        ) {
+        )
+        {
             return new TypeWithAnnotations(
                 defaultType: underlying.DefaultType,
                 nullableAnnotation: NullableAnnotation.Annotated,
@@ -284,7 +289,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal TypeWithAnnotations MergeEquivalentTypes(
             TypeWithAnnotations other,
             VarianceKind variance
-        ) {
+        )
+        {
             TypeSymbol typeSymbol = other.Type;
             NullableAnnotation nullableAnnotation = this.NullableAnnotation.MergeNullableAnnotation(
                 other.NullableAnnotation,
@@ -337,7 +343,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         && format.MiscellaneousOptions.IncludesOption(
                             SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier
                         )
-                    ) {
+                    )
+                    {
                         return DefaultType.ToDisplayString(format) + "?";
                     }
 
@@ -354,7 +361,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier
                     )
                     && (!HasType || (!IsNullableType() && !Type.IsValueType))
-                ) {
+                )
+                {
                     return str + "?";
                 }
                 else if (
@@ -369,7 +377,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             && !Type.IsTypeParameterDisallowingAnnotationInCSharp8()
                         )
                     )
-                ) {
+                )
+                {
                     return str + "!";
                 }
             }
@@ -419,7 +428,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (
                 (comparison & TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds) == 0
                 && !this.CustomModifiers.SequenceEqual(other.CustomModifiers)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -434,7 +444,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         (comparison & TypeCompareKind.ObliviousNullableModifierMatchesAny) == 0
                         || (!thisAnnotation.IsOblivious() && !otherAnnotation.IsOblivious())
                     )
-                ) {
+                )
+                {
                     if (!HasType)
                     {
                         return false;
@@ -494,7 +505,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ref DiagnosticInfo result,
             Symbol owner,
             ref HashSet<TypeSymbol> checkedTypes
-        ) {
+        )
+        {
             return Type.GetUnificationUseSiteDiagnosticRecursive(
                     ref result,
                     owner,
@@ -511,7 +523,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public bool IsAtLeastAsVisibleAs(
             Symbol sym,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             // System.Nullable is public, so it is safe to delegate to the underlying.
             return NullableUnderlyingTypeOrSelf.IsAtLeastAsVisibleAs(sym, ref useSiteInfo);
         }
@@ -543,7 +556,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (
                     typeSymbol.Equals(newTypeWithModifiers.Type, TypeCompareKind.ConsiderEverything)
                     && newCustomModifiers == CustomModifiers
-                ) {
+                )
+                {
                     return this; // substitution had no effect on the type or modifiers
                 }
                 else if (
@@ -551,7 +565,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         NullableAnnotation.IsOblivious()
                         || (typeSymbol.IsNullableType() && NullableAnnotation.IsAnnotated())
                     ) && newCustomModifiers.IsEmpty
-                ) {
+                )
+                {
                     return newTypeWithModifiers;
                 }
 
@@ -561,13 +576,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (
                 newTypeWithModifiers.Is((TypeParameterSymbol)typeSymbol)
                 && newCustomModifiers == CustomModifiers
-            ) {
+            )
+            {
                 return this; // substitution had no effect on the type or modifiers
             }
             else if (
                 Is((TypeParameterSymbol)typeSymbol)
                 && newTypeWithModifiers.NullableAnnotation != NullableAnnotation.Ignored
-            ) {
+            )
+            {
                 return newTypeWithModifiers;
             }
 
@@ -585,7 +602,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (
                 NullableAnnotation.IsAnnotated()
                 || newTypeWithModifiers.NullableAnnotation.IsAnnotated()
-            ) {
+            )
+            {
                 newAnnotation = NullableAnnotation.Annotated;
             }
             else if (newTypeWithModifiers.NullableAnnotation == NullableAnnotation.Ignored)
@@ -636,7 +654,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Binder binder,
             SyntaxNode syntax,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             binder.ReportDiagnosticsIfObsolete(diagnostics, Type, syntax, hasBaseReceiver: false);
         }
 
@@ -683,7 +702,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public static bool NeedsNullableAttribute(
             TypeWithAnnotations typeWithAnnotationsOpt,
             TypeSymbol typeOpt
-        ) {
+        )
+        {
             var type = TypeSymbolExtensions.VisitType(
                 typeWithAnnotationsOpt,
                 typeOpt,
@@ -723,7 +743,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private static void AddNullableTransforms(
             TypeWithAnnotations typeWithAnnotations,
             ArrayBuilder<byte> transforms
-        ) {
+        )
+        {
             while (true)
             {
                 var type = typeWithAnnotations.Type;
@@ -763,7 +784,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ImmutableArray<byte> transforms,
             ref int position,
             out TypeWithAnnotations result
-        ) {
+        )
+        {
             result = this;
 
             TypeSymbol oldTypeSymbol = Type;
@@ -796,7 +818,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     ref position,
                     out newTypeSymbol
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -846,7 +869,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (
                 NullableAnnotation.IsNotAnnotated()
                 || (typeSymbol.IsValueType && !typeSymbol.IsNullableType())
-            ) {
+            )
+            {
                 return this;
             }
 
@@ -994,7 +1018,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             internal static Extensions CreateLazy(
                 CSharpCompilation compilation,
                 TypeWithAnnotations underlying
-            ) {
+            )
+            {
                 return new LazyNullableTypeParameter(compilation, underlying);
             }
 
@@ -1080,7 +1105,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             internal override TypeWithAnnotations WithModifiers(
                 TypeWithAnnotations type,
                 ImmutableArray<CustomModifier> customModifiers
-            ) {
+            )
+            {
                 return CreateNonLazyType(
                     type.DefaultType,
                     type.NullableAnnotation,
@@ -1094,7 +1120,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 TypeWithAnnotations type,
                 TypeSymbol typeSymbol,
                 ImmutableArray<CustomModifier> customModifiers
-            ) {
+            )
+            {
                 return CreateNonLazyType(typeSymbol, type.NullableAnnotation, customModifiers);
             }
 
@@ -1109,7 +1136,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             internal override TypeWithAnnotations AsNotNullableReferenceType(
                 TypeWithAnnotations type
-            ) {
+            )
+            {
                 var defaultType = type.DefaultType;
                 return CreateNonLazyType(
                     defaultType,
@@ -1124,14 +1152,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 TypeWithAnnotations type,
                 TypeWithAnnotations other,
                 TypeCompareKind comparison
-            ) {
+            )
+            {
                 return type.TypeSymbolEqualsCore(other, comparison);
             }
 
             internal override TypeWithAnnotations SubstituteType(
                 TypeWithAnnotations type,
                 AbstractTypeMap typeMap
-            ) {
+            )
+            {
                 return type.SubstituteTypeCore(typeMap);
             }
 
@@ -1140,7 +1170,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 Binder binder,
                 SyntaxNode syntax,
                 BindingDiagnosticBag diagnostics
-            ) {
+            )
+            {
                 type.ReportDiagnosticsIfObsoleteCore(binder, syntax, diagnostics);
             }
 
@@ -1160,7 +1191,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             public LazyNullableTypeParameter(
                 CSharpCompilation compilation,
                 TypeWithAnnotations underlying
-            ) {
+            )
+            {
                 Debug.Assert(!underlying.NullableAnnotation.IsAnnotated());
                 Debug.Assert(underlying.TypeKind == TypeKind.TypeParameter);
                 Debug.Assert(underlying.CustomModifiers.IsEmpty);
@@ -1212,7 +1244,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             internal override TypeWithAnnotations WithModifiers(
                 TypeWithAnnotations type,
                 ImmutableArray<CustomModifier> customModifiers
-            ) {
+            )
+            {
                 if (customModifiers.IsEmpty)
                 {
                     return type;
@@ -1235,7 +1268,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 TypeWithAnnotations type,
                 TypeSymbol typeSymbol,
                 ImmutableArray<CustomModifier> customModifiers
-            ) {
+            )
+            {
                 if (typeSymbol.IsNullableType())
                 {
                     return TypeWithAnnotations.Create(
@@ -1255,7 +1289,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             internal override TypeWithAnnotations AsNotNullableReferenceType(
                 TypeWithAnnotations type
-            ) {
+            )
+            {
                 if (!_underlying.Type.IsValueType)
                 {
                     return _underlying;
@@ -1266,7 +1301,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             internal override TypeWithAnnotations SubstituteType(
                 TypeWithAnnotations type,
                 AbstractTypeMap typeMap
-            ) {
+            )
+            {
                 if ((object)_resolved != null)
                 {
                     return type.SubstituteTypeCore(typeMap);
@@ -1280,7 +1316,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             this._underlying.Type,
                             TypeCompareKind.ConsiderEverything
                         ) && newUnderlying.CustomModifiers.IsEmpty
-                    ) {
+                    )
+                    {
                         return CreateLazyNullableType(_compilation, newUnderlying);
                     }
 
@@ -1297,7 +1334,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 Binder binder,
                 SyntaxNode syntax,
                 BindingDiagnosticBag diagnostics
-            ) {
+            )
+            {
                 if ((object)_resolved != null)
                 {
                     type.ReportDiagnosticsIfObsoleteCore(binder, syntax, diagnostics);
@@ -1319,7 +1357,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 TypeWithAnnotations type,
                 TypeWithAnnotations other,
                 TypeCompareKind comparison
-            ) {
+            )
+            {
                 var otherLazy = other._extensions as LazyNullableTypeParameter;
 
                 if ((object)otherLazy != null)

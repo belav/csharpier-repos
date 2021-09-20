@@ -14,10 +14,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
     {
         private readonly ILogger<LoggingHttpMessageHandler> _logger;
 
-        public LoggingHttpMessageHandler(
-            HttpMessageHandler inner,
-            ILoggerFactory loggerFactory
-        ) : base(inner)
+        public LoggingHttpMessageHandler(HttpMessageHandler inner, ILoggerFactory loggerFactory)
+            : base(inner)
         {
             if (loggerFactory == null)
             {
@@ -30,7 +28,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
         protected override async Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Log.SendingHttpRequest(_logger, request.Method, request.RequestUri!);
 
             var response = await base.SendAsync(request, cancellationToken);
@@ -77,7 +76,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
                 ILogger logger,
                 HttpMethod requestMethod,
                 Uri requestUrl
-            ) {
+            )
+            {
                 _sendingHttpRequest(logger, requestMethod, requestUrl, null);
             }
             public static void UnsuccessfulHttpResponse(
@@ -85,7 +85,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
                 HttpStatusCode statusCode,
                 HttpMethod requestMethod,
                 Uri requestUrl
-            ) {
+            )
+            {
                 _unsuccessfulHttpResponse(logger, (int)statusCode, requestMethod, requestUrl, null);
             }
         }

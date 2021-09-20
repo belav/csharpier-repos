@@ -30,19 +30,21 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             bool isIntrinsic = false,
             bool shouldFormatOnCommit = false,
             int? matchPriority = null
-        ) : this(
-            keyword,
-            glyph,
-            _ => CreateDisplayParts(keyword, toolTip),
-            isIntrinsic,
-            shouldFormatOnCommit,
-            matchPriority
-        ) { }
+        )
+            : this(
+                keyword,
+                glyph,
+                _ => CreateDisplayParts(keyword, toolTip),
+                isIntrinsic,
+                shouldFormatOnCommit,
+                matchPriority
+            ) { }
 
         internal static ImmutableArray<SymbolDisplayPart> CreateDisplayParts(
             string keyword,
             string toolTip
-        ) {
+        )
+        {
             var textContentBuilder = new System.Collections.Generic.List<SymbolDisplayPart>();
             textContentBuilder.AddText(string.Format(FeaturesResources._0_Keyword, keyword));
 
@@ -62,7 +64,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             bool isIntrinsic = false,
             bool shouldFormatOnCommit = false,
             int? matchPriority = null
-        ) {
+        )
+        {
             Keyword = keyword;
             Glyph = glyph;
             DescriptionFactory = descriptionFactory;

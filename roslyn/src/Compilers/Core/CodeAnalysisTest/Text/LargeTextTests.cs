@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                         bufferSize: 1024,
                         leaveOpen: true
                     )
-                ) {
+                )
+                {
                     sw.Write(s);
                 }
 
@@ -49,7 +50,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             TextReader reader,
             int length,
             Encoding encoding = null
-        ) {
+        )
+        {
             return LargeText.Decode(
                 reader,
                 length,
@@ -139,7 +141,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                         bufferSize: 1024,
                         leaveOpen: true
                     )
-                ) {
+                )
+                {
                     while (stream.Length < targetLength)
                     {
                         sw.Write(HelloWorld);
@@ -185,7 +188,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             int length,
             int newlineLength,
             string lineText
-        ) {
+        )
+        {
             var textLine = text.Lines[lineNumber];
 
             Assert.Equal(start, textLine.Start);

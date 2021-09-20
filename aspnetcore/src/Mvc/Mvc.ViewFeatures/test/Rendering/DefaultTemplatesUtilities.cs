@@ -104,7 +104,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public static HtmlHelper<TModel> GetHtmlHelper<TModel>(
             ViewDataDictionary<TModel> viewData,
             string idAttributeDotReplacement
-        ) {
+        )
+        {
             return GetHtmlHelper(
                 viewData,
                 CreateUrlHelper(),
@@ -125,7 +126,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public static HtmlHelper<TModel> GetHtmlHelper<TModel>(
             TModel model,
             string idAttributeDotReplacement
-        ) {
+        )
+        {
             var provider = TestModelMetadataProvider.CreateDefaultProvider();
             var viewData = new ViewDataDictionary<TModel>(provider);
             viewData.Model = model;
@@ -144,7 +146,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
 
         public static HtmlHelper<IEnumerable<TModel>> GetHtmlHelperForEnumerable<TModel>(
             TModel model
-        ) {
+        )
+        {
             return GetHtmlHelper<IEnumerable<TModel>>(new TModel[] { model });
         }
 
@@ -160,14 +163,16 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
 
         public static HtmlHelper<IEnumerable<ObjectTemplateModel>> GetHtmlHelperForEnumerable(
             IModelMetadataProvider provider
-        ) {
+        )
+        {
             return GetHtmlHelper<IEnumerable<ObjectTemplateModel>>(model: null, provider: provider);
         }
 
         public static HtmlHelper<TModel> GetHtmlHelper<TModel>(
             TModel model,
             IModelMetadataProvider provider
-        ) {
+        )
+        {
             return GetHtmlHelper(model, CreateUrlHelper(), CreateViewEngine(), provider);
         }
 
@@ -175,7 +180,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             TModel model,
             ICompositeViewEngine viewEngine,
             IStringLocalizerFactory stringLocalizerFactory = null
-        ) {
+        )
+        {
             return GetHtmlHelper(
                 model,
                 CreateUrlHelper(),
@@ -189,7 +195,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             TModel model,
             ICompositeViewEngine viewEngine,
             Func<IHtmlHelper, IHtmlHelper> innerHelperWrapper
-        ) {
+        )
+        {
             return GetHtmlHelper(
                 model,
                 CreateUrlHelper(),
@@ -206,7 +213,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             ICompositeViewEngine viewEngine,
             IModelMetadataProvider provider,
             IStringLocalizerFactory localizerFactory = null
-        ) {
+        )
+        {
             return GetHtmlHelper(
                 model,
                 urlHelper,
@@ -224,7 +232,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             IModelMetadataProvider provider,
             IStringLocalizerFactory localizerFactory,
             Func<IHtmlHelper, IHtmlHelper> innerHelperWrapper
-        ) {
+        )
+        {
             var viewData = new ViewDataDictionary<TModel>(provider);
             viewData.Model = model;
 
@@ -249,7 +258,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             Func<IHtmlHelper, IHtmlHelper> innerHelperWrapper,
             IHtmlGenerator htmlGenerator,
             string idAttributeDotReplacement
-        ) {
+        )
+        {
             var httpContext = new DefaultHttpContext();
             var actionContext = new ActionContext(
                 httpContext,

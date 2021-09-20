@@ -58,7 +58,8 @@ namespace System.Xml.Schema
 
         private static XmlSchemaComplexType CreateAnyType(
             XmlSchemaContentProcessing processContents
-        ) {
+        )
+        {
             XmlSchemaComplexType localAnyType = new XmlSchemaComplexType();
             localAnyType.SetQualifiedName(DatatypeImplementation.QnAnyType);
 
@@ -453,7 +454,8 @@ namespace System.Xml.Schema
 
         internal static XmlSchemaObjectCollection CloneAttributes(
             XmlSchemaObjectCollection attributes
-        ) {
+        )
+        {
             if (HasAttributeQNameRef(attributes))
             {
                 XmlSchemaObjectCollection newAttributes = attributes.Clone();
@@ -489,7 +491,8 @@ namespace System.Xml.Schema
         private static XmlSchemaObjectCollection CloneGroupBaseParticles(
             XmlSchemaObjectCollection groupBaseParticles,
             XmlSchema? parentSchema
-        ) {
+        )
+        {
             XmlSchemaObjectCollection newParticles = groupBaseParticles.Clone();
 
             for (int i = 0; i < groupBaseParticles.Count; i++)
@@ -504,7 +507,8 @@ namespace System.Xml.Schema
         internal static XmlSchemaParticle? CloneParticle(
             XmlSchemaParticle? particle,
             XmlSchema? parentSchema
-        ) {
+        )
+        {
             XmlSchemaGroupBase? groupBase = particle as XmlSchemaGroupBase;
             if (groupBase != null)
             { //Choice or sequence
@@ -539,7 +543,8 @@ namespace System.Xml.Schema
                         || !oldElem.SchemaTypeName.IsEmpty
                         || GetResolvedElementForm(parentSchema, oldElem) == XmlSchemaForm.Qualified
                     )
-                ) {
+                )
+                {
                     XmlSchemaElement newElem = (XmlSchemaElement)oldElem.Clone(parentSchema);
                     return newElem;
                 }
@@ -556,7 +561,8 @@ namespace System.Xml.Schema
         private static XmlSchemaForm GetResolvedElementForm(
             XmlSchema? parentSchema,
             XmlSchemaElement element
-        ) {
+        )
+        {
             if (element.Form == XmlSchemaForm.None && parentSchema != null)
             {
                 return parentSchema.ElementFormDefault;
@@ -596,7 +602,8 @@ namespace System.Xml.Schema
                                 || GetResolvedElementForm(parentSchema, elem)
                                     == XmlSchemaForm.Qualified
                             )
-                        ) {
+                        )
+                        {
                             foundRef = true;
                         }
                         else

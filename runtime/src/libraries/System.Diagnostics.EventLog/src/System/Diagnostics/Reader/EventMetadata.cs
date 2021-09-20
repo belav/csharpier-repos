@@ -29,7 +29,8 @@ namespace System.Diagnostics.Eventing.Reader
             string template,
             string description,
             ProviderMetadata pmReference
-        ) {
+        )
+        {
             Id = id;
             Version = version;
             _channelId = channelId;

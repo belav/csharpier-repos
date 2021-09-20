@@ -54,7 +54,8 @@ namespace System.Net.Mail
                         SizeOfAuthExtension,
                         StringComparison.OrdinalIgnoreCase
                     ) == 0
-                ) {
+                )
+                {
                     // remove the AUTH text including the following character
                     // to ensure that split only gets the modules supported
                     string[] authTypes = extension.Remove(0, SizeOfAuthExtension)
@@ -67,12 +68,14 @@ namespace System.Net.Mail
                         }
                         else if (
                             string.Equals(authType, AuthNtlm, StringComparison.OrdinalIgnoreCase)
-                        ) {
+                        )
+                        {
                             _supportedAuth |= SupportedAuth.NTLM;
                         }
                         else if (
                             string.Equals(authType, AuthGssapi, StringComparison.OrdinalIgnoreCase)
-                        ) {
+                        )
+                        {
                             _supportedAuth |= SupportedAuth.GSSAPI;
                         }
                     }
@@ -80,7 +83,8 @@ namespace System.Net.Mail
                 else if (
                     string.Compare(extension, 0, "dsn ", 0, 3, StringComparison.OrdinalIgnoreCase)
                     == 0
-                ) {
+                )
+                {
                     _dsnEnabled = true;
                 }
                 else if (
@@ -92,7 +96,8 @@ namespace System.Net.Mail
                         8,
                         StringComparison.OrdinalIgnoreCase
                     ) == 0
-                ) {
+                )
+                {
                     _serverSupportsStartTls = true;
                 }
                 else if (
@@ -104,7 +109,8 @@ namespace System.Net.Mail
                         8,
                         StringComparison.OrdinalIgnoreCase
                     ) == 0
-                ) {
+                )
+                {
                     _serverSupportsEai = true;
                 }
             }

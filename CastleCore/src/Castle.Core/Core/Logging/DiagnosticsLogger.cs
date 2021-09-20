@@ -101,7 +101,8 @@ namespace Castle.Core.Logging
             string loggerName,
             string message,
             Exception exception
-        ) {
+        )
+        {
             if (eventLog == null)
             {
                 return; // just in case it was disposed

@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption
             ArraySegment<byte> additionalAuthenticatedData,
             uint preBufferSize,
             uint postBufferSize
-        ) {
+        )
+        {
             // Can we call the optimized version?
             var optimizedEncryptor = encryptor as IOptimizedAuthenticatedEncryptor;
             if (optimizedEncryptor != null)

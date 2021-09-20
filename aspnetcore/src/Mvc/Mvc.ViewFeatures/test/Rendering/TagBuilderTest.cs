@@ -31,7 +31,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Rendering
             bool replaceExisting,
             string expectedKey,
             string expectedValue
-        ) {
+        )
+        {
             // Arrange
             var tagBuilder = new TagBuilder("p");
             tagBuilder.Attributes.Add("Hello", "World");
@@ -79,7 +80,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Rendering
         public void WriteTo_IgnoresIdAttributeCase(
             TagRenderMode renderingMode,
             string expectedOutput
-        ) {
+        )
+        {
             // Arrange
             var tagBuilder = new TagBuilder("p");
             // An empty value id attribute should not be rendered via ToString.
@@ -126,7 +128,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Rendering
             string attributeKey,
             string attributeValue,
             string expectedOutput
-        ) {
+        )
+        {
             // Arrange
             var tagBuilder = new TagBuilder("p");
 

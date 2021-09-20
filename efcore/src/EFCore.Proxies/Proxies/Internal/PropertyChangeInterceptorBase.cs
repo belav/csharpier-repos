@@ -63,7 +63,8 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
                 if (
                     indexerPropertyInfo != null
                     && indexerPropertyInfo.GetSetMethod(nonPublic: true) == invocation.Method
-                ) {
+                )
+                {
                     return (string)invocation.Arguments[0];
                 }
             }

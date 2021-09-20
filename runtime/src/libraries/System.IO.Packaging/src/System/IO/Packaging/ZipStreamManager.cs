@@ -20,7 +20,8 @@ namespace System.IO.Packaging
             ZipArchive zipArchive,
             FileMode packageFileMode,
             FileAccess packageFileAccess
-        ) {
+        )
+        {
             _zipArchive = zipArchive;
             _packageFileMode = packageFileMode;
             _packageFileAccess = packageFileAccess;
@@ -30,7 +31,8 @@ namespace System.IO.Packaging
             ZipArchiveEntry zipArchiveEntry,
             FileMode streamFileMode,
             FileAccess streamFileAccess
-        ) {
+        )
+        {
             bool canRead = true;
             bool canWrite = true;
             switch (_packageFileAccess)

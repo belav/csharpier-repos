@@ -189,7 +189,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
             Func<T1, TR> method,
             T1 arg,
             TR expected
-        ) {
+        )
+        {
             const int iterationCount = 2000;
             var ce = new CountdownEvent(s_dop); // used to block tasks until all are ready for execution
             return Task.WhenAll(
@@ -231,7 +232,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
 
         private static TransformBlock<int, string> ConstructTransformWithNMessages(
             int messagesCount
-        ) {
+        )
+        {
             var block = new TransformBlock<int, string>(i => i.ToString());
             block.PostRange(0, messagesCount);
             SpinWait.SpinUntil(() => block.OutputCount == messagesCount);
@@ -240,7 +242,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
 
         private static TransformManyBlock<int, int> ConstructTransformManyWithNMessages(
             int messagesCount
-        ) {
+        )
+        {
             var block = new TransformManyBlock<int, int>(i => new int[] { i });
             block.PostRange(0, messagesCount);
             SpinWait.SpinUntil(() => block.OutputCount == messagesCount); // spin until messages available
@@ -257,7 +260,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
 
         private static BatchedJoinBlock<int, int> ConstructBatchedJoin2NewWithNMessages(
             int messagesCount
-        ) {
+        )
+        {
             var block = new BatchedJoinBlock<int, int>(2);
             for (int i = 0; i < messagesCount; i++)
             {

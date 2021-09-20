@@ -25,7 +25,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             IProperty property,
             ColumnBase column,
             TableMappingBase tableMapping
-        ) {
+        )
+        {
             Property = property;
             Column = column;
             TableMapping = tableMapping;

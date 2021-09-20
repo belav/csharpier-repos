@@ -20,7 +20,8 @@ namespace Microsoft.Extensions.CommandLineUtils
                     new[] { ' ', '|' },
                     StringSplitOptions.RemoveEmptyEntries
                 )
-            ) {
+            )
+            {
                 if (part.StartsWith("--", StringComparison.Ordinal))
                 {
                     LongName = part.Substring(2);
@@ -42,7 +43,8 @@ namespace Microsoft.Extensions.CommandLineUtils
                 else if (
                     part.StartsWith("<", StringComparison.Ordinal)
                     && part.EndsWith(">", StringComparison.Ordinal)
-                ) {
+                )
+                {
                     ValueName = part.Substring(1, part.Length - 2);
                 }
                 else
@@ -58,7 +60,8 @@ namespace Microsoft.Extensions.CommandLineUtils
                 string.IsNullOrEmpty(LongName)
                 && string.IsNullOrEmpty(ShortName)
                 && string.IsNullOrEmpty(SymbolName)
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     $"Invalid template pattern '{template}'",
                     nameof(template)

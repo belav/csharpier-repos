@@ -25,7 +25,8 @@ namespace System.Web.Mvc.Ajax
             string linkText,
             string actionName,
             AjaxOptions ajaxOptions
-        ) {
+        )
+        {
             return ActionLink(
                 ajaxHelper,
                 linkText,
@@ -42,7 +43,8 @@ namespace System.Web.Mvc.Ajax
             string actionName,
             object routeValues,
             AjaxOptions ajaxOptions
-        ) {
+        )
+        {
             return ActionLink(
                 ajaxHelper,
                 linkText,
@@ -61,7 +63,8 @@ namespace System.Web.Mvc.Ajax
             object routeValues,
             AjaxOptions ajaxOptions,
             object htmlAttributes
-        ) {
+        )
+        {
             return ActionLink(
                 ajaxHelper,
                 linkText,
@@ -80,7 +83,8 @@ namespace System.Web.Mvc.Ajax
             string actionName,
             RouteValueDictionary routeValues,
             AjaxOptions ajaxOptions
-        ) {
+        )
+        {
             return ActionLink(
                 ajaxHelper,
                 linkText,
@@ -99,7 +103,8 @@ namespace System.Web.Mvc.Ajax
             RouteValueDictionary routeValues,
             AjaxOptions ajaxOptions,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             return ActionLink(
                 ajaxHelper,
                 linkText,
@@ -118,7 +123,8 @@ namespace System.Web.Mvc.Ajax
             string actionName,
             string controllerName,
             AjaxOptions ajaxOptions
-        ) {
+        )
+        {
             return ActionLink(
                 ajaxHelper,
                 linkText,
@@ -138,7 +144,8 @@ namespace System.Web.Mvc.Ajax
             string controllerName,
             object routeValues,
             AjaxOptions ajaxOptions
-        ) {
+        )
+        {
             return ActionLink(
                 ajaxHelper,
                 linkText,
@@ -158,7 +165,8 @@ namespace System.Web.Mvc.Ajax
             object routeValues,
             AjaxOptions ajaxOptions,
             object htmlAttributes
-        ) {
+        )
+        {
             RouteValueDictionary newValues = TypeHelper.ObjectToDictionary(routeValues);
             RouteValueDictionary newAttributes = HtmlHelper.AnonymousObjectToHtmlAttributes(
                 htmlAttributes
@@ -181,7 +189,8 @@ namespace System.Web.Mvc.Ajax
             string controllerName,
             RouteValueDictionary routeValues,
             AjaxOptions ajaxOptions
-        ) {
+        )
+        {
             return ActionLink(
                 ajaxHelper,
                 linkText,
@@ -201,7 +210,8 @@ namespace System.Web.Mvc.Ajax
             RouteValueDictionary routeValues,
             AjaxOptions ajaxOptions,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             if (String.IsNullOrEmpty(linkText))
             {
                 throw new ArgumentException(MvcResources.Common_NullOrEmpty, "linkText");
@@ -239,7 +249,8 @@ namespace System.Web.Mvc.Ajax
             object routeValues,
             AjaxOptions ajaxOptions,
             object htmlAttributes
-        ) {
+        )
+        {
             RouteValueDictionary newValues = TypeHelper.ObjectToDictionary(routeValues);
             RouteValueDictionary newAttributes = HtmlHelper.AnonymousObjectToHtmlAttributes(
                 htmlAttributes
@@ -269,7 +280,8 @@ namespace System.Web.Mvc.Ajax
             RouteValueDictionary routeValues,
             AjaxOptions ajaxOptions,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             if (String.IsNullOrEmpty(linkText))
             {
                 throw new ArgumentException(MvcResources.Common_NullOrEmpty, "linkText");
@@ -304,7 +316,8 @@ namespace System.Web.Mvc.Ajax
             this AjaxHelper ajaxHelper,
             string actionName,
             AjaxOptions ajaxOptions
-        ) {
+        )
+        {
             return BeginForm(
                 ajaxHelper,
                 actionName,
@@ -319,7 +332,8 @@ namespace System.Web.Mvc.Ajax
             string actionName,
             object routeValues,
             AjaxOptions ajaxOptions
-        ) {
+        )
+        {
             return BeginForm(
                 ajaxHelper,
                 actionName,
@@ -336,7 +350,8 @@ namespace System.Web.Mvc.Ajax
             object routeValues,
             AjaxOptions ajaxOptions,
             object htmlAttributes
-        ) {
+        )
+        {
             return BeginForm(
                 ajaxHelper,
                 actionName,
@@ -353,7 +368,8 @@ namespace System.Web.Mvc.Ajax
             string actionName,
             RouteValueDictionary routeValues,
             AjaxOptions ajaxOptions
-        ) {
+        )
+        {
             return BeginForm(
                 ajaxHelper,
                 actionName,
@@ -370,7 +386,8 @@ namespace System.Web.Mvc.Ajax
             RouteValueDictionary routeValues,
             AjaxOptions ajaxOptions,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             return BeginForm(
                 ajaxHelper,
                 actionName,
@@ -387,7 +404,8 @@ namespace System.Web.Mvc.Ajax
             string actionName,
             string controllerName,
             AjaxOptions ajaxOptions
-        ) {
+        )
+        {
             return BeginForm(
                 ajaxHelper,
                 actionName,
@@ -405,7 +423,8 @@ namespace System.Web.Mvc.Ajax
             string controllerName,
             object routeValues,
             AjaxOptions ajaxOptions
-        ) {
+        )
+        {
             return BeginForm(
                 ajaxHelper,
                 actionName,
@@ -423,7 +442,8 @@ namespace System.Web.Mvc.Ajax
             object routeValues,
             AjaxOptions ajaxOptions,
             object htmlAttributes
-        ) {
+        )
+        {
             RouteValueDictionary newValues = new RouteValueDictionary(routeValues);
             RouteValueDictionary newAttributes = HtmlHelper.AnonymousObjectToHtmlAttributes(
                 htmlAttributes
@@ -444,7 +464,8 @@ namespace System.Web.Mvc.Ajax
             string controllerName,
             RouteValueDictionary routeValues,
             AjaxOptions ajaxOptions
-        ) {
+        )
+        {
             return BeginForm(
                 ajaxHelper,
                 actionName,
@@ -462,7 +483,8 @@ namespace System.Web.Mvc.Ajax
             RouteValueDictionary routeValues,
             AjaxOptions ajaxOptions,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             // get target URL
             string formAction = UrlHelper.GenerateUrl(
                 null,
@@ -480,7 +502,8 @@ namespace System.Web.Mvc.Ajax
             this AjaxHelper ajaxHelper,
             string routeName,
             AjaxOptions ajaxOptions
-        ) {
+        )
+        {
             return BeginRouteForm(
                 ajaxHelper,
                 routeName,
@@ -496,7 +519,8 @@ namespace System.Web.Mvc.Ajax
             string routeName,
             object routeValues,
             AjaxOptions ajaxOptions
-        ) {
+        )
+        {
             return BeginRouteForm(
                 ajaxHelper,
                 routeName,
@@ -512,7 +536,8 @@ namespace System.Web.Mvc.Ajax
             object routeValues,
             AjaxOptions ajaxOptions,
             object htmlAttributes
-        ) {
+        )
+        {
             RouteValueDictionary newAttributes = HtmlHelper.AnonymousObjectToHtmlAttributes(
                 htmlAttributes
             );
@@ -530,7 +555,8 @@ namespace System.Web.Mvc.Ajax
             string routeName,
             RouteValueDictionary routeValues,
             AjaxOptions ajaxOptions
-        ) {
+        )
+        {
             return BeginRouteForm(
                 ajaxHelper,
                 routeName,
@@ -546,7 +572,8 @@ namespace System.Web.Mvc.Ajax
             RouteValueDictionary routeValues,
             AjaxOptions ajaxOptions,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             string formAction = UrlHelper.GenerateUrl(
                 routeName,
                 null /* actionName */
@@ -571,7 +598,8 @@ namespace System.Web.Mvc.Ajax
             string formAction,
             AjaxOptions ajaxOptions,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             TagBuilder builder = new TagBuilder("form");
             builder.MergeAttributes(htmlAttributes);
             builder.MergeAttribute("action", formAction);
@@ -623,14 +651,16 @@ namespace System.Web.Mvc.Ajax
         public static MvcHtmlString GlobalizationScript(
             this AjaxHelper ajaxHelper,
             CultureInfo cultureInfo
-        ) {
+        )
+        {
             return GlobalizationScriptHelper(AjaxHelper.GlobalizationScriptPath, cultureInfo);
         }
 
         internal static MvcHtmlString GlobalizationScriptHelper(
             string scriptPath,
             CultureInfo cultureInfo
-        ) {
+        )
+        {
             if (cultureInfo == null)
             {
                 throw new ArgumentNullException("cultureInfo");
@@ -653,7 +683,8 @@ namespace System.Web.Mvc.Ajax
             string linkText,
             object routeValues,
             AjaxOptions ajaxOptions
-        ) {
+        )
+        {
             return RouteLink(
                 ajaxHelper,
                 linkText,
@@ -671,7 +702,8 @@ namespace System.Web.Mvc.Ajax
             object routeValues,
             AjaxOptions ajaxOptions,
             object htmlAttributes
-        ) {
+        )
+        {
             return RouteLink(
                 ajaxHelper,
                 linkText,
@@ -688,7 +720,8 @@ namespace System.Web.Mvc.Ajax
             string linkText,
             RouteValueDictionary routeValues,
             AjaxOptions ajaxOptions
-        ) {
+        )
+        {
             return RouteLink(
                 ajaxHelper,
                 linkText,
@@ -706,7 +739,8 @@ namespace System.Web.Mvc.Ajax
             RouteValueDictionary routeValues,
             AjaxOptions ajaxOptions,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             return RouteLink(
                 ajaxHelper,
                 linkText,
@@ -723,7 +757,8 @@ namespace System.Web.Mvc.Ajax
             string linkText,
             string routeName,
             AjaxOptions ajaxOptions
-        ) {
+        )
+        {
             return RouteLink(
                 ajaxHelper,
                 linkText,
@@ -740,7 +775,8 @@ namespace System.Web.Mvc.Ajax
             string routeName,
             AjaxOptions ajaxOptions,
             object htmlAttributes
-        ) {
+        )
+        {
             return RouteLink(
                 ajaxHelper,
                 linkText,
@@ -757,7 +793,8 @@ namespace System.Web.Mvc.Ajax
             string routeName,
             AjaxOptions ajaxOptions,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             return RouteLink(
                 ajaxHelper,
                 linkText,
@@ -774,7 +811,8 @@ namespace System.Web.Mvc.Ajax
             string routeName,
             object routeValues,
             AjaxOptions ajaxOptions
-        ) {
+        )
+        {
             return RouteLink(
                 ajaxHelper,
                 linkText,
@@ -792,7 +830,8 @@ namespace System.Web.Mvc.Ajax
             object routeValues,
             AjaxOptions ajaxOptions,
             object htmlAttributes
-        ) {
+        )
+        {
             return RouteLink(
                 ajaxHelper,
                 linkText,
@@ -809,7 +848,8 @@ namespace System.Web.Mvc.Ajax
             string routeName,
             RouteValueDictionary routeValues,
             AjaxOptions ajaxOptions
-        ) {
+        )
+        {
             return RouteLink(
                 ajaxHelper,
                 linkText,
@@ -827,7 +867,8 @@ namespace System.Web.Mvc.Ajax
             RouteValueDictionary routeValues,
             AjaxOptions ajaxOptions,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             if (String.IsNullOrEmpty(linkText))
             {
                 throw new ArgumentException(MvcResources.Common_NullOrEmpty, "linkText");
@@ -866,7 +907,8 @@ namespace System.Web.Mvc.Ajax
             RouteValueDictionary routeValues,
             AjaxOptions ajaxOptions,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             if (String.IsNullOrEmpty(linkText))
             {
                 throw new ArgumentException(MvcResources.Common_NullOrEmpty, "linkText");
@@ -904,7 +946,8 @@ namespace System.Web.Mvc.Ajax
             string targetUrl,
             AjaxOptions ajaxOptions,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             TagBuilder tag = new TagBuilder("a") { InnerHtml = HttpUtility.HtmlEncode(linkText) };
 
             tag.MergeAttributes(htmlAttributes);

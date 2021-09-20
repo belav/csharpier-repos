@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             SignatureHelpTriggerReason triggerReason,
             CancellationToken cancellationToken,
             out AttributeSyntax attribute
-        ) {
+        )
+        {
             if (
                 !CommonSignatureHelpUtilities.TryGetSyntax(
                     root,
@@ -51,7 +52,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                     cancellationToken,
                     out attribute
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -79,7 +81,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             int position,
             SignatureHelpTriggerInfo triggerInfo,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
             if (
@@ -91,7 +94,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                     cancellationToken,
                     out var attribute
                 )
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -103,7 +107,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             if (
                 semanticModel.GetTypeInfo(attribute, cancellationToken).Type
                 is not INamedTypeSymbol attributeType
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -163,7 +168,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             ISyntaxFactsService syntaxFacts,
             TextSpan currentSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 TryGetAttributeExpression(
                     root,
@@ -175,7 +181,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                 )
                 && currentSpan.Start
                     == SignatureHelpUtilities.GetSignatureHelpSpan(expression.ArgumentList!).Start
-            ) {
+            )
+            {
                 return SignatureHelpUtilities.GetSignatureHelpState(
                     expression.ArgumentList!,
                     position
@@ -193,7 +200,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             IAnonymousTypeDisplayService anonymousTypeDisplayService,
             IDocumentationCommentFormattingService documentationCommentFormatter,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var position = attribute.SpanStart;
             var namedParameters = constructor.ContainingType.GetAttributeNamedParameters(
                     semanticModel.Compilation,
@@ -240,7 +248,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             IList<ISymbol> namedParameters,
             IDocumentationCommentFormattingService documentationCommentFormatter,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var result = new List<SignatureHelpSymbolParameter>();
             foreach (var parameter in constructor.Parameters)
             {
@@ -317,7 +326,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             IMethodSymbol method,
             SemanticModel semanticModel,
             int position
-        ) {
+        )
+        {
             var result = new List<SymbolDisplayPart>();
 
             result.AddRange(method.ContainingType.ToMinimalDisplayParts(semanticModel, position));

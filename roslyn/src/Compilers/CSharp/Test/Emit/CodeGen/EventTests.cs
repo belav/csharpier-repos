@@ -259,7 +259,8 @@ class C
             bool isFromSource,
             bool isStatic,
             bool isFieldLike
-        ) {
+        )
+        {
             var @class = module.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
             var @event = @class.GetMember<EventSymbol>("E");
 

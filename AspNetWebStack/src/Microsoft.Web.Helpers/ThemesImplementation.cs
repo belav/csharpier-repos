@@ -26,7 +26,8 @@ namespace Microsoft.Web.Helpers
         public ThemesImplementation(
             VirtualPathProvider vpp,
             IDictionary<object, object> scopeStorage
-        ) {
+        )
+        {
             _vpp = vpp;
             _currentScope = scopeStorage;
         }

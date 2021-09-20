@@ -166,7 +166,8 @@ namespace System.Net.Tests
                 string challenge,
                 WebRequest request,
                 ICredentials credentials
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 

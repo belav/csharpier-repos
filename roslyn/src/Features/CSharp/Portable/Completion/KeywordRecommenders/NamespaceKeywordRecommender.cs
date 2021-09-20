@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             int position,
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxTree = context.SyntaxTree;
 
             // namespaces are illegal in interactive code:
@@ -103,7 +104,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             if (
                 token.Kind() == SyntaxKind.OpenBraceToken
                 && token.Parent.IsKind(SyntaxKind.NamespaceDeclaration)
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -127,7 +129,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                 if (
                     token.Parent is TypeDeclarationSyntax
                     && !(token.Parent.Parent is TypeDeclarationSyntax)
-                ) {
+                )
+                {
                     return true;
                 }
                 else if (token.Parent.IsKind(SyntaxKind.NamespaceDeclaration))
@@ -144,7 +147,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                 if (
                     token.Parent.IsKind(SyntaxKind.DelegateDeclaration)
                     && !(token.Parent.Parent is TypeDeclarationSyntax)
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -156,7 +160,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                 token.Kind() == SyntaxKind.CloseBracketToken
                 && token.Parent.IsKind(SyntaxKind.AttributeList)
                 && token.Parent.IsParentKind(SyntaxKind.CompilationUnit)
-            ) {
+            )
+            {
                 return true;
             }
 

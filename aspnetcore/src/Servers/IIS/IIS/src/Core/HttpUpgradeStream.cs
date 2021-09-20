@@ -93,7 +93,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
             int count,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             return _requestStream.BeginRead(buffer, offset, count, callback, state);
         }
 
@@ -108,7 +109,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
             int count,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             return _responseStream.BeginWrite(buffer, offset, count, callback, state);
         }
 
@@ -122,14 +124,16 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _requestStream.ReadAsync(buffer, offset, count, cancellationToken);
         }
 
         public override ValueTask<int> ReadAsync(
             Memory<byte> destination,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return _requestStream.ReadAsync(destination, cancellationToken);
         }
 
@@ -137,7 +141,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
             Stream destination,
             int bufferSize,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _requestStream.CopyToAsync(destination, bufferSize, cancellationToken);
         }
 
@@ -146,14 +151,16 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _responseStream.WriteAsync(buffer, offset, count, cancellationToken);
         }
 
         public override ValueTask WriteAsync(
             ReadOnlyMemory<byte> source,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return _responseStream.WriteAsync(source, cancellationToken);
         }
 

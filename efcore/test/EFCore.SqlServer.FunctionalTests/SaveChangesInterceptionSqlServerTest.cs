@@ -13,9 +13,8 @@ namespace Microsoft.EntityFrameworkCore
 {
     public abstract class SaveChangesInterceptionSqlServerTestBase : SaveChangesInterceptionTestBase
     {
-        protected SaveChangesInterceptionSqlServerTestBase(
-            InterceptionSqlServerFixtureBase fixture
-        ) : base(fixture) { }
+        protected SaveChangesInterceptionSqlServerTestBase(InterceptionSqlServerFixtureBase fixture)
+            : base(fixture) { }
 
         public abstract class InterceptionSqlServerFixtureBase : InterceptionFixtureBase
         {
@@ -36,9 +35,8 @@ namespace Microsoft.EntityFrameworkCore
             : SaveChangesInterceptionSqlServerTestBase,
               IClassFixture<SaveChangesInterceptionSqlServerTest.InterceptionSqlServerFixture>
         {
-            public SaveChangesInterceptionSqlServerTest(
-                InterceptionSqlServerFixture fixture
-            ) : base(fixture) { }
+            public SaveChangesInterceptionSqlServerTest(InterceptionSqlServerFixture fixture)
+                : base(fixture) { }
 
             public class InterceptionSqlServerFixture : InterceptionSqlServerFixtureBase
             {

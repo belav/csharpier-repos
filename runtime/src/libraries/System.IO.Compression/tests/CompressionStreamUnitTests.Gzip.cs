@@ -85,7 +85,8 @@ namespace System.IO.Compression
                         CompressionLevel.NoCompression,
                         leaveOpen: true
                     )
-                ) {
+                )
+                {
                     // write one byte in order to allow us to prime the inflater buffer
                     gz.WriteByte(3);
                 }
@@ -98,7 +99,8 @@ namespace System.IO.Compression
                             CompressionLevel.NoCompression,
                             leaveOpen: true
                         )
-                    ) {
+                    )
+                    {
                         gz.Write(Array.Empty<byte>());
                     }
                 }
@@ -163,7 +165,8 @@ namespace System.IO.Compression
             TestScenario scenario,
             int bufferSize,
             int bytesPerStream
-        ) {
+        )
+        {
             await TestConcatenatedGzipStreams(streamCount, scenario, bufferSize, bytesPerStream);
         }
 
@@ -187,7 +190,8 @@ namespace System.IO.Compression
             TestScenario scenario,
             int bufferSize,
             int bytesPerStream
-        ) {
+        )
+        {
             await TestConcatenatedGzipStreams(streamCount, scenario, bufferSize, bytesPerStream);
         }
 
@@ -205,7 +209,8 @@ namespace System.IO.Compression
             TestScenario scenario,
             int bufferSize,
             int bytesPerStream = 1
-        ) {
+        )
+        {
             bool isCopy = scenario == TestScenario.Copy || scenario == TestScenario.CopyAsync;
 
             using (MemoryStream correctDecompressedOutput = new MemoryStream())
@@ -226,7 +231,8 @@ namespace System.IO.Compression
                             CompressionLevel.NoCompression,
                             true
                         )
-                    ) {
+                    )
+                    {
                         for (int j = 0; j < bytesPerStream; j++)
                         {
                             byte b = (byte)((i * j) % 256);
@@ -312,7 +318,8 @@ namespace System.IO.Compression
                     CompressionMode.Compress,
                     leaveOpen: true
                 )
-            ) {
+            )
+            {
                 compressor.Write(new Span<byte>(new byte[1]));
                 Assert.True(compressor.WriteArrayInvoked);
             }
@@ -323,7 +330,8 @@ namespace System.IO.Compression
                     CompressionMode.Decompress,
                     leaveOpen: true
                 )
-            ) {
+            )
+            {
                 compressor.Read(new Span<byte>(new byte[1]));
                 Assert.True(compressor.ReadArrayInvoked);
             }
@@ -334,7 +342,8 @@ namespace System.IO.Compression
                     CompressionMode.Decompress,
                     leaveOpen: true
                 )
-            ) {
+            )
+            {
                 compressor.ReadAsync(new Memory<byte>(new byte[1])).AsTask().Wait();
                 Assert.True(compressor.ReadArrayInvoked);
             }
@@ -345,7 +354,8 @@ namespace System.IO.Compression
                     CompressionMode.Compress,
                     leaveOpen: true
                 )
-            ) {
+            )
+            {
                 compressor.WriteAsync(new ReadOnlyMemory<byte>(new byte[1])).AsTask().Wait();
                 Assert.True(compressor.WriteArrayInvoked);
             }
@@ -370,7 +380,8 @@ namespace System.IO.Compression
                 int offset,
                 int count,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 ReadArrayInvoked = true;
                 return base.ReadAsync(buffer, offset, count, cancellationToken);
             }
@@ -386,7 +397,8 @@ namespace System.IO.Compression
                 int offset,
                 int count,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 WriteArrayInvoked = true;
                 return base.WriteAsync(buffer, offset, count, cancellationToken);
             }

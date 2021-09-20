@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                 string title,
                 IEnumerable<IRefactorNotifyService> refactorNotifyServices,
                 ITextUndoHistoryRegistry undoHistoryRegistry
-            ) {
+            )
+            {
                 _document = document;
                 _title = title;
                 _refactorNotifyServices = refactorNotifyServices;
@@ -43,7 +44,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
 
             protected override Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // Invoked directly without previewing.
                 if (_renameTrackingCommitter == null)
                 {
@@ -72,7 +74,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                 if (
                     !documentOptions.GetOption(FeatureOnOffOptions.RenameTrackingPreview)
                     || !TryInitializeRenameTrackingCommitter(cancellationToken)
-                ) {
+                )
+                {
                     return await SpecializedTasks.EmptyEnumerable<CodeActionOperation>()
                         .ConfigureAwait(false);
                 }
@@ -97,13 +100,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                             typeof(StateMachine),
                             out StateMachine stateMachine
                         )
-                    ) {
+                    )
+                    {
                         if (
                             !stateMachine.CanInvokeRename(
                                 out _,
                                 cancellationToken: cancellationToken
                             )
-                        ) {
+                        )
+                        {
                             // The rename tracking could be dismissed while a codefix is still cached
                             // in the lightbulb. If this happens, do not perform the rename requested
                             // and instead let the user know their fix will not be applied.

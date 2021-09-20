@@ -281,28 +281,32 @@ namespace Microsoft.AspNetCore.Identity.Test
             public Task<IdentityResult> CreateAsync(
                 PocoRole role,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             public Task<IdentityResult> CreateAsync(
                 PocoUser user,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             public Task<IdentityResult> DeleteAsync(
                 PocoRole role,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             public Task<IdentityResult> DeleteAsync(
                 PocoUser user,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -314,56 +318,64 @@ namespace Microsoft.AspNetCore.Identity.Test
             public Task<PocoUser> FindByIdAsync(
                 string userId,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             public Task<PocoUser> FindByNameAsync(
                 string normalizedUserName,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             public Task<string> GetNormalizedRoleNameAsync(
                 PocoRole role,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             public Task<string> GetNormalizedUserNameAsync(
                 PocoUser user,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             public Task<string> GetRoleIdAsync(
                 PocoRole role,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             public Task<string> GetRoleNameAsync(
                 PocoRole role,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             public Task<string> GetUserIdAsync(
                 PocoUser user,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             public Task<string> GetUserNameAsync(
                 PocoUser user,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -371,7 +383,8 @@ namespace Microsoft.AspNetCore.Identity.Test
                 PocoRole role,
                 string normalizedName,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -379,7 +392,8 @@ namespace Microsoft.AspNetCore.Identity.Test
                 PocoUser user,
                 string normalizedName,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -387,7 +401,8 @@ namespace Microsoft.AspNetCore.Identity.Test
                 PocoRole role,
                 string roleName,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -395,21 +410,24 @@ namespace Microsoft.AspNetCore.Identity.Test
                 PocoUser user,
                 string userName,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             public Task<IdentityResult> UpdateAsync(
                 PocoRole role,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             public Task<IdentityResult> UpdateAsync(
                 PocoUser user,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -427,21 +445,24 @@ namespace Microsoft.AspNetCore.Identity.Test
                 UserManager<PocoUser> manager,
                 PocoUser user,
                 string password
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             Task<PocoRole> IRoleStore<PocoRole>.FindByIdAsync(
                 string roleId,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             Task<PocoRole> IRoleStore<PocoRole>.FindByNameAsync(
                 string roleName,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }

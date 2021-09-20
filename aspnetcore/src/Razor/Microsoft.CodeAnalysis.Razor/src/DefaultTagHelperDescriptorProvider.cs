@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.Razor
                 {
                     if (
                         compilation.GetAssemblyOrModuleSymbol(reference) is IAssemblySymbol assembly
-                    ) {
+                    )
+                    {
                         if (IsTagHelperAssembly(assembly))
                         {
                             visitor.Visit(assembly.GlobalNamespace);

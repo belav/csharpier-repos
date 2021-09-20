@@ -20,7 +20,8 @@ namespace System.Web.Http.ModelBinding
             ModelMetadataProvider metadataProvider,
             HttpActionContext actionContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             string name = Descriptor.ParameterName;
             actionContext.ActionArguments.Add(name, cancellationToken);
             return TaskHelpers.Completed();

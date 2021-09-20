@@ -40,7 +40,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 && unaryExpression.NodeType == ExpressionType.Convert
                 && expression.Type == unaryExpression.Operand.Type
                 && unaryExpression.Method == null
-            ) {
+            )
+            {
                 expression = unaryExpression.Operand;
             }
 

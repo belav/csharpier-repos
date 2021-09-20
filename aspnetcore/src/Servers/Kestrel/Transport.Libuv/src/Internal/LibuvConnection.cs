@@ -55,7 +55,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
             PipeOptions outputOptions = null,
             long? maxReadBufferSize = null,
             long? maxWriteBufferSize = null
-        ) {
+        )
+        {
             _socket = socket;
 
             LocalEndPoint = localEndPoint;
@@ -218,7 +219,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
             UvStreamHandle handle,
             int suggestedSize,
             object state
-        ) {
+        )
+        {
             return ((LibuvConnection)state).OnAlloc(handle, suggestedSize);
         }
 

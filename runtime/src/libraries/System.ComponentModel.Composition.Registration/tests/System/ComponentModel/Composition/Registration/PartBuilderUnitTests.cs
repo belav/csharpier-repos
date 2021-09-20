@@ -132,7 +132,8 @@ namespace System.ComponentModel.Composition.Registration.Tests
         public ManyConstructorsController(
             IFormsAuthenticationService formsService,
             IMembershipService membershipService
-        ) {
+        )
+        {
             FormsService = formsService;
             MembershipService = MembershipService;
         }
@@ -141,7 +142,8 @@ namespace System.ComponentModel.Composition.Registration.Tests
             IFormsAuthenticationService formsService,
             IMembershipService membershipService,
             HttpRequestValidator validator
-        ) {
+        )
+        {
             FormsService = formsService;
             MembershipService = membershipService;
             Validator = validator;

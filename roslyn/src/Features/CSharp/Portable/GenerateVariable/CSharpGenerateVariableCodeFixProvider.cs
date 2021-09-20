@@ -76,7 +76,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateVariable
             Document document,
             SyntaxNode node,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var service = document.GetLanguageService<IGenerateVariableService>();
             return service.GenerateVariableAsync(document, node, cancellationToken);
         }

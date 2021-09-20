@@ -22,7 +22,8 @@ namespace System.Runtime
 
         private static void SetLOHCompactionMode(
             GCLargeObjectHeapCompactionMode newLOHCompactionMode
-        ) {
+        )
+        {
             if (newLOHCompactionMode != GCLargeObjectHeapCompactionMode.Default)
                 throw new PlatformNotSupportedException();
         }

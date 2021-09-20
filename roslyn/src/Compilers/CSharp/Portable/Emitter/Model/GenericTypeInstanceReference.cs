@@ -43,12 +43,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
         ImmutableArray<Cci.ITypeReference> Cci.IGenericTypeInstanceReference.GetGenericArguments(
             EmitContext context
-        ) {
+        )
+        {
             PEModuleBuilder moduleBeingBuilt = (PEModuleBuilder)context.Module;
             var builder = ArrayBuilder<Cci.ITypeReference>.GetInstance();
             foreach (
                 TypeWithAnnotations type in UnderlyingNamedType.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
-            ) {
+            )
+            {
                 builder.Add(
                     moduleBeingBuilt.Translate(
                         type.Type,
@@ -63,7 +65,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
         Cci.INamedTypeReference Cci.IGenericTypeInstanceReference.GetGenericType(
             EmitContext context
-        ) {
+        )
+        {
             System.Diagnostics.Debug.Assert(UnderlyingNamedType.OriginalDefinition.IsDefinition);
             PEModuleBuilder moduleBeingBuilt = (PEModuleBuilder)context.Module;
             return moduleBeingBuilt.Translate(

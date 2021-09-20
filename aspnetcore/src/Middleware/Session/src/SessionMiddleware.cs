@@ -42,7 +42,8 @@ namespace Microsoft.AspNetCore.Session
             IDataProtectionProvider dataProtectionProvider,
             ISessionStore sessionStore,
             IOptions<SessionOptions> options
-        ) {
+        )
+        {
             if (next == null)
             {
                 throw new ArgumentNullException(nameof(next));
@@ -146,7 +147,8 @@ namespace Microsoft.AspNetCore.Session
                 HttpContext context,
                 string cookieValue,
                 SessionOptions options
-            ) {
+            )
+            {
                 _context = context;
                 _cookieValue = cookieValue;
                 _options = options;

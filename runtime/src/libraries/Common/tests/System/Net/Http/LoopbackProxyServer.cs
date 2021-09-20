@@ -142,7 +142,8 @@ namespace System.Net.Test.Common
             Socket clientSocket,
             StreamReader reader,
             StreamWriter writer
-        ) {
+        )
+        {
             var headers = new Dictionary<string, string>();
             string url = null;
             string method = null;
@@ -230,7 +231,8 @@ namespace System.Net.Test.Common
             using (
                 HttpResponseMessage response = await outboundClient.SendAsync(requestMessage)
                     .ConfigureAwait(false)
-            ) {
+            )
+            {
                 // Transfer the response headers from the server to the client.
                 var sb = new StringBuilder(
                     $"HTTP/{response.Version.ToString(2)} {(int)response.StatusCode} {response.ReasonPhrase}\r\n"
@@ -241,7 +243,8 @@ namespace System.Net.Test.Common
                 }
                 foreach (
                     KeyValuePair<string, IEnumerable<string>> header in response.Content.Headers
-                ) {
+                )
+                {
                     sb.Append($"{header.Key}: {string.Join(", ", header.Value)}\r\n");
                 }
                 sb.Append("\r\n");
@@ -261,7 +264,8 @@ namespace System.Net.Test.Common
             NetworkStream clientStream,
             string remoteHost,
             int remotePort
-        ) {
+        )
+        {
             // Open connection to destination server.
             using Socket serverSocket = new Socket(
                 AddressFamily.InterNetwork,
@@ -333,7 +337,8 @@ namespace System.Net.Test.Common
                 if (
                     sockErr != SocketError.ConnectionReset
                     && sockErr != SocketError.ConnectionAborted
-                ) {
+                )
+                {
                     ExceptionDispatchInfo.Capture(ex).Throw();
                 }
             }

@@ -71,7 +71,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             out Solution solution,
             out EditAndContinueWorkspaceService service,
             Type[] additionalParts = null
-        ) {
+        )
+        {
             var workspace = new TestWorkspace(composition: s_composition.AddParts(additionalParts));
             solution = workspace.CurrentSolution;
             service = GetEditAndContinueService(workspace);
@@ -96,7 +97,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             ISourceGenerator generator = null,
             string additionalFileText = null,
             (string key, string value)[] analyzerConfig = null
-        ) {
+        )
+        {
             solution = AddDefaultTestProject(
                 solution,
                 new[] { source },
@@ -113,7 +115,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             ISourceGenerator generator = null,
             string additionalFileText = null,
             (string key, string value)[] analyzerConfig = null
-        ) {
+        )
+        {
             var project = solution.AddProject("proj", "proj", LanguageNames.CSharp)
                 .WithMetadataReferences(TargetFrameworkUtil.GetReferences(DefaultTargetFramework));
 
@@ -187,7 +190,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             Solution solution,
             CommittedSolution.DocumentState initialState =
                 CommittedSolution.DocumentState.MatchesBuildOutput
-        ) {
+        )
+        {
             await service.StartDebuggingSessionAsync(
                 solution,
                 _debuggerService,
@@ -208,7 +212,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             EditAndContinueWorkspaceService service,
             ImmutableArray<ManagedActiveStatementDebugInfo> activeStatements = default,
             ImmutableArray<DocumentId> documentsWithRudeEdits = default
-        ) {
+        )
+        {
             _debuggerService.GetActiveStatementsImpl = () => activeStatements.NullToEmpty();
             service.BreakStateEntered(out var documentsToReanalyze);
             AssertEx.Equal(documentsWithRudeEdits.NullToEmpty(), documentsToReanalyze);
@@ -223,7 +228,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
         private static void CommitSolutionUpdate(
             EditAndContinueWorkspaceService service,
             ImmutableArray<DocumentId> documentsWithRudeEdits = default
-        ) {
+        )
+        {
             service.CommitSolutionUpdate(out var documentsToReanalyze);
             AssertEx.Equal(documentsWithRudeEdits.NullToEmpty(), documentsToReanalyze);
         }
@@ -231,7 +237,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
         private static void EndDebuggingSession(
             EditAndContinueWorkspaceService service,
             ImmutableArray<DocumentId> documentsWithRudeEdits = default
-        ) {
+        )
+        {
             service.EndDebuggingSession(out var documentsToReanalyze);
             AssertEx.Equal(documentsWithRudeEdits.NullToEmpty(), documentsToReanalyze);
         }
@@ -240,7 +247,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             IEditAndContinueWorkspaceService service,
             Solution solution,
             SolutionActiveStatementSpanProvider activeStatementSpanProvider = null
-        ) {
+        )
+        {
             var result = await service.EmitSolutionUpdateAsync(
                 solution,
                 activeStatementSpanProvider ?? s_noSolutionActiveSpans,
@@ -253,7 +261,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             DebuggingSession session,
             Solution solution,
             CommittedSolution.DocumentState state
-        ) {
+        )
+        {
             foreach (var project in solution.Projects)
             {
                 foreach (var document in project.Documents)
@@ -283,7 +292,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             string sourceFilePath = null,
             Encoding encoding = null,
             string assemblyName = ""
-        ) {
+        )
+        {
             var moduleId = EmitLibrary(source, sourceFilePath, encoding, assemblyName);
             LoadLibraryToDebuggee(moduleId);
             return moduleId;
@@ -292,7 +302,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
         private void LoadLibraryToDebuggee(
             Guid moduleId,
             ManagedEditAndContinueAvailability availability = default
-        ) {
+        )
+        {
             _debuggerService.LoadedModules.Add(moduleId, availability);
         }
 
@@ -305,7 +316,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             ISourceGenerator generator = null,
             string additionalFileText = null,
             IEnumerable<(string, string)> analyzerOptions = null
-        ) {
+        )
+        {
             return EmitLibrary(
                 new[] { (source, sourceFilePath ?? Path.Combine(TempRoot.Root, "test1.cs")) },
                 encoding,
@@ -325,7 +337,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             ISourceGenerator generator = null,
             string additionalFileText = null,
             IEnumerable<(string, string)> analyzerOptions = null
-        ) {
+        )
+        {
             encoding ??= Encoding.UTF8;
 
             var parseOptions = TestOptions.RegularPreview;
@@ -383,7 +396,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
         private Guid EmitLibrary(
             Compilation compilation,
             DebugInformationFormat pdbFormat = DebugInformationFormat.PortablePdb
-        ) {
+        )
+        {
             var (peImage, pdbImage) = compilation.EmitToArrays(
                 new EmitOptions(debugInformationFormat: pdbFormat)
             );
@@ -475,7 +489,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 Workspace workspace,
                 DocumentId documentId,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Assert.True(false, $"Content of document {documentId} should never be loaded");
                 throw ExceptionUtilities.Unreachable;
             }
@@ -2429,7 +2444,8 @@ class C { int Y => 2; }
         [InlineData(false)]
         public async Task BreakMode_ValidSignificantChange_ApplyBeforeFileWatcherEvent(
             bool saveDocument
-        ) {
+        )
+        {
             // Scenarios tested:
             //
             // SaveDocument=true
@@ -3021,7 +3037,8 @@ class C { int Y => 2; }
         [InlineData(false)]
         public async Task BreakMode_ValidSignificantChange_EmitSuccessful_UpdateDeferred(
             bool commitUpdate
-        ) {
+        )
+        {
             var dir = Temp.CreateDirectory();
 
             var sourceV1 =
@@ -3256,7 +3273,8 @@ partial class E { int B = 2; public E(int a, int b) { A = a; B = new System.Func
         private static unsafe void VerifyEncLogMetadata(
             ImmutableArray<byte> delta,
             params EditAndContinueLogEntry[] expectedRows
-        ) {
+        )
+        {
             fixed (byte* ptr = delta.ToArray())
             {
                 var reader = new MetadataReader(ptr, delta.Length);
@@ -3295,7 +3313,8 @@ partial class E { int B = 2; public E(int a, int b) { A = a; B = new System.Func
                 if (
                     context.AnalyzerConfigOptions.GetOptions(syntaxTree)
                         .TryGetValue("enc_generator_output", out var optionValue)
-                ) {
+                )
+                {
                     context.AddSource(
                         "GeneratedFromOptions_" + fileName,
                         $"class G {{ int X => {optionValue}; }}"

@@ -391,7 +391,8 @@ namespace System.Data.Tests
         private static string WriteXmlWithSchema(
             Action<TextWriter, XmlWriteMode> writeMethod,
             XmlWriteMode xmlWriteMode = XmlWriteMode.WriteSchema
-        ) {
+        )
+        {
             StringWriter writer = new StringWriter();
             writeMethod(writer, xmlWriteMode);
             return writer.ToString();

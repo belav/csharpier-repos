@@ -155,7 +155,8 @@ namespace System.Linq.Expressions.Compiler
             LambdaCompiler parent,
             LambdaExpression lambda,
             InvocationExpression invocation
-        ) {
+        )
+        {
             _tree = parent._tree;
             _lambda = lambda;
             _method = parent._method;

@@ -716,7 +716,8 @@ namespace Microsoft.AspNetCore.TestHost
 
             TestHostingContext IHttpApplication<TestHostingContext>.CreateContext(
                 IFeatureCollection contextFeatures
-            ) {
+            )
+            {
                 return new TestHostingContext()
                 {
                     HttpContext = new DefaultHttpContext(contextFeatures)
@@ -745,7 +746,8 @@ namespace Microsoft.AspNetCore.TestHost
 
             Task IHttpApplication<TestHostingContext>.ProcessRequestAsync(
                 TestHostingContext context
-            ) {
+            )
+            {
                 return _application(context.HttpContext);
             }
         }
@@ -768,7 +770,8 @@ namespace Microsoft.AspNetCore.TestHost
 
             TestHostingContext IHttpApplication<TestHostingContext>.CreateContext(
                 IFeatureCollection contextFeatures
-            ) {
+            )
+            {
                 _inspector(contextFeatures);
                 return new TestHostingContext()
                 {
@@ -798,7 +801,8 @@ namespace Microsoft.AspNetCore.TestHost
 
             Task IHttpApplication<TestHostingContext>.ProcessRequestAsync(
                 TestHostingContext context
-            ) {
+            )
+            {
                 return Task.FromResult(0);
             }
         }

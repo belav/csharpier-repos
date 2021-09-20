@@ -26,7 +26,8 @@ namespace System.Web.Http
         public async Task ControllerConfigurationSettings_ArePropagatedTo_ControllerAndRequest(
             string requestUrl,
             int count
-        ) {
+        )
+        {
             HttpConfiguration config = new HttpConfiguration();
             config.Routes.MapHttpRoute("Default", "{controller}/{action}");
             HttpServer server = new HttpServer(config);

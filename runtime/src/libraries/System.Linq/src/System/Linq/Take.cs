@@ -11,7 +11,8 @@ namespace System.Linq
         public static IEnumerable<TSource> Take<TSource>(
             this IEnumerable<TSource> source,
             int count
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -31,7 +32,8 @@ namespace System.Linq
         public static IEnumerable<TSource> Take<TSource>(
             this IEnumerable<TSource> source,
             Range range
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -75,7 +77,8 @@ namespace System.Linq
             int startIndex,
             bool isEndIndexFromEnd,
             int endIndex
-        ) {
+        )
+        {
             Debug.Assert(source != null);
             Debug.Assert(isStartIndexFromEnd || isEndIndexFromEnd);
             Debug.Assert(
@@ -200,7 +203,8 @@ namespace System.Linq
         public static IEnumerable<TSource> TakeWhile<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, bool> predicate
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -217,7 +221,8 @@ namespace System.Linq
         private static IEnumerable<TSource> TakeWhileIterator<TSource>(
             IEnumerable<TSource> source,
             Func<TSource, bool> predicate
-        ) {
+        )
+        {
             foreach (TSource element in source)
             {
                 if (!predicate(element))
@@ -232,7 +237,8 @@ namespace System.Linq
         public static IEnumerable<TSource> TakeWhile<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, int, bool> predicate
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -249,7 +255,8 @@ namespace System.Linq
         private static IEnumerable<TSource> TakeWhileIterator<TSource>(
             IEnumerable<TSource> source,
             Func<TSource, int, bool> predicate
-        ) {
+        )
+        {
             int index = -1;
             foreach (TSource element in source)
             {
@@ -270,7 +277,8 @@ namespace System.Linq
         public static IEnumerable<TSource> TakeLast<TSource>(
             this IEnumerable<TSource> source,
             int count
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);

@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Localization
         /// <param name="provider">The provider delegate.</param>
         public CustomRequestCultureProvider(
             Func<HttpContext, Task<ProviderCultureResult?>> provider
-        ) {
+        )
+        {
             if (provider == null)
             {
                 throw new ArgumentNullException(nameof(provider));
@@ -32,7 +33,8 @@ namespace Microsoft.AspNetCore.Localization
         /// <inheritdoc />
         public override Task<ProviderCultureResult?> DetermineProviderCultureResult(
             HttpContext httpContext
-        ) {
+        )
+        {
             if (httpContext == null)
             {
                 throw new ArgumentNullException(nameof(httpContext));

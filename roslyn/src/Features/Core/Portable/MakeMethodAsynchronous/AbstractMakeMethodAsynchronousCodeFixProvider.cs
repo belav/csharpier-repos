@@ -121,7 +121,8 @@ namespace Microsoft.CodeAnalysis.MakeMethodAsynchronous
             bool keepVoid,
             bool isEntryPoint,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var node = GetContainingFunction(diagnostic, cancellationToken);
 
             // See if we're on an actual method declaration (otherwise we're on a lambda declaration).
@@ -166,7 +167,8 @@ namespace Microsoft.CodeAnalysis.MakeMethodAsynchronous
                 bool keepVoid,
                 bool isEntryPoint,
                 in KnownTypes knownTypes
-            ) {
+            )
+            {
                 if (!methodSymbol.IsOrdinaryMethodOrLocalFunction())
                 {
                     // We don't need to rename methods that don't have a name
@@ -200,7 +202,8 @@ namespace Microsoft.CodeAnalysis.MakeMethodAsynchronous
         private SyntaxNode GetContainingFunction(
             Diagnostic diagnostic,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var token = diagnostic.Location.FindToken(cancellationToken);
             var node = token.GetAncestor(IsAsyncSupportingFunctionSyntax);
             return node;
@@ -213,7 +216,8 @@ namespace Microsoft.CodeAnalysis.MakeMethodAsynchronous
             IMethodSymbol methodSymbol,
             KnownTypes knownTypes,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var name = methodSymbol.Name;
             var newName = name + AsyncSuffix;
             var solution = document.Project.Solution;
@@ -263,7 +267,8 @@ namespace Microsoft.CodeAnalysis.MakeMethodAsynchronous
             KnownTypes knownTypes,
             SyntaxNode node,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var newNode = AddAsyncTokenAndFixReturnType(
                 keepVoid,
                 methodSymbolOpt,

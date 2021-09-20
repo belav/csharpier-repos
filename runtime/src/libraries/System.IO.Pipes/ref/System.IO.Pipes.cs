@@ -143,12 +143,14 @@ namespace System.IO.Pipes
         public System.Threading.Tasks.Task ConnectAsync(
             int timeout,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task ConnectAsync(
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         ~NamedPipeClientStream() { }
@@ -164,10 +166,8 @@ namespace System.IO.Pipes
         ) : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
         public NamedPipeServerStream(string pipeName)
             : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
-        public NamedPipeServerStream(
-            string pipeName,
-            System.IO.Pipes.PipeDirection direction
-        ) : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
+        public NamedPipeServerStream(string pipeName, System.IO.Pipes.PipeDirection direction)
+            : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
         public NamedPipeServerStream(
             string pipeName,
             System.IO.Pipes.PipeDirection direction,
@@ -198,7 +198,8 @@ namespace System.IO.Pipes
         public System.IAsyncResult BeginWaitForConnection(
             System.AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public void Disconnect() { }
@@ -218,7 +219,8 @@ namespace System.IO.Pipes
         }
         public System.Threading.Tasks.Task WaitForConnectionAsync(
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -309,7 +311,8 @@ namespace System.IO.Pipes
             int count,
             System.AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public override System.IAsyncResult BeginWrite(
@@ -318,7 +321,8 @@ namespace System.IO.Pipes
             int count,
             System.AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         protected internal virtual void CheckPipePropertyOperations() { }
@@ -333,7 +337,8 @@ namespace System.IO.Pipes
         public override void Flush() { }
         public override System.Threading.Tasks.Task FlushAsync(
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         protected void InitializeHandle(
@@ -354,14 +359,16 @@ namespace System.IO.Pipes
             int offset,
             int count,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Threading.Tasks.ValueTask<int> ReadAsync(
             System.Memory<byte> buffer,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public override int ReadByte()
@@ -382,14 +389,16 @@ namespace System.IO.Pipes
             int offset,
             int count,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Threading.Tasks.ValueTask WriteAsync(
             System.ReadOnlyMemory<byte> buffer,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public override void WriteByte(byte value) { }

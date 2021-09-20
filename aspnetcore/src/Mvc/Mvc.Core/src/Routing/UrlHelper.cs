@@ -108,7 +108,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         protected virtual VirtualPathData? GetVirtualPathData(
             string? routeName,
             RouteValueDictionary values
-        ) {
+        )
+        {
             var context = new VirtualPathContext(HttpContext, AmbientValues, values, routeName);
             return Router.GetVirtualPath(context);
         }
@@ -126,7 +127,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             string? host,
             VirtualPathData? pathData,
             string? fragment
-        ) {
+        )
+        {
             return GenerateUrl(protocol, host, pathData?.VirtualPath, fragment);
         }
     }

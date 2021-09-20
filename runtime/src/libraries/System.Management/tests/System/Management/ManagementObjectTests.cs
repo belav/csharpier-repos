@@ -36,7 +36,8 @@ namespace System.Management.Tests
                 ManagementObject obj = new ManagementObject(
                     $"Win32_LogicalDisk.DeviceID=\"{WmiTestHelper.SystemDriveId}\""
                 )
-            ) {
+            )
+            {
                 obj.Get();
                 Assert.True(obj.Properties.Count > 0);
                 Assert.True(ulong.Parse(obj["Size"].ToString()) > 0);
@@ -82,7 +83,8 @@ namespace System.Management.Tests
                 ManagementObject obj = new ManagementObject(
                     $"Win32_ComputerSystem.Name=\"{Environment.MachineName}\""
                 )
-            ) {
+            )
+            {
                 obj.Get();
                 obj.SetPropertyValue("Workgroup", "WmiTests");
             }

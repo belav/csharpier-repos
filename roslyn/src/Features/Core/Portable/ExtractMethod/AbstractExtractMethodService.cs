@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             bool localFunction,
             OptionSet options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             options ??= await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
 
             var semanticDocument = await SemanticDocument.CreateAsync(document, cancellationToken)

@@ -57,7 +57,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool isForSingleSymbol,
             BindingDiagnosticBag diagnostics,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _assemblyName = assemblyName;
 
             _compilation = compilation;
@@ -170,7 +171,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Symbol symbol,
             bool processIncludes,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(
                 symbol.Kind == SymbolKind.Event
                     || symbol.Kind == SymbolKind.Field
@@ -257,7 +259,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 _filterTree != null
                 && !symbol.IsDefinedInSourceTree(_filterTree, _filterSpanWithinTree)
-            ) {
+            )
+            {
                 return;
             }
 
@@ -288,7 +291,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 _filterTree != null
                 && !symbol.IsDefinedInSourceTree(_filterTree, _filterSpanWithinTree)
-            ) {
+            )
+            {
                 return;
             }
 
@@ -310,7 +314,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     out maxDocumentationMode,
                     out docCommentNodes
                 )
-            ) {
+            )
+            {
                 // If the XML in any of the doc comments is invalid, skip all further processing (for this symbol) and
                 // just write a comment saying that info was lost for this symbol.
                 string message = ErrorFacts.GetMessage(
@@ -333,7 +338,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     maxDocumentationMode >= DocumentationMode.Diagnose
                     && RequiresDocumentationComment(symbol)
-                ) {
+                )
+                {
                     // Report the error at a location in the tree that was parsing doc comments.
                     Location location = GetLocationInTreeReportingDocumentationCommentDiagnostics(
                         symbol
@@ -368,7 +374,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     out documentedParameters,
                     out includeElementNodes
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -499,7 +506,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             out HashSet<TypeParameterSymbol> documentedTypeParameters,
             out HashSet<ParameterSymbol> documentedParameters,
             out ImmutableArray<CSharpSyntaxNode> includeElementNodes
-        ) {
+        )
+        {
             Debug.Assert(!docCommentNodes.IsDefaultOrEmpty);
 
             bool processedDocComment = false; // Even if there are DocumentationCommentTriviaSyntax, we may not need to process any of them.
@@ -610,7 +618,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private static Location GetLocationInTreeReportingDocumentationCommentDiagnostics(
             Symbol symbol
-        ) {
+        )
+        {
             foreach (Location location in symbol.Locations)
             {
                 if (location.SourceTree.ReportDocumentationCommentDiagnostics())
@@ -701,7 +710,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Symbol symbol,
             out DocumentationMode maxDocumentationMode,
             out ImmutableArray<DocumentationCommentTriviaSyntax> nodes
-        ) {
+        )
+        {
             maxDocumentationMode = DocumentationMode.None;
             nodes = default(ImmutableArray<DocumentationCommentTriviaSyntax>);
 
@@ -1079,7 +1089,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CrefSyntax crefSyntax,
             Binder binder,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             if (crefSyntax.ContainsDiagnostics)
             {
                 return ToBadCrefString(crefSyntax);
@@ -1150,7 +1161,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ref HashSet<ParameterSymbol> documentedParameters,
             ref HashSet<TypeParameterSymbol> documentedTypeParameters,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             XmlNameAttributeElementKind elementKind = syntax.GetElementKind();
 
             // NOTE: We want the corresponding hash set to be non-null if we saw
@@ -1241,7 +1253,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         if (
                             !parameter.ContainingSymbol.IsAccessor()
                             && !documentedParameters.Add(parameter)
-                        ) {
+                        )
+                        {
                             diagnostics.Add(
                                 ErrorCode.WRN_DuplicateParamTag,
                                 syntax.Location,

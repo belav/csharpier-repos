@@ -38,7 +38,8 @@ namespace System.Reflection.Tests
             Type attrType,
             CtorArg expectedCtorValue,
             NamedArg expectedNamedValue
-        ) {
+        )
+        {
             Module module = typeof(ModuleTest).GetTypeInfo().Module;
 
             CustomAttributeData attribute = module.CustomAttributes.Single(

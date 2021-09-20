@@ -26,7 +26,8 @@ namespace Microsoft.Extensions.DependencyModel
 
         public static IEnumerable<RuntimeFile> GetDefaultNativeRuntimeFileAssets(
             this DependencyContext self
-        ) {
+        )
+        {
             if (self == null)
             {
                 throw new ArgumentNullException(nameof(self));
@@ -39,7 +40,8 @@ namespace Microsoft.Extensions.DependencyModel
         public static IEnumerable<string> GetRuntimeNativeAssets(
             this DependencyContext self,
             string runtimeIdentifier
-        ) {
+        )
+        {
             if (self == null)
             {
                 throw new ArgumentNullException(nameof(self));
@@ -56,7 +58,8 @@ namespace Microsoft.Extensions.DependencyModel
         public static IEnumerable<RuntimeFile> GetRuntimeNativeRuntimeFileAssets(
             this DependencyContext self,
             string runtimeIdentifier
-        ) {
+        )
+        {
             if (self == null)
             {
                 throw new ArgumentNullException(nameof(self));
@@ -73,7 +76,8 @@ namespace Microsoft.Extensions.DependencyModel
         public static IEnumerable<string> GetDefaultNativeAssets(
             this RuntimeLibrary self,
             DependencyContext context
-        ) {
+        )
+        {
             if (self == null)
             {
                 throw new ArgumentNullException(nameof(self));
@@ -84,7 +88,8 @@ namespace Microsoft.Extensions.DependencyModel
         public static IEnumerable<RuntimeFile> GetDefaultNativeRuntimeFileAssets(
             this RuntimeLibrary self,
             DependencyContext context
-        ) {
+        )
+        {
             if (self == null)
             {
                 throw new ArgumentNullException(nameof(self));
@@ -96,7 +101,8 @@ namespace Microsoft.Extensions.DependencyModel
             this RuntimeLibrary self,
             DependencyContext context,
             string runtimeIdentifier
-        ) {
+        )
+        {
             if (self == null)
             {
                 throw new ArgumentNullException(nameof(self));
@@ -116,7 +122,8 @@ namespace Microsoft.Extensions.DependencyModel
             this RuntimeLibrary self,
             DependencyContext context,
             string runtimeIdentifier
-        ) {
+        )
+        {
             if (self == null)
             {
                 throw new ArgumentNullException(nameof(self));
@@ -146,7 +153,8 @@ namespace Microsoft.Extensions.DependencyModel
         public static IEnumerable<AssemblyName> GetRuntimeAssemblyNames(
             this DependencyContext self,
             string runtimeIdentifier
-        ) {
+        )
+        {
             if (self == null)
             {
                 throw new ArgumentNullException(nameof(self));
@@ -163,7 +171,8 @@ namespace Microsoft.Extensions.DependencyModel
         public static IEnumerable<AssemblyName> GetDefaultAssemblyNames(
             this RuntimeLibrary self,
             DependencyContext context
-        ) {
+        )
+        {
             if (self == null)
             {
                 throw new ArgumentNullException(nameof(self));
@@ -180,7 +189,8 @@ namespace Microsoft.Extensions.DependencyModel
             this RuntimeLibrary self,
             DependencyContext context,
             string runtimeIdentifier
-        ) {
+        )
+        {
             if (self == null)
             {
                 throw new ArgumentNullException(nameof(self));
@@ -220,7 +230,8 @@ namespace Microsoft.Extensions.DependencyModel
             DependencyContext context,
             string runtimeIdentifier,
             IEnumerable<RuntimeAssetGroup> assets
-        ) {
+        )
+        {
             RuntimeFallbacks fallbacks = context.RuntimeGraph.FirstOrDefault(
                 f => f.Runtime == runtimeIdentifier
             );
@@ -235,7 +246,8 @@ namespace Microsoft.Extensions.DependencyModel
             DependencyContext context,
             string runtimeIdentifier,
             IEnumerable<RuntimeAssetGroup> assets
-        ) {
+        )
+        {
             RuntimeFallbacks fallbacks = context.RuntimeGraph.FirstOrDefault(
                 f => f.Runtime == runtimeIdentifier
             );
@@ -249,7 +261,8 @@ namespace Microsoft.Extensions.DependencyModel
         private static IEnumerable<string> SelectAssets(
             IEnumerable<string> rids,
             IEnumerable<RuntimeAssetGroup> groups
-        ) {
+        )
+        {
             foreach (string rid in rids)
             {
                 RuntimeAssetGroup group = groups.FirstOrDefault(g => g.Runtime == rid);
@@ -266,7 +279,8 @@ namespace Microsoft.Extensions.DependencyModel
         private static IEnumerable<RuntimeFile> SelectRuntimeFiles(
             IEnumerable<string> rids,
             IEnumerable<RuntimeAssetGroup> groups
-        ) {
+        )
+        {
             foreach (string rid in rids)
             {
                 RuntimeAssetGroup group = groups.FirstOrDefault(g => g.Runtime == rid);

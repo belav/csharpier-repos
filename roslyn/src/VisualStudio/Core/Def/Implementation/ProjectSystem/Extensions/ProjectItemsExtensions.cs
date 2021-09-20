@@ -45,7 +45,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.E
             ProjectItem itemToIgnore,
             string itemName,
             string extension
-        ) {
+        )
+        {
             return NameGenerator.GenerateUniqueName(
                 itemName,
                 extension,

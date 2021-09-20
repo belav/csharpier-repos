@@ -60,7 +60,8 @@ namespace System.Xml
             int maxBytesPerRead,
             int maxNameTableCharCount,
             XmlDictionaryReaderQuotaTypes modifiedQuotas
-        ) {
+        )
+        {
             _maxDepth = maxDepth;
             _maxStringContentLength = maxStringContentLength;
             _maxArrayLength = maxArrayLength;

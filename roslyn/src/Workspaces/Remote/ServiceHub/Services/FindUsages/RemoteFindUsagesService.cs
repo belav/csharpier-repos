@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Remote
             SerializableSymbolAndProjectId symbolAndProjectId,
             FindReferencesSearchOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 async cancellationToken =>
                 {
@@ -81,7 +82,8 @@ namespace Microsoft.CodeAnalysis.Remote
             RemoteServiceCallbackId callbackId,
             SerializableSymbolAndProjectId symbolAndProjectId,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 async cancellationToken =>
                 {
@@ -125,7 +127,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 RemoteCallback<IRemoteFindUsagesService.ICallback> callback,
                 RemoteServiceCallbackId callbackId,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 _callback = callback;
                 _callbackId = callbackId;
                 CancellationToken = cancellationToken;

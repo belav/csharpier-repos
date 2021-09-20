@@ -412,21 +412,24 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckTernaryNullableGenericWithStructRestrictionWithEnumTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckTernaryNullableGenericWithStructRestrictionHelper<E>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckTernaryNullableGenericWithStructRestrictionWithStructTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckTernaryNullableGenericWithStructRestrictionHelper<S>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckTernaryNullableGenericWithStructRestrictionWithStructWithStringAndFieldTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckTernaryNullableGenericWithStructRestrictionHelper<Scs>(useInterpreter);
         }
 
@@ -466,7 +469,8 @@ namespace System.Linq.Expressions.Tests
             bool? a,
             bool? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool?>> e = Expression.Lambda<Func<bool?>>(
                 Expression.Condition(
                     Expression.Constant(condition, typeof(bool)),
@@ -485,7 +489,8 @@ namespace System.Linq.Expressions.Tests
             byte? a,
             byte? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<byte?>> e = Expression.Lambda<Func<byte?>>(
                 Expression.Condition(
                     Expression.Constant(condition, typeof(bool)),
@@ -504,7 +509,8 @@ namespace System.Linq.Expressions.Tests
             char? a,
             char? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<char?>> e = Expression.Lambda<Func<char?>>(
                 Expression.Condition(
                     Expression.Constant(condition, typeof(bool)),
@@ -523,7 +529,8 @@ namespace System.Linq.Expressions.Tests
             decimal? a,
             decimal? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
                 Expression.Condition(
                     Expression.Constant(condition, typeof(bool)),
@@ -542,7 +549,8 @@ namespace System.Linq.Expressions.Tests
             double? a,
             double? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
                 Expression.Condition(
                     Expression.Constant(condition, typeof(bool)),
@@ -576,7 +584,8 @@ namespace System.Linq.Expressions.Tests
             El? a,
             El? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<El?>> e = Expression.Lambda<Func<El?>>(
                 Expression.Condition(
                     Expression.Constant(condition, typeof(bool)),
@@ -595,7 +604,8 @@ namespace System.Linq.Expressions.Tests
             float? a,
             float? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<float?>> e = Expression.Lambda<Func<float?>>(
                 Expression.Condition(
                     Expression.Constant(condition, typeof(bool)),
@@ -629,7 +639,8 @@ namespace System.Linq.Expressions.Tests
             long? a,
             long? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
                 Expression.Condition(
                     Expression.Constant(condition, typeof(bool)),
@@ -663,7 +674,8 @@ namespace System.Linq.Expressions.Tests
             sbyte? a,
             sbyte? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
                 Expression.Condition(
                     Expression.Constant(condition, typeof(bool)),
@@ -682,7 +694,8 @@ namespace System.Linq.Expressions.Tests
             Sc? a,
             Sc? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<Sc?>> e = Expression.Lambda<Func<Sc?>>(
                 Expression.Condition(
                     Expression.Constant(condition, typeof(bool)),
@@ -701,7 +714,8 @@ namespace System.Linq.Expressions.Tests
             Scs? a,
             Scs? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<Scs?>> e = Expression.Lambda<Func<Scs?>>(
                 Expression.Condition(
                     Expression.Constant(condition, typeof(bool)),
@@ -720,7 +734,8 @@ namespace System.Linq.Expressions.Tests
             short? a,
             short? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
                 Expression.Condition(
                     Expression.Constant(condition, typeof(bool)),
@@ -739,7 +754,8 @@ namespace System.Linq.Expressions.Tests
             Sp? a,
             Sp? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<Sp?>> e = Expression.Lambda<Func<Sp?>>(
                 Expression.Condition(
                     Expression.Constant(condition, typeof(bool)),
@@ -758,7 +774,8 @@ namespace System.Linq.Expressions.Tests
             Ss? a,
             Ss? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<Ss?>> e = Expression.Lambda<Func<Ss?>>(
                 Expression.Condition(
                     Expression.Constant(condition, typeof(bool)),
@@ -777,7 +794,8 @@ namespace System.Linq.Expressions.Tests
             uint? a,
             uint? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
                 Expression.Condition(
                     Expression.Constant(condition, typeof(bool)),
@@ -796,7 +814,8 @@ namespace System.Linq.Expressions.Tests
             ulong? a,
             ulong? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
                 Expression.Condition(
                     Expression.Constant(condition, typeof(bool)),
@@ -815,7 +834,8 @@ namespace System.Linq.Expressions.Tests
             ushort? a,
             ushort? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
                 Expression.Condition(
                     Expression.Constant(condition, typeof(bool)),

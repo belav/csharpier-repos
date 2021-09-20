@@ -31,7 +31,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             object routeValues,
             string method,
             object htmlAttributes
-        ) {
+        )
+        {
             var tagBuilder = generator.GenerateForm(
                 viewContext,
                 actionName,
@@ -69,7 +70,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string fragment,
             string method,
             object htmlAttributes
-        ) {
+        )
+        {
             var tagBuilder = generator.GenerateRouteForm(
                 viewContext,
                 routeName,

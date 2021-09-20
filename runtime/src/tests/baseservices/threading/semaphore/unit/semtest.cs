@@ -134,7 +134,8 @@ class TestSemaphore
                     "Semaphore_TESTSEM",
                     out createdNew
                 )
-            ) {
+            )
+            {
                 if (createdNew)
                 {
                     Failure("Error: we are not expecting a new semaphore here");

@@ -11,7 +11,8 @@ namespace System.Web.Razor.Test.Utils
             IEnumerable<T> left,
             IEnumerable<V> right,
             Action<T, V> action
-        ) {
+        )
+        {
             IEnumerator<T> leftEnum = left.GetEnumerator();
             IEnumerator<V> rightEnum = right.GetEnumerator();
             while (leftEnum.MoveNext() && rightEnum.MoveNext())

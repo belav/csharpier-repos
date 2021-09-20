@@ -18,7 +18,8 @@ internal class WrappedStream : Stream
         bool canWrite,
         bool canSeek,
         EventHandler onClosed
-    ) {
+    )
+    {
         _baseStream = baseStream;
         _onClosed = onClosed;
         _canRead = canRead;

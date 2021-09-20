@@ -37,7 +37,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IApplicationBuilder UseFileServer(
             this IApplicationBuilder app,
             bool enableDirectoryBrowsing
-        ) {
+        )
+        {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));
@@ -57,7 +58,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IApplicationBuilder UseFileServer(
             this IApplicationBuilder app,
             string requestPath
-        ) {
+        )
+        {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));
@@ -82,7 +84,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IApplicationBuilder UseFileServer(
             this IApplicationBuilder app,
             FileServerOptions options
-        ) {
+        )
+        {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));

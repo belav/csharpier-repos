@@ -62,7 +62,8 @@ namespace Microsoft.Web.Mvc
                     rawBytes,
                     XmlDictionaryReaderQuotas.Max
                 )
-            ) {
+            )
+            {
                 object deserialized = new NetDataContractSerializer().ReadObject(dr);
                 return deserialized;
             }
@@ -104,7 +105,8 @@ namespace Microsoft.Web.Mvc
                     null,
                     ownsStream: false
                 )
-            ) {
+            )
+            {
                 new NetDataContractSerializer().WriteObject(dw, graph);
             }
         }

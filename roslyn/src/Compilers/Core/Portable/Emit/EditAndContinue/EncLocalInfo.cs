@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Emit
             Cci.ITypeReference type,
             LocalSlotConstraints constraints,
             byte[]? signature
-        ) {
+        )
+        {
             SlotInfo = slotInfo;
             Type = type;
             Constraints = constraints;

@@ -30,7 +30,8 @@ namespace System.Security.Cryptography.Xml.Tests
             RSA rsaKey,
             string keyName,
             bool useOAEP
-        ) {
+        )
+        {
             var elementToEncrypt = (XmlElement)doc.GetElementsByTagName(elementName)[0];
 
             using (var sessionKey = Aes.Create())

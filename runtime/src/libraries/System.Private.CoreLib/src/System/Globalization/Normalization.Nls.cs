@@ -13,7 +13,8 @@ namespace System.Globalization
         private static unsafe bool NlsIsNormalized(
             string strInput,
             NormalizationForm normalizationForm
-        ) {
+        )
+        {
             Debug.Assert(!GlobalizationMode.Invariant);
             Debug.Assert(GlobalizationMode.UseNls);
             Debug.Assert(strInput != null);
@@ -44,7 +45,8 @@ namespace System.Globalization
                         && normalizationForm != NormalizationForm.FormD
                         && normalizationForm != NormalizationForm.FormKC
                         && normalizationForm != NormalizationForm.FormKD
-                    ) {
+                    )
+                    {
                         throw new ArgumentException(
                             SR.Argument_InvalidNormalizationForm,
                             nameof(normalizationForm)
@@ -69,7 +71,8 @@ namespace System.Globalization
         private static unsafe string NlsNormalize(
             string strInput,
             NormalizationForm normalizationForm
-        ) {
+        )
+        {
             Debug.Assert(!GlobalizationMode.Invariant);
             Debug.Assert(GlobalizationMode.UseNls);
             Debug.Assert(strInput != null);
@@ -97,7 +100,8 @@ namespace System.Globalization
                     int realLength;
                     fixed (char* pInput = strInput)fixed (
                         char* pDest = &MemoryMarshal.GetReference(buffer)
-                    ) {
+                    )
+                    {
                         realLength = Interop.Normaliz.NormalizeString(
                             normalizationForm,
                             pInput,
@@ -139,7 +143,8 @@ namespace System.Globalization
                                 && normalizationForm != NormalizationForm.FormD
                                 && normalizationForm != NormalizationForm.FormKC
                                 && normalizationForm != NormalizationForm.FormKD
-                            ) {
+                            )
+                            {
                                 throw new ArgumentException(
                                     SR.Argument_InvalidNormalizationForm,
                                     nameof(normalizationForm)

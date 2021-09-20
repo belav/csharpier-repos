@@ -212,7 +212,8 @@ namespace System
                 && sign == 1
                 && r == 10
                 && ((flags & TreatAsUnsigned) == 0)
-            ) {
+            )
+            {
                 Number.ThrowOverflowException(TypeCode.Int32);
             }
 

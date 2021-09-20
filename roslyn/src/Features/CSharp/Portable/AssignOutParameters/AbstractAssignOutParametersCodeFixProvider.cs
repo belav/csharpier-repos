@@ -60,7 +60,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AssignOutParameters
         private static (SyntaxNode container, SyntaxNode exprOrStatement) GetContainer(
             SyntaxNode root,
             TextSpan span
-        ) {
+        )
+        {
             var location = root.FindNode(span);
             if (IsValidLocation(location))
             {
@@ -115,7 +116,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AssignOutParameters
             Document document,
             ImmutableArray<Diagnostic> diagnostics,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
@@ -163,7 +165,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AssignOutParameters
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var unassignedParameters = await GetUnassignedParametersAsync(
                     document,
                     diagnostics,
@@ -173,7 +176,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AssignOutParameters
 
             foreach (
                 var container in unassignedParameters.Keys.OrderByDescending(n => n.Span.Start)
-            ) {
+            )
+            {
                 AssignOutParameters(
                     editor,
                     container,
@@ -196,7 +200,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AssignOutParameters
         protected static ImmutableArray<SyntaxNode> GenerateAssignmentStatements(
             SyntaxGenerator generator,
             ImmutableArray<IParameterSymbol> unassignedParameters
-        ) {
+        )
+        {
             var result = ArrayBuilder<SyntaxNode>.GetInstance();
 
             foreach (var parameter in unassignedParameters)

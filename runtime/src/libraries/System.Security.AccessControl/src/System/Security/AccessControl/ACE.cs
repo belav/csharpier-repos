@@ -203,7 +203,8 @@ namespace System.Security.AccessControl
         internal static AceFlags AceFlagsFromInheritanceFlags(
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags
-        ) {
+        )
+        {
             AceFlags flags = AceFlags.None;
 
             if ((inheritanceFlags & InheritanceFlags.ContainerInherit) != 0)
@@ -267,7 +268,8 @@ namespace System.Security.AccessControl
             else if (
                 (binaryForm[offset + 3] << 8) + (binaryForm[offset + 2] << 0)
                 > binaryForm.Length - offset
-            ) {
+            )
+            {
                 //
                 // Reported length of ACE ought to be no longer than the
                 // length of the buffer passed in
@@ -307,7 +309,8 @@ namespace System.Security.AccessControl
                 || type == AceType.AccessDeniedCallback
                 || type == AceType.SystemAuditCallback
                 || type == AceType.SystemAlarmCallback
-            ) {
+            )
+            {
                 if (
                     CommonAce.ParseBinaryForm(
                         binaryForm,
@@ -318,7 +321,8 @@ namespace System.Security.AccessControl
                         out bool isCallback,
                         out byte[]? opaque
                     )
-                ) {
+                )
+                {
                     AceFlags flags = (AceFlags)binaryForm[offset + 1];
                     result = new CommonAce(flags, qualifier, accessMask, sid, isCallback, opaque);
                 }
@@ -336,7 +340,8 @@ namespace System.Security.AccessControl
                 || type == AceType.AccessDeniedCallbackObject
                 || type == AceType.SystemAuditCallbackObject
                 || type == AceType.SystemAlarmCallbackObject
-            ) {
+            )
+            {
                 if (
                     ObjectAce.ParseBinaryForm(
                         binaryForm,
@@ -350,7 +355,8 @@ namespace System.Security.AccessControl
                         out bool isCallback,
                         out byte[]? opaque
                     )
-                ) {
+                )
+                {
                     AceFlags flags = (AceFlags)binaryForm[offset + 1];
                     result = new ObjectAce(
                         flags,
@@ -379,7 +385,8 @@ namespace System.Security.AccessControl
                         out CompoundAceType compoundAceType,
                         out SecurityIdentifier? sid
                     )
-                ) {
+                )
+                {
                     AceFlags flags = (AceFlags)binaryForm[offset + 1];
                     result = new CompoundAce(flags, accessMask, compoundAceType, sid);
                 }
@@ -442,7 +449,8 @@ namespace System.Security.AccessControl
                         != result.BinaryLength
                     )
                 )
-            ) {
+            )
+            {
                 goto InvalidParameter;
             }
 
@@ -982,7 +990,8 @@ namespace System.Security.AccessControl
             out int accessMask,
             out CompoundAceType compoundAceType,
             [NotNullWhen(true)] out SecurityIdentifier? sid
-        ) {
+        )
+        {
             //
             // Verify the ACE header
             //
@@ -999,7 +1008,8 @@ namespace System.Security.AccessControl
                     + AccessMaskLength
                     + AceTypeLength
                     + SecurityIdentifier.MinBinaryLength
-            ) {
+            )
+            {
                 goto InvalidParameter;
             }
 
@@ -1469,7 +1479,8 @@ namespace System.Security.AccessControl
             [NotNullWhen(true)] out SecurityIdentifier? sid,
             out bool isCallback,
             out byte[]? opaque
-        ) {
+        )
+        {
             //
             // Verify the ACE header
             //
@@ -1483,7 +1494,8 @@ namespace System.Security.AccessControl
             if (
                 binaryForm.Length - offset
                 < HeaderLength + AccessMaskLength + SecurityIdentifier.MinBinaryLength
-            ) {
+            )
+            {
                 goto InvalidParameter;
             }
 
@@ -1498,7 +1510,8 @@ namespace System.Security.AccessControl
                 || type == AceType.AccessDenied
                 || type == AceType.SystemAudit
                 || type == AceType.SystemAlarm
-            ) {
+            )
+            {
                 isCallback = false;
             }
             else if (
@@ -1506,7 +1519,8 @@ namespace System.Security.AccessControl
                 || type == AceType.AccessDeniedCallback
                 || type == AceType.SystemAuditCallback
                 || type == AceType.SystemAlarmCallback
-            ) {
+            )
+            {
                 isCallback = true;
             }
             else
@@ -1855,14 +1869,16 @@ namespace System.Security.AccessControl
             if (
                 (ObjectAceFlags & ObjectAceFlags.ObjectAceTypePresent)
                 != (objectFlags & ObjectAceFlags.ObjectAceTypePresent)
-            ) {
+            )
+            {
                 return false;
             }
 
             if (
                 ((ObjectAceFlags & ObjectAceFlags.ObjectAceTypePresent) != 0)
                 && (!ObjectAceType.Equals(objectType))
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -1876,18 +1892,21 @@ namespace System.Security.AccessControl
         internal bool InheritedObjectTypesMatch(
             ObjectAceFlags objectFlags,
             Guid inheritedObjectType
-        ) {
+        )
+        {
             if (
                 (ObjectAceFlags & ObjectAceFlags.InheritedObjectAceTypePresent)
                 != (objectFlags & ObjectAceFlags.InheritedObjectAceTypePresent)
-            ) {
+            )
+            {
                 return false;
             }
 
             if (
                 ((ObjectAceFlags & ObjectAceFlags.InheritedObjectAceTypePresent) != 0)
                 && (!InheritedObjectAceType.Equals(inheritedObjectType))
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -1914,7 +1933,8 @@ namespace System.Security.AccessControl
             out Guid inheritedObjectAceType,
             out bool isCallback,
             out byte[]? opaque
-        ) {
+        )
+        {
             byte[] guidArray = new byte[GuidLength];
 
             //
@@ -1933,7 +1953,8 @@ namespace System.Security.AccessControl
                     + AccessMaskLength
                     + ObjectFlagsLength
                     + SecurityIdentifier.MinBinaryLength
-            ) {
+            )
+            {
                 goto InvalidParameter;
             }
 
@@ -1948,7 +1969,8 @@ namespace System.Security.AccessControl
                 || type == AceType.AccessDeniedObject
                 || type == AceType.SystemAuditObject
                 || type == AceType.SystemAlarmObject
-            ) {
+            )
+            {
                 isCallback = false;
             }
             else if (
@@ -1956,7 +1978,8 @@ namespace System.Security.AccessControl
                 || type == AceType.AccessDeniedCallbackObject
                 || type == AceType.SystemAuditCallbackObject
                 || type == AceType.SystemAlarmCallbackObject
-            ) {
+            )
+            {
                 isCallback = true;
             }
             else
@@ -1974,7 +1997,8 @@ namespace System.Security.AccessControl
             }
             else if (
                 type == AceType.AccessDeniedObject || type == AceType.AccessDeniedCallbackObject
-            ) {
+            )
+            {
                 qualifier = AceQualifier.AccessDenied;
             }
             else if (type == AceType.SystemAuditObject || type == AceType.SystemAuditCallbackObject)

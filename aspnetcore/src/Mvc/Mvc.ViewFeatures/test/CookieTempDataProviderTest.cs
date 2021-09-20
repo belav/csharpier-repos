@@ -163,7 +163,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             bool isRequestSecure,
             CookieSecurePolicy cookieSecurePolicy,
             bool expectedSecureFlag
-        ) {
+        )
+        {
             // Arrange
             var expectedDataToProtect = Bytes;
             var expectedDataInCookie = WebEncoders.Base64UrlEncode(expectedDataToProtect);
@@ -201,7 +202,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public void SaveTempData_DefaultProviderOptions_SetsCookie_WithAppropriateCookieOptions(
             string pathBase,
             string expectedCookiePath
-        ) {
+        )
+        {
             // Arrange
             var expectedDataToProtect = Bytes;
             var expectedDataInCookie = WebEncoders.Base64UrlEncode(expectedDataToProtect);
@@ -242,7 +244,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string optionsDomain,
             string expectedCookiePath,
             string expectedDomain
-        ) {
+        )
+        {
             // Arrange
             var expectedDataToProtect = Bytes;
             var expectedDataInCookie = WebEncoders.Base64UrlEncode(expectedDataToProtect);
@@ -394,7 +397,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         private CookieTempDataProvider GetProvider(
             IDataProtector dataProtector = null,
             CookieTempDataProviderOptions options = null
-        ) {
+        )
+        {
             if (dataProtector == null)
             {
                 dataProtector = new PassThroughDataProtector();

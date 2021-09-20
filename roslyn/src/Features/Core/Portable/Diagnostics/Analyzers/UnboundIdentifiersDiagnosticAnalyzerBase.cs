@@ -51,7 +51,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.AddImport
         protected static DiagnosticDescriptor GetDiagnosticDescriptor(
             string id,
             LocalizableString messageFormat
-        ) {
+        )
+        {
             // it is not configurable diagnostic, title doesn't matter
             return new DiagnosticDescriptor(
                 id,
@@ -93,7 +94,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.AddImport
         private void ReportUnboundIdentifierNames(
             SyntaxNodeAnalysisContext context,
             SyntaxNode member
-        ) {
+        )
+        {
             static bool isQualifiedOrSimpleName(SyntaxNode n) =>
                 n is TQualifiedNameSyntax || n is TSimpleNameSyntax;
             var typeNames = member.DescendantNodes()

@@ -16,7 +16,8 @@ namespace System.Reflection.Emit.Tests
             Type returnType,
             Type[] parameterTypes,
             int expectedLength
-        ) {
+        )
+        {
             ModuleBuilder module = Helpers.DynamicModule();
             SignatureHelper helper = SignatureHelper.GetPropertySigHelper(
                 module,
@@ -67,7 +68,8 @@ namespace System.Reflection.Emit.Tests
         public void GetProperySigHelper_Module_Type_TypeArray_TypeArray_TypeArrayArray_TypeArrayArray(
             Type[] types,
             int expectedLength
-        ) {
+        )
+        {
             ModuleBuilder module = Helpers.DynamicModule();
 
             Type[][] customModifiers = new Type[][] { types, types };

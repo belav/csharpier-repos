@@ -757,7 +757,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     ForNuint,
                     ForChar
                 }
-            ) {
+            )
+            {
                 for (int i = 0; i < 100; i++)
                 {
                     var s1 = fac.Random(10, Random);
@@ -791,7 +792,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     ForNuint,
                     ForChar
                 }
-            ) {
+            )
+            {
                 for (int i = 0; i < 100; i++)
                 {
                     ConstantValue value = fac.RandomValue(Random);

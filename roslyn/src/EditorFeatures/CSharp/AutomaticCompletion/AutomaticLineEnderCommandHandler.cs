@@ -66,7 +66,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
             Document document,
             int caretPosition,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = document.GetRequiredSyntaxRootSynchronously(cancellationToken);
 
             var endToken = root.FindToken(caretPosition);
@@ -104,7 +105,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
             Document document,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = document.GetRequiredSyntaxRootSynchronously(cancellationToken);
             var endToken = root.FindToken(position);
             var span = GetFormattedTextSpan(root, endToken);
@@ -161,7 +163,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
             Document document,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // prepare expansive information from document
             var tree = document.GetRequiredSyntaxTreeSynchronously(cancellationToken);
             var root = tree.GetRoot(cancellationToken);
@@ -248,7 +251,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
             int position,
             SyntaxNode owningNode,
             SyntaxToken lastToken
-        ) {
+        )
+        {
             var line = text.Lines.GetLineFromPosition(position);
 
             // if caret is at the end of the line and containing statement is expression statement
@@ -281,14 +285,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
             if (
                 previousToken.Kind() == SyntaxKind.StringLiteralToken
                 && previousToken.ToString().Last() != '"'
-            ) {
+            )
+            {
                 return false;
             }
 
             if (
                 previousToken.Kind() == SyntaxKind.CharacterLiteralToken
                 && previousToken.ToString().Last() != '\''
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -313,7 +319,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
             int position,
             SyntaxNode owningNode,
             out SyntaxToken lastToken
-        ) {
+        )
+        {
             lastToken = owningNode.GetLastToken(includeZeroWidth: true);
 
             // last token must be on the same line as the caret
@@ -378,7 +385,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
             bool addBrace,
             int caretPosition,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = document.GetRequiredSyntaxRootSynchronously(cancellationToken);
             // Add braces for the selected node
             if (addBrace)
@@ -401,7 +409,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
                         or DoStatementSyntax
                         or IfStatementSyntax
                         or ElseClauseSyntax
-                ) {
+                )
+                {
                     // Add the braces and get the next caretPosition
                     var (newRoot, nextCaretPosition) = AddBraceToSelectedNode(
                         document,
@@ -414,7 +423,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
                         document.Project.Solution.Workspace.TryApplyChanges(
                             document.WithSyntaxRoot(newRoot).Project.Solution
                         )
-                    ) {
+                    )
+                    {
                         args.TextView.TryMoveCaretToAndEnsureVisible(
                             new SnapshotPoint(args.SubjectBuffer.CurrentSnapshot, nextCaretPosition)
                         );
@@ -462,7 +472,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
                     document.Project.Solution.Workspace.TryApplyChanges(
                         document.WithSyntaxRoot(newRoot).Project.Solution
                     )
-                ) {
+                )
+                {
                     args.TextView.TryMoveCaretToAndEnsureVisible(
                         new SnapshotPoint(args.SubjectBuffer.CurrentSnapshot, nextCaretPosition)
                     );
@@ -476,7 +487,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
             SyntaxNode selectedNode,
             IEditorOptions editorOptions,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // For these nodes, directly modify the node and replace it.
             if (
                 selectedNode
@@ -486,7 +498,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
                     or FieldDeclarationSyntax
                     or EventFieldDeclarationSyntax
                     or AccessorDeclarationSyntax
-            ) {
+            )
+            {
                 var newRoot = ReplaceNodeAndFormat(
                     document,
                     root,
@@ -581,7 +594,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
             SyntaxNode selectedNode,
             IEditorOptions editorOptions,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Remove the initializer from ObjectCreationExpression
             // Step 1. Remove the initializer
             // e.g. var c = new Bar { $$ } => var c = new Bar
@@ -715,7 +729,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
             Document document,
             int insertionPosition,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var bracePair = GetBracePairString(textView.Options);
 
             // 1. Insert { }.
@@ -738,7 +753,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
             Document document,
             int caretPosition,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = document.GetRequiredSyntaxRootSynchronously(cancellationToken);
             var token = root.FindTokenOnLeftOfPosition(caretPosition);
             if (token.IsKind(SyntaxKind.None))

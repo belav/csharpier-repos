@@ -18,7 +18,8 @@ namespace System.Dynamic.Tests
             public override DynamicMetaObject FallbackGetMember(
                 DynamicMetaObject target,
                 DynamicMetaObject errorSuggestion
-            ) {
+            )
+            {
                 throw new NotSupportedException();
             }
         }

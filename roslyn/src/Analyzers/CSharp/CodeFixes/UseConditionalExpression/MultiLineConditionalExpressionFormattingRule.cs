@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseConditionalExpression
             in SyntaxToken previousToken,
             in SyntaxToken currentToken,
             in NextGetAdjustNewLinesOperation nextOperation
-        ) {
+        )
+        {
             if (IsQuestionOrColonOfNewConditional(currentToken))
             {
                 // We want to force the ? and : to each be put onto the following line.
@@ -61,11 +62,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UseConditionalExpression
             List<IndentBlockOperation> list,
             SyntaxNode node,
             in NextIndentBlockOperationAction nextOperation
-        ) {
+        )
+        {
             if (
                 node.HasAnnotation(SpecializedFormattingAnnotation)
                 && node is ConditionalExpressionSyntax conditional
-            ) {
+            )
+            {
                 var statement = conditional.FirstAncestorOrSelf<StatementSyntax>();
                 if (statement != null)
                 {

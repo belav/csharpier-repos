@@ -12,7 +12,8 @@ namespace Microsoft.CodeAnalysis.Text.Shared.Extensions
             this SnapshotPoint snapshotPoint,
             out ITextSnapshot snapshot,
             out int position
-        ) {
+        )
+        {
             snapshot = snapshotPoint.Snapshot;
             position = snapshotPoint.Position;
         }

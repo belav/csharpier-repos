@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             int defaultDestination,
             int exitDestination,
             params (string text, int destination)[] entries
-        ) {
+        )
+        {
             var fallback = new DictionaryJumpTable(defaultDestination, exitDestination, entries);
             var table = new ILEmitTrieJumpTable(
                 defaultDestination,
@@ -93,7 +94,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             string path,
             int start,
             int length
-        ) {
+        )
+        {
             // Makes it easy to spot invalid tests
             Assert.Equal(entry.Length, length);
             Assert.Equal(entry, path.Substring(start, length), ignoreCase: true);
@@ -154,7 +156,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             string path,
             int start,
             int length
-        ) {
+        )
+        {
             // Makes it easy to spot invalid tests
             Assert.Equal(entry.Length, length);
             Assert.Equal(entry, path.Substring(start, length), ignoreCase: true);
@@ -218,7 +221,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             string path,
             int start,
             int length
-        ) {
+        )
+        {
             // Makes it easy to spot invalid tests
             Assert.Equal(entry.Length, length);
             Assert.NotEqual(entry, path.Substring(start, length));

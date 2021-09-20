@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             AnalyzerConfigOptions options,
             IEnumerable<AbstractFormattingRule> rules,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             CheckArguments(node, spans, options, rules);
 
             // quick exit check
@@ -75,7 +76,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             IEnumerable<AbstractFormattingRule> rules,
             IList<TextSpan> spansToFormat,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var spanToFormat = TextSpan.FromBounds(
                 spansToFormat[0].Start,
                 spansToFormat[spansToFormat.Count - 1].End
@@ -105,7 +107,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             IEnumerable<AbstractFormattingRule> rules,
             IList<TextSpan> spansToFormat,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             List<AbstractFormattingResult>? results = null;
             foreach (var pair in node.ConvertToTokenPairs(spansToFormat))
             {
@@ -141,7 +144,8 @@ namespace Microsoft.CodeAnalysis.Formatting
         private static bool AllowDisjointSpanMerging(
             IList<TextSpan> list,
             bool shouldUseFormattingSpanCollapse
-        ) {
+        )
+        {
             // If the user is specific about the formatting specific spans then honor users settings
             if (!shouldUseFormattingSpanCollapse)
             {
@@ -178,7 +182,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             IEnumerable<TextSpan> spans,
             AnalyzerConfigOptions options,
             IEnumerable<AbstractFormattingRule> rules
-        ) {
+        )
+        {
             if (node == null)
             {
                 throw new ArgumentNullException(nameof(node));

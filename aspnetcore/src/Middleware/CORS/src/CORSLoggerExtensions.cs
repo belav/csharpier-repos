@@ -122,7 +122,8 @@ namespace Microsoft.AspNetCore.Cors
         public static void AccessControlMethodNotAllowed(
             this ILogger logger,
             string accessControlMethod
-        ) {
+        )
+        {
             _accessControlMethodNotAllowed(logger, accessControlMethod, null);
         }
 

@@ -21,7 +21,8 @@ namespace System.Reflection.Context.Virtual
             MemberInfo member,
             ParameterInfo[] parameters,
             bool skipLastParameter
-        ) {
+        )
+        {
             int length = parameters.Length;
             if (skipLastParameter)
             {

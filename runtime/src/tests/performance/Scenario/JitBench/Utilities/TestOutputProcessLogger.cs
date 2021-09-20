@@ -122,7 +122,8 @@ namespace JitBench
             ProcessRunner runner,
             ProcessStream stream,
             string data
-        ) {
+        )
+        {
             StringBuilder lineBuffer = _lineBuffers[(int)stream];
             if (lineBuffer == null)
             {

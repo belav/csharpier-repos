@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             bool absent,
             CSharpParseOptions options = null,
             int? matchPriority = null
-        ) {
+        )
+        {
             MarkupTestFile.GetPosition(markup, out var code, out int position);
             await VerifyAtPositionAsync(
                 code,
@@ -90,7 +91,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             string insertText,
             CSharpParseOptions options,
             int? matchPriority
-        ) {
+        )
+        {
             text = text.Substring(0, position) + insertText + "/**/" + text.Substring(position);
 
             position += insertText.Length;
@@ -104,7 +106,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             bool absent,
             CSharpParseOptions options,
             int? matchPriority
-        ) {
+        )
+        {
             var tree = SyntaxFactory.ParseSyntaxTree(text, options: options);
             var compilation = CSharpCompilation.Create(
                 "test",
@@ -131,7 +134,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             int position,
             CSharpSyntaxContext context,
             int? matchPriority
-        ) {
+        )
+        {
             if (absent)
             {
                 if (RecommendKeywordsAsync != null)
@@ -203,7 +207,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             string insertText,
             CSharpParseOptions options,
             int? matchPriority
-        ) {
+        )
+        {
             text = text.Substring(0, position) + insertText + text.Substring(position);
 
             position += insertText.Length;
@@ -250,7 +255,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             string insertText,
             CSharpParseOptions options,
             int? matchPriority
-        ) {
+        )
+        {
             // only do this if the placeholder was at the end of the text.
             if (text.Length != position)
             {
@@ -300,7 +306,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             string text,
             CSharpParseOptions options = null,
             CSharpParseOptions scriptOptions = null
-        ) {
+        )
+        {
             // run the verification in both context(normal and script)
             await VerifyWorkerAsync(text, absent: false, options: options);
             await VerifyWorkerAsync(text, absent: false, options: scriptOptions ?? Options.Script);
@@ -324,7 +331,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             string text,
             CSharpParseOptions options = null,
             CSharpParseOptions scriptOptions = null
-        ) {
+        )
+        {
             // run the verification in both context(normal and script)
             await VerifyWorkerAsync(text, absent: true, options: options);
             await VerifyWorkerAsync(text, absent: true, options: scriptOptions ?? Options.Script);
@@ -348,7 +356,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             bool isAsync = false,
             string returnType = "void",
             bool topLevelStatement = false
-        ) {
+        )
+        {
             if (topLevelStatement)
             {
                 return returnType switch

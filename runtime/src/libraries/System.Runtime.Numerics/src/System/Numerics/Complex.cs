@@ -571,7 +571,8 @@ namespace System.Numerics
             out double b,
             out double bPrime,
             out double v
-        ) {
+        )
+        {
             // This method for the inverse complex sine (and cosine) is described in Hull, Fairgrieve,
             // and Tang, "Implementing the Complex Arcsine and Arccosine Functions Using Exception Handling",
             // ACM Transactions on Mathematical Software (1997)
@@ -766,7 +767,8 @@ namespace System.Numerics
                 if (
                     (Math.Abs(value.m_real) >= s_sqrtRescaleThreshold)
                     || (Math.Abs(value.m_imaginary) >= s_sqrtRescaleThreshold)
-                ) {
+                )
+                {
                     if (double.IsInfinity(value.m_imaginary) && !double.IsNaN(value.m_real))
                     {
                         // We need to handle infinite imaginary parts specially because otherwise

@@ -86,7 +86,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             public void AddRangeToCollection(
                 IPropertyBase propertyBase,
                 IEnumerable<object> addedEntities
-            ) {
+            )
+            {
                 var index = propertyBase.GetRelationshipIndex();
                 if (index != -1)
                 {

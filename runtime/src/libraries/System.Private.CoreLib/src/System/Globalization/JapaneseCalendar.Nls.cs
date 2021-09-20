@@ -201,7 +201,8 @@ namespace System.Globalization
                     NumberFormatInfo.InvariantInfo,
                     out int day
                 )
-            ) {
+            )
+            {
                 // Couldn't convert integer, fail
                 return null;
             }

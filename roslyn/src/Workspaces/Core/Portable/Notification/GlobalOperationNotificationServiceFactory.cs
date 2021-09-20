@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.Notification
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public GlobalOperationNotificationServiceFactory(
             IAsynchronousOperationListenerProvider listenerProvider
-        ) {
+        )
+        {
             _listener = listenerProvider.GetListener(FeatureAttribute.GlobalOperation);
             _singleton = new GlobalOperationNotificationService(_listener);
         }

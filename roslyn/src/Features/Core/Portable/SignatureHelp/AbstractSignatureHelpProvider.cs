@@ -57,7 +57,8 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
             IList<SignatureHelpItem> items,
             TextSpan applicableSpan,
             SignatureHelpState state
-        ) {
+        )
+        {
             return CreateSignatureHelpItems(items, applicableSpan, state, selectedItem: null);
         }
 
@@ -66,7 +67,8 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
             TextSpan applicableSpan,
             SignatureHelpState? state,
             int? selectedItem
-        ) {
+        )
+        {
             if (items == null || !items.Any() || state == null)
             {
                 return null;
@@ -92,7 +94,8 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
             IList<SignatureHelpItem> items,
             TextSpan applicableSpan,
             SignatureHelpState? state
-        ) {
+        )
+        {
             // We will have added all the accessible '.Add' methods that take at least one
             // arguments. However, in general the one-arg Add method is the least likely for the
             // user to invoke. For example, say there is:
@@ -123,7 +126,8 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
             IList<SignatureHelpItem> items,
             IEnumerable<string>? parameterNames,
             int? selectedItem
-        ) {
+        )
+        {
             if (parameterNames == null)
             {
                 return (items.ToList(), selectedItem);
@@ -153,7 +157,8 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
             int position,
             TextSpan currentSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
             return GetCurrentArgumentState(
@@ -182,7 +187,8 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
             IList<SymbolDisplayPart> suffixParts,
             IList<SignatureHelpSymbolParameter> parameters,
             IList<SymbolDisplayPart>? descriptionParts = null
-        ) {
+        )
+        {
             return CreateItem(
                 orderSymbol,
                 semanticModel,
@@ -210,7 +216,8 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
             IList<SymbolDisplayPart> suffixParts,
             IList<SignatureHelpSymbolParameter> parameters,
             IList<SymbolDisplayPart>? descriptionParts = null
-        ) {
+        )
+        {
             return CreateItemImpl(
                 orderSymbol,
                 semanticModel,
@@ -238,7 +245,8 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
             IList<SymbolDisplayPart> suffixParts,
             IList<SignatureHelpSymbolParameter> parameters,
             IList<SymbolDisplayPart>? descriptionParts
-        ) {
+        )
+        {
             prefixParts = anonymousTypeDisplayService.InlineDelegateAnonymousTypes(
                 prefixParts,
                 semanticModel,
@@ -323,7 +331,8 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
         private static SignatureHelpSymbolParameter ReplaceAnonymousTypes(
             SignatureHelpSymbolParameter parameter,
             AnonymousTypeDisplayInfo info
-        ) {
+        )
+        {
             return new SignatureHelpSymbolParameter(
                 parameter.Name,
                 parameter.IsOptional,
@@ -338,7 +347,8 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
             SemanticModel semanticModel,
             int position,
             IAnonymousTypeDisplayService anonymousTypeDisplayService
-        ) {
+        )
+        {
             return new SignatureHelpSymbolParameter(
                 parameter.Name,
                 parameter.IsOptional,
@@ -371,7 +381,8 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
             int position,
             SignatureHelpTriggerInfo triggerInfo,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var itemsForCurrentDocument = await GetItemsWorkerAsync(
                     document,
                     position,
@@ -417,7 +428,8 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
                         cancellationToken
                     ).Symbol
                         is not ISymbol symbol
-                ) {
+                )
+                {
                     finalItems.Add(item);
                     continue;
                 }
@@ -428,7 +440,8 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
                     symbol is IMethodSymbol methodSymbol
                     && methodSymbol.IsGenericMethod
                     && methodSymbol != methodSymbol.OriginalDefinition
-                ) {
+                )
+                {
                     symbolKey = SymbolKey.Create(
                         methodSymbol.OriginalDefinition,
                         cancellationToken
@@ -452,7 +465,8 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
                             ignoreAssemblyKey: true,
                             cancellationToken
                         ).Symbol == null
-                    ) {
+                    )
+                    {
                         invalidProjectsForCurrentSymbol.Add(relatedDocument.Project.Id);
                     }
                 }
@@ -479,7 +493,8 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
             int position,
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<Document>.GetInstance(out var builder);
             foreach (var relatedDocument in document.GetLinkedDocuments())
             {
@@ -488,7 +503,8 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
                 if (
                     !relatedDocument.GetRequiredLanguageService<ISyntaxFactsService>()
                         .IsInInactiveRegion(syntaxTree, position, cancellationToken)
-                ) {
+                )
+                {
                     builder.Add(relatedDocument);
                 }
             }
@@ -499,7 +515,8 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
         private static SignatureHelpItem UpdateItem(
             SignatureHelpItem item,
             SupportedPlatformData platformData
-        ) {
+        )
+        {
             var platformParts = platformData.ToDisplayParts().ToTaggedText();
             if (platformParts.Length == 0)
             {

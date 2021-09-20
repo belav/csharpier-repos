@@ -194,7 +194,8 @@ namespace System.Tests
         {
             foreach (
                 Lazy<InitiallyExceptionThrowingCtor> lazy in Ctor_ExceptionRecovery_MemberData()
-            ) {
+            )
+            {
                 InitiallyExceptionThrowingCtor.counter = 0;
                 InitiallyExceptionThrowingCtor result = null;
                 for (int i = 0; i < 10; ++i)
@@ -213,7 +214,8 @@ namespace System.Tests
             Lazy<int> lazy,
             ref int counter,
             int expected
-        ) {
+        )
+        {
             counter = 0;
             int result = 0;
             for (var i = 0; i < 10; ++i)
@@ -231,7 +233,8 @@ namespace System.Tests
             Lazy<string> lazy,
             ref int counter,
             string expected
-        ) {
+        )
+        {
             counter = 0;
             var result = default(string);
             for (var i = 0; i < 10; ++i)
@@ -901,7 +904,8 @@ namespace System.Tests
             T expectedValue,
             bool hasValue,
             bool isValueCreated
-        ) {
+        )
+        {
             Assert.Equal(isValueCreated, lazy.IsValueCreated);
             if (hasValue)
             {

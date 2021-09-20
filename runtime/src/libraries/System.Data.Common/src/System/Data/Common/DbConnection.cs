@@ -64,7 +64,8 @@ namespace System.Data.Common
         protected virtual ValueTask<DbTransaction> BeginDbTransactionAsync(
             IsolationLevel isolationLevel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (cancellationToken.IsCancellationRequested)
             {
                 return ValueTask.FromCanceled<DbTransaction>(cancellationToken);
@@ -115,7 +116,8 @@ namespace System.Data.Common
         public virtual Task ChangeDatabaseAsync(
             string databaseName,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (cancellationToken.IsCancellationRequested)
             {
                 return Task.FromCanceled(cancellationToken);
@@ -257,7 +259,8 @@ namespace System.Data.Common
         public virtual Task<DataTable> GetSchemaAsync(
             string collectionName,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (cancellationToken.IsCancellationRequested)
             {
                 return Task.FromCanceled<DataTable>(cancellationToken);
@@ -291,7 +294,8 @@ namespace System.Data.Common
             string collectionName,
             string?[] restrictionValues,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (cancellationToken.IsCancellationRequested)
             {
                 return Task.FromCanceled<DataTable>(cancellationToken);

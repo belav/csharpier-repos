@@ -123,7 +123,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 var microsoftDotCom = new X509Certificate2(
                     TestData.MicrosoftDotComLegacySslCertBytes
                 )
-            ) {
+            )
+            {
                 // Fails because expired (NotAfter = 10/16/2016)
                 Assert.False(microsoftDotCom.Verify(), "MicrosoftDotComLegacySslCertBytes");
             }
@@ -132,7 +133,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 var microsoftDotComIssuer = new X509Certificate2(
                     TestData.MicrosoftDotComIssuerBytes
                 )
-            ) {
+            )
+            {
                 // NotAfter=10/8/2024, 7:00:00 AM UTC
                 success = microsoftDotComIssuer.Verify();
                 if (!success)
@@ -151,7 +153,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     var microsoftDotComRoot = new X509Certificate2(
                         TestData.MicrosoftDotComRootBytes
                     )
-                ) {
+                )
+                {
                     // NotAfter=7/17/2025
                     success = microsoftDotComRoot.Verify();
                     if (!success)
@@ -238,14 +241,16 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [MemberData(nameof(StorageFlags))]
         public static void X509Certificate2ToStringVerbose_WithPrivateKey(
             X509KeyStorageFlags keyStorageFlags
-        ) {
+        )
+        {
             using (
                 var cert = new X509Certificate2(
                     TestData.PfxData,
                     TestData.PfxDataPassword,
                     keyStorageFlags
                 )
-            ) {
+            )
+            {
                 string certToString = cert.ToString(true);
                 Assert.Contains(PrivateKeySectionHeader, certToString);
                 Assert.Contains(PublicKeySectionHeader, certToString);
@@ -256,7 +261,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [MemberData(nameof(StorageFlags))]
         public static void X509Certificate2ToStringVerbose_WithPrivateKey_FromSpans(
             X509KeyStorageFlags keyStorageFlags
-        ) {
+        )
+        {
             Span<char> pwTmp = stackalloc char[30];
             pwTmp.Fill('Z');
             TestData.PfxDataPassword.AsSpan().CopyTo(pwTmp);
@@ -316,7 +322,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     TestFiles.ChainPfxFile,
                     TestData.ChainPfxPassword
                 )
-            ) {
+            )
+            {
                 // OID=RSA Encryption
                 Assert.Equal("1.2.840.113549.1.1.1", cert2.GetKeyAlgorithm());
             }
@@ -478,7 +485,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     TestData.PfxData,
                     TestData.PfxDataPassword
                 )
-            ) {
+            )
+            {
                 Assert.True(fromPfx.HasPrivateKey, "fromPfx.HasPrivateKey - before");
 
                 byte[] serializedCert = fromPfx.Export(X509ContentType.SerializedCert);

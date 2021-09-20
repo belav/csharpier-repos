@@ -31,7 +31,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         public VisualStudioDecompilerEulaService(
             SVsServiceProvider serviceProvider,
             IThreadingContext threadingContext
-        ) {
+        )
+        {
             _serviceProvider = (IAsyncServiceProvider)serviceProvider;
             _threadingContext = threadingContext;
         }
@@ -55,7 +56,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
         private async ValueTask<RoslynPackage?> TryGetRoslynPackageAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (_roslynPackage is null)
             {
                 await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
@@ -74,7 +76,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                             out var package
                         )
                     )
-                ) {
+                )
+                {
                     _roslynPackage = (RoslynPackage)package;
                 }
             }

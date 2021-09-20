@@ -185,7 +185,8 @@ namespace JIT.HardwareIntrinsics.General
             Int16 result,
             Int16[] values,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             if (result != values[3])
             {
                 Succeeded = false;
@@ -206,7 +207,8 @@ namespace JIT.HardwareIntrinsics.General
             Int16[] values,
             Int16 insertedValue,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Int16[] resultElements = new Int16[ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<Int16, byte>(ref resultElements[0]), result);
             ValidateWithResult(resultElements, values, insertedValue, method);
@@ -217,7 +219,8 @@ namespace JIT.HardwareIntrinsics.General
             Int16[] values,
             Int16 insertedValue,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             for (int i = 0; i < ElementCount; i++)

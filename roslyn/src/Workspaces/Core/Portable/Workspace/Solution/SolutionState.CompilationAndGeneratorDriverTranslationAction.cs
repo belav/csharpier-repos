@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis
             public virtual Task<Compilation> TransformCompilationAsync(
                 Compilation oldCompilation,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return Task.FromResult(oldCompilation);
             }
         }

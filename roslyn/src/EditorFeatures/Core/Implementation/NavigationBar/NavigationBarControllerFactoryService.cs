@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
             IThreadingContext threadingContext,
             IWaitIndicator waitIndicator,
             IAsynchronousOperationListenerProvider listenerProvider
-        ) {
+        )
+        {
             _threadingContext = threadingContext;
             _waitIndicator = waitIndicator;
             _asyncListener = listenerProvider.GetListener(FeatureAttribute.NavigationBar);
@@ -36,7 +37,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
         public INavigationBarController CreateController(
             INavigationBarPresenter presenter,
             ITextBuffer textBuffer
-        ) {
+        )
+        {
             return new NavigationBarController(
                 _threadingContext,
                 presenter,

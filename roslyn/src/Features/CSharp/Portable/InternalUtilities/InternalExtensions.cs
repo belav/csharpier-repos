@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             this ArgumentSyntax argument,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return DetermineParameterType(argument.Expression, semanticModel, cancellationToken);
         }
 
@@ -25,7 +26,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ExpressionSyntax expression,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (expression is DeclarationExpressionSyntax decl)
             {
                 var typeInfo = semanticModel.GetTypeInfo(decl.Type, cancellationToken);

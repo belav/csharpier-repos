@@ -204,7 +204,8 @@ namespace AutoMapper.UnitTests.CustomMapping
                 IDictionary<TKey, TValue> source,
                 IDictionary<TKey, TValue> destination,
                 ResolutionContext context
-            ) {
+            )
+            {
                 return Instance;
             }
         }
@@ -357,7 +358,8 @@ namespace AutoMapper.UnitTests.CustomMapping
                 Source source,
                 Destination destination,
                 ResolutionContext context
-            ) {
+            )
+            {
                 return new Destination { OtherValue = source.Value + 10 };
             }
         }
@@ -403,7 +405,8 @@ namespace AutoMapper.UnitTests.CustomMapping
                 Source source,
                 Destination destination,
                 ResolutionContext context
-            ) {
+            )
+            {
                 return new Destination { OtherValue = source.Value + 10 };
             }
         }

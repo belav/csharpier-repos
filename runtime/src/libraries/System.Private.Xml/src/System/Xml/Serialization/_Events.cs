@@ -25,7 +25,8 @@ namespace System.Xml.Serialization
             int linePosition,
             object? o,
             string? qnames
-        ) {
+        )
+        {
             _attr = attr;
             _o = o;
             _qnames = qnames;
@@ -84,7 +85,8 @@ namespace System.Xml.Serialization
             int linePosition,
             object? o,
             string? qnames
-        ) {
+        )
+        {
             _elem = elem;
             _o = o;
             _qnames = qnames;

@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis
             string name,
             Version version,
             byte[] publicKeyTokenBytes
-        ) {
+        )
+        {
             var fileName = name + ".dll";
 
             // First check to see if the assembly lives alongside mscorlib.dll.
@@ -82,14 +83,16 @@ namespace Microsoft.CodeAnalysis
                 if (
                     version != null
                     && !assemblyDir.Name.StartsWith(version.ToString(), StringComparison.Ordinal)
-                ) {
+                )
+                {
                     continue;
                 }
 
                 if (
                     publicKeyToken != null
                     && !assemblyDir.Name.EndsWith(publicKeyToken, StringComparison.Ordinal)
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -104,7 +107,8 @@ namespace Microsoft.CodeAnalysis
         private static IEnumerable<(AssemblyIdentity Identity, string Path)> GetAssemblyIdentitiesAndPaths(
             AssemblyName name,
             ImmutableArray<ProcessorArchitecture> architectureFilter
-        ) {
+        )
+        {
             if (name == null)
             {
                 return GetAssemblyIdentitiesAndPaths(null, null, null, architectureFilter);
@@ -123,7 +127,8 @@ namespace Microsoft.CodeAnalysis
             Version version,
             byte[] publicKeyToken,
             ImmutableArray<ProcessorArchitecture> architectureFilter
-        ) {
+        )
+        {
             var assemblyPaths = GetGacAssemblyPaths(s_gacDirectory, name, version, publicKeyToken);
 
             foreach (var assemblyPath in assemblyPaths)
@@ -140,7 +145,8 @@ namespace Microsoft.CodeAnalysis
                     && architectureFilter != default(ImmutableArray<ProcessorArchitecture>)
                     && architectureFilter.Length > 0
                     && !architectureFilter.Contains(gacAssemblyName.ProcessorArchitecture)
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -159,7 +165,8 @@ namespace Microsoft.CodeAnalysis
             AssemblyName partialName,
             ImmutableArray<ProcessorArchitecture> architectureFilter =
                 default(ImmutableArray<ProcessorArchitecture>)
-        ) {
+        )
+        {
             return GetAssemblyIdentitiesAndPaths(partialName, architectureFilter)
                 .Select(identityAndPath => identityAndPath.Item1);
         }
@@ -168,7 +175,8 @@ namespace Microsoft.CodeAnalysis
             string partialName = null,
             ImmutableArray<ProcessorArchitecture> architectureFilter =
                 default(ImmutableArray<ProcessorArchitecture>)
-        ) {
+        )
+        {
             AssemblyName name;
             try
             {
@@ -185,7 +193,8 @@ namespace Microsoft.CodeAnalysis
         public override IEnumerable<string> GetAssemblySimpleNames(
             ImmutableArray<ProcessorArchitecture> architectureFilter =
                 default(ImmutableArray<ProcessorArchitecture>)
-        ) {
+        )
+        {
             return GetAssemblyIdentitiesAndPaths(
                     name: null,
                     version: null,
@@ -201,7 +210,8 @@ namespace Microsoft.CodeAnalysis
             out string location,
             ImmutableArray<ProcessorArchitecture> architectureFilter,
             CultureInfo preferredCulture
-        ) {
+        )
+        {
             if (displayName == null)
             {
                 throw new ArgumentNullException(nameof(displayName));
@@ -223,7 +233,8 @@ namespace Microsoft.CodeAnalysis
                     assemblyName,
                     architectureFilter
                 )
-            ) {
+            )
+            {
                 var assemblyPath = identityAndPath.Path;
 
                 if (!File.Exists(assemblyPath))

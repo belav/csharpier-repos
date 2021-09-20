@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Suppression
             Func<SyntaxNode, SyntaxNode> formatNode,
             bool needsLeadingEndOfLine,
             bool needsTrailingEndOfLine
-        ) {
+        )
+        {
             var restoreKeyword = SyntaxFactory.Token(SyntaxKind.RestoreKeyword);
             return CreatePragmaDirectiveTrivia(
                 restoreKeyword,
@@ -59,7 +60,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Suppression
             Func<SyntaxNode, SyntaxNode> formatNode,
             bool needsLeadingEndOfLine,
             bool needsTrailingEndOfLine
-        ) {
+        )
+        {
             var disableKeyword = SyntaxFactory.Token(SyntaxKind.DisableKeyword);
             return CreatePragmaDirectiveTrivia(
                 disableKeyword,
@@ -76,7 +78,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Suppression
             Func<SyntaxNode, SyntaxNode> formatNode,
             bool needsLeadingEndOfLine,
             bool needsTrailingEndOfLine
-        ) {
+        )
+        {
             var diagnosticId = GetOrMapDiagnosticId(diagnostic, out var includeTitle);
             var id = SyntaxFactory.IdentifierName(diagnosticId);
             var ids = new SeparatedSyntaxList<ExpressionSyntax>().Add(id);
@@ -140,7 +143,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Suppression
             Compilation compilation,
             IAddImportsService addImportsService,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var compilationRoot = (CompilationUnitSyntax)newRoot;
             var isFirst = !compilationRoot.AttributeLists.Any();
 
@@ -171,7 +175,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Suppression
             ISymbol targetSymbol,
             INamedTypeSymbol suppressMessageAttribute,
             Diagnostic diagnostic
-        ) {
+        )
+        {
             var memberNode = (MemberDeclarationSyntax)targetNode;
 
             SyntaxTriviaList leadingTriviaForAttributeList;
@@ -209,7 +214,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Suppression
             bool isAssemblyAttribute,
             SyntaxTriviaList leadingTrivia,
             bool needsLeadingEndOfLine
-        ) {
+        )
+        {
             var attributeArguments = CreateAttributeArguments(
                 targetSymbol,
                 diagnostic,
@@ -248,7 +254,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Suppression
             ISymbol targetSymbol,
             Diagnostic diagnostic,
             bool isAssemblyAttribute
-        ) {
+        )
+        {
             // SuppressMessage("Rule Category", "Rule Id", Justification = nameof(Justification), Scope = nameof(Scope), Target = nameof(Target))
             var category = SyntaxFactory.LiteralExpression(
                 SyntaxKind.StringLiteralExpression,
@@ -331,7 +338,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Suppression
             string id,
             out bool enableDirective,
             out bool hasMultipleIds
-        ) {
+        )
+        {
             if (trivia.Kind() == SyntaxKind.PragmaWarningDirectiveTrivia)
             {
                 var pragmaWarning = (PragmaWarningDirectiveTriviaSyntax)trivia.GetStructure();
@@ -368,14 +376,16 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Suppression
             SyntaxNode root,
             TextLineCollection lines,
             int indexOfLine
-        ) {
+        )
+        {
             var nextToken = token.GetNextToken();
             if (
                 nextToken.Kind() == SyntaxKind.SemicolonToken
                 && nextToken.Parent is StatementSyntax statement
                 && statement.GetLastToken() == nextToken
                 && token.Parent.FirstAncestorOrSelf<StatementSyntax>() == statement
-            ) {
+            )
+            {
                 // both the current and next tokens belong to the same statement, and the next token
                 // is the final semicolon in a statement.  Do not put the pragma before that
                 // semicolon.  Place it after the semicolon so the statement stays whole.

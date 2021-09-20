@@ -25,7 +25,8 @@ namespace System.Xml
             Stream stream,
             bool includeComments,
             string[]? inclusivePrefixes
-        ) {
+        )
+        {
             _writer = writer;
             if (_signingWriter == null)
                 _signingWriter = new XmlCanonicalWriter();
@@ -89,7 +90,8 @@ namespace System.Xml
             byte[] localNameBuffer,
             int localNameOffset,
             int localNameLength
-        ) {
+        )
+        {
             _writer.WriteStartElement(
                 prefixBuffer,
                 prefixOffset,
@@ -142,7 +144,8 @@ namespace System.Xml
             byte[] nsBuffer,
             int nsOffset,
             int nsLength
-        ) {
+        )
+        {
             _writer.WriteXmlnsAttribute(
                 prefixBuffer,
                 prefixOffset,
@@ -181,7 +184,8 @@ namespace System.Xml
             byte[] localNameBuffer,
             int localNameOffset,
             int localNameLength
-        ) {
+        )
+        {
             _writer.WriteStartAttribute(
                 prefixBuffer,
                 prefixOffset,
@@ -398,7 +402,8 @@ namespace System.Xml
             byte[] buffer,
             int offset,
             int count
-        ) {
+        )
+        {
             if (trailByteCount > 0)
                 WriteBase64Text(trailBytes, 0, trailByteCount);
             WriteBase64Text(buffer, offset, count);

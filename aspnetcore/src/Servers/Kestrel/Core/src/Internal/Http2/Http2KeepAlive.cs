@@ -36,7 +36,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
             TimeSpan keepAliveInterval,
             TimeSpan keepAliveTimeout,
             ISystemClock systemClock
-        ) {
+        )
+        {
             _keepAliveInterval = keepAliveInterval;
             _keepAliveTimeout = keepAliveTimeout;
             _systemClock = systemClock;

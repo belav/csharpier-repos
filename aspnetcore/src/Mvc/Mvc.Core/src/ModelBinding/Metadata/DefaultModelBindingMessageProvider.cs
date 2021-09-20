@@ -61,7 +61,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
         /// <param name="originalProvider">The <see cref="DefaultModelBindingMessageProvider"/> to duplicate.</param>
         public DefaultModelBindingMessageProvider(
             DefaultModelBindingMessageProvider originalProvider
-        ) {
+        )
+        {
             if (originalProvider == null)
             {
                 throw new ArgumentNullException(nameof(originalProvider));
@@ -99,7 +100,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
         [MemberNotNull(nameof(_missingBindRequiredValueAccessor))]
         public void SetMissingBindRequiredValueAccessor(
             Func<string, string> missingBindRequiredValueAccessor
-        ) {
+        )
+        {
             if (missingBindRequiredValueAccessor == null)
             {
                 throw new ArgumentNullException(nameof(missingBindRequiredValueAccessor));
@@ -137,7 +139,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
         [MemberNotNull(nameof(_missingRequestBodyRequiredValueAccessor))]
         public void SetMissingRequestBodyRequiredValueAccessor(
             Func<string> missingRequestBodyRequiredValueAccessor
-        ) {
+        )
+        {
             if (missingRequestBodyRequiredValueAccessor == null)
             {
                 throw new ArgumentNullException(nameof(missingRequestBodyRequiredValueAccessor));
@@ -176,7 +179,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
         [MemberNotNull(nameof(_attemptedValueIsInvalidAccessor))]
         public void SetAttemptedValueIsInvalidAccessor(
             Func<string, string, string> attemptedValueIsInvalidAccessor
-        ) {
+        )
+        {
             if (attemptedValueIsInvalidAccessor == null)
             {
                 throw new ArgumentNullException(nameof(attemptedValueIsInvalidAccessor));
@@ -196,7 +200,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
         [MemberNotNull(nameof(_nonPropertyAttemptedValueIsInvalidAccessor))]
         public void SetNonPropertyAttemptedValueIsInvalidAccessor(
             Func<string, string> nonPropertyAttemptedValueIsInvalidAccessor
-        ) {
+        )
+        {
             if (nonPropertyAttemptedValueIsInvalidAccessor == null)
             {
                 throw new ArgumentNullException(nameof(nonPropertyAttemptedValueIsInvalidAccessor));
@@ -217,7 +222,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
         [MemberNotNull(nameof(_unknownValueIsInvalidAccessor))]
         public void SetUnknownValueIsInvalidAccessor(
             Func<string, string> unknownValueIsInvalidAccessor
-        ) {
+        )
+        {
             if (unknownValueIsInvalidAccessor == null)
             {
                 throw new ArgumentNullException(nameof(unknownValueIsInvalidAccessor));
@@ -237,7 +243,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
         [MemberNotNull(nameof(_nonPropertyUnknownValueIsInvalidAccessor))]
         public void SetNonPropertyUnknownValueIsInvalidAccessor(
             Func<string> nonPropertyUnknownValueIsInvalidAccessor
-        ) {
+        )
+        {
             if (nonPropertyUnknownValueIsInvalidAccessor == null)
             {
                 throw new ArgumentNullException(nameof(nonPropertyUnknownValueIsInvalidAccessor));
@@ -294,7 +301,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
         [MemberNotNull(nameof(_nonPropertyValueMustBeANumberAccessor))]
         public void SetNonPropertyValueMustBeANumberAccessor(
             Func<string> nonPropertyValueMustBeANumberAccessor
-        ) {
+        )
+        {
             if (nonPropertyValueMustBeANumberAccessor == null)
             {
                 throw new ArgumentNullException(nameof(nonPropertyValueMustBeANumberAccessor));

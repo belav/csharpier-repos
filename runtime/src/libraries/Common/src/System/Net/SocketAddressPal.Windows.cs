@@ -46,7 +46,8 @@ namespace System.Net
             ReadOnlySpan<byte> buffer,
             Span<byte> address,
             out uint scope
-        ) {
+        )
+        {
             buffer.Slice(8, address.Length).CopyTo(address);
 
             scope = BinaryPrimitives.ReadUInt32LittleEndian(buffer.Slice(24));

@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis
                 GreenNode greenNode,
                 int index,
                 int position
-            ) {
+            )
+            {
                 _token = token;
                 _singleNodeOrList = greenNode;
                 _baseIndex = index;

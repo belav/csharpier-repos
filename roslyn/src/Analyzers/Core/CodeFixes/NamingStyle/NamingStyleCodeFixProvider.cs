@@ -117,7 +117,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.NamingStyles
             ISymbol symbol,
             string fixedName,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return await Renamer.RenameSymbolAsync(
                     document.Project.Solution,
                     symbol,
@@ -149,7 +150,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.NamingStyles
                 string title,
                 Func<CancellationToken, Task<Solution>> createChangedSolutionAsync,
                 string equivalenceKey
-            ) {
+            )
+            {
 #if !CODE_STYLE
                 _startingSolution = startingSolution;
                 _symbol = symbol;
@@ -172,7 +174,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.NamingStyles
             }
             protected override async Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var newSolution = await _createChangedSolutionAsync(cancellationToken)
                     .ConfigureAwait(false);
                 var codeAction = new ApplyChangesOperation(newSolution);

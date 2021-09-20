@@ -75,7 +75,8 @@ namespace System.ComponentModel.Tests
             object instance,
             string message,
             Exception innerException
-        ) {
+        )
+        {
             var exception = new LicenseException(type, instance, message, innerException);
             Assert.Same(innerException, exception.InnerException);
             Assert.Equal(-2146232063, exception.HResult);

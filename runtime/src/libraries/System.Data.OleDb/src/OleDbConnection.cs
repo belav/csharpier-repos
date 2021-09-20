@@ -101,7 +101,8 @@ namespace System.Data.OleDb
                         DbConnectionOptions.DataDirectory,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     OleDbConnectionInternal connection = GetOpenConnection();
                     if (null != connection)
                     {
@@ -143,7 +144,8 @@ namespace System.Data.OleDb
                         DbConnectionOptions.DataDirectory,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     if (IsOpen)
                     {
                         value = GetDataSourceValue(
@@ -153,7 +155,8 @@ namespace System.Data.OleDb
                         if (
                             (null == value)
                             || ((value is string) && (0 == (value as string)!.Length))
-                        ) {
+                        )
+                        {
                             value = GetDataSourceValue(
                                 OleDbPropertySetGuid.DataSourceInfo,
                                 ODB.DBPROP_DATASOURCENAME
@@ -450,7 +453,8 @@ namespace System.Data.OleDb
             string method,
             out string quotePrefix,
             out string quoteSuffix
-        ) {
+        )
+        {
             CheckStateOpen(method);
             OleDbConnectionPoolGroupProviderInfo info = ProviderInfo;
             if (info.HasQuoteFix)
@@ -535,7 +539,8 @@ namespace System.Data.OleDb
         internal void OnInfoMessage(
             UnsafeNativeMethods.IErrorInfo errorInfo,
             OleDbHResult errorCode
-        ) {
+        )
+        {
             OleDbInfoMessageEventHandler? handler = (OleDbInfoMessageEventHandler?)Events[
                 EventInfoMessage
             ];
@@ -578,7 +583,8 @@ namespace System.Data.OleDb
                         & ((OleDbConnectionString)(this.ConnectionOptions!)).OleDbServices
                     )
                 ) && ADP.NeedManualEnlistment()
-            ) {
+            )
+            {
                 GetOpenConnection().EnlistTransactionInternal(SysTx.Transaction.Current);
             }
         }
@@ -589,7 +595,8 @@ namespace System.Data.OleDb
             string description,
             bool required,
             object value
-        ) {
+        )
+        {
             CheckStateOpen(ADP.SetProperties);
             OleDbHResult hr;
             using (IDBPropertiesWrapper idbProperties = IDBProperties())
@@ -601,7 +608,8 @@ namespace System.Data.OleDb
                         required,
                         value
                     )
-                ) {
+                )
+                {
                     hr = idbProperties.Value.SetProperties(propSet.PropertySetCount, propSet);
 
                     if (hr < 0)
@@ -646,11 +654,13 @@ namespace System.Data.OleDb
             OleDbHResult hresult,
             OleDbConnection? connection,
             object? src
-        ) {
+        )
+        {
             if (
                 (0 <= (int)hresult)
                 && ((null == connection) || (null == connection.Events[EventInfoMessage]))
-            ) {
+            )
+            {
                 SafeNativeMethods.Wrapper.ClearErrorInfo();
                 return null;
             }

@@ -75,7 +75,8 @@ namespace Microsoft.EntityFrameworkCore
             Func<DbContext, Category, ValueTask<EntityEntry<Category>>> categoryAdder,
             Func<DbContext, Product, ValueTask<EntityEntry<Product>>> productAdder,
             EntityState expectedState
-        ) {
+        )
+        {
             using var context = new EarlyLearningCenter(
                 InMemoryTestHelpers.Instance.CreateServiceProvider()
             );
@@ -196,7 +197,8 @@ namespace Microsoft.EntityFrameworkCore
         private static async Task TrackMultipleEntitiesTest(
             Func<DbContext, object[], Task> adder,
             EntityState expectedState
-        ) {
+        )
+        {
             using var context = new EarlyLearningCenter(
                 InMemoryTestHelpers.Instance.CreateServiceProvider()
             );
@@ -304,7 +306,8 @@ namespace Microsoft.EntityFrameworkCore
             Func<DbContext, Category, ValueTask<EntityEntry<Category>>> categoryAdder,
             Func<DbContext, Product, ValueTask<EntityEntry<Product>>> productAdder,
             EntityState expectedState
-        ) {
+        )
+        {
             using var context = new EarlyLearningCenter(
                 InMemoryTestHelpers.Instance.CreateServiceProvider()
             );
@@ -407,7 +410,8 @@ namespace Microsoft.EntityFrameworkCore
             Func<DbContext, object[], Task> categoryAdder,
             Func<DbContext, object[], Task> productAdder,
             EntityState expectedState
-        ) {
+        )
+        {
             using var context = new EarlyLearningCenter(
                 InMemoryTestHelpers.Instance.CreateServiceProvider()
             );
@@ -465,7 +469,8 @@ namespace Microsoft.EntityFrameworkCore
         private static void TrackNoEntitiesTest(
             Action<DbContext> categoryAdder,
             Action<DbContext> productAdder
-        ) {
+        )
+        {
             using var context = new EarlyLearningCenter(
                 InMemoryTestHelpers.Instance.CreateServiceProvider()
             );
@@ -539,7 +544,8 @@ namespace Microsoft.EntityFrameworkCore
             Func<DbContext, object, ValueTask<EntityEntry>> categoryAdder,
             Func<DbContext, object, ValueTask<EntityEntry>> productAdder,
             EntityState expectedState
-        ) {
+        )
+        {
             using var context = new EarlyLearningCenter(
                 InMemoryTestHelpers.Instance.CreateServiceProvider()
             );
@@ -660,7 +666,8 @@ namespace Microsoft.EntityFrameworkCore
         private static async Task TrackMultipleEntitiesTestEnumerable(
             Func<DbContext, IEnumerable<object>, Task> adder,
             EntityState expectedState
-        ) {
+        )
+        {
             using var context = new EarlyLearningCenter(
                 InMemoryTestHelpers.Instance.CreateServiceProvider()
             );
@@ -768,7 +775,8 @@ namespace Microsoft.EntityFrameworkCore
             Func<DbContext, object, ValueTask<EntityEntry>> categoryAdder,
             Func<DbContext, object, ValueTask<EntityEntry>> productAdder,
             EntityState expectedState
-        ) {
+        )
+        {
             using var context = new EarlyLearningCenter(
                 InMemoryTestHelpers.Instance.CreateServiceProvider()
             );
@@ -871,7 +879,8 @@ namespace Microsoft.EntityFrameworkCore
             Func<DbContext, IEnumerable<object>, Task> categoryAdder,
             Func<DbContext, IEnumerable<object>, Task> productAdder,
             EntityState expectedState
-        ) {
+        )
+        {
             using var context = new EarlyLearningCenter(
                 InMemoryTestHelpers.Instance.CreateServiceProvider()
             );
@@ -929,7 +938,8 @@ namespace Microsoft.EntityFrameworkCore
         private static void TrackNoEntitiesTestEnumerable(
             Action<DbContext, IEnumerable<object>> categoryAdder,
             Action<DbContext, IEnumerable<object>> productAdder
-        ) {
+        )
+        {
             using var context = new EarlyLearningCenter(
                 InMemoryTestHelpers.Instance.CreateServiceProvider()
             );
@@ -949,7 +959,8 @@ namespace Microsoft.EntityFrameworkCore
             bool attachFirst,
             bool useEntry,
             bool async
-        ) {
+        )
+        {
             using var context = new EarlyLearningCenter(
                 InMemoryTestHelpers.Instance.CreateServiceProvider()
             );
@@ -1156,7 +1167,8 @@ namespace Microsoft.EntityFrameworkCore
             Func<DbContext, object, ValueTask<EntityEntry>> action,
             EntityState initialState,
             EntityState expectedState
-        ) {
+        )
+        {
             using var context = new EarlyLearningCenter(
                 InMemoryTestHelpers.Instance.CreateServiceProvider()
             );

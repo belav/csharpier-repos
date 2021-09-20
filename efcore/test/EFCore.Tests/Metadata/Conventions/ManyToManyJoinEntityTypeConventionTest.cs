@@ -417,7 +417,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
         private InternalSkipNavigationBuilder RunConvention(
             InternalSkipNavigationBuilder skipNavBuilder
-        ) {
+        )
+        {
             var context = new ConventionContext<IConventionSkipNavigationBuilder>(
                 skipNavBuilder.Metadata.DeclaringEntityType.Model.ConventionDispatcher
             );

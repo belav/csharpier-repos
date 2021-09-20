@@ -147,7 +147,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             PEModule module,
             MetadataImportOptions importOptions,
             int ordinal
-        ) {
+        )
+        {
             Debug.Assert((object)assemblySymbol != null);
             Debug.Assert(module != null);
 
@@ -238,7 +239,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 {
                     foreach (
                         var qualifier in Cci.MetadataWriter.dummyAssemblyAttributeParentQualifier
-                    ) {
+                    )
+                    {
                         EntityHandle typerefAssemblyAttributesGoHere = Module.GetTypeRef(
                             assemblyMSCorLib,
                             Cci.MetadataWriter.dummyAssemblyAttributeParentNamespace,
@@ -253,7 +255,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                                     var customAttributeHandle in Module.GetCustomAttributesOrThrow(
                                         typerefAssemblyAttributesGoHere
                                     )
-                                ) {
+                                )
+                                {
                                     if (moduleAssemblyAttributesBuilder == null)
                                     {
                                         moduleAssemblyAttributesBuilder =
@@ -283,7 +286,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         internal void LoadCustomAttributes(
             EntityHandle token,
             ref ImmutableArray<CSharpAttributeData> customAttributes
-        ) {
+        )
+        {
             var loaded = GetCustomAttributesForToken(token);
             ImmutableInterlocked.InterlockedInitialize(ref customAttributes, loaded);
         }
@@ -293,7 +297,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             ref ImmutableArray<CSharpAttributeData> customAttributes,
             out bool foundExtension,
             out bool foundReadOnly
-        ) {
+        )
+        {
             var loadedCustomAttributes = GetCustomAttributesFilterCompilerAttributes(
                 token,
                 out foundExtension,
@@ -308,7 +313,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         internal void LoadCustomAttributesFilterExtensions(
             EntityHandle token,
             ref ImmutableArray<CSharpAttributeData> customAttributes
-        ) {
+        )
+        {
             var loadedCustomAttributes = GetCustomAttributesFilterCompilerAttributes(
                 token,
                 out _,
@@ -324,7 +330,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             EntityHandle token,
             out CustomAttributeHandle filteredOutAttribute1,
             AttributeDescription filterOut1
-        ) {
+        )
+        {
             return GetCustomAttributesForToken(
                 token,
                 out filteredOutAttribute1,
@@ -352,7 +359,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             AttributeDescription filterOut3,
             out CustomAttributeHandle filteredOutAttribute4,
             AttributeDescription filterOut4
-        ) {
+        )
+        {
             filteredOutAttribute1 = default;
             filteredOutAttribute2 = default;
             filteredOutAttribute3 = default;
@@ -427,7 +435,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         internal ImmutableArray<CSharpAttributeData> GetCustomAttributesForToken(
             EntityHandle token,
             out CustomAttributeHandle paramArrayAttribute
-        ) {
+        )
+        {
             return GetCustomAttributesForToken(
                 token,
                 out paramArrayAttribute,
@@ -452,7 +461,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         internal TypeSymbol TryDecodeAttributeWithTypeArgument(
             EntityHandle handle,
             AttributeDescription attributeDescription
-        ) {
+        )
+        {
             string typeName;
             if (_module.HasStringValuedAttribute(handle, attributeDescription, out typeName))
             {
@@ -472,7 +482,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             EntityHandle token,
             out bool foundExtension,
             out bool foundReadOnly
-        ) {
+        )
+        {
             var result = GetCustomAttributesForToken(
                 token,
                 filteredOutAttribute1: out CustomAttributeHandle extensionAttribute,
@@ -492,7 +503,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
         internal void OnNewTypeDeclarationsLoaded(
             Dictionary<string, ImmutableArray<PENamedTypeSymbol>> typesDict
-        ) {
+        )
+        {
             bool keepLookingForDeclaredCorTypes = (
                 _ordinal == 0 && _assemblySymbol.KeepLookingForDeclaredSpecialTypes
             );
@@ -668,7 +680,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                                 currResult,
                                 TypeCompareKind.ConsiderEverything2
                             )
-                        ) {
+                        )
+                        {
                             referencedAssemblyResult = null;
                         }
                         break;
@@ -733,7 +746,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         internal NamedTypeSymbol LookupTopLevelMetadataType(
             ref MetadataTypeName emittedName,
             out bool isNoPiaLocalType
-        ) {
+        )
+        {
             NamedTypeSymbol result;
             PENamespaceSymbol scope = (PENamespaceSymbol)this.GlobalNamespace.LookupNestedNamespace(
                 emittedName.NamespaceSegments
@@ -764,7 +778,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         /// </remarks>
         internal (AssemblySymbol FirstSymbol, AssemblySymbol SecondSymbol) GetAssembliesForForwardedType(
             ref MetadataTypeName fullName
-        ) {
+        )
+        {
             string matchedName;
             (int firstIndex, int secondIndex) = this.Module.GetAssemblyRefsForForwardedType(
                 fullName.FullName,
@@ -795,7 +810,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     string,
                     (int FirstIndex, int SecondIndex)
                 > forwarder in Module.GetForwardedTypes()
-            ) {
+            )
+            {
                 var name = MetadataTypeName.FromFullName(forwarder.Key);
 
                 Debug.Assert(

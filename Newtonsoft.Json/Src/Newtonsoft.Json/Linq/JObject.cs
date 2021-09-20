@@ -205,11 +205,13 @@ namespace Newtonsoft.Json.Linq
                     if (
                         !(existingProperty.Value is JContainer existingContainer)
                         || existingContainer.Type != contentItem.Value.Type
-                    ) {
+                    )
+                    {
                         if (
                             !IsNull(contentItem.Value)
                             || settings?.MergeNullValueHandling == MergeNullValueHandling.Merge
-                        ) {
+                        )
+                        {
                             existingProperty.Value = contentItem.Value;
                         }
                     }
@@ -616,7 +618,8 @@ namespace Newtonsoft.Json.Linq
             string propertyName,
             StringComparison comparison,
             [NotNullWhen(true)] out JToken? value
-        ) {
+        )
+        {
             value = GetValue(propertyName, comparison);
             return (value != null);
         }
@@ -712,7 +715,8 @@ namespace Newtonsoft.Json.Linq
         void ICollection<KeyValuePair<string, JToken?>>.CopyTo(
             KeyValuePair<string, JToken?>[] array,
             int arrayIndex
-        ) {
+        )
+        {
             if (array == null)
             {
                 throw new ArgumentNullException(nameof(array));
@@ -900,7 +904,8 @@ namespace Newtonsoft.Json.Linq
                 JObject instance,
                 GetMemberBinder binder,
                 out object? result
-            ) {
+            )
+            {
                 // result can be null
                 result = instance[binder.Name];
                 return true;
@@ -910,7 +915,8 @@ namespace Newtonsoft.Json.Linq
                 JObject instance,
                 SetMemberBinder binder,
                 object value
-            ) {
+            )
+            {
                 // this can throw an error if value isn't a valid for a JValue
                 if (!(value is JToken v))
                 {

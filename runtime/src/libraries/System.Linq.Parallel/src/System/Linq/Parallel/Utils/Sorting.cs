@@ -65,7 +65,8 @@ namespace System.Linq.Parallel
             GrowingArray<TKey>[] sharedkeys,
             TInputOutput[][] sharedValues,
             Barrier[][] sharedBarriers
-        ) {
+        )
+        {
             Debug.Assert(source != null);
             Debug.Assert(groupState != null);
             Debug.Assert(sharedIndices != null);
@@ -108,7 +109,8 @@ namespace System.Linq.Parallel
         internal static SortHelper<TInputOutput, TKey>[] GenerateSortHelpers(
             PartitionedStream<TInputOutput, TKey> partitions,
             QueryTaskGroupState groupState
-        ) {
+        )
+        {
             int degreeOfParallelism = partitions.PartitionCount;
             SortHelper<TInputOutput, TKey>[] helpers = new SortHelper<TInputOutput, TKey>[
                 degreeOfParallelism
@@ -244,7 +246,8 @@ namespace System.Linq.Parallel
         private void BuildKeysFromSource(
             ref GrowingArray<TKey>? keys,
             ref List<TInputOutput>? values
-        ) {
+        )
+        {
             values = new List<TInputOutput>();
 
             // Enumerate the whole input set, generating a key set in the process.
@@ -295,7 +298,8 @@ namespace System.Linq.Parallel
             GrowingArray<TKey> keys,
             List<TInputOutput> values,
             OrdinalIndexState ordinalIndexState
-        ) {
+        )
+        {
             Debug.Assert(keys != null);
             Debug.Assert(values != null);
             Debug.Assert(keys.Count == values.Count);
@@ -484,7 +488,8 @@ namespace System.Linq.Parallel
                                         rightKeys[rightIndices![j1]]
                                     ) <= 0
                                 )
-                            ) {
+                            )
+                            {
                                 if (isLastPhase)
                                 {
                                     mergedValues[i] = myValues[myIndices[j0]];
@@ -569,7 +574,8 @@ namespace System.Linq.Parallel
                                         myKeysArr[myIndices[j1]]
                                     ) > 0
                                 )
-                            ) {
+                            )
+                            {
                                 Debug.Assert(leftIndices != null);
                                 if (isLastPhase)
                                 {
@@ -635,7 +641,8 @@ namespace System.Linq.Parallel
             TKey[] keys,
             int[] indices,
             CancellationToken cancelToken
-        ) {
+        )
+        {
             Debug.Assert(keys != null, "need a non-null keyset");
             Debug.Assert(keys.Length >= indices.Length);
             Debug.Assert(left <= right);

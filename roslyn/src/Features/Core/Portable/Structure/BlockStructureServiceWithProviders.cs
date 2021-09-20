@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.Structure
         public override async Task<BlockStructure> GetBlockStructureAsync(
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var context = await CreateContextAsync(document, cancellationToken)
                 .ConfigureAwait(false);
             return await GetBlockStructureAsync(context, _providers).ConfigureAwait(false);
@@ -57,7 +58,8 @@ namespace Microsoft.CodeAnalysis.Structure
         public override BlockStructure GetBlockStructure(
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var context = CreateContextAsync(document, cancellationToken)
                 .WaitAndGetResult(cancellationToken);
             return GetBlockStructure(context, _providers);
@@ -68,7 +70,8 @@ namespace Microsoft.CodeAnalysis.Structure
             OptionSet options,
             bool isMetadataAsSource,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var context = CreateContext(syntaxTree, options, isMetadataAsSource, cancellationToken);
             return await GetBlockStructureAsync(context, _providers).ConfigureAwait(false);
         }
@@ -78,7 +81,8 @@ namespace Microsoft.CodeAnalysis.Structure
             OptionSet options,
             bool isMetadataAsSource,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var context = CreateContext(syntaxTree, options, isMetadataAsSource, cancellationToken);
             return GetBlockStructure(context, _providers);
         }
@@ -86,7 +90,8 @@ namespace Microsoft.CodeAnalysis.Structure
         private static async Task<BlockStructureContext> CreateContextAsync(
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxTree = await document.GetSyntaxTreeAsync(cancellationToken)
                 .ConfigureAwait(false);
             var options = document.Project.Solution.Options;
@@ -100,7 +105,8 @@ namespace Microsoft.CodeAnalysis.Structure
             OptionSet options,
             bool isMetadataAsSource,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var optionProvider = new BlockStructureOptionProvider(options, isMetadataAsSource);
             return new BlockStructureContext(syntaxTree, optionProvider, cancellationToken);
         }
@@ -108,7 +114,8 @@ namespace Microsoft.CodeAnalysis.Structure
         private static async Task<BlockStructure> GetBlockStructureAsync(
             BlockStructureContext context,
             ImmutableArray<BlockStructureProvider> providers
-        ) {
+        )
+        {
             foreach (var provider in providers)
             {
                 await provider.ProvideBlockStructureAsync(context).ConfigureAwait(false);
@@ -120,7 +127,8 @@ namespace Microsoft.CodeAnalysis.Structure
         private static BlockStructure GetBlockStructure(
             BlockStructureContext context,
             ImmutableArray<BlockStructureProvider> providers
-        ) {
+        )
+        {
             foreach (var provider in providers)
             {
                 provider.ProvideBlockStructure(context);
@@ -185,7 +193,8 @@ namespace Microsoft.CodeAnalysis.Structure
             bool showOutliningForCodeLevelConstructs,
             bool showOutliningForDeclarationLevelConstructs,
             bool showOutliningForCommentsAndPreprocessorRegions
-        ) {
+        )
+        {
             var type = blockSpan.Type;
 
             var isTopLevel = BlockTypes.IsDeclarationLevelConstruct(type);
@@ -196,7 +205,8 @@ namespace Microsoft.CodeAnalysis.Structure
                 (!showIndentGuidesForDeclarationLevelConstructs && isTopLevel)
                 || (!showIndentGuidesForCodeLevelConstructs && isMemberLevel)
                 || (!showIndentGuidesForCommentsAndPreprocessorRegions && isComment)
-            ) {
+            )
+            {
                 type = BlockTypes.Nonstructural;
             }
 
@@ -207,7 +217,8 @@ namespace Microsoft.CodeAnalysis.Structure
                     (!showOutliningForDeclarationLevelConstructs && isTopLevel)
                     || (!showOutliningForCodeLevelConstructs && isMemberLevel)
                     || (!showOutliningForCommentsAndPreprocessorRegions && isComment)
-                ) {
+                )
+                {
                     isCollapsible = false;
                 }
             }

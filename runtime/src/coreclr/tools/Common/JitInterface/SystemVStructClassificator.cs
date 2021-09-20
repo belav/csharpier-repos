@@ -75,7 +75,8 @@ namespace Internal.JitInterface
                 TypeDesc typeDesc,
                 bool isFixedBuffer,
                 int numIntroducedFields
-            ) {
+            )
+            {
                 foreach (FieldDesc field in typeDesc.GetFields())
                 {
                     if (field.IsStatic)
@@ -100,7 +101,8 @@ namespace Internal.JitInterface
         public static void GetSystemVAmd64PassStructInRegisterDescriptor(
             TypeDesc typeDesc,
             out SYSTEMV_AMD64_CORINFO_STRUCT_REG_PASSING_DESCRIPTOR structPassInRegDescPtr
-        ) {
+        )
+        {
             structPassInRegDescPtr = default;
             structPassInRegDescPtr.passedInRegisters = false;
 
@@ -108,7 +110,8 @@ namespace Internal.JitInterface
             if (
                 typeDesc.IsValueType
                 && (typeSize <= CLR_SYSTEMV_MAX_STRUCT_BYTES_TO_PASS_IN_REGISTERS)
-            ) {
+            )
+            {
                 if (TypeDef2SystemVClassification(typeDesc) != SystemVClassificationTypeStruct)
                 {
                     return;
@@ -191,7 +194,8 @@ namespace Internal.JitInterface
         static SystemVClassificationType ReClassifyField(
             SystemVClassificationType originalClassification,
             SystemVClassificationType newFieldClassification
-        ) {
+        )
+        {
             Debug.Assert(
                 (newFieldClassification == SystemVClassificationTypeInteger)
                     || (newFieldClassification == SystemVClassificationTypeIntegerReference)
@@ -251,7 +255,8 @@ namespace Internal.JitInterface
             TypeDesc typeDesc,
             ref SystemVStructRegisterPassingHelper helper,
             int startOffsetOfStruct
-        ) {
+        )
+        {
             FieldDesc firstField = null;
             int numIntroducedFields = 0;
             foreach (FieldDesc field in typeDesc.GetFields())
@@ -280,7 +285,8 @@ namespace Internal.JitInterface
                     if (
                         VectorFieldLayoutAlgorithm.IsVectorType(instantiatedType)
                         || VectorOfTFieldLayoutAlgorithm.IsVectorOfTType(instantiatedType)
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }
@@ -318,7 +324,8 @@ namespace Internal.JitInterface
                     isFixedBuffer,
                     numIntroducedFields
                 )
-            ) {
+            )
+            {
                 Debug.Assert(fieldIndex < numIntroducedFields);
 
                 int fieldOffset = isFixedBuffer ? fieldIndex * firstFieldSize : field.Offset.AsInt;
@@ -451,7 +458,8 @@ namespace Internal.JitInterface
         // Assigns the classification types to the array with eightbyte types.
         private static void AssignClassifiedEightByteTypes(
             ref SystemVStructRegisterPassingHelper helper
-        ) {
+        )
+        {
             const int CLR_SYSTEMV_MAX_BYTES_TO_PASS_IN_REGISTERS =
                 CLR_SYSTEMV_MAX_EIGHTBYTES_COUNT_TO_PASS_IN_REGISTERS
                 * SYSTEMV_EIGHT_BYTE_SIZE_IN_BYTES;
@@ -549,17 +557,20 @@ namespace Internal.JitInterface
                         int currentFieldEightByte = fieldStartEightByte;
                         currentFieldEightByte <= fieldEndEightByte;
                         currentFieldEightByte++
-                    ) {
+                    )
+                    {
                         if (
                             helper.EightByteClassifications[currentFieldEightByte]
                             == fieldClassificationType
-                        ) {
+                        )
+                        {
                             // Do nothing. The eight-byte already has this classification.
                         }
                         else if (
                             helper.EightByteClassifications[currentFieldEightByte]
                             == SystemVClassificationTypeNoClass
-                        ) {
+                        )
+                        {
                             helper.EightByteClassifications[currentFieldEightByte] =
                                 fieldClassificationType;
                         }
@@ -568,7 +579,8 @@ namespace Internal.JitInterface
                                 helper.EightByteClassifications[currentFieldEightByte]
                                 == SystemVClassificationTypeInteger
                             ) || (fieldClassificationType == SystemVClassificationTypeInteger)
-                        ) {
+                        )
+                        {
                             Debug.Assert(
                                 (
                                     fieldClassificationType
@@ -591,7 +603,8 @@ namespace Internal.JitInterface
                             || (
                                 fieldClassificationType == SystemVClassificationTypeIntegerReference
                             )
-                        ) {
+                        )
+                        {
                             helper.EightByteClassifications[currentFieldEightByte] =
                                 SystemVClassificationTypeIntegerReference;
                         }
@@ -600,7 +613,8 @@ namespace Internal.JitInterface
                                 helper.EightByteClassifications[currentFieldEightByte]
                                 == SystemVClassificationTypeIntegerByRef
                             ) || (fieldClassificationType == SystemVClassificationTypeIntegerByRef)
-                        ) {
+                        )
+                        {
                             helper.EightByteClassifications[currentFieldEightByte] =
                                 SystemVClassificationTypeIntegerByRef;
                         }
@@ -622,7 +636,8 @@ namespace Internal.JitInterface
                                 helper.EightByteClassifications[
                                     offset / SYSTEMV_EIGHT_BYTE_SIZE_IN_BYTES
                                 ] == SystemVClassificationTypeNoClass
-                            ) {
+                            )
+                            {
                                 helper.EightByteClassifications[
                                     offset / SYSTEMV_EIGHT_BYTE_SIZE_IN_BYTES
                                 ] = SystemVClassificationTypeInteger;
@@ -642,7 +657,8 @@ namespace Internal.JitInterface
                     int currentEightByte = 0;
                     currentEightByte < usedEightBytes;
                     currentEightByte++
-                ) {
+                )
+                {
                     int eightByteSize =
                         accumulatedSizeForEightBytes
                         < (SYSTEMV_EIGHT_BYTE_SIZE_IN_BYTES * (currentEightByte + 1))

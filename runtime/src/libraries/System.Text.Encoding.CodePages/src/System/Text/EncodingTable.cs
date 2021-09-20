@@ -124,7 +124,8 @@ namespace System.Text
                         s_encodingNameIndices[left],
                         s_encodingNameIndices[left + 1] - s_encodingNameIndices[left]
                     ) == 0
-                ) {
+                )
+                {
                     return (s_codePagesByName[left]);
                 }
             }
@@ -174,7 +175,8 @@ namespace System.Text
             string names,
             int[] indices,
             Dictionary<int, string> cache
-        ) {
+        )
+        {
             string? name;
 
             Debug.Assert(s_mappedCodePages.Length + 1 == indices.Length);

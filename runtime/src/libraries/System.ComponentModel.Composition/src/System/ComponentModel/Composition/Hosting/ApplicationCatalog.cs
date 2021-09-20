@@ -39,7 +39,8 @@ namespace System.ComponentModel.Composition.Hosting
         public ApplicationCatalog(
             ReflectionContext reflectionContext,
             ICompositionElement definitionOrigin
-        ) {
+        )
+        {
             Requires.NotNull(reflectionContext, nameof(reflectionContext));
             Requires.NotNull(definitionOrigin, nameof(definitionOrigin));
 
@@ -163,7 +164,8 @@ namespace System.ComponentModel.Composition.Hosting
         /// </exception>
         public override IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>> GetExports(
             ImportDefinition definition
-        ) {
+        )
+        {
             ThrowIfDisposed();
 
             Requires.NotNull(definition, nameof(definition));

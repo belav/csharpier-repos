@@ -33,7 +33,8 @@ namespace System.SpanTests
             string search,
             char expectResult,
             int expectIndex
-        ) {
+        )
+        {
             byte[] buffers = Encoding.UTF8.GetBytes(raw);
             var span = new ReadOnlySpan<byte>(buffers);
             char[] searchFor = search.ToCharArray();

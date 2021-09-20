@@ -76,7 +76,8 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
             Diagnostic diagnostic,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
             var ifStatement = diagnostic.AdditionalLocations[0].FindNode(cancellationToken);
 
@@ -96,7 +97,8 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
                     out var trueAssignment,
                     out var falseAssignment
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -123,7 +125,8 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
                     falseAssignment,
                     conditionalExpression
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -142,7 +145,8 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
             IConditionalOperation ifOperation,
             ISimpleAssignmentOperation assignment,
             TExpressionSyntax conditionalExpression
-        ) {
+        )
+        {
             var generator = editor.Generator;
             var ifStatement = (TIfStatementSyntax)ifOperation.Syntax;
             var expressionStatement = (TStatementSyntax)generator.ExpressionStatement(
@@ -163,7 +167,8 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
             ISimpleAssignmentOperation? trueAssignment,
             ISimpleAssignmentOperation? falseAssignment,
             TExpressionSyntax conditionalExpression
-        ) {
+        )
+        {
             if (
                 !TryFindMatchingLocalDeclarationImmediatelyAbove(
                     ifOperation,
@@ -172,7 +177,8 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
                     out var localDeclarationOperation,
                     out var declarator
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -205,7 +211,8 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
             ISimpleAssignmentOperation? falseAssignment,
             [NotNullWhen(true)] out IVariableDeclarationGroupOperation? localDeclaration,
             [NotNullWhen(true)] out IVariableDeclaratorOperation? declarator
-        ) {
+        )
+        {
             localDeclaration = null;
             declarator = null;
 
@@ -300,7 +307,8 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
             if (
                 operation is ILocalReferenceOperation localReference
                 && Equals(variable, localReference.Local)
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -317,13 +325,12 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                AnalyzersResources.Convert_to_conditional_expression,
-                createChangedDocument,
-                IDEDiagnosticIds.UseConditionalExpressionForAssignmentDiagnosticId
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    AnalyzersResources.Convert_to_conditional_expression,
+                    createChangedDocument,
+                    IDEDiagnosticIds.UseConditionalExpressionForAssignmentDiagnosticId
+                ) { }
         }
     }
 }

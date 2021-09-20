@@ -135,7 +135,8 @@ namespace Microsoft.AspNetCore.Analyzers
         public async Task StartupAnalyzer_MvcOptionsAnalysis_FindsEndpointRoutingEnabled(
             string sourceFileName,
             string mvcMiddlewareName
-        ) {
+        )
+        {
             // Arrange
             var source = Read(sourceFileName);
 

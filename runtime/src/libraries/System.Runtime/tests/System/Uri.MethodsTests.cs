@@ -659,7 +659,8 @@ namespace System.Tests
             UriFormat compareFormat,
             StringComparison comparisonType,
             int expected
-        ) {
+        )
+        {
             Assert.Equal(
                 expected,
                 Math.Sign(Uri.Compare(uri1, uri2, partsToCompare, compareFormat, comparisonType))
@@ -1749,7 +1750,8 @@ namespace System.Tests
             UriComponents components,
             UriFormat format,
             string expected
-        ) {
+        )
+        {
             Assert.Equal(expected, uri.GetComponents(components, format));
         }
 

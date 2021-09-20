@@ -56,10 +56,8 @@ namespace System.Threading
         /// </summary>
         /// <param name="info">The object that holds the serialized object data.</param>
         /// <param name="context">The contextual information about the source or destination.</param>
-        protected BarrierPostPhaseException(
-            SerializationInfo info,
-            StreamingContext context
-        ) : base(info, context) { }
+        protected BarrierPostPhaseException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 
     /// <summary>
@@ -238,7 +236,8 @@ namespace System.Threading
             out int current,
             out int total,
             out bool sense
-        ) {
+        )
+        {
             total = (int)(currentTotal & TOTAL_MASK);
             current = (int)((currentTotal & CURRENT_MASK) >> 16);
             sense = (currentTotal & SENSE_MASK) == 0 ? true : false;
@@ -902,7 +901,8 @@ namespace System.Threading
             int totalTimeout,
             CancellationToken token,
             long observedPhase
-        ) {
+        )
+        {
             int maxWait = 100; // 100 ms
             int waitTimeCeiling = 10000; // 10 seconds
             while (observedPhase == CurrentPhaseNumber)

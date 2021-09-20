@@ -38,7 +38,8 @@ namespace Microsoft.AspNetCore.Components.Forms
 
         public void AssociateWithValidationMessageStore(
             ValidationMessageStore validationMessageStore
-        ) {
+        )
+        {
             if (_validationMessageStores == null)
             {
                 _validationMessageStores = new HashSet<ValidationMessageStore>();

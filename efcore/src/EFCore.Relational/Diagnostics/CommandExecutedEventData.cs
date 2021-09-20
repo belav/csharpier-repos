@@ -42,20 +42,21 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             bool logParameterValues,
             DateTimeOffset startTime,
             TimeSpan duration
-        ) : base(
-            eventDefinition,
-            messageGenerator,
-            connection,
-            command,
-            context,
-            executeMethod,
-            commandId,
-            connectionId,
-            async,
-            logParameterValues,
-            startTime,
-            duration
-        ) => Result = result;
+        )
+            : base(
+                eventDefinition,
+                messageGenerator,
+                connection,
+                command,
+                context,
+                executeMethod,
+                commandId,
+                connectionId,
+                async,
+                logParameterValues,
+                startTime,
+                duration
+            ) => Result = result;
 
         /// <summary>
         ///     The result of executing the command.

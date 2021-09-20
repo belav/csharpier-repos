@@ -54,7 +54,8 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.Configurat
         public void ExportToXml_BuiltInTypes_ProducesCorrectPayload(
             Type encryptionAlgorithmType,
             Type validationAlgorithmType
-        ) {
+        )
+        {
             // Arrange
             var masterKey = Convert.ToBase64String(Encoding.UTF8.GetBytes("[PLACEHOLDER]"));
             var descriptor = new ManagedAuthenticatedEncryptorDescriptor(

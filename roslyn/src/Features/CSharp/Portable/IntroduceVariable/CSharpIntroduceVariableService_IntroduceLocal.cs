@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
             bool allOccurrences,
             bool isConstant,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var containerToGenerateInto = expression.Ancestors()
                 .FirstOrDefault(
                     s =>
@@ -74,7 +75,8 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
                     containerToGenerateInto.GetFirstToken(),
                     containerToGenerateInto.GetLastToken()
                 )
-            ) {
+            )
+            {
                 declarationStatement = declarationStatement.WithAppendedTrailingTrivia(
                     SyntaxFactory.ElasticCarriageReturnLineFeed
                 );
@@ -138,7 +140,8 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
             LocalDeclarationStatementSyntax declarationStatement,
             bool allOccurrences,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var oldBody = (ExpressionSyntax)oldLambda.Body;
             var isEntireLambdaBodySelected = oldBody.Equals(expression.WalkUpParentheses());
 
@@ -182,12 +185,14 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
             SemanticDocument document,
             LambdaExpressionSyntax oldLambda,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 document.SemanticModel.GetTypeInfo(oldLambda, cancellationToken).ConvertedType
                     is INamedTypeSymbol delegateType
                 && delegateType.DelegateInvokeMethod != null
-            ) {
+            )
+            {
                 if (delegateType.DelegateInvokeMethod.ReturnsVoid)
                 {
                     return false;
@@ -216,7 +221,8 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
                             compilation.ValueTaskType() != null
                             && delegateReturnType.Equals(compilation.ValueTaskType())
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }
@@ -230,7 +236,8 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
             bool isEntireLambdaBodySelected,
             ExpressionSyntax rewrittenBody,
             bool includeReturnStatement
-        ) {
+        )
+        {
             if (includeReturnStatement)
             {
                 // Case 1: The lambda has a non-void return type.
@@ -289,7 +296,8 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
             SemanticDocument document,
             ExpressionSyntax expression,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var typeSymbol = GetTypeSymbol(document, expression, cancellationToken);
             return typeSymbol.GenerateTypeSyntax();
         }
@@ -303,7 +311,8 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
             bool allOccurrences,
             bool createReturnStatement,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var oldBody = arrowExpression;
             var oldParentingNode = oldBody.Parent;
             var leadingTrivia = oldBody.GetLeadingTrivia()
@@ -387,7 +396,8 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
             LocalDeclarationStatementSyntax declarationStatement,
             bool allOccurrences,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             declarationStatement = declarationStatement.WithAdditionalAnnotations(
                 Formatter.Annotation
             );
@@ -401,7 +411,8 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
                 && !localFunction.Modifiers.Any(
                     modifier => modifier.IsKind(SyntaxKind.StaticKeyword)
                 )
-            ) {
+            )
+            {
                 scope = block.GetAncestor<MemberDeclarationSyntax>();
             }
 
@@ -497,7 +508,8 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
 
         private static IEnumerable<StatementSyntax> GetApplicableStatementAncestors(
             ExpressionSyntax expr
-        ) {
+        )
+        {
             foreach (var statement in expr.GetAncestorsOrThis<StatementSyntax>())
             {
                 // When determining where to put a local, we don't want to put it between the `else`
@@ -506,7 +518,8 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
                 if (
                     statement.Kind() == SyntaxKind.IfStatement
                     && statement.IsParentKind(SyntaxKind.ElseClause)
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -518,7 +531,8 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
             SyntaxNode innermostCommonBlock,
             ISet<ExpressionSyntax> matches,
             int firstStatementAffectedIndex
-        ) {
+        )
+        {
             // If a local function is involved, we have to make sure the new declaration is placed:
             //     1. Before all calls to local functions that use the variable.
             //     2. Before the local function(s) themselves.
@@ -578,7 +592,8 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
             SyntaxList<StatementSyntax> oldStatements,
             StatementSyntax newStatement,
             int statementIndex
-        ) {
+        )
+        {
             var nextStatement = oldStatements.ElementAtOrDefault(statementIndex);
             if (nextStatement == null)
                 return oldStatements.Insert(statementIndex, newStatement);

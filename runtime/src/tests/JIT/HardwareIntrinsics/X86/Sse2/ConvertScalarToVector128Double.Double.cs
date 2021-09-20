@@ -115,7 +115,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             public void RunStructFldScenario(
                 SimpleBinaryOpConvTest__ConvertScalarToVector128DoubleDouble testClass
-            ) {
+            )
+            {
                 var result = Sse2.ConvertScalarToVector128Double(_fld1, _fld2);
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
@@ -393,7 +394,8 @@ namespace JIT.HardwareIntrinsics.X86
             Int32 right,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Double[] inArray1 = new Double[Op1ElementCount];
             Double[] outArray = new Double[RetElementCount];
 
@@ -412,7 +414,8 @@ namespace JIT.HardwareIntrinsics.X86
             Int32 right,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Double[] inArray1 = new Double[Op1ElementCount];
             Double[] outArray = new Double[RetElementCount];
 
@@ -435,7 +438,8 @@ namespace JIT.HardwareIntrinsics.X86
             Int32 right,
             Double[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             if ((double)right != result[0])
             {
                 Succeeded = false;

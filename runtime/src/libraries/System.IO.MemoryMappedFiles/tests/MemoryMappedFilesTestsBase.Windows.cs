@@ -54,7 +54,8 @@ namespace System.IO.MemoryMappedFiles.Tests
         protected static void AssertInheritability(
             SafeHandle handle,
             HandleInheritability inheritability
-        ) {
+        )
+        {
             if (OperatingSystem.IsWindows())
             {
                 uint flags;

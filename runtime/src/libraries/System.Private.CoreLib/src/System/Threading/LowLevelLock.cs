@@ -155,7 +155,8 @@ namespace System.Threading
                     SpinCount,
                     SpinSleep0Threshold
                 )
-            ) {
+            )
+            {
                 Debug.Assert((_state & LockedMask) != 0);
                 SetOwnerThreadToCurrent();
                 return;
@@ -179,7 +180,8 @@ namespace System.Threading
                         state + (LockedMask - WaiterCountIncrement),
                         state
                     ) == state
-                ) {
+                )
+                {
                     break;
                 }
 

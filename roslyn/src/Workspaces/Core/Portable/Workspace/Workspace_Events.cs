@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis
             Solution newSolution,
             ProjectId projectId = null,
             DocumentId documentId = null
-        ) {
+        )
+        {
             if (newSolution == null)
             {
                 throw new ArgumentNullException(nameof(newSolution));
@@ -71,7 +72,8 @@ namespace Microsoft.CodeAnalysis
                                 kind,
                                 CancellationToken.None
                             )
-                        ) {
+                        )
+                        {
                             var args = new WorkspaceChangeEventArgs(
                                 kind,
                                 oldSolution,
@@ -190,7 +192,8 @@ namespace Microsoft.CodeAnalysis
             SourceTextContainer sourceTextContainer,
             DocumentId oldActiveContextDocumentId,
             DocumentId newActiveContextDocumentId
-        ) {
+        )
+        {
             var ev = GetEventHandlers<DocumentActiveContextChangedEventArgs>(
                 DocumentActiveContextChangedName
             );
@@ -199,7 +202,8 @@ namespace Microsoft.CodeAnalysis
                 && sourceTextContainer != null
                 && oldActiveContextDocumentId != null
                 && newActiveContextDocumentId != null
-            ) {
+            )
+            {
                 // Capture the current solution snapshot (inside the _serializationLock of OnDocumentContextUpdated)
                 var currentSolution = this.CurrentSolution;
 

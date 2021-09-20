@@ -109,7 +109,8 @@ namespace Microsoft.AspNetCore.SignalR.Crankier
                         while (
                             !_sendCts.Token.IsCancellationRequested
                             && State != ConnectionState.Disconnected
-                        ) {
+                        )
+                        {
                             try
                             {
                                 await _connection.InvokeAsync(

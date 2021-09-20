@@ -25,7 +25,8 @@ namespace System.Web.Razor.Parser
         public override void ParseSection(
             Tuple<string, string> nestingSequences,
             bool caseSensitive
-        ) {
+        )
+        {
             if (Context == null)
             {
                 throw new InvalidOperationException(RazorResources.Parser_Context_Not_Set);
@@ -108,7 +109,8 @@ namespace System.Web.Razor.Parser
                         if (
                             !EndOfFile
                             && !String.Equals(CurrentSymbol.Content, component, Comparison)
-                        ) {
+                        )
+                        {
                             return false;
                         }
                         NextToken();
@@ -162,12 +164,14 @@ namespace System.Web.Razor.Parser
             int position,
             int currentNesting,
             int retIfMatched
-        ) {
+        )
+        {
             if (
                 sequence != null
                 && CurrentSymbol.Content[position] == sequence[0]
                 && position + sequence.Length <= CurrentSymbol.Content.Length
-            ) {
+            )
+            {
                 string possibleStart = CurrentSymbol.Content.Substring(position, sequence.Length);
                 if (String.Equals(possibleStart, sequence, Comparison))
                 {

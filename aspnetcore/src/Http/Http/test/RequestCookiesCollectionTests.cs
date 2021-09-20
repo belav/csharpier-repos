@@ -34,7 +34,8 @@ namespace Microsoft.AspNetCore.Http.Tests
             string input,
             string expectedKey,
             string expectedValue
-        ) {
+        )
+        {
             var cookies = RequestCookieCollection.ParseInternal(
                 new StringValues(input),
                 enableCookieNameEncoding: true

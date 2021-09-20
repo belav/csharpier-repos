@@ -153,7 +153,8 @@ namespace System.Text.Encodings.Web.Tests
                                 uint spanCounter = startSpanCodepoint;
                                 spanCounter < codePoint;
                                 spanCounter++
-                            ) {
+                            )
+                            {
                                 retVal[spanCounter] = true; // chars in this category are allowable
                             }
                         }

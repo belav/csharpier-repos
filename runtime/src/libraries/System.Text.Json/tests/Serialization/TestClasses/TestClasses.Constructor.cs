@@ -222,7 +222,8 @@ namespace System.Text.Json.Serialization.Tests
         public SingleParameterlessCtor_MultiplePublicParameterizedCtor_Struct(
             int myInt,
             string myString
-        ) {
+        )
+        {
             MyInt = myInt;
             MyString = myString;
         }
@@ -383,7 +384,8 @@ namespace System.Text.Json.Serialization.Tests
         public ParameterlessCtor_MultiplePublicParameterizedCtor_WithAttribute(
             int myInt,
             string myString
-        ) {
+        )
+        {
             MyInt = myInt;
             MyString = myString;
         }
@@ -420,7 +422,8 @@ namespace System.Text.Json.Serialization.Tests
         public PublicParameterlessConstructor_PublicParameterizedCtor_WithMultipleAttributes(
             int myInt,
             string myString
-        ) {
+        )
+        {
             MyInt = myInt;
             MyString = myString;
         }
@@ -577,7 +580,8 @@ namespace System.Text.Json.Serialization.Tests
             int myInt,
             Point_3D_Struct myPoint3DStruct,
             string myString
-        ) {
+        )
+        {
             MyInt = myInt;
             MyPoint3DStruct = myPoint3DStruct;
             MyString = myString;
@@ -629,7 +633,8 @@ namespace System.Text.Json.Serialization.Tests
             Point_3D_Struct readOnlyPoint3DStruct,
             Point_2D_With_ExtData readOnlyPoint2DWithExtData,
             SinglePublicParameterizedCtor readOnlySinglePublicParameterizedCtor
-        ) {
+        )
+        {
             EmailAddress = emailAddress;
             Id = id;
             Age = age;
@@ -770,7 +775,8 @@ namespace System.Text.Json.Serialization.Tests
             Point_3D_Struct readOnlyPoint3DStruct,
             Point_2D_With_ExtData readOnlyPoint2DWithExtData,
             SinglePublicParameterizedCtor readOnlySinglePublicParameterizedCtor
-        ) {
+        )
+        {
             // Readonly, setting in ctor.
             EmailAddress = emailAddress;
             Id = id;
@@ -930,7 +936,8 @@ namespace System.Text.Json.Serialization.Tests
             Point_3D_Struct point3DStruct,
             ImmutableArray<int> immutableArray,
             int @int = 50
-        ) {
+        )
+        {
             Point3DStruct = point3DStruct;
             ImmutableArray = immutableArray;
             Int = @int;
@@ -1006,7 +1013,8 @@ namespace System.Text.Json.Serialization.Tests
             IImmutableDictionary<string, string> myStringToStringIImmutableDict,
             ImmutableSortedSet<string> myStringImmutableSortedSetT,
             List<string> myListOfNullString
-        ) {
+        )
+        {
             MyByte = myByte;
             MyChar = myChar;
             MyString = myString;
@@ -1230,7 +1238,8 @@ namespace System.Text.Json.Serialization.Tests
             ref Utf8JsonReader reader,
             Type typeToConvert,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             if (reader.TokenType != JsonTokenType.StartObject)
             {
                 throw new JsonException();
@@ -1248,7 +1257,8 @@ namespace System.Text.Json.Serialization.Tests
             Utf8JsonWriter writer,
             Point_3D value,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
     }
@@ -1385,7 +1395,8 @@ namespace System.Text.Json.Serialization.Tests
             int int61,
             int int62,
             int int63
-        ) {
+        )
+        {
             Int0 = int0;
             Int1 = int1;
             Int2 = int2;
@@ -1619,7 +1630,8 @@ namespace System.Text.Json.Serialization.Tests
             int int61,
             int int62,
             int int63
-        ) {
+        )
+        {
             Int0 = int0;
             Int1 = int1;
             Int2 = int2;
@@ -1821,7 +1833,8 @@ namespace System.Text.Json.Serialization.Tests
             int int62,
             int int63,
             int int64
-        ) {
+        )
+        {
             Int0 = int0;
             Int1 = int1;
             Int2 = int2;
@@ -2025,7 +2038,8 @@ namespace System.Text.Json.Serialization.Tests
             int int62,
             int int63,
             int int64
-        ) {
+        )
+        {
             Int0 = int0;
             Int1 = int1;
             Int2 = int2;
@@ -2259,7 +2273,8 @@ namespace System.Text.Json.Serialization.Tests
             List<ActiveOrUpcomingEvent> activeOrUpcomingEvents,
             CampaignSummaryViewModel featuredCampaign,
             bool isNewAccount
-        ) {
+        )
+        {
             ActiveOrUpcomingEvents = activeOrUpcomingEvents;
             FeaturedCampaign = featuredCampaign;
             IsNewAccount = isNewAccount;
@@ -2893,7 +2908,8 @@ namespace System.Text.Json.Serialization.Tests
         public ClassWithNestedClass(
             ClassWithNestedClass myClass,
             Point_2D_Struct_WithAttribute myPoint
-        ) {
+        )
+        {
             MyClass = myClass;
             MyPoint = myPoint;
         }

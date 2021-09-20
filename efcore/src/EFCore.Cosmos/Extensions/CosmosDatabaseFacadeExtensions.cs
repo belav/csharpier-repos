@@ -29,7 +29,8 @@ namespace Microsoft.EntityFrameworkCore
 
         private static TService GetService<TService>(
             IInfrastructure<IServiceProvider> databaseFacade
-        ) {
+        )
+        {
             Check.NotNull(databaseFacade, nameof(databaseFacade));
 
             var service = databaseFacade.Instance.GetService<TService>();

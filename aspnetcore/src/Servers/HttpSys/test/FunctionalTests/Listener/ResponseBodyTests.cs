@@ -620,7 +620,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
         private async Task<HttpResponseMessage> SendRequestAsync(
             string uri,
             CancellationToken cancellationToken = new CancellationToken()
-        ) {
+        )
+        {
             using (HttpClient client = new HttpClient() { Timeout = Utilities.DefaultTimeout })
             {
                 return await client.GetAsync(

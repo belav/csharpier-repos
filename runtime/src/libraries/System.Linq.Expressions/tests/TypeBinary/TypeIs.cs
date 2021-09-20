@@ -98,7 +98,8 @@ namespace System.Linq.Expressions.Tests
             Expression expression,
             Type type,
             bool useInterpreter
-        ) {
+        )
+        {
             bool expected =
                 expression.Type == typeof(void)
                     ? type == typeof(void)
@@ -122,7 +123,8 @@ namespace System.Linq.Expressions.Tests
             Expression expression,
             Type type,
             bool useInterpreter
-        ) {
+        )
+        {
             if (expression.Type == typeof(void))
                 return; // Can't have void parameter.
 

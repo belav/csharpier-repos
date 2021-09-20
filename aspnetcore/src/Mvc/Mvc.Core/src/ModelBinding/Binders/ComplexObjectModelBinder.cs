@@ -42,7 +42,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             IDictionary<ModelMetadata, IModelBinder> propertyBinders,
             IReadOnlyList<IModelBinder> parameterBinders,
             ILogger<ComplexObjectModelBinder> logger
-        ) {
+        )
+        {
             _propertyBinders = propertyBinders;
             _parameterBinders = parameterBinders;
             _logger = logger;
@@ -129,7 +130,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                 !attemptedBinding
                 && bindingContext.IsTopLevelObject
                 && modelMetadata.IsBindingRequired
-            ) {
+            )
+            {
                 var messageProvider = modelMetadata.ModelBindingMessageProvider;
                 var message = messageProvider.MissingBindRequiredValueAccessor(
                     bindingContext.FieldName
@@ -163,7 +165,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                 !bindingContext.IsTopLevelObject
                 && !bindingSucceeded
                 && propertyData == GreedyPropertiesMayHaveData
-            ) {
+            )
+            {
                 bindingContext.Result = ModelBindingResult.Failed();
                 return;
             }
@@ -175,7 +178,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             ModelBindingContext bindingContext,
             ModelMetadata boundConstructor,
             object[] values
-        ) {
+        )
+        {
             try
             {
                 bindingContext.Model = boundConstructor.BoundConstructorInvoker!(values);
@@ -253,7 +257,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             int propertyData,
             IReadOnlyList<ModelMetadata> parameters,
             object?[] parameterValues
-        ) {
+        )
+        {
             var attemptedBinding = false;
             var bindingSucceeded = false;
 
@@ -291,7 +296,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                         !bindingContext.IsTopLevelObject
                         && !bindingSucceeded
                         && propertyData == GreedyPropertiesMayHaveData
-                    ) {
+                    )
+                    {
                         // Have no confirmation of data for the current instance. Postpone completing the loop until
                         // we _know_ the current instance is useful. Recursion would otherwise occur prior to the
                         // block with a similar condition after the loop.
@@ -368,7 +374,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             ModelBindingContext bindingContext,
             int propertyData,
             IReadOnlyList<ModelMetadata> boundProperties
-        ) {
+        )
+        {
             var attemptedBinding = false;
             var bindingSucceeded = false;
 
@@ -399,7 +406,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                         !bindingContext.IsTopLevelObject
                         && !bindingSucceeded
                         && propertyData == GreedyPropertiesMayHaveData
-                    ) {
+                    )
+                    {
                         // Have no confirmation of data for the current instance. Postpone completing the loop until
                         // we _know_ the current instance is useful. Recursion would otherwise occur prior to the
                         // block with a similar condition after the loop.
@@ -473,7 +481,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         internal bool CanBindItem(
             ModelBindingContext bindingContext,
             ModelMetadata propertyMetadata
-        ) {
+        )
+        {
             var metadataProviderFilter =
                 bindingContext.ModelMetadata.PropertyFilterProvider?.PropertyFilter;
             if (metadataProviderFilter?.Invoke(propertyMetadata) == false)
@@ -494,7 +503,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             if (
                 propertyMetadata.MetadataKind == ModelMetadataKind.Property
                 && propertyMetadata.IsReadOnly
-            ) {
+            )
+            {
                 // Determine if we can update a readonly property (such as a collection).
                 return CanUpdateReadOnlyProperty(propertyMetadata.ModelType);
             }
@@ -508,7 +518,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             IModelBinder propertyBinder,
             string fieldName,
             string modelName
-        ) {
+        )
+        {
             Debug.Assert(property.MetadataKind == ModelMetadataKind.Property);
 
             // Pass complex (including collection) values down so that binding system does not unnecessarily
@@ -520,7 +531,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                 property.PropertyGetter != null
                 && property.IsComplexType
                 && !property.ModelType.IsArray
-            ) {
+            )
+            {
                 propertyModel = property.PropertyGetter(bindingContext.Model!);
             }
 
@@ -532,7 +544,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                     modelName: modelName,
                     model: propertyModel
                 )
-            ) {
+            )
+            {
                 await propertyBinder.BindModelAsync(bindingContext);
                 result = bindingContext.Result;
             }
@@ -558,7 +571,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             IModelBinder parameterBinder,
             string fieldName,
             string modelName
-        ) {
+        )
+        {
             Debug.Assert(parameter.MetadataKind == ModelMetadataKind.Parameter);
 
             ModelBindingResult result;
@@ -569,7 +583,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                     modelName: modelName,
                     model: null
                 )
-            ) {
+            )
+            {
                 await parameterBinder.BindModelAsync(bindingContext);
                 result = bindingContext.Result;
             }
@@ -633,7 +648,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                     !performsConstructorBinding
                     || modelMetadata.BoundConstructor!.BoundConstructorParameters!.Count == 0
                 )
-            ) {
+            )
+            {
                 Log.NoPublicSettableItems(_logger, bindingContext);
                 return NoDataAvailable;
             }
@@ -691,7 +707,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                         modelName: modelName,
                         model: null
                     )
-                ) {
+                )
+                {
                     // If any property can be bound from a value provider, then success.
                     if (bindingContext.ValueProvider.ContainsPrefix(bindingContext.ModelName))
                     {
@@ -734,7 +751,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                             modelName: modelName,
                             model: null
                         )
-                    ) {
+                    )
+                    {
                         // If any parameter can be bound from a value provider, then success.
                         if (bindingContext.ValueProvider.ContainsPrefix(bindingContext.ModelName))
                         {
@@ -785,7 +803,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             string modelName,
             ModelMetadata propertyMetadata,
             ModelBindingResult result
-        ) {
+        )
+        {
             if (!result.IsModelSet)
             {
                 // If we don't have a value, don't set it on the model and trounce a pre-initialized value.
@@ -814,7 +833,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             Exception exception,
             string modelName,
             ModelBindingContext bindingContext
-        ) {
+        )
+        {
             var targetInvocationException = exception as TargetInvocationException;
             if (targetInvocationException?.InnerException != null)
             {
@@ -846,7 +866,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             public static void NoPublicSettableItems(
                 ILogger logger,
                 ModelBindingContext bindingContext
-            ) {
+            )
+            {
                 _noPublicSettableProperties(
                     logger,
                     bindingContext.ModelName,

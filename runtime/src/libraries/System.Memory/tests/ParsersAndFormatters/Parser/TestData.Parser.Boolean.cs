@@ -13,7 +13,8 @@ namespace System.Buffers.Text.Tests
             {
                 foreach (
                     ParserTestData<bool> testData in BooleanFormatterTestData.ToParserTheoryDataCollection()
-                ) {
+                )
+                {
                     yield return testData;
                 }
 

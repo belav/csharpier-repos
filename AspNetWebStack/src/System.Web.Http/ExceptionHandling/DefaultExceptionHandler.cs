@@ -23,7 +23,8 @@ namespace System.Web.Http.ExceptionHandling
         public Task HandleAsync(
             ExceptionHandlerContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Handle(context);
             return TaskHelpers.Completed();
         }

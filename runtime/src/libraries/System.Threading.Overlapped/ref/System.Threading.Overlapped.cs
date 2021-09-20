@@ -65,20 +65,23 @@ namespace System.Threading
         )]
         public unsafe System.Threading.NativeOverlapped* Pack(
             System.Threading.IOCompletionCallback? iocb
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
         public unsafe System.Threading.NativeOverlapped* Pack(
             System.Threading.IOCompletionCallback? iocb,
             object? userData
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
         public unsafe static System.Threading.Overlapped Unpack(
             System.Threading.NativeOverlapped* nativeOverlappedPtr
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
@@ -87,14 +90,16 @@ namespace System.Threading
         )]
         public unsafe System.Threading.NativeOverlapped* UnsafePack(
             System.Threading.IOCompletionCallback? iocb
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
         public unsafe System.Threading.NativeOverlapped* UnsafePack(
             System.Threading.IOCompletionCallback? iocb,
             object? userData
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -121,18 +126,21 @@ namespace System.Threading
             System.Threading.IOCompletionCallback callback,
             object? state,
             object? pinData
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
         public unsafe System.Threading.NativeOverlapped* AllocateNativeOverlapped(
             System.Threading.PreAllocatedOverlapped preAllocated
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.ThreadPoolBoundHandle BindHandle(
             System.Runtime.InteropServices.SafeHandle handle
-        ) {
+        )
+        {
             throw null;
         }
         public void Dispose() { }
@@ -141,7 +149,8 @@ namespace System.Threading
         [System.CLSCompliantAttribute(false)]
         public unsafe static object? GetNativeOverlappedState(
             System.Threading.NativeOverlapped* overlapped
-        ) {
+        )
+        {
             throw null;
         }
     }

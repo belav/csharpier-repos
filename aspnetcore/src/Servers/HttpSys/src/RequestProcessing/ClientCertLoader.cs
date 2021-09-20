@@ -43,7 +43,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
         internal ClientCertLoader(
             RequestContext requestContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _requestContext = requestContext;
             _tcs = new TaskCompletionSource<object?>();
             // we will use this overlapped structure to issue async IO to ul
@@ -190,13 +191,15 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                 else if (
                     statusCode == UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS
                     && HttpSysListener.SkipIOCPCallbackOnSuccess
-                ) {
+                )
+                {
                     IOCompleted(statusCode, bytesReceived);
                 }
                 else if (
                     statusCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS
                     && statusCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_IO_PENDING
-                ) {
+                )
+                {
                     // Some other bad error, possible(?) return values are:
                     // ERROR_INVALID_HANDLE, ERROR_INSUFFICIENT_BUFFER, ERROR_OPERATION_ABORTED
                     // Also ERROR_BAD_DATA if we got it twice or it reported smaller size buffer required.
@@ -238,7 +241,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             ClientCertLoader asyncResult,
             uint errorCode,
             uint numBytes
-        ) {
+        )
+        {
             RequestContext requestContext = asyncResult.RequestContext;
             try
             {
@@ -269,7 +273,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                             errorCode == UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS
                             && !HttpSysListener.SkipIOCPCallbackOnSuccess
                         )
-                    ) {
+                    )
+                    {
                         return;
                     }
                 }
@@ -333,7 +338,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             uint errorCode,
             uint numBytes,
             NativeOverlapped* nativeOverlapped
-        ) {
+        )
+        {
             var asyncResult = (ClientCertLoader)ThreadPoolBoundHandle.GetNativeOverlappedState(
                 nativeOverlapped
             )!;
@@ -382,7 +388,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             RequestQueue requestQueue,
             ulong connectionId,
             ILogger logger
-        ) {
+        )
+        {
             // +128 since a CBT is usually <128 thus we need to call HRCC just once. If the CBT
             // is >128 we will get ERROR_MORE_DATA and call again
             int size = RequestChannelBindStatusSize + 128;
@@ -432,7 +439,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     }
                     else if (
                         statusCode == UnsafeNclNativeMethods.ErrorCodes.ERROR_INVALID_PARAMETER
-                    ) {
+                    )
+                    {
                         Log.ChannelBindingUnsupported(logger);
                         return null; // old schannel library which doesn't support CBT
                     }

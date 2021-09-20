@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             NamedTypeSymbol type,
             CSharpCompilation currentCompilation,
             HashSet<Symbol> partialClosure
-        ) {
+        )
+        {
             if ((object)type == null)
             {
                 return;
@@ -85,7 +86,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             NamedTypeSymbol type,
             HashSet<Symbol> partialClosure,
             NamedTypeSymbol on
-        ) {
+        )
+        {
             Debug.Assert((object)type != null);
 
             if ((object)type.OriginalDefinition == on)
@@ -106,7 +108,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     var fieldType = field?.NonPointerType();
                     if (
                         fieldType is null || fieldType.TypeKind != TypeKind.Struct || field.IsStatic
-                    ) {
+                    )
+                    {
                         continue;
                     }
 
@@ -134,7 +137,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal static ManagedKind GetManagedKind(
             NamedTypeSymbol type,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             var (isManaged, hasGenerics) = IsManagedTypeHelper(type);
             var definitelyManaged = isManaged == ThreeState.True;
             if (isManaged == ThreeState.Unknown)
@@ -171,7 +175,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             NamedTypeSymbol type,
             HashSet<Symbol> partialClosure,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             Debug.Assert((object)type != null);
 
             var hasGenerics = false;
@@ -263,7 +268,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         private static (ThreeState isManaged, bool hasGenerics) IsManagedTypeHelper(
             NamedTypeSymbol type
-        ) {
+        )
+        {
             // To match dev10, we treat enums as their underlying types.
             if (type.IsEnumType())
             {

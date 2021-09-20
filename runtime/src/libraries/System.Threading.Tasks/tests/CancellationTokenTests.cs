@@ -441,7 +441,8 @@ namespace System.Threading.Tasks.Tests
                 CancellationTokenSource linked = CancellationTokenSource.CreateLinkedTokenSource(
                     original.Token
                 )
-            ) {
+            )
+            {
                 Assert.False(linked.Token.IsCancellationRequested);
                 original.Cancel();
                 Assert.True(linked.Token.IsCancellationRequested);
@@ -452,7 +453,8 @@ namespace System.Threading.Tasks.Tests
                 CancellationTokenSource linked = CancellationTokenSource.CreateLinkedTokenSource(
                     original.Token
                 )
-            ) {
+            )
+            {
                 Assert.False(linked.Token.IsCancellationRequested);
                 linked.Cancel();
                 Assert.True(linked.Token.IsCancellationRequested);
@@ -464,7 +466,8 @@ namespace System.Threading.Tasks.Tests
                 CancellationTokenSource linked = CancellationTokenSource.CreateLinkedTokenSource(
                     original.Token
                 )
-            ) {
+            )
+            {
                 Assert.False(linked.Token.IsCancellationRequested);
                 original.Dispose();
                 Assert.False(linked.Token.IsCancellationRequested);

@@ -385,7 +385,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             string template,
             int order = 0,
             params object[] metadata
-        ) {
+        )
+        {
             var builder = new RouteEndpointBuilder(
                 TestConstants.EmptyRequestDelegate,
                 RoutePatternFactory.Parse(template),

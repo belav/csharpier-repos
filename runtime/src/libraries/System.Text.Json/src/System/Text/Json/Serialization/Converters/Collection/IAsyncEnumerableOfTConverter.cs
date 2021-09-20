@@ -18,7 +18,8 @@ namespace System.Text.Json.Serialization.Converters
             JsonSerializerOptions options,
             ref ReadStack state,
             out TAsyncEnumerable value
-        ) {
+        )
+        {
             if (!typeToConvert.IsAssignableFrom(typeof(IAsyncEnumerable<TElement>)))
             {
                 ThrowHelper.ThrowNotSupportedException_CannotPopulateCollection(
@@ -40,7 +41,8 @@ namespace System.Text.Json.Serialization.Converters
             ref Utf8JsonReader reader,
             ref ReadStack state,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             state.Current.ReturnValue = new BufferedAsyncEnumerable();
         }
 
@@ -49,7 +51,8 @@ namespace System.Text.Json.Serialization.Converters
             TAsyncEnumerable value,
             JsonSerializerOptions options,
             ref WriteStack state
-        ) {
+        )
+        {
             if (!state.SupportContinuation)
             {
                 ThrowHelper.ThrowNotSupportedException_TypeRequiresAsyncSerialization(
@@ -70,7 +73,8 @@ namespace System.Text.Json.Serialization.Converters
             TAsyncEnumerable value,
             JsonSerializerOptions options,
             ref WriteStack state
-        ) {
+        )
+        {
             IAsyncEnumerator<TElement> enumerator;
             ValueTask<bool> moveNextTask;
 

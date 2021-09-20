@@ -40,10 +40,8 @@ namespace System.Data.OleDb
             SelectCommand = new OleDbCommand(selectCommandText, connection);
         }
 
-        public OleDbDataAdapter(
-            string? selectCommandText,
-            OleDbConnection? selectConnection
-        ) : this()
+        public OleDbDataAdapter(string? selectCommandText, OleDbConnection? selectConnection)
+            : this()
         {
             SelectCommand = new OleDbCommand(selectCommandText, selectConnection);
         }
@@ -161,7 +159,8 @@ namespace System.Data.OleDb
             IDbCommand? command,
             StatementType statementType,
             DataTableMapping tableMapping
-        ) {
+        )
+        {
             return new OleDbRowUpdatedEventArgs(dataRow, command, statementType, tableMapping);
         }
 
@@ -170,14 +169,16 @@ namespace System.Data.OleDb
             IDbCommand? command,
             StatementType statementType,
             DataTableMapping tableMapping
-        ) {
+        )
+        {
             return new OleDbRowUpdatingEventArgs(dataRow, command, statementType, tableMapping);
         }
 
         internal static void FillDataTable(
             OleDbDataReader dataReader,
             params DataTable[] dataTables
-        ) {
+        )
+        {
             OleDbDataAdapter adapter = new OleDbDataAdapter();
             adapter.Fill(dataTables, dataReader, 0, 0);
         }
@@ -349,7 +350,8 @@ namespace System.Data.OleDb
             UnsafeNativeMethods.ADORecordsetConstruction recordset,
             string? srcTable,
             out bool incrementResultCount
-        ) {
+        )
+        {
             incrementResultCount = false;
 
             IntPtr chapter; /*ODB.DB_NULL_HCHAPTER*/
@@ -417,7 +419,8 @@ namespace System.Data.OleDb
             object data,
             UnsafeNativeMethods.ADORecordConstruction record,
             string srcTable
-        ) {
+        )
+        {
             object? result = null;
             try
             {

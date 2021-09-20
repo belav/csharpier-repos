@@ -69,7 +69,8 @@ namespace System.Net.Mime.Tests
         public static void DispositionType_SetValue_InvalidThrows(
             Type exceptionType,
             string contentDisposition
-        ) {
+        )
+        {
             Assert.Throws(
                 exceptionType,
                 () => new ContentDisposition().DispositionType = contentDisposition

@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
         public override Task<ImmutableArray<Diagnostic>> AnalyzeSyntaxAsync(
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return Task.FromResult(
                 ImmutableArray.Create(
                     Diagnostic.Create(

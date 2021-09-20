@@ -41,7 +41,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
         public async Task TreeRouter_RouteAsync_RespectsPrecedence(
             string firstTemplate,
             string secondTemplate
-        ) {
+        )
+        {
             // Arrange
             var expectedRouteGroup = CreateRouteGroup(0, firstTemplate);
 
@@ -101,7 +102,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
         public async Task TreeRouter_RouteAsync_MatchesRouteWithTheRightLength(
             string url,
             string expected
-        ) {
+        )
+        {
             // Arrange
             var routes = new[]
             {
@@ -160,7 +162,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
         public async Task TreeRouter_RouteAsync_MatchesRoutesWithDefaults(
             string url,
             object[] routeValues
-        ) {
+        )
+        {
             // Arrange
             var routes = new[] { "{parameter1=1}/{parameter2=2}/{parameter3=3}/{parameter4=4}", };
 
@@ -215,7 +218,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
         public async Task TreeRouter_RouteAsync_MatchesConstrainedRoutesWithDefaults(
             string url,
             object[] routeValues
-        ) {
+        )
+        {
             // Arrange
             var routes = new[]
             {
@@ -331,7 +335,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
         public async Task TreeRouter_RouteAsync_DoesNotMatchRoutesWithMultipleIntermediateDefaultOrOptionalRouteValues(
             string template,
             string url
-        ) {
+        )
+        {
             // Arrange
             var builder = CreateBuilder();
 
@@ -354,7 +359,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
         public async Task RouteAsync_MatchRoutesWithMultipleIntermediateDefaultOrOptionalRouteValues_WhenAllIntermediateValuesAreProvided(
             string template,
             string url
-        ) {
+        )
+        {
             // Arrange
             var builder = CreateBuilder();
 
@@ -411,7 +417,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
         public async Task TreeRouter_RouteAsync_RespectsOrderOverPrecedence(
             string firstTemplate,
             string secondTemplate
-        ) {
+        )
+        {
             // Arrange
             var expectedRouteGroup = CreateRouteGroup(0, secondTemplate);
 
@@ -443,7 +450,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
         [InlineData("///c/")]
         public async Task TryMatch_MultipleOptionalParameters_WithEmptyIntermediateSegmentsDoesNotMatch(
             string url
-        ) {
+        )
+        {
             // Arrange
             var builder = CreateBuilder();
 
@@ -471,7 +479,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
         [InlineData("/a/b/c/")]
         public async Task TryMatch_MultipleOptionalParameters_WithIncrementalOptionalValues(
             string url
-        ) {
+        )
+        {
             // Arrange
             var builder = CreateBuilder();
 
@@ -567,7 +576,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
             string template,
             string requestPath,
             string expectedResult
-        ) {
+        )
+        {
             // Arrange
             var builder = CreateBuilder();
             MapInboundEntry(builder, template);
@@ -589,7 +599,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
         public async Task TreeRouter_RouteAsync_MatchesCatchAll_NullValue(
             string template,
             string requestPath
-        ) {
+        )
+        {
             // Arrange
             var builder = CreateBuilder();
             MapInboundEntry(builder, template);
@@ -611,7 +622,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
         public async Task TreeRouter_RouteAsync_MatchesCatchAll_NullValue_DoesNotReplaceExistingValue(
             string template,
             string requestPath
-        ) {
+        )
+        {
             // Arrange
             var builder = CreateBuilder();
             MapInboundEntry(builder, template);
@@ -634,7 +646,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
         public async Task TreeRouter_RouteAsync_MatchesCatchAll_UsesDefaultValue(
             string template,
             string requestPath
-        ) {
+        )
+        {
             // Arrange
             var builder = CreateBuilder();
             MapInboundEntry(builder, template);
@@ -717,7 +730,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
             string template,
             string request,
             bool expectedResult
-        ) {
+        )
+        {
             // Arrange
             var expectedRouteGroup = CreateRouteGroup(0, template);
 
@@ -767,7 +781,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
             string p1,
             string p2,
             string p3
-        ) {
+        )
+        {
             // Arrange
             var expectedRouteGroup = CreateRouteGroup(0, template);
 
@@ -812,7 +827,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
         public async Task TreeRouter_WithOptionalCompositeParameter_Invalid(
             string template,
             string request
-        ) {
+        )
+        {
             // Arrange
             var expectedRouteGroup = CreateRouteGroup(0, template);
 
@@ -848,7 +864,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
             string firstTemplate,
             string secondTemplate,
             string expectedPath
-        ) {
+        )
+        {
             // Arrange
             var values = new Dictionary<string, object> { { "url", "dingo" }, { "id", 5 } };
 
@@ -894,7 +911,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
             string firstTemplate,
             string secondTemplate,
             string expectedPath
-        ) {
+        )
+        {
             // Arrange
             var route = CreateTreeRouter(firstTemplate, secondTemplate);
             var parameter = 5;
@@ -924,7 +942,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
             string firstTemplate,
             string secondTemplate,
             string expectedPath
-        ) {
+        )
+        {
             // Arrange
             var route = CreateTreeRouter(firstTemplate, secondTemplate);
             var parameter = 5;
@@ -960,7 +979,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
         public void TreeRouter_GenerateLink_RespectsPrecedence(
             string firstTemplate,
             string secondTemplate
-        ) {
+        )
+        {
             // Arrange
             var builder = CreateBuilder();
 
@@ -1000,7 +1020,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
             string template,
             string expectedPath,
             object parameter
-        ) {
+        )
+        {
             // Arrange
             var builder = CreateBuilder();
             MapOutboundEntry(builder, template);
@@ -1050,7 +1071,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
         public void TreeRouter_GenerateLink_RespectsOrderOverPrecedence(
             string firstTemplate,
             string secondTemplate
-        ) {
+        )
+        {
             // Arrange
             var builder = CreateBuilder();
 
@@ -1083,7 +1105,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
         public void TreeRouter_GenerateLink_RespectsOrder(
             string firstTemplate,
             string secondTemplate
-        ) {
+        )
+        {
             // Arrange
             var builder = CreateBuilder();
 
@@ -1118,7 +1141,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
         public void TreeRouter_GenerateLink_EnsuresStableOrder(
             string firstTemplate,
             string secondTemplate
-        ) {
+        )
+        {
             // Arrange
             var builder = CreateBuilder();
 
@@ -1248,7 +1272,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
         public void TreeRouter_DoesNotGenerateLink_IfValuesDoNotMatchNamedEntry(
             string template,
             string value
-        ) {
+        )
+        {
             // Arrange
             var builder = CreateBuilder();
 
@@ -1833,7 +1858,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
             object ambientValues,
             object values,
             string expected
-        ) {
+        )
+        {
             // Arrange
             var builder = CreateBuilder();
             MapOutboundEntry(builder, template);
@@ -2174,7 +2200,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
             object values,
             object ambientValues = null,
             string name = null
-        ) {
+        )
+        {
             var mockHttpContext = new Mock<HttpContext>();
             mockHttpContext.Setup(h => h.RequestServices.GetService(typeof(ILoggerFactory)))
                 .Returns(NullLoggerFactory.Instance);
@@ -2192,7 +2219,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
             string template,
             int order = 0,
             IRouter handler = null
-        ) {
+        )
+        {
             var entry = builder.MapInbound(
                 handler ?? new StubRouter(),
                 TemplateParser.Parse(template),
@@ -2213,7 +2241,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
             int order = 0,
             string name = null,
             IRouter handler = null
-        ) {
+        )
+        {
             var entry = builder.MapOutbound(
                 handler ?? new StubRouter(),
                 TemplateParser.Parse(template),

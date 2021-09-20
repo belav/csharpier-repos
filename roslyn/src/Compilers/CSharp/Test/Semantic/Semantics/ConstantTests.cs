@@ -1522,7 +1522,8 @@ ulong.MinValue --> 0";
         private static string ParseAndGetConstantFoldingSteps(
             string source,
             Func<BoundNode, bool> predicate
-        ) {
+        )
+        {
             var block = ParseAndBindMethodBody(source);
             var constants = BoundTreeSequencer.GetNodes(block)
                 .Where(predicate)

@@ -68,7 +68,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryCast
             SemanticModel model,
             TCastExpression node,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             if (!IsUnnecessaryCast(model, node, cancellationToken))

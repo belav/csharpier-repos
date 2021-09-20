@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MetadataAsSource
                 string? sourceWithSymbolReference = null,
                 string? languageVersion = null,
                 string? metadataLanguageVersion = null
-            ) {
+            )
+            {
                 projectLanguage ??= LanguageNames.CSharp;
                 metadataSources ??= SpecializedCollections.EmptyEnumerable<string>();
                 metadataSources = !metadataSources.Any()
@@ -74,7 +75,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MetadataAsSource
                 ISymbol symbol,
                 Project? project = null,
                 bool allowDecompilation = false
-            ) {
+            )
+            {
                 project ??= this.DefaultProject;
                 Contract.ThrowIfNull(symbol);
 
@@ -90,7 +92,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MetadataAsSource
                 string? symbolMetadataName = null,
                 Project? project = null,
                 bool allowDecompilation = false
-            ) {
+            )
+            {
                 symbolMetadataName ??= AbstractMetadataAsSourceTests.DefaultSymbolMetadataName;
                 project ??= this.DefaultProject;
 
@@ -128,7 +131,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MetadataAsSource
                 string symbolMetadataName,
                 string expected,
                 Project? project = null
-            ) {
+            )
+            {
                 var result = await GenerateSourceAsync(symbolMetadataName, project);
                 VerifyResult(result, expected);
             }
@@ -159,7 +163,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MetadataAsSource
             public async Task<ISymbol?> ResolveSymbolAsync(
                 string symbolMetadataName,
                 Compilation? compilation = null
-            ) {
+            )
+            {
                 if (compilation == null)
                 {
                     compilation = await this.DefaultProject.GetRequiredCompilationAsync(
@@ -246,7 +251,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MetadataAsSource
                 string? sourceWithSymbolReference,
                 string? languageVersion,
                 string? metadataLanguageVersion
-            ) {
+            )
+            {
                 var languageVersionAttribute = languageVersion is null
                     ? ""
                     : $@" LanguageVersion=""{languageVersion}""";

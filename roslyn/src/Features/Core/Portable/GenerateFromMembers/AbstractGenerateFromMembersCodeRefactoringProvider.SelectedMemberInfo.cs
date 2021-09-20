@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.GenerateFromMembers
                 INamedTypeSymbol containingType,
                 ImmutableArray<SyntaxNode> selectedDeclarations,
                 ImmutableArray<ISymbol> selectedMembers
-            ) {
+            )
+            {
                 ContainingType = containingType;
                 SelectedDeclarations = selectedDeclarations;
                 SelectedMembers = selectedMembers;

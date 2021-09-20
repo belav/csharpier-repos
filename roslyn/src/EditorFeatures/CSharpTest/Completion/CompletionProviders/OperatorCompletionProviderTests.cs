@@ -133,7 +133,8 @@ public class Program
         public async Task OperatorSuggestionOnPartiallyWrittenMember(
             string expression,
             bool isOffered
-        ) {
+        )
+        {
             var verifyAction = isOffered
                 ? new Func<string, Task>(
                       markup => VerifyItemExistsAsync(markup, "+", inlineDescription: "x + y")
@@ -317,7 +318,8 @@ public class Program
         public async Task OperatorSuggestionForSpecialTypes(
             string specialType,
             int numberOfSuggestions
-        ) {
+        )
+        {
             var completionItems = await GetCompletionItemsAsync(
                 @$"
 public class Program

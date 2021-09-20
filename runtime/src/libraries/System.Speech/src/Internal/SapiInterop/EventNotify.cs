@@ -35,7 +35,8 @@ namespace System.Speech.Internal.SapiInterop
             ISpEventSource sapiEventSource,
             IAsyncDispatch dispatcher,
             bool additionalSapiFeatures
-        ) {
+        )
+        {
             // Remember event source
             _sapiEventSourceReference = new WeakReference(sapiEventSource);
 
@@ -95,7 +96,8 @@ namespace System.Speech.Internal.SapiInterop
                                     _audioFormat
                                 )
                             )
-                        ) {
+                        )
+                        {
                             speechEvents.Add(speechEvent);
                         }
                         _dispatcher.Post(speechEvents.ToArray());

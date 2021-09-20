@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string header,
             string beforeString,
             string afterString
-        ) {
+        )
+        {
             if (beforeString == null && afterString == null)
             {
                 // Whitespace only

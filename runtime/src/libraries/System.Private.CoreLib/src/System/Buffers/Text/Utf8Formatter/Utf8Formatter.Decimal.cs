@@ -32,7 +32,8 @@ namespace System.Buffers.Text
             Span<byte> destination,
             out int bytesWritten,
             StandardFormat format = default
-        ) {
+        )
+        {
             if (format.IsDefault)
             {
                 format = 'G';
@@ -71,7 +72,8 @@ namespace System.Buffers.Text
                             numDigits != 0
                             && number.Scale == numDigits
                             && digits[numDigits - 1] == '0'
-                        ) {
+                        )
+                        {
                             while (numDigits != 0 && digits[numDigits - 1] == '0')
                             {
                                 digits[numDigits - 1] = 0;

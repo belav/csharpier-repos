@@ -40,7 +40,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             (string text, int destination)[] entries,
             bool? vectorize,
             JumpTable fallback
-        ) {
+        )
+        {
             _defaultDestination = defaultDestination;
             _exitDestination = exitDestination;
             _entries = entries;

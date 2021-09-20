@@ -21,7 +21,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
             CodeModelState state,
             ProjectId projectId,
             ITypeSymbol typeSymbol
-        ) {
+        )
+        {
             var newElement = new ExternalCodeUnknown(state, projectId, typeSymbol);
             return (EnvDTE.CodeElement)ComAggregate.CreateAggregatedObject(newElement);
         }

@@ -32,7 +32,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         public void CanCreateModel_ReturnsTrue_IfIsTopLevelObject(
             bool isTopLevelObject,
             int expectedCanCreate
-        ) {
+        )
+        {
             var bindingContext = CreateContext(GetMetadataForType(typeof(Person)));
             bindingContext.IsTopLevelObject = isTopLevelObject;
 
@@ -103,7 +104,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         [InlineData(ComplexTypeModelBinder.NoDataAvailable)]
         public void CanCreateModel_ReturnsTrue_IfNotIsTopLevelObject_BasedOnValueAvailability(
             int valueAvailable
-        ) {
+        )
+        {
             // Arrange
             var valueProvider = new Mock<IValueProvider>(MockBehavior.Strict);
             valueProvider.Setup(provider => provider.ContainsPrefix("SimpleContainer.Simple.Name"))
@@ -170,7 +172,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         public void CanCreateModel_CreatesModelForValueProviderBasedBinderMetadatas_IfAValueProviderProvidesValue(
             Type modelType,
             int valueProviderProvidesValue
-        ) {
+        )
+        {
             var valueProvider = new Mock<IValueProvider>();
             valueProvider.Setup(o => o.ContainsPrefix(It.IsAny<string>()))
                 .Returns(
@@ -211,7 +214,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         public void CanCreateModel_CreatesModelForValueProviderBasedBinderMetadatas_IfPropertyHasGreedyBindingSource(
             Type modelType,
             int expectedCanCreate
-        ) {
+        )
+        {
             var valueProvider = new Mock<IValueProvider>();
             valueProvider.Setup(o => o.ContainsPrefix(It.IsAny<string>()))
                 .Returns(expectedCanCreate == ComplexTypeModelBinder.ValueProviderDataAvailable);
@@ -242,7 +246,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         public void CanCreateModel_ForExplicitValueProviderMetadata_UsesOriginalValueProvider(
             Type modelType,
             int expectedCanCreate
-        ) {
+        )
+        {
             var valueProvider = new Mock<IValueProvider>();
             valueProvider.Setup(o => o.ContainsPrefix(It.IsAny<string>())).Returns(false);
 
@@ -294,7 +299,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             Type modelType,
             bool valueProviderProvidesValue,
             int expectedCanCreate
-        ) {
+        )
+        {
             var valueProvider = new Mock<IValueProvider>();
             valueProvider.Setup(o => o.ContainsPrefix(It.IsAny<string>()))
                 .Returns(valueProviderProvidesValue);
@@ -325,7 +331,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         public async Task BindModelAsync_CreatesModel_IfIsTopLevelObject(
             bool allowValidatingTopLevelNodes,
             bool isBindingRequired
-        ) {
+        )
+        {
             // Arrange
             var expectedErrorCount = isBindingRequired ? 1 : 0;
             var mockValueProvider = new Mock<IValueProvider>();
@@ -562,7 +569,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         public void CanUpdateProperty_CollectionProperty_FalseOnlyForArray(
             string propertyName,
             bool expected
-        ) {
+        )
+        {
             // Arrange
             var metadataProvider = _metadataProvider;
             var metadata = metadataProvider.GetMetadataForProperty(
@@ -832,7 +840,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         public void CanBindProperty_BindingAttributes_OverridingBehavior(
             string property,
             bool expected
-        ) {
+        )
+        {
             // Arrange
             var metadata = GetMetadataForProperty(typeof(ModelWithMixedBindingBehaviors), property);
             var bindingContext = new DefaultModelBindingContext()
@@ -1204,7 +1213,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         public void SetProperty_ValueProvidedAndCanUpdatePropertyTrue_DoesNothing(
             string propertyName,
             Func<object, object> propertyAccessor
-        ) {
+        )
+        {
             // Arrange
             var model = new MyModelTestingCanUpdateProperty();
             var type = model.GetType();
@@ -1364,7 +1374,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         private static DefaultModelBindingContext CreateContext(
             ModelMetadata metadata,
             object model = null
-        ) {
+        )
+        {
             var valueProvider = new TestValueProvider(new Dictionary<string, object>());
             return new DefaultModelBindingContext()
             {
@@ -1746,7 +1757,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             public virtual bool CanBindPropertyPublic(
                 ModelBindingContext bindingContext,
                 ModelMetadata propertyMetadata
-            ) {
+            )
+            {
                 if (Results.Count == 0)
                 {
                     return base.CanBindProperty(bindingContext, propertyMetadata);
@@ -1760,7 +1772,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             protected override bool CanBindProperty(
                 ModelBindingContext bindingContext,
                 ModelMetadata propertyMetadata
-            ) {
+            )
+            {
                 return CanBindPropertyPublic(bindingContext, propertyMetadata);
             }
 
@@ -1779,7 +1792,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                 string modelName,
                 ModelMetadata propertyMetadata,
                 ModelBindingResult result
-            ) {
+            )
+            {
                 base.SetProperty(bindingContext, modelName, propertyMetadata, result);
             }
 
@@ -1788,7 +1802,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                 string modelName,
                 ModelMetadata propertyMetadata,
                 ModelBindingResult result
-            ) {
+            )
+            {
                 SetPropertyPublic(bindingContext, modelName, propertyMetadata, result);
             }
         }

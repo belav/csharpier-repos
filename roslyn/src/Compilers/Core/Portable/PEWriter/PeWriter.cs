@@ -46,7 +46,8 @@ namespace Microsoft.Cci
             bool emitTestCoverageData,
             RSAParameters? privateKeyOpt,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // If PDB writer is given, we have to have PDB path.
             Debug.Assert(nativePdbWriterOpt == null || pdbPathOpt != null);
 
@@ -334,7 +335,8 @@ namespace Microsoft.Cci
             Blob guidSectionFixup,
             Blob stringFixup,
             Guid mvid
-        ) {
+        )
+        {
             if (!guidFixup.IsDefault)
             {
                 var writer = new BlobWriter(guidFixup);
@@ -369,7 +371,8 @@ namespace Microsoft.Cci
 
         private static ResourceSectionBuilder CreateNativeResourceSectionSerializer(
             CommonPEModuleBuilder module
-        ) {
+        )
+        {
             // Win32 resources are supplied to the compiler in one of two forms, .RES (the output of the resource compiler),
             // or .OBJ (the output of running cvtres.exe on a .RES file). A .RES file is parsed and processed into
             // a set of objects implementing IWin32Resources. These are then ordered and the final image form is constructed

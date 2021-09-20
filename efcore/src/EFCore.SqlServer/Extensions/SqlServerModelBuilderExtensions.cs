@@ -26,7 +26,8 @@ namespace Microsoft.EntityFrameworkCore
             this ModelBuilder modelBuilder,
             string? name = null,
             string? schema = null
-        ) {
+        )
+        {
             Check.NotNull(modelBuilder, nameof(modelBuilder));
             Check.NullButNotEmpty(name, nameof(name));
             Check.NullButNotEmpty(schema, nameof(schema));
@@ -63,7 +64,8 @@ namespace Microsoft.EntityFrameworkCore
             string? name,
             string? schema,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             if (!modelBuilder.CanSetHiLoSequence(name, schema))
             {
                 return null;
@@ -88,7 +90,8 @@ namespace Microsoft.EntityFrameworkCore
             string? name,
             string? schema,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             Check.NotNull(modelBuilder, nameof(modelBuilder));
             Check.NullButNotEmpty(name, nameof(name));
             Check.NullButNotEmpty(schema, nameof(schema));
@@ -118,7 +121,8 @@ namespace Microsoft.EntityFrameworkCore
             this ModelBuilder modelBuilder,
             int seed = 1,
             int increment = 1
-        ) {
+        )
+        {
             Check.NotNull(modelBuilder, nameof(modelBuilder));
 
             var model = modelBuilder.Model;
@@ -146,7 +150,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionModelBuilder modelBuilder,
             int? seed,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             if (modelBuilder.CanSetIdentityColumnSeed(seed, fromDataAnnotation))
             {
                 modelBuilder.Metadata.SetIdentitySeed(seed, fromDataAnnotation);
@@ -167,7 +172,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionModelBuilder modelBuilder,
             int? seed,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             Check.NotNull(modelBuilder, nameof(modelBuilder));
 
             return modelBuilder.CanSetAnnotation(
@@ -191,7 +197,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionModelBuilder modelBuilder,
             int? increment,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             if (modelBuilder.CanSetIdentityColumnIncrement(increment, fromDataAnnotation))
             {
                 modelBuilder.Metadata.SetIdentityIncrement(increment, fromDataAnnotation);
@@ -212,7 +219,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionModelBuilder modelBuilder,
             int? increment,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             Check.NotNull(modelBuilder, nameof(modelBuilder));
 
             return modelBuilder.CanSetAnnotation(
@@ -237,13 +245,15 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionModelBuilder modelBuilder,
             SqlServerValueGenerationStrategy? valueGenerationStrategy,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             if (
                 modelBuilder.CanSetValueGenerationStrategy(
                     valueGenerationStrategy,
                     fromDataAnnotation
                 )
-            ) {
+            )
+            {
                 modelBuilder.Metadata.SetValueGenerationStrategy(
                     valueGenerationStrategy,
                     fromDataAnnotation
@@ -276,7 +286,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionModelBuilder modelBuilder,
             SqlServerValueGenerationStrategy? valueGenerationStrategy,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             Check.NotNull(modelBuilder, nameof(modelBuilder));
 
             return modelBuilder.CanSetAnnotation(
@@ -300,7 +311,8 @@ namespace Microsoft.EntityFrameworkCore
         public static ModelBuilder HasDatabaseMaxSize(
             this ModelBuilder modelBuilder,
             string maxSize
-        ) {
+        )
+        {
             Check.NotNull(modelBuilder, nameof(modelBuilder));
             Check.NotNull(maxSize, nameof(maxSize));
 
@@ -328,7 +340,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionModelBuilder modelBuilder,
             string? maxSize,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             if (modelBuilder.CanSetDatabaseMaxSize(maxSize, fromDataAnnotation))
             {
                 modelBuilder.Metadata.SetDatabaseMaxSize(maxSize, fromDataAnnotation);
@@ -349,7 +362,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionModelBuilder modelBuilder,
             string? maxSize,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             Check.NotNull(modelBuilder, nameof(modelBuilder));
 
             return modelBuilder.CanSetAnnotation(
@@ -373,7 +387,8 @@ namespace Microsoft.EntityFrameworkCore
         public static ModelBuilder HasServiceTier(
             this ModelBuilder modelBuilder,
             string serviceTier
-        ) {
+        )
+        {
             Check.NotNull(modelBuilder, nameof(modelBuilder));
             Check.NotNull(serviceTier, nameof(serviceTier));
 
@@ -396,7 +411,8 @@ namespace Microsoft.EntityFrameworkCore
         public static ModelBuilder HasServiceTierSql(
             this ModelBuilder modelBuilder,
             string serviceTier
-        ) {
+        )
+        {
             Check.NotNull(modelBuilder, nameof(modelBuilder));
             Check.NotNull(serviceTier, nameof(serviceTier));
 
@@ -424,7 +440,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionModelBuilder modelBuilder,
             string? serviceTier,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             if (modelBuilder.CanSetServiceTierSql(serviceTier, fromDataAnnotation))
             {
                 modelBuilder.Metadata.SetServiceTierSql(serviceTier, fromDataAnnotation);
@@ -445,7 +462,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionModelBuilder modelBuilder,
             string? serviceTier,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             Check.NotNull(modelBuilder, nameof(modelBuilder));
 
             return modelBuilder.CanSetAnnotation(
@@ -469,7 +487,8 @@ namespace Microsoft.EntityFrameworkCore
         public static ModelBuilder HasPerformanceLevel(
             this ModelBuilder modelBuilder,
             string performanceLevel
-        ) {
+        )
+        {
             Check.NotNull(modelBuilder, nameof(modelBuilder));
             Check.NotNull(performanceLevel, nameof(performanceLevel));
 
@@ -494,7 +513,8 @@ namespace Microsoft.EntityFrameworkCore
         public static ModelBuilder HasPerformanceLevelSql(
             this ModelBuilder modelBuilder,
             string performanceLevel
-        ) {
+        )
+        {
             Check.NotNull(modelBuilder, nameof(modelBuilder));
             Check.NotNull(performanceLevel, nameof(performanceLevel));
 
@@ -522,7 +542,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionModelBuilder modelBuilder,
             string? performanceLevel,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             if (modelBuilder.CanSetPerformanceLevelSql(performanceLevel, fromDataAnnotation))
             {
                 modelBuilder.Metadata.SetPerformanceLevelSql(performanceLevel, fromDataAnnotation);
@@ -543,7 +564,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionModelBuilder modelBuilder,
             string? performanceLevel,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             Check.NotNull(modelBuilder, nameof(modelBuilder));
 
             return modelBuilder.CanSetAnnotation(

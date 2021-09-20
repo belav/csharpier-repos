@@ -275,7 +275,8 @@ End Class";
             TestLspServer testLspServer,
             string query,
             IProgress<LSP.SymbolInformation[]>? progress = null
-        ) {
+        )
+        {
             var request = new LSP.WorkspaceSymbolParams
             {
                 Query = query,
@@ -297,7 +298,8 @@ End Class";
         private static string GetContainerName(
             Solution solution,
             string? containingSymbolName = null
-        ) {
+        )
+        {
             if (containingSymbolName == null)
             {
                 return string.Format(FeaturesResources.project_0, solution.Projects.Single().Name);

@@ -12,7 +12,8 @@ namespace System.CommandLine.Rendering
     {
         public static CommandLineBuilder UseAnsiTerminalWhenAvailable(
             this CommandLineBuilder builder
-        ) {
+        )
+        {
             builder.ConfigureConsole(
                 context =>
                 {
@@ -48,7 +49,8 @@ namespace System.CommandLine.Rendering
             if (
                 context.ParseResult.Directives.TryGetValues("output", out var modeString)
                 && Enum.TryParse<OutputMode>(modeString.FirstOrDefault(), true, out var mode)
-            ) {
+            )
+            {
                 return mode;
             }
 

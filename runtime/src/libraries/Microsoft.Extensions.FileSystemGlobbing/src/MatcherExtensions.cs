@@ -19,7 +19,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing
         public static void AddExcludePatterns(
             this Matcher matcher,
             params IEnumerable<string>[] excludePatternsGroups
-        ) {
+        )
+        {
             foreach (IEnumerable<string> group in excludePatternsGroups)
             {
                 foreach (string pattern in group)
@@ -37,7 +38,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing
         public static void AddIncludePatterns(
             this Matcher matcher,
             params IEnumerable<string>[] includePatternsGroups
-        ) {
+        )
+        {
             foreach (IEnumerable<string> group in includePatternsGroups)
             {
                 foreach (string pattern in group)
@@ -56,7 +58,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing
         public static IEnumerable<string> GetResultsInFullPath(
             this Matcher matcher,
             string directoryPath
-        ) {
+        )
+        {
             IEnumerable<FilePatternMatch> matches =
                 matcher.Execute(new DirectoryInfoWrapper(new DirectoryInfo(directoryPath))).Files;
             string[] result = matches.Select(
@@ -112,7 +115,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing
             this Matcher matcher,
             string rootDir,
             IEnumerable<string> files
-        ) {
+        )
+        {
             if (matcher == null)
             {
                 throw new ArgumentNullException(nameof(matcher));

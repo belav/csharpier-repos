@@ -27,7 +27,8 @@ namespace System.Web.Mvc.Html
             HtmlHelper htmlHelper,
             ModelMetadata modelMetadata,
             string modelName
-        ) {
+        )
+        {
             FormContext formContext = htmlHelper.ViewContext.FormContext;
             FieldValidationMetadata fieldMetadata = formContext.GetValidationMetadataForField(
                 modelName,
@@ -44,7 +45,8 @@ namespace System.Web.Mvc.Html
                 ModelClientValidationRule rule in validators.SelectMany(
                     v => v.GetClientValidationRules()
                 )
-            ) {
+            )
+            {
                 fieldMetadata.ValidationRules.Add(rule);
             }
 
@@ -74,7 +76,8 @@ namespace System.Web.Mvc.Html
             HttpContextBase httpContext,
             ModelError error,
             ModelState modelState
-        ) {
+        )
+        {
             if (!String.IsNullOrEmpty(error.ErrorMessage))
             {
                 return error.ErrorMessage;
@@ -117,7 +120,8 @@ namespace System.Web.Mvc.Html
         public static void ValidateFor<TModel, TProperty>(
             this HtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TProperty>> expression
-        ) {
+        )
+        {
             ValidateHelper(
                 htmlHelper,
                 ModelMetadata.FromLambdaExpression(expression, htmlHelper.ViewData),
@@ -129,7 +133,8 @@ namespace System.Web.Mvc.Html
             HtmlHelper htmlHelper,
             ModelMetadata modelMetadata,
             string expression
-        ) {
+        )
+        {
             FormContext formContext = htmlHelper.ViewContext.GetFormContextForClientValidation();
             if (formContext == null || htmlHelper.ViewContext.UnobtrusiveJavaScriptEnabled)
             {
@@ -158,7 +163,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper htmlHelper,
             string modelName,
             object htmlAttributes
-        ) {
+        )
+        {
             return ValidationMessage(
                 htmlHelper,
                 modelName,
@@ -182,7 +188,8 @@ namespace System.Web.Mvc.Html
             string modelName,
             object htmlAttributes,
             string tag
-        ) {
+        )
+        {
             return ValidationMessage(
                 htmlHelper,
                 modelName,
@@ -201,7 +208,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper htmlHelper,
             string modelName,
             string validationMessage
-        ) {
+        )
+        {
             return ValidationMessage(
                 htmlHelper,
                 modelName,
@@ -220,7 +228,8 @@ namespace System.Web.Mvc.Html
             string modelName,
             string validationMessage,
             object htmlAttributes
-        ) {
+        )
+        {
             return ValidationMessage(
                 htmlHelper,
                 modelName,
@@ -251,7 +260,8 @@ namespace System.Web.Mvc.Html
             string validationMessage,
             object htmlAttributes,
             string tag
-        ) {
+        )
+        {
             return ValidationMessage(
                 htmlHelper,
                 modelName,
@@ -281,7 +291,8 @@ namespace System.Web.Mvc.Html
             string modelName,
             string validationMessage,
             string tag
-        ) {
+        )
+        {
             return ValidationMessage(
                 htmlHelper,
                 modelName,
@@ -295,7 +306,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper htmlHelper,
             string modelName,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             return ValidationMessage(
                 htmlHelper,
                 modelName,
@@ -320,7 +332,8 @@ namespace System.Web.Mvc.Html
             string modelName,
             IDictionary<string, object> htmlAttributes,
             string tag
-        ) {
+        )
+        {
             return ValidationMessage(
                 htmlHelper,
                 modelName,
@@ -340,7 +353,8 @@ namespace System.Web.Mvc.Html
             string modelName,
             string validationMessage,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             return ValidationMessage(
                 htmlHelper,
                 modelName,
@@ -373,7 +387,8 @@ namespace System.Web.Mvc.Html
             string validationMessage,
             IDictionary<string, object> htmlAttributes,
             string tag
-        ) {
+        )
+        {
             if (modelName == null)
             {
                 throw new ArgumentNullException("modelName");
@@ -397,7 +412,8 @@ namespace System.Web.Mvc.Html
         public static MvcHtmlString ValidationMessageFor<TModel, TProperty>(
             this HtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TProperty>> expression
-        ) {
+        )
+        {
             return ValidationMessageFor(
                 htmlHelper,
                 expression,
@@ -415,7 +431,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TProperty>> expression,
             string validationMessage
-        ) {
+        )
+        {
             return ValidationMessageFor(
                 htmlHelper,
                 expression,
@@ -434,7 +451,8 @@ namespace System.Web.Mvc.Html
             Expression<Func<TModel, TProperty>> expression,
             string validationMessage,
             object htmlAttributes
-        ) {
+        )
+        {
             return ValidationMessageFor(
                 htmlHelper,
                 expression,
@@ -453,7 +471,8 @@ namespace System.Web.Mvc.Html
             Expression<Func<TModel, TProperty>> expression,
             string validationMessage,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             return ValidationMessageFor(
                 htmlHelper,
                 expression,
@@ -485,7 +504,8 @@ namespace System.Web.Mvc.Html
             Expression<Func<TModel, TProperty>> expression,
             string validationMessage,
             string tag
-        ) {
+        )
+        {
             return ValidationMessageFor(
                 htmlHelper,
                 expression,
@@ -519,7 +539,8 @@ namespace System.Web.Mvc.Html
             string validationMessage,
             object htmlAttributes,
             string tag
-        ) {
+        )
+        {
             return ValidationMessageFor(
                 htmlHelper,
                 expression,
@@ -554,7 +575,8 @@ namespace System.Web.Mvc.Html
             string validationMessage,
             IDictionary<string, object> htmlAttributes,
             string tag
-        ) {
+        )
+        {
             return ValidationMessageHelper(
                 htmlHelper,
                 ModelMetadata.FromLambdaExpression(expression, htmlHelper.ViewData),
@@ -577,7 +599,8 @@ namespace System.Web.Mvc.Html
             string validationMessage,
             IDictionary<string, object> htmlAttributes,
             string tag
-        ) {
+        )
+        {
             string modelName = htmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(
                 expression
             );
@@ -672,7 +695,8 @@ namespace System.Web.Mvc.Html
         public static MvcHtmlString ValidationSummary(
             this HtmlHelper htmlHelper,
             bool excludePropertyErrors
-        ) {
+        )
+        {
             return ValidationSummary(htmlHelper, excludePropertyErrors, message: null);
         }
 
@@ -691,7 +715,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper htmlHelper,
             string message,
             string headingTag
-        ) {
+        )
+        {
             return ValidationSummary(
                 htmlHelper,
                 excludePropertyErrors: false,
@@ -705,7 +730,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper htmlHelper,
             bool excludePropertyErrors,
             string message
-        ) {
+        )
+        {
             return ValidationSummary(
                 htmlHelper,
                 excludePropertyErrors,
@@ -720,7 +746,8 @@ namespace System.Web.Mvc.Html
             bool excludePropertyErrors,
             string message,
             string headingTag
-        ) {
+        )
+        {
             return ValidationSummary(
                 htmlHelper,
                 excludePropertyErrors,
@@ -734,7 +761,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper htmlHelper,
             string message,
             object htmlAttributes
-        ) {
+        )
+        {
             return ValidationSummary(
                 htmlHelper,
                 excludePropertyErrors: false,
@@ -749,7 +777,8 @@ namespace System.Web.Mvc.Html
             string message,
             object htmlAttributes,
             string headingTag
-        ) {
+        )
+        {
             return ValidationSummary(
                 htmlHelper,
                 excludePropertyErrors: false,
@@ -764,7 +793,8 @@ namespace System.Web.Mvc.Html
             bool excludePropertyErrors,
             string message,
             object htmlAttributes
-        ) {
+        )
+        {
             return ValidationSummary(
                 htmlHelper,
                 excludePropertyErrors,
@@ -780,7 +810,8 @@ namespace System.Web.Mvc.Html
             string message,
             object htmlAttributes,
             string headingTag
-        ) {
+        )
+        {
             return ValidationSummary(
                 htmlHelper,
                 excludePropertyErrors,
@@ -794,7 +825,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper htmlHelper,
             string message,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             return ValidationSummary(
                 htmlHelper,
                 excludePropertyErrors: false,
@@ -809,7 +841,8 @@ namespace System.Web.Mvc.Html
             string message,
             IDictionary<string, object> htmlAttributes,
             string headingTag
-        ) {
+        )
+        {
             return ValidationSummary(
                 htmlHelper,
                 excludePropertyErrors: false,
@@ -824,7 +857,8 @@ namespace System.Web.Mvc.Html
             bool excludePropertyErrors,
             string message,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             return ValidationSummary(
                 htmlHelper,
                 excludePropertyErrors,
@@ -840,7 +874,8 @@ namespace System.Web.Mvc.Html
             string message,
             IDictionary<string, object> htmlAttributes,
             string headingTag
-        ) {
+        )
+        {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException("htmlHelper");
@@ -946,7 +981,8 @@ namespace System.Web.Mvc.Html
         private static IEnumerable<ModelState> GetModelStateList(
             HtmlHelper htmlHelper,
             bool excludePropertyErrors
-        ) {
+        )
+        {
             if (excludePropertyErrors)
             {
                 ModelState ms;

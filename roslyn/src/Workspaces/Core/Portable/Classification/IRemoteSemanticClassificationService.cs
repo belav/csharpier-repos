@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.Classification
 
         internal static SerializableClassifiedSpans Dehydrate(
             ImmutableArray<ClassifiedSpan> classifiedSpans
-        ) {
+        )
+        {
             using var _ = PooledDictionary<string, int>.GetInstance(out var classificationTypeToId);
             return Dehydrate(classifiedSpans, classificationTypeToId);
         }
@@ -48,7 +49,8 @@ namespace Microsoft.CodeAnalysis.Classification
         private static SerializableClassifiedSpans Dehydrate(
             ImmutableArray<ClassifiedSpan> classifiedSpans,
             Dictionary<string, int> classificationTypeToId
-        ) {
+        )
+        {
             var classificationTypes = new List<string>();
             var classificationTriples = new List<int>(capacity: classifiedSpans.Length * 3);
 

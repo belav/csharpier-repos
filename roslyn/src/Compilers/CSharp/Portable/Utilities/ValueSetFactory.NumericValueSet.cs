@@ -255,7 +255,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         tc.Related(Equal, tc.MinValue, first)
                         || tc.Related(GreaterThanOrEqual, builder.Last().last, tc.Prev(first))
                     )
-                ) {
+                )
+                {
                     // merge with previous interval when adjacent
                     var oldLastInterval = builder.Pop();
                     oldLastInterval.last = Max(last, oldLastInterval.last);

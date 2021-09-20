@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Razor
         public static void SetCompilation(
             this TagHelperDescriptorProviderContext context,
             Compilation compilation
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));

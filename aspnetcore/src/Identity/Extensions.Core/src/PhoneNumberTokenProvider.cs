@@ -29,7 +29,8 @@ namespace Microsoft.AspNetCore.Identity
         public override async Task<bool> CanGenerateTwoFactorTokenAsync(
             UserManager<TUser> manager,
             TUser user
-        ) {
+        )
+        {
             if (manager == null)
             {
                 throw new ArgumentNullException(nameof(manager));
@@ -55,7 +56,8 @@ namespace Microsoft.AspNetCore.Identity
             string purpose,
             UserManager<TUser> manager,
             TUser user
-        ) {
+        )
+        {
             if (manager == null)
             {
                 throw new ArgumentNullException(nameof(manager));

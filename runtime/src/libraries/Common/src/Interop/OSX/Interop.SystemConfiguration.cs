@@ -55,7 +55,8 @@ internal static partial class Interop
             CFStringRef name,
             delegate* unmanaged<SCDynamicStoreRef, CFArrayRef, IntPtr, void> callout,
             SCDynamicStoreContext* context
-        ) {
+        )
+        {
             return SCDynamicStoreCreate(IntPtr.Zero, name, callout, context);
         }
 
@@ -88,7 +89,8 @@ internal static partial class Interop
             CFStringRef domain,
             CFStringRef serviceID,
             CFStringRef entity
-        ) {
+        )
+        {
             return SCDynamicStoreKeyCreateNetworkServiceEntity(
                 IntPtr.Zero,
                 domain,
@@ -124,7 +126,8 @@ internal static partial class Interop
         internal static SafeCreateHandle SCDynamicStoreCreateRunLoopSource(
             SCDynamicStoreRef store,
             CFIndex order
-        ) {
+        )
+        {
             return SCDynamicStoreCreateRunLoopSource(IntPtr.Zero, store, order);
         }
 

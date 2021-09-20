@@ -36,7 +36,8 @@ namespace System.Net.Sockets.Tests
             int length,
             int offset,
             int count
-        ) {
+        )
+        {
             using var socket = CreateSocket();
 
             ArraySegment<byte> buffer = new FakeArraySegment

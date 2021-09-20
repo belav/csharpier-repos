@@ -95,7 +95,8 @@ namespace System.ComponentModel.Composition.Hosting
         public IEnumerable<Export> GetExports(
             ImportDefinition definition,
             AtomicComposition? atomicComposition
-        ) {
+        )
+        {
             Requires.NotNull(definition, nameof(definition));
 
             ExportCardinalityCheckResult result = TryGetExportsCore(
@@ -153,7 +154,8 @@ namespace System.ComponentModel.Composition.Hosting
             ImportDefinition definition,
             AtomicComposition? atomicComposition,
             out IEnumerable<Export>? exports
-        ) {
+        )
+        {
             Requires.NotNull(definition, nameof(definition));
 
             ExportCardinalityCheckResult result = TryGetExportsCore(
@@ -227,7 +229,8 @@ namespace System.ComponentModel.Composition.Hosting
             ImportDefinition definition,
             AtomicComposition? atomicComposition,
             out IEnumerable<Export>? exports
-        ) {
+        )
+        {
             if (definition == null)
             {
                 throw new ArgumentNullException(nameof(definition));
@@ -244,7 +247,8 @@ namespace System.ComponentModel.Composition.Hosting
             if (
                 checkResult == ExportCardinalityCheckResult.TooManyExports
                 && definition.Cardinality == ImportCardinality.ZeroOrOne
-            ) {
+            )
+            {
                 checkResult = ExportCardinalityCheckResult.Match;
                 exports = null;
             }

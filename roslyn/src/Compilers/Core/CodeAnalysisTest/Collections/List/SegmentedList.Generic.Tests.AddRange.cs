@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             int enumerableLength,
             int numberOfMatchingElements,
             int numberOfDuplicateElements
-        ) {
+        )
+        {
             SegmentedList<T> list = GenericListFactory(listLength);
             SegmentedList<T> listBeforeAdd = list.ToSegmentedList();
             IEnumerable<T> enumerable = CreateEnumerable(

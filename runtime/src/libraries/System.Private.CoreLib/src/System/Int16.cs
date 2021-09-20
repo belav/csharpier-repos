@@ -98,7 +98,8 @@ namespace System
             out int charsWritten,
             ReadOnlySpan<char> format = default,
             IFormatProvider? provider = null
-        ) {
+        )
+        {
             return Number.TryFormatInt32(
                 m_value,
                 0x0000FFFF,
@@ -147,7 +148,8 @@ namespace System
             ReadOnlySpan<char> s,
             NumberStyles style = NumberStyles.Integer,
             IFormatProvider? provider = null
-        ) {
+        )
+        {
             NumberFormatInfo.ValidateParseStyleInteger(style);
             return Parse(s, style, NumberFormatInfo.GetInstance(provider));
         }
@@ -165,7 +167,8 @@ namespace System
             if (
                 (uint)(i - MinValue - ((int)(style & NumberStyles.AllowHexSpecifier) << 6))
                 > ushort.MaxValue
-            ) {
+            )
+            {
                 Number.ThrowOverflowException(TypeCode.Int16);
             }
             return (short)i;
@@ -197,7 +200,8 @@ namespace System
             NumberStyles style,
             IFormatProvider? provider,
             out short result
-        ) {
+        )
+        {
             NumberFormatInfo.ValidateParseStyleInteger(style);
 
             if (s == null)
@@ -219,7 +223,8 @@ namespace System
             NumberStyles style,
             IFormatProvider? provider,
             out short result
-        ) {
+        )
+        {
             NumberFormatInfo.ValidateParseStyleInteger(style);
             return TryParse(s, style, NumberFormatInfo.GetInstance(provider), out result);
         }
@@ -229,14 +234,16 @@ namespace System
             NumberStyles style,
             NumberFormatInfo info,
             out short result
-        ) {
+        )
+        {
             // For hex number styles AllowHexSpecifier << 6 == 0x8000 and cancels out MinValue so the check is effectively: (uint)i > ushort.MaxValue
             // For integer styles it's zero and the effective check is (uint)(i - MinValue) > ushort.MaxValue
             if (
                 Number.TryParseInt32(s, style, info, out int i) != Number.ParsingStatus.OK
                 || (uint)(i - MinValue - ((int)(style & NumberStyles.AllowHexSpecifier) << 6))
                     > ushort.MaxValue
-            ) {
+            )
+            {
                 result = 0;
                 return false;
             }

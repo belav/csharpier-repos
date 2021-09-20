@@ -23,7 +23,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.Xunit
         public static async ValueTask<bool> TrySkipAsync(
             XunitTestCase testCase,
             IMessageBus messageBus
-        ) {
+        )
+        {
             var method = testCase.Method;
             var type = testCase.TestMethod.TestClass.Class;
             var assembly = type.Assembly;

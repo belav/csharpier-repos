@@ -18,7 +18,8 @@ namespace System.IO
             string fullPath,
             string fileName,
             ref FileStatus fileStatus
-        ) {
+        )
+        {
             FileSystemInfo info = fileStatus.InitiallyDirectory
                 ? (FileSystemInfo)new DirectoryInfo(
                       fullPath,

@@ -78,7 +78,8 @@ namespace Microsoft.AspNetCore.DataProtection.XmlEncryption
 
                 using (
                     var secret = DpapiSecretSerializerHelper.UnprotectWithDpapiNG(protectedSecret)
-                ) {
+                )
+                {
                     return secret.ToXElement();
                 }
             }

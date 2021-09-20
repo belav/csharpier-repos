@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Classification
             Document document,
             TextSpan span,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var classificationService = document.GetLanguageService<IClassificationService>();
             if (classificationService == null)
             {
@@ -93,7 +94,8 @@ namespace Microsoft.CodeAnalysis.Classification
             List<ClassifiedSpan> syntaxSpans,
             List<ClassifiedSpan> semanticSpans,
             TextSpan widenedSpan
-        ) {
+        )
+        {
             // The spans produced by the language services may not be ordered
             // (indeed, this happens with semantic classification as different
             // providers produce different results in an arbitrary order).  Order
@@ -156,7 +158,8 @@ namespace Microsoft.CodeAnalysis.Classification
                     if (
                         !isAdditiveClassification
                         && spans[i - 1].TextSpan.End > intersection.Value.Start
-                    ) {
+                    )
+                    {
                         // This span isn't strictly after the previous span.  Ignore it.
                         intersection = null;
                     }
@@ -174,7 +177,8 @@ namespace Microsoft.CodeAnalysis.Classification
             int startPosition,
             IEnumerable<ClassifiedSpan> classifiedSpans,
             ArrayBuilder<ClassifiedSpan> result
-        ) {
+        )
+        {
             foreach (var span in classifiedSpans)
             {
                 // Ignore empty spans.  We can get those when the classification service
@@ -203,7 +207,8 @@ namespace Microsoft.CodeAnalysis.Classification
         private static ImmutableArray<ClassifiedSpan> MergeParts(
             ArrayBuilder<ClassifiedSpan> syntaxParts,
             ArrayBuilder<ClassifiedSpan> semanticParts
-        ) {
+        )
+        {
             // Take all the syntax parts.  However, if any have been overridden by a
             // semantic part, then choose that one.
 

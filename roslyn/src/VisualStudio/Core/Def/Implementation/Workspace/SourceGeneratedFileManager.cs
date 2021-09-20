@@ -93,7 +93,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             VisualStudioWorkspace visualStudioWorkspace,
             VisualStudioDocumentNavigationService visualStudioDocumentNavigationService,
             IAsynchronousOperationListenerProvider listenerProvider
-        ) {
+        )
+        {
             _serviceProvider = serviceProvider;
             _threadingContext = threadingContext;
             _foregroundThreadAffintizedObject = new ForegroundThreadAffinitizedObject(
@@ -127,7 +128,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             SourceGeneratedDocument document,
             TextSpan sourceSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _foregroundThreadAffintizedObject.AssertIsForeground();
 
             // We will create an file name to represent this generated file; the Visual Studio shell APIs imply you can use a URI,
@@ -189,7 +191,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             [NotNullWhen(true)] out DocumentId? documentId,
             [NotNullWhen(true)] out Type? generatorType,
             [NotNullWhen(true)] out string? generatedSourceHintName
-        ) {
+        )
+        {
             _foregroundThreadAffintizedObject.AssertIsForeground();
 
             documentId = null;
@@ -208,7 +211,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     guid,
                     out var directoryInfo
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -224,7 +228,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             ITextBuffer textBuffer,
             IVsHierarchy? hierarchy,
             IVsWindowFrame? windowFrame
-        ) {
+        )
+        {
             if (
                 TryGetGeneratedFileInformation(
                     moniker,
@@ -232,7 +237,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     out var generatorType,
                     out var generatedSourceHintName
                 )
-            ) {
+            )
+            {
                 // Attach to the text buffer if we haven't already
                 if (!_openFiles.TryGetValue(moniker, out var openFile))
                 {
@@ -427,7 +433,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                                                 g.GetType().Assembly.Equals(_generatorType.Assembly)
                                         )
                             )
-                        ) {
+                        )
+                        {
                             windowFrameMessageToShow = string.Format(
                                 ServicesVSResources.The_generator_0_that_generated_this_file_has_stopped_generating_this_file,
                                 GeneratorDisplayName
@@ -466,7 +473,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                                 _textBuffer,
                                 out var textDocument
                             )
-                        ) {
+                        )
+                        {
                             textDocument.Encoding = generatedSource.Encoding;
                         }
 
@@ -482,7 +490,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                                 reiteratedVersionNumber: null,
                                 editTag: textDocument
                             )
-                        ) {
+                        )
+                        {
                             // TODO: make the edit in some nicer way than creating a massive string
                             edit.Replace(
                                 startPosition: 0,
@@ -528,7 +537,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                                             _cancellationTokenSource.Token
                                         )
                                         .ConfigureAwait(false)
-                                ) {
+                                )
+                                {
                                     _batchingWorkQueue.RequeueWork();
                                 }
                             },
@@ -578,7 +588,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     || _windowFrame == null
                     || _currentWindowFrameMessage == _windowFrameMessageToShow
                         && !_currentWindowFrameImageMoniker.Equals(_windowFrameImageMonikerToShow)
-                ) {
+                )
+                {
                     // We don't have anything to do, or anything to do yet.
                     return;
                 }
@@ -595,7 +606,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                             out var infoBarHostObject
                         )
                     ) || infoBarHostObject is not IVsInfoBarHost infoBarHost
-                ) {
+                )
+                {
                     return;
                 }
 

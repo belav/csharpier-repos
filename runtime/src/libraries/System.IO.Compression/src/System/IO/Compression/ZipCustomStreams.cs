@@ -25,7 +25,8 @@ namespace System.IO.Compression
             bool closeBaseStream,
             ZipArchiveEntry? entry,
             Action<ZipArchiveEntry?>? onClosed
-        ) {
+        )
+        {
             _baseStream = baseStream;
             _closeBaseStream = closeBaseStream;
             _onClosed = onClosed;
@@ -345,7 +346,8 @@ namespace System.IO.Compression
             ZipArchiveEntry entry,
             EventHandler? onClose,
             Action<long, long, uint, Stream, ZipArchiveEntry, EventHandler?> saveCrcAndSizes
-        ) {
+        )
+        {
             _baseStream = baseStream;
             _baseBaseStream = baseBaseStream;
             _position = 0;

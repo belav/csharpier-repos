@@ -73,7 +73,8 @@ namespace System.Composition.Convention.Tests
         private static IEnumerable<ExportAttribute> GetExportAttributes(
             ConventionBuilder builder,
             Type type
-        ) {
+        )
+        {
             Attribute[] list = builder.GetDeclaredAttributes(type, type.GetTypeInfo());
             return list.Cast<ExportAttribute>();
         }

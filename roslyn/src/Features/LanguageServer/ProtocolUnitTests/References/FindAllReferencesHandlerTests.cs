@@ -369,7 +369,8 @@ class C
             TestLspServer testLspServer,
             LSP.Location caret,
             IProgress<object> progress = null
-        ) {
+        )
+        {
             var vsClientCapabilities = new LSP.VSClientCapabilities
             {
                 SupportsVisualStudioExtensions = true
@@ -391,7 +392,8 @@ class C
             LSP.VSReferenceItem[] referenceItems,
             int definitionIndex,
             Glyph definitionGlyph
-        ) {
+        )
+        {
             var definition = referenceItems[definitionIndex];
             var definitionId = definition.DefinitionId;
             Assert.NotNull(definition.DefinitionText);
@@ -417,7 +419,8 @@ class C
             int expectedDefinitionCount,
             int expectedWrittenReferenceCount,
             int expectedReferenceCount
-        ) {
+        )
+        {
             var actualDefinitionCount = referenceItems.Select(
                     item =>
                         ((ClassifiedTextElement)item.Text).Runs.Where(

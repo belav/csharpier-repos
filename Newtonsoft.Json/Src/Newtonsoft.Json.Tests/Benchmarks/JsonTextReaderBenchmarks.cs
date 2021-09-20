@@ -61,7 +61,8 @@ namespace Newtonsoft.Json.Tests.Benchmarks
         {
             using (
                 JsonTextReader jsonTextReader = new JsonTextReader(new StringReader(FloatArrayJson))
-            ) {
+            )
+            {
                 jsonTextReader.Read();
 
                 while (jsonTextReader.ReadAsDecimal() != null) { }

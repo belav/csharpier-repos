@@ -26,7 +26,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
     {
         public TestingInfrastructureTests(
             WebApplicationFactory<BasicWebSite.StartupWithoutEndpointRouting> fixture
-        ) {
+        )
+        {
             Factory =
                 fixture.Factories.FirstOrDefault()
                 ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
@@ -245,7 +246,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             protected override Task<HttpResponseMessage> SendAsync(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (!HeaderAdded)
                 {
                     request.Headers.Add("X-Added-Header", "true");

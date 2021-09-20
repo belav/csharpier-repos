@@ -49,7 +49,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionModel model,
             string? name,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             Check.NullButNotEmpty(name, nameof(name));
 
             model.SetOrRemoveAnnotation(
@@ -105,7 +106,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionModel model,
             string? value,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             Check.NullButNotEmpty(value, nameof(value));
 
             model.SetOrRemoveAnnotation(
@@ -156,7 +158,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionModel model,
             int? seed,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             model.SetOrRemoveAnnotation(
                 SqlServerAnnotationNames.IdentitySeed,
                 seed,
@@ -202,7 +205,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionModel model,
             int? increment,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             model.SetOrRemoveAnnotation(
                 SqlServerAnnotationNames.IdentityIncrement,
                 increment,
@@ -260,7 +264,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionModel model,
             SqlServerValueGenerationStrategy? value,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             model.SetOrRemoveAnnotation(
                 SqlServerAnnotationNames.ValueGenerationStrategy,
                 value,
@@ -309,7 +314,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionModel model,
             string? value,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             model.SetOrRemoveAnnotation(
                 SqlServerAnnotationNames.MaxDatabaseSize,
                 value,
@@ -358,7 +364,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionModel model,
             string? value,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             model.SetOrRemoveAnnotation(
                 SqlServerAnnotationNames.ServiceTierSql,
                 value,
@@ -405,7 +412,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionModel model,
             string? value,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             model.SetOrRemoveAnnotation(
                 SqlServerAnnotationNames.PerformanceLevelSql,
                 value,

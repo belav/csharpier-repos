@@ -39,7 +39,8 @@ namespace System.ComponentModel.Tests
             BrowsableAttribute attribute,
             object other,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, attribute.Equals(other));
             if (other is BrowsableAttribute)
             {
@@ -59,7 +60,8 @@ namespace System.ComponentModel.Tests
         public void DefaultProperties_GetBrowsable_ReturnsExpected(
             BrowsableAttribute attribute,
             bool expectedBrowsable
-        ) {
+        )
+        {
             Assert.Equal(expectedBrowsable, attribute.Browsable);
             Assert.Equal(expectedBrowsable, attribute.IsDefaultAttribute());
         }

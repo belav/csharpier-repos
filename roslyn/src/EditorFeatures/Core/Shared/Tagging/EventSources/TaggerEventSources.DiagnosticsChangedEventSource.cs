@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
                     document != null
                     && document.Project.Solution.Workspace == e.Workspace
                     && document.Id == e.DocumentId
-                ) {
+                )
+                {
                     this.RaiseChanged();
                 }
             }

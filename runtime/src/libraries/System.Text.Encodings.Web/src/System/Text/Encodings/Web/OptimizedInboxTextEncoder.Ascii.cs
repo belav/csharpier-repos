@@ -53,7 +53,8 @@ namespace System.Text.Encodings.Web
 
             internal void PopulateAllowedCodePoints(
                 in AllowedBmpCodePointsBitmap allowedBmpCodePoints
-            ) {
+            )
+            {
                 this = default; // clear all existing data
 
                 // we only care about ASCII non-control chars; all control chars and non-ASCII chars are disallowed
@@ -85,7 +86,8 @@ namespace System.Text.Encodings.Web
             internal void PopulatePreescapedData(
                 in AllowedBmpCodePointsBitmap allowedCodePointsBmp,
                 ScalarEscaperBase innerEncoder
-            ) {
+            )
+            {
                 this = default; // clear all existing data
 
                 Span<char> tempBuffer =

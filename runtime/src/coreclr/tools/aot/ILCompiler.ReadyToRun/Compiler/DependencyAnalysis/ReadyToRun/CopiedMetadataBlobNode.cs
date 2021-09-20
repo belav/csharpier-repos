@@ -40,7 +40,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             NodeFactory factory,
             ref ObjectDataBuilder builder,
             ref BlobReader reader
-        ) {
+        )
+        {
             MetadataReader metadataReader = _sourceModule.MetadataReader;
             var tableIndex = TableIndex.MethodDef;
             int rowCount = metadataReader.GetTableRowCount(tableIndex);
@@ -77,7 +78,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             NodeFactory factory,
             ref ObjectDataBuilder builder,
             ref BlobReader reader
-        ) {
+        )
+        {
             MetadataReader metadataReader = _sourceModule.MetadataReader;
             var tableIndex = TableIndex.FieldRva;
             int rowCount = metadataReader.GetTableRowCount(tableIndex);

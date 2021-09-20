@@ -46,7 +46,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim
             public PortableExecutableReference GetReference(
                 string resolvedPath,
                 MetadataReferenceProperties properties
-            ) {
+            )
+            {
                 return MetadataReference.CreateFromFile(resolvedPath, properties);
             }
         }

@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Tools.Formatters
             FormatOptions formatOptions,
             ILogger logger,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // If we are fixing CodeStyle and the 'IDE0005' diagnostic is configured, then
             // see if we can remove unused imports.
 

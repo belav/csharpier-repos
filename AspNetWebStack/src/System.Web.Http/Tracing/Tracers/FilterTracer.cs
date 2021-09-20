@@ -39,7 +39,8 @@ namespace System.Web.Http.Tracing.Tracers
         public static IEnumerable<IFilter> CreateFilterTracers(
             IFilter filter,
             ITraceWriter traceWriter
-        ) {
+        )
+        {
             List<IFilter> filters = new List<IFilter>();
             bool addedActionAttributeTracer = false;
             bool addedAuthorizationAttributeTracer = false;
@@ -118,7 +119,8 @@ namespace System.Web.Http.Tracing.Tracers
         public static IEnumerable<FilterInfo> CreateFilterTracers(
             FilterInfo filter,
             ITraceWriter traceWriter
-        ) {
+        )
+        {
             IFilter filterInstance = filter.Instance;
             IEnumerable<IFilter> filterTracers = CreateFilterTracers(filterInstance, traceWriter);
             List<FilterInfo> filters = new List<FilterInfo>();

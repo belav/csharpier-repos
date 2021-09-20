@@ -45,10 +45,11 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
             out bool negate,
             out string? formatString,
             out ImmutableArray<Location> unnecessaryLocations
-        ) where TInterpolationSyntax : SyntaxNode
-          where TExpressionSyntax : SyntaxNode
-          where TConditionalExpressionSyntax : TExpressionSyntax
-          where TParenthesizedExpressionSyntax : TExpressionSyntax
+        )
+            where TInterpolationSyntax : SyntaxNode
+            where TExpressionSyntax : SyntaxNode
+            where TConditionalExpressionSyntax : TExpressionSyntax
+            where TParenthesizedExpressionSyntax : TExpressionSyntax
         {
             alignment = null;
             negate = false;
@@ -116,8 +117,9 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
             out IOperation unwrapped,
             out string? formatString,
             List<TextSpan> unnecessarySpans
-        ) where TConditionalExpressionSyntax : SyntaxNode
-          where TParenthesizedExpressionSyntax : SyntaxNode
+        )
+            where TConditionalExpressionSyntax : SyntaxNode
+            where TParenthesizedExpressionSyntax : SyntaxNode
         {
             if (
                 expression
@@ -125,7 +127,8 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
                 && HasNonImplicitInstance(invocation)
                 && !syntaxFacts.IsBaseExpression(invocation.Instance!.Syntax)
                 && !invocation.Instance.Type!.IsRefLikeType
-            ) {
+            )
+            {
                 if (
                     invocation.Arguments.Length == 1
                     && invocation.Arguments[0].Value
@@ -138,7 +141,8 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
                     )
                         is { } systemIFormattable
                     && invocation.Instance.Type.Implements(systemIFormattable)
-                ) {
+                )
+                {
                     unwrapped = invocation.Instance;
                     formatString = value;
 
@@ -167,7 +171,8 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
                 if (
                     method.ContainingType.SpecialType == SpecialType.System_Object
                     && method.Name == nameof(ToString)
-                ) {
+                )
+                {
                     // A call to `.ToString()` at the end of the interpolation.  This is unnecessary.
                     // Just remove entirely.
                     unwrapped = invocation.Instance;
@@ -191,7 +196,8 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
         private static TextSpan GetSpanWithinLiteralQuotes(
             IVirtualCharService virtualCharService,
             SyntaxToken formatToken
-        ) {
+        )
+        {
             var sequence = virtualCharService.TryConvertToVirtualChars(formatToken);
             return sequence.IsDefaultOrEmpty
               ? default
@@ -208,9 +214,10 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
             out TExpressionSyntax? alignment,
             out bool negate,
             List<TextSpan> unnecessarySpans
-        ) where TExpressionSyntax : SyntaxNode
-          where TConditionalExpressionSyntax : TExpressionSyntax
-          where TParenthesizedExpressionSyntax : TExpressionSyntax
+        )
+            where TExpressionSyntax : SyntaxNode
+            where TConditionalExpressionSyntax : TExpressionSyntax
+            where TParenthesizedExpressionSyntax : TExpressionSyntax
         {
             if (expression is IInvocationOperation invocation && HasNonImplicitInstance(invocation))
             {

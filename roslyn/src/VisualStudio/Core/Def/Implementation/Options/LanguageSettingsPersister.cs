@@ -81,7 +81,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
                             pColorPrefs: null
                         )
                     )
-                ) {
+                )
+                {
                     RefreshLanguageSettings(languagePreferences);
                 }
             }
@@ -109,7 +110,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             VIEWPREFERENCES3[] viewPrefs,
             LANGPREFERENCES3[] langPrefs,
             FONTCOLORPREFERENCES2[] colorPrefs
-        ) {
+        )
+        {
             if (langPrefs != null)
             {
                 RefreshLanguageSettings(langPrefs);
@@ -189,7 +191,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             IOption option,
             ref LANGPREFERENCES3 languagePreference,
             object value
-        ) {
+        )
+        {
             if (option == FormattingOptions.UseTabs)
             {
                 languagePreference.fInsertTabs = Convert.ToUInt32((bool)value ? 1 : 0);

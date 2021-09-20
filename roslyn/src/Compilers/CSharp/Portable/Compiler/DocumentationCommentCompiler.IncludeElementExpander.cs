@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 DocumentationCommentIncludeCache includedFileCache,
                 BindingDiagnosticBag diagnostics,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 _memberSymbol = memberSymbol;
                 _sourceIncludeElementNodes = sourceIncludeElementNodes;
                 _compilation = compilation;
@@ -73,7 +74,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 TextWriter writer,
                 BindingDiagnosticBag diagnostics,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // If there are no include elements, then there's nothing to expand.
                 // NOTE: By skipping parsing and re-writing, we avoid slightly
                 // modifying the whitespace, as we would if we let the XmlWriter
@@ -135,7 +137,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         currentXmlFilePath: null,
                         originatingSyntax: null
                     )
-                ) {
+                )
+                {
                     cancellationToken.ThrowIfCancellationRequested();
 
                     if (writer != null)
@@ -163,7 +166,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 XNode[] nodes,
                 string currentXmlFilePath,
                 CSharpSyntaxNode originatingSyntax
-            ) {
+            )
+            {
                 Debug.Assert(nodes != null);
 
                 ArrayBuilder<XNode> builder = null;
@@ -190,7 +194,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 XNode node,
                 string currentXmlFilePath,
                 CSharpSyntaxNode originatingSyntax
-            ) {
+            )
+            {
                 _cancellationToken.ThrowIfCancellationRequested();
 
                 string commentMessage = null;
@@ -253,7 +258,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 attribute,
                                 DocumentationCommentXmlNames.CrefAttributeName
                             )
-                        ) {
+                        )
+                        {
                             BindAndReplaceCref(attribute, originatingSyntax);
                         }
                         else if (
@@ -261,7 +267,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 attribute,
                                 DocumentationCommentXmlNames.NameAttributeName
                             )
-                        ) {
+                        )
+                        {
                             if (
                                 ElementNameIs(
                                     element,
@@ -271,7 +278,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                     element,
                                     DocumentationCommentXmlNames.ParameterReferenceElementName
                                 )
-                            ) {
+                            )
+                            {
                                 BindName(
                                     attribute,
                                     originatingSyntax,
@@ -284,7 +292,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                     element,
                                     DocumentationCommentXmlNames.TypeParameterElementName
                                 )
-                            ) {
+                            )
+                            {
                                 BindName(
                                     attribute,
                                     originatingSyntax,
@@ -297,7 +306,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                     element,
                                     DocumentationCommentXmlNames.TypeParameterReferenceElementName
                                 )
-                            ) {
+                            )
+                            {
                                 BindName(
                                     attribute,
                                     originatingSyntax,
@@ -341,7 +351,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 string currentXmlFilePath,
                 CSharpSyntaxNode originatingSyntax,
                 out string commentMessage
-            ) {
+            )
+            {
                 Location location = GetIncludeElementLocation(
                     includeElement,
                     ref currentXmlFilePath,
@@ -633,7 +644,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 XElement includeElement,
                 ref string currentXmlFilePath,
                 ref CSharpSyntaxNode originatingSyntax
-            ) {
+            )
+            {
                 Location location = includeElement.Annotation<Location>();
                 if (location != null)
                 {
@@ -668,7 +680,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             private void BindAndReplaceCref(
                 XAttribute attribute,
                 CSharpSyntaxNode originatingSyntax
-            ) {
+            )
+            {
                 string attributeValue = attribute.Value;
                 CrefSyntax crefSyntax = SyntaxFactory.ParseCref(attributeValue);
 
@@ -708,7 +721,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 CSharpSyntaxNode originatingSyntax,
                 bool isParameter,
                 bool isTypeParameterRef
-            ) {
+            )
+            {
                 XmlNameAttributeSyntax attrSyntax = ParseNameAttribute(
                     attribute.ToString(),
                     attribute.Parent.Name.LocalName
@@ -753,7 +767,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 bool isTypeParameterRef,
                 Symbol memberSymbol,
                 CSharpCompilation compilation
-            ) {
+            )
+            {
                 Binder binder = new BuckStopsHereBinder(compilation);
 
                 // All binders should have a containing symbol.
@@ -825,7 +840,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             private static XmlNameAttributeSyntax ParseNameAttribute(
                 string attributeText,
                 string elementName
-            ) {
+            )
+            {
                 // NOTE: Rather than introducing a new code path that will have to be kept in
                 // sync with other mode changes distributed throughout Lexer, SyntaxParser, and
                 // DocumentationCommentParser, we'll just wrap the text in some lexable syntax
@@ -852,20 +868,23 @@ namespace Microsoft.CodeAnalysis.CSharp
             private void RecordSyntaxDiagnostics(
                 CSharpSyntaxNode treelessSyntax,
                 Location sourceLocation
-            ) {
+            )
+            {
                 if (
                     treelessSyntax.ContainsDiagnostics
                     && (
                         (SyntaxTree)sourceLocation.SourceTree
                     ).ReportDocumentationCommentDiagnostics()
-                ) {
+                )
+                {
                     // NOTE: treelessSyntax doesn't have its own SyntaxTree, so we have to access the diagnostics
                     // via the Dummy tree.
                     foreach (
                         Diagnostic diagnostic in CSharpSyntaxTree.Dummy.GetDiagnostics(
                             treelessSyntax
                         )
-                    ) {
+                    )
+                    {
                         _diagnostics.Add(diagnostic.WithLocation(sourceLocation));
                     }
                 }
@@ -877,14 +896,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             private void RecordBindingDiagnostics(
                 BindingDiagnosticBag bindingDiagnostics,
                 Location sourceLocation
-            ) {
+            )
+            {
                 if (((SyntaxTree)sourceLocation.SourceTree).ReportDocumentationCommentDiagnostics())
                 {
                     if (bindingDiagnostics.DiagnosticBag?.IsEmptyWithoutResolution == false)
                     {
                         foreach (
                             Diagnostic diagnostic in bindingDiagnostics.DiagnosticBag.AsEnumerable()
-                        ) {
+                        )
+                        {
                             // CONSIDER: Dev11 actually uses the originating location plus the offset into the cref/name
                             _diagnostics.Add(diagnostic.WithLocation(sourceLocation));
                         }

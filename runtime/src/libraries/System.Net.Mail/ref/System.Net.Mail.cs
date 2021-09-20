@@ -36,14 +36,16 @@ namespace System.Net.Mail
         public static System.Net.Mail.AlternateView CreateAlternateViewFromString(
             string content,
             System.Net.Mime.ContentType? contentType
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Net.Mail.AlternateView CreateAlternateViewFromString(
             string content,
             System.Text.Encoding? contentEncoding,
             string? mediaType
-        ) {
+        )
+        {
             throw null;
         }
         protected override void Dispose(bool disposing) { }
@@ -61,10 +63,8 @@ namespace System.Net.Mail
     }
     public partial class Attachment : System.Net.Mail.AttachmentBase
     {
-        public Attachment(
-            System.IO.Stream contentStream,
-            System.Net.Mime.ContentType contentType
-        ) : base(default(System.IO.Stream)) { }
+        public Attachment(System.IO.Stream contentStream, System.Net.Mime.ContentType contentType)
+            : base(default(System.IO.Stream)) { }
         public Attachment(System.IO.Stream contentStream, string? name)
             : base(default(System.IO.Stream)) { }
         public Attachment(System.IO.Stream contentStream, string? name, string? mediaType)
@@ -90,13 +90,15 @@ namespace System.Net.Mail
         public static System.Net.Mail.Attachment CreateAttachmentFromString(
             string content,
             System.Net.Mime.ContentType contentType
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Net.Mail.Attachment CreateAttachmentFromString(
             string content,
             string? name
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Net.Mail.Attachment CreateAttachmentFromString(
@@ -104,7 +106,8 @@ namespace System.Net.Mail
             string? name,
             System.Text.Encoding? contentEncoding,
             string? mediaType
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -188,14 +191,16 @@ namespace System.Net.Mail
         public static System.Net.Mail.LinkedResource CreateLinkedResourceFromString(
             string content,
             System.Net.Mime.ContentType? contentType
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Net.Mail.LinkedResource CreateLinkedResourceFromString(
             string content,
             System.Text.Encoding? contentEncoding,
             string? mediaType
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -237,7 +242,8 @@ namespace System.Net.Mail
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhen(true)] object? value
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -247,14 +253,16 @@ namespace System.Net.Mail
         public static bool TryCreate(
             string address,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] out MailAddress? result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryCreate(
             string address,
             string? displayName,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] out MailAddress? result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryCreate(
@@ -262,7 +270,8 @@ namespace System.Net.Mail
             string? displayName,
             System.Text.Encoding? displayNameEncoding,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] out MailAddress? result
-        ) {
+        )
+        {
             throw null;
         }
         public override string ToString()
@@ -489,13 +498,15 @@ namespace System.Net.Mail
             string recipients,
             string? subject,
             string? body
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task SendMailAsync(
             System.Net.Mail.MailMessage message,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task SendMailAsync(
@@ -504,7 +515,8 @@ namespace System.Net.Mail
             string? subject,
             string? body,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -688,7 +700,8 @@ namespace System.Net.Mime
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhen(true)] object? rparam
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -731,7 +744,8 @@ namespace System.Net.Mime
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhen(true)] object? rparam
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()

@@ -75,7 +75,8 @@ namespace Microsoft.CodeAnalysis.UseCollectionInitializer
         private void AnalyzeNode(
             SyntaxNodeAnalysisContext context,
             INamedTypeSymbol ienumerableType
-        ) {
+        )
+        {
             if (!AreCollectionInitializersSupported(context))
             {
                 return;
@@ -154,7 +155,8 @@ namespace Microsoft.CodeAnalysis.UseCollectionInitializer
             SyntaxNodeAnalysisContext context,
             ImmutableArray<TExpressionStatementSyntax> matches,
             ImmutableArray<Location> locations
-        ) {
+        )
+        {
             var syntaxTree = context.Node.SyntaxTree;
 
             var fadeOutCode = context.GetOption(

@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.MSBuild.Logging
             WorkspaceDiagnosticKind kind,
             string message,
             string projectFilePath
-        ) {
+        )
+        {
             Kind = kind;
             Message = message ?? throw new ArgumentNullException(nameof(message));
             ProjectFilePath = projectFilePath ?? throw new ArgumentNullException(nameof(message));

@@ -72,7 +72,8 @@ namespace System.ComponentModel.Tests
             string argumentName,
             int invalidValue,
             Type enumClass
-        ) {
+        )
+        {
             var exception = new InvalidEnumArgumentException(argumentName, invalidValue, enumClass);
             if (argumentName != null)
             {

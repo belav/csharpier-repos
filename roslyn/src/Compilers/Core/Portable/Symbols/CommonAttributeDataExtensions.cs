@@ -9,7 +9,8 @@ namespace Microsoft.CodeAnalysis
         public static bool TryGetGuidAttributeValue(
             this AttributeData attrData,
             out string? guidString
-        ) {
+        )
+        {
             if (attrData.CommonConstructorArguments.Length == 1)
             {
                 object? value = attrData.CommonConstructorArguments[0].ValueInternal;

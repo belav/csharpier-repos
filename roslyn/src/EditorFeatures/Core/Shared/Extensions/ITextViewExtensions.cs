@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
         public static SnapshotPoint? GetCaretPoint(
             this ITextView textView,
             ITextBuffer subjectBuffer
-        ) {
+        )
+        {
             var caret = textView.Caret.Position;
             return textView.BufferGraph.MapUpOrDownToBuffer(caret.BufferPosition, subjectBuffer);
         }
@@ -47,7 +48,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
         public static SnapshotPoint? GetCaretPoint(
             this ITextView textView,
             Predicate<ITextSnapshot> match
-        ) {
+        )
+        {
             var caret = textView.Caret.Position;
             var span = textView.BufferGraph.MapUpOrDownToFirstMatch(
                 new SnapshotSpan(caret.BufferPosition, 0),
@@ -66,7 +68,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
         public static VirtualSnapshotPoint? GetVirtualCaretPoint(
             this ITextView textView,
             ITextBuffer subjectBuffer
-        ) {
+        )
+        {
             if (subjectBuffer == textView.TextBuffer)
             {
                 return textView.Caret.Position.VirtualBufferPosition;
@@ -85,7 +88,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
         public static ITextBuffer? GetBufferContainingCaret(
             this ITextView textView,
             string contentType = ContentTypeNames.RoslynContentType
-        ) {
+        )
+        {
             var point = GetCaretPoint(textView, s => s.ContentType.IsOfType(contentType));
             return point.HasValue ? point.Value.Snapshot.TextBuffer : null;
         }
@@ -115,7 +119,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             this ITextView textView,
             VirtualSnapshotPoint anchorPoint,
             VirtualSnapshotPoint activePoint
-        ) {
+        )
+        {
             var isReversed = activePoint < anchorPoint;
             var start = isReversed ? activePoint : anchorPoint;
             var end = isReversed ? anchorPoint : activePoint;
@@ -126,7 +131,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             this ITextView textView,
             SnapshotSpan span,
             bool isReversed = false
-        ) {
+        )
+        {
             var spanInView = textView.GetSpanInView(span).Single();
             textView.Selection.Select(spanInView, isReversed);
             textView.Caret.MoveTo(isReversed ? spanInView.Start : spanInView.End);
@@ -139,7 +145,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
         public static void SetMultiSelection(
             this ITextView textView,
             IEnumerable<SnapshotSpan> spans
-        ) {
+        )
+        {
             var spansInView = spans.Select(s => new Selection(textView.GetSpanInView(s).Single()));
             textView.GetMultiSelectionBroker().SetSelectionRange(spansInView, spansInView.Last());
         }
@@ -161,7 +168,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             VirtualSnapshotPoint point,
             IOutliningManagerService? outliningManagerService = null,
             EnsureSpanVisibleOptions ensureSpanVisibleOptions = EnsureSpanVisibleOptions.None
-        ) {
+        )
+        {
             if (textView.IsClosed)
             {
                 return false;
@@ -345,7 +353,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             this ITextView textView,
             ITextBuffer subjectBuffer,
             char ch
-        ) {
+        )
+        {
             var finalCaretPositionOpt = textView.GetCaretPoint(subjectBuffer);
             if (finalCaretPositionOpt == null)
             {
@@ -377,7 +386,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             this ITextView textView,
             ISmartIndentationService smartIndentService,
             ITextSnapshotLine line
-        ) {
+        )
+        {
             var pointInView = textView.BufferGraph.MapUpToSnapshot(
                 line.Start,
                 PointTrackingMode.Positive,
@@ -398,7 +408,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             this ITextView textView,
             VirtualSnapshotSpan virtualSnapshotSpan,
             out VirtualSnapshotSpan surfaceBufferSpan
-        ) {
+        )
+        {
             // If we are already on the surface buffer, then there's no reason to attempt mappings
             // as we'll lose virtualness
             if (virtualSnapshotSpan.Snapshot.TextBuffer == textView.TextBuffer)
@@ -435,7 +446,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             this ITextView textView,
             ITextBuffer subjectBuffer,
             int extraLines = 0
-        ) {
+        )
+        {
             // No point in continuing if the text view has been closed.
             if (textView.IsClosed)
             {

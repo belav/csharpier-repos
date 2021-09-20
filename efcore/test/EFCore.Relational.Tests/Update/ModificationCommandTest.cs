@@ -598,7 +598,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             EntityState entityState,
             bool generateKeyValues = false,
             bool computeNonKeyValue = false
-        ) {
+        )
+        {
             var model = BuildModel(generateKeyValues, computeNonKeyValue);
 
             return RelationalTestHelpers.Instance.CreateInternalEntry(

@@ -115,7 +115,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override NamedTypeSymbol LookupTopLevelMetadataType(
             ref MetadataTypeName emittedName
-        ) {
+        )
+        {
             return new MissingMetadataTypeSymbol.TopLevel(this, ref emittedName);
         }
 
@@ -132,7 +133,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void SetReferences(
             ModuleReferences<AssemblySymbol> moduleReferences,
             SourceAssemblySymbol originatingSourceAssemblyDebugOnly
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
 
@@ -144,7 +146,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override bool GetUnificationUseSiteDiagnostic(
             ref DiagnosticInfo result,
             TypeSymbol dependentType
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
 

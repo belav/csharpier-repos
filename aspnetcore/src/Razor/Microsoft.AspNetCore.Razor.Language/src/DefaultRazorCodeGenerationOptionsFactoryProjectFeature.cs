@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public RazorCodeGenerationOptions Create(
             string fileKind,
             Action<RazorCodeGenerationOptionsBuilder> configure
-        ) {
+        )
+        {
             var builder = new DefaultRazorCodeGenerationOptionsBuilder(
                 ProjectEngine.Configuration,
                 fileKind

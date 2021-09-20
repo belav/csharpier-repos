@@ -47,7 +47,8 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
 
         public Action<ControllerContext, object> GetActivatorDelegate(
             ControllerActionDescriptor actionDescriptor
-        ) {
+        )
+        {
             if (actionDescriptor == null)
             {
                 throw new ArgumentNullException(nameof(actionDescriptor));

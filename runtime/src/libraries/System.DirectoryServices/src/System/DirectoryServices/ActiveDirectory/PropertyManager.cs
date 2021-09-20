@@ -133,7 +133,8 @@ namespace System.DirectoryServices.ActiveDirectory
             DirectoryContext? context,
             DirectoryEntry directoryEntry,
             string propertyName
-        ) {
+        )
+        {
             Debug.Assert(
                 directoryEntry != null,
                 "PropertyManager::GetPropertyValue - directoryEntry is null"

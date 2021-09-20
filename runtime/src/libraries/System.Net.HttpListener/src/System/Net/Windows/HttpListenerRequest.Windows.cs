@@ -193,7 +193,8 @@ namespace System.Net
                             "chunked",
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         _boundaryType = BoundaryType.Chunked;
                         _contentLength = -1;
                     }
@@ -389,7 +390,8 @@ namespace System.Net
         private ListenerClientCertAsyncResult BeginGetClientCertificateCore(
             AsyncCallback? requestCallback,
             object? state
-        ) {
+        )
+        {
             ListenerClientCertAsyncResult? asyncResult = null;
             //--------------------------------------------------------------------
             //When you configure the HTTP.SYS with a flag value 2
@@ -474,7 +476,8 @@ namespace System.Net
                         if (
                             statusCode != Interop.HttpApi.ERROR_SUCCESS
                             && statusCode != Interop.HttpApi.ERROR_IO_PENDING
-                        ) {
+                        )
+                        {
                             // someother bad error, possible return values are:
                             // ERROR_INVALID_HANDLE, ERROR_INSUFFICIENT_BUFFER, ERROR_OPERATION_ABORTED
                             // Also ERROR_BAD_DATA if we got it twice or it reported smaller size buffer required.
@@ -484,7 +487,8 @@ namespace System.Net
                         if (
                             statusCode == Interop.HttpApi.ERROR_SUCCESS
                             && HttpListener.SkipIOCPCallbackOnSuccess
-                        ) {
+                        )
+                        {
                             asyncResult.IOCompleted(statusCode, bytesReceived);
                         }
                         break;

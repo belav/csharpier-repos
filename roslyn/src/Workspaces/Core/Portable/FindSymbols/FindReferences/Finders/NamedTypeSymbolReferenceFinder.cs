@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             FindReferencesSearchOptions options,
             FindReferencesCascadeDirection cascadeDirection,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<ISymbol>.GetInstance(out var result);
 
             if (symbol.AssociatedSymbol != null)
@@ -56,7 +57,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             IImmutableSet<Document>? documents,
             FindReferencesSearchOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxFacts = project.LanguageServices.GetRequiredService<ISyntaxFactsService>();
 
             var documentsWithName = await FindDocumentsAsync(
@@ -96,7 +98,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             PredefinedType predefinedType,
             ISyntaxFactsService syntaxFacts,
             SyntaxToken token
-        ) {
+        )
+        {
             return syntaxFacts.TryGetPredefinedType(token, out var actualType)
                 && predefinedType == actualType;
         }
@@ -109,7 +112,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             SemanticModel semanticModel,
             FindReferencesSearchOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var nonAliasReferences = await FindNonAliasReferencesAsync(
                     namedType,
                     document,
@@ -139,7 +143,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             Document document,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var ordinaryRefs = await FindOrdinaryReferencesAsync(
                     symbol,
                     document,
@@ -169,7 +174,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             Document document,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Get the parent node that best matches what this token represents.  For example, if we have `new a.b()`
             // then the parent node of `b` won't be `a.b`, but rather `new a.b()`.  This will actually cause us to bind
             // to the constructor not the type.  That's a good thing as we don't want these object-creations to
@@ -200,7 +206,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             Document document,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var predefinedType = symbol.SpecialType.ToPredefinedType();
             if (predefinedType == PredefinedType.None)
             {
@@ -227,7 +234,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             Document document,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var symbolsMatch = GetStandardSymbolsMatchFunction(
                 namedType,
                 null,

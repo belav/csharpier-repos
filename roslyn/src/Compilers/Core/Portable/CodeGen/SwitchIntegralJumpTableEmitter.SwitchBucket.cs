@@ -51,7 +51,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             internal SwitchBucket(
                 ImmutableArray<KeyValuePair<ConstantValue, object>> allLabels,
                 int index
-            ) {
+            )
+            {
                 _startLabelIndex = index;
                 _endLabelIndex = index;
                 _allLabels = allLabels;
@@ -62,7 +63,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
                 ImmutableArray<KeyValuePair<ConstantValue, object>> allLabels,
                 int startIndex,
                 int endIndex
-            ) {
+            )
+            {
                 Debug.Assert((uint)startIndex < (uint)endIndex);
 
                 _startLabelIndex = startIndex;
@@ -76,7 +78,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
                 int startIndex,
                 int endIndex,
                 bool isDegenerate
-            ) {
+            )
+            {
                 Debug.Assert((uint)startIndex <= (uint)endIndex);
                 Debug.Assert((uint)startIndex != (uint)endIndex || isDegenerate);
 
@@ -154,7 +157,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
                         if (
                             lastLabel != switchLabel.Value
                             || !IsContiguous(lastConst, switchLabel.Key)
-                        ) {
+                        )
+                        {
                             if (split != 0)
                             {
                                 // found another discontinuity, so cannot be split
@@ -185,7 +189,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             private static ulong GetBucketSize(
                 ConstantValue startConstant,
                 ConstantValue endConstant
-            ) {
+            )
+            {
                 Debug.Assert(!BucketOverflowUInt64Limit(startConstant, endConstant));
                 Debug.Assert(endConstant.Discriminator == startConstant.Discriminator);
 
@@ -211,7 +216,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             private static bool BucketOverflowUInt64Limit(
                 ConstantValue startConstant,
                 ConstantValue endConstant
-            ) {
+            )
+            {
                 Debug.Assert(IsValidSwitchBucketConstantPair(startConstant, endConstant));
 
                 if (startConstant.Discriminator == ConstantValueTypeDiscriminator.Int64)
@@ -233,7 +239,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             private static bool BucketOverflow(
                 ConstantValue startConstant,
                 ConstantValue endConstant
-            ) {
+            )
+            {
                 return BucketOverflowUInt64Limit(startConstant, endConstant)
                     || GetBucketSize(startConstant, endConstant) > Int32.MaxValue;
             }
@@ -269,7 +276,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             private static bool IsValidSwitchBucketConstantPair(
                 ConstantValue startConstant,
                 ConstantValue endConstant
-            ) {
+            )
+            {
                 return IsValidSwitchBucketConstant(startConstant)
                     && IsValidSwitchBucketConstant(endConstant)
                     && startConstant.IsUnsigned == endConstant.IsUnsigned;

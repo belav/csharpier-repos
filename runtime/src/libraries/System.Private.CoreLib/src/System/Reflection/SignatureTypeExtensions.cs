@@ -113,7 +113,8 @@ namespace System.Reflection
         internal static Type? TryResolveAgainstGenericMethod(
             this SignatureType signatureType,
             MethodInfo genericMethod
-        ) {
+        )
+        {
             return signatureType.TryResolve(genericMethod.GetGenericArguments());
         }
 
@@ -125,7 +126,8 @@ namespace System.Reflection
         private static Type? TryResolve(
             this SignatureType signatureType,
             Type[] genericMethodParameters
-        ) {
+        )
+        {
             if (signatureType.IsSZArray)
             {
                 return signatureType.ElementType!.TryResolve(

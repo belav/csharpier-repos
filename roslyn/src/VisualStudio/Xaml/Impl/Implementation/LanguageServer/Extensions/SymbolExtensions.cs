@@ -25,7 +25,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
             this ISymbol symbol,
             TextDocument document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (symbol == null)
             {
                 return Enumerable.Empty<TaggedText>();

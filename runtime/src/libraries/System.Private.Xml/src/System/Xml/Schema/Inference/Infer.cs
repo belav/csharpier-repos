@@ -251,7 +251,8 @@ namespace System.Xml.Schema
                     if (
                         elem!.Name == _xtr.LocalName
                         && elem.QualifiedName.Namespace == _xtr.NamespaceURI
-                    ) {
+                    )
+                    {
                         _rootSchema = elem.Parent as XmlSchema;
                         xse = elem;
                         break;
@@ -331,7 +332,8 @@ namespace System.Xml.Schema
             XmlSchema parentSchema,
             XmlSchemaObjectCollection addLocation,
             XmlSchemaObjectTable compiledAttributes
-        ) {
+        )
+        {
             if (childURI == XmlSchema.Namespace)
             {
                 throw new XmlSchemaInferenceException(SR.SchInf_schema, 0, 0);
@@ -578,7 +580,8 @@ namespace System.Xml.Schema
             XmlSchema? parentSchema,
             XmlSchemaObjectCollection? addLocation,
             int positionWithinCollection
-        ) {
+        )
+        {
             if (childURI == XmlSchema.Namespace)
             {
                 throw new XmlSchemaInferenceException(SR.SchInf_schema, 0, 0);
@@ -669,7 +672,8 @@ namespace System.Xml.Schema
                 {
                     if (
                         this.Occurrence == InferenceOption.Relaxed /*&& parentSchema.Items != addLocation*/
-                    ) {
+                    )
+                    {
                         xse.MinOccurs = 0;
                     }
                     if (positionWithinCollection == -1)
@@ -721,7 +725,8 @@ namespace System.Xml.Schema
             XmlSchemaElement xse,
             bool bCreatingNewType,
             XmlSchema parentSchema
-        ) {
+        )
+        {
             bool bEmptyElement = _xtr!.IsEmptyElement;
             int lastUsedSeqItem = -1;
 
@@ -1197,7 +1202,8 @@ namespace System.Xml.Schema
             ref bool bParticleChanged,
             XmlSchema? parentSchema,
             bool setMaxoccurs
-        ) {
+        )
+        {
             if (xtr.NamespaceURI == XmlSchema.Namespace)
             {
                 throw new XmlSchemaInferenceException(SR.SchInf_schema, 0, 0);
@@ -1241,7 +1247,8 @@ namespace System.Xml.Schema
                         if (
                             (el.Name == xtr.LocalName)
                             && (parentSchema!.TargetNamespace == childURI)
-                        ) { // element is in the same namespace
+                        )
+                        { // element is in the same namespace
                             InferElement(el, false, parentSchema);
                             SetMinMaxOccurs(el, setMaxoccurs);
                             return el;
@@ -1249,7 +1256,8 @@ namespace System.Xml.Schema
                         else if (
                             (el.RefName.Name == xtr.LocalName)
                             && (el.RefName.Namespace == xtr.NamespaceURI)
-                        ) {
+                        )
+                        {
                             XmlSchemaElement referencedElement = FindGlobalElement(
                                 childURI,
                                 xtr.LocalName,
@@ -1292,7 +1300,8 @@ namespace System.Xml.Schema
                     }
                     else if (
                         el.RefName.Name == xtr.LocalName && el.RefName.Namespace == xtr.NamespaceURI
-                    ) {
+                    )
+                    {
                         if (!bItemNotUsedYet) //read: if item was already used one or more times
                             el.MaxOccurs = decimal.MaxValue; //set it to unbounded
                         lastUsedSeqItem = iSeqItem;
@@ -1330,7 +1339,8 @@ namespace System.Xml.Schema
                         else if (
                             el.RefName.Name == xtr.LocalName
                             && el.RefName.Namespace == xtr.NamespaceURI
-                        ) {
+                        )
+                        {
                             lastUsedSeqItem = iSeqItem;
                             for (int i = 0; i < minOccursCandidates.Count; ++i)
                             {
@@ -1414,7 +1424,8 @@ namespace System.Xml.Schema
             XmlSchemaType? effectiveSchemaType,
             bool bCreatingNewType,
             XmlSchema parentSchema
-        ) {
+        )
+        {
             XmlSchemaObjectCollection attributesSeen = new XmlSchemaObjectCollection();
             XmlSchemaComplexType? ct = effectiveSchemaType as XmlSchemaComplexType;
 
@@ -1442,7 +1453,8 @@ namespace System.Xml.Schema
                         localName != "type"
                         && localName != "schemaLocation"
                         && localName != "noNamespaceSchemaLocation"
-                    ) {
+                    )
+                    {
                         throw new XmlSchemaInferenceException(SR.Sch_NotXsiAttribute, localName);
                     }
                 }
@@ -1462,7 +1474,8 @@ namespace System.Xml.Schema
                         effectiveSchemaType != null
                         && effectiveSchemaType.Datatype != null
                         && !xse.SchemaTypeName.IsEmpty
-                    ) {
+                    )
+                    {
                         //type was previously simple type, now it will become complex with simple type extension
                         Debug.Assert(ct != null);
                         XmlSchemaSimpleContent sc = new XmlSchemaSimpleContent();
@@ -1523,7 +1536,8 @@ namespace System.Xml.Schema
         private void MoveAttributes(
             XmlSchemaSimpleContentExtension scExtension,
             XmlSchemaComplexType ct
-        ) {
+        )
+        {
             //copy all attributes from the simple content to the complex type
             //This is ok since when we move from complex type to simple content extension we copy from AttributeUses property
             for (int i = 0; i < scExtension.Attributes.Count; ++i) //since simpleContent is being cleared
@@ -1536,7 +1550,8 @@ namespace System.Xml.Schema
             XmlSchemaComplexType ct,
             XmlSchemaSimpleContentExtension simpleContentExtension,
             bool bCreatingNewType
-        ) {
+        )
+        {
             //copy all attributes from the complex type to the simple content
 
             ICollection sourceCollection;
@@ -1577,7 +1592,8 @@ namespace System.Xml.Schema
             string? namespaceURI,
             string localName,
             out XmlSchema? parentSchema
-        ) {
+        )
+        {
             ICollection col = _schemaSet!.Schemas(namespaceURI);
             XmlSchemaElement? xse = null;
             parentSchema = null;
@@ -1596,7 +1612,8 @@ namespace System.Xml.Schema
         internal XmlSchemaElement? FindElement(
             XmlSchemaObjectCollection elements,
             string elementName
-        ) {
+        )
+        {
             for (int i = 0; i < elements.Count; ++i)
             {
                 XmlSchemaElement? xse = elements[i] as XmlSchemaElement;
@@ -1616,7 +1633,8 @@ namespace System.Xml.Schema
             ICollection attributes,
             string attributeName,
             string nsURI
-        ) {
+        )
+        {
             foreach (XmlSchemaObject? xsa in attributes)
             {
                 XmlSchemaAttribute? schemaAttribute = xsa as XmlSchemaAttribute;
@@ -1625,7 +1643,8 @@ namespace System.Xml.Schema
                     if (
                         schemaAttribute.RefName.Name == attributeName
                         && schemaAttribute.RefName.Namespace == nsURI
-                    ) {
+                    )
+                    {
                         return schemaAttribute;
                     }
                 }
@@ -1638,7 +1657,8 @@ namespace System.Xml.Schema
             XmlSchemaObjectCollection elements,
             string elementName,
             string nsURI
-        ) {
+        )
+        {
             for (int i = 0; i < elements.Count; ++i)
             {
                 XmlSchemaElement? xse = elements[i] as XmlSchemaElement;
@@ -1657,7 +1677,8 @@ namespace System.Xml.Schema
         internal void MakeExistingAttributesOptional(
             XmlSchemaComplexType ct,
             XmlSchemaObjectCollection? attributesInInstance
-        ) {
+        )
+        {
             if (ct == null)
             {
                 throw new XmlSchemaInferenceException(SR.SchInf_noct, 0, 0);
@@ -1676,7 +1697,8 @@ namespace System.Xml.Schema
         private void SwitchUseToOptional(
             XmlSchemaObjectCollection attributes,
             XmlSchemaObjectCollection? attributesInInstance
-        ) {
+        )
+        {
             for (int i = 0; i < attributes.Count; ++i)
             {
                 XmlSchemaAttribute? attr = attributes[i] as XmlSchemaAttribute;
@@ -1700,7 +1722,8 @@ namespace System.Xml.Schema
                                     attr.RefName.Name,
                                     attr.RefName.Namespace
                                 )
-                            ) {
+                            )
+                            {
                                 attr.Use = XmlSchemaUse.Optional;
                             }
                         }
@@ -1859,7 +1882,8 @@ namespace System.Xml.Schema
                                             XmlConvert.ToString(dbValue),
                                             StringComparison.OrdinalIgnoreCase
                                         ) == 0
-                                    ) {
+                                    )
+                                    {
                                         // If we can convert the original string to the exact same value
                                         //   and it still fits into float then we treat it as float
                                         return ST_float;

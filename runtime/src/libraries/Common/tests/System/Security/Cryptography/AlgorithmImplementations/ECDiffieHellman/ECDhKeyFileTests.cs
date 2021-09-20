@@ -23,7 +23,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             ECDiffieHellman key,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             return key.TryExportECPrivateKey(destination, out bytesWritten);
         }
 
@@ -31,7 +32,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             ECDiffieHellman key,
             ReadOnlySpan<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             key.ImportECPrivateKey(source, out bytesRead);
         }
 

@@ -53,7 +53,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             int position,
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return IsNewConstraintContext(context)
                 || context.IsAnyExpressionContext
                 || context.IsStatementContext
@@ -65,7 +66,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
         private static bool IsTypeDeclarationContext(
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 context.IsTypeDeclarationContext(
                     validModifiers: ValidTypeModifiers,
@@ -73,7 +75,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                     canBePartial: false,
                     cancellationToken: cancellationToken
                 )
-            ) {
+            )
+            {
                 // we must be on a nested type.
                 var token = context.LeftToken;
                 return token.GetAncestors<TypeDeclarationSyntax>()
@@ -90,7 +93,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
         private static bool IsMemberDeclarationContext(
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return context.SyntaxTree.IsGlobalMemberDeclarationContext(
                     context.Position,
                     SyntaxKindSet.AllGlobalMemberModifiers,
@@ -117,7 +121,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                     context.Position,
                     context.LeftToken
                 )
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -129,11 +134,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                     SyntaxKind.TypeParameterConstraintClause,
                     out TypeParameterConstraintClauseSyntax constraintClause
                 )
-            ) {
+            )
+            {
                 if (
                     !constraintClause.Constraints.OfType<ClassOrStructConstraintSyntax>()
                         .Any(c => c.ClassOrStructKeyword.Kind() == SyntaxKind.StructKeyword)
-                ) {
+                )
+                {
                     return true;
                 }
             }

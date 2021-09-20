@@ -275,7 +275,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             object routeValues,
             FormMethod method,
             object htmlAttributes
-        ) {
+        )
+        {
             // Arrange
             var expectedAction = "http://localhost/Hello/World";
             var expectedStartTag = string.Format(
@@ -331,7 +332,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             object routeValues,
             FormMethod method,
             object htmlAttributes
-        ) {
+        )
+        {
             // Arrange
             var expectedAction = "http://localhost/Hello/World";
             var expectedStartTag = string.Format(
@@ -615,7 +617,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         [InlineData(FormMethod.Post)]
         public void BeginForm_EndForm_DoesNotSuppressAntiforgeryTokenWhenAntiforgeryIsTrue(
             FormMethod method
-        ) {
+        )
+        {
             // Arrange
             var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
             htmlGenerator.Setup(
@@ -693,7 +696,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                     antiforgery: false,
                     htmlAttributes: null
                 )
-            ) {
+            )
+            {
                 // This call will output a token.
                 Assert.Equal(
                     "antiforgery",
@@ -885,7 +889,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         [InlineData(FormMethod.Post)]
         public void BeginRouteForm_EndForm_DoesNotSuppressAntiforgeryTokenWhenAntiforgeryIsTrue(
             FormMethod method
-        ) {
+        )
+        {
             // Arrange
             var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
             htmlGenerator.Setup(

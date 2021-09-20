@@ -31,7 +31,8 @@ namespace System.Net
             string? bannerMessage,
             string? welcomeMessage,
             string? exitMessage
-        ) {
+        )
+        {
             _responseStream = responseStream;
             if (responseStream == null && contentLength < 0)
             {
@@ -51,7 +52,8 @@ namespace System.Net
             FtpStatusCode statusCode,
             string? statusLine,
             string? exitMessage
-        ) {
+        )
+        {
             _statusCode = statusCode;
             _statusLine = statusLine;
             _exitMessage = exitMessage;

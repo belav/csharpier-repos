@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             OpenLineBelowCommandArgs args,
             Action nextHandler,
             CommandExecutionContext context
-        ) {
+        )
+        {
             HandlePossibleTypingCommand(
                 args,
                 nextHandler,

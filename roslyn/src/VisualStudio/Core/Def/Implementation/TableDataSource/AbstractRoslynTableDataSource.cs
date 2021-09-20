@@ -22,7 +22,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
         protected ImmutableArray<DocumentId> GetDocumentsWithSameFilePath(
             Solution solution,
             DocumentId documentId
-        ) {
+        )
+        {
             var document = solution.GetDocument(documentId);
             if (document == null)
             {

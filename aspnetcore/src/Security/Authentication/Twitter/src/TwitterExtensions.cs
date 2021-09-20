@@ -76,7 +76,8 @@ namespace Microsoft.Extensions.DependencyInjection
             string authenticationScheme,
             string displayName,
             Action<TwitterOptions> configureOptions
-        ) {
+        )
+        {
             builder.Services.TryAddEnumerable(
                 ServiceDescriptor.Singleton<
                     IPostConfigureOptions<TwitterOptions>,

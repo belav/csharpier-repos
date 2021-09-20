@@ -52,7 +52,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             in SyntaxToken previousToken,
             in SyntaxToken currentToken,
             in NextGetAdjustSpacesOperation nextOperation
-        ) {
+        )
+        {
             var space = currentToken.Kind() == SyntaxKind.EndOfFileToken ? 0 : 1;
             return FormattingOperations.CreateAdjustSpacesOperation(
                 space,

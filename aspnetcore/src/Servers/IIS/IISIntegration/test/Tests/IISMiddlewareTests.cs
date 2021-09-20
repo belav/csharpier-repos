@@ -113,7 +113,8 @@ namespace Microsoft.AspNetCore.Server.IISIntegration
             string pathBase,
             string requestPath,
             string shutdownEvent
-        ) {
+        )
+        {
             var requestExecuted = new TaskCompletionSource<int>(
                 TaskCreationOptions.RunContinuationsAsynchronously
             );

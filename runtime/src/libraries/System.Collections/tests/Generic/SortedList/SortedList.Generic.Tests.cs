@@ -146,7 +146,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void SortedList_Generic_Capacity_NegativeValue_ThrowsArgumentOutOfRangeException(
             int count
-        ) {
+        )
+        {
             SortedList<TKey, TValue> dictionary =
                 (SortedList<TKey, TValue>)GenericIDictionaryFactory(count);
             int capacityBefore = dictionary.Capacity;
@@ -161,7 +162,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void SortedList_Generic_Capacity_LessThanCount_ThrowsArgumentOutOfRangeException(
             int count
-        ) {
+        )
+        {
             SortedList<TKey, TValue> dictionary =
                 (SortedList<TKey, TValue>)GenericIDictionaryFactory();
             for (int i = 0; i < count; i++)
@@ -418,7 +420,8 @@ namespace System.Collections.Tests
         private void RemoveAt(
             SortedList<TKey, TValue> dictionary,
             KeyValuePair<TKey, TValue> element
-        ) {
+        )
+        {
             dictionary.RemoveAt(dictionary.IndexOfKey(element.Key));
         }
 
@@ -426,7 +429,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void SortedList_Generic_RemoveAt_OnReadOnlySortedList_ThrowsNotSupportedException(
             int count
-        ) {
+        )
+        {
             if (IsReadOnly)
             {
                 SortedList<TKey, TValue> dictionary =
@@ -497,7 +501,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void SortedList_Generic_TrimExcess_OnValidSortedListThatHasntBeenRemovedFrom(
             int dictionaryLength
-        ) {
+        )
+        {
             SortedList<TKey, TValue> dictionary =
                 (SortedList<TKey, TValue>)GenericIDictionaryFactory(dictionaryLength);
             dictionary.TrimExcess();
@@ -540,7 +545,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void SortedList_Generic_TrimExcess_AfterClearingAndAddingSomeElementsBack(
             int dictionaryLength
-        ) {
+        )
+        {
             if (dictionaryLength > 0)
             {
                 SortedList<TKey, TValue> dictionary =
@@ -560,7 +566,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void SortedList_Generic_TrimExcess_AfterClearingAndAddingAllElementsBack(
             int dictionaryLength
-        ) {
+        )
+        {
             if (dictionaryLength > 0)
             {
                 SortedList<TKey, TValue> dictionary =

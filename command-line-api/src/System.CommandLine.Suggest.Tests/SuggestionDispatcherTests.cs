@@ -99,7 +99,8 @@ namespace System.CommandLine.Suggest.Tests
             string scriptSendsCommand,
             int scriptSendsPosition,
             string expectToReceive
-        ) {
+        )
+        {
             string receivedTargetExeArgs = null;
 
             var args = PrepareArgs(
@@ -221,7 +222,8 @@ namespace System.CommandLine.Suggest.Tests
             string[] args,
             ISuggestionRegistration suggestionProvider,
             ISuggestionStore suggestionStore = null
-        ) {
+        )
+        {
             var dispatcher = new SuggestionDispatcher(
                 suggestionProvider,
                 suggestionStore ?? new TestSuggestionStore()
@@ -237,7 +239,8 @@ namespace System.CommandLine.Suggest.Tests
                 string exeFileName,
                 string suggestionTargetArguments,
                 TimeSpan timeout
-            ) {
+            )
+            {
                 if (timeout <= TimeSpan.FromMilliseconds(100))
                 {
                     return "";
@@ -270,7 +273,8 @@ namespace System.CommandLine.Suggest.Tests
                 string exeFileName,
                 string suggestionTargetArguments,
                 TimeSpan timeout
-            ) {
+            )
+            {
                 return _getSuggestions(exeFileName, suggestionTargetArguments, timeout);
             }
         }

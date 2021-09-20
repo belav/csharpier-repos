@@ -48,7 +48,8 @@ namespace System.Security.Cryptography.Pkcs
             ReadOnlyMemory<byte> encodedBytes,
             out int bytesConsumed,
             bool skipCopy = false
-        ) {
+        )
+        {
             // Trim it to the first value
             int firstValueLength = PkcsHelpers.FirstBerValueLength(encodedBytes.Span);
             ReadOnlyMemory<byte> firstValue = encodedBytes.Slice(0, firstValueLength);

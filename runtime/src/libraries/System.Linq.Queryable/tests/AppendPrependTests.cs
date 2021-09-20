@@ -81,7 +81,8 @@ namespace System.Linq.Tests
             IEnumerable<int> source,
             IEnumerable<int> appends,
             IEnumerable<int> prepends
-        ) {
+        )
+        {
             // Prepend first
             IQueryable<int> first = AppendRange(
                 PrependRange(source.AsQueryable(), prepends),
@@ -137,14 +138,16 @@ namespace System.Linq.Tests
         private static IQueryable<TSource> AppendRange<TSource>(
             IQueryable<TSource> source,
             IEnumerable<TSource> appends
-        ) {
+        )
+        {
             return appends.Aggregate(source, (acc, x) => acc.Append(x));
         }
 
         private static IQueryable<TSource> PrependRange<TSource>(
             IQueryable<TSource> source,
             IEnumerable<TSource> prepends
-        ) {
+        )
+        {
             return prepends.Reverse().Aggregate(source, (acc, x) => acc.Prepend(x));
         }
     }

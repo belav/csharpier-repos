@@ -47,7 +47,8 @@ namespace Internal.Cryptography.Pal
             ReadOnlySpan<byte> rawData,
             SafePasswordHandle password,
             X509KeyStorageFlags keyStorageFlags
-        ) {
+        )
+        {
             Debug.Assert(password != null);
 
             ICertificatePal? cert;
@@ -59,7 +60,8 @@ namespace Internal.Cryptography.Pal
                 || PkcsFormatReader.TryReadPkcs7Der(rawData, out cert)
                 || PkcsFormatReader.TryReadPkcs7Pem(rawData, out cert)
                 || PkcsFormatReader.TryReadPkcs12(rawData, password, out cert, out openSslException)
-            ) {
+            )
+            {
                 if (cert == null)
                 {
                     // Empty collection, most likely.
@@ -78,7 +80,8 @@ namespace Internal.Cryptography.Pal
             string fileName,
             SafePasswordHandle password,
             X509KeyStorageFlags keyStorageFlags
-        ) {
+        )
+        {
             ICertificatePal? pal;
 
             // If we can't open the file, fail right away.
@@ -161,7 +164,8 @@ namespace Internal.Cryptography.Pal
         internal static bool TryReadX509Der(
             ReadOnlySpan<byte> rawData,
             [NotNullWhen(true)] out ICertificatePal? certPal
-        ) {
+        )
+        {
             SafeX509Handle certHandle = Interop.Crypto.DecodeX509(
                 ref MemoryMarshal.GetReference(rawData),
                 rawData.Length
@@ -182,7 +186,8 @@ namespace Internal.Cryptography.Pal
         internal static bool TryReadX509Pem(
             SafeBioHandle bio,
             [NotNullWhen(true)] out ICertificatePal? certPal
-        ) {
+        )
+        {
             SafeX509Handle cert = Interop.Crypto.PemReadX509FromBioAux(bio);
 
             if (cert.IsInvalid)
@@ -200,7 +205,8 @@ namespace Internal.Cryptography.Pal
         internal static bool TryReadX509PemNoAux(
             SafeBioHandle bio,
             [NotNullWhen(true)] out ICertificatePal? certPal
-        ) {
+        )
+        {
             SafeX509Handle cert = Interop.Crypto.PemReadX509FromBio(bio);
 
             if (cert.IsInvalid)
@@ -218,7 +224,8 @@ namespace Internal.Cryptography.Pal
         internal static bool TryReadX509Pem(
             ReadOnlySpan<byte> rawData,
             [NotNullWhen(true)] out ICertificatePal? certPal
-        ) {
+        )
+        {
             using (SafeBioHandle bio = Interop.Crypto.CreateMemoryBio())
             {
                 Interop.Crypto.CheckValidOpenSslHandle(bio);
@@ -235,7 +242,8 @@ namespace Internal.Cryptography.Pal
         internal static bool TryReadX509Der(
             SafeBioHandle bio,
             [NotNullWhen(true)] out ICertificatePal? fromBio
-        ) {
+        )
+        {
             SafeX509Handle cert = Interop.Crypto.ReadX509AsDerFromBio(bio);
 
             if (cert.IsInvalid)
@@ -353,7 +361,8 @@ namespace Internal.Cryptography.Pal
                     SafeSharedAsn1IntegerHandle serialNumber = Interop.Crypto.X509GetSerialNumber(
                         _cert
                     )
-                ) {
+                )
+                {
                     return Interop.Crypto.GetAsn1IntegerBytes(serialNumber);
                 }
             }
@@ -552,7 +561,8 @@ namespace Internal.Cryptography.Pal
                     cert,
                     nid
                 )
-            ) {
+            )
+            {
                 if (data.IsInvalid)
                 {
                     return default;
@@ -732,7 +742,8 @@ namespace Internal.Cryptography.Pal
                     (int)nameType,
                     forIssuer
                 )
-            ) {
+            )
+            {
                 if (bioHandle.IsInvalid)
                 {
                     return "";
@@ -846,7 +857,8 @@ namespace Internal.Cryptography.Pal
                         DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal,
                         out utcTime
                     )
-                ) {
+                )
+                {
                     throw new CryptographicException();
                 }
 
@@ -865,7 +877,8 @@ namespace Internal.Cryptography.Pal
                         DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal,
                         out generalizedTime
                     )
-                ) {
+                )
+                {
                     throw new CryptographicException();
                 }
 

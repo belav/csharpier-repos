@@ -113,7 +113,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     currentNode != null
                     && searchSpan.Contains(currentNode.FullSpan)
                     && predicate(currentNode)
-                ) {
+                )
+                {
                     if (currentNode is TSyntaxNode tSyntax)
                     {
                         yield return tSyntax;
@@ -254,7 +255,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 // pad, making further work faster.
                 while (
                     commonAncestorsStack.Count > 0 && commonAncestorsStack.Peek() != commonAncestor
-                ) {
+                )
+                {
                     commonAncestorsSet.Remove(commonAncestorsStack.Peek());
                     commonAncestorsStack.Pop();
                 }
@@ -280,7 +282,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             static SyntaxNode? FindCommonAncestor(
                 SyntaxNode node,
                 HashSet<SyntaxNode> commonAncestorsSet
-            ) {
+            )
+            {
                 foreach (var ancestor in node.ValueAncestorsAndSelf())
                 {
                     if (commonAncestorsSet.Contains(ancestor))
@@ -304,7 +307,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static SyntaxNode AddAnnotations(
             this SyntaxNode root,
             IEnumerable<Tuple<SyntaxToken, SyntaxAnnotation>> pairs
-        ) {
+        )
+        {
             Contract.ThrowIfNull(root);
             Contract.ThrowIfNull(pairs);
 
@@ -324,7 +328,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static SyntaxNode AddAnnotations(
             this SyntaxNode root,
             IEnumerable<Tuple<SyntaxNode, SyntaxAnnotation>> pairs
-        ) {
+        )
+        {
             Contract.ThrowIfNull(root);
             Contract.ThrowIfNull(pairs);
 
@@ -356,7 +361,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static IEnumerable<TextSpan> GetContiguousSpans(
             this IEnumerable<SyntaxNode> nodes,
             Func<SyntaxNode, SyntaxToken>? getLastToken = null
-        ) {
+        )
+        {
             (SyntaxNode node, TextSpan textSpan)? previous = null;
 
             // Sort the nodes in source location order.
@@ -413,7 +419,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             SyntaxNode startNode,
             SyntaxNode endNode,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var start = startNode.Span.End;
             var end = endNode.SpanStart;
 
@@ -651,7 +658,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                         if (
                             rewritten != original
                             || !nodeReplacements.TryGetValue(original, out var replaced)
-                        ) {
+                        )
+                        {
                             // the subtree did change, or we didn't have a replacement for it in this batch
                             // so we need to add an annotation so we can find this node again for the next batch.
                             replaced = retryAnnotations.WithAdditionalAnnotations(
@@ -669,7 +677,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                         if (
                             rewritten != original
                             || !tokenReplacements.TryGetValue(original, out var replaced)
-                        ) {
+                        )
+                        {
                             // the subtree did change, or we didn't have a replacement for it in this batch
                             // so we need to add an annotation so we can find this node again for the next batch.
                             replaced = retryAnnotations.WithAdditionalAnnotations(
@@ -742,7 +751,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         private static SyntaxToken FindSkippedTokenForward(
             SyntaxTriviaList triviaList,
             int position
-        ) {
+        )
+        {
             foreach (var trivia in triviaList)
             {
                 if (trivia.HasStructure)
@@ -778,7 +788,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         private static SyntaxToken FindSkippedTokenBackward(
             SyntaxTriviaList triviaList,
             int position
-        ) {
+        )
+        {
             foreach (var trivia in triviaList.Reverse())
             {
                 if (trivia.HasStructure)
@@ -805,7 +816,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             bool includeSkipped = false,
             bool includeDirectives = false,
             bool includeDocumentationComments = false
-        ) {
+        )
+        {
             return (position < root.FullSpan.End || !(root is ICompilationUnitSyntax))
               ? root.FindToken(
                     position,
@@ -834,7 +846,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             bool includeSkipped = false,
             bool includeDirectives = false,
             bool includeDocumentationComments = false
-        ) {
+        )
+        {
             var findSkippedToken = includeSkipped ? s_findSkippedTokenForward : ((l, p) => default);
 
             var token = GetInitialToken(
@@ -888,7 +901,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             bool includeSkipped = false,
             bool includeDirectives = false,
             bool includeDocumentationComments = false
-        ) {
+        )
+        {
             var findSkippedToken = includeSkipped
                 ? s_findSkippedTokenBackward
                 : ((l, p) => default);
@@ -1042,7 +1056,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 var current = node;
                 current != null;
                 current = current.GetParent(ascendOutOfTrivia: true)
-            ) {
+            )
+            {
                 if (current is TNode tnode)
                 {
                     return tnode;

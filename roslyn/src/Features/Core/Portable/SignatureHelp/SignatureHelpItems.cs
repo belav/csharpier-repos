@@ -61,7 +61,8 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
             int argumentCount,
             string? argumentName,
             int? selectedItem = null
-        ) {
+        )
+        {
             Contract.ThrowIfNull(items);
             Contract.ThrowIfTrue(items.IsEmpty());
             Contract.ThrowIfTrue(selectedItem.HasValue && selectedItem.Value >= items.Count);

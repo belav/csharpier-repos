@@ -111,7 +111,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                 semanticModel.GetSymbolInfo(comparison, cancellationToken)
                     .GetAnySymbol()
                     .IsUserDefinedOperator()
-            ) {
+            )
+            {
                 return;
             }
 
@@ -123,7 +124,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                     out var asExpression,
                     out var localSymbol
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -146,7 +148,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
             if (
                 localStatement is LocalDeclarationStatementSyntax localDecl
                 && localDecl.UsingKeyword != default
-            ) {
+            )
+            {
                 return;
             }
 
@@ -218,7 +221,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                         SyntaxKind.IdentifierName,
                         out IdentifierNameSyntax? identifierName
                     )
-                ) {
+                )
+                {
                     // Check if this is a 'write' to the asOperand.
                     if (
                         identifierName.Identifier.ValueText == asOperand?.Name
@@ -226,7 +230,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                             semanticModel.GetSymbolInfo(identifierName, cancellationToken).Symbol
                         )
                         && identifierName.IsWrittenTo()
-                    ) {
+                    )
+                    {
                         return;
                     }
 
@@ -248,7 +253,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                     enclosingBlock,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -277,7 +283,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
             [NotNullWhen(true)] out VariableDeclaratorSyntax? declarator,
             [NotNullWhen(true)] out BinaryExpressionSyntax? asExpression,
             [NotNullWhen(true)] out ILocalSymbol? localSymbol
-        ) {
+        )
+        {
             switch (operand.Kind())
             {
                 case SyntaxKind.IdentifierName:
@@ -292,7 +299,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                             out localSymbol,
                             out declarator
                         )
-                    ) {
+                    )
+                    {
                         break;
                     }
 
@@ -316,7 +324,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                             SyntaxKind.IdentifierName,
                             out IdentifierNameSyntax? identifier
                         )
-                    ) {
+                    )
+                    {
                         break;
                     }
 
@@ -327,7 +336,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                             out localSymbol,
                             out declarator
                         )
-                    ) {
+                    )
+                    {
                         break;
                     }
 
@@ -346,7 +356,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
             IdentifierNameSyntax identifier,
             [NotNullWhen(true)] out ILocalSymbol? localSymbol,
             [NotNullWhen(true)] out VariableDeclaratorSyntax? declarator
-        ) {
+        )
+        {
             localSymbol = semanticModel.GetSymbolInfo(identifier).Symbol as ILocalSymbol;
             declarator =
                 localSymbol?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax()
@@ -358,7 +369,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
             ExpressionSyntax left,
             SyntaxKind comparisonKind,
             SyntaxNode right
-        ) {
+        )
+        {
             if (left.IsKind(SyntaxKind.NullLiteralExpression))
             {
                 // null == x
@@ -377,7 +389,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                 right.IsKind(SyntaxKind.PredefinedType, out PredefinedTypeSyntax? predefinedType)
                 && predefinedType.Keyword.IsKind(SyntaxKind.ObjectKeyword)
                 && comparisonKind == SyntaxKind.IsExpression
-            ) {
+            )
+            {
                 // x is object
                 return left;
             }
@@ -386,7 +399,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                 right.IsKind(SyntaxKind.ConstantPattern, out ConstantPatternSyntax? constantPattern)
                 && constantPattern.Expression.IsKind(SyntaxKind.NullLiteralExpression)
                 && comparisonKind == SyntaxKind.IsPatternExpression
-            ) {
+            )
+            {
                 // x is null
                 return left;
             }

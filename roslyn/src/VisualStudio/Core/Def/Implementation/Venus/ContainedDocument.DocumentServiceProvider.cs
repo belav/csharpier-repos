@@ -71,7 +71,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                     Document document,
                     IEnumerable<TextSpan> spans,
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     // REVIEW: for now, we keep document here due to open file case, otherwise, we need to create new SpanMappingService for every char user types.
                     var sourceText = await document.GetTextAsync(cancellationToken)
                         .ConfigureAwait(false);
@@ -94,7 +95,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                             var primarySpan in primarySnapshot.MapFromSourceSnapshot(
                                 span.ToSnapshotSpan(roslynSnapshot)
                             )
-                        ) {
+                        )
+                        {
                             // this is from http://index/?query=MapSecondaryToPrimarySpan&rightProject=Microsoft.VisualStudio.Editor.Implementation&file=VsTextBufferCoordinatorAdapter.cs&line=177
                             // make sure we only consider one that's not split
                             if (primarySpan.Length != span.Length)
@@ -135,7 +137,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                     TextSpan span,
                     ExcerptMode mode,
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     // REVIEW: for now, we keep document here due to open file case, otherwise, we need to create new DocumentExcerpter for every char user types.
                     var sourceText = await document.GetTextAsync(cancellationToken)
                         .ConfigureAwait(false);
@@ -203,7 +206,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                     ITextSnapshot roslynSnapshot,
                     SnapshotSpan contentSpanOnPrimarySnapshot,
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     var primarySnapshot =
                         (IProjectionSnapshot)contentSpanOnPrimarySnapshot.Snapshot;
 
@@ -225,7 +229,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                         var roslynSpan in primarySnapshot.MapToSourceSnapshots(
                             contentSpanOnPrimarySnapshot.Span
                         )
-                    ) {
+                    )
+                    {
                         if (roslynSnapshot.TextBuffer != roslynSpan.Snapshot.TextBuffer)
                         {
                             // not mapped to right buffer. ignore
@@ -322,12 +327,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
 
                 private static int GetNonWhitespaceStartPositionOnContent(
                     SnapshotSpan spanOnPrimarySnapshot
-                ) {
+                )
+                {
                     for (
                         var i = spanOnPrimarySnapshot.Start.Position;
                         i < spanOnPrimarySnapshot.End.Position;
                         i++
-                    ) {
+                    )
+                    {
                         if (!char.IsWhiteSpace(spanOnPrimarySnapshot.Snapshot[i]))
                         {
                             return i - spanOnPrimarySnapshot.Start.Position;
@@ -341,7 +348,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                     IProjectionSnapshot primarySnapshot,
                     ITextSnapshot roslynSnapshot,
                     TextSpan span
-                ) {
+                )
+                {
                     var primarySpans = primarySnapshot.MapFromSourceSnapshot(
                         span.ToSnapshotSpan(roslynSnapshot)
                     );
@@ -358,7 +366,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                     ExcerptMode mode,
                     SnapshotSpan primarySpan,
                     SnapshotSpan contentSpan
-                ) {
+                )
+                {
                     var line = primarySpan.Start.GetContainingLine();
 
                     if (mode == ExcerptMode.SingleLine)
@@ -389,7 +398,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                 private static SnapshotSpan? GetContentSpanFromPrimarySpan(
                     ExcerptMode mode,
                     SnapshotSpan primarySpan
-                ) {
+                )
+                {
                     var line = primarySpan.Start.GetContainingLine();
 
                     if (mode == ExcerptMode.SingleLine)

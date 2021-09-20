@@ -11,27 +11,31 @@ namespace Microsoft.Extensions.Logging
         public static Microsoft.Extensions.Logging.ILoggingBuilder AddTraceSource(
             this Microsoft.Extensions.Logging.ILoggingBuilder builder,
             System.Diagnostics.SourceSwitch sourceSwitch
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Logging.ILoggingBuilder AddTraceSource(
             this Microsoft.Extensions.Logging.ILoggingBuilder builder,
             System.Diagnostics.SourceSwitch sourceSwitch,
             System.Diagnostics.TraceListener listener
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Logging.ILoggingBuilder AddTraceSource(
             this Microsoft.Extensions.Logging.ILoggingBuilder builder,
             string switchName
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Logging.ILoggingBuilder AddTraceSource(
             this Microsoft.Extensions.Logging.ILoggingBuilder builder,
             string switchName,
             System.Diagnostics.TraceListener listener
-        ) {
+        )
+        {
             throw null;
         }
     }

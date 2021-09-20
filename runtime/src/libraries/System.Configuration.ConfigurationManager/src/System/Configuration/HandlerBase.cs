@@ -29,7 +29,8 @@ namespace System.Configuration
             string attrib,
             bool fRequired,
             ref string val
-        ) {
+        )
+        {
             XmlNode a = GetAndRemoveAttribute(node, attrib, fRequired);
             if (a != null)
                 val = a.Value;
@@ -41,7 +42,8 @@ namespace System.Configuration
             XmlNode node,
             string attrib,
             ref string val
-        ) {
+        )
+        {
             return GetAndRemoveStringAttributeInternal(
                 node,
                 attrib,
@@ -57,7 +59,8 @@ namespace System.Configuration
             string attrib,
             bool fRequired,
             ref bool val
-        ) {
+        )
+        {
             XmlNode a = GetAndRemoveAttribute(node, attrib, fRequired);
             if (a != null)
             {
@@ -82,7 +85,8 @@ namespace System.Configuration
             XmlNode node,
             string attrib,
             ref bool val
-        ) {
+        )
+        {
             return GetAndRemoveBooleanAttributeInternal(
                 node,
                 attrib,
@@ -98,7 +102,8 @@ namespace System.Configuration
             string attrib,
             bool fRequired,
             ref int val
-        ) {
+        )
+        {
             XmlNode a = GetAndRemoveAttribute(node, attrib, fRequired);
             if (a != null)
             {
@@ -131,7 +136,8 @@ namespace System.Configuration
             XmlNode node,
             string attrib,
             ref int val
-        ) {
+        )
+        {
             return GetAndRemoveIntegerAttributeInternal(
                 node,
                 attrib,

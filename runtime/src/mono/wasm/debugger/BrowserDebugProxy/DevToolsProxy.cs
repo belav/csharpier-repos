@@ -41,7 +41,8 @@ namespace Microsoft.WebAssembly.Diagnostics
             string method,
             JObject args,
             CancellationToken token
-        ) {
+        )
+        {
             return Task.FromResult(false);
         }
 
@@ -50,7 +51,8 @@ namespace Microsoft.WebAssembly.Diagnostics
             string method,
             JObject args,
             CancellationToken token
-        ) {
+        )
+        {
             return Task.FromResult(false);
         }
 
@@ -115,7 +117,8 @@ namespace Microsoft.WebAssembly.Diagnostics
             string method,
             JObject args,
             CancellationToken token
-        ) {
+        )
+        {
             try
             {
                 if (!await AcceptEvent(sessionId, method, args, token))
@@ -135,7 +138,8 @@ namespace Microsoft.WebAssembly.Diagnostics
             string method,
             JObject args,
             CancellationToken token
-        ) {
+        )
+        {
             try
             {
                 if (!await AcceptCommand(id, method, args, token))
@@ -205,7 +209,8 @@ namespace Microsoft.WebAssembly.Diagnostics
             string method,
             JObject args,
             CancellationToken token
-        ) {
+        )
+        {
             //Log ("verbose", $"sending command {method}: {args}");
             return await SendCommandInternal(id, method, args, token);
         }
@@ -215,7 +220,8 @@ namespace Microsoft.WebAssembly.Diagnostics
             string method,
             JObject args,
             CancellationToken token
-        ) {
+        )
+        {
             int id = Interlocked.Increment(ref next_cmd_id);
 
             var o = JObject.FromObject(new { id, method, @params = args });
@@ -236,7 +242,8 @@ namespace Microsoft.WebAssembly.Diagnostics
             string method,
             JObject args,
             CancellationToken token
-        ) {
+        )
+        {
             //Log ("verbose", $"sending event {method}: {args}");
             SendEventInternal(sessionId, method, args, token);
         }
@@ -246,7 +253,8 @@ namespace Microsoft.WebAssembly.Diagnostics
             string method,
             JObject args,
             CancellationToken token
-        ) {
+        )
+        {
             var o = JObject.FromObject(new { method, @params = args });
             if (sessionId.sessionId != null)
                 o["sessionId"] = sessionId.sessionId;

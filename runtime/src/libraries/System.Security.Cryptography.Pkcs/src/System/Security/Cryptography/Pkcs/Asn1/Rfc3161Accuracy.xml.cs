@@ -45,7 +45,8 @@ namespace System.Security.Cryptography.Pkcs.Asn1
         internal static Rfc3161Accuracy Decode(
             ReadOnlyMemory<byte> encoded,
             AsnEncodingRules ruleSet
-        ) {
+        )
+        {
             return Decode(Asn1Tag.Sequence, encoded, ruleSet);
         }
 
@@ -53,7 +54,8 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             Asn1Tag expectedTag,
             ReadOnlyMemory<byte> encoded,
             AsnEncodingRules ruleSet
-        ) {
+        )
+        {
             try
             {
                 AsnValueReader reader = new AsnValueReader(encoded.Span, ruleSet);
@@ -72,7 +74,8 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             ref AsnValueReader reader,
             ReadOnlyMemory<byte> rebind,
             out Rfc3161Accuracy decoded
-        ) {
+        )
+        {
             Decode(ref reader, Asn1Tag.Sequence, rebind, out decoded);
         }
 
@@ -81,7 +84,8 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             Asn1Tag expectedTag,
             ReadOnlyMemory<byte> rebind,
             out Rfc3161Accuracy decoded
-        ) {
+        )
+        {
             try
             {
                 DecodeCore(ref reader, expectedTag, rebind, out decoded);
@@ -97,14 +101,16 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             Asn1Tag expectedTag,
             ReadOnlyMemory<byte> rebind,
             out Rfc3161Accuracy decoded
-        ) {
+        )
+        {
             decoded = default;
             AsnValueReader sequenceReader = reader.ReadSequence(expectedTag);
 
             if (
                 sequenceReader.HasData
                 && sequenceReader.PeekTag().HasSameClassAndValue(Asn1Tag.Integer)
-            ) {
+            )
+            {
                 if (sequenceReader.TryReadInt32(out int tmpSeconds))
                 {
                     decoded.Seconds = tmpSeconds;
@@ -119,13 +125,15 @@ namespace System.Security.Cryptography.Pkcs.Asn1
                 sequenceReader.HasData
                 && sequenceReader.PeekTag()
                     .HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 0))
-            ) {
+            )
+            {
                 if (
                     sequenceReader.TryReadInt32(
                         out int tmpMillis,
                         new Asn1Tag(TagClass.ContextSpecific, 0)
                     )
-                ) {
+                )
+                {
                     decoded.Millis = tmpMillis;
                 }
                 else
@@ -138,13 +146,15 @@ namespace System.Security.Cryptography.Pkcs.Asn1
                 sequenceReader.HasData
                 && sequenceReader.PeekTag()
                     .HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 1))
-            ) {
+            )
+            {
                 if (
                     sequenceReader.TryReadInt32(
                         out int tmpMicros,
                         new Asn1Tag(TagClass.ContextSpecific, 1)
                     )
-                ) {
+                )
+                {
                     decoded.Micros = tmpMicros;
                 }
                 else

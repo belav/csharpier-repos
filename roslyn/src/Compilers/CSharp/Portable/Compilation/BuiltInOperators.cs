@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         //       The most natural type choice, Enum arrays, are not blittable due to a CLR limitation.
         private ImmutableArray<UnaryOperatorSignature> GetSignaturesFromUnaryOperatorKinds(
             int[] operatorKinds
-        ) {
+        )
+        {
             var builder = ArrayBuilder<UnaryOperatorSignature>.GetInstance();
             foreach (var kind in operatorKinds)
             {
@@ -49,7 +50,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             UnaryOperatorKind kind,
             ArrayBuilder<UnaryOperatorSignature> operators,
             bool skipNativeIntegerOperators
-        ) {
+        )
+        {
             if (_builtInUnaryOperators == null)
             {
                 var allOperators = new ImmutableArray<UnaryOperatorSignature>[]
@@ -340,7 +342,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         //       The most natural type choice, Enum arrays, are not blittable due to a CLR limitation.
         private ImmutableArray<BinaryOperatorSignature> GetSignaturesFromBinaryOperatorKinds(
             int[] operatorKinds
-        ) {
+        )
+        {
             var builder = ArrayBuilder<BinaryOperatorSignature>.GetInstance();
             foreach (var kind in operatorKinds)
             {
@@ -354,7 +357,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BinaryOperatorKind kind,
             ArrayBuilder<BinaryOperatorSignature> operators,
             bool skipNativeIntegerOperators
-        ) {
+        )
+        {
             if (_builtInOperators == null)
             {
                 var logicalOperators = new ImmutableArray<BinaryOperatorSignature>[]
@@ -994,7 +998,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool rightIsNull,
             bool rightIsDefault,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             // SPEC: The predefined reference type equality operators require one of the following:
 
             // SPEC: (1) Both operands are a value of a type known to be a reference-type or the literal null.

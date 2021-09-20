@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Cryptography.KeyDerivation.PBKDF2
             KeyDerivationPrf prf,
             int iterationCount,
             int numBytesRequested
-        ) {
+        )
+        {
             Debug.Assert(password != null);
             Debug.Assert(salt != null);
             Debug.Assert(iterationCount > 0);
@@ -39,7 +40,8 @@ namespace Microsoft.AspNetCore.Cryptography.KeyDerivation.PBKDF2
                     (cbPasswordBuffer > Constants.MAX_STACKALLOC_BYTES)
                         ? new byte[cbPasswordBuffer]
                         : null
-            ) {
+            )
+            {
                 byte* pbPasswordBuffer = pbHeapAllocatedPasswordBuffer;
                 if (pbPasswordBuffer == null)
                 {

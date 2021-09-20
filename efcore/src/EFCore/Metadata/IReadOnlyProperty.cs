@@ -177,7 +177,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     var propertyIndex = 0;
                     propertyIndex < foreignKey.Properties.Count;
                     propertyIndex++
-                ) {
+                )
+                {
                     if (this == foreignKey.Properties[propertyIndex])
                     {
                         return foreignKey.PrincipalKey.Properties[propertyIndex];
@@ -203,14 +204,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         private static void AddPrincipals(
             IReadOnlyProperty property,
             List<IReadOnlyProperty> visited
-        ) {
+        )
+        {
             foreach (var foreignKey in property.GetContainingForeignKeys())
             {
                 for (
                     var propertyIndex = 0;
                     propertyIndex < foreignKey.Properties.Count;
                     propertyIndex++
-                ) {
+                )
+                {
                     if (property == foreignKey.Properties[propertyIndex])
                     {
                         var principal = foreignKey.PrincipalKey.Properties[propertyIndex];
@@ -299,7 +302,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         string ToDebugString(
             MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault,
             int indent = 0
-        ) {
+        )
+        {
             var builder = new StringBuilder();
             var indentString = new string(' ', indent);
 
@@ -398,7 +402,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             if (
                 (options & MetadataDebugStringOptions.IncludePropertyIndexes) != 0
                 && ((AnnotatableBase)this).IsReadOnly
-            ) {
+            )
+            {
                 var indexes = ((IProperty)this).GetPropertyIndexes();
                 builder.Append(" ").Append(indexes.Index);
                 builder.Append(" ").Append(indexes.OriginalValueIndex);

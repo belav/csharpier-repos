@@ -29,7 +29,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
         public void WriteTagHelperHtmlAttributeValue(
             CodeRenderingContext context,
             PreallocatedTagHelperHtmlAttributeValueIntermediateNode node
-        ) {
+        )
+        {
             context.CodeWriter.Write("private static readonly global::")
                 .Write(TagHelperAttributeTypeName)
                 .Write(" ")
@@ -59,7 +60,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
         public void WriteTagHelperHtmlAttribute(
             CodeRenderingContext context,
             PreallocatedTagHelperHtmlAttributeIntermediateNode node
-        ) {
+        )
+        {
             if (context.Parent as TagHelperIntermediateNode == null)
             {
                 var message = Resources.FormatIntermediateNodes_InvalidParentNode(
@@ -80,7 +82,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
         public void WriteTagHelperPropertyValue(
             CodeRenderingContext context,
             PreallocatedTagHelperPropertyValueIntermediateNode node
-        ) {
+        )
+        {
             context.CodeWriter.Write("private static readonly global::")
                 .Write(TagHelperAttributeTypeName)
                 .Write(" ")
@@ -100,7 +103,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
         public void WriteTagHelperProperty(
             CodeRenderingContext context,
             PreallocatedTagHelperPropertyIntermediateNode node
-        ) {
+        )
+        {
             var tagHelperNode = context.Parent as TagHelperIntermediateNode;
             if (tagHelperNode == null)
             {
@@ -115,7 +119,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             if (
                 node.IsIndexerNameMatch
                 && object.ReferenceEquals(FindFirstUseOfIndexer(tagHelperNode, node), node)
-            ) {
+            )
+            {
                 // Throw a reasonable Exception at runtime if the dictionary property is null.
                 context.CodeWriter.Write("if (")
                     .Write(node.FieldName)
@@ -154,7 +159,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
         private static PreallocatedTagHelperPropertyIntermediateNode FindFirstUseOfIndexer(
             TagHelperIntermediateNode tagHelperNode,
             PreallocatedTagHelperPropertyIntermediateNode propertyNode
-        ) {
+        )
+        {
             Debug.Assert(tagHelperNode.Children.Contains(propertyNode));
             Debug.Assert(propertyNode.IsIndexerNameMatch);
 
@@ -166,7 +172,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                     && otherPropertyNode.TagHelper.Equals(propertyNode.TagHelper)
                     && otherPropertyNode.BoundAttribute.Equals(propertyNode.BoundAttribute)
                     && otherPropertyNode.IsIndexerNameMatch
-                ) {
+                )
+                {
                     return otherPropertyNode;
                 }
             }
@@ -177,7 +184,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
 
         private static string GetPropertyAccessor(
             PreallocatedTagHelperPropertyIntermediateNode node
-        ) {
+        )
+        {
             var propertyAccessor = $"{node.FieldName}.{node.PropertyName}";
 
             if (node.IsIndexerNameMatch)

@@ -280,7 +280,8 @@ namespace System.Text.RegularExpressions.Tests
             int count,
             int start,
             string[] expected
-        ) {
+        )
+        {
             bool isDefaultStart = RegexHelpers.IsDefaultStart(input, options, start);
             bool isDefaultCount = RegexHelpers.IsDefaultCount(input, options, count);
             if (options == RegexOptions.None)

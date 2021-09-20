@@ -95,7 +95,8 @@ namespace System.Net
             object? thisOrContextObject,
             FormattableString? formattableString = null,
             [CallerMemberName] string? memberName = null
-        ) {
+        )
+        {
             DebugValidateArg(thisOrContextObject);
             DebugValidateArg(formattableString);
             if (Log.IsEnabled())
@@ -115,7 +116,8 @@ namespace System.Net
             object? thisOrContextObject,
             object arg0,
             [CallerMemberName] string? memberName = null
-        ) {
+        )
+        {
             DebugValidateArg(thisOrContextObject);
             DebugValidateArg(arg0);
             if (Log.IsEnabled())
@@ -133,7 +135,8 @@ namespace System.Net
             object arg0,
             object arg1,
             [CallerMemberName] string? memberName = null
-        ) {
+        )
+        {
             DebugValidateArg(thisOrContextObject);
             DebugValidateArg(arg0);
             DebugValidateArg(arg1);
@@ -158,7 +161,8 @@ namespace System.Net
             object arg1,
             object arg2,
             [CallerMemberName] string? memberName = null
-        ) {
+        )
+        {
             DebugValidateArg(thisOrContextObject);
             DebugValidateArg(arg0);
             DebugValidateArg(arg1);
@@ -186,7 +190,8 @@ namespace System.Net
             object? thisOrContextObject,
             FormattableString? formattableString = null,
             [CallerMemberName] string? memberName = null
-        ) {
+        )
+        {
             DebugValidateArg(thisOrContextObject);
             DebugValidateArg(formattableString);
             if (Log.IsEnabled())
@@ -206,7 +211,8 @@ namespace System.Net
             object? thisOrContextObject,
             object arg0,
             [CallerMemberName] string? memberName = null
-        ) {
+        )
+        {
             DebugValidateArg(thisOrContextObject);
             DebugValidateArg(arg0);
             if (Log.IsEnabled())
@@ -224,7 +230,8 @@ namespace System.Net
             object arg0,
             object arg1,
             [CallerMemberName] string? memberName = null
-        ) {
+        )
+        {
             DebugValidateArg(thisOrContextObject);
             DebugValidateArg(arg0);
             DebugValidateArg(arg1);
@@ -247,7 +254,8 @@ namespace System.Net
             object? thisOrContextObject,
             FormattableString? formattableString = null,
             [CallerMemberName] string? memberName = null
-        ) {
+        )
+        {
             DebugValidateArg(thisOrContextObject);
             DebugValidateArg(formattableString);
             if (Log.IsEnabled())
@@ -267,7 +275,8 @@ namespace System.Net
             object? thisOrContextObject,
             object? message,
             [CallerMemberName] string? memberName = null
-        ) {
+        )
+        {
             DebugValidateArg(thisOrContextObject);
             DebugValidateArg(message);
             if (Log.IsEnabled())
@@ -289,7 +298,8 @@ namespace System.Net
             object? thisOrContextObject,
             FormattableString formattableString,
             [CallerMemberName] string? memberName = null
-        ) {
+        )
+        {
             DebugValidateArg(thisOrContextObject);
             DebugValidateArg(formattableString);
             if (Log.IsEnabled())
@@ -305,7 +315,8 @@ namespace System.Net
             object? thisOrContextObject,
             object message,
             [CallerMemberName] string? memberName = null
-        ) {
+        )
+        {
             DebugValidateArg(thisOrContextObject);
             DebugValidateArg(message);
             if (Log.IsEnabled())
@@ -330,7 +341,8 @@ namespace System.Net
             object? thisOrContextObject,
             byte[] buffer,
             [CallerMemberName] string? memberName = null
-        ) {
+        )
+        {
             DumpBuffer(thisOrContextObject, buffer, 0, buffer.Length, memberName);
         }
 
@@ -347,7 +359,8 @@ namespace System.Net
             int offset,
             int count,
             [CallerMemberName] string? memberName = null
-        ) {
+        )
+        {
             if (Log.IsEnabled() && offset >= 0 && offset <= buffer.Length - count)
             {
                 count = Math.Min(count, MaxDumpSize);
@@ -374,7 +387,8 @@ namespace System.Net
             IntPtr bufferPtr,
             int count,
             [CallerMemberName] string? memberName = null
-        ) {
+        )
+        {
             Debug.Assert(bufferPtr != IntPtr.Zero);
             Debug.Assert(count >= 0);
 
@@ -404,7 +418,8 @@ namespace System.Net
             object first,
             object second,
             [CallerMemberName] string? memberName = null
-        ) {
+        )
+        {
             DebugValidateArg(first);
             DebugValidateArg(second);
             if (Log.IsEnabled())
@@ -422,7 +437,8 @@ namespace System.Net
             object first,
             object second,
             [CallerMemberName] string? memberName = null
-        ) {
+        )
+        {
             DebugValidateArg(thisOrContextObject);
             DebugValidateArg(first);
             DebugValidateArg(second);
@@ -589,7 +605,8 @@ namespace System.Net
             string? arg2,
             string? arg3,
             string? arg4
-        ) {
+        )
+        {
             if (IsEnabled())
             {
                 if (arg1 == null)
@@ -772,7 +789,8 @@ namespace System.Net
             string? arg2,
             string? arg3,
             int arg4
-        ) {
+        )
+        {
             if (IsEnabled())
             {
                 if (arg1 == null)

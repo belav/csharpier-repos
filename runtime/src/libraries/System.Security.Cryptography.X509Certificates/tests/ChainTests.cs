@@ -355,7 +355,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [InlineData(false)]
         public static void SystemTrustCertificateWithCustomRootTrust(
             bool addCertificateToCustomRootTrust
-        ) {
+        )
+        {
             using (var microsoftDotCom = new X509Certificate2(TestData.MicrosoftDotComSslCertBytes))
             using (
                 var testCert = new X509Certificate2(
@@ -450,7 +451,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             bool chainBuildsSuccessfully,
             X509ChainStatusFlags chainFlags,
             BuildChainCustomTrustStoreTestArguments testArguments
-        ) {
+        )
+        {
             using (var endCert = new X509Certificate2(TestData.MicrosoftDotComSslCertBytes))
             using (var issuerCert = new X509Certificate2(TestData.MicrosoftDotComIssuerBytes))
             using (var rootCert = new X509Certificate2(TestData.MicrosoftDotComRootBytes))
@@ -835,11 +837,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             using (var microsoftDotCom = new X509Certificate2(TestData.MicrosoftDotComSslCertBytes))
             using (
                 var microsoftDotComRoot = new X509Certificate2(TestData.MicrosoftDotComRootBytes)
-            ) {
+            )
+            {
                 // Check that microsoft.com's root certificate IS installed in the machine root store as a sanity step
                 using (
                     var machineRootStore = new X509Store(StoreName.Root, StoreLocation.LocalMachine)
-                ) {
+                )
+                {
                     machineRootStore.Open(OpenFlags.ReadOnly);
                     bool foundCert = false;
 
@@ -1495,7 +1499,8 @@ LjCvFGJ+RiZCbxIZfUZEuJ5vAH5WOa2S0tYoEAeyfzuLMIqY9xK74nlZ/vzz1cY="
         internal static void AllowUnknownAuthorityOrAddSelfSignedToCustomTrust(
             this X509Chain chain,
             X509Certificate2 cert
-        ) {
+        )
+        {
             if (!PlatformDetection.IsAndroid)
             {
                 chain.ChainPolicy.VerificationFlags |=

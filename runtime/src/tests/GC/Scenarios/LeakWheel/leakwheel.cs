@@ -167,7 +167,8 @@ namespace DefaultNamespace
                 && Node.iSmallCreat == Node.iSmallFinal
                 && Node.iThrdCreat == Node.iThrdFinal
                 && Node.iVarAryCreat == Node.iVarAryFinal
-            ) {
+            )
+            {
                 Console.WriteLine("Test Passed!");
                 return 100;
             }
@@ -317,7 +318,8 @@ namespace DefaultNamespace
             Node nValue,
             Node LstNode,
             Dictionary<int, WeakReference> oTable
-        ) {
+        )
+        {
             /**************************************************/
             /* save new node in a chain, all the node is      */
             /* refereced by this chain, Table only have their */

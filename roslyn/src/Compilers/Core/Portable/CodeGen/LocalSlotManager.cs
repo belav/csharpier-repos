@@ -131,13 +131,15 @@ namespace Microsoft.CodeAnalysis.CodeGen
             ImmutableArray<bool> dynamicTransformFlags,
             ImmutableArray<string> tupleElementNames,
             bool isSlotReusable
-        ) {
+        )
+        {
             LocalDefinition? local;
 
             if (
                 !isSlotReusable
                 || !FreeSlots.TryPop(new LocalSignature(type, constraints), out local)
-            ) {
+            )
+            {
                 local = this.DeclareLocalImpl(
                     type,
                     symbol,
@@ -182,10 +184,12 @@ namespace Microsoft.CodeAnalysis.CodeGen
             LocalSlotConstraints constraints,
             ImmutableArray<bool> dynamicTransformFlags = default,
             ImmutableArray<string> tupleElementNames = default
-        ) {
+        )
+        {
             if (
                 !FreeSlots.TryPop(new LocalSignature(type, constraints), out LocalDefinition? local)
-            ) {
+            )
+            {
                 local = DeclareLocalImpl(
                     type: type,
                     symbol: null,
@@ -212,7 +216,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             LocalSlotConstraints constraints,
             ImmutableArray<bool> dynamicTransformFlags,
             ImmutableArray<string> tupleElementNames
-        ) {
+        )
+        {
             if (_lazyAllLocals == null)
             {
                 _lazyAllLocals = new ArrayBuilder<Cci.ILocalDefinition>(1);

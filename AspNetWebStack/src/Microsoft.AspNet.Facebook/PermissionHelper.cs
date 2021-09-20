@@ -16,7 +16,8 @@ namespace Microsoft.AspNet.Facebook
 
         public static IEnumerable<string> GetDeclinedPermissions(
             PermissionsStatus permissionsStatus
-        ) {
+        )
+        {
             return GetPermissionsWithStatus(permissionsStatus, PermissionStatus.Declined);
         }
 
@@ -40,7 +41,8 @@ namespace Microsoft.AspNet.Facebook
 
         public static HashSet<string> GetRequiredPermissions(
             IEnumerable<FacebookAuthorizeAttribute> facebookAuthorizeAttributes
-        ) {
+        )
+        {
             var requiredPermissions = new HashSet<string>(
                 facebookAuthorizeAttributes.SelectMany(attribute => attribute.Permissions),
                 StringComparer.Ordinal
@@ -53,7 +55,8 @@ namespace Microsoft.AspNet.Facebook
             HttpRequestBase request,
             IEnumerable<string> missingPermissions,
             IEnumerable<string> declinedPermissions
-        ) {
+        )
+        {
             IEnumerable<string> previouslyRequestedPermissions =
                 PermissionHelper.GetPreviouslyRequestedPermissions(request);
             IEnumerable<string> previouslyRequestedMissingPermissions = missingPermissions.Where(
@@ -69,7 +72,8 @@ namespace Microsoft.AspNet.Facebook
         public static void PersistRequestedPermissions(
             AuthorizationContext context,
             IEnumerable<string> requestedPermissions
-        ) {
+        )
+        {
             HttpRequestBase request = context.HttpContext.Request;
             IEnumerable<string> existingRequestedPermissions = GetPreviouslyRequestedPermissions(
                 request
@@ -98,7 +102,8 @@ namespace Microsoft.AspNet.Facebook
         private static IEnumerable<string> GetPermissionsWithStatus(
             PermissionsStatus permissionsStatus,
             PermissionStatus status
-        ) {
+        )
+        {
             return permissionsStatus.Status.Where(kvp => kvp.Value == status)
                 .Select(kvp => kvp.Key);
         }

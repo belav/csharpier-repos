@@ -253,7 +253,8 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
             Function objectPrototype,
             string creator,
             JSObject arrayType
-        ) {
+        )
+        {
             HelperMarshal._funcActionBufferObjectResultValue = arrayType;
             Assert.Equal(10, HelperMarshal._funcActionBufferObjectResultValue.Length);
             Assert.Equal(

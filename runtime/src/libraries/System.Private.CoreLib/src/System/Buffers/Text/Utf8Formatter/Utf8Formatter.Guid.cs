@@ -45,7 +45,8 @@ namespace System.Buffers.Text
             Span<byte> destination,
             out int bytesWritten,
             StandardFormat format = default
-        ) {
+        )
+        {
             const int INSERT_DASHES = unchecked((int)0x80000000);
             const int NO_DASHES = 0;
             const int INSERT_CURLY_BRACES = (CloseBrace << 16) | (OpenBrace << 8);
@@ -190,7 +191,8 @@ namespace System.Buffers.Text
 
             if (
                 flags < 0 /* use dash? */
-            ) {
+            )
+            {
                 destination[8] = Dash;
                 destination = destination.Slice(9);
             }
@@ -235,7 +237,8 @@ namespace System.Buffers.Text
 
             if (
                 flags < 0 /* use dash? */
-            ) {
+            )
+            {
                 destination[4] = Dash;
                 destination = destination.Slice(5);
             }
@@ -280,7 +283,8 @@ namespace System.Buffers.Text
 
             if (
                 flags < 0 /* use dash? */
-            ) {
+            )
+            {
                 destination[4] = Dash;
                 destination = destination.Slice(5);
             }
@@ -307,7 +311,8 @@ namespace System.Buffers.Text
 
             if (
                 flags < 0 /* use dash? */
-            ) {
+            )
+            {
                 destination[4] = Dash;
                 destination = destination.Slice(5);
             }

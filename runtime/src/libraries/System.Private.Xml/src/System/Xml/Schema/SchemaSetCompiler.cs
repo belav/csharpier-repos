@@ -492,7 +492,8 @@ namespace System.Xml.Schema
                             headElement.ElementSchemaType,
                             headElement.FinalResolved
                         )
-                    ) {
+                    )
+                    {
                         SendValidationEvent(
                             SR.Sch_InvalidSubstitutionMember,
                             (element.QualifiedName).ToString(),
@@ -601,7 +602,8 @@ namespace System.Xml.Schema
         private void RecursivelyCheckRedefinedGroups(
             XmlSchemaGroup redefinedGroup,
             XmlSchemaGroup baseGroup
-        ) {
+        )
+        {
             if (baseGroup.Redefined != null)
             {
                 RecursivelyCheckRedefinedGroups(baseGroup, baseGroup.Redefined);
@@ -634,7 +636,8 @@ namespace System.Xml.Schema
         private void RecursivelyCheckRedefinedAttributeGroups(
             XmlSchemaAttributeGroup attributeGroup,
             XmlSchemaAttributeGroup baseAttributeGroup
-        ) {
+        )
+        {
             if (baseAttributeGroup.Redefined != null)
             {
                 RecursivelyCheckRedefinedAttributeGroups(
@@ -735,7 +738,8 @@ namespace System.Xml.Schema
                     else if (
                         simpleType.Redefined != null
                         && restriction.BaseTypeName == simpleType.Redefined.QualifiedName
-                    ) {
+                    )
+                    {
                         CompileSimpleType((XmlSchemaSimpleType)simpleType.Redefined);
                         simpleType.SetBaseSchemaType(simpleType.Redefined.BaseXmlSchemaType);
                         datatype = simpleType.Redefined.Datatype!;
@@ -879,12 +883,14 @@ namespace System.Xml.Schema
             XmlSchemaSimpleType unionMember,
             ArrayList memberTypeDefinitions,
             XmlSchemaSimpleType parentType
-        ) {
+        )
+        {
             XmlSchemaDatatype unionDatatype = unionMember.Datatype!;
             if (
                 unionMember.DerivedBy == XmlSchemaDerivationMethod.Restriction
                 && (unionDatatype.HasLexicalFacets || unionDatatype.HasValueFacets)
-            ) {
+            )
+            {
                 SendValidationEvent(SR.Sch_UnionFromUnion, parentType);
             }
             else
@@ -1000,7 +1006,8 @@ namespace System.Xml.Schema
                             && attribute.AttDef != null
                             && attribute.AttDef.Name != XmlQualifiedName.Empty
                             && attribute.AttDef != SchemaAttDef.Empty
-                        ) {
+                        )
+                        {
                             decl.AddAttDef(attribute.AttDef);
                         }
                     }
@@ -1017,12 +1024,14 @@ namespace System.Xml.Schema
         private void CompileSimpleContentExtension(
             XmlSchemaComplexType complexType,
             XmlSchemaSimpleContentExtension simpleExtension
-        ) {
+        )
+        {
             XmlSchemaComplexType? baseType = null;
             if (
                 complexType.Redefined != null
                 && simpleExtension.BaseTypeName == complexType.Redefined.QualifiedName
-            ) {
+            )
+            {
                 baseType = (XmlSchemaComplexType)complexType.Redefined;
                 CompileComplexType(baseType);
                 complexType.SetBaseSchemaType(baseType);
@@ -1072,13 +1081,15 @@ namespace System.Xml.Schema
         private void CompileSimpleContentRestriction(
             XmlSchemaComplexType complexType,
             XmlSchemaSimpleContentRestriction simpleRestriction
-        ) {
+        )
+        {
             XmlSchemaComplexType? baseType = null;
             XmlSchemaDatatype? datatype = null;
             if (
                 complexType.Redefined != null
                 && simpleRestriction.BaseTypeName == complexType.Redefined.QualifiedName
-            ) {
+            )
+            {
                 baseType = (XmlSchemaComplexType)complexType.Redefined;
                 CompileComplexType(baseType);
                 datatype = baseType.Datatype;
@@ -1112,7 +1123,8 @@ namespace System.Xml.Schema
                                 baseType.Datatype!,
                                 XmlSchemaDerivationMethod.None
                             )
-                        ) {
+                        )
+                        {
                             SendValidationEvent(SR.Sch_DerivedNotFromBase, simpleRestriction);
                         }
                         datatype = simpleRestriction.BaseType.Datatype;
@@ -1121,7 +1133,8 @@ namespace System.Xml.Schema
                 else if (
                     baseType.ContentType == XmlSchemaContentType.Mixed
                     && baseType.ElementDecl!.ContentValidator!.IsEmptiable
-                ) {
+                )
+                {
                     if (simpleRestriction.BaseType != null)
                     {
                         CompileSimpleType(simpleRestriction.BaseType);
@@ -1188,12 +1201,14 @@ namespace System.Xml.Schema
             XmlSchemaComplexType complexType,
             XmlSchemaComplexContent complexContent,
             XmlSchemaComplexContentExtension complexExtension
-        ) {
+        )
+        {
             XmlSchemaComplexType? baseType = null;
             if (
                 complexType.Redefined != null
                 && complexExtension.BaseTypeName == complexType.Redefined.QualifiedName
-            ) {
+            )
+            {
                 baseType = (XmlSchemaComplexType)complexType.Redefined;
                 CompileComplexType(baseType);
             }
@@ -1272,7 +1287,8 @@ namespace System.Xml.Schema
             if (
                 baseType.ContentType != XmlSchemaContentType.Empty
                 && complexType.ContentType != baseType.ContentType
-            ) { //If base is empty, do not check
+            )
+            { //If base is empty, do not check
                 SendValidationEvent(SR.Sch_DifContentType, complexType);
                 return;
             }
@@ -1285,12 +1301,14 @@ namespace System.Xml.Schema
             XmlSchemaComplexType complexType,
             XmlSchemaComplexContent complexContent,
             XmlSchemaComplexContentRestriction complexRestriction
-        ) {
+        )
+        {
             XmlSchemaComplexType? baseType = null;
             if (
                 complexType.Redefined != null
                 && complexRestriction.BaseTypeName == complexType.Redefined.QualifiedName
-            ) {
+            )
+            {
                 baseType = (XmlSchemaComplexType)complexType.Redefined;
                 CompileComplexType(baseType);
             }
@@ -1335,7 +1353,8 @@ namespace System.Xml.Schema
                     if (
                         baseType.ElementDecl != null
                         && !baseType.ElementDecl.ContentValidator!.IsEmptiable
-                    ) { //base is either TextOnly or its ElementOnly/Mixed and not emptiable
+                    )
+                    { //base is either TextOnly or its ElementOnly/Mixed and not emptiable
                         SendValidationEvent(
                             SR.Sch_InvalidContentRestrictionDetailed,
                             SR.Sch_InvalidBaseToEmpty,
@@ -1366,7 +1385,8 @@ namespace System.Xml.Schema
                 baseType != null
                 && baseType != XmlSchemaComplexType.AnyType
                 && complexType.DerivedBy == XmlSchemaDerivationMethod.Restriction
-            ) {
+            )
+            {
                 XmlSchemaParticle derivedParticle = CannonicalizePointlessRoot(
                     complexType.ContentTypeParticle
                 );
@@ -1404,7 +1424,8 @@ namespace System.Xml.Schema
                         localComplexType != null
                         && localElement.SchemaTypeName == XmlQualifiedName.Empty
                         && localElement.RefName == XmlQualifiedName.Empty
-                    ) { //Only local elements
+                    )
+                    { //Only local elements
                         localElement.IsLocalTypeDerivationChecked = true; //Not clearing this flag after recursion to make sure this check is not repeated for multiple references of the same local element (through group refs)
                         CheckParticleDerivation(localComplexType);
                     }
@@ -1415,7 +1436,8 @@ namespace System.Xml.Schema
         private void CheckParticleDerivation(
             XmlSchemaParticle derivedParticle,
             XmlSchemaParticle baseParticle
-        ) {
+        )
+        {
             _restrictionErrorMsg = null;
             derivedParticle = CannonicalizePointlessRoot(derivedParticle);
             baseParticle = CannonicalizePointlessRoot(baseParticle);
@@ -1490,7 +1512,8 @@ namespace System.Xml.Schema
             if (
                 !element.RefName.IsEmpty
                 && (element.ElementDecl!.Block & XmlSchemaDerivationMethod.Substitution) == 0
-            ) {
+            )
+            {
                 XmlSchemaSubstitutionGroup? substitutionGroup =
                     (XmlSchemaSubstitutionGroup?)_examplars[element.QualifiedName];
                 if (substitutionGroup == null)
@@ -1646,7 +1669,8 @@ namespace System.Xml.Schema
                             p1.MinOccurs == decimal.One
                             && p1.MaxOccurs == decimal.One
                             && p1 is XmlSchemaChoice
-                        ) {
+                        )
+                        {
                             XmlSchemaChoice p1Choice = (p1 as XmlSchemaChoice)!;
                             for (int j = 0; j < p1Choice.Items.Count; ++j)
                             {
@@ -1674,7 +1698,8 @@ namespace System.Xml.Schema
                 && choice.Items.Count == 1
                 && choice.MinOccurs == decimal.One
                 && choice.MaxOccurs == decimal.One
-            ) {
+            )
+            {
                 return (XmlSchemaParticle)choice.Items[0];
             }
             else
@@ -1704,7 +1729,8 @@ namespace System.Xml.Schema
                             p1.MinOccurs == decimal.One
                             && p1.MaxOccurs == decimal.One
                             && p1Sequence != null
-                        ) {
+                        )
+                        {
                             for (int j = 0; j < p1Sequence.Items.Count; ++j)
                             {
                                 newSequence.Items.Add(p1Sequence.Items[j]);
@@ -1727,7 +1753,8 @@ namespace System.Xml.Schema
                 && sequence.Items.Count == 1
                 && sequence.MinOccurs == decimal.One
                 && sequence.MaxOccurs == decimal.One
-            ) {
+            )
+            {
                 return (XmlSchemaParticle)sequence.Items[0];
             }
             else
@@ -1798,7 +1825,8 @@ namespace System.Xml.Schema
         private bool IsValidRestriction(
             XmlSchemaParticle derivedParticle,
             XmlSchemaParticle baseParticle
-        ) {
+        )
+        {
             if (derivedParticle == baseParticle)
             {
                 return true;
@@ -1873,7 +1901,8 @@ namespace System.Xml.Schema
                             (XmlSchemaGroupBase)baseParticle,
                             true
                         )
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }
@@ -1884,7 +1913,8 @@ namespace System.Xml.Schema
                             (XmlSchemaSequence)derivedParticle,
                             (XmlSchemaAll)baseParticle
                         )
-                    ) {
+                    )
+                    {
                         return true;
                     }
                     _restrictionErrorMsg = SR.Format(
@@ -1931,7 +1961,8 @@ namespace System.Xml.Schema
                             (XmlSchemaSequence)derivedParticle,
                             (XmlSchemaChoice)baseParticle
                         )
-                    ) {
+                    )
+                    {
                         return true;
                     }
                     _restrictionErrorMsg = SR.Format(
@@ -1963,14 +1994,16 @@ namespace System.Xml.Schema
                         derivedParticle is XmlSchemaAll
                         && ((XmlSchemaGroupBase)derivedParticle).Items.Count == 1
                     )
-                ) {
+                )
+                {
                     if (
                         IsGroupBaseFromGroupBase(
                             (XmlSchemaGroupBase)derivedParticle,
                             (XmlSchemaGroupBase)baseParticle,
                             true
                         )
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }
@@ -1991,7 +2024,8 @@ namespace System.Xml.Schema
         private bool IsElementFromElement(
             XmlSchemaElement derivedElement,
             XmlSchemaElement baseElement
-        ) {
+        )
+        {
             // In case of elements the block value '#all' is 100% equivalent to the value of 'substitution restriction extension'.
             // Since below we perform a logical operation on the bit fields we need to convert the #all (0xFF)
             //   to the equivalent set of substitution, restriction and extension, so that the operation works as expected.
@@ -2031,7 +2065,8 @@ namespace System.Xml.Schema
                         )
                     )
                 )
-            ) {
+            )
+            {
                 _restrictionErrorMsg = SR.Format(
                     SR.Sch_ElementFromElement,
                     derivedElement.QualifiedName,
@@ -2095,7 +2130,8 @@ namespace System.Xml.Schema
                     baseAny.MinOccurs,
                     baseAny.MaxOccurs
                 )
-            ) {
+            )
+            {
                 _restrictionErrorMsg = SR.Format(
                     SR.Sch_GroupBaseFromAny2,
                     derivedGroupBase.LineNumber.ToString(NumberFormatInfo.InvariantInfo),
@@ -2126,11 +2162,13 @@ namespace System.Xml.Schema
             XmlSchemaElement derivedElement,
             XmlSchemaGroupBase baseGroupBase,
             bool skipEmptableOnly
-        ) {
+        )
+        {
             if (
                 !IsRangeSimple(baseGroupBase.MinOccurs, baseGroupBase.MaxOccurs)
                 || !IsRangeSimple(derivedElement.MinOccurs, derivedElement.MaxOccurs)
-            ) {
+            )
+            {
                 return IsElementFromGroupBase(derivedElement, baseGroupBase); //SPEC COMPLIANT
             }
             else
@@ -2154,7 +2192,8 @@ namespace System.Xml.Schema
             XmlSchemaElement derivedElement,
             XmlSchemaGroupBase baseGroupBase,
             bool skipEmptableOnly
-        ) {
+        )
+        {
             bool isMatched = false;
 
             foreach (XmlSchemaParticle baseParticle in baseGroupBase.Items)
@@ -2186,7 +2225,8 @@ namespace System.Xml.Schema
         private bool IsElementFromGroupBase(
             XmlSchemaElement derivedElement,
             XmlSchemaGroupBase baseGroupBase
-        ) {
+        )
+        {
             if (baseGroupBase is XmlSchemaSequence)
             {
                 XmlSchemaSequence virtualSeq = new XmlSchemaSequence();
@@ -2218,7 +2258,8 @@ namespace System.Xml.Schema
                         baseGroupBase,
                         false
                     )
-                ) {
+                )
+                {
                     return true;
                 }
                 _restrictionErrorMsg = SR.Format(
@@ -2255,7 +2296,8 @@ namespace System.Xml.Schema
         private bool IsChoiceFromChoiceSubstGroup(
             XmlSchemaChoice derivedChoice,
             XmlSchemaChoice baseChoice
-        ) {
+        )
+        {
             if (!IsValidOccurrenceRangeRestriction(derivedChoice, baseChoice))
             {
                 _restrictionErrorMsg = SR.Sch_GroupBaseRestRangeInvalid;
@@ -2266,7 +2308,8 @@ namespace System.Xml.Schema
                 if (
                     GetMappingParticle((XmlSchemaParticle)derivedChoice.Items[i], baseChoice.Items)
                     < 0
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -2277,7 +2320,8 @@ namespace System.Xml.Schema
             XmlSchemaGroupBase derivedGroupBase,
             XmlSchemaGroupBase baseGroupBase,
             bool skipEmptableOnly
-        ) {
+        )
+        {
             if (!IsValidOccurrenceRangeRestriction(derivedGroupBase, baseGroupBase))
             {
                 _restrictionErrorMsg = SR.Sch_GroupBaseRestRangeInvalid;
@@ -2298,7 +2342,8 @@ namespace System.Xml.Schema
                         (XmlSchemaParticle)derivedGroupBase.Items[count],
                         baseParticle
                     )
-                ) {
+                )
+                {
                     count++;
                 }
                 else if (skipEmptableOnly && !IsParticleEmptiable(baseParticle))
@@ -2322,7 +2367,8 @@ namespace System.Xml.Schema
             if (
                 !IsValidOccurrenceRangeRestriction(derivedSequence, baseAll)
                 || derivedSequence.Items.Count > baseAll.Items.Count
-            ) {
+            )
+            {
                 return false;
             }
             BitSet map = new BitSet(baseAll.Items.Count);
@@ -2361,7 +2407,8 @@ namespace System.Xml.Schema
         private bool IsSequenceFromChoice(
             XmlSchemaSequence derivedSequence,
             XmlSchemaChoice baseChoice
-        ) {
+        )
+        {
             decimal minOccurs,
                 maxOccurs;
             minOccurs = derivedSequence.MinOccurs * derivedSequence.Items.Count;
@@ -2381,7 +2428,8 @@ namespace System.Xml.Schema
                     baseChoice.MaxOccurs
                 )
                 || derivedSequence.Items.Count > baseChoice.Items.Count
-            ) {
+            )
+            {
                 return false;
             }
             for (int i = 0; i < derivedSequence.Items.Count; ++i)
@@ -2400,7 +2448,8 @@ namespace System.Xml.Schema
         private bool IsValidOccurrenceRangeRestriction(
             XmlSchemaParticle derivedParticle,
             XmlSchemaParticle baseParticle
-        ) {
+        )
+        {
             return IsValidOccurrenceRangeRestriction(
                 derivedParticle.MinOccurs,
                 derivedParticle.MaxOccurs,
@@ -2414,14 +2463,16 @@ namespace System.Xml.Schema
             decimal maxOccurs,
             decimal baseMinOccurs,
             decimal baseMaxOccurs
-        ) {
+        )
+        {
             return (baseMinOccurs <= minOccurs) && (maxOccurs <= baseMaxOccurs);
         }
 
         private int GetMappingParticle(
             XmlSchemaParticle particle,
             XmlSchemaObjectCollection collection
-        ) {
+        )
+        {
             for (int i = 0; i < collection.Count; i++)
             {
                 if (IsValidRestriction(particle, (XmlSchemaParticle)collection[i]))
@@ -2442,7 +2493,8 @@ namespace System.Xml.Schema
             XmlSchemaParticle particle,
             out decimal minOccurs,
             out decimal maxOccurs
-        ) {
+        )
+        {
             XmlSchemaChoice? choice = particle as XmlSchemaChoice;
 
             if (particle is XmlSchemaElement || particle is XmlSchemaAny)
@@ -2538,11 +2590,13 @@ namespace System.Xml.Schema
             XmlSchemaComplexType complexType,
             XmlSchemaComplexContent? complexContent,
             XmlSchemaParticle particle
-        ) {
+        )
+        {
             if (
                 (complexContent != null && complexContent.IsMixed)
                 || (complexContent == null && complexType.IsMixed)
-            ) {
+            )
+            {
                 return XmlSchemaContentType.Mixed;
             }
             else if (particle != null && !particle.IsEmpty)
@@ -2602,7 +2656,8 @@ namespace System.Xml.Schema
                         if (
                             attributeGroup.Redefined != null
                             && attributeGroupRef.RefName == attributeGroup.Redefined.QualifiedName
-                        ) {
+                        )
+                        {
                             attributeGroupResolved =
                                 (XmlSchemaAttributeGroup)attributeGroup.Redefined;
                         }
@@ -2618,7 +2673,8 @@ namespace System.Xml.Schema
                             CompileAttributeGroup(attributeGroupResolved);
                             foreach (
                                 XmlSchemaAttribute? attribute in attributeGroupResolved.AttributeUses.Values
-                            ) {
+                            )
+                            {
                                 if (attributeGroup.AttributeUses[attribute!.QualifiedName] == null)
                                 {
                                     attributeGroup.AttributeUses.Add(
@@ -2666,7 +2722,8 @@ namespace System.Xml.Schema
             XmlSchemaObjectCollection attributes,
             XmlSchemaAnyAttribute? anyAttribute,
             XmlSchemaDerivationMethod derivedBy
-        ) {
+        )
+        {
             XmlSchemaAnyAttribute? baseAttributeWildcard =
                 baseType != null ? baseType.AttributeWildcard : null;
             for (int i = 0; i < attributes.Count; ++i)
@@ -2685,7 +2742,8 @@ namespace System.Xml.Schema
                             && derivedBy == XmlSchemaDerivationMethod.Restriction
                             && baseType != XmlSchemaComplexType.AnyType
                         )
-                    ) {
+                    )
+                    {
                         if (derivedType.AttributeUses[attr.QualifiedName] == null)
                         {
                             derivedType.AttributeUses.Add(attr.QualifiedName, attr);
@@ -2720,7 +2778,8 @@ namespace System.Xml.Schema
                         CompileAttributeGroup(attributeGroup);
                         foreach (
                             XmlSchemaAttribute? attribute in attributeGroup.AttributeUses.Values
-                        ) {
+                        )
+                        {
                             if (
                                 attribute!.Use != XmlSchemaUse.Prohibited
                                 || (
@@ -2728,7 +2787,8 @@ namespace System.Xml.Schema
                                     && derivedBy == XmlSchemaDerivationMethod.Restriction
                                     && baseType != XmlSchemaComplexType.AnyType
                                 )
-                            ) {
+                            )
+                            {
                                 if (derivedType.AttributeUses[attribute.QualifiedName] == null)
                                 {
                                     derivedType.AttributeUses.Add(
@@ -2800,7 +2860,8 @@ namespace System.Xml.Schema
                                 attributeBase.Use != XmlSchemaUse.Prohibited
                                 && attribute.AttributeSchemaType
                                     != attributeBase.AttributeSchemaType
-                            ) { //Extension allows previously prohibited attributes to be re-added,
+                            )
+                            { //Extension allows previously prohibited attributes to be re-added,
                                 SendValidationEvent(SR.Sch_InvalidAttributeExtension, attribute);
                             }
                         }
@@ -2820,7 +2881,8 @@ namespace System.Xml.Schema
                                 baseAttributeWildcard
                             )
                         )
-                    ) {
+                    )
+                    {
                         SendValidationEvent(SR.Sch_InvalidAnyAttributeRestriction, derivedType);
                     }
                     else
@@ -2847,7 +2909,8 @@ namespace System.Xml.Schema
                             if (
                                 attributeBase.Use == XmlSchemaUse.Prohibited
                                 && attribute.Use != XmlSchemaUse.Prohibited
-                            ) {
+                            )
+                            {
                                 SendValidationEvent(
                                     SR.Sch_AttributeRestrictionProhibited,
                                     attribute
@@ -2856,7 +2919,8 @@ namespace System.Xml.Schema
                             else if (
                                 attributeBase.Use == XmlSchemaUse.Required
                                 && (attribute.Use != XmlSchemaUse.Required)
-                            ) { //If base is required, derived should also be required
+                            )
+                            { //If base is required, derived should also be required
                                 SendValidationEvent(SR.Sch_AttributeUseInvalid, attribute);
                             }
                             else if (attribute.Use == XmlSchemaUse.Prohibited)
@@ -2871,7 +2935,8 @@ namespace System.Xml.Schema
                                     attributeBase.AttributeSchemaType,
                                     XmlSchemaDerivationMethod.Empty
                                 )
-                            ) {
+                            )
+                            {
                                 SendValidationEvent(SR.Sch_AttributeRestrictionInvalid, attribute);
                             }
                             else if (!IsFixedEqual(attributeBase.AttDef!, attribute.AttDef!))
@@ -2894,7 +2959,8 @@ namespace System.Xml.Schema
                         if (
                             baseAttributeWildcard == null
                             || !baseAttributeWildcard.Allows(attribute.QualifiedName)
-                        ) {
+                        )
+                        {
                             SendValidationEvent(
                                 SR.Sch_AttributeRestrictionInvalidFromWildcard,
                                 attribute
@@ -2912,7 +2978,8 @@ namespace System.Xml.Schema
         private void CheckAtrributeGroupRestriction(
             XmlSchemaAttributeGroup baseAttributeGroup,
             XmlSchemaAttributeGroup derivedAttributeGroup
-        ) {
+        )
+        {
             XmlSchemaAnyAttribute? baseAnyAtt = baseAttributeGroup.AttributeWildcard;
             XmlSchemaAnyAttribute? derivedAnyAtt = derivedAttributeGroup.AttributeWildcard;
 
@@ -2923,7 +2990,8 @@ namespace System.Xml.Schema
                     || !XmlSchemaAnyAttribute.IsSubset(derivedAnyAtt, baseAnyAtt)
                     || !IsProcessContentsRestricted(null, derivedAnyAtt, baseAnyAtt)
                 )
-            ) {
+            )
+            {
                 SendValidationEvent(SR.Sch_InvalidAnyAttributeRestriction, derivedAttributeGroup);
             }
 
@@ -2938,13 +3006,15 @@ namespace System.Xml.Schema
                     if (
                         attributeBase.Use == XmlSchemaUse.Prohibited
                         && attribute.Use != XmlSchemaUse.Prohibited
-                    ) {
+                    )
+                    {
                         SendValidationEvent(SR.Sch_AttributeRestrictionProhibited, attribute);
                     }
                     else if (
                         attributeBase.Use == XmlSchemaUse.Required
                         && attribute.Use != XmlSchemaUse.Required
-                    ) {
+                    )
+                    {
                         SendValidationEvent(SR.Sch_AttributeUseInvalid, attribute);
                     }
                     else if (attribute.Use == XmlSchemaUse.Prohibited)
@@ -2959,7 +3029,8 @@ namespace System.Xml.Schema
                             attributeBase.AttributeSchemaType,
                             XmlSchemaDerivationMethod.Empty
                         )
-                    ) {
+                    )
+                    {
                         SendValidationEvent(SR.Sch_AttributeRestrictionInvalid, attribute);
                     }
                     else if (!IsFixedEqual(attributeBase.AttDef!, attribute.AttDef!))
@@ -2998,7 +3069,8 @@ namespace System.Xml.Schema
             XmlSchemaComplexType? baseType,
             XmlSchemaAnyAttribute derivedAttributeWildcard,
             XmlSchemaAnyAttribute baseAttributeWildcard
-        ) {
+        )
+        {
             if (baseType == XmlSchemaComplexType.AnyType)
             {
                 return true;
@@ -3006,7 +3078,8 @@ namespace System.Xml.Schema
             if (
                 (int)derivedAttributeWildcard.ProcessContentsCorrect
                 >= (int)baseAttributeWildcard.ProcessContentsCorrect
-            ) {
+            )
+            {
                 return true;
             }
             return false;
@@ -3015,7 +3088,8 @@ namespace System.Xml.Schema
         private XmlSchemaAnyAttribute? CompileAnyAttributeUnion(
             XmlSchemaAnyAttribute? a,
             XmlSchemaAnyAttribute? b
-        ) {
+        )
+        {
             if (a == null)
             {
                 return b;
@@ -3039,7 +3113,8 @@ namespace System.Xml.Schema
         private XmlSchemaAnyAttribute? CompileAnyAttributeIntersection(
             XmlSchemaAnyAttribute? a,
             XmlSchemaAnyAttribute? b
-        ) {
+        )
+        {
             if (a == null)
             {
                 return b;
@@ -3311,7 +3386,8 @@ namespace System.Xml.Schema
                     if (
                         ic.CompiledConstraint.Role
                         == CompiledIdentityConstraint.ConstraintRole.Keyref
-                    ) {
+                    )
+                    {
                         throw new XmlSchemaException(
                             SR.Sch_ReftoKeyref,
                             xi.QualifiedName.ToString(),
@@ -3479,7 +3555,8 @@ namespace System.Xml.Schema
                                 decl.ContentValidator.ContentType == XmlSchemaContentType.Mixed
                                 && decl.ContentValidator.IsEmptiable
                             )
-                        ) {
+                        )
+                        {
                             if (xe.DefaultValue != null)
                             {
                                 decl.Presence = SchemaDeclBase.Use.Default;
@@ -3595,7 +3672,8 @@ namespace System.Xml.Schema
                             localElement,
                             localElement.MinOccurs == decimal.Zero
                         )
-                    ) {
+                    )
+                    {
                         SendValidationEvent(
                             SR.Sch_DupElement,
                             localElement.QualifiedName.ToString(),
@@ -3677,7 +3755,8 @@ namespace System.Xml.Schema
         private bool BuildParticleContentModel(
             ParticleContentValidator contentValidator,
             XmlSchemaParticle particle
-        ) {
+        )
+        {
             bool hasWildCard = false;
             if (particle is XmlSchemaElement)
             {
@@ -3748,7 +3827,8 @@ namespace System.Xml.Schema
         private void CompileParticleElements(
             XmlSchemaComplexType complexType,
             XmlSchemaParticle particle
-        ) {
+        )
+        {
             if (particle is XmlSchemaElement)
             {
                 XmlSchemaElement localElement = (XmlSchemaElement)particle;
@@ -3881,14 +3961,16 @@ namespace System.Xml.Schema
             if (
                 baseDecl.Presence == SchemaDeclBase.Use.Fixed
                 || baseDecl.Presence == SchemaDeclBase.Use.RequiredFixed
-            ) {
+            )
+            {
                 object baseFixedValue = baseDecl.DefaultValueTyped!;
 
                 Debug.Assert(baseFixedValue != null);
                 if (
                     derivedDecl.Presence != SchemaDeclBase.Use.Fixed
                     && derivedDecl.Presence != SchemaDeclBase.Use.RequiredFixed
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -3919,7 +4001,8 @@ namespace System.Xml.Schema
                                 simpleFixedValue.TypedValue,
                                 derivedFixedValue
                             )
-                        ) { //base type {Union of long & string}, derived type {int}
+                        )
+                        { //base type {Union of long & string}, derived type {int}
                             return false;
                         }
                     }

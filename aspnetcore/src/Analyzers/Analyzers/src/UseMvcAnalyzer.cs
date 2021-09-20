@@ -39,13 +39,15 @@ namespace Microsoft.AspNetCore.Analyzers
             // Note that this doesn't attempt to handle inheritance scenarios.
             foreach (
                 var middlewareAnalysis in _context.GetRelatedAnalyses<MiddlewareAnalysis>(type)
-            ) {
+            )
+            {
                 foreach (var middlewareItem in middlewareAnalysis.Middleware)
                 {
                     if (
                         middlewareItem.UseMethod.Name == "UseMvc"
                         || middlewareItem.UseMethod.Name == "UseMvcWithDefaultRoute"
-                    ) {
+                    )
+                    {
                         // Report a diagnostic if it's unclear that the user turned off Endpoint Routing.
                         if (!OptionsFacts.IsEndpointRoutingExplicitlyDisabled(optionsAnalysis))
                         {

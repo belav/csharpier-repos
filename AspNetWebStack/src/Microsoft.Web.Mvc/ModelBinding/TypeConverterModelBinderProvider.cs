@@ -12,7 +12,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
         public override IExtensibleModelBinder GetBinder(
             ControllerContext controllerContext,
             ExtensibleModelBindingContext bindingContext
-        ) {
+        )
+        {
             ModelBinderUtil.ValidateBindingContext(bindingContext);
 
             ValueProviderResult valueProviderResult = bindingContext.ValueProvider.GetValue(
@@ -26,7 +27,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
             if (
                 !TypeDescriptor.GetConverter(bindingContext.ModelType)
                     .CanConvertFrom(typeof(string))
-            ) {
+            )
+            {
                 return null; // this type cannot be converted
             }
 

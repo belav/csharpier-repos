@@ -305,7 +305,8 @@ public class ScenarioMonitor
                 this.MaximumTimeHasElapsed,
                 ScenarioMonitor.MaximumExecutionTimeInMilliseconds
             )
-        ) {
+        )
+        {
             // Use this thread to run the "flip" thread (hopefully in parallel with the "check" thread)
             // until the scenario ends (either due to timeout or due to completing the required amount
             // of work).
@@ -409,7 +410,8 @@ public class ScenarioMonitor
                     _fMinimumTimeHasElapsed
                     && _fAllRequiredCheckIterationsHaveOccurred
                     && _fAllRequiredFlipIterationsHaveOccurred
-                ) {
+                )
+                {
                     // Basic requirements have been met for execution time and iteration counts, so the
                     // scenario does not need to continue.
                     //

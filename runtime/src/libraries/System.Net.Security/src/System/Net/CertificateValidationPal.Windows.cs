@@ -20,7 +20,8 @@ namespace System.Net
             bool checkCertName,
             bool isServer,
             string? hostName
-        ) {
+        )
+        {
             SslPolicyErrors sslPolicyErrors = SslPolicyErrors.None;
 
             bool chainBuildResult = chain.Build(remoteCertificate);
@@ -104,7 +105,8 @@ namespace System.Net
             SafeDeleteContext? securityContext,
             bool retrieveCollection,
             out X509Certificate2Collection? remoteCertificateCollection
-        ) {
+        )
+        {
             remoteCertificateCollection = null;
 
             if (securityContext == null)
@@ -234,7 +236,8 @@ namespace System.Net
         private static unsafe uint Verify(
             SafeX509ChainHandle chainContext,
             ref Interop.Crypt32.CERT_CHAIN_POLICY_PARA cpp
-        ) {
+        )
+        {
             Interop.Crypt32.CERT_CHAIN_POLICY_STATUS status = default;
             status.cbSize = (uint)sizeof(Interop.Crypt32.CERT_CHAIN_POLICY_STATUS);
 

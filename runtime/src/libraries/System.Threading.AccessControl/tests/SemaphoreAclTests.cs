@@ -146,7 +146,8 @@ namespace System.Threading.Tests
         public void Semaphore_Create_SpecificSecurity(
             SemaphoreRights rights,
             AccessControlType accessControl
-        ) {
+        )
+        {
             SemaphoreSecurity security = GetSemaphoreSecurity(
                 WellKnownSidType.BuiltinUsersSid,
                 rights,
@@ -333,7 +334,8 @@ namespace System.Threading.Tests
             WellKnownSidType sid,
             SemaphoreRights rights,
             AccessControlType accessControl
-        ) {
+        )
+        {
             SemaphoreSecurity security = new SemaphoreSecurity();
             SecurityIdentifier identity = new SecurityIdentifier(sid, null);
             SemaphoreAccessRule accessRule = new SemaphoreAccessRule(
@@ -351,7 +353,8 @@ namespace System.Threading.Tests
             string name,
             SemaphoreSecurity expectedSecurity,
             bool expectedCreatedNew
-        ) {
+        )
+        {
             Semaphore Semaphore = SemaphoreAcl.Create(
                 initialCount,
                 maximumCount,
@@ -386,7 +389,8 @@ namespace System.Threading.Tests
         private void VerifySemaphoreSecurity(
             SemaphoreSecurity expectedSecurity,
             SemaphoreSecurity actualSecurity
-        ) {
+        )
+        {
             Assert.Equal(typeof(SemaphoreRights), expectedSecurity.AccessRightType);
             Assert.Equal(typeof(SemaphoreRights), actualSecurity.AccessRightType);
 
@@ -426,7 +430,8 @@ namespace System.Threading.Tests
         private bool AreAccessRulesEqual(
             SemaphoreAccessRule expectedRule,
             SemaphoreAccessRule actualRule
-        ) {
+        )
+        {
             return expectedRule.AccessControlType == actualRule.AccessControlType
                 && expectedRule.SemaphoreRights == actualRule.SemaphoreRights
                 && expectedRule.InheritanceFlags == actualRule.InheritanceFlags

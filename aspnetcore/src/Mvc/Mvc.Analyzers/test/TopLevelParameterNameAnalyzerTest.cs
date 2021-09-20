@@ -180,7 +180,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
 
         private async Task<bool> IsProblematicParameterTest(
             [CallerMemberName] string testMethod = ""
-        ) {
+        )
+        {
             var testSource = MvcTestSource.Read(GetType().Name, testMethod);
             var project = MvcDiagnosticAnalyzerRunner.CreateProjectWithReferencesInBinDir(
                 GetType().Assembly,
@@ -406,7 +407,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
             string typeName,
             string parameterName,
             [CallerMemberName] string testMethod = ""
-        ) {
+        )
+        {
             // Arrange
             var descriptor =
                 DiagnosticDescriptors.MVC1004_ParameterNameCollidesWithTopLevelProperty;

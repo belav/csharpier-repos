@@ -53,7 +53,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                         out var stringLiteral,
                         cancellationToken
                     )
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -84,7 +85,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             int caretPosition,
             CompletionTrigger trigger,
             OptionSet options
-        ) {
+        )
+        {
             var lineStart = text.Lines.GetLineFromPosition(caretPosition).Start;
 
             // check if the line starts with {whitespace}#{whitespace}{DirectiveName}{whitespace}"
@@ -102,7 +104,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             if (
                 directiveNameStartIndex == -1
                 || !text.ContentEquals(directiveNameStartIndex, DirectiveName)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -123,7 +126,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             string quotedPath,
             int quotedPathStart,
             int position
-        ) {
+        )
+        {
             Contract.ThrowIfTrue(quotedPath[0] != '"');
 
             const int QuoteLength = 1;
@@ -142,7 +146,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             string quotedPath,
             int quotedPathStart,
             int position
-        ) {
+        )
+        {
             // We want the text change to be from after the last slash to the end of the quoted
             // path. If there is no last slash, then we want it from right after the start quote
             // character.
@@ -183,7 +188,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 (index = text.LastIndexOf('/', position)) >= 0
                 || !PathUtilities.IsUnixLikePlatform
                     && (index = text.LastIndexOf('\\', position)) >= 0
-            ) {
+            )
+            {
                 return index + 1;
             }
 
@@ -200,13 +206,15 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             Glyph itemGlyph,
             ImmutableArray<string> extensions,
             CompletionItemRules completionRules
-        ) {
+        )
+        {
             ImmutableArray<string> referenceSearchPaths;
             string? baseDirectory;
             if (
                 document.Project.CompilationOptions?.MetadataReferenceResolver
                 is RuntimeMetadataReferenceResolver resolver
-            ) {
+            )
+            {
                 referenceSearchPaths = resolver.PathResolver.SearchPaths;
                 baseDirectory = resolver.PathResolver.BaseDirectory;
             }

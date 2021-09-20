@@ -23,7 +23,8 @@ namespace Algorithms
             float yminf,
             float ymaxf,
             float stepf
-        ) {
+        )
+        {
             double xmin = (double)xminf;
             double xmax = (double)xmaxf;
             double ymin = (double)yminf;
@@ -60,7 +61,8 @@ namespace Algorithms
             float yminf,
             float ymaxf,
             float stepf
-        ) {
+        )
+        {
             double xmin = (double)xminf;
             double xmax = (double)xmaxf;
             double ymin = (double)yminf;
@@ -99,7 +101,8 @@ namespace Algorithms
             float yminf,
             float ymaxf,
             float stepf
-        ) {
+        )
+        {
             double xmin = (double)xminf;
             double xmax = (double)xmaxf;
             double ymin = (double)yminf;
@@ -142,7 +145,8 @@ namespace Algorithms
             float ymind,
             float ymaxd,
             float stepd
-        ) {
+        )
+        {
             double xmin = (double)xmind;
             double xmax = (double)xmaxd;
             double ymin = (double)ymind;

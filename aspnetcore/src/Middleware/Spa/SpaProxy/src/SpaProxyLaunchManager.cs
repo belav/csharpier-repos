@@ -64,7 +64,8 @@ namespace Microsoft.AspNetCore.SpaProxy
         private async Task<bool> ProbeSpaDevelopmentServerUrl(
             HttpClient httpClient,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var timeout = new CancellationTokenSource(TimeSpan.FromSeconds(10));
             using var cancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(
                 timeout.Token,
@@ -93,7 +94,8 @@ namespace Microsoft.AspNetCore.SpaProxy
         private async Task StartSpaProcessAndProbeForLiveness(
             HttpClient httpClient,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             LaunchDevelopmentProxy();
             var sw = Stopwatch.StartNew();
             var livenessProbeSucceeded = false;

@@ -1097,7 +1097,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         [InlineData(typeof(MultipleRouteAttributeController))]
         public void CreateActionModel_RouteAttributeOnController_CreatesAttributeRoute_ForNonAttributedActions(
             Type controller
-        ) {
+        )
+        {
             // Arrange
             var builder = new TestApplicationModelProvider();
             var typeInfo = controller.GetTypeInfo();
@@ -1121,7 +1122,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         [InlineData(typeof(MultipleRouteAttributeController))]
         public void CreateActionModel_RouteOnController_CreatesOneActionInfoPerRouteTemplateOnAction(
             Type controller
-        ) {
+        )
+        {
             // Arrange
             var builder = new TestApplicationModelProvider();
             var typeInfo = controller.GetTypeInfo();
@@ -1760,7 +1762,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             public static OperatorOverloadingController operator +(
                 OperatorOverloadingController c1,
                 OperatorOverloadingController c2
-            ) {
+            )
+            {
                 return new OperatorOverloadingController();
             }
         }
@@ -1965,7 +1968,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             public Task OnActionExecutionAsync(
                 ActionExecutingContext context,
                 ActionExecutionDelegate next
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -1992,7 +1996,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             public Task OnResourceExecutionAsync(
                 ResourceExecutingContext context,
                 ResourceExecutionDelegate next
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }

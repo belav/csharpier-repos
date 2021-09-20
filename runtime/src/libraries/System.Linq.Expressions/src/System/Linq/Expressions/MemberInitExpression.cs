@@ -17,7 +17,8 @@ namespace System.Linq.Expressions
         internal MemberInitExpression(
             NewExpression newExpression,
             ReadOnlyCollection<MemberBinding> bindings
-        ) {
+        )
+        {
             NewExpression = newExpression;
             Bindings = bindings;
         }
@@ -72,7 +73,8 @@ namespace System.Linq.Expressions
             Expression objExpression,
             ReadOnlyCollection<MemberBinding> bindings,
             bool keepOnStack
-        ) {
+        )
+        {
             ParameterExpression objVar = Variable(objExpression.Type);
             int count = bindings.Count;
             Expression[] block = new Expression[count + 2];
@@ -90,7 +92,8 @@ namespace System.Linq.Expressions
             Expression listExpression,
             ReadOnlyCollection<ElementInit> initializers,
             bool keepOnStack
-        ) {
+        )
+        {
             ParameterExpression listVar = Variable(listExpression.Type);
             int count = initializers.Count;
             Expression[] block = new Expression[count + 2];
@@ -108,7 +111,8 @@ namespace System.Linq.Expressions
         internal static Expression ReduceMemberBinding(
             ParameterExpression objVar,
             MemberBinding binding
-        ) {
+        )
+        {
             MemberExpression member = Expression.MakeMemberAccess(objVar, binding.Member);
             return binding.BindingType switch
             {
@@ -141,7 +145,8 @@ namespace System.Linq.Expressions
         public MemberInitExpression Update(
             NewExpression newExpression,
             IEnumerable<MemberBinding> bindings
-        ) {
+        )
+        {
             if (newExpression == NewExpression && bindings != null)
             {
                 if (ExpressionUtils.SameElements(ref bindings!, Bindings))
@@ -166,7 +171,8 @@ namespace System.Linq.Expressions
         public static MemberInitExpression MemberInit(
             NewExpression newExpression,
             params MemberBinding[] bindings
-        ) {
+        )
+        {
             return MemberInit(newExpression, (IEnumerable<MemberBinding>)bindings);
         }
 
@@ -180,7 +186,8 @@ namespace System.Linq.Expressions
         public static MemberInitExpression MemberInit(
             NewExpression newExpression,
             IEnumerable<MemberBinding> bindings
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(newExpression, nameof(newExpression));
             ContractUtils.RequiresNotNull(bindings, nameof(bindings));
             ReadOnlyCollection<MemberBinding> roBindings = bindings.ToReadOnly();

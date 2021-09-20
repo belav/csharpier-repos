@@ -25,7 +25,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
             RequestContext context,
             CancellationToken cancellationToken,
             LSP.Range? range = null
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<LSP.TextEdit>.GetInstance(out var edits);
 
             var document = context.Document;

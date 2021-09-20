@@ -48,7 +48,8 @@ namespace RunTests
             string assemblyPath,
             string displayName,
             ImmutableArray<TypeInfo> typeInfoList
-        ) {
+        )
+        {
             AssemblyPartitionId = assemblyPartitionId;
             AssemblyPath = assemblyPath;
             DisplayName = displayName;
@@ -98,7 +99,8 @@ namespace RunTests
                 int methodLimit,
                 List<TypeInfo> typeInfoList,
                 out ImmutableArray<PartitionInfo> partitionInfoList
-            ) {
+            )
+            {
                 var list = new List<PartitionInfo>();
                 var hasEventListenerGuard = typeInfoList.Any(
                     x => x.FullName == EventListenerGuardFullName
@@ -153,7 +155,8 @@ namespace RunTests
                     if (
                         currentTypeInfoList.Sum(x => x.MethodCount) >= methodLimit
                         || currentClassNameLengthSum > 25000
-                    ) {
+                    )
+                    {
                         FinishPartition();
                         BeginPartition();
                     }
@@ -278,7 +281,8 @@ namespace RunTests
             MetadataReader reader,
             TypeDefinition type,
             int testMethodCount
-        ) {
+        )
+        {
             // xunit only handles public, non-abstract classes
             var isPublic =
                 TypeAttributes.Public == (type.Attributes & TypeAttributes.Public)
@@ -287,7 +291,8 @@ namespace RunTests
                 !isPublic
                 || TypeAttributes.Abstract == (type.Attributes & TypeAttributes.Abstract)
                 || TypeAttributes.Class != (type.Attributes & TypeAttributes.Class)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -319,14 +324,16 @@ namespace RunTests
                 if (
                     methodDefinition.GetCustomAttributes().Count == 0
                     || !IsValidIdentifier(reader, methodDefinition.Name)
-                ) {
+                )
+                {
                     continue;
                 }
 
                 if (
                     MethodAttributes.Public
                     != (methodDefinition.Attributes & MethodAttributes.Public)
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -356,7 +363,8 @@ namespace RunTests
         private static bool InheritsFromFrameworkBaseType(
             MetadataReader reader,
             TypeDefinition type
-        ) {
+        )
+        {
             if (type.BaseType.Kind != HandleKind.TypeReference)
             {
                 return false;

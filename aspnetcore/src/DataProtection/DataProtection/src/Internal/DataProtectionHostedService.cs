@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.DataProtection.Internal
         public DataProtectionHostedService(
             IKeyRingProvider keyRingProvider,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             _keyRingProvider = keyRingProvider;
             _logger = loggerFactory.CreateLogger<DataProtectionHostedService>();
         }

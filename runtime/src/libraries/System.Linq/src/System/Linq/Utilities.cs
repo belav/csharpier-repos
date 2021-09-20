@@ -20,7 +20,8 @@ namespace System.Linq
         public static bool AreEqualityComparersEqual<TSource>(
             IEqualityComparer<TSource>? left,
             IEqualityComparer<TSource>? right
-        ) {
+        )
+        {
             if (left == right)
             {
                 return true;

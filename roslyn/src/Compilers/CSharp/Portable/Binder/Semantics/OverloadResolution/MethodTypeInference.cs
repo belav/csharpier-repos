@@ -80,7 +80,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public MethodTypeInferenceResult(
             bool success,
             ImmutableArray<TypeWithAnnotations> inferredTypeArguments
-        ) {
+        )
+        {
             this.Success = success;
             this.InferredTypeArguments = inferredTypeArguments;
         }
@@ -109,7 +110,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 internal override TypeWithAnnotations GetMethodGroupResultType(
                     BoundMethodGroup group,
                     MethodSymbol method
-                ) {
+                )
+                {
                     return method.ReturnTypeWithAnnotations;
                 }
             }
@@ -263,7 +265,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             // no arguments per se we cons up some fake arguments.
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo,
             Extensions extensions = null
-        ) {
+        )
+        {
             Debug.Assert(!methodTypeParameters.IsDefault);
             Debug.Assert(methodTypeParameters.Length > 0);
             Debug.Assert(!formalParameterTypes.IsDefault);
@@ -314,7 +317,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<RefKind> formalParameterRefKinds,
             ImmutableArray<BoundExpression> arguments,
             Extensions extensions
-        ) {
+        )
+        {
             _conversions = conversions;
             _methodTypeParameters = methodTypeParameters;
             _constructedContainingTypeOfMethod = constructedContainingTypeOfMethod;
@@ -519,7 +523,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 int methodTypeParameterIndex = 0;
                 methodTypeParameterIndex < _methodTypeParameters.Length;
                 ++methodTypeParameterIndex
-            ) {
+            )
+            {
                 if (IsUnfixed(methodTypeParameterIndex))
                 {
                     return false;
@@ -532,7 +537,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeWithAnnotations addedBound,
             HashSet<TypeWithAnnotations>[] collectedBounds,
             TypeWithAnnotations methodTypeParameterWithAnnotations
-        ) {
+        )
+        {
             Debug.Assert(IsUnfixedTypeParameter(methodTypeParameterWithAnnotations));
 
             var methodTypeParameter = (TypeParameterSymbol)methodTypeParameterWithAnnotations.Type;
@@ -558,7 +564,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private TypeSymbol GetFixedDelegateOrFunctionPointer(
             TypeSymbol delegateOrFunctionPointerType
-        ) {
+        )
+        {
             Debug.Assert((object)delegateOrFunctionPointerType != null);
             Debug.Assert(
                 delegateOrFunctionPointerType.IsDelegateType()
@@ -599,7 +606,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private MethodTypeInferenceResult InferTypeArgs(
             Binder binder,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             // SPEC: Type inference takes place in phases. Each phase will try to infer type
             // SPEC: arguments for more type parameters based on the findings of the previous
             // SPEC: phase. The first phase makes some initial inferences of bounds, whereas
@@ -643,7 +651,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeWithAnnotations target,
             ExactOrBoundsKind kind,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             // SPEC: * If Ei is an anonymous function, an explicit type parameter
             // SPEC:   inference is made from Ei to Ti.
 
@@ -668,7 +677,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     kind,
                     ref useSiteInfo
                 )
-            ) {
+            )
+            {
                 // Either the argument is not a tuple literal, or we were unable to do the inference from its elements, let's try to infer from argument type
                 if (IsReallyAType(argument.Type))
                 {
@@ -687,7 +697,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeWithAnnotations target,
             ExactOrBoundsKind kind,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             // try match up element-wise to the destination tuple (or underlying type)
             // Example:
             //      if   "(a: 1, b: "qq")" is passed as   (T, U) arg
@@ -738,7 +749,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private bool InferTypeArgsSecondPhase(
             Binder binder,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             // SPEC: The second phase proceeds as follows:
             // SPEC: * If no unfixed type parameters exist then type inference succeeds.
             // SPEC: * Otherwise, if there exists one or more arguments Ei with corresponding
@@ -790,7 +802,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private InferenceResult DoSecondPhase(
             Binder binder,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             // SPEC: * If no unfixed type parameters exist then type inference succeeds.
             if (AllFixed())
             {
@@ -840,7 +853,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private void MakeOutputTypeInferences(
             Binder binder,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             // SPEC: Otherwise, for all arguments Ei with corresponding parameter type Ti
             // SPEC: where the output types contain unfixed type parameters but the input
             // SPEC: types do not, an output type inference is made from Ei to Ti.
@@ -858,7 +872,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression argument,
             TypeWithAnnotations formalType,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             if (argument.Kind == BoundKind.TupleLiteral && (object)argument.Type == null)
             {
                 MakeOutputTypeInferences(
@@ -873,7 +888,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     HasUnfixedParamInOutputType(argument, formalType.Type)
                     && !HasUnfixedParamInInputType(argument, formalType.Type)
-                ) {
+                )
+                {
                     //UNDONE: if (argument->isTYPEORNAMESPACEERROR() && argumentType->IsErrorType())
                     //UNDONE: {
                     //UNDONE:     argumentType = GetTypeManager().GetErrorSym();
@@ -888,7 +904,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundTupleLiteral argument,
             TypeWithAnnotations formalType,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             if (formalType.Type.Kind != SymbolKind.NamedType)
             {
                 // tuples can only match to tuples or tuple underlying types.
@@ -922,7 +939,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private InferenceResult FixNondependentParameters(
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             // SPEC: * Otherwise, if there exists one or more type parameters Xi such that
             // SPEC:     o Xi is unfixed, and
             // SPEC:     o Xi has a non-empty set of bounds, and
@@ -936,7 +954,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private InferenceResult FixDependentParameters(
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             // SPEC: * All unfixed type parameters Xi are fixed for which all of the following hold:
             // SPEC:   * There is at least one type parameter Xj that depends on Xi.
             // SPEC:   * Xi has a non-empty set of bounds.
@@ -949,7 +968,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private InferenceResult FixParameters(
             Func<MethodTypeInferrer, int, bool> predicate,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             // Dependency is only defined for unfixed parameters. Therefore, fixing
             // a parameter may cause all of its dependencies to become no longer
             // dependent on anything. We need to first determine which parameters need to be
@@ -989,7 +1009,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression argument,
             TypeSymbol formalParameterType,
             TypeParameterSymbol typeParameter
-        ) {
+        )
+        {
             // SPEC: If E is a method group or an anonymous function and T is a delegate
             // SPEC: type or expression tree type then all the parameter types of T are
             // SPEC: input types of E with type T.
@@ -1008,7 +1029,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     !isFunctionPointer
                     && argument.Kind is not (BoundKind.UnboundLambda or BoundKind.MethodGroup)
                 )
-            ) {
+            )
+            {
                 return false; // No input types.
             }
 
@@ -1052,7 +1074,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression argument,
             TypeSymbol formalParameterType,
             TypeParameterSymbol typeParameter
-        ) {
+        )
+        {
             // SPEC: If E is a method group or an anonymous function and T is a delegate
             // SPEC: type or expression tree type then the return type of T is an output type
             // SPEC: of E with type T.
@@ -1071,7 +1094,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     !isFunctionPointer
                     && argument.Kind is not (BoundKind.UnboundLambda or BoundKind.MethodGroup)
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -1099,7 +1123,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private bool HasUnfixedParamInOutputType(
             BoundExpression argument,
             TypeSymbol formalParameterType
-        ) {
+        )
+        {
             for (int iParam = 0; iParam < _methodTypeParameters.Length; iParam++)
             {
                 if (IsUnfixed(iParam))
@@ -1110,7 +1135,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             formalParameterType,
                             _methodTypeParameters[iParam]
                         )
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }
@@ -1156,7 +1182,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         formalParameterType,
                         _methodTypeParameters[iParam]
                     )
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -1260,7 +1287,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     ((_dependencies[iParam, kParam]) & Dependency.DependsMask) != 0
                     && ((_dependencies[kParam, jParam]) & Dependency.DependsMask) != 0
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -1384,7 +1412,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression expression,
             TypeWithAnnotations target,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             Debug.Assert(expression != null);
             Debug.Assert(target.HasType);
             // SPEC: An output type inference is made from an expression E to a type T
@@ -1420,7 +1449,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression source,
             TypeWithAnnotations target,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             Debug.Assert(source != null);
             Debug.Assert(target.HasType);
             // SPEC: * If E is an anonymous function with inferred return type U and
@@ -1461,7 +1491,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression source,
             TypeSymbol target,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             Debug.Assert(source != null);
             Debug.Assert((object)target != null);
             // SPEC: * Otherwise, if E is a method group and T is a delegate type or
@@ -1472,7 +1503,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (
                 source.Kind is not (BoundKind.MethodGroup or BoundKind.UnconvertedAddressOfOperator)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -1485,7 +1517,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 delegateOrFunctionPointerType.IsFunctionPointer()
                 != (source.Kind == BoundKind.UnconvertedAddressOfOperator)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -1505,7 +1538,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeWithAnnotations sourceReturnType = method.ReturnTypeWithAnnotations;
             if (
                 !sourceReturnType.HasType || sourceReturnType.SpecialType == SpecialType.System_Void
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -1553,7 +1587,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool isFunctionPointerResolution,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo,
             in CallingConventionInfo callingConventionInfo
-        ) {
+        )
+        {
             var analyzedArguments = AnalyzedArguments.GetInstance();
             Conversions.GetDelegateOrFunctionPointerArguments(
                 source.Syntax,
@@ -1599,7 +1634,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression source,
             TypeWithAnnotations target,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             Debug.Assert(source != null);
             Debug.Assert(target.HasType);
 
@@ -1665,7 +1701,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeWithAnnotations source,
             TypeWithAnnotations target,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             Debug.Assert(source.HasType);
             Debug.Assert(target.HasType);
 
@@ -1713,7 +1750,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private bool ExactTypeParameterInference(
             TypeWithAnnotations source,
             TypeWithAnnotations target
-        ) {
+        )
+        {
             Debug.Assert(source.HasType);
             Debug.Assert(target.HasType);
 
@@ -1731,7 +1769,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeWithAnnotations source,
             TypeWithAnnotations target,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             Debug.Assert(source.HasType);
             Debug.Assert(target.HasType);
 
@@ -1769,7 +1808,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeWithAnnotations source,
             TypeWithAnnotations target,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             switch (kind)
             {
                 case ExactOrBoundsKind.Exact:
@@ -1789,7 +1829,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeWithAnnotations source,
             TypeWithAnnotations target,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             Debug.Assert(source.HasType);
             Debug.Assert(target.HasType);
 
@@ -1830,7 +1871,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeWithAnnotations source,
             TypeWithAnnotations target,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             return ExactOrBoundsNullableInference(
                 ExactOrBoundsKind.Exact,
                 source,
@@ -1843,7 +1885,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeWithAnnotations source,
             TypeWithAnnotations target,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             Debug.Assert(source.HasType);
             Debug.Assert(target.HasType);
 
@@ -1858,7 +1901,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 !source.Type.TryGetElementTypesWithAnnotationsIfTupleType(out sourceTypes)
                 || !target.Type.TryGetElementTypesWithAnnotationsIfTupleType(out targetTypes)
                 || sourceTypes.Length != targetTypes.Length
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -1874,7 +1918,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeWithAnnotations source,
             TypeWithAnnotations target,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             Debug.Assert(source.HasType);
             Debug.Assert(target.HasType);
 
@@ -1900,7 +1945,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     namedTarget.OriginalDefinition,
                     TypeCompareKind.ConsiderEverything2
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -1912,7 +1958,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeWithAnnotations source,
             TypeWithAnnotations target,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             if (source.TypeKind == TypeKind.Pointer && target.TypeKind == TypeKind.Pointer)
             {
                 ExactInference(
@@ -1934,11 +1981,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                         Signature: { ParameterCount: int targetParameterCount } targetSignature
                     }
                 && sourceParameterCount == targetParameterCount
-            ) {
+            )
+            {
                 if (
                     !FunctionPointerRefKindsEqual(sourceSignature, targetSignature)
                     || !FunctionPointerCallingConventionsEqual(sourceSignature, targetSignature)
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -1965,7 +2014,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static bool FunctionPointerCallingConventionsEqual(
             FunctionPointerMethodSymbol sourceSignature,
             FunctionPointerMethodSymbol targetSignature
-        ) {
+        )
+        {
             if (sourceSignature.CallingConvention != targetSignature.CallingConvention)
             {
                 return false;
@@ -1987,7 +2037,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static bool FunctionPointerRefKindsEqual(
             FunctionPointerMethodSymbol sourceSignature,
             FunctionPointerMethodSymbol targetSignature
-        ) {
+        )
+        {
             return sourceSignature.RefKind == targetSignature.RefKind
                 && (
                     sourceSignature.ParameterRefKinds.IsDefault,
@@ -2007,7 +2058,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             NamedTypeSymbol source,
             NamedTypeSymbol target,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             Debug.Assert((object)source != null);
             Debug.Assert((object)target != null);
             Debug.Assert(
@@ -2043,7 +2095,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeWithAnnotations source,
             TypeWithAnnotations target,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             Debug.Assert(source.HasType);
             Debug.Assert(target.HasType);
 
@@ -2131,7 +2184,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private bool LowerBoundTypeParameterInference(
             TypeWithAnnotations source,
             TypeWithAnnotations target
-        ) {
+        )
+        {
             Debug.Assert(source.HasType);
             Debug.Assert(target.HasType);
 
@@ -2149,7 +2203,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ArrayTypeSymbol source,
             TypeSymbol target,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             Debug.Assert((object)source != null);
             Debug.Assert((object)target != null);
 
@@ -2190,7 +2245,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol source,
             TypeSymbol target,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             Debug.Assert((object)source != null);
             Debug.Assert((object)target != null);
 
@@ -2231,7 +2287,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeWithAnnotations source,
             TypeWithAnnotations target,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             return ExactOrBoundsNullableInference(
                 ExactOrBoundsKind.LowerBound,
                 source,
@@ -2244,7 +2301,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol source,
             TypeSymbol target,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             Debug.Assert((object)source != null);
             Debug.Assert((object)target != null);
 
@@ -2276,7 +2334,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     constructedTarget.OriginalDefinition,
                     TypeCompareKind.ConsiderEverything2
                 )
-            ) {
+            )
+            {
                 if (constructedSource.IsInterface || constructedSource.IsDelegateType())
                 {
                     LowerBoundTypeArgumentInference(
@@ -2324,7 +2383,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol source,
             NamedTypeSymbol target,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             Debug.Assert((object)source != null);
             Debug.Assert((object)target != null);
 
@@ -2364,7 +2424,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         target.OriginalDefinition,
                         TypeCompareKind.ConsiderEverything2
                     )
-                ) {
+                )
+                {
                     ExactTypeArgumentInference(sourceBase, target, ref useSiteInfo);
                     return true;
                 }
@@ -2377,7 +2438,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol source,
             NamedTypeSymbol target,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             Debug.Assert((object)source != null);
             Debug.Assert((object)target != null);
 
@@ -2438,7 +2500,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal static ImmutableArray<NamedTypeSymbol> ModuloReferenceTypeNullabilityDifferences(
             ImmutableArray<NamedTypeSymbol> interfaces,
             VarianceKind variance
-        ) {
+        )
+        {
             var dictionary =
                 PooledDictionaryIgnoringNullableModifiersForReferenceTypes.GetInstance();
 
@@ -2467,7 +2530,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             NamedTypeSymbol source,
             NamedTypeSymbol target,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             // SPEC: The choice of inference for the i-th type argument is made
             // SPEC: based on the declaration of the i-th type parameter of C, as
             // SPEC: follows:
@@ -2507,13 +2571,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     sourceTypeArgument.Type.IsReferenceType
                     && typeParameter.Variance == VarianceKind.Out
-                ) {
+                )
+                {
                     LowerBoundInference(sourceTypeArgument, targetTypeArgument, ref useSiteInfo);
                 }
                 else if (
                     sourceTypeArgument.Type.IsReferenceType
                     && typeParameter.Variance == VarianceKind.In
-                ) {
+                )
+                {
                     UpperBoundInference(sourceTypeArgument, targetTypeArgument, ref useSiteInfo);
                 }
                 else
@@ -2532,11 +2598,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol source,
             TypeSymbol target,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             if (
                 source is not FunctionPointerTypeSymbol { Signature: { } sourceSignature }
                 || target is not FunctionPointerTypeSymbol { Signature: { } targetSignature }
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -2548,7 +2616,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 !FunctionPointerRefKindsEqual(sourceSignature, targetSignature)
                 || !FunctionPointerCallingConventionsEqual(sourceSignature, targetSignature)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -2562,7 +2631,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     (sourceParam.Type.IsReferenceType || sourceParam.Type.IsFunctionPointer())
                     && sourceParam.RefKind == RefKind.None
-                ) {
+                )
+                {
                     UpperBoundInference(
                         sourceParam.TypeWithAnnotations,
                         targetParam.TypeWithAnnotations,
@@ -2585,7 +2655,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     || sourceSignature.ReturnType.IsFunctionPointer()
                 )
                 && sourceSignature.RefKind == RefKind.None
-            ) {
+            )
+            {
                 LowerBoundInference(
                     sourceSignature.ReturnTypeWithAnnotations,
                     targetSignature.ReturnTypeWithAnnotations,
@@ -2613,7 +2684,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeWithAnnotations source,
             TypeWithAnnotations target,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             Debug.Assert(source.HasType);
             Debug.Assert(target.HasType);
 
@@ -2675,7 +2747,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private bool UpperBoundTypeParameterInference(
             TypeWithAnnotations source,
             TypeWithAnnotations target
-        ) {
+        )
+        {
             Debug.Assert(source.HasType);
             Debug.Assert(target.HasType);
             // SPEC: * If V is one of the unfixed Xi then U is added to the set of upper bounds
@@ -2692,7 +2765,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeWithAnnotations source,
             TypeWithAnnotations target,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             Debug.Assert(source.HasType);
             Debug.Assert(target.HasType);
 
@@ -2732,7 +2806,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeWithAnnotations source,
             TypeWithAnnotations target,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             return ExactOrBoundsNullableInference(
                 ExactOrBoundsKind.UpperBound,
                 source,
@@ -2745,7 +2820,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeWithAnnotations sourceWithAnnotations,
             TypeWithAnnotations targetWithAnnotations,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             Debug.Assert(sourceWithAnnotations.HasType);
             Debug.Assert(targetWithAnnotations.HasType);
             var source = sourceWithAnnotations.Type;
@@ -2776,7 +2852,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     target.OriginalDefinition,
                     TypeCompareKind.ConsiderEverything2
                 )
-            ) {
+            )
+            {
                 if (constructedTarget.IsInterface || constructedTarget.IsDelegateType())
                 {
                     UpperBoundTypeArgumentInference(
@@ -2821,7 +2898,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             NamedTypeSymbol source,
             TypeSymbol target,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             Debug.Assert((object)source != null);
             Debug.Assert((object)target != null);
 
@@ -2843,7 +2921,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         source.OriginalDefinition,
                         TypeCompareKind.ConsiderEverything2
                     )
-                ) {
+                )
+                {
                     ExactTypeArgumentInference(source, targetBase, ref useSiteInfo);
                     return true;
                 }
@@ -2858,7 +2937,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             NamedTypeSymbol source,
             TypeSymbol target,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             Debug.Assert((object)source != null);
             Debug.Assert((object)target != null);
 
@@ -2906,7 +2986,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             NamedTypeSymbol source,
             NamedTypeSymbol target,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             // SPEC: The choice of inference for the i-th type argument is made
             // SPEC: based on the declaration of the i-th type parameter of C, as
             // SPEC: follows:
@@ -2946,13 +3027,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     sourceTypeArgument.Type.IsReferenceType
                     && typeParameter.Variance == VarianceKind.Out
-                ) {
+                )
+                {
                     UpperBoundInference(sourceTypeArgument, targetTypeArgument, ref useSiteInfo);
                 }
                 else if (
                     sourceTypeArgument.Type.IsReferenceType
                     && typeParameter.Variance == VarianceKind.In
-                ) {
+                )
+                {
                     LowerBoundInference(sourceTypeArgument, targetTypeArgument, ref useSiteInfo);
                 }
                 else
@@ -2971,11 +3054,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol source,
             TypeSymbol target,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             if (
                 source is not FunctionPointerTypeSymbol { Signature: { } sourceSignature }
                 || target is not FunctionPointerTypeSymbol { Signature: { } targetSignature }
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -2987,7 +3072,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 !FunctionPointerRefKindsEqual(sourceSignature, targetSignature)
                 || !FunctionPointerCallingConventionsEqual(sourceSignature, targetSignature)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -3001,7 +3087,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     (sourceParam.Type.IsReferenceType || sourceParam.Type.IsFunctionPointer())
                     && sourceParam.RefKind == RefKind.None
-                ) {
+                )
+                {
                     LowerBoundInference(
                         sourceParam.TypeWithAnnotations,
                         targetParam.TypeWithAnnotations,
@@ -3024,7 +3111,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     || sourceSignature.ReturnType.IsFunctionPointer()
                 )
                 && sourceSignature.RefKind == RefKind.None
-            ) {
+            )
+            {
                 UpperBoundInference(
                     sourceSignature.ReturnTypeWithAnnotations,
                     targetSignature.ReturnTypeWithAnnotations,
@@ -3098,7 +3186,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             HashSet<TypeWithAnnotations> upper,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo,
             ConversionsBase conversions
-        ) {
+        )
+        {
             // UNDONE: This method makes a lot of garbage.
 
             // SPEC: An unfixed type parameter with a set of bounds is fixed as follows:
@@ -3199,7 +3288,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             ref useSiteInfo,
                             conversions.WithNullability(false)
                         )
-                    ) {
+                    )
+                    {
                         goto OuterBreak;
                     }
                 }
@@ -3236,7 +3326,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeWithAnnotations destinationWithAnnotations,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo,
             ConversionsBase conversions
-        ) {
+        )
+        {
             var source = sourceWithAnnotations.Type;
             var destination = destinationWithAnnotations.Type;
 
@@ -3251,7 +3342,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     sourceWithAnnotations,
                     destinationWithAnnotations
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -3270,7 +3362,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression source,
             NamedTypeSymbol target,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             Debug.Assert((object)target != null);
             Debug.Assert(target.IsDelegateType());
             Debug.Assert(
@@ -3345,7 +3438,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 TypeCompareKind.IgnoreDynamicAndTupleNames
                                     | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
                             )
-                    ) {
+                    )
+                    {
                         return default;
                     }
                 }
@@ -3370,7 +3464,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static NamedTypeSymbol GetInterfaceInferenceBound(
             ImmutableArray<NamedTypeSymbol> interfaces,
             NamedTypeSymbol target
-        ) {
+        )
+        {
             Debug.Assert(target.IsInterface);
             NamedTypeSymbol matchingInterface = null;
             foreach (var currentInterface in interfaces)
@@ -3381,7 +3476,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         target.OriginalDefinition,
                         TypeCompareKind.ConsiderEverything
                     )
-                ) {
+                )
+                {
                     if ((object)matchingInterface == null)
                     {
                         matchingInterface = currentInterface;
@@ -3392,7 +3488,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             currentInterface,
                             TypeCompareKind.ConsiderEverything
                         )
-                    ) {
+                    )
+                    {
                         // Not unique. Bail out.
                         return null;
                     }
@@ -3431,7 +3528,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             MethodSymbol method,
             ImmutableArray<BoundExpression> arguments,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             Debug.Assert((object)method != null);
             Debug.Assert(method.Arity > 0);
             Debug.Assert(!arguments.IsDefault);
@@ -3468,7 +3566,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private bool InferTypeArgumentsFromFirstArgument(
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             Debug.Assert(!_formalParameterTypes.IsDefault);
             Debug.Assert(_formalParameterTypes.Length >= 1);
             Debug.Assert(!_arguments.IsDefault);
@@ -3521,7 +3620,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static void GetAllCandidates(
             Dictionary<TypeWithAnnotations, TypeWithAnnotations> candidates,
             ArrayBuilder<TypeWithAnnotations> builder
-        ) {
+        )
+        {
             builder.AddRange(candidates.Values);
         }
 
@@ -3530,7 +3630,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             HashSet<TypeWithAnnotations> bounds,
             VarianceKind variance,
             ConversionsBase conversions
-        ) {
+        )
+        {
             foreach (var candidate in bounds)
             {
                 var type = candidate;
@@ -3550,7 +3651,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeWithAnnotations newCandidate,
             VarianceKind variance,
             ConversionsBase conversions
-        ) {
+        )
+        {
             Debug.Assert(
                 conversions.IncludeNullability
                     || newCandidate.SetUnknownNullabilityForReferenceTypes()
@@ -3580,7 +3682,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ConversionsBase conversions,
             VarianceKind variance,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             Debug.Assert(variance == VarianceKind.In || variance == VarianceKind.Out);
             // SPEC:   For each lower (upper) bound U of Xi all types to which there is not an
             // SPEC:   implicit conversion from (to) U are removed from the candidate set.
@@ -3614,12 +3717,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                             ref useSiteInfo,
                             conversions.WithNullability(false)
                         )
-                    ) {
+                    )
+                    {
                         candidates.Remove(candidate);
                         if (
                             conversions.IncludeNullability
                             && candidates.TryGetValue(bound, out var oldBound)
-                        ) {
+                        )
+                        {
                             // merge the nullability from candidate into bound
                             var oldAnnotation = oldBound.NullableAnnotation;
                             var newAnnotation = oldAnnotation.MergeNullableAnnotation(
@@ -3642,7 +3747,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             TypeCompareKind.IgnoreDynamicAndTupleNames
                                 | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
                         )
-                    ) {
+                    )
+                    {
                         // SPEC: 4.7 The Dynamic Type
                         //       Type inference (7.5.2) will prefer dynamic over object if both are candidates.
                         //
@@ -3667,7 +3773,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeWithAnnotations newCandidate,
             VarianceKind variance,
             ConversionsBase conversions
-        ) {
+        )
+        {
             // We make an exception when new candidate is dynamic, for backwards compatibility
             if (newCandidate.Type.IsDynamic())
             {

@@ -2276,7 +2276,8 @@ class C { }
             void verifyDiagnosticsWithOptions(
                 CompilationOptions options,
                 params DiagnosticDescription[] expected
-            ) {
+            )
+            {
                 GeneratorDriver driver = CSharpGeneratorDriver.Create(
                     ImmutableArray.Create(gen),
                     parseOptions: parseOptions
@@ -2356,7 +2357,8 @@ class C { }
                 string source,
                 (Diagnostic, TextSpan)[] reportDiagnostics,
                 params DiagnosticDescription[] expected
-            ) {
+            )
+            {
                 var parseOptions = TestOptions.Regular;
                 source = source.Replace(Environment.NewLine, "\r\n");
                 Compilation compilation = CreateCompilation(

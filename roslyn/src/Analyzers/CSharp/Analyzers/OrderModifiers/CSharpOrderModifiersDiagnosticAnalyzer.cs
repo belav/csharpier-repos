@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp.OrderModifiers
             Dictionary<int, int> preferredOrder,
             ReportDiagnostic severity,
             SyntaxNode root
-        ) {
+        )
+        {
             foreach (var child in root.ChildNodesAndTokens())
             {
                 if (child.IsNode)

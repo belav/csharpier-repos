@@ -38,7 +38,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             IOptions<HttpSysOptions> options,
             ILoggerFactory loggerFactory,
             IAuthenticationSchemeProvider authentication
-        ) {
+        )
+        {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));

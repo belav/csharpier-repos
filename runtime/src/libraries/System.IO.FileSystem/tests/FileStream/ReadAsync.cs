@@ -70,7 +70,8 @@ namespace System.IO.Tests
                     TestBuffer.Length * 2,
                     useAsync: true
                 )
-            ) {
+            )
+            {
                 byte[] buffer = new byte[TestBuffer.Length];
 
                 // prime the internal buffer

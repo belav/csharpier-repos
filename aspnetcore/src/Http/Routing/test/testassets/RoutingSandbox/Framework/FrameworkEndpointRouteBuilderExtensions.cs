@@ -18,7 +18,8 @@ namespace RoutingSandbox.Framework
         public static IEndpointConventionBuilder MapFramework(
             this IEndpointRouteBuilder endpoints,
             Action<FrameworkConfigurationBuilder> configure
-        ) {
+        )
+        {
             if (endpoints == null)
             {
                 throw new ArgumentNullException(nameof(endpoints));

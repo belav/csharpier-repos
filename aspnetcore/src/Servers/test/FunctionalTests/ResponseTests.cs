@@ -81,7 +81,8 @@ namespace ServerComparison.FunctionalTests
             TestVariant variant,
             Func<HttpClient, ILogger, Task> scenario,
             [CallerMemberName] string testName = null
-        ) {
+        )
+        {
             testName =
                 $"{testName}_{variant.Server}_{variant.Tfm}_{variant.Architecture}_{variant.ApplicationType}";
             using (
@@ -90,7 +91,8 @@ namespace ServerComparison.FunctionalTests
                     variant.Server == ServerType.Nginx ? LogLevel.Trace : LogLevel.Debug, // https://github.com/aspnet/ServerTests/issues/144
                     testName
                 )
-            ) {
+            )
+            {
                 var logger = loggerFactory.CreateLogger("ResponseFormats");
 
                 var deploymentParameters = new DeploymentParameters(variant)
@@ -110,7 +112,8 @@ namespace ServerComparison.FunctionalTests
                         deploymentParameters,
                         loggerFactory
                     )
-                ) {
+                )
+                {
                     var deploymentResult = await deployer.DeployAsync();
 
                     // Request to base address and check if various parts of the body are rendered & measure the cold startup time.
@@ -263,7 +266,8 @@ namespace ServerComparison.FunctionalTests
         private static async Task CheckManuallyChunkedAndCloseAsync(
             HttpClient client,
             ILogger logger
-        ) {
+        )
+        {
             logger.LogInformation("Testing ManuallyChunkedAndClose");
             var response = await client.GetAsync("manuallychunkedandclose");
             var responseText = await response.Content.ReadAsStringAsync();

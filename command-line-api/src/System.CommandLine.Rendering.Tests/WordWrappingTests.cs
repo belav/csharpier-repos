@@ -39,7 +39,8 @@ namespace System.CommandLine.Rendering.Tests
             int top,
             int width,
             int height
-        ) {
+        )
+        {
             var terminalWithoutAnsiCodes = new TestTerminal();
             var rendererWithoutAnsiCodes = new ConsoleRenderer(
                 terminalWithoutAnsiCodes,

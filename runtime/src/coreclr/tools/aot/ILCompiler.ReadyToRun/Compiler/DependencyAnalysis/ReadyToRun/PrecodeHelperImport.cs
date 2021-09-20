@@ -26,7 +26,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             ref ObjectDataBuilder dataBuilder,
             NodeFactory factory,
             bool relocsOnly
-        ) {
+        )
+        {
             // This needs to be an empty target pointer since it will be filled in with Module*
             // when loaded by CoreCLR
             dataBuilder.EmitZeroPointer();

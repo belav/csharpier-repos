@@ -335,7 +335,8 @@ class C
             Version version0,
             Version version1,
             Version version2
-        ) {
+        )
+        {
             string srcLib =
                 $@"
 [assembly: System.Reflection.AssemblyVersion(""{sourceVersion}"")]

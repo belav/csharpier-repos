@@ -37,7 +37,8 @@ namespace System.Web.Http.WebHost
         public Task HandleAsync(
             ExceptionHandlerContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException("context");
@@ -49,7 +50,8 @@ namespace System.Web.Http.WebHost
             if (
                 exceptionContext.CatchBlock
                 == WebHostExceptionCatchBlocks.HttpControllerHandlerBufferContent
-            ) {
+            )
+            {
                 HandleWebHostBufferedContentException(context);
                 return TaskHelpers.Completed();
             }

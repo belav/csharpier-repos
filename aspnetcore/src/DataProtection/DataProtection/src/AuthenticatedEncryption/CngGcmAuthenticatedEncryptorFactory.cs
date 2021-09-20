@@ -54,7 +54,8 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption
         internal CngGcmAuthenticatedEncryptor? CreateAuthenticatedEncryptorInstance(
             ISecret secret,
             CngGcmAuthenticatedEncryptorConfiguration configuration
-        ) {
+        )
+        {
             if (configuration == null)
             {
                 return null;
@@ -72,7 +73,8 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption
         [SupportedOSPlatform("windows")]
         private BCryptAlgorithmHandle GetSymmetricBlockCipherAlgorithmHandle(
             CngGcmAuthenticatedEncryptorConfiguration configuration
-        ) {
+        )
+        {
             // basic argument checking
             if (String.IsNullOrEmpty(configuration.EncryptionAlgorithm))
             {

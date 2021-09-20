@@ -48,7 +48,8 @@ namespace System.Text.Encodings.Web
             uint unicodeScalar,
             Span<char> buffer,
             out int charsWritten
-        ) {
+        )
+        {
             fixed (char* pBuffer = &MemoryMarshal.GetReference(buffer))
             {
                 return TryEncodeUnicodeScalar(
@@ -65,7 +66,8 @@ namespace System.Text.Encodings.Web
             Span<char> utf16ScratchBuffer,
             Span<byte> utf8Destination,
             out int bytesWritten
-        ) {
+        )
+        {
             if (!TryEncodeUnicodeScalar(unicodeScalar, utf16ScratchBuffer, out int charsWritten))
             {
                 // We really don't expect any encoder to exceed 24 escaped chars per input scalar.
@@ -87,7 +89,8 @@ namespace System.Text.Encodings.Web
                         out Rune nextScalarValue,
                         out int scalarUtf16CodeUnitCount
                     ) != OperationStatus.Done
-                ) {
+                )
+                {
                     // Wrote bad UTF-16 data, we cannot transcode to UTF-8.
                     ThrowArgumentException_MaxOutputCharsPerInputChar();
                 }
@@ -246,7 +249,8 @@ namespace System.Text.Encodings.Web
             string value,
             int startIndex,
             int characterCount
-        ) {
+        )
+        {
             if (value == null)
             {
                 throw new ArgumentNullException(nameof(value));
@@ -292,7 +296,8 @@ namespace System.Text.Encodings.Web
             char[] value,
             int startIndex,
             int characterCount
-        ) {
+        )
+        {
             if (value == null)
             {
                 throw new ArgumentNullException(nameof(value));
@@ -342,7 +347,8 @@ namespace System.Text.Encodings.Web
             out int bytesConsumed,
             out int bytesWritten,
             bool isFinalBlock = true
-        ) {
+        )
+        {
             // The Encode method is intended to be called in a loop, potentially where the source buffer
             // is much larger than the destination buffer. We don't want to walk the entire source buffer
             // on each invocation of this method, so we'll slice the source buffer to be no larger than
@@ -393,7 +399,8 @@ namespace System.Text.Encodings.Web
             out int bytesConsumed,
             out int bytesWritten,
             bool isFinalBlock
-        ) {
+        )
+        {
             int originalUtf8SourceLength = utf8Source.Length;
             int originalUtf8DestinationLength = utf8Destination.Length;
 
@@ -446,7 +453,8 @@ namespace System.Text.Encodings.Web
                         utf8Destination,
                         out int bytesWrittenJustNow
                     )
-                ) {
+                )
+                {
                     goto DestinationTooSmall;
                 }
 
@@ -490,7 +498,8 @@ namespace System.Text.Encodings.Web
             out int charsConsumed,
             out int charsWritten,
             bool isFinalBlock = true
-        ) {
+        )
+        {
             // The Encode method is intended to be called in a loop, potentially where the source buffer
             // is much larger than the destination buffer. We don't want to walk the entire source buffer
             // on each invocation of this method, so we'll slice the source buffer to be no larger than
@@ -541,7 +550,8 @@ namespace System.Text.Encodings.Web
             out int charsConsumed,
             out int charsWritten,
             bool isFinalBlock
-        ) {
+        )
+        {
             int originalSourceLength = source.Length;
             int originalDestinationLength = destination.Length;
 
@@ -582,7 +592,8 @@ namespace System.Text.Encodings.Web
                         destination,
                         out int charsWrittenJustNow
                     )
-                ) {
+                )
+                {
                     goto DestinationTooSmall;
                 }
 
@@ -638,7 +649,8 @@ namespace System.Text.Encodings.Web
                 if (
                     charsWrittenJustNow == 0
                     || (uint)charsWrittenJustNow > (uint)scratchBuffer.Length
-                ) {
+                )
+                {
                     ThrowArgumentException_MaxOutputCharsPerInputChar(); // couldn't make forward progress or returned bogus data
                 }
 
@@ -694,7 +706,8 @@ namespace System.Text.Encodings.Web
             string source,
             Span<char> destination,
             out int numberOfCharactersWritten
-        ) {
+        )
+        {
             Debug.Assert(!string.IsNullOrEmpty(source));
 
             if (destination.Length < source.Length)
@@ -717,7 +730,8 @@ namespace System.Text.Encodings.Web
             int unicodeScalar,
             Span<char> destination,
             out int numberOfCharactersWritten
-        ) {
+        )
+        {
             Debug.Assert(unicodeScalar < ushort.MaxValue);
             if (destination.IsEmpty)
             {
@@ -733,7 +747,8 @@ namespace System.Text.Encodings.Web
             int startIndex,
             int characterCount,
             int actualInputLength
-        ) {
+        )
+        {
             if (startIndex < 0 || startIndex > actualInputLength)
             {
                 throw new ArgumentOutOfRangeException(nameof(startIndex));

@@ -19,7 +19,8 @@ namespace System.Data
         public static EnumerableRowCollection<TRow> Where<TRow>(
             this EnumerableRowCollection<TRow> source,
             Func<TRow, bool> predicate
-        ) {
+        )
+        {
             //copy constructor
             EnumerableRowCollection<TRow> edt = new EnumerableRowCollection<TRow>(
                 source,
@@ -36,7 +37,8 @@ namespace System.Data
         public static OrderedEnumerableRowCollection<TRow> OrderBy<TRow, TKey>(
             this EnumerableRowCollection<TRow> source,
             Func<TRow, TKey> keySelector
-        ) {
+        )
+        {
             IEnumerable<TRow> ie = Enumerable.OrderBy(source, keySelector);
 
             OrderedEnumerableRowCollection<TRow> edt = new OrderedEnumerableRowCollection<TRow>(
@@ -54,7 +56,8 @@ namespace System.Data
             this EnumerableRowCollection<TRow> source,
             Func<TRow, TKey> keySelector,
             IComparer<TKey> comparer
-        ) {
+        )
+        {
             IEnumerable<TRow> ie = Enumerable.OrderBy(source, keySelector, comparer);
             OrderedEnumerableRowCollection<TRow> edt = new OrderedEnumerableRowCollection<TRow>(
                 source,
@@ -70,7 +73,8 @@ namespace System.Data
         public static OrderedEnumerableRowCollection<TRow> OrderByDescending<TRow, TKey>(
             this EnumerableRowCollection<TRow> source,
             Func<TRow, TKey> keySelector
-        ) {
+        )
+        {
             IEnumerable<TRow> ie = Enumerable.OrderByDescending(source, keySelector);
 
             OrderedEnumerableRowCollection<TRow> edt = new OrderedEnumerableRowCollection<TRow>(
@@ -88,7 +92,8 @@ namespace System.Data
             this EnumerableRowCollection<TRow> source,
             Func<TRow, TKey> keySelector,
             IComparer<TKey> comparer
-        ) {
+        )
+        {
             IEnumerable<TRow> ie = Enumerable.OrderByDescending(source, keySelector, comparer);
 
             OrderedEnumerableRowCollection<TRow> edt = new OrderedEnumerableRowCollection<TRow>(
@@ -105,7 +110,8 @@ namespace System.Data
         public static OrderedEnumerableRowCollection<TRow> ThenBy<TRow, TKey>(
             this OrderedEnumerableRowCollection<TRow> source,
             Func<TRow, TKey> keySelector
-        ) {
+        )
+        {
             IEnumerable<TRow> ie = Enumerable.ThenBy(
                 (IOrderedEnumerable<TRow>)source.EnumerableRows,
                 keySelector
@@ -126,7 +132,8 @@ namespace System.Data
             this OrderedEnumerableRowCollection<TRow> source,
             Func<TRow, TKey> keySelector,
             IComparer<TKey> comparer
-        ) {
+        )
+        {
             IEnumerable<TRow> ie = Enumerable.ThenBy(
                 (IOrderedEnumerable<TRow>)source.EnumerableRows,
                 keySelector,
@@ -147,7 +154,8 @@ namespace System.Data
         public static OrderedEnumerableRowCollection<TRow> ThenByDescending<TRow, TKey>(
             this OrderedEnumerableRowCollection<TRow> source,
             Func<TRow, TKey> keySelector
-        ) {
+        )
+        {
             IEnumerable<TRow> ie = Enumerable.ThenByDescending(
                 (IOrderedEnumerable<TRow>)source.EnumerableRows,
                 keySelector
@@ -168,7 +176,8 @@ namespace System.Data
             this OrderedEnumerableRowCollection<TRow> source,
             Func<TRow, TKey> keySelector,
             IComparer<TKey> comparer
-        ) {
+        )
+        {
             IEnumerable<TRow> ie = Enumerable.ThenByDescending(
                 (IOrderedEnumerable<TRow>)source.EnumerableRows,
                 keySelector,
@@ -191,7 +200,8 @@ namespace System.Data
         public static EnumerableRowCollection<S> Select<TRow, S>(
             this EnumerableRowCollection<TRow> source,
             Func<TRow, S> selector
-        ) {
+        )
+        {
             //Anonymous type or some other type
             //The only thing that matters from this point on is _enumerableRows
             IEnumerable<S> typedEnumerable = Enumerable.Select(source, selector);
@@ -209,7 +219,8 @@ namespace System.Data
         /// </summary>
         public static EnumerableRowCollection<TResult> Cast<TResult>(
             this EnumerableRowCollection source
-        ) {
+        )
+        {
             // Since Cast does not have the signature Cast_T_R(..) this call is routed through the non-generic base class EnumerableDataTable
 
             if ((null != source) && source.ElementType.Equals(typeof(TResult)))

@@ -44,7 +44,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             IEnumerable<TagHelperAttribute> initialAttributes,
             string nameToLookup,
             int expectedIndex
-        ) {
+        )
+        {
             // Arrange
             var attributes = new TagHelperAttributeList(initialAttributes);
 
@@ -85,7 +86,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             IEnumerable<TagHelperAttribute> initialAttributes,
             int indexToLookup,
             TagHelperAttribute expectedAttribute
-        ) {
+        )
+        {
             // Arrange
             var attributes = new TagHelperAttributeList(initialAttributes);
 
@@ -177,7 +179,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             IEnumerable<TagHelperAttribute> initialAttributes,
             string nameToLookup,
             TagHelperAttribute expectedAttribute
-        ) {
+        )
+        {
             // Arrange
             var attributes = new TagHelperAttributeList(initialAttributes);
 
@@ -353,7 +356,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             IEnumerable<TagHelperAttribute> initialAttributes,
             TagHelperAttribute attributeToLookup,
             bool expected
-        ) {
+        )
+        {
             // Arrange
             var attributes = new TagHelperAttributeList(initialAttributes);
 
@@ -429,7 +433,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             IEnumerable<TagHelperAttribute> initialAttributes,
             string nameToLookup,
             bool expected
-        ) {
+        )
+        {
             // Arrange
             var attributes = new TagHelperAttributeList(initialAttributes);
 
@@ -565,7 +570,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             IEnumerable<TagHelperAttribute> initialAttributes,
             TagHelperAttribute attributeToLookup,
             int expected
-        ) {
+        )
+        {
             // Arrange
             var attributes = new TagHelperAttributeList(initialAttributes);
 
@@ -634,7 +640,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             string nameToLookup,
             TagHelperAttribute expectedAttribute,
             bool expectedResult
-        ) {
+        )
+        {
             // Arrange
             var attributes = new TagHelperAttributeList(initialAttributes);
             TagHelperAttribute attribute;
@@ -744,7 +751,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             string nameToLookup,
             IEnumerable<TagHelperAttribute> expectedAttributes,
             bool expectedResult
-        ) {
+        )
+        {
             // Arrange
             var attributes = new TagHelperAttributeList(initialAttributes);
             IReadOnlyList<TagHelperAttribute> resolvedAttributes;
@@ -820,7 +828,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             IEnumerable<TagHelperAttribute> initialAttributes,
             int indexToLookup,
             TagHelperAttribute expectedAttribute
-        ) {
+        )
+        {
             // Arrange
             var attributes = new TestableReadOnlyTagHelperAttributes(
                 Enumerable.Empty<TagHelperAttribute>()
@@ -844,7 +853,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             IEnumerable<TagHelperAttribute> initialAttributes,
             string nameToLookup,
             TagHelperAttribute expectedAttribute
-        ) {
+        )
+        {
             // Arrange
             var attributes = new TestableReadOnlyTagHelperAttributes(
                 Enumerable.Empty<TagHelperAttribute>()
@@ -864,9 +874,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
 
         private class TestableReadOnlyTagHelperAttributes : ReadOnlyTagHelperAttributeList
         {
-            public TestableReadOnlyTagHelperAttributes(
-                IEnumerable<TagHelperAttribute> attributes
-            ) : base(new List<TagHelperAttribute>(attributes)) { }
+            public TestableReadOnlyTagHelperAttributes(IEnumerable<TagHelperAttribute> attributes)
+                : base(new List<TagHelperAttribute>(attributes)) { }
 
             public List<TagHelperAttribute> PublicAttributes
             {

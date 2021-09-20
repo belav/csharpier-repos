@@ -54,7 +54,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
             string controllerName,
             string actionName,
             IEnumerable<string> parameterNames
-        ) {
+        )
+        {
             if (!Enum.IsDefined(typeof(SampleDirection), sampleDirection))
             {
                 throw new InvalidEnumArgumentException(

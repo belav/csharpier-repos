@@ -1941,7 +1941,8 @@ namespace SerializationTestTypes
         void ICollection<PublicDCClassPrivateDM>.CopyTo(
             PublicDCClassPrivateDM[] array,
             int arrayIndex
-        ) {
+        )
+        {
             _internalList.CopyTo(array, arrayIndex);
         }
 
@@ -3789,20 +3790,23 @@ namespace SerializationTestTypes
 
         void ICollection<KeyValuePair<PublicDC, PublicDC>>.Add(
             KeyValuePair<PublicDC, PublicDC> item
-        ) {
+        )
+        {
             _data.Add(item.Key, item.Value);
         }
 
         bool ICollection<KeyValuePair<PublicDC, PublicDC>>.Contains(
             KeyValuePair<PublicDC, PublicDC> item
-        ) {
+        )
+        {
             return _data.ContainsKey(item.Key);
         }
 
         void ICollection<KeyValuePair<PublicDC, PublicDC>>.CopyTo(
             KeyValuePair<PublicDC, PublicDC>[] array,
             int arrayIndex
-        ) {
+        )
+        {
             throw new Exception(
                 "TEST EXCEPTION!!: CopyTO: method or operation is not implemented."
             );
@@ -3810,7 +3814,8 @@ namespace SerializationTestTypes
 
         bool ICollection<KeyValuePair<PublicDC, PublicDC>>.Remove(
             KeyValuePair<PublicDC, PublicDC> item
-        ) {
+        )
+        {
             return _data.Remove(item.Key);
         }
 
@@ -5618,7 +5623,8 @@ namespace SerializationTestTypes
         public object GetCustomDataToExport(
             System.Reflection.MemberInfo memberInfo,
             Type dataContractType
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -5655,14 +5661,16 @@ namespace SerializationTestTypes
             string typeName,
             string typeNamespace,
             object customData
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
         public System.CodeDom.CodeTypeDeclaration ProcessImportedType(
             System.CodeDom.CodeTypeDeclaration typeDeclaration,
             System.CodeDom.CodeCompileUnit compileUnit
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
     }
@@ -5682,7 +5690,8 @@ namespace SerializationTestTypes
             SerializationInfo info,
             StreamingContext context,
             ISurrogateSelector selector
-        ) {
+        )
+        {
             if (obj is PersonSurrogated)
             {
                 return new NonDCPerson(obj as PersonSurrogated);
@@ -5710,7 +5719,8 @@ namespace SerializationTestTypes
         private object GetCustomDataToExport(
             System.Reflection.MemberInfo memberInfo,
             Type dataContractType
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -5747,14 +5757,16 @@ namespace SerializationTestTypes
             string typeName,
             string typeNamespace,
             object customData
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
         private System.CodeDom.CodeTypeDeclaration ProcessImportedType(
             System.CodeDom.CodeTypeDeclaration typeDeclaration,
             System.CodeDom.CodeCompileUnit compileUnit
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
     }
@@ -5765,7 +5777,8 @@ namespace SerializationTestTypes
             object obj,
             SerializationInfo info,
             StreamingContext context
-        ) {
+        )
+        {
             if (obj is NonDCPerson)
             {
                 info.AddValue("data", new PersonSurrogated(obj as NonDCPerson));
@@ -5777,7 +5790,8 @@ namespace SerializationTestTypes
             SerializationInfo info,
             StreamingContext context,
             ISurrogateSelector selector
-        ) {
+        )
+        {
             if (obj is PersonSurrogated)
             {
                 return new NonDCPerson(obj as PersonSurrogated);
@@ -5805,7 +5819,8 @@ namespace SerializationTestTypes
         public object GetCustomDataToExport(
             System.Reflection.MemberInfo memberInfo,
             Type dataContractType
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -5842,14 +5857,16 @@ namespace SerializationTestTypes
             string typeName,
             string typeNamespace,
             object customData
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
         public System.CodeDom.CodeTypeDeclaration ProcessImportedType(
             System.CodeDom.CodeTypeDeclaration typeDeclaration,
             System.CodeDom.CodeCompileUnit compileUnit
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
     }
@@ -5869,7 +5886,8 @@ namespace SerializationTestTypes
             SerializationInfo info,
             StreamingContext context,
             ISurrogateSelector selector
-        ) {
+        )
+        {
             if (obj is PrivateDC)
             {
                 return new NonDCPerson();

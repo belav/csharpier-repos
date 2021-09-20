@@ -54,7 +54,8 @@ namespace Microsoft.CodeAnalysis.ReplaceMethodWithProperty
             IMethodSymbol setMethod,
             SyntaxNode getMethodDeclaration,
             SyntaxNode setMethodDeclaration
-        ) {
+        )
+        {
             GetMethod = getMethod;
             SetMethod = setMethod;
             GetMethodDeclaration = getMethodDeclaration;

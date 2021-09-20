@@ -28,7 +28,8 @@ namespace System.Web.Mvc
 
         protected virtual SessionStateBehavior GetSessionStateBehavior(
             RequestContext requestContext
-        ) {
+        )
+        {
             string controllerName = (string)requestContext.RouteData.Values["controller"];
             if (String.IsNullOrWhiteSpace(controllerName))
             {

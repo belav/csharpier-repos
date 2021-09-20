@@ -451,7 +451,8 @@ namespace Microsoft.Extensions.Hosting.Tests
                 TState state,
                 Exception exception,
                 Func<TState, Exception, string> formatter
-            ) {
+            )
+            {
                 ScopeProvider.ForEachScope(
                     (scopeObject, state) =>
                     {

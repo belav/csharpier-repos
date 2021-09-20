@@ -61,7 +61,8 @@ namespace System.IO
             string? first,
             string? second,
             bool ignoreCase
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(first) || string.IsNullOrEmpty(second))
                 return 0;
 
@@ -81,7 +82,8 @@ namespace System.IO
                         *l == *r
                         || (ignoreCase && char.ToUpperInvariant(*l) == char.ToUpperInvariant(*r))
                     )
-                ) {
+                )
+                {
                     commonChars++;
                     l++;
                     r++;
@@ -98,7 +100,8 @@ namespace System.IO
             string? first,
             string? second,
             StringComparison comparisonType
-        ) {
+        )
+        {
             int firstRootLength = GetRootLength(first.AsSpan());
             int secondRootLength = GetRootLength(second.AsSpan());
 
@@ -146,7 +149,8 @@ namespace System.IO
             ReadOnlySpan<char> path,
             int rootLength,
             ref ValueStringBuilder sb
-        ) {
+        )
+        {
             Debug.Assert(rootLength > 0);
             bool flippedSeparator = false;
 
@@ -183,7 +187,8 @@ namespace System.IO
                     if (
                         (i + 2 == path.Length || PathInternal.IsDirectorySeparator(path[i + 2]))
                         && path[i + 1] == '.'
-                    ) {
+                    )
+                    {
                         i++;
                         continue;
                     }
@@ -195,7 +200,8 @@ namespace System.IO
                         && (i + 3 == path.Length || PathInternal.IsDirectorySeparator(path[i + 3]))
                         && path[i + 1] == '.'
                         && path[i + 2] == '.'
-                    ) {
+                    )
+                    {
                         // Unwind back to the last slash (and if there isn't one, clear out everything).
                         int s;
                         for (s = sb.Length - 1; s >= skip; s--)
@@ -220,7 +226,8 @@ namespace System.IO
                 if (
                     c != PathInternal.DirectorySeparatorChar
                     && c == PathInternal.AltDirectorySeparatorChar
-                ) {
+                )
+                {
                     c = PathInternal.DirectorySeparatorChar;
                     flippedSeparator = true;
                 }

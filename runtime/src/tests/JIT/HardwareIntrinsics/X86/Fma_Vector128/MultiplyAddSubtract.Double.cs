@@ -140,7 +140,8 @@ namespace JIT.HardwareIntrinsics.X86
                 Double[] inArray3,
                 Double[] outArray,
                 int alignment
-            ) {
+            )
+            {
                 int sizeOfinArray1 = inArray1.Length * Unsafe.SizeOf<Double>();
                 int sizeOfinArray2 = inArray2.Length * Unsafe.SizeOf<Double>();
                 int sizeOfinArray3 = inArray3.Length * Unsafe.SizeOf<Double>();
@@ -151,7 +152,8 @@ namespace JIT.HardwareIntrinsics.X86
                     || (alignment * 2) < sizeOfinArray2
                     || (alignment * 2) < sizeOfinArray3
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -250,7 +252,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             public void RunStructFldScenario(
                 AlternatingTernaryOpTest__MultiplyAddSubtractDouble testClass
-            ) {
+            )
+            {
                 var result = Fma.MultiplyAddSubtract(_fld1, _fld2, _fld3);
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
@@ -259,7 +262,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             public void RunStructFldScenario_Load(
                 AlternatingTernaryOpTest__MultiplyAddSubtractDouble testClass
-            ) {
+            )
+            {
                 fixed (Vector128<Double>* pFld1 = &_fld1)fixed (
                     Vector128<Double>* pFld2 = &_fld2
                 )fixed (Vector128<Double>* pFld3 = &_fld3)
@@ -740,7 +744,8 @@ namespace JIT.HardwareIntrinsics.X86
             Vector128<Double> op3,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Double[] inArray1 = new Double[Op1ElementCount];
             Double[] inArray2 = new Double[Op2ElementCount];
             Double[] inArray3 = new Double[Op3ElementCount];
@@ -764,7 +769,8 @@ namespace JIT.HardwareIntrinsics.X86
             void* op3,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Double[] inArray1 = new Double[Op1ElementCount];
             Double[] inArray2 = new Double[Op2ElementCount];
             Double[] inArray3 = new Double[Op3ElementCount];
@@ -800,7 +806,8 @@ namespace JIT.HardwareIntrinsics.X86
             Double[] thirdOp,
             Double[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             for (var i = 0; i < RetElementCount; i += 2)
@@ -809,7 +816,8 @@ namespace JIT.HardwareIntrinsics.X86
                     BitConverter.DoubleToInt64Bits(
                         Math.Round((firstOp[i] * secondOp[i]) - thirdOp[i], 9)
                     ) != BitConverter.DoubleToInt64Bits(Math.Round(result[i], 9))
-                ) {
+                )
+                {
                     succeeded = false;
                     break;
                 }
@@ -818,7 +826,8 @@ namespace JIT.HardwareIntrinsics.X86
                     BitConverter.DoubleToInt64Bits(
                         Math.Round((firstOp[i + 1] * secondOp[i + 1]) + thirdOp[i + 1], 9)
                     ) != BitConverter.DoubleToInt64Bits(Math.Round(result[i + 1], 9))
-                ) {
+                )
+                {
                     succeeded = false;
                     break;
                 }

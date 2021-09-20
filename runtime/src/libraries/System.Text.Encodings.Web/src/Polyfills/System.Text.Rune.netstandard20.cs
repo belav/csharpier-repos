@@ -140,7 +140,8 @@ namespace System.Text
             ReadOnlySpan<char> source,
             out Rune result,
             out int charsConsumed
-        ) {
+        )
+        {
             if (!source.IsEmpty)
             {
                 // First, check for the common case of a BMP scalar value.
@@ -227,7 +228,8 @@ namespace System.Text
             ReadOnlySpan<byte> source,
             out Rune result,
             out int bytesConsumed
-        ) {
+        )
+        {
             // This method follows the Unicode Standard's recommendation for detecting
             // the maximal subpart of an ill-formed subsequence. See The Unicode Standard,
             // Ch. 3.9 for more details. In summary, when reporting an invalid subsequence,
@@ -308,7 +310,8 @@ namespace System.Text
                     ((0xE0 - 0xC0) << 6) + (0xA0 - 0x80),
                     ((0xF4 - 0xC0) << 6) + (0x8F - 0x80)
                 )
-            ) {
+            )
+            {
                 // The first two bytes were not in the range [[E0 A0]..[F4 8F]].
                 // This is an overlong 3-byte sequence or an out-of-range 4-byte sequence.
                 goto Invalid;
@@ -320,7 +323,8 @@ namespace System.Text
                     ((0xED - 0xC0) << 6) + (0xA0 - 0x80),
                     ((0xED - 0xC0) << 6) + (0xBF - 0x80)
                 )
-            ) {
+            )
+            {
                 // This is a UTF-16 surrogate code point, which is invalid in UTF-8.
                 goto Invalid;
             }
@@ -331,7 +335,8 @@ namespace System.Text
                     ((0xF0 - 0xC0) << 6) + (0x80 - 0x80),
                     ((0xF0 - 0xC0) << 6) + (0x8F - 0x80)
                 )
-            ) {
+            )
+            {
                 // This is an overlong 4-byte sequence.
                 goto Invalid;
             }

@@ -87,7 +87,8 @@ namespace System.Net.Security
                 impersonationLevel != TokenImpersonationLevel.Identification
                 && impersonationLevel != TokenImpersonationLevel.Impersonation
                 && impersonationLevel != TokenImpersonationLevel.Delegation
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(
                     nameof(impersonationLevel),
                     impersonationLevel.ToString(),
@@ -103,7 +104,8 @@ namespace System.Net.Security
             bool isNtlm,
             [NotNull] ref byte[]? output,
             uint sequenceNumber
-        ) {
+        )
+        {
             SecPkgContext_Sizes sizes = default;
             bool success = SSPIWrapper.QueryBlittableContextAttributes(
                 GlobalSSPI.SSPIAuth,
@@ -205,7 +207,8 @@ namespace System.Net.Security
             if (
                 securityBuffer[2].size != 0
                 && (forceCopy || resultSize != (buffer.Length + sizes.cbSecurityTrailer))
-            ) {
+            )
+            {
                 Buffer.BlockCopy(
                     output,
                     securityBuffer[2].offset,
@@ -236,7 +239,8 @@ namespace System.Net.Security
             bool isNtlm,
             out int newOffset,
             uint sequenceNumber
-        ) {
+        )
+        {
             if (offset < 0 || offset > (buffer == null ? 0 : buffer.Length))
             {
                 Debug.Fail("Argument 'offset' out of range.");
@@ -320,7 +324,8 @@ namespace System.Net.Security
             bool isConfidential,
             out int newOffset,
             uint sequenceNumber
-        ) {
+        )
+        {
             const int ntlmSignatureLength = 16;
             // For the most part the arguments are verified in Decrypt().
             if (count < ntlmSignatureLength)

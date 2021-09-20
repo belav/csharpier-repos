@@ -104,7 +104,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
         public async Task Match_HttpMethod_CaseInsensitive(
             string endpointMethod,
             string requestMethod
-        ) {
+        )
+        {
             // Arrange
             var endpoint = CreateEndpoint("/hello", httpMethods: new string[] { endpointMethod, });
 
@@ -124,7 +125,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
         public async Task Match_HttpMethod_CaseInsensitive_CORS_Preflight(
             string endpointMethod,
             string requestMethod
-        ) {
+        )
+        {
             // Arrange
             var endpoint = CreateEndpoint(
                 "/hello",
@@ -376,7 +378,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             string path,
             string httpMethod,
             bool corsPreflight = false
-        ) {
+        )
+        {
             var httpContext = new DefaultHttpContext();
             httpContext.Request.Method = corsPreflight ? PreflightHttpMethod : httpMethod;
             httpContext.Request.Path = path;
@@ -397,7 +400,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             int order = 0,
             string[] httpMethods = null,
             bool acceptCorsPreflight = false
-        ) {
+        )
+        {
             var metadata = new List<object>();
             if (httpMethods != null)
             {

@@ -133,7 +133,8 @@ namespace System.Collections.Tests
 
         protected override ICollection<KeyValuePair<TKey, TValue>> GenericICollectionFactory(
             int count
-        ) {
+        )
+        {
             return GenericIDictionaryFactory(count);
         }
 
@@ -144,7 +145,8 @@ namespace System.Collections.Tests
         protected override void AddToCollection(
             ICollection<KeyValuePair<TKey, TValue>> collection,
             int numberOfItemsToAdd
-        ) {
+        )
+        {
             Assert.False(IsReadOnly);
             int seed = 12353;
             IDictionary<TKey, TValue> casted = (IDictionary<TKey, TValue>)collection;
@@ -173,7 +175,8 @@ namespace System.Collections.Tests
         /// </summary>
         protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(
             ModifyOperation operations
-        ) {
+        )
+        {
             if ((operations & ModifyOperation.Add) == ModifyOperation.Add)
             {
                 yield return (IEnumerable<KeyValuePair<TKey, TValue>> enumerable) =>
@@ -289,7 +292,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void IDictionary_Generic_ItemGet_MissingNonDefaultKey_ThrowsKeyNotFoundException(
             int count
-        ) {
+        )
+        {
             IDictionary<TKey, TValue> dictionary = GenericIDictionaryFactory(count);
             TKey missingKey = GetNewKey(dictionary);
             Assert.Throws<KeyNotFoundException>(() => dictionary[missingKey]);
@@ -299,7 +303,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void IDictionary_Generic_ItemGet_MissingDefaultKey_ThrowsKeyNotFoundException(
             int count
-        ) {
+        )
+        {
             if (DefaultValueAllowed)
             {
                 IDictionary<TKey, TValue> dictionary = GenericIDictionaryFactory(count);
@@ -348,7 +353,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void IDictionary_Generic_ItemSet_OnReadOnlyDictionary_ThrowsNotSupportedException(
             int count
-        ) {
+        )
+        {
             if (IsReadOnly)
             {
                 IDictionary<TKey, TValue> dictionary = GenericIDictionaryFactory(count);
@@ -419,14 +425,16 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void IDictionary_Generic_Keys_Enumeration_ParentDictionaryModifiedInvalidates(
             int count
-        ) {
+        )
+        {
             IDictionary<TKey, TValue> dictionary = GenericIDictionaryFactory(count);
             ICollection<TKey> keys = dictionary.Keys;
             IEnumerator<TKey> keysEnum = keys.GetEnumerator();
             dictionary.Add(GetNewKey(dictionary), CreateTValue(3432));
             if (
                 IDictionary_Generic_Keys_Values_Enumeration_ThrowsInvalidOperation_WhenParentModified
-            ) {
+            )
+            {
                 Assert.Throws<InvalidOperationException>(() => keysEnum.MoveNext());
                 Assert.Throws<InvalidOperationException>(() => keysEnum.Reset());
             }
@@ -516,14 +524,16 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void IDictionary_Generic_Values_Enumeration_ParentDictionaryModifiedInvalidates(
             int count
-        ) {
+        )
+        {
             IDictionary<TKey, TValue> dictionary = GenericIDictionaryFactory(count);
             ICollection<TValue> values = dictionary.Values;
             IEnumerator<TValue> valuesEnum = values.GetEnumerator();
             dictionary.Add(GetNewKey(dictionary), CreateTValue(3432));
             if (
                 IDictionary_Generic_Keys_Values_Enumeration_ThrowsInvalidOperation_WhenParentModified
-            ) {
+            )
+            {
                 Assert.Throws<InvalidOperationException>(() => valuesEnum.MoveNext());
                 Assert.Throws<InvalidOperationException>(() => valuesEnum.Reset());
             }
@@ -568,7 +578,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void IDictionary_Generic_Add_OnReadOnlyDictionary_ThrowsNotSupportedException(
             int count
-        ) {
+        )
+        {
             if (IsReadOnly)
             {
                 IDictionary<TKey, TValue> dictionary = GenericIDictionaryFactory(count);
@@ -766,7 +777,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void IDictionary_Generic_RemoveKey_OnReadOnlyDictionary_ThrowsNotSupportedException(
             int count
-        ) {
+        )
+        {
             if (IsReadOnly)
             {
                 IDictionary<TKey, TValue> dictionary = GenericIDictionaryFactory(count);
@@ -891,7 +903,8 @@ namespace System.Collections.Tests
             KeyValuePair<WeakReference<object>, WeakReference<object>> PopulateAndRemove(
                 IDictionary<TKey, TValue> collection,
                 bool useRemove
-            ) {
+            )
+            {
                 AddToCollection(collection, 1);
                 KeyValuePair<TKey, TValue> item = collection.First();
 

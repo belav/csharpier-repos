@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EditAndContinue
             SaveCommandArgs args,
             Action nextCommandHandler,
             CommandExecutionContext executionContext
-        ) {
+        )
+        {
             var textContainer = args.SubjectBuffer.AsTextContainer();
 
             if (Workspace.TryGetWorkspace(textContainer, out var workspace))

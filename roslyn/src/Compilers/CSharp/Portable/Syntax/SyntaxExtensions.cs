@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         internal static ArrowExpressionClauseSyntax? GetExpressionBodySyntax(
             this CSharpSyntaxNode node
-        ) {
+        )
+        {
             ArrowExpressionClauseSyntax? arrowExpr = null;
             switch (node.Kind())
             {
@@ -69,7 +70,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             this SyntaxToken token,
             string indentation,
             bool elasticTrivia
-        ) {
+        )
+        {
             return SyntaxNormalizer.Normalize(
                 token,
                 indentation,
@@ -100,7 +102,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string indentation = CodeAnalysis.SyntaxNodeExtensions.DefaultIndentation,
             string eol = CodeAnalysis.SyntaxNodeExtensions.DefaultEOL,
             bool elasticTrivia = false
-        ) {
+        )
+        {
             return SyntaxNormalizer.Normalize(token, indentation, eol, elasticTrivia);
         }
 
@@ -115,7 +118,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             this SyntaxTriviaList list,
             string indentation,
             bool elasticTrivia
-        ) {
+        )
+        {
             return SyntaxNormalizer.Normalize(
                 list,
                 indentation,
@@ -138,7 +142,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string indentation = CodeAnalysis.SyntaxNodeExtensions.DefaultIndentation,
             string eol = CodeAnalysis.SyntaxNodeExtensions.DefaultEOL,
             bool elasticTrivia = false
-        ) {
+        )
+        {
             return SyntaxNormalizer.Normalize(list, indentation, eol, elasticTrivia);
         }
 
@@ -149,7 +154,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal static XmlNameAttributeElementKind GetElementKind(
             this XmlNameAttributeSyntax attributeSyntax
-        ) {
+        )
+        {
             Debug.Assert(attributeSyntax.Parent is object);
             CSharpSyntaxNode parentSyntax = attributeSyntax.Parent;
             SyntaxKind parentKind = parentSyntax.Kind();
@@ -177,7 +183,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     parentName,
                     DocumentationCommentXmlNames.ParameterElementName
                 )
-            ) {
+            )
+            {
                 return XmlNameAttributeElementKind.Parameter;
             }
             else if (
@@ -185,7 +192,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     parentName,
                     DocumentationCommentXmlNames.ParameterReferenceElementName
                 )
-            ) {
+            )
+            {
                 return XmlNameAttributeElementKind.ParameterReference;
             }
             else if (
@@ -193,7 +201,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     parentName,
                     DocumentationCommentXmlNames.TypeParameterElementName
                 )
-            ) {
+            )
+            {
                 return XmlNameAttributeElementKind.TypeParameter;
             }
             else if (
@@ -201,7 +210,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     parentName,
                     DocumentationCommentXmlNames.TypeParameterReferenceElementName
                 )
-            ) {
+            )
+            {
                 return XmlNameAttributeElementKind.TypeParameterReference;
             }
             else
@@ -225,7 +235,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static SimpleNameSyntax WithIdentifier(
             this SimpleNameSyntax simpleName,
             SyntaxToken identifier
-        ) {
+        )
+        {
             return simpleName.Kind() == SyntaxKind.IdentifierName
               ? (SimpleNameSyntax)((IdentifierNameSyntax)simpleName).WithIdentifier(identifier)
               : (SimpleNameSyntax)((GenericNameSyntax)simpleName).WithIdentifier(identifier);
@@ -233,7 +244,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal static bool IsTypeInContextWhichNeedsDynamicAttribute(
             this IdentifierNameSyntax typeNode
-        ) {
+        )
+        {
             Debug.Assert(typeNode != null);
             return SyntaxFacts.IsInTypeOnlyContext(typeNode)
                 && IsInContextWhichNeedsDynamicAttribute(typeNode);
@@ -314,7 +326,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxToken thisKeyword,
             BracketedParameterListSyntax parameterList,
             AccessorListSyntax accessorList
-        ) {
+        )
+        {
             return syntax.Update(
                 attributeLists,
                 modifiers,
@@ -338,7 +351,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ParameterListSyntax parameterList,
             BlockSyntax block,
             SyntaxToken semicolonToken
-        ) {
+        )
+        {
             return syntax.Update(
                 attributeLists,
                 modifiers,
@@ -364,7 +378,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxList<TypeParameterConstraintClauseSyntax> constraintClauses,
             BlockSyntax block,
             SyntaxToken semicolonToken
-        ) {
+        )
+        {
             return syntax.Update(
                 attributeLists,
                 modifiers,
@@ -392,7 +407,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 kind != SyntaxKind.TupleExpression
                 && kind != SyntaxKind.DeclarationExpression
                 && kind != SyntaxKind.IdentifierName
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -459,7 +475,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             this TypeSyntax type,
             Action<ArrayRankSpecifierSyntax, TArg> action,
             in TArg argument
-        ) {
+        )
+        {
             // Use a manual stack here to avoid deeply nested recursion which can blow the real stack
             var stack = ArrayBuilder<SyntaxNode>.GetInstance();
             stack.Push(type);
@@ -501,7 +518,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             int i = functionPointerTypeSyntax.ParameterList.Parameters.Count - 1;
                             i >= 0;
                             i--
-                        ) {
+                        )
+                        {
                             TypeSyntax? paramType =
                                 functionPointerTypeSyntax.ParameterList.Parameters[i].Type;
                             Debug.Assert(paramType is object);
@@ -525,7 +543,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             int i = genericNameSyntax.TypeArgumentList.Arguments.Count - 1;
                             i >= 0;
                             i--
-                        ) {
+                        )
+                        {
                             stack.Push(genericNameSyntax.TypeArgumentList.Arguments[i]);
                         }
                         break;

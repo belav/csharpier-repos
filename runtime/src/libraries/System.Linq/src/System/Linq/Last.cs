@@ -22,7 +22,8 @@ namespace System.Linq
         public static TSource Last<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, bool> predicate
-        ) {
+        )
+        {
             TSource? last = source.TryGetLast(predicate, out bool found);
             if (!found)
             {
@@ -38,7 +39,8 @@ namespace System.Linq
         public static TSource LastOrDefault<TSource>(
             this IEnumerable<TSource> source,
             TSource defaultValue
-        ) {
+        )
+        {
             TSource? last = source.TryGetLast(out bool found);
             return found ? last! : defaultValue;
         }
@@ -52,7 +54,8 @@ namespace System.Linq
             this IEnumerable<TSource> source,
             Func<TSource, bool> predicate,
             TSource defaultValue
-        ) {
+        )
+        {
             var last = source.TryGetLast(predicate, out bool found);
             return found ? last! : defaultValue;
         }
@@ -60,7 +63,8 @@ namespace System.Linq
         private static TSource? TryGetLast<TSource>(
             this IEnumerable<TSource> source,
             out bool found
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -106,7 +110,8 @@ namespace System.Linq
             this IEnumerable<TSource> source,
             Func<TSource, bool> predicate,
             out bool found
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);

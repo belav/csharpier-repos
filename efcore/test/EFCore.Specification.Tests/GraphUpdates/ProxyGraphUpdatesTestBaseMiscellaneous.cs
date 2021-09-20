@@ -98,7 +98,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true)]
         public virtual void Avoid_nulling_shared_FK_property_when_nulling_navigation(
             bool nullPrincipal
-        ) {
+        )
+        {
             ExecuteWithStrategyInTransaction(
                 context =>
                 {

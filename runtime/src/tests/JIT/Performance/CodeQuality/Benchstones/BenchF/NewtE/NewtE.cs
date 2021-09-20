@@ -75,7 +75,8 @@ namespace Benchstone.BenchF
                         && (System.Math.Abs(deltaY) < 0.000001)
                         && (System.Math.Abs(a) < 0.000001)
                         && (System.Math.Abs(b) < 0.000001)
-                    ) {
+                    )
+                    {
                         goto L11;
                     }
                 }

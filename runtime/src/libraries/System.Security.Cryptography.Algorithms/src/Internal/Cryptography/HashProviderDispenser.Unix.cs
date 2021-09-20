@@ -20,7 +20,8 @@ namespace Internal.Cryptography
         internal static HashProvider CreateMacProvider(
             string hashAlgorithmId,
             ReadOnlySpan<byte> key
-        ) {
+        )
+        {
             IntPtr evpType = Interop.Crypto.HashAlgorithmToEvp(hashAlgorithmId);
             return new HmacHashProvider(evpType, key);
         }
@@ -31,7 +32,8 @@ namespace Internal.Cryptography
                 string hashAlgorithmId,
                 ReadOnlySpan<byte> source,
                 Span<byte> destination
-            ) {
+            )
+            {
                 IntPtr evpType = Interop.Crypto.HashAlgorithmToEvp(hashAlgorithmId);
                 Debug.Assert(evpType != IntPtr.Zero);
 

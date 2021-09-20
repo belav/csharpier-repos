@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             bool supportsCorsPreflight,
             int corsPreflightExitDestination,
             int corsPreflightDestination
-        ) {
+        )
+        {
             _exitDestination = exitDestination;
             _method = method;
             _destination = destination;
@@ -41,7 +42,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
                     httpMethod,
                     out var accessControlRequestMethod
                 )
-            ) {
+            )
+            {
                 return HttpMethods.Equals(accessControlRequestMethod, _method)
                   ? _corsPreflightDestination
                   : _corsPreflightExitDestination;

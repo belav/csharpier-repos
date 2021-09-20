@@ -24,7 +24,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.PathSegments
             List<string> contains,
             string endsWith,
             StringComparison comparisonType
-        ) {
+        )
+        {
             BeginsWith = beginsWith;
             Contains = contains;
             EndsWith = endsWith;

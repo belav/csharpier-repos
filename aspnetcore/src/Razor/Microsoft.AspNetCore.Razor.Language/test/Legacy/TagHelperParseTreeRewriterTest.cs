@@ -53,7 +53,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         public void GetAttributeNameValuePairs_ParsesPairsCorrectly(
             string documentContent,
             IEnumerable<KeyValuePair<string, string>> expectedPairs
-        ) {
+        )
+        {
             // Arrange
             var errorSink = new ErrorSink();
             var parseResult = ParseDocument(documentContent);
@@ -669,7 +670,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
         private TagHelperDescriptor[] GetAllowedChildrenTagHelperDescriptors(
             string[] allowedChildren
-        ) {
+        )
+        {
             var pTagHelperBuilder = TagHelperDescriptorBuilder.Create("PTagHelper", "SomeAssembly")
                 .TagMatchingRuleDescriptor(rule => rule.RequireTagName("p"));
             var strongTagHelperBuilder = TagHelperDescriptorBuilder.Create(

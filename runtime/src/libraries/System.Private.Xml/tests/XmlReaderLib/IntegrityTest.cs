@@ -375,7 +375,8 @@ namespace System.Xml.Tests
             if (
                 IntegrityVer == EINTEGRITY.BEFORE_READ
                 || IntegrityVer == EINTEGRITY.AFTER_RESETSTATE
-            ) {
+            )
+            {
                 // not interesting for test
                 return TEST_SKIPPED;
             }
@@ -421,7 +422,8 @@ namespace System.Xml.Tests
             if (
                 (IntegrityVer == EINTEGRITY.AFTER_CLOSE)
                 || (IntegrityVer == EINTEGRITY.CLOSE_IN_THE_MIDDLE)
-            ) {
+            )
+            {
                 iState = ReadState.Closed;
             }
             CError.Compare(DataReader.ReadState, iState, CurVariation.Desc);
@@ -480,7 +482,8 @@ namespace System.Xml.Tests
             if (
                 IntegrityVer == EINTEGRITY.BEFORE_READ
                 || IntegrityVer == EINTEGRITY.AFTER_RESETSTATE
-            ) {
+            )
+            {
                 // not interseting for test
                 return TEST_SKIPPED;
             }
@@ -498,7 +501,8 @@ namespace System.Xml.Tests
             if (
                 IntegrityVer == EINTEGRITY.BEFORE_READ
                 || IntegrityVer == EINTEGRITY.AFTER_RESETSTATE
-            ) {
+            )
+            {
                 // not interseting for test
                 return TEST_SKIPPED;
             }
@@ -515,7 +519,8 @@ namespace System.Xml.Tests
             if (
                 IntegrityVer == EINTEGRITY.BEFORE_READ
                 || IntegrityVer == EINTEGRITY.AFTER_RESETSTATE
-            ) {
+            )
+            {
                 // not interseting for test
                 return TEST_SKIPPED;
             }
@@ -532,7 +537,8 @@ namespace System.Xml.Tests
             if (
                 IntegrityVer == EINTEGRITY.BEFORE_READ
                 || IntegrityVer == EINTEGRITY.AFTER_RESETSTATE
-            ) {
+            )
+            {
                 // not interseting for test
                 return TEST_SKIPPED;
             }
@@ -549,7 +555,8 @@ namespace System.Xml.Tests
             if (
                 IntegrityVer == EINTEGRITY.BEFORE_READ
                 || IntegrityVer == EINTEGRITY.AFTER_RESETSTATE
-            ) {
+            )
+            {
                 // not interseting for test
                 return TEST_SKIPPED;
             }
@@ -566,7 +573,8 @@ namespace System.Xml.Tests
             if (
                 IntegrityVer == EINTEGRITY.BEFORE_READ
                 || IntegrityVer == EINTEGRITY.AFTER_RESETSTATE
-            ) {
+            )
+            {
                 // not interseting for test
                 return TEST_SKIPPED;
             }
@@ -587,7 +595,8 @@ namespace System.Xml.Tests
             if (
                 IntegrityVer == EINTEGRITY.BEFORE_READ
                 || IntegrityVer == EINTEGRITY.AFTER_RESETSTATE
-            ) {
+            )
+            {
                 // not interseting for test
                 return TEST_SKIPPED;
             }
@@ -611,7 +620,8 @@ namespace System.Xml.Tests
             if (
                 IntegrityVer == EINTEGRITY.BEFORE_READ
                 || IntegrityVer == EINTEGRITY.AFTER_RESETSTATE
-            ) {
+            )
+            {
                 // not interseting for test
                 return TEST_SKIPPED;
             }
@@ -635,7 +645,8 @@ namespace System.Xml.Tests
             if (
                 IntegrityVer == EINTEGRITY.BEFORE_READ
                 || IntegrityVer == EINTEGRITY.AFTER_RESETSTATE
-            ) {
+            )
+            {
                 // not interseting for test
                 return TEST_SKIPPED;
             }
@@ -659,7 +670,8 @@ namespace System.Xml.Tests
             if (
                 IntegrityVer == EINTEGRITY.BEFORE_READ
                 || IntegrityVer == EINTEGRITY.AFTER_RESETSTATE
-            ) {
+            )
+            {
                 // not interseting for test
                 return TEST_SKIPPED;
             }
@@ -683,7 +695,8 @@ namespace System.Xml.Tests
             if (
                 IntegrityVer == EINTEGRITY.BEFORE_READ
                 || IntegrityVer == EINTEGRITY.AFTER_RESETSTATE
-            ) {
+            )
+            {
                 // not interseting for test
                 return TEST_SKIPPED;
             }
@@ -707,7 +720,8 @@ namespace System.Xml.Tests
             if (
                 IntegrityVer == EINTEGRITY.BEFORE_READ
                 || IntegrityVer == EINTEGRITY.AFTER_RESETSTATE
-            ) {
+            )
+            {
                 // not interseting for test
                 return TEST_SKIPPED;
             }

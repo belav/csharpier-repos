@@ -98,7 +98,8 @@ namespace System.Web.Http
             HttpRequestMessage request,
             string name,
             IDictionary<string, object> values
-        ) {
+        )
+        {
             if (request == null)
             {
                 throw Error.ArgumentNull("request");
@@ -165,7 +166,8 @@ namespace System.Web.Http
             IDictionary<string, object> defaults,
             IDictionary<string, object> constraints,
             IDictionary<string, object> dataTokens
-        ) {
+        )
+        {
             return CreateRoute(routeTemplate, defaults, constraints, dataTokens, handler: null);
         }
 
@@ -175,7 +177,8 @@ namespace System.Web.Http
             IDictionary<string, object> constraints,
             IDictionary<string, object> dataTokens,
             HttpMessageHandler handler
-        ) {
+        )
+        {
             HttpRouteValueDictionary routeDefaults = new HttpRouteValueDictionary(defaults);
             HttpRouteValueDictionary routeConstraints = new HttpRouteValueDictionary(constraints);
             HttpRouteValueDictionary routeDataTokens = new HttpRouteValueDictionary(dataTokens);
@@ -209,7 +212,8 @@ namespace System.Web.Http
             string routeTemplate,
             string name,
             object constraint
-        ) {
+        )
+        {
             if (name == null)
             {
                 throw Error.ArgumentNull("name");

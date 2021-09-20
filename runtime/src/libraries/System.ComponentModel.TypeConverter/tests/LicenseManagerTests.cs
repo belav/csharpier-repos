@@ -67,7 +67,8 @@ namespace System.ComponentModel.Tests
             Type type,
             object instance,
             bool allowExceptions
-        ) {
+        )
+        {
             if (type.Name.Equals("RuntimeLicensedObject"))
             {
                 if (context.UsageMode != LicenseUsageMode.Runtime)

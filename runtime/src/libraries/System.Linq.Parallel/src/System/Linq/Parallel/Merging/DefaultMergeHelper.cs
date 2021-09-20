@@ -49,7 +49,8 @@ namespace System.Linq.Parallel
             TaskScheduler taskScheduler,
             CancellationState cancellationState,
             int queryId
-        ) {
+        )
+        {
             Debug.Assert(partitions != null);
 
             _taskGroupState = new QueryTaskGroupState(cancellationState, queryId);
@@ -207,7 +208,8 @@ namespace System.Linq.Parallel
                     IEnumerator<TInputOutput> enumerator = (
                         (IMergeHelper<TInputOutput>)this
                     ).GetEnumerator()
-                ) {
+                )
+                {
                     while (enumerator.MoveNext())
                     {
                         output.Add(enumerator.Current);

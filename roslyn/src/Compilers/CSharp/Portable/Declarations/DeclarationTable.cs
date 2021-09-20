@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableSetWithInsertionOrder<RootSingleNamespaceDeclaration> allOlderRootDeclarations,
             Lazy<RootSingleNamespaceDeclaration> latestLazyRootDeclaration,
             Cache cache
-        ) {
+        )
+        {
             _allOlderRootDeclarations = allOlderRootDeclarations;
             _latestLazyRootDeclaration = latestLazyRootDeclaration;
             _cache = cache ?? new Cache(this);
@@ -61,7 +62,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public DeclarationTable AddRootDeclaration(
             Lazy<RootSingleNamespaceDeclaration> lazyRootDeclaration
-        ) {
+        )
+        {
             // We can only re-use the cache if we don't already have a 'latest' item for the decl
             // table.
             if (_latestLazyRootDeclaration == null)
@@ -83,7 +85,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public DeclarationTable RemoveRootDeclaration(
             Lazy<RootSingleNamespaceDeclaration> lazyRootDeclaration
-        ) {
+        )
+        {
             // We can only reuse the cache if we're removing the decl that was just added.
             if (_latestLazyRootDeclaration == lazyRootDeclaration)
             {
@@ -256,7 +259,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static ISet<string> GetNames(
             Declaration declaration,
             Predicate<Declaration> predicate
-        ) {
+        )
+        {
             var set = new HashSet<string>();
             var stack = new Stack<Declaration>();
             stack.Push(declaration);
@@ -303,7 +307,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string name,
             SymbolFilter filter,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return ContainsNameHelper(
                 mergedRoot,
                 n => n == name,
@@ -318,7 +323,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Func<string, bool> predicate,
             SymbolFilter filter,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return ContainsNameHelper(
                 mergedRoot,
                 predicate,
@@ -345,7 +351,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SymbolFilter filter,
             Func<SingleTypeDeclaration, bool> typePredicate,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var includeNamespace = (filter & SymbolFilter.Namespace) == SymbolFilter.Namespace;
             var includeType = (filter & SymbolFilter.Type) == SymbolFilter.Type;
             var includeMember = (filter & SymbolFilter.Member) == SymbolFilter.Member;
@@ -398,7 +405,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             includeMember
                             || includeType
                             || childNamespaceOrType.Kind == DeclarationKind.Namespace
-                        ) {
+                        )
+                        {
                             stack.Push(childNamespaceOrType);
                         }
                     }

@@ -178,7 +178,8 @@ namespace System.Text.Json.Serialization.Tests
             ref Utf8JsonReader reader,
             Type typeToConvert,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             if (reader.TokenType != JsonTokenType.StartArray)
             {
                 throw new JsonException();
@@ -198,7 +199,8 @@ namespace System.Text.Json.Serialization.Tests
             Utf8JsonWriter writer,
             ListWrapper value,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             writer.WriteStartArray();
             writer.WriteEndArray();
         }
@@ -210,7 +212,8 @@ namespace System.Text.Json.Serialization.Tests
             ref Utf8JsonReader reader,
             Type typeToConvert,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             if (reader.TokenType != JsonTokenType.StartArray)
             {
                 throw new JsonException();
@@ -230,7 +233,8 @@ namespace System.Text.Json.Serialization.Tests
             Utf8JsonWriter writer,
             StringIEnumerableWrapper value,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             writer.WriteStartArray();
             writer.WriteEndArray();
         }
@@ -242,7 +246,8 @@ namespace System.Text.Json.Serialization.Tests
             ref Utf8JsonReader reader,
             Type typeToConvert,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             if (reader.TokenType != JsonTokenType.StartObject)
             {
                 throw new JsonException();
@@ -262,7 +267,8 @@ namespace System.Text.Json.Serialization.Tests
             Utf8JsonWriter writer,
             DictionaryWrapper value,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             writer.WriteStartObject();
             writer.WriteEndObject();
         }
@@ -274,7 +280,8 @@ namespace System.Text.Json.Serialization.Tests
             ref Utf8JsonReader reader,
             Type typeToConvert,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             if (reader.TokenType != JsonTokenType.StartObject)
             {
                 throw new JsonException();
@@ -294,7 +301,8 @@ namespace System.Text.Json.Serialization.Tests
             Utf8JsonWriter writer,
             UnsupportedDictionaryWrapper value,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             writer.WriteStartObject();
             writer.WriteEndObject();
         }

@@ -56,7 +56,8 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
             IWpfTextView textView,
             ITextBuffer buffer,
             ITagAggregator<InlineHintDataTag> tagAggregator
-        ) {
+        )
+        {
             _cache = new List<ITagSpan<IntraTextAdornmentTag>>();
 
             _threadAffinitizedObject = new ForegroundThreadAffinitizedObject(
@@ -112,7 +113,8 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
 
         public IEnumerable<ITagSpan<IntraTextAdornmentTag>> GetTags(
             NormalizedSnapshotSpanCollection spans
-        ) {
+        )
+        {
             if (spans.Count == 0)
             {
                 return Array.Empty<ITagSpan<IntraTextAdornmentTag>>();

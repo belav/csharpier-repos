@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 bool shouldBeReadOnly,
                 bool endOfSelectionReachable,
                 OperationStatus status
-            ) {
+            )
+            {
                 var semanticModel = document.SemanticModel;
 
                 UseInstanceMember = instanceMemberIsUsed;
@@ -162,7 +163,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
 
             public ImmutableArray<VariableInfo> GetVariablesToSplitOrMoveIntoMethodDefinition(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return _variables.WhereAsArray(
                     v =>
                         v.GetDeclarationBehavior(cancellationToken) == DeclarationBehavior.SplitIn
@@ -186,7 +188,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
 
             public IEnumerable<VariableInfo> GetVariablesToMoveOutToCallSiteOrDelete(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return _variables.Where(
                     v =>
                         v.GetDeclarationBehavior(cancellationToken) == DeclarationBehavior.MoveOut
@@ -196,7 +199,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
 
             public IEnumerable<VariableInfo> GetVariablesToSplitOrMoveOutToCallSite(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return _variables.Where(
                     v =>
                         v.GetDeclarationBehavior(cancellationToken) == DeclarationBehavior.SplitOut

@@ -194,7 +194,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task ReadAsStringAsync_NoSubContent_MatchesExpected(
             MultipartContentToStringMode mode,
             bool async
-        ) {
+        )
+        {
             var mc = new MultipartContent("someSubtype", "theBoundary");
 
             Assert.Equal(
@@ -211,7 +212,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task ReadAsStringAsync_OneSubContentWithHeaders_MatchesExpected(
             MultipartContentToStringMode mode,
             bool async
-        ) {
+        )
+        {
             var subContent = new ByteArrayContent(
                 Encoding.UTF8.GetBytes("This is a ByteArrayContent")
             );
@@ -245,7 +247,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task ReadAsStringAsync_TwoSubContents_MatchesExpected(
             MultipartContentToStringMode mode,
             bool async
-        ) {
+        )
+        {
             var mc = new MultipartContent("someSubtype", "theBoundary");
             mc.Add(new ByteArrayContent(Encoding.UTF8.GetBytes("This is a ByteArrayContent")));
             mc.Add(new StringContent("This is a StringContent"));
@@ -323,7 +326,8 @@ namespace System.Net.Http.Functional.Tests
             bool firstContentSeekable,
             bool secondContentSeekable,
             bool readStreamAsync
-        ) {
+        )
+        {
             var c = new MultipartContent();
             c.Add(
                 new StreamContent(
@@ -360,7 +364,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task ReadAsStreamAsync_Seek_JumpsToSpecifiedPosition(
             bool nestedContent,
             bool readStreamAsync
-        ) {
+        )
+        {
             var mc = new MultipartContent();
             if (nestedContent)
             {
@@ -540,7 +545,8 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(false)]
         public async Task ReadAsStreamAsync_CustomEncodingSelector_SelectorIsCalledWithCustomState(
             bool async
-        ) {
+        )
+        {
             var mc = new MultipartContent();
 
             var stringContent = new StringContent("foo");
@@ -661,7 +667,8 @@ namespace System.Net.Http.Functional.Tests
             MultipartContent content,
             MultipartContentToStringMode mode,
             bool async
-        ) {
+        )
+        {
             Stream stream;
 
             switch (mode)
@@ -712,7 +719,8 @@ namespace System.Net.Http.Functional.Tests
                 Stream stream,
                 TransportContext context,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 

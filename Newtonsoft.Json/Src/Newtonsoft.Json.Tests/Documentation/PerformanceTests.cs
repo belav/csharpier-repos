@@ -98,7 +98,8 @@ namespace Newtonsoft.Json.Tests.Documentation
             Type objectType,
             object existingValue,
             JsonSerializer serializer
-        ) {
+        )
+        {
             JObject o = (JObject)JToken.ReadFrom(reader);
 
             Person p = new Person { Name = (string)o["Name"] };

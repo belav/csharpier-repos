@@ -15,7 +15,8 @@ namespace Microsoft.DotNet.OpenApi
             if (
                 args.Length > 0
                 && string.Equals("--debug", args[0], StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 args = args.Skip(1).ToArray();
 
                 Console.WriteLine(

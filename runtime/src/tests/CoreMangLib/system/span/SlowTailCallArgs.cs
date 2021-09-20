@@ -128,7 +128,8 @@ internal static class ByRefLikeTest
         TestByRefLike c,
         TestByRefLike d,
         TestByRefLike e
-    ) {
+    )
+    {
         GC.Collect();
         for (int i = 0; i < 10000; i++)
             GC.KeepAlive(new object());
@@ -143,7 +144,8 @@ internal static class ByRefLikeTest
             || c.span2[0] != 42
             || d.span2[0] != 42
             || e.span2[0] != 42
-        ) {
+        )
+        {
             throw new ArgumentException();
         }
     }

@@ -165,7 +165,8 @@ namespace System.Linq.Expressions.Tests
             Expression<Func<T>> expr,
             Func<T, bool> check,
             bool useInterpreter
-        ) {
+        )
+        {
             Func<T> c = expr.Compile(useInterpreter);
             Assert.True(check(c()));
         }

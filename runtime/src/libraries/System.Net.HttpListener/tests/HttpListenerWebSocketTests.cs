@@ -44,7 +44,8 @@ namespace System.Net.Tests
         public async Task SendAsync_SendWholeBuffer_Success(
             WebSocketMessageType messageType,
             bool endOfMessage
-        ) {
+        )
+        {
             HttpListenerWebSocketContext context = await GetWebSocketContext();
             await ClientConnectTask;
 
@@ -93,7 +94,8 @@ namespace System.Net.Tests
         [InlineData(WebSocketMessageType.Text - 1)]
         public async Task SendAsync_InvalidMessageType_ThrowsArgumentNullException(
             WebSocketMessageType messageType
-        ) {
+        )
+        {
             HttpListenerWebSocketContext context = await GetWebSocketContext();
             await AssertExtensions.ThrowsAsync<ArgumentException>(
                 "messageType",
@@ -132,7 +134,8 @@ namespace System.Net.Tests
         public async Task ReceiveAsync_ReadWholeBuffer_Success(
             WebSocketMessageType messageType,
             bool endOfMessage
-        ) {
+        )
+        {
             HttpListenerWebSocketContext context = await GetWebSocketContext();
             await ClientConnectTask;
 
@@ -260,7 +263,8 @@ namespace System.Net.Tests
             WebSocketCloseStatus status,
             string statusDescription,
             WebSocketCloseStatus expectedCloseStatus
-        ) {
+        )
+        {
             // [ActiveIssue("https://github.com/dotnet/runtime/issues/22011", TargetFrameworkMonikers.Netcoreapp)]
             string expectedStatusDescription = statusDescription;
             if (statusDescription == null)
@@ -370,7 +374,8 @@ namespace System.Net.Tests
             WebSocketCloseStatus status,
             string statusDescription,
             WebSocketCloseStatus expectedCloseStatus
-        ) {
+        )
+        {
             // [ActiveIssue("https://github.com/dotnet/runtime/issues/22011", TargetFrameworkMonikers.Netcoreapp)]
             string expectedStatusDescription = statusDescription;
             if (statusDescription == null)
@@ -498,7 +503,8 @@ namespace System.Net.Tests
             WebSocketCloseStatus status,
             string statusDescription,
             string paramName
-        ) {
+        )
+        {
             HttpListenerWebSocketContext context = await GetWebSocketContext();
 
             await Assert.ThrowsAsync<ArgumentException>(
@@ -585,7 +591,8 @@ namespace System.Net.Tests
             WebSocket webSocket,
             int expectedBytes,
             byte[] buffer
-        ) {
+        )
+        {
             int totalReceived = 0;
             WebSocketReceiveResult result = default(WebSocketReceiveResult);
             while (totalReceived < expectedBytes)
@@ -605,7 +612,8 @@ namespace System.Net.Tests
 
         private async Task<HttpListenerWebSocketContext> GetWebSocketContext(
             string[] subProtocols = null
-        ) {
+        )
+        {
             if (subProtocols != null)
             {
                 foreach (string subProtocol in subProtocols)

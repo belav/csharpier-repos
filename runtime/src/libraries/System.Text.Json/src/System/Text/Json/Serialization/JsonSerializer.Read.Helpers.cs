@@ -13,7 +13,8 @@ namespace System.Text.Json
             ref Utf8JsonReader reader,
             Type returnType,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             ReadStack state = default;
             state.Initialize(returnType, options, supportContinuation: false);
             JsonConverter jsonConverter = state.Current.JsonPropertyInfo!.ConverterBase;
@@ -25,7 +26,8 @@ namespace System.Text.Json
             ref Utf8JsonReader reader,
             JsonSerializerOptions options,
             ref ReadStack state
-        ) {
+        )
+        {
             if (jsonConverter is JsonConverter<TValue> converter)
             {
                 // Call the strongly-typed ReadCore that will not box structs.

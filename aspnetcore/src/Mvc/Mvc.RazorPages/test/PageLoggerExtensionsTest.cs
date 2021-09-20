@@ -168,7 +168,8 @@ namespace Microsoft.AspNetCore.Mvc
         public void ExecutingHandlerMethod_WithArguments_LogsArguments(
             string expectedArgumentsMessage,
             params object[] arguments
-        ) {
+        )
+        {
             // Arrange
             var testSink = new TestSink();
             var loggerFactory = new TestLoggerFactory(testSink, enabled: true);

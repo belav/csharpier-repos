@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             public AnalyzerConfigOptionsImpl(
                 AnalyzerConfigOptions options,
                 AnalyzerConfigOptions fallbackOptions
-            ) {
+            )
+            {
                 _options = options;
                 _fallbackOptions = fallbackOptions;
             }

@@ -339,7 +339,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
         private async Task<(bool result, IList<ActualApiResponseMetadata> responseMetadatas, TestSource testSource)> TryGetActualResponseMetadata(
             string typeName,
             string methodName
-        ) {
+        )
+        {
             var testSource = MvcTestSource.Read(
                 GetType().Name,
                 "TryGetActualResponseMetadataTests"
@@ -373,7 +374,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
 
         private async Task<ActualApiResponseMetadata?> RunInspectReturnStatementSyntax(
             [CallerMemberName] string test = null
-        ) {
+        )
+        {
             // Arrange
             var compilation = await GetCompilation("InspectReturnExpressionTests");
             Assert.True(ApiControllerSymbolCache.TryCreate(compilation, out var symbolCache));
@@ -400,7 +402,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
         private async Task<ActualApiResponseMetadata?> RunInspectReturnStatementSyntax(
             string source,
             string test
-        ) {
+        )
+        {
             var project = MvcDiagnosticAnalyzerRunner.CreateProjectWithReferencesInBinDir(
                 GetType().Assembly,
                 new[] { source }

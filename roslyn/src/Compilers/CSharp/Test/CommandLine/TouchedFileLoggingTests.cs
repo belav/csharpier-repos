@@ -235,7 +235,8 @@ public class C { }"
             string outputPath,
             out List<string> expectedReads,
             out List<string> expectedWrites
-        ) {
+        )
+        {
             expectedReads = cmd.Arguments.MetadataReferences.Select(r => r.Reference).ToList();
 
             foreach (var file in cmd.Arguments.SourceFiles)
@@ -253,7 +254,8 @@ public class C { }"
             List<string> expectedReads,
             List<string> expectedWrites,
             string touchedFilesBase
-        ) {
+        )
+        {
             var touchedReadPath = touchedFilesBase + ".read";
             var touchedWritesPath = touchedFilesBase + ".write";
 

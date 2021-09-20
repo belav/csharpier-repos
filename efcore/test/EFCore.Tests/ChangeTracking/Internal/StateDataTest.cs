@@ -73,7 +73,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             InternalEntityEntry.PropertyFlag unusedFlag1,
             InternalEntityEntry.PropertyFlag unusedFlag2,
             InternalEntityEntry.PropertyFlag unusedFlag3
-        ) {
+        )
+        {
             var data = new InternalEntityEntry.StateData(propertyCount, propertyCount);
 
             Assert.False(data.AnyPropertiesFlagged(propertyFlag));

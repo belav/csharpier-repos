@@ -258,7 +258,8 @@ namespace Castle.DynamicProxy.Tests
         public void FromExpression_Creates_Same_CustomAttributeInfo_As_Calling_The_Constructor(
             Opaque<Expression<Func<Attribute>>> expr,
             CustomAttributeInfo expected
-        ) {
+        )
+        {
             var actual = CustomAttributeInfo.FromExpression(expr.Value);
             Assert.AreEqual(expected, actual);
         }
@@ -331,7 +332,8 @@ namespace Castle.DynamicProxy.Tests
         private static object[] CreateFromExpressionTestCase(
             Expression<Func<Attribute>> expr,
             CustomAttributeInfo expected
-        ) {
+        )
+        {
             return new object[] { new Opaque<Expression<Func<Attribute>>>(expr), expected };
         }
 

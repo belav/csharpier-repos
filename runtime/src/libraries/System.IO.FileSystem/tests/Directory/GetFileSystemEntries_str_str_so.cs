@@ -28,7 +28,8 @@ namespace System.IO.Tests
             string dirName,
             string searchPattern,
             SearchOption option
-        ) {
+        )
+        {
             return Directory.GetFileSystemEntries(dirName, searchPattern, option);
         }
 
@@ -135,7 +136,8 @@ namespace System.IO.Tests
             string dirName,
             string searchPattern,
             SearchOption option
-        ) {
+        )
+        {
             return Directory.GetFileSystemEntries(dirName, searchPattern, option);
         }
 

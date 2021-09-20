@@ -21,7 +21,8 @@ namespace System.IO.Tests
                     capacity,
                     FileAccess.ReadWrite
                 )
-            ) {
+            )
+            {
                 AssertExtensions.Throws<ArgumentNullException>(
                     "array",
                     () => uma.WriteArray<UmaTestStruct>(0, null, 0, 1)
@@ -117,7 +118,8 @@ namespace System.IO.Tests
                     capacity,
                     FileAccess.Write
                 )
-            ) {
+            )
+            {
                 Assert.Throws<NotSupportedException>(
                     () => uma.ReadArray<UmaTestStruct>(0, structArr, 0, 1)
                 );
@@ -137,7 +139,8 @@ namespace System.IO.Tests
                     capacity,
                     FileAccess.Read
                 )
-            ) {
+            )
+            {
                 Assert.Throws<NotSupportedException>(
                     () => uma.WriteArray<UmaTestStruct>(0, structArr, 0, 1)
                 );
@@ -157,7 +160,8 @@ namespace System.IO.Tests
                     capacity,
                     FileAccess.ReadWrite
                 )
-            ) {
+            )
+            {
                 AssertExtensions.Throws<ArgumentException>(
                     null,
                     () =>
@@ -283,7 +287,8 @@ namespace System.IO.Tests
                     capacity,
                     FileAccess.ReadWrite
                 )
-            ) {
+            )
+            {
                 uma.WriteArray<UmaTestStruct>(
                     capacity - UmaTestStruct_AlignedSize,
                     inStructArr,
@@ -333,7 +338,8 @@ namespace System.IO.Tests
                     capacity,
                     FileAccess.ReadWrite
                 )
-            ) {
+            )
+            {
                 uma.WriteArray<UmaTestStruct>(0, inStructArr, 0, numberOfStructs);
                 Assert.Equal(
                     numberOfStructs,
@@ -367,7 +373,8 @@ namespace System.IO.Tests
                     capacity,
                     FileAccess.ReadWrite
                 )
-            ) {
+            )
+            {
                 uma.WriteArray<UmaTestStruct>(0, inStructArr, 0, 1);
                 int readCount = uma.ReadArray<UmaTestStruct>(0, outStructArr, 0, 5000);
                 Assert.Equal(capacity / UmaTestStruct_AlignedSize, readCount);

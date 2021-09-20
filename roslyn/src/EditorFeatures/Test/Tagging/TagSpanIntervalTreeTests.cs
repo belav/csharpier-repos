@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Tagging
         private static TagSpanIntervalTree<ITextMarkerTag> CreateTree(
             string text,
             params Span[] spans
-        ) {
+        )
+        {
             var exportProvider =
                 EditorTestCompositions.Editor.ExportProviderFactory.CreateExportProvider();
             var buffer = EditorFactory.CreateBuffer(exportProvider, text);
@@ -195,7 +196,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Tagging
                         tree.Buffer.CurrentSnapshot.Length
                     )
                 )
-            ) {
+            )
+            {
                 Assert.True(lastStart < tag.Span.Start.Position);
                 lastStart = tag.Span.Start.Position;
             }

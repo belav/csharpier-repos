@@ -69,7 +69,8 @@ namespace BenchmarksGame
             BlockingCollection<T> queue,
             Func<T, R> transform,
             int threadCount
-        ) {
+        )
+        {
             var tasks = new Task<R>[threadCount];
 
             for (int i = 0; i < threadCount; ++i)
@@ -133,7 +134,8 @@ namespace BenchmarksGame
                     rnd => SelectNucleotides(a, rnd),
                     Environment.ProcessorCount
                 )
-            ) {
+            )
+            {
                 s.Write(r, 0, r.Length);
             }
         }

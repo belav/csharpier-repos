@@ -212,7 +212,8 @@ namespace System.Web.Helpers.AntiXsrf.Test
             public override IEnumerable<object[]> GetData(
                 MethodInfo methodUnderTest,
                 Type[] parameterTypes
-            ) {
+            )
+            {
                 MockClaimsIdentity identity1 = new MockClaimsIdentity();
                 identity1.AddClaim(
                     ClaimUidExtractor.IdentityProviderClaimType,
@@ -261,7 +262,8 @@ namespace System.Web.Helpers.AntiXsrf.Test
             public override IEnumerable<object[]> GetData(
                 MethodInfo methodUnderTest,
                 Type[] parameterTypes
-            ) {
+            )
+            {
                 MockClaimsIdentity identity1 = new MockClaimsIdentity();
                 yield return new object[] { identity1 };
 

@@ -35,7 +35,8 @@ namespace Microsoft.AspNetCore.Authorization
         public AuthorizationMiddleware(
             RequestDelegate next,
             IAuthorizationPolicyProvider policyProvider
-        ) {
+        )
+        {
             _next = next ?? throw new ArgumentNullException(nameof(next));
             _policyProvider =
                 policyProvider ?? throw new ArgumentNullException(nameof(policyProvider));
@@ -91,7 +92,8 @@ namespace Microsoft.AspNetCore.Authorization
                     SuppressUseHttpContextAsAuthorizationResource,
                     out var useEndpointAsResource
                 ) && useEndpointAsResource
-            ) {
+            )
+            {
                 resource = endpoint;
             }
             else

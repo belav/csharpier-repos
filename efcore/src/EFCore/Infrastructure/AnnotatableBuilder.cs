@@ -61,7 +61,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             object? value,
             ConfigurationSource configurationSource,
             bool canOverrideSameSource
-        ) {
+        )
+        {
             var existingAnnotation = Metadata.FindAnnotation(name);
             if (existingAnnotation != null)
             {
@@ -78,7 +79,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                         configurationSource,
                         canOverrideSameSource
                     )
-                ) {
+                )
+                {
                     return null;
                 }
 
@@ -121,7 +123,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             string name,
             object? value,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             var existingAnnotation = Metadata.FindAnnotation(name);
             return existingAnnotation == null
                 || CanSetAnnotationValue(
@@ -137,7 +140,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             object? value,
             ConfigurationSource configurationSource,
             bool canOverrideSameSource
-        ) {
+        )
+        {
             if (Equals(annotation.Value, value))
             {
                 return true;
@@ -157,7 +161,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         public virtual AnnotatableBuilder<TMetadata, TModelBuilder>? RemoveAnnotation(
             string name,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             if (!CanRemoveAnnotation(name, configurationSource))
             {
                 return null;
@@ -176,7 +181,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         public virtual bool CanRemoveAnnotation(
             string name,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             var existingAnnotation = Metadata.FindAnnotation(name);
             return existingAnnotation == null
                 || configurationSource.Overrides(existingAnnotation.GetConfigurationSource());
@@ -197,7 +203,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         public virtual void MergeAnnotationsFrom(
             TMetadata annotatable,
             ConfigurationSource minimalConfigurationSource
-        ) {
+        )
+        {
             foreach (var annotation in annotatable.GetAnnotations())
             {
                 var configurationSource = annotation.GetConfigurationSource();

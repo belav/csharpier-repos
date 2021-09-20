@@ -99,7 +99,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                         httpMethod,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     candidates.Add(handler);
                 }
             }
@@ -120,7 +121,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                                 fuzzyHttpMethod,
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             candidates.Add(handler);
                         }
                     }
@@ -134,7 +136,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 if (
                     handler.Name != null
                     && !handler.Name.Equals(handlerName, StringComparison.OrdinalIgnoreCase)
-                ) {
+                )
+                {
                     candidates.RemoveAt(i);
                 }
             }

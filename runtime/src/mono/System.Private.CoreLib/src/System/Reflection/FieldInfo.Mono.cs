@@ -24,7 +24,8 @@ namespace System.Reflection
         public static FieldInfo GetFieldFromHandle(
             RuntimeFieldHandle handle,
             RuntimeTypeHandle declaringType
-        ) {
+        )
+        {
             if (handle.IsNullHandle())
                 throw new ArgumentException(SR.Argument_InvalidHandle);
             FieldInfo fi = internal_from_handle_type(handle.Value, declaringType.Value);

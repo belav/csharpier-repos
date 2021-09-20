@@ -52,7 +52,8 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption
         internal CbcAuthenticatedEncryptor? CreateAuthenticatedEncryptorInstance(
             ISecret secret,
             CngCbcAuthenticatedEncryptorConfiguration? configuration
-        ) {
+        )
+        {
             if (configuration == null)
             {
                 return null;
@@ -71,7 +72,8 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption
         [SupportedOSPlatform("windows")]
         private BCryptAlgorithmHandle GetHmacAlgorithmHandle(
             CngCbcAuthenticatedEncryptorConfiguration configuration
-        ) {
+        )
+        {
             // basic argument checking
             if (String.IsNullOrEmpty(configuration.HashAlgorithm))
             {
@@ -122,7 +124,8 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption
         [SupportedOSPlatform("windows")]
         private BCryptAlgorithmHandle GetSymmetricBlockCipherAlgorithmHandle(
             CngCbcAuthenticatedEncryptorConfiguration configuration
-        ) {
+        )
+        {
             // basic argument checking
             if (String.IsNullOrEmpty(configuration.EncryptionAlgorithm))
             {

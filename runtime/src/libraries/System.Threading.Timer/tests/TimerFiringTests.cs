@@ -33,7 +33,8 @@ namespace System.Threading.Tests
                     TimeSpan.FromMilliseconds(250),
                     TimeSpan.FromMilliseconds(Timeout.Infinite) /* not relevant */
                 )
-            ) {
+            )
+            {
                 Assert.True(are.WaitOne(TimeSpan.FromMilliseconds(MaxPositiveTimeoutInMs)));
             }
         }
@@ -57,7 +58,8 @@ namespace System.Threading.Tests
                     TimeSpan.FromMilliseconds(100),
                     TimeSpan.FromMilliseconds(Timeout.Infinite) /* not relevant */
                 )
-            ) {
+            )
+            {
                 Assert.True(are.WaitOne(TimeSpan.FromMilliseconds(MaxPositiveTimeoutInMs)));
             }
         }
@@ -80,7 +82,8 @@ namespace System.Threading.Tests
                     TimeSpan.FromMilliseconds(100),
                     TimeSpan.FromMilliseconds(Timeout.Infinite) /* not relevant */
                 )
-            ) {
+            )
+            {
                 Assert.True(are.WaitOne(TimeSpan.FromMilliseconds(MaxPositiveTimeoutInMs)));
             }
         }
@@ -117,7 +120,8 @@ namespace System.Threading.Tests
                     TimeSpan.FromMilliseconds(dueTime),
                     TimeSpan.FromMilliseconds(period)
                 )
-            ) {
+            )
+            {
                 Assert.True(are.WaitOne(TimeSpan.FromMilliseconds(MaxPositiveTimeoutInMs)));
             }
         }
@@ -143,7 +147,8 @@ namespace System.Threading.Tests
                     TimeSpan.FromMilliseconds(100),
                     TimeSpan.FromMilliseconds(Timeout.Infinite) /* not relevant */
                 )
-            ) {
+            )
+            {
                 Assert.False(
                     are.WaitOne(
                         TimeSpan.FromMilliseconds(
@@ -420,7 +425,8 @@ namespace System.Threading.Tests
         [InlineData(new int[] { 1000 })]
         public async Task Timer_ManyDifferentSerialSingleDueTimes_AllFireWithinAllowedRange(
             int[] dueTimes
-        ) {
+        )
+        {
             const int MillisecondsPadding = 100; // for each timer, out of range == Math.Abs(actualTime - dueTime) > MillisecondsPadding
             const int MaxAllowedOutOfRangePercentage = 20; // max % allowed out of range to pass test
 
@@ -453,7 +459,8 @@ namespace System.Threading.Tests
                                                 if (
                                                     Math.Abs(sw.ElapsedMilliseconds - dueTime)
                                                     > MillisecondsPadding
-                                                ) {
+                                                )
+                                                {
                                                     outOfRange.Enqueue(
                                                         new KeyValuePair<int, long>(
                                                             dueTime,

@@ -266,7 +266,8 @@ class Program2
         public async Task TestMissingWhenHandledByAnalyzer(
             string fileHeaderTemplate,
             int expectedActionCount
-        ) {
+        )
+        {
             var initialMarkup =
                 $@"
 <Workspace>

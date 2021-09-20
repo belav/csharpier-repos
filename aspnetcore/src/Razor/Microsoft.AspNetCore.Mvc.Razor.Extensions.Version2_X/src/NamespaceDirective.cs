@@ -45,13 +45,15 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
             protected override void ExecuteCore(
                 RazorCodeDocument codeDocument,
                 DocumentIntermediateNode documentNode
-            ) {
+            )
+            {
                 if (
                     documentNode.DocumentKind
                         != RazorPageDocumentClassifierPass.RazorPageDocumentKind
                     && documentNode.DocumentKind
                         != MvcViewDocumentClassifierPass.MvcViewDocumentKind
-                ) {
+                )
+                {
                     // Not a page. Skip.
                     return;
                 }
@@ -105,7 +107,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
             if (
                 !source.StartsWith(directiveSource, StringComparison.OrdinalIgnoreCase)
                 || source.Length <= directiveSource.Length
-            ) {
+            )
+            {
                 // The imports are not from the directory hierarchy, can't compute a suffix.
                 return baseNamespace;
             }
@@ -166,7 +169,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
 
             public override void VisitNamespaceDeclaration(
                 NamespaceDeclarationIntermediateNode node
-            ) {
+            )
+            {
                 if (FirstNamespace == null)
                 {
                     FirstNamespace = node;

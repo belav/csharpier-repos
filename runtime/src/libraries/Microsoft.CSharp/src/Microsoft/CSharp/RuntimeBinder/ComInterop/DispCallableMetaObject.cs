@@ -21,7 +21,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         public override DynamicMetaObject BindGetIndex(
             GetIndexBinder binder,
             DynamicMetaObject[] indexes
-        ) {
+        )
+        {
             return BindGetOrInvoke(indexes, binder.CallInfo) ?? base.BindGetIndex(binder, indexes);
         }
 
@@ -43,7 +44,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             if (
                 target.TryGetMemberMethod(name, out ComMethodDesc method)
                 || target.TryGetMemberMethodExplicit(name, out method)
-            ) {
+            )
+            {
                 bool[] isByRef = ComBinderHelpers.ProcessArgumentsForCom(ref args);
                 return BindComInvoke(method, args, callInfo, isByRef);
             }
@@ -59,7 +61,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             SetIndexBinder binder,
             DynamicMetaObject[] indexes,
             DynamicMetaObject value
-        ) {
+        )
+        {
             IDispatchComObject target = _callable.DispatchComObject;
             string name = _callable.MemberName;
 
@@ -72,7 +75,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                     holdsNull
                 )
                 || target.TryGetPropertySetterExplicit(name, out method, value.LimitType, holdsNull)
-            ) {
+            )
+            {
                 bool[] isByRef = ComBinderHelpers.ProcessArgumentsForCom(ref indexes);
                 isByRef = isByRef.AddLast(false);
                 DynamicMetaObject result = BindComInvoke(
@@ -101,7 +105,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             DynamicMetaObject[] indexes,
             CallInfo callInfo,
             bool[] isByRef
-        ) {
+        )
+        {
             Expression callable = Expression;
             Expression dispCall = Helpers.Convert(callable, typeof(DispCallable));
 

@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             SemanticModel semanticModel,
             bool allowParams = false,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             // if argument is a named argument it can't map to a parameter.
             if (argument.NameEquals != null)
             {

@@ -217,7 +217,8 @@ namespace System.Reflection.PortableExecutable.Tests
                         | PEStreamOptions.PrefetchMetadata
                         | PEStreamOptions.PrefetchEntireImage
                 )
-            ) {
+            )
+            {
                 var md = reader.GetMetadataReader();
                 var il = reader.GetMethodBody(
                     md.GetMethodDefinition(
@@ -252,7 +253,8 @@ namespace System.Reflection.PortableExecutable.Tests
                     peStream,
                     PEStreamOptions.LeaveOpen | PEStreamOptions.PrefetchMetadata
                 )
-            ) {
+            )
+            {
                 var md = reader.GetMetadataReader();
                 var method = md.GetMethodDefinition(MetadataTokens.MethodDefinitionHandle(1));
                 Assert.Equal("MC1", md.GetString(method.Name));
@@ -285,7 +287,8 @@ namespace System.Reflection.PortableExecutable.Tests
                         | PEStreamOptions.PrefetchMetadata
                         | PEStreamOptions.PrefetchEntireImage
                 )
-            ) {
+            )
+            {
                 Assert.Equal(4608, reader.GetEntireImage().Length);
             }
         }
@@ -603,7 +606,8 @@ namespace System.Reflection.PortableExecutable.Tests
                         reader.ReadEmbeddedPortablePdbDebugDirectoryData(
                             reader.ReadDebugDirectory()[2]
                         )
-                ) {
+                )
+                {
                     var embeddedReader = embeddedProvider.GetMetadataReader();
                     var embeddedBytes = new BlobReader(
                         embeddedReader.MetadataPointer,

@@ -107,26 +107,28 @@ namespace System.Net.Security
             Stream innerStream,
             bool leaveInnerStreamOpen,
             RemoteCertificateValidationCallback? userCertificateValidationCallback
-        ) : this(
-            innerStream,
-            leaveInnerStreamOpen,
-            userCertificateValidationCallback,
-            null,
-            EncryptionPolicy.RequireEncryption
-        ) { }
+        )
+            : this(
+                innerStream,
+                leaveInnerStreamOpen,
+                userCertificateValidationCallback,
+                null,
+                EncryptionPolicy.RequireEncryption
+            ) { }
 
         public SslStream(
             Stream innerStream,
             bool leaveInnerStreamOpen,
             RemoteCertificateValidationCallback? userCertificateValidationCallback,
             LocalCertificateSelectionCallback? userCertificateSelectionCallback
-        ) : this(
-            innerStream,
-            leaveInnerStreamOpen,
-            userCertificateValidationCallback,
-            userCertificateSelectionCallback,
-            EncryptionPolicy.RequireEncryption
-        ) { }
+        )
+            : this(
+                innerStream,
+                leaveInnerStreamOpen,
+                userCertificateValidationCallback,
+                userCertificateSelectionCallback,
+                EncryptionPolicy.RequireEncryption
+            ) { }
 
         public SslStream(
             Stream innerStream,
@@ -140,7 +142,8 @@ namespace System.Net.Security
                 encryptionPolicy != EncryptionPolicy.RequireEncryption
                 && encryptionPolicy != EncryptionPolicy.AllowNoEncryption
                 && encryptionPolicy != EncryptionPolicy.NoEncryption
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     SR.Format(SR.net_invalid_enum, "EncryptionPolicy"),
                     nameof(encryptionPolicy)
@@ -212,7 +215,8 @@ namespace System.Net.Security
             X509CertificateCollection localCertificates,
             X509Certificate? remoteCertificate,
             string[] acceptableIssuers
-        ) {
+        )
+        {
             return _userCertificateSelectionCallback!(
                 this,
                 targetHost,
@@ -227,13 +231,15 @@ namespace System.Net.Security
 
         private SslAuthenticationOptions CreateAuthenticationOptions(
             SslServerAuthenticationOptions sslServerAuthenticationOptions
-        ) {
+        )
+        {
             if (
                 sslServerAuthenticationOptions.ServerCertificate == null
                 && sslServerAuthenticationOptions.ServerCertificateContext == null
                 && sslServerAuthenticationOptions.ServerCertificateSelectionCallback == null
                 && _certSelectionDelegate == null
-            ) {
+            )
+            {
                 throw new ArgumentNullException(
                     nameof(sslServerAuthenticationOptions.ServerCertificate)
                 );
@@ -246,7 +252,8 @@ namespace System.Net.Security
                     || _certSelectionDelegate != null
                 )
                 && sslServerAuthenticationOptions.ServerCertificateSelectionCallback != null
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     SR.Format(
                         SR.net_conflicting_options,
@@ -277,7 +284,8 @@ namespace System.Net.Security
             string targetHost,
             AsyncCallback? asyncCallback,
             object? asyncState
-        ) {
+        )
+        {
             return BeginAuthenticateAsClient(
                 targetHost,
                 null,
@@ -294,7 +302,8 @@ namespace System.Net.Security
             bool checkCertificateRevocation,
             AsyncCallback? asyncCallback,
             object? asyncState
-        ) {
+        )
+        {
             return BeginAuthenticateAsClient(
                 targetHost,
                 clientCertificates,
@@ -312,7 +321,8 @@ namespace System.Net.Security
             bool checkCertificateRevocation,
             AsyncCallback? asyncCallback,
             object? asyncState
-        ) {
+        )
+        {
             SslClientAuthenticationOptions options = new SslClientAuthenticationOptions
             {
                 TargetHost = targetHost,
@@ -354,7 +364,8 @@ namespace System.Net.Security
             X509Certificate serverCertificate,
             AsyncCallback? asyncCallback,
             object? asyncState
-        ) {
+        )
+        {
             return BeginAuthenticateAsServer(
                 serverCertificate,
                 false,
@@ -371,7 +382,8 @@ namespace System.Net.Security
             bool checkCertificateRevocation,
             AsyncCallback? asyncCallback,
             object? asyncState
-        ) {
+        )
+        {
             return BeginAuthenticateAsServer(
                 serverCertificate,
                 clientCertificateRequired,
@@ -389,7 +401,8 @@ namespace System.Net.Security
             bool checkCertificateRevocation,
             AsyncCallback? asyncCallback,
             object? asyncState
-        ) {
+        )
+        {
             SslServerAuthenticationOptions options = new SslServerAuthenticationOptions
             {
                 ServerCertificate = serverCertificate,
@@ -449,7 +462,8 @@ namespace System.Net.Security
             string targetHost,
             X509CertificateCollection? clientCertificates,
             bool checkCertificateRevocation
-        ) {
+        )
+        {
             AuthenticateAsClient(
                 targetHost,
                 clientCertificates,
@@ -463,7 +477,8 @@ namespace System.Net.Security
             X509CertificateCollection? clientCertificates,
             SslProtocols enabledSslProtocols,
             bool checkCertificateRevocation
-        ) {
+        )
+        {
             SslClientAuthenticationOptions options = new SslClientAuthenticationOptions
             {
                 TargetHost = targetHost,
@@ -480,7 +495,8 @@ namespace System.Net.Security
 
         public void AuthenticateAsClient(
             SslClientAuthenticationOptions sslClientAuthenticationOptions
-        ) {
+        )
+        {
             if (sslClientAuthenticationOptions == null)
             {
                 throw new ArgumentNullException(nameof(sslClientAuthenticationOptions));
@@ -515,7 +531,8 @@ namespace System.Net.Security
             X509Certificate serverCertificate,
             bool clientCertificateRequired,
             bool checkCertificateRevocation
-        ) {
+        )
+        {
             AuthenticateAsServer(
                 serverCertificate,
                 clientCertificateRequired,
@@ -529,7 +546,8 @@ namespace System.Net.Security
             bool clientCertificateRequired,
             SslProtocols enabledSslProtocols,
             bool checkCertificateRevocation
-        ) {
+        )
+        {
             SslServerAuthenticationOptions options = new SslServerAuthenticationOptions
             {
                 ServerCertificate = serverCertificate,
@@ -546,7 +564,8 @@ namespace System.Net.Security
 
         public void AuthenticateAsServer(
             SslServerAuthenticationOptions sslServerAuthenticationOptions
-        ) {
+        )
+        {
             if (sslServerAuthenticationOptions == null)
             {
                 throw new ArgumentNullException(nameof(sslServerAuthenticationOptions));
@@ -582,7 +601,8 @@ namespace System.Net.Security
             X509CertificateCollection? clientCertificates,
             SslProtocols enabledSslProtocols,
             bool checkCertificateRevocation
-        ) {
+        )
+        {
             SslClientAuthenticationOptions options = new SslClientAuthenticationOptions()
             {
                 TargetHost = targetHost,
@@ -600,7 +620,8 @@ namespace System.Net.Security
         public Task AuthenticateAsClientAsync(
             SslClientAuthenticationOptions sslClientAuthenticationOptions,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (sslClientAuthenticationOptions == null)
             {
                 throw new ArgumentNullException(nameof(sslClientAuthenticationOptions));
@@ -625,7 +646,8 @@ namespace System.Net.Security
         private Task AuthenticateAsClientApm(
             SslClientAuthenticationOptions sslClientAuthenticationOptions,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             SetAndVerifyValidationCallback(
                 sslClientAuthenticationOptions.RemoteCertificateValidationCallback
             );
@@ -654,7 +676,8 @@ namespace System.Net.Security
             X509Certificate serverCertificate,
             bool clientCertificateRequired,
             bool checkCertificateRevocation
-        ) {
+        )
+        {
             SslServerAuthenticationOptions options = new SslServerAuthenticationOptions
             {
                 ServerCertificate = serverCertificate,
@@ -673,7 +696,8 @@ namespace System.Net.Security
             bool clientCertificateRequired,
             SslProtocols enabledSslProtocols,
             bool checkCertificateRevocation
-        ) {
+        )
+        {
             SslServerAuthenticationOptions options = new SslServerAuthenticationOptions
             {
                 ServerCertificate = serverCertificate,
@@ -691,7 +715,8 @@ namespace System.Net.Security
         public Task AuthenticateAsServerAsync(
             SslServerAuthenticationOptions sslServerAuthenticationOptions,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (sslServerAuthenticationOptions == null)
             {
                 throw new ArgumentNullException(nameof(sslServerAuthenticationOptions));
@@ -708,7 +733,8 @@ namespace System.Net.Security
         private Task AuthenticateAsServerApm(
             SslServerAuthenticationOptions sslServerAuthenticationOptions,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             SetAndVerifyValidationCallback(
                 sslServerAuthenticationOptions.RemoteCertificateValidationCallback
             );
@@ -721,7 +747,8 @@ namespace System.Net.Security
             ServerOptionsSelectionCallback optionsCallback,
             object? state,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             ValidateCreateContext(
                 new SslAuthenticationOptions(
                     optionsCallback,
@@ -1098,7 +1125,8 @@ namespace System.Net.Security
             int count,
             AsyncCallback? asyncCallback,
             object? asyncState
-        ) {
+        )
+        {
             ThrowIfExceptionalOrNotAuthenticated();
             return TaskToApm.Begin(
                 ReadAsync(buffer, offset, count, CancellationToken.None),
@@ -1119,7 +1147,8 @@ namespace System.Net.Security
             int count,
             AsyncCallback? asyncCallback,
             object? asyncState
-        ) {
+        )
+        {
             ThrowIfExceptionalOrNotAuthenticated();
             return TaskToApm.Begin(
                 WriteAsync(buffer, offset, count, CancellationToken.None),
@@ -1139,7 +1168,8 @@ namespace System.Net.Security
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ThrowIfExceptionalOrNotAuthenticated();
             ValidateBufferArguments(buffer, offset, count);
             return WriteAsync(new ReadOnlyMemory<byte>(buffer, offset, count), cancellationToken)
@@ -1149,7 +1179,8 @@ namespace System.Net.Security
         public override ValueTask WriteAsync(
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             ThrowIfExceptionalOrNotAuthenticated();
             return WriteAsyncInternal(
                 new AsyncReadWriteAdapter(InnerStream, cancellationToken),
@@ -1162,7 +1193,8 @@ namespace System.Net.Security
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ThrowIfExceptionalOrNotAuthenticated();
             ValidateBufferArguments(buffer, offset, count);
             return ReadAsyncInternal(
@@ -1175,7 +1207,8 @@ namespace System.Net.Security
         public override ValueTask<int> ReadAsync(
             Memory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             ThrowIfExceptionalOrNotAuthenticated();
             return ReadAsyncInternal(
                 new AsyncReadWriteAdapter(InnerStream, cancellationToken),

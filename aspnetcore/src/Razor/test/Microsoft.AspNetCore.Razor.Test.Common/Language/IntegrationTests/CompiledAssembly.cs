@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
             Compilation compilation,
             RazorCodeDocument codeDocument,
             Assembly assembly
-        ) {
+        )
+        {
             Compilation = compilation;
             CodeDocument = codeDocument;
             Assembly = assembly;

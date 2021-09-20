@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         public async Task TryMergeChangesAsync(
             Document newDocument,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(newDocument.Id == _oldDocument.Id);
 
             cancellationToken.ThrowIfCancellationRequested();
@@ -75,7 +76,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         public async Task TryMergeChangesAsync(
             ImmutableArray<Document> newDocuments,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             foreach (var newDocument in newDocuments)
                 await TryMergeChangesAsync(newDocument, cancellationToken).ConfigureAwait(false);
         }
@@ -94,7 +96,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         private static bool AllChangesCanBeApplied(
             SimpleIntervalTree<TextChange, IntervalIntrospector> cumulativeChanges,
             ImmutableArray<TextChange> currentChanges
-        ) {
+        )
+        {
             using var overlappingSpans = TemporaryArray<TextChange>.Empty;
             using var intersectingSpans = TemporaryArray<TextChange>.Empty;
 
@@ -111,7 +114,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             ImmutableArray<TextChange> currentChanges,
             ref TemporaryArray<TextChange> overlappingSpans,
             ref TemporaryArray<TextChange> intersectingSpans
-        ) {
+        )
+        {
             foreach (var change in currentChanges)
             {
                 overlappingSpans.Clear();
@@ -148,7 +152,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             TextChange change,
             in TemporaryArray<TextChange> overlappingSpans,
             in TemporaryArray<TextChange> intersectingSpans
-        ) {
+        )
+        {
             // We distinguish two types of changes that can happen.  'Pure Insertions'
             // and 'Overwrites'.  Pure-Insertions are those that are just inserting
             // text into a specific *position*.  They do not replace any existing text.
@@ -174,7 +179,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             TextChange change,
             in TemporaryArray<TextChange> overlappingSpans,
             in TemporaryArray<TextChange> intersectingSpans
-        ) {
+        )
+        {
             // Pure insertions can't ever overlap anything.  (They're just an insertion at a
             // single position, and overlaps can't occur with single-positions).
             Debug.Assert(IsPureInsertion(change));
@@ -220,7 +226,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             TextChange change,
             in TemporaryArray<TextChange> overlappingSpans,
             in TemporaryArray<TextChange> intersectingSpans
-        ) {
+        )
+        {
             Debug.Assert(!IsPureInsertion(change));
 
             return !OverwriteChangeConflictsWithOverlappingSpans(change, in overlappingSpans)
@@ -230,7 +237,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         private static bool OverwriteChangeConflictsWithOverlappingSpans(
             TextChange change,
             in TemporaryArray<TextChange> overlappingSpans
-        ) {
+        )
+        {
             Debug.Assert(!IsPureInsertion(change));
 
             if (overlappingSpans.Count == 0)
@@ -250,7 +258,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         private static bool OverwriteChangeConflictsWithIntersectingSpans(
             TextChange change,
             in TemporaryArray<TextChange> intersectingSpans
-        ) {
+        )
+        {
             Debug.Assert(!IsPureInsertion(change));
 
             // We care about our intersections with pure-insertion changes.  Overwrite-changes that

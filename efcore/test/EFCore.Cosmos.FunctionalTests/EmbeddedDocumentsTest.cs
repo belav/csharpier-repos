@@ -560,7 +560,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
                 Action<ModelBuilder> onModelCreating = null,
                 object additionalModelCacheKey = null,
                 bool seed = true
-            ) {
+            )
+            {
                 OnModelCreatingAction = onModelCreating;
                 AdditionalModelCacheKey = additionalModelCacheKey;
                 var options = CreateOptions(TestStore);

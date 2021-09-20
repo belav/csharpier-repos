@@ -13,7 +13,8 @@ static unsafe class CopyCtor
     public static unsafe int StructWithCtorTest(
         StructWithCtor* ptrStruct,
         ref StructWithCtor refStruct
-    ) {
+    )
+    {
         if (ptrStruct->_instanceField != 1)
             return 1;
         if (refStruct._instanceField != 2)

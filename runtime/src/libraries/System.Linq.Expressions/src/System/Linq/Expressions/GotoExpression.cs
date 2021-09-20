@@ -40,7 +40,8 @@ namespace System.Linq.Expressions
             LabelTarget target,
             Expression? value,
             Type type
-        ) {
+        )
+        {
             Kind = kind;
             Value = value;
             Target = target;
@@ -339,7 +340,8 @@ namespace System.Linq.Expressions
             LabelTarget target,
             Expression? value,
             Type type
-        ) {
+        )
+        {
             ValidateGoto(target, ref value, nameof(target), nameof(value), type);
             return new GotoExpression(kind, target, value, type);
         }
@@ -350,7 +352,8 @@ namespace System.Linq.Expressions
             string targetParameter,
             string valueParameter,
             Type? type
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(target, targetParameter);
             if (value == null)
             {
@@ -373,7 +376,8 @@ namespace System.Linq.Expressions
             Type expectedType,
             ref Expression value,
             string paramName
-        ) {
+        )
+        {
             ExpressionUtils.RequiresCanRead(value, paramName);
             if (expectedType != typeof(void))
             {

@@ -1187,7 +1187,8 @@ class Query
             string typeViewName,
             string name,
             TypeSymbol propType
-        ) {
+        )
+        {
             PropertySymbol property = this.GetMemberByName<PropertySymbol>(type, name);
             Assert.NotNull(property);
             Assert.Equal(propType, property.Type);
@@ -1217,7 +1218,8 @@ class Query
             string retType,
             bool isVirtualAndOverride = false,
             AttributeInfo attr = null
-        ) {
+        )
+        {
             Assert.NotNull(method);
             Assert.Equal(signature, method.ToDisplayString());
             Assert.Equal(Accessibility.Public, method.DeclaredAccessibility);

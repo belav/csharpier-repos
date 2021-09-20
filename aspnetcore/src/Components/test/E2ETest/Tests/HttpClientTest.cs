@@ -147,7 +147,8 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             string requestMethod,
             string relativeUri,
             string requestBody = null
-        ) {
+        )
+        {
             var targetUri = new Uri(_apiServerFixture.RootUri, relativeUri);
             SetValue("request-uri", targetUri.AbsoluteUri);
             SetValue("request-body", requestBody ?? string.Empty);

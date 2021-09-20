@@ -40,7 +40,8 @@ namespace Microsoft.EntityFrameworkCore.Utilities
             this IDictionary<TKey, TValue> source,
             Func<TKey, TValue, TState?, bool> predicate,
             TState? state
-        ) {
+        )
+        {
             var found = false;
             var firstRemovedKey = default(TKey);
             List<KeyValuePair<TKey, TValue>>? pairsRemainder = null;

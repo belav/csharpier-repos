@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
         public ViewLocationCacheResult(
             ViewLocationCacheItem view,
             IReadOnlyList<ViewLocationCacheItem> viewStarts
-        ) {
+        )
+        {
             if (viewStarts == null)
             {
                 throw new ArgumentNullException(nameof(viewStarts));

@@ -362,7 +362,8 @@ namespace System.Security.Cryptography.Xml
                             ,
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         X509KeyUsageExtension keyUsage = new X509KeyUsageExtension();
                         keyUsage.CopyFrom(extension);
                         SignedXmlDebugLog.LogVerifyKeyUsage(this, certificate, keyUsage);
@@ -723,7 +724,8 @@ namespace System.Security.Cryptography.Xml
                         SignedInfo.CanonicalizationMethod,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -765,7 +767,8 @@ namespace System.Security.Cryptography.Xml
                         transformAlgorithm,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -778,7 +781,8 @@ namespace System.Security.Cryptography.Xml
                         transformAlgorithm,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -893,7 +897,8 @@ namespace System.Security.Cryptography.Xml
                 reference.Uri == null
                 || reference.Uri.Length == 0
                 || (reference.Uri.Length > 0 && reference.Uri[0] != '#')
-            ) {
+            )
+            {
                 _refLevelCache[index] = 0;
                 return 0;
             }
@@ -1174,7 +1179,8 @@ namespace System.Security.Cryptography.Xml
             XmlDocument document,
             string idAttributeName,
             string idValue
-        ) {
+        )
+        {
             // idValue has already been tested as an NCName (unless overridden for compatibility), so there's no
             // escaping that needs to be done here.
             string xPath = "//*[@" + idAttributeName + "=\"" + idValue + "\"]";

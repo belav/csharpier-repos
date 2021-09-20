@@ -42,7 +42,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 int propertyCount,
                 PropertyFlag propertyFlag,
                 bool flagged
-            ) {
+            )
+            {
                 for (var i = 0; i < _bits.Length; i++)
                 {
                     if (flagged)

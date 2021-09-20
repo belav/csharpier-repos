@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
             ref TemporaryArray<BlockSpan> spans,
             BlockStructureOptionProvider optionProvider,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             CSharpStructureHelpers.CollectCommentBlockSpans(
                 typeDeclaration,
                 ref spans,
@@ -30,7 +31,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
             if (
                 !typeDeclaration.OpenBraceToken.IsMissing
                 && !typeDeclaration.CloseBraceToken.IsMissing
-            ) {
+            )
+            {
                 var lastToken =
                     typeDeclaration.TypeParameterList == null
                         ? typeDeclaration.Identifier

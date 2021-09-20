@@ -248,7 +248,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         && ((CSharpSyntaxNode)nodeOrToken.AsToken().Node).ContainsSkippedText
                         && nodeOrToken.Parent.ContainsDiagnostics
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -274,7 +275,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         nodeOrToken.IsNode
                         && IsIncomplete((CSharp.CSharpSyntaxNode)nodeOrToken.AsNode())
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 

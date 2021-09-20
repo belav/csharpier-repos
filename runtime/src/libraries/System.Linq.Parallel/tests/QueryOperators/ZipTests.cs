@@ -36,7 +36,8 @@ namespace System.Linq.Parallel.Tests
                     (left, right) => left,
                     counts
                 )
-            ) {
+            )
+            {
                 yield return new object[]
                 {
                     ((Labeled<ParallelQuery<int>>)parms[0]).Order(),
@@ -116,7 +117,8 @@ namespace System.Linq.Parallel.Tests
             int leftCount,
             Labeled<ParallelQuery<int>> right,
             int rightCount
-        ) {
+        )
+        {
             // The ordering of Zip is only guaranteed when both operands are ordered,
             // however the current implementation manages to perform ordering if either operand is ordered _in most cases_.
             // If this test starts failing, consider revising the operators and mention the change in release notes.
@@ -145,7 +147,8 @@ namespace System.Linq.Parallel.Tests
             int leftCount,
             Labeled<ParallelQuery<int>> right,
             int rightCount
-        ) {
+        )
+        {
             Zip(left, leftCount, right, rightCount);
         }
 
@@ -195,7 +198,8 @@ namespace System.Linq.Parallel.Tests
             int leftCount,
             Labeled<ParallelQuery<int>> right,
             int rightCount
-        ) {
+        )
+        {
             // The ordering of Zip is only guaranteed when both operands are ordered,
             // however the current implementation manages to perform ordering if either operand is ordered _in most cases_.
             // If this test starts failing, consider revising the operators and mention the change in release notes.
@@ -227,7 +231,8 @@ namespace System.Linq.Parallel.Tests
             int leftCount,
             Labeled<ParallelQuery<int>> right,
             int rightCount
-        ) {
+        )
+        {
             Zip_NotPipelined(left, leftCount, right, rightCount);
         }
 
@@ -246,7 +251,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> right,
             int rightCount,
             int degree
-        ) {
+        )
+        {
             _ = leftCount;
             _ = rightCount;
             ParallelQuery<int> query = left.Item.WithDegreeOfParallelism(degree)

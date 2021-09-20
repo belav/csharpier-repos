@@ -90,7 +90,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
         [InlineData(AuthenticationSchemes.Basic)]
         public async Task AuthType_AllowAnonymousButSpecify401_ChallengesAdded(
             AuthenticationSchemes authType
-        ) {
+        )
+        {
             using var baseServer = Utilities.CreateHttpAuthServer(
                 authType,
                 AllowAnoymous,
@@ -170,7 +171,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
         )]
         public async Task AuthTypes_AllowAnonymousButSpecify401_Success(
             AuthenticationSchemes authType
-        ) {
+        )
+        {
             using var baseServer = Utilities.CreateHttpAuthServer(
                 authType,
                 AllowAnoymous,
@@ -246,7 +248,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
         private async Task<HttpResponseMessage> SendRequestAsync(
             string uri,
             bool useDefaultCredentials = false
-        ) {
+        )
+        {
             HttpClientHandler handler = new HttpClientHandler();
             handler.UseDefaultCredentials = useDefaultCredentials;
             using HttpClient client = new HttpClient(handler) { Timeout = TimeSpan.FromSeconds(5) };

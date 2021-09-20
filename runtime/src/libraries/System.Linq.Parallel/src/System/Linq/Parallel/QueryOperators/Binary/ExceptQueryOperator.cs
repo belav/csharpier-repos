@@ -43,7 +43,8 @@ namespace System.Linq.Parallel
         internal override QueryResults<TInputOutput> Open(
             QuerySettings settings,
             bool preferStriping
-        ) {
+        )
+        {
             // We just open our child operators, left and then right.  Do not propagate the preferStriping value, but
             // instead explicitly set it to false. Regardless of whether the parent prefers striping or range
             // partitioning, the output will be hash-partitioned.
@@ -65,7 +66,8 @@ namespace System.Linq.Parallel
             IPartitionedStreamRecipient<TInputOutput> outputRecipient,
             bool preferStriping,
             QuerySettings settings
-        ) {
+        )
+        {
             Debug.Assert(leftStream.PartitionCount == rightStream.PartitionCount);
 
             if (OutputOrdered)
@@ -121,7 +123,8 @@ namespace System.Linq.Parallel
             PartitionedStream<TInputOutput, TRightKey> rightPartitionedStream,
             IPartitionedStreamRecipient<TInputOutput> outputRecipient,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             int partitionCount = leftHashStream.PartitionCount;
 
             PartitionedStream<Pair<TInputOutput, NoKeyMemoizationRequired>, int> rightHashStream =
@@ -230,7 +233,8 @@ namespace System.Linq.Parallel
                 > rightSource,
                 IEqualityComparer<TInputOutput>? comparer,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Debug.Assert(leftSource != null);
                 Debug.Assert(rightSource != null);
 
@@ -247,7 +251,8 @@ namespace System.Linq.Parallel
             internal override bool MoveNext(
                 [MaybeNullWhen(false), AllowNull] ref TInputOutput currentElement,
                 ref int currentKey
-            ) {
+            )
+            {
                 Debug.Assert(_leftSource != null);
                 Debug.Assert(_rightSource != null);
 
@@ -344,7 +349,8 @@ namespace System.Linq.Parallel
                 IEqualityComparer<TInputOutput>? comparer,
                 IComparer<TLeftKey> leftKeyComparer,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Debug.Assert(leftSource != null);
                 Debug.Assert(rightSource != null);
 
@@ -362,7 +368,8 @@ namespace System.Linq.Parallel
             internal override bool MoveNext(
                 [MaybeNullWhen(false), AllowNull] ref TInputOutput currentElement,
                 [AllowNull] ref TLeftKey currentKey
-            ) {
+            )
+            {
                 Debug.Assert(_leftSource != null);
                 Debug.Assert(_rightSource != null);
 
@@ -412,7 +419,8 @@ namespace System.Linq.Parallel
                         if (
                             !leftLookup.TryGetValue(wrappedLeftElement, out oldEntry)
                             || _leftKeyComparer.Compare(leftKey, oldEntry.Second) < 0
-                        ) {
+                        )
+                        {
                             // For each "elem" value, we store the smallest key, and the element value that had that key.
                             // Note that even though two element values are "equal" according to the EqualityComparer,
                             // we still cannot choose arbitrarily which of the two to yield.

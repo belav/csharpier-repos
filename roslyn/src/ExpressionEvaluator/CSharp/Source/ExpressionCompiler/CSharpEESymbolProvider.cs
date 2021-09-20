@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             SourceAssemblySymbol sourceAssembly,
             PEModuleSymbol module,
             PEMethodSymbol method
-        ) {
+        )
+        {
             _metadataDecoder = new MetadataDecoder(module, method);
             _sourceAssembly = sourceAssembly;
             _method = method;
@@ -34,7 +35,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             LocalInfo<TypeSymbol> info,
             ImmutableArray<bool> dynamicFlagsOpt,
             ImmutableArray<string?> tupleElementNamesOpt
-        ) {
+        )
+        {
             var isPinned = info.IsPinned;
 
             LocalDeclarationKind kind;
@@ -82,7 +84,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             ConstantValue value,
             ImmutableArray<bool> dynamicFlagsOpt,
             ImmutableArray<string?> tupleElementNamesOpt
-        ) {
+        )
+        {
             type = IncludeDynamicAndTupleElementNamesIfAny(
                 type,
                 RefKind.None,
@@ -110,14 +113,16 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             ref BlobReader reader,
             out TypeSymbol type,
             out ConstantValue value
-        ) {
+        )
+        {
             _metadataDecoder.DecodeLocalConstantBlobOrThrow(ref reader, out type, out value);
         }
 
         /// <exception cref="BadImageFormatException"></exception>
         public override IAssemblySymbolInternal GetReferencedAssembly(
             AssemblyReferenceHandle handle
-        ) {
+        )
+        {
             int index = _metadataDecoder.Module.GetAssemblyReferenceIndexOrThrow(handle);
             var assembly = _metadataDecoder.ModuleSymbol.GetReferencedAssemblySymbol(index);
             if (assembly == null)
@@ -144,7 +149,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             RefKind refKind,
             ImmutableArray<bool> dynamicFlagsOpt,
             ImmutableArray<string?> tupleElementNamesOpt
-        ) {
+        )
+        {
             if (!dynamicFlagsOpt.IsDefault)
             {
                 type = DynamicTypeDecoder.TransformTypeWithoutCustomModifierFlags(

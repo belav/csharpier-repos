@@ -758,7 +758,8 @@ internal static partial class Interop
             HTTP_REQUEST* request,
             long fixup,
             int headerIndex
-        ) {
+        )
+        {
             string? header = null;
 
             HTTP_KNOWN_HEADER* pKnownHeader = (&request->Headers.KnownHeaders) + headerIndex;
@@ -801,7 +802,8 @@ internal static partial class Interop
             if (
                 (int)request->Verb > (int)HTTP_VERB.HttpVerbUnknown
                 && (int)request->Verb < (int)HTTP_VERB.HttpVerbMaximum
-            ) {
+            )
+            {
                 verb = HttpVerbs[(int)request->Verb];
             }
             else if (request->Verb == HTTP_VERB.HttpVerbUnknown && request->pUnknownVerb != null)
@@ -830,7 +832,8 @@ internal static partial class Interop
         internal static unsafe WebHeaderCollection GetHeaders(
             IntPtr memoryBlob,
             IntPtr originalAddress
-        ) {
+        )
+        {
             // Return value.
             WebHeaderCollection headerCollection = new WebHeaderCollection();
             byte* pMemoryBlob = (byte*)memoryBlob;
@@ -903,7 +906,8 @@ internal static partial class Interop
             byte[] buffer,
             int offset,
             int size
-        ) {
+        )
+        {
             // Return value.
             uint dataRead = 0;
             byte* pMemoryBlob = (byte*)memoryBlob;
@@ -914,7 +918,8 @@ internal static partial class Interop
                 request->EntityChunkCount > 0
                 && dataChunkIndex < request->EntityChunkCount
                 && dataChunkIndex != -1
-            ) {
+            )
+            {
                 HTTP_DATA_CHUNK* pDataChunk = (HTTP_DATA_CHUNK*)(
                     fixup + (byte*)&request->pEntityChunks[dataChunkIndex]
                 );
@@ -968,7 +973,8 @@ internal static partial class Interop
             if (
                 (int)request->Verb > (int)HTTP_VERB.HttpVerbUnparsed
                 && (int)request->Verb < (int)HTTP_VERB.HttpVerbMaximum
-            ) {
+            )
+            {
                 verb = request->Verb;
             }
 
@@ -978,7 +984,8 @@ internal static partial class Interop
         internal static unsafe IPEndPoint? GetRemoteEndPoint(
             IntPtr memoryBlob,
             IntPtr originalAddress
-        ) {
+        )
+        {
             SocketAddress? v4address = new SocketAddress(
                 AddressFamily.InterNetwork,
                 IPv4AddressSize
@@ -1019,7 +1026,8 @@ internal static partial class Interop
         internal static unsafe IPEndPoint? GetLocalEndPoint(
             IntPtr memoryBlob,
             IntPtr originalAddress
-        ) {
+        )
+        {
             SocketAddress? v4address = new SocketAddress(
                 AddressFamily.InterNetwork,
                 IPv4AddressSize
@@ -1057,7 +1065,8 @@ internal static partial class Interop
             IntPtr address,
             ref SocketAddress? v4address,
             ref SocketAddress? v6address
-        ) {
+        )
+        {
             if (address != IntPtr.Zero)
             {
                 ushort addressFamily = *((ushort*)address);

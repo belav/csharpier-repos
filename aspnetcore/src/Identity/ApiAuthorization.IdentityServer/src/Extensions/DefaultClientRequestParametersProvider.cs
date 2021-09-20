@@ -15,7 +15,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
         public DefaultClientRequestParametersProvider(
             IAbsoluteUrlFactory urlFactory,
             IOptions<ApiAuthorizationOptions> options
-        ) {
+        )
+        {
             UrlFactory = urlFactory;
             Options = options;
         }
@@ -34,7 +35,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
                     ApplicationProfilesPropertyNames.Profile,
                     out var type
                 )
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     $"Can't determine the type for the client '{clientId}'"
                 );

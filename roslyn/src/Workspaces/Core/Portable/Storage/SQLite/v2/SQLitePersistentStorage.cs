@@ -80,7 +80,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
             string solutionFilePath,
             string databaseFile,
             IPersistentStorageFaultInjector? faultInjector
-        ) {
+        )
+        {
             var sqlStorage = new SQLitePersistentStorage(
                 connectionPoolService,
                 workingFolderPath,
@@ -129,7 +130,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
         private static void Initialize(
             SqlConnection connection,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (cancellationToken.IsCancellationRequested)
             {
                 // Someone tried to get a connection *after* a call to Dispose the storage system

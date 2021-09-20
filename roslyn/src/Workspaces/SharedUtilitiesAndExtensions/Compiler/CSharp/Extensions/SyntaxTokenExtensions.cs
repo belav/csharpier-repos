@@ -50,7 +50,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             SyntaxKind kind1,
             SyntaxKind kind2,
             SyntaxKind kind3
-        ) {
+        )
+        {
             return token.Kind() == kind1 || token.Kind() == kind2 || token.Kind() == kind3;
         }
 
@@ -60,7 +61,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             SyntaxKind kind2,
             SyntaxKind kind3,
             SyntaxKind kind4
-        ) {
+        )
+        {
             return token.Kind() == kind1
                 || token.Kind() == kind2
                 || token.Kind() == kind3
@@ -74,7 +76,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             SyntaxKind kind3,
             SyntaxKind kind4,
             SyntaxKind kind5
-        ) {
+        )
+        {
             return token.Kind() == kind1
                 || token.Kind() == kind2
                 || token.Kind() == kind3
@@ -140,7 +143,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         public static SyntaxToken GetPreviousTokenIfTouchingWord(
             this SyntaxToken token,
             int position
-        ) {
+        )
+        {
             return token.IntersectsWith(position) && IsWord(token)
               ? token.GetPreviousToken(includeSkipped: true)
               : token;

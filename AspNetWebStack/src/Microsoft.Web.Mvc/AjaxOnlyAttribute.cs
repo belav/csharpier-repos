@@ -13,7 +13,8 @@ namespace Microsoft.Web.Mvc
         public override bool IsValidForRequest(
             ControllerContext controllerContext,
             MethodInfo methodInfo
-        ) {
+        )
+        {
             if (controllerContext == null)
             {
                 throw new ArgumentNullException("controllerContext");

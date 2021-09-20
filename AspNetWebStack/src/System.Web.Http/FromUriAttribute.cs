@@ -16,7 +16,8 @@ namespace System.Web.Http
     {
         public override IEnumerable<ValueProviderFactory> GetValueProviderFactories(
             HttpConfiguration configuration
-        ) {
+        )
+        {
             if (configuration == null)
             {
                 throw Error.ArgumentNull("configuration");

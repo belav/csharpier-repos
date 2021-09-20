@@ -53,7 +53,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             GeneratedLabelSymbol breakLabel,
             GeneratedLabelSymbol continueLabel,
             bool hasErrors
-        ) {
+        )
+        {
             Debug.Assert(
                 original.Kind == BoundKind.ForStatement
                     || original.Kind == BoundKind.ForEachStatement
@@ -192,7 +193,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression? rewrittenCondition,
             BoundStatement? rewrittenIncrement,
             BoundStatement rewrittenBody
-        ) {
+        )
+        {
             if (node.InnerLocals.IsEmpty)
             {
                 return RewriteForStatementWithoutInnerLocals(

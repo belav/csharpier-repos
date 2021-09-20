@@ -44,7 +44,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
             Span<byte> destination,
             uint value,
             bool preserveHighestBit
-        ) {
+        )
+        {
             Debug.Assert(value <= 0x7F_FF_FF_FF, value.ToString(CultureInfo.InvariantCulture));
 
             if (preserveHighestBit)

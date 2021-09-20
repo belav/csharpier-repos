@@ -79,7 +79,8 @@ namespace System.Runtime.InteropServices
             object rcw,
             Guid sourceIid,
             bool createIfNotFound
-        ) {
+        )
+        {
             List<ComEventsSink> comEventSinks = ComEventSinksContainer.FromRuntimeCallableWrapper(
                 rcw,
                 createIfNotFound

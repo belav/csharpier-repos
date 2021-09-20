@@ -54,7 +54,8 @@ namespace System.Security.Cryptography
                 ReadOnlySpan<byte> source,
                 Span<byte> destination,
                 out int bytesWritten
-            ) {
+            )
+            {
                 return TrySignHashCore(
                     source,
                     destination,
@@ -68,13 +69,15 @@ namespace System.Security.Cryptography
                 Span<byte> destination,
                 DSASignatureFormat signatureFormat,
                 out int bytesWritten
-            ) {
+            )
+            {
 #else
         public override unsafe bool TrySignHash(
             ReadOnlySpan<byte> source,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             ReadOnlySpan<byte> hash = source;
 #endif
                 using (SafeNCryptKeyHandle keyHandle = GetDuplicatedKeyHandle())
@@ -87,7 +90,8 @@ namespace System.Security.Cryptography
                             null,
                             out bytesWritten
                         )
-                    ) {
+                    )
+                    {
                         bytesWritten = 0;
                         return false;
                     }

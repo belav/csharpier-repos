@@ -65,7 +65,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             string migrationName,
             IReadOnlyList<MigrationOperation> upOperations,
             IReadOnlyList<MigrationOperation> downOperations
-        ) {
+        )
+        {
             Check.NotEmpty(migrationName, nameof(migrationName));
             Check.NotNull(upOperations, nameof(upOperations));
             Check.NotNull(downOperations, nameof(downOperations));
@@ -151,7 +152,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             string migrationName,
             string migrationId,
             IModel targetModel
-        ) {
+        )
+        {
             Check.NotNull(contextType, nameof(contextType));
             Check.NotEmpty(migrationName, nameof(migrationName));
             Check.NotEmpty(migrationId, nameof(migrationId));
@@ -247,7 +249,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             Type contextType,
             string modelSnapshotName,
             IModel model
-        ) {
+        )
+        {
             Check.NotEmpty(modelSnapshotNamespace, nameof(modelSnapshotNamespace));
             Check.NotNull(contextType, nameof(contextType));
             Check.NotEmpty(modelSnapshotName, nameof(modelSnapshotName));

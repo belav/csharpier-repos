@@ -62,7 +62,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             ShapedQueryExpression source,
             LambdaExpression keySelector,
             bool ascending
-        ) {
+        )
+        {
             Check.NotNull(source, nameof(source));
             Check.NotNull(keySelector, nameof(keySelector));
 
@@ -81,7 +82,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                 || orderingExpressionType == typeof(decimal)
                 || orderingExpressionType == typeof(TimeSpan)
                 || orderingExpressionType == typeof(ulong)
-            ) {
+            )
+            {
                 throw new NotSupportedException(
                     SqliteStrings.OrderByNotSupported(orderingExpressionType.ShortDisplayName())
                 );
@@ -100,7 +102,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             ShapedQueryExpression source,
             LambdaExpression keySelector,
             bool ascending
-        ) {
+        )
+        {
             Check.NotNull(source, nameof(source));
             Check.NotNull(keySelector, nameof(keySelector));
 
@@ -119,7 +122,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                 || orderingExpressionType == typeof(decimal)
                 || orderingExpressionType == typeof(TimeSpan)
                 || orderingExpressionType == typeof(ulong)
-            ) {
+            )
+            {
                 throw new NotSupportedException(
                     SqliteStrings.OrderByNotSupported(orderingExpressionType.ShortDisplayName())
                 );

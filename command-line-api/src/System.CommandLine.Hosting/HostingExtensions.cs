@@ -70,7 +70,8 @@ namespace System.CommandLine.Hosting
             this IHostBuilder host,
             InvocationContext invocation,
             Action<InvocationLifetimeOptions> configureOptions = null
-        ) {
+        )
+        {
             return host.ConfigureServices(
                 services =>
                 {
@@ -111,7 +112,8 @@ namespace System.CommandLine.Hosting
             this IHostBuilder builder,
             Type commandType,
             Type handlerType
-        ) {
+        )
+        {
             if (!typeof(Command).IsAssignableFrom(commandType))
             {
                 throw new ArgumentException(
@@ -132,7 +134,8 @@ namespace System.CommandLine.Hosting
                 builder.Properties[typeof(InvocationContext)] is InvocationContext invocation
                 && invocation.ParseResult.CommandResult.Command is Command command
                 && command.GetType() == commandType
-            ) {
+            )
+            {
                 invocation.BindingContext.AddService(
                     handlerType,
                     c => c.GetService<IHost>().Services.GetService(handlerType)

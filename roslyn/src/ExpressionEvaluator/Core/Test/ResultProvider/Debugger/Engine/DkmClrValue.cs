@@ -40,7 +40,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
             DkmEvaluationResultCategory category = default(DkmEvaluationResultCategory),
             DkmEvaluationResultAccessType access = default(DkmEvaluationResultAccessType),
             ulong nativeComPointer = 0
-        ) {
+        )
+        {
             Debug.Assert(
                 (type == null)
                     || !type.GetLmrType().IsTypeVariables()
@@ -158,7 +159,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
         public string GetValueString(
             DkmInspectionContext inspectionContext,
             ReadOnlyCollection<string> formatSpecifiers
-        ) {
+        )
+        {
             if (inspectionContext == null)
             {
                 throw new ArgumentNullException(nameof(inspectionContext));
@@ -208,7 +210,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
             string ResultName,
             string ResultFullName,
             DkmCompletionRoutine<DkmEvaluationAsyncResult> CompletionRoutine
-        ) {
+        )
+        {
             InspectionContext.InspectionSession.InvokeResultProvider(
                 this,
                 MethodId.GetResult,
@@ -256,7 +259,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
                             BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly
                         )
                         .Any(m => m.Name == "ToString")
-                ) {
+                )
+                {
                     break;
                 }
 
@@ -280,7 +284,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
             DkmClrType targetType,
             string formatString,
             DkmCompletionRoutine<DkmEvaluateDebuggerDisplayStringAsyncResult> completionRoutine
-        ) {
+        )
+        {
             Debug.Assert(!this.IsNull, "Not supported by VIL");
 
             if (inspectionContext == null)
@@ -474,7 +479,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
             int MemberType,
             string ParentTypeName,
             DkmInspectionContext InspectionContext
-        ) {
+        )
+        {
             if (InspectionContext == null)
             {
                 throw new ArgumentNullException(nameof(InspectionContext));
@@ -565,7 +571,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
                     if (
                         field.Attributes.HasFlag(System.Reflection.FieldAttributes.Literal)
                         || field.Attributes.HasFlag(System.Reflection.FieldAttributes.InitOnly)
-                    ) {
+                    )
+                    {
                         evalFlags |= DkmEvaluationResultFlags.ReadOnly;
                     }
                     try
@@ -727,7 +734,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
         public DkmClrValue InstantiateProxyType(
             DkmInspectionContext inspectionContext,
             DkmClrType proxyType
-        ) {
+        )
+        {
             if (inspectionContext == null)
             {
                 throw new ArgumentNullException(nameof(inspectionContext));
@@ -776,7 +784,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
         public DkmClrValue InstantiateResultsViewProxy(
             DkmInspectionContext inspectionContext,
             DkmClrType enumerableType
-        ) {
+        )
+        {
             if (EvalFlags.Includes(DkmEvaluationResultFlags.ExceptionThrown))
             {
                 throw new InvalidOperationException();
@@ -890,7 +899,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
 
         private static DkmEvaluationResultAccessType GetFieldAccess(
             Microsoft.VisualStudio.Debugger.Metadata.FieldInfo field
-        ) {
+        )
+        {
             if (field.IsPrivate)
             {
                 return DkmEvaluationResultAccessType.Private;
@@ -911,13 +921,15 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
 
         private static DkmEvaluationResultAccessType GetPropertyAccess(
             Microsoft.VisualStudio.Debugger.Metadata.PropertyInfo property
-        ) {
+        )
+        {
             return GetMethodAccess(property.GetGetMethod(nonPublic: true));
         }
 
         private static DkmEvaluationResultAccessType GetMethodAccess(
             Microsoft.VisualStudio.Debugger.Metadata.MethodBase method
-        ) {
+        )
+        {
             if (method.IsPrivate)
             {
                 return DkmEvaluationResultAccessType.Private;

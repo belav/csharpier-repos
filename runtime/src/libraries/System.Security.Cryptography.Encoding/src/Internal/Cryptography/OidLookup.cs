@@ -24,7 +24,8 @@ namespace Internal.Cryptography
             string oid,
             OidGroup oidGroup,
             bool fallBackToAllGroups
-        ) {
+        )
+        {
             if (oid == null)
                 throw new ArgumentNullException(nameof(oid));
 
@@ -42,7 +43,8 @@ namespace Internal.Cryptography
                     s_oidToFriendlyName.TryGetValue(oid, out mappedName)
                     || s_compatOids.TryGetValue(oid, out mappedName)
                     || s_lateBoundOidToFriendlyName.TryGetValue(oid, out mappedName)
-                ) {
+                )
+                {
                     return mappedName;
                 }
             }
@@ -66,7 +68,8 @@ namespace Internal.Cryptography
             string friendlyName,
             OidGroup oidGroup,
             bool fallBackToAllGroups
-        ) {
+        )
+        {
             if (friendlyName == null)
                 throw new ArgumentNullException(nameof(friendlyName));
             if (friendlyName.Length == 0)
@@ -80,7 +83,8 @@ namespace Internal.Cryptography
                 if (
                     s_friendlyNameToOid.TryGetValue(friendlyName, out mappedOid)
                     || s_lateBoundFriendlyNameToOid.TryGetValue(friendlyName, out mappedOid)
-                ) {
+                )
+                {
                     return mappedOid;
                 }
             }
@@ -162,7 +166,8 @@ namespace Internal.Cryptography
                 string oid,
                 string primaryFriendlyName,
                 string[]? additionalFriendlyNames = null
-            ) {
+            )
+            {
                 s_oidToFriendlyName.Add(oid, primaryFriendlyName);
                 s_friendlyNameToOid.Add(primaryFriendlyName, oid);
 

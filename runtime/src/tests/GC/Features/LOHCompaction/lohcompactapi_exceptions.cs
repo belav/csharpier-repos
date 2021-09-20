@@ -21,7 +21,8 @@ namespace LOHCompactAPI
                 if (
                     (GCLargeObjectHeapCompactionMode)(i)
                     == GCLargeObjectHeapCompactionMode.CompactOnce
-                ) {
+                )
+                {
                     Console.WriteLine("CompactOnce");
                     continue;
                 }

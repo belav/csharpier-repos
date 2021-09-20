@@ -43,7 +43,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessForeignKeyAdded(
             IConventionForeignKeyBuilder relationshipBuilder,
             IConventionContext<IConventionForeignKeyBuilder> context
-        ) {
+        )
+        {
             var foreignKey = relationshipBuilder.Metadata;
             if (!foreignKey.IsBaseLinking())
             {
@@ -64,7 +65,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionEntityTypeBuilder entityTypeBuilder,
             IConventionForeignKey foreignKey,
             IConventionContext<IConventionForeignKey> context
-        ) {
+        )
+        {
             OnForeignKeyRemoved(foreignKey.Properties);
         }
 
@@ -80,7 +82,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IReadOnlyList<IConventionProperty> oldDependentProperties,
             IConventionKey oldPrincipalKey,
             IConventionContext<IReadOnlyList<IConventionProperty>> context
-        ) {
+        )
+        {
             var foreignKey = relationshipBuilder.Metadata;
             if (!foreignKey.Properties.SequenceEqual(oldDependentProperties))
             {
@@ -130,7 +133,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionKey? newPrimaryKey,
             IConventionKey? previousPrimaryKey,
             IConventionContext<IConventionKey> context
-        ) {
+        )
+        {
             if (previousPrimaryKey != null)
             {
                 foreach (var property in previousPrimaryKey.Properties)
@@ -163,7 +167,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionEntityType? newBaseType,
             IConventionEntityType? oldBaseType,
             IConventionContext<IConventionEntityType> context
-        ) {
+        )
+        {
             if (entityTypeBuilder.Metadata.BaseType != newBaseType)
             {
                 return;
@@ -224,10 +229,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessForeignKeyOwnershipChanged(
             IConventionForeignKeyBuilder relationshipBuilder,
             IConventionContext<bool?> context
-        ) {
+        )
+        {
             foreach (
                 var property in relationshipBuilder.Metadata.DeclaringEntityType.GetProperties()
-            ) {
+            )
+            {
                 property.Builder.ValueGenerated(GetValueGenerated(property));
             }
         }

@@ -40,7 +40,8 @@ namespace System.Speech.Internal.Synthesis
         public void AddEvents(
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] SpeechEventInfo[] events,
             int ulCount
-        ) {
+        )
+        {
             try
             {
                 foreach (SpeechEventInfo sapiEvent in events)
@@ -50,7 +51,8 @@ namespace System.Speech.Internal.Synthesis
                     if (
                         sapiEvent.EventId == (short)TtsEventId.EndInputStream
                         && _eventMapper != null
-                    ) {
+                    )
+                    {
                         _eventMapper.FlushEvent();
                     }
 
@@ -169,7 +171,8 @@ namespace System.Speech.Internal.Synthesis
                         out baseUriUnused,
                         out localPath
                     )
-                ) {
+                )
+                {
                     // Read the file in memory for SES and release the original file immediately
                     // This scheme is really bad if the files being read are big but I would assume
                     // That it should not be the case.
@@ -421,13 +424,15 @@ namespace System.Speech.Internal.Synthesis
                             prefix,
                             _conversion == PhonemeConversion.SapiToIpa
                         )
-                    ) {
+                    )
+                    {
                         if (
                             _alphabetConverter.IsConvertibleUnit(
                                 prefix,
                                 _conversion == PhonemeConversion.SapiToIpa
                             )
-                        ) {
+                        )
+                        {
                             _lastComplete = prefixSeek;
                         }
                         prefixSeek++;

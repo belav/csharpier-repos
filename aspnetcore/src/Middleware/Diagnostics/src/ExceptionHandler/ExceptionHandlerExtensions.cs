@@ -39,7 +39,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IApplicationBuilder UseExceptionHandler(
             this IApplicationBuilder app,
             string errorHandlingPath
-        ) {
+        )
+        {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));
@@ -63,7 +64,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IApplicationBuilder UseExceptionHandler(
             this IApplicationBuilder app,
             Action<IApplicationBuilder> configure
-        ) {
+        )
+        {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));
@@ -92,7 +94,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IApplicationBuilder UseExceptionHandler(
             this IApplicationBuilder app,
             ExceptionHandlerOptions options
-        ) {
+        )
+        {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));

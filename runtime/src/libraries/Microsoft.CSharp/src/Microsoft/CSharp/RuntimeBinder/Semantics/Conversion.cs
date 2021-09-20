@@ -340,7 +340,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             if (
                 ptSrc == ptDst
                 || ptDst == PredefinedType.PT_OBJECT && ptSrc < PredefinedType.PT_COUNT
-            ) {
+            )
+            {
                 return ConvKind.Implicit;
             }
             if (ptSrc == PredefinedType.PT_OBJECT && ptDst < PredefinedType.PT_COUNT)
@@ -774,7 +775,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             PredefinedType pt1,
             PredefinedType pt2,
             CType typeGiven
-        ) {
+        )
+        {
             if (pt1 == pt2)
             {
                 return BetterType.Same;
@@ -836,7 +838,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 || !(type2 is NullableType nub2)
                 || !nub1.UnderlyingType.IsPredefined
                 || !nub2.UnderlyingType.IsPredefined
-            ) {
+            )
+            {
                 return BetterType.Neither;
             }
 
@@ -900,7 +903,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         ftSrc == FUNDTYPE.FT_I4
                         && (ftDest <= FUNDTYPE.FT_LASTNONLONG || ftDest == FUNDTYPE.FT_U8)
                     ) || (ftSrc == FUNDTYPE.FT_I8 && ftDest == FUNDTYPE.FT_U8)
-                ) {
+                )
+                {
                     // Failed because value was out of range. Report nifty error message.
                     string value = constant.Int64Value.ToString(CultureInfo.InvariantCulture);
                     throw ErrorHandling.Error(ErrorCode.ERR_ConstOutOfRange, value, dest);
@@ -1010,7 +1014,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                             dest,
                             flags | CONVERTTYPE.NOUDC
                         )
-                    ) {
+                    )
+                    {
                         throw CantConvert(expr, dest);
                     }
 
@@ -1092,7 +1097,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             CType pSourceType,
             CType destinationType,
             CONVERTTYPE flags
-        ) {
+        )
+        {
             ImplicitConversion binder = new ImplicitConversion(
                 this,
                 pSourceExpr,
@@ -1111,7 +1117,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             CType destinationType,
             out Expr ppDestinationExpr,
             CONVERTTYPE flags
-        ) {
+        )
+        {
             ImplicitConversion binder = new ImplicitConversion(
                 this,
                 pSourceExpr,
@@ -1133,7 +1140,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             bool needsExprDest,
             out Expr ppDestinationExpr,
             CONVERTTYPE flags
-        ) {
+        )
+        {
             ImplicitConversion binder = new ImplicitConversion(
                 this,
                 pSourceExpr,
@@ -1155,7 +1163,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             bool needsExprDest,
             out Expr ppDestinationExpr,
             CONVERTTYPE flags
-        ) {
+        )
+        {
             ExplicitConversion binder = new ExplicitConversion(
                 this,
                 pSourceExpr,
@@ -1176,7 +1185,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             CType destinationType,
             out Expr ppDestinationExpr,
             CONVERTTYPE flags
-        ) {
+        )
+        {
             ExplicitConversion binder = new ExplicitConversion(
                 this,
                 pSourceExpr,
@@ -1196,7 +1206,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             CType pSourceType,
             CType destinationType,
             CONVERTTYPE flags
-        ) {
+        )
+        {
             ExplicitConversion binder = new ExplicitConversion(
                 this,
                 pSourceExpr,
@@ -1256,7 +1267,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             bool needExprDest,
             out Expr pexprDst,
             bool fImplicitOnly
-        ) {
+        )
+        {
             pexprDst = null;
             Debug.Assert(exprSrc == null || exprSrc.Type == typeSrc);
 
@@ -1266,7 +1278,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 || typeDst == null
                 || typeSrc.IsInterfaceType
                 || typeDst.IsInterfaceType
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -1311,7 +1324,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     fIntPtrOverride2
                     && !typeDstBase.IsPredefType(PredefinedType.PT_LONG)
                     && !typeDstBase.IsPredefType(PredefinedType.PT_ULONG)
-                ) {
+                )
+                {
                     fIntPtrOverride2 = false;
                 }
             }
@@ -1342,7 +1356,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     AggregateType atsCur = rgats[iats];
                     atsCur != null && atsCur.OwningAggregate.HasConversion();
                     atsCur = atsCur.BaseClass
-                ) {
+                )
+                {
                     AggregateSymbol aggCur = atsCur.OwningAggregate;
 
                     // We need to replicate behavior that allows non-standard conversions with these guys.
@@ -1360,7 +1375,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         MethodSymbol convCur = aggCur.GetFirstUDConversion();
                         convCur != null;
                         convCur = convCur.ConvNext()
-                    ) {
+                    )
+                    {
                         if (convCur.Params.Count != 1)
                         {
                             // If we have a user-defined conversion that
@@ -1386,7 +1402,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                             fImplicitOrExactSrc
                             && !fNeedImplicit
                             && typeFrom.StripNubs() != typeSrcBase
-                        ) {
+                        )
+                        {
                             if (!convCur.isImplicit())
                                 continue;
                             fNeedImplicit = true;
@@ -1401,7 +1418,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                                 && ftTo > FUNDTYPE.FT_NONE
                                 && (ftFrom = typeFrom.FundamentalType) <= FUNDTYPE.FT_LASTNUMERIC
                                 && ftFrom > FUNDTYPE.FT_NONE
-                            ) {
+                            )
+                            {
                                 continue;
                             }
                         }
@@ -1447,7 +1465,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                                         || !canCast(typeSrc, typeFrom, CONVERTTYPE.NOUDC)
                                     )
                             )
-                        ) {
+                        )
+                        {
                             continue;
                         }
                         bool fToImplicit = canConvert(
@@ -1470,7 +1489,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                                         || !canCast(typeTo, typeDst, CONVERTTYPE.NOUDC)
                                     )
                             )
-                        ) {
+                        )
+                        {
                             continue;
                         }
                         if (IsConvInTable(prguci, convCur, atsCur, fFromImplicit, fToImplicit))
@@ -1812,7 +1832,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             List<UdConvInfo> prguci,
             int iuciBestSrc,
             int iuciBestDst
-        ) {
+        )
+        {
             Debug.Assert(0 <= iuciBestSrc && iuciBestSrc < prguci.Count);
             Debug.Assert(0 <= iuciBestDst && iuciBestDst < prguci.Count);
             return ErrorHandling.Error(
@@ -1863,7 +1884,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             CType pTypeTo,
             CType pTypeDestination,
             MethWithInst mwiBest
-        ) {
+        )
+        {
             Expr ppTransformedArgument;
             return BindUDConversionCore(
                 pFrom,
@@ -1883,7 +1905,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             CType pTypeDestination,
             MethWithInst mwiBest,
             out Expr ppTransformedArgument
-        ) {
+        )
+        {
             Expr pTransformedArgument = mustCastCore(pFrom, pTypeFrom, CONVERTTYPE.NOUDC);
             Debug.Assert(pTransformedArgument != null);
             ExprMemberGroup pMemGroup = ExprFactory.CreateMemGroup(null, mwiBest);
@@ -1910,7 +1933,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             bool needExprDest,
             out Expr pexprDest,
             bool explicitConversion
-        ) {
+        )
+        {
             pexprDest = null;
             long valueInt = 0;
             double valueFlt = 0;
@@ -1943,7 +1967,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 explicitConversion
                 && Context.Checked
                 && !isConstantInRange(constSrc, typeDest, true)
-            ) {
+            )
+            {
                 return ConstCastResult.CheckFailure;
             }
 
@@ -2287,7 +2312,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             CType typeSrc,
             CType typeDest,
             CONVERTTYPE flags
-        ) {
+        )
+        {
             Debug.Assert(typeDest != null);
             return new ExpressionBinder(new BindingContext(Context)).BindExplicitConversion(
                 exprSrc,

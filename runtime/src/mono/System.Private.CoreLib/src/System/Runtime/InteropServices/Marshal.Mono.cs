@@ -59,7 +59,8 @@ namespace System.Runtime.InteropServices
             IntPtr ptr,
             object? structure,
             bool allowValueClasses
-        ) {
+        )
+        {
             if (structure == null)
                 throw new ArgumentNullException(nameof(structure));
             PtrToStructureInternal(ptr, structure, allowValueClasses);
@@ -71,7 +72,8 @@ namespace System.Runtime.InteropServices
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
             )]
                 Type structureType
-        ) {
+        )
+        {
             object obj = Activator.CreateInstance(structureType)!;
             PtrToStructureHelper(ptr, obj, true);
             return obj;
@@ -160,7 +162,8 @@ namespace System.Runtime.InteropServices
                 if (
                     (getInstanceMethod == null)
                     || (getInstanceMethod.ReturnType != typeof(ICustomMarshaler))
-                ) {
+                )
+                {
                     throw new ApplicationException(
                         $"Custom marshaler '{type.FullName}' does not implement a static GetInstance method that takes a single string parameter and returns an ICustomMarshaler."
                     );

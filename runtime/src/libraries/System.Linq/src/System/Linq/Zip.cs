@@ -11,7 +11,8 @@ namespace System.Linq
             this IEnumerable<TFirst> first,
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, TResult> resultSelector
-        ) {
+        )
+        {
             if (first is null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.first);
@@ -33,7 +34,8 @@ namespace System.Linq
         public static IEnumerable<(TFirst First, TSecond Second)> Zip<TFirst, TSecond>(
             this IEnumerable<TFirst> first,
             IEnumerable<TSecond> second
-        ) {
+        )
+        {
             if (first is null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.first);
@@ -84,7 +86,8 @@ namespace System.Linq
         private static IEnumerable<(TFirst First, TSecond Second)> ZipIterator<TFirst, TSecond>(
             IEnumerable<TFirst> first,
             IEnumerable<TSecond> second
-        ) {
+        )
+        {
             using (IEnumerator<TFirst> e1 = first.GetEnumerator())
             using (IEnumerator<TSecond> e2 = second.GetEnumerator())
             {
@@ -99,7 +102,8 @@ namespace System.Linq
             IEnumerable<TFirst> first,
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, TResult> resultSelector
-        ) {
+        )
+        {
             using (IEnumerator<TFirst> e1 = first.GetEnumerator())
             using (IEnumerator<TSecond> e2 = second.GetEnumerator())
             {

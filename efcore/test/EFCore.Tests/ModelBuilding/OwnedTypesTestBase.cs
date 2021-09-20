@@ -699,7 +699,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             [InlineData(HasDataOverload.Enumerable | HasDataOverload.Generic)]
             public virtual void Can_configure_owned_type_from_an_owned_type_collection(
                 HasDataOverload hasDataOverload
-            ) {
+            )
+            {
                 var modelBuilder = CreateModelBuilder();
 
                 modelBuilder.Ignore<OrderDetails>();

@@ -131,7 +131,8 @@ namespace System.Linq.Expressions.Tests
             Expression expression,
             Type type,
             bool useInterpreter
-        ) {
+        )
+        {
             if (expression.Type == typeof(void))
                 return; // Can't have void parameter.
             bool expected;

@@ -166,14 +166,16 @@ namespace System.Reflection.Emit
             ref StackCrawlMark stackMark,
             AssemblyLoadContext? assemblyLoadContext,
             IEnumerable<CustomAttributeBuilder>? unsafeAssemblyAttributes
-        ) {
+        )
+        {
             if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));
             }
             if (
                 access != AssemblyBuilderAccess.Run && access != AssemblyBuilderAccess.RunAndCollect
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     SR.Format(SR.Arg_EnumIllegalVal, (int)access),
                     nameof(access)
@@ -255,7 +257,8 @@ namespace System.Reflection.Emit
         public static AssemblyBuilder DefineDynamicAssembly(
             AssemblyName name,
             AssemblyBuilderAccess access
-        ) {
+        )
+        {
             StackCrawlMark stackMark = StackCrawlMark.LookForMyCaller;
             return InternalDefineDynamicAssembly(
                 name,
@@ -271,7 +274,8 @@ namespace System.Reflection.Emit
             AssemblyName name,
             AssemblyBuilderAccess access,
             IEnumerable<CustomAttributeBuilder>? assemblyAttributes
-        ) {
+        )
+        {
             StackCrawlMark stackMark = StackCrawlMark.LookForMyCaller;
             return InternalDefineDynamicAssembly(
                 name,
@@ -299,7 +303,8 @@ namespace System.Reflection.Emit
             ref StackCrawlMark stackMark,
             AssemblyLoadContext? assemblyLoadContext,
             IEnumerable<CustomAttributeBuilder>? unsafeAssemblyAttributes
-        ) {
+        )
+        {
             lock (s_assemblyBuilderLock)
             {
                 // We can only create dynamic assemblies in the current domain

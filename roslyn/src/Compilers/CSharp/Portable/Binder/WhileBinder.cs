@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal override BoundWhileStatement BindWhileParts(
             BindingDiagnosticBag diagnostics,
             Binder originalBinder
-        ) {
+        )
+        {
             var node = (WhileStatementSyntax)_syntax;
 
             var condition = originalBinder.BindBooleanExpression(node.Condition, diagnostics);
@@ -52,7 +53,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal override BoundDoStatement BindDoParts(
             BindingDiagnosticBag diagnostics,
             Binder originalBinder
-        ) {
+        )
+        {
             var node = (DoStatementSyntax)_syntax;
 
             var condition = originalBinder.BindBooleanExpression(node.Condition, diagnostics);
@@ -91,7 +93,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal override ImmutableArray<LocalSymbol> GetDeclaredLocalsForScope(
             SyntaxNode scopeDesignator
-        ) {
+        )
+        {
             if (_syntax == scopeDesignator)
             {
                 return this.Locals;
@@ -102,7 +105,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal override ImmutableArray<LocalFunctionSymbol> GetDeclaredLocalFunctionsForScope(
             CSharpSyntaxNode scopeDesignator
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
 

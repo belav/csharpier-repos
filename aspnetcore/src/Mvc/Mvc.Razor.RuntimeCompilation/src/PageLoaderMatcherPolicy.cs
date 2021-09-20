@@ -100,7 +100,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             CandidateSet candidates,
             Task<CompiledPageActionDescriptor> actionDescriptorTask,
             int index
-        ) {
+        )
+        {
             var compiled = await actionDescriptorTask;
 
             candidates.ReplaceEndpoint(index, compiled.Endpoint, candidates[index].Values);

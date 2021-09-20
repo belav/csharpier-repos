@@ -90,7 +90,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
                 DiagnosticReportingOptions requestedProjectOptions,
                 DiagnosticReportingOptions discoveredProjectOptions,
                 bool preferMetadataForReferencesOfDiscoveredProjects
-            ) {
+            )
+            {
                 _workspaceServices = services;
                 _diagnosticReporter = diagnosticReporter;
                 _pathResolver = pathResolver;
@@ -121,7 +122,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
                 string? projectPath,
                 string? targetFramework,
                 Func<Task<TResult>> doFunc
-            ) {
+            )
+            {
                 var watch = _progress != null ? Stopwatch.StartNew() : null;
 
                 TResult result;
@@ -151,7 +153,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
 
             public async Task<ImmutableArray<ProjectInfo>> LoadAsync(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var results = ImmutableArray.CreateBuilder<ProjectInfo>();
                 var processedPaths = new HashSet<string>(PathUtilities.Comparer);
 
@@ -169,7 +172,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
                                 _requestedProjectOptions.OnPathFailure,
                                 out var absoluteProjectPath
                             )
-                        ) {
+                        )
+                        {
                             continue; // Failure should already be reported.
                         }
 
@@ -220,14 +224,16 @@ namespace Microsoft.CodeAnalysis.MSBuild
                 string projectPath,
                 DiagnosticReportingOptions reportingOptions,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (
                     !_projectFileLoaderRegistry.TryGetLoaderFromProjectPath(
                         projectPath,
                         reportingOptions.OnLoaderFailure,
                         out var loader
                     )
-                ) {
+                )
+                {
                     return ImmutableArray<ProjectFileInfo>.Empty; // Failure should already be reported.
                 }
 
@@ -284,11 +290,13 @@ namespace Microsoft.CodeAnalysis.MSBuild
                 string projectPath,
                 DiagnosticReportingOptions reportingOptions,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (
                     _projectMap.TryGetProjectInfosByProjectPath(projectPath, out var results)
                     || _pathToDiscoveredProjectInfosMap.TryGetValue(projectPath, out results)
-                ) {
+                )
+                {
                     return results;
                 }
 
@@ -358,14 +366,16 @@ namespace Microsoft.CodeAnalysis.MSBuild
                 ProjectId projectId,
                 bool addDiscriminator,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var language = projectFileInfo.Language;
                 var projectPath = projectFileInfo.FilePath;
                 var projectName = Path.GetFileNameWithoutExtension(projectPath) ?? string.Empty;
                 if (
                     addDiscriminator
                     && !RoslynString.IsNullOrWhiteSpace(projectFileInfo.TargetFramework)
-                ) {
+                )
+                {
                     projectName += "(" + projectFileInfo.TargetFramework + ")";
                 }
 
@@ -560,7 +570,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
 
             private IEnumerable<AnalyzerReference> ResolveAnalyzerReferences(
                 CommandLineArguments commandLineArgs
-            ) {
+            )
+            {
                 var analyzerService = GetWorkspaceService<IAnalyzerService>();
                 if (analyzerService is null)
                 {
@@ -596,7 +607,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
                 IReadOnlyList<DocumentFileInfo> documentFileInfos,
                 ProjectId projectId,
                 Encoding? encoding
-            ) {
+            )
+            {
                 var results = ImmutableArray.CreateBuilder<DocumentInfo>();
 
                 foreach (var info in documentFileInfos)
@@ -629,7 +641,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
                 string logicalPath,
                 out string name,
                 out ImmutableArray<string> folders
-            ) {
+            )
+            {
                 var pathNames = logicalPath.Split(
                     s_directorySplitChars,
                     StringSplitOptions.RemoveEmptyEntries
@@ -654,7 +667,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
                 ImmutableArray<DocumentInfo> documents,
                 string? projectFilePath,
                 ProjectId projectId
-            ) {
+            )
+            {
                 var paths = new HashSet<string>(PathUtilities.Comparer);
                 foreach (var doc in documents)
                 {

@@ -29,17 +29,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             SourceMemberContainerTypeSymbol containingType,
             int memberOffset,
             BindingDiagnosticBag diagnostics
-        ) : base(
-            containingType,
-            WellKnownMemberNames.InequalityOperatorName,
-            memberOffset,
-            diagnostics
-        ) { }
+        )
+            : base(
+                containingType,
+                WellKnownMemberNames.InequalityOperatorName,
+                memberOffset,
+                diagnostics
+            ) { }
 
         internal override void GenerateMethodBody(
             TypeCompilationState compilationState,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var F = new SyntheticBoundNodeFactory(
                 this,
                 ContainingType.GetNonNullSyntaxNode(),

@@ -136,7 +136,8 @@ namespace System.Reflection.Emit.Tests
         [InlineData(typeof(EmptyNonGenericClass[]))]
         public void ParentHasNoDefaultConstructor_ThrowsNotSupportedExceptionOnCreation(
             Type parentType
-        ) {
+        )
+        {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
 
             type.SetParent(parentType);

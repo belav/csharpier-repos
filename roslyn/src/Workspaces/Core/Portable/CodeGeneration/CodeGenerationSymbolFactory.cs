@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             IMethodSymbol? addMethod = null,
             IMethodSymbol? removeMethod = null,
             IMethodSymbol? raiseMethod = null
-        ) {
+        )
+        {
             var result = new CodeGenerationEventSymbol(
                 null,
                 attributes,
@@ -66,7 +67,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             IMethodSymbol? setMethod,
             bool isIndexer = false,
             SyntaxNode? initializer = null
-        ) {
+        )
+        {
             var result = new CodeGenerationPropertySymbol(
                 containingType,
                 attributes,
@@ -105,7 +107,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             IMethodSymbol? getMethod,
             IMethodSymbol? setMethod,
             bool isIndexer = false
-        ) {
+        )
+        {
             return CreatePropertySymbol(
                 containingType: null,
                 attributes: attributes,
@@ -134,7 +137,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             bool hasConstantValue = false,
             object? constantValue = null,
             SyntaxNode? initializer = null
-        ) {
+        )
+        {
             var result = new CodeGenerationFieldSymbol(
                 null,
                 attributes,
@@ -167,7 +171,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             ImmutableArray<SyntaxNode> baseConstructorArguments = default,
             ImmutableArray<SyntaxNode> thisConstructorArguments = default,
             bool isPrimaryConstructor = false
-        ) {
+        )
+        {
             var result = new CodeGenerationConstructorSymbol(
                 null,
                 attributes,
@@ -194,7 +199,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             ImmutableArray<AttributeData> attributes,
             string typeName,
             ImmutableArray<SyntaxNode> statements = default
-        ) {
+        )
+        {
             var result = new CodeGenerationDestructorSymbol(null, attributes);
             CodeGenerationDestructorInfo.Attach(result, typeName, statements);
             return result;
@@ -216,7 +222,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             ImmutableArray<AttributeData> returnTypeAttributes = default,
             MethodKind methodKind = MethodKind.Ordinary,
             bool isInitOnly = false
-        ) {
+        )
+        {
             var result = new CodeGenerationMethodSymbol(
                 containingType,
                 attributes,
@@ -263,7 +270,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             ImmutableArray<AttributeData> returnTypeAttributes = default,
             MethodKind methodKind = MethodKind.Ordinary,
             bool isInitOnly = false
-        ) {
+        )
+        {
             return CreateMethodSymbol(
                 null,
                 attributes,
@@ -296,7 +304,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             ImmutableArray<SyntaxNode> statements = default,
             ImmutableArray<AttributeData> returnTypeAttributes = default,
             string? documentationCommentXml = null
-        ) {
+        )
+        {
             var expectedParameterCount = CodeGenerationOperatorSymbol.GetParameterCount(
                 operatorKind
             );
@@ -343,7 +352,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             ImmutableArray<SyntaxNode> statements = default,
             ImmutableArray<AttributeData> toTypeAttributes = default,
             string? documentationCommentXml = null
-        ) {
+        )
+        {
             return CreateConversionSymbol(
                 attributes: default,
                 accessibility: Accessibility.Public,
@@ -372,7 +382,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             ImmutableArray<SyntaxNode> statements = default,
             ImmutableArray<AttributeData> toTypeAttributes = default,
             string? documentationCommentXml = null
-        ) {
+        )
+        {
             var result = new CodeGenerationConversionSymbol(
                 containingType,
                 attributes,
@@ -406,7 +417,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             RefKind refKind,
             ITypeSymbol type,
             string name
-        ) {
+        )
+        {
             return CreateParameterSymbol(
                 attributes: default,
                 refKind,
@@ -429,7 +441,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             bool isOptional = false,
             bool hasDefaultValue = false,
             object? defaultValue = null
-        ) {
+        )
+        {
             return new CodeGenerationParameterSymbol(
                 null,
                 attributes,
@@ -456,7 +469,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             bool? isOptional = null,
             bool? hasDefaultValue = null,
             Optional<object> defaultValue = default
-        ) {
+        )
+        {
             return new CodeGenerationParameterSymbol(
                 containingType: null,
                 attributes ?? parameter.GetAttributes(),
@@ -506,7 +520,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             bool hasValueConstraint = false,
             bool hasNotNullConstraint = false,
             int ordinal = 0
-        ) {
+        )
+        {
             return new CodeGenerationTypeParameterSymbol(
                 null,
                 attributes,
@@ -544,7 +559,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             Accessibility? accessibility = null,
             ImmutableArray<IMethodSymbol> explicitInterfaceImplementations = default,
             ImmutableArray<SyntaxNode> statements = default
-        ) {
+        )
+        {
             return CreateMethodSymbol(
                 attributes,
                 accessibility ?? accessor.DeclaredAccessibility,
@@ -571,7 +587,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             ImmutableArray<AttributeData> attributes,
             Accessibility accessibility,
             ImmutableArray<SyntaxNode> statements
-        ) {
+        )
+        {
             return CreateMethodSymbol(
                 attributes,
                 accessibility,
@@ -593,7 +610,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             INamedTypeSymbol attributeClass,
             ImmutableArray<TypedConstant> constructorArguments = default,
             ImmutableArray<KeyValuePair<string, TypedConstant>> namedArguments = default
-        ) {
+        )
+        {
             return new CodeGenerationAttributeData(
                 attributeClass,
                 constructorArguments,
@@ -617,7 +635,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             ImmutableArray<ISymbol> members = default,
             NullableAnnotation nullableAnnotation = NullableAnnotation.None,
             IAssemblySymbol? containingAssembly = null
-        ) {
+        )
+        {
             return CreateNamedTypeSymbol(
                 attributes,
                 accessibility,
@@ -652,7 +671,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             ImmutableArray<ISymbol> members = default,
             NullableAnnotation nullableAnnotation = NullableAnnotation.None,
             IAssemblySymbol? containingAssembly = null
-        ) {
+        )
+        {
             members = members.NullToEmpty();
 
             return new CodeGenerationNamedTypeSymbol(
@@ -690,7 +710,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             ImmutableArray<ITypeParameterSymbol> typeParameters = default,
             ImmutableArray<IParameterSymbol> parameters = default,
             NullableAnnotation nullableAnnotation = NullableAnnotation.None
-        ) {
+        )
+        {
             var invokeMethod = CreateMethodSymbol(
                 attributes: default,
                 accessibility: Accessibility.Public,
@@ -730,7 +751,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             string name,
             IList<ISymbol>? imports = null,
             IList<INamespaceOrTypeSymbol>? members = null
-        ) {
+        )
+        {
             var @namespace = new CodeGenerationNamespaceSymbol(name, members);
             CodeGenerationNamespaceInfo.Attach(@namespace, imports);
             return @namespace;
@@ -748,7 +770,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             INamedTypeSymbol? containingType = null,
             ITypeSymbol? returnType = null,
             Optional<ImmutableArray<AttributeData>> returnTypeAttributes = default
-        ) {
+        )
+        {
             return CreateMethodSymbol(
                 containingType,
                 attributes,
@@ -780,7 +803,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             bool? isIndexer = null,
             IMethodSymbol? getMethod = null,
             IMethodSymbol? setMethod = null
-        ) {
+        )
+        {
             return CreatePropertySymbol(
                 attributes,
                 accessibility ?? property.DeclaredAccessibility,
@@ -805,7 +829,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             string? name = null,
             IMethodSymbol? addMethod = null,
             IMethodSymbol? removeMethod = null
-        ) {
+        )
+        {
             return CreateEventSymbol(
                 attributes,
                 accessibility ?? @event.DeclaredAccessibility,

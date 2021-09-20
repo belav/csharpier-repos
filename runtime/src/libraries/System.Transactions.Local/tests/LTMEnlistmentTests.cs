@@ -87,7 +87,8 @@ namespace System.Transactions.Tests
             bool commit,
             EnlistmentOutcome expectedVolatileOutcome,
             TransactionStatus expectedTxStatus
-        ) {
+        )
+        {
             Transaction tx = null;
             try
             {
@@ -182,7 +183,8 @@ namespace System.Transactions.Tests
             EnlistmentOutcome expectedVolatileOutcome,
             EnlistmentOutcome expectedDurableOutcome,
             TransactionStatus expectedTxStatus
-        ) {
+        )
+        {
             Transaction tx = null;
             try
             {
@@ -259,7 +261,8 @@ namespace System.Transactions.Tests
             bool commit,
             EnlistmentOutcome expectedOutcome,
             TransactionStatus expectedTxStatus
-        ) {
+        )
+        {
             Transaction tx = null;
             AutoResetEvent outcomeEvent = null;
             try
@@ -329,7 +332,8 @@ namespace System.Transactions.Tests
             bool commit,
             EnlistmentOutcome expectedEnlistmentOutcome,
             TransactionStatus expectedTxStatus
-        ) {
+        )
+        {
             AutoResetEvent[] outcomeEvents = null;
             Transaction tx = null;
             try

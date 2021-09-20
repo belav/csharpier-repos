@@ -51,56 +51,64 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
         public virtual void WriteComponent(
             CodeRenderingContext context,
             ComponentIntermediateNode node
-        ) {
+        )
+        {
             throw new NotSupportedException("This writer does not support components.");
         }
 
         public virtual void WriteComponentAttribute(
             CodeRenderingContext context,
             ComponentAttributeIntermediateNode node
-        ) {
+        )
+        {
             throw new NotSupportedException("This writer does not support components.");
         }
 
         public virtual void WriteComponentChildContent(
             CodeRenderingContext context,
             ComponentChildContentIntermediateNode node
-        ) {
+        )
+        {
             throw new NotSupportedException("This writer does not support components.");
         }
 
         public virtual void WriteComponentTypeArgument(
             CodeRenderingContext context,
             ComponentTypeArgumentIntermediateNode node
-        ) {
+        )
+        {
             throw new NotSupportedException("This writer does not support components.");
         }
 
         public virtual void WriteComponentTypeInferenceMethod(
             CodeRenderingContext context,
             ComponentTypeInferenceMethodIntermediateNode node
-        ) {
+        )
+        {
             throw new NotSupportedException("This writer does not support components.");
         }
 
         public virtual void WriteMarkupElement(
             CodeRenderingContext context,
             MarkupElementIntermediateNode node
-        ) {
+        )
+        {
             throw new NotSupportedException("This writer does not support components.");
         }
 
         public virtual void WriteMarkupBlock(
             CodeRenderingContext context,
             MarkupBlockIntermediateNode node
-        ) {
+        )
+        {
             throw new NotSupportedException("This writer does not support components.");
         }
 
         public virtual void WriteReferenceCapture(
             CodeRenderingContext context,
             ReferenceCaptureIntermediateNode node
-        ) {
+        )
+        {
             throw new NotSupportedException("This writer does not support components.");
         }
 

@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             public Data(
                 AnalyzerTelemetryInfo analyzerTelemetryInfo,
                 bool isTelemetryCollectionAllowed
-            ) {
+            )
+            {
                 CodeBlockActionsCount = analyzerTelemetryInfo.CodeBlockActionsCount;
                 CodeBlockEndActionsCount = analyzerTelemetryInfo.CodeBlockEndActionsCount;
                 CodeBlockStartActionsCount = analyzerTelemetryInfo.CodeBlockStartActionsCount;
@@ -80,7 +81,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             DiagnosticAnalyzer analyzer,
             AnalyzerTelemetryInfo analyzerTelemetryInfo,
             bool isTelemetryCollectionAllowed
-        ) {
+        )
+        {
             lock (_guard)
             {
                 _analyzerInfoMap = _analyzerInfoMap.SetItem(

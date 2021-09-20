@@ -174,7 +174,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 pArgument.Type == pExpr.Type
                 || SymbolLoader.IsBaseClassOfClass(pArgument.Type, pExpr.Type)
                 || CConversions.FImpRefConv(pArgument.Type, pExpr.Type)
-            ) {
+            )
+            {
                 return Visit(pArgument);
             }
 
@@ -184,7 +185,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 pExpr.Type != null
                 && pExpr.Type.IsPredefType(PredefinedType.PT_G_EXPRESSION)
                 && pArgument is ExprBoundLambda
-            ) {
+            )
+            {
                 return Visit(pArgument);
             }
 
@@ -205,7 +207,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             if (
                 expr.FirstArgument.Type.IsPredefType(PredefinedType.PT_STRING)
                 && expr.SecondArgument.Type.IsPredefType(PredefinedType.PT_STRING)
-            ) {
+            )
+            {
                 pdm = PREDEFMETH.PM_STRING_CONCAT_STRING_2;
             }
             else
@@ -648,7 +651,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             if (
                 expr.Kind == ExpressionKind.DelegateSubtract
                 || expr.Kind == ExpressionKind.DelegateAdd
-            ) {
+            )
+            {
                 Expr pTypeOf = CreateTypeOf(expr.Type);
                 return GenerateCall(PREDEFMETH.PM_EXPRESSION_CONVERT, call, pTypeOf);
             }
@@ -709,7 +713,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 || expr.Kind == ExpressionKind.Dec
                 || expr.Kind == ExpressionKind.DecimalInc
                 || expr.Kind == ExpressionKind.DecimalDec
-            ) {
+            )
+            {
                 return GenerateCall(
                     pdm,
                     null,
@@ -800,7 +805,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             CType CType,
             Expr target,
             MethWithInst method
-        ) {
+        )
+        {
             // The user-defined explicit conversion from enum? to decimal or decimal? requires
             // that we convert the enum? to its nullable underlying CType.
             if (isEnumToDecimalConversion(arg.Type, CType))
@@ -866,7 +872,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             if (
                 !isEnumToDecimalConversion(pArgument.Type, pExpr.Type)
                 && IsNullableValueAccess(pCastArgument, pArgument)
-            ) {
+            )
+            {
                 // We have an implicit conversion of nullable CType to the value CType, generate a convert node for it.
                 pConversionSource = GenerateValueAccessConversion(pArgument);
             }
@@ -982,7 +989,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 ExpressionIterator it = new ExpressionIterator(oldArgs);
                 !it.AtEnd();
                 it.MoveNext()
-            ) {
+            )
+            {
                 Expr oldArg = it.Current();
                 ExprFactory.AppendItemToList(Visit(oldArg), ref newArgs, ref newArgsTail);
             }
@@ -1000,7 +1008,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 ExpressionIterator it = new ExpressionIterator(oldIndices);
                 !it.AtEnd();
                 it.MoveNext()
-            ) {
+            )
+            {
                 Expr newIndex = it.Current();
                 if (newIndex.Type != intType)
                 {
@@ -1097,7 +1106,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             Expr arg2,
             Expr arg3,
             Expr arg4
-        ) {
+        )
+        {
             MethodSymbol method = GetPreDefMethod(pdm);
             if (method == null)
                 return null;
@@ -1132,7 +1142,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             ExprBinOp expr,
             ref Expr pp1,
             ref Expr pp2
-        ) {
+        )
+        {
             // If we have lifted T1 op T2 to T1? op T2?, and we have an expression T1 op T2? or T1? op T2 then
             // we need to ensure that the unlifted actual arguments are promoted to their nullable CType.
             Debug.Assert(expr != null);
@@ -1156,7 +1167,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 || !fat1.OwningAggregate.IsValueType()
                 || !(fptype2 is AggregateType fat2)
                 || !fat2.OwningAggregate.IsValueType()
-            ) {
+            )
+            {
                 return;
             }
 
@@ -1166,7 +1178,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             if (
                 aatype1 is NullType
                 || aatype1 == fptype1 && (aatype2 == nubfptype2 || aatype2 is NullType)
-            ) {
+            )
+            {
                 new1 = GenerateCall(
                     PREDEFMETH.PM_EXPRESSION_CONVERT,
                     new1,
@@ -1178,7 +1191,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             if (
                 aatype2 is NullType
                 || aatype2 == fptype2 && (aatype1 == nubfptype1 || aatype1 is NullType)
-            ) {
+            )
+            {
                 new2 = GenerateCall(
                     PREDEFMETH.PM_EXPRESSION_CONVERT,
                     new2,

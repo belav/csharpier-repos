@@ -11,7 +11,8 @@ namespace System.Diagnostics
             this Process process,
             string prefix,
             ILogger logger
-        ) {
+        )
+        {
             process.EnableRaisingEvents = true;
             process.OutputDataReceived += (_, dataArgs) =>
             {

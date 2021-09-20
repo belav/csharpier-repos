@@ -16,7 +16,8 @@ namespace System.Web.Http.WebHost.Routing
         public HttpRequestMessageContextWrapper(
             string virtualPathRoot,
             HttpRequestMessage httpRequest
-        ) {
+        )
+        {
             _httpWrapper = new HttpRequestMessageWrapper(virtualPathRoot, httpRequest);
             _items = new Hashtable();
         }

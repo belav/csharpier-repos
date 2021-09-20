@@ -47,7 +47,8 @@ namespace System.Speech.Internal.ObjectTokens
             string sCategoryId,
             string sTokenId,
             bool fCreateIfNotExist
-        ) {
+        )
+        {
             ISpObjectToken sapiObjectToken = (ISpObjectToken)new SpObjectToken();
 
             try
@@ -226,7 +227,8 @@ namespace System.Speech.Internal.ObjectTokens
             [MarshalAs(UnmanagedType.LPWStr)] string pszCategoryId,
             [MarshalAs(UnmanagedType.LPWStr)] string pszTokenId,
             [MarshalAs(UnmanagedType.Bool)] bool fCreateIfNotExist
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -266,7 +268,8 @@ namespace System.Speech.Internal.ObjectTokens
         public void MatchesAttributes(
             [MarshalAs(UnmanagedType.LPWStr)] string pszAttributes,
             [MarshalAs(UnmanagedType.Bool)] out bool pfMatches
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -344,7 +347,8 @@ namespace System.Speech.Internal.ObjectTokens
                     || e is InvalidComObjectException
                     || e is NotSupportedException
                     || e is FormatException
-                ) {
+                )
+                {
                     throw new ArgumentException(SR.Get(SRID.TokenCannotCreateInstance));
                 }
                 throw;

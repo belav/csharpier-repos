@@ -14,7 +14,8 @@ namespace System.Net.NetworkInformation
         internal SystemIPAddressInformation(
             IPAddress address,
             Interop.IpHlpApi.AdapterAddressFlags flags
-        ) {
+        )
+        {
             _address = address;
             Transient = (flags & Interop.IpHlpApi.AdapterAddressFlags.Transient) > 0;
             DnsEligible = (flags & Interop.IpHlpApi.AdapterAddressFlags.DnsEligible) > 0;

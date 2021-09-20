@@ -321,7 +321,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             string prependBytes,
             string appendBytes,
             string answerBytes
-        ) {
+        )
+        {
             byte[] prepend = prependBytes?.HexToByteArray();
             byte[] append = appendBytes?.HexToByteArray();
             byte[] answer = answerBytes.HexToByteArray();

@@ -39,7 +39,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddSession(
             this IServiceCollection services,
             Action<SessionOptions> configure
-        ) {
+        )
+        {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));

@@ -39,14 +39,16 @@ namespace Microsoft.AspNetCore.Testing
         public static async Task<string> GetStringAsync(
             Uri requestUri,
             bool validateCertificate = true
-        ) {
+        )
+        {
             return await RetryRequest(
                 async () =>
                 {
                     using (
                         var stream = await GetStream(requestUri, validateCertificate)
                             .ConfigureAwait(false)
-                    ) {
+                    )
+                    {
                         using (
                             var writer = new StreamWriter(
                                 stream,
@@ -54,7 +56,8 @@ namespace Microsoft.AspNetCore.Testing
                                 bufferSize: 1024,
                                 leaveOpen: true
                             )
-                        ) {
+                        )
+                        {
                             await writer.WriteAsync($"GET {requestUri.PathAndQuery} HTTP/1.0\r\n")
                                 .ConfigureAwait(false);
                             await writer.WriteAsync($"Host: {GetHost(requestUri)}\r\n")
@@ -111,7 +114,8 @@ namespace Microsoft.AspNetCore.Testing
             Uri requestUri,
             HttpContent content,
             bool validateCertificate = true
-        ) {
+        )
+        {
             return await RetryRequest(
                 async () =>
                 {
@@ -124,7 +128,8 @@ namespace Microsoft.AspNetCore.Testing
                                 bufferSize: 1024,
                                 leaveOpen: true
                             )
-                        ) {
+                        )
+                        {
                             await writer.WriteAsync($"POST {requestUri.PathAndQuery} HTTP/1.0\r\n")
                                 .ConfigureAwait(false);
                             await writer.WriteAsync($"Host: {requestUri.Authority}\r\n")
@@ -158,7 +163,8 @@ namespace Microsoft.AspNetCore.Testing
                     bufferSize: 1024,
                     leaveOpen: true
                 )
-            ) {
+            )
+            {
                 var response = await reader.ReadToEndAsync().ConfigureAwait(false);
 
                 var status = GetStatus(response);

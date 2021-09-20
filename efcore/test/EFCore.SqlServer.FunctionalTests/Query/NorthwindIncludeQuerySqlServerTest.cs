@@ -246,7 +246,8 @@ ORDER BY [o].[OrderID], [o].[ProductID], [o0].[OrderID], [c].[CustomerID], [o1].
 
         public override async Task Include_multi_level_reference_and_collection_predicate(
             bool async
-        ) {
+        )
+        {
             await base.Include_multi_level_reference_and_collection_predicate(async);
 
             AssertSql(
@@ -264,7 +265,8 @@ ORDER BY [t].[OrderID], [t].[CustomerID0], [o0].[OrderID]"
 
         public override async Task Include_multi_level_collection_and_then_include_reference_predicate(
             bool async
-        ) {
+        )
+        {
             await base.Include_multi_level_collection_and_then_include_reference_predicate(async);
 
             AssertSql(
@@ -387,7 +389,8 @@ ORDER BY [t].[ContactTitle], [t].[CustomerID], [o].[OrderID]"
 
         public override async Task Include_collection_order_by_non_key_with_first_or_default(
             bool async
-        ) {
+        )
+        {
             await base.Include_collection_order_by_non_key_with_first_or_default(async);
 
             AssertSql(
@@ -492,7 +495,8 @@ ORDER BY [c].[CustomerID], [t].[OrderID], [t].[OrderID0], [t].[ProductID]"
 
         public override async Task Include_collection_then_include_collection_then_include_reference(
             bool async
-        ) {
+        )
+        {
             await base.Include_collection_then_include_collection_then_include_reference(async);
 
             AssertSql(
@@ -608,7 +612,8 @@ ORDER BY [c].[CustomerID], [t].[OrderID], [o0].[OrderID]"
 
         public override async Task Include_collection_on_additional_from_clause_with_filter(
             bool async
-        ) {
+        )
+        {
             await base.Include_collection_on_additional_from_clause_with_filter(async);
 
             AssertSql(
@@ -704,7 +709,8 @@ ORDER BY [t1].[CustomerID], [t1].[CustomerID0], [o].[OrderID], [o0].[OrderID]"
 
         public override async Task Include_collection_on_join_clause_with_order_by_and_filter(
             bool async
-        ) {
+        )
+        {
             await base.Include_collection_on_join_clause_with_order_by_and_filter(async);
 
             AssertSql(
@@ -719,7 +725,8 @@ ORDER BY [c].[City], [c].[CustomerID], [o].[OrderID], [o0].[OrderID]"
 
         public override async Task Include_collection_with_outer_apply_with_filter_non_equality(
             bool async
-        ) {
+        )
+        {
             await base.Include_collection_with_outer_apply_with_filter_non_equality(async);
 
             AssertSql(
@@ -986,7 +993,8 @@ LEFT JOIN [Customers] AS [c] ON [o].[CustomerID] = [c].[CustomerID]"
 
         public override async Task Include_with_complex_projection_does_not_change_ordering_of_projection(
             bool async
-        ) {
+        )
+        {
             await base.Include_with_complex_projection_does_not_change_ordering_of_projection(
                 async
             );
@@ -1192,7 +1200,8 @@ ORDER BY [t].[c], [t].[CustomerID]"
 
         public override async Task Include_collection_OrderBy_empty_list_does_not_contains(
             bool async
-        ) {
+        )
+        {
             await base.Include_collection_OrderBy_empty_list_does_not_contains(async);
 
             AssertSql(
@@ -1273,7 +1282,8 @@ ORDER BY [t].[c], [t].[CustomerID], [o].[OrderID]"
 
         public override async Task Include_is_not_ignored_when_projection_contains_client_method_and_complex_expression(
             bool async
-        ) {
+        )
+        {
             await base.Include_is_not_ignored_when_projection_contains_client_method_and_complex_expression(
                 async
             );
@@ -1393,7 +1403,8 @@ ORDER BY [c].[CustomerID], [t0].[OrderDate] DESC, [t0].[OrderID]"
 
         public override async Task Outer_idenfier_correctly_determined_when_doing_include_on_right_side_of_left_join(
             bool async
-        ) {
+        )
+        {
             await base.Outer_idenfier_correctly_determined_when_doing_include_on_right_side_of_left_join(
                 async
             );

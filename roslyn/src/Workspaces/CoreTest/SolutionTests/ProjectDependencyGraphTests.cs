@@ -57,7 +57,8 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
         private static void VerifyTopologicalSort(
             Solution solution,
             params string[] expectedResults
-        ) {
+        )
+        {
             var projectDependencyGraph = solution.GetProjectDependencyGraph();
             var projectIds = projectDependencyGraph.GetTopologicallySortedProjects(
                 CancellationToken.None
@@ -329,7 +330,8 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             Solution solution,
             string project,
             string[] expectedResults
-        ) {
+        )
+        {
             var projectDependencyGraph = solution.GetProjectDependencyGraph();
             var projectId = solution.GetProjectsByName(project).Single().Id;
             var projectIds = projectDependencyGraph.GetProjectsThatThisProjectDirectlyDependsOn(
@@ -344,7 +346,8 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             Solution solution,
             string project,
             string[] expectedResults
-        ) {
+        )
+        {
             var projectDependencyGraph = solution.GetProjectDependencyGraph();
             VerifyTransitiveReferences(solution, projectDependencyGraph, project, expectedResults);
         }
@@ -354,7 +357,8 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             ProjectDependencyGraph projectDependencyGraph,
             string project,
             string[] expectedResults
-        ) {
+        )
+        {
             var projectId = solution.GetProjectsByName(project).Single().Id;
             var projectIds = projectDependencyGraph.GetProjectsThatThisProjectTransitivelyDependsOn(
                 projectId
@@ -755,7 +759,8 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             Solution solution,
             string project,
             string[] expectedResults
-        ) {
+        )
+        {
             var projectDependencyGraph = solution.GetProjectDependencyGraph();
             var projectId = solution.GetProjectsByName(project).Single().Id;
             var projectIds = projectDependencyGraph.GetProjectsThatDirectlyDependOnThisProject(
@@ -770,7 +775,8 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             Solution solution,
             string project,
             string[] expectedResults
-        ) {
+        )
+        {
             var projectDependencyGraph = solution.GetProjectDependencyGraph();
             var projectId = solution.GetProjectsByName(project).Single().Id;
             var projectIds = projectDependencyGraph.GetProjectsThatTransitivelyDependOnThisProject(
@@ -841,7 +847,8 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             Solution solution,
             string projectName,
             IEnumerable<string> projectReferences
-        ) {
+        )
+        {
             var referencesByTargetProject = new Dictionary<string, List<ProjectReference>>();
             foreach (var targetProject in projectReferences)
             {

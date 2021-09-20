@@ -39,7 +39,8 @@ namespace Microsoft.AspNetCore.WebSockets
             RequestDelegate next,
             IOptions<WebSocketOptions> options,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             if (next == null)
             {
                 throw new ArgumentNullException(nameof(next));
@@ -83,14 +84,16 @@ namespace Microsoft.AspNetCore.WebSockets
                     if (
                         !StringValues.IsNullOrEmpty(originHeader)
                         && webSocketFeature.IsWebSocketRequest
-                    ) {
+                    )
+                    {
                         // Check allowed origins to see if request is allowed
                         if (
                             !_allowedOrigins.Contains(
                                 originHeader.ToString(),
                                 StringComparer.Ordinal
                             )
-                        ) {
+                        )
+                        {
                             _logger.LogDebug(
                                 "Request origin {Origin} is not in the list of allowed origins.",
                                 originHeader
@@ -116,7 +119,8 @@ namespace Microsoft.AspNetCore.WebSockets
                 HttpContext context,
                 IHttpUpgradeFeature upgradeFeature,
                 WebSocketOptions options
-            ) {
+            )
+            {
                 _context = context;
                 _upgradeFeature = upgradeFeature;
                 _options = options;
@@ -140,7 +144,8 @@ namespace Microsoft.AspNetCore.WebSockets
                             {
                                 foreach (
                                     var value in requestHeaders.GetCommaSeparatedValues(headerName)
-                                ) {
+                                )
+                                {
                                     interestingHeaders.Add(
                                         new KeyValuePair<string, string>(headerName, value)
                                     );

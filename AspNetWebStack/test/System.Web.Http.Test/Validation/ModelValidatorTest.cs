@@ -90,7 +90,8 @@ namespace System.Web.Http.Validation
             public override IEnumerable<ModelValidator> GetValidators(
                 ModelMetadata metadata,
                 IEnumerable<ModelValidatorProvider> validatorProviders
-            ) {
+            )
+            {
                 return new ModelValidator[] { new ObservableModelValidator(validatorProviders) };
             }
 
@@ -103,7 +104,8 @@ namespace System.Web.Http.Validation
                 public override IEnumerable<ModelValidationResult> Validate(
                     ModelMetadata metadata,
                     object container
-                ) {
+                )
+                {
                     return Enumerable.Empty<ModelValidationResult>();
                 }
             }
@@ -130,14 +132,14 @@ namespace System.Web.Http.Validation
 
         private class TestableModelValidator : ModelValidator
         {
-            public TestableModelValidator(
-                IEnumerable<ModelValidatorProvider> validatorProviders
-            ) : base(validatorProviders) { }
+            public TestableModelValidator(IEnumerable<ModelValidatorProvider> validatorProviders)
+                : base(validatorProviders) { }
 
             public override IEnumerable<ModelValidationResult> Validate(
                 ModelMetadata metadata,
                 object container
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }

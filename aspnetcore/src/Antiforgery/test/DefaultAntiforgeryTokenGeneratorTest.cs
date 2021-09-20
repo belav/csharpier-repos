@@ -426,7 +426,8 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
         public void TryValidateTokenSet_UsernameMismatch(
             string identityUsername,
             string embeddedUsername
-        ) {
+        )
+        {
             // Arrange
             var httpContext = new DefaultHttpContext();
             var identity = GetAuthenticatedIdentity(identityUsername);

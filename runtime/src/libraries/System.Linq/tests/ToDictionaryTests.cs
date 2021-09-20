@@ -42,7 +42,8 @@ namespace System.Linq.Tests
         private void RunToDictionaryOnAllCollectionTypes<T>(
             T[] items,
             Action<Dictionary<T, T>> validation
-        ) {
+        )
+        {
             validation(Enumerable.ToDictionary(items, key => key));
             validation(Enumerable.ToDictionary(items, key => key, value => value));
             validation(Enumerable.ToDictionary(new List<T>(items), key => key));
@@ -388,7 +389,8 @@ namespace System.Linq.Tests
             IEnumerable<K> keys,
             IEnumerable<E> values,
             Dictionary<K, E> dict
-        ) {
+        )
+        {
             Assert.NotNull(dict);
             Assert.NotNull(keys);
             Assert.NotNull(values);

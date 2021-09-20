@@ -186,7 +186,8 @@ namespace Castle.Components.DictionaryAdapter
         void IBindingList<T>.ApplySort(
             SCM.PropertyDescriptor property,
             SCM.ListSortDirection direction
-        ) {
+        )
+        {
             AsBindingList.ApplySort(property, direction);
         }
 

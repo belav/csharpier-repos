@@ -115,7 +115,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             IFormatProvider provider,
             string format,
             params object[] args
-        ) {
+        )
+        {
             HtmlContentBuilderExtensions.AppendFormat(this, provider, format, args);
             return this;
         }

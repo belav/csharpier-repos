@@ -27,14 +27,15 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
             int? precision = null,
             int? scale = null,
             StoreTypePostfix storeTypePostfix = StoreTypePostfix.PrecisionAndScale
-        ) : base(
-            new RelationalTypeMappingParameters(
-                new CoreTypeMappingParameters(typeof(decimal)),
-                storeType,
-                storeTypePostfix,
-                dbType
-            ).WithPrecisionAndScale(precision, scale)
-        ) { }
+        )
+            : base(
+                new RelationalTypeMappingParameters(
+                    new CoreTypeMappingParameters(typeof(decimal)),
+                    storeType,
+                    storeTypePostfix,
+                    dbType
+                ).WithPrecisionAndScale(precision, scale)
+            ) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

@@ -140,7 +140,8 @@ namespace System.Security.AccessControl.Tests
             int inheritanceFlags,
             int propagationFlags,
             int accessControlType
-        ) {
+        )
+        {
             IdentityReference identityReference = new SecurityIdentifier(sid);
             AccessRule accessRule = Constructor(
                 identityReference,
@@ -167,7 +168,8 @@ namespace System.Security.AccessControl.Tests
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
             AccessControlType accessControlType
-        ) {
+        )
+        {
             return new FileSystemAccessRule(
                 identityReference,
                 FileSystemRights.Read,

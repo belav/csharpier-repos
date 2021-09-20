@@ -12,7 +12,8 @@ namespace System.Text.Json
             int index,
             ReadOnlySpan<char> propertyName,
             out JsonElement value
-        ) {
+        )
+        {
             CheckNotDisposed();
 
             DbRow row = _parsedData.Get(index);
@@ -113,7 +114,8 @@ namespace System.Text.Json
             int index,
             ReadOnlySpan<byte> propertyName,
             out JsonElement value
-        ) {
+        )
+        {
             CheckNotDisposed();
 
             DbRow row = _parsedData.Get(index);
@@ -137,7 +139,8 @@ namespace System.Text.Json
             int endIndex,
             ReadOnlySpan<byte> propertyName,
             out JsonElement value
-        ) {
+        )
+        {
             ReadOnlySpan<byte> documentSpan = _utf8Json.Span;
             Span<byte> utf8UnescapedStack = stackalloc byte[JsonConstants.StackallocThreshold];
 
@@ -182,7 +185,8 @@ namespace System.Text.Json
                             propertyName.Length > idx
                             && currentPropertyName.Slice(0, idx)
                                 .SequenceEqual(propertyName.Slice(0, idx))
-                        ) {
+                        )
+                        {
                             int remaining = currentPropertyName.Length - idx;
                             int written = 0;
                             byte[]? rented = null;
@@ -206,7 +210,8 @@ namespace System.Text.Json
                                 if (
                                     utf8Unescaped.Slice(0, written)
                                         .SequenceEqual(propertyName.Slice(idx))
-                                ) {
+                                )
+                                {
                                     // If the property name is a match, the answer is the next element.
                                     value = new JsonElement(this, index + DbRow.Size);
                                     return true;

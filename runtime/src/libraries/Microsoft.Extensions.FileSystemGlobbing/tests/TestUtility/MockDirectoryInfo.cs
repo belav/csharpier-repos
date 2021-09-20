@@ -16,7 +16,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.TestUtility
             string fullName,
             string name,
             string[] paths
-        ) {
+        )
+        {
             ParentDirectory = parentDirectory;
             Recorder = recorder;
             FullName = fullName;

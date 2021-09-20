@@ -44,7 +44,8 @@ namespace RoutingWebSite
             public override ValueTask<RouteValueDictionary> TransformAsync(
                 HttpContext httpContext,
                 RouteValueDictionary values
-            ) {
+            )
+            {
                 if (!(values["slug"] is string slug))
                 {
                     return new ValueTask<RouteValueDictionary>(values);

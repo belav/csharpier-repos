@@ -520,7 +520,8 @@ namespace System.Threading
             object? stateForCallback,
             SynchronizationContext? syncContext,
             ExecutionContext? executionContext
-        ) {
+        )
+        {
             Debug.Assert(
                 this != s_neverCanceledSource,
                 "This source should never be exposed via a CancellationToken."
@@ -646,7 +647,8 @@ namespace System.Threading
                 !IsCancellationRequested
                 && Interlocked.CompareExchange(ref _state, NotifyingState, NotCanceledState)
                     == NotCanceledState
-            ) {
+            )
+            {
                 // Dispose of the timer, if any.  Dispose may be running concurrently here, but TimerQueueTimer.Close is thread-safe.
                 TimerQueueTimer? timer = _timer;
                 if (timer != null)
@@ -827,7 +829,8 @@ namespace System.Threading
         /// <exception cref="System.ArgumentNullException"><paramref name="tokens"/> is null.</exception>
         public static CancellationTokenSource CreateLinkedTokenSource(
             params CancellationToken[] tokens
-        ) {
+        )
+        {
             if (tokens == null)
             {
                 throw new ArgumentNullException(nameof(tokens));
@@ -880,7 +883,8 @@ namespace System.Threading
             internal Linked2CancellationTokenSource(
                 CancellationToken token1,
                 CancellationToken token2
-            ) {
+            )
+            {
                 _reg1 = token1.UnsafeRegister(
                     LinkedNCancellationTokenSource.s_linkedTokenCancelDelegate,
                     this
@@ -1149,7 +1153,8 @@ namespace System.Threading
                                 while (
                                     Volatile.Read(ref state.Item1.ExecutingCallbackId)
                                     == state.Item2
-                                ) {
+                                )
+                                {
                                     await Task.Yield();
                                 }
                             },

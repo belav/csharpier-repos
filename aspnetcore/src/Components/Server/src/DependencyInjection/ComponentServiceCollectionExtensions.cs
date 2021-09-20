@@ -32,7 +32,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServerSideBlazorBuilder AddServerSideBlazor(
             this IServiceCollection services,
             Action<CircuitOptions>? configure = null
-        ) {
+        )
+        {
             var builder = new DefaultServerSideBlazorBuilder(services);
 
             services.AddDataProtection();

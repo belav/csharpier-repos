@@ -22,13 +22,14 @@ namespace System.Web.Mvc.Async
             MethodInfo completedMethodInfo,
             string actionName,
             ControllerDescriptor controllerDescriptor
-        ) : this(
-            asyncMethodInfo,
-            completedMethodInfo,
-            actionName,
-            controllerDescriptor,
-            true /* validateMethods */
-        ) { }
+        )
+            : this(
+                asyncMethodInfo,
+                completedMethodInfo,
+                actionName,
+                controllerDescriptor,
+                true /* validateMethods */
+            ) { }
 
         internal ReflectedAsyncActionDescriptor(
             MethodInfo asyncMethodInfo,
@@ -36,7 +37,8 @@ namespace System.Web.Mvc.Async
             string actionName,
             ControllerDescriptor controllerDescriptor,
             bool validateMethods
-        ) {
+        )
+        {
             if (asyncMethodInfo == null)
             {
                 throw new ArgumentNullException("asyncMethodInfo");
@@ -105,7 +107,8 @@ namespace System.Web.Mvc.Async
             IDictionary<string, object> parameters,
             AsyncCallback callback,
             object state
-        ) {
+        )
+        {
             if (controllerContext == null)
             {
                 throw new ArgumentNullException("controllerContext");
@@ -120,7 +123,8 @@ namespace System.Web.Mvc.Async
             BeginInvokeDelegate beginDelegate = delegate(
                 AsyncCallback asyncCallback,
                 object asyncState
-            ) {
+            )
+            {
                 // call the XxxAsync() method
                 ParameterInfo[] parameterInfos = AsyncMethodInfo.GetParameters();
                 var rawParameterValues =

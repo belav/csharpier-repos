@@ -91,7 +91,8 @@ namespace Microsoft.CodeAnalysis.CommandLine
             string? libEnvVariable,
             ICompilerServerLogger logger,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var pipeNameOpt = sharedCompilationId ?? GetPipeNameForPath(buildPaths.ClientDirectory);
 
             return RunServerCompilationCoreAsync(
@@ -121,7 +122,8 @@ namespace Microsoft.CodeAnalysis.CommandLine
             CreateServerFunc createServerFunc,
             ICompilerServerLogger logger,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (pipeName is null)
             {
                 throw new ArgumentException(nameof(pipeName));
@@ -185,7 +187,8 @@ namespace Microsoft.CodeAnalysis.CommandLine
                 CreateServerFunc createServerFunc,
                 ICompilerServerLogger logger,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var originalThreadId = Environment.CurrentManagedThreadId;
                 var clientDir = buildPaths.ClientDirectory;
                 var timeoutNewProcess = timeoutOverride ?? TimeOutMsNewProcess;
@@ -275,7 +278,8 @@ namespace Microsoft.CodeAnalysis.CommandLine
             BuildRequest request,
             ICompilerServerLogger logger,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             BuildResponse response;
             using (pipeStream)
             {
@@ -346,7 +350,8 @@ namespace Microsoft.CodeAnalysis.CommandLine
             Guid requestId,
             ICompilerServerLogger logger,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var buffer = Array.Empty<byte>();
 
             while (!cancellationToken.IsCancellationRequested && pipeStream.IsConnected)
@@ -385,7 +390,8 @@ namespace Microsoft.CodeAnalysis.CommandLine
             int timeoutMs,
             ICompilerServerLogger logger,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             NamedPipeClientStream? pipeStream = null;
             try
             {
@@ -458,7 +464,8 @@ namespace Microsoft.CodeAnalysis.CommandLine
         internal static (string processFilePath, string commandLineArguments, string toolFilePath) GetServerProcessInfo(
             string clientDir,
             string pipeName
-        ) {
+        )
+        {
             var serverPathWithoutExtension = Path.Combine(clientDir, "VBCSCompiler");
             var commandLineArgs = $@"""-pipename:{pipeName}""";
             return RuntimeHostInfo.GetProcessInfo(serverPathWithoutExtension, commandLineArgs);
@@ -468,7 +475,8 @@ namespace Microsoft.CodeAnalysis.CommandLine
             string clientDir,
             string pipeName,
             ICompilerServerLogger logger
-        ) {
+        )
+        {
             var serverInfo = GetServerProcessInfo(clientDir, pipeName);
 
             if (!File.Exists(serverInfo.toolFilePath))
@@ -582,7 +590,8 @@ namespace Microsoft.CodeAnalysis.CommandLine
             string userName,
             bool isAdmin,
             string compilerExeDirectory
-        ) {
+        )
+        {
             // Normalize away trailing slashes.  File APIs include / exclude this with no
             // discernable pattern.  Easiest to normalize it here vs. auditing every caller
             // of this method.

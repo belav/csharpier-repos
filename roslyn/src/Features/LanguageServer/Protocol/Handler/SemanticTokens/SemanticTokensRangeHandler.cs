@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
 
         public LSP.TextDocumentIdentifier? GetTextDocumentIdentifier(
             LSP.SemanticTokensRangeParams request
-        ) {
+        )
+        {
             Contract.ThrowIfNull(request.TextDocument);
             return request.TextDocument;
         }
@@ -44,7 +45,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
             LSP.SemanticTokensRangeParams request,
             RequestContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(request.TextDocument, "TextDocument is null.");
             Contract.ThrowIfNull(context.Document, "Document is null.");
 

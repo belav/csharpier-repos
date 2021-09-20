@@ -23,7 +23,8 @@ namespace System.Web.Http.Controllers
             ApiController controller,
             IAuthenticationFilter[] filters,
             IHttpActionResult innerResult
-        ) {
+        )
+        {
             Contract.Assert(context != null);
             Contract.Assert(controller != null);
             Contract.Assert(filters != null);

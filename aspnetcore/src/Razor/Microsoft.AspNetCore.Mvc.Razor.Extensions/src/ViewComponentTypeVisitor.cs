@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
             INamedTypeSymbol viewComponentAttribute,
             INamedTypeSymbol nonViewComponentAttribute,
             List<INamedTypeSymbol> results
-        ) {
+        )
+        {
             _viewComponentAttribute = viewComponentAttribute;
             _nonViewComponentAttribute = nonViewComponentAttribute;
             _results = results;
@@ -62,7 +63,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
                 || symbol.IsAbstract
                 || symbol.IsGenericType
                 || AttributeIsDefined(symbol, _nonViewComponentAttribute)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -75,7 +77,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
         private static bool AttributeIsDefined(
             INamedTypeSymbol type,
             INamedTypeSymbol queryAttribute
-        ) {
+        )
+        {
             if (type == null || queryAttribute == null)
             {
                 return false;

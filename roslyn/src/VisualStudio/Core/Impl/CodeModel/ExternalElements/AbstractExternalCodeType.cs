@@ -51,7 +51,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
                     compilation.GetMetadataReference(assembly)
                     is PortableExecutableReference metadataReference
                 )
-            ) {
+            )
+            {
                 return string.Empty;
             }
 

@@ -33,7 +33,8 @@ namespace System.Net.Test.Common
             Span<byte> buffer,
             int nameValueIdx,
             QPackFlags flags = QPackFlags.StaticIndex
-        ) {
+        )
+        {
             byte prefix,
                 prefixMask;
 
@@ -65,7 +66,8 @@ namespace System.Net.Test.Common
             string value,
             Encoding valueEncoding,
             QPackFlags flags = QPackFlags.StaticIndex
-        ) {
+        )
+        {
             byte prefix,
                 prefixMask;
 
@@ -111,7 +113,8 @@ namespace System.Net.Test.Common
             string value,
             Encoding valueEncoding,
             QPackFlags flags = QPackFlags.None
-        ) {
+        )
+        {
             byte[] data = Encoding.ASCII.GetBytes(name);
             byte prefix;
 
@@ -160,7 +163,8 @@ namespace System.Net.Test.Common
             string value,
             Encoding valueEncoding,
             bool huffmanCoded = false
-        ) {
+        )
+        {
             return HPackEncoder.EncodeString(value, valueEncoding, buffer, huffmanCoded);
         }
 

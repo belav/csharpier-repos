@@ -51,7 +51,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
             Document document,
             State state,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<CodeAction>.GetInstance(out var result);
             result.Add(
                 new GenerateParameterizedMemberCodeAction(
@@ -90,7 +91,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
             if (
                 semanticFacts.SupportsParameterizedProperties
                 && state.InvocationExpressionOpt != null
-            ) {
+            )
+            {
                 var typeParameters = state.SignatureInfo.DetermineTypeParameters(cancellationToken);
                 var returnType = await state.SignatureInfo.DetermineReturnTypeAsync(
                         cancellationToken

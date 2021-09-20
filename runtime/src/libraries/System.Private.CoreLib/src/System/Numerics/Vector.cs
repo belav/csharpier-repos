@@ -22,7 +22,8 @@ namespace System.Numerics
             Vector<int> condition,
             Vector<float> left,
             Vector<float> right
-        ) {
+        )
+        {
             return (Vector<float>)Vector<float>.ConditionalSelect(
                 (Vector<float>)condition,
                 left,
@@ -41,7 +42,8 @@ namespace System.Numerics
             Vector<long> condition,
             Vector<double> left,
             Vector<double> right
-        ) {
+        )
+        {
             return (Vector<double>)Vector<double>.ConditionalSelect(
                 (Vector<double>)condition,
                 left,
@@ -827,7 +829,8 @@ namespace System.Numerics
             Vector<byte> source,
             out Vector<ushort> low,
             out Vector<ushort> high
-        ) {
+        )
+        {
             int elements = Vector<byte>.Count;
             ushort* lowPtr = stackalloc ushort[elements / 2];
             for (int i = 0; i < elements / 2; i++)
@@ -854,7 +857,8 @@ namespace System.Numerics
             Vector<ushort> source,
             out Vector<uint> low,
             out Vector<uint> high
-        ) {
+        )
+        {
             int elements = Vector<ushort>.Count;
             uint* lowPtr = stackalloc uint[elements / 2];
             for (int i = 0; i < elements / 2; i++)
@@ -881,7 +885,8 @@ namespace System.Numerics
             Vector<uint> source,
             out Vector<ulong> low,
             out Vector<ulong> high
-        ) {
+        )
+        {
             int elements = Vector<uint>.Count;
             ulong* lowPtr = stackalloc ulong[elements / 2];
             for (int i = 0; i < elements / 2; i++)
@@ -908,7 +913,8 @@ namespace System.Numerics
             Vector<sbyte> source,
             out Vector<short> low,
             out Vector<short> high
-        ) {
+        )
+        {
             int elements = Vector<sbyte>.Count;
             short* lowPtr = stackalloc short[elements / 2];
             for (int i = 0; i < elements / 2; i++)
@@ -934,7 +940,8 @@ namespace System.Numerics
             Vector<short> source,
             out Vector<int> low,
             out Vector<int> high
-        ) {
+        )
+        {
             int elements = Vector<short>.Count;
             int* lowPtr = stackalloc int[elements / 2];
             for (int i = 0; i < elements / 2; i++)
@@ -960,7 +967,8 @@ namespace System.Numerics
             Vector<int> source,
             out Vector<long> low,
             out Vector<long> high
-        ) {
+        )
+        {
             int elements = Vector<int>.Count;
             long* lowPtr = stackalloc long[elements / 2];
             for (int i = 0; i < elements / 2; i++)
@@ -986,7 +994,8 @@ namespace System.Numerics
             Vector<float> source,
             out Vector<double> low,
             out Vector<double> high
-        ) {
+        )
+        {
             int elements = Vector<float>.Count;
             double* lowPtr = stackalloc double[elements / 2];
             for (int i = 0; i < elements / 2; i++)

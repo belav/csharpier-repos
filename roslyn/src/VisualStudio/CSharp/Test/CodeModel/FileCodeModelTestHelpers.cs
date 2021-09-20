@@ -28,7 +28,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.UnitTests.CodeModel
         [HandleProcessCorruptedStateExceptions]
         public static (TestWorkspace workspace, VisualStudioWorkspace extraWorkspaceToDisposeButNotUse, EnvDTE.FileCodeModel fileCodeModel) CreateWorkspaceAndFileCodeModel(
             string file
-        ) {
+        )
+        {
             var workspace = TestWorkspace.CreateCSharp(
                 file,
                 composition: VisualStudioTestCompositions.LanguageServices

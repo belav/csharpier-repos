@@ -40,7 +40,8 @@ namespace Microsoft.EntityFrameworkCore.Tools
 
         private static IEnumerable<CommandLineApplication> GetCommands(
             CommandLineApplication command
-        ) {
+        )
+        {
             var commands = new Stack<CommandLineApplication>();
             commands.Push(command);
 

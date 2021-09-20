@@ -165,7 +165,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                         if (
                             !string.IsNullOrEmpty(root.GetMetadata(Names.SourceControl))
                             == sourceControlled
-                        ) {
+                        )
+                        {
                             string localPath = root.ItemSpec;
                             string nestedRoot = root.GetMetadata(Names.NestedRoot);
                             if (string.IsNullOrEmpty(nestedRoot))
@@ -225,7 +226,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                                 Utilities.FixFilePath(containingRoot),
                                 out var mappedTopLevelPath
                             )
-                        ) {
+                        )
+                        {
                             Debug.Assert(
                                 mappedTopLevelPath.EndsWith("/", StringComparison.Ordinal)
                             );
@@ -277,7 +279,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                     !string.IsNullOrEmpty(leftValue)
                     && !string.IsNullOrEmpty(rightValue)
                     && leftValue != rightValue
-                ) {
+                )
+                {
                     Log.LogWarningFromResources(
                         "MapSourceRoots.ContainsDuplicate",
                         Names.SourceRoot,

@@ -75,11 +75,13 @@ namespace System.Collections.Tests
         /// </summary>
         protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(
             ModifyOperation operations
-        ) {
+        )
+        {
             if (
                 !AddRemoveClear_ThrowsNotSupported
                 && (operations & ModifyOperation.Add) == ModifyOperation.Add
-            ) {
+            )
+            {
                 yield return (IEnumerable<T> enumerable) =>
                 {
                     var casted = (ICollection<T>)enumerable;
@@ -90,7 +92,8 @@ namespace System.Collections.Tests
             if (
                 !AddRemoveClear_ThrowsNotSupported
                 && (operations & ModifyOperation.Remove) == ModifyOperation.Remove
-            ) {
+            )
+            {
                 yield return (IEnumerable<T> enumerable) =>
                 {
                     var casted = (ICollection<T>)enumerable;
@@ -105,7 +108,8 @@ namespace System.Collections.Tests
             if (
                 !AddRemoveClear_ThrowsNotSupported
                 && (operations & ModifyOperation.Clear) == ModifyOperation.Clear
-            ) {
+            )
+            {
                 yield return (IEnumerable<T> enumerable) =>
                 {
                     var casted = (ICollection<T>)enumerable;
@@ -411,7 +415,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void ICollection_Generic_Contains_ValidValueOnCollectionNotContainingThatValue(
             int count
-        ) {
+        )
+        {
             ICollection<T> collection = GenericICollectionFactory(count);
             int seed = 4315;
             T item = CreateT(seed++);
@@ -424,7 +429,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void ICollection_Generic_Contains_ValidValueOnCollectionContainingThatValue(
             int count
-        ) {
+        )
+        {
             ICollection<T> collection = GenericICollectionFactory(count);
             foreach (T item in collection)
                 Assert.True(collection.Contains(item));
@@ -434,7 +440,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void ICollection_Generic_Contains_DefaultValueOnCollectionNotContainingDefaultValue(
             int count
-        ) {
+        )
+        {
             ICollection<T> collection = GenericICollectionFactory(count);
             if (DefaultValueAllowed)
                 Assert.False(collection.Contains(default(T)));
@@ -444,7 +451,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public virtual void ICollection_Generic_Contains_DefaultValueOnCollectionContainingDefaultValue(
             int count
-        ) {
+        )
+        {
             if (DefaultValueAllowed && !IsReadOnly && !AddRemoveClear_ThrowsNotSupported)
             {
                 ICollection<T> collection = GenericICollectionFactory(count);
@@ -512,7 +520,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void ICollection_Generic_CopyTo_NegativeIndex_ThrowsArgumentOutOfRangeException(
             int count
-        ) {
+        )
+        {
             ICollection<T> collection = GenericICollectionFactory(count);
             T[] array = new T[count];
             Assert.Throws<ArgumentOutOfRangeException>(() => collection.CopyTo(array, -1));
@@ -525,7 +534,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void ICollection_Generic_CopyTo_IndexEqualToArrayCount_ThrowsArgumentException(
             int count
-        ) {
+        )
+        {
             ICollection<T> collection = GenericICollectionFactory(count);
             T[] array = new T[count];
             if (count > 0)
@@ -538,7 +548,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void ICollection_Generic_CopyTo_IndexLargerThanArrayCount_ThrowsAnyArgumentException(
             int count
-        ) {
+        )
+        {
             ICollection<T> collection = GenericICollectionFactory(count);
             T[] array = new T[count];
             Assert.Throws(
@@ -551,7 +562,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void ICollection_Generic_CopyTo_NotEnoughSpaceInOffsettedArray_ThrowsArgumentException(
             int count
-        ) {
+        )
+        {
             if (count > 0) // Want the T array to have at least 1 element
             {
                 ICollection<T> collection = GenericICollectionFactory(count);
@@ -588,7 +600,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void ICollection_Generic_Remove_OnReadOnlyCollection_ThrowsNotSupportedException(
             int count
-        ) {
+        )
+        {
             if (IsReadOnly || AddRemoveClear_ThrowsNotSupported)
             {
                 ICollection<T> collection = GenericICollectionFactory(count);
@@ -605,7 +618,8 @@ namespace System.Collections.Tests
                 && !AddRemoveClear_ThrowsNotSupported
                 && DefaultValueAllowed
                 && !Enumerable.Contains(InvalidValues, default(T))
-            ) {
+            )
+            {
                 int seed = count * 21;
                 ICollection<T> collection = GenericICollectionFactory(count);
                 T value = default(T);
@@ -644,7 +658,8 @@ namespace System.Collections.Tests
                 && !AddRemoveClear_ThrowsNotSupported
                 && DefaultValueAllowed
                 && !Enumerable.Contains(InvalidValues, default(T))
-            ) {
+            )
+            {
                 int seed = count * 21;
                 ICollection<T> collection = GenericICollectionFactory(count);
                 T value = default(T);

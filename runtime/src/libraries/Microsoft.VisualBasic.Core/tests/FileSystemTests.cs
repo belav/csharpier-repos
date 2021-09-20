@@ -628,7 +628,8 @@ namespace Microsoft.VisualBasic.Tests
                                     System.IO.FileAccess.Write,
                                     System.IO.FileShare.ReadWrite
                                 )
-                            ) {
+                            )
+                            {
                                 try
                                 {
                                     using (var writer = new System.IO.StreamWriter(stream))

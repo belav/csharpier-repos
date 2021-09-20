@@ -31,7 +31,8 @@ namespace System.Globalization
                     null,
                     &bufLen
                 ) != Interop.BOOL.FALSE
-            ) {
+            )
+            {
                 Span<char> languages =
                     bufLen <= 256 ? stackalloc char[(int)bufLen] : new char[bufLen];
                 fixed (char* pLanguages = languages)
@@ -43,7 +44,8 @@ namespace System.Globalization
                             pLanguages,
                             &bufLen
                         ) != Interop.BOOL.FALSE
-                    ) {
+                    )
+                    {
                         return GetCultureByName(languages.ToString());
                     }
                 }

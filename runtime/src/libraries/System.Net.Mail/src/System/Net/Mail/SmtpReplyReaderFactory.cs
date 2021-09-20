@@ -51,7 +51,8 @@ namespace System.Net.Mail
             SmtpReplyReader caller,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             ReadLinesAsyncResult result = new ReadLinesAsyncResult(this, callback, state);
             result.Read(caller);
             return result;
@@ -61,7 +62,8 @@ namespace System.Net.Mail
             SmtpReplyReader caller,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             ReadLinesAsyncResult result = new ReadLinesAsyncResult(this, callback, state, true);
             result.Read(caller);
             return result;

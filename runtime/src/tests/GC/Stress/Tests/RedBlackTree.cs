@@ -82,7 +82,8 @@ public class Tree
         int min,
         int max,
         bool notRed
-    ) {
+    )
+    {
         if (curr == null)
             return 0;
 

@@ -12,7 +12,8 @@ namespace System.CodeDom
         public CodeArrayIndexerExpression(
             CodeExpression targetObject,
             params CodeExpression[] indices
-        ) {
+        )
+        {
             TargetObject = targetObject;
             Indices.AddRange(indices);
         }

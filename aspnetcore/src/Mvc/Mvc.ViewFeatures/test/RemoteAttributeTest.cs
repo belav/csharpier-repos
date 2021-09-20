@@ -491,7 +491,8 @@ namespace Microsoft.AspNetCore.Mvc
         private static ActionContext GetActionContext(
             IServiceProvider serviceProvider,
             RouteData routeData
-        ) {
+        )
+        {
             // Set IServiceProvider properties because TemplateRoute gets services (e.g. an ILoggerFactory instance)
             // through the HttpContext.
             var httpContext = new DefaultHttpContext { RequestServices = serviceProvider, };
@@ -578,11 +579,8 @@ namespace Microsoft.AspNetCore.Mvc
             public TestableRemoteAttribute(string action, string controller)
                 : base(action, controller) { }
 
-            public TestableRemoteAttribute(
-                string action,
-                string controller,
-                string areaName
-            ) : base(action, controller, areaName) { }
+            public TestableRemoteAttribute(string action, string controller, string areaName)
+                : base(action, controller, areaName) { }
 
             public new string RouteName
             {

@@ -35,7 +35,8 @@ namespace System.Security.Cryptography.Encoding.Tests
             int labelLength,
             int dataLength,
             int expectedSize
-        ) {
+        )
+        {
             int size = PemEncoding.GetEncodedSize(labelLength, dataLength);
             Assert.Equal(expectedSize, size);
         }

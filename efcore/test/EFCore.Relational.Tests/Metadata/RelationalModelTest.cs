@@ -769,7 +769,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             bool mapToTables = false,
             bool mapToViews = false,
             Mapping mapping = Mapping.TPH
-        ) {
+        )
+        {
             var modelBuilder = CreateConventionModelBuilder();
             modelBuilder.Entity<Customer>(
                 cb =>

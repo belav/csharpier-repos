@@ -94,7 +94,8 @@ namespace System.Transactions.Tests
             string testCaseDescription,
             byte[] promotedTokenToCompare,
             Transaction txToPromote = null
-        ) {
+        )
+        {
             if (txToPromote == null)
             {
                 txToPromote = Transaction.Current;
@@ -157,7 +158,8 @@ namespace System.Transactions.Tests
             Transaction tx = null,
             EnlistmentOptions options = EnlistmentOptions.None,
             bool votePrepared = true
-        ) {
+        )
+        {
             MyEnlistment enlistment = new MyEnlistment(outcomeReceived, votePrepared);
             Transaction txToEnlist = Transaction.Current;
             if (tx != null)
@@ -183,7 +185,8 @@ namespace System.Transactions.Tests
             bool failGetPromoterType = false,
             bool failGetId = false,
             bool incorrectNotificationObjectToSetDistributedTransactionId = false
-        ) {
+        )
+        {
             IPromotableSinglePhaseNotification enlistment = null;
 
             Transaction txToEnlist = Transaction.Current;
@@ -223,7 +226,8 @@ namespace System.Transactions.Tests
         private static DependentTransaction CreateDependentClone(
             bool blocking,
             Transaction tx = null
-        ) {
+        )
+        {
             DependentTransaction clone = null;
             if (tx == null)
             {
@@ -419,7 +423,8 @@ namespace System.Transactions.Tests
             IPromotableSinglePhaseNotification promotableNotification,
             Transaction txToEnlist,
             Guid promoterType
-        ) {
+        )
+        {
             object[] parameters = new object[] { promotableNotification, promoterType };
             bool returnVal = (bool)s_enlistPromotableSinglePhaseMethodInfo.Invoke(
                 txToEnlist,
@@ -432,7 +437,8 @@ namespace System.Transactions.Tests
             IPromotableSinglePhaseNotification promotableNotification,
             Transaction txToSet,
             Guid distributedId
-        ) {
+        )
+        {
             object[] parameters = new object[] { promotableNotification, distributedId };
             s_setDistributedTransactionIdentifierMethodInfo.Invoke(txToSet, parameters);
         }
@@ -481,7 +487,8 @@ namespace System.Transactions.Tests
                 bool failGetPromoterType = false,
                 bool failGetId = false,
                 bool incorrectNotificationObjectToSetDistributedTransactionId = false
-            ) {
+            )
+            {
                 _promoterType = promoterType;
                 _promotedToken = promotedTokenToReturn;
                 _spcResponse = spcResponse;
@@ -514,7 +521,8 @@ namespace System.Transactions.Tests
                 Transaction txToEnlist = null,
                 bool expectRejection = false,
                 bool comparePromotedToken = false
-            ) {
+            )
+            {
                 if (txToEnlist == null)
                 {
                     txToEnlist = Transaction.Current;
@@ -684,7 +692,8 @@ namespace System.Transactions.Tests
                 EnlistmentOptions enlistOptions = EnlistmentOptions.None,
                 bool expectSuccessfulEnlist = true,
                 AutoResetEvent secondEnlistmentCompleted = null
-            ) {
+            )
+            {
                 _outcomeReceived = outcomeReceived;
                 _votePrepared = votePrepared;
                 _enlistDuringPrepare = enlistDuringPrepare;
@@ -970,7 +979,8 @@ namespace System.Transactions.Tests
             bool commitTx = true,
             bool votePrepared = true,
             Type expectedExceptionType = null
-        ) {
+        )
+        {
             string testCaseDescription = string.Format(
                 "TestCase_VolatileEnlistments; count = {0}; expectedOutcome = {1}; options = {2}; votePrepared = {3}, expectedExceptionType = {4}",
                 count,
@@ -1025,7 +1035,8 @@ namespace System.Transactions.Tests
                     ((expectedOutcome == TransactionStatus.Committed) && vols[i].CommittedOutcome)
                     || ((expectedOutcome == TransactionStatus.Aborted) && vols[i].AbortedOutcome)
                     || ((expectedOutcome == TransactionStatus.InDoubt) && vols[i].InDoubtOutcome)
-                ) {
+                )
+                {
                     passCount++;
                 }
             }
@@ -1044,7 +1055,8 @@ namespace System.Transactions.Tests
             int p1AfterPSPE = 0,
             int p0AfterPromote = 0,
             int p1AfterPromote = 0
-        ) {
+        )
+        {
             string testCaseDescription = string.Format(
                 "TestCase_PSPENonMsdtc commit={0}; promote={1}; spcResponse= {2}; p0BeforePSPE={3}; p0AfterPSPE={4}; p1BeforePSPE={5}; p1AfterPSPE={6}; p0AfterPromote={7}; p1AfterPromote={8}",
                 commit,
@@ -1274,7 +1286,8 @@ namespace System.Transactions.Tests
                             || (
                                 (spcResponse == TransactionStatus.InDoubt) && vols[i].InDoubtOutcome
                             )
-                        ) {
+                        )
+                        {
                             passCount++;
                         }
                     }
@@ -1324,7 +1337,8 @@ namespace System.Transactions.Tests
             int blockingAfterPSPE = 0,
             int abortingAfterPromote = 0,
             int blockingAfterPromote = 0
-        ) {
+        )
+        {
             string testCaseDescription = string.Format(
                 "TestCase_PSPENonMsdtcWithClones commit={0}; promote={1}; spcResponse= {2}; abortingBeforePSPE={3}; abortingAfterPSPE={4}; blockingBeforePSPE={5}; blockingAfterPSPE={6}; abortingAfterPromote={7}; blockingAfterPromote={8}",
                 commit,
@@ -1497,7 +1511,8 @@ namespace System.Transactions.Tests
         private static void TestCase_AbortFromVolatile(
             bool promote,
             EnlistmentOptions enlistmentOptions = EnlistmentOptions.None
-        ) {
+        )
+        {
             string testCaseDescription = string.Format(
                 "TestCase_AbortFromVolatile promote={0}; enlistmentOptions = {1}",
                 promote,
@@ -1761,7 +1776,8 @@ namespace System.Transactions.Tests
             EnlistmentOptions firstOptions = EnlistmentOptions.None,
             EnlistmentOptions secondOptions = EnlistmentOptions.None,
             bool expectSecondEnlistSuccess = true
-        ) {
+        )
+        {
             string testCaseDescription = string.Format(
                 "TestCase_EnlistDuringPrepare promote={0}; beforePromote={1}, firstOptions={2}, secondOptions={3}, expectSecondEnlistSuccess={4}",
                 promote,
@@ -1995,7 +2011,8 @@ namespace System.Transactions.Tests
                 tx.TransactionCompleted += delegate(
                     object sender,
                     TransactionEventArgs completedArgs
-                ) {
+                )
+                {
                     Trace("Completed event registered before PSPE");
                     numberOfCompletions++;
                     Assert.Equal(
@@ -2017,7 +2034,8 @@ namespace System.Transactions.Tests
                 tx.TransactionCompleted += delegate(
                     object sender,
                     TransactionEventArgs completedArgs
-                ) {
+                )
+                {
                     Trace("Completed event registered after PSPE");
                     numberOfCompletions++;
                     Assert.Equal(
@@ -2033,7 +2051,8 @@ namespace System.Transactions.Tests
                     tx.TransactionCompleted += delegate(
                         object sender,
                         TransactionEventArgs completedArgs
-                    ) {
+                    )
+                    {
                         Trace("Completed event registered after promote");
                         numberOfCompletions++;
                         Assert.Equal(
@@ -2488,7 +2507,8 @@ namespace System.Transactions.Tests
             bool commit,
             bool promote,
             TransactionStatus spcResponse
-        ) {
+        )
+        {
             TestCase_PSPENonMsdtc(commit, promote, spcResponse);
             TestCase_PSPENonMsdtc(commit, promote, spcResponse, 1);
             TestCase_PSPENonMsdtc(commit, promote, spcResponse, 1, 1);
@@ -2512,7 +2532,8 @@ namespace System.Transactions.Tests
             bool commit,
             bool promote,
             TransactionStatus spcResponse
-        ) {
+        )
+        {
             TestCase_PSPENonMsdtcWithClones(commit, promote, spcResponse);
             TestCase_PSPENonMsdtcWithClones(commit, promote, spcResponse, 1);
             TestCase_PSPENonMsdtcWithClones(commit, promote, spcResponse, 1, 1);
@@ -2640,7 +2661,8 @@ namespace System.Transactions.Tests
             EnlistmentOptions options,
             EnlistmentOptions secondOptions,
             bool expectSecondEnlistSuccess
-        ) {
+        )
+        {
             TestCase_EnlistDuringPrepare(
                 promote,
                 beforePromote,

@@ -30,7 +30,8 @@ namespace System.Linq
 
         internal TResult[] ToArray<TResult>(
             Func<TKey, IEnumerable<TElement>, TResult> resultSelector
-        ) {
+        )
+        {
             TResult[] array = new TResult[_count];
             int index = 0;
             Grouping<TKey, TElement>? g = _lastGrouping;

@@ -216,7 +216,8 @@ namespace System.Data
             DataColumn col,
             XmlNameTable nameTable,
             XmlNodeIdHashtable columns
-        ) {
+        )
+        {
             string columnLocalName = nameTable.Get(col.EncodedColumnName);
             string columnNamespace = nameTable.Get(col.Namespace);
             if (columnLocalName == null)
@@ -239,7 +240,8 @@ namespace System.Data
             XmlNameTable nameTable,
             DataColumn col,
             XmlNodeIdHashtable columns
-        ) {
+        )
+        {
             string _columnLocalName = XmlConvert.EncodeLocalName(col.ColumnName);
             string columnLocalName = nameTable.Get(_columnLocalName); // Look it up in a name table
 
@@ -462,7 +464,8 @@ namespace System.Data
             {
                 foreach (
                     DataRelation childRelations in ((DataTable)tableList[nCounter]).ChildRelations
-                ) {
+                )
+                {
                     if (!tableList.Contains(childRelations.ChildTable))
                         tableList.Add(childRelations.ChildTable);
                 }
@@ -558,7 +561,8 @@ namespace System.Data
             DataColumn col,
             XmlNameTable nameTable,
             XmlNodeIdHashtable columns
-        ) {
+        )
+        {
             // if column name starts with xml, we encode it manualy and add it for look up
             Debug.Assert(
                 col.ColumnName.StartsWith("xml", StringComparison.OrdinalIgnoreCase),

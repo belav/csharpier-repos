@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.NavigationBar
             int indent,
             ImmutableArray<RoslynNavigationBarItem> childItems,
             ImmutableArray<TextSpan> spans
-        ) {
+        )
+        {
             Kind = kind;
             Text = text;
             Glyph = glyph;

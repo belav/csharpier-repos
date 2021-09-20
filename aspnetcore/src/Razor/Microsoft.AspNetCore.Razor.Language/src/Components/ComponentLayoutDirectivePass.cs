@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         protected override void ExecuteCore(
             RazorCodeDocument codeDocument,
             DocumentIntermediateNode documentNode
-        ) {
+        )
+        {
             var @namespace = documentNode.FindPrimaryNamespace();
             var @class = documentNode.FindPrimaryClass();
             if (@namespace == null || @class == null)

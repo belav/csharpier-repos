@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.Navigation
             [NotNullWhen(true)] out string? filePath,
             out int lineNumber,
             out int charOffset
-        ) {
+        )
+        {
             filePath = null;
             lineNumber = 0;
             charOffset = 0;

@@ -937,7 +937,8 @@ namespace System.Web.Mvc.Test
         private static UrlHelper GetUrlHelper(
             RouteData routeData = null,
             RouteCollection routeCollection = null
-        ) {
+        )
+        {
             HttpContextBase httpcontext = MvcHelper.GetHttpContext("/app/", null, null);
             UrlHelper urlHelper = new UrlHelper(
                 new RequestContext(httpcontext, routeData ?? new RouteData()),

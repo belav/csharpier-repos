@@ -33,7 +33,8 @@ namespace System.Reflection.Tests
                 ConstructorInfo constructor,
                 IList<CustomAttributeTypedArgument> cats,
                 IList<CustomAttributeNamedArgument> cans
-            ) {
+            )
+            {
                 _constructor = constructor;
                 _cats = cats;
                 _cans = cans;
@@ -86,7 +87,8 @@ namespace System.Reflection.Tests
 
         private static CustomAttributeTypedArgument ProjectBackToRuntime(
             this CustomAttributeTypedArgument cat
-        ) {
+        )
+        {
             Type ecmaArgumentType = cat.ArgumentType;
             if (ecmaArgumentType.IsImplementedByRuntime())
                 return cat;
@@ -106,7 +108,8 @@ namespace System.Reflection.Tests
 
         private static CustomAttributeNamedArgument ProjectBackToRuntime(
             this CustomAttributeNamedArgument can
-        ) {
+        )
+        {
             const BindingFlags bf =
                 BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly;
             Type runtimeDeclaringType = can.MemberInfo.DeclaringType.ProjectBackToRuntime();
@@ -253,7 +256,8 @@ namespace System.Reflection.Tests
                 CustomAttributeNamedArgument cna in cad.NamedArguments.OrderBy(
                     can => can.MemberName
                 )
-            ) {
+            )
+            {
                 Console.WriteLine(si + "   MemberName....: " + cna.MemberName);
                 Console.WriteLine(si + "    IsField.......: " + cna.IsField);
                 cna.TypedValue.Dump(indent + 4);

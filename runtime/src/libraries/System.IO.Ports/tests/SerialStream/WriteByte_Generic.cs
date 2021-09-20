@@ -37,7 +37,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 Debug.WriteLine("Verifying write method throws exception after a call to Cloes()");
 
                 com.Open();
@@ -55,7 +56,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 Debug.WriteLine(
                     "Verifying write method throws exception after a call to BaseStream.Close()"
                 );
@@ -77,7 +79,8 @@ namespace System.IO.Ports.Tests
             )
             using (
                 var com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName)
-            ) {
+            )
+            {
                 var rndGen = new Random(-55);
 
                 com1.WriteTimeout = rndGen.Next(minRandomTimeout, maxRandomTimeout);
@@ -104,7 +107,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 var rndGen = new Random(-55);
 
                 com.WriteTimeout = rndGen.Next(minRandomTimeout, maxRandomTimeout);
@@ -133,7 +137,8 @@ namespace System.IO.Ports.Tests
         {
             using (
                 var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName)
-            ) {
+            )
+            {
                 var rndGen = new Random(-55);
                 var asyncEnableRts = new AsyncEnableRts();
                 var t = new Task(asyncEnableRts.EnableRTS);
@@ -171,7 +176,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 Debug.WriteLine("Verifying BytesToWrite with one call to Write");
 
                 com.Handshake = Handshake.RequestToSend;
@@ -199,7 +205,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 Debug.WriteLine("Verifying BytesToWrite with successive calls to Write");
 
                 com.Handshake = Handshake.RequestToSend;
@@ -235,7 +242,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 Debug.WriteLine("Verifying Handshake=None");
 
                 com.Open();
@@ -285,7 +293,8 @@ namespace System.IO.Ports.Tests
                         var com2 = new SerialPort(
                             TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                         )
-                    ) {
+                    )
+                    {
                         var rndGen = new Random(-55);
                         int sleepPeriod = rndGen.Next(minRandomTimeout, maxRandomTimeout / 2);
 
@@ -374,7 +383,8 @@ namespace System.IO.Ports.Tests
             )
             using (
                 var com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName)
-            ) {
+            )
+            {
                 bool rts =
                     Handshake.RequestToSend == handshake
                     || Handshake.RequestToSendXOnXOff == handshake;

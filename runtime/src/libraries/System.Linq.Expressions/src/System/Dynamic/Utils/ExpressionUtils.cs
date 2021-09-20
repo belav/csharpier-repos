@@ -19,7 +19,8 @@ namespace System.Dynamic.Utils
         public static ReadOnlyCollection<ParameterExpression> ReturnReadOnly(
             IParameterProvider provider,
             ref object collection
-        ) {
+        )
+        {
             if (collection is ParameterExpression tObj)
             {
                 // otherwise make sure only one read-only collection ever gets exposed
@@ -70,7 +71,8 @@ namespace System.Dynamic.Utils
         public static ReadOnlyCollection<Expression> ReturnReadOnly(
             IArgumentProvider provider,
             ref object collection
-        ) {
+        )
+        {
             if (collection is Expression tObj)
             {
                 // otherwise make sure only one read-only collection ever gets exposed
@@ -108,7 +110,8 @@ namespace System.Dynamic.Utils
             ExpressionType nodeKind,
             ref ReadOnlyCollection<Expression> arguments,
             string? methodParamName
-        ) {
+        )
+        {
             Debug.Assert(
                 nodeKind == ExpressionType.Invoke
                     || nodeKind == ExpressionType.Call
@@ -159,7 +162,8 @@ namespace System.Dynamic.Utils
             ExpressionType nodeKind,
             int count,
             ParameterInfo[] pis
-        ) {
+        )
+        {
             if (pis.Length != count)
             {
                 // Throw the right error for the node we were given
@@ -186,7 +190,8 @@ namespace System.Dynamic.Utils
             string? methodParamName,
             string argumentParamName,
             int index = -1
-        ) {
+        )
+        {
             RequiresCanRead(arguments, argumentParamName, index);
             Type pType = pi.ParameterType;
             if (pType.IsByRef)
@@ -276,7 +281,8 @@ namespace System.Dynamic.Utils
             if (
                 TypeUtils.IsSameOrSubclass(quoteable, parameterType)
                 && parameterType.IsInstanceOfType(argument)
-            ) {
+            )
+            {
                 argument = Expression.Quote(argument);
                 return true;
             }
@@ -287,7 +293,8 @@ namespace System.Dynamic.Utils
         internal static ParameterInfo[] GetParametersForValidation(
             MethodBase method,
             ExpressionType nodeKind
-        ) {
+        )
+        {
             ParameterInfo[] pis = method.GetParametersCached();
 
             if (nodeKind == ExpressionType.Dynamic)

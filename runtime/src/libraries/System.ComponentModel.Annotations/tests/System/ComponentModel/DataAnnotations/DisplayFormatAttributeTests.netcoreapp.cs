@@ -70,7 +70,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         public void GetNullDisplayText_InvalidResourceType_ThrowsInvalidOperationException(
             Type nullDisplayTextResourceType,
             string nullDisplayText
-        ) {
+        )
+        {
             var attribute = new DisplayFormatAttribute
             {
                 NullDisplayTextResourceType = nullDisplayTextResourceType,

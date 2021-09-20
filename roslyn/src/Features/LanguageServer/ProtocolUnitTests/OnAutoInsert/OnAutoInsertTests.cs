@@ -310,7 +310,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.OnAutoInsert
             string expected,
             bool insertSpaces = true,
             int tabSize = 4
-        ) {
+        )
+        {
             using var testLspServer = CreateTestLspServer(markup, out var locations);
             var locationTyped = locations["type"].Single();
 
@@ -338,7 +339,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.OnAutoInsert
             string markup,
             bool insertSpaces = true,
             int tabSize = 4
-        ) {
+        )
+        {
             using var testLspServer = CreateTestLspServer(markup, out var locations);
             var locationTyped = locations["type"].Single();
             var documentText = await testLspServer.GetCurrentSolution()
@@ -363,7 +365,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.OnAutoInsert
             LSP.Location locationTyped,
             bool insertSpaces,
             int tabSize
-        ) {
+        )
+        {
             return await testLspServer.ExecuteRequestAsync<
                 LSP.DocumentOnAutoInsertParams,
                 LSP.DocumentOnAutoInsertResponseItem?

@@ -50,7 +50,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             Func<SyntaxNode, SyntaxNode?>? syntaxMap,
             SyntaxTree? syntaxMapTree,
             SymbolKey? partialType
-        ) {
+        )
+        {
             Kind = kind;
             Symbol = symbol;
             SyntaxMap = syntaxMap;

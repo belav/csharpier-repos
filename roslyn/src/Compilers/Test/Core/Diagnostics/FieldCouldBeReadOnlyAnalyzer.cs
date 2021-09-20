@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                         {
                             if (
                                 operationBlockContext.OwningSymbol is IMethodSymbol containingMethod
-                            ) {
+                            )
+                            {
                                 bool inConstructor =
                                     containingMethod.MethodKind == MethodKind.Constructor;
                                 ITypeSymbol staticConstructorType =
@@ -60,7 +61,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                         if (
                                             operationContext.Operation
                                             is IAssignmentOperation assignment
-                                        ) {
+                                        )
+                                        {
                                             AssignTo(
                                                 assignment.Target,
                                                 inConstructor,
@@ -72,7 +74,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                         else if (
                                             operationContext.Operation
                                             is IIncrementOrDecrementOperation increment
-                                        ) {
+                                        )
+                                        {
                                             AssignTo(
                                                 increment.Target,
                                                 inConstructor,
@@ -101,11 +104,13 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                             (IInvocationOperation)operationContext.Operation;
                                         foreach (
                                             IArgumentOperation argument in invocation.Arguments
-                                        ) {
+                                        )
+                                        {
                                             if (
                                                 argument.Parameter.RefKind == RefKind.Out
                                                 || argument.Parameter.RefKind == RefKind.Ref
-                                            ) {
+                                            )
+                                            {
                                                 AssignTo(
                                                     argument.Value,
                                                     inConstructor,
@@ -130,7 +135,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                 !field.IsConst
                                 && !field.IsReadOnly
                                 && !assignedToFields.Contains(field)
-                            ) {
+                            )
+                            {
                                 mightBecomeReadOnlyFields.Add(field);
                             }
                         },
@@ -160,7 +166,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             ITypeSymbol staticConstructorType,
             HashSet<IFieldSymbol> assignedToFields,
             HashSet<IFieldSymbol> mightBecomeReadOnlyFields
-        ) {
+        )
+        {
             if (target.Kind == OperationKind.FieldReference)
             {
                 IFieldReferenceOperation fieldReference = (IFieldReferenceOperation)target;
@@ -179,7 +186,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                     staticConstructorType != null
                     && targetField.IsStatic
                     && targetField.ContainingType == staticConstructorType
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -203,7 +211,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             CompilationAnalysisContext context,
             IFieldSymbol field,
             DiagnosticDescriptor descriptor
-        ) {
+        )
+        {
             context.ReportDiagnostic(
                 Diagnostic.Create(descriptor, field.Locations.FirstOrDefault())
             );

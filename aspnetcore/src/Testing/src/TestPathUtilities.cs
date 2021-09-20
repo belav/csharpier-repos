@@ -38,7 +38,8 @@ namespace Microsoft.AspNetCore.Testing
                             $"{solution}.slnf",
                             SearchOption.AllDirectories
                         )
-                    ) {
+                    )
+                    {
                         return solutionFileInfo.DirectoryName;
                     }
                     // No luck. Exit loop and error out.

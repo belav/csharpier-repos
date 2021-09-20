@@ -201,7 +201,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Extensions
             ITypeSymbol pointedAtType = null,
             bool isWithEvents = false,
             TypeKind typeKind = TypeKind.Unknown
-        ) {
+        )
+        {
             var symbol = CreateSymbolMock(
                 kind,
                 declaredAccessibility,
@@ -230,7 +231,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Extensions
             ITypeSymbol pointedAtType = null,
             bool isWithEvents = false,
             TypeKind typeKind = TypeKind.Unknown
-        ) {
+        )
+        {
             var symbolMock = new Mock<ISymbol>(MockBehavior.Strict);
 
             symbolMock.SetupGet(s => s.Kind).Returns(kind);

@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
     {
         public ContentNegotiationTest(
             MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting> fixture
-        ) {
+        )
+        {
             Client = fixture.CreateDefaultClient();
         }
 
@@ -104,7 +105,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [InlineData("text/html, application/json, image/jpeg, *; q=.2, */*; q=.2")]
         public async Task ContentNegotiationWithPartiallyValidAcceptHeader_SkipsInvalidEntries(
             string acceptHeader
-        ) {
+        )
+        {
             // Arrange
             var expectedContentType = MediaTypeHeaderValue.Parse("application/json;charset=utf-8");
             var request = new HttpRequestMessage(
@@ -179,7 +181,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         )]
         public async Task NoAcceptAndRequestContentTypeHeaders_UsesFirstFormatterWhichCanWriteType(
             string url
-        ) {
+        )
+        {
             // Arrange
             var expectedContentType = MediaTypeHeaderValue.Parse("application/json;charset=utf-8");
 
@@ -227,7 +230,8 @@ END:VCARD
             string action,
             string expectedMediaType,
             string expectedResponseBody
-        ) {
+        )
+        {
             // Arrange & Act
             var response = await Client.GetAsync(
                 "http://localhost/ProducesWithMediaTypeParameters/" + action
@@ -404,7 +408,8 @@ END:VCARD
         [InlineData("text/html, application/xhtml+xml, image/jxr, */*")] // typical browser accept header
         public async Task ObjectResult_WithStringReturnType_DefaultToTextPlain(
             string acceptMediaType
-        ) {
+        )
+        {
             // Arrange
             var request = new HttpRequestMessage(
                 HttpMethod.Get,

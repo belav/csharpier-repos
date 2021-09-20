@@ -10,7 +10,8 @@ namespace System.Configuration.Internal
         void IInternalConfigSettingsFactory.SetConfigurationSystem(
             IInternalConfigSystem configSystem,
             bool initComplete
-        ) {
+        )
+        {
             ConfigurationManager.SetConfigurationSystem(configSystem, initComplete);
         }
 

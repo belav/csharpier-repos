@@ -39,7 +39,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         internal static bool ExpectsStringValue(
             this BoundAttributeDescriptor attribute,
             string name
-        ) {
+        )
+        {
             if (attribute.IsStringProperty)
             {
                 return true;
@@ -55,7 +56,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         internal static bool ExpectsBooleanValue(
             this BoundAttributeDescriptor attribute,
             string name
-        ) {
+        )
+        {
             if (attribute.IsBooleanProperty)
             {
                 return true;

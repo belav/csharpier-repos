@@ -149,7 +149,8 @@ namespace Roslyn.Utilities
             private void BuildArrays(
                 ImmutableArray<Node>.Builder nodes,
                 ImmutableArray<Edge>.Builder edges
-            ) {
+            )
+            {
                 var currentEdgeIndex = 0;
                 for (var i = 0; i < _builderNodes.Length; i++)
                 {
@@ -229,7 +230,8 @@ namespace Roslyn.Utilities
                             editDistance,
                             out var childNodeIndex
                         )
-                    ) {
+                    )
+                    {
                         // Edit distances collide.  Move to this child and add this word to it.
                         currentNodeIndex = childNodeIndex;
                         continue;
@@ -253,7 +255,8 @@ namespace Roslyn.Utilities
                 int currentNodeEdgeCount,
                 int currentNodeIndex,
                 int editDistance
-            ) {
+            )
+            {
                 // The node as 'currentNodeIndex' doesn't have an edge with this edit distance.
                 // Three cases to handle:
                 // 1) there are less than 4 edges.  We simply place the edge into the correct
@@ -299,7 +302,8 @@ namespace Roslyn.Utilities
                 int currentNodeIndex,
                 int editDistance,
                 out int childIndex
-            ) {
+            )
+            {
                 // linearly scan the children we have to see if there is one with this edit distance.
                 var start = currentNodeIndex * CompactEdgeAllocationSize;
                 var end = start + Math.Min(currentNode.EdgeCount, CompactEdgeAllocationSize);

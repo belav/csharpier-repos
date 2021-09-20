@@ -35,7 +35,8 @@ namespace Microsoft.AspNetCore.DataProtection.XmlEncryption
             string protectionDescriptorRule,
             DpapiNGProtectionDescriptorFlags flags,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             if (protectionDescriptorRule == null)
             {
                 throw new ArgumentNullException(nameof(protectionDescriptorRule));

@@ -25,7 +25,8 @@ namespace Microsoft.AspNetCore.Builder
             this IApplicationBuilder app,
             Predicate predicate,
             Action<IApplicationBuilder> configuration
-        ) {
+        )
+        {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));

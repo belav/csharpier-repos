@@ -36,7 +36,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             Assembly startupAssembly,
             IOperationReporter reporter,
             string[] args
-        ) {
+        )
+        {
             _startupAssembly = startupAssembly;
             _reporter = reporter;
             _args = args;
@@ -156,7 +157,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                         provider,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -176,7 +178,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             string provider,
             IServiceCollection services,
             bool throwOnError = false
-        ) {
+        )
+        {
             _reporter.WriteVerbose(DesignStrings.FindingProviderServices(provider));
 
             Assembly providerAssembly;
@@ -228,7 +231,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         private static void ConfigureDesignTimeServices(
             Type designTimeServicesType,
             IServiceCollection services
-        ) {
+        )
+        {
             Check.DebugAssert(designTimeServicesType != null, "designTimeServicesType is null.");
 
             var designTimeServices = (IDesignTimeServices)Activator.CreateInstance(

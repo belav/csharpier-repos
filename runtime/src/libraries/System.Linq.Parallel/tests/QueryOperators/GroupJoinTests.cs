@@ -65,7 +65,8 @@ namespace System.Linq.Parallel.Tests
                     y => y,
                     (x, y) => KeyValuePair.Create(x, y)
                 )
-            ) {
+            )
+            {
                 seen.Add(p.Key);
                 if (p.Key < (rightCount + (KeyFactor - 1)) / KeyFactor)
                 {
@@ -92,7 +93,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> left,
             int leftCount,
             int rightCount
-        ) {
+        )
+        {
             ParallelQuery<int> leftQuery = left.Item;
             int seen = 0;
             foreach (
@@ -102,7 +104,8 @@ namespace System.Linq.Parallel.Tests
                     y => y,
                     (x, y) => KeyValuePair.Create(x, y)
                 )
-            ) {
+            )
+            {
                 Assert.Equal(seen++, p.Key);
                 if (p.Key < (rightCount + (KeyFactor - 1)) / KeyFactor)
                 {
@@ -129,7 +132,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> left,
             int leftCount,
             int rightCount
-        ) {
+        )
+        {
             GroupJoin(left, leftCount, rightCount);
         }
 
@@ -180,7 +184,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> left,
             int leftCount,
             int rightCount
-        ) {
+        )
+        {
             ParallelQuery<int> leftQuery = left.Item;
             int seen = 0;
             Assert.All(
@@ -220,7 +225,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> left,
             int leftCount,
             int rightCount
-        ) {
+        )
+        {
             GroupJoin_NotPipelined(left, leftCount, rightCount);
         }
 
@@ -283,7 +289,8 @@ namespace System.Linq.Parallel.Tests
             int leftCount,
             Labeled<ParallelQuery<int>> right,
             int rightCount
-        ) {
+        )
+        {
             ParallelQuery<int> leftQuery = left.Item;
             ParallelQuery<int> rightQuery = right.Item;
             int seenOuter = 0;
@@ -333,7 +340,8 @@ namespace System.Linq.Parallel.Tests
             int leftCount,
             Labeled<ParallelQuery<int>> right,
             int rightCount
-        ) {
+        )
+        {
             GroupJoin_Multiple(left, leftCount, right, rightCount);
         }
 
@@ -347,7 +355,8 @@ namespace System.Linq.Parallel.Tests
             int leftCount,
             Labeled<ParallelQuery<int>> right,
             int rightCount
-        ) {
+        )
+        {
             ParallelQuery<int> leftQuery = left.Item.AsUnordered().OrderBy(x => 0);
             ParallelQuery<int> rightQuery = right.Item;
             int seenNonEmpty = 0;
@@ -403,7 +412,8 @@ namespace System.Linq.Parallel.Tests
             int leftCount,
             Labeled<ParallelQuery<int>> right,
             int rightCount
-        ) {
+        )
+        {
             GroupJoin_Multiple_LeftWithOrderingColisions(left, leftCount, right, rightCount);
         }
 
@@ -468,7 +478,8 @@ namespace System.Linq.Parallel.Tests
             int leftCount,
             Labeled<ParallelQuery<int>> right,
             int rightCount
-        ) {
+        )
+        {
             ParallelQuery<int> leftQuery = left.Item;
             ParallelQuery<int> rightQuery = right.Item;
             int seenOuter = 0;
@@ -525,7 +536,8 @@ namespace System.Linq.Parallel.Tests
             int leftCount,
             Labeled<ParallelQuery<int>> right,
             int rightCount
-        ) {
+        )
+        {
             GroupJoin_CustomComparator(left, leftCount, right, rightCount);
         }
 
@@ -539,7 +551,8 @@ namespace System.Linq.Parallel.Tests
             int leftCount,
             Labeled<ParallelQuery<int>> right,
             int rightCount
-        ) {
+        )
+        {
             ParallelQuery<int> leftQuery = left.Item.AsUnordered().OrderBy(x => x / KeyFactor);
             ParallelQuery<int> rightQuery = right.Item;
             int seenNonEmpty = 0;
@@ -639,7 +652,8 @@ namespace System.Linq.Parallel.Tests
             int leftCount,
             Labeled<ParallelQuery<int>> right,
             int rightCount
-        ) {
+        )
+        {
             GroupJoin_CustomComparator_LeftWithOrderingColisions(
                 left,
                 leftCount,

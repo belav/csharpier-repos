@@ -78,7 +78,8 @@ namespace System.Drawing.Tests
             int height,
             PixelFormat pixelFormat,
             ImageFormat rawFormat
-        ) {
+        )
+        {
             using (var bitmap = new Bitmap(Helpers.GetTestBitmapPath(filename)))
             {
                 Assert.Equal(width, bitmap.Width);
@@ -96,7 +97,8 @@ namespace System.Drawing.Tests
             int height,
             PixelFormat pixelFormat,
             ImageFormat rawFormat
-        ) {
+        )
+        {
             foreach (bool useIcm in new bool[] { true, false })
             {
                 using (var bitmap = new Bitmap(Helpers.GetTestBitmapPath(filename), useIcm))
@@ -187,7 +189,8 @@ namespace System.Drawing.Tests
             int height,
             PixelFormat pixelFormat,
             ImageFormat rawFormat
-        ) {
+        )
+        {
             using (Stream stream = File.OpenRead(Helpers.GetTestBitmapPath(filename)))
             using (var bitmap = new Bitmap(stream))
             {
@@ -206,7 +209,8 @@ namespace System.Drawing.Tests
             int height,
             PixelFormat pixelFormat,
             ImageFormat rawFormat
-        ) {
+        )
+        {
             foreach (bool useIcm in new bool[] { true, false })
             {
                 using (Stream stream = File.OpenRead(Helpers.GetTestBitmapPath(filename)))
@@ -318,7 +322,8 @@ namespace System.Drawing.Tests
             int stride,
             PixelFormat pixelFormat,
             IntPtr scan0
-        ) {
+        )
+        {
             using (var bitmap = new Bitmap(width, height, stride, pixelFormat, scan0))
             {
                 Assert.Equal(width, bitmap.Width);
@@ -577,7 +582,8 @@ namespace System.Drawing.Tests
             Bitmap bitmap,
             Rectangle rectangle,
             PixelFormat targetFormat
-        ) {
+        )
+        {
             try
             {
                 using (Bitmap clone = bitmap.Clone(rectangle, targetFormat))
@@ -628,7 +634,8 @@ namespace System.Drawing.Tests
             Bitmap bitmap,
             Rectangle rectangle,
             PixelFormat format
-        ) {
+        )
+        {
             try
             {
                 using (Bitmap clone = bitmap.Clone((RectangleF)rectangle, format))
@@ -679,7 +686,8 @@ namespace System.Drawing.Tests
             int y,
             int width,
             int height
-        ) {
+        )
+        {
             using (var bitmap = new Bitmap(3, 3))
             {
                 Assert.Throws<OutOfMemoryException>(
@@ -1034,7 +1042,8 @@ namespace System.Drawing.Tests
             {
                 using (
                     Bitmap bitmap = GetHicon_FromHicon_ReturnsExpected(icon.Handle, width, height)
-                ) {
+                )
+                {
                     handle = bitmap.GetHicon();
                 }
             }
@@ -1806,7 +1815,8 @@ namespace System.Drawing.Tests
             PixelFormat pixelFormat,
             int expectedStride,
             int expectedReserved
-        ) {
+        )
+        {
             Do_LockBits_Invoke_Success(
                 bitmap,
                 rectangle,
@@ -1828,7 +1838,8 @@ namespace System.Drawing.Tests
             PixelFormat pixelFormat,
             int expectedStride,
             int expectedReserved
-        ) {
+        )
+        {
             Do_LockBits_Invoke_Success(
                 bitmap,
                 rectangle,
@@ -1846,7 +1857,8 @@ namespace System.Drawing.Tests
             PixelFormat pixelFormat,
             int expectedStride,
             int expectedReserved
-        ) {
+        )
+        {
             try
             {
                 BitmapData data = bitmap.LockBits(rectangle, lockMode, pixelFormat);
@@ -1914,7 +1926,8 @@ namespace System.Drawing.Tests
             int y,
             int width,
             int height
-        ) {
+        )
+        {
             using (var bitmap = new Bitmap(2, 2))
             {
                 AssertExtensions.Throws<ArgumentException>(

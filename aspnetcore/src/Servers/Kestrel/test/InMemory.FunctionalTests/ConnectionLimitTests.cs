@@ -45,7 +45,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     },
                     counter
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     await connection.SendEmptyGetAsKeepAlive();
@@ -79,7 +80,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     },
                     max: 1
                 )
-            ) {
+            )
+            {
                 using (var disposables = new DisposableStack<InMemoryConnection>())
                 {
                     var upgraded = server.CreateConnection();
@@ -128,7 +130,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     },
                     max
                 )
-            ) {
+            )
+            {
                 using (var disposables = new DisposableStack<InMemoryConnection>())
                 {
                     for (var i = 0; i < max; i++)
@@ -195,7 +198,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
 
             await using (
                 var server = CreateServerWithMaxConnections(_ => Task.CompletedTask, counter)
-            ) {
+            )
+            {
                 // open a bunch of connections in parallel
                 Parallel.For(
                     0,
@@ -236,7 +240,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
         private TestServer CreateServerWithMaxConnections(
             RequestDelegate app,
             ResourceCounter concurrentConnectionCounter
-        ) {
+        )
+        {
             var serviceContext = new TestServiceContext(LoggerFactory);
 
             var listenOptions = new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0));

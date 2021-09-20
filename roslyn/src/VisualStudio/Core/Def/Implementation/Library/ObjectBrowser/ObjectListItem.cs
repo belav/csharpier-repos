@@ -26,7 +26,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             StandardGlyphGroup glyphGroup,
             StandardGlyphItem glyphItem = StandardGlyphItem.GlyphItemPublic,
             bool isHidden = false
-        ) {
+        )
+        {
             _projectId = projectId;
 
             _glyphIndex =

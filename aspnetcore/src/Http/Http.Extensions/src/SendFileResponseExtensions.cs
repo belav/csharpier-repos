@@ -34,7 +34,8 @@ namespace Microsoft.AspNetCore.Http
             this HttpResponse response,
             IFileInfo file,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (response == null)
             {
                 throw new ArgumentNullException(nameof(response));
@@ -67,7 +68,8 @@ namespace Microsoft.AspNetCore.Http
             long offset,
             long? count,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (response == null)
             {
                 throw new ArgumentNullException(nameof(response));
@@ -96,7 +98,8 @@ namespace Microsoft.AspNetCore.Http
             this HttpResponse response,
             string fileName,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (response == null)
             {
                 throw new ArgumentNullException(nameof(response));
@@ -130,7 +133,8 @@ namespace Microsoft.AspNetCore.Http
             long offset,
             long? count,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (response == null)
             {
                 throw new ArgumentNullException(nameof(response));
@@ -150,7 +154,8 @@ namespace Microsoft.AspNetCore.Http
             long offset,
             long? count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(file.PhysicalPath))
             {
                 CheckRange(offset, count, file.Length);
@@ -190,7 +195,8 @@ namespace Microsoft.AspNetCore.Http
             long offset,
             long? count,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var useRequestAborted = !cancellationToken.CanBeCanceled;
             var localCancel = useRequestAborted
                 ? response.HttpContext.RequestAborted
@@ -215,7 +221,8 @@ namespace Microsoft.AspNetCore.Http
                 && (
                     count.GetValueOrDefault() < 0 || count.GetValueOrDefault() > fileLength - offset
                 )
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(nameof(count), count, string.Empty);
             }
         }

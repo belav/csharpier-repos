@@ -38,7 +38,8 @@ namespace System.Threading.Tests
             bool createdNew;
             using (
                 var ewh = new EventWaitHandle(true, EventResetMode.AutoReset, name, out createdNew)
-            ) {
+            )
+            {
                 Assert.True(createdNew);
             }
         }
@@ -128,7 +129,8 @@ namespace System.Threading.Tests
 
             using (
                 EventWaitHandle are1 = new EventWaitHandle(false, EventResetMode.AutoReset, name)
-            ) {
+            )
+            {
                 using (EventWaitHandle are2 = EventWaitHandle.OpenExisting(name))
                 {
                     are1.Set();
@@ -223,7 +225,8 @@ namespace System.Threading.Tests
                     outboundName,
                     inboundName
                 )
-            ) {
+            )
+            {
                 // Repeatedly wait for one event and then set the other
                 for (int i = 0; i < 10; i++)
                 {
@@ -241,7 +244,8 @@ namespace System.Threading.Tests
             string modeName,
             string inboundName,
             string outboundName
-        ) {
+        )
+        {
             EventResetMode mode = (EventResetMode)Enum.Parse(typeof(EventResetMode), modeName);
 
             // Open the two events

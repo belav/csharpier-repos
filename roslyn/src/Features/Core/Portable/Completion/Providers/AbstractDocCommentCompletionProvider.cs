@@ -195,7 +195,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         protected IEnumerable<CompletionItem> GetAttributeItems(
             string tagName,
             ISet<string> existingAttributes
-        ) {
+        )
+        {
             return s_attributeMap.Where(x => x[0] == tagName && !existingAttributes.Contains(x[1]))
                 .Select(x => CreateCompletionItem(x[1], x[2], x[3]));
         }
@@ -276,7 +277,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             ISymbol symbol,
             string tagName,
             string attributeName
-        ) {
+        )
+        {
             if (attributeName == NameAttributeName && symbol != null)
             {
                 if (tagName == ParameterElementName || tagName == ParameterReferenceElementName)
@@ -393,7 +395,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             CompletionItem item,
             char? commitChar = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var includesCommitCharacter = true;
 
             if (
@@ -403,7 +406,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                     out var beforeCaretText,
                     out var afterCaretText
                 )
-            ) {
+            )
+            {
                 includesCommitCharacter = false;
             }
             else
@@ -429,7 +433,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 commitChar.HasValue
                 && !char.IsWhiteSpace(commitChar.Value)
                 && commitChar.Value != replacementText[^1]
-            ) {
+            )
+            {
                 // include the commit character
                 replacementText += commitChar.Value;
 
@@ -470,7 +475,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             string afterCaretText,
             string beforeCaretTextOnSpace = null,
             string afterCaretTextOnSpace = null
-        ) {
+        )
+        {
             return XmlDocCommentCompletionItem.Create(
                 displayText,
                 beforeCaretText,

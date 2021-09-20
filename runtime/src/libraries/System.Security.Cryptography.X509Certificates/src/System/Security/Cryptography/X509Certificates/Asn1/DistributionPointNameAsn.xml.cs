@@ -71,7 +71,8 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
                         || !validateTag.HasSameClassAndValue(
                             new Asn1Tag(TagClass.ContextSpecific, 1)
                         )
-                    ) {
+                    )
+                    {
                         throw new CryptographicException();
                     }
                 }
@@ -96,7 +97,8 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
         internal static DistributionPointNameAsn Decode(
             ReadOnlyMemory<byte> encoded,
             AsnEncodingRules ruleSet
-        ) {
+        )
+        {
             try
             {
                 AsnValueReader reader = new AsnValueReader(encoded.Span, ruleSet);
@@ -115,7 +117,8 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             ref AsnValueReader reader,
             ReadOnlyMemory<byte> rebind,
             out DistributionPointNameAsn decoded
-        ) {
+        )
+        {
             try
             {
                 DecodeCore(ref reader, rebind, out decoded);
@@ -130,7 +133,8 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             ref AsnValueReader reader,
             ReadOnlyMemory<byte> rebind,
             out DistributionPointNameAsn decoded
-        ) {
+        )
+        {
             decoded = default;
             Asn1Tag tag = reader.PeekTag();
             AsnValueReader collectionReader;

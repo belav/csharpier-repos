@@ -29,7 +29,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public DiagnosticTableControlEventProcessorProvider(
             IVisualStudioDiagnosticListSuppressionStateService suppressionStateService
-        ) {
+        )
+        {
             _suppressionStateService =
                 (VisualStudioDiagnosticListSuppressionStateService)suppressionStateService;
         }

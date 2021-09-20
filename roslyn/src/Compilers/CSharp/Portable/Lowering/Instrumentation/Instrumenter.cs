@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static BoundStatement InstrumentStatement(
             BoundStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             Debug.Assert(!original.WasCompilerGenerated);
             return rewritten;
         }
@@ -39,14 +40,16 @@ namespace Microsoft.CodeAnalysis.CSharp
         public virtual BoundStatement InstrumentNoOpStatement(
             BoundNoOpStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             return InstrumentStatement(original, rewritten);
         }
 
         public virtual BoundStatement InstrumentYieldBreakStatement(
             BoundYieldBreakStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             Debug.Assert(
                 !original.WasCompilerGenerated || original.Syntax.Kind() == SyntaxKind.Block
             );
@@ -56,7 +59,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public virtual BoundStatement InstrumentYieldReturnStatement(
             BoundYieldReturnStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             return InstrumentStatement(original, rewritten);
         }
 
@@ -66,7 +70,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public virtual BoundStatement? CreateBlockPrologue(
             BoundBlock original,
             out Symbols.LocalSymbol? synthesizedLocal
-        ) {
+        )
+        {
             synthesizedLocal = null;
             return null;
         }
@@ -82,35 +87,40 @@ namespace Microsoft.CodeAnalysis.CSharp
         public virtual BoundStatement InstrumentThrowStatement(
             BoundThrowStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             return InstrumentStatement(original, rewritten);
         }
 
         public virtual BoundStatement InstrumentContinueStatement(
             BoundContinueStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             return InstrumentStatement(original, rewritten);
         }
 
         public virtual BoundStatement InstrumentGotoStatement(
             BoundGotoStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             return InstrumentStatement(original, rewritten);
         }
 
         public virtual BoundStatement InstrumentExpressionStatement(
             BoundExpressionStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             return InstrumentStatement(original, rewritten);
         }
 
         public virtual BoundStatement InstrumentFieldOrPropertyInitializer(
             BoundStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             Debug.Assert(LocalRewriter.IsFieldOrPropertyInitializer(original));
             return InstrumentStatement(original, rewritten);
         }
@@ -118,7 +128,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public virtual BoundStatement InstrumentBreakStatement(
             BoundBreakStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             return InstrumentStatement(original, rewritten);
         }
 
@@ -126,7 +137,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundDoStatement original,
             BoundExpression rewrittenCondition,
             SyntheticBoundNodeFactory factory
-        ) {
+        )
+        {
             Debug.Assert(!original.WasCompilerGenerated);
             Debug.Assert(original.Syntax.Kind() == SyntaxKind.DoStatement);
             Debug.Assert(factory != null);
@@ -137,7 +149,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundWhileStatement original,
             BoundExpression rewrittenCondition,
             SyntheticBoundNodeFactory factory
-        ) {
+        )
+        {
             Debug.Assert(!original.WasCompilerGenerated);
             Debug.Assert(original.Syntax.Kind() == SyntaxKind.WhileStatement);
             Debug.Assert(factory != null);
@@ -147,7 +160,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public virtual BoundStatement InstrumentDoStatementConditionalGotoStart(
             BoundDoStatement original,
             BoundStatement ifConditionGotoStart
-        ) {
+        )
+        {
             Debug.Assert(!original.WasCompilerGenerated);
             Debug.Assert(original.Syntax.Kind() == SyntaxKind.DoStatement);
             return ifConditionGotoStart;
@@ -156,7 +170,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public virtual BoundStatement InstrumentWhileStatementConditionalGotoStartOrBreak(
             BoundWhileStatement original,
             BoundStatement ifConditionGotoStart
-        ) {
+        )
+        {
             Debug.Assert(!original.WasCompilerGenerated);
             Debug.Assert(original.Syntax.Kind() == SyntaxKind.WhileStatement);
             return ifConditionGotoStart;
@@ -166,7 +181,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public virtual BoundStatement? InstrumentForEachStatementCollectionVarDeclaration(
             BoundForEachStatement original,
             BoundStatement? collectionVarDecl
-        ) {
+        )
+        {
             Debug.Assert(!original.WasCompilerGenerated);
             Debug.Assert(original.Syntax is CommonForEachStatementSyntax);
             return collectionVarDecl;
@@ -175,7 +191,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public virtual BoundStatement InstrumentForEachStatement(
             BoundForEachStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             Debug.Assert(original.Syntax is CommonForEachStatementSyntax);
             return InstrumentStatement(original, rewritten);
         }
@@ -183,7 +200,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public virtual BoundStatement InstrumentForEachStatementIterationVarDeclaration(
             BoundForEachStatement original,
             BoundStatement iterationVarDecl
-        ) {
+        )
+        {
             Debug.Assert(!original.WasCompilerGenerated);
             Debug.Assert(original.Syntax.Kind() == SyntaxKind.ForEachStatement);
             return iterationVarDecl;
@@ -192,7 +210,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public virtual BoundStatement InstrumentForEachStatementDeconstructionVariablesDeclaration(
             BoundForEachStatement original,
             BoundStatement iterationVarDecl
-        ) {
+        )
+        {
             Debug.Assert(!original.WasCompilerGenerated);
             Debug.Assert(original.Syntax.Kind() == SyntaxKind.ForEachVariableStatement);
             return iterationVarDecl;
@@ -201,7 +220,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public virtual BoundStatement InstrumentForEachStatementConditionalGotoStart(
             BoundForEachStatement original,
             BoundStatement branchBack
-        ) {
+        )
+        {
             Debug.Assert(!original.WasCompilerGenerated);
             Debug.Assert(original.Syntax is CommonForEachStatementSyntax);
             return branchBack;
@@ -210,7 +230,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public virtual BoundStatement InstrumentForStatementConditionalGotoStartOrBreak(
             BoundForStatement original,
             BoundStatement branchBack
-        ) {
+        )
+        {
             Debug.Assert(!original.WasCompilerGenerated);
             Debug.Assert(original.Syntax.Kind() == SyntaxKind.ForStatement);
             return branchBack;
@@ -220,7 +241,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundForStatement original,
             BoundExpression rewrittenCondition,
             SyntheticBoundNodeFactory factory
-        ) {
+        )
+        {
             Debug.Assert(!original.WasCompilerGenerated);
             Debug.Assert(original.Syntax.Kind() == SyntaxKind.ForStatement);
             Debug.Assert(factory != null);
@@ -230,7 +252,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public virtual BoundStatement InstrumentIfStatement(
             BoundIfStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             Debug.Assert(original.Syntax.Kind() == SyntaxKind.IfStatement);
             return InstrumentStatement(original, rewritten);
         }
@@ -239,7 +262,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundIfStatement original,
             BoundExpression rewrittenCondition,
             SyntheticBoundNodeFactory factory
-        ) {
+        )
+        {
             Debug.Assert(!original.WasCompilerGenerated);
             Debug.Assert(original.Syntax.Kind() == SyntaxKind.IfStatement);
             Debug.Assert(factory != null);
@@ -249,7 +273,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public virtual BoundStatement InstrumentLabelStatement(
             BoundLabeledStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             Debug.Assert(original.Syntax.Kind() == SyntaxKind.LabeledStatement);
             return InstrumentStatement(original, rewritten);
         }
@@ -257,7 +282,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public virtual BoundStatement InstrumentLocalInitialization(
             BoundLocalDeclaration original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             Debug.Assert(
                 original.Syntax.Kind() == SyntaxKind.VariableDeclarator
                     || (
@@ -273,7 +299,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public virtual BoundStatement InstrumentLockTargetCapture(
             BoundLockStatement original,
             BoundStatement lockTargetCapture
-        ) {
+        )
+        {
             Debug.Assert(!original.WasCompilerGenerated);
             Debug.Assert(original.Syntax.Kind() == SyntaxKind.LockStatement);
             return lockTargetCapture;
@@ -282,14 +309,16 @@ namespace Microsoft.CodeAnalysis.CSharp
         public virtual BoundStatement InstrumentReturnStatement(
             BoundReturnStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             return rewritten;
         }
 
         public virtual BoundStatement InstrumentSwitchStatement(
             BoundSwitchStatement original,
             BoundStatement rewritten
-        ) {
+        )
+        {
             Debug.Assert(original.Syntax.Kind() == SyntaxKind.SwitchStatement);
             return InstrumentStatement(original, rewritten);
         }
@@ -302,7 +331,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public virtual BoundStatement InstrumentSwitchWhenClauseConditionalGotoBody(
             BoundExpression original,
             BoundStatement ifConditionGotoBody
-        ) {
+        )
+        {
             Debug.Assert(!original.WasCompilerGenerated);
             Debug.Assert(original.Syntax.FirstAncestorOrSelf<WhenClauseSyntax>() != null);
             return ifConditionGotoBody;
@@ -311,7 +341,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public virtual BoundStatement InstrumentUsingTargetCapture(
             BoundUsingStatement original,
             BoundStatement usingTargetCapture
-        ) {
+        )
+        {
             Debug.Assert(!original.WasCompilerGenerated);
             Debug.Assert(original.Syntax.Kind() == SyntaxKind.UsingStatement);
             return usingTargetCapture;
@@ -321,7 +352,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundCatchBlock original,
             BoundExpression rewrittenFilter,
             SyntheticBoundNodeFactory factory
-        ) {
+        )
+        {
             Debug.Assert(!original.WasCompilerGenerated);
             Debug.Assert(original.Syntax.Kind() == SyntaxKind.CatchClause);
             Debug.Assert(((CatchClauseSyntax)original.Syntax).Filter != null);
@@ -333,7 +365,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundStatement original,
             BoundExpression rewrittenExpression,
             SyntheticBoundNodeFactory factory
-        ) {
+        )
+        {
             Debug.Assert(original.Kind == BoundKind.SwitchStatement);
             Debug.Assert(!original.WasCompilerGenerated);
             Debug.Assert(original.Syntax.Kind() == SyntaxKind.SwitchStatement);
@@ -348,14 +381,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression original,
             BoundExpression rewrittenExpression,
             SyntheticBoundNodeFactory factory
-        ) {
+        )
+        {
             Debug.Assert(factory != null);
             return rewrittenExpression;
         }
 
         public virtual BoundStatement InstrumentSwitchBindCasePatternVariables(
             BoundStatement bindings
-        ) {
+        )
+        {
             return bindings;
         }
     }

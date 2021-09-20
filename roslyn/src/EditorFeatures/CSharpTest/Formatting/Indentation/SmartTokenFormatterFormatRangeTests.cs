@@ -3797,7 +3797,8 @@ class Program{
 
         private static Tuple<OptionSet, IEnumerable<AbstractFormattingRule>> GetService(
             TestWorkspace workspace
-        ) {
+        )
+        {
             var options = workspace.Options;
             return Tuple.Create(
                 options,
@@ -3846,7 +3847,8 @@ class Program{
             string expected,
             SyntaxKind tokenKind,
             SyntaxKind startTokenKind
-        ) {
+        )
+        {
             await AutoFormatOnMarkerAsync(
                     initialMarkup,
                     expected,
@@ -3871,7 +3873,8 @@ class Program{
             bool useTabs,
             SyntaxKind tokenKind,
             SyntaxKind startTokenKind
-        ) {
+        )
+        {
             using var workspace = TestWorkspace.CreateCSharp(initialMarkup);
 
             workspace.TryApplyChanges(
@@ -3896,7 +3899,8 @@ class Program{
             if (
                 position == endToken.SpanStart
                 && !endToken.GetPreviousToken().IsKind(SyntaxKind.None)
-            ) {
+            )
+            {
                 endToken = endToken.GetPreviousToken();
             }
 

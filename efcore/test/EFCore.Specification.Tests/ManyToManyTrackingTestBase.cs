@@ -140,7 +140,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbContext context,
                 IList<EntityCompositeKey> leftEntities,
                 IList<EntityLeaf> rightEntities
-            ) {
+            )
+            {
                 Assert.Equal(11, context.ChangeTracker.Entries().Count());
                 Assert.Equal(3, context.ChangeTracker.Entries<EntityCompositeKey>().Count());
                 Assert.Equal(3, context.ChangeTracker.Entries<EntityLeaf>().Count());
@@ -323,7 +324,8 @@ namespace Microsoft.EntityFrameworkCore
                 int leftCount,
                 int rightCount,
                 int joinCount
-            ) {
+            )
+            {
                 Assert.Equal(
                     leftCount,
                     context.ChangeTracker.Entries<EntityCompositeKey>().Count()
@@ -450,7 +452,8 @@ namespace Microsoft.EntityFrameworkCore
                         var joinEntity in context.ChangeTracker.Entries<JoinCompositeKeyToLeaf>()
                             .Select(e => e.Entity)
                             .ToList()
-                    ) {
+                    )
+                    {
                         Assert.Equal(joinEntity.Composite.Key1, joinEntity.CompositeId1);
                         Assert.Equal(joinEntity.Composite.Key2, joinEntity.CompositeId2);
                         Assert.Equal(joinEntity.Composite.Key3, joinEntity.CompositeId3);
@@ -621,7 +624,8 @@ namespace Microsoft.EntityFrameworkCore
                     var joinEntity in context.ChangeTracker.Entries<JoinCompositeKeyToLeaf>()
                         .Select(e => e.Entity)
                         .ToList()
-                ) {
+                )
+                {
                     Assert.Equal(joinEntity.Composite.Key1, joinEntity.CompositeId1);
                     Assert.Equal(joinEntity.Composite.Key2, joinEntity.CompositeId2);
                     Assert.Equal(joinEntity.Composite.Key3, joinEntity.CompositeId3);
@@ -753,7 +757,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbContext context,
                 IList<EntityCompositeKey> leftEntities,
                 IList<EntityRoot> rightEntities
-            ) {
+            )
+            {
                 Assert.Equal(11, context.ChangeTracker.Entries().Count());
                 Assert.Equal(3, context.ChangeTracker.Entries<EntityCompositeKey>().Count());
                 Assert.Equal(3, context.ChangeTracker.Entries<EntityRoot>().Count());
@@ -928,7 +933,8 @@ namespace Microsoft.EntityFrameworkCore
                 int leftCount,
                 int rightCount,
                 int joinCount
-            ) {
+            )
+            {
                 Assert.Equal(
                     leftCount,
                     context.ChangeTracker.Entries<EntityCompositeKey>().Count()
@@ -1186,7 +1192,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true)]
         public virtual async Task Can_insert_many_to_many_composite_additional_pk_with_navs(
             bool async
-        ) {
+        )
+        {
             List<string> keys = null;
 
             await ExecuteWithStrategyInTransactionAsync(
@@ -1320,7 +1327,8 @@ namespace Microsoft.EntityFrameworkCore
                 IList<EntityCompositeKey> leftEntities,
                 IList<EntityThree> rightEntities,
                 bool postSave
-            ) {
+            )
+            {
                 var entries = context.ChangeTracker.Entries();
                 Assert.Equal(11, entries.Count());
                 Assert.Equal(3, context.ChangeTracker.Entries<EntityCompositeKey>().Count());
@@ -1515,7 +1523,8 @@ namespace Microsoft.EntityFrameworkCore
                 int leftCount,
                 int rightCount,
                 int joinCount
-            ) {
+            )
+            {
                 Assert.Equal(
                     leftCount,
                     context.ChangeTracker.Entries<EntityCompositeKey>().Count()
@@ -1655,7 +1664,8 @@ namespace Microsoft.EntityFrameworkCore
                         var joinEntity in context.ChangeTracker.Entries<JoinThreeToCompositeKeyFull>()
                             .Select(e => e.Entity)
                             .ToList()
-                    ) {
+                    )
+                    {
                         Assert.Equal(joinEntity.Composite.Key1, joinEntity.CompositeId1);
                         Assert.Equal(joinEntity.Composite.Key2, joinEntity.CompositeId2);
                         Assert.Equal(joinEntity.Composite.Key3, joinEntity.CompositeId3);
@@ -1824,7 +1834,8 @@ namespace Microsoft.EntityFrameworkCore
                     var joinEntity in context.ChangeTracker.Entries<JoinThreeToCompositeKeyFull>()
                         .Select(e => e.Entity)
                         .ToList()
-                ) {
+                )
+                {
                     Assert.Equal(joinEntity.Composite.Key1, joinEntity.CompositeId1);
                     Assert.Equal(joinEntity.Composite.Key2, joinEntity.CompositeId2);
                     Assert.Equal(joinEntity.Composite.Key3, joinEntity.CompositeId3);
@@ -1948,7 +1959,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbContext context,
                 IList<EntityTwo> leftEntities,
                 IList<EntityTwo> rightEntities
-            ) {
+            )
+            {
                 Assert.Equal(11, context.ChangeTracker.Entries().Count());
                 Assert.Equal(6, context.ChangeTracker.Entries<EntityTwo>().Count());
                 Assert.Equal(
@@ -2108,7 +2120,8 @@ namespace Microsoft.EntityFrameworkCore
                 List<EntityTwo> rightEntities,
                 int count,
                 int joinCount
-            ) {
+            )
+            {
                 Assert.Equal(count, context.ChangeTracker.Entries<EntityTwo>().Count());
                 Assert.Equal(
                     joinCount,
@@ -2312,7 +2325,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbContext context,
                 IList<EntityTwo> leftEntities,
                 IList<EntityThree> rightEntities
-            ) {
+            )
+            {
                 Assert.Equal(11, context.ChangeTracker.Entries().Count());
                 Assert.Equal(3, context.ChangeTracker.Entries<EntityTwo>().Count());
                 Assert.Equal(3, context.ChangeTracker.Entries<EntityThree>().Count());
@@ -2480,7 +2494,8 @@ namespace Microsoft.EntityFrameworkCore
                 int leftCount,
                 int rightCount,
                 int joinCount
-            ) {
+            )
+            {
                 Assert.Equal(leftCount, context.ChangeTracker.Entries<EntityTwo>().Count());
                 Assert.Equal(rightCount, context.ChangeTracker.Entries<EntityThree>().Count());
                 Assert.Equal(joinCount, context.ChangeTracker.Entries<JoinTwoToThree>().Count());
@@ -2663,7 +2678,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbContext context,
                 IList<EntityOne> leftEntities,
                 IList<EntityBranch> rightEntities
-            ) {
+            )
+            {
                 Assert.Equal(11, context.ChangeTracker.Entries().Count());
                 Assert.Equal(3, context.ChangeTracker.Entries<EntityOne>().Count());
                 Assert.Equal(3, context.ChangeTracker.Entries<EntityBranch>().Count());
@@ -2823,7 +2839,8 @@ namespace Microsoft.EntityFrameworkCore
                 int leftCount,
                 int rightCount,
                 int joinCount
-            ) {
+            )
+            {
                 Assert.Equal(leftCount, context.ChangeTracker.Entries<EntityOne>().Count());
                 Assert.Equal(rightCount, context.ChangeTracker.Entries<EntityBranch>().Count());
                 Assert.Equal(joinCount, context.ChangeTracker.Entries<JoinOneToBranch>().Count());
@@ -2999,7 +3016,8 @@ namespace Microsoft.EntityFrameworkCore
                 IList<EntityOne> leftEntities,
                 IList<EntityOne> rightEntities,
                 bool postSave
-            ) {
+            )
+            {
                 Assert.Equal(11, context.ChangeTracker.Entries().Count());
                 Assert.Equal(6, context.ChangeTracker.Entries<EntityOne>().Count());
                 Assert.Equal(5, context.ChangeTracker.Entries<JoinOneSelfPayload>().Count());
@@ -3195,7 +3213,8 @@ namespace Microsoft.EntityFrameworkCore
                 int count,
                 int joinCount,
                 bool postSave
-            ) {
+            )
+            {
                 Assert.Equal(count, context.ChangeTracker.Entries<EntityOne>().Count());
                 Assert.Equal(
                     joinCount,
@@ -3429,7 +3448,8 @@ namespace Microsoft.EntityFrameworkCore
                 IList<EntityOne> leftEntities,
                 IList<EntityThree> rightEntities,
                 bool postSave
-            ) {
+            )
+            {
                 Assert.Equal(11, context.ChangeTracker.Entries().Count());
                 Assert.Equal(3, context.ChangeTracker.Entries<EntityOne>().Count());
                 Assert.Equal(3, context.ChangeTracker.Entries<EntityThree>().Count());
@@ -3455,7 +3475,8 @@ namespace Microsoft.EntityFrameworkCore
                         var joinEntity in context.ChangeTracker.Entries<
                             Dictionary<string, object>
                         >().Select(e => e.Entity).ToList()
-                    ) {
+                    )
+                    {
                         Assert.Equal("Generated", joinEntity["Payload"]);
                     }
                 }
@@ -3652,7 +3673,8 @@ namespace Microsoft.EntityFrameworkCore
                 int rightCount,
                 int joinCount,
                 bool postSave
-            ) {
+            )
+            {
                 Assert.Equal(leftCount, context.ChangeTracker.Entries<EntityOne>().Count());
                 Assert.Equal(rightCount, context.ChangeTracker.Entries<EntityThree>().Count());
                 Assert.Equal(
@@ -3708,7 +3730,8 @@ namespace Microsoft.EntityFrameworkCore
                         context.Entry(joinEntity).Property<int>("OneId").CurrentValue == oneId1
                         && context.Entry(joinEntity).Property<int>("ThreeId").CurrentValue
                             == threeId1
-                    ) {
+                    )
+                    {
                         Assert.Equal(
                             postSave ? EntityState.Unchanged : EntityState.Added,
                             joinEntry.State
@@ -3719,7 +3742,8 @@ namespace Microsoft.EntityFrameworkCore
                         context.Entry(joinEntity).Property<int>("OneId").CurrentValue == oneId2
                         && context.Entry(joinEntity).Property<int>("ThreeId").CurrentValue
                             == threeId2
-                    ) {
+                    )
+                    {
                         Assert.Equal(
                             postSave ? EntityState.Unchanged : EntityState.Modified,
                             joinEntry.State
@@ -3873,7 +3897,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbContext context,
                 IList<EntityOne> leftEntities,
                 IList<EntityTwo> rightEntities
-            ) {
+            )
+            {
                 Assert.Equal(11, context.ChangeTracker.Entries().Count());
                 Assert.Equal(3, context.ChangeTracker.Entries<EntityOne>().Count());
                 Assert.Equal(3, context.ChangeTracker.Entries<EntityTwo>().Count());
@@ -4032,7 +4057,8 @@ namespace Microsoft.EntityFrameworkCore
                 int leftCount,
                 int rightCount,
                 int joinCount
-            ) {
+            )
+            {
                 Assert.Equal(leftCount, context.ChangeTracker.Entries<EntityOne>().Count());
                 Assert.Equal(rightCount, context.ChangeTracker.Entries<EntityTwo>().Count());
                 Assert.Equal(
@@ -4205,7 +4231,8 @@ namespace Microsoft.EntityFrameworkCore
                 IList<EntityOne> leftEntities,
                 IList<EntityThree> rightEntities,
                 bool postSave
-            ) {
+            )
+            {
                 Assert.Equal(11, context.ChangeTracker.Entries().Count());
                 Assert.Equal(3, context.ChangeTracker.Entries<EntityOne>().Count());
                 Assert.Equal(3, context.ChangeTracker.Entries<EntityThree>().Count());
@@ -4426,7 +4453,8 @@ namespace Microsoft.EntityFrameworkCore
                 int rightCount,
                 int joinCount,
                 bool postSave
-            ) {
+            )
+            {
                 Assert.Equal(leftCount, context.ChangeTracker.Entries<EntityOne>().Count());
                 Assert.Equal(rightCount, context.ChangeTracker.Entries<EntityThree>().Count());
                 Assert.Equal(
@@ -4486,7 +4514,8 @@ namespace Microsoft.EntityFrameworkCore
                         context.Entry(joinEntity).Property(e => e.OneId).CurrentValue == oneId1
                         && context.Entry(joinEntity).Property(e => e.ThreeId).CurrentValue
                             == threeId1
-                    ) {
+                    )
+                    {
                         Assert.Equal(
                             postSave ? EntityState.Unchanged : EntityState.Added,
                             joinEntry.State
@@ -4497,7 +4526,8 @@ namespace Microsoft.EntityFrameworkCore
                         context.Entry(joinEntity).Property(e => e.OneId).CurrentValue == oneId2
                         && context.Entry(joinEntity).Property(e => e.ThreeId).CurrentValue
                             == threeId2
-                    ) {
+                    )
+                    {
                         Assert.Equal(
                             postSave ? EntityState.Unchanged : EntityState.Modified,
                             joinEntry.State
@@ -4577,7 +4607,8 @@ namespace Microsoft.EntityFrameworkCore
                         var joinEntity in context.ChangeTracker.Entries<JoinOneToThreePayloadFull>()
                             .Select(e => e.Entity)
                             .ToList()
-                    ) {
+                    )
+                    {
                         Assert.Equal(joinEntity.One.Id, joinEntity.OneId);
                         Assert.Equal(joinEntity.Three.Id, joinEntity.ThreeId);
                         Assert.Contains(joinEntity, joinEntity.One.JoinThreePayloadFull);
@@ -4712,7 +4743,8 @@ namespace Microsoft.EntityFrameworkCore
                     var joinEntity in context.ChangeTracker.Entries<JoinOneToThreePayloadFull>()
                         .Select(e => e.Entity)
                         .ToList()
-                ) {
+                )
+                {
                     Assert.Equal(joinEntity.One.Id, joinEntity.OneId);
                     Assert.Equal(joinEntity.Three.Id, joinEntity.ThreeId);
                     Assert.Contains(joinEntity, joinEntity.One.JoinThreePayloadFull);
@@ -4827,7 +4859,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbContext context,
                 IList<EntityOne> leftEntities,
                 IList<EntityTwo> rightEntities
-            ) {
+            )
+            {
                 Assert.Equal(11, context.ChangeTracker.Entries().Count());
                 Assert.Equal(3, context.ChangeTracker.Entries<EntityOne>().Count());
                 Assert.Equal(3, context.ChangeTracker.Entries<EntityTwo>().Count());
@@ -4859,7 +4892,8 @@ namespace Microsoft.EntityFrameworkCore
             bool async,
             bool useTrackGraph,
             bool useDetectChanges
-        ) {
+        )
+        {
             List<int> keys = null;
 
             await ExecuteWithStrategyInTransactionAsync(
@@ -5044,7 +5078,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbContext context,
                 IList<EntityOne> leftEntities,
                 IList<EntityTwo> rightEntities
-            ) {
+            )
+            {
                 Assert.Equal(12, context.ChangeTracker.Entries().Count());
                 Assert.Equal(3, context.ChangeTracker.Entries<EntityOne>().Count());
                 Assert.Equal(3, context.ChangeTracker.Entries<EntityTwo>().Count());
@@ -5088,7 +5123,8 @@ namespace Microsoft.EntityFrameworkCore
             bool async,
             bool useTrackGraph,
             bool useDetectChanges
-        ) {
+        )
+        {
             List<int> keys = null;
 
             await ExecuteWithStrategyInTransactionAsync(
@@ -5214,7 +5250,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbContext context,
                 IList<EntityOne> leftEntities,
                 IList<EntityTwo> rightEntities
-            ) {
+            )
+            {
                 Assert.Equal(11, context.ChangeTracker.Entries().Count());
                 Assert.Equal(3, context.ChangeTracker.Entries<EntityOne>().Count());
                 Assert.Equal(3, context.ChangeTracker.Entries<EntityTwo>().Count());
@@ -5392,7 +5429,8 @@ namespace Microsoft.EntityFrameworkCore
                 int leftCount,
                 int rightCount,
                 int joinCount
-            ) {
+            )
+            {
                 Assert.Equal(leftCount, context.ChangeTracker.Entries<EntityOne>().Count());
                 Assert.Equal(rightCount, context.ChangeTracker.Entries<EntityTwo>().Count());
                 Assert.Equal(joinCount, context.ChangeTracker.Entries<JoinOneToTwo>().Count());
@@ -5714,7 +5752,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbContext context,
                 IList<ImplicitManyToManyA> leftEntities,
                 IList<ImplicitManyToManyB> rightEntities
-            ) {
+            )
+            {
                 Assert.Equal(11, context.ChangeTracker.Entries().Count());
                 Assert.Equal(3, context.ChangeTracker.Entries<ImplicitManyToManyA>().Count());
                 Assert.Equal(3, context.ChangeTracker.Entries<ImplicitManyToManyB>().Count());
@@ -5741,7 +5780,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true)]
         public virtual async Task Can_insert_many_to_many_fully_by_convention_generated_keys(
             bool async
-        ) {
+        )
+        {
             await ExecuteWithStrategyInTransactionAsync(
                 async context =>
                 {
@@ -5835,7 +5875,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbContext context,
                 IList<GeneratedKeysLeft> leftEntities,
                 IList<GeneratedKeysRight> rightEntities
-            ) {
+            )
+            {
                 Assert.Equal(11, context.ChangeTracker.Entries().Count());
                 Assert.Equal(3, context.ChangeTracker.Entries<GeneratedKeysLeft>().Count());
                 Assert.Equal(3, context.ChangeTracker.Entries<GeneratedKeysRight>().Count());
@@ -5865,7 +5906,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual async Task Can_Attach_or_Update_a_many_to_many_with_mixed_set_and_unset_keys(
             bool useUpdate,
             bool async
-        ) {
+        )
+        {
             var existingLeftId = -1;
             var existingRightId = -1;
             await ExecuteWithStrategyInTransactionAsync(
@@ -6012,7 +6054,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbContext context,
                 IList<GeneratedKeysLeft> leftEntities,
                 IList<GeneratedKeysRight> rightEntities
-            ) {
+            )
+            {
                 Assert.Equal(11, context.ChangeTracker.Entries().Count());
                 Assert.Equal(3, context.ChangeTracker.Entries<GeneratedKeysLeft>().Count());
                 Assert.Equal(3, context.ChangeTracker.Entries<GeneratedKeysRight>().Count());
@@ -6120,7 +6163,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbContext context,
                 IList<ImplicitManyToManyA> leftEntities,
                 IList<ImplicitManyToManyB> rightEntities
-            ) {
+            )
+            {
                 Assert.Equal(9, context.ChangeTracker.Entries().Count());
                 Assert.Equal(3, context.ChangeTracker.Entries<ImplicitManyToManyA>().Count());
                 Assert.Equal(3, context.ChangeTracker.Entries<ImplicitManyToManyB>().Count());
@@ -6472,7 +6516,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbContext context,
                 IList<EntityTwo> leftEntities,
                 IList<EntityThree> rightEntities
-            ) {
+            )
+            {
                 Assert.Equal(11, context.ChangeTracker.Entries().Count());
                 Assert.Equal(3, context.ChangeTracker.Entries<EntityTwo>().Count());
                 Assert.Equal(3, context.ChangeTracker.Entries<EntityThree>().Count());
@@ -6490,7 +6535,8 @@ namespace Microsoft.EntityFrameworkCore
                     var joinEntity in context.ChangeTracker.Entries<JoinTwoToThree>()
                         .Select(e => e.Entity)
                         .ToList()
-                ) {
+                )
+                {
                     Assert.Equal(joinEntity.Two.Id, joinEntity.TwoId);
                     Assert.Equal(joinEntity.Three.Id, joinEntity.ThreeId);
                     Assert.Contains(joinEntity, joinEntity.Two.JoinThreeFull);
@@ -6516,7 +6562,8 @@ namespace Microsoft.EntityFrameworkCore
                         foreach (
                             var property in entityType.GetForeignKeys()
                                 .SelectMany(e => e.Properties)
-                        ) {
+                        )
+                        {
                             if (property.GetRelationshipIndex() >= 0)
                             {
                                 Assert.Equal(
@@ -6531,7 +6578,8 @@ namespace Microsoft.EntityFrameworkCore
                                 .Concat(
                                     (IEnumerable<INavigationBase>)entityType.GetSkipNavigations()
                                 )
-                        ) {
+                        )
+                        {
                             if (navigation.GetRelationshipIndex() >= 0)
                             {
                                 var snapshot = entityEntry.GetRelationshipSnapshotValue(navigation);

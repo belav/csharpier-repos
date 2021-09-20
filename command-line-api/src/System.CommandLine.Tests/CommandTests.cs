@@ -102,7 +102,8 @@ namespace System.CommandLine.Tests
         [InlineData("aa aa")]
         public void When_a_command_is_created_with_an_alias_that_contains_whitespace_then_an_informative_error_is_returned(
             string alias
-        ) {
+        )
+        {
             Action create = () => new Command(alias);
 
             create.Should()
@@ -117,7 +118,8 @@ namespace System.CommandLine.Tests
         [InlineData("aa aa")]
         public void When_a_command_alias_is_added_and_contains_whitespace_then_an_informative_error_is_returned(
             string alias
-        ) {
+        )
+        {
             var command = new Command("-x");
 
             Action addAlias = () => command.AddAlias(alias);
@@ -142,7 +144,8 @@ namespace System.CommandLine.Tests
         public void ParseResult_Command_identifies_innermost_command(
             string input,
             string expectedCommand
-        ) {
+        )
+        {
             var outer = new Command("outer")
             {
                 new Command("inner") { new Command("inner-er") },

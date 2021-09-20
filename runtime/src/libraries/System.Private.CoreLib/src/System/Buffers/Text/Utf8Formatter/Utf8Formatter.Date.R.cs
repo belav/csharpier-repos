@@ -15,7 +15,8 @@ namespace System.Buffers.Text
             DateTime value,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             // Writing the check in this fashion elides all bounds checks on 'buffer'
             // for the remainder of the method.
             if ((uint)28 >= (uint)destination.Length)

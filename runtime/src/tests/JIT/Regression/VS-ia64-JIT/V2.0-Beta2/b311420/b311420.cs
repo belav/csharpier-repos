@@ -11297,7 +11297,8 @@ public class Test
         if (
             (!(null == obj1 && null == obj2))
             && (null == obj1 || null == obj2 || !obj1.Equals(obj2))
-        ) {
+        )
+        {
             result = false;
             Console.WriteLine("Test Failed at location: " + counter);
             Console.WriteLine("While Comparing {0} to {1}", obj1, obj2);

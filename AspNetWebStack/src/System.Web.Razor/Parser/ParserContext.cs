@@ -27,7 +27,8 @@ namespace System.Web.Razor.Parser
             ParserBase codeParser,
             ParserBase markupParser,
             ParserBase activeParser
-        ) {
+        )
+        {
             if (source == null)
             {
                 throw new ArgumentNullException("source");

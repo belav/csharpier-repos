@@ -19,7 +19,8 @@ internal static partial class Interop
             ReadOnlySpan<byte> secret,
             int cbSecret,
             BCryptCreateHashFlags dwFlags
-        ) {
+        )
+        {
             return BCryptCreateHash(
                 hAlgorithm,
                 out phHash,

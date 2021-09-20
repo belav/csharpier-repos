@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.Components.Forms
             string? value,
             [MaybeNullWhen(false)] out TValue result,
             [NotNullWhen(false)] out string? validationErrorMessage
-        ) {
+        )
+        {
             try
             {
                 if (
@@ -25,7 +26,8 @@ namespace Microsoft.AspNetCore.Components.Forms
                         CultureInfo.CurrentCulture,
                         out var parsedValue
                     )
-                ) {
+                )
+                {
                     result = parsedValue;
                     validationErrorMessage = null;
                     return true;

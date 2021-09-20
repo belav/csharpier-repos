@@ -27,7 +27,8 @@ namespace System.Web.WebPages.Html
             string name,
             string defaultOption,
             IEnumerable<SelectListItem> selectList
-        ) {
+        )
+        {
             return ListBox(
                 name,
                 defaultOption: defaultOption,
@@ -41,7 +42,8 @@ namespace System.Web.WebPages.Html
             string name,
             IEnumerable<SelectListItem> selectList,
             object htmlAttributes
-        ) {
+        )
+        {
             return ListBox(
                 name,
                 defaultOption: null,
@@ -55,7 +57,8 @@ namespace System.Web.WebPages.Html
             string name,
             IEnumerable<SelectListItem> selectList,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             return ListBox(
                 name,
                 defaultOption: null,
@@ -70,7 +73,8 @@ namespace System.Web.WebPages.Html
             string defaultOption,
             IEnumerable<SelectListItem> selectList,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             return ListBox(
                 name,
                 defaultOption,
@@ -85,7 +89,8 @@ namespace System.Web.WebPages.Html
             string defaultOption,
             IEnumerable<SelectListItem> selectList,
             object htmlAttributes
-        ) {
+        )
+        {
             return ListBox(
                 name,
                 defaultOption: defaultOption,
@@ -101,7 +106,8 @@ namespace System.Web.WebPages.Html
             IEnumerable<SelectListItem> selectList,
             object selectedValues,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             if (String.IsNullOrEmpty(name))
             {
                 throw new ArgumentException(
@@ -126,7 +132,8 @@ namespace System.Web.WebPages.Html
             IEnumerable<SelectListItem> selectList,
             object selectedValues,
             object htmlAttributes
-        ) {
+        )
+        {
             return ListBox(
                 name,
                 defaultOption: defaultOption,
@@ -142,7 +149,8 @@ namespace System.Web.WebPages.Html
             object selectedValues,
             int size,
             bool allowMultiple
-        ) {
+        )
+        {
             return ListBox(
                 name,
                 defaultOption: null,
@@ -161,7 +169,8 @@ namespace System.Web.WebPages.Html
             object selectedValues,
             int size,
             bool allowMultiple
-        ) {
+        )
+        {
             return ListBox(
                 name,
                 defaultOption: defaultOption,
@@ -181,7 +190,8 @@ namespace System.Web.WebPages.Html
             int size,
             bool allowMultiple,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             if (String.IsNullOrEmpty(name))
             {
                 throw new ArgumentException(
@@ -209,7 +219,8 @@ namespace System.Web.WebPages.Html
             int size,
             bool allowMultiple,
             object htmlAttributes
-        ) {
+        )
+        {
             return ListBox(
                 name,
                 defaultOption,
@@ -229,7 +240,8 @@ namespace System.Web.WebPages.Html
             int? size,
             bool allowMultiple,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             var modelState = ModelState[name];
             if (modelState != null)
             {
@@ -319,7 +331,8 @@ namespace System.Web.WebPages.Html
             string name,
             IEnumerable<SelectListItem> selectList,
             object htmlAttributes
-        ) {
+        )
+        {
             return DropDownList(
                 name,
                 defaultOption: null,
@@ -333,7 +346,8 @@ namespace System.Web.WebPages.Html
             string name,
             IEnumerable<SelectListItem> selectList,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             return DropDownList(
                 name,
                 defaultOption: null,
@@ -347,7 +361,8 @@ namespace System.Web.WebPages.Html
             string name,
             string defaultOption,
             IEnumerable<SelectListItem> selectList
-        ) {
+        )
+        {
             return DropDownList(
                 name,
                 defaultOption,
@@ -362,7 +377,8 @@ namespace System.Web.WebPages.Html
             string defaultOption,
             IEnumerable<SelectListItem> selectList,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             return DropDownList(
                 name,
                 defaultOption,
@@ -377,7 +393,8 @@ namespace System.Web.WebPages.Html
             string defaultOption,
             IEnumerable<SelectListItem> selectList,
             object htmlAttributes
-        ) {
+        )
+        {
             return DropDownList(
                 name,
                 defaultOption: defaultOption,
@@ -393,7 +410,8 @@ namespace System.Web.WebPages.Html
             IEnumerable<SelectListItem> selectList,
             object selectedValue,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             if (String.IsNullOrEmpty(name))
             {
                 throw new ArgumentException(
@@ -416,7 +434,8 @@ namespace System.Web.WebPages.Html
             IEnumerable<SelectListItem> selectList,
             object selectedValue,
             object htmlAttributes
-        ) {
+        )
+        {
             return DropDownList(
                 name,
                 defaultOption,
@@ -432,7 +451,8 @@ namespace System.Web.WebPages.Html
             IEnumerable<SelectListItem> selectList,
             object selectedValue,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             var modelState = ModelState[name];
             if (modelState != null)
             {
@@ -481,7 +501,8 @@ namespace System.Web.WebPages.Html
         private static string BuildListOptions(
             IEnumerable<SelectListItem> selectList,
             string optionText
-        ) {
+        )
+        {
             StringBuilder builder = new StringBuilder().AppendLine();
             if (optionText != null)
             {

@@ -12,7 +12,8 @@ namespace BasicWebSite.Controllers
         public AsyncDisposableController(
             ILogger<AsyncDisposableController> logger,
             ControllerTestDisposeAsync testDisposeAsync
-        ) {
+        )
+        {
             Logger = logger;
             _testDisposeAsync = testDisposeAsync;
         }

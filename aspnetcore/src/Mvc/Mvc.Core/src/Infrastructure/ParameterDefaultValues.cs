@@ -43,7 +43,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         public static bool TryGetDeclaredParameterDefaultValue(
             ParameterInfo parameterInfo,
             out object? defaultValue
-        ) {
+        )
+        {
             if (ParameterDefaultValue.TryGetDefaultValue(parameterInfo, out defaultValue))
             {
                 return true;

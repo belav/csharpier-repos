@@ -57,7 +57,8 @@ namespace System.IO.Pipelines.Tests
         [MemberData(nameof(WriteCalls))]
         public async Task WritingToPipeStreamWritesToUnderlyingPipeWriter(
             WriteAsyncDelegate writeAsync
-        ) {
+        )
+        {
             byte[] helloBytes = Encoding.ASCII.GetBytes("Hello World");
             var pipe = new Pipe();
             var stream = new PipeWriterStream(pipe.Writer, leaveOpen: false);
@@ -226,7 +227,8 @@ namespace System.IO.Pipelines.Tests
 
             public override ValueTask<FlushResult> FlushAsync(
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 FlushCalled = true;
                 return default;
             }
@@ -244,7 +246,8 @@ namespace System.IO.Pipelines.Tests
             public override ValueTask<FlushResult> WriteAsync(
                 ReadOnlyMemory<byte> source,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 WriteAsyncCalled = true;
                 return default;
             }

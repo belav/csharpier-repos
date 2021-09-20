@@ -46,14 +46,16 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         /// </summary>
         protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(
             ModifyOperation operations
-        ) {
+        )
+        {
             foreach (var item in base.GetModifyEnumerables(operations))
                 yield return item;
 
             if (
                 !AddRemoveClear_ThrowsNotSupported
                 && (operations & ModifyOperation.Insert) == ModifyOperation.Insert
-            ) {
+            )
+            {
                 yield return (IEnumerable<T> enumerable) =>
                 {
                     IList<T> casted = ((IList<T>)enumerable);
@@ -68,7 +70,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             if (
                 !AddRemoveClear_ThrowsNotSupported
                 && (operations & ModifyOperation.Overwrite) == ModifyOperation.Overwrite
-            ) {
+            )
+            {
                 yield return (IEnumerable<T> enumerable) =>
                 {
                     IList<T> casted = ((IList<T>)enumerable);
@@ -83,7 +86,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             if (
                 !AddRemoveClear_ThrowsNotSupported
                 && (operations & ModifyOperation.Remove) == ModifyOperation.Remove
-            ) {
+            )
+            {
                 yield return (IEnumerable<T> enumerable) =>
                 {
                     IList<T> casted = ((IList<T>)enumerable);
@@ -570,7 +574,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [MemberData(nameof(ValidCollectionSizes))]
         public void IList_Generic_RemoveAt_NegativeIndex_ThrowsArgumentOutOfRangeException(
             int count
-        ) {
+        )
+        {
             if (!IsReadOnly && !AddRemoveClear_ThrowsNotSupported)
             {
                 IList<T> list = GenericIListFactory(count);
@@ -585,7 +590,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [MemberData(nameof(ValidCollectionSizes))]
         public void IList_Generic_RemoveAt_IndexGreaterThanListCount_ThrowsArgumentOutOfRangeException(
             int count
-        ) {
+        )
+        {
             if (!IsReadOnly && !AddRemoveClear_ThrowsNotSupported)
             {
                 IList<T> list = GenericIListFactory(count);

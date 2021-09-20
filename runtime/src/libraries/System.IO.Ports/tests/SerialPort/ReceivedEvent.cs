@@ -30,7 +30,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 ReceivedEventHandler rcvEventHandler = new ReceivedEventHandler(com1);
 
                 Debug.WriteLine("Verifying ReceivedChars event");
@@ -73,7 +74,8 @@ namespace System.IO.Ports.Tests
             )
             using (
                 var com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName)
-            ) {
+            )
+            {
                 com1.Open();
                 com2.Open();
 
@@ -106,7 +108,8 @@ namespace System.IO.Ports.Tests
             )
             using (
                 var com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName)
-            ) {
+            )
+            {
                 com1.Open();
                 com2.Open();
 
@@ -143,7 +146,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 ReceivedEventHandler rcvEventHandler = new ReceivedEventHandler(com1);
 
                 byte[] xmitBytes = new byte[1];
@@ -191,7 +195,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 ReceivedEventHandler rcvEventHandler = new ReceivedEventHandler(com1);
 
                 byte[] xmitBytes = new byte[3];
@@ -246,7 +251,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 ReadInReceivedEventHandler rcvEventHandler = new ReadInReceivedEventHandler(com1);
                 byte[] xmitBytes = new byte[3];
 
@@ -301,7 +307,8 @@ namespace System.IO.Ports.Tests
                             if (
                                 xmitBytes[j]
                                 != rcvEventHandler.BytesRead[(i * xmitBytes.Length) + j]
-                            ) {
+                            )
+                            {
                                 Fail(
                                     "Err_2829aneid Expected to Read '{0}'({0:X}) actually read {1}'({1:X})",
                                     xmitBytes[j],
@@ -372,7 +379,8 @@ namespace System.IO.Ports.Tests
                     while (
                         maxMilliseconds > sw.ElapsedMilliseconds
                         && NumEventsHandled < totalNumberOfEvents
-                    ) {
+                    )
+                    {
                         Monitor.Wait(this, (int)(maxMilliseconds - sw.ElapsedMilliseconds));
                     }
 
@@ -418,7 +426,8 @@ namespace System.IO.Ports.Tests
                             eventType == (SerialData)EventType[i]
                             && bytesToRead <= (int)BytesToRead[i]
                             && (SerialPort)Source[i] == com
-                        ) {
+                        )
+                        {
                             EventType.RemoveAt(i);
                             BytesToRead.RemoveAt(i);
                             Source.RemoveAt(i);

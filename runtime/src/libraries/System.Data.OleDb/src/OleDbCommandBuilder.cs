@@ -79,7 +79,8 @@ namespace System.Data.OleDb
             DataRow datarow,
             StatementType statementType,
             bool whereClause
-        ) {
+        )
+        {
             OleDbParameter p = (OleDbParameter)parameter;
             object valueType = datarow[SchemaTableColumn.ProviderType];
             p.OleDbType = (OleDbType)valueType;
@@ -148,7 +149,8 @@ namespace System.Data.OleDb
         private static OleDbParameter[] DeriveParametersFromStoredProcedure(
             OleDbConnection connection,
             OleDbCommand command
-        ) {
+        )
+        {
             OleDbParameter[] plist = Array.Empty<OleDbParameter>();
 
             if (connection.SupportSchemaRowset(OleDbSchemaGuid.Procedure_Parameters))
@@ -253,7 +255,8 @@ namespace System.Data.OleDb
                         if (
                             (null != parameterName)
                             && !dataRow.IsNull(parameterName, DataRowVersion.Default)
-                        ) {
+                        )
+                        {
                             // $CONSIDER - not trimming the @ from the beginning but to left the designer do that
                             parameter.ParameterName = Convert.ToString(
                                 dataRow[parameterName, DataRowVersion.Default],
@@ -263,7 +266,8 @@ namespace System.Data.OleDb
                         if (
                             (null != parameterDirection)
                             && !dataRow.IsNull(parameterDirection, DataRowVersion.Default)
-                        ) {
+                        )
+                        {
                             short direction = Convert.ToInt16(
                                 dataRow[parameterDirection, DataRowVersion.Default],
                                 CultureInfo.InvariantCulture
@@ -295,7 +299,8 @@ namespace System.Data.OleDb
                                 if (
                                     (null != numericPrecision)
                                     && !dataRow.IsNull(numericPrecision, DataRowVersion.Default)
-                                ) {
+                                )
+                                {
                                     // @devnote: unguarded cast from Int16 to Byte
                                     parameter.PrecisionInternal = (byte)Convert.ToInt16(
                                         dataRow[numericPrecision],
@@ -305,7 +310,8 @@ namespace System.Data.OleDb
                                 if (
                                     (null != numericScale)
                                     && !dataRow.IsNull(numericScale, DataRowVersion.Default)
-                                ) {
+                                )
+                                {
                                     // @devnote: unguarded cast from Int16 to Byte
                                     parameter.ScaleInternal = (byte)Convert.ToInt16(
                                         dataRow[numericScale],
@@ -362,7 +368,8 @@ namespace System.Data.OleDb
                 if (
                     (0 == plist.Length)
                     && connection.SupportSchemaRowset(OleDbSchemaGuid.Procedures)
-                ) {
+                )
+                {
                     restrictions = new object?[4] { null, null, command.CommandText, null };
                     table = connection.GetSchemaRowset(OleDbSchemaGuid.Procedures, restrictions)!;
                     if (0 == table.Rows.Count)

@@ -288,7 +288,8 @@ namespace System.Runtime.InteropServices.Tests
         public void PtrToStructure_CantCreateType_ThrowsArgumentException(
             Type structureType,
             Type exceptionType
-        ) {
+        )
+        {
             Assert.Throws(exceptionType, () => Marshal.PtrToStructure((IntPtr)1, structureType));
         }
 

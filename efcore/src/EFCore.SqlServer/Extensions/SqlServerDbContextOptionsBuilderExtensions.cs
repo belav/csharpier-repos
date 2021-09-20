@@ -33,7 +33,8 @@ namespace Microsoft.EntityFrameworkCore
         public static DbContextOptionsBuilder UseSqlServer(
             this DbContextOptionsBuilder optionsBuilder,
             Action<SqlServerDbContextOptionsBuilder>? sqlServerOptionsAction = null
-        ) {
+        )
+        {
             Check.NotNull(optionsBuilder, nameof(optionsBuilder));
 
             ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
@@ -58,7 +59,8 @@ namespace Microsoft.EntityFrameworkCore
             this DbContextOptionsBuilder optionsBuilder,
             string connectionString,
             Action<SqlServerDbContextOptionsBuilder>? sqlServerOptionsAction = null
-        ) {
+        )
+        {
             Check.NotNull(optionsBuilder, nameof(optionsBuilder));
             Check.NotEmpty(connectionString, nameof(connectionString));
 
@@ -91,7 +93,8 @@ namespace Microsoft.EntityFrameworkCore
             this DbContextOptionsBuilder optionsBuilder,
             DbConnection connection,
             Action<SqlServerDbContextOptionsBuilder>? sqlServerOptionsAction = null
-        ) {
+        )
+        {
             Check.NotNull(optionsBuilder, nameof(optionsBuilder));
             Check.NotNull(connection, nameof(connection));
 

@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
         protected static bool ShouldFindReferencesInGlobalSuppressions(
             ISymbol symbol,
             [NotNullWhen(returnValue: true)] out string? documentationCommentId
-        ) {
+        )
+        {
             if (!SupportsGlobalSuppression(symbol))
             {
                 documentationCommentId = null;
@@ -64,7 +65,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             ISyntaxFacts syntaxFacts,
             string docCommentId,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Check if we have any relevant global attributes in this document.
             var info = await SyntaxTreeIndex.GetRequiredIndexAsync(document, cancellationToken)
                 .ConfigureAwait(false);
@@ -104,7 +106,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                         cancellationToken,
                         out var offsetOfReferenceInToken
                     )
-                ) {
+                )
+                {
                     var referenceLocation = CreateReferenceLocation(
                         offsetOfReferenceInToken,
                         token,
@@ -127,7 +130,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 INamedTypeSymbol suppressMessageAttribute,
                 CancellationToken cancellationToken,
                 out int offsetOfReferenceInToken
-            ) {
+            )
+            {
                 offsetOfReferenceInToken = -1;
 
                 // Check if this token is a named attribute argument to "Target" property of "SuppressMessageAttribute".
@@ -139,7 +143,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                         syntaxFacts,
                         cancellationToken
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -150,7 +155,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                         out var prefix,
                         out var docCommentId
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -198,7 +204,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 SemanticModel semanticModel,
                 ISyntaxFacts syntaxFacts,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // We need to check if the given token is a non-null, non-empty string literal token
                 // passed as a named argument to 'Target' property of a global SuppressMessageAttribute.
                 //
@@ -250,7 +257,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 SyntaxNode root,
                 Document document,
                 ISyntaxFacts syntaxFacts
-            ) {
+            )
+            {
                 // We found a valid reference to the symbol in documentation comment ID string literal.
                 // Compute the reference span within this string literal for the identifier.
                 // For example, consider the suppression below for field 'Field' defined in type 'C':
@@ -287,7 +295,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
         private static bool TryGetExpectedDocumentationCommentId(
             string id,
             out ReadOnlyMemory<char> docCommentId
-        ) {
+        )
+        {
             return ValidateAndSplitDocumentationCommentId(id, out _, out docCommentId);
         }
 
@@ -304,7 +313,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             [NotNullWhen(true)] string? docCommentId,
             out ReadOnlyMemory<char> prefix,
             out ReadOnlyMemory<char> id
-        ) {
+        )
+        {
             prefix = ReadOnlyMemory<char>.Empty;
             id = ReadOnlyMemory<char>.Empty;
             if (docCommentId is null)
@@ -352,7 +362,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             ReadOnlyMemory<char> id,
             out ReadOnlyMemory<char> idPartBeforeArguments,
             out ReadOnlyMemory<char> arguments
-        ) {
+        )
+        {
             ReadOnlySpan<char> argumentSeparators = stackalloc[] { '(', '[' };
             var indexOfArguments = id.Span.IndexOfAny(argumentSeparators);
             if (indexOfArguments < 0)
@@ -387,7 +398,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             out ReadOnlyMemory<char> prefix,
             out ReadOnlyMemory<char> idPartBeforeArguments,
             out ReadOnlyMemory<char> arguments
-        ) {
+        )
+        {
             idPartBeforeArguments = ReadOnlyMemory<char>.Empty;
             arguments = ReadOnlyMemory<char>.Empty;
             if (!ValidateAndSplitDocumentationCommentId(docCommentId, out prefix, out var id))

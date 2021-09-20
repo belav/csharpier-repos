@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             [NotNullWhen(true)] this TypeSyntax? typeSyntax,
             SemanticModel? semanticModelOpt,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (typeSyntax == null)
             {
                 return false;
@@ -29,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 || typeSyntax is GenericNameSyntax
                 || typeSyntax is PointerTypeSyntax
                 || typeSyntax is NullableTypeSyntax
-            ) {
+            )
+            {
                 return true;
             }
 

@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTrans
             EndPoint endpoint,
             IFeatureCollection features = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             OnBindAsync?.Invoke(endpoint, features);
 
             return ValueTask.FromResult<IMultiplexedConnectionListener>(
@@ -39,7 +40,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTrans
             public ValueTask<MultiplexedConnectionContext> AcceptAsync(
                 IFeatureCollection features = null,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 return ValueTask.FromResult<MultiplexedConnectionContext>(null);
             }
 

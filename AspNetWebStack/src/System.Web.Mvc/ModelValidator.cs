@@ -46,7 +46,8 @@ namespace System.Web.Mvc
         public static ModelValidator GetModelValidator(
             ModelMetadata metadata,
             ControllerContext context
-        ) {
+        )
+        {
             return new CompositeModelValidator(metadata, context);
         }
 
@@ -62,7 +63,8 @@ namespace System.Web.Mvc
             private static ModelValidationResult CreateSubPropertyResult(
                 ModelMetadata propertyMetadata,
                 ModelValidationResult propertyResult
-            ) {
+            )
+            {
                 return new ModelValidationResult
                 {
                     MemberName = DefaultModelBinder.CreateSubPropertyName(
@@ -87,12 +89,14 @@ namespace System.Web.Mvc
                         ModelValidator propertyValidator in propertyMetadata.GetValidators(
                             ControllerContext
                         )
-                    ) {
+                    )
+                    {
                         foreach (
                             ModelValidationResult propertyResult in propertyValidator.Validate(
                                 Metadata.Model
                             )
-                        ) {
+                        )
+                        {
                             propertiesValid = false;
                             yield return CreateSubPropertyResult(propertyMetadata, propertyResult);
                         }
@@ -103,10 +107,12 @@ namespace System.Web.Mvc
                 {
                     foreach (
                         ModelValidator typeValidator in Metadata.GetValidators(ControllerContext)
-                    ) {
+                    )
+                    {
                         foreach (
                             ModelValidationResult typeResult in typeValidator.Validate(container)
-                        ) {
+                        )
+                        {
                             yield return typeResult;
                         }
                     }

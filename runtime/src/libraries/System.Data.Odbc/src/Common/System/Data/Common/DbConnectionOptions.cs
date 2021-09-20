@@ -43,7 +43,8 @@ namespace System.Data.Common
             string connectionString,
             Dictionary<string, string>? synonyms,
             bool useOdbcRules
-        ) {
+        )
+        {
             _useOdbcRules = useOdbcRules;
             _parsetable = new Dictionary<string, string?>();
             _usersConnectionString = ((null != connectionString) ? connectionString : "");
@@ -139,7 +140,8 @@ namespace System.Data.Common
             string keyName,
             string? keyValue,
             bool useOdbcRules
-        ) {
+        )
+        {
             ADP.CheckArgumentNull(builder, nameof(builder));
             ADP.CheckArgumentLength(keyName, nameof(keyName));
 
@@ -188,7 +190,8 @@ namespace System.Data.Common
                             )
                         )
                         && !s_connectionStringQuoteOdbcValueRegex.IsMatch(keyValue)
-                    ) {
+                    )
+                    {
                         // always quote Driver value (required for ODBC Version 2.65 and earlier)
                         // always quote values that contain a ';'
                         builder.Append('{').Append(keyValue.Replace("}", "}}")).Append('}');
@@ -320,12 +323,14 @@ namespace System.Data.Common
             string keyword,
             string? value,
             ref string? datadir
-        ) {
+        )
+        {
             string? fullPath = null;
             if (
                 (null != value)
                 && value.StartsWith(DataDirectory, StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 string? rootFolderPath = datadir;
                 if (null == rootFolderPath)
                 {

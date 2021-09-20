@@ -80,7 +80,8 @@ namespace System.Collections.Concurrent.Tests
         public void PushRange_Concurrent_ConsecutiveItemsInEachRange(
             int numThreads,
             int numItemsPerThread
-        ) {
+        )
+        {
             var stack = new ConcurrentStack<int>();
 
             Task.WaitAll(
@@ -132,7 +133,8 @@ namespace System.Collections.Concurrent.Tests
         public void TryPopRange_Concurrent_PoppedItemsAreConsecutive(
             int numThreads,
             int numElementsPerThread
-        ) {
+        )
+        {
             int numTotalElements = numThreads * numElementsPerThread;
             var allValues = new List<int>(Enumerable.Range(1, numTotalElements));
             var stack = new ConcurrentStack<int>(allValues);

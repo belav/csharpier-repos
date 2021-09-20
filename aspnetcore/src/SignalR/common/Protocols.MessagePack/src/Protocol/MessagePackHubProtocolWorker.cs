@@ -26,7 +26,8 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
             ref ReadOnlySequence<byte> input,
             IInvocationBinder binder,
             [NotNullWhen(true)] out HubMessage? message
-        ) {
+        )
+        {
             if (!BinaryMessageParser.TryParseMessage(ref input, out var payload))
             {
                 message = null;
@@ -70,7 +71,8 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
             ref MessagePackReader reader,
             IInvocationBinder binder,
             int itemCount
-        ) {
+        )
+        {
             var headers = ReadHeaders(ref reader);
             var invocationId = ReadInvocationId(ref reader);
 
@@ -115,7 +117,8 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
             ref MessagePackReader reader,
             IInvocationBinder binder,
             int itemCount
-        ) {
+        )
+        {
             var headers = ReadHeaders(ref reader);
             var invocationId = ReadInvocationId(ref reader);
             var target = ReadString(ref reader, "target");
@@ -151,7 +154,8 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
         private HubMessage CreateStreamItemMessage(
             ref MessagePackReader reader,
             IInvocationBinder binder
-        ) {
+        )
+        {
             var headers = ReadHeaders(ref reader);
             var invocationId = ReadInvocationId(ref reader);
             object value;
@@ -174,7 +178,8 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
         private CompletionMessage CreateCompletionMessage(
             ref MessagePackReader reader,
             IInvocationBinder binder
-        ) {
+        )
+        {
             var headers = ReadHeaders(ref reader);
             var invocationId = ReadInvocationId(ref reader);
             var resultKind = ReadInt32(ref reader, "resultKind");
@@ -273,7 +278,8 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
         private object[] BindArguments(
             ref MessagePackReader reader,
             IReadOnlyList<Type> parameterTypes
-        ) {
+        )
+        {
             var argumentCount = ReadArrayLength(ref reader, "arguments");
 
             if (parameterTypes.Count != argumentCount)
@@ -448,7 +454,8 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
         private void WriteStreamInvocationMessage(
             StreamInvocationMessage message,
             ref MessagePackWriter writer
-        ) {
+        )
+        {
             writer.WriteArrayHeader(6);
 
             writer.Write(HubProtocolConstants.StreamInvocationMessageType);
@@ -475,7 +482,8 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
         private void WriteStreamingItemMessage(
             StreamItemMessage message,
             ref MessagePackWriter writer
-        ) {
+        )
+        {
             writer.WriteArrayHeader(4);
             writer.Write(HubProtocolConstants.StreamItemMessageType);
             PackHeaders(message.Headers, ref writer);
@@ -539,7 +547,8 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
         private void WriteCancelInvocationMessage(
             CancelInvocationMessage message,
             ref MessagePackWriter writer
-        ) {
+        )
+        {
             writer.WriteArrayHeader(3);
             writer.Write(HubProtocolConstants.CancelInvocationMessageType);
             PackHeaders(message.Headers, ref writer);

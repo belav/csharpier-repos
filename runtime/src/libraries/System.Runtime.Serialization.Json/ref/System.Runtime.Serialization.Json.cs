@@ -128,7 +128,8 @@ namespace System.Runtime.Serialization.Json
         public override object? ReadObject(
             System.Xml.XmlDictionaryReader reader,
             bool verifyObjectName
-        ) {
+        )
+        {
             throw null;
         }
         public override object? ReadObject(System.Xml.XmlReader reader)
@@ -229,7 +230,8 @@ namespace System.Runtime.Serialization.Json
             System.Text.Encoding? encoding,
             System.Xml.XmlDictionaryReaderQuotas quotas,
             System.Xml.OnXmlDictionaryReaderClose? onClose
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.XmlDictionaryReader CreateJsonReader(
@@ -237,13 +239,15 @@ namespace System.Runtime.Serialization.Json
             int offset,
             int count,
             System.Xml.XmlDictionaryReaderQuotas quotas
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.XmlDictionaryReader CreateJsonReader(
             byte[] buffer,
             System.Xml.XmlDictionaryReaderQuotas quotas
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.XmlDictionaryReader CreateJsonReader(
@@ -251,13 +255,15 @@ namespace System.Runtime.Serialization.Json
             System.Text.Encoding? encoding,
             System.Xml.XmlDictionaryReaderQuotas quotas,
             System.Xml.OnXmlDictionaryReaderClose? onClose
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.XmlDictionaryReader CreateJsonReader(
             System.IO.Stream stream,
             System.Xml.XmlDictionaryReaderQuotas quotas
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.XmlDictionaryWriter CreateJsonWriter(System.IO.Stream stream)
@@ -267,14 +273,16 @@ namespace System.Runtime.Serialization.Json
         public static System.Xml.XmlDictionaryWriter CreateJsonWriter(
             System.IO.Stream stream,
             System.Text.Encoding encoding
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.XmlDictionaryWriter CreateJsonWriter(
             System.IO.Stream stream,
             System.Text.Encoding encoding,
             bool ownsStream
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.XmlDictionaryWriter CreateJsonWriter(
@@ -282,7 +290,8 @@ namespace System.Runtime.Serialization.Json
             System.Text.Encoding encoding,
             bool ownsStream,
             bool indent
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.XmlDictionaryWriter CreateJsonWriter(
@@ -291,7 +300,8 @@ namespace System.Runtime.Serialization.Json
             bool ownsStream,
             bool indent,
             string? indentChars
-        ) {
+        )
+        {
             throw null;
         }
     }

@@ -172,7 +172,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         [InlineData(TransferFormat.Binary)]
         public async Task WebSocketsTransportStopsWhenConnectionClosedByTheServer(
             TransferFormat transferFormat
-        ) {
+        )
+        {
             await using (var server = await StartServer<Startup>())
             {
                 var webSocketsTransport = new WebSocketsTransport(
@@ -227,7 +228,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         [WebSocketsSupportedCondition]
         public async Task WebSocketsTransportThrowsForInvalidTransferFormat(
             TransferFormat transferFormat
-        ) {
+        )
+        {
             using (StartVerifiableLog())
             {
                 var webSocketsTransport = new WebSocketsTransport(

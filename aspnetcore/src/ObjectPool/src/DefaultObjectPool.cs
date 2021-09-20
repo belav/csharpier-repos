@@ -67,7 +67,8 @@ namespace Microsoft.Extensions.ObjectPool
                     if (
                         item != null
                         && Interlocked.CompareExchange(ref items[i].Element, null, item) == item
-                    ) {
+                    )
+                    {
                         return item;
                     }
                 }
@@ -90,7 +91,8 @@ namespace Microsoft.Extensions.ObjectPool
                 if (
                     _firstItem != null
                     || Interlocked.CompareExchange(ref _firstItem, obj, null) != null
-                ) {
+                )
+                {
                     var items = _items;
                     for (
                         var i = 0;

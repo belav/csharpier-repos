@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices.TypeInferenceService
             SemanticModel semanticModel,
             ImmutableArray<ITypeSymbol> result,
             string nameOpt
-        ) {
+        )
+        {
             if (result.IsEmpty && nameOpt != null)
             {
                 return InferTypeBasedOnName(semanticModel, nameOpt);
@@ -34,7 +35,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices.TypeInferenceService
             SemanticModel semanticModel,
             ImmutableArray<TypeInferenceInfo> result,
             string nameOpt
-        ) {
+        )
+        {
             if (result.IsEmpty && nameOpt != null)
             {
                 var types = InferTypeBasedOnName(semanticModel, nameOpt);
@@ -54,7 +56,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices.TypeInferenceService
         private static ImmutableArray<ITypeSymbol> InferTypeBasedOnName(
             SemanticModel semanticModel,
             string name
-        ) {
+        )
+        {
             var matchesBoolean = MatchesBoolean(name);
             return matchesBoolean
               ? ImmutableArray.Create<ITypeSymbol>(
@@ -97,7 +100,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices.TypeInferenceService
             int position,
             string nameOpt,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var result = CreateTypeInferrer(semanticModel, cancellationToken)
                 .InferTypes(position)
                 .Select(t => t.InferredType)
@@ -111,7 +115,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices.TypeInferenceService
             SyntaxNode expression,
             string nameOpt,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var result = CreateTypeInferrer(semanticModel, cancellationToken)
                 .InferTypes(expression)
                 .Select(info => info.InferredType)
@@ -125,7 +130,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices.TypeInferenceService
             int position,
             string nameOpt,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var result = CreateTypeInferrer(semanticModel, cancellationToken).InferTypes(position);
             return InferTypeBasedOnNameIfEmpty(semanticModel, result, nameOpt);
         }
@@ -135,7 +141,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices.TypeInferenceService
             SyntaxNode expression,
             string nameOpt,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var result = CreateTypeInferrer(semanticModel, cancellationToken)
                 .InferTypes(expression);
             return InferTypeBasedOnNameIfEmpty(semanticModel, result, nameOpt);

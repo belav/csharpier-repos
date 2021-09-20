@@ -29,7 +29,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         )]
         public async Task PartialLayoutPaths_SpecifiedInViewStarts_GetResolvedByViewEngine(
             string action
-        ) {
+        )
+        {
             // Arrange
             var expected =
                 @"<layout>
@@ -50,7 +51,8 @@ _ViewStart that specifies partial Layout
         [InlineData("LayoutSpecifiedWithPartialPathInPageWithAppRelativePath")]
         public async Task PartialLayoutPaths_SpecifiedInPage_GetResolvedByViewEngine(
             string actionName
-        ) {
+        )
+        {
             // Arrange
             var expected =
                 @"<non-shared>Layout specified in page

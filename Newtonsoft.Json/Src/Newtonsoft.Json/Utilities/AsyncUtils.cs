@@ -79,7 +79,8 @@ namespace Newtonsoft.Json.Utilities
             this TextWriter writer,
             char value,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             MiscellaneousUtils.Assert(writer != null);
             return cancellationToken.IsCancellationRequested
               ? FromCanceled(cancellationToken)
@@ -90,7 +91,8 @@ namespace Newtonsoft.Json.Utilities
             this TextWriter writer,
             string? value,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             MiscellaneousUtils.Assert(writer != null);
             return cancellationToken.IsCancellationRequested
               ? FromCanceled(cancellationToken)
@@ -103,7 +105,8 @@ namespace Newtonsoft.Json.Utilities
             int start,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             MiscellaneousUtils.Assert(writer != null);
             return cancellationToken.IsCancellationRequested
               ? FromCanceled(cancellationToken)
@@ -116,7 +119,8 @@ namespace Newtonsoft.Json.Utilities
             int index,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             MiscellaneousUtils.Assert(reader != null);
             return cancellationToken.IsCancellationRequested
               ? FromCanceled<int>(cancellationToken)

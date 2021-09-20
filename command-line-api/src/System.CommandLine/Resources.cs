@@ -144,7 +144,8 @@ namespace System.CommandLine
         protected virtual string GetResourceString(
             string resourceString,
             params object[] formatArguments
-        ) {
+        )
+        {
             if (resourceString is null)
             {
                 return string.Empty;

@@ -21,7 +21,8 @@ namespace System.Threading.Tests
                                 "System.Threading.SynchronizationEventSource",
                                 EventLevel.Verbose
                             )
-                        ) {
+                        )
+                        {
                             const int BarrierPhaseFinishedId = 3;
                             const int ExpectedInvocations = 5;
                             int eventsRaised = 0;

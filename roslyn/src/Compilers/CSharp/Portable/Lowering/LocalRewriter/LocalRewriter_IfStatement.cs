@@ -56,7 +56,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundStatement rewrittenConsequence,
             BoundStatement? rewrittenAlternativeOpt,
             bool hasErrors
-        ) {
+        )
+        {
             var afterif = new GeneratedLabelSymbol("afterif");
             var builder = ArrayBuilder<BoundStatement>.GetInstance();
 

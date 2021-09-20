@@ -37,7 +37,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
 
         private static IFileProvider GetCompositeFileProvider(
             MvcRazorRuntimeCompilationOptions options
-        ) {
+        )
+        {
             var fileProviders = options.FileProviders;
             if (fileProviders.Count == 0)
             {

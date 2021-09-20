@@ -21,9 +21,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         ///     Creates a new instance of <see cref="KeyDiscoveryConvention" />.
         /// </summary>
         /// <param name="dependencies"> Parameter object containing dependencies for this convention. </param>
-        public CosmosKeyDiscoveryConvention(
-            ProviderConventionSetBuilderDependencies dependencies
-        ) : base(dependencies) { }
+        public CosmosKeyDiscoveryConvention(ProviderConventionSetBuilderDependencies dependencies)
+            : base(dependencies) { }
 
         /// <summary>
         ///     Called after an annotation is changed on an entity type.
@@ -39,7 +38,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionAnnotation? annotation,
             IConventionAnnotation? oldAnnotation,
             IConventionContext<IConventionAnnotation> context
-        ) {
+        )
+        {
             Check.NotNull(entityTypeBuilder, nameof(entityTypeBuilder));
             Check.NotEmpty(name, nameof(name));
             Check.NotNull(context, nameof(context));
@@ -54,7 +54,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         protected override void ProcessKeyProperties(
             IList<IConventionProperty> keyProperties,
             IConventionEntityType entityType
-        ) {
+        )
+        {
             if (keyProperties.Count == 0)
             {
                 return;

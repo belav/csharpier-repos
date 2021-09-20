@@ -181,7 +181,8 @@ unsafe class PlatformDefaultMemberFunctionTest
     private static PlatformDefaultMemberFunctionNative.C CreateCWithUnmanagedCallersOnlyVTable(
         float width,
         float height
-    ) {
+    )
+    {
         return new PlatformDefaultMemberFunctionNative.C
         {
             vtable = UnmanagedCallersOnlyVtable,
@@ -217,7 +218,8 @@ unsafe class PlatformDefaultMemberFunctionTest
     private static PlatformDefaultMemberFunctionNative.SizeF GetSize(
         PlatformDefaultMemberFunctionNative.C* c,
         int unused
-    ) {
+    )
+    {
         return new PlatformDefaultMemberFunctionNative.SizeF
         {
             width = c->width,
@@ -228,21 +230,24 @@ unsafe class PlatformDefaultMemberFunctionTest
     [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvMemberFunction) })]
     private static PlatformDefaultMemberFunctionNative.Width GetWidth(
         PlatformDefaultMemberFunctionNative.C* c
-    ) {
+    )
+    {
         return new PlatformDefaultMemberFunctionNative.Width { width = c->width };
     }
 
     [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvMemberFunction) })]
     private static PlatformDefaultMemberFunctionNative.IntWrapper GetHeightAsInt(
         PlatformDefaultMemberFunctionNative.C* c
-    ) {
+    )
+    {
         return new PlatformDefaultMemberFunctionNative.IntWrapper { i = (int)c->height };
     }
 
     [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvMemberFunction) })]
     private static PlatformDefaultMemberFunctionNative.E GetE(
         PlatformDefaultMemberFunctionNative.C* c
-    ) {
+    )
+    {
         return c->dummy;
     }
 

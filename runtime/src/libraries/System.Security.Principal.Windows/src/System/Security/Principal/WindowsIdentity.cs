@@ -90,7 +90,8 @@ namespace System.Security.Principal
                     !identity._safeTokenHandle.IsInvalid
                     && identity._safeTokenHandle != SafeAccessTokenHandle.InvalidHandle
                     && identity._safeTokenHandle.DangerousGetHandle() != IntPtr.Zero
-                ) {
+                )
+                {
                     identity._safeTokenHandle.DangerousAddRef(ref mustDecrement);
 
                     if (
@@ -175,7 +176,8 @@ namespace System.Security.Principal
                         SafeLocalAllocHandle authenticationInfo = SafeLocalAllocHandle.LocalAlloc(
                             authenticationInfoLength
                         )
-                    ) {
+                    )
+                    {
                         KERB_S4U_LOGON* pKerbS4uLogin = (KERB_S4U_LOGON*)(
                             authenticationInfo.DangerousGetHandle()
                         );
@@ -198,7 +200,8 @@ namespace System.Security.Principal
                             SafeLocalAllocHandle sourceNameBuffer = SafeLocalAllocHandle.LocalAlloc(
                                 sourceNameLength
                             )
-                        ) {
+                        )
+                        {
                             Marshal.Copy(
                                 sourceName,
                                 0,
@@ -301,7 +304,8 @@ namespace System.Security.Principal
                     out dwLength
                 )
                 && Marshal.GetLastWin32Error() == Interop.Errors.ERROR_INVALID_HANDLE
-            ) {
+            )
+            {
                 throw new ArgumentException(SR.Argument_InvalidImpersonationToken);
             }
 
@@ -317,7 +321,8 @@ namespace System.Security.Principal
                     true,
                     Interop.DuplicateHandleOptions.DUPLICATE_SAME_ACCESS
                 )
-            ) {
+            )
+            {
                 throw new SecurityException(new Win32Exception().Message);
             }
 
@@ -672,7 +677,8 @@ namespace System.Security.Principal
                             TokenInformationClass.TokenOwner,
                             nullOnInvalidParam: false
                         )!
-                    ) {
+                    )
+                    {
                         _owner = new SecurityIdentifier(tokenOwner.Read<IntPtr>(0));
                     }
                 }
@@ -697,7 +703,8 @@ namespace System.Security.Principal
                             TokenInformationClass.TokenUser,
                             nullOnInvalidParam: false
                         )!
-                    ) {
+                    )
+                    {
                         _user = new SecurityIdentifier(tokenUser!.Read<IntPtr>(0));
                     }
                 }
@@ -723,7 +730,8 @@ namespace System.Security.Principal
                             TokenInformationClass.TokenGroups,
                             nullOnInvalidParam: false
                         )!
-                    ) {
+                    )
+                    {
                         Interop.TOKEN_GROUPS tokenGroups = pGroups!.Read<Interop.TOKEN_GROUPS>(0);
                         Interop.SID_AND_ATTRIBUTES[] groupDetails = new Interop.SID_AND_ATTRIBUTES[
                             tokenGroups.GroupCount
@@ -744,7 +752,8 @@ namespace System.Security.Principal
                                 | Interop.SecurityGroups.SE_GROUP_USE_FOR_DENY_ONLY;
                             if (
                                 (group.Attributes & mask) == Interop.SecurityGroups.SE_GROUP_ENABLED
-                            ) {
+                            )
+                            {
                                 groups.Add(new SecurityIdentifier(group.Sid));
                             }
                         }
@@ -773,7 +782,8 @@ namespace System.Security.Principal
         public static void RunImpersonated(
             SafeAccessTokenHandle safeAccessTokenHandle,
             Action action
-        ) {
+        )
+        {
             if (action == null)
                 throw new ArgumentNullException(nameof(action));
 
@@ -783,7 +793,8 @@ namespace System.Security.Principal
         public static T RunImpersonated<T>(
             SafeAccessTokenHandle safeAccessTokenHandle,
             Func<T> func
-        ) {
+        )
+        {
             if (func == null)
                 throw new ArgumentNullException(nameof(func));
 
@@ -880,7 +891,8 @@ namespace System.Security.Principal
 
         private static void CurrentImpersonatedTokenChanged(
             AsyncLocalValueChangedArgs<SafeAccessTokenHandle?> args
-        ) {
+        )
+        {
             if (!args.ThreadContextChanged)
                 return; // we handle explicit Value property changes elsewhere.
 
@@ -897,7 +909,8 @@ namespace System.Security.Principal
         internal static WindowsIdentity? GetCurrentInternal(
             TokenAccessLevels desiredAccess,
             bool threadOnly
-        ) {
+        )
+        {
             SafeAccessTokenHandle safeTokenHandle = GetCurrentToken(
                 desiredAccess,
                 threadOnly,
@@ -951,7 +964,8 @@ namespace System.Security.Principal
             bool threadOnly,
             out bool isImpersonating,
             out int hr
-        ) {
+        )
+        {
             isImpersonating = true;
             hr = 0;
             bool success = Interop.Advapi32.OpenThreadToken(
@@ -974,7 +988,8 @@ namespace System.Security.Principal
         private static SafeAccessTokenHandle GetCurrentProcessToken(
             TokenAccessLevels desiredAccess,
             out int hr
-        ) {
+        )
+        {
             hr = 0;
             if (
                 !Interop.Advapi32.OpenProcessToken(
@@ -1005,7 +1020,8 @@ namespace System.Security.Principal
                     tokenInformationClass,
                     nullOnInvalidParam: false
                 )!
-            ) {
+            )
+            {
                 Debug.Assert(
                     information!.ByteLength >= (ulong)Marshal.SizeOf<T>(),
                     "information.ByteLength >= (ulong)Marshal.SizeOf(typeof(T))"
@@ -1023,7 +1039,8 @@ namespace System.Security.Principal
                     TokenInformationClass.TokenStatistics,
                     nullOnInvalidParam: false
                 )!
-            ) {
+            )
+            {
                 Interop.TOKEN_STATISTICS statistics = pStatistics!.Read<Interop.TOKEN_STATISTICS>(
                     0
                 );
@@ -1035,7 +1052,8 @@ namespace System.Security.Principal
             SafeAccessTokenHandle tokenHandle,
             TokenInformationClass tokenInformationClass,
             bool nullOnInvalidParam = false
-        ) {
+        )
+        {
             SafeLocalAllocHandle safeLocalAllocHandle = SafeLocalAllocHandle.InvalidHandle;
             uint dwLength = (uint)sizeof(uint);
             bool result = Interop.Advapi32.GetTokenInformation(
@@ -1277,7 +1295,8 @@ namespace System.Security.Principal
                         if (
                             !foundPrimaryGroupSid
                             && StringComparer.Ordinal.Equals(groupSid.Value, primaryGroupSid.Value)
-                        ) {
+                        )
+                        {
                             claim = new Claim(
                                 ClaimTypes.PrimaryGroupSid,
                                 groupSid.Value,
@@ -1311,11 +1330,13 @@ namespace System.Security.Principal
                     else if (
                         (group.Attributes & mask)
                         == Interop.SecurityGroups.SE_GROUP_USE_FOR_DENY_ONLY
-                    ) {
+                    )
+                    {
                         if (
                             !foundPrimaryGroupSid
                             && StringComparer.Ordinal.Equals(groupSid.Value, primaryGroupSid.Value)
-                        ) {
+                        )
+                        {
                             claim = new Claim(
                                 ClaimTypes.DenyOnlyPrimaryGroupSid,
                                 groupSid.Value,
@@ -1401,7 +1422,8 @@ namespace System.Security.Principal
                 }
                 else if (
                     (user.Attributes & mask) == Interop.SecurityGroups.SE_GROUP_USE_FOR_DENY_ONLY
-                ) {
+                )
+                {
                     claim = new Claim(
                         ClaimTypes.DenyOnlyPrimarySid,
                         sid.Value,
@@ -1427,7 +1449,8 @@ namespace System.Security.Principal
         private void AddDeviceGroupSidClaims(
             List<Claim> instanceClaims,
             TokenInformationClass tokenInformationClass
-        ) {
+        )
+        {
             // special case the anonymous identity.
             if (_safeTokenHandle.IsInvalid)
                 return;
@@ -1491,7 +1514,8 @@ namespace System.Security.Principal
                     else if (
                         (group.Attributes & mask)
                         == Interop.SecurityGroups.SE_GROUP_USE_FOR_DENY_ONLY
-                    ) {
+                    )
+                    {
                         claimType = ClaimTypes.DenyOnlyWindowsDeviceGroup;
                         Claim claim = new Claim(
                             claimType,
@@ -1528,7 +1552,8 @@ namespace System.Security.Principal
             List<Claim> instanceClaims,
             TokenInformationClass tokenInformationClass,
             string propertyValue
-        ) {
+        )
+        {
             // special case the anonymous identity.
             if (_safeTokenHandle.IsInvalid)
                 return;

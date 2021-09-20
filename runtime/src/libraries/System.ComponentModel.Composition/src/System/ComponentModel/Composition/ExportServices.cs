@@ -67,7 +67,8 @@ namespace System.ComponentModel.Composition
         internal static Func<Export, object> CreateStronglyTypedLazyFactory(
             Type? exportType,
             Type? metadataViewType
-        ) {
+        )
+        {
             MethodInfo genericMethod;
             if (metadataViewType != null)
             {
@@ -97,7 +98,8 @@ namespace System.ComponentModel.Composition
         internal static Func<Export, Lazy<object, object>> CreateSemiStronglyTypedLazyFactory(
             Type? exportType,
             Type? metadataViewType
-        ) {
+        )
+        {
             MethodInfo genericMethod = _createSemiStronglyTypedLazy.MakeGenericMethod(
                 exportType ?? ExportServices.DefaultExportedValueType,
                 metadataViewType ?? ExportServices.DefaultMetadataViewType
@@ -202,7 +204,8 @@ namespace System.ComponentModel.Composition
         internal static ExportCardinalityCheckResult CheckCardinality<T>(
             ImportDefinition definition,
             IEnumerable<T>? enumerable
-        ) {
+        )
+        {
             EnumerableCardinality actualCardinality =
                 (enumerable != null) ? enumerable.GetCardinality() : EnumerableCardinality.Zero;
 
@@ -212,7 +215,8 @@ namespace System.ComponentModel.Composition
         private static ExportCardinalityCheckResult MatchCardinality(
             EnumerableCardinality actualCardinality,
             ImportCardinality importCardinality
-        ) {
+        )
+        {
             switch (actualCardinality)
             {
                 case EnumerableCardinality.Zero:

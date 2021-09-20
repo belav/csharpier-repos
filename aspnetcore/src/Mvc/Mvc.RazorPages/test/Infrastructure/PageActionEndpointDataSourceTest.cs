@@ -96,7 +96,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         private protected override ActionEndpointDataSourceBase CreateDataSource(
             IActionDescriptorCollectionProvider actions,
             ActionEndpointFactory endpointFactory
-        ) {
+        )
+        {
             return new PageActionEndpointDataSource(
                 new PageActionEndpointDataSourceIdProvider(),
                 actions,
@@ -109,7 +110,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             object values,
             string pattern = null,
             IList<object> metadata = null
-        ) {
+        )
+        {
             var action = new PageActionDescriptor();
 
             foreach (var kvp in new RouteValueDictionary(values))

@@ -60,7 +60,8 @@ namespace System.UnitTesting
             CompositionErrorExpectation expectation,
             RetryMode retry,
             Action action
-        ) {
+        )
+        {
             ExceptionAssert.Throws<ComposablePartException>(
                 retry,
                 action,
@@ -92,7 +93,8 @@ namespace System.UnitTesting
             ErrorId innerInnerId,
             RetryMode retry,
             Action action
-        ) {
+        )
+        {
             ThrowsError(GetExpectation(id, innerId, innerInnerId), retry, action);
         }
 
@@ -105,7 +107,8 @@ namespace System.UnitTesting
             CompositionErrorExpectation expectation,
             RetryMode retry,
             Action action
-        ) {
+        )
+        {
             ThrowsErrors(new CompositionErrorExpectation[] { expectation }, retry, action);
         }
 
@@ -142,7 +145,8 @@ namespace System.UnitTesting
             ErrorId innerId,
             RetryMode retry,
             Action action
-        ) {
+        )
+        {
             ThrowsChangeRejectedError(GetExpectation(id, innerId), retry, action);
         }
 
@@ -152,7 +156,8 @@ namespace System.UnitTesting
             ErrorId innerInnerId,
             RetryMode retry,
             Action action
-        ) {
+        )
+        {
             ThrowsChangeRejectedError(GetExpectation(id, innerId, innerInnerId), retry, action);
         }
 
@@ -160,7 +165,8 @@ namespace System.UnitTesting
             CompositionErrorExpectation expectation,
             RetryMode retry,
             Action action
-        ) {
+        )
+        {
             ThrowsChangeRejectedErrors(
                 new CompositionErrorExpectation[] { expectation },
                 retry,
@@ -172,7 +178,8 @@ namespace System.UnitTesting
             CompositionErrorExpectation[] expectations,
             RetryMode retry,
             Action action
-        ) {
+        )
+        {
             ExceptionAssert.Throws<ChangeRejectedException>(
                 retry,
                 action,
@@ -187,7 +194,8 @@ namespace System.UnitTesting
             CompositionErrorExpectation[] expectations,
             RetryMode retry,
             Action action
-        ) {
+        )
+        {
             ExceptionAssert.Throws<CompositionException>(
                 retry,
                 action,
@@ -203,7 +211,8 @@ namespace System.UnitTesting
             string prefix,
             CompositionException exception,
             CompositionErrorExpectation[] expectations
-        ) {
+        )
+        {
             Assert.Equal(exception.Errors.Count, expectations.Length);
 
             for (int i = 0; i < exception.Errors.Count; i++)
@@ -222,7 +231,8 @@ namespace System.UnitTesting
             string prefix,
             ComposablePartException error,
             CompositionErrorExpectation expectation
-        ) {
+        )
+        {
             if (expectation.ElementSpecified)
             {
                 AssertCore(retryCount, prefix, "Element", expectation.Element, error.Element);
@@ -280,7 +290,8 @@ namespace System.UnitTesting
             string prefix,
             CompositionError error,
             CompositionErrorExpectation expectation
-        ) {
+        )
+        {
             if (expectation.IdSpecified)
             {
                 AssertCore(retryCount, prefix, "Id", expectation.Id, (ErrorId)error.Id);
@@ -344,7 +355,8 @@ namespace System.UnitTesting
             string propertyName,
             T expected,
             T actual
-        ) {
+        )
+        {
             Assert.Equal(expected, actual);
         }
 

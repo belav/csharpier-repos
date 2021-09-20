@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.SemanticModelReuse
                 Document document,
                 SyntaxNode node,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // TODO: port the GetSemanticModelForNodeAsync implementation from Workspaces layer,
                 // which currently relies on a bunch of internal APIs.
                 // For now, we fall back to the public API to fetch document's SemanticModel.

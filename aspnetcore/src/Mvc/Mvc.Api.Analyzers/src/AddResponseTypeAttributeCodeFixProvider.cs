@@ -38,7 +38,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                     diagnostic.Descriptor.Id
                     != ApiDiagnosticDescriptors.API1001_ActionReturnsUndocumentedSuccessResult.Id
                 )
-            ) {
+            )
+            {
                 return Task.CompletedTask;
             }
 

@@ -16,7 +16,8 @@ namespace System.Web.Http.ModelBinding.Binders
         private static List<TElement> BindComplexCollection(
             HttpActionContext actionContext,
             ModelBindingContext bindingContext
-        ) {
+        )
+        {
             string indexPropertyName = ModelBindingHelper.CreatePropertyModelName(
                 bindingContext.ModelName,
                 "index"
@@ -35,7 +36,8 @@ namespace System.Web.Http.ModelBinding.Binders
             HttpActionContext actionContext,
             ModelBindingContext bindingContext,
             IEnumerable<string> indexNames
-        ) {
+        )
+        {
             bool indexNamesIsFinite;
             if (indexNames != null)
             {
@@ -89,7 +91,8 @@ namespace System.Web.Http.ModelBinding.Binders
         public virtual bool BindModel(
             HttpActionContext actionContext,
             ModelBindingContext bindingContext
-        ) {
+        )
+        {
             ModelBindingHelper.ValidateBindingContext(bindingContext);
 
             if (!bindingContext.ValueProvider.ContainsPrefix(bindingContext.ModelName))
@@ -121,7 +124,8 @@ namespace System.Web.Http.ModelBinding.Binders
             ModelBindingContext bindingContext,
             object rawValue,
             CultureInfo culture
-        ) {
+        )
+        {
             if (rawValue == null)
             {
                 return null; // nothing to do
@@ -168,7 +172,8 @@ namespace System.Web.Http.ModelBinding.Binders
             HttpActionContext actionContext,
             ModelBindingContext bindingContext,
             IList<TElement> newCollection
-        ) {
+        )
+        {
             CollectionModelBinderUtil.CreateOrReplaceCollection(
                 bindingContext,
                 newCollection,

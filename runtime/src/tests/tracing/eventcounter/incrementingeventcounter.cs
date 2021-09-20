@@ -118,7 +118,8 @@ namespace BasicEventSourceTests
                     EventLevel.Verbose,
                     iter
                 )
-            ) {
+            )
+            {
                 string displayName = "Mock Counter";
                 string displayUnits = "Count";
 

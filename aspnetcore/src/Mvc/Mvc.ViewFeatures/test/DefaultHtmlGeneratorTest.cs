@@ -442,7 +442,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public void GenerateTextBox_SearchType_RendersMaxLength(
             string expression,
             int expectedValue
-        ) {
+        )
+        {
             // Arrange
             var metadataProvider = new TestModelMetadataProvider();
             var htmlGenerator = GetGenerator(metadataProvider);
@@ -708,7 +709,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string[] rawValue,
             bool allowMultiple,
             IReadOnlyCollection<string> expected
-        ) {
+        )
+        {
             // Arrange
             var metadataProvider = new TestModelMetadataProvider();
             var htmlGenerator = GetGenerator(metadataProvider);
@@ -741,7 +743,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string[] rawValue,
             bool allowMultiple,
             IReadOnlyCollection<string> expected
-        ) {
+        )
+        {
             // Arrange
             var metadataProvider = new TestModelMetadataProvider();
             var htmlGenerator = GetGenerator(metadataProvider);
@@ -797,7 +800,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public void GetCurrentValues_WithModelExplorerAndViewData_ReturnsExpressionResult(
             string[] rawValue,
             IReadOnlyCollection<string> expected
-        ) {
+        )
+        {
             // Arrange
             var metadataProvider = new TestModelMetadataProvider();
             var htmlGenerator = GetGenerator(metadataProvider);
@@ -830,7 +834,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public void GetCurrentValues_WithViewData_ReturnsViewDataEntry(
             string[] rawValue,
             IReadOnlyCollection<string> expected
-        ) {
+        )
+        {
             // Arrange
             var metadataProvider = new TestModelMetadataProvider();
             var htmlGenerator = GetGenerator(metadataProvider);
@@ -861,7 +866,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public void GetCurrentValues_WithModel_ReturnsModel(
             string[] rawValue,
             IReadOnlyCollection<string> expected
-        ) {
+        )
+        {
             // Arrange
             var metadataProvider = new TestModelMetadataProvider();
             var htmlGenerator = GetGenerator(metadataProvider);
@@ -939,7 +945,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public void GetCurrentValues_CollectionWithModelExplorerAndViewData_ReturnsExpressionResult(
             string[] rawValue,
             IReadOnlyCollection<string> expected
-        ) {
+        )
+        {
             // Arrange
             var metadataProvider = new TestModelMetadataProvider();
             var htmlGenerator = GetGenerator(metadataProvider);
@@ -975,7 +982,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public void GetCurrentValues_CollectionWithViewData_ReturnsViewDataEntry(
             string[] rawValue,
             IReadOnlyCollection<string> expected
-        ) {
+        )
+        {
             // Arrange
             var metadataProvider = new TestModelMetadataProvider();
             var htmlGenerator = GetGenerator(metadataProvider);
@@ -1006,7 +1014,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public void GetCurrentValues_CollectionWithModel_ReturnsModel(
             string[] rawValue,
             IReadOnlyCollection<string> expected
-        ) {
+        )
+        {
             // Arrange
             var metadataProvider = new TestModelMetadataProvider();
             var htmlGenerator = GetGenerator(metadataProvider);
@@ -1120,7 +1129,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string propertyName,
             object rawValue,
             IReadOnlyCollection<string> expected
-        ) {
+        )
+        {
             // Arrange
             var metadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
             var htmlGenerator = GetGenerator(metadataProvider);
@@ -1155,7 +1165,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public void GenerateAntiforgery_GeneratesAntiforgeryFieldsOnlyIfRequired(
             bool hasAntiforgeryToken,
             string expectedAntiforgeryHtmlField
-        ) {
+        )
+        {
             // Arrange
             var metadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
             var htmlGenerator = GetGenerator(metadataProvider);
@@ -1186,7 +1197,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         [InlineData(true)]
         public void GenerateAntiforgery_AlwaysGeneratesAntiforgeryToken_IfCannotRenderAtEnd(
             bool hasAntiforgeryToken
-        ) {
+        )
+        {
             // Arrange
             var expected =
                 "<input name=\"formFieldName\" type=\"hidden\" value=\"requestToken\" />";
@@ -1251,7 +1263,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         private static ViewContext GetViewContext<TModel>(
             TModel model,
             IModelMetadataProvider metadataProvider
-        ) {
+        )
+        {
             var actionContext = new ActionContext(
                 new DefaultHttpContext(),
                 new RouteData(),

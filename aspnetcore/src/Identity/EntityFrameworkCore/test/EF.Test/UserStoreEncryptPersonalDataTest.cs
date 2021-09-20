@@ -154,7 +154,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
             string id,
             string loginProvider,
             string tokenName
-        ) {
+        )
+        {
             using (var command = conn.CreateCommand())
             {
                 command.CommandText =
@@ -271,9 +272,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
 
         private class ProtectedIdentityDbContext : IdentityDbContext<CustomUser>
         {
-            public ProtectedIdentityDbContext(
-                DbContextOptions<ProtectedIdentityDbContext> options
-            ) : base(options) { }
+            public ProtectedIdentityDbContext(DbContextOptions<ProtectedIdentityDbContext> options)
+                : base(options) { }
         }
 
         private class UnprotectedIdentityDbContext : IdentityDbContext<CustomUser>

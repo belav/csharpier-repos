@@ -125,7 +125,8 @@ namespace Microsoft.DotNet.Cli.Build.Framework
                     foreach (
                         var path in System.Environment.GetEnvironmentVariable("PATH")
                             .Split(Path.PathSeparator)
-                    ) {
+                    )
+                    {
                         var candidate = Path.Combine(path, executable + ".exe");
                         if (File.Exists(candidate))
                         {
@@ -217,7 +218,8 @@ namespace Microsoft.DotNet.Cli.Build.Framework
         public CommandResult WaitForExit(
             bool fExpectedToFail,
             int timeoutMilliseconds = Timeout.Infinite
-        ) {
+        )
+        {
             ReportExecWaitOnExit();
 
             int exitCode;
@@ -425,7 +427,8 @@ namespace Microsoft.DotNet.Cli.Build.Framework
             StringWriter capture,
             Action<string> forward,
             Action<string> handler
-        ) {
+        )
+        {
             if (data == null)
             {
                 return;

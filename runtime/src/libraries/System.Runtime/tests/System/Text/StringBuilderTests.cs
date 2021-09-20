@@ -611,7 +611,8 @@ namespace System.Text.Tests
             char value,
             int repeatCount,
             string expected
-        ) {
+        )
+        {
             StringBuilder builder;
             if (repeatCount == 1)
             {
@@ -667,7 +668,8 @@ namespace System.Text.Tests
             char[] charArray,
             int valueCount,
             string expected
-        ) {
+        )
+        {
             _ = charArray; // https://github.com/xunit/xunit/issues/1969
             fixed (char* value = charArray)
             {
@@ -735,7 +737,8 @@ namespace System.Text.Tests
             int startIndex,
             int count,
             string expected
-        ) {
+        )
+        {
             StringBuilder builder;
             if (startIndex == 0 && count == (value?.Length ?? 0))
             {
@@ -768,7 +771,8 @@ namespace System.Text.Tests
             string value,
             int startIndex,
             int count
-        ) {
+        )
+        {
             var builder = new StringBuilder();
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "startIndex",
@@ -818,7 +822,8 @@ namespace System.Text.Tests
             int startIndex,
             int charCount,
             string expected
-        ) {
+        )
+        {
             StringBuilder builder;
             if (startIndex == 0 && charCount == (value?.Length ?? 0))
             {
@@ -1292,7 +1297,8 @@ namespace System.Text.Tests
             string format,
             object[] values,
             string expected
-        ) {
+        )
+        {
             StringBuilder builder;
             if (values != null)
             {
@@ -1668,7 +1674,8 @@ namespace System.Text.Tests
             int destinationIndex,
             int count,
             char[] expected
-        ) {
+        )
+        {
             var builder = new StringBuilder(value);
             builder.CopyTo(sourceIndex, destination, destinationIndex, count);
             Assert.Equal(expected, destination);
@@ -2221,7 +2228,8 @@ namespace System.Text.Tests
             int index,
             double doubleValue,
             string expected
-        ) {
+        )
+        {
             var builder = new StringBuilder(original);
             builder.Insert(index, new decimal(doubleValue));
             Assert.Equal(expected, builder.ToString());
@@ -2287,7 +2295,8 @@ namespace System.Text.Tests
             string value,
             int count,
             string expected
-        ) {
+        )
+        {
             StringBuilder builder;
             if (count == 1)
             {
@@ -2357,7 +2366,8 @@ namespace System.Text.Tests
             int startIndex,
             int charCount,
             string expected
-        ) {
+        )
+        {
             StringBuilder builder;
             if (startIndex == 0 && charCount == (value?.Length ?? 0))
             {
@@ -2470,7 +2480,8 @@ namespace System.Text.Tests
             int startIndex,
             int count,
             string expected
-        ) {
+        )
+        {
             StringBuilder builder = StringBuilderWithMultipleChunks();
             builder.Remove(startIndex, count);
             Assert.Equal(expected, builder.ToString());
@@ -2518,7 +2529,8 @@ namespace System.Text.Tests
             int startIndex,
             int count,
             string expected
-        ) {
+        )
+        {
             StringBuilder builder;
             if (startIndex == 0 && count == value.Length)
             {
@@ -2593,7 +2605,8 @@ namespace System.Text.Tests
             int startIndex,
             int count,
             string expected
-        ) {
+        )
+        {
             StringBuilder builder;
             if (startIndex == 0 && count == value.Length)
             {
@@ -2859,7 +2872,8 @@ namespace System.Text.Tests
         public static void AppendJoin_NoValues_NoSpareCapacity_DoesNotThrow(
             string separator,
             object[] values
-        ) {
+        )
+        {
             var stringValues = Array.ConvertAll(values, _ => _?.ToString());
             var enumerable = values.Select(_ => _);
 
@@ -2882,7 +2896,8 @@ namespace System.Text.Tests
         public static void AppendJoin_NoSpareCapacity_ThrowsArgumentOutOfRangeException(
             string separator,
             object[] values
-        ) {
+        )
+        {
             var builder = new StringBuilder(0, 5);
             builder.Append("Hello");
 
@@ -2949,7 +2964,8 @@ namespace System.Text.Tests
         [InlineData(10000)]
         public static void Clear_AppendAndInsertBeforeClearManyTimes_CapacityStaysWithinRange(
             int times
-        ) {
+        )
+        {
             var builder = new StringBuilder();
             var originalCapacity = builder.Capacity;
             var s = new string(' ', 10);
@@ -3034,7 +3050,8 @@ namespace System.Text.Tests
             char[] destination,
             int count,
             char[] expected
-        ) {
+        )
+        {
             var builder = new StringBuilder(value);
             builder.CopyTo(sourceIndex, new Span<char>(destination), count);
             Assert.Equal(expected, destination);
@@ -3093,7 +3110,8 @@ namespace System.Text.Tests
             int index,
             char[] value,
             string expected
-        ) {
+        )
+        {
             var builder = new StringBuilder(original);
             builder.Insert(index, new ReadOnlySpan<char>(value));
             Assert.Equal(expected, builder.ToString());
@@ -3292,7 +3310,8 @@ namespace System.Text.Tests
             int startIndex,
             int count,
             string s
-        ) {
+        )
+        {
             Assert.Equal(s, s1.Append(s2, startIndex, count).ToString());
         }
 

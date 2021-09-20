@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         public ResponseCacheFilterApplicationModelProvider(
             IOptions<MvcOptions> mvcOptionsAccessor,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             if (mvcOptionsAccessor == null)
             {
                 throw new ArgumentNullException(nameof(mvcOptionsAccessor));

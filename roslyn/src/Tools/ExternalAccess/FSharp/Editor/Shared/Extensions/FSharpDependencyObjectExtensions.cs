@@ -16,14 +16,16 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Editor.Shared.Extensions
         public static void SetTextProperties(
             this DependencyObject dependencyObject,
             TextFormattingRunProperties textProperties
-        ) {
+        )
+        {
             DependencyObjectExtensions.SetTextProperties(dependencyObject, textProperties);
         }
 
         public static void SetDefaultTextProperties(
             this DependencyObject dependencyObject,
             IClassificationFormatMap formatMap
-        ) {
+        )
+        {
             DependencyObjectExtensions.SetDefaultTextProperties(dependencyObject, formatMap);
         }
     }

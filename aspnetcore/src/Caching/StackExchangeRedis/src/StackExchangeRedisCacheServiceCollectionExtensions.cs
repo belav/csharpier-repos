@@ -23,7 +23,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddStackExchangeRedisCache(
             this IServiceCollection services,
             Action<RedisCacheOptions> setupAction
-        ) {
+        )
+        {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));

@@ -60,8 +60,9 @@ namespace Roslyn.Utilities
             this IDictionary<TKey, TCollection> dictionary,
             TKey key,
             TValue value
-        ) where TKey : notnull
-          where TCollection : ICollection<TValue>, new()
+        )
+            where TKey : notnull
+            where TCollection : ICollection<TValue>, new()
         {
             if (!dictionary.TryGetValue(key, out var collection))
             {
@@ -114,8 +115,9 @@ namespace Roslyn.Utilities
             this IDictionary<TKey, ImmutableArray<TValue>> dictionary,
             TKey key,
             TValue value
-        ) where TKey : notnull
-          where TValue : IEquatable<TValue>
+        )
+            where TKey : notnull
+            where TValue : IEquatable<TValue>
         {
             if (!dictionary.TryGetValue(key, out var existingArray))
             {
@@ -130,8 +132,9 @@ namespace Roslyn.Utilities
             TKey key,
             TValue value,
             ImmutableArray<TValue> defaultArray
-        ) where TKey : notnull
-          where TValue : IEquatable<TValue>
+        )
+            where TKey : notnull
+            where TValue : IEquatable<TValue>
         {
             if (!dictionary.TryGetValue(key, out var existingArray))
             {
@@ -148,8 +151,9 @@ namespace Roslyn.Utilities
             this IDictionary<TKey, TCollection> dictionary,
             TKey key,
             TValue value
-        ) where TKey : notnull
-          where TCollection : ICollection<TValue>
+        )
+            where TKey : notnull
+            where TCollection : ICollection<TValue>
         {
             if (dictionary.TryGetValue(key, out var collection))
             {
@@ -193,8 +197,9 @@ namespace Roslyn.Utilities
             this IDictionary<TKey, TSet> dictionary,
             TKey key,
             TValue value
-        ) where TKey : notnull
-          where TSet : IImmutableSet<TValue>
+        )
+            where TKey : notnull
+            where TSet : IImmutableSet<TValue>
         {
             if (dictionary.TryGetValue(key, out var collection))
             {

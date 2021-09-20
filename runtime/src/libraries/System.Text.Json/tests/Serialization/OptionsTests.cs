@@ -19,7 +19,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -27,7 +28,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 bool value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }
@@ -341,7 +343,8 @@ namespace System.Text.Json.Serialization.Tests
         public static void CustomEncoderAllowLatin1Supplement(
             string message,
             string expectedMessage
-        ) {
+        )
+        {
             // Latin-1 Supplement block starts from U+0080 and ends at U+00FF
             JavaScriptEncoder encoder = JavaScriptEncoder.Create(UnicodeRanges.Latin1Supplement);
 
@@ -382,7 +385,8 @@ namespace System.Text.Json.Serialization.Tests
         public static void JsonEncodedTextStringsCustomAllowAll(
             string message,
             string expectedMessage
-        ) {
+        )
+        {
             // Allow all unicode values (except forbidden characters which we don't have in test data here)
             JavaScriptEncoder encoder = JavaScriptEncoder.Create(UnicodeRanges.All);
 
@@ -425,7 +429,8 @@ namespace System.Text.Json.Serialization.Tests
             object objectValue,
             string stringValue,
             bool throws
-        ) {
+        )
+        {
             var options = new JsonSerializerOptions();
 
             JsonConverter<T> converter = (JsonConverter<T>)options.GetConverter(typeof(T));
@@ -555,7 +560,8 @@ namespace System.Text.Json.Serialization.Tests
             string stringValue,
             JsonSerializerOptions options,
             bool nullOptionOkay = true
-        ) {
+        )
+        {
             JsonConverter<T> converter = (JsonConverter<T>)options.GetConverter(typeof(T));
 
             Assert.True(converter.CanConvert(typeof(T)));
@@ -748,7 +754,8 @@ namespace System.Text.Json.Serialization.Tests
         private static void VerifyOptionsEqual(
             JsonSerializerOptions options,
             JsonSerializerOptions newOptions
-        ) {
+        )
+        {
             foreach (PropertyInfo property in typeof(JsonSerializerOptions).GetProperties())
             {
                 Type propertyType = property.PropertyType;

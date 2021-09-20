@@ -15,7 +15,8 @@ namespace System.Reflection
 
         public static AssemblyNameFlags ExtractAssemblyNameFlags(
             this AssemblyNameFlags combinedFlags
-        ) {
+        )
+        {
             return combinedFlags & unchecked((AssemblyNameFlags)0xFFFFF10F);
         }
     }

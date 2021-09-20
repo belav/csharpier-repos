@@ -261,7 +261,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         public async Task BindParameterFromHeader_WithData_WithPrefix_ModelGetsBound(
             Type modelType,
             string value
-        ) {
+        )
+        {
             // Arrange
             string expectedAttemptedValue;
             object expectedRawValue;
@@ -462,7 +463,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         private ModelBindingTestContext GetModelBindingTestContext(
             Action<HttpRequest> updateRequest = null,
             Action<MvcOptions> updateOptions = null
-        ) {
+        )
+        {
             return ModelBindingTestHelper.GetTestContext(updateRequest, updateOptions);
         }
 
@@ -531,7 +533,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ITypeDescriptorContext context,
                 CultureInfo culture,
                 object value
-            ) {
+            )
+            {
                 var id = value.ToString();
                 return new OrderWithTypeConverter()
                 {

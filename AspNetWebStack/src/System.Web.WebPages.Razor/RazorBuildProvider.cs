@@ -277,7 +277,8 @@ namespace System.Web.WebPages.Razor
         private static HttpParseException CreateExceptionFromParserError(
             RazorError error,
             string virtualPath
-        ) {
+        )
+        {
             return new HttpParseException(
                 error.Message + Environment.NewLine,
                 null,

@@ -17,25 +17,25 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousTypeToTuple
     {
         private readonly ISyntaxKinds _syntaxKinds;
 
-        protected AbstractConvertAnonymousTypeToTupleDiagnosticAnalyzer(
-            ISyntaxKinds syntaxKinds
-        ) : base(
-            IDEDiagnosticIds.ConvertAnonymousTypeToTupleDiagnosticId,
-            EnforceOnBuildValues.ConvertAnonymousTypeToTuple,
-            option: null,
-            new LocalizableResourceString(
-                nameof(AnalyzersResources.Convert_to_tuple),
-                AnalyzersResources.ResourceManager,
-                typeof(AnalyzersResources)
-            ),
-            new LocalizableResourceString(
-                nameof(AnalyzersResources.Convert_to_tuple),
-                AnalyzersResources.ResourceManager,
-                typeof(AnalyzersResources)
-            ),
-            // This analyzer is not configurable.  The intent is just to act as a refactoring, just benefiting from fix-all
-            configurable: false
-        ) {
+        protected AbstractConvertAnonymousTypeToTupleDiagnosticAnalyzer(ISyntaxKinds syntaxKinds)
+            : base(
+                IDEDiagnosticIds.ConvertAnonymousTypeToTupleDiagnosticId,
+                EnforceOnBuildValues.ConvertAnonymousTypeToTuple,
+                option: null,
+                new LocalizableResourceString(
+                    nameof(AnalyzersResources.Convert_to_tuple),
+                    AnalyzersResources.ResourceManager,
+                    typeof(AnalyzersResources)
+                ),
+                new LocalizableResourceString(
+                    nameof(AnalyzersResources.Convert_to_tuple),
+                    AnalyzersResources.ResourceManager,
+                    typeof(AnalyzersResources)
+                ),
+                // This analyzer is not configurable.  The intent is just to act as a refactoring, just benefiting from fix-all
+                configurable: false
+            )
+        {
             _syntaxKinds = syntaxKinds;
         }
 

@@ -31,7 +31,8 @@ namespace Microsoft.Web.Management.PInvoke.UxTheme
             out string themeName,
             out string color,
             out string size
-        ) {
+        )
+        {
             StringBuilder nameBuilder = new StringBuilder(512);
             StringBuilder colorBuilder = new StringBuilder(512);
             StringBuilder sizeBuilder = new StringBuilder(512);

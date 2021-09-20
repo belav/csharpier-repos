@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis
             SourceText text,
             SyntaxTree tree,
             SyntaxNode root
-        ) {
+        )
+        {
             this.Document = document;
             this.Text = text;
             this.SyntaxTree = tree;
@@ -34,7 +35,8 @@ namespace Microsoft.CodeAnalysis
         public static async Task<SyntacticDocument> CreateAsync(
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             return new SyntacticDocument(document, text, root.SyntaxTree, root);

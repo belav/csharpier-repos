@@ -435,7 +435,8 @@ namespace Microsoft.Cci
         {
             foreach (
                 IParameterTypeInformation parameterTypeInformation in parameterTypeInformations
-            ) {
+            )
+            {
                 this.Visit(parameterTypeInformation);
             }
         }

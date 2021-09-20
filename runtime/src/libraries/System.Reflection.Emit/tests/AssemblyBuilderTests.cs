@@ -38,7 +38,8 @@ namespace System.Reflection.Emit.Tests
                     AssemblyBuilderAccess.Run,
                     AssemblyBuilderAccess.RunAndCollect
                 }
-            ) {
+            )
+            {
                 yield return new object[]
                 {
                     new AssemblyName("TestName") { Version = new Version(0, 0, 0, 0) },
@@ -68,7 +69,8 @@ namespace System.Reflection.Emit.Tests
         public void DefineDynamicAssembly_AssemblyName_AssemblyBuilderAccess(
             AssemblyName name,
             AssemblyBuilderAccess access
-        ) {
+        )
+        {
             AssemblyBuilder assembly = AssemblyBuilder.DefineDynamicAssembly(name, access);
             VerifyAssemblyBuilder(assembly, name, new CustomAttributeBuilder[0]);
         }
@@ -102,7 +104,8 @@ namespace System.Reflection.Emit.Tests
             AssemblyName name,
             AssemblyBuilderAccess access,
             IEnumerable<CustomAttributeBuilder> attributes
-        ) {
+        )
+        {
             AssemblyBuilder assembly = AssemblyBuilder.DefineDynamicAssembly(
                 name,
                 access,
@@ -139,7 +142,8 @@ namespace System.Reflection.Emit.Tests
         [InlineData((AssemblyBuilderAccess)6)] // ReflectionOnly (not supported)
         public void DefineDynamicAssembly_CoreclrNotSupportedAccess_ThrowsArgumentException(
             AssemblyBuilderAccess access
-        ) {
+        )
+        {
             DefineDynamicAssembly_InvalidAccess_ThrowsArgumentException(access);
         }
 
@@ -150,7 +154,8 @@ namespace System.Reflection.Emit.Tests
         [InlineData((AssemblyBuilderAccess)int.MaxValue)]
         public void DefineDynamicAssembly_InvalidAccess_ThrowsArgumentException(
             AssemblyBuilderAccess access
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentException>(
                 "access",
                 () => AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Name"), access)
@@ -452,7 +457,8 @@ namespace System.Reflection.Emit.Tests
             AssemblyBuilder assembly,
             AssemblyName name,
             IEnumerable<CustomAttributeBuilder> attributes
-        ) {
+        )
+        {
             Assert.StartsWith(name.ToString(), assembly.FullName);
             Assert.StartsWith(name.ToString(), assembly.GetName().ToString());
 

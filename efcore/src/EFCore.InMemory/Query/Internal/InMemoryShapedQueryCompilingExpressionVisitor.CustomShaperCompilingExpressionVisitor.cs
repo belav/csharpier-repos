@@ -52,9 +52,10 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 INavigationBase inverseNavigation,
                 Action<TIncludingEntity, TIncludedEntity> fixup,
                 bool trackingQuery
-            ) where TIncludingEntity : class, TEntity
-              where TEntity : class
-              where TIncludedEntity : class
+            )
+                where TIncludingEntity : class, TEntity
+                where TEntity : class
+                where TIncludedEntity : class
             {
                 if (entity is TIncludingEntity includingEntity)
                 {
@@ -91,9 +92,10 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 Action<TIncludingEntity, TIncludedEntity> fixup,
                 bool trackingQuery,
                 bool setLoaded
-            ) where TIncludingEntity : class, TEntity
-              where TEntity : class
-              where TIncludedEntity : class
+            )
+                where TIncludingEntity : class, TEntity
+                where TEntity : class
+                where TIncludedEntity : class
             {
                 if (entity is TIncludingEntity includingEntity)
                 {
@@ -168,7 +170,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                     if (
                         includingClrType != entityClrType
                         && includingClrType.IsAssignableFrom(entityClrType)
-                    ) {
+                    )
+                    {
                         includingClrType = entityClrType;
                     }
 
@@ -256,7 +259,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
                 if (
                     extensionExpression is SingleResultShaperExpression singleResultShaperExpression
-                ) {
+                )
+                {
                     var innerShaper = (LambdaExpression)Visit(
                         singleResultShaperExpression.InnerShaper
                     );
@@ -279,7 +283,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 Type relatedEntityType,
                 INavigationBase navigation,
                 INavigationBase? inverseNavigation
-            ) {
+            )
+            {
                 var entityParameter = Expression.Parameter(entityType);
                 var relatedEntityParameter = Expression.Parameter(relatedEntityType);
                 var expressions = new List<Expression>
@@ -325,7 +330,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 ParameterExpression entity,
                 ParameterExpression relatedEntity,
                 INavigationBase navigation
-            ) {
+            )
+            {
                 return entity.MakeMemberAccess(
                         navigation.GetMemberInfo(forMaterialization: true, forSet: true)
                     )

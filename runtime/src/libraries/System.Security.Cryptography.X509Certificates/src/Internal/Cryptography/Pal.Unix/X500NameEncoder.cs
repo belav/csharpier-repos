@@ -43,7 +43,8 @@ namespace Internal.Cryptography.Pal
             bool printOid,
             X500DistinguishedNameFlags flags,
             bool addTrailingDelimiter = false
-        ) {
+        )
+        {
             bool reverse =
                 (flags & X500DistinguishedNameFlags.Reversed)
                 == X500DistinguishedNameFlags.Reversed;
@@ -58,7 +59,8 @@ namespace Internal.Cryptography.Pal
             if (
                 (flags & X500DistinguishedNameFlags.UseSemicolons)
                 == X500DistinguishedNameFlags.UseSemicolons
-            ) {
+            )
+            {
                 dnSeparator = "; ";
             }
             // Explicit UseCommas has preference over explicit UseNewLines.
@@ -70,7 +72,8 @@ namespace Internal.Cryptography.Pal
                         | X500DistinguishedNameFlags.UseCommas
                     )
                 ) == X500DistinguishedNameFlags.UseNewLines
-            ) {
+            )
+            {
                 dnSeparator = Environment.NewLine;
             }
             else
@@ -104,7 +107,8 @@ namespace Internal.Cryptography.Pal
         internal static byte[] X500DistinguishedNameEncode(
             string stringForm,
             X500DistinguishedNameFlags flags
-        ) {
+        )
+        {
             bool reverse =
                 (flags & X500DistinguishedNameFlags.Reversed)
                 == X500DistinguishedNameFlags.Reversed;
@@ -118,21 +122,24 @@ namespace Internal.Cryptography.Pal
             if (
                 (flags & X500DistinguishedNameFlags.UseSemicolons)
                 == X500DistinguishedNameFlags.UseSemicolons
-            ) {
+            )
+            {
                 // Just semicolon.
                 dnSeparators = s_useSemicolonSeparators;
             }
             else if (
                 (flags & X500DistinguishedNameFlags.UseCommas)
                 == X500DistinguishedNameFlags.UseCommas
-            ) {
+            )
+            {
                 // Just comma
                 dnSeparators = s_useCommaSeparators;
             }
             else if (
                 (flags & X500DistinguishedNameFlags.UseNewLines)
                 == X500DistinguishedNameFlags.UseNewLines
-            ) {
+            )
+            {
                 // CR or LF.  Not "and".  Whichever is first was the separator, the later one is trimmed as whitespace.
                 dnSeparators = s_useNewlineSeparators;
             }
@@ -174,7 +181,8 @@ namespace Internal.Cryptography.Pal
             if (
                 IsQuotableWhitespace(rdnValue[0])
                 || IsQuotableWhitespace(rdnValue[rdnValue.Length - 1])
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -204,7 +212,8 @@ namespace Internal.Cryptography.Pal
             if (
                 StringComparer.Ordinal.Equals(oid.FriendlyName, oidValue)
                 || string.IsNullOrEmpty(oid.FriendlyName)
-            ) {
+            )
+            {
                 decodedName.Append(OidTagPrefix);
                 decodedName.Append(oid.Value);
             }
@@ -233,7 +242,8 @@ namespace Internal.Cryptography.Pal
             string stringForm,
             List<char> dnSeparators,
             bool noQuotes
-        ) {
+        )
+        {
             // 16 is way more RDNs than we should ever need. A fairly standard set of values is
             // { E, CN, O, OU, L, S, C } = 7;
             // The EV values add in

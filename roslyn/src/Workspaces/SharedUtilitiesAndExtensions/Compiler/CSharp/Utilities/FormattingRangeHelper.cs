@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
         public static ValueTuple<SyntaxToken, SyntaxToken>? FindAppropriateRange(
             SyntaxToken endToken,
             bool useDefaultRange = true
-        ) {
+        )
+        {
             Contract.ThrowIfTrue(endToken.Kind() == SyntaxKind.None);
 
             return FixupOpenBrace(FindAppropriateRangeWorker(endToken, useDefaultRange));
@@ -28,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
 
         private static ValueTuple<SyntaxToken, SyntaxToken>? FixupOpenBrace(
             ValueTuple<SyntaxToken, SyntaxToken>? tokenRange
-        ) {
+        )
+        {
             if (!tokenRange.HasValue)
             {
                 return tokenRange;
@@ -43,12 +45,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             while (
                 currentToken.Kind() != SyntaxKind.CloseBraceToken
                 && previousToken.Kind() == SyntaxKind.OpenBraceToken
-            ) {
+            )
+            {
                 var (_, closeBrace) = previousToken.Parent.GetBracePair();
                 if (
                     closeBrace.Kind() == SyntaxKind.None
                     || !AreTwoTokensOnSameLine(previousToken, closeBrace)
-                ) {
+                )
+                {
                     return ValueTuple.Create(currentToken, tokenRange.Value.Item2);
                 }
 
@@ -62,7 +66,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
         private static ValueTuple<SyntaxToken, SyntaxToken>? FindAppropriateRangeWorker(
             SyntaxToken endToken,
             bool useDefaultRange
-        ) {
+        )
+        {
             // special token that we know how to find proper starting token
             switch (endToken.Kind())
             {
@@ -108,7 +113,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                     if (
                         parent.Kind() == SyntaxKind.StringLiteralExpression
                         || parent.Kind() == SyntaxKind.CharacterLiteralExpression
-                    ) {
+                    )
+                    {
                         return null;
                     }
 
@@ -124,7 +130,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
 
         private static ValueTuple<SyntaxToken, SyntaxToken>? FindAppropriateRangeForSemicolon(
             SyntaxToken endToken
-        ) {
+        )
+        {
             var parent = endToken.Parent;
             if (parent == null || parent.Kind() == SyntaxKind.SkippedTokensTrivia)
             {
@@ -141,7 +148,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                 || (parent is ConstructorDeclarationSyntax)
                 || (parent is DestructorDeclarationSyntax)
                 || (parent is OperatorDeclarationSyntax)
-            ) {
+            )
+            {
                 return ValueTuple.Create(
                     GetAppropriatePreviousToken(
                         parent.GetFirstToken(),
@@ -161,7 +169,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                         propertyDeclaration.AccessorList!.OpenBraceToken,
                         propertyDeclaration.AccessorList.CloseBraceToken
                     )
-                ) {
+                )
+                {
                     return ValueTuple.Create(
                         propertyDeclaration.AccessorList.OpenBraceToken,
                         propertyDeclaration.AccessorList.CloseBraceToken
@@ -212,7 +221,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
 
         private static ValueTuple<SyntaxToken, SyntaxToken>? FindAppropriateRangeForCloseBrace(
             SyntaxToken endToken
-        ) {
+        )
+        {
             // don't do anything if there is no proper parent
             var parent = endToken.Parent;
             if (parent == null || parent.Kind() == SyntaxKind.SkippedTokensTrivia)
@@ -305,7 +315,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                 if (
                     containerOfBlock is MemberDeclarationSyntax
                     || IsSpecialContainingNode(containerOfBlock)
-                ) {
+                )
+                {
                     return ValueTuple.Create(
                         GetAppropriatePreviousToken(containerOfBlock.GetFirstToken()),
                         containerOfBlock.GetLastToken()
@@ -344,7 +355,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
 
         private static ValueTuple<SyntaxToken, SyntaxToken>? FindAppropriateRangeForColon(
             SyntaxToken endToken
-        ) {
+        )
+        {
             // don't do anything if there is no proper parent
             var parent = endToken.Parent;
             if (parent == null || parent.Kind() == SyntaxKind.SkippedTokensTrivia)
@@ -389,7 +401,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
         private static SyntaxToken GetAppropriatePreviousToken(
             SyntaxToken startToken,
             bool canTokenBeFirstInABlock = false
-        ) {
+        )
+        {
             var previousToken = startToken.GetPreviousToken();
             if (previousToken.Kind() == SyntaxKind.None)
             {
@@ -499,7 +512,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             if (
                 previousToken.Kind() != SyntaxKind.SemicolonToken
                 && previousToken.Kind() != SyntaxKind.CloseBraceToken
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -523,7 +537,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                 if (
                     token.Parent.Kind() == SyntaxKind.Block
                     || token.Parent.Kind() == SyntaxKind.AccessorList
-                ) {
+                )
+                {
                     return token.Parent.Parent as MemberDeclarationSyntax;
                 }
             }

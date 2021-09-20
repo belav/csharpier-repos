@@ -38,7 +38,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             string src,
             string srcOutput,
             string expectedSrcPrefix
-        ) {
+        )
+        {
             // Arrange
             var allAttributes = new TagHelperAttributeList(
                 new TagHelperAttributeList
@@ -276,7 +277,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             IWebHostEnvironment hostingEnvironment = null,
             IUrlHelperFactory urlHelperFactory = null,
             ViewContext viewContext = null
-        ) {
+        )
+        {
             hostingEnvironment = hostingEnvironment ?? MakeHostingEnvironment();
             urlHelperFactory = urlHelperFactory ?? MakeUrlHelperFactory();
             viewContext = viewContext ?? MakeViewContext();

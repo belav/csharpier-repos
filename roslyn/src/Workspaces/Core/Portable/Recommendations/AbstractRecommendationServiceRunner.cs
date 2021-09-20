@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.Recommendations
             TSyntaxContext context,
             bool filterOutOfScopeLocals,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _context = context;
             _stringComparerForLanguage =
                 _context.GetLanguageService<ISyntaxFactsService>().StringComparer;
@@ -53,7 +54,8 @@ namespace Microsoft.CodeAnalysis.Recommendations
             IParameterSymbol parameter,
             int position,
             bool useBaseReferenceAccessibility
-        ) {
+        )
+        {
             var symbols = TryGetMemberSymbolsForLambdaParameter(parameter, position);
             return symbols.IsDefault
               ? GetMemberSymbols(
@@ -68,7 +70,8 @@ namespace Microsoft.CodeAnalysis.Recommendations
         private ImmutableArray<ISymbol> TryGetMemberSymbolsForLambdaParameter(
             IParameterSymbol parameter,
             int position
-        ) {
+        )
+        {
             // Use normal lookup path for this/base parameters.
             if (parameter.IsThis)
                 return default;
@@ -98,7 +101,8 @@ namespace Microsoft.CodeAnalysis.Recommendations
                     && syntaxFactsService.IsArgument(lambdaSyntax.Parent)
                     && syntaxFactsService.IsInvocationExpression(lambdaSyntax.Parent.Parent.Parent)
                 )
-            ) {
+            )
+            {
                 return default;
             }
 
@@ -119,7 +123,8 @@ namespace Microsoft.CodeAnalysis.Recommendations
                     parameter.Ordinal,
                     out var explicitLambdaParameterType
                 )
-            ) {
+            )
+            {
                 parameterTypeSymbols = ImmutableArray.Create(explicitLambdaParameterType);
             }
             else
@@ -165,7 +170,8 @@ namespace Microsoft.CodeAnalysis.Recommendations
         private ImmutableArray<ITypeSymbol> SubstituteTypeParameters(
             ImmutableArray<ITypeSymbol> parameterTypeSymbols,
             SyntaxNode invocationExpression
-        ) {
+        )
+        {
             if (!parameterTypeSymbols.Any(t => t.IsKind(SymbolKind.TypeParameter)))
             {
                 return parameterTypeSymbols;
@@ -191,7 +197,8 @@ namespace Microsoft.CodeAnalysis.Recommendations
                             SymbolKind.TypeParameter,
                             out var typeParameter
                         )
-                    ) {
+                    )
+                    {
                         // The typeParameter could be from the containing type, so it may not be
                         // present in this method's list of typeParameters.
                         var index = typeParameters.IndexOf(typeParameter);
@@ -225,7 +232,8 @@ namespace Microsoft.CodeAnalysis.Recommendations
             string argumentName,
             int ordinalInInvocation,
             int ordinalInLambda
-        ) {
+        )
+        {
             var expressionSymbol = _context.SemanticModel.Compilation.GetTypeByMetadataName(
                 typeof(Expression<>).FullName
             );
@@ -243,7 +251,8 @@ namespace Microsoft.CodeAnalysis.Recommendations
                             ordinalInInvocation,
                             out var type
                         )
-                    ) {
+                    )
+                    {
                         continue;
                     }
 
@@ -255,7 +264,8 @@ namespace Microsoft.CodeAnalysis.Recommendations
                         && expressionSymbolNamedTypeCandidate.OriginalDefinition.Equals(
                             expressionSymbol
                         )
-                    ) {
+                    )
+                    {
                         var allTypeArguments = type.GetAllTypeArguments();
                         if (allTypeArguments.Length != 1)
                         {
@@ -292,7 +302,8 @@ namespace Microsoft.CodeAnalysis.Recommendations
             string argumentName,
             int ordinalInInvocation,
             out ITypeSymbol parameterType
-        ) {
+        )
+        {
             if (!string.IsNullOrEmpty(argumentName))
             {
                 parameterType = method.Parameters.FirstOrDefault(
@@ -356,7 +367,8 @@ namespace Microsoft.CodeAnalysis.Recommendations
         protected static bool IsNonIntersectingNamespace(
             ISymbol recommendationSymbol,
             SyntaxNode declarationSyntax
-        ) {
+        )
+        {
             //
             // Apart from filtering out non-namespace symbols, this also filters out the symbol
             // currently being declared. For example...
@@ -389,7 +401,8 @@ namespace Microsoft.CodeAnalysis.Recommendations
             int position,
             bool excludeInstance,
             bool useBaseReferenceAccessibility
-        ) {
+        )
+        {
             // For a normal parameter, we have a specialized codepath we use to ensure we properly get lambda parameter
             // information that the compiler may fail to give.
             if (container is IParameterSymbol parameter)
@@ -411,7 +424,8 @@ namespace Microsoft.CodeAnalysis.Recommendations
             INamespaceOrTypeSymbol container,
             int position,
             bool excludeInstance
-        ) {
+        )
+        {
             return excludeInstance
               ? _context.SemanticModel.LookupStaticMembers(position, container)
               : SuppressDefaultTupleElements(
@@ -432,7 +446,8 @@ namespace Microsoft.CodeAnalysis.Recommendations
         protected static ImmutableArray<ISymbol> SuppressDefaultTupleElements(
             INamespaceOrTypeSymbol container,
             ImmutableArray<ISymbol> symbols
-        ) {
+        )
+        {
             var namedType = container as INamedTypeSymbol;
             if (namedType?.IsTupleType != true)
             {

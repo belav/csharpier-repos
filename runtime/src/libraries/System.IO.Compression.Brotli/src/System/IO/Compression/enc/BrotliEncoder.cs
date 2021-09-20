@@ -95,7 +95,8 @@ namespace System.IO.Compression
                     BrotliEncoderParameter.Quality,
                     (uint)quality
                 )
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     SR.Format(SR.BrotliEncoder_InvalidSetParameter, "Quality")
                 );
@@ -128,7 +129,8 @@ namespace System.IO.Compression
                     BrotliEncoderParameter.LGWin,
                     (uint)window
                 )
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     SR.Format(SR.BrotliEncoder_InvalidSetParameter, "Window")
                 );
@@ -215,7 +217,8 @@ namespace System.IO.Compression
             out int bytesConsumed,
             out int bytesWritten,
             BrotliEncoderOperation operation
-        ) {
+        )
+        {
             EnsureInitialized();
             Debug.Assert(_state != null);
 
@@ -232,7 +235,8 @@ namespace System.IO.Compression
                 {
                     fixed (byte* inBytes = &MemoryMarshal.GetReference(source))fixed (
                         byte* outBytes = &MemoryMarshal.GetReference(destination)
-                    ) {
+                    )
+                    {
                         if (
                             !Interop.Brotli.BrotliEncoderCompressStream(
                                 _state,
@@ -243,7 +247,8 @@ namespace System.IO.Compression
                                 &outBytes,
                                 out _
                             )
-                        ) {
+                        )
+                        {
                             return OperationStatus.InvalidData;
                         }
 
@@ -258,7 +263,8 @@ namespace System.IO.Compression
                             (int)availableOutput == destination.Length
                             && !Interop.Brotli.BrotliEncoderHasMoreOutput(_state)
                             && availableInput == 0
-                        ) {
+                        )
+                        {
                             return OperationStatus.Done;
                         }
 
@@ -302,7 +308,8 @@ namespace System.IO.Compression
             out int bytesWritten,
             int quality,
             int window
-        ) {
+        )
+        {
             if (quality < 0 || quality > BrotliUtils.Quality_Max)
             {
                 throw new ArgumentOutOfRangeException(
@@ -326,7 +333,8 @@ namespace System.IO.Compression
             {
                 fixed (byte* inBytes = &MemoryMarshal.GetReference(source))fixed (
                     byte* outBytes = &MemoryMarshal.GetReference(destination)
-                ) {
+                )
+                {
                     nuint availableOutput = (nuint)destination.Length;
                     bool success = Interop.Brotli.BrotliEncoderCompress(
                         quality,

@@ -11,7 +11,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
         public static bool IsDelegateOrConstructorOrLocalFunctionOrMethodOrOperatorParameterList(
             [NotNullWhen(true)] this SyntaxNode? node,
             bool includeOperators
-        ) {
+        )
+        {
             if (!node.IsKind(SyntaxKind.ParameterList))
             {
                 return false;
@@ -22,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
                 || node.IsParentKind(SyntaxKind.LocalFunctionStatement)
                 || node.IsParentKind(SyntaxKind.ConstructorDeclaration)
                 || node.IsParentKind(SyntaxKind.DelegateDeclaration)
-            ) {
+            )
+            {
                 return true;
             }
 

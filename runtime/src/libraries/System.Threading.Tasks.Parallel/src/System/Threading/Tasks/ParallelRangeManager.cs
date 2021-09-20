@@ -74,7 +74,8 @@ namespace System.Threading.Tasks
             int nInitialRange,
             long nStep,
             bool use32BitCurrentIndex
-        ) {
+        )
+        {
             _indexRanges = ranges;
             _use32BitCurrentIndex = use32BitCurrentIndex;
             _nCurrentIndexRange = nInitialRange;
@@ -156,7 +157,8 @@ namespace System.Threading.Tasks
                         if (
                             (nToExclusiveLocal > currentRange._nToExclusive)
                             || (nToExclusiveLocal < currentRange._nFromInclusive)
-                        ) {
+                        )
+                        {
                             nToExclusiveLocal = currentRange._nToExclusive;
                         }
 
@@ -244,7 +246,8 @@ namespace System.Threading.Tasks
             long nToExclusive,
             long nStep,
             int nNumExpectedWorkers
-        ) {
+        )
+        {
             _nCurrentIndexRangeToAssign = 0;
             _nStep = nStep;
 
@@ -302,7 +305,8 @@ namespace System.Threading.Tasks
                 if (
                     nCurrentIndex < unchecked(nCurrentIndex - nRangeSize)
                     || nCurrentIndex > nToExclusive
-                ) {
+                )
+                {
                     // this should only happen at the last index
                     Debug.Assert(i == nNumRanges - 1);
 

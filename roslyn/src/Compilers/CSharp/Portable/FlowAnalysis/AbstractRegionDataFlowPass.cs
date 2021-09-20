@@ -22,16 +22,17 @@ namespace Microsoft.CodeAnalysis.CSharp
             HashSet<Symbol> initiallyAssignedVariables = null,
             HashSet<PrefixUnaryExpressionSyntax> unassignedVariableAddressOfSyntaxes = null,
             bool trackUnassignments = false
-        ) : base(
-            compilation,
-            member,
-            node,
-            firstInRegion,
-            lastInRegion,
-            initiallyAssignedVariables,
-            unassignedVariableAddressOfSyntaxes,
-            trackUnassignments
-        ) { }
+        )
+            : base(
+                compilation,
+                member,
+                node,
+                firstInRegion,
+                lastInRegion,
+                initiallyAssignedVariables,
+                unassignedVariableAddressOfSyntaxes,
+                trackUnassignments
+            ) { }
 
         /// <summary>
         /// To scan the whole body, we start outside (before) the region.

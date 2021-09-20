@@ -15,7 +15,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
         public int GetCodeWindowManager(
             IVsCodeWindow pCodeWin,
             out IVsCodeWindowManager ppCodeWinMgr
-        ) {
+        )
+        {
             ppCodeWinMgr = new VsCodeWindowManager((TLanguageService)this, pCodeWin);
 
             return VSConstants.S_OK;

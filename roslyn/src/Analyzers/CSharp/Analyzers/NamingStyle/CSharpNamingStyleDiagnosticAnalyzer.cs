@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.NamingStyles
                     {
                         Parent: ParameterListSyntax { Parent: RecordDeclarationSyntax }
                     }
-            ) {
+            )
+            {
                 // Parameters of positional record declarations should be ignored because they also
                 // considered properties, and that naming style makes more sense
                 return true;

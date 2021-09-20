@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
         public Task OnPageHandlerExecutionAsync(
             PageHandlerExecutingContext context,
             PageHandlerExecutionDelegate next
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -76,7 +77,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             PageHandlerExecutingContext context,
             PageHandlerExecutionDelegate next,
             IPageFilter pageFilter
-        ) {
+        )
+        {
             pageFilter.OnPageHandlerExecuting(context);
             if (context.Result == null)
             {

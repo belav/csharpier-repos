@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.DataProtection
         public void GetApplicationUniqueIdentifierFromHosting(
             string contentRootPath,
             string expected
-        ) {
+        )
+        {
             // Arrange
             var mockEnvironment = new Mock<IHostEnvironment>();
             mockEnvironment.Setup(o => o.ContentRootPath).Returns(contentRootPath);
@@ -45,7 +46,8 @@ namespace Microsoft.AspNetCore.DataProtection
         public void GetApplicationIdentifierFromApplicationDiscriminator(
             string discriminator,
             string expected
-        ) {
+        )
+        {
             // Arrange
             var mockAppDiscriminator = new Mock<IApplicationDiscriminator>();
             mockAppDiscriminator.Setup(o => o.Discriminator).Returns(discriminator);

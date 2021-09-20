@@ -14,7 +14,8 @@ namespace RoutingWebSite
             string routeKey,
             RouteValueDictionary values,
             RouteDirection routeDirection
-        ) {
+        )
+        {
             return httpContext.Request.Query["allowed"].ToString() == "true";
         }
     }

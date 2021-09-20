@@ -428,7 +428,8 @@ class Program
                     new MemoryStream(bytes.ToArray()),
                     CompressionMode.Decompress
                 )
-            ) {
+            )
+            {
                 source.CopyTo(destination);
             }
 

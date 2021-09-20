@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.Components
             ref Utf8JsonReader reader,
             Type typeToConvert,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             string? id = null;
             while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
             {
@@ -58,7 +59,8 @@ namespace Microsoft.AspNetCore.Components
             Utf8JsonWriter writer,
             ElementReference value,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             writer.WriteStartObject();
             writer.WriteString(IdProperty, value.Id);
             writer.WriteEndObject();

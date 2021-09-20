@@ -196,7 +196,8 @@ namespace System.Configuration
             out string locationConfigPath,
             IInternalConfigRoot configRoot,
             params object[] hostInitConfigurationParams
-        ) {
+        )
+        {
             locationSubPath = null;
             configPath = (string)hostInitConfigurationParams[2];
             locationConfigPath = null;
@@ -332,7 +333,8 @@ namespace System.Configuration
             string streamName,
             string templateStreamName,
             ref object writeContext
-        ) {
+        )
+        {
             // only support files, not URIs
             if (!IsFile(streamName))
                 throw ExceptionUtil.UnexpectedError(
@@ -355,7 +357,8 @@ namespace System.Configuration
             string configPath,
             ConfigurationAllowDefinition allowDefinition,
             ConfigurationAllowExeDefinition allowExeDefinition
-        ) {
+        )
+        {
             string allowedConfigPath;
 
             switch (allowExeDefinition)
@@ -388,7 +391,8 @@ namespace System.Configuration
             ConfigurationAllowDefinition allowDefinition,
             ConfigurationAllowExeDefinition allowExeDefinition,
             IConfigErrorInfo errorInfo
-        ) {
+        )
+        {
             if (!IsDefinitionAllowed(configPath, allowDefinition, allowExeDefinition))
             {
                 throw allowExeDefinition switch
@@ -473,7 +477,8 @@ namespace System.Configuration
             bool isMachine,
             ConfigurationUserLevel userLevel,
             string exePath
-        ) {
+        )
+        {
             // validate userLevel argument
             switch (userLevel)
             {

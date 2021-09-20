@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this ILocalSymbol localSymbol,
             SyntaxNode currentBlock,
             SyntaxNode destinationBlock
-        ) {
+        )
+        {
             if (currentBlock != destinationBlock)
             {
                 var localFunctionOrMethodDeclaration = currentBlock.AncestorsAndSelf()
@@ -32,7 +33,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                         localSymbol.Type.Name
                     )
                     && HasTypeParameterWithName(localFunctionStatement, localSymbol.Type.Name)
-                ) {
+                )
+                {
                     return false;
                 }
             }

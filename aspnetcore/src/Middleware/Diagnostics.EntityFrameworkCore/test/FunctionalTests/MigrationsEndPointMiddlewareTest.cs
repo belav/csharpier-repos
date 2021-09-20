@@ -131,7 +131,8 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Tests
                     var db = BloggingContextWithMigrations.CreateWithoutExternalServiceProvider(
                         optionsBuilder.Options
                     )
-                ) {
+                )
+                {
                     var databaseCreator = db.GetService<IRelationalDatabaseCreator>();
                     Assert.False(databaseCreator.Exists());
 

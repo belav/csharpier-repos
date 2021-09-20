@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             CompletionItem item,
             char? commitKey = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var newDocument = await DetermineNewDocumentAsync(document, item, cancellationToken)
                 .ConfigureAwait(false);
             var newText = await newDocument.GetTextAsync(cancellationToken).ConfigureAwait(false);
@@ -89,7 +90,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             Document document,
             CompletionItem completionItem,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
 
             // The span we're going to replace
@@ -154,7 +156,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             CompletionItem completionItem,
             TextLine line,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var codeGenService = document.GetLanguageService<ICodeGenerationService>();
 
             // Resolve member and type in our new, forked, solution
@@ -260,7 +263,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         private async Task<string> GenerateInsertionTextAsync(
             Document memberContainingDocument,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             memberContainingDocument = await Simplifier.ReduceAsync(
                     memberContainingDocument,
                     Simplifier.Annotation,
@@ -283,7 +287,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         private async Task<SyntaxNode> GetTreeWithAddedSyntaxNodeRemovedAsync(
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Added imports are annotated for simplification too. Therefore, we simplify the document
             // before removing added member node to preserve those imports in the document.
             document = await Simplifier.ReduceAsync(

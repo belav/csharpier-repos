@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.KeywordHighlighting.KeywordHighli
             SwitchStatementSyntax switchStatement,
             List<TextSpan> spans,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             spans.Add(switchStatement.SwitchKeyword.Span);
 
             foreach (var switchSection in switchStatement.Sections)
@@ -58,7 +59,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.KeywordHighlighting.KeywordHighli
             List<TextSpan> spans,
             bool highlightBreaks,
             bool highlightGotos
-        ) {
+        )
+        {
             Debug.Assert(highlightBreaks || highlightGotos);
 
             if (highlightBreaks && node is BreakStatementSyntax breakStatement)
@@ -76,7 +78,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.KeywordHighlighting.KeywordHighli
                         SyntaxKind.GotoCaseStatement,
                         SyntaxKind.GotoDefaultStatement
                     ) || gotoStatement.Expression.IsMissing
-                ) {
+                )
+                {
                     var start = gotoStatement.GotoKeyword.SpanStart;
                     var end = !gotoStatement.CaseOrDefaultKeyword.IsKind(SyntaxKind.None)
                         ? gotoStatement.CaseOrDefaultKeyword.Span.End

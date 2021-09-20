@@ -388,7 +388,8 @@ namespace System.Text.Json.Tests
         public static void TestingNumbersInvalidConversionToSByte(
             string jsonString,
             double expected
-        ) {
+        )
+        {
             byte[] dataUtf8 = Encoding.UTF8.GetBytes(jsonString);
 
             var json = new Utf8JsonReader(dataUtf8, isFinalBlock: true, state: default);
@@ -429,7 +430,8 @@ namespace System.Text.Json.Tests
         public static void TestingNumbersInvalidConversionToInt16(
             string jsonString,
             double expected
-        ) {
+        )
+        {
             byte[] dataUtf8 = Encoding.UTF8.GetBytes(jsonString);
 
             var json = new Utf8JsonReader(dataUtf8, isFinalBlock: true, state: default);
@@ -470,7 +472,8 @@ namespace System.Text.Json.Tests
         public static void TestingNumbersInvalidConversionToInt32(
             string jsonString,
             double expected
-        ) {
+        )
+        {
             byte[] dataUtf8 = Encoding.UTF8.GetBytes(jsonString);
 
             var json = new Utf8JsonReader(dataUtf8, isFinalBlock: true, state: default);
@@ -510,7 +513,8 @@ namespace System.Text.Json.Tests
         public static void TestingNumbersInvalidConversionToInt64(
             string jsonString,
             double expected
-        ) {
+        )
+        {
             byte[] dataUtf8 = Encoding.UTF8.GetBytes(jsonString);
 
             var json = new Utf8JsonReader(dataUtf8, isFinalBlock: true, state: default);
@@ -551,7 +555,8 @@ namespace System.Text.Json.Tests
         public static void TestingNumbersInvalidConversionToUInt16(
             string jsonString,
             double expected
-        ) {
+        )
+        {
             byte[] dataUtf8 = Encoding.UTF8.GetBytes(jsonString);
 
             var json = new Utf8JsonReader(dataUtf8, isFinalBlock: true, state: default);
@@ -592,7 +597,8 @@ namespace System.Text.Json.Tests
         public static void TestingNumbersInvalidConversionToUInt32(
             string jsonString,
             double expected
-        ) {
+        )
+        {
             byte[] dataUtf8 = Encoding.UTF8.GetBytes(jsonString);
 
             var json = new Utf8JsonReader(dataUtf8, isFinalBlock: true, state: default);
@@ -632,7 +638,8 @@ namespace System.Text.Json.Tests
         public static void TestingNumbersInvalidConversionToUInt64(
             string jsonString,
             double expected
-        ) {
+        )
+        {
             byte[] dataUtf8 = Encoding.UTF8.GetBytes(jsonString);
 
             var json = new Utf8JsonReader(dataUtf8, isFinalBlock: true, state: default);
@@ -669,7 +676,8 @@ namespace System.Text.Json.Tests
             string jsonString,
             float expectedFloat,
             double expectedDouble
-        ) {
+        )
+        {
             byte[] dataUtf8 = Encoding.UTF8.GetBytes(jsonString);
 
             var json = new Utf8JsonReader(dataUtf8, isFinalBlock: true, state: default);
@@ -717,7 +725,8 @@ namespace System.Text.Json.Tests
         public static void TestingTooLargeDoubleConversionToInfinity(
             string jsonString,
             double expected
-        ) {
+        )
+        {
             byte[] dataUtf8 = Encoding.UTF8.GetBytes(jsonString);
 
             var json = new Utf8JsonReader(dataUtf8, isFinalBlock: true, state: default);
@@ -761,7 +770,8 @@ namespace System.Text.Json.Tests
         public static void TestingNumbersInvalidConversionToDecimal(
             string jsonString,
             double expected
-        ) {
+        )
+        {
             byte[] dataUtf8 = Encoding.UTF8.GetBytes(jsonString);
 
             var json = new Utf8JsonReader(dataUtf8, isFinalBlock: true, state: default);
@@ -1236,7 +1246,8 @@ namespace System.Text.Json.Tests
 
             foreach (
                 JsonCommentHandling commentHandling in Enum.GetValues(typeof(JsonCommentHandling))
-            ) {
+            )
+            {
                 var state = new JsonReaderState(
                     options: new JsonReaderOptions { CommentHandling = commentHandling }
                 );
@@ -1262,7 +1273,8 @@ namespace System.Text.Json.Tests
         {
             foreach (
                 JsonCommentHandling commentHandling in Enum.GetValues(typeof(JsonCommentHandling))
-            ) {
+            )
+            {
                 var state = new JsonReaderState(
                     options: new JsonReaderOptions { CommentHandling = commentHandling }
                 );
@@ -1382,7 +1394,8 @@ namespace System.Text.Json.Tests
 
             foreach (
                 JsonCommentHandling commentHandling in Enum.GetValues(typeof(JsonCommentHandling))
-            ) {
+            )
+            {
                 var state = new JsonReaderState(
                     options: new JsonReaderOptions { CommentHandling = commentHandling }
                 );
@@ -1418,7 +1431,8 @@ namespace System.Text.Json.Tests
         {
             foreach (
                 JsonCommentHandling commentHandling in Enum.GetValues(typeof(JsonCommentHandling))
-            ) {
+            )
+            {
                 var state = new JsonReaderState(
                     options: new JsonReaderOptions { CommentHandling = commentHandling }
                 );
@@ -1533,7 +1547,8 @@ namespace System.Text.Json.Tests
         public static void TryGetGuid_HasValueSequence_RetrievesGuid(
             string testString,
             string expectedString
-        ) {
+        )
+        {
             static void test(string testString, string expectedString, bool isFinalBlock)
             {
                 byte[] dataUtf8 = Encoding.UTF8.GetBytes($"\"{testString}\"");

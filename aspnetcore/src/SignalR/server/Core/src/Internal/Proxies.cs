@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
             string method,
             object?[] args,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return _lifetimeManager.SendUserAsync(_userId, method, args, cancellationToken);
         }
     }
@@ -35,7 +36,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
         public MultipleUserProxy(
             HubLifetimeManager<THub> lifetimeManager,
             IReadOnlyList<string> userIds
-        ) {
+        )
+        {
             _lifetimeManager = lifetimeManager;
             _userIds = userIds;
         }
@@ -44,7 +46,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
             string method,
             object?[] args,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return _lifetimeManager.SendUsersAsync(_userIds, method, args, cancellationToken);
         }
     }
@@ -64,7 +67,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
             string method,
             object?[] args,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return _lifetimeManager.SendGroupAsync(_groupName, method, args, cancellationToken);
         }
     }
@@ -77,7 +81,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
         public MultipleGroupProxy(
             HubLifetimeManager<THub> lifetimeManager,
             IReadOnlyList<string> groupNames
-        ) {
+        )
+        {
             _lifetimeManager = lifetimeManager;
             _groupNames = groupNames;
         }
@@ -86,7 +91,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
             string method,
             object?[] args,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return _lifetimeManager.SendGroupsAsync(_groupNames, method, args, cancellationToken);
         }
     }
@@ -101,7 +107,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
             HubLifetimeManager<THub> lifetimeManager,
             string groupName,
             IReadOnlyList<string> excludedConnectionIds
-        ) {
+        )
+        {
             _lifetimeManager = lifetimeManager;
             _groupName = groupName;
             _excludedConnectionIds = excludedConnectionIds;
@@ -111,7 +118,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
             string method,
             object?[] args,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return _lifetimeManager.SendGroupExceptAsync(
                 _groupName,
                 method,
@@ -135,7 +143,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
             string method,
             object?[] args,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return _lifetimeManager.SendAllAsync(method, args, cancellationToken);
         }
     }
@@ -148,7 +157,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
         public AllClientsExceptProxy(
             HubLifetimeManager<THub> lifetimeManager,
             IReadOnlyList<string> excludedConnectionIds
-        ) {
+        )
+        {
             _lifetimeManager = lifetimeManager;
             _excludedConnectionIds = excludedConnectionIds;
         }
@@ -157,7 +167,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
             string method,
             object?[] args,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return _lifetimeManager.SendAllExceptAsync(
                 method,
                 args,
@@ -182,7 +193,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
             string method,
             object?[] args,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return _lifetimeManager.SendConnectionAsync(
                 _connectionId,
                 method,
@@ -200,7 +212,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
         public MultipleClientProxy(
             HubLifetimeManager<THub> lifetimeManager,
             IReadOnlyList<string> connectionIds
-        ) {
+        )
+        {
             _lifetimeManager = lifetimeManager;
             _connectionIds = connectionIds;
         }
@@ -209,7 +222,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
             string method,
             object?[] args,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return _lifetimeManager.SendConnectionsAsync(
                 _connectionIds,
                 method,

@@ -69,7 +69,8 @@ namespace System.CommandLine
         public virtual IEnumerable<string?> GetSuggestions(
             ParseResult? parseResult = null,
             string? textToMatch = null
-        ) {
+        )
+        {
             var suggestions = new HashSet<string>();
 
             textToMatch ??= "";
@@ -86,7 +87,8 @@ namespace System.CommandLine
                             if (
                                 alias is { } suggestion
                                 && suggestion.ContainsCaseInsensitive(textToMatch)
-                            ) {
+                            )
+                            {
                                 suggestions.Add(suggestion);
                             }
                         }
@@ -94,10 +96,12 @@ namespace System.CommandLine
                     case IArgument argument:
                         foreach (
                             var suggestion in argument.GetSuggestions(parseResult, textToMatch)
-                        ) {
+                        )
+                        {
                             if (
                                 suggestion is { } && suggestion.ContainsCaseInsensitive(textToMatch)
-                            ) {
+                            )
+                            {
                                 suggestions.Add(suggestion);
                             }
                         }

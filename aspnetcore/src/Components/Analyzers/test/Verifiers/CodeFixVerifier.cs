@@ -52,7 +52,8 @@ namespace TestHelper
             string newSource,
             int? codeFixIndex = null,
             bool allowNewCompilerDiagnostics = false
-        ) {
+        )
+        {
             VerifyFix(
                 LanguageNames.CSharp,
                 GetCSharpDiagnosticAnalyzer(),
@@ -76,7 +77,8 @@ namespace TestHelper
             string newSource,
             int? codeFixIndex = null,
             bool allowNewCompilerDiagnostics = false
-        ) {
+        )
+        {
             VerifyFix(
                 LanguageNames.VisualBasic,
                 GetBasicDiagnosticAnalyzer(),
@@ -109,7 +111,8 @@ namespace TestHelper
             string newSource,
             int? codeFixIndex,
             bool allowNewCompilerDiagnostics
-        ) {
+        )
+        {
             var document = CreateDocument(oldSource, language);
             var analyzerDiagnostics = GetSortedDiagnosticsFromDocuments(
                 analyzer,

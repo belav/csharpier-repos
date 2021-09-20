@@ -18,7 +18,8 @@ namespace System.Web.Http.Tracing.Tracers
             BufferedMediaTypeFormatter formatter,
             HttpRequestMessage request,
             ITraceWriter traceWriter
-        ) {
+        )
+        {
             return new BufferedMediaTypeFormatterTracer(formatter, traceWriter, request);
         }
 

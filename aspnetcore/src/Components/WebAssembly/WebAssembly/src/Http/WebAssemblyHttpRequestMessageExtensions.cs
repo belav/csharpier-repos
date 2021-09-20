@@ -32,7 +32,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Http
         public static HttpRequestMessage SetBrowserRequestCredentials(
             this HttpRequestMessage requestMessage,
             BrowserRequestCredentials requestCredentials
-        ) {
+        )
+        {
             if (requestMessage is null)
             {
                 throw new ArgumentNullException(nameof(requestMessage));
@@ -64,7 +65,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Http
         public static HttpRequestMessage SetBrowserRequestCache(
             this HttpRequestMessage requestMessage,
             BrowserRequestCache requestCache
-        ) {
+        )
+        {
             if (requestMessage is null)
             {
                 throw new ArgumentNullException(nameof(requestMessage));
@@ -96,7 +98,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Http
         public static HttpRequestMessage SetBrowserRequestMode(
             this HttpRequestMessage requestMessage,
             BrowserRequestMode requestMode
-        ) {
+        )
+        {
             if (requestMessage is null)
             {
                 throw new ArgumentNullException(nameof(requestMessage));
@@ -142,7 +145,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Http
             this HttpRequestMessage requestMessage,
             string name,
             object value
-        ) {
+        )
+        {
             if (requestMessage is null)
             {
                 throw new ArgumentNullException(nameof(requestMessage));
@@ -177,7 +181,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Http
         public static HttpRequestMessage SetBrowserResponseStreamingEnabled(
             this HttpRequestMessage requestMessage,
             bool streamingEnabled
-        ) {
+        )
+        {
             if (requestMessage is null)
             {
                 throw new ArgumentNullException(nameof(requestMessage));

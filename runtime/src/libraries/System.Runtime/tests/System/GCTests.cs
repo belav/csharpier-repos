@@ -87,7 +87,8 @@ namespace System.Tests
         [InlineData(GCCollectionMode.Optimized + 1)]
         public static void Collection_InvalidCollectionMode_ThrowsArgumentOutOfRangeException(
             GCCollectionMode mode
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "mode",
                 null,
@@ -453,7 +454,8 @@ namespace System.Tests
         [InlineData(GCLargeObjectHeapCompactionMode.Default)]
         public static void LargeObjectHeapCompactionModeRoundTrips(
             GCLargeObjectHeapCompactionMode value
-        ) {
+        )
+        {
             GCLargeObjectHeapCompactionMode orig = GCSettings.LargeObjectHeapCompactionMode;
             try
             {
@@ -1077,7 +1079,8 @@ namespace System.Tests
             long CallGetTotalAllocatedBytesAndCheck(
                 long previous,
                 out long differenceBetweenPreciseAndImprecise
-            ) {
+            )
+            {
                 long precise = GC.GetTotalAllocatedBytes(true);
                 long imprecise = GC.GetTotalAllocatedBytes(false);
 

@@ -130,7 +130,8 @@ namespace System.ServiceModel.Syndication.Tests
             Uri itemAlternateLink,
             string id,
             DateTimeOffset lastUpdatedTime
-        ) {
+        )
+        {
             var item = new SyndicationItem(title, content, itemAlternateLink, id, lastUpdatedTime);
             Assert.Empty(item.AttributeExtensions);
             Assert.Empty(item.Authors);
@@ -214,7 +215,8 @@ namespace System.ServiceModel.Syndication.Tests
             Uri itemAlternateLink,
             string id,
             DateTimeOffset lastUpdatedTime
-        ) {
+        )
+        {
             var item = new SyndicationItem(title, content, itemAlternateLink, id, lastUpdatedTime);
             Assert.Empty(item.AttributeExtensions);
             Assert.Empty(item.Authors);
@@ -606,7 +608,8 @@ namespace System.ServiceModel.Syndication.Tests
             string ns,
             string value,
             string version
-        ) {
+        )
+        {
             var item = new SyndicationItemSubclass();
             Assert.False(item.TryParseAttributeEntryPoint(name, ns, value, version));
         }
@@ -629,7 +632,8 @@ namespace System.ServiceModel.Syndication.Tests
             XmlReader reader,
             string contentType,
             string version
-        ) {
+        )
+        {
             var item = new SyndicationItemSubclass();
             Assert.False(
                 item.TryParseContentEntryPoint(
@@ -747,7 +751,8 @@ namespace System.ServiceModel.Syndication.Tests
                 string contentType,
                 string version,
                 out SyndicationContent content
-            ) {
+            )
+            {
                 return TryParseContent(reader, contentType, version, out content);
             }
 

@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             ISyntaxFactsService syntaxFacts,
             TextSpan currentSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 GetOuterMostTupleExpressionInSpan(
                     root,
@@ -57,7 +58,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                     cancellationToken,
                     out var expression
                 )
-            ) {
+            )
+            {
                 return CommonSignatureHelpUtilities.GetSignatureHelpState(
                     expression,
                     position,
@@ -77,7 +79,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                     cancellationToken,
                     out var parenthesizedExpression
                 )
-            ) {
+            )
+            {
                 if (currentSpan.Start == parenthesizedExpression.SpanStart)
                 {
                     return new SignatureHelpState(
@@ -99,7 +102,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             TextSpan currentSpan,
             CancellationToken cancellationToken,
             [NotNullWhen(true)] out TupleExpressionSyntax? result
-        ) {
+        )
+        {
             result = null;
             while (
                 TryGetTupleExpression(
@@ -110,7 +114,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                     cancellationToken,
                     out var expression
                 )
-            ) {
+            )
+            {
                 if (!currentSpan.Contains(expression.Span))
                 {
                     break;
@@ -130,7 +135,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             TextSpan currentSpan,
             CancellationToken cancellationToken,
             [NotNullWhen(true)] out ParenthesizedExpressionSyntax? result
-        ) {
+        )
+        {
             result = null;
             while (
                 TryGetParenthesizedExpression(
@@ -141,7 +147,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                     cancellationToken,
                     out var expression
                 )
-            ) {
+            )
+            {
                 if (!currentSpan.Contains(expression.Span))
                 {
                     break;
@@ -163,7 +170,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             int position,
             SignatureHelpTriggerInfo triggerInfo,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
             var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken)
@@ -207,7 +215,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             ISyntaxFactsService syntaxFacts,
             CancellationToken cancellationToken,
             out ExpressionSyntax? targetExpression
-        ) {
+        )
+        {
             // Walk upward through TupleExpressionSyntax/ParenthsizedExpressionSyntax looking for a
             // place where we can infer a tuple type.
             ParenthesizedExpressionSyntax? parenthesizedExpression = null;
@@ -228,7 +237,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                     cancellationToken,
                     out parenthesizedExpression
                 )
-            ) {
+            )
+            {
                 targetExpression = (ExpressionSyntax?)tupleExpression ?? parenthesizedExpression;
                 var inferredTypes = typeInferrer.InferTypes(
                     semanticModel,
@@ -259,7 +269,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             SemanticModel semanticModel,
             IEnumerable<INamedTypeSymbol> tupleTypes,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var prefixParts = SpecializedCollections.SingletonEnumerable(
                     new SymbolDisplayPart(SymbolDisplayPartKind.Punctuation, null, "(")
                 )
@@ -305,7 +316,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             ImmutableArray<TaggedText> separatorParts,
             SemanticModel semanticModel,
             int position
-        ) {
+        )
+        {
             return new SymbolKeySignatureHelpItem(
                 symbol: tupleType,
                 isVariadic: false,
@@ -322,7 +334,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             INamedTypeSymbol tupleType,
             SemanticModel semanticModel,
             int position
-        ) {
+        )
+        {
             var spacePart = Space();
             var result = new List<SignatureHelpParameter>();
             foreach (var element in tupleType.TupleElements)
@@ -361,7 +374,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             ISyntaxFactsService syntaxFacts,
             CancellationToken cancellationToken,
             [NotNullWhen(true)] out TupleExpressionSyntax? tupleExpression
-        ) {
+        )
+        {
             return CommonSignatureHelpUtilities.TryGetSyntax(
                 root,
                 position,
@@ -383,7 +397,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
         private static bool IsTupleArgumentListToken(
             TupleExpressionSyntax? tupleExpression,
             SyntaxToken token
-        ) {
+        )
+        {
             return tupleExpression != null
                 && tupleExpression.Arguments.FullSpan.Contains(token.SpanStart)
                 && token != tupleExpression.CloseParenToken;
@@ -396,7 +411,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             ISyntaxFactsService syntaxFacts,
             CancellationToken cancellationToken,
             [NotNullWhen(true)] out ParenthesizedExpressionSyntax? parenthesizedExpression
-        ) {
+        )
+        {
             return CommonSignatureHelpUtilities.TryGetSyntax(
                 root,
                 position,
@@ -416,7 +432,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
         private static bool IsParenthesizedExpressionToken(
             ParenthesizedExpressionSyntax? expr,
             SyntaxToken token
-        ) {
+        )
+        {
             return expr != null
                 && expr.FullSpan.Contains(token.SpanStart)
                 && token != expr.CloseParenToken;

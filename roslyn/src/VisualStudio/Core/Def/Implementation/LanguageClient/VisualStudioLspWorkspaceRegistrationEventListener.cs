@@ -29,7 +29,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public VisualStudioLspWorkspaceRegistrationEventListener(
             ILspWorkspaceRegistrationService lspWorkspaceRegistrationService
-        ) {
+        )
+        {
             _lspWorkspaceRegistrationService = lspWorkspaceRegistrationService;
         }
 

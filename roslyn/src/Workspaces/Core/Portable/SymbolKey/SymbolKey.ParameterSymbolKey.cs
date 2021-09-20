@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis
             public static SymbolKeyResolution Resolve(
                 SymbolKeyReader reader,
                 out string? failureReason
-            ) {
+            )
+            {
                 var metadataName = reader.ReadString()!;
                 var containingSymbolResolution = reader.ReadSymbolKey(
                     out var containingSymbolFailureReason
@@ -80,7 +81,8 @@ namespace Microsoft.CodeAnalysis
                 SymbolKeyReader reader,
                 string metadataName,
                 ImmutableArray<IParameterSymbol> parameters
-            ) {
+            )
+            {
                 foreach (var parameter in parameters)
                 {
                     if (SymbolKey.Equals(reader.Compilation, parameter.MetadataName, metadataName))

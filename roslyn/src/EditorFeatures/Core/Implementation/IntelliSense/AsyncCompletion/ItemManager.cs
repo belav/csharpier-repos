@@ -51,13 +51,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             IAsyncCompletionSession session,
             AsyncCompletionSessionInitialDataSnapshot data,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 session.TextView.Properties.TryGetProperty(
                     CompletionSource.TargetTypeFilterExperimentEnabled,
                     out bool isTargetTypeFilterEnabled
                 ) && isTargetTypeFilterEnabled
-            ) {
+            )
+            {
                 AsyncCompletionLogger.LogSessionHasTargetTypeFilterEnabled();
 
                 // This method is called exactly once, so use the opportunity to set a baseline for telemetry.
@@ -68,7 +70,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                                 f => f.DisplayText == FeaturesResources.Target_type_matches
                             )
                     )
-                ) {
+                )
+                {
                     AsyncCompletionLogger.LogSessionContainsTargetTypeFilter();
                 }
             }
@@ -78,7 +81,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                     CompletionSource.TypeImportCompletionEnabled,
                     out bool isTypeImportCompletionEnabled
                 ) && isTypeImportCompletionEnabled
-            ) {
+            )
+            {
                 AsyncCompletionLogger.LogSessionWithTypeImportCompletionEnabled();
             }
 
@@ -106,13 +110,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             IAsyncCompletionSession session,
             AsyncCompletionSessionDataSnapshot data,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 !session.Properties.TryGetProperty(
                     CompletionSource.HasSuggestionItemOptions,
                     out bool hasSuggestedItemOptions
                 )
-            ) {
+            )
+            {
                 // This is the scenario when the session is created out of Roslyn, in some other provider, e.g. in Debugger.
                 // For now, the default hasSuggestedItemOptions is false.
                 hasSuggestedItemOptions = false;
@@ -168,7 +174,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                     CompletionSource.TargetTypeFilterExperimentEnabled,
                     out bool isExperimentEnabled
                 ) && isExperimentEnabled
-            ) {
+            )
+            {
                 // Telemetry: Want to know % of sessions with the "Target type matches" filter where that filter is actually enabled
                 if (
                     needToFilter
@@ -176,7 +183,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                     && selectedNonExpanderFilters.Any(
                         f => f.DisplayText == FeaturesResources.Target_type_matches
                     )
-                ) {
+                )
+                {
                     AsyncCompletionLogger.LogTargetTypeFilterChosenInSession();
 
                     // Make sure we only record one enabling of the filter per session
@@ -212,7 +220,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 && data.Trigger.Reason == CompletionTriggerReason.Backspace
                 && completionRules.DismissIfLastCharacterDeleted
                 && session.ApplicableToSpan.GetText(data.Snapshot).Length == 0
-            ) {
+            )
+            {
                 // Dismiss the session
                 return null;
             }
@@ -240,14 +249,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                     if (
                         needToFilter
                         && ShouldBeFilteredOutOfCompletionList(item, selectedNonExpanderFilters)
-                    ) {
+                    )
+                    {
                         continue;
                     }
 
                     if (
                         needToFilterExpanded
                         && ShouldBeFilteredOutOfExpandedCompletionList(item, unselectedExpanders)
-                    ) {
+                    )
+                    {
                         continue;
                     }
 
@@ -263,7 +274,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                             ref currentIndex,
                             out var matchResult
                         )
-                    ) {
+                    )
+                    {
                         initialListOfItemsToBeIncluded.Add(matchResult);
                     }
                 }
@@ -338,7 +350,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             static bool ShouldBeFilteredOutOfCompletionList(
                 VSCompletionItem item,
                 ImmutableArray<CompletionFilter> activeNonExpanderFilters
-            ) {
+            )
+            {
                 if (item.Filters.Any(filter => activeNonExpanderFilters.Contains(filter)))
                 {
                     return false;
@@ -350,7 +363,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             static bool ShouldBeFilteredOutOfExpandedCompletionList(
                 VSCompletionItem item,
                 ImmutableArray<CompletionFilter> unselectedExpanders
-            ) {
+            )
+            {
                 var associatedWithUnselectedExpander = false;
                 foreach (var itemFilter in item.Filters)
                 {
@@ -391,7 +405,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             char typeChar,
             List<MatchResult> itemsInList,
             bool hasSuggestedItemOptions
-        ) {
+        )
+        {
             // Not deletion.  Defer to the language to decide which item it thinks best
             // matches the text typed so far.
 
@@ -477,7 +492,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                     typeChar,
                     filterText
                 )
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -508,7 +524,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             string filterText,
             ImmutableArray<CompletionFilterWithState> filters,
             bool hasSuggestedItemOptions
-        ) {
+        )
+        {
             var matchingItems = matchResults.Where(r => r.MatchedFilterText);
             if (filterTriggerKind == CompletionTriggerReason.Insertion && !matchingItems.Any())
             {
@@ -601,7 +618,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             CompletionTriggerReason triggerReason,
             ImmutableArray<CompletionFilterWithState> filters,
             CompletionRules completionRules
-        ) {
+        )
+        {
             if (triggerReason == CompletionTriggerReason.Insertion)
             {
                 // If the user was just typing, and the list went to empty *and* this is a
@@ -635,7 +653,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
         private static ImmutableArray<CompletionFilterWithState> GetUpdatedFilters(
             List<MatchResult> filteredList,
             ImmutableArray<CompletionFilterWithState> filters
-        ) {
+        )
+        {
             // See which filters might be enabled based on the typed code
             using var _ = PooledHashSet<CompletionFilter>.GetInstance(out var textFilteredFilters);
             textFilteredFilters.AddRange(filteredList.SelectMany(n => n.VSCompletionItem.Filters));
@@ -659,7 +678,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
         private static RoslynCompletionItem GetBestCompletionItemBasedOnMRU(
             ImmutableArray<RoslynCompletionItem> chosenItems,
             ImmutableArray<string> recentItems
-        ) {
+        )
+        {
             // Try to find the chosen item has been most recently used.
             var bestItem = chosenItems.First();
             for (int i = 0, n = chosenItems.Length; i < n; i++)
@@ -675,7 +695,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                         && !bestItem.IsPreferredItem()
                         && chosenItem.IsPreferredItem()
                     )
-                ) {
+                )
+                {
                     bestItem = chosenItem;
                 }
             }
@@ -701,7 +722,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                         && !bestItem.IsPreferredItem()
                         && chosenItem.IsPreferredItem()
                     )
-                ) {
+                )
+                {
                     bestItem = chosenItem;
                 }
             }
@@ -712,7 +734,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
         private static int GetRecentItemIndex(
             ImmutableArray<string> recentItems,
             RoslynCompletionItem item
-        ) {
+        )
+        {
             var index = recentItems.IndexOf(item.FilterText);
             return -index;
         }
@@ -724,7 +747,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                     CompletionSource.RoslynItem,
                     out RoslynCompletionItem roslynItem
                 )
-            ) {
+            )
+            {
                 roslynItem = RoslynCompletionItem.Create(
                     displayText: vsItem.DisplayText,
                     filterText: vsItem.FilterText,
@@ -749,7 +773,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
         private static bool KeepAllItemsInTheList(
             CompletionTriggerKind initialTriggerKind,
             string filterText
-        ) {
+        )
+        {
             return filterText.Length <= 1
                 || initialTriggerKind == CompletionTriggerKind.Invoke
                 || initialTriggerKind == CompletionTriggerKind.Deletion;
@@ -765,7 +790,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             bool highlightMatchingPortions,
             ref int currentIndex,
             out MatchResult matchResult
-        ) {
+        )
+        {
             var roslynItem = GetOrAddRoslynCompletionItem(item);
 
             // Get the match of the given completion item for the pattern provided so far.
@@ -824,7 +850,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 bool highlightMatchingPortions,
                 RoslynCompletionItem roslynItem,
                 PatternMatch? patternMatch
-            ) {
+            )
+            {
                 if (!highlightMatchingPortions)
                 {
                     return ImmutableArray<Span>.Empty;
@@ -873,7 +900,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             CompletionFilterReason filterReason,
             ImmutableArray<string> recentItems,
             PatternMatch? patternMatch
-        ) {
+        )
+        {
             // For the deletion we bake in the core logic for how matching should work.
             // This way deletion feels the same across all languages that opt into deletion
             // as a completion trigger.
@@ -884,7 +912,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             if (
                 filterReason == CompletionFilterReason.Deletion
                 && initialTriggerKind == CompletionTriggerKind.Deletion
-            ) {
+            )
+            {
                 return item.FilterText.GetCaseInsensitivePrefixLength(filterText) > 0;
             }
 
@@ -912,7 +941,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             RoslynCompletionItem item,
             bool matchedFilterText,
             bool useSuggestionMode
-        ) {
+        )
+        {
             if (item == null || useSuggestionMode)
             {
                 return false;
@@ -938,7 +968,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 filterText.Length > 0
                 && IsAllPunctuation(filterText)
                 && filterText != item.DisplayText
-            ) {
+            )
+            {
                 return false;
             }
 

@@ -637,7 +637,8 @@ class C
             string variableName,
             Alias alias,
             bool valid
-        ) {
+        )
+        {
             string error;
             var testData = Evaluate(runtime, "C.M", variableName, out error, alias);
             if (valid)
@@ -1639,7 +1640,8 @@ IL_0010:  ret
             string expr,
             out string error,
             params Alias[] aliases
-        ) {
+        )
+        {
             var context = CreateMethodContext(runtime, methodName);
             var testData = new CompilationTestData();
             var result = context.CompileExpression(

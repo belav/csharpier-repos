@@ -21,7 +21,8 @@ namespace Microsoft.EntityFrameworkCore.Utilities
         public static T NotNull<T>(
             [NoEnumeration, AllowNull, NotNull] T value,
             [InvokerParameterName] string parameterName
-        ) {
+        )
+        {
             if (value is null)
             {
                 NotEmpty(parameterName, nameof(parameterName));
@@ -36,7 +37,8 @@ namespace Microsoft.EntityFrameworkCore.Utilities
         public static IReadOnlyList<T> NotEmpty<T>(
             [NotNull] IReadOnlyList<T>? value,
             [InvokerParameterName] string parameterName
-        ) {
+        )
+        {
             NotNull(value, parameterName);
 
             if (value.Count == 0)
@@ -55,7 +57,8 @@ namespace Microsoft.EntityFrameworkCore.Utilities
         public static string NotEmpty(
             [NotNull] string? value,
             [InvokerParameterName] string parameterName
-        ) {
+        )
+        {
             if (value is null)
             {
                 NotEmpty(parameterName, nameof(parameterName));
@@ -76,7 +79,8 @@ namespace Microsoft.EntityFrameworkCore.Utilities
         public static string? NullButNotEmpty(
             string? value,
             [InvokerParameterName] string parameterName
-        ) {
+        )
+        {
             if (value is not null && value.Length == 0)
             {
                 NotEmpty(parameterName, nameof(parameterName));
@@ -107,7 +111,8 @@ namespace Microsoft.EntityFrameworkCore.Utilities
         public static IReadOnlyList<string> HasNoEmptyElements(
             [NotNull] IReadOnlyList<string>? value,
             [InvokerParameterName] string parameterName
-        ) {
+        )
+        {
             NotNull(value, parameterName);
 
             if (value.Any(s => string.IsNullOrWhiteSpace(s)))

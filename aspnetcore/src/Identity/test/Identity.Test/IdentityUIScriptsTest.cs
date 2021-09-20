@@ -86,7 +86,8 @@ namespace Microsoft.AspNetCore.Identity.Test
         [SkipOnHelix("Skip on Ubuntu 16", Queues = "Ubuntu.1604.Amd64.Open;Ubuntu.1604.Amd64")]
         public async Task IdentityUI_ScriptTags_FallbackSourceContent_Matches_CDNContent(
             ScriptTag scriptTag
-        ) {
+        )
+        {
             var wwwrootDir = Path.Combine(GetProjectBasePath(), "wwwroot", scriptTag.Version);
 
             var cdnContent = await _httpClient.GetStringAsync(scriptTag.Src);

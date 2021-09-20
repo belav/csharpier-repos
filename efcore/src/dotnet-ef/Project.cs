@@ -46,7 +46,8 @@ namespace Microsoft.EntityFrameworkCore.Tools
             string? framework = null,
             string? configuration = null,
             string? runtime = null
-        ) {
+        )
+        {
             Debug.Assert(!string.IsNullOrEmpty(file), "file is null or empty.");
 
             if (buildExtensionsDir == null)

@@ -117,7 +117,8 @@ namespace Microsoft.Web.Helpers
             object options = null,
             object htmlAttributes = null,
             string embedName = null
-        ) {
+        )
+        {
             return Flash(
                 HttpContext,
                 _pathUtility,
@@ -165,7 +166,8 @@ namespace Microsoft.Web.Helpers
             object options = null,
             object htmlAttributes = null,
             string embedName = null
-        ) {
+        )
+        {
             return MediaPlayer(
                 HttpContext,
                 _pathUtility,
@@ -208,7 +210,8 @@ namespace Microsoft.Web.Helpers
             bool autoUpgrade = true,
             object options = null,
             object htmlAttributes = null
-        ) {
+        )
+        {
             return Silverlight(
                 HttpContext,
                 _pathUtility,
@@ -242,7 +245,8 @@ namespace Microsoft.Web.Helpers
             object options = null,
             object htmlAttributes = null,
             string embedName = null
-        ) {
+        )
+        {
             var parameters = ObjectToDictionary(options, "options", _flashBlacklist);
             if (!play)
             {
@@ -317,7 +321,8 @@ namespace Microsoft.Web.Helpers
             object options = null,
             object htmlAttributes = null,
             string embedName = null
-        ) {
+        )
+        {
             var parameters = ObjectToDictionary(options, "options", _mediaPlayerBlacklist);
             if (!autoStart)
             {
@@ -382,7 +387,8 @@ namespace Microsoft.Web.Helpers
             bool autoUpgrade = true,
             object options = null,
             object htmlAttributes = null
-        ) {
+        )
+        {
             if (String.IsNullOrEmpty(width))
             {
                 throw new ArgumentException(
@@ -448,7 +454,8 @@ namespace Microsoft.Web.Helpers
             object o,
             string argName,
             string[] blackList
-        ) {
+        )
+        {
             var dictionary = new RouteValueDictionary(o);
 
             foreach (var key in dictionary.Keys)
@@ -484,7 +491,8 @@ namespace Microsoft.Web.Helpers
             object htmlAttributes = null,
             string embedName = null,
             Action<TextWriter> plugin = null
-        ) {
+        )
+        {
             path = ValidatePath(context, pathUtility, path);
 
             var objectAttr = ObjectToDictionary(htmlAttributes, "htmlAttributes", _globalBlacklist);
@@ -501,7 +509,8 @@ namespace Microsoft.Web.Helpers
                     tw.Write("<object ");
                     foreach (
                         var a in objectAttr.OrderBy(a => a.Key, StringComparer.OrdinalIgnoreCase)
-                    ) {
+                    )
+                    {
                         var value = (a.Value == null) ? null : a.Value.ToString();
                         WriteIfNotNullOrEmpty(tw, a.Key, value);
                     }
@@ -564,7 +573,8 @@ namespace Microsoft.Web.Helpers
             HttpContextBase context,
             VirtualPathUtilityBase pathUtility,
             string path
-        ) {
+        )
+        {
             if (String.IsNullOrEmpty(path))
             {
                 throw new ArgumentException(

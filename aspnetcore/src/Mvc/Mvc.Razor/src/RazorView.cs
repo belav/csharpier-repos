@@ -43,7 +43,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             IRazorPage razorPage,
             HtmlEncoder htmlEncoder,
             DiagnosticListener diagnosticListener
-        ) {
+        )
+        {
             if (viewEngine == null)
             {
                 throw new ArgumentNullException(nameof(viewEngine));
@@ -119,7 +120,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             IRazorPage page,
             ViewContext context,
             bool invokeViewStarts
-        ) {
+        )
+        {
             var writer = context.Writer as ViewBufferTextWriter;
             if (writer == null)
             {
@@ -261,7 +263,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                     && renderedLayouts.Any(
                         l => string.Equals(l.Path, layoutPage.Path, StringComparison.Ordinal)
                     )
-                ) {
+                )
+                {
                     // If the layout has been previously rendered as part of this view, we're potentially in a layout
                     // rendering cycle.
                     throw new InvalidOperationException(
@@ -315,7 +318,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             ViewContext context,
             string executingFilePath,
             string layoutPath
-        ) {
+        )
+        {
             var layoutPageResult = _viewEngine.GetPage(executingFilePath, layoutPath);
             var originalLocations = layoutPageResult.SearchedLocations;
             if (layoutPageResult.Page == null)

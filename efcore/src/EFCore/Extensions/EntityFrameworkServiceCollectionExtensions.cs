@@ -213,8 +213,9 @@ namespace Microsoft.Extensions.DependencyInjection
             this IServiceCollection serviceCollection,
             Action<DbContextOptionsBuilder> optionsAction,
             int poolSize = 128
-        ) where TContextImplementation : DbContext, TContextService
-          where TContextService : class
+        )
+            where TContextImplementation : DbContext, TContextService
+            where TContextService : class
         {
             Check.NotNull(optionsAction, nameof(optionsAction));
 
@@ -330,8 +331,9 @@ namespace Microsoft.Extensions.DependencyInjection
             this IServiceCollection serviceCollection,
             Action<IServiceProvider, DbContextOptionsBuilder> optionsAction,
             int poolSize = 128
-        ) where TContextImplementation : DbContext, TContextService
-          where TContextService : class
+        )
+            where TContextImplementation : DbContext, TContextService
+            where TContextService : class
         {
             Check.NotNull(serviceCollection, nameof(serviceCollection));
             Check.NotNull(optionsAction, nameof(optionsAction));
@@ -443,8 +445,9 @@ namespace Microsoft.Extensions.DependencyInjection
             this IServiceCollection serviceCollection,
             ServiceLifetime contextLifetime,
             ServiceLifetime optionsLifetime = ServiceLifetime.Scoped
-        ) where TContextImplementation : DbContext, TContextService
-          where TContextService : class =>
+        )
+            where TContextImplementation : DbContext, TContextService
+            where TContextService : class =>
             AddDbContext<TContextService, TContextImplementation>(
                 serviceCollection,
                 (Action<IServiceProvider, DbContextOptionsBuilder>?)null,
@@ -711,8 +714,9 @@ namespace Microsoft.Extensions.DependencyInjection
             this IServiceCollection serviceCollection,
             Action<DbContextOptionsBuilder>? optionsAction = null,
             ServiceLifetime lifetime = ServiceLifetime.Singleton
-        ) where TContext : DbContext
-          where TFactory : IDbContextFactory<TContext> =>
+        )
+            where TContext : DbContext
+            where TFactory : IDbContextFactory<TContext> =>
             AddDbContextFactory<TContext, TFactory>(
                 serviceCollection,
                 optionsAction == null
@@ -851,8 +855,9 @@ namespace Microsoft.Extensions.DependencyInjection
             this IServiceCollection serviceCollection,
             Action<IServiceProvider, DbContextOptionsBuilder>? optionsAction,
             ServiceLifetime lifetime = ServiceLifetime.Singleton
-        ) where TContext : DbContext
-          where TFactory : IDbContextFactory<TContext>
+        )
+            where TContext : DbContext
+            where TFactory : IDbContextFactory<TContext>
         {
             Check.NotNull(serviceCollection, nameof(serviceCollection));
 
@@ -1028,7 +1033,8 @@ namespace Microsoft.Extensions.DependencyInjection
             if (
                 declaredConstructors.Count == 1
                 && declaredConstructors[0].GetParameters().Length == 0
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     CoreStrings.DbContextMissingConstructor(typeof(TContext).ShortDisplayName())
                 );

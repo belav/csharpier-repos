@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.TextStructureNavigation
                     if (
                         position == token.Span.End - 1
                         && token.Text.EndsWith("\"", StringComparison.Ordinal)
-                    ) {
+                    )
+                    {
                         return false;
                     }
 
@@ -63,12 +64,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.TextStructureNavigation
         protected override TextExtent GetExtentOfWordFromToken(
             SyntaxToken token,
             SnapshotPoint position
-        ) {
+        )
+        {
             if (
                 token.Kind() == SyntaxKind.StringLiteralToken
                 && position.Position == token.Span.End - 1
                 && token.Text.EndsWith("\"", StringComparison.Ordinal)
-            ) {
+            )
+            {
                 // Special case to treat the closing quote of a string literal as a separate token.  This allows the
                 // cursor to stop during word navigation (Ctrl+LeftArrow, etc.) immediately before AND after the
                 // closing quote, just like it did in VS2013 and like it currently does for interpolated strings.

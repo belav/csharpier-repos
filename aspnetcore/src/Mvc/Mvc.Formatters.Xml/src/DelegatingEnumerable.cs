@@ -41,7 +41,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
         public DelegatingEnumerable(
             IEnumerable<TDeclared> source,
             IWrapperProvider elementWrapperProvider
-        ) {
+        )
+        {
             if (source == null)
             {
                 throw new ArgumentNullException(nameof(source));

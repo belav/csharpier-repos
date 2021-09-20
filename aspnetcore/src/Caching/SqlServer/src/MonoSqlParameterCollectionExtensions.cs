@@ -21,7 +21,8 @@ namespace Microsoft.Extensions.Caching.SqlServer
         public static SqlParameterCollection AddExpiresAtTimeMono(
             this SqlParameterCollection parameters,
             DateTimeOffset utcTime
-        ) {
+        )
+        {
             return parameters.AddWithValue(
                 Columns.Names.ExpiresAtTime,
                 SqlDbType.DateTime,
@@ -32,7 +33,8 @@ namespace Microsoft.Extensions.Caching.SqlServer
         public static SqlParameterCollection AddAbsoluteExpirationMono(
             this SqlParameterCollection parameters,
             DateTimeOffset? utcTime
-        ) {
+        )
+        {
             if (utcTime.HasValue)
             {
                 return parameters.AddWithValue(

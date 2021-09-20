@@ -72,7 +72,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns> The same builder instance so that further configuration calls can be chained. </returns>
         public virtual DbFunctionParameterBuilder PropagatesNullability(
             bool propagatesNullability = true
-        ) {
+        )
+        {
             Builder.PropagatesNullability(propagatesNullability, ConfigurationSource.Explicit);
 
             return this;

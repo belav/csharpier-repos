@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     whenTrueLabel: node.WhenTrueLabel,
                     whenFalseLabel: node.WhenFalseLabel
                 )
-            ) {
+            )
+            {
                 // If we can build a linear test sequence `(e1 && e2 && e3)` for the dag, do so.
                 var isPatternRewriter = new IsPatternExpressionLinearLocalRewriter(node, this);
                 result = isPatternRewriter.LowerIsPatternAsLinearTestSequence(
@@ -39,7 +40,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     whenTrueLabel: node.WhenFalseLabel,
                     whenFalseLabel: node.WhenTrueLabel
                 )
-            ) {
+            )
+            {
                 // If we can build a linear test sequence with the whenTrue and whenFalse labels swapped, then negate the
                 // result.  This would typically arise when the source contains `e is not pattern`.
                 negated = !negated;
@@ -76,7 +78,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 BoundDecisionDagNode node,
                 LabelSymbol whenTrueLabel,
                 LabelSymbol whenFalseLabel
-            ) {
+            )
+            {
                 while (true)
                 {
                     switch (node)
@@ -264,7 +267,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 BoundIsPatternExpression isPatternExpression,
                 LabelSymbol whenTrueLabel,
                 LabelSymbol whenFalseLabel
-            ) {
+            )
+            {
                 BoundDecisionDag decisionDag = isPatternExpression.DecisionDag;
                 BoundExpression loweredInput = _localRewriter.VisitExpression(
                     isPatternExpression.Expression
@@ -290,13 +294,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                 BoundDecisionDagNode node,
                 LabelSymbol whenTrueLabel,
                 LabelSymbol whenFalseLabel
-            ) {
+            )
+            {
                 // We follow the "good" path in the decision dag. We depend on it being nicely linear in structure.
                 // If we add "or" patterns that assumption breaks down.
                 while (
                     node.Kind != BoundKind.LeafDecisionDagNode
                     && node.Kind != BoundKind.WhenDecisionDagNode
-                ) {
+                )
+                {
                     switch (node)
                     {
                         case BoundEvaluationDecisionDagNode evalNode:
@@ -317,7 +323,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                         out BoundExpression? sideEffect,
                                         out BoundExpression? testExpression
                                     )
-                                ) {
+                                )
+                                {
                                     _sideEffectBuilder.Add(sideEffect);
                                     AddConjunct(testExpression);
                                     node = e.Next;

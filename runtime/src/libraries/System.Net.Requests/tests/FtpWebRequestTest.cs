@@ -25,7 +25,8 @@ namespace System.Net.Tests
                 bool usePassive,
                 bool useAsync,
                 bool useOldStyleAsync
-            ) {
+            )
+            {
                 UseSsl = useSsl;
                 UsePassive = usePassive;
                 UseAsync = useAsync;
@@ -216,7 +217,8 @@ namespace System.Net.Tests
         private static async Task<MemoryStream> DoAsync(
             FtpWebRequest request,
             MemoryStream requestBody
-        ) {
+        )
+        {
             if (requestBody != null)
             {
                 Stream requestStream = await request.GetRequestStreamAsync();
@@ -278,7 +280,8 @@ namespace System.Net.Tests
             string uri,
             byte[] requestBody,
             string renameTo = null
-        ) {
+        )
+        {
             FtpWebRequest request = (FtpWebRequest)WebRequest.Create(uri);
 
             request.EnableSsl = mode.UseSsl;
@@ -328,7 +331,8 @@ namespace System.Net.Tests
             string method,
             string uri,
             byte[] requestBody
-        ) {
+        )
+        {
             byte[] responseBody = Do(mode, method, uri, requestBody);
 
             // Should be no response
@@ -340,7 +344,8 @@ namespace System.Net.Tests
             string method,
             string uri,
             string renameTo = null
-        ) {
+        )
+        {
             byte[] responseBody = Do(mode, method, uri, null, renameTo);
 
             // Should be no response

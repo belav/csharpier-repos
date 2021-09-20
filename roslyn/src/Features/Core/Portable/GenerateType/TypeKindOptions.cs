@@ -54,7 +54,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
         public static TypeKindOptions RemoveOptions(
             TypeKindOptions fromValue,
             params TypeKindOptions[] removeValues
-        ) {
+        )
+        {
             var tempReturnValue = fromValue;
             foreach (var removeValue in removeValues)
             {

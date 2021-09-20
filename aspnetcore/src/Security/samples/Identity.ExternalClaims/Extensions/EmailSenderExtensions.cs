@@ -13,7 +13,8 @@ namespace Identity.ExternalClaims.Services
             this IEmailSender emailSender,
             string email,
             string link
-        ) {
+        )
+        {
             return emailSender.SendEmailAsync(
                 email,
                 "Confirm your email",
@@ -25,7 +26,8 @@ namespace Identity.ExternalClaims.Services
             this IEmailSender emailSender,
             string email,
             string callbackUrl
-        ) {
+        )
+        {
             return emailSender.SendEmailAsync(
                 email,
                 "Reset Password",

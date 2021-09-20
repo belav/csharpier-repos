@@ -2707,7 +2707,8 @@ class ClassA
         [WorkItem(42049, "https://github.com/dotnet/roslyn/issues/42049")]
         public async Task TestCompletionDoesNotUseLocalAsLocalFunctionVariable(
             LanguageVersion languageVersion
-        ) {
+        )
+        {
             var source =
                 @"
 class ClassA
@@ -2933,7 +2934,8 @@ public class MyClass
             static (SymbolSpecification specification, NamingStyle style) SpecificationStyle(
                 SymbolKindOrTypeKind kind,
                 string name
-            ) {
+            )
+            {
                 var symbolSpecification = new SymbolSpecification(
                     id: null,
                     symbolSpecName: name,
@@ -2976,7 +2978,8 @@ public class MyClass
             static (SymbolSpecification specification, NamingStyle style) SpecificationStyle(
                 SymbolKindOrTypeKind kind,
                 string suffix
-            ) {
+            )
+            {
                 var symbolSpecification = new SymbolSpecification(
                     id: null,
                     symbolSpecName: suffix,
@@ -3001,7 +3004,8 @@ public class MyClass
         private static SerializableNamingRule CreateRule(
             SymbolSpecification specification,
             NamingStyle style
-        ) {
+        )
+        {
             return new SerializableNamingRule()
             {
                 SymbolSpecificationID = specification.ID,

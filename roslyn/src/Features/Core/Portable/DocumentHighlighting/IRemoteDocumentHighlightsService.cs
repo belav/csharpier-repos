@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.DocumentHighlighting
         public SerializableDocumentHighlights(
             DocumentId documentId,
             ImmutableArray<HighlightSpan> highlightSpans
-        ) {
+        )
+        {
             DocumentId = documentId;
             HighlightSpans = highlightSpans;
         }

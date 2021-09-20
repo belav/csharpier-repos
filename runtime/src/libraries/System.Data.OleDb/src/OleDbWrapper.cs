@@ -51,7 +51,8 @@ namespace System.Data.OleDb
         internal void GetDataSource(
             OleDbConnectionString constr,
             ref DataSourceWrapper datasrcWrapper
-        ) {
+        )
+        {
             OleDbHResult hr;
             UnsafeNativeMethods.IDataInitializeGetDataSource GetDataSource =
                 DangerousIDataInitializeGetDataSource!;
@@ -115,7 +116,8 @@ namespace System.Data.OleDb
         internal OleDbHResult InitializeAndCreateSession(
             OleDbConnectionString constr,
             ref SessionWrapper sessionWrapper
-        ) {
+        )
+        {
             OleDbHResult hr;
             bool mustRelease = false;
             IntPtr idbCreateSession = IntPtr.Zero;
@@ -139,7 +141,8 @@ namespace System.Data.OleDb
                 if (
                     (null == QueryInterface)
                     || (method != Marshal.GetFunctionPointerForDelegate(QueryInterface))
-                ) {
+                )
+                {
                     QueryInterface =
                         (UnsafeNativeMethods.IUnknownQueryInterface)Marshal.GetDelegateForFunctionPointer(
                             method,
@@ -163,7 +166,8 @@ namespace System.Data.OleDb
                 if (
                     (null == Initialize)
                     || (method != Marshal.GetFunctionPointerForDelegate(Initialize))
-                ) {
+                )
+                {
                     Initialize =
                         (UnsafeNativeMethods.IDBInitializeInitialize)Marshal.GetDelegateForFunctionPointer(
                             method,
@@ -200,7 +204,8 @@ namespace System.Data.OleDb
                         if (
                             (null == CreateSession)
                             || (method != Marshal.GetFunctionPointerForDelegate(CreateSession))
-                        ) {
+                        )
+                        {
                             CreateSession =
                                 (UnsafeNativeMethods.IDBCreateSessionCreateSession)Marshal.GetDelegateForFunctionPointer(
                                     method,
@@ -306,7 +311,8 @@ namespace System.Data.OleDb
             if (
                 !constr.HaveQueriedForCreateCommand
                 || (null != constr.DangerousIDBCreateCommandCreateCommand)
-            ) {
+            )
+            {
                 IntPtr idbCreateCommand = IntPtr.Zero;
                 RuntimeHelpers.PrepareConstrainedRegions();
                 try
@@ -387,7 +393,8 @@ namespace System.Data.OleDb
             if (
                 (null == CreateCommand)
                 || (method != Marshal.GetFunctionPointerForDelegate(CreateCommand))
-            ) {
+            )
+            {
                 CreateCommand =
                     (UnsafeNativeMethods.IDBCreateCommandCreateCommand)Marshal.GetDelegateForFunctionPointer(
                         method,

@@ -378,7 +378,8 @@ namespace System.Web.Helpers.AntiXsrf.Test
         public void ValidateTokens_UsernameMismatch(
             string identityUsername,
             string embeddedUsername
-        ) {
+        )
+        {
             // Arrange
             HttpContextBase httpContext = new Mock<HttpContextBase>().Object;
             IIdentity identity = new GenericIdentity(identityUsername);

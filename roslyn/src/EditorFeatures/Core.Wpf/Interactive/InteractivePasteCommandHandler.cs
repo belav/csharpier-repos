@@ -63,7 +63,8 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
         public InteractivePasteCommandHandler(
             IEditorOperationsFactoryService editorOperationsFactoryService,
             ITextUndoHistoryRegistry textUndoHistoryRegistry
-        ) {
+        )
+        {
             _editorOperationsFactoryService = editorOperationsFactoryService;
             _textUndoHistoryRegistry = textUndoHistoryRegistry;
             RoslynClipboard = new SystemClipboardWrapper();
@@ -76,7 +77,8 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
                 !args.TextView.TextBuffer.ContentType.IsOfType(
                     PredefinedInteractiveContentTypes.InteractiveContentTypeName
                 ) && RoslynClipboard.ContainsData(InteractiveClipboardFormat.Tag)
-            ) {
+            )
+            {
                 PasteInteractiveFormat(args.TextView);
                 return true;
             }
@@ -128,7 +130,8 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
                     && !HasNonWhiteSpaceCharacter(
                         textView.Caret.Position.BufferPosition.GetContainingLine()
                     )
-                ) {
+                )
+                {
                     // trim the last newline before paste
                     var trimmed = text.Remove(
                         text.LastIndexOf(textView.Options.GetNewLineCharacter())

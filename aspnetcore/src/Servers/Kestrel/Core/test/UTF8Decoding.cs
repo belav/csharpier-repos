@@ -37,7 +37,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                 var length = bytes.Length;
                 length < Vector<sbyte>.Count * 4 + bytes.Length;
                 length++
-            ) {
+            )
+            {
                 for (var position = 0; position <= length - bytes.Length; position++)
                 {
                     var byteRange = Enumerable.Range(1, length).Select(x => (byte)x).ToArray();

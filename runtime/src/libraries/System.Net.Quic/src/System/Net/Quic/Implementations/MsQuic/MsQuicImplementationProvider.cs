@@ -16,7 +16,8 @@ namespace System.Net.Quic.Implementations.MsQuic
 
         internal override QuicConnectionProvider CreateConnection(
             QuicClientConnectionOptions options
-        ) {
+        )
+        {
             return new MsQuicConnection(options);
         }
     }

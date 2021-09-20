@@ -517,7 +517,8 @@ namespace Microsoft.AspNetCore.Authentication.Certificate.Test
                 response.Content != null
                 && response.Content.Headers.ContentType != null
                 && response.Content.Headers.ContentType.MediaType == "text/xml"
-            ) {
+            )
+            {
                 var responseContent = await response.Content.ReadAsStringAsync();
                 responseAsXml = XElement.Parse(responseContent);
             }
@@ -570,7 +571,8 @@ namespace Microsoft.AspNetCore.Authentication.Certificate.Test
                 !string.IsNullOrEmpty(
                     Certificates.SelfSignedValidWithNoEku.GetNameInfo(X509NameType.DnsName, false)
                 )
-            ) {
+            )
+            {
                 actual = responseAsXml.Elements("claim")
                     .Where(claim => claim.Attribute("Type").Value == ClaimTypes.Dns);
                 if (actual.Count() > 0)
@@ -590,7 +592,8 @@ namespace Microsoft.AspNetCore.Authentication.Certificate.Test
                 !string.IsNullOrEmpty(
                     Certificates.SelfSignedValidWithNoEku.GetNameInfo(X509NameType.EmailName, false)
                 )
-            ) {
+            )
+            {
                 actual = responseAsXml.Elements("claim")
                     .Where(claim => claim.Attribute("Type").Value == ClaimTypes.Email);
                 if (actual.Count() > 0)
@@ -613,7 +616,8 @@ namespace Microsoft.AspNetCore.Authentication.Certificate.Test
                         false
                     )
                 )
-            ) {
+            )
+            {
                 actual = responseAsXml.Elements("claim")
                     .Where(claim => claim.Attribute("Type").Value == ClaimTypes.Name);
                 if (actual.Count() > 0)
@@ -633,7 +637,8 @@ namespace Microsoft.AspNetCore.Authentication.Certificate.Test
                 !string.IsNullOrEmpty(
                     Certificates.SelfSignedValidWithNoEku.GetNameInfo(X509NameType.UpnName, false)
                 )
-            ) {
+            )
+            {
                 actual = responseAsXml.Elements("claim")
                     .Where(claim => claim.Attribute("Type").Value == ClaimTypes.Upn);
                 if (actual.Count() > 0)
@@ -653,7 +658,8 @@ namespace Microsoft.AspNetCore.Authentication.Certificate.Test
                 !string.IsNullOrEmpty(
                     Certificates.SelfSignedValidWithNoEku.GetNameInfo(X509NameType.UrlName, false)
                 )
-            ) {
+            )
+            {
                 actual = responseAsXml.Elements("claim")
                     .Where(claim => claim.Attribute("Type").Value == ClaimTypes.Uri);
                 if (actual.Count() > 0)
@@ -732,7 +738,8 @@ namespace Microsoft.AspNetCore.Authentication.Certificate.Test
                 response.Content != null
                 && response.Content.Headers.ContentType != null
                 && response.Content.Headers.ContentType.MediaType == "text/xml"
-            ) {
+            )
+            {
                 var responseContent = await response.Content.ReadAsStringAsync();
                 responseAsXml = XElement.Parse(responseContent);
             }
@@ -754,7 +761,8 @@ namespace Microsoft.AspNetCore.Authentication.Certificate.Test
                 response.Content != null
                 && response.Content.Headers.ContentType != null
                 && response.Content.Headers.ContentType.MediaType == "text/xml"
-            ) {
+            )
+            {
                 var responseContent = await response.Content.ReadAsStringAsync();
                 responseAsXml = XElement.Parse(responseContent);
             }
@@ -816,7 +824,8 @@ namespace Microsoft.AspNetCore.Authentication.Certificate.Test
                 response.Content != null
                 && response.Content.Headers.ContentType != null
                 && response.Content.Headers.ContentType.MediaType == "text/xml"
-            ) {
+            )
+            {
                 var responseContent = await response.Content.ReadAsStringAsync();
                 responseAsXml = XElement.Parse(responseContent);
             }
@@ -837,7 +846,8 @@ namespace Microsoft.AspNetCore.Authentication.Certificate.Test
             bool wireUpHeaderMiddleware = false,
             string headerName = "",
             bool useCache = false
-        ) {
+        )
+        {
             var host = new HostBuilder().ConfigureWebHost(
                     builder =>
                         builder.UseTestServer()

@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Collections
             SegmentedArray<T> sourceArray,
             SegmentedArray<T> destinationArray,
             int length
-        ) {
+        )
+        {
             if (length == 0)
                 return;
 
@@ -48,7 +49,8 @@ namespace Microsoft.CodeAnalysis.Collections
             SegmentedArray<T> sourceArray,
             Array destinationArray,
             int length
-        ) {
+        )
+        {
             if (destinationArray is null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.destinationArray);
             if (length == 0)
@@ -86,7 +88,8 @@ namespace Microsoft.CodeAnalysis.Collections
             SegmentedArray<T> destinationArray,
             int destinationIndex,
             int length
-        ) {
+        )
+        {
             if (length < 0)
                 throw new ArgumentOutOfRangeException(
                     nameof(length),
@@ -113,7 +116,8 @@ namespace Microsoft.CodeAnalysis.Collections
             if (
                 sourceArray.SyncRoot == destinationArray.SyncRoot
                 && sourceIndex + length > destinationIndex
-            ) {
+            )
+            {
                 // We are copying in the same array with overlap
                 CopyOverlapped(sourceArray, sourceIndex, destinationIndex, length);
             }
@@ -127,7 +131,8 @@ namespace Microsoft.CodeAnalysis.Collections
                         destinationIndex,
                         length
                     )
-                ) {
+                )
+                {
                     first.CopyTo(second);
                 }
             }
@@ -140,7 +145,8 @@ namespace Microsoft.CodeAnalysis.Collections
             int sourceIndex,
             int destinationIndex,
             int length
-        ) {
+        )
+        {
             Debug.Assert(length > 0);
             Debug.Assert(sourceIndex >= 0);
             Debug.Assert(destinationIndex >= 0);
@@ -177,7 +183,8 @@ namespace Microsoft.CodeAnalysis.Collections
             Array destinationArray,
             int destinationIndex,
             int length
-        ) {
+        )
+        {
             if (destinationArray == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.destinationArray);
 
@@ -248,7 +255,8 @@ namespace Microsoft.CodeAnalysis.Collections
             int length,
             T value,
             IComparer<T>? comparer
-        ) {
+        )
+        {
             if (index < 0)
                 ThrowHelper.ThrowIndexArgumentOutOfRange_NeedNonNegNumException();
             if (length < 0)
@@ -316,7 +324,8 @@ namespace Microsoft.CodeAnalysis.Collections
             T value,
             int startIndex,
             int count
-        ) {
+        )
+        {
             if (array.Length == 0)
             {
                 // Special case for 0 length List
@@ -410,7 +419,8 @@ namespace Microsoft.CodeAnalysis.Collections
             int index,
             int length,
             IComparer<T>? comparer
-        ) {
+        )
+        {
             if (index < 0)
                 ThrowHelper.ThrowIndexArgumentOutOfRange_NeedNonNegNumException();
             if (length < 0)
@@ -489,7 +499,8 @@ namespace Microsoft.CodeAnalysis.Collections
                 SegmentedArray<T> second,
                 int secondOffset,
                 int length
-            ) {
+            )
+            {
                 _first = first;
                 _firstOffset = firstOffset;
                 _second = second;
@@ -524,7 +535,8 @@ namespace Microsoft.CodeAnalysis.Collections
                 T[][] secondSegments,
                 int secondOffset,
                 int length
-            ) {
+            )
+            {
                 _firstSegments = firstSegments;
                 _firstOffset = firstOffset;
                 _secondSegments = secondSegments;
@@ -610,7 +622,8 @@ namespace Microsoft.CodeAnalysis.Collections
                 SegmentedArray<T> second,
                 int secondOffset,
                 int length
-            ) {
+            )
+            {
                 _first = first;
                 _firstOffset = firstOffset;
                 _second = second;
@@ -668,7 +681,8 @@ namespace Microsoft.CodeAnalysis.Collections
                 T[][] secondSegments,
                 int secondOffset,
                 int length
-            ) {
+            )
+            {
                 _firstSegments = firstSegments;
                 _firstOffset = firstOffset;
                 _secondSegments = secondSegments;
@@ -731,7 +745,8 @@ namespace Microsoft.CodeAnalysis.Collections
                     T[][] secondSegments,
                     int secondOffset,
                     int length
-                ) {
+                )
+                {
                     _firstSegments = firstSegments;
                     _firstOffset = firstOffset;
                     _secondSegments = secondSegments;

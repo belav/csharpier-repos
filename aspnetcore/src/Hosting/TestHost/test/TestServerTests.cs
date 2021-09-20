@@ -513,7 +513,8 @@ namespace Microsoft.AspNetCore.TestHost
             public ReplaceServiceProvidersFeatureFilter(
                 IServiceProvider appServices,
                 IServiceProvider requestServices
-            ) {
+            )
+            {
                 ApplicationServices = appServices;
                 RequestServices = requestServices;
             }
@@ -966,7 +967,8 @@ namespace Microsoft.AspNetCore.TestHost
             public virtual void OnUnhandledException(
                 IProxyHttpContext httpContext,
                 IProxyException exception
-            ) {
+            )
+            {
                 UnhandledException = new OnUnhandledExceptionEventData()
                 {
                     HttpContext = httpContext,

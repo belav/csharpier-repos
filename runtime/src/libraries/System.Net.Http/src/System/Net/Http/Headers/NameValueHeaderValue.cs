@@ -123,7 +123,8 @@ namespace System.Net.Http.Headers
         public static bool TryParse(
             [NotNullWhen(true)] string? input,
             [NotNullWhen(true)] out NameValueHeaderValue? parsedValue
-        ) {
+        )
+        {
             int index = 0;
             parsedValue = null;
 
@@ -134,7 +135,8 @@ namespace System.Net.Http.Headers
                     ref index,
                     out object? output
                 )
-            ) {
+            )
+            {
                 parsedValue = (NameValueHeaderValue)output!;
                 return true;
             }
@@ -176,7 +178,8 @@ namespace System.Net.Http.Headers
             char separator,
             bool leadingSeparator,
             StringBuilder destination
-        ) {
+        )
+        {
             Debug.Assert(destination != null);
 
             if ((values == null) || (values.Count == 0))
@@ -214,7 +217,8 @@ namespace System.Net.Http.Headers
             string input,
             int startIndex,
             out NameValueHeaderValue? parsedValue
-        ) {
+        )
+        {
             return GetNameValueLength(
                 input,
                 startIndex,
@@ -228,7 +232,8 @@ namespace System.Net.Http.Headers
             int startIndex,
             Func<NameValueHeaderValue> nameValueCreator,
             out NameValueHeaderValue? parsedValue
-        ) {
+        )
+        {
             Debug.Assert(input != null);
             Debug.Assert(startIndex >= 0);
             Debug.Assert(nameValueCreator != null);
@@ -290,7 +295,8 @@ namespace System.Net.Http.Headers
             int startIndex,
             char delimiter,
             ObjectCollection<NameValueHeaderValue> nameValueCollection
-        ) {
+        )
+        {
             Debug.Assert(nameValueCollection != null);
             Debug.Assert(startIndex >= 0);
 
@@ -334,7 +340,8 @@ namespace System.Net.Http.Headers
         internal static NameValueHeaderValue? Find(
             ObjectCollection<NameValueHeaderValue>? values,
             string name
-        ) {
+        )
+        {
             Debug.Assert((name != null) && (name.Length > 0));
 
             if ((values == null) || (values.Count == 0))
@@ -369,7 +376,8 @@ namespace System.Net.Http.Headers
                 if (
                     HttpRuleParser.GetQuotedStringLength(input, startIndex, out valueLength)
                     != HttpParseResult.Parsed
-                ) {
+                )
+                {
                     // We have an invalid value. Reset the name and return.
                     return 0;
                 }
@@ -414,7 +422,8 @@ namespace System.Net.Http.Headers
                 if (
                     (parseResult == HttpParseResult.Parsed && valueLength != value.Length)
                     || parseResult != HttpParseResult.Parsed
-                ) {
+                )
+                {
                     throw new FormatException(
                         SR.Format(
                             System.Globalization.CultureInfo.InvariantCulture,

@@ -300,7 +300,8 @@ namespace System.Speech.Internal.SrgsCompiler
                         && (attributes & SPCFGRULEATTRIBUTES.SPRAF_Export) != 0
                     )
                 )
-            ) {
+            )
+            {
                 throw new ArgumentException(SR.Get(SRID.InvalidFlagsSet), nameof(attributes));
             }
 
@@ -315,7 +316,8 @@ namespace System.Speech.Internal.SrgsCompiler
                     || (attributes & SPCFGRULEATTRIBUTES.SPRAF_Active) != 0
                     || (attributes & SPCFGRULEATTRIBUTES.SPRAF_Root) != 0
                 )
-            ) {
+            )
+            {
                 attributes &= ~(
                     SPCFGRULEATTRIBUTES.SPRAF_TopLevel
                     | SPCFGRULEATTRIBUTES.SPRAF_Active
@@ -431,7 +433,8 @@ namespace System.Speech.Internal.SrgsCompiler
                             )
                         )
                     )
-                ) {
+                )
+                {
                     LogError(sRule, SRID.RuleNameIdConflict);
                 }
             }
@@ -494,7 +497,8 @@ namespace System.Speech.Internal.SrgsCompiler
                 rule == CfgGrammar.SPRULETRANS_WILDCARD
                 || rule == CfgGrammar.SPRULETRANS_DICTATION
                 || rule == CfgGrammar.SPRULETRANS_TEXTBUFFER
-            ) {
+            )
+            {
                 specialRuleTrans = rule;
             }
             else
@@ -628,7 +632,8 @@ namespace System.Speech.Internal.SrgsCompiler
             Backend extra,
             Dictionary<State, State> srcToDestHash,
             bool fromOrg
-        ) {
+        )
+        {
             Backend beSrc = fromOrg ? org : extra;
 
             List<State> CloneStack = new(); // States to process
@@ -697,7 +702,8 @@ namespace System.Speech.Internal.SrgsCompiler
                         }
                         else if (
                             arc.RuleRef.Name.IndexOf("URL:STATIC#", StringComparison.Ordinal) == 0
-                        ) {
+                        )
+                        {
                             ruleName = arc.RuleRef.Name.Substring(11);
                             if (fromOrg == false && FindInRules(ruleName) == null)
                             {
@@ -771,7 +777,8 @@ namespace System.Speech.Internal.SrgsCompiler
                         endState != null
                         && !stateToProcess.Contains(endState)
                         && !statesToDelete.Contains(endState)
-                    ) {
+                    )
+                    {
                         stateToProcess.Push(endState);
                     }
                     arcsToDelete.Add(arc);
@@ -1126,7 +1133,8 @@ namespace System.Speech.Internal.SrgsCompiler
             ushort iSemanticGlobals,
             out int cArcs,
             out float[] pWeights
-        ) {
+        )
+        {
             cArcs = 1; // Start with offset one! (0 indicates dead state).
             pWeights = null;
 
@@ -1241,7 +1249,8 @@ namespace System.Speech.Internal.SrgsCompiler
             State[] apStateTable,
             SortedDictionary<int, Rule> ruleFirstArcs,
             int previousCfgLastRules
-        ) {
+        )
+        {
             for (int i = 0; i < header.rules.Length; i++)
             {
                 // Check if the rule does not exist already
@@ -1309,7 +1318,8 @@ namespace System.Speech.Internal.SrgsCompiler
             State srcToState,
             List<State> CloneStack,
             Dictionary<State, State> srcToDestHash
-        ) {
+        )
+        {
             bool newRule = false;
             int posDynamic = srcToState.Rule.Name.IndexOf("URL:DYNAMIC#", StringComparison.Ordinal);
             string ruleName =

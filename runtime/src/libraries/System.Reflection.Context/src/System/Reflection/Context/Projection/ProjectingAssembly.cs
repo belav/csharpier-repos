@@ -104,7 +104,8 @@ namespace System.Reflection.Context.Projection
             string moduleName,
             byte[] rawModule,
             byte[] rawSymbolStore
-        ) {
+        )
+        {
             return Projector.ProjectModule(base.LoadModule(moduleName, rawModule, rawSymbolStore));
         }
 

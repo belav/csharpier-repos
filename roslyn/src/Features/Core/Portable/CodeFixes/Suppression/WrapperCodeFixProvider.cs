@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
         public WrapperCodeFixProvider(
             IConfigurationFixProvider suppressionFixProvider,
             IEnumerable<string> diagnosticIds
-        ) {
+        )
+        {
             _suppressionFixProvider = suppressionFixProvider;
             _originalDiagnosticIds = diagnosticIds.Distinct().ToImmutableArray();
         }
@@ -64,7 +65,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
         private static void RegisterSuppressionFixes(
             CodeFixContext context,
             ImmutableArray<CodeFix> suppressionFixes
-        ) {
+        )
+        {
             if (!suppressionFixes.IsDefault)
             {
                 foreach (var suppressionFix in suppressionFixes)

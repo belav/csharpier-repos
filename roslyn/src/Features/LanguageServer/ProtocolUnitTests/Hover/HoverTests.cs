@@ -211,7 +211,8 @@ class Program
             TestLspServer testLspServer,
             LSP.Location caret,
             ProjectId projectContext = null
-        ) {
+        )
+        {
             return (LSP.VSHover)await testLspServer.ExecuteRequestAsync<
                 LSP.TextDocumentPositionParams,
                 LSP.Hover
@@ -249,7 +250,8 @@ class Program
         private void GetClassifiedTextElements(
             ContainerElement container,
             ArrayBuilder<ClassifiedTextElement> classifiedTextElements
-        ) {
+        )
+        {
             foreach (var element in container.Elements)
             {
                 if (element is ClassifiedTextElement classifiedTextElement)

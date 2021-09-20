@@ -31,7 +31,8 @@ namespace System.Web.WebPages
         internal ValidationHelper(
             HttpContextBase httpContext,
             ModelStateDictionary modelStateDictionary
-        ) {
+        )
+        {
             Debug.Assert(httpContext != null);
             Debug.Assert(modelStateDictionary != null);
 
@@ -195,7 +196,8 @@ namespace System.Web.WebPages
                     _httpContext.Request.HttpMethod,
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 string cssClass = IsValid(field)
                     ? ValidationHelper.ValidCssClass
                     : ValidationHelper.InvalidCssClass;
@@ -223,7 +225,8 @@ namespace System.Web.WebPages
 
         private IEnumerable<ValidationResult> ValidateFieldsAndUpdateModelState(
             IEnumerable<string> fields
-        ) {
+        )
+        {
             var validationContext = new ValidationContext(
                 _httpContext,
                 serviceProvider: null,
@@ -302,7 +305,8 @@ namespace System.Web.WebPages
 
         internal static HtmlString GenerateHtmlFromClientValidationRules(
             IEnumerable<ModelClientValidationRule> clientRules
-        ) {
+        )
+        {
             if (!clientRules.Any())
             {
                 return null;

@@ -309,7 +309,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             string template,
             IHostMetadata hostMetadata,
             params object[] more
-        ) {
+        )
+        {
             var metadata = new List<object>();
             if (hostMetadata != null)
             {

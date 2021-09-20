@@ -41,7 +41,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
             DocumentOnTypeFormattingParams request,
             RequestContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var edits = new ArrayBuilder<TextEdit>();
             if (string.IsNullOrEmpty(request.Character))
             {

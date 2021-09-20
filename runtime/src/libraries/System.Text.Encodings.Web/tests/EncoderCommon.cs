@@ -12,7 +12,8 @@ namespace System.Text.Encodings.Web.Tests
         public static int GetCapacityOfOutputStringBuilder(
             int numCharsToEncode,
             int worstCaseOutputCharsPerInputChar
-        ) {
+        )
+        {
             // We treat 32KB byte size (16k chars) as a soft upper boundary for the length of any StringBuilder
             // that we allocate. We'll try to avoid going above this boundary if we can avoid it so that we
             // don't allocate objects on the LOH.

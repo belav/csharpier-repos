@@ -73,7 +73,8 @@ namespace System.DirectoryServices.AccountManagement
             ContextType contextType,
             string serverName,
             ServerProperties serverProperties
-        ) {
+        )
+        {
             _fastConcurrentSupported = !(serverProperties.OsVersion == DomainControllerMode.Win2k);
 
             if (contextType == ContextType.Machine && serverName == null)
@@ -245,7 +246,8 @@ namespace System.DirectoryServices.AccountManagement
             LdapConnection current,
             NetworkCredential creds,
             ContextOptions contextOptions
-        ) {
+        )
+        {
             current.AuthType = (
                 (ContextOptions.SimpleBind & contextOptions) > 0
                     ? AuthType.Basic
@@ -280,7 +282,8 @@ namespace System.DirectoryServices.AccountManagement
             if (
                 _contextType == ContextType.Domain
                 || _contextType == ContextType.ApplicationDirectory
-            ) {
+            )
+            {
                 try
                 {
                     if (
@@ -289,7 +292,8 @@ namespace System.DirectoryServices.AccountManagement
                             _fastConcurrentSupported
                             || _contextType == ContextType.ApplicationDirectory
                         )
-                    ) {
+                    )
+                    {
                         try
                         {
                             BindLdap(networkCredential, defaultContextOptionsSimple);
@@ -354,7 +358,8 @@ namespace System.DirectoryServices.AccountManagement
             if (
                 _contextType == ContextType.Domain
                 || _contextType == ContextType.ApplicationDirectory
-            ) {
+            )
+            {
                 try
                 {
                     NetworkCredential networkCredential = new NetworkCredential(userName, password);
@@ -426,14 +431,15 @@ namespace System.DirectoryServices.AccountManagement
             string name,
             string userName,
             string password
-        ) : this(
-            contextType,
-            name,
-            null,
-            PrincipalContext.GetDefaultOptionForStore(contextType),
-            userName,
-            password
-        ) { }
+        )
+            : this(
+                contextType,
+                name,
+                null,
+                PrincipalContext.GetDefaultOptionForStore(contextType),
+                userName,
+                password
+            ) { }
 
         public PrincipalContext(
             ContextType contextType,
@@ -441,14 +447,15 @@ namespace System.DirectoryServices.AccountManagement
             string container,
             string userName,
             string password
-        ) : this(
-            contextType,
-            name,
-            container,
-            PrincipalContext.GetDefaultOptionForStore(contextType),
-            userName,
-            password
-        ) { }
+        )
+            : this(
+                contextType,
+                name,
+                container,
+                PrincipalContext.GetDefaultOptionForStore(contextType),
+                userName,
+                password
+            ) { }
 
         public PrincipalContext(
             ContextType contextType,
@@ -457,7 +464,8 @@ namespace System.DirectoryServices.AccountManagement
             ContextOptions options,
             string userName,
             string password
-        ) {
+        )
+        {
             GlobalDebug.WriteLineIf(GlobalDebug.Info, "PrincipalContext", "Entering ctor");
 
             if ((userName == null && password != null) || (userName != null && password == null))
@@ -501,7 +509,8 @@ namespace System.DirectoryServices.AccountManagement
                         )
                     )
                 )
-            ) {
+            )
+            {
                 throw new ArgumentException(SR.InvalidContextOptionsForAD);
             }
 
@@ -512,7 +521,8 @@ namespace System.DirectoryServices.AccountManagement
 #if TESTHOOK
                 && (contextType != ContextType.Test)
 #endif
-            ) {
+            )
+            {
                 throw new InvalidEnumArgumentException(
                     nameof(contextType),
                     (int)contextType,
@@ -845,7 +855,8 @@ namespace System.DirectoryServices.AccountManagement
             if (
                 _contextType == ContextType.ApplicationDirectory
                 || _contextType == ContextType.Domain
-            ) {
+            )
+            {
                 ReadServerConfig(_name, ref _serverProperties);
 
                 if (_serverProperties.contextType != _contextType)
@@ -1410,7 +1421,8 @@ namespace System.DirectoryServices.AccountManagement
                     int i = 0;
                     i < searchResponse.Entries[0].Attributes["supportedCapabilities"].Count;
                     i++
-                ) {
+                )
+                {
                     properties.SupportCapabilities[i] = (string)searchResponse.Entries[
                         0
                     ].Attributes["supportedCapabilities"][i];
@@ -1569,7 +1581,8 @@ namespace System.DirectoryServices.AccountManagement
             if (
                 t == typeof(System.DirectoryServices.AccountManagement.UserPrincipal)
                 || t.IsSubclassOf(typeof(System.DirectoryServices.AccountManagement.UserPrincipal))
-            ) {
+            )
+            {
                 return _userCtx;
             }
             else if (
@@ -1577,7 +1590,8 @@ namespace System.DirectoryServices.AccountManagement
                 || t.IsSubclassOf(
                     typeof(System.DirectoryServices.AccountManagement.ComputerPrincipal)
                 )
-            ) {
+            )
+            {
                 return _computerCtx;
             }
             else if (
@@ -1585,7 +1599,8 @@ namespace System.DirectoryServices.AccountManagement
                 || t.IsSubclassOf(
                     typeof(System.DirectoryServices.AccountManagement.AuthenticablePrincipal)
                 )
-            ) {
+            )
+            {
                 return _userCtx;
             }
             else

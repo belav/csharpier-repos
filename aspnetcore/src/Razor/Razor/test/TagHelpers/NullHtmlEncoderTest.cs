@@ -79,7 +79,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             int startIndex,
             int characterCount,
             string expectedResult
-        ) {
+        )
+        {
             // Arrange
             var encoder = NullHtmlEncoder.Default;
 
@@ -116,7 +117,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             int startIndex,
             int characterCount,
             string expectedResult
-        ) {
+        )
+        {
             // Arrange
             var encoder = NullHtmlEncoder.Default;
             var chars = value.ToCharArray();

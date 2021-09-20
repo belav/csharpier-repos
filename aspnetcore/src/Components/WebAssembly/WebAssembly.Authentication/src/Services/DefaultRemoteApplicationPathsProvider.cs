@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
 
         public DefaultRemoteApplicationPathsProvider(
             IOptionsSnapshot<RemoteAuthenticationOptions<TProviderOptions>> options
-        ) {
+        )
+        {
             _options = options;
         }
 

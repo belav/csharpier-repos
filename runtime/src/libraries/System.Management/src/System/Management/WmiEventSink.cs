@@ -33,7 +33,8 @@ namespace System.Management
             ManagementScope scope,
             string path,
             string className
-        ) {
+        )
+        {
             if (MTAHelper.IsNoContextMTA())
                 return new WmiEventSink(watcher, context, scope, path, className);
 
@@ -71,7 +72,8 @@ namespace System.Management
             ManagementScope scope,
             string path,
             string className
-        ) {
+        )
+        {
             try
             {
                 this.context = context;
@@ -99,7 +101,8 @@ namespace System.Management
                                 StringComparison.OrdinalIgnoreCase
                             )
                         )
-                    ) {
+                    )
+                    {
                         this.isLocal = true;
                     }
                 }
@@ -126,7 +129,8 @@ namespace System.Management
                                     StringComparison.OrdinalIgnoreCase
                                 )
                             )
-                        ) {
+                        )
+                        {
                             this.isLocal = true;
                         }
                     }
@@ -291,7 +295,8 @@ namespace System.Management
             object context,
             ManagementScope scope,
             ManagementObject managementObject
-        ) {
+        )
+        {
             if (MTAHelper.IsNoContextMTA())
                 return new WmiGetEventSink(watcher, context, scope, managementObject);
 

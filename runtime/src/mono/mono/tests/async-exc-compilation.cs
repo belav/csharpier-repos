@@ -3365,7 +3365,8 @@ class MyRealProxy : RealProxy, IRemotingTypeInfo
 
     public override System.Runtime.Remoting.Messaging.IMessage Invoke(
         System.Runtime.Remoting.Messaging.IMessage msg
-    ) {
+    )
+    {
         IMethodCallMessage call = (IMethodCallMessage)msg;
 
         return new ReturnMessage(mbro.CallMe((int)call.Args[0]), null, 0, null, call);

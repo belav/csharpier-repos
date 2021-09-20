@@ -68,7 +68,8 @@ namespace Microsoft.AspNetCore.MiddlewareAnalysis
             if (
                 Properties.TryGetValue(NextMiddlewareName, out var middlewareNameObj)
                 && middlewareNameObj != null
-            ) {
+            )
+            {
                 middlewareName = middlewareNameObj.ToString();
                 Properties.Remove(NextMiddlewareName);
             }

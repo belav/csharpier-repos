@@ -244,7 +244,8 @@ namespace System.Web.Http.ModelBinding
 
         private static async Task<HttpResponseMessage> SubmitRequestAsync(
             HttpRequestMessage request
-        ) {
+        )
+        {
             HttpConfiguration config = new HttpConfiguration();
             config.MapHttpAttributeRoutes();
             HttpServer server = new HttpServer(config);

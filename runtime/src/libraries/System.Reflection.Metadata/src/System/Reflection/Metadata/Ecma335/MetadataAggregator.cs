@@ -48,7 +48,8 @@ namespace System.Reflection.Metadata.Ecma335
             IReadOnlyList<int>? baseTableRowCounts,
             IReadOnlyList<int>? baseHeapSizes,
             IReadOnlyList<MetadataReader>? deltaReaders
-        ) {
+        )
+        {
             if (baseTableRowCounts == null)
             {
                 if (baseReader == null)
@@ -101,7 +102,8 @@ namespace System.Reflection.Metadata.Ecma335
                 if (
                     deltaReaders[i].GetTableRowCount(TableIndex.EncMap) == 0
                     || !deltaReaders[i].IsMinimalDelta
-                ) {
+                )
+                {
                     throw new ArgumentException(SR.ReadersMustBeDeltaReaders, nameof(deltaReaders));
                 }
             }
@@ -121,7 +123,8 @@ namespace System.Reflection.Metadata.Ecma335
             MetadataReader baseReader,
             out IReadOnlyList<int> baseTableRowCounts,
             out IReadOnlyList<int> baseHeapSizes
-        ) {
+        )
+        {
             int[] rowCounts = new int[MetadataTokens.TableCount];
             int[] heapSizes = new int[MetadataTokens.HeapCount];
 
@@ -142,7 +145,8 @@ namespace System.Reflection.Metadata.Ecma335
         private static ImmutableArray<ImmutableArray<int>> CalculateHeapSizes(
             IReadOnlyList<int> baseSizes,
             IReadOnlyList<MetadataReader> deltaReaders
-        ) {
+        )
+        {
             // GUID heap index is multiple of sizeof(Guid) == 16
             const int guidSize = 16;
             int generationCount = 1 + deltaReaders.Count;
@@ -178,7 +182,8 @@ namespace System.Reflection.Metadata.Ecma335
         private static ImmutableArray<ImmutableArray<RowCounts>> CalculateRowCounts(
             IReadOnlyList<int> baseRowCounts,
             IReadOnlyList<MetadataReader> deltaReaders
-        ) {
+        )
+        {
             // TODO: optimize - we don't need to allocate all these arrays
             var rowCounts = GetBaseRowCounts(baseRowCounts, generations: 1 + deltaReaders.Count);
 
@@ -209,7 +214,8 @@ namespace System.Reflection.Metadata.Ecma335
         internal static RowCounts[][] GetBaseRowCounts(
             IReadOnlyList<int> baseRowCounts,
             int generations
-        ) {
+        )
+        {
             var rowCounts = new RowCounts[MetadataTokens.TableCount][];
 
             for (int t = 0; t < rowCounts.Length; t++)
@@ -226,7 +232,8 @@ namespace System.Reflection.Metadata.Ecma335
             RowCounts[][] rowCounts,
             int generation,
             ref EnCMapTableReader encMapTable
-        ) {
+        )
+        {
             foreach (var tableRowCounts in rowCounts)
             {
                 tableRowCounts[generation].AggregateInserts =

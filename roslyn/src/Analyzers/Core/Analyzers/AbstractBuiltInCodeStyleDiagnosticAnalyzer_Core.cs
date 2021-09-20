@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
             LocalizableString? messageFormat,
             bool isUnnecessary,
             bool configurable
-        ) {
+        )
+        {
             DescriptorId = descriptorId;
             _localizableTitle = title;
             _localizableMessageFormat = messageFormat ?? title;
@@ -46,7 +47,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         /// </summary>
         protected AbstractBuiltInCodeStyleDiagnosticAnalyzer(
             ImmutableArray<DiagnosticDescriptor> supportedDiagnostics
-        ) {
+        )
+        {
             SupportedDiagnostics = supportedDiagnostics;
 
             Descriptor = SupportedDiagnostics[0];

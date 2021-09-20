@@ -28,7 +28,8 @@ namespace System
                         fileTime - cacheValue.OSFileTimeTicksAtStartOfValidityWindow;
                     if (
                         ticksSinceStartOfCacheValidityWindow < LeapSecondCache.ValidityPeriodInTicks
-                    ) {
+                    )
+                    {
                         return new DateTime(
                             dateData: cacheValue.DotnetDateDataAtStartOfValidityWindow
                                 + ticksSinceStartOfCacheValidityWindow
@@ -51,7 +52,8 @@ namespace System
             int hour,
             int minute,
             DateTimeKind kind
-        ) {
+        )
+        {
             Interop.Kernel32.SYSTEMTIME time;
             time.Year = (ushort)year;
             time.Month = (ushort)month;
@@ -124,7 +126,8 @@ namespace System
         private static DateTime CreateDateTimeFromSystemTime(
             in Interop.Kernel32.SYSTEMTIME time,
             ulong hundredNanoSecond
-        ) {
+        )
+        {
             uint year = time.Year;
             uint[] days = IsLeapYear((int)year) ? s_daysToMonth366 : s_daysToMonth365;
             int month = time.Month - 1;
@@ -175,7 +178,8 @@ namespace System
                     "GetSystemTimePreciseAsFileTime",
                     out IntPtr pfnGetSystemTimePrecise
                 )
-            ) {
+            )
+            {
                 // GetSystemTimePreciseAsFileTime exists and we'd like to use it.  However, on
                 // misconfigured systems, it's possible for the "precise" time to be inaccurate:
                 //     https://github.com/dotnet/runtime/issues/9014
@@ -203,7 +207,8 @@ namespace System
                     if (
                         Math.Abs(preciseSystemTimeResult - systemTimeResult)
                         <= 100 * TicksPerMillisecond
-                    ) {
+                    )
+                    {
                         pfnGetSystemTime = pfnGetSystemTimePrecise; // use the precise version
                         break;
                     }
@@ -249,7 +254,8 @@ namespace System
             if (
                 Interop.Kernel32.FileTimeToSystemTime(&fileTimeNow, &systemTimeNow)
                 == Interop.BOOL.FALSE
-            ) {
+            )
+            {
                 return LowGranularityNonCachedFallback();
             }
 
@@ -273,7 +279,8 @@ namespace System
                     &fileTimeAtEndOfValidityPeriod,
                     &systemTimeAtEndOfValidityPeriod
                 ) == Interop.BOOL.FALSE
-            ) {
+            )
+            {
                 return LowGranularityNonCachedFallback();
             }
 
@@ -313,7 +320,8 @@ namespace System
                         &systemTimeAtBeginningOfDay,
                         &fileTimeAtBeginningOfDay
                     ) == Interop.BOOL.FALSE
-                ) {
+                )
+                {
                     return LowGranularityNonCachedFallback();
                 }
 
@@ -324,7 +332,8 @@ namespace System
                 if (
                     fileTimeNow - fileTimeAtStartOfValidityWindow
                     >= LeapSecondCache.ValidityPeriodInTicks
-                ) {
+                )
+                {
                     // If we're inside this block, then we slid the validity window back so far that the current time is no
                     // longer within the window. This can only occur if the current time is 23:59:59.xxx and the next second is a
                     // positive leap second (23:59:60.xxx). For example, if the current time is 23:59:59.123, assuming a

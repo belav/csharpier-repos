@@ -110,7 +110,8 @@ namespace System.Collections.Tests
             IndexOfMethod indexOfMethod,
             int count,
             bool frontToBackOrder
-        ) {
+        )
+        {
             _ = frontToBackOrder;
             List<T> list = GenericListFactory(count);
             List<T> expectedList = list.ToList();
@@ -131,7 +132,8 @@ namespace System.Collections.Tests
             IndexOfMethod indexOfMethod,
             int count,
             bool frontToBackOrder
-        ) {
+        )
+        {
             _ = frontToBackOrder;
             List<T> list = GenericListFactory(count);
             IEnumerable<T> nonexistentValues = CreateEnumerable(
@@ -158,7 +160,8 @@ namespace System.Collections.Tests
             IndexOfMethod indexOfMethod,
             int count,
             bool frontToBackOrder
-        ) {
+        )
+        {
             _ = frontToBackOrder;
             T defaultValue = default;
             List<T> list = GenericListFactory(count);
@@ -175,7 +178,8 @@ namespace System.Collections.Tests
             IndexOfMethod indexOfMethod,
             int count,
             bool frontToBackOrder
-        ) {
+        )
+        {
             List<T> list = GenericListFactory(count);
             List<T> withoutDuplicates = list.ToList();
             list.AddRange(list);

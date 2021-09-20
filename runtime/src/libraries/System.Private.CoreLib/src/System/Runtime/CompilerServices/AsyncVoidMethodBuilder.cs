@@ -57,8 +57,9 @@ namespace System.Runtime.CompilerServices
         public void AwaitOnCompleted<TAwaiter, TStateMachine>(
             ref TAwaiter awaiter,
             ref TStateMachine stateMachine
-        ) where TAwaiter : INotifyCompletion
-          where TStateMachine : IAsyncStateMachine =>
+        )
+            where TAwaiter : INotifyCompletion
+            where TStateMachine : IAsyncStateMachine =>
             _builder.AwaitOnCompleted(ref awaiter, ref stateMachine);
 
         /// <summary>
@@ -71,8 +72,9 @@ namespace System.Runtime.CompilerServices
         public void AwaitUnsafeOnCompleted<TAwaiter, TStateMachine>(
             ref TAwaiter awaiter,
             ref TStateMachine stateMachine
-        ) where TAwaiter : ICriticalNotifyCompletion
-          where TStateMachine : IAsyncStateMachine =>
+        )
+            where TAwaiter : ICriticalNotifyCompletion
+            where TStateMachine : IAsyncStateMachine =>
             _builder.AwaitUnsafeOnCompleted(ref awaiter, ref stateMachine);
 
         /// <summary>Completes the method builder successfully.</summary>

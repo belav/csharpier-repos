@@ -35,7 +35,8 @@ namespace System.Collections.Immutable.Tests
         internal static void CollectionAssertAreEquivalent<T>(
             ICollection<T> expected,
             ICollection<T> actual
-        ) {
+        )
+        {
             Assert.Equal(expected.Count, actual.Count);
             foreach (var value in expected)
             {
@@ -77,7 +78,8 @@ namespace System.Collections.Immutable.Tests
         protected static void ManuallyEnumerateTest<T>(
             IList<T> expectedResults,
             IEnumerator<T> enumerator
-        ) {
+        )
+        {
             T[] manualArray = new T[expectedResults.Count];
             int i = 0;
 

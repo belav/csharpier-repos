@@ -37,7 +37,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IApplicationBuilder UseDirectoryBrowser(
             this IApplicationBuilder app,
             string requestPath
-        ) {
+        )
+        {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));
@@ -57,7 +58,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IApplicationBuilder UseDirectoryBrowser(
             this IApplicationBuilder app,
             DirectoryBrowserOptions options
-        ) {
+        )
+        {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));

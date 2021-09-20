@@ -28,9 +28,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public WorkspacePullDiagnosticHandler(
-            IXamlPullDiagnosticService xamlPullDiagnosticService
-        ) : base(xamlPullDiagnosticService) { }
+        public WorkspacePullDiagnosticHandler(IXamlPullDiagnosticService xamlPullDiagnosticService)
+            : base(xamlPullDiagnosticService) { }
 
         public override string Method => MSLSPMethods.WorkspacePullDiagnosticName;
 

@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.VisualStudio
             ProjectId projectId,
             string errorCodePrefix,
             IServiceProvider serviceProvider
-        ) {
+        )
+        {
             ThreadHelper.ThrowIfNotOnUIThread();
             var workspace =
                 (VisualStudioWorkspaceImpl)serviceProvider.GetMefService<VisualStudioWorkspace>();

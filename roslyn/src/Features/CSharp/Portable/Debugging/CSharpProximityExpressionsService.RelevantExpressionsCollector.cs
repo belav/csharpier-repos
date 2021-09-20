@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
 
             public override void VisitLocalDeclarationStatement(
                 LocalDeclarationStatementSyntax node
-            ) {
+            )
+            {
                 // Here, we collect expression expressions from any/all initialization expressions
                 AddVariableExpressions(node.Declaration.Variables, _expressions);
             }
@@ -94,7 +95,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
             private void AddVariableExpressions(
                 SeparatedSyntaxList<VariableDeclaratorSyntax> declarators,
                 IList<string> expressions
-            ) {
+            )
+            {
                 foreach (var declarator in declarators)
                 {
                     if (_includeDeclarations)
@@ -112,7 +114,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
             private void AddVariableExpressions(
                 ExpressionSyntax component,
                 IList<string> expressions
-            ) {
+            )
+            {
                 if (!_includeDeclarations)
                     return;
 
@@ -139,7 +142,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
             private void AddVariableExpressions(
                 VariableDesignationSyntax component,
                 IList<string> expressions
-            ) {
+            )
+            {
                 if (!_includeDeclarations)
                     return;
 

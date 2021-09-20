@@ -44,7 +44,8 @@ namespace System.Net.Primitives.Functional.Tests
                                 "Private.InternalDiagnostics.System.Net.Primitives",
                                 EventLevel.Verbose
                             )
-                        ) {
+                        )
+                        {
                             var events = new ConcurrentQueue<EventWrittenEventArgs>();
                             listener.RunWithCallback(
                                 events.Enqueue,

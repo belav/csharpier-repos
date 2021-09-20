@@ -27,7 +27,8 @@ internal static partial class Interop
             ref OBJECT_ATTRIBUTES Attributes,
             int AccessMask,
             out SafeLsaPolicyHandle PolicyHandle
-        ) {
+        )
+        {
             UNICODE_STRING systemNameUnicode = default;
             if (SystemName != null)
             {

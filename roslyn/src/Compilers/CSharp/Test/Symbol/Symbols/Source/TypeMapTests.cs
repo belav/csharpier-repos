@@ -92,7 +92,8 @@ public class Top : A<E> { // base is A<E>
         private static NamedTypeSymbol DeepConstruct(
             NamedTypeSymbol type,
             ImmutableArray<TypeSymbol> typeArguments
-        ) {
+        )
+        {
             Assert.True(type.IsDefinition);
             var allTypeParameters = ArrayBuilder<TypeParameterSymbol>.GetInstance();
             type.GetAllTypeParameters(allTypeParameters);

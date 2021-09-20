@@ -26,7 +26,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Analyzers
                 AnalyzerSetting result,
                 string keyName,
                 out object? content
-            ) {
+            )
+            {
                 content = keyName switch
                 {
                     ColumnDefinitions.Analyzer.Enabled => result.IsEnabled,

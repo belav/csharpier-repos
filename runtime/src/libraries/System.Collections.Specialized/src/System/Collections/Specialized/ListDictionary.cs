@@ -79,7 +79,8 @@ namespace System.Collections.Specialized
                     object oldKey = node.key;
                     if (
                         (comparer == null) ? oldKey.Equals(key) : comparer.Compare(oldKey, key) == 0
-                    ) {
+                    )
+                    {
                         break;
                     }
                     last = node;

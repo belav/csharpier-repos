@@ -71,8 +71,9 @@ namespace System.Text.Json.Serialization.Metadata
             JsonTypeInfo keyInfo,
             JsonTypeInfo valueInfo,
             JsonNumberHandling numberHandling
-        ) where TCollection : Dictionary<TKey, TValue>
-          where TKey : notnull =>
+        )
+            where TCollection : Dictionary<TKey, TValue>
+            where TKey : notnull =>
             new JsonTypeInfoInternal<TCollection>(
                 options,
                 createObjectFunc,

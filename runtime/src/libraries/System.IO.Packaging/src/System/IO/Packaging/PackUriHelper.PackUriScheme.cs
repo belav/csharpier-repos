@@ -213,7 +213,8 @@ namespace System.IO.Packaging
                 if (
                     firstPackageUri.Scheme == PackUriHelper.UriSchemePack
                     && secondPackageUri.Scheme == PackUriHelper.UriSchemePack
-                ) {
+                )
+                {
                     compareResult = ComparePackUri(firstPackageUri, secondPackageUri);
                 }
                 else
@@ -245,7 +246,8 @@ namespace System.IO.Packaging
             Uri packUri,
             out Uri packageUri,
             out Uri? partUri
-        ) {
+        )
+        {
             //Validate if its not null and is an absolute Uri, has pack:// Scheme.
             packUri = ValidatePackUri(packUri);
             packageUri = GetPackageUriComponent(packUri);

@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.Host
             Stream stream,
             Encoding? defaultEncoding,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             return EncodedStringText.Create(stream, defaultEncoding);
         }
@@ -33,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Host
             TextReader reader,
             Encoding? encoding,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             var textReaderWithLength = reader as TextReaderWithLength;

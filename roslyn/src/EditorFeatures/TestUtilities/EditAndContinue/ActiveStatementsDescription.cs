@@ -122,7 +122,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             string contentGroupName,
             string markedSource,
             int offset
-        ) {
+        )
+        {
             foreach (var match in regex.Matches(markedSource).ToEnumerable())
             {
                 var markedSyntax = match.Groups[contentGroupName];
@@ -142,7 +143,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                         markedSyntax.Value,
                         absoluteOffset
                     )
-                ) {
+                )
+                {
                     yield return nestedSpan;
                 }
             }
@@ -157,7 +159,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                     markedSource,
                     offset: 0
                 )
-            ) {
+            )
+            {
                 foreach (var id in ids)
                 {
                     yield return (span, id);
@@ -218,7 +221,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
         internal static ImmutableArray<TextSpan>[] GetExceptionRegions(
             string src,
             int activeStatementCount
-        ) {
+        )
+        {
             var matches = ExceptionRegionPattern.Matches(src);
             var result = new List<TextSpan>[activeStatementCount];
 

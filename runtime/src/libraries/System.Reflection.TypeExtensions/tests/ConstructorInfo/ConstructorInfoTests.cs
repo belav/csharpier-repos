@@ -112,7 +112,8 @@ namespace System.Reflection.Tests
             Type[] constructorTypeParameters,
             object[] parameters,
             Type exceptionType
-        ) {
+        )
+        {
             ConstructorInfo constructor = TypeExtensions.GetConstructor(
                 constructorParent,
                 constructorTypeParameters

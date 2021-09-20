@@ -17,10 +17,11 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration.ConfigureSeverity
             public TopLevelConfigureSeverityCodeAction(
                 Diagnostic diagnostic,
                 ImmutableArray<CodeAction> nestedActions
-            ) : base(
-                nestedActions,
-                string.Format(FeaturesResources.Configure_0_severity, diagnostic.Id)
-            ) { }
+            )
+                : base(
+                    nestedActions,
+                    string.Format(FeaturesResources.Configure_0_severity, diagnostic.Id)
+                ) { }
         }
     }
 }

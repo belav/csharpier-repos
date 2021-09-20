@@ -274,7 +274,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             bool ignoreCase,
             SolutionKind workspaceKind,
             string[] expectedResults
-        ) {
+        )
+        {
             using var workspace = CreateWorkspaceWithProject(workspaceKind, out var project);
             var declarations = await SymbolFinder.FindDeclarationsAsync(
                     project,
@@ -685,7 +686,8 @@ Inner i;
             bool ignoreCase,
             SolutionKind workspaceKind,
             string[] expectedResults
-        ) {
+        )
+        {
             using var workspace = CreateWorkspaceWithProject(workspaceKind, out var project);
             var declarations = await SymbolFinder.FindSourceDeclarationsAsync(
                     project,
@@ -1005,7 +1007,8 @@ Inner i;
             bool ignoreCase,
             SolutionKind workspaceKind,
             string[] expectedResults
-        ) {
+        )
+        {
             using var workspace = CreateWorkspaceWithSolution(workspaceKind, out var solution);
             var declarations = await SymbolFinder.FindSourceDeclarationsAsync(
                     solution,
@@ -1114,7 +1117,8 @@ Inner i;
         public async Task FindSourceDeclarationsAsync_Project_Func_Test(
             SolutionKind workspaceKind,
             string[] expectedResults
-        ) {
+        )
+        {
             using var workspace = CreateWorkspaceWithProject(workspaceKind, out var project);
             var declarations = await SymbolFinder.FindSourceDeclarationsAsync(
                     project,
@@ -1267,7 +1271,8 @@ Inner i;
         public async Task FindSourceDeclarationsAsync_Solution_Func_Test(
             SolutionKind workspaceKind,
             string[] expectedResult
-        ) {
+        )
+        {
             using var workspace = CreateWorkspaceWithSolution(workspaceKind, out var solution);
             var declarations = await SymbolFinder.FindSourceDeclarationsAsync(
                     solution,
@@ -1396,7 +1401,8 @@ Inner i;
         public async Task FindSourceDeclarationsWithPatternAsync_Project_Test(
             SolutionKind workspaceKind,
             string[] expectedResults
-        ) {
+        )
+        {
             using var workspace = CreateWorkspaceWithProject(workspaceKind, out var project);
             var declarations = await SymbolFinder.FindSourceDeclarationsWithPatternAsync(
                     project,
@@ -1429,7 +1435,8 @@ Inner i;
             SolutionKind workspaceKind,
             string pattern,
             string[] expectedResults
-        ) {
+        )
+        {
             using var workspace = CreateWorkspaceWithProject(workspaceKind, out var project);
             var declarations = await SymbolFinder.FindSourceDeclarationsWithPatternAsync(
                     project,
@@ -1558,7 +1565,8 @@ Inner i;
         public async Task FindSourceDeclarationsWithPatternAsync_Solution_Test(
             SolutionKind workspaceKind,
             string[] expectedResult
-        ) {
+        )
+        {
             using var workspace = CreateWorkspaceWithSolution(workspaceKind, out var solution);
             var declarations = await SymbolFinder.FindSourceDeclarationsWithPatternAsync(
                     solution,
@@ -1591,7 +1599,8 @@ Inner i;
             SolutionKind workspaceKind,
             string pattern,
             string[] expectedResults
-        ) {
+        )
+        {
             using var workspace = CreateWorkspaceWithSolution(workspaceKind, out var solution);
             var declarations = await SymbolFinder.FindSourceDeclarationsWithPatternAsync(
                     solution,

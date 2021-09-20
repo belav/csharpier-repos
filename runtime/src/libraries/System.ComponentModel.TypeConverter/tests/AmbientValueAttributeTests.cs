@@ -146,7 +146,8 @@ namespace System.ComponentModel.Tests
             AmbientValueAttribute attribute,
             object other,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, attribute.Equals(other));
         }
 

@@ -41,7 +41,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         [MemberData(nameof(ProcessAsync_GeneratesExpectedOutput_WithNoErrorsData))]
         public async Task ProcessAsync_GeneratesExpectedOutput_WithNoErrors(
             ModelStateDictionary modelState
-        ) {
+        )
+        {
             // Arrange
             var expectedTagName = "not-div";
             var metadataProvider = new TestModelMetadataProvider();
@@ -107,7 +108,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         [MemberData(nameof(ProcessAsync_GeneratesExpectedOutput_WithNoErrorsData))]
         public async Task ProcessAsync_SuppressesOutput_IfClientSideValidationDisabled_WithNoErrorsData(
             ModelStateDictionary modelStateDictionary
-        ) {
+        )
+        {
             // Arrange
             var metadataProvider = new TestModelMetadataProvider();
             var htmlGenerator = new TestableHtmlGenerator(metadataProvider);
@@ -185,7 +187,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         public async Task ProcessAsync_SuppressesOutput_IfModelOnly_WithNoModelError(
             string prefix,
             ModelStateDictionary modelStateDictionary
-        ) {
+        )
+        {
             // Arrange
             var metadataProvider = new TestModelMetadataProvider();
             var htmlGenerator = new TestableHtmlGenerator(metadataProvider);
@@ -230,7 +233,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         [InlineData(ValidationSummary.ModelOnly)]
         public async Task ProcessAsync_GeneratesExpectedOutput_WithModelError(
             ValidationSummary validationSummary
-        ) {
+        )
+        {
             // Arrange
             var expectedError = "I am an error.";
             var expectedTagName = "not-div";
@@ -383,7 +387,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         public async Task ProcessAsync_CallsIntoGenerateValidationSummaryWithExpectedParameters(
             ValidationSummary validationSummary,
             bool expectedExcludePropertyErrors
-        ) {
+        )
+        {
             // Arrange
             var expectedViewContext = CreateViewContext();
 
@@ -567,7 +572,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         [InlineData(ValidationSummary.ModelOnly)]
         public async Task ProcessAsync_GeneratesValidationSummaryWhenNotNone(
             ValidationSummary validationSummary
-        ) {
+        )
+        {
             // Arrange
             var tagBuilder = new TagBuilder("span2");
             tagBuilder.InnerHtml.SetHtmlContent("New HTML");
@@ -632,7 +638,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         [ReplaceCulture]
         public void ValidationSummaryProperty_ThrowsWhenSetToInvalidValidationSummaryValue(
             ValidationSummary validationSummary
-        ) {
+        )
+        {
             // Arrange
             var generator = new TestableHtmlGenerator(new EmptyModelMetadataProvider());
 

@@ -108,7 +108,8 @@ namespace Microsoft.Win32.SystemEventsTests
                 if (
                     timersSignaled.TryAdd(args.TimerId, true)
                     && Interlocked.Increment(ref numSignaled) == NumConcurrentTimers
-                ) {
+                )
+                {
                     elapsed.Set();
                 }
             };

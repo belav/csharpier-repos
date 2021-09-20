@@ -31,7 +31,8 @@ namespace System.Web.Helpers.Test
             public override DynamicMetaObject FallbackGetMember(
                 DynamicMetaObject target,
                 DynamicMetaObject errorSuggestion
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }

@@ -40,7 +40,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         public override async Task FromSqlRaw_queryable_simple_columns_out_of_order_and_extra_columns(
             bool async
-        ) {
+        )
+        {
             await base.FromSqlRaw_queryable_simple_columns_out_of_order_and_extra_columns(async);
 
             AssertSql(
@@ -67,7 +68,8 @@ WHERE [c].[ContactName] LIKE N'%z%'";
 
         public override async Task FromSqlRaw_queryable_composed_after_removing_whitespaces(
             bool async
-        ) {
+        )
+        {
             await base.FromSqlRaw_queryable_composed_after_removing_whitespaces(async);
 
             AssertSql(
@@ -99,7 +101,8 @@ WHERE [c].[ContactName] LIKE N'%z%'"
 
         public override async Task FromSqlRaw_queryable_composed_compiled_with_DbParameter(
             bool async
-        ) {
+        )
+        {
             await base.FromSqlRaw_queryable_composed_compiled_with_DbParameter(async);
 
             AssertSql(
@@ -115,7 +118,8 @@ WHERE [c].[ContactName] LIKE N'%z%'"
 
         public override async Task FromSqlRaw_queryable_composed_compiled_with_nameless_DbParameter(
             bool async
-        ) {
+        )
+        {
             await base.FromSqlRaw_queryable_composed_compiled_with_nameless_DbParameter(async);
 
             AssertSql(
@@ -192,7 +196,8 @@ WHERE [c].[CustomerID] = [o].[CustomerID]"
 
         public override async Task FromSqlRaw_queryable_multiple_composed_with_closure_parameters(
             bool async
-        ) {
+        )
+        {
             await base.FromSqlRaw_queryable_multiple_composed_with_closure_parameters(async);
 
             AssertSql(
@@ -212,7 +217,8 @@ WHERE [c].[CustomerID] = [o].[CustomerID]"
 
         public override async Task FromSqlRaw_queryable_multiple_composed_with_parameters_and_closure_parameters(
             bool async
-        ) {
+        )
+        {
             await base.FromSqlRaw_queryable_multiple_composed_with_parameters_and_closure_parameters(
                 async
             );
@@ -297,7 +303,8 @@ SELECT * FROM ""Customers"" WHERE ""City"" = @p0 AND ""ContactTitle"" = @p1"
 
         public override async Task FromSqlInterpolated_queryable_with_parameters_interpolated(
             bool async
-        ) {
+        )
+        {
             await base.FromSqlInterpolated_queryable_with_parameters_interpolated(async);
 
             AssertSql(
@@ -310,7 +317,8 @@ SELECT * FROM ""Customers"" WHERE ""City"" = @p0 AND ""ContactTitle"" = @p1"
 
         public override async Task FromSqlInterpolated_queryable_with_parameters_inline_interpolated(
             bool async
-        ) {
+        )
+        {
             await base.FromSqlInterpolated_queryable_with_parameters_inline_interpolated(async);
 
             AssertSql(
@@ -323,7 +331,8 @@ SELECT * FROM ""Customers"" WHERE ""City"" = @p0 AND ""ContactTitle"" = @p1"
 
         public override async Task FromSqlInterpolated_queryable_multiple_composed_with_parameters_and_closure_parameters_interpolated(
             bool async
-        ) {
+        )
+        {
             await base.FromSqlInterpolated_queryable_multiple_composed_with_parameters_and_closure_parameters_interpolated(
                 async
             );
@@ -370,7 +379,8 @@ SELECT * FROM ""Employees"" WHERE ""ReportsTo"" = @p0 OR (""ReportsTo"" IS NULL 
 
         public override async Task<string> FromSqlRaw_queryable_with_parameters_and_closure(
             bool async
-        ) {
+        )
+        {
             var queryString = await base.FromSqlRaw_queryable_with_parameters_and_closure(async);
 
             AssertSql(
@@ -402,7 +412,8 @@ WHERE [c].[ContactTitle] = @__contactTitle_1",
 
         public override async Task FromSqlRaw_queryable_simple_cache_key_includes_query_string(
             bool async
-        ) {
+        )
+        {
             await base.FromSqlRaw_queryable_simple_cache_key_includes_query_string(async);
 
             AssertSql(
@@ -414,7 +425,8 @@ WHERE [c].[ContactTitle] = @__contactTitle_1",
 
         public override async Task FromSqlRaw_queryable_with_parameters_cache_key_includes_parameters(
             bool async
-        ) {
+        )
+        {
             await base.FromSqlRaw_queryable_with_parameters_cache_key_includes_parameters(async);
 
             AssertSql(
@@ -432,7 +444,8 @@ SELECT * FROM ""Customers"" WHERE ""City"" = @p0 AND ""ContactTitle"" = @p1"
 
         public override async Task FromSqlRaw_queryable_simple_as_no_tracking_not_composed(
             bool async
-        ) {
+        )
+        {
             await base.FromSqlRaw_queryable_simple_as_no_tracking_not_composed(async);
 
             AssertSql(@"SELECT * FROM ""Customers""");
@@ -608,7 +621,8 @@ SELECT * FROM ""Customers"" WHERE ""CustomerID"" = @somename"
 
         public override async Task FromSqlInterpolated_with_inlined_db_parameter_without_name_prefix(
             bool async
-        ) {
+        )
+        {
             await base.FromSqlInterpolated_with_inlined_db_parameter_without_name_prefix(async);
 
             AssertSql(
@@ -766,7 +780,8 @@ WHERE EXISTS (
 
         public override async Task FromSqlRaw_in_subquery_with_positional_dbParameter_without_name(
             bool async
-        ) {
+        )
+        {
             await base.FromSqlRaw_in_subquery_with_positional_dbParameter_without_name(async);
 
             AssertSql(
@@ -785,7 +800,8 @@ WHERE EXISTS (
 
         public override async Task FromSqlRaw_in_subquery_with_positional_dbParameter_with_name(
             bool async
-        ) {
+        )
+        {
             await base.FromSqlRaw_in_subquery_with_positional_dbParameter_with_name(async);
 
             AssertSql(

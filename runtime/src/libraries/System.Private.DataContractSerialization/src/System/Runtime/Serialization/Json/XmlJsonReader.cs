@@ -382,7 +382,8 @@ namespace System.Runtime.Serialization.Json
         public override string? GetAttribute(
             XmlDictionaryString localName,
             XmlDictionaryString namespaceUri
-        ) {
+        )
+        {
             if (XmlDictionaryString.GetString(localName) != JsonGlobals.typeString)
             {
                 return UnescapeJsonString(base.GetAttribute(localName, namespaceUri));
@@ -428,7 +429,8 @@ namespace System.Runtime.Serialization.Json
                 {
                     if (
                         _charactersToSkipOnNextRead[0] == ch || _charactersToSkipOnNextRead[1] == ch
-                    ) {
+                    )
+                    {
                         BufferReader.SkipByte();
                         _charactersToSkipOnNextRead[0] = 0;
                         _charactersToSkipOnNextRead[1] = 0;
@@ -542,7 +544,8 @@ namespace System.Runtime.Serialization.Json
                     ch = BufferReader.GetByte();
                     if (
                         (ch == JsonGlobals.MemberSeparatorByte) || (ch == JsonGlobals.EndObjectByte)
-                    ) {
+                    )
+                    {
                         BufferReader.SkipByte();
                     }
                     else
@@ -608,7 +611,8 @@ namespace System.Runtime.Serialization.Json
                     || buffer[offset + 2] != (byte)'l'
                     || buffer[offset + 3] != (byte)'s'
                     || buffer[offset + 4] != (byte)'e'
-                ) {
+                )
+                {
                     XmlExceptionHelper.ThrowTokenExpected(
                         this,
                         "false",
@@ -624,7 +628,8 @@ namespace System.Runtime.Serialization.Json
                         && ch != JsonGlobals.MemberSeparatorByte
                         && ch != JsonGlobals.EndObjectChar
                         && ch != JsonGlobals.EndCollectionByte
-                    ) {
+                    )
+                    {
                         XmlExceptionHelper.ThrowTokenExpected(
                             this,
                             "false",
@@ -642,7 +647,8 @@ namespace System.Runtime.Serialization.Json
                     buffer[offset + 1] != (byte)'r'
                     || buffer[offset + 2] != (byte)'u'
                     || buffer[offset + 3] != (byte)'e'
-                ) {
+                )
+                {
                     XmlExceptionHelper.ThrowTokenExpected(
                         this,
                         "true",
@@ -658,7 +664,8 @@ namespace System.Runtime.Serialization.Json
                         && ch != JsonGlobals.MemberSeparatorByte
                         && ch != JsonGlobals.EndObjectChar
                         && ch != JsonGlobals.EndCollectionByte
-                    ) {
+                    )
+                    {
                         XmlExceptionHelper.ThrowTokenExpected(
                             this,
                             "true",
@@ -676,7 +683,8 @@ namespace System.Runtime.Serialization.Json
                     buffer[offset + 1] != (byte)'u'
                     || buffer[offset + 2] != (byte)'l'
                     || buffer[offset + 3] != (byte)'l'
-                ) {
+                )
+                {
                     XmlExceptionHelper.ThrowTokenExpected(
                         this,
                         "null",
@@ -713,7 +721,8 @@ namespace System.Runtime.Serialization.Json
                 || (((byte)'0' <= ch) && (ch <= (byte)'9'))
                 || (ch == (byte)'I')
                 || (ch == (byte)'N')
-            ) {
+            )
+            {
                 ReadNumericalText();
             }
             else
@@ -876,7 +885,8 @@ namespace System.Runtime.Serialization.Json
             Encoding? encoding,
             XmlDictionaryReaderQuotas quotas,
             OnXmlDictionaryReaderClose? onClose
-        ) {
+        )
+        {
             if (buffer == null)
             {
                 throw new ArgumentNullException(nameof(buffer));
@@ -921,7 +931,8 @@ namespace System.Runtime.Serialization.Json
             Encoding? encoding,
             XmlDictionaryReaderQuotas quotas,
             OnXmlDictionaryReaderClose? onClose
-        ) {
+        )
+        {
             if (stream == null)
             {
                 throw new ArgumentNullException(nameof(stream));
@@ -939,7 +950,8 @@ namespace System.Runtime.Serialization.Json
             Stream stream,
             bool includeComments,
             string[]? inclusivePrefixes
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
 
@@ -1021,7 +1033,8 @@ namespace System.Runtime.Serialization.Json
                     || ch == JsonGlobals.EndObjectByte
                     || ch == JsonGlobals.EndCollectionByte
                     || IsWhitespace(ch)
-                ) {
+                )
+                {
                     break;
                 }
                 offset++;
@@ -1034,7 +1047,8 @@ namespace System.Runtime.Serialization.Json
             int offset,
             int offsetMax,
             out bool escaped
-        ) {
+        )
+        {
             // Assumes that for quoted text "someText", the first " has been consumed.
             // For original text "someText", buffer passed in is someText".
             // This method returns return 8 for someText" (s, o, m, e, T, e, x, t).
@@ -1192,7 +1206,8 @@ namespace System.Runtime.Serialization.Json
         private void MoveToInitial(
             XmlDictionaryReaderQuotas quotas,
             OnXmlDictionaryReaderClose? onClose
-        ) {
+        )
+        {
             MoveToInitial(quotas);
             _maxBytesPerRead = quotas.MaxBytesPerRead;
             _onReaderClose = onClose;
@@ -1238,12 +1253,14 @@ namespace System.Runtime.Serialization.Json
                     int i = 0, offset = elementNode.NameOffset;
                     i < elementNode.NameLength;
                     i++, offset++
-                ) {
+                )
+                {
                     currentCharacter = (int)BufferReader.GetByte(offset);
                     if (
                         (CharTypes[currentCharacter] & CharType.Name) == 0
                         || currentCharacter >= 0x80
-                    ) {
+                    )
+                    {
                         SetJsonNameWithMapping(elementNode);
                         break;
                     }
@@ -1344,7 +1361,8 @@ namespace System.Runtime.Serialization.Json
                         || (nextByte <= '9' && nextByte >= '0')
                         || nextByte == 'N'
                         || nextByte == 'I'
-                    ) {
+                    )
+                    {
                         attribute.Value.SetConstantValue(ValueHandleConstStringType.Number);
                     }
                     else
@@ -1624,7 +1642,8 @@ namespace System.Runtime.Serialization.Json
                     && buffer[offset + 5] == (byte)'p'
                     && buffer[offset + 6] == (byte)'e'
                     && buffer[offset + 7] == (byte)'\"'
-                ) {
+                )
+                {
                     XmlAttributeNode attribute = AddAttribute();
 
                     attribute.LocalName.SetValue(offset + 1, 6);

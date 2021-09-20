@@ -242,7 +242,8 @@ namespace Microsoft.Extensions.Options.Tests
         public void Configure_GetsNullableOptionsFromConfiguration(
             IDictionary<string, string> configValues,
             IDictionary<string, object> expectedValues
-        ) {
+        )
+        {
             // Arrange
             var services = new ServiceCollection();
             var builder = new ConfigurationBuilder().AddInMemoryCollection(configValues);
@@ -306,7 +307,8 @@ namespace Microsoft.Extensions.Options.Tests
         public void Configure_GetsEnumOptionsFromConfiguration(
             IDictionary<string, string> configValues,
             IDictionary<string, object> expectedValues
-        ) {
+        )
+        {
             // Arrange
             var services = new ServiceCollection();
             var builder = new ConfigurationBuilder().AddInMemoryCollection(configValues);

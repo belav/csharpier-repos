@@ -384,7 +384,8 @@ namespace System.Text.Json
                     int i = (length - DbRow.Size) / sizeof(int);
                     i >= 0;
                     i -= DbRow.Size / sizeof(int)
-                ) {
+                )
+                {
                     Debug.Assert(newDbInts[i] >= locationOffset);
                     newDbInts[i] -= locationOffset;
                 }

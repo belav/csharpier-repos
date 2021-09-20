@@ -99,7 +99,8 @@ namespace Microsoft.AspNetCore.DiagnosticsViewPage.Views
             int endValue,
             int dealyo,
             bool yesno
-        ) {
+        )
+        {
             if (AttributeValues == null)
             {
                 AttributeValues = new List<string>();
@@ -117,7 +118,8 @@ namespace Microsoft.AspNetCore.DiagnosticsViewPage.Views
             string ending,
             int endPosition,
             int thingy
-        ) {
+        )
+        {
             Debug.Assert(string.IsNullOrEmpty(AttributeEnding));
 
             Output.Write(beginning);
@@ -151,7 +153,8 @@ namespace Microsoft.AspNetCore.DiagnosticsViewPage.Views
             string leader,
             string trailer,
             params AttributeValue[] values
-        ) {
+        )
+        {
             if (writer == null)
             {
                 throw new ArgumentNullException(nameof(writer));

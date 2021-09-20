@@ -27,13 +27,15 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         public override DynamicMetaObject BindInvokeMember(
             InvokeMemberBinder binder,
             DynamicMetaObject[] args
-        ) {
+        )
+        {
             Requires.NotNull(binder, nameof(binder));
 
             if (
                 _self.TryGetMemberMethod(binder.Name, out ComMethodDesc method)
                 || _self.TryGetMemberMethodExplicit(binder.Name, out method)
-            ) {
+            )
+            {
                 bool[] isByRef = ComBinderHelpers.ProcessArgumentsForCom(ref args);
                 return BindComInvoke(args, method, binder.CallInfo, isByRef);
             }
@@ -65,7 +67,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             ComMethodDesc method,
             CallInfo callInfo,
             bool[] isByRef
-        ) {
+        )
+        {
             return new ComInvokeBinder(
                 callInfo,
                 args,
@@ -177,7 +180,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         public override DynamicMetaObject BindGetIndex(
             GetIndexBinder binder,
             DynamicMetaObject[] indexes
-        ) {
+        )
+        {
             Requires.NotNull(binder, nameof(binder));
 
             if (_self.TryGetGetItem(out ComMethodDesc getItem))
@@ -198,7 +202,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             SetIndexBinder binder,
             DynamicMetaObject[] indexes,
             DynamicMetaObject value
-        ) {
+        )
+        {
             Requires.NotNull(binder, nameof(binder));
 
             if (_self.TryGetSetItem(out ComMethodDesc setItem))
@@ -234,7 +239,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         public override DynamicMetaObject BindSetMember(
             SetMemberBinder binder,
             DynamicMetaObject value
-        ) {
+        )
+        {
             Requires.NotNull(binder, nameof(binder));
 
             return
@@ -265,7 +271,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                     value.LimitType,
                     holdsNull
                 )
-            ) {
+            )
+            {
                 BindingRestrictions restrictions = IDispatchRestriction();
                 Expression dispatch = Expression.Property(
                     Helpers.Convert(Expression, typeof(IDispatchComObject)),
@@ -301,11 +308,13 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         private DynamicMetaObject TryEventHandlerNoop(
             SetMemberBinder binder,
             DynamicMetaObject value
-        ) {
+        )
+        {
             if (
                 _self.TryGetMemberEvent(binder.Name, out _)
                 && value.LimitType == typeof(BoundDispEvent)
-            ) {
+            )
+            {
                 // Drop the event property set.
                 return new DynamicMetaObject(
                     Expression.Constant(null),
@@ -330,7 +339,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         internal static BindingRestrictions IDispatchRestriction(
             Expression expr,
             ComTypeDesc typeDesc
-        ) {
+        )
+        {
             return BindingRestrictions.GetTypeRestriction(expr, typeof(IDispatchComObject))
                 .Merge(
                     BindingRestrictions.GetExpressionRestriction(

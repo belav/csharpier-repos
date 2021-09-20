@@ -24,7 +24,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
         /// </summary>
         public SqliteSqlTranslatingExpressionVisitorFactory(
             RelationalSqlTranslatingExpressionVisitorDependencies dependencies
-        ) {
+        )
+        {
             _dependencies = dependencies;
         }
 

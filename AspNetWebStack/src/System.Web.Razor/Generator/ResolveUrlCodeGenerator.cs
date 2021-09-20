@@ -25,7 +25,8 @@ namespace System.Web.Razor.Generator
             if (
                 context.Host.EnableInstrumentation
                 && context.ExpressionRenderingMode == ExpressionRenderingMode.WriteToOutput
-            ) {
+            )
+            {
                 // Add a non-literal context call (non-literal because the expanded URL will not match the source character-by-character)
                 context.AddContextCall(
                     target,
@@ -41,7 +42,8 @@ namespace System.Web.Razor.Generator
                     {
                         if (
                             context.ExpressionRenderingMode == ExpressionRenderingMode.WriteToOutput
-                        ) {
+                        )
+                        {
                             if (!String.IsNullOrEmpty(context.TargetWriterName))
                             {
                                 cw.WriteStartMethodInvoke(
@@ -65,7 +67,8 @@ namespace System.Web.Razor.Generator
 
                         if (
                             context.ExpressionRenderingMode == ExpressionRenderingMode.WriteToOutput
-                        ) {
+                        )
+                        {
                             cw.WriteEndMethodInvoke();
                             cw.WriteEndStatement();
                         }
@@ -88,7 +91,8 @@ namespace System.Web.Razor.Generator
             if (
                 context.Host.EnableInstrumentation
                 && context.ExpressionRenderingMode == ExpressionRenderingMode.WriteToOutput
-            ) {
+            )
+            {
                 context.AddContextCall(
                     target,
                     context.Host.GeneratedClassContext.EndContextMethodName,

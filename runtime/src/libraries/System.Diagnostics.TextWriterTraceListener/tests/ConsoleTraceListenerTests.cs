@@ -58,7 +58,8 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
                                 var listener = new ConsoleTraceListener(
                                     useErrorStream: setErrorStream
                                 )
-                            ) {
+                            )
+                            {
                                 listener.Write(message);
                                 string writerOutput = stringWriter.ToString();
                                 Assert.Equal(message, writerOutput);
@@ -92,7 +93,8 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
                                 var listener = new ConsoleTraceListener(
                                     useErrorStream: setErrorStream
                                 )
-                            ) {
+                            )
+                            {
                                 listener.WriteLine(message);
                                 Assert.Contains(
                                     message,

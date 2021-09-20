@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Formatting
             List<SuppressOperation> list,
             SyntaxNode node,
             in NextSuppressOperationAction nextOperation
-        ) {
+        )
+        {
             if (TryAddSuppressionOnMissingCloseBraceCase(list, node))
             {
                 return;
@@ -34,7 +35,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Formatting
         private static bool TryAddSuppressionOnMissingCloseBraceCase(
             List<SuppressOperation> list,
             SyntaxNode node
-        ) {
+        )
+        {
             var bracePair = node.GetBracePair();
             if (!bracePair.IsValidBracePair())
             {
@@ -96,7 +98,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Formatting
                         firstTokenOfNode,
                         firstStatement.GetFirstToken()
                     )
-                ) {
+                )
+                {
                     endToken = firstStatement.GetLastToken();
                 }
             }

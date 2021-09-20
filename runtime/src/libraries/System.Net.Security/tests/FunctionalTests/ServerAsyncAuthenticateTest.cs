@@ -40,7 +40,8 @@ namespace System.Net.Security.Tests
         [ClassData(typeof(SslProtocolSupport.SupportedSslProtocolsTestData))]
         public async Task ServerAsyncAuthenticate_EachSupportedProtocol_Success(
             SslProtocols protocol
-        ) {
+        )
+        {
             await ServerAsyncSslHelper(protocol, protocol);
         }
 
@@ -50,7 +51,8 @@ namespace System.Net.Security.Tests
             SslProtocols serverProtocol,
             SslProtocols clientProtocol,
             Type expectedException
-        ) {
+        )
+        {
             Exception e = await Record.ExceptionAsync(
                 () =>
                 {
@@ -70,7 +72,8 @@ namespace System.Net.Security.Tests
         [ClassData(typeof(SslProtocolSupport.SupportedSslProtocolsTestData))]
         public async Task ServerAsyncAuthenticate_AllClientVsIndividualServerSupportedProtocols_Success(
             SslProtocols serverProtocol
-        ) {
+        )
+        {
             await ServerAsyncSslHelper(SslProtocolSupport.SupportedSslProtocols, serverProtocol);
         }
 
@@ -168,7 +171,8 @@ namespace System.Net.Security.Tests
 
         private async Task<SslServerAuthenticationOptions> OptionsTask(
             SslServerAuthenticationOptions value
-        ) {
+        )
+        {
             await Task.Yield();
             return value;
         }
@@ -504,7 +508,8 @@ namespace System.Net.Security.Tests
             SslProtocols clientSslProtocols,
             SslProtocols serverSslProtocols,
             bool expectedToFail = false
-        ) {
+        )
+        {
             _log.WriteLine(
                 "Server: "
                     + serverSslProtocols
@@ -538,7 +543,8 @@ namespace System.Net.Security.Tests
                         return true;
                     }
                 )
-            ) {
+            )
+            {
                 // Use a different SNI for each connection to prevent TLS 1.3 renegotiation issue: https://github.com/dotnet/runtime/issues/47378
                 string serverName = TestHelper.GetTestSNIName(
                     nameof(ServerAsyncSslHelper),
@@ -621,7 +627,8 @@ namespace System.Net.Security.Tests
             X509Certificate certificate,
             X509Chain chain,
             SslPolicyErrors sslPolicyErrors
-        ) {
+        )
+        {
             Assert.True(
                 (sslPolicyErrors & SslPolicyErrors.RemoteCertificateNotAvailable)
                     == SslPolicyErrors.RemoteCertificateNotAvailable,

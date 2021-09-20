@@ -73,7 +73,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public void HiddenWithArgumentValueAndAttributes_UsesArgumentValue(
             object attributes,
             string expected
-        ) {
+        )
+        {
             // Arrange
             var helper = DefaultTemplatesUtilities.GetHtmlHelper(
                 GetViewDataWithModelStateAndModelAndViewDataValues()
@@ -625,7 +626,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public void HiddenWithComplexExpressions_UsesValueFromViewData(
             string expression,
             string expected
-        ) {
+        )
+        {
             // Arrange
             var viewData = GetViewDataWithModelStateAndModelAndViewDataValues();
             viewData["Property3[height]"] = "Prop3Value";
@@ -666,7 +668,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public void HiddenWithComplexExpressions_UsesIdDotSeparator(
             string expression,
             string expected
-        ) {
+        )
+        {
             // Arrange
             var viewData = GetViewDataWithModelStateAndModelAndViewDataValues();
             viewData["Property3[height]"] = "Prop3Value";
@@ -708,7 +711,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public void HiddenForWithAttributes_GeneratesExpectedValue(
             object htmlAttributes,
             string expected
-        ) {
+        )
+        {
             // Arrange
             var helper = DefaultTemplatesUtilities.GetHtmlHelper(
                 GetViewDataWithModelStateAndModelAndViewDataValues()
@@ -929,7 +933,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public void HiddenFor_UsesPropertyValueIfModelStateDoesNotContainValue(
             Expression<Func<HiddenModel, string>> expression,
             string expected
-        ) {
+        )
+        {
             // Arrange
             var viewData = GetViewDataWithModelStateAndModelAndViewDataValues();
             viewData["Property3[key]"] = "Prop3Val";
@@ -983,7 +988,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public void HiddenForInTemplate_UsesModelStateValueForComplexExpressions(
             Expression<Func<HiddenModel, string>> expression,
             string expected
-        ) {
+        )
+        {
             // Arrange
             var viewData = GetViewDataWithNullModelAndNonNullViewData();
             viewData.ModelState.SetModelValue("pre.Property3[key]", "Prop3Val", "Prop3Val");

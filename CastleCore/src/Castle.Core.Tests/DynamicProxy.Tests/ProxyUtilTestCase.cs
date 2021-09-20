@@ -107,7 +107,8 @@ namespace Castle.DynamicProxy.Tests
         [TestCaseSource(nameof(AccessibleMethods))]
         public void IsAccessibleWithReason_Accessible_Method_Does_Not_Populate_ReasonMethodIsNotAccessible(
             MethodBase method
-        ) {
+        )
+        {
             string reason;
             ProxyUtil.IsAccessible(method, out reason);
 
@@ -124,7 +125,8 @@ namespace Castle.DynamicProxy.Tests
         [TestCaseSource(nameof(InaccessibleMethods))]
         public void IsAccessibleWithReason_Inaccessible_Method_Populates_ReasonMethodIsNotAccessible(
             MethodBase method
-        ) {
+        )
+        {
             string reason;
             ProxyUtil.IsAccessible(method, out reason);
 

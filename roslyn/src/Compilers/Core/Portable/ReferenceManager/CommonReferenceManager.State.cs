@@ -210,7 +210,8 @@ namespace Microsoft.CodeAnalysis
             string simpleAssemblyName,
             AssemblyIdentityComparer identityComparer,
             Dictionary<MetadataReference, MetadataOrDiagnostic>? observedMetadata
-        ) {
+        )
+        {
             Debug.Assert(simpleAssemblyName != null);
             Debug.Assert(identityComparer != null);
 
@@ -453,7 +454,8 @@ namespace Microsoft.CodeAnalysis
                 MetadataReference,
                 ImmutableArray<MetadataReference>
             >? mergedAssemblyReferencesMapOpt
-        ) {
+        )
+        {
             AssertUnbound();
 
             Debug.Assert(referencedModules.Length == referencedModulesReferences.Length);
@@ -510,7 +512,8 @@ namespace Microsoft.CodeAnalysis
                 MetadataReference,
                 ImmutableArray<MetadataReference>
             >? mergedAssemblyReferencesMapOpt
-        ) {
+        )
+        {
             referencedAssembliesMap = new Dictionary<MetadataReference, int>(referenceMap.Length);
             referencedModulesMap = new Dictionary<MetadataReference, int>(referencedModuleCount);
             var aliasesOfReferencedAssembliesBuilder = ArrayBuilder<
@@ -601,7 +604,8 @@ namespace Microsoft.CodeAnalysis
         > GetAssemblyReferenceIdentityBaselineMap(
             ImmutableArray<TAssemblySymbol> symbols,
             ImmutableArray<AssemblyIdentity> originalIdentities
-        ) {
+        )
+        {
             Debug.Assert(originalIdentities.Length == symbols.Length);
 
             ImmutableDictionary<AssemblyIdentity, AssemblyIdentity>.Builder? lazyBuilder = null;
@@ -649,7 +653,8 @@ namespace Microsoft.CodeAnalysis
             Version version,
             Version candidateVersion,
             TAssemblySymbol candidateSymbol
-        ) {
+        )
+        {
             // major and minor parts must match exactly
 
             if (version.Major != candidateVersion.Major || version.Minor != candidateVersion.Minor)
@@ -668,7 +673,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 (versionPattern is null || versionPattern.Build < ushort.MaxValue)
                 && version.Build != candidateVersion.Build
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -692,7 +698,8 @@ namespace Microsoft.CodeAnalysis
             BoundInputAssembly[] bindingResult,
             ImmutableArray<ResolvedReference> referenceMap,
             ArrayBuilder<ImmutableArray<string>> aliasesOfReferencedAssembliesBuilder
-        ) {
+        )
+        {
             var assemblyIndicesToProcess = ArrayBuilder<int>.GetInstance();
             var visitedAssemblies = BitVector.Create(bindingResult.Length);
 
@@ -791,7 +798,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         internal override MetadataReference? GetMetadataReference(
             IAssemblySymbolInternal? assemblySymbol
-        ) {
+        )
+        {
             foreach (var entry in ReferencedAssembliesMap)
             {
                 if ((object)ReferencedAssemblies[entry.Value] == assemblySymbol)

@@ -31,7 +31,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
                             compilationStartAnalysisContext.Compilation,
                             out var typeCache
                         )
-                    ) {
+                    )
+                    {
                         // No-op if we can't find types we care about.
                         return;
                     }
@@ -44,7 +45,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
         private void InitializeWorker(
             CompilationStartAnalysisContext compilationStartAnalysisContext,
             SymbolCache symbolCache
-        ) {
+        )
+        {
             compilationStartAnalysisContext.RegisterSymbolAction(
                 symbolAnalysisContext =>
                 {
@@ -70,7 +72,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
                             symbolCache.NonActionAttribute,
                             symbolCache.IDisposableDispose
                         )
-                    ) {
+                    )
+                    {
                         return;
                     }
 
@@ -79,7 +82,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
                             symbolCache.IApiBehaviorMetadata,
                             inherit: true
                         )
-                    ) {
+                    )
+                    {
                         // The issue of parameter name collision with properties affects complex model-bound types
                         // and not input formatting. Ignore ApiController instances since they default to formatting.
                         return;
@@ -113,7 +117,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
         internal static bool IsProblematicParameter(
             in SymbolCache symbolCache,
             IParameterSymbol parameter
-        ) {
+        )
+        {
             if (parameter.GetAttributes(symbolCache.FromBodyAttribute).Any())
             {
                 // Ignore input formatted parameters.
@@ -142,7 +147,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
                         member.DeclaredAccessibility != Accessibility.Public
                         || member.IsStatic
                         || member.Kind != SymbolKind.Property
-                    ) {
+                    )
+                    {
                         continue;
                     }
 
@@ -153,7 +159,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
                             propertyName,
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }
@@ -207,7 +214,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
                         && namedArgumentValue.Kind == TypedConstantKind.Primitive
                         && namedArgumentValue.Type.SpecialType == SpecialType.System_String
                         && namedArgumentValue.Value is string name
-                    ) {
+                    )
+                    {
                         return name;
                     }
                 }
@@ -219,12 +227,14 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
         internal static bool SpecifiesModelType(
             in SymbolCache symbolCache,
             IParameterSymbol parameterSymbol
-        ) {
+        )
+        {
             foreach (
                 var attribute in parameterSymbol.GetAttributes(
                     symbolCache.IBinderTypeProviderMetadata
                 )
-            ) {
+            )
+            {
                 // Look for a attribute property named BinderType being assigned. This would match
                 // [ModelBinder(BinderType = typeof(SomeBinder))]
                 for (var i = 0; i < attribute.NamedArguments.Length; i++)
@@ -234,7 +244,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
                     if (
                         string.Equals(namedArgument.Key, "BinderType", StringComparison.Ordinal)
                         && namedArgumentValue.Kind == TypedConstantKind.Type
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }
@@ -252,7 +263,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
                             "binderType",
                             StringComparison.Ordinal
                         )
-                    ) {
+                    )
+                    {
                         // A constructor that requires binderType was used.
                         return true;
                     }
@@ -274,7 +286,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
                 INamedTypeSymbol nonControllerAttribute,
                 INamedTypeSymbol nonActionAttribute,
                 IMethodSymbol disposableDispose
-            ) {
+            )
+            {
                 BindAttribute = bindAttribute;
                 ControllerAttribute = controllerAttribute;
                 FromBodyAttribute = fromBodyAttribute;
@@ -315,7 +328,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
                         SymbolNames.IBinderTypeProviderMetadata,
                         out var iBinderTypeProviderMetadata
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 

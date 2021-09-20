@@ -235,7 +235,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
 
         private static CallSiteKind GetCallSiteKind(
             AddParameterDialogViewModel addParameterViewModel
-        ) {
+        )
+        {
             if (addParameterViewModel.IsCallsiteInferred)
                 return CallSiteKind.Inferred;
 
@@ -259,7 +260,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
                 if (
                     Members.ItemContainerGenerator.ContainerFromIndex(Members.SelectedIndex)
                     is not DataGridRow row
-                ) {
+                )
+                {
                     Members.ScrollIntoView(Members.SelectedItem);
                     row =
                         Members.ItemContainerGenerator.ContainerFromIndex(Members.SelectedIndex)

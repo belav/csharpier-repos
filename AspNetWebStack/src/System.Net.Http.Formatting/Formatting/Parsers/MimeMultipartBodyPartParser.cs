@@ -58,7 +58,8 @@ namespace System.Net.Http.Formatting.Parsers
             MultipartStreamProvider streamProvider,
             long maxMessageSize,
             int maxBodyPartHeaderSize
-        ) {
+        )
+        {
             Contract.Assert(content != null, "content cannot be null.");
             Contract.Assert(streamProvider != null, "streamProvider cannot be null.");
 
@@ -149,7 +150,8 @@ namespace System.Net.Http.Formatting.Parsers
                 if (
                     _mimeStatus != MimeMultipartParser.State.BodyPartCompleted
                     && _mimeStatus != MimeMultipartParser.State.NeedMoreData
-                ) {
+                )
+                {
                     CleanupCurrentBodyPart();
                     throw Error.InvalidOperation(
                         Properties.Resources.ReadAsMimeMultipartParseError,
@@ -254,7 +256,8 @@ namespace System.Net.Http.Formatting.Parsers
             HttpContent content,
             long maxMessageSize,
             bool throwOnError
-        ) {
+        )
+        {
             Contract.Assert(content != null, "content cannot be null.");
             if (maxMessageSize < MimeMultipartParser.MinMessageSize)
             {

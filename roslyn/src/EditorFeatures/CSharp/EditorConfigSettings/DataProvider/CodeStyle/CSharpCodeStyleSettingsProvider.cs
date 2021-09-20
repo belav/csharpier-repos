@@ -32,7 +32,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.EditorConfigSettings.Da
         protected override void UpdateOptions(
             AnalyzerConfigOptions editorConfigOptions,
             OptionSet visualStudioOptions
-        ) {
+        )
+        {
             var varSettings = GetVarCodeStyleOptions(
                 editorConfigOptions,
                 visualStudioOptions,
@@ -108,7 +109,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.EditorConfigSettings.Da
             AnalyzerConfigOptions editorConfigOptions,
             OptionSet visualStudioOptions,
             OptionUpdater updaterService
-        ) {
+        )
+        {
             yield return CodeStyleSetting.Create(
                 option: CSharpCodeStyleOptions.VarForBuiltInTypes,
                 description: CSharpEditorResources.For_built_in_types,
@@ -142,7 +144,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.EditorConfigSettings.Da
             AnalyzerConfigOptions editorConfigOptions,
             OptionSet visualStudioOptions,
             OptionUpdater updaterService
-        ) {
+        )
+        {
             yield return CodeStyleSetting.Create(
                 option: CSharpCodeStyleOptions.PreferredUsingDirectivePlacement,
                 description: CSharpEditorResources.Preferred_using_directive_placement,
@@ -166,7 +169,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.EditorConfigSettings.Da
             AnalyzerConfigOptions editorConfigOptions,
             OptionSet visualStudioOptions,
             OptionUpdater updaterService
-        ) {
+        )
+        {
             yield return CodeStyleSetting.Create(
                 option: CSharpCodeStyleOptions.PreferThrowExpression,
                 description: CSharpEditorResources.Prefer_throw_expression,
@@ -187,7 +191,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.EditorConfigSettings.Da
             AnalyzerConfigOptions editorConfigOptions,
             OptionSet visualStudioOptions,
             OptionUpdater updaterService
-        ) {
+        )
+        {
             yield return CodeStyleSetting.Create(
                 option: CSharpCodeStyleOptions.PreferStaticLocalFunction,
                 description: CSharpEditorResources.Prefer_static_local_functions,
@@ -201,7 +206,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.EditorConfigSettings.Da
             AnalyzerConfigOptions editorConfigOptions,
             OptionSet visualStudioOptions,
             OptionUpdater updaterService
-        ) {
+        )
+        {
             yield return CodeStyleSetting.Create(
                 option: CSharpCodeStyleOptions.PreferSimpleUsingStatement,
                 description: CSharpEditorResources.Prefer_simple_using_statement,
@@ -215,7 +221,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.EditorConfigSettings.Da
             AnalyzerConfigOptions editorConfigOptions,
             OptionSet visualStudioOptions,
             OptionUpdater updaterService
-        ) {
+        )
+        {
             yield return CodeStyleSetting.Create(
                 CSharpCodeStyleOptions.PreferSwitchExpression,
                 description: CSharpEditorResources.Prefer_switch_expression,
@@ -257,7 +264,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.EditorConfigSettings.Da
             AnalyzerConfigOptions editorConfigOptions,
             OptionSet visualStudioOptions,
             OptionUpdater updaterService
-        ) {
+        )
+        {
             yield return CodeStyleSetting.Create(
                 CSharpCodeStyleOptions.PreferPatternMatching,
                 description: CSharpEditorResources.Prefer_pattern_matching,
@@ -292,7 +300,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.EditorConfigSettings.Da
             AnalyzerConfigOptions editorConfigOptions,
             OptionSet visualStudioOptions,
             OptionUpdater updaterService
-        ) {
+        )
+        {
             yield return CodeStyleSetting.Create(
                 CSharpCodeStyleOptions.PreferInlinedVariableDeclaration,
                 description: CSharpEditorResources.Prefer_inlined_variable_declaration,
@@ -313,7 +322,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.EditorConfigSettings.Da
             AnalyzerConfigOptions editorConfigOptions,
             OptionSet visualStudioOptions,
             OptionUpdater updaterService
-        ) {
+        )
+        {
             var enumValues = new[]
             {
                 ExpressionBodyPreference.Never,
@@ -404,7 +414,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.EditorConfigSettings.Da
             AnalyzerConfigOptions editorConfigOptions,
             OptionSet visualStudioOptions,
             OptionUpdater updaterService
-        ) {
+        )
+        {
             var enumValues = new[]
             {
                 UnusedValuePreference.UnusedLocalVariable,

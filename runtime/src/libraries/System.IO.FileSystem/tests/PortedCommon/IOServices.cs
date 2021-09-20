@@ -181,7 +181,8 @@ internal class IOServices
             path.Length > 0
             && path[path.Length - 1] != Path.DirectorySeparatorChar
             && path[path.Length - 1] != Path.AltDirectorySeparatorChar
-        ) {
+        )
+        {
             path = path + Path.DirectorySeparatorChar;
         }
 

@@ -86,7 +86,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ImmutableArray<CustomModifier> newCustomModifiers,
             ImmutableArray<CustomModifier> newRefCustomModifiers,
             bool newIsParams
-        ) {
+        )
+        {
             return new SourceClonedParameterSymbol(
                 _originalParam.WithCustomModifiersAndParamsCore(
                     newType,

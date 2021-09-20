@@ -66,7 +66,8 @@ namespace System.Text
             if (
                 !UnicodeUtility.IsValidUnicodeScalar(scalarValue)
                 || UnicodeUtility.IsBmpCodePoint(scalarValue)
-            ) {
+            )
+            {
                 Debug.Fail(
                     $"The value {ToHexString(scalarValue)} is not a valid supplementary plane Unicode scalar value."
                 );

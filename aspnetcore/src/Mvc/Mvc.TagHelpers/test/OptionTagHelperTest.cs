@@ -528,7 +528,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             string value,
             ICollection<string> currentValues,
             TagHelperOutput expectedTagHelperOutput
-        ) {
+        )
+        {
             // Arrange
             var originalAttributes = new TagHelperAttributeList { { "label", "my-label" }, };
             if (selected != null)
@@ -600,7 +601,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             string value,
             ICollection<string> currentValues,
             TagHelperOutput _
-        ) {
+        )
+        {
             // Arrange
             var originalAttributes = new TagHelperAttributeList
             {
@@ -667,7 +669,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             string value,
             ICollection<string> _,
             TagHelperOutput __
-        ) {
+        )
+        {
             // Arrange
             var originalAttributes = new TagHelperAttributeList
             {
@@ -721,7 +724,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             string tagName,
             TagHelperAttributeList attributes,
             string content
-        ) {
+        )
+        {
             var tagHelperOutput = new TagHelperOutput(
                 tagName,
                 attributes,

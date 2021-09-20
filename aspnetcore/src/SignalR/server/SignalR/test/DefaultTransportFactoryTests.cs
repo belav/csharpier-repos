@@ -24,7 +24,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         [InlineData((HttpTransportType)int.MaxValue)]
         public void DefaultTransportFactoryCanBeCreatedWithNoOrUnknownTransportTypeFlags(
             HttpTransportType transportType
-        ) {
+        )
+        {
             Assert.NotNull(
                 new DefaultTransportFactory(
                     transportType,
@@ -44,7 +45,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         [InlineData(HttpTransportType.ServerSentEvents | HttpTransportType.WebSockets)]
         public void DefaultTransportFactoryCannotBeCreatedWithoutHttpClient(
             HttpTransportType transportType
-        ) {
+        )
+        {
             var exception = Assert.Throws<ArgumentNullException>(
                 () =>
                     new DefaultTransportFactory(
@@ -79,7 +81,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         public void DefaultTransportFactoryCreatesRequestedTransportIfAvailable(
             HttpTransportType requestedTransport,
             Type expectedTransportType
-        ) {
+        )
+        {
             var transportFactory = new DefaultTransportFactory(
                 requestedTransport,
                 loggerFactory: null,
@@ -100,7 +103,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         [InlineData(AllTransportTypes)]
         public void DefaultTransportFactoryThrowsIfItCannotCreateRequestedTransport(
             HttpTransportType requestedTransport
-        ) {
+        )
+        {
             var transportFactory = new DefaultTransportFactory(
                 requestedTransport,
                 loggerFactory: null,
@@ -137,7 +141,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         public void DefaultTransportFactoryCreatesRequestedTransportIfAvailable_Win7(
             HttpTransportType requestedTransport,
             Type expectedTransportType
-        ) {
+        )
+        {
             if (!TestHelpers.IsWebSocketsSupported())
             {
                 var transportFactory = new DefaultTransportFactory(
@@ -158,7 +163,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         [InlineData(HttpTransportType.WebSockets)]
         public void DefaultTransportFactoryThrowsIfItCannotCreateRequestedTransport_Win7(
             HttpTransportType requestedTransport
-        ) {
+        )
+        {
             if (!TestHelpers.IsWebSocketsSupported())
             {
                 var transportFactory = new DefaultTransportFactory(

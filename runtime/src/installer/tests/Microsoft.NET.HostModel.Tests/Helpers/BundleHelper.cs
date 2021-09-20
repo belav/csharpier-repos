@@ -66,7 +66,8 @@ namespace BundleTests.Helpers
         public static string[] GetExtractedFiles(
             TestProjectFixture fixture,
             BundleOptions bundleOptions
-        ) {
+        )
+        {
             switch (bundleOptions & ~BundleOptions.EnableCompression)
             {
                 case BundleOptions.None:
@@ -171,7 +172,8 @@ namespace BundleTests.Helpers
             string sourceDir,
             string outputDir,
             bool copyExludedFiles = true
-        ) {
+        )
+        {
             // Convert sourceDir to absolute path
             sourceDir = Path.GetFullPath(sourceDir);
 
@@ -220,7 +222,8 @@ namespace BundleTests.Helpers
             BundleOptions options = BundleOptions.None,
             Version targetFrameworkVersion = null,
             bool copyExcludedFiles = true
-        ) {
+        )
+        {
             var hostName = GetHostName(fixture);
             string publishPath = GetPublishPath(fixture);
             var bundleDir = GetBundleDir(fixture);
@@ -249,7 +252,8 @@ namespace BundleTests.Helpers
             TestProjectFixture fixture,
             BundleOptions options = BundleOptions.None,
             Version targetFrameworkVersion = null
-        ) {
+        )
+        {
             string singleFile;
             BundleApp(fixture, out singleFile, options, targetFrameworkVersion);
             return singleFile;
@@ -258,7 +262,8 @@ namespace BundleTests.Helpers
         public static Bundler Bundle(
             TestProjectFixture fixture,
             BundleOptions options = BundleOptions.None
-        ) {
+        )
+        {
             string singleFile;
             return BundleApp(fixture, out singleFile, options, copyExcludedFiles: false);
         }

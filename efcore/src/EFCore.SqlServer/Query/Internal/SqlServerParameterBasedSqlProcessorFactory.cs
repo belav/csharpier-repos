@@ -24,7 +24,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         /// </summary>
         public SqlServerParameterBasedSqlProcessorFactory(
             RelationalParameterBasedSqlProcessorDependencies dependencies
-        ) {
+        )
+        {
             _dependencies = dependencies;
         }
 

@@ -210,7 +210,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
 
         private static KeyTransRecipientInfo EncodeKeyTransl(
             SubjectIdentifierType type = SubjectIdentifierType.IssuerAndSerialNumber
-        ) {
+        )
+        {
             ContentInfo contentInfo = new ContentInfo(new byte[] { 1, 2, 3 });
             EnvelopedCms ecms = new EnvelopedCms(contentInfo);
             using (X509Certificate2 cert = Certificates.RSAKeyTransfer1.GetCertificate())
@@ -232,7 +233,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
 
         private static KeyTransRecipientInfo FixedValueKeyTrans1(
             SubjectIdentifierType type = SubjectIdentifierType.IssuerAndSerialNumber
-        ) {
+        )
+        {
             byte[] encodedMessage;
             switch (type)
             {

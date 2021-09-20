@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 Workspace workspace,
                 ITextBuffer subjectBuffer,
                 IInlineRenameSession inlineRenameSession
-            ) {
+            )
+            {
                 var textUndoHistoryService =
                     workspace.Services.GetService<ITextUndoHistoryWorkspaceService>();
                 Contract.ThrowIfFalse(
@@ -83,14 +84,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             public void CreateConflictResolutionUndoTransaction(
                 ITextBuffer subjectBuffer,
                 Action applyEdit
-            ) {
+            )
+            {
                 var undoHistory = this.UndoManagers[subjectBuffer].TextUndoHistory;
                 while (true)
                 {
                     if (
                         undoHistory.UndoStack.First()
                         == this.UndoManagers[subjectBuffer].StartRenameSessionUndoTransaction
-                    ) {
+                    )
+                    {
                         undoHistory.Undo(1);
                         break;
                     }
@@ -114,7 +117,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 ITextBuffer subjectBuffer,
                 bool disconnect,
                 bool undoConflictResolution
-            ) {
+            )
+            {
                 if (!this.UndoManagers.TryGetValue(subjectBuffer, out var bufferUndoState))
                 {
                     return;
@@ -145,7 +149,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 ITextBuffer subjectBuffer,
                 object propagateSpansEditTag,
                 IEnumerable<ITrackingSpan> spans
-            ) {
+            )
+            {
                 ApplyReplacementText(
                     subjectBuffer,
                     this.UndoManagers[subjectBuffer].TextUndoHistory,

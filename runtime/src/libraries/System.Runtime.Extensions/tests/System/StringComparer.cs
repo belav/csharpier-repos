@@ -101,7 +101,8 @@ namespace System.Tests
             string lowerForm,
             string upperForm,
             string cultureName
-        ) {
+        )
+        {
             CultureInfo ci = CultureInfo.GetCultureInfo(cultureName);
             StringComparer sc = StringComparer.Create(ci, false);
             Assert.False(
@@ -283,7 +284,8 @@ namespace System.Tests
             string cultureName,
             CompareOptions options,
             bool result
-        ) {
+        )
+        {
             CultureInfo ci = CultureInfo.GetCultureInfo(cultureName);
             StringComparer sc = StringComparer.Create(ci, options);
 
@@ -303,7 +305,8 @@ namespace System.Tests
             string cultureName,
             CompareOptions options,
             bool result
-        ) {
+        )
+        {
             CultureInfo ci = CultureInfo.GetCultureInfo(cultureName);
             StringComparer sc = StringComparer.Create(ci, options);
 

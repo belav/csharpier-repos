@@ -18,7 +18,8 @@ namespace ILCompiler
         public VectorFieldLayoutAlgorithm(
             FieldLayoutAlgorithm fallbackAlgorithm,
             bool vectorAbiIsStable = true
-        ) {
+        )
+        {
             _vectorAbiIsStable = vectorAbiIsStable;
             _fallbackAlgorithm = fallbackAlgorithm;
         }
@@ -26,7 +27,8 @@ namespace ILCompiler
         public override ComputedInstanceFieldLayout ComputeInstanceLayout(
             DefType defType,
             InstanceLayoutKind layoutKind
-        ) {
+        )
+        {
             Debug.Assert(IsVectorType(defType));
 
             LayoutInt alignment;
@@ -87,7 +89,8 @@ namespace ILCompiler
         public override ComputedStaticFieldLayout ComputeStaticFieldLayout(
             DefType defType,
             StaticLayoutKind layoutKind
-        ) {
+        )
+        {
             return _fallbackAlgorithm.ComputeStaticFieldLayout(defType, layoutKind);
         }
 
@@ -99,11 +102,13 @@ namespace ILCompiler
 
         public override ValueTypeShapeCharacteristics ComputeValueTypeShapeCharacteristics(
             DefType type
-        ) {
+        )
+        {
             if (
                 type.Context.Target.Architecture == TargetArchitecture.ARM64
                 && type.Instantiation[0].IsPrimitiveNumeric
-            ) {
+            )
+            {
                 return type.InstanceFieldSize.AsInt switch
                 {
                     8 => ValueTypeShapeCharacteristics.Vector64Aggregate,

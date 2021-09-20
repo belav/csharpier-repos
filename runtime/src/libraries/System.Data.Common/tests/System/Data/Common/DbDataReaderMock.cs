@@ -54,7 +54,8 @@ namespace System.Data.Common.Tests
             byte[]? buffer,
             int bufferOffset,
             int length
-        ) {
+        )
+        {
             object value = GetValue(ordinal);
             if (value == DBNull.Value)
             {
@@ -80,7 +81,8 @@ namespace System.Data.Common.Tests
             char[]? buffer,
             int bufferOffset,
             int length
-        ) {
+        )
+        {
             object value = GetValue(ordinal);
             if (value == DBNull.Value)
             {

@@ -238,7 +238,8 @@ namespace Microsoft.CodeAnalysis.Wrapping.ChainedExpression
             private static void DeleteAllSpacesInChunk(
                 ArrayBuilder<Edit> result,
                 ImmutableArray<SyntaxNodeOrToken> chunk
-            ) {
+            )
+            {
                 for (var i = 1; i < chunk.Length; i++)
                 {
                     result.Add(Edit.DeleteBetween(chunk[i - 1], chunk[i]));

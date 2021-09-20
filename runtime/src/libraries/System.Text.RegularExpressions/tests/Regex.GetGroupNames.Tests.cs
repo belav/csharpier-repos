@@ -138,7 +138,8 @@ namespace System.Text.RegularExpressions.Tests
             string[] expectedNames,
             int[] expectedNumbers,
             string[] expectedGroups
-        ) {
+        )
+        {
             Regex regex = new Regex(pattern);
             Match match = regex.Match(input);
             Assert.True(match.Success);

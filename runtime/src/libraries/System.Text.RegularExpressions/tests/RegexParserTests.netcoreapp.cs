@@ -285,7 +285,8 @@ namespace System.Text.RegularExpressions.Tests
             RegexOptions options,
             object error,
             int offset = -1
-        ) {
+        )
+        {
             Parse(pattern, options, error, offset);
         }
 

@@ -26,7 +26,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             Expression projection,
             Expression innerShaper,
             Type type
-        ) {
+        )
+        {
             Projection = projection;
             InnerShaper = innerShaper;
             Type = type;

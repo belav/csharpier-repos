@@ -31,7 +31,8 @@ namespace System.Threading.Tasks.Extensions
             int milliseconds = DefaultTimeoutDuration,
             [CallerFilePath] string filePath = null,
             [CallerLineNumber] int lineNumber = default
-        ) {
+        )
+        {
             return task.TimeoutAfter(TimeSpan.FromMilliseconds(milliseconds), filePath, lineNumber);
         }
 
@@ -40,7 +41,8 @@ namespace System.Threading.Tasks.Extensions
             TimeSpan timeout,
             [CallerFilePath] string filePath = null,
             [CallerLineNumber] int lineNumber = default
-        ) {
+        )
+        {
             return task.TimeoutAfter(timeout, filePath, lineNumber);
         }
 
@@ -49,7 +51,8 @@ namespace System.Threading.Tasks.Extensions
             int milliseconds = DefaultTimeoutDuration,
             [CallerFilePath] string filePath = null,
             [CallerLineNumber] int lineNumber = default
-        ) {
+        )
+        {
             return task.AsTask()
                 .TimeoutAfter(TimeSpan.FromMilliseconds(milliseconds), filePath, lineNumber);
         }
@@ -59,7 +62,8 @@ namespace System.Threading.Tasks.Extensions
             TimeSpan timeout,
             [CallerFilePath] string filePath = null,
             [CallerLineNumber] int lineNumber = default
-        ) {
+        )
+        {
             return task.AsTask().TimeoutAfter(timeout, filePath, lineNumber);
         }
 
@@ -68,7 +72,8 @@ namespace System.Threading.Tasks.Extensions
             int milliseconds = DefaultTimeoutDuration,
             [CallerFilePath] string filePath = null,
             [CallerLineNumber] int lineNumber = default
-        ) {
+        )
+        {
             return task.TimeoutAfter(TimeSpan.FromMilliseconds(milliseconds), filePath, lineNumber);
         }
 
@@ -77,7 +82,8 @@ namespace System.Threading.Tasks.Extensions
             TimeSpan timeout,
             [CallerFilePath] string filePath = null,
             [CallerLineNumber] int lineNumber = default
-        ) {
+        )
+        {
             return task.TimeoutAfter(timeout, filePath, lineNumber);
         }
 
@@ -86,7 +92,8 @@ namespace System.Threading.Tasks.Extensions
             int milliseconds = DefaultTimeoutDuration,
             [CallerFilePath] string filePath = null,
             [CallerLineNumber] int lineNumber = default
-        ) {
+        )
+        {
             return task.AsTask()
                 .TimeoutAfter(TimeSpan.FromMilliseconds(milliseconds), filePath, lineNumber);
         }
@@ -96,7 +103,8 @@ namespace System.Threading.Tasks.Extensions
             TimeSpan timeout,
             [CallerFilePath] string filePath = null,
             [CallerLineNumber] int lineNumber = default
-        ) {
+        )
+        {
             return task.AsTask().TimeoutAfter(timeout, filePath, lineNumber);
         }
 
@@ -110,7 +118,8 @@ namespace System.Threading.Tasks.Extensions
             TimeSpan timeout,
             [CallerFilePath] string filePath = null,
             [CallerLineNumber] int lineNumber = default
-        ) {
+        )
+        {
             // Don't create a timer if the task is already completed
             // or the debugger is attached
             if (task.IsCompleted || Debugger.IsAttached)
@@ -150,7 +159,8 @@ namespace System.Threading.Tasks.Extensions
             TimeSpan timeout,
             [CallerFilePath] string filePath = null,
             [CallerLineNumber] int lineNumber = default
-        ) {
+        )
+        {
             // Don't create a timer if the task is already completed
             // or the debugger is attached
             if (task.IsCompleted || Debugger.IsAttached)

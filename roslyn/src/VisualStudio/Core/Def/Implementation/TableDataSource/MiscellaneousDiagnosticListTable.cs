@@ -63,7 +63,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 if (
                     solution.ProjectIds.Count == 0
                     || this.TableManager.Sources.Any(s => s == _source)
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -75,7 +76,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 if (
                     solution.ProjectIds.Count > 0
                     || !this.TableManager.Sources.Any(s => s == _source)
-                ) {
+                )
+                {
                     return;
                 }
 

@@ -156,7 +156,8 @@ namespace System.ServiceModel.Syndication.Tests
             string expression,
             XmlDiffAdvancedOptions advOptions,
             XPathNavigator nav
-        ) {
+        )
+        {
             XPathExpression expr = nav.Compile(expression);
 
             if (advOptions.HadAddedNamespace())
@@ -231,7 +232,8 @@ namespace System.ServiceModel.Syndication.Tests
                             if (
                                 sourceChild.NodeType == XmlDiffNodeType.Element
                                 && !(sourceChild is XmlDiffEmptyElement)
-                            ) {
+                            )
+                            {
                                 XmlDiffElement sourceElem = sourceChild as XmlDiffElement;
                                 XmlDiffElement targetElem = targetChild as XmlDiffElement;
                                 Debug.Assert(sourceElem != null);
@@ -292,7 +294,8 @@ namespace System.ServiceModel.Syndication.Tests
                             {
                                 if (
                                     CompareNodes(sourceChild, backupTargetChild) == DiffType.Success
-                                ) {
+                                )
+                                {
                                     recoveryFlag = true;
                                     do
                                     {
@@ -313,7 +316,8 @@ namespace System.ServiceModel.Syndication.Tests
                                     if (
                                         CompareNodes(backupSourceChild, targetChild)
                                         == DiffType.Success
-                                    ) {
+                                    )
+                                    {
                                         recoveryFlag = true;
                                         do
                                         {
@@ -541,7 +545,8 @@ namespace System.ServiceModel.Syndication.Tests
                         if (
                             (sourceElem is XmlDiffEmptyElement)
                             != (targetElem is XmlDiffEmptyElement)
-                        ) {
+                        )
+                        {
                             return DiffType.Element;
                         }
                     }
@@ -815,7 +820,8 @@ namespace System.ServiceModel.Syndication.Tests
                     if (
                         sourceAttr.NamespaceURI == xmlnsNamespace
                         && targetAttr.NamespaceURI == xmlnsNamespace
-                    ) {
+                    )
+                    {
                         if (!IgnorePrefix && (sourceAttr.LocalName != targetAttr.LocalName))
                         {
                             return false;

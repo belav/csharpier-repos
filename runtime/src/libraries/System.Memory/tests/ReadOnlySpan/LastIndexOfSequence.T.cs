@@ -419,7 +419,8 @@ namespace System.SpanTests
             string[] spanInput,
             string[] searchInput,
             int expected
-        ) {
+        )
+        {
             ReadOnlySpan<string> theStrings = spanInput;
             Assert.Equal(expected, theStrings.LastIndexOf(searchInput));
             Assert.Equal(expected, theStrings.LastIndexOf((ReadOnlySpan<string>)searchInput));

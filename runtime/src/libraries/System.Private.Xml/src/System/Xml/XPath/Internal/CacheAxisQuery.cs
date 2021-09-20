@@ -12,12 +12,8 @@ namespace MS.Internal.Xml.XPath
         // int count; -- we reusing it here
         protected List<XPathNavigator> outputBuffer;
 
-        public CacheAxisQuery(
-            Query qyInput,
-            string name,
-            string prefix,
-            XPathNodeType typeTest
-        ) : base(qyInput, name, prefix, typeTest)
+        public CacheAxisQuery(Query qyInput, string name, string prefix, XPathNodeType typeTest)
+            : base(qyInput, name, prefix, typeTest)
         {
             this.outputBuffer = new List<XPathNavigator>();
             this.count = 0;

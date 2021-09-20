@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Core.IO
                 IntPtr httpContext,
                 IntPtr completionInfo,
                 IntPtr completionContext
-            ) {
+            )
+            {
                 var context = (WebSocketReadOperation)GCHandle.FromIntPtr(
                     completionContext
                 ).Target!;

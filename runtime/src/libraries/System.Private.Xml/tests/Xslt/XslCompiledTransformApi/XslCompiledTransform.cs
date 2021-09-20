@@ -97,7 +97,8 @@ namespace System.Xml.Tests
             MethodInfo meth,
             byte[] bytes,
             Type[] types
-        ) {
+        )
+        {
             instance.Load(meth, bytes, types);
         }
     }
@@ -661,7 +662,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             AppContext.SetSwitch("Switch.System.Xml.AllowDefaultResolver", true);
 
             string Baseline = Path.Combine("baseline", (string)param);
@@ -745,7 +747,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             AppContext.SetSwitch("Switch.System.Xml.AllowDefaultResolver", true);
 
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>123</result>";
@@ -779,7 +782,8 @@ namespace System.Xml.Tests
             if (
                 LoadXSL("xmlResolver_document_function_absolute_uri.xsl", xslInputType, readerType)
                 == 1
-            ) {
+            )
+            {
                 if (Transform((string)"fruits.xml", (OutputType)outputType, navType) == 1)
                 {
                     VerifyResult(expected);
@@ -903,7 +907,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             if (LoadXSL("showParam.xsl", xslInputType, readerType) == 1)
             {
                 try
@@ -1007,7 +1012,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string Baseline = Path.Combine("baseline", (string)param);
             try
             {
@@ -1018,7 +1024,8 @@ namespace System.Xml.Tests
                 if (
                     (LoadXSL("showParam.xsl", xslInputType, readerType) == 1)
                     && (Transform((string)"fruits.xml", (OutputType)outputType, navType) == 1)
-                ) {
+                )
+                {
                     VerifyResult(Baseline, _strOutFile);
                     return;
                 }
@@ -1098,7 +1105,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string Baseline = Path.Combine("baseline", (string)param);
             if (xslInputType != XslInputType.Reader)
                 LoadXSL(
@@ -1155,7 +1163,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", xslInputType, readerType) == 1)
                 && (Transform((string)"fruits.xml", (OutputType)outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(Baseline, _strOutFile);
                 return;
             }
@@ -1234,7 +1243,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string Baseline = Path.Combine("baseline", (string)param);
             for (int i = 0; i < 100; i++)
             {
@@ -1250,7 +1260,8 @@ namespace System.Xml.Tests
             if (
                 (LoadXSL("showParam.xsl", xslInputType, readerType) == 1)
                 && (Transform((string)"fruits.xml", (OutputType)outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(Baseline, _strOutFile);
                 return;
             }
@@ -1338,7 +1349,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             FileStream s2;
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result><fruit>Apple</fruit><fruit>orange</fruit></result>";
@@ -1430,7 +1442,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             FileStream s2;
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result><fruit>Apple</fruit><fruit>orange</fruit></result>";
@@ -1521,7 +1534,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             if (navType.ToString() == "DataDocument")
                 // Skip the test for DataDocument
                 return;
@@ -1539,7 +1553,8 @@ namespace System.Xml.Tests
                         readerType,
                         new XmlUrlResolver()
                     ) != 1
-                ) {
+                )
+                {
                     _output.WriteLine("Failed to load stylesheet books_entity_ref.xsl");
                     Assert.True(false);
                 }
@@ -1549,7 +1564,8 @@ namespace System.Xml.Tests
                         Transform((string)"books_entity_ref.xml", (OutputType)outputType, navType)
                         == 1
                     )
-                ) {
+                )
+                {
                     VerifyResult(expected);
                     return;
                 }
@@ -1729,7 +1745,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string Baseline = Path.Combine("baseline", (string)param);
             try
             {
@@ -1913,7 +1930,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string Baseline = Path.Combine("baseline", (string)param);
             CustomNullResolver myResolver = new CustomNullResolver(_output);
             try
@@ -2026,7 +2044,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result><fruit>Apple</fruit><fruit>orange</fruit></result>";
 
@@ -2328,7 +2347,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result><fruit>Apple</fruit><fruit>orange</fruit></result>";
 
@@ -2341,11 +2361,13 @@ namespace System.Xml.Tests
                         GetDefaultCredResolver()
                     ) == 1
                 )
-            ) {
+            )
+            {
                 if (
                     (LoadXSL("XmlResolver_Main.xsl", xslInputType, readerType) == 1)
                     && (Transform((string)"fruits.xml", (OutputType)outputType, navType) == 1)
-                ) {
+                )
+                {
                     VerifyResult(expected);
                     return;
                 }
@@ -2439,7 +2461,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             // XsltResolverTestMain.xsl is placed in IIS virtual directory
             // which requires integrated Windows NT authentication
             string Baseline = Path.Combine("baseline", (string)param);
@@ -2452,7 +2475,8 @@ namespace System.Xml.Tests
                         GetDefaultCredResolver()
                     ) == 1
                 ) && (Transform((string)"fruits.xml", (OutputType)outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(Baseline, _strOutFile);
                 return;
             }
@@ -3234,12 +3258,14 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string Baseline = Path.Combine("baseline", (string)param);
             if (
                 (LoadXSL("showParam.xsl", xslInputType, readerType) == 1)
                 && (Transform((string)"fruits.xml", (OutputType)outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(Baseline, _strOutFile);
                 return;
             }
@@ -3318,7 +3344,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string Baseline = Path.Combine("baseline", (string)param);
             for (int i = 0; i < 5; i++)
             {
@@ -3404,7 +3431,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string Baseline = Path.Combine("baseline", (string)param);
             if (LoadXSL("showParam.xsl", xslInputType, readerType) == 1)
             {
@@ -3506,13 +3534,15 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             FileStream s2;
 
             if (
                 (LoadXSL("showParam.xsl", xslInputType, readerType) == 1)
                 && (Transform((string)"fruits.xml", (OutputType)outputType, navType) == 1)
-            ) {
+            )
+            {
                 s2 = new FileStream(FullFilePath("showParam.xsl"), FileMode.Open, FileAccess.Read);
                 s2.Dispose();
 
@@ -3588,7 +3618,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             try
             {
                 LoadXSL("ForwardComp.xsl", xslInputType, readerType);
@@ -3683,7 +3714,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             try
             {
                 LoadXSL("RootNodeAtt.xsl", xslInputType, readerType);
@@ -3780,7 +3812,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             try
             {
                 LoadXSL("Bug369463.xsl", xslInputType, readerType);
@@ -3881,7 +3914,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><result><fruit>Apple</fruit><fruit>orange</fruit></result>";
 
@@ -3977,7 +4011,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             AppContext.SetSwitch("Switch.System.Xml.AllowDefaultResolver", true);
 
             // "xmlResolver_document_function.xsl" contains
@@ -4071,7 +4106,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             AppContext.SetSwitch("Switch.System.Xml.AllowDefaultResolver", true);
 
             // "xmlResolver_document_function.xsl" contains
@@ -4156,7 +4192,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             AppContext.SetSwitch("Switch.System.Xml.AllowDefaultResolver", true);
 
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>123</result>";
@@ -4189,7 +4226,8 @@ namespace System.Xml.Tests
             if (
                 LoadXSL("xmlResolver_document_function_absolute_uri.xsl", xslInputType, readerType)
                 == 1
-            ) {
+            )
+            {
                 if (TransformResolver("fruits.xml", outputType, navType, new XmlUrlResolver()) == 1)
                 {
                     VerifyResult(expected);
@@ -4269,7 +4307,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             LoadXSL("Bug382198.xsl", xslInputType, readerType);
             // Pass null
             TransformResolver("fruits.xml", outputType, navType, null);
@@ -4686,7 +4725,8 @@ namespace System.Xml.Tests
 
             if (
                 LoadXSL("XmlResolver_Main.xsl", xslInputType, readerType, new XmlUrlResolver()) == 1
-            ) {
+            )
+            {
                 XmlTextReader xr = new XmlTextReader(szFullFilename);
                 XmlTextWriter xw = new XmlTextWriter("out.xml", Encoding.Unicode);
                 xslt.Transform(xr, null, xw, null);
@@ -4748,7 +4788,8 @@ namespace System.Xml.Tests
             object param,
             XslInputType xslInputType,
             ReaderType readerType
-        ) {
+        )
+        {
             AppContext.SetSwitch("Switch.System.Xml.AllowDefaultResolver", true);
 
             // "xmlResolver_document_function.xsl" contains
@@ -4846,7 +4887,8 @@ namespace System.Xml.Tests
             object param3,
             object param4,
             object param5
-        ) {
+        )
+        {
             AppContext.SetSwitch("Switch.System.Xml.AllowDefaultResolver", true);
 
             ValidCases(param0, param1, param2, param3, param4, param5);
@@ -4965,7 +5007,8 @@ namespace System.Xml.Tests
             object param3,
             object param4,
             object param5
-        ) {
+        )
+        {
             string xslFile = FullFilePath(param0 as string);
             string xmlFile = FullFilePath(param1 as string);
             string baseLineFile = Path.Combine("baseline", param2 as string);
@@ -5147,7 +5190,8 @@ namespace System.Xml.Tests
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><out>
 param1 (correct answer is 'local-param1-arg'): local-param1-arg
@@ -5159,7 +5203,8 @@ param2 (correct answer is 'local-param2-arg'): local-param2-arg
             if (
                 (LoadXSL("paramScope.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -5180,7 +5225,8 @@ param2 (correct answer is 'local-param2-arg'): local-param2-arg
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><out>
 param1 (correct answer is 'local-param1-arg'): local-param1-arg
@@ -5192,7 +5238,8 @@ param2 (correct answer is 'local-param2-arg'): local-param2-arg
             if (
                 (LoadXSL("varScope.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("fruits.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -5213,7 +5260,8 @@ param2 (correct answer is 'local-param2-arg'): local-param2-arg
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?><distinct-countries>France, Spain, Austria, Germany</distinct-countries>";
 
@@ -5223,7 +5271,8 @@ param2 (correct answer is 'local-param2-arg'): local-param2-arg
             if (
                 (LoadXSL("Bug111075.xsl", xslInputType, readerType) == 1)
                 && (Transform_ArgList("Bug111075.xml", outputType, navType) == 1)
-            ) {
+            )
+            {
                 VerifyResult(expected);
                 return;
             }
@@ -5244,7 +5293,8 @@ param2 (correct answer is 'local-param2-arg'): local-param2-arg
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             string expected =
                 @"<?xml version=""1.0"" encoding=""utf-8""?>
 		Node Count: {3}
@@ -5256,7 +5306,8 @@ param2 (correct answer is 'local-param2-arg'): local-param2-arg
             if (
                 (LoadXSL("Bug109644.xsl", xslInputType, readerType) == 1)
                 && (Transform((string)"foo.xml", (OutputType)outputType, navType) == 1)
-            ) {
+            )
+            {
                 Assert.Equal(
                     expected,
                     File.ReadAllText("out.xml"),
@@ -5290,7 +5341,8 @@ param2 (correct answer is 'local-param2-arg'): local-param2-arg
             ReaderType readerType,
             OutputType outputType,
             NavType navType
-        ) {
+        )
+        {
             // <SQL BU Defect Tracking 410060>
             // </SQL BU Defect Tracking 410060>
 

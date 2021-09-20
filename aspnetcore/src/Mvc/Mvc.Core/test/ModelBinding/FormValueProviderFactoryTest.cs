@@ -41,7 +41,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Test
         )]
         public async Task GetValueProviderAsync_ReturnsValueProvider_WithCurrentCulture(
             string contentType
-        ) {
+        )
+        {
             // Arrange
             var context = CreateContext(contentType);
             var factory = new FormValueProviderFactory();

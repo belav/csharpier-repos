@@ -197,7 +197,8 @@ namespace System.Xml.Schema
                     if (
                         !_attributeDecls.TryGetValue(qname, out attdef)
                         && _targetNamespaces.ContainsKey(qname.Namespace)
-                    ) {
+                    )
+                    {
                         throw new XmlSchemaException(SR.Sch_UndeclaredAttribute, qname.ToString());
                     }
                 }
@@ -211,7 +212,8 @@ namespace System.Xml.Schema
             XmlQualifiedName qname,
             XmlSchemaObject? partialValidationType,
             out AttributeMatchState attributeMatchState
-        ) {
+        )
+        {
             SchemaAttDef? attdef = null;
             attributeMatchState = AttributeMatchState.UndeclaredAttribute;
             if (ed != null)
@@ -295,7 +297,8 @@ namespace System.Xml.Schema
             SchemaElementDecl? ed,
             XmlQualifiedName qname,
             ref bool skip
-        ) {
+        )
+        {
             AttributeMatchState attributeMatchState;
 
             SchemaAttDef? attDef = GetAttributeXsd(ed, qname, null, out attributeMatchState);
@@ -362,7 +365,8 @@ namespace System.Xml.Schema
             }
             foreach (
                 KeyValuePair<XmlQualifiedName, SchemaElementDecl> entry in sinfo._elementDeclsByType
-            ) {
+            )
+            {
                 if (!_elementDeclsByType.ContainsKey(entry.Key))
                 {
                     _elementDeclsByType.Add(entry.Key, entry.Value);

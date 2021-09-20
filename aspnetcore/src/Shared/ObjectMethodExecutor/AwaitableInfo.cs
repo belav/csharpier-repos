@@ -28,7 +28,8 @@ namespace Microsoft.Extensions.Internal
             MethodInfo awaiterUnsafeOnCompletedMethod,
             Type resultType,
             MethodInfo getAwaiterMethod
-        ) {
+        )
+        {
             AwaiterType = awaiterType;
             AwaiterIsCompletedProperty = awaiterIsCompletedProperty;
             AwaiterGetResultMethod = awaiterGetResultMethod;

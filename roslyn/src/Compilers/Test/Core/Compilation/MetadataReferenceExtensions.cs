@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
         public static ModuleMetadata GetManifestModuleMetadata(
             this PortableExecutableReference peReference
-        ) {
+        )
+        {
             switch (peReference.GetMetadata())
             {
                 case AssemblyMetadata assemblyMetadata:

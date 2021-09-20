@@ -550,7 +550,8 @@ namespace System.Xml.Tests
                     Path.Combine(TestData._Root, "105897.xml"),
                     settings
                 )
-            ) {
+            )
+            {
                 while (vr.Read())
                     ;
             }
@@ -1288,7 +1289,8 @@ namespace System.Xml.Tests
                     Path.Combine(TestData._Root, "105897.xml"),
                     settings
                 )
-            ) {
+            )
+            {
                 while (vr.Read())
                     ;
             }
@@ -2022,7 +2024,8 @@ namespace System.Xml.Tests
                     Path.Combine(TestData._Root, "105897.xml"),
                     settings
                 )
-            ) {
+            )
+            {
                 while (vr.Read())
                     ;
             }

@@ -245,7 +245,8 @@ namespace Microsoft.AspNetCore.Routing
 
         private EndpointNameAddressScheme CreateAddressScheme(
             params EndpointDataSource[] dataSources
-        ) {
+        )
+        {
             return new EndpointNameAddressScheme(new CompositeEndpointDataSource(dataSources));
         }
 

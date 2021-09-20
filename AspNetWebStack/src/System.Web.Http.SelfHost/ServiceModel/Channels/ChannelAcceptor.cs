@@ -58,7 +58,8 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
             TimeSpan timeout,
             AsyncCallback callback,
             object state
-        ) {
+        )
+        {
             return new CompletedAsyncResult(callback, state);
         }
 
@@ -73,7 +74,8 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
             TimeSpan timeout,
             AsyncCallback callback,
             object state
-        ) {
+        )
+        {
             return new CompletedAsyncResult(callback, state);
         }
 

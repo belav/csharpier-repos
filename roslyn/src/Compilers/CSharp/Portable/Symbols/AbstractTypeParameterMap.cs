@@ -21,13 +21,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         protected AbstractTypeParameterMap(
             SmallDictionary<TypeParameterSymbol, TypeWithAnnotations> mapping
-        ) {
+        )
+        {
             this.Mapping = mapping;
         }
 
         protected sealed override TypeWithAnnotations SubstituteTypeParameter(
             TypeParameterSymbol typeParameter
-        ) {
+        )
+        {
             // It might need to be substituted directly.
             TypeWithAnnotations result;
             if (Mapping.TryGetValue(typeParameter, out result))

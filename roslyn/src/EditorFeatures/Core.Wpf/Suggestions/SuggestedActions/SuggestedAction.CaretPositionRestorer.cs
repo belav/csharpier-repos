@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
             public CaretPositionRestorer(
                 ITextBuffer subjectBuffer,
                 ITextBufferAssociatedViewService associatedViewService
-            ) {
+            )
+            {
                 Contract.ThrowIfNull(associatedViewService);
                 _subjectBuffer = subjectBuffer;
                 _caretPositionChangedHandler = (s, e) => _caretChanged = true;

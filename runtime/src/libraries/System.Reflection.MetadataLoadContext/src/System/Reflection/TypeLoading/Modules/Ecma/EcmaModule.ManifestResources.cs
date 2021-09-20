@@ -13,7 +13,8 @@ namespace System.Reflection.TypeLoading.Ecma
     {
         internal unsafe InternalManifestResourceInfo GetInternalManifestResourceInfo(
             string resourceName
-        ) {
+        )
+        {
             MetadataReader reader = Reader;
 
             InternalManifestResourceInfo result = default;

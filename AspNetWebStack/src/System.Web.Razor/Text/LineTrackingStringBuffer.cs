@@ -48,7 +48,8 @@ namespace System.Web.Razor.Text
                 if (
                     (content[i] == '\r' && (i + 1 == content.Length || content[i + 1] != '\n'))
                     || (content[i] != '\r' && ParserHelpers.IsNewLine(content[i]))
-                ) {
+                )
+                {
                     PushNewLine();
                 }
             }
@@ -93,7 +94,8 @@ namespace System.Web.Razor.Text
                 }
                 else if (
                     absoluteIndex > _currentLine.Index && _currentLine.Index + 1 < _lines.Count
-                ) {
+                )
+                {
                     // This index is ahead of the last read line
                     selected = ScanLines(absoluteIndex, _currentLine.Index);
                 }

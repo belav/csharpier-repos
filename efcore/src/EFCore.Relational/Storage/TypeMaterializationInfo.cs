@@ -25,7 +25,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             IProperty? property,
             RelationalTypeMapping mapping,
             bool? nullable = null
-        ) {
+        )
+        {
             Check.NotNull(modelClrType, nameof(modelClrType));
 
             ProviderClrType = mapping.Converter?.ProviderClrType ?? modelClrType;

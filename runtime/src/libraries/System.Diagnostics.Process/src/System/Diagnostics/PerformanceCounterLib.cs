@@ -72,7 +72,8 @@ namespace System.Diagnostics
         internal static PerformanceCounterLib GetPerformanceCounterLib(
             string machineName,
             CultureInfo culture
-        ) {
+        )
+        {
             string lcidString = culture.Name.ToLowerInvariant();
             if (machineName.CompareTo(".") == 0)
                 machineName = ComputerName.ToLowerInvariant();
@@ -184,7 +185,8 @@ namespace System.Diagnostics
                                 CultureInfo.InvariantCulture,
                                 out key
                             )
-                        ) {
+                        )
+                        {
                             if (isHelp)
                             {
                                 // Category Help Table

@@ -36,13 +36,15 @@ namespace Microsoft.CodeAnalysis.Editor.Structure
             IProjectionBufferFactoryService projectionBufferFactoryService,
             ITextEditorFactoryService textEditorFactoryService,
             IAsynchronousOperationListenerProvider listenerProvider
-        ) : base(
-            threadingContext,
-            notificationService,
-            editorOptionsFactoryService,
-            projectionBufferFactoryService,
-            listenerProvider
-        ) {
+        )
+            : base(
+                threadingContext,
+                notificationService,
+                editorOptionsFactoryService,
+                projectionBufferFactoryService,
+                listenerProvider
+            )
+        {
             _textEditorFactoryService = textEditorFactoryService;
         }
 
@@ -61,7 +63,8 @@ namespace Microsoft.CodeAnalysis.Editor.Structure
             IThreadingContext threadingContext,
             ITextEditorFactoryService textEditorFactoryService,
             ITextBuffer finalBuffer
-        ) {
+        )
+        {
             var roles = textEditorFactoryService.CreateTextViewRoleSet(OutliningRegionTextViewRole);
             var view = textEditorFactoryService.CreateTextView(finalBuffer, roles);
 

@@ -13,10 +13,12 @@ class ComputeManagedAssemblies
     public static IEnumerable<string> GetManagedAssembliesInFolder(
         string folder,
         string fileNamePattern = "*.*"
-    ) {
+    )
+    {
         foreach (
             var file in Directory.GetFiles(folder, fileNamePattern, SearchOption.TopDirectoryOnly)
-        ) {
+        )
+        {
             if (IsManaged(file))
             {
                 yield return file;
@@ -64,7 +66,8 @@ class ComputeManagedAssemblies
                         if (
                             culture == ""
                             || culture.Equals("neutral", StringComparison.OrdinalIgnoreCase)
-                        ) {
+                        )
+                        {
                             isManaged = true;
                         }
                     }

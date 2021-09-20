@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
             [NotNullWhen(true)] out IOperation? falseStatement,
             out IReturnOperation? trueReturn,
             out IReturnOperation? falseReturn
-        ) {
+        )
+        {
             trueReturn = null;
             falseReturn = null;
 
@@ -84,7 +85,8 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
                     trueThrow,
                     falseThrow
                 )
-            ) {
+            )
+            {
                 return false;
             }
 

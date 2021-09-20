@@ -63,7 +63,8 @@ namespace System.CommandLine.Benchmarks.DragonFruit
             int methodsPerClassCount,
             string classNamePrefix = "ABCClass",
             string methodNamePrefix = "Method"
-        ) {
+        )
+        {
             IEnumerable<string> testMethodsCodeSnapshot = Enumerable.Range(0, methodsPerClassCount)
                 .Select(i => $"public int {methodNamePrefix}_{i}() {{ return 0; }} ");
 

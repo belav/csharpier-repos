@@ -16,7 +16,8 @@ namespace System.Runtime
         private static unsafe bool CheckForAvailableMemory(
             out ulong availPageFile,
             out ulong totalAddressSpaceFree
-        ) {
+        )
+        {
             Interop.Kernel32.MEMORYSTATUSEX memoryStatus = default;
             memoryStatus.dwLength = (uint)sizeof(Interop.Kernel32.MEMORYSTATUSEX);
             if (!Interop.Kernel32.GlobalMemoryStatusEx(ref memoryStatus))

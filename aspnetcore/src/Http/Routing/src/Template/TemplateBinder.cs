@@ -47,14 +47,15 @@ namespace Microsoft.AspNetCore.Routing.Template
             ObjectPool<UriBuildingContext> pool,
             RouteTemplate template,
             RouteValueDictionary defaults
-        ) : this(
-            urlEncoder,
-            pool,
-            template?.ToRoutePattern()!,
-            defaults,
-            requiredKeys: null,
-            parameterPolicies: null
-        ) { }
+        )
+            : this(
+                urlEncoder,
+                pool,
+                template?.ToRoutePattern()!,
+                defaults,
+                requiredKeys: null,
+                parameterPolicies: null
+            ) { }
 
         /// <summary>
         /// Creates a new instance of <see cref="TemplateBinder"/>.
@@ -74,7 +75,8 @@ namespace Microsoft.AspNetCore.Routing.Template
             RouteValueDictionary? defaults,
             IEnumerable<string>? requiredKeys,
             IEnumerable<(string parameterName, IParameterPolicy policy)>? parameterPolicies
-        ) {
+        )
+        {
             if (urlEncoder == null)
             {
                 throw new ArgumentNullException(nameof(urlEncoder));
@@ -122,7 +124,8 @@ namespace Microsoft.AspNetCore.Routing.Template
             ObjectPool<UriBuildingContext> pool,
             RoutePattern pattern,
             IEnumerable<(string parameterName, IParameterPolicy policy)> parameterPolicies
-        ) {
+        )
+        {
             if (urlEncoder == null)
             {
                 throw new ArgumentNullException(nameof(urlEncoder));
@@ -176,7 +179,8 @@ namespace Microsoft.AspNetCore.Routing.Template
         public TemplateValuesResult? GetValues(
             RouteValueDictionary? ambientValues,
             RouteValueDictionary values
-        ) {
+        )
+        {
             // Make a new copy of the slots array, we'll use this as 'scratch' space
             // and then the RVD will take ownership of it.
             var slots = new KeyValuePair<string, object?>[_slots.Length];
@@ -230,7 +234,8 @@ namespace Microsoft.AspNetCore.Routing.Template
                     if (
                         ambientValues == null
                         || !ambientValues.TryGetValue(key, out var ambientValue)
-                    ) {
+                    )
+                    {
                         ambientValue = null;
                     }
 
@@ -249,7 +254,8 @@ namespace Microsoft.AspNetCore.Routing.Template
                         if (
                             !RoutePartsEqual(ambientValue, _pattern.RequiredValues[key])
                             && !RoutePattern.IsRequiredValueAny(_pattern.RequiredValues[key])
-                        ) {
+                        )
+                        {
                             copyAmbientValues = false;
                             break;
                         }
@@ -297,7 +303,8 @@ namespace Microsoft.AspNetCore.Routing.Template
                         ambientValues != null && ambientValues.TryGetValue(key, out ambientValue);
                     if (
                         hasExplicitValue && hasAmbientValue && !RoutePartsEqual(ambientValue, value)
-                    ) {
+                    )
+                    {
                         // Stop copying current values when we find one that doesn't match
                         copyAmbientValues = false;
                     }
@@ -306,7 +313,8 @@ namespace Microsoft.AspNetCore.Routing.Template
                         !hasExplicitValue
                         && !hasAmbientValue
                         && _defaults?.ContainsKey(parameter.Name) != true
-                    ) {
+                    )
+                    {
                         // This is an unsatisfied parameter value and there are no defaults. We might still
                         // be able to generate a URL but we should stop 'accepting' ambient values.
                         //
@@ -338,7 +346,8 @@ namespace Microsoft.AspNetCore.Routing.Template
                     !copyAmbientValues
                     && !hasExplicitValue
                     && _pattern.RequiredValues.TryGetValue(key, out var requiredValue)
-                ) {
+                )
+                {
                     hasAmbientValue =
                         ambientValues != null && ambientValues.TryGetValue(key, out ambientValue);
                     if (
@@ -347,7 +356,8 @@ namespace Microsoft.AspNetCore.Routing.Template
                             RoutePartsEqual(requiredValue, ambientValue)
                             || RoutePattern.IsRequiredValueAny(requiredValue)
                         )
-                    ) {
+                    )
+                    {
                         // Treat this an an explicit value to *force it*.
                         slots[i] = new KeyValuePair<string, object?>(key, ambientValue);
                         hasExplicitValue = true;
@@ -372,7 +382,8 @@ namespace Microsoft.AspNetCore.Routing.Template
                 }
                 else if (
                     _defaults != null && _defaults.TryGetValue(parameter.Name, out var defaultValue)
-                ) {
+                )
+                {
                     // Add the default value only if there isn't already a new value for it and
                     // only if it actually has a default value.
                     slots[i] = new KeyValuePair<string, object?>(key, defaultValue);
@@ -469,7 +480,8 @@ namespace Microsoft.AspNetCore.Routing.Template
             RouteValueDictionary combinedValues,
             out string? parameterName,
             out IRouteConstraint? constraint
-        ) {
+        )
+        {
             var constraints = _constraints;
             for (var i = 0; i < constraints.Length; i++)
             {
@@ -483,7 +495,8 @@ namespace Microsoft.AspNetCore.Routing.Template
                         combinedValues,
                         RouteDirection.UrlGeneration
                     )
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -520,7 +533,8 @@ namespace Microsoft.AspNetCore.Routing.Template
             LinkOptions? options,
             LinkOptions globalOptions,
             out (PathString path, QueryString query) result
-        ) {
+        )
+        {
             var context = _pool.Get();
 
             context.AppendTrailingSlash =
@@ -550,7 +564,8 @@ namespace Microsoft.AspNetCore.Routing.Template
         private bool TryBindValuesCore(
             UriBuildingContext context,
             RouteValueDictionary acceptedValues
-        ) {
+        )
+        {
             // If we have any output parameter transformers, allow them a chance to influence the parameter values
             // before we build the URI.
             var parameterTransformers = _parameterTransformers;
@@ -601,7 +616,8 @@ namespace Microsoft.AspNetCore.Routing.Template
                             _defaults != null
                             && _defaults.TryGetValue(parameterPart.Name, out var defaultValue)
                             && RoutePartsEqual(value, defaultValue)
-                        ) {
+                        )
+                        {
                             isSameAsDefault = true;
                         }
 
@@ -633,7 +649,8 @@ namespace Microsoft.AspNetCore.Routing.Template
                                     && parameterPart.IsOptional
                                     && (nullablePart = parts[j - 1] as RoutePatternSeparatorPart)
                                         != null
-                                ) {
+                                )
+                                {
                                     separatorPart = nullablePart;
                                     context.Remove(separatorPart.Content);
                                 }
@@ -691,7 +708,8 @@ namespace Microsoft.AspNetCore.Routing.Template
             string key,
             object? value,
             bool wroteFirst
-        ) {
+        )
+        {
             var converted = Convert.ToString(value, CultureInfo.InvariantCulture);
             if (!string.IsNullOrEmpty(converted))
             {
@@ -774,7 +792,8 @@ namespace Microsoft.AspNetCore.Routing.Template
             RouteValueDictionary? ambientValues,
             RouteValueDictionary acceptedValues,
             RouteValueDictionary combinedValues
-        ) {
+        )
+        {
             if (ambientValues == null)
             {
                 return;
@@ -796,7 +815,8 @@ namespace Microsoft.AspNetCore.Routing.Template
         private static KeyValuePair<string, object?>[] AssignSlots(
             RoutePattern pattern,
             KeyValuePair<string, object?>[] filters
-        ) {
+        )
+        {
             var slots = new KeyValuePair<string, object?>[
                 pattern.Parameters.Count + filters.Length
             ];

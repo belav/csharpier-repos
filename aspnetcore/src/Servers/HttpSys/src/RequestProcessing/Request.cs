@@ -65,7 +65,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             if (
                 KnownMethod == HttpApiTypes.HTTP_VERB.HttpVerbOPTIONS
                 && string.Equals(RawUrl, "*", StringComparison.Ordinal)
-            ) {
+            )
+            {
                 PathBase = string.Empty;
                 Path = string.Empty;
             }
@@ -102,7 +103,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         out var pathBase,
                         out var path
                     )
-                ) {
+                )
+                {
                     PathBase = pathBase;
                     Path = path;
                 }
@@ -154,7 +156,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                             transferEncoding?.Trim(),
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         _contentBoundaryType = BoundaryType.Chunked;
                     }
                     else
@@ -169,7 +172,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                                 CultureInfo.InvariantCulture.NumberFormat,
                                 out value
                             )
-                        ) {
+                        )
+                        {
                             _contentBoundaryType = BoundaryType.ContentLength;
                             _contentLength = value;
                         }
@@ -386,7 +390,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
         // enable this, but it's unclear what Http.Sys would do.
         public async Task<X509Certificate2?> GetClientCertificateAsync(
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             if (SslStatus == SslStatus.Insecure)
             {
                 // Non-SSL
@@ -462,7 +467,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             byte[] buffer,
             int offset,
             int size
-        ) {
+        )
+        {
             return RequestContext.GetChunks(
                 ref dataChunkIndex,
                 ref dataChunkOffset,

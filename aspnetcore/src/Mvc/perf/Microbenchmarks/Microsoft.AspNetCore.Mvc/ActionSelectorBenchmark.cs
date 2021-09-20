@@ -168,7 +168,8 @@ namespace Microsoft.AspNetCore.Mvc.Microbenchmarks
         private static IReadOnlyList<ActionDescriptor> NaiveSelectCandidates(
             ActionDescriptor[] actions,
             RouteValueDictionary routeValues
-        ) {
+        )
+        {
             var results = new List<ActionDescriptor>();
             for (var i = 0; i < actions.Length; i++)
             {
@@ -186,7 +187,8 @@ namespace Microsoft.AspNetCore.Mvc.Microbenchmarks
                     }
                     else if (
                         string.Equals(kvp.Value, routeValue, StringComparison.OrdinalIgnoreCase)
-                    ) {
+                    )
+                    {
                         // Match;
                     }
                     else
@@ -279,7 +281,8 @@ namespace Microsoft.AspNetCore.Mvc.Microbenchmarks
         private static void Verify(
             IReadOnlyList<ActionDescriptor> expected,
             IReadOnlyList<ActionDescriptor> actual
-        ) {
+        )
+        {
             if (expected.Count == 0 && actual == null)
             {
                 return;

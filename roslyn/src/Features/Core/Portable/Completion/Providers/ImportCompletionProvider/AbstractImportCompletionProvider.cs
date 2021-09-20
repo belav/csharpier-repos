@@ -118,7 +118,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                         importCompletionOptionValue == null
                         && !IsExperimentEnabled(document.Project.Solution.Workspace)
                     )
-                ) {
+                )
+                {
                     return;
                 }
             }
@@ -144,7 +145,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             Document document,
             SyntaxContext syntaxContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var semanticModel = syntaxContext.SemanticModel;
 
             // The location is the containing node of the LeftToken, or the compilation unit itsef if LeftToken
@@ -188,7 +190,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             char? commitKey,
             bool disallowAddingImports,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             LogCommit();
             var containingNamespace = ImportCompletionItem.GetContainingNamespace(completionItem);
             var provideParenthesisCompletion = await ShouldProvideParenthesisCompletionAsync(
@@ -324,7 +327,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             Document document,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
             var syntaxTree = await document.GetRequiredSyntaxTreeAsync(cancellationToken)
                 .ConfigureAwait(false);
@@ -340,7 +344,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         protected static bool IsAddingImportsSupported(
             Document document,
             bool disallowAddingImports
-        ) {
+        )
+        {
             if (disallowAddingImports)
             {
                 return false;

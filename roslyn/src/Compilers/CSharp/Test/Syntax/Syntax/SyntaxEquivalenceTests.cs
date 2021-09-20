@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             SyntaxNode node1,
             SyntaxNode node2,
             Func<SyntaxKind, bool> ignoreChildNode
-        ) {
+        )
+        {
             Assert.True(SyntaxFactory.AreEquivalent(node1, node2, ignoreChildNode));
 
             // now try as if the second tree were created from scratch.
@@ -523,7 +524,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void TestNullableDirectives_DifferentDirectives(
             string firstDirective,
             string secondDirective
-        ) {
+        )
+        {
             var tree1 = SyntaxFactory.ParseSyntaxTree(
                 $@"
 {firstDirective}

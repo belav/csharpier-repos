@@ -158,7 +158,8 @@ namespace Microsoft.AspNetCore.Identity
             int iterCount,
             int saltSize,
             int numBytesRequested
-        ) {
+        )
+        {
             // Produce a version 3 (see comment above) text hash.
             byte[] salt = new byte[saltSize];
             rng.GetBytes(salt);
@@ -194,7 +195,8 @@ namespace Microsoft.AspNetCore.Identity
             TUser user,
             string hashedPassword,
             string providedPassword
-        ) {
+        )
+        {
             if (hashedPassword == null)
             {
                 throw new ArgumentNullException(nameof(hashedPassword));
@@ -234,7 +236,8 @@ namespace Microsoft.AspNetCore.Identity
                             providedPassword,
                             out embeddedIterCount
                         )
-                    ) {
+                    )
+                    {
                         // If this hasher was configured with a higher iteration count, change the entry now.
                         return (embeddedIterCount < _iterCount)
                           ? PasswordVerificationResult.SuccessRehashNeeded
@@ -296,7 +299,8 @@ namespace Microsoft.AspNetCore.Identity
             byte[] hashedPassword,
             string password,
             out int iterCount
-        ) {
+        )
+        {
             iterCount = default(int);
 
             try

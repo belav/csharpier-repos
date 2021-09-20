@@ -30,7 +30,8 @@ namespace Internal.IL
             TypeDesc type = null,
             MethodDesc method = null,
             StackValueFlags flags = StackValueFlags.None
-        ) {
+        )
+        {
             this.Kind = kind;
             this.Type = type;
             this.Method = method;
@@ -121,7 +122,8 @@ namespace Internal.IL
             TypeDesc type,
             bool readOnly = false,
             bool permanentHome = false
-        ) {
+        )
+        {
             return new StackValue(
                 StackValueKind.ByRef,
                 type,
@@ -283,7 +285,8 @@ namespace Internal.IL
             StackValue valueA,
             StackValue valueB,
             out StackValue merged
-        ) {
+        )
+        {
             merged = valueA;
 
             if (valueB.IsReadOnly)
@@ -480,7 +483,8 @@ namespace Internal.IL
             else if (
                 (!arrayTypeA.ElementType.IsValueType && !arrayTypeA.ElementType.IsByRef)
                 && (!arrayTypeB.ElementType.IsValueType && !arrayTypeB.ElementType.IsByRef)
-            ) {
+            )
+            {
                 // Find common ancestor of the element types
                 mergedElementType = MergeObjectReferences(
                     arrayTypeA.ElementType,

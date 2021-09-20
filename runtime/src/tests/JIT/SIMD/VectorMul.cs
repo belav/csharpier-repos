@@ -18,7 +18,8 @@ internal partial class VectorTest
             T leftTimesRight,
             T leftTimesRightSquared,
             T rightTimesRight
-        ) {
+        )
+        {
             Vector<T> A = new Vector<T>(left);
             Vector<T> B = new Vector<T>(right);
 

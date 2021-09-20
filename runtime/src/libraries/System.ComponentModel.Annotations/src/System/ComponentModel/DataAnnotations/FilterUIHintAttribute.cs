@@ -62,7 +62,8 @@ namespace System.ComponentModel.DataAnnotations
             string filterUIHint,
             string? presentationLayer,
             params object?[] controlParameters
-        ) {
+        )
+        {
             _implementation = new UIHintAttribute.UIHintImplementation(
                 filterUIHint,
                 presentationLayer,

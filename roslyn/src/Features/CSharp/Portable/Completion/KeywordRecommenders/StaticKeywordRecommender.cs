@@ -66,7 +66,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             int position,
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return context.IsGlobalStatementContext
                 || context.TargetToken.IsUsingKeywordInUsingDirective()
                 || IsValidContextForType(context, cancellationToken)
@@ -86,7 +87,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
         private static bool IsValidContextForMember(
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return context.SyntaxTree.IsGlobalMemberDeclarationContext(
                     context.Position,
                     s_validGlobalMemberModifiers,
@@ -103,7 +105,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
         private static bool IsValidContextForType(
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return context.IsTypeDeclarationContext(
                 validModifiers: s_validTypeModifiers,
                 validTypeDeclarations: SyntaxKindSet.ClassInterfaceStructRecordTypeDeclarations,

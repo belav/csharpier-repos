@@ -865,7 +865,8 @@ public class Program
             bool includesAttributeDefinition,
             bool includesAttributeUse,
             bool publicDefinition
-        ) {
+        )
+        {
             const string attributeName =
                 "System.Runtime.CompilerServices.NullablePublicOnlyAttribute";
             var type = (NamedTypeSymbol)module.GlobalNamespace.GetMember(attributeName);

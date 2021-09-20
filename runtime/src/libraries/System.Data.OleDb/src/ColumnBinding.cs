@@ -60,7 +60,8 @@ namespace System.Data.OleDb
             tagDBBINDING binding,
             int offset,
             bool ifIRowsetElseIRow
-        ) {
+        )
+        {
             Debug.Assert(null != rowbinding, "null rowbinding");
             Debug.Assert(null != bindings, "null bindings");
             Debug.Assert(ODB.SizeOf_tagDBBINDING <= offset, "invalid offset" + offset);

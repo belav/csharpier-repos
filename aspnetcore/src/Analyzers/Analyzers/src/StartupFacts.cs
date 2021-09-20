@@ -33,7 +33,8 @@ namespace Microsoft.AspNetCore.Analyzers
                 if (
                     members[i] is IMethodSymbol method
                     && (IsConfigureServices(symbols, method) || IsConfigure(symbols, method))
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -74,7 +75,8 @@ namespace Microsoft.AspNetCore.Analyzers
                     SymbolNames.ConfigureServicesMethodSuffix,
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -118,7 +120,8 @@ namespace Microsoft.AspNetCore.Analyzers
                     SymbolNames.ConfigureMethodPrefix,
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -130,7 +133,8 @@ namespace Microsoft.AspNetCore.Analyzers
                         symbol.Parameters[i].Type,
                         symbols.IApplicationBuilder
                     )
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -171,7 +175,8 @@ namespace Microsoft.AspNetCore.Analyzers
                     SymbolNames.ComponentEndpointRouteBuilderExtensions.MapBlazorHubMethodName,
                     StringComparison.Ordinal
                 )
-            ) {
+            )
+            {
                 return true;
             }
 

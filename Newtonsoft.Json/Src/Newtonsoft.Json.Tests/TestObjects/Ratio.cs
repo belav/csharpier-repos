@@ -230,7 +230,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
                             formatProvider,
                             out denominator
                         )
-                    ) {
+                    )
+                    {
                         result = new Ratio(numerator, denominator);
                         return true;
                     }

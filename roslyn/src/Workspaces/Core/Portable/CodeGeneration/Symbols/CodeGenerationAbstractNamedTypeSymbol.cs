@@ -31,16 +31,18 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             SpecialType specialType,
             NullableAnnotation nullableAnnotation,
             ImmutableArray<CodeGenerationAbstractNamedTypeSymbol> typeMembers
-        ) : base(
-            containingAssembly,
-            containingType,
-            attributes,
-            declaredAccessibility,
-            modifiers,
-            name,
-            specialType,
-            nullableAnnotation
-        ) {
+        )
+            : base(
+                containingAssembly,
+                containingType,
+                attributes,
+                declaredAccessibility,
+                modifiers,
+                name,
+                specialType,
+                nullableAnnotation
+            )
+        {
             this.TypeMembers = typeMembers;
 
             foreach (var member in typeMembers)
@@ -73,7 +75,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         public INamedTypeSymbol Construct(
             ImmutableArray<ITypeSymbol> typeArguments,
             ImmutableArray<NullableAnnotation> typeArgumentNullableAnnotations
-        ) {
+        )
+        {
             return new CodeGenerationConstructedNamedTypeSymbol(
                 ConstructedFrom,
                 typeArguments,

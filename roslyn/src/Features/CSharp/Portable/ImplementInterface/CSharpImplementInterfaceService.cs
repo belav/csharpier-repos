@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ImplementInterface
             out SyntaxNode classOrStructDecl,
             out INamedTypeSymbol classOrStructType,
             out IEnumerable<INamedTypeSymbol> interfaceTypes
-        ) {
+        )
+        {
             if (!cancellationToken.IsCancellationRequested)
             {
                 if (
@@ -47,14 +48,16 @@ namespace Microsoft.CodeAnalysis.CSharp.ImplementInterface
                     && interfaceNode.Parent is BaseTypeSyntax baseType
                     && baseType.IsParentKind(SyntaxKind.BaseList)
                     && baseType.Type == interfaceNode
-                ) {
+                )
+                {
                     if (
                         interfaceNode.Parent.Parent.IsParentKind(
                             SyntaxKind.ClassDeclaration,
                             SyntaxKind.StructDeclaration,
                             SyntaxKind.RecordDeclaration
                         )
-                    ) {
+                    )
+                    {
                         var interfaceSymbolInfo = model.GetSymbolInfo(
                             interfaceNode,
                             cancellationToken
@@ -66,7 +69,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ImplementInterface
                             if (
                                 interfaceSymbolInfo.GetAnySymbol() is INamedTypeSymbol interfaceType
                                 && interfaceType.TypeKind == TypeKind.Interface
-                            ) {
+                            )
+                            {
                                 classOrStructDecl =
                                     interfaceNode.Parent.Parent.Parent as TypeDeclarationSyntax;
                                 classOrStructType =
@@ -96,7 +100,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ImplementInterface
         protected override SyntaxNode AddCommentInsideIfStatement(
             SyntaxNode ifStatement,
             SyntaxTriviaList trivia
-        ) {
+        )
+        {
             return ifStatement.ReplaceToken(
                 ifStatement.GetLastToken(),
                 ifStatement.GetLastToken().WithPrependedLeadingTrivia(trivia)
@@ -107,7 +112,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ImplementInterface
             SyntaxGenerator g,
             INamedTypeSymbol classType,
             string disposeMethodDisplayString
-        ) {
+        )
+        {
             // ' Do not change this code...
             // Dispose(false)
             var disposeStatement = (StatementSyntax)AddComment(

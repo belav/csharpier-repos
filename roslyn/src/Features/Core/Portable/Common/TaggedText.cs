@@ -77,7 +77,8 @@ namespace Microsoft.CodeAnalysis
             TaggedTextStyle style,
             string navigationTarget,
             string navigationHint
-        ) {
+        )
+        {
             Tag = tag ?? throw new ArgumentNullException(nameof(tag));
             Text = text ?? throw new ArgumentNullException(nameof(text));
             Style = style;
@@ -99,7 +100,8 @@ namespace Microsoft.CodeAnalysis
             this IEnumerable<SymbolDisplayPart> displayParts,
             TaggedTextStyle style,
             Func<ISymbol, string> getNavigationHint = null
-        ) {
+        )
+        {
             if (displayParts == null)
                 return ImmutableArray<TaggedText>.Empty;
 
@@ -249,7 +251,8 @@ namespace Microsoft.CodeAnalysis
 
         public static IEnumerable<ClassifiedSpan> ToClassifiedSpans(
             this IEnumerable<TaggedText> parts
-        ) {
+        )
+        {
             var index = 0;
             foreach (var part in parts)
             {
@@ -269,7 +272,8 @@ namespace Microsoft.CodeAnalysis
         public static string ToVisibleDisplayString(
             this TaggedText part,
             bool includeLeftToRightMarker
-        ) {
+        )
+        {
             var text = part.ToString();
 
             if (includeLeftToRightMarker)
@@ -278,7 +282,8 @@ namespace Microsoft.CodeAnalysis
                 if (
                     classificationTypeName == ClassificationTypeNames.Punctuation
                     || classificationTypeName == ClassificationTypeNames.WhiteSpace
-                ) {
+                )
+                {
                     text = LeftToRightMarkerPrefix + text;
                 }
             }
@@ -289,7 +294,8 @@ namespace Microsoft.CodeAnalysis
         public static string ToVisibleDisplayString(
             this IEnumerable<TaggedText> parts,
             bool includeLeftToRightMarker
-        ) {
+        )
+        {
             return string.Join(
                 string.Empty,
                 parts.Select(p => p.ToVisibleDisplayString(includeLeftToRightMarker))

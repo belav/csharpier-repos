@@ -11,7 +11,8 @@ namespace Microsoft.Extensions.Configuration.Xml
             string textContent,
             int? linePosition,
             int? lineNumber
-        ) {
+        )
+        {
             TextContent = textContent ?? throw new ArgumentNullException(nameof(textContent));
             LineNumber = lineNumber;
             LinePosition = linePosition;

@@ -40,13 +40,15 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ReplaceMethodWithProper
             GetAndSetMethods getAndSetMethods,
             string propertyName,
             bool nameChanged
-        ) {
+        )
+        {
             if (
                 !(
                     getAndSetMethods.GetMethodDeclaration
                     is MethodDeclarationSyntax getMethodDeclaration
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -71,7 +73,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ReplaceMethodWithProper
             GetAndSetMethods getAndSetMethods,
             string propertyName,
             bool nameChanged
-        ) {
+        )
+        {
             var propertyDeclaration = ConvertMethodsToPropertyWorker(
                 documentOptions,
                 parseOptions,
@@ -92,7 +95,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ReplaceMethodWithProper
                     propertyDeclaration.AccessorList?.Accessors.Count == 1
                     && propertyDeclaration.AccessorList?.Accessors[0].Kind()
                         == SyntaxKind.GetAccessorDeclaration
-                ) {
+                )
+                {
                     var getAccessor = propertyDeclaration.AccessorList.Accessors[0];
                     if (getAccessor.ExpressionBody != null)
                     {
@@ -109,7 +113,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ReplaceMethodWithProper
                             out var arrowExpression,
                             out var semicolonToken
                         )
-                    ) {
+                    )
+                    {
                         return propertyDeclaration.WithExpressionBody(arrowExpression)
                             .WithSemicolonToken(semicolonToken)
                             .WithAccessorList(null);
@@ -125,7 +130,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ReplaceMethodWithProper
                         createReturnStatementForExpression: true,
                         block: out var block
                     )
-                ) {
+                )
+                {
                     var accessor = SyntaxFactory.AccessorDeclaration(
                             SyntaxKind.GetAccessorDeclaration
                         )
@@ -151,7 +157,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ReplaceMethodWithProper
             GetAndSetMethods getAndSetMethods,
             string propertyName,
             bool nameChanged
-        ) {
+        )
+        {
             var getMethodDeclaration =
                 (MethodDeclarationSyntax)getAndSetMethods.GetMethodDeclaration;
             var setMethodDeclaration =
@@ -189,7 +196,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ReplaceMethodWithProper
             if (
                 setMethodDeclaration?.Modifiers.Any(SyntaxKind.UnsafeKeyword) == true
                 && !property.Modifiers.Any(SyntaxKind.UnsafeKeyword)
-            ) {
+            )
+            {
                 property = property.AddModifiers(SyntaxFactory.Token(SyntaxKind.UnsafeKeyword));
             }
 
@@ -210,7 +218,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ReplaceMethodWithProper
             SyntaxToken identifier,
             string propertyName,
             bool nameChanged
-        ) {
+        )
+        {
             return nameChanged ? SyntaxFactory.Identifier(propertyName) : identifier;
         }
 
@@ -218,7 +227,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ReplaceMethodWithProper
             GetAndSetMethods getAndSetMethods,
             DocumentOptionSet documentOptions,
             ParseOptions parseOptions
-        ) {
+        )
+        {
             var accessorDeclaration = CreateGetAccessorWorker(getAndSetMethods);
 
             return UseExpressionOrBlockBodyIfDesired(
@@ -232,7 +242,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ReplaceMethodWithProper
             DocumentOptionSet documentOptions,
             ParseOptions parseOptions,
             AccessorDeclarationSyntax accessorDeclaration
-        ) {
+        )
+        {
             var expressionBodyPreference =
                 documentOptions.GetOption(
                     CSharpCodeStyleOptions.PreferExpressionBodiedAccessors
@@ -240,7 +251,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ReplaceMethodWithProper
             if (
                 accessorDeclaration?.Body != null
                 && expressionBodyPreference != ExpressionBodyPreference.Never
-            ) {
+            )
+            {
                 if (
                     accessorDeclaration.Body.TryConvertToArrowExpressionBody(
                         accessorDeclaration.Kind(),
@@ -249,7 +261,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ReplaceMethodWithProper
                         out var arrowExpression,
                         out var semicolonToken
                     )
-                ) {
+                )
+                {
                     return accessorDeclaration.WithBody(null)
                         .WithExpressionBody(arrowExpression)
                         .WithSemicolonToken(semicolonToken)
@@ -259,7 +272,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ReplaceMethodWithProper
             else if (
                 accessorDeclaration?.ExpressionBody != null
                 && expressionBodyPreference == ExpressionBodyPreference.Never
-            ) {
+            )
+            {
                 if (
                     accessorDeclaration.ExpressionBody.TryConvertToBlock(
                         accessorDeclaration.SemicolonToken,
@@ -267,7 +281,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ReplaceMethodWithProper
                             == SyntaxKind.GetAccessorDeclaration,
                         block: out var block
                     )
-                ) {
+                )
+                {
                     return accessorDeclaration.WithExpressionBody(null)
                         .WithSemicolonToken(default)
                         .WithBody(block)
@@ -280,7 +295,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ReplaceMethodWithProper
 
         private static AccessorDeclarationSyntax CreateGetAccessorWorker(
             GetAndSetMethods getAndSetMethods
-        ) {
+        )
+        {
             var getMethodDeclaration =
                 getAndSetMethods.GetMethodDeclaration as MethodDeclarationSyntax;
 
@@ -313,7 +329,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ReplaceMethodWithProper
             GetAndSetMethods getAndSetMethods,
             DocumentOptionSet documentOptions,
             ParseOptions parseOptions
-        ) {
+        )
+        {
             var accessorDeclaration = CreateSetAccessorWorker(
                 semanticModel,
                 generator,
@@ -330,7 +347,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ReplaceMethodWithProper
             SemanticModel semanticModel,
             SyntaxGenerator generator,
             GetAndSetMethods getAndSetMethods
-        ) {
+        )
+        {
             var setMethod = getAndSetMethods.SetMethod;
             if (
                 !(
@@ -338,7 +356,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ReplaceMethodWithProper
                     is MethodDeclarationSyntax setMethodDeclaration
                 )
                 || setMethod?.Parameters.Length != 1
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -447,7 +466,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ReplaceMethodWithProper
                 invocation.ArgumentList?.Arguments.Count != 1
                 || invocation.ArgumentList.Arguments[0].Expression.Kind()
                     == SyntaxKind.DeclarationExpression
-            ) {
+            )
+            {
                 var annotation = ConflictAnnotation.Create(
                     FeaturesResources.Only_methods_with_a_single_argument_which_is_not_an_out_variable_declaration_can_be_replaced_with_a_property
                 );
@@ -530,7 +550,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ReplaceMethodWithProper
                 SimpleNameSyntax,
                 SimpleNameSyntax
             > replace
-        ) {
+        )
+        {
             if (nameToken.Kind() != SyntaxKind.IdentifierToken)
             {
                 return;
@@ -585,7 +606,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ReplaceMethodWithProper
         private static bool IsInvocationName(
             IdentifierNameSyntax nameNode,
             ExpressionSyntax invocationExpression
-        ) {
+        )
+        {
             if (invocationExpression == nameNode)
             {
                 return true;
@@ -594,7 +616,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ReplaceMethodWithProper
             if (
                 nameNode.IsAnyMemberAccessExpressionName()
                 && nameNode.Parent == invocationExpression
-            ) {
+            )
+            {
                 return true;
             }
 

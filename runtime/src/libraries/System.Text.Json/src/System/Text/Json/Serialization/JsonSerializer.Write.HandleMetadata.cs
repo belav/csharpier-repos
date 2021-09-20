@@ -27,7 +27,8 @@ namespace System.Text.Json
             object currentValue,
             ref WriteStack state,
             Utf8JsonWriter writer
-        ) {
+        )
+        {
             MetadataPropertyName writtenMetadataName;
 
             // If the jsonConverter supports immutable dictionaries or value types, don't write any metadata
@@ -64,7 +65,8 @@ namespace System.Text.Json
             object currentValue,
             ref WriteStack state,
             Utf8JsonWriter writer
-        ) {
+        )
+        {
             MetadataPropertyName writtenMetadataName;
 
             // If the jsonConverter supports immutable enumerables or value type collections, don't write any metadata

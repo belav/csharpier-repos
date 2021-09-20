@@ -149,14 +149,16 @@ namespace System.Net.Http
         protected internal override HttpResponseMessage Send(
             HttpRequestMessage request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
         protected internal override async Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 var requestObject = new JSObject();
@@ -166,7 +168,8 @@ namespace System.Net.Http
                         FetchOptions,
                         out IDictionary<string, object>? fetchOptions
                     )
-                ) {
+                )
+                {
                     foreach (KeyValuePair<string, object> item in fetchOptions)
                     {
                         requestObject.SetObjectProperty(item.Key, item.Value);
@@ -212,7 +215,8 @@ namespace System.Net.Http
                                 await request.Content.ReadAsByteArrayAsync(cancellationToken)
                                     .ConfigureAwait(continueOnCapturedContext: true)
                             )
-                        ) {
+                        )
+                        {
                             requestObject.SetObjectProperty("body", uint8Buffer);
                         }
                     }
@@ -237,7 +241,8 @@ namespace System.Net.Http
                                 string,
                                 IEnumerable<string>
                             > header in request.Content.Headers
-                        ) {
+                        )
+                        {
                             foreach (string value in header.Value)
                             {
                                 jsHeaders.Invoke("append", header.Key, value);
@@ -343,7 +348,8 @@ namespace System.Net.Http
                                             (System.Runtime.InteropServices.JavaScript.Array)nextResult.GetObjectProperty(
                                                 "value"
                                             )
-                                    ) {
+                                    )
+                                    {
                                         var name = (string)resultValue[0];
                                         var value = (string)resultValue[1];
                                         if (
@@ -390,7 +396,8 @@ namespace System.Net.Http
                 JSObject abortController,
                 CancellationTokenSource abortCts,
                 CancellationTokenRegistration abortRegistration
-            ) {
+            )
+            {
                 _fetchResponse =
                     fetchResponse ?? throw new ArgumentNullException(nameof(fetchResponse));
                 _abortController =
@@ -450,7 +457,8 @@ namespace System.Net.Http
                     System.Runtime.InteropServices.JavaScript.ArrayBuffer dataBuffer =
                         (System.Runtime.InteropServices.JavaScript.ArrayBuffer)await _status.ArrayBuffer()
                             .ConfigureAwait(continueOnCapturedContext: true)
-                ) {
+                )
+                {
                     using (Uint8Array dataBinView = new Uint8Array(dataBuffer))
                     {
                         _data = dataBinView.ToArray();
@@ -476,7 +484,8 @@ namespace System.Net.Http
                 Stream stream,
                 TransportContext? context,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 byte[] data = await GetResponseData()
                     .ConfigureAwait(continueOnCapturedContext: true);
                 await stream.WriteAsync(data, cancellationToken)
@@ -529,7 +538,8 @@ namespace System.Net.Http
                 int offset,
                 int count,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (buffer == null)
                 {
                     throw new ArgumentNullException(nameof(buffer));
@@ -575,7 +585,8 @@ namespace System.Net.Http
                     var t = (Task<object>)_reader.Invoke("read");
                     using (
                         var read = (JSObject)await t.ConfigureAwait(continueOnCapturedContext: true)
-                    ) {
+                    )
+                    {
                         if ((bool)read.GetObjectProperty("done"))
                         {
                             _reader.Dispose();

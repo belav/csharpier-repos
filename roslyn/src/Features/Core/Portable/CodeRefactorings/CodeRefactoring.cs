@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
         public CodeRefactoring(
             CodeRefactoringProvider provider,
             ImmutableArray<(CodeAction, TextSpan?)> actions
-        ) {
+        )
+        {
             Provider = provider;
             CodeActions = actions.NullToEmpty();
 

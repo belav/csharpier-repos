@@ -55,7 +55,8 @@ namespace Internal.TypeSystem
         // Parameter index 0 represents the return type, and indices 1-n represent the parameters to the signature
         public static string GetIndexOfCustomModifierOnPointedAtTypeByParameterIndex(
             int parameterIndex
-        ) {
+        )
+        {
             return $"0.1.1.2.{(parameterIndex + 1).ToStringInvariant()}.1";
         }
 
@@ -65,7 +66,8 @@ namespace Internal.TypeSystem
             TypeDesc returnType,
             TypeDesc[] parameters,
             EmbeddedSignatureData[] embeddedSignatureData = null
-        ) {
+        )
+        {
             _flags = flags;
             _genericParameterCount = genericParameterCount;
             _returnType = returnType;
@@ -214,17 +216,20 @@ namespace Internal.TypeSystem
 
             if (
                 this._embeddedSignatureData == null && otherSignature._embeddedSignatureData == null
-            ) {
+            )
+            {
                 return true;
             }
 
             if (
                 this._embeddedSignatureData != null && otherSignature._embeddedSignatureData != null
-            ) {
+            )
+            {
                 if (
                     this._embeddedSignatureData.Length
                     != otherSignature._embeddedSignatureData.Length
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -366,7 +371,8 @@ namespace Internal.TypeSystem
                 || _genericParameterCount != _template._genericParameterCount
                 || _returnType != _template._returnType
                 || _parameters != _template._parameters
-            ) {
+            )
+            {
                 _template = new MethodSignature(
                     _flags,
                     _genericParameterCount,
@@ -603,7 +609,8 @@ namespace Internal.TypeSystem
         public virtual MethodDesc InstantiateSignature(
             Instantiation typeInstantiation,
             Instantiation methodInstantiation
-        ) {
+        )
+        {
             Instantiation instantiation = Instantiation;
             TypeDesc[] clone = null;
 

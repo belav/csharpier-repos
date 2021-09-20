@@ -21,7 +21,8 @@ namespace System.Net.Http.Headers
             int startIndex,
             object? storeValue,
             out object? parsedValue
-        ) {
+        )
+        {
             CacheControlHeaderValue? temp = storeValue as CacheControlHeaderValue;
             Debug.Assert(
                 storeValue == null || temp != null,

@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             public CollectTypeParameterSymbolsVisitor(
                 IList<ITypeParameterSymbol> typeParameters,
                 bool onlyMethodTypeParameters
-            ) {
+            )
+            {
                 _onlyMethodTypeParameters = onlyMethodTypeParameters;
                 _typeParameters = typeParameters;
             }
@@ -82,7 +83,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     if (
                         symbol.TypeParameterKind == TypeParameterKind.Method
                         || !_onlyMethodTypeParameters
-                    ) {
+                    )
+                    {
                         if (!_typeParameters.Contains(symbol))
                         {
                             _typeParameters.Add(symbol);

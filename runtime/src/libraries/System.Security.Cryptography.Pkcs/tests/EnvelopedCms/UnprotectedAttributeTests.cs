@@ -478,7 +478,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         public static void TestVersionNumber_RoundTrip(
             bool addUnprotectedAttrs,
             int expectedVersion
-        ) {
+        )
+        {
             ContentInfo expectedContentInfo = new ContentInfo(new byte[] { 1, 2, 3 });
             byte[] docName = ("0410AA00790020004E0061006D0065000000").HexToByteArray();
             EnvelopedCms ecms = new EnvelopedCms(expectedContentInfo);
@@ -504,7 +505,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         private static void AssertIsDocumentationDescription(
             this AsnEncodedData attribute,
             string expectedDocumentDescription
-        ) {
+        )
+        {
             Assert.Equal(Oids.DocumentDescription, attribute.Oid.Value);
             Pkcs9DocumentDescription enhancedAttribute = attribute as Pkcs9DocumentDescription;
             Assert.NotNull(enhancedAttribute);
@@ -514,7 +516,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         private static void AssertIsDocumentationName(
             this AsnEncodedData attribute,
             string expectedDocumentName
-        ) {
+        )
+        {
             Assert.Equal(Oids.DocumentName, attribute.Oid.Value);
             Pkcs9DocumentName enhancedAttribute = attribute as Pkcs9DocumentName;
             Assert.NotNull(enhancedAttribute);
@@ -524,7 +527,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         private static void AssertIsSigningTime(
             this AsnEncodedData attribute,
             DateTime expectedTime
-        ) {
+        )
+        {
             Assert.Equal(Oids.SigningTime, attribute.Oid.Value);
             Pkcs9SigningTime enhancedAttribute = attribute as Pkcs9SigningTime;
             Assert.NotNull(enhancedAttribute);
@@ -534,7 +538,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         private static void AssertIsContentType(
             this AsnEncodedData attribute,
             string expectedContentType
-        ) {
+        )
+        {
             Assert.Equal(Oids.ContentType, attribute.Oid.Value);
             Pkcs9ContentType enhancedAttribute = attribute as Pkcs9ContentType;
             Assert.NotNull(enhancedAttribute);
@@ -544,7 +549,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         private static void AssertIsMessageDigest(
             this AsnEncodedData attribute,
             byte[] expectedDigest
-        ) {
+        )
+        {
             Assert.Equal(Oids.MessageDigest, attribute.Oid.Value);
             Pkcs9MessageDigest enhancedAttribute = attribute as Pkcs9MessageDigest;
             Assert.NotNull(enhancedAttribute);
@@ -572,7 +578,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
 
         private static AsnEncodedData[] FlattenAndSort(
             this CryptographicAttributeObjectCollection col
-        ) {
+        )
+        {
             List<AsnEncodedData> attributes = new List<AsnEncodedData>();
             foreach (CryptographicAttributeObject cao in col)
             {

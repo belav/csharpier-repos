@@ -84,7 +84,8 @@ namespace Microsoft.CodeAnalysis.Completion
             bool formatOnCommit,
             int matchPriority,
             CompletionItemSelectionBehavior selectionBehavior
-        ) {
+        )
+        {
             FilterCharacterRules = filterCharacterRules.NullToEmpty();
             CommitCharacterRules = commitCharacterRules.NullToEmpty();
             EnterKeyRule = enterKeyRule;
@@ -108,7 +109,8 @@ namespace Microsoft.CodeAnalysis.Completion
             EnterKeyRule enterKeyRule,
             bool formatOnCommit,
             int? matchPriority
-        ) {
+        )
+        {
             return Create(
                 filterCharacterRules,
                 commitCharacterRules,
@@ -137,7 +139,8 @@ namespace Microsoft.CodeAnalysis.Completion
             int? matchPriority = null,
             CompletionItemSelectionBehavior selectionBehavior =
                 CompletionItemSelectionBehavior.Default
-        ) {
+        )
+        {
             if (
                 filterCharacterRules.IsDefaultOrEmpty
                 && commitCharacterRules.IsDefaultOrEmpty
@@ -145,7 +148,8 @@ namespace Microsoft.CodeAnalysis.Completion
                 && formatOnCommit == Default.FormatOnCommit
                 && matchPriority.GetValueOrDefault() == Default.MatchPriority
                 && selectionBehavior == Default.SelectionBehavior
-            ) {
+            )
+            {
                 return Default;
             }
             else
@@ -176,7 +180,8 @@ namespace Microsoft.CodeAnalysis.Completion
             EnterKeyRule enterKeyRule,
             bool formatOnCommit,
             bool preselect
-        ) {
+        )
+        {
             var matchPriority = preselect
                 ? Completion.MatchPriority.Preselect
                 : Completion.MatchPriority.Default;
@@ -196,7 +201,8 @@ namespace Microsoft.CodeAnalysis.Completion
             Optional<bool> formatOnCommit = default,
             Optional<int> matchPriority = default,
             Optional<CompletionItemSelectionBehavior> selectionBehavior = default
-        ) {
+        )
+        {
             var newFilterRules = filterRules.HasValue ? filterRules.Value : FilterCharacterRules;
             var newCommitRules = commitRules.HasValue ? commitRules.Value : CommitCharacterRules;
             var newEnterKeyRule = enterKeyRule.HasValue ? enterKeyRule.Value : EnterKeyRule;
@@ -213,7 +219,8 @@ namespace Microsoft.CodeAnalysis.Completion
                 && newFormatOnCommit == FormatOnCommit
                 && newMatchPriority == MatchPriority
                 && newSelectionBehavior == SelectionBehavior
-            ) {
+            )
+            {
                 return this;
             }
             else

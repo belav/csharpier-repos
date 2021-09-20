@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.AddMissingImports
         protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
             Workspace workspace,
             TestParameters parameters
-        ) {
+        )
+        {
             var testWorkspace = (TestWorkspace)workspace;
             var pasteTrackingService =
                 testWorkspace.ExportProvider.GetExportedValue<PasteTrackingService>();
@@ -36,7 +37,8 @@ namespace Microsoft.CodeAnalysis.AddMissingImports
         protected override void InitializeWorkspace(
             TestWorkspace workspace,
             TestParameters parameters
-        ) {
+        )
+        {
             // Treat the span being tested as the pasted span
             var hostDocument = workspace.Documents.First();
             var pastedTextSpan = hostDocument.SelectedSpans.FirstOrDefault();
@@ -61,7 +63,8 @@ namespace Microsoft.CodeAnalysis.AddMissingImports
             string expectedMarkup,
             bool placeSystemNamespaceFirst,
             bool separateImportDirectiveGroups
-        ) {
+        )
+        {
             var options = new OptionsCollection(GetLanguage())
             {
                 { GenerationOptions.PlaceSystemNamespaceFirst, placeSystemNamespaceFirst },

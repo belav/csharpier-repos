@@ -18,10 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
 {
     internal sealed class EmbeddedField : EmbeddedTypesManager.CommonEmbeddedField
     {
-        public EmbeddedField(
-            EmbeddedType containingType,
-            FieldSymbolAdapter underlyingField
-        ) : base(containingType, underlyingField) { }
+        public EmbeddedField(EmbeddedType containingType, FieldSymbolAdapter underlyingField)
+            : base(containingType, underlyingField) { }
 
         internal override EmbeddedTypesManager TypeManager
         {
@@ -30,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
 
         protected override IEnumerable<CSharpAttributeData> GetCustomAttributesToEmit(
             PEModuleBuilder moduleBuilder
-        ) {
+        )
+        {
             return UnderlyingField.AdaptedFieldSymbol.GetCustomAttributesToEmit(moduleBuilder);
         }
 

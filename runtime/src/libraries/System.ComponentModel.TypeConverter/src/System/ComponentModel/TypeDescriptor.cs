@@ -121,7 +121,8 @@ namespace System.ComponentModel
         public static TypeDescriptionProvider AddAttributes(
             Type type,
             params Attribute[] attributes
-        ) {
+        )
+        {
             if (type == null)
             {
                 throw new ArgumentNullException(nameof(type));
@@ -152,7 +153,8 @@ namespace System.ComponentModel
         public static TypeDescriptionProvider AddAttributes(
             object instance,
             params Attribute[] attributes
-        ) {
+        )
+        {
             if (instance == null)
             {
                 throw new ArgumentNullException(nameof(instance));
@@ -348,7 +350,8 @@ namespace System.ComponentModel
                 if (
                     providerType != null
                     && typeof(TypeDescriptionProvider).IsAssignableFrom(providerType)
-                ) {
+                )
+                {
                     TypeDescriptionProvider prov =
                         (TypeDescriptionProvider)Activator.CreateInstance(providerType);
                     AddProvider(prov, type);
@@ -434,7 +437,8 @@ namespace System.ComponentModel
             string name,
             Type type,
             params Attribute[] attributes
-        ) {
+        )
+        {
             return new ReflectEventDescriptor(componentType, name, type, attributes);
         }
 
@@ -446,7 +450,8 @@ namespace System.ComponentModel
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type componentType,
             EventDescriptor oldEventDescriptor,
             params Attribute[] attributes
-        ) {
+        )
+        {
             return new ReflectEventDescriptor(componentType, oldEventDescriptor, attributes);
         }
 
@@ -461,7 +466,8 @@ namespace System.ComponentModel
                 Type objectType,
             Type[] argTypes,
             object[] args
-        ) {
+        )
+        {
             if (objectType == null)
             {
                 throw new ArgumentNullException(nameof(objectType));
@@ -502,7 +508,8 @@ namespace System.ComponentModel
             string name,
             Type type,
             params Attribute[] attributes
-        ) {
+        )
+        {
             return new ReflectPropertyDescriptor(componentType, name, type, attributes);
         }
 
@@ -515,7 +522,8 @@ namespace System.ComponentModel
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type componentType,
             PropertyDescriptor oldPropertyDescriptor,
             params Attribute[] attributes
-        ) {
+        )
+        {
             // We must do some special case work here for extended properties. If the old property descriptor is really
             // an extender property that is being surfaced on a component as a normal property, then we must
             // do work here or else ReflectPropertyDescriptor will fail to resolve the get and set methods. We check
@@ -674,7 +682,8 @@ namespace System.ComponentModel
         /// </summary>
         public static AttributeCollection GetAttributes(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type componentType
-        ) {
+        )
+        {
             if (componentType == null)
             {
                 Debug.Fail(
@@ -824,7 +833,8 @@ namespace System.ComponentModel
         /// </summary>
         public static string GetClassName(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type componentType
-        ) {
+        )
+        {
             return GetDescriptor(componentType, nameof(componentType)).GetClassName();
         }
 
@@ -875,7 +885,8 @@ namespace System.ComponentModel
         [RequiresUnreferencedCode(TypeConverter.RequiresUnreferencedCodeMessage)]
         public static TypeConverter GetConverter(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type
-        ) {
+        )
+        {
             return GetDescriptor(type, nameof(type)).GetConverter();
         }
 
@@ -893,7 +904,8 @@ namespace System.ComponentModel
         private static object ConvertFromInvariantString(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type,
             string stringValue
-        ) {
+        )
+        {
             return GetConverter(type).ConvertFromInvariantString(stringValue);
         }
 
@@ -903,7 +915,8 @@ namespace System.ComponentModel
         [RequiresUnreferencedCode(EventDescriptor.RequiresUnreferencedCodeMessage)]
         public static EventDescriptor GetDefaultEvent(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type componentType
-        ) {
+        )
+        {
             if (componentType == null)
             {
                 Debug.Fail("COMPAT:  Returning null, but you should not pass null here");
@@ -948,7 +961,8 @@ namespace System.ComponentModel
         [RequiresUnreferencedCode(PropertyDescriptor.PropertyDescriptorPropertyTypeMessage)]
         public static PropertyDescriptor GetDefaultProperty(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type componentType
-        ) {
+        )
+        {
             if (componentType == null)
             {
                 Debug.Fail(
@@ -996,7 +1010,8 @@ namespace System.ComponentModel
         internal static ICustomTypeDescriptor GetDescriptor(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type,
             string typeName
-        ) {
+        )
+        {
             if (type == null)
             {
                 throw new ArgumentNullException(typeName);
@@ -1082,7 +1097,8 @@ namespace System.ComponentModel
         public static object GetEditor(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type,
             Type editorBaseType
-        ) {
+        )
+        {
             if (editorBaseType == null)
             {
                 throw new ArgumentNullException(nameof(editorBaseType));
@@ -1096,7 +1112,8 @@ namespace System.ComponentModel
         /// </summary>
         public static EventDescriptorCollection GetEvents(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type componentType
-        ) {
+        )
+        {
             if (componentType == null)
             {
                 Debug.Fail(
@@ -1116,7 +1133,8 @@ namespace System.ComponentModel
         public static EventDescriptorCollection GetEvents(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type componentType,
             Attribute[] attributes
-        ) {
+        )
+        {
             if (componentType == null)
             {
                 Debug.Fail(
@@ -1188,7 +1206,8 @@ namespace System.ComponentModel
             object component,
             Attribute[] attributes,
             bool noCustomTypeDesc
-        ) {
+        )
+        {
             if (component == null)
             {
                 Debug.Fail(
@@ -1364,7 +1383,8 @@ namespace System.ComponentModel
         [RequiresUnreferencedCode(PropertyDescriptor.PropertyDescriptorPropertyTypeMessage)]
         public static PropertyDescriptorCollection GetProperties(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type componentType
-        ) {
+        )
+        {
             if (componentType == null)
             {
                 Debug.Fail(
@@ -1388,7 +1408,8 @@ namespace System.ComponentModel
         public static PropertyDescriptorCollection GetProperties(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type componentType,
             Attribute[] attributes
-        ) {
+        )
+        {
             if (componentType == null)
             {
                 Debug.Fail(
@@ -1443,7 +1464,8 @@ namespace System.ComponentModel
         public static PropertyDescriptorCollection GetProperties(
             object component,
             bool noCustomTypeDesc
-        ) {
+        )
+        {
             return GetPropertiesImpl(component, null, noCustomTypeDesc, true);
         }
 
@@ -1460,7 +1482,8 @@ namespace System.ComponentModel
         public static PropertyDescriptorCollection GetProperties(
             object component,
             Attribute[] attributes
-        ) {
+        )
+        {
             return GetProperties(component, attributes, false);
         }
 
@@ -1478,7 +1501,8 @@ namespace System.ComponentModel
             object component,
             Attribute[] attributes,
             bool noCustomTypeDesc
-        ) {
+        )
+        {
             return GetPropertiesImpl(component, attributes, noCustomTypeDesc, false);
         }
 
@@ -1497,7 +1521,8 @@ namespace System.ComponentModel
             Attribute[] attributes,
             bool noCustomTypeDesc,
             bool noAttributes
-        ) {
+        )
+        {
             if (component == null)
             {
                 Debug.Fail(
@@ -1668,7 +1693,8 @@ namespace System.ComponentModel
         [return: DynamicallyAccessedMembers(ReflectTypesDynamicallyAccessedMembers)]
         public static Type GetReflectionType(
             [DynamicallyAccessedMembers(ReflectTypesDynamicallyAccessedMembers)] Type type
-        ) {
+        )
+        {
             if (type == null)
             {
                 throw new ArgumentNullException(nameof(type));
@@ -1940,7 +1966,8 @@ namespace System.ComponentModel
             Attribute[] filter,
             object instance,
             IDictionary cache
-        ) {
+        )
+        {
             Debug.Assert(
                 pipelineType != PIPELINE_ATTRIBUTES,
                 "PipelineAttributeFilter is not supported for attributes"
@@ -1964,7 +1991,8 @@ namespace System.ComponentModel
                     cache[s_pipelineAttributeFilterKeys[pipelineType]]
                         is AttributeFilterCacheItem filterCache
                     && filterCache.IsValid(filter)
-                ) {
+                )
+                {
                     return filterCache.FilteredMembers;
                 }
             }
@@ -2029,7 +2057,8 @@ namespace System.ComponentModel
             ICollection members,
             object instance,
             IDictionary cache
-        ) {
+        )
+        {
             IComponent component = instance as IComponent;
             ITypeDescriptorFilterService componentFilter = null;
 
@@ -2066,7 +2095,8 @@ namespace System.ComponentModel
                 if (
                     cache[s_pipelineFilterKeys[pipelineType]] is FilterCacheItem cacheItem
                     && cacheItem.IsValid(componentFilter)
-                ) {
+                )
+                {
                     return cacheItem.FilteredMembers;
                 }
             }
@@ -2254,7 +2284,8 @@ namespace System.ComponentModel
             int pipelineType,
             ICollection members,
             IDictionary cache
-        ) {
+        )
+        {
             if (cache != null)
             {
                 bool cacheValid = true;
@@ -2262,7 +2293,8 @@ namespace System.ComponentModel
                 if (
                     cache[s_pipelineInitializeKeys[pipelineType]] is ICollection cachedMembers
                     && cachedMembers.Count == members.Count
-                ) {
+                )
+                {
                     IEnumerator cacheEnum = cachedMembers.GetEnumerator();
                     IEnumerator memberEnum = members.GetEnumerator();
 
@@ -2301,7 +2333,8 @@ namespace System.ComponentModel
             ICollection secondary,
             object instance,
             IDictionary cache
-        ) {
+        )
+        {
             // If there is no secondary collection, there is nothing to merge.
             if (secondary == null || secondary.Count == 0)
             {
@@ -2312,7 +2345,8 @@ namespace System.ComponentModel
             if (
                 cache?[s_pipelineMergeKeys[pipelineType]] is ICollection mergeCache
                 && mergeCache.Count == (primary.Count + secondary.Count)
-            ) {
+            )
+            {
                 // Walk the merge cache.
                 IEnumerator mergeEnum = mergeCache.GetEnumerator();
                 IEnumerator primaryEnum = primary.GetEnumerator();
@@ -2456,11 +2490,13 @@ namespace System.ComponentModel
                         if (
                             nodeType != null && type.IsAssignableFrom(nodeType)
                             || nodeType == typeof(object)
-                        ) {
+                        )
+                        {
                             TypeDescriptionNode node = (TypeDescriptionNode)de.Value;
                             while (
                                 node != null && !(node.Provider is ReflectTypeDescriptionProvider)
-                            ) {
+                            )
+                            {
                                 found = true;
                                 node = node.Next;
                             }
@@ -2544,7 +2580,8 @@ namespace System.ComponentModel
                     if (
                         nodeType != null && type.IsAssignableFrom(nodeType)
                         || nodeType == typeof(object)
-                    ) {
+                    )
+                    {
                         TypeDescriptionNode node = (TypeDescriptionNode)de.Value;
                         while (node != null && !(node.Provider is ReflectTypeDescriptionProvider))
                         {
@@ -2608,7 +2645,8 @@ namespace System.ComponentModel
                     if (
                         nodeType != null && nodeType.Module.Equals(module)
                         || nodeType == typeof(object)
-                    ) {
+                    )
+                    {
                         TypeDescriptionNode node = (TypeDescriptionNode)de.Value;
                         while (node != null && !(node.Provider is ReflectTypeDescriptionProvider))
                         {
@@ -2745,7 +2783,8 @@ namespace System.ComponentModel
                 while (
                     typeDescriptionNode != null
                     && !(typeDescriptionNode.Provider is ComNativeDescriptionProvider)
-                ) {
+                )
+                {
                     typeDescriptionNode = typeDescriptionNode.Next;
                 }
                 if (typeDescriptionNode == null)
@@ -2889,7 +2928,8 @@ namespace System.ComponentModel
         public static void RemoveProviderTransparent(
             TypeDescriptionProvider provider,
             object instance
-        ) {
+        )
+        {
             if (provider == null)
             {
                 throw new ArgumentNullException(nameof(provider));
@@ -2966,7 +3006,8 @@ namespace System.ComponentModel
             public override ICustomTypeDescriptor GetTypeDescriptor(
                 [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type objectType,
                 object instance
-            ) {
+            )
+            {
                 if (objectType == null)
                 {
                     throw new ArgumentNullException(nameof(objectType));
@@ -3004,7 +3045,8 @@ namespace System.ComponentModel
                 internal ComNativeTypeDescriptor(
                     IComNativeDescriptorHandler handler,
                     object instance
-                ) {
+                )
+                {
                     _handler = handler;
                     _instance = instance;
                 }
@@ -3065,7 +3107,8 @@ namespace System.ComponentModel
                 )]
                 PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties(
                     Attribute[] attributes
-                ) {
+                )
+                {
                     return _handler.GetProperties(_instance, attributes);
                 }
 
@@ -3099,7 +3142,8 @@ namespace System.ComponentModel
             public override ICustomTypeDescriptor GetTypeDescriptor(
                 [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type objectType,
                 object instance
-            ) {
+            )
+            {
                 return new AttributeTypeDescriptor(
                     _attrs,
                     base.GetTypeDescriptor(objectType, instance)
@@ -3117,10 +3161,8 @@ namespace System.ComponentModel
                 /// Creates a new custom type descriptor that can merge
                 /// the provided set of attributes with the existing set.
                 /// </summary>
-                internal AttributeTypeDescriptor(
-                    Attribute[] attrs,
-                    ICustomTypeDescriptor parent
-                ) : base(parent)
+                internal AttributeTypeDescriptor(Attribute[] attrs, ICustomTypeDescriptor parent)
+                    : base(parent)
                 {
                     _attributeArray = attrs;
                 }
@@ -3224,7 +3266,8 @@ namespace System.ComponentModel
             internal FilterCacheItem(
                 ITypeDescriptorFilterService filterService,
                 ICollection filteredMembers
-            ) {
+            )
+            {
                 _filterService = filterService;
                 FilteredMembers = filteredMembers;
             }
@@ -3291,7 +3334,8 @@ namespace System.ComponentModel
             public override ICustomTypeDescriptor GetTypeDescriptor(
                 [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type objectType,
                 object instance
-            ) {
+            )
+            {
                 return _comNativeDescriptor.GetTypeDescriptor(objectType, instance);
             }
         }
@@ -3313,7 +3357,8 @@ namespace System.ComponentModel
             internal MergedTypeDescriptor(
                 ICustomTypeDescriptor primary,
                 ICustomTypeDescriptor secondary
-            ) {
+            )
+            {
                 _primary = primary;
                 _secondary = secondary;
             }
@@ -3493,7 +3538,8 @@ namespace System.ComponentModel
                     Type objectType,
                 Type[] argTypes,
                 object[] args
-            ) {
+            )
+            {
                 if (objectType == null)
                 {
                     throw new ArgumentNullException(nameof(objectType));
@@ -3583,7 +3629,8 @@ namespace System.ComponentModel
                 [DynamicallyAccessedMembers(ReflectTypesDynamicallyAccessedMembers)]
                     Type objectType,
                 object instance
-            ) {
+            )
+            {
                 if (objectType == null)
                 {
                     throw new ArgumentNullException(nameof(objectType));
@@ -3609,7 +3656,8 @@ namespace System.ComponentModel
             public override ICustomTypeDescriptor GetTypeDescriptor(
                 [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type objectType,
                 object instance
-            ) {
+            )
+            {
                 if (objectType == null)
                 {
                     throw new ArgumentNullException(nameof(objectType));
@@ -4010,7 +4058,8 @@ namespace System.ComponentModel
                 )]
                 PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties(
                     Attribute[] attributes
-                ) {
+                )
+                {
                     // Check to see if the provider we get is a ReflectTypeDescriptionProvider.
                     // If so, we can call on it directly rather than creating another
                     // custom type descriptor
@@ -4099,7 +4148,8 @@ namespace System.ComponentModel
                     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
                         Type objectType,
                     object instance
-                ) {
+                )
+                {
                     _node = node;
                     _objectType = objectType;
                     _instance = instance;
@@ -4478,7 +4528,8 @@ namespace System.ComponentModel
                 )]
                 PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties(
                     Attribute[] attributes
-                ) {
+                )
+                {
                     // Check to see if the provider we get is a ReflectTypeDescriptionProvider.
                     // If so, we can call on it directly rather than creating another
                     // custom type descriptor

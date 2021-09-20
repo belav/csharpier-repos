@@ -40,9 +40,7 @@ namespace System.IO
             HResult = HResults.InternalBufferOverflow;
         }
 
-        protected InternalBufferOverflowException(
-            SerializationInfo info,
-            StreamingContext context
-        ) : base(info, context) { }
+        protected InternalBufferOverflowException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

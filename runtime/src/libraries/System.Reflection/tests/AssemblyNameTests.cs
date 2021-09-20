@@ -124,7 +124,8 @@ namespace System.Reflection.Tests
         public void Ctor_ValidArchitectureName_Succeeds(
             string architectureName,
             ProcessorArchitecture expected
-        ) {
+        )
+        {
             string fullName = "Test, ProcessorArchitecture=" + architectureName;
             AssemblyName assemblyName = new AssemblyName(fullName);
             Assert.Equal(expected, assemblyName.ProcessorArchitecture);
@@ -216,7 +217,8 @@ namespace System.Reflection.Tests
             string cultureName,
             string expectedCultureName,
             string expectedEqualString
-        ) {
+        )
+        {
             Assert.Equal(originalCultureName, assemblyName.CultureName);
             assemblyName.CultureName = cultureName;
             Assert.Equal(expectedCultureName, assemblyName.CultureName);
@@ -367,7 +369,8 @@ namespace System.Reflection.Tests
                     FileAccess.Write,
                     FileShare.None
                 )
-            ) {
+            )
+            {
                 if (PlatformDetection.IsWindows) // File locking is Windows specific.
                 {
                     Assert.Throws<System.IO.FileLoadException>(
@@ -405,7 +408,8 @@ namespace System.Reflection.Tests
             AssemblyName a1,
             AssemblyName a2,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, AssemblyName.ReferenceMatchesDefinition(a1, a2));
         }
 
@@ -796,7 +800,8 @@ namespace System.Reflection.Tests
                     versionStr.IndexOf(VersionUnspecifiedStr, StringComparison.Ordinal) == -1
                     && versionStr.IndexOf("65536", StringComparison.Ordinal) == -1
                 )
-            ) {
+            )
+            {
                 Assert.ThrowsAny<Exception>(() => new Version(versionStr));
             }
             else
@@ -833,7 +838,8 @@ namespace System.Reflection.Tests
         public static void Constructor_String_VersionTest(
             Version expectedVersion,
             string versionStr
-        ) {
+        )
+        {
             Assert.NotNull(expectedVersion);
 
             void Verify(AssemblyName an)
@@ -955,7 +961,8 @@ namespace System.Reflection.Tests
         [InlineData((ProcessorArchitecture)(~7 | 6))]
         public void SetProcessorArchitecture_InvalidArchitecture_TakesLowerThreeBitsIfLessThanOrEqualToMax(
             ProcessorArchitecture invalidArchitecture
-        ) {
+        )
+        {
             foreach (ProcessorArchitecture validArchitecture in ValidProcessorArchitectureValues())
             {
                 var assemblyName = new AssemblyName();
@@ -978,7 +985,8 @@ namespace System.Reflection.Tests
         [MemberData(nameof(ProcessorArchitectures_TestData))]
         public void SetProcessorArchitecture_NoneArchitecture_Succeeds(
             ProcessorArchitecture architecture
-        ) {
+        )
+        {
             var assemblyName = new AssemblyName();
 
             assemblyName.ProcessorArchitecture = architecture;
@@ -992,7 +1000,8 @@ namespace System.Reflection.Tests
         public void GetFullNameAndToString_AreEquivalentAndDoNotPreserveArchitecture(
             string name,
             ProcessorArchitecture expected
-        ) {
+        )
+        {
             _ = expected;
             string originalFullName =
                 "Test, Culture=en-US, PublicKeyToken=b77a5c561934e089, ProcessorArchitecture="
@@ -1010,7 +1019,8 @@ namespace System.Reflection.Tests
         [MemberData(nameof(ProcessorArchitectures_TestData))]
         public void SetProcessorArchitecture_ValidArchitecture_Succeeds(
             ProcessorArchitecture architecture
-        ) {
+        )
+        {
             AssemblyName assemblyName = new AssemblyName();
             assemblyName.ProcessorArchitecture = architecture;
             Assert.Equal(architecture, assemblyName.ProcessorArchitecture);

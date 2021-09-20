@@ -136,7 +136,8 @@ namespace System.Linq.Expressions.Tests
             Type sizeType,
             object defaultValue,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression newArrayExpression = Expression.NewArrayBounds(
                 arrayType,
                 Expression.Constant(size, sizeType)
@@ -153,7 +154,8 @@ namespace System.Linq.Expressions.Tests
                 || sizeType == typeof(short?)
                 || sizeType == typeof(int?)
                 || sizeType == typeof(long?)
-            ) {
+            )
+            {
                 VerifyArrayGenerator(
                     f,
                     arrayType,
@@ -192,7 +194,8 @@ namespace System.Linq.Expressions.Tests
             Type arrayType,
             long? size,
             object defaultValue
-        ) {
+        )
+        {
             if (!size.HasValue)
             {
                 Assert.Throws<InvalidOperationException>(() => func());

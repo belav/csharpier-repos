@@ -39,7 +39,8 @@ namespace System.Security.Cryptography
         private static Pkcs8Response ImportPkcs8(
             ReadOnlySpan<byte> keyBlob,
             ReadOnlySpan<char> password
-        ) {
+        )
+        {
             SafeNCryptKeyHandle handle = CngKeyLite.ImportKeyBlob(
                 Interop.NCrypt.NCRYPT_PKCS8_PRIVATE_KEY_BLOB,
                 keyBlob,

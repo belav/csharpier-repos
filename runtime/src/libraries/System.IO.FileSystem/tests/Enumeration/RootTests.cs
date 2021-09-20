@@ -42,7 +42,8 @@ namespace System.IO.Tests.Enumeration
                         RecurseSubdirectories = true
                     }
                 )
-            ) {
+            )
+            {
                 while (recursed.MoveNext())
                 {
                     if (recursed.LastDirectory != null)

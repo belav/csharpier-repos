@@ -483,7 +483,8 @@ namespace System.Web.Http
             protected override Task<HttpResponseMessage> SendAsync(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return _action(request);
             }
         }

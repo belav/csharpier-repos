@@ -66,7 +66,8 @@ namespace ServerComparison.TestSites
         public Task StartAsync<TContext>(
             IHttpApplication<TContext> application,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return Task.CompletedTask;
         }
 

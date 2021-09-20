@@ -66,7 +66,8 @@ namespace System.Net.Security.Tests
                                 RedirectStandardError = true
                             }
                         )
-                    ) {
+                    )
+                    {
                         // On some platforms (openSUSE 13.2 is one example), doing this query can print error messages to standard error
                         // when the tests are run via MSBuild, this error message gets picked up and treated as an error from the test itself
                         // causing the task to fail.  We don't actually care about the error text at all, so we just ignore it.

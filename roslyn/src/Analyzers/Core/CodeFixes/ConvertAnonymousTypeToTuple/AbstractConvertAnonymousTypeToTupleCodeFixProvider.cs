@@ -66,7 +66,8 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousTypeToTuple
             SyntaxEditor editor,
             Diagnostic diagnostic,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // For the standard invocation of the code-fix, we want to fixup all creations of the
             // "same" anonymous type within the containing method.  We define same-ness as meaning
             // "they have the type symbol".  This means both have the same member names, in the same
@@ -128,7 +129,8 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousTypeToTuple
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             foreach (var diagnostic in diagnostics)
             {
                 // During a fix-all we don't need to bother with the work to go to the containing
@@ -178,13 +180,12 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousTypeToTuple
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                AnalyzersResources.Convert_to_tuple,
-                createChangedDocument,
-                AnalyzersResources.Convert_to_tuple
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    AnalyzersResources.Convert_to_tuple,
+                    createChangedDocument,
+                    AnalyzersResources.Convert_to_tuple
+                ) { }
         }
     }
 }

@@ -60,7 +60,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 if (
                     !values.ContainsKey("action")
                     && AmbientValues.TryGetValue("action", out var action)
-                ) {
+                )
+                {
                     values["action"] = action;
                 }
             }
@@ -74,7 +75,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 if (
                     !values.ContainsKey("controller")
                     && AmbientValues.TryGetValue("controller", out var controller)
-                ) {
+                )
+                {
                     values["controller"] = controller;
                 }
             }

@@ -63,7 +63,8 @@ namespace System.Web.WebPages.Razor
         public static WebPageRazorHost CreateHostFromConfig(
             RazorWebSectionGroup config,
             string virtualPath
-        ) {
+        )
+        {
             return CreateHostFromConfig(config, virtualPath, null);
         }
 
@@ -71,7 +72,8 @@ namespace System.Web.WebPages.Razor
             RazorWebSectionGroup config,
             string virtualPath,
             string physicalPath
-        ) {
+        )
+        {
             if (config == null)
             {
                 throw new ArgumentNullException("config");
@@ -95,7 +97,8 @@ namespace System.Web.WebPages.Razor
             RazorWebSectionGroup config,
             string virtualPath,
             string physicalPath
-        ) {
+        )
+        {
             // Use the virtual path to select a host environment for the generated code
             // Do this check here because the App_Code host can't be overridden.
 
@@ -115,7 +118,8 @@ namespace System.Web.WebPages.Razor
                     config != null
                     && config.Host != null
                     && !String.IsNullOrEmpty(config.Host.FactoryType)
-                ) {
+                )
+                {
                     Func<WebRazorHostFactory> factoryCreator = _factories.GetOrAdd(
                         config.Host.FactoryType,
                         CreateFactory
@@ -160,7 +164,8 @@ namespace System.Web.WebPages.Razor
             foreach (
                 string import in config.Namespaces.OfType<NamespaceInfo>()
                     .Select(ns => ns.Namespace)
-            ) {
+            )
+            {
                 host.NamespaceImports.Add(import);
             }
         }

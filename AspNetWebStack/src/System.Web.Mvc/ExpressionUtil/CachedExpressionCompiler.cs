@@ -17,7 +17,8 @@ namespace System.Web.Mvc.ExpressionUtil
         // how to handle it, we'll just compile the expression as normal.
         public static Func<TModel, TValue> Process<TModel, TValue>(
             Expression<Func<TModel, TValue>> lambdaExpression
-        ) {
+        )
+        {
             return Compiler<TModel, TValue>.Compile(lambdaExpression);
         }
 
@@ -126,7 +127,8 @@ namespace System.Web.Mvc.ExpressionUtil
                 {
                     if (
                         memberExpr.Expression == expr.Parameters[0] || memberExpr.Expression == null
-                    ) {
+                    )
+                    {
                         // model => model.Member or model => StaticMember
                         return _simpleMemberAccessDict.GetOrAdd(
                             memberExpr.Member,

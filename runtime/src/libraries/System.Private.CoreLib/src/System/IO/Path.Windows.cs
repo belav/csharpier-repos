@@ -161,7 +161,8 @@ namespace System.IO
                 length >= 2
                 && PathInternal.IsValidDriveChar(path[0])
                 && path[1] == PathInternal.VolumeSeparatorChar
-            ) {
+            )
+            {
                 // Drive relative paths
                 Debug.Assert(length == 2 || !PathInternal.IsDirectorySeparator(path[2]));
 
@@ -230,7 +231,8 @@ namespace System.IO
                         ref builder.GetPinnableReference()
                     )
                 ) > builder.Capacity
-            ) {
+            )
+            {
                 // Reported size is greater than the buffer size. Increase the capacity.
                 builder.EnsureCapacity(checked((int)result));
             }

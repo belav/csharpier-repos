@@ -52,7 +52,8 @@ namespace System.Composition.Hosting
         /// <returns>A configuration object allowing configuration to continue.</returns>
         public ContainerConfiguration WithProvider(
             ExportDescriptorProvider exportDescriptorProvider
-        ) {
+        )
+        {
             if (exportDescriptorProvider == null)
                 throw new ArgumentNullException(nameof(exportDescriptorProvider));
             _addedSources.Add(exportDescriptorProvider);
@@ -158,7 +159,8 @@ namespace System.Composition.Hosting
         public ContainerConfiguration WithParts(
             IEnumerable<Type> partTypes,
             AttributedModelProvider conventions
-        ) {
+        )
+        {
             if (partTypes == null)
                 throw new ArgumentNullException(nameof(partTypes));
             _types.Add(Tuple.Create(partTypes, conventions));
@@ -186,7 +188,8 @@ namespace System.Composition.Hosting
         public ContainerConfiguration WithAssembly(
             Assembly assembly,
             AttributedModelProvider conventions
-        ) {
+        )
+        {
             return WithAssemblies(new[] { assembly }, conventions);
         }
 
@@ -211,7 +214,8 @@ namespace System.Composition.Hosting
         public ContainerConfiguration WithAssemblies(
             IEnumerable<Assembly> assemblies,
             AttributedModelProvider conventions
-        ) {
+        )
+        {
             if (assemblies == null)
                 throw new ArgumentNullException(nameof(assemblies));
             return WithParts(

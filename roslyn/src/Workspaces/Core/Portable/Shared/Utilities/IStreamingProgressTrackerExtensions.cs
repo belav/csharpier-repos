@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         /// </summary>
         public static async Task<IAsyncDisposable> AddSingleItemAsync(
             this IStreamingProgressTracker progressTracker
-        ) {
+        )
+        {
             await progressTracker.AddItemsAsync(1).ConfigureAwait(false);
             return new StreamingProgressDisposer(progressTracker);
         }

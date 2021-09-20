@@ -53,7 +53,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static AuthenticationBuilder AddAuthentication(
             this IServiceCollection services,
             Action<AuthenticationOptions> configureOptions
-        ) {
+        )
+        {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));

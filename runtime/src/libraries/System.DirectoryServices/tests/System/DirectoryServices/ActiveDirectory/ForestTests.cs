@@ -20,7 +20,8 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         [InlineData(DirectoryContextType.Domain)]
         public void GetForest_InvalidContextType_ThrowsArgumentException(
             DirectoryContextType contextType
-        ) {
+        )
+        {
             var context = new DirectoryContext(contextType, "Name");
             AssertExtensions.Throws<ArgumentException>("context", () => Forest.GetForest(context));
         }
@@ -51,7 +52,8 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         public void GetForest_NonNullNameAndNotRootedDomain_ThrowsActiveDirectoryObjectNotFoundException(
             DirectoryContextType type,
             string name
-        ) {
+        )
+        {
             var context = new DirectoryContext(type, name);
             Assert.Throws<ActiveDirectoryObjectNotFoundException>(() => Forest.GetForest(context));
 

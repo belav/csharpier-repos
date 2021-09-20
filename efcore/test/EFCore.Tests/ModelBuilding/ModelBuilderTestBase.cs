@@ -28,7 +28,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 IEnumerable<string> expectedNames,
                 IEnumerable<string> actualNames,
                 StringComparer? stringComparer = null
-            ) {
+            )
+            {
                 stringComparer ??= StringComparer.Ordinal;
                 Assert.Equal(
                     new SortedSet<string>(expectedNames, stringComparer),
@@ -41,7 +42,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 IEnumerable<IReadOnlyProperty> expectedProperties,
                 IEnumerable<IReadOnlyProperty> actualProperties,
                 PropertyComparer? propertyComparer = null
-            ) {
+            )
+            {
                 propertyComparer ??= new PropertyComparer(compareAnnotations: false);
                 Assert.Equal(
                     new SortedSet<IReadOnlyProperty>(expectedProperties, propertyComparer),
@@ -54,7 +56,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 IEnumerable<IReadOnlyNavigation> expectedNavigations,
                 IEnumerable<IReadOnlyNavigation> actualNavigations,
                 NavigationComparer? navigationComparer = null
-            ) {
+            )
+            {
                 navigationComparer ??= new NavigationComparer(compareAnnotations: false);
                 Assert.Equal(
                     new SortedSet<IReadOnlyNavigation>(expectedNavigations, navigationComparer),
@@ -67,7 +70,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 IEnumerable<IReadOnlyKey> expectedKeys,
                 IEnumerable<IReadOnlyKey> actualKeys,
                 TestKeyComparer? testKeyComparer = null
-            ) {
+            )
+            {
                 testKeyComparer ??= new TestKeyComparer(compareAnnotations: false);
                 Assert.Equal(
                     new SortedSet<IReadOnlyKey>(expectedKeys, testKeyComparer),
@@ -80,7 +84,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 IEnumerable<IReadOnlyForeignKey> expectedForeignKeys,
                 IEnumerable<IReadOnlyForeignKey> actualForeignKeys,
                 ForeignKeyStrictComparer? foreignKeyComparer = null
-            ) {
+            )
+            {
                 foreignKeyComparer ??= new ForeignKeyStrictComparer(compareAnnotations: false);
                 Assert.Equal(
                     new SortedSet<IReadOnlyForeignKey>(expectedForeignKeys, foreignKeyComparer),
@@ -93,7 +98,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 IEnumerable<IReadOnlyIndex> expectedIndexes,
                 IEnumerable<IReadOnlyIndex> actualIndexes,
                 TestIndexComparer? testIndexComparer = null
-            ) {
+            )
+            {
                 testIndexComparer ??= new TestIndexComparer(compareAnnotations: false);
                 Assert.Equal(
                     new SortedSet<IReadOnlyIndex>(expectedIndexes, testIndexComparer),
@@ -201,7 +207,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
             public virtual TestModelBuilder UsePropertyAccessMode(
                 PropertyAccessMode propertyAccessMode
-            ) {
+            )
+            {
                 ModelBuilder.UsePropertyAccessMode(propertyAccessMode);
 
                 return this;
@@ -270,10 +277,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             public abstract TestOwnedNavigationBuilder<
                 TEntity,
                 TRelatedEntity
-            > OwnsOne<TRelatedEntity>(
-                string entityTypeName,
-                string navigationName
-            ) where TRelatedEntity : class;
+            > OwnsOne<TRelatedEntity>(string entityTypeName, string navigationName)
+                where TRelatedEntity : class;
 
             public abstract TestEntityTypeBuilder<TEntity> OwnsOne<TRelatedEntity>(
                 string navigationName,
@@ -320,10 +325,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             public abstract TestOwnedNavigationBuilder<
                 TEntity,
                 TRelatedEntity
-            > OwnsMany<TRelatedEntity>(
-                string entityTypeName,
-                string navigationName
-            ) where TRelatedEntity : class;
+            > OwnsMany<TRelatedEntity>(string entityTypeName, string navigationName)
+                where TRelatedEntity : class;
 
             public abstract TestEntityTypeBuilder<TEntity> OwnsMany<TRelatedEntity>(
                 string navigationName,
@@ -626,16 +629,14 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             public abstract TestReferenceReferenceBuilder<
                 TEntity,
                 TRelatedEntity
-            > HasForeignKey<TDependentEntity>(
-                params string[] foreignKeyPropertyNames
-            ) where TDependentEntity : class;
+            > HasForeignKey<TDependentEntity>(params string[] foreignKeyPropertyNames)
+                where TDependentEntity : class;
 
             public abstract TestReferenceReferenceBuilder<
                 TEntity,
                 TRelatedEntity
-            > HasPrincipalKey<TPrincipalEntity>(
-                params string[] keyPropertyNames
-            ) where TPrincipalEntity : class;
+            > HasPrincipalKey<TPrincipalEntity>(params string[] keyPropertyNames)
+                where TPrincipalEntity : class;
 
             public abstract TestReferenceReferenceBuilder<TEntity, TRelatedEntity> IsRequired(
                 bool isRequired = true

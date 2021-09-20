@@ -247,7 +247,8 @@ namespace System.Net.Http.Formatting.Parsers
             bool withExtraWhitespace,
             bool withExtraCRLF,
             string singleShortBody
-        ) {
+        )
+        {
             byte[] data = CreateBuffer(
                 boundary,
                 withExtraWhitespace,
@@ -293,7 +294,8 @@ namespace System.Net.Http.Formatting.Parsers
             bool withExtraWhitespace,
             bool withExtraCRLF,
             string[] multipleShortBodies
-        ) {
+        )
+        {
             byte[] data = CreateBuffer(
                 boundary,
                 withExtraWhitespace,
@@ -343,7 +345,8 @@ namespace System.Net.Http.Formatting.Parsers
             bool withExtraWhitespace,
             bool withExtraCRLF,
             string singleLongBody
-        ) {
+        )
+        {
             byte[] data = CreateBuffer(
                 boundary,
                 withExtraWhitespace,
@@ -391,7 +394,8 @@ namespace System.Net.Http.Formatting.Parsers
             bool withExtraWhitespace,
             bool withExtraCRLF,
             string[] multipleLongBodies
-        ) {
+        )
+        {
             byte[] data = CreateBuffer(
                 boundary,
                 withExtraWhitespace,
@@ -441,7 +445,8 @@ namespace System.Net.Http.Formatting.Parsers
             bool withExtraWhitespace,
             bool withExtraCRLF,
             string nearBoundaryBody
-        ) {
+        )
+        {
             byte[] data = CreateBuffer(
                 boundary,
                 withExtraWhitespace,
@@ -608,7 +613,8 @@ namespace System.Net.Http.Formatting.Parsers
         private static MimeMultipartParser CreateMimeMultipartParser(
             string boundary,
             int minimumLength
-        ) {
+        )
+        {
             return new MimeMultipartParser(boundary, minimumLength);
         }
 
@@ -637,7 +643,8 @@ namespace System.Net.Http.Formatting.Parsers
             bool withExtraWhitespace,
             bool withTrailingCRLF,
             params string[] bodyparts
-        ) {
+        )
+        {
             string whitespace = String.Empty;
             if (withExtraWhitespace)
             {
@@ -670,7 +677,8 @@ namespace System.Net.Http.Formatting.Parsers
             int readsize,
             out List<string> bodyParts,
             out int totalBytesConsumed
-        ) {
+        )
+        {
             MimeMultipartParser.State state = MimeMultipartParser.State.Invalid;
             totalBytesConsumed = 0;
             bodyParts = new List<string>();

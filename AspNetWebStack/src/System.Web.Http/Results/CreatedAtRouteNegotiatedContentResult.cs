@@ -45,12 +45,13 @@ namespace System.Web.Http.Results
             IContentNegotiator contentNegotiator,
             HttpRequestMessage request,
             IEnumerable<MediaTypeFormatter> formatters
-        ) : this(
-            routeName,
-            routeValues,
-            content,
-            new DirectDependencyProvider(urlFactory, contentNegotiator, request, formatters)
-        ) { }
+        )
+            : this(
+                routeName,
+                routeValues,
+                content,
+                new DirectDependencyProvider(urlFactory, contentNegotiator, request, formatters)
+            ) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CreatedAtRouteNegotiatedContentResult{T}"/> class with the
@@ -73,7 +74,8 @@ namespace System.Web.Http.Results
             IDictionary<string, object> routeValues,
             T content,
             IDependencyProvider dependencies
-        ) {
+        )
+        {
             if (routeName == null)
             {
                 throw new ArgumentNullException("routeName");
@@ -217,7 +219,8 @@ namespace System.Web.Http.Results
                 IContentNegotiator contentNegotiator,
                 HttpRequestMessage request,
                 IEnumerable<MediaTypeFormatter> formatters
-            ) {
+            )
+            {
                 if (urlFactory == null)
                 {
                     throw new ArgumentNullException("urlFactory");

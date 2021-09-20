@@ -102,7 +102,8 @@ namespace System.Threading.Tasks
             TaskScheduler taskScheduler,
             int maxConcurrencyLevel,
             int maxItemsPerTask
-        ) {
+        )
+        {
             // Validate arguments
             if (taskScheduler == null)
                 throw new ArgumentNullException(nameof(taskScheduler));
@@ -355,14 +356,16 @@ namespace System.Threading.Tasks
                         concurrentTasksWaitingCount > 0
                         && !exclusiveTasksAreWaiting
                         && m_processingCount < m_maxConcurrencyLevel
-                    ) {
+                    )
+                    {
                         // Launch concurrent task processing, up to the allowed limit
                         for (
                             int i = 0;
                             i < concurrentTasksWaitingCount
                                 && m_processingCount < m_maxConcurrencyLevel;
                             ++i
-                        ) {
+                        )
+                        {
                             ++m_processingCount;
                             if (!TryQueueThreadPoolWorkItem(fairly))
                             {
@@ -615,7 +618,8 @@ namespace System.Threading.Tasks
                 ConcurrentExclusiveSchedulerPair pair,
                 int maxConcurrencyLevel,
                 ProcessingMode processingMode
-            ) {
+            )
+            {
                 Debug.Assert(pair != null, "Scheduler must be associated with a valid pair.");
                 Debug.Assert(
                     processingMode == ProcessingMode.ProcessingConcurrentTasks
@@ -702,7 +706,8 @@ namespace System.Threading.Tasks
                     isDefaultScheduler
                     && taskWasPreviouslyQueued
                     && !Thread.CurrentThread.IsThreadPoolThread
-                ) {
+                )
+                {
                     return false;
                 }
                 else
@@ -881,7 +886,8 @@ namespace System.Threading.Tasks
         /// <returns>The options to use.</returns>
         internal static TaskCreationOptions GetCreationOptionsForTask(
             bool isReplacementReplica = false
-        ) {
+        )
+        {
             TaskCreationOptions options = TaskCreationOptions.DenyChildAttach;
             if (isReplacementReplica)
                 options |= TaskCreationOptions.PreferFairness;

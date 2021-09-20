@@ -31,7 +31,8 @@ namespace System.Linq.Parallel.Tests
             if (
                 labeled.ToString().StartsWith("Enumerable.Range")
                 || labeled.ToString().StartsWith("Partitioner")
-            ) {
+            )
+            {
                 if (count > 0)
                 {
                     Assert.Throws<NotSupportedException>(() => enumerator.Reset());
@@ -59,7 +60,8 @@ namespace System.Linq.Parallel.Tests
         public static void GetEnumerator_Unordered_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             GetEnumerator_Unordered(labeled, count);
         }
 
@@ -80,7 +82,8 @@ namespace System.Linq.Parallel.Tests
             if (
                 labeled.ToString().StartsWith("Enumerable.Range")
                 || labeled.ToString().StartsWith("Partitioner")
-            ) {
+            )
+            {
                 if (count > 0)
                 {
                     Assert.Throws<NotSupportedException>(() => enumerator.Reset());
@@ -117,7 +120,8 @@ namespace System.Linq.Parallel.Tests
         public static void GetEnumerator_OperationCanceledException(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             _ = count;
             CancellationTokenSource source = new CancellationTokenSource();
             int countdown = 4;
@@ -147,7 +151,8 @@ namespace System.Linq.Parallel.Tests
         public static void GetEnumerator_OperationCanceledException_PreCanceled(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             _ = count;
             Assert.Throws<OperationCanceledException>(
                 () =>
@@ -156,7 +161,8 @@ namespace System.Linq.Parallel.Tests
                         var i in labeled.Item.WithCancellation(
                             new CancellationToken(canceled: true)
                         )
-                    ) {
+                    )
+                    {
                         throw new ShouldNotBeInvokedException();
                     }
                     ;
@@ -173,7 +179,8 @@ namespace System.Linq.Parallel.Tests
         public static void GetEnumerator_MoveNextAfterQueryOpeningFailsIsIllegal(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             _ = count;
             ParallelQuery<int> query = labeled.Item.Select<int, int>(
                     x =>
@@ -202,12 +209,14 @@ namespace System.Linq.Parallel.Tests
         public static void GetEnumerator_CurrentBeforeMoveNext(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             IEnumerator<int> enumerator = labeled.Item.GetEnumerator();
             if (
                 labeled.ToString().StartsWith("Partitioner")
                 || labeled.ToString().StartsWith("Array")
-            ) {
+            )
+            {
                 Assert.Throws<InvalidOperationException>(() => enumerator.Current);
             }
             else
@@ -226,7 +235,8 @@ namespace System.Linq.Parallel.Tests
         public static void GetEnumerator_MoveNextAfterEnd(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             IEnumerator<int> enumerator = labeled.Item.GetEnumerator();
             while (enumerator.MoveNext())
             {
@@ -244,7 +254,8 @@ namespace System.Linq.Parallel.Tests
                     .AsParallel()
                     .SkipWhile(i => true)
                     .GetEnumerator()
-            ) {
+            )
+            {
                 e.MoveNext();
                 Task.Delay(100).Wait(); // verify nothing goes haywire when the internal buffer is allowed to fill
                 while (e.MoveNext())
@@ -262,7 +273,8 @@ namespace System.Linq.Parallel.Tests
         public static void GetEnumerator_DisposeBeforeFirstMoveNext(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             _ = count;
             IEnumerator<int> e = labeled.Item.Select(i => i).GetEnumerator();
             e.Dispose();
@@ -278,7 +290,8 @@ namespace System.Linq.Parallel.Tests
         public static void GetEnumerator_DisposeAfterMoveNext(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             _ = count;
             IEnumerator<int> e = labeled.Item.Select(i => i).GetEnumerator();
             e.MoveNext();

@@ -102,7 +102,8 @@ namespace Microsoft.DotNet.Build.Tasks
                 var depsFileStream = File.Create(
                     Path.Combine(SharedFrameworkDirectory, $"{sharedFxName}.deps.json")
                 )
-            ) {
+            )
+            {
                 new DependencyContextWriter().Write(dependencyContext, depsFileStream);
             }
 
@@ -127,7 +128,8 @@ namespace Microsoft.DotNet.Build.Tasks
         private static IEnumerable<RuntimeFallbacks> GetRuntimeFallbacks(
             string[] runtimeGraphFiles,
             string runtime
-        ) {
+        )
+        {
             RuntimeGraph runtimeGraph = RuntimeGraph.Empty;
 
             foreach (string runtimeGraphFile in runtimeGraphFiles)

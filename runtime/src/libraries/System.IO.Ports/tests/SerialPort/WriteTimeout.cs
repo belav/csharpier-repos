@@ -242,7 +242,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 com.WriteTimeout = 1;
                 com.Open();
 
@@ -256,7 +257,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 com.Open();
                 com.WriteTimeout = 1;
 
@@ -332,7 +334,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 VerifyExceptionAtOpen(com, writeTimeout, throwAt, expectedException);
 
                 if (com.IsOpen)
@@ -347,7 +350,8 @@ namespace System.IO.Ports.Tests
             int writeTimeout,
             ThrowAt throwAt,
             Type expectedException
-        ) {
+        )
+        {
             int origWriteTimeout = com.WriteTimeout;
 
             SerialPortProperties serPortProp = new SerialPortProperties();
@@ -403,7 +407,8 @@ namespace System.IO.Ports.Tests
             SerialPort com,
             int writeTimeout,
             Type expectedException
-        ) {
+        )
+        {
             SerialPortProperties serPortProp = new SerialPortProperties();
 
             com.Open();

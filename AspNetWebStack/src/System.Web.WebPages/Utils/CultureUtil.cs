@@ -24,7 +24,8 @@ namespace System.Web.WebPages
             Thread thread,
             HttpContextBase context,
             string cultureName
-        ) {
+        )
+        {
             Debug.Assert(!String.IsNullOrEmpty(cultureName));
             CultureInfo cultureInfo = GetCulture(context, cultureName);
             if (cultureInfo != null)

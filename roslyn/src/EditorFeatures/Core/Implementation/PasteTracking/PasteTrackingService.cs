@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.PasteTracking
         public bool TryGetPastedTextSpan(
             SourceTextContainer sourceTextContainer,
             out TextSpan textSpan
-        ) {
+        )
+        {
             var textBuffer = sourceTextContainer.TryGetTextBuffer();
             if (textBuffer is null)
             {

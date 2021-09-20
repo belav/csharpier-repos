@@ -88,7 +88,8 @@ namespace System.Net.Http.Tests
             int startIndex,
             ProductInfoHeaderValue expectedResult,
             int expectedIndex
-        ) {
+        )
+        {
             ProductInfoHeaderParser parser = ProductInfoHeaderParser.MultipleValueParser;
             object result = null;
             Assert.True(

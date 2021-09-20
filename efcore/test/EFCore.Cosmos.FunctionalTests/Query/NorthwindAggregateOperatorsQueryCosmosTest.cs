@@ -20,7 +20,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             ITestOutputHelper testOutputHelper
         )
 #pragma warning restore IDE0060 // Remove unused parameter
-          : base(fixture)
+            : base(fixture)
         {
             ClearLog();
             //Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);
@@ -344,7 +344,8 @@ WHERE (c[""Discriminator""] = ""OrderDetail"")"
         [ConditionalTheory(Skip = "Issue#16146")]
         public override async Task Average_with_division_on_decimal_no_significant_digits(
             bool async
-        ) {
+        )
+        {
             await base.Average_with_division_on_decimal_no_significant_digits(async);
 
             AssertSql(
@@ -1007,7 +1008,8 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         [ConditionalTheory(Skip = "Issue #17246")]
         public override Task Multiple_collection_navigation_with_FirstOrDefault_chained_projecting_scalar(
             bool async
-        ) {
+        )
+        {
             return base.Multiple_collection_navigation_with_FirstOrDefault_chained_projecting_scalar(
                 async
             );
@@ -1301,7 +1303,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] IN (""ABCDE"
 
         public override async Task Contains_with_local_collection_complex_predicate_not_matching_ins1(
             bool async
-        ) {
+        )
+        {
             await base.Contains_with_local_collection_complex_predicate_not_matching_ins1(async);
 
             AssertSql(
@@ -1313,7 +1316,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (((c[""CustomerID""] = ""ALFKI"
 
         public override async Task Contains_with_local_collection_complex_predicate_not_matching_ins2(
             bool async
-        ) {
+        )
+        {
             await base.Contains_with_local_collection_complex_predicate_not_matching_ins2(async);
 
             AssertSql(
@@ -1418,7 +1422,8 @@ WHERE (c[""Discriminator""] = ""Order"")"
         [ConditionalTheory(Skip = "Issue#17246")]
         public override async Task Average_with_non_matching_types_in_projection_doesnt_produce_second_explicit_cast(
             bool async
-        ) {
+        )
+        {
             await base.Average_with_non_matching_types_in_projection_doesnt_produce_second_explicit_cast(
                 async
             );
@@ -1433,7 +1438,8 @@ WHERE (c[""Discriminator""] = ""Order"")"
         [ConditionalTheory(Skip = "Issue#17246")]
         public override async Task Max_with_non_matching_types_in_projection_introduces_explicit_cast(
             bool async
-        ) {
+        )
+        {
             await base.Max_with_non_matching_types_in_projection_introduces_explicit_cast(async);
 
             AssertSql(
@@ -1446,7 +1452,8 @@ WHERE (c[""Discriminator""] = ""Order"")"
         [ConditionalTheory(Skip = "Issue#17246")]
         public override async Task Min_with_non_matching_types_in_projection_introduces_explicit_cast(
             bool async
-        ) {
+        )
+        {
             await base.Min_with_non_matching_types_in_projection_introduces_explicit_cast(async);
 
             AssertSql(
@@ -1495,7 +1502,8 @@ WHERE ((c[""Discriminator""] = ""Order"") AND (c[""OrderID""] = 10248))"
         [ConditionalTheory(Skip = "Issue#17246 (Contains over subquery is not supported)")]
         public override async Task List_Contains_over_entityType_should_rewrite_to_identity_equality(
             bool async
-        ) {
+        )
+        {
             await base.List_Contains_over_entityType_should_rewrite_to_identity_equality(async);
 
             AssertSql(
@@ -1579,7 +1587,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND c[""CustomerID""] IN (""ALFKI""
 
         public override async Task String_FirstOrDefault_in_projection_does_not_do_client_eval(
             bool async
-        ) {
+        )
+        {
             await base.String_FirstOrDefault_in_projection_does_not_do_client_eval(async);
 
             AssertSql(
@@ -1742,7 +1751,8 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         [ConditionalTheory(Skip = "Issue#17246")]
         public override Task Collection_LastOrDefault_member_access_in_projection_translated(
             bool async
-        ) {
+        )
+        {
             return base.Collection_LastOrDefault_member_access_in_projection_translated(async);
         }
 
@@ -1755,7 +1765,8 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         [ConditionalTheory(Skip = "Issue#17246 (Contains over subquery is not supported)")]
         public override Task Contains_over_scalar_with_null_should_rewrite_to_identity_equality_subquery(
             bool async
-        ) {
+        )
+        {
             return base.Contains_over_scalar_with_null_should_rewrite_to_identity_equality_subquery(
                 async
             );
@@ -1764,7 +1775,8 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         [ConditionalTheory(Skip = "Issue#17246 (Contains over subquery is not supported)")]
         public override Task Contains_over_nullable_scalar_with_null_in_subquery_translated_correctly(
             bool async
-        ) {
+        )
+        {
             return base.Contains_over_nullable_scalar_with_null_in_subquery_translated_correctly(
                 async
             );
@@ -1773,7 +1785,8 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         [ConditionalTheory(Skip = "Issue#17246 (Contains over subquery is not supported)")]
         public override Task Contains_over_non_nullable_scalar_with_null_in_subquery_simplifies_to_false(
             bool async
-        ) {
+        )
+        {
             return base.Contains_over_non_nullable_scalar_with_null_in_subquery_simplifies_to_false(
                 async
             );
@@ -1782,7 +1795,8 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         [ConditionalTheory(Skip = "Issue#17246 (Contains over subquery is not supported)")]
         public override Task Contains_over_entityType_with_null_should_rewrite_to_identity_equality_subquery(
             bool async
-        ) {
+        )
+        {
             return base.Contains_over_entityType_with_null_should_rewrite_to_identity_equality_subquery(
                 async
             );
@@ -1791,7 +1805,8 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         [ConditionalTheory(Skip = "Issue#17246 (Contains over subquery is not supported)")]
         public override Task Contains_over_entityType_with_null_should_rewrite_to_identity_equality_subquery_complex(
             bool async
-        ) {
+        )
+        {
             return base.Contains_over_entityType_with_null_should_rewrite_to_identity_equality_subquery_complex(
                 async
             );
@@ -1800,7 +1815,8 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         [ConditionalTheory(Skip = "Issue#17246 (Contains over subquery is not supported)")]
         public override Task Contains_over_entityType_with_null_should_rewrite_to_identity_equality_subquery_negated(
             bool async
-        ) {
+        )
+        {
             return base.Contains_over_entityType_with_null_should_rewrite_to_identity_equality_subquery_negated(
                 async
             );
@@ -1839,7 +1855,8 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         [ConditionalTheory(Skip = "Issue#20677")]
         public override Task Average_with_unmapped_property_access_throws_meaningful_exception(
             bool async
-        ) {
+        )
+        {
             return base.Average_with_unmapped_property_access_throws_meaningful_exception(async);
         }
 

@@ -104,7 +104,8 @@ namespace System.Drawing.Tests
             FontFamily fontFamily,
             object other,
             bool expected
-        ) {
+        )
+        {
             try
             {
                 Assert.Equal(expected, fontFamily.Equals(other));

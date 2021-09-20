@@ -133,7 +133,8 @@ namespace System.Xml.Xsl.XsltOld
                     if (
                         Ref.Equal(nspace, input.Atoms.UriXsl)
                         && Ref.Equal(name, input.Atoms.Version)
-                    ) {
+                    )
+                    {
                         version = input.Value;
                     }
                 } while (input.MoveToNextAttribute());
@@ -145,7 +146,8 @@ namespace System.Xml.Xsl.XsltOld
                 if (
                     Ref.Equal(input.LocalName, input.Atoms.Stylesheet)
                     && input.NamespaceURI == XmlReservedNs.NsWdXsl
-                ) {
+                )
+                {
                     throw XsltException.Create(SR.Xslt_WdXslNamespace);
                 }
                 throw XsltException.Create(SR.Xslt_WrongStylesheetElement);
@@ -176,7 +178,8 @@ namespace System.Xml.Xsl.XsltOld
                 if (
                     !Ref.Equal(input.LocalName, input.Atoms.Stylesheet)
                     && !Ref.Equal(input.LocalName, input.Atoms.Transform)
-                ) {
+                )
+                {
                     throw XsltException.Create(SR.Xslt_WrongStylesheetElement);
                 }
                 compiler.PushNamespaceScope();
@@ -875,7 +878,8 @@ namespace System.Xml.Xsl.XsltOld
                         compiler.IsExcludedNamespace(uri)
                         || compiler.IsExtensionNamespace(uri)
                         || compiler.IsNamespaceAlias(uri)
-                    ) {
+                    )
+                    {
                         continue;
                     }
                     this.AddEvent(new NamespaceEvent(input));
@@ -961,13 +965,15 @@ namespace System.Xml.Xsl.XsltOld
                                 "javascript",
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             lang = ScriptingLanguage.JScript;
                         }
                         else if (
                             string.Equals(langName, "c#", StringComparison.OrdinalIgnoreCase)
                             || string.Equals(langName, "csharp", StringComparison.OrdinalIgnoreCase)
-                        ) {
+                        )
+                        {
                             lang = ScriptingLanguage.CSharp;
                         }
                         else if (
@@ -977,7 +983,8 @@ namespace System.Xml.Xsl.XsltOld
                                 "visualbasic",
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             lang = ScriptingLanguage.VisualBasic;
                         }
                         else

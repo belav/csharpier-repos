@@ -100,7 +100,8 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
                         .Any(n => n.RawKind == (int)SyntaxKind.ArrayCreationExpression)
                     && !expression.DepthFirstTraversal()
                         .Any(n => n.RawKind == (int)SyntaxKind.TypeOfExpression)
-                ) {
+                )
+                {
                     var attributeDecl = attributeArgument.GetAncestorOrThis<AttributeListSyntax>();
 
                     // Also can't extract an attribute initializer if the attribute is a global one.
@@ -162,7 +163,8 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
             TNode node,
             SyntaxNode replacementNode,
             ISet<ExpressionSyntax> matches
-        ) {
+        )
+        {
             return (TNode)Rewriter.Visit(node, replacementNode, matches);
         }
     }

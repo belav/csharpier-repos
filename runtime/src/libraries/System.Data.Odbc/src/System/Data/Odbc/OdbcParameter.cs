@@ -333,7 +333,8 @@ namespace System.Data.Odbc
                         if (
                             !_internalShouldSerializeSize
                             && (0 != (ParameterDirection.Output & _internalDirection))
-                        ) {
+                        )
+                        {
                             throw ADP.UninitializedParameterSize(ordinal, _bindtype._type);
                         }
                         if ((null == value) || Convert.IsDBNull(value))
@@ -347,7 +348,8 @@ namespace System.Data.Odbc
                             if (
                                 (0 != (ParameterDirection.Output & _internalDirection))
                                 && (0x3fffffff <= _internalSize)
-                            ) {
+                            )
+                            {
                                 // restrict output parameters when user set Size to Int32.MaxValue
                                 // to the greater of intput size or 8K
                                 cch = Math.Max(cch, 4 * 1024); // MDAC 69224
@@ -366,7 +368,8 @@ namespace System.Data.Odbc
                                 (ODBC32.SQL_TYPE.CHAR == _bindtype._sql_type)
                                 || (ODBC32.SQL_TYPE.VARCHAR == _bindtype._sql_type)
                                 || (ODBC32.SQL_TYPE.LONGVARCHAR == _bindtype._sql_type)
-                            ) {
+                            )
+                            {
                                 cch = System.Text.Encoding.Default.GetMaxByteCount(cch);
                             }
                         }
@@ -376,14 +379,16 @@ namespace System.Data.Odbc
                             if (
                                 (0 != (ParameterDirection.Output & _internalDirection))
                                 && (0x3fffffff <= _internalSize)
-                            ) {
+                            )
+                            {
                                 cch = Math.Max(cch, 4 * 1024); // MDAC 69224
                             }
                             if (
                                 (ODBC32.SQL_TYPE.CHAR == _bindtype._sql_type)
                                 || (ODBC32.SQL_TYPE.VARCHAR == _bindtype._sql_type)
                                 || (ODBC32.SQL_TYPE.LONGVARCHAR == _bindtype._sql_type)
-                            ) {
+                            )
+                            {
                                 cch = System.Text.Encoding.Default.GetMaxByteCount(cch);
                             }
                         }
@@ -394,7 +399,8 @@ namespace System.Data.Odbc
                             if (
                                 (0 != (ParameterDirection.Output & _internalDirection))
                                 && (0x3fffffff <= _internalSize)
-                            ) {
+                            )
+                            {
                                 // restrict output parameters when user set Size to Int32.MaxValue
                                 // to the greater of intput size or 8K
                                 cch = Math.Max(cch, 8 * 1024); // MDAC 69224
@@ -457,7 +463,8 @@ namespace System.Data.Odbc
                     && (_internalSize >= 0)
                     && (_internalSize < cch)
                     && (_bindtype == _originalbindtype)
-                ) {
+                )
+                {
                     cch = _internalSize;
                 }
                 if (twobytesperunit)
@@ -529,7 +536,8 @@ namespace System.Data.Odbc
                         if (
                             (0 != (ParameterDirection.Output & _internalDirection))
                             && (0x3fffffff <= _internalSize)
-                        ) {
+                        )
+                        {
                             // restrict output parameters when user set Size to Int32.MaxValue
                             // to the greater of intput size or 8K
                             ccb = Math.Max(ccb, 8 * 1024); // MDAC 69224
@@ -541,7 +549,8 @@ namespace System.Data.Odbc
                             (value is string)
                             && (ccb < ((string)value).Length)
                             && (_bindtype == _originalbindtype)
-                        ) {
+                        )
+                        {
                             // silently truncate ... MDAC 84408 ... do not truncate upgraded values ... MDAC 84706
                             ccb = ((string)value).Length;
                         }
@@ -551,7 +560,8 @@ namespace System.Data.Odbc
                         (value is byte[])
                         && (ccb < ((byte[])value).Length)
                         && (_bindtype == _originalbindtype)
-                    ) {
+                    )
+                    {
                         // silently truncate ... MDAC 84408 ... do not truncate upgraded values ... MDAC 84706
                         ccb = ((byte[])value).Length;
                     }
@@ -653,7 +663,8 @@ namespace System.Data.Odbc
             OdbcCommand command,
             short ordinal,
             ref int parameterBufferSize
-        ) {
+        )
+        {
             Debug.Assert(command.Connection != null);
 
             // make a snapshot of the current properties. Properties may change while we work on them
@@ -708,7 +719,8 @@ namespace System.Data.Odbc
                         !command.Connection.IsV3Driver // for non V3 driver we always do the conversion
                         || !command.Connection.TestTypeSupport(ODBC32.SQL_TYPE.NUMERIC) // otherwise we convert if the driver does not support numeric
                         || command.Connection.TestRestrictedSqlBindType(_bindtype._sql_type) // or the type is not supported
-                    ) {
+                    )
+                    {
                         // No support for NUMERIC
                         // Change the type
                         _bindtype = TypeMap._VarChar;
@@ -835,7 +847,8 @@ namespace System.Data.Odbc
             short ordinal,
             CNativeBuffer parameterBuffer,
             bool allowReentrance
-        ) {
+        )
+        {
             Debug.Assert(command.Connection != null);
 
             ODBC32.RetCode retcode;
@@ -906,7 +919,8 @@ namespace System.Data.Odbc
                 && (_boundScale == scale)
                 && (_boundBuffer == valueBuffer.Handle)
                 && (_boundIntbuffer == intBuffer.Handle)
-            ) {
+            )
+            {
                 return;
             }
 
@@ -1054,7 +1068,8 @@ namespace System.Data.Odbc
                         && (null != Value)
                         && !Convert.IsDBNull(Value)
                         && (Value.GetType() != _typemap!._type)
-                    ) {
+                    )
+                    {
                         Debug.Assert(ODBC32.SQL_C.NUMERIC == _typemap._sql_c, "unexpected");
                         Value = decimal.Parse(
                             (string)Value,
@@ -1135,11 +1150,13 @@ namespace System.Data.Odbc
             int sizeorprecision,
             int offset,
             CNativeBuffer parameterBuffer
-        ) { //Handle any input params
+        )
+        { //Handle any input params
             if (
                 (ParameterDirection.Input == _internalDirection)
                 || (ParameterDirection.InputOutput == _internalDirection)
-            ) {
+            )
+            {
                 //Note: (lang) "null" means to use the servers default (not DBNull).
                 //We probably should just not have bound this parameter, period, but that
                 //would mess up the users question marks, etc...

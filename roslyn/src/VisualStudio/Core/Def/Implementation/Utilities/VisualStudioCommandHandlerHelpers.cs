@@ -20,7 +20,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
             Guid commandGroup,
             EventHandler invokeHandler,
             EventHandler beforeQueryStatus
-        ) {
+        )
+        {
             var commandIdWithGroupId = new CommandID(commandGroup, commandId);
             var command = new OleMenuCommand(
                 invokeHandler,
@@ -35,14 +36,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
         public static bool TryGetSelectedProjectHierarchy(
             IServiceProvider? serviceProvider,
             [NotNullWhen(returnValue: true)] out IVsHierarchy? hierarchy
-        ) {
+        )
+        {
             hierarchy = null;
 
             // Get the DTE service and make sure there is an open solution
             if (
                 serviceProvider?.GetService(typeof(EnvDTE.DTE)) is not EnvDTE.DTE dte
                 || dte.Solution == null
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -53,7 +56,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
             if (
                 serviceProvider.GetService(typeof(SVsShellMonitorSelection))
                 is IVsMonitorSelection monitorSelection
-            ) {
+            )
+            {
                 try
                 {
                     monitorSelection.GetCurrentSelection(

@@ -179,7 +179,8 @@ namespace Microsoft.CodeAnalysis
             public PooledArrayBuilder<T> ReadArray<T>(
                 ReadFunction<T> readFunction,
                 out string? failureReason
-            ) {
+            )
+            {
                 var builder = PooledArrayBuilder<T>.GetInstance();
                 EatSpace();
 
@@ -268,7 +269,8 @@ namespace Microsoft.CodeAnalysis
                 int start,
                 int end,
                 bool hasEmbeddedQuote
-            ) {
+            )
+            {
                 // 'start' is right after the open quote, and 'end' is right before the close quote.
                 // However, we want to include both quotes in the result.
                 _builder.Append(DoubleQuoteChar);
@@ -331,7 +333,8 @@ namespace Microsoft.CodeAnalysis
                 Compilation compilation,
                 bool ignoreAssemblyKey,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var reader = s_readerPool.Allocate();
                 reader.Initialize(data, compilation, ignoreAssemblyKey, cancellationToken);
                 return reader;
@@ -342,7 +345,8 @@ namespace Microsoft.CodeAnalysis
                 Compilation compilation,
                 bool ignoreAssemblyKey,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 base.Initialize(data, cancellationToken);
                 Compilation = compilation;
                 IgnoreAssemblyKey = ignoreAssemblyKey;
@@ -355,11 +359,13 @@ namespace Microsoft.CodeAnalysis
             internal bool ParameterTypesMatch(
                 ImmutableArray<IParameterSymbol> parameters,
                 PooledArrayBuilder<ITypeSymbol> originalParameterTypes
-            ) {
+            )
+            {
                 if (
                     originalParameterTypes.IsDefault
                     || parameters.Length != originalParameterTypes.Count
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -532,7 +538,8 @@ namespace Microsoft.CodeAnalysis
                 int start,
                 int end,
                 bool hasEmbeddedQuote
-            ) {
+            )
+            {
                 var substring = Data.Substring(start, end - start);
                 var result = hasEmbeddedQuote ? substring.Replace("\"\"", "\"") : substring;
                 return result;
@@ -657,7 +664,8 @@ namespace Microsoft.CodeAnalysis
             private static IModuleSymbol? GetModule(
                 IEnumerable<IModuleSymbol> modules,
                 string moduleName
-            ) {
+            )
+            {
                 foreach (var module in modules)
                 {
                     if (module.MetadataName == moduleName)

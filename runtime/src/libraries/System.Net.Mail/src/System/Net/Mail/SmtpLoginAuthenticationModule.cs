@@ -21,7 +21,8 @@ namespace System.Net.Mail
             object sessionCookie,
             string? spn,
             ChannelBinding? channelBindingToken
-        ) {
+        )
+        {
             lock (_sessions)
             {
                 NetworkCredential? cachedCredential;
@@ -30,7 +31,8 @@ namespace System.Net.Mail
                     if (
                         credential == null
                         || ReferenceEquals(credential, CredentialCache.DefaultNetworkCredentials)
-                    ) {
+                    )
+                    {
                         return null;
                     }
 

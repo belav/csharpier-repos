@@ -54,7 +54,8 @@ namespace Microsoft.CodeAnalysis.AddImport
 
             protected async Task<Document> GetUpdatedDocumentAsync(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var oldText = await OriginalDocument.GetTextAsync(cancellationToken)
                     .ConfigureAwait(false);
                 var newText = oldText.WithChanges(_textChanges);

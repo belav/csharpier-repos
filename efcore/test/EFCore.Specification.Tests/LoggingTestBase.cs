@@ -64,7 +64,8 @@ namespace Microsoft.EntityFrameworkCore
 
         protected virtual string ActualMessage(
             Func<IServiceCollection, DbContextOptionsBuilder> optionsActions
-        ) {
+        )
+        {
             var loggerFactory = new ListLoggerFactory();
             var optionsBuilder = optionsActions(
                 new ServiceCollection().AddSingleton<ILoggerFactory>(loggerFactory)

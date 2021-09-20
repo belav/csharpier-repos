@@ -56,7 +56,8 @@ namespace Microsoft.DotNet.OpenApi.Commands
             string tagName,
             FileInfo projectFile,
             string sourceFile
-        ) {
+        )
+        {
             var project = LoadProject(projectFile);
             var openApiReferenceItems = project.GetItems(tagName);
 
@@ -69,7 +70,8 @@ namespace Microsoft.DotNet.OpenApi.Commands
                 if (
                     string.Equals(include, sourceFile, StringComparison.OrdinalIgnoreCase)
                     || string.Equals(sourceUrl, sourceFile, StringComparison.OrdinalIgnoreCase)
-                ) {
+                )
+                {
                     project.RemoveItem(item);
                     project.Save();
                     return include;

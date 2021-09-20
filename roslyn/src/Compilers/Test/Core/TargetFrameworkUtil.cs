@@ -223,7 +223,8 @@ namespace Roslyn.Test.Utilities
         public static ImmutableArray<MetadataReference> GetReferences(
             TargetFramework tf,
             IEnumerable<MetadataReference> additionalReferences
-        ) {
+        )
+        {
             var references = GetReferences(tf);
             if (additionalReferences == null)
             {
@@ -274,7 +275,8 @@ namespace Roslyn.Test.Utilities
                 if (
                     m is PortableExecutableReference p
                     && p.GetMetadata() is AssemblyMetadata assemblyMetadata
-                ) {
+                )
+                {
                     try
                     {
                         var identity = assemblyMetadata.GetAssembly().Identity;

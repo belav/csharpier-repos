@@ -143,7 +143,8 @@ namespace StressAllocator
                 if (
                     (float)current_bucketObjCount[i] * 100.0F / (float)current_TotalObjCount
                     < sizeBuckets[i].percentage
-                ) {
+                )
+                {
                     size = Rand.Next(sizeBuckets[i].minsize, sizeBuckets[i].maxsize);
                     //Console.WriteLine("bucket={0}, size {1}", i, size);
                     current_bucketObjCount[i]++;
@@ -504,14 +505,16 @@ namespace StressAllocator
                     else if (
                         String.Compare(currentArg.ToLower(), "threads") == 0
                         || String.Compare(currentArg, "t") == 0
-                    ) {
+                    )
+                    {
                         currentArgValue = args[++i];
                         numThreads = Int32.Parse(currentArgValue);
                     }
                     else if (
                         String.Compare(currentArg.ToLower(), "idletime") == 0
                         || String.Compare(currentArg, "t") == 0
-                    ) {
+                    )
+                    {
                         currentArgValue = args[++i];
                         threadIdleTime = Int32.Parse(currentArgValue);
                     }
@@ -609,7 +612,8 @@ namespace StressAllocator
                 || maxLife < 1
                 || objCount < 1
                 || outputFrequency < 0
-            ) {
+            )
+            {
                 Console.WriteLine("Incorrect values for arguments");
                 return false;
             }

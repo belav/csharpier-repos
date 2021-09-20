@@ -48,7 +48,8 @@ namespace System.Linq.Parallel.Tests
         public static void OfType_AllValid_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             OfType_AllValid(labeled, count);
         }
 
@@ -79,7 +80,8 @@ namespace System.Linq.Parallel.Tests
         public static void OfType_AllValid_NotPipelined(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             ParallelQuery<int> query = labeled.Item;
             int seen = 0;
             Assert.All(
@@ -95,7 +97,8 @@ namespace System.Linq.Parallel.Tests
         public static void OfType_AllValid_NotPipelined_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             OfType_AllValid_NotPipelined(labeled, count);
         }
 
@@ -124,7 +127,8 @@ namespace System.Linq.Parallel.Tests
         public static void OfType_NoneValid_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             OfType_NoneValid(labeled, count);
         }
 
@@ -138,7 +142,8 @@ namespace System.Linq.Parallel.Tests
         public static void OfType_NoneValid_NotPipelined(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             _ = count;
             ParallelQuery<int> query = labeled.Item;
             Assert.Empty(query.OfType<long>().ToList());
@@ -155,7 +160,8 @@ namespace System.Linq.Parallel.Tests
         public static void OfType_NoneValid_NotPipelined_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             OfType_NoneValid_NotPipelined(labeled, count);
         }
 
@@ -171,7 +177,8 @@ namespace System.Linq.Parallel.Tests
                 int i in UnorderedSources.Default(count)
                     .Select(x => x >= count / 2 ? (object)x : x.ToString())
                     .OfType<int>()
-            ) {
+            )
+            {
                 seen.Add(i);
             }
             seen.AssertComplete();
@@ -192,7 +199,8 @@ namespace System.Linq.Parallel.Tests
             int seen = count / 2;
             foreach (
                 int i in query.Select(x => x >= count / 2 ? (object)x : x.ToString()).OfType<int>()
-            ) {
+            )
+            {
                 Assert.Equal(seen++, i);
             }
             Assert.Equal(count, seen);
@@ -204,7 +212,8 @@ namespace System.Linq.Parallel.Tests
         public static void OfType_SomeValid_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             OfType_SomeValid(labeled, count);
         }
 
@@ -238,7 +247,8 @@ namespace System.Linq.Parallel.Tests
         public static void OfType_SomeValid_NotPipelined(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             ParallelQuery<int> query = labeled.Item;
             int seen = count / 2;
             Assert.All(
@@ -254,7 +264,8 @@ namespace System.Linq.Parallel.Tests
         public static void OfType_SomeValid_NotPipelined_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             OfType_SomeValid_NotPipelined(labeled, count);
         }
 
@@ -277,7 +288,8 @@ namespace System.Linq.Parallel.Tests
         public static void OfType_SomeInvalidNull_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             OfType_SomeInvalidNull(labeled, count);
         }
 
@@ -309,7 +321,8 @@ namespace System.Linq.Parallel.Tests
         public static void OfType_SomeValidNull_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             OfType_SomeValidNull(labeled, count);
         }
 
@@ -340,7 +353,8 @@ namespace System.Linq.Parallel.Tests
         public static void OfType_SomeNull_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             OfType_SomeNull(labeled, count);
         }
 

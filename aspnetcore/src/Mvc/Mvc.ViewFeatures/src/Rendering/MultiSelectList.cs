@@ -52,11 +52,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         /// <param name="items">The items.</param>
         /// <param name="dataValueField">The data value field.</param>
         /// <param name="dataTextField">The data text field.</param>
-        public MultiSelectList(
-            IEnumerable items,
-            string dataValueField,
-            string dataTextField
-        ) : this(items, dataValueField, dataTextField, selectedValues: null)
+        public MultiSelectList(IEnumerable items, string dataValueField, string dataTextField)
+            : this(items, dataValueField, dataTextField, selectedValues: null)
         {
             if (items == null)
             {
@@ -103,7 +100,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string dataTextField,
             IEnumerable selectedValues,
             string dataGroupField
-        ) {
+        )
+        {
             if (items == null)
             {
                 throw new ArgumentNullException(nameof(items));

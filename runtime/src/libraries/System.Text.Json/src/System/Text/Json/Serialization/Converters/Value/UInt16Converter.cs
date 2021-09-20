@@ -14,7 +14,8 @@ namespace System.Text.Json.Serialization.Converters
             ref Utf8JsonReader reader,
             Type typeToConvert,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             return reader.GetUInt16();
         }
 
@@ -22,7 +23,8 @@ namespace System.Text.Json.Serialization.Converters
             Utf8JsonWriter writer,
             ushort value,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             // For performance, lift up the writer implementation.
             writer.WriteNumberValue((long)value);
         }
@@ -37,18 +39,21 @@ namespace System.Text.Json.Serialization.Converters
             ushort value,
             JsonSerializerOptions options,
             ref WriteStack state
-        ) {
+        )
+        {
             writer.WritePropertyName(value);
         }
 
         internal override ushort ReadNumberWithCustomHandling(
             ref Utf8JsonReader reader,
             JsonNumberHandling handling
-        ) {
+        )
+        {
             if (
                 reader.TokenType == JsonTokenType.String
                 && (JsonNumberHandling.AllowReadingFromString & handling) != 0
-            ) {
+            )
+            {
                 return reader.GetUInt16WithQuotes();
             }
 
@@ -59,7 +64,8 @@ namespace System.Text.Json.Serialization.Converters
             Utf8JsonWriter writer,
             ushort value,
             JsonNumberHandling handling
-        ) {
+        )
+        {
             if ((JsonNumberHandling.WriteAsString & handling) != 0)
             {
                 writer.WriteNumberValueAsString(value);

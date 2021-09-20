@@ -177,14 +177,16 @@ namespace System.Web.WebPages
         private static object CallPropertyGetter<TDeclaringType, TValue>(
             Func<TDeclaringType, TValue> getter,
             object @this
-        ) {
+        )
+        {
             return getter((TDeclaringType)@this);
         }
 
         private static object CallPropertyGetterByReference<TDeclaringType, TValue>(
             ByRefFunc<TDeclaringType, TValue> getter,
             object @this
-        ) {
+        )
+        {
             TDeclaringType unboxed = (TDeclaringType)@this;
             return getter(ref unboxed);
         }
@@ -200,7 +202,8 @@ namespace System.Web.WebPages
             Action<TDeclaringType, TValue> setter,
             object @this,
             object value
-        ) {
+        )
+        {
             setter((TDeclaringType)@this, (TValue)value);
         }
 
@@ -208,7 +211,8 @@ namespace System.Web.WebPages
             object instance,
             Func<PropertyInfo, PropertyHelper> createPropertyHelper,
             ConcurrentDictionary<Type, PropertyHelper[]> cache
-        ) {
+        )
+        {
             // Using an array rather than IEnumerable, as this will be called on the hot path numerous times.
             PropertyHelper[] helpers;
 

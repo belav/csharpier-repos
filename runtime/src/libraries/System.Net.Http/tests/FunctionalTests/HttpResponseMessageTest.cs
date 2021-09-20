@@ -115,12 +115,14 @@ namespace System.Net.Http.Functional.Tests
         public void IsSuccessStatusCode_VariousStatusCodes_ReturnTrueFor2xxFalseOtherwise(
             HttpStatusCode? status,
             bool expectedSuccess
-        ) {
+        )
+        {
             using (
                 var m = status.HasValue
                     ? new HttpResponseMessage(status.Value)
                     : new HttpResponseMessage()
-            ) {
+            )
+            {
                 Assert.Equal(expectedSuccess, m.IsSuccessStatusCode);
             }
         }

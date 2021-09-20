@@ -72,7 +72,8 @@ namespace Internal.Cryptography.Pal
         internal static void GetNativeCollections(
             out SafeX509StackHandle root,
             out SafeX509StackHandle intermediate
-        ) {
+        )
+        {
             Tuple<SafeX509StackHandle, SafeX509StackHandle> nativeColls = GetCollections();
             root = nativeColls.Item1;
             intermediate = nativeColls.Item2;
@@ -127,7 +128,8 @@ namespace Internal.Cryptography.Pal
                             && linkInfo.Exists
                             && linkInfo.LastWriteTimeUtc != s_linkCertsLastWrite
                         )
-                    ) {
+                    )
+                    {
                         ret = LoadMachineStores(dirInfo, fileInfo, linkInfo);
                     }
                 }
@@ -141,7 +143,8 @@ namespace Internal.Cryptography.Pal
             DirectoryInfo? rootStorePath,
             FileInfo? rootStoreFile,
             DirectoryInfo? linkedRootPath
-        ) {
+        )
+        {
             Debug.Assert(
                 Monitor.IsEntered(s_recheckStopwatch),
                 "LoadMachineStores assumes a lock(s_recheckStopwatch)"
@@ -200,7 +203,8 @@ namespace Internal.Cryptography.Pal
                     while (
                         OpenSslX509CertificateReader.TryReadX509PemNoAux(fileBio, out pal)
                         || OpenSslX509CertificateReader.TryReadX509Der(fileBio, out pal)
-                    ) {
+                    )
+                    {
                         X509Certificate2 cert = new X509Certificate2(pal);
 
                         // The HashSets are just used for uniqueness filters, they do not survive this method.

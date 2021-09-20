@@ -28,7 +28,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.CPS
             using (var environment = new TestEnvironment())
             using (
                 var project = await CSharpHelpers.CreateCSharpCPSProjectAsync(environment, "Test")
-            ) {
+            )
+            {
                 Assert.Null(DefaultNamespaceOfSingleProject(environment));
 
                 var rootNamespace = "Foo.Bar";
@@ -51,7 +52,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.CPS
         [InlineData(null)]
         public async Task SetProperty_MaxSupportedLangVersion_CPS(
             LanguageVersion? maxSupportedLangVersion
-        ) {
+        )
+        {
             const LanguageVersion attemptedVersion = LanguageVersion.CSharp8;
 
             using (var environment = new TestEnvironment(typeof(CSharpParseOptionsChangingService)))
@@ -60,7 +62,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.CPS
                     environment,
                     "Test"
                 )
-            ) {
+            )
+            {
                 var project = environment.Workspace.CurrentSolution.Projects.Single();
                 var oldParseOptions = (CSharpParseOptions)project.ParseOptions;
 
@@ -97,7 +100,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.CPS
                     environment,
                     "Test"
                 )
-            ) {
+            )
+            {
                 var project = environment.Workspace.CurrentSolution.Projects.Single();
                 var oldParseOptions = (CSharpParseOptions)project.ParseOptions;
 
@@ -139,7 +143,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.CPS
             string runAnalyzers,
             string runAnalyzersDuringLiveAnalysis,
             bool expectedRunAnalyzers
-        ) {
+        )
+        {
             await TestCPSProject();
             TestLegacyProject();
             return;

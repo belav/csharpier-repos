@@ -44,17 +44,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             OptionStore optionStore,
             string groupName,
             List<CodeStylePreference> preferences
-        ) : this(
-            (IOption)option,
-            language,
-            description,
-            enumValues,
-            previews,
-            info,
-            optionStore,
-            groupName,
-            preferences
-        ) { }
+        )
+            : this(
+                (IOption)option,
+                language,
+                description,
+                enumValues,
+                previews,
+                info,
+                optionStore,
+                groupName,
+                preferences
+            ) { }
 
         public EnumCodeStyleOptionViewModel(
             Option2<CodeStyleOption2<T>> option,
@@ -65,17 +66,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             OptionStore optionStore,
             string groupName,
             List<CodeStylePreference> preferences
-        ) : this(
-            option,
-            language: null,
-            description,
-            enumValues,
-            previews,
-            info,
-            optionStore,
-            groupName,
-            preferences
-        ) { }
+        )
+            : this(
+                option,
+                language: null,
+                description,
+                enumValues,
+                previews,
+                info,
+                optionStore,
+                groupName,
+                preferences
+            ) { }
 
         private EnumCodeStyleOptionViewModel(
             IOption option,

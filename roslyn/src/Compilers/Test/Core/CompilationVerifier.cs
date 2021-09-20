@@ -52,7 +52,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 string
             > visualizeRealIL = null,
             IEnumerable<ModuleData> dependencies = null
-        ) {
+        )
+        {
             _compilation = compilation;
             _dependencies = dependencies;
             _visualizeRealIL = visualizeRealIL;
@@ -147,7 +148,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             void listMethods(
                 ICSharpCode.Decompiler.TypeSystem.INamespace @namespace,
                 Dictionary<string, ICSharpCode.Decompiler.TypeSystem.IMethod> result
-            ) {
+            )
+            {
                 foreach (var nestedNS in @namespace.ChildNamespaces)
                 {
                     if (nestedNS.FullName != "System" && nestedNS.FullName != "Microsoft")
@@ -165,7 +167,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             void listMethodsInType(
                 ICSharpCode.Decompiler.TypeSystem.ITypeDefinition type,
                 Dictionary<string, ICSharpCode.Decompiler.TypeSystem.IMethod> result
-            ) {
+            )
+            {
                 foreach (var nestedType in type.NestedTypes)
                 {
                     listMethodsInType(nestedType, result);
@@ -211,7 +214,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                     var moduleMetadata = ModuleMetadata.CreateFromImage(
                         testEnvironment.GetMainImage()
                     )
-                ) {
+                )
+                {
                     var peFile = new PEFile(mainModuleFullName, moduleMetadata.Module.PEReaderOpt);
                     var metadataReader = moduleMetadata.GetMetadataReader();
 
@@ -249,7 +253,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             EmitOptions emitOptions,
             Verification peVerify,
             SignatureDescription[] expectedSignatures
-        ) {
+        )
+        {
             using var testEnvironment = RuntimeEnvironmentFactory.Create(_dependencies);
 
             string mainModuleName = Emit(testEnvironment, manifestResources, emitOptions);
@@ -291,7 +296,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             IRuntimeEnvironment testEnvironment,
             IEnumerable<ResourceDescription> manifestResources,
             EmitOptions emitOptions
-        ) {
+        )
+        {
             testEnvironment.Emit(_compilation, manifestResources, emitOptions);
 
             _diagnostics = testEnvironment.GetDiagnostics();
@@ -309,7 +315,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             string sequencePoints = null,
             [CallerFilePath] string callerPath = null,
             [CallerLineNumber] int callerLine = 0
-        ) {
+        )
+        {
             return VerifyILImpl(
                 qualifiedMethodName,
                 expectedIL.Value,
@@ -329,7 +336,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             [CallerFilePath] string callerPath = null,
             [CallerLineNumber] int callerLine = 0,
             string source = null
-        ) {
+        )
+        {
             return VerifyILImpl(
                 qualifiedMethodName,
                 expectedIL,
@@ -347,7 +355,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             string expectedSignature,
             [CallerLineNumber] int callerLine = 0,
             [CallerFilePath] string callerPath = null
-        ) {
+        )
+        {
             var ilBuilder = _testData.GetMethodData(qualifiedMethodName).ILBuilder;
             string actualSignature = ILBuilderVisualizer.LocalSignatureToString(ilBuilder);
             AssertEx.AssertEqualToleratingWhitespaceDifferences(
@@ -372,7 +381,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             int callerLine,
             bool escapeQuotes,
             string source = null
-        ) {
+        )
+        {
             string actualIL = VisualizeIL(qualifiedMethodName, realIL, sequencePoints, source);
             AssertEx.AssertEqualToleratingWhitespaceDifferences(
                 expectedIL,
@@ -389,7 +399,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             bool realIL = false,
             string sequencePoints = null,
             string source = null
-        ) {
+        )
+        {
             // TODO: Currently the qualifiedMethodName is a symbol display name while PDB need metadata name.
             // So we need to pass the PDB metadata name of the method to sequencePoints (instead of just bool).
 
@@ -406,7 +417,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             bool realIL,
             string sequencePoints = null,
             string source = null
-        ) {
+        )
+        {
             Dictionary<int, string> markers = null;
 
             if (sequencePoints != null)
@@ -498,7 +510,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         internal IModuleSymbol GetSymbolFromMetadata(
             MetadataReference metadataReference,
             MetadataImportOptions importOptions
-        ) {
+        )
+        {
             var dummy = _compilation.RemoveAllSyntaxTrees()
                 .AddReferences(metadataReference)
                 .WithAssemblyName("Dummy")
@@ -520,7 +533,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             ImmutableArray<byte> image,
             OutputKind outputKind,
             string display = null
-        ) {
+        )
+        {
             var moduleMetadata = ModuleMetadata.CreateFromImage(image);
             moduleMetadata.Module.PretendThereArentNoPiaLocalTypes();
 
@@ -537,7 +551,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         public void VerifyOperationTree(
             string expectedOperationTree,
             bool skipImplicitlyDeclaredSymbols = false
-        ) {
+        )
+        {
             _compilation.VerifyOperationTree(expectedOperationTree, skipImplicitlyDeclaredSymbols);
         }
 
@@ -545,7 +560,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             string symbolToVerify,
             string expectedOperationTree,
             bool skipImplicitlyDeclaredSymbols = false
-        ) {
+        )
+        {
             _compilation.VerifyOperationTree(
                 symbolToVerify,
                 expectedOperationTree,
@@ -559,7 +575,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         public void VerifySynthesizedFields(
             string containingTypeName,
             params string[] expectedFields
-        ) {
+        )
+        {
             var types = TestData.Module.GetAllSynthesizedMembers();
             Assert.Contains(types.Keys, t => containingTypeName == t.ToString());
             var members = TestData.Module.GetAllSynthesizedMembers()

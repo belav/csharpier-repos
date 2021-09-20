@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public TestAnalyzerReferenceByLanguage(
             IReadOnlyDictionary<string, ImmutableArray<DiagnosticAnalyzer>> analyzersMap,
             string? fullPath = null
-        ) {
+        )
+        {
             _analyzersMap = analyzersMap;
             FullPath = fullPath;
         }

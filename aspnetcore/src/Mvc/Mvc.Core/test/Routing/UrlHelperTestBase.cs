@@ -25,7 +25,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             string appRoot,
             string contentPath,
             string expectedPath
-        ) {
+        )
+        {
             // Arrange
             var urlHelper = CreateUrlHelper(appRoot);
 
@@ -48,7 +49,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             string appRoot,
             string contentPath,
             string expectedPath
-        ) {
+        )
+        {
             // Arrange
             var urlHelper = CreateUrlHelper(appRoot);
 
@@ -1075,7 +1077,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         protected virtual ActionContext CreateActionContext(
             HttpContext httpContext,
             RouteData routeData = null
-        ) {
+        )
+        {
             routeData = routeData ?? new RouteData();
             return new ActionContext(httpContext, routeData, new ActionDescriptor());
         }
@@ -1085,7 +1088,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             string appRoot,
             string host,
             string protocol
-        ) {
+        )
+        {
             appRoot = string.IsNullOrEmpty(appRoot) ? string.Empty : appRoot;
             host = string.IsNullOrEmpty(host) ? "localhost" : host;
 

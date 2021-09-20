@@ -121,7 +121,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
             private MemberInfo ComputeMemberInfo(
                 IMethodSymbol sliceLikeMethod,
                 bool requireRangeMember
-            ) {
+            )
+            {
                 Debug.Assert(IsTwoArgumentSliceLikeMethod(sliceLikeMethod));
 
                 // Check that the type has an int32 'Length' or 'Count' property. If not, we don't

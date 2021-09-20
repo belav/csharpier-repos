@@ -41,7 +41,8 @@ namespace System.Net.Http.Functional.Tests
             byte[] expectedMD5Hash,
             bool chunkedUpload,
             string requestBody
-        ) {
+        )
+        {
             // Verify that response body from the server was corrected received by comparing MD5 hash.
             byte[] actualMD5Hash = ComputeMD5Hash(responseContent);
             Assert.Equal(expectedMD5Hash, actualMD5Hash);
@@ -109,7 +110,8 @@ namespace System.Net.Http.Functional.Tests
         public static Task WhenAllCompletedOrAnyFailedWithTimeout(
             int timeoutInMilliseconds,
             params Task[] tasks
-        ) {
+        )
+        {
             return TaskTimeoutExtensions.WhenAllOrAnyFailed(tasks, timeoutInMilliseconds);
         }
 

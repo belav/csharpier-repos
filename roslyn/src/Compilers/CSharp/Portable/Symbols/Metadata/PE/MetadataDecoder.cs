@@ -43,16 +43,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             PENamedTypeSymbol typeContextOpt,
             PEMethodSymbol methodContextOpt
         )
-          // TODO (tomat): if the containing assembly is a source assembly and we are about to decode assembly level attributes, we run into a cycle,
-          // so for now ignore the assembly identity.
-          : base(
-            moduleSymbol.Module,
-            (moduleSymbol.ContainingAssembly is PEAssemblySymbol)
-              ? moduleSymbol.ContainingAssembly.Identity
-              : null,
-            SymbolFactory.Instance,
-            moduleSymbol
-        ) {
+            // TODO (tomat): if the containing assembly is a source assembly and we are about to decode assembly level attributes, we run into a cycle,
+            // so for now ignore the assembly identity.
+            : base(
+                moduleSymbol.Module,
+                (moduleSymbol.ContainingAssembly is PEAssemblySymbol)
+                  ? moduleSymbol.ContainingAssembly.Identity
+                  : null,
+                SymbolFactory.Instance,
+                moduleSymbol
+            )
+        {
             Debug.Assert((object)moduleSymbol != null);
 
             _typeContextOpt = typeContextOpt;
@@ -120,7 +121,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         protected override TypeSymbol LookupNestedTypeDefSymbol(
             TypeSymbol container,
             ref MetadataTypeName emittedName
-        ) {
+        )
+        {
             var result = container.LookupMetadataType(ref emittedName);
             Debug.Assert((object)result != null);
 
@@ -135,7 +137,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         protected override TypeSymbol LookupTopLevelTypeDefSymbol(
             int referencedAssemblyIndex,
             ref MetadataTypeName emittedName
-        ) {
+        )
+        {
             var assembly = moduleSymbol.GetReferencedAssemblySymbol(referencedAssemblyIndex);
             if ((object)assembly == null)
             {
@@ -162,7 +165,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             string moduleName,
             ref MetadataTypeName emittedName,
             out bool isNoPiaLocalType
-        ) {
+        )
+        {
             foreach (ModuleSymbol m in moduleSymbol.ContainingAssembly.Modules)
             {
                 if (string.Equals(m.Name, moduleName, StringComparison.OrdinalIgnoreCase))
@@ -200,7 +204,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         protected override TypeSymbol LookupTopLevelTypeDefSymbol(
             ref MetadataTypeName emittedName,
             out bool isNoPiaLocalType
-        ) {
+        )
+        {
             return moduleSymbol.LookupTopLevelMetadataType(ref emittedName, out isNoPiaLocalType);
         }
 
@@ -227,7 +232,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         public static bool IsOrClosedOverATypeFromAssemblies(
             TypeSymbol symbol,
             ImmutableArray<AssemblySymbol> assemblies
-        ) {
+        )
+        {
             switch (symbol.Kind)
             {
                 case SymbolKind.TypeParameter:
@@ -296,7 +302,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             string interfaceGuid,
             string scope,
             string identifier
-        ) {
+        )
+        {
             TypeSymbol result;
 
             try
@@ -356,7 +363,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             string scope,
             string identifier,
             AssemblySymbol referringAssembly
-        ) {
+        )
+        {
             NamedTypeSymbol result = null;
 
             Guid interfaceGuidValue = new Guid();
@@ -400,7 +408,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     candidate.Kind == SymbolKind.ErrorType
                     || !ReferenceEquals(candidate.ContainingAssembly, assembly)
                     || candidate.DeclaredAccessibility != Accessibility.Public
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -456,7 +465,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                         if (
                             baseSpecialType == SpecialType.None
                             || baseSpecialType != (baseType?.SpecialType ?? SpecialType.None)
-                        ) {
+                        )
+                        {
                             continue;
                         }
                         break;
@@ -471,7 +481,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                         !haveInterfaceGuidValue
                         || !haveCandidateGuidValue
                         || candidateGuidValue != interfaceGuidValue
-                    ) {
+                    )
+                    {
                         continue;
                     }
                 }
@@ -481,7 +492,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                         !haveScopeGuidValue
                         || identifier == null
                         || !identifier.Equals(name.FullName)
-                    ) {
+                    )
+                    {
                         continue;
                     }
 
@@ -533,7 +545,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         protected override MethodSymbol FindMethodSymbolInType(
             TypeSymbol typeSymbol,
             MethodDefinitionHandle targetMethodDef
-        ) {
+        )
+        {
             Debug.Assert(typeSymbol is PENamedTypeSymbol || typeSymbol is ErrorTypeSymbol);
 
             foreach (Symbol member in typeSymbol.GetMembersUnordered())
@@ -551,7 +564,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         protected override FieldSymbol FindFieldSymbolInType(
             TypeSymbol typeSymbol,
             FieldDefinitionHandle fieldDef
-        ) {
+        )
+        {
             Debug.Assert(typeSymbol is PENamedTypeSymbol || typeSymbol is ErrorTypeSymbol);
 
             foreach (Symbol member in typeSymbol.GetMembersUnordered())
@@ -570,7 +584,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             MemberReferenceHandle memberRef,
             TypeSymbol scope = null,
             bool methodsOnly = false
-        ) {
+        )
+        {
             TypeSymbol targetTypeSymbol = GetMemberRefTypeSymbol(memberRef);
 
             if (targetTypeSymbol is null)
@@ -603,7 +618,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                                   useSiteInfo: ref discardedUseSiteInfo
                               )
                     )
-                ) {
+                )
+                {
                     return null;
                 }
             }
@@ -627,7 +643,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             Queue<TypeDefinitionHandle> typeDefsToSearch,
             Queue<TypeSymbol> typeSymbolsToSearch,
             TypeSymbol typeSymbol
-        ) {
+        )
+        {
             foreach (NamedTypeSymbol @interface in typeSymbol.InterfacesNoUseSiteDiagnostics())
             {
                 EnqueueTypeSymbol(typeDefsToSearch, typeSymbolsToSearch, @interface);
@@ -644,14 +661,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             Queue<TypeDefinitionHandle> typeDefsToSearch,
             Queue<TypeSymbol> typeSymbolsToSearch,
             TypeSymbol typeSymbol
-        ) {
+        )
+        {
             if ((object)typeSymbol != null)
             {
                 PENamedTypeSymbol peTypeSymbol = typeSymbol as PENamedTypeSymbol;
                 if (
                     (object)peTypeSymbol != null
                     && ReferenceEquals(peTypeSymbol.ContainingPEModule, moduleSymbol)
-                ) {
+                )
+                {
                     typeDefsToSearch.Enqueue(peTypeSymbol.Handle);
                 }
                 else
@@ -666,7 +685,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             PEMethodSymbol peMethod = method as PEMethodSymbol;
             if (
                 (object)peMethod != null && ReferenceEquals(peMethod.ContainingModule, moduleSymbol)
-            ) {
+            )
+            {
                 return peMethod.Handle;
             }
 

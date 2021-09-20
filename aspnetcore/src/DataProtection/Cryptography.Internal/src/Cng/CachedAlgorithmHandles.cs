@@ -122,7 +122,8 @@ namespace Microsoft.AspNetCore.Cryptography.Cng
 
             public static BCryptAlgorithmHandle GetAlgorithmHandle(
                 ref CachedAlgorithmInfo cachedAlgorithmInfo
-            ) {
+            )
+            {
                 return WeakReferenceHelpers.GetSharedInstance(
                     ref cachedAlgorithmInfo._algorithmHandle,
                     cachedAlgorithmInfo._factory

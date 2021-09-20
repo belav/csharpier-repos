@@ -36,7 +36,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                         now.AddMinutes(10),
                         new byte[1]
                     )
-                ) {
+                )
+                {
                     X509Certificate2Collection collection = new X509Certificate2Collection()
                     {
                         cert,
@@ -76,7 +77,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                         now.AddMinutes(10),
                         new byte[1]
                     )
-                ) {
+                )
+                {
                     X509Certificate2UI.DisplayCertificate(cert);
                 }
             }

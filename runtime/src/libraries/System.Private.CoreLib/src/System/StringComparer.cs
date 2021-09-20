@@ -100,7 +100,8 @@ namespace System
         public static bool IsWellKnownOrdinalComparer(
             IEqualityComparer<string?>? comparer,
             out bool ignoreCase
-        ) {
+        )
+        {
             if (comparer is IInternalStringEqualityComparer internalStringComparer)
             {
                 comparer = internalStringComparer.GetUnderlyingEqualityComparer(); // unwrap if necessary
@@ -151,7 +152,8 @@ namespace System
             IEqualityComparer<string?>? comparer,
             [NotNullWhen(true)] out CompareInfo? compareInfo,
             out CompareOptions compareOptions
-        ) {
+        )
+        {
             if (comparer is IInternalStringEqualityComparer internalStringComparer)
             {
                 comparer = internalStringComparer.GetUnderlyingEqualityComparer(); // unwrap if necessary
@@ -176,7 +178,8 @@ namespace System
         private protected virtual bool IsWellKnownCultureAwareComparerCore(
             [NotNullWhen(true)] out CompareInfo? compareInfo,
             out CompareOptions compareOptions
-        ) {
+        )
+        {
             // unless specialized comparer overrides this, we're not a well-known culture-aware comparer
             compareInfo = default;
             compareOptions = default;
@@ -348,7 +351,8 @@ namespace System
         private protected override bool IsWellKnownCultureAwareComparerCore(
             [NotNullWhen(true)] out CompareInfo? compareInfo,
             out CompareOptions compareOptions
-        ) {
+        )
+        {
             compareInfo = _compareInfo;
             compareOptions = _options;
             return true;

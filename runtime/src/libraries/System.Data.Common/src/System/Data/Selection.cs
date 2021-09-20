@@ -113,7 +113,8 @@ namespace System.Data
             System.Comparison<DataRow>? comparison,
             DataViewRowState recordStates,
             IFilter? rowFilter
-        ) {
+        )
+        {
             DataCommonEventSource.Log.Trace(
                 "<ds.Index.Index|API> {0}, table={1}, recordStates={2}",
                 ObjectID,
@@ -125,7 +126,8 @@ namespace System.Data
             if (
                 (recordStates & (~(DataViewRowState.CurrentRows | DataViewRowState.OriginalRows)))
                 != 0
-            ) {
+            )
+            {
                 throw ExceptionBuilder.RecordStateRange();
             }
             _table = table;
@@ -157,7 +159,8 @@ namespace System.Data
                 || _indexFields.Length != indexDesc.Length
                 || _recordStates != recordStates
                 || null != rowFilter
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -166,7 +169,8 @@ namespace System.Data
                 if (
                     _indexFields[loop].Column != indexDesc[loop].Column
                     || _indexFields[loop].IsDescending != indexDesc[loop].IsDescending
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -969,12 +973,8 @@ namespace System.Data
                 e,
                 false,
                 false,
-                delegate(
-                    DataViewListener listener,
-                    ListChangedEventArgs args,
-                    bool arg2,
-                    bool arg3
-                ) {
+                delegate(DataViewListener listener, ListChangedEventArgs args, bool arg2, bool arg3)
+                {
                     listener.IndexListChanged(args);
                 }
             );
@@ -988,12 +988,8 @@ namespace System.Data
                 changedType,
                 ((0 <= record) ? _table._recordManager[record] : null),
                 trackAddRemove,
-                delegate(
-                    DataViewListener listener,
-                    ListChangedType type,
-                    DataRow? row,
-                    bool track
-                ) {
+                delegate(DataViewListener listener, ListChangedType type, DataRow? row, bool track)
+                {
                     listener.MaintainDataView(changedType, row, track);
                 }
             );
@@ -1060,7 +1056,8 @@ namespace System.Data
             int record,
             DataViewRowState oldState,
             DataViewRowState newState
-        ) {
+        )
+        {
             DataCommonEventSource.Log.Trace(
                 "<ds.Index.RecordStateChanged|API> {0}, record={1}, oldState={2}, newState={3}",
                 ObjectID,
@@ -1080,7 +1077,8 @@ namespace System.Data
             int newRecord,
             DataViewRowState newOldState,
             DataViewRowState newNewState
-        ) {
+        )
+        {
             DataCommonEventSource.Log.Trace(
                 "<ds.Index.RecordStateChanged|API> {0}, oldRecord={1}, oldOldState={2}, oldNewState={3}, newRecord={4}, newOldState={5}, newNewState={6}",
                 ObjectID,
@@ -1117,7 +1115,8 @@ namespace System.Data
                     (null == _comparison)
                     && oldRecordIndex != -1
                     && CompareRecords(oldRecord, newRecord) == 0
-                ) {
+                )
+                {
                     _records.UpdateNodeKey(oldRecord, newRecord); //change in place, as Both records have same key value
 
                     int commonIndexLocation = GetIndex(newRecord);
@@ -1274,7 +1273,8 @@ namespace System.Data
             T2 arg2,
             T3 arg3,
             Action<TElem, T1, T2, T3> action
-        ) {
+        )
+        {
             Debug.Assert(null != action, "no action");
             Debug.Assert(0 <= _listenerReaderCount, "negative _listEventCount");
 

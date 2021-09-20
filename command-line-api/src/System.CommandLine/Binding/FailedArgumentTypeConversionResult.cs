@@ -17,7 +17,8 @@ namespace System.CommandLine.Binding
             IArgument argument,
             Type expectedType,
             string value
-        ) {
+        )
+        {
             if (argument is Argument a && a.Parents.Count == 1)
             {
                 // TODO: (FailedArgumentTypeConversionResult) localize

@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
         protected override void ExecuteCore(
             RazorCodeDocument codeDocument,
             DocumentIntermediateNode documentNode
-        ) {
+        )
+        {
             var @class = documentNode.FindPrimaryClass();
             if (@class == null)
             {
@@ -28,7 +29,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                 var implements in documentNode.FindDirectiveReferences(
                     ImplementsDirective.Directive
                 )
-            ) {
+            )
+            {
                 var token = ((DirectiveIntermediateNode)implements.Node).Tokens.FirstOrDefault();
                 if (token != null)
                 {

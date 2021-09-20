@@ -66,13 +66,15 @@ namespace Microsoft.CodeAnalysis.AddConstructorParametersFromMembers
             Document document,
             TextSpan textSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (
                 Logger.LogBlock(
                     FunctionId.Refactoring_GenerateFromMembers_AddConstructorParametersFromMembers,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 var info = await GetSelectedMemberInfoAsync(
                         document,
                         textSpan,
@@ -91,7 +93,8 @@ namespace Microsoft.CodeAnalysis.AddConstructorParametersFromMembers
                         .ConfigureAwait(false);
                     if (
                         state?.ConstructorCandidates != null && !state.ConstructorCandidates.IsEmpty
-                    ) {
+                    )
+                    {
                         return CreateCodeActions(document, state);
                     }
                 }
@@ -195,7 +198,8 @@ namespace Microsoft.CodeAnalysis.AddConstructorParametersFromMembers
                 ConstructorCandidate constructorCandidate,
                 INamedTypeSymbol containingType,
                 bool useSubMenuName
-            ) {
+            )
+            {
                 var missingOptionalParameters =
                     constructorCandidate.MissingParameters.SelectAsArray(
                         p =>

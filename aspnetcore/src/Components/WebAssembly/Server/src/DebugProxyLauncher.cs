@@ -35,7 +35,8 @@ namespace Microsoft.AspNetCore.Builder
         public static Task<string> EnsureLaunchedAndGetUrl(
             IServiceProvider serviceProvider,
             string devToolsHost
-        ) {
+        )
+        {
             lock (LaunchLock)
             {
                 if (LaunchedDebugProxyUrl == null)
@@ -50,7 +51,8 @@ namespace Microsoft.AspNetCore.Builder
         private static async Task<string> LaunchAndGetUrl(
             IServiceProvider serviceProvider,
             string devToolsHost
-        ) {
+        )
+        {
             var tcs = new TaskCompletionSource<string>();
 
             var environment = serviceProvider.GetRequiredService<IWebHostEnvironment>();
@@ -97,7 +99,8 @@ namespace Microsoft.AspNetCore.Builder
 
         private static void RemoveUnwantedEnvironmentVariables(
             IDictionary<string, string?> environment
-        ) {
+        )
+        {
             // Generally we expect to pass through most environment variables, since dotnet might
             // need them for arbitrary reasons to function correctly. However, we specifically don't
             // want to pass through any ASP.NET Core hosting related ones, since the child process
@@ -144,7 +147,8 @@ namespace Microsoft.AspNetCore.Builder
         private static void CompleteTaskWhenServerIsReady(
             Process aspNetProcess,
             TaskCompletionSource<string> taskCompletionSource
-        ) {
+        )
+        {
             string? capturedUrl = null;
             aspNetProcess.OutputDataReceived += OnOutputDataReceived;
             aspNetProcess.BeginOutputReadLine();

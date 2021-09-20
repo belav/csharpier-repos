@@ -25,7 +25,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ObjectBrowser
         protected override void BuildNamespaceDeclaration(
             INamespaceSymbol namespaceSymbol,
             _VSOBJDESCOPTIONS options
-        ) {
+        )
+        {
             AddText("namespace ");
             AddName(namespaceSymbol.ToDisplayString());
         }
@@ -33,7 +34,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ObjectBrowser
         protected override void BuildDelegateDeclaration(
             INamedTypeSymbol typeSymbol,
             _VSOBJDESCOPTIONS options
-        ) {
+        )
+        {
             Debug.Assert(typeSymbol.TypeKind == TypeKind.Delegate);
 
             BuildTypeModifiers(typeSymbol);
@@ -70,7 +72,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ObjectBrowser
         protected override void BuildTypeDeclaration(
             INamedTypeSymbol typeSymbol,
             _VSOBJDESCOPTIONS options
-        ) {
+        )
+        {
             BuildTypeModifiers(typeSymbol);
 
             switch (typeSymbol.TypeKind)
@@ -126,7 +129,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ObjectBrowser
                         && baseType.SpecialType != SpecialType.System_MulticastDelegate
                         && baseType.SpecialType != SpecialType.System_Enum
                         && baseType.SpecialType != SpecialType.System_ValueType
-                    ) {
+                    )
+                    {
                         AddText(" : ");
                         AddTypeLink(baseType, LinkFlags.None);
                     }
@@ -192,7 +196,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ObjectBrowser
                 && typeSymbol.TypeKind != TypeKind.Struct
                 && typeSymbol.TypeKind != TypeKind.Enum
                 && typeSymbol.TypeKind != TypeKind.Delegate
-            ) {
+            )
+            {
                 AddText("sealed ");
             }
         }
@@ -200,7 +205,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ObjectBrowser
         protected override void BuildMethodDeclaration(
             IMethodSymbol methodSymbol,
             _VSOBJDESCOPTIONS options
-        ) {
+        )
+        {
             BuildMemberModifiers(methodSymbol);
 
             if (
@@ -208,7 +214,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ObjectBrowser
                 && methodSymbol.MethodKind != MethodKind.Destructor
                 && methodSymbol.MethodKind != MethodKind.StaticConstructor
                 && methodSymbol.MethodKind != MethodKind.Conversion
-            ) {
+            )
+            {
                 AddTypeLink(methodSymbol.ReturnType, LinkFlags.None);
                 AddText(" ");
             }
@@ -259,7 +266,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ObjectBrowser
             if (
                 memberSymbol.ContainingType != null
                 && memberSymbol.ContainingType.TypeKind == TypeKind.Interface
-            ) {
+            )
+            {
                 return;
             }
 
@@ -357,7 +365,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ObjectBrowser
                 && !typeParameterSymbol.HasConstructorConstraint
                 && !typeParameterSymbol.HasReferenceTypeConstraint
                 && !typeParameterSymbol.HasValueTypeConstraint
-            ) {
+            )
+            {
                 return;
             }
 
@@ -476,7 +485,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ObjectBrowser
         protected override void BuildFieldDeclaration(
             IFieldSymbol fieldSymbol,
             _VSOBJDESCOPTIONS options
-        ) {
+        )
+        {
             BuildMemberModifiers(fieldSymbol);
 
             if (fieldSymbol.ContainingType.TypeKind != TypeKind.Enum)
@@ -491,7 +501,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ObjectBrowser
         protected override void BuildPropertyDeclaration(
             IPropertySymbol propertySymbol,
             _VSOBJDESCOPTIONS options
-        ) {
+        )
+        {
             BuildMemberModifiers(propertySymbol);
 
             AddTypeLink(propertySymbol.Type, LinkFlags.None);
@@ -516,7 +527,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ObjectBrowser
                 if (
                     propertySymbol.GetMethod.DeclaredAccessibility
                     != propertySymbol.DeclaredAccessibility
-                ) {
+                )
+                {
                     BuildAccessibility(propertySymbol.GetMethod);
                 }
 
@@ -528,7 +540,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ObjectBrowser
                 if (
                     propertySymbol.SetMethod.DeclaredAccessibility
                     != propertySymbol.DeclaredAccessibility
-                ) {
+                )
+                {
                     BuildAccessibility(propertySymbol.SetMethod);
                 }
 
@@ -541,7 +554,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ObjectBrowser
         protected override void BuildEventDeclaration(
             IEventSymbol eventSymbol,
             _VSOBJDESCOPTIONS options
-        ) {
+        )
+        {
             BuildMemberModifiers(eventSymbol);
 
             AddText("event ");

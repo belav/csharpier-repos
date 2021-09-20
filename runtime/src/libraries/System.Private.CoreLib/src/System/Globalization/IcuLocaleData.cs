@@ -25241,7 +25241,8 @@ namespace System.Globalization
         private static string GetLocaleDataMappedCulture(
             string cultureName,
             IcuLocaleDataParts part
-        ) {
+        )
+        {
             int indexToIndicesTable = GetLocaleDataNumericPart(cultureName, part);
             if (indexToIndicesTable < 0)
             {

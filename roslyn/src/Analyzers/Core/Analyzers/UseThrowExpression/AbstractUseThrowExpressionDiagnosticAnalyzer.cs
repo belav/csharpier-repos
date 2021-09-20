@@ -41,22 +41,24 @@ namespace Microsoft.CodeAnalysis.UseThrowExpression
         protected AbstractUseThrowExpressionDiagnosticAnalyzer(
             Option2<CodeStyleOption2<bool>> preferThrowExpressionOption,
             string language
-        ) : base(
-            IDEDiagnosticIds.UseThrowExpressionDiagnosticId,
-            EnforceOnBuildValues.UseThrowExpression,
-            preferThrowExpressionOption,
-            language,
-            new LocalizableResourceString(
-                nameof(AnalyzersResources.Use_throw_expression),
-                AnalyzersResources.ResourceManager,
-                typeof(AnalyzersResources)
-            ),
-            new LocalizableResourceString(
-                nameof(AnalyzersResources.Null_check_can_be_simplified),
-                AnalyzersResources.ResourceManager,
-                typeof(AnalyzersResources)
+        )
+            : base(
+                IDEDiagnosticIds.UseThrowExpressionDiagnosticId,
+                EnforceOnBuildValues.UseThrowExpression,
+                preferThrowExpressionOption,
+                language,
+                new LocalizableResourceString(
+                    nameof(AnalyzersResources.Use_throw_expression),
+                    AnalyzersResources.ResourceManager,
+                    typeof(AnalyzersResources)
+                ),
+                new LocalizableResourceString(
+                    nameof(AnalyzersResources.Null_check_can_be_simplified),
+                    AnalyzersResources.ResourceManager,
+                    typeof(AnalyzersResources)
+                )
             )
-        ) {
+        {
             _preferThrowExpressionOption = preferThrowExpressionOption;
         }
 
@@ -84,7 +86,8 @@ namespace Microsoft.CodeAnalysis.UseThrowExpression
         private void AnalyzeOperation(
             OperationAnalysisContext context,
             INamedTypeSymbol expressionTypeOpt
-        ) {
+        )
+        {
             var syntaxTree = context.Operation.Syntax.SyntaxTree;
             if (!IsSupported(syntaxTree.Options))
             {
@@ -130,7 +133,8 @@ namespace Microsoft.CodeAnalysis.UseThrowExpression
                     expressionTypeOpt,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -152,7 +156,8 @@ namespace Microsoft.CodeAnalysis.UseThrowExpression
                     out var expressionStatement,
                     out var assignmentExpression
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -172,7 +177,8 @@ namespace Microsoft.CodeAnalysis.UseThrowExpression
                     expressionStatement,
                     assignmentExpression
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -201,7 +207,8 @@ namespace Microsoft.CodeAnalysis.UseThrowExpression
             ISymbol localOrParameter,
             IExpressionStatementOperation expressionStatement,
             IAssignmentOperation assignmentExpression
-        ) {
+        )
+        {
             var statements = containingBlock.Operations;
             var ifOperationIndex = statements.IndexOf(ifOperation);
             var expressionStatementIndex = statements.IndexOf(expressionStatement);
@@ -218,7 +225,8 @@ namespace Microsoft.CodeAnalysis.UseThrowExpression
                 if (
                     dataFlow.ReadInside.Contains(localOrParameter)
                     || dataFlow.WrittenInside.Contains(localOrParameter)
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -243,7 +251,8 @@ namespace Microsoft.CodeAnalysis.UseThrowExpression
             ISymbol localOrParameter,
             out IExpressionStatementOperation expressionStatement,
             out IAssignmentOperation assignmentExpression
-        ) {
+        )
+        {
             var ifOperationIndex = containingBlock.Operations.IndexOf(ifOperation);
 
             // walk forward until we find an assignment of this local/parameter into
@@ -268,7 +277,8 @@ namespace Microsoft.CodeAnalysis.UseThrowExpression
                         assignmentExpression.Value,
                         out var assignmentValue
                     )
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -288,7 +298,8 @@ namespace Microsoft.CodeAnalysis.UseThrowExpression
         private bool TryDecomposeIfCondition(
             IConditionalOperation ifStatement,
             out ISymbol localOrParameter
-        ) {
+        )
+        {
             localOrParameter = null;
 
             var condition = ifStatement.Condition;
@@ -324,7 +335,8 @@ namespace Microsoft.CodeAnalysis.UseThrowExpression
         private bool TryGetLocalOrParameterSymbol(
             IOperation operation,
             out ISymbol localOrParameter
-        ) {
+        )
+        {
             if (operation is IConversionOperation conversion && conversion.IsImplicit)
             {
                 return TryGetLocalOrParameterSymbol(conversion.Operand, out localOrParameter);
@@ -353,7 +365,8 @@ namespace Microsoft.CodeAnalysis.UseThrowExpression
             SemanticModel semanticModel,
             IThrowOperation throwOperation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var throwStatement = throwOperation.Syntax;
             var containingOperation = semanticModel.GetOperation(
                 throwStatement.Parent,

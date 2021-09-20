@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
         public ExtractInterfaceCodeAction(
             AbstractExtractInterfaceService extractInterfaceService,
             ExtractInterfaceTypeAnalysisResult typeAnalysisResult
-        ) {
+        )
+        {
             _extractInterfaceService = extractInterfaceService;
             _typeAnalysisResult = typeAnalysisResult;
         }
@@ -43,13 +44,15 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
         protected override async Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(
             object options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var operations = SpecializedCollections.EmptyEnumerable<CodeActionOperation>();
 
             if (
                 options is ExtractInterfaceOptionsResult extractInterfaceOptions
                 && !extractInterfaceOptions.IsCancelled
-            ) {
+            )
+            {
                 var extractInterfaceResult =
                     await _extractInterfaceService.ExtractInterfaceFromAnalyzedTypeAsync(
                             _typeAnalysisResult,

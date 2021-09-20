@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public static NamedTypeSymbol ConstructIfGeneric(
             this NamedTypeSymbol type,
             ImmutableArray<TypeWithAnnotations> typeArguments
-        ) {
+        )
+        {
             Debug.Assert(type.TypeParameters.IsEmpty == (typeArguments.Length == 0));
             return type.TypeParameters.IsEmpty
               ? type
@@ -52,7 +53,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             this NamedTypeSymbol superType,
             NamedTypeSymbol subType,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             // NOTE: we don't use strict inheritance.  Instead we ignore constructed generic types
             // and only consider the unconstructed types.  Ecma-334, 4th edition contained the
             // following text supporting this (although, for instance members) in 10.5.3 Protected
@@ -69,7 +71,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 NamedTypeSymbol? current = subType;
                 (object?)current != null;
                 current = current.BaseTypeWithDefinitionUseSiteDiagnostics(ref useSiteInfo)
-            ) {
+            )
+            {
                 if (ReferenceEquals(current.OriginalDefinition, originalSuperType))
                 {
                     return true;
@@ -82,7 +85,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     NamedTypeSymbol current in subType.AllInterfacesWithDefinitionUseSiteDiagnostics(
                         ref useSiteInfo
                     )
-                ) {
+                )
+                {
                     if (ReferenceEquals(current.OriginalDefinition, originalSuperType))
                     {
                         return true;
@@ -100,7 +104,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             this Symbol symbol,
             TypeSymbol type,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             return type.IsAtLeastAsVisibleAs(symbol, ref useSiteInfo);
         }
 
@@ -108,7 +113,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             this Symbol symbol,
             TypeWithAnnotations type,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             return type.IsAtLeastAsVisibleAs(symbol, ref useSiteInfo);
         }
 
@@ -116,7 +122,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             this Symbol? symbol,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo,
             bool addDiagnostics = true
-        ) {
+        )
+        {
             if (symbol is null)
             {
                 return;
@@ -195,7 +202,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         if (
                             method.MethodKind == MethodKind.AnonymousFunction
                             || method.MethodKind == MethodKind.LocalFunction
-                        ) {
+                        )
+                        {
                             symbol = method.ContainingSymbol;
                             continue;
                         }
@@ -240,7 +248,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public static bool IsSourceParameterWithEnumeratorCancellationAttribute(
             this ParameterSymbol parameter
-        ) {
+        )
+        {
             switch (parameter)
             {
                 case SourceComplexParameterSymbol source:
@@ -259,7 +268,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public static bool IsContainingSymbolOfAllTypeParameters(
             this Symbol containingSymbol,
             TypeSymbol type
-        ) {
+        )
+        {
             return type.VisitType(s_hasInvalidTypeParameterFunc, containingSymbol) is null;
         }
 
@@ -270,7 +280,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public static bool IsContainingSymbolOfAllTypeParameters(
             this Symbol containingSymbol,
             ImmutableArray<TypeSymbol> types
-        ) {
+        )
+        {
             return types.All(containingSymbol.IsContainingSymbolOfAllTypeParameters);
         }
 
@@ -287,7 +298,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     ((object?)containingSymbol != null)
                         && (containingSymbol.Kind != SymbolKind.Namespace);
                     containingSymbol = containingSymbol.ContainingSymbol
-                ) {
+                )
+                {
                     if (containingSymbol == symbol)
                     {
                         return false;
@@ -327,7 +339,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             this Symbol symbol,
             DeclarationModifiers modifiers,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             symbol.CheckUnsafeModifier(modifiers, symbol.Locations[0], diagnostics);
         }
 
@@ -336,11 +349,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             DeclarationModifiers modifiers,
             Location errorLocation,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             if (
                 ((modifiers & DeclarationModifiers.Unsafe) == DeclarationModifiers.Unsafe)
                 && !symbol.CompilationAllowsUnsafe()
-            ) {
+            )
+            {
                 RoslynDebug.Assert(errorLocation != null);
                 diagnostics.Add(ErrorCode.ERR_IllegalUnsafe, errorLocation);
             }
@@ -444,7 +459,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal static AssemblySymbol? EnsureCSharpSymbolOrNull(
             this IAssemblySymbol? symbol,
             string paramName
-        ) {
+        )
+        {
             return (AssemblySymbol?)EnsureCSharpSymbolOrNull((ISymbol?)symbol, paramName);
         }
 
@@ -452,7 +468,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal static NamespaceOrTypeSymbol? EnsureCSharpSymbolOrNull(
             this INamespaceOrTypeSymbol? symbol,
             string paramName
-        ) {
+        )
+        {
             return (NamespaceOrTypeSymbol?)EnsureCSharpSymbolOrNull((ISymbol?)symbol, paramName);
         }
 
@@ -460,7 +477,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal static NamespaceSymbol? EnsureCSharpSymbolOrNull(
             this INamespaceSymbol? symbol,
             string paramName
-        ) {
+        )
+        {
             return (NamespaceSymbol?)EnsureCSharpSymbolOrNull((ISymbol?)symbol, paramName);
         }
 
@@ -468,7 +486,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal static TypeSymbol? EnsureCSharpSymbolOrNull(
             this ITypeSymbol? symbol,
             string paramName
-        ) {
+        )
+        {
             return (TypeSymbol?)EnsureCSharpSymbolOrNull((ISymbol?)symbol, paramName);
         }
 
@@ -476,7 +495,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal static NamedTypeSymbol? EnsureCSharpSymbolOrNull(
             this INamedTypeSymbol? symbol,
             string paramName
-        ) {
+        )
+        {
             return (NamedTypeSymbol?)EnsureCSharpSymbolOrNull((ISymbol?)symbol, paramName);
         }
 
@@ -484,7 +504,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal static TypeParameterSymbol? EnsureCSharpSymbolOrNull(
             this ITypeParameterSymbol? symbol,
             string paramName
-        ) {
+        )
+        {
             return (TypeParameterSymbol?)EnsureCSharpSymbolOrNull((ISymbol?)symbol, paramName);
         }
 
@@ -492,7 +513,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal static EventSymbol? EnsureCSharpSymbolOrNull(
             this IEventSymbol? symbol,
             string paramName
-        ) {
+        )
+        {
             return (EventSymbol?)EnsureCSharpSymbolOrNull((ISymbol?)symbol, paramName);
         }
 
@@ -505,14 +527,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal static FlowAnalysisAnnotations GetFlowAnalysisAnnotations(
             this PropertySymbol property
-        ) {
+        )
+        {
             var annotations =
                 property.GetOwnOrInheritedGetMethod()?.ReturnTypeFlowAnalysisAnnotations
                 ?? FlowAnalysisAnnotations.None;
             if (
                 property.GetOwnOrInheritedSetMethod()?.Parameters.Last().FlowAnalysisAnnotations is
                 { } setterAnnotations
-            ) {
+            )
+            {
                 annotations |= setterAnnotations;
             }
             else if (property is SourcePropertySymbolBase sourceProperty)
@@ -550,7 +574,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             out RefKind refKind,
             out TypeWithAnnotations returnType,
             out ImmutableArray<CustomModifier> refCustomModifiers
-        ) {
+        )
+        {
             switch (symbol.Kind)
             {
                 case SymbolKind.Field:
@@ -747,7 +772,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         [return: NotNullIfNotNull("symbol")]
         internal static IFunctionPointerTypeSymbol? GetPublicSymbol(
             this FunctionPointerTypeSymbol? symbol
-        ) {
+        )
+        {
             return symbol.GetPublicSymbol<IFunctionPointerTypeSymbol>();
         }
 
@@ -776,73 +802,85 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal static ImmutableArray<ISymbol> GetPublicSymbols(
             this ImmutableArray<Symbol> symbols
-        ) {
+        )
+        {
             return GetPublicSymbols<ISymbol>(symbols);
         }
 
         internal static ImmutableArray<IPropertySymbol> GetPublicSymbols(
             this ImmutableArray<PropertySymbol> symbols
-        ) {
+        )
+        {
             return GetPublicSymbols<IPropertySymbol>(StaticCast<Symbol>.From(symbols));
         }
 
         internal static ImmutableArray<ITypeSymbol> GetPublicSymbols(
             this ImmutableArray<TypeSymbol> symbols
-        ) {
+        )
+        {
             return GetPublicSymbols<ITypeSymbol>(StaticCast<Symbol>.From(symbols));
         }
 
         internal static ImmutableArray<INamedTypeSymbol> GetPublicSymbols(
             this ImmutableArray<NamedTypeSymbol> symbols
-        ) {
+        )
+        {
             return GetPublicSymbols<INamedTypeSymbol>(StaticCast<Symbol>.From(symbols));
         }
 
         internal static ImmutableArray<ILocalSymbol> GetPublicSymbols(
             this ImmutableArray<LocalSymbol> symbols
-        ) {
+        )
+        {
             return GetPublicSymbols<ILocalSymbol>(StaticCast<Symbol>.From(symbols));
         }
 
         internal static ImmutableArray<IEventSymbol> GetPublicSymbols(
             this ImmutableArray<EventSymbol> symbols
-        ) {
+        )
+        {
             return GetPublicSymbols<IEventSymbol>(StaticCast<Symbol>.From(symbols));
         }
 
         internal static ImmutableArray<ITypeParameterSymbol> GetPublicSymbols(
             this ImmutableArray<TypeParameterSymbol> symbols
-        ) {
+        )
+        {
             return GetPublicSymbols<ITypeParameterSymbol>(StaticCast<Symbol>.From(symbols));
         }
 
         internal static ImmutableArray<IParameterSymbol> GetPublicSymbols(
             this ImmutableArray<ParameterSymbol> symbols
-        ) {
+        )
+        {
             return GetPublicSymbols<IParameterSymbol>(StaticCast<Symbol>.From(symbols));
         }
 
         internal static ImmutableArray<IMethodSymbol> GetPublicSymbols(
             this ImmutableArray<MethodSymbol> symbols
-        ) {
+        )
+        {
             return GetPublicSymbols<IMethodSymbol>(StaticCast<Symbol>.From(symbols));
         }
 
         internal static ImmutableArray<IAssemblySymbol> GetPublicSymbols(
             this ImmutableArray<AssemblySymbol> symbols
-        ) {
+        )
+        {
             return GetPublicSymbols<IAssemblySymbol>(StaticCast<Symbol>.From(symbols));
         }
 
         internal static ImmutableArray<IFieldSymbol> GetPublicSymbols(
             this ImmutableArray<FieldSymbol> symbols
-        ) {
+        )
+        {
             return GetPublicSymbols<IFieldSymbol>(StaticCast<Symbol>.From(symbols));
         }
 
         internal static ImmutableArray<INamespaceSymbol> GetPublicSymbols(
             this ImmutableArray<NamespaceSymbol> symbols
-        ) {
+        )
+        {
             return GetPublicSymbols<INamespaceSymbol>(StaticCast<Symbol>.From(symbols));
         }
 
@@ -903,7 +941,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         [return: NotNullIfNotNull("symbol")]
         internal static FunctionPointerTypeSymbol? GetSymbol(
             this IFunctionPointerTypeSymbol? symbol
-        ) {
+        )
+        {
             return symbol.GetSymbol<FunctionPointerTypeSymbol>();
         }
     }

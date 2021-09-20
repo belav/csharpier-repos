@@ -295,7 +295,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IList<TConvention> conventionsList,
             TConvention newConvention,
             Type existingConventionType
-        ) {
+        )
+        {
             Check.NotNull(conventionsList, nameof(conventionsList));
             Check.NotNull(newConvention, nameof(newConvention));
 
@@ -323,7 +324,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IList<TConvention> conventionsList,
             TConvention newConvention,
             Type existingConventionType
-        ) {
+        )
+        {
             Check.NotNull(conventionsList, nameof(conventionsList));
             Check.NotNull(newConvention, nameof(newConvention));
 
@@ -349,7 +351,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public static bool Remove<TConvention>(
             IList<TConvention> conventionsList,
             Type existingConventionType
-        ) {
+        )
+        {
             Check.NotNull(conventionsList, nameof(conventionsList));
 
             for (var i = 0; i < conventionsList.Count; i++)

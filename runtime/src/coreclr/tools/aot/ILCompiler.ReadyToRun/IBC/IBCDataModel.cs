@@ -123,7 +123,8 @@ namespace ILCompiler.IBC
                         SectionFormat section = 0;
                         section < SectionFormat.SectionFormatCount;
                         section++
-                    ) {
+                    )
+                    {
                         if (IBCData.IsTokenList(section) || iteratorKind == SectionIteratorKind.All)
                         {
                             yield return section;

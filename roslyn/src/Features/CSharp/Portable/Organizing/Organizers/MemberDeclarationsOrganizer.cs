@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Organizing.Organizers
         public static SyntaxList<MemberDeclarationSyntax> Organize(
             SyntaxList<MemberDeclarationSyntax> members,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Break the list of members up into groups based on the PP
             // directives between them.
             var groups = members.SplitNodesOnPreprocessorBoundaries(cancellationToken);
@@ -117,7 +118,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Organizing.Organizers
 
         private static IList<MemberDeclarationSyntax> OrganizeMemberGroup(
             IList<MemberDeclarationSyntax> members
-        ) {
+        )
+        {
             if (members.Count > 1)
             {
                 var initialList = new List<MemberDeclarationSyntax>(members);

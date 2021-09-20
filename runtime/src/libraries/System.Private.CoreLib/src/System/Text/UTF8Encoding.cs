@@ -252,7 +252,8 @@ namespace System.Text
             int charsLength,
             EncoderFallback? fallback,
             out int charsConsumed
-        ) {
+        )
+        {
             // The number of UTF-8 code units may exceed the number of UTF-16 code units,
             // so we'll need to check for overflow before casting to Int32.
 
@@ -286,7 +287,8 @@ namespace System.Text
             int charCount,
             byte[] bytes,
             int byteIndex
-        ) {
+        )
+        {
             // Validate Parameters
 
             if (s is null || bytes is null)
@@ -354,7 +356,8 @@ namespace System.Text
             int charCount,
             byte[] bytes,
             int byteIndex
-        ) {
+        )
+        {
             // Validate parameters
 
             if (chars is null || bytes is null)
@@ -438,7 +441,8 @@ namespace System.Text
 
             fixed (char* charsPtr = &MemoryMarshal.GetReference(chars))fixed (
                 byte* bytesPtr = &MemoryMarshal.GetReference(bytes)
-            ) {
+            )
+            {
                 return GetBytesCommon(charsPtr, chars.Length, bytesPtr, bytes.Length);
             }
         }
@@ -498,7 +502,8 @@ namespace System.Text
             byte* pBytes,
             int bytesLength,
             out int charsConsumed
-        ) {
+        )
+        {
             // We don't care about the exact OperationStatus value returned by the workhorse routine; we only
             // care if the workhorse was able to consume the entire input payload. If we're unable to do so,
             // we'll handle the remainder in the fallback routine.
@@ -607,7 +612,8 @@ namespace System.Text
             int byteCount,
             char[] chars,
             int charIndex
-        ) {
+        )
+        {
             // Validate Parameters
 
             if (bytes is null || chars is null)
@@ -691,7 +697,8 @@ namespace System.Text
 
             fixed (byte* bytesPtr = &MemoryMarshal.GetReference(bytes))fixed (
                 char* charsPtr = &MemoryMarshal.GetReference(chars)
-            ) {
+            )
+            {
                 return GetCharsCommon(bytesPtr, bytes.Length, charsPtr, chars.Length);
             }
         }
@@ -758,7 +765,8 @@ namespace System.Text
             char* pChars,
             int charsLength,
             out int bytesConsumed
-        ) {
+        )
+        {
             // We don't care about the exact OperationStatus value returned by the workhorse routine; we only
             // care if the workhorse was able to consume the entire input payload. If we're unable to do so,
             // we'll handle the remainder in the fallback routine.
@@ -782,7 +790,8 @@ namespace System.Text
             Span<char> chars,
             int originalCharsLength,
             DecoderNLS? decoder
-        ) {
+        )
+        {
             // We special-case DecoderReplacementFallback if it's telling us to write a single U+FFFD char,
             // since we believe this to be relatively common and we can handle it more efficiently than
             // the base implementation.
@@ -792,7 +801,8 @@ namespace System.Text
                     is DecoderReplacementFallback replacementFallback
                 && replacementFallback.MaxCharCount == 1
                 && replacementFallback.DefaultString[0] == UnicodeUtility.ReplacementChar
-            ) {
+            )
+            {
                 // Don't care about the exact OperationStatus, just how much of the payload we were able
                 // to process.
 
@@ -925,7 +935,8 @@ namespace System.Text
             int bytesLength,
             DecoderFallback? fallback,
             out int bytesConsumed
-        ) {
+        )
+        {
             // The number of UTF-16 code units will never exceed the number of UTF-8 code units,
             // so the addition at the end of this method will not overflow.
 
@@ -968,7 +979,8 @@ namespace System.Text
             Rune value,
             Span<byte> bytes,
             out int bytesWritten
-        ) {
+        )
+        {
             // All well-formed Rune instances can be encoded as 1..4 UTF-8 code units.
             // If there's an error, it's because the destination was too small.
 
@@ -981,7 +993,8 @@ namespace System.Text
             ReadOnlySpan<byte> bytes,
             out Rune value,
             out int bytesConsumed
-        ) {
+        )
+        {
             return Rune.DecodeFromUtf8(bytes, out value, out bytesConsumed);
         }
 

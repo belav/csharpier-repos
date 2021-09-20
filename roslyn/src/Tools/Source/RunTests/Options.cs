@@ -110,7 +110,8 @@ namespace RunTests
             string testResultsDirectory,
             string logFilesDirectory,
             string platform
-        ) {
+        )
+        {
             DotnetFilePath = dotnetFilePath;
             ArtifactsDirectory = artifactsDirectory;
             Configuration = configuration;

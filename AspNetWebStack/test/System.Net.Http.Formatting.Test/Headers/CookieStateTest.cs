@@ -191,7 +191,8 @@ namespace System.Net.Http.Headers
         public void CookieState_ToStringWithNameValueCollection(
             string subValue,
             string encodedSubvalue
-        ) {
+        )
+        {
             // Arrange
             NameValueCollection nvc = new NameValueCollection();
             nvc.Add("n1", subValue);

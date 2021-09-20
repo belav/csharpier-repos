@@ -12,7 +12,8 @@ namespace System.CodeDom
         public CodeRemoveEventStatement(
             CodeEventReferenceExpression eventRef,
             CodeExpression listener
-        ) {
+        )
+        {
             _eventRef = eventRef;
             Listener = listener;
         }
@@ -21,7 +22,8 @@ namespace System.CodeDom
             CodeExpression targetObject,
             string eventName,
             CodeExpression listener
-        ) {
+        )
+        {
             _eventRef = new CodeEventReferenceExpression(targetObject, eventName);
             Listener = listener;
         }

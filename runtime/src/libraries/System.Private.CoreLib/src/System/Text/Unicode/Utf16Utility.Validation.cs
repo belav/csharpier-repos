@@ -50,7 +50,8 @@ namespace System.Text.Unicode
             int inputLength,
             out long utf8CodeUnitCountAdjustment,
             out int scalarCountAdjustment
-        ) {
+        )
+        {
             Debug.Assert(inputLength >= 0, "Input length must not be negative.");
             Debug.Assert(
                 pInputBuffer != null || inputLength == 0,
@@ -545,7 +546,8 @@ namespace System.Text.Unicode
                         (thisChar - (BitConverter.IsLittleEndian ? 0xDC00_D800u : 0xD800_DC00u))
                         & 0xFC00_FC00u
                     ) != 0
-                ) {
+                )
+                {
                     goto Error; // not a well-formed surrogate pair
                 }
 

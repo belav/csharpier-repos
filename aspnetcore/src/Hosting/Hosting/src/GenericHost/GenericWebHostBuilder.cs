@@ -180,7 +180,8 @@ namespace Microsoft.AspNetCore.Hosting
 
                     foreach (
                         var attribute in assembly.GetCustomAttributes<HostingStartupAttribute>()
-                    ) {
+                    )
+                    {
                         var hostingStartup = (IHostingStartup)Activator.CreateInstance(
                             attribute.HostingStartupType
                         )!;
@@ -214,7 +215,8 @@ namespace Microsoft.AspNetCore.Hosting
 
         public IWebHostBuilder ConfigureAppConfiguration(
             Action<WebHostBuilderContext, IConfigurationBuilder> configureDelegate
-        ) {
+        )
+        {
             _builder.ConfigureAppConfiguration(
                 (context, builder) =>
                 {
@@ -233,7 +235,8 @@ namespace Microsoft.AspNetCore.Hosting
 
         public IWebHostBuilder ConfigureServices(
             Action<WebHostBuilderContext, IServiceCollection> configureServices
-        ) {
+        )
+        {
             _builder.ConfigureServices(
                 (context, builder) =>
                 {
@@ -247,7 +250,8 @@ namespace Microsoft.AspNetCore.Hosting
 
         public IWebHostBuilder UseDefaultServiceProvider(
             Action<WebHostBuilderContext, ServiceProviderOptions> configure
-        ) {
+        )
+        {
             _builder.UseServiceProviderFactory(
                 context =>
                 {
@@ -263,7 +267,8 @@ namespace Microsoft.AspNetCore.Hosting
 
         public IWebHostBuilder UseStartup(
             [DynamicallyAccessedMembers(StartupLinkerOptions.Accessibility)] Type startupType
-        ) {
+        )
+        {
             // UseStartup can be called multiple times. Only run the last one.
             _startupObject = startupType;
 
@@ -318,7 +323,8 @@ namespace Microsoft.AspNetCore.Hosting
             HostBuilderContext context,
             IServiceCollection services,
             object? instance = null
-        ) {
+        )
+        {
             var webHostBuilderContext = GetWebHostBuilderContext(context);
             var webHostOptions = (WebHostOptions)context.Properties[typeof(WebHostOptions)];
 
@@ -337,7 +343,8 @@ namespace Microsoft.AspNetCore.Hosting
                         startupType,
                         context.HostingEnvironment.EnvironmentName
                     )
-                ) {
+                )
+                {
                     throw new NotSupportedException(
                         $"ConfigureServices returning an {typeof(IServiceProvider)} isn't supported."
                     );
@@ -436,7 +443,8 @@ namespace Microsoft.AspNetCore.Hosting
 
         public IWebHostBuilder Configure(
             Action<WebHostBuilderContext, IApplicationBuilder> configure
-        ) {
+        )
+        {
             // Clear the startup type
             _startupObject = configure;
 
@@ -519,7 +527,8 @@ namespace Microsoft.AspNetCore.Hosting
 #pragma warning restore CS0618 // Type or member is obsolete
                     || serviceType == typeof(IWebHostEnvironment)
                     || serviceType == typeof(IHostEnvironment)
-                ) {
+                )
+                {
                     return _context.HostingEnvironment;
                 }
 

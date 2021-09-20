@@ -39,7 +39,8 @@ namespace System.Net.Http
             this HttpClient client,
             string requestUri,
             T value
-        ) {
+        )
+        {
             return client.PostAsJsonAsync(requestUri, value, CancellationToken.None);
         }
 
@@ -67,7 +68,8 @@ namespace System.Net.Http
             string requestUri,
             T value,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return client.PostAsync(
                 requestUri,
                 value,
@@ -92,7 +94,8 @@ namespace System.Net.Http
             this HttpClient client,
             Uri requestUri,
             T value
-        ) {
+        )
+        {
             return client.PostAsJsonAsync(requestUri, value, CancellationToken.None);
         }
 
@@ -114,7 +117,8 @@ namespace System.Net.Http
             Uri requestUri,
             T value,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return client.PostAsync(
                 requestUri,
                 value,
@@ -145,7 +149,8 @@ namespace System.Net.Http
             this HttpClient client,
             string requestUri,
             T value
-        ) {
+        )
+        {
             return client.PostAsXmlAsync(requestUri, value, CancellationToken.None);
         }
 
@@ -173,7 +178,8 @@ namespace System.Net.Http
             string requestUri,
             T value,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return client.PostAsync(
                 requestUri,
                 value,
@@ -198,7 +204,8 @@ namespace System.Net.Http
             this HttpClient client,
             Uri requestUri,
             T value
-        ) {
+        )
+        {
             return client.PostAsXmlAsync(requestUri, value, CancellationToken.None);
         }
 
@@ -220,7 +227,8 @@ namespace System.Net.Http
             Uri requestUri,
             T value,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return client.PostAsync(
                 requestUri,
                 value,
@@ -251,7 +259,8 @@ namespace System.Net.Http
             string requestUri,
             T value,
             MediaTypeFormatter formatter
-        ) {
+        )
+        {
             return client.PostAsync(requestUri, value, formatter, CancellationToken.None);
         }
 
@@ -279,7 +288,8 @@ namespace System.Net.Http
             T value,
             MediaTypeFormatter formatter,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return client.PostAsync(
                 requestUri,
                 value,
@@ -314,7 +324,8 @@ namespace System.Net.Http
             T value,
             MediaTypeFormatter formatter,
             string mediaType
-        ) {
+        )
+        {
             return client.PostAsync(
                 requestUri,
                 value,
@@ -350,7 +361,8 @@ namespace System.Net.Http
             MediaTypeFormatter formatter,
             string mediaType,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return client.PostAsync(
                 requestUri,
                 value,
@@ -396,7 +408,8 @@ namespace System.Net.Http
             MediaTypeFormatter formatter,
             MediaTypeHeaderValue mediaType,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (client == null)
             {
                 throw Error.ArgumentNull("client");
@@ -423,7 +436,8 @@ namespace System.Net.Http
             Uri requestUri,
             T value,
             MediaTypeFormatter formatter
-        ) {
+        )
+        {
             return client.PostAsync(requestUri, value, formatter, CancellationToken.None);
         }
 
@@ -445,7 +459,8 @@ namespace System.Net.Http
             T value,
             MediaTypeFormatter formatter,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return client.PostAsync(
                 requestUri,
                 value,
@@ -474,7 +489,8 @@ namespace System.Net.Http
             T value,
             MediaTypeFormatter formatter,
             string mediaType
-        ) {
+        )
+        {
             return client.PostAsync(
                 requestUri,
                 value,
@@ -504,7 +520,8 @@ namespace System.Net.Http
             MediaTypeFormatter formatter,
             string mediaType,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return client.PostAsync(
                 requestUri,
                 value,
@@ -539,7 +556,8 @@ namespace System.Net.Http
             MediaTypeFormatter formatter,
             MediaTypeHeaderValue mediaType,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (client == null)
             {
                 throw Error.ArgumentNull("client");
@@ -572,7 +590,8 @@ namespace System.Net.Http
             this HttpClient client,
             string requestUri,
             T value
-        ) {
+        )
+        {
             return client.PutAsJsonAsync(requestUri, value, CancellationToken.None);
         }
 
@@ -600,7 +619,8 @@ namespace System.Net.Http
             string requestUri,
             T value,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return client.PutAsync(
                 requestUri,
                 value,
@@ -625,7 +645,8 @@ namespace System.Net.Http
             this HttpClient client,
             Uri requestUri,
             T value
-        ) {
+        )
+        {
             return client.PutAsJsonAsync(requestUri, value, CancellationToken.None);
         }
 
@@ -647,7 +668,8 @@ namespace System.Net.Http
             Uri requestUri,
             T value,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return client.PutAsync(
                 requestUri,
                 value,
@@ -678,7 +700,8 @@ namespace System.Net.Http
             this HttpClient client,
             string requestUri,
             T value
-        ) {
+        )
+        {
             return client.PutAsXmlAsync(requestUri, value, CancellationToken.None);
         }
 
@@ -706,7 +729,8 @@ namespace System.Net.Http
             string requestUri,
             T value,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return client.PutAsync(
                 requestUri,
                 value,
@@ -731,7 +755,8 @@ namespace System.Net.Http
             this HttpClient client,
             Uri requestUri,
             T value
-        ) {
+        )
+        {
             return client.PutAsXmlAsync(requestUri, value, CancellationToken.None);
         }
 
@@ -753,7 +778,8 @@ namespace System.Net.Http
             Uri requestUri,
             T value,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return client.PutAsync(
                 requestUri,
                 value,
@@ -784,7 +810,8 @@ namespace System.Net.Http
             string requestUri,
             T value,
             MediaTypeFormatter formatter
-        ) {
+        )
+        {
             return client.PutAsync(requestUri, value, formatter, CancellationToken.None);
         }
 
@@ -812,7 +839,8 @@ namespace System.Net.Http
             T value,
             MediaTypeFormatter formatter,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return client.PutAsync(
                 requestUri,
                 value,
@@ -847,7 +875,8 @@ namespace System.Net.Http
             T value,
             MediaTypeFormatter formatter,
             string mediaType
-        ) {
+        )
+        {
             return client.PutAsync(requestUri, value, formatter, mediaType, CancellationToken.None);
         }
 
@@ -877,7 +906,8 @@ namespace System.Net.Http
             MediaTypeFormatter formatter,
             string mediaType,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return client.PutAsync(
                 requestUri,
                 value,
@@ -923,7 +953,8 @@ namespace System.Net.Http
             MediaTypeFormatter formatter,
             MediaTypeHeaderValue mediaType,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (client == null)
             {
                 throw Error.ArgumentNull("client");
@@ -950,7 +981,8 @@ namespace System.Net.Http
             Uri requestUri,
             T value,
             MediaTypeFormatter formatter
-        ) {
+        )
+        {
             return client.PutAsync(requestUri, value, formatter, CancellationToken.None);
         }
 
@@ -972,7 +1004,8 @@ namespace System.Net.Http
             T value,
             MediaTypeFormatter formatter,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return client.PutAsync(
                 requestUri,
                 value,
@@ -1001,7 +1034,8 @@ namespace System.Net.Http
             T value,
             MediaTypeFormatter formatter,
             string mediaType
-        ) {
+        )
+        {
             return client.PutAsync(requestUri, value, formatter, mediaType, CancellationToken.None);
         }
 
@@ -1025,7 +1059,8 @@ namespace System.Net.Http
             MediaTypeFormatter formatter,
             string mediaType,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return client.PutAsync(
                 requestUri,
                 value,
@@ -1060,7 +1095,8 @@ namespace System.Net.Http
             MediaTypeFormatter formatter,
             MediaTypeHeaderValue mediaType,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (client == null)
             {
                 throw Error.ArgumentNull("client");

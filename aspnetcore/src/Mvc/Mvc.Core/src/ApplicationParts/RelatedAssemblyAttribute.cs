@@ -48,7 +48,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationParts
         public static IReadOnlyList<Assembly> GetRelatedAssemblies(
             Assembly assembly,
             bool throwOnError
-        ) {
+        )
+        {
             if (assembly == null)
             {
                 throw new ArgumentNullException(nameof(assembly));
@@ -69,7 +70,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationParts
             bool throwOnError,
             Func<string, bool> fileExists,
             AssemblyLoadContextWrapper assemblyLoadContext
-        ) {
+        )
+        {
             if (assembly == null)
             {
                 throw new ArgumentNullException(nameof(assembly));
@@ -109,7 +111,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationParts
                         attribute.AssemblyFileName,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     throw new InvalidOperationException(
                         Resources.FormatRelatedAssemblyAttribute_AssemblyCannotReferenceSelf(
                             nameof(RelatedAssemblyAttribute),

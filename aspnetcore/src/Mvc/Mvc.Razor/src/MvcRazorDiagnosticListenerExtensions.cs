@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             this DiagnosticListener diagnosticListener,
             IRazorPage page,
             ViewContext viewContext
-        ) {
+        )
+        {
             // Inlinable fast-path check if Diagnositcs is enabled
             if (diagnosticListener.IsEnabled())
             {
@@ -26,7 +27,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             this DiagnosticListener diagnosticListener,
             IRazorPage page,
             ViewContext viewContext
-        ) {
+        )
+        {
             if (diagnosticListener.IsEnabled(Diagnostics.BeforeViewPageEventData.EventName))
             {
                 diagnosticListener.Write(
@@ -45,7 +47,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             this DiagnosticListener diagnosticListener,
             IRazorPage page,
             ViewContext viewContext
-        ) {
+        )
+        {
             // Inlinable fast-path check if Diagnositcs is enabled
             if (diagnosticListener.IsEnabled())
             {
@@ -57,7 +60,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             this DiagnosticListener diagnosticListener,
             IRazorPage page,
             ViewContext viewContext
-        ) {
+        )
+        {
             if (diagnosticListener.IsEnabled(Diagnostics.AfterViewPageEventData.EventName))
             {
                 diagnosticListener.Write(

@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.ResponseCompression.Tests
         public void OnWrite_AppendsAcceptEncodingToVaryHeader_IfNotPresent(
             string providedVaryHeader,
             string expectedVaryHeader
-        ) {
+        )
+        {
             var httpContext = new DefaultHttpContext();
             httpContext.Response.Headers[HeaderNames.Vary] = providedVaryHeader;
             var stream = new ResponseCompressionBody(
@@ -61,7 +62,8 @@ namespace Microsoft.AspNetCore.ResponseCompression.Tests
         [InlineData(false)]
         public async Task WriteAsync_IsPassedToUnderlyingStream_WhenDisableResponseBuffering(
             bool flushable
-        ) {
+        )
+        {
             var buffer = new byte[] { 1 };
 
             var memoryStream = new MemoryStream();
@@ -101,7 +103,8 @@ namespace Microsoft.AspNetCore.ResponseCompression.Tests
         [InlineData(false)]
         public void BeginWrite_IsPassedToUnderlyingStream_WhenDisableResponseBuffering(
             bool flushable
-        ) {
+        )
+        {
             var buffer = new byte[] { 1 };
 
             var memoryStream = new MemoryStream();

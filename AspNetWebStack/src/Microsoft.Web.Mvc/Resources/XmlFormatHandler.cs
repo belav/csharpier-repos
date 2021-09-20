@@ -24,7 +24,8 @@ namespace Microsoft.Web.Mvc.Resources
             ControllerContext controllerContext,
             ModelBindingContext bindingContext,
             ContentType requestFormat
-        ) {
+        )
+        {
             DataContractSerializer xml = new DataContractSerializer(
                 bindingContext.ModelType,
                 null,

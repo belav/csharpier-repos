@@ -599,7 +599,8 @@ namespace System.Threading.Tasks.Tests
         [InlineData(true)]
         public async Task TaskScheduler_AllCodeExecutedOnCorrectScheduler_Sync(
             bool defaultScheduler
-        ) {
+        )
+        {
             TaskScheduler scheduler = defaultScheduler
                 ? TaskScheduler.Default
                 : new ConcurrentExclusiveSchedulerPair().ConcurrentScheduler;
@@ -646,7 +647,8 @@ namespace System.Threading.Tasks.Tests
         [InlineData(true)]
         public async Task TaskScheduler_AllCodeExecutedOnCorrectScheduler_Async(
             bool defaultScheduler
-        ) {
+        )
+        {
             TaskScheduler scheduler = defaultScheduler
                 ? TaskScheduler.Default
                 : new ConcurrentExclusiveSchedulerPair().ConcurrentScheduler;
@@ -749,7 +751,8 @@ namespace System.Threading.Tasks.Tests
         {
             static async IAsyncEnumerable<CancellationToken> YieldTokenAsync(
                 [EnumeratorCancellation] CancellationToken cancellationToken
-            ) {
+            )
+            {
                 await Task.Yield();
                 yield return cancellationToken;
             }
@@ -1214,7 +1217,8 @@ namespace System.Threading.Tasks.Tests
         public async Task ExecutionContext_FlowsToWorkerBodies_Async(
             bool defaultScheduler,
             bool flowContext
-        ) {
+        )
+        {
             TaskScheduler scheduler = defaultScheduler
                 ? TaskScheduler.Default
                 : new ConcurrentExclusiveSchedulerPair().ConcurrentScheduler;
@@ -1257,7 +1261,8 @@ namespace System.Threading.Tasks.Tests
             int start,
             int count,
             bool yield = true
-        ) {
+        )
+        {
             for (int i = start; i < start + count; i++)
             {
                 if (yield)

@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.QuickInfo
             Document document,
             SyntaxToken token,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var (model, tokenInformation, supportedPlatforms) = await ComputeQuickInfoDataAsync(
                     document,
                     token,
@@ -52,7 +53,8 @@ namespace Microsoft.CodeAnalysis.QuickInfo
             Document document,
             SyntaxToken token,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var linkedDocumentIds = document.GetLinkedDocumentIds();
             if (linkedDocumentIds.Any())
             {
@@ -76,7 +78,8 @@ namespace Microsoft.CodeAnalysis.QuickInfo
             ImmutableArray<DocumentId> linkedDocumentIds,
             SyntaxToken token,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Linked files/shared projects: imagine the following when GOO is false
             // #if GOO
             // int x = 3;
@@ -147,7 +150,8 @@ namespace Microsoft.CodeAnalysis.QuickInfo
                             LinkedFilesSymbolEquivalenceComparer.Instance
                         )
                         .Any()
-                ) {
+                )
+                {
                     invalidProjects.Add(candidate.docId.ProjectId);
                 }
             }
@@ -168,7 +172,8 @@ namespace Microsoft.CodeAnalysis.QuickInfo
             SyntaxToken token,
             Document linkedDocument,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await linkedDocument.GetSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
 
@@ -196,7 +201,8 @@ namespace Microsoft.CodeAnalysis.QuickInfo
             TokenInformation tokenInformation,
             SupportedPlatformData? supportedPlatforms,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxFactsService = workspace.Services.GetLanguageServices(semanticModel.Language)
                 .GetRequiredService<ISyntaxFactsService>();
 
@@ -249,7 +255,8 @@ namespace Microsoft.CodeAnalysis.QuickInfo
             Document document,
             SyntaxToken token,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
             var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
@@ -318,7 +325,8 @@ namespace Microsoft.CodeAnalysis.QuickInfo
             Workspace workspace,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (GetBindableNodeForTokenIndicatingLambda(token, out var lambdaSyntax))
             {
                 var symbol = semanticModel.GetSymbolInfo(lambdaSyntax, cancellationToken).Symbol;
@@ -332,7 +340,8 @@ namespace Microsoft.CodeAnalysis.QuickInfo
                     token,
                     out var elementAccessExpression
                 )
-            ) {
+            )
+            {
                 var symbol =
                     semanticModel.GetSymbolInfo(elementAccessExpression, cancellationToken).Symbol;
                 if (symbol?.IsIndexer() == true)

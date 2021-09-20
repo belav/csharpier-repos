@@ -65,7 +65,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         private static IModelBinder CreateInstance(
             ModelBinderProviderContext context,
             Type collectionType
-        ) {
+        )
+        {
             var binderType = typeof(CollectionModelBinder<>).MakeGenericType(
                 collectionType.GenericTypeArguments
             );

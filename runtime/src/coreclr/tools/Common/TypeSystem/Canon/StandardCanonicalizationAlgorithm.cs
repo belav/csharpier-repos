@@ -21,7 +21,8 @@ namespace Internal.TypeSystem
             Instantiation instantiation,
             CanonicalFormKind kind,
             out bool changed
-        ) {
+        )
+        {
             TypeDesc[] canonInstantiation = null;
 
             CanonicalFormKind currentKind = kind;
@@ -37,7 +38,8 @@ namespace Internal.TypeSystem
                     int instantiationIndex = 0;
                     instantiationIndex < instantiation.Length;
                     instantiationIndex++
-                ) {
+                )
+                {
                     TypeDesc typeToConvert = instantiation[instantiationIndex];
                     TypeDesc canonForm = ConvertToCanon(typeToConvert, ref currentKind);
                     if (typeToConvert != canonForm || canonInstantiation != null)

@@ -321,7 +321,8 @@ namespace System.Runtime.CompilerServices
                         == System.Linq.Expressions.Compiler.DelegateHelpers.GetActionType(
                             args.AddFirst(typeof(CallSite))
                         )
-                    ) {
+                    )
+                    {
                         method = typeof(UpdateDelegates).GetMethod(
                             "UpdateAndExecuteVoid" + args.Length,
                             BindingFlags.NonPublic | BindingFlags.Static
@@ -339,7 +340,8 @@ namespace System.Runtime.CompilerServices
                         == System.Linq.Expressions.Compiler.DelegateHelpers.GetFuncType(
                             args.AddFirst(typeof(CallSite))
                         )
-                    ) {
+                    )
+                    {
                         method = typeof(UpdateDelegates).GetMethod(
                             "UpdateAndExecute" + (args.Length - 1),
                             BindingFlags.NonPublic | BindingFlags.Static

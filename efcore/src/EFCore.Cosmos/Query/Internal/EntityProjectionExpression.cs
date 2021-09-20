@@ -116,7 +116,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             if (
                 !EntityType.IsAssignableFrom(property.DeclaringEntityType)
                 && !property.DeclaringEntityType.IsAssignableFrom(EntityType)
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     CosmosStrings.UnableToBindMemberToEntityProjection(
                         "property",
@@ -138,7 +139,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 // would not otherwise be found to be non-translatable. See issues #17670 and #14121.
                 && property.Name != StoreKeyConvention.JObjectPropertyName
                 && expression.Name.Length == 0
-            ) {
+            )
+            {
                 // Non-persisted property can't be translated
                 return null;
             }
@@ -157,7 +159,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             if (
                 !EntityType.IsAssignableFrom(navigation.DeclaringEntityType)
                 && !navigation.DeclaringEntityType.IsAssignableFrom(EntityType)
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     CosmosStrings.UnableToBindMemberToEntityProjection(
                         "navigation",
@@ -220,7 +223,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             Type entityClrType,
             bool clientEval,
             out IPropertyBase propertyBase
-        ) {
+        )
+        {
             var entityType = EntityType;
             if (entityClrType != null && !entityClrType.IsAssignableFrom(entityType.ClrType))
             {

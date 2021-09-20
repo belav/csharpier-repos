@@ -87,7 +87,8 @@ namespace System.Text.Json
         public static void ValidatePropertyAndValue(
             ReadOnlySpan<char> propertyName,
             ReadOnlySpan<byte> value
-        ) {
+        )
+        {
             if (
                 propertyName.Length > JsonConstants.MaxCharacterTokenSize
                 || value.Length > JsonConstants.MaxUnescapedTokenSize
@@ -99,7 +100,8 @@ namespace System.Text.Json
         public static void ValidatePropertyAndValue(
             ReadOnlySpan<byte> propertyName,
             ReadOnlySpan<char> value
-        ) {
+        )
+        {
             if (
                 propertyName.Length > JsonConstants.MaxUnescapedTokenSize
                 || value.Length > JsonConstants.MaxCharacterTokenSize
@@ -111,7 +113,8 @@ namespace System.Text.Json
         public static void ValidatePropertyAndValue(
             ReadOnlySpan<byte> propertyName,
             ReadOnlySpan<byte> value
-        ) {
+        )
+        {
             if (
                 propertyName.Length > JsonConstants.MaxUnescapedTokenSize
                 || value.Length > JsonConstants.MaxUnescapedTokenSize
@@ -123,7 +126,8 @@ namespace System.Text.Json
         public static void ValidatePropertyAndValue(
             ReadOnlySpan<char> propertyName,
             ReadOnlySpan<char> value
-        ) {
+        )
+        {
             if (
                 propertyName.Length > JsonConstants.MaxCharacterTokenSize
                 || value.Length > JsonConstants.MaxCharacterTokenSize
@@ -135,7 +139,8 @@ namespace System.Text.Json
         public static void ValidatePropertyAndBytes(
             ReadOnlySpan<char> propertyName,
             ReadOnlySpan<byte> bytes
-        ) {
+        )
+        {
             if (
                 propertyName.Length > JsonConstants.MaxCharacterTokenSize
                 || bytes.Length > JsonConstants.MaxBase64ValueTokenSize
@@ -147,7 +152,8 @@ namespace System.Text.Json
         public static void ValidatePropertyAndBytes(
             ReadOnlySpan<byte> propertyName,
             ReadOnlySpan<byte> bytes
-        ) {
+        )
+        {
             if (
                 propertyName.Length > JsonConstants.MaxUnescapedTokenSize
                 || bytes.Length > JsonConstants.MaxBase64ValueTokenSize
@@ -187,7 +193,8 @@ namespace System.Text.Json
             {
                 while (
                     i < utf8FormattedNumber.Length && JsonHelpers.IsDigit(utf8FormattedNumber[i])
-                ) {
+                )
+                {
                     i++;
                 }
             }
@@ -214,7 +221,8 @@ namespace System.Text.Json
 
                 while (
                     i < utf8FormattedNumber.Length && JsonHelpers.IsDigit(utf8FormattedNumber[i])
-                ) {
+                )
+                {
                     i++;
                 }
 

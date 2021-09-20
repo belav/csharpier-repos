@@ -13,7 +13,8 @@ namespace System.Reflection.Metadata.Tests
             string str,
             int charCount,
             int byteLimit
-        ) {
+        )
+        {
             fixed (char* ptr = str)
             {
                 char* remainderPtr;

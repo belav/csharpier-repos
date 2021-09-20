@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Diagnostics
             HttpContext context,
             StatusCodePagesOptions options,
             RequestDelegate next
-        ) {
+        )
+        {
             HttpContext = context;
             Options = options;
             Next = next;

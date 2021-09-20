@@ -48,7 +48,8 @@ namespace Roslyn.Test.Utilities.Desktop
             this SerializationInfo info,
             string name,
             ImmutableArray<byte> value
-        ) {
+        )
+        {
             // we will copy the content into an array and serialize the copy
             // we could serialize element-wise, but that would require serializing
             // name and type for every serialized element which seems worse than creating a copy.

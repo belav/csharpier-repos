@@ -38,63 +38,74 @@ namespace SimpleArray_01
                                                     int index10 = 0;
                                                     index10 < array.Length;
                                                     index10++
-                                                ) {
+                                                )
+                                                {
                                                     for (
                                                         int index11 = 0;
                                                         index11 < array.Length;
                                                         index11++
-                                                    ) {
+                                                    )
+                                                    {
                                                         for (
                                                             int index12 = 0;
                                                             index12 < array.Length;
                                                             index12++
-                                                        ) {
+                                                        )
+                                                        {
                                                             for (
                                                                 int index13 = 0;
                                                                 index13 < array.Length;
                                                                 index13++
-                                                            ) {
+                                                            )
+                                                            {
                                                                 for (
                                                                     int index14 = 0;
                                                                     index14 < array.Length;
                                                                     index14++
-                                                                ) {
+                                                                )
+                                                                {
                                                                     for (
                                                                         int index15 = 0;
                                                                         index15 < array.Length;
                                                                         index15++
-                                                                    ) {
+                                                                    )
+                                                                    {
                                                                         for (
                                                                             int index16 = 0;
                                                                             index16 < array.Length;
                                                                             index16++
-                                                                        ) {
+                                                                        )
+                                                                        {
                                                                             for (
                                                                                 int index17 = 0;
                                                                                 index17
                                                                                     < array.Length;
                                                                                 index17++
-                                                                            ) {
+                                                                            )
+                                                                            {
                                                                                 for (
                                                                                     int index18 = 0;
                                                                                     index18
                                                                                         < array.Length;
                                                                                     index18++
-                                                                                ) {
+                                                                                )
+                                                                                {
                                                                                     for (
                                                                                         int index19 =
                                                                                             0;
                                                                                         index19
                                                                                             < array.Length;
                                                                                         index19++
-                                                                                    ) {
+                                                                                    )
+                                                                                    {
                                                                                         for (
                                                                                             int index20 =
                                                                                                 0;
                                                                                             index20
                                                                                                 < array.Length;
                                                                                             index20++
-                                                                                        ) {
+                                                                                        )
+                                                                                        {
                                                                                             array[
                                                                                                 index1
                                                                                             ] =

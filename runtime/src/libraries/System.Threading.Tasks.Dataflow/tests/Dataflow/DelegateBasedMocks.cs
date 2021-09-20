@@ -45,7 +45,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
             TInput messageValue,
             ISourceBlock<TInput> source,
             bool consumeToAccept
-        ) {
+        )
+        {
             return OfferMessageDelegate != null
               ? OfferMessageDelegate(messageHeader, messageValue, source, consumeToAccept)
               : DataflowMessageStatus.Accepted;
@@ -79,7 +80,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
             DataflowMessageHeader messageHeader,
             ITargetBlock<TOutput> target,
             out bool messageConsumed
-        ) {
+        )
+        {
             messageConsumed = false;
             return ConsumeMessageDelegate != null
               ? ConsumeMessageDelegate(messageHeader, target, out messageConsumed)
@@ -89,7 +91,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
         public bool ReserveMessage(
             DataflowMessageHeader messageHeader,
             ITargetBlock<TOutput> target
-        ) {
+        )
+        {
             return ReserveMessageDelegate != null
               ? ReserveMessageDelegate(messageHeader, target)
               : true;
@@ -98,7 +101,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
         public void ReleaseReservation(
             DataflowMessageHeader messageHeader,
             ITargetBlock<TOutput> target
-        ) {
+        )
+        {
             if (ReleaseMessageDelegate != null)
                 ReleaseMessageDelegate(messageHeader, target);
         }

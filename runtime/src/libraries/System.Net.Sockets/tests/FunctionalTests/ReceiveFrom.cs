@@ -38,7 +38,8 @@ namespace System.Net.Sockets.Tests
             int length,
             int offset,
             int count
-        ) {
+        )
+        {
             using Socket socket = CreateSocket();
 
             ArraySegment<byte> buffer = new FakeArraySegment
@@ -225,7 +226,8 @@ namespace System.Net.Sockets.Tests
         [InlineData(false)]
         public async Task ClosedDuringOperation_Throws_ObjectDisposedExceptionOrSocketException(
             bool closeOrDispose
-        ) {
+        )
+        {
             if (UsesSync && PlatformDetection.IsOSX)
             {
                 // [ActiveIssue("https://github.com/dotnet/runtime/issues/47342")]
@@ -292,7 +294,8 @@ namespace System.Net.Sockets.Tests
         [InlineData(SocketShutdown.Receive)]
         public async Task ShutdownReceiveBeforeOperation_ThrowsSocketException(
             SocketShutdown shutdown
-        ) {
+        )
+        {
             using var socket = new Socket(
                 AddressFamily.InterNetwork,
                 SocketType.Dgram,

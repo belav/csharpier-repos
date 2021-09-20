@@ -26,7 +26,8 @@ namespace IntelHardwareIntrinsicTest
                         new float[4] { 1, -5, 100, 0 },
                         new float[4]
                     )
-                ) {
+                )
+                {
                     var vf1 = Unsafe.Read<Vector128<float>>(floatTable.inArrayPtr);
                     var vf2 = Sse.Sqrt(vf1);
                     Unsafe.Write(floatTable.outArrayPtr, vf2);
@@ -39,7 +40,8 @@ namespace IntelHardwareIntrinsicTest
                                 return (expected == y) || (float.IsNaN(expected) && float.IsNaN(y));
                             }
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("SSE Sqrt failed on float:");
                         foreach (var item in floatTable.outArray)
                         {

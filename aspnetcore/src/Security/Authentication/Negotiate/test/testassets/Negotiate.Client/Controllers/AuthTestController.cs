@@ -29,7 +29,8 @@ namespace Negotiate.Client.Controllers
         public async Task<IActionResult> AnonymousUnrestricted(
             [FromQuery] string server,
             [FromQuery] string protocol
-        ) {
+        )
+        {
             var client = CreateSocketHttpClient(server);
             client.DefaultRequestVersion = GetProtocolVersion(protocol);
 
@@ -45,7 +46,8 @@ namespace Negotiate.Client.Controllers
                 )
                 || HasWrongProtocol(protocol, result.Version, out actionResult)
                 || HasUser(body, out actionResult)
-            ) {
+            )
+            {
                 return actionResult;
             }
 
@@ -57,7 +59,8 @@ namespace Negotiate.Client.Controllers
         public async Task<IActionResult> AnonymousAuthorized(
             [FromQuery] string server,
             [FromQuery] string protocol
-        ) {
+        )
+        {
             // Note WinHttpHandler cannot disable default credentials on localhost.
             var client = CreateSocketHttpClient(server);
             client.DefaultRequestVersion = GetProtocolVersion(protocol);
@@ -72,7 +75,8 @@ namespace Negotiate.Client.Controllers
                     body,
                     out var actionResult
                 ) || HasWrongProtocol(protocol, result.Version, out actionResult)
-            ) {
+            )
+            {
                 return actionResult;
             }
 
@@ -91,7 +95,8 @@ namespace Negotiate.Client.Controllers
         public async Task<IActionResult> DefaultCredentialsAuthorized(
             [FromQuery] string server,
             [FromQuery] string protocol
-        ) {
+        )
+        {
             // Note WinHttpHandler cannot disable default credentials on localhost.
             // https://github.com/dotnet/corefx/issues/35195 SocketHttpHandler won't downgrade HTTP/2. WinHttpHandler does.
             var client = CreateWinHttpClient(server, useDefaultCredentials: true);
@@ -110,7 +115,8 @@ namespace Negotiate.Client.Controllers
                 // Automatic downgrade to HTTP/1.1
                 || HasWrongProtocol(Http11Protocol, result.Version, out actionResult)
                 || MissingUser(body, out actionResult)
-            ) {
+            )
+            {
                 return actionResult;
             }
 
@@ -123,7 +129,8 @@ namespace Negotiate.Client.Controllers
             [FromQuery] string server,
             [FromQuery] string protocol1,
             [FromQuery] string protocol2
-        ) {
+        )
+        {
             // Note WinHttpHandler cannot disable default credentials on localhost.
             // https://github.com/dotnet/corefx/issues/35195 SocketHttpHandler won't downgrade HTTP/2. WinHttpHandler does.
             var client = CreateWinHttpClient(server, useDefaultCredentials: true);
@@ -142,7 +149,8 @@ namespace Negotiate.Client.Controllers
                 // Automatic downgrade to HTTP/1.1
                 || HasWrongProtocol(Http11Protocol, result.Version, out actionResult)
                 || MissingUser(body, out actionResult)
-            ) {
+            )
+            {
                 return actionResult;
             }
 
@@ -163,7 +171,8 @@ namespace Negotiate.Client.Controllers
                 )
                 || HasWrongProtocol(Http11Protocol, result.Version, out actionResult)
                 || MissingUser(body, out actionResult)
-            ) {
+            )
+            {
                 return actionResult;
             }
 
@@ -176,7 +185,8 @@ namespace Negotiate.Client.Controllers
             [FromQuery] string server,
             [FromQuery] string protocol1,
             [FromQuery] string protocol2
-        ) {
+        )
+        {
             // Note WinHttpHandler cannot disable default credentials on localhost.
             // https://github.com/dotnet/corefx/issues/35195 SocketHttpHandler won't downgrade HTTP/2. WinHttpHandler does.
             var client = CreateWinHttpClient(server, useDefaultCredentials: true);
@@ -195,7 +205,8 @@ namespace Negotiate.Client.Controllers
                 // Automatic downgrade to HTTP/1.1
                 || HasWrongProtocol(Http11Protocol, result.Version, out actionResult)
                 || MissingUser(body, out actionResult)
-            ) {
+            )
+            {
                 return actionResult;
             }
 
@@ -216,7 +227,8 @@ namespace Negotiate.Client.Controllers
                 )
                 || HasWrongProtocol(Http11Protocol, result.Version, out actionResult)
                 || HasUser(body, out actionResult)
-            ) {
+            )
+            {
                 return actionResult;
             }
 
@@ -229,7 +241,8 @@ namespace Negotiate.Client.Controllers
             [FromQuery] string server,
             [FromQuery] string protocol1,
             [FromQuery] string protocol2
-        ) {
+        )
+        {
             // Note WinHttpHandler cannot disable default credentials on localhost.
             // https://github.com/dotnet/corefx/issues/35195 SocketHttpHandler won't downgrade HTTP/2. WinHttpHandler does.
             var client = CreateWinHttpClient(server, useDefaultCredentials: true);
@@ -248,7 +261,8 @@ namespace Negotiate.Client.Controllers
                 // Automatic downgrade to HTTP/1.1
                 || HasWrongProtocol(Http11Protocol, result.Version, out actionResult)
                 || MissingUser(body, out actionResult)
-            ) {
+            )
+            {
                 return actionResult;
             }
 
@@ -269,7 +283,8 @@ namespace Negotiate.Client.Controllers
                 )
                 || HasWrongProtocol(Http11Protocol, result.Version, out actionResult)
                 || MissingUser(body, out actionResult)
-            ) {
+            )
+            {
                 return actionResult;
             }
 
@@ -281,7 +296,8 @@ namespace Negotiate.Client.Controllers
         public async Task<IActionResult> Unauthorized(
             [FromQuery] string server,
             [FromQuery] string protocol
-        ) {
+        )
+        {
             var client = CreateWinHttpClient(server, useDefaultCredentials: true);
             client.DefaultRequestVersion = GetProtocolVersion(protocol);
 
@@ -315,7 +331,8 @@ namespace Negotiate.Client.Controllers
         public async Task<IActionResult> AfterAuthUnauthorized(
             [FromQuery] string server,
             [FromQuery] string protocol
-        ) {
+        )
+        {
             var client = CreateWinHttpClient(server, useDefaultCredentials: true);
             client.DefaultRequestVersion = GetProtocolVersion(protocol);
 
@@ -332,7 +349,8 @@ namespace Negotiate.Client.Controllers
                 // Automatic downgrade to HTTP/1.1
                 || HasWrongProtocol(Http11Protocol, result.Version, out actionResult)
                 || MissingUser(body, out actionResult)
-            ) {
+            )
+            {
                 return actionResult;
             }
 
@@ -366,7 +384,8 @@ namespace Negotiate.Client.Controllers
             HttpStatusCode actual,
             string body,
             out IActionResult actionResult
-        ) {
+        )
+        {
             if (expected != (int)actual)
             {
                 actionResult = StatusCode(StatusCode600WrongStatusCode, $"{actual} {body}");
@@ -380,11 +399,13 @@ namespace Negotiate.Client.Controllers
             string expected,
             Version actual,
             out IActionResult actionResult
-        ) {
+        )
+        {
             if (
                 (expected == Http11Protocol && actual != new Version(1, 1))
                 || (expected == Http2Protocol && actual != new Version(2, 0))
-            ) {
+            )
+            {
                 actionResult = StatusCode(StatusCode604WrongProtocol, actual.ToString());
                 return true;
             }

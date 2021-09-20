@@ -121,7 +121,8 @@ namespace BasicEventSourceTests
                     "SimpleEventSource",
                     EventLevel.Verbose
                 )
-            ) {
+            )
+            {
                 string displayName = "Mock Counter";
                 string displayUnits = "Count";
 

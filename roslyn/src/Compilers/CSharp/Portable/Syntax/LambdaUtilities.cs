@@ -71,7 +71,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal static SyntaxNode? TryGetCorrespondingLambdaBody(
             SyntaxNode oldBody,
             SyntaxNode newLambda
-        ) {
+        )
+        {
             Debug.Assert(oldBody.Parent is object);
 
             switch (newLambda.Kind())
@@ -251,7 +252,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static bool IsReducedSelectOrGroupByClause(
             SelectOrGroupClauseSyntax selectOrGroupClause,
             ExpressionSyntax selectOrGroupExpression
-        ) {
+        )
+        {
             if (!selectOrGroupExpression.IsKind(SyntaxKind.IdentifierName))
             {
                 return false;
@@ -285,7 +287,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 selectOrGroupClause.IsKind(SyntaxKind.SelectClause)
                 && containingBody.Clauses.Count == 0
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -294,7 +297,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     !clause.IsKind(SyntaxKind.WhereClause)
                     && !clause.IsKind(SyntaxKind.OrderByClause)
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -315,7 +319,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static bool IsLambdaBodyStatementOrExpression(
             SyntaxNode node,
             out SyntaxNode lambdaBody
-        ) {
+        )
+        {
             lambdaBody = node;
             return IsLambdaBody(node);
         }
@@ -327,7 +332,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxNode node,
             [NotNullWhen(true)] out SyntaxNode? lambdaBody1,
             out SyntaxNode? lambdaBody2
-        ) {
+        )
+        {
             lambdaBody1 = null;
             lambdaBody2 = null;
 
@@ -531,7 +537,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private static SyntaxNode GetLocalFunctionBody(
             LocalFunctionStatementSyntax localFunctionStatementSyntax
-        ) {
+        )
+        {
             return (SyntaxNode?)localFunctionStatementSyntax.Body
                 ?? localFunctionStatementSyntax.ExpressionBody!.Expression;
         }

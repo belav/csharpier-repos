@@ -75,7 +75,8 @@ namespace Newtonsoft.Json.Tests.Serialization
                 Type objectType,
                 object existingValue,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 return new ContentA() { B = serializer.Deserialize<ContentB>(reader) }; // Construct my data back.
             }
 
@@ -83,7 +84,8 @@ namespace Newtonsoft.Json.Tests.Serialization
                 JsonWriter writer,
                 object value,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 ContentB b = ((ContentA)value).B;
                 serializer.Serialize(writer, b); // My Content.B contains all useful data.
             }
@@ -573,7 +575,8 @@ namespace Newtonsoft.Json.Tests.Serialization
                 JsonWriter writer,
                 object value,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 CircularReferenceClass circularReferenceClass = (CircularReferenceClass)value;
 
                 string reference = serializer.ReferenceResolver.GetReference(
@@ -597,7 +600,8 @@ namespace Newtonsoft.Json.Tests.Serialization
                 Type objectType,
                 object existingValue,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 JObject o = JObject.Load(reader);
                 string id = (string)o["$id"];
                 if (id != null)

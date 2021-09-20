@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             int[] numbers,
             bool randomCase,
             IEqualityComparer<string> comparer
-        ) {
+        )
+        {
             var keys = new HashSet<string>(comparer);
             foreach (var n in numbers)
             {
@@ -117,7 +118,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             ILookup<string, int> look1,
             CachingDictionary<string, int> look2,
             HashSet<string> keys
-        ) {
+        )
+        {
             foreach (string k in keys)
             {
                 Assert.Equal(look1.Contains(k), look2.Contains(k));
@@ -137,7 +139,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             ILookup<string, int> look1,
             CachingDictionary<string, int> look2,
             HashSet<string> keys
-        ) {
+        )
+        {
             foreach (string k in look1.Select(g => g.Key))
             {
                 CheckEqualEnumerable(look1[k], look2[k]);
@@ -155,7 +158,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             CachingDictionary<string, int> look1,
             ILookup<string, int> look2,
             HashSet<string> keys
-        ) {
+        )
+        {
             foreach (string k in look1.Keys)
             {
                 CheckEqualEnumerable(look1[k], look2[k]);

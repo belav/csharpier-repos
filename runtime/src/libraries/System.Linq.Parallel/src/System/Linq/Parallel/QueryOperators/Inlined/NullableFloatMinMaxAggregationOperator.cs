@@ -57,7 +57,8 @@ namespace System.Linq.Parallel
                     ParallelMergeOptions.FullyBuffered,
                     true
                 )
-            ) {
+            )
+            {
                 // Just return null right away for empty results.
                 if (!enumerator.MoveNext())
                 {
@@ -78,7 +79,8 @@ namespace System.Linq.Parallel
                             best == null
                             || current < best
                             || float.IsNaN(current.GetValueOrDefault())
-                        ) {
+                        )
+                        {
                             best = current;
                         }
                     }
@@ -111,7 +113,8 @@ namespace System.Linq.Parallel
             QueryOperatorEnumerator<float?, TKey> source,
             object? sharedData,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return new NullableFloatMinMaxAggregationOperatorEnumerator<TKey>(
                 source,
                 index,
@@ -176,7 +179,8 @@ namespace System.Linq.Parallel
                                 currentElement == null
                                 || elem < currentElement
                                 || float.IsNaN(elem.GetValueOrDefault())
-                            ) {
+                            )
+                            {
                                 currentElement = elem;
                             }
                         }
@@ -195,7 +199,8 @@ namespace System.Linq.Parallel
                                 currentElement == null
                                 || elem > currentElement
                                 || float.IsNaN(currentElement.GetValueOrDefault())
-                            ) {
+                            )
+                            {
                                 currentElement = elem;
                             }
                         }

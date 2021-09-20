@@ -52,7 +52,8 @@ namespace Microsoft.AspNetCore.Testing
             if (
                 Queues.Contains("All.OSX")
                 && targetQueue.StartsWith("osx", StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 return true;
             }
 

@@ -85,7 +85,8 @@ namespace Microsoft.Cci
 
         internal static CallingConvention FromSignatureConvention(
             this SignatureCallingConvention convention
-        ) {
+        )
+        {
             if (!convention.IsValid())
             {
                 throw new UnsupportedSignatureContent();
@@ -108,7 +109,8 @@ namespace Microsoft.Cci
         internal static bool IsCallingConvention(
             this CallingConvention original,
             CallingConvention compare
-        ) {
+        )
+        {
             Debug.Assert((compare & ~(CallingConvention)SignatureCallingConventionMask) == 0);
             return ((original & (CallingConvention)SignatureCallingConventionMask)) == compare;
         }

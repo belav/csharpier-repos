@@ -207,7 +207,8 @@ namespace N.N1.N6.N7
         [MemberData(nameof(SimpleAttributeNames))]
         public async Task GlobalSuppressionOnTypesAndNamespaces_NamespaceAndDescendants(
             string attrName
-        ) {
+        )
+        {
             var source =
                 @"
 using System.Diagnostics.CodeAnalysis;
@@ -631,7 +632,8 @@ namespace A
         [MemberData(nameof(QualifiedAttributeNames))]
         public async Task SuppressSyntaxDiagnosticsOnNamespaceAndChildDeclarationCSharp(
             string attrName
-        ) {
+        )
+        {
             await VerifyTokenDiagnosticsCSharpAsync(
                 @"
 [assembly: "
@@ -679,7 +681,8 @@ End|] Namespace
         [MemberData(nameof(QualifiedAttributeNames))]
         public async Task SuppressSyntaxDiagnosticsOnNamespaceAndDescendantsDeclarationBasic(
             string attrName
-        ) {
+        )
+        {
             await VerifyTokenDiagnosticsBasicAsync(
                 @"
 <assembly: "
@@ -1706,14 +1709,16 @@ End Class
             string source,
             DiagnosticAnalyzer[] analyzers,
             params DiagnosticDescription[] diagnostics
-        ) {
+        )
+        {
             await VerifyAsync(source, LanguageNames.CSharp, analyzers, diagnostics);
         }
 
         protected Task VerifyTokenDiagnosticsCSharpAsync(
             string markup,
             params DiagnosticDescription[] diagnostics
-        ) {
+        )
+        {
             return VerifyTokenDiagnosticsAsync(markup, LanguageNames.CSharp, diagnostics);
         }
 
@@ -1722,7 +1727,8 @@ End Class
             string rootNamespace,
             DiagnosticAnalyzer[] analyzers,
             params DiagnosticDescription[] diagnostics
-        ) {
+        )
+        {
             Assert.False(
                 string.IsNullOrWhiteSpace(rootNamespace),
                 string.Format("Invalid root namespace '{0}'", rootNamespace)
@@ -1740,14 +1746,16 @@ End Class
             string source,
             DiagnosticAnalyzer[] analyzers,
             params DiagnosticDescription[] diagnostics
-        ) {
+        )
+        {
             await VerifyAsync(source, LanguageNames.VisualBasic, analyzers, diagnostics);
         }
 
         protected Task VerifyTokenDiagnosticsBasicAsync(
             string markup,
             params DiagnosticDescription[] diagnostics
-        ) {
+        )
+        {
             return VerifyTokenDiagnosticsAsync(markup, LanguageNames.VisualBasic, diagnostics);
         }
 
@@ -1764,7 +1772,8 @@ End Class
             string markup,
             string language,
             DiagnosticDescription[] diagnostics
-        ) {
+        )
+        {
             MarkupTestFile.GetSpans(markup, out var source, out ImmutableArray<TextSpan> spans);
             Assert.True(
                 spans.Length > 0,

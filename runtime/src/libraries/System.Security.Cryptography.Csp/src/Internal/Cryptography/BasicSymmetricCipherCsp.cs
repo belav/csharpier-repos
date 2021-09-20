@@ -129,7 +129,8 @@ namespace Internal.Cryptography
             int algId,
             byte[] rawKey,
             bool addNoSaltFlag
-        ) {
+        )
+        {
             SafeKeyHandle safeKeyHandle;
             byte[] keyBlob = ToPlainTextKeyBlob(algId, rawKey);
             ImportKeyBlob(

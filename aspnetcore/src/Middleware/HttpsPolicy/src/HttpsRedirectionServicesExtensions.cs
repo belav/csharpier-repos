@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IServiceCollection AddHttpsRedirection(
             this IServiceCollection services,
             Action<HttpsRedirectionOptions> configureOptions
-        ) {
+        )
+        {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));

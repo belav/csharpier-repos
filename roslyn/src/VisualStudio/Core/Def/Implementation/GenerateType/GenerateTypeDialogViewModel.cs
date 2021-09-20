@@ -152,7 +152,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.GenerateType
             string key,
             Accessibility accessibility,
             string languageName = null
-        ) {
+        )
+        {
             if (languageName == null)
             {
                 _csharpAccessList.Add(key);
@@ -251,7 +252,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.GenerateType
                 if (
                     string.IsNullOrWhiteSpace(trimmedFileName)
                     || trimmedFileName.EndsWith(@"\", StringComparison.Ordinal)
-                ) {
+                )
+                {
                     SendFailureNotification(ServicesVSResources.Path_cannot_have_empty_filename);
                     return false;
                 }
@@ -274,7 +276,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.GenerateType
                             ServicesVSResources.Project_Path_is_illegal,
                             out implicitFilePath
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }
@@ -286,7 +289,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.GenerateType
                             ServicesVSResources.DocumentPath_is_illegal,
                             out implicitFilePath
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }
@@ -338,7 +342,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.GenerateType
                         ServicesVSResources.Project_Path_is_illegal,
                         out projectRootPath
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -366,7 +371,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.GenerateType
                                         || _syntaxFactsService.IsVerbatimIdentifier(folder)
                                     )
                             )
-                        ) {
+                        )
+                        {
                             _areFoldersValidIdentifiers = false;
                         }
                     }
@@ -401,7 +407,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.GenerateType
                 if (
                     this.FullFilePath.Split(new[] { '\\' }, StringSplitOptions.RemoveEmptyEntries)
                         .Any(s => _reservedKeywords.Contains(s, StringComparer.OrdinalIgnoreCase))
-                ) {
+                )
+                {
                     SendFailureNotification(
                         ServicesVSResources.File_path_cannot_use_reserved_keywords
                     );
@@ -427,7 +434,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.GenerateType
                             .Any()
                     )
                     || File.Exists(FullFilePath)
-                ) {
+                )
+                {
                     SendFailureNotification(ServicesVSResources.File_already_exists);
                     return false;
                 }
@@ -440,7 +448,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.GenerateType
             string implicitPathContainer,
             string message,
             out string implicitPath
-        ) {
+        )
+        {
             var indexOfLastSeparator = implicitPathContainer.LastIndexOf('\\');
             if (indexOfLastSeparator == -1)
             {
@@ -502,7 +511,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.GenerateType
                     if (
                         previousProject != null
                         && previousProject.Language != _selectedProject.Language
-                    ) {
+                    )
+                    {
                         if (_selectedProject.Language == LanguageNames.CSharp)
                         {
                             var previousSelectedIndex = _kindSelectIndex;
@@ -684,7 +694,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.GenerateType
             if (
                 !string.IsNullOrWhiteSpace(currentFileName)
                 && !currentFileName.EndsWith("\\", StringComparison.Ordinal)
-            ) {
+            )
+            {
                 if (this.SelectedProject.Language == LanguageNames.CSharp)
                 {
                     // For CSharp
@@ -712,7 +723,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.GenerateType
             string currentFileName,
             string desiredFileExtension,
             string undesiredFileExtension
-        ) {
+        )
+        {
             if (currentFileName.EndsWith(desiredFileExtension, StringComparison.OrdinalIgnoreCase))
             {
                 // No change required
@@ -722,7 +734,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.GenerateType
             // Remove the undesired extension
             if (
                 currentFileName.EndsWith(undesiredFileExtension, StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 currentFileName = currentFileName.Substring(
                     0,
                     currentFileName.Length - undesiredFileExtension.Length
@@ -744,7 +757,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.GenerateType
             bool isNewFile,
             string accessSelectString,
             string typeKindSelectString
-        ) {
+        )
+        {
             _generateTypeDialogOptions = generateTypeDialogOptions;
 
             InitialSetup();

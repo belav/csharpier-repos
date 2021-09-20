@@ -39,7 +39,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
                 _deploymentParameters.ServerType != ServerType.IIS
                 && _deploymentParameters.ServerType != ServerType.Kestrel
                 && _deploymentParameters.ServerType != ServerType.HttpSys
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     $"Server type {_deploymentParameters.ServerType} is not supported for remote deployment."
                         + $" Supported server types are {nameof(ServerType.Kestrel)}, {nameof(ServerType.IIS)} and {nameof(ServerType.HttpSys)}"
@@ -72,7 +73,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
             if (
                 _deploymentParameters.ApplicationType == ApplicationType.Portable
                 && string.IsNullOrEmpty(_deploymentParameters.DotnetRuntimePath)
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     $"Invalid value '{_deploymentParameters.DotnetRuntimePath}' for {nameof(RemoteWindowsDeploymentParameters.DotnetRuntimePath)}. "
                         + "It must be non-empty for portable apps."
@@ -321,7 +323,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
 
                 using (
                     var runScriptsOnRemoteServerProcess = new Process() { StartInfo = startInfo }
-                ) {
+                )
+                {
                     runScriptsOnRemoteServerProcess.EnableRaisingEvents = true;
                     runScriptsOnRemoteServerProcess.Exited += (sender, exitedArgs) =>
                     {
@@ -342,7 +345,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
                     if (
                         runScriptsOnRemoteServerProcess.HasExited
                         && runScriptsOnRemoteServerProcess.ExitCode != 0
-                    ) {
+                    )
+                    {
                         throw new Exception(
                             $"Failed to execute the script on '{_deploymentParameters.ServerName}'."
                         );
@@ -355,7 +359,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
             string sourceDirName,
             string destDirName,
             bool copySubDirs
-        ) {
+        )
+        {
             var dir = new DirectoryInfo(sourceDirName);
 
             if (!dir.Exists)

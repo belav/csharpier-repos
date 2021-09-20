@@ -34,7 +34,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             StringLengthAttribute attribute,
             MemberInfo clrMember,
             IConventionContext context
-        ) {
+        )
+        {
             if (attribute.MaximumLength > 0)
             {
                 propertyBuilder.HasMaxLength(attribute.MaximumLength, fromDataAnnotation: true);

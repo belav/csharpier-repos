@@ -27,17 +27,14 @@ namespace System.IO.IsolatedStorage
                 null
             ) { }
 
-        public IsolatedStorageFileStream(
-            string path,
-            FileMode mode,
-            IsolatedStorageFile? isf
-        ) : this(
-            path,
-            mode,
-            (mode == FileMode.Append ? FileAccess.Write : FileAccess.ReadWrite),
-            FileShare.None,
-            isf
-        ) { }
+        public IsolatedStorageFileStream(string path, FileMode mode, IsolatedStorageFile? isf)
+            : this(
+                path,
+                mode,
+                (mode == FileMode.Append ? FileAccess.Write : FileAccess.ReadWrite),
+                FileShare.None,
+                isf
+            ) { }
 
         public IsolatedStorageFileStream(string path, FileMode mode, FileAccess access)
             : this(
@@ -54,14 +51,15 @@ namespace System.IO.IsolatedStorage
             FileMode mode,
             FileAccess access,
             IsolatedStorageFile? isf
-        ) : this(
-            path,
-            mode,
-            access,
-            access == FileAccess.Read ? FileShare.Read : FileShare.None,
-            DefaultBufferSize,
-            isf
-        ) { }
+        )
+            : this(
+                path,
+                mode,
+                access,
+                access == FileAccess.Read ? FileShare.Read : FileShare.None,
+                DefaultBufferSize,
+                isf
+            ) { }
 
         public IsolatedStorageFileStream(
             string path,
@@ -93,14 +91,15 @@ namespace System.IO.IsolatedStorage
             FileShare share,
             int bufferSize,
             IsolatedStorageFile? isf
-        ) : this(
-            path,
-            mode,
-            access,
-            share,
-            bufferSize,
-            InitializeFileStream(path, mode, access, share, bufferSize, isf)
-        ) { }
+        )
+            : this(
+                path,
+                mode,
+                access,
+                share,
+                bufferSize,
+                InitializeFileStream(path, mode, access, share, bufferSize, isf)
+            ) { }
 
         // On .NET Framework FileStream has an internal no arg constructor that we utilize to provide the facade. We don't have access
         // to internals in .NET Core so we'll do the next best thing and contort ourselves into the SafeFileHandle constructor.
@@ -115,14 +114,16 @@ namespace System.IO.IsolatedStorage
             FileShare share,
             int bufferSize,
             InitialiationData initializationData
-        ) : base(
-            new SafeFileHandle(
-                initializationData.NestedStream.SafeFileHandle.DangerousGetHandle(),
-                ownsHandle: false
-            ),
-            access,
-            bufferSize
-        ) {
+        )
+            : base(
+                new SafeFileHandle(
+                    initializationData.NestedStream.SafeFileHandle.DangerousGetHandle(),
+                    ownsHandle: false
+                ),
+                access,
+                bufferSize
+            )
+        {
             _isf = initializationData.StorageFile;
             _givenPath = path;
             _fullPath = initializationData.FullPath;
@@ -144,7 +145,8 @@ namespace System.IO.IsolatedStorage
             FileShare share,
             int bufferSize,
             IsolatedStorageFile? isf
-        ) {
+        )
+        {
             if (path == null)
                 throw new ArgumentNullException(nameof(path));
 
@@ -308,14 +310,16 @@ namespace System.IO.IsolatedStorage
             int offset,
             int count,
             Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _fs.ReadAsync(buffer, offset, count, cancellationToken);
         }
 
         public override ValueTask<int> ReadAsync(
             Memory<byte> buffer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _fs.ReadAsync(buffer, cancellationToken);
         }
 
@@ -346,14 +350,16 @@ namespace System.IO.IsolatedStorage
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _fs.WriteAsync(buffer, offset, count, cancellationToken);
         }
 
         public override ValueTask WriteAsync(
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _fs.WriteAsync(buffer, cancellationToken);
         }
 
@@ -368,7 +374,8 @@ namespace System.IO.IsolatedStorage
             int numBytes,
             AsyncCallback? userCallback,
             object? stateObject
-        ) {
+        )
+        {
             return _fs.BeginRead(array, offset, numBytes, userCallback, stateObject);
         }
 
@@ -378,7 +385,8 @@ namespace System.IO.IsolatedStorage
             int numBytes,
             AsyncCallback? userCallback,
             object? stateObject
-        ) {
+        )
+        {
             return _fs.BeginWrite(array, offset, numBytes, userCallback, stateObject);
         }
 

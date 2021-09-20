@@ -90,7 +90,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
                 string runtime,
                 string runtimeVersion,
                 string expected
-            ) {
+            )
+            {
                 Name = name;
                 Version = version;
                 DetailedVersion = detailedVersion;

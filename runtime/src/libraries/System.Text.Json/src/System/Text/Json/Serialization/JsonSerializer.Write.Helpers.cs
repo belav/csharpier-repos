@@ -20,7 +20,8 @@ namespace System.Text.Json
             in TValue value,
             Type inputType,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             Debug.Assert(writer != null);
 
             //  We treat typeof(object) special and allow polymorphic behavior.
@@ -54,7 +55,8 @@ namespace System.Text.Json
             in TValue value,
             JsonSerializerOptions options,
             ref WriteStack state
-        ) {
+        )
+        {
             Debug.Assert(writer != null);
 
             bool success;

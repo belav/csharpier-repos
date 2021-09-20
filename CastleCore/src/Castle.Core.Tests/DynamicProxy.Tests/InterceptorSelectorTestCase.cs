@@ -508,7 +508,8 @@ namespace Castle.DynamicProxy.Tests
             Type type,
             MethodInfo method,
             IInterceptor[] interceptors
-        ) {
+        )
+        {
             var interceptorsOfT = new List<IInterceptor>();
             foreach (var interceptor in interceptors)
             {
@@ -533,7 +534,8 @@ namespace Castle.DynamicProxy.Tests
             Type type,
             MethodInfo method,
             IInterceptor[] interceptors
-        ) {
+        )
+        {
             return interceptors;
         }
 		#endregion
@@ -577,7 +579,8 @@ namespace Castle.DynamicProxy.Tests
             Type type,
             MethodInfo method,
             IInterceptor[] interceptors
-        ) {
+        )
+        {
             return interceptors;
         }
 
@@ -657,7 +660,8 @@ namespace Castle.DynamicProxy.Tests
             IInterceptor[] interceptorsDo,
             MethodInfo tokenDo,
             object[] objArray
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 

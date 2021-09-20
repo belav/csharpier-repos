@@ -29,7 +29,8 @@ namespace Microsoft.Extensions.Internal
             Func<ISymbol, bool> isInInternalNamespace,
             Func<ISymbol, bool> hasInternalAttribute,
             DiagnosticDescriptor descriptor
-        ) {
+        )
+        {
             _isInternalNamespace = isInInternalNamespace ?? new Func<ISymbol, bool>((_) => false);
             _hasInternalAttribute = hasInternalAttribute ?? new Func<ISymbol, bool>((_) => false);
             _descriptor = descriptor ?? throw new ArgumentNullException(nameof(descriptor));
@@ -140,7 +141,8 @@ namespace Microsoft.Extensions.Internal
                     symbol.ContainingAssembly,
                     context.Compilation.Assembly
                 )
-            ) {
+            )
+            {
                 // The type is being referenced within the same assembly. This is valid use of an "internal" type
                 return;
             }
@@ -178,14 +180,16 @@ namespace Microsoft.Extensions.Internal
             SymbolAnalysisContext context,
             ISymbol symbol,
             ISymbol symbolForDiagnostic
-        ) {
+        )
+        {
             if (
                 symbol == null
                 || SymbolEqualityComparer.Default.Equals(
                     symbol.ContainingAssembly,
                     context.Compilation.Assembly
                 )
-            ) {
+            )
+            {
                 // This is part of the compilation, avoid this analyzer when building from source.
                 return;
             }

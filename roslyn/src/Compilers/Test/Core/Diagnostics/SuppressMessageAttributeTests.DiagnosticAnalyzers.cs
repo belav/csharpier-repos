@@ -68,7 +68,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                                 _errorSymbolPrefix,
                                 StringComparison.Ordinal
                             )
-                        ) {
+                        )
+                        {
                             context.ReportDiagnostic(
                                 CodeAnalysis.Diagnostic.Create(
                                     s_rule,
@@ -160,7 +161,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
             {
                 public void Initialize(
                     CodeBlockStartAnalysisContext<CSharp.SyntaxKind> analysisContext
-                ) {
+                )
+                {
                     analysisContext.RegisterCodeBlockEndAction(
                         (context) =>
                         {
@@ -194,7 +196,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
             {
                 public void Initialize(
                     CodeBlockStartAnalysisContext<VisualBasic.SyntaxKind> analysisContext
-                ) {
+                )
+                {
                     analysisContext.RegisterCodeBlockEndAction(
                         (context) =>
                         {
@@ -289,11 +292,13 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                     {
                         foreach (
                             var nodeOrToken in context.Tree.GetRoot().DescendantNodesAndTokens()
-                        ) {
+                        )
+                        {
                             if (
                                 nodeOrToken.IsToken
                                 && _spans.Any(s => s.OverlapsWith(nodeOrToken.FullSpan))
-                            ) {
+                            )
+                            {
                                 context.ReportDiagnostic(
                                     CodeAnalysis.Diagnostic.Create(
                                         s_rule,
@@ -317,7 +322,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
 
             public ThrowExceptionForEachNamedTypeAnalyzer(
                 ExceptionDispatchInfo exceptionDispatchInfo
-            ) {
+            )
+            {
                 _exceptionDispatchInfo = exceptionDispatchInfo;
             }
 

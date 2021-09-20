@@ -15,7 +15,8 @@ namespace System.Globalization
             int startIndex,
             int count,
             bool ignoreCase
-        ) {
+        )
+        {
             Debug.Assert(source != null);
             Debug.Assert(value != null);
             Debug.Assert(startIndex >= 0 && startIndex < source.Length);
@@ -44,13 +45,15 @@ namespace System.Globalization
             ReadOnlySpan<char> value,
             bool ignoreCase,
             bool fromBeginning = true
-        ) {
+        )
+        {
             Debug.Assert(source.Length != 0);
             Debug.Assert(value.Length != 0);
 
             fixed (char* pSource = &MemoryMarshal.GetReference(source))fixed (
                 char* pValue = &MemoryMarshal.GetReference(value)
-            ) {
+            )
+            {
                 return InvariantFindString(
                     pSource,
                     source.Length,
@@ -68,7 +71,8 @@ namespace System.Globalization
             int startIndex,
             int count,
             bool ignoreCase
-        ) {
+        )
+        {
             Debug.Assert(!string.IsNullOrEmpty(source));
             Debug.Assert(value != null);
             Debug.Assert(startIndex >= 0 && startIndex < source.Length);
@@ -99,7 +103,8 @@ namespace System.Globalization
             int valueCount,
             bool ignoreCase,
             bool fromBeginning
-        ) {
+        )
+        {
             int ctrSource = 0; // index value into source
             int ctrValue = 0; // index value into value
             char sourceChar; // Character for case lookup in source
@@ -292,7 +297,8 @@ namespace System.Globalization
         private static void InvariantCreateSortKeyOrdinal(
             ReadOnlySpan<char> source,
             Span<byte> sortKey
-        ) {
+        )
+        {
             Debug.Assert(sortKey.Length >= source.Length * sizeof(char));
 
             for (int i = 0; i < source.Length; i++)
@@ -306,7 +312,8 @@ namespace System.Globalization
         private static void InvariantCreateSortKeyOrdinalIgnoreCase(
             ReadOnlySpan<char> source,
             Span<byte> sortKey
-        ) {
+        )
+        {
             Debug.Assert(sortKey.Length >= source.Length * sizeof(char));
 
             for (int i = 0; i < source.Length; i++)
@@ -324,7 +331,8 @@ namespace System.Globalization
             ReadOnlySpan<char> source,
             Span<byte> destination,
             CompareOptions options
-        ) {
+        )
+        {
             Debug.Assert(GlobalizationMode.Invariant);
             Debug.Assert((options & ValidCompareMaskOffFlags) == 0);
 
@@ -352,7 +360,8 @@ namespace System.Globalization
         private static int InvariantGetSortKeyLength(
             ReadOnlySpan<char> source,
             CompareOptions options
-        ) {
+        )
+        {
             Debug.Assert(GlobalizationMode.Invariant);
             Debug.Assert((options & ValidCompareMaskOffFlags) == 0);
 

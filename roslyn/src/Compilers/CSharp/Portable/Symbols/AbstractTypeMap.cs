@@ -140,7 +140,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal virtual ImmutableArray<CustomModifier> SubstituteCustomModifiers(
             ImmutableArray<CustomModifier> customModifiers
-        ) {
+        )
+        {
             if (customModifiers.IsDefaultOrEmpty)
             {
                 return customModifiers;
@@ -173,7 +174,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 substituted,
                                 TypeCompareKind.ConsiderEverything2
                             )
-                        ) {
+                        )
+                        {
                             builder.Add(
                                 customModifiers[i].IsOptional
                                   ? CSharpCustomModifier.CreateOptional(substituted)
@@ -201,7 +203,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         protected virtual TypeWithAnnotations SubstituteTypeParameter(
             TypeParameterSymbol typeParameter
-        ) {
+        )
+        {
             return TypeWithAnnotations.Create(typeParameter);
         }
 
@@ -310,7 +313,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 || !substitutedParamModifiers.IsDefault
                 || !f.Signature.ReturnTypeWithAnnotations.IsSameAs(substitutedReturnType)
                 || substitutedRefCustomModifiers != refCustomModifiers
-            ) {
+            )
+            {
                 f = f.SubstituteTypeSymbol(
                     substitutedReturnType,
                     substitutedParamTypes,
@@ -324,7 +328,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal ImmutableArray<TypeSymbol> SubstituteTypesWithoutModifiers(
             ImmutableArray<TypeSymbol> original
-        ) {
+        )
+        {
             if (original.IsDefault)
             {
                 return original;
@@ -359,7 +364,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal ImmutableArray<TypeWithAnnotations> SubstituteTypes(
             ImmutableArray<TypeWithAnnotations> original
-        ) {
+        )
+        {
             if (original.IsDefault)
             {
                 return default(ImmutableArray<TypeWithAnnotations>);
@@ -384,7 +390,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ImmutableArray<TypeWithAnnotations> original,
             ArrayBuilder<TypeWithAnnotations> result,
             HashSet<TypeParameterSymbol> ignoreTypesDependentOnTypeParametersOpt
-        ) {
+        )
+        {
             DynamicTypeEraser dynamicEraser = null;
 
             if (original.Length == 0)
@@ -397,7 +404,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (
                     ignoreTypesDependentOnTypeParametersOpt == null
                     || !type.Type.ContainsTypeParameters(ignoreTypesDependentOnTypeParametersOpt)
-                ) {
+                )
+                {
                     result.Add(substituteConstraintType(type));
                 }
             }
@@ -411,7 +419,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         || !type.Type.ContainsTypeParameters(
                             ignoreTypesDependentOnTypeParametersOpt
                         )
-                    ) {
+                    )
+                    {
                         var substituted = substituteConstraintType(type);
 
                         if (!map.TryGetValue(substituted.Type, out int mergeWith))
@@ -455,7 +464,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal ImmutableArray<TypeParameterSymbol> SubstituteTypeParameters(
             ImmutableArray<TypeParameterSymbol> original
-        ) {
+        )
+        {
             return original.SelectAsArray(
                 (tp, m) => (TypeParameterSymbol)m.SubstituteTypeParameter(tp).AsTypeSymbolOnly(),
                 this
@@ -467,7 +477,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         internal ImmutableArray<NamedTypeSymbol> SubstituteNamedTypes(
             ImmutableArray<NamedTypeSymbol> original
-        ) {
+        )
+        {
             NamedTypeSymbol[] result = null;
 
             for (int i = 0; i < original.Length; i++)

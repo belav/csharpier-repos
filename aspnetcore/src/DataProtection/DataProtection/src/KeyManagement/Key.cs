@@ -21,13 +21,14 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             DateTimeOffset expirationDate,
             IAuthenticatedEncryptorDescriptor descriptor,
             IEnumerable<IAuthenticatedEncryptorFactory> encryptorFactories
-        ) : base(
-            keyId,
-            creationDate,
-            activationDate,
-            expirationDate,
-            new Lazy<IAuthenticatedEncryptorDescriptor>(() => descriptor),
-            encryptorFactories
-        ) { }
+        )
+            : base(
+                keyId,
+                creationDate,
+                activationDate,
+                expirationDate,
+                new Lazy<IAuthenticatedEncryptorDescriptor>(() => descriptor),
+                encryptorFactories
+            ) { }
     }
 }

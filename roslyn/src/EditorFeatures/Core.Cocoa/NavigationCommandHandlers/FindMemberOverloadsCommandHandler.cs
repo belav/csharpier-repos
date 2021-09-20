@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
             int caretPosition,
             Document document,
             CommandExecutionContext context
-        ) {
+        )
+        {
             var streamingPresenter = base.GetStreamingPresenter();
             if (streamingPresenter != null)
             {
@@ -70,7 +71,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
             int caretPosition,
             IStreamingFindUsagesPresenter presenter,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 using var token = _asyncListener.BeginAsyncOperation(
@@ -89,7 +91,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
                         KeyValueLogMessage.Create(LogType.UserAction, m => m["type"] = "streaming"),
                         context.CancellationToken
                     )
-                ) {
+                )
+                {
                     try
                     {
 #pragma warning disable CA2007 // Consider calling ConfigureAwait on the awaited task
@@ -111,7 +114,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
                         foreach (
                             var curSymbol in symbol.ContainingType.GetMembers()
                                 .Where(m => m.Kind == symbol.Kind && m.Name == symbol.Name)
-                        ) {
+                        )
+                        {
                             var definitionItem = curSymbol.ToNonClassifiedDefinitionItem(
                                 document.Project.Solution,
                                 true

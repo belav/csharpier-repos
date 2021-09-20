@@ -17,14 +17,16 @@ namespace System.Security.Cryptography
             byte[] userData,
             byte[]? optionalEntropy,
             System.Security.Cryptography.DataProtectionScope scope
-        ) {
+        )
+        {
             throw null;
         }
         public static byte[] Unprotect(
             byte[] encryptedData,
             byte[]? optionalEntropy,
             System.Security.Cryptography.DataProtectionScope scope
-        ) {
+        )
+        {
             throw null;
         }
     }

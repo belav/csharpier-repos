@@ -511,7 +511,8 @@ class C
             using (
                 PinnedMetadata pinned1 = new PinnedMetadata(GetMetadataBytes(comp1)),
                     pinned2 = new PinnedMetadata(GetMetadataBytes(comp2))
-            ) {
+            )
+            {
                 var assemblyIdentity1 = comp1.Assembly.Identity;
                 var assemblyIdentity2 = comp2.Assembly.Identity;
                 Assert.NotEqual(assemblyIdentity1, assemblyIdentity2);
@@ -1141,7 +1142,8 @@ class UseLinq
             string expression,
             string expectedIL,
             LanguageVersion languageVersion = LanguageVersion.CSharp7
-        ) {
+        )
+        {
             var comp = CreateCompilationWithMscorlib40(
                 source,
                 parseOptions: TestOptions.Regular.WithLanguageVersion(languageVersion),
@@ -1223,7 +1225,8 @@ class UseLinq
         private static AssemblyIdentity GetMissingAssemblyIdentity(
             ErrorCode code,
             params object[] arguments
-        ) {
+        )
+        {
             var missingAssemblyIdentities = EvaluationContext.GetMissingAssemblyIdentitiesHelper(
                 code,
                 arguments,

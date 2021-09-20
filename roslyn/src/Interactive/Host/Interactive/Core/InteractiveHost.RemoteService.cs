@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.Interactive
                 JsonRpc jsonRpc,
                 InteractiveHostPlatformInfo platformInfo,
                 InteractiveHostOptions options
-            ) {
+            )
+            {
                 Process = process;
                 JsonRpc = jsonRpc;
                 PlatformInfo = platformInfo;
@@ -184,7 +185,8 @@ namespace Microsoft.CodeAnalysis.Interactive
                                         0,
                                         transcodingMarker.Length
                                     )
-                                ) {
+                                )
+                                {
                                     // once we hit the marker we assume everything that follows is encoded:
                                     charsRead = Transcode(
                                         ref buffer,
@@ -221,7 +223,8 @@ namespace Microsoft.CodeAnalysis.Interactive
                 char[] right,
                 int rightStart,
                 int length
-            ) {
+            )
+            {
                 if (leftStart + length > left.Length || rightStart + length > right.Length)
                 {
                     return false;

@@ -511,7 +511,8 @@ namespace System.Text.RegularExpressions.Tests
         public void UnicodeCategoriesInclusionsExpected(
             string generalCategory,
             UnicodeCategory unicodeCategory
-        ) {
+        )
+        {
             foreach (RegexOptions options in new[] { RegexOptions.None, RegexOptions.Compiled })
             {
                 Regex r;
@@ -642,7 +643,8 @@ namespace System.Text.RegularExpressions.Tests
             HashSet<char> included,
             HashSet<char> excluded,
             bool validateEveryChar = false
-        ) {
+        )
+        {
             Assert.True((included != null) ^ (excluded != null));
 
             foreach (RegexOptions compiled in new[] { RegexOptions.None, RegexOptions.Compiled })

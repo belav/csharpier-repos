@@ -57,7 +57,8 @@ namespace Microsoft.Web.WebPages.OAuth
             string requestToken,
             string accessToken,
             string accessTokenSecret
-        ) {
+        )
+        {
             if (String.IsNullOrEmpty(requestToken))
             {
                 throw new ArgumentException(

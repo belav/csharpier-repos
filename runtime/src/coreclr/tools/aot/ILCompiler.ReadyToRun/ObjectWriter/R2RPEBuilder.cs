@@ -269,7 +269,8 @@ namespace ILCompiler.PEWriter
             ObjectNodeSection section,
             string name,
             OutputInfoBuilder outputInfoBuilder
-        ) {
+        )
+        {
             if (_written)
             {
                 throw new InternalCompilerErrorException(
@@ -306,7 +307,8 @@ namespace ILCompiler.PEWriter
             ISymbolNode symbol,
             ISymbolNode firstNode,
             ISymbolNode secondNode
-        ) {
+        )
+        {
             _sectionBuilder.AddSymbolForRange(symbol, firstNode, secondNode);
         }
 
@@ -821,7 +823,8 @@ namespace ILCompiler.PEWriter
             DllCharacteristics dllCharacteristics,
             Subsystem subsystem,
             TargetDetails target
-        ) {
+        )
+        {
             bool is64BitTarget = target.PointerSize == sizeof(long);
 
             imageCharacteristics &= ~(

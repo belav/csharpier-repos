@@ -21,7 +21,8 @@ namespace System.Linq.Expressions
             Expression? defaultBody,
             MethodInfo? comparison,
             ReadOnlyCollection<SwitchCase> cases
-        ) {
+        )
+        {
             Type = type;
             SwitchValue = switchValue;
             DefaultBody = defaultBody;
@@ -99,7 +100,8 @@ namespace System.Linq.Expressions
             Expression switchValue,
             IEnumerable<SwitchCase>? cases,
             Expression? defaultBody
-        ) {
+        )
+        {
             if (switchValue == SwitchValue && defaultBody == DefaultBody && cases != null)
             {
                 if (ExpressionUtils.SameElements(ref cases, Cases))
@@ -135,7 +137,8 @@ namespace System.Linq.Expressions
             Expression switchValue,
             Expression? defaultBody,
             params SwitchCase[]? cases
-        ) {
+        )
+        {
             return Switch(switchValue, defaultBody, null, (IEnumerable<SwitchCase>?)cases);
         }
 
@@ -152,7 +155,8 @@ namespace System.Linq.Expressions
             Expression? defaultBody,
             MethodInfo? comparison,
             params SwitchCase[]? cases
-        ) {
+        )
+        {
             return Switch(switchValue, defaultBody, comparison, (IEnumerable<SwitchCase>?)cases);
         }
 
@@ -171,7 +175,8 @@ namespace System.Linq.Expressions
             Expression? defaultBody,
             MethodInfo? comparison,
             params SwitchCase[]? cases
-        ) {
+        )
+        {
             return Switch(
                 type,
                 switchValue,
@@ -194,7 +199,8 @@ namespace System.Linq.Expressions
             Expression? defaultBody,
             MethodInfo? comparison,
             IEnumerable<SwitchCase>? cases
-        ) {
+        )
+        {
             return Switch(null, switchValue, defaultBody, comparison, cases);
         }
 
@@ -213,7 +219,8 @@ namespace System.Linq.Expressions
             Expression? defaultBody,
             MethodInfo? comparison,
             IEnumerable<SwitchCase>? cases
-        ) {
+        )
+        {
             ExpressionUtils.RequiresCanRead(switchValue, nameof(switchValue));
             if (switchValue.Type == typeof(void))
                 throw Error.ArgumentCannotBeOfTypeVoid(nameof(switchValue));
@@ -350,7 +357,8 @@ namespace System.Linq.Expressions
             bool customType,
             Type resultType,
             string parameterName
-        ) {
+        )
+        {
             if (customType)
             {
                 if (resultType != typeof(void))

@@ -13,7 +13,8 @@ namespace System.Runtime.InteropServices
             Assembly assembly,
             DllImportSearchPath? searchPath,
             bool throwOnError
-        ) {
+        )
+        {
             return LoadByName(
                 libraryName,
                 (RuntimeAssembly)assembly,
@@ -47,7 +48,8 @@ namespace System.Runtime.InteropServices
             bool hasDllImportSearchPathFlags,
             uint dllImportSearchPathFlags,
             ref IntPtr dll
-        ) {
+        )
+        {
             dll = LoadLibraryCallbackStub(
                 libraryName,
                 assembly,

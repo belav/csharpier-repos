@@ -886,7 +886,8 @@ namespace Microsoft.AspNetCore.Routing
             string routeName = null,
             object values = null,
             object ambientValues = null
-        ) {
+        )
+        {
             return new RouteValuesAddress()
             {
                 RouteName = routeName,

@@ -76,14 +76,15 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             ImmutableArray<Diagnostic> diagnostics,
             Action<CodeAction, ImmutableArray<Diagnostic>> registerCodeFix,
             CancellationToken cancellationToken
-        ) : this(
-            document,
-            span,
-            diagnostics,
-            registerCodeFix,
-            verifyArguments: true,
-            cancellationToken: cancellationToken
-        ) { }
+        )
+            : this(
+                document,
+                span,
+                diagnostics,
+                registerCodeFix,
+                verifyArguments: true,
+                cancellationToken: cancellationToken
+            ) { }
 
         /// <summary>
         /// Creates a code fix context to be passed into <see cref="CodeFixProvider.RegisterCodeFixesAsync(CodeFixContext)"/> method.
@@ -101,14 +102,15 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             Diagnostic diagnostic,
             Action<CodeAction, ImmutableArray<Diagnostic>> registerCodeFix,
             CancellationToken cancellationToken
-        ) : this(
-            document,
-            diagnostic.Location.SourceSpan,
-            ImmutableArray.Create(diagnostic),
-            registerCodeFix,
-            verifyArguments: true,
-            cancellationToken: cancellationToken
-        ) { }
+        )
+            : this(
+                document,
+                diagnostic.Location.SourceSpan,
+                ImmutableArray.Create(diagnostic),
+                registerCodeFix,
+                verifyArguments: true,
+                cancellationToken: cancellationToken
+            ) { }
 
         internal CodeFixContext(
             Document document,
@@ -117,16 +119,17 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             Action<CodeAction, ImmutableArray<Diagnostic>> registerCodeFix,
             bool verifyArguments,
             CancellationToken cancellationToken
-        ) : this(
-            document,
-            document.Project,
-            span,
-            diagnostics,
-            registerCodeFix,
-            verifyArguments,
-            isBlocking: false,
-            cancellationToken
-        ) { }
+        )
+            : this(
+                document,
+                document.Project,
+                span,
+                diagnostics,
+                registerCodeFix,
+                verifyArguments,
+                isBlocking: false,
+                cancellationToken
+            ) { }
 
         internal CodeFixContext(
             Document document,
@@ -136,16 +139,17 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             bool verifyArguments,
             bool isBlocking,
             CancellationToken cancellationToken
-        ) : this(
-            document,
-            document.Project,
-            span,
-            diagnostics,
-            registerCodeFix,
-            verifyArguments,
-            isBlocking,
-            cancellationToken
-        ) { }
+        )
+            : this(
+                document,
+                document.Project,
+                span,
+                diagnostics,
+                registerCodeFix,
+                verifyArguments,
+                isBlocking,
+                cancellationToken
+            ) { }
 
         private CodeFixContext(
             Document document,
@@ -156,7 +160,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             bool verifyArguments,
             bool isBlocking,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (verifyArguments)
             {
                 if (document == null)
@@ -188,14 +193,15 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             Action<CodeAction, ImmutableArray<Diagnostic>> registerCodeFix,
             bool verifyArguments,
             CancellationToken cancellationToken
-        ) : this(
-            document,
-            diagnostic.Location.SourceSpan,
-            ImmutableArray.Create(diagnostic),
-            registerCodeFix,
-            verifyArguments,
-            cancellationToken
-        ) { }
+        )
+            : this(
+                document,
+                diagnostic.Location.SourceSpan,
+                ImmutableArray.Create(diagnostic),
+                registerCodeFix,
+                verifyArguments,
+                cancellationToken
+            ) { }
 
         /// <summary>
         /// Add supplied <paramref name="action"/> to the list of fixes that will be offered to the user.
@@ -257,7 +263,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         private static void VerifyDiagnosticsArgument(
             ImmutableArray<Diagnostic> diagnostics,
             TextSpan span
-        ) {
+        )
+        {
             if (diagnostics.IsDefault)
             {
                 throw new ArgumentException(nameof(diagnostics));

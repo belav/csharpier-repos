@@ -46,7 +46,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             ISymbol symbol,
             string newName,
             bool throwOnFailure
-        ) {
+        )
+        {
             if (workspace is VisualStudioWorkspaceImpl visualStudioWorkspace)
             {
                 foreach (var documentId in changedDocumentIDs)
@@ -92,7 +93,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             else if (
                 symbol is INamedTypeSymbol
                 && (symbol as INamedTypeSymbol).TypeKind == TypeKind.Class
-            ) {
+            )
+            {
                 return ContainedLanguageRenameType.CLRT_CLASS;
             }
             else if (
@@ -100,7 +102,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 || symbol.Kind == SymbolKind.Field
                 || symbol.Kind == SymbolKind.Method
                 || symbol.Kind == SymbolKind.Property
-            ) {
+            )
+            {
                 return ContainedLanguageRenameType.CLRT_CLASSMEMBER;
             }
             else

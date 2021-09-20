@@ -29,7 +29,8 @@ namespace Microsoft.AspNetCore.Routing
         public RouteConstraintBuilder(
             IInlineConstraintResolver inlineConstraintResolver,
             string displayName
-        ) {
+        )
+        {
             if (inlineConstraintResolver == null)
             {
                 throw new ArgumentNullException(nameof(inlineConstraintResolver));

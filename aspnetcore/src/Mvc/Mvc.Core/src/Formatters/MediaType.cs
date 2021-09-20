@@ -363,7 +363,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             if (
                 charset.HasValue
                 && charset.Equals(encoding.WebName, StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 return mediaType.Value;
             }
 
@@ -420,7 +421,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         public static MediaTypeSegmentWithQuality CreateMediaTypeSegmentWithQuality(
             string mediaType,
             int start
-        ) {
+        )
+        {
             var parsedMediaType = new MediaType(mediaType, start, length: null);
 
             // Short-circuit use of the MediaTypeParameterParser if constructor detected an invalid type or subtype.
@@ -428,7 +430,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             if (
                 parsedMediaType.Type.Equals(default(StringSegment))
                 || parsedMediaType.SubType.Equals(default(StringSegment))
-            ) {
+            )
+            {
                 return default(MediaTypeSegmentWithQuality);
             }
 
@@ -486,7 +489,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         private static string CreateMediaTypeWithEncoding(
             StringSegment mediaType,
             Encoding encoding
-        ) {
+        )
+        {
             return $"{mediaType.Value}; charset={encoding.WebName}";
         }
 
@@ -571,7 +575,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 parameterFound = false;
                 while (
                     subSetParameters.ParseNextParameter(out var subSetParameter) && !parameterFound
-                ) {
+                )
+                {
                     parameterFound = subSetParameter.Equals(setParameter);
                 }
             }
@@ -625,7 +630,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 string input,
                 int startIndex,
                 out MediaTypeParameter parsedValue
-            ) {
+            )
+            {
                 if (OffsetIsOutOfRange(startIndex, input.Length) || input[startIndex] != ';')
                 {
                     parsedValue = default(MediaTypeParameter);
@@ -640,11 +646,13 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                     nameLength == 0
                     || OffsetIsOutOfRange(current, input.Length)
                     || input[current] != '='
-                ) {
+                )
+                {
                     if (
                         current == input.Length
                         && name.Equals("*", StringComparison.OrdinalIgnoreCase)
-                    ) {
+                    )
+                    {
                         // As a special case, we allow a trailing ";*" to indicate a wildcard
                         // string allowing any other parameters. It's the same as ";*=*".
                         var asterisk = new StringSegment("*");

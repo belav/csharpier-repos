@@ -63,7 +63,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             int start,
             int length,
             Func<T, int, int, bool> predicate
-        ) {
+        )
+        {
             var result = default(T);
             if (root == null || MaxEndValue(root) < start)
             {
@@ -130,7 +131,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                                 && Introspector.GetLength(currentNode.Value)
                                     < Introspector.GetLength(result!)
                             )
-                        ) {
+                        )
+                        {
                             result = currentNode.Value;
                         }
                     }
@@ -163,7 +165,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                                 >.Default.Equals(result!, default!)
                                 || Introspector.GetStart(parentNode.Value)
                                     == Introspector.GetStart(currentNode.Value)
-                            ) {
+                            )
+                            {
                                 // put left as new root, and break out inner loop
                                 spineNodes.Push(parentNode.Left);
                                 break;

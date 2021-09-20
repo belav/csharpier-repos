@@ -89,7 +89,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
         internal async Task SolutionAdded_Simple(
             BackgroundAnalysisScope analysisScope,
             int expectedDocumentEvents
-        ) {
+        )
+        {
             using var workspace = WorkCoordinatorWorkspace.CreateWithAnalysisScope(
                 analysisScope,
                 SolutionCrawlerWorkspaceKind,
@@ -129,7 +130,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
         internal async Task SolutionAdded_Complex(
             BackgroundAnalysisScope analysisScope,
             int expectedDocumentEvents
-        ) {
+        )
+        {
             using var workspace = WorkCoordinatorWorkspace.CreateWithAnalysisScope(
                 analysisScope,
                 SolutionCrawlerWorkspaceKind,
@@ -187,7 +189,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
             BackgroundAnalysisScope analysisScope,
             int expectedDocumentEvents,
             int expectedProjectEvents
-        ) {
+        )
+        {
             using var workspace = WorkCoordinatorWorkspace.CreateWithAnalysisScope(
                 analysisScope,
                 SolutionCrawlerWorkspaceKind,
@@ -209,7 +212,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
         internal async Task Solution_Change(
             BackgroundAnalysisScope analysisScope,
             int expectedDocumentEvents
-        ) {
+        )
+        {
             using var workspace = WorkCoordinatorWorkspace.CreateWithAnalysisScope(
                 analysisScope,
                 SolutionCrawlerWorkspaceKind,
@@ -238,7 +242,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
         internal async Task Project_Add(
             BackgroundAnalysisScope analysisScope,
             int expectedDocumentEvents
-        ) {
+        )
+        {
             using var workspace = WorkCoordinatorWorkspace.CreateWithAnalysisScope(
                 analysisScope,
                 SolutionCrawlerWorkspaceKind,
@@ -324,7 +329,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
             BackgroundAnalysisScope analysisScope,
             bool firstDocumentActive,
             int expectedDocumentEvents
-        ) {
+        )
+        {
             using var workspace = WorkCoordinatorWorkspace.CreateWithAnalysisScope(
                 analysisScope,
                 SolutionCrawlerWorkspaceKind,
@@ -359,7 +365,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
             BackgroundAnalysisScope analysisScope,
             bool firstDocumentActive,
             int expectedDocumentEvents
-        ) {
+        )
+        {
             using var workspace = WorkCoordinatorWorkspace.CreateWithAnalysisScope(
                 analysisScope,
                 SolutionCrawlerWorkspaceKind,
@@ -394,7 +401,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
             BackgroundAnalysisScope analysisScope,
             bool firstDocumentActive,
             int expectedDocumentEvents
-        ) {
+        )
+        {
             using var workspace = WorkCoordinatorWorkspace.CreateWithAnalysisScope(
                 analysisScope,
                 SolutionCrawlerWorkspaceKind,
@@ -429,7 +437,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
             BackgroundAnalysisScope analysisScope,
             bool firstDocumentActive,
             int expectedDocumentEvents
-        ) {
+        )
+        {
             using var workspace = WorkCoordinatorWorkspace.CreateWithAnalysisScope(
                 analysisScope,
                 SolutionCrawlerWorkspaceKind,
@@ -467,7 +476,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
             BackgroundAnalysisScope analysisScope,
             bool firstDocumentActive,
             int expectedDocumentEvents
-        ) {
+        )
+        {
             using var workspace = WorkCoordinatorWorkspace.CreateWithAnalysisScope(
                 analysisScope,
                 SolutionCrawlerWorkspaceKind,
@@ -505,7 +515,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
             BackgroundAnalysisScope analysisScope,
             bool firstDocumentActive,
             int expectedDocumentEvents
-        ) {
+        )
+        {
             using var workspace = WorkCoordinatorWorkspace.CreateWithAnalysisScope(
                 analysisScope,
                 SolutionCrawlerWorkspaceKind,
@@ -543,7 +554,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
             BackgroundAnalysisScope analysisScope,
             bool firstDocumentActive,
             int expectedDocumentEvents
-        ) {
+        )
+        {
             using var workspace = WorkCoordinatorWorkspace.CreateWithAnalysisScope(
                 analysisScope,
                 SolutionCrawlerWorkspaceKind,
@@ -701,7 +713,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
             BackgroundAnalysisScope analysisScope,
             int expectedDocumentEvents,
             int expectedProjectEvents
-        ) {
+        )
+        {
             using var workspace = WorkCoordinatorWorkspace.CreateWithAnalysisScope(
                 analysisScope,
                 SolutionCrawlerWorkspaceKind,
@@ -727,7 +740,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
             bool activeDocument,
             int expectedDocumentSyntaxEvents,
             int expectedDocumentSemanticEvents
-        ) {
+        )
+        {
             using var workspace = WorkCoordinatorWorkspace.CreateWithAnalysisScope(
                 analysisScope,
                 SolutionCrawlerWorkspaceKind,
@@ -769,7 +783,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
             int expectedDocumentInvalidatedEvents,
             int expectedDocumentSyntaxEvents,
             int expectedDocumentSemanticEvents
-        ) {
+        )
+        {
             using var workspace = WorkCoordinatorWorkspace.CreateWithAnalysisScope(
                 analysisScope,
                 SolutionCrawlerWorkspaceKind,
@@ -800,7 +815,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
         internal async Task Document_Reload(
             BackgroundAnalysisScope analysisScope,
             bool reloadActiveDocument
-        ) {
+        )
+        {
             using var workspace = WorkCoordinatorWorkspace.CreateWithAnalysisScope(
                 analysisScope,
                 SolutionCrawlerWorkspaceKind,
@@ -832,7 +848,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
             BackgroundAnalysisScope analysisScope,
             bool reanalyzeActiveDocument,
             int expectedReanalyzeCount
-        ) {
+        )
+        {
             using var workspace = WorkCoordinatorWorkspace.CreateWithAnalysisScope(
                 analysisScope,
                 SolutionCrawlerWorkspaceKind,
@@ -897,7 +914,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
             BackgroundAnalysisScope analysisScope,
             bool changeActiveDocument,
             int expectedDocumentEvents
-        ) {
+        )
+        {
             using var workspace = WorkCoordinatorWorkspace.CreateWithAnalysisScope(
                 analysisScope,
                 SolutionCrawlerWorkspaceKind,
@@ -931,7 +949,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
             bool firstDocumentActive,
             int expectedDocumentSyntaxEvents,
             int expectedDocumentSemanticEvents
-        ) {
+        )
+        {
             using var workspace = WorkCoordinatorWorkspace.CreateWithAnalysisScope(
                 analysisScope,
                 SolutionCrawlerWorkspaceKind,
@@ -983,7 +1002,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
             bool firstDocumentActive,
             int expectedDocumentSyntaxEvents,
             int expectedDocumentSemanticEvents
-        ) {
+        )
+        {
             using var workspace = WorkCoordinatorWorkspace.CreateWithAnalysisScope(
                 analysisScope,
                 SolutionCrawlerWorkspaceKind,
@@ -1043,7 +1063,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
             bool activeDocument,
             int expectedDocumentSyntaxEvents,
             int expectedDocumentSemanticEvents
-        ) {
+        )
+        {
             using var workspace = WorkCoordinatorWorkspace.CreateWithAnalysisScope(
                 analysisScope,
                 SolutionCrawlerWorkspaceKind,
@@ -1102,7 +1123,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
             bool activeDocument,
             int expectedDocumentSyntaxEvents,
             int expectedDocumentSemanticEvents
-        ) {
+        )
+        {
             using var workspace = WorkCoordinatorWorkspace.CreateWithAnalysisScope(
                 analysisScope,
                 SolutionCrawlerWorkspaceKind,
@@ -1229,7 +1251,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
             bool hasActiveDocumentBefore,
             int expectedSourceSwitchDocumentEvents,
             int expectedNonSourceSwitchDocumentEvents
-        ) {
+        )
+        {
             using var workspace = WorkCoordinatorWorkspace.CreateWithAnalysisScope(
                 analysisScope,
                 SolutionCrawlerWorkspaceKind,
@@ -1730,7 +1753,8 @@ class C
             string text,
             bool expectDocumentAnalysis,
             string language = LanguageNames.CSharp
-        ) {
+        )
+        {
             using var workspace = TestWorkspace.Create(
                 language,
                 compilationOptions: null,
@@ -1784,7 +1808,8 @@ class C
         private static async Task<Analyzer> ExecuteOperation(
             TestWorkspace workspace,
             Action<TestWorkspace> operation
-        ) {
+        )
+        {
             var lazyWorker = Assert.Single(
                 workspace.ExportProvider.GetExports<
                     IIncrementalAnalyzerProvider,
@@ -1832,7 +1857,8 @@ class C
         private static async Task WaitAsync(
             SolutionCrawlerRegistrationService service,
             TestWorkspace workspace
-        ) {
+        )
+        {
             await WaitWaiterAsync(workspace.ExportProvider);
 
             service.GetTestAccessor().WaitUntilCompletion(workspace);
@@ -2031,13 +2057,15 @@ class C
                 string workspaceKind = null,
                 bool disablePartialSolutions = true,
                 Type incrementalAnalyzer = null
-            ) : base(
-                composition: incrementalAnalyzer is null
-                  ? s_composition
-                  : s_composition.AddParts(incrementalAnalyzer),
-                workspaceKind: workspaceKind,
-                disablePartialSolutions: disablePartialSolutions
-            ) {
+            )
+                : base(
+                    composition: incrementalAnalyzer is null
+                      ? s_composition
+                      : s_composition.AddParts(incrementalAnalyzer),
+                    workspaceKind: workspaceKind,
+                    disablePartialSolutions: disablePartialSolutions
+                )
+            {
                 _workspaceWaiter = GetListenerProvider(ExportProvider)
                     .GetWaiter(FeatureAttribute.Workspace);
                 _solutionCrawlerWaiter = GetListenerProvider(ExportProvider)
@@ -2054,7 +2082,8 @@ class C
                 string workspaceKind = null,
                 bool disablePartialSolutions = true,
                 Type incrementalAnalyzer = null
-            ) {
+            )
+            {
                 var workspace = new WorkCoordinatorWorkspace(
                     workspaceKind,
                     disablePartialSolutions,
@@ -2204,7 +2233,8 @@ class C
                 bool semanticsChanged,
                 InvocationReasons reasons,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 this.ProjectIds.Add(project.Id);
                 return Task.CompletedTask;
             }
@@ -2214,7 +2244,8 @@ class C
                 SyntaxNode bodyOpt,
                 InvocationReasons reasons,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (bodyOpt == null)
                 {
                     this.DocumentIds.Add(document.Id);
@@ -2227,7 +2258,8 @@ class C
                 Document document,
                 InvocationReasons reasons,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 this.SyntaxDocumentIds.Add(document.Id);
                 Process(document.Id, cancellationToken);
                 return Task.CompletedTask;
@@ -2236,7 +2268,8 @@ class C
             public Task RemoveDocumentAsync(
                 DocumentId documentId,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 InvalidateDocumentIds.Add(documentId);
                 return Task.CompletedTask;
             }
@@ -2299,7 +2332,8 @@ class C
                 SyntaxNode bodyOpt,
                 InvocationReasons reasons,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 this.DocumentIds.Add(document.Id);
                 return Task.CompletedTask;
             }

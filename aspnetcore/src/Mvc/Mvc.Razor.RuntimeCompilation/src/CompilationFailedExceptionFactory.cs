@@ -24,7 +24,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
         public static CompilationFailedException Create(
             RazorCodeDocument codeDocument,
             IEnumerable<RazorDiagnostic> diagnostics
-        ) {
+        )
+        {
             // If a SourceLocation does not specify a file path, assume it is produced from parsing the current file.
             var messageGroups = diagnostics.GroupBy(
                 razorError => razorError.Span.FilePath ?? codeDocument.Source.FilePath,
@@ -55,7 +56,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
             string compilationContent,
             string assemblyName,
             IEnumerable<Diagnostic> diagnostics
-        ) {
+        )
+        {
             var diagnosticGroups = diagnostics.Where(
                     diagnostic =>
                         diagnostic.IsWarningAsError
@@ -89,7 +91,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
                             string.Equals(CS0234, g.Id, StringComparison.OrdinalIgnoreCase)
                             || string.Equals(CS0246, g.Id, StringComparison.OrdinalIgnoreCase)
                     )
-                ) {
+                )
+                {
                     additionalMessage = Resources.FormatCompilation_MissingReferences(
                         "CopyRefAssembliesToPublishDirectory"
                     );
@@ -115,7 +118,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
             if (
                 string.IsNullOrEmpty(filePath)
                 || string.Equals(codeDocument.Source.FilePath, filePath, StringComparison.Ordinal)
-            ) {
+            )
+            {
                 sourceDocument = codeDocument.Source;
             }
             else
@@ -152,7 +156,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
         private static DiagnosticMessage CreateDiagnosticMessage(
             RazorDiagnostic razorDiagnostic,
             string filePath
-        ) {
+        )
+        {
             var sourceSpan = razorDiagnostic.Span;
             var message = razorDiagnostic.GetMessage(CultureInfo.CurrentCulture);
             return new DiagnosticMessage(

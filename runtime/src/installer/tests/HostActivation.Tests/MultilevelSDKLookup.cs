@@ -658,7 +658,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 var registeredInstallLocationOverride = new RegisteredInstallLocationOverride(
                     DotNet.GreatestVersionHostFxrFilePath
                 )
-            ) {
+            )
+            {
                 registeredInstallLocationOverride.SetInstallLocation(
                     _regDir,
                     RepoDirectories.BuildArchitecture

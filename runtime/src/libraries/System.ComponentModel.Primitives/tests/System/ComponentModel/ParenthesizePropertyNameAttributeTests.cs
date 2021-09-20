@@ -62,7 +62,8 @@ namespace System.ComponentModel.Tests
             ParenthesizePropertyNameAttribute attribute,
             object other,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, attribute.Equals(other));
             if (other is ParenthesizePropertyNameAttribute)
             {

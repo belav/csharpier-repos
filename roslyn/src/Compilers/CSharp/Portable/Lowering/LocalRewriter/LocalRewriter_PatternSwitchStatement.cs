@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             public static BoundStatement Rewrite(
                 LocalRewriter localRewriter,
                 BoundSwitchStatement node
-            ) {
+            )
+            {
                 var rewriter = new SwitchStatementLocalRewriter(node, localRewriter);
                 BoundStatement result = rewriter.LowerSwitchStatement(node);
                 rewriter.Free();
@@ -68,13 +69,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             private SwitchStatementLocalRewriter(
                 BoundSwitchStatement node,
                 LocalRewriter localRewriter
-            ) : base(
-                node.Syntax,
-                localRewriter,
-                node.SwitchSections.SelectAsArray(section => section.Syntax),
-                // Only add instrumentation (such as sequence points) if the node is not compiler-generated.
-                generateInstrumentation: localRewriter.Instrument && !node.WasCompilerGenerated
-            ) { }
+            )
+                : base(
+                    node.Syntax,
+                    localRewriter,
+                    node.SwitchSections.SelectAsArray(section => section.Syntax),
+                    // Only add instrumentation (such as sequence points) if the node is not compiler-generated.
+                    generateInstrumentation: localRewriter.Instrument && !node.WasCompilerGenerated
+                ) { }
 
             private BoundStatement LowerSwitchStatement(BoundSwitchStatement node)
             {

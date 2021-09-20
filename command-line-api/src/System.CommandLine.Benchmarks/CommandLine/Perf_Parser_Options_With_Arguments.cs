@@ -34,7 +34,8 @@ namespace System.CommandLine.Benchmarks.CommandLine
         private string GenerateTestOptionsWithArgumentsAsStringExpr(
             int optionsCount,
             int argumentsCount
-        ) {
+        )
+        {
             var arguments = Enumerable.Range(0, argumentsCount)
                 .Select(i => $"arg{i}")
                 .Aggregate("", (ac, next) => ac + " " + next);

@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Interactive
             public IWorkspaceGlobalUndoTransaction OpenGlobalUndoTransaction(
                 Workspace workspace,
                 string description
-            ) {
+            )
+            {
                 if (!CanUndo(workspace))
                 {
                     throw new ArgumentException(

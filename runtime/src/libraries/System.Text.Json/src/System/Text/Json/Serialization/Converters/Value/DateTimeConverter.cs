@@ -9,7 +9,8 @@ namespace System.Text.Json.Serialization.Converters
             ref Utf8JsonReader reader,
             Type typeToConvert,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             return reader.GetDateTime();
         }
 
@@ -17,7 +18,8 @@ namespace System.Text.Json.Serialization.Converters
             Utf8JsonWriter writer,
             DateTime value,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             writer.WriteStringValue(value);
         }
 
@@ -31,7 +33,8 @@ namespace System.Text.Json.Serialization.Converters
             DateTime value,
             JsonSerializerOptions options,
             ref WriteStack state
-        ) {
+        )
+        {
             writer.WritePropertyName(value);
         }
     }

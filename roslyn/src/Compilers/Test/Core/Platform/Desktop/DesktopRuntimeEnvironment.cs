@@ -104,7 +104,8 @@ namespace Roslyn.Test.Utilities.Desktop
         private RuntimeData CreateAndInitializeRuntimeData(
             IEnumerable<ModuleData> compilationDependencies,
             ModuleDataId mainModuleId
-        ) {
+        )
+        {
             var allModules = compilationDependencies;
             if (_additionalDependencies != null)
             {
@@ -155,7 +156,8 @@ namespace Roslyn.Test.Utilities.Desktop
                         !manager.HasConflicts(
                             modules.Select(x => new RuntimeModuleDataId(x.Id)).ToList()
                         )
-                    ) {
+                    )
+                    {
                         s_runtimeDataCache.RemoveAt(i);
                         return data;
                     }
@@ -207,7 +209,8 @@ namespace Roslyn.Test.Utilities.Desktop
             IEnumerable<ResourceDescription> manifestResources,
             EmitOptions emitOptions,
             bool usePdbForDebugging = false
-        ) {
+        )
+        {
             _testData.Methods.Clear();
 
             var diagnostics = DiagnosticBag.GetInstance();
@@ -368,7 +371,8 @@ namespace Roslyn.Test.Utilities.Desktop
         public SortedSet<string> GetMemberSignaturesFromMetadata(
             string fullyQualifiedTypeName,
             string memberName
-        ) {
+        )
+        {
             var emitData = GetEmitData();
             var searchIds = emitData.AllModuleData.Select(x => new RuntimeModuleDataId(x.Id))
                 .ToList();
@@ -394,7 +398,8 @@ namespace Roslyn.Test.Utilities.Desktop
                     if (
                         _emitData.RuntimeData != null
                         && s_runtimeDataCache.Count < MaxCachedRuntimeData
-                    ) {
+                    )
+                    {
                         s_runtimeDataCache.Add(_emitData.RuntimeData);
                         _emitData.RuntimeData = null;
                     }
@@ -429,7 +434,8 @@ namespace Roslyn.Test.Utilities.Desktop
             int expectedLength,
             out string output,
             out string errorOutput
-        ) {
+        )
+        {
             TextWriter errorOutputWriter = new CappedStringWriter(expectedLength);
             TextWriter outputWriter = new CappedStringWriter(expectedLength);
 

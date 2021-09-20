@@ -62,7 +62,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
         protected virtual bool TryInvokeSnippetPickerOnQuestionMark(
             ITextView textView,
             ITextBuffer textBuffer
-        ) {
+        )
+        {
             return false;
         }
 
@@ -79,7 +80,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
                     typeof(AbstractSnippetExpansionClient),
                     out AbstractSnippetExpansionClient snippetExpansionClient
                 ) && snippetExpansionClient.TryHandleTab()
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -130,7 +132,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
                     typeof(AbstractSnippetExpansionClient),
                     out AbstractSnippetExpansionClient snippetExpansionClient
                 ) && snippetExpansionClient.TryHandleReturn()
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -167,7 +170,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
                     typeof(AbstractSnippetExpansionClient),
                     out AbstractSnippetExpansionClient snippetExpansionClient
                 ) && snippetExpansionClient.TryHandleEscape()
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -204,7 +208,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
                     typeof(AbstractSnippetExpansionClient),
                     out AbstractSnippetExpansionClient snippetExpansionClient
                 ) && snippetExpansionClient.TryHandleBackTab()
-            ) {
+            )
+            {
                 return true;
             }
 

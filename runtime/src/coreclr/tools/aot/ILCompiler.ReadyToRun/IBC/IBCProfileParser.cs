@@ -62,7 +62,8 @@ namespace ILCompiler.IBC
                 if (
                     !parsedData.Tokens.TryGetValue(section, out List<TokenData> TokenList)
                     || TokenList.Count == 0
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -227,7 +228,8 @@ namespace ILCompiler.IBC
         private static Dictionary<IBCBlobKey, BlobEntry> GetIBCBlobs(
             List<BlobEntry> inputBlobs,
             out HashSet<uint> ignoredIbcMethodSpecTokens
-        ) {
+        )
+        {
             Dictionary<IBCBlobKey, BlobEntry> blobs = new Dictionary<IBCBlobKey, BlobEntry>();
             ignoredIbcMethodSpecTokens = new HashSet<uint>();
 
@@ -248,7 +250,8 @@ namespace ILCompiler.IBC
                                     Cor.Macros.TypeFromToken(blob.Token)
                                     == CorTokenType.ibcMethodSpec
                                 )
-                            ) {
+                            )
+                            {
                                 if (blob.Type == BlobType.ParamMethodSpec)
                                 {
                                     //
@@ -300,7 +303,8 @@ namespace ILCompiler.IBC
                                             || (
                                                 leadingByte == CorElementType.ELEMENT_TYPE_VALUETYPE
                                             )
-                                        ) {
+                                        )
+                                        {
                                             owningTypeSignatureAppearsToBeEncodedInStandardForm =
                                                 true;
                                         }
@@ -350,13 +354,15 @@ namespace ILCompiler.IBC
             ref EcmaModule externalModule,
             uint ibcToken,
             Dictionary<IBCBlobKey, BlobEntry> blobs
-        ) {
+        )
+        {
             if (
                 !blobs.TryGetValue(
                     new IBCBlobKey(ibcToken, BlobType.ExternalTypeDef),
                     out BlobEntry externalTypeDefBlob
                 )
-            ) {
+            )
+            {
                 if (_logger.IsVerbose)
                     _logger.Writer.WriteLine(
                         $"Ibc TypeToken {ibcToken:x} unable to find external typedef"
@@ -394,7 +400,8 @@ namespace ILCompiler.IBC
                         new IBCBlobKey(nameSpaceToken, BlobType.ExternalNamespaceDef),
                         out BlobEntry namespaceEntryBlob
                     )
-                ) {
+                )
+                {
                     if (_logger.IsVerbose)
                         _logger.Writer.WriteLine(
                             $"Ibc TypeToken {ibcToken:x} unable to find external namespace blob '{nameSpaceToken:x}"
@@ -501,7 +508,8 @@ namespace ILCompiler.IBC
             MetadataType methodMetadataType,
             uint ibcToken,
             Dictionary<IBCBlobKey, BlobEntry> blobs
-        ) {
+        )
+        {
             var methodEntry = (BlobEntry.ExternalMethodEntry)blobs[
                 new IBCBlobKey(ibcToken, BlobType.ExternalMethodDef)
             ];
@@ -588,7 +596,8 @@ namespace ILCompiler.IBC
             IBCModule ibcModule,
             EcmaModule ecmaModule,
             BlobReader sig
-        ) {
+        )
+        {
             TypeSystemContext context = ibcModule.EcmaModule.Context;
 
             CorElementType typ = (CorElementType)sig.ReadByte();
@@ -799,7 +808,8 @@ namespace ILCompiler.IBC
             EcmaModule ecmaModule,
             CorElementType typ,
             ref BlobReader sig
-        ) {
+        )
+        {
             switch (typ)
             {
                 case CorElementType.ELEMENT_TYPE_CLASS:
@@ -852,7 +862,8 @@ namespace ILCompiler.IBC
         private MethodDesc GetSigMethodInstantiationFromIBCMethodSpec(
             IBCModule ibcModule,
             BlobReader sig
-        ) {
+        )
+        {
             TypeDesc methodType = GetSigTypeFromIBCZapSig(ibcModule, ibcModule.EcmaModule, sig);
             if (methodType == null)
                 return null;

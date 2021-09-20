@@ -236,7 +236,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
 
                 if (
                     (routeLink && actionLink) || (routeLink && pageLink) || (actionLink && pageLink)
-                ) {
+                )
+                {
                     var message = string.Join(
                         Environment.NewLine,
                         Resources.FormatCannotDetermineAttributeFor(
@@ -275,7 +276,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     &&
                     // Antiforgery will sometime be set globally via TagHelper Initializers, verify it was provided in the cshtml.
                     !context.AllAttributes.ContainsName(AntiforgeryAttributeName)
-                ) {
+                )
+                {
                     // A <form> tag that doesn't utilize asp-* attributes. Let it flow to the output.
                     Method = Method ?? "get";
                 }

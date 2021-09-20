@@ -67,7 +67,8 @@ namespace System.Formats.Asn1
             out int contentOffset,
             out int contentLength,
             out int bytesConsumed
-        ) {
+        )
+        {
             CheckEncodingRules(ruleSet);
 
             if (
@@ -78,7 +79,8 @@ namespace System.Formats.Asn1
                     out int? encodedLength,
                     out int lengthLength
                 )
-            ) {
+            )
+            {
                 int headerLength = tagLength + lengthLength;
 
                 LengthValidity validity = ValidateLength(
@@ -153,7 +155,8 @@ namespace System.Formats.Asn1
             out int contentOffset,
             out int contentLength,
             out int bytesConsumed
-        ) {
+        )
+        {
             CheckEncodingRules(ruleSet);
 
             Asn1Tag tag = Asn1Tag.Decode(source, out int tagLength);
@@ -186,7 +189,8 @@ namespace System.Formats.Asn1
             Asn1Tag expectedTag,
             UniversalTagNumber tagNumber,
             out int bytesConsumed
-        ) {
+        )
+        {
             CheckEncodingRules(ruleSet);
 
             Asn1Tag localTag = Asn1Tag.Decode(source, out int tagLength);
@@ -220,7 +224,8 @@ namespace System.Formats.Asn1
             AsnEncodingRules ruleSet,
             out int? length,
             out int bytesRead
-        ) {
+        )
+        {
             return DecodeLength(source, ruleSet, out length, out bytesRead)
                 == LengthDecodeStatus.Success;
         }
@@ -229,7 +234,8 @@ namespace System.Formats.Asn1
             ReadOnlySpan<byte> source,
             AsnEncodingRules ruleSet,
             out int bytesConsumed
-        ) {
+        )
+        {
             LengthDecodeStatus status = DecodeLength(
                 source,
                 ruleSet,
@@ -260,7 +266,8 @@ namespace System.Formats.Asn1
             AsnEncodingRules ruleSet,
             out int? length,
             out int bytesRead
-        ) {
+        )
+        {
             length = null;
             bytesRead = 0;
 
@@ -385,7 +392,8 @@ namespace System.Formats.Asn1
             AsnEncodingRules ruleSet,
             out int? contentsLength,
             out int bytesRead
-        ) {
+        )
+        {
             Asn1Tag tag = Asn1Tag.Decode(source, out int tagBytesRead);
             int? length = ReadLength(source.Slice(tagBytesRead), ruleSet, out int lengthBytesRead);
 
@@ -426,7 +434,8 @@ namespace System.Formats.Asn1
             int? encodedLength,
             out int actualLength,
             out int bytesConsumed
-        ) {
+        )
+        {
             if (localTag.IsConstructed)
             {
                 // T-REC-X.690-201508 sec 9.1 (CER: Length forms) says constructed is always indefinite.
@@ -555,7 +564,8 @@ namespace System.Formats.Asn1
                 Utf8Parser.TryParse(data, out uint value, out int consumed)
                 && value <= int.MaxValue
                 && consumed == data.Length
-            ) {
+            )
+            {
                 return (int)value;
             }
 
@@ -565,7 +575,8 @@ namespace System.Formats.Asn1
         private static ReadOnlySpan<byte> SliceAtMost(
             ReadOnlySpan<byte> source,
             int longestPermitted
-        ) {
+        )
+        {
             int len = Math.Min(longestPermitted, source.Length);
             return source.Slice(0, len);
         }
@@ -604,7 +615,8 @@ namespace System.Formats.Asn1
         internal static ReadOnlyMemory<byte> Slice(
             ReadOnlyMemory<byte> bigger,
             ReadOnlySpan<byte> smaller
-        ) {
+        )
+        {
             if (smaller.IsEmpty)
             {
                 return default;
@@ -631,7 +643,8 @@ namespace System.Formats.Asn1
                 ruleSet != AsnEncodingRules.BER
                 && ruleSet != AsnEncodingRules.CER
                 && ruleSet != AsnEncodingRules.DER
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(nameof(ruleSet));
             }
         }
@@ -640,10 +653,12 @@ namespace System.Formats.Asn1
             Asn1Tag tag,
             Asn1Tag expectedTag,
             UniversalTagNumber tagNumber
-        ) {
+        )
+        {
             if (
                 expectedTag.TagClass == TagClass.Universal && expectedTag.TagValue != (int)tagNumber
-            ) {
+            )
+            {
                 throw new ArgumentException(SR.Argument_UniversalValueIsFixed, nameof(expectedTag));
             }
 
@@ -727,7 +742,8 @@ namespace System.Formats.Asn1
             ReadOnlyMemory<byte> data,
             AsnEncodingRules ruleSet,
             AsnReaderOptions options = default
-        ) {
+        )
+        {
             AsnDecoder.CheckEncodingRules(ruleSet);
 
             _data = data;

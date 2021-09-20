@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         public TInstance CreateInstance<TInstance>(
             IServiceProvider serviceProvider,
             Type implementationType
-        ) {
+        )
+        {
             if (serviceProvider == null)
             {
                 throw new ArgumentNullException(nameof(serviceProvider));

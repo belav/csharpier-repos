@@ -115,7 +115,8 @@ namespace System.Text.Json
         internal ValueTask WriteToStreamAsync(
             Stream destination,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return destination.WriteAsync(WrittenMemory, cancellationToken);
         }
 #else

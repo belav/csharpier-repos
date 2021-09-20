@@ -1517,7 +1517,8 @@ End Class
             string language,
             bool rootNamespace,
             params string[] fxCopFullyQualifiedNames
-        ) {
+        )
+        {
             string rootNamespaceName = "";
             if (rootNamespace)
             {
@@ -1538,7 +1539,8 @@ End Class
             string language,
             bool rootNamespace,
             params string[] fxCopFullyQualifiedNames
-        ) {
+        )
+        {
             string rootNamespaceName = "";
             if (rootNamespace)
             {
@@ -1559,7 +1561,8 @@ End Class
             string language,
             bool rootNamespace,
             params string[] fxCopFullyQualifiedNames
-        ) {
+        )
+        {
             string rootNamespaceName = "";
             if (rootNamespace)
             {
@@ -1580,7 +1583,8 @@ End Class
             string language,
             bool rootNamespace,
             params string[] fxCopFullyQualifiedNames
-        ) {
+        )
+        {
             string rootNamespaceName = "";
             if (rootNamespace)
             {
@@ -1601,7 +1605,8 @@ End Class
             string language,
             bool rootNamespace,
             params string[] fxCopFullyQualifiedNames
-        ) {
+        )
+        {
             string rootNamespaceName = "";
             if (rootNamespace)
             {
@@ -1622,7 +1627,8 @@ End Class
             string language,
             bool rootNamespace,
             params string[] fxCopFullyQualifiedNames
-        ) {
+        )
+        {
             string rootNamespaceName = "";
             if (rootNamespace)
             {
@@ -1644,7 +1650,8 @@ End Class
             SuppressMessageAttributeState.TargetScope scope,
             string language,
             string rootNamespace
-        ) {
+        )
+        {
             // Parse out the span containing the declaration of the expected symbol
             MarkupTestFile.GetPositionAndSpans(
                 markup,
@@ -1755,7 +1762,8 @@ End Class
             SuppressMessageAttributeState.TargetScope scope,
             string language,
             string rootNamespace
-        ) {
+        )
+        {
             var compilation = CreateCompilation(source, language, rootNamespace);
 
             foreach (var fxCopName in fxCopFullyQualifiedNames)
@@ -1781,7 +1789,8 @@ End Class
             SyntaxTree syntaxTree,
             string language,
             string rootNamespace
-        ) {
+        )
+        {
             string projectName = "TestProject";
 
             if (language == LanguageNames.CSharp)
@@ -1810,7 +1819,8 @@ End Class
             string source,
             string language,
             string rootNamespace
-        ) {
+        )
+        {
             return CreateCompilation(CreateSyntaxTree(source, language), language, rootNamespace);
         }
 

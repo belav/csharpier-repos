@@ -69,7 +69,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             LocalSlotConstraints constraints,
             ImmutableArray<bool> dynamicTransformFlags,
             ImmutableArray<string> tupleElementNames
-        ) {
+        )
+        {
             _symbolOpt = symbolOpt;
             _nameOpt = nameOpt;
             _type = type;

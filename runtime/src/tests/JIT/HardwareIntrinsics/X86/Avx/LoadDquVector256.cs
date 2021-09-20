@@ -26,7 +26,8 @@ namespace IntelHardwareIntrinsicTest
                         new int[8] { 1, -5, 100, 0, 1, 2, 3, 4 },
                         new int[8]
                     )
-                ) {
+                )
+                {
                     var vf = Avx.LoadDquVector256((int*)(intTable.inArrayPtr));
                     Unsafe.Write(intTable.outArrayPtr, vf);
 
@@ -47,7 +48,8 @@ namespace IntelHardwareIntrinsicTest
                         new uint[8] { 1, 5, 100, 0, 1, 2, 3, 4 },
                         new uint[8]
                     )
-                ) {
+                )
+                {
                     var vf = Avx.LoadDquVector256((uint*)(intTable.inArrayPtr));
                     Unsafe.Write(intTable.outArrayPtr, vf);
 
@@ -68,7 +70,8 @@ namespace IntelHardwareIntrinsicTest
                         new long[4] { 1, -5, 100, 0 },
                         new long[4]
                     )
-                ) {
+                )
+                {
                     var vf = Avx.LoadDquVector256((long*)(intTable.inArrayPtr));
                     Unsafe.Write(intTable.outArrayPtr, vf);
 
@@ -89,7 +92,8 @@ namespace IntelHardwareIntrinsicTest
                         new ulong[4] { 1, 5, 100, 0 },
                         new ulong[4]
                     )
-                ) {
+                )
+                {
                     var vf = Avx.LoadDquVector256((ulong*)(intTable.inArrayPtr));
                     Unsafe.Write(intTable.outArrayPtr, vf);
 
@@ -110,7 +114,8 @@ namespace IntelHardwareIntrinsicTest
                         new short[16] { 1, -5, 100, 0, 1, 2, 3, 4, 1, -5, 100, 0, 1, 2, 3, 4 },
                         new short[16]
                     )
-                ) {
+                )
+                {
                     var vf = Avx.LoadDquVector256((short*)(intTable.inArrayPtr));
                     Unsafe.Write(intTable.outArrayPtr, vf);
 
@@ -131,7 +136,8 @@ namespace IntelHardwareIntrinsicTest
                         new ushort[16] { 1, 5, 100, 0, 1, 2, 3, 4, 1, 5, 100, 0, 1, 2, 3, 4 },
                         new ushort[16]
                     )
-                ) {
+                )
+                {
                     var vf = Avx.LoadDquVector256((ushort*)(intTable.inArrayPtr));
                     Unsafe.Write(intTable.outArrayPtr, vf);
 
@@ -186,7 +192,8 @@ namespace IntelHardwareIntrinsicTest
                         },
                         new byte[32]
                     )
-                ) {
+                )
+                {
                     var vf = Avx.LoadDquVector256((byte*)(intTable.inArrayPtr));
                     Unsafe.Write(intTable.outArrayPtr, vf);
 
@@ -241,7 +248,8 @@ namespace IntelHardwareIntrinsicTest
                         },
                         new sbyte[32]
                     )
-                ) {
+                )
+                {
                     var vf = Avx.LoadDquVector256((sbyte*)(intTable.inArrayPtr));
                     Unsafe.Write(intTable.outArrayPtr, vf);
 

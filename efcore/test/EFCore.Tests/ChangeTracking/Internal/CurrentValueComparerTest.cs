@@ -185,7 +185,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             string propertyName,
             Func<int, Godzilla> generator,
             Func<Godzilla, int> selector
-        ) {
+        )
+        {
             using var context = new GodzillaContext();
 
             context.AttachRange(
@@ -265,7 +266,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             string propertyName,
             Func<byte[], Godzilla> generator,
             Func<Godzilla, byte[]> selector
-        ) {
+        )
+        {
             using var context = new GodzillaContext();
 
             context.AttachRange(
@@ -414,7 +416,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             string propertyName,
             Func<int?, Godzilla> generator,
             Func<Godzilla, int?> selector
-        ) {
+        )
+        {
             using var context = new GodzillaContext();
 
             context.AttachRange(
@@ -506,7 +509,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             string propertyName,
             Func<byte[], Godzilla> generator,
             Func<Godzilla, byte[]> selector
-        ) {
+        )
+        {
             using var context = new GodzillaContext();
 
             context.AttachRange(

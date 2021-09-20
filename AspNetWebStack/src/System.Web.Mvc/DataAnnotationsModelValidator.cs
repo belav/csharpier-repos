@@ -39,7 +39,8 @@ namespace System.Web.Mvc
             ModelMetadata metadata,
             ControllerContext context,
             ValidationAttribute attribute
-        ) {
+        )
+        {
             return new DataAnnotationsModelValidator(metadata, context, attribute);
         }
 

@@ -53,7 +53,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
             Uri url,
             TransferFormat transferFormat,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (transferFormat != TransferFormat.Text)
             {
                 throw new ArgumentException(
@@ -149,7 +150,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
         private async Task ProcessEventStream(
             HttpResponseMessage response,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(_application != null);
 
             Log.StartReceive(_logger);

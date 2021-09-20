@@ -27,7 +27,8 @@ namespace IntelHardwareIntrinsicTest
                         new int[4] { 22, -1, -50, 0 },
                         new long[2]
                     )
-                ) {
+                )
+                {
                     var vi1 = Unsafe.Read<Vector128<int>>(intTable.inArray1Ptr);
                     var vi2 = Unsafe.Read<Vector128<int>>(intTable.inArray2Ptr);
                     var vi3 = Sse41.Multiply(vi1, vi2);
@@ -38,7 +39,8 @@ namespace IntelHardwareIntrinsicTest
                         if (
                             intTable.inArray1[i * 2] * intTable.inArray2[i * 2]
                             != intTable.outArray[i]
-                        ) {
+                        )
+                        {
                             Console.WriteLine("SSE4.1 Multiply failed on int:");
                             foreach (var item in intTable.outArray)
                             {

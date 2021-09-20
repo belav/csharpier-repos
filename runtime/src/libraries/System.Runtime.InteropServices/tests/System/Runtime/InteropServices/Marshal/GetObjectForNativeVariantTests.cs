@@ -268,7 +268,8 @@ namespace System.Runtime.InteropServices.Tests
         [PlatformSpecific(TestPlatforms.Windows)]
         public void GetObjectForNativeVariant_ZeroByRefTypeNotEmptyOrNull_ThrowsArgumentException(
             ushort vt
-        ) {
+        )
+        {
             var variant = new Variant();
             variant.m_Variant.vt = vt;
             variant.m_Variant._unionTypes._byref = IntPtr.Zero;
@@ -428,7 +429,8 @@ namespace System.Runtime.InteropServices.Tests
         [PlatformSpecific(TestPlatforms.Windows)]
         public void GetObjectForNativeVariant_InvalidVarType_InvalidOleVariantTypeException(
             ushort vt
-        ) {
+        )
+        {
             Variant variant = CreateVariant(vt, new UnionTypes { _byref = (IntPtr)10 });
             Assert.Throws<InvalidOleVariantTypeException>(() => GetObjectForNativeVariant(variant));
         }
@@ -438,7 +440,8 @@ namespace System.Runtime.InteropServices.Tests
         [PlatformSpecific(TestPlatforms.Windows)]
         public void GetObjectForNativeVariant_InvalidVarTypeByRef_InvalidOleVariantTypeException(
             ushort vt
-        ) {
+        )
+        {
             Variant variant = CreateVariant(
                 (ushort)(vt | VT_BYREF),
                 new UnionTypes { _byref = (IntPtr)10 }
@@ -516,13 +519,15 @@ namespace System.Runtime.InteropServices.Tests
             else if (
                 variant.m_Variant.vt == VT_UNKNOWN
                 && variant.m_Variant._unionTypes._unknown != IntPtr.Zero
-            ) {
+            )
+            {
                 Marshal.Release(variant.m_Variant._unionTypes._unknown);
             }
             else if (
                 variant.m_Variant.vt == VT_DISPATCH
                 && variant.m_Variant._unionTypes._dispatch != IntPtr.Zero
-            ) {
+            )
+            {
                 Marshal.Release(variant.m_Variant._unionTypes._dispatch);
             }
         }
@@ -567,7 +572,8 @@ namespace System.Runtime.InteropServices.Tests
                     MarshalType = "System.Runtime.InteropServices.CustomMarshalers.TypeToTypeInfoMarshaler"
                 )]
                     out Type ppTypeInfo
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -575,7 +581,8 @@ namespace System.Runtime.InteropServices.Tests
                 [In] IntPtr pvData,
                 [In, MarshalAs(UnmanagedType.LPWStr)] string szFieldName,
                 [MarshalAs(UnmanagedType.Struct)] out object pvarField
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -584,7 +591,8 @@ namespace System.Runtime.InteropServices.Tests
                 [In, MarshalAs(UnmanagedType.LPWStr)] string szFieldName,
                 [MarshalAs(UnmanagedType.Struct)] out object pvarField,
                 out IntPtr ppvDataCArray
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -593,7 +601,8 @@ namespace System.Runtime.InteropServices.Tests
                 [In, Out] IntPtr pvData,
                 [In, MarshalAs(UnmanagedType.LPWStr)] string szFieldName,
                 [In, MarshalAs(UnmanagedType.Struct)] ref object pvarField
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -602,20 +611,23 @@ namespace System.Runtime.InteropServices.Tests
                 [In, Out] IntPtr pvData,
                 [In, MarshalAs(UnmanagedType.LPWStr)] string szFieldName,
                 [In, MarshalAs(UnmanagedType.Struct)] ref object pvarField
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             public void GetFieldNames(
                 [In, Out] ref uint pcNames,
                 [MarshalAs(UnmanagedType.BStr)] out string rgBstrNames
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             public int IsMatchingType(
                 [In, MarshalAs(UnmanagedType.Interface)] IRecordInfo pRecordInfo
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 

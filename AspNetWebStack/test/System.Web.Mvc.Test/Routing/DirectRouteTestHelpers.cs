@@ -15,7 +15,8 @@ namespace System.Web.Routing.Test
     {
         public static RouteCollectionRoute BuildDirectRouteFromMethod<T>(
             Expression<Action<T>> methodCall
-        ) {
+        )
+        {
             SubRouteCollection collector = new SubRouteCollection();
             AddDirectRouteFromMethod(collector, methodCall);
             return new RouteCollectionRoute(collector);
@@ -24,7 +25,8 @@ namespace System.Web.Routing.Test
         public static void AddDirectRouteFromMethod<T>(
             SubRouteCollection collector,
             Expression<Action<T>> methodCall
-        ) {
+        )
+        {
             var method = ((MethodCallExpression)methodCall.Body).Method;
             var attributes = method.GetCustomAttributes(false).OfType<IRouteInfoProvider>();
 
@@ -64,7 +66,8 @@ namespace System.Web.Routing.Test
         public static void AddDirectRouteMatches(
             this RouteData routeData,
             Func<RouteBase, RouteData, bool> selector = null
-        ) {
+        )
+        {
             RouteCollectionRoute route = (RouteCollectionRoute)routeData.Route;
 
             List<RouteData> matches = new List<RouteData>();

@@ -110,7 +110,8 @@ namespace Microsoft.JSInterop
                 string? argsJson,
                 JSCallResultType resultType,
                 long targetInstanceId
-            ) {
+            )
+            {
                 InvokeCalls.Add(new InvokeArgs { Identifier = identifier, ArgsJson = argsJson });
                 return NextResultJson;
             }

@@ -162,7 +162,8 @@ namespace Templates.Test.Helpers
                             l.Contains("dotnet new")
                             && l.Contains(packageName, StringComparison.OrdinalIgnoreCase)
                     )
-                ) {
+                )
+                {
                     var uninstallCommand = command.TrimStart();
                     Debug.Assert(
                         uninstallCommand.StartsWith("dotnet new", StringComparison.Ordinal)
@@ -183,7 +184,8 @@ namespace Templates.Test.Helpers
         private static async Task VerifyCanFindTemplate(
             ITestOutputHelper output,
             string templateName
-        ) {
+        )
+        {
             var proc = await RunDotNetNew(output, $"");
             if (!proc.Output.Contains($" {templateName} "))
             {
@@ -196,7 +198,8 @@ namespace Templates.Test.Helpers
         private static async Task VerifyCannotFindTemplateAsync(
             ITestOutputHelper output,
             string templateName
-        ) {
+        )
+        {
             // Verify we really did remove the previous templates
             var tempDir = Path.Combine(
                 AppContext.BaseDirectory,

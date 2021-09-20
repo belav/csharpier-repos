@@ -110,7 +110,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             object model,
             NameAndId nameAndId,
             string expectedContent
-        ) {
+        )
+        {
             // Arrange
             var expectedAttributes = new TagHelperAttributeList
             {

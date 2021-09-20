@@ -25,7 +25,8 @@ namespace System.IO
         public StreamBuffer(
             int initialBufferSize = DefaultInitialBufferSize,
             int maxBufferSize = DefaultMaxBufferSize
-        ) {
+        )
+        {
             _buffer = new MultiArrayBuffer(initialBufferSize);
             _maxBufferSize = maxBufferSize;
             _readTaskSource = new ResettableValueTaskSource();
@@ -156,7 +157,8 @@ namespace System.IO
         public async ValueTask WriteAsync(
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             if (buffer.Length == 0)
@@ -249,7 +251,8 @@ namespace System.IO
         public async ValueTask<int> ReadAsync(
             Memory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             if (buffer.Length == 0)

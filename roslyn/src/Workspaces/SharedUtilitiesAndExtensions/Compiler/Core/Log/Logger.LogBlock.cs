@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Internal.Log
             LogMessage message,
             int blockId,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(s_currentLogger);
 
             var block = s_pool.Allocate();
@@ -55,7 +56,8 @@ namespace Microsoft.CodeAnalysis.Internal.Log
                 LogMessage logMessage,
                 int blockId,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 _logger = logger;
                 _functionId = functionId;
                 _logMessage = logMessage;

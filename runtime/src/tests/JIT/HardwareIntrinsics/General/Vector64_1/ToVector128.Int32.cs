@@ -91,7 +91,8 @@ namespace JIT.HardwareIntrinsics.General
             Int32[] values,
             bool isUnsafe,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Int32[] resultElements = new Int32[ElementCount * 2];
             Unsafe.WriteUnaligned(ref Unsafe.As<Int32, byte>(ref resultElements[0]), result);
 
@@ -103,7 +104,8 @@ namespace JIT.HardwareIntrinsics.General
             Int32[] values,
             bool isUnsafe,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             for (int i = 0; i < ElementCount; i++)

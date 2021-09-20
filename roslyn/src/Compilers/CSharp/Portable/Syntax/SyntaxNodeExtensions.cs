@@ -239,7 +239,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             this ExpressionSyntax? syntax,
             BindingDiagnosticBag diagnostics,
             out RefKind refKind
-        ) {
+        )
+        {
             refKind = RefKind.None;
             if (syntax?.Kind() == SyntaxKind.RefExpression)
             {
@@ -255,7 +256,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal static void CheckDeconstructionCompatibleArgument(
             this ExpressionSyntax expression,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             if (IsDeconstructionCompatibleArgument(expression))
             {
                 diagnostics.Add(

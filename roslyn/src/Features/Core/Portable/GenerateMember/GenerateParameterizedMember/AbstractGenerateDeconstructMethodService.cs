@@ -40,13 +40,15 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
             SyntaxNode leftSide,
             INamedTypeSymbol typeToGenerateIn,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (
                 Logger.LogBlock(
                     FunctionId.Refactoring_GenerateMember_GenerateMethod,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 var semanticDocument = await SemanticDocument.CreateAsync(
                         document,
                         cancellationToken

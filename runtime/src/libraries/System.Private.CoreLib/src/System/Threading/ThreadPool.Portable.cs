@@ -129,7 +129,8 @@ namespace System.Threading
             uint millisecondsTimeOutInterval,
             bool executeOnlyOnce,
             bool flowExecutionContext
-        ) {
+        )
+        {
             if (waitObject == null)
                 throw new ArgumentNullException(nameof(waitObject));
 

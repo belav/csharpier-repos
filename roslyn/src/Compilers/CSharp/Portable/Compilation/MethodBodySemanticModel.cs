@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ExecutableCodeBinder? binder = null,
                 NullableWalker.SnapshotManager? snapshotManager = null,
                 ImmutableDictionary<Symbol, Symbol>? remappedSymbols = null
-            ) {
+            )
+            {
                 Syntax = syntax;
                 Body = bodyOpt;
                 Binder = binder;
@@ -52,16 +53,18 @@ namespace Microsoft.CodeAnalysis.CSharp
             NullableWalker.SnapshotManager snapshotManagerOpt = null,
             ImmutableDictionary<Symbol, Symbol> parentRemappedSymbolsOpt = null,
             int speculatedPosition = 0
-        ) : base(
-            syntax,
-            owner,
-            rootBinder,
-            containingSemanticModelOpt,
-            parentSemanticModelOpt,
-            snapshotManagerOpt,
-            parentRemappedSymbolsOpt,
-            speculatedPosition
-        ) {
+        )
+            : base(
+                syntax,
+                owner,
+                rootBinder,
+                containingSemanticModelOpt,
+                parentSemanticModelOpt,
+                snapshotManagerOpt,
+                parentRemappedSymbolsOpt,
+                speculatedPosition
+            )
+        {
             Debug.Assert((object)owner != null);
             Debug.Assert(owner.Kind == SymbolKind.Method);
             Debug.Assert(syntax != null);
@@ -82,7 +85,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxTreeSemanticModel containingSemanticModel,
             MethodSymbol owner,
             InitialState initialState
-        ) {
+        )
+        {
             Debug.Assert(containingSemanticModel != null);
             var result = new MethodBodySemanticModel(
                 owner,
@@ -108,7 +112,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Binder binder,
             CSharpSyntaxNode node,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             switch (node.Kind())
             {
                 case SyntaxKind.ArrowExpressionClause:
@@ -159,7 +164,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             NullableWalker.SnapshotManager snapshotManagerOpt,
             ImmutableDictionary<Symbol, Symbol> parentRemappedSymbolsOpt,
             int position
-        ) {
+        )
+        {
             Debug.Assert(parentSemanticModel != null);
             Debug.Assert(syntax != null);
             Debug.Assert(rootBinder != null);
@@ -185,7 +191,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ArrowExpressionClauseSyntax syntax,
             Binder rootBinder,
             int position
-        ) {
+        )
+        {
             Debug.Assert(parentSemanticModel != null);
             Debug.Assert(syntax != null);
             Debug.Assert(rootBinder != null);
@@ -209,7 +216,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ConstructorInitializerSyntax syntax,
             Binder rootBinder,
             int position
-        ) {
+        )
+        {
             Debug.Assert(parentSemanticModel != null);
             Debug.Assert(syntax != null);
             Debug.Assert(rootBinder != null);
@@ -233,7 +241,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             PrimaryConstructorBaseTypeSyntax syntax,
             Binder rootBinder,
             int position
-        ) {
+        )
+        {
             Debug.Assert(parentSemanticModel != null);
             Debug.Assert(syntax != null);
             Debug.Assert(rootBinder != null);
@@ -253,7 +262,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             int position,
             BaseMethodDeclarationSyntax method,
             out SemanticModel speculativeModel
-        ) {
+        )
+        {
             // CONSIDER: Do we want to ensure that speculated method and the original method have identical signatures?
             return GetSpeculativeSemanticModelForMethodBody(
                 parentModel,
@@ -268,7 +278,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             int position,
             BlockSyntax body,
             out SemanticModel speculativeModel
-        ) {
+        )
+        {
             position = CheckAndAdjustPosition(position);
 
             var methodSymbol = (MethodSymbol)this.MemberSymbol;
@@ -316,7 +327,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             int position,
             AccessorDeclarationSyntax accessor,
             out SemanticModel speculativeModel
-        ) {
+        )
+        {
             return GetSpeculativeSemanticModelForMethodBody(
                 parentModel,
                 position,
@@ -330,7 +342,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             int position,
             StatementSyntax statement,
             out SemanticModel speculativeModel
-        ) {
+        )
+        {
             position = CheckAndAdjustPosition(position);
 
             var binder = this.GetEnclosingBinder(position);
@@ -360,7 +373,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             int position,
             ArrowExpressionClauseSyntax expressionBody,
             out SemanticModel speculativeModel
-        ) {
+        )
+        {
             position = CheckAndAdjustPosition(position);
 
             var binder = this.GetEnclosingBinder(position);
@@ -389,14 +403,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             int position,
             ConstructorInitializerSyntax constructorInitializer,
             out SemanticModel speculativeModel
-        ) {
+        )
+        {
             if (
                 MemberSymbol is MethodSymbol methodSymbol
                 && methodSymbol.MethodKind == MethodKind.Constructor
                 && Root.FindToken(position).Parent?.AncestorsAndSelf()
                     .OfType<ConstructorInitializerSyntax>()
                     .FirstOrDefault()?.Parent == Root
-            ) {
+            )
+            {
                 var binder = this.GetEnclosingBinder(position);
                 if (binder != null)
                 {
@@ -422,13 +438,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             int position,
             PrimaryConstructorBaseTypeSyntax constructorInitializer,
             out SemanticModel speculativeModel
-        ) {
+        )
+        {
             if (
                 MemberSymbol is SynthesizedRecordConstructor primaryCtor
                 && Root.FindToken(position).Parent?.AncestorsAndSelf()
                     .OfType<PrimaryConstructorBaseTypeSyntax>()
                     .FirstOrDefault() == primaryCtor.GetSyntax().PrimaryConstructorBaseType
-            ) {
+            )
+            {
                 var binder = this.GetEnclosingBinder(position);
                 if (binder != null)
                 {
@@ -454,7 +472,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             int position,
             EqualsValueClauseSyntax initializer,
             out SemanticModel speculativeModel
-        ) {
+        )
+        {
             speculativeModel = null;
             return false;
         }
@@ -466,7 +485,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool createSnapshots,
             out NullableWalker.SnapshotManager snapshotManager,
             ref ImmutableDictionary<Symbol, Symbol> remappedSymbols
-        ) {
+        )
+        {
             var afterInitializersState = NullableWalker.GetAfterInitializersState(
                 Compilation,
                 MemberSymbol
@@ -489,7 +509,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Binder binder,
             DiagnosticBag diagnostics,
             bool createSnapshots
-        ) {
+        )
+        {
             NullableWalker.AnalyzeWithoutRewrite(
                 Compilation,
                 MemberSymbol,

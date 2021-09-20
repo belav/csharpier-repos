@@ -11,7 +11,8 @@ namespace System.IO
         public static async Task<int> ReadByteAsync(
             this Stream stream,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             byte[] buffer = new byte[1];
 
             int numBytesRead = await stream.ReadAsync(buffer, 0, 1, cancellationToken);

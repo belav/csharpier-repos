@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                     Project project,
                     Diagnostic diagnostic,
                     AbstractSuppressionCodeFixProvider fixer
-                ) {
+                )
+                {
                     return new AttributeRemoveAction(attribute, project, diagnostic, fixer);
                 }
 
@@ -57,7 +58,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
 
                 public async Task<SyntaxNode> GetAttributeToRemoveAsync(
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     var attributeNode = await _attribute.ApplicationSyntaxReference.GetSyntaxAsync(
                             cancellationToken
                         )
@@ -69,7 +71,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
 
                 protected override async Task<Solution> GetChangedSolutionAsync(
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     var attributeNode = await GetAttributeToRemoveAsync(cancellationToken)
                         .ConfigureAwait(false);
                     var documentWithAttribute = _project.GetDocument(attributeNode.SyntaxTree);

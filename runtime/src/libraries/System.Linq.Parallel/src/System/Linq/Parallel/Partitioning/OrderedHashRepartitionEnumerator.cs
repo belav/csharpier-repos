@@ -78,7 +78,8 @@ namespace System.Linq.Parallel
             ListChunk<Pair<TInputOutput, THashKey>>[][] valueExchangeMatrix,
             ListChunk<TOrderKey>[][] keyExchangeMatrix,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(source != null);
             Debug.Assert(
                 keySelector != null || typeof(THashKey) == typeof(NoKeyMemoizationRequired)
@@ -126,7 +127,8 @@ namespace System.Linq.Parallel
         internal override bool MoveNext(
             ref Pair<TInputOutput, THashKey> currentElement,
             [AllowNull] ref TOrderKey currentKey
-        ) {
+        )
+        {
             if (_partitionCount == 1)
             {
                 TInputOutput current = default(TInputOutput)!;

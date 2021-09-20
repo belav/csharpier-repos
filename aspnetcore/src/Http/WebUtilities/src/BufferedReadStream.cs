@@ -201,7 +201,8 @@ namespace Microsoft.AspNetCore.WebUtilities
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _inner.WriteAsync(buffer, offset, count, cancellationToken);
         }
 
@@ -229,7 +230,8 @@ namespace Microsoft.AspNetCore.WebUtilities
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ValidateBuffer(buffer, offset, count);
 
             // Drain buffer
@@ -327,7 +329,8 @@ namespace Microsoft.AspNetCore.WebUtilities
         public async Task<bool> EnsureBufferedAsync(
             int minCount,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (minCount > _buffer.Length)
             {
                 throw new ArgumentOutOfRangeException(
@@ -403,7 +406,8 @@ namespace Microsoft.AspNetCore.WebUtilities
         public async Task<string> ReadLineAsync(
             int lengthLimit,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             CheckDisposed();
             using (var builder = new MemoryStream(200))
             {

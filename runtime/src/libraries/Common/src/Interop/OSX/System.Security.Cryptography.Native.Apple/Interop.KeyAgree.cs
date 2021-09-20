@@ -25,7 +25,8 @@ internal static partial class Interop
             SafeSecKeyRefHandle publicKey,
             Span<byte> opportunisticDestination,
             out int bytesWritten
-        ) {
+        )
+        {
             const int Success = 1;
             const int kErrorSeeError = -2;
 
@@ -50,7 +51,8 @@ internal static partial class Interop
                             opportunisticDestination,
                             out bytesWritten
                         )
-                    ) {
+                    )
+                    {
                         return null;
                     }
 

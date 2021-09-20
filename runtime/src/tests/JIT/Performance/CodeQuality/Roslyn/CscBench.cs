@@ -109,7 +109,8 @@ public static class CscBench
         SyntaxTree tree,
         out StatementSyntax firstStatement,
         out StatementSyntax lastStatement
-    ) {
+    )
+    {
         TextSpan span = GetSpanBetweenMarkers(tree);
         var statementsInside = tree.GetRoot()
             .DescendantNodes(span)

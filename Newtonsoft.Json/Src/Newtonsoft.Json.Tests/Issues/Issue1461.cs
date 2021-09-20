@@ -103,7 +103,8 @@ namespace Newtonsoft.Json.Tests.Issues
                 Type objectType,
                 object existingValue,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 if (reader.TokenType == JsonToken.Integer)
                     return new Id((long)reader.Value);
 
@@ -116,7 +117,8 @@ namespace Newtonsoft.Json.Tests.Issues
                 JsonWriter writer,
                 object value,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 if (value == null)
                 {
                     writer.WriteNull();

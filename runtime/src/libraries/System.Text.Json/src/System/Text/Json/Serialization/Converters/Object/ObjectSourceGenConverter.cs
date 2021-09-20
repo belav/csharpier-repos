@@ -18,7 +18,8 @@ namespace System.Text.Json.Serialization.Converters
             JsonSerializerOptions options,
             ref ReadStack state,
             [MaybeNullWhen(false)] out T value
-        ) {
+        )
+        {
             JsonTypeInfo jsonTypeInfo = state.Current.JsonTypeInfo;
             if (jsonTypeInfo.PropertyCache == null)
             {
@@ -33,7 +34,8 @@ namespace System.Text.Json.Serialization.Converters
             T value,
             JsonSerializerOptions options,
             ref WriteStack state
-        ) {
+        )
+        {
             JsonTypeInfo jsonTypeInfo = state.Current.JsonTypeInfo;
             if (jsonTypeInfo.PropertyCacheArray == null)
             {

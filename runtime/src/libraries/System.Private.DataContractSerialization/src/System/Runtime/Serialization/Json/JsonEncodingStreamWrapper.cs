@@ -142,7 +142,8 @@ namespace System.Runtime.Serialization.Json
             int offset,
             int count,
             Encoding? encoding
-        ) {
+        )
+        {
             try
             {
                 SupportedEncoding expectedEnc = GetSupportedEncoding(encoding);
@@ -360,7 +361,8 @@ namespace System.Runtime.Serialization.Json
         private static void ThrowExpectedEncodingMismatch(
             SupportedEncoding expEnc,
             SupportedEncoding actualEnc
-        ) {
+        )
+        {
             throw new XmlException(
                 SR.Format(
                     SR.JsonExpectedEncoding,

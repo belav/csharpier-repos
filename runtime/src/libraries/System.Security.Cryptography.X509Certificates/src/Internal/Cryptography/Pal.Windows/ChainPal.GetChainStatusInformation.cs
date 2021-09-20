@@ -70,7 +70,8 @@ namespace Internal.Cryptography.Pal
                 CertTrustErrorStatus win32Flag,
                 int win32ErrorCode,
                 X509ChainStatusFlags chainStatusFlag
-            ) {
+            )
+            {
                 Win32Flag = win32Flag;
                 Win32ErrorCode = win32ErrorCode;
                 ChainStatusFlag = chainStatusFlag;

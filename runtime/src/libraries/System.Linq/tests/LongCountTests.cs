@@ -49,7 +49,8 @@ namespace System.Linq.Tests
             IEnumerable<int> source,
             Func<int, bool> predicate,
             long expected
-        ) {
+        )
+        {
             if (predicate == null)
             {
                 Assert.Equal(expected, source.LongCount());
@@ -66,7 +67,8 @@ namespace System.Linq.Tests
             IEnumerable<int> source,
             Func<int, bool> predicate,
             long expected
-        ) {
+        )
+        {
             if (predicate == null)
             {
                 Assert.Equal(expected, source.RunOnce().LongCount());

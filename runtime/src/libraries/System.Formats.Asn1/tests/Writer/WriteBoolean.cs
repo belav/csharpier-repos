@@ -33,7 +33,8 @@ namespace System.Formats.Asn1.Tests.Writer
             AsnEncodingRules ruleSet,
             bool value,
             string expectedHex
-        ) {
+        )
+        {
             AsnWriter writer = new AsnWriter(ruleSet);
             writer.WriteBoolean(value, new Asn1Tag(TagClass.ContextSpecific, 3));
 

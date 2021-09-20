@@ -119,7 +119,8 @@ namespace System.Text.Json.Serialization
             object? value,
             JsonSerializerOptions options,
             ref WriteStack state
-        ) {
+        )
+        {
             T valueOfT = (T)value!;
             return TryWrite(writer, valueOfT, options, ref state);
         }
@@ -130,7 +131,8 @@ namespace System.Text.Json.Serialization
             T value,
             JsonSerializerOptions options,
             ref WriteStack state
-        ) {
+        )
+        {
             Write(writer, value, options);
             return true;
         }
@@ -142,7 +144,8 @@ namespace System.Text.Json.Serialization
             JsonSerializerOptions options,
             ref ReadStack state,
             out T? value
-        ) {
+        )
+        {
             value = Read(ref reader, typeToConvert, options);
             return true;
         }
@@ -169,7 +172,8 @@ namespace System.Text.Json.Serialization
             JsonSerializerOptions options,
             ref ReadStack state,
             out T? value
-        ) {
+        )
+        {
             if (ConverterStrategy == ConverterStrategy.Value)
             {
                 // A value converter should never be within a continuation.
@@ -237,7 +241,8 @@ namespace System.Text.Json.Serialization
                     options.ReferenceHandlingStrategy == ReferenceHandlingStrategy.Preserve
                     && CanBePolymorphic
                     && value is JsonElement element
-                ) {
+                )
+                {
                     // Edge case where we want to lookup for a reference when parsing into typeof(object)
                     // instead of return `value` as a JsonElement.
                     Debug.Assert(TypeToConvert == typeof(object));
@@ -248,7 +253,8 @@ namespace System.Text.Json.Serialization
                             element,
                             out object? referenceValue
                         )
-                    ) {
+                    )
+                    {
                         value = (T?)referenceValue;
                     }
                 }
@@ -341,7 +347,8 @@ namespace System.Text.Json.Serialization
             JsonSerializerOptions options,
             ref ReadStack state,
             out object? value
-        ) {
+        )
+        {
             bool success = TryRead(
                 ref reader,
                 TypeToConvert,
@@ -360,7 +367,8 @@ namespace System.Text.Json.Serialization
             in T value,
             JsonSerializerOptions options,
             ref WriteStack state
-        ) {
+        )
+        {
             if (writer.CurrentDepth >= options.EffectiveMaxDepth)
             {
                 ThrowHelper.ThrowJsonException_SerializerCycleDetected(options.EffectiveMaxDepth);
@@ -379,7 +387,8 @@ namespace System.Text.Json.Serialization
                 options.ReferenceHandlingStrategy == ReferenceHandlingStrategy.IgnoreCycles
                 && !IsValueType
                 && !IsNull(value)
-            ) {
+            )
+            {
                 Debug.Assert(value != null);
                 ReferenceResolver resolver = state.ReferenceResolver;
 
@@ -432,7 +441,8 @@ namespace System.Text.Json.Serialization
                     if (
                         options.ReferenceHandlingStrategy == ReferenceHandlingStrategy.IgnoreCycles
                         && jsonConverter.IsValueType
-                    ) {
+                    )
+                    {
                         // For boxed value types: push the value before it gets unboxed on TryWriteAsObject.
                         state.ReferenceResolver.PushReferenceForCycleDetection(value);
                         ignoreCyclesPopReference = true;
@@ -510,7 +520,8 @@ namespace System.Text.Json.Serialization
             T value,
             JsonSerializerOptions options,
             ref WriteStack state
-        ) {
+        )
+        {
             Debug.Assert(value != null);
 
             if (!IsInternalConverter)
@@ -560,7 +571,8 @@ namespace System.Text.Json.Serialization
             long bytesConsumed,
             bool isValueConverter,
             ref Utf8JsonReader reader
-        ) {
+        )
+        {
             switch (tokenType)
             {
                 case JsonTokenType.StartArray:

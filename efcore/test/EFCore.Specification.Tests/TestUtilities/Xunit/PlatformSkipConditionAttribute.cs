@@ -31,14 +31,16 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.Xunit
             if (
                 excludedFrameworks.HasFlag(TestPlatform.Windows)
                 && RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-            ) {
+            )
+            {
                 return false;
             }
 
             if (
                 excludedFrameworks.HasFlag(TestPlatform.Linux)
                 && RuntimeInformation.IsOSPlatform(OSPlatform.Linux)
-            ) {
+            )
+            {
                 return false;
             }
 

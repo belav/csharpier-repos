@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             string name,
             bool ignoreCase,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             using var query = SearchQuery.Create(name, ignoreCase);
             var declarations = await DeclarationFinder.FindAllDeclarationsWithNormalQueryAsync(
                     project,
@@ -41,7 +42,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             bool ignoreCase,
             SymbolFilter filter,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             using var query = SearchQuery.Create(name, ignoreCase);
             var declarations = await DeclarationFinder.FindAllDeclarationsWithNormalQueryAsync(
                     project,

@@ -240,7 +240,8 @@ namespace System
             NumberStyles style,
             IFormatProvider? provider,
             out IntPtr result
-        ) {
+        )
+        {
             Unsafe.SkipInit(out result);
             return nint_t.TryParse(s, style, provider, out Unsafe.As<IntPtr, nint_t>(ref result));
         }
@@ -256,7 +257,8 @@ namespace System
             NumberStyles style,
             IFormatProvider? provider,
             out IntPtr result
-        ) {
+        )
+        {
             Unsafe.SkipInit(out result);
             return nint_t.TryParse(s, style, provider, out Unsafe.As<IntPtr, nint_t>(ref result));
         }

@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                 ISymbol symbolToRename,
                 Solution originalSolution,
                 Solution renamedSolution
-            ) {
+            )
+            {
                 Symbol = symbolToRename;
                 OriginalSolution = originalSolution;
                 RenamedSolution = renamedSolution;

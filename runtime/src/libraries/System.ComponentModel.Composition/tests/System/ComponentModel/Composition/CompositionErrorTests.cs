@@ -551,7 +551,8 @@ namespace System.ComponentModel.Composition
             string message,
             ICompositionElement element,
             Exception exception
-        ) {
+        )
+        {
             return new CompositionError(id, message, element, exception);
         }
 
@@ -574,7 +575,8 @@ namespace System.ComponentModel.Composition
 
         private static CompositionError CreateCompositionErrorWithException(
             params string[] messages
-        ) {
+        )
+        {
             Exception innerException = null;
             foreach (string message in messages.Skip(1).Reverse())
             {
@@ -587,7 +589,8 @@ namespace System.ComponentModel.Composition
         private static CompositionError CreateCompostionErrorWithCompositionException(
             string message1,
             string message2
-        ) {
+        )
+        {
             var exception = CreateCompositionException(new Exception(message2));
 
             return new CompositionError(message1, exception);

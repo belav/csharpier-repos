@@ -420,7 +420,8 @@ namespace Microsoft.Extensions.ApiDescription.Client
         public void Execute_SetsClassName_BasedOnSanitizedOutputPath(
             string outputPath,
             string className
-        ) {
+        )
+        {
             // Arrange
             var identity = Path.Combine("TestProjects", "files", "NSwag.json");
             var @namespace = "Console.Client";

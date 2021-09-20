@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void AddSynthesizedAttributes(
             PEModuleBuilder moduleBuilder,
             ref ArrayBuilder<SynthesizedAttributeData> attributes
-        ) {
+        )
+        {
             base.AddSynthesizedAttributes(moduleBuilder, ref attributes);
 
             if (this.HasUnmanagedTypeConstraint)
@@ -49,7 +50,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     InheritsBaseMethodAttributes: true
                 }
-            ) {
+            )
+            {
                 return _underlyingTypeParameter.GetAttributes();
             }
 

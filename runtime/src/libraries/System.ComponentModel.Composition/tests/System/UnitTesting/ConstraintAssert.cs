@@ -15,7 +15,8 @@ namespace System.UnitTesting
         public static void Contains(
             Expression<Func<ExportDefinition, bool>> constraint,
             string contractName
-        ) {
+        )
+        {
             Contains(constraint, contractName, Enumerable.Empty<KeyValuePair<string, Type>>());
         }
 
@@ -23,7 +24,8 @@ namespace System.UnitTesting
             Expression<Func<ExportDefinition, bool>> constraint,
             string contractName,
             IEnumerable<KeyValuePair<string, Type>> requiredMetadata
-        ) {
+        )
+        {
             string actualContractName;
             IEnumerable<KeyValuePair<string, Type>> actualRequiredMetadata;
             bool success = TryParseConstraint(
@@ -41,7 +43,8 @@ namespace System.UnitTesting
             Expression<Func<ExportDefinition, bool>> constraint,
             out string contractName,
             out IEnumerable<KeyValuePair<string, Type>> requiredMetadata
-        ) {
+        )
+        {
             return ContraintParser.TryParseConstraint(
                 constraint,
                 out contractName,

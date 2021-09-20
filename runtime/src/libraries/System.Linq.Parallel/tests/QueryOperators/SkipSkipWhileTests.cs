@@ -93,7 +93,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int skip
-        ) {
+        )
+        {
             Skip(labeled, count, skip);
         }
 
@@ -131,7 +132,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int skip
-        ) {
+        )
+        {
             ParallelQuery<int> query = labeled.Item;
             int seen = Math.Max(0, skip);
             Assert.All(query.Skip(skip).ToList(), x => Assert.Equal(seen++, x));
@@ -151,7 +153,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int skip
-        ) {
+        )
+        {
             Skip_NotPipelined(labeled, count, skip);
         }
 
@@ -173,7 +176,8 @@ namespace System.Linq.Parallel.Tests
                 object[] results in Sources.Ranges(
                     counts.DefaultIfEmpty(Sources.OuterLoopCount / 4)
                 )
-            ) {
+            )
+            {
                 yield return new[] { results[0], results[1], new[] { 0 } };
                 yield return new[]
                 {
@@ -242,7 +246,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int skip
-        ) {
+        )
+        {
             SkipWhile(labeled, count, skip);
         }
 
@@ -283,7 +288,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int skip
-        ) {
+        )
+        {
             ParallelQuery<int> query = labeled.Item;
             int seen = Math.Max(0, skip);
             Assert.All(query.SkipWhile(x => x < skip).ToList(), x => Assert.Equal(seen++, x));
@@ -303,7 +309,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int skip
-        ) {
+        )
+        {
             SkipWhile_NotPipelined(labeled, count, skip);
         }
 
@@ -344,7 +351,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int skip
-        ) {
+        )
+        {
             ParallelQuery<int> query = labeled.Item;
             int seen = Math.Max(0, skip);
             foreach (int i in query.SkipWhile((x, index) => index < skip))
@@ -367,7 +375,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int skip
-        ) {
+        )
+        {
             SkipWhile_Indexed(labeled, count, skip);
         }
 
@@ -408,7 +417,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int skip
-        ) {
+        )
+        {
             ParallelQuery<int> query = labeled.Item;
             int seen = Math.Max(0, skip);
             Assert.All(query.SkipWhile((x, index) => index < skip), x => Assert.Equal(seen++, x));
@@ -428,7 +438,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int skip
-        ) {
+        )
+        {
             SkipWhile_Indexed_NotPipelined(labeled, count, skip);
         }
 
@@ -438,7 +449,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int skip
-        ) {
+        )
+        {
             _ = skip;
             ParallelQuery<int> query = labeled.Item;
             int seen = 0;
@@ -459,7 +471,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int skip
-        ) {
+        )
+        {
             SkipWhile_AllFalse(labeled, count, skip);
         }
 
@@ -469,7 +482,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int skip
-        ) {
+        )
+        {
             _ = skip;
             ParallelQuery<int> query = labeled.Item;
             IntegerRangeSet seen = new IntegerRangeSet(0, count);
@@ -490,7 +504,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int skip
-        ) {
+        )
+        {
             SkipWhile_AllTrue(labeled, count, skip);
         }
 
@@ -500,7 +515,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int[] skip
-        ) {
+        )
+        {
             ParallelQuery<int> query = labeled.Item;
             int seen = skip.Min() == 0 ? 1 : 0;
             Assert.All(query.SkipWhile(x => skip.Contains(x)), x => Assert.Equal(seen++, x));
@@ -520,7 +536,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int[] skip
-        ) {
+        )
+        {
             SkipWhile_SomeTrue(labeled, count, skip);
         }
 
@@ -530,7 +547,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int[] skip
-        ) {
+        )
+        {
             ParallelQuery<int> query = labeled.Item;
             int seen = skip.Min();
             Assert.All(query.SkipWhile(x => !skip.Contains(x)), x => Assert.Equal(seen++, x));
@@ -550,7 +568,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int[] skip
-        ) {
+        )
+        {
             SkipWhile_SomeFalse(labeled, count, skip);
         }
 

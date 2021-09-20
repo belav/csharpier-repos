@@ -80,7 +80,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 if (
                     token.Parent.Parent is not AttributeSyntax attributeSyntax
                     || token.Parent is not AttributeArgumentListSyntax attributeArgumentList
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -142,7 +143,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             if (
                 token.Kind() == SyntaxKind.CommaToken
                 && token.Parent is AttributeArgumentListSyntax argumentList
-            ) {
+            )
+            {
                 foreach (var item in argumentList.Arguments.GetWithSeparators())
                 {
                     if (item.IsToken && item.AsToken() == token)
@@ -169,7 +171,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             if (
                 token.Kind() == SyntaxKind.CommaToken
                 && token.Parent is AttributeArgumentListSyntax argumentList
-            ) {
+            )
+            {
                 foreach (var item in argumentList.Arguments.GetWithSeparators())
                 {
                     if (item.IsToken && item.AsToken() == token)
@@ -197,7 +200,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             SyntaxToken token,
             AttributeSyntax attributeSyntax,
             ISet<string> existingNamedParameters
-        ) {
+        )
+        {
             var attributeNamedParameters = GetAttributeNamedParameters(
                 semanticModel,
                 context.Position,
@@ -231,7 +235,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             SyntaxToken token,
             AttributeSyntax attributeSyntax,
             ISet<string> existingNamedParameters
-        ) {
+        )
+        {
             var parameterLists = GetParameterLists(
                 semanticModel,
                 context.Position,
@@ -270,7 +275,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
         private static ISet<string> GetExistingNamedParameters(
             AttributeArgumentListSyntax argumentList,
             int position
-        ) {
+        )
+        {
             var existingArguments1 = argumentList.Arguments.Where(a => a.Span.End <= position)
                 .Where(a => a.NameColon != null)
                 .Select(a => a.NameColon.Name.Identifier.ValueText);
@@ -286,13 +292,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             int position,
             AttributeSyntax attribute,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var within = semanticModel.GetEnclosingNamedTypeOrAssembly(position, cancellationToken);
             if (
                 within != null
                 && semanticModel.GetTypeInfo(attribute, cancellationToken).Type
                     is INamedTypeSymbol attributeType
-            ) {
+            )
+            {
                 return attributeType.InstanceConstructors.Where(c => c.IsAccessibleWithin(within))
                     .Select(c => c.Parameters);
             }
@@ -305,7 +313,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             int position,
             AttributeSyntax attribute,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var within = semanticModel.GetEnclosingNamedTypeOrAssembly(position, cancellationToken);
             var attributeType =
                 semanticModel.GetTypeInfo(attribute, cancellationToken).Type as INamedTypeSymbol;

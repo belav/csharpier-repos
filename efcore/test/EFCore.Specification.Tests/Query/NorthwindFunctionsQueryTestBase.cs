@@ -1845,7 +1845,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Order_by_length_twice_followed_by_projection_of_naked_collection_navigation(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>

@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.UnitTests
 
         internal static NavigateToMatchKind GetExpectedNavigateToMatchKind(
             FSharpNavigateToMatchKind kind
-        ) {
+        )
+        {
             switch (kind)
             {
                 case FSharpNavigateToMatchKind.Exact:

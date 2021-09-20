@@ -57,7 +57,8 @@ namespace System.Net
             int offset,
             int length,
             long contentlength
-        ) {
+        )
+        {
             _stream = stream;
             _buffer = buffer;
             _offset = offset;
@@ -135,7 +136,8 @@ namespace System.Net
             int size,
             AsyncCallback? cback,
             object? state
-        ) {
+        )
+        {
             if (size == 0 || _closed)
             {
                 HttpStreamAsyncResult ares = new HttpStreamAsyncResult(this);

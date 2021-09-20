@@ -85,7 +85,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 if (
                     SymbolLoader.HasIdentityOrImplicitReferenceConversion(typeSrc, typeDst)
                     || SymbolLoader.HasIdentityOrImplicitReferenceConversion(typeDst, typeSrc)
-                ) {
+                )
+                {
                     return true;
                 }
 
@@ -95,7 +96,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 if (
                     typeSrc.IsInterfaceType && typeDst is TypeParameterType
                     || typeSrc is TypeParameterType && typeDst.IsInterfaceType
-                ) {
+                )
+                {
                     return true;
                 }
 
@@ -111,7 +113,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         (aggSrc.IsClass() && !aggSrc.IsSealed() && aggDest.IsInterface())
                         || (aggSrc.IsInterface() && aggDest.IsClass() && !aggDest.IsSealed())
                         || (aggSrc.IsInterface() && aggDest.IsInterface())
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }
@@ -160,7 +163,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                                 aggDst.OwningAggregate
                             )
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
 
@@ -175,7 +179,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                             SymbolLoader.GetPredefindType(PredefinedType.PT_ARRAY),
                             typeSrc
                         )
-                    ) {
+                    )
+                    {
                         return true;
                     }
 
@@ -187,7 +192,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         !arrayDest.IsSZArray
                         || !typeSrc.IsInterfaceType
                         || aggtypeSrc.TypeArgsAll.Count != 1
-                    ) {
+                    )
+                    {
                         return false;
                     }
 
@@ -208,7 +214,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                                 aggtypeSrc.OwningAggregate
                             )
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
 
@@ -262,14 +269,16 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         public static bool HasGenericDelegateExplicitReferenceConversion(
             CType pSource,
             AggregateType pTarget
-        ) {
+        )
+        {
             if (
                 !(pSource is AggregateType aggSrc)
                 || !aggSrc.IsDelegateType
                 || !pTarget.IsDelegateType
                 || aggSrc.OwningAggregate != pTarget.OwningAggregate
                 || SymbolLoader.HasIdentityOrImplicitReferenceConversion(aggSrc, pTarget)
-            ) {
+            )
+            {
                 return false;
             }
 

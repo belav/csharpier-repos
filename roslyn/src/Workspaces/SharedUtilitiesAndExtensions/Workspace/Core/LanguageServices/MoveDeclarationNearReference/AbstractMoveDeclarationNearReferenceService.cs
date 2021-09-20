@@ -60,7 +60,8 @@ namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
             Document document,
             SyntaxNode node,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var state = await ComputeStateAsync(document, node, cancellationToken)
                 .ConfigureAwait(false);
             return state != null;
@@ -70,7 +71,8 @@ namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
             Document document,
             SyntaxNode node,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!(node is TLocalDeclarationStatementSyntax statement))
             {
                 return null;
@@ -94,7 +96,8 @@ namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
                     == state.IndexOfFirstStatementAffectedInInnermostBlock - 1
                 && !await CanMergeDeclarationAndAssignmentAsync(document, state, cancellationToken)
                     .ConfigureAwait(false)
-            ) {
+            )
+            {
                 // Declaration statement is already closest to the first reference
                 // and they both cannot be merged into a single statement, so bail out.
                 return null;
@@ -112,7 +115,8 @@ namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
             Document document,
             SyntaxNode localDeclarationStatement,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var state = await ComputeStateAsync(
                     document,
                     localDeclarationStatement,
@@ -154,7 +158,8 @@ namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
                     statementIndex + 1 < state.OutermostBlockStatements.Count
                     && state.OutermostBlockStatements[statementIndex + 1]
                         == state.FirstStatementAffectedInInnermostBlock
-                ) {
+                )
+                {
                     // Already at the correct location.
                     return document;
                 }
@@ -180,7 +185,8 @@ namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
             SyntaxEditor editor,
             SyntaxAnnotation warningAnnotation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // If we're not merging with an existing declaration, make the declaration semantically
             // explicit to improve the chances that it won't break code.
             var explicitDeclarationStatement = await Simplifier.ExpandAsync(
@@ -237,7 +243,8 @@ namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
             State state,
             SyntaxEditor editor,
             SyntaxAnnotation warningAnnotation
-        ) {
+        )
+        {
             // Replace the first reference with a new declaration.
             var declarationStatement = CreateMergedDeclarationStatement(document, state);
             declarationStatement =
@@ -264,7 +271,8 @@ namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
             ISyntaxFactsService syntaxFacts,
             TStatementSyntax statement1,
             TStatementSyntax statement2
-        ) {
+        )
+        {
             return syntaxFacts.GetLeadingBlankLines(statement2)
                 .Concat(syntaxFacts.GetTriviaAfterLeadingBlankLines(statement1))
                 .Concat(syntaxFacts.GetTriviaAfterLeadingBlankLines(statement2));
@@ -293,7 +301,8 @@ namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
             Document document,
             State state,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxFacts = document.GetLanguageService<ISyntaxFactsService>();
 
             var initializer = syntaxFacts.GetInitializerOfVariableDeclarator(
@@ -304,7 +313,8 @@ namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
                 || syntaxFacts.IsLiteralExpression(
                     syntaxFacts.GetValueOfEqualsValueClause(initializer)
                 )
-            ) {
+            )
+            {
                 var firstStatement = state.FirstStatementAffectedInInnermostBlock;
                 if (syntaxFacts.IsSimpleAssignmentStatement(firstStatement))
                 {
@@ -338,7 +348,8 @@ namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
         private static TLocalDeclarationStatementSyntax CreateMergedDeclarationStatement(
             Document document,
             State state
-        ) {
+        )
+        {
             var generator = document.GetLanguageService<SyntaxGeneratorInternal>();
 
             var syntaxFacts = document.GetLanguageService<ISyntaxFactsService>();

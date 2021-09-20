@@ -215,7 +215,8 @@ namespace JIT.HardwareIntrinsics.X86
             UInt64 data,
             UInt64 result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             var isUnexpectedResult = false;
 
             isUnexpectedResult = ((unchecked((ulong)(-(long)data)) & data) != result);

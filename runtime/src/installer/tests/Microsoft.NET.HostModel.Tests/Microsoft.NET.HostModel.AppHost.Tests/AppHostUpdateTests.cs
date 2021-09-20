@@ -260,7 +260,8 @@ namespace Microsoft.NET.HostModel.Tests
         private string PrepareAppHostMockFile(
             TestDirectory testDirectory,
             Action<byte[]> customize = null
-        ) {
+        )
+        {
             // For now we're testing the AppHost on Windows PE files only.
             // The only customization which we do on non-Windows files is the embedding
             // of the binary path, which works the same regardless of the file format.

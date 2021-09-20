@@ -24,7 +24,8 @@ namespace System.Linq.Expressions
         internal ListInitExpression(
             NewExpression newExpression,
             ReadOnlyCollection<ElementInit> initializers
-        ) {
+        )
+        {
             NewExpression = newExpression;
             Initializers = initializers;
         }
@@ -91,7 +92,8 @@ namespace System.Linq.Expressions
         public ListInitExpression Update(
             NewExpression newExpression,
             IEnumerable<ElementInit> initializers
-        ) {
+        )
+        {
             if (newExpression == NewExpression && initializers != null)
             {
                 if (ExpressionUtils.SameElements(ref initializers!, Initializers))
@@ -116,7 +118,8 @@ namespace System.Linq.Expressions
         public static ListInitExpression ListInit(
             NewExpression newExpression,
             params Expression[] initializers
-        ) {
+        )
+        {
             return ListInit(newExpression, initializers as IEnumerable<Expression>);
         }
 
@@ -130,7 +133,8 @@ namespace System.Linq.Expressions
         public static ListInitExpression ListInit(
             NewExpression newExpression,
             IEnumerable<Expression> initializers
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(newExpression, nameof(newExpression));
             ContractUtils.RequiresNotNull(initializers, nameof(initializers));
 
@@ -165,7 +169,8 @@ namespace System.Linq.Expressions
             NewExpression newExpression,
             MethodInfo? addMethod,
             params Expression[] initializers
-        ) {
+        )
+        {
             return ListInit(newExpression, addMethod, initializers as IEnumerable<Expression>);
         }
 
@@ -181,7 +186,8 @@ namespace System.Linq.Expressions
             NewExpression newExpression,
             MethodInfo? addMethod,
             IEnumerable<Expression> initializers
-        ) {
+        )
+        {
             if (addMethod == null)
             {
                 return ListInit(newExpression, initializers);
@@ -214,7 +220,8 @@ namespace System.Linq.Expressions
         public static ListInitExpression ListInit(
             NewExpression newExpression,
             params ElementInit[] initializers
-        ) {
+        )
+        {
             return ListInit(newExpression, (IEnumerable<ElementInit>)initializers);
         }
 
@@ -231,7 +238,8 @@ namespace System.Linq.Expressions
         public static ListInitExpression ListInit(
             NewExpression newExpression,
             IEnumerable<ElementInit> initializers
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(newExpression, nameof(newExpression));
             ContractUtils.RequiresNotNull(initializers, nameof(initializers));
             ReadOnlyCollection<ElementInit> initializerlist = initializers.ToReadOnly();

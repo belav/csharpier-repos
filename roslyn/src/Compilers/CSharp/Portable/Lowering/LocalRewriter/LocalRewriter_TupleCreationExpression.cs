@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private BoundExpression RewriteTupleCreationExpression(
             BoundTupleExpression node,
             ImmutableArray<BoundExpression> rewrittenArguments
-        ) {
+        )
+        {
             Debug.Assert(node.Type is { });
             return MakeTupleCreationExpression(
                 node.Syntax,
@@ -50,7 +51,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxNode syntax,
             NamedTypeSymbol type,
             ImmutableArray<BoundExpression> rewrittenArguments
-        ) {
+        )
+        {
             Debug.Assert(type.IsTupleType);
 
             ArrayBuilder<NamedTypeSymbol> underlyingTupleTypeChain =

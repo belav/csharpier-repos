@@ -159,7 +159,8 @@ namespace System.Text
             int charsLength,
             EncoderFallback? fallback,
             out int charsConsumed
-        ) {
+        )
+        {
             // Can we short-circuit the entire calculation? If so, the output byte count
             // will exactly match the input char count. Otherwise we need to walk the
             // entire input and find the index of the first non-Latin-1 char.
@@ -240,7 +241,8 @@ namespace System.Text
             int charCount,
             byte[] bytes,
             int byteIndex
-        ) {
+        )
+        {
             // Validate parameters
 
             if (chars is null || bytes is null)
@@ -294,7 +296,8 @@ namespace System.Text
 
             fixed (char* charsPtr = &MemoryMarshal.GetReference(chars))fixed (
                 byte* bytesPtr = &MemoryMarshal.GetReference(bytes)
-            ) {
+            )
+            {
                 return GetBytesCommon(charsPtr, chars.Length, bytesPtr, bytes.Length);
             }
         }
@@ -305,7 +308,8 @@ namespace System.Text
             int charCount,
             byte[] bytes,
             int byteIndex
-        ) {
+        )
+        {
             // Validate Parameters
 
             if (s is null || bytes is null)
@@ -408,7 +412,8 @@ namespace System.Text
             byte* pBytes,
             int bytesLength,
             out int charsConsumed
-        ) {
+        )
+        {
             int bytesWritten = (int)Latin1Utility.NarrowUtf16ToLatin1(
                 pChars,
                 pBytes,
@@ -495,7 +500,8 @@ namespace System.Text
             int bytesLength,
             DecoderFallback? fallback,
             out int bytesConsumed
-        ) {
+        )
+        {
             // We never consult the fallback mechanism during GetChars.
             // A single byte is always widened to a single char, so we'll return
             // the byte count as the final char count.
@@ -579,7 +585,8 @@ namespace System.Text
             int byteCount,
             char[] chars,
             int charIndex
-        ) {
+        )
+        {
             // Validate Parameters
 
             if (bytes is null || chars is null)
@@ -673,7 +680,8 @@ namespace System.Text
 
             fixed (byte* bytesPtr = &MemoryMarshal.GetReference(bytes))fixed (
                 char* charsPtr = &MemoryMarshal.GetReference(chars)
-            ) {
+            )
+            {
                 return GetCharsCommon(bytesPtr, bytes.Length, charsPtr, chars.Length);
             }
         }
@@ -787,7 +795,8 @@ namespace System.Text
             char* pChars,
             int charsLength,
             out int bytesConsumed
-        ) {
+        )
+        {
             int charsWritten = Math.Min(bytesLength, charsLength);
             Latin1Utility.WidenLatin1ToUtf16(pBytes, pChars, (uint)charsWritten);
 
@@ -830,7 +839,8 @@ namespace System.Text
             Rune value,
             Span<byte> bytes,
             out int bytesWritten
-        ) {
+        )
+        {
             // We can only process U+0000..U+00FF.
             // Everything else must go through the fallback mechanism.
 
@@ -859,7 +869,8 @@ namespace System.Text
             ReadOnlySpan<byte> bytes,
             out Rune value,
             out int bytesConsumed
-        ) {
+        )
+        {
             if (!bytes.IsEmpty)
             {
                 byte b = bytes[0];
@@ -934,7 +945,8 @@ namespace System.Text
                 fallback is EncoderReplacementFallback replacementFallback
                 && replacementFallback.MaxCharCount == 1
                 && replacementFallback.DefaultString[0] <= byte.MaxValue
-            ) {
+            )
+            {
                 return true;
             }
 

@@ -42,7 +42,8 @@ namespace System.ComponentModel.Tests
             DataObjectAttribute attribute,
             object other,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, attribute.Equals(other));
         }
 

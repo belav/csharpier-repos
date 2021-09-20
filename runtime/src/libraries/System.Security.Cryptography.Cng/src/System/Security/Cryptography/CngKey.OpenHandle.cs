@@ -18,7 +18,8 @@ namespace System.Security.Cryptography
         public static CngKey Open(
             SafeNCryptKeyHandle keyHandle,
             CngKeyHandleOpenOptions keyHandleOpenOptions
-        ) {
+        )
+        {
             if (keyHandle == null)
                 throw new ArgumentNullException(nameof(keyHandle));
             if (keyHandle.IsClosed || keyHandle.IsInvalid)

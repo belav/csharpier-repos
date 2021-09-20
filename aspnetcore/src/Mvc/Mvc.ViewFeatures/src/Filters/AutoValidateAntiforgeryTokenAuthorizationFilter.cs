@@ -30,7 +30,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
                 || HttpMethods.IsHead(method)
                 || HttpMethods.IsTrace(method)
                 || HttpMethods.IsOptions(method)
-            ) {
+            )
+            {
                 return false;
             }
 

@@ -31,7 +31,8 @@ namespace System.Speech.Internal.Synthesis
         void ISpEngineSite.AddEvents(
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] SpeechEventSapi[] eventsSapi,
             int ulCount
-        ) {
+        )
+        {
             SpeechEventInfo[] events = new SpeechEventInfo[eventsSapi.Length];
             for (int i = 0; i < eventsSapi.Length; i++)
             {

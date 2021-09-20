@@ -173,7 +173,8 @@ namespace System.Web.Mvc.Test
                 ViewContext viewContext,
                 TextWriter writer,
                 object instance
-            ) {
+            )
+            {
                 return;
             }
         }

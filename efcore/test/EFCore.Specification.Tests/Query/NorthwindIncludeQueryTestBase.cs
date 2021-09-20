@@ -979,7 +979,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Include_multi_level_collection_and_then_include_reference_predicate(
             bool async
-        ) {
+        )
+        {
             return AssertSingle(
                 async,
                 ss => ss.Set<Order>().Include(o => o.OrderDetails).ThenInclude(od => od.Product),
@@ -1045,7 +1046,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Include_multiple_references_and_collection_multi_level_reverse(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -1320,7 +1322,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Include_collection_then_include_collection_then_include_reference(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -1407,7 +1410,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Include_multi_level_reference_then_include_collection_predicate(
             bool async
-        ) {
+        )
+        {
             return AssertSingle(
                 async,
                 ss => ss.Set<Order>().Include(o => o.Customer).ThenInclude(c => c.Orders),
@@ -1427,7 +1431,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Include_multiple_references_then_include_collection_multi_level(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -1454,7 +1459,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Include_multiple_references_then_include_collection_multi_level_reverse(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -1553,7 +1559,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Include_references_then_include_collection_multi_level_predicate(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -1612,7 +1619,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Include_with_complex_projection_does_not_change_ordering_of_projection(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2028,7 +2036,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Include_is_not_ignored_when_projection_contains_client_method_and_complex_expression(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2167,7 +2176,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Include_with_cycle_does_not_throw_when_AsNoTrackingWithIdentityResolution(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2183,7 +2193,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Outer_idenfier_correctly_determined_when_doing_include_on_right_side_of_left_join(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>

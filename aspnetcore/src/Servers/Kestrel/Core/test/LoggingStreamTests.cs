@@ -72,7 +72,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                 TState state,
                 Exception exception,
                 Func<TState, Exception, string> formatter
-            ) {
+            )
+            {
                 _logs.Append(formatter(state, exception));
             }
         }

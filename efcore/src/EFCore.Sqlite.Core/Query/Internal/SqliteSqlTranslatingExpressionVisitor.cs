@@ -100,7 +100,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             if (
                 unaryExpression.NodeType == ExpressionType.ArrayLength
                 && unaryExpression.Operand.Type == typeof(byte[])
-            ) {
+            )
+            {
                 return Visit(unaryExpression.Operand) is SqlExpression sqlExpression
                   ? Dependencies.SqlExpressionFactory.Function(
                         "length",
@@ -121,7 +122,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             if (
                 visitedExpression is SqlUnaryExpression sqlUnary
                 && sqlUnary.OperatorType == ExpressionType.Negate
-            ) {
+            )
+            {
                 var operandType = GetProviderType(sqlUnary.Operand);
                 if (operandType == typeof(decimal))
                 {
@@ -200,7 +202,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                         _functionModuloTypes.Contains(GetProviderType(sqlBinary.Left))
                         || _functionModuloTypes.Contains(GetProviderType(sqlBinary.Right))
                     )
-                ) {
+                )
+                {
                     return Dependencies.SqlExpressionFactory.Function(
                         "ef_mod",
                         new[] { sqlBinary.Left, sqlBinary.Right },
@@ -240,7 +243,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                         restrictedTypes.Contains(GetProviderType(sqlBinary.Left))
                         || restrictedTypes.Contains(GetProviderType(sqlBinary.Right))
                     )
-                ) {
+                )
+                {
                     return QueryCompilationContext.NotTranslatedExpression;
                 }
             }
@@ -290,7 +294,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                 || argumentType == typeof(decimal)
                 || argumentType == typeof(TimeSpan)
                 || argumentType == typeof(ulong)
-            ) {
+            )
+            {
                 throw new NotSupportedException(
                     SqliteStrings.AggregateOperationNotSupported(
                         nameof(Queryable.Max),
@@ -319,7 +324,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                 || argumentType == typeof(decimal)
                 || argumentType == typeof(TimeSpan)
                 || argumentType == typeof(ulong)
-            ) {
+            )
+            {
                 throw new NotSupportedException(
                     SqliteStrings.AggregateOperationNotSupported(
                         nameof(Queryable.Min),
@@ -382,7 +388,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             ExpressionType op,
             SqlExpression left,
             SqlExpression right
-        ) {
+        )
+        {
             var actual = Dependencies.SqlExpressionFactory.Function(
                 name: "ef_compare",
                 new[] { left, right },
@@ -424,7 +431,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             ExpressionType op,
             SqlExpression left,
             SqlExpression right
-        ) {
+        )
+        {
             return op switch
             {
                 ExpressionType.Add
@@ -465,7 +473,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                 string name,
                 SqlExpression left,
                 SqlExpression right
-            ) {
+            )
+            {
                 return Dependencies.SqlExpressionFactory.Function(
                     name,
                     new[] { left, right },
@@ -478,7 +487,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             Expression DecimalSubtractExpressionFactoryMethod(
                 SqlExpression left,
                 SqlExpression right
-            ) {
+            )
+            {
                 var subtrahend = Dependencies.SqlExpressionFactory.Function(
                     "ef_negate",
                     new[] { right },

@@ -76,7 +76,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 if (
                     !s_kindPrecedenceMap.TryGetValue(x.Kind(), out var xPrecedence)
                     || !s_kindPrecedenceMap.TryGetValue(y.Kind(), out var yPrecedence)
-                ) {
+                )
+                {
                     // The containing declaration is malformed and contains a node kind we did not expect.
                     // Ignore comparisons with those unexpected nodes and sort them to the end of the declaration.
                     return 1;
@@ -164,7 +165,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 && EqualStaticness(x.Modifiers, y.Modifiers, out result)
                 && EqualReadOnlyness(x.Modifiers, y.Modifiers, out result)
                 && EqualAccessibility(x, x.Modifiers, y, y.Modifiers, out result)
-            ) {
+            )
+            {
                 if (_includeName)
                 {
                     EqualIdentifierName(
@@ -183,7 +185,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             if (
                 EqualStaticness(x.Modifiers, y.Modifiers, out var result)
                 && EqualAccessibility(x, x.Modifiers, y, y.Modifiers, out result)
-            ) {
+            )
+            {
                 EqualParameterCount(x.ParameterList, y.ParameterList, out result);
             }
 
@@ -195,7 +198,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             if (
                 EqualStaticness(x.Modifiers, y.Modifiers, out var result)
                 && EqualAccessibility(x, x.Modifiers, y, y.Modifiers, out result)
-            ) {
+            )
+            {
                 if (!_includeName)
                 {
                     EqualIdentifierName(x.Identifier, y.Identifier, out result);
@@ -208,7 +212,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         private static int Compare(
             ConversionOperatorDeclarationSyntax x,
             ConversionOperatorDeclarationSyntax y
-        ) {
+        )
+        {
             if (x.ImplicitOrExplicitKeyword.Kind() != y.ImplicitOrExplicitKeyword.Kind())
             {
                 return x.ImplicitOrExplicitKeyword.Kind() == SyntaxKind.ImplicitKeyword ? -1 : 1;
@@ -234,7 +239,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             if (
                 EqualStaticness(x.Modifiers, y.Modifiers, out var result)
                 && EqualAccessibility(x, x.Modifiers, y, y.Modifiers, out result)
-            ) {
+            )
+            {
                 if (_includeName)
                 {
                     EqualIdentifierName(x.Identifier, y.Identifier, out result);
@@ -249,7 +255,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             if (
                 EqualStaticness(x.Modifiers, y.Modifiers, out var result)
                 && EqualAccessibility(x, x.Modifiers, y, y.Modifiers, out result)
-            ) {
+            )
+            {
                 EqualParameterCount(x.ParameterList, y.ParameterList, out result);
             }
 
@@ -261,7 +268,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             if (
                 EqualStaticness(x.Modifiers, y.Modifiers, out var result)
                 && EqualAccessibility(x, x.Modifiers, y, y.Modifiers, out result)
-            ) {
+            )
+            {
                 if (_includeName)
                 {
                     EqualIdentifierName(x.Identifier, y.Identifier, out result);
@@ -289,7 +297,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             if (
                 EqualStaticness(x.Modifiers, y.Modifiers, out var result)
                 && EqualAccessibility(x, x.Modifiers, y, y.Modifiers, out result)
-            ) {
+            )
+            {
                 if (_includeName)
                 {
                     EqualIdentifierName(x.Identifier, y.Identifier, out result);
@@ -380,7 +389,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 else if (
                     node.Kind() == SyntaxKind.StructDeclaration
                     || node.Kind() == SyntaxKind.ClassDeclaration
-                ) {
+                )
+                {
                     // Members and nested types default to private
                     return (int)Accessibility.Private;
                 }
@@ -394,7 +404,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             SyntaxTokenList y,
             SyntaxKind modifierKind,
             out int comparisonResult
-        ) {
+        )
+        {
             var xHasModifier = ContainsToken(x, modifierKind);
             var yHasModifier = ContainsToken(y, modifierKind);
 
@@ -432,7 +443,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             SyntaxNode y,
             SyntaxTokenList yModifiers,
             out int comparisonResult
-        ) {
+        )
+        {
             var xAccessibility = GetAccessibilityPrecedence(xModifiers, x.Parent ?? y.Parent);
             var yAccessibility = GetAccessibilityPrecedence(yModifiers, y.Parent ?? x.Parent);
 
@@ -444,7 +456,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             SyntaxToken x,
             SyntaxToken y,
             out int comparisonResult
-        ) {
+        )
+        {
             if (NeitherNull(x, y, out comparisonResult))
             {
                 comparisonResult = string.Compare(
@@ -461,7 +474,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             SyntaxToken x,
             SyntaxToken y,
             out int comparisonResult
-        ) {
+        )
+        {
             if (NeitherNull(x, y, out comparisonResult))
             {
                 s_operatorPrecedenceMap.TryGetValue(x.Kind(), out var xPrecedence);
@@ -477,7 +491,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             BaseParameterListSyntax x,
             BaseParameterListSyntax y,
             out int comparisonResult
-        ) {
+        )
+        {
             var xParameterCount = x.Parameters.Count;
             var yParameterCount = y.Parameters.Count;
 

@@ -38,7 +38,8 @@ namespace Microsoft.Cci
             int tryEndOffset,
             int handlerStartOffset,
             int handlerEndOffset
-        ) {
+        )
+        {
             Debug.Assert(tryStartOffset < tryEndOffset);
             Debug.Assert(tryEndOffset <= handlerStartOffset);
             Debug.Assert(handlerStartOffset < handlerEndOffset);

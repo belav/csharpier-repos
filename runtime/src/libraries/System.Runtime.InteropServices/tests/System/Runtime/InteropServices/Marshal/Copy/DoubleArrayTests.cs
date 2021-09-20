@@ -115,7 +115,8 @@ namespace System.Runtime.InteropServices.Tests
         public void CopyTo_InvalidStartIndexLength_ThrowsArgumentOutOfRangeException(
             int startIndex,
             int length
-        ) {
+        )
+        {
             double[] array = new double[10];
             IntPtr ptr = Marshal.AllocCoTaskMem(sizeof(double) * array.Length);
             try

@@ -453,7 +453,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             List<AnalyzerLoadFailureEventArgs> buildAndLoadGeneratorAndReturnAnyErrors(
                 string? targetFramework
-            ) {
+            )
+            {
                 string targetFrameworkAttributeText =
                     targetFramework is object
                         ? $"[assembly: System.Runtime.Versioning.TargetFramework(\"{targetFramework}\")]"

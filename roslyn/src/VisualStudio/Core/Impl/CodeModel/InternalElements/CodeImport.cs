@@ -23,7 +23,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             FileCodeModel fileCodeModel,
             AbstractCodeElement parent,
             string dottedName
-        ) {
+        )
+        {
             var element = new CodeImport(state, fileCodeModel, parent, dottedName);
             var result = (EnvDTE80.CodeImport)ComAggregate.CreateAggregatedObject(element);
 
@@ -35,7 +36,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             FileCodeModel fileCodeModel,
             int nodeKind,
             string dottedName
-        ) {
+        )
+        {
             var element = new CodeImport(state, fileCodeModel, nodeKind, dottedName);
             return (EnvDTE80.CodeImport)ComAggregate.CreateAggregatedObject(element);
         }

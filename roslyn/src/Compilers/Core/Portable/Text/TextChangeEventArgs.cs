@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Text
             SourceText oldText,
             SourceText newText,
             IEnumerable<TextChangeRange> changes
-        ) {
+        )
+        {
             if (changes == null)
             {
                 throw new ArgumentNullException(nameof(changes));

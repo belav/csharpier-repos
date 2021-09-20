@@ -32,7 +32,8 @@ namespace Internal.Cryptography.Pal
             X509VerificationFlags flags,
             X509ChainElement element,
             bool isEndEntity
-        ) {
+        )
+        {
             foreach (X509ChainStatus status in element.ChainElementStatus)
             {
                 if (status.Status == X509ChainStatusFlags.NoError)

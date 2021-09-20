@@ -109,7 +109,8 @@ namespace System.Net.Http.Functional.Tests
             IBuffer buffer,
             uint count,
             InputStreamOptions options
-        ) {
+        )
+        {
             byte[] dataBytes = ReadInternal((int)count);
 
             var ibuffer = dataBytes.AsBuffer();

@@ -26,7 +26,8 @@ namespace R2RTest
                 string description,
                 Option[] options,
                 Func<BuildOptions, int> action
-            ) {
+            )
+            {
                 Command command = new Command(name, description);
                 foreach (var option in GetCommonOptions())
                     command.AddOption(option);

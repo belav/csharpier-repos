@@ -27,7 +27,8 @@ namespace AutoMapper.UnitTests
                 Destination destination,
                 string destMember,
                 ResolutionContext context
-            ) {
+            )
+            {
                 return "source1";
             }
 
@@ -36,7 +37,8 @@ namespace AutoMapper.UnitTests
                 Destination destination,
                 string destMember,
                 ResolutionContext context
-            ) {
+            )
+            {
                 return "source2";
             }
         }
@@ -86,7 +88,8 @@ namespace AutoMapper.UnitTests
                 string sourceMember,
                 string destMember,
                 ResolutionContext context
-            ) {
+            )
+            {
                 return "Resolved";
             }
         }
@@ -753,7 +756,8 @@ namespace AutoMapper.UnitTests
                 ModelSubObject source,
                 int ignored,
                 ResolutionContext context
-            ) {
+            )
+            {
                 return source.SomeValue + 1;
             }
         }
@@ -1163,7 +1167,8 @@ namespace AutoMapper.UnitTests
                 Source source,
                 Destination destination,
                 ResolutionContext context
-            ) {
+            )
+            {
                 return new Destination { Value = source.Value + 10 };
             }
         }
@@ -1224,7 +1229,8 @@ namespace AutoMapper.UnitTests
                 Source source,
                 Destination destination,
                 ResolutionContext context
-            ) {
+            )
+            {
                 return new Destination { Value = source.Value + _value };
             }
         }
@@ -1426,7 +1432,8 @@ namespace AutoMapper.UnitTests
                 string source,
                 int member,
                 ResolutionContext context
-            ) {
+            )
+            {
                 return int.Parse(source);
             }
         }
@@ -1487,7 +1494,8 @@ namespace AutoMapper.UnitTests
                 int source,
                 object dest,
                 ResolutionContext context
-            ) {
+            )
+            {
                 return source + 5;
             }
         }

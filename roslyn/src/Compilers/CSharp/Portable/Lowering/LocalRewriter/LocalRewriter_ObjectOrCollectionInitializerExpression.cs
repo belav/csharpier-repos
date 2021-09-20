@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static BoundObjectInitializerExpressionBase UpdateInitializers(
             BoundObjectInitializerExpressionBase initializerExpression,
             ImmutableArray<BoundExpression> newInitializers
-        ) {
+        )
+        {
             switch (initializerExpression)
             {
                 case BoundObjectInitializerExpression objectInitializer:
@@ -45,7 +46,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ArrayBuilder<BoundExpression> result,
             BoundExpression rewrittenReceiver,
             BoundExpression initializerExpression
-        ) {
+        )
+        {
             Debug.Assert(!_inExpressionLambda);
             Debug.Assert(rewrittenReceiver != null);
 
@@ -89,7 +91,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private ImmutableArray<BoundExpression> MakeObjectOrCollectionInitializersForExpressionTree(
             BoundExpression initializerExpression
-        ) {
+        )
+        {
             Debug.Assert(_inExpressionLambda);
 
             switch (initializerExpression.Kind)
@@ -127,7 +130,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ArrayBuilder<BoundExpression> result,
             BoundExpression? rewrittenReceiver,
             ImmutableArray<BoundExpression> initializers
-        ) {
+        )
+        {
             Debug.Assert(rewrittenReceiver is { } || _inExpressionLambda);
 
             foreach (var initializer in initializers)
@@ -165,7 +169,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private BoundExpression MakeDynamicCollectionInitializer(
             BoundExpression rewrittenReceiver,
             BoundDynamicCollectionElementInitializer initializer
-        ) {
+        )
+        {
             var rewrittenArguments = VisitList(initializer.Arguments);
 
             // If we are calling a method on a NoPIA type, we need to embed all methods/properties
@@ -191,7 +196,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private BoundExpression? MakeCollectionInitializer(
             BoundExpression? rewrittenReceiver,
             BoundCollectionElementInitializer initializer
-        ) {
+        )
+        {
             MethodSymbol addMethod = initializer.AddMethod;
 
             Debug.Assert(addMethod.Name == "Add");
@@ -289,7 +295,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ArrayBuilder<BoundExpression> result,
             BoundExpression rewrittenReceiver,
             ImmutableArray<BoundExpression> initializers
-        ) {
+        )
+        {
             Debug.Assert(!_inExpressionLambda);
 
             foreach (var initializer in initializers)
@@ -315,7 +322,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ArrayBuilder<BoundExpression> result,
             BoundExpression rewrittenReceiver,
             BoundAssignmentOperator assignment
-        ) {
+        )
+        {
             Debug.Assert(rewrittenReceiver != null);
             Debug.Assert(!_inExpressionLambda);
 
@@ -563,7 +571,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<RefKind> paramRefKindsOpt,
             ArrayBuilder<BoundExpression> sideeffects,
             ref ArrayBuilder<LocalSymbol>? temps
-        ) {
+        )
+        {
             ArrayBuilder<BoundExpression>? newArgs = null;
 
             for (int i = 0; i < args.Length; i++)
@@ -604,7 +613,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression rewrittenReceiver,
             BoundObjectInitializerMember rewrittenLeft,
             bool isRhsNestedInitializer
-        ) {
+        )
+        {
             var memberSymbol = rewrittenLeft.MemberSymbol;
             Debug.Assert(memberSymbol is object);
 

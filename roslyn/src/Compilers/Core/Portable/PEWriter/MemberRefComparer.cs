@@ -28,11 +28,13 @@ namespace Microsoft.Cci
             if (
                 x.GetContainingType(_metadataWriter.Context)
                 != y.GetContainingType(_metadataWriter.Context)
-            ) {
+            )
+            {
                 if (
                     _metadataWriter.GetMemberReferenceParent(x)
                     != _metadataWriter.GetMemberReferenceParent(y)
-                ) {
+                )
+                {
                     return false;
                 }
             }

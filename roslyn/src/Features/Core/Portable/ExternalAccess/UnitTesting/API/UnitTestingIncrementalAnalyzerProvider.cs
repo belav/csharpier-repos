@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
         internal UnitTestingIncrementalAnalyzerProvider(
             Workspace workspace,
             IUnitTestingIncrementalAnalyzerProviderImplementation incrementalAnalyzerProvider
-        ) {
+        )
+        {
             _workspace = workspace;
             _incrementalAnalyzerProvider = incrementalAnalyzerProvider;
         }
@@ -54,7 +55,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
             Workspace workspace,
             string analyzerName,
             IUnitTestingIncrementalAnalyzerProviderImplementation provider
-        ) {
+        )
+        {
             var solutionCrawlerRegistrationService =
                 workspace.Services.GetService<ISolutionCrawlerRegistrationService>();
             if (solutionCrawlerRegistrationService == null)

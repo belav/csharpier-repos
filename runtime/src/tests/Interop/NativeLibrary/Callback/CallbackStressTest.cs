@@ -235,7 +235,8 @@ public class CallbackStressTest
             && s_WrongPInvokesExecuted == 0
             && s_PInvokesExecuted == (s_LoopCounter * 3)
             && s_SEHExceptionCatchCalled == (s_LoopCounter * 2)
-        ) {
+        )
+        {
             Console.WriteLine("PASS");
             return 100;
         }

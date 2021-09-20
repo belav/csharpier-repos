@@ -219,7 +219,8 @@ namespace System.IO.Tests
                     GetTestFilePath() + streamSpecifier,
                     FileMode.Append
                 )
-            ) {
+            )
+            {
                 Assert.False(fs.CanRead);
                 Assert.True(fs.CanWrite);
             }

@@ -29,7 +29,8 @@ namespace Microsoft.Extensions.Options
         public Microsoft.Extensions.Options.ValidateOptionsResult Validate(
             string name,
             TOptions options
-        ) {
+        )
+        {
             throw null;
         }
     }

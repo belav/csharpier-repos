@@ -31,7 +31,8 @@ namespace Microsoft.AspNetCore.Routing
             IEndpointRouteBuilder endpointRouteBuilder,
             DiagnosticListener diagnosticListener,
             RequestDelegate next
-        ) {
+        )
+        {
             if (endpointRouteBuilder == null)
             {
                 throw new ArgumentNullException(nameof(endpointRouteBuilder));
@@ -78,7 +79,8 @@ namespace Microsoft.AspNetCore.Routing
                 EndpointRoutingMiddleware middleware,
                 HttpContext httpContext,
                 Task<Matcher> matcherTask
-            ) {
+            )
+            {
                 var matcher = await matcherTask;
                 await matcher.MatchAsync(httpContext);
                 await middleware.SetRoutingAndContinue(httpContext);
@@ -88,7 +90,8 @@ namespace Microsoft.AspNetCore.Routing
                 EndpointRoutingMiddleware middleware,
                 HttpContext httpContext,
                 Task matchTask
-            ) {
+            )
+            {
                 await matchTask;
                 await middleware.SetRoutingAndContinue(httpContext);
             }
@@ -109,7 +112,8 @@ namespace Microsoft.AspNetCore.Routing
                 if (
                     _diagnosticListener.IsEnabled()
                     && _diagnosticListener.IsEnabled(DiagnosticsEndpointMatchedKey)
-                ) {
+                )
+                {
                     // We're just going to send the HttpContext since it has all of the relevant information
                     _diagnosticListener.Write(DiagnosticsEndpointMatchedKey, httpContext);
                 }

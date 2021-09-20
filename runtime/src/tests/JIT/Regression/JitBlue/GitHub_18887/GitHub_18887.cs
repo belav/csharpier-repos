@@ -37,7 +37,8 @@ internal class BufferState
         if (
             Interlocked.CompareExchange(ref this.currentState, desiredState, expectedCurrentState)
             == expectedCurrentState
-        ) {
+        )
+        {
             return true;
         }
 

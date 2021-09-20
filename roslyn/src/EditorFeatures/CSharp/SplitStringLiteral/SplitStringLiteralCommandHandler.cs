@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.SplitStringLiteral
         public SplitStringLiteralCommandHandler(
             ITextUndoHistoryRegistry undoHistoryRegistry,
             IEditorOperationsFactoryService editorOperationsFactoryService
-        ) {
+        )
+        {
             _undoHistoryRegistry = undoHistoryRegistry;
             _editorOperationsFactoryService = editorOperationsFactoryService;
         }
@@ -169,7 +170,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.SplitStringLiteral
             DocumentOptionSet options,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var useTabs = options.GetOption(FormattingOptions.UseTabs);
             var tabSize = options.GetOption(FormattingOptions.TabSize);
             var indentStyle = options.GetOption(

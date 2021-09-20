@@ -62,7 +62,8 @@ namespace System.Web.WebPages
             InvokeMemberBinder binder,
             object[] args,
             out object result
-        ) {
+        )
+        {
             result = RealObject.GetType()
                 .InvokeMember(
                     binder.Name,

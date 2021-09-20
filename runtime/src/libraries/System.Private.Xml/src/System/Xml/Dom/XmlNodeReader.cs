@@ -1532,7 +1532,8 @@ namespace System.Xml
                 if (
                     (_readerNav.NodeType == XmlNodeType.Document)
                     || (_readerNav.NodeType == XmlNodeType.DocumentFragment)
-                ) {
+                )
+                {
                     _bStartFromDocument = true;
                     if (!ReadNextNode(fSkipChildren))
                     {
@@ -1662,7 +1663,8 @@ namespace System.Xml
                 && _nodeType != XmlNodeType.EndElement
                 && _readerNav.NodeType == XmlNodeType.Element
                 && !_readerNav.IsEmptyElement
-            ) {
+            )
+            {
                 _nodeType = XmlNodeType.EndElement;
                 return true;
             }
@@ -1945,7 +1947,8 @@ namespace System.Xml
 
         IDictionary<string, string> IXmlNamespaceResolver.GetNamespacesInScope(
             XmlNamespaceScope scope
-        ) {
+        )
+        {
             return _readerNav.GetNamespacesInScope(scope);
         }
 

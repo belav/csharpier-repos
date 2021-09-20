@@ -148,12 +148,14 @@ namespace System
             {
                 foreach (
                     TimeZoneInfo.AdjustmentRule rule in TimeZoneInfo.Local.GetAdjustmentRules()
-                ) {
+                )
+                {
                     if (
                         rule.DateStart.Year <= year
                         && rule.DateEnd.Year >= year
                         && rule.DaylightDelta != TimeSpan.Zero
-                    ) {
+                    )
+                    {
                         start = TimeZoneInfo.TransitionTimeToDateTime(
                             year,
                             rule.DaylightTransitionStart

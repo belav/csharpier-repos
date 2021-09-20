@@ -216,7 +216,8 @@ namespace System.Net.Http.Tests
             int expectedLength,
             long? expectedFrom,
             long? expectedTo
-        ) {
+        )
+        {
             RangeItemHeaderValue result = null;
             Assert.Equal(
                 expectedLength,
@@ -238,7 +239,8 @@ namespace System.Net.Http.Tests
             int startIndex,
             int expectedLength,
             params Tuple<long?, long?>[] expectedRanges
-        ) {
+        )
+        {
             List<RangeItemHeaderValue> ranges = new List<RangeItemHeaderValue>();
             Assert.Equal(
                 expectedLength,

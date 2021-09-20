@@ -7,10 +7,8 @@ namespace System.Reflection.Context.Custom
 {
     internal sealed class CustomConstructorInfo : ProjectingConstructorInfo
     {
-        public CustomConstructorInfo(
-            ConstructorInfo template,
-            CustomReflectionContext context
-        ) : base(template, context.Projector)
+        public CustomConstructorInfo(ConstructorInfo template, CustomReflectionContext context)
+            : base(template, context.Projector)
         {
             ReflectionContext = context;
         }

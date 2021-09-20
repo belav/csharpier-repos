@@ -13,7 +13,8 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
         public DefaultCodeTarget(
             RazorCodeGenerationOptions options,
             IEnumerable<ICodeTargetExtension> extensions
-        ) {
+        )
+        {
             _options = options;
             Extensions = extensions.ToArray();
         }

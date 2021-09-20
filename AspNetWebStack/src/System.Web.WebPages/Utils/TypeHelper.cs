@@ -58,7 +58,8 @@ namespace System.Web.WebPages
         public static void AddAnonymousObjectToDictionary(
             IDictionary<string, object> dictionary,
             object value
-        ) {
+        )
+        {
             var values = ObjectToDictionary(value);
             foreach (var item in values)
             {

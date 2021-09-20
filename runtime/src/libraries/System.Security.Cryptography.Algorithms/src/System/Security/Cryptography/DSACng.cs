@@ -78,7 +78,8 @@ namespace System.Security.Cryptography
                 int kdfCount,
                 Span<byte> destination,
                 out int bytesWritten
-            ) {
+            )
+            {
                 using (SafeNCryptKeyHandle keyHandle = GetDuplicatedKeyHandle())
                 {
                     return CngKeyLite.TryExportPkcs8KeyBlob(

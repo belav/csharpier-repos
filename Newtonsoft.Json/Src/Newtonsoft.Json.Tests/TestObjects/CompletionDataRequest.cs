@@ -32,7 +32,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
             int cursorPosition,
             string dataSource,
             string project
-        ) {
+        )
+        {
             Text = text;
             CursorPosition = cursorPosition;
             DataSource = dataSource;

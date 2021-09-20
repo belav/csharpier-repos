@@ -229,7 +229,8 @@ namespace JIT.HardwareIntrinsics.X86
             UInt64 right,
             UInt64 result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             var isUnexpectedResult = false;
 
             // The validation logic defined here for Bmi2.ParallelBitDeposit and Bmi2.ParallelBitExtract is

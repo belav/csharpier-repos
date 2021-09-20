@@ -440,7 +440,8 @@ namespace System.ServiceModel.Syndication.Tests
             string ns,
             string value,
             string version
-        ) {
+        )
+        {
             Assert.False(
                 Formatter.TryParseAttributeEntryPoint(
                     name,
@@ -484,7 +485,8 @@ namespace System.ServiceModel.Syndication.Tests
             string ns,
             string value,
             string version
-        ) {
+        )
+        {
             Assert.False(
                 Formatter.TryParseAttributeEntryPoint(
                     name,
@@ -519,7 +521,8 @@ namespace System.ServiceModel.Syndication.Tests
             string ns,
             string value,
             string version
-        ) {
+        )
+        {
             Assert.False(
                 Formatter.TryParseAttributeEntryPoint(name, ns, value, new Workspace(), version)
             );
@@ -548,7 +551,8 @@ namespace System.ServiceModel.Syndication.Tests
             string ns,
             string value,
             string version
-        ) {
+        )
+        {
             Assert.False(
                 Formatter.TryParseAttributeEntryPoint(
                     name,
@@ -1119,7 +1123,8 @@ namespace System.ServiceModel.Syndication.Tests
                 string value,
                 ServiceDocument document,
                 string version
-            ) {
+            )
+            {
                 return TryParseAttribute(name, ns, value, document, version);
             }
 
@@ -1129,7 +1134,8 @@ namespace System.ServiceModel.Syndication.Tests
                 string value,
                 ResourceCollectionInfo collection,
                 string version
-            ) {
+            )
+            {
                 return TryParseAttribute(name, ns, value, collection, version);
             }
 
@@ -1139,7 +1145,8 @@ namespace System.ServiceModel.Syndication.Tests
                 string value,
                 CategoriesDocument categories,
                 string version
-            ) {
+            )
+            {
                 return TryParseAttribute(name, ns, value, categories, version);
             }
 
@@ -1149,7 +1156,8 @@ namespace System.ServiceModel.Syndication.Tests
                 string value,
                 Workspace workspace,
                 string version
-            ) {
+            )
+            {
                 return TryParseAttribute(name, ns, value, workspace, version);
             }
 
@@ -1157,7 +1165,8 @@ namespace System.ServiceModel.Syndication.Tests
                 XmlReader reader,
                 ServiceDocument document,
                 string version
-            ) {
+            )
+            {
                 return TryParseElement(reader, document, version);
             }
 
@@ -1165,7 +1174,8 @@ namespace System.ServiceModel.Syndication.Tests
                 XmlReader reader,
                 ResourceCollectionInfo collection,
                 string version
-            ) {
+            )
+            {
                 return TryParseElement(reader, collection, version);
             }
 
@@ -1173,7 +1183,8 @@ namespace System.ServiceModel.Syndication.Tests
                 XmlReader reader,
                 CategoriesDocument categories,
                 string version
-            ) {
+            )
+            {
                 return TryParseElement(reader, categories, version);
             }
 
@@ -1181,7 +1192,8 @@ namespace System.ServiceModel.Syndication.Tests
                 XmlReader reader,
                 Workspace workspace,
                 string version
-            ) {
+            )
+            {
                 return TryParseElement(reader, workspace, version);
             }
 
@@ -1189,7 +1201,8 @@ namespace System.ServiceModel.Syndication.Tests
                 XmlWriter writer,
                 CategoriesDocument categories,
                 string version
-            ) {
+            )
+            {
                 WriteAttributeExtensions(writer, categories, version);
             }
 
@@ -1197,7 +1210,8 @@ namespace System.ServiceModel.Syndication.Tests
                 XmlWriter writer,
                 ResourceCollectionInfo collection,
                 string version
-            ) {
+            )
+            {
                 WriteAttributeExtensions(writer, collection, version);
             }
 
@@ -1205,7 +1219,8 @@ namespace System.ServiceModel.Syndication.Tests
                 XmlWriter writer,
                 ServiceDocument document,
                 string version
-            ) {
+            )
+            {
                 WriteAttributeExtensions(writer, document, version);
             }
 
@@ -1213,7 +1228,8 @@ namespace System.ServiceModel.Syndication.Tests
                 XmlWriter writer,
                 Workspace workspace,
                 string version
-            ) {
+            )
+            {
                 WriteAttributeExtensions(writer, workspace, version);
             }
 
@@ -1221,7 +1237,8 @@ namespace System.ServiceModel.Syndication.Tests
                 XmlWriter writer,
                 CategoriesDocument categories,
                 string version
-            ) {
+            )
+            {
                 WriteElementExtensions(writer, categories, version);
             }
 
@@ -1229,7 +1246,8 @@ namespace System.ServiceModel.Syndication.Tests
                 XmlWriter writer,
                 ResourceCollectionInfo collection,
                 string version
-            ) {
+            )
+            {
                 WriteElementExtensions(writer, collection, version);
             }
 
@@ -1237,7 +1255,8 @@ namespace System.ServiceModel.Syndication.Tests
                 XmlWriter writer,
                 ServiceDocument document,
                 string version
-            ) {
+            )
+            {
                 WriteElementExtensions(writer, document, version);
             }
 
@@ -1245,7 +1264,8 @@ namespace System.ServiceModel.Syndication.Tests
                 XmlWriter writer,
                 Workspace workspace,
                 string version
-            ) {
+            )
+            {
                 WriteElementExtensions(writer, workspace, version);
             }
 

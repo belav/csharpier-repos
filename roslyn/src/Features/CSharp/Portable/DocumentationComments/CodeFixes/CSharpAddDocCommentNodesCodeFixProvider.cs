@@ -72,7 +72,8 @@ namespace Microsoft.CodeAnalysis.DiagnosticComments.CodeFixes
                     descendentXmlElements.Any(
                         element => GetXmlElementLocalName(element) == NodeName
                     )
-                ) {
+                )
+                {
                     return nodeStructure;
                 }
             }
@@ -99,7 +100,8 @@ namespace Microsoft.CodeAnalysis.DiagnosticComments.CodeFixes
         protected override XmlElementSyntax GetNewNode(
             string parameterName,
             bool isFirstNodeInComment
-        ) {
+        )
+        {
             // This is the simplest way of getting the XML node with the correct leading trivia
             // However, trying to add a `DocumentationCommentTriviaSyntax` to the node in the abstract
             // implementation causes an exception, so we have to add an XmlElementSyntax

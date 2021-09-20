@@ -32,7 +32,8 @@ namespace System.Web.Razor.Parser
             Action<BlockType> startBlockCallback,
             Action<BlockType> endBlockCallback,
             Action completeCallback
-        ) {
+        )
+        {
             _spanCallback = spanCallback;
             _errorCallback = errorCallback;
             _startBlockCallback = startBlockCallback;
@@ -76,7 +77,8 @@ namespace System.Web.Razor.Parser
             SynchronizationContext syncContext,
             T param,
             Action<T> callback
-        ) {
+        )
+        {
             if (callback != null)
             {
                 if (syncContext != null)

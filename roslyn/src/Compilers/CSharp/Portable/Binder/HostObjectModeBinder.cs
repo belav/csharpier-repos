@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Binder originalBinder,
             bool diagnose,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             var hostObjectType = GetHostObjectType();
             if (hostObjectType.Kind == SymbolKind.ErrorType)
             {
@@ -73,7 +74,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             LookupSymbolsInfo result,
             LookupOptions options,
             Binder originalBinder
-        ) {
+        )
+        {
             var hostObjectType = GetHostObjectType();
             if (hostObjectType.Kind != SymbolKind.ErrorType)
             {

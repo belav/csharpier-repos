@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
             object? title,
             UnifiedSuggestedActionSetPriority priority,
             TextSpan? applicableToSpan
-        ) {
+        )
+        {
             CategoryName = categoryName;
             Actions = actions;
             Title = title;

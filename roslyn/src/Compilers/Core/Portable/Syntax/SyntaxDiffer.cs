@@ -79,7 +79,8 @@ namespace Microsoft.CodeAnalysis
         internal static IList<TextSpan> GetPossiblyDifferentTextSpans(
             SyntaxTree? before,
             SyntaxTree? after
-        ) {
+        )
+        {
             if (object.ReferenceEquals(before, after))
             {
                 // They're the same, so nothing changed.
@@ -104,7 +105,8 @@ namespace Microsoft.CodeAnalysis
         internal static IList<TextSpan> GetPossiblyDifferentTextSpans(
             SyntaxNode oldNode,
             SyntaxNode newNode
-        ) {
+        )
+        {
             return new SyntaxDiffer(oldNode, newNode, computeNewText: false).ComputeSpansInNew();
         }
 
@@ -343,7 +345,8 @@ namespace Microsoft.CodeAnalysis
                             _oldNodes.Peek().FullSpan.Length,
                             _newNodes.Peek().FullSpan.Length
                         )
-                    ) {
+                    )
+                    {
                         return new DiffAction(DiffOp.ReduceBoth, 1);
                     }
                 }
@@ -379,7 +382,8 @@ namespace Microsoft.CodeAnalysis
             out int index,
             out int similarity,
             int startIndex = 0
-        ) {
+        )
+        {
             index = -1;
             similarity = -1;
 
@@ -563,7 +567,8 @@ namespace Microsoft.CodeAnalysis
                 TextChangeRange range,
                 Queue<SyntaxNodeOrToken>? oldNodes,
                 Queue<SyntaxNodeOrToken>? newNodes
-            ) {
+            )
+            {
                 this.Range = range;
                 this.OldNodes = oldNodes;
                 this.NewNodes = newNodes;
@@ -660,7 +665,8 @@ namespace Microsoft.CodeAnalysis
             TextChangeRange textChangeRange,
             in SyntaxNodeOrToken removedNode,
             SyntaxNodeOrToken insertedNode
-        ) {
+        )
+        {
             if (_changes.Count > 0)
             {
                 var last = _changes[_changes.Count - 1];
@@ -760,7 +766,8 @@ namespace Microsoft.CodeAnalysis
         private static Queue<SyntaxNodeOrToken>? Combine(
             Queue<SyntaxNodeOrToken>? first,
             Queue<SyntaxNodeOrToken>? next
-        ) {
+        )
+        {
             if (first == null || first.Count == 0)
             {
                 return next;
@@ -922,7 +929,8 @@ namespace Microsoft.CodeAnalysis
             StringBuilder newText,
             out int commonLeadingCount,
             out int commonTrailingCount
-        ) {
+        )
+        {
             int maxChars = Math.Min(oldText.Length, newText.Length);
 
             commonLeadingCount = 0;
@@ -943,7 +951,8 @@ namespace Microsoft.CodeAnalysis
                 if (
                     oldText[oldText.Length - commonTrailingCount - 1]
                     != newText[newText.Length - commonTrailingCount - 1]
-                ) {
+                )
+                {
                     break;
                 }
             }

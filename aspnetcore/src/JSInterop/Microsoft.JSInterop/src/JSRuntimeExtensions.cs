@@ -25,7 +25,8 @@ namespace Microsoft.JSInterop
             this IJSRuntime jsRuntime,
             string identifier,
             params object[] args
-        ) {
+        )
+        {
             if (jsRuntime is null)
             {
                 throw new ArgumentNullException(nameof(jsRuntime));
@@ -77,7 +78,8 @@ namespace Microsoft.JSInterop
             string identifier,
             CancellationToken cancellationToken,
             params object?[]? args
-        ) {
+        )
+        {
             if (jsRuntime is null)
             {
                 throw new ArgumentNullException(nameof(jsRuntime));
@@ -102,7 +104,8 @@ namespace Microsoft.JSInterop
             string identifier,
             CancellationToken cancellationToken,
             params object[] args
-        ) {
+        )
+        {
             if (jsRuntime is null)
             {
                 throw new ArgumentNullException(nameof(jsRuntime));
@@ -148,7 +151,8 @@ namespace Microsoft.JSInterop
             string identifier,
             TimeSpan timeout,
             params object[] args
-        ) {
+        )
+        {
             if (jsRuntime is null)
             {
                 throw new ArgumentNullException(nameof(jsRuntime));

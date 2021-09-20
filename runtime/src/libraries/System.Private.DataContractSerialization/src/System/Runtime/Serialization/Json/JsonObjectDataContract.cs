@@ -18,7 +18,8 @@ namespace System.Runtime.Serialization.Json
         public override object? ReadJsonValueCore(
             XmlReaderDelegator jsonReader,
             XmlObjectSerializerReadContextComplexJson? context
-        ) {
+        )
+        {
             object? obj;
             string? contentMode = jsonReader.GetAttribute(JsonGlobals.typeString);
 
@@ -68,7 +69,8 @@ namespace System.Runtime.Serialization.Json
             object obj,
             XmlObjectSerializerWriteContextComplexJson? context,
             RuntimeTypeHandle declaredTypeHandle
-        ) {
+        )
+        {
             jsonWriter.WriteAttributeString(
                 null,
                 JsonGlobals.typeString,
@@ -96,7 +98,8 @@ namespace System.Runtime.Serialization.Json
                         NumberFormatInfo.InvariantInfo,
                         out intValue
                     )
-                ) {
+                )
+                {
                     objectTypeCode = TypeCode.Int32;
                     return intValue;
                 }
@@ -109,7 +112,8 @@ namespace System.Runtime.Serialization.Json
                         NumberFormatInfo.InvariantInfo,
                         out longValue
                     )
-                ) {
+                )
+                {
                     objectTypeCode = TypeCode.Int64;
                     return longValue;
                 }
@@ -123,7 +127,8 @@ namespace System.Runtime.Serialization.Json
                     NumberFormatInfo.InvariantInfo,
                     out decimalValue
                 )
-            ) {
+            )
+            {
                 objectTypeCode = TypeCode.Decimal;
 
                 //check for decimal underflow

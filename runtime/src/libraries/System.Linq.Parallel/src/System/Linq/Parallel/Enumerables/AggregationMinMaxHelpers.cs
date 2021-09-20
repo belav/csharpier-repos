@@ -72,7 +72,8 @@ namespace System.Linq
 
         private static Func<Pair<bool, T>, T, Pair<bool, T>> MakeIntermediateReduceFunction(
             int sign
-        ) {
+        )
+        {
             Comparer<T> comparer = Util.GetDefaultComparer<T>();
 
             // Note that we capture the 'sign' argument and 'comparer' local, and therefore the C#
@@ -90,7 +91,8 @@ namespace System.Linq
                         !accumulator.First
                         || Util.Sign(comparer.Compare(element, accumulator.Second)) == sign
                     )
-                ) {
+                )
+                {
                     return new Pair<bool, T>(true, element);
                 }
 
@@ -101,7 +103,8 @@ namespace System.Linq
 
         private static Func<Pair<bool, T>, Pair<bool, T>, Pair<bool, T>> MakeFinalReduceFunction(
             int sign
-        ) {
+        )
+        {
             Comparer<T> comparer = Util.GetDefaultComparer<T>();
 
             // Note that we capture the 'sign' argument and 'comparer' local, and therefore the C#
@@ -119,7 +122,8 @@ namespace System.Linq
                         !accumulator.First
                         || Util.Sign(comparer.Compare(element.Second, accumulator.Second)) == sign
                     )
-                ) {
+                )
+                {
                     Debug.Assert(
                         default(T) != null || element.Second != null,
                         "nulls unexpected in final reduce"

@@ -36,7 +36,8 @@ namespace JitTest
             ref int[][][][] b,
             ref char[][] seq,
             ref int[] len
-        ) {
+        )
+        {
             int[] ind = new int[RANK];
             for (ind[0] = 1; ind[0] < len[0]; ind[0]++)
             {

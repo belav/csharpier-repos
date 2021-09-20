@@ -353,7 +353,8 @@ namespace System.IO
                         // Check for sequential separators past the first position (we need to keep initial two for UNC/extended)
                         || (i > 0 && i + 1 < path.Length && IsDirectorySeparator(path[i + 1]))
                     )
-                ) {
+                )
+                {
                     normalized = false;
                     break;
                 }

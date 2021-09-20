@@ -18,7 +18,8 @@ namespace WebApiHelpPageWebHost.UnitTest.Helpers
             string controllerName,
             string actionName,
             params string[] parameterNames
-        ) {
+        )
+        {
             if (config == null)
             {
                 config = new HttpConfiguration();
@@ -45,7 +46,8 @@ namespace WebApiHelpPageWebHost.UnitTest.Helpers
                         actionName,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     HashSet<string> actionParameterSet = new HashSet<string>(
                         actionDescriptor.GetParameters().Select(p => p.ParameterName),
                         StringComparer.OrdinalIgnoreCase

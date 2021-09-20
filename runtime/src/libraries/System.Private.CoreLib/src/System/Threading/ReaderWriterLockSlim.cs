@@ -968,7 +968,8 @@ namespace System.Threading
         private void LazyCreateEvent(
             [NotNull] ref EventWaitHandle? waitEvent,
             EnterLockType enterLockType
-        ) {
+        )
+        {
 #if DEBUG
             Debug.Assert(_spinLock.IsHeld);
             Debug.Assert(waitEvent == null);
@@ -1018,7 +1019,8 @@ namespace System.Threading
             ref uint numWaiters,
             TimeoutTracker timeout,
             EnterLockType enterLockType
-        ) {
+        )
+        {
 #if DEBUG
             Debug.Assert(_spinLock.IsHeld);
 #endif
@@ -1065,7 +1067,8 @@ namespace System.Threading
             if (
                 waiterSignaledState != WaiterStates.None
                 && (_waiterStates & waiterSignaledState) != WaiterStates.None
-            ) {
+            )
+            {
                 _waiterStates &= ~waiterSignaledState;
             }
             waitEvent.Reset();
@@ -1097,7 +1100,8 @@ namespace System.Threading
                     waitSuccessful
                     && waiterSignaledState != WaiterStates.None
                     && (_waiterStates & waiterSignaledState) != WaiterStates.None
-                ) {
+                )
+                {
                     // Indicate that a signaled waiter of this type has woken. Since non-read waiters are signaled to wake one
                     // at a time, we avoid waking up more than one waiter of that type upon successive enter/exit loops until
                     // the signaled thread actually wakes up. For example, if there are multiple write waiters and one thread is
@@ -1224,7 +1228,8 @@ namespace System.Threading
                 if (
                     (_waiterStates & WaiterStates.UpgradeableReadWaiterSignaled)
                     == WaiterStates.None
-                ) {
+                )
+                {
                     _waiterStates |= WaiterStates.UpgradeableReadWaiterSignaled;
                 }
                 else
@@ -1702,7 +1707,8 @@ namespace System.Threading
                     if (
                         spinIndex
                         >= (LockSpinCount + LockSleep0Count + DeprioritizedLockSleep1Count)
-                    ) {
+                    )
+                    {
                         reason |= EnterSpinLockReason.Wait;
                         spinIndex = -1;
                     }

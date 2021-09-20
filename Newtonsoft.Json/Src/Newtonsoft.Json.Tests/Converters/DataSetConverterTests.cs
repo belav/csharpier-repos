@@ -651,7 +651,8 @@ namespace Newtonsoft.Json.Tests.Converters
                 JsonWriter writer,
                 object value,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 var dataTableSerializer = new JsonSerializer
                 {
                     ContractResolver = new LowercaseContractResolver()

@@ -1348,7 +1348,8 @@ namespace Microsoft.VisualBasic.FileIO.Tests
             string TestData,
             string TestFileName,
             string PathFromBase = null
-        ) {
+        )
+        {
             Assert.False(String.IsNullOrEmpty(TestFileName));
             var TempFileNameWithPath = TestDirectory;
             if (!string.IsNullOrEmpty(PathFromBase))

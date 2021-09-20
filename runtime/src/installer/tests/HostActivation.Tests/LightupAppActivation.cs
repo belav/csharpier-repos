@@ -603,7 +603,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             string customLightupPath,
             string version,
             string libDepsJson
-        ) {
+        )
+        {
             customLightupPath = Path.Combine(customLightupPath, version);
 
             // Create the folder to which lightup.deps.json will be copied to.
@@ -616,7 +617,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         private static string CreateAdditionalDeps(
             string destDir,
             JObject immutableCollectionVersionInfo
-        ) {
+        )
+        {
             DirectoryInfo dir = new DirectoryInfo(destDir);
             if (dir.Exists)
             {
@@ -654,7 +656,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         private static void CopyLightupLib(
             TestProjectFixture fixtureApp,
             TestProjectFixture fixtureLib
-        ) {
+        )
+        {
             var appDll = fixtureApp.TestProject.AppDll;
             var libDll = fixtureLib.TestProject.AppDll;
 

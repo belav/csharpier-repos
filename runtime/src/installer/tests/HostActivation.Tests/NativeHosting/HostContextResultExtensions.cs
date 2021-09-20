@@ -11,7 +11,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             this CommandResultAssertions assertion,
             string appPath,
             string[] appArgs
-        ) {
+        )
+        {
             var constraint = assertion.HaveStdOutContaining("mock coreclr_initialize() called")
                 .And.HaveStdOutContaining("mock coreclr_execute_assembly() called")
                 .And.HaveStdOutContaining($"mock managedAssemblyPath:{appPath}")
@@ -28,14 +29,16 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
 
         public static AndConstraint<CommandResultAssertions> CreateDelegateMock(
             this CommandResultAssertions assertion
-        ) {
+        )
+        {
             return assertion.HaveStdOutContaining("mock coreclr_initialize() called")
                 .And.HaveStdOutContaining("mock coreclr_create_delegate() called");
         }
 
         public static AndConstraint<CommandResultAssertions> CreateDelegateMock_COM(
             this CommandResultAssertions assertion
-        ) {
+        )
+        {
             return assertion.CreateDelegateMock()
                 .And.HaveStdOutContaining("mock entryPointAssemblyName:System.Private.CoreLib")
                 .And.HaveStdOutContaining(
@@ -48,7 +51,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
 
         public static AndConstraint<CommandResultAssertions> CreateDelegateMock_InMemoryAssembly(
             this CommandResultAssertions assertion
-        ) {
+        )
+        {
             return assertion.CreateDelegateMock()
                 .And.HaveStdOutContaining("mock entryPointAssemblyName:System.Private.CoreLib")
                 .And.HaveStdOutContaining(
@@ -61,28 +65,32 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             this CommandResultAssertions assertion,
             string name,
             string value
-        ) {
+        )
+        {
             return assertion.HaveStdOutContaining($"mock property[{name}] = {value}");
         }
 
         public static AndConstraint<CommandResultAssertions> NotHavePropertyMock(
             this CommandResultAssertions assertion,
             string name
-        ) {
+        )
+        {
             return assertion.NotHaveStdOutContaining($"mock property[{name}]");
         }
 
         public static AndConstraint<CommandResultAssertions> InitializeContextForApp(
             this CommandResultAssertions assertion,
             string path
-        ) {
+        )
+        {
             return assertion.HaveStdErrContaining($"Initialized context for app: {path}");
         }
 
         public static AndConstraint<CommandResultAssertions> InitializeContextForConfig(
             this CommandResultAssertions assertion,
             string path
-        ) {
+        )
+        {
             return assertion.HaveStdErrContaining($"Initialized context for config: {path}");
         }
 
@@ -90,7 +98,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             this CommandResultAssertions assertion,
             string path,
             int statusCode
-        ) {
+        )
+        {
             return assertion.HaveStdErrContaining(
                     $"Initialized secondary context for config: {path}"
                 )
@@ -102,7 +111,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
         public static AndConstraint<CommandResultAssertions> FailToInitializeContextForConfig(
             this CommandResultAssertions assertion,
             int errorCode
-        ) {
+        )
+        {
             return assertion.HaveStdOutContaining(
                 $"hostfxr_initialize_for_runtime_config failed: 0x{errorCode.ToString("x")}"
             );
@@ -113,7 +123,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             string prefix,
             string name,
             string value
-        ) {
+        )
+        {
             return assertion.HaveStdOutContaining(
                 $"{prefix}hostfxr_get_runtime_property_value succeeded for property: {name}={value}"
             );
@@ -124,7 +135,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             string prefix,
             string name,
             int errorCode
-        ) {
+        )
+        {
             return assertion.HaveStdOutContaining(
                 $"{prefix}hostfxr_get_runtime_property_value failed for property: {name} - 0x{errorCode.ToString("x")}"
             );
@@ -134,7 +146,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             this CommandResultAssertions assertion,
             string prefix,
             string name
-        ) {
+        )
+        {
             return assertion.HaveStdOutContaining(
                 $"{prefix}hostfxr_set_runtime_property_value succeeded for property: {name}"
             );
@@ -145,7 +158,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             string prefix,
             string name,
             int errorCode
-        ) {
+        )
+        {
             return assertion.HaveStdOutContaining(
                 $"{prefix}hostfxr_set_runtime_property_value failed for property: {name} - 0x{errorCode.ToString("x")}"
             );
@@ -156,7 +170,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             string prefix,
             string name,
             string value
-        ) {
+        )
+        {
             return assertion.HaveStdOutContaining(
                     $"{prefix}hostfxr_get_runtime_properties succeeded"
                 )
@@ -169,7 +184,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             this CommandResultAssertions assertion,
             string prefix,
             string name
-        ) {
+        )
+        {
             return assertion.HaveStdOutContaining(
                     $"{prefix}hostfxr_get_runtime_properties succeeded"
                 )
@@ -180,7 +196,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             this CommandResultAssertions assertion,
             string prefix,
             int errorCode
-        ) {
+        )
+        {
             return assertion.HaveStdOutContaining(
                 $"{prefix}hostfxr_get_runtime_properties failed - 0x{errorCode.ToString("x")}"
             );

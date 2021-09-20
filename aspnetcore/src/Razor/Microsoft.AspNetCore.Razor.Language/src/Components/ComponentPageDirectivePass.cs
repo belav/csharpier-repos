@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         protected override void ExecuteCore(
             RazorCodeDocument codeDocument,
             DocumentIntermediateNode documentNode
-        ) {
+        )
+        {
             if (codeDocument == null)
             {
                 throw new ArgumentNullException(nameof(codeDocument));
@@ -45,7 +46,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 if (
                     FileKinds.IsComponentImport(codeDocument.GetFileKind())
                     || directive.Node.IsImported()
-                ) {
+                )
+                {
                     directive.Node.Diagnostics.Add(
                         ComponentDiagnosticFactory.CreatePageDirective_CannotBeImported(
                             directive.Node.Source.Value
@@ -77,7 +79,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                     && routeToken.Content[0] == '\"'
                     && routeToken.Content[1] == '/'
                     && routeToken.Content[routeToken.Content.Length - 1] == '\"'
-                ) {
+                )
+                {
                     var template = routeToken.Content.Substring(1, routeToken.Content.Length - 2);
                     @namespace.Children.Insert(index++, new RouteAttributeExtensionNode(template));
                 }

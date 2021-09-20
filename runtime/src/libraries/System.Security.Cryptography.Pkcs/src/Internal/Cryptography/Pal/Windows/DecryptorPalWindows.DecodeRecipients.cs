@@ -48,7 +48,8 @@ namespace Internal.Cryptography.Pal.Windows
         private static IEnumerable<RecipientInfo> ToRecipientInfosForThisIndex(
             SafeHandle pCmsgCmsRecipientInfoMemory,
             int index
-        ) {
+        )
+        {
             bool mustRelease = false;
             pCmsgCmsRecipientInfoMemory.DangerousAddRef(ref mustRelease);
             try

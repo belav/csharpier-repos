@@ -20,7 +20,8 @@ namespace System.Net.Security.Tests
             X509Certificate certificate,
             X509Chain chain,
             SslPolicyErrors sslPolicyErrors
-        ) {
+        )
+        {
             return true; // allow everything
         }
 
@@ -48,7 +49,8 @@ namespace System.Net.Security.Tests
                         null,
                         EncryptionPolicy.RequireEncryption
                     )
-                ) {
+                )
+                {
                     await sslStream.AuthenticateAsClientAsync(
                         "localhost",
                         null,
@@ -98,7 +100,8 @@ namespace System.Net.Security.Tests
         private static void CheckChannelBinding(
             ChannelBindingKind kind,
             ChannelBinding channelBinding
-        ) {
+        )
+        {
             if (channelBinding != null)
             {
                 const string PrefixEndpoint = "tls-server-end-point:";

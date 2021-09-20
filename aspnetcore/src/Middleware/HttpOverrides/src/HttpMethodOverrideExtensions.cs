@@ -39,7 +39,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IApplicationBuilder UseHttpMethodOverride(
             this IApplicationBuilder builder,
             HttpMethodOverrideOptions options
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));

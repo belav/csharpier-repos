@@ -167,7 +167,8 @@ namespace System.Diagnostics.Tests
             string samplingResult,
             bool alldataRequested,
             ActivityTraceFlags activityTraceFlags
-        ) {
+        )
+        {
             RemoteExecutor.Invoke(
                     (result, dataRequested, traceFlags) =>
                     {
@@ -220,7 +221,8 @@ namespace System.Diagnostics.Tests
             string eventName,
             string samplingResult,
             bool alldataRequested
-        ) {
+        )
+        {
             RemoteExecutor.Invoke(
                     (eventname, result, dataRequested) =>
                     {
@@ -282,7 +284,8 @@ namespace System.Diagnostics.Tests
             string spec,
             bool isAlldataRequestedFromSpecif,
             bool alldataRequestedFromNoneSpecific
-        ) {
+        )
+        {
             RemoteExecutor.Invoke(
                     (specString, specificAllData, noneSpecificAllData) =>
                     {
@@ -324,7 +327,8 @@ namespace System.Diagnostics.Tests
                         using (
                             TestDiagnosticSourceEventListener eventSourceListener =
                                 new TestDiagnosticSourceEventListener()
-                        ) {
+                        )
+                        {
                             using ActivitySource aSource1 = new ActivitySource("TransSpecsSource");
                             eventSourceListener.Enable("[AS]*");
 
@@ -426,7 +430,8 @@ namespace System.Diagnostics.Tests
                         using (
                             TestDiagnosticSourceEventListener eventSourceListener =
                                 new TestDiagnosticSourceEventListener()
-                        ) {
+                        )
+                        {
                             using ActivitySource aSource1 = new ActivitySource("Source1");
                             using ActivitySource aSource2 = new ActivitySource("Source2");
 
@@ -556,7 +561,8 @@ namespace System.Diagnostics.Tests
             string eventName,
             string sourceName,
             string activityName
-        ) {
+        )
+        {
             Assert.Equal(eventName, eventSourceListener.LastEvent.EventSourceEventName);
             Assert.Equal(sourceName, eventSourceListener.LastEvent.SourceName);
             Assert.Equal(activityName, eventSourceListener.LastEvent.EventName);
@@ -577,7 +583,8 @@ namespace System.Diagnostics.Tests
                             var diagnosticSourceListener = new DiagnosticListener(
                                 "TestSpecificEventsSource"
                             )
-                        ) {
+                        )
+                        {
                             Assert.Equal(0, eventSourceListener.EventCount);
 
                             // Turn on events with both implicit and explicit types You can have whitespace
@@ -668,7 +675,8 @@ namespace System.Diagnostics.Tests
                                 var diagnosticSourceListener2 = new DiagnosticListener(
                                     "TestSpecificEventsSource2"
                                 )
-                            ) {
+                            )
+                            {
                                 if (diagnosticSourceListener2.IsEnabled("TestEvent1"))
                                     diagnosticSourceListener2.Write(
                                         "TestEvent1",
@@ -714,7 +722,8 @@ namespace System.Diagnostics.Tests
                             var diagnosticSourceListener = new DiagnosticListener(
                                 "LinuxNewLineConventionsSource"
                             )
-                        ) {
+                        )
+                        {
                             Assert.Equal(0, eventSourceListener.EventCount);
 
                             // Turn on events with both implicit and explicit types You can have whitespace
@@ -813,7 +822,8 @@ namespace System.Diagnostics.Tests
                             var diagnosticSourceListener2 = new DiagnosticListener(
                                 "TestWildCardSourceName2"
                             )
-                        ) {
+                        )
+                        {
                             eventSourceListener.Filter = (DiagnosticSourceEvent evnt) =>
                                 evnt.SourceName.StartsWith("TestWildCardSourceName");
 
@@ -919,7 +929,8 @@ namespace System.Diagnostics.Tests
                             var diagnosticSourceListener = new DiagnosticListener(
                                 "TestWildCardEventNameSource"
                             )
-                        ) {
+                        )
+                        {
                             Assert.Equal(0, eventSourceListener.EventCount);
 
                             // Turn on events with both implicit and explicit types
@@ -1037,7 +1048,8 @@ namespace System.Diagnostics.Tests
                                 var diagnosticSourceListener2 = new DiagnosticListener(
                                     "TestWildCardEventNameSource2"
                                 )
-                            ) {
+                            )
+                            {
                                 if (diagnosticSourceListener2.IsEnabled("TestEvent1"))
                                     diagnosticSourceListener2.Write(
                                         "TestEvent1",
@@ -1108,7 +1120,8 @@ namespace System.Diagnostics.Tests
                             var diagnosticSourceListener = new DiagnosticListener(
                                 "TestNullsTestSource"
                             )
-                        ) {
+                        )
+                        {
                             Assert.Equal(0, eventSourceListener.EventCount);
 
                             // Turn on events with both implicit and explicit types
@@ -1246,7 +1259,8 @@ namespace System.Diagnostics.Tests
                             var diagnosticSourceListener = new DiagnosticListener(
                                 "TestNoImplicitTransformsSource"
                             )
-                        ) {
+                        )
+                        {
                             Assert.Equal(0, eventSourceListener.EventCount);
 
                             // use the - prefix to suppress the implicit properties.  Thus you should only get propStr and Url.
@@ -1303,7 +1317,8 @@ namespace System.Diagnostics.Tests
                             var diagnosticSourceListener = new DiagnosticListener(
                                 "TestBadPropertiesSource"
                             )
-                        ) {
+                        )
+                        {
                             Assert.Equal(0, eventSourceListener.EventCount);
 
                             // This has a syntax error in the Url case, so it should be ignored.
@@ -1356,7 +1371,8 @@ namespace System.Diagnostics.Tests
                             var diagnosticSourceListener = new DiagnosticListener(
                                 "TestMessagesSource"
                             )
-                        ) {
+                        )
+                        {
                             Assert.Equal(0, eventSourceListener.EventCount);
 
                             // This is just to make debugging easier.
@@ -1364,7 +1380,8 @@ namespace System.Diagnostics.Tests
 
                             eventSourceListener.OtherEventWritten += delegate(
                                 EventWrittenEventArgs evnt
-                            ) {
+                            )
+                            {
                                 if (evnt.EventName == "Message")
                                 {
                                     var message = (string)evnt.Payload[0];
@@ -1396,7 +1413,8 @@ namespace System.Diagnostics.Tests
                             var diagnosticSourceListener = new DiagnosticListener(
                                 "TestActivitiesSource"
                             )
-                        ) {
+                        )
+                        {
                             Assert.Equal(0, eventSourceListener.EventCount);
                             eventSourceListener.Enable(
                                 "TestActivitiesSource/TestActivity1Start@Activity1Start\r\n"
@@ -1548,7 +1566,8 @@ namespace System.Diagnostics.Tests
                             var entityFrameworkCoreSource = new DiagnosticListener(
                                 "Microsoft.EntityFrameworkCore"
                             )
-                        ) {
+                        )
+                        {
                             // Sadly we have a problem where if something else has turned on Microsoft-Diagnostics-DiagnosticSource then
                             // its keywords are ORed with our and because the shortcuts require that IgnoreShortCutKeywords is OFF
                             // Something outside this test (the debugger seems to do this), will cause the test to fail.
@@ -2151,7 +2170,8 @@ namespace System.Diagnostics.Tests
                 if (
                     eventData.Payload.Count == 3
                     && (eventData.EventName == "Event" || eventData.EventName.Contains("Activity"))
-                ) {
+                )
+                {
                     Debug.Assert(eventData.PayloadNames[0] == "SourceName");
                     Debug.Assert(
                         eventData.PayloadNames[1] == "EventName"

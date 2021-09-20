@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
             string? expectedOutput = null,
             TargetFramework targetFramework = TargetFramework.Standard,
             CSharpCompilationOptions? options = null
-        ) {
+        )
+        {
             var comp = CreateCompilation(
                 sources,
                 references,
@@ -59,7 +60,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
             IEnumerable<MetadataReference>? references = null,
             CSharpCompilationOptions? options = null,
             TargetFramework? targetFramework = null
-        ) {
+        )
+        {
             return CreateCompilation(
                 source,
                 references: references,
@@ -74,7 +76,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
             string ilStub,
             Action<ModuleSymbol>? symbolValidator = null,
             string? expectedOutput = null
-        ) {
+        )
+        {
             var comp = CreateCompilationWithIL(
                 source,
                 ilStub,
@@ -96,7 +99,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
             string ilStub,
             IEnumerable<MetadataReference>? references = null,
             CSharpCompilationOptions? options = null
-        ) {
+        )
+        {
             return CreateCompilationWithIL(
                 source,
                 ilStub,
@@ -122,7 +126,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
         internal void CallingConventions(
             string conventionString,
             CallingConvention expectedConvention
-        ) {
+        )
+        {
             var verifier = CompileAndVerifyFunctionPointers(
                 $@"
 class C
@@ -906,7 +911,8 @@ public class C
                 int length,
                 string expectedTypeName,
                 ImmutableArray<CustomModifier> customMods
-            ) {
+            )
+            {
                 Assert.Equal(length, customMods.Length);
                 var firstMod = customMods[0];
                 Assert.True(firstMod.IsOptional);
@@ -1585,7 +1591,8 @@ class Caller
         public void UnmanagedCallingConventions_UnmanagedCallersOnlyAttribute(
             string delegateConventionString,
             string attributeArgumentString
-        ) {
+        )
+        {
             var verifier = CompileAndVerifyFunctionPointers(
                 new[]
                 {
@@ -3908,7 +3915,8 @@ unsafe class C
         public void AddressOf_CallingConventionMustMatch(
             string callingConventionKeyword,
             string callingConvention
-        ) {
+        )
+        {
             var comp = CreateCompilationWithFunctionPointers(
                 $@"
 unsafe class C
@@ -7816,7 +7824,8 @@ unsafe class Derived : Base
                 NamedTypeSymbol derived,
                 string methodName,
                 string expectedSignature
-            ) {
+            )
+            {
                 var m = derived.GetMember<MethodSymbol>(methodName);
                 AssertEx.AssertEqualToleratingWhitespaceDifferences(
                     expectedSignature,
@@ -7880,7 +7889,8 @@ unsafe class Derived : Base
                 NamedTypeSymbol derived,
                 string methodName,
                 string expectedSignature
-            ) {
+            )
+            {
                 var m = derived.GetMember<MethodSymbol>(methodName);
                 AssertEx.AssertEqualToleratingWhitespaceDifferences(
                     expectedSignature,
@@ -8057,7 +8067,8 @@ unsafe class Derived : Base
                 NamedTypeSymbol derived,
                 string methodName,
                 string expectedSignature
-            ) {
+            )
+            {
                 var m = derived.GetMember<MethodSymbol>(methodName);
                 AssertEx.AssertEqualToleratingWhitespaceDifferences(
                     expectedSignature,
@@ -8171,7 +8182,8 @@ unsafe class Derived : Base
                 NamedTypeSymbol derived,
                 string methodName,
                 string expectedSignature
-            ) {
+            )
+            {
                 var m = derived.GetMember<MethodSymbol>(methodName);
                 AssertEx.AssertEqualToleratingWhitespaceDifferences(
                     expectedSignature,
@@ -8285,7 +8297,8 @@ public unsafe class Derived : Base
                 NamedTypeSymbol derived,
                 string methodName,
                 string expectedSignature
-            ) {
+            )
+            {
                 var m = derived.GetMember<MethodSymbol>(methodName);
                 AssertEx.AssertEqualToleratingWhitespaceDifferences(
                     expectedSignature,
@@ -13102,7 +13115,8 @@ class A
         public void UnmanagedCallersOnlyAttribute_ConversionsToPointerType(
             string unmanagedCallersOnlyConventions,
             int diagnosticToSkip
-        ) {
+        )
+        {
             var comp = CreateCompilationWithFunctionPointers(
                 new[]
                 {
@@ -14266,7 +14280,8 @@ class C<T> {}
             MetadataBuilder metadata,
             BlobBuilder ilBuilder,
             SignatureHeader headerToUseForM
-        ) {
+        )
+        {
             metadata.AddModule(
                 0,
                 metadata.GetOrAddString("ConsoleApplication.exe"),
@@ -14435,7 +14450,8 @@ class C<T> {}
             Stream peStream,
             MetadataBuilder metadataBuilder,
             BlobBuilder ilBuilder
-        ) {
+        )
+        {
             var peHeaderBuilder = new PEHeaderBuilder(imageCharacteristics: Characteristics.Dll);
 
             var peBuilder = new ManagedPEBuilder(

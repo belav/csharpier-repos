@@ -230,7 +230,8 @@ namespace System.Collections.Concurrent.Tests
             long count,
             long desiredRangeSize,
             int dop
-        ) {
+        )
+        {
             long to = from + count;
             var partitioner = Partitioner.Create(from, to, desiredRangeSize);
 
@@ -274,7 +275,8 @@ namespace System.Collections.Concurrent.Tests
             long from,
             long count,
             long desiredRangeSize
-        ) {
+        )
+        {
             long to = from + count;
             var partitioner = Partitioner.Create(from, to, desiredRangeSize);
 
@@ -319,7 +321,8 @@ namespace System.Collections.Concurrent.Tests
             long count,
             long desiredRangeSize,
             int dop
-        ) {
+        )
+        {
             long to = from + count;
             var partitioner = Partitioner.Create(from, to, desiredRangeSize);
 
@@ -379,7 +382,8 @@ namespace System.Collections.Concurrent.Tests
             long from,
             long count,
             long desiredRangeSize
-        ) {
+        )
+        {
             long to = from + count;
             var partitioner = Partitioner.Create(from, to, desiredRangeSize);
 

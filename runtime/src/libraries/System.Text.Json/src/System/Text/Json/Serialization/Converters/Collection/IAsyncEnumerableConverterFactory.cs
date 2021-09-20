@@ -19,7 +19,8 @@ namespace System.Text.Json.Serialization
         public override JsonConverter CreateConverter(
             Type typeToConvert,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             Type? asyncEnumerableInterface = GetAsyncEnumerableInterface(typeToConvert);
             Debug.Assert(
                 asyncEnumerableInterface is not null,

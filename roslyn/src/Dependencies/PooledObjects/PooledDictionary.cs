@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.PooledObjects
         // if someone needs to create a pool;
         public static ObjectPool<PooledDictionary<K, V>> CreatePool(
             IEqualityComparer<K> keyComparer
-        ) {
+        )
+        {
             ObjectPool<PooledDictionary<K, V>>? pool = null;
             pool = new ObjectPool<PooledDictionary<K, V>>(
                 () => new PooledDictionary<K, V>(pool!, keyComparer),

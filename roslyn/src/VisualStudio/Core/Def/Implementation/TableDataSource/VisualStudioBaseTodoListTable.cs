@@ -130,7 +130,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             private bool CheckAggregateKey(
                 ImmutableArray<DocumentId> key,
                 TodoItemsUpdatedArgs args
-            ) {
+            )
+            {
                 if (args.DocumentId == null || args.Solution == null)
                     return true;
 
@@ -158,7 +159,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 
             public override IEnumerable<TodoTableItem> Order(
                 IEnumerable<TodoTableItem> groupedItems
-            ) {
+            )
+            {
                 return groupedItems.OrderBy(d => d.Data.OriginalLine)
                     .ThenBy(d => d.Data.OriginalColumn);
             }
@@ -183,7 +185,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 
             public override AbstractTableEntriesSource<TodoTableItem> CreateTableEntriesSource(
                 object data
-            ) {
+            )
+            {
                 var item = (UpdatedEventArgs)data;
                 return new TableEntriesSource(this, item.Workspace, item.DocumentId);
             }
@@ -198,7 +201,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                     TableDataSource source,
                     Workspace workspace,
                     DocumentId documentId
-                ) {
+                )
+                {
                     _source = source;
                     _workspace = workspace;
                     _documentId = documentId;

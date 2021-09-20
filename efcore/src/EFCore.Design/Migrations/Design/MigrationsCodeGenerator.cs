@@ -156,7 +156,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
 
         private static IEnumerable<IAnnotatable> GetAnnotatables(
             IEnumerable<MigrationOperation> operations
-        ) {
+        )
+        {
             foreach (var operation in operations)
             {
                 yield return operation;

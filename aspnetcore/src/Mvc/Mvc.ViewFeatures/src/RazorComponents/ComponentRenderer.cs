@@ -24,7 +24,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             StaticComponentRenderer staticComponentRenderer,
             ServerComponentSerializer serverComponentSerializer,
             WebAssemblyComponentSerializer WebAssemblyComponentSerializer
-        ) {
+        )
+        {
             _staticComponentRenderer = staticComponentRenderer;
             _serverComponentSerializer = serverComponentSerializer;
             _WebAssemblyComponentSerializer = WebAssemblyComponentSerializer;
@@ -35,7 +36,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             Type componentType,
             RenderMode renderMode,
             object parameters
-        ) {
+        )
+        {
             if (viewContext is null)
             {
                 throw new ArgumentNullException(nameof(viewContext));
@@ -96,7 +98,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
         private static ServerComponentInvocationSequence GetOrCreateInvocationId(
             ViewContext viewContext
-        ) {
+        )
+        {
             if (!viewContext.Items.TryGetValue(ComponentSequenceKey, out var result))
             {
                 result = new ServerComponentInvocationSequence();
@@ -153,7 +156,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             HttpContext context,
             Type type,
             ParameterView parametersCollection
-        ) {
+        )
+        {
             var result = await _staticComponentRenderer.PrerenderComponentAsync(
                 parametersCollection,
                 context,
@@ -168,7 +172,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             ServerComponentInvocationSequence invocationId,
             Type type,
             ParameterView parametersCollection
-        ) {
+        )
+        {
             if (!context.Response.HasStarted)
             {
                 context.Response.Headers[HeaderNames.CacheControl] =
@@ -199,7 +204,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             HttpContext context,
             Type type,
             ParameterView parametersCollection
-        ) {
+        )
+        {
             var currentInvocation = _WebAssemblyComponentSerializer.SerializeInvocation(
                 type,
                 parametersCollection,
@@ -224,7 +230,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             ServerComponentInvocationSequence invocationId,
             Type type,
             ParameterView parametersCollection
-        ) {
+        )
+        {
             if (!context.Response.HasStarted)
             {
                 context.Response.Headers[HeaderNames.CacheControl] =
@@ -247,7 +254,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             HttpContext context,
             Type type,
             ParameterView parametersCollection
-        ) {
+        )
+        {
             var currentInvocation = _WebAssemblyComponentSerializer.SerializeInvocation(
                 type,
                 parametersCollection,

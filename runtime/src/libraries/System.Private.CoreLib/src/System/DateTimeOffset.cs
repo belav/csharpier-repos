@@ -118,7 +118,8 @@ namespace System
                         dateTime,
                         TimeZoneInfoOptions.NoThrowOnInvalidTime
                     )
-                ) {
+                )
+                {
                     throw new ArgumentException(SR.Argument_OffsetLocalMismatch, nameof(offset));
                 }
             }
@@ -143,7 +144,8 @@ namespace System
             int minute,
             int second,
             TimeSpan offset
-        ) {
+        )
+        {
             _offsetMinutes = ValidateOffset(offset);
 
             int originalSecond = second;
@@ -165,7 +167,8 @@ namespace System
                     _dateTime.Minute,
                     DateTimeKind.Utc
                 )
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(
                     null,
                     SR.ArgumentOutOfRange_BadHourMinuteSecond
@@ -184,7 +187,8 @@ namespace System
             int second,
             int millisecond,
             TimeSpan offset
-        ) {
+        )
+        {
             _offsetMinutes = ValidateOffset(offset);
 
             int originalSecond = second;
@@ -209,7 +213,8 @@ namespace System
                     _dateTime.Minute,
                     DateTimeKind.Utc
                 )
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(
                     null,
                     SR.ArgumentOutOfRange_BadHourMinuteSecond
@@ -229,7 +234,8 @@ namespace System
             int millisecond,
             Calendar calendar,
             TimeSpan offset
-        ) {
+        )
+        {
             _offsetMinutes = ValidateOffset(offset);
 
             int originalSecond = second;
@@ -254,7 +260,8 @@ namespace System
                     _dateTime.Minute,
                     DateTimeKind.Utc
                 )
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(
                     null,
                     SR.ArgumentOutOfRange_BadHourMinuteSecond
@@ -620,7 +627,8 @@ namespace System
             string input,
             IFormatProvider? formatProvider,
             DateTimeStyles styles
-        ) {
+        )
+        {
             styles = ValidateStyles(styles, nameof(styles));
             if (input == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.input);
@@ -638,7 +646,8 @@ namespace System
             ReadOnlySpan<char> input,
             IFormatProvider? formatProvider = null,
             DateTimeStyles styles = DateTimeStyles.None
-        ) {
+        )
+        {
             styles = ValidateStyles(styles, nameof(styles));
             DateTime dateResult = DateTimeParse.Parse(
                 input,
@@ -657,7 +666,8 @@ namespace System
             string input,
             string format,
             IFormatProvider? formatProvider
-        ) {
+        )
+        {
             if (input == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.input);
             if (format == null)
@@ -674,7 +684,8 @@ namespace System
             string format,
             IFormatProvider? formatProvider,
             DateTimeStyles styles
-        ) {
+        )
+        {
             styles = ValidateStyles(styles, nameof(styles));
             if (input == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.input);
@@ -696,7 +707,8 @@ namespace System
             ReadOnlySpan<char> format,
             IFormatProvider? formatProvider,
             DateTimeStyles styles = DateTimeStyles.None
-        ) {
+        )
+        {
             styles = ValidateStyles(styles, nameof(styles));
             DateTime dateResult = DateTimeParse.ParseExact(
                 input,
@@ -713,7 +725,8 @@ namespace System
             string[] formats,
             IFormatProvider? formatProvider,
             DateTimeStyles styles
-        ) {
+        )
+        {
             styles = ValidateStyles(styles, nameof(styles));
             if (input == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.input);
@@ -733,7 +746,8 @@ namespace System
             string[] formats,
             IFormatProvider? formatProvider,
             DateTimeStyles styles = DateTimeStyles.None
-        ) {
+        )
+        {
             styles = ValidateStyles(styles, nameof(styles));
             DateTime dateResult = DateTimeParse.ParseExactMultiple(
                 input,
@@ -865,7 +879,8 @@ namespace System
             IFormatProvider? formatProvider,
             DateTimeStyles styles,
             out DateTimeOffset result
-        ) {
+        )
+        {
             styles = ValidateStyles(styles, nameof(styles));
             if (input == null)
             {
@@ -889,7 +904,8 @@ namespace System
             IFormatProvider? formatProvider,
             DateTimeStyles styles,
             out DateTimeOffset result
-        ) {
+        )
+        {
             styles = ValidateStyles(styles, nameof(styles));
             bool parsed = DateTimeParse.TryParse(
                 input,
@@ -908,7 +924,8 @@ namespace System
             IFormatProvider? formatProvider,
             DateTimeStyles styles,
             out DateTimeOffset result
-        ) {
+        )
+        {
             styles = ValidateStyles(styles, nameof(styles));
             if (input == null || format == null)
             {
@@ -934,7 +951,8 @@ namespace System
             IFormatProvider? formatProvider,
             DateTimeStyles styles,
             out DateTimeOffset result
-        ) {
+        )
+        {
             styles = ValidateStyles(styles, nameof(styles));
             bool parsed = DateTimeParse.TryParseExact(
                 input,
@@ -954,7 +972,8 @@ namespace System
             IFormatProvider? formatProvider,
             DateTimeStyles styles,
             out DateTimeOffset result
-        ) {
+        )
+        {
             styles = ValidateStyles(styles, nameof(styles));
             if (input == null)
             {
@@ -980,7 +999,8 @@ namespace System
             IFormatProvider? formatProvider,
             DateTimeStyles styles,
             out DateTimeOffset result
-        ) {
+        )
+        {
             styles = ValidateStyles(styles, nameof(styles));
             bool parsed = DateTimeParse.TryParseExactMultiple(
                 input,
@@ -1040,7 +1060,8 @@ namespace System
             if (
                 ((style & (DateTimeStyles.AssumeLocal)) != 0)
                 && ((style & (DateTimeStyles.AssumeUniversal)) != 0)
-            ) {
+            )
+            {
                 throw new ArgumentException(SR.Argument_ConflictingDateTimeStyles, parameterName);
             }
             if ((style & DateTimeStyles.NoCurrentDateDefault) != 0)

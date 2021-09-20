@@ -177,7 +177,8 @@ namespace System.Data.Common
             object store,
             BitArray nullbits,
             int storeIndex
-        ) {
+        )
+        {
             SqlDateTime[] typedStore = (SqlDateTime[])store;
             typedStore[storeIndex] = _values[record];
             nullbits.Set(record, IsNull(record));

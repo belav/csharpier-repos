@@ -3512,7 +3512,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
             {
                 if (
                     ErrorVerifier.Verify(RuntimeErrorId.BindToVoidMethodButExpectResult, ex.Message)
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }
@@ -3528,7 +3529,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
             {
                 if (
                     ErrorVerifier.Verify(RuntimeErrorId.BindToVoidMethodButExpectResult, ex.Message)
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }
@@ -3543,7 +3545,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
             {
                 if (
                     ErrorVerifier.Verify(RuntimeErrorId.BindToVoidMethodButExpectResult, ex.Message)
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }
@@ -3558,7 +3561,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
             {
                 if (
                     ErrorVerifier.Verify(RuntimeErrorId.BindToVoidMethodButExpectResult, ex.Message)
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }
@@ -3573,7 +3577,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
             {
                 if (
                     ErrorVerifier.Verify(RuntimeErrorId.BindToVoidMethodButExpectResult, ex.Message)
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }

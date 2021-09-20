@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets
         public SocketConnectionFactory(
             IOptions<SocketTransportOptions> options,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -80,7 +81,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets
         public async ValueTask<ConnectionContext> ConnectAsync(
             EndPoint endpoint,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var ipEndPoint = endpoint as IPEndPoint;
 
             if (ipEndPoint is null)

@@ -717,7 +717,8 @@ class C
         public async Task RemoveAsyncInLocalFunctionKeepsTrivia(
             string asyncReturn,
             string expectedReturn
-        ) {
+        )
+        {
             await VerifyCS.VerifyCodeFixAsync(
                 $@"using System;
 using System.Threading.Tasks;
@@ -766,7 +767,8 @@ class C
             string modifiers,
             string asyncReturn,
             string expectedReturn
-        ) {
+        )
+        {
             await VerifyCS.VerifyCodeFixAsync(
                 $@"using System;
 using System.Threading.Tasks;

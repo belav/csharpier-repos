@@ -18,7 +18,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             FileCodeModel fileCodeModel,
             SyntaxNodeKey nodeKey,
             int? nodeKind
-        ) {
+        )
+        {
             var element = new CodeEnum(state, fileCodeModel, nodeKey, nodeKind);
             var result = (EnvDTE.CodeEnum)ComAggregate.CreateAggregatedObject(element);
 
@@ -32,7 +33,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             FileCodeModel fileCodeModel,
             int nodeKind,
             string name
-        ) {
+        )
+        {
             var element = new CodeEnum(state, fileCodeModel, nodeKind, name);
             return (EnvDTE.CodeEnum)ComAggregate.CreateAggregatedObject(element);
         }

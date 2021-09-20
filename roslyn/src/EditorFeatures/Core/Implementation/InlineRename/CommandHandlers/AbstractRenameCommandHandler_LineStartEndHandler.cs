@@ -67,7 +67,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             ITextView view,
             bool lineStart,
             bool extendSelection
-        ) {
+        )
+        {
             if (_renameService.ActiveSession == null)
             {
                 return false;
@@ -81,7 +82,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                         caretPoint.Value,
                         out var span
                     )
-                ) {
+                )
+                {
                     var newPoint = lineStart ? span.Start : span.End;
                     if (newPoint == caretPoint.Value && (view.Selection.IsEmpty || extendSelection))
                     {

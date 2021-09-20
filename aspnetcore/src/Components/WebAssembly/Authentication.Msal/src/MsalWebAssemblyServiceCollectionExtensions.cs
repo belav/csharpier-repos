@@ -30,7 +30,8 @@ namespace Microsoft.Extensions.DependencyInjection
         > AddMsalAuthentication(
             this IServiceCollection services,
             Action<RemoteAuthenticationOptions<MsalProviderOptions>> configure
-        ) {
+        )
+        {
             return AddMsalAuthentication<RemoteAuthenticationState>(services, configure);
         }
 
@@ -72,8 +73,9 @@ namespace Microsoft.Extensions.DependencyInjection
         >(
             this IServiceCollection services,
             Action<RemoteAuthenticationOptions<MsalProviderOptions>> configure
-        ) where TRemoteAuthenticationState : RemoteAuthenticationState, new()
-          where TAccount : RemoteUserAccount
+        )
+            where TRemoteAuthenticationState : RemoteAuthenticationState, new()
+            where TAccount : RemoteUserAccount
         {
             services.AddRemoteAuthentication<
                 TRemoteAuthenticationState,

@@ -60,7 +60,8 @@ namespace Microsoft.CodeAnalysis.AddMissingReference
         private static async Task<ImmutableArray<CodeAction>> GetAddReferencesCodeActionsAsync(
             CodeFixContext context,
             ISet<AssemblyIdentity> uniqueIdentities
-        ) {
+        )
+        {
             var result = ArrayBuilder<CodeAction>.GetInstance();
             foreach (var identity in uniqueIdentities)
             {
@@ -78,7 +79,8 @@ namespace Microsoft.CodeAnalysis.AddMissingReference
 
         private static async Task<ISet<AssemblyIdentity>> GetUniqueIdentitiesAsync(
             CodeFixContext context
-        ) {
+        )
+        {
             var cancellationToken = context.CancellationToken;
             var compilation = await context.Document.Project.GetCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
@@ -96,7 +98,8 @@ namespace Microsoft.CodeAnalysis.AddMissingReference
                         out var displayName
                     )
                     && AssemblyIdentity.TryParseDisplayName(displayName, out var serializedIdentity)
-                ) {
+                )
+                {
                     uniqueIdentities.Add(serializedIdentity);
                 }
             }

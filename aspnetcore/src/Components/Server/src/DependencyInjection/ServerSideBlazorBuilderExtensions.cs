@@ -21,7 +21,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServerSideBlazorBuilder AddCircuitOptions(
             this IServerSideBlazorBuilder builder,
             Action<CircuitOptions> configure
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -46,7 +47,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServerSideBlazorBuilder AddHubOptions(
             this IServerSideBlazorBuilder builder,
             Action<HubOptions> configure
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));

@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             this ClassifiedText part,
             IClassificationFormatMap formatMap,
             ClassificationTypeMap typeMap
-        ) {
+        )
+        {
             var run = new Run(part.Text);
 
             var classificationType = typeMap.GetClassificationType(part.ClassificationType);
@@ -39,7 +40,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             IClassificationFormatMap formatMap,
             ClassificationTypeMap typeMap,
             Action<Run, ClassifiedText, int> runCallback = null
-        ) {
+        )
+        {
             var inlines = new List<Inline>();
 
             var position = 0;
@@ -59,7 +61,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             this IEnumerable<TaggedText> parts,
             IClassificationFormatMap formatMap,
             ClassificationTypeMap typeMap
-        ) {
+        )
+        {
             var classifiedTexts = parts.Select(
                 p =>
                     new ClassifiedText(
@@ -74,7 +77,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             this IEnumerable<TaggedText> parts,
             IClassificationFormatMap formatMap,
             ClassificationTypeMap typeMap
-        ) {
+        )
+        {
             var inlines = parts.ToInlines(formatMap, typeMap);
             return inlines.ToTextBlock(formatMap);
         }
@@ -94,7 +98,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             this IEnumerable<Inline> inlines,
             IClassificationFormatMap formatMap,
             bool wrap = true
-        ) {
+        )
+        {
             var textBlock = new TextBlock
             {
                 TextWrapping = wrap ? TextWrapping.Wrap : TextWrapping.NoWrap,

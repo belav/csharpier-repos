@@ -40,7 +40,8 @@ namespace System.Net.Http.Headers
             if (
                 (HttpRuleParser.GetQuotedStringLength(tag, 0, out length) != HttpParseResult.Parsed)
                 || (length != tag.Length)
-            ) {
+            )
+            {
                 // Note that we don't allow 'W/' prefixes for weak ETags in the 'tag' parameter. If the user wants to
                 // add a weak ETag, they can set 'isWeak' to true.
                 throw new FormatException(SR.net_http_headers_invalid_etag_name);
@@ -102,7 +103,8 @@ namespace System.Net.Http.Headers
         public static bool TryParse(
             [NotNullWhen(true)] string? input,
             [NotNullWhen(true)] out EntityTagHeaderValue? parsedValue
-        ) {
+        )
+        {
             int index = 0;
             parsedValue = null;
 
@@ -113,7 +115,8 @@ namespace System.Net.Http.Headers
                     ref index,
                     out object? output
                 )
-            ) {
+            )
+            {
                 parsedValue = (EntityTagHeaderValue)output!;
                 return true;
             }
@@ -124,7 +127,8 @@ namespace System.Net.Http.Headers
             string? input,
             int startIndex,
             out EntityTagHeaderValue? parsedValue
-        ) {
+        )
+        {
             Debug.Assert(startIndex >= 0);
 
             parsedValue = null;
@@ -166,7 +170,8 @@ namespace System.Net.Http.Headers
                 if (
                     HttpRuleParser.GetQuotedStringLength(input, current, out tagLength)
                     != HttpParseResult.Parsed
-                ) {
+                )
+                {
                     return 0;
                 }
 

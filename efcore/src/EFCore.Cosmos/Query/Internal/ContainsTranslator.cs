@@ -39,12 +39,14 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             MethodInfo method,
             IReadOnlyList<SqlExpression> arguments,
             IDiagnosticsLogger<DbLoggerCategory.Query> logger
-        ) {
+        )
+        {
             if (
                 method.IsGenericMethod
                 && method.GetGenericMethodDefinition().Equals(EnumerableMethods.Contains)
                 && ValidateValues(arguments[0])
-            ) {
+            )
+            {
                 return _sqlExpressionFactory.In(arguments[1], arguments[0], false);
             }
 
@@ -53,7 +55,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 && method.IsContainsMethod()
                 && instance != null
                 && ValidateValues(instance)
-            ) {
+            )
+            {
                 return _sqlExpressionFactory.In(arguments[0], instance, false);
             }
 

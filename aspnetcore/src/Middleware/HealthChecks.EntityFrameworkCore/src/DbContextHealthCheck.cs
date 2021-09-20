@@ -25,7 +25,8 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks
         public DbContextHealthCheck(
             TContext dbContext,
             IOptionsMonitor<DbContextHealthCheckOptions<TContext>> options
-        ) {
+        )
+        {
             if (dbContext == null)
             {
                 throw new ArgumentNullException(nameof(dbContext));
@@ -43,7 +44,8 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks
         public async Task<HealthCheckResult> CheckHealthAsync(
             HealthCheckContext context,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));

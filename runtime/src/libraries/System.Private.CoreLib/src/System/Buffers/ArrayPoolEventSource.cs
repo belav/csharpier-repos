@@ -99,7 +99,8 @@ namespace System.Buffers
             int poolId,
             int bucketId,
             BufferAllocatedReason reason
-        ) {
+        )
+        {
             EventData* payload = stackalloc EventData[5];
             payload[0].Size = sizeof(int);
             payload[0].DataPointer = ((IntPtr)(&bufferId));
@@ -161,7 +162,8 @@ namespace System.Buffers
             int poolId,
             int bucketId,
             BufferDroppedReason reason
-        ) {
+        )
+        {
             EventData* payload = stackalloc EventData[5];
             payload[0].Size = sizeof(int);
             payload[0].DataPointer = ((IntPtr)(&bufferId));

@@ -63,7 +63,8 @@ namespace System.Xml.Tests
             string specFile,
             string[] filters,
             string defaultSection
-        ) {
+        )
+        {
             ParseControlFileSafe(
                 testCaseNamePrefix,
                 specFile,
@@ -216,7 +217,8 @@ namespace System.Xml.Tests
             XElement node,
             string attrName,
             string defaultValue
-        ) {
+        )
+        {
             XAttribute resNode = node.Attribute(attrName);
             if (resNode == null)
                 return defaultValue;
@@ -368,7 +370,8 @@ namespace System.Xml.Tests
             int pos,
             XElement[] list,
             int listCount
-        ) {
+        )
+        {
             XElement node = null;
             for (int curPos = 0, i = 0; i < listCount; i++)
             {
@@ -569,7 +572,8 @@ namespace System.Xml.Tests
             XElement testModuleNode,
             MyDict<string, object> masterList,
             IList xmlDriverParams
-        ) {
+        )
+        {
             // loop through all includes cases
             foreach (XElement includeNode in testModuleNode.Elements("Include"))
             {
@@ -634,7 +638,8 @@ namespace System.Xml.Tests
             XElement topNode,
             MyDict<string, object> masterList,
             IList xmlDriverParams
-        ) {
+        )
+        {
             try
             {
                 _parseError = null;
@@ -709,7 +714,8 @@ namespace System.Xml.Tests
             XElement topNode,
             MyDict<string, object> masterList,
             IList xmlDriverParams
-        ) {
+        )
+        {
             // load the control file
             XDocument doc = LoadControlFile(controlFile);
 
@@ -858,7 +864,8 @@ namespace System.Xml.Tests
                 if (
                     ((CXmlDriverParam)_testModuleParams[0]).RawNodes.TestModule.Attribute("Name")
                     != null
-                ) {
+                )
+                {
                     moduleName =
                         ((CXmlDriverParam)_testModuleParams[0]).RawNodes.TestModule.Attribute(
                             "Name"
@@ -880,7 +887,8 @@ namespace System.Xml.Tests
                     ((CXmlDriverParam)_testModuleParams[0]).RawNodes.TestModule.Attribute(
                         "Description"
                     ) != null
-                ) {
+                )
+                {
                     moduleDesc =
                         ((CXmlDriverParam)_testModuleParams[0]).RawNodes.TestModule.Attribute(
                             "Description"

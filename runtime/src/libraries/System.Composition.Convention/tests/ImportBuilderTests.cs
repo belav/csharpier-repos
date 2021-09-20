@@ -146,7 +146,8 @@ namespace System.Composition.Convention.Tests
 
         private static ImportMetadataConstraintAttribute GetImportMetadataConstraintAttribute(
             ConventionBuilder builder
-        ) {
+        )
+        {
             Attribute[] list = builder.GetDeclaredAttributes(
                 typeof(FooImpl),
                 typeof(FooImpl).GetRuntimeProperties()

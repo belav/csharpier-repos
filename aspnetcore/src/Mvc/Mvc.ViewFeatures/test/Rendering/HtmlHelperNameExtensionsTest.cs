@@ -124,7 +124,8 @@ namespace Microsoft.AspNetCore.Mvc.Core
             string prefix,
             string expectedName,
             string expectedId
-        ) {
+        )
+        {
             // Arrange
             var helper = DefaultTemplatesUtilities.GetHtmlHelper();
             helper.ViewData.TemplateInfo.HtmlFieldPrefix = prefix;
@@ -230,7 +231,8 @@ namespace Microsoft.AspNetCore.Mvc.Core
         public void IdAndName_ReturnExpression_EvenIfExpressionNotFound(
             string expression,
             string expectedId
-        ) {
+        )
+        {
             // Arrange
             var helper = DefaultTemplatesUtilities.GetHtmlHelper();
 
@@ -389,7 +391,8 @@ namespace Microsoft.AspNetCore.Mvc.Core
             Expression<Func<List<OuterClass>, string>> expression,
             string expectedName,
             string expectedId
-        ) {
+        )
+        {
             // Arrange
             var model = new List<OuterClass>();
             var helper = DefaultTemplatesUtilities.GetHtmlHelper(model);

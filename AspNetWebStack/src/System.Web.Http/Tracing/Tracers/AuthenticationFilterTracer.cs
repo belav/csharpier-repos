@@ -39,7 +39,8 @@ namespace System.Web.Http.Tracing.Tracers
         public Task AuthenticateAsync(
             HttpAuthenticationContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             IPrincipal originalPrincipal = null;
             return TraceWriter.TraceBeginEndAsync(
                 request: context != null ? context.Request : null,
@@ -97,7 +98,8 @@ namespace System.Web.Http.Tracing.Tracers
         public Task ChallengeAsync(
             HttpAuthenticationChallengeContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return TraceWriter.TraceBeginEndAsync(
                 request: context != null ? context.Request : null,
                 category: TraceCategories.FiltersCategory,

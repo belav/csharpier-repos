@@ -30,7 +30,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public AnalyzerItemsTracker(
             [Import(typeof(SVsServiceProvider))] IServiceProvider serviceProvider
-        ) {
+        )
+        {
             _serviceProvider = serviceProvider;
         }
 
@@ -71,7 +72,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             uint elementid,
             object varValueOld,
             object varValueNew
-        ) {
+        )
+        {
             return VSConstants.S_OK;
         }
 
@@ -84,7 +86,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             uint itemidNew,
             IVsMultiItemSelect pMISNew,
             ISelectionContainer pSCNew
-        ) {
+        )
+        {
             var oldSelectedHierarchy = this.SelectedHierarchy;
             var oldSelectedItemId = this.SelectedItemId;
 
@@ -108,7 +111,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             if (
                 !object.ReferenceEquals(oldSelectedHierarchy, this.SelectedHierarchy)
                 || oldSelectedItemId != this.SelectedItemId
-            ) {
+            )
+            {
                 this.SelectedHierarchyItemChanged?.Invoke(this, EventArgs.Empty);
             }
 
@@ -128,7 +132,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                     out var selectedObjectCount
                 ) < 0
                 || selectedObjectCount == 0
-            ) {
+            )
+            {
                 return Array.Empty<object>();
             }
 
@@ -139,7 +144,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                     selectedObjectCount,
                     selectedObjects
                 ) < 0
-            ) {
+            )
+            {
                 return Array.Empty<object>();
             }
 

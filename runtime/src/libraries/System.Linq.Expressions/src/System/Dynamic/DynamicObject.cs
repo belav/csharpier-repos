@@ -82,7 +82,8 @@ namespace System.Dynamic
             InvokeMemberBinder binder,
             object?[]? args,
             out object? result
-        ) {
+        )
+        {
             result = null;
             return false;
         }
@@ -114,7 +115,8 @@ namespace System.Dynamic
             CreateInstanceBinder binder,
             object?[]? args,
             [NotNullWhen(true)] out object? result
-        ) {
+        )
+        {
             result = null;
             return false;
         }
@@ -147,7 +149,8 @@ namespace System.Dynamic
             BinaryOperationBinder binder,
             object arg,
             out object? result
-        ) {
+        )
+        {
             result = null;
             return false;
         }
@@ -240,7 +243,8 @@ namespace System.Dynamic
             public override DynamicMetaObject BindSetMember(
                 SetMemberBinder binder,
                 DynamicMetaObject value
-            ) {
+            )
+            {
                 if (IsOverridden(DynamicObject_TrySetMember))
                 {
                     DynamicMetaObject localValue = value;
@@ -293,7 +297,8 @@ namespace System.Dynamic
             public override DynamicMetaObject BindInvokeMember(
                 InvokeMemberBinder binder,
                 DynamicMetaObject[] args
-            ) {
+            )
+            {
                 // Generate a tree like:
                 //
                 // {
@@ -330,7 +335,8 @@ namespace System.Dynamic
             public override DynamicMetaObject BindCreateInstance(
                 CreateInstanceBinder binder,
                 DynamicMetaObject[] args
-            ) {
+            )
+            {
                 if (IsOverridden(DynamicObject_TryCreateInstance))
                 {
                     DynamicMetaObject[] localArgs = args;
@@ -350,7 +356,8 @@ namespace System.Dynamic
             public override DynamicMetaObject BindInvoke(
                 InvokeBinder binder,
                 DynamicMetaObject[] args
-            ) {
+            )
+            {
                 if (IsOverridden(DynamicObject_TryInvoke))
                 {
                     DynamicMetaObject[] localArgs = args;
@@ -370,7 +377,8 @@ namespace System.Dynamic
             public override DynamicMetaObject BindBinaryOperation(
                 BinaryOperationBinder binder,
                 DynamicMetaObject arg
-            ) {
+            )
+            {
                 if (IsOverridden(DynamicObject_TryBinaryOperation))
                 {
                     DynamicMetaObject localArg = arg;
@@ -406,7 +414,8 @@ namespace System.Dynamic
             public override DynamicMetaObject BindGetIndex(
                 GetIndexBinder binder,
                 DynamicMetaObject[] indexes
-            ) {
+            )
+            {
                 if (IsOverridden(DynamicObject_TryGetIndex))
                 {
                     DynamicMetaObject[] localIndexes = indexes;
@@ -427,7 +436,8 @@ namespace System.Dynamic
                 SetIndexBinder binder,
                 DynamicMetaObject[] indexes,
                 DynamicMetaObject value
-            ) {
+            )
+            {
                 if (IsOverridden(DynamicObject_TrySetIndex))
                 {
                     DynamicMetaObject[] localIndexes = indexes;
@@ -449,7 +459,8 @@ namespace System.Dynamic
             public override DynamicMetaObject BindDeleteIndex(
                 DeleteIndexBinder binder,
                 DynamicMetaObject[] indexes
-            ) {
+            )
+            {
                 if (IsOverridden(DynamicObject_TryDeleteIndex))
                 {
                     DynamicMetaObject[] localIndexes = indexes;
@@ -666,7 +677,8 @@ namespace System.Dynamic
                     if (
                         binder.ReturnType.IsValueType
                         && Nullable.GetUnderlyingType(binder.ReturnType) == null
-                    ) {
+                    )
+                    {
                         condition = Expression.TypeIs(resultMO.Expression, binder.ReturnType);
                     }
                     else
@@ -920,7 +932,8 @@ namespace System.Dynamic
                     if (
                         mi.DeclaringType != typeof(DynamicObject)
                         && mi.GetBaseDefinition() == method
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }
@@ -970,7 +983,8 @@ namespace System.Dynamic
                 public override DynamicMetaObject FallbackGetMember(
                     DynamicMetaObject target,
                     DynamicMetaObject? errorSuggestion
-                ) {
+                )
+                {
                     throw new NotSupportedException();
                 }
             }

@@ -39,7 +39,8 @@ internal static class DataSetUtil
     internal static ArgumentOutOfRangeException ArgumentOutOfRange(
         string message,
         string parameterName
-    ) {
+    )
+    {
         return TraceExceptionAsReturnValue(new ArgumentOutOfRangeException(parameterName, message));
     }
 

@@ -131,7 +131,8 @@ namespace System.Linq.Parallel
                     ParallelMergeOptions.FullyBuffered,
                     true
                 )
-            ) {
+            )
+            {
                 // We just reduce the elements in each output partition. If the operation is associative,
                 // this will yield the correct answer. If not, we should never be calling this routine.
                 while (enumerator.MoveNext())
@@ -192,7 +193,8 @@ namespace System.Linq.Parallel
         internal override QueryResults<TIntermediate> Open(
             QuerySettings settings,
             bool preferStriping
-        ) {
+        )
+        {
             // We just open the child operator.
             QueryResults<TInput> childQueryResults = Child.Open(settings, preferStriping);
             return new UnaryQueryOperatorResults(childQueryResults, this, settings, preferStriping);
@@ -203,7 +205,8 @@ namespace System.Linq.Parallel
             IPartitionedStreamRecipient<TIntermediate> recipient,
             bool preferStriping,
             QuerySettings settings
-        ) {
+        )
+        {
             int partitionCount = inputStream.PartitionCount;
             PartitionedStream<TIntermediate, int> outputStream = new PartitionedStream<
                 TIntermediate,
@@ -275,7 +278,8 @@ namespace System.Linq.Parallel
                 AssociativeAggregationOperator<TInput, TIntermediate, TOutput> reduceOperator,
                 int partitionIndex,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Debug.Assert(source != null);
                 Debug.Assert(reduceOperator != null);
 
@@ -296,7 +300,8 @@ namespace System.Linq.Parallel
             internal override bool MoveNext(
                 [MaybeNullWhen(false), AllowNull] ref TIntermediate currentElement,
                 ref int currentKey
-            ) {
+            )
+            {
                 Debug.Assert(_reduceOperator != null);
                 Debug.Assert(
                     _reduceOperator._intermediateReduce != null,

@@ -104,14 +104,16 @@ namespace System.Web.Http
             public virtual Task AuthenticateAsync(
                 HttpAuthenticationContext context,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return Task.FromResult<object>(null);
             }
 
             public virtual Task ChallengeAsync(
                 HttpAuthenticationChallengeContext context,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return Task.FromResult<object>(null);
             }
 
@@ -143,7 +145,8 @@ namespace System.Web.Http
             public override Task AuthenticateAsync(
                 HttpAuthenticationContext context,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 TryThrowHttpResponseException(context.ActionContext);
                 throw new ArgumentException("authentication");
             }
@@ -154,7 +157,8 @@ namespace System.Web.Http
             public override Task AuthenticateAsync(
                 HttpAuthenticationContext context,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 context.ErrorResult = new AuthenticationErrorResult(context.ActionContext);
                 return Task.FromResult<object>(null);
             }
@@ -165,7 +169,8 @@ namespace System.Web.Http
             public override Task ChallengeAsync(
                 HttpAuthenticationChallengeContext context,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 TryThrowHttpResponseException(context.ActionContext);
                 throw new ArgumentException("authentication");
             }
@@ -176,7 +181,8 @@ namespace System.Web.Http
             public override Task ChallengeAsync(
                 HttpAuthenticationChallengeContext context,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 context.Result = new AuthenticationErrorResult(context.ActionContext);
                 return Task.FromResult<object>(null);
             }
@@ -217,7 +223,8 @@ namespace System.Web.Http
                     ResponseExceptionHeaderKey,
                     out values
                 )
-            ) {
+            )
+            {
                 string statusString = values.First() as string;
                 if (!String.IsNullOrEmpty(statusString))
                 {

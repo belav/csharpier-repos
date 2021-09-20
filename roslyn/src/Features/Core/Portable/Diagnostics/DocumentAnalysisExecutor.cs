@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             InProcOrRemoteHostAnalyzerRunner diagnosticAnalyzerRunner,
             bool logPerformanceInfo,
             Action? onAnalysisException = null
-        ) {
+        )
+        {
             AnalysisScope = analysisScope;
             _compilationWithAnalyzers = compilationWithAnalyzers;
             _diagnosticAnalyzerRunner = diagnosticAnalyzerRunner;
@@ -70,7 +71,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public async Task<IEnumerable<DiagnosticData>> ComputeDiagnosticsAsync(
             DiagnosticAnalyzer analyzer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfFalse(AnalysisScope.Analyzers.Contains(analyzer));
 
             var textDocument = AnalysisScope.TextDocument;
@@ -221,7 +223,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         > GetAnalysisResultAsync(
             DocumentAnalysisScope analysisScope,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             RoslynDebug.Assert(_compilationWithAnalyzers != null);
 
             try
@@ -247,7 +250,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             DiagnosticAnalyzer analyzer,
             TextSpan? span,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             RoslynDebug.Assert(analyzer.IsCompilerAnalyzer());
             RoslynDebug.Assert(_compilationWithAnalyzers != null);
             RoslynDebug.Assert(_compilationBasedAnalyzersInAnalysisScope.Contains(analyzer));
@@ -269,7 +273,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             DiagnosticAnalyzer analyzer,
             bool isCompilerAnalyzer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // PERF:
             //  1. Compute diagnostics for all analyzers with a single invocation into CompilationWithAnalyzers.
             //     This is critical for better analyzer execution performance.
@@ -319,7 +324,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             DiagnosticAnalyzer analyzer,
             bool isCompilerAnalyzer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // PERF:
             //  1. Compute diagnostics for all analyzers with a single invocation into CompilationWithAnalyzers.
             //     This is critical for better analyzer execution performance through re-use of bound node cache.
@@ -495,7 +501,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             TextDocument textDocument,
             ImmutableArray<DiagnosticData> diagnostics,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (diagnostics.IsEmpty)
             {
                 return diagnostics;

@@ -15,11 +15,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             uint itemId,
             int propertyId,
             [MaybeNullWhen(false)] out T value
-        ) {
+        )
+        {
             if (
                 ErrorHandler.Failed(hierarchy.GetProperty(itemId, propertyId, out var property))
                 || !(property is T)
-            ) {
+            )
+            {
                 value = default;
                 return false;
             }
@@ -33,7 +35,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             this IVsHierarchy hierarchy,
             int propertyId,
             [MaybeNullWhen(false)] out T value
-        ) {
+        )
+        {
             const uint root = VSConstants.VSITEMID_ROOT;
             return hierarchy.TryGetItemProperty(root, propertyId, out value);
         }
@@ -133,7 +136,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                         out var projectFilePath
                     )
                 ) && !string.IsNullOrEmpty(projectFilePath)
-            ) {
+            )
+            {
                 return projectFilePath;
             }
 

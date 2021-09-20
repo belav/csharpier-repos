@@ -24,7 +24,8 @@ public class TestSmallStackArgsClass
         short s10,
         short s11,
         short s12
-    ) {
+    )
+    {
         if (
             s1 != 1
             || s2 != 2
@@ -38,7 +39,8 @@ public class TestSmallStackArgsClass
             || s10 != 10
             || s11 != 11
             || s12 != 12
-        ) {
+        )
+        {
             Console.WriteLine("small stack arguments do not match.");
             Console.WriteLine("Expected: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12");
             Console.WriteLine(

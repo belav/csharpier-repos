@@ -265,7 +265,8 @@ public class Huffman : HuffStruct
         int arraysize,
         int nloops,
         huff_node[] hufftree
-    ) {
+    )
+    {
         int i; /* Index */
         int j; /* Bigger index */
         int root; /* Pointer to huffman tree root */

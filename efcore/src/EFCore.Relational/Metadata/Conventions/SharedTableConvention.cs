@@ -25,7 +25,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public SharedTableConvention(
             ProviderConventionSetBuilderDependencies dependencies,
             RelationalConventionSetBuilderDependencies relationalDependencies
-        ) {
+        )
+        {
             Dependencies = dependencies;
         }
 
@@ -38,7 +39,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessModelFinalizing(
             IConventionModelBuilder modelBuilder,
             IConventionContext<IConventionModelBuilder> context
-        ) {
+        )
+        {
             var maxLength = modelBuilder.Metadata.GetMaxIdentifierLength();
             var tables = new Dictionary<
                 (string TableName, string? Schema),
@@ -75,7 +77,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionModel model,
             Dictionary<(string Name, string? Schema), List<IConventionEntityType>> tables,
             int maxLength
-        ) {
+        )
+        {
             Dictionary<
                 (string Name, string? Schema),
                 Dictionary<(string Name, string? Schema), List<IConventionEntityType>>
@@ -103,7 +106,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         )
                         .Any()
                     && !entityTypes.Any(t => t.IsAssignableFrom(entityType))
-                ) {
+                )
+                {
                     entityTypes.Insert(0, entityType);
                 }
                 else
@@ -135,7 +139,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                             (originalName, table.Schema),
                             out var subTable
                         )
-                    ) {
+                    )
+                    {
                         subTable = new List<IConventionEntityType>();
                         clashingSubTables[(originalName, table.Schema)] = subTable;
                     }
@@ -178,7 +183,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Dictionary<string, IConventionProperty> properties,
             in StoreObjectIdentifier storeObject,
             int maxLength
-        ) {
+        )
+        {
             foreach (var property in entityType.GetDeclaredProperties())
             {
                 var columnName = property.GetColumnName(storeObject);
@@ -208,13 +214,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         !property.Builder.CanSetColumnName(null)
                         && !otherProperty.Builder.CanSetColumnName(null)
                     )
-                ) {
+                )
+                {
                     if (
                         property.GetAfterSaveBehavior() == PropertySaveBehavior.Save
                         && otherProperty.GetAfterSaveBehavior() == PropertySaveBehavior.Save
                         && property.ValueGenerated == ValueGenerated.Never
                         && otherProperty.ValueGenerated == ValueGenerated.Never
-                    ) {
+                    )
+                    {
                         // Handle this with a default value convention #9329
                         property.Builder.ValueGenerated(ValueGenerated.OnUpdateSometimes);
                         otherProperty.Builder.ValueGenerated(ValueGenerated.OnUpdateSometimes);
@@ -234,7 +242,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         )
                     )
                     || property.DeclaringEntityType.FindRowInternalForeignKeys(storeObject).Any()
-                ) {
+                )
+                {
                     var newColumnName = TryUniquify(
                         property,
                         columnName,
@@ -261,7 +270,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     )
                     || otherProperty.DeclaringEntityType.FindRowInternalForeignKeys(storeObject)
                         .Any()
-                ) {
+                )
+                {
                     var newOtherColumnName = TryUniquify(
                         otherProperty,
                         columnName,
@@ -284,7 +294,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Dictionary<string, IConventionProperty> properties,
             bool usePrefix,
             int maxLength
-        ) {
+        )
+        {
             if (property.Builder.CanSetColumnName(null))
             {
                 if (usePrefix)
@@ -314,7 +325,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Dictionary<string, IConventionKey> keys,
             in StoreObjectIdentifier storeObject,
             int maxLength
-        ) {
+        )
+        {
             foreach (var key in entityType.GetDeclaredKeys())
             {
                 var keyName = key.GetName(storeObject);
@@ -332,7 +344,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 if (
                     (key.IsPrimaryKey() && otherKey.IsPrimaryKey())
                     || AreCompatible(key, otherKey, storeObject)
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -370,7 +383,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             string keyName,
             Dictionary<string, T> keys,
             int maxLength
-        ) {
+        )
+        {
             if (key.Builder.CanSetName(null))
             {
                 keyName = Uniquifier.Uniquify(keyName, keys, maxLength);
@@ -386,7 +400,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Dictionary<string, IConventionIndex> indexes,
             in StoreObjectIdentifier storeObject,
             int maxLength
-        ) {
+        )
+        {
             foreach (var index in entityType.GetDeclaredIndexes())
             {
                 var indexName = index.GetDatabaseName(storeObject);
@@ -440,7 +455,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             string indexName,
             Dictionary<string, T> indexes,
             int maxLength
-        ) {
+        )
+        {
             if (index.Builder.CanSetDatabaseName(null))
             {
                 indexName = Uniquifier.Uniquify(indexName, indexes, maxLength);
@@ -456,7 +472,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Dictionary<string, IConventionForeignKey> foreignKeys,
             in StoreObjectIdentifier storeObject,
             int maxLength
-        ) {
+        )
+        {
             foreach (var foreignKey in entityType.GetForeignKeys())
             {
                 if (
@@ -465,7 +482,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         foreignKey.DeclaringEntityType,
                         StoreObjectType.Table
                     ) == storeObject
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -518,7 +536,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 if (
                     !otherForeignKey.DeclaringEntityType.IsAssignableFrom(entityType)
                     && !entityType.IsAssignableFrom(otherForeignKey.DeclaringEntityType)
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -554,7 +573,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             string foreignKeyName,
             Dictionary<string, T> foreignKeys,
             int maxLength
-        ) {
+        )
+        {
             if (foreignKey.Builder.CanSetConstraintName(null))
             {
                 foreignKeyName = Uniquifier.Uniquify(foreignKeyName, foreignKeys, maxLength);

@@ -69,7 +69,8 @@ namespace System.DirectoryServices.ActiveDirectory
             if (
                 (context.ContextType != DirectoryContextType.Domain)
                 && (context.ContextType != DirectoryContextType.DirectoryServer)
-            ) {
+            )
+            {
                 throw new ArgumentException(SR.TargetShouldBeServerORDomain, nameof(context));
             }
 
@@ -120,7 +121,8 @@ namespace System.DirectoryServices.ActiveDirectory
                 if (
                     (context.isServer())
                     && (!Utils.CheckCapability(rootDSE, Capability.ActiveDirectory))
-                ) {
+                )
+                {
                     throw new ActiveDirectoryObjectNotFoundException(
                         SR.Format(SR.DCNotFound, context.Name),
                         typeof(Domain),
@@ -304,7 +306,8 @@ namespace System.DirectoryServices.ActiveDirectory
             if (
                 domainMode < DomainMode.Windows2000MixedDomain
                 || domainMode > DomainMode.Windows2012R2Domain
-            ) {
+            )
+            {
                 throw new InvalidEnumArgumentException(
                     nameof(domainMode),
                     (int)domainMode,
@@ -821,7 +824,8 @@ namespace System.DirectoryServices.ActiveDirectory
             string targetDomainName,
             TrustDirection direction,
             string trustPassword
-        ) {
+        )
+        {
             CheckIfDisposed();
 
             if (targetDomainName == null)
@@ -916,7 +920,8 @@ namespace System.DirectoryServices.ActiveDirectory
         public void UpdateLocalSideOfTrustRelationship(
             string targetDomainName,
             string newTrustPassword
-        ) {
+        )
+        {
             CheckIfDisposed();
 
             if (targetDomainName == null)
@@ -938,7 +943,8 @@ namespace System.DirectoryServices.ActiveDirectory
             string targetDomainName,
             TrustDirection newTrustDirection,
             string newTrustPassword
-        ) {
+        )
+        {
             CheckIfDisposed();
 
             if (targetDomainName == null)
@@ -1716,7 +1722,8 @@ namespace System.DirectoryServices.ActiveDirectory
                                     | DS_DOMAINTRUST_FLAG.DS_DOMAIN_DIRECT_INBOUND
                                 )
                             ) == 0
-                        ) {
+                        )
+                        {
                             // Not interested in indirectly trusted domains.
                             continue;
                         }
@@ -1811,7 +1818,8 @@ namespace System.DirectoryServices.ActiveDirectory
                         if (
                             localDomainParent != null
                             && Utils.Compare(localDomainParent, tmpObject.DnsDomainName) == 0
-                        ) {
+                        )
+                        {
                             tmpObject.TrustType = TrustType.ParentChild;
                             continue;
                         }
@@ -1822,7 +1830,8 @@ namespace System.DirectoryServices.ActiveDirectory
                             if (
                                 tmpObject.ParentIndex
                                 == ((TrustObject)tmpTrustList[localDomainIndex]!).OriginalIndex
-                            ) {
+                            )
+                            {
                                 tmpObject.TrustType = TrustType.ParentChild;
                             }
                             // tree root
@@ -1833,7 +1842,8 @@ namespace System.DirectoryServices.ActiveDirectory
                                     ((TrustObject)tmpTrustList[localDomainIndex]!).Flags
                                     & (int)DS_DOMAINTRUST_FLAG.DS_DOMAIN_TREE_ROOT
                                 ) != 0
-                            ) {
+                            )
+                            {
                                 string? tmpForestName = null;
                                 string rootDomainNC = directoryEntryMgr.ExpandWellKnownDN(
                                     WellKnownDN.RootDomainNamingContext
@@ -1849,7 +1859,8 @@ namespace System.DirectoryServices.ActiveDirectory
                                 if (
                                     tmpContext.isRootDomain()
                                     || Utils.Compare(tmpObject.DnsDomainName, tmpForestName) == 0
-                                ) {
+                                )
+                                {
                                     tmpObject.TrustType = TrustType.TreeRoot;
                                 }
                                 else
@@ -1870,7 +1881,8 @@ namespace System.DirectoryServices.ActiveDirectory
                                 tmpObject.TrustAttributes
                                 & (int)TRUST_ATTRIBUTE.TRUST_ATTRIBUTE_FOREST_TRANSITIVE
                             ) != 0
-                        ) {
+                        )
+                        {
                             // should not happen as we specify DS_DOMAIN_IN_FOREST when enumerating the trust, so forest trust will not be returned
                             tmpObject.TrustType = TrustType.Forest;
                         }

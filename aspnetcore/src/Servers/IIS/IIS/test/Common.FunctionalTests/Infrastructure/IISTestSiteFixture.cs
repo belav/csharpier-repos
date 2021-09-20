@@ -161,7 +161,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
                 TState state,
                 Exception exception,
                 Func<TState, Exception, string> formatter
-            ) {
+            )
+            {
                 Logger?.Log(logLevel, eventId, state, exception, formatter);
             }
 

@@ -38,7 +38,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
         public void PostConfigure(
             string name,
             RemoteAuthenticationOptions<OidcProviderOptions> options
-        ) {
+        )
+        {
             if (string.Equals(name, Options.DefaultName))
             {
                 Configure(options);

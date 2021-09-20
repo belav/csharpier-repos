@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
             int argumentCount,
             string? argumentName,
             IList<string>? argumentNames
-        ) {
+        )
+        {
             ArgumentIndex = argumentIndex;
             ArgumentCount = argumentCount;
             ArgumentName = argumentName;

@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             protected DeliberateException(
                 SerializationInfo serializationInfo,
                 StreamingContext streamingContext
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -58,7 +59,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             SyntaxNode node,
             ISymbol symbol,
             string methodName
-        ) {
+        )
+        {
             if (_throwOnList.Contains(methodName))
             {
                 Thrown = true;
@@ -68,13 +70,15 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
         public static void VerifyAnalyzerEngineIsSafeAgainstExceptions(
             Func<DiagnosticAnalyzer, IEnumerable<Diagnostic>> runAnalysis
-        ) {
+        )
+        {
             VerifyAnalyzerEngineIsSafeAgainstExceptionsAsync(runAnalysis).Wait();
         }
 
         public static async Task VerifyAnalyzerEngineIsSafeAgainstExceptionsAsync(
             Func<DiagnosticAnalyzer, IEnumerable<Diagnostic>> runAnalysis
-        ) {
+        )
+        {
             await VerifyAnalyzerEngineIsSafeAgainstExceptionsAsync(
                 a => Task.FromResult(runAnalysis(a))
             );
@@ -82,7 +86,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
         public static async Task VerifyAnalyzerEngineIsSafeAgainstExceptionsAsync(
             Func<DiagnosticAnalyzer, Task<IEnumerable<Diagnostic>>> runAnalysis
-        ) {
+        )
+        {
             var handled = new bool?[AllAnalyzerMemberNames.Length];
             for (int i = 0; i < AllAnalyzerMemberNames.Length; i++)
             {

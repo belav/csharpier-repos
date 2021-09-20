@@ -86,7 +86,8 @@ namespace Newtonsoft.Json.Tests.Issues
             protected override JsonProperty CreateProperty(
                 MemberInfo member,
                 MemberSerialization memberSerialization
-            ) {
+            )
+            {
                 var property = base.CreateProperty(member, memberSerialization);
 
                 if (member.Name == "Items")
@@ -106,7 +107,8 @@ namespace Newtonsoft.Json.Tests.Issues
                 JsonWriter writer,
                 object value,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 throw new NotSupportedException();
             }
 
@@ -115,7 +117,8 @@ namespace Newtonsoft.Json.Tests.Issues
                 Type objectType,
                 object existingValue,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 var token = JToken.Load(reader);
                 if (token.Type == JTokenType.Array)
                 {

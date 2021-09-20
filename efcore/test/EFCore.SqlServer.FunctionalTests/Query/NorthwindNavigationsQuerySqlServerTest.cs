@@ -89,7 +89,8 @@ ORDER BY [t].[CustomerID]"
 
         public override async Task Select_collection_FirstOrDefault_project_single_column1(
             bool async
-        ) {
+        )
+        {
             await base.Select_collection_FirstOrDefault_project_single_column1(async);
 
             AssertSql(
@@ -107,7 +108,8 @@ ORDER BY [c].[CustomerID]"
 
         public override async Task Select_collection_FirstOrDefault_project_single_column2(
             bool async
-        ) {
+        )
+        {
             await base.Select_collection_FirstOrDefault_project_single_column2(async);
 
             AssertSql(
@@ -125,7 +127,8 @@ ORDER BY [c].[CustomerID]"
 
         public override async Task Select_collection_FirstOrDefault_project_anonymous_type(
             bool async
-        ) {
+        )
+        {
             await base.Select_collection_FirstOrDefault_project_anonymous_type(async);
 
             AssertSql(
@@ -152,7 +155,8 @@ ORDER BY [t].[CustomerID]"
 
         public override async Task Select_collection_FirstOrDefault_project_anonymous_type_client_eval(
             bool async
-        ) {
+        )
+        {
             await base.Select_collection_FirstOrDefault_project_anonymous_type_client_eval(async);
 
             AssertSql(
@@ -341,7 +345,8 @@ WHERE ([c].[City] = N'Seattle') AND (([c].[Phone] <> N'555 555 5555') OR [c].[Ph
 
         public override async Task Select_Where_Navigation_Scalar_Equals_Navigation_Scalar_Projected(
             bool async
-        ) {
+        )
+        {
             await base.Select_Where_Navigation_Scalar_Equals_Navigation_Scalar_Projected(async);
 
             AssertSql(
@@ -439,7 +444,8 @@ ORDER BY [c].[CustomerID]"
 
         public override async Task Select_collection_navigation_simple_followed_by_ordering_by_scalar(
             bool async
-        ) {
+        )
+        {
             await base.Select_collection_navigation_simple_followed_by_ordering_by_scalar(async);
 
             AssertSql(
@@ -731,7 +737,8 @@ ORDER BY [c].[CustomerID]"
 
         public override async Task Collection_select_nav_prop_first_or_default_then_nav_prop(
             bool async
-        ) {
+        )
+        {
             await base.Collection_select_nav_prop_first_or_default_then_nav_prop(async);
 
             AssertSql(
@@ -754,7 +761,8 @@ ORDER BY [c].[CustomerID]"
 
         public override async Task Collection_select_nav_prop_first_or_default_then_nav_prop_nested(
             bool async
-        ) {
+        )
+        {
             await base.Collection_select_nav_prop_first_or_default_then_nav_prop_nested(async);
 
             AssertSql(
@@ -770,7 +778,8 @@ WHERE [c].[CustomerID] LIKE N'A%'"
 
         public override async Task Collection_select_nav_prop_single_or_default_then_nav_prop_nested(
             bool async
-        ) {
+        )
+        {
             await base.Collection_select_nav_prop_single_or_default_then_nav_prop_nested(async);
 
             AssertSql(
@@ -786,7 +795,8 @@ WHERE [c].[CustomerID] LIKE N'A%'"
 
         public override async Task Collection_select_nav_prop_first_or_default_then_nav_prop_nested_using_property_method(
             bool async
-        ) {
+        )
+        {
             await base.Collection_select_nav_prop_first_or_default_then_nav_prop_nested_using_property_method(
                 async
             );
@@ -804,7 +814,8 @@ WHERE [c].[CustomerID] LIKE N'A%'"
 
         public override async Task Collection_select_nav_prop_first_or_default_then_nav_prop_nested_with_orderby(
             bool async
-        ) {
+        )
+        {
             await base.Collection_select_nav_prop_first_or_default_then_nav_prop_nested_with_orderby(
                 async
             );
@@ -935,7 +946,8 @@ WHERE ((
 
         public override async Task Project_single_scalar_value_subquery_is_properly_inlined(
             bool async
-        ) {
+        )
+        {
             await base.Project_single_scalar_value_subquery_is_properly_inlined(async);
 
             AssertSql(
@@ -970,7 +982,8 @@ ORDER BY [c].[CustomerID]"
 
         public override async Task Project_single_scalar_value_subquery_in_query_with_optional_navigation_works(
             bool async
-        ) {
+        )
+        {
             await base.Project_single_scalar_value_subquery_in_query_with_optional_navigation_works(
                 async
             );
@@ -995,7 +1008,8 @@ ORDER BY [t].[OrderID]"
 
         public override async Task GroupJoin_with_complex_subquery_and_LOJ_gets_flattened(
             bool async
-        ) {
+        )
+        {
             await base.GroupJoin_with_complex_subquery_and_LOJ_gets_flattened(async);
 
             AssertSql(
@@ -1012,7 +1026,8 @@ LEFT JOIN (
 
         public override async Task GroupJoin_with_complex_subquery_and_LOJ_gets_flattened2(
             bool async
-        ) {
+        )
+        {
             await base.GroupJoin_with_complex_subquery_and_LOJ_gets_flattened2(async);
 
             AssertSql(

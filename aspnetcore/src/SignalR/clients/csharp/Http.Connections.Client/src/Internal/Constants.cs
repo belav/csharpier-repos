@@ -65,7 +65,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
             string os,
             string runtime,
             string runtimeVersion
-        ) {
+        )
+        {
             var userAgent = $"Microsoft SignalR/{version.Major}.{version.Minor} (";
 
             if (!string.IsNullOrEmpty(detailedVersion))

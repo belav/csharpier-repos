@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Test
             int index,
             int length,
             string newText
-        ) {
+        )
+        {
             // Arrange
             var directiveTokenHandler = new TestDirectiveTokenEditHandler();
             directiveTokenHandler.AcceptedCharacters = AcceptedCharactersInternal.NonWhitespace;
@@ -62,7 +63,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Test
         private static CSharpStatementLiteralSyntax GetSyntaxNode(
             DirectiveTokenEditHandler editHandler,
             string content
-        ) {
+        )
+        {
             var builder = SyntaxListBuilder<SyntaxToken>.Create();
             var tokens = CSharpLanguageCharacteristics.Instance.TokenizeString(content).ToArray();
             foreach (var token in tokens)

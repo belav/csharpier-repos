@@ -32,7 +32,8 @@ namespace System.Web.Mvc.Html
         public static MvcForm BeginForm(
             this HtmlHelper htmlHelper,
             RouteValueDictionary routeValues
-        ) {
+        )
+        {
             return BeginForm(
                 htmlHelper,
                 null,
@@ -47,7 +48,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper htmlHelper,
             string actionName,
             string controllerName
-        ) {
+        )
+        {
             return BeginForm(
                 htmlHelper,
                 actionName,
@@ -63,7 +65,8 @@ namespace System.Web.Mvc.Html
             string actionName,
             string controllerName,
             object routeValues
-        ) {
+        )
+        {
             return BeginForm(
                 htmlHelper,
                 actionName,
@@ -79,7 +82,8 @@ namespace System.Web.Mvc.Html
             string actionName,
             string controllerName,
             RouteValueDictionary routeValues
-        ) {
+        )
+        {
             return BeginForm(
                 htmlHelper,
                 actionName,
@@ -95,7 +99,8 @@ namespace System.Web.Mvc.Html
             string actionName,
             string controllerName,
             FormMethod method
-        ) {
+        )
+        {
             return BeginForm(
                 htmlHelper,
                 actionName,
@@ -112,7 +117,8 @@ namespace System.Web.Mvc.Html
             string controllerName,
             object routeValues,
             FormMethod method
-        ) {
+        )
+        {
             return BeginForm(
                 htmlHelper,
                 actionName,
@@ -129,7 +135,8 @@ namespace System.Web.Mvc.Html
             string controllerName,
             RouteValueDictionary routeValues,
             FormMethod method
-        ) {
+        )
+        {
             return BeginForm(
                 htmlHelper,
                 actionName,
@@ -146,7 +153,8 @@ namespace System.Web.Mvc.Html
             string controllerName,
             FormMethod method,
             object htmlAttributes
-        ) {
+        )
+        {
             return BeginForm(
                 htmlHelper,
                 actionName,
@@ -163,7 +171,8 @@ namespace System.Web.Mvc.Html
             string controllerName,
             FormMethod method,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             return BeginForm(
                 htmlHelper,
                 actionName,
@@ -181,7 +190,8 @@ namespace System.Web.Mvc.Html
             object routeValues,
             FormMethod method,
             object htmlAttributes
-        ) {
+        )
+        {
             return BeginForm(
                 htmlHelper,
                 actionName,
@@ -199,7 +209,8 @@ namespace System.Web.Mvc.Html
             RouteValueDictionary routeValues,
             FormMethod method,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             string formAction = UrlHelper.GenerateUrl(
                 null /* routeName */
                 ,
@@ -228,7 +239,8 @@ namespace System.Web.Mvc.Html
         public static MvcForm BeginRouteForm(
             this HtmlHelper htmlHelper,
             RouteValueDictionary routeValues
-        ) {
+        )
+        {
             return BeginRouteForm(
                 htmlHelper,
                 null /* routeName */
@@ -254,7 +266,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper htmlHelper,
             string routeName,
             object routeValues
-        ) {
+        )
+        {
             return BeginRouteForm(
                 htmlHelper,
                 routeName,
@@ -268,7 +281,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper htmlHelper,
             string routeName,
             RouteValueDictionary routeValues
-        ) {
+        )
+        {
             return BeginRouteForm(
                 htmlHelper,
                 routeName,
@@ -282,7 +296,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper htmlHelper,
             string routeName,
             FormMethod method
-        ) {
+        )
+        {
             return BeginRouteForm(
                 htmlHelper,
                 routeName,
@@ -297,7 +312,8 @@ namespace System.Web.Mvc.Html
             string routeName,
             object routeValues,
             FormMethod method
-        ) {
+        )
+        {
             return BeginRouteForm(
                 htmlHelper,
                 routeName,
@@ -312,7 +328,8 @@ namespace System.Web.Mvc.Html
             string routeName,
             RouteValueDictionary routeValues,
             FormMethod method
-        ) {
+        )
+        {
             return BeginRouteForm(
                 htmlHelper,
                 routeName,
@@ -327,7 +344,8 @@ namespace System.Web.Mvc.Html
             string routeName,
             FormMethod method,
             object htmlAttributes
-        ) {
+        )
+        {
             return BeginRouteForm(
                 htmlHelper,
                 routeName,
@@ -342,7 +360,8 @@ namespace System.Web.Mvc.Html
             string routeName,
             FormMethod method,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             return BeginRouteForm(
                 htmlHelper,
                 routeName,
@@ -358,7 +377,8 @@ namespace System.Web.Mvc.Html
             object routeValues,
             FormMethod method,
             object htmlAttributes
-        ) {
+        )
+        {
             return BeginRouteForm(
                 htmlHelper,
                 routeName,
@@ -374,7 +394,8 @@ namespace System.Web.Mvc.Html
             RouteValueDictionary routeValues,
             FormMethod method,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             string formAction = UrlHelper.GenerateUrl(
                 routeName,
                 null,
@@ -409,7 +430,8 @@ namespace System.Web.Mvc.Html
             string formAction,
             FormMethod method,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             TagBuilder tagBuilder = new TagBuilder("form");
             tagBuilder.MergeAttributes(htmlAttributes);
             // action is implicitly generated, so htmlAttributes take precedence.

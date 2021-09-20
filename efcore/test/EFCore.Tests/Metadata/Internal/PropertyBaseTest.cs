@@ -1979,7 +1979,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             string forConstruction,
             string forSet,
             string forGet
-        ) {
+        )
+        {
             property.SetPropertyAccessMode(accessMode);
 
             MemberInfoTestCommon(
@@ -1997,7 +1998,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             string forConstruction,
             string forSet,
             string forGet
-        ) {
+        )
+        {
             navigation.SetPropertyAccessMode(accessMode);
 
             MemberInfoTestCommon(
@@ -2015,7 +2017,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             string forConstruction,
             string forSet,
             string forGet
-        ) {
+        )
+        {
             string failMessage = null;
             try
             {
@@ -2172,7 +2175,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             IMutablePropertyBase propertyBase,
             PropertyInfo propertyInfo,
             string fieldName
-        ) {
+        )
+        {
             Assert.Null(propertyBase.GetFieldName());
             Assert.Null(propertyBase.FieldInfo);
             Assert.Same(propertyInfo, propertyBase.GetIdentifyingMemberInfo());
@@ -2271,7 +2275,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 int id,
                 ReadOnlyProp reference,
                 IEnumerable<ReadOnlyProp> collection
-            ) {
+            )
+            {
                 _foo = id;
                 _reference = reference;
                 _collection = collection;
@@ -2292,7 +2297,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 int id,
                 ReadOnlyAutoProp reference,
                 IEnumerable<ReadOnlyAutoProp> collection
-            ) {
+            )
+            {
                 Foo = id;
                 Reference = reference;
                 Collection = collection;
@@ -2316,7 +2322,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 int id,
                 ReadOnlyFieldProp reference,
                 IEnumerable<ReadOnlyFieldProp> collection
-            ) {
+            )
+            {
                 _foo = id;
                 _reference = reference;
                 _collection = collection;
@@ -2418,7 +2425,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 int id,
                 ReadOnlyPropNoField notFoundRef,
                 IEnumerable<ReadOnlyPropNoField> notFoundColl
-            ) {
+            )
+            {
                 _notFound = id;
                 _notFoundRef = notFoundRef;
                 _notFoundColl = notFoundColl;

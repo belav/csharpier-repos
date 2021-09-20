@@ -127,7 +127,8 @@ namespace Microsoft.CodeAnalysis
             BuildPaths buildPaths,
             string? additionalReferenceDirectories,
             IAnalyzerAssemblyLoader assemblyLoader
-        ) {
+        )
+        {
             IEnumerable<string> allArgs = args;
 
             Debug.Assert(null == responseFile || PathUtilities.IsAbsolute(responseFile));
@@ -240,7 +241,8 @@ namespace Microsoft.CodeAnalysis
 
         internal virtual MetadataReferenceResolver GetCommandLineMetadataReferenceResolver(
             TouchedFileLogger? loggerOpt
-        ) {
+        )
+        {
             var pathResolver = new CompilerRelativePathResolver(
                 FileSystem,
                 Arguments.ReferencePaths,
@@ -260,7 +262,8 @@ namespace Microsoft.CodeAnalysis
             List<DiagnosticInfo> diagnostics,
             TouchedFileLogger? touchedFiles,
             out MetadataReferenceResolver referenceDirectiveResolver
-        ) {
+        )
+        {
             var commandLineReferenceResolver = GetCommandLineMetadataReferenceResolver(
                 touchedFiles
             );
@@ -298,7 +301,8 @@ namespace Microsoft.CodeAnalysis
         internal SourceText? TryReadFileContent(
             CommandLineSourceFile file,
             IList<DiagnosticInfo> diagnostics
-        ) {
+        )
+        {
             return TryReadFileContent(file, diagnostics, out _);
         }
 
@@ -313,7 +317,8 @@ namespace Microsoft.CodeAnalysis
             CommandLineSourceFile file,
             IList<DiagnosticInfo> diagnostics,
             out string? normalizedFilePath
-        ) {
+        )
+        {
             var filePath = file.Path;
             try
             {
@@ -359,7 +364,8 @@ namespace Microsoft.CodeAnalysis
             ImmutableArray<string> analyzerConfigPaths,
             DiagnosticBag diagnostics,
             [NotNullWhen(true)] out AnalyzerConfigSet? analyzerConfigSet
-        ) {
+        )
+        {
             var configs = ArrayBuilder<AnalyzerConfig>.GetInstance(analyzerConfigPaths.Length);
 
             var processedDirs = PooledHashSet<string>.GetInstance();
@@ -437,7 +443,8 @@ namespace Microsoft.CodeAnalysis
             string filePath,
             DiagnosticBag diagnostics,
             out string? normalizedPath
-        ) {
+        )
+        {
             try
             {
                 var data = OpenFileForReadWithSmallBufferOptimization(filePath, out normalizedPath);
@@ -477,7 +484,8 @@ namespace Microsoft.CodeAnalysis
         internal EmbeddedText? TryReadEmbeddedFileContent(
             string filePath,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             try
             {
                 using (var stream = OpenFileForReadWithSmallBufferOptimization(filePath, out _))
@@ -513,7 +521,8 @@ namespace Microsoft.CodeAnalysis
         private ImmutableArray<EmbeddedText?> AcquireEmbeddedTexts(
             Compilation compilation,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             Debug.Assert(compilation.Options.SourceReferenceResolver is object);
             if (Arguments.EmbeddedFiles.IsEmpty)
             {
@@ -609,7 +618,8 @@ namespace Microsoft.CodeAnalysis
             CommonMessageProvider messageProvider,
             Exception e,
             string filePath
-        ) {
+        )
+        {
             DiagnosticInfo diagnosticInfo;
 
             if (e is FileNotFoundException || e is DirectoryNotFoundException)
@@ -647,7 +657,8 @@ namespace Microsoft.CodeAnalysis
             TextWriter consoleOutput,
             ErrorLogger? errorLoggerOpt,
             Compilation? compilation
-        ) {
+        )
+        {
             bool hasErrors = false;
             foreach (var diag in diagnostics)
             {
@@ -690,7 +701,8 @@ namespace Microsoft.CodeAnalysis
                 {
                     foreach (
                         var (id, justification) in diag.ProgrammaticSuppressionInfo.Suppressions
-                    ) {
+                    )
+                    {
                         var suppressionDiag = new SuppressionDiagnostic(diag, id, justification);
                         if (_reportedDiagnostics.Add(suppressionDiag))
                         {
@@ -786,7 +798,8 @@ namespace Microsoft.CodeAnalysis
         public SarifErrorLogger? GetErrorLogger(
             TextWriter consoleOutput,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(Arguments.ErrorLogOptions?.Path != null);
 
             var diagnostics = DiagnosticBag.GetInstance();
@@ -847,7 +860,8 @@ namespace Microsoft.CodeAnalysis
         public virtual int Run(
             TextWriter consoleOutput,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var saveUICulture = CultureInfo.CurrentUICulture;
             SarifErrorLogger? errorLogger = null;
 
@@ -912,7 +926,8 @@ namespace Microsoft.CodeAnalysis
             AnalyzerConfigOptionsProvider analyzerConfigOptionsProvider,
             ImmutableArray<AdditionalText> additionalTexts,
             DiagnosticBag generatorDiagnostics
-        ) {
+        )
+        {
             return input;
         }
 
@@ -920,7 +935,8 @@ namespace Microsoft.CodeAnalysis
             TextWriter consoleOutput,
             ErrorLogger? errorLogger,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(!Arguments.IsScriptRunner);
 
             cancellationToken.ThrowIfCancellationRequested();
@@ -970,7 +986,8 @@ namespace Microsoft.CodeAnalysis
                         diagnostics,
                         out analyzerConfigSet
                     )
-                ) {
+                )
+                {
                     var hadErrors = ReportDiagnostics(
                         diagnostics,
                         consoleOutput,
@@ -1073,7 +1090,8 @@ namespace Microsoft.CodeAnalysis
                         errorLogger,
                         compilation
                     )
-                ) {
+                )
+                {
                     exitCode = Failed;
                 }
             }
@@ -1099,7 +1117,8 @@ namespace Microsoft.CodeAnalysis
             ImmutableArray<AnalyzerConfigOptionsResult> sourceFileAnalyzerConfigOptions,
             ImmutableArray<AdditionalText> additionalFiles = default,
             ImmutableArray<AnalyzerConfigOptionsResult> additionalFileOptions = default
-        ) {
+        )
+        {
             var builder = ImmutableDictionary.CreateBuilder<object, AnalyzerConfigOptions>();
             int i = 0;
             foreach (var syntaxTree in syntaxTrees)
@@ -1157,7 +1176,8 @@ namespace Microsoft.CodeAnalysis
             out CancellationTokenSource? analyzerCts,
             out bool reportAnalyzer,
             out AnalyzerDriver? analyzerDriver
-        ) {
+        )
+        {
             analyzerCts = null;
             reportAnalyzer = false;
             analyzerDriver = null;
@@ -1386,7 +1406,8 @@ namespace Microsoft.CodeAnalysis
                 if (
                     Arguments.ParseOptions.Features.ContainsKey("pdb-path-determinism")
                     && !string.IsNullOrEmpty(emitOptions.PdbFilePath)
-                ) {
+                )
+                {
                     emitOptions = emitOptions.WithPdbFilePath(
                         Path.GetFileName(emitOptions.PdbFilePath)
                     );
@@ -1508,7 +1529,8 @@ namespace Microsoft.CodeAnalysis
                                         compilation,
                                         diagnostics
                                     )
-                                ) {
+                                )
+                                {
                                     if (HasUnsuppressableErrors(diagnostics))
                                     {
                                         return;
@@ -1595,7 +1617,8 @@ namespace Microsoft.CodeAnalysis
                             compilation.Options.StrongNameProvider != null
                             && compilation.SignUsingBuilder
                             && !compilation.Options.PublicSign
-                        ) {
+                        )
+                        {
                             privateKeyOpt = compilation.StrongNameKeys.PrivateKey;
                         }
 
@@ -1682,7 +1705,8 @@ namespace Microsoft.CodeAnalysis
             DiagnosticBag diagnostics,
             TouchedFileLogger? touchedFilesLogger,
             string? finalXmlFilePath
-        ) {
+        )
+        {
             if (Arguments.TouchedFilesPath != null)
             {
                 Debug.Assert(touchedFilesLogger != null);
@@ -1737,7 +1761,8 @@ namespace Microsoft.CodeAnalysis
             List<DiagnosticInfo> diagnostics,
             CommonMessageProvider messageProvider,
             TouchedFileLogger? touchedFilesLogger
-        ) {
+        )
+        {
             var builder = ImmutableArray.CreateBuilder<AdditionalTextFile>();
 
             foreach (var file in Arguments.AdditionalFiles)
@@ -1753,7 +1778,8 @@ namespace Microsoft.CodeAnalysis
             AnalyzerDriver analyzerDriver,
             CultureInfo culture,
             bool isConcurrentBuild
-        ) {
+        )
+        {
             Debug.Assert(analyzerDriver.AnalyzerExecutionTimes != null);
             if (analyzerDriver.AnalyzerExecutionTimes.IsEmpty)
             {
@@ -1856,7 +1882,8 @@ namespace Microsoft.CodeAnalysis
             FileMode mode = FileMode.Open,
             FileAccess access = FileAccess.ReadWrite,
             FileShare share = FileShare.None
-        ) {
+        )
+        {
             try
             {
                 return FileSystem.OpenFile(filePath, mode, access, share);
@@ -1875,7 +1902,8 @@ namespace Microsoft.CodeAnalysis
             CommandLineArguments arguments,
             Compilation compilation,
             out IEnumerable<DiagnosticInfo> errors
-        ) {
+        )
+        {
             var diagnostics = DiagnosticBag.GetInstance();
             var stream = GetWin32Resources(
                 fileSystem,
@@ -1903,7 +1931,8 @@ namespace Microsoft.CodeAnalysis
             CommandLineArguments arguments,
             Compilation compilation,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             if (arguments.Win32ResourceFile != null)
             {
                 return OpenStream(
@@ -1924,7 +1953,8 @@ namespace Microsoft.CodeAnalysis
                     arguments,
                     diagnostics
                 )
-            ) {
+            )
+            {
                 using (
                     Stream? iconStream = OpenStream(
                         fileSystem,
@@ -1934,7 +1964,8 @@ namespace Microsoft.CodeAnalysis
                         messageProvider.ERR_CantOpenWin32Icon,
                         diagnostics
                     )
-                ) {
+                )
+                {
                     try
                     {
                         return compilation.CreateDefaultWin32Resources(
@@ -1966,7 +1997,8 @@ namespace Microsoft.CodeAnalysis
             OutputKind outputKind,
             CommandLineArguments arguments,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             return outputKind.IsNetModule()
               ? null
               : OpenStream(
@@ -1986,7 +2018,8 @@ namespace Microsoft.CodeAnalysis
             string? baseDirectory,
             int errorCode,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             if (path == null)
             {
                 return null;
@@ -2027,7 +2060,8 @@ namespace Microsoft.CodeAnalysis
             string path,
             string? baseDirectory,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             string? fullPath = FileUtilities.ResolveRelativePath(path, baseDirectory);
             if (fullPath == null)
             {
@@ -2047,7 +2081,8 @@ namespace Microsoft.CodeAnalysis
             string diagnosticId,
             string expectedPrefix,
             out uint code
-        ) {
+        )
+        {
             code = 0;
             return diagnosticId.StartsWith(expectedPrefix, StringComparison.Ordinal)
                 && uint.TryParse(diagnosticId.Substring(expectedPrefix.Length), out code);
@@ -2067,7 +2102,8 @@ namespace Microsoft.CodeAnalysis
             string[] rawArgs,
             string baseDirectory,
             CommandLineParser parser
-        ) {
+        )
+        {
             var key = CreateDeterminismKey(args, rawArgs, baseDirectory, parser);
             var filePath = Path.Combine(args.OutputDirectory, args.OutputFileName + ".key");
             using (var stream = File.Create(filePath))
@@ -2092,7 +2128,8 @@ namespace Microsoft.CodeAnalysis
             string[] rawArgs,
             string baseDirectory,
             CommandLineParser parser
-        ) {
+        )
+        {
             List<Diagnostic> diagnostics = new List<Diagnostic>();
             List<string> flattenedArgs = new List<string>();
             parser.FlattenArgs(rawArgs, diagnostics, flattenedArgs, null, baseDirectory);

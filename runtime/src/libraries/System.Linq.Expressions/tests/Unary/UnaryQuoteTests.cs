@@ -479,7 +479,8 @@ namespace System.Linq.Expressions.Tests
         private static Expression<TDelegate> BuildQuote<TDelegate, TQuoteType>(
             Expression body,
             params ParameterExpression[] parameters
-        ) {
+        )
+        {
             var expr = Lambda<TDelegate>(
                 Call(
                     typeof(UnaryQuoteTests).GetMethod(nameof(GetQuote))

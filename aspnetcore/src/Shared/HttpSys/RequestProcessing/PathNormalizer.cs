@@ -175,7 +175,8 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
                         if (
                             (ch2 == ByteDot && ch3 == ByteDot)
                             || (ch2 == ByteDot && ch3 == ByteSlash)
-                        ) {
+                        )
+                        {
                             return true;
                         }
                         break;
@@ -187,7 +188,8 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
                         if (
                             (ch2 == ByteDot && ch3 == ByteDot && ch4 == ByteSlash)
                             || (ch2 == ByteDot && ch3 == ByteSlash)
-                        ) {
+                        )
+                        {
                             return true;
                         }
                         break;

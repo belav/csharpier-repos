@@ -13,11 +13,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
     {
         internal class MissingTokenWithTrivia : SyntaxTokenWithTrivia
         {
-            internal MissingTokenWithTrivia(
-                SyntaxKind kind,
-                GreenNode leading,
-                GreenNode trailing
-            ) : base(kind, leading, trailing)
+            internal MissingTokenWithTrivia(SyntaxKind kind, GreenNode leading, GreenNode trailing)
+                : base(kind, leading, trailing)
             {
                 this.flags &= ~NodeFlags.IsNotMissing;
             }

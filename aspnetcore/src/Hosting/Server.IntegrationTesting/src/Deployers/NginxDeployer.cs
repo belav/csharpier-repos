@@ -65,7 +65,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
                 if (
                     DeploymentParameters.RuntimeFlavor == RuntimeFlavor.CoreClr
                     && DeploymentParameters.ApplicationType == ApplicationType.Standalone
-                ) {
+                )
+                {
                     // Publish is required to get the correct files in the output directory
                     DeploymentParameters.PublishApplicationBeforeDeployment = true;
                 }
@@ -129,7 +130,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
                     {
                         StartInfo = { FileName = "whoami", RedirectStandardOutput = true, }
                     }
-                ) {
+                )
+                {
                     process.Start();
                     process.WaitForExit(10_000);
                     return process.StandardOutput.ReadToEnd();

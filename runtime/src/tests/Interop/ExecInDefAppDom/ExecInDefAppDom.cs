@@ -52,7 +52,8 @@ public class Program
         string argument,
         int expectedHResult,
         int expectedResult
-    ) {
+    )
+    {
         bool passed = true;
         try
         {

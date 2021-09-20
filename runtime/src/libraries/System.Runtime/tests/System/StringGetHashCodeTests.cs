@@ -20,7 +20,8 @@ namespace System.Tests
         [MemberData(nameof(GetHashCode_TestData))]
         public void GetHashCodeWithStringComparer_UseSameStringInTwoProcesses_ReturnsDifferentHashCodes(
             int getHashCodeIndex
-        ) {
+        )
+        {
             Func<string, string, int> method = (parentHash, i) =>
                 int.Parse(parentHash) != s_GetHashCodes[int.Parse(i)]()
                     ? RemoteExecutor.SuccessExitCode
@@ -38,7 +39,8 @@ namespace System.Tests
                         getHashCodeIndex.ToString(),
                         new RemoteInvokeOptions { CheckExitCode = false }
                     )
-                ) {
+                )
+                {
                     exitCode = handle.ExitCode;
                     retry++;
                 }
@@ -146,7 +148,8 @@ namespace System.Tests
         [MemberData(nameof(GetHashCodeOrdinalIgnoreCase_TestData))]
         public void GetHashCode_OrdinalIgnoreCase_ReturnsSameHashCodeAsUpperCaseOrdinal(
             string input
-        ) {
+        )
+        {
             // As an implementation detail, the OrdinalIgnoreCase hash code calculation is simply the hash code
             // of the upper-invariant version of the input string.
 

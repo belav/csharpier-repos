@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Rewrite.UrlActions
             RewriteContext context,
             BackReferenceCollection? ruleBackReferences,
             BackReferenceCollection? conditionBackReferences
-        ) {
+        )
+        {
             context.HttpContext.Abort();
             context.Result = RuleResult.EndResponse;
             context.Logger.AbortedRequest(

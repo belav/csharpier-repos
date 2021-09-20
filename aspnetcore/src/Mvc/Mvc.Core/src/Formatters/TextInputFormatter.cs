@@ -42,7 +42,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         /// <inheritdoc />
         public override Task<InputFormatterResult> ReadRequestBodyAsync(
             InputFormatterContext context
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -118,7 +119,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                                 SupportedEncodings[i].WebName,
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             return SupportedEncodings[i];
                         }
                     }

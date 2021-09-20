@@ -51,7 +51,8 @@ namespace Microsoft.CodeAnalysis.AddImports
             SyntaxNode? contextLocation,
             SyntaxNode import,
             SyntaxGenerator generator
-        ) {
+        )
+        {
             var globalImports = GetGlobalImports(compilation, generator);
             var containers = GetAllContainers(root, contextLocation);
             return HasExistingImport(import, containers, globalImports);
@@ -60,7 +61,8 @@ namespace Microsoft.CodeAnalysis.AddImports
         private static ImmutableArray<SyntaxNode> GetAllContainers(
             SyntaxNode root,
             SyntaxNode? contextLocation
-        ) {
+        )
+        {
             contextLocation ??= root;
 
             var applicableContainer = GetFirstApplicableContainer(contextLocation);
@@ -71,7 +73,8 @@ namespace Microsoft.CodeAnalysis.AddImports
             SyntaxNode import,
             ImmutableArray<SyntaxNode> containers,
             ImmutableArray<SyntaxNode> globalImports
-        ) {
+        )
+        {
             foreach (var node in containers)
             {
                 if (GetUsingsAndAliases(node).Any(u => IsEquivalentImport(u, import)))
@@ -102,7 +105,8 @@ namespace Microsoft.CodeAnalysis.AddImports
             SyntaxNode root,
             SyntaxNode? contextLocation,
             SyntaxNode import
-        ) {
+        )
+        {
             contextLocation ??= root;
             GetContainers(
                 root,
@@ -143,7 +147,8 @@ namespace Microsoft.CodeAnalysis.AddImports
             bool placeSystemNamespaceFirst,
             bool allowInHiddenRegions,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             contextLocation ??= root;
 
             var globalImports = GetGlobalImports(compilation, generator);
@@ -213,7 +218,8 @@ namespace Microsoft.CodeAnalysis.AddImports
             out SyntaxNode usingContainer,
             out SyntaxNode staticUsingContainer,
             out SyntaxNode aliasContainer
-        ) {
+        )
+        {
             var applicableContainer = GetFirstApplicableContainer(contextLocation);
             var contextSpine = applicableContainer.GetAncestorsOrThis<SyntaxNode>()
                 .ToImmutableArray();

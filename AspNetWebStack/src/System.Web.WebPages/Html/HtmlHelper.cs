@@ -258,7 +258,8 @@ namespace System.Web.WebPages.Html
                     PropertyHelper property in HtmlAttributePropertyHelper.GetProperties(
                         htmlAttributes
                     )
-                ) {
+                )
+                {
                     result.Add(property.Name, property.GetValue(htmlAttributes));
                 }
             }

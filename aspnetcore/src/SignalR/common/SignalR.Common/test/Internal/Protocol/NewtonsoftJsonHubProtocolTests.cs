@@ -25,7 +25,8 @@ namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Protocol
         protected override IHubProtocol GetProtocolWithOptions(
             bool useCamelCase,
             bool ignoreNullValues
-        ) {
+        )
+        {
             var protocolOptions = new NewtonsoftJsonHubProtocolOptions
             {
                 PayloadSerializerSettings = new JsonSerializerSettings()

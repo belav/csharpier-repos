@@ -73,7 +73,8 @@ namespace System.Tests
             B nonRefParam2,
             ref A refParam,
             out B outParam
-        ) {
+        )
+        {
             outParam = (B)refParam;
             refParam = nonRefParam2;
             return nonRefParam1;
@@ -190,7 +191,8 @@ namespace System.Tests
         public static void DynamicInvoke_ValuePreservingPrimitiveWidening_Succeeds(
             object o1,
             object o2
-        ) {
+        )
+        {
             Delegate d = new IntIntDelegate(IntIntMethod);
             d.DynamicInvoke(o1, o2);
         }
@@ -201,7 +203,8 @@ namespace System.Tests
         public static void DynamicInvoke_ValuePreservingWideningToEnum_Succeeds(
             object o1,
             object o2
-        ) {
+        )
+        {
             Delegate d = new EnumEnumDelegate(EnumEnumMethod);
             d.DynamicInvoke(o1, o2);
         }
@@ -625,7 +628,8 @@ namespace System.Tests
             ulong uint64,
             float single,
             double dbl
-        ) {
+        )
+        {
             return FormattableString.Invariant(
                 $"{boolean}, {str}, {character}, {unsignedbyte}, {signedbyte}, {int16}, {uint16}, {int32}, {uint32}, {int64}, {uint64}, {single}, {dbl}"
             );

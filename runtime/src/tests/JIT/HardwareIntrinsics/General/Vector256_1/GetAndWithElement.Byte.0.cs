@@ -251,7 +251,8 @@ namespace JIT.HardwareIntrinsics.General
             Byte result,
             Byte[] values,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             if (result != values[0])
             {
                 Succeeded = false;
@@ -272,7 +273,8 @@ namespace JIT.HardwareIntrinsics.General
             Byte[] values,
             Byte insertedValue,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Byte[] resultElements = new Byte[ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<Byte, byte>(ref resultElements[0]), result);
             ValidateWithResult(resultElements, values, insertedValue, method);
@@ -283,7 +285,8 @@ namespace JIT.HardwareIntrinsics.General
             Byte[] values,
             Byte insertedValue,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             for (int i = 0; i < ElementCount; i++)

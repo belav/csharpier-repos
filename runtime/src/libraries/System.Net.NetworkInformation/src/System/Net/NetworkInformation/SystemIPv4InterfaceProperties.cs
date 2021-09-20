@@ -21,7 +21,8 @@ namespace System.Net.NetworkInformation
         internal SystemIPv4InterfaceProperties(
             Interop.IpHlpApi.FIXED_INFO fixedInfo,
             Interop.IpHlpApi.IpAdapterAddresses ipAdapterAddresses
-        ) {
+        )
+        {
             _index = ipAdapterAddresses.index;
             _routingEnabled = fixedInfo.enableRouting;
             _dhcpEnabled = (

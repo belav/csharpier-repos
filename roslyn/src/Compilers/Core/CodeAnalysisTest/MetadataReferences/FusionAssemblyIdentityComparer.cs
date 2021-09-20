@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             bool ignoreVersion,
             FusionAssemblyPortabilityPolicy policy,
             out bool unificationApplied
-        ) {
+        )
+        {
             unificationApplied = false;
             bool equivalent;
             AssemblyComparisonResult result;
@@ -92,7 +93,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             out bool areEquivalent,
             out AssemblyComparisonResult result,
             IntPtr asmConfigCookie
-        ) {
+        )
+        {
             lock (s_assemblyIdentityGate)
             {
                 return CompareAssemblyIdentityWithConfig(

@@ -300,7 +300,8 @@ namespace System.Diagnostics.Tests
                 var px = Process.Start(
                     new ProcessStartInfo { UseShellExecute = true, FileName = fileToOpen }
                 )
-            ) {
+            )
+            {
                 if (isFolder)
                 {
                     Assert.Null(px);
@@ -345,7 +346,8 @@ namespace System.Diagnostics.Tests
                 var process = Process.Start(
                     new ProcessStartInfo { UseShellExecute = true, FileName = filename }
                 )
-            ) {
+            )
+            {
                 process.WaitForExit();
                 Assert.Equal(42, process.ExitCode);
             }
@@ -404,7 +406,8 @@ namespace System.Diagnostics.Tests
                                     FileName = scriptFilename
                                 }
                             )
-                        ) {
+                        )
+                        {
                             process.WaitForExit();
                             Assert.Equal(workingDirReturnValue, process.ExitCode);
                         }
@@ -419,7 +422,8 @@ namespace System.Diagnostics.Tests
                                     FileName = scriptFilename
                                 }
                             )
-                        ) {
+                        )
+                        {
                             process.WaitForExit();
                             Assert.Equal(pathDirReturnValue, process.ExitCode);
                         }
@@ -465,7 +469,8 @@ namespace System.Diagnostics.Tests
                         WorkingDirectory = wd
                     }
                 )
-            ) {
+            )
+            {
                 process.WaitForExit();
                 Assert.Equal(42, process.ExitCode);
             }
@@ -1592,7 +1597,8 @@ namespace System.Diagnostics.Tests
                     inputArguments,
                     options
                 )
-            ) {
+            )
+            {
                 Assert.Equal(expectedArgv, handle.Process.StandardOutput.ReadToEnd());
             }
         }
@@ -1693,7 +1699,8 @@ namespace System.Diagnostics.Tests
                         return RemoteExecutor.SuccessExitCode;
                     }
                 )
-            ) {
+            )
+            {
                 process.StartInfo.RedirectStandardOutput = true;
 
                 Assert.True(process.Start());
@@ -1806,7 +1813,8 @@ namespace System.Diagnostics.Tests
                                             GetTestFilePath(),
                                             FileMode.OpenOrCreate
                                         )
-                                    ) {
+                                    )
+                                    {
                                         // Get the initial handle count
                                         p.Refresh();
                                         int handleCountAtStart = p.HandleCount;
@@ -2395,7 +2403,8 @@ namespace System.Diagnostics.Tests
             SecureString password = AsSecureString("Value");
             using (
                 Process p = Process.Start(currentProcessName, arguments, userName, password, domain)
-            ) {
+            )
+            {
                 Assert.NotNull(p);
                 Assert.Equal(currentProcessName, p.StartInfo.FileName);
                 Assert.Equal(arguments, p.StartInfo.Arguments);
@@ -2878,7 +2887,8 @@ namespace System.Diagnostics.Tests
             {
                 using (
                     var client = new AnonymousPipeClientStream(PipeDirection.Out, handleAsString)
-                ) {
+                )
+                {
                     using (var sw = new StreamWriter(client))
                     {
                         sw.WriteLine(message);
@@ -2893,7 +2903,8 @@ namespace System.Diagnostics.Tests
                         PipeDirection.In,
                         HandleInheritability.Inheritable
                     )
-                ) {
+                )
+                {
                     string handleAsString = pipeServer.GetClientHandleAsString();
 
                     T result = action(handleAsString);

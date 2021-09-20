@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             out CrefSyntax replacementNode,
             out TextSpan issueSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             replacementNode = null;
             issueSpan = default;
 
@@ -46,7 +47,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                     SyntaxKind.NameMemberCref,
                     out NameMemberCrefSyntax nameMemberCref
                 )
-            ) {
+            )
+            {
                 var symbolInfo = semanticModel.GetSymbolInfo(
                     nameMemberCref.Name,
                     cancellationToken
@@ -87,7 +89,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
         private static TypeCrefSyntax CreateReplacement(
             QualifiedCrefSyntax crefSyntax,
             SyntaxKind keywordKind
-        ) {
+        )
+        {
             var annotation = new SyntaxAnnotation(
                 nameof(CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess)
             );
@@ -104,7 +107,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             SemanticModel semanticModel,
             CrefSyntax replacement,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return CanSimplifyWithReplacement(
                 crefSyntax,
                 semanticModel,
@@ -122,7 +126,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             out CrefSyntax replacementNode,
             out TextSpan issueSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var oldSymbol = semanticModel.GetSymbolInfo(crefSyntax, cancellationToken).Symbol;
             if (oldSymbol != null)
             {

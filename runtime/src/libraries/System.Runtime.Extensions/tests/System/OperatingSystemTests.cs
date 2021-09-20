@@ -292,7 +292,8 @@ namespace System.Tests
         private static void AssertVersionChecks(
             bool isCurrentOS,
             Func<int, int, int, int, bool> isOSVersionAtLeast
-        ) {
+        )
+        {
             Version current = Environment.OSVersion.Version;
 
             Assert.False(
@@ -374,7 +375,8 @@ namespace System.Tests
         private static void AssertVersionChecks(
             bool isCurrentOS,
             Func<int, int, int, bool> isOSVersionAtLeast
-        ) {
+        )
+        {
             Version current = Environment.OSVersion.Version;
 
             Assert.False(isOSVersionAtLeast(current.Major + 1, current.Minor, current.Build));

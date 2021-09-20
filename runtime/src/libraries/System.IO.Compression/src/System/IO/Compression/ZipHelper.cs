@@ -124,7 +124,8 @@ namespace System.IO.Compression
             Stream stream,
             uint signatureToFind,
             int maxBytesToRead
-        ) {
+        )
+        {
             Debug.Assert(signatureToFind != 0);
             Debug.Assert(maxBytesToRead > 0);
 
@@ -195,7 +196,8 @@ namespace System.IO.Compression
             Stream stream,
             byte[] buffer,
             out int bufferPointer
-        ) {
+        )
+        {
             if (stream.Position >= buffer.Length)
             {
                 stream.Seek(-buffer.Length, SeekOrigin.Current);

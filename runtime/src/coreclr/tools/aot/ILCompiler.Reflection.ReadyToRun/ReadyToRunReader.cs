@@ -361,7 +361,8 @@ namespace ILCompiler.Reflection.ReadyToRun
             IAssemblyMetadata metadata,
             PEReader peReader,
             string filename
-        ) {
+        )
+        {
             _assemblyResolver = assemblyResolver;
             CompositeReader = peReader;
             Filename = filename;
@@ -460,7 +461,8 @@ namespace ILCompiler.Reflection.ReadyToRun
                     ReadyToRunSectionType.PgoInstrumentationData,
                     out _
                 )
-            ) {
+            )
+            {
                 ParsePgoMethods();
             }
 
@@ -475,7 +477,8 @@ namespace ILCompiler.Reflection.ReadyToRun
                     ReadyToRunSectionType.RuntimeFunctions,
                     out ReadyToRunSection runtimeFunctionSection
                 )
-            ) {
+            )
+            {
                 int runtimeFunctionSize = CalculateRuntimeFunctionSize();
                 uint nRuntimeFunctions = (uint)(runtimeFunctionSection.Size / runtimeFunctionSize);
                 bool[] isEntryPoint = new bool[nRuntimeFunctions];
@@ -512,7 +515,8 @@ namespace ILCompiler.Reflection.ReadyToRun
             ReadyToRunMethod
         > GetCustomMethodToRuntimeFunctionMapping<TType, TMethod, TGenericContext>(
             IR2RSignatureTypeProvider<TType, TMethod, TGenericContext> provider
-        ) {
+        )
+        {
             EnsureEntrypointRuntimeFunctionToReadyToRunMethodDict();
 
             Dictionary<TMethod, ReadyToRunMethod> customMethods = new Dictionary<
@@ -524,7 +528,8 @@ namespace ILCompiler.Reflection.ReadyToRun
                     ReadyToRunSectionType.RuntimeFunctions,
                     out ReadyToRunSection runtimeFunctionSection
                 )
-            ) {
+            )
+            {
                 ParseMethodDefEntrypoints(
                     (section, reader) =>
                         ParseMethodDefEntrypointsSectionCustom<TType, TMethod, TGenericContext>(
@@ -546,7 +551,8 @@ namespace ILCompiler.Reflection.ReadyToRun
         private static bool TryLocateNativeReadyToRunHeader(
             PEReader reader,
             out int readyToRunHeaderRVA
-        ) {
+        )
+        {
             PEExportTable exportTable = reader.GetExportTable();
 
             return exportTable.TryGetValue("RTR_HEADER", out readyToRunHeaderRVA);
@@ -660,7 +666,8 @@ namespace ILCompiler.Reflection.ReadyToRun
                     ReadyToRunSectionType.DebugInfo,
                     out ReadyToRunSection debugInfoSection
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -691,7 +698,8 @@ namespace ILCompiler.Reflection.ReadyToRun
                     ReadyToRunSectionType.ManifestMetadata,
                     out ReadyToRunSection manifestMetadata
                 )
-            ) {
+            )
+            {
                 fixed (byte* image = Image)
                 {
                     _manifestReader = new MetadataReader(
@@ -703,7 +711,8 @@ namespace ILCompiler.Reflection.ReadyToRun
                         int assemblyRefIndex = 1;
                         assemblyRefIndex <= assemblyRefCount;
                         assemblyRefIndex++
-                    ) {
+                    )
+                    {
                         AssemblyReferenceHandle asmRefHandle =
                             MetadataTokens.AssemblyReferenceHandle(assemblyRefIndex);
                         _manifestReferences.Add(asmRefHandle);
@@ -741,7 +750,8 @@ namespace ILCompiler.Reflection.ReadyToRun
                     ReadyToRunSectionType.ExceptionInfo,
                     out ReadyToRunSection exceptionInfoSection
                 )
-            ) {
+            )
+            {
                 int offset = GetOffset(exceptionInfoSection.RelativeVirtualAddress);
                 int length = exceptionInfoSection.Size;
                 int methodRva = BitConverter.ToInt32(Image, offset);
@@ -784,14 +794,16 @@ namespace ILCompiler.Reflection.ReadyToRun
         /// </summary>
         private void ParseMethodDefEntrypoints(
             Action<ReadyToRunSection, IAssemblyMetadata> methodDefSectionReader
-        ) {
+        )
+        {
             ReadyToRunSection methodEntryPointSection;
             if (
                 ReadyToRunHeader.Sections.TryGetValue(
                     ReadyToRunSectionType.MethodDefEntryPoints,
                     out methodEntryPointSection
                 )
-            ) {
+            )
+            {
                 methodDefSectionReader(methodEntryPointSection, GetGlobalMetadata());
             }
             else if (ReadyToRunAssemblyHeaders != null)
@@ -800,13 +812,15 @@ namespace ILCompiler.Reflection.ReadyToRun
                     int assemblyIndex = 0;
                     assemblyIndex < ReadyToRunAssemblyHeaders.Count;
                     assemblyIndex++
-                ) {
+                )
+                {
                     if (
                         ReadyToRunAssemblyHeaders[assemblyIndex].Sections.TryGetValue(
                             ReadyToRunSectionType.MethodDefEntryPoints,
                             out methodEntryPointSection
                         )
-                    ) {
+                    )
+                    {
                         methodDefSectionReader(
                             methodEntryPointSection,
                             OpenReferenceAssembly(assemblyIndex + 1)
@@ -827,7 +841,8 @@ namespace ILCompiler.Reflection.ReadyToRun
             ReadyToRunSection section,
             IAssemblyMetadata componentReader,
             bool[] isEntryPoint
-        ) {
+        )
+        {
             int assemblyIndex = GetAssemblyIndex(section);
             int methodDefEntryPointsOffset = GetOffset(section.RelativeVirtualAddress);
             NativeArray methodEntryPoints = new NativeArray(
@@ -863,7 +878,8 @@ namespace ILCompiler.Reflection.ReadyToRun
                     if (
                         method.EntryPointRuntimeFunctionId < 0
                         || method.EntryPointRuntimeFunctionId >= isEntryPoint.Length
-                    ) {
+                    )
+                    {
                         throw new BadImageFormatException(
                             "EntryPointRuntimeFunctionId out of bounds"
                         );
@@ -885,7 +901,8 @@ namespace ILCompiler.Reflection.ReadyToRun
             Dictionary<TMethod, ReadyToRunMethod> foundMethods,
             ReadyToRunSection section,
             IAssemblyMetadata metadataReader
-        ) {
+        )
+        {
             int methodDefEntryPointsOffset = GetOffset(section.RelativeVirtualAddress);
             NativeArray methodEntryPoints = new NativeArray(
                 Image,
@@ -928,13 +945,15 @@ namespace ILCompiler.Reflection.ReadyToRun
         private void ParseInstanceMethodEntrypointsCustom<TType, TMethod, TGenericContext>(
             IR2RSignatureTypeProvider<TType, TMethod, TGenericContext> provider,
             Dictionary<TMethod, ReadyToRunMethod> foundMethods
-        ) {
+        )
+        {
             if (
                 !ReadyToRunHeader.Sections.TryGetValue(
                     ReadyToRunSectionType.InstanceMethodEntryPoints,
                     out ReadyToRunSection instMethodEntryPointSection
                 )
-            ) {
+            )
+            {
                 return;
             }
             int instMethodEntryPointsOffset = GetOffset(
@@ -990,7 +1009,8 @@ namespace ILCompiler.Reflection.ReadyToRun
                     ReadyToRunSectionType.InstanceMethodEntryPoints,
                     out ReadyToRunSection instMethodEntryPointSection
                 )
-            ) {
+            )
+            {
                 return;
             }
             int instMethodEntryPointsOffset = GetOffset(
@@ -1023,7 +1043,8 @@ namespace ILCompiler.Reflection.ReadyToRun
                 if (
                     (methodFlags & (uint)ReadyToRunMethodSigFlags.READYTORUN_METHOD_SIG_OwnerType)
                     != 0
-                ) {
+                )
+                {
                     mdReader = decoder.GetMetadataReaderFromModuleOverride() ?? mdReader;
                     if ((_composite) && mdReader == null)
                     {
@@ -1037,7 +1058,8 @@ namespace ILCompiler.Reflection.ReadyToRun
                         methodFlags
                         & (uint)ReadyToRunMethodSigFlags.READYTORUN_METHOD_SIG_SlotInsteadOfToken
                     ) != 0
-                ) {
+                )
+                {
                     throw new NotImplementedException();
                 }
                 EntityHandle methodHandle;
@@ -1047,7 +1069,8 @@ namespace ILCompiler.Reflection.ReadyToRun
                         methodFlags
                         & (uint)ReadyToRunMethodSigFlags.READYTORUN_METHOD_SIG_MemberRefToken
                     ) != 0
-                ) {
+                )
+                {
                     methodHandle = MetadataTokens.MemberReferenceHandle(rid);
                 }
                 else
@@ -1060,7 +1083,8 @@ namespace ILCompiler.Reflection.ReadyToRun
                         methodFlags
                         & (uint)ReadyToRunMethodSigFlags.READYTORUN_METHOD_SIG_MethodInstantiation
                     ) != 0
-                ) {
+                )
+                {
                     uint typeArgCount = decoder.ReadUInt();
                     methodTypeArgs = new string[typeArgCount];
                     for (int typeArgIndex = 0; typeArgIndex < typeArgCount; typeArgIndex++)
@@ -1073,7 +1097,8 @@ namespace ILCompiler.Reflection.ReadyToRun
                 if (
                     (methodFlags & (uint)ReadyToRunMethodSigFlags.READYTORUN_METHOD_SIG_Constrained)
                     != 0
-                ) {
+                )
+                {
                     constrainedType = decoder.ReadTypeSignatureNoEmit();
                 }
 
@@ -1097,7 +1122,8 @@ namespace ILCompiler.Reflection.ReadyToRun
                 if (
                     method.EntryPointRuntimeFunctionId >= 0
                     && method.EntryPointRuntimeFunctionId < isEntryPoint.Length
-                ) {
+                )
+                {
                     isEntryPoint[method.EntryPointRuntimeFunctionId] = true;
                 }
                 _instanceMethods.Add(new InstanceMethod(curParser.LowHashcode, method));
@@ -1151,7 +1177,8 @@ namespace ILCompiler.Reflection.ReadyToRun
                     ReadyToRunSectionType.PgoInstrumentationData,
                     out ReadyToRunSection pgoInstrumentationDataSection
                 )
-            ) {
+            )
+            {
                 return;
             }
             int pgoInstrumentationDataOffset = GetOffset(
@@ -1184,7 +1211,8 @@ namespace ILCompiler.Reflection.ReadyToRun
                 if (
                     (methodFlags & (uint)ReadyToRunMethodSigFlags.READYTORUN_METHOD_SIG_OwnerType)
                     != 0
-                ) {
+                )
+                {
                     mdReader = decoder.GetMetadataReaderFromModuleOverride() ?? mdReader;
                     if ((_composite) && mdReader == null)
                     {
@@ -1198,7 +1226,8 @@ namespace ILCompiler.Reflection.ReadyToRun
                         methodFlags
                         & (uint)ReadyToRunMethodSigFlags.READYTORUN_METHOD_SIG_SlotInsteadOfToken
                     ) != 0
-                ) {
+                )
+                {
                     throw new NotImplementedException();
                 }
                 EntityHandle methodHandle;
@@ -1208,7 +1237,8 @@ namespace ILCompiler.Reflection.ReadyToRun
                         methodFlags
                         & (uint)ReadyToRunMethodSigFlags.READYTORUN_METHOD_SIG_MemberRefToken
                     ) != 0
-                ) {
+                )
+                {
                     methodHandle = MetadataTokens.MemberReferenceHandle(rid);
                 }
                 else
@@ -1221,7 +1251,8 @@ namespace ILCompiler.Reflection.ReadyToRun
                         methodFlags
                         & (uint)ReadyToRunMethodSigFlags.READYTORUN_METHOD_SIG_MethodInstantiation
                     ) != 0
-                ) {
+                )
+                {
                     uint typeArgCount = decoder.ReadUInt();
                     methodTypeArgs = new string[typeArgCount];
                     for (int typeArgIndex = 0; typeArgIndex < typeArgCount; typeArgIndex++)
@@ -1234,7 +1265,8 @@ namespace ILCompiler.Reflection.ReadyToRun
                 if (
                     (methodFlags & (uint)ReadyToRunMethodSigFlags.READYTORUN_METHOD_SIG_Constrained)
                     != 0
-                ) {
+                )
+                {
                     constrainedType = decoder.ReadTypeSignatureNoEmit();
                 }
 
@@ -1308,7 +1340,8 @@ namespace ILCompiler.Reflection.ReadyToRun
                     int assemblyIndex = 0;
                     assemblyIndex < _readyToRunAssemblyHeaders.Count;
                     assemblyIndex++
-                ) {
+                )
+                {
                     ReadyToRunSection toMatch;
                     if (
                         _readyToRunAssemblyHeaders[assemblyIndex].Sections.TryGetValue(
@@ -1316,7 +1349,8 @@ namespace ILCompiler.Reflection.ReadyToRun
                             out toMatch
                         )
                         && section.RelativeVirtualAddress == toMatch.RelativeVirtualAddress
-                    ) {
+                    )
+                    {
                         return assemblyIndex;
                     }
                 }
@@ -1344,7 +1378,8 @@ namespace ILCompiler.Reflection.ReadyToRun
                     ReadyToRunSectionType.AvailableTypes,
                     out availableTypesSection
                 )
-            ) {
+            )
+            {
                 ParseAvailableTypesSection(0, availableTypesSection, GetGlobalMetadata());
             }
             else if (_readyToRunAssemblyHeaders != null)
@@ -1353,13 +1388,15 @@ namespace ILCompiler.Reflection.ReadyToRun
                     int assemblyIndex = 0;
                     assemblyIndex < _readyToRunAssemblyHeaders.Count;
                     assemblyIndex++
-                ) {
+                )
+                {
                     if (
                         _readyToRunAssemblyHeaders[assemblyIndex].Sections.TryGetValue(
                             ReadyToRunSectionType.AvailableTypes,
                             out availableTypesSection
                         )
-                    ) {
+                    )
+                    {
                         ParseAvailableTypesSection(
                             assemblyIndex,
                             availableTypesSection,
@@ -1379,7 +1416,8 @@ namespace ILCompiler.Reflection.ReadyToRun
             int assemblyIndex,
             ReadyToRunSection availableTypesSection,
             IAssemblyMetadata metadataReader
-        ) {
+        )
+        {
             _readyToRunAssemblies[assemblyIndex]._availableTypes = new List<string>();
             int availableTypesOffset = GetOffset(availableTypesSection.RelativeVirtualAddress);
             NativeParser parser = new NativeParser(Image, (uint)availableTypesOffset);
@@ -1442,7 +1480,8 @@ namespace ILCompiler.Reflection.ReadyToRun
                     ReadyToRunSectionType.CompilerIdentifier,
                     out ReadyToRunSection compilerIdentifierSection
                 )
-            ) {
+            )
+            {
                 return;
             }
             byte[] identifier = new byte[compilerIdentifierSection.Size - 1];
@@ -1463,7 +1502,8 @@ namespace ILCompiler.Reflection.ReadyToRun
                     ReadyToRunSectionType.ComponentAssemblies,
                     out componentAssembliesSection
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -1503,7 +1543,8 @@ namespace ILCompiler.Reflection.ReadyToRun
                     ReadyToRunSectionType.ImportSections,
                     out ReadyToRunSection importSectionsSection
                 )
-            ) {
+            )
+            {
                 return;
             }
             int offset = GetOffset(importSectionsSection.RelativeVirtualAddress);
@@ -1617,7 +1658,8 @@ namespace ILCompiler.Reflection.ReadyToRun
         private static string GetExportedTypeFullName(
             MetadataReader mdReader,
             ExportedTypeHandle handle
-        ) {
+        )
+        {
             string typeNamespace = "";
             string typeStr = "";
             try
@@ -1641,7 +1683,8 @@ namespace ILCompiler.Reflection.ReadyToRun
             int offset,
             out int runtimeFunctionIndex,
             out int? fixupOffset
-        ) {
+        )
+        {
             fixupOffset = null;
 
             // get the id of the entry point runtime function from the MethodEntryPoints NativeArray
@@ -1671,7 +1714,8 @@ namespace ILCompiler.Reflection.ReadyToRun
         private AssemblyReferenceHandle GetAssemblyAtIndex(
             int refAsmIndex,
             out MetadataReader metadataReader
-        ) {
+        )
+        {
             Debug.Assert(refAsmIndex != 0);
 
             int assemblyRefCount = (

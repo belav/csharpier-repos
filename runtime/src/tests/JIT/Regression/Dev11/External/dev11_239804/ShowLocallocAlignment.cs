@@ -46,7 +46,8 @@ namespace ShowLocallocAlignment
             int arg4,
             int arg5,
             int arg6
-        ) {
+        )
+        {
             App.CallTarget1(arg1, arg2, arg3, arg4, arg5);
             double* buffer = stackalloc double[16];
             return (void*)buffer;
@@ -60,7 +61,8 @@ namespace ShowLocallocAlignment
             int arg4,
             int arg5,
             int arg6
-        ) {
+        )
+        {
             App.CallTarget2(arg1, arg2, arg3, arg4, arg5, arg6);
             double* buffer = stackalloc double[16];
             return (void*)buffer;
@@ -80,7 +82,8 @@ namespace ShowLocallocAlignment
             if (
                 RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
                 && (RuntimeInformation.ProcessArchitecture == Architecture.X86)
-            ) {
+            )
+            {
                 required_alignment = 4;
             }
             else if (RuntimeInformation.ProcessArchitecture == Architecture.Arm)

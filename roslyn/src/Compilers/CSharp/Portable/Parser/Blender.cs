@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             Lexer lexer,
             CSharp.CSharpSyntaxNode oldTree,
             IEnumerable<TextChangeRange> changes
-        ) {
+        )
+        {
             Debug.Assert(lexer != null);
             _lexer = lexer;
             _changes = ImmutableStack.Create<TextChangeRange>();
@@ -95,7 +96,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             DirectiveStack newDirectives,
             DirectiveStack oldDirectives,
             LexerMode newLexerDrivenMode
-        ) {
+        )
+        {
             Debug.Assert(lexer != null);
             Debug.Assert(changes != null);
             Debug.Assert(newPosition >= 0);
@@ -119,7 +121,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         private static TextChangeRange ExtendToAffectedRange(
             CSharp.CSharpSyntaxNode oldTree,
             TextChangeRange changeRange
-        ) {
+        )
+        {
             // we will increase affected range of the change by the number of lookahead tokens
             // original code in Blender seem to imply the lookahead at the end of a node is 1 token
             // max. TODO: 1 token lookahead seems a bit too optimistic. Increase if needed.
@@ -176,7 +179,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 var parent = token.Parent; // for each parent
                 parent != null;
                 parent = parent.Parent
-            ) {
+            )
+            {
                 if (parent.Kind() == SyntaxKind.InterpolatedStringExpression)
                 {
                     return true;

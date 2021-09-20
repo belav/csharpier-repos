@@ -20,35 +20,38 @@ namespace System.Security.AccessControl
             string name,
             AccessControlSections includeSections,
             bool isDirectory
-        ) : base(
-            isContainer,
-            s_ResourceType,
-            PathInternal.EnsureExtendedPrefixIfNeeded(Path.GetFullPath(name)),
-            includeSections,
-            _HandleErrorCode,
-            isDirectory
-        ) { }
+        )
+            : base(
+                isContainer,
+                s_ResourceType,
+                PathInternal.EnsureExtendedPrefixIfNeeded(Path.GetFullPath(name)),
+                includeSections,
+                _HandleErrorCode,
+                isDirectory
+            ) { }
 
         internal FileSystemSecurity(
             bool isContainer,
             SafeFileHandle? handle,
             AccessControlSections includeSections,
             bool isDirectory
-        ) : base(
-            isContainer,
-            s_ResourceType,
-            handle,
-            includeSections,
-            _HandleErrorCode,
-            isDirectory
-        ) { }
+        )
+            : base(
+                isContainer,
+                s_ResourceType,
+                handle,
+                includeSections,
+                _HandleErrorCode,
+                isDirectory
+            ) { }
 
         private static Exception? _HandleErrorCode(
             int errorCode,
             string? name,
             SafeHandle? handle,
             object? context
-        ) {
+        )
+        {
             Exception? exception = null;
 
             switch (errorCode)
@@ -93,7 +96,8 @@ namespace System.Security.AccessControl
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
             AccessControlType type
-        ) {
+        )
+        {
             return new FileSystemAccessRule(
                 identityReference,
                 accessMask,
@@ -111,7 +115,8 @@ namespace System.Security.AccessControl
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
             AuditFlags flags
-        ) {
+        )
+        {
             return new FileSystemAuditRule(
                 identityReference,
                 accessMask,
@@ -208,7 +213,8 @@ namespace System.Security.AccessControl
                     && (fsrule.FileSystemRights == rule.FileSystemRights)
                     && (fsrule.IdentityReference == rule.IdentityReference)
                     && (fsrule.AccessControlType == rule.AccessControlType)
-                ) {
+                )
+                {
                     return base.RemoveAccessRule(rule);
                 }
             }
@@ -262,7 +268,8 @@ namespace System.Security.AccessControl
                     && (fsrule.FileSystemRights == rule.FileSystemRights)
                     && (fsrule.IdentityReference == rule.IdentityReference)
                     && (fsrule.AccessControlType == rule.AccessControlType)
-                ) {
+                )
+                {
                     base.RemoveAccessRuleSpecific(rule);
                     return;
                 }

@@ -323,7 +323,8 @@ namespace System.Xml.Serialization
                     && !o.QualifiedName.IsEmpty
                     && o.QualifiedName.Namespace != null
                     && o.QualifiedName.Namespace.Length != 0
-                ) {
+                )
+                {
                     WriteAttribute(@"form", @"", "qualified");
                 }
                 else
@@ -1064,7 +1065,8 @@ namespace System.Xml.Serialization
                     && !o.QualifiedName.IsEmpty
                     && o.QualifiedName.Namespace != null
                     && o.QualifiedName.Namespace.Length != 0
-                ) {
+                )
+                {
                     WriteAttribute(@"form", @"", "qualified");
                 }
                 else
@@ -1326,7 +1328,8 @@ namespace System.Xml.Serialization
 
         private void Write56_XmlSchemaComplexContentRestriction(
             XmlSchemaComplexContentRestriction? o
-        ) {
+        )
+        {
             if (o is null)
                 return;
             WriteStartElement("restriction");

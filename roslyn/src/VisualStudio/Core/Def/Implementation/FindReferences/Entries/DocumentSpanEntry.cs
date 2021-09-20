@@ -113,7 +113,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 SourceText lineText,
                 SymbolUsageInfo symbolUsageInfo,
                 ImmutableDictionary<string, string> customColumnsData
-            ) {
+            )
+            {
                 var document = documentSpan.Document;
                 var (guid, projectName, projectFlavor) = GetGuidAndProjectInfo(document);
                 var entry = new DocumentSpanEntry(
@@ -199,7 +200,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             public override bool TryCreateColumnContent(
                 string columnName,
                 [NotNullWhen(true)] out FrameworkElement? content
-            ) {
+            )
+            {
                 if (base.TryCreateColumnContent(columnName, out content))
                 {
                     // this lazy tooltip causes whole solution to be kept in memory until find all reference result gets cleared.
@@ -237,7 +239,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             private DisposableToolTip CreateDisposableToolTip(
                 Document document,
                 TextSpan sourceSpan
-            ) {
+            )
+            {
                 Presenter.AssertIsForeground();
 
                 var controlService =
@@ -289,7 +292,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             private void SetStaticClassifications(
                 ITextBuffer textBuffer,
                 ImmutableArray<ClassifiedSpan> classifiedSpans
-            ) {
+            )
+            {
                 var key = PredefinedPreviewTaggerKeys.StaticClassificationSpansKey;
                 textBuffer.Properties.RemoveProperty(key);
                 textBuffer.Properties.AddProperty(key, classifiedSpans);
@@ -299,7 +303,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 HighlightSpanKind spanKind,
                 ITextBuffer textBuffer,
                 TextSpan span
-            ) {
+            )
+            {
                 // Create an appropriate highlight span on that buffer for the reference.
                 var key =
                     spanKind == HighlightSpanKind.Definition
@@ -320,7 +325,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             private static Span GetRegionSpanForReference(
                 SourceText sourceText,
                 TextSpan sourceSpan
-            ) {
+            )
+            {
                 const int AdditionalLineCountPerSide = 3;
 
                 var referenceSpan = sourceSpan;
@@ -341,7 +347,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             bool ISupportsNavigation.TryNavigateTo(
                 bool isPreview,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // If the document is a source generated document, we need to do the navigation ourselves;
                 // this is because the file path given to the table control isn't a real file path to a file
                 // on disk.

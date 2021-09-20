@@ -228,7 +228,8 @@ namespace System.Reflection
         internal static MethodBase GetMethodFromHandleNoGenericCheck(
             RuntimeMethodHandle handle,
             RuntimeTypeHandle reflectedType
-        ) {
+        )
+        {
             return GetMethodFromHandleInternalType_native(handle.Value, reflectedType.Value, false);
         }
 
@@ -250,7 +251,8 @@ namespace System.Reflection
         internal static MethodBase GetMethodFromHandleInternalType(
             IntPtr method_handle,
             IntPtr type_handle
-        ) {
+        )
+        {
             return GetMethodFromHandleInternalType_native(method_handle, type_handle, true);
         }
 
@@ -358,7 +360,8 @@ namespace System.Reflection
             Binder? binder,
             object?[]? parameters,
             CultureInfo? culture
-        ) {
+        )
+        {
             if (!IsStatic)
             {
                 if (!DeclaringType.IsInstanceOfType(obj))
@@ -427,7 +430,8 @@ namespace System.Reflection
             ParameterInfo[] pinfo,
             CultureInfo? culture,
             BindingFlags invokeAttr
-        ) {
+        )
+        {
             if (args == null)
             {
                 if (pinfo.Length == 0)
@@ -894,7 +898,8 @@ namespace System.Reflection
             Binder? binder,
             object?[]? parameters,
             CultureInfo? culture
-        ) {
+        )
+        {
             if (obj == null)
             {
                 if (!IsStatic)
@@ -914,7 +919,8 @@ namespace System.Reflection
             Binder? binder,
             object?[]? parameters,
             CultureInfo? culture
-        ) {
+        )
+        {
             if (binder == null)
                 binder = Type.DefaultBinder;
 
@@ -988,7 +994,8 @@ namespace System.Reflection
             Binder? binder,
             object?[]? parameters,
             CultureInfo? culture
-        ) {
+        )
+        {
             return DoInvoke(null, invokeAttr, binder, parameters, culture);
         }
 

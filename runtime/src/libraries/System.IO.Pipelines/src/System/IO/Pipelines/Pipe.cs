@@ -170,7 +170,8 @@ namespace System.IO.Pipelines
                 !_operationState.IsWritingActive
                 || _writingHeadMemory.Length == 0
                 || _writingHeadMemory.Length < sizeHint
-            ) {
+            )
+            {
                 AllocateWriteHeadSynchronized(sizeHint);
             }
         }
@@ -301,7 +302,8 @@ namespace System.IO.Pipelines
                 && oldLength < PauseWriterThreshold
                 && _unconsumedBytes >= PauseWriterThreshold
                 && !_readerCompletion.IsCompleted
-            ) {
+            )
+            {
                 _writerAwaitable.SetUncompleted();
             }
 
@@ -356,7 +358,8 @@ namespace System.IO.Pipelines
             out CompletionData completionData,
             out ValueTask<FlushResult> result,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var wasEmpty = CommitUnsynchronized();
 
             // AttachToken before completing reader awaiter in case cancellationToken is already completed
@@ -449,7 +452,8 @@ namespace System.IO.Pipelines
             int consumedIndex,
             BufferSegment? examinedSegment,
             int examinedIndex
-        ) {
+        )
+        {
             // Throw if examined < consumed
             if (
                 consumedSegment != null
@@ -460,7 +464,8 @@ namespace System.IO.Pipelines
                     examinedSegment,
                     examinedIndex
                 ) < 0
-            ) {
+            )
+            {
                 ThrowHelper.ThrowInvalidOperationException_InvalidExaminedOrConsumedPosition();
             }
 
@@ -501,7 +506,8 @@ namespace System.IO.Pipelines
                     if (
                         oldLength >= ResumeWriterThreshold
                         && _unconsumedBytes < ResumeWriterThreshold
-                    ) {
+                    )
+                    {
                         _writerAwaitable.Complete(out completionData);
                     }
                 }
@@ -739,7 +745,8 @@ namespace System.IO.Pipelines
         private static void ScheduleCallbacks(
             PipeScheduler scheduler,
             PipeCompletionCallbacks completionCallbacks
-        ) {
+        )
+        {
             Debug.Assert(completionCallbacks != null);
 
             scheduler.UnsafeSchedule(s_invokeCompletionCallbacks, completionCallbacks);
@@ -763,7 +770,8 @@ namespace System.IO.Pipelines
             if (
                 completionData.SynchronizationContext is null
                 && completionData.ExecutionContext is null
-            ) {
+            )
+            {
                 // Common fast-path
                 scheduler.UnsafeSchedule(completion, completionData.CompletionState);
             }
@@ -777,7 +785,8 @@ namespace System.IO.Pipelines
         private static void ScheduleWithContext(
             PipeScheduler scheduler,
             in CompletionData completionData
-        ) {
+        )
+        {
             Debug.Assert(
                 completionData.SynchronizationContext != null
                     || completionData.ExecutionContext != null
@@ -875,7 +884,8 @@ namespace System.IO.Pipelines
             Action<object?> continuation,
             object? state,
             ValueTaskSourceOnCompletedFlags flags
-        ) {
+        )
+        {
             CompletionData completionData;
             bool doubleCompletion;
             lock (SyncObj)
@@ -1029,7 +1039,8 @@ namespace System.IO.Pipelines
         internal ValueTask<FlushResult> WriteAsync(
             ReadOnlyMemory<byte> source,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (_writerCompletion.IsCompleted)
             {
                 ThrowHelper.ThrowInvalidOperationException_NoWritingAllowed();
@@ -1106,7 +1117,8 @@ namespace System.IO.Pipelines
             Action<object?> continuation,
             object? state,
             ValueTaskSourceOnCompletedFlags flags
-        ) {
+        )
+        {
             CompletionData completionData;
             bool doubleCompletion;
             lock (SyncObj)

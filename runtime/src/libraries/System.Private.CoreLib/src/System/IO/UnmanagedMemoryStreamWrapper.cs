@@ -142,7 +142,8 @@ namespace System.IO
             Stream destination,
             int bufferSize,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // The parameter checks must be in sync with the base version:
             if (destination == null)
                 throw new ArgumentNullException(nameof(destination));
@@ -178,14 +179,16 @@ namespace System.IO
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _unmanagedStream.ReadAsync(buffer, offset, count, cancellationToken);
         }
 
         public override ValueTask<int> ReadAsync(
             Memory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return _unmanagedStream.ReadAsync(buffer, cancellationToken);
         }
 
@@ -194,14 +197,16 @@ namespace System.IO
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _unmanagedStream.WriteAsync(buffer, offset, count, cancellationToken);
         }
 
         public override ValueTask WriteAsync(
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return _unmanagedStream.WriteAsync(buffer, cancellationToken);
         }
     } // class UnmanagedMemoryStreamWrapper

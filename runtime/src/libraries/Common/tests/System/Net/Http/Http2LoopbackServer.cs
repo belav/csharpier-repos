@@ -121,7 +121,8 @@ namespace System.Net.Test.Common
 
         public Task<Http2LoopbackConnection> EstablishConnectionAsync(
             params SettingsEntry[] settingsEntries
-        ) {
+        )
+        {
             return EstablishConnectionAsync(timeout: null, ackTimeout: null, settingsEntries);
         }
 
@@ -129,7 +130,8 @@ namespace System.Net.Test.Common
             TimeSpan? timeout,
             TimeSpan? ackTimeout,
             params SettingsEntry[] settingsEntries
-        ) {
+        )
+        {
             (Http2LoopbackConnection connection, _) = await EstablishConnectionGetSettingsAsync(
                     timeout,
                     ackTimeout,
@@ -141,7 +143,8 @@ namespace System.Net.Test.Common
 
         public Task<(Http2LoopbackConnection, SettingsFrame)> EstablishConnectionGetSettingsAsync(
             params SettingsEntry[] settingsEntries
-        ) {
+        )
+        {
             return EstablishConnectionGetSettingsAsync(
                 timeout: null,
                 ackTimeout: null,
@@ -153,7 +156,8 @@ namespace System.Net.Test.Common
             TimeSpan? timeout,
             TimeSpan? ackTimeout,
             params SettingsEntry[] settingsEntries
-        ) {
+        )
+        {
             Http2LoopbackConnection connection = await AcceptConnectionAsync(timeout)
                 .ConfigureAwait(false);
             SettingsFrame clientSettingsFrame = await connection.ReadAndSendSettingsAsync(
@@ -182,11 +186,13 @@ namespace System.Net.Test.Common
             HttpStatusCode statusCode = HttpStatusCode.OK,
             IList<HttpHeaderData> headers = null,
             string content = ""
-        ) {
+        )
+        {
             using (
                 Http2LoopbackConnection connection = await EstablishConnectionAsync()
                     .ConfigureAwait(false)
-            ) {
+            )
+            {
                 return await connection.HandleRequestAsync(statusCode, headers, content)
                     .ConfigureAwait(false);
             }
@@ -194,11 +200,13 @@ namespace System.Net.Test.Common
 
         public override async Task AcceptConnectionAsync(
             Func<GenericLoopbackConnection, Task> funcAsync
-        ) {
+        )
+        {
             using (
                 Http2LoopbackConnection connection = await EstablishConnectionAsync()
                     .ConfigureAwait(false)
-            ) {
+            )
+            {
                 await funcAsync(connection).ConfigureAwait(false);
             }
         }
@@ -207,7 +215,8 @@ namespace System.Net.Test.Common
             Func<Uri, Task> clientFunc,
             Func<Http2LoopbackServer, Task> serverFunc,
             int timeout = 60_000
-        ) {
+        )
+        {
             return CreateClientAndServerAsync(clientFunc, serverFunc, null, timeout);
         }
 
@@ -216,10 +225,12 @@ namespace System.Net.Test.Common
             Func<Http2LoopbackServer, Task> serverFunc,
             Http2Options http2Options,
             int timeout = 60_000
-        ) {
+        )
+        {
             using (
                 var server = Http2LoopbackServer.CreateServer(http2Options ?? new Http2Options())
-            ) {
+            )
+            {
                 Task clientTask = clientFunc(server.Address);
                 Task serverTask = serverFunc(server);
 
@@ -247,7 +258,8 @@ namespace System.Net.Test.Common
         public static async Task CreateServerAsync(
             Func<Http2LoopbackServer, Uri, Task> funcAsync,
             int millisecondsTimeout = 60_000
-        ) {
+        )
+        {
             using (var server = Http2LoopbackServer.CreateServer())
             {
                 await funcAsync(server, server.Address)
@@ -264,7 +276,8 @@ namespace System.Net.Test.Common
             Socket socket,
             Stream stream,
             GenericLoopbackOptions options = null
-        ) {
+        )
+        {
             return await Http2LoopbackConnection.CreateAsync(socket, stream, CreateOptions(options))
                 .ConfigureAwait(false);
         }
@@ -286,7 +299,8 @@ namespace System.Net.Test.Common
             Func<GenericLoopbackServer, Uri, Task> funcAsync,
             int millisecondsTimeout = 60_000,
             GenericLoopbackOptions options = null
-        ) {
+        )
+        {
             using (var server = CreateServer(options))
             {
                 await funcAsync(server, server.Address)

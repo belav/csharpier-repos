@@ -485,7 +485,8 @@ namespace System
             bool shift,
             bool alt,
             bool control
-        ) {
+        )
+        {
             throw null;
         }
         public System.ConsoleKey Key
@@ -506,7 +507,8 @@ namespace System
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? value
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()

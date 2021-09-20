@@ -173,7 +173,8 @@ namespace System.SpanTests
             string[] firstInput,
             string[] secondInput,
             bool expected
-        ) {
+        )
+        {
             Span<string> theStrings = firstInput;
 
             Assert.Equal(expected, theStrings.SequenceEqual(secondInput));

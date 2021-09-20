@@ -54,7 +54,8 @@ namespace System.Net.NetworkInformation
                         if (
                             s_addressChangedSubscribers.Count == 0
                             && s_availabilityChangedSubscribers.Count == 0
-                        ) {
+                        )
+                        {
                             Debug.Assert(
                                 s_socket == 0,
                                 "s_socket != 0, but there are no subscribers to NetworkAddressChanged or NetworkAvailabilityChanged."
@@ -66,7 +67,8 @@ namespace System.Net.NetworkInformation
                         if (
                             s_addressChangedSubscribers.Count == 0
                             && s_availabilityChangedSubscribers.Count == 0
-                        ) {
+                        )
+                        {
                             CloseSocket();
                         }
                     }
@@ -128,7 +130,8 @@ namespace System.Net.NetworkInformation
                         if (
                             s_addressChangedSubscribers.Count == 0
                             && s_availabilityChangedSubscribers.Count == 0
-                        ) {
+                        )
+                        {
                             Debug.Assert(
                                 s_socket == 0,
                                 "s_socket != 0, but there are no subscribers to NetworkAddressChanged or NetworkAvailabilityChanged."
@@ -262,7 +265,8 @@ namespace System.Net.NetworkInformation
                         NetworkAddressChangedEventHandler,
                         ExecutionContext?
                     > subscriber in addressChangedSubscribers
-                ) {
+                )
+                {
                     NetworkAddressChangedEventHandler handler = subscriber.Key;
                     ExecutionContext? ec = subscriber.Value;
 
@@ -315,7 +319,8 @@ namespace System.Net.NetworkInformation
                         NetworkAvailabilityChangedEventHandler,
                         ExecutionContext?
                     > subscriber in availabilityChangedSubscribers
-                ) {
+                )
+                {
                     NetworkAvailabilityChangedEventHandler handler = subscriber.Key;
                     ExecutionContext? ec = subscriber.Value;
 

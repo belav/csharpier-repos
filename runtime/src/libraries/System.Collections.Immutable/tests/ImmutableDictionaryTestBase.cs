@@ -260,7 +260,8 @@ namespace System.Collections.Immutable.Tests
             TKey key,
             TValue value1,
             TValue value2
-        ) {
+        )
+        {
             Assert.NotNull(map);
             Assert.NotNull(key);
             Assert.True(GetValueComparer(map).Equals(value1, value2));
@@ -288,7 +289,8 @@ namespace System.Collections.Immutable.Tests
             TKey key,
             TValue value1,
             TValue value2
-        ) {
+        )
+        {
             Assert.NotNull(map);
             Assert.NotNull(key);
             Assert.False(GetValueComparer(map).Equals(value1, value2));
@@ -303,7 +305,8 @@ namespace System.Collections.Immutable.Tests
             IImmutableDictionary<TKey, TValue> map,
             TKey key,
             TValue value
-        ) {
+        )
+        {
             Assert.False(map.ContainsKey(key));
             Assert.True(map.Add(key, value).ContainsKey(key));
         }
@@ -312,7 +315,8 @@ namespace System.Collections.Immutable.Tests
             IImmutableDictionary<TKey, TValue> map,
             TKey key,
             TValue value
-        ) {
+        )
+        {
             Assert.False(map.Contains(new KeyValuePair<TKey, TValue>(key, value)));
             Assert.False(map.Contains(key, value));
             Assert.True(map.Add(key, value).Contains(new KeyValuePair<TKey, TValue>(key, value)));
@@ -322,7 +326,8 @@ namespace System.Collections.Immutable.Tests
         protected void RemoveTestHelper<TKey, TValue>(
             IImmutableDictionary<TKey, TValue> map,
             TKey key
-        ) {
+        )
+        {
             // no-op remove
             Assert.Same(map, map.Remove(key));
             Assert.Same(map, map.RemoveRange(Enumerable.Empty<TKey>()));

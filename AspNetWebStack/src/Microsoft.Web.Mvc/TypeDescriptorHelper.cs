@@ -28,7 +28,8 @@ namespace Microsoft.Web.Mvc
                 Func<object> modelAccessor,
                 Type modelType,
                 string propertyName
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 

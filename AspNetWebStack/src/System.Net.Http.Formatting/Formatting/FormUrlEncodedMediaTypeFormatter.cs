@@ -37,9 +37,8 @@ namespace System.Net.Http.Formatting
         /// Initializes a new instance of the <see cref="FormUrlEncodedMediaTypeFormatter"/> class.
         /// </summary>
         /// <param name="formatter">The <see cref="FormUrlEncodedMediaTypeFormatter"/> instance to copy settings from.</param>
-        protected FormUrlEncodedMediaTypeFormatter(
-            FormUrlEncodedMediaTypeFormatter formatter
-        ) : base(formatter)
+        protected FormUrlEncodedMediaTypeFormatter(FormUrlEncodedMediaTypeFormatter formatter)
+            : base(formatter)
         {
             MaxDepth = formatter.MaxDepth;
             ReadBufferSize = formatter.ReadBufferSize;
@@ -156,7 +155,8 @@ namespace System.Net.Http.Formatting
             Stream readStream,
             HttpContent content,
             IFormatterLogger formatterLogger
-        ) {
+        )
+        {
             if (type == null)
             {
                 throw Error.ArgumentNull("type");
@@ -215,7 +215,8 @@ namespace System.Net.Http.Formatting
         private static IEnumerable<KeyValuePair<string, string>> ReadFormUrlEncoded(
             Stream input,
             int bufferSize
-        ) {
+        )
+        {
             Contract.Assert(input != null, "input stream cannot be null");
             Contract.Assert(
                 bufferSize >= MinBufferSize,

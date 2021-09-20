@@ -51,7 +51,8 @@ namespace System.Net.Security
         internal SecureChannel(
             SslAuthenticationOptions sslAuthenticationOptions,
             SslStream sslStream
-        ) {
+        )
+        {
             if (NetEventSource.Log.IsEnabled())
                 NetEventSource.Log.SecureChannelCtor(
                     this,
@@ -180,7 +181,8 @@ namespace System.Net.Security
             object instance,
             bool isServer,
             X509Certificate certificate
-        ) {
+        )
+        {
             if (certificate == null)
             {
                 return null;
@@ -385,7 +387,8 @@ namespace System.Net.Security
                     if (
                         _sslAuthenticationOptions.ClientCertificates == null
                         || _sslAuthenticationOptions.ClientCertificates.Count == 0
-                    ) {
+                    )
+                    {
                         if (NetEventSource.Log.IsEnabled())
                             NetEventSource.Log.NoDelegateNoClientCert(this);
 
@@ -402,7 +405,8 @@ namespace System.Net.Security
                 _credentialsHandle == null
                 && _sslAuthenticationOptions.ClientCertificates != null
                 && _sslAuthenticationOptions.ClientCertificates.Count > 0
-            ) {
+            )
+            {
                 // This is where we attempt to restart a session by picking the FIRST cert from the collection.
                 // Otherwise it is either server sending a client cert request or the session is renegotiated.
                 clientCertificate = _sslAuthenticationOptions.ClientCertificates[0];
@@ -418,7 +422,8 @@ namespace System.Net.Security
             else if (
                 _sslAuthenticationOptions.ClientCertificates != null
                 && _sslAuthenticationOptions.ClientCertificates.Count > 0
-            ) {
+            )
+            {
                 //
                 // This should be a server request for the client cert sent over currently anonymous sessions.
                 //
@@ -509,7 +514,8 @@ namespace System.Net.Security
                                 certificateEx != null
                                 && (object)certificateEx
                                     != (object)_sslAuthenticationOptions.ClientCertificates[i]
-                            ) {
+                            )
+                            {
                                 certificateEx.Dispose();
                             }
                         }
@@ -565,7 +571,8 @@ namespace System.Net.Security
                                 clientCertificate
                             )
                         ) != null
-                    ) {
+                    )
+                    {
                         break;
                     }
 
@@ -605,7 +612,8 @@ namespace System.Net.Security
                     && cachedCredentialHandle == null
                     && selectedCert != null
                     && SslStreamPal.StartMutualAuthAsAnonymous
-                ) {
+                )
+                {
                     if (NetEventSource.Log.IsEnabled())
                         NetEventSource.Info(this, "Reset to anonymous session.");
 
@@ -807,7 +815,8 @@ namespace System.Net.Security
             if (
                 !_sslAuthenticationOptions.IsServer
                 && status.ErrorCode == SecurityStatusPalErrorCode.CredentialsNeeded
-            ) {
+            )
+            {
                 if (NetEventSource.Log.IsEnabled())
                     NetEventSource.Info(
                         this,
@@ -917,7 +926,8 @@ namespace System.Net.Security
                         && !_securityContext.IsInvalid
                         && _credentialsHandle != null
                         && !_credentialsHandle.IsInvalid
-                    ) {
+                    )
+                    {
                         SslSessionsCache.CacheCredential(
                             _credentialsHandle,
                             thumbPrint,
@@ -979,7 +989,8 @@ namespace System.Net.Security
             ReadOnlyMemory<byte> buffer,
             ref byte[] output,
             out int resultSize
-        ) {
+        )
+        {
             if (NetEventSource.Log.IsEnabled())
                 NetEventSource.DumpBuffer(this, buffer);
 
@@ -1048,7 +1059,8 @@ namespace System.Net.Security
             ref ProtocolToken? alertToken,
             out SslPolicyErrors sslPolicyErrors,
             out X509ChainStatusFlags chainStatus
-        ) {
+        )
+        {
             sslPolicyErrors = SslPolicyErrors.None;
             chainStatus = X509ChainStatusFlags.NoError;
 
@@ -1068,7 +1080,8 @@ namespace System.Net.Security
                     _remoteCertificate != null
                     && certificate != null
                     && certificate.RawData.AsSpan().SequenceEqual(_remoteCertificate.RawData)
-                ) {
+                )
+                {
                     // This is renegotiation or TLS 1.3 and the certificate did not change.
                     // There is no reason to process callback again as we already established trust.
                     return true;
@@ -1196,7 +1209,8 @@ namespace System.Net.Security
         public ProtocolToken? CreateFatalHandshakeAlertToken(
             SslPolicyErrors sslPolicyErrors,
             X509Chain chain
-        ) {
+        )
+        {
             TlsAlertMessage alertMessage;
 
             switch (sslPolicyErrors)
@@ -1289,7 +1303,8 @@ namespace System.Net.Security
                             | X509ChainStatusFlags.Cyclic
                         )
                     ) != 0
-                ) {
+                )
+                {
                     return TlsAlertMessage.UnknownCA;
                 }
 
@@ -1298,7 +1313,8 @@ namespace System.Net.Security
                         chainStatus.Status
                         & (X509ChainStatusFlags.Revoked | X509ChainStatusFlags.OfflineRevocation)
                     ) != 0
-                ) {
+                )
+                {
                     return TlsAlertMessage.CertificateRevoked;
                 }
 
@@ -1311,7 +1327,8 @@ namespace System.Net.Security
                             | X509ChainStatusFlags.NotTimeValid
                         )
                     ) != 0
-                ) {
+                )
+                {
                     return TlsAlertMessage.CertificateExpired;
                 }
 
@@ -1332,7 +1349,8 @@ namespace System.Net.Security
                         | X509ChainStatusFlags.NoIssuanceChainPolicy
                         | X509ChainStatusFlags.NotValidForUsage
                     ) != 0
-                ) {
+                )
+                {
                     return TlsAlertMessage.BadCertificate;
                 }
 
@@ -1348,7 +1366,8 @@ namespace System.Net.Security
             SslPolicyErrors sslPolicyErrors,
             bool success,
             X509Chain chain
-        ) {
+        )
+        {
             if (!NetEventSource.Log.IsEnabled())
                 return;
 

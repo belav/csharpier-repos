@@ -470,7 +470,8 @@ class Program
         int index,
         Func<uint, byte> action1,
         Func<uint, byte> action2
-    ) {
+    )
+    {
         if (RunTest(() => action1((uint)index)) != RunTest(() => action2((uint)index)))
         {
             returnCode--;

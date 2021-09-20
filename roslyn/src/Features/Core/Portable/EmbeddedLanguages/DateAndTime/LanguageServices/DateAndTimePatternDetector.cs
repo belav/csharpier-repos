@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.DateAndTime.LanguageServices
             EmbeddedLanguageInfo info,
             INamedTypeSymbol dateTimeType,
             INamedTypeSymbol dateTimeOffsetType
-        ) {
+        )
+        {
             _info = info;
             _semanticModel = semanticModel;
             _dateTimeType = dateTimeType;
@@ -51,7 +52,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.DateAndTime.LanguageServices
         public static DateAndTimePatternDetector? TryGetOrCreate(
             SemanticModel semanticModel,
             EmbeddedLanguageInfo info
-        ) {
+        )
+        {
             // Do a quick non-allocating check first.
             if (_modelToDetector.TryGetValue(semanticModel, out var detector))
             {
@@ -64,7 +66,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.DateAndTime.LanguageServices
         private static DateAndTimePatternDetector? TryCreate(
             SemanticModel semanticModel,
             EmbeddedLanguageInfo info
-        ) {
+        )
+        {
             var dateTimeType = semanticModel.Compilation.GetTypeByMetadataName(
                 typeof(System.DateTime).FullName!
             );
@@ -92,7 +95,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.DateAndTime.LanguageServices
             ISyntaxFacts syntaxFacts,
             [NotNullWhen(true)] out SyntaxNode? argumentNode,
             [NotNullWhen(true)] out SyntaxNode? invocationExpression
-        ) {
+        )
+        {
             // Has to be a string literal passed to a method.
             argumentNode = null;
             invocationExpression = null;
@@ -136,7 +140,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.DateAndTime.LanguageServices
         private static string? GetNameOfInvokedExpression(
             ISyntaxFacts syntaxFacts,
             SyntaxNode invokedExpression
-        ) {
+        )
+        {
             if (syntaxFacts.IsSimpleMemberAccessExpression(invokedExpression))
                 return syntaxFacts.GetIdentifierOfSimpleName(
                     syntaxFacts.GetNameOfMemberAccessExpression(invokedExpression)
@@ -159,7 +164,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.DateAndTime.LanguageServices
             SyntaxToken token,
             ISyntaxFacts syntaxFacts,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 IsPossiblyDateAndTimeArgumentToken(
                     token,
@@ -167,7 +173,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.DateAndTime.LanguageServices
                     out var argumentNode,
                     out var invocationOrCreation
                 )
-            ) {
+            )
+            {
                 // if we couldn't determine the arg name or arg index, can't proceed.
                 var (argName, argIndex) = GetArgumentNameOrIndex(argumentNode);
                 if (argName == null && argIndex == null)
@@ -237,7 +244,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.DateAndTime.LanguageServices
             IMethodSymbol method,
             string? argName,
             int? argIndex
-        ) {
+        )
+        {
             Debug.Assert(argName != null || argIndex != null);
 
             var parameters = method.Parameters;

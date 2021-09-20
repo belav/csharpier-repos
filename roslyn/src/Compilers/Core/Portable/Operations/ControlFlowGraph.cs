@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 IFlowAnonymousFunctionOperation,
                 (ControlFlowRegion region, int ordinal)
             > anonymousFunctionsMap
-        ) {
+        )
+        {
             Debug.Assert(
                 parent != null
                     == (
@@ -103,7 +104,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             SyntaxNode node,
             SemanticModel semanticModel,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (node == null)
             {
                 throw new ArgumentNullException(nameof(node));
@@ -129,7 +131,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public static ControlFlowGraph Create(
             Operations.IBlockOperation body,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return CreateCore(body, nameof(body), cancellationToken);
         }
 
@@ -141,7 +144,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public static ControlFlowGraph Create(
             Operations.IFieldInitializerOperation initializer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return CreateCore(initializer, nameof(initializer), cancellationToken);
         }
 
@@ -153,7 +157,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public static ControlFlowGraph Create(
             Operations.IPropertyInitializerOperation initializer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return CreateCore(initializer, nameof(initializer), cancellationToken);
         }
 
@@ -165,7 +170,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public static ControlFlowGraph Create(
             Operations.IParameterInitializerOperation initializer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return CreateCore(initializer, nameof(initializer), cancellationToken);
         }
 
@@ -177,7 +183,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public static ControlFlowGraph Create(
             Operations.IConstructorBodyOperation constructorBody,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return CreateCore(constructorBody, nameof(constructorBody), cancellationToken);
         }
 
@@ -189,7 +196,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public static ControlFlowGraph Create(
             Operations.IMethodBodyOperation methodBody,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return CreateCore(methodBody, nameof(methodBody), cancellationToken);
         }
 #pragma warning restore RS0026 // Do not add multiple public overloads with optional parameters
@@ -198,7 +206,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             IOperation operation,
             string argumentNameForException,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             if (operation == null)
@@ -272,7 +281,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public ControlFlowGraph GetLocalFunctionControlFlowGraph(
             IMethodSymbol localFunction,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             if (localFunction is null)
@@ -286,7 +296,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                     cancellationToken,
                     out var controlFlowGraph
                 )
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(nameof(localFunction));
             }
 
@@ -297,13 +308,15 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             IMethodSymbol localFunction,
             CancellationToken cancellationToken,
             [NotNullWhen(true)] out ControlFlowGraph? controlFlowGraph
-        ) {
+        )
+        {
             if (
                 !_localFunctionsMap.TryGetValue(
                     localFunction,
                     out (ControlFlowRegion enclosing, ILocalFunctionOperation operation, int ordinal) info
                 )
-            ) {
+            )
+            {
                 controlFlowGraph = null;
                 return false;
             }
@@ -344,7 +357,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public ControlFlowGraph GetAnonymousFunctionControlFlowGraph(
             IFlowAnonymousFunctionOperation anonymousFunction,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             if (anonymousFunction is null)
@@ -358,7 +372,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                     cancellationToken,
                     out ControlFlowGraph? controlFlowGraph
                 )
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(nameof(anonymousFunction));
             }
 
@@ -369,13 +384,15 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             IFlowAnonymousFunctionOperation anonymousFunction,
             CancellationToken cancellationToken,
             [NotNullWhen(true)] out ControlFlowGraph? controlFlowGraph
-        ) {
+        )
+        {
             if (
                 !_anonymousFunctionsMap.TryGetValue(
                     anonymousFunction,
                     out (ControlFlowRegion enclosing, int ordinal) info
                 )
-            ) {
+            )
+            {
                 controlFlowGraph = null;
                 return false;
             }

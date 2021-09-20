@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             ImmutableArray<ISymbol> symbols,
             string localNameOpt,
             SyntaxAnnotation statementAnnotation
-        ) {
+        )
+        {
             var statements = CreateEqualsMethodStatements(
                 factory,
                 compilation,
@@ -45,7 +46,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static IMethodSymbol CreateEqualsMethod(
             this Compilation compilation,
             ImmutableArray<SyntaxNode> statements
-        ) {
+        )
+        {
             return CodeGenerationSymbolFactory.CreateMethodSymbol(
                 attributes: default,
                 accessibility: Accessibility.Public,
@@ -73,7 +75,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             ImmutableArray<ISymbol> symbols,
             INamedTypeSymbol constructedEquatableType,
             SyntaxAnnotation statementAnnotation
-        ) {
+        )
+        {
             var statements = CreateIEquatableEqualsMethodStatements(
                 factory,
                 semanticModel.Compilation,
@@ -127,7 +130,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             INamedTypeSymbol containingType,
             ImmutableArray<ISymbol> members,
             string localNameOpt
-        ) {
+        )
+        {
             using var _1 = ArrayBuilder<SyntaxNode>.GetInstance(out var statements);
 
             // A ref like type can not be boxed. Because of this an overloaded Equals taking object in the general case
@@ -260,7 +264,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             ImmutableArray<ISymbol> members,
             SyntaxNode localNameExpression,
             ArrayBuilder<SyntaxNode> expressions
-        ) {
+        )
+        {
             var iequatableType = compilation.GetTypeByMetadataName(typeof(IEquatable<>).FullName);
 
             // Now, iterate over all the supplied members and ensure that our instance
@@ -333,7 +338,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             Compilation compilation,
             INamedTypeSymbol containingType,
             ImmutableArray<ISymbol> members
-        ) {
+        )
+        {
             var statements = ArrayBuilder<SyntaxNode>.GetInstance();
 
             var otherNameExpression = factory.IdentifierName(OtherName);
@@ -407,7 +413,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         private static bool ImplementsIEquatable(
             ITypeSymbol memberType,
             INamedTypeSymbol iequatableType
-        ) {
+        )
+        {
             if (iequatableType != null)
             {
                 // We compare ignoring nested nullability here, as it's possible the underlying object could have implemented IEquatable<Type>

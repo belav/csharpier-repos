@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Classification
             TextSpan textSpan,
             List<ClassifiedSpan> result,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _service.AddLexicalClassifications(text, textSpan, result, cancellationToken);
         }
 
@@ -41,7 +42,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Classification
             TextSpan textSpan,
             List<ClassifiedSpan> result,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _service.AddSemanticClassificationsAsync(
                 document,
                 textSpan,
@@ -55,7 +57,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Classification
             TextSpan textSpan,
             List<ClassifiedSpan> result,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _service.AddSyntacticClassificationsAsync(
                 document,
                 textSpan,
@@ -67,7 +70,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Classification
         public ClassifiedSpan AdjustStaleClassification(
             SourceText text,
             ClassifiedSpan classifiedSpan
-        ) {
+        )
+        {
             return _service.AdjustStaleClassification(text, classifiedSpan);
         }
 

@@ -18,7 +18,8 @@ namespace System.Runtime.Serialization
 
         internal SerializationEvents(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type? t
-        ) {
+        )
+        {
             _onSerializingMethods = GetMethodsWithAttribute(typeof(OnSerializingAttribute), t);
             _onSerializedMethods = GetMethodsWithAttribute(typeof(OnSerializedAttribute), t);
             _onDeserializingMethods = GetMethodsWithAttribute(typeof(OnDeserializingAttribute), t);
@@ -30,7 +31,8 @@ namespace System.Runtime.Serialization
             // currently the only way to preserve base, non-public methods is to use All
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
                 Type? t
-        ) {
+        )
+        {
             List<MethodInfo>? mi = null;
 
             // Traverse the hierarchy to find all methods with the particular attribute
@@ -88,7 +90,8 @@ namespace System.Runtime.Serialization
             object obj,
             StreamingContext context,
             List<MethodInfo>? methods
-        ) {
+        )
+        {
             Debug.Assert(obj != null, "object should have been initialized");
             AddOnDelegate(obj, null, methods)?.Invoke(context);
         }
@@ -98,7 +101,8 @@ namespace System.Runtime.Serialization
             object obj,
             SerializationEventHandler? handler,
             List<MethodInfo>? methods
-        ) {
+        )
+        {
             if (methods != null)
             {
                 foreach (MethodInfo m in methods)

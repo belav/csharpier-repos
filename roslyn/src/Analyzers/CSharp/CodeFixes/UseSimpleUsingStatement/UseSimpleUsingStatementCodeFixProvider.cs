@@ -64,7 +64,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseSimpleUsingStatement
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var topmostUsingStatements = diagnostics.Select(
                     d => (UsingStatementSyntax)d.AdditionalLocations[0].FindNode(cancellationToken)
                 )
@@ -88,7 +89,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseSimpleUsingStatement
             BlockSyntax originalBlock,
             BlockSyntax currentBlock,
             ISet<UsingStatementSyntax> topmostUsingStatements
-        ) {
+        )
+        {
             if (originalBlock.Statements.Count == currentBlock.Statements.Count)
             {
                 var statementToUpdateIndex = originalBlock.Statements.IndexOf(
@@ -99,7 +101,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseSimpleUsingStatement
                 if (
                     statementToUpdate is UsingStatementSyntax usingStatement
                     && usingStatement.Declaration != null
-                ) {
+                )
+                {
                     var updatedStatements = currentBlock.Statements.ReplaceRange(
                         statementToUpdate,
                         Expand(usingStatement)
@@ -138,7 +141,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseSimpleUsingStatement
         private static SyntaxTriviaList Expand(
             List<StatementSyntax> result,
             UsingStatementSyntax usingStatement
-        ) {
+        )
+        {
             // First, convert the using-statement into a using-declaration.
             result.Add(Convert(usingStatement));
             switch (usingStatement.Statement)
@@ -193,13 +197,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UseSimpleUsingStatement
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                CSharpAnalyzersResources.Use_simple_using_statement,
-                createChangedDocument,
-                CSharpAnalyzersResources.Use_simple_using_statement
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    CSharpAnalyzersResources.Use_simple_using_statement,
+                    createChangedDocument,
+                    CSharpAnalyzersResources.Use_simple_using_statement
+                ) { }
         }
     }
 }

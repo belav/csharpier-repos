@@ -26,14 +26,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private ParameterSignature(
             ImmutableArray<TypeWithAnnotations> parameterTypesWithAnnotations,
             ImmutableArray<RefKind> parameterRefKinds
-        ) {
+        )
+        {
             this.parameterTypesWithAnnotations = parameterTypesWithAnnotations;
             this.parameterRefKinds = parameterRefKinds;
         }
 
         private static ParameterSignature MakeParamTypesAndRefKinds(
             ImmutableArray<ParameterSymbol> parameters
-        ) {
+        )
+        {
             if (parameters.Length == 0)
             {
                 return NoParams;
@@ -70,7 +72,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal static void PopulateParameterSignature(
             ImmutableArray<ParameterSymbol> parameters,
             ref ParameterSignature lazySignature
-        ) {
+        )
+        {
             if (lazySignature == null)
             {
                 Interlocked.CompareExchange(

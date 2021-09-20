@@ -45,7 +45,8 @@ namespace System.Net.Test.Common
             Socket socket,
             Stream stream,
             Http2Options httpOptions
-        ) {
+        )
+        {
             return CreateAsync(socket, stream, httpOptions, Http2LoopbackServer.Timeout);
         }
 
@@ -54,7 +55,8 @@ namespace System.Net.Test.Common
             Stream stream,
             Http2Options httpOptions,
             TimeSpan timeout
-        ) {
+        )
+        {
             if (httpOptions.UseSsl)
             {
                 var sslStream = new SslStream(
@@ -146,7 +148,8 @@ namespace System.Net.Test.Common
         private async Task<bool> FillBufferAsync(
             Memory<byte> buffer,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             int readBytes = await _connectionStream.ReadAsync(buffer, cancellationToken)
                 .ConfigureAwait(false);
             if (readBytes == 0)
@@ -201,7 +204,8 @@ namespace System.Net.Test.Common
             if (
                 header.Length > 0
                 && !await FillBufferAsync(data, cancellationToken).ConfigureAwait(false)
-            ) {
+            )
+            {
                 throw new Exception(
                     "Connection stream closed while attempting to read frame body."
                 );
@@ -211,7 +215,8 @@ namespace System.Net.Test.Common
                 _ignoredSettingsAckPromise != null
                 && header.Type == FrameType.Settings
                 && header.Flags == FrameFlags.Ack
-            ) {
+            )
+            {
                 _ignoredSettingsAckPromise.TrySetResult(true);
                 _ignoredSettingsAckPromise = null;
                 return await ReadFrameAsync(cancellationToken).ConfigureAwait(false);
@@ -364,7 +369,8 @@ namespace System.Net.Test.Common
         public async Task ShutdownIgnoringErrorsAsync(
             int lastStreamId,
             ProtocolErrors errorCode = ProtocolErrors.NO_ERROR
-        ) {
+        )
+        {
             try
             {
                 await SendGoAway(lastStreamId, errorCode).ConfigureAwait(false);
@@ -404,13 +410,15 @@ namespace System.Net.Test.Common
         private static (int bytesConsumed, int value) DecodeInteger(
             ReadOnlySpan<byte> headerBlock,
             byte prefixMask
-        ) {
+        )
+        {
             return QPackTestDecoder.DecodeInteger(headerBlock, prefixMask);
         }
 
         private static (int bytesConsumed, string value) DecodeString(
             ReadOnlySpan<byte> headerBlock
-        ) {
+        )
+        {
             (int bytesConsumed, int stringLength) = DecodeInteger(headerBlock, 0b01111111);
             if ((headerBlock[0] & 0b10000000) != 0)
             {
@@ -505,7 +513,8 @@ namespace System.Net.Test.Common
         private static (int bytesConsumed, HttpHeaderData headerData) DecodeLiteralHeader(
             ReadOnlySpan<byte> headerBlock,
             byte prefixMask
-        ) {
+        )
+        {
             int i = 0;
 
             (int bytesConsumed, int index) = DecodeInteger(headerBlock, prefixMask);
@@ -531,7 +540,8 @@ namespace System.Net.Test.Common
 
         private static (int bytesConsumed, HttpHeaderData headerData) DecodeHeader(
             ReadOnlySpan<byte> headerBlock
-        ) {
+        )
+        {
             int i = 0;
 
             byte b = headerBlock[0];
@@ -636,7 +646,8 @@ namespace System.Net.Test.Common
 
         public async Task<(int streamId, HttpRequestData requestData)> ReadAndParseRequestHeaderAsync(
             bool readBody = true
-        ) {
+        )
+        {
             HttpRequestData requestData = new HttpRequestData();
 
             bool endOfStream = false;
@@ -705,7 +716,8 @@ namespace System.Net.Test.Common
         public async Task<SettingsFrame> ReadAndSendSettingsAsync(
             TimeSpan? ackTimeout,
             params SettingsEntry[] settingsEntries
-        ) {
+        )
+        {
             SettingsFrame clientSettingsFrame = await ReadSettingsAsync().ConfigureAwait(false);
             await SendSettingsAsync(ackTimeout, settingsEntries).ConfigureAwait(false);
             return clientSettingsFrame;
@@ -746,7 +758,8 @@ namespace System.Net.Test.Common
         public async Task SendGoAway(
             int lastStreamId,
             ProtocolErrors errorCode = ProtocolErrors.NO_ERROR
-        ) {
+        )
+        {
             GoAwayFrame frame = new GoAwayFrame(lastStreamId, (int)errorCode, new byte[] {  }, 0);
             await WriteFrameAsync(frame).ConfigureAwait(false);
         }
@@ -823,7 +836,8 @@ namespace System.Net.Test.Common
             bool isTrailingHeader = false,
             bool endHeaders = true,
             IList<HttpHeaderData> headers = null
-        ) {
+        )
+        {
             // For now, only support headers that fit in a single frame
             byte[] headerBlock = new byte[Frame.MaxFrameLength];
             int bytesGenerated = 0;
@@ -874,7 +888,8 @@ namespace System.Net.Test.Common
             int streamId,
             ReadOnlyMemory<byte> responseData,
             bool endStream
-        ) {
+        )
+        {
             DataFrame dataFrame = new DataFrame(
                 responseData,
                 endStream ? FrameFlags.EndStream : FrameFlags.None,
@@ -888,7 +903,8 @@ namespace System.Net.Test.Common
             int streamId,
             ReadOnlyMemory<byte> responseBody,
             bool isFinal = true
-        ) {
+        )
+        {
             // Only support response body if it fits in a single frame, for now
             // In the future we should separate the body into chunks as needed,
             // and if it's larger than the default window size, we will need to process window updates as well.
@@ -935,7 +951,8 @@ namespace System.Net.Test.Common
             string body = null,
             bool isFinal = true,
             int requestId = 0
-        ) {
+        )
+        {
             // TODO: Header continuation support.
             Assert.NotNull(statusCode);
 
@@ -1004,7 +1021,8 @@ namespace System.Net.Test.Common
             HttpStatusCode statusCode = HttpStatusCode.OK,
             IList<HttpHeaderData> headers = null,
             int requestId = 0
-        ) {
+        )
+        {
             int streamId = requestId == 0 ? _lastStreamId : requestId;
             return SendResponseHeadersAsync(
                 streamId,
@@ -1020,7 +1038,8 @@ namespace System.Net.Test.Common
             byte[] body,
             bool isFinal = true,
             int requestId = 0
-        ) {
+        )
+        {
             int streamId = requestId == 0 ? _lastStreamId : requestId;
             return SendResponseBodyAsync(streamId, body, isFinal);
         }
@@ -1029,7 +1048,8 @@ namespace System.Net.Test.Common
             HttpStatusCode statusCode = HttpStatusCode.OK,
             IList<HttpHeaderData> headers = null,
             string content = ""
-        ) {
+        )
+        {
             (int streamId, HttpRequestData requestData) = await ReadAndParseRequestHeaderAsync()
                 .ConfigureAwait(false);
 
@@ -1070,7 +1090,8 @@ namespace System.Net.Test.Common
         public override async Task WaitForCancellationAsync(
             bool ignoreIncomingData = true,
             int requestId = 0
-        ) {
+        )
+        {
             int streamId = requestId == 0 ? _lastStreamId : requestId;
 
             Frame frame;

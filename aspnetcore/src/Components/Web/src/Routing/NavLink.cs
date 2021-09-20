@@ -70,7 +70,8 @@ namespace Microsoft.AspNetCore.Components.Routing
             if (
                 AdditionalAttributes != null
                 && AdditionalAttributes.TryGetValue("href", out var obj)
-            ) {
+            )
+            {
                 href = Convert.ToString(obj, CultureInfo.InvariantCulture);
             }
 
@@ -128,7 +129,8 @@ namespace Microsoft.AspNetCore.Components.Routing
             if (
                 Match == NavLinkMatch.Prefix
                 && IsStrictlyPrefixWithSeparator(currentUriAbsolute, _hrefAbsolute)
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -141,7 +143,8 @@ namespace Microsoft.AspNetCore.Components.Routing
 
             if (
                 string.Equals(currentUriAbsolute, _hrefAbsolute, StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -161,7 +164,8 @@ namespace Microsoft.AspNetCore.Components.Routing
                         currentUriAbsolute,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     return true;
                 }
             }

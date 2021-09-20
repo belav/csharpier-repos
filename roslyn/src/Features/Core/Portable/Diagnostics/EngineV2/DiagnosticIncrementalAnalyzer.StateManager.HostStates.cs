@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             private HostAnalyzerStateSets GetOrCreateHostStateSets(
                 Project project,
                 ProjectAnalyzerStateSets projectStateSets
-            ) {
+            )
+            {
                 var hostStateSets = ImmutableInterlocked.GetOrAdd(
                     ref _hostAnalyzerStateMap,
                     project.Language,
@@ -34,7 +35,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 static HostAnalyzerStateSets CreateLanguageSpecificAnalyzerMap(
                     string language,
                     HostDiagnosticAnalyzers hostAnalyzers
-                ) {
+                )
+                {
                     var analyzersPerReference =
                         hostAnalyzers.GetOrCreateHostDiagnosticAnalyzersPerReference(language);
 
@@ -63,14 +65,16 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 private HostAnalyzerStateSets(
                     ImmutableDictionary<DiagnosticAnalyzer, StateSet> stateSetMap,
                     ImmutableArray<StateSet> orderedStateSets
-                ) {
+                )
+                {
                     StateSetMap = stateSetMap;
                     OrderedStateSets = orderedStateSets;
                 }
 
                 public HostAnalyzerStateSets(
                     ImmutableDictionary<DiagnosticAnalyzer, StateSet> analyzerMap
-                ) {
+                )
+                {
                     StateSetMap = analyzerMap;
 
                     // order statesets
@@ -82,7 +86,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
 
                 public HostAnalyzerStateSets WithExcludedAnalyzers(
                     ImmutableHashSet<DiagnosticAnalyzer> excludedAnalyzers
-                ) {
+                )
+                {
                     if (excludedAnalyzers.IsEmpty)
                     {
                         return this;

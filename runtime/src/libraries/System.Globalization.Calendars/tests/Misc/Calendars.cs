@@ -161,7 +161,8 @@ namespace System.Globalization.Tests
             Calendar calendar,
             int yearHasLeapMonth,
             CalendarAlgorithmType algorithmType
-        ) {
+        )
+        {
             _ = yearHasLeapMonth;
             _ = algorithmType;
             Calendar cloned = (Calendar)calendar.Clone();
@@ -174,7 +175,8 @@ namespace System.Globalization.Tests
             Calendar calendar,
             int yearHasLeapMonth,
             CalendarAlgorithmType algorithmType
-        ) {
+        )
+        {
             _ = algorithmType;
             if (yearHasLeapMonth > 0)
             {
@@ -196,7 +198,8 @@ namespace System.Globalization.Tests
             Calendar calendar,
             int yearHasLeapMonth,
             CalendarAlgorithmType algorithmType
-        ) {
+        )
+        {
             _ = yearHasLeapMonth;
             _ = algorithmType;
             Assert.False(calendar.IsReadOnly);
@@ -212,7 +215,8 @@ namespace System.Globalization.Tests
             Calendar calendar,
             int yearHasLeapMonth,
             CalendarAlgorithmType algorithmType
-        ) {
+        )
+        {
             _ = yearHasLeapMonth;
             Assert.Equal(calendar.AlgorithmType, algorithmType);
         }

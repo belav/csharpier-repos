@@ -42,7 +42,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             Func<IHtmlHelper, IHtmlContent> partialMethod,
             object expectedModel,
             ViewDataDictionary expectedViewData
-        ) {
+        )
+        {
             // Arrange
             var htmlContent = Mock.Of<IHtmlContent>();
             var helper = new Mock<IHtmlHelper>(MockBehavior.Strict);
@@ -72,7 +73,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             Func<IHtmlHelper, IHtmlContent> partialMethod,
             object unusedModel,
             ViewDataDictionary unusedViewData
-        ) {
+        )
+        {
             // Arrange
             var expected = new InvalidOperationException();
             var helper = new Mock<IHtmlHelper>();
@@ -127,7 +129,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             Func<IHtmlHelper, Task<IHtmlContent>> partialAsyncMethod,
             object expectedModel,
             ViewDataDictionary expectedViewData
-        ) {
+        )
+        {
             // Arrange
             var htmlContent = Mock.Of<IHtmlContent>();
             var helper = new Mock<IHtmlHelper>(MockBehavior.Strict);
@@ -178,7 +181,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             Action<IHtmlHelper> partialMethod,
             object unusedModel,
             ViewDataDictionary unusedViewData
-        ) {
+        )
+        {
             // Arrange
             var expected = new InvalidOperationException();
             var helper = new Mock<IHtmlHelper>();
@@ -214,7 +218,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             Func<IHtmlHelper, Task> renderPartialAsyncMethod,
             object expectedModel,
             ViewDataDictionary expectedViewData
-        ) {
+        )
+        {
             // Arrange
             var htmlContent = Mock.Of<IHtmlContent>();
             var helper = new Mock<IHtmlHelper>(MockBehavior.Strict);
@@ -263,7 +268,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             Func<IHtmlHelper, Task> renderPartialAsyncMethod,
             object expectedModel,
             ViewDataDictionary expectedViewData
-        ) {
+        )
+        {
             // Arrange
             var htmlContent = Mock.Of<IHtmlContent>();
             var helper = new Mock<IHtmlHelper>(MockBehavior.Strict);

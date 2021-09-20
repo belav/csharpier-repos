@@ -37,7 +37,8 @@ namespace System.Net.Http
                 string schemeName,
                 NetworkCredential credential,
                 string? challenge
-            ) {
+            )
+            {
                 AuthenticationType = authenticationType;
                 SchemeName = schemeName;
                 Credential = credential;
@@ -49,7 +50,8 @@ namespace System.Net.Http
             string scheme,
             HttpHeaderValueCollection<AuthenticationHeaderValue> authenticationHeaderValues,
             out string? challengeData
-        ) {
+        )
+        {
             foreach (AuthenticationHeaderValue ahv in authenticationHeaderValues)
             {
                 if (StringComparer.OrdinalIgnoreCase.Equals(scheme, ahv.Scheme))
@@ -79,7 +81,8 @@ namespace System.Net.Http
                 if (
                     StringComparer.OrdinalIgnoreCase.Equals(NegotiateScheme, ahv.Scheme)
                     || StringComparer.OrdinalIgnoreCase.Equals(NtlmScheme, ahv.Scheme)
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -94,7 +97,8 @@ namespace System.Net.Http
             ICredentials credentials,
             HttpHeaderValueCollection<AuthenticationHeaderValue> authenticationHeaderValues,
             out AuthenticationChallenge challenge
-        ) {
+        )
+        {
             challenge = default;
 
             if (
@@ -103,7 +107,8 @@ namespace System.Net.Http
                     authenticationHeaderValues,
                     out string? challengeData
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -144,7 +149,8 @@ namespace System.Net.Http
             Uri authUri,
             ICredentials credentials,
             out AuthenticationChallenge challenge
-        ) {
+        )
+        {
             if (!IsAuthenticationChallenge(response, isProxyAuth))
             {
                 challenge = default;
@@ -200,7 +206,8 @@ namespace System.Net.Http
             string scheme,
             bool isProxyAuth,
             out string? challengeData
-        ) {
+        )
+        {
             challengeData = null;
 
             if (!IsAuthenticationChallenge(response, isProxyAuth))
@@ -214,7 +221,8 @@ namespace System.Net.Http
                     GetResponseAuthenticationHeaderValues(response, isProxyAuth),
                     out challengeData
                 )
-            ) {
+            )
+            {
                 // We got another challenge status code, but couldn't find the challenge for the scheme we're handling currently.
                 // Just stop processing auth.
                 return false;
@@ -226,7 +234,8 @@ namespace System.Net.Http
         private static bool IsAuthenticationChallenge(
             HttpResponseMessage response,
             bool isProxyAuth
-        ) {
+        )
+        {
             return isProxyAuth
               ? response.StatusCode == HttpStatusCode.ProxyAuthenticationRequired
               : response.StatusCode == HttpStatusCode.Unauthorized;
@@ -235,7 +244,8 @@ namespace System.Net.Http
         private static HttpHeaderValueCollection<AuthenticationHeaderValue> GetResponseAuthenticationHeaderValues(
             HttpResponseMessage response,
             bool isProxyAuth
-        ) {
+        )
+        {
             return isProxyAuth
               ? response.Headers.ProxyAuthenticate
               : response.Headers.WwwAuthenticate;
@@ -245,7 +255,8 @@ namespace System.Net.Http
             HttpRequestMessage request,
             AuthenticationHeaderValue headerValue,
             bool isProxyAuth
-        ) {
+        )
+        {
             if (isProxyAuth)
             {
                 request.Headers.ProxyAuthorization = headerValue;
@@ -260,7 +271,8 @@ namespace System.Net.Http
             HttpRequestMessage request,
             NetworkCredential credential,
             bool isProxyAuth
-        ) {
+        )
+        {
             string authString = !string.IsNullOrEmpty(credential.Domain)
                 ? credential.Domain + "\\" + credential.UserName + ":" + credential.Password
                 : credential.UserName + ":" + credential.Password;
@@ -279,7 +291,8 @@ namespace System.Net.Http
             NetworkCredential credential,
             DigestResponse digestResponse,
             bool isProxyAuth
-        ) {
+        )
+        {
             string? parameter = await GetDigestTokenForCredential(
                     credential,
                     request,
@@ -312,7 +325,8 @@ namespace System.Net.Http
             bool doRequestAuth,
             HttpConnectionPool pool,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return isProxyAuth
               ? pool.SendWithRetryAsync(request, async, doRequestAuth, cancellationToken)
               : pool.SendWithProxyAuthAsync(request, async, doRequestAuth, cancellationToken);
@@ -328,7 +342,8 @@ namespace System.Net.Http
             bool doRequestAuth,
             HttpConnectionPool pool,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // If preauth is enabled and this isn't proxy auth, try to get a basic credential from the
             // preauth credentials cache, and if successful, set an auth header for it onto the request.
             // Currently we only support preauth for Basic.
@@ -378,7 +393,8 @@ namespace System.Net.Http
                     credentials,
                     out AuthenticationChallenge challenge
                 )
-            ) {
+            )
+            {
                 switch (challenge.AuthenticationType)
                 {
                     case AuthenticationType.Digest:
@@ -391,7 +407,8 @@ namespace System.Net.Http
                                     isProxyAuth
                                 )
                                 .ConfigureAwait(false)
-                        ) {
+                        )
+                        {
                             response.Dispose();
                             response = await InnerSendAsync(
                                     request,
@@ -411,7 +428,8 @@ namespace System.Net.Http
                                     isProxyAuth,
                                     out string? challengeData
                                 )
-                            ) {
+                            )
+                            {
                                 digestResponse = new DigestResponse(challengeData);
                                 if (
                                     IsServerNonceStale(digestResponse)
@@ -422,7 +440,8 @@ namespace System.Net.Http
                                             isProxyAuth
                                         )
                                         .ConfigureAwait(false)
-                                ) {
+                                )
+                                {
                                     response.Dispose();
                                     response = await InnerSendAsync(
                                             request,
@@ -517,7 +536,8 @@ namespace System.Net.Http
 
             if (
                 NetEventSource.Log.IsEnabled() && response.StatusCode == HttpStatusCode.Unauthorized
-            ) {
+            )
+            {
                 NetEventSource.AuthenticationError(
                     authUri,
                     $"{(isProxyAuth ? "Proxy" : "Server")} authentication failed."
@@ -535,7 +555,8 @@ namespace System.Net.Http
             bool doRequestAuth,
             HttpConnectionPool pool,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return SendWithAuthAsync(
                 request,
                 proxyUri,
@@ -556,7 +577,8 @@ namespace System.Net.Http
             bool preAuthenticate,
             HttpConnectionPool pool,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(request.RequestUri != null);
             return SendWithAuthAsync(
                 request,

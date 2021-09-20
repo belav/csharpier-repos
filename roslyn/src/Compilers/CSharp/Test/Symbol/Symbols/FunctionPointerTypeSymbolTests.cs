@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         private static CSharpCompilation CreateFunctionPointerCompilation(
             string source,
             TargetFramework targetFramework = TargetFramework.Standard
-        ) {
+        )
+        {
             return CreateCompilation(
                 source,
                 parseOptions: TestOptions.Regular9,
@@ -42,7 +43,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             string modifier,
             RefKind expectedKind,
             string expectedPublicType
-        ) {
+        )
+        {
             var comp = CreateFunctionPointerCompilation(
                 $@"
 class C
@@ -306,7 +308,8 @@ class C
         internal void ValidCallingConventions(
             string convention,
             CallingConvention expectedConvention
-        ) {
+        )
+        {
             string source =
                 $@"
 class C
@@ -1214,7 +1217,8 @@ class C
             Equality returnEquality,
             Equality callingConventionEquality,
             params Equality[] parameterEqualities
-        ) {
+        )
+        {
             var overallEquality =
                 returnEquality
                 | callingConventionEquality
@@ -2298,7 +2302,8 @@ unsafe class C
         public void PublicApi_CallingConventions_NoModopts(
             string expectedText,
             SignatureCallingConvention convention
-        ) {
+        )
+        {
             var comp = (Compilation)CreateCompilation("");
             var @string = comp.GetSpecialType(SpecialType.System_String);
 
@@ -2981,7 +2986,8 @@ namespace System
                 bool expectedConventionEquality,
                 bool expectedFullEquality,
                 bool skipGetCallingConventionModifiersCheck = false
-            ) {
+            )
+            {
                 // No equality between pointers with differing refkinds
                 Assert.False(
                     ptr1.NoRef.Equals(
@@ -3111,7 +3117,8 @@ namespace System
                 (FunctionPointerTypeSymbol NoRef, FunctionPointerTypeSymbol ByRef) ptr2,
                 bool expectedConventionEquality,
                 bool expectedFullEquality
-            ) {
+            )
+            {
                 // No equality between pointers with differing refkinds
                 Assert.False(
                     ptr1.NoRef.Equals(
@@ -3244,7 +3251,8 @@ namespace System
                 (FunctionPointerTypeSymbol NoRef, FunctionPointerTypeSymbol ByRef) ptr2,
                 bool expectedTypeConventionEquality,
                 bool expectedRefConventionEquality
-            ) {
+            )
+            {
                 // No equality between pointers with differing refkinds
                 Assert.False(
                     ptr1.NoRef.Equals(

@@ -67,7 +67,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             DocumentationProvider documentationProvider,
             bool isLinked,
             MetadataImportOptions importOptions
-        ) {
+        )
+        {
             Debug.Assert(assembly != null);
             Debug.Assert(documentationProvider != null);
             _assembly = assembly;
@@ -141,7 +142,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         /// </remarks>
         internal (AssemblySymbol FirstSymbol, AssemblySymbol SecondSymbol) LookupAssembliesForForwardedMetadataType(
             ref MetadataTypeName emittedName
-        ) {
+        )
+        {
             // Look in the type forwarders of the primary module of this assembly, clr does not honor type forwarder
             // in non-primary modules.
 
@@ -157,7 +159,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         internal override NamedTypeSymbol TryLookupForwardedMetadataTypeWithCycleDetection(
             ref MetadataTypeName emittedName,
             ConsList<AssemblySymbol> visitedAssemblies
-        ) {
+        )
+        {
             // Check if it is a forwarded type.
             (AssemblySymbol firstSymbol, AssemblySymbol secondSymbol) =
                 LookupAssembliesForForwardedMetadataType(ref emittedName);
@@ -204,13 +207,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
         internal override void SetNoPiaResolutionAssemblies(
             ImmutableArray<AssemblySymbol> assemblies
-        ) {
+        )
+        {
             _noPiaResolutionAssemblies = assemblies;
         }
 
         internal override void SetLinkedReferencedAssemblies(
             ImmutableArray<AssemblySymbol> assemblies
-        ) {
+        )
+        {
             _linkedReferencedAssemblies = assemblies;
         }
 
@@ -231,14 +236,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
         internal override bool AreInternalsVisibleToThisAssembly(
             AssemblySymbol potentialGiverOfAccess
-        ) {
+        )
+        {
             IVTConclusion conclusion = MakeFinalIVTDetermination(potentialGiverOfAccess);
             return conclusion == IVTConclusion.Match || conclusion == IVTConclusion.OneSignedOneNot;
         }
 
         internal override IEnumerable<ImmutableArray<byte>> GetInternalsVisibleToPublicKeys(
             string simpleName
-        ) {
+        )
+        {
             return Assembly.GetInternalsVisibleToPublicKeys(simpleName);
         }
 

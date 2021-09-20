@@ -120,7 +120,8 @@ namespace JIT.HardwareIntrinsics.General
             Vector128<SByte> result,
             SByte[] expectedValues,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             SByte[] resultElements = new SByte[ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<SByte, byte>(ref resultElements[0]), result);
             ValidateResult(resultElements, expectedValues, method);
@@ -130,7 +131,8 @@ namespace JIT.HardwareIntrinsics.General
             SByte[] resultElements,
             SByte[] expectedValues,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             for (var i = 0; i < ElementCount; i++)

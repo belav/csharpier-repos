@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             INamedTypeSymbol? containingType,
             ImmutableArray<ISymbol> members,
             bool justMemberReference
-        ) {
+        )
+        {
             var result = ArrayBuilder<SyntaxNode>.GetInstance();
 
             if (containingType != null && GetBaseGetHashCodeMethod(containingType) != null)
@@ -47,7 +48,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             SyntaxGeneratorInternal generatorInternal,
             INamedTypeSymbol hashCodeType,
             ImmutableArray<SyntaxNode> memberReferences
-        ) {
+        )
+        {
             if (memberReferences.Length <= 8)
             {
                 var statement = factory.ReturnStatement(
@@ -108,7 +110,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             INamedTypeSymbol containingType,
             ImmutableArray<ISymbol> members,
             bool useInt64
-        ) {
+        )
+        {
             var components = GetGetHashCodeComponents(
                 factory,
                 compilation,
@@ -234,7 +237,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             INamedTypeSymbol namedTypeSymbol,
             string name,
             SyntaxNode initializer
-        ) {
+        )
+        {
             return generatorInternal.RequiresLocalDeclarationType()
               ? generator.LocalDeclarationStatement(namedTypeSymbol, name, initializer)
               : generator.LocalDeclarationStatement(name, initializer);
@@ -276,7 +280,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             Compilation compilation,
             ISymbol member,
             bool justMemberReference
-        ) {
+        )
+        {
             var getHashCodeNameExpression = factory.IdentifierName(GetHashCodeName);
             var thisSymbol = factory.MemberAccessExpression(
                     factory.ThisExpression(),

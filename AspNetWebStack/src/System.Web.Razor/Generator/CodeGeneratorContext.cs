@@ -58,7 +58,8 @@ namespace System.Web.Razor.Generator
             string rootNamespace,
             string sourceFile,
             bool shouldGenerateLinePragmas
-        ) {
+        )
+        {
             return Create(
                 host,
                 null,
@@ -76,7 +77,8 @@ namespace System.Web.Razor.Generator
             string rootNamespace,
             string sourceFile,
             bool shouldGenerateLinePragmas
-        ) {
+        )
+        {
             CodeGeneratorContext context = new CodeGeneratorContext()
             {
                 Host = host,
@@ -140,7 +142,8 @@ namespace System.Web.Razor.Generator
             SourceLocation sourceLocation,
             int generatedCodeStart,
             int generatedCodeLength
-        ) {
+        )
+        {
             if (generatedCodeStart == Int32.MaxValue)
             {
                 throw new ArgumentOutOfRangeException("generatedCodeStart");
@@ -188,7 +191,8 @@ namespace System.Web.Razor.Generator
             Span target,
             int generatedCodeStart,
             int codeLength
-        ) {
+        )
+        {
             return GenerateLinePragma(target.Start, generatedCodeStart, codeLength);
         }
 
@@ -196,7 +200,8 @@ namespace System.Web.Razor.Generator
             SourceLocation start,
             int generatedCodeStart,
             int codeLength
-        ) {
+        )
+        {
             if (!String.IsNullOrEmpty(SourceFile))
             {
                 if (Host.DesignTimeMode)

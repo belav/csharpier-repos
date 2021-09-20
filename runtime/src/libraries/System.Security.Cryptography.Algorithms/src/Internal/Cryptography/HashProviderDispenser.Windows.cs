@@ -34,7 +34,8 @@ namespace Internal.Cryptography
                 string hashAlgorithmId,
                 ReadOnlySpan<byte> source,
                 Span<byte> destination
-            ) {
+            )
+            {
                 int hashSize; // in bytes
 
                 // Try using a pseudo-handle if available.
@@ -70,7 +71,8 @@ namespace Internal.Cryptography
                 ReadOnlySpan<byte> source,
                 Span<byte> destination,
                 out int hashSize
-            ) {
+            )
+            {
                 hashSize = default;
 
                 Interop.BCrypt.BCryptAlgPseudoHandle algHandle;
@@ -115,7 +117,8 @@ namespace Internal.Cryptography
 
                 fixed (byte* pSrc = &MemoryMarshal.GetReference(source))fixed (
                     byte* pDest = &MemoryMarshal.GetReference(destination)
-                ) {
+                )
+                {
                     NTSTATUS ntStatus = Interop.BCrypt.BCryptHash(
                         (uint)algHandle,
                         pbSecret: null,
@@ -140,7 +143,8 @@ namespace Internal.Cryptography
                 int hashSize,
                 ReadOnlySpan<byte> source,
                 Span<byte> destination
-            ) {
+            )
+            {
                 NTSTATUS ntStatus = Interop.BCrypt.BCryptCreateHash(
                     algHandle,
                     out SafeBCryptHashHandle hHash,

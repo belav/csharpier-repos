@@ -1957,7 +1957,8 @@ class C
             LocalAndMethod localAndMethod,
             string expectedName,
             params byte[] expectedBytes
-        ) {
+        )
+        {
             Assert.Equal(localAndMethod.LocalName, expectedName);
             ReadOnlyCollection<byte> customTypeInfo;
             Guid customTypeInfoId = localAndMethod.GetCustomTypeInfo(out customTypeInfo);
@@ -1967,7 +1968,8 @@ class C
         private static void VerifyCustomTypeInfo(
             CompileResult compileResult,
             params byte[] expectedBytes
-        ) {
+        )
+        {
             ReadOnlyCollection<byte> customTypeInfo;
             Guid customTypeInfoId = compileResult.GetCustomTypeInfo(out customTypeInfo);
             VerifyCustomTypeInfo(customTypeInfoId, customTypeInfo, expectedBytes);
@@ -1977,7 +1979,8 @@ class C
             Guid customTypeInfoId,
             ReadOnlyCollection<byte> customTypeInfo,
             params byte[] expectedBytes
-        ) {
+        )
+        {
             if (expectedBytes == null)
             {
                 Assert.Equal(Guid.Empty, customTypeInfoId);

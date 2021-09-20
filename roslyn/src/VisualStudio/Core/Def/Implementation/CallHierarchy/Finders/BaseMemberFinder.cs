@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy.Finders
             Project project,
             IImmutableSet<Document> documents,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var calls = await SymbolFinder.FindCallersAsync(
                     symbol,
                     project.Solution,

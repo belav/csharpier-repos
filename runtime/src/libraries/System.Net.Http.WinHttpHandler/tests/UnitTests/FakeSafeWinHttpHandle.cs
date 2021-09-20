@@ -69,7 +69,8 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
         public void InvokeCallback(
             uint internetStatus,
             Interop.WinHttp.WINHTTP_ASYNC_RESULT asyncResult
-        ) {
+        )
+        {
             GCHandle pinnedAsyncResult = GCHandle.Alloc(asyncResult, GCHandleType.Pinned);
             IntPtr statusInformation = pinnedAsyncResult.AddrOfPinnedObject();
             uint statusInformationLength =
@@ -84,7 +85,8 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
             uint internetStatus,
             IntPtr statusInformation,
             uint statusInformationLength
-        ) {
+        )
+        {
             _callback(
                 DangerousGetHandle(),
                 _context,

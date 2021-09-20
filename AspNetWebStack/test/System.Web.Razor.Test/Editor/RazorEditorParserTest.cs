@@ -217,7 +217,8 @@ namespace System.Web.Razor.Test.Editor
                     CreateHost(),
                     TestLinePragmaFileName
                 )
-            ) {
+            )
+            {
                 ITextBuffer original = new StringTextBuffer("Foo @bar Baz");
                 ITextBuffer changed = new StringTextBuffer("Foo @bap Daz");
                 TextChange change = new TextChange(7, 3, original, 3, changed);

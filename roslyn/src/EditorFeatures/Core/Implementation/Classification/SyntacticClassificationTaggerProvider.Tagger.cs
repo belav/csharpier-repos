@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
 
             public IEnumerable<ITagSpan<IClassificationTag>> GetTags(
                 NormalizedSnapshotSpanCollection spans
-            ) {
+            )
+            {
                 if (_tagComputer == null)
                 {
                     throw new ObjectDisposedException(

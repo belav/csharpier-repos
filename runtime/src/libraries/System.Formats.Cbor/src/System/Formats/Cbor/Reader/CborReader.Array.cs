@@ -28,7 +28,8 @@ namespace System.Formats.Cbor
                 if (
                     _isConformanceModeCheckEnabled
                     && CborConformanceModeHelpers.RequiresDefiniteLengthItems(ConformanceMode)
-                ) {
+                )
+                {
                     throw new CborContentException(
                         SR.Format(
                             SR.Cbor_ConformanceMode_IndefiniteLengthItemsNotSupported,

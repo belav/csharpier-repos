@@ -105,7 +105,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
                 if (
                     part.IsParameter
                     && RemainingSegmentsAreOptional(entry.RouteTemplate.Segments, i)
-                ) {
+                )
+                {
                     current.Matches.Add(
                         new InboundMatch() { Entry = entry, TemplateMatcher = matcher }
                     );
@@ -183,7 +184,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
         private static bool RemainingSegmentsAreOptional(
             IList<TemplateSegment> segments,
             int currentParameterIndex
-        ) {
+        )
+        {
             for (var i = currentParameterIndex; i < segments.Count; i++)
             {
                 if (!segments[i].IsSimple)

@@ -175,7 +175,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <returns> The same builder instance so that multiple calls can be chained. </returns>
         protected virtual CosmosDbContextOptionsBuilder WithOption(
             Func<CosmosOptionsExtension, CosmosOptionsExtension> setAction
-        ) {
+        )
+        {
             ((IDbContextOptionsBuilderInfrastructure)_optionsBuilder).AddOrUpdateExtension(
                 setAction(
                     _optionsBuilder.Options.FindExtension<CosmosOptionsExtension>()

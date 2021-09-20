@@ -25,7 +25,8 @@ namespace System.Net.Sockets
         private static void MicrosecondsToTimeValue(
             long microseconds,
             ref Interop.Winsock.TimeValue socketTime
-        ) {
+        )
+        {
             const int microcnv = 1000000;
 
             socketTime.Seconds = (int)(microseconds / microcnv);
@@ -44,7 +45,8 @@ namespace System.Net.Sockets
             SocketType socketType,
             ProtocolType protocolType,
             out SafeSocketHandle socket
-        ) {
+        )
+        {
             Interop.Winsock.EnsureInitialized();
 
             IntPtr handle = Interop.Winsock.WSASocketW(
@@ -78,12 +80,14 @@ namespace System.Net.Sockets
             ref AddressFamily addressFamily,
             ref SocketType socketType,
             ref ProtocolType protocolType
-        ) {
+        )
+        {
             if (
                 socketInformation.ProtocolInformation == null
                 || socketInformation.ProtocolInformation.Length
                     < sizeof(Interop.Winsock.WSAPROTOCOL_INFOW)
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     SR.net_sockets_invalid_socketinformation,
                     nameof(socketInformation)
@@ -127,7 +131,8 @@ namespace System.Net.Sockets
                         Interop.Kernel32.HandleFlags.HANDLE_FLAG_INHERIT,
                         0
                     )
-                ) {
+                )
+                {
                     // Returning SocketError for consistency, since the call site can deal with conversion, and
                     // the most common SetHandleInformation error (AccessDenied) is included in SocketError anyways:
                     SocketError error = GetLastSocketError();
@@ -158,7 +163,8 @@ namespace System.Net.Sockets
             SafeSocketHandle handle,
             bool shouldBlock,
             out bool willBlock
-        ) {
+        )
+        {
             int intBlocking = shouldBlock ? 0 : -1;
 
             SocketError errorCode;
@@ -181,7 +187,8 @@ namespace System.Net.Sockets
             SafeSocketHandle handle,
             byte* buffer,
             int* nameLen
-        ) {
+        )
+        {
             SocketError errorCode = Interop.Winsock.getsockname(handle, buffer, nameLen);
             return errorCode == SocketError.SocketError
               ? GetLastSocketError()
@@ -206,7 +213,8 @@ namespace System.Net.Sockets
             SafeSocketHandle handle,
             Span<byte> buffer,
             ref int nameLen
-        ) {
+        )
+        {
             fixed (byte* rawBuffer = buffer)
             {
                 SocketError errorCode = Interop.Winsock.getpeername(handle, rawBuffer, ref nameLen);
@@ -221,7 +229,8 @@ namespace System.Net.Sockets
             ProtocolType socketProtocolType,
             byte[] buffer,
             int nameLen
-        ) {
+        )
+        {
             SocketError errorCode = Interop.Winsock.bind(handle, buffer, nameLen);
             return errorCode == SocketError.SocketError
               ? GetLastSocketError()
@@ -241,7 +250,8 @@ namespace System.Net.Sockets
             byte[] socketAddress,
             ref int socketAddressSize,
             out SafeSocketHandle socket
-        ) {
+        )
+        {
             IntPtr handle = Interop.Winsock.accept(
                 listenSocket,
                 socketAddress,
@@ -259,7 +269,8 @@ namespace System.Net.Sockets
             SafeSocketHandle handle,
             byte[] peerAddress,
             int peerAddressLen
-        ) {
+        )
+        {
             SocketError errorCode = Interop.Winsock.WSAConnect(
                 handle,
                 peerAddress,
@@ -279,7 +290,8 @@ namespace System.Net.Sockets
             IList<ArraySegment<byte>> buffers,
             SocketFlags socketFlags,
             out int bytesTransferred
-        ) {
+        )
+        {
             const int StackThreshold = 16; // arbitrary limit to avoid too much space on stack (note: may be over-sized, that's OK - length passed separately)
             int count = buffers.Count;
             bool useStack = count <= StackThreshold;
@@ -372,7 +384,8 @@ namespace System.Net.Sockets
             ReadOnlySpan<byte> buffer,
             SocketFlags socketFlags,
             out int bytesTransferred
-        ) {
+        )
+        {
             int bytesSent;
             fixed (byte* bufferPtr = &MemoryMarshal.GetReference(buffer))
             {
@@ -395,7 +408,8 @@ namespace System.Net.Sockets
             ReadOnlySpan<byte> preBuffer,
             ReadOnlySpan<byte> postBuffer,
             TransmitFileOptions flags
-        ) {
+        )
+        {
             fixed (byte* prePinnedBuffer = preBuffer)fixed (byte* postPinnedBuffer = postBuffer)
             {
                 bool success = TransmitFileHelper(
@@ -421,7 +435,8 @@ namespace System.Net.Sockets
             byte[] peerAddress,
             int peerAddressSize,
             out int bytesTransferred
-        ) {
+        )
+        {
             int bytesSent;
             if (buffer.Length == 0)
             {
@@ -464,7 +479,8 @@ namespace System.Net.Sockets
             IList<ArraySegment<byte>> buffers,
             SocketFlags socketFlags,
             out int bytesTransferred
-        ) {
+        )
+        {
             const int StackThreshold = 16; // arbitrary limit to avoid too much space on stack (note: may be over-sized, that's OK - length passed separately)
             int count = buffers.Count;
             bool useStack = count <= StackThreshold;
@@ -557,7 +573,8 @@ namespace System.Net.Sockets
             Span<byte> buffer,
             SocketFlags socketFlags,
             out int bytesTransferred
-        ) {
+        )
+        {
             int bytesReceived;
             fixed (byte* bufferPtr = &MemoryMarshal.GetReference(buffer))
             {
@@ -576,7 +593,8 @@ namespace System.Net.Sockets
 
         public static unsafe IPPacketInformation GetIPPacketInformation(
             Interop.Winsock.ControlData* controlBuffer
-        ) {
+        )
+        {
             IPAddress address =
                 controlBuffer->length == UIntPtr.Zero
                     ? IPAddress.None
@@ -586,7 +604,8 @@ namespace System.Net.Sockets
 
         public static unsafe IPPacketInformation GetIPPacketInformation(
             Interop.Winsock.ControlDataIPv6* controlBuffer
-        ) {
+        )
+        {
             if (controlBuffer->length == (UIntPtr)sizeof(Interop.Winsock.ControlData))
             {
                 // IPv4 client connectiong to dual mode socket.
@@ -617,7 +636,8 @@ namespace System.Net.Sockets
             out Internals.SocketAddress receiveAddress,
             out IPPacketInformation ipPacketInformation,
             out int bytesTransferred
-        ) {
+        )
+        {
             return ReceiveMessageFrom(
                 socket,
                 handle,
@@ -639,7 +659,8 @@ namespace System.Net.Sockets
             out Internals.SocketAddress receiveAddress,
             out IPPacketInformation ipPacketInformation,
             out int bytesTransferred
-        ) {
+        )
+        {
             bool ipv4,
                 ipv6;
             Socket.GetIPProtocolInformation(
@@ -654,7 +675,8 @@ namespace System.Net.Sockets
             ipPacketInformation = default(IPPacketInformation);
             fixed (byte* bufferPtr = &MemoryMarshal.GetReference(buffer))fixed (
                 byte* ptrSocketAddress = socketAddress.Buffer
-            ) {
+            )
+            {
                 Interop.Winsock.WSAMsg wsaMsg;
                 wsaMsg.socketAddress = (IntPtr)ptrSocketAddress;
                 wsaMsg.addressLength = (uint)socketAddress.Size;
@@ -675,7 +697,8 @@ namespace System.Net.Sockets
                     if (
                         socket.WSARecvMsgBlocking(handle, (IntPtr)(&wsaMsg), out bytesTransferred)
                         == SocketError.SocketError
-                    ) {
+                    )
+                    {
                         return GetLastSocketError();
                     }
 
@@ -690,7 +713,8 @@ namespace System.Net.Sockets
                     if (
                         socket.WSARecvMsgBlocking(handle, (IntPtr)(&wsaMsg), out bytesTransferred)
                         == SocketError.SocketError
-                    ) {
+                    )
+                    {
                         return GetLastSocketError();
                     }
 
@@ -704,7 +728,8 @@ namespace System.Net.Sockets
                     if (
                         socket.WSARecvMsgBlocking(handle, (IntPtr)(&wsaMsg), out bytesTransferred)
                         == SocketError.SocketError
-                    ) {
+                    )
+                    {
                         return GetLastSocketError();
                     }
                 }
@@ -724,7 +749,8 @@ namespace System.Net.Sockets
             byte[] socketAddress,
             ref int addressLength,
             out int bytesTransferred
-        ) {
+        )
+        {
             int bytesReceived;
             if (buffer.Length == 0)
             {
@@ -768,7 +794,8 @@ namespace System.Net.Sockets
             byte[]? optionInValue,
             byte[]? optionOutValue,
             out int optionLength
-        ) {
+        )
+        {
             if (ioControlCode == Interop.Winsock.IoctlSocketConstants.FIONBIO)
             {
                 throw new InvalidOperationException(SR.net_sockets_useblocking);
@@ -795,7 +822,8 @@ namespace System.Net.Sockets
             SocketOptionLevel optionLevel,
             SocketOptionName optionName,
             int optionValue
-        ) {
+        )
+        {
             SocketError errorCode;
             if (
                 optionLevel == SocketOptionLevel.Tcp
@@ -804,7 +832,8 @@ namespace System.Net.Sockets
                     || optionName == SocketOptionName.TcpKeepAliveInterval
                 )
                 && IOControlKeepAlive.IsNeeded
-            ) {
+            )
+            {
                 errorCode = IOControlKeepAlive.Set(handle, optionName, optionValue);
             }
             else
@@ -827,7 +856,8 @@ namespace System.Net.Sockets
             SocketOptionLevel optionLevel,
             SocketOptionName optionName,
             byte[] optionValue
-        ) {
+        )
+        {
             SocketError errorCode;
             if (
                 optionLevel == SocketOptionLevel.Tcp
@@ -836,7 +866,8 @@ namespace System.Net.Sockets
                     || optionName == SocketOptionName.TcpKeepAliveInterval
                 )
                 && IOControlKeepAlive.IsNeeded
-            ) {
+            )
+            {
                 return IOControlKeepAlive.Set(handle, optionName, optionValue);
             }
 
@@ -860,7 +891,8 @@ namespace System.Net.Sockets
             int optionLevel,
             int optionName,
             ReadOnlySpan<byte> optionValue
-        ) {
+        )
+        {
             fixed (byte* optionValuePtr = optionValue)
             {
                 SocketError errorCode = Interop.Winsock.setsockopt(
@@ -885,7 +917,8 @@ namespace System.Net.Sockets
             SafeSocketHandle handle,
             SocketOptionName optionName,
             MulticastOption optionValue
-        ) {
+        )
+        {
             Interop.Winsock.IPMulticastRequest ipmr = default;
 
 #pragma warning disable CS0618 // Address is marked obsolete
@@ -930,7 +963,8 @@ namespace System.Net.Sockets
             SafeSocketHandle handle,
             SocketOptionName optionName,
             IPv6MulticastOption optionValue
-        ) {
+        )
+        {
             Interop.Winsock.IPv6MulticastRequest ipmr = default;
 
             ipmr.MulticastAddress = optionValue.Group.GetAddressBytes();
@@ -972,7 +1006,8 @@ namespace System.Net.Sockets
             Socket socket,
             SocketOptionLevel optionLevel,
             int protectionLevel
-        ) {
+        )
+        {
             socket.SetSocketOption(
                 optionLevel,
                 SocketOptionName.IPProtectionLevel,
@@ -985,7 +1020,8 @@ namespace System.Net.Sockets
             SocketOptionLevel optionLevel,
             SocketOptionName optionName,
             out int optionValue
-        ) {
+        )
+        {
             if (
                 optionLevel == SocketOptionLevel.Tcp
                 && (
@@ -993,7 +1029,8 @@ namespace System.Net.Sockets
                     || optionName == SocketOptionName.TcpKeepAliveInterval
                 )
                 && IOControlKeepAlive.IsNeeded
-            ) {
+            )
+            {
                 optionValue = IOControlKeepAlive.Get(handle, optionName);
                 return SocketError.Success;
             }
@@ -1020,7 +1057,8 @@ namespace System.Net.Sockets
             SocketOptionName optionName,
             byte[] optionValue,
             ref int optionLength
-        ) {
+        )
+        {
             if (
                 optionLevel == SocketOptionLevel.Tcp
                 && (
@@ -1028,7 +1066,8 @@ namespace System.Net.Sockets
                     || optionName == SocketOptionName.TcpKeepAliveInterval
                 )
                 && IOControlKeepAlive.IsNeeded
-            ) {
+            )
+            {
                 return IOControlKeepAlive.Get(handle, optionName, optionValue, ref optionLength);
             }
 
@@ -1053,7 +1092,8 @@ namespace System.Net.Sockets
             int optionName,
             Span<byte> optionValue,
             ref int optionLength
-        ) {
+        )
+        {
             Debug.Assert((uint)optionLength <= optionValue.Length);
 
             SocketError errorCode;
@@ -1076,7 +1116,8 @@ namespace System.Net.Sockets
             SafeSocketHandle handle,
             SocketOptionName optionName,
             out MulticastOption? optionValue
-        ) {
+        )
+        {
             Interop.Winsock.IPMulticastRequest ipmr = default;
             int optlen = Interop.Winsock.IPMulticastRequest.Size;
 
@@ -1111,7 +1152,8 @@ namespace System.Net.Sockets
             SafeSocketHandle handle,
             SocketOptionName optionName,
             out IPv6MulticastOption? optionValue
-        ) {
+        )
+        {
             Interop.Winsock.IPv6MulticastRequest ipmr = default;
 
             int optlen = Interop.Winsock.IPv6MulticastRequest.Size;
@@ -1141,7 +1183,8 @@ namespace System.Net.Sockets
         public static SocketError GetLingerOption(
             SafeSocketHandle handle,
             out LingerOption? optionValue
-        ) {
+        )
+        {
             Interop.Winsock.Linger lngopt = default;
             int optlen = 4;
 
@@ -1169,7 +1212,8 @@ namespace System.Net.Sockets
             int microseconds,
             SelectMode mode,
             out bool status
-        ) {
+        )
+        {
             bool refAdded = false;
             try
             {
@@ -1227,7 +1271,8 @@ namespace System.Net.Sockets
             IList? checkWrite,
             IList? checkError,
             int microseconds
-        ) {
+        )
+        {
             const int StackThreshold = 64; // arbitrary limit to avoid too much space on stack
             static bool ShouldStackAlloc(IList? list, ref IntPtr[]? lease, out Span<IntPtr> span)
             {
@@ -1374,7 +1419,8 @@ namespace System.Net.Sockets
             bool isConnected,
             bool isDisconnected,
             SocketShutdown how
-        ) {
+        )
+        {
             SocketError err = Interop.Winsock.shutdown(handle, (int)how);
             if (err != SocketError.SocketError)
             {
@@ -1398,7 +1444,8 @@ namespace System.Net.Sockets
             IntPtr pinnedPostBuffer,
             int postBufferLength,
             TransmitFileOptions flags
-        ) {
+        )
+        {
             bool needTransmitFileBuffers = false;
             Interop.Mswsock.TransmitFileBuffers transmitFileBuffers = default;
 
@@ -1453,7 +1500,8 @@ namespace System.Net.Sockets
             byte[]? postBuffer,
             TransmitFileOptions flags,
             TransmitFileAsyncResult asyncResult
-        ) {
+        )
+        {
             asyncResult.SetUnmanagedStructures(
                 fileStream,
                 preBuffer,
@@ -1493,7 +1541,8 @@ namespace System.Net.Sockets
             int receiveSize,
             int socketAddressSize,
             AcceptOverlappedAsyncResult asyncResult
-        ) {
+        )
+        {
             // The buffer needs to contain the requested data plus room for two sockaddrs and 16 bytes
             // of associated data for each.
             int addressBufferSize = socketAddressSize + 16;
@@ -1536,7 +1585,8 @@ namespace System.Net.Sockets
             SafeSocketHandle handle,
             bool reuseSocket,
             DisconnectOverlappedAsyncResult asyncResult
-        ) {
+        )
+        {
             asyncResult.SetUnmanagedStructures(null);
             try
             {
@@ -1561,7 +1611,8 @@ namespace System.Net.Sockets
             Socket socket,
             SafeSocketHandle handle,
             bool reuseSocket
-        ) {
+        )
+        {
             SocketError errorCode = SocketError.Success;
 
             // This can throw ObjectDisposedException (handle, and retrieving the delegate).
@@ -1571,7 +1622,8 @@ namespace System.Net.Sockets
                     (int)(reuseSocket ? TransmitFileOptions.ReuseSocket : 0),
                     0
                 )
-            ) {
+            )
+            {
                 errorCode = GetLastSocketError();
             }
 
@@ -1582,7 +1634,8 @@ namespace System.Net.Sockets
             SafeSocketHandle handle,
             int targetProcessId,
             out SocketInformation socketInformation
-        ) {
+        )
+        {
             socketInformation = new SocketInformation
             {
                 ProtocolInformation = new byte[sizeof(Interop.Winsock.WSAPROTOCOL_INFOW)]

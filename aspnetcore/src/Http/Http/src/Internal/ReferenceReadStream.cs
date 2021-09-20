@@ -117,7 +117,8 @@ namespace Microsoft.AspNetCore.Http
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ThrowIfDisposed();
             VerifyPosition();
             var toRead = Math.Min(count, _length - _position);
@@ -135,7 +136,8 @@ namespace Microsoft.AspNetCore.Http
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
 

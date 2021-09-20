@@ -146,7 +146,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
         private (int HPackStaticTableId, string Name, string Value)[] GetNormalizedHeaders(
             Http2HeadersEnumerator enumerator
-        ) {
+        )
+        {
             var headers = new List<(int HPackStaticTableId, string Name, string Value)>();
             while (enumerator.MoveNext())
             {
@@ -165,7 +166,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             int hPackStaticTableId,
             string key,
             string value
-        ) {
+        )
+        {
             return (hPackStaticTableId, key, value);
         }
     }

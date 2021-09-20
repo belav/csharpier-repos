@@ -142,7 +142,8 @@ namespace System.Web.Mvc
 
         private static void ClearChildActionFilterFinishCallback(
             ControllerContext controllerContext
-        ) {
+        )
+        {
             controllerContext.HttpContext.Items.Remove(_childActionFilterFinishCallbackKey);
         }
 
@@ -159,7 +160,8 @@ namespace System.Web.Mvc
 
         private static Action<bool> GetChildActionFilterFinishCallback(
             ControllerContext controllerContext
-        ) {
+        )
+        {
             return controllerContext.HttpContext.Items[_childActionFilterFinishCallbackKey]
                 as Action<bool>;
         }
@@ -203,7 +205,8 @@ namespace System.Web.Mvc
         internal void BuildUniqueIdFromActionParameters(
             StringBuilder builder,
             ActionExecutingContext filterContext
-        ) {
+        )
+        {
             if (String.Equals(VaryByParam, "none", StringComparison.OrdinalIgnoreCase))
             {
                 // nothing to do
@@ -381,7 +384,8 @@ namespace System.Web.Mvc
         private static void SetChildActionFilterFinishCallback(
             ControllerContext controllerContext,
             Action<bool> callback
-        ) {
+        )
+        {
             controllerContext.HttpContext.Items[_childActionFilterFinishCallbackKey] = callback;
         }
 
@@ -394,7 +398,8 @@ namespace System.Web.Mvc
                 || !String.IsNullOrWhiteSpace(VaryByHeader)
                 || _locationWasSet
                 || _noStoreWasSet
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     MvcResources.OutputCacheAttribute_ChildAction_UnsupportedSetting
                 );
@@ -442,7 +447,8 @@ namespace System.Web.Mvc
 
         private static Dictionary<string, object> GetCaseInsensitiveActionParametersDictionary(
             IDictionary<string, object> actionParameters
-        ) {
+        )
+        {
             // The ControllerActionInvoker starts off with a Dictionary<string, object> with
             // StringComparer.OrdinalIgnoreCase. Check if we are working with this type to start with.
             // If not produce a new dictionary from the existing one.

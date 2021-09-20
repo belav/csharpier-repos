@@ -54,7 +54,8 @@ namespace System.Tests
             object target,
             Type attributeType,
             Attribute attribute
-        ) {
+        )
+        {
             switch (target)
             {
                 case Type type:
@@ -97,7 +98,8 @@ namespace System.Tests
             object target,
             Type attributeType,
             Attribute attribute
-        ) {
+        )
+        {
             switch (target)
             {
                 case Type type:

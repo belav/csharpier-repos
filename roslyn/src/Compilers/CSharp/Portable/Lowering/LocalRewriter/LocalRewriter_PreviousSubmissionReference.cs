@@ -11,7 +11,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         public override BoundNode VisitPreviousSubmissionReference(
             BoundPreviousSubmissionReference node
-        ) {
+        )
+        {
             var targetType = (ImplicitNamedTypeSymbol)node.Type;
             Debug.Assert(targetType.TypeKind == TypeKind.Submission);
             Debug.Assert(_factory.TopLevelMethod is { IsStatic: false });

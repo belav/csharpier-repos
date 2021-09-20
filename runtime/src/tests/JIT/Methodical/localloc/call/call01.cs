@@ -66,7 +66,8 @@ internal class LocallocTest
         int i8,
         Int32* ar1,
         Int32* ar2
-    ) {
+    )
+    {
 #if LOCALLOC_SMALL
         Int32* intArray1 = stackalloc Int32[1];
         Int32* intArray2 = stackalloc Int32[1];

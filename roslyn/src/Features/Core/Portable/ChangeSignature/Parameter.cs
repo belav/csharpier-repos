@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             bool isRequired = true,
             string defaultValue = "",
             bool typeBinds = true
-        ) {
+        )
+        {
             Type = type;
             TypeBinds = typeBinds;
             TypeName = typeName;

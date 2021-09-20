@@ -21,7 +21,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             Workspace workspace,
             ITableManagerProvider provider,
             string tableIdentifier
-        ) {
+        )
+        {
             Workspace = workspace;
             this.TableManager = provider.GetTableManager(tableIdentifier);
         }

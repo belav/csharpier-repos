@@ -18,7 +18,8 @@ namespace System.Web.Razor.Generator
         protected internal override void EmitStartMethodInvoke(
             string methodName,
             params string[] genericArguments
-        ) {
+        )
+        {
             InnerWriter.Write(methodName);
             if (genericArguments != null && genericArguments.Length > 0)
             {

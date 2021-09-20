@@ -23,7 +23,8 @@ namespace ILCompiler
         public override ComputedInstanceFieldLayout ComputeInstanceLayout(
             DefType defType,
             InstanceLayoutKind layoutKind
-        ) {
+        )
+        {
             TargetDetails targetDetails = defType.Context.Target;
             ComputedInstanceFieldLayout layoutFromMetadata =
                 _fallbackAlgorithm.ComputeInstanceLayout(defType, layoutKind);
@@ -49,7 +50,8 @@ namespace ILCompiler
         public unsafe override ComputedStaticFieldLayout ComputeStaticFieldLayout(
             DefType defType,
             StaticLayoutKind layoutKind
-        ) {
+        )
+        {
             return _fallbackAlgorithm.ComputeStaticFieldLayout(defType, layoutKind);
         }
 
@@ -60,7 +62,8 @@ namespace ILCompiler
 
         public override ValueTypeShapeCharacteristics ComputeValueTypeShapeCharacteristics(
             DefType type
-        ) {
+        )
+        {
             return _fallbackAlgorithm.ComputeValueTypeShapeCharacteristics(type);
         }
     }

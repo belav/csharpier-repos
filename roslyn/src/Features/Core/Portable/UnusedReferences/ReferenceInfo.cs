@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.UnusedReferences
             bool treatAsUsed,
             ImmutableArray<string> compilationAssemblies,
             ImmutableArray<ReferenceInfo> dependencies
-        ) {
+        )
+        {
             ReferenceType = referenceType;
             ItemSpecification = itemSpecification;
             TreatAsUsed = treatAsUsed;

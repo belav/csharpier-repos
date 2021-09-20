@@ -20,7 +20,8 @@ namespace Microsoft.Web.Mvc
             this HtmlHelper helper,
             string linkText,
             string emailAddress
-        ) {
+        )
+        {
             return Mailto(helper, linkText, emailAddress, null, null, null, null, null);
         }
 
@@ -29,7 +30,8 @@ namespace Microsoft.Web.Mvc
             string linkText,
             string emailAddress,
             object htmlAttributes
-        ) {
+        )
+        {
             return Mailto(helper, linkText, emailAddress, null, null, null, null, htmlAttributes);
         }
 
@@ -38,7 +40,8 @@ namespace Microsoft.Web.Mvc
             string linkText,
             string emailAddress,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             return Mailto(helper, linkText, emailAddress, null, null, null, null, htmlAttributes);
         }
 
@@ -47,7 +50,8 @@ namespace Microsoft.Web.Mvc
             string linkText,
             string emailAddress,
             string subject
-        ) {
+        )
+        {
             return Mailto(helper, linkText, emailAddress, subject, null, null, null, null);
         }
 
@@ -57,7 +61,8 @@ namespace Microsoft.Web.Mvc
             string emailAddress,
             string subject,
             object htmlAttributes
-        ) {
+        )
+        {
             return Mailto(
                 helper,
                 linkText,
@@ -76,7 +81,8 @@ namespace Microsoft.Web.Mvc
             string emailAddress,
             string subject,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             return Mailto(
                 helper,
                 linkText,
@@ -98,7 +104,8 @@ namespace Microsoft.Web.Mvc
             string cc,
             string bcc,
             object htmlAttributes
-        ) {
+        )
+        {
             return Mailto(
                 helper,
                 linkText,
@@ -120,7 +127,8 @@ namespace Microsoft.Web.Mvc
             string cc,
             string bcc,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             if (emailAddress == null)
             {
                 throw new ArgumentNullException("emailAddress"); // TODO: Resource message

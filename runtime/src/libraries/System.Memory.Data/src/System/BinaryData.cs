@@ -51,7 +51,8 @@ namespace System
             object? jsonSerializable,
             JsonSerializerOptions? options = default,
             Type? type = default
-        ) {
+        )
+        {
             type ??= jsonSerializable?.GetType() ?? typeof(object);
 
             _bytes = JsonSerializer.SerializeToUtf8Bytes(jsonSerializable, type, options);
@@ -132,7 +133,8 @@ namespace System
         public static Task<BinaryData> FromStreamAsync(
             Stream stream,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (stream == null)
             {
                 throw new ArgumentNullException(nameof(stream));
@@ -145,7 +147,8 @@ namespace System
             Stream stream,
             bool async,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             const int CopyToBufferSize = 81920; // the default used by Stream.CopyToAsync
             int bufferSize = CopyToBufferSize;
             MemoryStream memoryStream;
@@ -200,7 +203,8 @@ namespace System
         public static BinaryData FromObjectAsJson<T>(
             T jsonSerializable,
             JsonSerializerOptions? options = default
-        ) {
+        )
+        {
             byte[] buffer = JsonSerializer.SerializeToUtf8Bytes(
                 jsonSerializable,
                 typeof(T),

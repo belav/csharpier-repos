@@ -72,7 +72,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SemanticModel semanticModel,
             SyntaxToken token,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var location = token.GetLocation();
 
             foreach (var ancestor in token.GetAncestors<SyntaxNode>())
@@ -129,7 +130,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxNode oldNode,
             SyntaxNode newNode,
             out SemanticModel speculativeModel
-        ) {
+        )
+        {
             Debug.Assert(oldNode.Kind() == newNode.Kind());
 
             var model = oldSemanticModel;
@@ -137,7 +139,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 !(oldNode is BaseMethodDeclarationSyntax oldMethod)
                 || !(newNode is BaseMethodDeclarationSyntax newMethod)
                 || oldMethod.Body == null
-            ) {
+            )
+            {
                 speculativeModel = null;
                 return false;
             }
@@ -154,7 +157,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public ImmutableHashSet<string> GetAliasNameSet(
             SemanticModel model,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var original = model.GetOriginalSemanticModel();
             if (!original.SyntaxTree.HasCompilationUnitRoot)
             {
@@ -177,7 +181,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static void AppendAliasNames(
             SyntaxList<UsingDirectiveSyntax> usings,
             ImmutableHashSet<string>.Builder builder
-        ) {
+        )
+        {
             foreach (var @using in usings)
             {
                 if (@using.Alias == null || @using.Alias.Name == null)
@@ -193,7 +198,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             IEnumerable<NamespaceDeclarationSyntax> namespaces,
             ImmutableHashSet<string>.Builder builder,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             foreach (var @namespace in namespaces)
             {
                 cancellationToken.ThrowIfCancellationRequested();
@@ -210,7 +216,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public ForEachSymbols GetForEachSymbols(
             SemanticModel semanticModel,
             SyntaxNode forEachStatement
-        ) {
+        )
+        {
             if (forEachStatement is CommonForEachStatementSyntax csforEachStatement)
             {
                 var info = semanticModel.GetForEachStatementInfo(csforEachStatement);
@@ -242,7 +249,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public ImmutableArray<IMethodSymbol> GetDeconstructionAssignmentMethods(
             SemanticModel semanticModel,
             SyntaxNode node
-        ) {
+        )
+        {
             if (node is AssignmentExpressionSyntax assignment && assignment.IsDeconstruction())
             {
                 using var builder = TemporaryArray<IMethodSymbol>.Empty;
@@ -259,7 +267,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public ImmutableArray<IMethodSymbol> GetDeconstructionForEachMethods(
             SemanticModel semanticModel,
             SyntaxNode node
-        ) {
+        )
+        {
             if (node is ForEachVariableStatementSyntax @foreach)
             {
                 using var builder = TemporaryArray<IMethodSymbol>.Empty;
@@ -276,7 +285,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static void FlattenDeconstructionMethods(
             DeconstructionInfo deconstruction,
             ref TemporaryArray<IMethodSymbol> builder
-        ) {
+        )
+        {
             var method = deconstruction.Method;
             if (method != null)
             {
@@ -304,7 +314,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SemanticModel semanticModel,
             SyntaxNode memberDeclaration,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             switch (memberDeclaration)
             {
                 case FieldDeclarationSyntax field:
@@ -340,7 +351,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxNode node,
             SyntaxToken token,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (node == null)
                 return ImmutableArray<ISymbol>.Empty;
 
@@ -361,7 +373,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxNode node,
             SyntaxToken token,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             switch (node)
             {
                 case OrderByClauseSyntax orderByClauseSyntax:
@@ -385,7 +398,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     else if (
                         orderByClauseSyntax.Orderings[0].AscendingOrDescendingKeyword.Kind()
                         == SyntaxKind.None
-                    ) {
+                    )
+                    {
                         // The first ordering is displayed on the "orderby" keyword itself if there isn't a
                         // ascending/descending keyword.
                         return semanticModel.GetSymbolInfo(

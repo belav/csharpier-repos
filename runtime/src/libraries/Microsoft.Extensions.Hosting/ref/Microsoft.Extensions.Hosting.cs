@@ -59,7 +59,8 @@ namespace Microsoft.Extensions.Hosting
                 Microsoft.Extensions.Hosting.HostBuilderContext,
                 Microsoft.Extensions.Configuration.IConfigurationBuilder
             > configureDelegate
-        ) {
+        )
+        {
             throw null;
         }
         public Microsoft.Extensions.Hosting.IHostBuilder ConfigureContainer<TContainerBuilder>(
@@ -67,12 +68,14 @@ namespace Microsoft.Extensions.Hosting
                 Microsoft.Extensions.Hosting.HostBuilderContext,
                 TContainerBuilder
             > configureDelegate
-        ) {
+        )
+        {
             throw null;
         }
         public Microsoft.Extensions.Hosting.IHostBuilder ConfigureHostConfiguration(
             System.Action<Microsoft.Extensions.Configuration.IConfigurationBuilder> configureDelegate
-        ) {
+        )
+        {
             throw null;
         }
         public Microsoft.Extensions.Hosting.IHostBuilder ConfigureServices(
@@ -80,12 +83,14 @@ namespace Microsoft.Extensions.Hosting
                 Microsoft.Extensions.Hosting.HostBuilderContext,
                 Microsoft.Extensions.DependencyInjection.IServiceCollection
             > configureDelegate
-        ) {
+        )
+        {
             throw null;
         }
         public Microsoft.Extensions.Hosting.IHostBuilder UseServiceProviderFactory<TContainerBuilder>(
             Microsoft.Extensions.DependencyInjection.IServiceProviderFactory<TContainerBuilder> factory
-        ) {
+        )
+        {
             throw null;
         }
         public Microsoft.Extensions.Hosting.IHostBuilder UseServiceProviderFactory<TContainerBuilder>(
@@ -93,7 +98,8 @@ namespace Microsoft.Extensions.Hosting
                 Microsoft.Extensions.Hosting.HostBuilderContext,
                 Microsoft.Extensions.DependencyInjection.IServiceProviderFactory<TContainerBuilder>
             > factory
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -102,19 +108,22 @@ namespace Microsoft.Extensions.Hosting
         public static Microsoft.Extensions.Hosting.IHostBuilder ConfigureAppConfiguration(
             this Microsoft.Extensions.Hosting.IHostBuilder hostBuilder,
             System.Action<Microsoft.Extensions.Configuration.IConfigurationBuilder> configureDelegate
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Hosting.IHostBuilder ConfigureContainer<TContainerBuilder>(
             this Microsoft.Extensions.Hosting.IHostBuilder hostBuilder,
             System.Action<TContainerBuilder> configureDelegate
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Hosting.IHostBuilder ConfigureDefaults(
             this Microsoft.Extensions.Hosting.IHostBuilder builder,
             string[] args
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Hosting.IHostBuilder ConfigureLogging(
@@ -123,19 +132,22 @@ namespace Microsoft.Extensions.Hosting
                 Microsoft.Extensions.Hosting.HostBuilderContext,
                 Microsoft.Extensions.Logging.ILoggingBuilder
             > configureLogging
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Hosting.IHostBuilder ConfigureLogging(
             this Microsoft.Extensions.Hosting.IHostBuilder hostBuilder,
             System.Action<Microsoft.Extensions.Logging.ILoggingBuilder> configureLogging
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Hosting.IHostBuilder ConfigureServices(
             this Microsoft.Extensions.Hosting.IHostBuilder hostBuilder,
             System.Action<Microsoft.Extensions.DependencyInjection.IServiceCollection> configureDelegate
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task RunConsoleAsync(
@@ -143,37 +155,43 @@ namespace Microsoft.Extensions.Hosting
             System.Action<Microsoft.Extensions.Hosting.ConsoleLifetimeOptions> configureOptions,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task RunConsoleAsync(
             this Microsoft.Extensions.Hosting.IHostBuilder hostBuilder,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Hosting.IHostBuilder UseConsoleLifetime(
             this Microsoft.Extensions.Hosting.IHostBuilder hostBuilder
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Hosting.IHostBuilder UseConsoleLifetime(
             this Microsoft.Extensions.Hosting.IHostBuilder hostBuilder,
             System.Action<Microsoft.Extensions.Hosting.ConsoleLifetimeOptions> configureOptions
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Hosting.IHostBuilder UseContentRoot(
             this Microsoft.Extensions.Hosting.IHostBuilder hostBuilder,
             string contentRoot
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Hosting.IHostBuilder UseDefaultServiceProvider(
             this Microsoft.Extensions.Hosting.IHostBuilder hostBuilder,
             System.Action<Microsoft.Extensions.DependencyInjection.ServiceProviderOptions> configure
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Hosting.IHostBuilder UseDefaultServiceProvider(
@@ -182,13 +200,15 @@ namespace Microsoft.Extensions.Hosting
                 Microsoft.Extensions.Hosting.HostBuilderContext,
                 Microsoft.Extensions.DependencyInjection.ServiceProviderOptions
             > configure
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Hosting.IHostBuilder UseEnvironment(
             this Microsoft.Extensions.Hosting.IHostBuilder hostBuilder,
             string environment
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -252,12 +272,14 @@ namespace Microsoft.Extensions.Hosting.Internal
         public void Dispose() { }
         public System.Threading.Tasks.Task StopAsync(
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task WaitForStartAsync(
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
     }

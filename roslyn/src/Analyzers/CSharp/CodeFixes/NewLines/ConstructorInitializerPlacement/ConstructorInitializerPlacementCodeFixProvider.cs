@@ -52,7 +52,8 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConstructorInitializerPlacement
             Document document,
             ImmutableArray<Diagnostic> diagnostics,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
             var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
@@ -110,7 +111,8 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConstructorInitializerPlacement
             Dictionary<SyntaxToken, SyntaxToken> replacementMap,
             SyntaxToken colonToken,
             SyntaxToken thisBaseKeyword
-        ) {
+        )
+        {
             // colonToken has the unnecessary newline.  Move all of it's trivia to the previous token so nothing belongs to it.
             var closeParen = colonToken.GetPreviousToken();
             replacementMap[closeParen] = ComputeNewCloseParen(colonToken, closeParen);
@@ -126,7 +128,8 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConstructorInitializerPlacement
             static SyntaxToken ComputeNewCloseParen(
                 SyntaxToken colonToken,
                 SyntaxToken previousToken
-            ) {
+            )
+            {
                 var allColonTrivia = colonToken.LeadingTrivia.AddRange(colonToken.TrailingTrivia);
 
                 return previousToken.TrailingTrivia.All(
@@ -146,13 +149,12 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConstructorInitializerPlacement
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                CSharpCodeFixesResources.Place_colon_on_following_line,
-                createChangedDocument,
-                CSharpCodeFixesResources.Place_colon_on_following_line
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    CSharpCodeFixesResources.Place_colon_on_following_line,
+                    createChangedDocument,
+                    CSharpCodeFixesResources.Place_colon_on_following_line
+                ) { }
         }
     }
 }

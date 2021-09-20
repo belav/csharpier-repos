@@ -31,7 +31,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             string otherKey,
             string[] expectedThisKeyMembers,
             string[] expectedOtherKeyMembers
-        ) {
+        )
+        {
             var attribute = new AssociationAttribute(name, thisKey, otherKey);
             Assert.Equal(name, attribute.Name);
             Assert.Equal(thisKey, attribute.ThisKey);

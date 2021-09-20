@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.Editor.ReferenceHighlighting
         public NavigateToHighlightReferenceCommandHandler(
             IOutliningManagerService outliningManagerService,
             IViewTagAggregatorFactoryService tagAggregatorFactory
-        ) {
+        )
+        {
             _outliningManagerService =
                 outliningManagerService
                 ?? throw new ArgumentNullException(nameof(outliningManagerService));
@@ -81,7 +82,8 @@ namespace Microsoft.CodeAnalysis.Editor.ReferenceHighlighting
             using (
                 var tagAggregator =
                     _tagAggregatorFactory.CreateTagAggregator<NavigableHighlightTag>(args.TextView)
-            ) {
+            )
+            {
                 var tagUnderCursor = FindTagUnderCaret(tagAggregator, args.TextView);
 
                 if (tagUnderCursor == null)
@@ -104,7 +106,8 @@ namespace Microsoft.CodeAnalysis.Editor.ReferenceHighlighting
                         destTag.Start,
                         _outliningManagerService
                     )
-                ) {
+                )
+                {
                     args.TextView.SetSelection(destTag);
                 }
             }
@@ -115,7 +118,8 @@ namespace Microsoft.CodeAnalysis.Editor.ReferenceHighlighting
         private static IEnumerable<SnapshotSpan> GetTags(
             ITagAggregator<NavigableHighlightTag> tagAggregator,
             SnapshotSpan span
-        ) {
+        )
+        {
             return tagAggregator.GetTags(span)
                 .SelectMany(tag => tag.Span.GetSpans(span.Snapshot.TextBuffer))
                 .OrderBy(tag => tag.Start);
@@ -125,7 +129,8 @@ namespace Microsoft.CodeAnalysis.Editor.ReferenceHighlighting
             SnapshotSpan tagUnderCursor,
             List<SnapshotSpan> orderedTagSpans,
             bool navigateToNext
-        ) {
+        )
+        {
             var destIndex = orderedTagSpans.BinarySearch(tagUnderCursor, new StartComparer());
 
             Contract.ThrowIfFalse(destIndex >= 0, "Expected to find start tag in the collection");
@@ -146,7 +151,8 @@ namespace Microsoft.CodeAnalysis.Editor.ReferenceHighlighting
         private static SnapshotSpan? FindTagUnderCaret(
             ITagAggregator<NavigableHighlightTag> tagAggregator,
             ITextView textView
-        ) {
+        )
+        {
             // We always want to be working with the surface buffer here, so this line is correct
             var caretPosition = textView.Caret.Position.BufferPosition.Position;
 

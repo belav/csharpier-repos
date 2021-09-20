@@ -19,7 +19,8 @@ namespace System.Reflection.Metadata
             int handlerOffset,
             int handlerLength,
             int classTokenOrFilterOffset
-        ) {
+        )
+        {
             _kind = kind;
             _tryOffset = tryOffset;
             _tryLength = tryLength;

@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup.Providers
             Document document,
             ImmutableArray<TextSpan> spans,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // If the old text already exists, use the fast path for formatting.
             if (document.TryGetText(out var oldText))
             {
@@ -53,7 +54,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup.Providers
             ImmutableArray<TextSpan> spans,
             Workspace workspace,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // If the old text already exists, use the fast path for formatting.
             if (root.SyntaxTree != null && root.SyntaxTree.TryGetText(out var oldText))
             {

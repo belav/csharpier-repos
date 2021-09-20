@@ -213,7 +213,8 @@ namespace System.MemoryTests
             byte[] bytes,
             int start,
             int length
-        ) {
+        )
+        {
             var memory = new ReadOnlyMemory<byte>(bytes, start, length);
             var pointingToSameMemory = new ReadOnlyMemory<byte>(bytes, start, length);
             ReadOnlyMemory<byte> structCopy = memory;

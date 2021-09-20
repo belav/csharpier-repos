@@ -35,7 +35,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider
                 CancellationToken,
                 Task<DbDataReader>
             > executeReaderAsync = null
-        ) {
+        )
+        {
             _executeNonQuery = executeNonQuery ?? (c => -1);
 
             _executeScalar = executeScalar ?? (c => null);

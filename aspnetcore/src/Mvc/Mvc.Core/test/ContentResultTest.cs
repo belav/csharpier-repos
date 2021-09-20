@@ -120,7 +120,8 @@ namespace Microsoft.AspNetCore.Mvc
             string responseContentType,
             string expectedContentType,
             byte[] expectedContentData
-        ) {
+        )
+        {
             // Arrange
             var contentResult = new ContentResult
             {
@@ -382,7 +383,8 @@ namespace Microsoft.AspNetCore.Mvc
         public async Task ContentResult_WritesDataCorrectly_ForDifferentContentSizes(
             string content,
             string contentType
-        ) {
+        )
+        {
             // Arrange
             var contentResult = new ContentResult { Content = content, ContentType = contentType };
             var httpContext = GetHttpContext();

@@ -26,7 +26,8 @@ namespace System.Net.Http
             uint internetStatus,
             IntPtr statusInformation,
             uint statusInformationLength
-        ) {
+        )
+        {
             if (NetEventSource.Log.IsEnabled())
                 WinHttpTraceHelper.TraceCallbackStatus(null, handle, context, internetStatus);
 
@@ -60,7 +61,8 @@ namespace System.Net.Http
             uint internetStatus,
             IntPtr statusInformation,
             uint statusInformationLength
-        ) {
+        )
+        {
             try
             {
                 switch (internetStatus)
@@ -178,7 +180,8 @@ namespace System.Net.Http
                 bytesRead == 0
                 && state.ExpectedBytesToRead.HasValue
                 && state.CurrentBytesRead < state.ExpectedBytesToRead.Value
-            ) {
+            )
+            {
                 state.LifecycleAwaitable.SetException(
                     new IOException(
                         SR.Format(
@@ -290,7 +293,8 @@ namespace System.Net.Http
                         ref certHandle,
                         ref certHandleSize
                     )
-                ) {
+                )
+                {
                     int lastError = Marshal.GetLastWin32Error();
                     if (NetEventSource.Log.IsEnabled())
                         NetEventSource.Error(
@@ -375,7 +379,8 @@ namespace System.Net.Http
         private static void OnRequestError(
             WinHttpRequestState state,
             Interop.WinHttp.WINHTTP_ASYNC_RESULT asyncResult
-        ) {
+        )
+        {
             Debug.Assert(state != null, "OnRequestError: state is null");
 
             if (NetEventSource.Log.IsEnabled())
@@ -400,7 +405,8 @@ namespace System.Net.Http
                     }
                     else if (
                         asyncResult.dwError == Interop.WinHttp.ERROR_WINHTTP_CLIENT_AUTH_CERT_NEEDED
-                    ) {
+                    )
+                    {
                         // WinHttp will automatically drop any client SSL certificates that we
                         // have pre-set into the request handle including the NULL certificate
                         // (which means we have no certs to send). For security reasons, we don't
@@ -416,7 +422,8 @@ namespace System.Net.Http
                     }
                     else if (
                         asyncResult.dwError == Interop.WinHttp.ERROR_WINHTTP_OPERATION_CANCELLED
-                    ) {
+                    )
+                    {
                         state.LifecycleAwaitable.SetCanceled(state.CancellationToken);
                     }
                     else
@@ -501,7 +508,8 @@ namespace System.Net.Http
                     (uint)AuthHeaderNameWithColon.Length,
                     Interop.WinHttp.WINHTTP_ADDREQ_FLAG_REPLACE
                 )
-            ) {
+            )
+            {
                 int lastError = Marshal.GetLastWin32Error();
                 if (lastError != Interop.WinHttp.ERROR_WINHTTP_HEADER_NOT_FOUND)
                 {

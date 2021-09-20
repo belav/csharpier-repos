@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer
         internal BuildServerController(
             NameValueCollection appSettings,
             ICompilerServerLogger logger
-        ) {
+        )
+        {
             _appSettings = appSettings;
             _logger = logger;
         }
@@ -73,7 +74,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer
                         out int keepAliveValue
                     )
                     && keepAliveValue >= 0
-                ) {
+                )
+                {
                     if (keepAliveValue == 0)
                     {
                         // This is a one time server entry.
@@ -149,7 +151,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer
             IDiagnosticListener? listener = null,
             TimeSpan? keepAlive = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             keepAlive ??= GetKeepAliveTimeout();
             listener ??= new EmptyDiagnosticListener();
             compilerServerHost ??= CreateCompilerServerHost(_logger);
@@ -165,7 +168,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer
                     name: mutexName,
                     createdNew: out createdNew
                 )
-            ) {
+            )
+            {
                 if (!createdNew)
                 {
                     return CommonCompiler.Failed;
@@ -196,7 +200,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer
             NameValueCollection? appSettings = null,
             ICompilerServerLogger? logger = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             appSettings ??= new NameValueCollection();
             logger ??= EmptyCompilerServerLogger.Instance;
             var controller = new BuildServerController(appSettings, logger);
@@ -215,7 +220,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer
             bool waitForProcess = true,
             TimeSpan? timeout = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return RunShutdownAsync(pipeName, waitForProcess, timeout, cancellationToken)
                 .GetAwaiter()
                 .GetResult();
@@ -233,7 +239,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer
             bool waitForProcess = true,
             TimeSpan? timeout = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (WasServerRunning(pipeName) == false)
             {
                 // The server holds the mutex whenever it is running, if it's not open then the
@@ -290,7 +297,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer
             string[] args,
             out string? pipeName,
             out bool shutdown
-        ) {
+        )
+        {
             pipeName = null;
             shutdown = false;
 

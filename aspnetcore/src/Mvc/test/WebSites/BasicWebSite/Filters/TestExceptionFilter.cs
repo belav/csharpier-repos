@@ -15,7 +15,8 @@ namespace BasicWebSite.Filters
                     "handleException",
                     out var handleException
                 )
-            ) {
+            )
+            {
                 if (handleException.Equals("true"))
                 {
                     context.Result = new ContentResult()

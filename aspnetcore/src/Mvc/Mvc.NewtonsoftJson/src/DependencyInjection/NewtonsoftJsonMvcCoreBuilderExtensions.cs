@@ -45,7 +45,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IMvcCoreBuilder AddNewtonsoftJson(
             this IMvcCoreBuilder builder,
             Action<MvcNewtonsoftJsonOptions> setupAction
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));

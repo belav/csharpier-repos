@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Editor.Xaml.OrganizeImports
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public XamlRemoveUnnecessaryImportsService(
             IXamlRemoveUnnecessaryNamespacesService removeService
-        ) {
+        )
+        {
             _removeService = removeService;
         }
 
@@ -47,7 +48,8 @@ namespace Microsoft.CodeAnalysis.Editor.Xaml.OrganizeImports
             Document document,
             Func<SyntaxNode, bool> predicate,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _removeService.RemoveUnnecessaryNamespacesAsync(document, cancellationToken)
                 ?? Task.FromResult(document);
         }

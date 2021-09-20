@@ -72,7 +72,8 @@ namespace System.Web.Http.Cors
             string requestedMethod,
             string expectedOrigin,
             string requestedHeaders
-        ) {
+        )
+        {
             HttpConfiguration config = new HttpConfiguration();
             config.Routes.MapHttpRoute("default", "{controller}");
             HttpServer server = new HttpServer(config);
@@ -319,7 +320,8 @@ namespace System.Web.Http.Cors
         [InlineData(null)]
         public async Task HandleCorsPreflightRequestAsync_ReturnsBadRequestWhenAccessControlRequestMethodIsNullOrEmpty(
             string accessControlRequestMethod
-        ) {
+        )
+        {
             CorsMessageHandler corsHandler = new CorsMessageHandler(new HttpConfiguration());
             HttpResponseMessage response = await corsHandler.HandleCorsPreflightRequestAsync(
                 new HttpRequestMessage(),
@@ -354,7 +356,8 @@ namespace System.Web.Http.Cors
             public Task HandleAsync(
                 ExceptionHandlerContext context,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 throw context.Exception;
             }
         }

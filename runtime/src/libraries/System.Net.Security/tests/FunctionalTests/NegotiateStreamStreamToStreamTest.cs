@@ -545,7 +545,8 @@ namespace System.Net.Security.Tests
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             stream.Write(buffer, offset, count);
             return Task.CompletedTask;
         }

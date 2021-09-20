@@ -42,7 +42,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             PropertyInfo? propertyInfo,
             FieldInfo? fieldInfo,
             PropertyAccessMode propertyAccessMode
-        ) {
+        )
+        {
             Name = name;
             _propertyInfo = propertyInfo;
             _fieldInfo = fieldInfo;

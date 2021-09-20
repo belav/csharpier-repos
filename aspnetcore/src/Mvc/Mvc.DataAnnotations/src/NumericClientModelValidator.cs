@@ -34,7 +34,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             IDictionary<string, string> attributes,
             string key,
             string value
-        ) {
+        )
+        {
             if (!attributes.ContainsKey(key))
             {
                 attributes.Add(key, value);

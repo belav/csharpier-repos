@@ -63,7 +63,8 @@ namespace System.Net
                 if (
                     value == EntitySendFormat.Chunked
                     && HttpListenerRequest.ProtocolVersion.Minor == 0
-                ) {
+                )
+                {
                     throw new ProtocolViolationException(SR.net_nochunkuploadonhttp10);
                 }
                 _boundaryType = (BoundaryType)value;

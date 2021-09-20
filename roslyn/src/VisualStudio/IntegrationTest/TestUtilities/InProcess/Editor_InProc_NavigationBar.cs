@@ -178,7 +178,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                     oleServiceProvider.QueryService(ref guidService, ref riid, out var ppvObject)
                 )
                 || ppvObject == IntPtr.Zero
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -197,7 +198,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             if (
                 ErrorHandler.Failed(frame.QueryViewInterface(ref riid, out ppvObject))
                 || ppvObject == IntPtr.Zero
-            ) {
+            )
+            {
                 return null;
             }
 

@@ -47,7 +47,8 @@ namespace System.Runtime.Serialization.Json
         [RequiresUnreferencedCode(DataContractJsonSerializer.SerializerTrimmerWarning)]
         internal JsonFormatCollectionWriterDelegate GenerateCollectionWriter(
             CollectionDataContract collectionContract
-        ) {
+        )
+        {
             return _helper.GenerateCollectionWriter(collectionContract);
         }
 
@@ -78,7 +79,8 @@ namespace System.Runtime.Serialization.Json
             [RequiresUnreferencedCode(DataContractJsonSerializer.SerializerTrimmerWarning)]
             internal JsonFormatClassWriterDelegate GenerateClassWriter(
                 ClassDataContract classContract
-            ) {
+            )
+            {
                 _ilg = new CodeGenerator();
                 bool memberAccessFlag = classContract.RequiresMemberAccessForWrite(null);
                 try
@@ -112,7 +114,8 @@ namespace System.Runtime.Serialization.Json
             [RequiresUnreferencedCode(DataContractJsonSerializer.SerializerTrimmerWarning)]
             internal JsonFormatCollectionWriterDelegate GenerateCollectionWriter(
                 CollectionDataContract collectionContract
-            ) {
+            )
+            {
                 _ilg = new CodeGenerator();
                 bool memberAccessFlag = collectionContract.RequiresMemberAccessForWrite(null);
                 try
@@ -147,7 +150,8 @@ namespace System.Runtime.Serialization.Json
                 string methodName,
                 Type delegateType,
                 bool allowPrivateMemberAccess
-            ) {
+            )
+            {
                 MethodInfo signature = GetInvokeMethod(delegateType);
                 ParameterInfo[] parameters = signature.GetParameters();
                 Type[] paramTypes = new Type[parameters.Length];
@@ -194,7 +198,8 @@ namespace System.Runtime.Serialization.Json
                 else if (
                     objType.IsGenericType
                     && objType.GetGenericTypeDefinition() == Globals.TypeOfKeyValuePairAdapter
-                ) {
+                )
+                {
                     ClassDataContract dc = (ClassDataContract)DataContract.GetDataContract(objType);
                     _ilg.ConvertValue(
                         objectArg.ArgType,
@@ -284,7 +289,8 @@ namespace System.Runtime.Serialization.Json
                 ClassDataContract classContract,
                 LocalBuilder? extensionDataLocal,
                 ClassDataContract derivedMostClassContract
-            ) {
+            )
+            {
                 int memberCount =
                     (classContract.BaseContract == null)
                         ? 0
@@ -334,7 +340,8 @@ namespace System.Runtime.Serialization.Json
                             name: null,
                             nameIndex: i + _childElementIndex
                         )
-                    ) {
+                    )
+                    {
                         // Note: DataContractSerializer has member-conflict logic here to deal with the schema export
                         //       requirement that the same member can't be of two different types.
                         if (requiresNameAttribute)
@@ -428,7 +435,8 @@ namespace System.Runtime.Serialization.Json
                             _objectLocal,
                             itemName
                         )
-                    ) {
+                    )
+                    {
                         WriteArrayAttribute();
                         _ilg.For(i, 0, _objectLocal);
                         if (
@@ -443,7 +451,8 @@ namespace System.Runtime.Serialization.Json
                                 itemName,
                                 0 /*nameIndex*/
                             )
-                        ) {
+                        )
+                        {
                             WriteStartElement(
                                 itemName,
                                 0 /*nameIndex*/
@@ -545,7 +554,8 @@ namespace System.Runtime.Serialization.Json
                                 kind == CollectionKind.GenericDictionary
                                 || kind == CollectionKind.GenericCollection
                                 || kind == CollectionKind.GenericEnumerable
-                            ) {
+                            )
+                            {
                                 Type[] interfaceTypes = enumeratorType.GetInterfaces();
                                 foreach (Type interfaceType in interfaceTypes)
                                 {
@@ -555,7 +565,8 @@ namespace System.Runtime.Serialization.Json
                                             == Globals.TypeOfIEnumeratorGeneric
                                         && interfaceType.GetGenericArguments()[0]
                                             == collectionContract.ItemType
-                                    ) {
+                                    )
+                                    {
                                         ienumeratorInterface = interfaceType;
                                         break;
                                     }
@@ -686,7 +697,8 @@ namespace System.Runtime.Serialization.Json
                             itemName,
                             0 /*nameIndex*/
                         )
-                    ) {
+                    )
+                    {
                         WriteStartElement(
                             itemName,
                             0 /*nameIndex*/
@@ -730,7 +742,8 @@ namespace System.Runtime.Serialization.Json
                 LocalBuilder? arrayItemIndex,
                 LocalBuilder? name,
                 int nameIndex
-            ) {
+            )
+            {
                 PrimitiveDataContract? primitiveContract =
                     PrimitiveDataContract.GetPrimitiveDataContract(type);
                 if (
@@ -784,7 +797,8 @@ namespace System.Runtime.Serialization.Json
                 Type itemType,
                 LocalBuilder value,
                 LocalBuilder itemName
-            ) {
+            )
+            {
                 PrimitiveDataContract? primitiveContract =
                     PrimitiveDataContract.GetPrimitiveDataContract(itemType);
                 if (primitiveContract == null)
@@ -919,7 +933,8 @@ namespace System.Runtime.Serialization.Json
                     if (
                         primitiveContract != null
                         && primitiveContract.UnderlyingType != Globals.TypeOfObject
-                    ) {
+                    )
+                    {
                         if (isNullableOfT)
                         {
                             _ilg.Call(
@@ -945,7 +960,8 @@ namespace System.Runtime.Serialization.Json
                             || //boxed Nullable<T>
                             memberType == Globals.TypeOfValueType
                             || ((IList)Globals.TypeOfNullable.GetInterfaces()).Contains(memberType)
-                        ) {
+                        )
+                        {
                             _ilg.Load(memberValue);
                             _ilg.ConvertValue(memberValue.LocalType, Globals.TypeOfObject);
                             memberValue = _ilg.DeclareLocal(
@@ -987,7 +1003,8 @@ namespace System.Runtime.Serialization.Json
                 LocalBuilder memberValue,
                 Type memberType,
                 bool writeXsiType
-            ) {
+            )
+            {
                 _ilg.Load(_contextArg);
                 _ilg.Load(_xmlWriterArg);
                 _ilg.Load(memberValue);
@@ -1022,7 +1039,8 @@ namespace System.Runtime.Serialization.Json
                 while (
                     memberType.IsGenericType
                     && memberType.GetGenericTypeDefinition() == Globals.TypeOfNullable
-                ) {
+                )
+                {
                     Type innerType = memberType.GetGenericArguments()[0];
                     _ilg.Dup();
                     _ilg.Call(

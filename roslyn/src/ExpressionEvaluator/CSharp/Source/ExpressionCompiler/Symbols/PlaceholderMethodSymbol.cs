@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             GetTypeParameters getTypeParameters,
             GetReturnType getReturnType,
             GetParameters getParameters
-        ) {
+        )
+        {
             _container = container;
             _name = name;
             _typeParameters = getTypeParameters(this);

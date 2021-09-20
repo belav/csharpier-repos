@@ -76,13 +76,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                 && workspace.GetHierarchy(project.Id) is { } hierarchy
                 && (IVsSolution3)ServiceProvider.GlobalProvider.GetService(typeof(SVsSolution))
                     is { } solution
-            ) {
+            )
+            {
                 if (
                     ErrorHandler.Succeeded(
                         solution.GetUniqueUINameOfProject(hierarchy, out var name)
                     )
                     && name != null
-                ) {
+                )
+                {
                     return name;
                 }
             }
@@ -154,7 +156,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             if (
                 hierarchy.TryGetParentHierarchy(out var parentHierarchy)
                 && !(parentHierarchy is IVsSolution)
-            ) {
+            )
+            {
                 var builder = new StringBuilder(result);
 
                 while (parentHierarchy != null && !(parentHierarchy is IVsSolution))

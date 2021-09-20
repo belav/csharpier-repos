@@ -148,7 +148,8 @@ namespace Microsoft.Net.Http.Headers
         public static bool TryParse(
             StringSegment input,
             [NotNullWhen(true)] out RangeHeaderValue parsedValue
-        ) {
+        )
+        {
             var index = 0;
             return Parser.TryParseValue(input, ref index, out parsedValue!);
         }
@@ -157,7 +158,8 @@ namespace Microsoft.Net.Http.Headers
             StringSegment input,
             int startIndex,
             out RangeHeaderValue? parsedValue
-        ) {
+        )
+        {
             Contract.Requires(startIndex >= 0);
 
             parsedValue = null;

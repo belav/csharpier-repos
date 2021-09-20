@@ -53,7 +53,8 @@ namespace Internal.Cryptography
         internal static HashAlgorithmName GetDigestAlgorithm(
             string? oidValue,
             bool forVerification = false
-        ) {
+        )
+        {
             switch (oidValue)
             {
                 case Oids.Md5:
@@ -140,7 +141,8 @@ namespace Internal.Cryptography
         public static AttributeAsn[] NormalizeAttributeSet(
             AttributeAsn[] setItems,
             Action<byte[]>? encodedValueProcessor = null
-        ) {
+        )
+        {
             byte[] normalizedValue;
 
             AsnWriter writer = new AsnWriter(AsnEncodingRules.DER);
@@ -184,7 +186,8 @@ namespace Internal.Cryptography
             ReadOnlyMemory<byte> content,
             string contentType,
             AsnEncodingRules ruleSet = AsnEncodingRules.DER
-        ) {
+        )
+        {
             ContentInfoAsn contentInfo = new ContentInfoAsn
             {
                 ContentType = contentType,
@@ -257,7 +260,8 @@ namespace Internal.Cryptography
             StoreName storeName,
             StoreLocation storeLocation,
             bool openExistingOnly
-        ) {
+        )
+        {
             using (X509Store store = new X509Store(storeName, storeLocation))
             {
                 OpenFlags flags = OpenFlags.ReadOnly | OpenFlags.IncludeArchived;
@@ -276,7 +280,8 @@ namespace Internal.Cryptography
         public static X509Certificate2? TryFindMatchingCertificate(
             this X509Certificate2Collection certs,
             SubjectIdentifier recipientIdentifier
-        ) {
+        )
+        {
             //
             // Note: SubjectIdentifier has no public constructor so the only one that can construct this type is this assembly.
             //       Therefore, we trust that the string-ized byte array (serial or ski) in it is correct and canonicalized.
@@ -437,7 +442,8 @@ namespace Internal.Cryptography
         public static Pkcs9AttributeObject CreateBestPkcs9AttributeObjectAvailable(
             Oid oid,
             byte[] encodedAttribute
-        ) {
+        )
+        {
             Pkcs9AttributeObject attributeObject = new Pkcs9AttributeObject(oid, encodedAttribute);
             switch (oid.Value)
             {
@@ -491,7 +497,8 @@ namespace Internal.Cryptography
             byte[] data,
             int offset,
             int length
-        ) {
+        )
+        {
             if (transform.CanTransformMultipleBlocks)
             {
                 return transform.TransformFinalBlock(data, offset, length);
@@ -505,7 +512,8 @@ namespace Internal.Cryptography
                         transform,
                         CryptoStreamMode.Write
                     )
-                ) {
+                )
+                {
                     cryptoStream.Write(data, offset, length);
                 }
 
@@ -525,7 +533,8 @@ namespace Internal.Cryptography
                     out int consumed
                 )
                 || consumed != source.Length
-            ) {
+            )
+            {
                 throw new CryptographicException(SR.Cryptography_Der_Invalid_Encoding);
             }
         }
@@ -541,7 +550,8 @@ namespace Internal.Cryptography
                     out _,
                     out int consumed
                 )
-            ) {
+            )
+            {
                 throw new CryptographicException(SR.Cryptography_Der_Invalid_Encoding);
             }
 
@@ -550,7 +560,8 @@ namespace Internal.Cryptography
 
         public static ReadOnlyMemory<byte> DecodeOctetStringAsMemory(
             ReadOnlyMemory<byte> encodedOctetString
-        ) {
+        )
+        {
             try
             {
                 ReadOnlySpan<byte> input = encodedOctetString.Span;
@@ -562,7 +573,8 @@ namespace Internal.Cryptography
                         out ReadOnlySpan<byte> primitive,
                         out int consumed
                     )
-                ) {
+                )
+                {
                     if (consumed != input.Length)
                     {
                         throw new CryptographicException(SR.Cryptography_Der_Invalid_Encoding);
@@ -712,7 +724,8 @@ namespace Internal.Cryptography
             ReadOnlyMemory<byte>? parameters,
             [NotNullWhen(true)] out RSAEncryptionPadding? rsaEncryptionPadding,
             [NotNullWhen(false)] out Exception? exception
-        ) {
+        )
+        {
             exception = null;
             rsaEncryptionPadding = null;
 
@@ -733,7 +746,8 @@ namespace Internal.Cryptography
                     oaepParameters.MaskGenFunc.Algorithm != Oids.Mgf1
                     || oaepParameters.MaskGenFunc.Parameters == null
                     || oaepParameters.PSourceFunc.Algorithm != Oids.PSpecified
-                ) {
+                )
+                {
                     exception = new CryptographicException(SR.Cryptography_Der_Invalid_Encoding);
                     return false;
                 }
@@ -756,7 +770,8 @@ namespace Internal.Cryptography
                     && !oaepParameters.PSourceFunc.Parameters.Value.Span.SequenceEqual(
                         pSpecifiedDefaultParameters
                     )
-                ) {
+                )
+                {
                     exception = new CryptographicException(SR.Cryptography_Der_Invalid_Encoding);
                     return false;
                 }

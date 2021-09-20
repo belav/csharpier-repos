@@ -101,7 +101,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             SyntaxToken token1,
             SyntaxToken token2,
             Analyzer.AnalysisResult result
-        ) {
+        )
+        {
             if (!ContainsOnlyWhitespace(result))
             {
                 return null;
@@ -155,7 +156,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
 
         private (bool canUseTriviaAsItIs, int lineBreaks, int indentation) GetLineBreaksAndIndentation(
             Analyzer.AnalysisResult result
-        ) {
+        )
+        {
             Debug.Assert(result.Tab >= 0);
             Debug.Assert(result.LineBreaks >= 0);
 
@@ -207,7 +209,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 || result.HasUnknownWhitespace
                 || result.LineBreaks > 0
                 || result.Tab > 0
-            ) {
+            )
+            {
                 return -1;
             }
 

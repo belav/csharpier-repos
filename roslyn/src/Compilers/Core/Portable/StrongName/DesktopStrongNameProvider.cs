@@ -47,19 +47,24 @@ namespace Microsoft.CodeAnalysis
         public DesktopStrongNameProvider(
             ImmutableArray<string> keyFileSearchPaths = default,
             string? tempPath = null
-        ) : this(
-            keyFileSearchPaths,
-            tempPath == null ? StrongNameFileSystem.Instance : new StrongNameFileSystem(tempPath)
-        ) { }
+        )
+            : this(
+                keyFileSearchPaths,
+                tempPath == null
+                  ? StrongNameFileSystem.Instance
+                  : new StrongNameFileSystem(tempPath)
+            ) { }
 
         internal DesktopStrongNameProvider(
             ImmutableArray<string> keyFileSearchPaths,
             StrongNameFileSystem strongNameFileSystem
-        ) {
+        )
+        {
             if (
                 !keyFileSearchPaths.IsDefault
                 && keyFileSearchPaths.Any(path => !PathUtilities.IsAbsolute(path))
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     CodeAnalysisResources.AbsolutePathExpected,
                     nameof(keyFileSearchPaths)
@@ -75,7 +80,8 @@ namespace Microsoft.CodeAnalysis
             string? keyContainerName,
             bool hasCounterSignature,
             CommonMessageProvider messageProvider
-        ) {
+        )
+        {
             var keyPair = default(ImmutableArray<byte>);
             var publicKey = default(ImmutableArray<byte>);
             string? container = null;
@@ -166,7 +172,8 @@ namespace Microsoft.CodeAnalysis
             string path,
             StrongNameFileSystem fileSystem,
             ImmutableArray<string> keyFileSearchPaths
-        ) {
+        )
+        {
             // Dev11: key path is simply appended to the search paths, even if it starts with the current (parent) directory ("." or "..").
             // This is different from PathUtilities.ResolveRelativePath.
 
@@ -201,7 +208,8 @@ namespace Microsoft.CodeAnalysis
         internal virtual void ReadKeysFromContainer(
             string keyContainer,
             out ImmutableArray<byte> publicKey
-        ) {
+        )
+        {
             try
             {
                 publicKey = GetPublicKey(keyContainer);
@@ -237,7 +245,8 @@ namespace Microsoft.CodeAnalysis
             ExtendedPEBuilder peBuilder,
             BlobBuilder peBlob,
             RSAParameters privateKey
-        ) {
+        )
+        {
             peBuilder.Sign(
                 peBlob,
                 content => SigningUtilities.CalculateRsaSignature(content, privateKey)
@@ -371,7 +380,8 @@ namespace Microsoft.CodeAnalysis
                     other._keyFileSearchPaths,
                     StringComparer.Ordinal
                 )
-            ) {
+            )
+            {
                 return false;
             }
 

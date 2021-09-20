@@ -41,13 +41,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionEntityType? newBaseType,
             IConventionEntityType? oldBaseType,
             IConventionContext<IConventionEntityType> context
-        ) {
+        )
+        {
             if (
                 oldBaseType != null
                 && oldBaseType.IsInModel
                 && oldBaseType.BaseType == null
                 && !oldBaseType.GetDirectlyDerivedTypes().Any()
-            ) {
+            )
+            {
                 oldBaseType.Builder.HasNoDiscriminator();
             }
 
@@ -102,14 +104,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionModelBuilder modelBuilder,
             IConventionEntityType entityType,
             IConventionContext<IConventionEntityType> context
-        ) {
+        )
+        {
             var oldBaseType = entityType.BaseType;
             if (
                 oldBaseType != null
                 && oldBaseType.IsInModel
                 && oldBaseType.BaseType == null
                 && !oldBaseType.GetDirectlyDerivedTypes().Any()
-            ) {
+            )
+            {
                 oldBaseType.Builder.HasNoDiscriminator();
             }
         }
@@ -122,7 +126,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         protected virtual void SetDefaultDiscriminatorValues(
             IEnumerable<IConventionEntityType> entityTypes,
             IConventionDiscriminatorBuilder discriminatorBuilder
-        ) {
+        )
+        {
             foreach (var entityType in entityTypes)
             {
                 discriminatorBuilder.HasValue(entityType, entityType.ShortName());

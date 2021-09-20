@@ -69,7 +69,8 @@ namespace Microsoft.EntityFrameworkCore.Design
             if (
                 toolsVersion != null
                 && new SemanticVersionComparer().Compare(toolsVersion, runtimeVersion) < 0
-            ) {
+            )
+            {
                 _reporter.WriteWarning(DesignStrings.VersionMismatch(toolsVersion, runtimeVersion));
             }
         }
@@ -171,7 +172,8 @@ namespace Microsoft.EntityFrameworkCore.Design
             string? outputDir,
             string? contextType,
             string? @namespace
-        ) {
+        )
+        {
             Check.NotEmpty(name, nameof(name));
 
             var files = MigrationsOperations.AddMigration(name, outputDir, contextType, @namespace);
@@ -322,7 +324,8 @@ namespace Microsoft.EntityFrameworkCore.Design
             bool idempotent,
             bool noTransactions,
             string? contextType
-        ) {
+        )
+        {
             var options = MigrationsSqlGenerationOptions.Default;
             if (idempotent)
             {
@@ -472,7 +475,8 @@ namespace Microsoft.EntityFrameworkCore.Design
             string? contextType,
             string? connectionString,
             bool noConnect
-        ) {
+        )
+        {
             var migrations = MigrationsOperations.GetMigrations(
                     contextType,
                     connectionString,
@@ -579,7 +583,8 @@ namespace Microsoft.EntityFrameworkCore.Design
             bool useDatabaseNames,
             bool suppressOnConfiguring,
             bool noPluarlize
-        ) {
+        )
+        {
             Check.NotNull(provider, nameof(provider));
             Check.NotNull(connectionString, nameof(connectionString));
             Check.NotNull(schemaFilters, nameof(schemaFilters));

@@ -21,7 +21,8 @@ namespace System.Reflection.Internal
             int byteCount,
             byte[]? prefix,
             MetadataStringDecoder utf8Decoder
-        ) {
+        )
+        {
             Debug.Assert(utf8Decoder != null);
 
             if (prefix != null)
@@ -42,7 +43,8 @@ namespace System.Reflection.Internal
             int byteCount,
             byte[] prefix,
             MetadataStringDecoder utf8Decoder
-        ) {
+        )
+        {
             Debug.Assert(utf8Decoder != null);
 
             int prefixedByteCount = byteCount + prefix.Length;

@@ -94,7 +94,8 @@ namespace System.Formats.Cbor
                         DateTimeStyles.RoundtripKind,
                         out DateTimeOffset result
                     )
-                ) {
+                )
+                {
                     throw new CborContentException(SR.Cbor_Reader_InvalidDateTimeEncoding);
                 }
 
@@ -328,7 +329,8 @@ namespace System.Formats.Cbor
             if (
                 _isConformanceModeCheckEnabled
                 && !CborConformanceModeHelpers.AllowsTags(ConformanceMode)
-            ) {
+            )
+            {
                 throw new CborContentException(
                     SR.Format(SR.Cbor_ConformanceMode_TagsNotSupported, ConformanceMode)
                 );

@@ -32,7 +32,8 @@ namespace System.Threading
             string? name,
             out bool createdNew,
             EventWaitHandleSecurity? eventSecurity
-        ) {
+        )
+        {
             if (eventSecurity == null)
             {
                 return new EventWaitHandle(initialState, mode, name, out createdNew);
@@ -73,7 +74,8 @@ namespace System.Threading
                     if (
                         !string.IsNullOrEmpty(name)
                         && errorCode == Interop.Errors.ERROR_INVALID_HANDLE
-                    ) {
+                    )
+                    {
                         throw new WaitHandleCannotBeOpenedException(
                             SR.Format(SR.WaitHandleCannotBeOpenedException_InvalidHandle, name)
                         );
@@ -146,7 +148,8 @@ namespace System.Threading
             string name,
             EventWaitHandleRights rights,
             out EventWaitHandle? result
-        ) {
+        )
+        {
             if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));

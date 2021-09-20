@@ -52,7 +52,8 @@ namespace System.Web.Http.ModelBinding
             HttpActionContext actionContext,
             ModelMetadata modelMetadata,
             object incomingValue
-        ) {
+        )
+        {
             return GetResourceCommon(
                 actionContext,
                 modelMetadata,
@@ -65,7 +66,8 @@ namespace System.Web.Http.ModelBinding
             HttpActionContext actionContext,
             ModelMetadata modelMetadata,
             object incomingValue
-        ) {
+        )
+        {
             return GetResourceCommon(
                 actionContext,
                 modelMetadata,
@@ -79,7 +81,8 @@ namespace System.Web.Http.ModelBinding
             ModelMetadata modelMetadata,
             object incomingValue,
             Func<HttpActionContext, string> resourceAccessor
-        ) {
+        )
+        {
             string displayName = modelMetadata.GetDisplayName();
             string errorMessageTemplate = resourceAccessor(actionContext);
             return Error.Format(errorMessageTemplate, incomingValue, displayName);
@@ -88,7 +91,8 @@ namespace System.Web.Http.ModelBinding
         private static string GetUserResourceString(
             HttpActionContext actionContext,
             string resourceName
-        ) {
+        )
+        {
             return GetUserResourceString(actionContext, resourceName, ResourceClassKey);
         }
 
@@ -118,7 +122,8 @@ namespace System.Web.Http.ModelBinding
             HttpActionContext actionContext,
             string resourceName,
             string resourceClassKey
-        ) {
+        )
+        {
 #if false
             return (!String.IsNullOrEmpty(resourceClassKey) && (actionContext != null) && (actionContext.HttpContext != null))
                        ? actionContext.HttpContext.GetGlobalResourceObject(resourceClassKey, resourceName, CultureInfo.CurrentUICulture) as string

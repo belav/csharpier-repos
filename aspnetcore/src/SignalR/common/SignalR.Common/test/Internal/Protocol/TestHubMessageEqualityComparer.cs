@@ -82,7 +82,8 @@ namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Protocol
         private bool StreamInvocationMessagesEqual(
             StreamInvocationMessage x,
             StreamInvocationMessage y
-        ) {
+        )
+        {
             return SequenceEqual(x.Headers, y.Headers)
                 && string.Equals(x.InvocationId, y.InvocationId, StringComparison.Ordinal)
                 && string.Equals(x.Target, y.Target, StringComparison.Ordinal)
@@ -134,7 +135,8 @@ namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Protocol
                 ;
                 leftMoved && rightMoved;
                 leftMoved = leftEnumerator.MoveNext(), rightMoved = rightEnumerator.MoveNext()
-            ) {
+            )
+            {
                 if (!Equals(leftEnumerator.Current, rightEnumerator.Current))
                 {
                     return false;

@@ -19,10 +19,8 @@ namespace Microsoft.CodeAnalysis.Serialization
     /// </summary>
     internal abstract class ChecksumCollection : ChecksumWithChildren, IEnumerable<Checksum>
     {
-        protected ChecksumCollection(
-            WellKnownSynchronizationKind kind,
-            Checksum[] checksums
-        ) : this(kind, (object[])checksums) { }
+        protected ChecksumCollection(WellKnownSynchronizationKind kind, Checksum[] checksums)
+            : this(kind, (object[])checksums) { }
 
         protected ChecksumCollection(WellKnownSynchronizationKind kind, object[] checksums)
             : base(kind, checksums) { }
@@ -66,7 +64,8 @@ namespace Microsoft.CodeAnalysis.Serialization
             HashSet<Checksum> searchingChecksumsLeft,
             Dictionary<Checksum, object> result,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfFalse(values.Count == checksums.Children.Count);
 
             for (var i = 0; i < checksums.Children.Count; i++)

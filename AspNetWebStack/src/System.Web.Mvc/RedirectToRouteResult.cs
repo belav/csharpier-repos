@@ -20,7 +20,8 @@ namespace System.Web.Mvc
             string routeName,
             RouteValueDictionary routeValues,
             bool permanent
-        ) {
+        )
+        {
             Permanent = permanent;
             RouteName = routeName ?? String.Empty;
             RouteValues = routeValues ?? new RouteValueDictionary();

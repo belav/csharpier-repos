@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         public ControllerActionDescriptorProvider(
             ApplicationPartManager partManager,
             ApplicationModelFactory applicationModelFactory
-        ) {
+        )
+        {
             if (partManager == null)
             {
                 throw new ArgumentNullException(nameof(partManager));

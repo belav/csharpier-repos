@@ -236,7 +236,8 @@ namespace System.Web.Mvc.Test
         public void GetHeaderValue_Produces_Correct_ContentDisposition(
             string input,
             string expectedOutput
-        ) {
+        )
+        {
             // Arrange & Act
             string actual = FileResult.ContentDispositionUtil.GetHeaderValue(input);
 

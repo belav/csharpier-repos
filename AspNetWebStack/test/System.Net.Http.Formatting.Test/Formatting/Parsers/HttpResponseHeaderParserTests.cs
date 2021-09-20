@@ -262,7 +262,8 @@ namespace System.Net.Http.Formatting.Parsers
             string statusCode,
             string reasonPhrase,
             Dictionary<string, string> headers
-        ) {
+        )
+        {
             const string SP = " ";
             const string CRLF = "\r\n";
             string lws = SP;
@@ -294,7 +295,8 @@ namespace System.Net.Http.Formatting.Parsers
             byte[] buffer,
             int readsize,
             out int totalBytesConsumed
-        ) {
+        )
+        {
             ParserState state = ParserState.Invalid;
             totalBytesConsumed = 0;
             while (totalBytesConsumed <= buffer.Length)
@@ -322,7 +324,8 @@ namespace System.Net.Http.Formatting.Parsers
             HttpStatusCode statusCode,
             string reasonPhrase,
             Dictionary<string, string> headers
-        ) {
+        )
+        {
             Assert.Equal(version, statusLine.Version);
             Assert.Equal(statusCode, statusLine.StatusCode);
             Assert.Equal(reasonPhrase, statusLine.ReasonPhrase);

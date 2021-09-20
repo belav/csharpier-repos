@@ -15,7 +15,8 @@ namespace Roslyn.Test.Utilities
         public static void AssertPublicAndInternalFieldsAndProperties(
             Type targetType,
             params string[] expectedFieldsAndProperties
-        ) {
+        )
+        {
             var fields = targetType.GetFields(
                 BindingFlags.DeclaredOnly
                     | BindingFlags.Instance

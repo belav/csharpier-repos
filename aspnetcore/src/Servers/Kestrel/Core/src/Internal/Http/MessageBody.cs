@@ -197,7 +197,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
         protected ValueTask<ReadResult> StartTimingReadAsync(
             ValueTask<ReadResult> readAwaitable,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!readAwaitable.IsCompleted)
             {
                 ValueTask<FlushResult> continueTask = TryProduceContinueAsync();
@@ -224,7 +225,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             ValueTask<FlushResult> continueTask,
             ValueTask<ReadResult> readAwaitable,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             await continueTask;
 
             if (_timingEnabled)
@@ -261,7 +263,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             ReadResult readResult,
             SequencePosition consumed,
             SequencePosition examined
-        ) {
+        )
+        {
             // This code path is fairly hard to understand so let's break it down with an example
             // ReadAsync returns a ReadResult of length 50.
             // Advance(25, 40). The examined length would be 40 and consumed length would be 25.

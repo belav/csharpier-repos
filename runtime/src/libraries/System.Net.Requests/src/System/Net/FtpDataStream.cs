@@ -27,7 +27,8 @@ namespace System.Net
             NetworkStream networkStream,
             FtpWebRequest request,
             TriState writeOnly
-        ) {
+        )
+        {
             if (NetEventSource.Log.IsEnabled())
                 NetEventSource.Info(this);
 
@@ -225,7 +226,8 @@ namespace System.Net
             int size,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             CheckError();
             LazyAsyncResult userResult = new LazyAsyncResult(this, state, callback);
             try
@@ -272,7 +274,8 @@ namespace System.Net
             int size,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             CheckError();
             try
             {

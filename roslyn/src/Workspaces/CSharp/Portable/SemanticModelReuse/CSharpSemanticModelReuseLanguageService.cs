@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SemanticModelReuse
 
         protected override BasePropertyDeclarationSyntax GetBasePropertyDeclaration(
             AccessorDeclarationSyntax accessor
-        ) {
+        )
+        {
             Contract.ThrowIfFalse(accessor.Parent is AccessorListSyntax);
             Contract.ThrowIfFalse(accessor.Parent.Parent is BasePropertyDeclarationSyntax);
             return (BasePropertyDeclarationSyntax)accessor.Parent.Parent;
@@ -52,7 +53,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SemanticModelReuse
                 SyntaxNode? previous = null, current = node;
                 current != null;
                 previous = current, current = current.Parent
-            ) {
+            )
+            {
                 // These are the exact types that SemanticModel.TryGetSpeculativeSemanticModelForMethodBody accepts.
                 if (current is BaseMethodDeclarationSyntax baseMethod)
                     return previous != null && baseMethod.Body == previous ? baseMethod : null;
@@ -68,7 +70,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SemanticModelReuse
             SemanticModel previousSemanticModel,
             SyntaxNode currentBodyNode,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var previousRoot = await previousSemanticModel.SyntaxTree.GetRootAsync(
                     cancellationToken
                 )
@@ -87,7 +90,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SemanticModelReuse
                     currentBaseMethod,
                     out var speculativeModel
                 )
-            ) {
+            )
+            {
                 return speculativeModel;
             }
 
@@ -100,7 +104,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SemanticModelReuse
                     currentAccessorDeclaration,
                     out speculativeModel
                 )
-            ) {
+            )
+            {
                 return speculativeModel;
             }
 

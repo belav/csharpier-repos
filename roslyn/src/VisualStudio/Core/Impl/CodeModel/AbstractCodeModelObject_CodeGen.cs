@@ -23,7 +23,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             EnvDTE.vsCMAccess access,
             ParseOptions parseOptions,
             OptionSet options
-        ) {
+        )
+        {
             var generateDefaultAccessibility = (access & EnvDTE.vsCMAccess.vsCMAccessDefault) == 0;
             return new CodeGenerationOptions(
                 generateDefaultAccessibility: generateDefaultAccessibility,
@@ -36,7 +37,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             SyntaxNode containerNode,
             string typeName,
             EnvDTE.vsCMAccess access
-        ) {
+        )
+        {
             var destination = CodeModelService.GetDestination(containerNode);
 
             var newMethodSymbol = CodeGenerationSymbolFactory.CreateConstructorSymbol(
@@ -79,7 +81,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             string name,
             EnvDTE.vsCMAccess access,
             INamedTypeSymbol returnType
-        ) {
+        )
+        {
             var destination = CodeModelService.GetDestination(containerNode);
 
             var newTypeSymbol = CodeGenerationSymbolFactory.CreateDelegateTypeSymbol(
@@ -112,7 +115,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             EnvDTE.vsCMAccess access,
             ITypeSymbol type,
             bool createPropertyStyleEvent
-        ) {
+        )
+        {
             var destination = CodeModelService.GetDestination(containerNode);
 
             IMethodSymbol addMethod = null;
@@ -176,7 +180,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             string name,
             EnvDTE.vsCMAccess access,
             ITypeSymbol type
-        ) {
+        )
+        {
             var destination = CodeModelService.GetDestination(containerNode);
 
             var newFieldSymbol = CodeGenerationSymbolFactory.CreateFieldSymbol(
@@ -209,7 +214,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             string name,
             EnvDTE.vsCMAccess access,
             ITypeSymbol returnType
-        ) {
+        )
+        {
             var destination = CodeModelService.GetDestination(containerNode);
 
             var newMethodSymbol = CodeGenerationSymbolFactory.CreateMethodSymbol(
@@ -255,7 +261,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             EnvDTE.vsCMAccess access,
             ITypeSymbol type,
             OptionSet options
-        ) {
+        )
+        {
             var destination = CodeModelService.GetDestination(containerNode);
 
             IMethodSymbol getMethod = null;
@@ -338,7 +345,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             EnvDTE.vsCMAccess access,
             INamedTypeSymbol baseType = null,
             ImmutableArray<INamedTypeSymbol> implementedInterfaces = default
-        ) {
+        )
+        {
             var destination = CodeModelService.GetDestination(containerNode);
 
             var newTypeSymbol = CodeGenerationSymbolFactory.CreateNamedTypeSymbol(

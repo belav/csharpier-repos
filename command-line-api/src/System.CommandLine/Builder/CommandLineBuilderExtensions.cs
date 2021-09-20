@@ -128,7 +128,8 @@ namespace System.CommandLine.Builder
         public static CommandLineBuilder ConfigureConsole(
             this CommandLineBuilder builder,
             Func<BindingContext, IConsole> createConsole
-        ) {
+        )
+        {
             builder.AddMiddleware(
                 async (context, next) =>
                 {
@@ -146,7 +147,8 @@ namespace System.CommandLine.Builder
         public static CommandLineBuilder EnableDirectives(
             this CommandLineBuilder builder,
             bool value = true
-        ) {
+        )
+        {
             builder.EnableDirectives = value;
             return builder;
         }
@@ -154,7 +156,8 @@ namespace System.CommandLine.Builder
         public static CommandLineBuilder EnablePosixBundling(
             this CommandLineBuilder builder,
             bool value = true
-        ) {
+        )
+        {
             builder.EnablePosixBundling = value;
             return builder;
         }
@@ -162,7 +165,8 @@ namespace System.CommandLine.Builder
         public static CommandLineBuilder ParseResponseFileAs(
             this CommandLineBuilder builder,
             ResponseFileHandling responseFileHandling
-        ) {
+        )
+        {
             builder.ResponseFileHandling = responseFileHandling;
             return builder;
         }
@@ -221,7 +225,8 @@ namespace System.CommandLine.Builder
         public static CommandLineBuilder UseDebugDirective(
             this CommandLineBuilder builder,
             int? errorExitCode = null
-        ) {
+        )
+        {
             builder.AddMiddleware(
                 async (context, next) =>
                 {
@@ -284,7 +289,8 @@ namespace System.CommandLine.Builder
 
         public static CommandLineBuilder UseEnvironmentVariableDirective(
             this CommandLineBuilder builder
-        ) {
+        )
+        {
             builder.AddMiddleware(
                 (context, next) =>
                 {
@@ -331,7 +337,8 @@ namespace System.CommandLine.Builder
             this CommandLineBuilder builder,
             Action<Exception, InvocationContext>? onException = null,
             int? errorExitCode = null
-        ) {
+        )
+        {
             builder.AddMiddleware(
                 async (context, next) =>
                 {
@@ -373,7 +380,8 @@ namespace System.CommandLine.Builder
         internal static CommandLineBuilder UseHelp(
             this CommandLineBuilder builder,
             HelpOption helpOption
-        ) {
+        )
+        {
             if (builder.HelpOption is null)
             {
                 builder.HelpOption = helpOption;
@@ -435,7 +443,8 @@ namespace System.CommandLine.Builder
             this CommandLineBuilder builder,
             InvocationMiddleware middleware,
             MiddlewareOrder order = MiddlewareOrder.Default
-        ) {
+        )
+        {
             builder.AddMiddleware(middleware, order);
 
             return builder;
@@ -445,7 +454,8 @@ namespace System.CommandLine.Builder
             this CommandLineBuilder builder,
             Action<InvocationContext> onInvoke,
             MiddlewareOrder order = MiddlewareOrder.Default
-        ) {
+        )
+        {
             builder.AddMiddleware(
                 async (context, next) =>
                 {
@@ -461,7 +471,8 @@ namespace System.CommandLine.Builder
         public static CommandLineBuilder UseParseDirective(
             this CommandLineBuilder builder,
             int? errorExitCode = null
-        ) {
+        )
+        {
             builder.AddMiddleware(
                 async (context, next) =>
                 {
@@ -483,7 +494,8 @@ namespace System.CommandLine.Builder
         public static CommandLineBuilder UseParseErrorReporting(
             this CommandLineBuilder builder,
             int? errorExitCode = null
-        ) {
+        )
+        {
             builder.AddMiddleware(
                 async (context, next) =>
                 {
@@ -535,14 +547,16 @@ namespace System.CommandLine.Builder
         public static CommandLineBuilder UseTypoCorrections(
             this CommandLineBuilder builder,
             int maxLevenshteinDistance = 3
-        ) {
+        )
+        {
             builder.AddMiddleware(
                 async (context, next) =>
                 {
                     if (
                         context.ParseResult.UnmatchedTokens.Count > 0
                         && context.ParseResult.CommandResult.Command.TreatUnmatchedTokensAsErrors
-                    ) {
+                    )
+                    {
                         var typoCorrection = new TypoCorrection(maxLevenshteinDistance);
 
                         typoCorrection.ProvideSuggestions(context.ParseResult, context.Console);
@@ -558,7 +572,8 @@ namespace System.CommandLine.Builder
         public static CommandLineBuilder UseValidationMessages(
             this CommandLineBuilder builder,
             Resources validationMessages
-        ) {
+        )
+        {
             builder.ValidationMessages = validationMessages;
             return builder;
         }
@@ -566,7 +581,8 @@ namespace System.CommandLine.Builder
         public static CommandLineBuilder UseVersionOption(
             this CommandLineBuilder builder,
             int? errorExitCode = null
-        ) {
+        )
+        {
             var command = builder.Command;
 
             if (command.Children.GetByAlias("--version") != null)

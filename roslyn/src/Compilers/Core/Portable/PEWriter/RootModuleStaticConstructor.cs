@@ -20,7 +20,8 @@ namespace Microsoft.Cci
         public RootModuleStaticConstructor(
             ITypeDefinition containingTypeDefinition,
             ImmutableArray<byte> il
-        ) {
+        )
+        {
             ContainingTypeDefinition = containingTypeDefinition;
             IL = il;
         }

@@ -154,7 +154,8 @@ namespace System.Threading.Tests
                 IntPtr[] waitHandles,
                 bool waitAll,
                 int millisecondsTimeout
-            ) {
+            )
+            {
                 return SynchronizationContext.WaitHelper(waitHandles, waitAll, millisecondsTimeout);
             }
         }

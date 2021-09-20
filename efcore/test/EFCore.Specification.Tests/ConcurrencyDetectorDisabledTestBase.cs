@@ -39,7 +39,8 @@ namespace Microsoft.EntityFrameworkCore
 
         protected override async Task ConcurrencyDetectorTest(
             Func<ConcurrencyDetectorDbContext, Task<object>> test
-        ) {
+        )
+        {
             using var context = CreateContext();
 
             var concurrencyDetector = context.GetService<IConcurrencyDetector>();

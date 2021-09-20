@@ -54,7 +54,8 @@ namespace BasicTestApp.InteropTest
             ComplexParameter parameter1,
             byte parameter2,
             DotNetObjectReference<TestDTO> parameter3
-        ) {
+        )
+        {
             Invocations[nameof(VoidWithThreeParameters)] = new object[]
             {
                 parameter1,
@@ -69,7 +70,8 @@ namespace BasicTestApp.InteropTest
             byte parameter2,
             DotNetObjectReference<TestDTO> parameter3,
             int parameter4
-        ) {
+        )
+        {
             Invocations[nameof(VoidWithFourParameters)] = new object[]
             {
                 parameter1,
@@ -86,7 +88,8 @@ namespace BasicTestApp.InteropTest
             DotNetObjectReference<TestDTO> parameter3,
             int parameter4,
             long parameter5
-        ) {
+        )
+        {
             Invocations[nameof(VoidWithFiveParameters)] = new object[]
             {
                 parameter1,
@@ -105,7 +108,8 @@ namespace BasicTestApp.InteropTest
             int parameter4,
             long parameter5,
             float parameter6
-        ) {
+        )
+        {
             Invocations[nameof(VoidWithSixParameters)] = new object[]
             {
                 parameter1,
@@ -126,7 +130,8 @@ namespace BasicTestApp.InteropTest
             long parameter5,
             float parameter6,
             List<double> parameter7
-        ) {
+        )
+        {
             Invocations[nameof(VoidWithSevenParameters)] = new object[]
             {
                 parameter1,
@@ -149,7 +154,8 @@ namespace BasicTestApp.InteropTest
             float parameter6,
             List<double> parameter7,
             Segment parameter8
-        ) {
+        )
+        {
             Invocations[nameof(VoidWithEightParameters)] = new object[]
             {
                 parameter1,
@@ -186,7 +192,8 @@ namespace BasicTestApp.InteropTest
             ComplexParameter parameter1,
             byte parameter2,
             DotNetObjectReference<TestDTO> parameter3
-        ) {
+        )
+        {
             return new object[]
             {
                 parameter1,
@@ -201,7 +208,8 @@ namespace BasicTestApp.InteropTest
             byte parameter2,
             DotNetObjectReference<TestDTO> parameter3,
             int parameter4
-        ) {
+        )
+        {
             return new object[]
             {
                 parameter1,
@@ -218,7 +226,8 @@ namespace BasicTestApp.InteropTest
             DotNetObjectReference<TestDTO> parameter3,
             int parameter4,
             long parameter5
-        ) {
+        )
+        {
             return new object[]
             {
                 parameter1,
@@ -237,7 +246,8 @@ namespace BasicTestApp.InteropTest
             int parameter4,
             long parameter5,
             float parameter6
-        ) {
+        )
+        {
             return new object[]
             {
                 parameter1,
@@ -258,7 +268,8 @@ namespace BasicTestApp.InteropTest
             long parameter5,
             float parameter6,
             List<double> parameter7
-        ) {
+        )
+        {
             return new object[]
             {
                 parameter1,
@@ -281,7 +292,8 @@ namespace BasicTestApp.InteropTest
             float parameter6,
             List<double> parameter7,
             Segment parameter8
-        ) {
+        )
+        {
             return new object[]
             {
                 parameter1,
@@ -325,7 +337,8 @@ namespace BasicTestApp.InteropTest
             ComplexParameter parameter1,
             byte parameter2,
             DotNetObjectReference<TestDTO> parameter3
-        ) {
+        )
+        {
             Invocations[nameof(VoidWithThreeParametersAsync)] = new object[]
             {
                 parameter1,
@@ -341,7 +354,8 @@ namespace BasicTestApp.InteropTest
             byte parameter2,
             DotNetObjectReference<TestDTO> parameter3,
             int parameter4
-        ) {
+        )
+        {
             Invocations[nameof(VoidWithFourParametersAsync)] = new object[]
             {
                 parameter1,
@@ -359,7 +373,8 @@ namespace BasicTestApp.InteropTest
             DotNetObjectReference<TestDTO> parameter3,
             int parameter4,
             long parameter5
-        ) {
+        )
+        {
             Invocations[nameof(VoidWithFiveParametersAsync)] = new object[]
             {
                 parameter1,
@@ -379,7 +394,8 @@ namespace BasicTestApp.InteropTest
             int parameter4,
             long parameter5,
             float parameter6
-        ) {
+        )
+        {
             Invocations[nameof(VoidWithSixParametersAsync)] = new object[]
             {
                 parameter1,
@@ -401,7 +417,8 @@ namespace BasicTestApp.InteropTest
             long parameter5,
             float parameter6,
             List<double> parameter7
-        ) {
+        )
+        {
             Invocations[nameof(VoidWithSevenParametersAsync)] = new object[]
             {
                 parameter1,
@@ -425,7 +442,8 @@ namespace BasicTestApp.InteropTest
             float parameter6,
             List<double> parameter7,
             Segment parameter8
-        ) {
+        )
+        {
             Invocations[nameof(VoidWithEightParametersAsync)] = new object[]
             {
                 parameter1,
@@ -456,7 +474,8 @@ namespace BasicTestApp.InteropTest
         public static Task<object[]> EchoTwoParametersAsync(
             ComplexParameter parameter1,
             byte parameter2
-        ) {
+        )
+        {
             return Task.FromResult(new object[] { parameter1, parameter2 });
         }
 
@@ -465,7 +484,8 @@ namespace BasicTestApp.InteropTest
             ComplexParameter parameter1,
             byte parameter2,
             DotNetObjectReference<TestDTO> parameter3
-        ) {
+        )
+        {
             return Task.FromResult(
                 new object[] { parameter1, parameter2, parameter3.Value.GetNonSerializedValue() }
             );
@@ -477,7 +497,8 @@ namespace BasicTestApp.InteropTest
             byte parameter2,
             DotNetObjectReference<TestDTO> parameter3,
             int parameter4
-        ) {
+        )
+        {
             return Task.FromResult(
                 new object[]
                 {
@@ -496,7 +517,8 @@ namespace BasicTestApp.InteropTest
             DotNetObjectReference<TestDTO> parameter3,
             int parameter4,
             long parameter5
-        ) {
+        )
+        {
             return Task.FromResult(
                 new object[]
                 {
@@ -517,7 +539,8 @@ namespace BasicTestApp.InteropTest
             int parameter4,
             long parameter5,
             float parameter6
-        ) {
+        )
+        {
             return Task.FromResult(
                 new object[]
                 {
@@ -540,7 +563,8 @@ namespace BasicTestApp.InteropTest
             long parameter5,
             float parameter6,
             List<double> parameter7
-        ) {
+        )
+        {
             return Task.FromResult(
                 new object[]
                 {
@@ -565,7 +589,8 @@ namespace BasicTestApp.InteropTest
             float parameter6,
             List<double> parameter7,
             Segment parameter8
-        ) {
+        )
+        {
             return Task.FromResult(
                 new object[]
                 {
@@ -611,14 +636,16 @@ namespace BasicTestApp.InteropTest
         [JSInvokable]
         public static IJSObjectReference RoundTripJSObjectReference(
             IJSObjectReference jsObjectReference
-        ) {
+        )
+        {
             return jsObjectReference;
         }
 
         [JSInvokable]
         public static async Task<IJSObjectReference> RoundTripJSObjectReferenceAsync(
             IJSObjectReference jSObjectReference
-        ) {
+        )
+        {
             await Task.Yield();
             return jSObjectReference;
         }
@@ -626,7 +653,8 @@ namespace BasicTestApp.InteropTest
         [JSInvokable]
         public static string InvokeDisposedJSObjectReferenceException(
             IJSInProcessObjectReference jsObjectReference
-        ) {
+        )
+        {
             try
             {
                 jsObjectReference.Invoke<object>("noop");
@@ -641,7 +669,8 @@ namespace BasicTestApp.InteropTest
         [JSInvokable]
         public static async Task<string> InvokeDisposedJSObjectReferenceExceptionAsync(
             IJSObjectReference jsObjectReference
-        ) {
+        )
+        {
             try
             {
                 await jsObjectReference.InvokeVoidAsync("noop");

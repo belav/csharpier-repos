@@ -248,7 +248,8 @@ namespace System.ServiceProcess
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(System.ServiceProcess.SessionChangeDescription changeDescription)
@@ -262,13 +263,15 @@ namespace System.ServiceProcess
         public static bool operator ==(
             System.ServiceProcess.SessionChangeDescription a,
             System.ServiceProcess.SessionChangeDescription b
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.ServiceProcess.SessionChangeDescription a,
             System.ServiceProcess.SessionChangeDescription b
-        ) {
+        )
+        {
             throw null;
         }
     }

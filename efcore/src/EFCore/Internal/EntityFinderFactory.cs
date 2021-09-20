@@ -30,7 +30,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
             IStateManager stateManager,
             IDbSetSource setSource,
             IDbSetCache setCache
-        ) {
+        )
+        {
             _entityFinderSource = entityFinderSource;
             _stateManager = stateManager;
             _setSource = setSource;

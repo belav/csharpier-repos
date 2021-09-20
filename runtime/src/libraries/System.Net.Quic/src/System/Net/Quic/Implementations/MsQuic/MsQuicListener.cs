@@ -80,7 +80,8 @@ namespace System.Net.Quic.Implementations.MsQuic
 
         internal override async ValueTask<QuicConnectionProvider> AcceptConnectionAsync(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             ThrowIfDisposed();
 
             try
@@ -176,7 +177,8 @@ namespace System.Net.Quic.Implementations.MsQuic
             IntPtr listener,
             IntPtr context,
             ref ListenerEvent evt
-        ) {
+        )
+        {
             if (evt.Type != QUIC_LISTENER_EVENT.NEW_CONNECTION)
             {
                 return MsQuicStatusCodes.InternalError;

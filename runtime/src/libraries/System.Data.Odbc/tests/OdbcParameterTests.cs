@@ -250,7 +250,8 @@ namespace System.Data.Odbc.Tests
             out object v2,
             out int v3,
             out int v4
-        ) {
+        )
+        {
             string procName = DataTestUtility.GetUniqueName("ODBCTEST", "", "");
 
             string removeExistingStoredProcSql =
@@ -342,7 +343,8 @@ namespace System.Data.Odbc.Tests
                 out object v2,
                 out int v3,
                 out int v4
-            ) {
+            )
+            {
                 using (OdbcCommand command = new OdbcCommand(sql, con, trn))
                 {
                     command.Parameters.Clear();

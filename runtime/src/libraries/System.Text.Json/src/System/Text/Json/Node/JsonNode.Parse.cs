@@ -44,7 +44,8 @@ namespace System.Text.Json.Node
         public static JsonNode? Parse(
             ref Utf8JsonReader reader,
             JsonNodeOptions? nodeOptions = null
-        ) {
+        )
+        {
             JsonElement element = JsonElement.ParseValue(ref reader);
             return JsonNodeConverter.Create(element, nodeOptions);
         }
@@ -68,7 +69,8 @@ namespace System.Text.Json.Node
             string json,
             JsonNodeOptions? nodeOptions = null,
             JsonDocumentOptions documentOptions = default(JsonDocumentOptions)
-        ) {
+        )
+        {
             if (json == null)
             {
                 throw new ArgumentNullException(nameof(json));
@@ -94,7 +96,8 @@ namespace System.Text.Json.Node
             ReadOnlySpan<byte> utf8Json,
             JsonNodeOptions? nodeOptions = null,
             JsonDocumentOptions documentOptions = default(JsonDocumentOptions)
-        ) {
+        )
+        {
             JsonElement element = JsonElement.ParseValue(utf8Json, documentOptions);
             return JsonNodeConverter.Create(element, nodeOptions);
         }
@@ -116,7 +119,8 @@ namespace System.Text.Json.Node
             Stream utf8Json,
             JsonNodeOptions? nodeOptions = null,
             JsonDocumentOptions documentOptions = default
-        ) {
+        )
+        {
             if (utf8Json == null)
             {
                 throw new ArgumentNullException(nameof(utf8Json));

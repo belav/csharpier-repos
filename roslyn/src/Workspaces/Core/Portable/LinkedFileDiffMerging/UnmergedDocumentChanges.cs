@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis
             IEnumerable<TextChange> unmergedChanges,
             string projectName,
             DocumentId documentId
-        ) {
+        )
+        {
             UnmergedChanges = unmergedChanges;
             ProjectName = projectName;
             DocumentId = documentId;

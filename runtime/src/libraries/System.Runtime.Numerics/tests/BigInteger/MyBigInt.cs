@@ -101,7 +101,8 @@ namespace System.Numerics.Tests
             BigInteger num2,
             string op,
             out BigInteger num3
-        ) {
+        )
+        {
             List<byte> bytes1 = new List<byte>(num1.ToByteArray());
             List<byte> bytes2 = new List<byte>(num2.ToByteArray());
 
@@ -162,7 +163,8 @@ namespace System.Numerics.Tests
             BigInteger num2,
             BigInteger num3,
             string op
-        ) {
+        )
+        {
             List<byte> bytes1 = new List<byte>(num1.ToByteArray());
             List<byte> bytes2 = new List<byte>(num2.ToByteArray());
             List<byte> bytes3 = new List<byte>(num3.ToByteArray());

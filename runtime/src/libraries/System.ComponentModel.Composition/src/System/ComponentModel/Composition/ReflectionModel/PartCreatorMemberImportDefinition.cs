@@ -18,18 +18,20 @@ namespace System.ComponentModel.Composition.ReflectionModel
             LazyMemberInfo importingLazyMember,
             ICompositionElement? origin,
             ContractBasedImportDefinition productImportDefinition
-        ) : base(
-            importingLazyMember,
-            CompositionConstants.PartCreatorContractName,
-            CompositionConstants.PartCreatorTypeIdentity,
-            productImportDefinition.RequiredMetadata,
-            productImportDefinition.Cardinality,
-            productImportDefinition.IsRecomposable,
-            false,
-            productImportDefinition.RequiredCreationPolicy,
-            MetadataServices.EmptyMetadata,
-            origin
-        ) {
+        )
+            : base(
+                importingLazyMember,
+                CompositionConstants.PartCreatorContractName,
+                CompositionConstants.PartCreatorTypeIdentity,
+                productImportDefinition.RequiredMetadata,
+                productImportDefinition.Cardinality,
+                productImportDefinition.IsRecomposable,
+                false,
+                productImportDefinition.RequiredCreationPolicy,
+                MetadataServices.EmptyMetadata,
+                origin
+            )
+        {
             if (productImportDefinition == null)
             {
                 throw new ArgumentNullException(nameof(productImportDefinition));

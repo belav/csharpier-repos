@@ -30,13 +30,14 @@ namespace System.ServiceModel.Syndication
             Uri itemAlternateLink,
             string id,
             DateTimeOffset lastUpdatedTime
-        ) : this(
-            title,
-            (content != null) ? new TextSyndicationContent(content) : null,
-            itemAlternateLink,
-            id,
-            lastUpdatedTime
-        ) { }
+        )
+            : this(
+                title,
+                (content != null) ? new TextSyndicationContent(content) : null,
+                itemAlternateLink,
+                id,
+                lastUpdatedTime
+            ) { }
 
         public SyndicationItem(
             string title,
@@ -44,7 +45,8 @@ namespace System.ServiceModel.Syndication
             Uri itemAlternateLink,
             string id,
             DateTimeOffset lastUpdatedTime
-        ) {
+        )
+        {
             if (title != null)
             {
                 Title = new TextSyndicationContent(title);
@@ -250,7 +252,8 @@ namespace System.ServiceModel.Syndication
             string ns,
             string value,
             string version
-        ) {
+        )
+        {
             return false;
         }
 
@@ -259,7 +262,8 @@ namespace System.ServiceModel.Syndication
             string contentType,
             string version,
             out SyndicationContent content
-        ) {
+        )
+        {
             content = null;
             return false;
         }
@@ -282,7 +286,8 @@ namespace System.ServiceModel.Syndication
         internal void LoadElementExtensions(
             XmlReader readerOverUnparsedExtensions,
             int maxExtensionSize
-        ) {
+        )
+        {
             _extensions.LoadElementExtensions(readerOverUnparsedExtensions, maxExtensionSize);
         }
 

@@ -10,7 +10,8 @@ namespace System.CodeDom
         public CodeConditionStatement(
             CodeExpression condition,
             params CodeStatement[] trueStatements
-        ) {
+        )
+        {
             Condition = condition;
             TrueStatements.AddRange(trueStatements);
         }
@@ -19,7 +20,8 @@ namespace System.CodeDom
             CodeExpression condition,
             CodeStatement[] trueStatements,
             CodeStatement[] falseStatements
-        ) {
+        )
+        {
             Condition = condition;
             TrueStatements.AddRange(trueStatements);
             FalseStatements.AddRange(falseStatements);

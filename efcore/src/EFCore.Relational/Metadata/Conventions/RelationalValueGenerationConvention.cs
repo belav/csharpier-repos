@@ -41,7 +41,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionAnnotation? annotation,
             IConventionAnnotation? oldAnnotation,
             IConventionContext<IConventionAnnotation> context
-        ) {
+        )
+        {
             var property = propertyBuilder.Metadata;
             switch (name)
             {
@@ -67,7 +68,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionAnnotation? annotation,
             IConventionAnnotation? oldAnnotation,
             IConventionContext<IConventionAnnotation> context
-        ) {
+        )
+        {
             if (name == RelationalAnnotationNames.TableName)
             {
                 var schema = entityTypeBuilder.Metadata.GetSchema();
@@ -99,7 +101,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             string? oldSchema,
             string? newTable,
             string? newSchema
-        ) {
+        )
+        {
             var primaryKey = entityTypeBuilder.Metadata.FindPrimaryKey();
             if (primaryKey == null)
             {
@@ -160,7 +163,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public static ValueGenerated? GetValueGenerated(
             IReadOnlyProperty property,
             in StoreObjectIdentifier storeObject
-        ) {
+        )
+        {
             var valueGenerated = GetValueGenerated(property);
             return valueGenerated
                 ?? (

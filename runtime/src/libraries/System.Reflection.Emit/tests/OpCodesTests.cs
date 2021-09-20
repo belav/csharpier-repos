@@ -2510,7 +2510,8 @@ namespace System.Reflection.Emit.Tests
             int value,
             StackBehaviour stackBehaviourPop,
             StackBehaviour stackBehaviourPush
-        ) {
+        )
+        {
             Assert.Equal(name, opCode.Name);
             Assert.Equal(opCodeType, opCode.OpCodeType);
             Assert.Equal(operandType, opCode.OperandType);

@@ -252,7 +252,8 @@ namespace Newtonsoft.Json.Schema
                     if (
                         valueRequired != Required.Always
                         && !HasFlag(resolvedSchema.Type, JsonSchemaType.Null)
-                    ) {
+                    )
+                    {
                         resolvedSchema.Type |= JsonSchemaType.Null;
                     }
                     if (required && resolvedSchema.Required != true)
@@ -337,7 +338,8 @@ namespace Newtonsoft.Json.Schema
                             CurrentSchema.Type == JsonSchemaType.Integer
                             && type.IsEnum()
                             && !type.IsDefined(typeof(FlagsAttribute), true)
-                        ) {
+                        )
+                        {
                             CurrentSchema.Enum = new List<JToken>();
 
                             EnumInfo enumValues = EnumUtils.GetEnumValuesAndNames(type);
@@ -487,7 +489,8 @@ namespace Newtonsoft.Json.Schema
             if (
                 flag == JsonSchemaType.Integer
                 && (value & JsonSchemaType.Float) == JsonSchemaType.Float
-            ) {
+            )
+            {
                 return true;
             }
 

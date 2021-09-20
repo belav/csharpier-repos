@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis
             DiagnosticDescriptor descriptor,
             Location? location,
             params object?[]? messageArgs
-        ) {
+        )
+        {
             return Create(descriptor, location, null, null, messageArgs);
         }
 
@@ -68,7 +69,8 @@ namespace Microsoft.CodeAnalysis
             Location? location,
             ImmutableDictionary<string, string?>? properties,
             params object?[]? messageArgs
-        ) {
+        )
+        {
             return Create(descriptor, location, null, properties, messageArgs);
         }
 
@@ -89,7 +91,8 @@ namespace Microsoft.CodeAnalysis
             Location? location,
             IEnumerable<Location>? additionalLocations,
             params object?[]? messageArgs
-        ) {
+        )
+        {
             return Create(
                 descriptor,
                 location,
@@ -122,7 +125,8 @@ namespace Microsoft.CodeAnalysis
             IEnumerable<Location>? additionalLocations,
             ImmutableDictionary<string, string?>? properties,
             params object?[]? messageArgs
-        ) {
+        )
+        {
             return Create(
                 descriptor,
                 location,
@@ -158,7 +162,8 @@ namespace Microsoft.CodeAnalysis
             IEnumerable<Location>? additionalLocations,
             ImmutableDictionary<string, string?>? properties,
             params object?[]? messageArgs
-        ) {
+        )
+        {
             if (descriptor == null)
             {
                 throw new ArgumentNullException(nameof(descriptor));
@@ -220,7 +225,8 @@ namespace Microsoft.CodeAnalysis
             IEnumerable<Location>? additionalLocations = null,
             IEnumerable<string>? customTags = null,
             ImmutableDictionary<string, string?>? properties = null
-        ) {
+        )
+        {
             return Create(
                 id,
                 category,
@@ -286,7 +292,8 @@ namespace Microsoft.CodeAnalysis
             IEnumerable<Location>? additionalLocations = null,
             IEnumerable<string>? customTags = null,
             ImmutableDictionary<string, string?>? properties = null
-        ) {
+        )
+        {
             if (id == null)
             {
                 throw new ArgumentNullException(nameof(id));
@@ -330,7 +337,8 @@ namespace Microsoft.CodeAnalysis
             CommonMessageProvider messageProvider,
             int errorCode,
             params object[] arguments
-        ) {
+        )
+        {
             return Create(new DiagnosticInfo(messageProvider, errorCode, arguments));
         }
 
@@ -521,7 +529,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         internal Diagnostic WithProgrammaticSuppression(
             ProgrammaticSuppressionInfo programmaticSuppressionInfo
-        ) {
+        )
+        {
             RoslynDebug.Assert(this.ProgrammaticSuppressionInfo == null);
             RoslynDebug.Assert(programmaticSuppressionInfo != null);
 
@@ -555,7 +564,8 @@ namespace Microsoft.CodeAnalysis
         internal bool HasIntersectingLocation(
             SyntaxTree tree,
             TextSpan? filterSpanWithinTree = null
-        ) {
+        )
+        {
             if (isLocationWithinSpan(Location, tree, filterSpanWithinTree))
             {
                 return true;
@@ -581,7 +591,8 @@ namespace Microsoft.CodeAnalysis
                 Location location,
                 SyntaxTree tree,
                 TextSpan? filterSpan
-            ) {
+            )
+            {
                 if (location.SourceTree != tree)
                 {
                     return false;

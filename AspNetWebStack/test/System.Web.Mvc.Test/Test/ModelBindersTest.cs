@@ -94,7 +94,8 @@ namespace System.Web.Mvc.Test
             public object BindModel(
                 ControllerContext controllerContext,
                 ModelBindingContext bindingContext
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }

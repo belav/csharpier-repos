@@ -691,7 +691,8 @@ namespace System.Data.Tests
                         NumberFormat = new NumberFormatInfo() { NegativeSign = "()" }
                     }
                 )
-            ) {
+            )
+            {
                 // Before serializing, update the culture to use a weird negative number format. This test is ensuring that this is ignored.
                 serializer.Serialize(buffer, table);
             }
@@ -2386,7 +2387,8 @@ namespace System.Data.Tests
                         NumberFormat = new NumberFormatInfo() { NegativeSign = "()" }
                     }
                 )
-            ) {
+            )
+            {
                 // Before deserializing, update the culture to use a weird negative number format. This test is ensuring that this is ignored.
                 // The bug this test is testing would cause "-1" to no longer be treated as a valid representation of the value -1, instead
                 // only accepting the string "()1".

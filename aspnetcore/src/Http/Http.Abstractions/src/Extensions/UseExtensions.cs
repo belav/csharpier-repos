@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IApplicationBuilder Use(
             this IApplicationBuilder app,
             Func<HttpContext, Func<Task>, Task> middleware
-        ) {
+        )
+        {
             return app.Use(
                 next =>
                 {

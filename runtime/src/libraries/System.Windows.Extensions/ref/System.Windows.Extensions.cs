@@ -117,7 +117,8 @@ namespace System.Security.Cryptography.X509Certificates
             string title,
             string message,
             System.Security.Cryptography.X509Certificates.X509SelectionFlag selectionFlag
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Security.Cryptography.X509Certificates.X509Certificate2Collection SelectFromCollection(
@@ -126,7 +127,8 @@ namespace System.Security.Cryptography.X509Certificates
             string message,
             System.Security.Cryptography.X509Certificates.X509SelectionFlag selectionFlag,
             System.IntPtr hwndParent
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -151,17 +153,20 @@ namespace System.Xaml.Permissions
         }
         public static System.Xaml.Permissions.XamlAccessLevel AssemblyAccessTo(
             System.Reflection.Assembly assembly
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xaml.Permissions.XamlAccessLevel AssemblyAccessTo(
             System.Reflection.AssemblyName assemblyName
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xaml.Permissions.XamlAccessLevel PrivateAccessTo(
             string assemblyQualifiedTypeName
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xaml.Permissions.XamlAccessLevel PrivateAccessTo(System.Type type)

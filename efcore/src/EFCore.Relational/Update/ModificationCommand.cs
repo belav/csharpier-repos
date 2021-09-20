@@ -66,7 +66,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             string? schema,
             IReadOnlyList<ColumnModification>? columnModifications,
             bool sensitiveLoggingEnabled
-        ) {
+        )
+        {
             Check.NotNull(name, nameof(name));
 
             TableName = name;
@@ -279,7 +280,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             if (
                 _entries.Count > 1
                 || (_entries.Count == 1 && _entries[0].SharedIdentityEntry != null)
-            ) {
+            )
+            {
                 sharedTableColumnMap = new Dictionary<string, ColumnValuePropagator>();
 
                 if (_comparer != null)
@@ -355,7 +357,8 @@ namespace Microsoft.EntityFrameworkCore.Update
                                 updating
                                 && property.GetAfterSaveBehavior() == PropertySaveBehavior.Save
                             ) || (!isKey && nonMainEntry)
-                        ) {
+                        )
+                        {
                             writeValue =
                                 columnPropagator?.TryPropagate(property, entry)
                                 ?? entry.IsModified(property);
@@ -424,7 +427,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             ITableMappingBase tableMapping,
             bool updating,
             Dictionary<string, ColumnValuePropagator> columnMap
-        ) {
+        )
+        {
             foreach (var columnMapping in tableMapping.ColumnMappings)
             {
                 var columnName = columnMapping.Column.Name;
@@ -537,7 +541,8 @@ namespace Microsoft.EntityFrameworkCore.Update
                             && Equals(_originalValue, entry.GetCurrentValue(property))
                         )
                     )
-                ) {
+                )
+                {
                     entry.SetStoreGeneratedValue(property, _currentValue);
 
                     return false;

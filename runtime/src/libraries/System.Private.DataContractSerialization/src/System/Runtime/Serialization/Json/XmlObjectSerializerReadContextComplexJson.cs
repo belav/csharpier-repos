@@ -38,7 +38,8 @@ namespace System.Runtime.Serialization.Json
         internal static XmlObjectSerializerReadContextComplexJson CreateContext(
             DataContractJsonSerializerImpl serializer,
             DataContract rootTypeDataContract
-        ) {
+        )
+        {
             return new XmlObjectSerializerReadContextComplexJson(serializer, rootTypeDataContract);
         }
 
@@ -46,7 +47,8 @@ namespace System.Runtime.Serialization.Json
         protected override object? ReadDataContractValue(
             DataContract dataContract,
             XmlReaderDelegator reader
-        ) {
+        )
+        {
             return DataContractJsonSerializerImpl.ReadJsonValue(dataContract, reader, this);
         }
 
@@ -55,7 +57,8 @@ namespace System.Runtime.Serialization.Json
             XmlDictionaryString[] memberNames,
             int memberIndex,
             ExtensionDataObject? extensionData
-        ) {
+        )
+        {
             int length = memberNames.Length;
             if (length != 0)
             {
@@ -63,7 +66,8 @@ namespace System.Runtime.Serialization.Json
                     int i = 0, index = (memberIndex + 1) % length;
                     i < length;
                     i++, index = (index + 1) % length
-                ) {
+                )
+                {
                     if (xmlReader.IsStartElement(memberNames[index], XmlDictionaryString.Empty))
                     {
                         return index;
@@ -76,7 +80,8 @@ namespace System.Runtime.Serialization.Json
                         int i = 0, index = (memberIndex + 1) % length;
                         i < length;
                         i++, index = (index + 1) % length
-                    ) {
+                    )
+                    {
                         if (memberNames[index].Value == name)
                         {
                             return index;
@@ -107,7 +112,8 @@ namespace System.Runtime.Serialization.Json
             XmlReaderDelegator xmlReader,
             string? dataContractName,
             string? dataContractNamespace
-        ) {
+        )
+        {
             IDataNode dataNode;
 
             switch (_extensionDataValueType)
@@ -167,7 +173,8 @@ namespace System.Runtime.Serialization.Json
             if (
                 xmlReader.MoveToAttribute(JsonGlobals.typeString)
                 && xmlReader.Value == JsonGlobals.nullString
-            ) {
+            )
+            {
                 attributes.XsiNil = true;
             }
             else if (xmlReader.MoveToAttribute(JsonGlobals.serverTypeString))
@@ -282,7 +289,8 @@ namespace System.Runtime.Serialization.Json
             int typeId,
             RuntimeTypeHandle typeHandle,
             Type? type
-        ) {
+        )
+        {
             DataContract dataContract = base.GetDataContractSkipValidation(
                 typeId,
                 typeHandle,
@@ -302,13 +310,15 @@ namespace System.Runtime.Serialization.Json
         internal static bool TryGetJsonLocalName(
             XmlReaderDelegator xmlReader,
             [NotNullWhen(true)] out string? name
-        ) {
+        )
+        {
             if (
                 xmlReader.IsStartElement(
                     JsonGlobals.itemDictionaryString,
                     JsonGlobals.itemDictionaryString
                 )
-            ) {
+            )
+            {
                 if (xmlReader.MoveToAttribute(JsonGlobals.itemString))
                 {
                     name = xmlReader.Value;
@@ -333,7 +343,8 @@ namespace System.Runtime.Serialization.Json
             object obj,
             XmlDictionaryString[] memberNames,
             int memberIndex
-        ) {
+        )
+        {
             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                 new SerializationException(
                     SR.Format(
@@ -350,7 +361,8 @@ namespace System.Runtime.Serialization.Json
             XmlDictionaryString[] memberNames,
             byte[] expectedElements,
             byte[] requiredElements
-        ) {
+        )
+        {
             StringBuilder stringBuilder = new StringBuilder();
             int missingMembersCount = 0;
             for (int i = 0; i < memberNames.Length; i++)

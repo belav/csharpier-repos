@@ -36,7 +36,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public ParameterBindingFactories(
             IEnumerable<IParameterBindingFactory>? registeredFactories,
             IRegisteredServices registeredServices
-        ) {
+        )
+        {
             _registeredServices = registeredServices;
 
             _parameterBindingFactories =

@@ -28,7 +28,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         [InlineData(@"c:\myapp\path-without-slash")]
         public void EnsureValidPageName_ThrowsIfPageNameDoesNotStartWithLeadingSlash(
             string pageName
-        ) {
+        )
+        {
             // Arrange
             var expected =
                 $"'{pageName}' is not a valid page name. A page name is path relative to the Razor Pages root directory that starts with a leading forward slash ('/') and does not contain the file extension e.g \"/Users/Edit\".";
@@ -74,7 +75,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         [InlineData(@"c:\myapp\path-without-slash")]
         public void EnsureValidFolderPath_ThrowsIfPageNameDoesNotStartWithLeadingSlash(
             string folderPath
-        ) {
+        )
+        {
             // Arrange
             // Act & Assert
             var ex = ExceptionAssert.ThrowsArgument(

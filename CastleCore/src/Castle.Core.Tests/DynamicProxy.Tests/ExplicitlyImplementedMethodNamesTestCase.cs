@@ -62,7 +62,8 @@ namespace Castle.DynamicProxy.Tests
             Type b,
             Type c,
             Type implementingType
-        ) {
+        )
+        {
             const BindingFlags bindingFlags =
                 BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
 

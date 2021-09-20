@@ -214,7 +214,8 @@ namespace System.Web.Mvc.Ajax
             IDictionary<string, object> dictionary,
             string name,
             string value
-        ) {
+        )
+        {
             if (!String.IsNullOrWhiteSpace(value))
             {
                 dictionary.Add(name, value);

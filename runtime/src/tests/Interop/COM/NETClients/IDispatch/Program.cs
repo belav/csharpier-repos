@@ -211,7 +211,8 @@ namespace NetClient
 
             System.Collections.Generic.IEnumerable<int> GetEnumerable(
                 System.Collections.IEnumerator e
-            ) {
+            )
+            {
                 var list = new System.Collections.Generic.List<int>();
                 while (e.MoveNext())
                 {

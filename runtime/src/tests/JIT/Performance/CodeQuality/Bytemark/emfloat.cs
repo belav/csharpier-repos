@@ -294,7 +294,8 @@ public class EMFloat : EmFloatStruct
         InternalFPF[] bbase,
         InternalFPF[] cbase,
         int arraysize
-    ) {
+    )
+    {
         int i;
         InternalFPF locFPF1,
             locFPF2;
@@ -325,7 +326,8 @@ public class EMFloat : EmFloatStruct
         InternalFPF[] cbase,
         int arraysize,
         int loops
-    ) {
+    )
+    {
         long elapsed; /* For the stopwatch */
         byte[] jtable = new byte[] { 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3 };
         int i;
@@ -707,7 +709,8 @@ public class EMFloat : EmFloatStruct
         ref InternalFPF y,
         ref InternalFPF z,
         int intel_flag
-    ) {
+    )
+    {
         int i;
 
         /*
@@ -753,7 +756,8 @@ public class EMFloat : EmFloatStruct
         ref InternalFPF x,
         ref InternalFPF y,
         ref InternalFPF z
-    ) {
+    )
+    {
         int exponent_difference;
         char borrow;
         char carry;

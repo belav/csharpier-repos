@@ -13,7 +13,8 @@ namespace RazorWebSite
         public virtual IEnumerable<string> ExpandViewLocations(
             ViewLocationExpanderContext context,
             IEnumerable<string> viewLocations
-        ) {
+        )
+        {
             if (context.IsMainPage)
             {
                 return viewLocations;

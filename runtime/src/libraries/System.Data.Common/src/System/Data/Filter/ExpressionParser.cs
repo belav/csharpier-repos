@@ -226,7 +226,8 @@ namespace System.Data
                                 opInfo._type == Nodes.Binop
                                 && opInfo._op == Operators.In
                                 && _token != Tokens.Parent
-                            ) {
+                            )
+                            {
                                 throw ExprException.InWithoutParentheses();
                             }
                         }

@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
             public static Dictionary<string, List<SyntaxToken>> GetAllDeclarations(
                 SyntaxNode syntax
-            ) {
+            )
+            {
                 var finder = new DeclarationFinder();
                 finder.Visit(syntax);
                 return finder._map;

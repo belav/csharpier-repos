@@ -21,7 +21,8 @@ namespace System.Net.Http
             NetworkCredential? httpCred,
             Uri? httpsProxy,
             NetworkCredential? httpsCred
-        ) {
+        )
+        {
             _httpCred = httpCred;
             _httpsCred = httpsCred;
             _httpProxy = httpProxy;
@@ -191,7 +192,8 @@ namespace System.Net.Http
                         value.AsSpan(separatorIndex + 1, endIndex - separatorIndex - 1),
                         out port
                     )
-                ) {
+                )
+                {
                     return null;
                 }
             }
@@ -240,7 +242,8 @@ namespace System.Net.Http
                                 input.Host.Length,
                                 StringComparison.OrdinalIgnoreCase
                             ) == 0
-                        ) {
+                        )
+                        {
                             return true;
                         }
                         else if (input.Host.EndsWith(s, StringComparison.OrdinalIgnoreCase))

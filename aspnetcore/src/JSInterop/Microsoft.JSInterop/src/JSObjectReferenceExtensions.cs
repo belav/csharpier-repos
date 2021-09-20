@@ -25,7 +25,8 @@ namespace Microsoft.JSInterop
             this IJSObjectReference jsObjectReference,
             string identifier,
             params object?[] args
-        ) {
+        )
+        {
             if (jsObjectReference is null)
             {
                 throw new ArgumentNullException(nameof(jsObjectReference));
@@ -77,7 +78,8 @@ namespace Microsoft.JSInterop
             string identifier,
             CancellationToken cancellationToken,
             params object?[] args
-        ) {
+        )
+        {
             if (jsObjectReference is null)
             {
                 throw new ArgumentNullException(nameof(jsObjectReference));
@@ -102,7 +104,8 @@ namespace Microsoft.JSInterop
             string identifier,
             CancellationToken cancellationToken,
             params object?[] args
-        ) {
+        )
+        {
             if (jsObjectReference is null)
             {
                 throw new ArgumentNullException(nameof(jsObjectReference));
@@ -126,7 +129,8 @@ namespace Microsoft.JSInterop
             string identifier,
             TimeSpan timeout,
             params object?[] args
-        ) {
+        )
+        {
             if (jsObjectReference is null)
             {
                 throw new ArgumentNullException(nameof(jsObjectReference));
@@ -152,7 +156,8 @@ namespace Microsoft.JSInterop
             string identifier,
             TimeSpan timeout,
             params object?[] args
-        ) {
+        )
+        {
             if (jsObjectReference is null)
             {
                 throw new ArgumentNullException(nameof(jsObjectReference));

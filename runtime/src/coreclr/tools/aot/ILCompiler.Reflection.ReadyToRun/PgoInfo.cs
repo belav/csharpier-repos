@@ -22,7 +22,8 @@ namespace ILCompiler.Reflection.ReadyToRun
             int pgoFormatVersion,
             byte[] image,
             int offset
-        ) {
+        )
+        {
             PgoFormatVersion = pgoFormatVersion;
             Key = key;
             Offset = offset;
@@ -44,7 +45,8 @@ namespace ILCompiler.Reflection.ReadyToRun
             public PgoDataLoader(
                 ReadyToRunReader r2rReader,
                 SignatureFormattingOptions formatOptions
-            ) {
+            )
+            {
                 _formatOptions = formatOptions;
                 _r2rReader = r2rReader;
             }

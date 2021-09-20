@@ -134,7 +134,8 @@ namespace JIT.HardwareIntrinsics.Arm
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfinArray2
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -213,7 +214,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario(
                 StoreBinaryOpTest__StorePairNonTemporal_Vector128_Double testClass
-            ) {
+            )
+            {
                 AdvSimd.Arm64.StorePairNonTemporal(
                     (Double*)testClass._dataTable.outArrayPtr,
                     _fld1,
@@ -225,7 +227,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario_Load(
                 StoreBinaryOpTest__StorePairNonTemporal_Vector128_Double testClass
-            ) {
+            )
+            {
                 fixed (Vector128<Double>* pFld1 = &_fld1)fixed (Vector128<Double>* pFld2 = &_fld2)
                 {
                     AdvSimd.Arm64.StorePairNonTemporal(
@@ -412,7 +415,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             fixed (Vector128<Double>* pClsVar1 = &_clsVar1)fixed (
                 Vector128<Double>* pClsVar2 = &_clsVar2
-            ) {
+            )
+            {
                 AdvSimd.Arm64.StorePairNonTemporal(
                     (Double*)_dataTable.outArrayPtr,
                     AdvSimd.LoadVector128((Double*)(pClsVar1)),
@@ -467,7 +471,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             fixed (Vector128<Double>* pFld1 = &test._fld1)fixed (
                 Vector128<Double>* pFld2 = &test._fld2
-            ) {
+            )
+            {
                 AdvSimd.Arm64.StorePairNonTemporal(
                     (Double*)_dataTable.outArrayPtr,
                     AdvSimd.LoadVector128((Double*)(pFld1)),
@@ -573,7 +578,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Vector128<Double> op2,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Double[] inArray1 = new Double[Op1ElementCount];
             Double[] inArray2 = new Double[Op2ElementCount];
             Double[] outArray = new Double[RetElementCount];
@@ -594,7 +600,8 @@ namespace JIT.HardwareIntrinsics.Arm
             void* op2,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Double[] inArray1 = new Double[Op1ElementCount];
             Double[] inArray2 = new Double[Op2ElementCount];
             Double[] outArray = new Double[RetElementCount];
@@ -623,7 +630,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Double[] secondOp,
             Double[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             for (int i = 0; i < RetElementCount; i++)
@@ -631,7 +639,8 @@ namespace JIT.HardwareIntrinsics.Arm
                 if (
                     BitConverter.DoubleToInt64Bits(Helpers.Concat(firstOp, secondOp, i))
                     != BitConverter.DoubleToInt64Bits(result[i])
-                ) {
+                )
+                {
                     succeeded = false;
                     break;
                 }

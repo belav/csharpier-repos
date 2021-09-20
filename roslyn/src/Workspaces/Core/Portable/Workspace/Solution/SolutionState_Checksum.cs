@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis
 
         private async Task<SolutionStateChecksums> ComputeChecksumsAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 using (
@@ -43,7 +44,8 @@ namespace Microsoft.CodeAnalysis
                         FilePath,
                         cancellationToken
                     )
-                ) {
+                )
+                {
                     // get states by id order to have deterministic checksum
                     var orderedProjectIds = ChecksumCache.GetOrCreate(
                         ProjectIds,

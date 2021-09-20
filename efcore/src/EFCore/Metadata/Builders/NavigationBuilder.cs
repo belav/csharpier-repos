@@ -104,7 +104,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns> The same builder instance so that multiple configuration calls can be chained. </returns>
         public virtual NavigationBuilder UsePropertyAccessMode(
             PropertyAccessMode propertyAccessMode
-        ) {
+        )
+        {
             if (InternalNavigationBuilder != null)
             {
                 InternalNavigationBuilder.UsePropertyAccessMode(

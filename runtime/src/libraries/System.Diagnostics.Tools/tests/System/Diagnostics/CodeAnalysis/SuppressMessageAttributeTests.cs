@@ -19,7 +19,8 @@ namespace System.Diagnostics.CodeAnalysis.Tests
             string messageId,
             string scope,
             string target
-        ) {
+        )
+        {
             SuppressMessageAttribute sma = new SuppressMessageAttribute(category, id)
             {
                 Justification = justification,

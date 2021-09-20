@@ -79,7 +79,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         public virtual WarningsConfiguration WithExplicit(
             IEnumerable<EventId> eventIds,
             WarningBehavior warningBehavior
-        ) {
+        )
+        {
             var clone = Clone();
 
             clone._explicitBehaviors = _explicitBehaviors is null ? new() : new(_explicitBehaviors);
@@ -109,7 +110,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <returns> A new instance with the behaviors set. </returns>
         public virtual WarningsConfiguration WithExplicit(
             IEnumerable<(EventId Id, LogLevel Level)> eventsAndLevels
-        ) {
+        )
+        {
             var clone = Clone();
 
             clone._explicitBehaviors = _explicitBehaviors is null ? new() : new(_explicitBehaviors);

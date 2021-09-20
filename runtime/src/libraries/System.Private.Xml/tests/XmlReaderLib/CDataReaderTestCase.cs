@@ -81,7 +81,8 @@ namespace System.Xml.Tests
             XmlException e,
             int expectedLine,
             int expectedPosition
-        ) {
+        )
+        {
             string actualCode = expectedCode;
             CError.WriteLine("***Exception");
             CError.WriteLineIgnore(e.ToString());

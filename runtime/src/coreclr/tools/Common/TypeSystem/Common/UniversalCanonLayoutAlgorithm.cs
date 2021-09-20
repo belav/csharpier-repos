@@ -24,7 +24,8 @@ namespace Internal.TypeSystem
         public override ComputedInstanceFieldLayout ComputeInstanceLayout(
             DefType type,
             InstanceLayoutKind layoutKind
-        ) {
+        )
+        {
             return new ComputedInstanceFieldLayout()
             {
                 FieldSize = LayoutInt.Indeterminate,
@@ -39,7 +40,8 @@ namespace Internal.TypeSystem
         public override ComputedStaticFieldLayout ComputeStaticFieldLayout(
             DefType type,
             StaticLayoutKind layoutKind
-        ) {
+        )
+        {
             return new ComputedStaticFieldLayout()
             {
                 NonGcStatics = new StaticsBlock()
@@ -68,7 +70,8 @@ namespace Internal.TypeSystem
 
         public override ValueTypeShapeCharacteristics ComputeValueTypeShapeCharacteristics(
             DefType type
-        ) {
+        )
+        {
             return ValueTypeShapeCharacteristics.None;
         }
     }

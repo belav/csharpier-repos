@@ -110,7 +110,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             PEModuleSymbol moduleSymbol,
             PENamedTypeSymbol containingType,
             FieldDefinitionHandle fieldDef
-        ) {
+        )
+        {
             Debug.Assert((object)moduleSymbol != null);
             Debug.Assert((object)containingType != null);
             Debug.Assert(!fieldDef.IsNil);
@@ -302,7 +303,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 if (
                     customModifiersArray.IsEmpty
                     && IsFixedBuffer(out fixedSize, out fixedElementType)
-                ) {
+                )
+                {
                     _lazyFixedSize = fixedSize;
                     _lazyFixedImplementationType = type.Type as NamedTypeSymbol;
                     type = TypeWithAnnotations.Create(
@@ -332,7 +334,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     out elementTypeName,
                     out bufferSize
                 )
-            ) {
+            )
+            {
                 var decoder = new MetadataDecoder(containingPEModule);
                 var elementType = decoder.GetTypeSymbolForSerializedType(elementTypeName);
                 if (elementType.FixedBufferElementSizeInBytes() != 0)
@@ -377,7 +380,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         private static FlowAnalysisAnnotations DecodeFlowAnalysisAttributes(
             PEModule module,
             FieldDefinitionHandle handle
-        ) {
+        )
+        {
             FlowAnalysisAnnotations annotations = FlowAnalysisAnnotations.None;
             if (module.HasAttribute(handle, AttributeDescription.AllowNullAttribute))
                 annotations |= FlowAnalysisAnnotations.AllowNull;
@@ -448,7 +452,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         internal override ConstantValue GetConstantValue(
             ConstantFieldsInProgress inProgress,
             bool earlyDecodingWellKnownAttributes
-        ) {
+        )
+        {
             if (_lazyConstantValue == Microsoft.CodeAnalysis.ConstantValue.Unset)
             {
                 ConstantValue value = null;
@@ -471,7 +476,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                             Handle,
                             out defaultValue
                         )
-                    ) {
+                    )
+                    {
                         value = defaultValue;
                     }
                 }
@@ -595,7 +601,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
         internal override IEnumerable<CSharpAttributeData> GetCustomAttributesToEmit(
             PEModuleBuilder moduleBuilder
-        ) {
+        )
+        {
             foreach (CSharpAttributeData attribute in GetAttributes())
             {
                 yield return attribute;
@@ -619,7 +626,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             CultureInfo preferredCulture = null,
             bool expandIncludes = false,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return PEDocumentationCommentUtils.GetDocumentationComment(
                 this,
                 _containingType.ContainingPEModule,

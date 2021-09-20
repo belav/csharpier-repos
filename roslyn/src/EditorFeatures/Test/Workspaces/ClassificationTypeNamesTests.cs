@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                     var field in typeof(ClassificationTypeNames).GetFields(
                         BindingFlags.Static | BindingFlags.Public
                     )
-                ) {
+                )
+                {
                     yield return new object[] { field.Name, field.GetRawConstantValue() };
                 }
             }

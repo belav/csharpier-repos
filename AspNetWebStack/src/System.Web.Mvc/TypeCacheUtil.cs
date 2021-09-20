@@ -15,7 +15,8 @@ namespace System.Web.Mvc
         private static IEnumerable<Type> FilterTypesInAssemblies(
             IBuildManager buildManager,
             Predicate<Type> predicate
-        ) {
+        )
+        {
             // Go through all assemblies referenced by the application and search for types matching a predicate
             IEnumerable<Type> typesSoFar = Type.EmptyTypes;
 
@@ -40,7 +41,8 @@ namespace System.Web.Mvc
             string cacheName,
             Predicate<Type> predicate,
             IBuildManager buildManager
-        ) {
+        )
+        {
             TypeCacheSerializer serializer = new TypeCacheSerializer();
 
             // first, try reading from the cache on disk
@@ -74,7 +76,8 @@ namespace System.Web.Mvc
             Predicate<Type> predicate,
             IBuildManager buildManager,
             TypeCacheSerializer serializer
-        ) {
+        )
+        {
             try
             {
                 Stream stream = buildManager.ReadCachedFile(cacheName);
@@ -88,7 +91,8 @@ namespace System.Web.Mvc
                             && deserializedTypes.All(
                                 type => TypeIsPublicClass(type) && predicate(type)
                             )
-                        ) {
+                        )
+                        {
                             // If all read types still match the predicate, success!
                             return deserializedTypes;
                         }
@@ -110,7 +114,8 @@ namespace System.Web.Mvc
             IList<Type> matchingTypes,
             IBuildManager buildManager,
             TypeCacheSerializer serializer
-        ) {
+        )
+        {
             try
             {
                 Stream stream = buildManager.CreateCachedFile(cacheName);

@@ -53,7 +53,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 RegistryKey key = Registry.LocalMachine.OpenSubKey(
                     @"SYSTEM\CurrentControlSet\Control\FileSystem"
                 )
-            ) {
+            )
+            {
                 if (key == null)
                 {
                     return;
@@ -64,7 +65,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                     longPathsSetting == null
                     || !(longPathsSetting is int)
                     || (int)longPathsSetting == 0
-                ) {
+                )
+                {
                     return;
                 }
             }

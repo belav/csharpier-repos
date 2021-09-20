@@ -89,7 +89,8 @@ namespace System.Xml.Tests
                         asyncStream,
                         new XmlWriterSettings() { Async = true }
                     )
-                ) {
+                )
+                {
                     await writer.WriteStartDocumentAsync();
                     await writer.WriteStartElementAsync(string.Empty, "root", null);
                     await writer.WriteStartElementAsync(null, "test", null);
@@ -104,7 +105,8 @@ namespace System.Xml.Tests
                         syncStream,
                         new XmlWriterSettings() { Async = false }
                     )
-                ) {
+                )
+                {
                     writer.WriteStartDocument();
                     writer.WriteStartElement("root");
                     writer.WriteStartElement("test");

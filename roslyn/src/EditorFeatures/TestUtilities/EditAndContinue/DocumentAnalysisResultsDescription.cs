@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             ActiveStatementsDescription? activeStatements = null,
             SemanticEditDescription[]? semanticEdits = null,
             RudeEditDiagnosticDescription[]? diagnostics = null
-        ) {
+        )
+        {
             // The test must validate semantic edits, diagnostics or both.
             // If neither is specified then assume the expectation is that
             // the documents has no edits and no diagnostics.

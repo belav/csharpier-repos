@@ -25,7 +25,8 @@ namespace System.CommandLine.Parsing
             IReadOnlyList<Token> unmatchedTokens,
             List<ParseError>? errors = null,
             string? rawInput = null
-        ) {
+        )
+        {
             Parser = parser;
             _rootCommandResult = rootCommandResult;
             CommandResult = commandResult;

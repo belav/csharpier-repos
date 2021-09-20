@@ -19,9 +19,8 @@ namespace Microsoft.Extensions.Logging.Console
             Environment.NewLine + _messagePadding;
         private IDisposable _optionsReloadToken;
 
-        public SimpleConsoleFormatter(
-            IOptionsMonitor<SimpleConsoleFormatterOptions> options
-        ) : base(ConsoleFormatterNames.Simple)
+        public SimpleConsoleFormatter(IOptionsMonitor<SimpleConsoleFormatterOptions> options)
+            : base(ConsoleFormatterNames.Simple)
         {
             ReloadLoggerOptions(options.CurrentValue);
             _optionsReloadToken = options.OnChange(ReloadLoggerOptions);
@@ -43,7 +42,8 @@ namespace Microsoft.Extensions.Logging.Console
             in LogEntry<TState> logEntry,
             IExternalScopeProvider scopeProvider,
             TextWriter textWriter
-        ) {
+        )
+        {
             string message = logEntry.Formatter(logEntry.State, logEntry.Exception);
             if (logEntry.Exception == null && message == null)
             {
@@ -80,7 +80,8 @@ namespace Microsoft.Extensions.Logging.Console
             in LogEntry<TState> logEntry,
             string message,
             IExternalScopeProvider scopeProvider
-        ) {
+        )
+        {
             bool singleLine = FormatterOptions.SingleLine;
             int eventId = logEntry.EventId.Id;
             Exception exception = logEntry.Exception;
@@ -153,7 +154,8 @@ namespace Microsoft.Extensions.Logging.Console
                 string oldValue,
                 string newValue,
                 string message
-            ) {
+            )
+            {
                 string newMessage = message.Replace(oldValue, newValue);
                 writer.Write(newMessage);
             }
@@ -209,7 +211,8 @@ namespace Microsoft.Extensions.Logging.Console
             TextWriter textWriter,
             IExternalScopeProvider scopeProvider,
             bool singleLine
-        ) {
+        )
+        {
             if (FormatterOptions.IncludeScopes && scopeProvider != null)
             {
                 bool paddingNeeded = !singleLine;

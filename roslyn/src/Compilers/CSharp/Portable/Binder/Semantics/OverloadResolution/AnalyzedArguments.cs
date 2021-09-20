@@ -100,7 +100,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         (object)argument.Type != null
                         && argument.Type.IsDynamic()
                         && (!hasRefKinds || RefKinds[i] == Microsoft.CodeAnalysis.RefKind.None)
-                    ) {
+                    )
+                    {
                         _lazyHasDynamicArgument = ThreeState.True;
                         return true;
                     }
@@ -149,7 +150,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<BoundExpression> arguments,
             ImmutableArray<RefKind> argumentRefKindsOpt,
             ImmutableArray<IdentifierNameSyntax> argumentNamesOpt
-        ) {
+        )
+        {
             var instance = GetInstance();
             instance.Arguments.AddRange(arguments);
             if (!argumentRefKindsOpt.IsDefault)

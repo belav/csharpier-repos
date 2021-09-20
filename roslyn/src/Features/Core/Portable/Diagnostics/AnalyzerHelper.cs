@@ -61,7 +61,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public static ReportDiagnostic GetEffectiveSeverity(
             this DiagnosticDescriptor descriptor,
             CompilationOptions options
-        ) {
+        )
+        {
             return options == null
               ? descriptor.DefaultSeverity.ToReportDiagnostic()
               : descriptor.GetEffectiveSeverity(options);
@@ -69,7 +70,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         public static (string analyzerId, VersionStamp version) GetAnalyzerIdAndVersion(
             this DiagnosticAnalyzer analyzer
-        ) {
+        )
+        {
             // Get the unique ID for given diagnostic analyzer.
             // note that we also put version stamp so that we can detect changed analyzer.
             var typeInfo = analyzer.GetType().GetTypeInfo();
@@ -83,7 +85,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             this AnalyzerOptions analyzerOptions,
             SyntaxTree syntaxTree,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var optionSetAsync = GetAnalyzerOptionSetAsync(
                 analyzerOptions,
                 syntaxTree,
@@ -99,7 +102,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             this AnalyzerOptions analyzerOptions,
             SyntaxTree syntaxTree,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var configOptions = analyzerOptions.AnalyzerConfigOptionsProvider.GetOptions(
                 syntaxTree
             );
@@ -120,7 +124,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             ILanguageSpecificOption<T> option,
             SyntaxTree syntaxTree,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var optionAsync = GetOptionAsync<T>(
                 analyzerOptions,
                 option,
@@ -140,7 +145,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             string? language,
             SyntaxTree syntaxTree,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var optionAsync = GetOptionAsync<T>(
                 analyzerOptions,
                 option,
@@ -160,7 +166,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             string? language,
             SyntaxTree syntaxTree,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (analyzerOptions.TryGetEditorConfigOption<T>(option, syntaxTree, out var value))
             {
                 return value;
@@ -190,7 +197,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             this AnalyzerOptions analyzerOptions,
             SyntaxTree syntaxTree,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!(analyzerOptions is WorkspaceAnalyzerOptions workspaceAnalyzerOptions))
             {
                 return ValueTaskFactory.FromResult((OptionSet?)null);
@@ -211,7 +219,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         internal static Diagnostic CreateAnalyzerExceptionDiagnostic(
             DiagnosticAnalyzer analyzer,
             Exception e
-        ) {
+        )
+        {
             var analyzerName = analyzer.ToString();
 
             // TODO: It is not ideal to create a new descriptor per analyzer exception diagnostic instance.
@@ -256,7 +265,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             string fullPath,
             ProjectId? projectId,
             string? language
-        ) {
+        )
+        {
             static string GetLanguageSpecificId(
                 string? language,
                 string noLanguageId,
@@ -361,7 +371,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public static void AppendAnalyzerMap(
             this Dictionary<string, DiagnosticAnalyzer> analyzerMap,
             IEnumerable<DiagnosticAnalyzer> analyzers
-        ) {
+        )
+        {
             foreach (var analyzer in analyzers)
             {
                 // user might have included exact same analyzer twice as project analyzers explicitly. we consider them as one
@@ -387,7 +398,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             IEnumerable<DiagnosticAnalyzer> analyzers,
             bool includeSuppressedDiagnostics,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var compilation = await project.GetCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
             if (compilation == null)
@@ -433,7 +445,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                         && project.Solution.Workspace.Options.GetOption(
                             InternalDiagnosticsOptions.CrashOnAnalyzerException
                         )
-                    ) {
+                    )
+                    {
                         // report telemetry
                         FatalError.ReportAndPropagate(ex);
 
@@ -462,7 +475,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             AnalysisKind kind,
             Compilation? compilation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             ImmutableArray<Diagnostic> diagnostics;
@@ -513,7 +527,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Project project,
             Compilation? compilation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             ImmutableArray<Diagnostic> diagnostics;
@@ -557,7 +572,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             ImmutableArray<Diagnostic> diagnostics,
             Project project,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             foreach (var diagnostic in diagnostics)
             {
                 await VerifyDiagnosticLocationAsync(diagnostic.Id, diagnostic.Location)
@@ -670,7 +686,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             this IEnumerable<Diagnostic> diagnostics,
             TextDocument targetTextDocument,
             TextSpan? span = null
-        ) {
+        )
+        {
             foreach (var diagnostic in diagnostics)
             {
                 if (!IsReportedInDocument(diagnostic, targetTextDocument))

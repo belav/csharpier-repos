@@ -48,7 +48,8 @@ namespace System.Web.Mvc
                 if (
                     !String.Equals(verbOverride, "GET", StringComparison.OrdinalIgnoreCase)
                     && !String.Equals(verbOverride, "POST", StringComparison.OrdinalIgnoreCase)
-                ) {
+                )
+                {
                     incomingVerb = verbOverride;
                 }
             }

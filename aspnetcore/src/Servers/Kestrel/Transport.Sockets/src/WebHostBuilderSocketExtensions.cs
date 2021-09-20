@@ -47,7 +47,8 @@ namespace Microsoft.AspNetCore.Hosting
         public static IWebHostBuilder UseSockets(
             this IWebHostBuilder hostBuilder,
             Action<SocketTransportOptions> configureOptions
-        ) {
+        )
+        {
             return hostBuilder.UseSockets()
                 .ConfigureServices(
                     services =>

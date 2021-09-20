@@ -461,7 +461,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             string ownedTypeName,
             string navigationName,
             Action<OwnedNavigationBuilder> buildAction
-        ) {
+        )
+        {
             Check.NotEmpty(ownedTypeName, nameof(ownedTypeName));
             Check.NotEmpty(navigationName, nameof(navigationName));
             Check.NotNull(buildAction, nameof(buildAction));
@@ -503,7 +504,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             Type ownedType,
             string navigationName,
             Action<OwnedNavigationBuilder> buildAction
-        ) {
+        )
+        {
             Check.NotEmpty(ownedTypeName, nameof(ownedTypeName));
             Check.NotNull(ownedType, nameof(ownedType));
             Check.NotEmpty(navigationName, nameof(navigationName));
@@ -546,7 +548,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             Type ownedType,
             string navigationName,
             Action<OwnedNavigationBuilder> buildAction
-        ) {
+        )
+        {
             Check.NotNull(ownedType, nameof(ownedType));
             Check.NotEmpty(navigationName, nameof(navigationName));
             Check.NotNull(buildAction, nameof(buildAction));
@@ -566,7 +569,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         private OwnedNavigationBuilder OwnsOneBuilder(
             in TypeIdentity ownedType,
             string navigationName
-        ) {
+        )
+        {
             IMutableForeignKey foreignKey;
             using (var batch = DependentEntityType.Model.DelayConventions())
             {
@@ -708,7 +712,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             string ownedTypeName,
             string navigationName,
             Action<OwnedNavigationBuilder> buildAction
-        ) {
+        )
+        {
             Check.NotEmpty(ownedTypeName, nameof(ownedTypeName));
             Check.NotEmpty(navigationName, nameof(navigationName));
             Check.NotNull(buildAction, nameof(buildAction));
@@ -749,7 +754,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             Type ownedType,
             string navigationName,
             Action<OwnedNavigationBuilder> buildAction
-        ) {
+        )
+        {
             Check.NotEmpty(ownedTypeName, nameof(ownedTypeName));
             Check.NotNull(ownedType, nameof(ownedType));
             Check.NotEmpty(navigationName, nameof(navigationName));
@@ -791,7 +797,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             Type ownedType,
             string navigationName,
             Action<OwnedNavigationBuilder> buildAction
-        ) {
+        )
+        {
             Check.NotNull(ownedType, nameof(ownedType));
             Check.NotEmpty(navigationName, nameof(navigationName));
             Check.NotNull(buildAction, nameof(buildAction));
@@ -811,7 +818,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         private OwnedNavigationBuilder OwnsManyBuilder(
             in TypeIdentity ownedType,
             string navigationName
-        ) {
+        )
+        {
             IMutableForeignKey foreignKey;
             using (var batch = DependentEntityType.Model.DelayConventions())
             {
@@ -856,7 +864,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         public virtual ReferenceNavigationBuilder HasOne(
             string relatedTypeName,
             string? navigationName
-        ) {
+        )
+        {
             Check.NotEmpty(relatedTypeName, nameof(relatedTypeName));
             Check.NullButNotEmpty(navigationName, nameof(navigationName));
 
@@ -937,7 +946,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         public virtual ReferenceNavigationBuilder HasOne(
             Type relatedType,
             string? navigationName = null
-        ) {
+        )
+        {
             Check.NotNull(relatedType, nameof(relatedType));
             Check.NullButNotEmpty(navigationName, nameof(navigationName));
 
@@ -966,7 +976,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         protected virtual EntityType FindRelatedEntityType(
             string relatedTypeName,
             string? navigationName
-        ) {
+        )
+        {
             EntityType? relatedEntityType = null;
             var model = DependentEntityType.Model;
             if (navigationName != null)
@@ -984,7 +995,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
                     "2.",
                     StringComparison.Ordinal
                 ) == true
-            ) {
+            )
+            {
                 var owner = DependentEntityType.FindOwnership()!.PrincipalEntityType;
                 if (owner.Name == relatedTypeName || owner.ShortName() == relatedTypeName)
                 {
@@ -1021,7 +1033,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
                 if (
                     PrincipalEntityType.HasSharedClrType
                     && PrincipalEntityType.ClrType == relatedType
-                ) {
+                )
+                {
                     return PrincipalEntityType;
                 }
 
@@ -1050,7 +1063,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns> The same builder instance so that multiple configuration calls can be chained. </returns>
         public virtual OwnedNavigationBuilder HasChangeTrackingStrategy(
             ChangeTrackingStrategy changeTrackingStrategy
-        ) {
+        )
+        {
             DependentEntityType.Builder.HasChangeTrackingStrategy(
                 changeTrackingStrategy,
                 ConfigurationSource.Explicit
@@ -1078,7 +1092,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns> The same builder instance so that multiple configuration calls can be chained. </returns>
         public virtual OwnedNavigationBuilder UsePropertyAccessMode(
             PropertyAccessMode propertyAccessMode
-        ) {
+        )
+        {
             DependentEntityType.Builder.UsePropertyAccessMode(
                 propertyAccessMode,
                 ConfigurationSource.Explicit

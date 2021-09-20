@@ -148,7 +148,8 @@ namespace System.IO.IsolatedStorage
             IsolatedStorageScope scope,
             Type? domainEvidenceType,
             Type? assemblyEvidenceType
-        ) {
+        )
+        {
             VerifyScope(scope);
             Scope = scope;
 

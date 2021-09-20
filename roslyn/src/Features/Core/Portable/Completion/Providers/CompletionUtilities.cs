@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             Compilation compilation,
             ITypeSymbol sourceType,
             ImmutableArray<ITypeSymbol> targetTypes
-        ) {
+        )
+        {
             foreach (var targetType in targetTypes)
             {
                 if (compilation.ClassifyCommonConversion(sourceType, targetType).IsImplicit)

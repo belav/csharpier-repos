@@ -120,7 +120,8 @@ public class Test
             || !File.Exists("notinlined.txt")
             || !File.Exists("inlinedval.txt")
             || !File.Exists("notinlinedval.txt")
-        ) {
+        )
+        {
             Console.WriteLine("FAIL: Cctor wasn't called");
             return 101;
         }

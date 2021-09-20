@@ -66,7 +66,8 @@ namespace System.IO.Strategies
             FileAccess access,
             int bufferSize,
             bool isAsync
-        ) {
+        )
+        {
             _exposedHandle = true;
             _bufferLength = bufferSize;
 
@@ -89,7 +90,8 @@ namespace System.IO.Strategies
             FileShare share,
             int bufferSize,
             FileOptions options
-        ) {
+        )
+        {
             string fullPath = Path.GetFullPath(path);
 
             _path = fullPath;
@@ -172,7 +174,8 @@ namespace System.IO.Strategies
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!_useAsyncIO)
             {
                 // If we weren't opened for asynchronous I/O, we still call to the base implementation so that
@@ -196,7 +199,8 @@ namespace System.IO.Strategies
         public override ValueTask<int> ReadAsync(
             Memory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (!_useAsyncIO)
             {
                 // If we weren't opened for asynchronous I/O, we still call to the base implementation so that
@@ -227,7 +231,8 @@ namespace System.IO.Strategies
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Task<int>? t = ReadAsyncInternal(
                 new Memory<byte>(buffer, offset, count),
                 cancellationToken,
@@ -293,7 +298,8 @@ namespace System.IO.Strategies
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!_useAsyncIO)
             {
                 // If we weren't opened for asynchronous I/O, we still call to the base implementation so that
@@ -321,7 +327,8 @@ namespace System.IO.Strategies
         public override ValueTask WriteAsync(
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (!_useAsyncIO)
             {
                 // If we weren't opened for asynchronous I/O, we still call to the base implementation so that
@@ -581,7 +588,8 @@ namespace System.IO.Strategies
             int count,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             if (!_useAsyncIO)
                 return base.BeginRead(buffer, offset, count, callback, state);
             else
@@ -598,7 +606,8 @@ namespace System.IO.Strategies
             int count,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             if (!_useAsyncIO)
                 return base.BeginWrite(buffer, offset, count, callback, state);
             else

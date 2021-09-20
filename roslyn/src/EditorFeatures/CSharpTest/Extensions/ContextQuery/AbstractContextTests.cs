@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntelliSense.Completion
             string markup,
             bool validLocation,
             CSharpParseOptions options = null
-        ) {
+        )
+        {
             MarkupTestFile.GetPosition(markup, out var code, out int position);
 
             VerifyAtPosition(code, position, validLocation, options: options);
@@ -43,7 +44,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntelliSense.Completion
             bool validLocation,
             string insertText,
             CSharpParseOptions options
-        ) {
+        )
+        {
             text = text.Substring(0, position) + insertText + "/**/" + text.Substring(position);
 
             position += insertText.Length;
@@ -73,7 +75,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntelliSense.Completion
             bool validLocation,
             string insertText,
             CSharpParseOptions options
-        ) {
+        )
+        {
             text = text.Substring(0, position) + insertText + text.Substring(position);
 
             position += insertText.Length;
@@ -102,7 +105,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntelliSense.Completion
             bool validLocation,
             string insertText,
             CSharpParseOptions options
-        ) {
+        )
+        {
             // only do this if the placeholder was at the end of the text.
             if (text.Length != position)
             {

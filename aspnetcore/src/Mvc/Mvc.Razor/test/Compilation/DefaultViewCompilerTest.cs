@@ -50,7 +50,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Compilation
         [InlineData("/viEws/HoME/inDex.cshtml")]
         public async Task CompileAsync_PerformsCaseInsensitiveLookupsForCompiledViews(
             string lookupPath
-        ) {
+        )
+        {
             // Arrange
             var path = "/Views/Home/Index.cshtml";
             var precompiledView = new CompiledViewDescriptor { RelativePath = path, };
@@ -80,7 +81,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Compilation
 
         private static TestRazorViewCompiler GetViewCompiler(
             IList<CompiledViewDescriptor> compiledViews = null
-        ) {
+        )
+        {
             compiledViews = compiledViews ?? Array.Empty<CompiledViewDescriptor>();
 
             var viewCompiler = new TestRazorViewCompiler(compiledViews);

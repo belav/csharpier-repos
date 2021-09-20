@@ -53,7 +53,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         public virtual IntersectExpression Update(
             SelectExpression source1,
             SelectExpression source2
-        ) {
+        )
+        {
             Check.NotNull(source1, nameof(source1));
             Check.NotNull(source2, nameof(source2));
 

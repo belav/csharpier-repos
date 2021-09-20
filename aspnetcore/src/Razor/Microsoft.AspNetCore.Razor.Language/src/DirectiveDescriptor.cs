@@ -75,7 +75,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             string directive,
             DirectiveKind kind,
             Action<IDirectiveDescriptorBuilder> configure
-        ) {
+        )
+        {
             if (directive == null)
             {
                 throw new ArgumentNullException(nameof(directive));
@@ -110,7 +111,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static DirectiveDescriptor CreateSingleLineDirective(
             string directive,
             Action<IDirectiveDescriptorBuilder> configure
-        ) {
+        )
+        {
             if (directive == null)
             {
                 throw new ArgumentNullException(nameof(directive));
@@ -143,7 +145,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static DirectiveDescriptor CreateRazorBlockDirective(
             string directive,
             Action<IDirectiveDescriptorBuilder> configure
-        ) {
+        )
+        {
             if (directive == null)
             {
                 throw new ArgumentNullException(nameof(directive));
@@ -176,7 +179,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static DirectiveDescriptor CreateCodeBlockDirective(
             string directive,
             Action<IDirectiveDescriptorBuilder> configure
-        ) {
+        )
+        {
             if (directive == null)
             {
                 throw new ArgumentNullException(nameof(directive));
@@ -260,7 +264,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 DirectiveTokenDescriptor[] tokens,
                 string displayName,
                 string description
-            ) {
+            )
+            {
                 Directive = directive;
                 Kind = kind;
                 Usage = usage;

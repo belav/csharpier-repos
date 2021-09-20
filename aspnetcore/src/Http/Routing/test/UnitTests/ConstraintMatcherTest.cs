@@ -215,7 +215,8 @@ namespace Microsoft.AspNetCore.Routing
         private TestSink SetUpMatch(
             Dictionary<string, IRouteConstraint> constraints,
             bool loggerEnabled
-        ) {
+        )
+        {
             // Arrange
             var sink = new TestSink();
             var logger = new TestLogger(_name, sink, loggerEnabled);
@@ -249,7 +250,8 @@ namespace Microsoft.AspNetCore.Routing
                 string routeKey,
                 RouteValueDictionary values,
                 RouteDirection routeDirection
-            ) {
+            )
+            {
                 if (_expectedKey != null)
                 {
                     Assert.Equal(_expectedKey, routeKey);
@@ -267,7 +269,8 @@ namespace Microsoft.AspNetCore.Routing
                 string routeKey,
                 RouteValueDictionary values,
                 RouteDirection routeDirection
-            ) {
+            )
+            {
                 return false;
             }
         }

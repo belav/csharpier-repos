@@ -73,7 +73,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
             if (
                 definition.RedirectUri == null
                 || !Uri.TryCreate(definition.RedirectUri, UriKind.Absolute, out var redirectUri)
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     $"The redirect uri "
                         + $"'{definition.RedirectUri}' for '{name}' is invalid. "
@@ -84,7 +85,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
             if (
                 definition.LogoutUri == null
                 || !Uri.TryCreate(definition.LogoutUri, UriKind.Absolute, out var postLogouturi)
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     $"The logout uri "
                         + $"'{definition.LogoutUri}' for '{name}' is invalid. "
@@ -98,7 +100,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
                     postLogouturi.GetLeftPart(UriPartial.Authority),
                     StringComparison.Ordinal
                 )
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     $"The redirect uri and the logout uri "
                         + $"for '{name}' have a different scheme, host or port."

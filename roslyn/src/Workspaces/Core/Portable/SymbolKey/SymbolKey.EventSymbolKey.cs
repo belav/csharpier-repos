@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis
             public static SymbolKeyResolution Resolve(
                 SymbolKeyReader reader,
                 out string? failureReason
-            ) {
+            )
+            {
                 var metadataName = reader.ReadString();
                 var containingTypeResolution = reader.ReadSymbolKey(
                     out var containingTypeFailureReason

@@ -68,7 +68,8 @@ namespace System.Security.Cryptography
                 ReadOnlySpan<byte> passwordBytes,
                 ReadOnlySpan<byte> source,
                 out int bytesRead
-            ) {
+            )
+            {
                 ThrowIfDisposed();
                 base.ImportEncryptedPkcs8PrivateKey(passwordBytes, source, out bytesRead);
             }
@@ -77,7 +78,8 @@ namespace System.Security.Cryptography
                 ReadOnlySpan<char> password,
                 ReadOnlySpan<byte> source,
                 out int bytesRead
-            ) {
+            )
+            {
                 ThrowIfDisposed();
                 base.ImportEncryptedPkcs8PrivateKey(password, source, out bytesRead);
             }
@@ -85,7 +87,8 @@ namespace System.Security.Cryptography
             public override byte[] ExportEncryptedPkcs8PrivateKey(
                 ReadOnlySpan<byte> passwordBytes,
                 PbeParameters pbeParameters
-            ) {
+            )
+            {
                 if (pbeParameters == null)
                     throw new ArgumentNullException(nameof(pbeParameters));
 
@@ -95,7 +98,8 @@ namespace System.Security.Cryptography
             public override byte[] ExportEncryptedPkcs8PrivateKey(
                 ReadOnlySpan<char> password,
                 PbeParameters pbeParameters
-            ) {
+            )
+            {
                 if (pbeParameters == null)
                 {
                     throw new ArgumentNullException(nameof(pbeParameters));
@@ -120,7 +124,8 @@ namespace System.Security.Cryptography
                 PbeParameters pbeParameters,
                 Span<byte> destination,
                 out int bytesWritten
-            ) {
+            )
+            {
                 if (pbeParameters == null)
                     throw new ArgumentNullException(nameof(pbeParameters));
 
@@ -144,7 +149,8 @@ namespace System.Security.Cryptography
                 PbeParameters pbeParameters,
                 Span<byte> destination,
                 out int bytesWritten
-            ) {
+            )
+            {
                 if (pbeParameters == null)
                     throw new ArgumentNullException(nameof(pbeParameters));
 
@@ -178,7 +184,8 @@ namespace System.Security.Cryptography
                 DSAParameters parameters,
                 int cbKey,
                 bool includePrivate
-            ) {
+            )
+            {
                 // We need to build a key blob structured as follows:
                 //
                 //     BCRYPT_DSA_KEY_BLOB       header
@@ -264,7 +271,8 @@ namespace System.Security.Cryptography
                 DSAParameters parameters,
                 int cbKey,
                 bool includePrivateParameters
-            ) {
+            )
+            {
                 // We need to build a key blob structured as follows:
                 //     BCRYPT_DSA_KEY_BLOB_V2  header
                 //     byte[cbSeedLength]      Seed
@@ -379,7 +387,8 @@ namespace System.Security.Cryptography
                         if (
                             magic == KeyBlobMagicNumber.BCRYPT_DSA_PUBLIC_MAGIC
                             || magic == KeyBlobMagicNumber.BCRYPT_DSA_PRIVATE_MAGIC
-                        ) {
+                        )
+                        {
                             if (dsaBlob.Length < sizeof(BCRYPT_DSA_KEY_BLOB))
                                 throw ErrorCode.E_FAIL.ToCryptographicException();
 
@@ -530,7 +539,8 @@ namespace System.Security.Cryptography
             private static void CheckMagicValueOfKey(
                 KeyBlobMagicNumber magic,
                 bool includePrivateParameters
-            ) {
+            )
+            {
                 if (includePrivateParameters)
                 {
                     if (

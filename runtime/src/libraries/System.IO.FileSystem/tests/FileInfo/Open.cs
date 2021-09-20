@@ -19,7 +19,8 @@ namespace System.IO.Tests
                     GetTestFilePath() + streamSpecifier,
                     FileMode.Append
                 )
-            ) {
+            )
+            {
                 Assert.False(fs.CanRead);
                 Assert.True(fs.CanWrite);
             }
@@ -61,7 +62,8 @@ namespace System.IO.Tests
             string path,
             FileMode mode,
             FileAccess access
-        ) {
+        )
+        {
             return new FileInfo(path).Open(mode, access);
         }
     }
@@ -81,7 +83,8 @@ namespace System.IO.Tests
             string path,
             FileMode mode,
             FileAccess access
-        ) {
+        )
+        {
             return new FileInfo(path).Open(mode, access, FileShare.ReadWrite | FileShare.Delete);
         }
 
@@ -90,7 +93,8 @@ namespace System.IO.Tests
             FileMode mode,
             FileAccess access,
             FileShare share
-        ) {
+        )
+        {
             return new FileInfo(path).Open(mode, access, share);
         }
     }
@@ -101,7 +105,8 @@ namespace System.IO.Tests
             string path,
             FileMode mode,
             FileAccess access
-        ) {
+        )
+        {
             if (mode == FileMode.Open && access == FileAccess.Read)
                 return new FileInfo(path).OpenRead();
             else if (mode == FileMode.OpenOrCreate && access == FileAccess.Write)
@@ -115,7 +120,8 @@ namespace System.IO.Tests
             FileMode mode,
             FileAccess access,
             FileShare share
-        ) {
+        )
+        {
             if (mode == FileMode.Open && access == FileAccess.Read && share == FileShare.Read)
                 return new FileInfo(path).OpenRead();
             else if (

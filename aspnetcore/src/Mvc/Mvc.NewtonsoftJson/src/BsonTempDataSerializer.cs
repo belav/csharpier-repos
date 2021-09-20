@@ -214,7 +214,8 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
                 if (
                     ClosedGenericMatcher.ExtractGenericInterface(typeToSerialize, typeof(IList<>))
                     != null
-                ) {
+                )
+                {
                     var genericTypeArguments = typeToSerialize.GenericTypeArguments;
                     Debug.Assert(
                         genericTypeArguments.Length == 1,
@@ -227,7 +228,8 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
                         typeToSerialize,
                         typeof(IDictionary<, >)
                     ) != null
-                ) {
+                )
+                {
                     var genericTypeArguments = typeToSerialize.GenericTypeArguments;
                     Debug.Assert(
                         genericTypeArguments.Length == 2,

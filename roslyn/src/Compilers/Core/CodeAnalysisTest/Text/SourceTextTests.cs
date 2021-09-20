@@ -369,7 +369,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Text
             string source,
             Encoding encoding,
             SourceHashAlgorithm checksumAlgorithm
-        ) {
+        )
+        {
             using (var writer = new LargeTextWriter(encoding, checksumAlgorithm, source.Length))
             {
                 writer.Write(source);
@@ -502,7 +503,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Text
             Encoding expectedEncoding,
             int expectedPreambleLength,
             byte[] data
-        ) {
+        )
+        {
             TestTryReadByteOrderMark(
                 expectedEncoding,
                 expectedPreambleLength,
@@ -516,7 +518,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Text
             int expectedPreambleLength,
             byte[] data,
             int validLength
-        ) {
+        )
+        {
             int actualPreambleLength;
             Encoding actualEncoding = SourceText.TryReadByteOrderMark(
                 data,

@@ -60,7 +60,8 @@ namespace Castle.Components.DictionaryAdapter
     {
         public static GenericDictionaryAdapter<TValue> ForDictionaryAdapter<TValue>(
             this IDictionary<string, TValue> dictionary
-        ) {
+        )
+        {
             return new GenericDictionaryAdapter<TValue>(dictionary);
         }
     }

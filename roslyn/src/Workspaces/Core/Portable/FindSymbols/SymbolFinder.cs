@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             int position,
             Workspace workspace,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return FindSymbolAtPositionAsync(semanticModel, position, workspace, cancellationToken)
                 .WaitAndGetResult(cancellationToken);
         }
@@ -46,7 +47,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             int position,
             Workspace workspace,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var semanticInfo = await GetSemanticInfoAtPositionAsync(
                     semanticModel,
                     position,
@@ -62,7 +64,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             int position,
             Workspace workspace,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var token = await GetTokenAtPositionAsync(
                     semanticModel,
                     position,
@@ -84,7 +87,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             int position,
             Workspace workspace,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxTree = semanticModel.SyntaxTree;
             var syntaxFacts = workspace.Services.GetLanguageServices(semanticModel.Language)
                 .GetService<ISyntaxFactsService>();
@@ -101,7 +105,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             Document document,
             int position,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
             return await FindSymbolAtPositionAsync(
@@ -121,7 +126,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             ISymbol symbol,
             Solution solution,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (symbol != null)
             {
                 symbol = symbol.GetOriginalUnreducedDefinition();
@@ -147,7 +153,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             ISymbol symbol,
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // If it's already in source, then we might already be done
             if (InSource(symbol))
             {
@@ -272,7 +279,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             ISymbol symbol,
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Add the original symbol to the result set.
             var linkedSymbols = new HashSet<ISymbol> { symbol };
 
@@ -316,7 +324,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                         linkedSymbol != null
                         && linkedSymbol.Kind == symbol.Kind
                         && linkedSymbol.Name == symbol.Name
-                    ) {
+                    )
+                    {
                         linkedSymbols.Add(linkedSymbol);
                     }
                 }

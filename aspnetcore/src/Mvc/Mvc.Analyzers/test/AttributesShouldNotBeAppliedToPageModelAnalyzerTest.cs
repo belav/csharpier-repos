@@ -115,7 +115,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
         private async Task VerifyDefault(
             DiagnosticDescriptor descriptor,
             [CallerMemberName] string testMethod = ""
-        ) {
+        )
+        {
             // Arrange
             var testSource = MvcTestSource.Read(GetType().Name, testMethod);
             var expectedLocation = testSource.DefaultMarkerLocation;

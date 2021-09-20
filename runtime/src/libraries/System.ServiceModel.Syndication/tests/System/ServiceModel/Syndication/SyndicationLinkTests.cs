@@ -83,7 +83,8 @@ namespace System.ServiceModel.Syndication.Tests
             string title,
             string mediaType,
             long length
-        ) {
+        )
+        {
             var link = new SyndicationLink(uri, relationshipType, title, mediaType, length);
             Assert.Empty(link.AttributeExtensions);
             Assert.Null(link.BaseUri);
@@ -282,7 +283,8 @@ namespace System.ServiceModel.Syndication.Tests
             Uri uri,
             string mediaType,
             long length
-        ) {
+        )
+        {
             SyndicationLink link = SyndicationLink.CreateMediaEnclosureLink(uri, mediaType, length);
             Assert.Empty(link.AttributeExtensions);
             Assert.Null(link.BaseUri);
@@ -376,7 +378,8 @@ namespace System.ServiceModel.Syndication.Tests
             string ns,
             string value,
             string version
-        ) {
+        )
+        {
             var link = new SyndicationLinkSubclass();
             Assert.False(link.TryParseAttributeEntryPoint(name, ns, value, version));
         }

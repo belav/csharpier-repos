@@ -32,7 +32,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         /// </summary>
         public RelationalParameterBasedSqlProcessorFactory(
             RelationalParameterBasedSqlProcessorDependencies dependencies
-        ) {
+        )
+        {
             Check.NotNull(dependencies, nameof(dependencies));
 
             _dependencies = dependencies;

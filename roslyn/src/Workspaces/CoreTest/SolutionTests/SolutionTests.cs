@@ -1267,7 +1267,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         public void WithProjectCompilationOptionsReplacesSyntaxTreeOptionProvider(
             [CombinatorialValues(LanguageNames.CSharp, LanguageNames.VisualBasic)]
                 string languageName
-        ) {
+        )
+        {
             var projectId = ProjectId.CreateNewId();
 
             using var workspace = CreateWorkspace();
@@ -3169,7 +3170,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Solution solution,
             DocumentId documentId,
             string expectedText = null
-        ) {
+        )
+        {
             var observedText = solution.GetDocument(documentId).GetTextAsync().Result;
 
             if (expectedText != null)
@@ -3207,7 +3209,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Solution solution,
             DocumentId documentId,
             string expectedText = null
-        ) {
+        )
+        {
             var observedText = solution.GetDocument(documentId).GetTextAsync().Result;
 
             if (expectedText != null)
@@ -3245,7 +3248,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         private static ObjectReference<SyntaxNode> GetObservedSyntaxTreeRoot(
             Solution solution,
             DocumentId documentId
-        ) {
+        )
+        {
             var observedTree = solution.GetDocument(documentId).GetSyntaxRootAsync().Result;
             return new ObjectReference<SyntaxNode>(observedTree);
         }
@@ -3277,7 +3281,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         private static ObjectReference<SyntaxNode> GetObservedSyntaxTreeRootAsync(
             Solution solution,
             DocumentId documentId
-        ) {
+        )
+        {
             var observedTree = solution.GetDocument(documentId).GetSyntaxRootAsync().Result;
             return new ObjectReference<SyntaxNode>(observedTree);
         }
@@ -3414,7 +3419,8 @@ End Class";
         private static ObjectReference<Compilation> GetObservedCompilationAsync(
             Solution solution,
             ProjectId projectId
-        ) {
+        )
+        {
             var observed = solution.GetProject(projectId).GetCompilationAsync().Result;
             return new ObjectReference<Compilation>(observed);
         }
@@ -3445,7 +3451,8 @@ End Class";
         private static ObjectReference<Compilation> GetObservedCompilation(
             Solution solution,
             ProjectId projectId
-        ) {
+        )
+        {
             var observed = solution.GetProject(projectId).GetCompilationAsync().Result;
             return new ObjectReference<Compilation>(observed);
         }
@@ -4015,7 +4022,8 @@ public class C : A {
         public async Task TestAddingEditorConfigFileWithDiagnosticSeverity(
             [CombinatorialValues(LanguageNames.CSharp, LanguageNames.VisualBasic)]
                 string languageName
-        ) {
+        )
+        {
             using var workspace = CreateWorkspace();
             var solution = workspace.CurrentSolution;
             var extension = languageName == LanguageNames.CSharp ? ".cs" : ".vb";
@@ -4078,7 +4086,8 @@ public class C : A {
         public async Task TestAddingAndRemovingEditorConfigFileWithDiagnosticSeverity(
             [CombinatorialValues(LanguageNames.CSharp, LanguageNames.VisualBasic)]
                 string languageName
-        ) {
+        )
+        {
             using var workspace = CreateWorkspace();
             var solution = workspace.CurrentSolution;
             var extension = languageName == LanguageNames.CSharp ? ".cs" : ".vb";
@@ -4155,7 +4164,8 @@ public class C : A {
             [CombinatorialValues(LanguageNames.CSharp, LanguageNames.VisualBasic)]
                 string languageName,
             bool useRecoverableTrees
-        ) {
+        )
+        {
             using var workspace = useRecoverableTrees
                 ? CreateWorkspaceWithRecoverableSyntaxTreesAndWeakCompilations()
                 : CreateWorkspace();
@@ -4470,7 +4480,8 @@ class C
             out Project dependsOnVbNormalProject,
             out Project transitivelyDependsOnBrokenProjects,
             out Project transitivelyDependsOnNormalProjects
-        ) {
+        )
+        {
             var workspace = new AdhocWorkspace();
 
             csBrokenProject = workspace.AddProject(
@@ -4588,7 +4599,8 @@ class C
             static SerializableOptionSet SerializeAndDeserialize(
                 SerializableOptionSet optionSet,
                 IOptionService optionService
-            ) {
+            )
+            {
                 using var stream = new MemoryStream();
                 using var writer = new ObjectWriter(stream);
                 optionSet.Serialize(writer, CancellationToken.None);

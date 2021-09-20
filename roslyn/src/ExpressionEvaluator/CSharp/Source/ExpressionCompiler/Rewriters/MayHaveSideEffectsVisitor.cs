@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 
         public override BoundNode VisitDeconstructionAssignmentOperator(
             BoundDeconstructionAssignmentOperator node
-        ) {
+        )
+        {
             return this.SetMayHaveSideEffects();
         }
 
@@ -53,7 +54,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 
         public override BoundNode VisitCompoundAssignmentOperator(
             BoundCompoundAssignmentOperator node
-        ) {
+        )
+        {
             return this.SetMayHaveSideEffects();
         }
 
@@ -69,7 +71,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 
         public override BoundNode VisitObjectInitializerExpression(
             BoundObjectInitializerExpression node
-        ) {
+        )
+        {
             foreach (var initializer in node.Initializers)
             {
                 // Do not treat initializer assignment as a side effect since it is

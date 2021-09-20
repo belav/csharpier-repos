@@ -16,7 +16,8 @@ namespace System.Net.Http.Json
             Type type,
             JsonSerializerOptions? options = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (content == null)
             {
                 throw new ArgumentNullException(nameof(content));
@@ -33,7 +34,8 @@ namespace System.Net.Http.Json
             this HttpContent content,
             JsonSerializerOptions? options = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (content == null)
             {
                 throw new ArgumentNullException(nameof(content));
@@ -52,7 +54,8 @@ namespace System.Net.Http.Json
             Encoding? sourceEncoding,
             JsonSerializerOptions? options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Stream contentStream = await ReadHttpContentStreamAsync(content, cancellationToken)
                 .ConfigureAwait(false);
 
@@ -79,7 +82,8 @@ namespace System.Net.Http.Json
             Encoding? sourceEncoding,
             JsonSerializerOptions? options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Stream contentStream = await ReadHttpContentStreamAsync(content, cancellationToken)
                 .ConfigureAwait(false);
 

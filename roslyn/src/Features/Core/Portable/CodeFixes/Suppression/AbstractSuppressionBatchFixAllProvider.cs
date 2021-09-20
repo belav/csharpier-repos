@@ -52,7 +52,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 ImmutableArray<Diagnostic>
             > documentsAndDiagnosticsToFixMap,
             FixAllContext fixAllContext
-        ) {
+        )
+        {
             var cancellationToken = fixAllContext.CancellationToken;
             if (documentsAndDiagnosticsToFixMap?.Any() == true)
             {
@@ -83,7 +84,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                             FixAllLogger.CreateCorrelationLogMessage(fixAllState.CorrelationId),
                             cancellationToken
                         )
-                    ) {
+                    )
+                    {
                         FixAllLogger.LogFixesToMergeStats(
                             functionId,
                             fixAllState.CorrelationId,
@@ -110,7 +112,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 ImmutableArray<Diagnostic>
             > documentsAndDiagnosticsToFixMap,
             FixAllContext fixAllContext
-        ) {
+        )
+        {
             var cancellationToken = fixAllContext.CancellationToken;
             var fixAllState = fixAllContext.State;
             var fixesBag = new ConcurrentBag<(Diagnostic diagnostic, CodeAction action)>();
@@ -121,7 +124,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                     FixAllLogger.CreateCorrelationLogMessage(fixAllState.CorrelationId),
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 cancellationToken.ThrowIfCancellationRequested();
                 var progressTracker = fixAllContext.GetProgressTracker();
 
@@ -167,7 +171,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
             FixAllState fixAllState,
             IProgressTracker progressTracker,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 await this.AddDocumentFixesAsync(
@@ -192,7 +197,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
             ConcurrentBag<(Diagnostic diagnostic, CodeAction action)> fixes,
             FixAllState fixAllState,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(!diagnostics.IsDefault);
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -229,7 +235,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
         private async Task<CodeAction?> GetFixAsync(
             ImmutableDictionary<Project, ImmutableArray<Diagnostic>> projectsAndDiagnosticsToFixMap,
             FixAllContext fixAllContext
-        ) {
+        )
+        {
             var cancellationToken = fixAllContext.CancellationToken;
             var fixAllState = fixAllContext.State;
 
@@ -247,7 +254,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                         FixAllLogger.CreateCorrelationLogMessage(fixAllState.CorrelationId),
                         cancellationToken
                     )
-                ) {
+                )
+                {
                     var projects = projectsAndDiagnosticsToFixMap.Keys;
                     var tasks = projects.Select(
                             p =>
@@ -288,7 +296,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
         private static Action<CodeAction, ImmutableArray<Diagnostic>> GetRegisterCodeFixAction(
             FixAllState fixAllState,
             ConcurrentBag<(Diagnostic diagnostic, CodeAction action)> result
-        ) {
+        )
+        {
             return (action, diagnostics) =>
             {
                 using var _ = ArrayBuilder<CodeAction>.GetInstance(out var builder);
@@ -299,7 +308,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                     if (
                         currentAction is { EquivalenceKey: var equivalenceKey }
                         && equivalenceKey == fixAllState.CodeActionEquivalenceKey
-                    ) {
+                    )
+                    {
                         result.Add((diagnostics.First(), currentAction));
                     }
 
@@ -317,7 +327,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
             ConcurrentBag<(Diagnostic diagnostic, CodeAction action)> fixes,
             FixAllState fixAllState,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return Task.CompletedTask;
         }
 
@@ -325,7 +336,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
             ImmutableArray<(Diagnostic diagnostic, CodeAction action)> batchOfFixes,
             FixAllState fixAllState,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfFalse(batchOfFixes.Any());
 
             var solution = fixAllState.Solution;
@@ -361,7 +373,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
             ImmutableArray<(Diagnostic diagnostic, CodeAction action)> diagnosticsAndCodeActions,
             FixAllState fixAllState,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var documentIdToChangedDocuments = await GetDocumentIdToChangedDocumentsAsync(
                     oldSolution,
                     diagnosticsAndCodeActions,
@@ -396,7 +409,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
             Solution oldSolution,
             ImmutableArray<(Diagnostic diagnostic, CodeAction action)> diagnosticsAndCodeActions,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var documentIdToChangedDocuments = new ConcurrentDictionary<
                 DocumentId,
                 ConcurrentBag<(CodeAction, Document)>
@@ -432,7 +446,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
             > documentIdToChangedDocuments,
             ImmutableArray<(Diagnostic diagnostic, CodeAction action)> diagnosticsAndCodeActions,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // We process changes to a document in 'Diagnostic' order.  i.e. we apply the change
             // created for an earlier diagnostic before the change applied to a later diagnostic.
             // It's as if we processed the diagnostics in the document, in order, finding the code
@@ -467,7 +482,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
             ConcurrentDictionary<DocumentId, SourceText> documentIdToFinalText,
             IEnumerable<(CodeAction action, Document document)> changedDocuments,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Merges all the text changes made to a single document by many code actions
             // into the final text for that document.
 
@@ -522,7 +538,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
             > documentIdToChangedDocuments,
             CodeAction codeAction,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             var changedSolution = await codeAction.GetChangedSolutionInternalAsync(

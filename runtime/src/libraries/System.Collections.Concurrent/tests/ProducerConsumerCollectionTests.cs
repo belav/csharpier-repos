@@ -223,7 +223,8 @@ namespace System.Collections.Concurrent.Tests
             int threadsCount,
             int itemsPerThread,
             bool take
-        ) {
+        )
+        {
             IProducerConsumerCollection<int> c = CreateProducerConsumerCollection(
                 Enumerable.Range(1, numStartingItems)
             );
@@ -292,7 +293,8 @@ namespace System.Collections.Concurrent.Tests
         public void ToArray_AddAndTakeItemsIntermixedWithEnumeration_ItemsAndCountMatch(
             int initialCount,
             int iters
-        ) {
+        )
+        {
             IEnumerable<int> initialItems = Enumerable.Range(1, initialCount);
             IProducerConsumerCollection<int> c = CreateProducerConsumerCollection(initialItems);
             IProducerConsumerCollection<int> oracle = CreateOracle(initialItems);
@@ -568,7 +570,8 @@ namespace System.Collections.Concurrent.Tests
             int numThreadsPerConsumerProducer,
             int numItemsPerThread,
             int producerSpin
-        ) {
+        )
+        {
             var bc = new BlockingCollection<int>(CreateProducerConsumerCollection());
             long dummy = 0;
 
@@ -679,7 +682,8 @@ namespace System.Collections.Concurrent.Tests
         public async Task GetEnumerator_Generic_ExpectedElementsYielded(
             int numItems,
             bool consumeFromSameThread
-        ) {
+        )
+        {
             IProducerConsumerCollection<int> c = CreateProducerConsumerCollection();
             using (var e = c.GetEnumerator())
             {
@@ -822,7 +826,8 @@ namespace System.Collections.Concurrent.Tests
         public void ManyConcurrentAddsTakes_EnsureTrackedCountsMatchResultingCollection(
             int threadsPerProc,
             double seconds
-        ) {
+        )
+        {
             IProducerConsumerCollection<int> c = CreateProducerConsumerCollection();
 
             DateTime end = default(DateTime);
@@ -831,7 +836,8 @@ namespace System.Collections.Concurrent.Tests
                     Environment.ProcessorCount * threadsPerProc,
                     _ => end = DateTime.UtcNow + TimeSpan.FromSeconds(seconds)
                 )
-            ) {
+            )
+            {
                 Task<int>[] tasks = Enumerable.Range(0, b.ParticipantCount)
                     .Select(
                         _ =>
@@ -906,7 +912,8 @@ namespace System.Collections.Concurrent.Tests
         [InlineData(ConcurrencyTestSeconds)]
         public void ManyConcurrentAddsTakesPeeks_ForceContentionWithOtherThreadsTaking(
             double seconds
-        ) {
+        )
+        {
             IProducerConsumerCollection<int> c = CreateProducerConsumerCollection();
             const int MaxCount = 4;
 
@@ -973,7 +980,8 @@ namespace System.Collections.Concurrent.Tests
         [InlineData(ConcurrencyTestSeconds)]
         public void ManyConcurrentAddsTakesPeeks_ForceContentionWithOtherThreadsPeeking(
             double seconds
-        ) {
+        )
+        {
             IProducerConsumerCollection<LargeStruct> c =
                 CreateProducerConsumerCollection<LargeStruct>();
             const int MaxCount = 4;
@@ -1079,7 +1087,8 @@ namespace System.Collections.Concurrent.Tests
         public void ManyConcurrentAddsTakes_ForceContentionWithGetEnumerator(
             int initialCount,
             double seconds
-        ) {
+        )
+        {
             IProducerConsumerCollection<int> c = CreateProducerConsumerCollection(
                 Enumerable.Range(1, initialCount)
             );
@@ -1218,7 +1227,8 @@ namespace System.Collections.Concurrent.Tests
                         || _a != _f
                         || _a != _g
                         || _a != _h
-                    ) {
+                    )
+                    {
                         throw new Exception(
                             $"Inconsistent {nameof(LargeStruct)}: {_a} {_b} {_c} {_d} {_e} {_f} {_g} {_h}"
                         );

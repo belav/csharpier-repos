@@ -118,7 +118,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IMvcCoreBuilder AddMvcCore(
             this IServiceCollection services,
             Action<MvcOptions> setupAction
-        ) {
+        )
+        {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));

@@ -2585,7 +2585,8 @@ class C
                         var metadata = ModuleMetadata.CreateFromImage(
                             ImmutableArray.CreateRange(assembly)
                         )
-                    ) {
+                    )
+                    {
                         var reader = metadata.MetadataReader;
                         var typeDef = reader.GetTypeDef("<>c__TypeVariables");
                         reader.CheckTypeParameters(
@@ -7433,7 +7434,8 @@ class C
             int count,
             out string typeName,
             out CompilationTestData testData
-        ) {
+        )
+        {
             var context = CreateMethodContext(runtime, methodName);
             testData = new CompilationTestData();
             var assembly = context.CompileGetLocals(locals, argumentsOnly, out typeName, testData);
@@ -7455,7 +7457,8 @@ class C
             MethodDebugInfoBytes debugInfo,
             ArrayBuilder<LocalAndMethod> locals,
             int count
-        ) {
+        )
+        {
             ImmutableArray<MetadataBlock> blocks;
             Guid moduleVersionId;
             ISymUnmanagedReader unused;

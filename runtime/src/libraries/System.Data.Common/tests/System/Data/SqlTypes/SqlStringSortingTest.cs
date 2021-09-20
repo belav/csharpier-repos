@@ -102,7 +102,8 @@ namespace System.Data.SqlTypes.Tests
         {
             if (
                 PlatformDetection.IsIcuGlobalization && cultureName == "ja-JP" && localeId == 0x0411
-            ) {
+            )
+            {
                 // TODO: Remove this once: https://github.com/dotnet/runtime/issues/18912 is fixed on ICU.
                 throw new SkipTestException(
                     $"PlatformDetection.IsIcuGlobalization and cultureName == ja-JP"
@@ -125,7 +126,8 @@ namespace System.Data.SqlTypes.Tests
                     SqlCompareOptions.BinarySort2,
                     DefaultCompareOption
                 }
-            ) {
+            )
+            {
                 SqlStringCompareTest(200, option, culture, localeId);
             }
         }
@@ -170,7 +172,8 @@ namespace System.Data.SqlTypes.Tests
                         | CompareOptions.IgnoreWidth
                         | CompareOptions.IgnoreCase
                 ) != 0
-            ) {
+            )
+            {
                 count--;
             }
 
@@ -205,7 +208,8 @@ namespace System.Data.SqlTypes.Tests
             SqlCompareOptions compareOption,
             CultureInfo cInfo,
             int localeID
-        ) {
+        )
+        {
             SortedList<SqlString, SqlString> items = CreateSortedSqlStringList(
                 numberOfItems,
                 compareOption,
@@ -220,7 +224,8 @@ namespace System.Data.SqlTypes.Tests
             SqlCompareOptions compareOption,
             CultureInfo cInfo,
             int localeID
-        ) {
+        )
+        {
             SortedList<SqlString, SqlString> items = new SortedList<SqlString, SqlString>(
                 numberOfItems
             );
@@ -268,7 +273,8 @@ namespace System.Data.SqlTypes.Tests
             SortedList<SqlString, SqlString> items,
             SqlCompareOptions compareOption,
             CultureInfo cInfo
-        ) {
+        )
+        {
             //
             // Verify the list is in order
             //

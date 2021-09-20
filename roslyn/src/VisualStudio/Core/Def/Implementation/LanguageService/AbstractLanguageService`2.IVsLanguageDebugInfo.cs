@@ -22,7 +22,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             int iLine,
             int iCol,
             out Guid pguidLanguageID
-        ) {
+        )
+        {
             try
             {
                 return LanguageDebugInfo.GetLanguageID(pBuffer, iLine, iCol, out pguidLanguageID);
@@ -37,7 +38,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             string pszName,
             out string pbstrMkDoc,
             out TextSpan pspanLocation
-        ) {
+        )
+        {
             try
             {
                 return LanguageDebugInfo.GetLocationOfName(
@@ -58,7 +60,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             int iCol,
             out string pbstrName,
             out int piLineOffset
-        ) {
+        )
+        {
             try
             {
                 return LanguageDebugInfo.GetNameOfLocation(
@@ -81,7 +84,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             int iCol,
             int cLines,
             out IVsEnumBSTR ppEnum
-        ) {
+        )
+        {
             try
             {
                 return LanguageDebugInfo.GetProximityExpressions(
@@ -114,7 +118,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             string pszName,
             uint dwFlags,
             out IVsEnumDebugName ppNames
-        ) {
+        )
+        {
             try
             {
                 return LanguageDebugInfo.ResolveName(pszName, dwFlags, out ppNames);
@@ -130,7 +135,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             int iLine,
             int iCol,
             TextSpan[] pCodeSpan
-        ) {
+        )
+        {
             try
             {
                 return LanguageDebugInfo.ValidateBreakpointLocation(

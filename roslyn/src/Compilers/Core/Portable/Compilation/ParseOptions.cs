@@ -81,7 +81,8 @@ namespace Microsoft.CodeAnalysis
         internal void ValidateOptions(
             ArrayBuilder<Diagnostic> builder,
             CommonMessageProvider messageProvider
-        ) {
+        )
+        {
             // Validate SpecifiedKind not Kind, to catch deprecated specified kinds:
             if (!SpecifiedKind.IsValid())
             {

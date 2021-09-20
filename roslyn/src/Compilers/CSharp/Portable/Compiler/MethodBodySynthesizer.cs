@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             MethodSymbol constructor,
             SynthesizedSubmissionFields previousSubmissionFields,
             CSharpCompilation compilation
-        ) {
+        )
+        {
             // Script field initializers have to be emitted after the call to the base constructor because they can refer to "this" instance.
             //
             // Unlike regular field initializers, initializers of global script variables can access "this" instance.
@@ -105,7 +106,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             MethodSymbol submissionConstructor,
             SynthesizedSubmissionFields synthesizedFields,
             CSharpCompilation compilation
-        ) {
+        )
+        {
             Debug.Assert(submissionConstructor.ParameterCount == 1);
 
             var submissionArrayReference = new BoundParameter(
@@ -264,7 +266,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         internal static BoundBlock ConstructAutoPropertyAccessorBody(
             SourceMemberMethodSymbol accessor
-        ) {
+        )
+        {
             Debug.Assert(
                 accessor.MethodKind == MethodKind.PropertyGet
                     || accessor.MethodKind == MethodKind.PropertySet
@@ -329,7 +332,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool isAddMethod,
             CSharpCompilation compilation,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             Debug.Assert(eventSymbol.HasAssociatedField);
             return eventSymbol.IsWindowsRuntimeEvent
               ? ConstructFieldLikeEventAccessorBody_WinRT(
@@ -360,7 +364,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool isAddMethod,
             CSharpCompilation compilation,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             CSharpSyntaxNode syntax = eventSymbol.CSharpSyntaxNode;
 
             MethodSymbol accessor = isAddMethod ? eventSymbol.AddMethod : eventSymbol.RemoveMethod;
@@ -489,7 +494,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool isAddMethod,
             CSharpCompilation compilation,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             CSharpSyntaxNode syntax = eventSymbol.CSharpSyntaxNode;
 
             TypeSymbol delegateType = eventSymbol.Type;

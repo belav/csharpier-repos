@@ -38,7 +38,8 @@ namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect
 
         public static OpenIdConnectOptions CreateOpenIdConnectOptions(
             Action<OpenIdConnectOptions> update
-        ) {
+        )
+        {
             var options = CreateOpenIdConnectOptions();
             update?.Invoke(options);
             return options;
@@ -66,7 +67,8 @@ namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect
             Action<OpenIdConnectOptions> options,
             Func<HttpContext, Task> handler,
             AuthenticationProperties properties
-        ) {
+        )
+        {
             var host = new HostBuilder().ConfigureWebHost(
                     builder =>
                         builder.UseTestServer()
@@ -88,7 +90,8 @@ namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect
                                             }
                                             else if (
                                                 req.Path == new PathString(ChallengeWithProperties)
-                                            ) {
+                                            )
+                                            {
                                                 await context.ChallengeAsync(
                                                     OpenIdConnectDefaults.AuthenticationScheme,
                                                     properties
@@ -96,7 +99,8 @@ namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect
                                             }
                                             else if (
                                                 req.Path == new PathString(ChallengeWithOutContext)
-                                            ) {
+                                            )
+                                            {
                                                 res.StatusCode = 401;
                                             }
                                             else if (req.Path == new PathString(Signin))
@@ -117,7 +121,8 @@ namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect
                                                 == new PathString(
                                                     "/signout_with_specific_redirect_uri"
                                                 )
-                                            ) {
+                                            )
+                                            {
                                                 await context.SignOutAsync(
                                                     OpenIdConnectDefaults.AuthenticationScheme,
                                                     new AuthenticationProperties()

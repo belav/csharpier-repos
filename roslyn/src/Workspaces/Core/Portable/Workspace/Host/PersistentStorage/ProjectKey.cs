@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.PersistentStorage
             string? filePath,
             string name,
             Checksum parseOptionsChecksum
-        ) {
+        )
+        {
             Solution = solution;
             Id = id;
             FilePath = filePath;

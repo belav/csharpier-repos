@@ -110,7 +110,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             string parentTagName,
             object availableDescriptors,
             object expectedDescriptors
-        ) {
+        )
+        {
             // Arrange
             var tagHelperBinder = new TagHelperBinder(
                 null,
@@ -326,7 +327,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             IReadOnlyList<KeyValuePair<string, string>> providedAttributes,
             object availableDescriptors,
             object expectedDescriptors
-        ) {
+        )
+        {
             // Arrange
             var tagHelperBinder = new TagHelperBinder(
                 null,

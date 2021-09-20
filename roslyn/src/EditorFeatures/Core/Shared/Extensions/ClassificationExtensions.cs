@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             this IEnumerable<TaggedText> parts,
             ITextSnapshot textSnapshot,
             ClassificationTypeMap typeMap
-        ) {
+        )
+        {
             var result = new List<ClassificationSpan>();
 
             var index = 0;

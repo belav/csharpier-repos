@@ -31,7 +31,8 @@ namespace System.Configuration
             SettingsAttributeDictionary attributes,
             bool throwOnErrorDeserializing,
             bool throwOnErrorSerializing
-        ) {
+        )
+        {
             Name = name;
             PropertyType = propertyType;
             Provider = provider;

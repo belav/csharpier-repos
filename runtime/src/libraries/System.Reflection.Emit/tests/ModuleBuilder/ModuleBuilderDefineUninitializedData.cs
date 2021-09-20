@@ -56,7 +56,8 @@ namespace System.Reflection.Emit.Tests
         [MemberData(nameof(Attributes_TestData))]
         public void DefineUnitializedData_EmptyName_ThrowsArgumentException(
             FieldAttributes attributes
-        ) {
+        )
+        {
             ModuleBuilder module = Helpers.DynamicModule();
             AssertExtensions.Throws<ArgumentException>(
                 "name",
@@ -68,7 +69,8 @@ namespace System.Reflection.Emit.Tests
         [MemberData(nameof(Attributes_TestData))]
         public void DefineUnitializedData_InvalidSize_ThrowsArgumentException(
             FieldAttributes attributes
-        ) {
+        )
+        {
             ModuleBuilder module = Helpers.DynamicModule();
             foreach (int size in new int[] { -1, 0, 0x003f0000, 0x003f0000 + 1 })
             {
@@ -83,7 +85,8 @@ namespace System.Reflection.Emit.Tests
         [MemberData(nameof(Attributes_TestData))]
         public void DefineUnitializedData_NullName_ThrowsArgumentNullException(
             FieldAttributes attributes
-        ) {
+        )
+        {
             ModuleBuilder module = Helpers.DynamicModule();
             AssertExtensions.Throws<ArgumentNullException>(
                 "name",
@@ -95,7 +98,8 @@ namespace System.Reflection.Emit.Tests
         [MemberData(nameof(Attributes_TestData))]
         public void DefineUninitalizedData_CreateGlobalFunctionsAlreadyCalled_ThrowsInvalidOperationException(
             FieldAttributes attributes
-        ) {
+        )
+        {
             ModuleBuilder module = Helpers.DynamicModule();
             module.CreateGlobalFunctions();
 

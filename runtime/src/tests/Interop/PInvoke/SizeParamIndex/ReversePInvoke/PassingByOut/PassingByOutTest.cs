@@ -113,7 +113,8 @@ public class ReversePInvoke_MashalArrayByOut_AsManagedTest
     public static bool TestMethodForByteArray_AsReversePInvokeByOut_AsCdecl(
         [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] out byte[] arrArg,
         out byte arraySize
-    ) {
+    )
+    {
         arrArg = Helper.GetExpChangeArray<byte>(20);
         arraySize = 20;
         return true;
@@ -123,7 +124,8 @@ public class ReversePInvoke_MashalArrayByOut_AsManagedTest
     public static bool TestMethodForSbyteArray_AsReversePInvokeByOut_AsCdecl(
         out sbyte arraySize,
         [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] out sbyte[] arrArg
-    ) {
+    )
+    {
         arrArg = Helper.GetExpChangeArray<sbyte>(sbyte.MaxValue);
         arraySize = sbyte.MaxValue;
         return true;
@@ -133,7 +135,8 @@ public class ReversePInvoke_MashalArrayByOut_AsManagedTest
     public static bool TestMethodForShortArray_AsReversePInvokeByOut_AsCdecl(
         [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] out short[] arrArg,
         out short arraySize
-    ) {
+    )
+    {
         arrArg = Helper.GetExpChangeArray<short>(20);
         arraySize = 20;
         return true;
@@ -143,7 +146,8 @@ public class ReversePInvoke_MashalArrayByOut_AsManagedTest
     public static bool TestMethodForShortArrayReturnNegativeSize_AsReversePInvokeByOut_AsCdecl(
         [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] out short[] arrArg,
         out short arraySize
-    ) {
+    )
+    {
         arrArg = Helper.GetExpChangeArray<short>(20);
         arraySize = -1;
         return true;
@@ -153,7 +157,8 @@ public class ReversePInvoke_MashalArrayByOut_AsManagedTest
     public static bool TestMethodForUshortArray_AsReversePInvokeByOut_AsCdecl(
         [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] out ushort[] arrArg,
         out ushort arraySize
-    ) {
+    )
+    {
         arrArg = Helper.GetExpChangeArray<ushort>(20);
         arraySize = 20;
         return true;
@@ -163,7 +168,8 @@ public class ReversePInvoke_MashalArrayByOut_AsManagedTest
     public static bool TestMethodForInt32Array_AsReversePInvokeByOut_AsCdecl(
         [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] out Int32[] arrArg,
         out Int32 arraySize
-    ) {
+    )
+    {
         arrArg = Helper.GetExpChangeArray<Int32>(20);
         arraySize = 20;
         return true;
@@ -173,7 +179,8 @@ public class ReversePInvoke_MashalArrayByOut_AsManagedTest
     public static bool TestMethodForUint32Array_AsReversePInvokeByOut_AsCdecl(
         [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] out UInt32[] arrArg,
         out UInt32 arraySize
-    ) {
+    )
+    {
         arrArg = Helper.GetExpChangeArray<UInt32>(20);
         arraySize = 20;
         return true;
@@ -183,7 +190,8 @@ public class ReversePInvoke_MashalArrayByOut_AsManagedTest
     public static bool TestMethodForLongArray_AsReversePInvokeByOut_AsCdecl(
         [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] out long[] arrArg,
         out long arraySize
-    ) {
+    )
+    {
         arrArg = Helper.GetExpChangeArray<long>(20);
         arraySize = 20;
         return true;
@@ -193,7 +201,8 @@ public class ReversePInvoke_MashalArrayByOut_AsManagedTest
     public static bool TestMethodForUlongArray_AsReversePInvokeByOut_AsCdecl(
         [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] out ulong[] arrArg,
         out ulong arraySize
-    ) {
+    )
+    {
         arrArg = Helper.GetExpChangeArray<ulong>(20);
         arraySize = 20;
         return true;
@@ -204,7 +213,8 @@ public class ReversePInvoke_MashalArrayByOut_AsManagedTest
         [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1, ArraySubType = UnmanagedType.BStr)]
             out string[] arrArg,
         out Int32 arraySize
-    ) {
+    )
+    {
         arrArg = Helper.GetExpChangeArray<string>(20);
         arraySize = 20;
         return true;

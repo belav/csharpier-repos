@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             INamedTypeSymbol attributeClass,
             ImmutableArray<TypedConstant> constructorArguments,
             ImmutableArray<KeyValuePair<string, TypedConstant>> namedArguments
-        ) {
+        )
+        {
             _attributeClass = attributeClass;
             _constructorArguments = constructorArguments.NullToEmpty();
             _namedArguments = namedArguments.NullToEmpty();

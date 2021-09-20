@@ -17,7 +17,8 @@ namespace Internal.Cryptography.Pal.AnyOS
     {
         internal static SubjectIdentifierOrKey ToSubjectIdentifierOrKey(
             this OriginatorIdentifierOrKeyAsn originator
-        ) {
+        )
+        {
             if (originator.IssuerAndSerialNumber.HasValue)
             {
                 var name = new X500DistinguishedName(
@@ -121,7 +122,8 @@ namespace Internal.Cryptography.Pal.AnyOS
                                 reader.TryReadPrimitiveOctetString(
                                     out ReadOnlyMemory<byte> contents
                                 )
-                            ) {
+                            )
+                            {
                                 saltLen = contents.Length;
                             }
                             else

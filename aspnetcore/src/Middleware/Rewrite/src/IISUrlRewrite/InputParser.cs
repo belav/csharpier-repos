@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite
         public InputParser(
             IISRewriteMapCollection? rewriteMaps,
             bool alwaysUseManagedServerVariables
-        ) {
+        )
+        {
             _rewriteMaps = rewriteMaps;
             _alwaysUseManagedServerVariables = alwaysUseManagedServerVariables;
         }
@@ -90,7 +91,8 @@ namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite
             ParserContext context,
             IList<PatternSegment> results,
             UriMatchPart uriMatchPart
-        ) {
+        )
+        {
             context.Mark();
             // Four main cases:
             // 1. {NAME} - Server Variable, create lambda to get the part of the context

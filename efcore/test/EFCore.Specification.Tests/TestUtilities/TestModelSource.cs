@@ -25,7 +25,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             DbContext context,
             IConventionSetBuilder conventionSetBuilder,
             ModelDependencies modelDependencies
-        ) {
+        )
+        {
             var modelBuilder = new ModelBuilder(
                 conventionSetBuilder.CreateConventionSet(),
                 modelDependencies

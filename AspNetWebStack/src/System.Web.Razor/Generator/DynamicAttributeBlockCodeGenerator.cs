@@ -26,7 +26,8 @@ namespace System.Web.Razor.Generator
         public DynamicAttributeBlockCodeGenerator(
             LocationTagged<string> prefix,
             SourceLocation valueStart
-        ) {
+        )
+        {
             Prefix = prefix;
             ValueStart = valueStart;
         }

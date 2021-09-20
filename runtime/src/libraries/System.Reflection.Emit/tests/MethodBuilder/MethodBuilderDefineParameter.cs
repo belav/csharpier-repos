@@ -209,7 +209,8 @@ namespace System.Reflection.Emit.Tests
             ParameterAttributes parameterAttributes,
             Type[] paramTypes,
             Type returnType
-        ) {
+        )
+        {
             TypeBuilder type = Helpers.DynamicType(typeAttributes);
             MethodBuilder method = type.DefineMethod(
                 "TestMethod",
@@ -237,7 +238,8 @@ namespace System.Reflection.Emit.Tests
             TypeAttributes typeAttributes,
             MethodAttributes methodAttributes,
             ParameterAttributes parameterAttributes
-        ) {
+        )
+        {
             TypeBuilder type = Helpers.DynamicType(typeAttributes);
             MethodBuilder method = type.DefineMethod("TestMethod", methodAttributes);
 
@@ -254,7 +256,8 @@ namespace System.Reflection.Emit.Tests
             string expectedName,
             ParameterAttributes expectedAttributes,
             int expectedPosition
-        ) {
+        )
+        {
             // This constant maps to ParameterAttributes.ReservedMask that is not available in the contract.
             const int ReservedMaskParameterAttribute = 0xF000;
             Assert.Equal(expectedName, parameter.Name);

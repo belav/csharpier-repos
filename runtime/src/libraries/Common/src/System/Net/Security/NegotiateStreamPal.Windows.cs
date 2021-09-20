@@ -40,7 +40,8 @@ namespace System.Net.Security
             string package,
             bool isServer,
             NetworkCredential credential
-        ) {
+        )
+        {
             SafeSspiAuthDataHandle? authData = null;
             try
             {
@@ -123,7 +124,8 @@ namespace System.Net.Security
             ChannelBinding? channelBinding,
             ref byte[]? resultBlob,
             ref ContextFlagsPal contextFlags
-        ) {
+        )
+        {
             InputSecurityBuffers inputBuffers = default;
             if (incomingBlob != null)
             {
@@ -166,7 +168,8 @@ namespace System.Net.Security
         internal static SecurityStatusPal CompleteAuthToken(
             ref SafeDeleteContext? securityContext,
             byte[]? incomingBlob
-        ) {
+        )
+        {
             // There is only one SafeDeleteContext type on Windows which is SafeDeleteSslContext so this cast is safe.
             SafeDeleteSslContext? sslContext = (SafeDeleteSslContext?)securityContext;
             var inSecurityBuffer = new SecurityBuffer(
@@ -191,7 +194,8 @@ namespace System.Net.Security
             ChannelBinding? channelBinding,
             ref byte[]? resultBlob,
             ref ContextFlagsPal contextFlags
-        ) {
+        )
+        {
             InputSecurityBuffers inputBuffers = default;
             if (incomingBlob != null)
             {
@@ -243,7 +247,8 @@ namespace System.Net.Security
             byte[] buffer,
             int offset,
             int count
-        ) {
+        )
+        {
             // validate offset within length
             if (offset < 0 || offset > (buffer == null ? 0 : buffer.Length))
             {
@@ -308,7 +313,8 @@ namespace System.Net.Security
             int offset,
             int count,
             [AllowNull] ref byte[] output
-        ) {
+        )
+        {
             SecPkgContext_Sizes sizes = default;
             bool success = SSPIWrapper.QueryBlittableContextAttributes(
                 GlobalSSPI.SSPIAuth,

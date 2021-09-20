@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.QuickInfo
             ImmutableArray<string> tags,
             ImmutableArray<QuickInfoSection> sections,
             ImmutableArray<TextSpan> relatedSpans
-        ) {
+        )
+        {
             Span = span;
             Tags = tags.IsDefault ? ImmutableArray<string>.Empty : tags;
             Sections = sections.IsDefault ? ImmutableArray<QuickInfoSection>.Empty : sections;
@@ -47,7 +48,8 @@ namespace Microsoft.CodeAnalysis.QuickInfo
             ImmutableArray<string> tags = default,
             ImmutableArray<QuickInfoSection> sections = default,
             ImmutableArray<TextSpan> relatedSpans = default
-        ) {
+        )
+        {
             return new QuickInfoItem(span, tags, sections, relatedSpans);
         }
     }

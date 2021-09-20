@@ -47,7 +47,8 @@ namespace System.CodeDom.Tests
             CodeExpression expression,
             CodeStatement[] trueStatements,
             CodeStatement[] falseStatements
-        ) {
+        )
+        {
             if (falseStatements.Length == 0)
             {
                 if (trueStatements.Length == 0)

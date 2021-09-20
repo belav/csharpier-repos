@@ -39,7 +39,8 @@ namespace Microsoft.Extensions.Logging
             {
                 if (
                     configurationSection.Key.Equals(LogLevelKey, StringComparison.OrdinalIgnoreCase)
-                ) {
+                )
+                {
                     // Load global category defaults
                     LoadRules(options, configurationSection, null);
                 }
@@ -62,13 +63,15 @@ namespace Microsoft.Extensions.Logging
             LoggerFilterOptions options,
             IConfigurationSection configurationSection,
             string logger
-        ) {
+        )
+        {
             foreach (
                 System.Collections.Generic.KeyValuePair<
                     string,
                     string
                 > section in configurationSection.AsEnumerable(true)
-            ) {
+            )
+            {
                 if (TryGetSwitch(section.Value, out LogLevel level))
                 {
                     string category = section.Key;

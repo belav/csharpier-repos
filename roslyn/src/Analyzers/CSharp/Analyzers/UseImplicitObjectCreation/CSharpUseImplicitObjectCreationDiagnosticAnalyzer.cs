@@ -83,7 +83,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseImplicitObjectCreation
                 && objectCreation.Parent.Parent.Parent
                     is VariableDeclarationSyntax variableDeclaration
                 && !variableDeclaration.Type.IsVar
-            ) {
+            )
+            {
                 typeNode = variableDeclaration.Type;
 
                 var helper = CSharpUseImplicitTypeHelper.Instance;
@@ -95,7 +96,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseImplicitObjectCreation
                         optionSet,
                         cancellationToken
                     ).IsStylePreferred
-                ) {
+                )
+                {
                     // this is a case where the user would prefer 'var'.  don't offer to use an implicit object here.
                     return;
                 }

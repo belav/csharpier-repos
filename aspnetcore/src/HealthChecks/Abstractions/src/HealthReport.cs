@@ -19,13 +19,14 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks
         public HealthReport(
             IReadOnlyDictionary<string, HealthReportEntry> entries,
             TimeSpan totalDuration
-        ) : this(
-            entries,
-            CalculateAggregateStatus(
-                entries?.Values ?? throw new ArgumentNullException(nameof(entries))
-            ),
-            totalDuration
-        ) { }
+        )
+            : this(
+                entries,
+                CalculateAggregateStatus(
+                    entries?.Values ?? throw new ArgumentNullException(nameof(entries))
+                ),
+                totalDuration
+            ) { }
 
         /// <summary>
         /// Create a new <see cref="HealthReport"/> from the specified results.
@@ -37,7 +38,8 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks
             IReadOnlyDictionary<string, HealthReportEntry> entries,
             HealthStatus status,
             TimeSpan totalDuration
-        ) {
+        )
+        {
             Entries = entries;
             Status = status;
             TotalDuration = totalDuration;

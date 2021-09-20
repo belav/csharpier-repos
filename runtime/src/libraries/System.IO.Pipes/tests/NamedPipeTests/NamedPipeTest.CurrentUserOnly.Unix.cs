@@ -33,7 +33,8 @@ namespace System.IO.Pipes.Tests
         public async Task Connection_UnderDifferentUsers_BehavesAsExpected(
             PipeOptions serverPipeOptions,
             PipeOptions clientPipeOptions
-        ) {
+        )
+        {
             // Use an absolute path, otherwise, the test can fail if the remote invoker and test runner have
             // different working and/or temp directories.
             string pipeName = "/tmp/" + Path.GetRandomFileName();
@@ -49,7 +50,8 @@ namespace System.IO.Pipes.Tests
                     PipeTransmissionMode.Byte,
                     serverPipeOptions | PipeOptions.Asynchronous
                 )
-            ) {
+            )
+            {
                 Task serverTask = server.WaitForConnectionAsync(CancellationToken.None);
 
                 using (
@@ -73,7 +75,8 @@ namespace System.IO.Pipes.Tests
         private static void ConnectClientFromRemoteInvoker(
             string pipeName,
             string isCurrentUserOnly
-        ) {
+        )
+        {
             PipeOptions pipeOptions = bool.Parse(isCurrentUserOnly)
                 ? PipeOptions.CurrentUserOnly
                 : PipeOptions.None;
@@ -84,7 +87,8 @@ namespace System.IO.Pipes.Tests
                     PipeDirection.InOut,
                     pipeOptions
                 )
-            ) {
+            )
+            {
                 if (pipeOptions == PipeOptions.CurrentUserOnly)
                     Assert.Throws<UnauthorizedAccessException>(() => client.Connect());
                 else

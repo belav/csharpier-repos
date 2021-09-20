@@ -116,7 +116,8 @@ namespace Internal.TypeSystem
         public override TypeDesc InstantiateSignature(
             Instantiation typeInstantiation,
             Instantiation methodInstantiation
-        ) {
+        )
+        {
             TypeDesc elementType = this.ElementType;
             TypeDesc instantiatedElementType = elementType.InstantiateSignature(
                 typeInstantiation,
@@ -334,7 +335,8 @@ namespace Internal.TypeSystem
         public override MethodDesc InstantiateSignature(
             Instantiation typeInstantiation,
             Instantiation methodInstantiation
-        ) {
+        )
+        {
             TypeDesc owningType = this.OwningType;
             TypeDesc instantiatedOwningType = owningType.InstantiateSignature(
                 typeInstantiation,

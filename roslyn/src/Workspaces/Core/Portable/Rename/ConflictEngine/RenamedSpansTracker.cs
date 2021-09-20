@@ -63,7 +63,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
             TextSpan oldSpan,
             TextSpan newSpan,
             List<(TextSpan oldSpan, TextSpan newSpan)> modifiedSubSpans
-        ) {
+        )
+        {
             if (!_documentToComplexifiedSpansMap.TryGetValue(documentId, out var spans))
             {
                 spans = new List<MutableComplexifiedSpan>();
@@ -107,7 +108,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                 if (
                     startingPosition >= c.OriginalSpan.End
                     && !appliedTextSpans.Any(s => s.Contains(c.OriginalSpan))
-                ) {
+                )
+                {
                     appliedTextSpans.Add(c.OriginalSpan);
                     adjustedStartingPosition += c.NewSpan.Length - c.OriginalSpan.Length;
                 }
@@ -117,7 +119,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                         var (oldSpan, newSpan) in c.ModifiedSubSpans.OrderByDescending(
                             t => t.oldSpan.Start
                         )
-                    ) {
+                    )
+                    {
                         if (!appliedTextSpans.Any(s => s.Contains(oldSpan)))
                         {
                             if (startingPosition == oldSpan.Start)
@@ -187,7 +190,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
             bool replacementTextValid,
             AnnotationTable<RenameAnnotation> renameAnnotations,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             foreach (var documentId in documentIds)
             {
                 if (this.IsDocumentChanged(documentId))
@@ -222,7 +226,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                             documentId,
                             out var complexifiedSpans
                         )
-                    ) {
+                    )
+                    {
                         complexifiedSpans.Clear();
                     }
 

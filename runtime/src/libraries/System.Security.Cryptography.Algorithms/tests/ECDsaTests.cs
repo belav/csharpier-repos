@@ -279,7 +279,8 @@ namespace System.Security.Cryptography.Algorithms.Tests
                 int outputLength;
                 while (
                     !ecdsa.TrySignData(input, output, HashAlgorithmName.SHA256, out outputLength)
-                ) {
+                )
+                {
                     output = new byte[output.Length * 2];
                 }
 

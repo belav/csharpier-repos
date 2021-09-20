@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider.CodeSt
         protected override void UpdateOptions(
             AnalyzerConfigOptions editorConfigOptions,
             OptionSet visualStudioOptions
-        ) {
+        )
+        {
             var qualifySettings = GetQualifyCodeStyleOptions(
                 editorConfigOptions,
                 visualStudioOptions,
@@ -90,7 +91,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider.CodeSt
             AnalyzerConfigOptions options,
             OptionSet visualStudioOptions,
             OptionUpdater updater
-        ) {
+        )
+        {
             yield return CodeStyleSetting.Create(
                 option: CodeStyleOptions2.QualifyFieldAccess,
                 description: EditorFeaturesResources.Qualify_field_access_with_this_or_Me,
@@ -133,7 +135,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider.CodeSt
             AnalyzerConfigOptions options,
             OptionSet visualStudioOptions,
             OptionUpdater updater
-        ) {
+        )
+        {
             yield return CodeStyleSetting.Create(
                 option: CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration,
                 description: EditorFeaturesResources.For_locals_parameters_and_members,
@@ -158,7 +161,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider.CodeSt
             AnalyzerConfigOptions options,
             OptionSet visualStudioOptions,
             OptionUpdater updater
-        ) {
+        )
+        {
             yield return CodeStyleSetting.Create(
                 option: CodeStyleOptions2.PreferCoalesceExpression,
                 description: EditorFeaturesResources.Prefer_coalesce_expression,
@@ -186,7 +190,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider.CodeSt
             AnalyzerConfigOptions options,
             OptionSet visualStudioOptions,
             OptionUpdater updater
-        ) {
+        )
+        {
             yield return CodeStyleSetting.Create(
                 option: CodeStyleOptions2.PreferReadonly,
                 description: EditorFeaturesResources.Prefer_readonly_fields,
@@ -200,7 +205,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider.CodeSt
             AnalyzerConfigOptions options,
             OptionSet visualStudioOptions,
             OptionUpdater updater
-        ) {
+        )
+        {
             yield return CodeStyleSetting.Create(
                 option: CodeStyleOptions2.PreferAutoProperties,
                 description: EditorFeaturesResources.analyzer_Prefer_auto_properties,
@@ -221,7 +227,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider.CodeSt
             AnalyzerConfigOptions options,
             OptionSet visualStudioOptions,
             OptionUpdater updater
-        ) {
+        )
+        {
             yield return CodeStyleSetting.Create(
                 CodeStyleOptions2.PreferObjectInitializer,
                 description: EditorFeaturesResources.Prefer_object_initializer,
@@ -291,7 +298,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider.CodeSt
             AnalyzerConfigOptions options,
             OptionSet visualStudioOptions,
             OptionUpdater updater
-        ) {
+        )
+        {
             var enumValues = new[]
             {
                 ParenthesesPreference.AlwaysForClarity,
@@ -347,7 +355,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider.CodeSt
             AnalyzerConfigOptions options,
             OptionSet visualStudioOptions,
             OptionUpdater updater
-        ) {
+        )
+        {
             yield return CodeStyleSetting.Create(
                 option: CodeStyleOptions2.UnusedParameters,
                 description: EditorFeaturesResources.Avoid_unused_parameters,

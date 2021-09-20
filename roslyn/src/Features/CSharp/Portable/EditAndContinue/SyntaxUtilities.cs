@@ -145,7 +145,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             SyntaxNode rightRoot,
             out SyntaxNode leftNode,
             out SyntaxNode rightNodeOpt
-        ) {
+        )
+        {
             leftNode = leftRoot;
             rightNodeOpt = rightRoot;
             while (true)
@@ -185,7 +186,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             SyntaxNode leftRoot,
             SyntaxNode rightRoot,
             SyntaxNode leftNode
-        ) {
+        )
+        {
             // Finding a partner of a zero-width node is complicated and not supported atm:
             Debug.Assert(leftNode.FullSpan.Length > 0);
             Debug.Assert(leftNode.SyntaxTree == leftRoot.SyntaxTree);
@@ -223,7 +225,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                     SyntaxKind.PropertyDeclaration,
                     out PropertyDeclarationSyntax property
                 )
-            ) {
+            )
+            {
                 return TryGetEffectiveGetterBody(property.ExpressionBody, property.AccessorList);
             }
 
@@ -232,7 +235,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                     SyntaxKind.IndexerDeclaration,
                     out IndexerDeclarationSyntax indexer
                 )
-            ) {
+            )
+            {
                 return TryGetEffectiveGetterBody(indexer.ExpressionBody, indexer.AccessorList);
             }
 
@@ -242,7 +246,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
         public static SyntaxNode TryGetEffectiveGetterBody(
             ArrowExpressionClauseSyntax propertyBody,
             AccessorListSyntax accessorList
-        ) {
+        )
+        {
             if (propertyBody != null)
             {
                 return propertyBody.Expression;
@@ -283,7 +288,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                     SyntaxKind.ConstructorDeclaration,
                     out ConstructorDeclarationSyntax ctor
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -295,7 +301,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             if (
                 property.Modifiers.Any(SyntaxKind.AbstractKeyword)
                 || property.Modifiers.Any(SyntaxKind.ExternKeyword)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -348,7 +355,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                 node.IsKind(SyntaxKind.AwaitExpression)
                 || node.IsKind(SyntaxKind.YieldBreakStatement)
                 || node.IsKind(SyntaxKind.YieldReturnStatement)
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -356,7 +364,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             if (
                 node is CommonForEachStatementSyntax foreachStatement
                 && foreachStatement.AwaitKeyword.IsKind(SyntaxKind.AwaitKeyword)
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -368,7 +377,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                     out LocalDeclarationStatementSyntax localDecl
                 )
                 && localDecl.AwaitKeyword.IsKind(SyntaxKind.AwaitKeyword)
-            ) {
+            )
+            {
                 return true;
             }
 

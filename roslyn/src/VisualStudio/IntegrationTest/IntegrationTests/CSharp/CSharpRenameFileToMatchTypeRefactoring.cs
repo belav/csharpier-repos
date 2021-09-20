@@ -19,9 +19,8 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
     {
         protected override string LanguageName => LanguageNames.CSharp;
 
-        public CSharpRenameFileToMatchTypeRefactoring(
-            VisualStudioInstanceFactory instanceFactory
-        ) : base(instanceFactory, nameof(CSharpGenerateFromUsage)) { }
+        public CSharpRenameFileToMatchTypeRefactoring(VisualStudioInstanceFactory instanceFactory)
+            : base(instanceFactory, nameof(CSharpGenerateFromUsage)) { }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.CodeActionsMoveType)]
         public void RenameFileToMatchType_ExistingCode()

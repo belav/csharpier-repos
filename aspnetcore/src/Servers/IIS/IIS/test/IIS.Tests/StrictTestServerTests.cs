@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
             if (
                 TestSink.Writes.FirstOrDefault(w => w.LogLevel > LogLevel.Information)
                 is WriteContext writeContext
-            ) {
+            )
+            {
                 throw new XunitException($"Unexpected log: {writeContext}");
             }
         }

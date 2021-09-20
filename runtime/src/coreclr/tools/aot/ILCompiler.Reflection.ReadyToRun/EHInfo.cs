@@ -103,7 +103,8 @@ namespace ILCompiler.Reflection.ReadyToRun
             if (
                 (Flags & CorExceptionFlag.COR_ILEXCEPTION_CLAUSE_KIND_MASK)
                 == CorExceptionFlag.COR_ILEXCEPTION_CLAUSE_NONE
-            ) {
+            )
+            {
                 if (reader.Composite)
                 {
                     // TODO: EH clauses in composite mode
@@ -222,7 +223,8 @@ namespace ILCompiler.Reflection.ReadyToRun
             int methodRva,
             int offset,
             int clauseCount
-        ) {
+        )
+        {
             _readyToRunReader = reader;
             RelativeVirtualAddress = ehInfoRva;
             MethodRelativeVirtualAddress = methodRva;

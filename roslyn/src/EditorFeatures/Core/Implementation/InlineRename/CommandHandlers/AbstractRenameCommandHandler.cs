@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
         protected AbstractRenameCommandHandler(
             IThreadingContext threadingContext,
             InlineRenameService renameService
-        ) {
+        )
+        {
             _threadingContext = threadingContext;
             _renameService = renameService;
         }
@@ -83,7 +84,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                     singleSpan.Start,
                     out var containingSpan
                 ) && containingSpan.Contains(singleSpan)
-            ) {
+            )
+            {
                 actionIfInsideActiveSpan(_renameService.ActiveSession, containingSpan);
             }
             else

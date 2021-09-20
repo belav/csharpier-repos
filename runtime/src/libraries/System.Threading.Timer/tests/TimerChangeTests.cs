@@ -99,7 +99,8 @@ namespace System.Threading.Tests
                     TimeSpan.FromSeconds(500),
                     TimeSpan.FromMilliseconds(50)
                 )
-            ) {
+            )
+            {
                 Assert.False(
                     are.WaitOne(TimeSpan.FromMilliseconds(100)),
                     "The reset event should not have been set yet"

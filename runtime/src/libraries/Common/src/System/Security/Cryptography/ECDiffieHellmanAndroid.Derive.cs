@@ -23,7 +23,8 @@ namespace System.Security.Cryptography
                 HashAlgorithmName hashAlgorithm,
                 byte[]? secretPrepend,
                 byte[]? secretAppend
-            ) {
+            )
+            {
                 if (otherPartyPublicKey == null)
                     throw new ArgumentNullException(nameof(otherPartyPublicKey));
                 if (string.IsNullOrEmpty(hashAlgorithm.Name))
@@ -49,7 +50,8 @@ namespace System.Security.Cryptography
                 byte[]? hmacKey,
                 byte[]? secretPrepend,
                 byte[]? secretAppend
-            ) {
+            )
+            {
                 if (otherPartyPublicKey == null)
                     throw new ArgumentNullException(nameof(otherPartyPublicKey));
                 if (string.IsNullOrEmpty(hashAlgorithm.Name))
@@ -74,7 +76,8 @@ namespace System.Security.Cryptography
                 ECDiffieHellmanPublicKey otherPartyPublicKey,
                 byte[] prfLabel,
                 byte[] prfSeed
-            ) {
+            )
+            {
                 if (otherPartyPublicKey == null)
                     throw new ArgumentNullException(nameof(otherPartyPublicKey));
                 if (prfLabel == null)
@@ -98,7 +101,8 @@ namespace System.Security.Cryptography
             private byte[]? DeriveSecretAgreement(
                 ECDiffieHellmanPublicKey otherPartyPublicKey,
                 IncrementalHash? hasher
-            ) {
+            )
+            {
                 Debug.Assert(otherPartyPublicKey != null);
 
                 // Ensure that this ECDH object contains a private key by attempting a parameter export
@@ -185,7 +189,8 @@ namespace System.Security.Cryptography
                             secret,
                             out int usedBufferLength
                         )
-                    ) {
+                    )
+                    {
                         throw new CryptographicException();
                     }
 

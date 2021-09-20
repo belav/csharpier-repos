@@ -1831,7 +1831,8 @@ namespace System.Numerics.Tests
             NumberFormatInfo provider,
             int precision,
             StringFormatter formatter
-        ) {
+        )
+        {
             string test;
 
             // Scenario 1: Large BigInteger - positive
@@ -1941,7 +1942,8 @@ namespace System.Numerics.Tests
             int precision,
             StringFormatter formatter,
             bool expectError = false
-        ) {
+        )
+        {
             string test;
 
             // Scenario 1: Large BigInteger - positive
@@ -2107,7 +2109,8 @@ namespace System.Numerics.Tests
             string negativeSign,
             int precision,
             StringFormatter formatter
-        ) {
+        )
+        {
             string test;
 
             // Scenario 1: Large BigInteger - positive
@@ -2376,7 +2379,8 @@ namespace System.Numerics.Tests
             string input,
             int precision,
             NumberFormatInfo nfi
-        ) {
+        )
+        {
             bool IsNeg = false;
             char[] temp = input.ToCharArray();
             char[] temp2;
@@ -2523,7 +2527,8 @@ namespace System.Numerics.Tests
                             nfi.NumberDecimalSeparator.Length
                         )
                         .Equals(nfi.NumberDecimalSeparator)
-                ) {
+                )
+                {
                     output =
                         output.Substring(0, expPlace - nfi.NumberDecimalSeparator.Length)
                         + output.Substring(expPlace);
@@ -2726,7 +2731,8 @@ namespace System.Numerics.Tests
             string input,
             int precision,
             NumberFormatInfo nfi
-        ) {
+        )
+        {
             bool IsNeg = false;
             string output = input;
 
@@ -2878,7 +2884,8 @@ namespace System.Numerics.Tests
                         + ZeroString(output.Length - nfi.NumberDecimalSeparator.Length)
                     )
                 )
-            ) {
+            )
+            {
                 output = nfi.NegativeSign + output;
             }
 
@@ -2889,7 +2896,8 @@ namespace System.Numerics.Tests
             string input,
             int precision,
             NumberFormatInfo nfi
-        ) {
+        )
+        {
             bool IsNeg = false;
             string output = input;
 
@@ -2935,7 +2943,8 @@ namespace System.Numerics.Tests
             string input,
             int precision,
             NumberFormatInfo nfi
-        ) {
+        )
+        {
             bool IsNeg = false;
             string output = input;
 
@@ -3061,7 +3070,8 @@ namespace System.Numerics.Tests
             string input,
             int precision,
             NumberFormatInfo nfi
-        ) {
+        )
+        {
             bool IsNeg = false;
             char[] temp = input.ToCharArray();
             char[] temp2;
@@ -3161,7 +3171,8 @@ namespace System.Numerics.Tests
             StringFormatter formatter,
             string added,
             int placesAfter
-        ) {
+        )
+        {
             StringFormatter sf = delegate(string input, int precision, NumberFormatInfo nfi)
             {
                 string temp = formatter(input, precision, nfi);
@@ -3181,7 +3192,8 @@ namespace System.Numerics.Tests
         private static StringFormatter CombinedFormatter(
             StringFormatter posFormatter,
             StringFormatter negFormatter
-        ) {
+        )
+        {
             return CombinedFormatter(posFormatter, negFormatter, posFormatter);
         }
 
@@ -3189,7 +3201,8 @@ namespace System.Numerics.Tests
             StringFormatter posFormatter,
             StringFormatter negFormatter,
             StringFormatter zeroFormatter
-        ) {
+        )
+        {
             return CombinedFormatter(posFormatter, negFormatter, zeroFormatter, false);
         }
 
@@ -3198,7 +3211,8 @@ namespace System.Numerics.Tests
             StringFormatter negFormatter,
             StringFormatter zeroFormatter,
             bool negInherited
-        ) {
+        )
+        {
             StringFormatter sf = delegate(string input, int precision, NumberFormatInfo nfi)
             {
                 string temp = string.Empty;
@@ -3242,7 +3256,8 @@ namespace System.Numerics.Tests
             string format,
             string expectedResult,
             bool expectError = false
-        ) {
+        )
+        {
             VerifyToString(
                 test,
                 format: format,
@@ -3258,7 +3273,8 @@ namespace System.Numerics.Tests
             IFormatProvider provider,
             bool expectError,
             string expectedResult
-        ) {
+        )
+        {
             bool hasFormat = !string.IsNullOrEmpty(format);
             bool hasProvider = provider != null;
             string result = null;
@@ -3322,7 +3338,8 @@ namespace System.Numerics.Tests
             IFormatProvider provider,
             bool expectError,
             string expectedResult
-        ) {
+        )
+        {
             try
             {
                 BigInteger bi = BigInteger.Parse(test, provider);
@@ -3548,7 +3565,8 @@ namespace System.Numerics.Tests
             if (
                 ((chars[chars.Length - 1] == 0) && (chars[chars.Length - 2] < 8))
                 || ((chars[chars.Length - 1] == 15) && (chars[chars.Length - 2] > 7))
-            ) {
+            )
+            {
                 start--;
             }
             for (; start >= 0; start--)
@@ -3673,7 +3691,8 @@ namespace System.Numerics.Tests
             int[] sizes,
             string point,
             int places
-        ) {
+        )
+        {
             string output = string.Empty;
             int currentspot = input.Length - 1;
             int currentsize = 0;

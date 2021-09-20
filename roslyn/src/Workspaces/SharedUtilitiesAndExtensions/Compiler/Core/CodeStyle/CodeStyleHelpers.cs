@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
             string arg,
             CodeStyleOption2<string> defaultValue,
             [NotNullWhen(true)] out CodeStyleOption2<string>? option
-        ) {
+        )
+        {
             if (
                 TryGetCodeStyleValueAndOptionalNotification(
                     arg,
@@ -24,7 +25,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
                     out var value,
                     out var notification
                 )
-            ) {
+            )
+            {
                 option = new CodeStyleOption2<string>(value, notification);
                 return true;
             }
@@ -37,7 +39,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
             string arg,
             CodeStyleOption2<bool> defaultValue,
             out CodeStyleOption2<bool> option
-        ) {
+        )
+        {
             if (
                 TryGetCodeStyleValueAndOptionalNotification(
                     arg,
@@ -45,7 +48,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
                     out var value,
                     out var notification
                 )
-            ) {
+            )
+            {
                 // First value has to be true or false.  Anything else is unsupported.
                 if (bool.TryParse(value, out var isEnabled))
                 {
@@ -86,7 +90,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
             NotificationOption2 defaultNotification,
             [NotNullWhen(true)] out string? value,
             [NotNullWhen(true)] out NotificationOption2? notification
-        ) {
+        )
+        {
             var args = arg.Split(':');
             Debug.Assert(args.Length > 0);
 
@@ -151,7 +156,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
             T defaultValue,
             ImmutableArray<IOption2>.Builder optionsBuilder,
             params OptionStorageLocation2[] storageLocations
-        ) {
+        )
+        {
             var option = new Option2<T>(feature, group, name, defaultValue, storageLocations);
             optionsBuilder.Add(option);
             return option;
@@ -216,7 +222,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         > ParseUnusedExpressionAssignmentPreference(
             string optionString,
             CodeStyleOption2<UnusedValuePreference> defaultCodeStyleOption
-        ) {
+        )
+        {
             if (
                 TryGetCodeStyleValueAndOptionalNotification(
                     optionString,
@@ -224,7 +231,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
                     out var value,
                     out var notification
                 )
-            ) {
+            )
+            {
                 return new CodeStyleOption2<UnusedValuePreference>(
                     s_unusedExpressionAssignmentPreferenceMap.GetValueOrDefault(value),
                     notification
@@ -237,7 +245,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         private static string GetUnusedExpressionAssignmentPreferenceEditorConfigString(
             CodeStyleOption2<UnusedValuePreference> option,
             CodeStyleOption2<UnusedValuePreference> defaultValue
-        ) {
+        )
+        {
             Debug.Assert(s_unusedExpressionAssignmentPreferenceMap.ContainsValue(option.Value));
             var value =
                 s_unusedExpressionAssignmentPreferenceMap.GetKeyOrDefault(option.Value)

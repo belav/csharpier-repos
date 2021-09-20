@@ -26,7 +26,8 @@ namespace Microsoft.AspNetCore.Http
             Stream destination,
             long? count,
             CancellationToken cancel
-        ) {
+        )
+        {
             return CopyToAsync(source, destination, count, DefaultBufferSize, cancel);
         }
 
@@ -43,7 +44,8 @@ namespace Microsoft.AspNetCore.Http
             long? count,
             int bufferSize,
             CancellationToken cancel
-        ) {
+        )
+        {
             long? bytesRemaining = count;
 
             var buffer = ArrayPool<byte>.Shared.Rent(bufferSize);

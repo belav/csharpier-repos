@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 SemanticDocument document,
                 SyntaxNode interfaceNode,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var state = new State();
                 if (
                     !await state.TryInitializeConversionAsync(
@@ -41,7 +42,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                             cancellationToken
                         )
                         .ConfigureAwait(false)
-                ) {
+                )
+                {
                     return null;
                 }
 
@@ -53,12 +55,14 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 SemanticDocument document,
                 SyntaxNode node,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (service.IsImplicitConversionGeneration(node))
                 {
                     if (
                         !TryInitializeImplicitConversion(service, document, node, cancellationToken)
-                    ) {
+                    )
+                    {
                         return SpecializedTasks.False;
                     }
                 }
@@ -66,7 +70,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 {
                     if (
                         !TryInitializeExplicitConversion(service, document, node, cancellationToken)
-                    ) {
+                    )
+                    {
                         return SpecializedTasks.False;
                     }
                 }
@@ -79,7 +84,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 SemanticDocument document,
                 SyntaxNode node,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 MethodKind = MethodKind.Conversion;
                 if (
                     !service.TryInitializeExplicitConversionState(
@@ -91,7 +97,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                         out var methodSymbol,
                         out var typeToGenerateIn
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -117,7 +124,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 SemanticDocument document,
                 SyntaxNode node,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 MethodKind = MethodKind.Conversion;
                 if (
                     !service.TryInitializeImplicitConversionState(
@@ -129,7 +137,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                         out var methodSymbol,
                         out var typeToGenerateIn
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 

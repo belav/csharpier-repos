@@ -1236,7 +1236,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                 public async ValueTask<ConnectionContext> ConnectAsync(
                     EndPoint endPoint,
                     CancellationToken cancellationToken = default
-                ) {
+                )
+                {
                     var testConnection = _testConnectionFactory();
 
                     _testConnectionTcs.SetResult(testConnection);
@@ -1277,7 +1278,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                 public DisposeInterceptingConnectionContextDecorator(
                     ConnectionContext inner,
                     ReconnectingConnectionFactory reconnectingConnectionFactory
-                ) {
+                )
+                {
                     _inner = inner;
                     _reconnectingConnectionFactory = reconnectingConnectionFactory;
                 }

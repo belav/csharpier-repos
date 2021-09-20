@@ -44,7 +44,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InlineRename
         public VisualStudioInlineRenameUndoManagerServiceFactory(
             InlineRenameService inlineRenameService,
             IVsEditorAdaptersFactoryService editorAdaptersFactoryService
-        ) {
+        )
+        {
             _inlineRenameService = inlineRenameService;
             _editorAdaptersFactoryService = editorAdaptersFactoryService;
         }
@@ -106,7 +107,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InlineRename
                 Workspace workspace,
                 ITextBuffer subjectBuffer,
                 IInlineRenameSession inlineRenameSession
-            ) {
+            )
+            {
                 var startRenameUndoPrimitive = new RenameUndoPrimitive(
                     EditorFeaturesResources.Start_Rename
                 );
@@ -140,7 +142,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InlineRename
             public void CreateConflictResolutionUndoTransaction(
                 ITextBuffer subjectBuffer,
                 Action applyEdit
-            ) {
+            )
+            {
                 // Replace the StartRenameSession undo entry with an identically named entry that also includes
                 // the conflict resolution edits.
                 var undoManager = this.UndoManagers[subjectBuffer].UndoManager;
@@ -180,7 +183,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InlineRename
                 ITextBuffer subjectBuffer,
                 bool disconnect,
                 bool undoConflictResolution
-            ) {
+            )
+            {
                 // There are crashes from Windows Error Reporting that indicate the BufferUndoState
                 // may be being unavailable here when inline rename has been dismissed due to an
                 // external workspace change. See bug #1167415.
@@ -222,7 +226,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InlineRename
                 ITextBuffer subjectBuffer,
                 object propagateSpansEditTag,
                 IEnumerable<ITrackingSpan> spans
-            ) {
+            )
+            {
                 // There are crash dumps that indicate the BufferUndoState may be being unavailable
                 // here when inline rename has been dismissed due to an external workspace change.
                 // See bug https://github.com/dotnet/roslyn/issues/31883.

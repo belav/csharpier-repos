@@ -30,7 +30,8 @@ namespace Moq
         public override Expression<Action<T>> ReconstructExpression<T>(
             Action<T> action,
             object[] ctorArgs = null
-        ) {
+        )
+        {
             using (var matcherObserver = MatcherObserver.Activate())
             {
                 // Create the root recording proxy:
@@ -74,7 +75,8 @@ namespace Moq
                             if (
                                 AwaitableFactory.TryGet(body.Type) is { } awaitableHandler
                                 && awaitableHandler.ResultType.IsAssignableFrom(resultType)
-                            ) {
+                            )
+                            {
                                 // We are here because the current invocation cannot be chained onto the previous one,
                                 // however it *can* be chained if we assume that there was a `.Result` query on the
                                 // former invocation that we don't see because non-virtual members aren't recorded.
@@ -148,7 +150,8 @@ namespace Moq
                         int argumentIndex = 0;
                         matchIndex < matches.Length && argumentIndex < expressions.Length;
                         ++argumentIndex
-                    ) {
+                    )
+                    {
                         // We are assuming that by default matchers return `default(T)`. If a matcher was used,
                         // it will have left behind a `default(T)` argument, possibly coerced to the parameter type.
                         // Therefore, we attempt to reproduce such coercions using `Convert.ChangeType`:
@@ -177,7 +180,8 @@ namespace Moq
                             parameterTypes[argumentIndex].IsAssignableFrom(
                                 defaultValue?.GetType() ?? defaultValueType
                             )
-                        ) {
+                        )
+                        {
                             // We found a potential match. (Matcher type is assignment-compatible to parameter type.)
 
                             if (
@@ -186,7 +190,8 @@ namespace Moq
                                     argumentIndex < expressions.Length - 1
                                     || CanDistribute(matchIndex + 1, argumentIndex + 1)
                                 )
-                            ) {
+                            )
+                            {
                                 // We get here if there are more matchers to distribute,
                                 // but we either:
                                 //  * ran out of parameters to distribute over, or
@@ -227,7 +232,8 @@ namespace Moq
                             if (
                                 parameterTypes[ai].IsAssignableFrom(matchType)
                                 && CanDistribute(msi + 1, ai + 1)
-                            ) {
+                            )
+                            {
                                 return true;
                             }
                         }
@@ -248,7 +254,8 @@ namespace Moq
                     if (
                         Nullable.GetUnderlyingType(parameterType) != null
                         && Nullable.GetUnderlyingType(argument.Type) == null
-                    ) {
+                    )
+                    {
                         expressions[i] = Expression.Convert(argument, parameterType);
                     }
                     // boxing of value types (i.e. where a value-typed value is assigned to a reference-typed parameter):
@@ -260,7 +267,8 @@ namespace Moq
                     else if (
                         argument.Type != parameterType
                         && !parameterType.IsAssignableFrom(argument.Type)
-                    ) {
+                    )
+                    {
                         expressions[i] = Expression.Convert(argument, parameterType);
                     }
                 }
@@ -275,7 +283,8 @@ namespace Moq
             object[] ctorArgs,
             MatcherObserver matcherObserver,
             out Recorder recorder
-        ) {
+        )
+        {
             recorder = new Recorder(matcherObserver);
             return (IProxy)ProxyFactory.Instance.CreateProxy(
                 type,

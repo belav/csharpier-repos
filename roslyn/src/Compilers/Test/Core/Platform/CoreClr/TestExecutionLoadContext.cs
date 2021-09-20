@@ -44,7 +44,8 @@ namespace Roslyn.Test.Utilities.CoreClr
                 || comparer.Equals(assemblyName.Name, "mscorlib")
                 || comparer.Equals(assemblyName.Name, "System")
                 || comparer.Equals(assemblyName.Name, "netstandard")
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -68,7 +69,8 @@ namespace Roslyn.Test.Utilities.CoreClr
             ImmutableArray<byte> mainImage,
             string[] mainArgs,
             int? expectedOutputLength
-        ) {
+        )
+        {
             var mainAssembly = LoadImageAsAssembly(mainImage);
             var entryPoint = mainAssembly.EntryPoint;
 
@@ -111,7 +113,8 @@ namespace Roslyn.Test.Utilities.CoreClr
             string fullyQualifiedTypeName,
             string memberName,
             IEnumerable<ModuleDataId> searchModules
-        ) {
+        )
+        {
             try
             {
                 var signatures = new SortedSet<string>();
@@ -125,7 +128,8 @@ namespace Roslyn.Test.Utilities.CoreClr
                             fullyQualifiedTypeName,
                             memberName
                         )
-                    ) {
+                    )
+                    {
                         signatures.Add(signature);
                     }
                 }

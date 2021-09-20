@@ -43,7 +43,8 @@ namespace Microsoft.EntityFrameworkCore
             this DbContextOptionsBuilder optionsBuilder,
             bool useChangeTrackingProxies = true,
             bool checkEquality = true
-        ) {
+        )
+        {
             Check.NotNull(optionsBuilder, nameof(optionsBuilder));
 
             var extension =
@@ -113,7 +114,8 @@ namespace Microsoft.EntityFrameworkCore
         public static DbContextOptionsBuilder UseLazyLoadingProxies(
             this DbContextOptionsBuilder optionsBuilder,
             bool useLazyLoadingProxies = true
-        ) {
+        )
+        {
             Check.NotNull(optionsBuilder, nameof(optionsBuilder));
 
             var extension =
@@ -166,7 +168,8 @@ namespace Microsoft.EntityFrameworkCore
             this DbContext context,
             Type entityType,
             params object[] constructorArguments
-        ) {
+        )
+        {
             Check.NotNull(context, nameof(context));
             Check.NotNull(entityType, nameof(entityType));
             Check.NotNull(constructorArguments, nameof(constructorArguments));
@@ -198,7 +201,8 @@ namespace Microsoft.EntityFrameworkCore
             this DbContext context,
             Action<TEntity>? configureEntity,
             params object[] constructorArguments
-        ) {
+        )
+        {
             var entity = (TEntity)context.CreateProxy(typeof(TEntity), constructorArguments);
 
             configureEntity?.Invoke(entity);
@@ -247,7 +251,8 @@ namespace Microsoft.EntityFrameworkCore
             this IServiceProvider serviceProvider,
             IEntityType entityType,
             params object[] constructorArguments
-        ) {
+        )
+        {
             CheckProxyOptions(serviceProvider, entityType.DisplayName());
 
             return serviceProvider.GetRequiredService<IProxyFactory>()
@@ -262,7 +267,8 @@ namespace Microsoft.EntityFrameworkCore
             this IServiceProvider serviceProvider,
             Type entityType,
             params object[] constructorArguments
-        ) {
+        )
+        {
             CheckProxyOptions(serviceProvider, entityType.ShortDisplayName());
 
             return serviceProvider.GetRequiredService<IProxyFactory>()
@@ -276,7 +282,8 @@ namespace Microsoft.EntityFrameworkCore
         private static void CheckProxyOptions(
             IServiceProvider serviceProvider,
             string entityTypeName
-        ) {
+        )
+        {
             var options = serviceProvider.GetRequiredService<IDbContextOptions>()
                 .FindExtension<ProxiesOptionsExtension>();
 

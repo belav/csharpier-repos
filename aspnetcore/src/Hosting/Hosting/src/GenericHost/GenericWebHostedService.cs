@@ -31,7 +31,8 @@ namespace Microsoft.AspNetCore.Hosting
             IEnumerable<IStartupFilter> startupFilters,
             IConfiguration configuration,
             IWebHostEnvironment hostingEnvironment
-        ) {
+        )
+        {
             Options = options.Value;
             Server = server;
             Logger = loggerFactory.CreateLogger("Microsoft.AspNetCore.Hosting.Diagnostics");

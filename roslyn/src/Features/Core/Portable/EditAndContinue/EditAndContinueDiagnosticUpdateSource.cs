@@ -65,7 +65,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             Workspace workspace,
             Solution solution,
             ImmutableArray<DiagnosticData> diagnostics
-        ) {
+        )
+        {
             RoslynDebug.Assert(solution != null);
 
             var updateEvent = DiagnosticsUpdated;
@@ -88,7 +89,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     var (documentId, diagnosticData) in documentDiagnostics.ToDictionary(
                         data => data.DocumentId!
                     )
-                ) {
+                )
+                {
                     var diagnosticGroupId = (this, documentId);
 
                     updateEvent(
@@ -111,7 +113,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     var (projectId, diagnosticData) in projectDiagnostics.ToDictionary(
                         data => data.ProjectId!
                     )
-                ) {
+                )
+                {
                     var diagnosticGroupId = (this, projectId);
 
                     updateEvent(

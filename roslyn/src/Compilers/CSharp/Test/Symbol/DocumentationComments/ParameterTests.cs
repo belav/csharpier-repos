@@ -968,7 +968,8 @@ class C<T>
 
         private static IEnumerable<IdentifierNameSyntax> GetNameAttributeValues(
             CSharpCompilation compilation
-        ) {
+        )
+        {
             return compilation.SyntaxTrees.SelectMany(
                 tree =>
                 {

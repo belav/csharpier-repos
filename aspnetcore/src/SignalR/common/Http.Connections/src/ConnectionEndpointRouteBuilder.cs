@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.Builder
 
         internal ConnectionEndpointRouteBuilder(
             IEndpointConventionBuilder endpointConventionBuilder
-        ) {
+        )
+        {
             _endpointConventionBuilder = endpointConventionBuilder;
         }
 

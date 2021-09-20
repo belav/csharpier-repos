@@ -16,7 +16,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         private static void AssertImplicitConvert<TSource, TTarget>(
             TSource argument,
             TTarget expected
-        ) {
+        )
+        {
             CallSiteBinder binder = Binder.Convert(
                 CSharpBinderFlags.None,
                 typeof(TTarget),

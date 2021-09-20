@@ -31,7 +31,8 @@ namespace System.Runtime.CompilerServices.Tests
                     new CultureInfo("en-US"),
                     new CultureInfo("fr-FR")
                 }
-            ) {
+            )
+            {
                 InterpolatedStringBuilder.Create(literalLength, formattedCount, provider);
 
                 InterpolatedStringBuilder.Create(literalLength, formattedCount, provider, default);
@@ -137,7 +138,8 @@ namespace System.Runtime.CompilerServices.Tests
 
             foreach (
                 string s in new[] { null, "", "a", "bc", "def", "this is a longer string", "!" }
-            ) {
+            )
+            {
                 // string
                 expected.AppendFormat("{0}", s);
                 actual.AppendFormatted(s);
@@ -214,7 +216,8 @@ namespace System.Runtime.CompilerServices.Tests
                     "this is a longer string",
                     "!"
                 }
-            ) {
+            )
+            {
                 foreach (
                     object o in new object[]
                     {
@@ -223,7 +226,8 @@ namespace System.Runtime.CompilerServices.Tests
                         new FormattableStringWrapper(rawInput), // IFormattable wrapper around string
                         new SpanFormattableStringWrapper(rawInput) // ISpanFormattable wrapper around string
                     }
-                ) {
+                )
+                {
                     // object
                     expected.AppendFormat("{0}", o);
                     actual.AppendFormatted(o);
@@ -290,7 +294,8 @@ namespace System.Runtime.CompilerServices.Tests
                     new FormattableStringWrapper("hello"),
                     new SpanFormattableStringWrapper("hello")
                 }
-            ) {
+            )
+            {
                 builder.AppendFormatted(tss);
                 Assert.Same(provider, tss.ToStringState.LastProvider);
 
@@ -321,7 +326,8 @@ namespace System.Runtime.CompilerServices.Tests
                         new FormattableStringWrapper(s),
                         new SpanFormattableStringWrapper(s)
                     }
-                ) {
+                )
+                {
                     void AssertTss(IHasToStringState tss, string format)
                     {
                         Assert.Equal(format, tss.ToStringState.LastFormat);
@@ -534,7 +540,8 @@ namespace System.Runtime.CompilerServices.Tests
                 out int charsWritten,
                 ReadOnlySpan<char> format,
                 IFormatProvider provider
-            ) {
+            )
+            {
                 ToStringState.LastFormat = format.ToString();
                 ToStringState.LastProvider = provider;
                 ToStringState.ToStringMode = ToStringMode.ISpanFormattableTryFormat;
@@ -589,7 +596,8 @@ namespace System.Runtime.CompilerServices.Tests
                 out int charsWritten,
                 ReadOnlySpan<char> format,
                 IFormatProvider provider
-            ) {
+            )
+            {
                 ToStringState.LastFormat = format.ToString();
                 ToStringState.LastProvider = provider;
                 ToStringState.ToStringMode = ToStringMode.ISpanFormattableTryFormat;

@@ -23,7 +23,8 @@ namespace System.Composition.Hosting.Core.Tests
                 CompositionHost host = CompositionHost.CreateCompositionHost(
                     new ExportDescriptorProvider[0]
                 )
-            ) {
+            )
+            {
                 Assert.True(
                     host.TryGetExport(
                         new CompositionContract(typeof(CompositionContext)),
@@ -69,7 +70,8 @@ namespace System.Composition.Hosting.Core.Tests
                 CompositionHost host = CompositionHost.CreateCompositionHost(
                     new ExportDescriptorProvider[0]
                 )
-            ) {
+            )
+            {
                 Assert.True(
                     host.TryGetExport(
                         new CompositionContract(typeof(CompositionContext)),
@@ -90,7 +92,8 @@ namespace System.Composition.Hosting.Core.Tests
                 CompositionHost host = CompositionHost.CreateCompositionHost(
                     new ExportDescriptorProvider[0]
                 )
-            ) {
+            )
+            {
                 Assert.True(
                     host.TryGetExport(
                         new CompositionContract(typeof(CompositionContext)),
@@ -102,12 +105,14 @@ namespace System.Composition.Hosting.Core.Tests
                 object Activator(
                     LifetimeContext activatorContext,
                     CompositionOperation activatorOperation
-                ) {
+                )
+                {
                     var value = new object();
                     object GetOrCreateActivate(
                         LifetimeContext getOrCreateContext,
                         CompositionOperation getOrCreateOperator
-                    ) {
+                    )
+                    {
                         Assert.Same(activatorContext, getOrCreateContext);
                         Assert.Same(activatorOperation, getOrCreateOperator);
 
@@ -136,7 +141,8 @@ namespace System.Composition.Hosting.Core.Tests
                 CompositionHost host = CompositionHost.CreateCompositionHost(
                     new ExportDescriptorProvider[0]
                 )
-            ) {
+            )
+            {
                 Assert.True(
                     host.TryGetExport(
                         new CompositionContract(typeof(CompositionContext)),
@@ -150,7 +156,8 @@ namespace System.Composition.Hosting.Core.Tests
                 object GetOrCreateActivate(
                     LifetimeContext getOrCreateContext,
                     CompositionOperation getOrCreateOperator
-                ) {
+                )
+                {
                     Assert.Same(context, getOrCreateContext);
                     Assert.Same(operation, getOrCreateOperator);
 
@@ -159,7 +166,8 @@ namespace System.Composition.Hosting.Core.Tests
                 object Activator(
                     LifetimeContext activatorContext,
                     CompositionOperation activatorOperation
-                ) {
+                )
+                {
                     operation = activatorOperation;
                     Assert.Same(value, context.GetOrCreate(1, operation, GetOrCreateActivate));
                     return "Hi";
@@ -177,7 +185,8 @@ namespace System.Composition.Hosting.Core.Tests
                 CompositionHost host = CompositionHost.CreateCompositionHost(
                     new ExportDescriptorProvider[0]
                 )
-            ) {
+            )
+            {
                 Assert.True(
                     host.TryGetExport(
                         new CompositionContract(typeof(CompositionContext)),
@@ -189,7 +198,8 @@ namespace System.Composition.Hosting.Core.Tests
                 object Activator(
                     LifetimeContext activatorContext,
                     CompositionOperation activatorOperation
-                ) {
+                )
+                {
                     Assert.Throws<NullReferenceException>(
                         () => activatorContext.GetOrCreate(1, activatorOperation, null)
                     );
@@ -207,7 +217,8 @@ namespace System.Composition.Hosting.Core.Tests
                 CompositionHost host = CompositionHost.CreateCompositionHost(
                     new ExportDescriptorProvider[0]
                 )
-            ) {
+            )
+            {
                 Assert.True(
                     host.TryGetExport(
                         new CompositionContract(typeof(CompositionContext)),
@@ -229,7 +240,8 @@ namespace System.Composition.Hosting.Core.Tests
                 CompositionHost host = CompositionHost.CreateCompositionHost(
                     new ExportDescriptorProvider[0]
                 )
-            ) {
+            )
+            {
                 Assert.True(
                     host.TryGetExport(
                         new CompositionContract(typeof(CompositionContext)),
@@ -249,7 +261,8 @@ namespace System.Composition.Hosting.Core.Tests
                 CompositionHost host = CompositionHost.CreateCompositionHost(
                     new ExportDescriptorProvider[0]
                 )
-            ) {
+            )
+            {
                 Assert.True(
                     host.TryGetExport(
                         new CompositionContract(typeof(CompositionContext)),
@@ -271,7 +284,8 @@ namespace System.Composition.Hosting.Core.Tests
                 CompositionHost host = CompositionHost.CreateCompositionHost(
                     new ExportDescriptorProvider[0]
                 )
-            ) {
+            )
+            {
                 Assert.True(
                     host.TryGetExport(
                         new CompositionContract(typeof(CompositionContext)),

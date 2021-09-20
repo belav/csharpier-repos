@@ -87,7 +87,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                         out attributeClass,
                         out attributeConstructor
                     )
-                ) {
+                )
+                {
                     // TODO: should we create CSErrorTypeSymbol for attribute class??
                     _lazyHasErrors = ThreeState.True;
                 }
@@ -95,7 +96,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     (object)attributeClass == null
                     || attributeClass.IsErrorType()
                     || (object)attributeConstructor == null
-                ) {
+                )
+                {
                     _lazyHasErrors = ThreeState.True;
                 }
 
@@ -126,7 +128,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                         out lazyConstructorArguments,
                         out lazyNamedArguments
                     )
-                ) {
+                )
+                {
                     _lazyHasErrors = ThreeState.True;
                 }
 
@@ -171,7 +174,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         internal override int GetTargetAttributeSignatureIndex(
             Symbol targetSymbol,
             AttributeDescription description
-        ) {
+        )
+        {
             // Matching an attribute by name should not load the attribute class.
             return _decoder.GetTargetAttributeSignatureIndex(_handle, description);
         }

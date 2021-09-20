@@ -60,14 +60,16 @@ namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics
         public void AddExternalSyntaxDiagnostics(
             DocumentId documentId,
             IEnumerable<Diagnostic> diagnostics
-        ) {
+        )
+        {
             AddExternalDiagnostics(ref _lazySyntaxLocals, documentId, diagnostics);
         }
 
         public void AddExternalSemanticDiagnostics(
             DocumentId documentId,
             IEnumerable<Diagnostic> diagnostics
-        ) {
+        )
+        {
             // this is for diagnostic producer that doesnt use compiler based DiagnosticAnalyzer such as TypeScript.
             Contract.ThrowIfTrue(Project.SupportsCompilation);
 
@@ -78,7 +80,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics
             ref Dictionary<DocumentId, List<DiagnosticData>>? lazyLocals,
             DocumentId documentId,
             IEnumerable<Diagnostic> diagnostics
-        ) {
+        )
+        {
             foreach (var diagnostic in diagnostics)
             {
                 // REVIEW: what is our plan for additional locations?
@@ -135,7 +138,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics
             ref Dictionary<DocumentId, List<DiagnosticData>>? map,
             TextDocument? document,
             Diagnostic diagnostic
-        ) {
+        )
+        {
             if (document is null || !document.SupportsDiagnostics())
             {
                 return;
@@ -174,7 +178,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics
             ref Dictionary<DocumentId, List<DiagnosticData>>? lazyLocals,
             SyntaxTree? tree,
             IEnumerable<Diagnostic> diagnostics
-        ) {
+        )
+        {
             foreach (var diagnostic in diagnostics)
             {
                 // REVIEW: what is our plan for additional locations?
@@ -228,7 +233,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics
 
         private static ImmutableDictionary<DocumentId, ImmutableArray<DiagnosticData>> Convert(
             Dictionary<DocumentId, List<DiagnosticData>>? map
-        ) {
+        )
+        {
             return map == null
               ? ImmutableDictionary<DocumentId, ImmutableArray<DiagnosticData>>.Empty
               : map.ToImmutableDictionary(kv => kv.Key, kv => kv.Value.ToImmutableArray());

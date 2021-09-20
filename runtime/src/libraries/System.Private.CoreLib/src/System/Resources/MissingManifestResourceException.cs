@@ -27,9 +27,7 @@ namespace System.Resources
             HResult = System.HResults.COR_E_MISSINGMANIFESTRESOURCE;
         }
 
-        protected MissingManifestResourceException(
-            SerializationInfo info,
-            StreamingContext context
-        ) : base(info, context) { }
+        protected MissingManifestResourceException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

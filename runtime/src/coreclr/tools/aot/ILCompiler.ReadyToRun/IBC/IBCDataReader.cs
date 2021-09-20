@@ -123,7 +123,8 @@ namespace ILCompiler.IBC
             out uint majorVersion,
             out uint minorVersion,
             out bool partialNGen
-        ) {
+        )
+        {
             // minified should always be false here, so ReadSizeAndGetStart would
             // work. However, since the header's size is always written in the
             // same way, there's no harm making that explicit here.
@@ -189,7 +190,8 @@ namespace ILCompiler.IBC
                     (majorVersion == IBC.Constants.CompatibleMajorVersion)
                     && (minorVersion < IBC.Constants.CompatibleMinorVersion)
                 )
-            ) {
+            )
+            {
                 throw new IBCException(
                     String.Format(
                         "Version mismatch: {0}.{1} not between {2}.{3} and {4}.{5}",
@@ -233,7 +235,8 @@ namespace ILCompiler.IBC
                 if (
                     (majorVersion == 1)
                     && (sectionFormat < SectionFormat.UserStringPoolProfilingData)
-                ) {
+                )
+                {
                     // The ScenarioInfo section was added in V2 and assigned index
                     // zero. Every other section that existed at that point was
                     // bumped up by one.
@@ -664,7 +667,8 @@ namespace ILCompiler.IBC
             Dictionary<SectionFormat, SectionInfo> sectionTable,
             SectionFormat section,
             Action f
-        ) {
+        )
+        {
             if (sectionTable.ContainsKey(section))
             {
                 SectionInfo info = sectionTable[section];
@@ -704,7 +708,8 @@ namespace ILCompiler.IBC
                 SectionFormat section in IBCData.SectionIterator(
                     IBCData.SectionIteratorKind.TokenFlags
                 )
-            ) {
+            )
+            {
                 IfPresent(
                     sectionTable,
                     section,

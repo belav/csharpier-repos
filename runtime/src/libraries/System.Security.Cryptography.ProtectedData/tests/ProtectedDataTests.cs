@@ -25,7 +25,8 @@ namespace System.Security.Cryptography.ProtectedDataTests
                     DataProtectionScope.CurrentUser,
                     DataProtectionScope.LocalMachine
                 }
-            ) {
+            )
+            {
                 byte[] plain = { 1, 2, 3 };
                 byte[] encrypted = ProtectedData.Protect(plain, entropy, scope);
                 Assert.NotEqual<byte>(plain, encrypted);
@@ -99,7 +100,8 @@ namespace System.Security.Cryptography.ProtectedDataTests
                     DataProtectionScope.CurrentUser,
                     DataProtectionScope.LocalMachine
                 }
-            ) {
+            )
+            {
                 byte[] plain = { 1, 2, 3 };
                 byte[] encrypted = ProtectedData.Protect(plain, entropy1, scope);
                 Assert.ThrowsAny<CryptographicException>(

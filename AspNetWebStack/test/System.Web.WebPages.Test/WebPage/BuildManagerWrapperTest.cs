@@ -334,7 +334,8 @@ namespace System.Web.WebPages.Test
 
         private static BuildManagerWrapper CreateWrapperInstance(
             IEnumerable<string> supportedExtensions = null
-        ) {
+        )
+        {
             return new BuildManagerWrapper(
                 new Mock<VirtualPathProvider>().Object,
                 GetVirtualPathUtility()

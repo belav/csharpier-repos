@@ -88,7 +88,8 @@ public class AA<TA, TB, TC, TD, TE, TF>
                                     new AA<TA, TB, TC, TD, TE, TF>()
                                     == new AA<TA, TB, TC, TD, TE, TF>()
                                 )
-                            ) {
+                            )
+                            {
                                 if (((bool)(((object)(new AA<TA, TB, TC, TD, TE, TF>())))))
                                     param1 = (new uint[local1, 107u, 22u, local1]);
                                 if (((bool)(((object)(param2)))))
@@ -101,7 +102,8 @@ public class AA<TA, TB, TC, TD, TE, TF>
                                         != /*2 REFS*/
                                         ((byte)(local1))
                                     )
-                                ) {
+                                )
+                                {
                                     throw new ApplicationException();
                                 }
                             }
@@ -187,7 +189,8 @@ public class AA<TA, TB, TC, TD, TE, TF>
                         App.m_iFwd3 -= 97;
                         Convert.ToBoolean(((ushort)(local5)));
                         App.m_ushFwd5 = Math.Max(((ushort)(26)), ((ushort)(43)))
-                    ) {
+                    )
+                    {
                         local7 = local7;
                     }
             }
@@ -206,7 +209,8 @@ public class AA<TA, TB, TC, TD, TE, TF>
                         == /*2 REFS*/
                         ((sbyte)(local5))
                     )
-                ) {
+                )
+                {
                     try
                     {
                         throw new IndexOutOfRangeException();
@@ -224,7 +228,8 @@ public class AA<TA, TB, TC, TD, TE, TF>
                                     new AA<TA, TB, TC, TD, TE, TF>()
                                     == new AA<TA, TB, TC, TD, TE, TF>()
                                 )
-                            ) {
+                            )
+                            {
                                 local7 = local7;
                                 local5 = (local5 += local5);
                             }
@@ -377,7 +382,8 @@ public class AA<TA, TB, TC, TD, TE, TF>
         Array param3,
         ref ulong[,,,,] param4,
         ref long[,,,][][][][,] param5
-    ) {
+    )
+    {
         BB[] local21 = ((BB[])(((Array)(null))));
         sbyte local22 = ((sbyte)(121));
         bool local23 = (new AA<TA, TB, TC, TD, TE, TF>() == new AA<TA, TB, TC, TD, TE, TF>());
@@ -471,7 +477,8 @@ public struct BB
         AA<sbyte, byte, uint, uint, long, bool> param4,
         ref AA<sbyte, byte, uint, uint, long, bool> param5,
         int param6
-    ) {
+    )
+    {
         do
         {
             ushort[] local25 = (new ushort[62u]);

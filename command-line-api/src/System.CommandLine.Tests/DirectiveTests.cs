@@ -71,7 +71,8 @@ namespace System.CommandLine.Tests
             string directive,
             string expectedKey,
             string expectedValue
-        ) {
+        )
+        {
             var option = new Option("-y");
 
             var result = option.Parse($"{directive} -y");

@@ -228,7 +228,8 @@ namespace PackageBaselineGenerator
                                 defaultTarget,
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             targetCondition =
                                 $"('$(TargetFramework)' == '$(DefaultNetCoreTargetFramework)' OR '$(TargetFramework)' == '{defaultTarget}')";
                         }
@@ -277,7 +278,8 @@ namespace PackageBaselineGenerator
             string documentPath,
             XDocument document,
             IEnumerable<SourceRepository> sourceRepositories
-        ) {
+        )
+        {
             var packageMetadataResources = await Task.WhenAll(
                 sourceRepositories.Select(
                     async sr => await sr.GetResourceAsync<PackageMetadataResource>()
@@ -352,7 +354,8 @@ namespace PackageBaselineGenerator
             IEnumerable<PackageMetadataResource> packageMetadataResources,
             ILogger logger,
             SourceCacheContext cacheContext
-        ) {
+        )
+        {
             var currentVersion = NuGetVersion.Parse(versionAttribute.Value);
             var versionRange = new VersionRange(
                 currentVersion,
@@ -386,7 +389,8 @@ namespace PackageBaselineGenerator
                         potentialLatestVersion != null
                         && potentialLatestVersion.CompareTo(latestVersion) > 0
                     )
-                ) {
+                )
+                {
                     latestVersion = potentialLatestVersion;
                 }
             }

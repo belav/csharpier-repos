@@ -602,7 +602,8 @@ namespace Roslyn.Utilities
             int hashCode,
             ReadOnlySpan<byte> utf8Bytes,
             bool isAscii
-        ) {
+        )
+        {
             string text;
             unsafe
             {

@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
             NamingStyle namingStyle,
             IReadOnlyDictionary<string, string> conventionsDictionary,
             out SerializableNamingRule serializableNamingRule
-        ) {
+        )
+        {
             if (!TryGetRuleSeverity(namingRuleTitle, conventionsDictionary, out var severity))
             {
                 serializableNamingRule = null;
@@ -38,13 +39,15 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
             string namingRuleName,
             IReadOnlyDictionary<string, string> conventionsDictionary,
             out ReportDiagnostic severity
-        ) {
+        )
+        {
             if (
                 conventionsDictionary.TryGetValue(
                     $"dotnet_naming_rule.{namingRuleName}.severity",
                     out var result
                 )
-            ) {
+            )
+            {
                 severity = ParseEnforcementLevel(result ?? string.Empty);
                 return true;
             }

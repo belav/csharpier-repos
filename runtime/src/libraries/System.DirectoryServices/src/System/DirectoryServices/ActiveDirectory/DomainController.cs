@@ -76,7 +76,8 @@ namespace System.DirectoryServices.ActiveDirectory
             DirectoryContext context,
             string domainControllerName,
             DirectoryEntryManager directoryEntryMgr
-        ) {
+        )
+        {
             this.context = context;
             this.replicaName = domainControllerName;
             this.directoryEntryMgr = directoryEntryMgr;
@@ -248,7 +249,8 @@ namespace System.DirectoryServices.ActiveDirectory
             DirectoryContext context,
             string siteName,
             LocatorOptions flag
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -386,7 +388,8 @@ namespace System.DirectoryServices.ActiveDirectory
             if (
                 role < ActiveDirectoryRole.SchemaRole
                 || role > ActiveDirectoryRole.InfrastructureRole
-            ) {
+            )
+            {
                 throw new InvalidEnumArgumentException(
                     nameof(role),
                     (int)role,
@@ -719,7 +722,8 @@ namespace System.DirectoryServices.ActiveDirectory
         public override void SyncReplicaFromAllServers(
             string partition,
             SyncFromAllServersOptions options
-        ) {
+        )
+        {
             if (_disposed)
                 throw new ObjectDisposedException(GetType().Name);
 
@@ -1111,7 +1115,8 @@ namespace System.DirectoryServices.ActiveDirectory
             DirectoryContext context,
             string? siteName,
             LocatorOptions flag
-        ) {
+        )
+        {
             DomainController dc;
             bool retry = false;
             bool credsValidated = false;
@@ -1204,7 +1209,8 @@ namespace System.DirectoryServices.ActiveDirectory
             string? domainName,
             string? siteName,
             LocatorOptions flag
-        ) {
+        )
+        {
             DomainControllerInfo domainControllerInfo;
             int errorCode = 0;
 
@@ -1227,7 +1233,8 @@ namespace System.DirectoryServices.ActiveDirectory
                         )
                     )
                 ) != 0
-            ) {
+            )
+            {
                 throw new ArgumentException(SR.InvalidFlags, nameof(flag));
             }
 
@@ -1282,7 +1289,8 @@ namespace System.DirectoryServices.ActiveDirectory
             string? domainName,
             bool isDnsDomainName,
             string? siteName
-        ) {
+        )
+        {
             ArrayList dcList = new ArrayList();
 
             if (siteName != null && siteName.Length == 0)
@@ -1327,7 +1335,8 @@ namespace System.DirectoryServices.ActiveDirectory
                     ,
                     false /* mustBeGC */
                 )
-            ) {
+            )
+            {
                 DirectoryContext dcContext = Utils.GetNewDirectoryContext(
                     dcName,
                     DirectoryContextType.DirectoryServer,
@@ -1406,7 +1415,8 @@ namespace System.DirectoryServices.ActiveDirectory
                                 if (
                                     Utils.Compare(domainControllerInfo3.dnsHostName, replicaName)
                                     == 0
-                                ) {
+                                )
+                                {
                                     initialized = true;
 
                                     // update all the fields
@@ -1435,7 +1445,8 @@ namespace System.DirectoryServices.ActiveDirectory
                                 if (
                                     Utils.Compare(domainControllerInfo2.dnsHostName, replicaName)
                                     == 0
-                                ) {
+                                )
+                                {
                                     initialized = true;
 
                                     // update all the fields

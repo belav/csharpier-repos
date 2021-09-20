@@ -29,7 +29,8 @@ namespace System.Web.Mvc.Routing
         public static void MapAttributeRoutes(
             RouteCollection routes,
             IInlineConstraintResolver constraintResolver
-        ) {
+        )
+        {
             if (routes == null)
             {
                 throw new ArgumentNullException("routes");
@@ -57,7 +58,8 @@ namespace System.Web.Mvc.Routing
             RouteCollection routes,
             IInlineConstraintResolver constraintResolver,
             IDirectRouteProvider directRouteProvider
-        ) {
+        )
+        {
             if (routes == null)
             {
                 throw new ArgumentNullException("routes");
@@ -92,7 +94,8 @@ namespace System.Web.Mvc.Routing
         public static void MapAttributeRoutes(
             RouteCollection routes,
             IEnumerable<Type> controllerTypes
-        ) {
+        )
+        {
             MapAttributeRoutes(routes, controllerTypes, new DefaultInlineConstraintResolver());
         }
 
@@ -108,7 +111,8 @@ namespace System.Web.Mvc.Routing
             RouteCollection routes,
             IEnumerable<Type> controllerTypes,
             IInlineConstraintResolver constraintResolver
-        ) {
+        )
+        {
             MapAttributeRoutes(
                 routes,
                 controllerTypes,
@@ -133,7 +137,8 @@ namespace System.Web.Mvc.Routing
             IEnumerable<Type> controllerTypes,
             IInlineConstraintResolver constraintResolver,
             IDirectRouteProvider directRouteProvider
-        ) {
+        )
+        {
             if (routes == null)
             {
                 throw new ArgumentNullException("routes");
@@ -199,7 +204,8 @@ namespace System.Web.Mvc.Routing
         private static void AddGenerationHooksForSubRoutes(
             RouteCollection routeTable,
             IList<RouteEntry> entries
-        ) {
+        )
+        {
             Contract.Assert(entries != null);
 
             foreach (RouteEntry entry in entries)
@@ -226,7 +232,8 @@ namespace System.Web.Mvc.Routing
             IEnumerable<Type> controllerTypes,
             IInlineConstraintResolver constraintResolver,
             IDirectRouteProvider directRouteProvider
-        ) {
+        )
+        {
             IEnumerable<ReflectedAsyncControllerDescriptor> controllers = GetControllerDescriptors(
                 controllerTypes
             );
@@ -270,7 +277,8 @@ namespace System.Web.Mvc.Routing
 
                         foreach (
                             var actionDescriptor in actionDescriptors.OfType<IMethodInfoActionDescriptor>()
-                        ) {
+                        )
+                        {
                             var methodInfo = actionDescriptor.MethodInfo;
                             if (methodInfo != null)
                             {
@@ -292,7 +300,8 @@ namespace System.Web.Mvc.Routing
 
         private static IEnumerable<ReflectedAsyncControllerDescriptor> GetControllerDescriptors(
             IEnumerable<Type> controllerTypes
-        ) {
+        )
+        {
             Contract.Assert(controllerTypes != null);
 
             Func<Type, ControllerDescriptor> descriptorFactory =
@@ -308,7 +317,8 @@ namespace System.Web.Mvc.Routing
 
         private static List<ActionDescriptor> GetActionDescriptors(
             ReflectedAsyncControllerDescriptor controller
-        ) {
+        )
+        {
             Contract.Assert(controller != null);
 
             AsyncActionMethodSelector actionSelector = controller.Selector;

@@ -243,7 +243,8 @@ namespace Dia.Util
                 int fExecutable,
                 uint cbData,
                 ref IMAGE_DEBUG_DIRECTORY pbData
-            ) {
+            )
+            {
                 Debug.Assert(
                     cbData == Marshal.SizeOf(typeof(IMAGE_DEBUG_DIRECTORY)),
                     "Got unexpected size for IMAGE_DEBUG_DIRECTORY"

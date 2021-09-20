@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
             Func<CSharpParseOptions, T, CSharpParseOptions> factory,
             Func<CSharpParseOptions, T> getter,
             T validValue
-        ) {
+        )
+        {
             var oldOpt1 = CSharpParseOptions.Default;
             var newOpt1 = factory(oldOpt1, validValue);
             var newOpt2 = factory(newOpt1, validValue);

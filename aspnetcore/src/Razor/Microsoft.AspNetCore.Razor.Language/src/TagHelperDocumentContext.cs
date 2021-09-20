@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static TagHelperDocumentContext Create(
             string prefix,
             IEnumerable<TagHelperDescriptor> tagHelpers
-        ) {
+        )
+        {
             if (tagHelpers == null)
             {
                 throw new ArgumentNullException(nameof(tagHelpers));

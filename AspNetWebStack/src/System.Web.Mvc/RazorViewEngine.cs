@@ -61,7 +61,8 @@ namespace System.Web.Mvc
         protected override IView CreatePartialView(
             ControllerContext controllerContext,
             string partialPath
-        ) {
+        )
+        {
             return new RazorView(
                 controllerContext,
                 partialPath,
@@ -78,7 +79,8 @@ namespace System.Web.Mvc
             ControllerContext controllerContext,
             string viewPath,
             string masterPath
-        ) {
+        )
+        {
             var view = new RazorView(
                 controllerContext,
                 viewPath,

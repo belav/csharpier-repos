@@ -122,7 +122,8 @@ namespace System.Data.OleDb
         protected override void Dispose(bool disposing) { }
         protected override System.Data.Common.DbDataReader ExecuteDbDataReader(
             System.Data.CommandBehavior behavior
-        ) {
+        )
+        {
             throw null;
         }
         public override int ExecuteNonQuery()
@@ -135,7 +136,8 @@ namespace System.Data.OleDb
         }
         public new System.Data.OleDb.OleDbDataReader ExecuteReader(
             System.Data.CommandBehavior behavior
-        ) {
+        )
+        {
             throw null;
         }
         public override object? ExecuteScalar()
@@ -150,7 +152,8 @@ namespace System.Data.OleDb
         }
         System.Data.IDataReader System.Data.IDbCommand.ExecuteReader(
             System.Data.CommandBehavior behavior
-        ) {
+        )
+        {
             throw null;
         }
         object System.ICloneable.Clone()
@@ -218,7 +221,8 @@ namespace System.Data.OleDb
         public string QuoteIdentifier(
             string unquotedIdentifier,
             System.Data.OleDb.OleDbConnection? connection
-        ) {
+        )
+        {
             throw null;
         }
         protected override void SetRowUpdatingHandler(System.Data.Common.DbDataAdapter adapter) { }
@@ -229,7 +233,8 @@ namespace System.Data.OleDb
         public string UnquoteIdentifier(
             string quotedIdentifier,
             System.Data.OleDb.OleDbConnection? connection
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -304,7 +309,8 @@ namespace System.Data.OleDb
         }
         protected override System.Data.Common.DbTransaction BeginDbTransaction(
             System.Data.IsolationLevel isolationLevel
-        ) {
+        )
+        {
             throw null;
         }
         public new System.Data.OleDb.OleDbTransaction BeginTransaction()
@@ -313,7 +319,8 @@ namespace System.Data.OleDb
         }
         public new System.Data.OleDb.OleDbTransaction BeginTransaction(
             System.Data.IsolationLevel isolationLevel
-        ) {
+        )
+        {
             throw null;
         }
         public override void ChangeDatabase(string value) { }
@@ -331,7 +338,8 @@ namespace System.Data.OleDb
         public System.Data.DataTable? GetOleDbSchemaTable(
             System.Guid schema,
             object?[]? restrictions
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Data.DataTable GetSchema()
@@ -345,7 +353,8 @@ namespace System.Data.OleDb
         public override System.Data.DataTable GetSchema(
             string collectionName,
             string?[]? restrictionValues
-        ) {
+        )
+        {
             throw null;
         }
         public override void Open() { }
@@ -416,7 +425,8 @@ namespace System.Data.OleDb
         public override bool TryGetValue(
             string keyword,
             [System.Diagnostics.CodeAnalysis.NotNullWhen(true)] out object? value
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -514,7 +524,8 @@ namespace System.Data.OleDb
             System.Data.IDbCommand? command,
             System.Data.StatementType statementType,
             System.Data.Common.DataTableMapping tableMapping
-        ) {
+        )
+        {
             throw null;
         }
         protected override System.Data.Common.RowUpdatingEventArgs CreateRowUpdatingEvent(
@@ -522,7 +533,8 @@ namespace System.Data.OleDb
             System.Data.IDbCommand? command,
             System.Data.StatementType statementType,
             System.Data.Common.DataTableMapping tableMapping
-        ) {
+        )
+        {
             throw null;
         }
         public int Fill(System.Data.DataSet dataSet, object ADODBRecordSet, string srcTable)
@@ -590,7 +602,8 @@ namespace System.Data.OleDb
             byte[]? buffer,
             int bufferIndex,
             int length
-        ) {
+        )
+        {
             throw null;
         }
         public override char GetChar(int ordinal)
@@ -603,7 +616,8 @@ namespace System.Data.OleDb
             char[]? buffer,
             int bufferIndex,
             int length
-        ) {
+        )
+        {
             throw null;
         }
         public new System.Data.OleDb.OleDbDataReader GetData(int ordinal)
@@ -1077,14 +1091,16 @@ namespace System.Data.OleDb
         public System.Data.OleDb.OleDbParameter Add(
             string? parameterName,
             System.Data.OleDb.OleDbType oleDbType
-        ) {
+        )
+        {
             throw null;
         }
         public System.Data.OleDb.OleDbParameter Add(
             string? parameterName,
             System.Data.OleDb.OleDbType oleDbType,
             int size
-        ) {
+        )
+        {
             throw null;
         }
         public System.Data.OleDb.OleDbParameter Add(
@@ -1092,7 +1108,8 @@ namespace System.Data.OleDb
             System.Data.OleDb.OleDbType oleDbType,
             int size,
             string? sourceColumn
-        ) {
+        )
+        {
             throw null;
         }
         public System.Data.OleDb.OleDbParameter Add(string? parameterName, object? value)
@@ -1163,12 +1180,13 @@ namespace System.Data.OleDb
             System.Data.IDbCommand? command,
             System.Data.StatementType statementType,
             System.Data.Common.DataTableMapping tableMapping
-        ) : base(
-            default(System.Data.DataRow),
-            default(System.Data.IDbCommand),
-            default(System.Data.StatementType),
-            default(System.Data.Common.DataTableMapping)
-        ) { }
+        )
+            : base(
+                default(System.Data.DataRow),
+                default(System.Data.IDbCommand),
+                default(System.Data.StatementType),
+                default(System.Data.Common.DataTableMapping)
+            ) { }
         public new System.Data.OleDb.OleDbCommand? Command
         {
             get { throw null; }
@@ -1185,12 +1203,13 @@ namespace System.Data.OleDb
             System.Data.IDbCommand? command,
             System.Data.StatementType statementType,
             System.Data.Common.DataTableMapping tableMapping
-        ) : base(
-            default(System.Data.DataRow),
-            default(System.Data.IDbCommand),
-            default(System.Data.StatementType),
-            default(System.Data.Common.DataTableMapping)
-        ) { }
+        )
+            : base(
+                default(System.Data.DataRow),
+                default(System.Data.IDbCommand),
+                default(System.Data.StatementType),
+                default(System.Data.Common.DataTableMapping)
+            ) { }
         protected override System.Data.IDbCommand? BaseCommand
         {
             get { throw null; }

@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
     {
         public static ImmutableDictionary<CaptureId, FlowCaptureKind> CreateLValueFlowCaptures(
             ControlFlowGraph cfg
-        ) {
+        )
+        {
             // This method identifies flow capture reference operations that are target of an assignment
             // and marks them as lvalue flow captures.
             // Control flow graph can also contain flow captures
@@ -59,12 +60,14 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                     var flowCaptureReference in cfg.DescendantOperations<IFlowCaptureReferenceOperation>(
                         OperationKind.FlowCaptureReference
                     )
-                ) {
+                )
+                {
                     if (
                         flowCaptureReference.Parent is IAssignmentOperation assignment
                             && assignment.Target == flowCaptureReference
                         || flowCaptureReference.IsInLeftOfDeconstructionAssignment(out _)
-                    ) {
+                    )
+                    {
                         lvalueFlowCaptureIdBuilder ??= ImmutableDictionary.CreateBuilder<
                             CaptureId,
                             FlowCaptureKind

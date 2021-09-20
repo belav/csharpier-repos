@@ -64,7 +64,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
             IProjectCodeModelFactory projectCodeModelFactory,
             Guid projectGuid,
             string binOutputPath
-        ) {
+        )
+        {
             _visualStudioProject = visualStudioProject;
             _visualStudioWorkspace = visualStudioWorkspace;
 
@@ -101,7 +102,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
             if (
                 visualStudioWorkspace.Services.GetLanguageServices(visualStudioProject.Language)
                     .GetService<ICommandLineParserService>() != null
-            ) {
+            )
+            {
                 _visualStudioProjectOptionsProcessor = new VisualStudioProjectOptionsProcessor(
                     _visualStudioProject,
                     visualStudioWorkspace.Services
@@ -208,7 +210,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
             else if (
                 name == AdditionalPropertyNames.TemporaryDependencyNodeTargetIdentifier
                 && !RoslynString.IsNullOrEmpty(value)
-            ) {
+            )
+            {
                 _visualStudioProject.DependencyNodeTargetIdentifier = value;
             }
         }
@@ -216,7 +219,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
         public void AddMetadataReference(
             string referencePath,
             MetadataReferenceProperties properties
-        ) {
+        )
+        {
             referencePath = FileUtilities.NormalizeAbsolutePath(referencePath);
             _visualStudioProject.AddMetadataReference(referencePath, properties);
         }
@@ -233,7 +237,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
         public void AddProjectReference(
             IWorkspaceProjectContext project,
             MetadataReferenceProperties properties
-        ) {
+        )
+        {
             var otherProjectId = ((CPSProject)project)._visualStudioProject.Id;
             _visualStudioProject.AddProjectReference(
                 new ProjectReference(

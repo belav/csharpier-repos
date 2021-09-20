@@ -14,7 +14,8 @@ namespace System.Web.Http.ModelBinding.Binders
         public ComplexModelDto(
             ModelMetadata modelMetadata,
             IEnumerable<ModelMetadata> propertyMetadata
-        ) {
+        )
+        {
             if (modelMetadata == null)
             {
                 throw Error.ArgumentNull("modelMetadata");

@@ -78,7 +78,8 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
             InlineHintsTaggerProvider taggerProvider,
             IClassificationFormatMap formatMap,
             bool classify
-        ) {
+        )
+        {
             return new InlineHintsTag(
                 CreateElement(
                     hint.DisplayParts,
@@ -97,7 +98,8 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
 
         public async Task<IReadOnlyCollection<object>> CreateDescriptionAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var document = _span.Snapshot.GetOpenDocumentInCurrentContextWithChanges();
             if (document != null)
             {
@@ -124,7 +126,8 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
             IClassificationFormatMap formatMap,
             ClassificationTypeMap typeMap,
             bool classify
-        ) {
+        )
+        {
             // Constructs the hint block which gets assigned parameter name and fontstyles according to the options
             // page. Calculates a inline tag that will be 3/4s the size of a normal line. This shrink size tends to work
             // well with VS at any zoom level or font size.
@@ -198,7 +201,8 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
 
         private static (ImmutableArray<TaggedText> texts, int leftPadding, int rightPadding) Trim(
             ImmutableArray<TaggedText> taggedTexts
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<TaggedText>.GetInstance(out var result);
             var leftPadding = 0;
             var rightPadding = 0;

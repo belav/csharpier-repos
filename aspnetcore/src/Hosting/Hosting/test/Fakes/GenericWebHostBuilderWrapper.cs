@@ -34,14 +34,16 @@ namespace Microsoft.AspNetCore.Hosting.Tests.Fakes
 
         public IWebHostBuilder Configure(
             Action<WebHostBuilderContext, IApplicationBuilder> configure
-        ) {
+        )
+        {
             _builder.Configure(configure);
             return this;
         }
 
         public IWebHostBuilder ConfigureAppConfiguration(
             Action<WebHostBuilderContext, IConfigurationBuilder> configureDelegate
-        ) {
+        )
+        {
             _builder.ConfigureAppConfiguration(configureDelegate);
             return this;
         }
@@ -54,7 +56,8 @@ namespace Microsoft.AspNetCore.Hosting.Tests.Fakes
 
         public IWebHostBuilder ConfigureServices(
             Action<WebHostBuilderContext, IServiceCollection> configureServices
-        ) {
+        )
+        {
             _builder.ConfigureServices(configureServices);
             return this;
         }
@@ -66,7 +69,8 @@ namespace Microsoft.AspNetCore.Hosting.Tests.Fakes
 
         public IWebHostBuilder UseDefaultServiceProvider(
             Action<WebHostBuilderContext, ServiceProviderOptions> configure
-        ) {
+        )
+        {
             _builder.UseDefaultServiceProvider(configure);
             return this;
         }
@@ -85,7 +89,8 @@ namespace Microsoft.AspNetCore.Hosting.Tests.Fakes
 
         public IWebHostBuilder UseStartup<TStartup>(
             Func<WebHostBuilderContext, TStartup> startupFactory
-        ) {
+        )
+        {
             _builder.UseStartup(startupFactory);
             return this;
         }

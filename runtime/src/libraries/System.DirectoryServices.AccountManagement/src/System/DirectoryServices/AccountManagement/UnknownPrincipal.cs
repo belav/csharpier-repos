@@ -30,7 +30,8 @@ namespace System.DirectoryServices.AccountManagement
             PrincipalContext ctx,
             byte[] sid,
             string name
-        ) {
+        )
+        {
             UnknownPrincipal up = new UnknownPrincipal(ctx);
             up.unpersisted = false;
             up.fakePrincipal = true;

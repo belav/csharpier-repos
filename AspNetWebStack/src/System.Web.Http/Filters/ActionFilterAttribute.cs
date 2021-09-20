@@ -30,7 +30,8 @@ namespace System.Web.Http.Filters
         public virtual Task OnActionExecutingAsync(
             HttpActionContext actionContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 OnActionExecuting(actionContext);
@@ -51,7 +52,8 @@ namespace System.Web.Http.Filters
         public virtual Task OnActionExecutedAsync(
             HttpActionExecutedContext actionExecutedContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 OnActionExecuted(actionExecutedContext);
@@ -68,7 +70,8 @@ namespace System.Web.Http.Filters
             HttpActionContext actionContext,
             CancellationToken cancellationToken,
             Func<Task<HttpResponseMessage>> continuation
-        ) {
+        )
+        {
             if (actionContext == null)
             {
                 throw Error.ArgumentNull("actionContext");
@@ -90,7 +93,8 @@ namespace System.Web.Http.Filters
             HttpActionContext actionContext,
             CancellationToken cancellationToken,
             Func<Task<HttpResponseMessage>> continuation
-        ) {
+        )
+        {
             await OnActionExecutingAsync(actionContext, cancellationToken);
 
             if (actionContext.Response != null)
@@ -110,7 +114,8 @@ namespace System.Web.Http.Filters
             HttpActionContext actionContext,
             CancellationToken cancellationToken,
             Func<Task<HttpResponseMessage>> continuation
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             HttpResponseMessage response = null;

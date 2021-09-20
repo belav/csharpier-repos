@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         protected override CSharpSyntaxNode ParseNode(
             string text,
             CSharpParseOptions options = null
-        ) {
+        )
+        {
             return SyntaxFactory.ParseExpression(
                 text,
                 options: (options ?? TestOptions.Regular).WithLanguageVersion(

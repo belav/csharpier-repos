@@ -15,7 +15,8 @@ namespace System.Reflection.TypeLoading.Ecma
             this EntityHandle handle,
             EcmaModule module,
             in TypeContext typeContext
-        ) {
+        )
+        {
             Debug.Assert(!handle.IsNil);
             Debug.Assert(module != null);
 
@@ -32,7 +33,8 @@ namespace System.Reflection.TypeLoading.Ecma
         public static EcmaDefinitionType ResolveTypeDef(
             this TypeDefinitionHandle handle,
             EcmaModule module
-        ) {
+        )
+        {
             Debug.Assert(!handle.IsNil);
             Debug.Assert(module != null);
 
@@ -48,7 +50,8 @@ namespace System.Reflection.TypeLoading.Ecma
         public static RoDefinitionType ResolveTypeRef(
             this TypeReferenceHandle handle,
             EcmaModule module
-        ) {
+        )
+        {
             Debug.Assert(!handle.IsNil);
             Debug.Assert(module != null);
 
@@ -61,7 +64,8 @@ namespace System.Reflection.TypeLoading.Ecma
         private static RoDefinitionType ComputeTypeRefResolution(
             TypeReferenceHandle handle,
             EcmaModule module
-        ) {
+        )
+        {
             MetadataReader reader = module.Reader;
             TypeReference tr = handle.GetTypeReference(reader);
             ReadOnlySpan<byte> ns = tr.Namespace.AsReadOnlySpan(reader);
@@ -174,7 +178,8 @@ namespace System.Reflection.TypeLoading.Ecma
             this TypeSpecificationHandle handle,
             EcmaModule module,
             in TypeContext typeContext
-        ) {
+        )
+        {
             Debug.Assert(!handle.IsNil);
             Debug.Assert(module != null);
 
@@ -184,7 +189,8 @@ namespace System.Reflection.TypeLoading.Ecma
         public static EcmaGenericParameterType ResolveGenericParameter(
             this GenericParameterHandle handle,
             EcmaModule module
-        ) {
+        )
+        {
             Debug.Assert(!handle.IsNil);
             Debug.Assert(module != null);
 
@@ -211,7 +217,8 @@ namespace System.Reflection.TypeLoading.Ecma
         public static RoAssembly ResolveAssembly(
             this AssemblyReferenceHandle handle,
             EcmaModule module
-        ) {
+        )
+        {
             RoAssembly? assembly = handle.TryResolveAssembly(module, out Exception? e);
             if (assembly == null)
                 throw e!;
@@ -222,7 +229,8 @@ namespace System.Reflection.TypeLoading.Ecma
             this AssemblyReferenceHandle handle,
             EcmaModule module,
             out Exception? e
-        ) {
+        )
+        {
             e = null;
             RoAssembly assembly = handle.ResolveToAssemblyOrExceptionAssembly(module);
             if (assembly is RoExceptionAssembly exceptionAssembly)
@@ -236,7 +244,8 @@ namespace System.Reflection.TypeLoading.Ecma
         public static RoAssembly ResolveToAssemblyOrExceptionAssembly(
             this AssemblyReferenceHandle handle,
             EcmaModule module
-        ) {
+        )
+        {
             return module.AssemblyRefTable.GetOrAdd(handle, module, s_resolveAssembly);
         }
 
@@ -274,7 +283,8 @@ namespace System.Reflection.TypeLoading.Ecma
             this TypeDefinitionHandle handle,
             EcmaModule module,
             in TypeContext typeContext
-        ) {
+        )
+        {
             RoDefinitionType declaringType = handle.ResolveTypeDef(module);
             if (typeContext.GenericTypeArguments != null && declaringType.IsGenericTypeDefinition)
                 return declaringType.GetUniqueConstructedGenericType(

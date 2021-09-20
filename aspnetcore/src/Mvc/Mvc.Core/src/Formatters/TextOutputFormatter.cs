@@ -98,7 +98,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                                 supportedEncoding.WebName,
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             // This is supported.
                             return SupportedEncodings[i];
                         }
@@ -181,14 +182,16 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
 
         internal static IList<StringWithQualityHeaderValue> GetAcceptCharsetHeaderValues(
             OutputFormatterWriteContext context
-        ) {
+        )
+        {
             var request = context.HttpContext.Request;
             if (
                 StringWithQualityHeaderValue.TryParseList(
                     request.Headers[HeaderNames.AcceptCharset],
                     out var result
                 )
-            ) {
+            )
+            {
                 return result;
             }
 
@@ -203,7 +206,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                     Encoding.UTF8.WebName,
                     StringComparison.OrdinalIgnoreCase
                 ) && OutputMediaTypeCache.ContainsKey(mediaType)
-            ) {
+            )
+            {
                 return OutputMediaTypeCache[mediaType];
             }
 
@@ -212,7 +216,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
 
         private Encoding? MatchAcceptCharacterEncoding(
             IList<StringWithQualityHeaderValue> acceptCharsetHeaders
-        ) {
+        )
+        {
             if (acceptCharsetHeaders != null && acceptCharsetHeaders.Count > 0)
             {
                 var acceptValues = Sort(acceptCharsetHeaders);
@@ -227,7 +232,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                             if (
                                 charset.Equals(encoding.WebName, StringComparison.OrdinalIgnoreCase)
                                 || charset.Equals("*", StringComparison.Ordinal)
-                            ) {
+                            )
+                            {
                                 return encoding;
                             }
                         }

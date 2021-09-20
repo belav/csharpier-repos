@@ -107,7 +107,8 @@ namespace System.Web.Http.Controllers
         private static HttpAuthenticationContext CreateProductUnderTest(
             HttpActionContext actionContext,
             IPrincipal principal
-        ) {
+        )
+        {
             return new HttpAuthenticationContext(actionContext, principal);
         }
 

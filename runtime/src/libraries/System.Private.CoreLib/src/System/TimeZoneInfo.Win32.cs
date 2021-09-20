@@ -102,7 +102,8 @@ namespace System
                     TimeZonesRegistryHive,
                     writable: false
                 )
-            ) {
+            )
+            {
                 if (reg != null)
                 {
                     foreach (string keyName in reg.GetSubKeyNames())
@@ -176,7 +177,8 @@ namespace System
             DateTime startDate,
             DateTime endDate,
             int defaultBaseUtcOffset
-        ) {
+        )
+        {
             bool supportsDst = timeZoneInformation.StandardDate.Month != 0;
 
             if (!supportsDst)
@@ -207,7 +209,8 @@ namespace System
                     out TransitionTime daylightTransitionStart,
                     readStartDate: true
                 )
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -217,7 +220,8 @@ namespace System
                     out TransitionTime daylightTransitionEnd,
                     readStartDate: false
                 )
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -245,7 +249,8 @@ namespace System
         private static string? FindIdFromTimeZoneInformation(
             in TIME_ZONE_INFORMATION timeZone,
             out bool dstDisabled
-        ) {
+        )
+        {
             dstDisabled = false;
 
             using (
@@ -253,7 +258,8 @@ namespace System
                     TimeZonesRegistryHive,
                     writable: false
                 )
-            ) {
+            )
+            {
                 if (key == null)
                 {
                     return null;
@@ -307,7 +313,8 @@ namespace System
                         out _,
                         cachedData
                     ) == TimeZoneInfoResult.Success
-                ) {
+                )
+                {
                     // successfully loaded the time zone from the registry
                     return zone!;
                 }
@@ -323,7 +330,8 @@ namespace System
                 if (
                     TryGetTimeZone(id, dstDisabled, out TimeZoneInfo? zone, out _, cachedData)
                     == TimeZoneInfoResult.Success
-                ) {
+                )
+                {
                     // successfully loaded the time zone from the registry
                     return zone!;
                 }
@@ -342,7 +350,8 @@ namespace System
         private static TimeZoneInfo GetLocalTimeZoneFromWin32Data(
             in TIME_ZONE_INFORMATION timeZoneInformation,
             bool dstDisabled
-        ) {
+        )
+        {
             // first try to create the TimeZoneInfo with the original 'dstDisabled' flag
             try
             {
@@ -431,7 +440,8 @@ namespace System
         internal static TimeSpan GetDateTimeNowUtcOffsetFromUtc(
             DateTime time,
             out bool isAmbiguousLocalDst
-        ) {
+        )
+        {
             isAmbiguousLocalDst = false;
             int timeYear = time.Year;
 
@@ -470,7 +480,8 @@ namespace System
             in REG_TZI_FORMAT timeZoneInformation,
             out TransitionTime transitionTime,
             bool readStartDate
-        ) {
+        )
+        {
             //
             // SYSTEMTIME -
             //
@@ -605,7 +616,8 @@ namespace System
             out AdjustmentRule[]? rules,
             out Exception? e,
             int defaultBaseUtcOffset
-        ) {
+        )
+        {
             rules = null;
             e = null;
 
@@ -637,7 +649,8 @@ namespace System
                         TimeZonesRegistryHive + "\\" + id + "\\Dynamic DST",
                         writable: false
                     )
-                ) {
+                )
+                {
                     if (dynamicKey == null)
                     {
                         AdjustmentRule? rule = CreateAdjustmentRuleFromTimeZoneInformation(
@@ -677,7 +690,8 @@ namespace System
                             first.ToString(CultureInfo.InvariantCulture),
                             out REG_TZI_FORMAT dtzi
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
 
@@ -721,7 +735,8 @@ namespace System
                                 i.ToString(CultureInfo.InvariantCulture),
                                 out dtzi
                             )
-                        ) {
+                        )
+                        {
                             return false;
                         }
                         AdjustmentRule? middleRule = CreateAdjustmentRuleFromTimeZoneInformation(
@@ -744,7 +759,8 @@ namespace System
                             last.ToString(CultureInfo.InvariantCulture),
                             out dtzi
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
                     AdjustmentRule? lastRule = CreateAdjustmentRuleFromTimeZoneInformation(
@@ -789,11 +805,13 @@ namespace System
             RegistryKey key,
             string name,
             out REG_TZI_FORMAT dtzi
-        ) {
+        )
+        {
             if (
                 !(key.GetValue(name, null) is byte[] regValue)
                 || regValue.Length != sizeof(REG_TZI_FORMAT)
-            ) {
+            )
+            {
                 dtzi = default;
                 return false;
             }
@@ -820,7 +838,8 @@ namespace System
             in TIME_ZONE_INFORMATION timeZone,
             string id,
             out bool dstDisabled
-        ) {
+        )
+        {
             dstDisabled = false;
 
             using (
@@ -828,7 +847,8 @@ namespace System
                     TimeZonesRegistryHive + "\\" + id,
                     writable: false
                 )
-            ) {
+            )
+            {
                 if (key == null)
                 {
                     return false;
@@ -840,7 +860,8 @@ namespace System
                         TimeZoneInfoValue,
                         out REG_TZI_FORMAT registryTimeZoneInfo
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -940,7 +961,8 @@ namespace System
                     CultureInfo.InvariantCulture,
                     out int resourceId
                 )
-            ) {
+            )
+            {
                 return string.Empty;
             }
             resourceId = -resourceId;
@@ -988,7 +1010,8 @@ namespace System
         private static unsafe string TryGetLocalizedNameByNativeResource(
             string filePath,
             int resource
-        ) {
+        )
+        {
             IntPtr handle = IntPtr.Zero;
             try
             {
@@ -1038,7 +1061,8 @@ namespace System
             out string? displayName,
             out string? standardName,
             out string? daylightName
-        ) {
+        )
+        {
             displayName = string.Empty;
             standardName = string.Empty;
             daylightName = string.Empty;
@@ -1089,7 +1113,8 @@ namespace System
             string id,
             out TimeZoneInfo? value,
             out Exception? e
-        ) {
+        )
+        {
             e = null;
 
             // Standard Time Zone Registry Data
@@ -1122,7 +1147,8 @@ namespace System
                     TimeZonesRegistryHive + "\\" + id,
                     writable: false
                 )
-            ) {
+            )
+            {
                 if (key == null)
                 {
                     value = null;
@@ -1135,7 +1161,8 @@ namespace System
                         TimeZoneInfoValue,
                         out REG_TZI_FORMAT defaultTimeZoneInformation
                     )
-                ) {
+                )
+                {
                     // the registry value could not be cast to a byte array
                     value = null;
                     return TimeZoneInfoResult.InvalidTimeZoneException;
@@ -1149,7 +1176,8 @@ namespace System
                         out e,
                         defaultTimeZoneInformation.Bias
                     )
-                ) {
+                )
+                {
                     value = null;
                     return TimeZoneInfoResult.InvalidTimeZoneException;
                 }
@@ -1207,7 +1235,8 @@ namespace System
                     TimeZonesRegistryHive + "\\" + UtcId,
                     writable: false
                 )
-            ) {
+            )
+            {
                 if (key != null)
                 {
                     // read the MUI_ registry key

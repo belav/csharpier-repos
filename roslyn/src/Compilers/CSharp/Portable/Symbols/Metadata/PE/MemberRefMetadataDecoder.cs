@@ -29,10 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         /// </summary>
         private readonly TypeSymbol _containingType;
 
-        public MemberRefMetadataDecoder(
-            PEModuleSymbol moduleSymbol,
-            TypeSymbol containingType
-        ) : base(moduleSymbol, containingType as PENamedTypeSymbol)
+        public MemberRefMetadataDecoder(PEModuleSymbol moduleSymbol, TypeSymbol containingType)
+            : base(moduleSymbol, containingType as PENamedTypeSymbol)
         {
             Debug.Assert((object)containingType != null);
             _containingType = containingType;
@@ -107,7 +105,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             NamedTypeSymbol namedType,
             out int cumulativeArity,
             out TypeSymbol typeArgument
-        ) {
+        )
+        {
             cumulativeArity = namedType.Arity;
             typeArgument = null;
 
@@ -150,7 +149,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             TypeSymbol targetTypeSymbol,
             MemberReferenceHandle memberRef,
             bool methodsOnly
-        ) {
+        )
+        {
             if ((object)targetTypeSymbol == null)
             {
                 return null;
@@ -221,7 +221,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             string targetMemberName,
             ImmutableArray<ModifierInfo<TypeSymbol>> customModifiers,
             TypeSymbol type
-        ) {
+        )
+        {
             foreach (Symbol member in targetTypeSymbol.GetMembers(targetMemberName))
             {
                 var field = member as FieldSymbol;
@@ -235,7 +236,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                         TypeCompareKind.CLRSignatureCompareOptions
                     )
                     && CustomModifiersMatch(fieldType.CustomModifiers, customModifiers)
-                ) {
+                )
+                {
                     // Behavior in the face of multiple matching signatures is
                     // implementation defined - we'll just pick the first one.
                     return field;
@@ -251,7 +253,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             SignatureHeader targetMemberSignatureHeader,
             int targetMemberTypeParamCount,
             ParamInfo<TypeSymbol>[] targetParamInfo
-        ) {
+        )
+        {
             foreach (Symbol member in targetTypeSymbol.GetMembers(targetMemberName))
             {
                 var method = member as MethodSymbol;
@@ -260,7 +263,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     && ((byte)method.CallingConvention == targetMemberSignatureHeader.RawValue)
                     && (targetMemberTypeParamCount == method.Arity)
                     && MethodSymbolMatchesParamInfo(method, targetParamInfo)
-                ) {
+                )
+                {
                     // Behavior in the face of multiple matching signatures is
                     // implementation defined - we'll just pick the first one.
                     return method;
@@ -273,7 +277,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         private static bool MethodSymbolMatchesParamInfo(
             MethodSymbol candidateMethod,
             ParamInfo<TypeSymbol>[] targetParamInfo
-        ) {
+        )
+        {
             int numParams = targetParamInfo.Length - 1; //don't count return type
 
             if (candidateMethod.ParameterCount != numParams)
@@ -304,7 +309,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                             i + 1 /*for return type*/
                         ]
                     )
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -316,7 +322,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             ParameterSymbol candidateParam,
             TypeMap candidateMethodTypeMap,
             ref ParamInfo<TypeSymbol> targetParam
-        ) {
+        )
+        {
             Debug.Assert(candidateMethodTypeMap != null);
 
             // This could be combined into a single return statement with a more complicated expression, but that would
@@ -337,7 +344,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     targetParam.Type,
                     TypeCompareKind.CLRSignatureCompareOptions
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -349,7 +357,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     ),
                     targetParam.RefCustomModifiers
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -360,7 +369,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             MethodSymbol candidateMethod,
             TypeMap candidateMethodTypeMap,
             ref ParamInfo<TypeSymbol> targetReturnParam
-        ) {
+        )
+        {
             Debug.Assert(candidateMethodTypeMap != null);
 
             if (candidateMethod.ReturnsByRef != targetReturnParam.IsByRef)
@@ -379,7 +389,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     targetReturnType,
                     TypeCompareKind.CLRSignatureCompareOptions
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -394,7 +405,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     ),
                     targetReturnParam.RefCustomModifiers
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -404,7 +416,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         private static bool CustomModifiersMatch(
             ImmutableArray<CustomModifier> candidateCustomModifiers,
             ImmutableArray<ModifierInfo<TypeSymbol>> targetCustomModifiers
-        ) {
+        )
+        {
             if (targetCustomModifiers.IsDefault || targetCustomModifiers.IsEmpty)
             {
                 return candidateCustomModifiers.IsDefault || candidateCustomModifiers.IsEmpty;
@@ -431,7 +444,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                         targetCustomModifier.Modifier,
                         ((CSharpCustomModifier)candidateCustomModifier).ModifierSymbol
                     )
-                ) {
+                )
+                {
                     return false;
                 }
             }

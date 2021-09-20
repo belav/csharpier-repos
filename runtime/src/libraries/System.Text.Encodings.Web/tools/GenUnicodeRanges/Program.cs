@@ -91,7 +91,8 @@ namespace GenDefinedCharList
                 if (
                     startCodeAsInt >= 0x10000
                     || (startCodeAsInt >= 0xD800 && startCodeAsInt <= 0xDFFF)
-                ) {
+                )
+                {
                     continue;
                 }
 

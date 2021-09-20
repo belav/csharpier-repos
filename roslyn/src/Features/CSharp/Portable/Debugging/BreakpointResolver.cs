@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
         protected override bool HasMethodBody(
             IMethodSymbol method,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var location = method.Locations.First(loc => loc.IsInSource);
             var tree = location.SourceTree;
             var token = tree.GetRoot(cancellationToken).FindToken(location.SourceSpan.Start);
@@ -48,7 +49,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
         protected override void ParseText(
             out IList<NameAndArity> nameParts,
             out int? parameterCount
-        ) {
+        )
+        {
             var text = Text;
 
             Debug.Assert(text != null);
@@ -68,7 +70,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
                 if (
                     parameterList.OpenParenToken.IsMissing
                     || parameterList.CloseParenToken.IsMissing
-                ) {
+                )
+                {
                     foundIncompleteParameterList = true;
                 }
                 else
@@ -101,7 +104,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
                 !foundIncompleteParameterList
                 && (lengthOfParsedText == text.Length)
                 && !parts.Any(p => p.IsKind(SyntaxKind.AliasQualifiedName))
-            ) {
+            )
+            {
                 nameParts = parts.Cast<SimpleNameSyntax>()
                     .Select(p => new NameAndArity(p.Identifier.ValueText, p.Arity))
                     .ToList();

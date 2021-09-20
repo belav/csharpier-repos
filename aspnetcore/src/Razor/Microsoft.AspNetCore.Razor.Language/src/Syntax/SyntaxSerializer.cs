@@ -150,7 +150,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
                 }
                 else if (
                     node is MarkupMinimizedTagHelperAttributeSyntax minimizedTagHelperAttribute
-                ) {
+                )
+                {
                     WriteTagHelperAttributeInfo(minimizedTagHelperAttribute.TagHelperAttributeInfo);
                 }
                 else if (node is MarkupStartTagSyntax startTag)

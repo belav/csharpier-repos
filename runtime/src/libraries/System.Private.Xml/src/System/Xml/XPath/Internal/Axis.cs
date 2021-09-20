@@ -40,7 +40,8 @@ namespace MS.Internal.Xml.XPath
             string prefix,
             string name,
             XPathNodeType nodetype
-        ) {
+        )
+        {
             Debug.Assert(prefix != null);
             Debug.Assert(name != null);
             _axisType = axisType;

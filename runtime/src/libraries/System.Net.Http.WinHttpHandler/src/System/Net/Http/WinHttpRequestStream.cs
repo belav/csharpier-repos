@@ -84,7 +84,8 @@ namespace System.Net.Http
             int offset,
             int count,
             CancellationToken token
-        ) {
+        )
+        {
             if (buffer == null)
             {
                 throw new ArgumentNullException(nameof(buffer));
@@ -117,7 +118,8 @@ namespace System.Net.Http
             if (
                 _state.TcsInternalWriteDataToRequestStream != null
                 && !_state.TcsInternalWriteDataToRequestStream.Task.IsCompleted
-            ) {
+            )
+            {
                 throw new InvalidOperationException(SR.net_http_no_concurrent_io_allowed);
             }
 
@@ -198,7 +200,8 @@ namespace System.Net.Http
             int offset,
             int count,
             CancellationToken token
-        ) {
+        )
+        {
             if (count == 0)
             {
                 return Task.CompletedTask;
@@ -214,7 +217,8 @@ namespace System.Net.Http
             int offset,
             int count,
             CancellationToken token
-        ) {
+        )
+        {
             // WinHTTP does not fully support chunked uploads. It simply allows one to omit the 'Content-Length' header
             // and instead use the 'Transfer-Encoding: chunked' header. The caller is still required to encode the
             // request body according to chunking rules.
@@ -236,7 +240,8 @@ namespace System.Net.Http
             int offset,
             int count,
             CancellationToken token
-        ) {
+        )
+        {
             Debug.Assert(count > 0);
 
             if (!_cachedSendPinnedBuffer.IsAllocated || _cachedSendPinnedBuffer.Target != buffer)
@@ -262,7 +267,8 @@ namespace System.Net.Http
                         (uint)count,
                         IntPtr.Zero
                     )
-                ) {
+                )
+                {
                     _state.TcsInternalWriteDataToRequestStream.TrySetException(
                         new IOException(
                             SR.net_http_io_write,

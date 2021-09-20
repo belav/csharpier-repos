@@ -38,7 +38,8 @@ namespace Microsoft.Extensions.Hosting.Systemd
                     SocketType.Dgram,
                     ProtocolType.Unspecified
                 )
-            ) {
+            )
+            {
                 var endPoint = new UnixDomainSocketEndPoint(_socketPath);
                 socket.Connect(endPoint);
 

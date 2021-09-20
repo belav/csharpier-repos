@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Routing.Tests
             object parameterValue,
             bool parseBeforeTest,
             bool expected
-        ) {
+        )
+        {
             // Arrange
             if (parseBeforeTest)
             {

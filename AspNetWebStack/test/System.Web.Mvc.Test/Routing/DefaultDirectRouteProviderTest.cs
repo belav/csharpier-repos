@@ -189,7 +189,8 @@ namespace System.Web.Routing
         private static ActionDescriptor CreateStubActionDescriptor(
             ControllerDescriptor controllerDescriptor,
             string actionName
-        ) {
+        )
+        {
             Mock<ActionDescriptor> mock = new Mock<ActionDescriptor>(MockBehavior.Strict);
             mock.SetupGet(d => d.ControllerDescriptor).Returns(controllerDescriptor);
             mock.SetupGet(d => d.ActionName).Returns(actionName);

@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 ImmutableArray<
                     KeyValuePair<IPropertySymbol, IOperation>
                 > anonymousTypePropertyValues
-            ) {
+            )
+            {
                 Debug.Assert(!anonymousTypePropertyValues.IsDefault);
                 Debug.Assert(implicitInstance == null || anonymousType == null);
                 ImplicitInstance = implicitInstance;

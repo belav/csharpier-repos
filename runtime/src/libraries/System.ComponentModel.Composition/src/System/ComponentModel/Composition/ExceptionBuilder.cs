@@ -12,7 +12,8 @@ namespace System.ComponentModel
         public static Exception CreateDiscoveryException(
             string messageFormat,
             params string[] arguments
-        ) {
+        )
+        {
             // DiscoveryError (Dev10:602872): This should go through the discovery error reporting when
             // we add a way to report discovery errors properly.
             return new InvalidOperationException(Format(messageFormat, arguments));
@@ -62,7 +63,8 @@ namespace System.ComponentModel
 
         public static ArgumentException CreateExportDefinitionNotOnThisComposablePart(
             string parameterName
-        ) {
+        )
+        {
             if (parameterName == null)
             {
                 throw new ArgumentNullException(nameof(parameterName));
@@ -80,7 +82,8 @@ namespace System.ComponentModel
 
         public static ArgumentException CreateImportDefinitionNotOnThisComposablePart(
             string parameterName
-        ) {
+        )
+        {
             if (parameterName == null)
             {
                 throw new ArgumentNullException(nameof(parameterName));
@@ -103,7 +106,8 @@ namespace System.ComponentModel
             ComposablePart part,
             ExportDefinition definition,
             Exception innerException
-        ) {
+        )
+        {
             if (part == null)
             {
                 throw new ArgumentNullException(nameof(part));
@@ -127,7 +131,8 @@ namespace System.ComponentModel
         public static ArgumentException CreateReflectionModelInvalidPartDefinition(
             string parameterName,
             Type partDefinitionType
-        ) {
+        )
+        {
             if (parameterName == null)
             {
                 throw new ArgumentNullException(nameof(parameterName));

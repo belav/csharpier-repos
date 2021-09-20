@@ -63,7 +63,8 @@ namespace System.Net.Http.Json.Functional.Tests
             ref Utf8JsonReader reader,
             Type typeToConvert,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             AssertDefaultOptions(options);
 
             while (reader.TokenType != JsonTokenType.EndObject)
@@ -77,7 +78,8 @@ namespace System.Net.Http.Json.Functional.Tests
             Utf8JsonWriter writer,
             EnsureDefaultOptions value,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             AssertDefaultOptions(options);
 
             writer.WriteStartObject();

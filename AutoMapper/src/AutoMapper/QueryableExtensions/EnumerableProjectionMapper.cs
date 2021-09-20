@@ -34,7 +34,8 @@ namespace AutoMapper.QueryableExtensions.Impl
             in ProjectionRequest request,
             Expression resolvedSource,
             LetPropertyMaps letPropertyMaps
-        ) {
+        )
+        {
             var destinationListType = GetElementType(memberMap.DestinationType);
             var sourceListType = GetElementType(memberMap.SourceType);
             var sourceExpression = resolvedSource;

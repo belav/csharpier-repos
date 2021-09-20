@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 Diagnostic diagnostic,
                 AbstractSuppressionCodeFixProvider fixer,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var compilation = await project.GetCompilationAsync(cancellationToken)
                     .ConfigureAwait(false);
                 var attribute = diagnostic.GetSuppressionInfo(compilation).Attribute;
@@ -37,7 +38,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 else if (
                     documentOpt != null
                     && !SuppressionHelpers.IsSynthesizedExternalSourceDiagnostic(diagnostic)
-                ) {
+                )
+                {
                     return PragmaRemoveAction.Create(
                         suppressionTargetInfo,
                         documentOpt,
@@ -55,10 +57,12 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 Diagnostic diagnostic,
                 AbstractSuppressionCodeFixProvider fixer,
                 bool forFixMultipleContext = false
-            ) : base(
-                fixer,
-                title: string.Format(FeaturesResources.Remove_Suppression_0, diagnostic.Id)
-            ) {
+            )
+                : base(
+                    fixer,
+                    title: string.Format(FeaturesResources.Remove_Suppression_0, diagnostic.Id)
+                )
+            {
                 _diagnostic = diagnostic;
                 _forFixMultipleContext = forFixMultipleContext;
             }

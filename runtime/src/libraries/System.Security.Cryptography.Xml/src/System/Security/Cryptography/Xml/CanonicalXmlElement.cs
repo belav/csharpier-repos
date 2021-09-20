@@ -33,7 +33,8 @@ namespace System.Security.Cryptography.Xml
             StringBuilder strBuilder,
             DocPosition docPos,
             AncestralNamespaceContextManager anc
-        ) {
+        )
+        {
             Hashtable nsLocallyDeclared = new Hashtable();
             SortedList nsListToRender = new SortedList(new NamespaceSortOrder());
             SortedList attrListToRender = new SortedList(new AttributeSortOrder());
@@ -47,7 +48,8 @@ namespace System.Security.Cryptography.Xml
                         ((CanonicalXmlAttribute)attr).IsInNodeSet
                         || Utils.IsNamespaceNode(attr)
                         || Utils.IsXmlNamespaceNode(attr)
-                    ) {
+                    )
+                    {
                         if (Utils.IsNamespaceNode(attr))
                         {
                             anc.TrackNamespaceNode(attr, nsListToRender, nsLocallyDeclared);
@@ -120,7 +122,8 @@ namespace System.Security.Cryptography.Xml
             HashAlgorithm hash,
             DocPosition docPos,
             AncestralNamespaceContextManager anc
-        ) {
+        )
+        {
             Hashtable nsLocallyDeclared = new Hashtable();
             SortedList nsListToRender = new SortedList(new NamespaceSortOrder());
             SortedList attrListToRender = new SortedList(new AttributeSortOrder());
@@ -136,7 +139,8 @@ namespace System.Security.Cryptography.Xml
                         ((CanonicalXmlAttribute)attr).IsInNodeSet
                         || Utils.IsNamespaceNode(attr)
                         || Utils.IsXmlNamespaceNode(attr)
-                    ) {
+                    )
+                    {
                         if (Utils.IsNamespaceNode(attr))
                         {
                             anc.TrackNamespaceNode(attr, nsListToRender, nsLocallyDeclared);

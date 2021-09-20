@@ -80,7 +80,8 @@ namespace System.Net
                 if (
                     UserAgent != null
                     && CultureInfo.InvariantCulture.CompareInfo.IsPrefix(UserAgent, "UP")
-                ) {
+                )
+                {
                     string? postDataCharset = Headers["x-up-devcap-post-charset"];
                     if (postDataCharset != null && postDataCharset.Length > 0)
                     {
@@ -127,7 +128,8 @@ namespace System.Net
                 if (
                     string.IsNullOrEmpty(Headers[HttpKnownHeaderNames.Connection])
                     || string.IsNullOrEmpty(Headers[HttpKnownHeaderNames.Upgrade])
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -139,7 +141,8 @@ namespace System.Net
                             HttpKnownHeaderNames.Upgrade,
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         foundConnectionUpgradeHeader = true;
                         break;
                     }
@@ -158,7 +161,8 @@ namespace System.Net
                             HttpWebSocket.WebSocketUpgradeToken,
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }
@@ -596,7 +600,8 @@ namespace System.Net
                 string s,
                 bool urlencoded,
                 Encoding encoding
-            ) {
+            )
+            {
                 int l = s.Length;
                 int i = (l > 0 && s[0] == '?') ? 1 : 0;
 

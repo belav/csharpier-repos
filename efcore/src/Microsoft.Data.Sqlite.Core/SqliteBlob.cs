@@ -35,14 +35,15 @@ namespace Microsoft.Data.Sqlite
             string columnName,
             long rowid,
             bool readOnly = false
-        ) : this(
-            connection,
-            SqliteConnection.MainDatabaseName,
-            tableName,
-            columnName,
-            rowid,
-            readOnly
-        ) { }
+        )
+            : this(
+                connection,
+                SqliteConnection.MainDatabaseName,
+                tableName,
+                columnName,
+                rowid,
+                readOnly
+            ) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="SqliteBlob" /> class.
@@ -61,7 +62,8 @@ namespace Microsoft.Data.Sqlite
             string columnName,
             long rowid,
             bool readOnly = false
-        ) {
+        )
+        {
             if (connection?.State != ConnectionState.Open)
             {
                 throw new InvalidOperationException(Resources.SqlBlobRequiresOpenConnection);

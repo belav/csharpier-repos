@@ -40,7 +40,8 @@ namespace Microsoft.Extensions.DependencyInjection
             string callSite,
             int chunkIndex,
             int chunkCount
-        ) {
+        )
+        {
             WriteEvent(1, serviceType, callSite, chunkIndex, chunkCount);
         }
 
@@ -67,7 +68,8 @@ namespace Microsoft.Extensions.DependencyInjection
             int serviceProviderHashCode,
             int scopedServicesResolved,
             int disposableServices
-        ) {
+        )
+        {
             WriteEvent(5, serviceProviderHashCode, scopedServicesResolved, disposableServices);
         }
 
@@ -136,7 +138,8 @@ namespace Microsoft.Extensions.DependencyInjection
             this DependencyInjectionEventSource source,
             Type serviceType,
             Expression expression
-        ) {
+        )
+        {
             if (source.IsEnabled(EventLevel.Verbose, EventKeywords.All))
             {
                 var visitor = new NodeCountingVisitor();

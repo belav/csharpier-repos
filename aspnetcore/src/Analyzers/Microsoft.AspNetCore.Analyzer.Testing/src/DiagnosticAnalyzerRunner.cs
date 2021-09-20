@@ -34,7 +34,8 @@ namespace Microsoft.AspNetCore.Analyzer.Testing
             DiagnosticAnalyzer analyzer,
             string[] additionalEnabledDiagnostics,
             bool getAllDiagnostics = true
-        ) {
+        )
+        {
             var project = DiagnosticProject.Create(GetType().Assembly, sources);
             return GetDiagnosticsAsync(new[] { project }, analyzer, additionalEnabledDiagnostics);
         }
@@ -56,7 +57,8 @@ namespace Microsoft.AspNetCore.Analyzer.Testing
             DiagnosticAnalyzer analyzer,
             string[] additionalEnabledDiagnostics,
             bool getAllDiagnostics = true
-        ) {
+        )
+        {
             var diagnostics = new List<Diagnostic>();
             foreach (var project in projects)
             {

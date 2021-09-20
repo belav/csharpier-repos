@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
             this ITextEditorFactoryService textEditorFactory,
             ITextBuffer buffer,
             ImmutableArray<string> roles = default
-        ) {
+        )
+        {
             // Every default role but outlining. Starting in 15.2, the editor
             // OutliningManager imports JoinableTaskContext in a way that's
             // difficult to satisfy in our unit tests. Since we don't directly

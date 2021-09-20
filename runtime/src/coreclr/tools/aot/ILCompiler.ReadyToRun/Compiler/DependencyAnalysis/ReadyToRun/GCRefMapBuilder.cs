@@ -86,7 +86,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             if (
                 (method.Context.Target.Architecture == TargetArchitecture.X86)
                 && method.IsArrayAddressMethod()
-            ) {
+            )
+            {
                 hasParamType = true;
             }
 
@@ -165,7 +166,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             ArgIterator argit,
             CORCOMPILE_GCREFMAP_TOKENS[] frame,
             bool isUnboxingStub
-        ) {
+        )
+        {
             // Encode generic instantiation arg
             if (argit.HasParamType)
             {
@@ -242,7 +244,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             in ArgDestination argDest,
             int delta,
             CORCOMPILE_GCREFMAP_TOKENS[] frame
-        ) {
+        )
+        {
             switch (type.Category)
             {
                 // TYPE_GC_NONE
@@ -295,7 +298,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             ArgDestination argDest,
             int delta,
             CORCOMPILE_GCREFMAP_TOKENS[] frame
-        ) {
+        )
+        {
             if (_transitionBlock.IsArgPassedByRef(new TypeHandle(type)))
             {
                 argDest.GcMark(frame, delta, interior: true);
@@ -330,7 +334,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             ArgDestination argDest,
             int delta,
             CORCOMPILE_GCREFMAP_TOKENS[] frame
-        ) {
+        )
+        {
             if (type.IsByReferenceOfT || type.IsByRef)
             {
                 argDest.GcMark(frame, delta, interior: true);

@@ -289,7 +289,8 @@ KoZIhvcNAwcECJ01qtX2EKx6oIAEEM7op+R2U3GQbYwlEj5X+h0AAAAAAAAAAAAA
             using (
                 X509Certificate2 explicitSkiCert =
                     Certificates.RSAKeyTransfer_ExplicitSki.GetCertificate()
-            ) {
+            )
+            {
                 // CmsRecipients have different identifiers to test multiple identifier encryption.
                 recipients.Add(
                     new CmsRecipient(SubjectIdentifierType.IssuerAndSerialNumber, issuerSerialCert)
@@ -311,7 +312,8 @@ KoZIhvcNAwcECJ01qtX2EKx6oIAEEM7op+R2U3GQbYwlEj5X+h0AAAAAAAAAAAAA
             using (
                 X509Certificate2 privateCert =
                     Certificates.RSAKeyTransfer_ExplicitSki.TryGetCertificateWithPrivateKey()
-            ) {
+            )
+            {
                 if (privateCert == null)
                     return; // CertLoader can't load the private certificate.
 
@@ -332,7 +334,8 @@ KoZIhvcNAwcECJ01qtX2EKx6oIAEEM7op+R2U3GQbYwlEj5X+h0AAAAAAAAAAAAA
             using (
                 X509Certificate2 explicitSkiCert =
                     Certificates.RSAKeyTransfer_ExplicitSki.GetCertificate()
-            ) {
+            )
+            {
                 CmsRecipient recipient = new CmsRecipient(
                     SubjectIdentifierType.SubjectKeyIdentifier,
                     explicitSkiCert
@@ -348,7 +351,8 @@ KoZIhvcNAwcECJ01qtX2EKx6oIAEEM7op+R2U3GQbYwlEj5X+h0AAAAAAAAAAAAA
             using (
                 X509Certificate2 privateCert =
                     Certificates.RSAKeyTransfer_ExplicitSki.TryGetCertificateWithPrivateKey()
-            ) {
+            )
+            {
                 if (privateCert == null)
                     return; // CertLoader can't load the private certificate.
 
@@ -445,7 +449,8 @@ KoZIhvcNAwcECJ01qtX2EKx6oIAEEM7op+R2U3GQbYwlEj5X+h0AAAAAAAAAAAAA
             using (
                 X509Certificate2 privateCert =
                     Certificates.RSAKeyTransfer1.TryGetCertificateWithPrivateKey()
-            ) {
+            )
+            {
                 if (privateCert == null)
                 {
                     return; //Private key not available.
@@ -474,7 +479,8 @@ KoZIhvcNAwcECJ01qtX2EKx6oIAEEM7op+R2U3GQbYwlEj5X+h0AAAAAAAAAAAAA
 
             using (
                 X509Certificate2 privateCert = certificateLoader.TryGetCertificateWithPrivateKey()
-            ) {
+            )
+            {
                 if (privateCert == null)
                     return; // CertLoader can't load the private certificate.
 

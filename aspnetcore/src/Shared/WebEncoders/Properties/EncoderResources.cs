@@ -28,7 +28,8 @@ namespace Microsoft.Extensions.WebEncoders.Sources
             object p0,
             object p1,
             object p2
-        ) {
+        )
+        {
             return string.Format(
                 CultureInfo.CurrentCulture,
                 WebEncoders_InvalidCountOffsetOrLength,

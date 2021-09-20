@@ -80,7 +80,8 @@ namespace Microsoft.AspNetCore.Mvc
         [MemberData(nameof(ExecuteResultAsync_InvokesForbidAsyncWithAuthPropertiesData))]
         public async Task ExecuteResultAsync_InvokesForbidAsyncWithAuthProperties(
             AuthenticationProperties expected
-        ) {
+        )
+        {
             // Arrange
             var httpContext = new Mock<HttpContext>();
             var auth = new Mock<IAuthenticationService>();
@@ -108,7 +109,8 @@ namespace Microsoft.AspNetCore.Mvc
         [MemberData(nameof(ExecuteResultAsync_InvokesForbidAsyncWithAuthPropertiesData))]
         public async Task ExecuteResultAsync_InvokesForbidAsyncWithAuthProperties_WhenAuthenticationSchemesIsEmpty(
             AuthenticationProperties expected
-        ) {
+        )
+        {
             // Arrange
             var httpContext = new Mock<HttpContext>();
             var auth = new Mock<IAuthenticationService>();

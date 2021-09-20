@@ -141,7 +141,8 @@ namespace System.Web.Http.Controllers
             HttpControllerContext controllerContext,
             IDictionary<string, object> arguments,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (controllerContext == null)
             {
                 throw Error.ArgumentNull("controllerContext");
@@ -220,7 +221,8 @@ namespace System.Web.Http.Controllers
         private object[] PrepareParameters(
             IDictionary<string, object> parameters,
             HttpControllerContext controllerContext
-        ) {
+        )
+        {
             // This is on a hotpath, so a quick check to avoid the allocation if we have no parameters.
             if (_parameters.Value.Count == 0)
             {
@@ -250,7 +252,8 @@ namespace System.Web.Http.Controllers
             ParameterInfo parameterInfo,
             IDictionary<string, object> parameters,
             HttpControllerContext controllerContext
-        ) {
+        )
+        {
             object value;
 
             if (!parameters.TryGetValue(parameterInfo.Name, out value))
@@ -323,7 +326,8 @@ namespace System.Web.Http.Controllers
         private static Collection<HttpMethod> GetSupportedHttpMethods(
             MethodInfo methodInfo,
             object[] actionAttributes
-        ) {
+        )
+        {
             Collection<HttpMethod> supportedHttpMethods = new Collection<HttpMethod>();
             ICollection<IActionHttpMethodProvider> httpMethodProviders =
                 TypeHelper.OfType<IActionHttpMethodProvider>(actionAttributes);
@@ -348,7 +352,8 @@ namespace System.Web.Http.Controllers
                             _supportedHttpMethodsByConvention[i].Method,
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         supportedHttpMethods.Add(_supportedHttpMethodsByConvention[i]);
                         break;
                     }
@@ -444,7 +449,8 @@ namespace System.Web.Http.Controllers
             [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
             private static Func<object, Task<object>> CompileGenericTaskConversionDelegate(
                 Type taskValueType
-            ) {
+            )
+            {
                 Contract.Assert(taskValueType != null);
 
                 return (Func<object, Task<object>>)Delegate.CreateDelegate(

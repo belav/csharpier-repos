@@ -27,7 +27,8 @@ namespace System.Net.Quic.Implementations.Mock
                 options.ListenEndPoint is null
                 || options.ListenEndPoint.Address != IPAddress.Loopback
                 || options.ListenEndPoint.Port != 0
-            ) {
+            )
+            {
                 throw new ArgumentException("Must pass loopback address and port 0");
             }
 
@@ -65,7 +66,8 @@ namespace System.Net.Quic.Implementations.Mock
 
         internal override async ValueTask<QuicConnectionProvider> AcceptConnectionAsync(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             CheckDisposed();
 
             MockConnection.ConnectionState state = await _listenQueue.Reader.ReadAsync(

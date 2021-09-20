@@ -41,7 +41,8 @@ namespace Microsoft.AspNetCore.Authentication
         public AuthenticationProperties(
             IDictionary<string, string?>? items,
             IDictionary<string, object?>? parameters
-        ) {
+        )
+        {
             Items = items ?? new Dictionary<string, string?>(StringComparer.Ordinal);
             Parameters = parameters ?? new Dictionary<string, object?>(StringComparer.Ordinal);
         }
@@ -209,7 +210,8 @@ namespace Microsoft.AspNetCore.Authentication
                     DateTimeStyles.RoundtripKind,
                     out var dateTimeOffset
                 )
-            ) {
+            )
+            {
                 return dateTimeOffset;
             }
             return null;

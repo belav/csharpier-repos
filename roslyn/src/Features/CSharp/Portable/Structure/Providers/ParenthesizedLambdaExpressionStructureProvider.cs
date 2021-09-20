@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
             ref TemporaryArray<BlockSpan> spans,
             BlockStructureOptionProvider optionProvider,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // fault tolerance
             if (lambdaExpression.Body.IsMissing)
             {
@@ -28,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
                 !(lambdaExpression.Body is BlockSyntax lambdaBlock)
                 || lambdaBlock.OpenBraceToken.IsMissing
                 || lambdaBlock.CloseBraceToken.IsMissing
-            ) {
+            )
+            {
                 return;
             }
 

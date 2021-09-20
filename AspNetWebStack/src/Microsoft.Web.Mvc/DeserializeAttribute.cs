@@ -37,7 +37,8 @@ namespace Microsoft.Web.Mvc
             public object BindModel(
                 ControllerContext controllerContext,
                 ModelBindingContext bindingContext
-            ) {
+            )
+            {
                 if (bindingContext == null)
                 {
                     throw new ArgumentNullException("bindingContext");

@@ -29,7 +29,8 @@ namespace System.CommandLine.Parsing
             List<Token> unmatchedTokens,
             IReadOnlyCollection<ParseError> parseErrors,
             string? rawInput
-        ) {
+        )
+        {
             _parser = parser;
             _tokenizeResult = tokenizeResult;
             _unparsedTokens = unparsedTokens;
@@ -177,7 +178,8 @@ namespace System.CommandLine.Parsing
                             var j = previousArgumentResult.Tokens.Count;
                             j < passedOnTokensCount;
                             j++
-                        ) {
+                        )
+                        {
                             var token = _innermostCommandResult.Tokens[j];
 
                             if (nextArgumentResult.IsArgumentLimitReached)
@@ -233,7 +235,8 @@ namespace System.CommandLine.Parsing
                     option is Option o
                     && o.IsRequired
                     && _rootCommandResult!.FindResultFor(o) is null
-                ) {
+                )
+                {
                     _errors.Add(
                         new ParseError(
                             $"Option '{o.Aliases.First()}' is required.",
@@ -344,7 +347,8 @@ namespace System.CommandLine.Parsing
             if (
                 argumentResult.GetArgumentConversionResult()
                 is FailedArgumentConversionResult failed
-            ) {
+            )
+            {
                 _errors.Add(new ParseError(failed.ErrorMessage!, argumentResult));
             }
         }
@@ -359,7 +363,8 @@ namespace System.CommandLine.Parsing
                     var symbolIndex = 0;
                     symbolIndex < commandResult.Command.Children.Count;
                     symbolIndex++
-                ) {
+                )
+                {
                     var symbol = commandResult.Command.Children[symbolIndex];
                     var symbolResult = _rootCommandResult!.FindResultForSymbol(symbol);
 
@@ -395,7 +400,8 @@ namespace System.CommandLine.Parsing
                         symbolResult is OptionResult o
                         && o.Option.Argument.ValueType == typeof(bool)
                         && o.Children.Count == 0
-                    ) {
+                    )
+                    {
                         o.Children.Add(new ArgumentResult(o.Option.Argument, o));
                     }
                 }

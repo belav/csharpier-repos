@@ -68,7 +68,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
             IAuthenticationSchemeProvider authentication,
             IOptions<IISServerOptions> options,
             ILogger<IISHttpServer> logger
-        ) {
+        )
+        {
             _nativeApplication = nativeApplication;
             _applicationLifetime = applicationLifetime;
             _logger = logger;
@@ -162,7 +163,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
         private static NativeMethods.REQUEST_NOTIFICATION_STATUS HandleRequest(
             IntPtr pInProcessHandler,
             IntPtr pvRequestContext
-        ) {
+        )
+        {
             IISHttpServer? server = null;
             try
             {
@@ -255,7 +257,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
             IntPtr pvManagedHttpContext,
             int hr,
             int bytes
-        ) {
+        )
+        {
             IISHttpContext? context = null;
             try
             {
@@ -328,7 +331,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
                 IISServerOptions options,
                 IISHttpServer server,
                 ILogger logger
-            ) {
+            )
+            {
                 _application = application;
                 _memoryPool = memoryPool;
                 _options = options;

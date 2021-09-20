@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             BindingSource bindingSource,
             Dictionary<string, StringValues> values,
             CultureInfo culture
-        ) {
+        )
+        {
             var backingStore = new QueryCollection(values);
             return new QueryStringValueProvider(bindingSource, backingStore, culture);
         }

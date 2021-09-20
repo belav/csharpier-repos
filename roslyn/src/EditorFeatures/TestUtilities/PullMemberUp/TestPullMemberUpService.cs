@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.PullMemberUp
         public TestPullMemberUpService(
             IEnumerable<(string member, bool makeAbstract)> selectedMembers,
             string destinationName
-        ) {
+        )
+        {
             _selectedMembers = selectedMembers;
             DestinationName = destinationName;
         }
@@ -31,7 +32,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.PullMemberUp
         public PullMembersUpOptions GetPullMemberUpOptions(
             Document document,
             ISymbol selectedNodeSymbol
-        ) {
+        )
+        {
             var members = selectedNodeSymbol.ContainingType.GetMembers()
                 .Where(member => MemberAndDestinationValidator.IsMemberValid(member));
 

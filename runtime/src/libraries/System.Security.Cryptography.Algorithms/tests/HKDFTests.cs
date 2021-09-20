@@ -453,7 +453,8 @@ namespace System.Security.Cryptography.Algorithms.Tests
                 int prkLength,
                 byte[] ikm,
                 byte[] salt
-            ) {
+            )
+            {
                 return HKDF.Extract(hash, ikm, salt);
             }
 
@@ -462,7 +463,8 @@ namespace System.Security.Cryptography.Algorithms.Tests
                 byte[] prk,
                 int outputLength,
                 byte[] info
-            ) {
+            )
+            {
                 return HKDF.Expand(hash, prk, outputLength, info);
             }
 
@@ -472,7 +474,8 @@ namespace System.Security.Cryptography.Algorithms.Tests
                 int outputLength,
                 byte[] salt,
                 byte[] info
-            ) {
+            )
+            {
                 return HKDF.DeriveKey(hash, ikm, outputLength, salt, info);
             }
 
@@ -565,7 +568,8 @@ namespace System.Security.Cryptography.Algorithms.Tests
                 int prkLength,
                 byte[] ikm,
                 byte[] salt
-            ) {
+            )
+            {
                 byte[] prk = new byte[prkLength];
                 Assert.Equal(prkLength, HKDF.Extract(hash, ikm, salt, prk));
                 return prk;
@@ -576,7 +580,8 @@ namespace System.Security.Cryptography.Algorithms.Tests
                 byte[] prk,
                 int outputLength,
                 byte[] info
-            ) {
+            )
+            {
                 byte[] output = new byte[outputLength];
                 HKDF.Expand(hash, prk, output, info);
                 return output;
@@ -588,7 +593,8 @@ namespace System.Security.Cryptography.Algorithms.Tests
                 int outputLength,
                 byte[] salt,
                 byte[] info
-            ) {
+            )
+            {
                 byte[] output = new byte[outputLength];
                 HKDF.DeriveKey(hash, ikm, output, salt, info);
                 return output;

@@ -182,7 +182,8 @@ namespace Microsoft.AspNetCore.Http.Tests
             string key,
             string value,
             string expected
-        ) {
+        )
+        {
             var headers = new HeaderDictionary();
             var features = MakeFeatures(headers);
             var cookies = new ResponseCookies(features);

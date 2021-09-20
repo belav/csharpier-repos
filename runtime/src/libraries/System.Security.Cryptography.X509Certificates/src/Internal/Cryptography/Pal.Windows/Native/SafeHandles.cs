@@ -135,7 +135,8 @@ namespace Internal.Cryptography.Pal.Native
                 SafeCertContextHandle certContext = Interop.crypt32.CertDuplicateCertificateContext(
                     handle
                 )
-            ) {
+            )
+            {
                 DeleteKeyContainer(certContext);
             }
             base.ReleaseHandle();
@@ -192,7 +193,8 @@ namespace Internal.Cryptography.Pal.Native
                                     keyContainerName,
                                     new CngProvider(providerName)
                                 )
-                            ) {
+                            )
+                            {
                                 cngKey.Delete();
                             }
                         }

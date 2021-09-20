@@ -12,7 +12,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider
         public static DbContextOptionsBuilder UseFakeRelational(
             this DbContextOptionsBuilder optionsBuilder,
             Action<FakeRelationalDbContextOptionsBuilder> fakeRelationalOptionsAction = null
-        ) {
+        )
+        {
             return optionsBuilder.UseFakeRelational("Database=Fake", fakeRelationalOptionsAction);
         }
 
@@ -20,7 +21,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider
             this DbContextOptionsBuilder optionsBuilder,
             string connectionString,
             Action<FakeRelationalDbContextOptionsBuilder> fakeRelationalOptionsAction = null
-        ) {
+        )
+        {
             return optionsBuilder.UseFakeRelational(
                 new FakeDbConnection(connectionString),
                 fakeRelationalOptionsAction
@@ -31,7 +33,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider
             this DbContextOptionsBuilder optionsBuilder,
             DbConnection connection,
             Action<FakeRelationalDbContextOptionsBuilder> fakeRelationalOptionsAction = null
-        ) {
+        )
+        {
             var extension = (FakeRelationalOptionsExtension)GetOrCreateExtension(optionsBuilder)
                 .WithConnection(connection);
             ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(

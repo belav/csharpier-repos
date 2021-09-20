@@ -33,7 +33,8 @@ namespace Microsoft.Extensions.Internal
             Type possibleFSharpAsyncType,
             out Expression coerceToAwaitableExpression,
             out Type awaitableType
-        ) {
+        )
+        {
             var methodReturnGenericType = possibleFSharpAsyncType.IsGenericType
                 ? possibleFSharpAsyncType.GetGenericTypeDefinition()
                 : null;
@@ -90,7 +91,8 @@ namespace Microsoft.Extensions.Internal
                     "Microsoft.FSharp.Control.FSharpAsync`1",
                     StringComparison.Ordinal
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -150,7 +152,8 @@ namespace Microsoft.Extensions.Internal
                     )
                     && parameters[1].ParameterType == fsharpOptionOfTaskCreationOptionsType
                     && parameters[2].ParameterType == fsharpOptionOfCancellationTokenType
-                ) {
+                )
+                {
                     // This really does look like the correct method (and hence assembly).
                     _fsharpAsyncStartAsTaskGenericMethod = candidateMethodInfo;
                     _fsharpCoreAssembly = assembly;

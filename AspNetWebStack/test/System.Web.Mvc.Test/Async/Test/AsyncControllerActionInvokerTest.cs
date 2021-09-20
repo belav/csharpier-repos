@@ -1137,7 +1137,8 @@ namespace System.Web.Mvc.Async.Test
         private ActionResult BeginInvokeActionMethodWithFiltersBeginTester(
             Func<IAsyncResult> beginFunction,
             params IActionFilter[] filters
-        ) {
+        )
+        {
             return BeginInvokeActionMethodWithFiltersTester(
                 beginFunction,
                 () => new Mock<ActionResult>().Object,
@@ -1151,7 +1152,8 @@ namespace System.Web.Mvc.Async.Test
             IAsyncResult asyncResult,
             Func<ActionResult> endFunction,
             params IActionFilter[] filters
-        ) {
+        )
+        {
             return BeginInvokeActionMethodWithFiltersTester(
                 () => asyncResult,
                 endFunction,
@@ -1167,7 +1169,8 @@ namespace System.Web.Mvc.Async.Test
             bool checkBegin,
             bool checkEnd,
             IActionFilter[] filters
-        ) {
+        )
+        {
             AsyncControllerActionInvoker invoker = new AsyncControllerActionInvoker();
             ControllerContext controllerContext = new ControllerContext();
             Dictionary<string, object> parameters = new Dictionary<string, object>();
@@ -1322,13 +1325,15 @@ namespace System.Web.Mvc.Async.Test
 
             protected override ControllerDescriptor GetControllerDescriptor(
                 ControllerContext controllerContext
-            ) {
+            )
+            {
                 return PublicGetControllerDescriptor(controllerContext);
             }
 
             public virtual ControllerDescriptor PublicGetControllerDescriptor(
                 ControllerContext controllerContext
-            ) {
+            )
+            {
                 return base.GetControllerDescriptor(controllerContext);
             }
 
@@ -1336,7 +1341,8 @@ namespace System.Web.Mvc.Async.Test
                 ControllerContext controllerContext,
                 IList<IExceptionFilter> filters,
                 Exception exception
-            ) {
+            )
+            {
                 return PublicInvokeExceptionFilters(controllerContext, filters, exception);
             }
 
@@ -1344,35 +1350,40 @@ namespace System.Web.Mvc.Async.Test
                 ControllerContext controllerContext,
                 IList<IExceptionFilter> filters,
                 Exception exception
-            ) {
+            )
+            {
                 return base.InvokeExceptionFilters(controllerContext, filters, exception);
             }
 
             protected override void InvokeActionResult(
                 ControllerContext controllerContext,
                 ActionResult actionResult
-            ) {
+            )
+            {
                 PublicInvokeActionResult(controllerContext, actionResult);
             }
 
             public virtual void PublicInvokeActionResult(
                 ControllerContext controllerContext,
                 ActionResult actionResult
-            ) {
+            )
+            {
                 base.InvokeActionResult(controllerContext, actionResult);
             }
 
             protected override FilterInfo GetFilters(
                 ControllerContext controllerContext,
                 ActionDescriptor actionDescriptor
-            ) {
+            )
+            {
                 return PublicGetFilters(controllerContext, actionDescriptor);
             }
 
             public virtual FilterInfo PublicGetFilters(
                 ControllerContext controllerContext,
                 ActionDescriptor actionDescriptor
-            ) {
+            )
+            {
                 return base.GetFilters(controllerContext, actionDescriptor);
             }
 
@@ -1380,7 +1391,8 @@ namespace System.Web.Mvc.Async.Test
                 ControllerContext controllerContext,
                 IList<IAuthenticationFilter> filters,
                 ActionDescriptor actionDescriptor
-            ) {
+            )
+            {
                 return base.InvokeAuthenticationFilters(
                     controllerContext,
                     filters,
@@ -1392,7 +1404,8 @@ namespace System.Web.Mvc.Async.Test
                 ControllerContext controllerContext,
                 IList<IAuthenticationFilter> filters,
                 ActionDescriptor actionDescriptor
-            ) {
+            )
+            {
                 return PublicInvokeAuthenticationFilters(
                     controllerContext,
                     filters,
@@ -1405,7 +1418,8 @@ namespace System.Web.Mvc.Async.Test
                 IList<IAuthenticationFilter> filters,
                 ActionDescriptor actionDescriptor,
                 ActionResult result
-            ) {
+            )
+            {
                 return base.InvokeAuthenticationFiltersChallenge(
                     controllerContext,
                     filters,
@@ -1419,7 +1433,8 @@ namespace System.Web.Mvc.Async.Test
                 IList<IAuthenticationFilter> filters,
                 ActionDescriptor actionDescriptor,
                 ActionResult result
-            ) {
+            )
+            {
                 return PublicInvokeAuthenticationFiltersChallenge(
                     controllerContext,
                     filters,
@@ -1432,7 +1447,8 @@ namespace System.Web.Mvc.Async.Test
                 ControllerContext controllerContext,
                 IList<IAuthorizationFilter> filters,
                 ActionDescriptor actionDescriptor
-            ) {
+            )
+            {
                 return PublicInvokeAuthorizationFilters(
                     controllerContext,
                     filters,
@@ -1444,7 +1460,8 @@ namespace System.Web.Mvc.Async.Test
                 ControllerContext controllerContext,
                 IList<IAuthorizationFilter> filters,
                 ActionDescriptor actionDescriptor
-            ) {
+            )
+            {
                 return base.InvokeAuthorizationFilters(
                     controllerContext,
                     filters,
@@ -1456,7 +1473,8 @@ namespace System.Web.Mvc.Async.Test
                 ControllerContext controllerContext,
                 ControllerDescriptor controllerDescriptor,
                 string actionName
-            ) {
+            )
+            {
                 return PublicFindAction(controllerContext, controllerDescriptor, actionName);
             }
 
@@ -1464,21 +1482,24 @@ namespace System.Web.Mvc.Async.Test
                 ControllerContext controllerContext,
                 ControllerDescriptor controllerDescriptor,
                 string actionName
-            ) {
+            )
+            {
                 return base.FindAction(controllerContext, controllerDescriptor, actionName);
             }
 
             protected override IDictionary<string, object> GetParameterValues(
                 ControllerContext controllerContext,
                 ActionDescriptor actionDescriptor
-            ) {
+            )
+            {
                 return PublicGetParameterValues(controllerContext, actionDescriptor);
             }
 
             public virtual IDictionary<string, object> PublicGetParameterValues(
                 ControllerContext controllerContext,
                 ActionDescriptor actionDescriptor
-            ) {
+            )
+            {
                 return base.GetParameterValues(controllerContext, actionDescriptor);
             }
         }
@@ -1489,7 +1510,8 @@ namespace System.Web.Mvc.Async.Test
                 ControllerContext controllerContext,
                 ControllerDescriptor controllerDescriptor,
                 string actionName
-            ) {
+            )
+            {
                 return base.FindAction(controllerContext, controllerDescriptor, "NormalAction");
             }
         }

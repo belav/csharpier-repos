@@ -83,7 +83,8 @@ namespace test45929
                     MethodInfo method in typeof(TestCore).GetMethods(
                         BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly
                     )
-                ) {
+                )
+                {
                     if (methodName == method.Name)
                     {
                         return method;

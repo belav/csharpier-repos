@@ -75,7 +75,8 @@ namespace Microsoft.Extensions.Internal
         public void Base64UrlEncode_And_Decode_WithBufferOffsets(
             string base64Input,
             string expectedBase64Url
-        ) {
+        )
+        {
             // Arrange
             var input = new byte[3].Concat(Convert.FromBase64String(base64Input))
                 .Concat(new byte[2])

@@ -179,7 +179,8 @@ namespace System.Web.Http.ModelBinding.Binders
                 ITypeDescriptorContext context,
                 CultureInfo culture,
                 object value
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     String.Format("From DummyTypeConverter: {0}", value)
                 );

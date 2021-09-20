@@ -37,7 +37,8 @@ namespace System.Xml.Xsl.Runtime
             )]
                 Type objectType,
             BindingFlags flags
-        ) {
+        )
+        {
             XmlExtensionFunction func;
 
             if (_funcCached == null)
@@ -109,7 +110,8 @@ namespace System.Xml.Xsl.Runtime
             )]
                 Type objectType,
             BindingFlags flags
-        ) {
+        )
+        {
             Init(name, namespaceUri, numArgs, objectType, flags);
         }
 
@@ -126,7 +128,8 @@ namespace System.Xml.Xsl.Runtime
             )]
                 Type objectType,
             BindingFlags flags
-        ) {
+        )
+        {
             _name = name;
             _namespaceUri = namespaceUri;
             _numArgs = numArgs;
@@ -202,7 +205,8 @@ namespace System.Xml.Xsl.Runtime
                 if (
                     methSearch.Name.Equals(_name, comparison)
                     && (_numArgs == -1 || methSearch.GetParameters().Length == _numArgs)
-                ) {
+                )
+                {
                     // Binding to generic methods will never succeed
                     if (!methSearch.IsGenericMethodDefinition)
                         return true;
@@ -230,7 +234,8 @@ namespace System.Xml.Xsl.Runtime
                 if (
                     methSearch.Name.Equals(_name, comparison)
                     && (_numArgs == -1 || methSearch.GetParameters().Length == _numArgs)
-                ) {
+                )
+                {
                     if (methMatch != null)
                         throw new XslTransformException( /*[XT_037]*/
                             SR.XmlIl_AmbiguousExtensionMethod,

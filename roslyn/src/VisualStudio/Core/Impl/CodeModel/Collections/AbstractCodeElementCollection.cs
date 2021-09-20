@@ -32,7 +32,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
             int index,
             string specifiedName,
             int specifiedIndex
-        ) {
+        )
+        {
             return (specifiedName != null && specifiedName == name)
                 || (specifiedIndex != -1 && specifiedIndex == index);
         }

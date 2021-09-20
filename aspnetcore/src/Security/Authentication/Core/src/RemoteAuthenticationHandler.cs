@@ -224,7 +224,8 @@ namespace Microsoft.AspNetCore.Authentication
                         out var authenticatedScheme
                     )
                     && string.Equals(Scheme.Name, authenticatedScheme, StringComparison.Ordinal)
-                ) {
+                )
+                {
                     return AuthenticateResult.Success(
                         new AuthenticationTicket(ticket.Principal, ticket.Properties, Scheme.Name)
                     );
@@ -315,7 +316,8 @@ namespace Microsoft.AspNetCore.Authentication
         /// <returns>The <see cref="HandleRequestResult"/>.</returns>
         protected virtual async Task<HandleRequestResult> HandleAccessDeniedErrorAsync(
             AuthenticationProperties properties
-        ) {
+        )
+        {
             Logger.AccessDeniedError();
             var context = new AccessDeniedContext(Context, Scheme, Options)
             {
@@ -348,7 +350,8 @@ namespace Microsoft.AspNetCore.Authentication
                 if (
                     !string.IsNullOrEmpty(context.ReturnUrlParameter)
                     && !string.IsNullOrEmpty(context.ReturnUrl)
-                ) {
+                )
+                {
                     uri = QueryHelpers.AddQueryString(
                         uri,
                         context.ReturnUrlParameter,

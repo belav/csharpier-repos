@@ -333,7 +333,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
             using (
                 X509Certificate2 c = new X509Certificate2(TestData.StoreSavedAsSerializedCerData)
-            ) {
+            )
+            {
                 assert(c);
                 using (X509Certificate2 c2 = new X509Certificate2(c))
                 {

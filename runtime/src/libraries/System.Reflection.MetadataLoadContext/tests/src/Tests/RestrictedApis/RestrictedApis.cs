@@ -14,7 +14,8 @@ namespace System.Reflection.Tests
                 MetadataLoadContext lc = new MetadataLoadContext(
                     new EmptyCoreMetadataAssemblyResolver()
                 )
-            ) {
+            )
+            {
                 Assembly a = lc.LoadFromAssemblyPath(
                     AssemblyPathHelper.GetAssemblyLocation(typeof(TopLevelType).Assembly)
                 );
@@ -42,7 +43,8 @@ namespace System.Reflection.Tests
                                 | BindingFlags.Static
                                 | BindingFlags.DeclaredOnly
                         )
-                    ) {
+                    )
+                    {
                         ICustomAttributeProvider icp = mem;
                         Assert.Throws<InvalidOperationException>(
                             () => icp.GetCustomAttributes(inherit: false)

@@ -301,7 +301,8 @@ namespace System.Xml.Xsl.XsltOld
             Processor processor,
             XPathNavigator navigator,
             XmlQualifiedName mode
-        ) {
+        )
+        {
             Debug.Assert(processor != null && navigator != null);
             Debug.Assert(mode != null);
             TemplateAction? action = null;
@@ -336,7 +337,8 @@ namespace System.Xml.Xsl.XsltOld
             Processor processor,
             XPathNavigator navigator,
             XmlQualifiedName mode
-        ) {
+        )
+        {
             TemplateAction? action = null;
 
             //

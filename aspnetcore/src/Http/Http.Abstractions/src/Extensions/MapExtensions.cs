@@ -24,7 +24,8 @@ namespace Microsoft.AspNetCore.Builder
             this IApplicationBuilder app,
             PathString pathMatch,
             Action<IApplicationBuilder> configuration
-        ) {
+        )
+        {
             return Map(app, pathMatch, preserveMatchedPathSegment: false, configuration);
         }
 
@@ -42,7 +43,8 @@ namespace Microsoft.AspNetCore.Builder
             PathString pathMatch,
             bool preserveMatchedPathSegment,
             Action<IApplicationBuilder> configuration
-        ) {
+        )
+        {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));

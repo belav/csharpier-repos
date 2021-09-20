@@ -47,7 +47,8 @@ namespace System.Diagnostics.CodeAnalysis.Tests
             string memberSignature,
             string typeName,
             string assemblyName
-        ) {
+        )
+        {
             var dda = new DynamicDependencyAttribute(memberSignature, typeName, assemblyName);
 
             Assert.Equal(memberSignature, dda.MemberSignature);
@@ -65,7 +66,8 @@ namespace System.Diagnostics.CodeAnalysis.Tests
         public void TestConstructorMemberTypes(
             DynamicallyAccessedMemberTypes memberTypes,
             Type type
-        ) {
+        )
+        {
             var dda = new DynamicDependencyAttribute(memberTypes, type);
 
             Assert.Null(dda.MemberSignature);
@@ -88,7 +90,8 @@ namespace System.Diagnostics.CodeAnalysis.Tests
             DynamicallyAccessedMemberTypes memberTypes,
             string typeName,
             string assemblyName
-        ) {
+        )
+        {
             var dda = new DynamicDependencyAttribute(memberTypes, typeName, assemblyName);
 
             Assert.Null(dda.MemberSignature);

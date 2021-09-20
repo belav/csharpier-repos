@@ -45,7 +45,8 @@ namespace System.Web.WebPages
             HttpContextBase httpContext,
             string virtualPath,
             Func<string, bool> virtualPathExists
-        ) {
+        )
+        {
             string transformedFilename = TransformPath(virtualPath, _suffix);
             if (transformedFilename != null && virtualPathExists(transformedFilename))
             {

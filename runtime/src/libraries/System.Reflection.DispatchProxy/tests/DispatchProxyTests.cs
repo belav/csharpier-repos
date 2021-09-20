@@ -936,7 +936,8 @@ namespace DispatchProxyTests
         private static void testRefOutInInvocation(
             Action<TestType_IOut_Ref> invocation,
             string expected
-        ) {
+        )
+        {
             var proxy = DispatchProxy.Create<TestType_IOut_Ref, TestDispatchProxy>();
 
             string result = "Failed";

@@ -25,7 +25,8 @@ namespace System.Linq.Expressions
             ExpressionType nodeType,
             Type type,
             ReadOnlyCollection<Expression> expressions
-        ) {
+        )
+        {
             Debug.Assert(type.IsArray);
             if (nodeType == ExpressionType.NewArrayInit)
             {
@@ -81,10 +82,8 @@ namespace System.Linq.Expressions
 
     internal sealed class NewArrayInitExpression : NewArrayExpression
     {
-        internal NewArrayInitExpression(
-            Type type,
-            ReadOnlyCollection<Expression> expressions
-        ) : base(type, expressions) { }
+        internal NewArrayInitExpression(Type type, ReadOnlyCollection<Expression> expressions)
+            : base(type, expressions) { }
 
         /// <summary>
         /// Returns the node type of this <see cref="Expression"/>. (Inherited from <see cref="Expression"/>.)
@@ -95,10 +94,8 @@ namespace System.Linq.Expressions
 
     internal sealed class NewArrayBoundsExpression : NewArrayExpression
     {
-        internal NewArrayBoundsExpression(
-            Type type,
-            ReadOnlyCollection<Expression> expressions
-        ) : base(type, expressions) { }
+        internal NewArrayBoundsExpression(Type type, ReadOnlyCollection<Expression> expressions)
+            : base(type, expressions) { }
 
         /// <summary>
         /// Returns the node type of this <see cref="Expression"/>. (Inherited from <see cref="Expression"/>.)
@@ -131,7 +128,8 @@ namespace System.Linq.Expressions
         public static NewArrayExpression NewArrayInit(
             Type type,
             IEnumerable<Expression> initializers
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(type, nameof(type));
             ContractUtils.RequiresNotNull(initializers, nameof(initializers));
             if (type == typeof(void))

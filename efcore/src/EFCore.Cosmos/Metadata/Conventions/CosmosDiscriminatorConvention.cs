@@ -22,9 +22,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         ///     Creates a new instance of <see cref="CosmosDiscriminatorConvention" />.
         /// </summary>
         /// <param name="dependencies"> Parameter object containing dependencies for this convention. </param>
-        public CosmosDiscriminatorConvention(
-            ProviderConventionSetBuilderDependencies dependencies
-        ) : base(dependencies) { }
+        public CosmosDiscriminatorConvention(ProviderConventionSetBuilderDependencies dependencies)
+            : base(dependencies) { }
 
         /// <summary>
         ///     Called after an entity type is added to the model.
@@ -34,7 +33,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessEntityTypeAdded(
             IConventionEntityTypeBuilder entityTypeBuilder,
             IConventionContext<IConventionEntityTypeBuilder> context
-        ) {
+        )
+        {
             Check.NotNull(entityTypeBuilder, nameof(entityTypeBuilder));
             Check.NotNull(context, nameof(context));
 
@@ -56,7 +56,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessForeignKeyOwnershipChanged(
             IConventionForeignKeyBuilder relationshipBuilder,
             IConventionContext<bool?> context
-        ) {
+        )
+        {
             Check.NotNull(relationshipBuilder, nameof(relationshipBuilder));
             Check.NotNull(context, nameof(context));
 
@@ -66,7 +67,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 && !entityType.IsDocumentRoot()
                 && entityType.BaseType == null
                 && !entityType.GetDerivedTypes().Any()
-            ) {
+            )
+            {
                 entityType.Builder.HasNoDiscriminator();
             }
         }
@@ -81,14 +83,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionEntityTypeBuilder entityTypeBuilder,
             IConventionForeignKey foreignKey,
             IConventionContext<IConventionForeignKey> context
-        ) {
+        )
+        {
             var entityType = foreignKey.DeclaringEntityType;
             if (
                 foreignKey.IsOwnership
                 && !entityType.IsDocumentRoot()
                 && entityType.BaseType == null
                 && !entityType.GetDerivedTypes().Any()
-            ) {
+            )
+            {
                 entityType.Builder.HasNoDiscriminator();
             }
         }
@@ -105,7 +109,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionEntityType? newBaseType,
             IConventionEntityType? oldBaseType,
             IConventionContext<IConventionEntityType> context
-        ) {
+        )
+        {
             if (entityTypeBuilder.Metadata.BaseType != newBaseType)
             {
                 return;

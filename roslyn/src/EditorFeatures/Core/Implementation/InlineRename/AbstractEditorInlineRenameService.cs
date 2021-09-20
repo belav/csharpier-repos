@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             Document document,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var triggerToken = await GetTriggerTokenAsync(document, position, cancellationToken)
                 .ConfigureAwait(false);
 
@@ -53,7 +54,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             Document document,
             SyntaxToken triggerToken,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxFactsService = document.GetRequiredLanguageService<ISyntaxFactsService>();
             if (syntaxFactsService.IsReservedOrContextualKeyword(triggerToken))
             {
@@ -104,7 +106,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                     triggerToken,
                     triggerToken.Parent
                 )
-            ) {
+            )
+            {
                 // To check if var in this context is a real type, or the keyword, we need to
                 // speculatively bind the identifier "var". If it returns a symbol, it's a real type,
                 // if not, it's the keyword.
@@ -150,7 +153,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 symbol.Kind == SymbolKind.NamedType
                 && symbol.Language == LanguageNames.VisualBasic
                 && triggerToken.ToString().Equals("New", StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 var originalSymbol = await SymbolFinder.FindSymbolAtPositionAsync(
                         semanticModel,
                         triggerToken.SpanStart,
@@ -188,7 +192,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                     && symbol.ContainingType.IsDelegateType()
                     && symbol.ContainingType.AssociatedSymbol != null
                 )
-            ) {
+            )
+            {
                 // We enable the parameter in RaiseEvent, if the Event is declared with a signature. If the Event is declared as a
                 // delegate type, we do not have a connection between the delegate type and the event.
                 // this prevents a rename in this case :(.
@@ -214,7 +219,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             if (
                 symbol.Kind == SymbolKind.Method
                 && ((IMethodSymbol)symbol).MethodKind == MethodKind.UserDefinedOperator
-            ) {
+            )
+            {
                 return new FailureInlineRenameInfo(
                     EditorFeaturesResources.You_cannot_rename_operators
                 );
@@ -257,7 +263,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                                         r => r.ProjectId == projectIdOfLocation
                                     )
                             )
-                        ) {
+                        )
+                        {
                             return new FailureInlineRenameInfo(
                                 EditorFeaturesResources.You_cannot_rename_elements_from_previous_submissions
                             );
@@ -296,7 +303,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             Document document,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxTree = await document.GetRequiredSyntaxTreeAsync(cancellationToken)
                 .ConfigureAwait(false);
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();

@@ -124,7 +124,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
             AnalyzerOptions options,
             ConcurrentDictionary<Guid, ConcurrentDictionary<string, string?>> idToCachedResult,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(symbol.Name))
             {
                 return null;
@@ -133,7 +134,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
             if (
                 symbol is IMethodSymbol methodSymbol
                 && methodSymbol.IsEntryPoint(compilation.TaskType(), compilation.TaskOfTType())
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -163,7 +165,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
             if (
                 !namingStyleRules.TryGetApplicableRule(symbol, out var applicableRule)
                 || applicableRule.EnforcementLevel == ReportDiagnostic.Suppress
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -204,7 +207,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
             ISymbol symbol,
             AnalyzerOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var sourceTree = symbol.Locations.FirstOrDefault()?.SourceTree;
             if (sourceTree == null)
             {

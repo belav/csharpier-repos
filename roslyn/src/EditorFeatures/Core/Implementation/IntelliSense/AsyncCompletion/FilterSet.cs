@@ -178,7 +178,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 string displayText,
                 char accessKey,
                 params string[] tags
-            ) {
+            )
+            {
                 var filter = CreateCompletionFilter(displayText, tags, accessKey);
                 previousMask = BitVector32.CreateMask(previousMask);
 
@@ -198,7 +199,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             string displayText,
             string[] tags,
             char accessKey
-        ) {
+        )
+        {
             var imageId = tags.ToImmutableArray().GetFirstGlyph().GetImageId();
             return new CompletionFilter(
                 displayText,
@@ -214,7 +216,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
 
         public (ImmutableArray<CompletionFilter> filters, int data) GetFiltersAndAddToSet(
             RoslynCompletionItem item
-        ) {
+        )
+        {
             var listBuilder = new ArrayBuilder<CompletionFilter>();
             var vectorForSingleItem = new BitVector32();
 
@@ -256,7 +259,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
 
         public ImmutableArray<CompletionFilterWithState> GetFilterStatesInSet(
             bool addUnselectedExpander
-        ) {
+        )
+        {
             var builder = new ArrayBuilder<CompletionFilterWithState>();
 
             // An unselected expander is only added if `addUnselectedExpander == true` and the expander is not in the set.

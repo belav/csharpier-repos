@@ -69,7 +69,8 @@ namespace System.Diagnostics
         public virtual IDisposable Subscribe(
             IObserver<KeyValuePair<string, object?>> observer,
             Predicate<string>? isEnabled
-        ) {
+        )
+        {
             IDisposable subscription;
             if (isEnabled == null)
             {
@@ -121,7 +122,8 @@ namespace System.Diagnostics
         public virtual IDisposable Subscribe(
             IObserver<KeyValuePair<string, object?>> observer,
             Func<string, object?, object?, bool>? isEnabled
-        ) {
+        )
+        {
             return isEnabled == null
               ? SubscribeInternal(observer, null, null, null, null)
               : SubscribeInternal(
@@ -254,7 +256,8 @@ namespace System.Diagnostics
                 DiagnosticSubscription? curSubscription = _subscriptions;
                 curSubscription != null;
                 curSubscription = curSubscription.Next
-            ) {
+            )
+            {
                 if (curSubscription.IsEnabled1Arg == null || curSubscription.IsEnabled1Arg(name))
                     return true;
             }
@@ -271,7 +274,8 @@ namespace System.Diagnostics
                 DiagnosticSubscription? curSubscription = _subscriptions;
                 curSubscription != null;
                 curSubscription = curSubscription.Next
-            ) {
+            )
+            {
                 if (
                     curSubscription.IsEnabled3Arg == null
                     || curSubscription.IsEnabled3Arg(name, arg1, arg2)
@@ -342,7 +346,8 @@ namespace System.Diagnostics
                             newSubscriptions,
                             subscriptions
                         ) == subscriptions
-                    ) {
+                    )
+                    {
 #if DEBUG
                         var cur = newSubscriptions;
                         while (cur != null)
@@ -367,7 +372,8 @@ namespace System.Diagnostics
             private static DiagnosticSubscription? Remove(
                 DiagnosticSubscription? subscriptions,
                 DiagnosticSubscription subscription
-            ) {
+            )
+            {
                 if (subscriptions == null)
                 {
                     // May happen if the IDisposable returned from Subscribe is Dispose'd again
@@ -472,7 +478,8 @@ namespace System.Diagnostics
                     AllListenerObservable owner,
                     IObserver<DiagnosticListener> subscriber,
                     AllListenerSubscription? next
-                ) {
+                )
+                {
                     this._owner = owner;
                     this.Subscriber = subscriber;
                     this.Next = next;
@@ -502,7 +509,8 @@ namespace System.Diagnostics
             Func<string, object?, object?, bool>? isEnabled3Arg,
             Action<Activity, object?>? onActivityImport,
             Action<Activity, object?>? onActivityExport
-        ) {
+        )
+        {
             // If we have been disposed, we silently ignore any subscriptions.
             if (_disposed)
             {

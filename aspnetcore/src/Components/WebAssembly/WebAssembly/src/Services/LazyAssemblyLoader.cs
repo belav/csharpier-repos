@@ -62,7 +62,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Services
 
         private Task<IEnumerable<Assembly>> LoadAssembliesInServerAsync(
             IEnumerable<string> assembliesToLoad
-        ) {
+        )
+        {
             var loadedAssemblies = new List<Assembly>();
 
             try
@@ -89,7 +90,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Services
         )]
         private async Task<IEnumerable<Assembly>> LoadAssembliesInClientAsync(
             IEnumerable<string> assembliesToLoad
-        ) {
+        )
+        {
             // Check to see if the assembly has already been loaded and avoids reloading it if so.
             // Note: in the future, as an extra precuation, we can call `Assembly.Load` and check
             // to see if it throws FileNotFound to ensure that an assembly hasn't been loaded

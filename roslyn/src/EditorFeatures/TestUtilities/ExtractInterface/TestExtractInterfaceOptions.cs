@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ExtractInterface
             string defaultNamespace,
             string generatedNameTypeParameterSuffix,
             string languageName
-        ) {
+        )
+        {
             this.AllExtractableMembers = extractableMembers;
             this.DefaultInterfaceName = defaultInterfaceName;
             this.ConflictingTypeNames = conflictingTypeNames;

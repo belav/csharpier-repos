@@ -35,7 +35,8 @@ namespace Castle.DynamicProxy.Contributors
             Type targetType,
             MetaMethod method,
             INamingScope namingScope
-        ) {
+        )
+        {
             Debug.Assert(
                 delegateType.IsGenericType == false,
                 "delegateType.IsGenericType == false"
@@ -49,7 +50,8 @@ namespace Castle.DynamicProxy.Contributors
         public ConstructorEmitter CreateConstructor(
             ArgumentReference[] baseCtorArguments,
             AbstractTypeEmitter invocation
-        ) {
+        )
+        {
             var arguments = GetArguments(baseCtorArguments);
             var constructor = invocation.CreateConstructor(arguments);
 
@@ -68,7 +70,8 @@ namespace Castle.DynamicProxy.Contributors
             IExpression[] args,
             Reference targetField,
             MethodEmitter invokeMethodOnTarget
-        ) {
+        )
+        {
             var allArgs = GetAllArgs(args, targetField);
             var @delegate = (Reference)invocation.GetField("delegate");
 
@@ -78,7 +81,8 @@ namespace Castle.DynamicProxy.Contributors
         public IExpression[] GetConstructorInvocationArguments(
             IExpression[] arguments,
             ClassEmitter proxy
-        ) {
+        )
+        {
             var allArguments = new IExpression[arguments.Length + 1];
             allArguments[0] = BuildDelegateToken(proxy);
             Array.Copy(arguments, 0, allArguments, 1, arguments.Length);

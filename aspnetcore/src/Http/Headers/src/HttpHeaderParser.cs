@@ -55,14 +55,16 @@ namespace Microsoft.Net.Http.Headers
         public virtual bool TryParseValues(
             IList<string>? values,
             [NotNullWhen(true)] out IList<T>? parsedValues
-        ) {
+        )
+        {
             return TryParseValues(values, strict: false, parsedValues: out parsedValues);
         }
 
         public virtual bool TryParseStrictValues(
             IList<string>? values,
             [NotNullWhen(true)] out IList<T>? parsedValues
-        ) {
+        )
+        {
             return TryParseValues(values, strict: true, parsedValues: out parsedValues);
         }
 
@@ -70,7 +72,8 @@ namespace Microsoft.Net.Http.Headers
             IList<string>? values,
             bool strict,
             [NotNullWhen(true)] out IList<T>? parsedValues
-        ) {
+        )
+        {
             Contract.Assert(_supportsMultipleValues);
             // If a parser returns an empty list, it means there was no value, but that's valid (e.g. "Accept: "). The caller
             // can ignore the value.

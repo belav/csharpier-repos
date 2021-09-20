@@ -22,7 +22,8 @@ namespace System.Net.Http.Formatting.Parsers
         internal static FormUrlEncodedParser CreateParser(
             int maxMessageSize,
             out ICollection<KeyValuePair<string, string>> nameValuePairs
-        ) {
+        )
+        {
             nameValuePairs = CreateCollection();
             return new FormUrlEncodedParser(nameValuePairs, maxMessageSize);
         }
@@ -53,7 +54,8 @@ namespace System.Net.Http.Formatting.Parsers
             byte[] buffer,
             int readsize,
             out int totalBytesConsumed
-        ) {
+        )
+        {
             ParserState state = ParserState.Invalid;
             totalBytesConsumed = 0;
             while (totalBytesConsumed <= buffer.Length)

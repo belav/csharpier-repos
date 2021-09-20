@@ -35,7 +35,8 @@ namespace System.Collections.Tests
         private static IEnumerable<TElement> HeapSort_Heapify<TElement>(
             IEnumerable<TElement> inputs,
             IComparer<TElement>? comparer = null
-        ) {
+        )
+        {
             var queue = new PriorityQueue<TElement, TElement>(inputs.Select(e => (e, e)), comparer);
             foreach ((TElement element, TElement priority) in DrainHeap(queue))
             {
@@ -65,7 +66,8 @@ namespace System.Collections.Tests
         private static IEnumerable<TElement> HeapSort_EnqueueRange<TElement>(
             IEnumerable<TElement> inputs,
             IComparer<TElement>? comparer = null
-        ) {
+        )
+        {
             var queue = new PriorityQueue<TElement, TElement>(comparer);
             queue.EnqueueRange(inputs.Select(e => (e, e)));
             foreach ((TElement element, TElement priority) in DrainHeap(queue))
@@ -96,7 +98,8 @@ namespace System.Collections.Tests
         private static IEnumerable<TElement> HeapSort_Enqueue<TElement>(
             IEnumerable<TElement> inputs,
             IComparer<TElement>? comparer = null
-        ) {
+        )
+        {
             var queue = new PriorityQueue<TElement, TElement>(comparer);
 
             foreach (TElement input in inputs)
@@ -136,7 +139,8 @@ namespace System.Collections.Tests
             TElement[] elements,
             int k,
             IComparer<TElement>? comparer = null
-        ) {
+        )
+        {
             var queue = new PriorityQueue<TElement, TElement>(comparer);
             comparer = queue.Comparer;
 

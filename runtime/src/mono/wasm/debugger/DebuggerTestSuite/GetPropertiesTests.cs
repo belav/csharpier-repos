@@ -327,7 +327,8 @@ namespace DebuggerTests
             bool? own_properties,
             bool? accessors_only,
             string[] expected_names
-        ) {
+        )
+        {
             string eval_expr;
             if (test_js)
             {
@@ -407,7 +408,8 @@ namespace DebuggerTests
             string[] expected_names,
             Func<string, JToken> get_actual_prop,
             Dictionary<string, (JObject, bool)> all_props
-        ) {
+        )
+        {
             foreach (var exp_name in expected_names)
             {
                 if (!all_props.TryGetValue(exp_name, out var expected))
@@ -441,7 +443,8 @@ namespace DebuggerTests
         private static void AssertHasOnlyExpectedProperties(
             string[] expected_names,
             IEnumerable<JObject> actual
-        ) {
+        )
+        {
             var exp = new HashSet<string>(expected_names);
 
             foreach (var obj in actual)

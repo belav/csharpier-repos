@@ -24,7 +24,8 @@ namespace System.Linq.Parallel.Tests
                 object[] results in Sources.Ranges(
                     counts.Select(x => x * DuplicateFactor).DefaultIfEmpty(Sources.OuterLoopCount)
                 )
-            ) {
+            )
+            {
                 yield return new object[] { results[0], ((int)results[1]) / DuplicateFactor };
             }
         }
@@ -66,7 +67,8 @@ namespace System.Linq.Parallel.Tests
             foreach (
                 int i in UnorderedSources.Default(count)
                     .Distinct(new ModularCongruenceComparer(uniqueCount))
-            ) {
+            )
+            {
                 seen.Add(i % uniqueCount);
             }
             seen.AssertComplete();
@@ -155,7 +157,8 @@ namespace System.Linq.Parallel.Tests
         public static void Distinct_NotPiplined_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             Distinct_NotPipelined(labeled, count);
         }
 
@@ -164,7 +167,8 @@ namespace System.Linq.Parallel.Tests
         public static void Distinct_Unordered_SourceMultiple(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             // The difference between this test and the previous, is that it's not possible to
             // get non-unique results from ParallelEnumerable.Range()...
             // Those tests either need modification of source (via .Select(x => x / DuplicateFactor) or similar,
@@ -186,7 +190,8 @@ namespace System.Linq.Parallel.Tests
         public static void Distinct_Unordered_SourceMultiple_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             Distinct_Unordered_SourceMultiple(labeled, count);
         }
 
@@ -211,7 +216,8 @@ namespace System.Linq.Parallel.Tests
         public static void Distinct_SourceMultiple_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             Distinct_SourceMultiple(labeled, count);
         }
 

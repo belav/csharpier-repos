@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
             Document document,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             var symbol = await SymbolFinder.FindSymbolAtPositionAsync(

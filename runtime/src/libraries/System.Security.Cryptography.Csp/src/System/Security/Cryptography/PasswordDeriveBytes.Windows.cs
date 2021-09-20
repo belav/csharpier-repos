@@ -18,7 +18,8 @@ namespace System.Security.Cryptography
             string? alghashname,
             int keySize,
             byte[] rgbIV
-        ) {
+        )
+        {
             if (keySize < 0)
                 throw new CryptographicException(SR.Cryptography_InvalidKeySize);
 

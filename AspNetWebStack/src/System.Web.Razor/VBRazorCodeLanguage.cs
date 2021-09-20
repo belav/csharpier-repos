@@ -46,7 +46,8 @@ namespace System.Web.Razor
             string rootNamespaceName,
             string sourceFileName,
             RazorEngineHost host
-        ) {
+        )
+        {
             return new VBRazorCodeGenerator(className, rootNamespaceName, sourceFileName, host);
         }
     }

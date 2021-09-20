@@ -34,7 +34,8 @@ namespace Roslyn.Test.Utilities
         public static IEnumerable<Type> GetAllTypesWithStaticFieldsImplementingType(
             Assembly assembly,
             Type type
-        ) {
+        )
+        {
             return assembly.GetTypes()
                 .Where(
                     t =>
@@ -111,7 +112,8 @@ namespace Roslyn.Test.Utilities
             Func<SyntaxNode, bool> syntaxNodePredicate = null,
             bool argumentOrderDoesNotMatter = false,
             bool isSuppressed = false
-        ) {
+        )
+        {
             Debug.Assert(
                 code is Microsoft.CodeAnalysis.CSharp.ErrorCode
                     || code is Microsoft.CodeAnalysis.VisualBasic.ERRID
@@ -140,7 +142,8 @@ namespace Roslyn.Test.Utilities
             Func<SyntaxNode, bool> syntaxNodePredicate = null,
             bool argumentOrderDoesNotMatter = false,
             bool isSuppressed = false
-        ) {
+        )
+        {
             return Diagnostic(
                 code,
                 NormalizeNewLines(squiggledText),

@@ -11,20 +11,23 @@ namespace Microsoft.Extensions.Configuration
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder AddCommandLine(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder builder,
             System.Action<Microsoft.Extensions.Configuration.CommandLine.CommandLineConfigurationSource> configureSource
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder AddCommandLine(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder configurationBuilder,
             string[] args
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder AddCommandLine(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder configurationBuilder,
             string[] args,
             System.Collections.Generic.IDictionary<string, string> switchMappings
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -60,7 +63,8 @@ namespace Microsoft.Extensions.Configuration.CommandLine
         }
         public Microsoft.Extensions.Configuration.IConfigurationProvider Build(
             Microsoft.Extensions.Configuration.IConfigurationBuilder builder
-        ) {
+        )
+        {
             throw null;
         }
     }

@@ -54,7 +54,8 @@ namespace Internal.CommandLine
             string applicationName,
             IEnumerable<string> syntaxElements,
             int maxWidth
-        ) {
+        )
+        {
             var usageHeader = string.Format(Strings.HelpUsageOfApplicationFmt, applicationName);
             sb.Append(usageHeader);
 
@@ -71,7 +72,8 @@ namespace Internal.CommandLine
             this StringBuilder sb,
             IReadOnlyList<HelpRow> rows,
             int maxWidth
-        ) {
+        )
+        {
             const int indent = 4;
             var maxColumnWidth = rows.Select(r => r.Header.Length).Max();
             var helpStartColumn = maxColumnWidth + 2 * indent;
@@ -102,7 +104,8 @@ namespace Internal.CommandLine
             IEnumerable<string> words,
             int indent,
             int maxidth
-        ) {
+        )
+        {
             var helpLines = WordWrapLines(words, maxidth);
             var isFirstHelpLine = true;
 
@@ -133,7 +136,8 @@ namespace Internal.CommandLine
         private static HelpPage GetCommandHelp(
             ArgumentSyntax argumentSyntax,
             ArgumentCommand command
-        ) {
+        )
+        {
             return new HelpPage
             {
                 ApplicationName = argumentSyntax.ApplicationName,
@@ -151,7 +155,8 @@ namespace Internal.CommandLine
         private static IEnumerable<string> GetCommandSyntax(
             ArgumentSyntax argumentSyntax,
             ArgumentCommand command
-        ) {
+        )
+        {
             if (command != null)
                 yield return command.Name;
 
@@ -206,7 +211,8 @@ namespace Internal.CommandLine
         private static IEnumerable<HelpRow> GetArgumentRows(
             ArgumentSyntax argumentSyntax,
             ArgumentCommand command
-        ) {
+        )
+        {
             return argumentSyntax.GetArguments(command)
                 .Where(a => !a.IsHidden)
                 .Select(a => new HelpRow { Header = GetArgumentRowHeader(a), Text = a.Help });

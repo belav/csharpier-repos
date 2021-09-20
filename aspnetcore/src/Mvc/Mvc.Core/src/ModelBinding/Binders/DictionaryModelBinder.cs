@@ -33,10 +33,12 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             IModelBinder keyBinder,
             IModelBinder valueBinder,
             ILoggerFactory loggerFactory
-        ) : base(
-            new KeyValuePairModelBinder<TKey, TValue>(keyBinder, valueBinder, loggerFactory),
-            loggerFactory
-        ) {
+        )
+            : base(
+                new KeyValuePairModelBinder<TKey, TValue>(keyBinder, valueBinder, loggerFactory),
+                loggerFactory
+            )
+        {
             if (valueBinder == null)
             {
                 throw new ArgumentNullException(nameof(valueBinder));
@@ -68,12 +70,14 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             IModelBinder valueBinder,
             ILoggerFactory loggerFactory,
             bool allowValidatingTopLevelNodes
-        ) : base(
-            new KeyValuePairModelBinder<TKey, TValue>(keyBinder, valueBinder, loggerFactory),
-            loggerFactory,
-            // CollectionModelBinder should not check IsRequired, done in this model binder.
-            allowValidatingTopLevelNodes: false
-        ) {
+        )
+            : base(
+                new KeyValuePairModelBinder<TKey, TValue>(keyBinder, valueBinder, loggerFactory),
+                loggerFactory,
+                // CollectionModelBinder should not check IsRequired, done in this model binder.
+                allowValidatingTopLevelNodes: false
+            )
+        {
             if (valueBinder == null)
             {
                 throw new ArgumentNullException(nameof(valueBinder));
@@ -110,12 +114,14 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             ILoggerFactory loggerFactory,
             bool allowValidatingTopLevelNodes,
             MvcOptions mvcOptions
-        ) : base(
-            new KeyValuePairModelBinder<TKey, TValue>(keyBinder, valueBinder, loggerFactory),
-            loggerFactory,
-            allowValidatingTopLevelNodes: false,
-            mvcOptions
-        ) {
+        )
+            : base(
+                new KeyValuePairModelBinder<TKey, TValue>(keyBinder, valueBinder, loggerFactory),
+                loggerFactory,
+                allowValidatingTopLevelNodes: false,
+                mvcOptions
+            )
+        {
             if (valueBinder == null)
             {
                 throw new ArgumentNullException(nameof(valueBinder));
@@ -153,7 +159,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
 
             if (
                 bindingContext.ValueProvider is not IEnumerableValueProvider enumerableValueProvider
-            ) {
+            )
+            {
                 // No IEnumerableValueProvider available for the fallback approach. For example the user may have
                 // replaced the ValueProvider with something other than a CompositeValueProvider.
                 if (bindingContext.IsTopLevelObject)
@@ -198,7 +205,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                         modelName: kvp.Value,
                         model: null
                     )
-                ) {
+                )
+                {
                     await _valueBinder.BindModelAsync(bindingContext);
 
                     var valueResult = bindingContext.Result;
@@ -252,7 +260,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         protected override object? ConvertToCollectionType(
             Type targetType,
             IEnumerable<KeyValuePair<TKey, TValue?>> collection
-        ) {
+        )
+        {
             if (collection == null)
             {
                 return null;

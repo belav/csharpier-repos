@@ -156,7 +156,8 @@ namespace Microsoft.Extensions.Logging.AzureAppServices
                             millisecondsTimeout: 0,
                             cancellationToken: _cancellationTokenSource.Token
                         )
-                    ) {
+                    )
+                    {
                         Interlocked.Increment(ref _messagesDropped);
                     }
                 }

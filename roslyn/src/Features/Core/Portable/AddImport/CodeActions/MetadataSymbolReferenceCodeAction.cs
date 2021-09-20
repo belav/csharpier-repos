@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                 Project project,
                 bool isPreview,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var projectWithReference = project.Solution.GetRequiredProject(
                     FixData.PortableExecutableReferenceProjectId
                 );

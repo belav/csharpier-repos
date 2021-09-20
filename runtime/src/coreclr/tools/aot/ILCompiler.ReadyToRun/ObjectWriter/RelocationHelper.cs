@@ -83,7 +83,8 @@ namespace ILCompiler.PEWriter
             Stream outputStream,
             ulong defaultImageBase,
             BlobBuilder peFileBuilder
-        ) {
+        )
+        {
             _outputStream = outputStream;
             _outputFilePos = 0;
 
@@ -142,7 +143,8 @@ namespace ILCompiler.PEWriter
             int sourceRVA,
             int targetRVA,
             int filePosWhenPlaced
-        ) {
+        )
+        {
             int relocationLength = 0;
             long delta = 0;
 

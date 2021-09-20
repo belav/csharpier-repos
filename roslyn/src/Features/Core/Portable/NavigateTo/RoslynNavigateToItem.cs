@@ -60,7 +60,8 @@ namespace Microsoft.CodeAnalysis.NavigateTo
             NavigateToMatchKind matchKind,
             bool isCaseSensitive,
             ImmutableArray<TextSpan> nameMatchSpans
-        ) {
+        )
+        {
             IsStale = isStale;
             DocumentId = documentId;
             AdditionalMatchingProjects = additionalMatchingProjects;
@@ -74,7 +75,8 @@ namespace Microsoft.CodeAnalysis.NavigateTo
         public async Task<INavigateToSearchResult?> TryCreateSearchResultAsync(
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (IsStale)
             {
                 // may refer to a document that doesn't exist anymore.  Bail out gracefully in that case.

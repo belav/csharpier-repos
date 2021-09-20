@@ -33,7 +33,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public static IEnumerable<IReadOnlyNavigation> GetNavigations(
             this IReadOnlyForeignKey foreignKey
-        ) {
+        )
+        {
             if (foreignKey.PrincipalToDependent != null)
             {
                 yield return foreignKey.PrincipalToDependent;
@@ -54,11 +55,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public static IEnumerable<IReadOnlyNavigation> FindNavigationsFrom(
             this IReadOnlyForeignKey foreignKey,
             IReadOnlyEntityType entityType
-        ) {
+        )
+        {
             if (
                 foreignKey.DeclaringEntityType != entityType
                 && foreignKey.PrincipalEntityType != entityType
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     CoreStrings.EntityTypeNotInRelationshipStrict(
                         entityType.DisplayName(),
@@ -82,11 +85,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public static IEnumerable<IReadOnlyNavigation> FindNavigationsFromInHierarchy(
             this IReadOnlyForeignKey foreignKey,
             IReadOnlyEntityType entityType
-        ) {
+        )
+        {
             if (
                 !foreignKey.DeclaringEntityType.IsAssignableFrom(entityType)
                 && !foreignKey.PrincipalEntityType.IsAssignableFrom(entityType)
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     CoreStrings.EntityTypeNotInRelationship(
                         entityType.DisplayName(),
@@ -114,11 +119,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public static IEnumerable<IReadOnlyNavigation> FindNavigationsTo(
             this IReadOnlyForeignKey foreignKey,
             IReadOnlyEntityType entityType
-        ) {
+        )
+        {
             if (
                 foreignKey.DeclaringEntityType != entityType
                 && foreignKey.PrincipalEntityType != entityType
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     CoreStrings.EntityTypeNotInRelationshipStrict(
                         entityType.DisplayName(),
@@ -142,11 +149,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public static IEnumerable<IReadOnlyNavigation> FindNavigationsToInHierarchy(
             this IReadOnlyForeignKey foreignKey,
             IReadOnlyEntityType entityType
-        ) {
+        )
+        {
             if (
                 !foreignKey.DeclaringEntityType.IsAssignableFrom(entityType)
                 && !foreignKey.PrincipalEntityType.IsAssignableFrom(entityType)
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     CoreStrings.EntityTypeNotInRelationship(
                         entityType.DisplayName(),
@@ -168,7 +177,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         private static IEnumerable<IReadOnlyNavigation> FindNavigations(
             this IReadOnlyForeignKey foreignKey,
             bool toPrincipal
-        ) {
+        )
+        {
             if (toPrincipal)
             {
                 if (foreignKey.DependentToPrincipal != null)
@@ -195,11 +205,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public static IReadOnlyEntityType ResolveOtherEntityTypeInHierarchy(
             this IReadOnlyForeignKey foreignKey,
             IReadOnlyEntityType entityType
-        ) {
+        )
+        {
             if (
                 !foreignKey.DeclaringEntityType.IsAssignableFrom(entityType)
                 && !foreignKey.PrincipalEntityType.IsAssignableFrom(entityType)
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     CoreStrings.EntityTypeNotInRelationship(
                         entityType.DisplayName(),
@@ -212,7 +224,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             if (
                 foreignKey.DeclaringEntityType.IsAssignableFrom(foreignKey.PrincipalEntityType)
                 || foreignKey.PrincipalEntityType.IsAssignableFrom(foreignKey.DeclaringEntityType)
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     CoreStrings.IntraHierarchicalAmbiguousTargetEntityType(
                         entityType.DisplayName(),
@@ -238,11 +251,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public static IReadOnlyEntityType ResolveEntityTypeInHierarchy(
             this IReadOnlyForeignKey foreignKey,
             IReadOnlyEntityType entityType
-        ) {
+        )
+        {
             if (
                 !foreignKey.DeclaringEntityType.IsAssignableFrom(entityType)
                 && !foreignKey.PrincipalEntityType.IsAssignableFrom(entityType)
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     CoreStrings.EntityTypeNotInRelationship(
                         entityType.DisplayName(),
@@ -255,7 +270,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             if (
                 foreignKey.DeclaringEntityType.IsAssignableFrom(foreignKey.PrincipalEntityType)
                 || foreignKey.PrincipalEntityType.IsAssignableFrom(foreignKey.DeclaringEntityType)
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     CoreStrings.IntraHierarchicalAmbiguousTargetEntityType(
                         entityType.DisplayName(),
@@ -281,7 +297,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             this IForeignKey foreignKey,
             out IReadOnlyList<IProperty> foreignKeyProperties,
             out IReadOnlyList<IProperty> principalKeyProperties
-        ) {
+        )
+        {
             // Finds the foreign key properties (and their associated principal key properties) of this foreign key where those
             // properties are not overlapping with any other foreign key, or all properties of the foreign key if there is not
             // a smaller set of non-overlapping properties.

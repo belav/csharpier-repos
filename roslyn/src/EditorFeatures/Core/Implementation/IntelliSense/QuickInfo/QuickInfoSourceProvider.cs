@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
         public QuickInfoSourceProvider(
             IThreadingContext threadingContext,
             Lazy<IStreamingFindUsagesPresenter> streamingPresenter
-        ) {
+        )
+        {
             _threadingContext = threadingContext;
             _streamingPresenter = streamingPresenter;
         }

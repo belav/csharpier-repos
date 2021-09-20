@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         public DynamicControllerEndpointMatcherPolicy(
             DynamicControllerEndpointSelectorCache selectorCache,
             EndpointMetadataComparer comparer
-        ) {
+        )
+        {
             if (selectorCache == null)
             {
                 throw new ArgumentNullException(nameof(selectorCache));
@@ -65,7 +66,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                     endpoints[
                         i
                     ].Metadata.GetMetadata<DynamicControllerRouteValueTransformerMetadata>() != null
-                ) {
+                )
+                {
                     // Found a dynamic controller endpoint
                     return true;
                 }
@@ -203,7 +205,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         private DynamicControllerEndpointSelector ResolveSelector(
             DynamicControllerEndpointSelector? currentSelector,
             Endpoint endpoint
-        ) {
+        )
+        {
             var selector = _selectorCache.GetEndpointSelector(endpoint);
 
             Debug.Assert(currentSelector == null || ReferenceEquals(currentSelector, selector));

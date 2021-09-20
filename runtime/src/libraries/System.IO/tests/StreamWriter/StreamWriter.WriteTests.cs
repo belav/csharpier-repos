@@ -253,14 +253,16 @@ namespace System.IO.Tests
             int writeSize,
             int writerBufferSize,
             bool autoFlush
-        ) {
+        )
+        {
             using (var s = new MemoryStream())
             using (
                 var writer = new StreamWriter(s, Encoding.ASCII, writerBufferSize)
                 {
                     AutoFlush = autoFlush
                 }
-            ) {
+            )
+            {
                 var data = new char[length];
                 var rand = new Random(42);
                 for (int i = 0; i < data.Length; i++)
@@ -294,14 +296,16 @@ namespace System.IO.Tests
             int writeSize,
             int writerBufferSize,
             bool autoFlush
-        ) {
+        )
+        {
             using (var s = new MemoryStream())
             using (
                 var writer = new StreamWriter(s, Encoding.ASCII, writerBufferSize)
                 {
                     AutoFlush = autoFlush
                 }
-            ) {
+            )
+            {
                 var data = new char[length];
                 var rand = new Random(42);
                 for (int i = 0; i < data.Length; i++)
@@ -335,14 +339,16 @@ namespace System.IO.Tests
             int writeSize,
             int writerBufferSize,
             bool autoFlush
-        ) {
+        )
+        {
             using (var s = new MemoryStream())
             using (
                 var writer = new StreamWriter(s, Encoding.ASCII, writerBufferSize)
                 {
                     AutoFlush = autoFlush
                 }
-            ) {
+            )
+            {
                 var data = new char[length];
                 var rand = new Random(42);
                 for (int i = 0; i < data.Length; i++)
@@ -379,14 +385,16 @@ namespace System.IO.Tests
             int writeSize,
             int writerBufferSize,
             bool autoFlush
-        ) {
+        )
+        {
             using (var s = new MemoryStream())
             using (
                 var writer = new StreamWriter(s, Encoding.ASCII, writerBufferSize)
                 {
                     AutoFlush = autoFlush
                 }
-            ) {
+            )
+            {
                 var data = new char[length];
                 var rand = new Random(42);
                 for (int i = 0; i < data.Length; i++)

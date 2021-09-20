@@ -113,7 +113,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Symbols
         private static async Task<object[]> RunGetDocumentSymbolsAsync(
             TestLspServer testLspServer,
             bool hierarchicalSupport
-        ) {
+        )
+        {
             var document = testLspServer.GetCurrentSolution().Projects.First().Documents.First();
             var request = new LSP.DocumentSymbolParams
             {
@@ -143,7 +144,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Symbols
         private static void AssertDocumentSymbolEquals(
             LSP.DocumentSymbol expected,
             LSP.DocumentSymbol actual
-        ) {
+        )
+        {
             Assert.Equal(expected.Kind, actual.Kind);
             Assert.Equal(expected.Name, actual.Name);
             Assert.Equal(expected.Range, actual.Range);
@@ -161,7 +163,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Symbols
             LSP.Location location,
             LSP.Location selection,
             LSP.DocumentSymbol parent = null
-        ) {
+        )
+        {
             var documentSymbol = new LSP.DocumentSymbol()
             {
                 Kind = kind,

@@ -67,7 +67,8 @@ namespace SignalRSamples
                                     context.Response.BodyWriter,
                                     _jsonWriterOptions
                                 )
-                            ) {
+                            )
+                            {
                                 writer.WriteStartObject();
                                 var commitHash = string.Empty;
 

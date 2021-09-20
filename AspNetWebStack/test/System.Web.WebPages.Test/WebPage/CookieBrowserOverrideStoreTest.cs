@@ -170,7 +170,8 @@ namespace System.Web.WebPages.Test
         internal static Mock<HttpContextBase> CreateCookieContext(
             HttpCookie requestCookie = null,
             HttpCookie responseCookie = null
-        ) {
+        )
+        {
             Mock<HttpContextBase> context = new Mock<HttpContextBase>();
 
             HttpCookieCollection requestCookies = new HttpCookieCollection();

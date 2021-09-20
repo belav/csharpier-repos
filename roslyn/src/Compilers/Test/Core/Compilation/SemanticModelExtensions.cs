@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             this SemanticModel model,
             SyntaxNode node,
             string expectedOperationTree
-        ) {
+        )
+        {
             var actualTextBuilder = new StringBuilder();
             AppendOperationTree(model, node, actualTextBuilder);
             OperationTreeVerifier.Verify(expectedOperationTree, actualTextBuilder.ToString());
@@ -25,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             SyntaxNode node,
             StringBuilder actualTextBuilder,
             int initialIndent = 0
-        ) {
+        )
+        {
             IOperation operation = model.GetOperation(node);
             if (operation != null)
             {

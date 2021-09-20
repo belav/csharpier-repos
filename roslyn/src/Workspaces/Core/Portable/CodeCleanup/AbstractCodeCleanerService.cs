@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
             ImmutableArray<TextSpan> spans,
             ImmutableArray<ICodeCleanupProvider> providers,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (Logger.LogBlock(FunctionId.CodeCleanup_CleanupAsync, cancellationToken))
             {
                 // If there is no span to format...
@@ -107,7 +108,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
             Workspace workspace,
             ImmutableArray<ICodeCleanupProvider> providers,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (Logger.LogBlock(FunctionId.CodeCleanup_Cleanup, cancellationToken))
             {
                 // If there is no span to format...
@@ -181,7 +183,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
             SyntaxNode node,
             List<(SyntaxAnnotation previousAnnotation, SyntaxAnnotation nextAnnotation)> annotations,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Now try to retrieve the text span from the annotations injected into the node.
             var builder = ArrayBuilder<TextSpan>.GetInstance();
 
@@ -212,7 +215,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
                         nextTokens,
                         out var span
                     )
-                ) {
+                )
+                {
                     builder.Add(span);
                 }
             }
@@ -227,7 +231,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
             IEnumerable<SyntaxToken> previousTokens,
             IEnumerable<SyntaxToken> nextTokens,
             out TextSpan span
-        ) {
+        )
+        {
             // Set initial value
             span = default;
 
@@ -303,7 +308,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
             if (
                 hasMultiplePreviousToken
                 && previousTokenMarker.Type == SpanMarkerType.BeginningOfFile
-            ) {
+            )
+            {
                 // Okay, it is an edge case. Let's use the start of the node as the beginning of the span
                 span = TextSpan.FromBounds(
                     node.SpanStart,
@@ -332,7 +338,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
         private static int GetPreviousTokenStartPosition(
             SpanMarkerType spanMarkerType,
             SyntaxToken previousToken
-        ) {
+        )
+        {
             Contract.ThrowIfTrue(spanMarkerType == SpanMarkerType.EndOfFile);
             Contract.ThrowIfTrue(previousToken.RawKind == 0);
 
@@ -355,7 +362,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
         private static int GetNextTokenEndPosition(
             SpanMarkerType spanMarkerType,
             SyntaxToken nextToken
-        ) {
+        )
+        {
             Contract.ThrowIfTrue(spanMarkerType == SpanMarkerType.BeginningOfFile);
             Contract.ThrowIfTrue(nextToken.RawKind == 0);
 
@@ -380,7 +388,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
             SyntaxNode root,
             ImmutableArray<TextSpan> spans,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Get spans where the tokens around the spans are not overlapping with the spans.
             var nonOverlappingSpans = GetNonOverlappingSpans(
                 syntaxFactsService,
@@ -465,7 +474,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
             SyntaxNode root,
             ImmutableArray<TextSpan> spans,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Create interval tree for spans
             var intervalTree = SimpleIntervalTree.Create(new TextSpanIntervalIntrospector(), spans);
 
@@ -536,7 +546,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
             out SyntaxToken startToken,
             out SyntaxToken endToken,
             out SyntaxToken nextToken
-        ) {
+        )
+        {
             // Get tokens at the edges of the span
             startToken = root.FindToken(span.Start, findInsideTrivia: true);
 
@@ -569,7 +580,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
             TextSpan span,
             out SyntaxToken startToken,
             out SyntaxToken endToken
-        ) {
+        )
+        {
             startToken = FindTokenOnLeftOfPosition(syntaxFactsService, root, span.Start);
             endToken = FindTokenOnRightOfPosition(syntaxFactsService, root, span.End);
 
@@ -593,7 +605,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
             ISyntaxFactsService syntaxFactsService,
             SyntaxNode root,
             int position
-        ) {
+        )
+        {
             var token = syntaxFactsService.FindTokenOnRightOfPosition(
                 root,
                 position,
@@ -621,7 +634,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
             ISyntaxFactsService syntaxFactsService,
             SyntaxNode root,
             int position
-        ) {
+        )
+        {
             // find token on left
             var token = syntaxFactsService.FindTokenOnLeftOfPosition(
                 root,
@@ -646,7 +660,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
 
         private static bool CleanupWholeNode(
             List<(SyntaxAnnotation previous, SyntaxAnnotation next)> annotations
-        ) {
+        )
+        {
             if (annotations.Count != 1)
             {
                 return false;
@@ -675,13 +690,15 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
             Func<SyntaxNode, ImmutableArray<TextSpan>> spanGetter,
             ImmutableArray<ICodeCleanupProvider> codeCleaners,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (
                 Logger.LogBlock(
                     FunctionId.CodeCleanup_IterateAllCodeCleanupProviders,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 var currentDocument = annotatedDocument;
                 Document? previousDocument = null;
                 var spans = ImmutableArray<TextSpan>.Empty;
@@ -725,7 +742,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
                             codeCleaner,
                             cancellationToken
                         )
-                    ) {
+                    )
+                    {
                         currentDocument = await codeCleaner.CleanupAsync(
                                 currentDocument,
                                 spans,
@@ -761,7 +779,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
         private ImmutableArray<TextSpan> GetSpans(
             SyntaxNode root,
             Func<SyntaxNode, ImmutableArray<TextSpan>> spanGetter
-        ) {
+        )
+        {
             // Get all the spans we've been requested to clean up.
             var requestedSpans = new NormalizedTextSpanCollection(spanGetter(root));
 
@@ -781,13 +800,15 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
             Workspace workspace,
             ImmutableArray<ICodeCleanupProvider> codeCleaners,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (
                 Logger.LogBlock(
                     FunctionId.CodeCleanup_IterateAllCodeCleanupProviders,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 var currentRoot = annotatedRoot;
                 SyntaxNode? previousRoot = null;
                 var spans = ImmutableArray<TextSpan>.Empty;
@@ -820,7 +841,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
                             codeCleaner,
                             cancellationToken
                         )
-                    ) {
+                    )
+                    {
                         currentRoot = await codeCleaner.CleanupAsync(
                                 currentRoot,
                                 spans,
@@ -850,7 +872,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
         private static SyntaxNode InjectAnnotations(
             SyntaxNode node,
             Dictionary<SyntaxToken, List<SyntaxAnnotation>> map
-        ) {
+        )
+        {
             var tokenMap = map.ToDictionary(p => p.Key, p => p.Value);
             return node.ReplaceTokens(
                 tokenMap.Keys,
@@ -913,7 +936,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
                 SpanMarkerType type,
                 SpanMarkerType oppositeMarkerType,
                 SyntaxAnnotation annotation
-            ) {
+            )
+            {
                 this.Type = type;
                 this.OppositeMarkerType = oppositeMarkerType;
                 this.Annotation = annotation;
@@ -922,14 +946,15 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
             public SpanMarker(
                 SpanMarkerType type = SpanMarkerType.Normal,
                 SpanMarkerType oppositeMarkerType = SpanMarkerType.Normal
-            ) : this(
-                type,
-                oppositeMarkerType,
-                new SyntaxAnnotation(
-                    AnnotationId,
-                    string.Format("{0} {1}", type, oppositeMarkerType)
-                )
-            ) { }
+            )
+                : this(
+                    type,
+                    oppositeMarkerType,
+                    new SyntaxAnnotation(
+                        AnnotationId,
+                        string.Format("{0} {1}", type, oppositeMarkerType)
+                    )
+                ) { }
 
             private static readonly char[] s_separators = new char[] { ' ' };
 

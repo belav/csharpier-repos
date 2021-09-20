@@ -43,7 +43,8 @@ namespace System.Xml
             int byteCount,
             char[] chars,
             int charIndex
-        ) {
+        )
+        {
             int charCount = GetCharCount(bytes, byteIndex, byteCount);
 
             if (_lastByte >= 0)
@@ -108,7 +109,8 @@ namespace System.Xml
             out int bytesUsed,
             out int charsUsed,
             out bool completed
-        ) {
+        )
+        {
             charsUsed = 0;
             bytesUsed = 0;
 
@@ -200,7 +202,8 @@ namespace System.Xml
             int byteCount,
             char[] chars,
             int charIndex
-        ) {
+        )
+        {
             int i = byteIndex;
             int j = charIndex;
             while (i < byteIndex + byteCount)
@@ -221,7 +224,8 @@ namespace System.Xml
             out int bytesUsed,
             out int charsUsed,
             out bool completed
-        ) {
+        )
+        {
             if (charCount < byteCount)
             {
                 byteCount = charCount;
@@ -280,7 +284,8 @@ namespace System.Xml
             int charCount,
             byte[] bytes,
             int byteIndex
-        ) {
+        )
+        {
             return 0;
         }
         public override int GetMaxByteCount(int charCount)
@@ -299,7 +304,8 @@ namespace System.Xml
             int byteCount,
             char[] chars,
             int charIndex
-        ) {
+        )
+        {
             return ucs4Decoder.GetChars(bytes, byteIndex, byteCount, chars, charIndex);
         }
 
@@ -448,7 +454,8 @@ namespace System.Xml
             int byteCount,
             char[] chars,
             int charIndex
-        ) {
+        )
+        {
             // finish a character from the bytes that were cached last time
             int i = lastBytesCount;
             if (lastBytesCount > 0)
@@ -507,7 +514,8 @@ namespace System.Xml
             out int bytesUsed,
             out int charsUsed,
             out bool completed
-        ) {
+        )
+        {
             bytesUsed = 0;
             charsUsed = 0;
             // finish a character from the bytes that were cached last time
@@ -592,7 +600,8 @@ namespace System.Xml
             int byteCount,
             char[] chars,
             int charIndex
-        ) {
+        )
+        {
             uint code;
             int i,
                 j;
@@ -642,7 +651,8 @@ namespace System.Xml
             int byteCount,
             char[] chars,
             int charIndex
-        ) {
+        )
+        {
             uint code;
             int i,
                 j;
@@ -692,7 +702,8 @@ namespace System.Xml
             int byteCount,
             char[] chars,
             int charIndex
-        ) {
+        )
+        {
             uint code;
             int i,
                 j;
@@ -744,7 +755,8 @@ namespace System.Xml
             int byteCount,
             char[] chars,
             int charIndex
-        ) {
+        )
+        {
             uint code;
             int i,
                 j;

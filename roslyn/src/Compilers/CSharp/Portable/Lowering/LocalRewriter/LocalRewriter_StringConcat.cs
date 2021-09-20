@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression loweredLeft,
             BoundExpression loweredRight,
             TypeSymbol type
-        ) {
+        )
+        {
             Debug.Assert(
                 operatorKind == BinaryOperatorKind.StringConcatenation
                     || operatorKind == BinaryOperatorKind.StringAndObjectConcatenation
@@ -173,7 +174,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private void FlattenConcatArg(
             BoundExpression lowered,
             ArrayBuilder<BoundExpression> flattened
-        ) {
+        )
+        {
             if (TryExtractStringConcatArgs(lowered, out var arguments))
             {
                 flattened.AddRange(arguments);
@@ -193,7 +195,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private bool TryExtractStringConcatArgs(
             BoundExpression lowered,
             out ImmutableArray<BoundExpression> arguments
-        ) {
+        )
+        {
             switch (lowered.Kind)
             {
                 case BoundKind.Call:
@@ -202,7 +205,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (
                         method.IsStatic
                         && method.ContainingType.SpecialType == SpecialType.System_String
-                    ) {
+                    )
+                    {
                         if (
                             (object)method
                                 == (object)_compilation.GetSpecialTypeMember(
@@ -216,7 +220,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 == (object)_compilation.GetSpecialTypeMember(
                                     SpecialMember.System_String__ConcatStringStringStringString
                                 )
-                        ) {
+                        )
+                        {
                             arguments = boundCall.Arguments;
                             return true;
                         }
@@ -226,7 +231,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             == (object)_compilation.GetSpecialTypeMember(
                                 SpecialMember.System_String__ConcatStringArray
                             )
-                        ) {
+                        )
+                        {
                             var args = boundCall.Arguments[0] as BoundArrayCreation;
                             if (args != null)
                             {
@@ -256,7 +262,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             rightConstant != null
                             && rightConstant.IsString
                             && rightConstant.StringValue.Length == 0
-                        ) {
+                        )
+                        {
                             arguments = ImmutableArray.Create(boundCoalesce.LeftOperand);
                             return true;
                         }
@@ -276,7 +283,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxNode syntax,
             BoundExpression loweredLeft,
             BoundExpression loweredRight
-        ) {
+        )
+        {
             // both left and right are constants
             var leftConst = loweredLeft.ConstantValue;
             var rightConst = loweredRight.ConstantValue;
@@ -326,7 +334,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static ConstantValue? TryFoldTwoConcatConsts(
             ConstantValue leftConst,
             ConstantValue rightConst
-        ) {
+        )
+        {
             var leftVal = leftConst.StringValue;
             var rightVal = rightConst.StringValue;
 
@@ -352,7 +361,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private BoundExpression RewriteStringConcatenationOneExpr(
             SyntaxNode syntax,
             BoundExpression loweredOperand
-        ) {
+        )
+        {
             // If it's a call to 'string.Concat' (or is something which ends in '?? ""', which this method also extracts),
             // we know the result cannot be null. Otherwise return loweredOperand ?? ""
             if (TryExtractStringConcatArgs(loweredOperand, out _))
@@ -369,7 +379,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxNode syntax,
             BoundExpression loweredLeft,
             BoundExpression loweredRight
-        ) {
+        )
+        {
             Debug.Assert(
                 loweredLeft.HasAnyErrors
                     || loweredLeft.Type is { } && loweredLeft.Type.IsStringType()
@@ -399,7 +410,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression loweredFirst,
             BoundExpression loweredSecond,
             BoundExpression loweredThird
-        ) {
+        )
+        {
             Debug.Assert(
                 loweredFirst.HasAnyErrors
                     || loweredFirst.Type is { } && loweredFirst.Type.IsStringType()
@@ -433,7 +445,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression loweredSecond,
             BoundExpression loweredThird,
             BoundExpression loweredFourth
-        ) {
+        )
+        {
             Debug.Assert(
                 loweredFirst.HasAnyErrors
                     || loweredFirst.Type is { } && loweredFirst.Type.IsStringType()
@@ -468,7 +481,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private BoundExpression RewriteStringConcatenationManyExprs(
             SyntaxNode syntax,
             ImmutableArray<BoundExpression> loweredArgs
-        ) {
+        )
+        {
             Debug.Assert(loweredArgs.Length > 4);
             Debug.Assert(
                 loweredArgs.All(a => a.HasErrors || a.Type is { } && a.Type.IsStringType())
@@ -498,7 +512,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression loweredLeft,
             BoundExpression loweredRight,
             TypeSymbol type
-        ) {
+        )
+        {
             SpecialMember member =
                 (operatorKind == BinaryOperatorKind.StringConcatenation)
                     ? SpecialMember.System_String__ConcatStringString
@@ -580,7 +595,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         member is MethodSymbol toStringMethod
                         && toStringMethod.GetLeastOverriddenMethod(type)
                             == (object)objectToStringMethod
-                    ) {
+                    )
+                    {
                         structToStringMethod = toStringMethod;
                         break;
                     }
@@ -597,7 +613,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     expr.Type.SpecialType != SpecialType.None
                     && !isFieldOfMarshalByRef(expr, _compilation)
                 )
-            ) {
+            )
+            {
                 return BoundCall.Synthesized(expr.Syntax, expr, structToStringMethod);
             }
 

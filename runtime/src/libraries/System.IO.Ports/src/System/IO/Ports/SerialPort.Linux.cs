@@ -45,7 +45,8 @@ namespace System.IO.Ports
                         || (!isTtyS && Directory.Exists(entry.FullName + "/device/tty"))
                         || Directory.Exists(sysUsbDir + entry.Name)
                         || (isTtyGS && (File.Exists(entry.FullName + "/dev")))
-                    ) {
+                    )
+                    {
                         string deviceName = devDir + entry.Name;
                         if (File.Exists(deviceName))
                         {
@@ -69,7 +70,8 @@ namespace System.IO.Ports
                         || portName.StartsWith("/dev/ttyACM", StringComparison.Ordinal)
                         || portName.StartsWith("/dev/ttyAMA", StringComparison.Ordinal)
                         || portName.StartsWith("/dev/ttymxc", StringComparison.Ordinal)
-                    ) {
+                    )
+                    {
                         ports.Add(portName);
                     }
                 }

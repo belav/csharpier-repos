@@ -66,7 +66,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
             if (
                 optionID != CompilerOptions.OPTID_IMPORTS
                 && optionID != CompilerOptions.OPTID_IMPORTSUSINGNOPIA
-            ) {
+            )
+            {
                 throw new ArgumentException("optionID was an unexpected value.", nameof(optionID));
             }
 
@@ -115,7 +116,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
             string fileName,
             object parent,
             out EnvDTE.FileCodeModel ppFileCodeModel
-        ) {
+        )
+        {
             ppFileCodeModel = ProjectCodeModel.GetOrCreateFileCodeModel(fileName, parent);
             return VSConstants.S_OK;
         }
@@ -187,7 +189,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
             string[] previousAliases,
             int currentAliasesCount,
             string[] currentAliases
-        ) {
+        )
+        {
             using (VisualStudioProject.CreateBatchScope())
             {
                 var existingProperties = VisualStudioProject.GetPropertiesForMetadataReference(file)

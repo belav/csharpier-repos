@@ -72,7 +72,8 @@ namespace Roslyn.Utilities
             string xpath,
             out string? errorMessage,
             out bool invalidXPath
-        ) {
+        )
+        {
             errorMessage = null;
             invalidXPath = false;
 

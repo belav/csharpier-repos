@@ -101,7 +101,8 @@ namespace Microsoft.Test.ModuleCore
                 variationfilter != null
                 && variationfilter != "*"
                 && variationfilter != variationname
-            ) {
+            )
+            {
                 ret = false;
             }
 

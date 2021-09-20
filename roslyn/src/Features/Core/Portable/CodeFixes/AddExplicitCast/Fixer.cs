@@ -58,7 +58,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
                 TArgumentListSyntax argumentList,
                 TInvocationSyntax invocationNode,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // Implicit downcast appears on the argument of invocation node,
                 // get all candidate functions and extract potential conversion types
                 var symbolInfo = semanticModel.GetSymbolInfo(invocationNode, cancellationToken);
@@ -89,7 +90,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
                         )
                         && GetExpressionOfArgument(targetArgument)
                             is TExpressionSyntax argumentExpression
-                    ) {
+                    )
+                    {
                         mutablePotentialConversionTypes.Add(
                             (argumentExpression, targetArgumentConversionType)
                         );
@@ -142,7 +144,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
                 TArgumentSyntax targetArgument,
                 CancellationToken cancellationToken,
                 [NotNullWhen(true)] out ITypeSymbol? targetArgumentConversionType
-            ) {
+            )
+            {
                 targetArgumentConversionType = null;
 
                 // No conversion happens under this case
@@ -165,7 +168,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
                         syntaxFacts.GetNameForArgument(arguments[i]) is string name
                         && name != string.Empty
                         && !FindCorrespondingParameterByName(name, parameters, ref parameterIndex)
-                    ) {
+                    )
+                    {
                         return false;
                     }
 
@@ -187,7 +191,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
                             argumentExpression,
                             paramsType.ElementType
                         ).Exists
-                    ) {
+                    )
+                    {
                         newArguments.Add(GenerateNewArgument(arguments[i], paramsType.ElementType));
                         if (arguments[i].Equals(targetArgument))
                             targetArgumentConversionType = paramsType.ElementType;
@@ -198,7 +203,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
                             argumentExpression,
                             parameterType
                         ).Exists
-                    ) {
+                    )
+                    {
                         newArguments.Add(GenerateNewArgument(arguments[i], parameterType));
                         if (arguments[i].Equals(targetArgument))
                             targetArgumentConversionType = parameterType;
@@ -211,7 +217,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
                             argumentType,
                             parameterType
                         ).IsIdentity
-                    ) {
+                    )
+                    {
                         // Direct conversion from a declaration expression to a type is unspecified, thus we classify the
                         // conversion from the type of declaration expression to the parameter type
                         // An example for this case:
@@ -255,7 +262,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
                 TArgumentListSyntax oldArgumentList,
                 ArrayBuilder<TArgumentSyntax> newArguments,
                 SyntaxNode targetNode
-            ) {
+            )
+            {
                 var newRoot = root.ReplaceNode(
                     oldArgumentList,
                     GenerateNewArgumentList(oldArgumentList, newArguments)
@@ -263,7 +271,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
                 if (
                     newRoot.FindNode(targetNode.Span).GetAncestorOrThis<TArgumentListSyntax>()
                     is TArgumentListSyntax newArgumentList
-                ) {
+                )
+                {
                     var symbolInfo = GetSpeculativeSymbolInfo(semanticModel, newArgumentList);
                     return symbolInfo.Symbol != null;
                 }

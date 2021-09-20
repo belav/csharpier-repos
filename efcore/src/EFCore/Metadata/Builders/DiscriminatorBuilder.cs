@@ -47,7 +47,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         private DiscriminatorBuilder? IsComplete(
             bool complete,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             if (configurationSource == ConfigurationSource.Explicit)
             {
                 ((IMutableEntityType)EntityTypeBuilder.Metadata).SetDiscriminatorMappingComplete(
@@ -62,7 +63,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
                         complete,
                         configurationSource == ConfigurationSource.DataAnnotation
                     )
-                ) {
+                )
+                {
                     return null;
                 }
 
@@ -130,7 +132,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             InternalEntityTypeBuilder? entityTypeBuilder,
             object? value,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             if (entityTypeBuilder == null)
             {
                 return null;
@@ -148,7 +151,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
                         configurationSource
                     ) == null
                 )
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     CoreStrings.DiscriminatorEntityTypeNotDerived(
                         entityTypeBuilder.Metadata.DisplayName(),
@@ -169,7 +173,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
                         value,
                         configurationSource == ConfigurationSource.DataAnnotation
                     )
-                ) {
+                )
+                {
                     return null;
                 }
 

@@ -340,7 +340,8 @@ namespace System.IO.Tests
         public void WindowsAlternateDataStreamOverwrite(
             string defaultStream,
             string alternateStream
-        ) {
+        )
+        {
             DirectoryInfo testDirectory = Directory.CreateDirectory(GetTestFilePath());
             string testFile = Path.Combine(testDirectory.FullName, GetTestFileName());
             string testFileDefaultStream = testFile + defaultStream;

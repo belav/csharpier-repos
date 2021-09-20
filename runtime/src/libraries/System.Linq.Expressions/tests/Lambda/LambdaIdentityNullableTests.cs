@@ -49,7 +49,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.MinValue,
                     decimal.MaxValue
                 }
-            ) {
+            )
+            {
                 VerifyIdentityNullableDecimal(value, useInterpreter);
             }
         }
@@ -71,7 +72,8 @@ namespace System.Linq.Expressions.Tests
                     double.PositiveInfinity,
                     double.NaN
                 }
-            ) {
+            )
+            {
                 VerifyIdentityNullableDouble(value, useInterpreter);
             }
         }
@@ -81,7 +83,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
-            ) {
+            )
+            {
                 VerifyIdentityNullableEnum(value, useInterpreter);
             }
         }
@@ -99,7 +102,8 @@ namespace System.Linq.Expressions.Tests
                     (El)long.MaxValue,
                     (El)long.MinValue
                 }
-            ) {
+            )
+            {
                 VerifyIdentityNullableEnumLong(value, useInterpreter);
             }
         }
@@ -121,7 +125,8 @@ namespace System.Linq.Expressions.Tests
                     float.PositiveInfinity,
                     float.NaN
                 }
-            ) {
+            )
+            {
                 VerifyIdentityNullableFloat(value, useInterpreter);
             }
         }
@@ -158,7 +163,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyIdentityNullableSByte(value, useInterpreter);
             }
         }
@@ -175,10 +181,12 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckLambdaIdentityNullableStructWithStringAndFieldTest(
             bool useInterpreter
-        ) {
+        )
+        {
             foreach (
                 Scs? value in new Scs?[] { null, default(Scs), new Scs(), new Scs(null, new S()) }
-            ) {
+            )
+            {
                 VerifyIdentityNullableStructWithStringAndField(value, useInterpreter);
             }
         }
@@ -188,7 +196,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyIdentityNullableShort(value, useInterpreter);
             }
         }
@@ -241,21 +250,24 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckLambdaIdentityNullableGenericWithStructRestrictionWithEnumTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckLambdaIdentityNullableGenericWithStructRestrictionHelper<E>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckLambdaIdentityNullableGenericWithStructRestrictionWithStructTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckLambdaIdentityNullableGenericWithStructRestrictionHelper<S>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckLambdaIdentityNullableGenericWithStructRestrictionWithStructWithStringAndFieldTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckLambdaIdentityNullableGenericWithStructRestrictionHelper<Scs>(useInterpreter);
         }
 
@@ -921,7 +933,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyIdentityNullableStructWithStringAndField(
             Scs? value,
             bool useInterpreter
-        ) {
+        )
+        {
             ParameterExpression p = Expression.Parameter(typeof(Scs?), "p");
 
             // parameter hard coded
@@ -1023,7 +1036,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyIdentityNullableStructWithTwoValues(
             Sp? value,
             bool useInterpreter
-        ) {
+        )
+        {
             ParameterExpression p = Expression.Parameter(typeof(Sp?), "p");
 
             // parameter hard coded

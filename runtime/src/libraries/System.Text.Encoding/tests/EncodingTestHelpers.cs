@@ -13,7 +13,8 @@ namespace System.Text.Tests
             int index,
             int count,
             byte[] expected
-        ) {
+        )
+        {
             GetByteCount(encoding, chars, index, count, expected.Length);
             GetBytes(encoding, chars, index, count, expected);
 
@@ -27,7 +28,8 @@ namespace System.Text.Tests
             int index,
             int count,
             int expected
-        ) {
+        )
+        {
             char[] charArray = chars.ToCharArray();
             if (index == 0 && count == chars.Length)
             {
@@ -52,7 +54,8 @@ namespace System.Text.Tests
             int index,
             int count,
             byte[] expectedBytes
-        ) {
+        )
+        {
             byte[] fullArray = new byte[expectedBytes.Length + 4];
             for (int i = 0; i < fullArray.Length; i++)
             {
@@ -97,7 +100,8 @@ namespace System.Text.Tests
             byte[] bytes,
             int byteIndex,
             byte[] expectedBytes
-        ) {
+        )
+        {
             byte[] originalBytes = (byte[])bytes.Clone();
 
             if (index == 0 && count == source.Length)
@@ -187,7 +191,8 @@ namespace System.Text.Tests
             int byteCount,
             byte[] originalBytes,
             byte[] expectedBytes
-        ) {
+        )
+        {
             for (int i = 0; i < byteIndex; i++)
             {
                 // Bytes outside the range should be ignored
@@ -210,7 +215,8 @@ namespace System.Text.Tests
             int index,
             int count,
             string expected
-        ) {
+        )
+        {
             GetCharCount(encoding, bytes, index, count, expected.Length);
             GetChars(encoding, bytes, index, count, expected.ToCharArray());
             GetString(encoding, bytes, index, count, expected);
@@ -225,7 +231,8 @@ namespace System.Text.Tests
             int index,
             int count,
             int expected
-        ) {
+        )
+        {
             if (index == 0 && count == bytes.Length)
             {
                 // Use GetCharCount(byte[])
@@ -250,7 +257,8 @@ namespace System.Text.Tests
             int index,
             int count,
             char[] expectedChars
-        ) {
+        )
+        {
             char[] fullArray = new char[expectedChars.Length + 4];
             for (int i = 0; i < fullArray.Length; i++)
             {
@@ -283,7 +291,8 @@ namespace System.Text.Tests
             char[] chars,
             int charIndex,
             char[] expectedChars
-        ) {
+        )
+        {
             char[] originalChars = (char[])chars.Clone();
 
             // Use GetChars(byte[])
@@ -343,7 +352,8 @@ namespace System.Text.Tests
             int charCount,
             char[] originalChars,
             char[] expectedChars
-        ) {
+        )
+        {
             for (int i = 0; i < charIndex; i++)
             {
                 // Chars outside the range should be ignored
@@ -366,7 +376,8 @@ namespace System.Text.Tests
             int index,
             int count,
             string expected
-        ) {
+        )
+        {
             if (index == 0 && count == bytes.Length)
             {
                 // Use GetString(byte[])
@@ -382,7 +393,8 @@ namespace System.Text.Tests
             int index,
             int count,
             int expected
-        ) {
+        )
+        {
             // Use GetByteCount(string, int, int)
             Assert.Equal(expected, encoding.GetByteCount(chars, index, count));
 
@@ -399,7 +411,8 @@ namespace System.Text.Tests
             int index,
             int count,
             byte[] expected
-        ) {
+        )
+        {
             // Use GetBytes(string, int, int)
             byte[] stringResultAdvanced = encoding.GetBytes(chars, index, count);
             VerifyGetBytes(
@@ -437,7 +450,8 @@ namespace System.Text.Tests
             int index,
             int count,
             int expected
-        ) {
+        )
+        {
             // Use GetCharCount(ReadOnlySpan<byte>)
             Assert.Equal(
                 expected,
@@ -456,7 +470,8 @@ namespace System.Text.Tests
             char[] chars,
             int charIndex,
             char[] expectedChars
-        ) {
+        )
+        {
             // Use GetChars(ReadOnlySpan<byte>, Span<char>)
             char[] byteChars = (char[])chars.Clone();
             int charCount = encoding.GetChars(
@@ -482,7 +497,8 @@ namespace System.Text.Tests
             int index,
             int count,
             string expected
-        ) {
+        )
+        {
             // Use GetString(ReadOnlySpan<byte>)
             Assert.Equal(expected, encoding.GetString(new ReadOnlySpan<byte>(bytes, index, count)));
 

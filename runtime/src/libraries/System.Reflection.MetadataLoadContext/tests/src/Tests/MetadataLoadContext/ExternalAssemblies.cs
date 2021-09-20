@@ -30,7 +30,8 @@ namespace System.Reflection.Tests
                         }
                     )
                 )
-            ) {
+            )
+            {
                 string location = runtimeAssembly.Location;
 
                 Assert.Throws<FileLoadException>(() => lc.LoadFromAssemblyName("SomeAssembly"));

@@ -76,7 +76,8 @@ namespace System.Data.OleDb
             OleDbCommand? command,
             int depth,
             CommandBehavior commandBehavior
-        ) {
+        )
+        {
             _connection = connection;
             _command = command;
             _commandBehavior = commandBehavior;
@@ -108,7 +109,8 @@ namespace System.Data.OleDb
             object? result,
             ChapterHandle chapterHandle,
             IntPtr recordsAffected
-        ) {
+        )
+        {
             // if from ADODB, connection will be null
             if ((null == _connection) || (ChapterHandle.DB_NULL_HCHAPTER != chapterHandle))
             {
@@ -494,7 +496,8 @@ namespace System.Data.OleDb
                     out columnInfos,
                     out hr
                 )
-            ) {
+            )
+            {
                 if (hr < 0)
                 {
                     ProcessResults(hr);
@@ -520,7 +523,8 @@ namespace System.Data.OleDb
             IntPtr columnInfos,
             bool filterITypeInfo,
             bool filterChapters
-        ) {
+        )
+        {
             Debug.Assert(0 < columnCount, "BuildSchemaTableInfoTable - no column");
 
             int rowCount = 0;
@@ -534,7 +538,8 @@ namespace System.Data.OleDb
                 if (
                     (ODB.IsRunningOnX86 && 0 >= (int)dbColumnInfo.iOrdinal)
                     || (!ODB.IsRunningOnX86 && 0 >= (long)dbColumnInfo.iOrdinal)
-                ) {
+                )
+                {
                     continue;
                 }
                 if (OleDbDataReader.DoColumnDropFilter(dbColumnInfo.dwFlags))
@@ -673,7 +678,8 @@ namespace System.Data.OleDb
                         out cOptColumns,
                         out hr
                     )
-                ) {
+                )
+                {
                     Debug.Assert(
                         (0 == hr) || prgOptColumns.IsInvalid,
                         "GetAvailableCOlumns: unexpected return"
@@ -944,7 +950,8 @@ namespace System.Data.OleDb
             byte[]? buffer,
             int bufferIndex,
             int length
-        ) {
+        )
+        {
             ColumnBinding binding = DoSequentialCheck(ordinal, dataIndex, ADP.GetBytes);
             byte[] value = binding.ValueByteArray();
 
@@ -985,7 +992,8 @@ namespace System.Data.OleDb
             char[]? buffer,
             int bufferIndex,
             int length
-        ) {
+        )
+        {
             ColumnBinding binding = DoSequentialCheck(ordinal, dataIndex, ADP.GetChars);
             string value = binding.ValueString();
 
@@ -1044,7 +1052,8 @@ namespace System.Data.OleDb
             int index,
             RowBinding rowbinding,
             int valueOffset
-        ) {
+        )
+        {
             return GetDataForReader(
                 _metadata![bindingIndex + index].ordinal,
                 rowbinding,
@@ -1056,7 +1065,8 @@ namespace System.Data.OleDb
             IntPtr ordinal,
             RowBinding rowbinding,
             int valueOffset
-        ) {
+        )
+        {
             UnsafeNativeMethods.IRowsetInfo rowsetInfo = IRowsetInfo();
             UnsafeNativeMethods.IRowset? result;
             OleDbHResult hr;
@@ -1375,7 +1385,8 @@ namespace System.Data.OleDb
             OleDbConnection? connection,
             OleDbCommand command,
             out IntPtr recordsAffected
-        ) {
+        )
+        {
             recordsAffected = ADP.RecordsUnaffected;
             List<OleDbException>? exceptions = null;
             if (null != imultipleResults)
@@ -1765,7 +1776,8 @@ namespace System.Data.OleDb
                         int i = index;
                         (i < metadata.Length) && (bindingCount == indexWithinBinding[i]);
                         ++i
-                    ) {
+                    )
+                    {
                         bindingCount++;
                     }
                     dbbindings[indexToBinding[index]] = bindings = new Bindings(
@@ -2158,7 +2170,8 @@ namespace System.Data.OleDb
                         (0 != ADP.SrcCompare(baseTableName, info.baseTableName))
                         || (0 != ADP.SrcCompare(baseCatalogName, catalogName))
                         || (0 != ADP.SrcCompare(baseSchemaName, schemaName))
-                    ) {
+                    )
+                    {
 #if DEBUG
                         if (AdapterSwitches.DataSchema.TraceVerbose)
                         {
@@ -2365,7 +2378,8 @@ namespace System.Data.OleDb
 
                 if (
                     (-1 != indxIndex) && (-1 != pkeyIndex) && (-1 != uniqIndex) && (-1 != nameIndex)
-                ) {
+                )
+                {
                     DataColumn indxColumn = dataColumns[indxIndex];
                     DataColumn pkeyColumn = dataColumns[pkeyIndex];
                     DataColumn uniqCOlumn = dataColumns[uniqIndex];
@@ -2512,7 +2526,8 @@ namespace System.Data.OleDb
                     int.MinValue,
                     0
                 )
-            ) {
+            )
+            {
                 dataReader.InitializeIRowset(rowset, ChapterHandle.DB_NULL_HCHAPTER, IntPtr.Zero);
                 dataReader.BuildSchemaTableInfo(rowset!, true, false);
 
@@ -2760,7 +2775,8 @@ namespace System.Data.OleDb
                 else if (
                     (ODB.IsRunningOnX86 && 0 >= (int)info.ordinal)
                     || (!ODB.IsRunningOnX86 && 0 >= (long)info.ordinal)
-                ) {
+                )
+                {
 #if DEBUG
                     if (AdapterSwitches.DataSchema.TraceVerbose)
                     {
@@ -2803,7 +2819,8 @@ namespace System.Data.OleDb
             OleDbDataReader dataReader,
             object handle,
             CommandBehavior behavior
-        ) {
+        )
+        {
             if (0 != (CommandBehavior.KeyInfo & behavior))
             {
                 dataReader.BuildSchemaTableRowset(handle); // tries IColumnsRowset first then IColumnsInfo

@@ -150,7 +150,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             ReadOnlyMemory<byte> tokenInfoBytes,
             TimestampTokenTestData testData,
             int? lengthFromTry
-        ) {
+        )
+        {
             Rfc3161TimestampTokenInfo tokenInfo;
 
             Assert.True(
@@ -408,7 +409,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             string accuracyHex,
             bool shouldParse,
             long? expectedTotalMicroseconds
-        ) {
+        )
+        {
             _ = description;
             string inputHex =
                 "305A0201010601003031300D0609608648016503040201050004200000000000"
@@ -500,7 +502,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
         internal static void AssertEqual(
             TimestampTokenTestData testData,
             Rfc3161TimestampTokenInfo tokenInfo
-        ) {
+        )
+        {
             Assert.Equal(testData.Version, tokenInfo.Version);
             Assert.Equal(testData.PolicyId, tokenInfo.PolicyId.Value);
             Assert.Equal(testData.HashAlgorithmId, tokenInfo.HashAlgorithmId.Value);

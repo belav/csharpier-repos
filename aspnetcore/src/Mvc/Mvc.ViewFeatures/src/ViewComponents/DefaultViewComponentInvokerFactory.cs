@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
             ViewComponentInvokerCache viewComponentInvokerCache,
             DiagnosticListener diagnosticListener,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             if (viewComponentFactory == null)
             {
                 throw new ArgumentNullException(nameof(viewComponentFactory));

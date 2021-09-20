@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
             ImmutableArray<SymbolSpecification> symbolSpecifications,
             ImmutableArray<NamingStyle> namingStyles,
             ImmutableArray<SerializableNamingRule> namingRules
-        ) {
+        )
+        {
             SymbolSpecifications = symbolSpecifications;
             NamingStyles = namingStyles;
             NamingRules = namingRules;

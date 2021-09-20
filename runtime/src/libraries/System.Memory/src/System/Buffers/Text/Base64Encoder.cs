@@ -40,7 +40,8 @@ namespace System.Buffers.Text
             out int bytesConsumed,
             out int bytesWritten,
             bool isFinalBlock = true
-        ) {
+        )
+        {
             if (bytes.IsEmpty)
             {
                 bytesConsumed = 0;
@@ -50,7 +51,8 @@ namespace System.Buffers.Text
 
             fixed (byte* srcBytes = &MemoryMarshal.GetReference(bytes))fixed (
                 byte* destBytes = &MemoryMarshal.GetReference(utf8)
-            ) {
+            )
+            {
                 int srcLength = bytes.Length;
                 int destLength = utf8.Length;
                 int maxSrcLength;
@@ -58,7 +60,8 @@ namespace System.Buffers.Text
                 if (
                     srcLength <= MaximumEncodeLength
                     && destLength >= GetMaxEncodedToUtf8Length(srcLength)
-                ) {
+                )
+                {
                     maxSrcLength = srcLength;
                 }
                 else
@@ -197,7 +200,8 @@ namespace System.Buffers.Text
             Span<byte> buffer,
             int dataLength,
             out int bytesWritten
-        ) {
+        )
+        {
             if (buffer.IsEmpty)
             {
                 bytesWritten = 0;
@@ -260,7 +264,8 @@ namespace System.Buffers.Text
             int destLength,
             byte* srcStart,
             byte* destStart
-        ) {
+        )
+        {
             // If we have AVX2 support, pick off 24 bytes at a time for as long as we can.
             // But because we read 32 bytes at a time, ensure we have enough room to do a
             // full 32-byte read without segfaulting.
@@ -415,7 +420,8 @@ namespace System.Buffers.Text
             int destLength,
             byte* srcStart,
             byte* destStart
-        ) {
+        )
+        {
             // If we have SSSE3 support, pick off 12 bytes at a time for as long as we can.
             // But because we read 16 bytes at a time, ensure we have enough room to do a
             // full 16-byte read without segfaulting.

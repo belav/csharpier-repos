@@ -75,7 +75,8 @@ namespace Microsoft.AspNetCore.Certificates.Generation
             StoreLocation location,
             bool isValid,
             bool requireExportable = true
-        ) {
+        )
+        {
             Log.ListCertificatesStart(location, storeName);
             var certificates = new List<X509Certificate2>();
             try
@@ -161,7 +162,8 @@ namespace Microsoft.AspNetCore.Certificates.Generation
                         && byteArray[0] == (byte)'A'
                     )
                     || byteArray.Length == 0
-                ) {
+                )
+                {
                     // No Version set, default to 0
                     return 0b0;
                 }
@@ -200,7 +202,8 @@ namespace Microsoft.AspNetCore.Certificates.Generation
             string? password = null,
             CertificateKeyExportFormat keyExportFormat = CertificateKeyExportFormat.Pfx,
             bool isInteractive = true
-        ) {
+        )
+        {
             var result = EnsureCertificateResult.Succeeded;
 
             var currentUserCertificates = ListCertificates(
@@ -518,7 +521,8 @@ namespace Microsoft.AspNetCore.Certificates.Generation
             bool includePrivateKey,
             string? password,
             CertificateKeyExportFormat format
-        ) {
+        )
+        {
             if (Log.IsEnabled())
             {
                 Log.ExportCertificateStart(GetDescription(certificate), path, includePrivateKey);
@@ -672,7 +676,8 @@ namespace Microsoft.AspNetCore.Certificates.Generation
         internal X509Certificate2 CreateAspNetCoreHttpsDevelopmentCertificate(
             DateTimeOffset notBefore,
             DateTimeOffset notAfter
-        ) {
+        )
+        {
             var subject = new X500DistinguishedName(Subject);
             var extensions = new List<X509Extension>();
             var sanBuilder = new SubjectAlternativeNameBuilder();
@@ -816,7 +821,8 @@ namespace Microsoft.AspNetCore.Certificates.Generation
             IEnumerable<X509Extension> extensions,
             DateTimeOffset notBefore,
             DateTimeOffset notAfter
-        ) {
+        )
+        {
             using var key = CreateKeyMaterial(RSAMinimumKeySizeInBits);
 
             var request = new CertificateRequest(
@@ -1030,7 +1036,8 @@ namespace Microsoft.AspNetCore.Certificates.Generation
                 string certificate,
                 string path,
                 bool includePrivateKey
-            ) {
+            )
+            {
                 if (IsEnabled())
                 {
                     WriteEvent(

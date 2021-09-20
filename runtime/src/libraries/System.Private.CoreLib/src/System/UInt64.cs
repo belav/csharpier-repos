@@ -111,7 +111,8 @@ namespace System
             out int charsWritten,
             ReadOnlySpan<char> format = default,
             IFormatProvider? provider = null
-        ) {
+        )
+        {
             return Number.TryFormatUInt64(m_value, format, provider, destination, out charsWritten);
         }
 
@@ -153,7 +154,8 @@ namespace System
             ReadOnlySpan<char> s,
             NumberStyles style = NumberStyles.Integer,
             IFormatProvider? provider = null
-        ) {
+        )
+        {
             NumberFormatInfo.ValidateParseStyleInteger(style);
             return Number.ParseUInt64(s, style, NumberFormatInfo.GetInstance(provider));
         }
@@ -189,7 +191,8 @@ namespace System
             NumberStyles style,
             IFormatProvider? provider,
             out ulong result
-        ) {
+        )
+        {
             NumberFormatInfo.ValidateParseStyleInteger(style);
 
             if (s == null)
@@ -211,7 +214,8 @@ namespace System
             NumberStyles style,
             IFormatProvider? provider,
             out ulong result
-        ) {
+        )
+        {
             NumberFormatInfo.ValidateParseStyleInteger(style);
             return Number.TryParseUInt64(
                     s,

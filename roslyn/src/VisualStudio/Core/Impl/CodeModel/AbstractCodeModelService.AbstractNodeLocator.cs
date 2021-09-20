@@ -42,7 +42,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 SyntaxNode node,
                 OptionSet options,
                 EnvDTE.vsCMPart? part
-            ) {
+            )
+            {
                 var text = node.SyntaxTree.GetText();
                 return GetStartPoint(text, options, node, part ?? DefaultPart);
             }
@@ -51,7 +52,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 SyntaxNode node,
                 OptionSet options,
                 EnvDTE.vsCMPart? part
-            ) {
+            )
+            {
                 var text = node.SyntaxTree.GetText();
                 return GetEndPoint(text, options, node, part ?? DefaultPart);
             }

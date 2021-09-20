@@ -108,7 +108,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void AddSynthesizedAttributes(
             PEModuleBuilder moduleBuilder,
             ref ArrayBuilder<SynthesizedAttributeData> attributes
-        ) {
+        )
+        {
             base.AddSynthesizedAttributes(moduleBuilder, ref attributes);
 
             var compilation = this.DeclaringCompilation;
@@ -120,7 +121,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             // Synthesize DecimalConstantAttribute when the default value is of type decimal
             if (
                 this.IsConst && value != null && this.Type.SpecialType == SpecialType.System_Decimal
-            ) {
+            )
+            {
                 var data = GetDecodedWellKnownAttributeData();
 
                 if (data == null || data.ConstValue == CodeAnalysis.ConstantValue.Unset)
@@ -157,7 +159,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             SyntaxTokenList modifiers,
             BindingDiagnosticBag diagnostics,
             out bool modifierErrors
-        ) {
+        )
+        {
             DeclarationModifiers defaultAccess =
                 (containingType.IsInterface)
                     ? DeclarationModifiers.Public
@@ -311,7 +314,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal sealed override void ForceComplete(
             SourceLocation locationOpt,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             while (true)
             {
                 cancellationToken.ThrowIfCancellationRequested();
@@ -376,13 +380,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             DeclarationModifiers modifiers,
             bool modifierErrors,
             BindingDiagnosticBag diagnostics
-        ) : base(
-            containingType,
-            modifiers,
-            declarator.Identifier.ValueText,
-            declarator.GetReference(),
-            declarator.Identifier.GetLocation()
-        ) {
+        )
+            : base(
+                containingType,
+                modifiers,
+                declarator.Identifier.ValueText,
+                declarator.GetReference(),
+                declarator.Identifier.GetLocation()
+            )
+        {
             _hasInitializer = declarator.Initializer != null;
 
             this.CheckAccessibility(diagnostics);
@@ -486,7 +492,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     SyntaxKind.FunctionPointerType => true,
                     _ => false
                 }
-            ) {
+            )
+            {
                 // public int * Blah;   // pointer
                 return true;
             }
@@ -496,7 +503,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal sealed override TypeWithAnnotations GetFieldType(
             ConsList<FieldSymbol> fieldsBeingBound
-        ) {
+        )
+        {
             Debug.Assert(fieldsBeingBound != null);
 
             if (_lazyType != null)
@@ -520,7 +528,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (
                 (object)associatedPropertyOrEvent != null
                 && associatedPropertyOrEvent.Kind == SymbolKind.Event
-            ) {
+            )
+            {
                 EventSymbol @event = (EventSymbol)associatedPropertyOrEvent;
                 if (@event.IsWindowsRuntimeEvent)
                 {
@@ -615,7 +624,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 if (
                                     (object)initializerOpt.Type != null
                                     && !initializerOpt.Type.IsErrorType()
-                                ) {
+                                )
+                                {
                                     type = TypeWithAnnotations.Create(initializerOpt.Type);
                                 }
 
@@ -668,7 +678,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     new TypeWithAnnotations.Boxed(type.WithModifiers(this.RequiredCustomModifiers)),
                     null
                 ) == null
-            ) {
+            )
+            {
                 TypeChecks(type.Type, diagnostics);
 
                 // CONSIDER: SourceEventFieldSymbol would like to suppress these diagnostics.
@@ -705,7 +716,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             HashSet<SourceFieldSymbolWithSyntaxReference> dependencies,
             bool earlyDecodingWellKnownAttributes,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             if (!this.IsConst || VariableDeclaratorNode.Initializer == null)
             {
                 return null;
@@ -724,7 +736,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             SyntaxTree tree,
             TextSpan? definedWithinSpan,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             if (this.SyntaxTree == tree)
             {
                 if (!definedWithinSpan.HasValue)
@@ -743,7 +756,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void AfterAddingTypeMembersChecks(
             ConversionsBase conversions,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             // This check prevents redundant ManagedAddr diagnostics on the underlying pointer field of a fixed-size buffer
             if (!IsFixedSizeBuffer)
             {

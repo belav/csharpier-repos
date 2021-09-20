@@ -69,7 +69,8 @@ namespace System.ConfigurationTests
             bool exclusiveRange,
             bool shouldThrow,
             string message
-        ) {
+        )
+        {
             Action action = () =>
                 ValidatorUtils.ValidateScalar(value, min, max, resolution, exclusiveRange);
             if (!shouldThrow)
@@ -98,7 +99,8 @@ namespace System.ConfigurationTests
             bool exclusiveRange,
             bool shouldThrow,
             string message
-        ) {
+        )
+        {
             Action action = () =>
                 ValidatorUtils.ValidateScalar(value, min, max, resolution, exclusiveRange);
             if (!shouldThrow)

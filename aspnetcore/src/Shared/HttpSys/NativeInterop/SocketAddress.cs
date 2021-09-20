@@ -371,7 +371,8 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
                 && numbers[2] == 0
                 && numbers[3] == 0
                 && numbers[6] != 0
-            ) {
+            )
+            {
                 // RFC 5952 Section 5 - 0:0 : 0:0 : 0:[0 | FFFF] : x.x.x.x
                 if (numbers[4] == 0 && (numbers[5] == 0 || numbers[5] == 0xFFFF))
                 {

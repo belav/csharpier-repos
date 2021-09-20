@@ -379,7 +379,8 @@ namespace System.Web.Http.Validation
                 protected override ValidationResult IsValid(
                     object value,
                     ValidationContext validationContext
-                ) {
+                )
+                {
                     LoggingValidatableObject lvo = (LoggingValidatableObject)value;
                     lvo._log.Add("In LoggingValidatonAttribute.IsValid()");
                     return ValidationResult.Success;

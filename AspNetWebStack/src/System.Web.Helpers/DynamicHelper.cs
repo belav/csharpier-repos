@@ -90,7 +90,8 @@ namespace Microsoft.Internal.Web.Utils
         // Dev10 Bug 914027 - Changed the callsite's target parameter from dynamic to object, see comment at top for details
         public static CallSite<Func<CallSite, object, object>> GetMemberAccessCallSite(
             string memberName
-        ) {
+        )
+        {
             var binder = Binder.GetMember(
                 CSharpBinderFlags.None,
                 memberName,
@@ -103,7 +104,8 @@ namespace Microsoft.Internal.Web.Utils
         // Dev10 Bug 914027 - Changed the callsite's target parameter from dynamic to object, see comment at top for details
         public static CallSite<Func<CallSite, object, object>> GetMemberAccessCallSite(
             CallSiteBinder binder
-        ) {
+        )
+        {
             return CallSite<Func<CallSite, object, object>>.Create(binder);
         }
 

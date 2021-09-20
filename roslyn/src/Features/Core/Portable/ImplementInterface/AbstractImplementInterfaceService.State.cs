@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                 INamedTypeSymbol classOrStructType,
                 IEnumerable<INamedTypeSymbol> interfaceTypes,
                 SemanticModel model
-            ) {
+            )
+            {
                 Location = interfaceNode;
                 ClassOrStructDecl = classOrStructDecl;
                 ClassOrStructType = classOrStructType;
@@ -61,7 +62,8 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                 SemanticModel model,
                 SyntaxNode interfaceNode,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (
                     !service.TryInitializeState(
                         document,
@@ -72,7 +74,8 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                         out var classOrStructType,
                         out var interfaceTypes
                     )
-                ) {
+                )
+                {
                     return null;
                 }
 
@@ -82,7 +85,8 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                         classOrStructType,
                         cancellationToken
                     )
-                ) {
+                )
+                {
                     return null;
                 }
 

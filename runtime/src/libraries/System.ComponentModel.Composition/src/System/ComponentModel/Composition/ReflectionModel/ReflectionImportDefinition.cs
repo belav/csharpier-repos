@@ -22,16 +22,18 @@ namespace System.ComponentModel.Composition.ReflectionModel
             CreationPolicy requiredCreationPolicy,
             IDictionary<string, object?> metadata,
             ICompositionElement? origin
-        ) : base(
-            contractName,
-            requiredTypeIdentity,
-            requiredMetadata,
-            cardinality,
-            isRecomposable,
-            isPrerequisite,
-            requiredCreationPolicy,
-            metadata
-        ) {
+        )
+            : base(
+                contractName,
+                requiredTypeIdentity,
+                requiredMetadata,
+                cardinality,
+                isRecomposable,
+                isPrerequisite,
+                requiredCreationPolicy,
+                metadata
+            )
+        {
             _origin = origin;
         }
 

@@ -25,7 +25,8 @@ namespace System.Net.Security.Tests
         protected override async Task<StreamPair> CreateWrappedConnectedStreamsAsync(
             StreamPair wrapped,
             bool leaveOpen
-        ) {
+        )
+        {
             var negotiate1 = new NegotiateStream(wrapped.Stream1, leaveOpen);
             var negotiate2 = new NegotiateStream(wrapped.Stream2, leaveOpen);
 

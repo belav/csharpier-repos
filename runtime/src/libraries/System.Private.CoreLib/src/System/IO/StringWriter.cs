@@ -236,7 +236,8 @@ namespace System.IO
         public override Task WriteAsync(
             ReadOnlyMemory<char> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (cancellationToken.IsCancellationRequested)
             {
                 return Task.FromCanceled(cancellationToken);
@@ -249,7 +250,8 @@ namespace System.IO
         public override Task WriteAsync(
             StringBuilder? value,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (GetType() != typeof(StringWriter))
             {
                 // This overload was added after the WriteAsync(char[], ...) overload, and so in case
@@ -286,7 +288,8 @@ namespace System.IO
         public override Task WriteLineAsync(
             StringBuilder? value,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (GetType() != typeof(StringWriter))
             {
                 // This overload was added after the WriteLineAsync(char[], ...) overload, and so in case
@@ -318,7 +321,8 @@ namespace System.IO
         public override Task WriteLineAsync(
             ReadOnlyMemory<char> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (cancellationToken.IsCancellationRequested)
             {
                 return Task.FromCanceled(cancellationToken);

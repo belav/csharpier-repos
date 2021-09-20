@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             IEnumerable<INamedTypeSymbol> directNormalAnonymousTypeReferences,
             SemanticModel semanticModel,
             int position
-        ) {
+        )
+        {
             if (!directNormalAnonymousTypeReferences.Any())
             {
                 return new AnonymousTypeDisplayInfo(
@@ -89,7 +90,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
 
         private static Dictionary<INamedTypeSymbol, string> GenerateAnonymousTypeNames(
             IList<INamedTypeSymbol> anonymousTypes
-        ) {
+        )
+        {
             var current = 0;
             var anonymousTypeToName = new Dictionary<INamedTypeSymbol, string>();
             foreach (var type in anonymousTypes)
@@ -115,7 +117,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         private static IList<INamedTypeSymbol> OrderAnonymousTypes(
             IList<INamedTypeSymbol> transitiveAnonymousTypeReferences,
             ISymbol symbol
-        ) {
+        )
+        {
             if (symbol is IMethodSymbol method)
             {
                 return transitiveAnonymousTypeReferences.OrderBy(
@@ -139,13 +142,15 @@ namespace Microsoft.CodeAnalysis.LanguageServices
                             if (
                                 n1.Equals(property.ContainingType)
                                 && !n2.Equals(property.ContainingType)
-                            ) {
+                            )
+                            {
                                 return -1;
                             }
                             else if (
                                 !n1.Equals(property.ContainingType)
                                 && n2.Equals(property.ContainingType)
-                            ) {
+                            )
+                            {
                                 return 1;
                             }
                             else
@@ -162,7 +167,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
 
         private static IList<INamedTypeSymbol> GetTransitiveNormalAnonymousTypeReferences(
             ISet<INamedTypeSymbol> anonymousTypeReferences
-        ) {
+        )
+        {
             var transitiveReferences = new List<INamedTypeSymbol>();
             var visitor = new NormalAnonymousTypeCollectorVisitor(transitiveReferences);
 

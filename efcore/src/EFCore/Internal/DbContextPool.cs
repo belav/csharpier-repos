@@ -63,7 +63,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
                         parameters[0].ParameterType == typeof(DbContextOptions)
                         || parameters[0].ParameterType == typeof(DbContextOptions<TContext>)
                     )
-                ) {
+                )
+                {
                     return Expression.Lambda<Func<TContext>>(
                             Expression.New(constructors[0], Expression.Constant(options))
                         )
@@ -129,7 +130,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
         public virtual async ValueTask ReturnAsync(
             IDbContextPoolable context,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (Interlocked.Increment(ref _count) <= _maxSize)
             {
                 await context.ResetStateAsync(cancellationToken).ConfigureAwait(false);

@@ -331,7 +331,8 @@ namespace System.IO.Strategies
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             AssertBufferArguments(buffer, offset, count);
 
             ValueTask<int> readResult = ReadAsync(
@@ -360,7 +361,8 @@ namespace System.IO.Strategies
         public override ValueTask<int> ReadAsync(
             Memory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (cancellationToken.IsCancellationRequested)
             {
                 return ValueTask.FromCanceled<int>(cancellationToken);
@@ -423,7 +425,8 @@ namespace System.IO.Strategies
         private async ValueTask<int> ReadFromPipeAsync(
             Memory<byte> destination,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(_strategy.IsPipe);
 
             // Employ async waiting based on the same synchronization used in BeginRead of the abstract Stream.
@@ -473,7 +476,8 @@ namespace System.IO.Strategies
             Task semaphoreLockTask,
             Memory<byte> buffer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(_asyncActiveSemaphore != null);
             Debug.Assert(!_strategy.IsPipe);
 
@@ -694,7 +698,8 @@ namespace System.IO.Strategies
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             AssertBufferArguments(buffer, offset, count);
 
             return WriteAsync(new ReadOnlyMemory<byte>(buffer, offset, count), cancellationToken)
@@ -704,7 +709,8 @@ namespace System.IO.Strategies
         public override ValueTask WriteAsync(
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (cancellationToken.IsCancellationRequested)
             {
                 return ValueTask.FromCanceled(cancellationToken);
@@ -773,7 +779,8 @@ namespace System.IO.Strategies
         private async ValueTask WriteToPipeAsync(
             ReadOnlyMemory<byte> source,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(_strategy.IsPipe);
 
             await EnsureAsyncActiveSemaphoreInitialized()
@@ -794,7 +801,8 @@ namespace System.IO.Strategies
             Task semaphoreLockTask,
             ReadOnlyMemory<byte> source,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(_asyncActiveSemaphore != null);
             Debug.Assert(!_strategy.IsPipe);
 
@@ -996,7 +1004,8 @@ namespace System.IO.Strategies
             Stream destination,
             int bufferSize,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ValidateCopyToArguments(destination, bufferSize);
             EnsureNotClosed();
             EnsureCanRead();
@@ -1010,7 +1019,8 @@ namespace System.IO.Strategies
             Stream destination,
             int bufferSize,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Synchronize async operations as does Read/WriteAsync.
             await EnsureAsyncActiveSemaphoreInitialized()
                 .WaitAsync(cancellationToken)

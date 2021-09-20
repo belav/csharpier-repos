@@ -55,7 +55,8 @@ namespace Microsoft.EntityFrameworkCore
         private static IEnumerable<Type> GetGenericTypeImplementations(
             Type type,
             Type interfaceOrBaseType
-        ) {
+        )
+        {
             var typeInfo = type.GetTypeInfo();
             if (!typeInfo.IsGenericTypeDefinition)
             {
@@ -67,7 +68,8 @@ namespace Microsoft.EntityFrameworkCore
                     if (
                         baseType.IsGenericType
                         && baseType.GetGenericTypeDefinition() == interfaceOrBaseType
-                    ) {
+                    )
+                    {
                         yield return baseType;
                     }
                 }

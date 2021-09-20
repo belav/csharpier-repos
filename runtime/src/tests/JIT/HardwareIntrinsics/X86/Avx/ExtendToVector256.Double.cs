@@ -361,7 +361,8 @@ namespace JIT.HardwareIntrinsics.X86
             Vector128<Double> firstOp,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Double[] inArray = new Double[Op1ElementCount];
             Double[] outArray = new Double[RetElementCount];
 
@@ -379,7 +380,8 @@ namespace JIT.HardwareIntrinsics.X86
             void* firstOp,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Double[] inArray = new Double[Op1ElementCount];
             Double[] outArray = new Double[RetElementCount];
 
@@ -401,7 +403,8 @@ namespace JIT.HardwareIntrinsics.X86
             Double[] firstOp,
             Double[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             if (firstOp[0] != result[0])
             {
                 Succeeded = false;

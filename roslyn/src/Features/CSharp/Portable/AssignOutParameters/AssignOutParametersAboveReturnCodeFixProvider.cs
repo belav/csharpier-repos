@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AssignOutParameters
             Document document,
             SyntaxNode container,
             SyntaxNode location
-        ) {
+        )
+        {
             context.RegisterCodeFix(
                 new MyCodeAction(
                     CSharpFeaturesResources.Assign_out_parameters,
@@ -55,7 +56,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AssignOutParameters
                 (SyntaxNode exprOrStatement, ImmutableArray<IParameterSymbol> unassignedParameters)
             >.ValueSet values,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             foreach (var (exprOrStatement, unassignedParameters) in values)
             {
                 var statements = GenerateAssignmentStatements(
@@ -70,7 +72,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AssignOutParameters
             SyntaxEditor editor,
             SyntaxNode exprOrStatement,
             ImmutableArray<SyntaxNode> statements
-        ) {
+        )
+        {
             var generator = editor.Generator;
 
             if (
@@ -78,7 +81,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AssignOutParameters
                 {
                     ExpressionBody: { } localFunctionExpressionBody
                 }
-            ) {
+            )
+            {
                 // Expression-bodied local functions report CS0177 on the method name instead of the expression.
                 // Reassign exprOrStatement so the code fix implementation works as it does for other expression-bodied
                 // members.

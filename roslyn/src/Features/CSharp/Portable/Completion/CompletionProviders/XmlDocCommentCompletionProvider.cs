@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             SourceText text,
             int characterPosition,
             OptionSet options
-        ) {
+        )
+        {
             var c = text[characterPosition];
             return c == '<'
                 || c == '"'
@@ -59,7 +60,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             int position,
             CompletionTrigger trigger,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 var tree = await document.GetSyntaxTreeAsync(cancellationToken)
@@ -112,7 +114,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                         out var elementName,
                         out var existingAttributes
                     )
-                ) {
+                )
+                {
                     return GetAttributeItems(elementName, existingAttributes);
                 }
 
@@ -150,12 +153,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                         token.Parent.IsKind(SyntaxKind.XmlName)
                         && token.Parent.IsParentKind(SyntaxKind.XmlEmptyElement)
                     )
-                ) {
+                )
+                {
                     // The user is typing inside an XmlElement
                     if (
                         token.Parent.Parent.Kind() == SyntaxKind.XmlElement
                         || token.Parent.Parent.IsParentKind(SyntaxKind.XmlElement)
-                    ) {
+                    )
+                    {
                         // Avoid including language keywords when following < or <text, since these cases should only be
                         // attempting to complete the XML name (which for language keywords is 'see'). While the parser
                         // treats the 'name' in '< name' as an XML name, we don't treat it like that here so the completion
@@ -176,7 +181,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     if (
                         token.Parent.IsParentKind(SyntaxKind.XmlEmptyElement)
                         && token.Parent.Parent.Parent is XmlElementSyntax nestedXmlElement
-                    ) {
+                    )
+                    {
                         AddXmlElementItems(items, nestedXmlElement.StartTag);
                     }
 
@@ -186,7 +192,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                             token.Parent.Parent.IsKind(SyntaxKind.XmlEmptyElement)
                             && token.Parent.Parent.Parent is DocumentationCommentTriviaSyntax
                         )
-                    ) {
+                    )
+                    {
                         items.AddRange(GetTopLevelItems(declaredSymbol, parentTrivia));
                     }
                 }
@@ -194,7 +201,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 if (
                     token.Parent is XmlElementStartTagSyntax startTag
                     && token == startTag.GreaterThanToken
-                ) {
+                )
+                {
                     AddXmlElementItems(items, startTag);
                 }
 
@@ -210,7 +218,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
         private void AddXmlElementItems(
             List<CompletionItem> items,
             XmlElementStartTagSyntax startTag
-        ) {
+        )
+        {
             var xmlElementName = startTag.Name.LocalName.ValueText;
             if (xmlElementName == ListElementName)
             {
@@ -231,13 +240,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             int position,
             out string elementName,
             out ISet<string> attributeNames
-        ) {
+        )
+        {
             elementName = null;
 
             if (
                 token.IsKind(SyntaxKind.XmlTextLiteralToken)
                 && string.IsNullOrWhiteSpace(token.Text)
-            ) {
+            )
+            {
                 // Unlike VB, the C# lexer has a preference for leading trivia. In the following example...
                 //
                 //    /// <exception          $$
@@ -265,7 +276,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 )
                 || token.Parent.IsKind(SyntaxKind.XmlNameAttribute, out attributeSyntax)
                 || token.Parent.IsKind(SyntaxKind.XmlTextAttribute, out attributeSyntax)
-            ) {
+            )
+            {
                 // In the following, 'attr1' may be a regular text attribute, or one of the special 'cref' or 'name' attributes
                 // <elem attr1="" $$
                 // <elem attr1="" $$attr2
@@ -283,7 +295,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 
         private (string name, SyntaxList<XmlAttributeSyntax> attributes) GetElementNameAndAttributes(
             SyntaxNode node
-        ) {
+        )
+        {
             XmlNameSyntax nameSyntax;
             SyntaxList<XmlAttributeSyntax> attributes;
 
@@ -319,7 +332,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             SyntaxToken token,
             out string tagName,
             out string attributeName
-        ) {
+        )
+        {
             XmlAttributeSyntax attributeSyntax;
             if (
                 token.Parent.IsKind(SyntaxKind.IdentifierName)
@@ -327,7 +341,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     SyntaxKind.XmlNameAttribute,
                     out XmlNameAttributeSyntax xmlName
                 )
-            ) {
+            )
+            {
                 // Handle the special 'name' attributes: name="bar$$
                 attributeSyntax = xmlName;
             }
@@ -337,14 +352,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     SyntaxKind.XmlTextAttribute,
                     out XmlTextAttributeSyntax xmlText
                 )
-            ) {
+            )
+            {
                 // Handle the other general text attributes: foo="bar$$
                 attributeSyntax = xmlText;
             }
             else if (
                 token.Parent.IsKind(SyntaxKind.XmlNameAttribute, out attributeSyntax)
                 || token.Parent.IsKind(SyntaxKind.XmlTextAttribute, out attributeSyntax)
-            ) {
+            )
+            {
                 // When there's no attribute value yet, the parent attribute is returned:
                 //     name="$$
                 //     foo="$$
@@ -401,7 +418,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             DocumentationCommentTriviaSyntax syntax,
             string elementName,
             string attributeName
-        ) {
+        )
+        {
             var attributeValues = SpecializedCollections.EmptyEnumerable<string>();
 
             foreach (var node in syntax.Content)

@@ -185,7 +185,8 @@ namespace System.Formats.Cbor
             CborInitialByte header,
             ReadOnlySpan<byte> data,
             out int bytesRead
-        ) {
+        )
+        {
             ulong length = DecodeUnsignedInteger(header, data, out bytesRead);
 
             // conservative check: ensure the buffer has the minimum required length for declared definite length.
@@ -202,7 +203,8 @@ namespace System.Formats.Cbor
             CborInitialByte header,
             ReadOnlySpan<byte> data,
             out int bytesRead
-        ) {
+        )
+        {
             ulong result;
 
             switch (header.AdditionalInfo)
@@ -272,7 +274,8 @@ namespace System.Formats.Cbor
                     && CborConformanceModeHelpers.RequiresCanonicalIntegerRepresentation(
                         ConformanceMode
                     )
-                ) {
+                )
+                {
                     throw new CborContentException(
                         SR.Format(
                             SR.Cbor_ConformanceMode_NonCanonicalIntegerRepresentation,

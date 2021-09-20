@@ -77,7 +77,8 @@ namespace System.Web.Http
             string email,
             string name = null,
             int phone = 0
-        ) {
+        )
+        {
             return null;
         }
         public User DeleteUserById_Email_Height_OptName_OptPhone(
@@ -86,7 +87,8 @@ namespace System.Web.Http
             double height,
             string name = "DefaultName",
             int? phone = null
-        ) {
+        )
+        {
             return null;
         }
         public void Head_Id_OptSize_OptIndex(int id, int size = 10, int index = 0) { }

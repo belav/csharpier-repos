@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             FoldingRangeParams request,
             RequestContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var document = context.Document;
             if (document == null)
             {
@@ -72,7 +73,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             OptionSet options,
             bool isMetadataAsSource,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var blockStructureService =
                 (BlockStructureServiceWithProviders)languageServices.GetRequiredService<BlockStructureService>();
             var blockStructure = blockStructureService.GetBlockStructure(
@@ -93,7 +95,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         private static FoldingRange[] GetFoldingRanges(
             BlockStructure blockStructure,
             SourceText text
-        ) {
+        )
+        {
             if (blockStructure.Spans.IsEmpty)
             {
                 return Array.Empty<FoldingRange>();

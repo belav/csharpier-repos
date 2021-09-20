@@ -151,7 +151,8 @@ namespace System.Text.Unicode.Tests
         public void ToBytes_WithSmallValidBuffers(
             string utf16Input,
             string expectedUtf8TranscodingHex
-        ) {
+        )
+        {
             // These test cases are for the "slow processing" code path at the end of TranscodeToUtf8,
             // so inputs should be less than 2 chars.
 
@@ -312,7 +313,8 @@ namespace System.Text.Unicode.Tests
         public void ToBytes_WithOnlyStandaloneSurrogates(
             char charValue,
             OperationStatus expectedOperationStatus
-        ) {
+        )
+        {
             ToBytes_Test_Core(
                 utf16Input: new[] { charValue },
                 destinationSize: 0,
@@ -335,7 +337,8 @@ namespace System.Text.Unicode.Tests
             string utf16Input,
             int expectedNumCharsConsumed,
             string expectedUtf8TranscodingHex
-        ) {
+        )
+        {
             // xUnit can't handle ill-formed strings in [InlineData], so we replace here.
 
             utf16Input = utf16Input.Replace("<HIGH>", "\uD800").Replace("<LOW>", "\uDFFF");
@@ -488,7 +491,8 @@ namespace System.Text.Unicode.Tests
             int expectedNumCharsConsumed,
             OperationStatus expectedOperationStatus,
             string expectedUtf8TranscodingHex
-        ) {
+        )
+        {
             // xUnit can't handle ill-formed strings in [InlineData], so we replace here.
 
             utf16Input = utf16Input.Replace("<HIGH>", "\uD800").Replace("<LOW>", "\uDFFF");
@@ -526,7 +530,8 @@ namespace System.Text.Unicode.Tests
             OperationStatus expectedOperationStatus,
             int expectedNumCharsRead,
             ReadOnlySpan<byte> expectedUtf8Transcoding
-        ) {
+        )
+        {
             // Arrange
 
             using (
@@ -538,7 +543,8 @@ namespace System.Text.Unicode.Tests
                 BoundedMemory<byte> boundedDestination = BoundedMemory.Allocate<byte>(
                     destinationSize
                 )
-            ) {
+            )
+            {
                 boundedSource.MakeReadonly();
 
                 // Act
@@ -585,7 +591,8 @@ namespace System.Text.Unicode.Tests
             string utf8HexInput,
             int expectedNumBytesConsumed,
             string expectedUtf16Transcoding
-        ) {
+        )
+        {
             // These test cases are for the "slow processing" code path at the end of TranscodeToUtf16,
             // so inputs should be less than 4 bytes.
 
@@ -636,7 +643,8 @@ namespace System.Text.Unicode.Tests
             string utf8HexInput,
             int expectedNumBytesConsumed,
             string expectedUtf16Transcoding
-        ) {
+        )
+        {
             // These test cases are for the "slow processing" code path at the end of TranscodeToUtf16,
             // so inputs should be less than 4 bytes.
 
@@ -832,7 +840,8 @@ namespace System.Text.Unicode.Tests
             string utf8HexInput,
             int expectedNumBytesConsumed,
             string expectedUtf16Transcoding
-        ) {
+        )
+        {
             // These test cases are for the "fast processing" code which is the main loop of TranscodeToUtf16,
             // so inputs should be less >= 4 bytes.
 
@@ -992,7 +1001,8 @@ namespace System.Text.Unicode.Tests
             OperationStatus expectedOperationStatus,
             int expectedNumBytesRead,
             ReadOnlySpan<char> expectedUtf16Transcoding
-        ) {
+        )
+        {
             // Arrange
 
             using (
@@ -1004,7 +1014,8 @@ namespace System.Text.Unicode.Tests
                 BoundedMemory<char> boundedDestination = BoundedMemory.Allocate<char>(
                     destinationSize
                 )
-            ) {
+            )
+            {
                 boundedSource.MakeReadonly();
 
                 // Act

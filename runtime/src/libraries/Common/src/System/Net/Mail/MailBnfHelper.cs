@@ -251,7 +251,8 @@ namespace System.Net.Mime
             string data,
             ref int offset,
             StringBuilder? builder
-        ) {
+        )
+        {
             return ReadQuotedString(data, ref offset, builder, false, false);
         }
 
@@ -261,7 +262,8 @@ namespace System.Net.Mime
             StringBuilder? builder,
             bool doesntRequireQuotes,
             bool permitUnicodeInDisplayName
-        ) {
+        )
+        {
             // assume first char is the opening quote
             if (!doesntRequireQuotes)
             {
@@ -288,7 +290,8 @@ namespace System.Net.Mime
                     && data[offset + 1] == '\r'
                     && data[offset + 2] == '\n'
                     && (data[offset + 3] == ' ' || data[offset + 3] == '\t')
-                ) {
+                )
+                {
                     //it's a soft crlf so it's ok
                     offset += 3;
                 }
@@ -321,7 +324,8 @@ namespace System.Net.Mime
             string data,
             ref int offset,
             StringBuilder? builder
-        ) {
+        )
+        {
             if (!SkipCFWS(data, ref offset))
                 return null; //
 
@@ -419,7 +423,8 @@ namespace System.Net.Mime
             string data,
             StringBuilder builder,
             bool allowUnicode
-        ) {
+        )
+        {
             int offset = 0,
                 start = 0;
             for (; offset < data.Length; offset++)

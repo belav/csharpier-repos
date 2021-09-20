@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis
             > arguments,
             AttributeTargets target,
             CommonMessageProvider messageProvider
-        ) {
+        )
+        {
             Debug.Assert((object)arguments.AttributeSyntaxOpt != null);
 
             UnmanagedType unmanagedType = DecodeMarshalAsType(arguments.Attribute);
@@ -113,7 +114,8 @@ namespace Microsoft.CodeAnalysis
                     if (
                         (int)unmanagedType < 0
                         || (int)unmanagedType > MarshalPseudoCustomAttributeData.MaxMarshalInteger
-                    ) {
+                    )
+                    {
                         // Dev10 reports CS0647: "Error emitting attribute ..."
                         messageProvider.ReportInvalidAttributeArgument(
                             arguments.Diagnostics,
@@ -139,7 +141,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 attribute.AttributeConstructor.Parameters[0].Type.SpecialType
                 == SpecialType.System_Int16
-            ) {
+            )
+            {
                 unmanagedType = (UnmanagedType)attribute.CommonConstructorArguments[
                     0
                 ].DecodeValue<short>(SpecialType.System_Int16);
@@ -161,7 +164,8 @@ namespace Microsoft.CodeAnalysis
                 TAttributeLocation
             > arguments,
             CommonMessageProvider messageProvider
-        ) {
+        )
+        {
             Debug.Assert((object)arguments.AttributeSyntaxOpt != null);
 
             ITypeSymbolInternal typeSymbol = null;
@@ -248,7 +252,8 @@ namespace Microsoft.CodeAnalysis
             > arguments,
             UnmanagedType unmanagedType,
             CommonMessageProvider messageProvider
-        ) {
+        )
+        {
             Debug.Assert((object)arguments.AttributeSyntaxOpt != null);
 
             int? parameterIndex = null;
@@ -264,7 +269,8 @@ namespace Microsoft.CodeAnalysis
                         if (
                             parameterIndex < 0
                             || parameterIndex > MarshalPseudoCustomAttributeData.MaxMarshalInteger
-                        ) {
+                        )
+                        {
                             messageProvider.ReportInvalidNamedArgument(
                                 arguments.Diagnostics,
                                 arguments.AttributeSyntaxOpt,
@@ -297,7 +303,8 @@ namespace Microsoft.CodeAnalysis
             > arguments,
             CommonMessageProvider messageProvider,
             bool isFixed
-        ) {
+        )
+        {
             Debug.Assert((object)arguments.AttributeSyntaxOpt != null);
 
             UnmanagedType? elementType = null;
@@ -321,7 +328,8 @@ namespace Microsoft.CodeAnalysis
                             !isFixed && elementType == Cci.Constants.UnmanagedType_CustomMarshaler
                             || (int)elementType < 0
                             || (int)elementType > MarshalPseudoCustomAttributeData.MaxMarshalInteger
-                        ) {
+                        )
+                        {
                             messageProvider.ReportInvalidNamedArgument(
                                 arguments.Diagnostics,
                                 arguments.AttributeSyntaxOpt,
@@ -338,7 +346,8 @@ namespace Microsoft.CodeAnalysis
                         if (
                             elementCount < 0
                             || elementCount > MarshalPseudoCustomAttributeData.MaxMarshalInteger
-                        ) {
+                        )
+                        {
                             messageProvider.ReportInvalidNamedArgument(
                                 arguments.Diagnostics,
                                 arguments.AttributeSyntaxOpt,
@@ -407,7 +416,8 @@ namespace Microsoft.CodeAnalysis
                 TAttributeLocation
             > arguments,
             CommonMessageProvider messageProvider
-        ) {
+        )
+        {
             Debug.Assert((object)arguments.AttributeSyntaxOpt != null);
 
             Cci.VarEnum? elementTypeVariant = null;
@@ -428,7 +438,8 @@ namespace Microsoft.CodeAnalysis
                             elementTypeVariant < 0
                             || (int)elementTypeVariant
                                 > MarshalPseudoCustomAttributeData.MaxMarshalInteger
-                        ) {
+                        )
+                        {
                             messageProvider.ReportInvalidNamedArgument(
                                 arguments.Diagnostics,
                                 arguments.AttributeSyntaxOpt,
@@ -504,7 +515,8 @@ namespace Microsoft.CodeAnalysis
                 TAttributeLocation
             > arguments,
             CommonMessageProvider messageProvider
-        ) {
+        )
+        {
             Debug.Assert((object)arguments.AttributeSyntaxOpt != null);
 
             int elementCount = -1;
@@ -520,7 +532,8 @@ namespace Microsoft.CodeAnalysis
                         if (
                             elementCount < 0
                             || elementCount > MarshalPseudoCustomAttributeData.MaxMarshalInteger
-                        ) {
+                        )
+                        {
                             messageProvider.ReportInvalidNamedArgument(
                                 arguments.Diagnostics,
                                 arguments.AttributeSyntaxOpt,

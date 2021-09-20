@@ -45,7 +45,8 @@ internal static partial class Interop
         internal static void X509StoreCtxResetForSignatureError(
             SafeX509StoreCtxHandle ctx,
             out SafeX509StoreHandle? newStore
-        ) {
+        )
+        {
             if (CryptoNative_X509StoreCtxResetForSignatureError(ctx, out newStore) != 1)
             {
                 newStore.Dispose();
@@ -73,7 +74,8 @@ internal static partial class Interop
 
         internal static SafeSharedX509StackHandle X509StoreCtxGetSharedUntrusted(
             SafeX509StoreCtxHandle ctx
-        ) {
+        )
+        {
             return SafeInteriorHandle.OpenInteriorHandle(
                 x => X509StoreCtxGetSharedUntrusted_private(x),
                 ctx

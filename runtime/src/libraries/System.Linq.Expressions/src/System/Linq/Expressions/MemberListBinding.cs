@@ -65,7 +65,8 @@ namespace System.Linq.Expressions
         public static MemberListBinding ListBind(
             MemberInfo member,
             params ElementInit[] initializers
-        ) {
+        )
+        {
             return ListBind(member, (IEnumerable<ElementInit>)initializers);
         }
 
@@ -80,7 +81,8 @@ namespace System.Linq.Expressions
         public static MemberListBinding ListBind(
             MemberInfo member,
             IEnumerable<ElementInit> initializers
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(member, nameof(member));
             ContractUtils.RequiresNotNull(initializers, nameof(initializers));
             Type memberType;
@@ -102,7 +104,8 @@ namespace System.Linq.Expressions
         public static MemberListBinding ListBind(
             MethodInfo propertyAccessor,
             params ElementInit[] initializers
-        ) {
+        )
+        {
             return ListBind(propertyAccessor, (IEnumerable<ElementInit>)initializers);
         }
 
@@ -118,7 +121,8 @@ namespace System.Linq.Expressions
         public static MemberListBinding ListBind(
             MethodInfo propertyAccessor,
             IEnumerable<ElementInit> initializers
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(propertyAccessor, nameof(propertyAccessor));
             ContractUtils.RequiresNotNull(initializers, nameof(initializers));
             return ListBind(GetProperty(propertyAccessor, nameof(propertyAccessor)), initializers);
@@ -128,7 +132,8 @@ namespace System.Linq.Expressions
             Type listType,
             ReadOnlyCollection<ElementInit> initializers,
             string listTypeParamName
-        ) {
+        )
+        {
             if (!typeof(IEnumerable).IsAssignableFrom(listType))
             {
                 throw Error.TypeNotIEnumerable(listType, listTypeParamName);

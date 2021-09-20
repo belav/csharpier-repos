@@ -21,7 +21,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Common
         public EditorTextUpdater(
             IVsEditorAdaptersFactoryService editorAdaptersFactoryService,
             IVsTextLines textLines
-        ) {
+        )
+        {
             _editorAdaptersFactoryService = editorAdaptersFactoryService;
             _textLines = textLines;
         }

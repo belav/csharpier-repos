@@ -51,7 +51,8 @@ namespace Microsoft.CodeAnalysis.Remote
             TraceSource logger,
             object? incomingCallTarget,
             IEnumerable<JsonConverter>? jsonConverters = null
-        ) {
+        )
+        {
             RoslynDebug.Assert(stream != null);
             RoslynDebug.Assert(logger != null);
 
@@ -103,7 +104,8 @@ namespace Microsoft.CodeAnalysis.Remote
             string targetName,
             IReadOnlyList<object?> arguments,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfFalse(_startedListening);
 
             // if this end-point is already disconnected do not log more errors:
@@ -128,7 +130,8 @@ namespace Microsoft.CodeAnalysis.Remote
             string targetName,
             IReadOnlyList<object?> arguments,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfFalse(_startedListening);
 
             if (_rpc.IsDisposed)
@@ -151,7 +154,8 @@ namespace Microsoft.CodeAnalysis.Remote
             string targetName,
             IReadOnlyList<object?> arguments,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfFalse(_startedListening);
 
             // if this end-point is already disconnected do not log more errors:
@@ -189,7 +193,8 @@ namespace Microsoft.CodeAnalysis.Remote
             IReadOnlyList<object?> arguments,
             Func<Stream, CancellationToken, Task<T>> dataReader,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             const int BufferSize = 12 * 1024;
 
             Contract.ThrowIfFalse(_startedListening);
@@ -290,7 +295,8 @@ namespace Microsoft.CodeAnalysis.Remote
             TData data,
             Func<Stream, TData, CancellationToken, Task> dataWriter,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             const int BufferSize = 4 * 1024;
 
             try
@@ -328,7 +334,8 @@ namespace Microsoft.CodeAnalysis.Remote
         private static async Task ConnectPipeAsync(
             NamedPipeClientStream pipe,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             const int ConnectWithoutTimeout = 1;
             const int MaxRetryAttemptsForFileNotFoundException = 3;
             const int ErrorSemTimeoutHResult = unchecked((int)0x80070079);
@@ -374,7 +381,8 @@ namespace Microsoft.CodeAnalysis.Remote
             Exception ex,
             CancellationToken linkedCancellationToken,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // check whether we are in cancellation mode
 
             // things are either cancelled by us (cancellationToken) or cancelled by OOP (linkedCancellationToken).
@@ -419,7 +427,8 @@ namespace Microsoft.CodeAnalysis.Remote
         private SoftCrashException CreateSoftCrashException(
             Exception ex,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // TODO: revisit https://github.com/dotnet/roslyn/issues/40476
             // We are getting unexpected exception from service hub. Rather than doing hard crash on unexpected exception,
             // we decided to do soft crash where we show info bar to users saying "VS got corrupted and users should save
@@ -465,7 +474,8 @@ namespace Microsoft.CodeAnalysis.Remote
             if (
                 e.Reason != DisconnectedReason.LocallyDisposed
                 && e.Reason != DisconnectedReason.RemotePartyTerminated
-            ) {
+            )
+            {
                 LogDisconnectInfo(e);
             }
 

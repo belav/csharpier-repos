@@ -236,7 +236,8 @@ namespace System.Data
                     Scope? currentScope = this;
                     currentScope != null;
                     currentScope = currentScope.m_previousScope
-                ) {
+                )
+                {
                     if (currentScope.m_allowedTypes.Contains(type))
                     {
                         return true;
@@ -298,7 +299,8 @@ namespace System.Data
                     type.IsGenericType
                     && !type.IsGenericTypeDefinition
                     && type.GetGenericTypeDefinition() == typeof(List<>)
-                ) {
+                )
+                {
                     type = type.GetGenericArguments()[0];
                     goto TryAgain;
                 }

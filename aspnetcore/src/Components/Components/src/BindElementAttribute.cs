@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.Components
             string? suffix,
             string valueAttribute,
             string changeAttribute
-        ) {
+        )
+        {
             if (element == null)
             {
                 throw new ArgumentNullException(nameof(element));

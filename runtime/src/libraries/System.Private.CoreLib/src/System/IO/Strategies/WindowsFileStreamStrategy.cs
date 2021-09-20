@@ -26,7 +26,8 @@ namespace System.IO.Strategies
             SafeFileHandle handle,
             FileAccess access,
             FileShare share
-        ) {
+        )
+        {
             InitFromHandle(handle, access, out _canSeek, out _isPipe);
 
             // Note: Cleaner to set the following fields in ValidateAndInitFromHandle,
@@ -46,7 +47,8 @@ namespace System.IO.Strategies
             FileAccess access,
             FileShare share,
             FileOptions options
-        ) {
+        )
+        {
             string fullPath = Path.GetFullPath(path);
 
             _path = fullPath;
@@ -268,7 +270,8 @@ namespace System.IO.Strategies
             FileAccess access,
             out bool canSeek,
             out bool isPipe
-        ) {
+        )
+        {
 #if DEBUG
             bool hadBinding = handle.ThreadPoolBinding != null;
 

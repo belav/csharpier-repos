@@ -22,10 +22,8 @@ namespace System
             HResult = HResults.COR_E_INSUFFICIENTEXECUTIONSTACK;
         }
 
-        public InsufficientExecutionStackException(
-            string? message,
-            Exception? innerException
-        ) : base(message, innerException)
+        public InsufficientExecutionStackException(string? message, Exception? innerException)
+            : base(message, innerException)
         {
             HResult = HResults.COR_E_INSUFFICIENTEXECUTIONSTACK;
         }

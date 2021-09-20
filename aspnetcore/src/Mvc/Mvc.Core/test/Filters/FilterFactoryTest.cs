@@ -350,7 +350,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
                 Action<FilterProviderContext> providerExecuting,
                 Action<FilterProviderContext> providerExecuted,
                 int order = 0
-            ) {
+            )
+            {
                 _providerExecuting = providerExecuting;
                 _providerExecuted = providerExecuted;
                 Order = order;

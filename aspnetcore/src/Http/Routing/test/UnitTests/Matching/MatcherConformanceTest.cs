@@ -36,7 +36,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             object defaults = null,
             object constraints = null,
             int? order = null
-        ) {
+        )
+        {
             return new RouteEndpoint(
                 TestConstants.EmptyRequestDelegate,
                 RoutePatternFactory.Parse(template, defaults, constraints),

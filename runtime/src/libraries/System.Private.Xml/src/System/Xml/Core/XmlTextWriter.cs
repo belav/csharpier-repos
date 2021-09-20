@@ -851,7 +851,8 @@ namespace System.Xml
                             string? definedPrefix = FindPrefix(ns);
                             if (
                                 definedPrefix != null && (prefix == null || prefix == definedPrefix)
-                            ) {
+                            )
+                            {
                                 prefix = definedPrefix;
                             }
                             else
@@ -955,7 +956,8 @@ namespace System.Xml
                 if (
                     null != text
                     && (text.Contains("--") || (text.Length != 0 && text[text.Length - 1] == '-'))
-                ) {
+                )
+                {
                     throw new ArgumentException(SR.Xml_InvalidCommentChars);
                 }
                 AutoComplete(Token.Comment);
@@ -986,7 +988,8 @@ namespace System.Xml
                 if (
                     0 == string.Compare(name, "xml", StringComparison.OrdinalIgnoreCase)
                     && _stateTable == s_stateTableDocument
-                ) {
+                )
+                {
                     throw new ArgumentException(SR.Xml_DupXmlDecl);
                 }
 
@@ -1613,7 +1616,8 @@ namespace System.Xml
             if (
                 (_stack[_top].defaultNs != _stack[_top - 1].defaultNs)
                 && (_stack[_top].defaultNsState == NamespaceState.DeclaredButNotWrittenOut)
-            ) {
+            )
+            {
                 _textWriter.Write(" xmlns=");
                 _textWriter.Write(_quoteChar);
                 _xmlEncoder.Write(_stack[_top].defaultNs);
@@ -2001,7 +2005,8 @@ namespace System.Xml
                     (prefix[0] == 'x' || prefix[0] == 'X')
                     && (prefix[1] == 'm' || prefix[1] == 'M')
                     && (prefix[2] == 'l' || prefix[2] == 'L')
-                ) {
+                )
+                {
                     if (XmlReservedNs.NsXml != ns)
                     {
                         throw new ArgumentException(SR.Xml_InvalidPrefix);

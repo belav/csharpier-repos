@@ -86,7 +86,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
         public static MSBuildWorkspace Create(
             IDictionary<string, string> properties,
             HostServices hostServices
-        ) {
+        )
+        {
             if (properties == null)
             {
                 throw new ArgumentNullException(nameof(properties));
@@ -202,7 +203,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
             ILogger? msbuildLogger,
             IProgress<ProjectLoadProgress>? progress = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (solutionFilePath == null)
             {
                 throw new ArgumentNullException(nameof(solutionFilePath));
@@ -256,7 +258,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
             ILogger? msbuildLogger,
             IProgress<ProjectLoadProgress>? progress = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (projectFilePath == null)
             {
                 throw new ArgumentNullException(nameof(projectFilePath));
@@ -328,7 +331,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
         internal override bool TryApplyChanges(
             Solution newSolution,
             IProgressTracker progressTracker
-        ) {
+        )
+        {
             using (_serializationLock.DisposableWait())
             {
                 return base.TryApplyChanges(newSolution, progressTracker);
@@ -366,7 +370,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
                             projectPath,
                             out var fileLoader
                         )
-                    ) {
+                    )
+                    {
                         try
                         {
                             var buildManager = new ProjectBuildManager(_loader.Properties);
@@ -524,7 +529,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
             string fullPath,
             SourceText newText,
             Encoding encoding
-        ) {
+        )
+        {
             try
             {
                 var dir = Path.GetDirectoryName(fullPath);
@@ -602,7 +608,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
         protected override void ApplyMetadataReferenceAdded(
             ProjectId projectId,
             MetadataReference metadataReference
-        ) {
+        )
+        {
             RoslynDebug.AssertNotNull(_applyChangesProjectFile);
             var identity = GetAssemblyIdentity(projectId, metadataReference);
             if (identity is null)
@@ -623,7 +630,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
         protected override void ApplyMetadataReferenceRemoved(
             ProjectId projectId,
             MetadataReference metadataReference
-        ) {
+        )
+        {
             RoslynDebug.AssertNotNull(_applyChangesProjectFile);
             var identity = GetAssemblyIdentity(projectId, metadataReference);
             if (identity is null)
@@ -644,7 +652,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
         private AssemblyIdentity? GetAssemblyIdentity(
             ProjectId projectId,
             MetadataReference metadataReference
-        ) {
+        )
+        {
             var project = this.CurrentSolution.GetProject(projectId);
             if (project is null)
             {
@@ -669,7 +678,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
         protected override void ApplyProjectReferenceAdded(
             ProjectId projectId,
             ProjectReference projectReference
-        ) {
+        )
+        {
             Debug.Assert(_applyChangesProjectFile != null);
 
             var project = this.CurrentSolution.GetProject(projectReference.ProjectId);
@@ -687,7 +697,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
         protected override void ApplyProjectReferenceRemoved(
             ProjectId projectId,
             ProjectReference projectReference
-        ) {
+        )
+        {
             Debug.Assert(_applyChangesProjectFile != null);
 
             var project = this.CurrentSolution.GetProject(projectReference.ProjectId);
@@ -702,7 +713,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
         protected override void ApplyAnalyzerReferenceAdded(
             ProjectId projectId,
             AnalyzerReference analyzerReference
-        ) {
+        )
+        {
             Debug.Assert(_applyChangesProjectFile != null);
             _applyChangesProjectFile.AddAnalyzerReference(analyzerReference);
             this.OnAnalyzerReferenceAdded(projectId, analyzerReference);
@@ -711,7 +723,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
         protected override void ApplyAnalyzerReferenceRemoved(
             ProjectId projectId,
             AnalyzerReference analyzerReference
-        ) {
+        )
+        {
             Debug.Assert(_applyChangesProjectFile != null);
             _applyChangesProjectFile.RemoveAnalyzerReference(analyzerReference);
             this.OnAnalyzerReferenceRemoved(projectId, analyzerReference);

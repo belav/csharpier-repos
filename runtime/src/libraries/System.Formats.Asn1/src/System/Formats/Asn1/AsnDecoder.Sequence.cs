@@ -59,7 +59,8 @@ namespace System.Formats.Asn1
             out int contentLength,
             out int bytesConsumed,
             Asn1Tag? expectedTag = default
-        ) {
+        )
+        {
             Asn1Tag tag = ReadTagAndLength(source, ruleSet, out int? length, out int headerLength);
             CheckExpectedTag(tag, expectedTag ?? Asn1Tag.Sequence, UniversalTagNumber.Sequence);
 

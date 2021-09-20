@@ -159,7 +159,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 BinaryOperatorKind relation,
                 decimal left,
                 decimal right
-            ) {
+            )
+            {
                 switch (relation)
                 {
                     case Equal:

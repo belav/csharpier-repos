@@ -48,12 +48,14 @@ namespace System.Web.Mvc
             string modelStateKey,
             Type elementType,
             object value
-        ) {
+        )
+        {
             if (
                 value == null
                 && !TypeHelpers.TypeAllowsNullValue(elementType)
                 && modelState.IsValidField(modelStateKey)
-            ) {
+            )
+            {
                 modelState.AddModelError(
                     modelStateKey,
                     GetValueRequiredResource(controllerContext)
@@ -65,7 +67,8 @@ namespace System.Web.Mvc
             ControllerContext controllerContext,
             ModelBindingContext bindingContext,
             object model
-        ) {
+        )
+        {
             // need to replace the property filter + model object and create an inner binding context
             ModelBindingContext newBindingContext = CreateComplexElementalModelBindingContext(
                 controllerContext,
@@ -84,7 +87,8 @@ namespace System.Web.Mvc
         internal object BindComplexModel(
             ControllerContext controllerContext,
             ModelBindingContext bindingContext
-        ) {
+        )
+        {
             object model = bindingContext.Model;
             Type modelType = bindingContext.ModelType;
 
@@ -197,7 +201,8 @@ namespace System.Web.Mvc
         public virtual object BindModel(
             ControllerContext controllerContext,
             ModelBindingContext bindingContext
-        ) {
+        )
+        {
             RuntimeHelpers.EnsureSufficientExecutionStack();
 
             if (bindingContext == null)
@@ -210,7 +215,8 @@ namespace System.Web.Mvc
             if (
                 !String.IsNullOrEmpty(bindingContext.ModelName)
                 && !bindingContext.ValueProvider.ContainsPrefix(bindingContext.ModelName)
-            ) {
+            )
+            {
                 // We couldn't find any entry that began with the prefix. If this is the top-level element, fall back
                 // to the empty prefix.
                 if (bindingContext.FallbackToEmptyPrefix)
@@ -260,7 +266,8 @@ namespace System.Web.Mvc
         private void BindProperties(
             ControllerContext controllerContext,
             ModelBindingContext bindingContext
-        ) {
+        )
+        {
             PropertyDescriptorCollection properties = GetModelProperties(
                 controllerContext,
                 bindingContext
@@ -282,7 +289,8 @@ namespace System.Web.Mvc
             ControllerContext controllerContext,
             ModelBindingContext bindingContext,
             PropertyDescriptor propertyDescriptor
-        ) {
+        )
+        {
             // need to skip properties that aren't part of the request, else we might hit a StackOverflowException
             string fullPropertyKey = CreateSubPropertyName(
                 bindingContext.ModelName,
@@ -326,7 +334,8 @@ namespace System.Web.Mvc
                         propertyDescriptor,
                         newPropertyValue
                     )
-                ) {
+                )
+                {
                     SetProperty(
                         controllerContext,
                         bindingContext,
@@ -356,12 +365,14 @@ namespace System.Web.Mvc
                             err => String.IsNullOrEmpty(err.ErrorMessage) && err.Exception != null
                         )
                         .ToList()
-                ) {
+                )
+                {
                     for (
                         Exception exception = error.Exception;
                         exception != null;
                         exception = exception.InnerException
-                    ) {
+                    )
+                    {
                         // We only consider "known" type of exception and do not make too aggressive changes here
                         if (exception is FormatException || exception is OverflowException)
                         {
@@ -388,7 +399,8 @@ namespace System.Web.Mvc
             ControllerContext controllerContext,
             ModelBindingContext bindingContext,
             ValueProviderResult valueProviderResult
-        ) {
+        )
+        {
             bindingContext.ModelState.SetModelValue(bindingContext.ModelName, valueProviderResult);
 
             // if the value provider returns an instance of the requested data type, we can just short-circuit
@@ -501,7 +513,8 @@ namespace System.Web.Mvc
             string modelStateKey,
             ValueProviderResult valueProviderResult,
             Type destinationType
-        ) {
+        )
+        {
             try
             {
                 object convertedValue = valueProviderResult.ConvertTo(destinationType);
@@ -518,7 +531,8 @@ namespace System.Web.Mvc
             ControllerContext controllerContext,
             ModelBindingContext bindingContext,
             object model
-        ) {
+        )
+        {
             BindAttribute bindAttr = (BindAttribute)GetTypeDescriptor(
                     controllerContext,
                     bindingContext
@@ -550,7 +564,8 @@ namespace System.Web.Mvc
             ControllerContext controllerContext,
             ModelBindingContext bindingContext,
             Type modelType
-        ) {
+        )
+        {
             // fallback to the type's default constructor
             Type typeToCreate = modelType;
 
@@ -568,7 +583,8 @@ namespace System.Web.Mvc
                     genericTypeDefinition == typeof(IEnumerable<>)
                     || genericTypeDefinition == typeof(ICollection<>)
                     || genericTypeDefinition == typeof(IList<>)
-                ) {
+                )
+                {
                     typeToCreate = typeof(List<>).MakeGenericType(modelType.GetGenericArguments());
                 }
             }
@@ -622,7 +638,8 @@ namespace System.Web.Mvc
         protected IEnumerable<PropertyDescriptor> GetFilteredModelProperties(
             ControllerContext controllerContext,
             ModelBindingContext bindingContext
-        ) {
+        )
+        {
             // Performance note: Retain for compatibility only. Faster version inlined
             PropertyDescriptorCollection properties = GetModelProperties(
                 controllerContext,
@@ -645,7 +662,8 @@ namespace System.Web.Mvc
             ModelBindingContext bindingContext,
             out bool stopOnIndexNotFound,
             out IEnumerable<string> indexes
-        ) {
+        )
+        {
             string indexKey = CreateSubPropertyName(bindingContext.ModelName, "index");
             ValueProviderResult valueProviderResult = bindingContext.ValueProvider.GetValue(
                 indexKey
@@ -670,7 +688,8 @@ namespace System.Web.Mvc
         protected virtual PropertyDescriptorCollection GetModelProperties(
             ControllerContext controllerContext,
             ModelBindingContext bindingContext
-        ) {
+        )
+        {
             return GetTypeDescriptor(controllerContext, bindingContext).GetProperties();
         }
 
@@ -679,12 +698,14 @@ namespace System.Web.Mvc
             ModelBindingContext bindingContext,
             PropertyDescriptor propertyDescriptor,
             IModelBinder propertyBinder
-        ) {
+        )
+        {
             object value = propertyBinder.BindModel(controllerContext, bindingContext);
 
             if (
                 bindingContext.ModelMetadata.ConvertEmptyStringToNull && Equals(value, String.Empty)
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -694,7 +715,8 @@ namespace System.Web.Mvc
         protected virtual ICustomTypeDescriptor GetTypeDescriptor(
             ControllerContext controllerContext,
             ModelBindingContext bindingContext
-        ) {
+        )
+        {
             return TypeDescriptorHelper.Get(bindingContext.ModelType);
         }
 
@@ -705,14 +727,16 @@ namespace System.Web.Mvc
         private static string GetUserResourceString(
             ControllerContext controllerContext,
             string resourceName
-        ) {
+        )
+        {
             string result = null;
 
             if (
                 !String.IsNullOrEmpty(ResourceClassKey)
                 && (controllerContext != null)
                 && (controllerContext.HttpContext != null)
-            ) {
+            )
+            {
                 result =
                     controllerContext.HttpContext.GetGlobalResourceObject(
                         ResourceClassKey,
@@ -762,7 +786,8 @@ namespace System.Web.Mvc
         protected virtual void OnModelUpdated(
             ControllerContext controllerContext,
             ModelBindingContext bindingContext
-        ) {
+        )
+        {
             Dictionary<string, bool> startedValid = new Dictionary<string, bool>(
                 StringComparer.OrdinalIgnoreCase
             );
@@ -773,7 +798,8 @@ namespace System.Web.Mvc
                         controllerContext
                     )
                     .Validate(null)
-            ) {
+            )
+            {
                 string subPropertyName = CreateSubPropertyName(
                     bindingContext.ModelName,
                     validationResult.MemberName
@@ -799,7 +825,8 @@ namespace System.Web.Mvc
         protected virtual bool OnModelUpdating(
             ControllerContext controllerContext,
             ModelBindingContext bindingContext
-        ) {
+        )
+        {
             // default implementation does nothing
             return true;
         }
@@ -809,7 +836,8 @@ namespace System.Web.Mvc
             ModelBindingContext bindingContext,
             PropertyDescriptor propertyDescriptor,
             object value
-        ) {
+        )
+        {
             // default implementation does nothing
         }
 
@@ -818,7 +846,8 @@ namespace System.Web.Mvc
             ModelBindingContext bindingContext,
             PropertyDescriptor propertyDescriptor,
             object value
-        ) {
+        )
+        {
             // default implementation does nothing
             return true;
         }
@@ -833,7 +862,8 @@ namespace System.Web.Mvc
             ModelBindingContext bindingContext,
             PropertyDescriptor propertyDescriptor,
             object value
-        ) {
+        )
+        {
             ModelMetadata propertyMetadata = bindingContext.PropertyMetadata[
                 propertyDescriptor.Name
             ];
@@ -865,7 +895,8 @@ namespace System.Web.Mvc
                         ModelValidationResult validationResult in requiredValidator.Validate(
                             bindingContext.Model
                         )
-                    ) {
+                    )
+                    {
                         bindingContext.ModelState.AddModelError(
                             modelStateKey,
                             validationResult.Message
@@ -900,7 +931,8 @@ namespace System.Web.Mvc
             if (
                 isNullValueOnNonNullableType
                 && bindingContext.ModelState.IsValidField(modelStateKey)
-            ) {
+            )
+            {
                 bindingContext.ModelState.AddModelError(
                     modelStateKey,
                     GetValueRequiredResource(controllerContext)
@@ -911,13 +943,15 @@ namespace System.Web.Mvc
         private static bool ShouldPerformRequestValidation(
             ControllerContext controllerContext,
             ModelBindingContext bindingContext
-        ) {
+        )
+        {
             if (
                 controllerContext == null
                 || controllerContext.Controller == null
                 || bindingContext == null
                 || bindingContext.ModelMetadata == null
-            ) {
+            )
+            {
                 // To make unit testing easier, if the caller hasn't specified enough contextual information we just default
                 // to always pulling the data from a collection that goes through request validation.
                 return true;
@@ -935,7 +969,8 @@ namespace System.Web.Mvc
         private static bool ShouldUpdateProperty(
             PropertyDescriptor property,
             Predicate<string> propertyFilter
-        ) {
+        )
+        {
             if (property.IsReadOnly && !CanUpdateReadonlyTypedReference(property.PropertyType))
             {
                 return false;
@@ -955,7 +990,8 @@ namespace System.Web.Mvc
             ControllerContext controllerContext,
             ModelBindingContext bindingContext,
             Type elementType
-        ) {
+        )
+        {
             bool stopOnIndexNotFound;
             IEnumerable<string> indexes;
             GetIndexes(bindingContext, out stopOnIndexNotFound, out indexes);
@@ -1020,7 +1056,8 @@ namespace System.Web.Mvc
             ModelBindingContext bindingContext,
             Type keyType,
             Type valueType
-        ) {
+        )
+        {
             bool stopOnIndexNotFound;
             IEnumerable<string> indexes;
             GetIndexes(bindingContext, out stopOnIndexNotFound, out indexes);
@@ -1041,7 +1078,8 @@ namespace System.Web.Mvc
                         bindingContext.ValueProvider.ContainsPrefix(keyFieldKey)
                         && bindingContext.ValueProvider.ContainsPrefix(valueFieldKey)
                     )
-                ) {
+                )
+                {
                     if (stopOnIndexNotFound)
                     {
                         // we ran out of elements to pull
@@ -1132,7 +1170,8 @@ namespace System.Web.Mvc
             IModelBinder valueBinder,
             string modelName,
             object modelKey
-        ) {
+        )
+        {
             ModelBindingContext valueBindingContext = new ModelBindingContext()
             {
                 ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(null, valueType),
@@ -1175,7 +1214,8 @@ namespace System.Web.Mvc
                 Type collectionType,
                 object collection,
                 object newContents
-            ) {
+            )
+            {
                 MethodInfo targetMethod = _replaceCollectionMethod.MakeGenericMethod(
                     collectionType
                 );
@@ -1185,7 +1225,8 @@ namespace System.Web.Mvc
             private static void ReplaceCollectionImpl<T>(
                 ICollection<T> collection,
                 IEnumerable newContents
-            ) {
+            )
+            {
                 collection.Clear();
                 if (newContents != null)
                 {
@@ -1205,7 +1246,8 @@ namespace System.Web.Mvc
                 Type valueType,
                 object dictionary,
                 object newContents
-            ) {
+            )
+            {
                 MethodInfo targetMethod = _replaceDictionaryMethod.MakeGenericMethod(
                     keyType,
                     valueType
@@ -1216,7 +1258,8 @@ namespace System.Web.Mvc
             private static void ReplaceDictionaryImpl<TKey, TValue>(
                 IDictionary<TKey, TValue> dictionary,
                 IEnumerable<KeyValuePair<object, object>> newContents
-            ) {
+            )
+            {
                 dictionary.Clear();
                 foreach (KeyValuePair<object, object> item in newContents)
                 {

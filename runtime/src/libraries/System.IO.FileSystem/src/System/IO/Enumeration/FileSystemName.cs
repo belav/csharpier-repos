@@ -46,7 +46,8 @@ namespace System.IO.Enumeration
                         }
                         else if (
                             i < length - 1 && (expression[i + 1] == '?' || expression[i + 1] == '*')
-                        ) {
+                        )
+                        {
                             sb.Append('\"'); // DOS_DOT
                         }
                         else
@@ -85,7 +86,8 @@ namespace System.IO.Enumeration
             ReadOnlySpan<char> expression,
             ReadOnlySpan<char> name,
             bool ignoreCase = true
-        ) {
+        )
+        {
             return MatchPattern(expression, name, ignoreCase, useExtendedWildcards: true);
         }
 
@@ -96,7 +98,8 @@ namespace System.IO.Enumeration
             ReadOnlySpan<char> expression,
             ReadOnlySpan<char> name,
             bool ignoreCase = true
-        ) {
+        )
+        {
             return MatchPattern(expression, name, ignoreCase, useExtendedWildcards: false);
         }
 
@@ -161,7 +164,8 @@ namespace System.IO.Enumeration
             ReadOnlySpan<char> name,
             bool ignoreCase,
             bool useExtendedWildcards
-        ) {
+        )
+        {
             // The idea behind the algorithm is pretty simple. We keep track of all possible locations
             // in the regular expression that are matching the name. When the name has been exhausted,
             // if one of the locations in the expression is also just exhausted, the name is in the
@@ -181,7 +185,8 @@ namespace System.IO.Enumeration
                     expressionEnd.IndexOfAny(
                         useExtendedWildcards ? s_wildcardChars : s_simpleWildcardChars
                     ) == -1
-                ) {
+                )
+                {
                     // Handle the special case of a single starting *, which essentially means "ends with"
 
                     // If the name doesn't have enough characters to match the remaining expression, it can't be a match.
@@ -382,7 +387,8 @@ namespace System.IO.Enumeration
                                         ? char.ToUpperInvariant(expressionChar)
                                           == char.ToUpperInvariant(nameChar)
                                         : expressionChar == nameChar
-                                ) {
+                                )
+                                {
                                     // Matched a non-wildcard character
                                     currentMatches[currentMatch++] = currentState;
                                 }
@@ -416,7 +422,8 @@ namespace System.IO.Enumeration
                             while (
                                 (priorMatch < previousLength)
                                 && (priorMatches[priorMatch] < currentMatches[priorMatchCount])
-                            ) {
+                            )
+                            {
                                 priorMatch++;
                             }
                             priorMatchCount++;

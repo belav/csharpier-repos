@@ -62,7 +62,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 
                 foreach (
                     var index in databaseModel.Tables.SelectMany(t => t.Indexes.Where(AcceptIndex))
-                ) {
+                )
+                {
                     operations.Add(Drop(index));
                 }
 
@@ -70,7 +71,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                     var foreignKey in databaseModel.Tables.SelectMany(
                         t => t.ForeignKeys.Where(AcceptForeignKey)
                     )
-                ) {
+                )
+                {
                     operations.Add(Drop(foreignKey));
                 }
 
@@ -120,7 +122,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             IRelationalConnection connection,
             IRawSqlCommandBuilder sqlBuilder,
             string customSql
-        ) {
+        )
+        {
             var batches = Regex.Split(
                 Regex.Replace(
                     customSql,
@@ -138,7 +141,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 if (
                     batches[i].StartsWith("GO", StringComparison.OrdinalIgnoreCase)
                     || string.IsNullOrWhiteSpace(batches[i])
-                ) {
+                )
+                {
                     continue;
                 }
 

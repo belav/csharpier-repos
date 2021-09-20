@@ -472,7 +472,8 @@ namespace ILCompiler.Reflection.ReadyToRun.Amd64
             int interruptibleRangeDelta1EncBase,
             int interruptibleRangeDelta2EncBase,
             ref int bitOffset
-        ) {
+        )
+        {
             List<InterruptibleRange> ranges = new List<InterruptibleRange>();
             uint lastinterruptibleRangeStopOffset = 0;
 
@@ -581,7 +582,8 @@ namespace ILCompiler.Reflection.ReadyToRun.Amd64
                                     uint slotIndex = readSlots;
                                     slotIndex < readSlots + cnt;
                                     slotIndex++
-                                ) {
+                                )
+                                {
                                     int trackedSlotIndex = 0;
                                     foreach (var slot in SlotTable.GcSlots)
                                     {
@@ -645,7 +647,8 @@ namespace ILCompiler.Reflection.ReadyToRun.Amd64
         private Dictionary<int, List<BaseGcTransition>> GetTransitions(
             byte[] image,
             ref int bitOffset
-        ) {
+        )
+        {
             int totalInterruptibleLength = 0;
             if (NumInterruptibleRanges == 0)
             {
@@ -819,7 +822,8 @@ namespace ILCompiler.Reflection.ReadyToRun.Amd64
             int slotId,
             ref int couldBeLiveCnt,
             ref int couldBeLiveOffset
-        ) {
+        )
+        {
             if (fSimple)
             {
                 // Get the slotId by iterating through the couldBeLive bit array. The slotId is the index of the next set bit
@@ -870,7 +874,8 @@ namespace ILCompiler.Reflection.ReadyToRun.Amd64
         /// </summary>
         private Dictionary<int, List<BaseGcTransition>> UpdateTransitionCodeOffset(
             List<GcTransition> transitions
-        ) {
+        )
+        {
             Dictionary<int, List<BaseGcTransition>> updatedTransitions = new Dictionary<
                 int,
                 List<BaseGcTransition>
@@ -879,7 +884,8 @@ namespace ILCompiler.Reflection.ReadyToRun.Amd64
             using (
                 IEnumerator<InterruptibleRange> interruptibleRangesIter =
                     InterruptibleRanges.GetEnumerator()
-            ) {
+            )
+            {
                 interruptibleRangesIter.MoveNext();
                 InterruptibleRange currentRange = interruptibleRangesIter.Current;
                 int currentRangeLength = (int)(currentRange.StopOffset - currentRange.StartOffset);

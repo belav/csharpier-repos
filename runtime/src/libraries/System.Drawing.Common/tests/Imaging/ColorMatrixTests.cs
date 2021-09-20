@@ -113,7 +113,8 @@ namespace System.Drawing.Imaging.Tests
         public void Ctor_BadValues_ThrowsExpectedException(
             float[][] newColorMatrix,
             Type expectedException
-        ) {
+        )
+        {
             Assert.Throws(expectedException, () => new ColorMatrix(newColorMatrix));
         }
 

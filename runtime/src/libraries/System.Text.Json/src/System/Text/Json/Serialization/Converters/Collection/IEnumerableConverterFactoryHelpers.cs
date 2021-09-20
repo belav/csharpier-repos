@@ -124,7 +124,8 @@ namespace System.Text.Json.Serialization
                     "System.Collections.Immutable,",
                     StringComparison.Ordinal
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -147,7 +148,8 @@ namespace System.Text.Json.Serialization
                     "System.Collections.Immutable,",
                     StringComparison.Ordinal
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -202,7 +204,8 @@ namespace System.Text.Json.Serialization
         public static MethodInfo GetImmutableEnumerableCreateRangeMethod(
             this Type type,
             Type elementType
-        ) {
+        )
+        {
             Type? constructingType = GetImmutableEnumerableConstructingType(type);
             if (constructingType != null)
             {
@@ -214,7 +217,8 @@ namespace System.Text.Json.Serialization
                         && method.GetParameters().Length == 1
                         && method.IsGenericMethod
                         && method.GetGenericArguments().Length == 1
-                    ) {
+                    )
+                    {
                         return method.MakeGenericMethod(elementType);
                     }
                 }
@@ -238,7 +242,8 @@ namespace System.Text.Json.Serialization
             this Type type,
             Type keyType,
             Type valueType
-        ) {
+        )
+        {
             Type? constructingType = GetImmutableDictionaryConstructingType(type);
             if (constructingType != null)
             {
@@ -250,7 +255,8 @@ namespace System.Text.Json.Serialization
                         && method.GetParameters().Length == 1
                         && method.IsGenericMethod
                         && method.GetGenericArguments().Length == 2
-                    ) {
+                    )
+                    {
                         return method.MakeGenericMethod(keyType, valueType);
                     }
                 }

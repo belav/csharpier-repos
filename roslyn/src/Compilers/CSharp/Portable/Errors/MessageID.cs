@@ -253,7 +253,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics,
             SyntaxNode syntax,
             Location? location = null
-        ) {
+        )
+        {
             var diag = GetFeatureAvailabilityDiagnosticInfo(
                 feature,
                 (CSharpParseOptions)syntax.SyntaxTree.Options
@@ -271,11 +272,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics,
             Compilation compilation,
             Location location
-        ) {
+        )
+        {
             if (
                 GetFeatureAvailabilityDiagnosticInfo(feature, (CSharpCompilation)compilation) is
                 { } diagInfo
-            ) {
+            )
+            {
                 diagnostics.Add(diagInfo, location);
                 return false;
             }
@@ -301,7 +304,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static CSDiagnosticInfo GetDisabledFeatureDiagnosticInfo(
             MessageID feature,
             LanguageVersion availableVersion
-        ) {
+        )
+        {
             string? requiredFeature = feature.RequiredFeature();
             if (requiredFeature != null)
             {

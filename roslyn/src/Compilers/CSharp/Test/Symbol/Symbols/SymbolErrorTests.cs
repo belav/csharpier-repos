@@ -8912,7 +8912,8 @@ public static int AT = (new { field = 2 }).field;
                     ilSource,
                     prependDefaultHeader: false
                 )
-            ) {
+            )
+            {
                 ilBytes = ReadFromFile(reference.Path);
             }
 
@@ -8986,7 +8987,8 @@ interface ITest20
                     ilSource,
                     prependDefaultHeader: false
                 )
-            ) {
+            )
+            {
                 ilBytes = ReadFromFile(reference.Path);
             }
 

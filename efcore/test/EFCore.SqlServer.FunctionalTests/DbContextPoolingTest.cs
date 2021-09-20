@@ -85,8 +85,9 @@ namespace Microsoft.EntityFrameworkCore
 
         private static IServiceProvider BuildServiceProvider<TContextService, TContext>(
             int poolSize
-        ) where TContextService : class
-          where TContext : DbContext, TContextService =>
+        )
+            where TContextService : class
+            where TContext : DbContext, TContextService =>
             new ServiceCollection().AddDbContextPool<TContextService, TContext>(
                     ob =>
                         ob.UseSqlServer(
@@ -1046,7 +1047,8 @@ namespace Microsoft.EntityFrameworkCore
         public async Task Pool_disposes_context_when_context_not_pooled(
             bool useInterface,
             bool async
-        ) {
+        )
+        {
             var serviceProvider = useInterface
                 ? BuildServiceProvider<IPooledContext, PooledContext>()
                 : BuildServiceProvider<PooledContext>();
@@ -1166,7 +1168,8 @@ namespace Microsoft.EntityFrameworkCore
         public async Task Double_dispose_with_standalone_lease_does_not_enter_pool_twice(
             bool useInterface,
             bool async
-        ) {
+        )
+        {
             var serviceProvider = useInterface
                 ? BuildServiceProvider<IPooledContext, PooledContext>()
                 : BuildServiceProvider<PooledContext>();
@@ -1429,7 +1432,8 @@ namespace Microsoft.EntityFrameworkCore
         public DbContextPoolingTest(
             NorthwindQuerySqlServerFixture<NoopModelCustomizer> fixture,
             ITestOutputHelper testOutputHelper
-        ) {
+        )
+        {
             //_testOutputHelper = testOutputHelper;
         }
     }

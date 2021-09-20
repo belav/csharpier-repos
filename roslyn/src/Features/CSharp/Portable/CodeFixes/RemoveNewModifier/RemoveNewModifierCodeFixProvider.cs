@@ -74,7 +74,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.RemoveNewModifier
             SyntaxGenerator generator,
             MemberDeclarationSyntax memberDeclaration,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
 
@@ -91,13 +92,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.RemoveNewModifier
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                CSharpFeaturesResources.Remove_new_modifier,
-                createChangedDocument,
-                CSharpFeaturesResources.Remove_new_modifier
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    CSharpFeaturesResources.Remove_new_modifier,
+                    createChangedDocument,
+                    CSharpFeaturesResources.Remove_new_modifier
+                ) { }
         }
     }
 }

@@ -61,7 +61,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             SymbolGroup group,
             ISymbol symbol,
             ReferenceLocation location
-        ) {
+        )
+        {
             _progress.OnReferenceFound(symbol, location);
             return default;
         }

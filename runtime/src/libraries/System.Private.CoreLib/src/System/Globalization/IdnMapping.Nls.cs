@@ -48,7 +48,8 @@ namespace System.Globalization
             uint flags,
             char* output,
             int outputLength
-        ) {
+        )
+        {
             Debug.Assert(!GlobalizationMode.Invariant);
             Debug.Assert(GlobalizationMode.UseNls);
             Debug.Assert(unicodeString != null && unicodeString.Length >= count);
@@ -101,7 +102,8 @@ namespace System.Globalization
             uint flags,
             char* output,
             int outputLength
-        ) {
+        )
+        {
             Debug.Assert(!GlobalizationMode.Invariant);
             Debug.Assert(GlobalizationMode.UseNls);
             Debug.Assert(asciiString != null && asciiString.Length >= count);

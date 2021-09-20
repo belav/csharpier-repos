@@ -134,7 +134,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 && this.ParameterCount == 0
                 && this.Arity == 0
                 && this.ReturnsVoid
-            ) {
+            )
+            {
                 diagnostics.Add(ErrorCode.WRN_FinalizeMethod, location);
             }
 
@@ -370,7 +371,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private void CompleteAsyncMethodChecks(
             BindingDiagnosticBag diagnosticsOpt,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (state.NotePartComplete(CompletionPart.StartAsyncMethodChecks))
             {
                 if (diagnosticsOpt != null)
@@ -482,7 +484,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             bool hasBody,
             Location location,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             bool isInterface = this.ContainingType.IsInterface;
             bool isExplicitInterfaceImplementation =
                 methodKind == MethodKind.ExplicitInterfaceImplementation;
@@ -577,7 +580,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             bool containingTypeIsInterface,
             MethodKind methodKind,
             bool hasBody
-        ) {
+        )
+        {
             // Let's overwrite modifiers for interface and explicit interface implementation methods with what they are supposed to be.
             // Proper errors must have been reported by now.
             if (containingTypeIsInterface)
@@ -612,7 +616,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             bool hasBody,
             Location location,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             bool isExplicitInterfaceImplementationInInterface =
                 isExplicitInterfaceImplementation && ContainingType.IsInterface;
 
@@ -650,7 +655,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 IsPartial
                 && !HasExplicitAccessModifier
                 && Parameters.Any(p => p.RefKind == RefKind.Out)
-            ) {
+            )
+            {
                 diagnostics.Add(
                     ErrorCode.ERR_PartialMethodWithOutParamMustHaveAccessMods,
                     location,
@@ -664,7 +670,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     || (IsAbstract && !isExplicitInterfaceImplementationInInterface)
                     || IsOverride
                 )
-            ) {
+            )
+            {
                 diagnostics.Add(ErrorCode.ERR_VirtualPrivate, location, this);
             }
             else if (IsStatic && (IsOverride || IsVirtual || IsAbstract))
@@ -681,7 +688,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 IsSealed
                 && !IsOverride
                 && !(isExplicitInterfaceImplementationInInterface && IsAbstract)
-            ) {
+            )
+            {
                 // '{0}' cannot be sealed because it is not an override
                 diagnostics.Add(ErrorCode.ERR_SealedNonOverride, location, this);
             }
@@ -750,7 +758,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     ContainingType.TypeKind == TypeKind.Class
                     || ContainingType.TypeKind == TypeKind.Submission
                 )
-            ) {
+            )
+            {
                 // '{0}' is abstract but it is contained in non-abstract type '{1}'
                 diagnostics.Add(
                     ErrorCode.ERR_AbstractInConcreteClass,
@@ -776,7 +785,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 ContainingType.IsSealed
                 && this.DeclaredAccessibility.HasProtected()
                 && !this.IsOverride
-            ) {
+            )
+            {
                 diagnostics.Add(
                     AccessCheck.GetProtectedMemberInSealedTypeError(ContainingType),
                     location,
@@ -795,7 +805,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     || _lazyParameters.Length > 0
                         && _lazyParameters[_lazyParameters.Length - 1].IsParams
                 )
-            ) {
+            )
+            {
                 diagnostics.Add(ErrorCode.ERR_BadVarargs, location);
             }
             else if (isVararg && IsAsync)
@@ -807,7 +818,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void AddSynthesizedAttributes(
             PEModuleBuilder moduleBuilder,
             ref ArrayBuilder<SynthesizedAttributeData> attributes
-        ) {
+        )
+        {
             base.AddSynthesizedAttributes(moduleBuilder, ref attributes);
 
             if (this.IsExtensionMethod)
@@ -828,7 +840,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void AfterAddingTypeMembersChecks(
             ConversionsBase conversions,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             base.AfterAddingTypeMembersChecks(conversions, diagnostics);
 
             var location = ReturnTypeLocation;
@@ -895,7 +908,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (
                 compilation.ShouldEmitNullableAttributes(this)
                 && ReturnTypeWithAnnotations.NeedsNullableAttribute()
-            ) {
+            )
+            {
                 compilation.EnsureNullableAttributeExists(
                     diagnostics,
                     location,

@@ -83,7 +83,8 @@ namespace AnalyzerRunner
         private async Task<Document> RefactorDocumentAsync(
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxKinds = _syntaxKinds[document.Project.Language];
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             foreach (var node in root.DescendantNodesAndTokens(descendIntoTrivia: true))
@@ -123,7 +124,8 @@ namespace AnalyzerRunner
                             if (
                                 projectChanges.Length != 1
                                 || projectChanges[0].ProjectId != document.Project.Id
-                            ) {
+                            )
+                            {
                                 continue;
                             }
 
@@ -144,7 +146,8 @@ namespace AnalyzerRunner
 
         private static ImmutableDictionary<string, ImmutableHashSet<int>> GetSyntaxKinds(
             ImmutableHashSet<string> refactoringNodes
-        ) {
+        )
+        {
             var knownLanguages = new[]
             {
                 (LanguageNames.CSharp, typeof(Microsoft.CodeAnalysis.CSharp.SyntaxKind)),
@@ -180,7 +183,8 @@ namespace AnalyzerRunner
                 ImmutableArray<Lazy<CodeRefactoringProvider, CodeRefactoringProviderMetadata>>
             > refactorings,
             Options options
-        ) {
+        )
+        {
             return refactorings.ToImmutableDictionary(
                 pair => pair.Key,
                 pair => FilterRefactorings(pair.Value, options).ToImmutableArray()
@@ -192,7 +196,8 @@ namespace AnalyzerRunner
                 Lazy<CodeRefactoringProvider, CodeRefactoringProviderMetadata>
             > refactorings,
             Options options
-        ) {
+        )
+        {
             if (options.IncrementalAnalyzerNames.Any())
             {
                 // AnalyzerRunner is running for IIncrementalAnalyzer testing. DiagnosticAnalyzer testing is disabled

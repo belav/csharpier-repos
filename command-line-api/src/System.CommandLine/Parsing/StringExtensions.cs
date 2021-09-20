@@ -55,7 +55,8 @@ namespace System.CommandLine.Parsing
         internal static TokenizeResult Tokenize(
             this IReadOnlyList<string> args,
             CommandLineConfiguration configuration
-        ) {
+        )
+        {
             var tokenList = new List<Token>();
             var errorList = new List<TokenizeError>();
 
@@ -90,7 +91,8 @@ namespace System.CommandLine.Parsing
                         && arg.EndsWith("]", StringComparison.Ordinal)
                         && arg[1] != ']'
                         && arg[1] != ':'
-                    ) {
+                    )
+                    {
                         tokenList.Add(Directive(arg));
                         continue;
                     }
@@ -104,7 +106,8 @@ namespace System.CommandLine.Parsing
                 if (
                     arg.GetResponseFileReference() is { } filePath
                     && configuration.ResponseFileHandling != ResponseFileHandling.Disabled
-                ) {
+                )
+                {
                     ReadResponseFile(filePath, i);
                     continue;
                 }
@@ -121,7 +124,8 @@ namespace System.CommandLine.Parsing
                     if (
                         knownTokens.TryGetValue(first!, out var token)
                         && token.Type == TokenType.Option
-                    ) {
+                    )
+                    {
                         tokenList.Add(Option(first!));
 
                         // trim outer quotes in case of, e.g., -x="why"
@@ -138,7 +142,8 @@ namespace System.CommandLine.Parsing
                     ||
                     // if token matches the current command name, consider it an argument
                     currentCommand?.HasAlias(arg) == true
-                ) {
+                )
+                {
                     tokenList.Add(Argument(arg));
                 }
                 else
@@ -146,7 +151,8 @@ namespace System.CommandLine.Parsing
                     if (
                         knownTokens.TryGetValue(arg, out var token)
                         && token.Type == TokenType.Option
-                    ) {
+                    )
+                    {
                         tokenList.Add(Option(arg));
                     }
                     else
@@ -212,7 +218,8 @@ namespace System.CommandLine.Parsing
                     && lastToken.Type == TokenType.Option
                     && currentCommand?.Children.GetByAlias(lastToken.Value) is IOption option
                     && option.Argument.Arity.MinimumNumberOfValues > 0
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -341,7 +348,8 @@ namespace System.CommandLine.Parsing
                             filePath,
                             configuration.ResponseFileHandling
                         )
-                    ) {
+                    )
+                    {
                         argList.Insert(next, newArg);
                         next += 1;
                     }
@@ -367,7 +375,8 @@ namespace System.CommandLine.Parsing
         private static List<string> NormalizeRootCommand(
             CommandLineConfiguration commandLineConfiguration,
             IReadOnlyList<string>? args
-        ) {
+        )
+        {
             if (args is null)
             {
                 args = new List<string>();
@@ -391,7 +400,8 @@ namespace System.CommandLine.Parsing
                 if (
                     potentialRootCommand != null
                     && commandLineConfiguration.RootCommand.HasAlias(potentialRootCommand)
-                ) {
+                )
+                {
                     list.AddRange(args);
                     return list;
                 }
@@ -427,7 +437,8 @@ namespace System.CommandLine.Parsing
                         $"{commandName}.dll",
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     return true;
                 }
 
@@ -436,7 +447,8 @@ namespace System.CommandLine.Parsing
                         $"{commandName}.exe",
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     return true;
                 }
 
@@ -451,7 +463,8 @@ namespace System.CommandLine.Parsing
             this string arg,
             out string? first,
             out string? rest
-        ) {
+        )
+        {
             var i = arg.IndexOfAny(_argumentDelimiters);
 
             if (i >= 0)
@@ -522,7 +535,8 @@ namespace System.CommandLine.Parsing
         private static IEnumerable<string> ExpandResponseFile(
             string filePath,
             ResponseFileHandling responseFileHandling
-        ) {
+        )
+        {
             var lines = File.ReadAllLines(filePath);
 
             for (var i = 0; i < lines.Length; i++)
@@ -579,7 +593,8 @@ namespace System.CommandLine.Parsing
                 var commandAliasIndex = 0;
                 commandAliasIndex < command.Aliases.Count;
                 commandAliasIndex++
-            ) {
+            )
+            {
                 var commandAlias = command.Aliases.ElementAt(commandAliasIndex);
 
                 tokens.Add(commandAlias, new Token(commandAlias, TokenType.Command, -1));

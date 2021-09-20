@@ -51,7 +51,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                                 out var windowFrameObject
                             )
                         )
-                    ) {
+                    )
+                    {
                         throw new InvalidOperationException(
                             "Tried to get the active document frame but no documents were open."
                         );
@@ -65,7 +66,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                                 out var isProvisionalObject
                             )
                         )
-                    ) {
+                    )
+                    {
                         throw new InvalidOperationException(
                             "The active window frame did not have an 'IsProvisional' property."
                         );

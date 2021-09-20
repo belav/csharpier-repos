@@ -54,7 +54,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         public override DynamicMetaObject BindInvokeMember(
             InvokeMemberBinder binder,
             DynamicMetaObject[] args
-        ) {
+        )
+        {
             DynamicMetaObject result = TryBindGetMember(binder.Name);
             if (result != null)
             {

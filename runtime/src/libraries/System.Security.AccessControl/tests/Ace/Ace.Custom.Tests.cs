@@ -13,7 +13,8 @@ namespace System.Security.AccessControl.Tests
             int intFlags,
             int opaqueLength,
             int offset
-        ) {
+        )
+        {
             byte[] opaque = new byte[opaqueLength];
             AceType type = (AceType)intType;
             AceFlags flags = (AceFlags)intFlags;
@@ -111,7 +112,8 @@ namespace System.Security.AccessControl.Tests
             GenericAce testAce,
             byte[] expectedBinaryForm,
             int testOffset
-        ) {
+        )
+        {
             byte[] resultBinaryForm = new byte[testAce.BinaryLength + testOffset];
             testAce.GetBinaryForm(resultBinaryForm, testOffset);
             GenericAce_VerifyBinaryForms(expectedBinaryForm, resultBinaryForm, testOffset);
@@ -123,7 +125,8 @@ namespace System.Security.AccessControl.Tests
             GenericAce expectedAce,
             byte[] testBinaryForm,
             int testOffset
-        ) {
+        )
+        {
             GenericAce resultAce = CustomAce.CreateFromBinaryForm(testBinaryForm, testOffset);
             GenericAce_VerifyAces(expectedAce, resultAce);
         }

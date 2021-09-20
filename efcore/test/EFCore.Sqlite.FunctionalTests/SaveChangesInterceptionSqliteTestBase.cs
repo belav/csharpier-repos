@@ -11,9 +11,8 @@ namespace Microsoft.EntityFrameworkCore
 {
     public abstract class SaveChangesInterceptionSqliteTestBase : SaveChangesInterceptionTestBase
     {
-        protected SaveChangesInterceptionSqliteTestBase(
-            InterceptionSqliteFixtureBase fixture
-        ) : base(fixture) { }
+        protected SaveChangesInterceptionSqliteTestBase(InterceptionSqliteFixtureBase fixture)
+            : base(fixture) { }
 
         public abstract class InterceptionSqliteFixtureBase : InterceptionFixtureBase
         {

@@ -47,7 +47,8 @@ internal static partial class Interop
             string key,
             OidGroup group,
             bool fallBackToAllGroups
-        ) {
+        )
+        {
             const OidGroup CRYPT_OID_DISABLE_SEARCH_DS_FLAG = unchecked((OidGroup)0x80000000);
             Debug.Assert(key != null);
 

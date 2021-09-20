@@ -19,7 +19,8 @@ namespace System.ComponentModel
             CultureInfo culture,
             object value,
             Type destinationType
-        ) {
+        )
+        {
             if (destinationType == null)
             {
                 throw new ArgumentNullException(nameof(destinationType));
@@ -45,7 +46,8 @@ namespace System.ComponentModel
             ITypeDescriptorContext context,
             object value,
             Attribute[] attributes
-        ) {
+        )
+        {
             return null;
         }
 

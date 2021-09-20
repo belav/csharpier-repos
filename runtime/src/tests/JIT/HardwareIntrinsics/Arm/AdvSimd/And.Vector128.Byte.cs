@@ -133,7 +133,8 @@ namespace JIT.HardwareIntrinsics.Arm
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfinArray2
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -402,7 +403,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             fixed (Vector128<Byte>* pClsVar1 = &_clsVar1)fixed (
                 Vector128<Byte>* pClsVar2 = &_clsVar2
-            ) {
+            )
+            {
                 var result = AdvSimd.And(
                     AdvSimd.LoadVector128((Byte*)(pClsVar1)),
                     AdvSimd.LoadVector128((Byte*)(pClsVar2))
@@ -559,7 +561,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Vector128<Byte> op2,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Byte[] inArray1 = new Byte[Op1ElementCount];
             Byte[] inArray2 = new Byte[Op2ElementCount];
             Byte[] outArray = new Byte[RetElementCount];
@@ -580,7 +583,8 @@ namespace JIT.HardwareIntrinsics.Arm
             void* op2,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Byte[] inArray1 = new Byte[Op1ElementCount];
             Byte[] inArray2 = new Byte[Op2ElementCount];
             Byte[] outArray = new Byte[RetElementCount];
@@ -609,7 +613,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Byte[] right,
             Byte[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             for (var i = 0; i < RetElementCount; i++)

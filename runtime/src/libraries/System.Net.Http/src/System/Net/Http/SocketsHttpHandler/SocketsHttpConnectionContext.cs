@@ -14,7 +14,8 @@ namespace System.Net.Http
         internal SocketsHttpConnectionContext(
             DnsEndPoint dnsEndPoint,
             HttpRequestMessage initialRequestMessage
-        ) {
+        )
+        {
             _dnsEndPoint = dnsEndPoint;
             _initialRequestMessage = initialRequestMessage;
         }

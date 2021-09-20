@@ -295,7 +295,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
 
         private static KeyRingProvider CreateKeyRingProvider(
             ICacheableKeyRingProvider cacheableKeyRingProvider
-        ) {
+        )
+        {
             var mockEncryptorFactory = new Mock<IAuthenticatedEncryptorFactory>();
             mockEncryptorFactory.Setup(m => m.CreateEncryptorInstance(It.IsAny<IKey>()))
                 .Returns(new Mock<IAuthenticatedEncryptor>().Object);

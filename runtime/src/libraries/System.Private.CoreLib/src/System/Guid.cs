@@ -85,7 +85,8 @@ namespace System
             byte i,
             byte j,
             byte k
-        ) {
+        )
+        {
             _a = (int)a;
             _b = (short)b;
             _c = (short)c;
@@ -138,7 +139,8 @@ namespace System
             byte i,
             byte j,
             byte k
-        ) {
+        )
+        {
             _a = a;
             _b = b;
             _c = c;
@@ -320,7 +322,8 @@ namespace System
             [NotNullWhen(true)] string? input,
             [NotNullWhen(true)] string? format,
             out Guid result
-        ) {
+        )
+        {
             if (input == null)
             {
                 result = default;
@@ -334,7 +337,8 @@ namespace System
             ReadOnlySpan<char> input,
             ReadOnlySpan<char> format,
             out Guid result
-        ) {
+        )
+        {
             if (format.Length != 1)
             {
                 result = default;
@@ -444,7 +448,8 @@ namespace System
                 || guidString[13] != '-'
                 || guidString[18] != '-'
                 || guidString[23] != '-'
-            ) {
+            )
+            {
                 result.SetFailure(overflow: false, nameof(SR.Format_GuidDashes));
                 return false;
             }
@@ -626,7 +631,8 @@ namespace System
             if (
                 !TryParseHex(guidString.Slice(numStart, numLen), out result._a, ref overflow)
                 || overflow
-            ) {
+            )
+            {
                 result.SetFailure(
                     overflow,
                     overflow ? nameof(SR.Overflow_UInt32) : nameof(SR.Format_GuidInvalidChar)
@@ -653,7 +659,8 @@ namespace System
             if (
                 !TryParseHex(guidString.Slice(numStart, numLen), out result._b, ref overflow)
                 || overflow
-            ) {
+            )
+            {
                 result.SetFailure(
                     overflow,
                     overflow ? nameof(SR.Overflow_UInt32) : nameof(SR.Format_GuidInvalidChar)
@@ -680,7 +687,8 @@ namespace System
             if (
                 !TryParseHex(guidString.Slice(numStart, numLen), out result._c, ref overflow)
                 || overflow
-            ) {
+            )
+            {
                 result.SetFailure(
                     overflow,
                     overflow ? nameof(SR.Overflow_UInt32) : nameof(SR.Format_GuidInvalidChar)
@@ -692,7 +700,8 @@ namespace System
             if (
                 (uint)guidString.Length <= (uint)(numStart + numLen + 1)
                 || guidString[numStart + numLen + 1] != '{'
-            ) {
+            )
+            {
                 result.SetFailure(overflow: false, nameof(SR.Format_GuidBrace));
                 return false;
             }
@@ -739,7 +748,8 @@ namespace System
                     !TryParseHex(guidString.Slice(numStart, numLen), out uint byteVal, ref overflow)
                     || overflow
                     || byteVal > byte.MaxValue
-                ) {
+                )
+                {
                     // The previous implementation had some odd inconsistencies, which are carried forward here.
                     // The byte values in the X format are treated as integers with regards to overflow, so
                     // a "byte" value like 0xddd in Guid's ctor results in a FormatException but 0xddddddddd results
@@ -761,7 +771,8 @@ namespace System
             if (
                 numStart + numLen + 1 >= guidString.Length
                 || guidString[numStart + numLen + 1] != '}'
-            ) {
+            )
+            {
                 result.SetFailure(overflow: false, nameof(SR.Format_GuidEndBrace));
                 return false;
             }
@@ -780,7 +791,8 @@ namespace System
             ReadOnlySpan<char> guidString,
             out ushort result,
             ref bool overflow
-        ) {
+        )
+        {
             bool success = TryParseHex(guidString, out uint tmp, ref overflow);
             result = (ushort)tmp;
             return success;
@@ -796,7 +808,8 @@ namespace System
             ReadOnlySpan<char> guidString,
             out uint result,
             ref bool overflow
-        ) {
+        )
+        {
             if ((uint)guidString.Length > 0)
             {
                 if (guidString[0] == '+')
@@ -808,7 +821,8 @@ namespace System
                     (uint)guidString.Length > 1
                     && guidString[0] == '0'
                     && (guidString[1] | 0x20) == 'x'
-                ) {
+                )
+                {
                     guidString = guidString.Slice(2);
                 }
             }
@@ -1179,7 +1193,8 @@ namespace System
             Span<char> destination,
             out int charsWritten,
             ReadOnlySpan<char> format = default
-        ) {
+        )
+        {
             if (format.Length == 0)
             {
                 format = "D";
@@ -1305,7 +1320,8 @@ namespace System
             out int charsWritten,
             ReadOnlySpan<char> format,
             IFormatProvider? provider
-        ) {
+        )
+        {
             // Like with the IFormattable implementation, provider is ignored.
             return TryFormat(destination, out charsWritten, format);
         }

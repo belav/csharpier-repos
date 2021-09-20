@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmClrValue value,
             DkmInspectionContext inspectionContext,
             ReadOnlyCollection<string> formatSpecifiers
-        ) {
+        )
+        {
             var useQuotes = (inspectionContext.EvaluationFlags & DkmEvaluationFlags.NoQuotes) == 0;
             var options = useQuotes
                 ? ObjectDisplayOptions.UseQuotes | ObjectDisplayOptions.EscapeNonPrintableCharacters
@@ -56,7 +57,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmClrType type,
             DkmClrCustomTypeInfo typeInfo,
             ReadOnlyCollection<string> formatSpecifiers
-        ) {
+        )
+        {
             bool unused;
             return GetTypeName(
                 new TypeAndCustomInfo(type, typeInfo),
@@ -68,14 +70,16 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         bool IDkmClrFormatter.HasUnderlyingString(
             DkmClrValue value,
             DkmInspectionContext inspectionContext
-        ) {
+        )
+        {
             return HasUnderlyingString(value, inspectionContext);
         }
 
         string IDkmClrFormatter.GetUnderlyingString(
             DkmClrValue value,
             DkmInspectionContext inspectionContext
-        ) {
+        )
+        {
             return GetUnderlyingString(value, inspectionContext);
         }
 
@@ -84,7 +88,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmClrCustomTypeInfo customTypeInfo,
             DkmInspectionContext inspectionContext,
             ReadOnlyCollection<string> formatSpecifiers
-        ) {
+        )
+        {
             return value.GetValueString(inspectionContext, formatSpecifiers);
         }
 
@@ -92,7 +97,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmClrValue value,
             DkmInspectionContext inspectionContext,
             DkmClrCustomTypeInfo customTypeInfo
-        ) {
+        )
+        {
             return GetEditableValue(value, inspectionContext, customTypeInfo);
         }
 
@@ -100,7 +106,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmInspectionContext inspectionContext,
             DkmClrType clrType,
             DkmClrCustomTypeInfo customTypeInfo
-        ) {
+        )
+        {
             Debug.Assert(inspectionContext != null);
             bool sawInvalidIdentifier;
             var name = GetTypeName(
@@ -114,7 +121,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         string IDkmClrFullNameProvider.GetClrArrayIndexExpression(
             DkmInspectionContext inspectionContext,
             string[] indices
-        ) {
+        )
+        {
             return GetArrayIndexExpression(indices);
         }
 
@@ -124,7 +132,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmClrType type,
             DkmClrCustomTypeInfo customTypeInfo,
             DkmClrCastExpressionOptions castExpressionOptions
-        ) {
+        )
+        {
             bool sawInvalidIdentifier;
             var name = GetTypeName(
                 new TypeAndCustomInfo(type, customTypeInfo),
@@ -143,7 +152,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmClrType type,
             DkmClrCustomTypeInfo customTypeInfo,
             string[] arguments
-        ) {
+        )
+        {
             bool sawInvalidIdentifier;
             var name = GetTypeName(
                 new TypeAndCustomInfo(type, customTypeInfo),
@@ -160,7 +170,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         string IDkmClrFullNameProvider.GetClrValidIdentifier(
             DkmInspectionContext inspectionContext,
             string identifier
-        ) {
+        )
+        {
             var pooledBuilder = PooledStringBuilder.GetInstance();
             var builder = pooledBuilder.Builder;
             bool sawInvalidIdentifier;
@@ -178,14 +189,16 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmInspectionContext inspectionContext,
             string expression,
             out ReadOnlyCollection<string> formatSpecifiers
-        ) {
+        )
+        {
             return TrimAndGetFormatSpecifiers(expression, out formatSpecifiers);
         }
 
         bool IDkmClrFullNameProvider.ClrExpressionMayRequireParentheses(
             DkmInspectionContext inspectionContext,
             string expression
-        ) {
+        )
+        {
             return NeedsParentheses(expression);
         }
 
@@ -197,7 +210,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             string memberName,
             bool memberAccessRequiresExplicitCast,
             bool memberIsStatic
-        ) {
+        )
+        {
             string qualifier;
             if (memberIsStatic)
             {
@@ -239,13 +253,15 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         string IDkmClrFullNameProvider.GetClrExpressionForNull(
             DkmInspectionContext inspectionContext
-        ) {
+        )
+        {
             return _nullString;
         }
 
         string IDkmClrFullNameProvider.GetClrExpressionForThis(
             DkmInspectionContext inspectionContext
-        ) {
+        )
+        {
             return _thisString;
         }
 
@@ -328,7 +344,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         internal static ReadOnlyCollection<string> AddFormatSpecifier(
             ReadOnlyCollection<string> formatSpecifiers,
             string formatSpecifier
-        ) {
+        )
+        {
             if (formatSpecifiers.Contains(formatSpecifier))
             {
                 return formatSpecifiers;
@@ -345,7 +362,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             int length,
             Predicate<char> leading,
             Predicate<char> trailing
-        ) {
+        )
+        {
             int oldLength = expression.Length;
             for (; start < oldLength && leading(expression[start]); start++) { }
             for (; length > start && trailing(expression[length - 1]); length--) { }
@@ -370,7 +388,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         protected string RemoveFormatSpecifiers(
             string expression,
             out ReadOnlyCollection<string> formatSpecifiers
-        ) {
+        )
+        {
             var builder = ArrayBuilder<string>.GetInstance();
             int oldLength = expression.Length;
             int newLength = oldLength;

@@ -23,7 +23,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
             ProjectId projectId,
             IParameterSymbol symbol,
             AbstractExternalCodeMember parent
-        ) {
+        )
+        {
             var element = new ExternalCodeParameter(state, projectId, symbol, parent);
             return (EnvDTE.CodeParameter)ComAggregate.CreateAggregatedObject(element);
         }

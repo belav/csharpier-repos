@@ -61,13 +61,14 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Action<Exception, DiagnosticAnalyzer, Diagnostic>? onAnalyzerException,
             bool concurrentAnalysis,
             bool logAnalyzerExecutionTime
-        ) : this(
-            options,
-            onAnalyzerException,
-            concurrentAnalysis,
-            logAnalyzerExecutionTime,
-            reportSuppressedDiagnostics: false
-        ) { }
+        )
+            : this(
+                options,
+                onAnalyzerException,
+                concurrentAnalysis,
+                logAnalyzerExecutionTime,
+                reportSuppressedDiagnostics: false
+            ) { }
 
         /// <summary>
         /// Creates a new <see cref="CompilationWithAnalyzersOptions"/>.
@@ -83,14 +84,15 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             bool concurrentAnalysis,
             bool logAnalyzerExecutionTime,
             bool reportSuppressedDiagnostics
-        ) : this(
-            options,
-            onAnalyzerException,
-            concurrentAnalysis,
-            logAnalyzerExecutionTime,
-            reportSuppressedDiagnostics,
-            analyzerExceptionFilter: null
-        ) { }
+        )
+            : this(
+                options,
+                onAnalyzerException,
+                concurrentAnalysis,
+                logAnalyzerExecutionTime,
+                reportSuppressedDiagnostics,
+                analyzerExceptionFilter: null
+            ) { }
 
         /// <summary>
         /// Creates a new <see cref="CompilationWithAnalyzersOptions"/>.
@@ -108,7 +110,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             bool logAnalyzerExecutionTime,
             bool reportSuppressedDiagnostics,
             Func<Exception, bool>? analyzerExceptionFilter
-        ) {
+        )
+        {
             _options = options;
             _onAnalyzerException = onAnalyzerException;
             _analyzerExceptionFilter = analyzerExceptionFilter;

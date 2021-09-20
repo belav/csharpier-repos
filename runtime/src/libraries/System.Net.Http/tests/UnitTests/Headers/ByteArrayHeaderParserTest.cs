@@ -79,7 +79,8 @@ namespace System.Net.Http.Tests
             int startIndex,
             byte[] expectedResult,
             int expectedIndex
-        ) {
+        )
+        {
             ByteArrayHeaderParser parser = ByteArrayHeaderParser.Parser;
             object result = 0;
             Assert.True(parser.TryParseValue(input, null, ref startIndex, out result));

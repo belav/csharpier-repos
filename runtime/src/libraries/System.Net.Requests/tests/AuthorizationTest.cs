@@ -37,7 +37,8 @@ namespace System.Net.Tests
         [InlineData("")]
         public void Ctor_ConnectionGroupIdNullOrEmpty_ExpectConnectionGroupIdNull(
             string connectionGroupId
-        ) {
+        )
+        {
             Authorization authorization = new Authorization(null, true, connectionGroupId);
             Assert.Null(authorization.ConnectionGroupId);
         }
@@ -74,7 +75,8 @@ namespace System.Net.Tests
             Authorization authorization,
             bool setValue,
             bool expectedValue
-        ) {
+        )
+        {
             authorization.MutuallyAuthenticated = setValue;
             Assert.Equal(expectedValue, authorization.MutuallyAuthenticated);
         }

@@ -242,7 +242,8 @@ namespace System.Reflection.Emit
         public static AssemblyBuilder DefineDynamicAssembly(
             AssemblyName name,
             AssemblyBuilderAccess access
-        ) {
+        )
+        {
             if (name == null)
                 throw new ArgumentNullException(nameof(name));
 
@@ -253,7 +254,8 @@ namespace System.Reflection.Emit
             AssemblyName name,
             AssemblyBuilderAccess access,
             IEnumerable<CustomAttributeBuilder>? assemblyAttributes
-        ) {
+        )
+        {
             AssemblyBuilder ab = DefineDynamicAssembly(name, access);
             if (assemblyAttributes != null)
             {

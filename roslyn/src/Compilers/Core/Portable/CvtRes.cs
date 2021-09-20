@@ -119,7 +119,8 @@ namespace Microsoft.CodeAnalysis
                 if (
                     pAdditional.pstringType.theString == null
                     && (pAdditional.pstringType.Ordinal == (WORD)RT_DLGINCLUDE)
-                ) {
+                )
+                {
                     // Ignore DLGINCLUDE resources
                     continue;
                 }
@@ -534,7 +535,8 @@ namespace Microsoft.CodeAnalysis
             string? productName = null,
             string? comments = null,
             string? companyName = null
-        ) {
+        )
+        {
             var resWriter = new BinaryWriter(resStream, Encoding.Unicode);
             resStream.Position = (resStream.Position + 3) & ~3;
 
@@ -580,7 +582,8 @@ namespace Microsoft.CodeAnalysis
             Stream resStream,
             Stream manifestStream,
             bool isDll
-        ) {
+        )
+        {
             resStream.Position = (resStream.Position + 3) & ~3;
             const WORD RT_MANIFEST = 24;
 
@@ -637,7 +640,8 @@ namespace Microsoft.CodeAnalysis
                 string? productName,
                 string productVersion,
                 Version assemblyVersion
-            ) {
+            )
+            {
                 _isDll = isDll;
                 _commentsContents = comments;
                 _companyNameContents = companyName;
@@ -796,7 +800,8 @@ namespace Microsoft.CodeAnalysis
             private static void WriteVersionString(
                 KeyValuePair<string, string> keyValuePair,
                 BinaryWriter writer
-            ) {
+            )
+            {
                 RoslynDebug.Assert(keyValuePair.Value != null);
 
                 ushort cbBlock = SizeofVerString(keyValuePair.Key, keyValuePair.Value);

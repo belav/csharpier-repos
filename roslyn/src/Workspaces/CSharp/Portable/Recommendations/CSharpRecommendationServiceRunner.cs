@@ -45,13 +45,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Recommendations
             SyntaxNode lambdaSyntax,
             int ordinalInLambda,
             [NotNullWhen(true)] out ITypeSymbol? explicitLambdaParameterType
-        ) {
+        )
+        {
             if (
                 lambdaSyntax.IsKind<ParenthesizedLambdaExpressionSyntax>(
                     SyntaxKind.ParenthesizedLambdaExpression,
                     out var parenthesizedLambdaSyntax
                 )
-            ) {
+            )
+            {
                 var parameters = parenthesizedLambdaSyntax.ParameterList.Parameters;
                 if (parameters.Count > ordinalInLambda)
                 {
@@ -87,7 +89,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Recommendations
                     _context.Position,
                     _context.LeftToken
                 )
-            ) {
+            )
+            {
                 // GitHub #717: With automatic brace completion active, typing '(i' produces "(i)", which gets parsed as
                 // as cast. The user might be trying to type a parenthesized expression, so even though a cast
                 // is a type-only context, we'll show all symbols anyway.
@@ -172,7 +175,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Recommendations
                 token.Kind() == SyntaxKind.SemicolonToken
                 && token.Parent.IsKind(SyntaxKind.UsingDirective)
                 && position >= token.Span.End
-            ) {
+            )
+            {
                 var compUnit = (CompilationUnitSyntax)syntaxTree.GetRoot(_cancellationToken);
                 if (compUnit.Usings.Count > 0 && compUnit.Usings.Last().GetLastToken() == token)
                 {
@@ -384,12 +388,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Recommendations
             ExpressionSyntax name,
             out SymbolInfo leftHandBinding,
             out ITypeSymbol? container
-        ) {
+        )
+        {
             if (
                 name.IsFoundUnder<LocalFunctionStatementSyntax>(d => d.ReturnType)
                 || name.IsFoundUnder<LocalDeclarationStatementSyntax>(d => d.Declaration.Type)
                 || name.IsFoundUnder<FieldDeclarationSyntax>(d => d.Declaration.Type)
-            ) {
+            )
+            {
                 leftHandBinding = _context.SemanticModel.GetSpeculativeSymbolInfo(
                     name.SpanStart,
                     name,
@@ -440,7 +446,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Recommendations
                     _context.SemanticModel,
                     _cancellationToken
                 )
-            ) {
+            )
+            {
                 var speculativeSymbolInfo = _context.SemanticModel.GetSpeculativeSymbolInfo(
                     expression.SpanStart,
                     expression,
@@ -465,7 +472,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Recommendations
 
         private RecommendedSymbols GetSymbolsOffOfDereferencedExpression(
             ExpressionSyntax originalExpression
-        ) {
+        )
+        {
             var expression = originalExpression.WalkDownParentheses();
             var leftHandBinding = _context.SemanticModel.GetSymbolInfo(
                 expression,
@@ -488,7 +496,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Recommendations
 
         private RecommendedSymbols GetSymbolsOffOfConditionalReceiver(
             ExpressionSyntax originalExpression
-        ) {
+        )
+        {
             // Given ((T?)t)?.|, the '.' will behave as if the expression was actually ((T)t).|. More plainly,
             // a member access off of a conditional receiver of nullable type binds to the unwrapped nullable
             // type. This is not exposed via the binding information for the LHS, so repeat this work here.
@@ -523,7 +532,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Recommendations
             ExpressionSyntax expression,
             SymbolInfo leftHandBinding,
             ITypeSymbol? containerType
-        ) {
+        )
+        {
             var excludeInstance = false;
             var excludeStatic = true;
 
@@ -546,7 +556,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Recommendations
                         is SymbolKind.NamedType
                             or SymbolKind.Namespace
                             or SymbolKind.Alias
-                ) {
+                )
+                {
                     return default;
                 }
 
@@ -554,7 +565,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Recommendations
                 if (
                     symbol.Kind is SymbolKind.Method
                     && originalExpressionKind is SyntaxKind.IdentifierName or SyntaxKind.GenericName
-                ) {
+                )
+                {
                     return default;
                 }
 
@@ -565,7 +577,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Recommendations
                         originalExpression.SpanStart,
                         ev
                     )
-                ) {
+                )
+                {
                     return default;
                 }
 
@@ -661,7 +674,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Recommendations
         private ITypeSymbol? GetContainerForUnnamedSymbols(
             SemanticModel semanticModel,
             ExpressionSyntax originalExpression
-        ) {
+        )
+        {
             return ShouldBeTreatedAsTypeInsteadOfExpression(
                 originalExpression,
                 out _,
@@ -683,7 +697,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Recommendations
             foreach (
                 var member in container.RemoveNullableIfPresent()
                     .GetAccessibleMembersInThisAndBaseTypes<IPropertySymbol>(containingType)
-            ) {
+            )
+            {
                 if (member.IsIndexer)
                     symbols.Add(member);
             }

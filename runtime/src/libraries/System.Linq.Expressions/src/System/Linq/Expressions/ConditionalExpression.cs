@@ -25,7 +25,8 @@ namespace System.Linq.Expressions
             Expression ifTrue,
             Expression ifFalse,
             Type type
-        ) {
+        )
+        {
             if (ifTrue.Type != type || ifFalse.Type != type)
             {
                 return new FullConditionalExpressionWithType(test, ifTrue, ifFalse, type);
@@ -105,11 +106,8 @@ namespace System.Linq.Expressions
     {
         private readonly Expression _false;
 
-        internal FullConditionalExpression(
-            Expression test,
-            Expression ifTrue,
-            Expression ifFalse
-        ) : base(test, ifTrue)
+        internal FullConditionalExpression(Expression test, Expression ifTrue, Expression ifFalse)
+            : base(test, ifTrue)
         {
             _false = ifFalse;
         }
@@ -147,7 +145,8 @@ namespace System.Linq.Expressions
             Expression test,
             Expression ifTrue,
             Expression ifFalse
-        ) {
+        )
+        {
             ExpressionUtils.RequiresCanRead(test, nameof(test));
             ExpressionUtils.RequiresCanRead(ifTrue, nameof(ifTrue));
             ExpressionUtils.RequiresCanRead(ifFalse, nameof(ifFalse));
@@ -182,7 +181,8 @@ namespace System.Linq.Expressions
             Expression ifTrue,
             Expression ifFalse,
             Type type
-        ) {
+        )
+        {
             ExpressionUtils.RequiresCanRead(test, nameof(test));
             ExpressionUtils.RequiresCanRead(ifTrue, nameof(ifTrue));
             ExpressionUtils.RequiresCanRead(ifFalse, nameof(ifFalse));
@@ -198,7 +198,8 @@ namespace System.Linq.Expressions
                 if (
                     !TypeUtils.AreReferenceAssignable(type, ifTrue.Type)
                     || !TypeUtils.AreReferenceAssignable(type, ifFalse.Type)
-                ) {
+                )
+                {
                     throw Error.ArgumentTypesMustMatch();
                 }
             }
@@ -234,7 +235,8 @@ namespace System.Linq.Expressions
             Expression test,
             Expression ifTrue,
             Expression ifFalse
-        ) {
+        )
+        {
             return Condition(test, ifTrue, ifFalse, typeof(void));
         }
     }

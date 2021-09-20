@@ -148,7 +148,8 @@ namespace System.Management
         internal static ManagementObject GetManagementObject(
             IWbemClassObjectFreeThreaded wbemObject,
             ManagementObject mgObj
-        ) {
+        )
+        {
             ManagementObject newObject = new ManagementObject();
             newObject.wbemObject = wbemObject;
 
@@ -176,7 +177,8 @@ namespace System.Management
         internal static ManagementObject GetManagementObject(
             IWbemClassObjectFreeThreaded wbemObject,
             ManagementScope scope
-        ) {
+        )
+        {
             ManagementObject newObject = new ManagementObject();
             newObject.wbemObject = wbemObject;
 
@@ -385,7 +387,8 @@ namespace System.Management
             ManagementScope scope,
             ManagementPath path,
             ObjectGetOptions options
-        ) {
+        )
+        {
             // We may use this to set the scope path
             string nsPath = string.Empty;
 
@@ -479,11 +482,8 @@ namespace System.Management
         /// Dim o As New ManagementObject("root\MyNamespace", "MyClass.Name=""abc""", opt);
         ///    </code>
         /// </example>
-        public ManagementObject(
-            string scopeString,
-            string pathString,
-            ObjectGetOptions options
-        ) : this(new ManagementScope(scopeString), new ManagementPath(pathString), options) { }
+        public ManagementObject(string scopeString, string pathString, ObjectGetOptions options)
+            : this(new ManagementScope(scopeString), new ManagementPath(pathString), options) { }
 
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.ManagementObject'/> class that is serializable.</para>
@@ -614,7 +614,8 @@ namespace System.Management
                     (GetType() == typeof(ManagementObject) && newPath.IsInstance)
                     || (GetType() == typeof(ManagementClass) && newPath.IsClass)
                     || newPath.IsEmpty
-                ) {
+                )
+                {
                     if (null != path)
                         path.IdentifierChanged -= new IdentifierChangedEventHandler(
                             HandleIdentifierChange
@@ -1089,7 +1090,8 @@ namespace System.Management
             string thisRole,
             bool classDefinitionsOnly,
             EnumerationOptions options
-        ) {
+        )
+        {
             if ((null == path) || (path.Path.Length == 0))
                 throw new InvalidOperationException();
 
@@ -1204,7 +1206,8 @@ namespace System.Management
             string thisRole,
             bool classDefinitionsOnly,
             EnumerationOptions options
-        ) {
+        )
+        {
             if ((null == path) || (path.Path.Length == 0))
                 throw new InvalidOperationException();
 
@@ -1329,7 +1332,8 @@ namespace System.Management
             string thisRole,
             bool classDefinitionsOnly,
             EnumerationOptions options
-        ) {
+        )
+        {
             if ((null == path) || (path.Path.Length == 0))
                 throw new InvalidOperationException();
 
@@ -1436,7 +1440,8 @@ namespace System.Management
             string thisRole,
             bool classDefinitionsOnly,
             EnumerationOptions options
-        ) {
+        )
+        {
             if ((null == path) || (path.Path.Length == 0))
                 throw new InvalidOperationException();
             if (null == watcher)
@@ -1964,7 +1969,8 @@ namespace System.Management
             ManagementOperationObserver watcher,
             ManagementPath path,
             PutOptions options
-        ) {
+        )
+        {
             if (null == watcher)
                 throw new ArgumentNullException(nameof(watcher));
             else
@@ -2271,7 +2277,8 @@ namespace System.Management
             ManagementOperationObserver watcher,
             string methodName,
             object[] args
-        ) {
+        )
+        {
             if ((null == path) || (path.Path.Length == 0))
                 throw new InvalidOperationException();
             else if (null == watcher)
@@ -2375,7 +2382,8 @@ namespace System.Management
             string methodName,
             ManagementBaseObject inParameters,
             InvokeMethodOptions options
-        ) {
+        )
+        {
             ManagementBaseObject outParameters = null;
 
             if ((null == path) || (path.Path.Length == 0))
@@ -2446,7 +2454,8 @@ namespace System.Management
             string methodName,
             ManagementBaseObject inParameters,
             InvokeMethodOptions options
-        ) {
+        )
+        {
             if ((null == path) || (path.Path.Length == 0))
                 throw new InvalidOperationException();
             else if (null == watcher)
@@ -2532,7 +2541,8 @@ namespace System.Management
             out ManagementBaseObject inParameters,
             out IWbemClassObjectFreeThreaded inParametersClass,
             out IWbemClassObjectFreeThreaded outParametersClass
-        ) {
+        )
+        {
             inParameters = null;
             inParametersClass = null;
             outParametersClass = null;
@@ -2825,7 +2835,8 @@ namespace System.Management
             object[] args,
             ManagementBaseObject inParams,
             IWbemClassObjectFreeThreaded inParamsClass
-        ) {
+        )
+        {
             int status = (int)ManagementStatus.NoError;
 
             if (null != inParamsClass)
@@ -2917,7 +2928,8 @@ namespace System.Management
             object[] args,
             ManagementBaseObject outParams,
             IWbemClassObjectFreeThreaded outParamsClass
-        ) {
+        )
+        {
             object result = null;
             int maxIndex = 0,
                 minIndex = 0,
@@ -2973,7 +2985,8 @@ namespace System.Management
                                     RETURNVALUE,
                                     StringComparison.OrdinalIgnoreCase
                                 )
-                            ) {
+                            )
+                            {
                                 result = outParams[RETURNVALUE];
                             }
                             else // Shouldn't get here if no args!

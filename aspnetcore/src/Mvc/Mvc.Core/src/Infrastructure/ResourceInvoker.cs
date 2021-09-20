@@ -45,7 +45,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             ActionContext actionContext,
             IFilterMetadata[] filters,
             IList<IValueProviderFactory> valueProviderFactories
-        ) {
+        )
+        {
             _diagnosticListener =
                 diagnosticListener ?? throw new ArgumentNullException(nameof(diagnosticListener));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
@@ -178,7 +179,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             static async ValueTask HandleAsyncReleaseErrors(
                 ValueTask releaseResult,
                 IDisposable? scope
-            ) {
+            )
+            {
                 Exception? releaseException = null;
                 try
                 {
@@ -273,7 +275,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 Scope scope,
                 object? state,
                 bool isCompleted
-            ) {
+            )
+            {
                 await lastTask;
 
                 while (!isCompleted)
@@ -876,7 +879,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                             exceptionContext.Result != null
                             || exceptionContext.Exception == null
                             || exceptionContext.ExceptionHandled
-                        ) {
+                        )
+                        {
                             goto case State.ExceptionHandled;
                         }
 
@@ -1045,7 +1049,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 Scope scope,
                 object? state,
                 bool isCompleted
-            ) {
+            )
+            {
                 try
                 {
                     await lastTask;
@@ -1103,7 +1108,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 Scope scope,
                 object? state,
                 bool isCompleted
-            ) {
+            )
+            {
                 try
                 {
                     await lastTask;
@@ -1164,7 +1170,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 Scope scope,
                 object? state,
                 bool isCompleted
-            ) {
+            )
+            {
                 await lastTask;
 
                 while (!isCompleted)
@@ -1218,7 +1225,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 Scope scope,
                 object? state,
                 bool isCompleted
-            ) {
+            )
+            {
                 await lastTask;
 
                 while (!isCompleted)
@@ -1238,8 +1246,9 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             ref Scope scope,
             ref object? state,
             ref bool isCompleted
-        ) where TFilter : class, IResultFilter
-          where TFilterAsync : class, IAsyncResultFilter
+        )
+            where TFilter : class, IResultFilter
+            where TFilterAsync : class, IAsyncResultFilter
         {
             var resultFilterKind =
                 typeof(TFilter) == typeof(IAlwaysRunResultFilter)
@@ -1534,7 +1543,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 Scope scope,
                 object? state,
                 bool isCompleted
-            ) {
+            )
+            {
                 try
                 {
                     await lastTask;

@@ -364,7 +364,8 @@ namespace Newtonsoft.Json.Tests.Converters
             Type objectType,
             object existingValue,
             JsonSerializer serializer
-        ) {
+        )
+        {
             return new DateTime(Convert.ToInt64(reader.Value), DateTimeKind.Utc);
         }
 

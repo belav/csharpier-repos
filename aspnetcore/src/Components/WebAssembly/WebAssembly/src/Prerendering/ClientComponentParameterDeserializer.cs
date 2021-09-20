@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.Components
 
         public WebAssemblyComponentParameterDeserializer(
             ComponentParametersTypeCache parametersCache
-        ) {
+        )
+        {
             _parametersCache = parametersCache;
         }
 
@@ -24,7 +25,8 @@ namespace Microsoft.AspNetCore.Components
         public ParameterView DeserializeParameters(
             IList<ComponentParameter> parametersDefinitions,
             IList<object> parameterValues
-        ) {
+        )
+        {
             var parametersDictionary = new Dictionary<string, object?>(
                 StringComparer.OrdinalIgnoreCase
             );

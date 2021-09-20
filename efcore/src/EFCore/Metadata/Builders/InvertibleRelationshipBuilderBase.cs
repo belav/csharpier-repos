@@ -32,7 +32,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             IMutableEntityType declaringEntityType,
             IMutableEntityType relatedEntityType,
             IMutableForeignKey foreignKey
-        ) {
+        )
+        {
             Builder = ((ForeignKey)foreignKey).Builder;
 
             DeclaringEntityType = declaringEntityType;
@@ -53,7 +54,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             bool foreignKeySet = false,
             bool principalKeySet = false,
             bool requiredSet = false
-        ) {
+        )
+        {
             Builder = builder;
 
             if (inverted)
@@ -61,7 +63,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
                 if (
                     oldBuilder._foreignKeyProperties != null
                     || oldBuilder._principalKeyProperties != null
-                ) {
+                )
+                {
                     throw new InvalidOperationException(CoreStrings.RelationshipCannotBeInverted);
                 }
             }

@@ -180,7 +180,8 @@ namespace System.Security.Cryptography.DeriveBytesTests
                     saltIn,
                     DefaultIterationCount
                 )
-            ) {
+            )
+            {
                 byte[] saltOut = deriveBytes.Salt;
 
                 Assert.NotSame(saltIn, saltOut);
@@ -226,7 +227,8 @@ namespace System.Security.Cryptography.DeriveBytesTests
                     s_testSalt,
                     DefaultIterationCount
                 )
-            ) {
+            )
+            {
                 first = deriveBytes.Salt;
                 second = deriveBytes.Salt;
             }
@@ -577,7 +579,8 @@ namespace System.Security.Cryptography.DeriveBytesTests
                     DefaultIterationCount,
                     hashAlgorithm
                 )
-            ) {
+            )
+            {
                 Assert.Equal(hashAlgorithm, pbkdf2.HashAlgorithm);
             }
         }
@@ -605,7 +608,8 @@ namespace System.Security.Cryptography.DeriveBytesTests
 
             using (
                 Rfc2898DeriveBytes deriveBytes = new Rfc2898DeriveBytes(TestPassword, s_testSalt)
-            ) {
+            )
+            {
                 // Set the internal block counter to be on the last possible block. This should succeed.
                 blockField.SetValue(deriveBytes, uint.MaxValue - 1);
                 deriveBytes.GetBytes(20); // Extract 20 bytes, a full block.
@@ -627,7 +631,8 @@ namespace System.Security.Cryptography.DeriveBytesTests
                     s_testSaltB,
                     DefaultIterationCount
                 )
-            ) {
+            )
+            {
                 derived = deriveBytes.GetBytes(64);
             }
 
@@ -637,7 +642,8 @@ namespace System.Security.Cryptography.DeriveBytesTests
                     s_testSaltB,
                     DefaultIterationCount
                 )
-            ) {
+            )
+            {
                 passwordBytes[0] ^= 0xFF; // Flipping a byte after the object is constructed should not be observed.
 
                 byte[] actual = deriveBytes.GetBytes(64);
@@ -657,7 +663,8 @@ namespace System.Security.Cryptography.DeriveBytesTests
                     s_testSaltB,
                     DefaultIterationCount
                 )
-            ) {
+            )
+            {
                 Assert.Equal(passwordBytesOriginal, passwordBytes);
             }
         }
@@ -667,7 +674,8 @@ namespace System.Security.Cryptography.DeriveBytesTests
             byte[] salt,
             int iterationCount,
             byte[] expected
-        ) {
+        )
+        {
             byte[] output;
 
             using (var deriveBytes = new Rfc2898DeriveBytes(password, salt, iterationCount))

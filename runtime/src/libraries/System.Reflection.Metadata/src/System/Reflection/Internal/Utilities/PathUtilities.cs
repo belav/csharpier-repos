@@ -50,7 +50,8 @@ namespace System.Reflection.Metadata
                     ch == DirectorySeparatorChar
                     || ch == AltDirectorySeparatorChar
                     || ch == VolumeSeparatorChar
-                ) {
+                )
+                {
                     return i + 1;
                 }
             }
@@ -80,7 +81,8 @@ namespace System.Reflection.Metadata
                 c == DirectorySeparatorChar
                 || c == AltDirectorySeparatorChar
                 || c == VolumeSeparatorChar
-            ) {
+            )
+            {
                 return root + relativePath;
             }
 

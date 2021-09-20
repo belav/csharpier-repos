@@ -216,7 +216,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
         private ControllerSaveTempDataPropertyFilter CreateControllerSaveTempDataPropertyFilter(
             HttpContext httpContext,
             TempDataDictionary tempData
-        ) {
+        )
+        {
             var factory = new Mock<ITempDataDictionaryFactory>();
             factory.Setup(f => f.GetTempData(httpContext)).Returns(tempData);
 

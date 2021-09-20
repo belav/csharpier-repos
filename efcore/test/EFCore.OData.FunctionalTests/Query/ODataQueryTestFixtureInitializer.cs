@@ -62,7 +62,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                             {
                                                 foreach (
                                                     var customRoutingConvention in customRoutingConventions
-                                                ) {
+                                                )
+                                                {
                                                     conventions.Insert(0, customRoutingConvention);
                                                 }
                                             }

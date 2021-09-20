@@ -1173,7 +1173,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             string methodName,
             string expectedHttpMethod,
             string expectedHandler
-        ) {
+        )
+        {
             // Arrange
 
             // Act
@@ -1304,7 +1305,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             public Task OnPageHandlerExecutionAsync(
                 PageHandlerExecutingContext context,
                 PageHandlerExecutionDelegate next
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 

@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             IContractResolver contractResolver,
             object value,
             out string errorMessage
-        ) {
+        )
+        {
             if (!TryGetJsonProperty(target, contractResolver, segment, out var jsonProperty))
             {
                 errorMessage = Resources.FormatTargetLocationAtPathSegmentNotFound(segment);
@@ -53,7 +54,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             IContractResolver contractResolver,
             out object value,
             out string errorMessage
-        ) {
+        )
+        {
             if (!TryGetJsonProperty(target, contractResolver, segment, out var jsonProperty))
             {
                 errorMessage = Resources.FormatTargetLocationAtPathSegmentNotFound(segment);
@@ -78,7 +80,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             string segment,
             IContractResolver contractResolver,
             out string errorMessage
-        ) {
+        )
+        {
             if (!TryGetJsonProperty(target, contractResolver, segment, out var jsonProperty))
             {
                 errorMessage = Resources.FormatTargetLocationAtPathSegmentNotFound(segment);
@@ -97,7 +100,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             if (
                 jsonProperty.PropertyType.IsValueType
                 && Nullable.GetUnderlyingType(jsonProperty.PropertyType) == null
-            ) {
+            )
+            {
                 value = Activator.CreateInstance(jsonProperty.PropertyType);
             }
 
@@ -113,7 +117,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             IContractResolver contractResolver,
             object value,
             out string errorMessage
-        ) {
+        )
+        {
             if (!TryGetJsonProperty(target, contractResolver, segment, out var jsonProperty))
             {
                 errorMessage = Resources.FormatTargetLocationAtPathSegmentNotFound(segment);
@@ -144,7 +149,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             IContractResolver contractResolver,
             object value,
             out string errorMessage
-        ) {
+        )
+        {
             if (!TryGetJsonProperty(target, contractResolver, segment, out var jsonProperty))
             {
                 errorMessage = Resources.FormatTargetLocationAtPathSegmentNotFound(segment);
@@ -169,7 +175,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
                     JsonConvert.SerializeObject(currentValue),
                     JsonConvert.SerializeObject(convertedValue)
                 )
-            ) {
+            )
+            {
                 errorMessage = Resources.FormatValueNotEqualToTestValue(
                     currentValue,
                     value,
@@ -188,7 +195,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             IContractResolver contractResolver,
             out object value,
             out string errorMessage
-        ) {
+        )
+        {
             if (target == null)
             {
                 value = null;
@@ -213,11 +221,13 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             IContractResolver contractResolver,
             string segment,
             out JsonProperty jsonProperty
-        ) {
+        )
+        {
             if (
                 contractResolver.ResolveContract(target.GetType())
                 is JsonObjectContract jsonObjectContract
-            ) {
+            )
+            {
                 var pocoProperty = jsonObjectContract.Properties.FirstOrDefault(
                     p => string.Equals(p.PropertyName, segment, StringComparison.OrdinalIgnoreCase)
                 );
@@ -237,7 +247,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             object value,
             Type propertyType,
             out object convertedValue
-        ) {
+        )
+        {
             var conversionResult = ConversionResultProvider.ConvertTo(value, propertyType);
             if (!conversionResult.CanBeConverted)
             {

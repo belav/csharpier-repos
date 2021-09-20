@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.Routing.Tests
             int min,
             string parameterValue,
             bool expected
-        ) {
+        )
+        {
             // Arrange
             var constraint = new MinLengthRouteConstraint(min);
 

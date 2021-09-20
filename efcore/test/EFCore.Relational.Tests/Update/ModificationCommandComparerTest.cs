@@ -332,7 +332,8 @@ namespace Microsoft.EntityFrameworkCore.Update
         private void Compare_returns_0_only_for_entries_that_have_same_key_values_generic<T>(
             T value1,
             T value2
-        ) {
+        )
+        {
             var modelBuilder = new ModelBuilder(TestRelationalConventionSetBuilder.Build());
             var model = modelBuilder.Model;
             var entityType = model.AddEntityType(typeof(object));

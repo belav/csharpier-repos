@@ -131,7 +131,8 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow
         protected override async Task InitializeAsync(
             CancellationToken cancellationToken,
             IProgress<ServiceProgressData> progress
-        ) {
+        )
+        {
             await base.InitializeAsync(cancellationToken, progress).ConfigureAwait(true);
 
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
@@ -197,7 +198,8 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow
             Type toolWindowType,
             int id,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return Task.FromResult(new object());
         }
     }

@@ -1393,7 +1393,8 @@ System.Collections.Generic.List`1[System.Int32]
             string conditionalExpression,
             string? expectedType,
             params DiagnosticDescription[] expectedDiagnostics
-        ) {
+        )
+        {
             TestConditional(conditionalExpression, expectedType, null, expectedDiagnostics);
         }
 
@@ -1402,7 +1403,8 @@ System.Collections.Generic.List`1[System.Int32]
             string? expectedType,
             CSharpParseOptions? parseOptions,
             params DiagnosticDescription[] expectedDiagnostics
-        ) {
+        )
+        {
             if (parseOptions is null)
             {
                 TestConditionalCore(
@@ -1436,7 +1438,8 @@ System.Collections.Generic.List`1[System.Int32]
             string? expectedType,
             CSharpParseOptions parseOptions,
             params DiagnosticDescription[] expectedDiagnostics
-        ) {
+        )
+        {
             string source =
                 $@"
 class C

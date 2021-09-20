@@ -37,7 +37,8 @@ namespace System.Net
             int count,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             if (NetEventSource.Log.IsEnabled())
                 NetEventSource.Info(
                     this,
@@ -75,7 +76,8 @@ namespace System.Net
             int count,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             throw new InvalidOperationException(SR.net_readonlystream);
         }
 

@@ -27,7 +27,8 @@ namespace System.IO.Pipes
             if (
                 inheritability < HandleInheritability.None
                 || inheritability > HandleInheritability.Inheritable
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(
                     nameof(inheritability),
                     SR.ArgumentOutOfRange_HandleInheritabilityNoneOrInheritable
@@ -41,7 +42,8 @@ namespace System.IO.Pipes
             PipeDirection direction,
             HandleInheritability inheritability,
             int bufferSize
-        ) {
+        )
+        {
             Create(direction, inheritability, bufferSize, null);
         }
 
@@ -50,7 +52,8 @@ namespace System.IO.Pipes
             HandleInheritability inheritability,
             int bufferSize,
             PipeSecurity? pipeSecurity
-        ) {
+        )
+        {
             Debug.Assert(
                 direction != PipeDirection.InOut,
                 "Anonymous pipe direction shouldn't be InOut"

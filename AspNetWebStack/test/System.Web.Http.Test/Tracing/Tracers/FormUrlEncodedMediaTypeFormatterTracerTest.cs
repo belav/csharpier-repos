@@ -15,7 +15,8 @@ namespace System.Web.Http.Tracing.Tracers
             FormUrlEncodedMediaTypeFormatter formatter,
             HttpRequestMessage request,
             ITraceWriter traceWriter
-        ) {
+        )
+        {
             return new FormUrlEncodedMediaTypeFormatterTracer(formatter, traceWriter, request);
         }
 

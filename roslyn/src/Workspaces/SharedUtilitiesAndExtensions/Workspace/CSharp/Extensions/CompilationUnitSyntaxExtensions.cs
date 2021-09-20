@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this SyntaxNode contextNode,
             bool allowInHiddenRegions,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var usingDirectiveAncestor = contextNode.GetAncestor<UsingDirectiveSyntax>();
             if (usingDirectiveAncestor?.Parent is CompilationUnitSyntax)
             {
@@ -62,7 +63,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         private static TextSpan GetUsingsSpan(
             CompilationUnitSyntax root,
             NamespaceDeclarationSyntax? namespaceDeclaration
-        ) {
+        )
+        {
             if (namespaceDeclaration != null)
             {
                 var usings = namespaceDeclaration.Usings;
@@ -96,7 +98,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             SyntaxNode contextNode,
             bool placeSystemNamespaceFirst,
             params SyntaxAnnotation[] annotations
-        ) {
+        )
+        {
             return root.AddUsingDirectives(
                 new[] { usingDirective },
                 contextNode,
@@ -111,7 +114,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             SyntaxNode contextNode,
             bool placeSystemNamespaceFirst,
             params SyntaxAnnotation[] annotations
-        ) {
+        )
+        {
             if (!usingDirectives.Any())
             {
                 return root;
@@ -144,7 +148,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             IList<UsingDirectiveSyntax> usingDirectives,
             bool placeSystemNamespaceFirst,
             params SyntaxAnnotation[] annotations
-        ) {
+        )
+        {
             if (usingDirectives.Count == 0)
             {
                 return root;
@@ -173,7 +178,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         private static List<UsingDirectiveSyntax> AddUsingDirectives(
             CompilationUnitSyntax root,
             IList<UsingDirectiveSyntax> usingDirectives
-        ) {
+        )
+        {
             // We need to try and not place the using inside of a directive if possible.
             var usings = new List<UsingDirectiveSyntax>();
             var endOfList = root.Usings.Count - 1;
@@ -184,14 +190,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 if (
                     root.Usings[i].GetLeadingTrivia()
                         .Any(trivia => trivia.IsKind(SyntaxKind.IfDirectiveTrivia))
-                ) {
+                )
+                {
                     startOfLastDirective = i;
                 }
 
                 if (
                     root.Usings[i].GetLeadingTrivia()
                         .Any(trivia => trivia.IsKind(SyntaxKind.EndIfDirectiveTrivia))
-                ) {
+                )
+                {
                     endOfLastDirective = i;
                 }
             }
@@ -206,7 +214,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 )
                 || (startOfLastDirective == -1 && endOfLastDirective == -1)
                 || (endOfLastDirective != endOfList && endOfLastDirective != -1)
-            ) {
+            )
+            {
                 usings.AddRange(usingDirectives);
             }
             else

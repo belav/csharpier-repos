@@ -46,7 +46,8 @@ namespace ServerComparison.FunctionalTests
                         deploymentParameters,
                         loggerFactory
                     )
-                ) {
+                )
+                {
                     var deploymentResult = await deployer.DeployAsync();
                     var httpClient = deploymentResult.HttpClient;
 

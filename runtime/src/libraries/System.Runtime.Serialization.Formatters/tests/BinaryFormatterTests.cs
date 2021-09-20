@@ -85,7 +85,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             FormatterAssemblyStyle assemblyFormat,
             TypeFilterLevel filterLevel,
             FormatterTypeStyle typeFormat
-        ) {
+        )
+        {
             object clone = BinaryFormatterHelpers.Clone(
                 obj,
                 null,
@@ -121,7 +122,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             object obj,
             TypeSerializableValue[] blobs,
             bool isEqualityComparer
-        ) {
+        )
+        {
             if (obj == null)
             {
                 throw new ArgumentNullException(
@@ -142,7 +144,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             if (
                 obj is ISerializable customSerializableObj
                 && HasObjectTypeIntegrity(customSerializableObj)
-            ) {
+            )
+            {
                 CheckObjectTypeIntegrity(customSerializableObj);
             }
 
@@ -156,7 +159,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
                     CultureInfo.CurrentUICulture.TwoLetterISOLanguageName != "en"
                     || CultureInfo.CurrentUICulture.Name.Length != 0
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -167,7 +171,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             if (
                 !PlatformDetection.IsNetFramework
                 && (obj is ReflectionTypeLoadException || obj is LicenseException)
-            ) {
+            )
+            {
                 var tmpList = new List<TypeSerializableValue>(blobs);
                 tmpList.RemoveAt(1);
 
@@ -353,7 +358,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             FormatterAssemblyStyle assemblyFormat,
             TypeFilterLevel filterLevel,
             FormatterTypeStyle typeFormat
-        ) {
+        )
+        {
             var f = new BinaryFormatter()
             {
                 AssemblyFormat = assemblyFormat,
@@ -525,7 +531,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
         public void MissingField_FailsWithAppropriateStyle(
             FormatterAssemblyStyle style,
             bool exceptionExpected
-        ) {
+        )
+        {
             var f = new BinaryFormatter();
             var s = new MemoryStream();
             f.Serialize(s, new Version1ClassWithoutField());
@@ -721,7 +728,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
                 || obj is Collections.Specialized.HybridDictionary
                 || obj is Color
                 || obj.GetType().FullName == "System.Collections.SortedList+SyncSortedList"
-            ) {
+            )
+            {
                 return;
             }
 
@@ -825,7 +833,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
         private static (int blobs, int foundBlobs, int updatedBlobs) UpdateCoreTypeBlobs(
             string testDataFilePath,
             string[] blobs
-        ) {
+        )
+        {
             // Replace existing test data blobs with updated ones
             string[] testDataLines = File.ReadAllLines(testDataFilePath);
             List<string> updatedTestDataLines = new List<string>();

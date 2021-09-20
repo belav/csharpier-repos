@@ -175,7 +175,8 @@ namespace System.Reflection.Context
 
             public override ExceptionHandlingClause ProjectExceptionHandlingClause(
                 ExceptionHandlingClause value
-            ) {
+            )
+            {
                 if (value == null)
                     return null;
 
@@ -186,7 +187,8 @@ namespace System.Reflection.Context
 
             public override CustomAttributeData ProjectCustomAttributeData(
                 CustomAttributeData value
-            ) {
+            )
+            {
                 if (value == null)
                     return null;
 
@@ -253,7 +255,8 @@ namespace System.Reflection.Context
 
             public override CustomAttributeTypedArgument ProjectTypedArgument(
                 CustomAttributeTypedArgument value
-            ) {
+            )
+            {
                 Type argumentType = ProjectType(value.ArgumentType);
 
                 return new CustomAttributeTypedArgument(argumentType, value.Value);
@@ -261,7 +264,8 @@ namespace System.Reflection.Context
 
             public override CustomAttributeNamedArgument ProjectNamedArgument(
                 CustomAttributeNamedArgument value
-            ) {
+            )
+            {
                 MemberInfo member = ProjectMember(value.MemberInfo);
                 CustomAttributeTypedArgument typedArgument = ProjectTypedArgument(value.TypedValue);
 

@@ -25,13 +25,15 @@ namespace Microsoft.AspNetCore.Testing
             TestMethodDisplayOptions defaultMethodDisplayOptions,
             ITestMethod testMethod,
             object[] testMethodArguments = null
-        ) : base(
-            diagnosticMessageSink,
-            defaultMethodDisplay,
-            defaultMethodDisplayOptions,
-            testMethod,
-            testMethodArguments
-        ) {
+        )
+            : base(
+                diagnosticMessageSink,
+                defaultMethodDisplay,
+                defaultMethodDisplayOptions,
+                testMethod,
+                testMethodArguments
+            )
+        {
             _skipReason = skipReason;
         }
 

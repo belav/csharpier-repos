@@ -93,7 +93,8 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
                 if (
                     string.IsNullOrEmpty(MachineAccountName)
                     && !string.IsNullOrEmpty(MachineAccountPassword)
-                ) {
+                )
+                {
                     throw new ArgumentException(
                         $"{nameof(MachineAccountPassword)} should only be specified when {nameof(MachineAccountName)} is configured."
                     );

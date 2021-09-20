@@ -26,7 +26,8 @@ namespace System.Reflection.Emit
             CallingConventions callingConvention,
             Type? returnType,
             Type[]? parameterTypes
-        ) {
+        )
+        {
             // This is a kind of MethodInfo to represent methods for array type of unbaked type
 
             // Another way to look at this class is as a glorified MethodToken wrapper. At the time of this comment
@@ -128,7 +129,8 @@ namespace System.Reflection.Emit
             Binder? binder,
             object?[]? parameters,
             CultureInfo? culture
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.NotSupported_SymbolMethod);
         }
 

@@ -36,7 +36,8 @@ namespace BasicEventSourceTests
         public void EventSourceSynchronousEnable(
             EventSource eventSource,
             FilteringOptions options = null
-        ) {
+        )
+        {
             EventSourceCommand(eventSource.Name, EventCommand.Enable, options);
             WaitForEnable(eventSource);
         }
@@ -231,7 +232,8 @@ namespace BasicEventSourceTests
             string eventSourceName,
             EventCommand command,
             FilteringOptions options = null
-        ) {
+        )
+        {
             EventTestHarness.LogWriteLine(
                 "Sending command {0} to EventSource {1} Options {2}",
                 eventSourceName,

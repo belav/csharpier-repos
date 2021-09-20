@@ -395,7 +395,8 @@ namespace System.Xml.Xsl.IlGen
             if (
                 ((((local0).XmlType)!.IsSingleton) && (!(IsGlobalVariable(local0))))
                 && (this[XmlILOptimization.NormalizeSingletonLet])
-            ) {
+            )
+            {
                 // PATTERN: [NormalizeSingletonLet] $iter:(Let $bind:*) ^ (Single? (TypeOf $iter)) ^ ~((GlobalVariable? $iter)) => { ... }
                 if (AllowReplace(XmlILOptimization.NormalizeSingletonLet, local0))
                 {
@@ -846,7 +847,8 @@ namespace System.Xml.Xsl.IlGen
                         !OptimizerPatterns.Read(local1)
                             .MatchesPattern(OptimizerPatternName.MaybeSideEffects)
                     )
-                ) {
+                )
+                {
                     // PATTERN: [EliminateLength] (Length $x:* ^ (Single? (TypeOf $x)) ^ (NoSideEffects? $x)) => (LiteralInt32 1)
                     if (AllowReplace(XmlILOptimization.EliminateLength, local0))
                     {
@@ -866,7 +868,8 @@ namespace System.Xml.Xsl.IlGen
                         (IsStepPattern(local1, QilNodeType.XPathPreceding))
                         || (IsStepPattern(local1, QilNodeType.PrecedingSibling))
                     )
-                ) {
+                )
+                {
                     // PATTERN: [IntroducePrecedingDod] (Length $expr:* ^ ~((DocOrderDistinct? $expr)) ^ (StepPattern? $expr {XPathPreceding}) | (StepPattern? $expr {PrecedingSibling})) => (Length (DocOrderDistinct $expr))
                     if (AllowReplace(XmlILOptimization.IntroducePrecedingDod, local0))
                     {
@@ -1042,7 +1045,8 @@ namespace System.Xml.Xsl.IlGen
                 if (
                     (IsStepPattern(local1, QilNodeType.Content))
                     || (IsStepPattern(local1, QilNodeType.Union))
-                ) {
+                )
+                {
                     if (
                         (
                             (IsStepPattern(local2, QilNodeType.Content))
@@ -1058,7 +1062,8 @@ namespace System.Xml.Xsl.IlGen
                                     .GetArgument(OptimizerPatternArgument.StepInput)
                             )
                         )
-                    ) {
+                    )
+                    {
                         // PATTERN: [AnnotateUnionContent] $outer:(Union $left:* ^ (StepPattern? $left {Content}) | (StepPattern? $left {Union}) $right:* ^ (StepPattern? $right {Content}) | (StepPattern? $right {Union}) ^ (Equal? (Argument $left {StepInput}) (Argument $right {StepInput}))) => (AddStepPattern $outer (Argument $left {StepInput})) ^ (AddPattern $outer {SameDepth}) ^ { }
                         if (AllowReplace(XmlILOptimization.AnnotateUnionContent, local0))
                         {
@@ -1567,7 +1572,8 @@ namespace System.Xml.Xsl.IlGen
                                 (QilLiteral)local2
                             )
                         )
-                    ) {
+                    )
+                    {
                         // PATTERN: [EliminateAdd] (Add $x:* ^ (Literal? $x) $y:* ^ (Literal? $y) ^ (CanFoldAdd? $x $y)) => (Add! $x $y)
                         if (AllowReplace(XmlILOptimization.EliminateAdd, local0))
                         {
@@ -1644,7 +1650,8 @@ namespace System.Xml.Xsl.IlGen
                                 (QilLiteral)local2
                             )
                         )
-                    ) {
+                    )
+                    {
                         // PATTERN: [EliminateSubtract] (Subtract $x:* ^ (Literal? $x) $y:* ^ (Literal? $y) ^ (CanFoldSub? $x $y)) => (Sub! $x $y)
                         if (AllowReplace(XmlILOptimization.EliminateSubtract, local0))
                         {
@@ -1703,7 +1710,8 @@ namespace System.Xml.Xsl.IlGen
                                 (QilLiteral)local2
                             )
                         )
-                    ) {
+                    )
+                    {
                         // PATTERN: [EliminateMultiply] (Multiply $x:* ^ (Literal? $x) $y:* ^ (Literal? $y) ^ (CanFoldMul? $x $y)) => (Mul! $x $y)
                         if (AllowReplace(XmlILOptimization.EliminateMultiply, local0))
                         {
@@ -1780,7 +1788,8 @@ namespace System.Xml.Xsl.IlGen
                                 (QilLiteral)local2
                             )
                         )
-                    ) {
+                    )
+                    {
                         // PATTERN: [EliminateDivide] (Divide $x:* ^ (Literal? $x) $y:* ^ (Literal? $y) ^ (CanFoldDiv? $x $y)) => (Div! $x $y)
                         if (AllowReplace(XmlILOptimization.EliminateDivide, local0))
                         {
@@ -1839,7 +1848,8 @@ namespace System.Xml.Xsl.IlGen
                                 (QilLiteral)local2
                             )
                         )
-                    ) {
+                    )
+                    {
                         // PATTERN: [EliminateModulo] (Modulo $x:* ^ (Literal? $x) $y:* ^ (Literal? $y) ^ (CanFoldMod? $x $y)) => (Mod! $x $y)
                         if (AllowReplace(XmlILOptimization.EliminateModulo, local0))
                         {
@@ -1924,7 +1934,8 @@ namespace System.Xml.Xsl.IlGen
             if (
                 (((local2).XmlType)!.IsSingleton)
                 && (this[XmlILOptimization.EliminateStrConcatSingle])
-            ) {
+            )
+            {
                 // PATTERN: [EliminateStrConcatSingle] (StrConcat * $x:*) ^ (Single? (TypeOf $x)) => (Nop $x)
                 if (AllowReplace(XmlILOptimization.EliminateStrConcatSingle, local0))
                 {
@@ -2074,7 +2085,8 @@ namespace System.Xml.Xsl.IlGen
                             if (
                                 (IsLiteral((local2)))
                                 && (CanFoldXsltConvertNonLossy(local2, (local3).XmlType!))
-                            ) {
+                            )
+                            {
                                 // PATTERN: [NormalizeXsltConvertNe] (Ne (XsltConvert $expr:* (LiteralType $typ:*)) ^ (PrimitiveNumeric? (TypeOf $expr)) ^ (PrimitiveNumeric? $typ) $lit:* ^ (Literal? $lit) ^ (CanFoldXsltConvertNonLossy? $lit (TypeOf $expr))) => (Ne $expr (FoldXsltConvert $lit (TypeOf $expr)))
                                 if (AllowReplace(XmlILOptimization.NormalizeXsltConvertNe, local0))
                                 {
@@ -2237,7 +2249,8 @@ namespace System.Xml.Xsl.IlGen
                             if (
                                 (IsLiteral((local2)))
                                 && (CanFoldXsltConvertNonLossy(local2, (local3).XmlType!))
-                            ) {
+                            )
+                            {
                                 // PATTERN: [NormalizeXsltConvertEq] (Eq (XsltConvert $expr:* (LiteralType $typ:*)) ^ (PrimitiveNumeric? (TypeOf $expr)) ^ (PrimitiveNumeric? $typ) $lit:* ^ (Literal? $lit) ^ (CanFoldXsltConvertNonLossy? $lit (TypeOf $expr))) => (Eq $expr (FoldXsltConvert $lit (TypeOf $expr)))
                                 if (AllowReplace(XmlILOptimization.NormalizeXsltConvertEq, local0))
                                 {
@@ -2271,7 +2284,8 @@ namespace System.Xml.Xsl.IlGen
                                     (QilLiteral)local4
                                 )
                             )
-                        ) {
+                        )
+                        {
                             // PATTERN: [NormalizeAddEq] (Eq (Add $exprAdd:* $litAdd:*) ^ (Literal? $litAdd) $litEq:* ^ (Literal? $litEq) ^ (CanFoldSub? $litEq $litAdd)) => (Eq $exprAdd (Sub! $litEq $litAdd))
                             if (AllowReplace(XmlILOptimization.NormalizeAddEq, local0))
                             {
@@ -2350,7 +2364,8 @@ namespace System.Xml.Xsl.IlGen
                                                         XmlILOptimization.NormalizeIdEq,
                                                         local0
                                                     )
-                                                ) {
+                                                )
+                                                {
                                                     QilNode local10 = VisitFor(f.For(local7));
                                                     return Replace(
                                                         XmlILOptimization.NormalizeIdEq,
@@ -2415,7 +2430,8 @@ namespace System.Xml.Xsl.IlGen
                                                         XmlILOptimization.NormalizeIdEq,
                                                         local0
                                                     )
-                                                ) {
+                                                )
+                                                {
                                                     QilNode local10 = VisitFor(f.For(local6));
                                                     return Replace(
                                                         XmlILOptimization.NormalizeIdEq,
@@ -2633,7 +2649,8 @@ namespace System.Xml.Xsl.IlGen
                             if (
                                 (IsLiteral((local2)))
                                 && (CanFoldXsltConvertNonLossy(local2, (local3).XmlType!))
-                            ) {
+                            )
+                            {
                                 // PATTERN: [NormalizeXsltConvertGt] (Gt (XsltConvert $expr:* (LiteralType $typ:*)) ^ (PrimitiveNumeric? (TypeOf $expr)) ^ (PrimitiveNumeric? $typ) $lit:* ^ (Literal? $lit) ^ (CanFoldXsltConvertNonLossy? $lit (TypeOf $expr))) => (Gt $expr (FoldXsltConvert $lit (TypeOf $expr)))
                                 if (AllowReplace(XmlILOptimization.NormalizeXsltConvertGt, local0))
                                 {
@@ -2770,7 +2787,8 @@ namespace System.Xml.Xsl.IlGen
                             if (
                                 (IsLiteral((local2)))
                                 && (CanFoldXsltConvertNonLossy(local2, (local3).XmlType!))
-                            ) {
+                            )
+                            {
                                 // PATTERN: [NormalizeXsltConvertGe] (Ge (XsltConvert $expr:* (LiteralType $typ:*)) ^ (PrimitiveNumeric? (TypeOf $expr)) ^ (PrimitiveNumeric? $typ) $lit:* ^ (Literal? $lit) ^ (CanFoldXsltConvertNonLossy? $lit (TypeOf $expr))) => (Ge $expr (FoldXsltConvert $lit (TypeOf $expr)))
                                 if (AllowReplace(XmlILOptimization.NormalizeXsltConvertGe, local0))
                                 {
@@ -2884,7 +2902,8 @@ namespace System.Xml.Xsl.IlGen
                             if (
                                 (IsLiteral((local2)))
                                 && (CanFoldXsltConvertNonLossy(local2, (local3).XmlType!))
-                            ) {
+                            )
+                            {
                                 // PATTERN: [NormalizeXsltConvertLt] (Lt (XsltConvert $expr:* (LiteralType $typ:*)) ^ (PrimitiveNumeric? (TypeOf $expr)) ^ (PrimitiveNumeric? $typ) $lit:* ^ (Literal? $lit) ^ (CanFoldXsltConvertNonLossy? $lit (TypeOf $expr))) => (Lt $expr (FoldXsltConvert $lit (TypeOf $expr)))
                                 if (AllowReplace(XmlILOptimization.NormalizeXsltConvertLt, local0))
                                 {
@@ -2998,7 +3017,8 @@ namespace System.Xml.Xsl.IlGen
                             if (
                                 (IsLiteral((local2)))
                                 && (CanFoldXsltConvertNonLossy(local2, (local3).XmlType!))
-                            ) {
+                            )
+                            {
                                 // PATTERN: [NormalizeXsltConvertLe] (Le (XsltConvert $expr:* (LiteralType $typ:*)) ^ (PrimitiveNumeric? (TypeOf $expr)) ^ (PrimitiveNumeric? $typ) $lit:* ^ (Literal? $lit) ^ (CanFoldXsltConvertNonLossy? $lit (TypeOf $expr))) => (Le $expr (FoldXsltConvert $lit (TypeOf $expr)))
                                 if (AllowReplace(XmlILOptimization.NormalizeXsltConvertLe, local0))
                                 {
@@ -3199,7 +3219,8 @@ namespace System.Xml.Xsl.IlGen
                         if (
                             !OptimizerPatterns.Read(local1)
                                 .MatchesPattern(OptimizerPatternName.IsPositional)
-                        ) {
+                        )
+                        {
                             // PATTERN: [EliminateIterator] $outer:(Loop $iter:(For $iterRef:(For *)) ^ (NonPositionalIterator? $iter) $ret:*) => (Subs $ret $iter $iterRef)
                             if (AllowReplace(XmlILOptimization.EliminateIterator, local0))
                             {
@@ -3240,7 +3261,8 @@ namespace System.Xml.Xsl.IlGen
                 if (
                     !OptimizerPatterns.Read(local1)
                         .MatchesPattern(OptimizerPatternName.MaybeSideEffects)
-                ) {
+                )
+                {
                     if (local2.NodeType == QilNodeType.Sequence)
                     {
                         if ((local2).Count == (0))
@@ -3307,7 +3329,8 @@ namespace System.Xml.Xsl.IlGen
                         !OptimizerPatterns.Read(local1)
                             .MatchesPattern(OptimizerPatternName.MaybeSideEffects)
                     )
-                ) {
+                )
+                {
                     if (_nodeCounter.Count(local2, local1) <= 1)
                     {
                         // PATTERN: [EliminateIteratorUsedAtMostOnce] (Loop $iter:* ^ (NodeType? $iter {Let}) | (Single? (TypeOf (First $iter))) ^ (NoSideEffects? $iter) $ret:* ^ (RefCountZeroOrOne? $ret $iter)) => (Subs $ret $iter (First $iter))
@@ -3338,7 +3361,8 @@ namespace System.Xml.Xsl.IlGen
                                 // PATTERN: [NormalizeLoopConditional] (Loop $iter:* (Conditional $cond:* $left:(Sequence) ^ (Count? $left 0) $iter)) => (Filter $iter (Not $cond))
                                 if (
                                     AllowReplace(XmlILOptimization.NormalizeLoopConditional, local0)
-                                ) {
+                                )
+                                {
                                     return Replace(
                                         XmlILOptimization.NormalizeLoopConditional,
                                         local0,
@@ -3366,7 +3390,8 @@ namespace System.Xml.Xsl.IlGen
                                 // PATTERN: [NormalizeLoopConditional] (Loop $iter:* (Conditional $cond:* $iter $right:(Sequence) ^ (Count? $right 0))) => (Filter $iter $cond)
                                 if (
                                     AllowReplace(XmlILOptimization.NormalizeLoopConditional, local0)
-                                ) {
+                                )
+                                {
                                     return Replace(
                                         XmlILOptimization.NormalizeLoopConditional,
                                         local0,
@@ -3399,7 +3424,8 @@ namespace System.Xml.Xsl.IlGen
                                             XmlILOptimization.NormalizeLoopConditional,
                                             local0
                                         )
-                                    ) {
+                                    )
+                                    {
                                         QilNode local7 = VisitFor(
                                             f.For(
                                                 VisitFilter(
@@ -3440,7 +3466,8 @@ namespace System.Xml.Xsl.IlGen
                                             XmlILOptimization.NormalizeLoopConditional,
                                             local0
                                         )
-                                    ) {
+                                    )
+                                    {
                                         QilNode local7 = VisitFor(
                                             f.For(VisitFilter(f.Filter(local1, local4)))
                                         );
@@ -3525,7 +3552,8 @@ namespace System.Xml.Xsl.IlGen
                     if (
                         OptimizerPatterns.Read((QilNode)(local3))
                             .MatchesPattern(OptimizerPatternName.SameDepth)
-                    ) {
+                    )
+                    {
                         if (
                             (
                                 (IsStepPattern(local2, QilNodeType.Content))
@@ -3538,7 +3566,8 @@ namespace System.Xml.Xsl.IlGen
                                         .GetArgument(OptimizerPatternArgument.StepInput)
                                 )
                             )
-                        ) {
+                        )
+                        {
                             // PATTERN: [AnnotateContentLoop] $outer:(Loop $iter:(For $bind:* ^ (Pattern? $bind {SameDepth})) $ret:* ^ (StepPattern? $ret {Content}) | (StepPattern? $ret {Union}) ^ (Equal? $iter (Argument $ret {StepInput}))) => (AddPattern $outer {SameDepth}) ^ (InheritPattern $outer $bind {IsDocOrderDistinct}) ^ { }
                             if (AllowReplace(XmlILOptimization.AnnotateContentLoop, local0))
                             {
@@ -3577,7 +3606,8 @@ namespace System.Xml.Xsl.IlGen
                                     .GetArgument(OptimizerPatternArgument.StepInput)
                             )
                         )
-                    ) {
+                    )
+                    {
                         // PATTERN: [AnnotateAttrNmspLoop] $outer:(Loop $iter:(For $bind:*) $ret:* ^ (StepPattern? $ret {Attribute}) | (StepPattern? $ret {XPathNamespace}) | (Pattern? $ret {FilterAttributeKind}) ^ (Equal? $iter (Argument $ret {StepInput}))) => (InheritPattern $outer $bind {SameDepth}) ^ (InheritPattern $outer $bind {IsDocOrderDistinct}) ^ { }
                         if (AllowReplace(XmlILOptimization.AnnotateAttrNmspLoop, local0))
                         {
@@ -3603,7 +3633,8 @@ namespace System.Xml.Xsl.IlGen
                     if (
                         OptimizerPatterns.Read((QilNode)(local3))
                             .MatchesPattern(OptimizerPatternName.SameDepth)
-                    ) {
+                    )
+                    {
                         if (
                             (
                                 (IsStepPattern(local2, QilNodeType.Descendant))
@@ -3616,7 +3647,8 @@ namespace System.Xml.Xsl.IlGen
                                         .GetArgument(OptimizerPatternArgument.StepInput)
                                 )
                             )
-                        ) {
+                        )
+                        {
                             // PATTERN: [AnnotateDescendantLoop] $outer:(Loop $iter:(For $bind:* ^ (Pattern? $bind {SameDepth})) $ret:* ^ (StepPattern? $ret {Descendant}) | (StepPattern? $ret {DescendantOrSelf}) ^ (Equal? $iter (Argument $ret {StepInput}))) => (InheritPattern $outer $bind {IsDocOrderDistinct}) ^ { }
                             if (AllowReplace(XmlILOptimization.AnnotateDescendantLoop, local0))
                             {
@@ -3672,7 +3704,8 @@ namespace System.Xml.Xsl.IlGen
                 if (
                     !OptimizerPatterns.Read(local1)
                         .MatchesPattern(OptimizerPatternName.MaybeSideEffects)
-                ) {
+                )
+                {
                     if (local2.NodeType == QilNodeType.False)
                     {
                         // PATTERN: [EliminateFilter] (Filter $i:* ^ (NoSideEffects? $i) (False)) => (Sequence)
@@ -3739,14 +3772,16 @@ namespace System.Xml.Xsl.IlGen
                                                         if (
                                                             local12.NodeType
                                                             == QilNodeType.LiteralQName
-                                                        ) {
+                                                        )
+                                                        {
                                                             // PATTERN: [NormalizeAttribute] (Filter $iter:(For (Content $input:*)) (And (IsType $iter (LiteralType $typ:* ^ (Equal? $typ (ConstructType {Attribute})))) (Eq (NameOf $iter) $qname:(LiteralQName * * *)))) => (Attribute $input $qname)
                                                             if (
                                                                 AllowReplace(
                                                                     XmlILOptimization.NormalizeAttribute,
                                                                     local0
                                                                 )
-                                                            ) {
+                                                            )
+                                                            {
                                                                 return Replace(
                                                                     XmlILOptimization.NormalizeAttribute,
                                                                     local0,
@@ -3806,14 +3841,16 @@ namespace System.Xml.Xsl.IlGen
                         !OptimizerPatterns.Read(local1)
                             .MatchesPattern(OptimizerPatternName.MaybeSideEffects)
                     ) && (!(((QilNode)(local1)[0]).NodeType == QilNodeType.OptimizeBarrier))
-                ) {
+                )
+                {
                     if (
                         (!(DependsOn(local2, local1)))
                         && (
                             !OptimizerPatterns.Read(local2)
                                 .MatchesPattern(OptimizerPatternName.MaybeSideEffects)
                         )
-                    ) {
+                    )
+                    {
                         // PATTERN: [NormalizeLoopInvariant] (Filter $iter:* ^ (NoSideEffects? $iter) ^ ~((NodeType? (First $iter) {OptimizeBarrier})) $cond:* ^ ~($cond >> $iter) ^ (NoSideEffects? $cond)) => (Conditional $cond (First $iter) (Sequence))
                         if (AllowReplace(XmlILOptimization.NormalizeLoopInvariant, local0))
                         {
@@ -3950,7 +3987,8 @@ namespace System.Xml.Xsl.IlGen
                     if (
                         OptimizerPatterns.Read((QilNode)(local3))
                             .MatchesPattern(OptimizerPatternName.Axis)
-                    ) {
+                    )
+                    {
                         if (local2.NodeType == QilNodeType.And)
                         {
                             QilNode local4 = local2[0];
@@ -3980,14 +4018,16 @@ namespace System.Xml.Xsl.IlGen
                                                         if (
                                                             local11.NodeType
                                                             == QilNodeType.LiteralQName
-                                                        ) {
+                                                        )
+                                                        {
                                                             // PATTERN: [AnnotateFilterElements] $outer:(Filter $iter:(For $bind:* ^ (Pattern? $bind {Axis})) (And (IsType $iter (LiteralType $typ:* ^ (Equal? $typ (ConstructType {Element})))) (Eq (NameOf $iter) $qname:(LiteralQName * * *)))) => (AddPattern $outer {FilterElements}) ^ (AddArgument $outer {ElementQName} $qname) ^ { }
                                                             if (
                                                                 AllowReplace(
                                                                     XmlILOptimization.AnnotateFilterElements,
                                                                     local0
                                                                 )
-                                                            ) {
+                                                            )
+                                                            {
                                                                 OptimizerPatterns.Write(
                                                                         (QilNode)(local0)
                                                                     )
@@ -4022,7 +4062,8 @@ namespace System.Xml.Xsl.IlGen
                     if (
                         OptimizerPatterns.Read((QilNode)(local3))
                             .MatchesPattern(OptimizerPatternName.Axis)
-                    ) {
+                    )
+                    {
                         if (local2.NodeType == QilNodeType.IsType)
                         {
                             QilNode local4 = local2[0];
@@ -4040,7 +4081,8 @@ namespace System.Xml.Xsl.IlGen
                                                 XmlILOptimization.AnnotateFilterContentKind,
                                                 local0
                                             )
-                                        ) {
+                                        )
+                                        {
                                             OptimizerPatterns.Write((QilNode)(local0))
                                                 .AddPattern(OptimizerPatternName.FilterContentKind);
                                             OptimizerPatterns.Write((QilNode)(local0))
@@ -4080,7 +4122,8 @@ namespace System.Xml.Xsl.IlGen
                                                 XmlILOptimization.AnnotateFilterAttributeKind,
                                                 local0
                                             )
-                                        ) {
+                                        )
+                                        {
                                             OptimizerPatterns.Write((QilNode)(local0))
                                                 .AddPattern(
                                                     OptimizerPatternName.FilterAttributeKind
@@ -4156,7 +4199,8 @@ namespace System.Xml.Xsl.IlGen
                         if (
                             (((local3).XmlType) == (XmlQueryTypeFactory.IntX))
                             && ((local5) == (XmlQueryTypeFactory.DoubleX))
-                        ) {
+                        )
+                        {
                             // PATTERN: [NormalizeSortXsltConvert] (SortKey (XsltConvert $expr:* (LiteralType $typ:*)) ^ (Equal? (TypeOf $expr) (ConstructType {IntX})) ^ (Equal? $typ (ConstructType {DoubleX})) $coll:*) => (SortKey $expr $coll)
                             if (AllowReplace(XmlILOptimization.NormalizeSortXsltConvert, local0))
                             {
@@ -4233,14 +4277,16 @@ namespace System.Xml.Xsl.IlGen
                                                     )
                                             )
                                         ) && (IsStepPattern(local7, QilNodeType.Content))
-                                    ) {
+                                    )
+                                    {
                                         // PATTERN: [FoldNamedDescendants] (DocOrderDistinct $path:(Loop $iter1:(For (Loop $iter2:* $ret2:(DescendantOrSelf $input:*))) $ret1:(Filter $iter3:* $cond3:*) ^ (Pattern? $ret1 {FilterElements}) | (Pattern? $ret1 {FilterContentKind}) ^ (StepPattern? $ret1 {Content}))) => (DocOrderDistinct (Loop $iter2 (Filter $iterNew:(For (Descendant $input)) (Subs $cond3 $iter3 $iterNew))))
                                         if (
                                             AllowReplace(
                                                 XmlILOptimization.FoldNamedDescendants,
                                                 local0
                                             )
-                                        ) {
+                                        )
+                                        {
                                             QilNode local10 = VisitFor(
                                                 f.For(VisitDescendant(f.Descendant(local6)))
                                             );
@@ -4304,11 +4350,13 @@ namespace System.Xml.Xsl.IlGen
                                                 )
                                         )
                                     ) && (IsStepPattern(local5, QilNodeType.Content))
-                                ) {
+                                )
+                                {
                                     // PATTERN: [FoldNamedDescendants] (DocOrderDistinct $path:(Loop $iter1:(For (DescendantOrSelf $input:*)) $ret1:(Filter $iter2:* $cond2:*) ^ (Pattern? $ret1 {FilterElements}) | (Pattern? $ret1 {FilterContentKind}) ^ (StepPattern? $ret1 {Content}))) => (Filter $iterNew:(For (Descendant $input)) (Subs $cond2 $iter2 $iterNew))
                                     if (
                                         AllowReplace(XmlILOptimization.FoldNamedDescendants, local0)
-                                    ) {
+                                    )
+                                    {
                                         QilNode local8 = VisitFor(
                                             f.For(VisitDescendant(f.Descendant(local4)))
                                         );
@@ -4338,7 +4386,8 @@ namespace System.Xml.Xsl.IlGen
                         if (
                             !OptimizerPatterns.Read(local2)
                                 .MatchesPattern(OptimizerPatternName.IsPositional)
-                        ) {
+                        )
+                        {
                             if (
                                 (
                                     (
@@ -4364,7 +4413,8 @@ namespace System.Xml.Xsl.IlGen
                                             )
                                     )
                                 )
-                            ) {
+                            )
+                            {
                                 // PATTERN: [CommuteDodFilter] (DocOrderDistinct $filter:(Filter $iter:(For $bind:*) ^ (NonPositionalIterator? $iter) $cond:*) ^ ~((Pattern? $filter {FilterElements})) ^ ~((Pattern? $filter {FilterContentKind})) ^ ~((Pattern? $filter {FilterAttributeKind}))) => (Filter $iterNew:(For (DocOrderDistinct $bind)) (Subs $cond $iter $iterNew))
                                 if (AllowReplace(XmlILOptimization.CommuteDodFilter, local0))
                                 {
@@ -4398,7 +4448,8 @@ namespace System.Xml.Xsl.IlGen
                             if (
                                 !OptimizerPatterns.Read(local4)
                                     .MatchesPattern(OptimizerPatternName.IsPositional)
-                            ) {
+                            )
+                            {
                                 if (!(DependsOn(local6, local2)))
                                 {
                                     if (
@@ -4428,11 +4479,13 @@ namespace System.Xml.Xsl.IlGen
                                                     )
                                             )
                                         )
-                                    ) {
+                                    )
+                                    {
                                         // PATTERN: [CommuteDodFilter] (DocOrderDistinct (Loop $iter1:* $ret1:(Filter $iter2:(For $bind2:*) ^ (NonPositionalIterator? $iter2) $cond2:* ^ ~($cond2 >> $iter1)) ^ ~((Pattern? $ret1 {FilterElements})) ^ ~((Pattern? $ret1 {FilterContentKind})) ^ ~((Pattern? $ret1 {FilterAttributeKind})))) => (Filter $iterNew:(For (DocOrderDistinct (Loop $iter1 $bind2))) (Subs $cond2 $iter2 $iterNew))
                                         if (
                                             AllowReplace(XmlILOptimization.CommuteDodFilter, local0)
-                                        ) {
+                                        )
+                                        {
                                             QilNode local7 = VisitFor(
                                                 f.For(
                                                     VisitDocOrderDistinct(
@@ -4474,7 +4527,8 @@ namespace System.Xml.Xsl.IlGen
                                         .MatchesPattern(OptimizerPatternName.IsPositional)
                                 )
                                 && ((local3).XmlType!.IsSubtypeOf(XmlQueryTypeFactory.NodeNotRtfS))
-                            ) {
+                            )
+                            {
                                 if (
                                     (
                                         (
@@ -4502,7 +4556,8 @@ namespace System.Xml.Xsl.IlGen
                                                 )
                                         )
                                     )
-                                ) {
+                                )
+                                {
                                     // PATTERN: [IntroduceDod] (DocOrderDistinct $loop:(Loop $iter:(For $bind:* ^ ~((DocOrderDistinct? $bind))) ^ (NonPositionalIterator? $iter) ^ (SubtypeOf? (TypeOf $bind) (ConstructType {NodeNotRtfS})) $ret:*) ^ ~((Pattern? $loop {FilterElements})) ^ ~((Pattern? $loop {FilterContentKind})) ^ ~((Pattern? $loop {FilterAttributeKind}))) => (DocOrderDistinct (Loop $iterNew:(For (DocOrderDistinct $bind)) (Subs $ret $iter $iterNew)))
                                     if (AllowReplace(XmlILOptimization.IntroduceDod, local0))
                                     {
@@ -4536,7 +4591,8 @@ namespace System.Xml.Xsl.IlGen
                     if (
                         (!(IsDocOrderDistinct(local3)))
                         && (IsStepPattern(local3, QilNodeType.PrecedingSibling))
-                    ) {
+                    )
+                    {
                         // PATTERN: [IntroducePrecedingDod] (DocOrderDistinct (Loop $iter:* $ret:* ^ ~((DocOrderDistinct? $ret)) ^ (StepPattern? $ret {PrecedingSibling}))) => (DocOrderDistinct (Loop $iter (DocOrderDistinct $ret)))
                         if (AllowReplace(XmlILOptimization.IntroducePrecedingDod, local0))
                         {
@@ -4632,7 +4688,8 @@ namespace System.Xml.Xsl.IlGen
                                             .GetArgument(OptimizerPatternArgument.StepInput)
                                     )
                                 )
-                            ) {
+                            )
+                            {
                                 // PATTERN: [AnnotateJoinAndDod] $outer:(DocOrderDistinct $join:(Loop $iter:(For $bind:*) ^ (DocOrderDistinct? $bind) $ret:* ^ (JoinAndDod? $ret) ^ (Equal? $iter (Argument $ret {StepInput})))) => (AddPattern $outer {JoinAndDod}) ^ (AddArgument $outer {DodStep} $ret) ^ { }
                                 if (AllowReplace(XmlILOptimization.AnnotateJoinAndDod, local0))
                                 {
@@ -4680,13 +4737,15 @@ namespace System.Xml.Xsl.IlGen
             if (
                 ((local0).XmlType!.IsSubtypeOf(XmlQueryTypeFactory.NodeS))
                 && (this[XmlILOptimization.AnnotateIndex1])
-            ) {
+            )
+            {
                 if (
                     (
                         (local1.Count == 2)
                         && (((QilNode)(local1)[0]).XmlType!.IsSubtypeOf(XmlQueryTypeFactory.Node))
                     ) && ((((QilNode)(local1)[1]).XmlType) == (XmlQueryTypeFactory.StringX))
-                ) {
+                )
+                {
                     if (local2.NodeType == QilNodeType.Filter)
                     {
                         QilNode local5 = local2[0];
@@ -4725,7 +4784,8 @@ namespace System.Xml.Xsl.IlGen
                                                                         XmlILOptimization.AnnotateIndex1,
                                                                         local0
                                                                     )
-                                                                ) {
+                                                                )
+                                                                {
                                                                     // The following conditions must be true for this pattern to match:
                                                                     //   1. The function must have exactly two arguments
                                                                     //   2. The type of the first argument must be a subtype of Node
@@ -4748,7 +4808,8 @@ namespace System.Xml.Xsl.IlGen
                                                                             local1[0],
                                                                             local14
                                                                         )
-                                                                    ) {
+                                                                    )
+                                                                    {
                                                                         // All conditions were true, so annotate Filter with the EqualityIndex pattern
                                                                         OptimizerPatterns patt =
                                                                             OptimizerPatterns.Write(
@@ -4783,13 +4844,15 @@ namespace System.Xml.Xsl.IlGen
             if (
                 ((local0).XmlType.IsSubtypeOf(XmlQueryTypeFactory.NodeS))
                 && (this[XmlILOptimization.AnnotateIndex2])
-            ) {
+            )
+            {
                 if (
                     (
                         (local1.Count == 2)
                         && ((((QilNode)(local1)[0]).XmlType) == (XmlQueryTypeFactory.Node))
                     ) && ((((QilNode)(local1)[1]).XmlType) == (XmlQueryTypeFactory.StringX))
-                ) {
+                )
+                {
                     if (local2.NodeType == QilNodeType.Filter)
                     {
                         QilNode local5 = local2[0];
@@ -4813,7 +4876,8 @@ namespace System.Xml.Xsl.IlGen
                                                     XmlILOptimization.AnnotateIndex2,
                                                     local0
                                                 )
-                                            ) {
+                                            )
+                                            {
                                                 // Same as EqualityIndex1, except that each nodes has at most one key value
 
                                                 EqualityIndexVisitor visitor =
@@ -4821,7 +4885,8 @@ namespace System.Xml.Xsl.IlGen
                                                 if (
                                                     visitor.Scan(local6, local1[0], local9)
                                                     && visitor.Scan(local8, local1[0], local9)
-                                                ) {
+                                                )
+                                                {
                                                     // All conditions were true, so annotate Filter with the EqualityIndex pattern
                                                     OptimizerPatterns patt =
                                                         OptimizerPatterns.Write(local2);
@@ -5561,7 +5626,8 @@ namespace System.Xml.Xsl.IlGen
             if (
                 (XmlILConstructInfo.Read(local0).IsNamespaceInScope)
                 && (this[XmlILOptimization.EliminateNamespaceDecl])
-            ) {
+            )
+            {
                 // PATTERN: [EliminateNamespaceDecl] $nmsp:(NamespaceDecl * *) ^ (NamespaceInScope? $nmsp) => (Sequence)
                 if (AllowReplace(XmlILOptimization.EliminateNamespaceDecl, local0))
                 {
@@ -5807,7 +5873,8 @@ namespace System.Xml.Xsl.IlGen
                 if (
                     !OptimizerPatterns.Read(local1)
                         .MatchesPattern(OptimizerPatternName.MaybeSideEffects)
-                ) {
+                )
+                {
                     if (local2.NodeType == QilNodeType.LiteralType)
                     {
                         XmlQueryType local3 = (XmlQueryType)((QilLiteral)local2).Value!;
@@ -5831,7 +5898,8 @@ namespace System.Xml.Xsl.IlGen
                 if (
                     !OptimizerPatterns.Read(local1)
                         .MatchesPattern(OptimizerPatternName.MaybeSideEffects)
-                ) {
+                )
+                {
                     if (local2.NodeType == QilNodeType.LiteralType)
                     {
                         XmlQueryType local3 = (XmlQueryType)((QilLiteral)local2).Value!;
@@ -5876,7 +5944,8 @@ namespace System.Xml.Xsl.IlGen
                         !OptimizerPatterns.Read(local1)
                             .MatchesPattern(OptimizerPatternName.MaybeSideEffects)
                     )
-                ) {
+                )
+                {
                     if (local2.NodeType == QilNodeType.LiteralType)
                     {
                         XmlQueryType local3 = (XmlQueryType)((QilLiteral)local2).Value!;
@@ -5902,7 +5971,8 @@ namespace System.Xml.Xsl.IlGen
                         !OptimizerPatterns.Read(local1)
                             .MatchesPattern(OptimizerPatternName.MaybeSideEffects)
                     )
-                ) {
+                )
+                {
                     if (local2.NodeType == QilNodeType.LiteralType)
                     {
                         XmlQueryType local3 = (XmlQueryType)((QilLiteral)local2).Value!;
@@ -5966,7 +6036,8 @@ namespace System.Xml.Xsl.IlGen
                         !OptimizerPatterns.Read(local1)
                             .MatchesPattern(OptimizerPatternName.MaybeSideEffects)
                     )
-                ) {
+                )
+                {
                     // PATTERN: [EliminateIsEmpty] (IsEmpty $expr:* ^ (NonEmpty? (TypeOf $expr)) ^ (NoSideEffects? $expr)) => (False)
                     if (AllowReplace(XmlILOptimization.EliminateIsEmpty, local0))
                     {
@@ -6638,7 +6709,8 @@ namespace System.Xml.Xsl.IlGen
             if (
                 patt.MatchesPattern(OptimizerPatternName.FilterElements)
                 || patt.MatchesPattern(OptimizerPatternName.FilterContentKind)
-            ) {
+            )
+            {
                 if (
                     IsStepPattern(patt, QilNodeType.DescendantOrSelf)
                     || IsStepPattern(patt, QilNodeType.Descendant)
@@ -6646,7 +6718,8 @@ namespace System.Xml.Xsl.IlGen
                     || IsStepPattern(patt, QilNodeType.XPathPreceding)
                     || IsStepPattern(patt, QilNodeType.XPathFollowing)
                     || IsStepPattern(patt, QilNodeType.FollowingSibling)
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -6666,13 +6739,15 @@ namespace System.Xml.Xsl.IlGen
                 patt.MatchesPattern(OptimizerPatternName.Axis)
                 || patt.MatchesPattern(OptimizerPatternName.FilterElements)
                 || patt.MatchesPattern(OptimizerPatternName.FilterContentKind)
-            ) {
+            )
+            {
                 if (
                     IsStepPattern(patt, QilNodeType.Ancestor)
                     || IsStepPattern(patt, QilNodeType.AncestorOrSelf)
                     || IsStepPattern(patt, QilNodeType.XPathPreceding)
                     || IsStepPattern(patt, QilNodeType.PrecedingSibling)
-                ) {
+                )
+                {
                     return true;
                 }
             }

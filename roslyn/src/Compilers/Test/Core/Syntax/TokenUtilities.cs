@@ -109,7 +109,8 @@ namespace Roslyn.Test.Utilities
             string expectedText,
             string language,
             ParseOptions options = null
-        ) {
+        )
+        {
             if (language == LanguageNames.CSharp)
             {
                 return CS.SyntaxFactory.ParseCompilationUnit(

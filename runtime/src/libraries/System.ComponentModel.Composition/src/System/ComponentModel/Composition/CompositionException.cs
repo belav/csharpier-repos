@@ -207,7 +207,8 @@ namespace System.ComponentModel.Composition
         private static void WritePaths(
             StringBuilder writer,
             IEnumerable<IEnumerable<CompositionError>> paths
-        ) {
+        )
+        {
             int ordinal = 0;
             foreach (IEnumerable<CompositionError> path in paths)
             {
@@ -220,7 +221,8 @@ namespace System.ComponentModel.Composition
             StringBuilder writer,
             IEnumerable<CompositionError> path,
             int ordinal
-        ) {
+        )
+        {
             writer.AppendLine();
             writer.Append(ordinal.ToString(CultureInfo.CurrentCulture));
             writer.Append(SR.CompositionException_PathsCountSeparator);
@@ -273,7 +275,8 @@ namespace System.ComponentModel.Composition
 
         private static IEnumerable<IEnumerable<CompositionError>> CalculatePaths(
             CompositionException exception
-        ) {
+        )
+        {
             List<IEnumerable<CompositionError>> paths = new List<IEnumerable<CompositionError>>();
 
             VisitContext context = default;
@@ -292,7 +295,8 @@ namespace System.ComponentModel.Composition
         private static void VisitCompositionException(
             CompositionException exception,
             VisitContext context
-        ) {
+        )
+        {
             foreach (CompositionError error in exception.Errors)
             {
                 VisitError(error, context);

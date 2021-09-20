@@ -138,7 +138,8 @@ namespace System.Security.Cryptography.Encryption.Des.Tests
             string textHex,
             string expectedDecrypted,
             string expectedEncrypted
-        ) {
+        )
+        {
             byte[] expectedDecryptedBytes =
                 expectedDecrypted == null
                     ? textHex.HexToByteArray()
@@ -217,7 +218,8 @@ namespace System.Security.Cryptography.Encryption.Des.Tests
                         s_randomKey_64.HexToByteArray(),
                         s_randomIv_64.HexToByteArray()
                     )
-                ) {
+                )
+                {
                     byte[] plainText1 = s_multiBlockString.HexToByteArray();
                     byte[] cipher1 = encryptor.Transform(plainText1);
                     byte[] expectedCipher1 = (
@@ -241,7 +243,8 @@ namespace System.Security.Cryptography.Encryption.Des.Tests
                         s_randomKey_64.HexToByteArray(),
                         null
                     )
-                ) {
+                )
+                {
                     byte[] plainText1 = s_multiBlockString.HexToByteArray();
                     byte[] cipher1 = encryptor.Transform(plainText1);
                     byte[] expectedCipher1 = (
@@ -347,7 +350,8 @@ namespace System.Security.Cryptography.Encryption.Des.Tests
         public static void EncryptorReuse_LeadsToSameResults(
             CipherMode cipherMode,
             int feedbackSize
-        ) {
+        )
+        {
             // AppleCCCryptor does not allow calling Reset on CFB cipher.
             // this test validates that the behavior is taken into consideration.
             var input = "b72606c98d8e4fabf08839abf7a0ac61".HexToByteArray();
@@ -378,7 +382,8 @@ namespace System.Security.Cryptography.Encryption.Des.Tests
         public static void DecryptorReuse_LeadsToSameResults(
             CipherMode cipherMode,
             int feedbackSize
-        ) {
+        )
+        {
             // AppleCCCryptor does not allow calling Reset on CFB cipher.
             // this test validates that the behavior is taken into consideration.
             var input = "4e6f77206973207468652074696d6520666f7220616c6c20".HexToByteArray();
@@ -557,7 +562,8 @@ namespace System.Security.Cryptography.Encryption.Des.Tests
             byte[] plainBytes,
             byte[] cipherBytes,
             int? feedbackSize = default
-        ) {
+        )
+        {
             byte[] liveEncryptBytes;
             byte[] liveDecryptBytes;
 
@@ -588,7 +594,8 @@ namespace System.Security.Cryptography.Encryption.Des.Tests
                     des.CreateEncryptor(key, iv),
                     CryptoStreamMode.Write
                 )
-            ) {
+            )
+            {
                 cryptoStream.Write(plainBytes, 0, plainBytes.Length);
                 cryptoStream.FlushFinalBlock();
 
@@ -601,7 +608,8 @@ namespace System.Security.Cryptography.Encryption.Des.Tests
             byte[] key,
             byte[] iv,
             byte[] cipherBytes
-        ) {
+        )
+        {
             using (MemoryStream output = new MemoryStream())
             using (
                 CryptoStream cryptoStream = new CryptoStream(
@@ -609,7 +617,8 @@ namespace System.Security.Cryptography.Encryption.Des.Tests
                     des.CreateDecryptor(key, iv),
                     CryptoStreamMode.Write
                 )
-            ) {
+            )
+            {
                 cryptoStream.Write(cipherBytes, 0, cipherBytes.Length);
                 cryptoStream.FlushFinalBlock();
 

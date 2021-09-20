@@ -317,7 +317,8 @@ namespace System.Speech.Internal.Synthesis
                 if (
                     GetDeviceName(iDevice, out device) == MMSYSERR.NOERROR
                     && string.Compare(device, name, StringComparison.OrdinalIgnoreCase) == 0
-                ) {
+                )
+                {
                     return iDevice;
                 }
             }
@@ -333,7 +334,8 @@ namespace System.Speech.Internal.Synthesis
         internal static MMSYSERR GetDeviceName(
             int deviceId,
             [MarshalAs(UnmanagedType.LPWStr)] out string prodName
-        ) {
+        )
+        {
             prodName = string.Empty;
             SafeNativeMethods.WAVEOUTCAPS caps = new();
 
@@ -380,7 +382,8 @@ namespace System.Speech.Internal.Synthesis
             IntPtr dwInstance,
             IntPtr dwParam1,
             IntPtr dwParam2
-        ) {
+        )
+        {
             if (uMsg == MM_MSG.MM_WOM_DONE)
             {
                 InItem inItem;

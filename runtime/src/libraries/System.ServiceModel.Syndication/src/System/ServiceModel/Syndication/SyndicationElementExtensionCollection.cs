@@ -28,9 +28,8 @@ namespace System.ServiceModel.Syndication
             _initialized = true;
         }
 
-        internal SyndicationElementExtensionCollection(
-            SyndicationElementExtensionCollection source
-        ) : base()
+        internal SyndicationElementExtensionCollection(SyndicationElementExtensionCollection source)
+            : base()
         {
             _buffer = source._buffer;
             for (int i = 0; i < source.Items.Count; ++i)
@@ -67,7 +66,8 @@ namespace System.ServiceModel.Syndication
             string outerNamespace,
             object dataContractExtension,
             XmlObjectSerializer dataContractSerializer
-        ) {
+        )
+        {
             if (dataContractExtension == null)
             {
                 throw new ArgumentNullException(nameof(dataContractExtension));
@@ -124,7 +124,8 @@ namespace System.ServiceModel.Syndication
         public Collection<TExtension> ReadElementExtensions<TExtension>(
             string extensionName,
             string extensionNamespace
-        ) {
+        )
+        {
             return ReadElementExtensions<TExtension>(
                 extensionName,
                 extensionNamespace,
@@ -136,7 +137,8 @@ namespace System.ServiceModel.Syndication
             string extensionName,
             string extensionNamespace,
             XmlObjectSerializer serializer
-        ) {
+        )
+        {
             if (serializer == null)
             {
                 throw new ArgumentNullException(nameof(serializer));
@@ -149,7 +151,8 @@ namespace System.ServiceModel.Syndication
             string extensionName,
             string extensionNamespace,
             XmlSerializer serializer
-        ) {
+        )
+        {
             if (serializer == null)
             {
                 throw new ArgumentNullException(nameof(serializer));
@@ -170,7 +173,8 @@ namespace System.ServiceModel.Syndication
                         if (
                             shouldSkipElement != null
                             && shouldSkipElement(reader.LocalName, reader.NamespaceURI)
-                        ) {
+                        )
+                        {
                             reader.Skip();
                             continue;
                         }
@@ -284,7 +288,8 @@ namespace System.ServiceModel.Syndication
             string extensionNamespace,
             XmlObjectSerializer dcSerializer,
             XmlSerializer xmlSerializer
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(extensionName))
             {
                 throw new ArgumentException(SR.ExtensionNameNotSpecified);
@@ -305,7 +310,8 @@ namespace System.ServiceModel.Syndication
                 if (
                     extensionName != this[i].OuterName
                     || extensionNamespace != this[i].OuterNamespace
-                ) {
+                )
+                {
                     continue;
                 }
                 if (dcSerializer != null)

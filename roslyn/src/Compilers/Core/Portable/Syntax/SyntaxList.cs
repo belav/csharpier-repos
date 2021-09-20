@@ -10,11 +10,8 @@ namespace Microsoft.CodeAnalysis.Syntax
 {
     internal abstract partial class SyntaxList : SyntaxNode
     {
-        internal SyntaxList(
-            InternalSyntax.SyntaxList green,
-            SyntaxNode? parent,
-            int position
-        ) : base(green, parent, position) { }
+        internal SyntaxList(InternalSyntax.SyntaxList green, SyntaxNode? parent, int position)
+            : base(green, parent, position) { }
 
         public override string Language
         {
@@ -31,14 +28,16 @@ namespace Microsoft.CodeAnalysis.Syntax
             Func<SyntaxToken, SyntaxToken, SyntaxToken>? computeReplacementToken = null,
             IEnumerable<SyntaxTrivia>? trivia = null,
             Func<SyntaxTrivia, SyntaxTrivia, SyntaxTrivia>? computeReplacementTrivia = null
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
 
         protected internal override SyntaxNode ReplaceNodeInListCore(
             SyntaxNode originalNode,
             IEnumerable<SyntaxNode> replacementNodes
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
 
@@ -46,14 +45,16 @@ namespace Microsoft.CodeAnalysis.Syntax
             SyntaxNode nodeInList,
             IEnumerable<SyntaxNode> nodesToInsert,
             bool insertBefore
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
 
         protected internal override SyntaxNode ReplaceTokenInListCore(
             SyntaxToken originalToken,
             IEnumerable<SyntaxToken> newTokens
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
 
@@ -61,14 +62,16 @@ namespace Microsoft.CodeAnalysis.Syntax
             SyntaxToken originalToken,
             IEnumerable<SyntaxToken> newTokens,
             bool insertBefore
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
 
         protected internal override SyntaxNode ReplaceTriviaInListCore(
             SyntaxTrivia originalTrivia,
             IEnumerable<SyntaxTrivia> newTrivia
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
 
@@ -76,14 +79,16 @@ namespace Microsoft.CodeAnalysis.Syntax
             SyntaxTrivia originalTrivia,
             IEnumerable<SyntaxTrivia> newTrivia,
             bool insertBefore
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
 
         protected internal override SyntaxNode RemoveNodesCore(
             IEnumerable<SyntaxNode> nodes,
             SyntaxRemoveOptions options
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
 
@@ -91,7 +96,8 @@ namespace Microsoft.CodeAnalysis.Syntax
             string indentation,
             string eol,
             bool elasticTrivia
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
 

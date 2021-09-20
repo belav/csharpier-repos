@@ -30,7 +30,8 @@ namespace System.Net.Sockets
             byte[] socketAddress,
             int socketAddressLen,
             SocketError errorCode
-        ) {
+        )
+        {
             _buffer = null;
             _numBytes = 0;
 

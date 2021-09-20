@@ -81,7 +81,8 @@ namespace Newtonsoft.Json.Converters
             Type objectType,
             object? existingValue,
             JsonSerializer serializer
-        ) {
+        )
+        {
             if (reader.TokenType == JsonToken.Null)
             {
                 if (!ReflectionUtils.IsNullable(objectType))
@@ -101,7 +102,8 @@ namespace Newtonsoft.Json.Converters
             if (
                 reader.TokenType != JsonToken.StartConstructor
                 || !string.Equals(reader.Value?.ToString(), "Date", StringComparison.Ordinal)
-            ) {
+            )
+            {
                 throw JsonSerializationException.Create(
                     reader,
                     "Unexpected token or value when parsing date. Token: {0}, Value: {1}".FormatWith(
@@ -118,7 +120,8 @@ namespace Newtonsoft.Json.Converters
                     out DateTime d,
                     out string? errorMessage
                 )
-            ) {
+            )
+            {
                 throw JsonSerializationException.Create(reader, errorMessage);
             }
 

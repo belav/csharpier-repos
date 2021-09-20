@@ -13,7 +13,8 @@ namespace Roslyn.Utilities
         public static SemaphoreDisposer DisposableWait(
             this SemaphoreSlim semaphore,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             semaphore.Wait(cancellationToken);
             return new SemaphoreDisposer(semaphore);
         }
@@ -25,7 +26,8 @@ namespace Roslyn.Utilities
         public static async ValueTask<SemaphoreDisposer> DisposableWaitAsync(
             this SemaphoreSlim semaphore,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             await semaphore.WaitAsync(cancellationToken).ConfigureAwait(false);
             return new SemaphoreDisposer(semaphore);
         }

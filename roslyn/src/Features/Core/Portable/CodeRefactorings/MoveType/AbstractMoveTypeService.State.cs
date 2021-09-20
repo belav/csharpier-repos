@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
                 SemanticDocument document,
                 TTypeDeclarationSyntax typeDeclaration,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var state = new State(document);
                 if (!state.TryInitialize(typeDeclaration, cancellationToken))
                 {
@@ -48,7 +49,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
             private bool TryInitialize(
                 TTypeDeclarationSyntax typeDeclaration,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (cancellationToken.IsCancellationRequested)
                 {
                     return false;
@@ -72,7 +74,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
                     || typeSymbol.IsAnonymousType
                     || typeSymbol.IsImplicitlyDeclared
                     || typeSymbol.Name == string.Empty
-                ) {
+                )
+                {
                     return false;
                 }
 

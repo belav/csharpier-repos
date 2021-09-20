@@ -27,13 +27,15 @@ namespace Internal.TypeSystem.Ecma
             PEReader peReader,
             MetadataReader metadataReader,
             IModuleResolver customModuleResolver
-        ) : base(
-            context,
-            peReader,
-            metadataReader,
-            containingAssembly: null,
-            customModuleResolver: customModuleResolver
-        ) {
+        )
+            : base(
+                context,
+                peReader,
+                metadataReader,
+                containingAssembly: null,
+                customModuleResolver: customModuleResolver
+            )
+        {
             if (!metadataReader.IsAssembly)
             {
                 ThrowHelper.ThrowBadImageFormatException();

@@ -15,7 +15,8 @@ namespace Internal.Cryptography
             int offset,
             int count,
             HashAlgorithmName hashAlgorithm
-        ) {
+        )
+        {
             // The classes that call us are sealed and their base class has checked this already.
             Debug.Assert(data != null);
             Debug.Assert(offset >= 0 && offset <= data.Length);
@@ -34,7 +35,8 @@ namespace Internal.Cryptography
             Span<byte> destination,
             HashAlgorithmName hashAlgorithm,
             out int bytesWritten
-        ) {
+        )
+        {
             Debug.Assert(!string.IsNullOrEmpty(hashAlgorithm.Name));
 
             using (var hashProvider = new HashProviderCng(hashAlgorithm.Name, null))

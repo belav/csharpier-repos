@@ -30,7 +30,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             AbstractObjectBrowserLibraryManager libraryManager,
             ObjectListItem listItem,
             Project project
-        ) {
+        )
+        {
             _description = description;
             _libraryManager = libraryManager;
             _listItem = listItem;
@@ -99,7 +100,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                 || typeSymbol.TypeKind == TypeKind.Error
                 || typeSymbol.TypeKind == TypeKind.TypeParameter
                 || typeSymbol.SpecialType == SpecialType.System_Void
-            ) {
+            )
+            {
                 AddName(typeSymbol.ToDisplayString(s_typeDisplay));
                 return;
             }
@@ -155,7 +157,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             if (
                 referenceListItem.MetadataReference
                 is PortableExecutableReference portableExecutableReference
-            ) {
+            )
+            {
                 AddText(portableExecutableReference.FilePath);
             }
         }
@@ -286,7 +289,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             if (
                 containingSymbol is INamespaceSymbol
                 && ((INamespaceSymbol)containingSymbol).IsGlobalNamespace
-            ) {
+            )
+            {
                 containingSymbol = containingSymbol.ContainingAssembly;
             }
 
@@ -475,7 +479,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                             compilation
                         )
                         is INamedTypeSymbol exceptionTypeSymbol
-                    ) {
+                    )
+                    {
                         AddLineBreak();
 
                         var exceptionTexts = documentationComment.GetExceptionTexts(exceptionType);

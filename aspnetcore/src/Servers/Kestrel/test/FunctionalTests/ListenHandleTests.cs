@@ -40,12 +40,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                     new TestServiceContext(LoggerFactory),
                     new ListenOptions((ulong)_canListenToOpenTcpSocketHandleSocket.Handle)
                 )
-            ) {
+            )
+            {
                 using (
                     var connection = new TestConnection(
                         ((IPEndPoint)_canListenToOpenTcpSocketHandleSocket.LocalEndPoint).Port
                     )
-                ) {
+                )
+                {
                     await connection.SendEmptyGet();
 
                     await connection.Receive(

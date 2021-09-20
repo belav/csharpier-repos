@@ -11,7 +11,8 @@ namespace System.Net.Http
         protected internal sealed override HttpResponseMessage Send(
             HttpRequestMessage request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ValueTask<HttpResponseMessage> sendTask = SendAsync(
                 request,
                 async: false,

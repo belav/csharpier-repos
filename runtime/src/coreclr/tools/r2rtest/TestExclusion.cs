@@ -60,7 +60,8 @@ namespace R2RTest
                 )
                 && pathComponents.Length >= firstComponent + PathComponents.Length
                 && (OpenEnd || pathComponents.Length == firstComponent + PathComponents.Length)
-            ) {
+            )
+            {
                 for (int matchIndex = 1; matchIndex < PathComponents.Length; matchIndex++)
                 {
                     if (
@@ -68,7 +69,8 @@ namespace R2RTest
                             PathComponents[matchIndex],
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }
@@ -103,7 +105,8 @@ namespace R2RTest
                     exclusion.PathComponents[0],
                     out List<TestExclusion> exclusionsPerFolder
                 )
-            ) {
+            )
+            {
                 exclusionsPerFolder = new List<TestExclusion>();
                 _folderToExclusions.Add(exclusion.PathComponents[0], exclusionsPerFolder);
             }
@@ -125,7 +128,8 @@ namespace R2RTest
                         pathComponents[firstComponent],
                         out List<TestExclusion> exclusions
                     )
-                ) {
+                )
+                {
                     foreach (TestExclusion exclusion in exclusions)
                     {
                         if (exclusion.Matches(pathComponents, firstComponent))
@@ -170,7 +174,8 @@ namespace R2RTest
                         XElement itemGroupElement in issuesXml.Root.Elements(
                             s_xmlNamespace + "ItemGroup"
                         )
-                    ) {
+                    )
+                    {
                         string condition = itemGroupElement.Attribute("Condition")?.Value ?? "";
                         List<TestExclusion> exclusions;
                         if (!exclusionsByCondition.TryGetValue(condition, out exclusions))
@@ -182,7 +187,8 @@ namespace R2RTest
                             XElement excludeListElement in itemGroupElement.Elements(
                                 s_xmlNamespace + "ExcludeList"
                             )
-                        ) {
+                        )
+                        {
                             string testPath = excludeListElement.Attribute("Include")?.Value ?? "";
                             string issueID =
                                 excludeListElement.Element(s_xmlNamespace + "Issue")?.Value
@@ -229,7 +235,8 @@ namespace R2RTest
                     int exclusionListIndex = 0;
                     exclusionListIndex < testExclusionLists.Count;
                     exclusionListIndex++
-                ) {
+                )
+                {
                     string conditionValue =
                         project.GetProperty(
                             "Condition_" + exclusionListIndex.ToString()
@@ -258,7 +265,8 @@ namespace R2RTest
             int end = pathComponents.Length;
             while (
                 end > begin && (pathComponents[end - 1] == "*" || pathComponents[end - 1] == "**")
-            ) {
+            )
+            {
                 end--;
             }
             bool openEnd = (end < pathComponents.Length && pathComponents[end] == "**");

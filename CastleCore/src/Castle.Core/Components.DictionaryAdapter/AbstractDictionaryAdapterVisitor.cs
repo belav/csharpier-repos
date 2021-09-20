@@ -46,7 +46,8 @@ namespace Castle.Components.DictionaryAdapter
         public virtual bool VisitDictionaryAdapter(
             IDictionaryAdapter dictionaryAdapter,
             object state
-        ) {
+        )
+        {
             return VisitDictionaryAdapter(dictionaryAdapter, null, null);
         }
 
@@ -54,7 +55,8 @@ namespace Castle.Components.DictionaryAdapter
             IDictionaryAdapter dictionaryAdapter,
             Func<PropertyDescriptor, bool> selector,
             object state
-        ) {
+        )
+        {
             if (PushScope(dictionaryAdapter) == false)
             {
                 return false;
@@ -100,7 +102,8 @@ namespace Castle.Components.DictionaryAdapter
             IDictionaryAdapter dictionaryAdapter,
             PropertyDescriptor property,
             object state
-        ) {
+        )
+        {
             VisitProperty(dictionaryAdapter, property, state);
         }
 
@@ -114,7 +117,8 @@ namespace Castle.Components.DictionaryAdapter
             IDictionaryAdapter dictionaryAdapter,
             PropertyDescriptor property,
             object state
-        ) {
+        )
+        {
             VisitInterface(dictionaryAdapter, property, state);
         }
 
@@ -122,7 +126,8 @@ namespace Castle.Components.DictionaryAdapter
             IDictionaryAdapter dictionaryAdapter,
             PropertyDescriptor property,
             object state
-        ) {
+        )
+        {
             VisitProperty(dictionaryAdapter, property, state);
         }
 
@@ -131,7 +136,8 @@ namespace Castle.Components.DictionaryAdapter
             PropertyDescriptor property,
             Type collectionItemType,
             object state
-        ) {
+        )
+        {
             VisitCollection(dictionaryAdapter, property, collectionItemType, state);
         }
 
@@ -140,7 +146,8 @@ namespace Castle.Components.DictionaryAdapter
             PropertyDescriptor property,
             Type collectionItemType,
             object state
-        ) {
+        )
+        {
             VisitProperty(dictionaryAdapter, property, state);
         }
 
@@ -165,7 +172,8 @@ namespace Castle.Components.DictionaryAdapter
             var propertyType = property.PropertyType;
             if (
                 propertyType != typeof(string) && typeof(IEnumerable).IsAssignableFrom(propertyType)
-            ) {
+            )
+            {
                 if (propertyType.IsArray)
                 {
                     collectionItemType = propertyType.GetElementType();

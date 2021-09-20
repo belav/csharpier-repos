@@ -73,7 +73,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             string rollForward,
             bool? applyPatches,
             string resolvedFramework
-        ) {
+        )
+        {
             RunTest("2.1.2", rollForward, applyPatches)
                 .ShouldHaveResolvedFrameworkOrFailToFind(MicrosoftNETCoreApp, resolvedFramework);
         }
@@ -103,7 +104,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             string rollForward,
             bool? applyPatches,
             string resolvedFramework
-        ) {
+        )
+        {
             RunTest("2.1.0", rollForward, applyPatches)
                 .ShouldHaveResolvedFrameworkOrFailToFind(MicrosoftNETCoreApp, resolvedFramework);
         }
@@ -127,7 +129,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             string rollForward,
             bool? applyPatches,
             string resolvedFramework
-        ) {
+        )
+        {
             RunTest("2.0.0", rollForward, applyPatches)
                 .ShouldHaveResolvedFrameworkOrFailToFind(MicrosoftNETCoreApp, resolvedFramework);
         }
@@ -149,7 +152,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             string rollForward,
             bool? applyPatches,
             string resolvedFramework
-        ) {
+        )
+        {
             RunTest("1.1.0", rollForward, applyPatches)
                 .ShouldHaveResolvedFrameworkOrFailToFind(MicrosoftNETCoreApp, resolvedFramework);
         }
@@ -199,7 +203,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             string frameworkReferenceVersion,
             string rollForward,
             bool? applyPatches
-        ) {
+        )
+        {
             return RunTest(
                 SharedState.DotNetWithNETCoreAppRelease,
                 SharedState.FrameworkReferenceApp,

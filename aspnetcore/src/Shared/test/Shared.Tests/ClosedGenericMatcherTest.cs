@@ -126,7 +126,8 @@ namespace Microsoft.Extensions.Internal
             Type queryType,
             Type interfaceType,
             Type expectedResult
-        ) {
+        )
+        {
             // Arrange & Act
             var result = ClosedGenericMatcher.ExtractGenericInterface(queryType, interfaceType);
 
@@ -245,7 +246,8 @@ namespace Microsoft.Extensions.Internal
 
             bool ICollection<KeyValuePair<string, object>>.Contains(
                 KeyValuePair<string, object> item
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -257,7 +259,8 @@ namespace Microsoft.Extensions.Internal
             void ICollection<KeyValuePair<string, object>>.CopyTo(
                 KeyValuePair<string, object>[] array,
                 int arrayIndex
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 

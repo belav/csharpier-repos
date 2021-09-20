@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     project.Name,
                     _cancellationToken
                 )
-            ) {
+            )
+            {
                 if (project.SupportsCompilation)
                 {
                     // make sure we hold onto compilation while we search documents belong to this project

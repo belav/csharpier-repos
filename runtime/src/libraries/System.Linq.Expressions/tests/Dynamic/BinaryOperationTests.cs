@@ -21,7 +21,8 @@ namespace System.Dynamic.Tests
                 DynamicMetaObject target,
                 DynamicMetaObject arg,
                 DynamicMetaObject errorSuggestion
-            ) {
+            )
+            {
                 throw new NotSupportedException();
             }
         }
@@ -804,7 +805,8 @@ namespace System.Dynamic.Tests
                 DynamicMetaObject target,
                 DynamicMetaObject arg,
                 DynamicMetaObject errorSuggestion
-            ) {
+            )
+            {
                 return new DynamicMetaObject(
                     Expression.Convert(
                         Expression.Add(

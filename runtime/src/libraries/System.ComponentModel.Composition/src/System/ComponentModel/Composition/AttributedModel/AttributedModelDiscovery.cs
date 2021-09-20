@@ -16,7 +16,8 @@ namespace System.ComponentModel.Composition.AttributedModel
         public static ComposablePartDefinition? CreatePartDefinitionIfDiscoverable(
             Type type,
             ICompositionElement? origin
-        ) {
+        )
+        {
             AttributedPartCreationInfo creationInfo = new AttributedPartCreationInfo(
                 type,
                 null,
@@ -36,7 +37,8 @@ namespace System.ComponentModel.Composition.AttributedModel
             PartCreationPolicyAttribute? partCreationPolicy,
             bool ignoreConstructorImports,
             ICompositionElement? origin
-        ) {
+        )
+        {
             if (type == null)
             {
                 throw new ArgumentNullException(nameof(type));
@@ -74,7 +76,8 @@ namespace System.ComponentModel.Composition.AttributedModel
         public static ReflectionComposablePart CreatePart(
             object attributedPart,
             ReflectionContext reflectionContext
-        ) {
+        )
+        {
             if (attributedPart == null)
             {
                 throw new ArgumentNullException(nameof(attributedPart));
@@ -114,7 +117,8 @@ namespace System.ComponentModel.Composition.AttributedModel
         public static ReflectionComposablePart CreatePart(
             ComposablePartDefinition partDefinition,
             object attributedPart
-        ) {
+        )
+        {
             if (partDefinition == null)
             {
                 throw new ArgumentNullException(nameof(partDefinition));
@@ -134,7 +138,8 @@ namespace System.ComponentModel.Composition.AttributedModel
         public static ReflectionParameterImportDefinition CreateParameterImportDefinition(
             ParameterInfo parameter,
             ICompositionElement origin
-        ) {
+        )
+        {
             Requires.NotNull(parameter, nameof(parameter));
 
             ReflectionParameter reflectionParameter = parameter.ToReflectionParameter();
@@ -182,7 +187,8 @@ namespace System.ComponentModel.Composition.AttributedModel
         public static ReflectionMemberImportDefinition CreateMemberImportDefinition(
             MemberInfo member,
             ICompositionElement origin
-        ) {
+        )
+        {
             Requires.NotNull(member, nameof(member));
 
             ReflectionWritableMember reflectionMember = member.ToReflectionWritableMember();
@@ -234,7 +240,8 @@ namespace System.ComponentModel.Composition.AttributedModel
         private static IAttributedImport GetAttributedImport(
             ReflectionItem item,
             ICustomAttributeProvider attributeProvider
-        ) {
+        )
+        {
             IAttributedImport[] imports = attributeProvider.GetAttributes<IAttributedImport>(false);
 
             // For constructor parameters they may not have an ImportAttribute

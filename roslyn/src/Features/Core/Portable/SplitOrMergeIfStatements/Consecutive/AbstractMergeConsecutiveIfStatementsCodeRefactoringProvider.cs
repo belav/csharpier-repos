@@ -56,7 +56,8 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
             SyntaxNode ifOrElseIf,
             CancellationToken cancellationToken,
             out SyntaxNode firstIfOrElseIf
-        ) {
+        )
+        {
             var syntaxFacts = document.GetLanguageService<ISyntaxFactsService>();
             var ifGenerator = document.GetLanguageService<IIfLikeStatementGenerator>();
 
@@ -78,7 +79,8 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
             SyntaxNode ifOrElseIf,
             CancellationToken cancellationToken,
             out SyntaxNode secondIfOrElseIf
-        ) {
+        )
+        {
             var syntaxFacts = document.GetLanguageService<ISyntaxFactsService>();
             var ifGenerator = document.GetLanguageService<IIfLikeStatementGenerator>();
 
@@ -100,7 +102,8 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
             SyntaxNode root,
             SyntaxNode firstIfOrElseIf,
             SyntaxNode secondIfOrElseIf
-        ) {
+        )
+        {
             var syntaxFacts = document.GetLanguageService<ISyntaxFactsService>();
             var ifGenerator = document.GetLanguageService<IIfLikeStatementGenerator>();
             var generator = document.GetLanguageService<SyntaxGenerator>();
@@ -165,7 +168,8 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
             IIfLikeStatementGenerator ifGenerator,
             SyntaxNode ifOrElseIf,
             out SyntaxNode parentIfOrElseIf
-        ) {
+        )
+        {
             return ifGenerator.IsElseIfClause(ifOrElseIf, out parentIfOrElseIf)
                 && ContainEquivalentStatements(syntaxFacts, ifOrElseIf, parentIfOrElseIf, out _);
         }
@@ -175,7 +179,8 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
             IIfLikeStatementGenerator ifGenerator,
             SyntaxNode ifOrElseIf,
             out SyntaxNode elseIfClause
-        ) {
+        )
+        {
             return ifGenerator.HasElseIfClause(ifOrElseIf, out elseIfClause)
                 && ContainEquivalentStatements(syntaxFacts, ifOrElseIf, elseIfClause, out _);
         }
@@ -187,7 +192,8 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
             SyntaxNode ifOrElseIf,
             CancellationToken cancellationToken,
             out SyntaxNode previousStatement
-        ) {
+        )
+        {
             return TryGetSiblingStatement(
                 syntaxFacts,
                 ifOrElseIf,
@@ -212,7 +218,8 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
             SyntaxNode ifOrElseIf,
             CancellationToken cancellationToken,
             out SyntaxNode nextStatement
-        ) {
+        )
+        {
             return TryGetSiblingStatement(
                 syntaxFacts,
                 ifOrElseIf,
@@ -237,7 +244,8 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
             SyntaxNode firstStatement,
             SyntaxNode secondStatement,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // We don't support cases where the previous if statement has any else-if or else clauses. In order for that
             // to be mergable, the control flow would have to quit from inside every branch, which is getting a little complex.
             if (
@@ -288,11 +296,13 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
             SyntaxNode ifOrElseIf,
             int relativeIndex,
             out SyntaxNode statement
-        ) {
+        )
+        {
             if (
                 syntaxFacts.IsExecutableStatement(ifOrElseIf)
                 && syntaxFacts.IsExecutableBlock(ifOrElseIf.Parent)
-            ) {
+            )
+            {
                 var blockStatements = syntaxFacts.GetExecutableBlockStatements(ifOrElseIf.Parent);
 
                 statement = blockStatements.ElementAtOrDefault(
@@ -310,7 +320,8 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
             SyntaxNode ifStatement1,
             SyntaxNode ifStatement2,
             out IReadOnlyList<SyntaxNode> statements
-        ) {
+        )
+        {
             var statements1 = WalkDownScopeBlocks(
                 syntaxFacts,
                 syntaxFacts.GetStatementContainerStatements(ifStatement1)
@@ -330,10 +341,11 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
                 Func<CancellationToken, Task<Document>> createChangedDocument,
                 MergeDirection direction,
                 string ifKeywordText
-            ) : base(
-                string.Format(GetResourceText(direction), ifKeywordText),
-                createChangedDocument
-            ) { }
+            )
+                : base(
+                    string.Format(GetResourceText(direction), ifKeywordText),
+                    createChangedDocument
+                ) { }
 
             private static string GetResourceText(MergeDirection direction) =>
                 direction == MergeDirection.Up

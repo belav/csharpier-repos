@@ -11,7 +11,8 @@ namespace Internal.TypeSystem
         protected internal sealed override int CompareToImpl(
             TypeDesc other,
             TypeSystemComparer comparer
-        ) {
+        )
+        {
             var otherType = (RuntimeDeterminedType)other;
             int result = comparer.Compare(_rawCanonType, otherType._rawCanonType);
             if (result != 0)

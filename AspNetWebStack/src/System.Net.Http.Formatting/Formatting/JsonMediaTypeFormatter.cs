@@ -122,7 +122,8 @@ namespace System.Net.Http.Formatting
             Type type,
             Stream readStream,
             Encoding effectiveEncoding
-        ) {
+        )
+        {
             if (type == null)
             {
                 throw Error.ArgumentNull("type");
@@ -146,7 +147,8 @@ namespace System.Net.Http.Formatting
             Type type,
             Stream writeStream,
             Encoding effectiveEncoding
-        ) {
+        )
+        {
             if (type == null)
             {
                 throw Error.ArgumentNull("type");
@@ -232,7 +234,8 @@ namespace System.Net.Http.Formatting
             Stream readStream,
             Encoding effectiveEncoding,
             IFormatterLogger formatterLogger
-        ) {
+        )
+        {
             if (type == null)
             {
                 throw Error.ArgumentNull("type");
@@ -258,7 +261,8 @@ namespace System.Net.Http.Formatting
                         _readerQuotas,
                         null
                     )
-                ) {
+                )
+                {
                     return dataContractSerializer.ReadObject(reader);
                 }
             }
@@ -276,7 +280,8 @@ namespace System.Net.Http.Formatting
             HttpContent content,
             TransportContext transportContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (type == null)
             {
                 throw Error.ArgumentNull("type");
@@ -311,7 +316,8 @@ namespace System.Net.Http.Formatting
             object value,
             Stream writeStream,
             Encoding effectiveEncoding
-        ) {
+        )
+        {
             if (type == null)
             {
                 throw Error.ArgumentNull("type");
@@ -345,7 +351,8 @@ namespace System.Net.Http.Formatting
                         effectiveEncoding,
                         ownsStream: false
                     )
-                ) {
+                )
+                {
                     dataContractSerializer.WriteObject(writer, value);
                 }
             }
@@ -363,7 +370,8 @@ namespace System.Net.Http.Formatting
         private DataContractJsonSerializer CreateDataContractSerializer(
             Type type,
             bool throwOnError
-        ) {
+        )
+        {
             Contract.Assert(type != null);
 
             DataContractJsonSerializer serializer = null;

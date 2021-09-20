@@ -67,7 +67,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             IDatabaseProvider databaseProvider,
             ISnapshotModelProcessor snapshotModelProcessor,
             IMigrator migrator
-        ) {
+        )
+        {
             Check.NotNull(currentContext, nameof(currentContext));
             Check.NotNull(model, nameof(model));
             Check.NotNull(migrationsAssembly, nameof(migrationsAssembly));

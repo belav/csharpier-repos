@@ -12,20 +12,23 @@ namespace System
         public override bool CanConvertFrom(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Type sourceType
-        ) {
+        )
+        {
             throw null;
         }
         public override bool CanConvertTo(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Type destinationType
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertFrom(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Globalization.CultureInfo culture,
             object value
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertTo(
@@ -33,13 +36,15 @@ namespace System
             System.Globalization.CultureInfo culture,
             object value,
             System.Type destinationType
-        ) {
+        )
+        {
             throw null;
         }
         public override bool IsValid(
             System.ComponentModel.ITypeDescriptorContext context,
             object value
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -104,7 +109,8 @@ namespace System.ComponentModel
             System.Globalization.CultureInfo culture,
             object value,
             System.Type destinationType
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -114,12 +120,14 @@ namespace System.ComponentModel
             System.ComponentModel.ITypeDescriptorContext context,
             object value,
             System.Attribute[] attributes
-        ) {
+        )
+        {
             throw null;
         }
         public override bool GetPropertiesSupported(
             System.ComponentModel.ITypeDescriptorContext context
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -180,7 +188,8 @@ namespace System.ComponentModel
         public static System.ComponentModel.AttributeCollection FromExisting(
             System.ComponentModel.AttributeCollection existing,
             params System.Attribute[] newAttributes
-        ) {
+        )
+        {
             throw null;
         }
         protected System.Attribute GetDefaultAttribute(
@@ -189,7 +198,8 @@ namespace System.ComponentModel
                     | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
             )]
                 System.Type attributeType
-        ) {
+        )
+        {
             throw null;
         }
         public System.Collections.IEnumerator GetEnumerator()
@@ -269,20 +279,23 @@ namespace System.ComponentModel
         public override bool CanConvertFrom(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Type sourceType
-        ) {
+        )
+        {
             throw null;
         }
         public override bool CanConvertTo(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Type destinationType
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertFrom(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Globalization.CultureInfo culture,
             object value
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertTo(
@@ -290,7 +303,8 @@ namespace System.ComponentModel
             System.Globalization.CultureInfo culture,
             object value,
             System.Type destinationType
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -497,7 +511,8 @@ namespace System.ComponentModel
         int System.ComponentModel.IBindingList.Find(
             System.ComponentModel.PropertyDescriptor prop,
             object key
-        ) {
+        )
+        {
             throw null;
         }
         void System.ComponentModel.IBindingList.RemoveIndex(
@@ -511,29 +526,34 @@ namespace System.ComponentModel
         public override bool CanConvertFrom(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Type sourceType
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertFrom(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Globalization.CultureInfo culture,
             object value
-        ) {
+        )
+        {
             throw null;
         }
         public override System.ComponentModel.TypeConverter.StandardValuesCollection GetStandardValues(
             System.ComponentModel.ITypeDescriptorContext context
-        ) {
+        )
+        {
             throw null;
         }
         public override bool GetStandardValuesExclusive(
             System.ComponentModel.ITypeDescriptorContext context
-        ) {
+        )
+        {
             throw null;
         }
         public override bool GetStandardValuesSupported(
             System.ComponentModel.ITypeDescriptorContext context
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -548,14 +568,16 @@ namespace System.ComponentModel
         public override bool CanConvertFrom(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Type sourceType
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertFrom(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Globalization.CultureInfo culture,
             object value
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertTo(
@@ -563,7 +585,8 @@ namespace System.ComponentModel
             System.Globalization.CultureInfo culture,
             object value,
             System.Type destinationType
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -600,7 +623,8 @@ namespace System.ComponentModel
             System.Globalization.CultureInfo culture,
             object value,
             System.Type destinationType
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -610,12 +634,14 @@ namespace System.ComponentModel
             System.ComponentModel.ITypeDescriptorContext context,
             object value,
             System.Attribute[] attributes
-        ) {
+        )
+        {
             throw null;
         }
         public override bool GetPropertiesSupported(
             System.ComponentModel.ITypeDescriptorContext context
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -653,12 +679,14 @@ namespace System.ComponentModel
             System.ComponentModel.ITypeDescriptorContext context,
             object value,
             System.Attribute[] attributes
-        ) {
+        )
+        {
             throw null;
         }
         public override bool GetPropertiesSupported(
             System.ComponentModel.ITypeDescriptorContext context
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -706,7 +734,8 @@ namespace System.ComponentModel
         protected virtual System.ComponentModel.ISite CreateSite(
             System.ComponentModel.IComponent component,
             string name
-        ) {
+        )
+        {
             throw null;
         }
         public void Dispose() { }
@@ -731,7 +760,8 @@ namespace System.ComponentModel
         protected ContainerFilterService() { }
         public virtual System.ComponentModel.ComponentCollection FilterComponents(
             System.ComponentModel.ComponentCollection components
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -741,20 +771,23 @@ namespace System.ComponentModel
         public override bool CanConvertFrom(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Type sourceType
-        ) {
+        )
+        {
             throw null;
         }
         public override bool CanConvertTo(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Type destinationType
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertFrom(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Globalization.CultureInfo culture,
             object value
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertTo(
@@ -762,7 +795,8 @@ namespace System.ComponentModel
             System.Globalization.CultureInfo culture,
             object value,
             System.Type destinationType
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual string GetCultureName(System.Globalization.CultureInfo culture)
@@ -771,17 +805,20 @@ namespace System.ComponentModel
         }
         public override System.ComponentModel.TypeConverter.StandardValuesCollection GetStandardValues(
             System.ComponentModel.ITypeDescriptorContext context
-        ) {
+        )
+        {
             throw null;
         }
         public override bool GetStandardValuesExclusive(
             System.ComponentModel.ITypeDescriptorContext context
-        ) {
+        )
+        {
             throw null;
         }
         public override bool GetStandardValuesSupported(
             System.ComponentModel.ITypeDescriptorContext context
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -838,7 +875,8 @@ namespace System.ComponentModel
         )]
         public virtual System.ComponentModel.EventDescriptorCollection GetEvents(
             System.Attribute[] attributes
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -853,7 +891,8 @@ namespace System.ComponentModel
         )]
         public virtual System.ComponentModel.PropertyDescriptorCollection GetProperties(
             System.Attribute[] attributes
-        ) {
+        )
+        {
             throw null;
         }
         public virtual object GetPropertyOwner(System.ComponentModel.PropertyDescriptor pd)
@@ -966,20 +1005,23 @@ namespace System.ComponentModel
         public override bool CanConvertFrom(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Type sourceType
-        ) {
+        )
+        {
             throw null;
         }
         public override bool CanConvertTo(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Type destinationType
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertFrom(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Globalization.CultureInfo culture,
             object value
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertTo(
@@ -987,7 +1029,8 @@ namespace System.ComponentModel
             System.Globalization.CultureInfo culture,
             object value,
             System.Type destinationType
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -997,20 +1040,23 @@ namespace System.ComponentModel
         public override bool CanConvertFrom(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Type sourceType
-        ) {
+        )
+        {
             throw null;
         }
         public override bool CanConvertTo(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Type destinationType
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertFrom(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Globalization.CultureInfo culture,
             object value
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertTo(
@@ -1018,7 +1064,8 @@ namespace System.ComponentModel
             System.Globalization.CultureInfo culture,
             object value,
             System.Type destinationType
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1028,7 +1075,8 @@ namespace System.ComponentModel
         public override bool CanConvertTo(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Type destinationType
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertTo(
@@ -1036,7 +1084,8 @@ namespace System.ComponentModel
             System.Globalization.CultureInfo culture,
             object value,
             System.Type destinationType
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1155,20 +1204,23 @@ namespace System.ComponentModel
         public override bool CanConvertFrom(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Type sourceType
-        ) {
+        )
+        {
             throw null;
         }
         public override bool CanConvertTo(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Type destinationType
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertFrom(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Globalization.CultureInfo culture,
             object value
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertTo(
@@ -1176,28 +1228,33 @@ namespace System.ComponentModel
             System.Globalization.CultureInfo culture,
             object value,
             System.Type destinationType
-        ) {
+        )
+        {
             throw null;
         }
         public override System.ComponentModel.TypeConverter.StandardValuesCollection GetStandardValues(
             System.ComponentModel.ITypeDescriptorContext context
-        ) {
+        )
+        {
             throw null;
         }
         public override bool GetStandardValuesExclusive(
             System.ComponentModel.ITypeDescriptorContext context
-        ) {
+        )
+        {
             throw null;
         }
         public override bool GetStandardValuesSupported(
             System.ComponentModel.ITypeDescriptorContext context
-        ) {
+        )
+        {
             throw null;
         }
         public override bool IsValid(
             System.ComponentModel.ITypeDescriptorContext context,
             object value
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1296,7 +1353,8 @@ namespace System.ComponentModel
         }
         public virtual System.ComponentModel.EventDescriptorCollection Sort(
             System.Collections.IComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.ComponentModel.EventDescriptorCollection Sort(string[] names)
@@ -1306,7 +1364,8 @@ namespace System.ComponentModel
         public virtual System.ComponentModel.EventDescriptorCollection Sort(
             string[] names,
             System.Collections.IComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         void System.Collections.ICollection.CopyTo(System.Array array, int index) { }
@@ -1341,12 +1400,14 @@ namespace System.ComponentModel
             System.ComponentModel.ITypeDescriptorContext context,
             object value,
             System.Attribute[] attributes
-        ) {
+        )
+        {
             throw null;
         }
         public override bool GetPropertiesSupported(
             System.ComponentModel.ITypeDescriptorContext context
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1385,20 +1446,23 @@ namespace System.ComponentModel
         public override bool CanConvertFrom(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Type sourceType
-        ) {
+        )
+        {
             throw null;
         }
         public override bool CanConvertTo(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Type destinationType
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertFrom(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Globalization.CultureInfo culture,
             object value
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertTo(
@@ -1406,7 +1470,8 @@ namespace System.ComponentModel
             System.Globalization.CultureInfo culture,
             object value,
             System.Type destinationType
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1700,7 +1765,8 @@ namespace System.ComponentModel
         public virtual string GetSavedLicenseKey(
             System.Type type,
             System.Reflection.Assembly resourceAssembly
-        ) {
+        )
+        {
             throw null;
         }
         public virtual object GetService(System.Type type)
@@ -1752,7 +1818,8 @@ namespace System.ComponentModel
             )]
                 System.Type type,
             System.ComponentModel.LicenseContext creationContext
-        ) {
+        )
+        {
             throw null;
         }
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
@@ -1763,7 +1830,8 @@ namespace System.ComponentModel
                 System.Type type,
             System.ComponentModel.LicenseContext creationContext,
             object[] args
-        ) {
+        )
+        {
             throw null;
         }
         public static bool IsLicensed(System.Type type)
@@ -1778,7 +1846,8 @@ namespace System.ComponentModel
             System.Type type,
             object instance,
             out System.ComponentModel.License license
-        ) {
+        )
+        {
             throw null;
         }
         public static void LockContext(object contextUser) { }
@@ -1857,7 +1926,8 @@ namespace System.ComponentModel
             System.Type type,
             object instance,
             bool allowExceptions
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual bool IsKeyValid(string key, System.Type type)
@@ -2253,7 +2323,8 @@ namespace System.ComponentModel
             char input,
             out int testPosition,
             out System.ComponentModel.MaskedTextResultHint resultHint
-        ) {
+        )
+        {
             throw null;
         }
         public bool Add(string input)
@@ -2264,7 +2335,8 @@ namespace System.ComponentModel
             string input,
             out int testPosition,
             out System.ComponentModel.MaskedTextResultHint resultHint
-        ) {
+        )
+        {
             throw null;
         }
         public void Clear() { }
@@ -2285,7 +2357,8 @@ namespace System.ComponentModel
             int startPosition,
             int endPosition,
             bool direction
-        ) {
+        )
+        {
             throw null;
         }
         public int FindEditPositionFrom(int position, bool direction)
@@ -2312,12 +2385,14 @@ namespace System.ComponentModel
             int startPosition,
             int endPosition,
             bool direction
-        ) {
+        )
+        {
             throw null;
         }
         public static bool GetOperationResultFromHint(
             System.ComponentModel.MaskedTextResultHint hint
-        ) {
+        )
+        {
             throw null;
         }
         public bool InsertAt(char input, int position)
@@ -2329,7 +2404,8 @@ namespace System.ComponentModel
             int position,
             out int testPosition,
             out System.ComponentModel.MaskedTextResultHint resultHint
-        ) {
+        )
+        {
             throw null;
         }
         public bool InsertAt(string input, int position)
@@ -2341,7 +2417,8 @@ namespace System.ComponentModel
             int position,
             out int testPosition,
             out System.ComponentModel.MaskedTextResultHint resultHint
-        ) {
+        )
+        {
             throw null;
         }
         public bool IsAvailablePosition(int position)
@@ -2371,7 +2448,8 @@ namespace System.ComponentModel
         public bool Remove(
             out int testPosition,
             out System.ComponentModel.MaskedTextResultHint resultHint
-        ) {
+        )
+        {
             throw null;
         }
         public bool RemoveAt(int position)
@@ -2387,7 +2465,8 @@ namespace System.ComponentModel
             int endPosition,
             out int testPosition,
             out System.ComponentModel.MaskedTextResultHint resultHint
-        ) {
+        )
+        {
             throw null;
         }
         public bool Replace(char input, int position)
@@ -2400,7 +2479,8 @@ namespace System.ComponentModel
             int endPosition,
             out int testPosition,
             out System.ComponentModel.MaskedTextResultHint resultHint
-        ) {
+        )
+        {
             throw null;
         }
         public bool Replace(
@@ -2408,7 +2488,8 @@ namespace System.ComponentModel
             int position,
             out int testPosition,
             out System.ComponentModel.MaskedTextResultHint resultHint
-        ) {
+        )
+        {
             throw null;
         }
         public bool Replace(string input, int position)
@@ -2421,7 +2502,8 @@ namespace System.ComponentModel
             int endPosition,
             out int testPosition,
             out System.ComponentModel.MaskedTextResultHint resultHint
-        ) {
+        )
+        {
             throw null;
         }
         public bool Replace(
@@ -2429,7 +2511,8 @@ namespace System.ComponentModel
             int position,
             out int testPosition,
             out System.ComponentModel.MaskedTextResultHint resultHint
-        ) {
+        )
+        {
             throw null;
         }
         public bool Set(string input)
@@ -2440,7 +2523,8 @@ namespace System.ComponentModel
             string input,
             out int testPosition,
             out System.ComponentModel.MaskedTextResultHint resultHint
-        ) {
+        )
+        {
             throw null;
         }
         public string ToDisplayString()
@@ -2465,7 +2549,8 @@ namespace System.ComponentModel
             bool includeLiterals,
             int startPosition,
             int length
-        ) {
+        )
+        {
             throw null;
         }
         public string ToString(
@@ -2473,7 +2558,8 @@ namespace System.ComponentModel
             bool includeLiterals,
             int startPosition,
             int length
-        ) {
+        )
+        {
             throw null;
         }
         public string ToString(bool ignorePasswordChar, int startPosition, int length)
@@ -2488,7 +2574,8 @@ namespace System.ComponentModel
             char input,
             int position,
             out System.ComponentModel.MaskedTextResultHint hint
-        ) {
+        )
+        {
             throw null;
         }
         public bool VerifyEscapeChar(char input, int position)
@@ -2503,7 +2590,8 @@ namespace System.ComponentModel
             string input,
             out int testPosition,
             out System.ComponentModel.MaskedTextResultHint resultHint
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -2588,7 +2676,8 @@ namespace System.ComponentModel
             string name,
             System.Type[] args,
             System.Type returnType
-        ) {
+        )
+        {
             throw null;
         }
         protected static System.Reflection.MethodInfo FindMethod(
@@ -2601,7 +2690,8 @@ namespace System.ComponentModel
             System.Type[] args,
             System.Type returnType,
             bool publicOnly
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -2632,7 +2722,8 @@ namespace System.ComponentModel
             System.Globalization.CultureInfo culture,
             object value,
             System.Type destinationType
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -2642,12 +2733,14 @@ namespace System.ComponentModel
             System.ComponentModel.ITypeDescriptorContext context,
             object value,
             System.Attribute[] attributes
-        ) {
+        )
+        {
             throw null;
         }
         public override bool GetPropertiesSupported(
             System.ComponentModel.ITypeDescriptorContext context
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -2669,7 +2762,8 @@ namespace System.ComponentModel
         protected override System.ComponentModel.ISite CreateSite(
             System.ComponentModel.IComponent component,
             string name
-        ) {
+        )
+        {
             throw null;
         }
         protected override void Dispose(bool disposing) { }
@@ -2699,20 +2793,23 @@ namespace System.ComponentModel
         public override bool CanConvertFrom(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Type sourceType
-        ) {
+        )
+        {
             throw null;
         }
         public override bool CanConvertTo(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Type destinationType
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertFrom(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Globalization.CultureInfo culture,
             object value
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertTo(
@@ -2720,18 +2817,21 @@ namespace System.ComponentModel
             System.Globalization.CultureInfo culture,
             object value,
             System.Type destinationType
-        ) {
+        )
+        {
             throw null;
         }
         public override object CreateInstance(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Collections.IDictionary propertyValues
-        ) {
+        )
+        {
             throw null;
         }
         public override bool GetCreateInstanceSupported(
             System.ComponentModel.ITypeDescriptorContext context
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -2741,33 +2841,39 @@ namespace System.ComponentModel
             System.ComponentModel.ITypeDescriptorContext context,
             object value,
             System.Attribute[] attributes
-        ) {
+        )
+        {
             throw null;
         }
         public override bool GetPropertiesSupported(
             System.ComponentModel.ITypeDescriptorContext context
-        ) {
+        )
+        {
             throw null;
         }
         public override System.ComponentModel.TypeConverter.StandardValuesCollection GetStandardValues(
             System.ComponentModel.ITypeDescriptorContext context
-        ) {
+        )
+        {
             throw null;
         }
         public override bool GetStandardValuesExclusive(
             System.ComponentModel.ITypeDescriptorContext context
-        ) {
+        )
+        {
             throw null;
         }
         public override bool GetStandardValuesSupported(
             System.ComponentModel.ITypeDescriptorContext context
-        ) {
+        )
+        {
             throw null;
         }
         public override bool IsValid(
             System.ComponentModel.ITypeDescriptorContext context,
             object value
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -2835,7 +2941,8 @@ namespace System.ComponentModel
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
             )]
                 System.Type type
-        ) {
+        )
+        {
             throw null;
         }
         public override bool Equals(object obj)
@@ -2855,7 +2962,8 @@ namespace System.ComponentModel
         )]
         public System.ComponentModel.PropertyDescriptorCollection GetChildProperties(
             System.Attribute[] filter
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -2863,7 +2971,8 @@ namespace System.ComponentModel
         )]
         public System.ComponentModel.PropertyDescriptorCollection GetChildProperties(
             object instance
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -2872,7 +2981,8 @@ namespace System.ComponentModel
         public virtual System.ComponentModel.PropertyDescriptorCollection GetChildProperties(
             object instance,
             System.Attribute[] filter
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -2901,7 +3011,8 @@ namespace System.ComponentModel
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
             )]
                 string typeName
-        ) {
+        )
+        {
             throw null;
         }
         public abstract object GetValue(object component);
@@ -3019,7 +3130,8 @@ namespace System.ComponentModel
         }
         public virtual System.ComponentModel.PropertyDescriptorCollection Sort(
             System.Collections.IComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.ComponentModel.PropertyDescriptorCollection Sort(string[] names)
@@ -3029,7 +3141,8 @@ namespace System.ComponentModel
         public virtual System.ComponentModel.PropertyDescriptorCollection Sort(
             string[] names,
             System.Collections.IComparer comparer
-        ) {
+        )
+        {
             throw null;
         }
         void System.Collections.IDictionary.Add(object key, object value) { }
@@ -3203,14 +3316,16 @@ namespace System.ComponentModel
         public override bool CanConvertFrom(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Type sourceType
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertFrom(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Globalization.CultureInfo culture,
             object value
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertTo(
@@ -3218,28 +3333,33 @@ namespace System.ComponentModel
             System.Globalization.CultureInfo culture,
             object value,
             System.Type destinationType
-        ) {
+        )
+        {
             throw null;
         }
         public override System.ComponentModel.TypeConverter.StandardValuesCollection GetStandardValues(
             System.ComponentModel.ITypeDescriptorContext context
-        ) {
+        )
+        {
             throw null;
         }
         public override bool GetStandardValuesExclusive(
             System.ComponentModel.ITypeDescriptorContext context
-        ) {
+        )
+        {
             throw null;
         }
         public override bool GetStandardValuesSupported(
             System.ComponentModel.ITypeDescriptorContext context
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual bool IsValueAllowed(
             System.ComponentModel.ITypeDescriptorContext context,
             object value
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -3314,14 +3434,16 @@ namespace System.ComponentModel
         public override bool CanConvertFrom(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Type sourceType
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertFrom(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Globalization.CultureInfo culture,
             object value
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -3346,20 +3468,23 @@ namespace System.ComponentModel
         public override bool CanConvertFrom(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Type sourceType
-        ) {
+        )
+        {
             throw null;
         }
         public override bool CanConvertTo(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Type destinationType
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertFrom(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Globalization.CultureInfo culture,
             object value
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertTo(
@@ -3367,7 +3492,8 @@ namespace System.ComponentModel
             System.Globalization.CultureInfo culture,
             object value,
             System.Type destinationType
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -3470,7 +3596,8 @@ namespace System.ComponentModel
         public virtual bool CanConvertFrom(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Type sourceType
-        ) {
+        )
+        {
             throw null;
         }
         public bool CanConvertFrom(System.Type sourceType)
@@ -3480,7 +3607,8 @@ namespace System.ComponentModel
         public virtual bool CanConvertTo(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Type destinationType
-        ) {
+        )
+        {
             throw null;
         }
         public bool CanConvertTo(System.Type destinationType)
@@ -3491,7 +3619,8 @@ namespace System.ComponentModel
             System.ComponentModel.ITypeDescriptorContext context,
             System.Globalization.CultureInfo culture,
             object value
-        ) {
+        )
+        {
             throw null;
         }
         public object ConvertFrom(object value)
@@ -3501,7 +3630,8 @@ namespace System.ComponentModel
         public object ConvertFromInvariantString(
             System.ComponentModel.ITypeDescriptorContext context,
             string text
-        ) {
+        )
+        {
             throw null;
         }
         public object ConvertFromInvariantString(string text)
@@ -3512,13 +3642,15 @@ namespace System.ComponentModel
             System.ComponentModel.ITypeDescriptorContext context,
             System.Globalization.CultureInfo culture,
             string text
-        ) {
+        )
+        {
             throw null;
         }
         public object ConvertFromString(
             System.ComponentModel.ITypeDescriptorContext context,
             string text
-        ) {
+        )
+        {
             throw null;
         }
         public object ConvertFromString(string text)
@@ -3530,7 +3662,8 @@ namespace System.ComponentModel
             System.Globalization.CultureInfo culture,
             object value,
             System.Type destinationType
-        ) {
+        )
+        {
             throw null;
         }
         public object ConvertTo(object value, System.Type destinationType)
@@ -3540,7 +3673,8 @@ namespace System.ComponentModel
         public string ConvertToInvariantString(
             System.ComponentModel.ITypeDescriptorContext context,
             object value
-        ) {
+        )
+        {
             throw null;
         }
         public string ConvertToInvariantString(object value)
@@ -3551,13 +3685,15 @@ namespace System.ComponentModel
             System.ComponentModel.ITypeDescriptorContext context,
             System.Globalization.CultureInfo culture,
             object value
-        ) {
+        )
+        {
             throw null;
         }
         public string ConvertToString(
             System.ComponentModel.ITypeDescriptorContext context,
             object value
-        ) {
+        )
+        {
             throw null;
         }
         public string ConvertToString(object value)
@@ -3571,7 +3707,8 @@ namespace System.ComponentModel
         public virtual object CreateInstance(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Collections.IDictionary propertyValues
-        ) {
+        )
+        {
             throw null;
         }
         protected System.Exception GetConvertFromException(object value)
@@ -3588,7 +3725,8 @@ namespace System.ComponentModel
         }
         public virtual bool GetCreateInstanceSupported(
             System.ComponentModel.ITypeDescriptorContext context
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -3597,7 +3735,8 @@ namespace System.ComponentModel
         public System.ComponentModel.PropertyDescriptorCollection GetProperties(
             System.ComponentModel.ITypeDescriptorContext context,
             object value
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -3607,7 +3746,8 @@ namespace System.ComponentModel
             System.ComponentModel.ITypeDescriptorContext context,
             object value,
             System.Attribute[] attributes
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -3623,7 +3763,8 @@ namespace System.ComponentModel
         }
         public virtual bool GetPropertiesSupported(
             System.ComponentModel.ITypeDescriptorContext context
-        ) {
+        )
+        {
             throw null;
         }
         public System.Collections.ICollection GetStandardValues()
@@ -3632,7 +3773,8 @@ namespace System.ComponentModel
         }
         public virtual System.ComponentModel.TypeConverter.StandardValuesCollection GetStandardValues(
             System.ComponentModel.ITypeDescriptorContext context
-        ) {
+        )
+        {
             throw null;
         }
         public bool GetStandardValuesExclusive()
@@ -3641,7 +3783,8 @@ namespace System.ComponentModel
         }
         public virtual bool GetStandardValuesExclusive(
             System.ComponentModel.ITypeDescriptorContext context
-        ) {
+        )
+        {
             throw null;
         }
         public bool GetStandardValuesSupported()
@@ -3650,13 +3793,15 @@ namespace System.ComponentModel
         }
         public virtual bool GetStandardValuesSupported(
             System.ComponentModel.ITypeDescriptorContext context
-        ) {
+        )
+        {
             throw null;
         }
         public virtual bool IsValid(
             System.ComponentModel.ITypeDescriptorContext context,
             object value
-        ) {
+        )
+        {
             throw null;
         }
         public bool IsValid(object value)
@@ -3666,7 +3811,8 @@ namespace System.ComponentModel
         protected System.ComponentModel.PropertyDescriptorCollection SortProperties(
             System.ComponentModel.PropertyDescriptorCollection props,
             string[] names
-        ) {
+        )
+        {
             throw null;
         }
         protected abstract partial class SimplePropertyDescriptor
@@ -3745,7 +3891,8 @@ namespace System.ComponentModel
                 System.Type objectType,
             System.Type[] argTypes,
             object[] args
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Collections.IDictionary GetCache(object instance)
@@ -3757,12 +3904,14 @@ namespace System.ComponentModel
         )]
         public virtual System.ComponentModel.ICustomTypeDescriptor GetExtendedTypeDescriptor(
             object instance
-        ) {
+        )
+        {
             throw null;
         }
         protected internal virtual System.ComponentModel.IExtenderProvider[] GetExtenderProviders(
             object instance
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -3789,7 +3938,8 @@ namespace System.ComponentModel
                     | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
             )]
                 System.Type objectType
-        ) {
+        )
+        {
             throw null;
         }
         [return: System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -3803,7 +3953,8 @@ namespace System.ComponentModel
             )]
                 System.Type objectType,
             object instance
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Type GetRuntimeType(System.Type reflectionType)
@@ -3822,7 +3973,8 @@ namespace System.ComponentModel
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.All
             )]
                 System.Type objectType
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.ComponentModel.ICustomTypeDescriptor GetTypeDescriptor(
@@ -3831,7 +3983,8 @@ namespace System.ComponentModel
             )]
                 System.Type objectType,
             object instance
-        ) {
+        )
+        {
             throw null;
         }
         public virtual bool IsSupportedType(System.Type type)
@@ -3878,7 +4031,8 @@ namespace System.ComponentModel
         public static System.ComponentModel.TypeDescriptionProvider AddAttributes(
             object instance,
             params System.Attribute[] attributes
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -3887,7 +4041,8 @@ namespace System.ComponentModel
         public static System.ComponentModel.TypeDescriptionProvider AddAttributes(
             System.Type type,
             params System.Attribute[] attributes
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -3938,7 +4093,8 @@ namespace System.ComponentModel
         public static System.ComponentModel.Design.IDesigner CreateDesigner(
             System.ComponentModel.IComponent component,
             System.Type designerBaseType
-        ) {
+        )
+        {
             throw null;
         }
         public static System.ComponentModel.EventDescriptor CreateEvent(
@@ -3948,7 +4104,8 @@ namespace System.ComponentModel
                 System.Type componentType,
             System.ComponentModel.EventDescriptor oldEventDescriptor,
             params System.Attribute[] attributes
-        ) {
+        )
+        {
             throw null;
         }
         public static System.ComponentModel.EventDescriptor CreateEvent(
@@ -3959,7 +4116,8 @@ namespace System.ComponentModel
             string name,
             System.Type type,
             params System.Attribute[] attributes
-        ) {
+        )
+        {
             throw null;
         }
         public static object CreateInstance(
@@ -3970,7 +4128,8 @@ namespace System.ComponentModel
                 System.Type objectType,
             System.Type[] argTypes,
             object[] args
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -3983,7 +4142,8 @@ namespace System.ComponentModel
                 System.Type componentType,
             System.ComponentModel.PropertyDescriptor oldPropertyDescriptor,
             params System.Attribute[] attributes
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -3997,7 +4157,8 @@ namespace System.ComponentModel
             string name,
             System.Type type,
             params System.Attribute[] attributes
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -4023,7 +4184,8 @@ namespace System.ComponentModel
         public static System.ComponentModel.AttributeCollection GetAttributes(
             object component,
             bool noCustomTypeDesc
-        ) {
+        )
+        {
             throw null;
         }
         public static System.ComponentModel.AttributeCollection GetAttributes(
@@ -4031,7 +4193,8 @@ namespace System.ComponentModel
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.All
             )]
                 System.Type componentType
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -4056,7 +4219,8 @@ namespace System.ComponentModel
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.All
             )]
                 System.Type componentType
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -4092,7 +4256,8 @@ namespace System.ComponentModel
         public static System.ComponentModel.TypeConverter GetConverter(
             object component,
             bool noCustomTypeDesc
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -4103,7 +4268,8 @@ namespace System.ComponentModel
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.All
             )]
                 System.Type type
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -4122,7 +4288,8 @@ namespace System.ComponentModel
         public static System.ComponentModel.EventDescriptor GetDefaultEvent(
             object component,
             bool noCustomTypeDesc
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -4133,7 +4300,8 @@ namespace System.ComponentModel
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.All
             )]
                 System.Type componentType
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -4152,7 +4320,8 @@ namespace System.ComponentModel
         public static System.ComponentModel.PropertyDescriptor GetDefaultProperty(
             object component,
             bool noCustomTypeDesc
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -4163,7 +4332,8 @@ namespace System.ComponentModel
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.All
             )]
                 System.Type componentType
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -4183,7 +4353,8 @@ namespace System.ComponentModel
             object component,
             System.Type editorBaseType,
             bool noCustomTypeDesc
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -4195,7 +4366,8 @@ namespace System.ComponentModel
             )]
                 System.Type type,
             System.Type editorBaseType
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -4211,7 +4383,8 @@ namespace System.ComponentModel
         public static System.ComponentModel.EventDescriptorCollection GetEvents(
             object component,
             System.Attribute[] attributes
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -4224,7 +4397,8 @@ namespace System.ComponentModel
             object component,
             System.Attribute[] attributes,
             bool noCustomTypeDesc
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -4236,7 +4410,8 @@ namespace System.ComponentModel
         public static System.ComponentModel.EventDescriptorCollection GetEvents(
             object component,
             bool noCustomTypeDesc
-        ) {
+        )
+        {
             throw null;
         }
         public static System.ComponentModel.EventDescriptorCollection GetEvents(
@@ -4244,7 +4419,8 @@ namespace System.ComponentModel
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.All
             )]
                 System.Type componentType
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -4256,7 +4432,8 @@ namespace System.ComponentModel
             )]
                 System.Type componentType,
             System.Attribute[] attributes
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -4271,7 +4448,8 @@ namespace System.ComponentModel
         )]
         public static System.ComponentModel.PropertyDescriptorCollection GetProperties(
             object component
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -4280,7 +4458,8 @@ namespace System.ComponentModel
         public static System.ComponentModel.PropertyDescriptorCollection GetProperties(
             object component,
             System.Attribute[] attributes
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -4290,7 +4469,8 @@ namespace System.ComponentModel
             object component,
             System.Attribute[] attributes,
             bool noCustomTypeDesc
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -4302,7 +4482,8 @@ namespace System.ComponentModel
         public static System.ComponentModel.PropertyDescriptorCollection GetProperties(
             object component,
             bool noCustomTypeDesc
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -4313,7 +4494,8 @@ namespace System.ComponentModel
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.All
             )]
                 System.Type componentType
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -4325,7 +4507,8 @@ namespace System.ComponentModel
             )]
                 System.Type componentType,
             System.Attribute[] attributes
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -4365,7 +4548,8 @@ namespace System.ComponentModel
                     | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
             )]
                 System.Type type
-        ) {
+        )
+        {
             throw null;
         }
         public static void Refresh(object component) { }
@@ -4416,20 +4600,23 @@ namespace System.ComponentModel
         public override bool CanConvertFrom(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Type sourceType
-        ) {
+        )
+        {
             throw null;
         }
         public override bool CanConvertTo(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Type destinationType
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertFrom(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Globalization.CultureInfo culture,
             object value
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertTo(
@@ -4437,22 +4624,26 @@ namespace System.ComponentModel
             System.Globalization.CultureInfo culture,
             object value,
             System.Type destinationType
-        ) {
+        )
+        {
             throw null;
         }
         public override System.ComponentModel.TypeConverter.StandardValuesCollection GetStandardValues(
             System.ComponentModel.ITypeDescriptorContext context
-        ) {
+        )
+        {
             throw null;
         }
         public override bool GetStandardValuesExclusive(
             System.ComponentModel.ITypeDescriptorContext context
-        ) {
+        )
+        {
             throw null;
         }
         public override bool GetStandardValuesSupported(
             System.ComponentModel.ITypeDescriptorContext context
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -4474,20 +4665,23 @@ namespace System.ComponentModel
         public override bool CanConvertFrom(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Type sourceType
-        ) {
+        )
+        {
             throw null;
         }
         public override bool CanConvertTo(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Type destinationType
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertFrom(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Globalization.CultureInfo culture,
             object value
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertTo(
@@ -4495,13 +4689,15 @@ namespace System.ComponentModel
             System.Globalization.CultureInfo culture,
             object value,
             System.Type destinationType
-        ) {
+        )
+        {
             throw null;
         }
         public override bool IsValid(
             System.ComponentModel.ITypeDescriptorContext context,
             object value
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -4727,7 +4923,8 @@ namespace System.ComponentModel.Design
             System.ComponentModel.Design.DesignerOptionService.DesignerOptionCollection parent,
             string name,
             object value
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual void PopulateOptionCollection(
@@ -4736,7 +4933,8 @@ namespace System.ComponentModel.Design
         protected virtual bool ShowDialog(
             System.ComponentModel.Design.DesignerOptionService.DesignerOptionCollection options,
             object optionObject
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -4745,7 +4943,8 @@ namespace System.ComponentModel.Design
         object System.ComponentModel.Design.IDesignerOptionService.GetOptionValue(
             string pageName,
             string valueName
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -4821,7 +5020,8 @@ namespace System.ComponentModel.Design
             }
             public int IndexOf(
                 System.ComponentModel.Design.DesignerOptionService.DesignerOptionCollection value
-            ) {
+            )
+            {
                 throw null;
             }
             public bool ShowDialog()
@@ -4956,7 +5156,8 @@ namespace System.ComponentModel.Design
         public override string GetSavedLicenseKey(
             System.Type type,
             System.Reflection.Assembly resourceAssembly
-        ) {
+        )
+        {
             throw null;
         }
         public override void SetSavedLicenseKey(System.Type type, string key) { }
@@ -5743,13 +5944,15 @@ namespace System.ComponentModel.Design.Serialization
         public static bool operator ==(
             System.ComponentModel.Design.Serialization.MemberRelationship left,
             System.ComponentModel.Design.Serialization.MemberRelationship right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.ComponentModel.Design.Serialization.MemberRelationship left,
             System.ComponentModel.Design.Serialization.MemberRelationship right
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -5768,7 +5971,8 @@ namespace System.ComponentModel.Design.Serialization
         }
         protected virtual System.ComponentModel.Design.Serialization.MemberRelationship GetRelationship(
             System.ComponentModel.Design.Serialization.MemberRelationship source
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual void SetRelationship(
@@ -5857,20 +6061,23 @@ namespace System.Drawing
         public override bool CanConvertFrom(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Type sourceType
-        ) {
+        )
+        {
             throw null;
         }
         public override bool CanConvertTo(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Type destinationType
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertFrom(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Globalization.CultureInfo culture,
             object value
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertTo(
@@ -5878,17 +6085,20 @@ namespace System.Drawing
             System.Globalization.CultureInfo culture,
             object value,
             System.Type destinationType
-        ) {
+        )
+        {
             throw null;
         }
         public override System.ComponentModel.TypeConverter.StandardValuesCollection GetStandardValues(
             System.ComponentModel.ITypeDescriptorContext context
-        ) {
+        )
+        {
             throw null;
         }
         public override bool GetStandardValuesSupported(
             System.ComponentModel.ITypeDescriptorContext context
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -5898,20 +6108,23 @@ namespace System.Drawing
         public override bool CanConvertFrom(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Type sourceType
-        ) {
+        )
+        {
             throw null;
         }
         public override bool CanConvertTo(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Type destinationType
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertFrom(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Globalization.CultureInfo culture,
             object value
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertTo(
@@ -5919,18 +6132,21 @@ namespace System.Drawing
             System.Globalization.CultureInfo culture,
             object value,
             System.Type destinationType
-        ) {
+        )
+        {
             throw null;
         }
         public override object CreateInstance(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Collections.IDictionary propertyValues
-        ) {
+        )
+        {
             throw null;
         }
         public override bool GetCreateInstanceSupported(
             System.ComponentModel.ITypeDescriptorContext context
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -5940,12 +6156,14 @@ namespace System.Drawing
             System.ComponentModel.ITypeDescriptorContext context,
             object value,
             System.Attribute[] attributes
-        ) {
+        )
+        {
             throw null;
         }
         public override bool GetPropertiesSupported(
             System.ComponentModel.ITypeDescriptorContext context
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -5955,20 +6173,23 @@ namespace System.Drawing
         public override bool CanConvertFrom(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Type sourceType
-        ) {
+        )
+        {
             throw null;
         }
         public override bool CanConvertTo(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Type destinationType
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertFrom(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Globalization.CultureInfo culture,
             object value
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertTo(
@@ -5976,18 +6197,21 @@ namespace System.Drawing
             System.Globalization.CultureInfo culture,
             object value,
             System.Type destinationType
-        ) {
+        )
+        {
             throw null;
         }
         public override object CreateInstance(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Collections.IDictionary propertyValues
-        ) {
+        )
+        {
             throw null;
         }
         public override bool GetCreateInstanceSupported(
             System.ComponentModel.ITypeDescriptorContext context
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -5997,12 +6221,14 @@ namespace System.Drawing
             System.ComponentModel.ITypeDescriptorContext context,
             object value,
             System.Attribute[] attributes
-        ) {
+        )
+        {
             throw null;
         }
         public override bool GetPropertiesSupported(
             System.ComponentModel.ITypeDescriptorContext context
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -6012,20 +6238,23 @@ namespace System.Drawing
         public override bool CanConvertFrom(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Type sourceType
-        ) {
+        )
+        {
             throw null;
         }
         public override bool CanConvertTo(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Type destinationType
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertFrom(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Globalization.CultureInfo culture,
             object value
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertTo(
@@ -6033,18 +6262,21 @@ namespace System.Drawing
             System.Globalization.CultureInfo culture,
             object value,
             System.Type destinationType
-        ) {
+        )
+        {
             throw null;
         }
         public override object CreateInstance(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Collections.IDictionary propertyValues
-        ) {
+        )
+        {
             throw null;
         }
         public override bool GetCreateInstanceSupported(
             System.ComponentModel.ITypeDescriptorContext context
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -6054,12 +6286,14 @@ namespace System.Drawing
             System.ComponentModel.ITypeDescriptorContext context,
             object value,
             System.Attribute[] attributes
-        ) {
+        )
+        {
             throw null;
         }
         public override bool GetPropertiesSupported(
             System.ComponentModel.ITypeDescriptorContext context
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -6069,20 +6303,23 @@ namespace System.Drawing
         public override bool CanConvertFrom(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Type sourceType
-        ) {
+        )
+        {
             throw null;
         }
         public override bool CanConvertTo(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Type destinationType
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertFrom(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Globalization.CultureInfo culture,
             object value
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertTo(
@@ -6090,18 +6327,21 @@ namespace System.Drawing
             System.Globalization.CultureInfo culture,
             object value,
             System.Type destinationType
-        ) {
+        )
+        {
             throw null;
         }
         public override object CreateInstance(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Collections.IDictionary propertyValues
-        ) {
+        )
+        {
             throw null;
         }
         public override bool GetCreateInstanceSupported(
             System.ComponentModel.ITypeDescriptorContext context
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -6111,12 +6351,14 @@ namespace System.Drawing
             System.ComponentModel.ITypeDescriptorContext context,
             object value,
             System.Attribute[] attributes
-        ) {
+        )
+        {
             throw null;
         }
         public override bool GetPropertiesSupported(
             System.ComponentModel.ITypeDescriptorContext context
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -6129,7 +6371,8 @@ namespace System.Security.Authentication.ExtendedProtection
         public override bool CanConvertTo(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Type destinationType
-        ) {
+        )
+        {
             throw null;
         }
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
@@ -6138,7 +6381,8 @@ namespace System.Security.Authentication.ExtendedProtection
             System.Globalization.CultureInfo culture,
             object value,
             System.Type destinationType
-        ) {
+        )
+        {
             throw null;
         }
     }

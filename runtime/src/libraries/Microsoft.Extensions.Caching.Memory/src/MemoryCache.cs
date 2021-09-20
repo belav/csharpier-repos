@@ -44,7 +44,8 @@ namespace Microsoft.Extensions.Caching.Memory
         public MemoryCache(
             IOptions<MemoryCacheOptions> optionsAccessor,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             if (optionsAccessor == null)
             {
                 throw new ArgumentNullException(nameof(optionsAccessor));
@@ -134,7 +135,8 @@ namespace Microsoft.Extensions.Caching.Memory
                 if (
                     !entry.AbsoluteExpiration.HasValue
                     || absoluteExpiration.Value < entry.AbsoluteExpiration.Value
-                ) {
+                )
+                {
                     entry.AbsoluteExpiration = absoluteExpiration;
                 }
             }
@@ -488,7 +490,8 @@ namespace Microsoft.Extensions.Caching.Memory
                 Func<CacheEntry, long> computeEntrySize,
                 List<CacheEntry> entriesToRemove,
                 List<CacheEntry> priorityEntries
-            ) {
+            )
+            {
                 // Do we meet our quota by just removing expired entries?
                 if (removalSizeTarget <= removedSize)
                 {

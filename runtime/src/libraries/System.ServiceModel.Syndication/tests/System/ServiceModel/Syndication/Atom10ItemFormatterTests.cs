@@ -516,7 +516,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void Read_FullItem_ReturnsExpected(
             bool preserveAttributeExtensions,
             bool preserveElementExtensions
-        ) {
+        )
+        {
             string xmlString =
                 @"<entry xml:base=""/relative"" item_name1="""" d1p1:item_name2="""" d1p1:item_name3=""item_value"" d1p2:item_name4="""" xmlns:d1p2=""xmlns"" xmlns:d1p1=""item_namespace"" xmlns=""http://www.w3.org/2005/Atom"">
     <id>id</id>
@@ -1053,7 +1054,8 @@ namespace System.ServiceModel.Syndication.Tests
             string contentXmlString,
             bool preserveAttributeExtensions,
             bool preserveElementExtensions
-        ) {
+        )
+        {
             VerifyRead(
                 @"<entry xmlns=""http://www.w3.org/2005/Atom"">" + contentXmlString + "</entry>",
                 preserveAttributeExtensions,
@@ -1095,7 +1097,8 @@ namespace System.ServiceModel.Syndication.Tests
             string contentXmlString,
             bool preserveAttributeExtensions,
             bool preserveElementExtensions
-        ) {
+        )
+        {
             VerifyRead(
                 @"<entry xmlns=""http://www.w3.org/2005/Atom"">" + contentXmlString + "</entry>",
                 preserveAttributeExtensions,
@@ -1145,7 +1148,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void Read_TryParseTrue_ReturnsExpected(
             bool preserveAttributeExtensions,
             bool preserveElementExtensions
-        ) {
+        )
+        {
             using (
                 var stringReader = new StringReader(
                     @"<entry xml:base=""/relative"" item_name1="""" d1p1:item_name2="""" d1p1:item_name3=""item_value"" d1p2:item_name4="""" xmlns:d1p2=""xmlns"" xmlns:d1p1=""item_namespace"" xmlns=""http://www.w3.org/2005/Atom"">
@@ -1476,7 +1480,8 @@ namespace System.ServiceModel.Syndication.Tests
             bool preserveAttributeExtensions,
             bool preserveElementExtensions,
             Action<SyndicationItem> verifyAction
-        ) {
+        )
+        {
             // ReadFrom.
             using (var stringReader = new StringReader(xmlString))
             using (XmlReader reader = XmlReader.Create(stringReader))
@@ -1781,7 +1786,8 @@ namespace System.ServiceModel.Syndication.Tests
         [InlineData(false)]
         public void PreserveAttributeExtensions_Set_GetReturnsExpected(
             bool preserveAttributeExtensions
-        ) {
+        )
+        {
             var formatter = new Atom10ItemFormatter()
             {
                 PreserveAttributeExtensions = preserveAttributeExtensions
@@ -1901,7 +1907,8 @@ namespace System.ServiceModel.Syndication.Tests
                 string contentType,
                 string version,
                 out SyndicationContent content
-            ) {
+            )
+            {
                 reader.Skip();
 
                 content = new TextSyndicationContent("overriden");

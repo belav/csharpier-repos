@@ -214,7 +214,8 @@ namespace System
             GCCollectionMode mode,
             bool blocking,
             bool compacting
-        ) {
+        )
+        {
             if (generation < 0)
             {
                 throw new ArgumentOutOfRangeException(
@@ -414,7 +415,8 @@ namespace System
         public static void RegisterForFullGCNotification(
             int maxGenerationThreshold,
             int largeObjectHeapThreshold
-        ) {
+        )
+        {
             if ((maxGenerationThreshold <= 0) || (maxGenerationThreshold >= 100))
             {
                 throw new ArgumentOutOfRangeException(
@@ -497,7 +499,8 @@ namespace System
             bool hasLohSize,
             long lohSize,
             bool disallowFullBlockingGC
-        ) {
+        )
+        {
             if (totalSize <= 0)
             {
                 throw new ArgumentOutOfRangeException(
@@ -569,7 +572,8 @@ namespace System
             long totalSize,
             long lohSize,
             bool disallowFullBlockingGC
-        ) {
+        )
+        {
             return StartNoGCRegionWorker(totalSize, true, lohSize, disallowFullBlockingGC);
         }
 
@@ -598,7 +602,8 @@ namespace System
                 float lowMemoryPercent,
                 float highMemoryPercent,
                 Action notification
-            ) {
+            )
+            {
                 LowMemoryPercent = lowMemoryPercent;
                 HighMemoryPercent = highMemoryPercent;
                 Notification = notification;
@@ -647,7 +652,8 @@ namespace System
                             s_notifications[i].LowMemoryPercent <= currentMemoryLoad
                             && currentMemoryLoad <= s_notifications[i].HighMemoryPercent
                         )
-                    ) {
+                    )
+                    {
                         s_notifications[i].Notification();
                         // it will then be overwritten or removed
                     }
@@ -678,12 +684,14 @@ namespace System
             float lowMemoryPercent,
             float highMemoryPercent,
             Action notification
-        ) {
+        )
+        {
             if (
                 highMemoryPercent < 0
                 || highMemoryPercent > 1.0
                 || highMemoryPercent <= lowMemoryPercent
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(nameof(highMemoryPercent));
             }
             if (lowMemoryPercent < 0)

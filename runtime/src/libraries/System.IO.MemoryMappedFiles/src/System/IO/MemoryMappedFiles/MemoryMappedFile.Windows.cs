@@ -15,7 +15,8 @@ namespace System.IO.MemoryMappedFiles
             MemoryMappedFileAccess access,
             long capacity,
             FileStream fileStream
-        ) {
+        )
+        {
             if (access == MemoryMappedFileAccess.Read && capacity > fileStream.Length)
             {
                 throw new ArgumentException(SR.Argument_ReadAccessWithLargeCapacity);
@@ -43,7 +44,8 @@ namespace System.IO.MemoryMappedFiles
             MemoryMappedFileAccess access,
             MemoryMappedFileOptions options,
             long capacity
-        ) {
+        )
+        {
             SafeFileHandle? fileHandle = fileStream != null ? fileStream.SafeFileHandle : null;
             Interop.Kernel32.SECURITY_ATTRIBUTES secAttrs = GetSecAttrs(inheritability);
 
@@ -97,7 +99,8 @@ namespace System.IO.MemoryMappedFiles
             HandleInheritability inheritability,
             MemoryMappedFileAccess access,
             bool createOrOpen
-        ) {
+        )
+        {
             return OpenCore(mapName, inheritability, GetFileMapAccess(access), createOrOpen);
         }
 
@@ -111,7 +114,8 @@ namespace System.IO.MemoryMappedFiles
             HandleInheritability inheritability,
             MemoryMappedFileRights rights,
             bool createOrOpen
-        ) {
+        )
+        {
             return OpenCore(mapName, inheritability, GetFileMapAccess(rights), createOrOpen);
         }
 
@@ -124,7 +128,8 @@ namespace System.IO.MemoryMappedFiles
             MemoryMappedFileAccess access,
             MemoryMappedFileOptions options,
             long capacity
-        ) {
+        )
+        {
             // Try to open the file if it exists -- this requires a bit more work. Loop until we can
             // either create or open a memory mapped file up to a timeout. CreateFileMapping may fail
             // if the file exists and we have non-null security attributes, in which case we need to
@@ -287,7 +292,8 @@ namespace System.IO.MemoryMappedFiles
             HandleInheritability inheritability,
             int desiredAccessRights,
             bool createOrOpen
-        ) {
+        )
+        {
             SafeMemoryMappedFileHandle handle = Interop.OpenFileMapping(
                 desiredAccessRights,
                 (inheritability & HandleInheritability.Inheritable) != 0,
@@ -316,7 +322,8 @@ namespace System.IO.MemoryMappedFiles
         /// </summary>
         private static unsafe Interop.Kernel32.SECURITY_ATTRIBUTES GetSecAttrs(
             HandleInheritability inheritability
-        ) {
+        )
+        {
             Interop.Kernel32.SECURITY_ATTRIBUTES secAttrs =
                 default(Interop.Kernel32.SECURITY_ATTRIBUTES);
             if ((inheritability & HandleInheritability.Inheritable) != 0)

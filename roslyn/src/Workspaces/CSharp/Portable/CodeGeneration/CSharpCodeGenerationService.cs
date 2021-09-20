@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         protected override IList<bool> GetAvailableInsertionIndices(
             SyntaxNode destination,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (destination is TypeDeclarationSyntax typeDeclaration)
             {
                 return GetInsertionIndices(typeDeclaration, cancellationToken);
@@ -61,7 +62,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IEventSymbol @event,
             CodeGenerationOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var newDocument = await base.AddEventAsync(
                     solution,
                     destination,
@@ -114,7 +116,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IEventSymbol @event,
             CodeGenerationOptions options,
             IList<bool> availableIndices
-        ) {
+        )
+        {
             CheckDeclarationNode<TypeDeclarationSyntax>(destination);
 
             return Cast<TDeclarationNode>(
@@ -132,7 +135,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IFieldSymbol field,
             CodeGenerationOptions options,
             IList<bool> availableIndices
-        ) {
+        )
+        {
             CheckDeclarationNode<
                 EnumDeclarationSyntax,
                 TypeDeclarationSyntax,
@@ -178,7 +182,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IMethodSymbol method,
             CodeGenerationOptions options,
             IList<bool> availableIndices
-        ) {
+        )
+        {
             // https://github.com/dotnet/roslyn/issues/44425: Add handling for top level statements
             if (destination is GlobalStatementSyntax)
             {
@@ -287,7 +292,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IPropertySymbol property,
             CodeGenerationOptions options,
             IList<bool> availableIndices
-        ) {
+        )
+        {
             CheckDeclarationNode<TypeDeclarationSyntax, CompilationUnitSyntax>(destination);
 
             // Can't generate a property with parameters.  So generate the setter/getter individually.
@@ -368,7 +374,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             CodeGenerationOptions options,
             IList<bool> availableIndices,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             CheckDeclarationNode<
                 TypeDeclarationSyntax,
                 NamespaceDeclarationSyntax,
@@ -422,7 +429,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             CodeGenerationOptions options,
             IList<bool> availableIndices,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             CheckDeclarationNode<CompilationUnitSyntax, NamespaceDeclarationSyntax>(destination);
 
             if (destination is CompilationUnitSyntax)
@@ -458,7 +466,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IEnumerable<IParameterSymbol> parameters,
             CodeGenerationOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var currentParameterList = destination.GetParameterList();
 
             if (currentParameterList == null)
@@ -502,7 +511,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             SyntaxToken? target,
             CodeGenerationOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (target.HasValue && !target.Value.IsValidAttributeTarget())
             {
                 throw new ArgumentException("target");
@@ -534,7 +544,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         protected override TDeclarationNode AddMembers<TDeclarationNode>(
             TDeclarationNode destination,
             IEnumerable<SyntaxNode> members
-        ) {
+        )
+        {
             CheckDeclarationNode<
                 EnumDeclarationSyntax,
                 TypeDeclarationSyntax,
@@ -577,7 +588,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             AttributeData attributeToRemove,
             CodeGenerationOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (attributeToRemove.ApplicationSyntaxReference == null)
             {
                 throw new ArgumentException("attributeToRemove");
@@ -599,7 +611,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             SyntaxNode attributeToRemove,
             CodeGenerationOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (attributeToRemove == null)
             {
                 throw new ArgumentException("attributeToRemove");
@@ -714,7 +727,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             SyntaxNode attributeToRemove,
             out int positionOfRemovedNode,
             out SyntaxTriviaList triviaOfRemovedNode
-        ) {
+        )
+        {
             foreach (var attributeList in attributeLists)
             {
                 var attributes = attributeList.Attributes;
@@ -764,7 +778,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IEnumerable<SyntaxNode> statements,
             CodeGenerationOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (destinationMember is MemberDeclarationSyntax memberDeclaration)
             {
                 return AddStatementsToMemberDeclaration<TDeclarationNode>(
@@ -817,7 +832,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             else if (
                 destinationMember is StatementSyntax statement
                 && statement.IsParentKind(SyntaxKind.GlobalStatement)
-            ) {
+            )
+            {
                 // We are adding a statement to a global statement in script, where the CompilationUnitSyntax is not a
                 // statement container. If the global statement is not already a block, create a block which can hold
                 // both the original statement and any new statements we are adding to it.
@@ -915,7 +931,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IEventSymbol @event,
             CodeGenerationDestination destination,
             CodeGenerationOptions options
-        ) {
+        )
+        {
             return EventGenerator.GenerateEventDeclaration(@event, destination, options);
         }
 
@@ -923,7 +940,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IFieldSymbol field,
             CodeGenerationDestination destination,
             CodeGenerationOptions options
-        ) {
+        )
+        {
             return destination == CodeGenerationDestination.EnumType
               ? EnumMemberGenerator.GenerateEnumMemberDeclaration(field, null, options)
               : (SyntaxNode)FieldGenerator.GenerateFieldDeclaration(field, options);
@@ -933,7 +951,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IMethodSymbol method,
             CodeGenerationDestination destination,
             CodeGenerationOptions options
-        ) {
+        )
+        {
             // Synthesized methods for properties/events are not things we actually generate
             // declarations for.
             if (method.AssociatedSymbol is IEventSymbol)
@@ -1005,7 +1024,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IPropertySymbol property,
             CodeGenerationDestination destination,
             CodeGenerationOptions options
-        ) {
+        )
+        {
             return PropertyGenerator.GeneratePropertyOrIndexer(
                 property,
                 destination,
@@ -1019,7 +1039,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             CodeGenerationDestination destination,
             CodeGenerationOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return NamedTypeGenerator.GenerateNamedTypeDeclaration(
                 this,
                 namedType,
@@ -1034,7 +1055,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             CodeGenerationDestination destination,
             CodeGenerationOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return NamespaceGenerator.GenerateNamespaceDeclaration(
                 this,
                 @namespace,
@@ -1081,7 +1103,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IEnumerable<SyntaxToken> newModifiers,
             CodeGenerationOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             SyntaxTokenList computeNewModifiersList(SyntaxTokenList modifiersList) =>
                 newModifiers.ToSyntaxTokenList();
             return UpdateDeclarationModifiers(declaration, computeNewModifiersList);
@@ -1092,7 +1115,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             Accessibility newAccessibility,
             CodeGenerationOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             SyntaxTokenList computeNewModifiersList(SyntaxTokenList modifiersList) =>
                 UpdateDeclarationAccessibility(modifiersList, newAccessibility, options);
             return UpdateDeclarationModifiers(declaration, computeNewModifiersList);
@@ -1102,7 +1126,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             SyntaxTokenList modifiersList,
             Accessibility newAccessibility,
             CodeGenerationOptions options
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<SyntaxToken>.GetInstance(out var newModifierTokens);
             CSharpCodeGenerationHelpers.AddAccessibilityModifiers(
                 newAccessibility,
@@ -1129,7 +1154,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             ITypeSymbol newType,
             CodeGenerationOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!(declaration is CSharpSyntaxNode syntaxNode))
             {
                 return declaration;
@@ -1271,7 +1297,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IList<ISymbol> newMembers,
             CodeGenerationOptions options = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (declaration is MemberDeclarationSyntax memberDeclaration)
             {
                 return Cast<TDeclarationNode>(

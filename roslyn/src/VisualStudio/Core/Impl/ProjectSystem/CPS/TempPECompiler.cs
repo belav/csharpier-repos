@@ -31,7 +31,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
             string outputFileName,
             ISet<string> filesToInclude,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (filesToInclude == null || filesToInclude.Count == 0)
             {
                 throw new ArgumentException(

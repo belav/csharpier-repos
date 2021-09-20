@@ -147,7 +147,8 @@ namespace Microsoft.AspNetCore.Routing
         public async Task Map_MatchesRequest(
             Action<IRouteBuilder> routeSetup,
             Action<HttpContext> requestSetup
-        ) {
+        )
+        {
             // Arrange
             var services = CreateServices();
 
@@ -395,7 +396,8 @@ namespace Microsoft.AspNetCore.Routing
         public async Task Map_DoesNotMatchRequest(
             Action<IRouteBuilder> routeSetup,
             Action<HttpContext> requestSetup
-        ) {
+        )
+        {
             // Arrange
             var services = CreateServices();
 

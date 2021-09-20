@@ -27,15 +27,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         ///     Creates a new instance of <see cref="BaseTypeDiscoveryConvention" />.
         /// </summary>
         /// <param name="dependencies"> Parameter object containing dependencies for this convention. </param>
-        public BaseTypeDiscoveryConvention(
-            ProviderConventionSetBuilderDependencies dependencies
-        ) : base(dependencies) { }
+        public BaseTypeDiscoveryConvention(ProviderConventionSetBuilderDependencies dependencies)
+            : base(dependencies) { }
 
         /// <inheritdoc />
         public virtual void ProcessEntityTypeAdded(
             IConventionEntityTypeBuilder entityTypeBuilder,
             IConventionContext<IConventionEntityTypeBuilder> context
-        ) {
+        )
+        {
             var entityType = entityTypeBuilder.Metadata;
             var clrType = entityType.ClrType;
             if (
@@ -43,7 +43,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 || entityType.HasSharedClrType
                 || entityType.Model.IsOwned(clrType)
                 || entityType.FindDeclaredOwnership() != null
-            ) {
+            )
+            {
                 return;
             }
 
@@ -106,7 +107,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 if (
                     entityTypeBuilder.HasBaseType(baseEntityType)
                     is IConventionEntityTypeBuilder newEntityTypeBuilder
-                ) {
+                )
+                {
                     context.StopProcessingIfChanged(newEntityTypeBuilder);
                 }
             }
@@ -116,16 +118,19 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessForeignKeyOwnershipChanged(
             IConventionForeignKeyBuilder relationshipBuilder,
             IConventionContext<bool?> context
-        ) {
+        )
+        {
             var foreignKey = relationshipBuilder.Metadata;
             if (
                 foreignKey.IsOwnership
                 && foreignKey.DeclaringEntityType.GetDirectlyDerivedTypes().Any()
-            ) {
+            )
+            {
                 foreach (
                     var derivedType in foreignKey.DeclaringEntityType.GetDirectlyDerivedTypes()
                         .ToList()
-                ) {
+                )
+                {
                     derivedType.Builder.HasBaseType(null);
                 }
             }

@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
             SyntaxNode root,
             Func<SyntaxNode, bool> predicate,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             predicate ??= Functions<SyntaxNode>.True;
             var diagnostics = model.GetDiagnostics(cancellationToken: cancellationToken);
             if (diagnostics.IsEmpty)
@@ -42,7 +43,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
                     if (
                         root.FindNode(diagnostic.Location.SourceSpan) is UsingDirectiveSyntax node
                         && predicate(node)
-                    ) {
+                    )
+                    {
                         unnecessaryImports.Add(node);
                     }
                 }

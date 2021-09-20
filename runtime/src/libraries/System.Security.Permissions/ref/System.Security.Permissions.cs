@@ -82,9 +82,8 @@ namespace System.Configuration
     public sealed partial class ConfigurationPermissionAttribute
         : System.Security.Permissions.CodeAccessSecurityAttribute
     {
-        public ConfigurationPermissionAttribute(
-            System.Security.Permissions.SecurityAction action
-        ) : base(default(System.Security.Permissions.SecurityAction)) { }
+        public ConfigurationPermissionAttribute(System.Security.Permissions.SecurityAction action)
+            : base(default(System.Security.Permissions.SecurityAction)) { }
         public override System.Security.IPermission CreatePermission()
         {
             throw null;
@@ -173,9 +172,8 @@ namespace System.Data.Common
     public abstract partial class DBDataPermissionAttribute
         : System.Security.Permissions.CodeAccessSecurityAttribute
     {
-        protected DBDataPermissionAttribute(
-            System.Security.Permissions.SecurityAction action
-        ) : base(default(System.Security.Permissions.SecurityAction)) { }
+        protected DBDataPermissionAttribute(System.Security.Permissions.SecurityAction action)
+            : base(default(System.Security.Permissions.SecurityAction)) { }
         public bool AllowBlankPassword
         {
             get { throw null; }
@@ -490,9 +488,8 @@ namespace System.Data.SqlClient
     public sealed partial class SqlClientPermissionAttribute
         : System.Data.Common.DBDataPermissionAttribute
     {
-        public SqlClientPermissionAttribute(
-            System.Security.Permissions.SecurityAction action
-        ) : base(default(System.Security.Permissions.SecurityAction)) { }
+        public SqlClientPermissionAttribute(System.Security.Permissions.SecurityAction action)
+            : base(default(System.Security.Permissions.SecurityAction)) { }
         public override System.Security.IPermission CreatePermission()
         {
             throw null;
@@ -555,9 +552,8 @@ namespace System.Diagnostics
     public partial class EventLogPermissionAttribute
         : System.Security.Permissions.CodeAccessSecurityAttribute
     {
-        public EventLogPermissionAttribute(
-            System.Security.Permissions.SecurityAction action
-        ) : base(default(System.Security.Permissions.SecurityAction)) { }
+        public EventLogPermissionAttribute(System.Security.Permissions.SecurityAction action)
+            : base(default(System.Security.Permissions.SecurityAction)) { }
         public string MachineName
         {
             get { throw null; }
@@ -813,9 +809,8 @@ namespace System.Drawing.Printing
     public sealed partial class PrintingPermissionAttribute
         : System.Security.Permissions.CodeAccessSecurityAttribute
     {
-        public PrintingPermissionAttribute(
-            System.Security.Permissions.SecurityAction action
-        ) : base(default(System.Security.Permissions.SecurityAction)) { }
+        public PrintingPermissionAttribute(System.Security.Permissions.SecurityAction action)
+            : base(default(System.Security.Permissions.SecurityAction)) { }
         public System.Drawing.Printing.PrintingPermissionLevel Level
         {
             get { throw null; }
@@ -1558,18 +1553,21 @@ namespace System.Security
             System.Security.Policy.Evidence applicationEvidence,
             System.Security.Policy.Evidence activatorEvidence,
             System.Security.Policy.TrustManagerContext context
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Security.Policy.EvidenceBase GenerateAppDomainEvidence(
             System.Type evidenceType
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Security.Policy.EvidenceBase GenerateAssemblyEvidence(
             System.Type evidenceType,
             System.Reflection.Assembly assembly
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Type[] GetHostSuppliedAppDomainEvidenceTypes()
@@ -1578,24 +1576,28 @@ namespace System.Security
         }
         public virtual System.Type[] GetHostSuppliedAssemblyEvidenceTypes(
             System.Reflection.Assembly assembly
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Security.Policy.Evidence ProvideAppDomainEvidence(
             System.Security.Policy.Evidence inputEvidence
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Security.Policy.Evidence ProvideAssemblyEvidence(
             System.Reflection.Assembly loadedAssembly,
             System.Security.Policy.Evidence inputEvidence
-        ) {
+        )
+        {
             throw null;
         }
         [System.ObsoleteAttribute]
         public virtual System.Security.PermissionSet ResolvePolicy(
             System.Security.Policy.Evidence evidence
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1641,10 +1643,8 @@ namespace System.Security
             : base(default(System.Security.Permissions.PermissionState)) { }
         public NamedPermissionSet(string name)
             : base(default(System.Security.Permissions.PermissionState)) { }
-        public NamedPermissionSet(
-            string name,
-            System.Security.Permissions.PermissionState state
-        ) : base(default(System.Security.Permissions.PermissionState)) { }
+        public NamedPermissionSet(string name, System.Security.Permissions.PermissionState state)
+            : base(default(System.Security.Permissions.PermissionState)) { }
         public NamedPermissionSet(string name, System.Security.PermissionSet permSet)
             : base(default(System.Security.Permissions.PermissionState)) { }
         public string Description
@@ -1711,7 +1711,8 @@ namespace System.Security
         }
         protected virtual System.Security.IPermission AddPermissionImpl(
             System.Security.IPermission perm
-        ) {
+        )
+        {
             throw null;
         }
         public void Assert() { }
@@ -1789,7 +1790,8 @@ namespace System.Security
         }
         protected virtual System.Security.IPermission SetPermissionImpl(
             System.Security.IPermission perm
-        ) {
+        )
+        {
             throw null;
         }
         void System.Runtime.Serialization.IDeserializationCallback.OnDeserialization(
@@ -1883,13 +1885,15 @@ namespace System.Security
         }
         public static System.Security.PermissionSet GetStandardSandbox(
             System.Security.Policy.Evidence evidence
-        ) {
+        )
+        {
             throw null;
         }
         public static void GetZoneAndOrigin(
             out System.Collections.ArrayList zone,
             out System.Collections.ArrayList origin
-        ) {
+        )
+        {
             throw null;
         }
         [System.ObsoleteAttribute]
@@ -1901,14 +1905,16 @@ namespace System.Security
         public static System.Security.Policy.PolicyLevel LoadPolicyLevelFromFile(
             string path,
             System.Security.PolicyLevelType type
-        ) {
+        )
+        {
             throw null;
         }
         [System.ObsoleteAttribute]
         public static System.Security.Policy.PolicyLevel LoadPolicyLevelFromString(
             string str,
             System.Security.PolicyLevelType type
-        ) {
+        )
+        {
             throw null;
         }
         [System.ObsoleteAttribute]
@@ -1919,7 +1925,8 @@ namespace System.Security
         [System.ObsoleteAttribute]
         public static System.Security.PermissionSet ResolvePolicy(
             System.Security.Policy.Evidence evidence
-        ) {
+        )
+        {
             throw null;
         }
         [System.ObsoleteAttribute]
@@ -1929,25 +1936,29 @@ namespace System.Security
             System.Security.PermissionSet optPset,
             System.Security.PermissionSet denyPset,
             out System.Security.PermissionSet denied
-        ) {
+        )
+        {
             throw null;
         }
         [System.ObsoleteAttribute]
         public static System.Security.PermissionSet ResolvePolicy(
             System.Security.Policy.Evidence[] evidences
-        ) {
+        )
+        {
             throw null;
         }
         [System.ObsoleteAttribute]
         public static System.Collections.IEnumerator ResolvePolicyGroups(
             System.Security.Policy.Evidence evidence
-        ) {
+        )
+        {
             throw null;
         }
         [System.ObsoleteAttribute]
         public static System.Security.PermissionSet ResolveSystemPolicy(
             System.Security.Policy.Evidence evidence
-        ) {
+        )
+        {
             throw null;
         }
         [System.ObsoleteAttribute]
@@ -2049,9 +2060,8 @@ namespace System.Security.Permissions
     public sealed partial class DataProtectionPermissionAttribute
         : System.Security.Permissions.CodeAccessSecurityAttribute
     {
-        public DataProtectionPermissionAttribute(
-            System.Security.Permissions.SecurityAction action
-        ) : base(default(System.Security.Permissions.SecurityAction)) { }
+        public DataProtectionPermissionAttribute(System.Security.Permissions.SecurityAction action)
+            : base(default(System.Security.Permissions.SecurityAction)) { }
         public System.Security.Permissions.DataProtectionPermissionFlags Flags
         {
             get { throw null; }
@@ -2187,9 +2197,8 @@ namespace System.Security.Permissions
     public sealed partial class EnvironmentPermissionAttribute
         : System.Security.Permissions.CodeAccessSecurityAttribute
     {
-        public EnvironmentPermissionAttribute(
-            System.Security.Permissions.SecurityAction action
-        ) : base(default(System.Security.Permissions.SecurityAction)) { }
+        public EnvironmentPermissionAttribute(System.Security.Permissions.SecurityAction action)
+            : base(default(System.Security.Permissions.SecurityAction)) { }
         public string All
         {
             get { throw null; }
@@ -2289,9 +2298,8 @@ namespace System.Security.Permissions
     public sealed partial class FileDialogPermissionAttribute
         : System.Security.Permissions.CodeAccessSecurityAttribute
     {
-        public FileDialogPermissionAttribute(
-            System.Security.Permissions.SecurityAction action
-        ) : base(default(System.Security.Permissions.SecurityAction)) { }
+        public FileDialogPermissionAttribute(System.Security.Permissions.SecurityAction action)
+            : base(default(System.Security.Permissions.SecurityAction)) { }
         public bool Open
         {
             get { throw null; }
@@ -2547,9 +2555,8 @@ namespace System.Security.Permissions
     public sealed partial class GacIdentityPermissionAttribute
         : System.Security.Permissions.CodeAccessSecurityAttribute
     {
-        public GacIdentityPermissionAttribute(
-            System.Security.Permissions.SecurityAction action
-        ) : base(default(System.Security.Permissions.SecurityAction)) { }
+        public GacIdentityPermissionAttribute(System.Security.Permissions.SecurityAction action)
+            : base(default(System.Security.Permissions.SecurityAction)) { }
         public override System.Security.IPermission CreatePermission()
         {
             throw null;
@@ -2688,9 +2695,8 @@ namespace System.Security.Permissions
     public sealed partial class IsolatedStorageFilePermission
         : System.Security.Permissions.IsolatedStoragePermission
     {
-        public IsolatedStorageFilePermission(
-            System.Security.Permissions.PermissionState state
-        ) : base(default(System.Security.Permissions.PermissionState)) { }
+        public IsolatedStorageFilePermission(System.Security.Permissions.PermissionState state)
+            : base(default(System.Security.Permissions.PermissionState)) { }
         public override System.Security.IPermission Copy()
         {
             throw null;
@@ -2966,7 +2972,8 @@ namespace System.Security.Permissions
         }
         public int IndexOf(
             System.Security.Permissions.KeyContainerPermissionAccessEntry accessEntry
-        ) {
+        )
+        {
             throw null;
         }
         public void Remove(
@@ -3021,9 +3028,8 @@ namespace System.Security.Permissions
     public sealed partial class KeyContainerPermissionAttribute
         : System.Security.Permissions.CodeAccessSecurityAttribute
     {
-        public KeyContainerPermissionAttribute(
-            System.Security.Permissions.SecurityAction action
-        ) : base(default(System.Security.Permissions.SecurityAction)) { }
+        public KeyContainerPermissionAttribute(System.Security.Permissions.SecurityAction action)
+            : base(default(System.Security.Permissions.SecurityAction)) { }
         public System.Security.Permissions.KeyContainerPermissionFlags Flags
         {
             get { throw null; }
@@ -3361,9 +3367,8 @@ namespace System.Security.Permissions
             UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
         )]
 #endif
-        public PrincipalPermissionAttribute(
-            System.Security.Permissions.SecurityAction action
-        ) : base(default(System.Security.Permissions.SecurityAction)) { }
+        public PrincipalPermissionAttribute(System.Security.Permissions.SecurityAction action)
+            : base(default(System.Security.Permissions.SecurityAction)) { }
         public bool Authenticated
         {
             get { throw null; }
@@ -3529,9 +3534,8 @@ namespace System.Security.Permissions
     public sealed partial class ReflectionPermissionAttribute
         : System.Security.Permissions.CodeAccessSecurityAttribute
     {
-        public ReflectionPermissionAttribute(
-            System.Security.Permissions.SecurityAction action
-        ) : base(default(System.Security.Permissions.SecurityAction)) { }
+        public ReflectionPermissionAttribute(System.Security.Permissions.SecurityAction action)
+            : base(default(System.Security.Permissions.SecurityAction)) { }
         public System.Security.Permissions.ReflectionPermissionFlag Flags
         {
             get { throw null; }
@@ -3683,9 +3687,8 @@ namespace System.Security.Permissions
     public sealed partial class RegistryPermissionAttribute
         : System.Security.Permissions.CodeAccessSecurityAttribute
     {
-        public RegistryPermissionAttribute(
-            System.Security.Permissions.SecurityAction action
-        ) : base(default(System.Security.Permissions.SecurityAction)) { }
+        public RegistryPermissionAttribute(System.Security.Permissions.SecurityAction action)
+            : base(default(System.Security.Permissions.SecurityAction)) { }
         [System.ObsoleteAttribute]
         public string All
         {
@@ -3910,9 +3913,8 @@ namespace System.Security.Permissions
     public sealed partial class SiteIdentityPermissionAttribute
         : System.Security.Permissions.CodeAccessSecurityAttribute
     {
-        public SiteIdentityPermissionAttribute(
-            System.Security.Permissions.SecurityAction action
-        ) : base(default(System.Security.Permissions.SecurityAction)) { }
+        public SiteIdentityPermissionAttribute(System.Security.Permissions.SecurityAction action)
+            : base(default(System.Security.Permissions.SecurityAction)) { }
         public string Site
         {
             get { throw null; }
@@ -4235,9 +4237,8 @@ namespace System.Security.Permissions
     public sealed partial class TypeDescriptorPermissionAttribute
         : System.Security.Permissions.CodeAccessSecurityAttribute
     {
-        public TypeDescriptorPermissionAttribute(
-            System.Security.Permissions.SecurityAction action
-        ) : base(default(System.Security.Permissions.SecurityAction)) { }
+        public TypeDescriptorPermissionAttribute(System.Security.Permissions.SecurityAction action)
+            : base(default(System.Security.Permissions.SecurityAction)) { }
         public System.Security.Permissions.TypeDescriptorPermissionFlags Flags
         {
             get { throw null; }
@@ -4440,9 +4441,8 @@ namespace System.Security.Permissions
     public sealed partial class UrlIdentityPermissionAttribute
         : System.Security.Permissions.CodeAccessSecurityAttribute
     {
-        public UrlIdentityPermissionAttribute(
-            System.Security.Permissions.SecurityAction action
-        ) : base(default(System.Security.Permissions.SecurityAction)) { }
+        public UrlIdentityPermissionAttribute(System.Security.Permissions.SecurityAction action)
+            : base(default(System.Security.Permissions.SecurityAction)) { }
         public string Url
         {
             get { throw null; }
@@ -4519,9 +4519,8 @@ namespace System.Security.Permissions
     public sealed partial class WebBrowserPermissionAttribute
         : System.Security.Permissions.CodeAccessSecurityAttribute
     {
-        public WebBrowserPermissionAttribute(
-            System.Security.Permissions.SecurityAction action
-        ) : base(default(System.Security.Permissions.SecurityAction)) { }
+        public WebBrowserPermissionAttribute(System.Security.Permissions.SecurityAction action)
+            : base(default(System.Security.Permissions.SecurityAction)) { }
         public System.Security.Permissions.WebBrowserPermissionLevel Level
         {
             get { throw null; }
@@ -4602,9 +4601,8 @@ namespace System.Security.Permissions
     public sealed partial class ZoneIdentityPermissionAttribute
         : System.Security.Permissions.CodeAccessSecurityAttribute
     {
-        public ZoneIdentityPermissionAttribute(
-            System.Security.Permissions.SecurityAction action
-        ) : base(default(System.Security.Permissions.SecurityAction)) { }
+        public ZoneIdentityPermissionAttribute(System.Security.Permissions.SecurityAction action)
+            : base(default(System.Security.Permissions.SecurityAction)) { }
         public System.Security.SecurityZone Zone
         {
             get { throw null; }
@@ -4817,7 +4815,8 @@ namespace System.Security.Policy
         public System.Security.Policy.ApplicationTrustCollection Find(
             System.ApplicationIdentity applicationIdentity,
             System.Security.Policy.ApplicationVersionMatch versionMatch
-        ) {
+        )
+        {
             throw null;
         }
         public System.Security.Policy.ApplicationTrustEnumerator GetEnumerator()
@@ -4880,7 +4879,8 @@ namespace System.Security.Policy
         }
         public static System.Security.Policy.CodeConnectAccess CreateOriginSchemeAccess(
             int allowPort
-        ) {
+        )
+        {
             throw null;
         }
         public override bool Equals(object o)
@@ -4987,10 +4987,11 @@ namespace System.Security.Policy
         public FileCodeGroup(
             System.Security.Policy.IMembershipCondition membershipCondition,
             System.Security.Permissions.FileIOPermissionAccess access
-        ) : base(
-            default(System.Security.Policy.IMembershipCondition),
-            default(System.Security.Policy.PolicyStatement)
-        ) { }
+        )
+            : base(
+                default(System.Security.Policy.IMembershipCondition),
+                default(System.Security.Policy.PolicyStatement)
+            ) { }
         public override string AttributeString
         {
             get { throw null; }
@@ -5025,12 +5026,14 @@ namespace System.Security.Policy
         ) { }
         public override System.Security.Policy.PolicyStatement Resolve(
             System.Security.Policy.Evidence evidence
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Security.Policy.CodeGroup ResolveMatchingCodeGroups(
             System.Security.Policy.Evidence evidence
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -5042,10 +5045,11 @@ namespace System.Security.Policy
         public FirstMatchCodeGroup(
             System.Security.Policy.IMembershipCondition membershipCondition,
             System.Security.Policy.PolicyStatement policy
-        ) : base(
-            default(System.Security.Policy.IMembershipCondition),
-            default(System.Security.Policy.PolicyStatement)
-        ) { }
+        )
+            : base(
+                default(System.Security.Policy.IMembershipCondition),
+                default(System.Security.Policy.PolicyStatement)
+            ) { }
         public override string MergeLogic
         {
             get { throw null; }
@@ -5056,12 +5060,14 @@ namespace System.Security.Policy
         }
         public override System.Security.Policy.PolicyStatement Resolve(
             System.Security.Policy.Evidence evidence
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Security.Policy.CodeGroup ResolveMatchingCodeGroups(
             System.Security.Policy.Evidence evidence
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -5083,7 +5089,8 @@ namespace System.Security.Policy
         }
         public System.Security.IPermission CreateIdentityPermission(
             System.Security.Policy.Evidence evidence
-        ) {
+        )
+        {
             throw null;
         }
         public override bool Equals(object o)
@@ -5317,12 +5324,14 @@ namespace System.Security.Policy
         public void ResetConnectAccess() { }
         public override System.Security.Policy.PolicyStatement Resolve(
             System.Security.Policy.Evidence evidence
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Security.Policy.CodeGroup ResolveMatchingCodeGroups(
             System.Security.Policy.Evidence evidence
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -5420,7 +5429,8 @@ namespace System.Security.Policy
         public System.Security.NamedPermissionSet ChangeNamedPermissionSet(
             string name,
             System.Security.PermissionSet pSet
-        ) {
+        )
+        {
             throw null;
         }
         [System.ObsoleteAttribute(
@@ -5458,7 +5468,8 @@ namespace System.Security.Policy
 #endif
         public System.Security.NamedPermissionSet RemoveNamedPermissionSet(
             System.Security.NamedPermissionSet permSet
-        ) {
+        )
+        {
             throw null;
         }
 #if NET50_OBSOLETIONS
@@ -5475,12 +5486,14 @@ namespace System.Security.Policy
         public void Reset() { }
         public System.Security.Policy.PolicyStatement Resolve(
             System.Security.Policy.Evidence evidence
-        ) {
+        )
+        {
             throw null;
         }
         public System.Security.Policy.CodeGroup ResolveMatchingCodeGroups(
             System.Security.Policy.Evidence evidence
-        ) {
+        )
+        {
             throw null;
         }
         public System.Security.SecurityElement ToXml()
@@ -5588,7 +5601,8 @@ namespace System.Security.Policy
         }
         public System.Security.IPermission CreateIdentityPermission(
             System.Security.Policy.Evidence evidence
-        ) {
+        )
+        {
             throw null;
         }
         public override bool Equals(object o)
@@ -5677,7 +5691,8 @@ namespace System.Security.Policy
         }
         public System.Security.IPermission CreateIdentityPermission(
             System.Security.Policy.Evidence evidence
-        ) {
+        )
+        {
             throw null;
         }
         public override bool Equals(object o)
@@ -5772,7 +5787,8 @@ namespace System.Security.Policy
         }
         public System.Security.IPermission CreateIdentityPermission(
             System.Security.Policy.Evidence evidence
-        ) {
+        )
+        {
             throw null;
         }
         public override bool Equals(object o)
@@ -5903,10 +5919,11 @@ namespace System.Security.Policy
         public UnionCodeGroup(
             System.Security.Policy.IMembershipCondition membershipCondition,
             System.Security.Policy.PolicyStatement policy
-        ) : base(
-            default(System.Security.Policy.IMembershipCondition),
-            default(System.Security.Policy.PolicyStatement)
-        ) { }
+        )
+            : base(
+                default(System.Security.Policy.IMembershipCondition),
+                default(System.Security.Policy.PolicyStatement)
+            ) { }
         public override string MergeLogic
         {
             get { throw null; }
@@ -5917,12 +5934,14 @@ namespace System.Security.Policy
         }
         public override System.Security.Policy.PolicyStatement Resolve(
             System.Security.Policy.Evidence evidence
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Security.Policy.CodeGroup ResolveMatchingCodeGroups(
             System.Security.Policy.Evidence evidence
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -5948,7 +5967,8 @@ namespace System.Security.Policy
         }
         public System.Security.IPermission CreateIdentityPermission(
             System.Security.Policy.Evidence evidence
-        ) {
+        )
+        {
             throw null;
         }
         public override bool Equals(object o)
@@ -6035,7 +6055,8 @@ namespace System.Security.Policy
         }
         public System.Security.IPermission CreateIdentityPermission(
             System.Security.Policy.Evidence evidence
-        ) {
+        )
+        {
             throw null;
         }
         public override bool Equals(object o)
@@ -6362,9 +6383,8 @@ namespace System.Web
     public sealed partial class AspNetHostingPermissionAttribute
         : System.Security.Permissions.CodeAccessSecurityAttribute
     {
-        public AspNetHostingPermissionAttribute(
-            System.Security.Permissions.SecurityAction action
-        ) : base(default(System.Security.Permissions.SecurityAction)) { }
+        public AspNetHostingPermissionAttribute(System.Security.Permissions.SecurityAction action)
+            : base(default(System.Security.Permissions.SecurityAction)) { }
         public System.Web.AspNetHostingPermissionLevel Level
         {
             get { throw null; }

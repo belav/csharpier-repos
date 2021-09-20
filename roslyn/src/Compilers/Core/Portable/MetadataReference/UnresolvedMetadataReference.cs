@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis
 
         internal override MetadataReference WithPropertiesImplReturningMetadataReference(
             MetadataReferenceProperties properties
-        ) {
+        )
+        {
             return new UnresolvedMetadataReference(this.Reference, properties);
         }
     }

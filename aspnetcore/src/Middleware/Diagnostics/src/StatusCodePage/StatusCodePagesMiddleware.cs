@@ -25,7 +25,8 @@ namespace Microsoft.AspNetCore.Diagnostics
         public StatusCodePagesMiddleware(
             RequestDelegate next,
             IOptions<StatusCodePagesOptions> options
-        ) {
+        )
+        {
             _next = next;
             _options = options.Value;
             if (_options.HandleAsync == null)
@@ -60,7 +61,8 @@ namespace Microsoft.AspNetCore.Diagnostics
                 || context.Response.StatusCode >= 600
                 || context.Response.ContentLength.HasValue
                 || !string.IsNullOrEmpty(context.Response.ContentType)
-            ) {
+            )
+            {
                 return;
             }
 

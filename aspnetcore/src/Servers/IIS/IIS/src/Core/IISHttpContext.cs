@@ -84,10 +84,12 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
             IISHttpServer server,
             ILogger logger,
             bool useLatin1
-        ) : base(
-            (HttpApiTypes.HTTP_REQUEST*)NativeMethods.HttpGetRawRequest(pInProcessHandler),
-            useLatin1: useLatin1
-        ) {
+        )
+            : base(
+                (HttpApiTypes.HTTP_REQUEST*)NativeMethods.HttpGetRawRequest(pInProcessHandler),
+                useLatin1: useLatin1
+            )
+        {
             _memoryPool = memoryPool;
             _requestNativeHandle = pInProcessHandler;
             _options = options;
@@ -158,7 +160,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
                 if (
                     KnownMethod == HttpApiTypes.HTTP_VERB.HttpVerbOPTIONS
                     && string.Equals(RawTarget, "*", StringComparison.Ordinal)
-                ) {
+                )
+                {
                     PathBase = string.Empty;
                     Path = string.Empty;
                 }
@@ -277,7 +280,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
                     transferEncoding?.Trim(),
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -655,7 +659,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
 
         public void PostCompletion(
             NativeMethods.REQUEST_NOTIFICATION_STATUS requestNotificationStatus
-        ) {
+        )
+        {
             NativeMethods.HttpSetCompletionStatus(_requestNativeHandle, requestNotificationStatus);
             NativeMethods.HttpPostCompletion(_requestNativeHandle, 0);
         }
@@ -730,7 +735,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
                             StringComparison.OrdinalIgnoreCase
                         )
                     )
-                ) {
+                )
+                {
                     return new WindowsPrincipal(new WindowsIdentity(token, authenticationType));
                 }
             }
@@ -781,7 +787,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
 
         private static NativeMethods.REQUEST_NOTIFICATION_STATUS ConvertRequestCompletionResults(
             bool success
-        ) {
+        )
+        {
             return success
               ? NativeMethods.REQUEST_NOTIFICATION_STATUS.RQ_NOTIFICATION_CONTINUE
               : NativeMethods.REQUEST_NOTIFICATION_STATUS.RQ_NOTIFICATION_FINISH_REQUEST;

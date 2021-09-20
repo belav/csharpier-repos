@@ -46,7 +46,8 @@ namespace System.Web.Http.Validation.Providers
             public override IEnumerable<ModelValidationResult> Validate(
                 ModelMetadata metadata,
                 object container
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }
@@ -264,14 +265,14 @@ namespace System.Web.Http.Validation.Providers
 
         private class MyValidatableAdapter : ModelValidator
         {
-            public MyValidatableAdapter(
-                IEnumerable<ModelValidatorProvider> validatorProviders
-            ) : base(validatorProviders) { }
+            public MyValidatableAdapter(IEnumerable<ModelValidatorProvider> validatorProviders)
+                : base(validatorProviders) { }
 
             public override IEnumerable<ModelValidationResult> Validate(
                 ModelMetadata metadata,
                 object container
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }
@@ -286,7 +287,8 @@ namespace System.Web.Http.Validation.Providers
             public override IEnumerable<ModelValidationResult> Validate(
                 ModelMetadata metadata,
                 object container
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }

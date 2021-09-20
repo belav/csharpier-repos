@@ -10,9 +10,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
     public class ConcurrencyDetectorEnabledCosmosTest
         : ConcurrencyDetectorEnabledTestBase<ConcurrencyDetectorEnabledCosmosTest.ConcurrencyDetectorCosmosFixture>
     {
-        public ConcurrencyDetectorEnabledCosmosTest(
-            ConcurrencyDetectorCosmosFixture fixture
-        ) : base(fixture) { }
+        public ConcurrencyDetectorEnabledCosmosTest(ConcurrencyDetectorCosmosFixture fixture)
+            : base(fixture) { }
 
         [ConditionalTheory(Skip = "Issue #17246")]
         public override Task Any(bool async) => base.Any(async);

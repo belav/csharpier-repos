@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
             IPEndPoint? localEndPoint,
             IPEndPoint? remoteEndPoint,
             IDuplexPipe transport
-        ) {
+        )
+        {
             ConnectionId = connectionId;
             Protocols = protocols;
             ConnectionContext = connectionContext;

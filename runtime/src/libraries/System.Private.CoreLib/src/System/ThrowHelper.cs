@@ -250,7 +250,8 @@ namespace System
         internal static void ThrowArgumentException(
             ExceptionResource resource,
             ExceptionArgument argument
-        ) {
+        )
+        {
             throw GetArgumentException(resource, argument);
         }
 
@@ -276,7 +277,8 @@ namespace System
         internal static void ThrowArgumentNullException(
             ExceptionArgument argument,
             ExceptionResource resource
-        ) {
+        )
+        {
             throw new ArgumentNullException(GetArgumentName(argument), GetResourceString(resource));
         }
 
@@ -290,7 +292,8 @@ namespace System
         internal static void ThrowArgumentOutOfRangeException(
             ExceptionArgument argument,
             ExceptionResource resource
-        ) {
+        )
+        {
             throw GetArgumentOutOfRangeException(argument, resource);
         }
 
@@ -299,7 +302,8 @@ namespace System
             ExceptionArgument argument,
             int paramNumber,
             ExceptionResource resource
-        ) {
+        )
+        {
             throw GetArgumentOutOfRangeException(argument, paramNumber, resource);
         }
 
@@ -385,7 +389,8 @@ namespace System
         internal static void ThrowObjectDisposedException(
             string objectName,
             ExceptionResource resource
-        ) {
+        )
+        {
             throw new ObjectDisposedException(objectName, GetResourceString(resource));
         }
 
@@ -492,7 +497,8 @@ namespace System
             Array? array,
             int offset,
             int count
-        ) {
+        )
+        {
             throw GetArraySegmentCtorValidationFailedException(array, offset, count);
         }
 
@@ -521,7 +527,8 @@ namespace System
             Array? array,
             int offset,
             int count
-        ) {
+        )
+        {
             if (array == null)
                 return new ArgumentNullException(nameof(array));
             if (offset < 0)
@@ -546,21 +553,24 @@ namespace System
 
         private static InvalidOperationException GetInvalidOperationException(
             ExceptionResource resource
-        ) {
+        )
+        {
             return new InvalidOperationException(GetResourceString(resource));
         }
 
         private static ArgumentException GetWrongKeyTypeArgumentException(
             object? key,
             Type targetType
-        ) {
+        )
+        {
             return new ArgumentException(SR.Format(SR.Arg_WrongType, key, targetType), nameof(key));
         }
 
         private static ArgumentException GetWrongValueTypeArgumentException(
             object? value,
             Type targetType
-        ) {
+        )
+        {
             return new ArgumentException(
                 SR.Format(SR.Arg_WrongType, value, targetType),
                 nameof(value)
@@ -575,7 +585,8 @@ namespace System
         private static ArgumentOutOfRangeException GetArgumentOutOfRangeException(
             ExceptionArgument argument,
             ExceptionResource resource
-        ) {
+        )
+        {
             return new ArgumentOutOfRangeException(
                 GetArgumentName(argument),
                 GetResourceString(resource)
@@ -585,7 +596,8 @@ namespace System
         private static ArgumentException GetArgumentException(
             ExceptionResource resource,
             ExceptionArgument argument
-        ) {
+        )
+        {
             return new ArgumentException(GetResourceString(resource), GetArgumentName(argument));
         }
 
@@ -593,7 +605,8 @@ namespace System
             ExceptionArgument argument,
             int paramNumber,
             ExceptionResource resource
-        ) {
+        )
+        {
             return new ArgumentOutOfRangeException(
                 GetArgumentName(argument) + "[" + paramNumber.ToString() + "]",
                 GetResourceString(resource)
@@ -614,7 +627,8 @@ namespace System
         internal static void IfNullAndNullsAreIllegalThenThrow<T>(
             object? value,
             ExceptionArgument argName
-        ) {
+        )
+        {
             // Note that default(T) is not equal to null for value types except when T is Nullable<U>.
             if (!(default(T) == null) && value == null)
                 ThrowHelper.ThrowArgumentNullException(argName);
@@ -637,7 +651,8 @@ namespace System
                 && typeof(T) != typeof(ulong)
                 && typeof(T) != typeof(float)
                 && typeof(T) != typeof(double)
-            ) {
+            )
+            {
                 ThrowNotSupportedException(ExceptionResource.Arg_TypeNotSupported);
             }
         }

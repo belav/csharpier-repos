@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntheticBoundNodeFactory factory,
             int methodOrdinal,
             int localFunctionOrdinal = -1
-        ) {
+        )
+        {
             Debug.Assert(factory != null);
             _factory = factory;
             _methodOrdinal = methodOrdinal;
@@ -78,7 +79,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool isArrayIndex,
             bool isChecked,
             TypeSymbol resultType
-        ) {
+        )
+        {
             _factory.Syntax = loweredOperand.Syntax;
 
             CSharpBinderFlags binderFlags = 0;
@@ -127,7 +129,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             UnaryOperatorKind operatorKind,
             BoundExpression loweredOperand,
             TypeSymbol resultType
-        ) {
+        )
+        {
             Debug.Assert(operatorKind.IsDynamic());
 
             _factory.Syntax = loweredOperand.Syntax;
@@ -176,7 +179,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression loweredRight,
             bool isCompoundAssignment,
             TypeSymbol resultType
-        ) {
+        )
+        {
             Debug.Assert(operatorKind.IsDynamic());
 
             _factory.Syntax = loweredLeft.Syntax;
@@ -238,7 +242,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<RefKind> refKinds,
             bool hasImplicitReceiver,
             bool resultDiscarded
-        ) {
+        )
+        {
             _factory.Syntax = loweredReceiver.Syntax;
             Debug.Assert(_factory.TopLevelMethod is { });
 
@@ -324,7 +329,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string accessorName,
             BoundExpression loweredReceiver,
             BoundExpression loweredHandler
-        ) {
+        )
+        {
             _factory.Syntax = loweredReceiver.Syntax;
 
             CSharpBinderFlags binderFlags =
@@ -376,7 +382,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<string> argumentNames,
             ImmutableArray<RefKind> refKinds,
             bool resultDiscarded
-        ) {
+        )
+        {
             _factory.Syntax = loweredReceiver.Syntax;
 
             TypeSymbol resultType;
@@ -431,7 +438,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<BoundExpression> loweredArguments,
             ImmutableArray<string> argumentNames,
             ImmutableArray<RefKind> refKinds
-        ) {
+        )
+        {
             _factory.Syntax = syntax;
 
             var loweredReceiver = _factory.Typeof(type);
@@ -475,7 +483,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression loweredReceiver,
             string name,
             bool resultIndexed
-        ) {
+        )
+        {
             _factory.Syntax = loweredReceiver.Syntax;
 
             CSharpBinderFlags binderFlags = 0;
@@ -527,7 +536,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression loweredRight,
             bool isCompoundAssignment = false,
             bool isChecked = false
-        ) {
+        )
+        {
             _factory.Syntax = loweredReceiver.Syntax;
 
             CSharpBinderFlags binderFlags = 0;
@@ -583,7 +593,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<BoundExpression> loweredArguments,
             ImmutableArray<string> argumentNames,
             ImmutableArray<RefKind> refKinds
-        ) {
+        )
+        {
             _factory.Syntax = loweredReceiver.Syntax;
 
             var resultType = DynamicTypeSymbol.Instance;
@@ -630,7 +641,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression loweredRight,
             bool isCompoundAssignment = false,
             bool isChecked = false
-        ) {
+        )
+        {
             CSharpBinderFlags binderFlags = 0;
             if (isCompoundAssignment)
             {
@@ -684,7 +696,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal LoweredDynamicOperation MakeDynamicIsEventTest(
             string name,
             BoundExpression loweredReceiver
-        ) {
+        )
+        {
             _factory.Syntax = loweredReceiver.Syntax;
             var resultType = _factory.SpecialType(SpecialType.System_Boolean);
             var binderConstruction = MakeBinderConstruction(
@@ -721,7 +734,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private BoundExpression? MakeBinderConstruction(
             WellKnownMember factoryMethod,
             BoundExpression[] args
-        ) {
+        )
+        {
             var binderFactory = _factory.WellKnownMember(factoryMethod);
             if (binderFactory is null)
             {
@@ -775,7 +789,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             RefKind receiverRefKind = RefKind.None,
             bool receiverIsStaticType = false,
             BoundExpression? loweredRight = null
-        ) {
+        )
+        {
             const string? NoName = null;
             Debug.Assert(
                 argumentNames.IsDefaultOrEmpty || loweredArguments.Length == argumentNames.Length
@@ -833,7 +848,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<RefKind> refKinds,
             BoundExpression? loweredRight,
             TypeSymbol resultType
-        ) {
+        )
+        {
             Debug.Assert(!loweredArguments.IsDefault);
 
             // get well-known types and members we need:
@@ -865,7 +881,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 || callSiteTypeGeneric.IsErrorType()
                 || callSiteFactoryGeneric is null
                 || callSiteTargetFieldGeneric is null
-            ) {
+            )
+            {
                 // CS1969: One or more types required to compile a dynamic expression cannot be found.
                 // Dev11 reports it with source location for each dynamic operation, which results in many error messages.
                 // The diagnostic that names the specific missing type or member has already been reported.
@@ -949,7 +966,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         private ImmutableArray<LocalSymbol> MakeTempsForDiscardArguments(
             ref ImmutableArray<BoundExpression> loweredArguments
-        ) {
+        )
+        {
             int discardCount = loweredArguments.Count(a => a.Kind == BoundKind.DiscardExpression);
 
             if (discardCount == 0)
@@ -971,7 +989,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntheticBoundNodeFactory factory,
             int methodOrdinal,
             int localFunctionOrdinal
-        ) {
+        )
+        {
             Debug.Assert(factory.CompilationState.ModuleBuilderOpt is { });
             Debug.Assert(factory.TopLevelMethod is { });
             Debug.Assert(factory.CurrentFunction is { });
@@ -1008,7 +1027,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             NamedTypeSymbol containerDefinition,
             NamedTypeSymbol delegateTypeOverMethodTypeParameters,
             TypeMap methodToContainerTypeParametersMap
-        ) {
+        )
+        {
             var fieldName = GeneratedNames.MakeDynamicCallSiteFieldName(_callSiteIdDispenser++);
             var delegateTypeOverContainerTypeParameters =
                 methodToContainerTypeParametersMap.SubstituteNamedType(
@@ -1042,7 +1062,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<RefKind> refKinds,
             BoundExpression? loweredRight,
             TypeSymbol resultType
-        ) {
+        )
+        {
             Debug.Assert(refKinds.IsDefaultOrEmpty || refKinds.Length == loweredArguments.Length);
 
             var callSiteType = _factory.WellKnownType(
@@ -1134,7 +1155,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string? name,
             RefKind refKind,
             bool isStaticType
-        ) {
+        )
+        {
             CSharpArgumentInfoFlags flags = 0;
 
             if (isStaticType)
@@ -1216,7 +1238,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression? receiver,
             ImmutableArray<BoundExpression> arguments,
             BoundExpression? right
-        ) {
+        )
+        {
             var result = new BoundExpression[
                 1 + (receiver != null ? 1 : 0) + arguments.Length + (right != null ? 1 : 0)
             ];
@@ -1246,7 +1269,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<BoundExpression> arguments,
             BoundExpression? right,
             TypeSymbol resultType
-        ) {
+        )
+        {
             var systemObjectType = _factory.SpecialType(SpecialType.System_Object);
             var result = new TypeSymbol[
                 1

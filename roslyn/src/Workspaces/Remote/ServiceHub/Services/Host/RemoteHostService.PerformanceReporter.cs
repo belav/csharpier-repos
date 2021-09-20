@@ -40,12 +40,14 @@ namespace Microsoft.CodeAnalysis.Remote
                 IGlobalOperationNotificationService globalOperationNotificationService,
                 TimeSpan reportingInterval,
                 CancellationToken shutdownToken
-            ) : base(
-                AsynchronousOperationListenerProvider.NullListener,
-                globalOperationNotificationService,
-                (int)reportingInterval.TotalMilliseconds,
-                shutdownToken
-            ) {
+            )
+                : base(
+                    AsynchronousOperationListenerProvider.NullListener,
+                    globalOperationNotificationService,
+                    (int)reportingInterval.TotalMilliseconds,
+                    shutdownToken
+                )
+            {
                 _event = new SemaphoreSlim(initialCount: 0);
                 _reported = new HashSet<string>();
 
@@ -76,7 +78,8 @@ namespace Microsoft.CodeAnalysis.Remote
                         FunctionId.Diagnostics_GeneratePerformaceReport,
                         CancellationToken
                     )
-                ) {
+                )
+                {
                     _diagnosticAnalyzerPerformanceTracker.GenerateReport(pooledObject.Object);
 
                     foreach (var analyzerInfo in pooledObject.Object)

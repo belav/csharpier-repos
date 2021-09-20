@@ -107,7 +107,8 @@ namespace System.Reflection.Metadata.Ecma335
             ImmutableArray<int> heapSizes,
             int metadataVersionByteCount,
             bool isStandaloneDebugMetadata
-        ) {
+        )
+        {
             Debug.Assert(rowCounts.Length == MetadataTokens.TableCount);
             Debug.Assert(externalRowCounts.Length == MetadataTokens.TableCount);
             Debug.Assert(heapSizes.Length == MetadataTokens.HeapCount);

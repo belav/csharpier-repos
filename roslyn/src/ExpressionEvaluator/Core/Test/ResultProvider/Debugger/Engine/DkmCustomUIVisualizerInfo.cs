@@ -25,7 +25,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
             string MenuName,
             string Description,
             string Metric
-        ) {
+        )
+        {
             return new DkmCustomUIVisualizerInfo
             {
                 Id = Id,
@@ -45,7 +46,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
             DkmClrCustomVisualizerAssemblyLocation UISideVisualizerAssemblyLocation,
             string DebuggeeSideVisualizerTypeName,
             string DebuggeeSideVisualizerAssemblyName
-        ) {
+        )
+        {
             return new DkmCustomUIVisualizerInfo
             {
                 Id = Id,

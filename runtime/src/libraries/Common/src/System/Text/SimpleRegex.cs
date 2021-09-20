@@ -20,7 +20,8 @@ namespace System.Text
         public static bool IsMatchWithStarWildcard(
             ReadOnlySpan<char> input,
             ReadOnlySpan<char> pattern
-        ) {
+        )
+        {
             int inputPos = 0,
                 inputPosSaved = -1;
             int patternPos = 0,
@@ -43,7 +44,8 @@ namespace System.Text
                         || char.ToUpperInvariant(pattern[patternPos])
                             == char.ToUpperInvariant(input[inputPos])
                     )
-                ) {
+                )
+                {
                     // If the characters in the pattern and the input match, advance both.
                     inputPos++;
                     patternPos++;

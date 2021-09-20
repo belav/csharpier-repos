@@ -38,7 +38,8 @@ internal static partial class Interop
             ObjectAttributes objectAttributes = ObjectAttributes.OBJ_CASE_INSENSITIVE,
             void* eaBuffer = null,
             uint eaLength = 0
-        ) {
+        )
+        {
             fixed (char* c = &MemoryMarshal.GetReference(path))
             {
                 UNICODE_STRING name = new UNICODE_STRING

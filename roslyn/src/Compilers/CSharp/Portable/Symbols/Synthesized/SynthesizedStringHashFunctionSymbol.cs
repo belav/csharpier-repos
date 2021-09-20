@@ -20,12 +20,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             PrivateImplementationDetails privateImplType,
             TypeSymbol returnType,
             TypeSymbol paramType
-        ) : base(
-            containingModule,
-            privateImplType,
-            returnType,
-            PrivateImplementationDetails.SynthesizedStringHashFunctionName
-        ) {
+        )
+            : base(
+                containingModule,
+                privateImplType,
+                returnType,
+                PrivateImplementationDetails.SynthesizedStringHashFunctionName
+            )
+        {
             this.SetParameters(
                 ImmutableArray.Create<ParameterSymbol>(
                     SynthesizedParameterSymbol.Create(

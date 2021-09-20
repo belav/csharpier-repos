@@ -19,7 +19,8 @@ namespace System.Composition.TypedParts
             object[] attributes,
             object site,
             out ImportInfo importInfo
-        ) {
+        )
+        {
             if (attributes.Any(a => a is ImportAttribute || a is ImportManyAttribute))
             {
                 importInfo = GetImportInfo(memberType, attributes, site);
@@ -72,7 +73,8 @@ namespace System.Composition.TypedParts
                 if (
                     attrType.GetTypeInfo().GetCustomAttribute<MetadataAttributeAttribute>(true)
                     != null
-                ) {
+                )
+                {
                     // We don't coalesce to collections here the way export metadata does
                     foreach (
                         var prop in attrType.GetRuntimeProperties()
@@ -80,7 +82,8 @@ namespace System.Composition.TypedParts
                                 p =>
                                     p.GetMethod.IsPublic && p.DeclaringType == attrType && p.CanRead
                             )
-                    ) {
+                    )
+                    {
                         importMetadata = importMetadata ?? new Dictionary<string, object>();
                         importMetadata.Add(prop.Name, prop.GetValue(attr, null));
                     }

@@ -128,7 +128,8 @@ namespace Microsoft.CodeAnalysis.Editor
     {
         public static IEnumerable<InlineRenameReplacementKind> GetAllReplacementKinds(
             this IInlineRenameReplacementInfo info
-        ) {
+        )
+        {
             var replacements = info.DocumentIds.SelectMany(info.GetReplacements);
             return replacements.Select(r => r.Kind);
         }

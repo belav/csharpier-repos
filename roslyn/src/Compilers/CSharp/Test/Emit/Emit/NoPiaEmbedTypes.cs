@@ -159,7 +159,8 @@ class UsePia
             bool metadataOnlyShouldSucceed,
             DiagnosticDescription[] expectedFullBuildDiagnostics,
             DiagnosticDescription[] expectedMetadataOnlyDiagnostics = null
-        ) {
+        )
+        {
             using (var executableStream = new MemoryStream())
             {
                 var result = compilation.Emit(executableStream);
@@ -7798,7 +7799,8 @@ class Program
         private static void AssertParametersWithoutNames(
             ImmutableArray<ParameterSymbol> parameters,
             bool isEmbedded
-        ) {
+        )
+        {
             Assert.True(((PEParameterSymbol)parameters[0]).Handle.IsNil);
 
             var p1 = (PEParameterSymbol)parameters[1];

@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             CSharpCompilationOptions? options = null,
             CSharpParseOptions? parseOptions = null,
             TargetFramework? targetFramework = null
-        ) {
+        )
+        {
             return CreateCompilation(
                 source,
                 options: options ?? TestOptions.UnsafeReleaseDll,
@@ -33,7 +34,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         private CompilationVerifier CompileAndVerifyFunctionPointers(
             CSharpCompilation compilation,
             string? expectedOutput = null
-        ) {
+        )
+        {
             return CompileAndVerify(
                 compilation,
                 verify: Verification.Skipped,
@@ -139,7 +141,8 @@ unsafe class C
                 SemanticModel model,
                 ExpressionSyntax initializer1,
                 Compilation comp
-            ) {
+            )
+            {
                 var typeInfo = model.GetTypeInfo(initializer1);
                 Assert.True(
                     typeInfo.ConvertedType
@@ -252,7 +255,8 @@ unsafe class C
                     .DescendantNodes()
                     .OfType<VariableDeclaratorSyntax>()
                     .Select(v => v.Initializer!.Value)
-            ) {
+            )
+            {
                 var conversion = model.GetConversion(literal);
                 var typeInfo = model.GetTypeInfo(literal);
                 Assert.Null(typeInfo.Type);
@@ -282,7 +286,8 @@ unsafe class C
             string type,
             string uncheckedInstruction,
             string checkedInstruction
-        ) {
+        )
+        {
             var comp = CreateCompilationWithFunctionPointers(
                 $@"
 unsafe class C
@@ -413,7 +418,8 @@ unsafe class C
             string type,
             string convKind,
             string checkedKind
-        ) {
+        )
+        {
             var comp = CreateCompilationWithFunctionPointers(
                 $@"
 unsafe class C
@@ -789,7 +795,8 @@ IVariableDeclaratorOperation (Symbol: delegate*<delegate*<System.Object, System.
             string expectedOriginalType,
             string expectedConvertedType,
             string expectedOperationTree
-        ) {
+        )
+        {
             var initializer = decl.Initializer!.Value;
             var conversion = model.GetConversion(initializer);
             Assert.Equal(expectedImplicit, conversion.IsImplicit);

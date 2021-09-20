@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             TypeSymbol type,
             EntityHandle handle,
             PEModuleSymbol containingModule
-        ) {
+        )
+        {
             return containingModule.Module.HasNativeIntegerAttribute(handle, out var transformFlags)
               ? TransformType(type, transformFlags)
               : type;
@@ -27,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         internal static TypeSymbol TransformType(
             TypeSymbol type,
             ImmutableArray<bool> transformFlags
-        ) {
+        )
+        {
             var decoder = new NativeIntegerTypeDecoder(transformFlags);
             try
             {
@@ -154,7 +156,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
         private FunctionPointerTypeSymbol TransformFunctionPointerType(
             FunctionPointerTypeSymbol type
-        ) {
+        )
+        {
             var transformedReturnType = TransformTypeWithAnnotations(
                 type.Signature.ReturnTypeWithAnnotations
             );
@@ -188,7 +191,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             if (
                 paramsModified
                 || !transformedReturnType.IsSameAs(type.Signature.ReturnTypeWithAnnotations)
-            ) {
+            )
+            {
                 return type.SubstituteTypeSymbol(
                     transformedReturnType,
                     transformedParameterTypes,

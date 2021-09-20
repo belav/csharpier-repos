@@ -56,7 +56,8 @@ namespace System.ComponentModel
         }
         public static System.ComponentModel.AsyncOperation CreateOperation(
             object? userSuppliedState
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -145,11 +146,8 @@ namespace System.ComponentModel
     );
     public partial class RunWorkerCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
     {
-        public RunWorkerCompletedEventArgs(
-            object? result,
-            System.Exception? error,
-            bool cancelled
-        ) : base(default(System.Exception), default(bool), default(object)) { }
+        public RunWorkerCompletedEventArgs(object? result, System.Exception? error, bool cancelled)
+            : base(default(System.Exception), default(bool), default(object)) { }
         public object? Result
         {
             get { throw null; }

@@ -25,7 +25,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DocumentationCo
         public VisualStudioDocumentationProvider(
             string filePath,
             IVsXMLMemberIndexService memberIndexService
-        ) {
+        )
+        {
             Contract.ThrowIfNull(memberIndexService);
             Contract.ThrowIfNull(filePath);
 
@@ -42,7 +43,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DocumentationCo
             string documentationMemberID,
             CultureInfo preferredCulture,
             CancellationToken token = default
-        ) {
+        )
+        {
             var memberIndex = _lazyMemberIndex.Value;
             if (memberIndex == null)
             {
@@ -53,7 +55,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DocumentationCo
                 ErrorHandler.Failed(
                     memberIndex.ParseMemberSignature(documentationMemberID, out var methodID)
                 )
-            ) {
+            )
+            {
                 return "";
             }
 

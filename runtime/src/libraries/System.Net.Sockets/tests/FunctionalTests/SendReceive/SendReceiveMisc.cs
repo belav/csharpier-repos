@@ -24,7 +24,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 server.BindToAnonymousPort(IPAddress.Loopback);
                 server.Listen(1);
 
@@ -63,7 +64,8 @@ namespace System.Net.Sockets.Tests
                         SocketType.Stream,
                         ProtocolType.Tcp
                     )
-                ) {
+                )
+                {
                     client.Connect(server.LocalEndPoint);
 
                     // receive data as 1-byte segments.
@@ -115,7 +117,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Dgram,
                     ProtocolType.Udp
                 )
-            ) {
+            )
+            {
                 socket.BindToAnonymousPort(IPAddress.Loopback);
                 // Use our own address as destination.
                 socket.Connect(socket.LocalEndPoint);
@@ -251,7 +254,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 // listen
                 server.BindToAnonymousPort(IPAddress.Loopback);
                 server.Listen(1);
@@ -294,7 +298,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Dgram,
                     ProtocolType.Udp
                 )
-            ) {
+            )
+            {
                 receiver.BindToAnonymousPort(IPAddress.Loopback);
                 sender.Connect(receiver.LocalEndPoint);
                 sender.SendBufferSize = 1500;

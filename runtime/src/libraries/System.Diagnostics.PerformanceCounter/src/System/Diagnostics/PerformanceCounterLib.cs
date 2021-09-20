@@ -143,7 +143,8 @@ namespace System.Diagnostics
                                 int index = 0;
                                 index < numPerfObjects && pos < dataBlock.TotalByteLength;
                                 index++
-                            ) {
+                            )
+                            {
                                 ref readonly PERF_OBJECT_TYPE perfObject =
                                     ref MemoryMarshal.AsRef<PERF_OBJECT_TYPE>(data.Slice(pos));
 
@@ -159,7 +160,8 @@ namespace System.Diagnostics
                                     int index2 = 0;
                                     index2 < newCategoryEntry.CounterIndexes.Length;
                                     ++index2
-                                ) {
+                                )
+                                {
                                     ref readonly PERF_COUNTER_DEFINITION perfCounter =
                                         ref MemoryMarshal.AsRef<PERF_COUNTER_DEFINITION>(
                                             data.Slice(pos)
@@ -434,7 +436,8 @@ namespace System.Diagnostics
             string categoryHelp,
             CounterCreationDataCollection creationData,
             string[] languageIds
-        ) {
+        )
+        {
             try
             {
                 StreamWriter iniWriter = new StreamWriter(IniFilePath, false, Encoding.Unicode);
@@ -542,7 +545,8 @@ namespace System.Diagnostics
             PerformanceCounterCategoryType categoryType,
             CounterCreationDataCollection creationData,
             ref bool iniRegistered
-        ) {
+        )
+        {
             RegistryKey serviceParentKey = null;
             RegistryKey serviceKey = null;
             RegistryKey linkageKey = null;
@@ -695,7 +699,8 @@ namespace System.Diagnostics
         internal bool FindCustomCategory(
             string category,
             out PerformanceCounterCategoryType categoryType
-        ) {
+        )
+        {
             RegistryKey key = null;
             RegistryKey baseKey = null;
             categoryType = PerformanceCounterCategoryType.Unknown;
@@ -726,7 +731,8 @@ namespace System.Diagnostics
                             ComputerName,
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         key = Registry.LocalMachine.OpenSubKey(keyPath);
                     }
                     else
@@ -779,7 +785,8 @@ namespace System.Diagnostics
                                     StringComparison.OrdinalIgnoreCase
                                 )
                             )
-                        ) {
+                        )
+                        {
                             object isMultiInstanceObject = key.GetValue("IsMultiInstance");
                             if (isMultiInstanceObject != null)
                             {
@@ -1080,7 +1087,8 @@ namespace System.Diagnostics
         internal static PerformanceCounterLib GetPerformanceCounterLib(
             string machineName,
             CultureInfo culture
-        ) {
+        )
+        {
             string lcidString = culture.LCID.ToString("X3", CultureInfo.InvariantCulture);
 
             machineName = (machineName == "." ? ComputerName : machineName).ToLowerInvariant();
@@ -1211,7 +1219,8 @@ namespace System.Diagnostics
                                 CultureInfo.InvariantCulture,
                                 out key
                             )
-                        ) {
+                        )
+                        {
                             if (isHelp)
                             {
                                 // Category Help Table
@@ -1286,7 +1295,8 @@ namespace System.Diagnostics
         internal static PerformanceCounterCategoryType GetCategoryType(
             string machine,
             string category
-        ) {
+        )
+        {
             PerformanceCounterCategoryType categoryType = PerformanceCounterCategoryType.Unknown;
 
             PerformanceCounterLib library = GetPerformanceCounterLib(
@@ -1315,7 +1325,8 @@ namespace System.Diagnostics
             PerformanceCounterCategoryType categoryType,
             string categoryHelp,
             CounterCreationDataCollection creationData
-        ) {
+        )
+        {
             try
             {
                 bool iniRegistered = false;
@@ -1410,7 +1421,8 @@ namespace System.Diagnostics
                         PerformanceCounterLib.ComputerName,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     perfDataKey = PerformanceDataRegistryKey.OpenRemoteBaseKey(machineName);
                 }
                 else
@@ -1873,7 +1885,8 @@ namespace System.Diagnostics
             in PERF_COUNTER_DEFINITION perfCounter,
             CategorySample categorySample,
             int instanceNumber
-        ) {
+        )
+        {
             _nameIndex = perfCounter.CounterNameTitleIndex;
             _counterType = perfCounter.CounterType;
             _offset = perfCounter.CounterOffset;

@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.SimplifyLinqExpressi
                 "LastOrDefault"
             )]
                 string methodName
-        ) {
+        )
+        {
             await new VerifyCS.Test
             {
                 TestCode =
@@ -104,7 +105,8 @@ class Test
                 "LastOrDefault"
             )]
                 string methodName
-        ) {
+        )
+        {
             var testCode =
                 $@"
 using System;
@@ -145,7 +147,8 @@ class Test
                 "LastOrDefault"
             )]
                 string methodName
-        ) {
+        )
+        {
             await new VerifyCS.Test
             {
                 TestCode =
@@ -342,7 +345,8 @@ namespace demo
                 "LastOrDefault"
             )]
                 string secondMethod
-        ) {
+        )
+        {
             var testCode =
                 $@"
 using System;

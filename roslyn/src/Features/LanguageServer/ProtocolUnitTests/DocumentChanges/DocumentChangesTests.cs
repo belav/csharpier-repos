@@ -395,7 +395,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
 
         private async Task<(TestLspServer, LSP.Location, string)> GetTestLspServerAndLocationAsync(
             string source
-        ) {
+        )
+        {
             var testLspServer = CreateTestLspServer(source, out var locations);
             var locationTyped = locations["type"].Single();
             var documentText = await testLspServer.GetCurrentSolution()
@@ -409,7 +410,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
         private static async Task DidOpen(
             TestLspServer testLspServer,
             LSP.DidOpenTextDocumentParams didOpenParams
-        ) {
+        )
+        {
             await testLspServer.ExecuteRequestAsync<LSP.DidOpenTextDocumentParams, object>(
                 Methods.TextDocumentDidOpenName,
                 didOpenParams,
@@ -422,7 +424,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
         private static async Task DidChange(
             TestLspServer testLspServer,
             LSP.DidChangeTextDocumentParams didChangeParams
-        ) {
+        )
+        {
             await testLspServer.ExecuteRequestAsync<LSP.DidChangeTextDocumentParams, object>(
                 Methods.TextDocumentDidChangeName,
                 didChangeParams,
@@ -435,7 +438,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
         private static async Task DidClose(
             TestLspServer testLspServer,
             LSP.DidCloseTextDocumentParams didCloseParams
-        ) {
+        )
+        {
             await testLspServer.ExecuteRequestAsync<LSP.DidCloseTextDocumentParams, object>(
                 Methods.TextDocumentDidCloseName,
                 didCloseParams,
@@ -457,7 +461,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
         private static LSP.DidChangeTextDocumentParams CreateDidChangeTextDocumentParams(
             Uri documentUri,
             params (int line, int column, string text)[] changes
-        ) {
+        )
+        {
             var changeEvents = new List<TextDocumentContentChangeEvent>();
             foreach (var change in changes)
             {

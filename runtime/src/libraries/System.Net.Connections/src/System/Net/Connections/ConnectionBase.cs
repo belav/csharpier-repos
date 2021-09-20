@@ -37,7 +37,8 @@ namespace System.Net.Connections
         public async ValueTask CloseAsync(
             ConnectionCloseMethod method = ConnectionCloseMethod.GracefulShutdown,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (!_disposed)
             {
                 await CloseAsyncCore(method, cancellationToken).ConfigureAwait(false);

@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             int argumentPosition,
             int parameterPosition,
             ImmutableArray<int> argsToParamsOpt
-        ) {
+        )
+        {
             this.Kind = kind;
             this.ArgumentPosition = argumentPosition;
             this.ParameterPosition = parameterPosition;

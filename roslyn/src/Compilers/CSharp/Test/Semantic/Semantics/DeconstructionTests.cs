@@ -5225,7 +5225,8 @@ class C
         private static void StandAlone_01_VerifySemanticModel(
             CSharpCompilation comp,
             LocalDeclarationKind localDeclarationKind
-        ) {
+        )
+        {
             var tree = comp.SyntaxTrees.First();
             var model = comp.GetSemanticModel(tree);
             var designations = tree.GetCompilationUnitRoot()
@@ -5542,7 +5543,8 @@ class C
                 var designation in tree.GetCompilationUnitRoot()
                     .DescendantNodes()
                     .OfType<DiscardDesignationSyntax>()
-            ) {
+            )
+            {
                 Assert.Null(model.GetDeclaredSymbol(designation));
                 count++;
             }
@@ -6328,7 +6330,8 @@ class C
         private static void StandAlone_14_VerifySemanticModel(
             CSharpCompilation comp,
             LocalDeclarationKind localDeclarationKind
-        ) {
+        )
+        {
             var tree = comp.SyntaxTrees.First();
             var model = comp.GetSemanticModel(tree);
             var designations = tree.GetCompilationUnitRoot()
@@ -6681,7 +6684,8 @@ class C
                 var designation in tree.GetCompilationUnitRoot()
                     .DescendantNodes()
                     .OfType<DiscardDesignationSyntax>()
-            ) {
+            )
+            {
                 Assert.Null(model.GetDeclaredSymbol(designation));
                 count++;
             }
@@ -6877,7 +6881,8 @@ class C
         private static void StandAlone_18_VerifySemanticModel(
             CSharpCompilation comp,
             LocalDeclarationKind localDeclarationKind
-        ) {
+        )
+        {
             var tree = comp.SyntaxTrees.First();
             var model = comp.GetSemanticModel(tree);
             var designations = tree.GetCompilationUnitRoot()
@@ -7154,7 +7159,8 @@ class C
                 var designation in tree.GetCompilationUnitRoot()
                     .DescendantNodes()
                     .OfType<DiscardDesignationSyntax>()
-            ) {
+            )
+            {
                 Assert.Null(model.GetDeclaredSymbol(designation));
                 count++;
             }

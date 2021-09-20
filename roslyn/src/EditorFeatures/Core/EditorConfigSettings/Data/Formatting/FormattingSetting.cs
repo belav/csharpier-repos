@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
             string description,
             OptionUpdater updater,
             string? language = null
-        ) {
+        )
+        {
             Description = description ?? throw new ArgumentNullException(nameof(description));
             Updater = updater;
             Language = language;

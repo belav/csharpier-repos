@@ -19,7 +19,8 @@ namespace Test
             BB param4,
             BB param5,
             ref float[] param6
-        ) {
+        )
+        {
             return null;
         }
         static int Main()

@@ -25,7 +25,8 @@ namespace BuildBoss
             ProjectData data,
             Dictionary<ProjectKey, ProjectData> solutionMap,
             bool isPrimarySolution
-        ) {
+        )
+        {
             _data = data;
             _projectUtil = data.ProjectUtil;
             _solutionMap = solutionMap;
@@ -114,7 +115,8 @@ namespace BuildBoss
         private bool CheckNoGuidsOnProjectReferences(
             TextWriter textWriter,
             List<ProjectReferenceEntry> entryList
-        ) {
+        )
+        {
             var allGood = true;
             foreach (var entry in entryList)
             {
@@ -154,7 +156,8 @@ namespace BuildBoss
 
         private IEnumerable<string> GetAllowedPackageReferenceVersions(
             PackageReference packageReference
-        ) {
+        )
+        {
             // If this is a generator project, if it has a reference to Microsoft.CodeAnalysis.Common, that means it's
             // a source generator. In that case, we require the version of the API being built against to match the toolset
             // version, so that way the source generator can actually be loaded by the toolset. We don't apply this rule to
@@ -163,7 +166,8 @@ namespace BuildBoss
             if (
                 ProjectFilePath.Contains("CompilerGeneratorTools")
                 && packageReference.Name == "Microsoft.CodeAnalysis.Common"
-            ) {
+            )
+            {
                 yield return "$(SourceGeneratorMicrosoftCodeAnalysisVersion)";
             }
             else
@@ -185,7 +189,8 @@ namespace BuildBoss
                         "false",
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     // IVTs explicitly declared with LoadsWithinVisualStudio="false" are allowed
                     continue;
                 }
@@ -246,7 +251,8 @@ namespace BuildBoss
         private bool CheckProjectReferencesComplete(
             TextWriter textWriter,
             IEnumerable<ProjectKey> declaredReferences
-        ) {
+        )
+        {
             var allGood = true;
             foreach (var key in declaredReferences)
             {
@@ -280,7 +286,8 @@ namespace BuildBoss
         private bool CheckUnitTestReferenceRestriction(
             TextWriter textWriter,
             IEnumerable<ProjectKey> declaredReferences
-        ) {
+        )
+        {
             if (!_data.IsTestProject)
             {
                 return true;

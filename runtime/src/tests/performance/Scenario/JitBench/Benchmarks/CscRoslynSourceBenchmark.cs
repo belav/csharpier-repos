@@ -16,7 +16,8 @@ namespace JitBench
             string runtimeDirPath,
             bool useExistingSetup,
             ITestOutputHelper output
-        ) {
+        )
+        {
             string cscSourceDownloadLink =
                 "https://roslyninfra.blob.core.windows.net/perf-artifacts/CodeAnalysisRepro"
                 + (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? ".zip" : ".tar.gz");

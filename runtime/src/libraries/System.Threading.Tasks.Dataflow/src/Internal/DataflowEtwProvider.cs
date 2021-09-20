@@ -69,7 +69,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
         internal void DataflowBlockCreated(
             IDataflowBlock block,
             DataflowBlockOptions dataflowBlockOptions
-        ) {
+        )
+        {
             Debug.Assert(block != null, "Block needed for the ETW event.");
             Debug.Assert(dataflowBlockOptions != null, "Options needed for the ETW event.");
 
@@ -101,7 +102,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
             Task task,
             TaskLaunchedReason reason,
             int availableMessages
-        ) {
+        )
+        {
             Debug.Assert(block != null, "Block needed for the ETW event.");
             Debug.Assert(task != null, "Task needed for the ETW event.");
             Debug.Assert(
@@ -133,7 +135,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
             TaskLaunchedReason reason,
             int availableMessages,
             int taskId
-        ) {
+        )
+        {
             WriteEvent(TASKLAUNCHED_EVENTID, blockId, reason, availableMessages, taskId);
         }
 
@@ -207,7 +210,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
             int blockId,
             BlockCompletionReason reason,
             string exceptionData
-        ) {
+        )
+        {
             WriteEvent(BLOCKCOMPLETED_EVENTID, blockId, reason, exceptionData);
         }
 #endregion

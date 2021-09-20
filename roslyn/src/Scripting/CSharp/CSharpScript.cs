@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting
             ScriptOptions options = null,
             Type globalsType = null,
             InteractiveAssemblyLoader assemblyLoader = null
-        ) {
+        )
+        {
             if (code == null)
                 throw new ArgumentNullException(nameof(code));
             return Script.CreateInitialScript<T>(
@@ -62,7 +63,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting
             ScriptOptions options = null,
             Type globalsType = null,
             InteractiveAssemblyLoader assemblyLoader = null
-        ) {
+        )
+        {
             if (code == null)
                 throw new ArgumentNullException(nameof(code));
             return Script.CreateInitialScript<T>(
@@ -87,7 +89,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting
             ScriptOptions options = null,
             Type globalsType = null,
             InteractiveAssemblyLoader assemblyLoader = null
-        ) {
+        )
+        {
             if (code == null)
                 throw new ArgumentNullException(nameof(code));
             return Create<object>(code, options, globalsType, assemblyLoader);
@@ -107,7 +110,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting
             ScriptOptions options = null,
             Type globalsType = null,
             InteractiveAssemblyLoader assemblyLoader = null
-        ) {
+        )
+        {
             if (code == null)
                 throw new ArgumentNullException(nameof(code));
             return Create<object>(code, options, globalsType, assemblyLoader);
@@ -129,7 +133,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting
             object globals = null,
             Type globalsType = null,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return Create<T>(code, options, globalsType ?? globals?.GetType())
                 .RunAsync(globals, cancellationToken);
         }
@@ -149,7 +154,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting
             object globals = null,
             Type globalsType = null,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return RunAsync<object>(code, options, globals, globalsType, cancellationToken);
         }
 
@@ -170,7 +176,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting
             object globals = null,
             Type globalsType = null,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return RunAsync<T>(code, options, globals, globalsType, cancellationToken)
                 .GetEvaluationResultAsync();
         }
@@ -191,7 +198,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting
             object globals = null,
             Type globalsType = null,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return EvaluateAsync<object>(code, options, globals, globalsType, cancellationToken);
         }
     }

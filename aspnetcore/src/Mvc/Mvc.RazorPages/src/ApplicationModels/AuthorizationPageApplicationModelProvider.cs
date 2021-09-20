@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         public AuthorizationPageApplicationModelProvider(
             IAuthorizationPolicyProvider policyProvider,
             IOptions<MvcOptions> mvcOptions
-        ) {
+        )
+        {
             _policyProvider = policyProvider;
             _mvcOptions = mvcOptions.Value;
         }

@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                         _key,
                         out NormalizedSnapshotSpanCollection matchingSpans
                     )
-                ) {
+                )
+                {
                     var intersection = NormalizedSnapshotSpanCollection.Intersection(
                         matchingSpans,
                         spans

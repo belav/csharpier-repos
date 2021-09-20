@@ -36,7 +36,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IApplicationBuilder UseCookiePolicy(
             this IApplicationBuilder app,
             CookiePolicyOptions options
-        ) {
+        )
+        {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));

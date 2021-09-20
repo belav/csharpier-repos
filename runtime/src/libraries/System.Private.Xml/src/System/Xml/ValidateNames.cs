@@ -372,7 +372,8 @@ namespace System.Xml
             if (
                 XmlCharType.IsNCNameSingleChar(s[offsetBadChar])
                 && !XmlCharType.IsStartNCNameSingleChar(s[offsetBadChar])
-            ) {
+            )
+            {
                 // The error character is a valid name character, but is not a valid start name character
                 throw new XmlException(
                     SR.Xml_BadStartNameChar,
@@ -393,7 +394,8 @@ namespace System.Xml
             string s,
             int offsetStartChar,
             int offsetBadChar
-        ) {
+        )
+        {
             // If the name is empty, throw an exception
             if (offsetStartChar >= s.Length)
                 return new XmlException(SR.Xml_EmptyName, string.Empty);
@@ -403,7 +405,8 @@ namespace System.Xml
             if (
                 XmlCharType.IsNCNameSingleChar(s[offsetBadChar])
                 && !XmlCharType.IsStartNCNameSingleChar(s[offsetBadChar])
-            ) {
+            )
+            {
                 // The error character is a valid name character, but is not a valid start name character
                 return new XmlException(
                     SR.Xml_BadStartNameChar,
@@ -459,7 +462,8 @@ namespace System.Xml
             string ns,
             XPathNodeType nodeKind,
             Flags flags
-        ) {
+        )
+        {
             // throwOnError = true
             ValidateNameInternal(prefix, localName, ns, nodeKind, flags, true);
         }
@@ -475,7 +479,8 @@ namespace System.Xml
             string ns,
             XPathNodeType nodeKind,
             Flags flags
-        ) {
+        )
+        {
             // throwOnError = false
             return ValidateNameInternal(prefix, localName, ns, nodeKind, flags, false);
         }
@@ -492,7 +497,8 @@ namespace System.Xml
             XPathNodeType nodeKind,
             Flags flags,
             bool throwOnError
-        ) {
+        )
+        {
             Debug.Assert(prefix != null && localName != null && ns != null);
 
             if ((flags & Flags.NCNames) != 0)
@@ -544,7 +550,8 @@ namespace System.Xml
                         if (
                             localName.Length == 0
                             || (localName.Length == 3 && StartsWithXml(localName))
-                        ) {
+                        )
+                        {
                             if (throwOnError)
                                 throw new XmlException(SR.Xml_InvalidPIName, localName);
                             return false;

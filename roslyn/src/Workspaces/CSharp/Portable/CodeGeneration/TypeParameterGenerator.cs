@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         public static TypeParameterListSyntax GenerateTypeParameterList(
             ImmutableArray<ITypeParameterSymbol> typeParameters,
             CodeGenerationOptions options
-        ) {
+        )
+        {
             return typeParameters.Length == 0
               ? null
               : SyntaxFactory.TypeParameterList(
@@ -30,7 +31,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         private static TypeParameterSyntax GenerateTypeParameter(
             ITypeParameterSymbol symbol,
             CodeGenerationOptions options
-        ) {
+        )
+        {
             var varianceKeyword =
                 symbol.Variance == VarianceKind.In
                     ? SyntaxFactory.Token(SyntaxKind.InKeyword)

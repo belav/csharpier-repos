@@ -153,18 +153,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 string name,
                 int arity,
                 bool mangleName
-            ) : this(
-                module,
-                @namespace,
-                name,
-                arity,
-                mangleName,
-                errorInfo: null,
-                isNativeInt: false,
-                containingNamespace: null,
-                typeId: -1,
-                tupleData: null
-            ) { }
+            )
+                : this(
+                    module,
+                    @namespace,
+                    name,
+                    arity,
+                    mangleName,
+                    errorInfo: null,
+                    isNativeInt: false,
+                    containingNamespace: null,
+                    typeId: -1,
+                    tupleData: null
+                ) { }
 
             public TopLevel(
                 ModuleSymbol module,
@@ -191,13 +192,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 ref MetadataTypeName fullName,
                 int typeId,
                 DiagnosticInfo? errorInfo
-            ) : this(
-                module,
-                ref fullName,
-                fullName.ForcedArity == -1 || fullName.ForcedArity == fullName.InferredArity,
-                errorInfo,
-                typeId
-            ) { }
+            )
+                : this(
+                    module,
+                    ref fullName,
+                    fullName.ForcedArity == -1 || fullName.ForcedArity == fullName.InferredArity,
+                    errorInfo,
+                    typeId
+                ) { }
 
             private TopLevel(
                 ModuleSymbol module,
@@ -205,18 +207,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 bool mangleName,
                 DiagnosticInfo? errorInfo,
                 int typeId
-            ) : this(
-                module,
-                fullName.NamespaceName,
-                mangleName ? fullName.UnmangledTypeName : fullName.TypeName,
-                mangleName ? fullName.InferredArity : fullName.ForcedArity,
-                mangleName,
-                isNativeInt: false,
-                errorInfo,
-                containingNamespace: null,
-                typeId,
-                tupleData: null
-            ) { }
+            )
+                : this(
+                    module,
+                    fullName.NamespaceName,
+                    mangleName ? fullName.UnmangledTypeName : fullName.TypeName,
+                    mangleName ? fullName.InferredArity : fullName.ForcedArity,
+                    mangleName,
+                    isNativeInt: false,
+                    errorInfo,
+                    containingNamespace: null,
+                    typeId,
+                    tupleData: null
+                ) { }
 
             private TopLevel(
                 ModuleSymbol module,
@@ -301,7 +304,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                     NamespaceOrTypeSymbol symbol in container.GetMembers(
                                         namespaces[i]
                                     )
-                                ) {
+                                )
+                                {
                                     if (symbol.Kind == SymbolKind.Namespace) // VB should also check name casing.
                                     {
                                         newContainer = (NamespaceSymbol)symbol;
@@ -346,7 +350,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             && (object)containingAssembly != null
                             && ReferenceEquals(containingAssembly, containingAssembly.CorLibrary)
                             && _containingModule.Ordinal == 0
-                        ) {
+                        )
+                        {
                             // Check the name
                             string emittedName = MetadataHelpers.BuildQualifiedName(
                                 _namespaceName,
@@ -461,7 +466,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     && (object)t2 != null
                     && t2.TypeKind == TypeKind.Dynamic
                     && this.SpecialType == Microsoft.CodeAnalysis.SpecialType.System_Object
-                ) {
+                )
+                {
                     return true;
                 }
 
@@ -474,7 +480,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (
                     (comparison & TypeCompareKind.IgnoreNativeIntegers) == 0
                     && _isNativeInt != other._isNativeInt
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -492,12 +499,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             private readonly NamedTypeSymbol _containingType;
 
-            public Nested(
-                NamedTypeSymbol containingType,
-                string name,
-                int arity,
-                bool mangleName
-            ) : base(name, arity, mangleName)
+            public Nested(NamedTypeSymbol containingType, string name, int arity, bool mangleName)
+                : base(name, arity, mangleName)
             {
                 RoslynDebug.Assert((object)containingType != null);
 
@@ -516,12 +519,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 NamedTypeSymbol containingType,
                 ref MetadataTypeName emittedName,
                 bool mangleName
-            ) : this(
-                containingType,
-                mangleName ? emittedName.UnmangledTypeName : emittedName.TypeName,
-                mangleName ? emittedName.InferredArity : emittedName.ForcedArity,
-                mangleName
-            ) { }
+            )
+                : this(
+                    containingType,
+                    mangleName ? emittedName.UnmangledTypeName : emittedName.TypeName,
+                    mangleName ? emittedName.InferredArity : emittedName.ForcedArity,
+                    mangleName
+                ) { }
 
             public override Symbol ContainingSymbol
             {

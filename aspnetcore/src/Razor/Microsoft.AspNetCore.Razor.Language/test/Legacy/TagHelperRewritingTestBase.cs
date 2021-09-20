@@ -37,7 +37,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             string documentContent,
             string tagHelperPrefix = null,
             RazorParserFeatureFlags featureFlags = null
-        ) {
+        )
+        {
             var syntaxTree = ParseDocument(documentContent, featureFlags: featureFlags);
 
             var rewrittenTree = TagHelperParseTreeRewriter.Rewrite(

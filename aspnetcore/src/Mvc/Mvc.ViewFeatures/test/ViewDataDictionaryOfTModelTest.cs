@@ -239,7 +239,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public void CopyConstructorToObject_DoesNotThrow_IfModelIncompatibleWithDeclaredType(
             object model,
             Type expectedType
-        ) {
+        )
+        {
             // Arrange
             var source = new ViewDataDictionary<TestModel>(new EmptyModelMetadataProvider());
 
@@ -259,7 +260,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         [InlineData(23)]
         public void CopyConstructor_DoesNotChangeMetadata_WhenValueCompatibleWithSourceMetadata(
             int? model
-        ) {
+        )
+        {
             // Arrange
             var metadataProvider = new EmptyModelMetadataProvider();
             var source = new ViewDataDictionary<int?>(metadataProvider) { Model = -48, };

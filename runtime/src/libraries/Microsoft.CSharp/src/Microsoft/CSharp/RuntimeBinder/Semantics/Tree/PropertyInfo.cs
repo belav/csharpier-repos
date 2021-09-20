@@ -57,7 +57,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                             | BindingFlags.Instance
                             | BindingFlags.Static
                     )
-                ) {
+                )
+                {
                     if (!p.HasSameMetadataDefinitionAs(propertyInfo))
                     {
                         continue;
@@ -82,7 +83,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                                 parameters[i].ParameterType,
                                 genericInstanceParams[i].AssociatedSystemType
                             )
-                        ) {
+                        )
+                        {
                             match = false;
                             break;
                         }

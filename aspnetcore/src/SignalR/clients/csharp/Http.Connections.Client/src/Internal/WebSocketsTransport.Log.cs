@@ -167,7 +167,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
                 ILogger logger,
                 TransferFormat transferFormat,
                 Uri webSocketUrl
-            ) {
+            )
+            {
                 _startTransport(logger, transferFormat, webSocketUrl, null);
             }
 
@@ -226,7 +227,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
                 WebSocketMessageType messageType,
                 int count,
                 bool endOfMessage
-            ) {
+            )
+            {
                 _messageReceived(logger, messageType, count, endOfMessage, null);
             }
 

@@ -60,7 +60,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             bool includeSuppressedDiagnostics,
             Option2<DiagnosticMode> diagnosticMode,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return new ValueTask<ImmutableArray<DiagnosticData>>(
                 GetDiagnostics(workspace, projectId, documentId)
             );
@@ -74,7 +75,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             bool includeSuppressedDiagnostics,
             Option2<DiagnosticMode> diagnosticMode,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return new ValueTask<ImmutableArray<DiagnosticData>>(
                 GetDiagnostics(workspace, projectId, documentId)
             );
@@ -84,7 +86,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             Workspace workspace,
             ProjectId? projectId,
             DocumentId? documentId
-        ) {
+        )
+        {
             Assert.Equal(projectId, GetProjectId(workspace));
             Assert.Equal(documentId, GetDocumentId(workspace));
 
@@ -99,7 +102,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             DocumentId? documentId,
             Option2<DiagnosticMode> diagnosticMode,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return GetDiagnosticBuckets(workspace, projectId, documentId);
         }
 
@@ -109,7 +113,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             DocumentId? documentId,
             Option2<DiagnosticMode> diagnosticMode,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return GetDiagnosticBuckets(workspace, projectId, documentId);
         }
 
@@ -117,7 +122,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             Workspace workspace,
             ProjectId? projectId,
             DocumentId? documentId
-        ) {
+        )
+        {
             Assert.Equal(projectId, GetProjectId(workspace));
             Assert.Equal(documentId, GetDocumentId(workspace));
 

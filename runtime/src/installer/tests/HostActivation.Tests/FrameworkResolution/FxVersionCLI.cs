@@ -32,7 +32,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             string frameworkReferenceVersion,
             string fxVersion,
             string resolvedFramework
-        ) {
+        )
+        {
             RunTest(
                     new TestSettings().WithRuntimeConfigCustomizer(
                             runtimeConfig =>
@@ -58,7 +59,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         public void IgnoresRollForwardOnNoCandidateFxAndApplyPatchesSettings(
             int? rollForwardOnNoCandidateFx,
             bool? applyPatches
-        ) {
+        )
+        {
             RunTest(
                     new TestSettings().WithRuntimeConfigCustomizer(
                             runtimeConfig =>

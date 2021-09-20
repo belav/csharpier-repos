@@ -57,7 +57,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         protected override async Task ProvideCompletionsAsync(
             CompletionContext context,
             string pathThroughLastSlash
-        ) {
+        )
+        {
             var resolver =
                 context.Document.Project.CompilationOptions.MetadataReferenceResolver
                 as RuntimeMetadataReferenceResolver;

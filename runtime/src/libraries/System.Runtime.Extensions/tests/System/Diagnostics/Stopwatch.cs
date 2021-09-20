@@ -114,7 +114,8 @@ namespace System.Diagnostics.Tests
                 if (
                     sw.ElapsedMilliseconds >= (SleepTime / WindowFactor)
                     && sw.ElapsedMilliseconds <= (SleepTime * WindowFactor)
-                ) {
+                )
+                {
                     return;
                 }
 

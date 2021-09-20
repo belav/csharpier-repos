@@ -21,7 +21,8 @@ namespace System.Collections.Generic
         private SortedSetEqualityComparer(
             IComparer<T>? comparer,
             IEqualityComparer<T>? memberEqualityComparer
-        ) {
+        )
+        {
             _comparer = comparer ?? Comparer<T>.Default;
             _memberEqualityComparer = memberEqualityComparer ?? EqualityComparer<T>.Default;
         }

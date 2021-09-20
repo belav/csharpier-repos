@@ -39,7 +39,8 @@ namespace Microsoft.AspNetCore.ResponseCompression
             HttpContext context,
             IResponseCompressionProvider provider,
             IHttpResponseBodyFeature innerBodyFeature
-        ) {
+        )
+        {
             _context = context;
             _provider = provider;
             _innerBodyFeature = innerBodyFeature;
@@ -202,7 +203,8 @@ namespace Microsoft.AspNetCore.ResponseCompression
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             OnWrite();
 
             if (_compressionStream != null)
@@ -237,7 +239,8 @@ namespace Microsoft.AspNetCore.ResponseCompression
                             HeaderNames.AcceptEncoding,
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         varyByAcceptEncoding = true;
                         break;
                     }
@@ -308,7 +311,8 @@ namespace Microsoft.AspNetCore.ResponseCompression
             long offset,
             long? count,
             CancellationToken cancellation
-        ) {
+        )
+        {
             OnWrite();
 
             if (_compressionStream != null)

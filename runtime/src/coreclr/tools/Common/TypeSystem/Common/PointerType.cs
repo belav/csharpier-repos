@@ -20,7 +20,8 @@ namespace Internal.TypeSystem
         public override TypeDesc InstantiateSignature(
             Instantiation typeInstantiation,
             Instantiation methodInstantiation
-        ) {
+        )
+        {
             TypeDesc parameterType = this.ParameterType;
             TypeDesc instantiatedParameterType = parameterType.InstantiateSignature(
                 typeInstantiation,

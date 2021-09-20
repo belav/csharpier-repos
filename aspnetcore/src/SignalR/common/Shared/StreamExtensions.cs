@@ -15,7 +15,8 @@ namespace System.IO
             this Stream stream,
             ReadOnlySequence<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (buffer.IsSingleSegment)
             {
 #if NETCOREAPP
@@ -42,7 +43,8 @@ namespace System.IO
             Stream stream,
             ReadOnlySequence<byte> buffer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var position = buffer.Start;
             while (buffer.TryGet(ref position, out var segment))
             {

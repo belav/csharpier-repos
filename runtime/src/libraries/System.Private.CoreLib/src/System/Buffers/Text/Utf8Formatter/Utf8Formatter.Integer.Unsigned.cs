@@ -19,7 +19,8 @@ namespace System.Buffers.Text
             Span<byte> destination,
             out int bytesWritten,
             StandardFormat format
-        ) {
+        )
+        {
             if (format.IsDefault)
             {
                 return TryFormatUInt64Default(value, destination, out bytesWritten);

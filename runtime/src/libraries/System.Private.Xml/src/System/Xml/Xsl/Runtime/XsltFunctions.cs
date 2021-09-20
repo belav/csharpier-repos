@@ -398,7 +398,8 @@ namespace System.Xml.Xsl.Runtime
             string format,
             string lang,
             bool isDate
-        ) {
+        )
+        {
             try
             {
                 string locale = GetCultureInfo(lang).Name;
@@ -412,7 +413,8 @@ namespace System.Xml.Xsl.Runtime
                             | XsdDateTimeFlags.XdrTimeNoTz,
                         out xdt
                     )
-                ) {
+                )
+                {
                     return string.Empty;
                 }
                 DateTime dt = xdt.ToZulu();
@@ -486,7 +488,8 @@ namespace System.Xml.Xsl.Runtime
                             | XsdDateTimeFlags.XdrTimeNoTz,
                         out xdt
                     )
-                ) {
+                )
+                {
                     return string.Empty;
                 }
                 dt = xdt.ToZulu();

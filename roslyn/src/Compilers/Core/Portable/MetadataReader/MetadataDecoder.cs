@@ -65,7 +65,8 @@ namespace Microsoft.CodeAnalysis
             ImmutableArray<ModifierInfo<TypeSymbol>> customModifiers,
             LocalSlotConstraints constraints,
             byte[] signatureOpt
-        ) {
+        )
+        {
             Debug.Assert(type != null);
 
             this.Type = type;
@@ -212,7 +213,8 @@ namespace Microsoft.CodeAnalysis
             ref BlobReader ppSig,
             SignatureTypeCode typeCode,
             out bool refersToNoPiaLocalType
-        ) {
+        )
+        {
             TypeSymbol typeSymbol;
             int paramPosition;
             ImmutableArray<ModifierInfo<TypeSymbol>> modifiers;
@@ -265,7 +267,8 @@ namespace Microsoft.CodeAnalysis
                     if (
                         !ppSig.TryReadCompressedInteger(out countOfDimensions)
                         || !ppSig.TryReadCompressedInteger(out countOfSizes)
-                    ) {
+                    )
+                    {
                         throw new UnsupportedSignatureContent();
                     }
 
@@ -425,7 +428,8 @@ namespace Microsoft.CodeAnalysis
         private TypeSymbol DecodeGenericTypeInstanceOrThrow(
             ref BlobReader ppSig,
             out bool refersToNoPiaLocalType
-        ) {
+        )
+        {
             SignatureTypeCode elementTypeCode = ppSig.ReadSignatureTypeCode();
             if (elementTypeCode != SignatureTypeCode.TypeHandle)
             {
@@ -497,7 +501,8 @@ namespace Microsoft.CodeAnalysis
             out bool isNoPiaLocalType,
             bool allowTypeSpec,
             bool requireShortForm
-        ) {
+        )
+        {
             if (handle.IsNil)
             {
                 throw new UnsupportedSignatureContent();
@@ -622,7 +627,8 @@ namespace Microsoft.CodeAnalysis
             ref MetadataTypeName fullName,
             EntityHandle tokenResolutionScope,
             out bool isNoPiaLocalType
-        ) {
+        )
+        {
             HandleKind tokenType = tokenResolutionScope.Kind;
 
             // TODO: I believe refs can be parented by a def tokens too, not common, but.
@@ -691,7 +697,8 @@ namespace Microsoft.CodeAnalysis
             TypeDefinitionHandle typeDef,
             out bool isNoPiaLocalType,
             bool isContainingType
-        ) {
+        )
+        {
             try
             {
                 // This is a cache similar to one used in MetaImport::GetTypeOfToken by native compiler.
@@ -827,7 +834,8 @@ namespace Microsoft.CodeAnalysis
         private ImmutableArray<ModifierInfo<TypeSymbol>> DecodeModifiersOrThrow(
             ref BlobReader signatureReader,
             out SignatureTypeCode typeCode
-        ) {
+        )
+        {
             ArrayBuilder<ModifierInfo<TypeSymbol>> modifiers = null;
 
             for (;;)
@@ -955,7 +963,8 @@ namespace Microsoft.CodeAnalysis
         /// <exception cref="BadImageFormatException">An exception from metadata reader.</exception>
         internal ImmutableArray<LocalInfo<TypeSymbol>> DecodeLocalSignatureOrThrow(
             ref BlobReader signatureReader
-        ) {
+        )
+        {
             SignatureHeader signatureHeader = signatureReader.ReadSignatureHeader();
 
             if (signatureHeader.Kind != SignatureKind.LocalVariables)
@@ -1021,7 +1030,8 @@ namespace Microsoft.CodeAnalysis
         internal TypeSymbol DecodeGenericParameterConstraint(
             EntityHandle token,
             out ImmutableArray<ModifierInfo<TypeSymbol>> modifiers
-        ) {
+        )
+        {
             modifiers = ImmutableArray<ModifierInfo<TypeSymbol>>.Empty;
 
             switch (token.Kind)
@@ -1087,7 +1097,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 typeCode == SignatureTypeCode.TypedReference
                 && constraints != LocalSlotConstraints.None
-            ) {
+            )
+            {
                 typeSymbol = GetUnsupportedMetadataTypeSymbol();
             }
             else
@@ -1119,7 +1130,8 @@ namespace Microsoft.CodeAnalysis
             ref BlobReader sigReader,
             out TypeSymbol type,
             out ConstantValue value
-        ) {
+        )
+        {
             SignatureTypeCode typeCode;
 
             var customModifiers = DecodeModifiersOrThrow(ref sigReader, out typeCode);
@@ -1209,7 +1221,8 @@ namespace Microsoft.CodeAnalysis
             ref BlobReader sigReader,
             SignatureTypeCode typeCode,
             out bool isEnumTypeCode
-        ) {
+        )
+        {
             switch (typeCode)
             {
                 case SignatureTypeCode.Boolean:
@@ -1292,7 +1305,8 @@ namespace Microsoft.CodeAnalysis
 
         internal ImmutableArray<LocalInfo<TypeSymbol>> GetLocalsOrThrow(
             StandaloneSignatureHandle handle
-        ) {
+        )
+        {
             var signatureHandle = Module.MetadataReader.GetStandaloneSignature(handle).Signature;
             var signatureReader = Module.MetadataReader.GetBlobReader(signatureHandle);
             return DecodeLocalSignatureOrThrow(ref signatureReader);
@@ -1327,7 +1341,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         internal ImmutableArray<LocalInfo<TypeSymbol>> GetLocalInfo(
             StandaloneSignatureHandle localSignatureHandle
-        ) {
+        )
+        {
             if (localSignatureHandle.IsNil)
             {
                 return ImmutableArray<LocalInfo<TypeSymbol>>.Empty;
@@ -1343,7 +1358,8 @@ namespace Microsoft.CodeAnalysis
         private void DecodeParameterOrThrow(
             ref BlobReader signatureReader, /*out*/
             ref ParamInfo<TypeSymbol> info
-        ) {
+        )
+        {
             info.CustomModifiers = DecodeModifiersOrThrow(
                 ref signatureReader,
                 out SignatureTypeCode typeCode
@@ -1366,7 +1382,8 @@ namespace Microsoft.CodeAnalysis
             out SignatureHeader signatureHeader,
             out BadImageFormatException metadataException,
             bool setParamHandles = true
-        ) {
+        )
+        {
             ParamInfo<TypeSymbol>[] paramInfo = null;
             signatureHeader = default(SignatureHeader);
 
@@ -1399,7 +1416,8 @@ namespace Microsoft.CodeAnalysis
                             sequenceNumber >= 0
                             && sequenceNumber < paramInfoLength
                             && paramInfo[sequenceNumber].Handle.IsNil
-                        ) {
+                        )
+                        {
                             paramInfo[sequenceNumber].Handle = param;
                         }
                     }
@@ -1429,7 +1447,8 @@ namespace Microsoft.CodeAnalysis
             MethodDefinitionHandle methodDef,
             out int parameterCount,
             out int typeParameterCount
-        ) {
+        )
+        {
             BlobHandle signature = module.GetMethodSignatureOrThrow(methodDef);
             SignatureHeader signatureHeader;
             BlobReader signatureReader = DecodeSignatureHeaderOrThrow(
@@ -1450,7 +1469,8 @@ namespace Microsoft.CodeAnalysis
             PropertyDefinitionHandle handle,
             out SignatureHeader signatureHeader,
             out BadImageFormatException BadImageFormatException
-        ) {
+        )
+        {
             ParamInfo<TypeSymbol>[] paramInfo = null;
             signatureHeader = default(SignatureHeader);
 
@@ -1515,7 +1535,8 @@ namespace Microsoft.CodeAnalysis
             out SerializationTypeCode elementTypeCode,
             out TypeSymbol elementType,
             bool isElementType
-        ) {
+        )
+        {
             SignatureTypeCode paramTypeCode = sigReader.ReadSignatureTypeCode();
 
             if (paramTypeCode == SignatureTypeCode.SZArray)
@@ -1617,7 +1638,8 @@ namespace Microsoft.CodeAnalysis
             out SerializationTypeCode elementTypeCode,
             out TypeSymbol elementType,
             bool isElementType
-        ) {
+        )
+        {
             typeCode = argReader.ReadSerializationTypeCode();
 
             // Spec:
@@ -1713,7 +1735,8 @@ namespace Microsoft.CodeAnalysis
         private TypedConstant DecodeCustomAttributeFixedArgumentOrThrow(
             ref BlobReader sigReader,
             ref BlobReader argReader
-        ) {
+        )
+        {
             SerializationTypeCode typeCode,
                 elementTypeCode;
             TypeSymbol type,
@@ -1747,7 +1770,8 @@ namespace Microsoft.CodeAnalysis
             ref BlobReader argReader,
             SerializationTypeCode typeCode,
             TypeSymbol type
-        ) {
+        )
+        {
             if (typeCode == SerializationTypeCode.TaggedObject)
             {
                 // Spec: If the parameter kind is System.Object, the value stored represents the "boxed" instance of that value-type.
@@ -1783,7 +1807,8 @@ namespace Microsoft.CodeAnalysis
             SerializationTypeCode elementTypeCode,
             TypeSymbol elementType,
             TypeSymbol arrayType
-        ) {
+        )
+        {
             int count = argReader.ReadInt32();
             TypedConstant[] values;
 
@@ -1817,7 +1842,8 @@ namespace Microsoft.CodeAnalysis
             ref BlobReader argReader,
             SerializationTypeCode typeCode,
             TypeSymbol type
-        ) {
+        )
+        {
             Debug.Assert(type != null);
 
             switch (typeCode)
@@ -1947,7 +1973,8 @@ namespace Microsoft.CodeAnalysis
             TypedConstant
         > nameValuePair, bool isProperty, SerializationTypeCode typeCode, SerializationTypeCode elementTypeCode) DecodeCustomAttributeNamedArgumentOrThrow(
             ref BlobReader argReader
-        ) {
+        )
+        {
             // Ecma-335 23.3 - A NamedArg is simply a FixedArg preceded by information to identify which field or
             // property it represents. [Note: Recall that the CLI allows fields and properties to have the same name; so
             // we require a means to disambiguate such situations. end note] FIELD is the single byte 0x53. PROPERTY is
@@ -1957,7 +1984,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 kind != CustomAttributeNamedArgumentKind.Field
                 && kind != CustomAttributeNamedArgumentKind.Property
-            ) {
+            )
+            {
                 throw new UnsupportedSignatureContent();
             }
 
@@ -2003,7 +2031,8 @@ namespace Microsoft.CodeAnalysis
             string namespaceName,
             string typeName,
             bool ignoreCase = false
-        ) {
+        )
+        {
             try
             {
                 EntityHandle ctor;
@@ -2025,7 +2054,8 @@ namespace Microsoft.CodeAnalysis
         internal int GetTargetAttributeSignatureIndex(
             CustomAttributeHandle customAttribute,
             AttributeDescription description
-        ) {
+        )
+        {
             try
             {
                 return Module.GetTargetAttributeSignatureIndex(customAttribute, description);
@@ -2040,7 +2070,8 @@ namespace Microsoft.CodeAnalysis
             CustomAttributeHandle handle,
             out TypedConstant[] positionalArgs,
             out KeyValuePair<string, TypedConstant>[] namedArgs
-        ) {
+        )
+        {
             try
             {
                 positionalArgs = Array.Empty<TypedConstant>();
@@ -2130,7 +2161,8 @@ namespace Microsoft.CodeAnalysis
             CustomAttributeHandle handle,
             [NotNullWhen(true)] out TypeSymbol? attributeClass,
             [NotNullWhen(true)] out MethodSymbol? attributeCtor
-        ) {
+        )
+        {
             EntityHandle attributeType;
             EntityHandle ctor;
 
@@ -2159,7 +2191,8 @@ namespace Microsoft.CodeAnalysis
         internal bool GetCustomAttributeWellKnownType(
             CustomAttributeHandle handle,
             out WellKnownType wellKnownAttribute
-        ) {
+        )
+        {
             wellKnownAttribute = WellKnownType.Unknown;
 
             try
@@ -2180,7 +2213,8 @@ namespace Microsoft.CodeAnalysis
                         out namespaceHandle,
                         out nameHandle
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -2226,7 +2260,8 @@ namespace Microsoft.CodeAnalysis
         internal BlobReader DecodeSignatureHeaderOrThrow(
             BlobHandle signature,
             out SignatureHeader signatureHeader
-        ) {
+        )
+        {
             return DecodeSignatureHeaderOrThrow(Module, signature, out signatureHeader);
         }
 
@@ -2235,7 +2270,8 @@ namespace Microsoft.CodeAnalysis
             PEModule module,
             BlobHandle signature,
             out SignatureHeader signatureHeader
-        ) {
+        )
+        {
             BlobReader reader = module.GetMemoryReaderOrThrow(signature);
             signatureHeader = reader.ReadSignatureHeader();
             return reader;
@@ -2248,7 +2284,8 @@ namespace Microsoft.CodeAnalysis
             out int typeParameterCount,
             bool shouldProcessAllBytes = true,
             bool isFunctionPointerSignature = false
-        ) {
+        )
+        {
             int paramCount;
             GetSignatureCountsOrThrow(
                 ref signatureReader,
@@ -2300,7 +2337,8 @@ namespace Microsoft.CodeAnalysis
             SignatureHeader signatureHeader,
             out int parameterCount,
             out int typeParameterCount
-        ) {
+        )
+        {
             // Get the type parameter count.
             typeParameterCount = signatureHeader.IsGeneric
                 ? signatureReader.ReadCompressedInteger()
@@ -2313,7 +2351,8 @@ namespace Microsoft.CodeAnalysis
         internal TypeSymbol DecodeFieldSignature(
             FieldDefinitionHandle fieldHandle,
             out ImmutableArray<ModifierInfo<TypeSymbol>> customModifiers
-        ) {
+        )
+        {
             try
             {
                 BlobHandle signature = Module.GetFieldSignatureOrThrow(fieldHandle);
@@ -2343,7 +2382,8 @@ namespace Microsoft.CodeAnalysis
         protected TypeSymbol DecodeFieldSignature(
             ref BlobReader signatureReader,
             out ImmutableArray<ModifierInfo<TypeSymbol>> customModifiers
-        ) {
+        )
+        {
             customModifiers = default;
 
             try
@@ -2378,14 +2418,16 @@ namespace Microsoft.CodeAnalysis
             TypeDefinitionHandle implementingTypeDef,
             MethodDefinitionHandle implementingMethodDef,
             TypeSymbol implementingTypeSymbol
-        ) {
+        )
+        {
             ArrayBuilder<MethodSymbol> resultBuilder = ArrayBuilder<MethodSymbol>.GetInstance();
 
             try
             {
                 foreach (
                     var methodImpl in Module.GetMethodImplementationsOrThrow(implementingTypeDef)
-                ) {
+                )
+                {
                     EntityHandle methodDebugHandle;
                     EntityHandle implementedMethodHandle;
                     Module.GetMethodImplPropsOrThrow(
@@ -2460,7 +2502,8 @@ namespace Microsoft.CodeAnalysis
         private MethodSymbol FindMethodSymbolInSuperType(
             TypeDefinitionHandle searchTypeDef,
             MethodDefinitionHandle targetMethodDef
-        ) {
+        )
+        {
             try
             {
                 // We're using queues (i.e. BFS), rather than stacks (i.e. DFS), because we expect the common case
@@ -2489,7 +2532,8 @@ namespace Microsoft.CodeAnalysis
                 while (
                     (hasMoreTypeDefs = (typeDefsToSearch.Count > 0))
                     || typeSymbolsToSearch.Count > 0
-                ) {
+                )
+                {
                     if (hasMoreTypeDefs)
                     {
                         TypeDefinitionHandle typeDef = typeDefsToSearch.Dequeue();
@@ -2503,7 +2547,8 @@ namespace Microsoft.CodeAnalysis
                                 MethodDefinitionHandle methodDef in Module.GetMethodsOfTypeOrThrow(
                                     typeDef
                                 )
-                            ) {
+                            )
+                            {
                                 if (methodDef == targetMethodDef)
                                 {
                                     TypeSymbol typeSymbol = this.GetTypeOfToken(typeDef);
@@ -2554,10 +2599,12 @@ namespace Microsoft.CodeAnalysis
             Queue<TypeDefinitionHandle> typeDefsToSearch,
             Queue<TypeSymbol> typeSymbolsToSearch,
             TypeDefinitionHandle searchTypeDef
-        ) {
+        )
+        {
             foreach (
                 var interfaceImplHandle in Module.GetInterfaceImplementationsOrThrow(searchTypeDef)
-            ) {
+            )
+            {
                 var interfaceImpl = Module.MetadataReader.GetInterfaceImplementation(
                     interfaceImplHandle
                 );
@@ -2581,7 +2628,8 @@ namespace Microsoft.CodeAnalysis
             Queue<TypeDefinitionHandle> typeDefsToSearch,
             Queue<TypeSymbol> typeSymbolsToSearch,
             EntityHandle typeToken
-        ) {
+        )
+        {
             if (!typeToken.IsNil)
             {
                 if (typeToken.Kind == HandleKind.TypeDefinition)
@@ -2662,7 +2710,8 @@ namespace Microsoft.CodeAnalysis
         internal MethodSymbol GetMethodSymbolForMemberRef(
             MemberReferenceHandle methodRef,
             TypeSymbol implementingTypeSymbol
-        ) {
+        )
+        {
             return (MethodSymbol)GetSymbolForMemberRef(
                 methodRef,
                 implementingTypeSymbol,
@@ -2673,7 +2722,8 @@ namespace Microsoft.CodeAnalysis
         internal FieldSymbol GetFieldSymbolForMemberRef(
             MemberReferenceHandle methodRef,
             TypeSymbol implementingTypeSymbol
-        ) {
+        )
+        {
             return (FieldSymbol)GetSymbolForMemberRef(
                 methodRef,
                 implementingTypeSymbol,
@@ -2724,7 +2774,8 @@ namespace Microsoft.CodeAnalysis
         private static TypedConstant CreateArrayTypedConstant(
             TypeSymbol type,
             ImmutableArray<TypedConstant> array
-        ) {
+        )
+        {
             if (type.TypeKind == TypeKind.Error)
             {
                 return new TypedConstant(type, TypedConstantKind.Error, null);
@@ -2738,7 +2789,8 @@ namespace Microsoft.CodeAnalysis
             TypeSymbol type,
             TypedConstantKind kind,
             object value
-        ) {
+        )
+        {
             if (type.TypeKind == TypeKind.Error)
             {
                 return new TypedConstant(type, TypedConstantKind.Error, null);
@@ -2751,7 +2803,8 @@ namespace Microsoft.CodeAnalysis
             TypeSymbol type,
             TypedConstantKind kind,
             bool value
-        ) {
+        )
+        {
             return CreateTypedConstant(type, kind, Boxes.Box(value));
         }
 
@@ -2864,7 +2917,8 @@ namespace Microsoft.CodeAnalysis
                     containerType != HandleKind.TypeDefinition
                     && containerType != HandleKind.TypeReference
                     && containerType != HandleKind.TypeSpecification
-                ) {
+                )
+                {
                     // C# symbols don't support global methods
                     return null;
                 }
@@ -2880,7 +2934,8 @@ namespace Microsoft.CodeAnalysis
         internal MethodSymbol GetMethodSymbolForMethodDefOrMemberRef(
             EntityHandle memberToken,
             TypeSymbol container
-        ) {
+        )
+        {
             HandleKind type = memberToken.Kind;
             Debug.Assert(type == HandleKind.MethodDefinition || type == HandleKind.MemberReference);
 
@@ -2892,7 +2947,8 @@ namespace Microsoft.CodeAnalysis
         internal FieldSymbol GetFieldSymbolForFieldDefOrMemberRef(
             EntityHandle memberToken,
             TypeSymbol container
-        ) {
+        )
+        {
             HandleKind type = memberToken.Kind;
             Debug.Assert(type == HandleKind.FieldDefinition || type == HandleKind.MemberReference);
 
@@ -2929,7 +2985,8 @@ namespace Microsoft.CodeAnalysis
             bool comparingToSetter,
             bool compareParamByRef,
             bool compareReturnType
-        ) {
+        )
+        {
             int additionalParamCount = (comparingToSetter ? 1 : 0);
 
             // Check the number of parameters.
@@ -2942,7 +2999,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 comparingToSetter
                 && (GetPrimitiveTypeCode(signature2[0].Type) != Cci.PrimitiveTypeCode.Void)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -2951,7 +3009,8 @@ namespace Microsoft.CodeAnalysis
                 int paramIndex1 = compareReturnType ? 0 : 1;
                 paramIndex1 < signature1.Length;
                 paramIndex1++
-            ) {
+            )
+            {
                 int paramIndex2 =
                     ((paramIndex1 == 0) && comparingToSetter) ? signature1.Length : paramIndex1;
                 var param1 = signature1[paramIndex1];
@@ -2978,7 +3037,8 @@ namespace Microsoft.CodeAnalysis
         internal bool DoesSignatureMatchEvent(
             TypeSymbol eventType,
             ParamInfo<TypeSymbol>[] methodParams
-        ) {
+        )
+        {
             // Check the number of parameters.
             if (methodParams.Length != 2)
             {

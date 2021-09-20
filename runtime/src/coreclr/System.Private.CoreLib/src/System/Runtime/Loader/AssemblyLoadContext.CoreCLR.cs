@@ -115,13 +115,15 @@ namespace System.Runtime.Loader
         internal unsafe Assembly InternalLoad(
             ReadOnlySpan<byte> arrAssembly,
             ReadOnlySpan<byte> arrSymbols
-        ) {
+        )
+        {
             RuntimeAssembly? loadedAssembly = null;
 
             fixed (
                 byte* ptrAssembly = arrAssembly,
                     ptrSymbols = arrSymbols
-            ) {
+            )
+            {
                 LoadFromStream(
                     _nativeAssemblyLoadContext,
                     new IntPtr(ptrAssembly),
@@ -172,7 +174,8 @@ namespace System.Runtime.Loader
         private static Assembly? ResolveSatelliteAssembly(
             IntPtr gchManagedAssemblyLoadContext,
             AssemblyName assemblyName
-        ) {
+        )
+        {
             AssemblyLoadContext context = (AssemblyLoadContext)(
                 GCHandle.FromIntPtr(gchManagedAssemblyLoadContext).Target
             )!;
@@ -186,7 +189,8 @@ namespace System.Runtime.Loader
         private static IntPtr ResolveUnmanagedDll(
             string unmanagedDllName,
             IntPtr gchManagedAssemblyLoadContext
-        ) {
+        )
+        {
             AssemblyLoadContext context = (AssemblyLoadContext)(
                 GCHandle.FromIntPtr(gchManagedAssemblyLoadContext).Target
             )!;
@@ -199,7 +203,8 @@ namespace System.Runtime.Loader
             string unmanagedDllName,
             Assembly assembly,
             IntPtr gchManagedAssemblyLoadContext
-        ) {
+        )
+        {
             AssemblyLoadContext context = (AssemblyLoadContext)(
                 GCHandle.FromIntPtr(gchManagedAssemblyLoadContext).Target
             )!;
@@ -211,7 +216,8 @@ namespace System.Runtime.Loader
         private static Assembly? ResolveUsingResolvingEvent(
             IntPtr gchManagedAssemblyLoadContext,
             AssemblyName assemblyName
-        ) {
+        )
+        {
             AssemblyLoadContext context = (AssemblyLoadContext)(
                 GCHandle.FromIntPtr(gchManagedAssemblyLoadContext).Target
             )!;

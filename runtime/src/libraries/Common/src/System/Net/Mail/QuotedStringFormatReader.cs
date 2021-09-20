@@ -38,7 +38,8 @@ namespace System.Net.Mail
             bool permitUnicode,
             out int outIndex,
             bool throwExceptionIfFail
-        ) {
+        )
+        {
             Debug.Assert(
                 0 <= index && index < data.Length,
                 "Index out of range: " + index + ", " + data.Length
@@ -62,7 +63,8 @@ namespace System.Net.Mail
                         out index,
                         throwExceptionIfFail
                     )
-                ) {
+                )
+                {
                     outIndex = default;
                     return false;
                 }
@@ -81,7 +83,8 @@ namespace System.Net.Mail
                         out int quotedCharCount,
                         throwExceptionIfFail
                     )
-                ) {
+                )
+                {
                     outIndex = default;
                     return false;
                 }
@@ -157,7 +160,8 @@ namespace System.Net.Mail
             bool expectCommaDelimiter,
             out int outIndex,
             bool throwExceptionIfFail
-        ) {
+        )
+        {
             Debug.Assert(
                 0 <= index && index < data.Length,
                 "Index out of range: " + index + ", " + data.Length
@@ -173,7 +177,8 @@ namespace System.Net.Mail
                         out index,
                         throwExceptionIfFail
                     )
-                ) {
+                )
+                {
                     outIndex = default;
                     return false;
                 }
@@ -191,7 +196,8 @@ namespace System.Net.Mail
                         out int quotedCharCount,
                         throwExceptionIfFail
                     )
-                ) {
+                )
+                {
                     outIndex = default;
                     return false;
                 }

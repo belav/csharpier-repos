@@ -32,7 +32,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             IXmlNode node,
             IDictionaryAdapter parent,
             IXmlAccessor accessor
-        ) {
+        )
+        {
             var serializable = (IXmlSerializable)Activator.CreateInstance(node.ClrType);
 
             using (var reader = new XmlSubtreeReader(node, XmlDefaultSerializer.Root))
@@ -51,7 +52,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             IXmlAccessor accessor,
             object oldValue,
             ref object value
-        ) {
+        )
+        {
             var serializable = (IXmlSerializable)value;
             var root = XmlDefaultSerializer.Root;
 

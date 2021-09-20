@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             public EntityHandle GetTypeFromSpecification(
                 MetadataReader reader,
                 TypeSpecificationHandle handle
-            ) {
+            )
+            {
                 // Create a decoder to process the type specification (which happens with
                 // instantiated generics).  It will call back into us to get the first handle
                 // for the type def or type ref that the specification starts with.

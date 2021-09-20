@@ -45,7 +45,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionEntityType? newBaseType,
             IConventionEntityType? oldBaseType,
             IConventionContext<IConventionEntityType> context
-        ) {
+        )
+        {
             if (oldBaseType == null)
             {
                 return;
@@ -58,7 +59,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessModelFinalizing(
             IConventionModelBuilder modelBuilder,
             IConventionContext<IConventionModelBuilder> context
-        ) {
+        )
+        {
             foreach (var entityType in modelBuilder.Metadata.GetEntityTypes())
             {
                 CheckIndexAttributesAndEnsureIndex(entityType, true);
@@ -68,10 +70,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         private static void CheckIndexAttributesAndEnsureIndex(
             IConventionEntityType entityType,
             bool shouldThrow
-        ) {
+        )
+        {
             foreach (
                 var indexAttribute in entityType.ClrType.GetCustomAttributes<IndexAttribute>(true)
-            ) {
+            )
+            {
                 IConventionIndexBuilder? indexBuilder;
                 if (!shouldThrow)
                 {
@@ -137,7 +141,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         private static void CheckIgnoredProperties(
             IndexAttribute indexAttribute,
             IConventionEntityType entityType
-        ) {
+        )
+        {
             foreach (var propertyName in indexAttribute.PropertyNames)
             {
                 if (entityType.Builder.IsIgnored(propertyName, fromDataAnnotation: true))
@@ -169,7 +174,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IndexAttribute indexAttribute,
             IConventionEntityType entityType,
             InvalidOperationException innerException
-        ) {
+        )
+        {
             foreach (var propertyName in indexAttribute.PropertyNames)
             {
                 var property = entityType.FindProperty(propertyName);

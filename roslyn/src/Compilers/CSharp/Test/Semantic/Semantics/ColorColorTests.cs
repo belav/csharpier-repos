@@ -2115,7 +2115,8 @@ public class Example
             SymbolKind parentSymbolKind,
             string parentDisplayString,
             params DiagnosticDescription[] expectedDiagnostics
-        ) {
+        )
+        {
             var tree = Parse(text);
 
             var comp = CreateCompilationWithMscorlib40(

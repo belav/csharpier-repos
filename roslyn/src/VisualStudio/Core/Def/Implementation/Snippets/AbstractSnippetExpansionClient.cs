@@ -163,7 +163,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             if (
                 ExpansionSession.TryGetHeaderNode("Description", out var descriptionNode)
                 && descriptionNode?.text == s_fullMethodCallDescriptionSentinel
-            ) {
+            )
+            {
                 return VSConstants.S_OK;
             }
 
@@ -258,7 +259,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
                         TextView.TextBuffer,
                         out var endSpanInSurfaceBuffer
                     )
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -350,7 +352,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
                     string.Format("{0}end{0}", delimiter),
                     StringComparison.OrdinalIgnoreCase
                 ) != -1
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -375,7 +378,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
         protected static bool TryGetSnippetNode(
             IVsExpansionSession pSession,
             [NotNullWhen(true)] out XElement? snippetNode
-        ) {
+        )
+        {
             IXMLDOMNode? xmlNode = null;
             snippetNode = null;
 
@@ -408,7 +412,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
         public int PositionCaretForEditing(
             IVsTextLines pBuffer,
             [ComAliasName("Microsoft.VisualStudio.TextManager.Interop.TextSpan")] VsTextSpan[] ts
-        ) {
+        )
+        {
             // If the formatted location of the $end$ position (the inserted comment) was on an
             // empty line and indented, then we have already removed the white space on that line
             // and the navigation location will be at column 0 on a blank line. We must now
@@ -541,7 +546,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             int startPositionInSubjectBuffer,
             int endPositionInSubjectBuffer,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var textViewModel = TextView.TextViewModel;
             if (textViewModel == null)
             {
@@ -560,7 +566,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
                     textViewModel.DataBuffer,
                     out var dataBufferSpan
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -597,7 +604,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
                     textSpan,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 Debug.Assert(_state.IsFullMethodCallSnippet);
                 return true;
             }
@@ -610,7 +618,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
                     LanguageServiceGuid,
                     out _state._expansionSession
                 ) == VSConstants.S_OK
-            ) {
+            )
+            {
                 // This expansion is not derived from a symbol, so make sure the state isn't tracking any symbol
                 // information
                 Debug.Assert(!_state.IsFullMethodCallSnippet);
@@ -626,14 +635,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             IVsExpansion expansion,
             VsTextSpan textSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 !(
                     SubjectBuffer.GetFeatureOnOffOption(
                         CompletionOptions.EnableArgumentCompletionSnippets
                     ) ?? false
                 )
-            ) {
+            )
+            {
                 // Argument completion snippets are not enabled
                 return false;
             }
@@ -679,7 +690,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
                             pszRelativePath: null,
                             out _state._expansionSession
                         ) == VSConstants.S_OK
-                    ) {
+                    )
+                    {
                         Debug.Assert(_state._expansionSession != null);
                         _state._methodNameForInsertFullMethodCall = methodSymbols.First().Name;
                         Debug.Assert(_state._method == null);
@@ -690,7 +702,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
                                 SubjectBuffer
                             ) is
                             { } controller
-                        ) {
+                        )
+                        {
                             EnsureRegisteredForModelUpdatedEvents(this, controller);
                         }
 
@@ -716,7 +729,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             static void EnsureRegisteredForModelUpdatedEvents(
                 AbstractSnippetExpansionClient client,
                 Controller controller
-            ) {
+            )
+            {
                 // Access to _registeredForSignatureHelpEvents is synchronized on the main thread
                 client.ThreadingContext.ThrowIfNotOnUIThread();
 
@@ -770,7 +784,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             bool includeMethod,
             ImmutableArray<IParameterSymbol> parameters,
             ImmutableDictionary<string, string> parameterValues
-        ) {
+        )
+        {
             XNamespace snippetNamespace =
                 "http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet";
 
@@ -919,7 +934,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             Document document,
             SnapshotPoint caretPosition,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
 
@@ -1047,7 +1063,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
                         out var placeholderValue
                     ) == VSConstants.S_OK
                     && placeholderValue.Length > 0
-                ) {
+                )
+                {
                     if (method.Parameters.Any())
                     {
                         newArguments = newArguments.SetItem(
@@ -1071,7 +1088,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
                             previousParameter.Name,
                             out var previousValue
                         ) == VSConstants.S_OK
-                    ) {
+                    )
+                    {
                         newArguments = newArguments.SetItem(previousParameter.Name, previousValue);
                     }
                 }
@@ -1138,7 +1156,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
                         pszRelativePath: null,
                         out _state._expansionSession
                     ) == VSConstants.S_OK
-                ) {
+                )
+                {
                     Debug.Assert(_state._expansionSession != null);
                     _state._methodNameForInsertFullMethodCall = method.Name;
                     _state._method = method;
@@ -1179,7 +1198,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             VsTextSpan[] ts,
             string bstrKind,
             out int pfIsValidKind
-        ) {
+        )
+        {
             pfIsValidKind = 1;
             return VSConstants.S_OK;
         }
@@ -1190,7 +1210,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             string[] rgTypes,
             int iCountTypes,
             out int pfIsValidType
-        ) {
+        )
+        {
             pfIsValidType = 1;
             return VSConstants.S_OK;
         }
@@ -1284,7 +1305,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             IVsExpansionSession pSession,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!TryGetSnippetNode(pSession, out var snippetNode))
             {
                 return;
@@ -1338,7 +1360,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
                 var reference in referencesNode.Elements(
                     XName.Get("Reference", snippetNode.Name.NamespaceName)
                 )
-            ) {
+            )
+            {
                 // Note: URL references are not supported
                 var assemblyElement = reference.Element(assemblyXmlName);
 
@@ -1352,7 +1375,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
                 if (
                     !(workspace is VisualStudioWorkspaceImpl visualStudioWorkspace)
                     || !visualStudioWorkspace.TryAddReferenceToProject(projectId, assemblyName)
-                ) {
+                )
+                {
                     failedReferenceAdditions.Add(assemblyName);
                 }
             }
@@ -1377,7 +1401,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
         protected static bool TryAddImportsToContainedDocument(
             Document document,
             IEnumerable<string> memberImportsNamespaces
-        ) {
+        )
+        {
             if (!(document.Project.Solution.Workspace is VisualStudioWorkspaceImpl vsWorkspace))
             {
                 return false;
@@ -1392,13 +1417,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             if (
                 containedDocument.ContainedLanguageHost
                 is IVsContainedLanguageHostInternal containedLanguageHost
-            ) {
+            )
+            {
                 foreach (var importClause in memberImportsNamespaces)
                 {
                     if (
                         containedLanguageHost.InsertImportsDirective(importClause)
                         != VSConstants.S_OK
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }
@@ -1411,12 +1438,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             IXMLDOMNode xmlFunctionNode,
             [NotNullWhen(true)] out string? snippetFunctionName,
             [NotNullWhen(true)] out string? param
-        ) {
+        )
+        {
             if (
                 xmlFunctionNode.text.IndexOf('(') == -1
                 || xmlFunctionNode.text.IndexOf(')') == -1
                 || xmlFunctionNode.text.IndexOf(')') < xmlFunctionNode.text.IndexOf('(')
-            ) {
+            )
+            {
                 snippetFunctionName = null;
                 param = null;
                 return false;
@@ -1437,7 +1466,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
         internal bool TryGetSubjectBufferSpan(
             VsTextSpan surfaceBufferTextSpan,
             out SnapshotSpan subjectBufferSpan
-        ) {
+        )
+        {
             var snapshotSpan = TextView.TextSnapshot.GetSpan(surfaceBufferTextSpan);
             var subjectBufferSpanCollection = TextView.BufferGraph.MapDownToBuffer(
                 snapshotSpan,
@@ -1460,7 +1490,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             SnapshotSpan snapshotSpan,
             ITextBuffer targetBuffer,
             out SnapshotSpan span
-        ) {
+        )
+        {
             var spanCollection = TextView.BufferGraph.MapUpToBuffer(
                 snapshotSpan,
                 SpanTrackingMode.EdgeExclusive,

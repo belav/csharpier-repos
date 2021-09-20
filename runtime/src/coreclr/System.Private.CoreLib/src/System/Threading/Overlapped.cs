@@ -38,7 +38,8 @@ namespace System.Threading
         internal _IOCompletionCallback(
             IOCompletionCallback ioCompletionCallback,
             ExecutionContext executionContext
-        ) {
+        )
+        {
             _ioCompletionCallback = ioCompletionCallback;
             _executionContext = executionContext;
         }
@@ -60,7 +61,8 @@ namespace System.Threading
             uint errorCode,
             uint numBytes,
             NativeOverlapped* pNativeOverlapped
-        ) {
+        )
+        {
             do
             {
                 OverlappedData overlapped = OverlappedData.GetOverlappedFromNative(

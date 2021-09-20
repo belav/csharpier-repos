@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateDefaultConstructors
                 State state,
                 IList<IMethodSymbol> constructors,
                 string title
-            ) {
+            )
+            {
                 _document = document;
                 _state = state;
                 _constructors = constructors;
@@ -40,7 +41,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateDefaultConstructors
 
             protected override async Task<Document> GetChangedDocumentAsync(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var result = await CodeGenerator.AddMemberDeclarationsAsync(
                         _document.Project.Solution,
                         _state.ClassType,
@@ -77,7 +79,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateDefaultConstructors
             private static Accessibility DetermineAccessibility(
                 IMethodSymbol baseConstructor,
                 INamedTypeSymbol classType
-            ) {
+            )
+            {
                 // If our base is abstract, and we are not, then (since we likely want to be
                 // instantiated) we make our constructor public by default.
                 if (

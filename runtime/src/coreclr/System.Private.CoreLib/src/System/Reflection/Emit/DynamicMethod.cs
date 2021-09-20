@@ -68,7 +68,8 @@ namespace System.Reflection.Emit
             Type? returnType,
             Type[]? parameterTypes,
             bool restrictedSkipVisibility
-        ) {
+        )
+        {
             Init(
                 name,
                 MethodAttributes.Public | MethodAttributes.Static,
@@ -106,7 +107,8 @@ namespace System.Reflection.Emit
             Type[]? parameterTypes,
             Module m,
             bool skipVisibility
-        ) {
+        )
+        {
             if (m == null)
                 throw new ArgumentNullException(nameof(m));
 
@@ -131,7 +133,8 @@ namespace System.Reflection.Emit
             Type[]? parameterTypes,
             Module m,
             bool skipVisibility
-        ) {
+        )
+        {
             if (m == null)
                 throw new ArgumentNullException(nameof(m));
 
@@ -172,7 +175,8 @@ namespace System.Reflection.Emit
             Type[]? parameterTypes,
             Type owner,
             bool skipVisibility
-        ) {
+        )
+        {
             if (owner == null)
                 throw new ArgumentNullException(nameof(owner));
 
@@ -197,7 +201,8 @@ namespace System.Reflection.Emit
             Type[]? parameterTypes,
             Type owner,
             bool skipVisibility
-        ) {
+        )
+        {
             if (owner == null)
                 throw new ArgumentNullException(nameof(owner));
 
@@ -219,7 +224,8 @@ namespace System.Reflection.Emit
         private static void CheckConsistency(
             MethodAttributes attributes,
             CallingConventions callingConvention
-        ) {
+        )
+        {
             // only public static for method attributes
             if ((attributes & ~MethodAttributes.MemberAccessMask) != MethodAttributes.Static)
                 throw new NotSupportedException(SR.NotSupported_DynamicMethodFlags);
@@ -285,7 +291,8 @@ namespace System.Reflection.Emit
             Module? m,
             bool skipVisibility,
             bool transparentMethod
-        ) {
+        )
+        {
             DynamicMethod.CheckConsistency(attributes, callingConvention);
 
             // check and store the signature
@@ -507,7 +514,8 @@ namespace System.Reflection.Emit
             Binder? binder,
             object?[]? parameters,
             CultureInfo? culture
-        ) {
+        )
+        {
             if ((CallingConvention & CallingConventions.VarArgs) == CallingConventions.VarArgs)
                 throw new NotSupportedException(SR.NotSupported_CallToVarArg);
 
@@ -593,7 +601,8 @@ namespace System.Reflection.Emit
             int position,
             ParameterAttributes attributes,
             string? parameterName
-        ) {
+        )
+        {
             if (position < 0 || position > m_parameterTypes.Length)
                 throw new ArgumentOutOfRangeException(SR.ArgumentOutOfRange_ParamSequence);
             position--; // it's 1 based. 0 is the return value
@@ -688,7 +697,8 @@ namespace System.Reflection.Emit
                 string name,
                 MethodAttributes attributes,
                 CallingConventions callingConvention
-            ) {
+            )
+            {
                 m_owner = owner;
                 m_name = name;
                 m_attributes = attributes;
@@ -752,7 +762,8 @@ namespace System.Reflection.Emit
                 Binder? binder,
                 object?[]? parameters,
                 CultureInfo? culture
-            ) {
+            )
+            {
                 // We want the creator of the DynamicMethod to control who has access to the
                 // DynamicMethod (just like we do for delegates). However, a user can get to
                 // the corresponding RTDynamicMethod using Exception.TargetSite, StackFrame.GetMethod, etc.

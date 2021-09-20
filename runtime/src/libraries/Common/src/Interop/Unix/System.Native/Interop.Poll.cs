@@ -38,7 +38,8 @@ internal static partial class Interop
             PollEvents events,
             int timeout,
             out PollEvents triggered
-        ) {
+        )
+        {
             bool gotRef = false;
             try
             {

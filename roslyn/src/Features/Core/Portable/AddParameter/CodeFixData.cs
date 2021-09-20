@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.AddParameter
             IMethodSymbol method,
             Func<CancellationToken, Task<Solution>> createChangedSolutionNonCascading,
             Func<CancellationToken, Task<Solution>> createChangedSolutionCascading
-        ) {
+        )
+        {
             Method = method ?? throw new ArgumentNullException(nameof(method));
             CreateChangedSolutionNonCascading =
                 createChangedSolutionNonCascading

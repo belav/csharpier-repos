@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis
             ImmutableArray<string> searchPaths,
             string? baseDirectory,
             ImmutableArray<KeyValuePair<string, string>> pathMap
-        ) {
+        )
+        {
             if (searchPaths.IsDefault)
             {
                 throw new ArgumentNullException(nameof(searchPaths));
@@ -45,7 +46,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 baseDirectory != null
                 && PathUtilities.GetPathKind(baseDirectory) != PathKind.Absolute
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     CodeAnalysisResources.AbsolutePathExpected,
                     nameof(baseDirectory)

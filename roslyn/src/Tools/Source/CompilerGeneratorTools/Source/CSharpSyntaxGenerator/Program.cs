@@ -130,7 +130,8 @@ namespace CSharpSyntaxGenerator
             bool writeTests,
             bool writeSignatures,
             string outputFile
-        ) {
+        )
+        {
             var tree = ReadTree(inputFile);
 
             // The syntax.xml doc contains some nodes that are useful for other tools, but which are

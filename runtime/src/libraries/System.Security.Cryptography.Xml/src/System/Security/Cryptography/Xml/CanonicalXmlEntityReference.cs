@@ -30,7 +30,8 @@ namespace System.Security.Cryptography.Xml
             StringBuilder strBuilder,
             DocPosition docPos,
             AncestralNamespaceContextManager anc
-        ) {
+        )
+        {
             if (IsInNodeSet)
                 CanonicalizationDispatcher.WriteGenericNode(this, strBuilder, docPos, anc);
         }
@@ -39,7 +40,8 @@ namespace System.Security.Cryptography.Xml
             HashAlgorithm hash,
             DocPosition docPos,
             AncestralNamespaceContextManager anc
-        ) {
+        )
+        {
             if (IsInNodeSet)
                 CanonicalizationDispatcher.WriteHashGenericNode(this, hash, docPos, anc);
         }

@@ -217,7 +217,8 @@ namespace System.Xml.Schema
             XmlResolver? resolver,
             XmlSchemaSet schemaSet,
             ValidationEventHandler valEventHandler
-        ) {
+        )
+        {
             if (schemaSet != null)
             {
                 XmlReaderSettings readerSettings = new XmlReaderSettings();
@@ -287,7 +288,8 @@ namespace System.Xml.Schema
             [NotNullWhen(true)] XmlSchemaType? derivedType,
             [NotNullWhen(true)] XmlSchemaType? baseType,
             XmlSchemaDerivationMethod except
-        ) {
+        )
+        {
             if (derivedType == null || baseType == null)
             {
                 return false;
@@ -317,7 +319,8 @@ namespace System.Xml.Schema
                     if (
                         (except & derivedType.DerivedBy) != 0
                         || !dt.Datatype!.IsDerivedFrom(bt.Datatype!)
-                    ) {
+                    )
+                    {
                         return false;
                     }
                     return true;
@@ -344,7 +347,8 @@ namespace System.Xml.Schema
             XmlSchemaDatatype derivedDataType,
             XmlSchemaDatatype baseDataType,
             XmlSchemaDerivationMethod except
-        ) {
+        )
+        {
             if (DatatypeImplementation.AnySimpleType.Datatype == baseDataType)
             {
                 return true;

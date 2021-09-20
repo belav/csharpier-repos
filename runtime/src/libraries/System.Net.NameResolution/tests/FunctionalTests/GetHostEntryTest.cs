@@ -253,7 +253,8 @@ namespace System.Net.NameResolution.Tests
         )]
         public async Task DnsGetHostEntry_BadName_ThrowsArgumentOutOfRangeException(
             string hostNameOrAddress
-        ) {
+        )
+        {
             Assert.ThrowsAny<ArgumentOutOfRangeException>(
                 () => Dns.GetHostEntry(hostNameOrAddress)
             );
@@ -346,7 +347,8 @@ namespace System.Net.NameResolution.Tests
             bool useAsync,
             string host,
             AddressFamily addressFamily
-        ) {
+        )
+        {
             IPHostEntry entry = useAsync
                 ? await Dns.GetHostEntryAsync(host, addressFamily)
                 : Dns.GetHostEntry(host, addressFamily);

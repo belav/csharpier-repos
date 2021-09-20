@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 type is INamedTypeSymbol namedType
                 && namedType.TypeKind == TypeKind.Interface
                 && !allInterfaces.Contains(namedType)
-            ) {
+            )
+            {
                 var result = new List<INamedTypeSymbol>(allInterfaces.Length + 1);
                 result.Add(namedType);
                 result.AddRange(allInterfaces);
@@ -62,7 +63,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
         public static bool IsNonNullableValueType(
             [NotNullWhen(returnValue: true)] this ITypeSymbol? symbol
-        ) {
+        )
+        {
             if (symbol?.IsValueType != true)
                 return false;
 
@@ -72,7 +74,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static bool IsNullable(
             [NotNullWhen(true)] this ITypeSymbol? symbol,
             [NotNullWhen(true)] out ITypeSymbol? underlyingType
-        ) {
+        )
+        {
             if (IsNullable(symbol))
             {
                 underlyingType = ((INamedTypeSymbol)symbol).TypeArguments[0];
@@ -110,7 +113,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         private static HashSet<INamedTypeSymbol> GetOriginalInterfacesAndTheirBaseInterfaces(
             this ITypeSymbol type,
             HashSet<INamedTypeSymbol>? symbols = null
-        ) {
+        )
+        {
             symbols ??= new HashSet<INamedTypeSymbol>(SymbolEquivalenceComparer.Instance);
 
             foreach (var interfaceType in type.Interfaces)
@@ -168,7 +172,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this ITypeSymbol type,
             ITypeSymbol baseType,
             bool includeInterfaces
-        ) {
+        )
+        {
             if (!includeInterfaces)
             {
                 return InheritsFromOrEquals(type, baseType);
@@ -192,7 +197,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static bool InheritsFromOrImplementsOrEqualsIgnoringConstruction(
             this ITypeSymbol type,
             ITypeSymbol baseType
-        ) {
+        )
+        {
             var originalBaseType = baseType.OriginalDefinition;
             type = type.OriginalDefinition;
 
@@ -219,7 +225,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static bool InheritsFromIgnoringConstruction(
             this ITypeSymbol type,
             ITypeSymbol baseType
-        ) {
+        )
+        {
             var originalBaseType = baseType.OriginalDefinition;
 
             // We could just call GetBaseTypes and foreach over it, but this
@@ -233,7 +240,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                         currentBaseType.OriginalDefinition,
                         originalBaseType
                     )
-                ) {
+                )
+                {
                     return true;
                 }
 
@@ -246,7 +254,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static bool ImplementsIgnoringConstruction(
             this ITypeSymbol type,
             ITypeSymbol interfaceType
-        ) {
+        )
+        {
             var originalInterfaceType = interfaceType.OriginalDefinition;
             return type.AllInterfaces.Any(
                 t =>
@@ -275,7 +284,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     && b.ContainingNamespace.Name == "System"
                     && b.ContainingNamespace.ContainingNamespace != null
                     && b.ContainingNamespace.ContainingNamespace.IsGlobalNamespace
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -285,7 +295,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
         public static bool IsFormattableStringOrIFormattable(
             [NotNullWhen(returnValue: true)] this ITypeSymbol? symbol
-        ) {
+        )
+        {
             return symbol?.MetadataName is nameof(FormattableString) or nameof(IFormattable)
                 && symbol.ContainingType == null
                 && symbol.ContainingNamespace?.Name == "System"
@@ -350,7 +361,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
         public static bool ContainsAnonymousType(
             [NotNullWhen(returnValue: true)] this ITypeSymbol? symbol
-        ) {
+        )
+        {
             switch (symbol)
             {
                 case IArrayTypeSymbol a:
@@ -412,7 +424,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             if (
                 type.IsSpecialType()
                 || type.OriginalDefinition.SpecialType == SpecialType.System_Nullable_T
-            ) {
+            )
+            {
                 return DefaultBuiltInParameterName;
             }
 
@@ -454,7 +467,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static bool CanSupportCollectionInitializer(
             this ITypeSymbol typeSymbol,
             ISymbol within
-        ) {
+        )
+        {
             return typeSymbol.AllInterfaces.Any(
                     i => i.SpecialType == SpecialType.System_Collections_IEnumerable
                 )
@@ -471,7 +485,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static INamedTypeSymbol? GetDelegateType(
             this ITypeSymbol? typeSymbol,
             Compilation compilation
-        ) {
+        )
+        {
             if (typeSymbol != null)
             {
                 var expressionOfT = compilation.ExpressionOfTType();
@@ -670,7 +685,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static bool IsOrDerivesFromExceptionType(
             [NotNullWhen(returnValue: true)] this ITypeSymbol? type,
             Compilation compilation
-        ) {
+        )
+        {
             if (type != null)
             {
                 switch (type.Kind)
@@ -706,7 +722,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static bool IsEnumType(
             [NotNullWhen(true)] this ITypeSymbol? type,
             [NotNullWhen(true)] out INamedTypeSymbol? enumType
-        ) {
+        )
+        {
             if (type != null && type.IsValueType && type.TypeKind == TypeKind.Enum)
             {
                 enumType = (INamedTypeSymbol)type;
@@ -789,7 +806,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                         attributeData.AttributeClass?.Name == nameof(ReferenceAssemblyAttribute)
                         && attributeData.AttributeClass.ToNameDisplayString()
                             == typeof(ReferenceAssemblyAttribute).FullName
-                    ) {
+                    )
+                    {
                         return null;
                     }
                 }

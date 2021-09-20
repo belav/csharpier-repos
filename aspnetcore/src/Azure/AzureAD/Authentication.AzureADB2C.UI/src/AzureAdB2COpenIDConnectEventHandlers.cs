@@ -36,7 +36,8 @@ namespace Microsoft.AspNetCore.Authentication.AzureADB2C.UI
                 context.Properties.Items.TryGetValue(AzureADB2CDefaults.PolicyKey, out var policy)
                 && !string.IsNullOrEmpty(policy)
                 && !string.Equals(policy, defaultPolicy, StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 context.ProtocolMessage.Scope = OpenIdConnectScope.OpenIdProfile;
                 context.ProtocolMessage.ResponseType = OpenIdConnectResponseType.IdToken;
                 context.ProtocolMessage.IssuerAddress = BuildIssuerAddress(
@@ -54,7 +55,8 @@ namespace Microsoft.AspNetCore.Authentication.AzureADB2C.UI
             RedirectContext context,
             string defaultPolicy,
             string policy
-        ) {
+        )
+        {
             if (!_policyToIssuerAddress.TryGetValue(policy, out var issuerAddress))
             {
                 _policyToIssuerAddress[policy] =
@@ -81,7 +83,8 @@ namespace Microsoft.AspNetCore.Authentication.AzureADB2C.UI
             if (
                 context.Failure is OpenIdConnectProtocolException
                 && context.Failure.Message.Contains("AADB2C90118")
-            ) {
+            )
+            {
                 // If the user clicked the reset password link, redirect to the reset password route
                 context.Response.Redirect(
                     $"{context.Request.PathBase}/AzureADB2C/Account/ResetPassword/{SchemeName}"
@@ -96,7 +99,8 @@ namespace Microsoft.AspNetCore.Authentication.AzureADB2C.UI
             else if (
                 context.Failure is OpenIdConnectProtocolException
                 && context.Failure.Message.Contains("access_denied")
-            ) {
+            )
+            {
                 context.Response.Redirect($"{context.Request.PathBase}/");
             }
             else

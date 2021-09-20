@@ -67,7 +67,8 @@ namespace Microsoft.Extensions.Logging
             IEnumerable<ILoggerProvider> providers,
             IOptionsMonitor<LoggerFilterOptions> filterOption,
             IOptions<LoggerFactoryOptions> options = null
-        ) {
+        )
+        {
             _factoryOptions =
                 options == null || options.Value == null
                     ? new LoggerFactoryOptions()
@@ -229,7 +230,8 @@ namespace Microsoft.Extensions.Logging
 
         private (MessageLogger[] MessageLoggers, ScopeLogger[] ScopeLoggers) ApplyFilters(
             LoggerInformation[] loggers
-        ) {
+        )
+        {
             var messageLoggers = new List<MessageLogger>();
             List<ScopeLogger> scopeLoggers = _filterOptions.CaptureScopes
                 ? new List<ScopeLogger>()
@@ -328,7 +330,8 @@ namespace Microsoft.Extensions.Logging
             public DisposingLoggerFactory(
                 ILoggerFactory loggerFactory,
                 ServiceProvider serviceProvider
-            ) {
+            )
+            {
                 _loggerFactory = loggerFactory;
                 _serviceProvider = serviceProvider;
             }

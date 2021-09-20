@@ -89,7 +89,8 @@ namespace Microsoft.AspNetCore.Http
 
         public override Task<X509Certificate2?> GetClientCertificateAsync(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return TlsConnectionFeature.GetClientCertificateAsync(cancellationToken);
         }
 

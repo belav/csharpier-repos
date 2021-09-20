@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 Solution solution,
                 IStreamingFindReferencesProgress progress,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 _solution = solution;
                 _progress = progress;
                 _cancellationToken = cancellationToken;
@@ -98,7 +99,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 SerializableSymbolGroup serializableSymbolGroup,
                 SerializableSymbolAndProjectId serializableSymbol,
                 SerializableReferenceLocation reference
-            ) {
+            )
+            {
                 SymbolGroup symbolGroup;
                 ISymbol symbol;
                 lock (_gate)
@@ -113,7 +115,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     if (
                         !_groupMap.TryGetValue(serializableSymbolGroup, out symbolGroup)
                         || !_definitionMap.TryGetValue(serializableSymbol, out symbol)
-                    ) {
+                    )
+                    {
                         return;
                     }
                 }

@@ -66,7 +66,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             ImmutableArray<Cci.ITypeReference?> stateMachineAwaiterSlots,
             StateMachineMoveNextBodyDebugInfo stateMachineMoveNextDebugInfoOpt,
             DynamicAnalysisMethodBodyData dynamicAnalysisDataOpt
-        ) {
+        )
+        {
             Debug.Assert(!locals.IsDefault);
             Debug.Assert(!exceptionHandlers.IsDefault);
             Debug.Assert(!localScopes.IsDefault);
@@ -96,7 +97,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
         private static ImmutableArray<Cci.SequencePoint> GetSequencePoints(
             SequencePointList? sequencePoints,
             DebugDocumentProvider debugDocumentProvider
-        ) {
+        )
+        {
             if (sequencePoints == null || sequencePoints.IsEmpty)
             {
                 return ImmutableArray<Cci.SequencePoint>.Empty;

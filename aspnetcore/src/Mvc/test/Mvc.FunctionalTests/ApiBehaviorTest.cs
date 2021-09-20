@@ -369,9 +369,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 
     public class ApiBehaviorTest : ApiBehaviorTestBase<BasicWebSite.StartupWithSystemTextJson>
     {
-        public ApiBehaviorTest(
-            MvcTestFixture<BasicWebSite.StartupWithSystemTextJson> fixture
-        ) : base(fixture) { }
+        public ApiBehaviorTest(MvcTestFixture<BasicWebSite.StartupWithSystemTextJson> fixture)
+            : base(fixture) { }
 
         [Fact]
         public override Task ActionsReturnBadRequest_WhenModelStateIsInvalid()

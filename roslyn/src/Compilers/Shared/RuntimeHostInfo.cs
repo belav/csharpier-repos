@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis
         internal static (string processFilePath, string commandLineArguments, string toolFilePath) GetProcessInfo(
             string toolFilePathWithoutExtension,
             string commandLineArguments
-        ) {
+        )
+        {
             Debug.Assert(
                 !toolFilePathWithoutExtension.EndsWith(".dll")
                     && !toolFilePathWithoutExtension.EndsWith(".exe")

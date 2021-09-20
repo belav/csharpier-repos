@@ -58,7 +58,8 @@ namespace Microsoft.CodeAnalysis
             private static SymbolKeyComparer EnsureInitialized(
                 ref SymbolKeyComparer location,
                 ComparisonOptions options
-            ) {
+            )
+            {
                 // This doesn't need to be interlocked since comparers store no state
                 return location ?? (location = new SymbolKeyComparer(options));
             }

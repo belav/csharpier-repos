@@ -142,7 +142,8 @@ namespace JIT.HardwareIntrinsics.X86
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfinArray2
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -229,7 +230,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             public void RunStructFldScenario_Load(
                 HorizontalBinaryOpTest__HorizontalAddDouble testClass
-            ) {
+            )
+            {
                 fixed (Vector128<Double>* pFld1 = &_fld1)fixed (Vector128<Double>* pFld2 = &_fld2)
                 {
                     var result = Sse3.HorizontalAdd(
@@ -446,7 +448,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             fixed (Vector128<Double>* pClsVar1 = &_clsVar1)fixed (
                 Vector128<Double>* pClsVar2 = &_clsVar2
-            ) {
+            )
+            {
                 var result = Sse3.HorizontalAdd(
                     Sse2.LoadVector128((Double*)(pClsVar1)),
                     Sse2.LoadVector128((Double*)(pClsVar2))
@@ -512,7 +515,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             fixed (Vector128<Double>* pFld1 = &test._fld1)fixed (
                 Vector128<Double>* pFld2 = &test._fld2
-            ) {
+            )
+            {
                 var result = Sse3.HorizontalAdd(
                     Sse2.LoadVector128((Double*)(pFld1)),
                     Sse2.LoadVector128((Double*)(pFld2))
@@ -616,7 +620,8 @@ namespace JIT.HardwareIntrinsics.X86
             Vector128<Double> op2,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Double[] inArray1 = new Double[Op1ElementCount];
             Double[] inArray2 = new Double[Op2ElementCount];
             Double[] outArray = new Double[RetElementCount];
@@ -637,7 +642,8 @@ namespace JIT.HardwareIntrinsics.X86
             void* op2,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Double[] inArray1 = new Double[Op1ElementCount];
             Double[] inArray2 = new Double[Op2ElementCount];
             Double[] outArray = new Double[RetElementCount];
@@ -666,7 +672,8 @@ namespace JIT.HardwareIntrinsics.X86
             Double[] right,
             Double[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             for (var outer = 0; outer < (LargestVectorSize / 16); outer++)
@@ -680,7 +687,8 @@ namespace JIT.HardwareIntrinsics.X86
                     if (
                         BitConverter.DoubleToInt64Bits(result[i1])
                         != BitConverter.DoubleToInt64Bits(left[i3] + left[i3 + 1])
-                    ) {
+                    )
+                    {
                         succeeded = false;
                         break;
                     }
@@ -688,7 +696,8 @@ namespace JIT.HardwareIntrinsics.X86
                     if (
                         BitConverter.DoubleToInt64Bits(result[i2])
                         != BitConverter.DoubleToInt64Bits(right[i3] + right[i3 + 1])
-                    ) {
+                    )
+                    {
                         succeeded = false;
                         break;
                     }

@@ -59,7 +59,8 @@ namespace System.Xml.Schema
             string value,
             Type destinationType,
             IXmlNamespaceResolver nsResolver
-        ) {
+        )
+        {
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
             if (destinationType == null)
@@ -212,7 +213,8 @@ namespace System.Xml.Schema
         private static XmlQualifiedName StringToQName(
             string value,
             IXmlNamespaceResolver nsResolver
-        ) {
+        )
+        {
             string prefix,
                 localName;
             string? ns;
@@ -250,7 +252,8 @@ namespace System.Xml.Schema
             string value,
             Type destinationType,
             IXmlNamespaceResolver nsResolver
-        ) {
+        )
+        {
             if (_listsAllowed && destinationType.IsArray)
             {
                 Type? itemTypeDst = destinationType.GetElementType();

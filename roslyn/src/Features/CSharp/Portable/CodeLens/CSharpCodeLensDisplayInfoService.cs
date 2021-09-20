@@ -94,7 +94,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeLens
             if (
                 node.Parent.IsKind(SyntaxKind.AccessorList)
                 && node.Parent.Parent.IsKind(SyntaxKind.IndexerDeclaration)
-            ) {
+            )
+            {
                 return GetDisplayName(semanticModel, node.Parent.Parent);
             }
 
@@ -203,7 +204,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeLens
             SyntaxNode node,
             SemanticModel semanticModel,
             SymbolDisplayFormat symbolDisplayFormat
-        ) {
+        )
+        {
             var scopeNode = node;
             while (scopeNode != null && !SyntaxFacts.IsNamespaceMemberDeclaration(scopeNode.Kind()))
             {

@@ -181,7 +181,8 @@ namespace System.Linq.Expressions.Tests
             object value,
             int blockSize,
             bool useInterpreter
-        ) {
+        )
+        {
             ConstantExpression constant = Expression.Constant(value, value.GetType());
             IEnumerable<Expression> expressions = PadBlock(blockSize - 1, constant);
 

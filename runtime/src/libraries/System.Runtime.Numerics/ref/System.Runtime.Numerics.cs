@@ -39,7 +39,8 @@ namespace System.Numerics
             System.ReadOnlySpan<byte> value,
             bool isUnsigned = false,
             bool isBigEndian = false
-        ) {
+        )
+        {
             throw null;
         }
         public BigInteger(float value)
@@ -95,7 +96,8 @@ namespace System.Numerics
         public static System.Numerics.BigInteger Add(
             System.Numerics.BigInteger left,
             System.Numerics.BigInteger right
-        ) {
+        )
+        {
             throw null;
         }
         public static int Compare(System.Numerics.BigInteger left, System.Numerics.BigInteger right)
@@ -122,14 +124,16 @@ namespace System.Numerics
         public static System.Numerics.BigInteger Divide(
             System.Numerics.BigInteger dividend,
             System.Numerics.BigInteger divisor
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.BigInteger DivRem(
             System.Numerics.BigInteger dividend,
             System.Numerics.BigInteger divisor,
             out System.Numerics.BigInteger remainder
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(long other)
@@ -142,7 +146,8 @@ namespace System.Numerics
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
@@ -165,7 +170,8 @@ namespace System.Numerics
         public static System.Numerics.BigInteger GreatestCommonDivisor(
             System.Numerics.BigInteger left,
             System.Numerics.BigInteger right
-        ) {
+        )
+        {
             throw null;
         }
         public static double Log(System.Numerics.BigInteger value)
@@ -183,26 +189,30 @@ namespace System.Numerics
         public static System.Numerics.BigInteger Max(
             System.Numerics.BigInteger left,
             System.Numerics.BigInteger right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.BigInteger Min(
             System.Numerics.BigInteger left,
             System.Numerics.BigInteger right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.BigInteger ModPow(
             System.Numerics.BigInteger value,
             System.Numerics.BigInteger exponent,
             System.Numerics.BigInteger modulus
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.BigInteger Multiply(
             System.Numerics.BigInteger left,
             System.Numerics.BigInteger right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.BigInteger Negate(System.Numerics.BigInteger value)
@@ -212,19 +222,22 @@ namespace System.Numerics
         public static System.Numerics.BigInteger operator +(
             System.Numerics.BigInteger left,
             System.Numerics.BigInteger right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.BigInteger operator &(
             System.Numerics.BigInteger left,
             System.Numerics.BigInteger right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.BigInteger operator |(
             System.Numerics.BigInteger left,
             System.Numerics.BigInteger right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.BigInteger operator --(System.Numerics.BigInteger value)
@@ -234,7 +247,8 @@ namespace System.Numerics
         public static System.Numerics.BigInteger operator /(
             System.Numerics.BigInteger dividend,
             System.Numerics.BigInteger divisor
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator ==(long left, System.Numerics.BigInteger right)
@@ -248,7 +262,8 @@ namespace System.Numerics
         public static bool operator ==(
             System.Numerics.BigInteger left,
             System.Numerics.BigInteger right
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
@@ -264,7 +279,8 @@ namespace System.Numerics
         public static System.Numerics.BigInteger operator ^(
             System.Numerics.BigInteger left,
             System.Numerics.BigInteger right
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Numerics.BigInteger(decimal value)
@@ -338,7 +354,8 @@ namespace System.Numerics
         public static bool operator >(
             System.Numerics.BigInteger left,
             System.Numerics.BigInteger right
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
@@ -362,7 +379,8 @@ namespace System.Numerics
         public static bool operator >=(
             System.Numerics.BigInteger left,
             System.Numerics.BigInteger right
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
@@ -426,7 +444,8 @@ namespace System.Numerics
         public static bool operator !=(
             System.Numerics.BigInteger left,
             System.Numerics.BigInteger right
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
@@ -442,7 +461,8 @@ namespace System.Numerics
         public static System.Numerics.BigInteger operator <<(
             System.Numerics.BigInteger value,
             int shift
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator <(long left, System.Numerics.BigInteger right)
@@ -456,7 +476,8 @@ namespace System.Numerics
         public static bool operator <(
             System.Numerics.BigInteger left,
             System.Numerics.BigInteger right
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
@@ -480,7 +501,8 @@ namespace System.Numerics
         public static bool operator <=(
             System.Numerics.BigInteger left,
             System.Numerics.BigInteger right
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
@@ -496,13 +518,15 @@ namespace System.Numerics
         public static System.Numerics.BigInteger operator %(
             System.Numerics.BigInteger dividend,
             System.Numerics.BigInteger divisor
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.BigInteger operator *(
             System.Numerics.BigInteger left,
             System.Numerics.BigInteger right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.BigInteger operator ~(System.Numerics.BigInteger value)
@@ -512,13 +536,15 @@ namespace System.Numerics
         public static System.Numerics.BigInteger operator >>(
             System.Numerics.BigInteger value,
             int shift
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.BigInteger operator -(
             System.Numerics.BigInteger left,
             System.Numerics.BigInteger right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.BigInteger operator -(System.Numerics.BigInteger value)
@@ -533,7 +559,8 @@ namespace System.Numerics
             System.ReadOnlySpan<char> value,
             System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Integer,
             System.IFormatProvider? provider = null
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.BigInteger Parse(string value)
@@ -543,20 +570,23 @@ namespace System.Numerics
         public static System.Numerics.BigInteger Parse(
             string value,
             System.Globalization.NumberStyles style
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.BigInteger Parse(
             string value,
             System.Globalization.NumberStyles style,
             System.IFormatProvider? provider
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.BigInteger Parse(
             string value,
             System.IFormatProvider? provider
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.BigInteger Pow(System.Numerics.BigInteger value, int exponent)
@@ -566,13 +596,15 @@ namespace System.Numerics
         public static System.Numerics.BigInteger Remainder(
             System.Numerics.BigInteger dividend,
             System.Numerics.BigInteger divisor
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.BigInteger Subtract(
             System.Numerics.BigInteger left,
             System.Numerics.BigInteger right
-        ) {
+        )
+        {
             throw null;
         }
         public byte[] ToByteArray()
@@ -604,7 +636,8 @@ namespace System.Numerics
             out int charsWritten,
             System.ReadOnlySpan<char> format = default(System.ReadOnlySpan<char>),
             System.IFormatProvider? provider = null
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
@@ -612,13 +645,15 @@ namespace System.Numerics
             System.Globalization.NumberStyles style,
             System.IFormatProvider? provider,
             out System.Numerics.BigInteger result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
             System.ReadOnlySpan<char> value,
             out System.Numerics.BigInteger result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
@@ -626,13 +661,15 @@ namespace System.Numerics
             System.Globalization.NumberStyles style,
             System.IFormatProvider? provider,
             out System.Numerics.BigInteger result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? value,
             out System.Numerics.BigInteger result
-        ) {
+        )
+        {
             throw null;
         }
         public bool TryWriteBytes(
@@ -640,7 +677,8 @@ namespace System.Numerics
             out int bytesWritten,
             bool isUnsigned = false,
             bool isBigEndian = false
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -691,7 +729,8 @@ namespace System.Numerics
         public static System.Numerics.Complex Add(
             System.Numerics.Complex left,
             System.Numerics.Complex right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Complex Asin(System.Numerics.Complex value)
@@ -717,19 +756,22 @@ namespace System.Numerics
         public static System.Numerics.Complex Divide(
             double dividend,
             System.Numerics.Complex divisor
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Complex Divide(
             System.Numerics.Complex dividend,
             double divisor
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Complex Divide(
             System.Numerics.Complex dividend,
             System.Numerics.Complex divisor
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(System.Numerics.Complex value)
@@ -738,7 +780,8 @@ namespace System.Numerics
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Complex Exp(System.Numerics.Complex value)
@@ -788,7 +831,8 @@ namespace System.Numerics
         public static System.Numerics.Complex Multiply(
             System.Numerics.Complex left,
             System.Numerics.Complex right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Complex Negate(System.Numerics.Complex value)
@@ -806,7 +850,8 @@ namespace System.Numerics
         public static System.Numerics.Complex operator +(
             System.Numerics.Complex left,
             System.Numerics.Complex right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Complex operator /(double left, System.Numerics.Complex right)
@@ -820,7 +865,8 @@ namespace System.Numerics
         public static System.Numerics.Complex operator /(
             System.Numerics.Complex left,
             System.Numerics.Complex right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator ==(System.Numerics.Complex left, System.Numerics.Complex right)
@@ -894,7 +940,8 @@ namespace System.Numerics
         public static System.Numerics.Complex operator *(
             System.Numerics.Complex left,
             System.Numerics.Complex right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Complex operator -(double left, System.Numerics.Complex right)
@@ -908,7 +955,8 @@ namespace System.Numerics
         public static System.Numerics.Complex operator -(
             System.Numerics.Complex left,
             System.Numerics.Complex right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Complex operator -(System.Numerics.Complex value)
@@ -922,7 +970,8 @@ namespace System.Numerics
         public static System.Numerics.Complex Pow(
             System.Numerics.Complex value,
             System.Numerics.Complex power
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Complex Reciprocal(System.Numerics.Complex value)
@@ -952,7 +1001,8 @@ namespace System.Numerics
         public static System.Numerics.Complex Subtract(
             System.Numerics.Complex left,
             System.Numerics.Complex right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Complex Tan(System.Numerics.Complex value)

@@ -30,7 +30,8 @@ namespace Microsoft.JSInterop.WebAssembly
             ref Utf8JsonReader reader,
             Type typeToConvert,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             var id = JSObjectReferenceJsonWorker.ReadJSObjectReferenceIdentifier(ref reader);
             return new WebAssemblyJSObjectReference(_jsRuntime, id);
         }
@@ -39,7 +40,8 @@ namespace Microsoft.JSInterop.WebAssembly
             Utf8JsonWriter writer,
             IJSObjectReference value,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             JSObjectReferenceJsonWorker.WriteJSObjectReference(writer, (JSObjectReference)value);
         }
     }

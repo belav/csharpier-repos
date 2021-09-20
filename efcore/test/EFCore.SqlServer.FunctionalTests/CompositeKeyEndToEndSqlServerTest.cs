@@ -8,9 +8,8 @@ namespace Microsoft.EntityFrameworkCore
     public class CompositeKeyEndToEndSqlServerTest
         : CompositeKeyEndToEndTestBase<CompositeKeyEndToEndSqlServerTest.CompositeKeyEndToEndSqlServerFixture>
     {
-        public CompositeKeyEndToEndSqlServerTest(
-            CompositeKeyEndToEndSqlServerFixture fixture
-        ) : base(fixture) { }
+        public CompositeKeyEndToEndSqlServerTest(CompositeKeyEndToEndSqlServerFixture fixture)
+            : base(fixture) { }
 
         public class CompositeKeyEndToEndSqlServerFixture : CompositeKeyEndToEndFixtureBase
         {

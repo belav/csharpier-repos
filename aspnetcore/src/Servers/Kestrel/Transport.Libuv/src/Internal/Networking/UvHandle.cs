@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
             int threadId,
             int size,
             Action<Action<IntPtr>, IntPtr> queueCloseHandle
-        ) {
+        )
+        {
             _queueCloseHandle = queueCloseHandle;
             CreateMemory(uv, threadId, size);
         }

@@ -24,16 +24,18 @@ namespace Microsoft.CodeAnalysis.NavigationBar
                 int indent = 0,
                 bool bolded = false,
                 bool grayed = false
-            ) : base(
-                RoslynNavigationBarItemKind.Symbol,
-                text,
-                glyph,
-                bolded,
-                grayed,
-                indent,
-                childItems,
-                spans
-            ) {
+            )
+                : base(
+                    RoslynNavigationBarItemKind.Symbol,
+                    text,
+                    glyph,
+                    bolded,
+                    grayed,
+                    indent,
+                    childItems,
+                    spans
+                )
+            {
                 this.NavigationSymbolId = navigationSymbolId;
                 this.NavigationSymbolIndex = navigationSymbolIndex;
             }

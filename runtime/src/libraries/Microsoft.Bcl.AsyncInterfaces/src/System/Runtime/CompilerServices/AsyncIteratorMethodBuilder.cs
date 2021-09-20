@@ -40,8 +40,9 @@ namespace System.Runtime.CompilerServices
         public void AwaitOnCompleted<TAwaiter, TStateMachine>(
             ref TAwaiter awaiter,
             ref TStateMachine stateMachine
-        ) where TAwaiter : INotifyCompletion
-          where TStateMachine : IAsyncStateMachine =>
+        )
+            where TAwaiter : INotifyCompletion
+            where TStateMachine : IAsyncStateMachine =>
             _methodBuilder.AwaitOnCompleted(ref awaiter, ref stateMachine);
 
         /// <summary>Schedules the state machine to proceed to the next action when the specified awaiter completes.</summary>
@@ -52,8 +53,9 @@ namespace System.Runtime.CompilerServices
         public void AwaitUnsafeOnCompleted<TAwaiter, TStateMachine>(
             ref TAwaiter awaiter,
             ref TStateMachine stateMachine
-        ) where TAwaiter : ICriticalNotifyCompletion
-          where TStateMachine : IAsyncStateMachine =>
+        )
+            where TAwaiter : ICriticalNotifyCompletion
+            where TStateMachine : IAsyncStateMachine =>
             _methodBuilder.AwaitUnsafeOnCompleted(ref awaiter, ref stateMachine);
 
         /// <summary>Marks iteration as being completed, whether successfully or otherwise.</summary>

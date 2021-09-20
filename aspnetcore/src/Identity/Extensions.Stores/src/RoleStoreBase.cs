@@ -90,7 +90,8 @@ namespace Microsoft.AspNetCore.Identity
         public virtual Task<string> GetRoleIdAsync(
             TRole role,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (role == null)
@@ -109,7 +110,8 @@ namespace Microsoft.AspNetCore.Identity
         public virtual Task<string> GetRoleNameAsync(
             TRole role,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (role == null)
@@ -130,7 +132,8 @@ namespace Microsoft.AspNetCore.Identity
             TRole role,
             string roleName,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (role == null)
@@ -200,7 +203,8 @@ namespace Microsoft.AspNetCore.Identity
         public virtual Task<string> GetNormalizedRoleNameAsync(
             TRole role,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (role == null)
@@ -221,7 +225,8 @@ namespace Microsoft.AspNetCore.Identity
             TRole role,
             string normalizedName,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (role == null)

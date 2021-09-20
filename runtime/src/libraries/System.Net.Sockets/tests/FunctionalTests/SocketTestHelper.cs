@@ -200,7 +200,8 @@ namespace System.Net.Sockets.Tests
         public override async Task<(Socket socket, byte[] buffer)> AcceptAsync(
             Socket s,
             int receiveSize
-        ) {
+        )
+        {
             byte[] buffer = null;
 
             IAsyncResult BeginAccept(AsyncCallback callback, object state) =>
@@ -242,7 +243,8 @@ namespace System.Net.Sockets.Tests
             Socket s,
             ArraySegment<byte> buffer,
             EndPoint endPoint
-        ) {
+        )
+        {
             var tcs = new TaskCompletionSource<SocketReceiveFromResult>();
             s.BeginReceiveFrom(
                 buffer.Array,
@@ -276,7 +278,8 @@ namespace System.Net.Sockets.Tests
             Socket s,
             ArraySegment<byte> buffer,
             EndPoint endPoint
-        ) {
+        )
+        {
             var tcs = new TaskCompletionSource<SocketReceiveMessageFromResult>();
             SocketFlags socketFlags = SocketFlags.None;
             s.BeginReceiveMessageFrom(
@@ -637,7 +640,8 @@ namespace System.Net.Sockets.Tests
             Socket s,
             Func<SocketAsyncEventArgs, TResult> getResult,
             Func<SocketAsyncEventArgs, bool> invoke
-        ) {
+        )
+        {
             var tcs = new TaskCompletionSource<TResult>();
             var saea = new SocketAsyncEventArgs();
             EventHandler<SocketAsyncEventArgs> handler = (_, e) =>

@@ -73,7 +73,8 @@ namespace System.Net.NetworkInformation
                             NetworkAvailabilityChangedEventHandler,
                             ExecutionContext?
                         > subscriber in availabilityChangedSubscribers
-                    ) {
+                    )
+                    {
                         NetworkAvailabilityChangedEventHandler handler = subscriber.Key;
                         ExecutionContext? ec = subscriber.Value;
 
@@ -182,7 +183,8 @@ namespace System.Net.NetworkInformation
                             NetworkAddressChangedEventHandler,
                             ExecutionContext?
                         > subscriber in addressChangedSubscribers
-                    ) {
+                    )
+                    {
                         NetworkAddressChangedEventHandler handler = subscriber.Key;
                         ExecutionContext? ec = subscriber.Value;
 
@@ -212,7 +214,8 @@ namespace System.Net.NetworkInformation
                 NetworkAddressChangedEventHandler? caller,
                 bool captureContext,
                 StartIPOptions startIPOptions
-            ) {
+            )
+            {
                 lock (s_globalLock)
                 {
                     // Setup changedEvent and native overlapped struct.
@@ -262,7 +265,8 @@ namespace System.Net.NetworkInformation
                         if (
                             Socket.OSSupportsIPv4
                             && (startIPOptions & StartIPOptions.StartIPv4) != 0
-                        ) {
+                        )
+                        {
                             ThreadPool.RegisterWaitForSingleObject(
                                 s_ipv4WaitHandle!,
                                 new WaitOrTimerCallback(AddressChangedCallback),
@@ -308,7 +312,8 @@ namespace System.Net.NetworkInformation
                         if (
                             Socket.OSSupportsIPv6
                             && (startIPOptions & StartIPOptions.StartIPv6) != 0
-                        ) {
+                        )
+                        {
                             ThreadPool.RegisterWaitForSingleObject(
                                 s_ipv6WaitHandle!,
                                 new WaitOrTimerCallback(AddressChangedCallback),

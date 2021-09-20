@@ -435,7 +435,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
             object input,
             Type declaredType,
             bool expectedOutput
-        ) {
+        )
+        {
             // Arrange
             var formatter = new XmlDataContractSerializerOutputFormatter();
             var outputFormatterContext = GetOutputFormatterContext(input, declaredType);
@@ -468,7 +469,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
             string mediaType,
             bool isServerDefined,
             string expectedResult
-        ) {
+        )
+        {
             // Arrange
             var formatter = new XmlDataContractSerializerOutputFormatter();
             var outputFormatterContext = GetOutputFormatterContext(new object(), typeof(object));
@@ -725,7 +727,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
         public void CannotCreateSerializer_LogsWarning(
             XmlDataContractSerializerOutputFormatter formatter,
             TestSink sink
-        ) {
+        )
+        {
             // Arrange
             var outputFormatterContext = GetOutputFormatterContext(
                 new Customer(10),
@@ -792,7 +795,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
             bool indent,
             object input,
             string expectedOutput
-        ) {
+        )
+        {
             // Arrange
             var formatter = new IndentingXmlDataContractSerializerOutputFormatter();
             var outputFormatterContext = GetOutputFormatterContext(input, input.GetType());
@@ -815,7 +819,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
             object outputValue,
             Type outputType,
             string contentType = "application/xml; charset=utf-8"
-        ) {
+        )
+        {
             return new OutputFormatterWriteContext(
                 GetHttpContext(contentType),
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
@@ -858,7 +863,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
                 OutputFormatterWriteContext context,
                 TextWriter writer,
                 XmlWriterSettings xmlWriterSettings
-            ) {
+            )
+            {
                 var request = context.HttpContext.Request;
                 if (request.Query["indent"] == "True")
                 {

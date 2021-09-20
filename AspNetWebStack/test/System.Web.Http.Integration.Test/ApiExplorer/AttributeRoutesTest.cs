@@ -367,7 +367,8 @@ namespace System.Web.Http.ApiExplorer
         public void VerifyDescription_OnAttributeRoutes(
             Type controllerType,
             List<object> expectedResults
-        ) {
+        )
+        {
             HttpConfiguration config = new HttpConfiguration();
             config.MapHttpAttributeRoutes();
 
@@ -566,7 +567,8 @@ namespace System.Web.Http.ApiExplorer
         public void VerifyDescription_OnMixedRoutes(
             Type controllerType,
             List<object> expectedResults
-        ) {
+        )
+        {
             HttpConfiguration config = new HttpConfiguration();
             config.MapHttpAttributeRoutes();
             config.Routes.MapHttpRoute(

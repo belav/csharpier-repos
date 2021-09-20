@@ -141,7 +141,8 @@ namespace System.Web.Http.ExceptionHandling
 
         private static ExceptionLoggerContext CreateProductUnderTest(
             ExceptionContext exceptionContext
-        ) {
+        )
+        {
             return new ExceptionLoggerContext(exceptionContext);
         }
     }

@@ -57,7 +57,8 @@ namespace System.Web.WebPages.Administration.PackageManager
         internal static void WriteFeeds(
             IEnumerable<WebPackageSource> sources,
             Func<Stream> getStream
-        ) {
+        )
+        {
             var xmlTree =
                 from item in sources
                 select new XElement(

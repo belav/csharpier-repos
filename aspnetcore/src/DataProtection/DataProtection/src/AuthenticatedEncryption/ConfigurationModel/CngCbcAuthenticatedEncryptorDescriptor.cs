@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.Configurat
         public CngCbcAuthenticatedEncryptorDescriptor(
             CngCbcAuthenticatedEncryptorConfiguration configuration,
             ISecret masterKey
-        ) {
+        )
+        {
             if (configuration == null)
             {
                 throw new ArgumentNullException(nameof(configuration));

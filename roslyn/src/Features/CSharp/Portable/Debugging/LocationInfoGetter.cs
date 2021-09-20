@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
             Document document,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // PERF:  This method will be called synchronously on the UI thread for every breakpoint in the solution.
             // Therefore, it is important that we make this call as cheap as possible.  Rather than constructing a
             // containing Symbol and using ToDisplayString (which might be more *correct*), we'll just do the best we
@@ -39,7 +40,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
             if (
                 (memberDeclaration == null)
                 || (memberDeclaration.Kind() == SyntaxKind.GlobalStatement)
-            ) {
+            )
+            {
                 return default;
             }
 
@@ -49,7 +51,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
             if (
                 memberDeclaration.Kind() == SyntaxKind.FieldDeclaration
                 || memberDeclaration.Kind() == SyntaxKind.EventFieldDeclaration
-            ) {
+            )
+            {
                 var variableDeclarators =
                     ((BaseFieldDeclarationSyntax)memberDeclaration).Declaration.Variables;
 

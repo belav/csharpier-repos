@@ -20,12 +20,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             SourceModuleSymbol containingModule,
             PrivateImplementationDetails privateImplementationType,
             NamedTypeSymbol voidType
-        ) : base(
-            containingModule,
-            privateImplementationType,
-            voidType,
-            WellKnownMemberNames.StaticConstructorName
-        ) {
+        )
+            : base(
+                containingModule,
+                privateImplementationType,
+                voidType,
+                WellKnownMemberNames.StaticConstructorName
+            )
+        {
             this.SetParameters(ImmutableArray<ParameterSymbol>.Empty);
         }
 
@@ -36,7 +38,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void GenerateMethodBody(
             TypeCompilationState compilationState,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             CSharpSyntaxNode syntax = this.GetNonNullSyntaxNode();
             SyntheticBoundNodeFactory factory = new SyntheticBoundNodeFactory(
                 this,
@@ -64,7 +67,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         int,
                         InstrumentationPayloadRootField
                     > payloadRoot in ContainingPrivateImplementationDetailsType.GetInstrumentationPayloadRoots()
-                ) {
+                )
+                {
                     int analysisKind = payloadRoot.Key;
                     ArrayTypeSymbol payloadArrayType =
                         (ArrayTypeSymbol)payloadRoot.Value.Type.GetInternalSymbol();

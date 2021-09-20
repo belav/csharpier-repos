@@ -43,7 +43,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ValidateState(cancellationToken);
 
             return Task.FromResult(0);

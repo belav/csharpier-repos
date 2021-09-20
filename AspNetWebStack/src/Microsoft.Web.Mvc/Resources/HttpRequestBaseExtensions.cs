@@ -56,7 +56,8 @@ namespace Microsoft.Web.Mvc.Resources
             this HttpRequestBase request,
             HttpVerbs httpMethod,
             bool allowOverride
-        ) {
+        )
+        {
             switch (httpMethod)
             {
                 case HttpVerbs.Get:
@@ -86,7 +87,8 @@ namespace Microsoft.Web.Mvc.Resources
             this HttpRequestBase request,
             string httpMethod,
             bool allowOverride
-        ) {
+        )
+        {
             string requestHttpMethod = allowOverride
                 ? request.GetHttpMethodOverride()
                 : request.HttpMethod;

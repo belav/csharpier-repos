@@ -125,7 +125,8 @@ namespace System.Web.Http.Routing
         public IHttpVirtualPathData GetVirtualPath(
             HttpRequestMessage request,
             IDictionary<string, object> values
-        ) {
+        )
+        {
             // Use LinkGenerationRoute stubs to get placeholders for all the sub routes.
             return null;
         }

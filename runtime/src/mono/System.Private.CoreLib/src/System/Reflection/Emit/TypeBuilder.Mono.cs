@@ -119,7 +119,8 @@ namespace System.Reflection.Emit
             PackingSize packing_size,
             int type_size,
             Type? nesting_type
-        ) {
+        )
+        {
             int sep_index;
             this.parent = ResolveUserType(parent);
             this.attrs = attr;
@@ -278,7 +279,8 @@ namespace System.Reflection.Emit
         [ComVisible(true)]
         public void AddInterfaceImplementation(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type interfaceType
-        ) {
+        )
+        {
             if (interfaceType == null)
                 throw new ArgumentNullException(nameof(interfaceType));
             if (interfaceType.IsByRef)
@@ -314,7 +316,8 @@ namespace System.Reflection.Emit
             CallingConventions callConvention,
             Type[] types,
             ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             check_created();
 
             if (created == typeof(object))
@@ -413,7 +416,8 @@ namespace System.Reflection.Emit
             string name,
             TypeAttributes attr,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type? parent
-        ) {
+        )
+        {
             return DefineNestedType(name, attr, parent, null);
         }
 
@@ -424,7 +428,8 @@ namespace System.Reflection.Emit
             Type[]? interfaces,
             PackingSize packSize,
             int typeSize
-        ) {
+        )
+        {
             // Visibility must be NestedXXX
             /* This breaks mcs
             if (((attrs & TypeAttributes.VisibilityMask) == TypeAttributes.Public) ||
@@ -475,7 +480,8 @@ namespace System.Reflection.Emit
             TypeAttributes attr,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type? parent,
             Type[]? interfaces
-        ) {
+        )
+        {
             return DefineNestedType(
                 name,
                 attr,
@@ -491,7 +497,8 @@ namespace System.Reflection.Emit
             TypeAttributes attr,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type? parent,
             int typeSize
-        ) {
+        )
+        {
             return DefineNestedType(name, attr, parent, null, PackingSize.Unspecified, typeSize);
         }
 
@@ -500,7 +507,8 @@ namespace System.Reflection.Emit
             TypeAttributes attr,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type? parent,
             PackingSize packSize
-        ) {
+        )
+        {
             return DefineNestedType(name, attr, parent, null, packSize, UnspecifiedTypeSize);
         }
 
@@ -510,7 +518,8 @@ namespace System.Reflection.Emit
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type? parent,
             PackingSize packSize,
             int typeSize
-        ) {
+        )
+        {
             return DefineNestedType(name, attr, parent, null, packSize, typeSize);
         }
 
@@ -519,7 +528,8 @@ namespace System.Reflection.Emit
             MethodAttributes attributes,
             CallingConventions callingConvention,
             Type[]? parameterTypes
-        ) {
+        )
+        {
             return DefineConstructor(attributes, callingConvention, parameterTypes, null, null);
         }
 
@@ -530,7 +540,8 @@ namespace System.Reflection.Emit
             Type[]? parameterTypes,
             Type[][]? requiredCustomModifiers,
             Type[][]? optionalCustomModifiers
-        ) {
+        )
+        {
             check_not_created();
             if (IsInterface && (attributes & MethodAttributes.Static) == 0)
                 throw new InvalidOperationException();
@@ -637,7 +648,8 @@ namespace System.Reflection.Emit
             MethodAttributes attributes,
             Type returnType,
             Type[] parameterTypes
-        ) {
+        )
+        {
             return DefineMethod(
                 name,
                 attributes,
@@ -653,7 +665,8 @@ namespace System.Reflection.Emit
             CallingConventions callingConvention,
             Type? returnType,
             Type[]? parameterTypes
-        ) {
+        )
+        {
             return DefineMethod(
                 name,
                 attributes,
@@ -677,7 +690,8 @@ namespace System.Reflection.Emit
             Type[]? parameterTypes,
             Type[][]? parameterTypeRequiredCustomModifiers,
             Type[][]? parameterTypeOptionalCustomModifiers
-        ) {
+        )
+        {
             check_name(nameof(name), name);
             check_not_created();
             if (
@@ -718,7 +732,8 @@ namespace System.Reflection.Emit
             Type[]? parameterTypes,
             CallingConvention nativeCallConv,
             CharSet nativeCharSet
-        ) {
+        )
+        {
             return DefinePInvokeMethod(
                 name,
                 dllName,
@@ -750,7 +765,8 @@ namespace System.Reflection.Emit
             Type[][]? parameterTypeOptionalCustomModifiers,
             CallingConvention nativeCallConv,
             CharSet nativeCharSet
-        ) {
+        )
+        {
             check_name(nameof(name), name);
             check_name(nameof(dllName), dllName);
             check_name(nameof(entryName), entryName);
@@ -791,7 +807,8 @@ namespace System.Reflection.Emit
             Type[]? parameterTypes,
             CallingConvention nativeCallConv,
             CharSet nativeCharSet
-        ) {
+        )
+        {
             return DefinePInvokeMethod(
                 name,
                 dllName,
@@ -814,14 +831,16 @@ namespace System.Reflection.Emit
             string name,
             MethodAttributes attributes,
             CallingConventions callingConvention
-        ) {
+        )
+        {
             return DefineMethod(name, attributes, callingConvention, null, null);
         }
 
         public void DefineMethodOverride(
             MethodInfo methodInfoBody,
             MethodInfo methodInfoDeclaration
-        ) {
+        )
+        {
             if (methodInfoBody == null)
                 throw new ArgumentNullException(nameof(methodInfoBody));
             if (methodInfoDeclaration == null)
@@ -847,7 +866,8 @@ namespace System.Reflection.Emit
             Type[]? requiredCustomModifiers,
             Type[]? optionalCustomModifiers,
             FieldAttributes attributes
-        ) {
+        )
+        {
             check_name(nameof(fieldName), fieldName);
             if (type == typeof(void))
                 throw new ArgumentException("Bad field type in defining field.");
@@ -893,7 +913,8 @@ namespace System.Reflection.Emit
             PropertyAttributes attributes,
             Type returnType,
             Type[]? parameterTypes
-        ) {
+        )
+        {
             return DefineProperty(
                 name,
                 attributes,
@@ -913,7 +934,8 @@ namespace System.Reflection.Emit
             CallingConventions callingConvention,
             Type returnType,
             Type[]? parameterTypes
-        ) {
+        )
+        {
             return DefineProperty(
                 name,
                 attributes,
@@ -936,7 +958,8 @@ namespace System.Reflection.Emit
             Type[]? parameterTypes,
             Type[][]? parameterTypeRequiredCustomModifiers,
             Type[][]? parameterTypeOptionalCustomModifiers
-        ) {
+        )
+        {
             return DefineProperty(
                 name,
                 attributes,
@@ -960,7 +983,8 @@ namespace System.Reflection.Emit
             Type[]? parameterTypes,
             Type[][]? parameterTypeRequiredCustomModifiers,
             Type[][]? parameterTypeOptionalCustomModifiers
-        ) {
+        )
+        {
             check_name(nameof(name), name);
             if (parameterTypes != null)
                 foreach (Type param in parameterTypes)
@@ -1069,7 +1093,8 @@ namespace System.Reflection.Emit
                 && (parent == null)
                 && (this != typeof(object))
                 && (FullName != "<Module>")
-            ) {
+            )
+            {
                 SetParent(typeof(object));
             }
 
@@ -1088,7 +1113,8 @@ namespace System.Reflection.Emit
                         && ft.IsValueType
                         && (ft != this)
                         && is_nested_in(ft)
-                    ) {
+                    )
+                    {
                         TypeBuilder tb = builder;
                         if (!tb.is_created)
                         {
@@ -1254,7 +1280,8 @@ namespace System.Reflection.Emit
             if (
                 t != null
                 && ((t.GetType().Assembly != typeof(int).Assembly) || (t is TypeDelegator))
-            ) {
+            )
+            {
                 t = t.UnderlyingSystemType;
                 if (
                     t != null
@@ -1438,7 +1465,8 @@ namespace System.Reflection.Emit
             string name,
             MemberTypes type,
             BindingFlags bindingAttr
-        ) {
+        )
+        {
             check_created();
             return created!.GetMember(name, type, bindingAttr);
         }
@@ -1454,7 +1482,8 @@ namespace System.Reflection.Emit
             string? name,
             BindingFlags bindingAttr,
             bool ignoreCase
-        ) {
+        )
+        {
             MethodInfo[]? candidates;
             bool match;
             MethodAttributes mattrs;
@@ -1570,7 +1599,8 @@ namespace System.Reflection.Emit
             CallingConventions callConvention,
             Type[]? types,
             ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             check_created();
 
             if (types == null)
@@ -1666,7 +1696,8 @@ namespace System.Reflection.Emit
             Type? returnType,
             Type[]? types,
             ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             throw not_supported();
         }
 
@@ -1689,7 +1720,8 @@ namespace System.Reflection.Emit
             ParameterModifier[]? modifiers,
             CultureInfo? culture,
             string[]? namedParameters
-        ) {
+        )
+        {
             check_created();
             return created!.InvokeMember(
                 name,
@@ -1966,7 +1998,8 @@ namespace System.Reflection.Emit
             string name,
             byte[] data,
             FieldAttributes attributes
-        ) {
+        )
+        {
             if (data == null)
                 throw new ArgumentNullException(nameof(data));
 
@@ -1979,7 +2012,8 @@ namespace System.Reflection.Emit
             string name,
             int size,
             FieldAttributes attributes
-        ) {
+        )
+        {
             if (name == null)
                 throw new ArgumentNullException(nameof(name));
             if (name.Length == 0)
@@ -2022,7 +2056,8 @@ namespace System.Reflection.Emit
         )]
         public void SetParent(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type? parent
-        ) {
+        )
+        {
             check_not_created();
 
             if (parent == null)

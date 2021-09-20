@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Rewrite.PatternSegments
             RewriteContext context,
             BackReferenceCollection? ruleBackReferences,
             BackReferenceCollection? conditionBackReferences
-        ) {
+        )
+        {
             if (context.HttpContext.Connection.RemoteIpAddress == null)
             {
                 return "off";

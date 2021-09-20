@@ -33,7 +33,8 @@ namespace System.Web.WebPages.Html
             string labelText,
             string labelFor,
             IDictionary<string, object> attributes
-        ) {
+        )
+        {
             if (String.IsNullOrEmpty(labelText))
             {
                 throw new ArgumentException(

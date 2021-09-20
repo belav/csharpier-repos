@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
             Location identifierLocation,
             string documentTitle,
             string documentTooltip
-        ) {
+        )
+        {
             _filePath = filePath;
             _identifierLocation = identifierLocation;
             _documentTitle = documentTitle;

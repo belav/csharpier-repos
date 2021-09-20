@@ -19,7 +19,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Metho
                 AbstractMethodXmlBuilder xmlBuilder,
                 string name,
                 AttributeInfo[] attributes
-            ) {
+            )
+            {
                 _xmlBuilder = xmlBuilder;
                 _name = name;
 

@@ -241,7 +241,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.RequestOrdering
         private static async Task<Solution> GetLSPSolution(
             TestLspServer testLspServer,
             string methodName
-        ) {
+        )
+        {
             var request = new TestRequest(methodName);
             var response = await testLspServer.ExecuteRequestAsync<TestRequest, TestResponse>(
                 request.MethodName,
@@ -256,7 +257,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.RequestOrdering
         private static async Task<TestResponse[]> TestAsync(
             TestLspServer testLspServer,
             TestRequest[] requests
-        ) {
+        )
+        {
             var waitables = StartTestRun(testLspServer, requests);
 
             var responses = await Task.WhenAll(waitables);
@@ -271,7 +273,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.RequestOrdering
         private static List<Task<TestResponse>> StartTestRun(
             TestLspServer testLspServer,
             TestRequest[] requests
-        ) {
+        )
+        {
             var clientCapabilities = new LSP.ClientCapabilities();
 
             var waitables = new List<Task<TestResponse>>();

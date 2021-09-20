@@ -31,7 +31,8 @@ namespace System.Web.Mvc
             IResolver<IViewPageActivator> activatorResolver,
             IDependencyResolver dependencyResolver,
             VirtualPathProvider pathProvider
-        ) {
+        )
+        {
             if (viewPageActivator != null)
             {
                 _viewPageActivator = viewPageActivator;

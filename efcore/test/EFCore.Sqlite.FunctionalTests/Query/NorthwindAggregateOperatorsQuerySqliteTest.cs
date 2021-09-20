@@ -46,7 +46,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         public override async Task Multiple_collection_navigation_with_FirstOrDefault_chained(
             bool async
-        ) {
+        )
+        {
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (

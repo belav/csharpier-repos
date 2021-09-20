@@ -76,7 +76,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
                     StoreName.CertificateAuthority,
                     StoreLocation.CurrentUser
                 )
-            ) {
+            )
+            {
                 cuCaStore.Open(OpenFlags.ReadWrite);
 
                 X509Chain chain = holder.Chain;

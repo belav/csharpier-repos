@@ -26,7 +26,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Common
             string fileName,
             int line,
             int column
-        ) {
+        )
+        {
             Severity = severity;
             Description = description;
             Project = project;

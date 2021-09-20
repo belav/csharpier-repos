@@ -65,7 +65,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             foreach (
                 var property in entityType.GetAllBaseTypesInclusive()
                     .SelectMany(et => et.GetDeclaredProperties())
-            ) {
+            )
+            {
                 var propertyExpression = CreateReadValueExpression(
                     property.ClrType,
                     property.GetIndex(),
@@ -260,7 +261,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
         /// </summary>
         public virtual void ReplaceProjectionMapping(
             IDictionary<ProjectionMember, Expression> projectionMappings
-        ) {
+        )
+        {
             _projectionMapping.Clear();
             _projectionMappingExpressions.Clear();
             LambdaExpression? selectorLambda = null;
@@ -332,11 +334,13 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
                 EntityProjectionExpression UpdateEntityProjection(
                     EntityProjectionExpression entityProjection
-                ) {
+                )
+                {
                     var readExpressionMap = new Dictionary<IProperty, MethodCallExpression>();
                     foreach (
                         var property in GetAllPropertiesInHierarchy(entityProjection.EntityType)
-                    ) {
+                    )
+                    {
                         var expression = entityProjection.BindProperty(property);
                         selectorExpressions.Add(expression);
                         var newExpression = CreateReadValueExpression(
@@ -358,7 +362,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                         var navigation in entityProjection.EntityType.GetAllBaseTypes()
                             .Concat(entityProjection.EntityType.GetDerivedTypesInclusive())
                             .SelectMany(t => t.GetDeclaredNavigations())
-                    ) {
+                    )
+                    {
                         var boundEntityShaperExpression = entityProjection.BindNavigation(
                             navigation
                         );
@@ -399,11 +404,13 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
         /// </summary>
         public virtual IReadOnlyDictionary<IProperty, int> AddToProjection(
             EntityProjectionExpression entityProjectionExpression
-        ) {
+        )
+        {
             var indexMap = new Dictionary<IProperty, int>();
             foreach (
                 var property in GetAllPropertiesInHierarchy(entityProjectionExpression.EntityType)
-            ) {
+            )
+            {
                 indexMap[property] = AddToProjection(
                     entityProjectionExpression.BindProperty(property)
                 );
@@ -434,7 +441,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
         public virtual int AddSubqueryProjection(
             ShapedQueryExpression shapedQueryExpression,
             out Expression innerShaper
-        ) {
+        )
+        {
             var subquery = (InMemoryQueryExpression)shapedQueryExpression.QueryExpression;
             subquery.ApplyProjection();
             var serverQueryExpression = subquery.ServerQueryExpression;
@@ -442,7 +450,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             if (
                 serverQueryExpression is MethodCallExpression selectMethodCall
                 && selectMethodCall.Arguments[0].Type == typeof(ResultEnumerable)
-            ) {
+            )
+            {
                 var terminatingMethodCall = (MethodCallExpression)(
                     (LambdaExpression)((NewExpression)selectMethodCall.Arguments[0]).Arguments[0]
                 ).Body;
@@ -492,7 +501,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
         public virtual void ApplySetOperation(
             MethodInfo setOperationMethodInfo,
             InMemoryQueryExpression source2
-        ) {
+        )
+        {
             Check.DebugAssert(
                 _groupingParameter == null,
                 "Cannot apply set operation after GroupBy without flattening."
@@ -509,17 +519,20 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                         kv => kv.Key,
                         (kv1, kv2) => (kv1.Key, Value1: kv1.Value, Value2: kv2.Value)
                     )
-                ) {
+                )
+                {
                     if (
                         value1 is EntityProjectionExpression entityProjection1
                         && value2 is EntityProjectionExpression entityProjection2
-                    ) {
+                    )
+                    {
                         var map = new Dictionary<IProperty, MethodCallExpression>();
                         foreach (
                             var property in GetAllPropertiesInHierarchy(
                                 entityProjection1.EntityType
                             )
-                        ) {
+                        )
+                        {
                             var expressionToAdd1 = entityProjection1.BindProperty(property);
                             var expressionToAdd2 = entityProjection2.BindProperty(property);
                             source1SelectorExpressions.Add(expressionToAdd1);
@@ -653,7 +666,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                     var map = new Dictionary<IProperty, MethodCallExpression>();
                     foreach (
                         var property in GetAllPropertiesInHierarchy(entityProjection.EntityType)
-                    ) {
+                    )
+                    {
                         map[property] = MakeReadValueNullable(
                             entityProjection.BindProperty(property)
                         );
@@ -748,7 +762,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             Expression groupingKey,
             Expression shaperExpression,
             bool defaultElementSelector
-        ) {
+        )
+        {
             var source = ServerQueryExpression;
             Expression? selector = null;
             if (defaultElementSelector)
@@ -880,7 +895,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             InMemoryQueryExpression innerQueryExpression,
             LambdaExpression outerKeySelector,
             LambdaExpression innerKeySelector
-        ) {
+        )
+        {
             var innerNullable = !navigation.ForeignKey.IsRequiredDependent;
             var outerParameter = Parameter(typeof(ValueBuffer), "outer");
             var innerParameter = Parameter(typeof(ValueBuffer), "inner");
@@ -1031,7 +1047,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             Expression key,
             List<Expression> groupingExpressions,
             Expression groupingKeyAccessExpression
-        ) {
+        )
+        {
             switch (key)
             {
                 case NewExpression newExpression:
@@ -1090,7 +1107,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             LambdaExpression? innerKeySelector,
             Type transparentIdentifierType,
             bool innerNullable
-        ) {
+        )
+        {
             var outerParameter = Parameter(typeof(ValueBuffer), "outer");
             var innerParameter = Parameter(typeof(ValueBuffer), "inner");
             var projectionMapping = new Dictionary<ProjectionMember, Expression>();
@@ -1110,7 +1128,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                     var readExpressionMap = new Dictionary<IProperty, MethodCallExpression>();
                     foreach (
                         var property in GetAllPropertiesInHierarchy(entityProjection.EntityType)
-                    ) {
+                    )
+                    {
                         var replacedExpression = replacingVisitor.Visit(
                             entityProjection.BindProperty(property)
                         );
@@ -1147,7 +1166,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                     var readExpressionMap = new Dictionary<IProperty, MethodCallExpression>();
                     foreach (
                         var property in GetAllPropertiesInHierarchy(entityProjection.EntityType)
-                    ) {
+                    )
+                    {
                         var replacedExpression = replacingVisitor.Visit(
                             entityProjection.BindProperty(property)
                         );
@@ -1355,7 +1375,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
             public ShaperRemappingExpressionVisitor(
                 IDictionary<ProjectionMember, Expression> projectionMapping
-            ) {
+            )
+            {
                 _projectionMapping = projectionMapping;
             }
 
@@ -1365,7 +1386,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 if (
                     expression is ProjectionBindingExpression projectionBindingExpression
                     && projectionBindingExpression.ProjectionMember != null
-                ) {
+                )
+                {
                     var mappingValue =
                         (
                             (ConstantExpression)_projectionMapping[

@@ -12,7 +12,8 @@ namespace System.Web.Razor.Generator
             string virtualPath,
             string physicalPath,
             CodeCompileUnit generatedCode
-        ) {
+        )
+        {
             if (String.IsNullOrEmpty(virtualPath))
             {
                 throw new ArgumentException(

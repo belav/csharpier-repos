@@ -79,7 +79,8 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
                 Uri.TryCreate(origin, UriKind.Absolute, out var uri)
                 && (uri.Scheme == Uri.UriSchemeHttp || uri.Scheme == Uri.UriSchemeHttps)
                 && !string.Equals(uri.IdnHost, uri.Host, StringComparison.Ordinal)
-            ) {
+            )
+            {
                 var builder = new UriBuilder(
                     uri.Scheme.ToLowerInvariant(),
                     uri.IdnHost.ToLowerInvariant()

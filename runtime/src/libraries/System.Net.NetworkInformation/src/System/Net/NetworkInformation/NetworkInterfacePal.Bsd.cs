@@ -18,7 +18,8 @@ namespace System.Net.NetworkInformation
                 if (
                     ni.NetworkInterfaceType == NetworkInterfaceType.Loopback
                     || ni.NetworkInterfaceType == NetworkInterfaceType.Tunnel
-                ) {
+                )
+                {
                     continue;
                 }
                 if (ni.OperationalStatus == OperationalStatus.Up)

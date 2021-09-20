@@ -238,7 +238,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <returns> A new instance with the option changed. </returns>
         public virtual RelationalOptionsExtension WithUseQuerySplittingBehavior(
             QuerySplittingBehavior querySplittingBehavior
-        ) {
+        )
+        {
             var clone = Clone();
 
             clone._querySplittingBehavior = querySplittingBehavior;
@@ -279,7 +280,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <returns> A new instance with the option changed. </returns>
         public virtual RelationalOptionsExtension WithMigrationsHistoryTableName(
             string? migrationsHistoryTableName
-        ) {
+        )
+        {
             var clone = Clone();
 
             clone._migrationsHistoryTableName = migrationsHistoryTableName;
@@ -300,7 +302,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <returns> A new instance with the option changed. </returns>
         public virtual RelationalOptionsExtension WithMigrationsHistoryTableSchema(
             string? migrationsHistoryTableSchema
-        ) {
+        )
+        {
             var clone = Clone();
 
             clone._migrationsHistoryTableSchema = migrationsHistoryTableSchema;
@@ -325,7 +328,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <returns> A new instance with the option changed. </returns>
         public virtual RelationalOptionsExtension WithExecutionStrategyFactory(
             Func<ExecutionStrategyDependencies, IExecutionStrategy>? executionStrategyFactory
-        ) {
+        )
+        {
             var clone = Clone();
 
             clone._executionStrategyFactory = executionStrategyFactory;
@@ -485,7 +489,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                         if (
                             Extension._migrationsHistoryTableName != null
                             || Extension._migrationsHistoryTableSchema != null
-                        ) {
+                        )
+                        {
                             builder.Append("MigrationsHistoryTable=");
 
                             if (Extension._migrationsHistoryTableSchema != null)

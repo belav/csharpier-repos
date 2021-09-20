@@ -6163,7 +6163,8 @@ namespace RootNamespace
             Action<ModelBuilder> buildModel,
             string expectedCode,
             Action<IModel, IModel> assert
-        ) {
+        )
+        {
             var modelBuilder = CreateConventionalModelBuilder();
             modelBuilder.HasChangeTrackingStrategy(ChangeTrackingStrategy.Snapshot);
             modelBuilder.Model.RemoveAnnotation(CoreAnnotationNames.ProductVersion);

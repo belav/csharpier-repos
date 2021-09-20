@@ -30,7 +30,8 @@ namespace System.Net.Http.Functional.Tests
         {
             foreach (
                 Configuration.Http.RemoteServer remoteServer in Configuration.Http.RemoteServers
-            ) {
+            )
+            {
                 yield return new object[] { remoteServer, 300 };
                 yield return new object[] { remoteServer, 301 };
                 yield return new object[] { remoteServer, 302 };
@@ -88,7 +89,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task GetAsync_AllowAutoRedirectFalse_RedirectFromHttpToHttp_StatusCodeRedirect(
             Configuration.Http.RemoteServer remoteServer,
             int statusCode
-        ) {
+        )
+        {
             if (statusCode == 308 && (IsWinHttpHandler && PlatformDetection.WindowsVersion < 10))
             {
                 // 308 redirects are not supported on old versions of WinHttp, or on .NET Framework.
@@ -118,7 +120,8 @@ namespace System.Net.Http.Functional.Tests
             int statusCode,
             string oldMethod,
             string newMethod
-        ) {
+        )
+        {
             if (statusCode == 308 && (IsWinHttpHandler && PlatformDetection.WindowsVersion < 10))
             {
                 // 308 redirects are not supported on old versions of WinHttp, or on .NET Framework.
@@ -281,7 +284,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task GetAsync_AllowAutoRedirectTrue_RedirectFromHttpToHttp_StatusCodeOK(
             Configuration.Http.RemoteServer remoteServer,
             int statusCode
-        ) {
+        )
+        {
             if (statusCode == 308 && (IsWinHttpHandler && PlatformDetection.WindowsVersion < 10))
             {
                 // 308 redirects are not supported on old versions of WinHttp, or on .NET Framework.
@@ -387,7 +391,8 @@ namespace System.Net.Http.Functional.Tests
         [Theory, MemberData(nameof(RemoteServersMemberData))]
         public async Task GetAsync_AllowAutoRedirectTrue_RedirectToUriWithParams_RequestMsgUriSet(
             Configuration.Http.RemoteServer remoteServer
-        ) {
+        )
+        {
             HttpClientHandler handler = CreateHttpClientHandler();
             handler.AllowAutoRedirect = true;
             Uri targetUri = remoteServer.BasicAuthUriForCreds(
@@ -418,7 +423,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task GetAsync_MaxAutomaticRedirectionsNServerHops_ThrowsIfTooMany(
             int maxHops,
             int hops
-        ) {
+        )
+        {
             if (IsWinHttpHandler && !PlatformDetection.IsWindows10Version1703OrGreater)
             {
                 // Skip this test if using WinHttpHandler but on a release prior to Windows 10 Creators Update.
@@ -470,7 +476,8 @@ namespace System.Net.Http.Functional.Tests
         [Theory, MemberData(nameof(RemoteServersMemberData))]
         public async Task GetAsync_AllowAutoRedirectTrue_RedirectWithRelativeLocation(
             Configuration.Http.RemoteServer remoteServer
-        ) {
+        )
+        {
             HttpClientHandler handler = CreateHttpClientHandler();
             handler.AllowAutoRedirect = true;
             using (HttpClient client = CreateHttpClientForRemoteServer(remoteServer, handler))
@@ -497,7 +504,8 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(400)]
         public async Task GetAsync_AllowAutoRedirectTrue_NonRedirectStatusCode_LocationHeader_NoRedirect(
             int statusCode
-        ) {
+        )
+        {
             HttpClientHandler handler = CreateHttpClientHandler();
             handler.AllowAutoRedirect = true;
             using (HttpClient client = CreateHttpClient(handler))
@@ -551,7 +559,8 @@ namespace System.Net.Http.Functional.Tests
             string redirFragment,
             string expectedFragment,
             bool useRelativeRedirect
-        ) {
+        )
+        {
             if (IsWinHttpHandler)
             {
                 // According to https://tools.ietf.org/html/rfc7231#section-7.1.2,
@@ -631,7 +640,8 @@ namespace System.Net.Http.Functional.Tests
         [OuterLoop("Uses external server")]
         public async Task GetAsync_CredentialIsNetworkCredentialUriRedirect_StatusCodeUnauthorized(
             Configuration.Http.RemoteServer remoteServer
-        ) {
+        )
+        {
             HttpClientHandler handler = CreateHttpClientHandler();
             handler.Credentials = _credential;
             using (HttpClient client = CreateHttpClientForRemoteServer(remoteServer, handler))
@@ -652,7 +662,8 @@ namespace System.Net.Http.Functional.Tests
         [OuterLoop("Uses external server")]
         public async Task HttpClientHandler_CredentialIsNotCredentialCacheAfterRedirect_StatusCodeOK(
             Configuration.Http.RemoteServer remoteServer
-        ) {
+        )
+        {
             HttpClientHandler handler = CreateHttpClientHandler();
             handler.Credentials = _credential;
             using (HttpClient client = CreateHttpClientForRemoteServer(remoteServer, handler))
@@ -681,7 +692,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task GetAsync_CredentialIsCredentialCacheUriRedirect_StatusCodeOK(
             Configuration.Http.RemoteServer remoteServer,
             int statusCode
-        ) {
+        )
+        {
             if (statusCode == 308 && (IsWinHttpHandler && PlatformDetection.WindowsVersion < 10))
             {
                 // 308 redirects are not supported on old versions of WinHttp, or on .NET Framework.
@@ -716,7 +728,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task DefaultHeaders_SetCredentials_ClearedOnRedirect(
             Configuration.Http.RemoteServer remoteServer,
             int statusCode
-        ) {
+        )
+        {
             if (statusCode == 308 && (IsWinHttpHandler && PlatformDetection.WindowsVersion < 10))
             {
                 // 308 redirects are not supported on old versions of WinHttp, or on .NET Framework.

@@ -22,7 +22,8 @@ namespace Microsoft.Extensions.Logging.TraceSource
             TState state,
             Exception exception,
             Func<TState, Exception, string> formatter
-        ) {
+        )
+        {
             if (!IsEnabled(logLevel))
             {
                 return;

@@ -38,7 +38,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             QueryableMethodTranslatingExpressionVisitorDependencies dependencies,
             QueryCompilationContext queryCompilationContext,
             bool subquery
-        ) {
+        )
+        {
             Check.NotNull(dependencies, nameof(dependencies));
             Check.NotNull(queryCompilationContext, nameof(queryCompilationContext));
 
@@ -118,7 +119,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             if (
                 method.DeclaringType == typeof(Queryable)
                 || method.DeclaringType == typeof(QueryableExtensions)
-            ) {
+            )
+            {
                 var source = Visit(methodCallExpression.Arguments[0]);
                 if (source is ShapedQueryExpression shapedQueryExpression)
                 {
@@ -408,7 +410,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                             if (
                                 Visit(methodCallExpression.Arguments[1])
                                 is ShapedQueryExpression innerShapedQueryExpression
-                            ) {
+                            )
+                            {
                                 return CheckTranslated(
                                     TranslateGroupJoin(
                                         shapedQueryExpression,
@@ -428,7 +431,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                             if (
                                 Visit(methodCallExpression.Arguments[1])
                                 is ShapedQueryExpression innerShapedQueryExpression
-                            ) {
+                            )
+                            {
                                 return CheckTranslated(
                                     TranslateIntersect(
                                         shapedQueryExpression,
@@ -444,7 +448,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                             if (
                                 Visit(methodCallExpression.Arguments[1])
                                 is ShapedQueryExpression innerShapedQueryExpression
-                            ) {
+                            )
+                            {
                                 return CheckTranslated(
                                     TranslateJoin(
                                         shapedQueryExpression,
@@ -464,7 +469,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                             if (
                                 Visit(methodCallExpression.Arguments[1])
                                 is ShapedQueryExpression innerShapedQueryExpression
-                            ) {
+                            )
+                            {
                                 return CheckTranslated(
                                     TranslateLeftJoin(
                                         shapedQueryExpression,
@@ -794,7 +800,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                             if (
                                 Visit(methodCallExpression.Arguments[1])
                                 is ShapedQueryExpression innerShapedQueryExpression
-                            ) {
+                            )
+                            {
                                 return CheckTranslated(
                                     TranslateUnion(
                                         shapedQueryExpression,
@@ -869,7 +876,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             LambdaExpression resultSelector,
             Expression innerShaper,
             Type transparentIdentifierType
-        ) {
+        )
+        {
             Check.NotNull(outer, nameof(outer));
             Check.NotNull(resultSelector, nameof(resultSelector));
             Check.NotNull(innerShaper, nameof(innerShaper));
@@ -913,7 +921,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Expression outerShaper,
             Expression innerShaper,
             Type transparentIdentifierType
-        ) {
+        )
+        {
             var outerMemberInfo = transparentIdentifierType.GetTypeInfo()
                 .GetRequiredDeclaredField("Outer");
             var innerMemberInfo = transparentIdentifierType.GetTypeInfo()
@@ -944,7 +953,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             public MemberAccessShiftingExpressionVisitor(
                 Expression queryExpression,
                 MemberInfo memberShift
-            ) {
+            )
+            {
                 _queryExpression = queryExpression;
                 _memberShift = memberShift;
             }
@@ -969,7 +979,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         private static Expression AccessOuterTransparentField(
             Type transparentIdentifierType,
             Expression targetExpression
-        ) {
+        )
+        {
             var fieldInfo = transparentIdentifierType.GetTypeInfo()
                 .GetRequiredDeclaredField("Outer");
 
@@ -980,7 +991,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         private static Expression AccessInnerTransparentField(
             Type transparentIdentifierType,
             Expression targetExpression
-        ) {
+        )
+        {
             var fieldInfo = transparentIdentifierType.GetTypeInfo()
                 .GetRequiredDeclaredField("Inner");
 

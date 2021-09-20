@@ -466,7 +466,8 @@ namespace Microsoft.Extensions.Http
         [MethodImpl(MethodImplOptions.NoInlining)]
         private async Task<ExpiredHandlerTrackingEntry> SimulateClientUse_Factory_CleanupCycle_DisposesEligibleHandler(
             TestHttpClientFactory factory
-        ) {
+        )
+        {
             // Create a handler and move it to the expired state
             var client1 = factory.CreateClient("github");
 
@@ -549,7 +550,8 @@ namespace Microsoft.Extensions.Http
         private async Task<ExpiredHandlerTrackingEntry> SimulateClientUse_Factory_CleanupCycle_DisposesLiveHandler(
             TestHttpClientFactory factory,
             DisposeTrackingHandler disposeHandler
-        ) {
+        )
+        {
             // Create a handler and move it to the expired state
             var client1 = factory.CreateClient("github");
 

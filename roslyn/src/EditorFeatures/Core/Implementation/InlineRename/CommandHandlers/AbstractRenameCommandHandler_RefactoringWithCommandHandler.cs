@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
         public bool ExecuteCommand(
             ReorderParametersCommandArgs args,
             CommandExecutionContext context
-        ) {
+        )
+        {
             CommitIfActive(args);
             return false;
         }
@@ -30,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
         public bool ExecuteCommand(
             RemoveParametersCommandArgs args,
             CommandExecutionContext context
-        ) {
+        )
+        {
             CommitIfActive(args);
             return false;
         }
@@ -41,7 +43,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
         public bool ExecuteCommand(
             ExtractInterfaceCommandArgs args,
             CommandExecutionContext context
-        ) {
+        )
+        {
             CommitIfActive(args);
             return false;
         }
@@ -52,7 +55,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
         public bool ExecuteCommand(
             EncapsulateFieldCommandArgs args,
             CommandExecutionContext context
-        ) {
+        )
+        {
             CommitIfActive(args);
             return false;
         }

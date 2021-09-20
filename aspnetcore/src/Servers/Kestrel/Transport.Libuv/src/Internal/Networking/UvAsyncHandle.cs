@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
             UvLoopHandle loop,
             Action callback,
             Action<Action<IntPtr>, IntPtr> queueCloseHandle
-        ) {
+        )
+        {
             CreateMemory(
                 loop.Libuv,
                 loop.ThreadId,

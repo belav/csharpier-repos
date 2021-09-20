@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                 CodeFixService codeFixService,
                 ImmutableHashSet<string>? diagnosticIds,
                 bool includeSuppressedDiagnostics
-            ) {
+            )
+            {
                 Debug.Assert(
                     diagnosticIds == null
                         || !diagnosticIds.Contains(

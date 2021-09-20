@@ -131,7 +131,8 @@ namespace System.Runtime.Serialization
             [NotNullWhen(true)] out ObjectHolder? holder,
             out object member,
             bool bThrowIfMissing
-        ) {
+        )
+        {
             //Set the member id (String or MemberInfo) for the member being fixed up.
             member = fixup._fixupInfo;
 
@@ -488,7 +489,8 @@ namespace System.Runtime.Serialization
                                 out fixupInfo,
                                 bObjectFullyComplete
                             )
-                        ) {
+                        )
+                        {
                             //Walk the SerializationInfo and find the member needing completion.  All we have to do
                             //at this point is set the member into the Object
                             object? holderValue = tempObjectHolder.ObjectValue;
@@ -537,7 +539,8 @@ namespace System.Runtime.Serialization
                             out fixupInfo,
                             bObjectFullyComplete
                         )
-                    ) {
+                    )
+                    {
                         // Check to make sure we are not both reachable from the topObject
                         // and there was a typeloadexception
                         if (tempObjectHolder.TypeLoadExceptionReachable)
@@ -603,14 +606,16 @@ namespace System.Runtime.Serialization
                                     if (
                                         holder.RequiresValueTypeFixup
                                         && holder.ValueTypeFixupPerformed
-                                    ) {
+                                    )
+                                    {
                                         if (
                                             !DoValueTypeFixup(
                                                 (FieldInfo)tempMember,
                                                 holder,
                                                 tempObjectHolder.ObjectValue
                                             )
-                                        ) {
+                                        )
+                                        {
                                             throw new SerializationException(
                                                 SR.Serialization_PartialValueTypeFixup
                                             );
@@ -749,7 +754,8 @@ namespace System.Runtime.Serialization
             SerializationInfo? info,
             long idOfContainingObj,
             MemberInfo? member
-        ) {
+        )
+        {
             RegisterObject(obj, objectID, info, idOfContainingObj, member, null);
         }
 
@@ -759,7 +765,8 @@ namespace System.Runtime.Serialization
             SerializationInfo? info,
             long idOfContainingObj,
             MemberInfo? member
-        ) {
+        )
+        {
             ObjectHolder temp;
             Debug.Assert(
                 member == null || member is FieldInfo,
@@ -787,7 +794,8 @@ namespace System.Runtime.Serialization
             long idOfContainingObj,
             MemberInfo? member,
             int[]? arrayIndex
-        ) {
+        )
+        {
             if (obj == null)
             {
                 throw new ArgumentNullException(nameof(obj));
@@ -924,7 +932,8 @@ namespace System.Runtime.Serialization
             object obj,
             SerializationInfo? info,
             StreamingContext context
-        ) {
+        )
+        {
             if (obj == null)
             {
                 throw new ArgumentNullException(nameof(obj));
@@ -957,7 +966,8 @@ namespace System.Runtime.Serialization
                     | DynamicallyAccessedMemberTypes.NonPublicConstructors
             )]
                 Type t
-        ) {
+        )
+        {
             foreach (
                 ConstructorInfo ci in t.GetConstructors(
                     BindingFlags.Public
@@ -965,13 +975,15 @@ namespace System.Runtime.Serialization
                         | BindingFlags.Instance
                         | BindingFlags.DeclaredOnly
                 )
-            ) {
+            )
+            {
                 ParameterInfo[] parameters = ci.GetParameters();
                 if (
                     parameters.Length == 2
                     && parameters[0].ParameterType == typeof(SerializationInfo)
                     && parameters[1].ParameterType == typeof(StreamingContext)
-                ) {
+                )
+                {
                     return ci;
                 }
             }
@@ -1056,7 +1068,8 @@ namespace System.Runtime.Serialization
                 {
                     if (
                         temp.TotalDependentObjects > 0 /*|| temp.m_missingElements!=null*/
-                    ) {
+                    )
+                    {
                         CompleteObject(temp, true);
                     }
                     temp = temp._next;
@@ -1105,7 +1118,8 @@ namespace System.Runtime.Serialization
             long objectToBeFixed,
             MemberInfo member,
             long objectRequired
-        ) {
+        )
+        {
             //Verify our arguments
             if (objectToBeFixed <= 0 || objectRequired <= 0)
             {
@@ -1134,7 +1148,8 @@ namespace System.Runtime.Serialization
             long objectToBeFixed,
             string memberName,
             long objectRequired
-        ) {
+        )
+        {
             //Verify our arguments
             if (objectToBeFixed <= 0 || objectRequired <= 0)
             {
@@ -1161,7 +1176,8 @@ namespace System.Runtime.Serialization
             long arrayToBeFixed,
             int index,
             long objectRequired
-        ) {
+        )
+        {
             int[] indexArray = new int[1];
             indexArray[0] = index;
             RecordArrayElementFixup(arrayToBeFixed, indexArray, objectRequired);
@@ -1171,7 +1187,8 @@ namespace System.Runtime.Serialization
             long arrayToBeFixed,
             int[] indices,
             long objectRequired
-        ) {
+        )
+        {
             //Verify our arguments
             if (arrayToBeFixed <= 0 || objectRequired <= 0)
             {
@@ -1269,7 +1286,8 @@ namespace System.Runtime.Serialization
             long idOfContainingObj,
             FieldInfo? field,
             int[]? arrayIndex
-        ) {
+        )
+        {
             Debug.Assert(objID >= 0, "objID>=0");
 
             _object = obj; //May be null;
@@ -1293,7 +1311,8 @@ namespace System.Runtime.Serialization
             if (
                 idOfContainingObj != 0
                 && ((field != null && field.FieldType.IsValueType) || arrayIndex != null)
-            ) {
+            )
+            {
                 if (idOfContainingObj == objID)
                 {
                     throw new SerializationException(SR.Serialization_ParentChildIdentical);
@@ -1313,7 +1332,8 @@ namespace System.Runtime.Serialization
             long idOfContainingObj,
             FieldInfo? field,
             int[]? arrayIndex
-        ) {
+        )
+        {
             Debug.Assert(objID >= 0, "objID>=0");
 
             _object = obj; //May be null;
@@ -1452,7 +1472,8 @@ namespace System.Runtime.Serialization
             FieldInfo? field,
             int[]? arrayIndex,
             ObjectManager manager
-        ) {
+        )
+        {
             Debug.Assert(obj != null, "obj!=null");
             Debug.Assert(_id > 0, "m_id>0");
 
@@ -1464,7 +1485,8 @@ namespace System.Runtime.Serialization
             if (
                 idOfContainer != 0
                 && ((field != null && field.FieldType.IsValueType) || arrayIndex != null)
-            ) {
+            )
+            {
                 if (idOfContainer == _id)
                 {
                     throw new SerializationException(SR.Serialization_ParentChildIdentical);

@@ -117,7 +117,8 @@ namespace Microsoft.JSInterop
             string identifier,
             CancellationToken cancellationToken,
             object?[]? args
-        ) {
+        )
+        {
             var taskId = Interlocked.Increment(ref _nextPendingTaskId);
             var tcs = new TaskCompletionSource<TValue>();
             if (cancellationToken.CanBeCanceled)

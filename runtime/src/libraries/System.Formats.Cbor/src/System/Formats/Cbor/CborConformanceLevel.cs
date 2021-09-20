@@ -66,14 +66,16 @@ namespace System.Formats.Cbor
             if (
                 conformanceMode < CborConformanceMode.Lax
                 || conformanceMode > CborConformanceMode.Ctap2Canonical
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(nameof(conformanceMode));
             }
         }
 
         public static bool RequiresCanonicalIntegerRepresentation(
             CborConformanceMode conformanceMode
-        ) {
+        )
+        {
             switch (conformanceMode)
             {
                 case CborConformanceMode.Lax:
@@ -250,7 +252,8 @@ namespace System.Formats.Cbor
             ReadOnlySpan<byte> left,
             ReadOnlySpan<byte> right,
             CborConformanceMode mode
-        ) {
+        )
+        {
             Debug.Assert(!left.IsEmpty && !right.IsEmpty);
 
             switch (mode)

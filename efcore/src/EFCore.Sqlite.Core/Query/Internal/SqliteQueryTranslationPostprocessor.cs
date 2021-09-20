@@ -63,7 +63,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                     && selectExpression.Tables.Any(
                         t => t is CrossApplyExpression || t is OuterApplyExpression
                     )
-                ) {
+                )
+                {
                     throw new InvalidOperationException(SqliteStrings.ApplyNotSupported);
                 }
 

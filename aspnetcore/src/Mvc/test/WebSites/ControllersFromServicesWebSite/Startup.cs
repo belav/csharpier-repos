@@ -39,7 +39,8 @@ namespace ControllersFromServicesWebSite
                             var part in CompiledRazorAssemblyApplicationPartFactory.GetDefaultApplicationParts(
                                 Assembly.GetExecutingAssembly()
                             )
-                        ) {
+                        )
+                        {
                             manager.ApplicationParts.Add(part);
                         }
                     }

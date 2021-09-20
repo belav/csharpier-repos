@@ -559,7 +559,8 @@ class C
             DkmVariableInfoFlags argumentFlags,
             Type[] typeArguments = null,
             string[] argumentValues = null
-        ) {
+        )
+        {
             var serializedTypeArgumentNames = typeArguments?.Select(t => t?.AssemblyQualifiedName)
                 .ToArray();
             return GetName(
@@ -577,7 +578,8 @@ class C
             DkmVariableInfoFlags argumentFlags,
             string[] typeArguments,
             string[] argumentValues = null
-        ) {
+        )
+        {
             Debug.Assert(
                 (argumentFlags & (DkmVariableInfoFlags.Names | DkmVariableInfoFlags.Types))
                     == argumentFlags,
@@ -621,7 +623,8 @@ class C
             string source,
             string methodName,
             Type[] typeArguments = null
-        ) {
+        )
+        {
             var instructionDecoder = CSharpInstructionDecoder.Instance;
             var serializedTypeArgumentNames = typeArguments?.Select(
                     t => (t != null) ? t.AssemblyQualifiedName : null
@@ -642,7 +645,8 @@ class C
             string methodName,
             string[] serializedTypeArgumentNames,
             CSharpInstructionDecoder instructionDecoder
-        ) {
+        )
+        {
             var compilation = CreateCompilationWithMscorlib45(
                 source,
                 options: TestOptions.DebugDll,

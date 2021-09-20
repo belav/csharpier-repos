@@ -180,7 +180,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         internal virtual ImmutableArray<LocalSymbol> GetDeclaredLocalsForScope(
             SyntaxNode scopeDesignator
-        ) {
+        )
+        {
             RoslynDebug.Assert(Next is object);
             return this.Next.GetDeclaredLocalsForScope(scopeDesignator);
         }
@@ -190,7 +191,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         internal virtual ImmutableArray<LocalFunctionSymbol> GetDeclaredLocalFunctionsForScope(
             CSharpSyntaxNode scopeDesignator
-        ) {
+        )
+        {
             RoslynDebug.Assert(Next is object);
             return this.Next.GetDeclaredLocalFunctionsForScope(scopeDesignator);
         }
@@ -535,7 +537,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics,
             DiagnosticInfo info,
             SyntaxNode syntax
-        ) {
+        )
+        {
             diagnostics.Add(new CSDiagnostic(info, syntax.Location));
         }
 
@@ -543,7 +546,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics,
             DiagnosticInfo info,
             Location location
-        ) {
+        )
+        {
             diagnostics.Add(new CSDiagnostic(info, location));
         }
 
@@ -551,7 +555,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics,
             ErrorCode code,
             CSharpSyntaxNode syntax
-        ) {
+        )
+        {
             diagnostics.Add(new CSDiagnostic(new CSDiagnosticInfo(code), syntax.Location));
         }
 
@@ -560,7 +565,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ErrorCode code,
             CSharpSyntaxNode syntax,
             params object[] args
-        ) {
+        )
+        {
             diagnostics.Add(new CSDiagnostic(new CSDiagnosticInfo(code, args), syntax.Location));
         }
 
@@ -568,7 +574,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics,
             ErrorCode code,
             SyntaxToken token
-        ) {
+        )
+        {
             diagnostics.Add(new CSDiagnostic(new CSDiagnosticInfo(code), token.GetLocation()));
         }
 
@@ -577,7 +584,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ErrorCode code,
             SyntaxToken token,
             params object[] args
-        ) {
+        )
+        {
             diagnostics.Add(
                 new CSDiagnostic(new CSDiagnosticInfo(code, args), token.GetLocation())
             );
@@ -587,7 +595,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics,
             ErrorCode code,
             SyntaxNodeOrToken syntax
-        ) {
+        )
+        {
             var location = syntax.GetLocation();
             RoslynDebug.Assert(location is object);
             Error(diagnostics, code, location);
@@ -598,7 +607,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ErrorCode code,
             SyntaxNodeOrToken syntax,
             params object[] args
-        ) {
+        )
+        {
             var location = syntax.GetLocation();
             RoslynDebug.Assert(location is object);
             Error(diagnostics, code, location, args);
@@ -608,7 +618,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics,
             ErrorCode code,
             Location location
-        ) {
+        )
+        {
             diagnostics.Add(new CSDiagnostic(new CSDiagnosticInfo(code), location));
         }
 
@@ -617,7 +628,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ErrorCode code,
             Location location,
             params object[] args
-        ) {
+        )
+        {
             diagnostics.Add(new CSDiagnostic(new CSDiagnosticInfo(code, args), location));
         }
 
@@ -635,7 +647,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Symbol symbol,
             SyntaxNode node,
             bool hasBaseReceiver
-        ) {
+        )
+        {
             ReportDiagnosticsIfObsolete(
                 diagnostics,
                 symbol,
@@ -654,7 +667,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Symbol symbol,
             SyntaxNodeOrToken node,
             bool hasBaseReceiver
-        ) {
+        )
+        {
             switch (symbol.Kind)
             {
                 case SymbolKind.NamedType:
@@ -680,7 +694,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Symbol symbol,
             SyntaxNodeOrToken node,
             bool hasBaseReceiver
-        ) {
+        )
+        {
             if (diagnostics.DiagnosticBag is object)
             {
                 ReportDiagnosticsIfObsolete(
@@ -697,7 +712,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Conversion conversion,
             SyntaxNodeOrToken node,
             bool hasBaseReceiver
-        ) {
+        )
+        {
             if (conversion.IsValid && conversion.Method is object)
             {
                 ReportDiagnosticsIfObsolete(diagnostics, conversion.Method, node, hasBaseReceiver);
@@ -712,7 +728,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Symbol? containingMember,
             NamedTypeSymbol? containingType,
             BinderFlags location
-        ) {
+        )
+        {
             RoslynDebug.Assert(symbol is object);
 
             RoslynDebug.Assert(
@@ -796,7 +813,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Symbol? containingMember,
             NamedTypeSymbol? containingType,
             BinderFlags location
-        ) {
+        )
+        {
             if (diagnostics.DiagnosticBag is object)
             {
                 ReportDiagnosticsIfObsolete(
@@ -817,7 +835,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxNodeOrToken node,
             Symbol? containingMember,
             BinderFlags location
-        ) {
+        )
+        {
             RoslynDebug.Assert(diagnostics != null);
 
             var kind = ObsoleteAttributeHelpers.GetObsoleteDiagnosticKind(symbol, containingMember);
@@ -848,7 +867,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxNodeOrToken node,
             Symbol containingMember,
             BinderFlags location
-        ) {
+        )
+        {
             if (diagnostics.DiagnosticBag is object)
             {
                 ReportDiagnosticsIfObsoleteInternal(
@@ -866,7 +886,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             MethodSymbol symbol,
             Location location,
             bool isDelegateConversion
-        ) {
+        )
+        {
             var unmanagedCallersOnlyAttributeData = symbol.GetUnmanagedCallersOnlyAttributeData(
                 forceComplete: false
             );
@@ -897,7 +918,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Symbol symbol,
             AssemblySymbol within,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             return AccessCheck.IsSymbolAccessible(symbol, within, ref useSiteInfo);
         }
 
@@ -906,7 +928,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             NamedTypeSymbol within,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo,
             TypeSymbol? throughTypeOpt = null
-        ) {
+        )
+        {
             return this.Flags.Includes(BinderFlags.IgnoreAccessibility)
                 || AccessCheck.IsSymbolAccessible(symbol, within, ref useSiteInfo, throughTypeOpt);
         }
@@ -918,7 +941,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             out bool failedThroughTypeCheck,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo,
             ConsList<TypeSymbol>? basesBeingResolved = null
-        ) {
+        )
+        {
             if (this.Flags.Includes(BinderFlags.IgnoreAccessibility))
             {
                 failedThroughTypeCheck = false;
@@ -944,7 +968,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics,
             Location? location = null,
             CSharpSyntaxNode? syntax = null
-        ) {
+        )
+        {
             RoslynDebug.Assert((location != null) ^ (syntax != null));
 
             // Dev11 reports use-site diagnostics when an optional attribute is found but is bad for some other reason
@@ -963,7 +988,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public CompoundUseSiteInfo<AssemblySymbol> GetNewCompoundUseSiteInfo(
             BindingDiagnosticBag futureDestination
-        ) {
+        )
+        {
             return new CompoundUseSiteInfo<AssemblySymbol>(futureDestination, Compilation.Assembly);
         }
 
@@ -983,7 +1009,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal BoundExpression WrapWithVariablesIfAny(
             CSharpSyntaxNode scopeDesignator,
             BoundExpression expression
-        ) {
+        )
+        {
             var locals = this.GetDeclaredLocalsForScope(scopeDesignator);
             return (locals.IsEmpty)
               ? expression
@@ -1007,7 +1034,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal BoundStatement WrapWithVariablesIfAny(
             CSharpSyntaxNode scopeDesignator,
             BoundStatement statement
-        ) {
+        )
+        {
             RoslynDebug.Assert(statement.Kind != BoundKind.StatementList);
             var locals = this.GetDeclaredLocalsForScope(scopeDesignator);
             if (locals.IsEmpty)
@@ -1027,7 +1055,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal BoundStatement WrapWithVariablesAndLocalFunctionsIfAny(
             CSharpSyntaxNode scopeDesignator,
             BoundStatement statement
-        ) {
+        )
+        {
             var locals = this.GetDeclaredLocalsForScope(scopeDesignator);
             var localFunctions = this.GetDeclaredLocalFunctionsForScope(scopeDesignator);
             if (locals.IsEmpty && localFunctions.IsEmpty)
@@ -1065,7 +1094,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (
                         currentContainer != null
                         && currentContainer != scope.Next?.ContainingMemberOrLambda
-                    ) {
+                    )
+                    {
                         sub.Add(
                             new TreeDumperNode(
                                 "containing symbol",

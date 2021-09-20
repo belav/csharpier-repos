@@ -8,7 +8,8 @@ namespace Internal.TypeSystem
         public FieldDesc GetNonRuntimeDeterminedFieldFromRuntimeDeterminedFieldViaSubstitution(
             Instantiation typeInstantiation,
             Instantiation methodInstantiation
-        ) {
+        )
+        {
             DefType owningType = OwningType;
             TypeDesc owningTypeInstantiated =
                 owningType.GetNonRuntimeDeterminedTypeFromRuntimeDeterminedSubtypeViaSubstitution(

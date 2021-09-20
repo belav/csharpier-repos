@@ -56,7 +56,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertForToForEach
             out MemberAccessExpressionSyntax memberAccess,
             out ExpressionSyntax stepValueExpressionOpt,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Look for very specific forms.  Basically, only minor variations around:
             // for (var i = 0; i < expr.Lenth; i++)
 
@@ -64,7 +65,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertForToForEach
                 forStatement.Declaration != null
                 && forStatement.Condition.IsKind(SyntaxKind.LessThanExpression)
                 && forStatement.Incrementors.Count == 1
-            ) {
+            )
+            {
                 var declaration = forStatement.Declaration;
                 if (declaration.Variables.Count == 1)
                 {
@@ -81,7 +83,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertForToForEach
                             binaryExpression.Left is IdentifierNameSyntax identifierName
                             && identifierName.Identifier.ValueText == iterationVariable.ValueText
                             && binaryExpression.Right is MemberAccessExpressionSyntax
-                        ) {
+                        )
+                        {
                             memberAccess = (MemberAccessExpressionSyntax)binaryExpression.Right;
 
                             var incrementor = forStatement.Incrementors[0];
@@ -106,7 +109,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertForToForEach
             SyntaxToken iterationVariable,
             ExpressionSyntax incrementor,
             out ExpressionSyntax stepValue
-        ) {
+        )
+        {
             // support
             //  x++
             //  ++x
@@ -147,7 +151,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertForToForEach
             ExpressionSyntax collectionExpression,
             ITypeSymbol iterationVariableType,
             OptionSet optionSet
-        ) {
+        )
+        {
             typeNode ??= iterationVariableType.GenerateTypeSyntax();
 
             return SyntaxFactory.ForEachStatement(

@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Symbol containingSymbol,
             Location location,
             bool isTransparent = false
-        ) {
+        )
+        {
             _name = Name;
             _containingSymbol = containingSymbol;
             _locations = ImmutableArray.Create<Location>(location);
@@ -121,7 +122,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override TResult Accept<TArg, TResult>(
             CSharpSymbolVisitor<TArg, TResult> visitor,
             TArg a
-        ) {
+        )
+        {
             return visitor.VisitRangeVariable(this, a);
         }
 

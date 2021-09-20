@@ -16,7 +16,8 @@ namespace System
             Version version,
             string? processorArchitecture,
             string? culture
-        ) {
+        )
+        {
             if (name == null)
                 throw new ArgumentNullException(nameof(name));
             if (name.Length == 0)

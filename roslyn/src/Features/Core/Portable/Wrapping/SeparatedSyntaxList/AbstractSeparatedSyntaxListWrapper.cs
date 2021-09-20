@@ -52,7 +52,8 @@ namespace Microsoft.CodeAnalysis.Wrapping.SeparatedSyntaxList
             int position,
             SyntaxNode declaration,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var listSyntax = TryGetApplicableList(declaration);
             if (listSyntax == null)
             {

@@ -53,7 +53,8 @@ namespace Microsoft.CodeAnalysis.AddAccessibilityModifiers
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
 
@@ -81,7 +82,8 @@ namespace Microsoft.CodeAnalysis.AddAccessibilityModifiers
             SyntaxNode UpdateAccessibility(
                 SyntaxNode declaration,
                 Accessibility preferredAccessibility
-            ) {
+            )
+            {
                 var generator = editor.Generator;
 
                 // If there was accessibility on the member, then remove it.  If there was no accessibility, then add
@@ -117,22 +119,23 @@ namespace Microsoft.CodeAnalysis.AddAccessibilityModifiers
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
 #if CODE_STYLE // 'CodeActionPriority' is not a public API, hence not supported in CodeStyle layer.
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                AnalyzersResources.Add_accessibility_modifiers,
-                createChangedDocument,
-                AnalyzersResources.Add_accessibility_modifiers
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    AnalyzersResources.Add_accessibility_modifiers,
+                    createChangedDocument,
+                    AnalyzersResources.Add_accessibility_modifiers
+                ) { }
 #else
             public MyCodeAction(
                 CodeActionPriority priority,
                 Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                AnalyzersResources.Add_accessibility_modifiers,
-                createChangedDocument,
-                AnalyzersResources.Add_accessibility_modifiers
-            ) {
+            )
+                : base(
+                    AnalyzersResources.Add_accessibility_modifiers,
+                    createChangedDocument,
+                    AnalyzersResources.Add_accessibility_modifiers
+                )
+            {
                 Priority = priority;
             }
 

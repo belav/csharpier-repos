@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string name,
             ImmutableArray<Symbol> symbols,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             FromClauseSyntax fromClause = null;
             for (SyntaxNode node = queryClause;; node = node.Parent)
             {
@@ -72,7 +73,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 fromClause != null
                 && fromClause.Type == null
                 && HasCastToQueryProvider(instanceArgument.Type, ref useSiteInfo)
-            ) {
+            )
+            {
                 // Could not find an implementation of the query pattern for source type '{0}'.  '{1}' not found.  Consider explicitly specifying the type of the range variable '{2}'.
                 diagnostics.Add(
                     new DiagnosticInfoWithSymbols(
@@ -108,11 +110,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol instanceType,
             string name,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             if (
                 instanceType.TypeKind == TypeKind.Array
                 || name == "Cast" && HasCastToQueryProvider(instanceType, ref useSiteInfo)
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -135,7 +139,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol instanceType,
             NamedTypeSymbol interfaceType,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             bool nonUnique = false;
             return HasUniqueInterface(instanceType, interfaceType, ref nonUnique, ref useSiteInfo);
         }
@@ -145,18 +150,21 @@ namespace Microsoft.CodeAnalysis.CSharp
             NamedTypeSymbol interfaceType,
             ref bool nonUnique,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             TypeSymbol candidate = null;
             foreach (
                 var i in instanceType.AllInterfacesWithDefinitionUseSiteDiagnostics(ref useSiteInfo)
-            ) {
+            )
+            {
                 if (
                     TypeSymbol.Equals(
                         i.OriginalDefinition,
                         interfaceType,
                         TypeCompareKind.ConsiderEverything2
                     )
-                ) {
+                )
+                {
                     if ((object)candidate == null)
                     {
                         candidate = i;
@@ -175,7 +183,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private bool HasCastToQueryProvider(
             TypeSymbol instanceType,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             var originalType = instanceType.OriginalDefinition;
             var ienumerable = Compilation.GetSpecialType(
                 SpecialType.System_Collections_IEnumerable
@@ -232,7 +241,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             AnalyzedArguments arguments,
             ImmutableArray<Symbol> symbols,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             string clauseKind = null;
             bool multiple = false;
             switch (queryClause.Kind())
@@ -276,7 +286,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             symbols,
                             diagnostics
                         )
-                    ) {
+                    )
+                    {
                         return;
                     }
                     clauseKind = SyntaxFacts.GetText(SyntaxKind.FromKeyword);
@@ -304,7 +315,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             AnalyzedArguments arguments,
             ImmutableArray<Symbol> symbols,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             Debug.Assert(methodName == "SelectMany");
 
             // Estimate the return type of Select's lambda argument

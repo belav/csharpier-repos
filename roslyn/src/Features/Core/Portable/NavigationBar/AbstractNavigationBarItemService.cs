@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.NavigationBar
             Document document,
             bool supportsCodeGeneration,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var client = await RemoteHostClient.TryGetClientAsync(
                     document.Project,
                     cancellationToken

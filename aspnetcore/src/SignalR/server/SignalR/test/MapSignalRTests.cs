@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 {
                     using (
                         var host = BuildWebHost(routes => routes.MapHub<InvalidHub>("/overloads"))
-                    ) {
+                    )
+                    {
                         host.Start();
                     }
                 }
@@ -100,7 +101,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                             }
                         )
                 )
-            ) {
+            )
+            {
                 host.Start();
 
                 var dataSource = host.Services.GetRequiredService<EndpointDataSource>();
@@ -144,7 +146,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                             }
                         )
                 )
-            ) {
+            )
+            {
                 host.Start();
 
                 var dataSource = host.Services.GetRequiredService<EndpointDataSource>();
@@ -188,7 +191,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                             }
                         )
                 )
-            ) {
+            )
+            {
                 host.Start();
 
                 var dataSource = host.Services.GetRequiredService<EndpointDataSource>();
@@ -232,7 +236,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                             }
                         )
                 )
-            ) {
+            )
+            {
                 host.Start();
 
                 var dataSource = host.Services.GetRequiredService<EndpointDataSource>();
@@ -279,7 +284,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                             }
                         )
                 )
-            ) {
+            )
+            {
                 host.Start();
 
                 var dataSource = host.Services.GetRequiredService<EndpointDataSource>();

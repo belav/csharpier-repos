@@ -22,7 +22,8 @@ namespace System.Security.Cryptography.Xml
             bool includeComments,
             XmlResolver resolver,
             string strBaseUri
-        ) {
+        )
+        {
             if (inputStream == null)
                 throw new ArgumentNullException(nameof(inputStream));
 
@@ -72,7 +73,8 @@ namespace System.Security.Cryptography.Xml
             XmlNodeList nodeList,
             XmlDocument inputRoot,
             XmlDocument root
-        ) {
+        )
+        {
             CanonicalXmlNodeList elementList = new CanonicalXmlNodeList();
             CanonicalXmlNodeList elementListCanonical = new CanonicalXmlNodeList();
             elementList.Add(inputRoot);

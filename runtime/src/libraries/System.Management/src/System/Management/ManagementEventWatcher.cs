@@ -190,11 +190,8 @@ namespace System.Management
         /// <param name='scope'>The management scope (namespace) in which the watcher will listen for events.</param>
         /// <param name=' query'>The query that defines the events for which the watcher will listen.</param>
         /// <param name='options'>An <see cref='System.Management.EventWatcherOptions'/> object representing additional options used to watch for events. </param>
-        public ManagementEventWatcher(
-            string scope,
-            string query,
-            EventWatcherOptions options
-        ) : this(new ManagementScope(scope), new EventQuery(query), options) { }
+        public ManagementEventWatcher(string scope, string query, EventWatcherOptions options)
+            : this(new ManagementScope(scope), new EventQuery(query), options) { }
 
         /// <summary>
         /// <para> Initializes a new instance of the <see cref='System.Management.ManagementEventWatcher'/> class
@@ -209,7 +206,8 @@ namespace System.Management
             ManagementScope scope,
             EventQuery query,
             EventWatcherOptions options
-        ) {
+        )
+        {
             if (null != scope)
                 this.scope = ManagementScope._Clone(
                     scope,
@@ -644,7 +642,8 @@ namespace System.Management
             ManagementEventWatcher eventWatcher,
             object context,
             IWbemServices services
-        ) {
+        )
+        {
             this.services = services;
             this.context = context;
             this.eventWatcher = eventWatcher;
@@ -669,7 +668,8 @@ namespace System.Management
                         StringComparison.OrdinalIgnoreCase
                     )
                 )
-            ) {
+            )
+            {
                 this.isLocal = true;
             }
 

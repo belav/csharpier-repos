@@ -31,7 +31,8 @@ namespace Microsoft.AspNetCore.Components.WebView
             IpcSender ipcSender,
             string baseUrl,
             string startUrl
-        ) {
+        )
+        {
             _serviceScope = serviceScope;
             var services = serviceScope.ServiceProvider;
 

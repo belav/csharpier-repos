@@ -186,7 +186,8 @@ namespace Newtonsoft.Json.Tests
                     Indentation = 2,
                     Formatting = Formatting.Indented
                 }
-            ) {
+            )
+            {
                 jsonWriter.WriteStartObject();
                 jsonWriter.WritePropertyName("prop");
                 jsonWriter.WriteValue(true);
@@ -941,7 +942,8 @@ namespace Newtonsoft.Json.Tests
 
             using (
                 JsonWriter jsonWriter = new JsonTextWriter(sw) { Formatting = Formatting.Indented }
-            ) {
+            )
+            {
                 jsonWriter.WriteStartArray();
 
                 jsonWriter.WriteValue(int.MaxValue);
@@ -1350,7 +1352,8 @@ _____'propertyName': NaN,
                 FieldInfo field in enumType.GetFields(
                     System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static
                 )
-            ) {
+            )
+            {
                 object value = field.GetValue(enumType);
                 values.Add(value);
             }
@@ -1616,7 +1619,8 @@ _____'propertyName': NaN,
             string s,
             char delimiter,
             bool appendDelimiters
-        ) {
+        )
+        {
             // leading delimiter
             if (appendDelimiters)
             {

@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         public static ItemCompletedDisposer ItemCompletedScope(
             this IProgressTracker tracker,
             string? description = null
-        ) {
+        )
+        {
             if (description != null)
                 tracker.Description = description;
 

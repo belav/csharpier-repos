@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             int position,
             CancellationToken cancellationToken,
             out TextSpan breakpointSpan
-        ) {
+        )
+        {
             var source = tree.GetText(cancellationToken);
 
             // If the line is entirely whitespace, then don't set any breakpoint there.
@@ -69,7 +70,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             SyntaxNode root,
             int position,
             out TextSpan span
-        ) {
+        )
+        {
             var node = root.FindToken(position).Parent;
             while (node != null)
             {
@@ -103,7 +105,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             SyntaxTokenList startOpt,
             SyntaxNodeOrToken startFallbackOpt,
             SyntaxNodeOrToken endOpt
-        ) {
+        )
+        {
             Debug.Assert(startFallbackOpt != default || endOpt != default);
 
             int startPos;
@@ -265,7 +268,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                     if (
                         property.Initializer != null
                         && position >= property.Initializer.FullSpan.Start
-                    ) {
+                    )
+                    {
                         return property.Initializer.Value.Span;
                     }
 
@@ -357,7 +361,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
 
         private static TextSpan CreateSpanForConstructorDeclaration(
             ConstructorDeclarationSyntax constructorSyntax
-        ) {
+        )
+        {
             if (constructorSyntax.Initializer != null)
             {
                 return CreateSpanForConstructorInitializer(constructorSyntax.Initializer);
@@ -404,11 +409,13 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
         private static TextSpan? TryCreateSpanForSwitchLabel(
             SwitchLabelSyntax switchLabel,
             int position
-        ) {
+        )
+        {
             if (
                 !(switchLabel.Parent is SwitchSectionSyntax switchSection)
                 || switchSection.Statements.Count == 0
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -529,7 +536,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                     if (
                         position < forEachStatement.OpenParenToken.Span.End
                         || position > forEachStatement.CloseParenToken.SpanStart
-                    ) {
+                    )
+                    {
                         return CreateSpan(forEachStatement.ForEachKeyword);
                     }
                     else if (position < forEachStatement.InKeyword.FullSpan.Start)
@@ -643,7 +651,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
         private static TextSpan? TryCreateSpanForVariableDeclaration(
             VariableDeclarationSyntax declaration,
             int position
-        ) {
+        )
+        {
             switch (declaration.Parent.Kind())
             {
                 case SyntaxKind.LocalDeclarationStatement:
@@ -661,7 +670,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             SyntaxTokenList modifiersOpt,
             SyntaxToken semicolonOpt,
             int position
-        ) {
+        )
+        {
             if (variableDeclaration.Variables.Count == 0)
             {
                 return null;
@@ -712,7 +722,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
         private static VariableDeclaratorSyntax FindClosestDeclaratorWithInitializer(
             SeparatedSyntaxList<VariableDeclaratorSyntax> declarators,
             int position
-        ) {
+        )
+        {
             var d = GetItemIndexByPosition(declarators, position);
             var i = 0;
             while (true)
@@ -819,7 +830,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
         private static TextSpan? CreateSpanForAccessors(
             SyntaxList<AccessorDeclarationSyntax> accessors,
             int position
-        ) {
+        )
+        {
             for (var i = 0; i < accessors.Count; i++)
             {
                 if (position <= accessors[i].FullSpan.End || i == accessors.Count - 1)

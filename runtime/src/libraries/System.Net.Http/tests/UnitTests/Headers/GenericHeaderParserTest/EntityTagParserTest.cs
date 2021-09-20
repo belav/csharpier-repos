@@ -108,7 +108,8 @@ namespace System.Net.Http.Tests
             EntityTagHeaderValue expectedResult,
             int expectedIndex,
             bool supportsMultipleValues
-        ) {
+        )
+        {
             HttpHeaderParser parser = null;
             if (supportsMultipleValues)
             {
@@ -136,7 +137,8 @@ namespace System.Net.Http.Tests
             string input,
             int startIndex,
             bool supportsMultipleValues
-        ) {
+        )
+        {
             HttpHeaderParser parser = null;
             if (supportsMultipleValues)
             {

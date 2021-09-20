@@ -126,7 +126,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
 
         private static DefaultPageModelFactoryProvider CreateModelFactoryProvider(
             IPageModelActivatorProvider modelActivator = null
-        ) {
+        )
+        {
             if (modelActivator == null)
             {
                 var mockActivator = new Mock<IPageModelActivatorProvider>();

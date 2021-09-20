@@ -153,7 +153,8 @@ namespace System.Web.Http.ContentNegotiation
             Type objectType,
             HttpContentHeaders contentHeaders,
             MediaTypeHeaderValue mediaType
-        ) {
+        )
+        {
             base.SetDefaultContentHeaders(objectType, contentHeaders, mediaType);
             contentHeaders.TryAddWithoutValidation("Version", "1.3.5.0");
         }
@@ -163,7 +164,8 @@ namespace System.Web.Http.ContentNegotiation
             Stream readStream,
             HttpContent content,
             IFormatterLogger formatterLogger
-        ) {
+        )
+        {
             string stringContent = null;
 
             using (var reader = new StreamReader(readStream))
@@ -183,7 +185,8 @@ namespace System.Web.Http.ContentNegotiation
             Stream writeStream,
             HttpContent content,
             TransportContext transportContext
-        ) {
+        )
+        {
             var output = value.ToString();
             var writer = new StreamWriter(writeStream);
             writer.Write(output);
@@ -218,7 +221,8 @@ namespace System.Web.Http.ContentNegotiation
             Stream readStream,
             HttpContent content,
             IFormatterLogger formatterLogger
-        ) {
+        )
+        {
             object result = null;
 
             using (var reader = new StreamReader(readStream))
@@ -246,7 +250,8 @@ namespace System.Web.Http.ContentNegotiation
             Stream writeStream,
             HttpContent content,
             TransportContext transportContext
-        ) {
+        )
+        {
             var output = value == null ? String.Empty : value.ToString();
             var writer = new StreamWriter(writeStream);
             writer.Write(output);

@@ -205,7 +205,8 @@ namespace System.Xml
             public int GetLocalnameAndNamespaceUriAndHash(
                 out string localname,
                 out string namespaceUri
-            ) {
+            )
+            {
                 localname = this.name.localname;
                 namespaceUri = this.name.namespaceUri;
                 return this.hashCode = this.name.GetNSHashCode();
@@ -244,7 +245,8 @@ namespace System.Xml
                 NamespaceDecl? prevDecl,
                 int scope,
                 bool implied
-            ) {
+            )
+            {
                 this.prefix = prefix;
                 this.uri = nsuri;
                 this.scopeLink = nextInScope;
@@ -362,7 +364,8 @@ namespace System.Xml
             string baseUri,
             bool closeInput,
             XmlReaderSettings settings
-        ) {
+        )
+        {
             _xnt = settings.NameTable!;
             if (_xnt == null)
             {
@@ -1022,7 +1025,8 @@ namespace System.Xml
                     if (
                         this.NodeType == XmlNodeType.ProcessingInstruction
                         || this.NodeType == XmlNodeType.Comment
-                    ) {
+                    )
+                    {
                         while (
                             Read()
                             && (
@@ -1931,7 +1935,8 @@ namespace System.Xml
         public override object ReadContentAs(
             Type returnType,
             IXmlNamespaceResolver? namespaceResolver
-        ) {
+        )
+        {
             int origPos = _pos;
             try
             {
@@ -1943,7 +1948,8 @@ namespace System.Xml
                         if (
                             this.NodeType == XmlNodeType.Element
                             || this.NodeType == XmlNodeType.EndElement
-                        ) {
+                        )
+                        {
                             value = string.Empty;
                         }
                         else if (returnType == this.ValueType || returnType == typeof(object))
@@ -2032,7 +2038,8 @@ namespace System.Xml
                         if (
                             nsdecl.scope != -1
                             || (XmlNamespaceScope.All == scope && "xml" == nsdecl.prefix)
-                        ) {
+                        )
+                        {
                             // xmlns="" only ever reported via scope==local
                             if (nsdecl.prefix.Length > 0 || nsdecl.uri.Length > 0)
                                 nstable.Add(nsdecl.prefix, nsdecl.uri);
@@ -3495,7 +3502,8 @@ namespace System.Xml
                     (_textXmlReader.NodeType == XmlNodeType.XmlDeclaration)
                     && !_textXmlReader.Read()
                 )
-            ) {
+            )
+            {
                 _state = ScanState.Doc;
                 ReadDoc();
             }
@@ -4516,7 +4524,8 @@ namespace System.Xml
             BinXmlToken token,
             Type returnType,
             IXmlNamespaceResolver? namespaceResolver
-        ) {
+        )
+        {
             object value;
             CheckValueTokenBounds();
             switch (token)

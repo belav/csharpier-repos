@@ -26,7 +26,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
             int headerId,
             int majorVersion,
             int minorVersion
-        ) {
+        )
+        {
             _binaryHeaderEnum = binaryHeaderEnum;
             _topId = topId;
             _headerId = headerId;

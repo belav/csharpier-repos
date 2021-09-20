@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             Project project,
             IEnumerable<StateSet> stateSets,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!project.SupportsCompilation)
             {
                 return null;
@@ -32,7 +33,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     project,
                     out var compilationWithAnalyzers
                 )
-            ) {
+            )
+            {
                 // we have cached one, return that.
                 AssertAnalyzers(compilationWithAnalyzers, stateSets);
                 return compilationWithAnalyzers;
@@ -97,7 +99,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
         private static void AssertAnalyzers(
             CompilationWithAnalyzers? compilation,
             IEnumerable<StateSet> stateSets
-        ) {
+        )
+        {
             if (compilation == null)
             {
                 // this can happen if project doesn't support compilation or no stateSets are given.

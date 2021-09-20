@@ -62,7 +62,8 @@ namespace System.CodeDom.Compiler
         public static CodeDomProvider CreateProvider(
             string language,
             System.Collections.Generic.IDictionary<string, string> providerOptions
-        ) {
+        )
+        {
             CompilerInfo compilerInfo = GetCompilerInfo(language);
             return compilerInfo.CreateProvider(providerOptions);
         }
@@ -216,7 +217,8 @@ namespace System.CodeDom.Compiler
             CodeTypeMember member,
             TextWriter writer,
             CodeGeneratorOptions options
-        ) {
+        )
+        {
             throw new NotImplementedException(SR.NotSupported_CodeDomAPI);
         }
 
@@ -258,10 +260,8 @@ namespace System.CodeDom.Compiler
         private sealed class ConfigurationErrorsException : SystemException
         {
             public ConfigurationErrorsException(string message) : base(message) { }
-            public ConfigurationErrorsException(
-                SerializationInfo info,
-                StreamingContext context
-            ) : base(info, context)
+            public ConfigurationErrorsException(SerializationInfo info, StreamingContext context)
+                : base(info, context)
             {
                 throw new PlatformNotSupportedException();
             }

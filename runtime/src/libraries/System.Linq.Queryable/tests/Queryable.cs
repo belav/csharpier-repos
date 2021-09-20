@@ -145,7 +145,8 @@ namespace System.Linq.Tests
             Type a,
             Type b,
             IEnumerable<string> excludedMethods
-        ) {
+        )
+        {
             var dex = new HashSet<string>(excludedMethods);
 
             var aMethods = a.GetMethods(BindingFlags.Static | BindingFlags.Public)

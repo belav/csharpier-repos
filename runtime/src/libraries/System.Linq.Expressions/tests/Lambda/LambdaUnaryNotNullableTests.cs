@@ -41,7 +41,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-            ) {
+            )
+            {
                 VerifyUnaryNotNullableSByte(value, useInterpreter);
             }
         }
@@ -51,7 +52,8 @@ namespace System.Linq.Expressions.Tests
         {
             foreach (
                 short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue }
-            ) {
+            )
+            {
                 VerifyUnaryNotNullableShort(value, useInterpreter);
             }
         }

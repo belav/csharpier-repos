@@ -64,7 +64,8 @@ namespace System.Data.Tests
             object operand1,
             object operand2,
             object result
-        ) {
+        )
+        {
             var table = new DataTable();
             table.Columns.Add("Operand1", operandType1);
             table.Columns.Add("Operand2", operandType2);

@@ -134,7 +134,8 @@ namespace System.Dynamic
         public virtual DynamicMetaObject BindSetMember(
             SetMemberBinder binder,
             DynamicMetaObject value
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(binder, nameof(binder));
             return binder.FallbackSetMember(this, value);
         }
@@ -159,7 +160,8 @@ namespace System.Dynamic
         public virtual DynamicMetaObject BindGetIndex(
             GetIndexBinder binder,
             DynamicMetaObject[] indexes
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(binder, nameof(binder));
             return binder.FallbackGetIndex(this, indexes);
         }
@@ -175,7 +177,8 @@ namespace System.Dynamic
             SetIndexBinder binder,
             DynamicMetaObject[] indexes,
             DynamicMetaObject value
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(binder, nameof(binder));
             return binder.FallbackSetIndex(this, indexes, value);
         }
@@ -189,7 +192,8 @@ namespace System.Dynamic
         public virtual DynamicMetaObject BindDeleteIndex(
             DeleteIndexBinder binder,
             DynamicMetaObject[] indexes
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(binder, nameof(binder));
             return binder.FallbackDeleteIndex(this, indexes);
         }
@@ -203,7 +207,8 @@ namespace System.Dynamic
         public virtual DynamicMetaObject BindInvokeMember(
             InvokeMemberBinder binder,
             DynamicMetaObject[] args
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(binder, nameof(binder));
             return binder.FallbackInvokeMember(this, args);
         }
@@ -229,7 +234,8 @@ namespace System.Dynamic
         public virtual DynamicMetaObject BindCreateInstance(
             CreateInstanceBinder binder,
             DynamicMetaObject[] args
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(binder, nameof(binder));
             return binder.FallbackCreateInstance(this, args);
         }
@@ -254,7 +260,8 @@ namespace System.Dynamic
         public virtual DynamicMetaObject BindBinaryOperation(
             BinaryOperationBinder binder,
             DynamicMetaObject arg
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(binder, nameof(binder));
             return binder.FallbackBinaryOperation(this, arg);
         }
@@ -313,7 +320,8 @@ namespace System.Dynamic
                     || !idoMetaObject.HasValue
                     || idoMetaObject.Value == null
                     || (object)idoMetaObject.Expression != (object)expression
-                ) {
+                )
+                {
                     throw System.Linq.Expressions.Error.InvalidMetaObjectCreated(ido.GetType());
                 }
 

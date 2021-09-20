@@ -13,7 +13,8 @@ namespace System.Web.Mvc
         public ReflectedParameterDescriptor(
             ParameterInfo parameterInfo,
             ActionDescriptor actionDescriptor
-        ) {
+        )
+        {
             if (parameterInfo == null)
             {
                 throw new ArgumentNullException("parameterInfo");

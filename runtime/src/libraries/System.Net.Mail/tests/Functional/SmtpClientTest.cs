@@ -345,7 +345,8 @@ namespace System.Net.Mail.Tests
                             SocketType.Stream,
                             ProtocolType.Tcp
                         )
-                    ) {
+                    )
+                    {
                         serverSocket.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                         serverSocket.Listen(1);
 
@@ -443,7 +444,8 @@ namespace System.Net.Mail.Tests
             bool useAsyncSend,
             bool useSevenBit,
             bool useSmtpUTF8
-        ) {
+        )
+        {
             // If the server support `SMTPUTF8` and use `SmtpDeliveryFormat.International`, the server should received this subject.
             const string subjectText = "Test \u6d4b\u8bd5 Contain \u5305\u542b UTF8";
 

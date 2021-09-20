@@ -110,7 +110,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 
         public ImmutableArray<TItem> AggregateItems<TKey>(
             IEnumerable<IGrouping<TKey, TItem>> groupedItems
-        ) {
+        )
+        {
             using var _0 = ArrayBuilder<TItem>.GetInstance(out var aggregateItems);
             using var _1 = ArrayBuilder<string>.GetInstance(out var projectNames);
             using var _2 = ArrayBuilder<Guid>.GetInstance(out var projectGuids);
@@ -272,7 +273,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             ImmutableArray<SubscriptionWithoutLock> snapshot,
             TableEntriesFactory<TItem, TData> factory,
             bool newFactory
-        ) {
+        )
+        {
             for (var i = 0; i < snapshot.Length; i++)
             {
                 snapshot[i].AddOrUpdate(factory, newFactory);
@@ -282,7 +284,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
         private static void NotifySubscriptionOnDataRemoved_NoLock(
             ImmutableArray<SubscriptionWithoutLock> snapshot,
             TableEntriesFactory<TItem, TData> factory
-        ) {
+        )
+        {
             for (var i = 0; i < snapshot.Length; i++)
             {
                 snapshot[i].Remove(factory);
@@ -293,7 +296,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             TData data,
             out TableEntriesFactory<TItem, TData> factory,
             out bool newFactory
-        ) {
+        )
+        {
             newFactory = false;
 
             var key = GetOrUpdateAggregationKey(data);
@@ -362,7 +366,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             public SubscriptionWithoutLock(
                 AbstractTableDataSource<TItem, TData> source,
                 ITableDataSink sink
-            ) {
+            )
+            {
                 _source = source;
                 _sink = sink;
 
@@ -417,7 +422,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                     ImmutableArray<SubscriptionWithoutLock>,
                     ImmutableArray<SubscriptionWithoutLock>
                 > update
-            ) {
+            )
+            {
                 while (true)
                 {
                     var current = _source._subscriptions;

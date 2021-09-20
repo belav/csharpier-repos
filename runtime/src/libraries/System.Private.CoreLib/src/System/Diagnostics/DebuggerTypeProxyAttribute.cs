@@ -15,7 +15,8 @@ namespace System.Diagnostics
 
         public DebuggerTypeProxyAttribute(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type
-        ) {
+        )
+        {
             if (type == null)
             {
                 throw new ArgumentNullException(nameof(type));
@@ -26,7 +27,8 @@ namespace System.Diagnostics
 
         public DebuggerTypeProxyAttribute(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] string typeName
-        ) {
+        )
+        {
             ProxyTypeName = typeName;
         }
 

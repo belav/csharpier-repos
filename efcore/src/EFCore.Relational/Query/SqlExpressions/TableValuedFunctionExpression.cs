@@ -30,11 +30,12 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         public TableValuedFunctionExpression(
             IStoreFunction storeFunction,
             IReadOnlyList<SqlExpression> arguments
-        ) : this(
-            storeFunction.Name.Substring(0, 1).ToLowerInvariant(),
-            Check.NotNull(storeFunction, nameof(storeFunction)),
-            Check.NotNull(arguments, nameof(arguments))
-        ) { }
+        )
+            : this(
+                storeFunction.Name.Substring(0, 1).ToLowerInvariant(),
+                Check.NotNull(storeFunction, nameof(storeFunction)),
+                Check.NotNull(arguments, nameof(arguments))
+            ) { }
 
         private TableValuedFunctionExpression(
             string alias,

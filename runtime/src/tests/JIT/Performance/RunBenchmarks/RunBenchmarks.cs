@@ -134,7 +134,8 @@ namespace BenchmarkConsoleApplication
             bool useSSE,
             bool useAVX,
             int expectedResults
-        ) {
+        )
+        {
             Name = name;
             SuiteName = suiteName;
             Tags = tags;
@@ -489,7 +490,8 @@ namespace BenchmarkConsoleApplication
             bool useSSE,
             bool useAVX,
             int expectedResults
-        ) {
+        )
+        {
             BenchmarkSuite benchmarkSuite;
             BenchmarkTagSet benchmarkTagSet;
             Benchmark benchmark;

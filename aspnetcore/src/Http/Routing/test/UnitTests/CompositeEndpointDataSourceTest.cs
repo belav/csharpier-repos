@@ -157,7 +157,8 @@ namespace Microsoft.AspNetCore.Routing
             object defaults = null,
             int order = 0,
             string routeName = null
-        ) {
+        )
+        {
             return new RouteEndpoint(
                 TestConstants.EmptyRequestDelegate,
                 RoutePatternFactory.Parse(template, defaults, parameterPolicies: null),

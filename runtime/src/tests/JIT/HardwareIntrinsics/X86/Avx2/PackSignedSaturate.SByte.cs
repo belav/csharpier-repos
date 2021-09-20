@@ -142,7 +142,8 @@ namespace JIT.HardwareIntrinsics.X86
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfinArray2
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -229,7 +230,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             public void RunStructFldScenario_Load(
                 SimpleBinaryOpTest__PackSignedSaturateSByte testClass
-            ) {
+            )
+            {
                 fixed (Vector256<Int16>* pFld1 = &_fld1)fixed (Vector256<Int16>* pFld2 = &_fld2)
                 {
                     var result = Avx2.PackSignedSaturate(
@@ -446,7 +448,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             fixed (Vector256<Int16>* pClsVar1 = &_clsVar1)fixed (
                 Vector256<Int16>* pClsVar2 = &_clsVar2
-            ) {
+            )
+            {
                 var result = Avx2.PackSignedSaturate(
                     Avx.LoadVector256((Int16*)(pClsVar1)),
                     Avx.LoadVector256((Int16*)(pClsVar2))
@@ -512,7 +515,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             fixed (Vector256<Int16>* pFld1 = &test._fld1)fixed (
                 Vector256<Int16>* pFld2 = &test._fld2
-            ) {
+            )
+            {
                 var result = Avx2.PackSignedSaturate(
                     Avx.LoadVector256((Int16*)(pFld1)),
                     Avx.LoadVector256((Int16*)(pFld2))
@@ -616,7 +620,8 @@ namespace JIT.HardwareIntrinsics.X86
             Vector256<Int16> op2,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Int16[] inArray1 = new Int16[Op1ElementCount];
             Int16[] inArray2 = new Int16[Op2ElementCount];
             SByte[] outArray = new SByte[RetElementCount];
@@ -637,7 +642,8 @@ namespace JIT.HardwareIntrinsics.X86
             void* op2,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Int16[] inArray1 = new Int16[Op1ElementCount];
             Int16[] inArray2 = new Int16[Op2ElementCount];
             SByte[] outArray = new SByte[RetElementCount];
@@ -666,7 +672,8 @@ namespace JIT.HardwareIntrinsics.X86
             Int16[] right,
             SByte[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (result[0] != (sbyte)Math.Clamp(left[0], sbyte.MinValue, sbyte.MaxValue))
@@ -704,7 +711,8 @@ namespace JIT.HardwareIntrinsics.X86
                                             )
                                   )
                         )
-                    ) {
+                    )
+                    {
                         succeeded = false;
                         break;
                     }

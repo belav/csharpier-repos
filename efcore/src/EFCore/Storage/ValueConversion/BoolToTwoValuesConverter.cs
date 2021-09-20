@@ -38,7 +38,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         private static Expression<Func<bool, TProvider>> ToProvider(
             TProvider falseValue,
             TProvider trueValue
-        ) {
+        )
+        {
             var param = Expression.Parameter(typeof(bool), "v");
             return Expression.Lambda<Func<bool, TProvider>>(
                 Expression.Condition(

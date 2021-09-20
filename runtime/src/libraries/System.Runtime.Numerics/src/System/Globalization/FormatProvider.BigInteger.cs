@@ -17,7 +17,8 @@ namespace System.Globalization
             NumberFormatInfo numberFormatInfo,
             char[] digits,
             int startIndex
-        ) {
+        )
+        {
             unsafe
             {
                 fixed (char* overrideDigits = digits)
@@ -61,7 +62,8 @@ namespace System.Globalization
             out int precision,
             out int scale,
             out bool sign
-        ) {
+        )
+        {
             FormatProvider.Number.NumberBuffer numberBuffer = default;
             unsafe
             {
@@ -82,7 +84,8 @@ namespace System.Globalization
                     numberFormatInfo,
                     parseDecimal: false
                 )
-            ) {
+            )
+            {
                 precision = default(int);
                 scale = default(int);
                 sign = default(bool);

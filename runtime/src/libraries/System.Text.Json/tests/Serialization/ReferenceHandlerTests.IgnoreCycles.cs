@@ -423,7 +423,8 @@ namespace System.Text.Json.Serialization.Tests
             T obj,
             string expected,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             string json;
             Type objType = typeof(T);
 

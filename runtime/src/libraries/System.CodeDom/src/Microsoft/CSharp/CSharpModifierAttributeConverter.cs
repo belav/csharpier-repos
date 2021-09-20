@@ -20,7 +20,8 @@ namespace Microsoft.CSharp
             ITypeDescriptorContext context,
             CultureInfo culture,
             object value
-        ) {
+        )
+        {
             string name = value as string;
             if (name != null)
             {
@@ -42,7 +43,8 @@ namespace Microsoft.CSharp
             CultureInfo culture,
             object value,
             Type destinationType
-        ) {
+        )
+        {
             if (destinationType == null)
             {
                 throw new ArgumentNullException(nameof(destinationType));

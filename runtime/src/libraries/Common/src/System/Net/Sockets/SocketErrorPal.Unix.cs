@@ -156,7 +156,8 @@ namespace System.Net.Sockets
         internal static bool TryGetNativeErrorForSocketError(
             SocketError error,
             out Interop.Error errno
-        ) {
+        )
+        {
             return s_socketErrorToNativeError.TryGetValue(error, out errno);
         }
     }

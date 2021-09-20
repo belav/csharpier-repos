@@ -50,7 +50,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                     int argumentCount,
                     string argumentName,
                     bool isCaseSensitive
-                ) {
+                )
+                {
                     SelectBestItem(
                         ref selectedItem,
                         ref userSelected,
@@ -78,7 +79,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                     int parameterIndex,
                     string parameterName,
                     bool isCaseSensitive
-                ) {
+                )
+                {
                     if (!string.IsNullOrEmpty(parameterName))
                     {
                         var comparer = isCaseSensitive
@@ -104,12 +106,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                     int argumentCount,
                     string name,
                     bool isCaseSensitive
-                ) {
+                )
+                {
                     // If the current item is still applicable, then just keep it.
                     if (
                         filteredItems.Contains(currentItem)
                         && IsApplicable(currentItem, argumentCount, name, isCaseSensitive)
-                    ) {
+                    )
+                    {
                         // If the current item was user-selected, we keep it as such.
                         return;
                     }
@@ -153,7 +157,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                     if (
                         currentItem.IsVariadic
                         || currentItem.Parameters.Length == lastItem.Parameters.Length
-                    ) {
+                    )
+                    {
                         return;
                     }
 
@@ -165,7 +170,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                     int argumentCount,
                     string name,
                     bool isCaseSensitive
-                ) {
+                )
+                {
                     // If they provided a name, then the item is only valid if it has a parameter that
                     // matches that name.
                     if (name != null)

@@ -47,7 +47,8 @@ internal static partial class Interop
             UNICODE_STRING* objectName,
             ObjectAttributes attributes,
             IntPtr rootDirectory
-        ) {
+        )
+        {
             Length = (uint)sizeof(OBJECT_ATTRIBUTES);
             RootDirectory = rootDirectory;
             ObjectName = objectName;

@@ -377,7 +377,8 @@ namespace System.IO.Tests
             string path,
             string normalExpected,
             string legacyExpected
-        ) {
+        )
+        {
             string expected = PathFeatures.IsUsingLegacyPathNormalization()
                 ? legacyExpected
                 : normalExpected;
@@ -501,7 +502,8 @@ namespace System.IO.Tests
             string path,
             string basePath,
             string expected
-        ) {
+        )
+        {
             Assert.Equal(expected, Path.GetFullPath(path, basePath));
         }
 
@@ -546,7 +548,8 @@ namespace System.IO.Tests
             string path,
             string basePath,
             string expected
-        ) {
+        )
+        {
             Assert.Equal(expected, Path.GetFullPath(path, basePath));
             Assert.Equal(expected, Path.GetFullPath(path, @"\\.\" + basePath));
             Assert.Equal(expected, Path.GetFullPath(path, @"\\?\" + basePath));
@@ -703,7 +706,8 @@ namespace System.IO.Tests
             string path,
             string basePath,
             string expected
-        ) {
+        )
+        {
             Assert.Equal(expected, Path.GetFullPath(path, basePath));
             Assert.Equal(@"\\.\" + expected, Path.GetFullPath(path, @"\\.\" + basePath));
             Assert.Equal(@"\\?\" + expected, Path.GetFullPath(path, @"\\?\" + basePath));

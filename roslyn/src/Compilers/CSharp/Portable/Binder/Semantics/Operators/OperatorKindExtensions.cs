@@ -54,7 +54,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static UnaryOperatorKind WithOverflowChecksIfApplicable(
             this UnaryOperatorKind kind,
             bool enabled
-        ) {
+        )
+        {
             if (enabled)
             {
                 // If it's dynamic and we're in a checked context then just mark it as checked,
@@ -122,7 +123,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static UnaryOperatorKind WithType(
             this UnaryOperatorKind kind,
             UnaryOperatorKind type
-        ) {
+        )
+        {
             Debug.Assert(kind == (kind & ~UnaryOperatorKind.TypeMask));
             Debug.Assert(type == (type & UnaryOperatorKind.TypeMask));
             return kind | type;
@@ -187,7 +189,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static BinaryOperatorKind WithType(
             this BinaryOperatorKind kind,
             BinaryOperatorKind type
-        ) {
+        )
+        {
             Debug.Assert(kind == (kind & ~BinaryOperatorKind.TypeMask));
             Debug.Assert(type == (type & BinaryOperatorKind.TypeMask));
             return kind | type;
@@ -244,7 +247,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static BinaryOperatorKind WithOverflowChecksIfApplicable(
             this BinaryOperatorKind kind,
             bool enabled
-        ) {
+        )
+        {
             if (enabled)
             {
                 // If it's a dynamic binop then make it checked. Let the lowering
@@ -344,7 +348,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static ExpressionType ToExpressionType(
             this BinaryOperatorKind kind,
             bool isCompoundAssignment
-        ) {
+        )
+        {
             if (isCompoundAssignment)
             {
                 switch (kind.Operator())

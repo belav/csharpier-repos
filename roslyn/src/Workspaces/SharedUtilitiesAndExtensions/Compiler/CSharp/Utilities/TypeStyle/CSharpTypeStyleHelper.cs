@@ -77,7 +77,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             SemanticModel semanticModel,
             OptionSet optionSet,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 typeName?.FirstAncestorOrSelf<SyntaxNode>(
                     a =>
@@ -88,7 +89,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                         )
                 )
                 is not { } declaration
-            ) {
+            )
+            {
                 return default;
             }
 
@@ -127,7 +129,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             SyntaxNode node,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(
                 node.IsKind(
                     SyntaxKind.VariableDeclaration,
@@ -165,7 +168,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
         public virtual bool ShouldAnalyzeVariableDeclaration(
             VariableDeclarationSyntax variableDeclaration,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // implicit type is applicable only for local variables and
             // such declarations cannot have multiple declarators and
             // must have an initializer.
@@ -191,7 +195,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             DeclarationExpressionSyntax declaration,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Ensure that deconstruction assignment or foreach variable statement have a non-null deconstruct method.
             DeconstructionInfo? deconstructionInfoOpt = null;
             switch (declaration.Parent)

@@ -81,7 +81,8 @@ namespace Microsoft.Extensions.Options
             TDep dependency,
             Func<TOptions, TDep, bool> validation,
             string failureMessage
-        ) {
+        )
+        {
             Name = name;
             Validation = validation;
             FailureMessage = failureMessage;
@@ -154,7 +155,8 @@ namespace Microsoft.Extensions.Options
             TDep2 dependency2,
             Func<TOptions, TDep1, TDep2, bool> validation,
             string failureMessage
-        ) {
+        )
+        {
             Name = name;
             Validation = validation;
             FailureMessage = failureMessage;
@@ -236,7 +238,8 @@ namespace Microsoft.Extensions.Options
             TDep3 dependency3,
             Func<TOptions, TDep1, TDep2, TDep3, bool> validation,
             string failureMessage
-        ) {
+        )
+        {
             Name = name;
             Validation = validation;
             FailureMessage = failureMessage;
@@ -327,7 +330,8 @@ namespace Microsoft.Extensions.Options
             TDep4 dependency4,
             Func<TOptions, TDep1, TDep2, TDep3, TDep4, bool> validation,
             string failureMessage
-        ) {
+        )
+        {
             Name = name;
             Validation = validation;
             FailureMessage = failureMessage;
@@ -393,7 +397,8 @@ namespace Microsoft.Extensions.Options
                             Dependency4
                         )
                     ).Value
-                ) {
+                )
+                {
                     return ValidateOptionsResult.Success;
                 }
                 return ValidateOptionsResult.Fail(FailureMessage);
@@ -436,7 +441,8 @@ namespace Microsoft.Extensions.Options
             TDep5 dependency5,
             Func<TOptions, TDep1, TDep2, TDep3, TDep4, TDep5, bool> validation,
             string failureMessage
-        ) {
+        )
+        {
             Name = name;
             Validation = validation;
             FailureMessage = failureMessage;
@@ -509,7 +515,8 @@ namespace Microsoft.Extensions.Options
                             Dependency5
                         )
                     ).Value
-                ) {
+                )
+                {
                     return ValidateOptionsResult.Success;
                 }
                 return ValidateOptionsResult.Fail(FailureMessage);

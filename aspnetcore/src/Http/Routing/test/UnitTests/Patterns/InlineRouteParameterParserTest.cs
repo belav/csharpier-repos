@@ -949,7 +949,8 @@ namespace Microsoft.AspNetCore.Routing.Patterns
         public void ParseRouteParameter_ParameterWithoutInlineConstraint_ReturnsTemplatePartWithEmptyInlineValues(
             string parameter,
             string expectedParameterName
-        ) {
+        )
+        {
             // Arrange & Act
             var templatePart = ParseParameter(parameter);
 

@@ -8,10 +8,8 @@ namespace System.Security.Policy
     )]
     public sealed partial class FirstMatchCodeGroup : CodeGroup
     {
-        public FirstMatchCodeGroup(
-            IMembershipCondition membershipCondition,
-            PolicyStatement policy
-        ) : base(default(IMembershipCondition), default(PolicyStatement)) { }
+        public FirstMatchCodeGroup(IMembershipCondition membershipCondition, PolicyStatement policy)
+            : base(default(IMembershipCondition), default(PolicyStatement)) { }
         public override string MergeLogic
         {
             get { return null; }

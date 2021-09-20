@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             ReferenceParams referenceParams,
             RequestContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(context.ClientCapabilities.HasVisualStudioLspCapability());
 
             var document = context.Document;

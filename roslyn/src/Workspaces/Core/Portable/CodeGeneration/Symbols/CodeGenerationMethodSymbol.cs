@@ -34,15 +34,17 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             string documentationCommentXml = null,
             MethodKind methodKind = MethodKind.Ordinary,
             bool isInitOnly = false
-        ) : base(
-            containingType,
-            attributes,
-            declaredAccessibility,
-            modifiers,
-            name,
-            returnTypeAttributes,
-            documentationCommentXml
-        ) {
+        )
+            : base(
+                containingType,
+                attributes,
+                declaredAccessibility,
+                modifiers,
+                name,
+                returnTypeAttributes,
+                documentationCommentXml
+            )
+        {
             this.ReturnType = returnType;
             this.RefKind = refKind;
 

@@ -9,7 +9,8 @@ namespace System.Text.Json.Serialization.Converters
             ref Utf8JsonReader reader,
             Type typeToConvert,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             return JsonElement.ParseValue(ref reader);
         }
 
@@ -17,7 +18,8 @@ namespace System.Text.Json.Serialization.Converters
             Utf8JsonWriter writer,
             JsonElement value,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             value.WriteTo(writer);
         }
     }

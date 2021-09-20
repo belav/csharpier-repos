@@ -21,14 +21,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             Solution solution,
             IGraphContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (
                 Logger.LogBlock(
                     FunctionId.GraphQuery_IsCalledBy,
                     KeyValueLogMessage.Create(LogType.UserAction),
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 var graphBuilder = await GraphBuilder.CreateForInputNodesAsync(
                         solution,
                         context.InputNodes,

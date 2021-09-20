@@ -53,16 +53,18 @@ namespace System.Runtime.CompilerServices
         public void AwaitOnCompleted<TAwaiter, TStateMachine>(
             ref TAwaiter awaiter,
             ref TStateMachine stateMachine
-        ) where TAwaiter : INotifyCompletion
-          where TStateMachine : IAsyncStateMachine =>
+        )
+            where TAwaiter : INotifyCompletion
+            where TStateMachine : IAsyncStateMachine =>
             AwaitOnCompleted(ref awaiter, ref stateMachine, ref m_task);
 
         internal static void AwaitOnCompleted<TAwaiter, TStateMachine>(
             ref TAwaiter awaiter,
             ref TStateMachine stateMachine,
             ref Task<TResult>? taskField
-        ) where TAwaiter : INotifyCompletion
-          where TStateMachine : IAsyncStateMachine
+        )
+            where TAwaiter : INotifyCompletion
+            where TStateMachine : IAsyncStateMachine
         {
             try
             {
@@ -87,8 +89,9 @@ namespace System.Runtime.CompilerServices
         public void AwaitUnsafeOnCompleted<TAwaiter, TStateMachine>(
             ref TAwaiter awaiter,
             ref TStateMachine stateMachine
-        ) where TAwaiter : ICriticalNotifyCompletion
-          where TStateMachine : IAsyncStateMachine =>
+        )
+            where TAwaiter : ICriticalNotifyCompletion
+            where TStateMachine : IAsyncStateMachine =>
             AwaitUnsafeOnCompleted(ref awaiter, ref stateMachine, ref m_task);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -96,8 +99,9 @@ namespace System.Runtime.CompilerServices
             ref TAwaiter awaiter,
             ref TStateMachine stateMachine,
             [NotNull] ref Task<TResult>? taskField
-        ) where TAwaiter : ICriticalNotifyCompletion
-          where TStateMachine : IAsyncStateMachine
+        )
+            where TAwaiter : ICriticalNotifyCompletion
+            where TStateMachine : IAsyncStateMachine
         {
             IAsyncStateMachineBox box = GetStateMachineBox(ref stateMachine, ref taskField);
             AwaitUnsafeOnCompleted(ref awaiter, box);
@@ -135,7 +139,8 @@ namespace System.Runtime.CompilerServices
             }
             else if (
                 (null != (object?)default(TAwaiter)) && (awaiter is IStateMachineBoxAwareAwaiter)
-            ) {
+            )
+            {
                 try
                 {
                     ((IStateMachineBoxAwareAwaiter)awaiter).AwaitUnsafeOnCompleted(box);
@@ -537,7 +542,8 @@ namespace System.Runtime.CompilerServices
         internal static void SetNotificationForWaitCompletion(
             bool enabled,
             [NotNull] ref Task<TResult>? taskField
-        ) {
+        )
+        {
             // Get the task (forcing initialization if not already initialized), and set debug notification
             (taskField ??= CreateWeaklyTypedStateMachineBox()).SetNotificationForWaitCompletion(
                 enabled

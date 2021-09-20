@@ -57,7 +57,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddWebEncoders(
             this IServiceCollection services,
             Action<WebEncoderOptions> setupAction
-        ) {
+        )
+        {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));
@@ -77,7 +78,8 @@ namespace Microsoft.Extensions.DependencyInjection
         private static Func<IServiceProvider, TService> CreateFactory<TService>(
             Func<TService> defaultFactory,
             Func<TextEncoderSettings, TService> customSettingsFactory
-        ) {
+        )
+        {
             return serviceProvider =>
             {
                 var settings = serviceProvider?.GetService<

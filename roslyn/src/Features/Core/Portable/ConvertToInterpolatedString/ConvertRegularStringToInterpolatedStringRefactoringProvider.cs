@@ -100,7 +100,8 @@ namespace Microsoft.CodeAnalysis.ConvertToInterpolatedString
             Document document,
             SyntaxNode literalExpression,
             bool isVerbatim
-        ) {
+        )
+        {
             var generator = SyntaxGenerator.GetGenerator(document);
             var text = literalExpression.GetFirstToken().Text;
             var valueText = literalExpression.GetFirstToken().ValueText;
@@ -123,7 +124,8 @@ namespace Microsoft.CodeAnalysis.ConvertToInterpolatedString
             Document document,
             SyntaxNode root,
             SyntaxToken token
-        ) {
+        )
+        {
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
             var literalExpression = token.GetRequiredParent();
             return Task.FromResult(
@@ -144,9 +146,8 @@ namespace Microsoft.CodeAnalysis.ConvertToInterpolatedString
         {
             internal override CodeActionPriority Priority => CodeActionPriority.Low;
 
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(FeaturesResources.Convert_to_interpolated_string, createChangedDocument) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(FeaturesResources.Convert_to_interpolated_string, createChangedDocument) { }
         }
     }
 }

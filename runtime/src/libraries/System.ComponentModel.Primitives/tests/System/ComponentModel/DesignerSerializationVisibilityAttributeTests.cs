@@ -16,7 +16,8 @@ namespace System.ComponentModel.Tests
         public static void Ctor_Visibility(
             DesignerSerializationVisibility visibility,
             bool expectedIsDefaultAttribute
-        ) {
+        )
+        {
             var attribute = new DesignerSerializationVisibilityAttribute(visibility);
             Assert.Equal(visibility, attribute.Visibility);
             Assert.Equal(expectedIsDefaultAttribute, attribute.IsDefaultAttribute());
@@ -65,7 +66,8 @@ namespace System.ComponentModel.Tests
             DesignerSerializationVisibilityAttribute attribute,
             object other,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, attribute.Equals(other));
             if (other is DesignerSerializationVisibilityAttribute)
             {
@@ -107,7 +109,8 @@ namespace System.ComponentModel.Tests
             DesignerSerializationVisibilityAttribute attribute,
             DesignerSerializationVisibility expectedVisibility,
             bool expectedIsDefaultAttribute
-        ) {
+        )
+        {
             Assert.Equal(expectedVisibility, attribute.Visibility);
             Assert.Equal(expectedIsDefaultAttribute, attribute.IsDefaultAttribute());
         }

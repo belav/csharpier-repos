@@ -40,7 +40,8 @@ namespace Roslyn.Test.Utilities.CoreClr
             int expectedLength,
             out string output,
             out string errorOutput
-        ) {
+        )
+        {
             var outputWriter = new CappedStringWriter(expectedLength);
             var errorOutputWriter = new CappedStringWriter(expectedLength);
 

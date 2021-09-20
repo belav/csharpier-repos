@@ -14,7 +14,8 @@ namespace System.Threading
             string? name,
             out bool createdNew,
             EventWaitHandleSecurity? eventSecurity
-        ) {
+        )
+        {
             return new EventWaitHandle(initialState, mode, name, out createdNew, eventSecurity);
         }
 
@@ -27,7 +28,8 @@ namespace System.Threading
             string name,
             EventWaitHandleRights rights,
             [NotNullWhen(true)] out EventWaitHandle result
-        ) {
+        )
+        {
             return EventWaitHandle.TryOpenExisting(name, rights, out result);
         }
     }

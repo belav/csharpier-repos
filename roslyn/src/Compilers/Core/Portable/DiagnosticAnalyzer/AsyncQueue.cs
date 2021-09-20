@@ -254,7 +254,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         )]
         public Task<TElement> DequeueAsync(
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             var optionalResult = TryDequeueAsync(cancellationToken);
             if (optionalResult.IsCompletedSuccessfully)
             {
@@ -268,7 +269,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
             static async Task<TElement> dequeueSlowAsync(
                 ValueTask<Optional<TElement>> optionalResult
-            ) {
+            )
+            {
                 var result = await optionalResult.ConfigureAwait(false);
                 if (!result.HasValue)
                     new CancellationToken(canceled: true).ThrowIfCancellationRequested();
@@ -325,7 +327,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         private static void AttachCancellation<T>(
             TaskCompletionSource<T> taskCompletionSource,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!cancellationToken.CanBeCanceled || taskCompletionSource.Task.IsCompleted)
                 return;
 
@@ -387,7 +390,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             internal CancelableTaskCompletionSource(
                 TaskCompletionSource<T> taskCompletionSource,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 TaskCompletionSource = taskCompletionSource;
                 CancellationToken = cancellationToken;
             }

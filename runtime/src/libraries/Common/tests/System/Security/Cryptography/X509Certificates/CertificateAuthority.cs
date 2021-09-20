@@ -103,7 +103,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.Common
             string aiaHttpUrl,
             string cdpUrl,
             string ocspUrl
-        ) {
+        )
+        {
             _cert = cert;
             AiaHttpUri = aiaHttpUrl;
             CdpUri = cdpUrl;
@@ -149,7 +150,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.Common
             string subject,
             RSA publicKey,
             int? depthLimit = null
-        ) {
+        )
+        {
             return CreateCertificate(
                 subject,
                 publicKey,
@@ -171,7 +173,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.Common
             string subject,
             RSA publicKey,
             X509ExtensionCollection extensions
-        ) {
+        )
+        {
             return CreateCertificate(subject, publicKey, TimeSpan.FromSeconds(2), extensions);
         }
 
@@ -204,7 +207,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.Common
         private void RebuildRootWithRevocation(
             X509Extension cdpExtension,
             X509Extension aiaExtension
-        ) {
+        )
+        {
             X500DistinguishedName subjectName = _cert.SubjectName;
 
             if (!subjectName.RawData.SequenceEqual(_cert.IssuerName.RawData))
@@ -241,7 +245,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.Common
                     new DateTimeOffset(_cert.NotAfter),
                     serial
                 )
-            ) {
+            )
+            {
                 _cert = tmp.CopyWithPrivateKey(rsa);
             }
         }
@@ -252,7 +257,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.Common
             TimeSpan nestingBuffer,
             X509ExtensionCollection extensions,
             bool ocspResponder = false
-        ) {
+        )
+        {
             if (_cdpExtension == null && CdpUri != null)
             {
                 _cdpExtension = CreateCdpExtension(CdpUri);
@@ -472,7 +478,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.Common
         internal byte[] BuildOcspResponse(
             ReadOnlyMemory<byte> certId,
             ReadOnlyMemory<byte> nonceExtension
-        ) {
+        )
+        {
             DateTimeOffset now = DateTimeOffset.UtcNow;
 
             DateTimeOffset revokedTime = default;
@@ -647,7 +654,8 @@ SingleResponse ::= SEQUENCE {
         private CertStatus CheckRevocation(
             ReadOnlyMemory<byte> certId,
             ref DateTimeOffset revokedTime
-        ) {
+        )
+        {
             AsnReader reader = new AsnReader(certId, AsnEncodingRules.DER);
             AsnReader idReader = reader.ReadSequence();
             reader.ThrowIfNotEmpty();
@@ -857,7 +865,8 @@ SingleResponse ::= SEQUENCE {
             string subjectName = null,
             int keySize = DefaultKeySize,
             X509ExtensionCollection extensions = null
-        ) {
+        )
+        {
             bool rootDistributionViaHttp = !pkiOptions.HasFlag(
                 PkiOptions.NoRootCertDistributionUri
             );
@@ -943,7 +952,8 @@ SingleResponse ::= SEQUENCE {
                     int intermediateIndex = 0;
                     intermediateIndex < intermediateAuthorityCount;
                     intermediateIndex++
-                ) {
+                )
+                {
                     using RSA intermediateKey = RSA.Create(keySize);
 
                     // Don't dispose this, it's being transferred to the CertificateAuthority
@@ -1019,7 +1029,8 @@ SingleResponse ::= SEQUENCE {
             string subjectName = null,
             int keySize = DefaultKeySize,
             X509ExtensionCollection extensions = null
-        ) {
+        )
+        {
             BuildPrivatePki(
                 pkiOptions,
                 out responder,
@@ -1043,7 +1054,8 @@ SingleResponse ::= SEQUENCE {
             string testName,
             PkiOptions pkiOptions,
             bool includePkiOptions
-        ) {
+        )
+        {
             if (includePkiOptions)
             {
                 return $"CN=\"{cn}\", O=\"{testName}\", OU=\"{pkiOptions}\"";

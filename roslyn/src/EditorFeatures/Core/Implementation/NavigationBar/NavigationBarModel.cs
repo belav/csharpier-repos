@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
             ImmutableArray<NavigationBarItem> types,
             VersionStamp semanticVersionStamp,
             INavigationBarItemService itemService
-        ) {
+        )
+        {
             Contract.ThrowIfNull(types);
 
             this.Types = types;

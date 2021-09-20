@@ -65,7 +65,8 @@ namespace System.Security.Cryptography.Hashing.Algorithms.Tests
             string block2,
             string expectedHash,
             string emptyHash
-        ) {
+        )
+        {
             byte[] block1_bytes = ByteUtils.AsciiBytes(block1);
             byte[] block2_bytes = ByteUtils.AsciiBytes(block2);
             byte[] expected_bytes = ByteUtils.HexToByteArray(expectedHash);
@@ -100,7 +101,8 @@ namespace System.Security.Cryptography.Hashing.Algorithms.Tests
             byte[] block2,
             byte[] expected,
             byte[] expectedEmpty
-        ) {
+        )
+        {
             using (HashAlgorithm hash = Create())
             {
                 // Verify Empty Hash
@@ -135,7 +137,8 @@ namespace System.Security.Cryptography.Hashing.Algorithms.Tests
             byte[] block2,
             byte[] expected,
             byte[] expectedEmpty
-        ) {
+        )
+        {
             using (HashAlgorithm hash = Create())
             {
                 // TransformBlock + ComputeHash

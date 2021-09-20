@@ -289,7 +289,8 @@ unsafe class Program
         if (
             RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
             || (RuntimeInformation.ProcessArchitecture != Architecture.X86)
-        ) {
+        )
+        {
             succeeded &= Test<DefaultLayoutDefaultPacking<double>>(
                 expectedSize: 16,
                 expectedOffsetByte: 0,
@@ -510,7 +511,8 @@ unsafe class Program
         if (
             RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
             || (RuntimeInformation.ProcessArchitecture != Architecture.X86)
-        ) {
+        )
+        {
             succeeded &= Test<DefaultLayoutDefaultPacking<long>>(
                 expectedSize: 16,
                 expectedOffsetByte: 0,
@@ -925,7 +927,8 @@ unsafe class Program
         if (
             RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
             || (RuntimeInformation.ProcessArchitecture != Architecture.X86)
-        ) {
+        )
+        {
             succeeded &= Test<DefaultLayoutDefaultPacking<ulong>>(
                 expectedSize: 16,
                 expectedOffsetByte: 0,

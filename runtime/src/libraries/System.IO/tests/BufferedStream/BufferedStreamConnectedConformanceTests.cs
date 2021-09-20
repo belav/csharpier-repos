@@ -39,7 +39,8 @@ namespace System.IO.Tests
         protected override Task<StreamPair> CreateWrappedConnectedStreamsAsync(
             StreamPair wrapped,
             bool leaveOpen = false
-        ) {
+        )
+        {
             var b1 = new BufferedStream(wrapped.Stream1, 1024);
             var b2 = new BufferedStream(wrapped.Stream2, 1024);
             return Task.FromResult<StreamPair>((b1, b2));

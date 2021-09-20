@@ -178,7 +178,8 @@ unsafe class StdCallMemberFunctionTest
     private static StdCallMemberFunctionNative.C CreateCWithUnmanagedCallersOnlyVTable(
         float width,
         float height
-    ) {
+    )
+    {
         return new StdCallMemberFunctionNative.C
         {
             vtable = UnmanagedCallersOnlyVtable,
@@ -216,7 +217,8 @@ unsafe class StdCallMemberFunctionTest
     private static StdCallMemberFunctionNative.SizeF GetSize(
         StdCallMemberFunctionNative.C* c,
         int unused
-    ) {
+    )
+    {
         return new StdCallMemberFunctionNative.SizeF { width = c->width, height = c->height };
     }
 
@@ -233,7 +235,8 @@ unsafe class StdCallMemberFunctionTest
     )]
     private static StdCallMemberFunctionNative.IntWrapper GetHeightAsInt(
         StdCallMemberFunctionNative.C* c
-    ) {
+    )
+    {
         return new StdCallMemberFunctionNative.IntWrapper { i = (int)c->height };
     }
 

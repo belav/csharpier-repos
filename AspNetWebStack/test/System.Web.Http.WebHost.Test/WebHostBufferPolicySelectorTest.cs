@@ -100,7 +100,8 @@ namespace System.Web.Http.WebHost
         public void UseBufferedOutputStream_ReturnsCorrectValue(
             HttpContent content,
             bool expectedResult
-        ) {
+        )
+        {
             // Arrange
             WebHostBufferPolicySelector selector = new WebHostBufferPolicySelector();
             HttpResponseMessage response = new HttpResponseMessage();

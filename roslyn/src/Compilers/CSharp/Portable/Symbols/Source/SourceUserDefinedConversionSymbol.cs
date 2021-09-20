@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ConversionOperatorDeclarationSyntax syntax,
             bool isNullableAnalysisEnabled,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             // Dev11 includes the explicit/implicit keyword, but we don't have a good way to include
             // Narrowing/Widening in VB and we want the languages to be consistent.
             var location = syntax.Type.Location;
@@ -46,19 +47,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ConversionOperatorDeclarationSyntax syntax,
             bool isNullableAnalysisEnabled,
             BindingDiagnosticBag diagnostics
-        ) : base(
-            MethodKind.Conversion,
-            name,
-            containingType,
-            location,
-            syntax,
-            MakeDeclarationModifiers(syntax, location, diagnostics),
-            hasBody: syntax.HasAnyBody(),
-            isExpressionBodied: syntax.Body == null && syntax.ExpressionBody != null,
-            isIterator: SyntaxFacts.HasYieldOperations(syntax.Body),
-            isNullableAnalysisEnabled: isNullableAnalysisEnabled,
-            diagnostics
-        ) {
+        )
+            : base(
+                MethodKind.Conversion,
+                name,
+                containingType,
+                location,
+                syntax,
+                MakeDeclarationModifiers(syntax, location, diagnostics),
+                hasBody: syntax.HasAnyBody(),
+                isExpressionBodied: syntax.Body == null && syntax.ExpressionBody != null,
+                isIterator: SyntaxFacts.HasYieldOperations(syntax.Body),
+                isNullableAnalysisEnabled: isNullableAnalysisEnabled,
+                diagnostics
+            )
+        {
             CheckForBlockAndExpressionBody(syntax.Body, syntax.ExpressionBody, syntax, diagnostics);
 
             if (syntax.ParameterList.Parameters.Count != 1)
@@ -100,7 +103,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         protected override (TypeWithAnnotations ReturnType, ImmutableArray<ParameterSymbol> Parameters) MakeParametersAndBindReturnType(
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             ConversionOperatorDeclarationSyntax declarationSyntax = GetSyntax();
             return MakeParametersAndBindReturnType(
                 declarationSyntax,

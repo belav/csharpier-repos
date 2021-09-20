@@ -121,7 +121,8 @@ namespace System.DirectoryServices.AccountManagement
                     (_cannotChangePasswordChanged != LoadState.Changed)
                     && !_cannotChangePasswordRead
                     && !_owningPrincipal.unpersisted
-                ) {
+                )
+                {
                     _cannotChangePassword = _owningPrincipal.GetStoreCtxToUse()
                         .AccessCheck(_owningPrincipal, PrincipalAccessMask.ChangePassword);
                     _cannotChangePasswordRead = true;

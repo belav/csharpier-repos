@@ -95,7 +95,8 @@ namespace Microsoft.Extensions.ApiDescription.Tool.Commands
                         if (
                             !string.IsNullOrEmpty(projectAssetsFile)
                             && File.Exists(projectAssetsFile)
-                        ) {
+                        )
+                        {
                             using var reader = new JsonTextReader(File.OpenText(projectAssetsFile));
                             var projectAssets = JToken.ReadFrom(reader);
                             var packageFolders = projectAssets[

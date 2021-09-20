@@ -105,7 +105,8 @@ namespace System.Web.Http.Dispatcher
         protected override async Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (request == null)
             {
                 throw Error.ArgumentNull("request");
@@ -187,7 +188,8 @@ namespace System.Web.Http.Dispatcher
             HttpRequestMessage request,
             HttpControllerDescriptor controllerDescriptor,
             IHttpController controller
-        ) {
+        )
+        {
             Contract.Assert(request != null);
             Contract.Assert(controllerDescriptor != null);
             Contract.Assert(controller != null);

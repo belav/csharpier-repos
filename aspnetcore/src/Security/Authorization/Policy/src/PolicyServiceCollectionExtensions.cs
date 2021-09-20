@@ -20,7 +20,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns>The <see cref="IServiceCollection"/> so that additional calls can be chained.</returns>
         public static IServiceCollection AddAuthorizationPolicyEvaluator(
             this IServiceCollection services
-        ) {
+        )
+        {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));
@@ -61,7 +62,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddAuthorization(
             this IServiceCollection services,
             Action<AuthorizationOptions> configure
-        ) {
+        )
+        {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));

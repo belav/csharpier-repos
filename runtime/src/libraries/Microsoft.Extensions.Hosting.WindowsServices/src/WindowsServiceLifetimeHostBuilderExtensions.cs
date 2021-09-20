@@ -44,7 +44,8 @@ namespace Microsoft.Extensions.Hosting
         public static IHostBuilder UseWindowsService(
             this IHostBuilder hostBuilder,
             Action<WindowsServiceLifetimeOptions> configure
-        ) {
+        )
+        {
             if (WindowsServiceHelpers.IsWindowsService())
             {
                 // Host.CreateDefaultBuilder uses CurrentDirectory for VS scenarios, but CurrentDirectory for services is c:\Windows\System32.

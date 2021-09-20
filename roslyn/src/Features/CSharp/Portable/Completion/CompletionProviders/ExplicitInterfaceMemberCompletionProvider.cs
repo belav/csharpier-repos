@@ -75,7 +75,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                         position,
                         cancellationToken
                     )
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -124,7 +125,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                         member.IsAccessor()
                         || member.Kind == SymbolKind.NamedType
                         || !semanticModel.IsAccessible(node.SpanStart, member)
-                    ) {
+                    )
+                    {
                         continue;
                     }
 
@@ -178,7 +180,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             CompletionItem selectedItem,
             char? ch,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // If the user is typing a punctuation portion of the signature, then just emit the name.  i.e. if the
             // member is `Contains<T>(string key)`, then typing `<` should just emit `Contains` and not
             // `Contains<T>(string key)<`

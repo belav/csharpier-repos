@@ -440,7 +440,8 @@ namespace System.Web.Mvc.ExpressionUtil.Test
         internal static void AssertChainEquals(
             ExpressionFingerprintChain fingerprintChain,
             params ExpressionFingerprint[] expectedElements
-        ) {
+        )
+        {
             ExpressionFingerprintChain newChain = new ExpressionFingerprintChain();
             newChain.Elements.AddRange(expectedElements);
             Assert.Equal(fingerprintChain, newChain);

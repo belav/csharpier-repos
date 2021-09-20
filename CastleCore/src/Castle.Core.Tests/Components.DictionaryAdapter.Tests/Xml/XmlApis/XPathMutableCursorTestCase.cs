@@ -159,7 +159,8 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             CompiledXPath path,
             IXmlIncludedTypeMap includedTypes,
             CursorFlags flags
-        ) {
+        )
+        {
             return new XPathMutableCursor(
                 parent,
                 path,

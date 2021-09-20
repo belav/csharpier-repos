@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
         public override RazorCSharpDocument WriteDocument(
             RazorCodeDocument codeDocument,
             DocumentIntermediateNode documentNode
-        ) {
+        )
+        {
             if (codeDocument == null)
             {
                 throw new ArgumentNullException(nameof(codeDocument));
@@ -88,7 +89,8 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
                             HashAlgorithmName.SHA256.Name,
                             StringComparison.Ordinal
                         )
-                    ) {
+                    )
+                    {
                         algorithmId = "{8829d00f-11b8-4213-878b-770e8597ac16}";
                     }
                     else if (
@@ -101,7 +103,8 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
                         // In 2.0, we didn't actually expose the name of the algorithm, so it's possible we could get null here.
                         // If that's the case, we just assume SHA1 since that's the only thing we supported in 2.0.
                         algorithm == null
-                    ) {
+                    )
+                    {
                         algorithmId = "{ff1816ec-aa5e-4d10-87f7-6f4963833460}";
                     }
                     else
@@ -156,7 +159,8 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
 
             public override void VisitNamespaceDeclaration(
                 NamespaceDeclarationIntermediateNode node
-            ) {
+            )
+            {
                 using (Context.CodeWriter.BuildNamespace(node.Content))
                 {
                     Context.CodeWriter.WriteLine("#line hidden");
@@ -174,7 +178,8 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
                         node.Interfaces,
                         node.TypeParameters.Select(p => (p.ParameterName, p.Constraints)).ToArray()
                     )
-                ) {
+                )
+                {
                     VisitDefault(node);
                 }
             }
@@ -273,13 +278,15 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
 
             public override void VisitCSharpExpressionAttributeValue(
                 CSharpExpressionAttributeValueIntermediateNode node
-            ) {
+            )
+            {
                 Context.NodeWriter.WriteCSharpExpressionAttributeValue(Context, node);
             }
 
             public override void VisitCSharpCodeAttributeValue(
                 CSharpCodeAttributeValueIntermediateNode node
-            ) {
+            )
+            {
                 Context.NodeWriter.WriteCSharpCodeAttributeValue(Context, node);
             }
 
@@ -305,19 +312,22 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
 
             public override void VisitComponentChildContent(
                 ComponentChildContentIntermediateNode node
-            ) {
+            )
+            {
                 Context.NodeWriter.WriteComponentChildContent(Context, node);
             }
 
             public override void VisitComponentTypeArgument(
                 ComponentTypeArgumentIntermediateNode node
-            ) {
+            )
+            {
                 Context.NodeWriter.WriteComponentTypeArgument(Context, node);
             }
 
             public override void VisitComponentTypeInferenceMethod(
                 ComponentTypeInferenceMethodIntermediateNode node
-            ) {
+            )
+            {
                 Context.NodeWriter.WriteComponentTypeInferenceMethod(Context, node);
             }
 

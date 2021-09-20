@@ -18,7 +18,8 @@ namespace System.Net.Primitives.Functional.Tests
         public void TryFormat_ProvidedBufferLargerThanNeeded_Success(
             string addressString,
             string expected
-        ) {
+        )
+        {
             IPAddress address = IPAddress.Parse(addressString);
 
             const int IPv4MaxLength = 15; // TryFormat currently requires at least this amount of space for IPv4 addresses

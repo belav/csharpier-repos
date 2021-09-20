@@ -786,7 +786,8 @@ class C
             SemanticModel model,
             OperationKind expectedRootOperationKind,
             SyntaxNode expectedRootSyntax
-        ) {
+        )
+        {
             SemanticModel memberModel = ((Operation)operation).OwningSemanticModel;
             while (true)
             {

@@ -260,7 +260,8 @@ namespace System.Data.Common
             object store,
             BitArray nullbits,
             int storeIndex
-        ) {
+        )
+        {
             DateTime[] typedStore = (DateTime[])store;
             bool isnull = !HasValue(record);
             if (isnull || (0 == (DateTimeMode & DataSetDateTime.Local)))

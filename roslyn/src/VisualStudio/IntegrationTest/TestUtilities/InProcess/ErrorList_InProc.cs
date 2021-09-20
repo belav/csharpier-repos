@@ -49,7 +49,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         public ErrorListItem NavigateToErrorListItem(
             int itemIndex,
             __VSERRORCATEGORY minimumSeverity = __VSERRORCATEGORY.EC_WARNING
-        ) {
+        )
+        {
             var errorItems = GetErrorItems()
                 .AsEnumerable()
                 .Where(e => ((IVsErrorItem)e).GetCategory() <= minimumSeverity)
@@ -92,7 +93,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
         public ErrorListItem[] GetErrorListContents(
             __VSERRORCATEGORY minimumSeverity = __VSERRORCATEGORY.EC_WARNING
-        ) {
+        )
+        {
             var errorItems = GetErrorItems();
             try
             {

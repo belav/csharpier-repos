@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis
         public static bool CanNavigateTo(
             this DocumentSpan documentSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var workspace = documentSpan.Document.Project.Solution.Workspace;
             var service = workspace.Services.GetService<IDocumentNavigationService>();
             return service.CanNavigateToSpan(
@@ -31,7 +32,8 @@ namespace Microsoft.CodeAnalysis
             bool showInPreviewTab,
             bool activateTab,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var solution = documentSpan.Document.Project.Solution;
             var workspace = solution.Workspace;
             var service = workspace.Services.GetService<IDocumentNavigationService>();
@@ -54,7 +56,8 @@ namespace Microsoft.CodeAnalysis
         public static async Task<bool> IsHiddenAsync(
             this DocumentSpan documentSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var document = documentSpan.Document;
             if (document.SupportsSyntaxTree)
             {

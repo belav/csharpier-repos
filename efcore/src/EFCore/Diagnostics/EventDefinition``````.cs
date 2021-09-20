@@ -69,7 +69,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             TParam4 arg4,
             TParam5 arg5,
             TParam6 arg6
-        ) {
+        )
+        {
             var extractor = new MessageExtractingLogger();
             _logAction(extractor, arg1, arg2, arg3, arg4, arg5, arg6, null);
             return extractor.Message;

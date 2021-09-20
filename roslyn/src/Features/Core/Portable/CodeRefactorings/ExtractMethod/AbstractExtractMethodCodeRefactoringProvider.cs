@@ -78,7 +78,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.ExtractMethod
             Document document,
             TextSpan textSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<CodeAction>.GetInstance(out var actions);
             var methodAction = await ExtractMethodAsync(document, textSpan, cancellationToken)
                 .ConfigureAwait(false);
@@ -99,7 +100,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.ExtractMethod
             Document document,
             TextSpan textSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var result = await ExtractMethodService.ExtractMethodAsync(
                     document,
                     textSpan,
@@ -122,7 +124,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.ExtractMethod
             Document document,
             TextSpan textSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxTree = await document.GetSyntaxTreeAsync(cancellationToken)
                 .ConfigureAwait(false);
             var syntaxFacts = document.GetLanguageService<ISyntaxFactsService>();
@@ -161,7 +164,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.ExtractMethod
             Document document,
             SyntaxToken invocationNameToken,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
 
             var finalRoot = root.ReplaceToken(

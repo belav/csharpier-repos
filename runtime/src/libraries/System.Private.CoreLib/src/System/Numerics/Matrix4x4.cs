@@ -123,7 +123,8 @@ namespace System.Numerics
             float m42,
             float m43,
             float m44
-        ) {
+        )
+        {
             M11 = m11;
             M12 = m12;
             M13 = m13;
@@ -947,7 +948,8 @@ namespace System.Numerics
             Vector3 cameraPosition,
             Vector3 cameraUpVector,
             Vector3 cameraForwardVector
-        ) {
+        )
+        {
             Vector3 zaxis = objectPosition - cameraPosition;
             float norm = zaxis.LengthSquared();
 
@@ -1001,7 +1003,8 @@ namespace System.Numerics
             Vector3 rotateAxis,
             Vector3 cameraForwardVector,
             Vector3 objectForwardVector
-        ) {
+        )
+        {
             // Treat the case when object and camera positions are too close.
             Vector3 faceDir = objectPosition - cameraPosition;
             float norm = faceDir.LengthSquared();
@@ -1184,7 +1187,8 @@ namespace System.Numerics
             Vector3 cameraPosition,
             Vector3 cameraTarget,
             Vector3 cameraUpVector
-        ) {
+        )
+        {
             Vector3 zaxis = Vector3.Normalize(cameraPosition - cameraTarget);
             Vector3 xaxis = Vector3.Normalize(Vector3.Cross(cameraUpVector, zaxis));
             Vector3 yaxis = Vector3.Cross(zaxis, xaxis);
@@ -1221,7 +1225,8 @@ namespace System.Numerics
             float height,
             float zNearPlane,
             float zFarPlane
-        ) {
+        )
+        {
             Matrix4x4 result = Identity;
 
             result.M11 = 2.0f / width;
@@ -1247,7 +1252,8 @@ namespace System.Numerics
             float top,
             float zNearPlane,
             float zFarPlane
-        ) {
+        )
+        {
             Matrix4x4 result = Identity;
 
             result.M11 = 2.0f / (right - left);
@@ -1279,7 +1285,8 @@ namespace System.Numerics
             float height,
             float nearPlaneDistance,
             float farPlaneDistance
-        ) {
+        )
+        {
             if (nearPlaneDistance <= 0.0f)
                 throw new ArgumentOutOfRangeException(nameof(nearPlaneDistance));
 
@@ -1329,7 +1336,8 @@ namespace System.Numerics
             float aspectRatio,
             float nearPlaneDistance,
             float farPlaneDistance
-        ) {
+        )
+        {
             if (fieldOfView <= 0.0f || fieldOfView >= MathF.PI)
                 throw new ArgumentOutOfRangeException(nameof(fieldOfView));
 
@@ -1386,7 +1394,8 @@ namespace System.Numerics
             float top,
             float nearPlaneDistance,
             float farPlaneDistance
-        ) {
+        )
+        {
             if (nearPlaneDistance <= 0.0f)
                 throw new ArgumentOutOfRangeException(nameof(nearPlaneDistance));
 
@@ -1631,7 +1640,8 @@ namespace System.Numerics
             float yScale,
             float zScale,
             Vector3 centerPoint
-        ) {
+        )
+        {
             Matrix4x4 result = Identity;
 
             float tx = centerPoint.X * (1 - xScale);
@@ -2271,7 +2281,8 @@ namespace System.Numerics
             out Vector3 scale,
             out Quaternion rotation,
             out Vector3 translation
-        ) {
+        )
+        {
             bool result = true;
             unsafe
             {

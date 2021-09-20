@@ -21,7 +21,8 @@ namespace System.Web.Helpers.AntiXsrf
             IAntiForgeryConfig config,
             ITokenStore tokenStore,
             ITokenValidator validator
-        ) {
+        )
+        {
             _serializer = serializer;
             _config = config;
             _tokenStore = tokenStore;
@@ -143,7 +144,8 @@ namespace System.Web.Helpers.AntiXsrf
             string serializedOldCookieToken,
             out string serializedNewCookieToken,
             out string serializedFormToken
-        ) {
+        )
+        {
             CheckSSLConfig(httpContext);
 
             AntiForgeryToken oldCookieToken = DeserializeTokenNoThrow(serializedOldCookieToken);
@@ -160,7 +162,8 @@ namespace System.Web.Helpers.AntiXsrf
             AntiForgeryToken oldCookieToken,
             out AntiForgeryToken newCookieToken,
             out AntiForgeryToken formToken
-        ) {
+        )
+        {
             newCookieToken = null;
             if (!_validator.IsCookieTokenValid(oldCookieToken))
             {

@@ -1006,7 +1006,8 @@ namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Protocol
                 bool useCamelCase,
                 bool ignoreNullValues,
                 string json
-            ) {
+            )
+            {
                 Name = name;
                 Message = message;
                 Json = json;

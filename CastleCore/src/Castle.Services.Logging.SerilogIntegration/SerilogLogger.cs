@@ -105,7 +105,8 @@ namespace Castle.Services.Logging.SerilogIntegration
             IFormatProvider formatProvider,
             string format,
             params object[] args
-        ) {
+        )
+        {
             if (IsTraceEnabled)
             {
                 //TODO: This honours the formatProvider rather than passing through args for structured logging
@@ -167,7 +168,8 @@ namespace Castle.Services.Logging.SerilogIntegration
             IFormatProvider formatProvider,
             string format,
             params object[] args
-        ) {
+        )
+        {
             if (IsDebugEnabled)
             {
                 //TODO: This honours the formatProvider rather than passing through args for structured logging
@@ -229,7 +231,8 @@ namespace Castle.Services.Logging.SerilogIntegration
             IFormatProvider formatProvider,
             string format,
             params object[] args
-        ) {
+        )
+        {
             if (IsErrorEnabled)
             {
                 //TODO: This honours the formatProvider rather than passing through args for structured logging
@@ -291,7 +294,8 @@ namespace Castle.Services.Logging.SerilogIntegration
             IFormatProvider formatProvider,
             string format,
             params object[] args
-        ) {
+        )
+        {
             if (IsFatalEnabled)
             {
                 //TODO: This honours the formatProvider rather than passing through args for structured logging
@@ -353,7 +357,8 @@ namespace Castle.Services.Logging.SerilogIntegration
             IFormatProvider formatProvider,
             string format,
             params object[] args
-        ) {
+        )
+        {
             if (IsInfoEnabled)
             {
                 //TODO: This honours the formatProvider rather than passing through args for structured logging
@@ -415,7 +420,8 @@ namespace Castle.Services.Logging.SerilogIntegration
             IFormatProvider formatProvider,
             string format,
             params object[] args
-        ) {
+        )
+        {
             if (IsWarnEnabled)
             {
                 //TODO: This honours the formatProvider rather than passing through args for structured logging

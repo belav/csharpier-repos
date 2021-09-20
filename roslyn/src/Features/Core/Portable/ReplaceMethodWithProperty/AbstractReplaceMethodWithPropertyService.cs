@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.ReplaceMethodWithProperty
             if (
                 OverridesMetadataSymbol(getAndSetMethods.GetMethod)
                 || OverridesMetadataSymbol(getAndSetMethods.SetMethod)
-            ) {
+            )
+            {
                 return FeaturesResources.Warning_Method_overrides_symbol_from_metadata;
             }
 
@@ -84,7 +85,8 @@ namespace Microsoft.CodeAnalysis.ReplaceMethodWithProperty
             ISyntaxFacts syntaxFacts,
             SyntaxNode methodDeclaration,
             List<SyntaxTrivia> finalLeadingTrivia
-        ) {
+        )
+        {
             var paramList = syntaxFacts.GetParameterList(methodDeclaration);
             if (paramList != null)
             {

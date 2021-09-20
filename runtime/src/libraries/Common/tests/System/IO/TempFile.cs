@@ -34,7 +34,8 @@ namespace System.IO
             byte[] bytes,
             [CallerMemberName] string memberName = null,
             [CallerLineNumber] int lineNumber = 0
-        ) {
+        )
+        {
             return new TempFile(GetFilePath(memberName, lineNumber), bytes);
         }
 
@@ -42,7 +43,8 @@ namespace System.IO
             long length = -1,
             [CallerMemberName] string memberName = null,
             [CallerLineNumber] int lineNumber = 0
-        ) {
+        )
+        {
             return new TempFile(GetFilePath(memberName, lineNumber), length);
         }
 

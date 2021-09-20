@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings
     {
         internal static async Task<SyntaxNode> GetSelectedDeclarationOrVariableAsync(
             CodeRefactoringContext context
-        ) {
+        )
+        {
             // Consider:
             // MemberDeclaration: member that can be declared in type (those are the ones we can pull up)
             // VariableDeclaratorSyntax: for fields the MemberDeclaration can actually represent multiple declarations, e.g. `int a = 0, b = 1;`.

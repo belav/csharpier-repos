@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
     {
         public static IList<MediaTypeSegmentWithQuality> ParseAcceptHeader(
             IList<string> acceptHeaders
-        ) {
+        )
+        {
             var parsedValues = new List<MediaTypeSegmentWithQuality>();
             ParseAcceptHeader(acceptHeaders, parsedValues);
 
@@ -21,7 +22,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         public static void ParseAcceptHeader(
             IList<string> acceptHeaders,
             IList<MediaTypeSegmentWithQuality> parsedValues
-        ) {
+        )
+        {
             if (acceptHeaders == null)
             {
                 throw new ArgumentNullException(nameof(acceptHeaders));
@@ -62,7 +64,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             string value,
             ref int index,
             out MediaTypeSegmentWithQuality parsedValue
-        ) {
+        )
+        {
             parsedValue = default(MediaTypeSegmentWithQuality);
 
             // The accept header may be added multiple times to the request/response message. E.g.
@@ -142,7 +145,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             string input,
             int startIndex,
             out bool separatorFound
-        ) {
+        )
+        {
             Debug.Assert(input != null);
             Debug.Assert(startIndex <= input.Length); // it's OK if index == value.Length.
 
@@ -173,7 +177,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             string input,
             int start,
             out MediaTypeSegmentWithQuality result
-        ) {
+        )
+        {
             result = MediaType.CreateMediaTypeSegmentWithQuality(input, start);
             if (result.MediaType.HasValue)
             {

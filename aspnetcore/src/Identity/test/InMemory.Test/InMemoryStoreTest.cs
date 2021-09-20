@@ -38,7 +38,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory.Test
             bool lockoutEnabled = false,
             DateTimeOffset? lockoutEnd = default(DateTimeOffset?),
             bool useNamePrefixAsUserName = false
-        ) {
+        )
+        {
             return new PocoUser
             {
                 UserName = useNamePrefixAsUserName
@@ -59,7 +60,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory.Test
         protected override PocoRole CreateTestRole(
             string roleNamePrefix = "",
             bool useRoleNamePrefixAsRoleName = false
-        ) {
+        )
+        {
             var roleName = useRoleNamePrefixAsRoleName
                 ? roleNamePrefix
                 : string.Format(

@@ -104,7 +104,8 @@ namespace Microsoft.CodeAnalysis.ValidateFormatString
         private void AnalyzeNode(
             SyntaxNodeAnalysisContext context,
             INamedTypeSymbol formatProviderType
-        ) {
+        )
+        {
             var syntaxFacts = GetSyntaxFacts();
             var expression = syntaxFacts.GetExpressionOfInvocationExpression(context.Node);
 
@@ -148,7 +149,8 @@ namespace Microsoft.CodeAnalysis.ValidateFormatString
                     parameters,
                     syntaxFacts
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -221,7 +223,8 @@ namespace Microsoft.CodeAnalysis.ValidateFormatString
             SeparatedSyntaxList<SyntaxNode> arguments,
             ImmutableArray<IParameterSymbol> parameters,
             ISyntaxFacts syntaxFacts
-        ) {
+        )
+        {
             var argsArgumentType = TryGetArgsArgumentType(
                 semanticModel,
                 arguments,
@@ -237,7 +240,8 @@ namespace Microsoft.CodeAnalysis.ValidateFormatString
             SeparatedSyntaxList<SyntaxNode> arguments,
             ImmutableArray<IParameterSymbol> parameters,
             ISyntaxFacts syntaxFacts
-        ) {
+        )
+        {
             var argsArgument = TryGetArgument(NameOfArgsParameter, arguments, parameters);
             if (argsArgument == null)
             {
@@ -253,7 +257,8 @@ namespace Microsoft.CodeAnalysis.ValidateFormatString
             string searchArgumentName,
             SeparatedSyntaxList<SyntaxNode> arguments,
             ImmutableArray<IParameterSymbol> parameters
-        ) {
+        )
+        {
             // First, look for a named argument that matches
             var matchingNamedArgument = TryGetMatchingNamedArgument(arguments, searchArgumentName);
             if (matchingNamedArgument != null)
@@ -292,7 +297,8 @@ namespace Microsoft.CodeAnalysis.ValidateFormatString
         private static IParameterSymbol? GetParameterWithMatchingName(
             ImmutableArray<IParameterSymbol> parameters,
             string searchArgumentName
-        ) {
+        )
+        {
             foreach (var p in parameters)
             {
                 if (p.Name == searchArgumentName)
@@ -308,7 +314,8 @@ namespace Microsoft.CodeAnalysis.ValidateFormatString
             SeparatedSyntaxList<SyntaxNode> arguments,
             ImmutableArray<IParameterSymbol> parameters,
             ISyntaxFacts syntaxFacts
-        ) {
+        )
+        {
             var formatArgumentSyntax = TryGetArgument(
                 NameOfFormatStringParameter,
                 arguments,
@@ -324,7 +331,8 @@ namespace Microsoft.CodeAnalysis.ValidateFormatString
                 !syntaxFacts.IsStringLiteralExpression(
                     syntaxFacts.GetExpressionOfArgument(formatArgumentSyntax)
                 )
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -365,7 +373,8 @@ namespace Microsoft.CodeAnalysis.ValidateFormatString
         private static bool FormatCallWorksAtRuntime(
             string formatString,
             int numberOfPlaceholderArguments
-        ) {
+        )
+        {
             var testArray = new object[numberOfPlaceholderArguments];
             for (var i = 0; i < numberOfPlaceholderArguments; i++)
             {
@@ -389,7 +398,8 @@ namespace Microsoft.CodeAnalysis.ValidateFormatString
             int numberOfPlaceholderArguments,
             string formatString,
             int formatStringPosition
-        ) {
+        )
+        {
             // removing escaped left brackets and replacing with space characters so they won't
             // impede the extraction of placeholders, yet the locations of the placeholders are
             // the same as in the original string.
@@ -439,7 +449,8 @@ namespace Microsoft.CodeAnalysis.ValidateFormatString
         private static bool PlaceholderIndexIsValid(
             string textInsideBrackets,
             int numberOfPlaceholderArguments
-        ) {
+        )
+        {
             var placeholderIndexText =
                 textInsideBrackets.IndexOf(",") > 0
                     ? textInsideBrackets.Split(',')[0]

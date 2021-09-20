@@ -28,7 +28,8 @@ namespace Microsoft.AspNetCore.Hosting
                     )
                     .UseStartup("Microsoft.AspNetCore.Hosting.Tests")
                     .Build()
-            ) {
+            )
+            {
                 await host.StartAsync();
 
                 Assert.Equal(2, providerFactory.Providers.Count);

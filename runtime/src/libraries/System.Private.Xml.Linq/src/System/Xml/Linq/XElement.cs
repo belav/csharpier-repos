@@ -154,7 +154,8 @@ namespace System.Xml.Linq
         internal static async Task<XElement> CreateAsync(
             XmlReader r,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             XElement xe = new XElement(default(AsyncConstructionSentry));
             await xe.ReadElementFromAsync(r, LoadOptions.None, cancellationToken)
                 .ConfigureAwait(false);
@@ -520,7 +521,8 @@ namespace System.Xml.Linq
                                         !hasInScopeNamespace
                                         || GetNamespaceOfPrefixInScope(a.Name.LocalName, e) == null
                                     )
-                                ) {
+                                )
+                                {
                                     return a.Name.LocalName;
                                 }
                             }
@@ -686,7 +688,8 @@ namespace System.Xml.Linq
             Stream stream,
             LoadOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             XmlReaderSettings rs = GetXmlReaderSettings(options);
 
             rs.Async = true;
@@ -771,7 +774,8 @@ namespace System.Xml.Linq
             TextReader textReader,
             LoadOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             XmlReaderSettings rs = GetXmlReaderSettings(options);
 
             rs.Async = true;
@@ -854,7 +858,8 @@ namespace System.Xml.Linq
             XmlReader reader,
             LoadOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (reader == null)
                 throw new ArgumentNullException(nameof(reader));
             if (cancellationToken.IsCancellationRequested)
@@ -866,7 +871,8 @@ namespace System.Xml.Linq
             XmlReader reader,
             LoadOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (await reader.MoveToContentAsync().ConfigureAwait(false) != XmlNodeType.Element)
                 throw new InvalidOperationException(
                     SR.Format(
@@ -1113,7 +1119,8 @@ namespace System.Xml.Linq
             Stream stream,
             SaveOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             XmlWriterSettings ws = GetXmlWriterSettings(options);
 
             ws.Async = true;
@@ -1178,7 +1185,8 @@ namespace System.Xml.Linq
             TextWriter textWriter,
             SaveOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             XmlWriterSettings ws = GetXmlWriterSettings(options);
 
             ws.Async = true;
@@ -2105,7 +2113,8 @@ namespace System.Xml.Linq
             XmlReader r,
             LoadOptions o,
             CancellationToken cancellationTokentoken
-        ) {
+        )
+        {
             ReadElementFromImpl(r, o);
 
             if (!r.IsEmptyElement)

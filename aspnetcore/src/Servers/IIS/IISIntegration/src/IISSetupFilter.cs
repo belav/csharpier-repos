@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.Server.IISIntegration
             string pairingToken,
             PathString pathBase,
             bool isWebsocketsSupported
-        ) {
+        )
+        {
             _pairingToken = pairingToken;
             _pathBase = pathBase;
             _isWebsocketsSupported = isWebsocketsSupported;

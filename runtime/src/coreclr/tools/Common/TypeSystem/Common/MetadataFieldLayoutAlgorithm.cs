@@ -16,7 +16,8 @@ namespace Internal.TypeSystem
         public override ComputedInstanceFieldLayout ComputeInstanceLayout(
             DefType defType,
             InstanceLayoutKind layoutKind
-        ) {
+        )
+        {
             MetadataType type = (MetadataType)defType;
 
             if (type.IsGenericDefinition)
@@ -78,13 +79,15 @@ namespace Internal.TypeSystem
                 (!type.IsValueType && !type.IsObject)
                 && (type.IsSequentialLayout || type.IsExplicitLayout)
                 && (!type.BaseType.IsValueType && !type.BaseType.IsObject)
-            ) {
+            )
+            {
                 MetadataType baseType = type.MetadataBaseType;
 
                 if (
                     type.IsSequentialLayout != baseType.IsSequentialLayout
                     || type.IsExplicitLayout != baseType.IsExplicitLayout
-                ) {
+                )
+                {
                     ThrowHelper.ThrowTypeLoadException(ExceptionStringID.ClassLoadBadFormat, type);
                 }
             }
@@ -180,7 +183,8 @@ namespace Internal.TypeSystem
         protected virtual ComputedInstanceFieldLayout ComputeInstanceFieldLayout(
             MetadataType type,
             int numInstanceFields
-        ) {
+        )
+        {
             if (type.IsExplicitLayout)
             {
                 return ComputeExplicitFieldLayout(type, numInstanceFields);
@@ -189,7 +193,8 @@ namespace Internal.TypeSystem
                 type.IsSequentialLayout
                 || type.IsEnum
                 || type.Context.Target.Abi == TargetAbi.CppCodegen
-            ) {
+            )
+            {
                 return ComputeSequentialFieldLayout(type, numInstanceFields);
             }
             else
@@ -201,7 +206,8 @@ namespace Internal.TypeSystem
         public override ComputedStaticFieldLayout ComputeStaticFieldLayout(
             DefType defType,
             StaticLayoutKind layoutKind
-        ) {
+        )
+        {
             MetadataType type = (MetadataType)defType;
             int numStaticFields = 0;
 
@@ -242,7 +248,8 @@ namespace Internal.TypeSystem
                 TypeDesc fieldType = field.FieldType;
                 if (
                     fieldType.IsByRef || (fieldType.IsValueType && ((DefType)fieldType).IsByRefLike)
-                ) {
+                )
+                {
                     ThrowHelper.ThrowTypeLoadException(ExceptionStringID.ClassLoadGeneral, type);
                 }
 
@@ -277,7 +284,8 @@ namespace Internal.TypeSystem
         private ref StaticsBlock GetStaticsBlockForField(
             ref ComputedStaticFieldLayout layout,
             FieldDesc field
-        ) {
+        )
+        {
             if (field.IsThreadStatic)
             {
                 if (field.HasGCStaticBase)
@@ -341,7 +349,8 @@ namespace Internal.TypeSystem
         protected static ComputedInstanceFieldLayout ComputeExplicitFieldLayout(
             MetadataType type,
             int numInstanceFields
-        ) {
+        )
+        {
             // Instance slice size is the total size of instance not including the base type.
             // It is calculated as the field whose offset and size add to the greatest value.
             LayoutInt offsetBias = !type.IsValueType
@@ -442,14 +451,16 @@ namespace Internal.TypeSystem
             LayoutInt cumulativeInstanceFieldPos,
             LayoutInt alignment,
             TargetDetails target
-        ) {
+        )
+        {
             return LayoutInt.AlignUp(cumulativeInstanceFieldPos, alignment, target);
         }
 
         protected ComputedInstanceFieldLayout ComputeSequentialFieldLayout(
             MetadataType type,
             int numInstanceFields
-        ) {
+        )
+        {
             var offsets = new FieldAndOffset[numInstanceFields];
 
             // For types inheriting from another type, field offsets continue on from where they left off
@@ -534,7 +545,8 @@ namespace Internal.TypeSystem
         protected ComputedInstanceFieldLayout ComputeAutoFieldLayout(
             MetadataType type,
             int numInstanceFields
-        ) {
+        )
+        {
             TypeSystemContext context = type.Context;
 
             var layoutMetadata = type.GetClassLayout();
@@ -669,7 +681,8 @@ namespace Internal.TypeSystem
                 !type.IsValueType
                 && cumulativeInstanceFieldPos != LayoutInt.Zero
                 && type.Context.Target.Architecture == TargetArchitecture.X86
-            ) {
+            )
+            {
                 offsetBias = new LayoutInt(type.Context.Target.PointerSize);
                 cumulativeInstanceFieldPos -= offsetBias;
             }
@@ -799,7 +812,8 @@ namespace Internal.TypeSystem
                     int j = instanceNonGCPointerFieldsCount[i];
                     j < instanceNonGCPointerFieldsArr[i].Length;
                     j++
-                ) {
+                )
+                {
                     PlaceInstanceField(
                         instanceNonGCPointerFieldsArr[i][j],
                         packingSize,
@@ -916,7 +930,8 @@ namespace Internal.TypeSystem
             ref LayoutInt instanceFieldPos,
             ref int fieldOrdinal,
             LayoutInt offsetBias
-        ) {
+        )
+        {
             var fieldSizeAndAlignment = ComputeFieldSizeAndAlignment(
                 field.FieldType,
                 packingSize,
@@ -970,7 +985,8 @@ namespace Internal.TypeSystem
             MetadataType type,
             bool requiresAlign8,
             bool requiresAlignedBase
-        ) {
+        )
+        {
             LayoutInt cumulativeInstanceFieldPos = LayoutInt.Zero;
 
             if (!type.IsValueType && type.HasBaseType)
@@ -982,7 +998,8 @@ namespace Internal.TypeSystem
                     if (
                         type.BaseType.IsZeroSizedReferenceType
                         && ((MetadataType)type.BaseType).HasLayout()
-                    ) {
+                    )
+                    {
                         cumulativeInstanceFieldPos += LayoutInt.One;
                     }
                     AlignBaseOffsetIfNecessary(
@@ -1001,7 +1018,8 @@ namespace Internal.TypeSystem
             TypeDesc fieldType,
             int packingSize,
             out bool layoutAbiStable
-        ) {
+        )
+        {
             SizeAndAlignment result;
             layoutAbiStable = true;
 
@@ -1055,7 +1073,8 @@ namespace Internal.TypeSystem
             LayoutInt alignment,
             int classLayoutSize,
             out SizeAndAlignment byteCount
-        ) {
+        )
+        {
             SizeAndAlignment result;
 
             // Pad the length of structs to be 1 if they are empty so we have no zero-length structures
@@ -1112,7 +1131,8 @@ namespace Internal.TypeSystem
 
         public override ValueTypeShapeCharacteristics ComputeValueTypeShapeCharacteristics(
             DefType type
-        ) {
+        )
+        {
             if (!type.IsValueType)
                 return ValueTypeShapeCharacteristics.None;
 
@@ -1125,7 +1145,8 @@ namespace Internal.TypeSystem
 
         private ValueTypeShapeCharacteristics ComputeHomogeneousAggregateCharacteristic(
             DefType type
-        ) {
+        )
+        {
             // Use this constant to make the code below more laconic
             const ValueTypeShapeCharacteristics NotHA = ValueTypeShapeCharacteristics.None;
 

@@ -340,7 +340,8 @@ namespace System.Collections.Immutable.Tests
 
         protected override IImmutableDictionary<string, TValue> Empty<TValue>(
             StringComparer comparer
-        ) {
+        )
+        {
             return ImmutableDictionary.Create<string, TValue>(comparer);
         }
 
@@ -348,7 +349,8 @@ namespace System.Collections.Immutable.Tests
             IDictionary<TKey, TValue> dictionary,
             TKey equalKey,
             out TKey actualKey
-        ) {
+        )
+        {
             return ((ImmutableDictionary<TKey, TValue>.Builder)dictionary).TryGetKey(
                 equalKey,
                 out actualKey
@@ -357,7 +359,8 @@ namespace System.Collections.Immutable.Tests
 
         protected override IDictionary<TKey, TValue> GetBuilder<TKey, TValue>(
             IImmutableDictionary<TKey, TValue> basis
-        ) {
+        )
+        {
             return (
                 (ImmutableDictionary<TKey, TValue>)(
                     basis ?? GetEmptyImmutableDictionary<TKey, TValue>()

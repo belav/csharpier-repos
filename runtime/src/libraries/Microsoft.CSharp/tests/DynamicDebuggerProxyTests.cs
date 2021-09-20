@@ -137,7 +137,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             internal DynamicTestObject(
                 Dictionary<string, object> members,
                 bool throwIfMissing = false
-            ) {
+            )
+            {
                 _members = members;
                 _throwIfMissing = throwIfMissing;
             }

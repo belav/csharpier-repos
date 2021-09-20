@@ -114,7 +114,8 @@ namespace System.Text.Json
         private void WriteStringEscapeProperty(
             ReadOnlySpan<char> propertyName,
             int firstEscapeIndexProp
-        ) {
+        )
+        {
             Debug.Assert(
                 int.MaxValue / JsonConstants.MaxExpansionFactorWhileEscaping >= propertyName.Length
             );
@@ -305,7 +306,8 @@ namespace System.Text.Json
         private void WriteStringEscapeProperty(
             ReadOnlySpan<byte> utf8PropertyName,
             int firstEscapeIndexProp
-        ) {
+        )
+        {
             Debug.Assert(
                 int.MaxValue / JsonConstants.MaxExpansionFactorWhileEscaping
                     >= utf8PropertyName.Length
@@ -483,7 +485,8 @@ namespace System.Text.Json
         private void WriteStringHelper(
             ReadOnlySpan<byte> utf8PropertyName,
             ReadOnlySpan<byte> utf8Value
-        ) {
+        )
+        {
             Debug.Assert(
                 utf8PropertyName.Length <= JsonConstants.MaxUnescapedTokenSize
                     && utf8Value.Length <= JsonConstants.MaxUnescapedTokenSize
@@ -658,7 +661,8 @@ namespace System.Text.Json
         private void WriteStringHelperEscapeValue(
             ReadOnlySpan<byte> utf8PropertyName,
             ReadOnlySpan<char> value
-        ) {
+        )
+        {
             Debug.Assert(utf8PropertyName.Length <= JsonConstants.MaxUnescapedTokenSize);
 
             JsonWriterHelper.ValidateValue(value);
@@ -747,7 +751,8 @@ namespace System.Text.Json
         private void WriteStringHelperEscapeValue(
             ReadOnlySpan<byte> utf8PropertyName,
             ReadOnlySpan<byte> utf8Value
-        ) {
+        )
+        {
             Debug.Assert(utf8PropertyName.Length <= JsonConstants.MaxUnescapedTokenSize);
 
             JsonWriterHelper.ValidateValue(utf8Value);
@@ -838,7 +843,8 @@ namespace System.Text.Json
         private void WriteStringHelperEscapeProperty(
             ReadOnlySpan<char> propertyName,
             ReadOnlySpan<byte> utf8Value
-        ) {
+        )
+        {
             Debug.Assert(utf8Value.Length <= JsonConstants.MaxUnescapedTokenSize);
 
             JsonWriterHelper.ValidateProperty(propertyName);
@@ -916,7 +922,8 @@ namespace System.Text.Json
         private void WriteStringHelperEscapeProperty(
             ReadOnlySpan<byte> utf8PropertyName,
             ReadOnlySpan<byte> utf8Value
-        ) {
+        )
+        {
             Debug.Assert(utf8Value.Length <= JsonConstants.MaxUnescapedTokenSize);
 
             JsonWriterHelper.ValidateProperty(utf8PropertyName);
@@ -978,7 +985,8 @@ namespace System.Text.Json
             ReadOnlySpan<byte> escapedPropertyName,
             ReadOnlySpan<byte> utf8Value,
             int firstEscapeIndex
-        ) {
+        )
+        {
             Debug.Assert(
                 int.MaxValue / JsonConstants.MaxExpansionFactorWhileEscaping >= utf8Value.Length
             );
@@ -1013,7 +1021,8 @@ namespace System.Text.Json
             ReadOnlySpan<byte> escapedPropertyName,
             ReadOnlySpan<char> value,
             int firstEscapeIndex
-        ) {
+        )
+        {
             Debug.Assert(
                 int.MaxValue / JsonConstants.MaxExpansionFactorWhileEscaping >= value.Length
             );
@@ -1048,7 +1057,8 @@ namespace System.Text.Json
             ReadOnlySpan<char> propertyName,
             ReadOnlySpan<byte> escapedValue,
             int firstEscapeIndex
-        ) {
+        )
+        {
             Debug.Assert(
                 int.MaxValue / JsonConstants.MaxExpansionFactorWhileEscaping >= propertyName.Length
             );
@@ -1086,7 +1096,8 @@ namespace System.Text.Json
             ReadOnlySpan<byte> utf8PropertyName,
             ReadOnlySpan<byte> escapedValue,
             int firstEscapeIndex
-        ) {
+        )
+        {
             Debug.Assert(
                 int.MaxValue / JsonConstants.MaxExpansionFactorWhileEscaping
                     >= utf8PropertyName.Length
@@ -1147,7 +1158,8 @@ namespace System.Text.Json
         private void WriteStringEscape(
             ReadOnlySpan<byte> utf8PropertyName,
             ReadOnlySpan<byte> utf8Value
-        ) {
+        )
+        {
             int valueIdx = JsonWriterHelper.NeedsEscaping(utf8Value, _options.Encoder);
             int propertyIdx = JsonWriterHelper.NeedsEscaping(utf8PropertyName, _options.Encoder);
 
@@ -1179,7 +1191,8 @@ namespace System.Text.Json
         private void WriteStringEscape(
             ReadOnlySpan<char> propertyName,
             ReadOnlySpan<byte> utf8Value
-        ) {
+        )
+        {
             int valueIdx = JsonWriterHelper.NeedsEscaping(utf8Value, _options.Encoder);
             int propertyIdx = JsonWriterHelper.NeedsEscaping(propertyName, _options.Encoder);
 
@@ -1206,7 +1219,8 @@ namespace System.Text.Json
         private void WriteStringEscape(
             ReadOnlySpan<byte> utf8PropertyName,
             ReadOnlySpan<char> value
-        ) {
+        )
+        {
             int valueIdx = JsonWriterHelper.NeedsEscaping(value, _options.Encoder);
             int propertyIdx = JsonWriterHelper.NeedsEscaping(utf8PropertyName, _options.Encoder);
 
@@ -1233,7 +1247,8 @@ namespace System.Text.Json
             ReadOnlySpan<char> value,
             int firstEscapeIndexProp,
             int firstEscapeIndexVal
-        ) {
+        )
+        {
             Debug.Assert(
                 int.MaxValue / JsonConstants.MaxExpansionFactorWhileEscaping >= value.Length
             );
@@ -1328,7 +1343,8 @@ namespace System.Text.Json
             ReadOnlySpan<byte> utf8Value,
             int firstEscapeIndexProp,
             int firstEscapeIndexVal
-        ) {
+        )
+        {
             Debug.Assert(
                 int.MaxValue / JsonConstants.MaxExpansionFactorWhileEscaping >= utf8Value.Length
             );
@@ -1424,7 +1440,8 @@ namespace System.Text.Json
             ReadOnlySpan<byte> utf8Value,
             int firstEscapeIndexProp,
             int firstEscapeIndexVal
-        ) {
+        )
+        {
             Debug.Assert(
                 int.MaxValue / JsonConstants.MaxExpansionFactorWhileEscaping >= utf8Value.Length
             );
@@ -1519,7 +1536,8 @@ namespace System.Text.Json
             ReadOnlySpan<char> value,
             int firstEscapeIndexProp,
             int firstEscapeIndexVal
-        ) {
+        )
+        {
             Debug.Assert(
                 int.MaxValue / JsonConstants.MaxExpansionFactorWhileEscaping >= value.Length
             );
@@ -1626,7 +1644,8 @@ namespace System.Text.Json
         private void WriteStringByOptions(
             ReadOnlySpan<byte> utf8PropertyName,
             ReadOnlySpan<byte> utf8Value
-        ) {
+        )
+        {
             ValidateWritingProperty();
             if (_options.Indented)
             {
@@ -1641,7 +1660,8 @@ namespace System.Text.Json
         private void WriteStringByOptions(
             ReadOnlySpan<char> propertyName,
             ReadOnlySpan<byte> utf8Value
-        ) {
+        )
+        {
             ValidateWritingProperty();
             if (_options.Indented)
             {
@@ -1656,7 +1676,8 @@ namespace System.Text.Json
         private void WriteStringByOptions(
             ReadOnlySpan<byte> utf8PropertyName,
             ReadOnlySpan<char> value
-        ) {
+        )
+        {
             ValidateWritingProperty();
             if (_options.Indented)
             {
@@ -1672,7 +1693,8 @@ namespace System.Text.Json
         private void WriteStringMinimized(
             ReadOnlySpan<char> escapedPropertyName,
             ReadOnlySpan<char> escapedValue
-        ) {
+        )
+        {
             Debug.Assert(escapedValue.Length <= JsonConstants.MaxUnescapedTokenSize);
             Debug.Assert(
                 escapedPropertyName.Length
@@ -1717,7 +1739,8 @@ namespace System.Text.Json
         private void WriteStringMinimized(
             ReadOnlySpan<byte> escapedPropertyName,
             ReadOnlySpan<byte> escapedValue
-        ) {
+        )
+        {
             Debug.Assert(escapedValue.Length <= JsonConstants.MaxEscapedTokenSize);
             Debug.Assert(escapedPropertyName.Length < int.MaxValue - escapedValue.Length - 6);
 
@@ -1755,7 +1778,8 @@ namespace System.Text.Json
         private void WriteStringMinimized(
             ReadOnlySpan<char> escapedPropertyName,
             ReadOnlySpan<byte> escapedValue
-        ) {
+        )
+        {
             Debug.Assert(escapedValue.Length <= JsonConstants.MaxEscapedTokenSize);
             Debug.Assert(
                 escapedPropertyName.Length
@@ -1801,7 +1825,8 @@ namespace System.Text.Json
         private void WriteStringMinimized(
             ReadOnlySpan<byte> escapedPropertyName,
             ReadOnlySpan<char> escapedValue
-        ) {
+        )
+        {
             Debug.Assert(escapedValue.Length <= JsonConstants.MaxEscapedTokenSize);
             Debug.Assert(
                 escapedPropertyName.Length
@@ -1847,7 +1872,8 @@ namespace System.Text.Json
         private void WriteStringIndented(
             ReadOnlySpan<char> escapedPropertyName,
             ReadOnlySpan<char> escapedValue
-        ) {
+        )
+        {
             int indent = Indentation;
             Debug.Assert(indent <= 2 * JsonConstants.MaxWriterDepth);
 
@@ -1912,7 +1938,8 @@ namespace System.Text.Json
         private void WriteStringIndented(
             ReadOnlySpan<byte> escapedPropertyName,
             ReadOnlySpan<byte> escapedValue
-        ) {
+        )
+        {
             int indent = Indentation;
             Debug.Assert(indent <= 2 * JsonConstants.MaxWriterDepth);
 
@@ -1968,7 +1995,8 @@ namespace System.Text.Json
         private void WriteStringIndented(
             ReadOnlySpan<char> escapedPropertyName,
             ReadOnlySpan<byte> escapedValue
-        ) {
+        )
+        {
             int indent = Indentation;
             Debug.Assert(indent <= 2 * JsonConstants.MaxWriterDepth);
 
@@ -2033,7 +2061,8 @@ namespace System.Text.Json
         private void WriteStringIndented(
             ReadOnlySpan<byte> escapedPropertyName,
             ReadOnlySpan<char> escapedValue
-        ) {
+        )
+        {
             int indent = Indentation;
             Debug.Assert(indent <= 2 * JsonConstants.MaxWriterDepth);
 

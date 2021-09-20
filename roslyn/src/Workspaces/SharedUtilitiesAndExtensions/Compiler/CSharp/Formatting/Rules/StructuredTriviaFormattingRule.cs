@@ -15,11 +15,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             in SyntaxToken previousToken,
             in SyntaxToken currentToken,
             in NextGetAdjustNewLinesOperation nextOperation
-        ) {
+        )
+        {
             if (
                 previousToken.Parent is StructuredTriviaSyntax
                 || currentToken.Parent is StructuredTriviaSyntax
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -30,16 +32,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             in SyntaxToken previousToken,
             in SyntaxToken currentToken,
             in NextGetAdjustSpacesOperation nextOperation
-        ) {
+        )
+        {
             if (
                 previousToken.Parent is StructuredTriviaSyntax
                 || currentToken.Parent is StructuredTriviaSyntax
-            ) {
+            )
+            {
                 // this doesn't take care of all cases where tokens belong to structured trivia. this is only for cases we care
                 if (
                     previousToken.Kind() == SyntaxKind.HashToken
                     && SyntaxFacts.IsPreprocessorKeyword(currentToken.Kind())
-                ) {
+                )
+                {
                     return CreateAdjustSpacesOperation(
                         space: 0,
                         option: AdjustSpacesOption.ForceSpacesIfOnSingleLine
@@ -49,7 +54,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 if (
                     previousToken.Kind() == SyntaxKind.RegionKeyword
                     && currentToken.Kind() == SyntaxKind.EndOfDirectiveToken
-                ) {
+                )
+                {
                     return CreateAdjustSpacesOperation(
                         space: 0,
                         option: AdjustSpacesOption.PreserveSpaces

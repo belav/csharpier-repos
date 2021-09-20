@@ -3232,7 +3232,8 @@ namespace System
             string corLibText,
             bool moduleOnly,
             params DiagnosticDescription[] expectedDiagnostics
-        ) {
+        )
+        {
             CSharpCompilationOptions options = TestOptions.UnsafeReleaseDll;
             if (moduleOnly)
             {

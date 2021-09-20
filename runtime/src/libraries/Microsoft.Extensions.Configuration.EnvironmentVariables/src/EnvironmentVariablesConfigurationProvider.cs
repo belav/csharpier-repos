@@ -57,7 +57,8 @@ namespace Microsoft.Extensions.Configuration.EnvironmentVariables
                     }
                     else if (
                         key.StartsWith(SqlAzureServerPrefix, StringComparison.OrdinalIgnoreCase)
-                    ) {
+                    )
+                    {
                         prefix = SqlAzureServerPrefix;
                         provider = "System.Data.SqlClient";
                     }

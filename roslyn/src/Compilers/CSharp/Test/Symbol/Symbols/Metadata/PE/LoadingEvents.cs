@@ -63,7 +63,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
         private static void CheckInstanceAndStaticEvents(
             NamedTypeSymbol @class,
             string eventTypeDisplayString
-        ) {
+        )
+        {
             var instanceEvent = @class.GetMember<EventSymbol>("InstanceEvent");
 
             Assert.Equal(SymbolKind.Event, instanceEvent.Kind);
@@ -372,7 +373,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             NamedTypeSymbol innerClass,
             string methodName,
             Symbol interfaceEvent
-        ) {
+        )
+        {
             var @interface = interfaceEvent.ContainingType;
 
             Assert.Equal(1, innerClass.Arity);

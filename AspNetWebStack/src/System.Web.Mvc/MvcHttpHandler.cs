@@ -15,7 +15,8 @@ namespace System.Web.Mvc
             HttpContext httpContext,
             AsyncCallback callback,
             object state
-        ) {
+        )
+        {
             HttpContextBase httpContextBase = new HttpContextWrapper(httpContext);
             return BeginProcessRequest(httpContextBase, callback, state);
         }
@@ -24,7 +25,8 @@ namespace System.Web.Mvc
             HttpContextBase httpContext,
             AsyncCallback callback,
             object state
-        ) {
+        )
+        {
             IHttpHandler httpHandler = GetHttpHandler(httpContext);
             IHttpAsyncHandler httpAsyncHandler = httpHandler as IHttpAsyncHandler;
 
@@ -37,7 +39,8 @@ namespace System.Web.Mvc
                     AsyncCallback asyncCallback,
                     object asyncState,
                     IHttpAsyncHandler innerHandler
-                ) {
+                )
+                {
                     return innerHandler.BeginProcessRequest(
                         HttpContext.Current,
                         asyncCallback,
@@ -47,7 +50,8 @@ namespace System.Web.Mvc
                 EndInvokeVoidDelegate<IHttpAsyncHandler> endDelegate = delegate(
                     IAsyncResult asyncResult,
                     IHttpAsyncHandler innerHandler
-                ) {
+                )
+                {
                     innerHandler.EndProcessRequest(asyncResult);
                 };
                 return AsyncResultWrapper.Begin(
@@ -91,7 +95,8 @@ namespace System.Web.Mvc
         protected override void VerifyAndProcessRequest(
             IHttpHandler httpHandler,
             HttpContextBase httpContext
-        ) {
+        )
+        {
             if (httpHandler == null)
             {
                 throw new ArgumentNullException("httpHandler");
@@ -106,7 +111,8 @@ namespace System.Web.Mvc
             HttpContext context,
             AsyncCallback cb,
             object extraData
-        ) {
+        )
+        {
             return BeginProcessRequest(context, cb, extraData);
         }
 
@@ -135,7 +141,8 @@ namespace System.Web.Mvc
             protected override void VerifyAndProcessRequest(
                 IHttpHandler httpHandler,
                 HttpContextBase httpContext
-            ) {
+            )
+            {
                 // don't process the request, just store a reference to it
                 HttpHandler = httpHandler;
             }

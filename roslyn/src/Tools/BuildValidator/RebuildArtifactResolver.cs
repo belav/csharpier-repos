@@ -21,7 +21,8 @@ namespace BuildValidator
         internal RebuildArtifactResolver(
             LocalSourceResolver sourceResolver,
             LocalReferenceResolver referenceResolver
-        ) {
+        )
+        {
             SourceResolver = sourceResolver;
             ReferenceResolver = referenceResolver;
         }
@@ -31,13 +32,15 @@ namespace BuildValidator
 
         public MetadataReference ResolveMetadataReference(
             MetadataReferenceInfo metadataReferenceInfo
-        ) {
+        )
+        {
             if (
                 !ReferenceResolver.TryResolveReferences(
                     metadataReferenceInfo,
                     out var metadataReference
                 )
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     $"Could not resolve reference: {metadataReferenceInfo.FileName}"
                 );

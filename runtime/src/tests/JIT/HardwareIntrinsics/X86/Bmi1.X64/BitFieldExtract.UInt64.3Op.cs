@@ -241,7 +241,8 @@ namespace JIT.HardwareIntrinsics.X86
             Byte op3,
             UInt64 result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             var isUnexpectedResult = false;
 
             ulong expectedResult = 15;

@@ -123,7 +123,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
                 var option in OptionStore.GetRegisteredOptions()
                     .Where(o => o.Feature == _featureOptionName)
                     .OrderBy(o => o.Name)
-            ) {
+            )
+            {
                 if (!option.IsPerLanguage)
                 {
                     AddOption(panel, option);
@@ -150,7 +151,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             IOption option,
             string languageName,
             string additional = null
-        ) {
+        )
+        {
             var uiElement = CreateControl(option, languageName, additional);
             if (uiElement != null)
             {
@@ -162,7 +164,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             IOption option,
             string languageName = null,
             string additional = null
-        ) {
+        )
+        {
             if (option.Type == typeof(bool))
             {
                 var checkBox = new CheckBox()

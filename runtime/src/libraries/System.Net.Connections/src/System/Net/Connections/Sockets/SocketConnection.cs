@@ -28,7 +28,8 @@ namespace System.Net.Connections
         protected override ValueTask CloseAsyncCore(
             ConnectionCloseMethod method,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (cancellationToken.IsCancellationRequested)
             {
                 return ValueTask.FromCanceled(cancellationToken);
@@ -65,7 +66,8 @@ namespace System.Net.Connections
         bool IConnectionProperties.TryGet(
             Type propertyKey,
             [NotNullWhen(true)] out object? property
-        ) {
+        )
+        {
             if (propertyKey == typeof(Socket))
             {
                 property = _socket;

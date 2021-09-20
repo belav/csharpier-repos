@@ -87,7 +87,8 @@ namespace System.Diagnostics
                         newCounterType
                         != Interop.Kernel32.PerformanceCounterOptions.PERF_COUNTER_MULTI_BASE
                     )
-                ) {
+                )
+                {
                     // Since oldSample has a system frequency of 0, this means the newSample is the first sample
                     // on a two sample calculation.  Since we can't do anything with it, return 0.
                     return 0.0f;
@@ -150,7 +151,8 @@ namespace System.Diagnostics
             CounterSample newSample,
             ref Interop.Kernel32.PerformanceCounterOptions.PDH_RAW_COUNTER oldPdhValue,
             ref Interop.Kernel32.PerformanceCounterOptions.PDH_RAW_COUNTER newPdhValue
-        ) {
+        )
+        {
             int newCounterType = (int)newSample.CounterType;
 
             switch (newCounterType)
@@ -191,7 +193,8 @@ namespace System.Diagnostics
                             == Interop.Kernel32.PerformanceCounterOptions.PERF_COUNTER_MULTI_TIMER
                         || newCounterType
                             == Interop.Kernel32.PerformanceCounterOptions.PERF_COUNTER_MULTI_TIMER_INV
-                    ) {
+                    )
+                    {
                         //  this is to make PDH work like PERFMON for
                         //  this counter type
                         newPdhValue.FirstValue *= (uint)newSample.CounterFrequency;
@@ -206,7 +209,8 @@ namespace System.Diagnostics
                             newCounterType
                             & Interop.Kernel32.PerformanceCounterOptions.PERF_MULTI_COUNTER
                         ) == Interop.Kernel32.PerformanceCounterOptions.PERF_MULTI_COUNTER
-                    ) {
+                    )
+                    {
                         newPdhValue.MultiCount = (int)newSample.BaseValue;
                         oldPdhValue.MultiCount = (int)oldSample.BaseValue;
                     }
@@ -243,7 +247,8 @@ namespace System.Diagnostics
                             newCounterType
                             & Interop.Kernel32.PerformanceCounterOptions.PERF_MULTI_COUNTER
                         ) == Interop.Kernel32.PerformanceCounterOptions.PERF_MULTI_COUNTER
-                    ) {
+                    )
+                    {
                         newPdhValue.MultiCount = (int)newSample.BaseValue;
                         oldPdhValue.MultiCount = (int)oldSample.BaseValue;
                     }

@@ -35,7 +35,8 @@ namespace IlasmPortablePdbTests
             int endLine = SequencePoint.HiddenLine,
             int startCol = 0,
             int endCol = 0
-        ) {
+        )
+        {
             Document = document;
             StartLine = startLine;
             EndLine = endLine;
@@ -55,7 +56,8 @@ namespace IlasmPortablePdbTests
             string name,
             DocumentStub document,
             List<SequencePointStub> sequencePoints = null
-        ) {
+        )
+        {
             Name = name;
             Document = document;
             SequencePoints = sequencePoints ?? new List<SequencePointStub>();
@@ -88,7 +90,8 @@ namespace IlasmPortablePdbTests
             int endOffset,
             int length,
             List<VariableStub> variables = null
-        ) {
+        )
+        {
             MethodName = methodName;
             StartOffset = startOffset;
             EndOffset = endOffset;

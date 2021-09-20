@@ -25,7 +25,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             string testCase,
             string certPem,
             string keyPem
-        ) {
+        )
+        {
             _ = testCase;
             using (var store = new X509Store(StoreName.My, StoreLocation.CurrentUser))
             using (var cert = X509Certificate2.CreateFromPem(certPem, keyPem))
@@ -65,7 +66,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     TestData.DsaCertificate,
                     TestData.DsaPkcs8Key
                 )
-            ) {
+            )
+            {
                 store.Open(OpenFlags.ReadWrite);
 
                 // Make sure cert is not already in the store

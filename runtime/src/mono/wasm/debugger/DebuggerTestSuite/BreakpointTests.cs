@@ -264,7 +264,8 @@ namespace DebuggerTests
             string method_to_stop,
             string condition,
             bool bp_stop_expected
-        ) {
+        )
+        {
             Result[] bps = new Result[2];
             bps[0] = await SetBreakpointInMethod(
                 "debugger-test.dll",
@@ -299,7 +300,8 @@ namespace DebuggerTests
             int column_bp,
             int line_expected,
             int column_expected
-        ) {
+        )
+        {
             await SetBreakpoint("/debugger-driver.html", line_bp, column_bp, condition: condition);
             await SetBreakpoint("/debugger-driver.html", 79, 3);
 
@@ -344,7 +346,8 @@ namespace DebuggerTests
             string condition,
             bool bp_stop_expected,
             bool bp_stop_expected2
-        ) {
+        )
+        {
             Result[] bps = new Result[2];
             bps[0] = await SetBreakpointInMethod(
                 "debugger-test.dll",

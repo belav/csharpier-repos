@@ -29,7 +29,8 @@ namespace System.Text.Unicode
             int inputLength,
             out int utf16CodeUnitCountAdjustment,
             out int scalarCountAdjustment
-        ) {
+        )
+        {
             Debug.Assert(inputLength >= 0, "Input length must not be negative.");
             Debug.Assert(
                 pInputBuffer != null || inputLength == 0,
@@ -119,7 +120,8 @@ namespace System.Text.Unicode
                             ref *pFinalPosWhereCanReadDWordFromInputBuffer
                         )
                         >= 4 * sizeof(uint)
-                    ) {
+                    )
+                    {
                         // We want reads in the inner loop to be aligned. So let's perform a quick
                         // ASCII check of the next 32 bits (4 bytes) now, and if that succeeds bump
                         // the read pointer up to the next aligned address.
@@ -192,7 +194,8 @@ namespace System.Text.Unicode
                                         !ASCIIUtility.AllBytesInUInt32AreAscii(
                                             ((uint*)pInputBuffer)[0] | ((uint*)pInputBuffer)[1]
                                         )
-                                    ) {
+                                    )
+                                    {
                                         goto LoopTerminatedEarlyDueToNonAsciiDataInFirstPair;
                                     }
 
@@ -200,7 +203,8 @@ namespace System.Text.Unicode
                                         !ASCIIUtility.AllBytesInUInt32AreAscii(
                                             ((uint*)pInputBuffer)[2] | ((uint*)pInputBuffer)[3]
                                         )
-                                    ) {
+                                    )
+                                    {
                                         goto LoopTerminatedEarlyDueToNonAsciiDataInSecondPair;
                                     }
                                 }
@@ -308,7 +312,8 @@ namespace System.Text.Unicode
                     if (
                         (BitConverter.IsLittleEndian && (byte)thisDWord < 0x02u)
                         || (!BitConverter.IsLittleEndian && thisDWord < 0x0200_0000u)
-                    ) {
+                    )
+                    {
                         goto Error; // overlong form - leading byte was [ C0 ] or [ C1 ]
                     }
 
@@ -334,7 +339,8 @@ namespace System.Text.Unicode
                                 && !UInt32EndsWithOverlongUtf8TwoByteSequence(thisDWord)
                             )
                         )
-                    ) {
+                    )
+                    {
                         // We have two runs of two bytes each.
                         pInputBuffer += 4;
                         tempUtf16CodeUnitCountAdjustment -= 2; // 4 UTF-8 code units -> 2 UTF-16 code units (and 2 scalars)
@@ -455,7 +461,8 @@ namespace System.Text.Unicode
                         if (
                             ((thisDWord & 0x0000_200Fu) == 0)
                             || (((thisDWord - 0x0000_200Du) & 0x0000_200Fu) == 0)
-                        ) {
+                        )
+                        {
                             goto Error; // overlong or surrogate
                         }
                     }
@@ -464,7 +471,8 @@ namespace System.Text.Unicode
                         if (
                             ((thisDWord & 0x0F20_0000u) == 0)
                             || (((thisDWord - 0x0D20_0000u) & 0x0F20_0000u) == 0)
-                        ) {
+                        )
+                        {
                             goto Error; // overlong or surrogate
                         }
                     }
@@ -529,7 +537,8 @@ namespace System.Text.Unicode
                             if (
                                 (thisQWord & 0xC0F0_C0C0_F0C0_C0F0ul) == 0x80E0_8080_E080_80E0ul
                                 && IsUtf8ContinuationByte(in pInputBuffer[8])
-                            ) {
+                            )
+                            {
                                 // Saw a proper bitmask for three incoming 3-byte sequences, perform the
                                 // overlong and surrogate sequence checking now.
 
@@ -539,7 +548,8 @@ namespace System.Text.Unicode
                                 if (
                                     (((uint)thisQWord & 0x200Fu) == 0)
                                     || ((((uint)thisQWord - 0x200Du) & 0x200Fu) == 0)
-                                ) {
+                                )
+                                {
                                     goto Error;
                                 }
 
@@ -552,7 +562,8 @@ namespace System.Text.Unicode
                                 if (
                                     (((uint)thisQWord & 0x200Fu) == 0)
                                     || ((((uint)thisQWord - 0x200Du) & 0x200Fu) == 0)
-                                ) {
+                                )
+                                {
                                     goto ProcessSingleThreeByteSequenceSkipOverlongAndSurrogateChecks;
                                 }
 
@@ -562,7 +573,8 @@ namespace System.Text.Unicode
                                 if (
                                     (((uint)thisQWord & 0x200Fu) == 0)
                                     || ((((uint)thisQWord - 0x200Du) & 0x200Fu) == 0)
-                                ) {
+                                )
+                                {
                                     goto ProcessSingleThreeByteSequenceSkipOverlongAndSurrogateChecks;
                                 }
 
@@ -586,7 +598,8 @@ namespace System.Text.Unicode
                                 if (
                                     (((uint)thisQWord & 0x200Fu) == 0)
                                     || ((((uint)thisQWord - 0x200Du) & 0x200Fu) == 0)
-                                ) {
+                                )
+                                {
                                     goto Error;
                                 }
 
@@ -599,7 +612,8 @@ namespace System.Text.Unicode
                                 if (
                                     (((uint)thisQWord & 0x200Fu) == 0)
                                     || ((((uint)thisQWord - 0x200Du) & 0x200Fu) == 0)
-                                ) {
+                                )
+                                {
                                     goto ProcessSingleThreeByteSequenceSkipOverlongAndSurrogateChecks;
                                 }
 

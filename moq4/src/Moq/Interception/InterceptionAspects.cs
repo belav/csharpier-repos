@@ -34,7 +34,8 @@ namespace Moq
             if (
                 IsObjectMethod(invocation.Method)
                 && !mock.MutableSetups.Any(c => IsObjectMethod(c.Method, "Equals"))
-            ) {
+            )
+            {
                 invocation.ReturnValue = ReferenceEquals(invocation.Arguments.First(), mock.Object);
                 return true;
             }
@@ -55,7 +56,8 @@ namespace Moq
             if (
                 IsObjectMethod(invocation.Method)
                 && !mock.MutableSetups.Any(c => IsObjectMethod(c.Method, "GetHashCode"))
-            ) {
+            )
+            {
                 invocation.ReturnValue = mock.GetHashCode();
                 return true;
             }
@@ -71,7 +73,8 @@ namespace Moq
             if (
                 IsObjectMethod(invocation.Method)
                 && !mock.MutableSetups.Any(c => IsObjectMethod(c.Method, "ToString"))
-            ) {
+            )
+            {
                 invocation.ReturnValue = mock.ToString() + ".Object";
                 return true;
             }
@@ -147,7 +150,8 @@ namespace Moq
                     methodName[0] == 'a'
                     && methodName[3] == '_'
                     && invocation.Method.IsEventAddAccessor()
-                ) {
+                )
+                {
                     var implementingMethod = invocation.Method.GetImplementingMethod(
                         invocation.ProxyType
                     );
@@ -163,7 +167,8 @@ namespace Moq
                         else if (
                             invocation.Arguments.Length > 0
                             && invocation.Arguments[0] is Delegate delegateInstance
-                        ) {
+                        )
+                        {
                             mock.EventHandlers.Add(@event, delegateInstance);
                             return true;
                         }
@@ -174,7 +179,8 @@ namespace Moq
                     && methodName.Length > 7
                     && methodName[6] == '_'
                     && invocation.Method.IsEventRemoveAccessor()
-                ) {
+                )
+                {
                     var implementingMethod = invocation.Method.GetImplementingMethod(
                         invocation.ProxyType
                     );
@@ -190,7 +196,8 @@ namespace Moq
                         else if (
                             invocation.Arguments.Length > 0
                             && invocation.Arguments[0] is Delegate delegateInstance
-                        ) {
+                        )
+                        {
                             mock.EventHandlers.Remove(@event, delegateInstance);
                             return true;
                         }

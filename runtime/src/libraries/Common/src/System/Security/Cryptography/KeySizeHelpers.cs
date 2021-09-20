@@ -28,7 +28,8 @@ namespace System.Security.Cryptography
             this int size,
             KeySizes legalSizes,
             out bool validatedByZeroSkipSizeKeySizes
-        ) {
+        )
+        {
             validatedByZeroSkipSizeKeySizes = false;
 
             // If a cipher has only one valid key size, MinSize == MaxSize and SkipSize will be 0
@@ -62,7 +63,8 @@ namespace System.Security.Cryptography
             this int size,
             KeySizes[] legalSizes,
             out bool validatedByZeroSkipSizeKeySizes
-        ) {
+        )
+        {
             for (int i = 0; i < legalSizes.Length; i++)
             {
                 if (size.IsLegalSize(legalSizes[i], out validatedByZeroSkipSizeKeySizes))

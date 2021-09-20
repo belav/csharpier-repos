@@ -488,7 +488,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 if (
                     args.Kind == WorkspaceChangeKind.DocumentInfoChanged
                     && args.DocumentId == originalDoc.Id
-                ) {
+                )
+                {
                     tcs.SetResult(true);
                 }
             };
@@ -522,7 +523,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 if (
                     args.Kind == WorkspaceChangeKind.DocumentInfoChanged
                     && args.DocumentId == originalDoc.Id
-                ) {
+                )
+                {
                     tcs.SetResult(true);
                 }
             };
@@ -557,7 +559,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 if (
                     args.Kind == WorkspaceChangeKind.DocumentInfoChanged
                     && args.DocumentId == originalDoc.Id
-                ) {
+                )
+                {
                     tcs.SetResult(true);
                 }
             };
@@ -589,7 +592,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 if (
                     args.Kind == WorkspaceChangeKind.DocumentInfoChanged
                     && args.DocumentId == originalDoc.Id
-                ) {
+                )
+                {
                     tcs.SetResult(true);
                 }
             };

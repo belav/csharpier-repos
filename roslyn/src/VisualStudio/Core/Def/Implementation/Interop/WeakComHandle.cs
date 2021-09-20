@@ -126,7 +126,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Interop
 
         internal bool TryGetManagedObjectWithoutCaringWhetherNativeObjectIsAlive(
             out TObject managedObject
-        ) {
+        )
+        {
             // NOTE: Only use this method if you do NOT care whether the native ComAggregate
             // object has already been released.
             if (_managedObjectWeakReference == null)

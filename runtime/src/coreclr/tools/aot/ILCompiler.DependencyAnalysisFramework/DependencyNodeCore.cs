@@ -18,7 +18,8 @@ namespace ILCompiler.DependencyAnalysisFramework
             public DependencyListEntry(
                 DependencyNodeCore<DependencyContextType> node,
                 string reason
-            ) {
+            )
+            {
                 Node = node;
                 Reason = reason;
             }
@@ -59,7 +60,8 @@ namespace ILCompiler.DependencyAnalysisFramework
                 DependencyNodeCore<DependencyContextType> node,
                 DependencyNodeCore<DependencyContextType> otherReasonNode,
                 string reason
-            ) {
+            )
+            {
                 Node = node;
                 OtherReasonNode = otherReasonNode;
                 Reason = reason;

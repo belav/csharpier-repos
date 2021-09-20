@@ -50,7 +50,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         /// <returns> An object that exposes change tracking information and operations for the given property. </returns>
         public virtual PropertyEntry<TEntity, TProperty> Property<TProperty>(
             Expression<Func<TEntity, TProperty>> propertyExpression
-        ) {
+        )
+        {
             Check.NotNull(propertyExpression, nameof(propertyExpression));
 
             return new PropertyEntry<TEntity, TProperty>(

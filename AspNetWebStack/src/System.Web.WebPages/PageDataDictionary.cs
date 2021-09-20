@@ -269,7 +269,8 @@ namespace System.Web.WebPages
         internal static IDictionary<object, dynamic> CreatePageDataFromParameters(
             IDictionary<object, dynamic> previousPageData,
             params object[] data
-        ) {
+        )
+        {
             var oldPageData = previousPageData as PageDataDictionary<dynamic>;
 
             // Add the original items

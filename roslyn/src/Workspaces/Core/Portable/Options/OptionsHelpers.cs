@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.Options
         public static object? GetPublicOption(
             OptionKey optionKey,
             Func<OptionKey, object?> getOption
-        ) {
+        )
+        {
             var value = getOption(optionKey);
             if (value is ICodeStyleOption codeStyleOption)
             {

@@ -106,14 +106,16 @@ namespace Microsoft.CodeAnalysis.ConvertLinq.ConvertForEachToLinqQuery
                     cancellationToken,
                     out var queryConverter
                 )
-            ) {
+            )
+            {
                 return;
             }
 
             if (
                 semanticModel.GetDiagnostics(forEachStatement.Span, cancellationToken)
                     .Any(diagnostic => diagnostic.DefaultSeverity == DiagnosticSeverity.Error)
-            ) {
+            )
+            {
                 return;
             }
 
@@ -161,7 +163,8 @@ namespace Microsoft.CodeAnalysis.ConvertLinq.ConvertForEachToLinqQuery
                     cancellationToken,
                     out var linqConverter
                 )
-            ) {
+            )
+            {
                 context.RegisterRefactoring(
                     new ForEachToLinqQueryCodeAction(
                         FeaturesResources.Convert_to_linq_call_form,
@@ -177,7 +180,8 @@ namespace Microsoft.CodeAnalysis.ConvertLinq.ConvertForEachToLinqQuery
             Document document,
             bool convertToQuery,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var editor = new SyntaxEditor(
                 converter.ForEachInfo.SemanticModel.SyntaxTree.GetRoot(cancellationToken),
                 document.Project.Solution.Workspace
@@ -201,7 +205,8 @@ namespace Microsoft.CodeAnalysis.ConvertLinq.ConvertForEachToLinqQuery
             bool convertLocalDeclarations,
             CancellationToken cancellationToken,
             out IConverter<TForEachStatement, TStatement> converter
-        ) {
+        )
+        {
             var forEachInfo = CreateForEachInfo(
                 forEachStatement,
                 semanticModel,
@@ -217,7 +222,8 @@ namespace Microsoft.CodeAnalysis.ConvertLinq.ConvertForEachToLinqQuery
                     cancellationToken,
                     out converter
                 )
-            ) {
+            )
+            {
                 return true;
             }
 

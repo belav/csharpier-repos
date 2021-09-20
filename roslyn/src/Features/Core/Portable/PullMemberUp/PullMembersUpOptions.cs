@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.PullMemberUp
         public PullMembersUpOptions(
             INamedTypeSymbol destination,
             ImmutableArray<MemberAnalysisResult> memberAnalysisResults
-        ) {
+        )
+        {
             Destination = destination;
             MemberAnalysisResults = memberAnalysisResults;
             PullUpOperationNeedsToDoExtraChanges = MemberAnalysisResults.Any(

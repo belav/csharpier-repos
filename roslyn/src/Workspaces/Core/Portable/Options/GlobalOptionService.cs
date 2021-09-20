@@ -75,7 +75,8 @@ namespace Microsoft.CodeAnalysis.Options
             [Import(AllowDefault = true)] IWorkspaceThreadingService? workspaceThreadingService,
             [ImportMany] IEnumerable<Lazy<IOptionProvider, LanguageMetadata>> optionProviders,
             [ImportMany] IEnumerable<Lazy<IOptionPersisterProvider>> optionSerializers
-        ) {
+        )
+        {
             _workspaceThreadingService = workspaceThreadingService;
             _lazyAllOptions = new Lazy<ImmutableHashSet<IOption>>(
                 () => optionProviders.SelectMany(p => p.Value.Options).ToImmutableHashSet()
@@ -96,7 +97,8 @@ namespace Microsoft.CodeAnalysis.Options
             Lazy<ImmutableHashSet<IOption>>
         > CreateLazySerializableOptionsByLanguage(
             IEnumerable<Lazy<IOptionProvider, LanguageMetadata>> optionProviders
-        ) {
+        )
+        {
             var builder = ImmutableDictionary.CreateBuilder<
                 string,
                 Lazy<ImmutableHashSet<IOption>>
@@ -117,7 +119,8 @@ namespace Microsoft.CodeAnalysis.Options
             // Local functions
             static ImmutableHashSet<IOption> ComputeSerializableOptionsFromProviders(
                 ImmutableArray<Lazy<IOptionProvider, LanguageMetadata>> lazyProvidersAndMetadata
-            ) {
+            )
+            {
                 var builder = ImmutableHashSet.CreateBuilder<IOption>();
 
                 foreach (var lazyProviderAndMetadata in lazyProvidersAndMetadata)
@@ -161,7 +164,8 @@ namespace Microsoft.CodeAnalysis.Options
                 IWorkspaceThreadingService? workspaceThreadingService,
                 ImmutableArray<Lazy<IOptionPersisterProvider>> optionSerializerProviders,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (workspaceThreadingService is not null)
                 {
                     return workspaceThreadingService.Run(
@@ -178,7 +182,8 @@ namespace Microsoft.CodeAnalysis.Options
             static async Task<ImmutableArray<IOptionPersister>> GetOptionPersistersAsync(
                 ImmutableArray<Lazy<IOptionPersisterProvider>> optionSerializerProviders,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return await optionSerializerProviders.SelectAsArrayAsync(
                         static (lazyProvider, cancellationToken) =>
                             lazyProvider.Value.GetOrCreatePersisterAsync(cancellationToken),
@@ -211,7 +216,8 @@ namespace Microsoft.CodeAnalysis.Options
             string? language,
             [NotNullWhen(true)] out IEditorConfigStorageLocation2? storageLocation,
             out OptionKey optionKey
-        ) {
+        )
+        {
             var temporaryOptions = s_emptyEditorConfigKeysToOptions;
             ref var editorConfigToOptionsStorage = ref temporaryOptions;
             switch (language)
@@ -259,14 +265,16 @@ namespace Microsoft.CodeAnalysis.Options
                 GlobalOptionService service,
                 string key,
                 string? language
-            ) {
+            )
+            {
                 // Use GetRegisteredSerializableOptions instead of GetRegisteredOptions to avoid loading assemblies for
                 // inactive languages.
                 foreach (
                     var option in service.GetRegisteredSerializableOptions(
                         ImmutableHashSet.Create(language ?? "")
                     )
-                ) {
+                )
+                {
                     foreach (var storage in option.StorageLocations)
                     {
                         if (!(storage is IEditorConfigStorageLocation2 editorConfigStorage))
@@ -290,7 +298,8 @@ namespace Microsoft.CodeAnalysis.Options
 
         public ImmutableHashSet<IOption> GetRegisteredSerializableOptions(
             ImmutableHashSet<string> languages
-        ) {
+        )
+        {
             if (languages.IsEmpty)
             {
                 return ImmutableHashSet<IOption>.Empty;
@@ -326,7 +335,8 @@ namespace Microsoft.CodeAnalysis.Options
         public SerializableOptionSet GetSerializableOptionsSnapshot(
             ImmutableHashSet<string> languages,
             IOptionService optionService
-        ) {
+        )
+        {
             Debug.Assert(languages.All(RemoteSupportedLanguages.IsSupported));
             var serializableOptions = GetRegisteredSerializableOptions(languages);
             var serializableOptionValues = GetSerializableOptionValues(
@@ -351,7 +361,8 @@ namespace Microsoft.CodeAnalysis.Options
         private ImmutableDictionary<OptionKey, object?> GetSerializableOptionValues(
             ImmutableHashSet<IOption> optionKeys,
             ImmutableHashSet<string> languages
-        ) {
+        )
+        {
             if (optionKeys.IsEmpty)
             {
                 return ImmutableDictionary<OptionKey, object?>.Empty;
@@ -509,7 +520,8 @@ namespace Microsoft.CodeAnalysis.Options
 
         private void UpdateRegisteredWorkspacesAndRaiseEvents(
             List<OptionChangedEventArgs> changedOptions
-        ) {
+        )
+        {
             if (changedOptions.Count == 0)
             {
                 return;

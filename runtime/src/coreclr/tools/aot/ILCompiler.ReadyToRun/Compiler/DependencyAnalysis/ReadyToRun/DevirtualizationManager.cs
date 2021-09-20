@@ -30,7 +30,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             if (
                 _compilationModuleGroup.VersionsWithMethodBody(declMethod)
                 && _compilationModuleGroup.VersionsWithType(implType)
-            ) {
+            )
+            {
                 /**
                  * It is possible for us to hit a scenario where a type implements
                  * the same interface more than once due to generic instantiations.

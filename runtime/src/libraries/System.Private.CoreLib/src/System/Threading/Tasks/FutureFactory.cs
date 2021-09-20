@@ -142,7 +142,8 @@ namespace System.Threading.Tasks
         public TaskFactory(
             TaskCreationOptions creationOptions,
             TaskContinuationOptions continuationOptions
-        ) {
+        )
+        {
             TaskFactory.CheckMultiTaskContinuationOptions(continuationOptions);
             TaskFactory.CheckCreationOptions(creationOptions);
 
@@ -378,7 +379,8 @@ namespace System.Threading.Tasks
             CancellationToken cancellationToken,
             TaskCreationOptions creationOptions,
             TaskScheduler scheduler
-        ) {
+        )
+        {
             return Task<TResult>.StartNew(
                 Task.InternalCurrentIfAttached(creationOptions),
                 function,
@@ -447,7 +449,8 @@ namespace System.Threading.Tasks
             Func<object?, TResult> function,
             object? state,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Task? currTask = Task.InternalCurrent;
             return Task<TResult>.StartNew(
                 currTask,
@@ -488,7 +491,8 @@ namespace System.Threading.Tasks
             Func<object?, TResult> function,
             object? state,
             TaskCreationOptions creationOptions
-        ) {
+        )
+        {
             Task? currTask = Task.InternalCurrent;
             return Task<TResult>.StartNew(
                 currTask,
@@ -542,7 +546,8 @@ namespace System.Threading.Tasks
             CancellationToken cancellationToken,
             TaskCreationOptions creationOptions,
             TaskScheduler scheduler
-        ) {
+        )
+        {
             return Task<TResult>.StartNew(
                 Task.InternalCurrentIfAttached(creationOptions),
                 function,
@@ -565,7 +570,8 @@ namespace System.Threading.Tasks
             Action<IAsyncResult>? endAction,
             Task<TResult> promise,
             bool requiresSynchronization
-        ) {
+        )
+        {
             Debug.Assert(
                 (endFunction != null) != (endAction != null),
                 "Expected exactly one of endFunction/endAction to be non-null"
@@ -644,7 +650,8 @@ namespace System.Threading.Tasks
         public Task<TResult> FromAsync(
             IAsyncResult asyncResult,
             Func<IAsyncResult, TResult> endMethod
-        ) {
+        )
+        {
             return FromAsyncImpl(
                 asyncResult,
                 endMethod,
@@ -677,7 +684,8 @@ namespace System.Threading.Tasks
             IAsyncResult asyncResult,
             Func<IAsyncResult, TResult> endMethod,
             TaskCreationOptions creationOptions
-        ) {
+        )
+        {
             return FromAsyncImpl(asyncResult, endMethod, null, creationOptions, DefaultScheduler);
         }
 
@@ -709,7 +717,8 @@ namespace System.Threading.Tasks
             Func<IAsyncResult, TResult> endMethod,
             TaskCreationOptions creationOptions,
             TaskScheduler scheduler
-        ) {
+        )
+        {
             return FromAsyncImpl(asyncResult, endMethod, null, creationOptions, scheduler);
         }
 
@@ -721,7 +730,8 @@ namespace System.Threading.Tasks
             Action<IAsyncResult>? endAction,
             TaskCreationOptions creationOptions,
             TaskScheduler scheduler
-        ) {
+        )
+        {
             if (asyncResult == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.asyncResult);
 
@@ -834,7 +844,8 @@ namespace System.Threading.Tasks
             Func<AsyncCallback, object?, IAsyncResult> beginMethod,
             Func<IAsyncResult, TResult> endMethod,
             object? state
-        ) {
+        )
+        {
             return FromAsyncImpl(beginMethod, endMethod, null, state, m_defaultCreationOptions);
         }
 
@@ -865,7 +876,8 @@ namespace System.Threading.Tasks
             Func<IAsyncResult, TResult> endMethod,
             object? state,
             TaskCreationOptions creationOptions
-        ) {
+        )
+        {
             return FromAsyncImpl(beginMethod, endMethod, null, state, creationOptions);
         }
 
@@ -877,7 +889,8 @@ namespace System.Threading.Tasks
             Action<IAsyncResult>? endAction,
             object? state,
             TaskCreationOptions creationOptions
-        ) {
+        )
+        {
             if (beginMethod == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.beginMethod);
 
@@ -977,7 +990,8 @@ namespace System.Threading.Tasks
             Func<IAsyncResult, TResult> endMethod,
             TArg1 arg1,
             object? state
-        ) {
+        )
+        {
             return FromAsyncImpl(
                 beginMethod,
                 endMethod,
@@ -1020,7 +1034,8 @@ namespace System.Threading.Tasks
             TArg1 arg1,
             object? state,
             TaskCreationOptions creationOptions
-        ) {
+        )
+        {
             return FromAsyncImpl(beginMethod, endMethod, null, arg1, state, creationOptions);
         }
 
@@ -1033,7 +1048,8 @@ namespace System.Threading.Tasks
             TArg1 arg1,
             object? state,
             TaskCreationOptions creationOptions
-        ) {
+        )
+        {
             if (beginMethod == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.beginMethod);
 
@@ -1139,7 +1155,8 @@ namespace System.Threading.Tasks
             TArg1 arg1,
             TArg2 arg2,
             object? state
-        ) {
+        )
+        {
             return FromAsyncImpl(
                 beginMethod,
                 endMethod,
@@ -1188,7 +1205,8 @@ namespace System.Threading.Tasks
             TArg2 arg2,
             object? state,
             TaskCreationOptions creationOptions
-        ) {
+        )
+        {
             return FromAsyncImpl(beginMethod, endMethod, null, arg1, arg2, state, creationOptions);
         }
 
@@ -1202,7 +1220,8 @@ namespace System.Threading.Tasks
             TArg2 arg2,
             object? state,
             TaskCreationOptions creationOptions
-        ) {
+        )
+        {
             if (beginMethod == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.beginMethod);
 
@@ -1314,7 +1333,8 @@ namespace System.Threading.Tasks
             TArg2 arg2,
             TArg3 arg3,
             object? state
-        ) {
+        )
+        {
             return FromAsyncImpl(
                 beginMethod,
                 endMethod,
@@ -1369,7 +1389,8 @@ namespace System.Threading.Tasks
             TArg3 arg3,
             object? state,
             TaskCreationOptions creationOptions
-        ) {
+        )
+        {
             return FromAsyncImpl(
                 beginMethod,
                 endMethod,
@@ -1393,7 +1414,8 @@ namespace System.Threading.Tasks
             TArg3 arg3,
             object? state,
             TaskCreationOptions creationOptions
-        ) {
+        )
+        {
             if (beginMethod == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.beginMethod);
 
@@ -1543,7 +1565,8 @@ namespace System.Threading.Tasks
             internal FromAsyncTrimPromise(
                 TInstance thisRef,
                 Func<TInstance, IAsyncResult, TResult> endMethod
-            ) {
+            )
+            {
                 Debug.Assert(thisRef != null, "Expected a non-null thisRef");
                 Debug.Assert(endMethod != null, "Expected a non-null endMethod");
                 m_thisRef = thisRef;
@@ -1606,7 +1629,8 @@ namespace System.Threading.Tasks
                 Func<TInstance, IAsyncResult, TResult> endMethod,
                 IAsyncResult asyncResult,
                 bool requiresSynchronization
-            ) {
+            )
+            {
                 Debug.Assert(!IsCompleted, "The task should not have been completed yet.");
 
                 // Run the end method and complete the task
@@ -1645,7 +1669,8 @@ namespace System.Threading.Tasks
         private static Task<TResult> CreateCanceledTask(
             TaskContinuationOptions continuationOptions,
             CancellationToken ct
-        ) {
+        )
+        {
             Task.CreationOptionsFromContinuationOptions(
                 continuationOptions,
                 out TaskCreationOptions tco,
@@ -1677,7 +1702,8 @@ namespace System.Threading.Tasks
         public Task<TResult> ContinueWhenAll(
             Task[] tasks,
             Func<Task[], TResult> continuationFunction
-        ) {
+        )
+        {
             if (continuationFunction == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.continuationFunction);
 
@@ -1716,7 +1742,8 @@ namespace System.Threading.Tasks
             Task[] tasks,
             Func<Task[], TResult> continuationFunction,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (continuationFunction == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.continuationFunction);
 
@@ -1761,7 +1788,8 @@ namespace System.Threading.Tasks
             Task[] tasks,
             Func<Task[], TResult> continuationFunction,
             TaskContinuationOptions continuationOptions
-        ) {
+        )
+        {
             if (continuationFunction == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.continuationFunction);
 
@@ -1818,7 +1846,8 @@ namespace System.Threading.Tasks
             CancellationToken cancellationToken,
             TaskContinuationOptions continuationOptions,
             TaskScheduler scheduler
-        ) {
+        )
+        {
             if (continuationFunction == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.continuationFunction);
 
@@ -1852,7 +1881,8 @@ namespace System.Threading.Tasks
         public Task<TResult> ContinueWhenAll<TAntecedentResult>(
             Task<TAntecedentResult>[] tasks,
             Func<Task<TAntecedentResult>[], TResult> continuationFunction
-        ) {
+        )
+        {
             if (continuationFunction == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.continuationFunction);
 
@@ -1892,7 +1922,8 @@ namespace System.Threading.Tasks
             Task<TAntecedentResult>[] tasks,
             Func<Task<TAntecedentResult>[], TResult> continuationFunction,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (continuationFunction == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.continuationFunction);
 
@@ -1938,7 +1969,8 @@ namespace System.Threading.Tasks
             Task<TAntecedentResult>[] tasks,
             Func<Task<TAntecedentResult>[], TResult> continuationFunction,
             TaskContinuationOptions continuationOptions
-        ) {
+        )
+        {
             if (continuationFunction == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.continuationFunction);
 
@@ -1996,7 +2028,8 @@ namespace System.Threading.Tasks
             CancellationToken cancellationToken,
             TaskContinuationOptions continuationOptions,
             TaskScheduler scheduler
-        ) {
+        )
+        {
             if (continuationFunction == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.continuationFunction);
 
@@ -2019,7 +2052,8 @@ namespace System.Threading.Tasks
             TaskContinuationOptions continuationOptions,
             CancellationToken cancellationToken,
             TaskScheduler scheduler
-        ) {
+        )
+        {
             // check arguments
             TaskFactory.CheckMultiTaskContinuationOptions(continuationOptions);
             if (tasks == null)
@@ -2040,7 +2074,8 @@ namespace System.Threading.Tasks
             if (
                 cancellationToken.IsCancellationRequested
                 && ((continuationOptions & TaskContinuationOptions.LazyCancellation) == 0)
-            ) {
+            )
+            {
                 return CreateCanceledTask(continuationOptions, cancellationToken);
             }
 
@@ -2081,7 +2116,8 @@ namespace System.Threading.Tasks
             TaskContinuationOptions continuationOptions,
             CancellationToken cancellationToken,
             TaskScheduler scheduler
-        ) {
+        )
+        {
             // check arguments
             TaskFactory.CheckMultiTaskContinuationOptions(continuationOptions);
             if (tasks == null)
@@ -2101,7 +2137,8 @@ namespace System.Threading.Tasks
             if (
                 cancellationToken.IsCancellationRequested
                 && ((continuationOptions & TaskContinuationOptions.LazyCancellation) == 0)
-            ) {
+            )
+            {
                 return CreateCanceledTask(continuationOptions, cancellationToken);
             }
 
@@ -2203,7 +2240,8 @@ namespace System.Threading.Tasks
             Task[] tasks,
             Func<Task, TResult> continuationFunction,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (continuationFunction == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.continuationFunction);
 
@@ -2248,7 +2286,8 @@ namespace System.Threading.Tasks
             Task[] tasks,
             Func<Task, TResult> continuationFunction,
             TaskContinuationOptions continuationOptions
-        ) {
+        )
+        {
             if (continuationFunction == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.continuationFunction);
 
@@ -2305,7 +2344,8 @@ namespace System.Threading.Tasks
             CancellationToken cancellationToken,
             TaskContinuationOptions continuationOptions,
             TaskScheduler scheduler
-        ) {
+        )
+        {
             if (continuationFunction == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.continuationFunction);
 
@@ -2339,7 +2379,8 @@ namespace System.Threading.Tasks
         public Task<TResult> ContinueWhenAny<TAntecedentResult>(
             Task<TAntecedentResult>[] tasks,
             Func<Task<TAntecedentResult>, TResult> continuationFunction
-        ) {
+        )
+        {
             if (continuationFunction == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.continuationFunction);
 
@@ -2379,7 +2420,8 @@ namespace System.Threading.Tasks
             Task<TAntecedentResult>[] tasks,
             Func<Task<TAntecedentResult>, TResult> continuationFunction,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (continuationFunction == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.continuationFunction);
 
@@ -2425,7 +2467,8 @@ namespace System.Threading.Tasks
             Task<TAntecedentResult>[] tasks,
             Func<Task<TAntecedentResult>, TResult> continuationFunction,
             TaskContinuationOptions continuationOptions
-        ) {
+        )
+        {
             if (continuationFunction == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.continuationFunction);
 
@@ -2483,7 +2526,8 @@ namespace System.Threading.Tasks
             CancellationToken cancellationToken,
             TaskContinuationOptions continuationOptions,
             TaskScheduler scheduler
-        ) {
+        )
+        {
             if (continuationFunction == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.continuationFunction);
 
@@ -2506,7 +2550,8 @@ namespace System.Threading.Tasks
             TaskContinuationOptions continuationOptions,
             CancellationToken cancellationToken,
             TaskScheduler scheduler
-        ) {
+        )
+        {
             // check arguments
             TaskFactory.CheckMultiTaskContinuationOptions(continuationOptions);
             if (tasks == null)
@@ -2532,7 +2577,8 @@ namespace System.Threading.Tasks
             if (
                 cancellationToken.IsCancellationRequested
                 && ((continuationOptions & TaskContinuationOptions.LazyCancellation) == 0)
-            ) {
+            )
+            {
                 return CreateCanceledTask(continuationOptions, cancellationToken);
             }
 
@@ -2578,7 +2624,8 @@ namespace System.Threading.Tasks
             TaskContinuationOptions continuationOptions,
             CancellationToken cancellationToken,
             TaskScheduler scheduler
-        ) {
+        )
+        {
             // check arguments
             TaskFactory.CheckMultiTaskContinuationOptions(continuationOptions);
             if (tasks == null)
@@ -2603,7 +2650,8 @@ namespace System.Threading.Tasks
             if (
                 cancellationToken.IsCancellationRequested
                 && ((continuationOptions & TaskContinuationOptions.LazyCancellation) == 0)
-            ) {
+            )
+            {
                 return CreateCanceledTask(continuationOptions, cancellationToken);
             }
 

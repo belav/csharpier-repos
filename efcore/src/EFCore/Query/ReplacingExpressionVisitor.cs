@@ -36,7 +36,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Expression original,
             Expression replacement,
             Expression tree
-        ) {
+        )
+        {
             Check.NotNull(original, nameof(original));
             Check.NotNull(replacement, nameof(replacement));
             Check.NotNull(tree, nameof(tree));
@@ -54,7 +55,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         public ReplacingExpressionVisitor(
             IReadOnlyList<Expression> originals,
             IReadOnlyList<Expression> replacements
-        ) {
+        )
+        {
             Check.NotNull(originals, nameof(originals));
             Check.NotNull(replacements, nameof(replacements));
 
@@ -70,7 +72,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 expression == null
                 || expression is ShapedQueryExpression
                 || expression is EntityShaperExpression
-            ) {
+            )
+            {
                 return expression;
             }
 
@@ -97,7 +100,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             if (
                 innerExpression is GroupByShaperExpression groupByShaperExpression
                 && memberExpression.Member.Name == nameof(IGrouping<int, int>.Key)
-            ) {
+            )
+            {
                 return groupByShaperExpression.KeySelector;
             }
 
@@ -119,7 +123,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     mb => mb.Member.IsSameAs(memberExpression.Member)
                 )
                     is MemberAssignment memberAssignment
-            ) {
+            )
+            {
                 return memberAssignment.Expression;
             }
 
@@ -136,7 +141,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     out var entityExpression,
                     out var propertyName
                 )
-            ) {
+            )
+            {
                 var newEntityExpression = Visit(entityExpression);
                 if (newEntityExpression is NewExpression newExpression)
                 {
@@ -156,7 +162,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         mb => mb.Member.Name == propertyName
                     )
                         is MemberAssignment memberAssignment
-                ) {
+                )
+                {
                     return memberAssignment.Expression;
                 }
 

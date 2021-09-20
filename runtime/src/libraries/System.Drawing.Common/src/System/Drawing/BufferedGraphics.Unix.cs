@@ -45,7 +45,8 @@ namespace System.Drawing
             Graphics? targetGraphics,
             IntPtr targetDc,
             Rectangle targetRectangle
-        ) {
+        )
+        {
             _targetGraphics = targetGraphics;
             _targetDC = targetDc;
             size = targetRectangle;

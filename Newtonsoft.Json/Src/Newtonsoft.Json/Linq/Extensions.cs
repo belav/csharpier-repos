@@ -271,7 +271,8 @@ namespace Newtonsoft.Json.Linq
                 // don't want to cast JValue to its interfaces, want to get the internal value
                 && typeof(U) != typeof(IComparable)
                 && typeof(U) != typeof(IFormattable)
-            ) {
+            )
+            {
                 return castValue;
             }
             else

@@ -177,7 +177,8 @@ namespace AutoMapper.IntegrationTests.Net4
                 ICalendar reference,
                 DateTime? validFrom,
                 DateTime? validTo
-            ) {
+            )
+            {
                 if (businessUnitId == Guid.Empty)
                     throw new ArgumentException();
 

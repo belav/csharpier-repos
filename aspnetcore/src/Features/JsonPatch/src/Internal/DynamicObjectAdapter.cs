@@ -25,7 +25,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             IContractResolver contractResolver,
             object value,
             out string errorMessage
-        ) {
+        )
+        {
             if (
                 !TrySetDynamicObjectProperty(
                     target,
@@ -34,7 +35,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
                     value,
                     out errorMessage
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -48,7 +50,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             IContractResolver contractResolver,
             out object value,
             out string errorMessage
-        ) {
+        )
+        {
             if (
                 !TryGetDynamicObjectProperty(
                     target,
@@ -57,7 +60,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
                     out value,
                     out errorMessage
                 )
-            ) {
+            )
+            {
                 value = null;
                 return false;
             }
@@ -71,7 +75,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             string segment,
             IContractResolver contractResolver,
             out string errorMessage
-        ) {
+        )
+        {
             if (
                 !TryGetDynamicObjectProperty(
                     target,
@@ -80,7 +85,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
                     out var property,
                     out errorMessage
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -90,7 +96,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             if (
                 property.GetType().IsValueType
                 && Nullable.GetUnderlyingType(property.GetType()) == null
-            ) {
+            )
+            {
                 value = Activator.CreateInstance(property.GetType());
             }
 
@@ -102,7 +109,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
                     value,
                     out errorMessage
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -116,7 +124,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             IContractResolver contractResolver,
             object value,
             out string errorMessage
-        ) {
+        )
+        {
             if (
                 !TryGetDynamicObjectProperty(
                     target,
@@ -125,7 +134,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
                     out var property,
                     out errorMessage
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -148,7 +158,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
                     convertedValue,
                     out errorMessage
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -162,7 +173,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             IContractResolver contractResolver,
             object value,
             out string errorMessage
-        ) {
+        )
+        {
             if (
                 !TryGetDynamicObjectProperty(
                     target,
@@ -171,7 +183,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
                     out var property,
                     out errorMessage
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -186,7 +199,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
                     JsonConvert.SerializeObject(property),
                     JsonConvert.SerializeObject(convertedValue)
                 )
-            ) {
+            )
+            {
                 errorMessage = Resources.FormatValueNotEqualToTestValue(property, value, segment);
                 return false;
             }
@@ -203,7 +217,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             IContractResolver contractResolver,
             out object nextTarget,
             out string errorMessage
-        ) {
+        )
+        {
             if (
                 !TryGetDynamicObjectProperty(
                     target,
@@ -212,7 +227,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
                     out var property,
                     out errorMessage
                 )
-            ) {
+            )
+            {
                 nextTarget = null;
                 return false;
             }
@@ -230,7 +246,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             string segment,
             out object value,
             out string errorMessage
-        ) {
+        )
+        {
             var jsonDynamicContract = (JsonDynamicContract)contractResolver.ResolveContract(
                 target.GetType()
             );
@@ -269,7 +286,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             string segment,
             object value,
             out string errorMessage
-        ) {
+        )
+        {
             var jsonDynamicContract = (JsonDynamicContract)contractResolver.ResolveContract(
                 target.GetType()
             );
@@ -306,7 +324,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             object value,
             Type propertyType,
             out object convertedValue
-        ) {
+        )
+        {
             var conversionResult = ConversionResultProvider.ConvertTo(value, propertyType);
             if (!conversionResult.CanBeConverted)
             {

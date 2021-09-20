@@ -1091,7 +1091,8 @@ namespace System.CommandLine.Tests
         public void When_an_argument_is_enclosed_in_double_quotes_its_value_has_the_quotes_removed(
             string input,
             string expected
-        ) {
+        )
+        {
             var option = new Option("-x", arity: ArgumentArity.ZeroOrMore);
 
             var parseResult = option.Parse(input);
@@ -1423,7 +1424,8 @@ namespace System.CommandLine.Tests
                 ITypeDescriptorContext context,
                 CultureInfo culture,
                 object value
-            ) {
+            )
+            {
                 if (value is string stringValue)
                 {
                     return new ClassWithCustomTypeConverter { Values = stringValue.Split(';') };
@@ -1449,7 +1451,8 @@ namespace System.CommandLine.Tests
                 ITypeDescriptorContext context,
                 CultureInfo culture,
                 object value
-            ) {
+            )
+            {
                 if (value is string stringValue)
                 {
                     return new CollectionWithCustomTypeConverter(stringValue.Split(';'));

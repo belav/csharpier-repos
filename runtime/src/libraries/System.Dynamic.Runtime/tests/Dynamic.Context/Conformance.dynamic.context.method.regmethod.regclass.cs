@@ -381,7 +381,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
             out byte? p1,
             out string[] p2,
             params ulong[] p3
-        ) {
+        )
+        {
             p1 = 3;
             p2 = new string[3];
             return new MyStruct() { Number = p3.Length };
@@ -768,7 +769,8 @@ namespace System.Dynamic.Runtime.Tests
                 ulong i = (ulong)mc.Method_ReturnUlong();
                 i < (ulong)mc.Method_ReturnUlong(new MyClass());
                 i++
-            ) {
+            )
+            {
                 result += (sbyte)mc.Method_ReturnSbyte(
                     (int)i,
                     mc,
@@ -931,7 +933,8 @@ namespace System.Dynamic.Runtime.Tests
                     ms,
                     (bool)mc.Method_ReturnBool(out p1, ref p2, out p3)
                 )
-            ) {
+            )
+            {
                 foreach (int s in array)
                 {
                     ms.Position = 0;
@@ -1949,7 +1952,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
                 int i = (int)dy.Method_ReturnMyEnumNullable();
                 i <= (int)dy.Method_ReturnMyEnumNullable(new int[0]);
                 i++
-            ) {
+            )
+            {
                 if (i != expected)
                 {
                     return 1;

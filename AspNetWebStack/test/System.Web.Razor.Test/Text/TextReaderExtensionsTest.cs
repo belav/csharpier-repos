@@ -273,7 +273,8 @@ namespace System.Web.Razor.Test.Text
             string expectedOutput,
             int expectedPeek,
             Func<TextReader, string> action
-        ) {
+        )
+        {
             // Arrange
             StringReader reader = new StringReader(testString);
 

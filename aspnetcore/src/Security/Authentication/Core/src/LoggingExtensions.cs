@@ -117,14 +117,16 @@ namespace Microsoft.Extensions.Logging
         public static void AuthenticationSchemeAuthenticated(
             this ILogger logger,
             string authenticationScheme
-        ) {
+        )
+        {
             _authenticationSchemeAuthenticated(logger, authenticationScheme, null);
         }
 
         public static void AuthenticationSchemeNotAuthenticated(
             this ILogger logger,
             string authenticationScheme
-        ) {
+        )
+        {
             _authenticationSchemeNotAuthenticated(logger, authenticationScheme, null);
         }
 
@@ -132,7 +134,8 @@ namespace Microsoft.Extensions.Logging
             this ILogger logger,
             string authenticationScheme,
             string failureMessage
-        ) {
+        )
+        {
             _authenticationSchemeNotAuthenticatedWithFailure(
                 logger,
                 authenticationScheme,
@@ -144,14 +147,16 @@ namespace Microsoft.Extensions.Logging
         public static void AuthenticationSchemeChallenged(
             this ILogger logger,
             string authenticationScheme
-        ) {
+        )
+        {
             _authenticationSchemeChallenged(logger, authenticationScheme, null);
         }
 
         public static void AuthenticationSchemeForbidden(
             this ILogger logger,
             string authenticationScheme
-        ) {
+        )
+        {
             _authenticationSchemeForbidden(logger, authenticationScheme, null);
         }
 
@@ -173,7 +178,8 @@ namespace Microsoft.Extensions.Logging
         public static void CorrelationPropertyNotFound(
             this ILogger logger,
             string correlationPrefix
-        ) {
+        )
+        {
             _correlationPropertyNotFound(logger, correlationPrefix, null);
         }
 
@@ -186,7 +192,8 @@ namespace Microsoft.Extensions.Logging
             this ILogger logger,
             string cookieName,
             string cookieValue
-        ) {
+        )
+        {
             _unexpectedCorrelationCookieValue(logger, cookieName, cookieValue, null);
         }
 

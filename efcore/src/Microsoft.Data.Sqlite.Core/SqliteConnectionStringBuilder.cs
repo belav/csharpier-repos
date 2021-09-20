@@ -330,7 +330,8 @@ namespace Microsoft.Data.Sqlite
             if (
                 !_keywords.TryGetValue(keyword, out var index)
                 || !base.Remove(_validKeywords[(int)index])
-            ) {
+            )
+            {
                 return false;
             }
 

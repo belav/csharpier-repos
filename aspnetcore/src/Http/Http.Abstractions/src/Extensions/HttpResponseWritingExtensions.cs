@@ -33,7 +33,8 @@ namespace Microsoft.AspNetCore.Http
             this HttpResponse response,
             string text,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             if (response == null)
             {
                 throw new ArgumentNullException(nameof(response));
@@ -65,7 +66,8 @@ namespace Microsoft.AspNetCore.Http
             string text,
             Encoding encoding,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             if (response == null)
             {
                 throw new ArgumentNullException(nameof(response));
@@ -116,7 +118,8 @@ namespace Microsoft.AspNetCore.Http
             Encoding encoding,
             CancellationToken cancellationToken,
             Task startAsyncTask
-        ) {
+        )
+        {
             await startAsyncTask;
             Write(response, text, encoding);
             await response.BodyWriter.FlushAsync(cancellationToken);
@@ -165,7 +168,8 @@ namespace Microsoft.AspNetCore.Http
             Span<byte> destination,
             int encodedLength,
             int minimumByteSize
-        ) {
+        )
+        {
             var encoder = encoding.GetEncoder();
             var source = text.AsSpan();
             var completed = false;

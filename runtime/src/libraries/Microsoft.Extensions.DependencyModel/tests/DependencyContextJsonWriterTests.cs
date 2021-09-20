@@ -41,7 +41,8 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             RuntimeLibrary[] runtimeLibraries = null,
             IReadOnlyList<RuntimeFallbacks> runtimeGraph = null,
             string runtimeSignature = null
-        ) {
+        )
+        {
             return new DependencyContext(
                 new TargetInfo(
                     target ?? "DefaultTarget",
@@ -156,7 +157,8 @@ namespace Microsoft.Extensions.DependencyModel.Tests
                     if (
                         reader.TokenType == JsonTokenType.PropertyName
                         && reader.ValueTextEquals("sha512")
-                    ) {
+                    )
+                    {
                         Assert.True(reader.Read());
                         Assert.Equal(
                             "HASH+/==",

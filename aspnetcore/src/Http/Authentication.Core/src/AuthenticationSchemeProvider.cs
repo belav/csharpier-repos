@@ -33,7 +33,8 @@ namespace Microsoft.AspNetCore.Authentication
         protected AuthenticationSchemeProvider(
             IOptions<AuthenticationOptions> options,
             IDictionary<string, AuthenticationScheme> schemes
-        ) {
+        )
+        {
             _options = options.Value;
 
             _schemes = schemes ?? throw new ArgumentNullException(nameof(schemes));

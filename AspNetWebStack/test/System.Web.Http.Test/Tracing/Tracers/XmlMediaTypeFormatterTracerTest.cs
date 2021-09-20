@@ -18,7 +18,8 @@ namespace System.Web.Http.Tracing.Tracers
             XmlMediaTypeFormatter formatter,
             HttpRequestMessage request,
             ITraceWriter traceWriter
-        ) {
+        )
+        {
             return new XmlMediaTypeFormatterTracer(formatter, traceWriter, request);
         }
 

@@ -66,7 +66,8 @@ namespace Microsoft.AspNetCore.HttpOverrides
             string header,
             string expectedIp,
             int expectedPort
-        ) {
+        )
+        {
             using var host = new HostBuilder().ConfigureWebHost(
                     webHostBuilder =>
                     {
@@ -231,7 +232,8 @@ namespace Microsoft.AspNetCore.HttpOverrides
             int expectedPort,
             string remainingHeader,
             bool requireSymmetry
-        ) {
+        )
+        {
             using var host = new HostBuilder().ConfigureWebHost(
                     webHostBuilder =>
                     {
@@ -472,7 +474,8 @@ namespace Microsoft.AspNetCore.HttpOverrides
             string expectedIp,
             int expectedPort,
             bool requireSymmetry
-        ) {
+        )
+        {
             using var host = new HostBuilder().ConfigureWebHost(
                     webHostBuilder =>
                     {
@@ -489,7 +492,8 @@ namespace Microsoft.AspNetCore.HttpOverrides
                                     foreach (
                                         var ip in knownIPs.Split(',')
                                             .Select(text => IPAddress.Parse(text))
-                                    ) {
+                                    )
+                                    {
                                         options.KnownProxies.Add(ip);
                                     }
                                     app.UseForwardedHeaders(options);
@@ -956,7 +960,8 @@ namespace Microsoft.AspNetCore.HttpOverrides
             int limit,
             string header,
             string expected
-        ) {
+        )
+        {
             using var host = new HostBuilder().ConfigureWebHost(
                     webHostBuilder =>
                     {
@@ -1127,7 +1132,8 @@ namespace Microsoft.AspNetCore.HttpOverrides
             string protoHeader,
             string forHeader,
             string expected
-        ) {
+        )
+        {
             using var host = new HostBuilder().ConfigureWebHost(
                     webHostBuilder =>
                     {
@@ -1182,7 +1188,8 @@ namespace Microsoft.AspNetCore.HttpOverrides
             string protoHeader,
             string forHeader,
             string expected
-        ) {
+        )
+        {
             using var host = new HostBuilder().ConfigureWebHost(
                     webHostBuilder =>
                     {
@@ -1240,7 +1247,8 @@ namespace Microsoft.AspNetCore.HttpOverrides
             string remoteIp,
             bool loopback,
             string expected
-        ) {
+        )
+        {
             using var host = new HostBuilder().ConfigureWebHost(
                     webHostBuilder =>
                     {
@@ -1447,7 +1455,8 @@ namespace Microsoft.AspNetCore.HttpOverrides
             string knownProxies,
             string knownNetworks,
             string expectedRemoteIp
-        ) {
+        )
+        {
             var options = new ForwardedHeadersOptions
             {
                 ForwardedHeaders = ForwardedHeaders.XForwardedFor,
@@ -1459,7 +1468,8 @@ namespace Microsoft.AspNetCore.HttpOverrides
                     new string[] { "," },
                     StringSplitOptions.RemoveEmptyEntries
                 )
-            ) {
+            )
+            {
                 var proxy = IPAddress.Parse(knownProxy);
                 options.KnownProxies.Add(proxy);
             }
@@ -1468,7 +1478,8 @@ namespace Microsoft.AspNetCore.HttpOverrides
                     new string[] { "," },
                     options: StringSplitOptions.RemoveEmptyEntries
                 )
-            ) {
+            )
+            {
                 var knownNetworkParts = knownNetwork.Split('/');
                 var networkIp = IPAddress.Parse(knownNetworkParts[0]);
                 var prefixLength = int.Parse(knownNetworkParts[1], CultureInfo.InvariantCulture);
@@ -1511,7 +1522,8 @@ namespace Microsoft.AspNetCore.HttpOverrides
             string header,
             string expectedScheme,
             string remainingHeader
-        ) {
+        )
+        {
             using var host = new HostBuilder().ConfigureWebHost(
                     webHostBuilder =>
                     {
@@ -1565,7 +1577,8 @@ namespace Microsoft.AspNetCore.HttpOverrides
             string header,
             string expectedScheme,
             string remainingHeader
-        ) {
+        )
+        {
             using var host = new HostBuilder().ConfigureWebHost(
                     webHostBuilder =>
                     {

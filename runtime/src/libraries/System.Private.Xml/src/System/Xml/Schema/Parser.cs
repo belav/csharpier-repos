@@ -40,7 +40,8 @@ namespace System.Xml.Schema
             XmlNameTable nameTable,
             SchemaNames schemaNames,
             ValidationEventHandler? eventHandler
-        ) {
+        )
+        {
             _schemaType = schemaType;
             _nameTable = nameTable;
             _schemaNames = schemaNames;
@@ -205,7 +206,8 @@ namespace System.Xml.Schema
                         _reader.LocalName,
                         _reader.NamespaceURI
                     )
-                ) {
+                )
+                {
                     _namespaceManager!.PushScope();
                     if (_reader.MoveToFirstAttribute())
                     {
@@ -220,7 +222,8 @@ namespace System.Xml.Schema
                             if (
                                 Ref.Equal(_reader.NamespaceURI, _schemaNames.NsXmlNs)
                                 && _isProcessNamespaces
-                            ) {
+                            )
+                            {
                                 _namespaceManager.AddNamespace(
                                     _reader.Prefix.Length == 0 ? string.Empty : _reader.LocalName,
                                     _reader.Value
@@ -268,7 +271,8 @@ namespace System.Xml.Schema
                 _reader.NodeType == XmlNodeType.EntityReference
                 || _reader.NodeType == XmlNodeType.SignificantWhitespace
                 || _reader.NodeType == XmlNodeType.CDATA
-            ) {
+            )
+            {
                 _builder!.ProcessCData(_reader.Value);
             }
             else if (_reader.NodeType == XmlNodeType.EndElement)

@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.SignatureHelp
             IEnumerable<TaggedText> suffixParts,
             IEnumerable<FSharpSignatureHelpParameter> parameters,
             IEnumerable<TaggedText> descriptionParts
-        ) {
+        )
+        {
             if (isVariadic && !parameters.Any())
             {
                 throw new ArgumentException(

@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.CommandLine
             bool utf8Output,
             TextWriter textWriter,
             Func<TextWriter, T> func
-        ) {
+        )
+        {
             if (utf8Output && textWriter.Encoding.CodePage != s_utf8Encoding.CodePage)
             {
                 if (textWriter != Console.Out)

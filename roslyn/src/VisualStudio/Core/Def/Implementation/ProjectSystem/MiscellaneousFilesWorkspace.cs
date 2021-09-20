@@ -124,7 +124,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             string newMoniker,
             string oldMoniker,
             ITextBuffer buffer
-        ) {
+        )
+        {
             // We want to consider this file to be added in one of two situations:
             //
             // 1) the old file already was a misc file, at which point we might just be doing a rename from
@@ -133,7 +134,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             if (
                 TryUntrackClosingDocument(oldMoniker)
                 || TryGetLanguageInformation(oldMoniker) == null
-            ) {
+            )
+            {
                 // Add the new one, if appropriate.
                 TrackOpenedDocument(newMoniker, buffer);
             }
@@ -160,7 +162,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                         out var fileLanguageGuid
                     )
                 )
-            ) {
+            )
+            {
                 _languageInformationByLanguageGuid.TryGetValue(
                     fileLanguageGuid,
                     out languageInformation
@@ -257,7 +260,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                         moniker,
                         out var projectIdAndSourceTextContainer
                     )
-                ) {
+                )
+                {
                     // The workspace was taken from us and released and we have only asynchronously found out now.
                     // We already have the file open in our workspace, but the global mapping of source text container
                     // to the workspace that owns it needs to be updated once more.
@@ -276,7 +280,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                                 moniker,
                                 out var buffer
                             )
-                        ) {
+                        )
+                        {
                             AttachToDocument(moniker, buffer);
                         }
                     }
@@ -337,7 +342,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     moniker,
                     textBuffer.AsTextContainer()
                 )
-            ) {
+            )
+            {
                 // We already added it, so we will keep it excluded from the misc files workspace
                 return;
             }
@@ -376,7 +382,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 parseOptions != null
                 && compilationOptions != null
                 && fileExtension == languageInformation.ScriptExtension
-            ) {
+            )
+            {
                 parseOptions = parseOptions.WithKind(SourceCodeKind.Script);
                 compilationOptions = GetCompilationOptionsWithScriptReferenceResolvers(
                     compilationOptions,
@@ -430,7 +437,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         private CompilationOptions GetCompilationOptionsWithScriptReferenceResolvers(
             CompilationOptions compilationOptions,
             string filePath
-        ) {
+        )
+        {
             var metadataService = Services.GetService<IMetadataService>();
 
             var baseDirectory = PathUtilities.GetDirectoryName(filePath);
@@ -457,7 +465,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             ParseOptions parseOptionsOpt,
             string fileExtension,
             LanguageInformation languageInformation
-        ) {
+        )
+        {
             if (parseOptionsOpt != null)
             {
                 return parseOptionsOpt.Kind;
@@ -482,7 +491,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
             if (
                 _monikersToProjectIdAndContainer.TryGetValue(moniker, out var projectIdAndContainer)
-            ) {
+            )
+            {
                 var document = this.CurrentSolution.GetProject(projectIdAndContainer.projectId)
                     .Documents.Single();
 

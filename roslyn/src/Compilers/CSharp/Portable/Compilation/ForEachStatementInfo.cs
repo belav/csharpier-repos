@@ -71,7 +71,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ITypeSymbol elementType,
             Conversion elementConversion,
             Conversion currentConversion
-        ) {
+        )
+        {
             this.IsAsynchronous = isAsync;
             this.GetEnumeratorMethod = getEnumeratorMethod;
             this.MoveNextMethod = moveNextMethod;

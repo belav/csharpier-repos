@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
             string expectedRegexMatchString,
             ILogger logger,
             bool allowMultiple = false
-        ) {
+        )
+        {
             Assert.True(deploymentResult.HostProcess.HasExited);
 
             var entries = GetEntries(deploymentResult);
@@ -46,7 +47,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         public static void VerifyEventLogEvents(
             IISDeploymentResult deploymentResult,
             params string[] expectedRegexMatchString
-        ) {
+        )
+        {
             Assert.True(deploymentResult.HostProcess.HasExited);
 
             var entries = GetEntries(deploymentResult).ToList();
@@ -82,7 +84,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
             string regexString,
             IEnumerable<EventLogEntry> entries,
             bool allowMultiple = false
-        ) {
+        )
+        {
             var expectedRegex = new Regex(regexString, RegexOptions.Singleline);
             var matchedEntries = entries.Where(entry => expectedRegex.IsMatch(entry.Message))
                 .ToArray();
@@ -121,7 +124,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
                 if (
                     eventLogEntry.ReplacementStrings == null
                     || eventLogEntry.ReplacementStrings.Length < 3
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -130,7 +134,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
                 if (
                     eventLogEntry.Source == AncmVersionToMatch(deploymentResult)
                     && processIdString == eventLogEntry.ReplacementStrings[1]
-                ) {
+                )
+                {
                     yield return eventLogEntry;
                 }
             }
@@ -179,7 +184,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         public static string InProcessFailedToStart(
             IISDeploymentResult deploymentResult,
             string reason
-        ) {
+        )
+        {
             if (DeployerSelector.HasNewHandler)
             {
                 return $"Application '/LM/W3SVC/1/ROOT' with physical root '{EscapedContentRoot(deploymentResult)}' failed to load coreclr. Exception message:\r\n{reason}";
@@ -203,14 +209,16 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         public static string InProcessFailedToStop(
             IISDeploymentResult deploymentResult,
             string reason
-        ) {
+        )
+        {
             return "Failed to gracefully shutdown application 'MACHINE/WEBROOT/APPHOST/.*?'.";
         }
 
         public static string InProcessThreadException(
             IISDeploymentResult deploymentResult,
             string reason
-        ) {
+        )
+        {
             return $"Application '/LM/W3SVC/1/ROOT' with physical root '{EscapedContentRoot(deploymentResult)}' hit unexpected managed exception{reason}";
         }
 
@@ -229,7 +237,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
             IISDeploymentResult deploymentResult,
             string code,
             string output
-        ) {
+        )
+        {
             if (DeployerSelector.HasNewHandler)
             {
                 return $"Application '/LM/W3SVC/1/ROOT' with physical root '{EscapedContentRoot(deploymentResult)}' has exited from Program.Main with exit code = '{code}'. First 30KB characters of captured stdout and stderr logs:\r\n{output}";
@@ -243,14 +252,16 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         public static string FailedToStartApplication(
             IISDeploymentResult deploymentResult,
             string code
-        ) {
+        )
+        {
             return $"Failed to start application '/LM/W3SVC/1/ROOT', ErrorCode '{code}'.";
         }
 
         public static string ConfigurationLoadError(
             IISDeploymentResult deploymentResult,
             string reason
-        ) {
+        )
+        {
             if (DeployerSelector.HasNewShim)
             {
                 return $"Could not load configuration. Exception message:\r\n{reason}";
@@ -264,7 +275,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         public static string OutOfProcessFailedToStart(
             IISDeploymentResult deploymentResult,
             string output
-        ) {
+        )
+        {
             if (DeployerSelector.HasNewShim)
             {
                 return $"Application '/LM/W3SVC/1/ROOT' with physical root '{EscapedContentRoot(deploymentResult)}' failed to start process with "
@@ -291,7 +303,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
 
         public static string InProcessFailedToFindNativeDependencies(
             IISDeploymentResult deploymentResult
-        ) {
+        )
+        {
             if (DeployerSelector.HasNewShim)
             {
                 return "Unable to locate application dependencies. Ensure that the versions of Microsoft.NetCore.App and Microsoft.AspNetCore.App targeted by the application are installed.";
@@ -306,7 +319,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
 
         public static string InProcessFailedToFindRequestHandler(
             IISDeploymentResult deploymentResult
-        ) {
+        )
+        {
             if (DeployerSelector.HasNewShim)
             {
                 return "Could not find the assembly '(.*)' referenced for the in-process application. Please confirm the Microsoft.AspNetCore.Server.IIS or Microsoft.AspNetCore.App is referenced in your application.";
@@ -320,7 +334,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         public static string CouldNotStartStdoutFileRedirection(
             string file,
             IISDeploymentResult deploymentResult
-        ) {
+        )
+        {
             return $"Could not start stdout file redirection to '{Regex.Escape(file)}' with application base '{EscapedContentRoot(deploymentResult)}'.";
         }
 

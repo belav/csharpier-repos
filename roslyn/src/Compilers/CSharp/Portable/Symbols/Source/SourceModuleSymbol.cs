@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             SourceAssemblySymbol assemblySymbol,
             DeclarationTable declarations,
             string moduleName
-        ) {
+        )
+        {
             Debug.Assert((object)assemblySymbol != null);
 
             _assemblySymbol = assemblySymbol;
@@ -160,7 +161,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     case SymbolKind.Namespace:
                         if (
                             NamespaceContainsExplicitDefinitionOfNoPiaLocalTypes((NamespaceSymbol)s)
-                        ) {
+                        )
+                        {
                             return true;
                         }
                         break;
@@ -212,7 +214,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void ForceComplete(
             SourceLocation locationOpt,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             while (true)
             {
                 cancellationToken.ThrowIfCancellationRequested();
@@ -238,7 +241,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 _state.NotePartComplete(
                                     CompletionPart.StartValidatingReferencedAssemblies
                                 )
-                            ) {
+                            )
+                            {
                                 if (diagnostics != null)
                                 {
                                     _assemblySymbol.AddDeclarationDiagnostics(diagnostics);
@@ -301,7 +305,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private void ValidateLinkedAssemblies(
             BindingDiagnosticBag diagnostics,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             foreach (AssemblySymbol a in GetReferencedAssemblySymbols())
             {
                 cancellationToken.ThrowIfCancellationRequested();
@@ -326,7 +331,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 a,
                                 AttributeDescription.ImportedFromTypeLibAttribute
                             )
-                        ) {
+                        )
+                        {
                             if (attrData.CommonConstructorArguments.Length == 1)
                             {
                                 hasImportedFromTypeLibOrPrimaryInteropAssemblyAttribute = true;
@@ -337,7 +343,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 a,
                                 AttributeDescription.PrimaryInteropAssemblyAttribute
                             )
-                        ) {
+                        )
+                        {
                             if (attrData.CommonConstructorArguments.Length == 2)
                             {
                                 hasImportedFromTypeLibOrPrimaryInteropAssemblyAttribute = true;
@@ -347,7 +354,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         if (
                             hasGuidAttribute
                             && hasImportedFromTypeLibOrPrimaryInteropAssemblyAttribute
-                        ) {
+                        )
+                        {
                             break;
                         }
                     }
@@ -477,7 +485,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         OneOrMany.Create(mergedAttributes),
                         ref _lazyCustomAttributesBag
                     )
-                ) {
+                )
+                {
                     var completed = _state.NotePartComplete(CompletionPart.Attributes);
                     Debug.Assert(completed);
                 }
@@ -522,7 +531,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 CSharpAttributeData,
                 AttributeLocation
             > arguments
-        ) {
+        )
+        {
             Debug.Assert((object)arguments.AttributeSyntaxOpt != null);
 
             var attribute = arguments.Attribute;
@@ -562,7 +572,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ) { }
             else if (
                 attribute.IsTargetAttribute(this, AttributeDescription.SkipLocalsInitAttribute)
-            ) {
+            )
+            {
                 CSharpAttributeData.DecodeSkipLocalsInitAttribute<ModuleWellKnownAttributeData>(
                     DeclaringCompilation,
                     ref arguments
@@ -573,7 +584,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void AddSynthesizedAttributes(
             PEModuleBuilder moduleBuilder,
             ref ArrayBuilder<SynthesizedAttributeData> attributes
-        ) {
+        )
+        {
             base.AddSynthesizedAttributes(moduleBuilder, ref attributes);
 
             var compilation = _assemblySymbol.DeclaringCompilation;
@@ -586,7 +598,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             WellKnownType.System_Security_UnverifiableCodeAttribute
                         ) is MissingMetadataTypeSymbol
                     )
-                ) {
+                )
+                {
                     AddSynthesizedAttribute(
                         ref attributes,
                         compilation.TrySynthesizeAttribute(

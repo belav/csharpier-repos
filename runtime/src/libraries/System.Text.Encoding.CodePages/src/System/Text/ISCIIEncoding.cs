@@ -146,7 +146,8 @@ namespace System.Text
             byte* bytes,
             int byteCount,
             EncoderNLS? baseEncoder
-        ) {
+        )
+        {
             // Allow null bytes for counting
             Debug.Assert(chars != null, "[ISCIIEncoding.GetBytes]chars!=null");
             //            Debug.Assert(bytes != null, "[ISCIIEncoding.GetBytes]bytes!=null");
@@ -355,7 +356,8 @@ namespace System.Text
             char* chars,
             int charCount,
             DecoderNLS? baseDecoder
-        ) {
+        )
+        {
             // Just need to ASSERT, this is called by something else internal that checked parameters already
             // Allow null chars for counting
             Debug.Assert(bytes != null, "[ISCIIEncoding.GetChars]bytes is null");
@@ -768,7 +770,8 @@ namespace System.Text
                     || cLastCharForNoNextNukta != '\0'
                     || bLastATR
                     || bLastDevenagariStressAbbr
-                ) {
+                )
+                {
                     // Either not flushing or had state (from convert)
                     Debug.Assert(
                         !decoder.MustFlush || !decoder.m_throwOnOverflow,

@@ -33,7 +33,8 @@ namespace Microsoft.Web.Mvc.ExpressionUtil
         public static ExpressionFingerprintChain GetFingerprintChain(
             Expression expr,
             out List<object> capturedConstants
-        ) {
+        )
+        {
             FingerprintingExpressionVisitor visitor = new FingerprintingExpressionVisitor();
             visitor.Visit(expr);
 

@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.Tools
             SourceFileMatcher fileMatcher,
             string? reportPath,
             bool includeGeneratedFiles
-        ) {
+        )
+        {
             WorkspaceFilePath = workspaceFilePath;
             WorkspaceType = workspaceType;
             NoRestore = noRestore;
@@ -66,7 +67,8 @@ namespace Microsoft.CodeAnalysis.Tools
             out SourceFileMatcher fileMatcher,
             out string? reportPath,
             out bool includeGeneratedFiles
-        ) {
+        )
+        {
             workspaceFilePath = WorkspaceFilePath;
             workspaceType = WorkspaceType;
             noRestore = NoRestore;

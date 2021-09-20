@@ -317,7 +317,8 @@ ORDER BY [t].[ContactName]"
 
         public override async Task Select_Union_different_fields_in_anonymous_with_subquery(
             bool async
-        ) {
+        )
+        {
             await base.Select_Union_different_fields_in_anonymous_with_subquery(async);
 
             AssertSql(
@@ -453,7 +454,8 @@ FROM [Customers] AS [c0]"
             bool async,
             string leftType,
             string rightType
-        ) {
+        )
+        {
             await base.Union_over_different_projection_types(async, leftType, rightType);
 
             var leftSql = GenerateSql(leftType);
@@ -633,7 +635,8 @@ ORDER BY [t].[CustomerID], [o1].[OrderID]"
 
         public override async Task Union_on_entity_plus_other_column_with_correlated_collection(
             bool async
-        ) {
+        )
+        {
             await base.Union_on_entity_plus_other_column_with_correlated_collection(async);
 
             AssertSql(

@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.Remote
             TextSpan span,
             Scope scope,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 async cancellationToken =>
                 {
@@ -87,7 +88,8 @@ namespace Microsoft.CodeAnalysis.Remote
             Solution oldSolution,
             Solution newSolution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var changes = newSolution.GetChangedDocuments(oldSolution);
 
             foreach (var docId in changes)
@@ -109,7 +111,8 @@ namespace Microsoft.CodeAnalysis.Remote
             Solution oldSolution,
             Solution newSolution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var changes = newSolution.GetChangedDocuments(oldSolution);
             var final = newSolution;
 

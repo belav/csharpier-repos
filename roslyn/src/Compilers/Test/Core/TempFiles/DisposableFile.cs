@@ -105,7 +105,8 @@ Is the file loaded as an assembly (e.g. via Assembly.LoadFile)?
                     8,
                     FileOptions.DeleteOnClose
                 )
-            ) {
+            )
+            {
                 PrepareDeleteOnCloseStreamForDisposal(stream);
             }
         }

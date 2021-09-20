@@ -25,7 +25,8 @@ namespace System.Text.Json.Serialization.Converters
         public override JsonConverter CreateConverter(
             Type typeToConvert,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             if (IsKeyValuePair(typeToConvert))
             {
                 return CreateKeyValuePairConverter(typeToConvert, options);

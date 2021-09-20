@@ -383,7 +383,8 @@ namespace System.Net.Http.Tests
             int startIndex,
             int expectedLength,
             out ContentRangeHeaderValue result
-        ) {
+        )
+        {
             object temp = null;
             Assert.Equal(
                 expectedLength,

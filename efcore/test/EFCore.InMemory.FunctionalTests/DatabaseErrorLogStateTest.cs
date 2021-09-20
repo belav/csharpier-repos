@@ -199,11 +199,13 @@ namespace Microsoft.EntityFrameworkCore
                     TState state,
                     Exception exception,
                     Func<TState, Exception, string> formatter
-                ) {
+                )
+                {
                     if (
                         eventId.Id == CoreEventId.SaveChangesFailed.Id
                         || eventId.Id == CoreEventId.QueryIterationFailed.Id
-                    ) {
+                    )
+                    {
                         LastDatabaseErrorState = (IReadOnlyList<KeyValuePair<string, object>>)state;
                         LastDatabaseErrorException = exception;
                         LastDatabaseErrorFormatter = (s, e) => formatter((TState)s, e);

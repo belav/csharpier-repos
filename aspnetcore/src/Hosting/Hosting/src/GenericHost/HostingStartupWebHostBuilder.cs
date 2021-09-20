@@ -35,7 +35,8 @@ namespace Microsoft.AspNetCore.Hosting
 
         public IWebHostBuilder ConfigureAppConfiguration(
             Action<WebHostBuilderContext, IConfigurationBuilder> configureDelegate
-        ) {
+        )
+        {
             _configureConfiguration += configureDelegate;
             return this;
         }
@@ -47,7 +48,8 @@ namespace Microsoft.AspNetCore.Hosting
 
         public IWebHostBuilder ConfigureServices(
             Action<WebHostBuilderContext, IServiceCollection> configureServices
-        ) {
+        )
+        {
             _configureServices += configureServices;
             return this;
         }
@@ -68,25 +70,29 @@ namespace Microsoft.AspNetCore.Hosting
         public void ConfigureAppConfiguration(
             WebHostBuilderContext context,
             IConfigurationBuilder builder
-        ) {
+        )
+        {
             _configureConfiguration?.Invoke(context, builder);
         }
 
         public IWebHostBuilder UseDefaultServiceProvider(
             Action<WebHostBuilderContext, ServiceProviderOptions> configure
-        ) {
+        )
+        {
             return _builder.UseDefaultServiceProvider(configure);
         }
 
         public IWebHostBuilder Configure(
             Action<WebHostBuilderContext, IApplicationBuilder> configure
-        ) {
+        )
+        {
             return _builder.Configure(configure);
         }
 
         public IWebHostBuilder UseStartup(
             [DynamicallyAccessedMembers(StartupLinkerOptions.Accessibility)] Type startupType
-        ) {
+        )
+        {
             return _builder.UseStartup(startupType);
         }
 

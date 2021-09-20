@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             Action<HttpRequest> updateRequest = null,
             Action<MvcOptions> updateOptions = null,
             IModelMetadataProvider metadataProvider = null
-        ) {
+        )
+        {
             return ModelBindingTestHelper.GetTestContext(
                 updateRequest,
                 updateOptions: options =>

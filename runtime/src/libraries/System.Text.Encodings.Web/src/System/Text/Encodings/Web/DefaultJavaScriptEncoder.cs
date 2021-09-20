@@ -24,7 +24,8 @@ namespace System.Text.Encodings.Web
         private DefaultJavaScriptEncoder(
             TextEncoderSettings settings,
             bool allowMinimalJsonEscaping
-        ) {
+        )
+        {
             if (settings is null)
             {
                 throw new ArgumentNullException(nameof(settings));

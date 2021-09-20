@@ -28,7 +28,8 @@ namespace System.Globalization
             char* dstBuffer,
             int dstBufferCapacity,
             bool bToUpper
-        ) {
+        )
+        {
             Debug.Assert(!GlobalizationMode.Invariant);
             Debug.Assert(!GlobalizationMode.UseNls);
 

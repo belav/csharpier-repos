@@ -97,7 +97,8 @@ namespace System.Threading
             int value,
             int comparand,
             ref bool success
-        ) {
+        )
+        {
             int result = Interlocked.CompareExchange(ref location, value, comparand);
             success = (result == comparand);
             return result;
@@ -355,7 +356,8 @@ namespace System.Threading
                 if (
                     CompareExchange(ref _owner, observedOwner | 1, observedOwner, ref lockTaken)
                     == observedOwner
-                ) {
+                )
+                {
                     // Acquired lock
                     return;
                 }
@@ -405,7 +407,8 @@ namespace System.Threading
                     if (
                         CompareExchange(ref _owner, newOwner, observedOwner, ref lockTaken)
                         == observedOwner
-                    ) {
+                    )
+                    {
                         return;
                     }
                 }
@@ -416,7 +419,8 @@ namespace System.Threading
                     if (
                         millisecondsTimeout != Timeout.Infinite
                         && TimeoutHelper.UpdateTimeOut(startTime, millisecondsTimeout) <= 0
-                    ) {
+                    )
+                    {
                         DecrementWaiters();
                         return;
                     }
@@ -438,7 +442,8 @@ namespace System.Threading
                 if (
                     Interlocked.CompareExchange(ref _owner, observedOwner - 2, observedOwner)
                     == observedOwner
-                ) {
+                )
+                {
                     Debug.Assert(!IsThreadOwnerTrackingEnabled); // Make sure the waiters never be negative which will cause the thread tracking bit to be flipped
                     break;
                 }
@@ -453,7 +458,8 @@ namespace System.Threading
             int millisecondsTimeout,
             uint startTime,
             ref bool lockTaken
-        ) {
+        )
+        {
             Debug.Assert(IsThreadOwnerTrackingEnabled);
 
             const int LockUnowned = 0;
@@ -482,7 +488,8 @@ namespace System.Threading
                     if (
                         CompareExchange(ref _owner, newOwner, LockUnowned, ref lockTaken)
                         == LockUnowned
-                    ) {
+                    )
+                    {
                         return;
                     }
                 }
@@ -494,7 +501,8 @@ namespace System.Threading
                         && spinner.NextSpinWillYield
                         && TimeoutHelper.UpdateTimeOut(startTime, millisecondsTimeout) <= 0
                     )
-                ) {
+                )
+                {
                     return;
                 }
             }

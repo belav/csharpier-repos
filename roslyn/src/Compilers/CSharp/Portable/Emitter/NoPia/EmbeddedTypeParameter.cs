@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
 
         protected override IEnumerable<Cci.TypeReferenceWithAttributes> GetConstraints(
             EmitContext context
-        ) {
+        )
+        {
             return ((Cci.IGenericParameter)UnderlyingTypeParameter).GetConstraints(context);
         }
 

@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.DocumentationComments
             TypeCharCommandArgs args,
             Action nextHandler,
             CommandExecutionContext context
-        ) {
+        )
+        {
             // Ensure completion and any other buffer edits happen first.
             nextHandler();
 
@@ -78,7 +79,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.DocumentationComments
                     allowCancellation: true,
                     EditorFeaturesResources.Completing_Tag
                 )
-            ) {
+            )
+            {
                 var buffer = args.SubjectBuffer;
 
                 var document = buffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
@@ -112,7 +114,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.DocumentationComments
             SnapshotPoint position,
             string insertionText,
             int? finalCaretPosition
-        ) {
+        )
+        {
             using var transaction = _undoHistory.GetHistory(textView.TextBuffer)
                 .CreateTransaction("XmlTagCompletion");
 

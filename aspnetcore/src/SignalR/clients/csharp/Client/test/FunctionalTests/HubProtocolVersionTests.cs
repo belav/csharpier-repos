@@ -182,7 +182,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
         [LogLevel(LogLevel.Trace)]
         public async Task ClientWithUnsupportedProtocolVersionDoesNotConnect(
             HttpTransportType transportType
-        ) {
+        )
+        {
             bool ExpectedErrors(WriteContext writeContext)
             {
                 return writeContext.LoggerName == typeof(HubConnection).FullName;
@@ -232,7 +233,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
             public ValueTask<ConnectionContext> ConnectAsync(
                 EndPoint endPoint,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 ConnectTask = _innerFactory.ConnectAsync(endPoint, cancellationToken);
                 return ConnectTask;
             }

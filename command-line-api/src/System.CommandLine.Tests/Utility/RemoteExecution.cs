@@ -17,7 +17,8 @@ namespace System.CommandLine.Tests.Utility
             string className,
             string methodName,
             string exceptionFile
-        ) {
+        )
+        {
             Process = process;
             ClassName = className;
             MethodName = methodName;

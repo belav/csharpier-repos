@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.Mvc
             IProxyHttpContext httpContext,
             IProxyRouteData routeData,
             IProxyActionDescriptor actionDescriptor
-        ) {
+        )
+        {
             BeforeAction = new OnBeforeActionEventData()
             {
                 ActionDescriptor = actionDescriptor,
@@ -43,7 +44,8 @@ namespace Microsoft.AspNetCore.Mvc
         public virtual void OnAfterAction(
             IProxyHttpContext httpContext,
             IProxyActionDescriptor actionDescriptor
-        ) {
+        )
+        {
             AfterAction = new OnAfterActionEventData()
             {
                 ActionDescriptor = actionDescriptor,
@@ -63,7 +65,8 @@ namespace Microsoft.AspNetCore.Mvc
         public virtual void OnBeforeActionMethod(
             IProxyActionContext actionContext,
             IReadOnlyDictionary<string, object> arguments
-        ) {
+        )
+        {
             BeforeActionMethod = new OnBeforeActionMethodEventData()
             {
                 ActionContext = actionContext,
@@ -83,7 +86,8 @@ namespace Microsoft.AspNetCore.Mvc
         public virtual void OnAfterActionMethod(
             IProxyActionContext actionContext,
             IProxyActionResult result
-        ) {
+        )
+        {
             AfterActionMethod = new OnAfterActionMethodEventData()
             {
                 ActionContext = actionContext,
@@ -103,7 +107,8 @@ namespace Microsoft.AspNetCore.Mvc
         public virtual void OnBeforeActionResult(
             IProxyActionContext actionContext,
             IProxyActionResult result
-        ) {
+        )
+        {
             BeforeActionResult = new OnBeforeActionResultEventData()
             {
                 ActionContext = actionContext,
@@ -123,7 +128,8 @@ namespace Microsoft.AspNetCore.Mvc
         public virtual void OnAfterActionResult(
             IProxyActionContext actionContext,
             IProxyActionResult result
-        ) {
+        )
+        {
             AfterActionResult = new OnAfterActionResultEventData()
             {
                 ActionContext = actionContext,
@@ -149,7 +155,8 @@ namespace Microsoft.AspNetCore.Mvc
             IProxyActionResult result,
             string viewName,
             IProxyView view
-        ) {
+        )
+        {
             ViewFound = new OnViewFoundEventData()
             {
                 ActionContext = actionContext,
@@ -178,7 +185,8 @@ namespace Microsoft.AspNetCore.Mvc
             IProxyActionResult result,
             string viewName,
             IEnumerable<string> searchedLocations
-        ) {
+        )
+        {
             ViewNotFound = new OnViewNotFoundEventData()
             {
                 ActionContext = actionContext,
@@ -233,7 +241,8 @@ namespace Microsoft.AspNetCore.Mvc
             IProxyViewContext viewContext,
             IProxyActionDescriptor actionDescriptor,
             IProxyHttpContext httpContext
-        ) {
+        )
+        {
             BeforeViewPage = new OnBeforeViewPageEventData()
             {
                 Page = page,
@@ -259,7 +268,8 @@ namespace Microsoft.AspNetCore.Mvc
             IProxyViewContext viewContext,
             IProxyActionDescriptor actionDescriptor,
             IProxyHttpContext httpContext
-        ) {
+        )
+        {
             AfterViewPage = new OnAfterViewPageEventData()
             {
                 Page = page,
@@ -285,7 +295,8 @@ namespace Microsoft.AspNetCore.Mvc
             IProxyActionDescriptor actionDescriptor,
             IProxyViewComponentContext viewComponentContext,
             object viewComponent
-        ) {
+        )
+        {
             BeforeViewComponent = new OnBeforeViewComponentEventData()
             {
                 ActionDescriptor = actionDescriptor,
@@ -313,7 +324,8 @@ namespace Microsoft.AspNetCore.Mvc
             IProxyViewComponentContext viewComponentContext,
             IProxyViewComponentResult viewComponentResult,
             object viewComponent
-        ) {
+        )
+        {
             AfterViewComponent = new OnAfterViewComponentEventData()
             {
                 ActionDescriptor = actionDescriptor,
@@ -339,7 +351,8 @@ namespace Microsoft.AspNetCore.Mvc
             IProxyActionDescriptor actionDescriptor,
             IProxyViewComponentContext viewComponentContext,
             IProxyView view
-        ) {
+        )
+        {
             ViewComponentBeforeViewExecute = new OnViewComponentBeforeViewExecuteEventData()
             {
                 ActionDescriptor = actionDescriptor,
@@ -364,7 +377,8 @@ namespace Microsoft.AspNetCore.Mvc
             IProxyActionDescriptor actionDescriptor,
             IProxyViewComponentContext viewComponentContext,
             IProxyView view
-        ) {
+        )
+        {
             ViewComponentAfterViewExecute = new OnViewComponentAfterViewExecuteEventData()
             {
                 ActionDescriptor = actionDescriptor,
@@ -402,7 +416,8 @@ namespace Microsoft.AspNetCore.Mvc
             int position,
             int length,
             bool isLiteral
-        ) {
+        )
+        {
             PageInstrumentationData.Add(
                 new BeginPageInstrumentationData
                 {
@@ -422,7 +437,8 @@ namespace Microsoft.AspNetCore.Mvc
             int position,
             int length,
             bool isLiteral
-        ) {
+        )
+        {
             PageInstrumentationData.Add(
                 new EndPageInstrumentationData { HttpContext = httpContext, Path = path, }
             );

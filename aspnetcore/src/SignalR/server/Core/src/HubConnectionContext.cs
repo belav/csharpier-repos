@@ -67,7 +67,8 @@ namespace Microsoft.AspNetCore.SignalR
             ConnectionContext connectionContext,
             HubConnectionContextOptions contextOptions,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             _keepAliveInterval = contextOptions.KeepAliveInterval.Ticks;
             _clientTimeoutInterval = contextOptions.ClientTimeoutInterval.Ticks;
             _streamBufferCapacity = contextOptions.StreamBufferCapacity;
@@ -187,7 +188,8 @@ namespace Microsoft.AspNetCore.SignalR
         public virtual ValueTask WriteAsync(
             HubMessage message,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return WriteAsync(message, ignoreAbort: false, cancellationToken);
         }
 
@@ -195,7 +197,8 @@ namespace Microsoft.AspNetCore.SignalR
             HubMessage message,
             bool ignoreAbort,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             // Try to grab the lock synchronously, if we fail, go to the slower path
             if (!_writeLock.Wait(0))
             {
@@ -244,7 +247,8 @@ namespace Microsoft.AspNetCore.SignalR
         public virtual ValueTask WriteAsync(
             SerializedHubMessage message,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             // Try to grab the lock synchronously, if we fail, go to the slower path
             if (!_writeLock.Wait(0))
             {
@@ -281,7 +285,8 @@ namespace Microsoft.AspNetCore.SignalR
         private ValueTask<FlushResult> WriteCore(
             HubMessage message,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 // We know that we are only writing this message to one receiver, so we can
@@ -306,7 +311,8 @@ namespace Microsoft.AspNetCore.SignalR
         private ValueTask<FlushResult> WriteCore(
             SerializedHubMessage message,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 // Grab a preserialized buffer for this protocol.
@@ -351,7 +357,8 @@ namespace Microsoft.AspNetCore.SignalR
             HubMessage message,
             bool ignoreAbort,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Failed to get the lock immediately when entering WriteAsync so await until it is available
             await _writeLock.WaitAsync(cancellationToken);
 
@@ -379,7 +386,8 @@ namespace Microsoft.AspNetCore.SignalR
         private async Task WriteSlowAsync(
             SerializedHubMessage message,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Failed to get the lock immediately when entering WriteAsync so await until it is available
             await _writeLock.WaitAsync(cancellationToken);
 
@@ -506,7 +514,8 @@ namespace Microsoft.AspNetCore.SignalR
             IHubProtocolResolver protocolResolver,
             IUserIdProvider userIdProvider,
             bool enableDetailedErrors
-        ) {
+        )
+        {
             try
             {
                 var input = Input;
@@ -545,7 +554,8 @@ namespace Microsoft.AspNetCore.SignalR
 
                                 if (
                                     _maxMessageSize != null && buffer.Length > _maxMessageSize.Value
-                                ) {
+                                )
+                                {
                                     // We give the parser a sliding window of the default message size
                                     segment = segment.Slice(segment.Start, _maxMessageSize.Value);
                                     overLength = true;
@@ -556,7 +566,8 @@ namespace Microsoft.AspNetCore.SignalR
                                         ref segment,
                                         out var handshakeRequestMessage
                                     )
-                                ) {
+                                )
+                                {
                                     // We parsed the handshake
                                     consumed = segment.Start;
                                     examined = consumed;
@@ -581,7 +592,8 @@ namespace Microsoft.AspNetCore.SignalR
                                         !Protocol.IsVersionSupported(
                                             handshakeRequestMessage.Version
                                         )
-                                    ) {
+                                    )
+                                    {
                                         Log.ProtocolVersionFailed(
                                             _logger,
                                             handshakeRequestMessage.Protocol,
@@ -607,7 +619,8 @@ namespace Microsoft.AspNetCore.SignalR
                                                 transferFormatFeature.SupportedFormats
                                                 & Protocol.TransferFormat
                                             ) == 0
-                                        ) {
+                                        )
+                                        {
                                             Log.HandshakeFailed(_logger, null);
                                             await WriteHandshakeResponseAsync(
                                                 new HandshakeResponseMessage(
@@ -631,7 +644,8 @@ namespace Microsoft.AspNetCore.SignalR
                                     if (
                                         Features.Get<IConnectionInherentKeepAliveFeature>()?.HasInherentKeepAlive
                                         != true
-                                    ) {
+                                    )
+                                    {
                                         // Only register KeepAlive after protocol handshake otherwise KeepAliveTick could try to write without having a ProtocolReaderWriter
                                         Features.Get<IConnectionHeartbeatFeature>()?.OnHeartbeat(
                                             state => ((HubConnectionContext)state).KeepAliveTick(),

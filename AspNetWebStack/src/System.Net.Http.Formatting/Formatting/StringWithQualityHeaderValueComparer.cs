@@ -39,7 +39,8 @@ namespace System.Net.Http.Formatting
         public int Compare(
             StringWithQualityHeaderValue stringWithQuality1,
             StringWithQualityHeaderValue stringWithQuality2
-        ) {
+        )
+        {
             Contract.Assert(stringWithQuality1 != null);
             Contract.Assert(stringWithQuality2 != null);
 
@@ -61,15 +62,18 @@ namespace System.Net.Http.Formatting
                     stringWithQuality2.Value,
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 if (
                     String.Equals(stringWithQuality1.Value, "*", StringComparison.OrdinalIgnoreCase)
-                ) {
+                )
+                {
                     return -1;
                 }
                 else if (
                     String.Equals(stringWithQuality2.Value, "*", StringComparison.OrdinalIgnoreCase)
-                ) {
+                )
+                {
                     return 1;
                 }
             }

@@ -47,7 +47,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
         /// </summary>
         public virtual InMemoryIntegerValueGenerator<TProperty> GetIntegerValueGenerator<TProperty>(
             IProperty property
-        ) {
+        )
+        {
             lock (_lock)
             {
                 var entityType = property.DeclaringEntityType;
@@ -72,7 +73,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
             IUpdateAdapterFactory updateAdapterFactory,
             IModel designModel,
             IDiagnosticsLogger<DbLoggerCategory.Update> updateLogger
-        ) {
+        )
+        {
             lock (_lock)
             {
                 var valuesSeeded = _tables == null;
@@ -143,7 +145,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
                     foreach (
                         var et in entityType.GetDerivedTypesInclusive()
                             .Where(et => !et.IsAbstract())
-                    ) {
+                    )
+                    {
                         var key = _useNameMatching ? (object)et.Name : et;
                         if (_tables.TryGetValue(key, out var table))
                         {
@@ -165,7 +168,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
         public virtual int ExecuteTransaction(
             IList<IUpdateEntry> entries,
             IDiagnosticsLogger<DbLoggerCategory.Update> updateLogger
-        ) {
+        )
+        {
             var rowsAffected = 0;
 
             lock (_lock)

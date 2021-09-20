@@ -77,7 +77,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             public void RunStructFldScenario(
                 ScalarSimdUnaryOpTest__ConvertScalarToVector128UInt64UInt64 testClass
-            ) {
+            )
+            {
                 var result = Sse2.X64.ConvertScalarToVector128UInt64(_fld);
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
@@ -237,7 +238,8 @@ namespace JIT.HardwareIntrinsics.X86
             UInt64 firstOp,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             UInt64[] outArray = new UInt64[RetElementCount];
 
             Unsafe.CopyBlockUnaligned(
@@ -253,7 +255,8 @@ namespace JIT.HardwareIntrinsics.X86
             UInt64 firstOp,
             UInt64[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (firstOp != result[0])

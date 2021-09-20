@@ -46,7 +46,8 @@ namespace System.Xml
             XmlDictionaryReaderQuotas quotas,
             XmlBinaryReaderSession? session,
             OnXmlDictionaryReaderClose? onClose
-        ) {
+        )
+        {
             if (buffer == null)
                 throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
                     nameof(buffer)
@@ -84,7 +85,8 @@ namespace System.Xml
             XmlDictionaryReaderQuotas quotas,
             XmlBinaryReaderSession? session,
             OnXmlDictionaryReaderClose? onClose
-        ) {
+        )
+        {
             if (stream == null)
                 throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
                     nameof(stream)
@@ -98,7 +100,8 @@ namespace System.Xml
             XmlDictionaryReaderQuotas quotas,
             XmlBinaryReaderSession? session,
             OnXmlDictionaryReaderClose? onClose
-        ) {
+        )
+        {
             MoveToInitial(quotas);
             _maxBytesPerRead = quotas.MaxBytesPerRead;
             _arrayState = ArrayState.None;
@@ -225,7 +228,8 @@ namespace System.Xml
             if (
                 CanOptimizeReadElementContent()
                 && GetNodeType() == XmlBinaryNodeType.FloatTextWithEndElement
-            ) {
+            )
+            {
                 SkipNodeType();
                 float value = BufferReader.ReadSingle();
                 ReadTextWithEndElement();
@@ -241,7 +245,8 @@ namespace System.Xml
             if (
                 CanOptimizeReadElementContent()
                 && GetNodeType() == XmlBinaryNodeType.DoubleTextWithEndElement
-            ) {
+            )
+            {
                 SkipNodeType();
                 double value = BufferReader.ReadDouble();
                 ReadTextWithEndElement();
@@ -257,7 +262,8 @@ namespace System.Xml
             if (
                 CanOptimizeReadElementContent()
                 && GetNodeType() == XmlBinaryNodeType.DecimalTextWithEndElement
-            ) {
+            )
+            {
                 SkipNodeType();
                 decimal value = BufferReader.ReadDecimal();
                 ReadTextWithEndElement();
@@ -273,7 +279,8 @@ namespace System.Xml
             if (
                 CanOptimizeReadElementContent()
                 && GetNodeType() == XmlBinaryNodeType.DateTimeTextWithEndElement
-            ) {
+            )
+            {
                 SkipNodeType();
                 DateTime value = BufferReader.ReadDateTime();
                 ReadTextWithEndElement();
@@ -289,7 +296,8 @@ namespace System.Xml
             if (
                 CanOptimizeReadElementContent()
                 && GetNodeType() == XmlBinaryNodeType.TimeSpanTextWithEndElement
-            ) {
+            )
+            {
                 SkipNodeType();
                 TimeSpan value = BufferReader.ReadTimeSpan();
                 ReadTextWithEndElement();
@@ -305,7 +313,8 @@ namespace System.Xml
             if (
                 CanOptimizeReadElementContent()
                 && GetNodeType() == XmlBinaryNodeType.GuidTextWithEndElement
-            ) {
+            )
+            {
                 SkipNodeType();
                 Guid value = BufferReader.ReadGuid();
                 ReadTextWithEndElement();
@@ -321,7 +330,8 @@ namespace System.Xml
             if (
                 CanOptimizeReadElementContent()
                 && GetNodeType() == XmlBinaryNodeType.UniqueIdTextWithEndElement
-            ) {
+            )
+            {
                 SkipNodeType();
                 UniqueId value = BufferReader.ReadUniqueId();
                 ReadTextWithEndElement();
@@ -1349,7 +1359,8 @@ namespace System.Xml
             XmlDictionaryString localName,
             XmlDictionaryString namespaceUri,
             XmlBinaryNodeType nodeType
-        ) {
+        )
+        {
             return IsStartElement(localName, namespaceUri)
                 && _arrayState == ArrayState.Element
                 && _arrayNodeType == nodeType
@@ -1404,7 +1415,8 @@ namespace System.Xml
             bool[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             if (IsStartArray(localName, namespaceUri, XmlBinaryNodeType.BoolTextWithEndElement))
                 return ReadArray(array, offset, count);
             return base.ReadArray(localName, namespaceUri, array, offset, count);
@@ -1416,7 +1428,8 @@ namespace System.Xml
             bool[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             if (IsStartArray(localName, namespaceUri, XmlBinaryNodeType.BoolTextWithEndElement))
                 return ReadArray(array, offset, count);
             return base.ReadArray(localName, namespaceUri, array, offset, count);
@@ -1440,7 +1453,8 @@ namespace System.Xml
             short[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             if (
                 IsStartArray(localName, namespaceUri, XmlBinaryNodeType.Int16TextWithEndElement)
                 && BitConverter.IsLittleEndian
@@ -1455,7 +1469,8 @@ namespace System.Xml
             short[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             if (
                 IsStartArray(localName, namespaceUri, XmlBinaryNodeType.Int16TextWithEndElement)
                 && BitConverter.IsLittleEndian
@@ -1482,7 +1497,8 @@ namespace System.Xml
             int[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             if (
                 IsStartArray(localName, namespaceUri, XmlBinaryNodeType.Int32TextWithEndElement)
                 && BitConverter.IsLittleEndian
@@ -1497,7 +1513,8 @@ namespace System.Xml
             int[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             if (
                 IsStartArray(localName, namespaceUri, XmlBinaryNodeType.Int32TextWithEndElement)
                 && BitConverter.IsLittleEndian
@@ -1524,7 +1541,8 @@ namespace System.Xml
             long[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             if (
                 IsStartArray(localName, namespaceUri, XmlBinaryNodeType.Int64TextWithEndElement)
                 && BitConverter.IsLittleEndian
@@ -1539,7 +1557,8 @@ namespace System.Xml
             long[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             if (
                 IsStartArray(localName, namespaceUri, XmlBinaryNodeType.Int64TextWithEndElement)
                 && BitConverter.IsLittleEndian
@@ -1566,7 +1585,8 @@ namespace System.Xml
             float[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             if (IsStartArray(localName, namespaceUri, XmlBinaryNodeType.FloatTextWithEndElement))
                 return ReadArray(array, offset, count);
             return base.ReadArray(localName, namespaceUri, array, offset, count);
@@ -1578,7 +1598,8 @@ namespace System.Xml
             float[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             if (IsStartArray(localName, namespaceUri, XmlBinaryNodeType.FloatTextWithEndElement))
                 return ReadArray(array, offset, count);
             return base.ReadArray(localName, namespaceUri, array, offset, count);
@@ -1602,7 +1623,8 @@ namespace System.Xml
             double[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             if (IsStartArray(localName, namespaceUri, XmlBinaryNodeType.DoubleTextWithEndElement))
                 return ReadArray(array, offset, count);
             return base.ReadArray(localName, namespaceUri, array, offset, count);
@@ -1614,7 +1636,8 @@ namespace System.Xml
             double[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             if (IsStartArray(localName, namespaceUri, XmlBinaryNodeType.DoubleTextWithEndElement))
                 return ReadArray(array, offset, count);
             return base.ReadArray(localName, namespaceUri, array, offset, count);
@@ -1638,7 +1661,8 @@ namespace System.Xml
             decimal[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             if (IsStartArray(localName, namespaceUri, XmlBinaryNodeType.DecimalTextWithEndElement))
                 return ReadArray(array, offset, count);
             return base.ReadArray(localName, namespaceUri, array, offset, count);
@@ -1650,7 +1674,8 @@ namespace System.Xml
             decimal[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             if (IsStartArray(localName, namespaceUri, XmlBinaryNodeType.DecimalTextWithEndElement))
                 return ReadArray(array, offset, count);
             return base.ReadArray(localName, namespaceUri, array, offset, count);
@@ -1675,7 +1700,8 @@ namespace System.Xml
             DateTime[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             if (IsStartArray(localName, namespaceUri, XmlBinaryNodeType.DateTimeTextWithEndElement))
                 return ReadArray(array, offset, count);
             return base.ReadArray(localName, namespaceUri, array, offset, count);
@@ -1687,7 +1713,8 @@ namespace System.Xml
             DateTime[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             if (IsStartArray(localName, namespaceUri, XmlBinaryNodeType.DateTimeTextWithEndElement))
                 return ReadArray(array, offset, count);
             return base.ReadArray(localName, namespaceUri, array, offset, count);
@@ -1712,7 +1739,8 @@ namespace System.Xml
             Guid[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             if (IsStartArray(localName, namespaceUri, XmlBinaryNodeType.GuidTextWithEndElement))
                 return ReadArray(array, offset, count);
             return base.ReadArray(localName, namespaceUri, array, offset, count);
@@ -1724,7 +1752,8 @@ namespace System.Xml
             Guid[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             if (IsStartArray(localName, namespaceUri, XmlBinaryNodeType.GuidTextWithEndElement))
                 return ReadArray(array, offset, count);
             return base.ReadArray(localName, namespaceUri, array, offset, count);
@@ -1749,7 +1778,8 @@ namespace System.Xml
             TimeSpan[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             if (IsStartArray(localName, namespaceUri, XmlBinaryNodeType.TimeSpanTextWithEndElement))
                 return ReadArray(array, offset, count);
             return base.ReadArray(localName, namespaceUri, array, offset, count);
@@ -1761,7 +1791,8 @@ namespace System.Xml
             TimeSpan[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             if (IsStartArray(localName, namespaceUri, XmlBinaryNodeType.TimeSpanTextWithEndElement))
                 return ReadArray(array, offset, count);
             return base.ReadArray(localName, namespaceUri, array, offset, count);

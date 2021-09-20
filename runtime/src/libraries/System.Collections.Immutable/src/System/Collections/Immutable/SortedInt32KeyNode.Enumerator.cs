@@ -129,7 +129,8 @@ namespace System.Collections.Immutable
                         ref this,
                         out Stack<RefAsValueType<SortedInt32KeyNode<TValue>>>? stack
                     )
-                ) {
+                )
+                {
                     stack.ClearFastWhenEmpty();
                     s_enumeratingStacks.TryAdd(this, _stack!);
                 }

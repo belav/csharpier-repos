@@ -181,7 +181,8 @@ namespace System
                     dd._methodPtr == d._methodPtr
                     && dd._target == d._target
                     && dd._methodPtrAux == d._methodPtrAux
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -192,7 +193,8 @@ namespace System
             object[] invocationList,
             int invocationCount,
             bool thisIsMultiCastAlready
-        ) {
+        )
+        {
             // First, allocate a new multicast delegate just like this one, i.e. same type as the this object
             MulticastDelegate result = (MulticastDelegate)InternalAllocLike(this);
 
@@ -218,7 +220,8 @@ namespace System
         internal MulticastDelegate NewMulticastDelegate(
             object[] invocationList,
             int invocationCount
-        ) {
+        )
+        {
             return NewMulticastDelegate(invocationList, invocationCount, false);
         }
 
@@ -329,7 +332,8 @@ namespace System
             int invocationCount,
             int deleteIndex,
             int deleteCount
-        ) {
+        )
+        {
             Debug.Assert(_invocationList is object[]);
             object[] thisInvocationList = (object[])_invocationList;
             int allocCount = thisInvocationList.Length;
@@ -420,7 +424,8 @@ namespace System
                                 i,
                                 vInvocationCount
                             )
-                        ) {
+                        )
+                        {
                             if (invocationCount - vInvocationCount == 0)
                             {
                                 // Special case - no values left
@@ -598,7 +603,8 @@ namespace System
                     if (
                         RuntimeTypeHandle.IsGenericTypeDefinition(declaringType)
                         || RuntimeTypeHandle.HasInstantiation(declaringType)
-                    ) {
+                    )
+                    {
                         // we are returning the 'Invoke' method of this delegate so use this.GetType() for the exact type
                         RuntimeType reflectedType = (RuntimeType)GetType();
                         declaringType = reflectedType;
@@ -671,7 +677,8 @@ namespace System
             IntPtr methodPtr,
             IntPtr shuffleThunk,
             IntPtr gchandle
-        ) {
+        )
+        {
             this._target = this;
             this._methodPtr = shuffleThunk;
             this._methodPtrAux = methodPtr;
@@ -684,7 +691,8 @@ namespace System
             IntPtr methodPtr,
             IntPtr shuffleThunk,
             IntPtr gchandle
-        ) {
+        )
+        {
             this._target = this;
             this._methodPtr = shuffleThunk;
             this._methodPtrAux = GetCallStub(methodPtr);

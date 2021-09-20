@@ -9,7 +9,8 @@ namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite
             ConditionCollection conditions,
             RewriteContext context,
             BackReferenceCollection? backReferences
-        ) {
+        )
+        {
             BackReferenceCollection? prevBackReferences = null;
             MatchResults? condResult = null;
             var orSucceeded = false;

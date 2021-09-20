@@ -39,7 +39,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IMvcCoreBuilder AddCors(
             this IMvcCoreBuilder builder,
             Action<CorsOptions> setupAction
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -65,7 +66,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IMvcCoreBuilder ConfigureCors(
             this IMvcCoreBuilder builder,
             Action<CorsOptions> setupAction
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));

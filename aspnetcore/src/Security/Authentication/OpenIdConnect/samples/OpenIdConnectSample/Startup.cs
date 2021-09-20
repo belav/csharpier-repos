@@ -73,7 +73,8 @@ namespace OpenIdConnectSample
                 userAgent.Contains("Macintosh; Intel Mac OS X 10_14")
                 && userAgent.Contains("Version/")
                 && userAgent.Contains("Safari")
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -158,7 +159,8 @@ namespace OpenIdConnectSample
         public void Configure(
             IApplicationBuilder app,
             IOptionsMonitor<OpenIdConnectOptions> optionsMonitor
-        ) {
+        )
+        {
             app.UseDeveloperExceptionPage();
             app.UseCookiePolicy(); // Before UseAuthentication or anything else that writes cookies.
             app.UseAuthentication();
@@ -283,7 +285,8 @@ namespace OpenIdConnectSample
                     if (
                         context.Request.Path.Equals("/restricted")
                         && !user.Identities.Any(identity => identity.HasClaim("special", "true"))
-                    ) {
+                    )
+                    {
                         await context.ForbidAsync();
                         return;
                     }
@@ -334,7 +337,8 @@ namespace OpenIdConnectSample
                             var payload = JsonDocument.Parse(
                                 await tokenResponse.Content.ReadAsStringAsync()
                             )
-                        ) {
+                        )
+                        {
                             // Persist the new acess token
                             props.UpdateTokenValue(
                                 "access_token",
@@ -347,7 +351,8 @@ namespace OpenIdConnectSample
                             if (
                                 payload.RootElement.TryGetProperty("expires_in", out var property)
                                 && property.TryGetInt32(out var seconds)
-                            ) {
+                            )
+                            {
                                 var expiresAt =
                                     DateTimeOffset.UtcNow + TimeSpan.FromSeconds(seconds);
                                 props.UpdateTokenValue(
@@ -455,7 +460,8 @@ namespace OpenIdConnectSample
         private static async Task WriteHtmlAsync(
             HttpResponse response,
             Func<HttpResponse, Task> writeContent
-        ) {
+        )
+        {
             var bootstrap =
                 "<link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css\" integrity=\"sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu\" crossorigin=\"anonymous\">";
 
@@ -471,7 +477,8 @@ namespace OpenIdConnectSample
             HttpResponse response,
             IEnumerable<string> columns,
             IEnumerable<IEnumerable<string>> data
-        ) {
+        )
+        {
             await response.WriteAsync("<table class=\"table table-condensed\">");
             await response.WriteAsync("<tr>");
             foreach (var column in columns)

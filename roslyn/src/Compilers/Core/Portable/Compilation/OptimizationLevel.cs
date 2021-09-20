@@ -67,7 +67,8 @@ namespace Microsoft.CodeAnalysis
             string value,
             out OptimizationLevel optimizationLevel,
             out bool debugPlusMode
-        ) {
+        )
+        {
             switch (value)
             {
                 case "release-debug-plus":

@@ -62,7 +62,8 @@ namespace System.Configuration
             ConfigurationElement parentSection,
             string name,
             ConfigurationSaveMode saveMode
-        ) {
+        )
+        {
             return _rawXml;
         }
     }

@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.Structure
             ref TemporaryArray<BlockSpan> spans,
             BlockStructureOptionProvider optionProvider,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
 
@@ -25,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Structure
             ref TemporaryArray<BlockSpan> spans,
             BlockStructureOptionProvider optionProvider,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (node is TSyntaxNode tSyntax)
             {
                 CollectBlockSpans(tSyntax, ref spans, optionProvider, cancellationToken);

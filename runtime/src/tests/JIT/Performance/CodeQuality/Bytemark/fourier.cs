@@ -162,7 +162,8 @@ public class Fourier : FourierStruct
         int nsteps,
         double omegan,
         int select
-    ) {
+    )
+    {
         double x; /* Independent variable */
         double dx; /* Stepsize */
         double rvalue; /* Return value */

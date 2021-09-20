@@ -83,7 +83,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
             ISymbol symbol,
             bool allowDecompilation,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (project == null)
             {
                 throw new ArgumentNullException(nameof(project));
@@ -231,7 +232,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                             append: false,
                             encoding: MetadataAsSourceGeneratedFileInfo.Encoding
                         )
-                    ) {
+                    )
+                    {
                         text.Write(textWriter, cancellationToken);
                     }
 
@@ -284,7 +286,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
             MetadataAsSourceGeneratedFileInfo fileInfo,
             SymbolKey symbolId,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(_workspace);
 
             // We need to relocate the symbol in the already existing file. If the file is open, we can just
@@ -323,7 +326,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
         public bool TryAddDocumentToWorkspace(
             string filePath,
             SourceTextContainer sourceTextContainer
-        ) {
+        )
+        {
             using (_gate.DisposableWait())
             {
                 if (_generatedFilenameToInformation.TryGetValue(filePath, out var fileInfo))
@@ -396,7 +400,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
             INamedTypeSymbol topLevelNamedType,
             bool allowDecompilation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var compilation = await project.GetCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
             Contract.ThrowIfNull(
@@ -446,7 +451,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
             Document document,
             SymbolKey symbolId,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             MetadataAsSourceGeneratedFileInfo? fileInfo;
 
             using (await _gate.DisposableWaitAsync(cancellationToken).ConfigureAwait(false))
@@ -518,14 +524,16 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                             var directoryInfo in new DirectoryInfo(
                                 _rootTemporaryPath
                             ).EnumerateDirectories()
-                        ) {
+                        )
+                        {
                             // Is there a mutex for this one?
                             if (
                                 Mutex.TryOpenExisting(
                                     CreateMutexName(directoryInfo.Name),
                                     out var acquiredMutex
                                 )
-                            ) {
+                            )
+                            {
                                 acquiredMutex.Dispose();
                                 deletedEverything = false;
                                 continue;
@@ -553,7 +561,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                         "*",
                         SearchOption.AllDirectories
                     )
-                ) {
+                )
+                {
                     fileInfo.IsReadOnly = false;
                 }
 
@@ -606,7 +615,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                 string language,
                 SymbolKey symbolId,
                 bool allowDecompilation
-            ) {
+            )
+            {
                 Contract.ThrowIfNull(filePath);
 
                 _filePath = filePath;
@@ -622,7 +632,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                 string language,
                 SymbolKey symbolId,
                 bool allowDecompilation
-            ) {
+            )
+            {
                 Contract.ThrowIfNull(assemblyIdentity);
 
                 _assemblyIdentity = assemblyIdentity;

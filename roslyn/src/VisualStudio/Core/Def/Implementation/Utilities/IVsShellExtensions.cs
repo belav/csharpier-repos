@@ -57,7 +57,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
             this IVsShell shell,
             __VSSPROPID id,
             out IntPtr value
-        ) {
+        )
+        {
             var hresult = shell.GetProperty((int)id, out var objValue);
             if (ErrorHandler.Succeeded(hresult) && objValue != null)
             {

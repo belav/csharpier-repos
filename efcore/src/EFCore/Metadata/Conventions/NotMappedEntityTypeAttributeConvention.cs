@@ -31,13 +31,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionEntityTypeBuilder entityTypeBuilder,
             NotMappedAttribute attribute,
             IConventionContext<IConventionEntityTypeBuilder> context
-        ) {
+        )
+        {
             if (
                 entityTypeBuilder.ModelBuilder.Ignore(
                     entityTypeBuilder.Metadata.Name,
                     fromDataAnnotation: true
                 ) != null
-            ) {
+            )
+            {
                 context.StopProcessing();
             }
         }

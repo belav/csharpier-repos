@@ -1412,8 +1412,7 @@ namespace System.Xml
                 return;
             }
             // write text
-            fixed (char* pSrcBegin = text)
-            fixed (char* pDstBegin = _bufChars)
+            fixed (char* pSrcBegin = text)fixed (char* pDstBegin = _bufChars)
             {
                 char* pSrc = pSrcBegin;
 
@@ -1433,7 +1432,8 @@ namespace System.Xml
                     while (
                         pDst < pDstEnd
                         && (XmlCharType.IsTextChar((char)(ch = *pSrc)) && ch != stopChar)
-                    ) {
+                    )
+                    {
                         *pDst = (char)ch;
                         pDst++;
                         pSrc++;
@@ -1564,8 +1564,7 @@ namespace System.Xml
 
             // write text
 
-            fixed (char* pSrcBegin = text)
-            fixed (char* pDstBegin = _bufChars)
+            fixed (char* pSrcBegin = text)fixed (char* pDstBegin = _bufChars)
             {
                 char* pSrc = pSrcBegin;
 
@@ -1585,7 +1584,8 @@ namespace System.Xml
                     while (
                         pDst < pDstEnd
                         && (XmlCharType.IsAttributeValueChar((char)(ch = *pSrc)) && ch != ']')
-                    ) {
+                    )
+                    {
                         *pDst = (char)ch;
                         pDst++;
                         pSrc++;
@@ -1713,7 +1713,8 @@ namespace System.Xml
                             LocalAppContextSwitches.DontThrowOnInvalidSurrogatePairs
                             || lowChar <= XmlCharType.SurLowEnd
                         )
-                    ) {
+                    )
+                    {
                         pDst[0] = (char)ch;
                         pDst[1] = (char)lowChar;
                         pDst += 2;
@@ -1944,7 +1945,8 @@ namespace System.Xml
             string chars,
             string propertyName,
             bool allowOnlyWhitespace
-        ) {
+        )
+        {
             if (allowOnlyWhitespace)
             {
                 if (!XmlCharType.IsOnlyWhitespace(chars))

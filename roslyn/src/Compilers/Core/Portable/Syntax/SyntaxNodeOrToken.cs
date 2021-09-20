@@ -625,7 +625,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public SyntaxNodeOrToken WithAdditionalAnnotations(
             IEnumerable<SyntaxAnnotation> annotations
-        ) {
+        )
+        {
             if (annotations == null)
             {
                 throw new ArgumentNullException(nameof(annotations));
@@ -886,7 +887,8 @@ namespace Microsoft.CodeAnalysis
                     node => node.ContainsDirectives,
                     descendIntoTrivia: true
                 )
-            ) {
+            )
+            {
                 _ = GetDirectivesInTrivia(trivia, filter, ref directives);
             }
         }
@@ -902,7 +904,8 @@ namespace Microsoft.CodeAnalysis
                 if (
                     trivia.GetStructure() is TDirective directive
                     && filter?.Invoke(directive) != false
-                ) {
+                )
+                {
                     if (directives == null)
                     {
                         directives = new List<TDirective>();
@@ -927,7 +930,8 @@ namespace Microsoft.CodeAnalysis
                 if (
                     !GetDirectivesInTrivia(tr, filter, ref directives)
                     && tr.GetStructure() is SyntaxNode node
-                ) {
+                )
+                {
                     GetDirectives(node, filter, ref directives);
                 }
             }

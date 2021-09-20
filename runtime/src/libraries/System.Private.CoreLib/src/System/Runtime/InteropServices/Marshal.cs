@@ -271,7 +271,8 @@ namespace System.Runtime.InteropServices
             int startIndex,
             IntPtr destination,
             int length
-        ) {
+        )
+        {
             if (source is null)
                 throw new ArgumentNullException(nameof(source));
             if (destination == IntPtr.Zero)
@@ -327,7 +328,8 @@ namespace System.Runtime.InteropServices
             T[] destination,
             int startIndex,
             int length
-        ) {
+        )
+        {
             if (source == IntPtr.Zero)
                 throw new ArgumentNullException(nameof(source));
             if (destination is null)
@@ -606,7 +608,8 @@ namespace System.Runtime.InteropServices
             [DisallowNull] T structure,
             IntPtr ptr,
             bool fDeleteOld
-        ) {
+        )
+        {
             StructureToPtr((object)structure!, ptr, fDeleteOld);
         }
 
@@ -620,7 +623,8 @@ namespace System.Runtime.InteropServices
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
             )]
                 Type structureType
-        ) {
+        )
+        {
             if (ptr == IntPtr.Zero)
             {
                 return null;

@@ -93,7 +93,8 @@ namespace System.Linq.Expressions
             Expression left,
             LambdaExpression? conversion,
             Expression right
-        ) {
+        )
+        {
             if (left == Left && right == Right && conversion == Conversion)
             {
                 return this;
@@ -336,7 +337,8 @@ namespace System.Linq.Expressions
             Type type,
             MethodInfo? method,
             LambdaExpression? conversion
-        ) {
+        )
+        {
             Debug.Assert(nodeType != ExpressionType.Assign);
             if (conversion != null)
             {
@@ -491,11 +493,8 @@ namespace System.Linq.Expressions
     // && || == != > < >= <=
     internal sealed class LogicalBinaryExpression : BinaryExpression
     {
-        internal LogicalBinaryExpression(
-            ExpressionType nodeType,
-            Expression left,
-            Expression right
-        ) : base(left, right)
+        internal LogicalBinaryExpression(ExpressionType nodeType, Expression left, Expression right)
+            : base(left, right)
         {
             NodeType = nodeType;
         }
@@ -655,7 +654,8 @@ namespace System.Linq.Expressions
             Expression left,
             Expression right,
             bool liftToNull
-        ) {
+        )
+        {
             // try exact match first
             MethodInfo? method = GetUserDefinedBinaryOperator(
                 binaryType,
@@ -683,7 +683,8 @@ namespace System.Linq.Expressions
                     method != null
                     && method.ReturnType.IsValueType
                     && !method.ReturnType.IsNullableType()
-                ) {
+                )
+                {
                     if (method.ReturnType != typeof(bool) || liftToNull)
                     {
                         return new MethodBinaryExpression(
@@ -715,7 +716,8 @@ namespace System.Linq.Expressions
             Expression right,
             MethodInfo method,
             bool liftToNull
-        ) {
+        )
+        {
             System.Diagnostics.Debug.Assert(method != null);
             ValidateOperator(method);
             ParameterInfo[] pms = method.GetParametersCached();
@@ -724,7 +726,8 @@ namespace System.Linq.Expressions
             if (
                 ParameterIsAssignable(pms[0], left.Type)
                 && ParameterIsAssignable(pms[1], right.Type)
-            ) {
+            )
+            {
                 ValidateParamswithOperandsOrThrow(
                     pms[0].ParameterType,
                     left.Type,
@@ -753,7 +756,8 @@ namespace System.Linq.Expressions
                 && ParameterIsAssignable(pms[1], right.Type.GetNonNullableType())
                 && method.ReturnType.IsValueType
                 && !method.ReturnType.IsNullableType()
-            ) {
+            )
+            {
                 if (method.ReturnType != typeof(bool) || liftToNull)
                 {
                     return new MethodBinaryExpression(
@@ -785,7 +789,8 @@ namespace System.Linq.Expressions
             MethodInfo method,
             LambdaExpression? conversion,
             bool liftToNull
-        ) {
+        )
+        {
             BinaryExpression b = GetMethodBasedBinaryOperator(
                 binaryType,
                 left,
@@ -823,7 +828,8 @@ namespace System.Linq.Expressions
             Expression left,
             Expression right,
             bool liftToNull
-        ) {
+        )
+        {
             BinaryExpression? b = GetUserDefinedBinaryOperator(
                 binaryType,
                 name,
@@ -858,7 +864,8 @@ namespace System.Linq.Expressions
             Expression right,
             LambdaExpression? conversion,
             bool liftToNull
-        ) {
+        )
+        {
             BinaryExpression b = GetUserDefinedBinaryOperatorOrThrow(
                 binaryType,
                 name,
@@ -895,7 +902,8 @@ namespace System.Linq.Expressions
             Type leftType,
             Type rightType,
             string name
-        ) {
+        )
+        {
             // This algorithm is wrong, we should be checking for uniqueness and erroring if
             // it is defined on both types.
             Type[] types = new Type[] { leftType, rightType };
@@ -919,7 +927,8 @@ namespace System.Linq.Expressions
             Type right,
             MethodInfo? method,
             ExpressionType binaryType
-        ) {
+        )
+        {
             return right.IsNullableType()
                 && left.IsNullableType()
                 && method == null
@@ -939,7 +948,8 @@ namespace System.Linq.Expressions
             Type operandType,
             ExpressionType exprType,
             string name
-        ) {
+        )
+        {
             if (paramType.IsNullableType() && !operandType.IsNullableType())
             {
                 throw Error.OperandTypesDoNotMatchParameters(exprType, name);
@@ -991,7 +1001,8 @@ namespace System.Linq.Expressions
             Type left,
             Type right,
             MethodInfo method
-        ) {
+        )
+        {
             ValidateOperator(method);
             ParameterInfo[] pms = method.GetParametersCached();
             if (pms.Length != 2)
@@ -1040,7 +1051,8 @@ namespace System.Linq.Expressions
                 || opTrue.ReturnType != typeof(bool)
                 || opFalse == null
                 || opFalse.ReturnType != typeof(bool)
-            ) {
+            )
+            {
                 throw Error.LogicalOperatorMustHaveBooleanOperators(nodeType, method.Name);
             }
             VerifyOpTrueFalse(nodeType, left, opFalse, nameof(method));
@@ -1052,7 +1064,8 @@ namespace System.Linq.Expressions
             Type left,
             MethodInfo opTrue,
             string paramName
-        ) {
+        )
+        {
             ParameterInfo[] pmsOpTrue = opTrue.GetParametersCached();
             if (pmsOpTrue.Length != 1)
                 throw Error.IncorrectNumberOfMethodCallArguments(opTrue, paramName);
@@ -1073,7 +1086,8 @@ namespace System.Linq.Expressions
             Type left,
             Type right,
             ParameterInfo[] pms
-        ) {
+        )
+        {
             return TypeUtils.AreEquivalent(left, right)
                 && right.IsNullableType()
                 && TypeUtils.AreEquivalent(pms[1].ParameterType, right.GetNonNullableType());
@@ -1090,7 +1104,8 @@ namespace System.Linq.Expressions
             ExpressionType binaryType,
             Expression left,
             Expression right
-        ) {
+        )
+        {
             return MakeBinary(
                 binaryType,
                 left,
@@ -1116,7 +1131,8 @@ namespace System.Linq.Expressions
             Expression right,
             bool liftToNull,
             MethodInfo? method
-        ) {
+        )
+        {
             return MakeBinary(binaryType, left, right, liftToNull, method, conversion: null);
         }
 
@@ -1218,7 +1234,8 @@ namespace System.Linq.Expressions
             Expression right,
             bool liftToNull,
             MethodInfo? method
-        ) {
+        )
+        {
             ExpressionUtils.RequiresCanRead(left, nameof(left));
             ExpressionUtils.RequiresCanRead(right, nameof(right));
             if (method == null)
@@ -1286,7 +1303,8 @@ namespace System.Linq.Expressions
             Expression right,
             bool liftToNull,
             MethodInfo? method
-        ) {
+        )
+        {
             ExpressionUtils.RequiresCanRead(left, nameof(left));
             ExpressionUtils.RequiresCanRead(right, nameof(right));
             if (method == null)
@@ -1333,7 +1351,8 @@ namespace System.Linq.Expressions
             Expression left,
             Expression right,
             bool liftToNull
-        ) {
+        )
+        {
             // known comparison - numeric types, bools, object, enums
             if (
                 left.Type == right.Type
@@ -1343,7 +1362,8 @@ namespace System.Linq.Expressions
                     || left.Type.IsBool()
                     || left.Type.GetNonNullableType().IsEnum
                 )
-            ) {
+            )
+            {
                 if (left.Type.IsNullableType() && liftToNull)
                 {
                     return new SimpleBinaryExpression(binaryType, left, right, typeof(bool?));
@@ -1368,7 +1388,8 @@ namespace System.Linq.Expressions
             if (
                 TypeUtils.HasBuiltInEqualityOperator(left.Type, right.Type)
                 || IsNullComparison(left, right)
-            ) {
+            )
+            {
                 if (left.Type.IsNullableType() && liftToNull)
                 {
                     return new SimpleBinaryExpression(binaryType, left, right, typeof(bool?));
@@ -1412,7 +1433,8 @@ namespace System.Linq.Expressions
             Expression right,
             bool liftToNull,
             MethodInfo? method
-        ) {
+        )
+        {
             ExpressionUtils.RequiresCanRead(left, nameof(left));
             ExpressionUtils.RequiresCanRead(right, nameof(right));
             if (method == null)
@@ -1462,7 +1484,8 @@ namespace System.Linq.Expressions
             Expression right,
             bool liftToNull,
             MethodInfo? method
-        ) {
+        )
+        {
             ExpressionUtils.RequiresCanRead(left, nameof(left));
             ExpressionUtils.RequiresCanRead(right, nameof(right));
             if (method == null)
@@ -1511,7 +1534,8 @@ namespace System.Linq.Expressions
             Expression right,
             bool liftToNull,
             MethodInfo? method
-        ) {
+        )
+        {
             ExpressionUtils.RequiresCanRead(left, nameof(left));
             ExpressionUtils.RequiresCanRead(right, nameof(right));
             if (method == null)
@@ -1560,7 +1584,8 @@ namespace System.Linq.Expressions
             Expression right,
             bool liftToNull,
             MethodInfo? method
-        ) {
+        )
+        {
             ExpressionUtils.RequiresCanRead(left, nameof(left));
             ExpressionUtils.RequiresCanRead(right, nameof(right));
             if (method == null)
@@ -1588,7 +1613,8 @@ namespace System.Linq.Expressions
             Expression left,
             Expression right,
             bool liftToNull
-        ) {
+        )
+        {
             if (left.Type == right.Type && left.Type.IsNumeric())
             {
                 if (left.Type.IsNullableType() && liftToNull)
@@ -1632,7 +1658,8 @@ namespace System.Linq.Expressions
             Expression left,
             Expression right,
             MethodInfo? method
-        ) {
+        )
+        {
             ExpressionUtils.RequiresCanRead(left, nameof(left));
             ExpressionUtils.RequiresCanRead(right, nameof(right));
             Type returnType;
@@ -1833,7 +1860,8 @@ namespace System.Linq.Expressions
             Expression left,
             Expression right,
             LambdaExpression? conversion
-        ) {
+        )
+        {
             ExpressionUtils.RequiresCanRead(left, nameof(left));
             ExpressionUtils.RequiresCanRead(right, nameof(right));
 
@@ -1880,7 +1908,8 @@ namespace System.Linq.Expressions
             if (
                 !ParameterIsAssignable(pms[0], left.Type.GetNonNullableType())
                 && !ParameterIsAssignable(pms[0], left.Type)
-            ) {
+            )
+            {
                 throw Error.OperandTypesDoNotMatchParameters(
                     ExpressionType.Coalesce,
                     conversion.ToString()
@@ -1991,7 +2020,8 @@ namespace System.Linq.Expressions
             Expression left,
             Expression right,
             MethodInfo? method
-        ) {
+        )
+        {
             return AddAssign(left, right, method, conversion: null);
         }
 
@@ -2011,7 +2041,8 @@ namespace System.Linq.Expressions
             Expression right,
             MethodInfo? method,
             LambdaExpression? conversion
-        ) {
+        )
+        {
             ExpressionUtils.RequiresCanRead(left, nameof(left));
             RequiresCanWrite(left, nameof(left));
             ExpressionUtils.RequiresCanRead(right, nameof(right));
@@ -2055,7 +2086,8 @@ namespace System.Linq.Expressions
             Expression left,
             MethodInfo method,
             ExpressionType nodeType
-        ) {
+        )
+        {
             Type delegateType = conversion.Type;
             Debug.Assert(
                 typeof(System.MulticastDelegate).IsAssignableFrom(delegateType)
@@ -2110,7 +2142,8 @@ namespace System.Linq.Expressions
             Expression left,
             Expression right,
             MethodInfo? method
-        ) {
+        )
+        {
             return AddAssignChecked(left, right, method, conversion: null);
         }
 
@@ -2130,7 +2163,8 @@ namespace System.Linq.Expressions
             Expression right,
             MethodInfo? method,
             LambdaExpression? conversion
-        ) {
+        )
+        {
             ExpressionUtils.RequiresCanRead(left, nameof(left));
             RequiresCanWrite(left, nameof(left));
             ExpressionUtils.RequiresCanRead(right, nameof(right));
@@ -2195,7 +2229,8 @@ namespace System.Linq.Expressions
             Expression left,
             Expression right,
             MethodInfo? method
-        ) {
+        )
+        {
             ExpressionUtils.RequiresCanRead(left, nameof(left));
             ExpressionUtils.RequiresCanRead(right, nameof(right));
             if (method == null)
@@ -2251,7 +2286,8 @@ namespace System.Linq.Expressions
             Expression left,
             Expression right,
             MethodInfo? method
-        ) {
+        )
+        {
             ExpressionUtils.RequiresCanRead(left, nameof(left));
             ExpressionUtils.RequiresCanRead(right, nameof(right));
             if (method == null)
@@ -2307,7 +2343,8 @@ namespace System.Linq.Expressions
             Expression left,
             Expression right,
             MethodInfo? method
-        ) {
+        )
+        {
             return SubtractAssign(left, right, method, conversion: null);
         }
 
@@ -2327,7 +2364,8 @@ namespace System.Linq.Expressions
             Expression right,
             MethodInfo? method,
             LambdaExpression? conversion
-        ) {
+        )
+        {
             ExpressionUtils.RequiresCanRead(left, nameof(left));
             RequiresCanWrite(left, nameof(left));
             ExpressionUtils.RequiresCanRead(right, nameof(right));
@@ -2391,7 +2429,8 @@ namespace System.Linq.Expressions
             Expression left,
             Expression right,
             MethodInfo? method
-        ) {
+        )
+        {
             return SubtractAssignChecked(left, right, method, conversion: null);
         }
 
@@ -2411,7 +2450,8 @@ namespace System.Linq.Expressions
             Expression right,
             MethodInfo? method,
             LambdaExpression? conversion
-        ) {
+        )
+        {
             ExpressionUtils.RequiresCanRead(left, nameof(left));
             RequiresCanWrite(left, nameof(left));
             ExpressionUtils.RequiresCanRead(right, nameof(right));
@@ -2475,7 +2515,8 @@ namespace System.Linq.Expressions
             Expression left,
             Expression right,
             MethodInfo? method
-        ) {
+        )
+        {
             ExpressionUtils.RequiresCanRead(left, nameof(left));
             ExpressionUtils.RequiresCanRead(right, nameof(right));
             if (method == null)
@@ -2584,7 +2625,8 @@ namespace System.Linq.Expressions
             Expression left,
             Expression right,
             MethodInfo? method
-        ) {
+        )
+        {
             return DivideAssign(left, right, method, conversion: null);
         }
 
@@ -2604,7 +2646,8 @@ namespace System.Linq.Expressions
             Expression right,
             MethodInfo? method,
             LambdaExpression? conversion
-        ) {
+        )
+        {
             ExpressionUtils.RequiresCanRead(left, nameof(left));
             RequiresCanWrite(left, nameof(left));
             ExpressionUtils.RequiresCanRead(right, nameof(right));
@@ -2721,7 +2764,8 @@ namespace System.Linq.Expressions
             Expression left,
             Expression right,
             MethodInfo? method
-        ) {
+        )
+        {
             return ModuloAssign(left, right, method, conversion: null);
         }
 
@@ -2741,7 +2785,8 @@ namespace System.Linq.Expressions
             Expression right,
             MethodInfo? method,
             LambdaExpression? conversion
-        ) {
+        )
+        {
             ExpressionUtils.RequiresCanRead(left, nameof(left));
             RequiresCanWrite(left, nameof(left));
             ExpressionUtils.RequiresCanRead(right, nameof(right));
@@ -2805,7 +2850,8 @@ namespace System.Linq.Expressions
             Expression left,
             Expression right,
             MethodInfo? method
-        ) {
+        )
+        {
             ExpressionUtils.RequiresCanRead(left, nameof(left));
             ExpressionUtils.RequiresCanRead(right, nameof(right));
             if (method == null)
@@ -2861,7 +2907,8 @@ namespace System.Linq.Expressions
             Expression left,
             Expression right,
             MethodInfo? method
-        ) {
+        )
+        {
             return MultiplyAssign(left, right, method, conversion: null);
         }
 
@@ -2881,7 +2928,8 @@ namespace System.Linq.Expressions
             Expression right,
             MethodInfo? method,
             LambdaExpression? conversion
-        ) {
+        )
+        {
             ExpressionUtils.RequiresCanRead(left, nameof(left));
             RequiresCanWrite(left, nameof(left));
             ExpressionUtils.RequiresCanRead(right, nameof(right));
@@ -2945,7 +2993,8 @@ namespace System.Linq.Expressions
             Expression left,
             Expression right,
             MethodInfo? method
-        ) {
+        )
+        {
             return MultiplyAssignChecked(left, right, method, conversion: null);
         }
 
@@ -2965,7 +3014,8 @@ namespace System.Linq.Expressions
             Expression right,
             MethodInfo? method,
             LambdaExpression? conversion
-        ) {
+        )
+        {
             ExpressionUtils.RequiresCanRead(left, nameof(left));
             RequiresCanWrite(left, nameof(left));
             ExpressionUtils.RequiresCanRead(right, nameof(right));
@@ -3029,7 +3079,8 @@ namespace System.Linq.Expressions
             Expression left,
             Expression right,
             MethodInfo? method
-        ) {
+        )
+        {
             ExpressionUtils.RequiresCanRead(left, nameof(left));
             ExpressionUtils.RequiresCanRead(right, nameof(right));
             if (method == null)
@@ -3100,7 +3151,8 @@ namespace System.Linq.Expressions
             Expression left,
             Expression right,
             MethodInfo? method
-        ) {
+        )
+        {
             ExpressionUtils.RequiresCanRead(left, nameof(left));
             ExpressionUtils.RequiresCanRead(right, nameof(right));
             if (method == null)
@@ -3157,7 +3209,8 @@ namespace System.Linq.Expressions
             Expression left,
             Expression right,
             MethodInfo? method
-        ) {
+        )
+        {
             return LeftShiftAssign(left, right, method, conversion: null);
         }
 
@@ -3177,7 +3230,8 @@ namespace System.Linq.Expressions
             Expression right,
             MethodInfo? method,
             LambdaExpression? conversion
-        ) {
+        )
+        {
             ExpressionUtils.RequiresCanRead(left, nameof(left));
             RequiresCanWrite(left, nameof(left));
             ExpressionUtils.RequiresCanRead(right, nameof(right));
@@ -3242,7 +3296,8 @@ namespace System.Linq.Expressions
             Expression left,
             Expression right,
             MethodInfo? method
-        ) {
+        )
+        {
             ExpressionUtils.RequiresCanRead(left, nameof(left));
             ExpressionUtils.RequiresCanRead(right, nameof(right));
             if (method == null)
@@ -3299,7 +3354,8 @@ namespace System.Linq.Expressions
             Expression left,
             Expression right,
             MethodInfo? method
-        ) {
+        )
+        {
             return RightShiftAssign(left, right, method, conversion: null);
         }
 
@@ -3319,7 +3375,8 @@ namespace System.Linq.Expressions
             Expression right,
             MethodInfo? method,
             LambdaExpression? conversion
-        ) {
+        )
+        {
             ExpressionUtils.RequiresCanRead(left, nameof(left));
             RequiresCanWrite(left, nameof(left));
             ExpressionUtils.RequiresCanRead(right, nameof(right));
@@ -3432,7 +3489,8 @@ namespace System.Linq.Expressions
             Expression left,
             Expression right,
             MethodInfo? method
-        ) {
+        )
+        {
             return AndAssign(left, right, method, conversion: null);
         }
 
@@ -3452,7 +3510,8 @@ namespace System.Linq.Expressions
             Expression right,
             MethodInfo? method,
             LambdaExpression? conversion
-        ) {
+        )
+        {
             ExpressionUtils.RequiresCanRead(left, nameof(left));
             RequiresCanWrite(left, nameof(left));
             ExpressionUtils.RequiresCanRead(right, nameof(right));
@@ -3564,7 +3623,8 @@ namespace System.Linq.Expressions
             Expression left,
             Expression right,
             MethodInfo? method
-        ) {
+        )
+        {
             return OrAssign(left, right, method, conversion: null);
         }
 
@@ -3584,7 +3644,8 @@ namespace System.Linq.Expressions
             Expression right,
             MethodInfo? method,
             LambdaExpression? conversion
-        ) {
+        )
+        {
             ExpressionUtils.RequiresCanRead(left, nameof(left));
             RequiresCanWrite(left, nameof(left));
             ExpressionUtils.RequiresCanRead(right, nameof(right));
@@ -3648,7 +3709,8 @@ namespace System.Linq.Expressions
             Expression left,
             Expression right,
             MethodInfo? method
-        ) {
+        )
+        {
             ExpressionUtils.RequiresCanRead(left, nameof(left));
             ExpressionUtils.RequiresCanRead(right, nameof(right));
             if (method == null)
@@ -3704,7 +3766,8 @@ namespace System.Linq.Expressions
             Expression left,
             Expression right,
             MethodInfo? method
-        ) {
+        )
+        {
             return ExclusiveOrAssign(left, right, method, conversion: null);
         }
 
@@ -3724,7 +3787,8 @@ namespace System.Linq.Expressions
             Expression right,
             MethodInfo? method,
             LambdaExpression? conversion
-        ) {
+        )
+        {
             ExpressionUtils.RequiresCanRead(left, nameof(left));
             RequiresCanWrite(left, nameof(left));
             ExpressionUtils.RequiresCanRead(right, nameof(right));
@@ -3878,7 +3942,8 @@ namespace System.Linq.Expressions
             Expression left,
             Expression right,
             MethodInfo? method
-        ) {
+        )
+        {
             return PowerAssign(left, right, method, conversion: null);
         }
 
@@ -3898,7 +3963,8 @@ namespace System.Linq.Expressions
             Expression right,
             MethodInfo? method,
             LambdaExpression? conversion
-        ) {
+        )
+        {
             ExpressionUtils.RequiresCanRead(left, nameof(left));
             RequiresCanWrite(left, nameof(left));
             ExpressionUtils.RequiresCanRead(right, nameof(right));

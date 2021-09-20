@@ -214,7 +214,8 @@ namespace System.Xml.XmlDiff
                             if (
                                 sourceChild.NodeType == XmlDiffNodeType.Element
                                 && !(sourceChild is XmlDiffEmptyElement)
-                            ) {
+                            )
+                            {
                                 XmlDiffElement sourceElem = sourceChild as XmlDiffElement;
                                 XmlDiffElement targetElem = targetChild as XmlDiffElement;
                                 Debug.Assert(sourceElem != null);
@@ -272,7 +273,8 @@ namespace System.Xml.XmlDiff
                             {
                                 if (
                                     CompareNodes(sourceChild, backupTargetChild) == DiffType.Success
-                                ) {
+                                )
+                                {
                                     recoveryFlag = true;
                                     do
                                     {
@@ -293,7 +295,8 @@ namespace System.Xml.XmlDiff
                                     if (
                                         CompareNodes(backupSourceChild, targetChild)
                                         == DiffType.Success
-                                    ) {
+                                    )
+                                    {
                                         recoveryFlag = true;
                                         do
                                         {

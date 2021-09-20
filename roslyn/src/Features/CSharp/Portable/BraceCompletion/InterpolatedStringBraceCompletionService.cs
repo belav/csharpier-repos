@@ -73,7 +73,8 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
             Document document,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
 
             var start = position - 1;

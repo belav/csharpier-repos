@@ -51,7 +51,8 @@ namespace Internal.TypeSystem
             StringBuilder sb,
             FunctionPointerType type,
             FormatOptions options
-        ) {
+        )
+        {
             MethodSignature signature = type.Signature;
 
             sb.Append("(*");
@@ -72,7 +73,8 @@ namespace Internal.TypeSystem
             StringBuilder sb,
             GenericParameterDesc type,
             FormatOptions options
-        ) {
+        )
+        {
             sb.Append(type.DiagnosticName);
             return Void.Value;
         }
@@ -81,7 +83,8 @@ namespace Internal.TypeSystem
             StringBuilder sb,
             SignatureMethodVariable type,
             FormatOptions options
-        ) {
+        )
+        {
             sb.Append("!!");
             sb.Append(type.Index.ToStringInvariant());
 
@@ -92,7 +95,8 @@ namespace Internal.TypeSystem
             StringBuilder sb,
             SignatureTypeVariable type,
             FormatOptions options
-        ) {
+        )
+        {
             sb.Append('!');
             sb.Append(type.Index.ToStringInvariant());
 
@@ -104,7 +108,8 @@ namespace Internal.TypeSystem
             DefType nestedType,
             DefType containingType,
             FormatOptions options
-        ) {
+        )
+        {
             if ((options & FormatOptions.NamespaceQualify) != 0)
             {
                 AppendName(sb, containingType, options);
@@ -120,7 +125,8 @@ namespace Internal.TypeSystem
             StringBuilder sb,
             DefType type,
             FormatOptions options
-        ) {
+        )
+        {
             int initialLen = sb.Length;
             try
             {
@@ -208,7 +214,8 @@ namespace Internal.TypeSystem
                 ((options & FormatOptions.AssemblyQualify) != 0)
                 && type is MetadataType mdType
                 && mdType.Module is IAssemblyDesc
-            ) {
+            )
+            {
                 sb.Append('[');
 
                 // Trim the "System.Private." prefix
@@ -247,7 +254,8 @@ namespace Internal.TypeSystem
             StringBuilder sb,
             DefType type,
             FormatOptions options
-        ) {
+        )
+        {
             AppendName(sb, type.GetTypeDefinition(), options);
 
             FormatOptions parameterOptions = options & ~FormatOptions.AssemblyQualify;
@@ -270,7 +278,8 @@ namespace Internal.TypeSystem
         protected override DefType GetContainingType(
             DefType possibleInnerType,
             FormatOptions options
-        ) {
+        )
+        {
             try
             {
                 return possibleInnerType.ContainingType;

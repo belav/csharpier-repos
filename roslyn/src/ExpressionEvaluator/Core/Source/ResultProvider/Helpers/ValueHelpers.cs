@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             this DkmClrValue value,
             DkmInspectionContext inspectionContext,
             string fullNameWithoutFormatSpecifiers
-        ) {
+        )
+        {
             var typeName = inspectionContext.GetTypeName(
                 value.Type,
                 null,
@@ -54,7 +55,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             this DkmClrValue value,
             MemberAndDeclarationInfo member,
             DkmInspectionContext inspectionContext
-        ) {
+        )
+        {
             // Note: GetMemberValue() may return special value when func-eval of properties is disabled.
             return value.GetMemberValue(
                 member.Name,
@@ -73,7 +75,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             this string[] values,
             char openParen,
             char closeParen
-        ) {
+        )
+        {
             Debug.Assert(values != null);
 
             var pooled = PooledStringBuilder.GetInstance();

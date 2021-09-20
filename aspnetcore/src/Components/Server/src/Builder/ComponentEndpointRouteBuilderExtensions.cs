@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Builder
         /// <returns>The <see cref="ComponentEndpointConventionBuilder"/>.</returns>
         public static ComponentEndpointConventionBuilder MapBlazorHub(
             this IEndpointRouteBuilder endpoints
-        ) {
+        )
+        {
             if (endpoints == null)
             {
                 throw new ArgumentNullException(nameof(endpoints));
@@ -39,7 +40,8 @@ namespace Microsoft.AspNetCore.Builder
         public static ComponentEndpointConventionBuilder MapBlazorHub(
             this IEndpointRouteBuilder endpoints,
             string path
-        ) {
+        )
+        {
             if (endpoints == null)
             {
                 throw new ArgumentNullException(nameof(endpoints));
@@ -62,7 +64,8 @@ namespace Microsoft.AspNetCore.Builder
         public static ComponentEndpointConventionBuilder MapBlazorHub(
             this IEndpointRouteBuilder endpoints,
             Action<HttpConnectionDispatcherOptions> configureOptions
-        ) {
+        )
+        {
             if (endpoints == null)
             {
                 throw new ArgumentNullException(nameof(endpoints));
@@ -87,7 +90,8 @@ namespace Microsoft.AspNetCore.Builder
             this IEndpointRouteBuilder endpoints,
             string path,
             Action<HttpConnectionDispatcherOptions> configureOptions
-        ) {
+        )
+        {
             if (endpoints == null)
             {
                 throw new ArgumentNullException(nameof(endpoints));

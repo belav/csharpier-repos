@@ -46,7 +46,8 @@ namespace System.Collections.Immutable.Tests
             IImmutableSet<T> emptySet,
             T value,
             IEqualityComparer<T> comparer
-        ) {
+        )
+        {
             Assert.NotNull(emptySet);
 
             this.EmptyTestHelper(emptySet);

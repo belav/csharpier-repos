@@ -57,7 +57,8 @@ namespace System.ComponentModel
             ITypeDescriptorContext context,
             CultureInfo culture,
             object value
-        ) {
+        )
+        {
             if (value is InstanceDescriptor instanceDescriptor)
             {
                 return instanceDescriptor.Invoke();
@@ -101,7 +102,8 @@ namespace System.ComponentModel
             ITypeDescriptorContext context,
             CultureInfo culture,
             string text
-        ) {
+        )
+        {
             return ConvertFrom(context, culture, text);
         }
 
@@ -123,7 +125,8 @@ namespace System.ComponentModel
             CultureInfo culture,
             object value,
             Type destinationType
-        ) {
+        )
+        {
             if (destinationType == null)
             {
                 throw new ArgumentNullException(nameof(destinationType));
@@ -187,7 +190,8 @@ namespace System.ComponentModel
             ITypeDescriptorContext context,
             CultureInfo culture,
             object value
-        ) {
+        )
+        {
             return (string)ConvertTo(context, culture, value, typeof(string));
         }
 
@@ -272,7 +276,8 @@ namespace System.ComponentModel
         public PropertyDescriptorCollection GetProperties(
             ITypeDescriptorContext context,
             object value
-        ) {
+        )
+        {
             return GetProperties(context, value, new Attribute[] { BrowsableAttribute.Yes });
         }
 
@@ -290,7 +295,8 @@ namespace System.ComponentModel
             ITypeDescriptorContext context,
             object value,
             Attribute[] attributes
-        ) {
+        )
+        {
             return null;
         }
 
@@ -379,7 +385,8 @@ namespace System.ComponentModel
         protected PropertyDescriptorCollection SortProperties(
             PropertyDescriptorCollection props,
             string[] names
-        ) {
+        )
+        {
             props.Sort(names);
             return props;
         }
@@ -392,11 +399,8 @@ namespace System.ComponentModel
             /// <summary>
             /// Initializes a new instance of the <see cref='System.ComponentModel.TypeConverter.SimplePropertyDescriptor'/> class.
             /// </summary>
-            protected SimplePropertyDescriptor(
-                Type componentType,
-                string name,
-                Type propertyType
-            ) : this(componentType, name, propertyType, Array.Empty<Attribute>()) { }
+            protected SimplePropertyDescriptor(Type componentType, string name, Type propertyType)
+                : this(componentType, name, propertyType, Array.Empty<Attribute>()) { }
 
             /// <summary>
             /// Initializes a new instance of the <see cref='System.ComponentModel.TypeConverter.SimplePropertyDescriptor'/> class.

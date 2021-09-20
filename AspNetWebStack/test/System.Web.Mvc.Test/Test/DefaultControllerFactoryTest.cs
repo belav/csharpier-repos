@@ -975,7 +975,8 @@ namespace System.Web.Mvc.Test
 
         private static DefaultControllerFactory GetDefaultControllerFactory(
             params string[] namespaces
-        ) {
+        )
+        {
             ControllerBuilder builder = new ControllerBuilder();
             builder.DefaultNamespaces.UnionWith(namespaces);
             return new DefaultControllerFactory() { ControllerBuilder = builder };

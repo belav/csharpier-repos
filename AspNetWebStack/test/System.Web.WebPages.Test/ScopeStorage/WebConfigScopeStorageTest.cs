@@ -116,7 +116,8 @@ namespace System.Web.WebPages.Test
 
         private WebConfigScopeDictionary GetWebConfigScopeStorage(
             IDictionary<string, string> values = null
-        ) {
+        )
+        {
             NameValueCollection collection = new NameValueCollection();
             if (values == null)
             {

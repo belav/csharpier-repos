@@ -51,7 +51,8 @@ namespace Microsoft.AspNetCore.Components.Analyzers
                                     if (
                                         context.Operation
                                         is IAssignmentOperation assignmentOperation
-                                    ) {
+                                    )
+                                    {
                                         leftHandSide = assignmentOperation.Target;
                                     }
                                     else
@@ -92,7 +93,8 @@ namespace Microsoft.AspNetCore.Components.Analyzers
                                             context.Compilation,
                                             propertyContainingType
                                         )
-                                    ) {
+                                    )
+                                    {
                                         // Someone referenced a property as [Parameter] inside something that is not a component.
                                         return;
                                     }

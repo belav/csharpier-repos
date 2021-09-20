@@ -17,7 +17,8 @@ namespace System.Text.RegularExpressions.Tests
         public static IEnumerable<object[]> TransformRegexOptions(
             string testDataMethodName,
             int regexOptionsArrayIndex
-        ) {
+        )
+        {
             IEnumerable<Type> types = Assembly.GetExecutingAssembly()
                 .GetTypes()
                 .Where(t => t.Namespace == typeof(RegexCompilationHelper).Namespace);
@@ -41,7 +42,8 @@ namespace System.Text.RegularExpressions.Tests
             Type type,
             string methodName,
             int regexOptionsArrayIndex
-        ) {
+        )
+        {
             MethodInfo methodInfo = type.GetMethod(
                 methodName,
                 BindingFlags.Public | BindingFlags.Static

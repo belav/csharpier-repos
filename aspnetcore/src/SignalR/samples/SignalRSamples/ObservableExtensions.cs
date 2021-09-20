@@ -14,7 +14,8 @@ namespace SignalRSamples
             this IObservable<T> observable,
             CancellationToken connectionAborted,
             int? maxBufferSize = null
-        ) {
+        )
+        {
             // This sample shows adapting an observable to a ChannelReader without
             // back pressure, if the connection is slower than the producer, memory will
             // start to increase.

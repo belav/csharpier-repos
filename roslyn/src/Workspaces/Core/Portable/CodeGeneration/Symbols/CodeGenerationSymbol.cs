@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             DeclarationModifiers modifiers,
             string name,
             string documentationCommentXml = null
-        ) {
+        )
+        {
             this.ContainingAssembly = containingAssembly;
             this.ContainingType = containingType;
             _attributes = attributes.NullToEmpty();
@@ -57,7 +58,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 
         internal CodeGenerationSymbol WithAdditionalAnnotations(
             params SyntaxAnnotation[] annotations
-        ) {
+        )
+        {
             return annotations.IsNullOrEmpty()
               ? this
               : AddAnnotationsTo(this, this.Clone(), annotations);
@@ -67,7 +69,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             CodeGenerationSymbol originalDefinition,
             CodeGenerationSymbol newDefinition,
             SyntaxAnnotation[] annotations
-        ) {
+        )
+        {
             annotationsTable.TryGetValue(originalDefinition, out var originalAnnotations);
 
             annotations = SyntaxAnnotationExtensions.CombineAnnotations(
@@ -164,7 +167,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             CultureInfo preferredCulture,
             bool expandIncludes,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _documentationCommentXml ?? "";
         }
 

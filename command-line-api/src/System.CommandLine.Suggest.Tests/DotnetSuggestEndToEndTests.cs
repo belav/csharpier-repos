@@ -166,7 +166,8 @@ namespace System.CommandLine.Suggest.Tests
             Action<string> stdOut = null,
             Action<string> stdErr = null,
             params (string key, string value)[] environmentVariables
-        ) {
+        )
+        {
             args ??= "";
 
             var process = new Diagnostics.Process

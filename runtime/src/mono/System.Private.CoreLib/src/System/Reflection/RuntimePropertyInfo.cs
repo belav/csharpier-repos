@@ -103,7 +103,8 @@ namespace System.Reflection
             bool isPublic,
             bool isInherited,
             bool isStatic
-        ) {
+        )
+        {
             BindingFlags bindingFlags = isPublic ? BindingFlags.Public : BindingFlags.NonPublic;
             if (isInherited)
             {
@@ -426,7 +427,8 @@ namespace System.Reflection
                         !DeclaringType.IsValueType
                         && !PropertyType.IsByRef
                         && !method.ContainsGenericParameters
-                    ) {
+                    )
+                    {
                         //FIXME find a way to build an invoke delegate for value types.
                         cached_getter = CreateGetterDelegate(method);
                         // The try-catch preserves the .Invoke () behaviour
@@ -462,7 +464,8 @@ namespace System.Reflection
             Binder? binder,
             object?[]? index,
             CultureInfo? culture
-        ) {
+        )
+        {
             object? ret = null;
 
             MethodInfo? method = GetGetMethod(true);
@@ -484,7 +487,8 @@ namespace System.Reflection
             Binder? binder,
             object?[]? index,
             CultureInfo? culture
-        ) {
+        )
+        {
             MethodInfo? method = GetSetMethod(true);
             if (method == null)
                 throw new ArgumentException("Set Method not found for '" + Name + "'");
@@ -535,7 +539,8 @@ namespace System.Reflection
         internal static PropertyInfo GetPropertyFromHandle(
             RuntimePropertyHandle handle,
             RuntimeTypeHandle reflectedType
-        ) {
+        )
+        {
             if (handle.Value == IntPtr.Zero)
                 throw new ArgumentException("The handle is invalid.");
             PropertyInfo pi = internal_from_handle_type(handle.Value, reflectedType.Value);

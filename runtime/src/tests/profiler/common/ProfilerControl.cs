@@ -26,7 +26,8 @@ namespace Profiler.Tests
 
         public static EventPipeSession AttachEventPipeSessionToSelf(
             IEnumerable<EventPipeProvider> providers
-        ) {
+        )
+        {
             int processId = Process.GetCurrentProcess().Id;
             DiagnosticsClient client = new DiagnosticsClient(processId);
             return client.StartEventPipeSession(

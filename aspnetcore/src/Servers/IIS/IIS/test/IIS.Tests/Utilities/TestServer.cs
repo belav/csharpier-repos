@@ -73,7 +73,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
             Action<IApplicationBuilder> appBuilder,
             ILoggerFactory loggerFactory,
             IISServerOptions options
-        ) {
+        )
+        {
             await WebCoreLock.WaitAsync();
             _options = options;
             var server = new TestServer(appBuilder, loggerFactory);
@@ -92,7 +93,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
             RequestDelegate app,
             ILoggerFactory loggerFactory,
             IISServerOptions options
-        ) {
+        )
+        {
             return Create(builder => builder.Run(app), loggerFactory, options);
         }
 

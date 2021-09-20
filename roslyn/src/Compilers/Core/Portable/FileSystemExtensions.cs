@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis
             string? win32ResourcesPath = null,
             IEnumerable<ResourceDescription>? manifestResources = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (compilation == null)
             {
                 throw new ArgumentNullException(nameof(compilation));
@@ -82,7 +83,8 @@ namespace Microsoft.CodeAnalysis
                               nameof(win32ResourcesPath)
                           )
                 )
-            ) {
+            )
+            {
                 return compilation.Emit(
                     outputStream,
                     pdbStream: pdbStream,

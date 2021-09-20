@@ -61,7 +61,8 @@ namespace Newtonsoft.Json.Utilities
             IFormatProvider provider,
             object? arg0,
             object? arg1
-        ) {
+        )
+        {
             return format.FormatWith(provider, new object?[] { arg0, arg1 });
         }
 
@@ -71,7 +72,8 @@ namespace Newtonsoft.Json.Utilities
             object? arg0,
             object? arg1,
             object? arg2
-        ) {
+        )
+        {
             return format.FormatWith(provider, new object?[] { arg0, arg1, arg2 });
         }
 
@@ -82,7 +84,8 @@ namespace Newtonsoft.Json.Utilities
             object? arg1,
             object? arg2,
             object? arg3
-        ) {
+        )
+        {
             return format.FormatWith(provider, new object?[] { arg0, arg1, arg2, arg3 });
         }
 
@@ -90,7 +93,8 @@ namespace Newtonsoft.Json.Utilities
             this string format,
             IFormatProvider provider,
             params object?[] args
-        ) {
+        )
+        {
             // leave this a private to force code to use an explicit overload
             // avoids stack memory being reserved for the object array
             ValidationUtils.ArgumentNotNull(format, nameof(format));
@@ -150,7 +154,8 @@ namespace Newtonsoft.Json.Utilities
             this IEnumerable<TSource> source,
             Func<TSource, string> valueSelector,
             string testValue
-        ) {
+        )
+        {
             if (source == null)
             {
                 throw new ArgumentNullException(nameof(source));

@@ -43,7 +43,8 @@ namespace Microsoft.AspNetCore.Routing
         public IParameterPolicy Create(
             RoutePatternParameterPart? parameter,
             RoutePatternParameterPolicyReference reference
-        ) {
+        )
+        {
             if (reference == null)
             {
                 throw new ArgumentNullException(nameof(reference));

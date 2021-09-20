@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             bool parseLeadingDirectives,
             RazorLanguageVersion version,
             string fileKind
-        ) {
+        )
+        {
             if (directives == null)
             {
                 throw new ArgumentNullException(nameof(directives));

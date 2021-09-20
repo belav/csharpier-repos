@@ -255,7 +255,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
             int start,
             int mySetLength,
             int myCategoryLength
-        ) {
+        )
+        {
             int min;
             int max;
             int mid;
@@ -300,7 +301,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
             int start,
             int mySetLength,
             int myCategoryLength
-        ) {
+        )
+        {
             var chcategory = CharUnicodeInfo.GetUnicodeCategory(ch);
 
             var i = start + SETSTART + mySetLength;
@@ -375,7 +377,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
             UnicodeCategory chcategory,
             string category,
             ref int i
-        ) {
+        )
+        {
             i++;
 
             int curcat = unchecked((short)category[i]);

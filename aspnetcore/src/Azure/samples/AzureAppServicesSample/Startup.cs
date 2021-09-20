@@ -93,7 +93,8 @@ namespace IISSample
                     foreach (
                         var key in vars.Keys.Cast<string>()
                             .OrderBy(key => key, StringComparer.OrdinalIgnoreCase)
-                    ) {
+                    )
+                    {
                         var value = vars[key];
                         await context.Response.WriteAsync(key + ": " + value + Environment.NewLine);
                     }

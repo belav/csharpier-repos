@@ -97,7 +97,8 @@ namespace System.Reflection.Metadata.Ecma335
             BlobBuilder builder,
             int exceptionRegionCount,
             bool hasSmallRegions
-        ) {
+        )
+        {
             Debug.Assert(exceptionRegionCount > 0);
 
             const byte EHTableFlag = 0x01;
@@ -141,7 +142,8 @@ namespace System.Reflection.Metadata.Ecma335
             int tryLength,
             int handlerOffset,
             int handlerLength
-        ) {
+        )
+        {
             return Add(
                 ExceptionRegionKind.Finally,
                 tryOffset,
@@ -170,7 +172,8 @@ namespace System.Reflection.Metadata.Ecma335
             int tryLength,
             int handlerOffset,
             int handlerLength
-        ) {
+        )
+        {
             return Add(
                 ExceptionRegionKind.Fault,
                 tryOffset,
@@ -204,7 +207,8 @@ namespace System.Reflection.Metadata.Ecma335
             int handlerOffset,
             int handlerLength,
             EntityHandle catchType
-        ) {
+        )
+        {
             return Add(
                 ExceptionRegionKind.Catch,
                 tryOffset,
@@ -235,7 +239,8 @@ namespace System.Reflection.Metadata.Ecma335
             int handlerOffset,
             int handlerLength,
             int filterOffset
-        ) {
+        )
+        {
             return Add(
                 ExceptionRegionKind.Filter,
                 tryOffset,
@@ -277,7 +282,8 @@ namespace System.Reflection.Metadata.Ecma335
             int handlerLength,
             EntityHandle catchType = default(EntityHandle),
             int filterOffset = 0
-        ) {
+        )
+        {
             if (Builder == null)
             {
                 Throw.InvalidOperation(SR.MethodHasNoExceptionRegions);
@@ -354,7 +360,8 @@ namespace System.Reflection.Metadata.Ecma335
             int handlerOffset,
             int handlerLength,
             int catchTokenOrOffset
-        ) {
+        )
+        {
             if (HasSmallFormat)
             {
                 Builder.WriteUInt16((ushort)kind);

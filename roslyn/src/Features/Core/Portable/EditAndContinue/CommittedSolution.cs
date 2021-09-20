@@ -88,7 +88,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             DebuggingSession debuggingSession,
             Solution solution,
             IEnumerable<KeyValuePair<DocumentId, DocumentState>> initialDocumentStates
-        ) {
+        )
+        {
             _solution = solution;
             _debuggingSession = debuggingSession;
             _documentState = new Dictionary<DocumentId, DocumentState>();
@@ -152,7 +153,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             Document? currentDocument,
             CancellationToken cancellationToken,
             bool reloadOutOfSyncDocument = false
-        ) {
+        )
+        {
             Contract.ThrowIfFalse(currentDocument == null || documentId == currentDocument.Id);
 
             Solution solution;
@@ -271,7 +273,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     _documentState.TryGetValue(documentId, out documentState)
                     && documentState != DocumentState.OutOfSync
                     && documentState != DocumentState.Indeterminate
-                ) {
+                )
+                {
                     return (document, documentState);
                 }
 
@@ -327,7 +330,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                         if (
                             committedDocument != null
                             && sourceText.ContentEquals(matchingSourceText)
-                        ) {
+                        )
+                        {
                             matchingDocument = document;
                         }
                         else
@@ -360,7 +364,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             Solution solution,
             Func<Project, CompilationOutputs> compilationOutputsProvider,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var projectTasks = solution.Projects.Select(
                 async project =>
                 {
@@ -392,7 +397,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                                 EditAndContinueWorkspaceService.SupportsEditAndContinue(
                                     documentState
                                 )
-                            ) {
+                            )
+                            {
                                 var sourceFilePath = documentState.FilePath;
                                 Contract.ThrowIfNull(sourceFilePath);
 
@@ -431,7 +437,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         private static DebugInformationReaderProvider? GetMethodDebugInfoReader(
             CompilationOutputs compilationOutputs,
             string projectName
-        ) {
+        )
+        {
             DebugInformationReaderProvider? debugInfoReaderProvider;
             try
             {
@@ -472,7 +479,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             EditAndContinueMethodDebugInfoReader debugInfoReader,
             string sourceFilePath,
             Encoding? encoding
-        ) {
+        )
+        {
             var hasDocument = TryReadSourceFileChecksumFromPdb(
                 debugInfoReader,
                 sourceFilePath,
@@ -537,7 +545,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             string sourceFilePath,
             out ImmutableArray<byte> checksum,
             out SourceHashAlgorithm algorithm
-        ) {
+        )
+        {
             checksum = default;
             algorithm = default;
 
@@ -549,7 +558,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                         out checksum,
                         out var algorithmId
                     )
-                ) {
+                )
+                {
                     EditAndContinueWorkspaceService.Log.Write(
                         "Source '{0}' doesn't match output PDB: no document",
                         sourceFilePath

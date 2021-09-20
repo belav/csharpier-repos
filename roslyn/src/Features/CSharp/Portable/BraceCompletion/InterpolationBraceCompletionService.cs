@@ -56,7 +56,8 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
             int position,
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return Task.FromResult(IsValidOpeningBraceToken(token) && token.SpanStart == position);
         }
 
@@ -74,14 +75,16 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
             Document document,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // First, check to see if the character to the left of the position is an open curly.
             // If it is, we shouldn't complete because the user may be trying to escape a curly.
             // E.g. they are trying to type $"{{"
             if (
                 await CouldEscapePreviousOpenBraceAsync('{', position, document, cancellationToken)
                     .ConfigureAwait(false)
-            ) {
+            )
+            {
                 return false;
             }
 

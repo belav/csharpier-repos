@@ -35,7 +35,8 @@ namespace System.Runtime.Serialization
             StreamingContext streamingContext,
             bool ignoreExtensionDataObject,
             DataContractResolver? dataContractResolver
-        ) {
+        )
+        {
             this.serializer = serializer;
             _itemCount = 1;
             _maxItemsInObjectGraph = maxItemsInObjectGraph;
@@ -49,25 +50,28 @@ namespace System.Runtime.Serialization
             int maxItemsInObjectGraph,
             StreamingContext streamingContext,
             bool ignoreExtensionDataObject
-        ) : this(
-            serializer,
-            maxItemsInObjectGraph,
-            streamingContext,
-            ignoreExtensionDataObject,
-            null
-        ) { }
+        )
+            : this(
+                serializer,
+                maxItemsInObjectGraph,
+                streamingContext,
+                ignoreExtensionDataObject,
+                null
+            ) { }
 
         internal XmlObjectSerializerContext(
             DataContractSerializer serializer,
             DataContract rootTypeDataContract,
             DataContractResolver? dataContractResolver
-        ) : this(
-            serializer,
-            serializer.MaxItemsInObjectGraph,
-            default(StreamingContext),
-            serializer.IgnoreExtensionDataObject,
-            dataContractResolver
-        ) {
+        )
+            : this(
+                serializer,
+                serializer.MaxItemsInObjectGraph,
+                default(StreamingContext),
+                serializer.IgnoreExtensionDataObject,
+                dataContractResolver
+            )
+        {
             this.rootTypeDataContract = rootTypeDataContract;
             this.serializerKnownTypeList = serializer.knownTypeList;
         }
@@ -152,7 +156,8 @@ namespace System.Runtime.Serialization
             int typeId,
             RuntimeTypeHandle typeHandle,
             Type? type
-        ) {
+        )
+        {
             if (IsGetOnlyCollection)
             {
                 return DataContract.GetGetOnlyCollectionDataContractSkipValidation(
@@ -188,7 +193,8 @@ namespace System.Runtime.Serialization
         internal virtual void CheckIfTypeSerializable(
             Type memberType,
             bool isMemberTypeSerializable
-        ) {
+        )
+        {
             if (!isMemberTypeSerializable)
                 throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                     new InvalidDataContractException(SR.Format(SR.TypeNotSerializable, memberType))
@@ -227,7 +233,8 @@ namespace System.Runtime.Serialization
 
         internal static DataContractDictionary? GetDataContractsForKnownTypes(
             IList<Type> knownTypeList
-        ) {
+        )
+        {
             if (knownTypeList == null)
                 return null;
             DataContractDictionary dataContracts = new DataContractDictionary();
@@ -249,7 +256,8 @@ namespace System.Runtime.Serialization
             DataContract dataContract,
             DataContractDictionary? knownDataContracts,
             Type? declaredType
-        ) {
+        )
+        {
             bool knownTypesAddedInCurrentScope = false;
             if (knownDataContracts != null)
             {
@@ -307,7 +315,8 @@ namespace System.Runtime.Serialization
             string? typeNs,
             DataContract? memberTypeContract,
             Type? declaredType
-        ) {
+        )
+        {
             XmlQualifiedName qname = new XmlQualifiedName(typeName, typeNs);
             DataContract? dataContract;
             if (_dataContractResolver == null)
@@ -330,7 +339,8 @@ namespace System.Runtime.Serialization
                     memberTypeContract != null
                     && !memberTypeContract.UnderlyingType.IsInterface
                     && memberTypeContract.StableName == qname
-                ) {
+                )
+                {
                     dataContract = memberTypeContract;
                 }
                 if (dataContract == null && rootTypeDataContract != null)

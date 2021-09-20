@@ -224,7 +224,8 @@ namespace System.Runtime.CompilerServices.Tests
         static WeakReference GetWeakCondTabRef(
             out ConditionalWeakTable<object, object> cwt_out,
             out object key_out
-        ) {
+        )
+        {
             var key = new object();
             var value = new object();
 
@@ -261,7 +262,8 @@ namespace System.Runtime.CompilerServices.Tests
         static void GetWeakRefPair(
             out WeakReference<object> key_out,
             out WeakReference<object> val_out
-        ) {
+        )
+        {
             var cwt = new ConditionalWeakTable<object, object>();
             var key = new object();
 
@@ -296,7 +298,8 @@ namespace System.Runtime.CompilerServices.Tests
         static void GetWeakRefValPair(
             out WeakReference<object> key_out,
             out WeakReference<object> val_out
-        ) {
+        )
+        {
             var cwt = new ConditionalWeakTable<object, object>();
             var key = new object();
 
@@ -505,7 +508,8 @@ namespace System.Runtime.CompilerServices.Tests
             )
             using (
                 IEnumerator<KeyValuePair<object, object>> enumerator2 = enumerable.GetEnumerator()
-            ) {
+            )
+            {
                 while (enumerator1.MoveNext())
                 {
                     Assert.True(enumerator2.MoveNext());
@@ -657,7 +661,8 @@ namespace System.Runtime.CompilerServices.Tests
 
             using (
                 IEnumerator<KeyValuePair<object, object>> enumerator = enumerable.GetEnumerator()
-            ) {
+            )
+            {
                 Assert.Throws<InvalidOperationException>(() => enumerator.Current); // before first MoveNext
             }
 

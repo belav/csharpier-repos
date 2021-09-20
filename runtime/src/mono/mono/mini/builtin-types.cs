@@ -2023,7 +2023,8 @@ namespace System
             NumberStyles style,
             IFormatProvider provider,
             out nint result
-        ) {
+        )
+        {
             Int32 v;
             var r = Int32.TryParse(s, style, provider, out v);
             result = (nint)v;
@@ -2060,7 +2061,8 @@ namespace System
             NumberStyles style,
             IFormatProvider provider,
             out nint result
-        ) {
+        )
+        {
             Int64 v;
             var r = Int64.TryParse(s, style, provider, out v);
             result = (nint)v;
@@ -2758,7 +2760,8 @@ namespace System
             NumberStyles style,
             IFormatProvider provider,
             out nuint result
-        ) {
+        )
+        {
             UInt32 v;
             var r = UInt32.TryParse(s, style, provider, out v);
             result = (nuint)v;
@@ -2795,7 +2798,8 @@ namespace System
             NumberStyles style,
             IFormatProvider provider,
             out nuint result
-        ) {
+        )
+        {
             UInt64 v;
             var r = UInt64.TryParse(s, style, provider, out v);
             result = (nuint)v;
@@ -3474,7 +3478,8 @@ namespace System
             NumberStyles style,
             IFormatProvider provider,
             out nfloat result
-        ) {
+        )
+        {
             Single v;
             var r = Single.TryParse(s, style, provider, out v);
             result = (nfloat)v;
@@ -3528,7 +3533,8 @@ namespace System
             NumberStyles style,
             IFormatProvider provider,
             out nfloat result
-        ) {
+        )
+        {
             Double v;
             var r = Double.TryParse(s, style, provider, out v);
             result = (nfloat)v;
@@ -3625,7 +3631,8 @@ namespace System
             nfloat[] destination,
             int startIndex,
             int length
-        ) {
+        )
+        {
             if (source == IntPtr.Zero)
                 throw new ArgumentNullException("source");
             if (destination == null)
@@ -3648,7 +3655,8 @@ namespace System
             int startIndex,
             IntPtr destination,
             int length
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException("source");
             if (destination == IntPtr.Zero)

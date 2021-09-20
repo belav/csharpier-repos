@@ -33,7 +33,8 @@ namespace Microsoft.Net.Http.Headers
             StringSegment value,
             int startIndex,
             out T? parsedValue
-        ) {
+        )
+        {
             return _getParsedValueLength(value, startIndex, out parsedValue);
         }
     }

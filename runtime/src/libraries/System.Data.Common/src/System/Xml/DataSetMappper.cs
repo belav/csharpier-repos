@@ -87,7 +87,8 @@ namespace System.Xml
         internal DataTable? SearchMatchingTableSchema(
             XmlBoundElement? rowElem,
             XmlBoundElement elem
-        ) {
+        )
+        {
             Debug.Assert(elem != null);
 
             DataTable t = SearchMatchingTableSchema(elem.LocalName, elem.NamespaceURI);

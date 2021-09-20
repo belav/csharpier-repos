@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Diagnostics
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public FSharpUnusedOpensDiagnosticAnalyzerService(
             IFSharpUnusedOpensDiagnosticAnalyzer analyzer
-        ) {
+        )
+        {
             _analyzer = analyzer;
         }
 
@@ -37,7 +38,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Diagnostics
             DiagnosticDescriptor descriptor,
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _analyzer.AnalyzeSemanticsAsync(descriptor, document, cancellationToken);
         }
     }
@@ -63,7 +65,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Diagnostics
         public override Task<ImmutableArray<Diagnostic>> AnalyzeSemanticsAsync(
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var analyzer =
                 document.Project.LanguageServices.GetService<FSharpUnusedOpensDiagnosticAnalyzerService>();
             if (analyzer == null)
@@ -77,7 +80,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Diagnostics
         public override Task<ImmutableArray<Diagnostic>> AnalyzeSyntaxAsync(
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return Task.FromResult(ImmutableArray<Diagnostic>.Empty);
         }
 

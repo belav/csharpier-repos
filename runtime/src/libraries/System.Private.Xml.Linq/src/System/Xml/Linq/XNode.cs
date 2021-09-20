@@ -495,7 +495,8 @@ namespace System.Xml.Linq
         public static Task<XNode> ReadFromAsync(
             XmlReader reader,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (reader == null)
                 throw new ArgumentNullException(nameof(reader));
             if (cancellationToken.IsCancellationRequested)
@@ -506,7 +507,8 @@ namespace System.Xml.Linq
         private static async Task<XNode> ReadFromAsyncInternal(
             XmlReader reader,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (reader.ReadState != ReadState.Interactive)
                 throw new InvalidOperationException(SR.InvalidOperation_ExpectedInteractive);
 

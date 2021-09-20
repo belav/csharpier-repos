@@ -46,7 +46,8 @@ namespace System.Runtime.Serialization
         internal DataContract BindGenericParameters(
             DataContract[] paramContracts,
             Dictionary<DataContract, DataContract> boundContracts
-        ) {
+        )
+        {
             return paramContracts[ParameterPosition];
         }
     }

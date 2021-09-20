@@ -93,7 +93,8 @@ namespace System.Formats.Cbor
             if (
                 !ConvertIndefiniteLengthEncodings
                 && CborConformanceModeHelpers.RequiresDefiniteLengthItems(ConformanceMode)
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     SR.Format(
                         SR.Cbor_ConformanceMode_IndefiniteLengthItemsNotSupported,
@@ -228,7 +229,8 @@ namespace System.Formats.Cbor
             if (
                 _pooledKeyEncodingRangeSets != null
                 && _pooledKeyEncodingRangeSets.TryPop(out HashSet<(int Offset, int Length)>? result)
-            ) {
+            )
+            {
                 result.Clear();
                 return _keyEncodingRanges = result;
             }
@@ -261,7 +263,8 @@ namespace System.Formats.Cbor
                 && _pooledKeyValuePairEncodingRangeLists.TryPop(
                     out List<KeyValuePairEncodingRange>? result
                 )
-            ) {
+            )
+            {
                 result.Clear();
                 return _keyValuePairEncodingRanges = result;
             }

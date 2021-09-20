@@ -281,7 +281,8 @@ namespace System.DirectoryServices.AccountManagement
             PrincipalContext context,
             DateTime time,
             MatchType type
-        ) {
+        )
+        {
             return FindByLockoutTime<AuthenticablePrincipal>(context, time, type);
         }
 
@@ -289,7 +290,8 @@ namespace System.DirectoryServices.AccountManagement
             PrincipalContext context,
             DateTime time,
             MatchType type
-        ) {
+        )
+        {
             return FindByLogonTime<AuthenticablePrincipal>(context, time, type);
         }
 
@@ -297,7 +299,8 @@ namespace System.DirectoryServices.AccountManagement
             PrincipalContext context,
             DateTime time,
             MatchType type
-        ) {
+        )
+        {
             return FindByExpirationTime<AuthenticablePrincipal>(context, time, type);
         }
 
@@ -305,7 +308,8 @@ namespace System.DirectoryServices.AccountManagement
             PrincipalContext context,
             DateTime time,
             MatchType type
-        ) {
+        )
+        {
             return FindByBadPasswordAttempt<AuthenticablePrincipal>(context, time, type);
         }
 
@@ -313,7 +317,8 @@ namespace System.DirectoryServices.AccountManagement
             PrincipalContext context,
             DateTime time,
             MatchType type
-        ) {
+        )
+        {
             return FindByPasswordSetTime<AuthenticablePrincipal>(context, time, type);
         }
 
@@ -325,7 +330,8 @@ namespace System.DirectoryServices.AccountManagement
             PrincipalContext context,
             DateTime time,
             MatchType type
-        ) {
+        )
+        {
             CheckFindByArgs(context, time, type, typeof(T));
 
             return new PrincipalSearchResult<T>(
@@ -336,7 +342,8 @@ namespace System.DirectoryServices.AccountManagement
             PrincipalContext context,
             DateTime time,
             MatchType type
-        ) {
+        )
+        {
             CheckFindByArgs(context, time, type, typeof(T));
 
             return new PrincipalSearchResult<T>(
@@ -347,7 +354,8 @@ namespace System.DirectoryServices.AccountManagement
             PrincipalContext context,
             DateTime time,
             MatchType type
-        ) {
+        )
+        {
             CheckFindByArgs(context, time, type, typeof(T));
 
             return new PrincipalSearchResult<T>(
@@ -358,7 +366,8 @@ namespace System.DirectoryServices.AccountManagement
             PrincipalContext context,
             DateTime time,
             MatchType type
-        ) {
+        )
+        {
             CheckFindByArgs(context, time, type, typeof(T));
 
             return new PrincipalSearchResult<T>(
@@ -369,7 +378,8 @@ namespace System.DirectoryServices.AccountManagement
             PrincipalContext context,
             DateTime time,
             MatchType type
-        ) {
+        )
+        {
             CheckFindByArgs(context, time, type, typeof(T));
 
             return new PrincipalSearchResult<T>(
@@ -423,7 +433,8 @@ namespace System.DirectoryServices.AccountManagement
             DateTime time,
             MatchType type,
             Type subtype
-        ) {
+        )
+        {
             if (
                 (subtype != typeof(AuthenticablePrincipal))
                 && (!subtype.IsSubclassOf(typeof(AuthenticablePrincipal)))
@@ -466,7 +477,8 @@ namespace System.DirectoryServices.AccountManagement
                             PropertyNames.AcctInfoPrefix,
                             StringComparison.Ordinal
                         )
-                    ) {
+                    )
+                    {
                         // If this is the first AccountInfo attribute we're loading,
                         // we'll need to create the AccountInfo to hold it
                         if (_accountInfo == null)
@@ -479,7 +491,8 @@ namespace System.DirectoryServices.AccountManagement
                             PropertyNames.PwdInfoPrefix,
                             StringComparison.Ordinal
                         )
-                    ) {
+                    )
+                    {
                         // If this is the first PasswordInfo attribute we're loading,
                         // we'll need to create the PasswordInfo to hold it
                         if (_passwordInfo == null)
@@ -531,7 +544,8 @@ namespace System.DirectoryServices.AccountManagement
                             PropertyNames.AcctInfoPrefix,
                             StringComparison.Ordinal
                         )
-                    ) {
+                    )
+                    {
                         if (_accountInfo == null)
                             return false;
 
@@ -542,7 +556,8 @@ namespace System.DirectoryServices.AccountManagement
                             PropertyNames.PwdInfoPrefix,
                             StringComparison.Ordinal
                         )
-                    ) {
+                    )
+                    {
                         if (_passwordInfo == null)
                             return false;
 
@@ -584,7 +599,8 @@ namespace System.DirectoryServices.AccountManagement
                             PropertyNames.AcctInfoPrefix,
                             StringComparison.Ordinal
                         )
-                    ) {
+                    )
+                    {
                         if (_accountInfo == null)
                         {
                             // Should never happen, since GetChangeStatusForProperty returned false
@@ -601,7 +617,8 @@ namespace System.DirectoryServices.AccountManagement
                             PropertyNames.PwdInfoPrefix,
                             StringComparison.Ordinal
                         )
-                    ) {
+                    )
+                    {
                         if (_passwordInfo == null)
                         {
                             // Should never happen, since GetChangeStatusForProperty returned false

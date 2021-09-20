@@ -23,7 +23,8 @@ namespace System.Threading.Tasks.Tests
         public static void OnCompleted_CompletesInAnotherSynchronizationContext(
             bool generic,
             bool? continueOnCapturedContext
-        ) {
+        )
+        {
             SynchronizationContext origCtx = SynchronizationContext.Current;
             try
             {
@@ -95,7 +96,8 @@ namespace System.Threading.Tasks.Tests
         public static void OnCompleted_CompletesInAnotherTaskScheduler(
             bool generic,
             bool? continueOnCapturedContext
-        ) {
+        )
+        {
             SynchronizationContext origCtx = SynchronizationContext.Current;
             try
             {
@@ -258,7 +260,8 @@ namespace System.Threading.Tasks.Tests
             bool runContinuationsAsynchronously,
             bool valueTask,
             object scheduler
-        ) {
+        )
+        {
             await Task.Factory.StartNew(
                     async delegate
                     {
@@ -530,7 +533,8 @@ namespace System.Threading.Tasks.Tests
                     TimeSpan.MaxValue,
                     TimeSpan.MinValue
                 }
-            ) {
+            )
+            {
                 AssertExtensions.Throws<ArgumentOutOfRangeException>(
                     "timeout",
                     () => new TaskCompletionSource().Task.WaitAsync(timeout)
@@ -903,7 +907,8 @@ namespace System.Threading.Tasks.Tests
             int lineNumber,
             Task task,
             OperationCanceledException expected
-        ) {
+        )
+        {
             _ = lineNumber;
             var caught = Assert.ThrowsAny<OperationCanceledException>(
                 () => task.GetAwaiter().GetResult()

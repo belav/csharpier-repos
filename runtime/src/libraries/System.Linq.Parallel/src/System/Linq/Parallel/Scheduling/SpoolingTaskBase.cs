@@ -51,7 +51,8 @@ namespace System.Linq.Parallel
                     && oce.CancellationToken
                         == _groupState.CancellationState.MergedCancellationToken
                     && _groupState.CancellationState.MergedCancellationToken.IsCancellationRequested
-                ) {
+                )
+                {
                     //an expected internal cancellation has occurred.  suppress this exception.
                 }
                 else

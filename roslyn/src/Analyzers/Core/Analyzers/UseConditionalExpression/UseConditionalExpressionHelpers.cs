@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
             IConditionalOperation ifOperation,
             IOperation whenTrue,
             IOperation whenFalse
-        ) {
+        )
+        {
             // Will likely not work as intended if the if directive spans any preprocessor directives. So
             // do not offer for now.  Note: we pass in both the node for the ifOperation and the
             // whenFalse portion.  The whenFalse portion isn't necessary under the ifOperation.  For
@@ -41,7 +42,8 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
             if (
                 HasRegularComments(syntaxFacts, whenTrue.Syntax)
                 || HasRegularComments(syntaxFacts, whenFalse.Syntax)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -70,7 +72,8 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
         public static bool HasRegularCommentTrivia(
             ISyntaxFacts syntaxFacts,
             SyntaxTriviaList triviaList
-        ) {
+        )
+        {
             foreach (var trivia in triviaList)
             {
                 if (syntaxFacts.IsRegularComment(trivia))
@@ -87,7 +90,8 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
             bool isRef,
             IThrowOperation? trueThrow,
             IThrowOperation? falseThrow
-        ) {
+        )
+        {
             // Can't convert to `x ? throw ... : throw ...` as there's no best common type between the two (even when
             // throwing the same exception type).
             if (trueThrow != null && falseThrow != null)

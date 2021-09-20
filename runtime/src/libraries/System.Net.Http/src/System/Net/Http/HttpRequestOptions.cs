@@ -45,7 +45,8 @@ namespace System.Net.Http
         public bool TryGetValue<TValue>(
             HttpRequestOptionsKey<TValue> key,
             [MaybeNullWhen(false)] out TValue value
-        ) {
+        )
+        {
             if (Options.TryGetValue(key.Key, out object? _value) && _value is TValue tvalue)
             {
                 value = tvalue;

@@ -35,7 +35,8 @@ namespace Microsoft.AspNetCore.Localization.Routing
             string requestUrl,
             string expectedCulture,
             string expectedUICulture
-        ) {
+        )
+        {
             using var host = new HostBuilder().ConfigureWebHost(
                     webHostBuilder =>
                     {
@@ -176,7 +177,8 @@ namespace Microsoft.AspNetCore.Localization.Routing
             string requestUrl,
             string expectedCulture,
             string expectedUICulture
-        ) {
+        )
+        {
             using var host = new HostBuilder().ConfigureWebHost(
                     webHostBuilder =>
                     {

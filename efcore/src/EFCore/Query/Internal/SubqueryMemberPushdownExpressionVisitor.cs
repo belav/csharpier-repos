@@ -88,7 +88,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 && _supportedMethods.Contains(
                     methodCallExpression.Method.GetGenericMethodDefinition()
                 )
-            ) {
+            )
+            {
                 return PushdownMember(
                     methodCallExpression,
                     (target, nullable) =>
@@ -132,7 +133,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     && _supportedMethods.Contains(
                         innerMethodCall.Method.GetGenericMethodDefinition()
                     )
-                ) {
+                )
+                {
                     return PushdownMember(
                         innerMethodCall,
                         (target, nullable) =>
@@ -164,7 +166,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     && _supportedMethods.Contains(
                         innerMethodCall.Method.GetGenericMethodDefinition()
                     )
-                ) {
+                )
+                {
                     return PushdownMember(
                         innerMethodCall,
                         (target, nullable) =>
@@ -199,7 +202,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 && methodCallExpression.Method.GetGenericMethodDefinition()
                     == QueryableMethods.AsQueryable
                 && methodCallExpression.Arguments[0] is MemberExpression memberExpression
-            ) {
+            )
+            {
                 var updatedMemberExpression = memberExpression.Update(
                     Visit(memberExpression.Expression)
                 );
@@ -219,7 +223,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             MethodCallExpression methodCallExpression,
             Func<Expression, bool, Expression> createSelector,
             Type returnType
-        ) {
+        )
+        {
             var source = methodCallExpression.Arguments[0];
             var queryableType = source.Type.GetSequenceType();
             var genericMethod = methodCallExpression.Method.GetGenericMethodDefinition();
@@ -240,7 +245,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 && sourceMethodCallExpression.Method.IsGenericMethod
                 && sourceMethodCallExpression.Method.GetGenericMethodDefinition()
                     == QueryableMethods.Select
-            ) {
+            )
+            {
                 var selector = sourceMethodCallExpression.Arguments[1].UnwrapLambdaFromQuote();
                 var selectorBody = selector.Body;
                 var memberAccessExpression = createSelector(

@@ -280,7 +280,8 @@ namespace System.Drawing.Imaging.Tests
                     MetafileFrameUnit.Pixel,
                     emfType
                 )
-            ) {
+            )
+            {
                 AssertMetafileIsBlank(metafile);
                 AssertEmfType(metafile.GetMetafileHeader(), emfType);
             }
@@ -300,7 +301,8 @@ namespace System.Drawing.Imaging.Tests
                     EmfType.EmfOnly,
                     description
                 )
-            ) {
+            )
+            {
                 AssertMetafileIsBlank(metafile);
             }
         }
@@ -341,7 +343,8 @@ namespace System.Drawing.Imaging.Tests
                     MetafileFrameUnit.Pixel,
                     emfType
                 )
-            ) {
+            )
+            {
                 AssertMetafileIsBlank(metafile);
                 AssertEmfType(metafile.GetMetafileHeader(), emfType);
             }
@@ -361,7 +364,8 @@ namespace System.Drawing.Imaging.Tests
                     EmfType.EmfOnly,
                     description
                 )
-            ) {
+            )
+            {
                 AssertMetafileIsBlank(metafile);
             }
         }
@@ -432,7 +436,8 @@ namespace System.Drawing.Imaging.Tests
         [MemberData(nameof(MetafileFrameUnit_Invalid_TestData))]
         public void Ctor_InvalidMetafileFrameUnit_ThrowsArgumentException(
             MetafileFrameUnit farameUnit
-        ) {
+        )
+        {
             using (Bitmap bmp = new Bitmap(10, 10, PixelFormat.Format32bppArgb))
             using (Graphics g = Graphics.FromImage(bmp))
             {
@@ -574,7 +579,8 @@ namespace System.Drawing.Imaging.Tests
             using (Graphics g = Graphics.FromImage(bmp))
             using (
                 var metafile = new Metafile(fileName, g.GetHdc(), EmfType.EmfPlusDual, description)
-            ) {
+            )
+            {
                 AssertMetafileIsBlank(metafile);
                 AssertEmfType(metafile.GetMetafileHeader(), EmfType.EmfPlusDual);
                 Assert.True(File.Exists(fileName));
@@ -710,7 +716,8 @@ namespace System.Drawing.Imaging.Tests
         [MemberData(nameof(MetafileFrameUnit_TestData))]
         public void Ctor_StringIntPtrRectangleFMetafileFrameUnit_Success(
             MetafileFrameUnit frameUnit
-        ) {
+        )
+        {
             string fileName = GetPath("newTestImage.wmf");
             using (Bitmap bmp = new Bitmap(10, 10, PixelFormat.Format32bppArgb))
             using (Graphics g = Graphics.FromImage(bmp))
@@ -738,7 +745,8 @@ namespace System.Drawing.Imaging.Tests
                     MetafileFrameUnit.GdiCompatible,
                     emfType
                 )
-            ) {
+            )
+            {
                 AssertMetafileIsBlank(metafile);
                 AssertEmfType(metafile.GetMetafileHeader(), emfType);
                 Assert.True(File.Exists(fileName));
@@ -751,7 +759,8 @@ namespace System.Drawing.Imaging.Tests
         [MemberData(nameof(Description_TestData))]
         public void Ctor_StringIntPtrRectangleFMetafileFrameUnitEmfTypeString_Success(
             string description
-        ) {
+        )
+        {
             string fileName = GetPath("newTestImage.wmf");
             using (Bitmap bmp = new Bitmap(10, 10, PixelFormat.Format32bppArgb))
             using (Graphics g = Graphics.FromImage(bmp))
@@ -764,7 +773,8 @@ namespace System.Drawing.Imaging.Tests
                     EmfType.EmfOnly,
                     description
                 )
-            ) {
+            )
+            {
                 AssertMetafileIsBlank(metafile);
                 AssertEmfType(metafile.GetMetafileHeader(), EmfType.EmfOnly);
                 Assert.True(File.Exists(fileName));
@@ -789,7 +799,8 @@ namespace System.Drawing.Imaging.Tests
                     EmfType.EmfOnly,
                     description
                 )
-            ) {
+            )
+            {
                 AssertMetafileIsBlank(metafile);
                 AssertEmfType(metafile.GetMetafileHeader(), EmfType.EmfOnly);
                 Assert.True(File.Exists(fileName));
@@ -844,7 +855,8 @@ namespace System.Drawing.Imaging.Tests
                     MetafileFrameUnit.GdiCompatible,
                     emfType
                 )
-            ) {
+            )
+            {
                 AssertMetafileIsBlank(metafile);
                 AssertEmfType(metafile.GetMetafileHeader(), emfType);
                 Assert.True(File.Exists(fileName));
@@ -857,7 +869,8 @@ namespace System.Drawing.Imaging.Tests
         [MemberData(nameof(Description_TestData))]
         public void Ctor_StringIntPtrRectangleMetafileFrameUnitEmfTypeString_Success(
             string description
-        ) {
+        )
+        {
             string fileName = GetPath("newTestImage.wmf");
             using (Bitmap bmp = new Bitmap(10, 10, PixelFormat.Format32bppArgb))
             using (Graphics g = Graphics.FromImage(bmp))
@@ -870,7 +883,8 @@ namespace System.Drawing.Imaging.Tests
                     EmfType.EmfOnly,
                     description
                 )
-            ) {
+            )
+            {
                 AssertMetafileIsBlank(metafile);
                 AssertEmfType(metafile.GetMetafileHeader(), EmfType.EmfOnly);
                 Assert.True(File.Exists(fileName));
@@ -895,7 +909,8 @@ namespace System.Drawing.Imaging.Tests
                     EmfType.EmfOnly,
                     description
                 )
-            ) {
+            )
+            {
                 AssertMetafileIsBlank(metafile);
                 AssertEmfType(metafile.GetMetafileHeader(), EmfType.EmfOnly);
                 Assert.True(File.Exists(fileName));
@@ -1306,7 +1321,8 @@ namespace System.Drawing.Imaging.Tests
                     MetafileFrameUnit.GdiCompatible,
                     emfType
                 )
-            ) {
+            )
+            {
                 AssertMetafileIsBlank(metafile);
                 AssertEmfType(metafile.GetMetafileHeader(), emfType);
             }
@@ -1322,7 +1338,8 @@ namespace System.Drawing.Imaging.Tests
         [MemberData(nameof(Description_TestData))]
         public void Ctor_StreamIntPtrRectangleMetafileFrameUnitEmfTypeString_Success(
             string description
-        ) {
+        )
+        {
             using (Bitmap bmp = new Bitmap(10, 10, PixelFormat.Format32bppArgb))
             using (Graphics g = Graphics.FromImage(bmp))
             using (var stream = new MemoryStream())
@@ -1335,7 +1352,8 @@ namespace System.Drawing.Imaging.Tests
                     EmfType.EmfOnly,
                     description
                 )
-            ) {
+            )
+            {
                 AssertMetafileIsBlank(metafile);
                 AssertEmfType(metafile.GetMetafileHeader(), EmfType.EmfOnly);
             }
@@ -1363,7 +1381,8 @@ namespace System.Drawing.Imaging.Tests
                     EmfType.EmfOnly,
                     description
                 )
-            ) {
+            )
+            {
                 AssertMetafileIsBlank(metafile);
                 AssertEmfType(metafile.GetMetafileHeader(), EmfType.EmfOnly);
             }

@@ -62,7 +62,8 @@ namespace System.Text.Json
         public static JsonEncodedText Encode(
             ReadOnlySpan<char> value,
             JavaScriptEncoder? encoder = null
-        ) {
+        )
+        {
             if (value.Length == 0)
             {
                 return new JsonEncodedText(Array.Empty<byte>());
@@ -74,7 +75,8 @@ namespace System.Text.Json
         private static JsonEncodedText TranscodeAndEncode(
             ReadOnlySpan<char> value,
             JavaScriptEncoder? encoder
-        ) {
+        )
+        {
             JsonWriterHelper.ValidateValue(value);
 
             int expectedByteCount = JsonReaderHelper.GetUtf8ByteCount(value);
@@ -107,7 +109,8 @@ namespace System.Text.Json
         public static JsonEncodedText Encode(
             ReadOnlySpan<byte> utf8Value,
             JavaScriptEncoder? encoder = null
-        ) {
+        )
+        {
             if (utf8Value.Length == 0)
             {
                 return new JsonEncodedText(Array.Empty<byte>());
@@ -120,7 +123,8 @@ namespace System.Text.Json
         private static JsonEncodedText EncodeHelper(
             ReadOnlySpan<byte> utf8Value,
             JavaScriptEncoder? encoder
-        ) {
+        )
+        {
             int idx = JsonWriterHelper.NeedsEscaping(utf8Value, encoder);
 
             if (idx != -1)

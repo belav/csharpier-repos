@@ -44,7 +44,8 @@ namespace Microsoft.AspNetCore.Session
             TimeSpan ioTimeout,
             Func<bool> tryEstablishSession,
             bool isNewSessionKey
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(sessionKey))
             {
                 throw new ArgumentException(

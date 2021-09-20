@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.Hosting
         public HostedServiceExecutor(
             ILogger<HostedServiceExecutor> logger,
             IEnumerable<IHostedService> services
-        ) {
+        )
+        {
             _logger = logger;
             _services = services;
         }
@@ -36,7 +37,8 @@ namespace Microsoft.AspNetCore.Hosting
         private async Task ExecuteAsync(
             Func<IHostedService, Task> callback,
             bool throwOnFirstFailure = true
-        ) {
+        )
+        {
             List<Exception>? exceptions = null;
 
             foreach (var service in _services)

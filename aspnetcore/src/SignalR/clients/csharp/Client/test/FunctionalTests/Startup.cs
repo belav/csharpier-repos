@@ -83,7 +83,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
                                 "/negotiate",
                                 StringComparison.Ordinal
                             )
-                        ) {
+                        )
+                        {
                             context.Response.Cookies.Append("fromNegotiate", "a value");
                         }
                         return next(context);

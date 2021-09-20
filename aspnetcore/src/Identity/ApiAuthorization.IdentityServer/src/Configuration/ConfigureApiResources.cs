@@ -24,7 +24,8 @@ namespace Microsoft.Extensions.DependencyInjection
             IConfiguration configuration,
             IIdentityServerJwtDescriptor localApiDescriptor,
             ILogger<ConfigureApiResources> logger
-        ) {
+        )
+        {
             _configuration = configuration;
             _localApiDescriptor = localApiDescriptor;
             _logger = logger;

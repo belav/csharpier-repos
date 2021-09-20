@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Rebuild
         protected CompilationFactory(
             string assemblyFileName,
             CompilationOptionsReader optionsReader
-        ) {
+        )
+        {
             AssemblyFileName = assemblyFileName;
             OptionsReader = optionsReader;
         }
@@ -93,7 +94,8 @@ namespace Microsoft.CodeAnalysis.Rebuild
             Stream? rebuildPdbStream,
             Compilation rebuildCompilation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var embeddedTexts = rebuildCompilation.SyntaxTrees.Select(
                     st => (path: st.FilePath, text: st.GetText())
                 )
@@ -116,7 +118,8 @@ namespace Microsoft.CodeAnalysis.Rebuild
             Compilation rebuildCompilation,
             ImmutableArray<EmbeddedText> embeddedTexts,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var peHeader = OptionsReader.PeReader.PEHeaders.PEHeader!;
             var win32Resources = OptionsReader.PeReader.GetSectionData(
                 peHeader.ResourceTableDirectory.RelativeVirtualAddress
@@ -198,7 +201,8 @@ namespace Microsoft.CodeAnalysis.Rebuild
                     OptionsReader.GetMainMethodInfo() is
 
                     (string mainTypeName, string mainMethodName)
-                ) {
+                )
+                {
                     var typeSymbol = rebuildCompilation.GetTypeByMetadataName(mainTypeName);
                     if (typeSymbol is object)
                     {
@@ -214,7 +218,8 @@ namespace Microsoft.CodeAnalysis.Rebuild
 
         protected static (OptimizationLevel OptimizationLevel, bool DebugPlus) GetOptimizationLevel(
             string? value
-        ) {
+        )
+        {
             if (value is null)
             {
                 return OptimizationLevelFacts.DefaultValues;
@@ -226,7 +231,8 @@ namespace Microsoft.CodeAnalysis.Rebuild
                     out OptimizationLevel optimizationLevel,
                     out bool debugPlus
                 )
-            ) {
+            )
+            {
                 throw new InvalidOperationException();
             }
 

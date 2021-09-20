@@ -160,7 +160,8 @@ namespace System.Xml.Schema
                             if (
                                 SchemaCollection!.Add(inlineNS, inlineSchemaInfo, schema, true)
                                 != null
-                            ) { //If no errors on compile
+                            )
+                            { //If no errors on compile
                                 //Add to validator's SchemaInfo
                                 SchemaInfo.Add(inlineSchemaInfo, EventHandler);
                             }
@@ -305,7 +306,8 @@ namespace System.Xml.Schema
                     string ns in _nsManager.GetNamespacesInScope(
                         XmlNamespaceScope.ExcludeXml
                     ).Values
-                ) {
+                )
+                {
                     LoadSchema(ns, null);
                 }
             }
@@ -404,7 +406,8 @@ namespace System.Xml.Schema
                                 stringValue.Length == 0
                                 && context.ElementDecl.DefaultValueTyped != null
                             )
-                        ) {
+                        )
+                        {
                             CheckValue(stringValue, null);
                             checkDatatype = false;
                         }
@@ -443,7 +446,8 @@ namespace System.Xml.Schema
             SchemaElementDecl? elementDecl,
             XmlQualifiedName xsiType,
             string? xsiNil
-        ) {
+        )
+        {
             if (elementDecl == null)
             {
                 elementDecl = schemaInfo!.GetElementDecl(elementName);
@@ -471,7 +475,8 @@ namespace System.Xml.Schema
                     if (
                         !schemaInfo!.ElementDeclsByType.TryGetValue(xsiType, out elementDeclXsi)
                         && xsiType.Namespace == _nsXs
-                    ) {
+                    )
+                    {
                         XmlSchemaSimpleType? simpleType =
                             DatatypeImplementation.GetSimpleTypeFromXsdType(
                                 new XmlQualifiedName(xsiType.Name, _nsXs)
@@ -492,7 +497,8 @@ namespace System.Xml.Schema
                             elementDecl.SchemaType,
                             elementDecl.Block
                         )
-                    ) {
+                    )
+                    {
                         SendValidationEvent(
                             SR.Sch_XsiTypeBlockedEx,
                             new string?[]
@@ -548,7 +554,8 @@ namespace System.Xml.Schema
                     reader.IsEmptyElement
                     && !context.IsNill
                     && context.ElementDecl.DefaultValueTyped != null
-                ) {
+                )
+                {
                     reader.TypedValueObject = UnWrapUnion(context.ElementDecl.DefaultValueTyped);
                     context.IsNill = true; // reusing IsNill
                 }
@@ -597,7 +604,8 @@ namespace System.Xml.Schema
                                     context.ElementDecl.HasRequiredAttribute
                                     || _startIDConstraint != -1
                                 )
-                            ) {
+                            )
+                            {
                                 _attPresence.Add(attnDef.Name, attnDef);
                             }
                             Debug.Assert(attnDef.SchemaType != null);
@@ -626,7 +634,8 @@ namespace System.Xml.Schema
                                 && _processContents == XmlSchemaContentProcessing.Strict
                                 && attQName.Namespace.Length != 0
                                 && schemaInfo.Contains(attQName.Namespace)
-                            ) {
+                            )
+                            {
                                 SendValidationEvent(
                                     SR.Sch_UndeclaredAttribute,
                                     attQName.ToString()
@@ -767,7 +776,8 @@ namespace System.Xml.Schema
             if (
                 SchemaInfo!.TargetNamespaces.ContainsKey(uri)
                 && _nsManager.LookupPrefix(uri) != null
-            ) {
+            )
+            {
                 return;
             }
 
@@ -873,7 +883,8 @@ namespace System.Xml.Schema
                     ttype == XmlTokenizedType.ENTITY
                     || ttype == XmlTokenizedType.ID
                     || ttype == XmlTokenizedType.IDREF
-                ) {
+                )
+                {
                     if (dtype.Variety == XmlSchemaDatatypeVariety.List)
                     {
                         string[] ss = (string[])typedValue;
@@ -1046,7 +1057,8 @@ namespace System.Xml.Schema
                 if (
                     context.Constr[i].constraint.Role
                     == CompiledIdentityConstraint.ConstraintRole.Keyref
-                ) {
+                )
+                {
                     bool find = false;
                     // go upwards checking or only in this level
                     for (
@@ -1058,7 +1070,8 @@ namespace System.Xml.Schema
                                     : _validationStack.Length - 1
                             );
                         level--
-                    ) {
+                    )
+                    {
                         // no constraint for this level
                         if (((ValidationState)(_validationStack[level])).Constr == null)
                         {
@@ -1072,7 +1085,8 @@ namespace System.Xml.Schema
                         {
                             if (
                                 constraints[j].constraint.name == context.Constr[i].constraint.refer
-                            ) {
+                            )
+                            {
                                 find = true;
                                 if (constraints[j].keyrefTable == null)
                                 {
@@ -1126,7 +1140,8 @@ namespace System.Xml.Schema
                             reader.LocalName,
                             reader.NamespaceURI
                         )
-                    ) {
+                    )
+                    {
                         // selector selects new node, activate a new set of fields
                         Debug.WriteLine("Selector Match!");
                         Debug.WriteLine(
@@ -1179,7 +1194,8 @@ namespace System.Xml.Schema
             object? obj,
             string sobj,
             SchemaAttDef attdef
-        ) {
+        )
+        {
             for (int ci = _startIDConstraint; ci < _validationStack.Length; ci++)
             {
                 // no constraint for this level
@@ -1307,7 +1323,8 @@ namespace System.Xml.Schema
                             reader.LocalName,
                             reader.NamespaceURI
                         )
-                    ) {
+                    )
+                    {
                         // insert key sequence into hash (+ located active axis tuple leave for later)
                         KeySequence ks = constraints[i].axisSelector.PopKS();
                         // unqualified keysequence are not allowed
@@ -1388,7 +1405,8 @@ namespace System.Xml.Schema
                                     if (
                                         !ks.IsQualified()
                                         || constraints[i].qualifiedTable!.Contains(ks)
-                                    ) {
+                                    )
+                                    {
                                         continue;
                                     }
                                     constraints[i].qualifiedTable!.Add(ks, ks);
@@ -1411,7 +1429,8 @@ namespace System.Xml.Schema
                     if (
                         (vcs[i].constraint.Role == CompiledIdentityConstraint.ConstraintRole.Keyref)
                         || (vcs[i].keyrefTable == null)
-                    ) {
+                    )
+                    {
                         continue;
                     }
                     foreach (KeySequence? ks in vcs[i].keyrefTable!.Keys)

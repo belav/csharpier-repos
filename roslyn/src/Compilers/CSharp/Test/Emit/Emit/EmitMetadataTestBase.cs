@@ -102,7 +102,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         internal static void ValidateDeclSecurity(
             ModuleSymbol module,
             params DeclSecurityEntry[] expectedEntries
-        ) {
+        )
+        {
             var metadataReader = module.GetMetadata().MetadataReader;
             var actualEntries = new List<DeclSecurityEntry>(expectedEntries.Length);
 
@@ -156,7 +157,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             EntityHandle token,
             out string name,
             out SymbolKind kind
-        ) {
+        )
+        {
             switch (token.Kind)
             {
                 case HandleKind.AssemblyDefinition:
@@ -186,7 +188,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         private static TypeDefinitionHandle GetTokenForType(
             MetadataReader metadataReader,
             string typeName
-        ) {
+        )
+        {
             Assert.NotNull(typeName);
             Assert.NotEmpty(typeName);
 
@@ -209,7 +212,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         private static MethodDefinitionHandle GetTokenForMethod(
             MetadataReader metadataReader,
             string methodName
-        ) {
+        )
+        {
             Assert.NotNull(methodName);
             Assert.NotEmpty(methodName);
 

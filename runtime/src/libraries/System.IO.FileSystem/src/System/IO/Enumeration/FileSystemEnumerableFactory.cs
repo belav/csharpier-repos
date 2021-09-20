@@ -38,7 +38,8 @@ namespace System.IO.Enumeration
             ref string directory,
             ref string expression,
             MatchType matchType
-        ) {
+        )
+        {
             if (Path.IsPathRooted(expression))
                 throw new ArgumentException(SR.Arg_Path2IsRooted, nameof(expression));
 
@@ -78,7 +79,8 @@ namespace System.IO.Enumeration
                     }
                     else if (
                         string.IsNullOrEmpty(expression) || expression == "." || expression == "*.*"
-                    ) {
+                    )
+                    {
                         // Historically we always treated "." as "*"
                         expression = "*";
                     }
@@ -87,7 +89,8 @@ namespace System.IO.Enumeration
                         if (
                             Path.DirectorySeparatorChar != '\\'
                             && expression.IndexOfAny(s_unixEscapeChars) != -1
-                        ) {
+                        )
+                        {
                             // Backslash isn't the default separator, need to escape (e.g. Unix)
                             expression = expression.Replace("\\", "\\\\");
 
@@ -114,7 +117,8 @@ namespace System.IO.Enumeration
             string expression,
             ReadOnlySpan<char> name,
             EnumerationOptions options
-        ) {
+        )
+        {
             bool ignoreCase =
                 (
                     options.MatchCasing == MatchCasing.PlatformDefault
@@ -136,7 +140,8 @@ namespace System.IO.Enumeration
             string directory,
             string expression,
             EnumerationOptions options
-        ) {
+        )
+        {
             return new FileSystemEnumerable<string>(
                 directory,
                 (ref FileSystemEntry entry) => entry.ToSpecifiedFullPath(),
@@ -151,7 +156,8 @@ namespace System.IO.Enumeration
             string directory,
             string expression,
             EnumerationOptions options
-        ) {
+        )
+        {
             return new FileSystemEnumerable<string>(
                 directory,
                 (ref FileSystemEntry entry) => entry.ToSpecifiedFullPath(),
@@ -166,7 +172,8 @@ namespace System.IO.Enumeration
             string directory,
             string expression,
             EnumerationOptions options
-        ) {
+        )
+        {
             return new FileSystemEnumerable<string>(
                 directory,
                 (ref FileSystemEntry entry) => entry.ToSpecifiedFullPath(),
@@ -182,7 +189,8 @@ namespace System.IO.Enumeration
             string expression,
             EnumerationOptions options,
             bool isNormalized
-        ) {
+        )
+        {
             return new FileSystemEnumerable<FileInfo>(
                 directory,
                 (ref FileSystemEntry entry) => (FileInfo)entry.ToFileSystemInfo(),
@@ -199,7 +207,8 @@ namespace System.IO.Enumeration
             string expression,
             EnumerationOptions options,
             bool isNormalized
-        ) {
+        )
+        {
             return new FileSystemEnumerable<DirectoryInfo>(
                 directory,
                 (ref FileSystemEntry entry) => (DirectoryInfo)entry.ToFileSystemInfo(),
@@ -216,7 +225,8 @@ namespace System.IO.Enumeration
             string expression,
             EnumerationOptions options,
             bool isNormalized
-        ) {
+        )
+        {
             return new FileSystemEnumerable<FileSystemInfo>(
                 directory,
                 (ref FileSystemEntry entry) => entry.ToFileSystemInfo(),

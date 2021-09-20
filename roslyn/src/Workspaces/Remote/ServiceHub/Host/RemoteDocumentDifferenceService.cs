@@ -58,7 +58,8 @@ namespace Microsoft.CodeAnalysis.Remote
             Document oldDocument,
             Document newDocument,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // in remote workspace, we don't trust any version based on VersionStamp. we only trust content based information such as
             // checksum or tree comparison and etc.
 

@@ -85,7 +85,8 @@ class Program
 
         if (
             !RunTest(targetType: typeof(DateTime), expectedConverterType: typeof(DateTimeConverter))
-        ) {
+        )
+        {
             return -1;
         }
 
@@ -94,7 +95,8 @@ class Program
                 targetType: typeof(DateTimeOffset),
                 expectedConverterType: typeof(DateTimeOffsetConverter)
             )
-        ) {
+        )
+        {
             return -1;
         }
 
@@ -105,7 +107,8 @@ class Program
 
         if (
             !RunTest(targetType: typeof(TimeSpan), expectedConverterType: typeof(TimeSpanConverter))
-        ) {
+        )
+        {
             return -1;
         }
 
@@ -124,7 +127,8 @@ class Program
                 targetType: typeof(ICollection),
                 expectedConverterType: typeof(CollectionConverter)
             )
-        ) {
+        )
+        {
             return -1;
         }
 
@@ -143,7 +147,8 @@ class Program
                 targetType: typeof(SomeValueType?),
                 expectedConverterType: typeof(NullableConverter)
             )
-        ) {
+        )
+        {
             return -1;
         }
 
@@ -152,7 +157,8 @@ class Program
                 targetType: typeof(ClassWithNoConverter),
                 expectedConverterType: typeof(TypeConverter)
             )
-        ) {
+        )
+        {
             return -1;
         }
 
@@ -166,7 +172,8 @@ class Program
                 targetType: typeof(CultureInfo),
                 expectedConverterType: typeof(CultureInfoConverter)
             )
-        ) {
+        )
+        {
             return -1;
         }
 
@@ -180,7 +187,8 @@ class Program
                 targetType: typeof(IFooComponent),
                 expectedConverterType: typeof(ReferenceConverter)
             )
-        ) {
+        )
+        {
             return -1;
         }
 

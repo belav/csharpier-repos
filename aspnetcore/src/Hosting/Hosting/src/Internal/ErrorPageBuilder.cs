@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Hosting
             ILogger logger,
             bool showDetailedErrors,
             Exception exception
-        ) {
+        )
+        {
             if (exception is TargetInvocationException tae)
             {
                 exception = tae.InnerException!;

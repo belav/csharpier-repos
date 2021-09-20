@@ -45,7 +45,8 @@ namespace System.Text
             char* _charEnd,
             EncoderNLS? _encoder,
             bool _setEncoder
-        ) {
+        )
+        {
             charStart = _charStart;
             charEnd = _charEnd;
             encoder = _encoder;

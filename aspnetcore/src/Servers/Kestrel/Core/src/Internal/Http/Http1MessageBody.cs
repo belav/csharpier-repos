@@ -26,7 +26,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
 
         public override ValueTask<ReadResult> ReadAsync(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             ThrowIfReaderCompleted();
             return ReadAsyncInternal(cancellationToken);
         }
@@ -137,7 +138,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             HttpVersion httpVersion,
             HttpRequestHeaders headers,
             Http1Connection context
-        ) {
+        )
+        {
             // see also http://tools.ietf.org/html/rfc2616#section-4.4
             var keepAlive = httpVersion != HttpVersion.Http10;
             var upgrade = false;
@@ -158,7 +160,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                 upgrade
                 && headers.ContentLength.GetValueOrDefault() == 0
                 && headers.HeaderTransferEncoding.Count == 0
-            ) {
+            )
+            {
                 context.OnTrailersComplete(); // No trailers for these.
                 return new Http1UpgradeMessageBody(context, keepAlive);
             }

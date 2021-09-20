@@ -55,7 +55,8 @@ namespace CSharpSyntaxGenerator
             if (
                 s_cachedResult.TryGetTarget(out var cachedResult)
                 && cachedResult.Checksum.SequenceEqual(currentChecksum)
-            ) {
+            )
+            {
                 // Add the previously-cached sources, and leave the cache as it was
                 AddSources(in context, sources: cachedResult.Sources);
                 return;
@@ -69,7 +70,8 @@ namespace CSharpSyntaxGenerator
                     out var diagnostics,
                     context.CancellationToken
                 )
-            ) {
+            )
+            {
                 AddSources(in context, sources);
 
                 if (diagnostics.IsEmpty)
@@ -114,7 +116,8 @@ namespace CSharpSyntaxGenerator
         private static void AddSources(
             in GeneratorExecutionContext context,
             ImmutableArray<(string hintName, SourceText sourceText)> sources
-        ) {
+        )
+        {
             foreach (var (hintName, sourceText) in sources)
             {
                 context.AddSource(hintName, sourceText);

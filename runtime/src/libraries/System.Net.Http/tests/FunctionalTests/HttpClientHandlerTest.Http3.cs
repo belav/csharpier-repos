@@ -177,7 +177,8 @@ namespace System.Net.Http.Functional.Tests
                     Version = HttpVersion.Version30,
                     VersionPolicy = HttpVersionPolicy.RequestVersionOrLower
                 }
-            ) {
+            )
+            {
                 using HttpResponseMessage responseA = await client.SendAsync(requestA)
                     .WaitAsync(TimeSpan.FromSeconds(20));
                 Assert.Equal(HttpStatusCode.OK, responseA.StatusCode);
@@ -194,7 +195,8 @@ namespace System.Net.Http.Functional.Tests
                     Version = HttpVersion.Version30,
                     VersionPolicy = HttpVersionPolicy.RequestVersionOrLower
                 }
-            ) {
+            )
+            {
                 using HttpResponseMessage responseB = await client.SendAsync(requestB)
                     .WaitAsync(TimeSpan.FromSeconds(20));
 

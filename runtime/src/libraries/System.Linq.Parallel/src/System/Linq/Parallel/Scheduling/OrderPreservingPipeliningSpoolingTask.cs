@@ -135,7 +135,8 @@ namespace System.Linq.Parallel
                     if (
                         _buffers[_partitionIndex].Count
                         >= OrderPreservingPipeliningMergeHelper<TOutput, TKey>.MAX_BUFFER_SIZE
-                    ) {
+                    )
+                    {
                         _producerWaiting[_partitionIndex] = true;
                         Monitor.Wait(_bufferLock);
                     }
@@ -156,7 +157,8 @@ namespace System.Linq.Parallel
             object[] bufferLocks,
             TaskScheduler taskScheduler,
             bool autoBuffered
-        ) {
+        )
+        {
             Debug.Assert(groupState != null);
             Debug.Assert(partitions != null);
             Debug.Assert(producerDone != null && producerDone.Length == partitions.PartitionCount);

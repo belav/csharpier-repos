@@ -111,7 +111,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         public override async Task<InputFormatterResult> ReadRequestBodyAsync(
             InputFormatterContext context,
             Encoding encoding
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));

@@ -3768,7 +3768,8 @@ public class Program
         private void VerifyXmlAttributes(
             SyntaxList<XmlAttributeSyntax> xmlAttributes,
             Dictionary<string, string> attributes
-        ) {
+        )
+        {
             // we have the same number of attributes
             Assert.Equal(attributes.Keys.Count, xmlAttributes.Count);
             foreach (XmlTextAttributeSyntax attribute in xmlAttributes)

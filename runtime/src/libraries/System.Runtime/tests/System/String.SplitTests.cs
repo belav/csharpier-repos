@@ -1139,7 +1139,8 @@ namespace System.Tests
             int count,
             StringSplitOptions options,
             string[] expected
-        ) {
+        )
+        {
             Assert.Equal(expected, value.Split(separator, count, options));
             Assert.Equal(expected, value.Split(new[] { separator }, count, options));
             Assert.Equal(expected, value.Split(separator.ToString(), count, options));
@@ -1217,7 +1218,8 @@ namespace System.Tests
             int count,
             StringSplitOptions options,
             string[] expected
-        ) {
+        )
+        {
             Assert.Equal(expected, value.Split(separator, count, options));
             Assert.Equal(expected, value.Split(new[] { separator }, count, options));
             if (count == int.MaxValue)
@@ -1420,7 +1422,8 @@ namespace System.Tests
             int count,
             StringSplitOptions options,
             string[] expected
-        ) {
+        )
+        {
             Assert.Equal(expected, value.Split(separators, count, options));
             Assert.Equal(expected, value.Split(ToStringArray(separators), count, options));
         }
@@ -1631,7 +1634,8 @@ namespace System.Tests
             int count,
             StringSplitOptions options,
             string[] expected
-        ) {
+        )
+        {
             Assert.Equal(expected, value.Split(separators, count, options));
         }
 

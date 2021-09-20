@@ -33,7 +33,8 @@ namespace Microsoft.AspNetCore.Routing
             RequestDelegate requestDelegate,
             RoutePattern routePattern,
             int order
-        ) {
+        )
+        {
             RequestDelegate = requestDelegate;
             RoutePattern = routePattern;
             Order = order;

@@ -370,7 +370,8 @@ namespace JIT.HardwareIntrinsics.X86
             Vector256<Double> firstOp,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Double[] inArray = new Double[Op1ElementCount];
             Double[] outArray = new Double[RetElementCount];
 
@@ -388,7 +389,8 @@ namespace JIT.HardwareIntrinsics.X86
             void* firstOp,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Double[] inArray = new Double[Op1ElementCount];
             Double[] outArray = new Double[RetElementCount];
 
@@ -410,13 +412,15 @@ namespace JIT.HardwareIntrinsics.X86
             Double[] firstOp,
             Double[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (
                 BitConverter.DoubleToInt64Bits(result[0])
                 != BitConverter.DoubleToInt64Bits(firstOp[1])
-            ) {
+            )
+            {
                 succeeded = false;
             }
             else
@@ -428,7 +432,8 @@ namespace JIT.HardwareIntrinsics.X86
                             != BitConverter.DoubleToInt64Bits(firstOp[2])
                         || BitConverter.DoubleToInt64Bits(result[2])
                             != BitConverter.DoubleToInt64Bits(firstOp[2])
-                    ) {
+                    )
+                    {
                         succeeded = false;
                         break;
                     }

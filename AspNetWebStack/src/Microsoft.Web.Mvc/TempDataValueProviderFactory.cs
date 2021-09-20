@@ -66,7 +66,8 @@ namespace Microsoft.Web.Mvc
 
             private static Dictionary<string, TempDataVoid> GetVoidDictionary(
                 TempDataDictionary tempData
-            ) {
+            )
+            {
                 // Create a special backing store that doesn't directly hold the values, since the DictionaryValueProvider
                 // enumerates over the backing store but enumerating over TempData marks everything for removal.
                 Dictionary<string, TempDataVoid> d = new Dictionary<string, TempDataVoid>(

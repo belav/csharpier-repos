@@ -46,7 +46,8 @@ namespace Microsoft.Extensions.Options
                         validationResults,
                         validateAllProperties: true
                     )
-                ) {
+                )
+                {
                     return ValidateOptionsResult.Success;
                 }
 

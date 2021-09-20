@@ -38,7 +38,8 @@ namespace System.Diagnostics.Tests
         public static PerformanceCounter CreateCounter(
             string name,
             PerformanceCounterType counterType
-        ) {
+        )
+        {
             var category = name + "_Category";
             var instance = name + "_Instance";
 

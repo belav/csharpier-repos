@@ -525,7 +525,8 @@ namespace System.Web.Http.Controllers
 
         private static IHttpActionResult CreateActionResult(
             Func<CancellationToken, Task<HttpResponseMessage>> executeAsync
-        ) {
+        )
+        {
             Mock<IHttpActionResult> mock = new Mock<IHttpActionResult>(MockBehavior.Strict);
             CancellationToken cancellationToken;
             mock.Setup(r => r.ExecuteAsync(It.IsAny<CancellationToken>()))
@@ -541,7 +542,8 @@ namespace System.Web.Http.Controllers
 
         private static IAuthenticationFilter CreateAuthenticationFilter(
             Action<HttpAuthenticationContext, CancellationToken> authenticate
-        ) {
+        )
+        {
             Mock<IAuthenticationFilter> mock = new Mock<IAuthenticationFilter>();
             mock.Setup(
                     f =>
@@ -571,7 +573,8 @@ namespace System.Web.Http.Controllers
         private static IAuthenticationFilter CreateAuthenticationFilter(
             Action<HttpAuthenticationContext, CancellationToken> authenticate,
             Action<HttpAuthenticationChallengeContext, CancellationToken> challenge
-        ) {
+        )
+        {
             Mock<IAuthenticationFilter> mock = new Mock<IAuthenticationFilter>();
             mock.Setup(
                     f =>
@@ -606,7 +609,8 @@ namespace System.Web.Http.Controllers
 
         private static IAuthenticationFilter CreateAuthenticationFilterChallenge(
             Action<HttpAuthenticationChallengeContext, CancellationToken> challenge
-        ) {
+        )
+        {
             Mock<IAuthenticationFilter> mock = new Mock<IAuthenticationFilter>();
             mock.Setup(
                     f =>
@@ -663,7 +667,8 @@ namespace System.Web.Http.Controllers
             ApiController controller,
             IAuthenticationFilter[] filters,
             IHttpActionResult innerResult
-        ) {
+        )
+        {
             return new AuthenticationFilterResult(context, controller, filters, innerResult);
         }
 

@@ -91,7 +91,8 @@ namespace Microsoft.AspNetCore.Authentication.OpenIdConnect
             else if (
                 Options.SignedOutCallbackPath.HasValue
                 && Options.SignedOutCallbackPath == Request.Path
-            ) {
+            )
+            {
                 return HandleSignOutCallbackAsync();
             }
 
@@ -121,7 +122,8 @@ namespace Microsoft.AspNetCore.Authentication.OpenIdConnect
                     StringComparison.OrdinalIgnoreCase
                 )
                 && Request.Body.CanRead
-            ) {
+            )
+            {
                 var form = await Request.ReadFormAsync(Context.RequestAborted);
                 message = new OpenIdConnectMessage(
                     form.Select(pair => new KeyValuePair<string, string[]>(pair.Key, pair.Value))
@@ -472,7 +474,8 @@ namespace Microsoft.AspNetCore.Authentication.OpenIdConnect
                     OpenIdConnectResponseMode.Query,
                     StringComparison.Ordinal
                 )
-            ) {
+            )
+            {
                 message.ResponseMode = Options.ResponseMode;
             }
 
@@ -577,7 +580,8 @@ namespace Microsoft.AspNetCore.Authentication.OpenIdConnect
                 if (
                     !string.IsNullOrEmpty(authorizationResponse.IdToken)
                     || !string.IsNullOrEmpty(authorizationResponse.AccessToken)
-                ) {
+                )
+                {
                     if (Options.SkipUnrecognizedRequests)
                     {
                         // Not for us?
@@ -599,7 +603,8 @@ namespace Microsoft.AspNetCore.Authentication.OpenIdConnect
                     StringComparison.OrdinalIgnoreCase
                 )
                 && Request.Body.CanRead
-            ) {
+            )
+            {
                 var form = await Request.ReadFormAsync(Context.RequestAborted);
                 authorizationResponse = new OpenIdConnectMessage(
                     form.Select(pair => new KeyValuePair<string, string[]>(pair.Key, pair.Value))
@@ -681,7 +686,8 @@ namespace Microsoft.AspNetCore.Authentication.OpenIdConnect
                             "access_denied",
                             StringComparison.Ordinal
                         )
-                    ) {
+                    )
+                    {
                         var result = await HandleAccessDeniedErrorAsync(properties);
                         if (!result.None)
                         {
@@ -853,7 +859,8 @@ namespace Microsoft.AspNetCore.Authentication.OpenIdConnect
                                 tokenEndpointJwt.Subject,
                                 StringComparison.Ordinal
                             )
-                        ) {
+                        )
+                        {
                             throw new SecurityTokenException(
                                 "The sub claim does not match in the id_token's from the authorization and token endpoints."
                             );
@@ -915,7 +922,8 @@ namespace Microsoft.AspNetCore.Authentication.OpenIdConnect
                 if (
                     Options.RefreshOnIssuerKeyNotFound
                     && exception is SecurityTokenSignatureKeyNotFoundException
-                ) {
+                )
+                {
                     if (Options.ConfigurationManager != null)
                     {
                         Logger.ConfigurationManagerRequestRefreshCalled();
@@ -959,7 +967,8 @@ namespace Microsoft.AspNetCore.Authentication.OpenIdConnect
         private void PopulateSessionProperties(
             OpenIdConnectMessage message,
             AuthenticationProperties properties
-        ) {
+        )
+        {
             if (!string.IsNullOrEmpty(message.SessionState))
             {
                 properties.Items[OpenIdConnectSessionProperties.SessionState] =
@@ -980,7 +989,8 @@ namespace Microsoft.AspNetCore.Authentication.OpenIdConnect
         /// <returns>OpenIdConnect message that has tokens inside it.</returns>
         protected virtual async Task<OpenIdConnectMessage> RedeemAuthorizationCodeAsync(
             OpenIdConnectMessage tokenEndpointRequest
-        ) {
+        )
+        {
             Logger.RedeemingCodeForTokens();
 
             var requestMessage = new HttpRequestMessage(
@@ -1007,7 +1017,8 @@ namespace Microsoft.AspNetCore.Authentication.OpenIdConnect
                     "application/json",
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 Logger.LogDebug(
                     $"Unexpected token response format. Status Code: {(int)responseMessage.StatusCode}. Content-Type {responseMessage.Content.Headers.ContentType}."
                 );
@@ -1054,7 +1065,8 @@ namespace Microsoft.AspNetCore.Authentication.OpenIdConnect
             JwtSecurityToken jwt,
             ClaimsPrincipal principal,
             AuthenticationProperties properties
-        ) {
+        )
+        {
             var userInfoEndpoint = _configuration?.UserInfoEndpoint;
 
             if (string.IsNullOrEmpty(userInfoEndpoint))
@@ -1094,7 +1106,8 @@ namespace Microsoft.AspNetCore.Authentication.OpenIdConnect
                     "application/json",
                     StringComparison.OrdinalIgnoreCase
                 ) ?? false
-            ) {
+            )
+            {
                 user = JsonDocument.Parse(userInfoResponse);
             }
             else if (
@@ -1102,7 +1115,8 @@ namespace Microsoft.AspNetCore.Authentication.OpenIdConnect
                     "application/jwt",
                     StringComparison.OrdinalIgnoreCase
                 ) ?? false
-            ) {
+            )
+            {
                 var userInfoEndpointJwt = new JwtSecurityToken(userInfoResponse);
                 user = JsonDocument.Parse(userInfoEndpointJwt.Payload.SerializeToJson());
             }
@@ -1214,7 +1228,8 @@ namespace Microsoft.AspNetCore.Authentication.OpenIdConnect
                         CultureInfo.InvariantCulture,
                         out int value
                     )
-                ) {
+                )
+                {
                     var expiresAt = Clock.UtcNow + TimeSpan.FromSeconds(value);
                     // https://www.w3.org/TR/xmlschema-2/#dateTime
                     // https://msdn.microsoft.com/en-us/library/az4se3k1(v=vs.110).aspx
@@ -1272,7 +1287,8 @@ namespace Microsoft.AspNetCore.Authentication.OpenIdConnect
                 if (
                     Options.NonceCookie.Name is string name
                     && nonceKey.StartsWith(name, StringComparison.Ordinal)
-                ) {
+                )
+                {
                     try
                     {
                         var nonceDecodedValue = Options.StringDataFormat.Unprotect(
@@ -1301,7 +1317,8 @@ namespace Microsoft.AspNetCore.Authentication.OpenIdConnect
         private async Task<MessageReceivedContext> RunMessageReceivedEventAsync(
             OpenIdConnectMessage message,
             AuthenticationProperties? properties
-        ) {
+        )
+        {
             Logger.MessageReceived(message.BuildRedirectUrl());
             var context = new MessageReceivedContext(Context, Scheme, Options, properties)
             {
@@ -1331,7 +1348,8 @@ namespace Microsoft.AspNetCore.Authentication.OpenIdConnect
             AuthenticationProperties properties,
             JwtSecurityToken jwt,
             string? nonce
-        ) {
+        )
+        {
             var context = new TokenValidatedContext(Context, Scheme, Options, user, properties)
             {
                 ProtocolMessage = authorizationResponse,
@@ -1361,7 +1379,8 @@ namespace Microsoft.AspNetCore.Authentication.OpenIdConnect
             ClaimsPrincipal? user,
             AuthenticationProperties properties,
             JwtSecurityToken? jwt
-        ) {
+        )
+        {
             Logger.AuthorizationCodeReceived();
 
             var tokenEndpointRequest = new OpenIdConnectMessage()
@@ -1413,7 +1432,8 @@ namespace Microsoft.AspNetCore.Authentication.OpenIdConnect
             OpenIdConnectMessage tokenEndpointResponse,
             ClaimsPrincipal user,
             AuthenticationProperties properties
-        ) {
+        )
+        {
             Logger.TokenResponseReceived();
             var context = new TokenResponseReceivedContext(
                 Context,
@@ -1447,7 +1467,8 @@ namespace Microsoft.AspNetCore.Authentication.OpenIdConnect
             AuthenticationProperties properties,
             OpenIdConnectMessage message,
             JsonDocument user
-        ) {
+        )
+        {
             Logger.UserInformationReceived(user.ToString()!);
 
             var context = new UserInformationReceivedContext(
@@ -1480,7 +1501,8 @@ namespace Microsoft.AspNetCore.Authentication.OpenIdConnect
         private async Task<AuthenticationFailedContext> RunAuthenticationFailedEventAsync(
             OpenIdConnectMessage message,
             Exception exception
-        ) {
+        )
+        {
             var context = new AuthenticationFailedContext(Context, Scheme, Options)
             {
                 ProtocolMessage = message,
@@ -1509,7 +1531,8 @@ namespace Microsoft.AspNetCore.Authentication.OpenIdConnect
             AuthenticationProperties properties,
             TokenValidationParameters validationParameters,
             out JwtSecurityToken jwt
-        ) {
+        )
+        {
             if (!Options.SecurityTokenValidator.CanReadToken(idToken))
             {
                 Logger.UnableToReadIdToken(idToken);
@@ -1605,7 +1628,8 @@ namespace Microsoft.AspNetCore.Authentication.OpenIdConnect
         private OpenIdConnectProtocolException CreateOpenIdConnectProtocolException(
             OpenIdConnectMessage message,
             HttpResponseMessage? response
-        ) {
+        )
+        {
             var description = message.ErrorDescription ?? "error_description is null";
             var errorUri = message.ErrorUri ?? "error_uri is null";
 

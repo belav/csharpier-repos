@@ -109,7 +109,8 @@ namespace System.Net
                 if (
                     statusCode != Interop.HttpApi.ERROR_SUCCESS
                     && statusCode != Interop.HttpApi.ERROR_HANDLE_EOF
-                ) {
+                )
+                {
                     Exception exception = new HttpListenerException((int)statusCode);
                     if (NetEventSource.Log.IsEnabled())
                         NetEventSource.Error(this, exception.ToString());
@@ -143,7 +144,8 @@ namespace System.Net
             int size,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             if (size == 0 || _closed)
             {
                 HttpRequestStreamAsyncResult result = new HttpRequestStreamAsyncResult(
@@ -261,7 +263,8 @@ namespace System.Net
                 if (
                     statusCode != Interop.HttpApi.ERROR_SUCCESS
                     && statusCode != Interop.HttpApi.ERROR_IO_PENDING
-                ) {
+                )
+                {
                     asyncResult.InternalCleanup();
                     if (statusCode == Interop.HttpApi.ERROR_HANDLE_EOF)
                     {
@@ -285,7 +288,8 @@ namespace System.Net
                 else if (
                     statusCode == Interop.HttpApi.ERROR_SUCCESS
                     && HttpListener.SkipIOCPCallbackOnSuccess
-                ) {
+                )
+                {
                     // IO operation completed synchronously - callback won't be called to signal completion.
                     asyncResult.IOCompleted(statusCode, bytesReturned);
                 }
@@ -416,7 +420,8 @@ namespace System.Net
                 HttpRequestStreamAsyncResult asyncResult,
                 uint errorCode,
                 uint numBytes
-            ) {
+            )
+            {
                 if (NetEventSource.Log.IsEnabled())
                     NetEventSource.Info(
                         null,
@@ -428,7 +433,8 @@ namespace System.Net
                     if (
                         errorCode != Interop.HttpApi.ERROR_SUCCESS
                         && errorCode != Interop.HttpApi.ERROR_HANDLE_EOF
-                    ) {
+                    )
+                    {
                         asyncResult.ErrorCode = (int)errorCode;
                         result = new HttpListenerException((int)errorCode);
                     }
@@ -456,7 +462,8 @@ namespace System.Net
                 uint errorCode,
                 uint numBytes,
                 NativeOverlapped* nativeOverlapped
-            ) {
+            )
+            {
                 HttpRequestStreamAsyncResult asyncResult =
                     (HttpRequestStreamAsyncResult)ThreadPoolBoundHandle.GetNativeOverlappedState(
                         nativeOverlapped

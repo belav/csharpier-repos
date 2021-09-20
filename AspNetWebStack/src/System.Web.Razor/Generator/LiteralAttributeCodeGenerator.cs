@@ -13,7 +13,8 @@ namespace System.Web.Razor.Generator
         public LiteralAttributeCodeGenerator(
             LocationTagged<string> prefix,
             LocationTagged<SpanCodeGenerator> valueGenerator
-        ) {
+        )
+        {
             Prefix = prefix;
             ValueGenerator = valueGenerator;
         }
@@ -21,7 +22,8 @@ namespace System.Web.Razor.Generator
         public LiteralAttributeCodeGenerator(
             LocationTagged<string> prefix,
             LocationTagged<string> value
-        ) {
+        )
+        {
             Prefix = prefix;
             Value = value;
         }

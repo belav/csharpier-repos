@@ -34,7 +34,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             ExpressionType operation,
             Type? context,
             IEnumerable<CSharpArgumentInfo>? argumentInfo
-        ) {
+        )
+        {
             bool isChecked = (flags & CSharpBinderFlags.CheckedContext) != 0;
             bool isLogical = (flags & CSharpBinderFlags.BinaryOperationLogical) != 0;
 
@@ -95,7 +96,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             CSharpBinderFlags flags,
             Type? context,
             IEnumerable<CSharpArgumentInfo>? argumentInfo
-        ) {
+        )
+        {
             return new CSharpGetIndexBinder(context, argumentInfo).TryGetExisting();
         }
 
@@ -115,7 +117,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             string name,
             Type? context,
             IEnumerable<CSharpArgumentInfo>? argumentInfo
-        ) {
+        )
+        {
             bool allowCallables = (flags & CSharpBinderFlags.ResultIndexed) != 0;
             return new CSharpGetMemberBinder(
                 name,
@@ -139,7 +142,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             CSharpBinderFlags flags,
             Type? context,
             IEnumerable<CSharpArgumentInfo>? argumentInfo
-        ) {
+        )
+        {
             bool resultDiscarded = (flags & CSharpBinderFlags.ResultDiscarded) != 0;
 
             CSharpCallFlags callFlags = 0;
@@ -169,7 +173,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             IEnumerable<Type>? typeArguments,
             Type? context,
             IEnumerable<CSharpArgumentInfo>? argumentInfo
-        ) {
+        )
+        {
             bool invokeSimpleName = (flags & CSharpBinderFlags.InvokeSimpleName) != 0;
             bool invokeSpecialName = (flags & CSharpBinderFlags.InvokeSpecialName) != 0;
             bool resultDiscarded = (flags & CSharpBinderFlags.ResultDiscarded) != 0;
@@ -211,7 +216,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             CSharpBinderFlags flags,
             Type? context,
             IEnumerable<CSharpArgumentInfo>? argumentInfo
-        ) {
+        )
+        {
             return new CSharpInvokeConstructorBinder(
                 CSharpCallFlags.None,
                 context,
@@ -248,7 +254,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             CSharpBinderFlags flags,
             Type? context,
             IEnumerable<CSharpArgumentInfo>? argumentInfo
-        ) {
+        )
+        {
             bool isCompoundAssignment =
                 (flags & CSharpBinderFlags.ValueFromCompoundAssignment) != 0;
             bool isChecked = (flags & CSharpBinderFlags.CheckedContext) != 0;
@@ -276,7 +283,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             string name,
             Type? context,
             IEnumerable<CSharpArgumentInfo>? argumentInfo
-        ) {
+        )
+        {
             bool isCompoundAssignment =
                 (flags & CSharpBinderFlags.ValueFromCompoundAssignment) != 0;
             bool isChecked = (flags & CSharpBinderFlags.CheckedContext) != 0;
@@ -305,7 +313,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             ExpressionType operation,
             Type? context,
             IEnumerable<CSharpArgumentInfo>? argumentInfo
-        ) {
+        )
+        {
             bool isChecked = (flags & CSharpBinderFlags.CheckedContext) != 0;
             return new CSharpUnaryOperationBinder(
                 operation,

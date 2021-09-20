@@ -25,7 +25,8 @@ namespace AutoMapper.QueryableExtensions.Impl
             Type destinationType,
             IQueryable destQuery,
             IGlobalConfiguration config
-        ) {
+        )
+        {
             _sourceType = sourceType;
             _destinationType = destinationType;
             _destQuery = destQuery;
@@ -37,7 +38,8 @@ namespace AutoMapper.QueryableExtensions.Impl
             IQueryable<TSource> sourceQuery,
             IQueryable<TDestination> destQuery,
             IGlobalConfiguration config
-        ) {
+        )
+        {
             var visitor = new QueryMapperVisitor(
                 typeof(TSource),
                 typeof(TDestination),
@@ -113,7 +115,8 @@ namespace AutoMapper.QueryableExtensions.Impl
                 || node.Method.Name == "OrderByDescending"
                 || node.Method.Name == "ThenBy"
                 || node.Method.Name == "ThenByDescending"
-            ) {
+            )
+            {
                 return VisitOrderBy(node);
             }
 
@@ -197,7 +200,8 @@ namespace AutoMapper.QueryableExtensions.Impl
         public MemberAccessQueryMapperVisitor(
             ExpressionVisitor rootVisitor,
             IGlobalConfiguration config
-        ) {
+        )
+        {
             _rootVisitor = rootVisitor;
             _config = config;
         }
@@ -252,7 +256,8 @@ namespace AutoMapper.QueryableExtensions.Impl
             this IGlobalConfiguration config,
             MemberInfo sourceMemberInfo,
             Type destinationMemberType
-        ) {
+        )
+        {
             var typeMap = config.CheckIfMapExists(
                 sourceMemberInfo.DeclaringType,
                 destinationMemberType
@@ -275,7 +280,8 @@ namespace AutoMapper.QueryableExtensions.Impl
             this IGlobalConfiguration config,
             Type sourceType,
             Type destinationType
-        ) {
+        )
+        {
             var typeMap = config.ResolveTypeMap(sourceType, destinationType);
             if (typeMap == null)
             {

@@ -2148,7 +2148,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
 
             public TestableRazorPageForDiagnostics(
                 Action<TestableRazorPageForDiagnostics> executeAction
-            ) {
+            )
+            {
                 _executeAction = executeAction;
                 HtmlEncoder = new HtmlTestEncoder();
             }

@@ -44,7 +44,8 @@ namespace System.Linq.Parallel
                     ParallelMergeOptions.FullyBuffered,
                     true
                 )
-            ) {
+            )
+            {
                 // We just reduce the elements in each output partition.
                 double sum = 0.0f;
                 while (enumerator.MoveNext())
@@ -66,7 +67,8 @@ namespace System.Linq.Parallel
             QueryOperatorEnumerator<float?, TKey> source,
             object? sharedData,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return new NullableFloatSumAggregationOperatorEnumerator<TKey>(
                 source,
                 index,

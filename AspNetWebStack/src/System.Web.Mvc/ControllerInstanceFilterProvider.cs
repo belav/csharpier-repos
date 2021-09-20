@@ -10,7 +10,8 @@ namespace System.Web.Mvc
         public IEnumerable<Filter> GetFilters(
             ControllerContext controllerContext,
             ActionDescriptor actionDescriptor
-        ) {
+        )
+        {
             if (controllerContext.Controller != null)
             {
                 // Use FilterScope.First and Order of Int32.MinValue to ensure controller instance methods always run first

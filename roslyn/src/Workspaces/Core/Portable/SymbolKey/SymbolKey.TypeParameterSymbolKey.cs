@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis
             public static SymbolKeyResolution Resolve(
                 SymbolKeyReader reader,
                 out string? failureReason
-            ) {
+            )
+            {
                 var isCref = reader.ReadBoolean();
 
                 if (isCref)

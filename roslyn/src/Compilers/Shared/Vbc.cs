@@ -18,21 +18,23 @@ namespace Microsoft.CodeAnalysis.VisualBasic.CommandLine
             BuildPaths buildPaths,
             string[] args,
             IAnalyzerAssemblyLoader analyzerLoader
-        ) : base(
-            VisualBasicCommandLineParser.Default,
-            responseFile,
-            args,
-            buildPaths,
-            Environment.GetEnvironmentVariable("LIB"),
-            analyzerLoader
-        ) { }
+        )
+            : base(
+                VisualBasicCommandLineParser.Default,
+                responseFile,
+                args,
+                buildPaths,
+                Environment.GetEnvironmentVariable("LIB"),
+                analyzerLoader
+            ) { }
 
         internal static int Run(
             string[] args,
             BuildPaths buildPaths,
             TextWriter textWriter,
             IAnalyzerAssemblyLoader analyzerLoader
-        ) {
+        )
+        {
             FatalError.Handler = FailFast.OnFatalException;
 
             var responseFile = Path.Combine(

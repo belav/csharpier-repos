@@ -384,7 +384,8 @@ internal class Command
             string middleAccessibility,
             string accessibility,
             string generatedAccessibility
-        ) {
+        )
+        {
             await TestInRegularAndScriptAsync(
                 $@"public class A
 {{

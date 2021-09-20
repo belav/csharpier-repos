@@ -195,7 +195,8 @@ namespace System.Runtime.Versioning
                 if (
                     separatorIndex == -1
                     || separatorIndex != component.LastIndexOf(KeyValueSeparator)
-                ) {
+                )
+                {
                     throw new ArgumentException(
                         SR.Argument_FrameworkNameInvalid,
                         nameof(frameworkName)

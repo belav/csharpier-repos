@@ -70,7 +70,8 @@ namespace System.Linq.Parallel
                     ParallelMergeOptions.FullyBuffered,
                     true
                 )
-            ) {
+            )
+            {
                 // Any value of true means the element was found. We needn't consult all partitions
                 while (enumerator.MoveNext())
                 {
@@ -100,7 +101,8 @@ namespace System.Linq.Parallel
             IPartitionedStreamRecipient<bool> recipient,
             bool preferStriping,
             QuerySettings settings
-        ) {
+        )
+        {
             int partitionCount = inputStream.PartitionCount;
             PartitionedStream<bool, int> outputStream = new PartitionedStream<bool, int>(
                 partitionCount,
@@ -177,7 +179,8 @@ namespace System.Linq.Parallel
                 int partitionIndex,
                 Shared<bool> resultFoundFlag,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Debug.Assert(source != null);
                 Debug.Assert(comparer != null);
                 Debug.Assert(resultFoundFlag != null);

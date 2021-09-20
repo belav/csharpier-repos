@@ -48,7 +48,8 @@ namespace Microsoft.Extensions.Localization.Tests
         protected override ResourceManagerStringLocalizer CreateResourceManagerStringLocalizer(
             Assembly assembly,
             string baseName
-        ) {
+        )
+        {
             BaseName = baseName;
             Assembly = assembly;
 

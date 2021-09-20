@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             Expression<Func<TModel, TResult>> expression,
             ViewDataDictionary<TModel> viewData,
             IModelMetadataProvider metadataProvider
-        ) {
+        )
+        {
             if (expression == null)
             {
                 throw new ArgumentNullException(nameof(expression));
@@ -58,7 +59,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                         string.Equals(propertyName, "Model", StringComparison.Ordinal)
                         && memberExpression.Type == typeof(TModel)
                         && memberExpression.Expression.NodeType == ExpressionType.Constant
-                    ) {
+                    )
+                    {
                         // Special case the Model property in RazorPage<TModel>. (m => Model) should behave identically
                         // to (m => m). But do the more complicated thing for (m => m.Model) since that is a slightly
                         // different beast.)
@@ -151,7 +153,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string expression,
             ViewDataDictionary viewData,
             IModelMetadataProvider metadataProvider
-        ) {
+        )
+        {
             if (viewData == null)
             {
                 throw new ArgumentNullException(nameof(viewData));
@@ -174,7 +177,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                     viewDataInfo.Container == viewData
                     && viewDataInfo.Value == viewData.Model
                     && string.IsNullOrEmpty(expression)
-                ) {
+                )
+                {
                     // Nothing for empty expression in ViewData and ViewDataEvaluator just returned the model. Handle
                     // using FromModel() for its object special case.
                     return FromModel(viewData, metadataProvider);
@@ -229,7 +233,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         private static ModelExplorer FromModel(
             ViewDataDictionary viewData,
             IModelMetadataProvider metadataProvider
-        ) {
+        )
+        {
             if (viewData == null)
             {
                 throw new ArgumentNullException(nameof(viewData));

@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.Debugging
             ref int offset,
             out byte version,
             out byte count
-        ) {
+        )
+        {
             version = bytes[offset + 0];
             count = bytes[offset + 1];
             offset += CustomDebugInfoConstants.GlobalHeaderSize;
@@ -49,7 +50,8 @@ namespace Microsoft.CodeAnalysis.Debugging
             out CustomDebugInfoKind kind,
             out int size,
             out int alignmentSize
-        ) {
+        )
+        {
             version = bytes[offset + 0];
             kind = (CustomDebugInfoKind)bytes[offset + 1];
             alignmentSize = bytes[offset + 3];
@@ -64,7 +66,8 @@ namespace Microsoft.CodeAnalysis.Debugging
         public static ImmutableArray<byte> TryGetCustomDebugInfoRecord(
             byte[] customDebugInfo,
             CustomDebugInfoKind recordKind
-        ) {
+        )
+        {
             foreach (var record in GetCustomDebugInfoRecords(customDebugInfo))
             {
                 if (record.Kind == recordKind)
@@ -82,7 +85,8 @@ namespace Microsoft.CodeAnalysis.Debugging
         /// <exception cref="InvalidOperationException"></exception>
         public static IEnumerable<CustomDebugInfoRecord> GetCustomDebugInfoRecords(
             byte[] customDebugInfo
-        ) {
+        )
+        {
             if (customDebugInfo.Length < CustomDebugInfoConstants.GlobalHeaderSize)
             {
                 throw new InvalidOperationException("Invalid header.");
@@ -128,7 +132,8 @@ namespace Microsoft.CodeAnalysis.Debugging
                     offset > customDebugInfo.Length - bodySize
                     || alignmentSize > 3
                     || alignmentSize > bodySize
-                ) {
+                )
+                {
                     throw new InvalidOperationException("Invalid header.");
                 }
 
@@ -199,7 +204,8 @@ namespace Microsoft.CodeAnalysis.Debugging
         /// </remarks>
         public static ImmutableArray<StateMachineHoistedLocalScope> DecodeStateMachineHoistedLocalScopesRecord(
             ImmutableArray<byte> bytes
-        ) {
+        )
+        {
             var offset = 0;
 
             var bucketCount = ReadInt32(bytes, ref offset);
@@ -264,7 +270,8 @@ namespace Microsoft.CodeAnalysis.Debugging
         /// <exception cref="InvalidOperationException">Bad data.</exception>
         public static ImmutableArray<DynamicLocalInfo> DecodeDynamicLocalsRecord(
             ImmutableArray<byte> bytes
-        ) {
+        )
+        {
             const int FlagBytesCount = 64;
 
             var flagsBuilder = ArrayBuilder<bool>.GetInstance(FlagBytesCount);
@@ -326,7 +333,8 @@ namespace Microsoft.CodeAnalysis.Debugging
         /// </summary>
         public static ImmutableArray<TupleElementNamesInfo> DecodeTupleElementNamesRecord(
             ImmutableArray<byte> bytes
-        ) {
+        )
+        {
             var offset = 0;
             var n = ReadInt32(bytes, ref offset);
             var builder = ArrayBuilder<TupleElementNamesInfo>.GetInstance(n);
@@ -341,7 +349,8 @@ namespace Microsoft.CodeAnalysis.Debugging
         private static TupleElementNamesInfo DecodeTupleElementNamesInfo(
             ImmutableArray<byte> bytes,
             ref int offset
-        ) {
+        )
+        {
             var n = ReadInt32(bytes, ref offset);
             var builder = ArrayBuilder<string>.GetInstance(n);
             for (var i = 0; i < n; i++)
@@ -371,7 +380,8 @@ namespace Microsoft.CodeAnalysis.Debugging
             ref int offset,
             int size,
             out ImmutableArray<byte> body
-        ) {
+        )
+        {
             var bodySize = size - CustomDebugInfoConstants.RecordHeaderSize;
             body = ImmutableArray.Create(bytes, offset, bodySize);
             offset += bodySize;
@@ -398,7 +408,8 @@ namespace Microsoft.CodeAnalysis.Debugging
             Func<int, TArg, byte[]> getMethodCustomDebugInfo,
             Func<int, TArg, ImmutableArray<string>> getMethodImportStrings,
             out ImmutableArray<string> externAliasStrings
-        ) {
+        )
+        {
             externAliasStrings = default;
 
             ImmutableArray<short> groupSizes = default;
@@ -581,7 +592,8 @@ namespace Microsoft.CodeAnalysis.Debugging
             int methodToken,
             TArg arg,
             Func<int, TArg, ImmutableArray<string>> getMethodImportStrings
-        ) {
+        )
+        {
             var importStrings = getMethodImportStrings(methodToken, arg);
             Debug.Assert(!importStrings.IsDefault);
 
@@ -606,7 +618,8 @@ namespace Microsoft.CodeAnalysis.Debugging
                             CultureInfo.InvariantCulture,
                             out var tempMethodToken
                         )
-                    ) {
+                    )
+                    {
                         importStrings = getMethodImportStrings(tempMethodToken, arg);
                         Debug.Assert(!importStrings.IsDefault);
                     }
@@ -694,7 +707,8 @@ namespace Microsoft.CodeAnalysis.Debugging
             out string externAlias,
             out string target,
             out ImportTargetKind kind
-        ) {
+        )
+        {
             alias = null;
             externAlias = null;
             target = null;
@@ -800,7 +814,8 @@ namespace Microsoft.CodeAnalysis.Debugging
             out string target,
             out ImportTargetKind kind,
             out VBImportScopeKind scope
-        ) {
+        )
+        {
             alias = null;
             target = null;
             kind = default;
@@ -952,7 +967,8 @@ namespace Microsoft.CodeAnalysis.Debugging
             char separator,
             out string before,
             out string after
-        ) {
+        )
+        {
             var separatorPos = input.IndexOf(separator, offset);
 
             // Allow zero-length before for the global namespace (empty string).

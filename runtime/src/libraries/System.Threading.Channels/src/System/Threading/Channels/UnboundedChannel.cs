@@ -384,7 +384,8 @@ namespace System.Threading.Channels
             if (
                 (!_blockedReaders.IsEmpty || _waitingReadersTail != null)
                 && _runContinuationsAsynchronously
-            ) {
+            )
+            {
                 Debug.Assert(
                     _items.IsEmpty,
                     "There are blocked/waiting readers, so there shouldn't be any data available."

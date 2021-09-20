@@ -450,7 +450,8 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CanPerformEqualityOnNullableWithoutOperatorsToConstantNull(
             bool useInterpreter
-        ) {
+        )
+        {
             var nullConst = Expression.Constant(null, typeof(UselessValue?));
             var uvConst = Expression.Constant(new UselessValue(), typeof(UselessValue?));
             var exp = Expression.Lambda<Func<bool>>(Expression.Equal(nullConst, uvConst));
@@ -465,7 +466,8 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CanPerformInequalityOnNullableWithoutOperatorsToConstantNull(
             bool useInterpreter
-        ) {
+        )
+        {
             var nullConst = Expression.Constant(null, typeof(UselessValue?));
             var uvConst = Expression.Constant(new UselessValue(), typeof(UselessValue?));
             var exp = Expression.Lambda<Func<bool>>(Expression.NotEqual(nullConst, uvConst));

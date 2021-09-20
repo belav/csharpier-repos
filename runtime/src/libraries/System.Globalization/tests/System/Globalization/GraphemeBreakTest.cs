@@ -58,7 +58,8 @@ namespace System.Globalization.Tests
         private static void RunStringInfoTestCase(
             string input,
             Range[] expectedGraphemeClusterRanges
-        ) {
+        )
+        {
             if (expectedGraphemeClusterRanges.Length == 0)
             {
                 // Handle empty inputs

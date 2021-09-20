@@ -130,7 +130,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
         [InlineData(500)]
         public void Matches_ReturnsTrue_IfDeclaredMetadataIsDefault_AndActualMetadataIsErrorStatusCode(
             int actualStatusCode
-        ) {
+        )
+        {
             // Arrange
             var declaredMetadata = DeclaredApiResponseMetadata.ForProducesDefaultResponse(
                 AttributeData,

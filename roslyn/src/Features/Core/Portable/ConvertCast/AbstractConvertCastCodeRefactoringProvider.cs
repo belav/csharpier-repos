@@ -69,7 +69,8 @@ namespace Microsoft.CodeAnalysis.ConvertCast
             Document document,
             TFromExpression from,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
             var newRoot = root.ReplaceNode(from, ConvertExpression(from));

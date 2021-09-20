@@ -48,7 +48,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
             byte[] pipeMessage,
             EndPoint endPoint,
             LibuvThread thread
-        ) {
+        )
+        {
             _pipeName = pipeName;
             _pipeMessage = pipeMessage;
 
@@ -175,7 +176,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
                     (uint)Marshal.SizeOf<FILE_COMPLETION_INFORMATION>(),
                     FileReplaceCompletionInformation
                 ) == STATUS_INVALID_INFO_CLASS
-            ) {
+            )
+            {
                 // Replacing IOCP information is only supported on Windows 8.1 or newer
                 _tryDetachFromIOCP = false;
             }
@@ -252,7 +254,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
             public LibuvFunctions.uv_buf_t AllocCallback(
                 UvStreamHandle dispatchPipe,
                 int suggestedSize
-            ) {
+            )
+            {
                 return dispatchPipe.Libuv.buf_init(
                     _bufPtr + _bytesRead,
                     _bufferLength - _bytesRead

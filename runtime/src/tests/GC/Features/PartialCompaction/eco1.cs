@@ -643,7 +643,8 @@ namespace PartialCompactionTest
                 int maxSpace,
                 int minObject,
                 int maxObject
-            ) {
+            )
+            {
                 this.pinnedPercentage = pinnedPercentage;
                 minSpaceSize = minSpace;
                 maxSpaceSize = maxSpace;
@@ -774,7 +775,8 @@ namespace PartialCompactionTest
                 bool arrayrefs,
                 int arrayRefCount,
                 int depth
-            ) {
+            )
+            {
                 this.depth = depth;
                 //we want m_data to have an approximate size of dataSize
                 m_dataSize = datasize;

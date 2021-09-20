@@ -36,7 +36,8 @@ namespace Microsoft.AspNetCore.NodeServices.Npm
             string pkgManagerCommand,
             DiagnosticSource diagnosticSource,
             CancellationToken applicationStoppingToken
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(workingDirectory))
             {
                 throw new ArgumentException("Cannot be null or empty.", nameof(workingDirectory));

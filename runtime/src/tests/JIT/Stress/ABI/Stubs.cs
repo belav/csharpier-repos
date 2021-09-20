@@ -67,7 +67,8 @@ namespace ABIStress
             GenericShape genericShape,
             GenericTypeParameterBuilder[] typeParamArr,
             string scenario
-        ) {
+        )
+        {
             if (genericShape == GenericShape.NotGeneric)
                 return;
             g.Emit(OpCodes.Ldtoken, typeParamArr[0]);
@@ -137,7 +138,8 @@ namespace ABIStress
             bool onValueType,
             GenericShape typeGenericShape,
             GenericShape methodGenericShape
-        ) {
+        )
+        {
             string callerNameSeed = Config.InstantiatingStubPrefix + "Caller" + callerIndex; // Use a consistent seed value here so that the various various of unboxing/instantiating stubs are generated with the same arg shape
             string callerName =
                 callerNameSeed

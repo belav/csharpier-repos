@@ -29,7 +29,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         internal static AggregateSymbol InitializePredefinedType(
             AggregateSymbol sym,
             PredefinedType pt
-        ) {
+        )
+        {
             sym.SetPredefined(true);
             sym.SetPredefType(pt);
             sym.SetSkipUDOps(
@@ -128,7 +129,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 Type associatedSystemType,
                 string name,
                 FUNDTYPE fundType
-            ) {
+            )
+            {
 #if DEBUG
                 Type = type;
 #endif
@@ -137,11 +139,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 AssociatedSystemType = associatedSystemType;
             }
 
-            internal PredefinedTypeInfo(
-                PredefinedType type,
-                Type associatedSystemType,
-                string name
-            ) : this(type, associatedSystemType, name, FUNDTYPE.FT_REF) { }
+            internal PredefinedTypeInfo(PredefinedType type, Type associatedSystemType, string name)
+                : this(type, associatedSystemType, name, FUNDTYPE.FT_REF) { }
         }
 
         private static readonly PredefinedTypeInfo[] s_types =

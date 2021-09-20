@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.SyncNamespace
             Document document,
             TextSpan span,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!span.IsEmpty)
             {
                 return null;
@@ -80,7 +81,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.SyncNamespace
                 if (
                     firstMemberDeclarationName != default
                     && firstMemberDeclarationName.Span.IntersectsWith(position)
-                ) {
+                )
+                {
                     return compilationUnit;
                 }
             }

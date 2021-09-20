@@ -28,7 +28,8 @@ namespace System.DirectoryServices.Protocols.Tests
             string distinguishedName,
             string newParentDistinguishedName,
             string newName
-        ) {
+        )
+        {
             var request = new ModifyDNRequest(
                 distinguishedName,
                 newParentDistinguishedName,

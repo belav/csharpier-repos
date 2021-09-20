@@ -38,7 +38,8 @@ internal static partial class Interop
             string pszProperty,
             ref byte result,
             CngPropertyOptions options = CngPropertyOptions.None
-        ) {
+        )
+        {
             fixed (byte* pResult = &result)
             {
                 ErrorCode errorCode = Interop.NCrypt.NCryptGetProperty(
@@ -63,7 +64,8 @@ internal static partial class Interop
             SafeNCryptHandle hObject,
             string pszProperty,
             ref int result
-        ) {
+        )
+        {
             fixed (int* pResult = &result)
             {
 #if NETSTANDARD || NETCOREAPP

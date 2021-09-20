@@ -67,7 +67,8 @@ namespace System.Xml.Tests
         [InlineData(false)]
         public void UsingCustomXmlResolverWith_SchemaLocation_NoNamespaceSchemaLocation(
             bool schemaLocation
-        ) {
+        )
+        {
             CXmlTestResolver res = new CXmlTestResolver();
             CResolverHolder holder = new CResolverHolder();
 
@@ -512,7 +513,8 @@ namespace System.Xml.Tests
         [InlineData("navigator")]
         public void Default_Null_ArbitraryObject_XmlReader_XmlDocument_XPathNavigator_ProvidedAsValidationEventSender(
             string param
-        ) {
+        )
+        {
             XmlSchemaInfo info = new XmlSchemaInfo();
             XmlSchemaValidator val = CreateValidator(CreateSchemaSetFromXml("<root>foo</root>"));
             CValidationEventHolder holder = new CValidationEventHolder();

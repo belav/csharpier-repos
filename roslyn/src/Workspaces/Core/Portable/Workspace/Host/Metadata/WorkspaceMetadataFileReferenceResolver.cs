@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Host
         public WorkspaceMetadataFileReferenceResolver(
             IMetadataService metadataService,
             RelativePathResolver pathResolver
-        ) {
+        )
+        {
             Debug.Assert(metadataService != null);
             Debug.Assert(pathResolver != null);
 
@@ -33,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Host
             string reference,
             string baseFilePath,
             MetadataReferenceProperties properties
-        ) {
+        )
+        {
             var path = PathResolver.ResolvePath(reference, baseFilePath);
             if (path == null)
             {

@@ -38,14 +38,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                     out ISignatureHelpSession session
                 )
                 && session.SelectedSignature is Signature
-            ) {
+            )
+            {
                 var signature = (Signature)session.SelectedSignature;
                 if (
                     !_subjectBuffer.Properties.TryGetProperty(
                         "UsePrettyPrintedContent",
                         out bool usePrettyPrintedContent
                     )
-                ) {
+                )
+                {
                     usePrettyPrintedContent = false;
                 }
 

@@ -88,7 +88,8 @@ namespace System.Security.Principal
                     + 1 /* '\' */
                     + MaximumAccountNameLength
                 )
-            ) {
+            )
+            {
                 throw new ArgumentException(SR.IdentityReference_AccountNameTooLong, nameof(name));
             }
 
@@ -168,7 +169,8 @@ namespace System.Security.Principal
             IdentityReferenceCollection sourceAccounts,
             Type targetType,
             bool forceSuccess
-        ) {
+        )
+        {
             IdentityReferenceCollection result = Translate(
                 sourceAccounts,
                 targetType,
@@ -200,7 +202,8 @@ namespace System.Security.Principal
             IdentityReferenceCollection sourceAccounts,
             Type targetType,
             out bool someFailed
-        ) {
+        )
+        {
             if (sourceAccounts == null)
             {
                 throw new ArgumentNullException(nameof(sourceAccounts));
@@ -255,7 +258,8 @@ namespace System.Security.Principal
         private static IdentityReferenceCollection TranslateToSids(
             IdentityReferenceCollection sourceAccounts,
             out bool someFailed
-        ) {
+        )
+        {
             if (sourceAccounts == null)
             {
                 throw new ArgumentNullException(nameof(sourceAccounts));
@@ -335,7 +339,8 @@ namespace System.Security.Principal
                 if (
                     ReturnCode == Interop.StatusOptions.STATUS_NO_MEMORY
                     || ReturnCode == Interop.StatusOptions.STATUS_INSUFFICIENT_RESOURCES
-                ) {
+                )
+                {
                     throw new OutOfMemoryException();
                 }
                 else if (ReturnCode == Interop.StatusOptions.STATUS_ACCESS_DENIED)
@@ -345,7 +350,8 @@ namespace System.Security.Principal
                 else if (
                     ReturnCode == Interop.StatusOptions.STATUS_NONE_MAPPED
                     || ReturnCode == Interop.StatusOptions.STATUS_SOME_NOT_MAPPED
-                ) {
+                )
+                {
                     someFailed = true;
                 }
                 else if (ReturnCode != 0)
@@ -355,7 +361,8 @@ namespace System.Security.Principal
                     if (
                         unchecked((int)win32ErrorCode)
                         != Interop.Errors.ERROR_TRUSTED_RELATIONSHIP_FAILURE
-                    ) {
+                    )
+                    {
                         Debug.Fail(
                             $"Interop.LsaLookupNames(2) returned unrecognized error {win32ErrorCode}"
                         );

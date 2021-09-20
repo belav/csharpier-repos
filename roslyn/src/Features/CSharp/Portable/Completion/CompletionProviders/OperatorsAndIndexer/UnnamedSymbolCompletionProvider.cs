@@ -81,7 +81,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
         private static (SyntaxToken dotLikeToken, int expressionStart) GetDotAndExpressionStart(
             SyntaxNode root,
             int position
-        ) {
+        )
+        {
             var tokenOnLeft = root.FindTokenOnLeftOfPosition(position, includeSkipped: true);
             var dotToken = tokenOnLeft.GetPreviousTokenIfTouchingWord(position);
 
@@ -163,7 +164,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             SemanticModel semanticModel,
             ImmutableArray<ISymbol> unnamedSymbols,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Add one 'this[]' entry for all the indexers this type may have.
             AddIndexers(context, unnamedSymbols.WhereAsArray(s => s.IsIndexer()));
 
@@ -189,7 +191,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             char? commitKey,
             bool disallowAddingImports,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var kind = item.Properties[KindName];
             return kind switch
             {
@@ -204,7 +207,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             Document document,
             CompletionItem item,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var kind = item.Properties[KindName];
             return kind switch
             {
@@ -243,7 +247,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             bool keepQuestion,
             int positionOffset,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
             var position = SymbolCompletionItem.GetContextPosition(item);

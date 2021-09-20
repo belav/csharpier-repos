@@ -26,7 +26,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
             object parent,
             FileCodeModel fileCodeModel,
             SyntaxNodeKey nodeKey
-        ) {
+        )
+        {
             var collection = new TypeCollection(state, parent, fileCodeModel, nodeKey);
             return (EnvDTE.CodeElements)ComAggregate.CreateAggregatedObject(collection);
         }

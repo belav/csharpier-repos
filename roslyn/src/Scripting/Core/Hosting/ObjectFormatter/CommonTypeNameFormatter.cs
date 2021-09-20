@@ -65,7 +65,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
         private static string FormatNonGenericTypeName(
             TypeInfo typeInfo,
             CommonTypeNameFormatterOptions options
-        ) {
+        )
+        {
             if (options.ShowNamespaces)
             {
                 return typeInfo.FullName.Replace('+', '.');
@@ -94,7 +95,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
         public virtual string FormatTypeArguments(
             Type[] typeArguments,
             CommonTypeNameFormatterOptions options
-        ) {
+        )
+        {
             if (typeArguments == null)
             {
                 throw new ArgumentNullException(nameof(typeArguments));
@@ -137,7 +139,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             Type arrayType,
             Array arrayOpt,
             CommonTypeNameFormatterOptions options
-        ) {
+        )
+        {
             if (arrayType == null)
             {
                 throw new ArgumentNullException(nameof(arrayType));
@@ -240,7 +243,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
         private string FormatGenericTypeName(
             TypeInfo typeInfo,
             CommonTypeNameFormatterOptions options
-        ) {
+        )
+        {
             var pooledBuilder = PooledStringBuilder.GetInstance();
             var builder = pooledBuilder.Builder;
 
@@ -307,7 +311,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             Type[] genericArguments,
             ref int genericArgIndex,
             CommonTypeNameFormatterOptions options
-        ) {
+        )
+        {
             // generic arguments of all the outer types and the current type;
             int currentArgCount =
                 (

@@ -69,7 +69,8 @@ namespace System.Net.Tests
                         if (
                             listenerException.ErrorCode == ERROR_ACCESS_DENIED
                             && (hostname == "*" || hostname == "+")
-                        ) {
+                        )
+                        {
                             throw new InvalidOperationException(
                                 $"Access denied for host {hostname}"
                             );
@@ -194,7 +195,8 @@ namespace System.Net.Tests
             string text,
             IEnumerable<string> headers,
             bool headerOnly
-        ) {
+        )
+        {
             headers = headers ?? Enumerable.Empty<string>();
 
             Uri listeningUri = new Uri(ListeningUrl);
@@ -212,7 +214,8 @@ namespace System.Net.Tests
             if (
                 text != null
                 && !headers.Any(header => header.ToLower().StartsWith("content-length:"))
-            ) {
+            )
+            {
                 content += $"Content-Length: {text.Length}\r\n";
             }
             foreach (string header in headers)

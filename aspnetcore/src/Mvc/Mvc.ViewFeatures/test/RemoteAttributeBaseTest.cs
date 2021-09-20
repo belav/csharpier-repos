@@ -104,7 +104,8 @@ namespace Microsoft.AspNetCore.Mvc
         [MemberData(nameof(NullOrEmptyNames))]
         public void FormatAdditionalFieldsForClientValidation_WithInvalidPropertyName_Throws(
             string property
-        ) {
+        )
+        {
             // Arrange
             var attribute = new TestableRemoteAttributeBase();
             var expectedMessage = "Value cannot be null or empty.";
@@ -138,7 +139,8 @@ namespace Microsoft.AspNetCore.Mvc
         [MemberData(nameof(NullOrEmptyNames))]
         public void FormatPropertyForClientValidation_WithInvalidPropertyName_Throws(
             string property
-        ) {
+        )
+        {
             // Arrange
             var expected = "Value cannot be null or empty.";
 
@@ -588,7 +590,8 @@ namespace Microsoft.AspNetCore.Mvc
         private static ClientModelValidationContext GetValidationContext(
             IStringLocalizerFactory localizerFactory = null,
             IModelMetadataProvider metadataProvider = null
-        ) {
+        )
+        {
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddOptions();
             if (localizerFactory != null)

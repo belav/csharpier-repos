@@ -80,7 +80,8 @@ namespace System.Text.Json.Serialization.Metadata
             Func<T>? createObjectFunc,
             Func<JsonSerializerContext, JsonPropertyInfo[]> propInitFunc,
             JsonNumberHandling numberHandling
-        ) {
+        )
+        {
             Options = options;
 
 #pragma warning disable CS8714

@@ -25,7 +25,8 @@ namespace System.Threading
             string? name,
             out bool createdNew,
             MutexSecurity? mutexSecurity
-        ) {
+        )
+        {
             if (mutexSecurity == null)
             {
                 return new Mutex(initiallyOwned, name, out createdNew);
@@ -139,7 +140,8 @@ namespace System.Threading
             string name,
             MutexRights rights,
             out Mutex? result
-        ) {
+        )
+        {
             if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));

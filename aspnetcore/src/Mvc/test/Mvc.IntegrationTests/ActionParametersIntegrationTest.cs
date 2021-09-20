@@ -820,7 +820,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             string input,
             bool isValid,
             string displayName = null
-        ) {
+        )
+        {
             // Arrange
             var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
             var parameterInfo = BindingAndValidationController.GetParameterInfo(paramName);

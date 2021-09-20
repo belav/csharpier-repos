@@ -29,7 +29,8 @@ namespace Microsoft.Extensions.Logging.AzureAppServices.Test
         protected override Task IntervalAsync(
             TimeSpan interval,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return IntervalControl.IntervalAsync();
         }
     }

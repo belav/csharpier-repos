@@ -211,7 +211,8 @@ namespace Newtonsoft.Json
                                     _currentScope.CurrentPropertyName,
                                     out JsonSchemaModel propertySchema
                                 )
-                            ) {
+                            )
+                            {
                                 schemas.Add(propertySchema);
                             }
                             if (schema.PatternProperties != null)
@@ -221,13 +222,15 @@ namespace Newtonsoft.Json
                                         string,
                                         JsonSchemaModel
                                     > patternProperty in schema.PatternProperties
-                                ) {
+                                )
+                                {
                                     if (
                                         Regex.IsMatch(
                                             _currentScope.CurrentPropertyName,
                                             patternProperty.Key
                                         )
-                                    ) {
+                                    )
+                                    {
                                         schemas.Add(patternProperty.Value);
                                     }
                                 }
@@ -237,7 +240,8 @@ namespace Newtonsoft.Json
                                 schemas.Count == 0
                                 && schema.AllowAdditionalProperties
                                 && schema.AdditionalProperties != null
-                            ) {
+                            )
+                            {
                                 schemas.Add(schema.AdditionalProperties);
                             }
                         }
@@ -395,7 +399,8 @@ namespace Newtonsoft.Json
                         schema.Disallow,
                         currentNodeType.GetValueOrDefault()
                     )
-                ) {
+                )
+                {
                     RaiseError(
                         "Type {0} is disallowed.".FormatWith(
                             CultureInfo.InvariantCulture,
@@ -701,7 +706,8 @@ namespace Newtonsoft.Json
                     if (
                         schemaScope.CurrentItemWriter.Top == 0
                         && _reader.TokenType != JsonToken.PropertyName
-                    ) {
+                    )
+                    {
                         JToken finishedItem = schemaScope.CurrentItemWriter.Token;
 
                         // start next item with new writer
@@ -714,7 +720,8 @@ namespace Newtonsoft.Json
                                     finishedItem,
                                     JToken.EqualityComparer
                                 )
-                            ) {
+                            )
+                            {
                                 RaiseError(
                                     "Non-unique array item at index {0}.".FormatWith(
                                         CultureInfo.InvariantCulture,
@@ -737,7 +744,8 @@ namespace Newtonsoft.Json
                                             finishedItem,
                                             JToken.EqualityComparer
                                         )
-                                    ) {
+                                    )
+                                    {
                                         StringWriter sw = new StringWriter(
                                             CultureInfo.InvariantCulture
                                         );
@@ -945,7 +953,8 @@ namespace Newtonsoft.Json
                 if (
                     schema.ExclusiveMaximum
                     && JValue.Compare(JTokenType.Integer, value, schema.Maximum) == 0
-                ) {
+                )
+                {
                     RaiseError(
                         "Integer {0} equals maximum value of {1} and exclusive maximum is true.".FormatWith(
                             CultureInfo.InvariantCulture,
@@ -973,7 +982,8 @@ namespace Newtonsoft.Json
                 if (
                     schema.ExclusiveMinimum
                     && JValue.Compare(JTokenType.Integer, value, schema.Minimum) == 0
-                ) {
+                )
+                {
                     RaiseError(
                         "Integer {0} equals minimum value of {1} and exclusive minimum is true.".FormatWith(
                             CultureInfo.InvariantCulture,
@@ -1046,7 +1056,8 @@ namespace Newtonsoft.Json
                             currentSchema.Items == null
                             || _currentScope.ArrayItemCount - 1 >= currentSchema.Items.Count
                         )
-                    ) {
+                    )
+                    {
                         RaiseError(
                             "Index {0} has not been defined and the schema does not allow additional items.".FormatWith(
                                 CultureInfo.InvariantCulture,

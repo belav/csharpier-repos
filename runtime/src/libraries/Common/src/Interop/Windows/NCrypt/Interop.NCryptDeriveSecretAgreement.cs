@@ -34,7 +34,8 @@ internal static partial class Interop
         internal static SafeNCryptSecretHandle DeriveSecretAgreement(
             SafeNCryptKeyHandle privateKey,
             SafeNCryptKeyHandle otherPartyPublicKey
-        ) {
+        )
+        {
             ErrorCode error = NCryptSecretAgreement(
                 privateKey,
                 otherPartyPublicKey,

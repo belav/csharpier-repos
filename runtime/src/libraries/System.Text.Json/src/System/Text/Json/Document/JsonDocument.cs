@@ -38,7 +38,8 @@ namespace System.Text.Json
             MetadataDb parsedData,
             byte[]? extraRentedBytes,
             bool isDisposable = true
-        ) {
+        )
+        {
             Debug.Assert(!utf8Json.IsEmpty);
 
             _utf8Json = utf8Json;
@@ -346,7 +347,8 @@ namespace System.Text.Json
             ReadOnlySpan<byte> otherUtf8Text,
             bool isPropertyName,
             bool shouldUnescape
-        ) {
+        )
+        {
             CheckNotDisposed();
 
             int matchIndex = isPropertyName ? index - DbRow.Size : index;
@@ -364,7 +366,8 @@ namespace System.Text.Json
             if (
                 otherUtf8Text.Length > segment.Length
                 || (!shouldUnescape && otherUtf8Text.Length != segment.Length)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -373,7 +376,8 @@ namespace System.Text.Json
                 if (
                     otherUtf8Text.Length
                     < segment.Length / JsonConstants.MaxExpansionFactorWhileEscaping
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -437,7 +441,8 @@ namespace System.Text.Json
             if (
                 Utf8Parser.TryParse(segment, out sbyte tmp, out int consumed)
                 && consumed == segment.Length
-            ) {
+            )
+            {
                 value = tmp;
                 return true;
             }
@@ -460,7 +465,8 @@ namespace System.Text.Json
             if (
                 Utf8Parser.TryParse(segment, out byte tmp, out int consumed)
                 && consumed == segment.Length
-            ) {
+            )
+            {
                 value = tmp;
                 return true;
             }
@@ -483,7 +489,8 @@ namespace System.Text.Json
             if (
                 Utf8Parser.TryParse(segment, out short tmp, out int consumed)
                 && consumed == segment.Length
-            ) {
+            )
+            {
                 value = tmp;
                 return true;
             }
@@ -506,7 +513,8 @@ namespace System.Text.Json
             if (
                 Utf8Parser.TryParse(segment, out ushort tmp, out int consumed)
                 && consumed == segment.Length
-            ) {
+            )
+            {
                 value = tmp;
                 return true;
             }
@@ -529,7 +537,8 @@ namespace System.Text.Json
             if (
                 Utf8Parser.TryParse(segment, out int tmp, out int consumed)
                 && consumed == segment.Length
-            ) {
+            )
+            {
                 value = tmp;
                 return true;
             }
@@ -552,7 +561,8 @@ namespace System.Text.Json
             if (
                 Utf8Parser.TryParse(segment, out uint tmp, out int consumed)
                 && consumed == segment.Length
-            ) {
+            )
+            {
                 value = tmp;
                 return true;
             }
@@ -575,7 +585,8 @@ namespace System.Text.Json
             if (
                 Utf8Parser.TryParse(segment, out long tmp, out int consumed)
                 && consumed == segment.Length
-            ) {
+            )
+            {
                 value = tmp;
                 return true;
             }
@@ -598,7 +609,8 @@ namespace System.Text.Json
             if (
                 Utf8Parser.TryParse(segment, out ulong tmp, out int consumed)
                 && consumed == segment.Length
-            ) {
+            )
+            {
                 value = tmp;
                 return true;
             }
@@ -621,7 +633,8 @@ namespace System.Text.Json
             if (
                 Utf8Parser.TryParse(segment, out double tmp, out int bytesConsumed)
                 && segment.Length == bytesConsumed
-            ) {
+            )
+            {
                 value = tmp;
                 return true;
             }
@@ -644,7 +657,8 @@ namespace System.Text.Json
             if (
                 Utf8Parser.TryParse(segment, out float tmp, out int bytesConsumed)
                 && segment.Length == bytesConsumed
-            ) {
+            )
+            {
                 value = tmp;
                 return true;
             }
@@ -667,7 +681,8 @@ namespace System.Text.Json
             if (
                 Utf8Parser.TryParse(segment, out decimal tmp, out int bytesConsumed)
                 && segment.Length == bytesConsumed
-            ) {
+            )
+            {
                 value = tmp;
                 return true;
             }
@@ -774,7 +789,8 @@ namespace System.Text.Json
             if (
                 segment.Length == JsonConstants.MaximumFormatGuidLength
                 && Utf8Parser.TryParse(segment, out Guid tmp, out _, 'D')
-            ) {
+            )
+            {
                 value = tmp;
                 return true;
             }
@@ -966,7 +982,8 @@ namespace System.Text.Json
             JsonReaderOptions readerOptions,
             ref MetadataDb database,
             ref StackRowStack stack
-        ) {
+        )
+        {
             bool inArray = false;
             int arrayItemsCount = 0;
             int numberOfRowsForMembers = 0;

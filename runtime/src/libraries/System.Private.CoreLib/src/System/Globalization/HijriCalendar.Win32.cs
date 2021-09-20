@@ -63,7 +63,8 @@ namespace System.Globalization
                         HijriAdvanceRegKeyEntry.Length,
                         StringComparison.OrdinalIgnoreCase
                     ) == 0
-                ) {
+                )
+                {
                     if (str!.Length == HijriAdvanceRegKeyEntry.Length)
                         hijriAdvance = -1;
                     else

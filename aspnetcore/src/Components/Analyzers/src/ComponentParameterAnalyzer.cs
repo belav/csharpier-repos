@@ -57,7 +57,8 @@ namespace Microsoft.AspNetCore.Components.Analyzers
                                 if (
                                     member is IPropertySymbol property
                                     && ComponentFacts.IsParameter(symbols, property)
-                                ) {
+                                )
+                                {
                                     // Annotated with [Parameter]. We ignore [CascadingParameter]'s because they don't interact with tooling and don't currently have any analyzer restrictions.
                                     properties.Add(property);
                                 }
@@ -98,7 +99,8 @@ namespace Microsoft.AspNetCore.Components.Analyzers
                                         else if (
                                             property.SetMethod?.DeclaredAccessibility
                                             != Accessibility.Public
-                                        ) {
+                                        )
+                                        {
                                             context.ReportDiagnostic(
                                                 Diagnostic.Create(
                                                     DiagnosticDescriptors.ComponentParameterSettersShouldBePublic,
@@ -115,7 +117,8 @@ namespace Microsoft.AspNetCore.Components.Analyzers
                                                 symbols,
                                                 property
                                             )
-                                        ) {
+                                        )
+                                        {
                                             captureUnmatchedValuesParameters.Add(property);
 
                                             // Check the type, we need to be able to assign a Dictionary<string, object>

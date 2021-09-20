@@ -92,7 +92,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ArrayBuilder<LocalSymbol> locals,
             SyntaxNode deconstructionStatement,
             Binder enclosingBinderOpt = null
-        ) {
+        )
+        {
             switch (declaration.Kind())
             {
                 case SyntaxKind.TupleExpression:
@@ -139,7 +140,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ArrayBuilder<LocalSymbol> locals,
             SyntaxNode deconstructionStatement,
             Binder enclosingBinderOpt
-        ) {
+        )
+        {
             switch (designation.Kind())
             {
                 case SyntaxKind.SingleVariableDesignation:
@@ -186,7 +188,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal override BoundStatement BindForEachParts(
             BindingDiagnosticBag diagnostics,
             Binder originalBinder
-        ) {
+        )
+        {
             BoundForEachStatement result = BindForEachPartsWorker(diagnostics, originalBinder);
             return result;
         }
@@ -197,7 +200,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal override BoundStatement BindForEachDeconstruction(
             BindingDiagnosticBag diagnostics,
             Binder originalBinder
-        ) {
+        )
+        {
             // Use the right binder to avoid seeing iteration variable
             BoundExpression collectionExpr = originalBinder.GetBinder(_syntax.Expression)
                 .BindRValueWithoutTargetType(_syntax.Expression, diagnostics);
@@ -238,7 +242,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private BoundForEachStatement BindForEachPartsWorker(
             BindingDiagnosticBag diagnostics,
             Binder originalBinder
-        ) {
+        )
+        {
             // Use the right binder to avoid seeing iteration variable
             BoundExpression collectionExpr = originalBinder.GetBinder(_syntax.Expression)
                 .BindRValueWithoutTargetType(_syntax.Expression, diagnostics);
@@ -279,7 +284,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (
                         getEnumeratorMethod.ParameterRefKinds is { IsDefault: false } refKinds
                         && refKinds[0] == RefKind.Ref
-                    ) {
+                    )
+                    {
                         Error(diagnostics, ErrorCode.ERR_RefLvalueExpected, collectionExpr.Syntax);
                         hasErrors = true;
                     }
@@ -304,7 +310,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     !hasErrors
                     && awaitInfo.GetResult?.ReturnType.SpecialType != SpecialType.System_Boolean
-                ) {
+                )
+                {
                     diagnostics.Add(
                         ErrorCode.ERR_BadGetAsyncEnumerator,
                         expr.Location,
@@ -377,7 +384,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                         if (
                             CheckRefLocalInAsyncOrIteratorMethod(local.IdentifierToken, diagnostics)
-                        ) {
+                        )
+                        {
                             hasErrors = true;
                         }
                     }
@@ -770,7 +778,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private bool GetAwaitDisposeAsyncInfo(
             ref ForEachEnumeratorInfo.Builder builder,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var awaitableType = builder.PatternDisposeInfo is null
                 ? this.GetWellKnownType(
                       WellKnownType.System_Threading_Tasks_ValueTask,
@@ -805,7 +814,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal TypeWithAnnotations InferCollectionElementType(
             BindingDiagnosticBag diagnostics,
             ExpressionSyntax collectionSyntax
-        ) {
+        )
+        {
             // Use the right binder to avoid seeing iteration variable
             BoundExpression collectionExpr = this.GetBinder(collectionSyntax)
                 .BindValue(collectionSyntax, diagnostics, BindValueKind.RValue);
@@ -825,7 +835,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ref BoundExpression collectionExpr,
             BindingDiagnosticBag diagnostics,
             out TypeWithAnnotations inferredType
-        ) {
+        )
+        {
             bool gotInfo = GetEnumeratorInfo(ref builder, ref collectionExpr, diagnostics);
 
             if (!gotInfo)
@@ -840,7 +851,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             else if (
                 collectionExpr.Type.SpecialType == SpecialType.System_String
                 && builder.CollectionType.SpecialType == SpecialType.System_Collections_IEnumerable
-            ) {
+            )
+            {
                 // Reproduce dev11 behavior: we're always going to lower a foreach loop over a string to a for loop
                 // over the string's Chars indexer.  Therefore, we should infer "char", regardless of what the spec
                 // indicates the element type is.  This actually matters in practice because the System.String in
@@ -860,7 +872,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private BoundExpression UnwrapCollectionExpressionIfNullable(
             BoundExpression collectionExpr,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             TypeSymbol collectionExprType = collectionExpr.Type;
 
             // If collectionExprType is a nullable type, then use the underlying type and take the value (i.e. .Value) of collectionExpr.
@@ -928,7 +941,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ref ForEachEnumeratorInfo.Builder builder,
             ref BoundExpression collectionExpr,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             bool isAsync = IsAsync;
             builder.IsAsync = isAsync;
 
@@ -1000,7 +1014,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ref BoundExpression collectionExpr,
             bool isAsync,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             TypeSymbol collectionExprType = collectionExpr.Type;
 
             if (collectionExprType is null) // There's no way to enumerate something without a type.
@@ -1037,7 +1052,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 collectionExprType.Kind == SymbolKind.ArrayType
                 || collectionExprType.Kind == SymbolKind.DynamicType
-            ) {
+            )
+            {
                 if (ReportConstantNullCollectionExpr(collectionExpr, diagnostics))
                 {
                     return EnumeratorResult.FailedAndReported;
@@ -1060,7 +1076,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     viaExtensionMethod: false,
                     diagnostics
                 )
-            ) {
+            )
+            {
                 collectionExpr = unwrappedCollectionExpr;
                 if (ReportConstantNullCollectionExpr(collectionExpr, diagnostics))
                 {
@@ -1110,7 +1127,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 )
                 is not EnumeratorResult.FailedNotReported
                     and var result
-            ) {
+            )
+            {
                 collectionExpr = unwrappedCollectionExpr;
                 return result;
             }
@@ -1139,7 +1157,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     viaExtensionMethod: true,
                     diagnostics
                 )
-            ) {
+            )
+            {
                 return createPatternBasedEnumeratorResult(
                     ref builder,
                     collectionExpr,
@@ -1157,7 +1176,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 bool isAsync,
                 bool viaExtensionMethod,
                 BindingDiagnosticBag diagnostics
-            ) {
+            )
+            {
                 Debug.Assert((object)builder.GetEnumeratorInfo != null);
 
                 Debug.Assert(
@@ -1200,7 +1220,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool isAsync,
             BindingDiagnosticBag diagnostics,
             TypeSymbol unwrappedCollectionExprType
-        ) {
+        )
+        {
             if (
                 !AllInterfacesContainsIEnumerable(
                     ref builder,
@@ -1209,7 +1230,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     diagnostics,
                     out bool foundMultipleGenericIEnumerableInterfaces
                 )
-            ) {
+            )
+            {
                 return EnumeratorResult.FailedNotReported;
             }
 
@@ -1419,7 +1441,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private bool ReportConstantNullCollectionExpr(
             BoundExpression collectionExpr,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             if (collectionExpr.ConstantValue is { IsNull: true })
             {
                 // Spec seems to refer to null literals, but Dev10 reports anything known to be null.
@@ -1434,7 +1457,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression expr,
             bool isAsync,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             // NOTE: if IDisposable is not available at all, no diagnostics will be reported - we will just assume that
             // the enumerator is not disposable.  If it has IDisposable in its interface list, there will be a diagnostic there.
             // If IDisposable is available but its Dispose method is not, then diagnostics will be reported only if the enumerator
@@ -1455,13 +1479,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                       : this.Compilation.GetSpecialType(SpecialType.System_IDisposable),
                     ref useSiteInfo
                 ).IsImplicit
-            ) {
+            )
+            {
                 builder.NeedsDisposal = true;
             }
             else if (
                 Compilation.IsFeatureEnabled(MessageID.IDS_FeatureUsingDeclarations)
                 && (enumeratorType.IsRefLikeType || isAsync)
-            ) {
+            )
+            {
                 // if it wasn't directly convertable to IDisposable, see if it is pattern-disposable
                 // again, we throw away any binding diagnostics, and assume it's not disposable if we encounter errors
                 var receiver = new BoundDisposableValuePlaceholder(_syntax, enumeratorType);
@@ -1512,7 +1538,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ForEachEnumeratorInfo.Builder builder,
             BindingDiagnosticBag diagnostics,
             TypeSymbol collectionExprType
-        ) {
+        )
+        {
             // NOTE: for arrays, we won't actually use any of these members - they're just for the API.
             builder.CollectionType = GetSpecialType(
                 SpecialType.System_Collections_IEnumerable,
@@ -1588,7 +1615,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool isAsync,
             bool viaExtensionMethod,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             string methodName = isAsync ? GetAsyncEnumeratorMethodName : GetEnumeratorMethodName;
             MethodArgumentInfo getEnumeratorInfo;
             if (viaExtensionMethod)
@@ -1634,7 +1662,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool warningsOnly,
             BindingDiagnosticBag diagnostics,
             bool isAsync
-        ) {
+        )
+        {
             Debug.Assert(lookupResult.IsClear);
 
             // Not using LookupOptions.MustBeInvocableMember because we don't want the corresponding lookup error.
@@ -1721,7 +1750,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool warningsOnly,
             BindingDiagnosticBag diagnostics,
             bool isAsync
-        ) {
+        )
+        {
             var analyzedArguments = AnalyzedArguments.GetInstance();
             var typeArguments = ArrayBuilder<TypeWithAnnotations>.GetInstance();
             var overloadResolutionResult = OverloadResolutionResult<MethodSymbol>.GetInstance();
@@ -1801,7 +1831,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             else if (
                 overloadResolutionResult.GetAllApplicableMembers() is var applicableMembers
                 && applicableMembers.Length > 1
-            ) {
+            )
+            {
                 if (warningsOnly)
                 {
                     diagnostics.Add(
@@ -1826,7 +1857,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression collectionExpr,
             string methodName,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var analyzedArguments = AnalyzedArguments.GetInstance();
 
             var methodGroupResolutionResult = this.BindExtensionMethod(
@@ -1894,7 +1926,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             else if (
                 overloadResolutionResult?.GetAllApplicableMembers() is { } applicableMembers
                 && applicableMembers.Length > 1
-            ) {
+            )
+            {
                 diagnostics.Add(
                     ErrorCode.WRN_PatternIsAmbiguous,
                     _syntax.Expression.Location,
@@ -1942,7 +1975,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ref ForEachEnumeratorInfo.Builder builder,
             bool isAsync,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             Debug.Assert((object)builder.GetEnumeratorInfo.Method != null);
 
             MethodSymbol getEnumeratorMethod = builder.GetEnumeratorInfo.Method;
@@ -2011,7 +2045,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     lookupSymbol.IsStatic
                     || lookupSymbol.DeclaredAccessibility != Accessibility.Public
                     || lookupSymbol.Kind != SymbolKind.Property
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -2057,7 +2092,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     || moveNextMethodCandidate.Method.IsStatic
                     || moveNextMethodCandidate.Method.DeclaredAccessibility != Accessibility.Public
                     || IsInvalidMoveNextMethod(moveNextMethodCandidate.Method, isAsync)
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -2089,7 +2125,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics,
             TypeSymbol enumeratorType,
             Symbol patternMemberCandidate
-        ) {
+        )
+        {
             CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
                 diagnostics
             );
@@ -2145,7 +2182,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool isAsync,
             BindingDiagnosticBag diagnostics,
             out bool foundMultiple
-        ) {
+        )
+        {
             CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
                 diagnostics
             );
@@ -2161,7 +2199,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 ((object)implementedIEnumerable == null)
                 || !this.IsAccessible(implementedIEnumerable, ref useSiteInfo)
-            ) {
+            )
+            {
                 implementedIEnumerable = null;
 
                 if (!isAsync)
@@ -2196,7 +2235,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CSharpCompilation compilation,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo,
             out bool foundMultiple
-        ) {
+        )
+        {
             NamedTypeSymbol implementedIEnumerable = null;
             foundMultiple = false;
 
@@ -2238,7 +2278,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CSharpCompilation compilation,
             ref NamedTypeSymbol result,
             ref bool foundMultiple
-        ) {
+        )
+        {
             if (foundMultiple)
             {
                 return;
@@ -2256,7 +2297,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (
                         (object)result == null
                         || TypeSymbol.Equals(@interface, result, TypeCompareKind.IgnoreTupleNames)
-                    ) {
+                    )
+                    {
                         result = @interface;
                     }
                     else
@@ -2272,7 +2314,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol type,
             bool isAsync,
             CSharpCompilation compilation
-        ) {
+        )
+        {
             if (isAsync)
             {
                 return type.Equals(
@@ -2301,7 +2344,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string memberName,
             bool warningsOnly,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             if (lookupResult.Symbols.Any())
             {
                 if (warningsOnly)
@@ -2348,7 +2392,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal override ImmutableArray<LocalSymbol> GetDeclaredLocalsForScope(
             SyntaxNode scopeDesignator
-        ) {
+        )
+        {
             if (_syntax == scopeDesignator)
             {
                 return this.Locals;
@@ -2359,7 +2404,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal override ImmutableArray<LocalFunctionSymbol> GetDeclaredLocalFunctionsForScope(
             CSharpSyntaxNode scopeDesignator
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
 
@@ -2372,7 +2418,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SpecialMember member,
             SyntaxNode syntax,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var resolvedMember = (MethodSymbol)GetSpecialTypeMember(member, diagnostics, syntax);
             Debug.Assert(resolvedMember is null or { ParameterCount: 0 });
             return resolvedMember is not null
@@ -2388,7 +2435,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxNode syntax,
             BindingDiagnosticBag diagnostics,
             bool assertMissingParametersAreOptional = true
-        ) {
+        )
+        {
             Debug.Assert((extensionReceiverOpt != null) == method.IsExtensionMethod);
 
             if (method.ParameterCount == 0)

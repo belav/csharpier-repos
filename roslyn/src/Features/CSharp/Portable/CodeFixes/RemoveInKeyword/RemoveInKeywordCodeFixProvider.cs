@@ -65,7 +65,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.RemoveInKeyword
             Document document,
             ArgumentSyntax argumentSyntax,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
             var generator = document.GetRequiredLanguageService<SyntaxGenerator>();
@@ -82,13 +83,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.RemoveInKeyword
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                CSharpFeaturesResources.Remove_in_keyword,
-                createChangedDocument,
-                CSharpFeaturesResources.Remove_in_keyword
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    CSharpFeaturesResources.Remove_in_keyword,
+                    createChangedDocument,
+                    CSharpFeaturesResources.Remove_in_keyword
+                ) { }
         }
     }
 }

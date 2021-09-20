@@ -67,7 +67,8 @@ namespace System.Web.Razor.Test.Tokenizer
                     if (
                         counter < expectedSymbols.Length
                         && !ReferenceEquals(expectedSymbols[counter], IgnoreRemaining)
-                    ) {
+                    )
+                    {
                         success = false;
                         for (; counter < expectedSymbols.Length; counter++)
                         {

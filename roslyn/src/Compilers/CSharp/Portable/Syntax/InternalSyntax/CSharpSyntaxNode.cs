@@ -32,11 +32,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             GreenStats.NoteGreen(this);
         }
 
-        internal CSharpSyntaxNode(
-            SyntaxKind kind,
-            DiagnosticInfo[] diagnostics,
-            int fullWidth
-        ) : base((ushort)kind, diagnostics, fullWidth)
+        internal CSharpSyntaxNode(SyntaxKind kind, DiagnosticInfo[] diagnostics, int fullWidth)
+            : base((ushort)kind, diagnostics, fullWidth)
         {
             GreenStats.NoteGreen(this);
         }
@@ -176,7 +173,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         internal static DirectiveStack ApplyDirectivesToListOrNode(
             GreenNode listOrNode,
             DirectiveStack stack
-        ) {
+        )
+        {
             // If we have a list of trivia, then that node is not actually a CSharpSyntaxNode.
             // Just defer to our standard ApplyDirectives helper as it will do the appropriate
             // walking of this list to ApplyDirectives to the children.

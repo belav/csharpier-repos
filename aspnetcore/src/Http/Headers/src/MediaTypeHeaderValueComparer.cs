@@ -75,13 +75,15 @@ namespace Microsoft.Net.Http.Headers
                     else if (
                         mediaType1.MatchesAllSubTypesWithoutSuffix
                         && !mediaType2.MatchesAllSubTypesWithoutSuffix
-                    ) {
+                    )
+                    {
                         return -1;
                     }
                     else if (
                         !mediaType1.MatchesAllSubTypesWithoutSuffix
                         && mediaType2.MatchesAllSubTypesWithoutSuffix
-                    ) {
+                    )
+                    {
                         return 1;
                     }
                 }
@@ -90,7 +92,8 @@ namespace Microsoft.Net.Http.Headers
                         mediaType2.SubType,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     if (mediaType1.MatchesAllSubTypes)
                     {
                         return -1;
@@ -102,19 +105,22 @@ namespace Microsoft.Net.Http.Headers
                     else if (
                         mediaType1.MatchesAllSubTypesWithoutSuffix
                         && !mediaType2.MatchesAllSubTypesWithoutSuffix
-                    ) {
+                    )
+                    {
                         return -1;
                     }
                     else if (
                         !mediaType1.MatchesAllSubTypesWithoutSuffix
                         && mediaType2.MatchesAllSubTypesWithoutSuffix
-                    ) {
+                    )
+                    {
                         return 1;
                     }
                 }
                 else if (
                     !mediaType1.Suffix.Equals(mediaType2.Suffix, StringComparison.OrdinalIgnoreCase)
-                ) {
+                )
+                {
                     if (mediaType1.MatchesAllSubTypesWithoutSuffix)
                     {
                         return -1;
@@ -132,7 +138,8 @@ namespace Microsoft.Net.Http.Headers
         private static int CompareBasedOnQualityFactor(
             MediaTypeHeaderValue mediaType1,
             MediaTypeHeaderValue mediaType2
-        ) {
+        )
+        {
             var mediaType1Quality = mediaType1.Quality ?? HeaderQuality.Match;
             var mediaType2Quality = mediaType2.Quality ?? HeaderQuality.Match;
             var qualityDifference = mediaType1Quality - mediaType2Quality;

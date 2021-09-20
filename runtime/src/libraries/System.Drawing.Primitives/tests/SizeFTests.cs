@@ -216,7 +216,8 @@ namespace System.Drawing.PrimitivesTest
             float width,
             float height,
             float multiplier
-        ) {
+        )
+        {
             SizeF sz1 = new SizeF(width, height);
             SizeF mulExpected;
 

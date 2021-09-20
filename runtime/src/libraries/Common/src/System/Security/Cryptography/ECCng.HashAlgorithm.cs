@@ -14,7 +14,8 @@ namespace System.Security.Cryptography
         /// </summary>
         internal static Interop.BCrypt.ECC_CURVE_ALG_ID_ENUM GetHashAlgorithmId(
             HashAlgorithmName? name
-        ) {
+        )
+        {
             if (name is null || string.IsNullOrEmpty(name.Value.Name))
             {
                 return Interop.BCrypt.ECC_CURVE_ALG_ID_ENUM.BCRYPT_NO_CURVE_GENERATION_ALG_ID;
@@ -43,7 +44,8 @@ namespace System.Security.Cryptography
         /// </summary>
         internal static HashAlgorithmName? GetHashAlgorithmName(
             Interop.BCrypt.ECC_CURVE_ALG_ID_ENUM hashId
-        ) {
+        )
+        {
             CRYPT_OID_INFO oid = Interop.Crypt32.FindAlgIdOidInfo(hashId);
             if (oid.AlgId == -1)
             {
@@ -71,7 +73,8 @@ namespace System.Security.Cryptography
         internal static string SpecialNistAlgorithmToCurveName(
             string? algorithm,
             out string oidValue
-        ) {
+        )
+        {
             switch (algorithm)
             {
                 case BCryptNative.AlgorithmName.ECDHP256:

@@ -104,7 +104,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
                         NativeMethods.GetAncestor(topLevelWindow, NativeMethods.GA_PARENT)
                         == parentWindow
                     )
-                ) {
+                )
+                {
                     return topLevelWindow;
                 }
             }
@@ -116,7 +117,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
             RegistryKey baseKey,
             string subKeyName,
             string valueName
-        ) {
+        )
+        {
             using (var registryKey = baseKey.OpenSubKey(subKeyName))
             {
                 if (registryKey == null)
@@ -237,7 +239,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
                             0,
                             NativeMethods.SWP_NOZORDER
                         )
-                    ) {
+                    )
+                    {
                         Marshal.ThrowExceptionForHR(Marshal.GetHRForLastWin32Error());
                     }
                 }
@@ -493,7 +496,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
                         StringComparison.OrdinalIgnoreCase
                     )
                     && displayNameProcessId == process.Id
-                ) {
+                )
+                {
                     runningObjectTable.GetObject(moniker, out dte);
                 }
             } while (dte == null);

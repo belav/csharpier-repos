@@ -11,7 +11,8 @@ namespace Microsoft.CodeAnalysis
     {
         internal static bool IsNullOrEmpty<T>(
             [NotNullWhen(returnValue: false)] this HashSet<T>? hashSet
-        ) {
+        )
+        {
             return hashSet == null || hashSet.Count == 0;
         }
 

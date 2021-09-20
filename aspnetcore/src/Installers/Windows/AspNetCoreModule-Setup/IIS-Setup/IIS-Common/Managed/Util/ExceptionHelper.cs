@@ -64,7 +64,8 @@ namespace Microsoft.WebMatrix.Utility
 
         public static IEnumerable<Assembly> RemoveAssembliesThatAreIntheGAC(
             IEnumerable<Assembly> input
-        ) {
+        )
+        {
             foreach (Assembly assembly in input)
             {
                 if (!assembly.GlobalAssemblyCache)
@@ -77,7 +78,8 @@ namespace Microsoft.WebMatrix.Utility
         public static IEnumerable<Assembly> RemoveAssembliesThatAreSignedWithToken(
             IEnumerable<Assembly> input,
             byte[] publicKeyToken
-        ) {
+        )
+        {
             Debug.Assert(
                 publicKeyToken.Length == PublicKeyTokenLength,
                 "public key tokens should be 8 bytes"

@@ -56,7 +56,8 @@ namespace System.Reflection
             Assembly assembly,
             IntPtr data,
             uint data_length
-        ) {
+        )
+        {
             this.ctorInfo = ctorInfo;
             this.lazyData = new LazyCAttrData();
             this.lazyData.assembly = assembly;
@@ -75,7 +76,8 @@ namespace System.Reflection
             ConstructorInfo ctorInfo,
             IList<CustomAttributeTypedArgument> ctorArgs,
             IList<CustomAttributeNamedArgument> namedArgs
-        ) {
+        )
+        {
             this.ctorInfo = ctorInfo;
             this.ctorArgs = ctorArgs;
             this.namedArgs = namedArgs;

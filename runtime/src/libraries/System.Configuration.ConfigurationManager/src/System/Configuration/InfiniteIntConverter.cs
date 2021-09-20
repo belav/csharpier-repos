@@ -14,7 +14,8 @@ namespace System.Configuration
             CultureInfo ci,
             object value,
             Type type
-        ) {
+        )
+        {
             ValidateType(value, typeof(int));
 
             return (int)value == int.MaxValue

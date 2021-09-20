@@ -106,7 +106,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             ITypeParameterSymbol symbol,
             TypeParameterConstraintKind constraints,
             params string[] constraintTypes
-        ) {
+        )
+        {
             Assert.Equal(constraints, GetTypeParameterConstraints(symbol));
             CheckISymbols(symbol.ConstraintTypes, constraintTypes);
         }
@@ -117,7 +118,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             string reducedFromDescription,
             string constructedFromDescription,
             string reducedAndConstructedFromDescription
-        ) {
+        )
+        {
             var reducedFrom = reducedMethod.ReducedFrom;
             CheckReducedExtensionMethod(reducedMethod, reducedFrom);
             Assert.Equal(
@@ -145,7 +147,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public static void CheckReducedExtensionMethod(
             IMethodSymbol reducedMethod,
             IMethodSymbol reducedFrom
-        ) {
+        )
+        {
             Assert.NotNull(reducedFrom);
             Assert.Equal(reducedMethod.ReducedFrom, reducedFrom);
             Assert.Null(reducedFrom.ReducedFrom);
@@ -165,7 +168,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         internal static void CheckReducedExtensionMethod(
             MethodSymbol reducedMethod,
             MethodSymbol reducedFrom
-        ) {
+        )
+        {
             CheckReducedExtensionMethod(
                 reducedMethod.GetPublicSymbol(),
                 reducedFrom.GetPublicSymbol()
@@ -175,7 +179,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public static void CheckConstructedMethod(
             IMethodSymbol constructedMethod,
             IMethodSymbol constructedFrom
-        ) {
+        )
+        {
             Assert.NotNull(constructedFrom);
 
             Assert.Same(constructedFrom, constructedMethod.ConstructedFrom);
@@ -191,7 +196,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         internal static void CheckConstructedMethod(
             MethodSymbol constructedMethod,
             MethodSymbol constructedFrom
-        ) {
+        )
+        {
             CheckConstructedMethod(
                 constructedMethod.GetPublicSymbol(),
                 constructedFrom.GetPublicSymbol()
@@ -211,7 +217,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         internal static TypeParameterConstraintKind GetTypeParameterConstraints(
             ITypeParameterSymbol typeParameter
-        ) {
+        )
+        {
             var constraints = TypeParameterConstraintKind.None;
             if (typeParameter.HasConstructorConstraint)
             {
@@ -230,7 +237,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         internal static TypeParameterConstraintKind GetTypeParameterConstraints(
             TypeParameterSymbol typeParameter
-        ) {
+        )
+        {
             var constraints = TypeParameterConstraintKind.None;
             if (typeParameter.HasConstructorConstraint)
             {
@@ -278,7 +286,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public static SemanticInfoSummary GetSemanticInfoSummary(
             this SemanticModel semanticModel,
             SyntaxNode node
-        ) {
+        )
+        {
             SemanticInfoSummary summary = new SemanticInfoSummary();
 
             // The information that is available varies by the type of the syntax node.
@@ -355,7 +364,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             int position,
             SyntaxNode node,
             SpeculativeBindingOption bindingOption
-        ) {
+        )
+        {
             SemanticInfoSummary summary = new SemanticInfoSummary();
 
             // The information that is available varies by the type of the syntax node.
@@ -412,7 +422,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             INamespaceOrTypeSymbol container = null,
             bool namespacesAndTypesOnly = false,
             bool useBaseReferenceAccessibility = false
-        ) {
+        )
+        {
             Assert.True(!useBaseReferenceAccessibility || (object)container == null);
             Assert.True(!useBaseReferenceAccessibility || !namespacesAndTypesOnly);
             var symbols = useBaseReferenceAccessibility
@@ -426,7 +437,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         internal static TypeInfo GetTypeInfoAndVerifyIOperation(
             this SemanticModel model,
             SyntaxNode expression
-        ) {
+        )
+        {
             var typeInfo = model.GetTypeInfo(expression);
             var iop = getOperation(model, expression);
             if (typeInfo.Type is null)
@@ -614,7 +626,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                             if (
                                 text.EndsWith(suffix)
                                 && (startsWithTypePrefix || text.StartsWith(convertedPrefix))
-                            ) {
+                            )
+                            {
                                 var prefix = startsWithTypePrefix ? typePrefix : convertedPrefix;
                                 var expr = getEnclosingExpression(token);
                                 Assert.True(

@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Remote
             public Handle(
                 ConcurrentDictionary<RemoteServiceCallbackId, object> callbackInstances,
                 RemoteServiceCallbackId callbackId
-            ) {
+            )
+            {
                 _callbackInstances = callbackInstances;
                 Id = callbackId;
             }

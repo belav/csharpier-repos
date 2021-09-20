@@ -43,11 +43,8 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
             _chunks = new byte[4][];
         }
 
-        public BufferedOutputStream(
-            int initialSize,
-            int maxSize,
-            BufferManager bufferManager
-        ) : this()
+        public BufferedOutputStream(int initialSize, int maxSize, BufferManager bufferManager)
+            : this()
         {
             Reinitialize(initialSize, maxSize, bufferManager);
         }
@@ -88,7 +85,8 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
             int maxSizeQuota,
             int effectiveMaxSize,
             BufferManager bufferManager
-        ) {
+        )
+        {
             Contract.Assert(!_initialized, "Clear must be called before re-initializing stream");
 
             if (bufferManager == null)
@@ -113,7 +111,8 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
             int count,
             AsyncCallback callback,
             object state
-        ) {
+        )
+        {
             throw Error.NotSupported(SRResources.ReadNotSupported);
         }
 
@@ -128,7 +127,8 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
             int count,
             AsyncCallback callback,
             object state
-        ) {
+        )
+        {
             Write(buffer, offset, count);
             return new CompletedAsyncResult(callback, state);
         }

@@ -64,7 +64,8 @@ namespace Microsoft.AspNetCore.Components.Server
         private async Task RevalidationLoop(
             Task<AuthenticationState> authenticationStateTask,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 var authenticationState = await authenticationStateTask;

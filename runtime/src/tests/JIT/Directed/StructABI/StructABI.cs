@@ -1119,7 +1119,8 @@ public static partial class StructABI
         ulong e,
         ulong f,
         TwoLongs value
-    ) {
+    )
+    {
         return value;
     }
 
@@ -1131,7 +1132,8 @@ public static partial class StructABI
         ulong d,
         ulong e,
         TwoLongs value
-    ) {
+    )
+    {
         return value;
     }
 
@@ -1144,7 +1146,8 @@ public static partial class StructABI
         ulong e,
         ulong f,
         DoubleAndByte value
-    ) {
+    )
+    {
         return value;
     }
 
@@ -1159,7 +1162,8 @@ public static partial class StructABI
         double g,
         double h,
         TwoDoubles value
-    ) {
+    )
+    {
         return value;
     }
 
@@ -1173,7 +1177,8 @@ public static partial class StructABI
         double f,
         double g,
         TwoDoubles value
-    ) {
+    )
+    {
         return value;
     }
 
@@ -1188,7 +1193,8 @@ public static partial class StructABI
         double g,
         double h,
         DoubleAndByte value
-    ) {
+    )
+    {
         return value;
     }
 
@@ -1201,7 +1207,8 @@ public static partial class StructABI
         ulong e,
         ulong f,
         TwoDoubles value
-    ) {
+    )
+    {
         return value;
     }
 
@@ -1213,7 +1220,8 @@ public static partial class StructABI
         ulong d,
         ulong e,
         DoubleAndByte value
-    ) {
+    )
+    {
         return value;
     }
 
@@ -1228,7 +1236,8 @@ public static partial class StructABI
         double g,
         double h,
         TwoLongs value
-    ) {
+    )
+    {
         return value;
     }
 
@@ -1242,7 +1251,8 @@ public static partial class StructABI
         double f,
         double g,
         DoubleAndByte value
-    ) {
+    )
+    {
         return value;
     }
 

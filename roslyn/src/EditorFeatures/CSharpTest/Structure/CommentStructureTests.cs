@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure
         internal override async Task<ImmutableArray<BlockSpan>> GetBlockSpansWorkerAsync(
             Document document,
             int position
-        ) {
+        )
+        {
             var root = await document.GetSyntaxRootAsync();
             var trivia = root.FindTrivia(position, findInsideTrivia: true);
 

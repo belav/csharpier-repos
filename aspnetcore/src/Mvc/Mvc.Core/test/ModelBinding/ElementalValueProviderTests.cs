@@ -15,7 +15,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         public void ContainsPrefix_ReturnsTrue_IfElementNameStartsWithPrefix(
             string elementName,
             string prefix
-        ) {
+        )
+        {
             // Arrange
             var culture = new CultureInfo("en-US");
             var elementalValueProvider = new ElementalValueProvider(elementName, "hi", culture);
@@ -34,7 +35,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         public void ContainsPrefix_ReturnsFalse_IfElementCannotSpecifyValuesForPrefix(
             string elementName,
             string prefix
-        ) {
+        )
+        {
             // Arrange
             var culture = new CultureInfo("en-US");
             var elementalValueProvider = new ElementalValueProvider(elementName, "hi", culture);

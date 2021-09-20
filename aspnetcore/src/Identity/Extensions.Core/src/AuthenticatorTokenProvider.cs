@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.Identity
         public async virtual Task<bool> CanGenerateTwoFactorTokenAsync(
             UserManager<TUser> manager,
             TUser user
-        ) {
+        )
+        {
             var key = await manager.GetAuthenticatorKeyAsync(user);
 
             return !string.IsNullOrWhiteSpace(key);
@@ -39,7 +40,8 @@ namespace Microsoft.AspNetCore.Identity
             string purpose,
             UserManager<TUser> manager,
             TUser user
-        ) {
+        )
+        {
             return Task.FromResult(string.Empty);
         }
 
@@ -56,7 +58,8 @@ namespace Microsoft.AspNetCore.Identity
             string token,
             UserManager<TUser> manager,
             TUser user
-        ) {
+        )
+        {
             var key = await manager.GetAuthenticatorKeyAsync(user);
             int code;
             if (key == null || !int.TryParse(token, out code))

@@ -708,7 +708,8 @@ namespace System.Drawing.Printing
         public Graphics CreateMeasurementGraphics(
             PageSettings pageSettings,
             bool honorOriginAtMargins
-        ) {
+        )
+        {
             Graphics g = CreateMeasurementGraphics();
             if (honorOriginAtMargins)
             {
@@ -788,7 +789,8 @@ namespace System.Drawing.Printing
             IntPtr pointerToBuffer,
             int defaultValue,
             string printerName
-        ) {
+        )
+        {
             int result = Interop.Winspool.DeviceCapabilities(
                 printerName,
                 GetOutputPort(),

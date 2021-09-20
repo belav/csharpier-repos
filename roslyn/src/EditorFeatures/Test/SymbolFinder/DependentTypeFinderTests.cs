@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             string code,
             MetadataReference metadataReference,
             params ProjectId[] projectReferences
-        ) {
+        )
+        {
             var suffix = languageName == LanguageNames.CSharp ? "cs" : "vb";
             var pid = ProjectId.CreateNewId();
             var did = DocumentId.CreateNewId(pid);

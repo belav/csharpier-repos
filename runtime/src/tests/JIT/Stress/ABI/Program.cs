@@ -263,7 +263,8 @@ namespace ABIStress
             List<TypeEx> callerParameters,
             List<TypeEx> calleeParameters,
             Random rand
-        ) {
+        )
+        {
             List<Value> args = new List<Value>(calleeParameters.Count);
             List<Value> candidates = new List<Value>();
             for (int j = 0; j < args.Capacity; j++)
@@ -297,7 +298,8 @@ namespace ABIStress
             Type targetTy,
             List<TypeEx> pms,
             List<Value> candidates
-        ) {
+        )
+        {
             for (int i = 0; i < pms.Count; i++)
             {
                 TypeEx pm = pms[i];
@@ -326,7 +328,8 @@ namespace ABIStress
             DynamicMethod callee,
             List<Value> passedArgs,
             Random rand
-        ) {
+        )
+        {
             object[] outerArgs = callerParameters.Select(
                     p => Gen.GenConstant(p.Type, p.Fields, rand)
                 )

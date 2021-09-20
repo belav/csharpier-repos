@@ -11,7 +11,8 @@ namespace System.CommandLine.Suggestions
         public static IEnumerable<string?> Containing(
             this IEnumerable<string?> candidates,
             string textToMatch
-        ) {
+        )
+        {
             foreach (var candidate in candidates)
             {
                 if (candidate is { } && candidate.ContainsCaseInsensitive(textToMatch))

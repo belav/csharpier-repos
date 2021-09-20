@@ -44,7 +44,8 @@ namespace System.Security.Cryptography.Asn1
             Asn1Tag expectedTag,
             ReadOnlyMemory<byte> encoded,
             AsnEncodingRules ruleSet
-        ) {
+        )
+        {
             try
             {
                 AsnValueReader reader = new AsnValueReader(encoded.Span, ruleSet);
@@ -63,7 +64,8 @@ namespace System.Security.Cryptography.Asn1
             ref AsnValueReader reader,
             ReadOnlyMemory<byte> rebind,
             out CurveAsn decoded
-        ) {
+        )
+        {
             Decode(ref reader, Asn1Tag.Sequence, rebind, out decoded);
         }
 
@@ -72,7 +74,8 @@ namespace System.Security.Cryptography.Asn1
             Asn1Tag expectedTag,
             ReadOnlyMemory<byte> rebind,
             out CurveAsn decoded
-        ) {
+        )
+        {
             try
             {
                 DecodeCore(ref reader, expectedTag, rebind, out decoded);
@@ -88,7 +91,8 @@ namespace System.Security.Cryptography.Asn1
             Asn1Tag expectedTag,
             ReadOnlyMemory<byte> rebind,
             out CurveAsn decoded
-        ) {
+        )
+        {
             decoded = default;
             AsnValueReader sequenceReader = reader.ReadSequence(expectedTag);
             ReadOnlySpan<byte> rebindSpan = rebind.Span;
@@ -120,7 +124,8 @@ namespace System.Security.Cryptography.Asn1
             if (
                 sequenceReader.HasData
                 && sequenceReader.PeekTag().HasSameClassAndValue(Asn1Tag.PrimitiveBitString)
-            ) {
+            )
+            {
                 if (sequenceReader.TryReadPrimitiveBitString(out _, out tmpSpan))
                 {
                     decoded.Seed = rebindSpan.Overlaps(tmpSpan, out offset)

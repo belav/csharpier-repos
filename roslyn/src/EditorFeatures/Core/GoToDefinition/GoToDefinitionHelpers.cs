@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Editor.GoToDefinition
             Solution solution,
             bool thirdPartyNavigationAllowed,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var alias = symbol as IAliasSymbol;
             if (alias != null)
             {
@@ -121,7 +122,8 @@ namespace Microsoft.CodeAnalysis.Editor.GoToDefinition
             IStreamingFindUsagesPresenter streamingPresenter,
             CancellationToken cancellationToken,
             bool thirdPartyNavigationAllowed = true
-        ) {
+        )
+        {
             var definitions = GetDefinitions(
                 symbol,
                 solution,
@@ -153,7 +155,8 @@ namespace Microsoft.CodeAnalysis.Editor.GoToDefinition
             IThreadingContext threadingContext,
             IStreamingFindUsagesPresenter streamingPresenter,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (definitions.IsDefaultOrEmpty)
                 return false;
 

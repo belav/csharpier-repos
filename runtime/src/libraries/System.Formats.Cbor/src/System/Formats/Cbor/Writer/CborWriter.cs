@@ -92,7 +92,8 @@ namespace System.Formats.Cbor
             CborConformanceMode conformanceMode = CborConformanceMode.Strict,
             bool convertIndefiniteLengthEncodings = false,
             bool allowMultipleRootLevelValues = false
-        ) {
+        )
+        {
             CborConformanceModeHelpers.Validate(conformanceMode);
 
             ConformanceMode = conformanceMode;
@@ -159,7 +160,8 @@ namespace System.Formats.Cbor
             static unsafe void ValidateEncoding(
                 ReadOnlySpan<byte> encodedValue,
                 CborConformanceMode conformanceMode
-            ) {
+            )
+            {
                 fixed (byte* ptr = &MemoryMarshal.GetReference(encodedValue))
                 {
                     using var manager = new PointerMemoryManager<byte>(ptr, encodedValue.Length);
@@ -401,7 +403,8 @@ namespace System.Formats.Cbor
                     if (
                         initialByte.MajorType != _currentMajorType
                         || initialByte.AdditionalInfo == CborAdditionalInfo.IndefiniteLength
-                    ) {
+                    )
+                    {
                         throw new InvalidOperationException(
                             SR.Cbor_Writer_CannotNestDataItemsInIndefiniteLengthStrings
                         );
@@ -457,7 +460,8 @@ namespace System.Formats.Cbor
                 bool keysRequireSorting,
                 List<KeyValuePairEncodingRange>? keyValuePairEncodingRanges,
                 HashSet<(int Offset, int Length)>? keyEncodingRanges
-            ) {
+            )
+            {
                 MajorType = type;
                 FrameOffset = frameOffset;
                 DefiniteLength = definiteLength;

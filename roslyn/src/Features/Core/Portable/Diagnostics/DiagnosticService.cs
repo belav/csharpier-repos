@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public DiagnosticService(
             IAsynchronousOperationListenerProvider listenerProvider,
             [ImportMany] IEnumerable<Lazy<IEventListener, EventListenerMetadata>> eventListeners
-        ) {
+        )
+        {
             // we use registry service rather than doing MEF import since MEF import method can have race issue where
             // update source gets created before aggregator - diagnostic service - is created and we will lose events fired before
             // the aggregator is created.
@@ -79,7 +80,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         private void RaiseDiagnosticsUpdated(
             IDiagnosticUpdateSource source,
             DiagnosticsUpdatedArgs args
-        ) {
+        )
+        {
             _eventListenerTracker.EnsureEventListener(args.Workspace, this);
 
             var ev = _eventMap.GetEventHandlers<EventHandler<DiagnosticsUpdatedArgs>>(
@@ -200,7 +202,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         private bool ClearDiagnosticsReportedBySource(
             IDiagnosticUpdateSource source,
             List<DiagnosticsUpdatedArgs> removed
-        ) {
+        )
+        {
             // we expect source who uses this ability to have small number of diagnostics.
             lock (_gate)
             {
@@ -319,7 +322,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             bool forPullDiagnostics,
             Option2<DiagnosticMode> diagnosticMode,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // If this is a pull client, but pull diagnostics is not on, then they get nothing.  Similarly, if this is a
             // push client and pull diagnostics are on, they get nothing.
             var isPull = workspace.IsPullDiagnostics(diagnosticMode);
@@ -358,7 +362,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             object id,
             bool includeSuppressedDiagnostics,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<Data>.GetInstance(out var buffer);
 
             foreach (var source in _updateSources)
@@ -404,7 +409,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             DocumentId documentId,
             bool includeSuppressedDiagnostics,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var _1 = ArrayBuilder<DiagnosticData>.GetInstance(out var result);
             using var _2 = ArrayBuilder<Data>.GetInstance(out var buffer);
             foreach (var source in _updateSources)
@@ -484,7 +490,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             bool forPullDiagnostics,
             Option2<DiagnosticMode> diagnosticMode,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // If this is a pull client, but pull diagnostics is not on, then they get nothing.  Similarly, if this is a
             // push client and pull diagnostics are on, they get nothing.
             var isPull = workspace.IsPullDiagnostics(diagnosticMode);
@@ -521,7 +528,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             DocumentId documentId,
             object id,
             ArrayBuilder<Data> list
-        ) {
+        )
+        {
             Contract.ThrowIfNull(workspace);
 
             lock (_gate)
@@ -529,7 +537,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 if (
                     !_map.TryGetValue(source, out var workspaceMap)
                     || !workspaceMap.TryGetValue(workspace, out var current)
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -549,7 +558,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                         TryAddData(workspace, documentId, data, d => d.DocumentId, list)
                         || TryAddData(workspace, projectId, data, d => d.ProjectId, list)
                         || TryAddData(workspace, workspace, data, d => d.Workspace, list)
-                    ) {
+                    )
+                    {
                         continue;
                     }
                 }

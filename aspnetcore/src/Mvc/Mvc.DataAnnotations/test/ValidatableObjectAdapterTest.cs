@@ -156,7 +156,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             ModelMetadata metadata,
             string expectedDisplayName,
             string expectedMemberName
-        ) {
+        )
+        {
             // Arrange
             var adapter = new ValidatableObjectAdapter();
             var model = new SampleModel();
@@ -185,7 +186,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         public void Validate_ReturnsExpectedResults(
             ValidationResult[] innerResults,
             ModelValidationResult[] expectedResults
-        ) {
+        )
+        {
             // Arrange
             var adapter = new ValidatableObjectAdapter();
             var model = new SampleModel();

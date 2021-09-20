@@ -23,7 +23,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             int shadowIndex,
             int relationshipIndex,
             int storeGenerationIndex
-        ) {
+        )
+        {
             Index = index;
             OriginalValueIndex = originalValueIndex;
             ShadowIndex = shadowIndex;

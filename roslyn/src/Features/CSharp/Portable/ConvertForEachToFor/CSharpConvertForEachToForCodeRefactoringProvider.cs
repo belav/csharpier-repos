@@ -69,7 +69,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertForEachToFor
             ForEachInfo foreachInfo,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             var generator = editor.Generator;
@@ -168,7 +169,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertForEachToFor
             SyntaxNode collectionVariableName,
             SyntaxToken indexVariable,
             bool donotCastElement
-        ) {
+        )
+        {
             var foreachStatement = foreachInfo.ForEachStatement;
             if (foreachStatement.Statement is EmptyStatementSyntax)
             {

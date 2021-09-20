@@ -23,18 +23,16 @@ namespace System.Drawing.Drawing2D
         public CustomLineCap(GraphicsPath? fillPath, GraphicsPath? strokePath)
             : this(fillPath, strokePath, LineCap.Flat) { }
 
-        public CustomLineCap(
-            GraphicsPath? fillPath,
-            GraphicsPath? strokePath,
-            LineCap baseCap
-        ) : this(fillPath, strokePath, baseCap, 0) { }
+        public CustomLineCap(GraphicsPath? fillPath, GraphicsPath? strokePath, LineCap baseCap)
+            : this(fillPath, strokePath, baseCap, 0) { }
 
         public CustomLineCap(
             GraphicsPath? fillPath,
             GraphicsPath? strokePath,
             LineCap baseCap,
             float baseInset
-        ) {
+        )
+        {
             IntPtr nativeLineCap;
             int status = Gdip.GdipCreateCustomLineCap(
                 new HandleRef(fillPath, (fillPath == null) ? IntPtr.Zero : fillPath._nativePath),

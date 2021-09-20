@@ -26,16 +26,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
             CodeModelState state,
             ProjectId projectId,
             ITypeSymbol typeSymbol
-        ) {
+        )
+        {
             var element = new ExternalCodeDelegate(state, projectId, typeSymbol);
             return (EnvDTE.CodeDelegate)ComAggregate.CreateAggregatedObject(element);
         }
 
-        private ExternalCodeDelegate(
-            CodeModelState state,
-            ProjectId projectId,
-            ITypeSymbol symbol
-        ) : base(state, projectId, symbol) { }
+        private ExternalCodeDelegate(CodeModelState state, ProjectId projectId, ITypeSymbol symbol)
+            : base(state, projectId, symbol) { }
 
         public override EnvDTE.vsCMElement Kind
         {

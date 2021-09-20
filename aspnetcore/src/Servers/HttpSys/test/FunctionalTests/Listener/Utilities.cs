@@ -26,7 +26,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
             AuthenticationSchemes authType,
             bool allowAnonymous,
             out string baseAddress
-        ) {
+        )
+        {
             var listener = CreateHttpServer(out baseAddress);
             listener.Options.Authentication.Schemes = authType;
             listener.Options.Authentication.AllowAnonymous = allowAnonymous;
@@ -49,7 +50,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
             string basePath,
             out string root,
             out string baseAddress
-        ) {
+        )
+        {
             lock (PortLock)
             {
                 while (NextPort < MaxPort)
@@ -75,7 +77,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
                             && ex.ErrorCode
                                 != UnsafeNclNativeMethods.ErrorCodes.ERROR_SHARING_VIOLATION
                             && ex.ErrorCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_ACCESS_DENIED
-                        ) {
+                        )
+                        {
                             throw;
                         }
                     }
@@ -95,7 +98,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
             string host,
             int port,
             string path
-        ) {
+        )
+        {
             var listener = new HttpSysListener(new HttpSysOptions(), new LoggerFactory());
             listener.Options.UrlPrefixes.Add(UrlPrefix.Create(scheme, host, port, path));
             listener.Start();
@@ -111,7 +115,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
             AuthenticationSchemes authScheme,
             bool allowAnonymos,
             string requestQueueName
-        ) {
+        )
+        {
             var options = new HttpSysOptions();
             options.RequestQueueMode = RequestQueueMode.Attach;
             options.RequestQueueName = requestQueueName;
@@ -129,7 +134,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
         internal static async Task<RequestContext> AcceptAsync(
             this HttpSysListener server,
             TimeSpan timeout
-        ) {
+        )
+        {
             var factory = new TestRequestContextFactory(server);
             using var acceptContext = new AsyncAcceptContext(server, factory);
 
@@ -168,7 +174,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
         internal static async Task<RequestContext> Before<T>(
             this Task<RequestContext> acceptTask,
             Task<T> responseTask
-        ) {
+        )
+        {
             var completedTask = await Task.WhenAny(acceptTask, responseTask);
 
             if (completedTask == acceptTask)

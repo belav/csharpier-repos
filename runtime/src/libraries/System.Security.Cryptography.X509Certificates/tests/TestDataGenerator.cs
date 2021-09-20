@@ -16,7 +16,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             IEnumerable<X509Extension> intermediateExtensions = null,
             IEnumerable<X509Extension> rootExtensions = null,
             [CallerMemberName] string testName = null
-        ) {
+        )
+        {
             using (RSA rootKey = RSA.Create())
             using (RSA intermediateKey = RSA.Create())
             using (RSA endEntityKey = RSA.Create())
@@ -48,7 +49,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             IEnumerable<X509Extension> intermediateExtensions = null,
             IEnumerable<X509Extension> rootExtensions = null,
             [CallerMemberName] string testName = null
-        ) {
+        )
+        {
             using (RSA rootKey = RSA.Create())
             using (RSA intermediateKey = RSA.Create())
             using (RSA endEntityKey = RSA.Create())
@@ -85,7 +87,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             IEnumerable<X509Extension> intermediateExtensions,
             IEnumerable<X509Extension> rootExtensions,
             string testName
-        ) {
+        )
+        {
             if (keys.Length < 2)
                 throw new ArgumentException(nameof(keys));
             if (keys.Length != certs.Length)

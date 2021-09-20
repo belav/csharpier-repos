@@ -58,7 +58,8 @@ namespace System.Net.Http.Tests
             int startIndex,
             RetryConditionHeaderValue expectedResult,
             int expectedIndex
-        ) {
+        )
+        {
             HttpHeaderParser parser = GenericHeaderParser.RetryConditionParser;
             object result = null;
             Assert.True(

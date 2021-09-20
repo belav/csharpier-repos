@@ -24,7 +24,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         /// </summary>
         public CosmosQueryMetadataExtractingExpressionVisitor(
             CosmosQueryCompilationContext cosmosQueryCompilationContext
-        ) {
+        )
+        {
             Check.NotNull(cosmosQueryCompilationContext, nameof(cosmosQueryCompilationContext));
             _cosmosQueryCompilationContext = cosmosQueryCompilationContext;
         }
@@ -41,7 +42,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 methodCallExpression.Method.IsGenericMethod
                 && methodCallExpression.Method.GetGenericMethodDefinition()
                     == CosmosQueryableExtensions.WithPartitionKeyMethodInfo
-            ) {
+            )
+            {
                 var innerQueryable = Visit(methodCallExpression.Arguments[0]);
 
                 _cosmosQueryCompilationContext.PartitionKeyFromExtension =

@@ -50,7 +50,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
             IVsHierarchyItemManager vsHierarchyItemManager,
             IAsynchronousOperationListenerProvider listenerProvider,
             HostDiagnosticUpdateSource hostDiagnosticUpdateSource
-        ) {
+        )
+        {
             _workspace = workspace;
             _diagnosticService = diagnosticService;
             _threadingContext = threadingContext;
@@ -154,7 +155,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
 
         private IReadOnlyDictionary<string, IEnumerable<DiagnosticDescriptor>> Transform(
             ImmutableDictionary<string, ImmutableArray<DiagnosticDescriptor>> map
-        ) {
+        )
+        {
             // unfortunately, we had to do this since ruleset editor and us are set to use this signature
             return map.ToDictionary(
                 kv => kv.Key,
@@ -182,7 +184,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
                 if (
                     command.CommandID.ID == RunCodeAnalysisForSelectedProjectCommandId
                     && hierarchy!.TryGetProject(out var project)
-                ) {
+                )
+                {
                     // Change to show the name of the project as part of the menu item display text.
                     command.Text = string.Format(
                         ServicesVSResources.Run_Code_Analysis_on_0,
@@ -211,7 +214,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
                     _serviceProvider,
                     out var hierarchy
                 )
-            ) {
+            )
+            {
                 RunAnalyzers(hierarchy);
             }
         }
@@ -340,7 +344,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
                         targetFrameworkMoniker: null,
                         out var projectId
                     )
-                ) {
+                )
+                {
                     return _workspace.CurrentSolution.GetProject(projectId);
                 }
             }
@@ -367,7 +372,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
                 IThreadingContext threadingContext,
                 string? projectOrSolutionName,
                 uint totalProjectCount
-            ) {
+            )
+            {
                 Contract.ThrowIfFalse(threadingContext.HasMainThread);
                 _statusBar = statusBar;
                 _threadingContext = threadingContext;

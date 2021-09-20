@@ -14,7 +14,8 @@ namespace System.Threading
             this CancellationToken cancellationToken,
             Action<object> callback,
             object state
-        ) {
+        )
+        {
             return cancellationToken.Register(callback, state);
         }
     }

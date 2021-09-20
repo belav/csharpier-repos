@@ -12,11 +12,8 @@ namespace System.Reflection.TypeLoading
     /// </summary>
     internal sealed class RoThinMethodParameter : RoMethodParameter
     {
-        internal RoThinMethodParameter(
-            IRoMethodBase roMethodBase,
-            int position,
-            Type parameterType
-        ) : base(roMethodBase, position, parameterType)
+        internal RoThinMethodParameter(IRoMethodBase roMethodBase, int position, Type parameterType)
+            : base(roMethodBase, position, parameterType)
         {
             Debug.Assert(roMethodBase != null);
             Debug.Assert(parameterType != null);

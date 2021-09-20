@@ -120,7 +120,8 @@ namespace System.Transactions.Tests
         public async Task RunWithCallbackAsync(
             Action<EventWrittenEventArgs> handler,
             Func<Task> body
-        ) {
+        )
+        {
             _eventWritten = handler;
             try
             {

@@ -676,7 +676,8 @@ namespace System.Net.Sockets.Tests
                     "localhost",
                     ((IPEndPoint)receiver.Client.LocalEndPoint).Port
                 )
-            ) {
+            )
+            {
                 sender.Send(new byte[1], 1);
 
                 IPEndPoint remoteEP = null;
@@ -749,7 +750,8 @@ namespace System.Net.Sockets.Tests
                     "localhost",
                     ((IPEndPoint)receiver.Client.LocalEndPoint).Port
                 )
-            ) {
+            )
+            {
                 sender.EndSend(sender.BeginSend(new byte[1], 1, null, null));
 
                 IPEndPoint remoteEP = null;
@@ -794,7 +796,8 @@ namespace System.Net.Sockets.Tests
                     "localhost",
                     ((IPEndPoint)receiver.Client.LocalEndPoint).Port
                 )
-            ) {
+            )
+            {
                 await sender.SendAsync(new byte[1], 1);
 
                 UdpReceiveResult result = await receiver.ReceiveAsync();
@@ -922,7 +925,8 @@ namespace System.Net.Sockets.Tests
                 if (
                     sender.Client.AddressFamily == AddressFamily.InterNetworkV6
                     && sender.Client.DualMode
-                ) {
+                )
+                {
                     sender.Send(
                         new byte[1],
                         1,

@@ -69,16 +69,15 @@ namespace System.DirectoryServices.Protocols
         public LdapConnection(LdapDirectoryIdentifier identifier)
             : this(identifier, null, AuthType.Negotiate) { }
 
-        public LdapConnection(
-            LdapDirectoryIdentifier identifier,
-            NetworkCredential credential
-        ) : this(identifier, credential, AuthType.Negotiate) { }
+        public LdapConnection(LdapDirectoryIdentifier identifier, NetworkCredential credential)
+            : this(identifier, credential, AuthType.Negotiate) { }
 
         public LdapConnection(
             LdapDirectoryIdentifier identifier,
             NetworkCredential credential,
             AuthType authType
-        ) {
+        )
+        {
             _directoryIdentifier = identifier;
             _directoryCredential =
                 (credential != null)
@@ -110,7 +109,8 @@ namespace System.DirectoryServices.Protocols
                         || !string.IsNullOrEmpty(_directoryCredential.UserName)
                     )
                 )
-            ) {
+            )
+            {
                 throw new ArgumentException(SR.InvalidAuthCredential);
             }
 
@@ -124,7 +124,8 @@ namespace System.DirectoryServices.Protocols
             NetworkCredential credential,
             AuthType authType,
             IntPtr handle
-        ) {
+        )
+        {
             _directoryIdentifier = identifier;
             _needDispose = false;
             _ldapHandle = new ConnectionHandle(handle, _needDispose);
@@ -340,7 +341,8 @@ namespace System.DirectoryServices.Protocols
             PartialResultProcessing partialMode,
             AsyncCallback callback,
             object state
-        ) {
+        )
+        {
             return BeginSendRequest(request, _connectionTimeOut, partialMode, callback, state);
         }
 
@@ -350,7 +352,8 @@ namespace System.DirectoryServices.Protocols
             PartialResultProcessing partialMode,
             AsyncCallback callback,
             object state
-        ) {
+        )
+        {
             if (_disposed)
             {
                 throw new ObjectDisposedException(GetType().Name);
@@ -364,7 +367,8 @@ namespace System.DirectoryServices.Protocols
             if (
                 partialMode < PartialResultProcessing.NoPartialResultSupport
                 || partialMode > PartialResultProcessing.ReturnPartialResultsAndNotifyCallback
-            ) {
+            )
+            {
                 throw new InvalidEnumArgumentException(
                     nameof(partialMode),
                     (int)partialMode,
@@ -375,14 +379,16 @@ namespace System.DirectoryServices.Protocols
             if (
                 partialMode != PartialResultProcessing.NoPartialResultSupport
                 && !(request is SearchRequest)
-            ) {
+            )
+            {
                 throw new NotSupportedException(SR.PartialResultsNotSupported);
             }
 
             if (
                 partialMode == PartialResultProcessing.ReturnPartialResultsAndNotifyCallback
                 && callback == null
-            ) {
+            )
+            {
                 throw new ArgumentException(SR.CallBackIsNull, nameof(callback));
             }
 
@@ -446,7 +452,8 @@ namespace System.DirectoryServices.Protocols
                     static async Task ResponseCallback(
                         ValueTask<DirectoryResponse> vt,
                         LdapRequestState requestState
-                    ) {
+                    )
+                    {
                         try
                         {
                             DirectoryResponse response = await vt.ConfigureAwait(false);
@@ -659,7 +666,8 @@ namespace System.DirectoryServices.Protocols
                 AutoBind
                 && (!_bounded || _needRebind)
                 && ((LdapDirectoryIdentifier)Directory).Connectionless != true
-            ) {
+            )
+            {
                 Debug.WriteLine("rebind occurs\n");
                 Bind();
             }
@@ -1200,7 +1208,8 @@ namespace System.DirectoryServices.Protocols
                         || string.IsNullOrEmpty(newCredential.UserName)
                     )
                 )
-            ) {
+            )
+            {
                 throw new InvalidOperationException(SR.InvalidAuthCredential);
             }
 
@@ -1239,7 +1248,8 @@ namespace System.DirectoryServices.Protocols
                 && tempCredential.UserName.Length == 0
                 && tempCredential.Password.Length == 0
                 && tempCredential.Domain.Length == 0
-            ) {
+            )
+            {
                 // Default credentials.
                 username = null;
                 domainName = null;
@@ -1388,7 +1398,8 @@ namespace System.DirectoryServices.Protocols
         internal LdapControl[] BuildControlArray(
             DirectoryControlCollection controls,
             bool serverControl
-        ) {
+        )
+        {
             LdapControl[] managedControls = null;
 
             if (controls != null && controls.Count != 0)
@@ -1581,7 +1592,8 @@ namespace System.DirectoryServices.Protocols
             TimeSpan requestTimeOut,
             bool exceptionOnTimeOut,
             bool sync
-        ) {
+        )
+        {
             var timeout = new LDAP_TIMEVAL()
             {
                 tv_sec = (int)(requestTimeOut.Ticks / TimeSpan.TicksPerSecond)
@@ -1646,7 +1658,8 @@ namespace System.DirectoryServices.Protocols
                             requestTimeOut != Threading.Timeout.InfiniteTimeSpan
                             && watch.Elapsed > requestTimeOut
                         )
-                    ) {
+                    )
+                    {
                         break;
                     }
                     await Task.Delay(Math.Min(iterationDelay, 100)).ConfigureAwait(false);
@@ -1674,7 +1687,8 @@ namespace System.DirectoryServices.Protocols
                     if (
                         error != (int)LdapResult.LDAP_RES_SEARCH_ENTRY
                         && error != (int)LdapResult.LDAP_RES_REFERRAL
-                    ) {
+                    )
+                    {
                         resultError = ConstructParsedResult(
                             ldapResult,
                             ref serverError,
@@ -1792,7 +1806,8 @@ namespace System.DirectoryServices.Protocols
                             error == (int)LdapResult.LDAP_RES_SEARCH_RESULT
                             || error == (int)LdapResult.LDAP_RES_SEARCH_ENTRY
                             || error == (int)LdapResult.LDAP_RES_REFERRAL
-                        ) {
+                        )
+                        {
                             response = new SearchResponse(
                                 responseDn,
                                 responseControl,
@@ -1863,7 +1878,8 @@ namespace System.DirectoryServices.Protocols
                             && resultError != (int)ResultCode.CompareTrue
                             && resultError != (int)ResultCode.Referral
                             && resultError != (int)ResultCode.ReferralV2
-                        ) {
+                        )
+                        {
                             // Throw operation exception.
                             if (Utility.IsResultCode((ResultCode)resultError))
                             {
@@ -1946,7 +1962,8 @@ namespace System.DirectoryServices.Protocols
             ref string responseMessage,
             ref Uri[] responseReferral,
             ref DirectoryControl[] responseControl
-        ) {
+        )
+        {
             IntPtr dn = IntPtr.Zero;
             IntPtr message = IntPtr.Zero;
             IntPtr referral = IntPtr.Zero;
@@ -2345,7 +2362,8 @@ namespace System.DirectoryServices.Protocols
         private bool SameCredential(
             NetworkCredential oldCredential,
             NetworkCredential newCredential
-        ) {
+        )
+        {
             if (oldCredential == null && newCredential == null)
             {
                 return true;
@@ -2364,7 +2382,8 @@ namespace System.DirectoryServices.Protocols
                     oldCredential.Domain == newCredential.Domain
                     && oldCredential.UserName == newCredential.UserName
                     && oldCredential.Password == newCredential.Password
-                ) {
+                )
+                {
                     return true;
                 }
                 else

@@ -40,7 +40,8 @@ namespace System.Composition.Diagnostics
         public static void Registration_MemberExportConventionOverridden(
             Type type,
             MemberInfo member
-        ) {
+        )
+        {
             if (type == null)
             {
                 throw new ArgumentNullException(nameof(type));
@@ -65,7 +66,8 @@ namespace System.Composition.Diagnostics
         public static void Registration_MemberImportConventionOverridden(
             Type type,
             MemberInfo member
-        ) {
+        )
+        {
             if (type == null)
             {
                 throw new ArgumentNullException(nameof(type));
@@ -90,7 +92,8 @@ namespace System.Composition.Diagnostics
         public static void Registration_OnSatisfiedImportNotificationOverridden(
             Type type,
             MemberInfo member
-        ) {
+        )
+        {
             if (type == null)
             {
                 throw new ArgumentNullException(nameof(type));
@@ -132,7 +135,8 @@ namespace System.Composition.Diagnostics
         public static void Registration_MemberImportConventionMatchedTwice(
             Type type,
             MemberInfo member
-        ) {
+        )
+        {
             if (type == null)
             {
                 throw new ArgumentNullException(nameof(type));
@@ -174,7 +178,8 @@ namespace System.Composition.Diagnostics
         public static void Registration_ParameterImportConventionOverridden(
             ParameterInfo parameter,
             ConstructorInfo constructor
-        ) {
+        )
+        {
             if (parameter == null)
             {
                 throw new ArgumentNullException(nameof(parameter));

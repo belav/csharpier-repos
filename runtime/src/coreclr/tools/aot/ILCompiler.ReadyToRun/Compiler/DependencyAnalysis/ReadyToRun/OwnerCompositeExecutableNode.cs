@@ -22,10 +22,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         private readonly string _ownerExecutableName;
 
-        public OwnerCompositeExecutableNode(
-            TargetDetails target,
-            string ownerExecutableName
-        ) : base(target)
+        public OwnerCompositeExecutableNode(TargetDetails target, string ownerExecutableName)
+            : base(target)
         {
             _ownerExecutableName = ownerExecutableName;
         }

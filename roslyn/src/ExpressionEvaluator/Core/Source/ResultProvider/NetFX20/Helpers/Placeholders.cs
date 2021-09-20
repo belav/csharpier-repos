@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis
             this Type type,
             string name,
             Type[] parameterTypes
-        ) {
+        )
+        {
             return type.GetMethod(
                 name,
                 BindingFlags.Public

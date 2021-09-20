@@ -1548,7 +1548,8 @@ namespace Microsoft.Extensions.DependencyInjection
             protected override Task<HttpResponseMessage> SendAsync(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
 #if NETFRAMEWORK
                 request.Properties[nameof(SingletonService)] = Service;
 #else
@@ -1573,7 +1574,8 @@ namespace Microsoft.Extensions.DependencyInjection
             protected override Task<HttpResponseMessage> SendAsync(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
 #if NETFRAMEWORK
                 request.Properties[nameof(ScopedService)] = Service;
 #else
@@ -1598,7 +1600,8 @@ namespace Microsoft.Extensions.DependencyInjection
             protected override Task<HttpResponseMessage> SendAsync(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
 #if NETFRAMEWORK
                 request.Properties[nameof(TransientService)] = Service;
 #else

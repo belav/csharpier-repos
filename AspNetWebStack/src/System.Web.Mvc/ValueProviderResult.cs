@@ -51,7 +51,8 @@ namespace System.Web.Mvc
             CultureInfo culture,
             object value,
             Type destinationType
-        ) {
+        )
+        {
             if (value == null || destinationType.IsInstanceOfType(value))
             {
                 return value;
@@ -165,7 +166,8 @@ namespace System.Web.Mvc
             CultureInfo culture,
             object value,
             Type destinationType
-        ) {
+        )
+        {
             if (value == null || destinationType.IsInstanceOfType(value))
             {
                 return value;

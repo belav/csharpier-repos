@@ -97,7 +97,8 @@ namespace Microsoft.NETCore.Platforms.BuildTasks.Tests
             RuntimeDescription[] expectedAdditions,
             string additionalRIDParent = null,
             [CallerMemberName] string runtimeFilePrefix = null
-        ) {
+        )
+        {
             string runtimeFile = runtimeFilePrefix + ".runtime.json";
 
             GenerateRuntimeGraph task = new GenerateRuntimeGraph()

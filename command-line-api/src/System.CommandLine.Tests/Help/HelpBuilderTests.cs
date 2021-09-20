@@ -110,7 +110,8 @@ namespace System.CommandLine.Tests.Help
             int minArity,
             int maxArity,
             string expectedDescriptor
-        ) {
+        )
+        {
             var argument = new Argument
             {
                 Name = "the-args",
@@ -143,7 +144,8 @@ namespace System.CommandLine.Tests.Help
             int minArityForArg2,
             int maxArityForArg2,
             string expectedDescriptor
-        ) {
+        )
+        {
             var arg1 = new Argument
             {
                 Name = "arg1",

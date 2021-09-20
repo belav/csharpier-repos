@@ -72,7 +72,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         private async Task<Solution?> FixAllContextsAsync(
             FixAllContext originalFixAllContext,
             ImmutableArray<FixAllContext> fixAllContexts
-        ) {
+        )
+        {
             var progressTracker = originalFixAllContext.GetProgressTracker();
             progressTracker.Description = this.GetFixAllTitle(originalFixAllContext);
 
@@ -103,7 +104,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             Solution currentSolution,
             FixAllContext fixAllContext,
             IProgressTracker progressTracker
-        ) {
+        )
+        {
             // First, determine the diagnostics to fix.
             var diagnostics = await DetermineDiagnosticsAsync(fixAllContext, progressTracker)
                 .ConfigureAwait(false);
@@ -134,7 +136,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         private static async Task<ImmutableArray<Diagnostic>> DetermineDiagnosticsAsync(
             FixAllContext fixAllContext,
             IProgressTracker progressTracker
-        ) {
+        )
+        {
             using var _ = progressTracker.ItemCompletedScope();
 
             return fixAllContext.Document != null
@@ -156,7 +159,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             FixAllContext fixAllContext,
             IProgressTracker progressTracker,
             ImmutableArray<Diagnostic> diagnostics
-        ) {
+        )
+        {
             var cancellationToken = fixAllContext.CancellationToken;
 
             using var _1 = progressTracker.ItemCompletedScope();
@@ -175,7 +179,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                 foreach (
                     var group in diagnostics.Where(d => d.Location.IsInSource)
                         .GroupBy(d => d.Location.SourceTree)
-                ) {
+                )
+                {
                     var tree = group.Key;
                     Contract.ThrowIfNull(tree);
                     var document = fixAllContext.Solution.GetRequiredDocument(tree);
@@ -239,7 +244,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             IProgressTracker progressTracker,
             Solution currentSolution,
             Dictionary<DocumentId, (SyntaxNode? node, SourceText? text)> docIdToNewRootOrText
-        ) {
+        )
+        {
             var cancellationToken = fixAllContext.CancellationToken;
             using var _1 = progressTracker.ItemCompletedScope();
 

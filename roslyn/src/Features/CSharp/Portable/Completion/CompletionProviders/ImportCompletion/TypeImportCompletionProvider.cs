@@ -64,7 +64,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
         protected override bool IsFinalSemicolonOfUsingOrExtern(
             SyntaxNode directive,
             SyntaxToken token
-        ) {
+        )
+        {
             if (token.IsKind(SyntaxKind.None) || token.IsMissing)
                 return false;
 
@@ -82,7 +83,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             CompletionItem item,
             char? commitKey,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (commitKey is ';' or '.')
             {
                 // Only consider add '()' if the type is used under object creation context

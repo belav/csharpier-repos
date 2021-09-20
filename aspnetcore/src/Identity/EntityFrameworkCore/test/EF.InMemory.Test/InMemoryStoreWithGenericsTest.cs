@@ -70,7 +70,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.InMemory.Test
             bool lockoutEnabled = false,
             DateTimeOffset? lockoutEnd = default(DateTimeOffset?),
             bool useNamePrefixAsUserName = false
-        ) {
+        )
+        {
             return new IdentityUserWithGenerics
             {
                 UserName = useNamePrefixAsUserName
@@ -91,7 +92,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.InMemory.Test
         protected override MyIdentityRole CreateTestRole(
             string roleNamePrefix = "",
             bool useRoleNamePrefixAsRoleName = false
-        ) {
+        )
+        {
             var roleName = useRoleNamePrefixAsRoleName
                 ? roleNamePrefix
                 : string.Format(
@@ -106,7 +108,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.InMemory.Test
         protected override void SetUserPasswordHash(
             IdentityUserWithGenerics user,
             string hashedPassword
-        ) {
+        )
+        {
             user.PasswordHash = hashedPassword;
         }
 
@@ -258,10 +261,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.InMemory.Test
     {
         public string LoginContext { get; set; }
 
-        public UserStoreWithGenerics(
-            InMemoryContextWithGenerics context,
-            string loginContext
-        ) : base(context)
+        public UserStoreWithGenerics(InMemoryContextWithGenerics context, string loginContext)
+            : base(context)
         {
             LoginContext = loginContext;
         }
@@ -269,7 +270,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.InMemory.Test
         protected override IdentityUserRoleWithDate CreateUserRole(
             IdentityUserWithGenerics user,
             MyIdentityRole role
-        ) {
+        )
+        {
             return new IdentityUserRoleWithDate()
             {
                 RoleId = role.Id,
@@ -281,7 +283,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.InMemory.Test
         protected override IdentityUserClaimWithIssuer CreateUserClaim(
             IdentityUserWithGenerics user,
             Claim claim
-        ) {
+        )
+        {
             return new IdentityUserClaimWithIssuer
             {
                 UserId = user.Id,
@@ -294,7 +297,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.InMemory.Test
         protected override IdentityUserLoginWithContext CreateUserLogin(
             IdentityUserWithGenerics user,
             UserLoginInfo login
-        ) {
+        )
+        {
             return new IdentityUserLoginWithContext
             {
                 UserId = user.Id,
@@ -310,7 +314,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.InMemory.Test
             string loginProvider,
             string name,
             string value
-        ) {
+        )
+        {
             return new IdentityUserTokenWithStuff
             {
                 UserId = user.Id,
@@ -332,10 +337,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.InMemory.Test
           >
     {
         private string _loginContext;
-        public RoleStoreWithGenerics(
-            InMemoryContextWithGenerics context,
-            string loginContext
-        ) : base(context)
+        public RoleStoreWithGenerics(InMemoryContextWithGenerics context, string loginContext)
+            : base(context)
         {
             _loginContext = loginContext;
         }
@@ -415,9 +418,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.InMemory.Test
               IdentityUserTokenWithStuff
           >
     {
-        public InMemoryContextWithGenerics(
-            DbContextOptions<InMemoryContextWithGenerics> options
-        ) : base(options) { }
+        public InMemoryContextWithGenerics(DbContextOptions<InMemoryContextWithGenerics> options)
+            : base(options) { }
     }
     #endregion
 }

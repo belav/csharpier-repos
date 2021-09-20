@@ -703,7 +703,8 @@ namespace DebuggerTests
             string method_name,
             bool call_other,
             bool invoke_async
-        ) {
+        )
+        {
             string entry_method_name =
                 $"[debugger-test] DebuggerTests.ValueTypesTest:MethodWithLocalsForToStringTest{(invoke_async ? "Async" : String.Empty)}";
             int frame_idx = 0;

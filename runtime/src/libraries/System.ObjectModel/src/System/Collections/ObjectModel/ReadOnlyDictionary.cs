@@ -81,7 +81,8 @@ namespace System.Collections.ObjectModel
         void ICollection<KeyValuePair<TKey, TValue>>.CopyTo(
             KeyValuePair<TKey, TValue>[] array,
             int arrayIndex
-        ) {
+        )
+        {
             m_dictionary.CopyTo(array, arrayIndex);
         }
 
@@ -404,7 +405,8 @@ namespace System.Collections.ObjectModel
             ICollection<T> collection,
             Array array,
             int index
-        ) {
+        )
+        {
             if (array == null)
             {
                 throw new ArgumentNullException(nameof(array));

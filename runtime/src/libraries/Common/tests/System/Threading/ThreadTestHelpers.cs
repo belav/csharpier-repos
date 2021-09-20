@@ -28,7 +28,8 @@ namespace System.Threading.Tests
             out Action checkForThreadErrors,
             out Action waitForThread,
             Action start
-        ) {
+        )
+        {
             Exception backgroundEx = null;
             var t = new Thread(
                 () =>
@@ -71,7 +72,8 @@ namespace System.Threading.Tests
             out Action checkForThreadErrors,
             out Action waitForThread,
             Action<object> start
-        ) {
+        )
+        {
             Exception backgroundEx = null;
             var t = new Thread(
                 parameter =>

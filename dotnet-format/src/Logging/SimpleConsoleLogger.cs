@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Tools.Logging
             IConsole console,
             LogLevel minimalLogLevel,
             LogLevel minimalErrorLevel
-        ) {
+        )
+        {
             _terminal = console.GetTerminal();
             _console = console;
             _minimalLogLevel = minimalLogLevel;
@@ -47,7 +48,8 @@ namespace Microsoft.CodeAnalysis.Tools.Logging
             TState state,
             Exception exception,
             Func<TState, Exception, string> formatter
-        ) {
+        )
+        {
             if (!IsEnabled(logLevel))
             {
                 return;

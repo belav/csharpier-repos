@@ -18,7 +18,8 @@ namespace WebServer
 
             using (
                 var compressor = new DeflateStream(compressedStream, CompressionMode.Compress, true)
-            ) {
+            )
+            {
                 compressor.Write(bytes, 0, bytes.Length);
             }
 
@@ -32,7 +33,8 @@ namespace WebServer
 
             using (
                 var compressor = new GZipStream(compressedStream, CompressionMode.Compress, true)
-            ) {
+            )
+            {
                 compressor.Write(bytes, 0, bytes.Length);
             }
 

@@ -3543,7 +3543,8 @@ class C1 {
             int position,
             bool minimal,
             params SymbolDisplayPartKind[] expectedKinds
-        ) {
+        )
+        {
             var comp = CreateCompilation(source);
             var tree = comp.SyntaxTrees.First();
             var model = comp.GetSemanticModel(tree);
@@ -3563,7 +3564,8 @@ class C1 {
             SymbolDisplayFormat format,
             string expectedText,
             params SymbolDisplayPartKind[] expectedKinds
-        ) {
+        )
+        {
             TestSymbolDescription(source, findSymbol, format, null, expectedText, expectedKinds);
         }
 
@@ -3574,7 +3576,8 @@ class C1 {
             CSharpParseOptions parseOptions,
             string expectedText,
             params SymbolDisplayPartKind[] expectedKinds
-        ) {
+        )
+        {
             var comp = CreateCompilation(source, parseOptions: parseOptions);
             var global = comp.GlobalNamespace;
             var symbol = findSymbol(global);
@@ -3587,7 +3590,8 @@ class C1 {
             ImmutableArray<SymbolDisplayPart> actualParts,
             string expectedText,
             params SymbolDisplayPartKind[] expectedKinds
-        ) {
+        )
+        {
             Assert.Equal(expectedText, actualParts.ToDisplayString());
             if (expectedKinds.Length > 0)
             {
@@ -6656,7 +6660,8 @@ class C
                 string withoutModifiers,
                 string withNullableModifier,
                 string withBothModifiers
-            ) {
+            )
+            {
                 var member = comp.GetMember(memberName);
                 Verify(
                     SymbolDisplay.ToDisplayParts(member, formatWithoutModifiers),

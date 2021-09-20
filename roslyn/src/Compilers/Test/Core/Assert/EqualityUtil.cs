@@ -14,7 +14,8 @@ namespace Roslyn.Test.Utilities
             Func<T, T, bool> compEqualsOperator,
             Func<T, T, bool> compNotEqualsOperator,
             params EqualityUnit<T>[] values
-        ) {
+        )
+        {
             var util = new EqualityUtil<T>(values, compEqualsOperator, compNotEqualsOperator);
             util.RunAll();
         }

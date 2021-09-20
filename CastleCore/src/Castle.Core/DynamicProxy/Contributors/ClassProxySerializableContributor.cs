@@ -35,11 +35,8 @@ namespace Castle.DynamicProxy.Contributors
         private ConstructorInfo serializationConstructor;
         private readonly IList<FieldReference> serializedFields = new List<FieldReference>();
 
-        public ClassProxySerializableContributor(
-            Type targetType,
-            Type[] interfaces,
-            string typeId
-        ) : base(targetType, interfaces, typeId)
+        public ClassProxySerializableContributor(Type targetType, Type[] interfaces, string typeId)
+            : base(targetType, interfaces, typeId)
         {
             Debug.Assert(
                 targetType.IsSerializable,
@@ -97,7 +94,8 @@ namespace Castle.DynamicProxy.Contributors
             ArgumentReference serializationInfo,
             MethodEmitter getObjectData,
             FieldReference field
-        ) {
+        )
+        {
             serializedFields.Add(field);
             base.AddAddValueInvocation(serializationInfo, getObjectData, field);
         }
@@ -107,7 +105,8 @@ namespace Castle.DynamicProxy.Contributors
             ArgumentReference serializationInfo,
             ArgumentReference streamingContext,
             ClassEmitter emitter
-        ) {
+        )
+        {
             codebuilder.AddStatement(
                 new MethodInvocationExpression(
                     serializationInfo,
@@ -129,7 +128,8 @@ namespace Castle.DynamicProxy.Contributors
         private void EmitCustomGetObjectData(
             CodeBuilder codebuilder,
             ArgumentReference serializationInfo
-        ) {
+        )
+        {
             var members = codebuilder.DeclareLocal(typeof(MemberInfo[]));
             var data = codebuilder.DeclareLocal(typeof(object[]));
 
@@ -165,7 +165,8 @@ namespace Castle.DynamicProxy.Contributors
             CodeBuilder codebuilder,
             ArgumentReference serializationInfo,
             ArgumentReference streamingContext
-        ) {
+        )
+        {
             var baseGetObjectData = targetType.GetMethod(
                 "GetObjectData",
                 new[] { typeof(SerializationInfo), typeof(StreamingContext) }
@@ -226,7 +227,8 @@ namespace Castle.DynamicProxy.Contributors
             Type baseType,
             MetaType model,
             out MetaMethod getObjectData
-        ) {
+        )
+        {
             getObjectData = null;
 
             if (!typeof(ISerializable).IsAssignableFrom(baseType))

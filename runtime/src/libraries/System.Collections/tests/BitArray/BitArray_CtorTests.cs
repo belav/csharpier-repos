@@ -104,7 +104,8 @@ namespace System.Collections.Tests
                     BitsPerInt32 * 8,
                     BitsPerInt32 * 16
                 }
-            ) {
+            )
+            {
                 yield return new object[] { Enumerable.Repeat(true, size).ToArray() };
                 yield return new object[] { Enumerable.Repeat(false, size).ToArray() };
                 yield return new object[]
@@ -162,7 +163,8 @@ namespace System.Collections.Tests
                     BitsPerInt32,
                     BitsPerInt32 * 2
                 }
-            ) {
+            )
+            {
                 yield return new object[] { "length", new BitArray(size) };
                 yield return new object[] { "length|default(true)", new BitArray(size, true) };
                 yield return new object[] { "length|default(false)", new BitArray(size, false) };
@@ -322,7 +324,8 @@ namespace System.Collections.Tests
                     BitsPerInt32 / BitsPerByte,
                     2 * BitsPerInt32 / BitsPerByte
                 }
-            ) {
+            )
+            {
                 yield return new object[]
                 {
                     Enumerable.Repeat((byte)0xff, size).ToArray(),

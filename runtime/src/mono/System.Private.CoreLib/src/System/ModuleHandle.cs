@@ -62,7 +62,8 @@ namespace System
             int typeToken,
             RuntimeTypeHandle[]? typeInstantiationContext,
             RuntimeTypeHandle[]? methodInstantiationContext
-        ) {
+        )
+        {
             ResolveTokenError error;
             if (value == IntPtr.Zero)
                 throw new ArgumentNullException(string.Empty, "Invalid handle");
@@ -89,7 +90,8 @@ namespace System
             int methodToken,
             RuntimeTypeHandle[]? typeInstantiationContext,
             RuntimeTypeHandle[]? methodInstantiationContext
-        ) {
+        )
+        {
             ResolveTokenError error;
             if (value == IntPtr.Zero)
                 throw new ArgumentNullException(string.Empty, "Invalid handle");
@@ -116,7 +118,8 @@ namespace System
             int fieldToken,
             RuntimeTypeHandle[]? typeInstantiationContext,
             RuntimeTypeHandle[]? methodInstantiationContext
-        ) {
+        )
+        {
             ResolveTokenError error;
             if (value == IntPtr.Zero)
                 throw new ArgumentNullException(string.Empty, "Invalid handle");

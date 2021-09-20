@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public async ValueTask InvokeAsync(
             Func<T, CancellationToken, ValueTask> invocation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 await invocation(_callback, cancellationToken).ConfigureAwait(false);
@@ -47,7 +48,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public async ValueTask<TResult> InvokeAsync<TResult>(
             Func<T, CancellationToken, ValueTask<TResult>> invocation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 return await invocation(_callback, cancellationToken).ConfigureAwait(false);
@@ -67,7 +69,8 @@ namespace Microsoft.CodeAnalysis.Remote
             Func<T, PipeWriter, CancellationToken, ValueTask> invocation,
             Func<PipeReader, CancellationToken, ValueTask<TResult>> reader,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 return await BrokeredServiceConnection<T>.InvokeStreamingServiceAsync(
@@ -95,7 +98,8 @@ namespace Microsoft.CodeAnalysis.Remote
         private static bool ReportUnexpectedException(
             Exception exception,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (exception is IOException)
             {
                 // propagate intermittent exceptions without reporting telemetry:
@@ -131,7 +135,8 @@ namespace Microsoft.CodeAnalysis.Remote
         private static Exception OnUnexpectedException(
             Exception exception,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             if (exception is ConnectionLostException)

@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             ImmutableArray<string> allTypeParameters,
             int containingArity,
             ImmutableArray<string> methodTypeParameters
-        ) {
+        )
+        {
             _reader = reader;
             _allTypeParameters = allTypeParameters;
             _containingArity = containingArity;
@@ -155,7 +156,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             ref BlobReader signatureReader,
             ImmutableArray<string> typeParameters,
             int containingArity
-        ) {
+        )
+        {
             int index = signatureReader.ReadCompressedInteger();
             if (index < containingArity)
             {
@@ -185,7 +187,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         private ImmutableArray<TypeSignature> DecodeGenericTypeArguments(
             ref BlobReader signatureReader
-        ) {
+        )
+        {
             int typeArgCount;
             signatureReader.TryReadCompressedInteger(out typeArgCount);
             var builder = ImmutableArray.CreateBuilder<TypeSignature>(typeArgCount);
@@ -202,7 +205,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             EntityHandle handle,
             ImmutableArray<TypeSignature> typeArguments,
             ref int typeArgumentOffset
-        ) {
+        )
+        {
             switch (handle.Kind)
             {
                 case HandleKind.TypeDefinition:
@@ -227,7 +231,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             TypeDefinitionHandle handle,
             ImmutableArray<TypeSignature> typeArguments,
             ref int typeArgumentOffset
-        ) {
+        )
+        {
             var typeDef = _reader.GetTypeDefinition(handle);
             TypeSignature qualifier;
             var declaringTypeHandle = typeDef.GetDeclaringType();
@@ -258,7 +263,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             TypeReferenceHandle handle,
             ImmutableArray<TypeSignature> typeArguments,
             ref int typeArgumentOffset
-        ) {
+        )
+        {
             var typeRef = _reader.GetTypeReference(handle);
             TypeSignature qualifier;
             var scope = typeRef.ResolutionScope;
@@ -314,7 +320,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             string typeName,
             ImmutableArray<TypeSignature> typeArguments,
             ref int typeArgumentOffset
-        ) {
+        )
+        {
             int arity;
             typeName = RemoveAritySeparatorIfAny(typeName, out arity);
             var qualifiedName = new QualifiedTypeSignature(qualifier, typeName);

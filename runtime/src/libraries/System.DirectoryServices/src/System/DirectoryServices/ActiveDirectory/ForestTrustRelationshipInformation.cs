@@ -22,7 +22,8 @@ namespace System.DirectoryServices.ActiveDirectory
             string source,
             DS_DOMAIN_TRUSTS unmanagedTrust,
             TrustType type
-        ) {
+        )
+        {
             string? tmpDNSName = null;
             string? tmpNetBIOSName = null;
 
@@ -471,7 +472,8 @@ namespace System.DirectoryServices.ActiveDirectory
                                 if (
                                     record.ForestTrustType
                                     == LSA_FOREST_TRUST_RECORD_TYPE.ForestTrustTopLevelName
-                                ) {
+                                )
+                                {
                                     IntPtr myPtr = IntPtr.Add(addr, 16);
                                     Marshal.PtrToStructure(myPtr, record.TopLevelName);
                                     TopLevelName TLN = new TopLevelName(
@@ -484,7 +486,8 @@ namespace System.DirectoryServices.ActiveDirectory
                                 else if (
                                     record.ForestTrustType
                                     == LSA_FOREST_TRUST_RECORD_TYPE.ForestTrustTopLevelNameEx
-                                ) {
+                                )
+                                {
                                     // get the excluded TLN and put it in our collection
                                     IntPtr myPtr = IntPtr.Add(addr, 16);
                                     Marshal.PtrToStructure(myPtr, record.TopLevelName);
@@ -498,7 +501,8 @@ namespace System.DirectoryServices.ActiveDirectory
                                 else if (
                                     record.ForestTrustType
                                     == LSA_FOREST_TRUST_RECORD_TYPE.ForestTrustDomainInfo
-                                ) {
+                                )
+                                {
                                     ForestTrustDomainInformation dom =
                                         new ForestTrustDomainInformation(
                                             record.Flags,
@@ -510,7 +514,8 @@ namespace System.DirectoryServices.ActiveDirectory
                                 else if (
                                     record.ForestTrustType
                                     == LSA_FOREST_TRUST_RECORD_TYPE.ForestTrustRecordTypeLast
-                                ) {
+                                )
+                                {
                                     // enumeration is done, but we might still have some unrecognized entries after that
                                     continue;
                                 }

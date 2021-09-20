@@ -99,7 +99,8 @@ namespace Microsoft.AspNetCore.Components.WebView
             string methodIdentifier,
             long dotNetObjectId,
             string argsJson
-        ) {
+        )
+        {
             DotNetDispatcher.BeginInvokeDotNet(
                 pageContext.JSRuntime,
                 new DotNetInvocationInfo(assemblyName, methodIdentifier, dotNetObjectId, callId),
@@ -112,7 +113,8 @@ namespace Microsoft.AspNetCore.Components.WebView
             long asyncHandle,
             bool succeeded,
             string argumentsOrError
-        ) {
+        )
+        {
             DotNetDispatcher.EndInvokeJS(pageContext.JSRuntime, argumentsOrError);
         }
 
@@ -120,7 +122,8 @@ namespace Microsoft.AspNetCore.Components.WebView
             PageContext pageContext,
             string eventDescriptor,
             string eventArgs
-        ) {
+        )
+        {
             var renderer = pageContext.Renderer;
             var jsonSerializerOptions = pageContext.JSRuntime.ReadJsonSerializerOptions();
             var webEventData = WebEventData.Parse(
@@ -140,7 +143,8 @@ namespace Microsoft.AspNetCore.Components.WebView
             PageContext pageContext,
             long batchId,
             string errorMessageOrNull
-        ) {
+        )
+        {
             if (errorMessageOrNull != null)
             {
                 throw new InvalidOperationException(errorMessageOrNull);

@@ -68,7 +68,8 @@ namespace System.Threading.Tasks.Dataflow
         public WriteOnceBlock(
             Func<T, T>? cloningFunction,
             DataflowBlockOptions dataflowBlockOptions
-        ) {
+        )
+        {
             // Validate arguments
             if (dataflowBlockOptions == null)
                 throw new ArgumentNullException(nameof(dataflowBlockOptions));
@@ -236,7 +237,8 @@ namespace System.Threading.Tasks.Dataflow
                         Common.CompletedVoidResultTaskCompletionSource,
                         null
                     ) != null
-                ) {
+                )
+                {
                     _lazyCompletionTaskSource.TrySetResult(default(VoidResult));
                 }
             }
@@ -399,7 +401,8 @@ namespace System.Threading.Tasks.Dataflow
             T messageValue,
             ISourceBlock<T>? source,
             bool consumeToAccept
-        ) {
+        )
+        {
             // Validate arguments
             if (!messageHeader.IsValid)
                 throw new ArgumentException(
@@ -454,7 +457,8 @@ namespace System.Threading.Tasks.Dataflow
             DataflowMessageHeader messageHeader,
             ITargetBlock<T> target,
             out bool messageConsumed
-        ) {
+        )
+        {
             // Validate arguments
             if (!messageHeader.IsValid)
                 throw new ArgumentException(
@@ -482,7 +486,8 @@ namespace System.Threading.Tasks.Dataflow
         bool ISourceBlock<T>.ReserveMessage(
             DataflowMessageHeader messageHeader,
             ITargetBlock<T> target
-        ) {
+        )
+        {
             // Validate arguments
             if (!messageHeader.IsValid)
                 throw new ArgumentException(
@@ -502,7 +507,8 @@ namespace System.Threading.Tasks.Dataflow
         void ISourceBlock<T>.ReleaseReservation(
             DataflowMessageHeader messageHeader,
             ITargetBlock<T> target
-        ) {
+        )
+        {
             // Validate arguments
             if (!messageHeader.IsValid)
                 throw new ArgumentException(

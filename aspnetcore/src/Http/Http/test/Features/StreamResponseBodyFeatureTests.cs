@@ -74,10 +74,8 @@ namespace Microsoft.AspNetCore.Http.Features
 
     public class InnerDisableBufferingFeature : StreamResponseBodyFeature
     {
-        public InnerDisableBufferingFeature(
-            Stream stream,
-            IHttpResponseBodyFeature priorFeature
-        ) : base(stream, priorFeature) { }
+        public InnerDisableBufferingFeature(Stream stream, IHttpResponseBodyFeature priorFeature)
+            : base(stream, priorFeature) { }
 
         public override void DisableBuffering()
         {

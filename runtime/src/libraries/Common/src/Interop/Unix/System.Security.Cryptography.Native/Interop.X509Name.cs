@@ -40,7 +40,8 @@ internal static partial class Interop
         internal static SafeSharedX509NameHandle GetX509NameStackField(
             SafeSharedX509NameStackHandle sk,
             int loc
-        ) {
+        )
+        {
             CheckValidOpenSslHandle(sk);
 
             return SafeInteriorHandle.OpenInteriorHandle(

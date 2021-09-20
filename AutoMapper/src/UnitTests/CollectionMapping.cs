@@ -793,7 +793,8 @@ namespace AutoMapper.UnitTests
             TDestination d,
             Func<TSource, IEnumerable<TSourceItem>> getSourceEnum,
             Func<TDestination, ICollection<TDestinationItem>> getDestinationColl
-        ) {
+        )
+        {
             ICollection<TDestinationItem> collection = getDestinationColl(d);
             collection.Clear();
             foreach (TSourceItem sourceItem in getSourceEnum(s))

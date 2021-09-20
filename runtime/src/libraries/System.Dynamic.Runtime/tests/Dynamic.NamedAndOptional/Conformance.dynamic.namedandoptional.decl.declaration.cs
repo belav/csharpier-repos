@@ -538,7 +538,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
             [Optional] dynamic j,
             [Optional] dynamic f,
             [Optional] dynamic d
-        ) {
+        )
+        {
             if (d == System.Type.Missing)
                 return 0;
             return 1;
@@ -578,7 +579,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
             [Optional] long? j,
             [Optional] float? f,
             [Optional] decimal? d
-        ) {
+        )
+        {
             if (d == null)
                 return 0;
             return 1;

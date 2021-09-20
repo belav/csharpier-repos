@@ -11,7 +11,8 @@ namespace ControllersFromServicesClassLibrary
         public ConstructorInjectionController(
             IUrlHelperFactory urlHelperFactory,
             QueryValueService queryService
-        ) {
+        )
+        {
             UrlHelperFactory = urlHelperFactory;
             QueryService = queryService;
         }

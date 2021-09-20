@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         private void VerifyFieldMetadataDecoding(
             CompilationVerifier verifier,
             Dictionary<string, byte[]> blobs
-        ) {
+        )
+        {
             int count = 0;
             using (var assembly = AssemblyMetadata.CreateFromImage(verifier.EmittedAssemblyData))
             {
@@ -41,7 +42,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 foreach (
                     NamedTypeSymbol type in compilation.GlobalNamespace.GetMembers()
                         .Where(s => s.Kind == SymbolKind.NamedType)
-                ) {
+                )
+                {
                     var fields = type.GetMembers().Where(s => s.Kind == SymbolKind.Field);
                     foreach (FieldSymbol field in fields)
                     {
@@ -67,7 +69,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         private void VerifyParameterMetadataDecoding(
             CompilationVerifier verifier,
             Dictionary<string, byte[]> blobs
-        ) {
+        )
+        {
             int count = 0;
             using (var assembly = AssemblyMetadata.CreateFromImage(verifier.EmittedAssemblyData))
             {
@@ -82,7 +85,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 foreach (
                     NamedTypeSymbol type in compilation.GlobalNamespace.GetMembers()
                         .Where(s => s.Kind == SymbolKind.NamedType)
-                ) {
+                )
+                {
                     var methods = type.GetMembers().Where(s => s.Kind == SymbolKind.Method);
                     foreach (MethodSymbol method in methods)
                     {

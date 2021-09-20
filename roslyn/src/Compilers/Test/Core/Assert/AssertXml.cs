@@ -61,7 +61,8 @@ namespace Roslyn.Test.Utilities
             string expectedValueSourcePath,
             int expectedValueSourceLine,
             bool expectedIsXmlLiteral
-        ) {
+        )
+        {
             if (
                 !CheckEqual(
                     expectedRoot,
@@ -69,7 +70,8 @@ namespace Roslyn.Test.Utilities
                     ShallowElementComparer.Instance,
                     out var firstMismatch
                 )
-            ) {
+            )
+            {
                 Assert.True(
                     false,
                     message
@@ -117,7 +119,8 @@ namespace Roslyn.Test.Utilities
             string expectedValueSourcePath,
             int expectedValueSourceLine,
             bool expectedIsXmlLiteral
-        ) {
+        )
+        {
             StringBuilder assertText = new StringBuilder();
 
             string actualString = expectedIsXmlLiteral
@@ -135,7 +138,8 @@ namespace Roslyn.Test.Utilities
                     expectedValueSourceLine,
                     out var link
                 )
-            ) {
+            )
+            {
                 assertText.AppendLine(link);
             }
             else
@@ -177,7 +181,8 @@ namespace Roslyn.Test.Utilities
             XElement actualRoot,
             IEqualityComparer<XElement> shallowComparer,
             out Tuple<XElement, XElement> firstMismatch
-        ) {
+        )
+        {
             Assert.NotNull(expectedRoot);
             Assert.NotNull(actualRoot);
             Assert.NotNull(shallowComparer);

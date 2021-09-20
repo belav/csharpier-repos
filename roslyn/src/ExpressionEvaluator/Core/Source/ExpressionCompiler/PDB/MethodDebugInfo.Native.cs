@@ -62,7 +62,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             int methodVersion,
             int ilOffset,
             bool isVisualBasicMethod
-        ) {
+        )
+        {
             // no symbols
             if (symReader == null)
             {
@@ -255,7 +256,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             ISymUnmanagedReader3 reader,
             int methodToken,
             int methodVersion
-        ) {
+        )
+        {
             try
             {
                 return reader.GetCustomDebugInfo(methodToken, methodVersion);
@@ -285,7 +287,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             ISymUnmanagedReader reader,
             int methodToken,
             int methodVersion
-        ) {
+        )
+        {
             var method = reader.GetMethodByVersion(methodToken, methodVersion);
             if (method == null)
             {
@@ -331,7 +334,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             int methodVersion,
             out ImmutableArray<ImmutableArray<ImportRecord>> importRecordGroups,
             out ImmutableArray<ExternAliasRecord> externAliasRecords
-        ) {
+        )
+        {
             ImmutableArray<string> externAliasStrings;
 
             var importStringGroups = CustomDebugInfoReader.GetCSharpGroupedImportStrings(
@@ -365,7 +369,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                                 importString,
                                 out var record
                             )
-                        ) {
+                        )
+                        {
                             groupBuilder.Add(record);
                         }
                         else
@@ -391,7 +396,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                                 out var target,
                                 out var kind
                             )
-                        ) {
+                        )
+                        {
                             Debug.WriteLine($"Unable to parse extern alias '{externAliasString}'");
                             continue;
                         }
@@ -429,7 +435,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             EESymbolProvider<TTypeSymbol, TLocalSymbol> symbolProvider,
             string importString,
             out ImportRecord record
-        ) {
+        )
+        {
             string? targetString;
             if (
                 CustomDebugInfoReader.TryParseCSharpImportString(
@@ -439,7 +446,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                     out targetString,
                     out var targetKind
                 )
-            ) {
+            )
+            {
                 ITypeSymbolInternal? type = null;
                 if (targetKind == ImportTargetKind.Type)
                 {
@@ -469,7 +477,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             IEnumerable<ISymUnmanagedScope> scopes,
             out ImmutableDictionary<int, ImmutableArray<bool>>? dynamicLocalMap,
             out ImmutableDictionary<string, ImmutableArray<bool>>? dynamicLocalConstantMap
-        ) {
+        )
+        {
             dynamicLocalMap = null;
             dynamicLocalConstantMap = null;
 
@@ -547,7 +556,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         private static void GetLocalKindByName(
             Dictionary<string, LocalKind> localNames,
             IEnumerable<ISymUnmanagedScope> scopes
-        ) {
+        )
+        {
             Debug.Assert(localNames.Count == 0);
 
             var localSlot0 = scopes.SelectMany(scope => scope.GetLocals())
@@ -576,7 +586,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 LocalNameAndScope,
                 ImmutableArray<string?>
             >? tupleLocalConstantMap
-        ) {
+        )
+        {
             tupleLocalMap = null;
             tupleLocalConstantMap = null;
 
@@ -640,7 +651,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             int methodVersion,
             out ImmutableArray<ImmutableArray<ImportRecord>> importRecordGroups,
             out string defaultNamespaceName
-        ) {
+        )
+        {
             importRecordGroups = ImmutableArray<ImmutableArray<ImportRecord>>.Empty;
 
             var importStrings = CustomDebugInfoReader.GetVisualBasicImportStrings(
@@ -676,7 +688,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                             out var kind,
                             out var scope
                         )
-                    ) {
+                    )
+                    {
                         Debug.WriteLine($"Unable to parse import string '{importString}'");
                         continue;
                     }
@@ -706,7 +719,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                             out importRecord,
                             out scope
                         )
-                    ) {
+                    )
+                    {
                         if (scope == VBImportScopeKind.Project)
                         {
                             projectLevelImportRecords.Add(importRecord);
@@ -739,7 +753,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             string importString,
             out ImportRecord record,
             out VBImportScopeKind scope
-        ) {
+        )
+        {
             ImportTargetKind targetKind;
             string alias;
             string targetString;
@@ -751,7 +766,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                     out targetKind,
                     out scope
                 )
-            ) {
+            )
+            {
                 record = new ImportRecord(
                     targetKind: targetKind,
                     alias: alias,
@@ -772,7 +788,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             ArrayBuilder<ISymUnmanagedScope> scopes,
             int ilOffset,
             bool isEndInclusive
-        ) {
+        )
+        {
             return MethodContextReuseConstraints.CalculateReuseSpan(
                 ilOffset,
                 ILSpan.MaxValue,
@@ -792,7 +809,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             ArrayBuilder<ISymUnmanagedScope> scopes,
             ImmutableDictionary<string, ImmutableArray<bool>>? dynamicLocalConstantMap,
             ImmutableDictionary<LocalNameAndScope, ImmutableArray<string?>>? tupleLocalConstantMap
-        ) {
+        )
+        {
             foreach (var scope in scopes)
             {
                 foreach (var constant in scope.GetConstants())
@@ -869,7 +887,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             ImmutableArray<LocalInfo<TTypeSymbol>> localInfo,
             ImmutableDictionary<int, ImmutableArray<bool>>? dynamicLocalMap,
             ImmutableDictionary<int, ImmutableArray<string?>>? tupleLocalConstantMap
-        ) {
+        )
+        {
             if (localInfo.Length == 0)
             {
                 // When debugging a .dmp without a heap, localInfo will be empty although

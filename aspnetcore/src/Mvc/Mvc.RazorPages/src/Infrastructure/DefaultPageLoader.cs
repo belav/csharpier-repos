@@ -26,7 +26,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             ActionEndpointFactory endpointFactory,
             IOptions<RazorPagesOptions> pageOptions,
             IOptions<MvcOptions> mvcOptions
-        ) {
+        )
+        {
             _viewCompilerProvider = viewCompilerProvider;
             _endpointFactory = endpointFactory;
             _compiledPageActionDescriptorFactory = new CompiledPageActionDescriptorFactory(
@@ -46,7 +47,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         public override Task<CompiledPageActionDescriptor> LoadAsync(
             PageActionDescriptor actionDescriptor,
             EndpointMetadataCollection endpointMetadata
-        ) {
+        )
+        {
             if (actionDescriptor == null)
             {
                 throw new ArgumentNullException(nameof(actionDescriptor));
@@ -68,7 +70,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         private async Task<CompiledPageActionDescriptor> LoadAsyncCore(
             PageActionDescriptor actionDescriptor,
             EndpointMetadataCollection endpointMetadata
-        ) {
+        )
+        {
             var viewDescriptor = await Compiler.CompileAsync(actionDescriptor.RelativePath);
             var compiled = _compiledPageActionDescriptorFactory.CreateCompiledDescriptor(
                 actionDescriptor,

@@ -32,7 +32,8 @@ namespace Internal.TypeSystem
                     int instantiationIndex = 0;
                     instantiationIndex < type.Instantiation.Length;
                     instantiationIndex++
-                ) {
+                )
+                {
                     if (type.Instantiation[instantiationIndex].IsConstructedOverType(typesToFind))
                     {
                         return true;
@@ -76,7 +77,8 @@ namespace Internal.TypeSystem
             this TypeDesc type,
             TypeDesc[] typesToReplace,
             TypeDesc[] replacementTypes
-        ) {
+        )
+        {
             int directReplacementIndex = Array.IndexOf(typesToReplace, type);
 
             if (directReplacementIndex != -1)
@@ -177,7 +179,8 @@ namespace Internal.TypeSystem
             this MethodDesc method,
             TypeDesc[] typesToReplace,
             TypeDesc[] replacementTypes
-        ) {
+        )
+        {
             TypeDesc newOwningType = method.OwningType.ReplaceTypesInConstructionOfType(
                 typesToReplace,
                 replacementTypes

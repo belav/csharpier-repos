@@ -74,7 +74,8 @@ namespace System.Web.Razor.Test.Parser.VB
             string keyword,
             string endSequence,
             AcceptedCharacters acceptedCharacters
-        ) {
+        )
+        {
             ParseBlockTest(
                 keyword
                     + Environment.NewLine
@@ -115,7 +116,8 @@ namespace System.Web.Razor.Test.Parser.VB
             string keyword,
             string endSequence,
             AcceptedCharacters acceptedCharacters
-        ) {
+        )
+        {
             ParseBlockTest(
                 keyword
                     + Environment.NewLine

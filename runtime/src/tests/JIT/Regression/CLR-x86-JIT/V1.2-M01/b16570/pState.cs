@@ -55,7 +55,8 @@ internal class test
                         / (cl.arr3d[4, 0, 3] - (vt.a1))
                     )
                 )
-            ) {
+            )
+            {
                 double if0_1retval = Convert.ToDouble(
                     (
                         ((vtstatic.a4 * clstatic.a5) + (asgop0 - (0.25F - 0.235290527F)))

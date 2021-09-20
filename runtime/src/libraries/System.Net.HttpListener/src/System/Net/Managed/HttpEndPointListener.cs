@@ -198,7 +198,8 @@ namespace System.Net
                     if (
                         path.StartsWith(ppath, StringComparison.Ordinal)
                         || pathSlash.StartsWith(ppath, StringComparison.Ordinal)
-                    ) {
+                    )
+                    {
                         bestLength = ppath.Length;
                         bestMatch = localPrefixes[p];
                         prefix = p;
@@ -234,7 +235,8 @@ namespace System.Net
             string path,
             List<ListenerPrefix>? list,
             out ListenerPrefix? prefix
-        ) {
+        )
+        {
             prefix = null;
             if (list == null)
                 return null;

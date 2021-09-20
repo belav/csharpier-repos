@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
             int index,
             SyntaxNode node,
             List<SuppressOperation> list
-        ) {
+        )
+        {
             _formattingRules = formattingRules;
             _index = index;
             _node = node;

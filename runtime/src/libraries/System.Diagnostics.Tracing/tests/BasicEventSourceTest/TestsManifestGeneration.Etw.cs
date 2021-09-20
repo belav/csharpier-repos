@@ -55,7 +55,8 @@ namespace BasicEventSourceTests
                                     }
                                 }
                             )
-                        ) {
+                        )
+                        {
                             var etlFileName = @"file.etl";
                             var tracesession = new TraceEventSession("testname", etlFileName);
 
@@ -107,7 +108,8 @@ namespace BasicEventSourceTests
                                     }
                                 }
                             )
-                        ) {
+                        )
+                        {
                             var initialFileName = @"initialFile.etl";
                             var rolloverFileName = @"rolloverFile.etl";
                             var tracesession = new TraceEventSession("testname", initialFileName);
@@ -169,7 +171,8 @@ namespace BasicEventSourceTests
                 if (
                     eventData.ProviderName.Equals("SimpleEventSource")
                     && eventData.EventName.Equals("ManifestData")
-                ) {
+                )
+                {
                     sawManifestData = true;
                 }
             };

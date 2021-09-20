@@ -97,7 +97,8 @@ namespace System.Web.WebPages
             int startPosition,
             int length,
             bool isLiteral
-        ) {
+        )
+        {
             BeginContext(GetOutputWriter(), virtualPath, startPosition, length, isLiteral);
         }
 
@@ -106,7 +107,8 @@ namespace System.Web.WebPages
             int startPosition,
             int length,
             bool isLiteral
-        ) {
+        )
+        {
             BeginContext(writer, VirtualPath, startPosition, length, isLiteral);
         }
 
@@ -116,7 +118,8 @@ namespace System.Web.WebPages
             int startPosition,
             int length,
             bool isLiteral
-        ) {
+        )
+        {
             // Double check that the instrumentation service is active because WriteAttribute always calls this
             if (InstrumentationService.IsAvailable)
             {
@@ -141,7 +144,8 @@ namespace System.Web.WebPages
             int startPosition,
             int length,
             bool isLiteral
-        ) {
+        )
+        {
             EndContext(GetOutputWriter(), virtualPath, startPosition, length, isLiteral);
         }
 
@@ -150,7 +154,8 @@ namespace System.Web.WebPages
             int startPosition,
             int length,
             bool isLiteral
-        ) {
+        )
+        {
             EndContext(writer, VirtualPath, startPosition, length, isLiteral);
         }
 
@@ -160,7 +165,8 @@ namespace System.Web.WebPages
             int startPosition,
             int length,
             bool isLiteral
-        ) {
+        )
+        {
             // Double check that the instrumentation service is active because WriteAttribute always calls this
             if (InstrumentationService.IsAvailable)
             {
@@ -218,7 +224,8 @@ namespace System.Web.WebPages
             PositionTagged<string> prefix,
             PositionTagged<string> suffix,
             params AttributeValue[] values
-        ) {
+        )
+        {
             WriteAttributeTo(GetOutputWriter(), name, prefix, suffix, values);
         }
 
@@ -228,7 +235,8 @@ namespace System.Web.WebPages
             PositionTagged<string> prefix,
             PositionTagged<string> suffix,
             params AttributeValue[] values
-        ) {
+        )
+        {
             WriteAttributeTo(VirtualPath, writer, name, prefix, suffix, values);
         }
 
@@ -239,7 +247,8 @@ namespace System.Web.WebPages
             PositionTagged<string> prefix,
             PositionTagged<string> suffix,
             params AttributeValue[] values
-        ) {
+        )
+        {
             bool first = true;
             bool wroteSomething = false;
             if (values.Length == 0)
@@ -352,7 +361,8 @@ namespace System.Web.WebPages
             string pageVirtualPath,
             string value,
             int position
-        ) {
+        )
+        {
             BeginContext(writer, pageVirtualPath, position, value.Length, isLiteral: true);
             WriteLiteralTo(writer, value);
             EndContext(writer, pageVirtualPath, position, value.Length, isLiteral: true);
@@ -362,7 +372,8 @@ namespace System.Web.WebPages
             TextWriter writer,
             string pageVirtualPath,
             PositionTagged<string> value
-        ) {
+        )
+        {
             WritePositionTaggedLiteral(writer, pageVirtualPath, value.Value, value.Position);
         }
 

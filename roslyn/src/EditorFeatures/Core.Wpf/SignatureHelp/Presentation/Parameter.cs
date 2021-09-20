@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
             string content,
             int index,
             int prettyPrintedIndex
-        ) {
+        )
+        {
             _parameter = parameter;
             this.Signature = signature;
             _contentLength = content.Length;

@@ -122,7 +122,8 @@ namespace System.IO.Tests
             int offset,
             int count,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (mode == ReadWriteMode.SyncByte)
             {
                 if (count > 0)
@@ -168,7 +169,8 @@ namespace System.IO.Tests
             int offset,
             int count,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             int bytesRead = 0;
             if (ReadsReadUntilSizeOrEof && mode != ReadWriteMode.SyncByte)
             {
@@ -204,7 +206,8 @@ namespace System.IO.Tests
             int offset,
             int count,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             switch (mode)
             {
                 case ReadWriteMode.SyncByte:
@@ -254,7 +257,8 @@ namespace System.IO.Tests
             ReadWriteMode mode,
             Stream stream,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             switch (mode)
             {
                 case ReadWriteMode.SyncByte:
@@ -428,7 +432,8 @@ namespace System.IO.Tests
                         (2, 0),
                         (int.MaxValue, int.MaxValue)
                     }
-                ) {
+                )
+                {
                     AssertExtensions.Throws<ArgumentOutOfRangeException>(
                         ReadWriteCountName,
                         () =>
@@ -760,7 +765,8 @@ namespace System.IO.Tests
                         (2, 0),
                         (int.MaxValue, int.MaxValue)
                     }
-                ) {
+                )
+                {
                     Assert.ThrowsAny<ArgumentException>(
                         () =>
                         {
@@ -1064,7 +1070,8 @@ namespace System.IO.Tests
         protected async Task AssertCanceledAsync(
             CancellationToken cancellationToken,
             Func<Task> testCode
-        ) {
+        )
+        {
             OperationCanceledException oce =
                 await Assert.ThrowsAnyAsync<OperationCanceledException>(testCode);
             if (cancellationToken.CanBeCanceled)
@@ -1075,7 +1082,8 @@ namespace System.IO.Tests
 
         protected async Task ValidatePrecanceledOperations_ThrowsCancellationException(
             Stream stream
-        ) {
+        )
+        {
             var cts = new CancellationTokenSource();
             cts.Cancel();
 
@@ -1121,7 +1129,8 @@ namespace System.IO.Tests
 
         protected async Task ValidateCancelableReadAsyncTask_AfterInvocation_ThrowsCancellationException(
             Stream stream
-        ) {
+        )
+        {
             if (!stream.CanRead || !FullyCancelableOperations)
             {
                 return;
@@ -1135,7 +1144,8 @@ namespace System.IO.Tests
 
         protected async Task ValidateCancelableReadAsyncValueTask_AfterInvocation_ThrowsCancellationException(
             Stream stream
-        ) {
+        )
+        {
             if (!stream.CanRead || !FullyCancelableOperations)
             {
                 return;
@@ -1478,7 +1488,8 @@ namespace System.IO.Tests
         public virtual async Task Read_PopulatedWithInitialData_KnownSize_Success(
             ReadWriteMode mode,
             int size
-        ) {
+        )
+        {
             byte[] expected = RandomNumberGenerator.GetBytes(size);
 
             using Stream? stream = await CreateReadOnlyStream(expected);
@@ -1511,7 +1522,8 @@ namespace System.IO.Tests
         public virtual async Task Read_PopulatedWithInitialData_ToEof_Success(
             ReadWriteMode mode,
             int size
-        ) {
+        )
+        {
             byte[] expected = RandomNumberGenerator.GetBytes(size);
 
             using Stream? stream = await CreateReadOnlyStream(expected);
@@ -1544,7 +1556,8 @@ namespace System.IO.Tests
         [MemberData(nameof(AllReadWriteModes))]
         public virtual async Task Read_PartiallySatisfied_RemainderOfBufferUntouched(
             ReadWriteMode mode
-        ) {
+        )
+        {
             byte[] expected = RandomNumberGenerator.GetBytes(20);
 
             using Stream? stream = await CreateReadOnlyStream(expected);
@@ -1638,7 +1651,8 @@ namespace System.IO.Tests
             bool useAsync,
             byte[] expected,
             int position
-        ) {
+        )
+        {
             using Stream? stream = await CreateReadOnlyStream(expected);
             if (stream is null)
             {
@@ -2231,7 +2245,8 @@ namespace System.IO.Tests
 
         protected IEnumerable<(Stream writeable, Stream readable)> GetReadWritePairs(
             StreamPair streams
-        ) {
+        )
+        {
             var pairs = new List<(Stream, Stream)>(2);
 
             if (streams.Stream1.CanWrite)
@@ -2390,14 +2405,16 @@ namespace System.IO.Tests
             ReadWriteMode mode,
             int writeSize,
             bool startWithFlush
-        ) {
+        )
+        {
             foreach (
                 CancellationToken nonCanceledToken in new[]
                 {
                     CancellationToken.None,
                     new CancellationTokenSource().Token
                 }
-            ) {
+            )
+            {
                 using StreamPair streams = await CreateConnectedStreamsAsync();
 
                 foreach ((Stream writeable, Stream readable) in GetReadWritePairs(streams))
@@ -2673,7 +2690,8 @@ namespace System.IO.Tests
         public virtual async Task ReadAsync_ContinuesOnCurrentSynchronizationContextIfDesired(
             bool flowExecutionContext,
             bool? continueOnCapturedContext
-        ) {
+        )
+        {
             await default(JumpToThreadPoolAwaiter); // escape xunit sync ctx
 
             using StreamPair streams = await CreateConnectedStreamsAsync();
@@ -2764,7 +2782,8 @@ namespace System.IO.Tests
         public virtual async Task ReadAsync_ContinuesOnCurrentTaskSchedulerIfDesired(
             bool flowExecutionContext,
             bool? continueOnCapturedContext
-        ) {
+        )
+        {
             await default(JumpToThreadPoolAwaiter); // escape xunit sync ctx
 
             using StreamPair streams = await CreateConnectedStreamsAsync();
@@ -3102,7 +3121,8 @@ namespace System.IO.Tests
                                             readBuffer.AsMemory(received)
                                         )
                                     ) > 0
-                                ) {
+                                )
+                                {
                                     received += bytesRead;
                                 }
                                 Assert.InRange(bytesRead, 1, int.MaxValue);
@@ -3589,7 +3609,8 @@ namespace System.IO.Tests
                     streams,
                     leaveOpen: true
                 )
-            ) {
+            )
+            {
                 foreach ((Stream writeable, Stream readable) in GetReadWritePairs(wrapper))
                 {
                     writeable.WriteByte(42);
@@ -3671,7 +3692,8 @@ namespace System.IO.Tests
         [InlineData(ReadWriteMode.AsyncAPM)]
         public virtual async Task ZeroByteRead_PerformsZeroByteReadOnUnderlyingStreamWhenDataNeeded(
             ReadWriteMode mode
-        ) {
+        )
+        {
             if (!ZeroByteReadPerformsZeroByteReadOnUnderlyingStream)
             {
                 return;
@@ -3782,7 +3804,8 @@ namespace System.IO.Tests
                 int count,
                 AsyncCallback? callback,
                 object? state
-            ) {
+            )
+            {
                 CheckForZeroByteRead(count);
                 return base.BeginRead(buffer, offset, count, callback, state);
             }
@@ -3804,7 +3827,8 @@ namespace System.IO.Tests
                 int offset,
                 int count,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 CheckForZeroByteRead(count);
                 return base.ReadAsync(buffer, offset, count, cancellationToken);
             }
@@ -3812,7 +3836,8 @@ namespace System.IO.Tests
             public override ValueTask<int> ReadAsync(
                 Memory<byte> buffer,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 CheckForZeroByteRead(buffer.Length);
                 return base.ReadAsync(buffer, cancellationToken);
             }

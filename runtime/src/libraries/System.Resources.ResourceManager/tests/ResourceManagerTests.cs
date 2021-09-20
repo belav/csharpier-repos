@@ -91,7 +91,8 @@ namespace System.Resources.Tests
             string key,
             string cultureName,
             string expectedValue
-        ) {
+        )
+        {
             Type resourceType = typeof(Resources.TestResx);
             ResourceManager resourceManager = new ResourceManager(resourceType);
             var culture = new CultureInfo(cultureName);
@@ -119,7 +120,8 @@ namespace System.Resources.Tests
         static System.Reflection.Assembly AssemblyResolvingEventHandler(
             System.Runtime.Loader.AssemblyLoadContext alc,
             System.Reflection.AssemblyName name
-        ) {
+        )
+        {
             if (name.FullName.StartsWith("System.Resources.ResourceManager.Tests.resources"))
             {
                 if (name.FullName.Contains("Culture=af-ZA"))
@@ -139,7 +141,8 @@ namespace System.Resources.Tests
         static System.Reflection.Assembly AssemblyResolveEventHandler(
             object sender,
             ResolveEventArgs args
-        ) {
+        )
+        {
             string name = args.Name;
             if (name.StartsWith("System.Resources.ResourceManager.Tests.resources"))
             {
@@ -371,7 +374,8 @@ namespace System.Resources.Tests
             string key,
             object expectedValue,
             bool requiresBinaryFormatter
-        ) {
+        )
+        {
             _ = requiresBinaryFormatter;
             var manager = new ResourceManager(
                 "System.Resources.Tests.Resources.TestResx.netstandard17",
@@ -392,7 +396,8 @@ namespace System.Resources.Tests
             string key,
             object expectedValue,
             bool requiresBinaryFormatter
-        ) {
+        )
+        {
             _ = requiresBinaryFormatter;
             var manager = new ResourceManager(
                 "System.Resources.Tests.Resources.TestResx.netstandard17",
@@ -429,7 +434,8 @@ namespace System.Resources.Tests
             string key,
             object expectedValue,
             bool requiresBinaryFormatter
-        ) {
+        )
+        {
             var manager = ResourceManager.CreateFileBasedResourceManager(
                 "TestResx.netstandard17",
                 Directory.GetCurrentDirectory(),
@@ -455,7 +461,8 @@ namespace System.Resources.Tests
             string key,
             object expectedValue,
             bool requiresBinaryFormatter
-        ) {
+        )
+        {
             var manager = ResourceManager.CreateFileBasedResourceManager(
                 "TestResx.netstandard17",
                 Directory.GetCurrentDirectory(),

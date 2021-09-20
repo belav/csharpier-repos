@@ -39,7 +39,8 @@ namespace System.Configuration
         protected internal override void DeserializeElement(
             XmlReader reader,
             bool serializeCollectionKey
-        ) {
+        )
+        {
             ValueXml = _document.ReadNode(reader);
         }
 
@@ -88,7 +89,8 @@ namespace System.Configuration
             ConfigurationElement sourceElement,
             ConfigurationElement parentElement,
             ConfigurationSaveMode saveMode
-        ) {
+        )
+        {
             base.Unmerge(sourceElement, parentElement, saveMode);
             ValueXml = ((SettingValueElement)sourceElement).ValueXml;
         }

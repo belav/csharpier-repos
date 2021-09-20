@@ -12,7 +12,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
     {
         public static SyntaxList<AttributeListSyntax> GetAttributes(
             this MemberDeclarationSyntax member
-        ) {
+        )
+        {
             if (member != null)
             {
                 return member.AttributeLists;

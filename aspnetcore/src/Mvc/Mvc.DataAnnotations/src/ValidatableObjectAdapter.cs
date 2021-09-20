@@ -47,7 +47,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
 
         private IEnumerable<ModelValidationResult> ConvertResults(
             IEnumerable<ValidationResult> results
-        ) {
+        )
+        {
             foreach (var result in results)
             {
                 if (result != ValidationResult.Success)

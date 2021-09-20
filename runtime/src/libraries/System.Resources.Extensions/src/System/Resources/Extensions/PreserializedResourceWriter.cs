@@ -197,7 +197,8 @@ namespace System.Resources.Extensions
             Stream value,
             string typeName,
             bool closeAfterWrite = false
-        ) {
+        )
+        {
             if (name == null)
                 throw new ArgumentNullException(nameof(name));
             if (value == null)
@@ -227,7 +228,8 @@ namespace System.Resources.Extensions
                 SerializationFormat format,
                 object data,
                 bool closeAfterWrite = false
-            ) {
+            )
+            {
                 Format = format;
                 Data = data;
                 CloseAfterWrite = closeAfterWrite;

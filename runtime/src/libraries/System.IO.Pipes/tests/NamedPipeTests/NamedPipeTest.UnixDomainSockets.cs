@@ -32,7 +32,8 @@ namespace System.IO.Pipes.Tests
                     SocketType.Stream,
                     ProtocolType.Unspecified
                 )
-            ) {
+            )
+            {
                 sockectClient.Connect(endPoint);
                 Assert.True(File.Exists(pipeName));
             }
@@ -62,7 +63,8 @@ namespace System.IO.Pipes.Tests
                     PipeDirection.InOut,
                     PipeOptions.None
                 )
-            ) {
+            )
+            {
                 socketServer.Bind(endPoint);
                 socketServer.Listen(1);
 

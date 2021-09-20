@@ -18,7 +18,8 @@ namespace System.Net.Sockets.Tests
             SocketImplementationType type,
             EndPoint endpoint,
             ProtocolType protocolType = ProtocolType.Tcp
-        ) {
+        )
+        {
             return SocketTestServerFactory(
                 type,
                 DefaultNumConnections,
@@ -32,7 +33,8 @@ namespace System.Net.Sockets.Tests
             SocketImplementationType type,
             IPAddress address,
             out int port
-        ) {
+        )
+        {
             return SocketTestServerFactory(
                 type,
                 DefaultNumConnections,
@@ -53,7 +55,8 @@ namespace System.Net.Sockets.Tests
             int receiveBufferSize,
             EndPoint localEndPoint,
             ProtocolType protocolType = ProtocolType.Tcp
-        ) {
+        )
+        {
             switch (type)
             {
                 case SocketImplementationType.APM:
@@ -80,7 +83,8 @@ namespace System.Net.Sockets.Tests
             int receiveBufferSize,
             IPAddress address,
             out int port
-        ) {
+        )
+        {
             SocketTestServer server = SocketTestServerFactory(
                 type,
                 numConnections,

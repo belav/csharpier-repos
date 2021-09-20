@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis
             public DiagnosticWithProgrammaticSuppression(
                 Diagnostic originalUnsuppressedDiagnostic,
                 ProgrammaticSuppressionInfo programmaticSuppressionInfo
-            ) {
+            )
+            {
                 RoslynDebug.Assert(!originalUnsuppressedDiagnostic.IsSuppressed);
                 RoslynDebug.Assert(
                     originalUnsuppressedDiagnostic.ProgrammaticSuppressionInfo == null

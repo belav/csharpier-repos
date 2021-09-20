@@ -25,7 +25,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         public static CompositeBindingSource Create(
             IEnumerable<BindingSource> bindingSources,
             string displayName
-        ) {
+        )
+        {
             if (bindingSources == null)
             {
                 throw new ArgumentNullException(nameof(bindingSources));

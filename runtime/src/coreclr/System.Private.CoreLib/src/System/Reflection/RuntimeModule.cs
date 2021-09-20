@@ -116,7 +116,8 @@ namespace System.Reflection
             int metadataToken,
             Type[]? genericTypeArguments,
             Type[]? genericMethodArguments
-        ) {
+        )
+        {
             try
             {
                 MetadataToken tk = new MetadataToken(metadataToken);
@@ -191,7 +192,8 @@ namespace System.Reflection
             int metadataToken,
             Type[]? genericTypeArguments,
             Type[]? genericMethodArguments
-        ) {
+        )
+        {
             MetadataToken tk = new MetadataToken(metadataToken);
 
             if (!MetadataImport.IsValidToken(tk) || !tk.IsFieldDef)
@@ -237,7 +239,8 @@ namespace System.Reflection
             int metadataToken,
             Type[]? genericTypeArguments,
             Type[]? genericMethodArguments
-        ) {
+        )
+        {
             try
             {
                 MetadataToken tk = new MetadataToken(metadataToken);
@@ -322,7 +325,8 @@ namespace System.Reflection
             int metadataToken,
             Type[]? genericTypeArguments,
             Type[]? genericMethodArguments
-        ) {
+        )
+        {
             try
             {
                 MetadataToken tk = new MetadataToken(metadataToken);
@@ -365,7 +369,8 @@ namespace System.Reflection
             int metadataToken,
             Type[]? genericTypeArguments,
             Type[]? genericMethodArguments
-        ) {
+        )
+        {
             MetadataToken tk = new MetadataToken(metadataToken);
 
             if (tk.IsProperty)
@@ -439,7 +444,8 @@ namespace System.Reflection
         public override void GetPEKind(
             out PortableExecutableKinds peKind,
             out ImageFileMachine machine
-        ) {
+        )
+        {
             ModuleHandle.GetPEKind(this, out peKind, out machine);
         }
 
@@ -469,7 +475,8 @@ namespace System.Reflection
             CallingConventions callConvention,
             Type[]? types,
             ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             return GetMethodInternal(name, bindingAttr, binder, callConvention, types, modifiers);
         }
 
@@ -483,7 +490,8 @@ namespace System.Reflection
             CallingConventions callConvention,
             Type[]? types,
             ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             if (RuntimeType == null)
                 return null;
 

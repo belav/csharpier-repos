@@ -20,7 +20,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
             Func<IEnumerable<ExportDefinition>> exports,
             IDictionary<string, object> metadata,
             ICompositionElement origin
-        ) {
+        )
+        {
             return (ReflectionComposablePartDefinition)ReflectionModelServices.CreatePartDefinition(
                 partType,
                 requiresDisposal,
@@ -284,7 +285,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
             ConstructorInfo constructor,
             IDictionary<string, object> metadata,
             ICompositionElement origin
-        ) {
+        )
+        {
             return (ReflectionComposablePartDefinition)ReflectionModelServices.CreatePartDefinition(
                 (type != null) ? type.AsLazy() : null,
                 false,

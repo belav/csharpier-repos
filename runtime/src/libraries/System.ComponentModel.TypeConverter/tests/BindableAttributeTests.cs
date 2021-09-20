@@ -36,7 +36,8 @@ namespace System.ComponentModel.Tests
             BindableSupport support,
             BindingDirection direction,
             bool expectedBindable
-        ) {
+        )
+        {
             var attribute = new BindableAttribute(support, direction);
             Assert.Equal(expectedBindable, attribute.Bindable);
             Assert.Equal(direction, attribute.Direction);
@@ -100,7 +101,8 @@ namespace System.ComponentModel.Tests
             BindableAttribute attribute,
             object other,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, attribute.Equals(other));
         }
 

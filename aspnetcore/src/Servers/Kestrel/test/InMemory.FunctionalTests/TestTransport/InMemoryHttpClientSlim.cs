@@ -37,7 +37,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTrans
             using (
                 var stream = await GetStream(connection.Stream, requestUri, validateCertificate)
                     .ConfigureAwait(false)
-            ) {
+            )
+            {
                 using (
                     var writer = new StreamWriter(
                         stream,
@@ -45,7 +46,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTrans
                         bufferSize: 1024,
                         leaveOpen: true
                     )
-                ) {
+                )
+                {
                     await writer.WriteAsync($"GET {requestUri.PathAndQuery} HTTP/1.0\r\n")
                         .ConfigureAwait(false);
                     await writer.WriteAsync($"Host: {GetHost(requestUri)}\r\n")
@@ -90,12 +92,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTrans
             Uri requestUri,
             HttpContent content,
             bool validateCertificate = true
-        ) {
+        )
+        {
             using (var connection = _inMemoryTestServer.CreateConnection())
             using (
                 var stream = await GetStream(connection.Stream, requestUri, validateCertificate)
                     .ConfigureAwait(false)
-            ) {
+            )
+            {
                 using (
                     var writer = new StreamWriter(
                         stream,
@@ -103,7 +107,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTrans
                         bufferSize: 1024,
                         leaveOpen: true
                     )
-                ) {
+                )
+                {
                     await writer.WriteAsync($"POST {requestUri.PathAndQuery} HTTP/1.0\r\n")
                         .ConfigureAwait(false);
                     await writer.WriteAsync($"Host: {requestUri.Authority}\r\n")
@@ -131,7 +136,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTrans
                     bufferSize: 1024,
                     leaveOpen: true
                 )
-            ) {
+            )
+            {
                 var response = await reader.ReadToEndAsync().DefaultTimeout().ConfigureAwait(false);
 
                 var status = GetStatus(response);
@@ -165,7 +171,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTrans
             Stream rawStream,
             Uri requestUri,
             bool validateCertificate
-        ) {
+        )
+        {
             if (requestUri.Scheme.Equals("https", StringComparison.OrdinalIgnoreCase))
             {
                 var sslStream = new SslStream(

@@ -12,7 +12,8 @@ namespace Microsoft.Extensions.Caching.StackExchangeRedis
             this IDatabase cache,
             string key,
             params string[] members
-        ) {
+        )
+        {
             // TODO: Error checking?
             return cache.HashGet(key, GetRedisMembers(members));
         }
@@ -21,7 +22,8 @@ namespace Microsoft.Extensions.Caching.StackExchangeRedis
             this IDatabase cache,
             string key,
             params string[] members
-        ) {
+        )
+        {
             // TODO: Error checking?
             return await cache.HashGetAsync(key, GetRedisMembers(members)).ConfigureAwait(false);
         }

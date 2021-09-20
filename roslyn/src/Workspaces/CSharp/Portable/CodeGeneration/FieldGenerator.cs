@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         private static MemberDeclarationSyntax LastField(
             SyntaxList<MemberDeclarationSyntax> members,
             FieldDeclarationSyntax fieldDeclaration
-        ) {
+        )
+        {
             var lastConst = members.OfType<FieldDeclarationSyntax>()
                 .Where(f => f.Modifiers.Any(SyntaxKind.ConstKeyword))
                 .LastOrDefault();
@@ -57,7 +58,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IFieldSymbol field,
             CodeGenerationOptions options,
             IList<bool> availableIndices
-        ) {
+        )
+        {
             var declaration = GenerateFieldDeclaration(field, options);
 
             // Place the field after the last field or const, or at the start of the type
@@ -78,7 +80,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IFieldSymbol field,
             CodeGenerationOptions options,
             IList<bool> availableIndices
-        ) {
+        )
+        {
             var declaration = GenerateFieldDeclaration(field, options);
 
             // Place the field after the last field or const, or at the start of the type
@@ -98,7 +101,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         public static FieldDeclarationSyntax GenerateFieldDeclaration(
             IFieldSymbol field,
             CodeGenerationOptions options
-        ) {
+        )
+        {
             var reusableSyntax = GetReuseableSyntaxNodeForSymbol<VariableDeclaratorSyntax>(
                 field,
                 options
@@ -168,7 +172,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         private static SyntaxTokenList GenerateModifiers(
             IFieldSymbol field,
             CodeGenerationOptions options
-        ) {
+        )
+        {
             var tokens = ArrayBuilder<SyntaxToken>.GetInstance();
 
             AddAccessibilityModifiers(

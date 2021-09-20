@@ -107,7 +107,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.ProjectContext
         private static async Task<LSP.ActiveProjectContexts?> RunGetProjectContext(
             TestLspServer testLspServer,
             Uri uri
-        ) {
+        )
+        {
             return await testLspServer.ExecuteRequestAsync<
                 LSP.GetTextDocumentWithContextParams,
                 LSP.ActiveProjectContexts?

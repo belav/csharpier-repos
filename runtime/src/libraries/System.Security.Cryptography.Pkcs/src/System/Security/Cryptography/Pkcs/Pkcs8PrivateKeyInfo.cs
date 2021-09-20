@@ -21,7 +21,8 @@ namespace System.Security.Cryptography.Pkcs
             ReadOnlyMemory<byte>? algorithmParameters,
             ReadOnlyMemory<byte> privateKey,
             bool skipCopies = false
-        ) {
+        )
+        {
             if (algorithmId == null)
                 throw new ArgumentNullException(nameof(algorithmId));
 
@@ -42,7 +43,8 @@ namespace System.Security.Cryptography.Pkcs
             ReadOnlyMemory<byte>? algorithmParameters,
             ReadOnlyMemory<byte> privateKey,
             CryptographicAttributeObjectCollection attributes
-        ) {
+        )
+        {
             Debug.Assert(algorithmId != null);
 
             AlgorithmId = algorithmId;
@@ -64,7 +66,8 @@ namespace System.Security.Cryptography.Pkcs
             ReadOnlyMemory<byte> source,
             out int bytesRead,
             bool skipCopy = false
-        ) {
+        )
+        {
             try
             {
                 AsnValueReader reader = new AsnValueReader(source.Span, AsnEncodingRules.BER);
@@ -144,7 +147,8 @@ namespace System.Security.Cryptography.Pkcs
             PbeParameters pbeParameters,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             if (pbeParameters == null)
                 throw new ArgumentNullException(nameof(pbeParameters));
 
@@ -164,7 +168,8 @@ namespace System.Security.Cryptography.Pkcs
             PbeParameters pbeParameters,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             if (pbeParameters == null)
                 throw new ArgumentNullException(nameof(pbeParameters));
 
@@ -187,7 +192,8 @@ namespace System.Security.Cryptography.Pkcs
             ReadOnlySpan<char> password,
             ReadOnlyMemory<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             ArraySegment<byte> decrypted = KeyFormatHelper.DecryptPkcs8(
                 password,
                 source,
@@ -221,7 +227,8 @@ namespace System.Security.Cryptography.Pkcs
             ReadOnlySpan<byte> passwordBytes,
             ReadOnlyMemory<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             ArraySegment<byte> decrypted = KeyFormatHelper.DecryptPkcs8(
                 passwordBytes,
                 source,

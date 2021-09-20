@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.BraceMatching
             Document document,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             var token = root.FindToken(position);
 
@@ -55,7 +56,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.BraceMatching
                         SyntaxKind.InterpolatedStringStartToken,
                         SyntaxKind.InterpolatedVerbatimStringStartToken
                     )
-                ) {
+                )
+                {
                     if (token.Parent is InterpolatedStringExpressionSyntax interpolatedString)
                     {
                         return new BraceMatchingResult(

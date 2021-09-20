@@ -27,7 +27,8 @@ namespace System.Web.Http.Controllers
             IExceptionLogger exceptionLogger,
             IExceptionHandler exceptionHandler,
             IHttpActionResult innerResult
-        ) {
+        )
+        {
             Contract.Assert(context != null);
             Contract.Assert(filters != null);
             Contract.Assert(exceptionLogger != null);

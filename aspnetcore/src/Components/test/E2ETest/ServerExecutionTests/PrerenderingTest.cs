@@ -124,7 +124,8 @@ namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests
         public async Task CanRedirectDuringPrerendering(
             string destinationParam,
             string expectedRedirectionLocation
-        ) {
+        )
+        {
             var requestUri = new Uri(
                 _serverFixture.RootUri,
                 "prerendered/prerendered-redirection?destination=" + destinationParam
@@ -146,7 +147,8 @@ namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests
         public void CanAccessAuthenticationStateDuringStaticPrerendering(
             string initialUsername,
             string interactiveUsername
-        ) {
+        )
+        {
             // See that the authentication state is usable during the initial prerendering
             SignInAs(initialUsername, null);
             Navigate("/prerendered/prerendered-transition");

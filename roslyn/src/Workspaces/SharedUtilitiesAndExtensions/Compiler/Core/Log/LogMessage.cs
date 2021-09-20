@@ -177,7 +177,8 @@ namespace Microsoft.CodeAnalysis.Internal.Log
                 Func<TArg0, TArg1, string> messageGetter,
                 TArg0 arg0,
                 TArg1 arg1
-            ) {
+            )
+            {
                 var logMessage = s_pool.Allocate();
                 logMessage._messageGetter = messageGetter;
                 logMessage._arg0 = arg0;
@@ -217,7 +218,8 @@ namespace Microsoft.CodeAnalysis.Internal.Log
                 TArg0 arg0,
                 TArg1 arg1,
                 TArg2 arg2
-            ) {
+            )
+            {
                 var logMessage = s_pool.Allocate();
                 logMessage._messageGetter = messageGetter;
                 logMessage._arg0 = arg0;
@@ -261,7 +263,8 @@ namespace Microsoft.CodeAnalysis.Internal.Log
                 TArg1 arg1,
                 TArg2 arg2,
                 TArg3 arg3
-            ) {
+            )
+            {
                 var logMessage = s_pool.Allocate();
                 logMessage._messageGetter = messageGetter;
                 logMessage._arg0 = arg0;

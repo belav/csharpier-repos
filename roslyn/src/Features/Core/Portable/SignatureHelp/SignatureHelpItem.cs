@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
             IEnumerable<TaggedText> suffixParts,
             IEnumerable<SignatureHelpParameter> parameters,
             IEnumerable<TaggedText>? descriptionParts
-        ) {
+        )
+        {
             if (isVariadic && !parameters.Any())
             {
                 throw new ArgumentException(
@@ -74,17 +75,18 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
             IEnumerable<SymbolDisplayPart> suffixParts,
             IEnumerable<SignatureHelpParameter> parameters,
             IEnumerable<SymbolDisplayPart> descriptionParts
-        ) : this(
-            isVariadic,
-            documentationFactory != null
-              ? c => documentationFactory(c).ToTaggedText()
-              : s_emptyDocumentationFactory,
-            prefixParts.ToTaggedText(),
-            separatorParts.ToTaggedText(),
-            suffixParts.ToTaggedText(),
-            parameters,
-            descriptionParts.ToTaggedText()
-        ) { }
+        )
+            : this(
+                isVariadic,
+                documentationFactory != null
+                  ? c => documentationFactory(c).ToTaggedText()
+                  : s_emptyDocumentationFactory,
+                prefixParts.ToTaggedText(),
+                separatorParts.ToTaggedText(),
+                suffixParts.ToTaggedText(),
+                parameters,
+                descriptionParts.ToTaggedText()
+            ) { }
 
         internal IEnumerable<TaggedText> GetAllParts()
         {

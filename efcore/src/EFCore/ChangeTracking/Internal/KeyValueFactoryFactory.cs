@@ -83,7 +83,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             IForeignKey foreignKey,
             object dependentKeyValueFactory,
             Func<IDependentsMap> dependentsMapFactory
-        ) {
+        )
+        {
             var concreteForeignKey = (IRuntimeForeignKey)foreignKey;
 
             concreteForeignKey.DependentKeyValueFactory = dependentKeyValueFactory;

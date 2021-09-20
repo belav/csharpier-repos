@@ -26,7 +26,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Type entityType,
             Type collectionType,
             bool requireFullNotifications
-        ) {
+        )
+        {
             // Code taken from EF6. The rules are:
             // If the collection is defined as a concrete type with a public parameterless constructor, then create an instance of that type
             // Else, if entity type is notifying and ObservableHashSet{T} can be assigned to the type, then use ObservableHashSet{T}
@@ -53,7 +54,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             if (
                 requireFullNotifications
                 || typeof(INotifyPropertyChanged).IsAssignableFrom(entityType)
-            ) {
+            )
+            {
                 var observableHashSetOfT = typeof(ObservableHashSet<>).MakeGenericType(elementType);
                 if (collectionType.IsAssignableFrom(observableHashSetOfT))
                 {

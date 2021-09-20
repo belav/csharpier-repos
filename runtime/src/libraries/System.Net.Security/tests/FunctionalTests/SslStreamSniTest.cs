@@ -70,7 +70,8 @@ namespace System.Net.Security.Tests
         [MemberData(nameof(HostNameData))]
         public async Task SslStream_ServerCallbackAndLocalCertificateSelectionSet_Throws(
             string hostName
-        ) {
+        )
+        {
             X509Certificate serverCert =
                 Configuration.Certificates.GetSelfSignedServerCertificate();
 
@@ -110,7 +111,8 @@ namespace System.Net.Security.Tests
             using (
                 SslStream server = new SslStream(stream1, false, null, selectionCallback),
                     client = new SslStream(stream2, leaveInnerStreamOpen: false, validationCallback)
-            ) {
+            )
+            {
                 Task clientJob = Task.Run(
                     () =>
                     {
@@ -142,7 +144,8 @@ namespace System.Net.Security.Tests
         [MemberData(nameof(HostNameData))]
         public async Task SslStream_ServerCallbackNotSet_UsesLocalCertificateSelection(
             string hostName
-        ) {
+        )
+        {
             X509Certificate serverCert =
                 Configuration.Certificates.GetSelfSignedServerCertificate();
 
@@ -181,7 +184,8 @@ namespace System.Net.Security.Tests
             using (
                 SslStream server = new SslStream(stream1, false, null, selectionCallback),
                     client = new SslStream(stream2, leaveInnerStreamOpen: false, validationCallback)
-            ) {
+            )
+            {
                 Task clientJob = Task.Run(
                     () =>
                     {
@@ -284,7 +288,8 @@ namespace System.Net.Security.Tests
         private async Task WithVirtualConnection(
             Func<SslStream, SslStream, Task> serverClientConnection,
             RemoteCertificateValidationCallback clientCertValidate
-        ) {
+        )
+        {
             (Stream clientStream, Stream serverStream) = TestHelper.GetConnectedStreams();
             using (
                 SslStream server = new SslStream(serverStream, leaveInnerStreamOpen: false),
@@ -293,7 +298,8 @@ namespace System.Net.Security.Tests
                         leaveInnerStreamOpen: false,
                         clientCertValidate
                     )
-            ) {
+            )
+            {
                 await serverClientConnection(server, client);
             }
         }

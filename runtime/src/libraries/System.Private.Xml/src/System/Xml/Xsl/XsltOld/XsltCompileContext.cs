@@ -28,7 +28,8 @@ namespace System.Xml.Xsl.XsltOld
         internal XsltCompileContext(InputScopeManager manager, Processor processor)
             : base( /*dummy*/
                 false
-            ) {
+            )
+        {
             _manager = manager;
             _processor = processor;
         }
@@ -121,7 +122,8 @@ namespace System.Xml.Xsl.XsltOld
             bool publicOnly,
             string name,
             XPathResultType[]? argTypes
-        ) {
+        )
+        {
             int length = methods.Length;
             int free = 0;
             // restrict search to methods with the same name and requiested protection attribute
@@ -133,7 +135,8 @@ namespace System.Xml.Xsl.XsltOld
                         methods[i].Name,
                         ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal
                     )
-                ) {
+                )
+                {
                     if (!publicOnly || methods[i].GetBaseDefinition().IsPublic)
                     {
                         methods[free++] = methods[i];
@@ -183,7 +186,8 @@ namespace System.Xml.Xsl.XsltOld
                     XPathResultType actual = GetXPathType(parameters[par].ParameterType);
                     if (
                         actual != required && actual != XPathResultType.Any // actual arg is object and we can pass everithing here.
-                    ) {
+                    )
+                    {
                         match = false;
                         break;
                     }
@@ -212,7 +216,8 @@ namespace System.Xml.Xsl.XsltOld
             string name,
             XPathResultType[]? argTypes,
             out object? extension
-        ) {
+        )
+        {
             FuncExtension? result = null;
             extension = _processor!.GetScriptObject(ns);
             if (extension != null)
@@ -255,7 +260,8 @@ namespace System.Xml.Xsl.XsltOld
             string prefix,
             string name,
             XPathResultType[] argTypes
-        ) {
+        )
+        {
             IXsltContextFunction? func = null;
             if (prefix.Length == 0)
             {
@@ -373,7 +379,8 @@ namespace System.Xml.Xsl.XsltOld
             string key,
             XPathNavigator value,
             bool checkDuplicates
-        ) {
+        )
+        {
             ArrayList? list = (ArrayList?)keyTable[key];
             if (list == null)
             {
@@ -394,7 +401,8 @@ namespace System.Xml.Xsl.XsltOld
                     if (
                         value.ComparePosition((XPathNavigator?)list[list.Count - 1])
                         == XmlNodeOrder.Same
-                    ) {
+                    )
+                    {
                         return;
                     }
                 }
@@ -416,7 +424,8 @@ namespace System.Xml.Xsl.XsltOld
             string matchStr,
             Query useExpr,
             Hashtable keyTable
-        ) {
+        )
+        {
             try
             {
                 if (matchExpr.MatchNode(node) == null)
@@ -642,7 +651,8 @@ namespace System.Xml.Xsl.XsltOld
                     if (
                         typeof(XPathNavigator).IsAssignableFrom(type)
                         || typeof(IXPathNavigable).IsAssignableFrom(type)
-                    ) {
+                    )
+                    {
                         return XPathResultType.Navigator;
                     }
                     if (typeof(XPathNodeIterator).IsAssignableFrom(type))
@@ -706,7 +716,8 @@ namespace System.Xml.Xsl.XsltOld
                 int maxArgs,
                 XPathResultType returnType,
                 XPathResultType[] argTypes
-            ) {
+            )
+            {
                 Init(minArgs, maxArgs, returnType, argTypes);
             }
 
@@ -716,7 +727,8 @@ namespace System.Xml.Xsl.XsltOld
                 int maxArgs,
                 XPathResultType returnType,
                 XPathResultType[] argTypes
-            ) {
+            )
+            {
                 _minargs = minArgs;
                 _maxargs = maxArgs;
                 _returnType = returnType;
@@ -865,7 +877,8 @@ namespace System.Xml.Xsl.XsltOld
                 XsltContext xsltContext,
                 object[] args,
                 XPathNavigator docContext
-            ) {
+            )
+            {
                 return ((XsltCompileContext)xsltContext).Current();
             }
         }
@@ -883,7 +896,8 @@ namespace System.Xml.Xsl.XsltOld
                 XsltContext xsltContext,
                 object[] args,
                 XPathNavigator docContext
-            ) {
+            )
+            {
                 throw XsltException.Create(SR.Xslt_UnsuppFunction, "unparsed-entity-uri");
             }
         }
@@ -901,7 +915,8 @@ namespace System.Xml.Xsl.XsltOld
                 XsltContext xsltContext,
                 object[] args,
                 XPathNavigator docContext
-            ) {
+            )
+            {
                 if (args.Length > 0)
                 {
                     XPathNodeIterator it = ToIterator(args[0]);
@@ -935,7 +950,8 @@ namespace System.Xml.Xsl.XsltOld
                 XsltContext xsltContext,
                 object[] args,
                 XPathNavigator docContext
-            ) {
+            )
+            {
                 return ((XsltCompileContext)xsltContext).SystemProperty(ToString(args[0]));
             }
         }
@@ -954,7 +970,8 @@ namespace System.Xml.Xsl.XsltOld
                 XsltContext xsltContext,
                 object[] args,
                 XPathNavigator docContext
-            ) {
+            )
+            {
                 return ((XsltCompileContext)xsltContext).ElementAvailable(ToString(args[0]));
             }
         }
@@ -973,7 +990,8 @@ namespace System.Xml.Xsl.XsltOld
                 XsltContext xsltContext,
                 object[] args,
                 XPathNavigator docContext
-            ) {
+            )
+            {
                 return ((XsltCompileContext)xsltContext).FunctionAvailable(ToString(args[0]));
             }
         }
@@ -994,7 +1012,8 @@ namespace System.Xml.Xsl.XsltOld
                 XsltContext xsltContext,
                 object[] args,
                 XPathNavigator docContext
-            ) {
+            )
+            {
                 string? baseUri = null;
                 if (args.Length == 2)
                 {
@@ -1039,7 +1058,8 @@ namespace System.Xml.Xsl.XsltOld
                 XsltContext xsltContext,
                 object[] args,
                 XPathNavigator docContext
-            ) {
+            )
+            {
                 XsltCompileContext xsltCompileContext = (XsltCompileContext)xsltContext;
 
                 string local,
@@ -1142,7 +1162,8 @@ namespace System.Xml.Xsl.XsltOld
                 XsltContext xsltContext,
                 object[] args,
                 XPathNavigator docContext
-            ) {
+            )
+            {
                 DecimalFormat formatInfo = ((XsltCompileContext)xsltContext).ResolveFormatName(
                     args.Length == 3 ? ToString(args[2]) : null
                 );
@@ -1163,7 +1184,8 @@ namespace System.Xml.Xsl.XsltOld
                 XsltContext xsltContext,
                 object[] args,
                 XPathNavigator docContext
-            ) {
+            )
+            {
                 return new XPathSingletonIterator(ToNavigator(args[0]));
             }
         }
@@ -1211,7 +1233,8 @@ namespace System.Xml.Xsl.XsltOld
                 XsltContext xsltContext,
                 object[] args,
                 XPathNavigator docContext
-            ) {
+            )
+            {
                 Debug.Assert(args.Length <= this.Minargs, "We cheking this on resolve time");
                 for (int i = args.Length - 1; 0 <= i; i--)
                 {

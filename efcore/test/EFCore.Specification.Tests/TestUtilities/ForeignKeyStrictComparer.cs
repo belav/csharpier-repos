@@ -17,7 +17,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
         public ForeignKeyStrictComparer(
             bool compareAnnotations = true,
             bool compareNavigations = true
-        ) {
+        )
+        {
             _compareAnnotations = compareAnnotations;
             _compareNavigations = compareNavigations;
         }

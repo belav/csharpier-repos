@@ -31,7 +31,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Common
             ISettingsProvider<T> data,
             IWpfTableControlProvider controlProvider,
             ITableManagerProvider tableMangerProvider
-        ) {
+        )
+        {
             _data = data;
             _controlProvider = controlProvider;
             _data.RegisterViewModel(this);

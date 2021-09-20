@@ -24,7 +24,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </remarks>
         public static IServiceCollection AddDatabaseDeveloperPageExceptionFilter(
             this IServiceCollection services
-        ) {
+        )
+        {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));

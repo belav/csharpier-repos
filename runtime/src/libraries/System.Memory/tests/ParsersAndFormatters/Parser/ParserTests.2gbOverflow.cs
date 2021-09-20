@@ -53,7 +53,8 @@ namespace System.Buffers.Text.Tests
         private static void TwoGiBOverflowHelper<T>(
             IEnumerable<ParserTestData<T>> testDataCollection,
             IntPtr pMemory
-        ) {
+        )
+        {
             Assert.All<ParserTestData<T>>(
                 testDataCollection,
                 (testData) =>

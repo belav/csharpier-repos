@@ -37,7 +37,8 @@ namespace System.Formats.Asn1
             ReadOnlySpan<byte> value,
             int unusedBitCount = 0,
             Asn1Tag? tag = null
-        ) {
+        )
+        {
             CheckUniversalTag(tag, UniversalTagNumber.BitString);
 
             // Primitive or constructed, doesn't matter.
@@ -49,7 +50,8 @@ namespace System.Formats.Asn1
             Asn1Tag tag,
             ReadOnlySpan<byte> bitString,
             int unusedBitCount
-        ) {
+        )
+        {
             // T-REC-X.690-201508 sec 8.6.2.2
             if (unusedBitCount < 0 || unusedBitCount > 7)
             {
@@ -166,7 +168,8 @@ namespace System.Formats.Asn1
             Asn1Tag tag,
             ReadOnlySpan<byte> payload,
             int unusedBitCount
-        ) {
+        )
+        {
             const int MaxCERSegmentSize = AsnReader.MaxCERSegmentSize;
             // Every segment has an "unused bit count" byte.
             const int MaxCERContentSize = MaxCERSegmentSize - 1;

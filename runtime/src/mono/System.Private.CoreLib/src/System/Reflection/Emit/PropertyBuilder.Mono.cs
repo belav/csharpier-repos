@@ -72,7 +72,8 @@ namespace System.Reflection.Emit
             Type[]? parameterTypes,
             Type[][]? paramModReq,
             Type[][]? paramModOpt
-        ) {
+        )
+        {
             this.name = name;
             this.attrs = attributes;
             this.callingConvention = callingConvention;
@@ -162,7 +163,8 @@ namespace System.Reflection.Emit
             Binder? binder,
             object?[]? index,
             CultureInfo? culture
-        ) {
+        )
+        {
             throw not_supported();
         }
         public override bool IsDefined(Type attributeType, bool inherit)
@@ -234,7 +236,8 @@ namespace System.Reflection.Emit
             Binder? binder,
             object?[]? index,
             CultureInfo? culture
-        ) {
+        )
+        {
             throw not_supported();
         }
 

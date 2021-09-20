@@ -72,7 +72,8 @@ namespace Microsoft.AspNetCore.Components.Rendering
         public async Task<ComponentRenderedText> RenderComponentAsync(
             Type componentType,
             ParameterView initialParameters
-        ) {
+        )
+        {
             var (componentId, frames) = await CreateInitialRenderAsync(
                 componentType,
                 initialParameters
@@ -100,7 +101,8 @@ namespace Microsoft.AspNetCore.Components.Rendering
             ArrayRange<RenderTreeFrame> frames,
             int position,
             int maxElements
-        ) {
+        )
+        {
             var nextPosition = position;
             var endPosition = position + maxElements;
             while (position < endPosition)
@@ -120,7 +122,8 @@ namespace Microsoft.AspNetCore.Components.Rendering
             HtmlRenderingContext context,
             ArrayRange<RenderTreeFrame> frames,
             int position
-        ) {
+        )
+        {
             ref var frame = ref frames.Array[position];
             switch (frame.FrameType)
             {
@@ -159,7 +162,8 @@ namespace Microsoft.AspNetCore.Components.Rendering
             HtmlRenderingContext context,
             ArrayRange<RenderTreeFrame> frames,
             int position
-        ) {
+        )
+        {
             ref var frame = ref frames.Array[position];
             var childFrames = GetCurrentRenderTreeFrames(frame.ComponentId);
             RenderFrames(context, childFrames, 0, childFrames.Count);
@@ -170,7 +174,8 @@ namespace Microsoft.AspNetCore.Components.Rendering
             HtmlRenderingContext context,
             ArrayRange<RenderTreeFrame> frames,
             int position
-        ) {
+        )
+        {
             ref var frame = ref frames.Array[position];
             var result = context.Result;
             result.Add("<");
@@ -194,7 +199,8 @@ namespace Microsoft.AspNetCore.Components.Rendering
                     context.ClosestSelectValueAsString,
                     StringComparison.Ordinal
                 )
-            ) {
+            )
+            {
                 result.Add(" selected");
             }
 
@@ -256,7 +262,8 @@ namespace Microsoft.AspNetCore.Components.Rendering
             ArrayRange<RenderTreeFrame> frames,
             int position,
             int maxElements
-        ) {
+        )
+        {
             if (maxElements == 0)
             {
                 return position;
@@ -271,7 +278,8 @@ namespace Microsoft.AspNetCore.Components.Rendering
             int position,
             int maxElements,
             out string capturedValueAttribute
-        ) {
+        )
+        {
             capturedValueAttribute = null;
 
             if (maxElements == 0)
@@ -320,7 +328,8 @@ namespace Microsoft.AspNetCore.Components.Rendering
         private async Task<(int, ArrayRange<RenderTreeFrame>)> CreateInitialRenderAsync(
             Type componentType,
             ParameterView initialParameters
-        ) {
+        )
+        {
             var component = InstantiateComponent(componentType);
             var componentId = AssignRootComponentId(component);
 

@@ -8,7 +8,8 @@ namespace System.Globalization
         public static StringComparer GetStringComparer(
             this CompareInfo compareInfo,
             CompareOptions options
-        ) {
+        )
+        {
             if (compareInfo == null)
             {
                 throw new ArgumentNullException(nameof(compareInfo));

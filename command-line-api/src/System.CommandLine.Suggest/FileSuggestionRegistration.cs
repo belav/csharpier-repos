@@ -48,7 +48,8 @@ namespace System.CommandLine.Suggest
             if (
                 _registrationConfigurationFilePath == null
                 || !File.Exists(_registrationConfigurationFilePath)
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -62,7 +63,8 @@ namespace System.CommandLine.Suggest
                             soughtExecutable.FullName,
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         completionTarget = line;
                     }
                 }
@@ -84,7 +86,8 @@ namespace System.CommandLine.Suggest
             if (
                 _registrationConfigurationFilePath != null
                 && File.Exists(_registrationConfigurationFilePath)
-            ) {
+            )
+            {
                 using (var sr = new StreamReader(_registrationConfigurationFilePath, Encoding.UTF8))
                 {
                     string line;

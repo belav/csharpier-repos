@@ -134,7 +134,8 @@ namespace JIT.HardwareIntrinsics.Arm
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfinArray3
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -213,7 +214,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario(
                 InsertSelectedScalarTest__InsertSelectedScalar_Vector128_Byte_15_Vector64_Byte_7 testClass
-            ) {
+            )
+            {
                 var result = AdvSimd.Arm64.InsertSelectedScalar(_fld1, 15, _fld3, 7);
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
@@ -222,7 +224,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario_Load(
                 InsertSelectedScalarTest__InsertSelectedScalar_Vector128_Byte_15_Vector64_Byte_7 testClass
-            ) {
+            )
+            {
                 fixed (Vector128<Byte>* pFld1 = &_fld1)fixed (Vector64<Byte>* pFld2 = &_fld3)
                 {
                     var result = AdvSimd.Arm64.InsertSelectedScalar(
@@ -429,7 +432,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             fixed (Vector128<Byte>* pClsVar1 = &_clsVar1)fixed (
                 Vector64<Byte>* pClsVar3 = &_clsVar3
-            ) {
+            )
+            {
                 var result = AdvSimd.Arm64.InsertSelectedScalar(
                     AdvSimd.LoadVector128((Byte*)(pClsVar1)),
                     15,
@@ -596,7 +600,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Vector64<Byte> op3,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Byte[] inArray1 = new Byte[Op1ElementCount];
             Byte[] inArray3 = new Byte[Op3ElementCount];
             Byte[] outArray = new Byte[RetElementCount];
@@ -617,7 +622,8 @@ namespace JIT.HardwareIntrinsics.Arm
             void* op3,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Byte[] inArray1 = new Byte[Op1ElementCount];
             Byte[] inArray3 = new Byte[Op3ElementCount];
             Byte[] outArray = new Byte[RetElementCount];
@@ -646,7 +652,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Byte[] thirdOp,
             Byte[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             for (var i = 0; i < RetElementCount; i++)

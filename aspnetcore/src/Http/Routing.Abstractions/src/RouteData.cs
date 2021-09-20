@@ -145,7 +145,8 @@ namespace Microsoft.AspNetCore.Routing
             IRouter? router,
             RouteValueDictionary? values,
             RouteValueDictionary? dataTokens
-        ) {
+        )
+        {
             // Perf: this is optimized for small list sizes, in particular to avoid overhead of a native call in
             // Array.CopyTo inside the List(IEnumerable<T>) constructor.
             List<IRouter>? routers = null;
@@ -217,7 +218,8 @@ namespace Microsoft.AspNetCore.Routing
                 RouteValueDictionary? dataTokens,
                 IList<IRouter>? routers,
                 RouteValueDictionary? values
-            ) {
+            )
+            {
                 if (routeData == null)
                 {
                     throw new ArgumentNullException(nameof(routeData));

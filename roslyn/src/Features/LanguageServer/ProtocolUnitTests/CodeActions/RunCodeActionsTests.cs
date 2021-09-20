@@ -60,7 +60,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.CodeActions
         private static async Task<bool> ExecuteRunCodeActionCommandAsync(
             TestLspServer testLspServer,
             CodeActionResolveData codeActionData
-        ) {
+        )
+        {
             var command = new LSP.ExecuteCommandParams
             {
                 Command = CodeActionsHandler.RunCodeActionCommandName,

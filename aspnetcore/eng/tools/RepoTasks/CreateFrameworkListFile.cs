@@ -65,7 +65,8 @@ namespace RepoTasks
                             )
                     )
                     .OrderBy(f => f.Filename, StringComparer.Ordinal)
-            ) {
+            )
+            {
                 var element = new XElement(
                     "File",
                     new XAttribute("Type", f.IsNative ? "Native" : "Managed"),

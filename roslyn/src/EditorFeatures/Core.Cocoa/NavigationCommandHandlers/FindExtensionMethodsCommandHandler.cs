@@ -52,7 +52,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
             int caretPosition,
             Document document,
             CommandExecutionContext context
-        ) {
+        )
+        {
             var streamingPresenter = base.GetStreamingPresenter();
             if (streamingPresenter != null)
             {
@@ -74,7 +75,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
             int caretPosition,
             IStreamingFindUsagesPresenter presenter,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 using var token = _asyncListener.BeginAsyncOperation(
@@ -93,7 +95,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
                         KeyValueLogMessage.Create(LogType.UserAction, m => m["type"] = "streaming"),
                         context.CancellationToken
                     )
-                ) {
+                )
+                {
 #pragma warning disable CA2007 // Consider calling ConfigureAwait on the awaited task
                     var candidateSymbolProjectPair =
                         await FindUsagesHelpers.GetRelevantSymbolAndProjectAtPositionAsync(
@@ -125,7 +128,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
                         var type in compilation.Assembly.GlobalNamespace.GetAllTypes(
                             context.CancellationToken
                         )
-                    ) {
+                    )
+                    {
                         if (!type.MightContainExtensionMethods)
                             continue;
 
@@ -133,7 +137,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
                             var extMethod in type.GetMembers()
                                 .OfType<IMethodSymbol>()
                                 .Where(method => method.IsExtensionMethod)
-                        ) {
+                        )
+                        {
                             if (context.CancellationToken.IsCancellationRequested)
                                 break;
 

@@ -29,7 +29,8 @@ internal static partial class Interop
             HandleRef hrgnSrc1,
             HandleRef hrgnSrc2,
             CombineMode iMode
-        ) {
+        )
+        {
             RegionType result = CombineRgn(hrgnDst.Handle, hrgnSrc1.Handle, hrgnSrc2.Handle, iMode);
             GC.KeepAlive(hrgnDst.Wrapper);
             GC.KeepAlive(hrgnSrc1.Wrapper);

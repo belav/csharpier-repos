@@ -33,7 +33,8 @@ namespace Microsoft.Extensions.Hosting.Internal
             IHostApplicationLifetime applicationLifetime,
             IOptions<HostOptions> hostOptions,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             Options = options?.Value ?? throw new ArgumentNullException(nameof(options));
             Environment = environment ?? throw new ArgumentNullException(nameof(environment));
             ApplicationLifetime =

@@ -34,7 +34,8 @@ namespace System.Web.Http.ExceptionHandling
         public Task HandleAsync(
             ExceptionHandlerContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (context != null)
             {
                 ExceptionContext exceptionContext = context.ExceptionContext;

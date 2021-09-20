@@ -29,7 +29,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
         [InlineData("eku.multiple_usages.pfx")]
         public void IsCertificateAllowedForServerAuth_ValidatesEnhancedKeyUsageOnCertificate(
             string testCertName
-        ) {
+        )
+        {
             var certPath = TestResources.GetCertPath(testCertName);
             TestOutputHelper.WriteLine("Loading " + certPath);
             var cert = new X509Certificate2(certPath, "testPassword");
@@ -45,7 +46,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
         [InlineData("eku.client.pfx")]
         public void IsCertificateAllowedForServerAuth_RejectsCertificatesMissingServerEku(
             string testCertName
-        ) {
+        )
+        {
             var certPath = TestResources.GetCertPath(testCertName);
             TestOutputHelper.WriteLine("Loading " + certPath);
             var cert = new X509Certificate2(certPath, "testPassword");

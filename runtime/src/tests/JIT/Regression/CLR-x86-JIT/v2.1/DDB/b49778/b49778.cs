@@ -51,7 +51,8 @@ class ReproTwo
         int i34,
         int i35,
         int i36
-    ) {
+    )
+    {
         int result_int = 0;
         IntWrapper result_obj = new IntWrapper();
         try // To disable inlining
@@ -102,7 +103,8 @@ class ReproTwo
         int i33,
         int i34,
         int i35
-    ) {
+    )
+    {
         int result_int = 0;
         IntWrapper result_obj = new IntWrapper();
         try // To disable inlining

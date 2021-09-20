@@ -300,7 +300,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.Common
             HttpListenerRequest request,
             string prefix,
             out byte[] requestBytes
-        ) {
+        )
+        {
             requestBytes = null;
             try
             {
@@ -315,7 +316,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.Common
                 else if (
                     request.HttpMethod == "POST"
                     && request.ContentType == "application/ocsp-request"
-                ) {
+                )
+                {
                     using (System.IO.Stream stream = request.InputStream)
                     {
                         requestBytes = new byte[request.ContentLength64];
@@ -337,7 +339,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.Common
             byte[] requestBytes,
             out ReadOnlyMemory<byte> certId,
             out ReadOnlyMemory<byte> nonceExtension
-        ) {
+        )
+        {
             Asn1Tag context0 = new Asn1Tag(TagClass.ContextSpecific, 0);
             Asn1Tag context1 = new Asn1Tag(TagClass.ContextSpecific, 1);
 

@@ -77,7 +77,8 @@ User-Agent: Testing application
                         false,
                         certValidationPolicy.SslStreamCallback
                     )
-                ) {
+                )
+                {
                     X509CertificateCollection clientCerts = null;
 
                     if (_options.ClientCertificate != null)

@@ -28,7 +28,8 @@ class Program
             || !(clientB is TypedClientB)
             || clientC == null
             || !(clientD is TypedClientD)
-        ) {
+        )
+        {
             return -1;
         }
 

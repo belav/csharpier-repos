@@ -174,7 +174,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             IManagedEditAndContinueDebuggerService debuggerService,
             bool captureMatchingDocuments,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             StartDebuggingSessionImpl?.Invoke(solution, debuggerService, captureMatchingDocuments);
             return default;
         }

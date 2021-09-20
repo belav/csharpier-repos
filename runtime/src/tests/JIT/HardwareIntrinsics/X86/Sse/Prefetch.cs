@@ -25,7 +25,8 @@ namespace IntelHardwareIntrinsicTest
                     TestTable<float> floatTable = new TestTable<float>(
                         new float[4] { 1, -5, 100, 3 }
                     )
-                ) {
+                )
+                {
                     try
                     {
                         Sse.Prefetch0(floatTable.inArrayPtr);

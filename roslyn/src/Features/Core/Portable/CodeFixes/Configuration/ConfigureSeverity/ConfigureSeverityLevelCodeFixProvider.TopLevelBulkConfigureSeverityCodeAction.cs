@@ -15,15 +15,17 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration.ConfigureSeverity
             public TopLevelBulkConfigureSeverityCodeAction(
                 ImmutableArray<CodeAction> nestedActions,
                 string? category
-            ) : base(
-                nestedActions,
-                category != null
-                  ? string.Format(
-                        FeaturesResources.Configure_severity_for_all_0_analyzers,
-                        category
-                    )
-                  : FeaturesResources.Configure_severity_for_all_analyzers
-            ) {
+            )
+                : base(
+                    nestedActions,
+                    category != null
+                      ? string.Format(
+                            FeaturesResources.Configure_severity_for_all_0_analyzers,
+                            category
+                        )
+                      : FeaturesResources.Configure_severity_for_all_analyzers
+                )
+            {
                 // Ensure that 'Category' based bulk configuration actions are shown above
                 // the 'All analyzer diagnostics' bulk configuration actions.
                 AdditionalPriority =

@@ -181,7 +181,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
                         IsRegularCommentOrDocComment,
                         cancellationToken
                     )
-                ) {
+                )
+                {
                     descriptor = fadeOut
                         ? _unnecessaryGeneratedCodeClassificationIdDescriptor
                         : _generatedCodeClassificationIdDescriptor;
@@ -214,7 +215,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
                 SyntaxTree tree,
                 string language,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return options.GetOption(
                     FadingOptions.FadeOutUnusedImports,
                     language,
@@ -233,7 +235,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
             SyntaxTree tree,
             DiagnosticDescriptor descriptor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             foreach (var span in contiguousSpans)
             {
                 if (tree.OverlapsHiddenPosition(span, cancellationToken))
@@ -255,7 +258,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
             IEnumerable<SyntaxNode> nodes,
             SyntaxTree tree,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var spans = GetFixableDiagnosticSpans(nodes, tree, cancellationToken);
 
             foreach (var span in spans)

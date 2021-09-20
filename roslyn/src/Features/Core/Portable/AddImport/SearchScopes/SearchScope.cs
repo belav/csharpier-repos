@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                 AbstractAddImportFeatureService<TSimpleNameSyntax> provider,
                 bool exact,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 this.provider = provider;
                 Exact = exact;
                 CancellationToken = cancellationToken;
@@ -49,7 +50,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                 string name,
                 TSimpleNameSyntax nameNode,
                 SymbolFilter filter
-            ) {
+            )
+            {
                 if (name != null && string.IsNullOrWhiteSpace(name))
                 {
                     return ImmutableArray<SymbolResult<ISymbol>>.Empty;

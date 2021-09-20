@@ -31,7 +31,8 @@ namespace System.Web.Helpers.AntiXsrf.Test
             HttpContextBase httpContext,
             IIdentity identity,
             AntiForgeryToken cookieToken
-        ) {
+        )
+        {
             return (AntiForgeryToken)GenerateFormToken(
                 httpContext,
                 identity,
@@ -49,7 +50,8 @@ namespace System.Web.Helpers.AntiXsrf.Test
             IIdentity identity,
             AntiForgeryToken cookieToken,
             AntiForgeryToken formToken
-        ) {
+        )
+        {
             ValidateTokens(
                 httpContext,
                 identity,

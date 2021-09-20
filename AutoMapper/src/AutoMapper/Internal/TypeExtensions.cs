@@ -23,18 +23,21 @@ namespace AutoMapper.Internal
             this Type type,
             string methodName,
             int parametersCount
-        ) {
+        )
+        {
             foreach (
                 MethodInfo foundMethod in type.GetMember(
                     methodName,
                     MemberTypes.Method,
                     StaticFlags & ~BindingFlags.NonPublic
                 )
-            ) {
+            )
+            {
                 if (
                     foundMethod.IsGenericMethodDefinition
                     && foundMethod.GetParameters().Length == parametersCount
-                ) {
+                )
+                {
                     return foundMethod;
                 }
             }
@@ -50,7 +53,8 @@ namespace AutoMapper.Internal
                 !baseType.IsAssignableFrom(derivedType)
                 && !derivedType.IsGenericTypeDefinition
                 && !baseType.IsGenericTypeDefinition
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(
                     nameof(derivedType),
                     $"{derivedType} is not derived from {baseType}."

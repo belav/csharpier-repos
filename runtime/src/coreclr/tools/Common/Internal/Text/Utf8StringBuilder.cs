@@ -110,7 +110,8 @@ namespace Internal.Text
 
             if (
                 _buffer[pos] < 128 /*10000000*/
-            ) {
+            )
+            {
                 // This is a single byte character
                 return pos;
             }
@@ -120,7 +121,8 @@ namespace Internal.Text
             // Skip following bytes of a multi-byte character until the first byte is seen
             while (
                 _buffer[pos] < 192 /*11000000*/
-            ) {
+            )
+            {
                 pos--;
             }
 
@@ -135,7 +137,8 @@ namespace Internal.Text
 
             if (
                 pos == origPos - 2 && _buffer[pos] < 240 && _buffer[pos] >= 224 /*11100000*/
-            ) {
+            )
+            {
                 // We just skipped a three-byte character
                 return origPos;
             }

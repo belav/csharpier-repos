@@ -108,7 +108,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Deleted)]
         public void AcceptChanges_handles_different_entity_states_for_owned_types(
             EntityState entityState
-        ) {
+        )
+        {
             using var context = new KClrContext();
             var ownerEntry = context.Entry(
                     new OwnerClass { Id = 1, Owned = new OwnedClass { Value = "Kool" } }

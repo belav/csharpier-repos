@@ -131,7 +131,8 @@ namespace JIT.HardwareIntrinsics.Arm
                 UInt16[] inArray3,
                 UInt16[] outArray,
                 int alignment
-            ) {
+            )
+            {
                 int sizeOfinArray1 = inArray1.Length * Unsafe.SizeOf<UInt16>();
                 int sizeOfinArray2 = inArray2.Length * Unsafe.SizeOf<UInt16>();
                 int sizeOfinArray3 = inArray3.Length * Unsafe.SizeOf<UInt16>();
@@ -142,7 +143,8 @@ namespace JIT.HardwareIntrinsics.Arm
                     || (alignment * 2) < sizeOfinArray2
                     || (alignment * 2) < sizeOfinArray3
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -241,7 +243,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario(
                 SimpleTernaryOpTest__BitwiseSelect_Vector128_UInt16 testClass
-            ) {
+            )
+            {
                 var result = AdvSimd.BitwiseSelect(_fld1, _fld2, _fld3);
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
@@ -250,7 +253,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario_Load(
                 SimpleTernaryOpTest__BitwiseSelect_Vector128_UInt16 testClass
-            ) {
+            )
+            {
                 fixed (Vector128<UInt16>* pFld1 = &_fld1)fixed (
                     Vector128<UInt16>* pFld2 = &_fld2
                 )fixed (Vector128<UInt16>* pFld3 = &_fld3)
@@ -667,7 +671,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Vector128<UInt16> op3,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             UInt16[] inArray1 = new UInt16[Op1ElementCount];
             UInt16[] inArray2 = new UInt16[Op2ElementCount];
             UInt16[] inArray3 = new UInt16[Op3ElementCount];
@@ -691,7 +696,8 @@ namespace JIT.HardwareIntrinsics.Arm
             void* op3,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             UInt16[] inArray1 = new UInt16[Op1ElementCount];
             UInt16[] inArray2 = new UInt16[Op2ElementCount];
             UInt16[] inArray3 = new UInt16[Op3ElementCount];
@@ -727,7 +733,8 @@ namespace JIT.HardwareIntrinsics.Arm
             UInt16[] thirdOp,
             UInt16[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             for (var i = 0; i < RetElementCount; i++)

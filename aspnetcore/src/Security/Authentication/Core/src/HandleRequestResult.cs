@@ -55,7 +55,8 @@ namespace Microsoft.AspNetCore.Authentication
         public static new HandleRequestResult Fail(
             Exception failure,
             AuthenticationProperties? properties
-        ) {
+        )
+        {
             return new HandleRequestResult() { Failure = failure, Properties = properties };
         }
 

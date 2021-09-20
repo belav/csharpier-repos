@@ -70,7 +70,8 @@ namespace System.Web.Http
             string httpMethod,
             string requestUrl,
             string expectedActionName
-        ) {
+        )
+        {
             string routeUrl = "{controller}/{id}";
             object routeDefault = new { id = RouteParameter.Optional };
 
@@ -102,7 +103,8 @@ namespace System.Web.Http
             string httpMethod,
             string requestUrl,
             string expectedActionName
-        ) {
+        )
+        {
             string routeUrl = "{controller}/{name}";
             object routeDefault = new { name = RouteParameter.Optional };
 
@@ -131,7 +133,8 @@ namespace System.Web.Http
             string httpMethod,
             string requestUrl,
             string expectedActionName
-        ) {
+        )
+        {
             string routeUrl = "{controller}/{ID}";
             object routeDefault = new { id = RouteParameter.Optional };
 
@@ -208,7 +211,8 @@ namespace System.Web.Http
             string httpMethod,
             string requestUrl,
             string expectedActionName
-        ) {
+        )
+        {
             string routeUrl = "{controller}/{action}/{id}";
             object routeDefault = new { id = RouteParameter.Optional };
 
@@ -265,7 +269,8 @@ namespace System.Web.Http
             string httpMethod,
             string requestUrl,
             string expectedActionName
-        ) {
+        )
+        {
             string routeUrl = "{controller}/{id}";
             object routeDefault = new { id = RouteParameter.Optional };
 
@@ -294,7 +299,8 @@ namespace System.Web.Http
             string httpMethod,
             string requestUrl,
             string expectedActionName
-        ) {
+        )
+        {
             string routeUrl = "{notActionParameter}/{controller}/{id}";
             object routeDefault = new { id = RouteParameter.Optional };
 
@@ -441,7 +447,8 @@ namespace System.Web.Http
         private void AssertAllowedHeaders(
             HttpResponseMessage response,
             params HttpMethod[] allowedMethods
-        ) {
+        )
+        {
             foreach (var method in allowedMethods)
             {
                 Assert.Contains(method.ToString(), response.Content.Headers.Allow);
@@ -461,7 +468,8 @@ namespace System.Web.Http
             string httpMethod,
             string requestUrl,
             string expectedActionName
-        ) {
+        )
+        {
             string routeUrl = "{controller}/{id}";
             object routeDefault = new { id = RouteParameter.Optional };
 
@@ -494,7 +502,8 @@ namespace System.Web.Http
             string httpMethod,
             string requestUrl,
             string expectedActionName
-        ) {
+        )
+        {
             string routeUrl = "{controller}";
 
             HttpControllerContext context = ApiControllerHelper.CreateControllerContext(

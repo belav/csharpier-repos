@@ -47,7 +47,8 @@ namespace System.Xml.Tests
             int iIndex,
             int iCount,
             Type exceptionType
-        ) {
+        )
+        {
             bool bPassed = false;
             byte[] buffer = new byte[iBufferSize];
 
@@ -553,7 +554,8 @@ namespace System.Xml.Tests
             int iIndex,
             int iCount,
             Type exceptionType
-        ) {
+        )
+        {
             bool bPassed = false;
             byte[] buffer = new byte[iBufferSize];
 
@@ -1004,7 +1006,8 @@ namespace System.Xml.Tests
                 {
                     if (
                         !(IsXPathNavigatorReader() || IsXmlNodeReader() || IsXmlNodeReaderDataDoc())
-                    ) {
+                    )
+                    {
                         CError.WriteLine("LineNumber" + DataReader.LineNumber);
                         CError.WriteLine("LinePosition" + DataReader.LinePosition);
                     }

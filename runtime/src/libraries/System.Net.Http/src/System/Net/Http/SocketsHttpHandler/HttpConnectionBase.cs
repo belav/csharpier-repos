@@ -25,7 +25,8 @@ namespace System.Net.Http
             HeaderDescriptor descriptor,
             ReadOnlySpan<byte> value,
             Encoding? valueEncoding
-        ) {
+        )
+        {
             return ReferenceEquals(descriptor.KnownHeader, KnownHeaders.Date)
               ? GetOrAddCachedValue(ref _lastDateHeaderValue, descriptor, value, valueEncoding)
               : ReferenceEquals(descriptor.KnownHeader, KnownHeaders.Server)
@@ -42,7 +43,8 @@ namespace System.Net.Http
                 HeaderDescriptor descriptor,
                 ReadOnlySpan<byte> value,
                 Encoding? encoding
-            ) {
+            )
+            {
                 string? lastValue = cache;
                 if (lastValue is null || !ByteArrayHelpers.EqualsOrdinalAscii(lastValue, value))
                 {
@@ -102,7 +104,8 @@ namespace System.Net.Http
                 || !IsDigit(status1 = value[0])
                 || !IsDigit(status2 = value[1])
                 || !IsDigit(status3 = value[2])
-            ) {
+            )
+            {
                 throw new HttpRequestException(
                     SR.Format(
                         SR.net_http_invalid_response_status_code,

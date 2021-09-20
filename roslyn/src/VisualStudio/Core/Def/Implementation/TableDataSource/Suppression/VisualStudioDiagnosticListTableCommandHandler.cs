@@ -48,7 +48,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             IWaitIndicator waitIndicator,
             IDiagnosticAnalyzerService diagnosticService,
             ICodeActionEditHandlerService editHandlerService
-        ) {
+        )
+        {
             _workspace = workspace;
             _suppressionFixService = (VisualStudioSuppressionFixService)suppressionFixService;
             _suppressionStateService =
@@ -135,7 +136,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             int commandId,
             EventHandler invokeHandler,
             EventHandler beforeQueryStatus
-        ) {
+        )
+        {
             var commandIdWithGroupId = new CommandID(Guids.RoslynGroupId, commandId);
             var command = new OleMenuCommand(
                 invokeHandler,
@@ -254,7 +256,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 
                 if (
                     result == WaitIndicatorResult.Completed && selectedDiagnostic.DocumentId != null
-                ) {
+                )
+                {
                     // Kick off diagnostic re-analysis for affected document so that the configured diagnostic gets refreshed.
                     Task.Run(
                         () =>
@@ -276,7 +279,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             // Local functions.
             async System.Threading.Tasks.Task<Solution> ConfigureSeverityAsync(
                 IWaitContext waitContext
-            ) {
+            )
+            {
                 var diagnostic = await selectedDiagnostic.ToDiagnosticAsync(
                         project,
                         waitContext.CancellationToken
@@ -302,7 +306,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             if (
                 !_tableControl.SelectedEntry.TryGetSnapshot(out var snapshot, out var index)
                 || !(snapshot is AbstractTableEntriesSnapshot<DiagnosticTableItem> roslynSnapshot)
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -312,14 +317,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
         private string TryGetPathToAnalyzerConfigDoc(
             DiagnosticData selectedDiagnostic,
             out Project project
-        ) {
+        )
+        {
             project = _workspace.CurrentSolution.GetProject(selectedDiagnostic.ProjectId);
             return project?.TryGetAnalyzerConfigPathForProjectConfiguration();
         }
 
         private static ReportDiagnostic? TryMapSelectedItemToReportDiagnostic(
             MenuCommand selectedItem
-        ) {
+        )
+        {
             if (selectedItem.CommandID.Guid == Guids.RoslynGroupId)
             {
                 return selectedItem.CommandID.ID switch

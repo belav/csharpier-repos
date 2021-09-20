@@ -352,7 +352,8 @@ namespace System.Web.Mvc.Html.Test
             string text,
             bool htmlEncode,
             string encodedText
-        ) {
+        )
+        {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
             viewData.ModelMetadata.HtmlEncode = htmlEncode;
@@ -403,7 +404,8 @@ namespace System.Web.Mvc.Html.Test
             string text,
             bool htmlEncode,
             string encodedText
-        ) {
+        )
+        {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
             viewData.ModelMetadata.HtmlEncode = htmlEncode;
@@ -637,7 +639,8 @@ namespace System.Web.Mvc.Html.Test
             string text,
             bool htmlEncode,
             string encodedText
-        ) {
+        )
+        {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
             viewData.ModelMetadata.HtmlEncode = htmlEncode;
@@ -664,7 +667,8 @@ namespace System.Web.Mvc.Html.Test
             string text,
             bool htmlEncode,
             string encodedText
-        ) {
+        )
+        {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
             viewData.ModelMetadata.HtmlEncode = htmlEncode;
@@ -1122,7 +1126,8 @@ namespace System.Web.Mvc.Html.Test
             string text,
             bool htmlEncode,
             string encodedText
-        ) {
+        )
+        {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
             viewData.ModelMetadata.HtmlEncode = htmlEncode;
@@ -1406,7 +1411,8 @@ namespace System.Web.Mvc.Html.Test
             string text,
             bool htmlEncode,
             string encodedText
-        ) {
+        )
+        {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
             viewData.ModelMetadata.HtmlEncode = htmlEncode;
@@ -1432,7 +1438,8 @@ namespace System.Web.Mvc.Html.Test
             string text,
             bool htmlEncode,
             string encodedText
-        ) {
+        )
+        {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
             viewData.ModelMetadata.HtmlEncode = htmlEncode;
@@ -1457,7 +1464,8 @@ namespace System.Web.Mvc.Html.Test
             string text,
             bool htmlEncode,
             string encodedText
-        ) {
+        )
+        {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
             viewData.ModelMetadata.HtmlEncode = htmlEncode;
@@ -1816,7 +1824,8 @@ namespace System.Web.Mvc.Html.Test
             string text,
             bool htmlEncode,
             string encodedText
-        ) {
+        )
+        {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
             viewData.ModelMetadata.HtmlEncode = htmlEncode;
@@ -1866,7 +1875,8 @@ namespace System.Web.Mvc.Html.Test
             string text,
             bool htmlEncode,
             string encodedText
-        ) {
+        )
+        {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
             viewData.ModelMetadata.HtmlEncode = htmlEncode;
@@ -1895,7 +1905,8 @@ namespace System.Web.Mvc.Html.Test
             string text,
             bool htmlEncode,
             string encodedText
-        ) {
+        )
+        {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
             viewData.ModelMetadata.HtmlEncode = htmlEncode;
@@ -2134,7 +2145,8 @@ namespace System.Web.Mvc.Html.Test
             string text,
             bool htmlEncode,
             string encodedText
-        ) {
+        )
+        {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
             viewData.ModelMetadata.HtmlEncode = htmlEncode;
@@ -2160,7 +2172,8 @@ namespace System.Web.Mvc.Html.Test
             string text,
             bool htmlEncode,
             string encodedText
-        ) {
+        )
+        {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
             viewData.ModelMetadata.HtmlEncode = htmlEncode;
@@ -2580,7 +2593,8 @@ namespace System.Web.Mvc.Html.Test
             string text,
             bool htmlEncode,
             string encodedText
-        ) {
+        )
+        {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
             viewData.ModelMetadata.HtmlEncode = htmlEncode;
@@ -2609,7 +2623,8 @@ namespace System.Web.Mvc.Html.Test
             string text,
             bool htmlEncode,
             string encodedText
-        ) {
+        )
+        {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
             viewData.ModelMetadata.HtmlEncode = htmlEncode;
@@ -2637,7 +2652,8 @@ namespace System.Web.Mvc.Html.Test
             string text,
             bool htmlEncode,
             string encodedText
-        ) {
+        )
+        {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
             viewData.ModelMetadata.HtmlEncode = htmlEncode;
@@ -2666,7 +2682,8 @@ namespace System.Web.Mvc.Html.Test
             string text,
             bool htmlEncode,
             string encodedText
-        ) {
+        )
+        {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
             viewData.ModelMetadata.HtmlEncode = htmlEncode;
@@ -2931,7 +2948,8 @@ namespace System.Web.Mvc.Html.Test
             string text,
             bool htmlEncode,
             string encodedText
-        ) {
+        )
+        {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
             viewData.ModelMetadata.HtmlEncode = htmlEncode;
@@ -2961,7 +2979,8 @@ namespace System.Web.Mvc.Html.Test
             string text,
             bool htmlEncode,
             string encodedText
-        ) {
+        )
+        {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
             viewData.ModelMetadata.HtmlEncode = htmlEncode;
@@ -2990,7 +3009,8 @@ namespace System.Web.Mvc.Html.Test
             string text,
             bool htmlEncode,
             string encodedText
-        ) {
+        )
+        {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
             viewData.ModelMetadata.HtmlEncode = htmlEncode;
@@ -3366,7 +3386,8 @@ namespace System.Web.Mvc.Html.Test
             string text,
             bool htmlEncode,
             string encodedText
-        ) {
+        )
+        {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
             viewData.ModelMetadata.HtmlEncode = htmlEncode;
@@ -3395,7 +3416,8 @@ namespace System.Web.Mvc.Html.Test
             string text,
             bool htmlEncode,
             string encodedText
-        ) {
+        )
+        {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
             viewData.ModelMetadata.HtmlEncode = htmlEncode;
@@ -3438,7 +3460,8 @@ namespace System.Web.Mvc.Html.Test
             string text,
             bool htmlEncode,
             string encodedText
-        ) {
+        )
+        {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
             viewData.ModelMetadata.HtmlEncode = htmlEncode;
@@ -3755,7 +3778,8 @@ namespace System.Web.Mvc.Html.Test
             string text,
             bool htmlEncode,
             string encodedText
-        ) {
+        )
+        {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
             viewData.ModelMetadata.HtmlEncode = htmlEncode;
@@ -3781,7 +3805,8 @@ namespace System.Web.Mvc.Html.Test
             string text,
             bool htmlEncode,
             string encodedText
-        ) {
+        )
+        {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: String.Empty);
             viewData.ModelMetadata.HtmlEncode = htmlEncode;
@@ -3804,7 +3829,8 @@ namespace System.Web.Mvc.Html.Test
             string text,
             bool htmlEncode,
             string encodedText
-        ) {
+        )
+        {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
             viewData.ModelMetadata.HtmlEncode = htmlEncode;
@@ -3829,7 +3855,8 @@ namespace System.Web.Mvc.Html.Test
             string text,
             bool htmlEncode,
             string encodedText
-        ) {
+        )
+        {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
             viewData.ModelMetadata.HtmlEncode = htmlEncode;

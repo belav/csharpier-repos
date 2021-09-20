@@ -15,7 +15,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             MarkupStartTagSyntax startTag,
             MarkupEndTagSyntax endTag,
             TagHelperBinding bindingResult
-        ) {
+        )
+        {
             var childSpan = startTag.GetLastToken()?.Parent;
 
             // Self-closing tags are always valid despite descriptors[X].TagStructure.
@@ -45,7 +46,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 if (
                     descriptor.IsAnyComponentDocumentTagHelper()
                     && !descriptor.IsComponentOrChildContentTagHelper()
-                ) {
+                )
+                {
                     hasDirectiveAttribute = true;
                 }
             }
@@ -65,7 +67,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             TagHelperBinding bindingResult,
             ErrorSink errorSink,
             RazorSourceDocument source
-        ) {
+        )
+        {
             var processedBoundAttributeNames = new HashSet<string>(
                 StringComparer.OrdinalIgnoreCase
             );
@@ -175,7 +178,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                             GetAttributeValueContent(result.RewrittenAttribute)
                         )
                     )
-                ) {
+                )
+                {
                     var errorLocation = new SourceSpan(
                         attributeNameLocation,
                         result.AttributeName.Length
@@ -235,7 +239,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             IEnumerable<TagHelperDescriptor> descriptors,
             ErrorSink errorSink,
             HashSet<string> processedBoundAttributeNames
-        ) {
+        )
+        {
             // Have a name now. Able to determine correct isBoundNonStringAttribute value.
             var result = CreateTryParseResult(
                 attributeBlock.Name.GetContent(),
@@ -284,7 +289,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             IEnumerable<TagHelperDescriptor> descriptors,
             ErrorSink errorSink,
             HashSet<string> processedBoundAttributeNames
-        ) {
+        )
+        {
             // Have a name now. Able to determine correct isBoundNonStringAttribute value.
             var result = CreateTryParseResult(
                 attributeBlock.Name.GetContent(),
@@ -375,7 +381,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             MarkupAttributeBlockSyntax attributeBlock,
             TryParseResult result,
             MarkupTagHelperAttributeValueSyntax rewrittenValue
-        ) {
+        )
+        {
             //
             // Consider, <Foo @bind:param="..." />
             // We're now going to rewrite @bind:param from a regular MarkupAttributeBlock to a MarkupTagHelperDirectiveAttribute.
@@ -450,7 +457,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         private static MarkupMinimizedTagHelperDirectiveAttributeSyntax RewriteToMinimizedDirectiveAttribute(
             MarkupMinimizedAttributeBlockSyntax attributeBlock,
             TryParseResult result
-        ) {
+        )
+        {
             //
             // Consider, <Foo @bind:param />
             // We're now going to rewrite @bind:param from a regular MarkupAttributeBlock to a MarkupTagHelperDirectiveAttribute.
@@ -520,7 +528,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         private static MarkupTagHelperAttributeValueSyntax RewriteAttributeValue(
             TryParseResult result,
             RazorBlockSyntax attributeValue
-        ) {
+        )
+        {
             var rewriter = new AttributeValueRewriter(result);
             var rewrittenValue = attributeValue;
             if (result.IsBoundAttribute)
@@ -538,7 +547,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         private static string GetPropertyType(
             string name,
             IEnumerable<TagHelperDescriptor> descriptors
-        ) {
+        )
+        {
             foreach (var descriptor in descriptors)
             {
                 if (
@@ -550,7 +560,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                         out var _,
                         out var _
                     )
-                ) {
+                )
+                {
                     if (indexerMatch)
                     {
                         return firstBoundAttribute.IndexerTypeName;
@@ -570,7 +581,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             string name,
             IEnumerable<TagHelperDescriptor> descriptors,
             HashSet<string> processedBoundAttributeNames
-        ) {
+        )
+        {
             var isBoundAttribute = false;
             var isBoundNonStringAttribute = false;
             var isBoundBooleanAttribute = false;
@@ -588,7 +600,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                         out var parameterMatch,
                         out var boundAttributeParameter
                     )
-                ) {
+                )
+                {
                     isBoundAttribute = true;
                     if (parameterMatch)
                     {
@@ -713,7 +726,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
             public override SyntaxNode VisitCSharpImplicitExpression(
                 CSharpImplicitExpressionSyntax node
-            ) {
+            )
+            {
                 if (_rewriteAsMarkup)
                 {
                     var builder = SyntaxListBuilder<RazorSyntaxNode>.Create();
@@ -760,7 +774,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
             public override SyntaxNode VisitCSharpExplicitExpression(
                 CSharpExplicitExpressionSyntax node
-            ) {
+            )
+            {
                 CSharpTransitionSyntax transition = null;
                 var builder = SyntaxListBuilder<RazorSyntaxNode>.Create();
                 if (_rewriteAsMarkup)
@@ -876,7 +891,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
             public override SyntaxNode VisitCSharpExpressionLiteral(
                 CSharpExpressionLiteralSyntax node
-            ) {
+            )
+            {
                 if (!_tryParseResult.IsBoundNonStringAttribute)
                 {
                     return base.VisitCSharpExpressionLiteral(node);
@@ -890,7 +906,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
             public override SyntaxNode VisitMarkupLiteralAttributeValue(
                 MarkupLiteralAttributeValueSyntax node
-            ) {
+            )
+            {
                 var builder = SyntaxListBuilder<SyntaxToken>.Create();
                 if (node.Prefix != null)
                 {
@@ -920,7 +937,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
             public override SyntaxNode VisitMarkupDynamicAttributeValue(
                 MarkupDynamicAttributeValueSyntax node
-            ) {
+            )
+            {
                 // Move the prefix to be part of the actual value.
                 var builder = SyntaxListBuilder<RazorSyntaxNode>.Create();
                 if (node.Prefix != null)
@@ -938,7 +956,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
             public override SyntaxNode VisitCSharpStatementLiteral(
                 CSharpStatementLiteralSyntax node
-            ) {
+            )
+            {
                 if (!_tryParseResult.IsBoundNonStringAttribute)
                 {
                     return base.VisitCSharpStatementLiteral(node);
@@ -964,7 +983,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
             public override SyntaxNode VisitMarkupEphemeralTextLiteral(
                 MarkupEphemeralTextLiteralSyntax node
-            ) {
+            )
+            {
                 if (!_tryParseResult.IsBoundNonStringAttribute)
                 {
                     return base.VisitMarkupEphemeralTextLiteral(node);
@@ -1021,7 +1041,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 if (
                     !_tryParseResult.IsDuplicateAttribute
                     && builder.ChunkGenerator != SpanChunkGenerator.Null
-                ) {
+                )
+                {
                     // We want to mark the value of non-string bound attributes to be CSharp.
                     // Except in two cases,
                     // 1. Cases when we don't want to render the span. Eg: Transition span '@'.

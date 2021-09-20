@@ -144,7 +144,8 @@ namespace System.Reflection.TypeLoading
             ReadOnlySpan<byte> name,
             bool ignoreCase,
             out Exception? e
-        ) {
+        )
+        {
             if (ignoreCase)
                 throw new NotSupportedException(SR.NotSupported_CaseInsensitive);
 

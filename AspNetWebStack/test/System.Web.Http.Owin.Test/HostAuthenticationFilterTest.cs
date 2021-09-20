@@ -467,7 +467,8 @@ namespace System.Web.Http.Owin
 
         private static HttpAuthenticationContext CreateAuthenticationContext(
             HttpRequestMessage request
-        ) {
+        )
+        {
             IPrincipal principal = CreateDummyPrincipal();
             return CreateAuthenticationContext(request, principal);
         }
@@ -475,14 +476,16 @@ namespace System.Web.Http.Owin
         private static HttpAuthenticationContext CreateAuthenticationContext(
             HttpRequestMessage request,
             IPrincipal principal
-        ) {
+        )
+        {
             HttpActionContext actionContext = CreateActionContext(request);
             return new HttpAuthenticationContext(actionContext, principal);
         }
 
         private static IAuthenticationManager CreateAuthenticationManager(
             Func<string, Task<AuthenticateResult>> authenticate
-        ) {
+        )
+        {
             Mock<IAuthenticationManager> mock = new Mock<IAuthenticationManager>(
                 MockBehavior.Strict
             );
@@ -500,7 +503,8 @@ namespace System.Web.Http.Owin
 
         private static IAuthenticationManager CreateAuthenticationManager(
             AuthenticationResponseChallenge challenge
-        ) {
+        )
+        {
             Mock<IAuthenticationManager> mock = new Mock<IAuthenticationManager>(
                 MockBehavior.Strict
             );
@@ -513,7 +517,8 @@ namespace System.Web.Http.Owin
         private static HttpAuthenticationChallengeContext CreateChallengeContext(
             HttpRequestMessage request,
             IHttpActionResult result
-        ) {
+        )
+        {
             HttpActionContext actionContext = CreateActionContext(request);
             return new HttpAuthenticationChallengeContext(actionContext, result);
         }

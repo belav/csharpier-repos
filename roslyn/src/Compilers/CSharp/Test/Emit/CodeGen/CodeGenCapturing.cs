@@ -127,7 +127,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
                 int remainingSum,
                 int setIndex, // 0-based index of subset we're generating
                 ImmutableList<int> setsSoFar
-            ) {
+            )
+            {
                 for (int i = 0; i <= remainingSum; i++)
                 {
                     var newSets = setsSoFar.Add(i);
@@ -139,7 +140,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
                     {
                         foreach (
                             var captures in GenerateAll(remainingSum - i, setIndex + 1, newSets)
-                        ) {
+                        )
+                        {
                             yield return captures;
                         }
                     }
@@ -219,7 +221,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
             void VerifyContext(
                 IList<IEnumerable<string>> expectedCtx,
                 List<IList<string>> actualCtx
-            ) {
+            )
+            {
                 Assert.Equal(expectedCtx.Count, ctx.VariablesByScope.Count);
                 for (int depth = 0; depth < expectedCtx.Count; depth++)
                 {
@@ -266,7 +269,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
                     int startingDepth,
                     IList<int> layout,
                     out (int depth, int localFuncIndex) newCurrent
-                ) {
+                )
+                {
                     for (int depth = startingDepth; depth < layout.Count; depth++)
                     {
                         if (layout[depth] > 0)

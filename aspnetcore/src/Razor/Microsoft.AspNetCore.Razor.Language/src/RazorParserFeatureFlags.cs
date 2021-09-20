@@ -89,7 +89,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 bool allowConditionalDataDashAttributesInComponents,
                 bool allowCSharpInMarkupAttributeArea,
                 bool allowNullableForgivenessOperator
-            ) {
+            )
+            {
                 AllowMinimizedBooleanTagHelperAttributes = allowMinimizedBooleanTagHelperAttributes;
                 AllowHtmlCommentsInTagHelpers = allowHtmlCommentsInTagHelpers;
                 AllowComponentFileKind = allowComponentFileKind;

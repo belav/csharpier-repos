@@ -191,7 +191,8 @@ namespace ILCompiler.Reflection.ReadyToRun
             int codeOffset,
             ReadyToRunMethod method,
             BaseUnwindInfo unwindInfo
-        ) {
+        )
+        {
             _readyToRunReader = readyToRunReader;
 
             Id = id;
@@ -374,7 +375,8 @@ namespace ILCompiler.Reflection.ReadyToRun
             string constrainedType,
             string[] instanceArgs,
             int? fixupOffset
-        ) {
+        )
+        {
             InstanceArgs = (string[])instanceArgs?.Clone();
             _readyToRunReader = readyToRunReader;
             _fixupOffset = fixupOffset;

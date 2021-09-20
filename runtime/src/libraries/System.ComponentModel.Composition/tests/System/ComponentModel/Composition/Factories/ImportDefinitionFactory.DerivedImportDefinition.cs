@@ -20,7 +20,8 @@ namespace System.ComponentModel.Composition.Factories
                 ImportCardinality cardinality,
                 bool isRecomposable,
                 bool isPrerequisite
-            ) {
+            )
+            {
                 _constraint = constraint ?? (export => false);
                 _cardinality = cardinality;
                 _isRecomposable = isRecomposable;

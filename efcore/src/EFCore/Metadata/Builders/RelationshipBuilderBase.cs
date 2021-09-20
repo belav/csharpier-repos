@@ -29,7 +29,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             IMutableEntityType principalEntityType,
             IMutableEntityType dependentEntityType,
             IMutableForeignKey foreignKey
-        ) {
+        )
+        {
             Check.NotNull(principalEntityType, nameof(principalEntityType));
             Check.NotNull(dependentEntityType, nameof(dependentEntityType));
 
@@ -52,7 +53,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             bool foreignKeySet = false,
             bool principalKeySet = false,
             bool requiredSet = false
-        ) {
+        )
+        {
             Check.NotNull(builder, nameof(builder));
 
             Builder = builder;

@@ -249,7 +249,8 @@ namespace System.Threading.Tests
             int initial,
             int maximum,
             Type exceptionType
-        ) {
+        )
+        {
             string methodFailed =
                 "RunSemaphoreSlimTest0_Ctor(" + initial + "," + maximum + "):  FAILED.  ";
             Exception exception = null;
@@ -282,7 +283,8 @@ namespace System.Threading.Tests
             object timeout,
             bool returnValue,
             Type exceptionType
-        ) {
+        )
+        {
             SemaphoreSlim semaphore = new SemaphoreSlim(initial, maximum);
             try
             {
@@ -324,7 +326,8 @@ namespace System.Threading.Tests
             object timeout,
             bool returnValue,
             Type exceptionType
-        ) {
+        )
+        {
             SemaphoreSlim semaphore = new SemaphoreSlim(initial, maximum);
             try
             {
@@ -407,7 +410,8 @@ namespace System.Threading.Tests
             int maximum,
             int releaseCount,
             Type exceptionType
-        ) {
+        )
+        {
             SemaphoreSlim semaphore = new SemaphoreSlim(initial, maximum);
             try
             {
@@ -433,7 +437,8 @@ namespace System.Threading.Tests
             SemaphoreSlim semaphore,
             SemaphoreSlimActions? action,
             object param
-        ) {
+        )
+        {
             if (action == SemaphoreSlimActions.Wait)
             {
                 if (param is TimeSpan)
@@ -499,7 +504,8 @@ namespace System.Threading.Tests
             int maximum,
             SemaphoreSlimActions? action,
             Type exceptionType
-        ) {
+        )
+        {
             SemaphoreSlim semaphore = new SemaphoreSlim(initial, maximum);
             try
             {
@@ -524,7 +530,8 @@ namespace System.Threading.Tests
             int initial,
             int maximum,
             SemaphoreSlimActions? action
-        ) {
+        )
+        {
             SemaphoreSlim semaphore = new SemaphoreSlim(initial, maximum);
 
             CallSemaphoreAction(semaphore, action, null);
@@ -554,7 +561,8 @@ namespace System.Threading.Tests
             int maximum,
             SemaphoreSlimActions? action,
             bool state
-        ) {
+        )
+        {
             SemaphoreSlim semaphore = new SemaphoreSlim(initial, maximum);
 
             CallSemaphoreAction(semaphore, action, null);
@@ -589,7 +597,8 @@ namespace System.Threading.Tests
             int failedWait,
             int finalCount,
             int timeout
-        ) {
+        )
+        {
             SemaphoreSlim semaphore = new SemaphoreSlim(initial, maximum);
             Task[] threads = new Task[waitThreads + releaseThreads];
             int succeeded = 0;
@@ -670,7 +679,8 @@ namespace System.Threading.Tests
             int failedWait,
             int finalCount,
             int timeout
-        ) {
+        )
+        {
             SemaphoreSlim semaphore = new SemaphoreSlim(initial, maximum);
             Task[] tasks = new Task[waitThreads + releaseThreads];
             int succeeded = 0;

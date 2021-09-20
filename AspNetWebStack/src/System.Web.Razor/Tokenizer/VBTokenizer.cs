@@ -87,7 +87,8 @@ namespace System.Web.Razor.Tokenizer
             string content,
             VBSymbolType type,
             IEnumerable<RazorError> errors
-        ) {
+        )
+        {
             return new VBSymbol(start, content, type, errors);
         }
 

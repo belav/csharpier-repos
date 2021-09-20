@@ -18,7 +18,8 @@ namespace System.Web.Razor.Generator
             string rootNamespaceName,
             string sourceFileName,
             RazorEngineHost host
-        ) {
+        )
+        {
             if (String.IsNullOrEmpty(className))
             {
                 throw new ArgumentException(

@@ -89,7 +89,8 @@ namespace Microsoft.CodeAnalysis.Remote
             int uiCultureLCID,
             int cultureLCID,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             RunService(
                 () =>
                 {
@@ -112,7 +113,8 @@ namespace Microsoft.CodeAnalysis.Remote
             int hostProcessId,
             string serializedSession,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             RunService(
                 () =>
                 {
@@ -165,7 +167,8 @@ namespace Microsoft.CodeAnalysis.Remote
             ISet<Checksum> checksums,
             ISerializerService serializerService,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return await RunServiceAsync(
                     () =>
                     {
@@ -178,7 +181,8 @@ namespace Microsoft.CodeAnalysis.Remote
                                 checksums,
                                 cancellationToken
                             )
-                        ) {
+                        )
+                        {
                             return EndPoint.InvokeAsync(
                                 nameof(IRemoteHostServiceCallback.GetAssetsAsync),
                                 new object[] { scopeId, checksums.ToArray() },
@@ -205,7 +209,8 @@ namespace Microsoft.CodeAnalysis.Remote
         async ValueTask<bool> IAssetSource.IsExperimentEnabledAsync(
             string experimentName,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return await RunServiceAsync(
                     () =>
                     {
@@ -215,7 +220,8 @@ namespace Microsoft.CodeAnalysis.Remote
                                 experimentName,
                                 cancellationToken
                             )
-                        ) {
+                        )
+                        {
                             return EndPoint.InvokeAsync<bool>(
                                 nameof(IRemoteHostServiceCallback.IsExperimentEnabledAsync),
                                 new object[] { experimentName },
@@ -235,7 +241,8 @@ namespace Microsoft.CodeAnalysis.Remote
             List<string> loggerTypes,
             List<string> functionIds,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             RunService(
                 () =>
                 {

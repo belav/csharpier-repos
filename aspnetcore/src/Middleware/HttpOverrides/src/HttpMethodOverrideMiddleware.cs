@@ -26,7 +26,8 @@ namespace Microsoft.AspNetCore.HttpOverrides
         public HttpMethodOverrideMiddleware(
             RequestDelegate next,
             IOptions<HttpMethodOverrideOptions> options
-        ) {
+        )
+        {
             if (next == null)
             {
                 throw new ArgumentNullException(nameof(next));

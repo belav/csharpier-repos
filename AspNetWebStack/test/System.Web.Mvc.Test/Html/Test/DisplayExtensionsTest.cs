@@ -27,7 +27,8 @@ namespace System.Web.Mvc.Html.Test
             string text,
             bool htmlEncode,
             string expectedResult
-        ) {
+        )
+        {
             // Arrange
             var innerModel = new ObjectTemplateModel
             {
@@ -78,7 +79,8 @@ namespace System.Web.Mvc.Html.Test
             bool htmlEncode,
             string attributeEncodedText,
             string htmlEncodedText
-        ) {
+        )
+        {
             // Arrange
             var expectedResult =
                 "<a href=\"mailto:" + attributeEncodedText + "\">" + htmlEncodedText + "</a>";
@@ -123,7 +125,8 @@ namespace System.Web.Mvc.Html.Test
             string text,
             bool htmlEncode,
             string expectedResult
-        ) {
+        )
+        {
             // Arrange
             var viewData = new ViewDataDictionary<string>(text);
             var html = MvcHelper.GetHtmlHelper(viewData);
@@ -206,7 +209,8 @@ namespace System.Web.Mvc.Html.Test
             bool htmlEncode,
             string attributeEncodedText,
             string htmlEncodedText
-        ) {
+        )
+        {
             // Arrange
             var expectedResult =
                 "<a href=\"" + attributeEncodedText + "\">" + htmlEncodedText + "</a>";

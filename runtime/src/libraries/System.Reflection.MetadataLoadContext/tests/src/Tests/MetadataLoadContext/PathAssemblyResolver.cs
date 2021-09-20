@@ -78,7 +78,8 @@ namespace System.Reflection.Tests
                     resolver,
                     TestUtils.GetNameOfCoreAssembly()
                 )
-            ) {
+            )
+            {
                 AssemblyName thisAssemblyName = typeof(MetadataLoadContextTests).Assembly.GetName();
                 Assembly assembly = lc.LoadFromAssemblyName(thisAssemblyName);
 
@@ -106,7 +107,8 @@ namespace System.Reflection.Tests
                     Path.Combine(dir.Path, TestData.s_SimpleVersionedShortName),
                     TestData.s_SimpleSignedVersioned100Image
                 )
-            ) {
+            )
+            {
                 var resolver = new PathAssemblyResolver(new string[] { core.Path, tf1.Path });
 
                 using (
@@ -114,7 +116,8 @@ namespace System.Reflection.Tests
                         resolver,
                         TestData.s_PhonyCoreAssemblySimpleName
                     )
-                ) {
+                )
+                {
                     Assert.Equal(1, lc.GetAssemblies().Count());
 
                     Assembly assembly = lc.LoadFromAssemblyName(
@@ -236,14 +239,16 @@ namespace System.Reflection.Tests
                     Path.Combine(dir2.Path, TestData.s_SimpleVersionedShortName),
                     TestData.s_SimpleSignedVersioned100Image
                 )
-            ) {
+            )
+            {
                 var resolver = new PathAssemblyResolver(
                     new string[] { core.Path, tf1.Path, tf2.Path }
                 );
 
                 using (
                     var lc = new MetadataLoadContext(resolver, TestData.s_PhonyCoreAssemblyFullName)
-                ) {
+                )
+                {
                     Assert.Equal(1, lc.GetAssemblies().Count());
 
                     Assembly a1 = lc.LoadFromAssemblyName(TestData.s_SimpleVersionedShortName);
@@ -278,14 +283,16 @@ namespace System.Reflection.Tests
                     Path.Combine(dir2.Path, TestData.s_SimpleVersionedShortName),
                     TestData.s_SimpleSignedVersioned200Image
                 )
-            ) {
+            )
+            {
                 var resolver = new PathAssemblyResolver(
                     new string[] { core.Path, tf1.Path, tf2.Path }
                 );
 
                 using (
                     var lc = new MetadataLoadContext(resolver, TestData.s_PhonyCoreAssemblyFullName)
-                ) {
+                )
+                {
                     Assert.Equal(1, lc.GetAssemblies().Count());
 
                     // Using simple name will find first assembly that matches.
@@ -325,13 +332,15 @@ namespace System.Reflection.Tests
                     Path.Combine(dir2.Path, TestData.s_SimpleVersionedShortName),
                     TestData.s_SimpleUnsignedVersioned100Image
                 )
-            ) {
+            )
+            {
                 var resolver = new PathAssemblyResolver(
                     new string[] { core.Path, tf1.Path, tf2.Path }
                 );
                 using (
                     var lc = new MetadataLoadContext(resolver, TestData.s_PhonyCoreAssemblyFullName)
-                ) {
+                )
+                {
                     Assembly a1 = lc.LoadFromAssemblyName(TestData.s_SimpleVersionedShortName);
                     Assembly a2 = lc.LoadFromAssemblyName(
                         TestData.s_SimpleUnsignedVersioned100FullName
@@ -363,13 +372,15 @@ namespace System.Reflection.Tests
                     Path.Combine(dir2.Path, TestData.s_SimpleVersionedShortName),
                     TestData.s_SimpleUnsignedVersioned100EnImage
                 )
-            ) {
+            )
+            {
                 var resolver = new PathAssemblyResolver(
                     new string[] { core.Path, tf1.Path, tf2.Path }
                 );
                 using (
                     var lc = new MetadataLoadContext(resolver, TestData.s_PhonyCoreAssemblyFullName)
-                ) {
+                )
+                {
                     Assert.Equal(1, lc.GetAssemblies().Count());
 
                     Assembly a1 = lc.LoadFromAssemblyName(TestData.s_SimpleVersionedShortName);
@@ -406,7 +417,8 @@ namespace System.Reflection.Tests
                     Path.Combine(dir2.Path, TestData.s_SimpleVersionedShortName),
                     TestData.s_SimpleUnsignedVersioned200Image
                 )
-            ) {
+            )
+            {
                 // tf1 first, then tf2.
                 {
                     var resolver = new PathAssemblyResolver(
@@ -417,7 +429,8 @@ namespace System.Reflection.Tests
                             resolver,
                             TestData.s_PhonyCoreAssemblyFullName
                         )
-                    ) {
+                    )
+                    {
                         Assembly a1 = lc.LoadFromAssemblyName(
                             TestData.s_SimpleUnsignedVersioned100FullName
                         );
@@ -435,7 +448,8 @@ namespace System.Reflection.Tests
                             resolver,
                             TestData.s_PhonyCoreAssemblyFullName
                         )
-                    ) {
+                    )
+                    {
                         Assembly a1 = lc.LoadFromAssemblyName(
                             TestData.s_SimpleUnsignedVersioned100FullName
                         );
@@ -467,14 +481,16 @@ namespace System.Reflection.Tests
                     Path.Combine(dir2.Path, TestData.s_SimpleVersionedShortName),
                     TestData.s_SimpleUnsignedVersioned100Image
                 )
-            ) {
+            )
+            {
                 var resolver = new PathAssemblyResolver(
                     new string[] { core.Path, tf1.Path, tf2.Path }
                 );
 
                 using (
                     var lc = new MetadataLoadContext(resolver, TestData.s_PhonyCoreAssemblyFullName)
-                ) {
+                )
+                {
                     Assert.Equal(1, lc.GetAssemblies().Count());
 
                     // These are treated as different since one contains a PublicKeyToken and one does not.
@@ -507,7 +523,8 @@ namespace System.Reflection.Tests
                     Path.Combine(dir.Path, TestData.s_RetargetableAssemblySimpleName),
                     TestData.s_RetargetableImage
                 )
-            ) {
+            )
+            {
                 var resolver = new PathAssemblyResolver(
                     new string[] { coreAssemblyPath, mscorLibPath, relocatableAsmFile.Path }
                 );

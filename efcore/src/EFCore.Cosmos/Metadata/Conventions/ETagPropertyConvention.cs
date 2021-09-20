@@ -15,7 +15,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Metadata.Conventions
         public virtual void ProcessModelFinalizing(
             IConventionModelBuilder modelBuilder,
             IConventionContext<IConventionModelBuilder> context
-        ) {
+        )
+        {
             foreach (var entityType in modelBuilder.Metadata.GetEntityTypes())
             {
                 foreach (var property in entityType.GetDeclaredProperties())

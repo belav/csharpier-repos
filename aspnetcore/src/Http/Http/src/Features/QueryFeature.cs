@@ -69,7 +69,8 @@ namespace Microsoft.AspNetCore.Http.Features
                 if (
                     _parsedValues == null
                     || !string.Equals(_original, current, StringComparison.Ordinal)
-                ) {
+                )
+                {
                     _original = current;
 
                     var result = QueryHelpers.ParseNullableQuery(current);

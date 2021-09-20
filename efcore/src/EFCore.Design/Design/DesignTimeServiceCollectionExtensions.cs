@@ -35,7 +35,8 @@ namespace Microsoft.EntityFrameworkCore.Design
             this IServiceCollection services,
             IOperationReporter? reporter = null,
             Func<IServiceProvider>? applicationServiceProviderAccessor = null
-        ) {
+        )
+        {
             if (reporter == null)
             {
                 reporter = new OperationReporter(handler: null);
@@ -119,7 +120,8 @@ namespace Microsoft.EntityFrameworkCore.Design
         public static IServiceCollection AddDbContextDesignTimeServices(
             this IServiceCollection services,
             DbContext context
-        ) {
+        )
+        {
             new EntityFrameworkRelationalServicesBuilder(services).TryAdd(
                     context.GetService<IDatabaseProvider>()
                 )

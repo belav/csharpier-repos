@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
             KestrelServerOptions serverOptions,
             ILogger logger,
             Func<ListenOptions, CancellationToken, Task> createBinding
-        ) {
+        )
+        {
             ServerAddressesFeature = serverAddressesFeature;
             ServerOptions = serverOptions;
             Logger = logger;

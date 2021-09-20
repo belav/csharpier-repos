@@ -20,7 +20,8 @@ namespace Roslyn.Utilities
         private ImmutableSetWithInsertionOrder(
             ImmutableDictionary<T, uint> map,
             uint nextElementValue
-        ) {
+        )
+        {
             _map = map;
             _nextElementValue = nextElementValue;
         }

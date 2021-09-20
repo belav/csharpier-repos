@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
         IEnumerable<Cci.ITypeReference> Cci.IGenericMethodInstanceReference.GetGenericArguments(
             EmitContext context
-        ) {
+        )
+        {
             PEModuleBuilder moduleBeingBuilt = (PEModuleBuilder)context.Module;
 
             foreach (var arg in UnderlyingMethod.TypeArgumentsWithAnnotations)
@@ -51,7 +52,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
         Cci.IMethodReference Cci.IGenericMethodInstanceReference.GetGenericMethod(
             EmitContext context
-        ) {
+        )
+        {
             return _genericMethod;
         }
 

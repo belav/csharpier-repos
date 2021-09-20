@@ -257,7 +257,8 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.ModRewrite
             string url,
             string rule,
             string expected
-        ) {
+        )
+        {
             var options = new RewriteOptions().AddApacheModRewrite(new StringReader(rule));
             using var host = new HostBuilder().ConfigureWebHost(
                     webHostBuilder =>
@@ -505,7 +506,8 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.ModRewrite
         [InlineData("http://www.example.com/")]
         public async Task Invoke_CaptureEmptyStringInRegexAssertRedirectLocationHasForwardSlash(
             string input
-        ) {
+        )
+        {
             var options = new RewriteOptions().AddApacheModRewrite(
                 new StringReader("RewriteRule ^(.*)$ $1 [R=301,L]")
             );

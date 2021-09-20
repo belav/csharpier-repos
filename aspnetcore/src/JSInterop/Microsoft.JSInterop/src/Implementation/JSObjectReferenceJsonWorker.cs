@@ -60,7 +60,8 @@ namespace Microsoft.JSInterop.Implementation
         public static void WriteJSObjectReference(
             Utf8JsonWriter writer,
             JSObjectReference objectReference
-        ) {
+        )
+        {
             writer.WriteStartObject();
             writer.WriteNumber(_idKey, objectReference.Id);
             writer.WriteEndObject();

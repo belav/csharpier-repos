@@ -25,7 +25,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
             if (
                 parameters.ServerType == ServerType.IISExpress
                 && !parameters.EnvironmentVariables.ContainsKey(DebugEnvironmentVariable)
-            ) {
+            )
+            {
                 parameters.EnvironmentVariables[DebugEnvironmentVariable] = "console";
             }
 
@@ -34,14 +35,16 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
 
         protected virtual async Task<IISDeploymentResult> DeployAsync(
             IISDeploymentParameters parameters
-        ) {
+        )
+        {
             _deployer = (IISDeployerBase)CreateDeployer(parameters);
             return (IISDeploymentResult)await _deployer.DeployAsync();
         }
 
         protected virtual async Task<IISDeploymentResult> StartAsync(
             IISDeploymentParameters parameters
-        ) {
+        )
+        {
             var result = await DeployAsync(parameters);
             await result.AssertStarts();
             return result;
@@ -50,7 +53,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
         protected virtual async Task<string> GetStringAsync(
             IISDeploymentParameters parameters,
             string path
-        ) {
+        )
+        {
             var result = await DeployAsync(parameters);
             return await result.HttpClient.GetStringAsync(path);
         }

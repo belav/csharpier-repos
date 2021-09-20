@@ -29,7 +29,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
             Type providerClrType,
             Func<ValueConverterInfo, ValueConverter> factory,
             ConverterMappingHints? mappingHints = null
-        ) {
+        )
+        {
             _factory = factory;
             Check.NotNull(modelClrType, nameof(modelClrType));
             Check.NotNull(providerClrType, nameof(providerClrType));

@@ -31,7 +31,8 @@ namespace System.Web.Mvc
                 if (
                     _displayColumnAttribute != null
                     && !String.IsNullOrEmpty(_displayColumnAttribute.DisplayColumn)
-                ) {
+                )
+                {
                     PropertyInfo displayColumnProperty = ModelType.GetProperty(
                         _displayColumnAttribute.DisplayColumn,
                         BindingFlags.Public | BindingFlags.IgnoreCase | BindingFlags.Instance
@@ -60,7 +61,8 @@ namespace System.Web.Mvc
             DisplayColumnAttribute displayColumnAttribute,
             PropertyInfo displayColumnProperty,
             Type modelType
-        ) {
+        )
+        {
             if (displayColumnProperty == null)
             {
                 throw new InvalidOperationException(

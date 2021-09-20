@@ -757,7 +757,8 @@ namespace System.Numerics
             Vector<T> condition,
             Vector<T> left,
             Vector<T> right
-        ) {
+        )
+        {
             ThrowHelper.ThrowForUnsupportedVectorBaseType<T>();
             Vector<T> result = default;
 

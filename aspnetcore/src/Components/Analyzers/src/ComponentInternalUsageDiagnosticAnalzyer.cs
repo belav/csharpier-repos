@@ -57,7 +57,8 @@ namespace Microsoft.Extensions.Internal
                 if (
                     @namespace == null
                     || !string.Equals(NamespaceParts[i], @namespace.Name, StringComparison.Ordinal)
-                ) {
+                )
+                {
                     return false;
                 }
 

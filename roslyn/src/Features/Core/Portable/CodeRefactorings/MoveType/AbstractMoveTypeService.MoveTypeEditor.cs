@@ -97,7 +97,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
                 Solution solution,
                 DocumentId sourceDocumentId,
                 DocumentId documentWithMovedTypeId
-            ) {
+            )
+            {
                 var documentWithMovedType = solution.GetRequiredDocument(documentWithMovedTypeId);
 
                 var syntaxFacts =
@@ -151,7 +152,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
             /// <param name="newDocumentId">id for the new document to be added</param>
             private async Task<Document> AddNewDocumentWithSingleTypeDeclarationAsync(
                 DocumentId newDocumentId
-            ) {
+            )
+            {
                 var document = SemanticDocument.Document;
                 Debug.Assert(
                     document.Name != FileName,
@@ -209,7 +211,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
             private async Task<SyntaxNode> AddFinalNewLineIfDesiredAsync(
                 Document document,
                 SyntaxNode modifiedRoot
-            ) {
+            )
+            {
                 var options = await document.GetOptionsAsync(CancellationToken)
                     .ConfigureAwait(false);
                 var insertFinalNewLine = options.GetOption(FormattingOptions2.InsertFinalNewLine);
@@ -225,7 +228,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
                     if (
                         endOfFileToken.LeadingTrivia.IsEmpty()
                         && !previousToken.TrailingTrivia.Any(syntaxFacts.IsEndOfLineTrivia)
-                    ) {
+                    )
+                    {
                         var generator =
                             document.GetRequiredLanguageService<SyntaxGeneratorInternal>();
                         var endOfLine = generator.EndOfLine(
@@ -330,7 +334,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
                 DocumentEditor documentEditor,
                 bool removeAttributesAndComments,
                 bool removeTypeInheritance
-            ) {
+            )
+            {
                 var semanticFacts =
                     State.SemanticDocument.Document.GetRequiredLanguageService<ISemanticFactsService>();
                 var typeChain = State.TypeNode.Ancestors().OfType<TTypeDeclarationSyntax>();
@@ -379,7 +384,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
 
             private TTypeDeclarationSyntax RemoveLeadingBlankLines(
                 TTypeDeclarationSyntax currentTypeNode
-            ) {
+            )
+            {
                 var syntaxFacts =
                     State.SemanticDocument.Document.GetRequiredLanguageService<ISyntaxFactsService>();
                 var withoutBlankLines = syntaxFacts.GetNodeWithoutLeadingBlankLines(

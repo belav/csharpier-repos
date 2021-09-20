@@ -41,7 +41,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             var i = 0;
             while (
                 i < entryNames.Length && TryGetEntryInternal(entryNames[i], expressions, out entry)
-            ) {
+            )
+            {
                 i++;
                 expressions = entry.DataMembers;
             }
@@ -65,7 +66,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             string entryName,
             EnvDTE.Expressions expressions,
             out EnvDTE.Expression expression
-        ) {
+        )
+        {
             expression = expressions.Cast<EnvDTE.Expression>()
                 .FirstOrDefault(e => e.Name == entryName);
             if (expression != null)

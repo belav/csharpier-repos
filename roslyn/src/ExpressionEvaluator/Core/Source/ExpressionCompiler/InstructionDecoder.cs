@@ -52,7 +52,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         internal virtual void AppendParameterTypeName(
             StringBuilder builder,
             IParameterSymbol parameter
-        ) {
+        )
+        {
             builder.Append(parameter.Type.ToDisplayString(DisplayFormat));
         }
 
@@ -81,7 +82,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             bool includeParameterTypes,
             bool includeParameterNames,
             ArrayBuilder<string?>? argumentValues = null
-        ) {
+        )
+        {
             var pooled = PooledStringBuilder.GetInstance();
             var builder = pooled.Builder;
 
@@ -153,7 +155,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             TCompilation compilation,
             TMethodSymbol method,
             string?[]? serializedTypeNames
-        ) {
+        )
+        {
             if (serializedTypeNames == null)
             {
                 return ImmutableArray<TTypeSymbol>.Empty;

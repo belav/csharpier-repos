@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         protected override (TypeWithAnnotations ReturnType, ImmutableArray<ParameterSymbol> Parameters, bool IsVararg, ImmutableArray<TypeParameterConstraintClause> DeclaredConstraintsForOverrideOrImplementation) MakeParametersAndBindReturnType(
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var compilation = DeclaringCompilation;
             var location = ReturnTypeLocation;
             return (
@@ -57,7 +58,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void GenerateMethodBody(
             TypeCompilationState compilationState,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var F = new SyntheticBoundNodeFactory(
                 this,
                 this.SyntaxNode,
@@ -109,7 +111,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     if (
                         overridden is null
                         || overridden.ReturnType.SpecialType != SpecialType.System_Int32
-                    ) {
+                    )
+                    {
                         // There was a problem with overriding, an error was reported elsewhere
                         F.CloseMethod(F.ThrowNull());
                         return;
@@ -153,7 +156,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 SyntheticBoundNodeFactory F,
                 ref MethodSymbol? equalityComparer_GetHashCode,
                 ref MethodSymbol? equalityComparer_get_Default
-            ) {
+            )
+            {
                 equalityComparer_GetHashCode ??= F.WellKnownMethod(
                     WellKnownMember.System_Collections_Generic_EqualityComparer_T__GetHashCode
                 );

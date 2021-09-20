@@ -178,14 +178,16 @@ namespace System.ComponentModel.Composition
         public static void AddAttribute(
             Type target,
             Func<MemberInfo, IEnumerable<Attribute>, IEnumerable<Attribute>> provider
-        ) {
+        )
+        {
             AddAttribute(target, provider, MetadataStore.Container);
         }
         public static void AddAttribute(
             Type target,
             Func<MemberInfo, IEnumerable<Attribute>, IEnumerable<Attribute>> provider,
             CompositionContainer container
-        ) {
+        )
+        {
             ContainerUnawareProviderRedirect.GetRedirect(container)[target] =
                 new MetadataStoreProvider(target, provider);
             RegisterTypeDescriptorInterop(target);
@@ -208,7 +210,8 @@ namespace System.ComponentModel.Composition
         }
         public static TypeDescriptorServices GetTypeDescriptorServicesForContainer(
             CompositionContainer container
-        ) {
+        )
+        {
             if (container != null)
             {
                 var result = container.GetExportedValueOrDefault<TypeDescriptorServices>();
@@ -233,7 +236,8 @@ namespace System.ComponentModel.Composition
             public override ICustomTypeDescriptor GetTypeDescriptor(
                 Type objectType,
                 object instance
-            ) {
+            )
+            {
                 var datd = GetTypeDescriptorServicesForContainer(MetadataStore.Container);
                 if (datd == null || !datd.Providers.ContainsKey(objectType))
                 {
@@ -247,7 +251,8 @@ namespace System.ComponentModel.Composition
 
             internal static Dictionary<Type, TypeDescriptionProvider> GetRedirect(
                 CompositionContainer container
-            ) {
+            )
+            {
                 TypeDescriptorServices v = GetTypeDescriptorServicesForContainer(container);
                 return v != null ? v.Providers : null;
             }
@@ -266,7 +271,8 @@ namespace System.ComponentModel.Composition
             public override ICustomTypeDescriptor GetTypeDescriptor(
                 Type objectType,
                 object instance
-            ) {
+            )
+            {
                 ICustomTypeDescriptor descriptor = base.GetTypeDescriptor(objectType, instance);
                 descriptor = new MetadataStoreTypeDescriptor(objectType, descriptor, provider);
                 return descriptor;
@@ -366,14 +372,16 @@ namespace System.ComponentModel.Composition
             System.Globalization.CultureInfo culture,
             object value,
             Type destinationType
-        ) {
+        )
+        {
             return ((DynamicMetadataTestClass)value).ToString();
         }
         public override object ConvertFrom(
             ITypeDescriptorContext context,
             System.Globalization.CultureInfo culture,
             object value
-        ) {
+        )
+        {
             return DynamicMetadataTestClass.Get((string)value);
         }
         public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)

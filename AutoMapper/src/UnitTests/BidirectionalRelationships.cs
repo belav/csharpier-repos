@@ -276,7 +276,8 @@ namespace AutoMapper.UnitTests.BidirectionalRelationships
                 int source,
                 ParentDto destination,
                 ResolutionContext resolutionContext
-            ) {
+            )
+            {
                 ParentModel parentModel = _parentModels[source];
                 return (ParentDto)resolutionContext.Mapper.Map(
                     parentModel,
@@ -300,7 +301,8 @@ namespace AutoMapper.UnitTests.BidirectionalRelationships
                 int source,
                 List<ChildDto> destination,
                 ResolutionContext resolutionContext
-            ) {
+            )
+            {
                 List<ChildModel> childModels = _childModels.Where(x => x.Parent.ID == source)
                     .ToList();
                 return (List<ChildDto>)resolutionContext.Mapper.Map(

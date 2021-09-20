@@ -139,7 +139,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
         public async Task PersistentService_Solution_WriteReadDifferentInstances(
             Size size,
             bool withChecksum
-        ) {
+        )
+        {
             var solution = CreateOrOpenSolution();
             var streamName1 = "PersistentService_Solution_WriteReadDifferentInstances1";
             var streamName2 = "PersistentService_Solution_WriteReadDifferentInstances2";
@@ -184,7 +185,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
         public async Task PersistentService_Solution_WriteReadReopenSolution(
             Size size,
             bool withChecksum
-        ) {
+        )
+        {
             var solution = CreateOrOpenSolution();
             var streamName1 = "PersistentService_Solution_WriteReadReopenSolution1";
             var streamName2 = "PersistentService_Solution_WriteReadReopenSolution2";
@@ -231,7 +233,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
         public async Task PersistentService_Solution_WriteReadSameInstance(
             Size size,
             bool withChecksum
-        ) {
+        )
+        {
             var solution = CreateOrOpenSolution();
             var streamName1 = "PersistentService_Solution_WriteReadSameInstance1";
             var streamName2 = "PersistentService_Solution_WriteReadSameInstance2";
@@ -271,7 +274,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
         public async Task PersistentService_Project_WriteReadSameInstance(
             Size size,
             bool withChecksum
-        ) {
+        )
+        {
             var solution = CreateOrOpenSolution();
             var streamName1 = "PersistentService_Project_WriteReadSameInstance1";
             var streamName2 = "PersistentService_Project_WriteReadSameInstance2";
@@ -315,7 +319,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
         public async Task PersistentService_Document_WriteReadSameInstance(
             Size size,
             bool withChecksum
-        ) {
+        )
+        {
             var solution = CreateOrOpenSolution();
             var streamName1 = "PersistentService_Document_WriteReadSameInstance1";
             var streamName2 = "PersistentService_Document_WriteReadSameInstance2";
@@ -501,7 +506,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
             Size size,
             bool withChecksum,
             [CombinatorialRange(0, 100)] int iteration
-        ) {
+        )
+        {
             _ = iteration;
 
             var solution = CreateOrOpenSolution();
@@ -755,7 +761,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
                     solution.Workspace,
                     SolutionKey.ToSolutionKey(solution)
                 )
-            ) {
+            )
+            {
                 Assert.True(
                     await storage.ChecksumMatchesAsync(
                         DocumentKey.ToDocumentKey(document),
@@ -798,7 +805,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
                     solution.Workspace,
                     SolutionKey.ToSolutionKey(solution)
                 )
-            ) {
+            )
+            {
                 Assert.True(await storage.ChecksumMatchesAsync(document, streamName1, s_checksum1));
                 Assert.Equal(
                     GetData1(Size.Small),
@@ -987,7 +995,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
                     solution.Workspace,
                     SolutionKey.ToSolutionKey(solution)
                 )
-            ) {
+            )
+            {
                 Assert.True(
                     await storage.ChecksumMatchesAsync(
                         DocumentKey.ToDocumentKey(document),
@@ -1036,7 +1045,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
                     solution.Workspace,
                     SolutionKey.ToSolutionKey(solution)
                 )
-            ) {
+            )
+            {
                 Assert.True(await storage.ChecksumMatchesAsync(document, streamName1, s_checksum1));
                 Assert.Equal(
                     GetData1(Size.Small),
@@ -1075,7 +1085,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
                     solution.Workspace,
                     SolutionKey.ToSolutionKey(solution)
                 )
-            ) {
+            )
+            {
                 await storage.WriteStreamAsync(
                     document,
                     streamName1,
@@ -1089,7 +1100,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
                     solution.Workspace,
                     SolutionKey.ToSolutionKey(solution)
                 )
-            ) {
+            )
+            {
                 Assert.True(
                     await storage.ChecksumMatchesAsync(
                         DocumentKey.ToDocumentKey(document),
@@ -1122,7 +1134,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
                     solution.Workspace,
                     SolutionKey.ToSolutionKey(solution)
                 )
-            ) {
+            )
+            {
                 await storage.WriteStreamAsync(
                     document,
                     streamName1,
@@ -1136,7 +1149,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
                     solution.Workspace,
                     SolutionKey.ToSolutionKey(solution)
                 )
-            ) {
+            )
+            {
                 Assert.True(await storage.ChecksumMatchesAsync(document, streamName1, s_checksum1));
                 Assert.Equal(
                     GetData1(Size.Small),
@@ -1158,7 +1172,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
                     solution.Workspace,
                     SolutionKey.ToSolutionKey(solution)
                 )
-            ) {
+            )
+            {
                 await storage.WriteStreamAsync(
                     document,
                     streamName1,
@@ -1201,7 +1216,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
                     solution.Workspace,
                     SolutionKey.ToSolutionKey(solution)
                 )
-            ) {
+            )
+            {
                 await storage.WriteStreamAsync(
                     document,
                     streamName1,
@@ -1233,7 +1249,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
                     solution.Workspace,
                     SolutionKey.ToSolutionKey(solution)
                 )
-            ) {
+            )
+            {
                 await storage.WriteStreamAsync(
                     document,
                     streamName1,
@@ -1282,7 +1299,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
                     solution.Workspace,
                     SolutionKey.ToSolutionKey(solution)
                 )
-            ) {
+            )
+            {
                 await storage.WriteStreamAsync(
                     document,
                     streamName1,
@@ -1331,7 +1349,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
                     solution.Workspace,
                     SolutionKey.ToSolutionKey(solution)
                 )
-            ) {
+            )
+            {
                 await storage.WriteStreamAsync(
                     document,
                     streamName1,
@@ -1345,7 +1364,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
                     solution.Workspace,
                     SolutionKey.ToSolutionKey(solution)
                 )
-            ) {
+            )
+            {
                 Assert.True(
                     await storage.ChecksumMatchesAsync(
                         DocumentKey.ToDocumentKey(document),
@@ -1384,7 +1404,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
                     solution.Workspace,
                     SolutionKey.ToSolutionKey(solution)
                 )
-            ) {
+            )
+            {
                 await storage.WriteStreamAsync(
                     document,
                     streamName1,
@@ -1398,7 +1419,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
                     solution.Workspace,
                     SolutionKey.ToSolutionKey(solution)
                 )
-            ) {
+            )
+            {
                 Assert.True(await storage.ChecksumMatchesAsync(document, streamName1, s_checksum1));
                 Assert.Equal(
                     GetData1(Size.Small),
@@ -1544,7 +1566,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
         internal async Task<IChecksummedPersistentStorage> GetStorageAsync(
             Solution solution,
             IPersistentStorageFaultInjector? faultInjector = null
-        ) {
+        )
+        {
             // If we handed out one for a previous test, we need to shut that down first
             _storageService?.GetTestAccessor().Shutdown();
             var locationService = new MockPersistentStorageLocationService(
@@ -1576,7 +1599,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
             Workspace workspace,
             SolutionKey solutionKey,
             IPersistentStorageFaultInjector? faultInjector = null
-        ) {
+        )
+        {
             // If we handed out one for a previous test, we need to shut that down first
             _storageService?.GetTestAccessor().Shutdown();
             var locationService = new MockPersistentStorageLocationService(
@@ -1613,7 +1637,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
             public MockPersistentStorageLocationService(
                 SolutionId solutionId,
                 string storageLocation
-            ) {
+            )
+            {
                 _solutionId = solutionId;
                 _storageLocation = storageLocation;
             }

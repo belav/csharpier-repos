@@ -45,7 +45,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         /// </summary>
         public virtual string GetDependentEndCandidateNavigationPropertyName(
             IReadOnlyForeignKey foreignKey
-        ) {
+        )
+        {
             Check.NotNull(foreignKey, nameof(foreignKey));
 
             var candidateName = FindCandidateNavigationName(foreignKey.Properties);
@@ -64,7 +65,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         public virtual string GetPrincipalEndCandidateNavigationPropertyName(
             IReadOnlyForeignKey foreignKey,
             string dependentEndNavigationPropertyName
-        ) {
+        )
+        {
             Check.NotNull(foreignKey, nameof(foreignKey));
             Check.NotEmpty(
                 dependentEndNavigationPropertyName,
@@ -161,7 +163,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             if (
                 commonPrefix.Length < 3
                 || !commonPrefix.EndsWith("id", StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 return commonPrefix;
             }
 

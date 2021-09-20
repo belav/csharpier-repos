@@ -22,7 +22,8 @@ namespace System.Net
             bool responseRestricted,
             bool multi,
             Func<string, string[]> parser
-        ) {
+        )
+        {
             HeaderName = name;
             IsRequestRestricted = requestRestricted;
             IsResponseRestricted = responseRestricted;

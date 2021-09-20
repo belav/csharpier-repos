@@ -50,7 +50,8 @@ namespace System.Speech.Internal.GrammarBuilding
             IElement parent,
             IRule rule,
             IdentifierCollection ruleIds
-        ) {
+        )
+        {
             Uri ruleUri = new(_uri, UriKind.RelativeOrAbsolute);
             return elementFactory.CreateRuleRef(parent, ruleUri, null, null);
         }

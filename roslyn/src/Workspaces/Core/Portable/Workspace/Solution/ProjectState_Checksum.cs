@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis
 
         private async Task<ProjectStateChecksums> ComputeChecksumsAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 using (
@@ -55,7 +56,8 @@ namespace Microsoft.CodeAnalysis
                         FilePath,
                         cancellationToken
                     )
-                ) {
+                )
+                {
                     var documentChecksumsTasks = DocumentStates.SelectAsArray(
                         static (state, token) => state.GetChecksumAsync(token),
                         cancellationToken

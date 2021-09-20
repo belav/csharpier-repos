@@ -162,7 +162,8 @@ namespace System.Web.Mvc.Html.Test
         public void ActionLinkWithControllerName_UrlEncodesController(
             string text,
             string expectedText
-        ) {
+        )
+        {
             // Arrange
             var helper = MvcHelper.GetHtmlHelper();
 
@@ -237,7 +238,8 @@ namespace System.Web.Mvc.Html.Test
         public void ActionLinkWithControllerNameAndObjectProperties_AttributeEncodes_AddedHtmlAttributes(
             string text,
             string expectedText
-        ) {
+        )
+        {
             // Arrange
             var helper = MvcHelper.GetHtmlHelper();
 
@@ -1098,7 +1100,8 @@ namespace System.Web.Mvc.Html.Test
         public void RouteLinkWithObjectProperties_AttributeEncodes_AddedHtmlAttributes(
             string text,
             string expectedText
-        ) {
+        )
+        {
             // Arrange
             var helper = MvcHelper.GetHtmlHelper();
 

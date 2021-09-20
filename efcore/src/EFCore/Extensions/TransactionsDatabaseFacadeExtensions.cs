@@ -24,14 +24,16 @@ namespace System.Transactions
         public static void EnlistTransaction(
             this DatabaseFacade databaseFacade,
             Transaction? transaction
-        ) {
+        )
+        {
             Check.NotNull(databaseFacade, nameof(databaseFacade));
             if (
                 (
                     (IDatabaseFacadeDependenciesAccessor)databaseFacade
                 ).Dependencies.TransactionManager
                 is ITransactionEnlistmentManager transactionManager
-            ) {
+            )
+            {
                 transactionManager.EnlistTransaction(transaction);
             }
             else
@@ -53,7 +55,8 @@ namespace System.Transactions
                     (IDatabaseFacadeDependenciesAccessor)databaseFacade
                 ).Dependencies.TransactionManager
                 is ITransactionEnlistmentManager transactionManager
-            ) {
+            )
+            {
                 return transactionManager.EnlistedTransaction;
             }
 

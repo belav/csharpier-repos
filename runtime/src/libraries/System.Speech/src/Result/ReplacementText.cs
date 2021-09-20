@@ -16,7 +16,8 @@ namespace System.Speech.Recognition
             string text,
             int wordIndex,
             int countOfWords
-        ) {
+        )
+        {
             _displayAttributes = displayAttributes;
             _text = text;
             _wordIndex = wordIndex;

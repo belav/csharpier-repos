@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
         public EditAndContinueDocumentAnalysesCache(
             AsyncLazy<ActiveStatementsMap> baseActiveStatements
-        ) {
+        )
+        {
             _baseActiveStatements = baseActiveStatements;
         }
 
@@ -39,7 +40,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             Document document,
             ImmutableArray<TextSpan> activeStatementSpans,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 var results = await GetDocumentAnalysisAsync(
@@ -62,7 +64,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             Project oldProject,
             IReadOnlyList<(Document newDocument, ImmutableArray<TextSpan> newActiveStatementSpans)> documentInfos,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 if (documentInfos.IsEmpty())
@@ -106,7 +109,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             Document document,
             ImmutableArray<TextSpan> activeStatementSpans,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 AsyncLazy<DocumentAnalysisResults> lazyResults;
@@ -133,7 +137,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             Project baseProject,
             Document document,
             ImmutableArray<TextSpan> activeStatementSpans
-        ) {
+        )
+        {
             // Do not reuse an analysis of the document unless its snasphot is exactly the same as was used to calculate the results.
             // Note that comparing document snapshots in effect compares the entire solution snapshots (when another document is changed a new solution snapshot is created
             // that creates new document snapshots for all queried documents).
@@ -150,7 +155,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 && analysis.baseProject == baseProject
                 && analysis.document == document
                 && analysis.activeStatementSpans.SequenceEqual(activeStatementSpans)
-            ) {
+            )
+            {
                 return analysis.results;
             }
 
@@ -171,7 +177,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                                 document.Id,
                                 out var documentBaseActiveStatements
                             )
-                        ) {
+                        )
+                        {
                             documentBaseActiveStatements = ImmutableArray<ActiveStatement>.Empty;
                         }
 

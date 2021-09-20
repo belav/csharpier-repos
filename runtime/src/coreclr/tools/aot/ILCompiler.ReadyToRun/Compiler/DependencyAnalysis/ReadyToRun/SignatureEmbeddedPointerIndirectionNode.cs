@@ -29,7 +29,8 @@ namespace ILCompiler.DependencyAnalysis
             ref ObjectDataBuilder dataBuilder,
             NodeFactory factory,
             bool relocsOnly
-        ) {
+        )
+        {
             dataBuilder.RequireInitialPointerAlignment();
             dataBuilder.EmitReloc(Target, RelocType.IMAGE_REL_BASED_ADDR32NB);
         }

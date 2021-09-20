@@ -86,7 +86,8 @@ namespace System.Xml.Tests
                     new StringReader("<root>abc</root>"),
                     false
                 )
-            ) {
+            )
+            {
                 CError.WriteLine(r.GetType().ToString());
                 CError.Compare((r.Settings != null), "Settings is null");
             }
@@ -133,7 +134,8 @@ namespace System.Xml.Tests
                     new StringReader("<root>abc</root>"),
                     false
                 )
-            ) {
+            )
+            {
                 CError.WriteLine(r.GetType().ToString());
                 CError.Compare((r.Settings != null), "Settings is null");
             }
@@ -160,7 +162,8 @@ namespace System.Xml.Tests
                     null,
                     ReaderSettings
                 )
-            ) {
+            )
+            {
                 using (XmlReader r2 = ReaderHelper.Create(r, ReaderSettings)) { }
             }
             return TEST_PASS;
@@ -179,7 +182,8 @@ namespace System.Xml.Tests
                     null,
                     rs
                 )
-            ) {
+            )
+            {
                 bool cc = r.Settings.CheckCharacters;
                 bool closeinput = r.Settings.CloseInput;
                 DtdProcessing dtd = r.Settings.DtdProcessing;
@@ -277,7 +281,8 @@ namespace System.Xml.Tests
                         null,
                         u
                     )
-                ) {
+                )
+                {
                     using (XmlWriter w = WriterHelper.Create(strWriter, ws))
                     {
                         w.WriteNode(r, false);
@@ -311,7 +316,8 @@ namespace System.Xml.Tests
                     null,
                     u
                 )
-            ) {
+            )
+            {
                 XmlReaderSettings s = new XmlReaderSettings();
                 s.DtdProcessing = DtdProcessing.Prohibit;
 
@@ -356,7 +362,8 @@ namespace System.Xml.Tests
                     null,
                     u
                 )
-            ) {
+            )
+            {
                 XmlReaderSettings s = new XmlReaderSettings();
                 s.DtdProcessing = DtdProcessing.Ignore;
 
@@ -406,7 +413,8 @@ namespace System.Xml.Tests
                     null,
                     u
                 )
-            ) {
+            )
+            {
                 u.DtdProcessing = DtdProcessing.Prohibit;
                 XmlWriterSettings ws = new XmlWriterSettings();
                 ws.OmitXmlDeclaration = true;
@@ -449,7 +457,8 @@ namespace System.Xml.Tests
                     null,
                     u
                 )
-            ) {
+            )
+            {
                 u.DtdProcessing = DtdProcessing.Ignore;
                 XmlWriterSettings ws = new XmlWriterSettings();
                 ws.OmitXmlDeclaration = true;
@@ -500,7 +509,8 @@ namespace System.Xml.Tests
                     null,
                     u
                 )
-            ) {
+            )
+            {
                 XmlReaderSettings s = new XmlReaderSettings();
                 s.DtdProcessing = DtdProcessing.Prohibit;
                 using (XmlReader wr = ReaderHelper.Create(r, s))
@@ -555,7 +565,8 @@ namespace System.Xml.Tests
                     null,
                     u
                 )
-            ) {
+            )
+            {
                 XmlReaderSettings s = new XmlReaderSettings();
                 s.DtdProcessing = DtdProcessing.Ignore;
                 using (XmlReader wr = ReaderHelper.Create(r, s))
@@ -593,7 +604,8 @@ namespace System.Xml.Tests
                     null,
                     rs
                 )
-            ) {
+            )
+            {
                 CError.Compare(r.Settings.DtdProcessing, DtdProcessing.Prohibit, "DtdProcessing");
             }
             return TEST_PASS;
@@ -620,7 +632,8 @@ namespace System.Xml.Tests
                     null,
                     rs
                 )
-            ) {
+            )
+            {
                 try
                 {
                     while (r.Read())
@@ -658,7 +671,8 @@ namespace System.Xml.Tests
                     null,
                     rs
                 )
-            ) {
+            )
+            {
                 try
                 {
                     while (r.Read())
@@ -692,7 +706,8 @@ namespace System.Xml.Tests
                     null,
                     rs
                 )
-            ) {
+            )
+            {
                 try
                 {
                     while (r.Read())
@@ -740,7 +755,8 @@ namespace System.Xml.Tests
                         null,
                         rs
                     )
-                ) {
+                )
+                {
                     using (XmlWriter w = WriterHelper.Create(strWriter, ws))
                     {
                         w.WriteNode(r, false);
@@ -772,7 +788,8 @@ namespace System.Xml.Tests
                     null,
                     rs
                 )
-            ) {
+            )
+            {
                 try
                 {
                     while (r.Read())
@@ -810,7 +827,8 @@ namespace System.Xml.Tests
                     null,
                     rs
                 )
-            ) {
+            )
+            {
                 try
                 {
                     while (r.Read())
@@ -846,7 +864,8 @@ namespace System.Xml.Tests
                     null,
                     rs
                 )
-            ) {
+            )
+            {
                 while (r.Read())
                     ;
                 CError.Compare(
@@ -886,7 +905,8 @@ namespace System.Xml.Tests
                         null,
                         u
                     )
-                ) {
+                )
+                {
                     using (XmlWriter w = WriterHelper.Create(strWriter, ws))
                     {
                         try
@@ -937,7 +957,8 @@ namespace System.Xml.Tests
                         null,
                         u
                     )
-                ) {
+                )
+                {
                     using (XmlWriter w = WriterHelper.Create(strWriter, ws))
                     {
                         try
@@ -987,7 +1008,8 @@ namespace System.Xml.Tests
                         null,
                         u
                     )
-                ) {
+                )
+                {
                     using (XmlWriter w = WriterHelper.Create(strWriter, ws))
                     {
                         try
@@ -1029,7 +1051,8 @@ namespace System.Xml.Tests
                     null,
                     u
                 )
-            ) {
+            )
+            {
                 try
                 {
                     r.Settings.DtdProcessing = (DtdProcessing)this.CurVariation.Param;
@@ -1127,7 +1150,8 @@ namespace System.Xml.Tests
                     null,
                     u
                 )
-            ) {
+            )
+            {
                 try
                 {
                     while (r.Read())
@@ -1174,7 +1198,8 @@ namespace System.Xml.Tests
                     null,
                     u
                 )
-            ) {
+            )
+            {
                 try
                 {
                     while (r.Read())
@@ -1286,7 +1311,8 @@ namespace System.Xml.Tests
                     null,
                     u
                 )
-            ) {
+            )
+            {
                 try
                 {
                     while (r.Read())
@@ -1330,7 +1356,8 @@ namespace System.Xml.Tests
                         null,
                         u
                     )
-                ) {
+                )
+                {
                     using (XmlWriter w = WriterHelper.Create(strWriter, ws))
                     {
                         w.WriteNode(r, false);
@@ -1368,7 +1395,8 @@ namespace System.Xml.Tests
                     null,
                     u
                 )
-            ) {
+            )
+            {
                 XmlReaderSettings s = new XmlReaderSettings();
                 s.DtdProcessing = DtdProcessing.Prohibit;
 
@@ -1422,7 +1450,8 @@ namespace System.Xml.Tests
                     null,
                     u
                 )
-            ) {
+            )
+            {
                 XmlReaderSettings s = new XmlReaderSettings();
                 s.DtdProcessing = DtdProcessing.Ignore;
 
@@ -1477,7 +1506,8 @@ namespace System.Xml.Tests
                     null,
                     u
                 )
-            ) {
+            )
+            {
                 u.DtdProcessing = DtdProcessing.Prohibit;
                 XmlWriterSettings ws = new XmlWriterSettings();
                 ws.OmitXmlDeclaration = true;
@@ -1529,7 +1559,8 @@ namespace System.Xml.Tests
                     null,
                     u
                 )
-            ) {
+            )
+            {
                 u.DtdProcessing = DtdProcessing.Ignore;
                 XmlWriterSettings ws = new XmlWriterSettings();
                 ws.OmitXmlDeclaration = true;
@@ -1582,7 +1613,8 @@ namespace System.Xml.Tests
                     null,
                     u
                 )
-            ) {
+            )
+            {
                 XmlReaderSettings s = new XmlReaderSettings();
                 s.DtdProcessing = DtdProcessing.Prohibit;
                 using (XmlReader wr = ReaderHelper.CreateReader(readerType, r, false, null, s))
@@ -1646,7 +1678,8 @@ namespace System.Xml.Tests
                     null,
                     u
                 )
-            ) {
+            )
+            {
                 XmlReaderSettings s = new XmlReaderSettings();
                 s.DtdProcessing = DtdProcessing.Ignore;
                 using (XmlReader wr = ReaderHelper.CreateReader(readerType, r, false, null, s))
@@ -1697,7 +1730,8 @@ namespace System.Xml.Tests
                     null,
                     rs
                 )
-            ) {
+            )
+            {
                 if (r.Settings != null)
                     CError.Compare(
                         r.Settings.DtdProcessing,
@@ -1767,7 +1801,8 @@ namespace System.Xml.Tests
                     null,
                     rs
                 )
-            ) {
+            )
+            {
                 try
                 {
                     while (r.Read())
@@ -1815,7 +1850,8 @@ namespace System.Xml.Tests
                         null,
                         rs
                     )
-                ) {
+                )
+                {
                     using (XmlWriter w = WriterHelper.Create(strWriter, ws))
                     {
                         w.WriteNode(r, false);
@@ -1855,7 +1891,8 @@ namespace System.Xml.Tests
                         null,
                         rs
                     )
-                ) {
+                )
+                {
                     using (XmlWriter w = WriterHelper.Create(strWriter, ws))
                     {
                         try
@@ -1916,7 +1953,8 @@ namespace System.Xml.Tests
                         null,
                         rs
                     )
-                ) {
+                )
+                {
                     using (XmlWriter w = WriterHelper.Create(strWriter, ws))
                     {
                         w.WriteNode(r, false);
@@ -1950,7 +1988,8 @@ namespace System.Xml.Tests
                         null,
                         rs
                     )
-                ) {
+                )
+                {
                     while (r.Read())
                         ;
                 }
@@ -2029,7 +2068,8 @@ namespace System.Xml.Tests
                     null,
                     rs
                 )
-            ) {
+            )
+            {
                 while (r.Read())
                     ;
                 if (r.Settings != null)
@@ -2070,7 +2110,8 @@ namespace System.Xml.Tests
                         null,
                         u
                     )
-                ) {
+                )
+                {
                     using (XmlWriter w = WriterHelper.Create(strWriter, ws))
                     {
                         try
@@ -2128,7 +2169,8 @@ namespace System.Xml.Tests
                         null,
                         u
                     )
-                ) {
+                )
+                {
                     using (XmlWriter w = WriterHelper.Create(strWriter, ws))
                     {
                         try
@@ -2186,7 +2228,8 @@ namespace System.Xml.Tests
                             null,
                             u
                         )
-                    ) {
+                    )
+                    {
                         using (XmlWriter w = WriterHelper.Create(strWriter, ws))
                         {
                             w.WriteNode(r, false);
@@ -2228,7 +2271,8 @@ namespace System.Xml.Tests
                     null,
                     u
                 )
-            ) {
+            )
+            {
                 try
                 {
                     if (r.Settings != null)
@@ -2329,7 +2373,8 @@ namespace System.Xml.Tests
                     null,
                     u
                 )
-            ) {
+            )
+            {
                 try
                 {
                     while (r.Read())
@@ -2558,7 +2603,8 @@ namespace System.Xml.Tests
                     rs,
                     true
                 )
-            ) {
+            )
+            {
                 while (r.Read())
                 {
                     CError.WriteLine(r.Value);
@@ -2611,7 +2657,8 @@ namespace System.Xml.Tests
                         rs,
                         true
                     )
-                ) {
+                )
+                {
                     r.Read();
                     CError.WriteLine(r.Value);
                 }
@@ -2645,7 +2692,8 @@ namespace System.Xml.Tests
                     rs,
                     false
                 )
-            ) {
+            )
+            {
                 while (r.Read())
                 {
                     CError.WriteLine(r.Value);
@@ -2676,7 +2724,8 @@ namespace System.Xml.Tests
                     rs,
                     false
                 )
-            ) {
+            )
+            {
                 while (r.Read())
                 {
                     CError.WriteLine(r.Value);
@@ -2717,7 +2766,8 @@ namespace System.Xml.Tests
                     rs,
                     false
                 )
-            ) {
+            )
+            {
                 using (StringWriter sw = new StringWriter())
                 {
                     using (XmlWriter w = WriterHelper.Create(sw))

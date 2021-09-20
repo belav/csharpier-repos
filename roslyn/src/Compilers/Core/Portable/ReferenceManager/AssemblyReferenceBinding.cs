@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis
                 AssemblyIdentity referenceIdentity,
                 int definitionIndex,
                 int versionDifference = 0
-            ) {
+            )
+            {
                 Debug.Assert(referenceIdentity != null);
                 Debug.Assert(definitionIndex >= 0);
                 Debug.Assert(versionDifference >= -1 && versionDifference <= +1);

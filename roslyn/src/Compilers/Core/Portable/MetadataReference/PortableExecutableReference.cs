@@ -112,7 +112,8 @@ namespace Microsoft.CodeAnalysis
         /// <exception cref="ArgumentException">Specified values not valid for this reference.</exception>
         public new PortableExecutableReference WithProperties(
             MetadataReferenceProperties properties
-        ) {
+        )
+        {
             if (properties == this.Properties)
             {
                 return this;
@@ -123,7 +124,8 @@ namespace Microsoft.CodeAnalysis
 
         internal sealed override MetadataReference WithPropertiesImplReturningMetadataReference(
             MetadataReferenceProperties properties
-        ) {
+        )
+        {
             return WithPropertiesImpl(properties);
         }
 
@@ -197,7 +199,8 @@ namespace Microsoft.CodeAnalysis
             Location location,
             string display,
             MetadataImageKind kind
-        ) {
+        )
+        {
             if (e is BadImageFormatException)
             {
                 int errorCode =

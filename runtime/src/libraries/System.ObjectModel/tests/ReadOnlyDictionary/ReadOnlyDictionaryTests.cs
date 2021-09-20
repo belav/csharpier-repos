@@ -591,7 +591,8 @@ namespace System.Collections.ObjectModel.Tests
             IReadOnlyDictionary<TKey, TValue> collection,
             KeyValuePair<TKey, TValue>[] expectedItems,
             Func<KeyValuePair<TKey, TValue>> generateItem
-        ) {
+        )
+        {
             _collection = collection;
             _expectedItems = expectedItems;
             _generateItem = generateItem;
@@ -773,7 +774,8 @@ namespace System.Collections.ObjectModel.Tests
         public void VerifyCollection(
             IReadOnlyDictionary<TKey, TValue> collection,
             KeyValuePair<TKey, TValue>[] expectedItems
-        ) {
+        )
+        {
             // verify that you can get all items in collection.
             Assert.Equal(expectedItems.Length, collection.Count);
             for (int i = 0; i < expectedItems.Length; ++i)
@@ -794,7 +796,8 @@ namespace System.Collections.ObjectModel.Tests
         private void VerifyGenericEnumerator(
             IReadOnlyDictionary<TKey, TValue> collection,
             KeyValuePair<TKey, TValue>[] expectedItems
-        ) {
+        )
+        {
             IEnumerator<KeyValuePair<TKey, TValue>> enumerator = collection.GetEnumerator();
             int iterations = 0;
             int expectedCount = expectedItems.Length;
@@ -877,7 +880,8 @@ namespace System.Collections.ObjectModel.Tests
         private void VerifyEnumerator(
             IReadOnlyDictionary<TKey, TValue> collection,
             KeyValuePair<TKey, TValue>[] expectedItems
-        ) {
+        )
+        {
             IEnumerator enumerator = collection.GetEnumerator();
             int iterations = 0;
             int expectedCount = expectedItems.Length;
@@ -959,7 +963,8 @@ namespace System.Collections.ObjectModel.Tests
         private bool IsUniqueKey(
             KeyValuePair<TKey, TValue>[] items,
             KeyValuePair<TKey, TValue> item
-        ) {
+        )
+        {
             for (int i = 0; i < items.Length; ++i)
             {
                 if (items[i].Key != null && items[i].Key.Equals(item.Key))

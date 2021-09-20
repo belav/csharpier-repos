@@ -113,7 +113,8 @@ namespace System
             out int charsWritten,
             ReadOnlySpan<char> format = default,
             IFormatProvider? provider = null
-        ) {
+        )
+        {
             return Number.TryFormatInt32(
                 m_value,
                 ~0,
@@ -170,7 +171,8 @@ namespace System
             ReadOnlySpan<char> s,
             NumberStyles style = NumberStyles.Integer,
             IFormatProvider? provider = null
-        ) {
+        )
+        {
             NumberFormatInfo.ValidateParseStyleInteger(style);
             return Number.ParseInt32(s, style, NumberFormatInfo.GetInstance(provider));
         }
@@ -212,7 +214,8 @@ namespace System
             NumberStyles style,
             IFormatProvider? provider,
             out int result
-        ) {
+        )
+        {
             NumberFormatInfo.ValidateParseStyleInteger(style);
 
             if (s == null)
@@ -234,7 +237,8 @@ namespace System
             NumberStyles style,
             IFormatProvider? provider,
             out int result
-        ) {
+        )
+        {
             NumberFormatInfo.ValidateParseStyleInteger(style);
             return Number.TryParseInt32(
                     s,

@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         internal ProgrammaticSuppressionInfo(
             ImmutableHashSet<(string Id, LocalizableString Justification)> suppressions
-        ) {
+        )
+        {
             Suppressions = suppressions;
         }
 

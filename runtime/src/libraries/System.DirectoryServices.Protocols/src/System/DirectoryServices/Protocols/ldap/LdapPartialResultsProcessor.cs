@@ -120,7 +120,8 @@ namespace System.DirectoryServices.Protocols
                             asyncResult._response.Entries.Count > 0
                             || asyncResult._response.References.Count > 0
                         )
-                    ) {
+                    )
+                    {
                         tmpCallback = asyncResult._callback;
                     }
                 }
@@ -159,7 +160,8 @@ namespace System.DirectoryServices.Protocols
                     if (
                         (asyncResult._startTime.Ticks + asyncResult._requestTimeout.Ticks)
                         > DateTime.Now.Ticks
-                    ) {
+                    )
+                    {
                         // This is expected, just the client does not have the result yet .
                         return;
                     }
@@ -363,7 +365,8 @@ namespace System.DirectoryServices.Protocols
         internal PartialResultsRetriever(
             ManualResetEvent eventHandle,
             LdapPartialResultsProcessor processor
-        ) {
+        )
+        {
             _workThreadWaitHandle = eventHandle;
             _processor = processor;
 

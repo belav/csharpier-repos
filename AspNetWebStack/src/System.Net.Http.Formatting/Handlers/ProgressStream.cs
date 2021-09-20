@@ -70,7 +70,8 @@ namespace System.Net.Http.Handlers
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             int readCount = await InnerStream.ReadAsync(buffer, offset, count, cancellationToken);
             ReportBytesReceived(readCount, userState: null);
             return readCount;
@@ -82,7 +83,8 @@ namespace System.Net.Http.Handlers
             int count,
             AsyncCallback callback,
             object state
-        ) {
+        )
+        {
             return InnerStream.BeginRead(buffer, offset, count, callback, state);
         }
 
@@ -111,7 +113,8 @@ namespace System.Net.Http.Handlers
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             await InnerStream.WriteAsync(buffer, offset, count, cancellationToken);
             ReportBytesSent(count, userState: null);
         }
@@ -123,7 +126,8 @@ namespace System.Net.Http.Handlers
             int count,
             AsyncCallback callback,
             object state
-        ) {
+        )
+        {
             return new ProgressWriteAsyncResult(
                 InnerStream,
                 this,

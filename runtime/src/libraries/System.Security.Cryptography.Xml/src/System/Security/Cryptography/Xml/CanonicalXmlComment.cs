@@ -38,7 +38,8 @@ namespace System.Security.Cryptography.Xml
             StringBuilder strBuilder,
             DocPosition docPos,
             AncestralNamespaceContextManager anc
-        ) {
+        )
+        {
             if (!IsInNodeSet || !IncludeComments)
                 return;
 
@@ -55,7 +56,8 @@ namespace System.Security.Cryptography.Xml
             HashAlgorithm hash,
             DocPosition docPos,
             AncestralNamespaceContextManager anc
-        ) {
+        )
+        {
             if (!IsInNodeSet || !IncludeComments)
                 return;
 

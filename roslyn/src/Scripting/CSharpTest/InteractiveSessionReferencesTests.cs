@@ -67,7 +67,8 @@ F(new C())
         [InlineData(false)]
         public async Task LibraryReference_MissingDependency_MultipleResolveAttempts(
             bool swapReferences
-        ) {
+        )
+        {
             var libASource =
                 @"
 public class A

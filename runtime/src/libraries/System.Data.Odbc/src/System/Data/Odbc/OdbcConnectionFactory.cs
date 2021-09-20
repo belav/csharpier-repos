@@ -31,7 +31,8 @@ namespace System.Data.Odbc
             object poolGroupProviderInfo,
             DbConnectionPool? pool,
             DbConnection? owningObject
-        ) {
+        )
+        {
             // TODO: owningObject may actually be null (see DbConnectionPool.CreateObject), in which case this will throw...
             DbConnectionInternal result = new OdbcConnectionOpen(
                 (owningObject as OdbcConnection)!,
@@ -43,7 +44,8 @@ namespace System.Data.Odbc
         protected override DbConnectionOptions CreateConnectionOptions(
             string connectionString,
             DbConnectionOptions? previous
-        ) {
+        )
+        {
             Debug.Assert(!string.IsNullOrEmpty(connectionString), "empty connectionString");
             OdbcConnectionString result = new OdbcConnectionString(
                 connectionString,
@@ -54,7 +56,8 @@ namespace System.Data.Odbc
 
         protected override DbConnectionPoolGroupOptions? CreateConnectionPoolGroupOptions(
             DbConnectionOptions connectionOptions
-        ) {
+        )
+        {
             // At this time, the ODBC provider only supports native pooling so we
             // simply return NULL to indicate that.
             return null;
@@ -62,14 +65,16 @@ namespace System.Data.Odbc
 
         internal override DbConnectionPoolGroupProviderInfo CreateConnectionPoolGroupProviderInfo(
             DbConnectionOptions connectionOptions
-        ) {
+        )
+        {
             return new OdbcConnectionPoolGroupProviderInfo();
         }
 
         protected override DbMetaDataFactory CreateMetaDataFactory(
             DbConnectionInternal internalConnection,
             out bool cacheMetaDataFactory
-        ) {
+        )
+        {
             Debug.Assert(internalConnection != null, "internalConnection may not be null.");
             cacheMetaDataFactory = false;
 
@@ -137,7 +142,8 @@ namespace System.Data.Odbc
         internal override void SetConnectionPoolGroup(
             DbConnection outerConnection,
             DbConnectionPoolGroup poolGroup
-        ) {
+        )
+        {
             OdbcConnection? c = (outerConnection as OdbcConnection);
             if (null != c)
             {
@@ -148,7 +154,8 @@ namespace System.Data.Odbc
         internal override void SetInnerConnectionEvent(
             DbConnection owningObject,
             DbConnectionInternal to
-        ) {
+        )
+        {
             OdbcConnection? c = (owningObject as OdbcConnection);
             if (null != c)
             {
@@ -160,7 +167,8 @@ namespace System.Data.Odbc
             DbConnection owningObject,
             DbConnectionInternal to,
             DbConnectionInternal from
-        ) {
+        )
+        {
             OdbcConnection? c = (owningObject as OdbcConnection);
             if (null != c)
             {
@@ -172,7 +180,8 @@ namespace System.Data.Odbc
         internal override void SetInnerConnectionTo(
             DbConnection owningObject,
             DbConnectionInternal to
-        ) {
+        )
+        {
             OdbcConnection? c = (owningObject as OdbcConnection);
             if (null != c)
             {

@@ -130,7 +130,8 @@ namespace JIT.HardwareIntrinsics.Arm
                     (alignment != 16 && alignment != 8)
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -189,7 +190,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario(
                 StoreSelectedScalarTest__StoreSelectedScalar_Vector128_Int64_1 testClass
-            ) {
+            )
+            {
                 AdvSimd.StoreSelectedScalar((Int64*)testClass._dataTable.outArrayPtr, _fld1, 1);
 
                 testClass.ValidateResult(_fld1, testClass._dataTable.outArrayPtr);
@@ -197,7 +199,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario_Load(
                 StoreSelectedScalarTest__StoreSelectedScalar_Vector128_Int64_1 testClass
-            ) {
+            )
+            {
                 fixed (Vector128<Int64>* pFld1 = &_fld1)
                 {
                     AdvSimd.StoreSelectedScalar(
@@ -495,7 +498,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Vector128<Int64> op1,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Int64[] inArray1 = new Int64[Op1ElementCount];
             Int64[] outArray = new Int64[RetElementCount];
 
@@ -532,7 +536,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Int64[] firstOp,
             Int64 result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (firstOp[ElementIndex] != result)

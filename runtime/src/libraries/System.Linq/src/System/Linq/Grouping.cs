@@ -219,7 +219,8 @@ namespace System.Linq
             Func<TSource, TElement> elementSelector,
             Func<TKey, IEnumerable<TElement>, TResult> resultSelector,
             IEqualityComparer<TKey>? comparer
-        ) {
+        )
+        {
             if (source is null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -271,7 +272,8 @@ namespace System.Linq
             Func<TSource, TKey> keySelector,
             Func<TKey, IEnumerable<TSource>, TResult> resultSelector,
             IEqualityComparer<TKey>? comparer
-        ) {
+        )
+        {
             if (source is null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -317,7 +319,8 @@ namespace System.Linq
             Func<TSource, TKey> keySelector,
             Func<TSource, TElement> elementSelector,
             IEqualityComparer<TKey>? comparer
-        ) {
+        )
+        {
             if (source is null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -355,7 +358,8 @@ namespace System.Linq
             IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector,
             IEqualityComparer<TKey>? comparer
-        ) {
+        )
+        {
             if (source is null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);

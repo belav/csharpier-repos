@@ -13,7 +13,8 @@ namespace System.CodeDom
         public CodeArrayCreateExpression(
             CodeTypeReference createType,
             params CodeExpression[] initializers
-        ) {
+        )
+        {
             _createType = createType;
             _initializers.AddRange(initializers);
         }

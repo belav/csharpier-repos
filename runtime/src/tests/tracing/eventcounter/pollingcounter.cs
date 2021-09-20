@@ -160,7 +160,8 @@ namespace BasicEventSourceTests
                     "SimpleEventSource",
                     EventLevel.Verbose
                 )
-            ) {
+            )
+            {
                 SimpleEventSource eventSource = new SimpleEventSource(
                     getMockedCount,
                     getSuccessCount
@@ -174,7 +175,8 @@ namespace BasicEventSourceTests
                     && myListener.SuccessEventCount > 0
                     && !myListener.Failed
                     && (mockedCountCalled > 0 && successCountCalled > 0)
-                ) {
+                )
+                {
                     Console.WriteLine("Test Passed");
                     return 100;
                 }

@@ -742,7 +742,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 string name,
                 int? customerMembershipId,
                 string customerMembershipName
-            ) {
+            )
+            {
                 Assert.Equal(id, actual.Id);
                 Assert.Equal(name, actual.Name);
                 Assert.Equal(customerMembershipId, actual.CustomerMembershipId);

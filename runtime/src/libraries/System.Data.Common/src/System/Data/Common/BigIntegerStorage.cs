@@ -111,7 +111,8 @@ namespace System.Data.Common
             BigInteger value,
             Type type,
             IFormatProvider formatProvider
-        ) {
+        )
+        {
             if (type == typeof(string))
             {
                 return value.ToString("D", formatProvider);
@@ -251,7 +252,8 @@ namespace System.Data.Common
             object store,
             BitArray nullbits,
             int storeIndex
-        ) {
+        )
+        {
             BigInteger[] typedStore = (BigInteger[])store;
             typedStore[storeIndex] = _values[record];
             nullbits.Set(storeIndex, !HasValue(record));

@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             AnalyzerConfigOptions options,
             ChainedFormattingRules formattingRules,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = trivia.GetStructure() ?? throw new ArgumentException();
             var formatter = new CSharpStructuredTriviaFormatEngine(
                 trivia,

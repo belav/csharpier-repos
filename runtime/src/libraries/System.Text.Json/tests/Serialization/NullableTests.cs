@@ -230,7 +230,8 @@ namespace System.Text.Json.Serialization.Tests
             TDictOfDict dictOfDictWithValue,
             TDictOfDict dictOfDictWithNull,
             TValue value
-        ) {
+        )
+        {
             string valueSerialized = JsonSerializer.Serialize(value);
 
             static void ValidateDict(TDict dict, TValue expectedValue)
@@ -421,7 +422,8 @@ namespace System.Text.Json.Serialization.Tests
             TEnumerableOfEnumerable enumerableOfEnumerableWithValue,
             TEnumerableOfEnumerable enumerableOfEnumerableWithNull,
             TValue value
-        ) {
+        )
+        {
             string valueSerialized = JsonSerializer.Serialize(value);
 
             static void ValidateEnumerable(TEnumerable enumerable, TValue expectedValue)
@@ -439,7 +441,8 @@ namespace System.Text.Json.Serialization.Tests
             static void ValidateEnumerableOfEnumerable(
                 TEnumerableOfEnumerable dictOfDict,
                 TValue expectedValue
-            ) {
+            )
+            {
                 IEnumerable<TEnumerable> ienumerable = (IEnumerable<TEnumerable>)dictOfDict;
                 int ienumerableCount = 0;
                 int nestedIEnumerableCount = 0;

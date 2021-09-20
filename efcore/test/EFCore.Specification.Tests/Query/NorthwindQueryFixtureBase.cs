@@ -33,7 +33,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     (applyFilters, tenantPrefix, searchTerm),
                     out var cachedResult
                 )
-            ) {
+            )
+            {
                 return cachedResult;
             }
 

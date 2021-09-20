@@ -28,7 +28,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public HtmlGenerationTest(
             MvcTestFixture<HtmlGenerationWebSite.Startup> fixture,
             MvcEncodedTestFixture<HtmlGenerationWebSite.Startup> encodedFixture
-        ) {
+        )
+        {
             Factory =
                 fixture.Factories.FirstOrDefault()
                 ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
@@ -104,7 +105,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task HtmlGenerationWebSite_GeneratesExpectedResults(
             string action,
             string antiforgeryPath
-        ) {
+        )
+        {
             // Arrange
             var expectedMediaType = MediaTypeHeaderValue.Parse("text/html; charset=utf-8");
             var outputFile =
@@ -246,7 +248,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task HtmlGenerationWebSite_GenerateEncodedResults(
             string action,
             string antiforgeryPath
-        ) {
+        )
+        {
             // Arrange
             var expectedMediaType = MediaTypeHeaderValue.Parse("text/html; charset=utf-8");
             var outputFile =

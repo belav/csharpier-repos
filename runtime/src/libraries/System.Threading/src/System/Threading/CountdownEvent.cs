@@ -242,7 +242,8 @@ namespace System.Threading
                         observedCount - signalCount,
                         observedCount
                     ) == observedCount
-                ) {
+                )
+                {
                     break;
                 }
 
@@ -357,7 +358,8 @@ namespace System.Threading
                         observedCount + signalCount,
                         observedCount
                     ) == observedCount
-                ) {
+                )
+                {
                     break;
                 }
 

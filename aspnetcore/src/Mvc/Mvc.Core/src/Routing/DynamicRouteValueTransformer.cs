@@ -93,7 +93,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             HttpContext httpContext,
             RouteValueDictionary values,
             IReadOnlyList<Endpoint> endpoints
-        ) {
+        )
+        {
             return new ValueTask<IReadOnlyList<Endpoint>>(endpoints);
         }
     }

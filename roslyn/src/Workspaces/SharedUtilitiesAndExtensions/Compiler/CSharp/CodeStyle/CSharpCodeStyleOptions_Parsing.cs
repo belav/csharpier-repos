@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeStyle
         public static CodeStyleOption2<ExpressionBodyPreference> ParseExpressionBodyPreference(
             string optionString,
             CodeStyleOption2<ExpressionBodyPreference> @default
-        ) {
+        )
+        {
             // optionString must be similar to true:error or when_on_single_line:suggestion.
             if (
                 CodeStyleHelpers.TryGetCodeStyleValueAndOptionalNotification(
@@ -23,7 +24,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeStyle
                     out var value,
                     out var notification
                 )
-            ) {
+            )
+            {
                 if (bool.TryParse(value, out var boolValue))
                 {
                     return boolValue
@@ -52,7 +54,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeStyle
         private static string GetExpressionBodyPreferenceEditorConfigString(
             CodeStyleOption2<ExpressionBodyPreference> value,
             CodeStyleOption2<ExpressionBodyPreference> defaultValue
-        ) {
+        )
+        {
             var notificationString = CodeStyleHelpers.GetEditorConfigStringNotificationPart(
                 value,
                 defaultValue
@@ -70,7 +73,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeStyle
         public static CodeStyleOption2<AddImportPlacement> ParseUsingDirectivesPlacement(
             string optionString,
             CodeStyleOption2<AddImportPlacement> @default
-        ) {
+        )
+        {
             if (
                 CodeStyleHelpers.TryGetCodeStyleValueAndOptionalNotification(
                     optionString,
@@ -78,7 +82,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeStyle
                     out var value,
                     out var notification
                 )
-            ) {
+            )
+            {
                 return value switch
                 {
                     "inside_namespace"
@@ -101,7 +106,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeStyle
         public static string GetUsingDirectivesPlacementEditorConfigString(
             CodeStyleOption2<AddImportPlacement> value,
             CodeStyleOption2<AddImportPlacement> defaultValue
-        ) {
+        )
+        {
             var notificationString = CodeStyleHelpers.GetEditorConfigStringNotificationPart(
                 value,
                 defaultValue
@@ -117,7 +123,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeStyle
         private static CodeStyleOption2<PreferBracesPreference> ParsePreferBracesPreference(
             string optionString,
             CodeStyleOption2<PreferBracesPreference> defaultValue
-        ) {
+        )
+        {
             if (
                 CodeStyleHelpers.TryGetCodeStyleValueAndOptionalNotification(
                     optionString,
@@ -125,7 +132,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeStyle
                     out var value,
                     out var notificationOption
                 )
-            ) {
+            )
+            {
                 if (bool.TryParse(value, out var boolValue))
                 {
                     return boolValue
@@ -154,7 +162,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeStyle
         private static string GetPreferBracesPreferenceEditorConfigString(
             CodeStyleOption2<PreferBracesPreference> value,
             CodeStyleOption2<PreferBracesPreference> defaultValue
-        ) {
+        )
+        {
             var notificationString = CodeStyleHelpers.GetEditorConfigStringNotificationPart(
                 value,
                 defaultValue

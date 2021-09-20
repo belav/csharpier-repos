@@ -492,7 +492,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
             string certificateFile,
             string certificateKey,
             string password
-        ) {
+        )
+        {
             var serverOptions = CreateServerOptions();
             var certificate = new X509Certificate2(
                 TestResources.GetCertPath(Path.ChangeExtension(certificateFile, "crt"))

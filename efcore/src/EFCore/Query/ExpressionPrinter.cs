@@ -570,7 +570,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 if (
                     memberExpression.Expression.NodeType == ExpressionType.Convert
                     || memberExpression.Expression is BinaryExpression
-                ) {
+                )
+                {
                     _stringBuilder.Append("(");
                     Visit(memberExpression.Expression);
                     _stringBuilder.Append(")");
@@ -667,7 +668,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 if (
                     method.Name == nameof(Enumerable.Cast)
                     || method.Name == nameof(Enumerable.OfType)
-                ) {
+                )
+                {
                     PrintGenericArguments(method, _stringBuilder);
                 }
             }
@@ -745,7 +747,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             static void PrintGenericArguments(
                 MethodInfo method,
                 IndentedStringBuilder stringBuilder
-            ) {
+            )
+            {
                 if (method.IsGenericMethod)
                 {
                     stringBuilder.Append("<");
@@ -1090,7 +1093,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Action<string> appendAction,
             string lastSeparator = "",
             bool areConnected = false
-        ) {
+        )
+        {
             for (var i = 0; i < arguments.Count; i++)
             {
                 if (areConnected && i == arguments.Count - 1)

@@ -22,7 +22,8 @@ namespace Microsoft.Web.Mvc.Test
                 ManualResetEvent waitHandle = new ManualResetEvent(
                     false /* initialState */
                 )
-            ) {
+            )
+            {
                 Func<AsyncCallback, IAsyncResult> beginDelegate = callback =>
                 {
                     Assert.Equal(1, asyncManager.OutstandingOperations.Count);
@@ -67,7 +68,8 @@ namespace Microsoft.Web.Mvc.Test
                 ManualResetEvent waitHandle = new ManualResetEvent(
                     false /* initialState */
                 )
-            ) {
+            )
+            {
                 Func<AsyncCallback, IAsyncResult> beginDelegate = callback =>
                 {
                     MockAsyncResult asyncResult = new MockAsyncResult(

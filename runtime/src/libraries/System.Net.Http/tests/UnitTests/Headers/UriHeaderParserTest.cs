@@ -88,7 +88,8 @@ namespace System.Net.Http.Tests
             int startIndex,
             Uri expectedResult,
             int expectedIndex
-        ) {
+        )
+        {
             UriHeaderParser parser = UriHeaderParser.RelativeOrAbsoluteUriParser;
 
             object result = null;

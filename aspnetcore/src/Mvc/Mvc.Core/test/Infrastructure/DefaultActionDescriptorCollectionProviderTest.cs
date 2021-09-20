@@ -169,7 +169,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
         private static IActionDescriptorProvider GetActionDescriptorProvider(
             params ActionDescriptor[] values
-        ) {
+        )
+        {
             var actionDescriptorProvider = new Mock<IActionDescriptorProvider>();
             actionDescriptorProvider.Setup(
                     p => p.OnProvidersExecuting(It.IsAny<ActionDescriptorProviderContext>())

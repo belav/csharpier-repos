@@ -477,7 +477,8 @@ $$"
         [InlineData("while (true) { }")]
         public async Task TestAfterIfNestedIfIncompleteStatementElseStatement_BeforeElse(
             string statement
-        ) {
+        )
+        {
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     $@"if (true)

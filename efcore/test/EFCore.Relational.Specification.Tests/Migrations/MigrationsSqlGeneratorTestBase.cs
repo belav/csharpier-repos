@@ -882,7 +882,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             TestHelpers testHelpers,
             IServiceCollection customServices = null,
             DbContextOptions options = null
-        ) {
+        )
+        {
             TestHelpers = testHelpers;
             CustomServices = customServices;
             ContextOptions = options;
@@ -895,7 +896,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             Action<ModelBuilder> buildAction,
             Action<MigrationBuilder> migrateAction,
             MigrationsSqlGenerationOptions options = MigrationsSqlGenerationOptions.Default
-        ) {
+        )
+        {
             var migrationBuilder = new MigrationBuilder(activeProvider: null);
             migrateAction(migrationBuilder);
 
@@ -911,7 +913,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             Action<ModelBuilder> buildAction,
             MigrationOperation[] operation,
             MigrationsSqlGenerationOptions options
-        ) {
+        )
+        {
             var services =
                 ContextOptions != null
                     ? TestHelpers.CreateContextServices(CustomServices, ContextOptions)

@@ -36,7 +36,8 @@ namespace BasicWebSite.Formatters
         public override async Task WriteResponseBodyAsync(
             OutputFormatterWriteContext context,
             Encoding selectedEncoding
-        ) {
+        )
+        {
             var response = context.HttpContext.Response;
             response.ContentType = ContentType + ";charset=utf-8";
             await response.WriteAsync(context.Object.ToString());

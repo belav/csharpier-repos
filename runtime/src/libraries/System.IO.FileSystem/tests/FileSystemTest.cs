@@ -133,7 +133,8 @@ namespace System.IO.Tests
         protected void ReadOnly_FileSystemHelper(
             Action<string> testAction,
             string subDirectoryName = null
-        ) {
+        )
+        {
             // Set up read only file system
             // Set up the source directory
             string sourceDirectory = GetTestFilePath();

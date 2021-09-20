@@ -2806,7 +2806,8 @@ namespace System.Data.Tests
             string toCompareTable,
             string toCompareSelect,
             string AssertTag
-        ) {
+        )
+        {
             DataRow drToTest = _ds.Tables[toTable].Select(toTestSelect)[0];
             DataRow drToCompare = _ds.Tables[toCompareTable].Select(toCompareSelect)[0];
             Assert.Equal(
@@ -3647,7 +3648,8 @@ namespace System.Data.Tests
         private void InitParentDataTableSchema(
             out XmlDocument schemaDocInit,
             out XmlNamespaceManager namespaceManagerToInit
-        ) {
+        )
+        {
             var ds = new DataSet();
             ds.Tables.Add(DataProvider.CreateParentDataTable());
             string strXML = ds.GetXmlSchema();
@@ -3664,7 +3666,8 @@ namespace System.Data.Tests
             int expectedNodesCout,
             XmlDocument schemaDoc,
             XmlNamespaceManager nm
-        ) {
+        )
+        {
             int actualNodeCount = schemaDoc.SelectNodes(xPath, nm).Count;
             Assert.Equal(expectedNodesCout, actualNodeCount);
         }

@@ -34,7 +34,8 @@ namespace System.Buffers.Text
             out DateTime value,
             out int bytesConsumed,
             char standardFormat = default
-        ) {
+        )
+        {
             switch (standardFormat)
             {
                 case 'R':
@@ -46,7 +47,8 @@ namespace System.Buffers.Text
                             out DateTimeOffset dateTimeOffset,
                             out bytesConsumed
                         )
-                    ) {
+                    )
+                    {
                         value = default;
                         return false;
                     }
@@ -63,7 +65,8 @@ namespace System.Buffers.Text
                             out DateTimeOffset dateTimeOffset,
                             out bytesConsumed
                         )
-                    ) {
+                    )
+                    {
                         value = default;
                         return false;
                     }
@@ -87,7 +90,8 @@ namespace System.Buffers.Text
                             out bytesConsumed,
                             out DateTimeKind kind
                         )
-                    ) {
+                    )
+                    {
                         value = default;
                         bytesConsumed = 0;
                         return false;
@@ -145,7 +149,8 @@ namespace System.Buffers.Text
             out DateTimeOffset value,
             out int bytesConsumed,
             char standardFormat = default
-        ) {
+        )
+        {
             return standardFormat switch
             {
                 'R' => TryParseDateTimeOffsetR(source, NoFlipCase, out value, out bytesConsumed),

@@ -28,7 +28,8 @@ namespace System
                 path.Length == 0
                 || option == SpecialFolderOption.DoNotVerify
                 || Interop.Sys.Access(path, Interop.Sys.AccessMode.R_OK) == 0
-            ) {
+            )
+            {
                 return path;
             }
 
@@ -233,7 +234,8 @@ namespace System
                                     0,
                                     RelativeToHomePrefix.Length
                                 ) == 0
-                            ) {
+                            )
+                            {
                                 relativeToHome = true;
                                 pos += RelativeToHomePrefix.Length;
                             }

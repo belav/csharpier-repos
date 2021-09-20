@@ -66,7 +66,8 @@ namespace System
         protected Delegate(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type target,
             string method
-        ) {
+        )
+        {
             if (target == null)
                 throw new ArgumentNullException(nameof(target));
 
@@ -195,7 +196,8 @@ namespace System
                 if (
                     RuntimeTypeHandle.IsGenericTypeDefinition(declaringType)
                     || RuntimeTypeHandle.HasInstantiation(declaringType)
-                ) {
+                )
+                {
                     bool isStatic =
                         (RuntimeMethodHandle.GetAttributes(method) & MethodAttributes.Static)
                         != (MethodAttributes)0;
@@ -220,7 +222,8 @@ namespace System
                                 if (
                                     currentType.IsGenericType
                                     && currentType.GetGenericTypeDefinition() == targetType
-                                ) {
+                                )
+                                {
                                     declaringType = currentType as RuntimeType;
                                     break;
                                 }
@@ -258,7 +261,8 @@ namespace System
             string method,
             bool ignoreCase,
             bool throwOnBindFailure
-        ) {
+        )
+        {
             if (type == null)
                 throw new ArgumentNullException(nameof(type));
             if (target == null)
@@ -289,7 +293,8 @@ namespace System
                         | DelegateBindingFlags.NeverCloseOverNull
                         | (ignoreCase ? DelegateBindingFlags.CaselessMatching : 0)
                 )
-            ) {
+            )
+            {
                 if (throwOnBindFailure)
                     throw new ArgumentException(SR.Arg_DlgtTargMeth);
 
@@ -306,7 +311,8 @@ namespace System
             string method,
             bool ignoreCase,
             bool throwOnBindFailure
-        ) {
+        )
+        {
             if (type == null)
                 throw new ArgumentNullException(nameof(type));
             if (target == null)
@@ -338,7 +344,8 @@ namespace System
                         | DelegateBindingFlags.OpenDelegateOnly
                         | (ignoreCase ? DelegateBindingFlags.CaselessMatching : 0)
                 )
-            ) {
+            )
+            {
                 if (throwOnBindFailure)
                     throw new ArgumentException(SR.Arg_DlgtTargMeth);
 
@@ -353,7 +360,8 @@ namespace System
             Type type,
             MethodInfo method,
             bool throwOnBindFailure
-        ) {
+        )
+        {
             // Validate the parameters.
             if (type == null)
                 throw new ArgumentNullException(nameof(type));
@@ -396,7 +404,8 @@ namespace System
             object? firstArgument,
             MethodInfo method,
             bool throwOnBindFailure
-        ) {
+        )
+        {
             // Validate the parameters.
             if (type == null)
                 throw new ArgumentNullException(nameof(type));
@@ -439,7 +448,8 @@ namespace System
             Type type,
             object? target,
             RuntimeMethodHandle method
-        ) {
+        )
+        {
             // Validate the parameters.
             if (type == null)
                 throw new ArgumentNullException(nameof(type));
@@ -477,7 +487,8 @@ namespace System
             RuntimeMethodInfo rtMethod,
             object? firstArgument,
             DelegateBindingFlags flags
-        ) {
+        )
+        {
             Delegate d = InternalAlloc(rtType);
 
             if (

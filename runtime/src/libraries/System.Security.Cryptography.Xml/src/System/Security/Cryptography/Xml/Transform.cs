@@ -182,7 +182,8 @@ namespace System.Security.Cryptography.Xml
                         (reference.ReferenceTargetType != ReferenceTargetType.UriReference)
                         || (string.IsNullOrEmpty(reference.Uri) || reference.Uri[0] != '#')
                     )
-                ) {
+                )
+                {
                     _propagatedNamespaces = new Hashtable(0);
                     return _propagatedNamespaces;
                 }

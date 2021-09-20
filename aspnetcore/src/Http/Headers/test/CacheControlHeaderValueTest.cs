@@ -572,7 +572,8 @@ namespace Microsoft.Net.Http.Headers
             CacheControlHeaderValue x,
             CacheControlHeaderValue y,
             bool areEqual
-        ) {
+        )
+        {
             if (areEqual)
             {
                 Assert.Equal(x.GetHashCode(), y.GetHashCode());
@@ -587,7 +588,8 @@ namespace Microsoft.Net.Http.Headers
             CacheControlHeaderValue x,
             CacheControlHeaderValue y,
             bool areEqual
-        ) {
+        )
+        {
             Assert.Equal(areEqual, x.Equals(y));
             Assert.Equal(areEqual, y.Equals(x));
         }

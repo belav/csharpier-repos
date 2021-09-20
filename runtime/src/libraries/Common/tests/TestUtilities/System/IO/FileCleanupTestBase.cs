@@ -104,7 +104,8 @@ namespace System.IO
             int? index = null,
             [CallerMemberName] string memberName = null,
             [CallerLineNumber] int lineNumber = 0
-        ) {
+        )
+        {
             string testFileName = GenerateTestFileName(index, memberName, lineNumber);
             string testFilePath = Path.Combine(TestDirectory, testFileName);
 

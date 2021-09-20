@@ -80,7 +80,8 @@ namespace System.Linq.Parallel
             IPartitionedStreamRecipient<TOutput> outputRecipient,
             bool preferStriping,
             QuerySettings settings
-        ) {
+        )
+        {
             Debug.Assert(rightStream.PartitionCount == leftStream.PartitionCount);
 
             if (LeftChild.OutputOrdered)
@@ -90,7 +91,8 @@ namespace System.Linq.Parallel
                         LeftChild.OrdinalIndexState,
                         OrdinalIndexState.Increasing
                     )
-                ) {
+                )
+                {
                     PartitionedStream<TLeftInput, int> leftStreamInt =
                         QueryOperator<TLeftInput>.ExecuteAndCollectResults(
                                 leftStream,
@@ -156,7 +158,8 @@ namespace System.Linq.Parallel
             PartitionedStream<TRightInput, TRightKey> rightPartitionedStream,
             IPartitionedStreamRecipient<TOutput> outputRecipient,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (RightChild.OutputOrdered && LeftChild.OutputOrdered)
             {
                 PairOutputKeyBuilder<TLeftKey, TRightKey> outputKeyBuilder =
@@ -210,7 +213,8 @@ namespace System.Linq.Parallel
             IComparer<TOutputKey> outputKeyComparer,
             IPartitionedStreamRecipient<TOutput> outputRecipient,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             int partitionCount = leftHashStream.PartitionCount;
 
             PartitionedStream<TOutput, TOutputKey> outputStream = new PartitionedStream<
@@ -303,7 +307,8 @@ namespace System.Linq.Parallel
         internal JoinHashLookupBuilder(
             QueryOperatorEnumerator<Pair<TElement, THashKey>, TOrderKey> dataSource,
             IEqualityComparer<THashKey>? keyComparer
-        ) {
+        )
+        {
             Debug.Assert(dataSource != null);
 
             _dataSource = dataSource;
@@ -312,7 +317,8 @@ namespace System.Linq.Parallel
 
         public override HashJoinHashLookup<THashKey, TElement, TOrderKey> BuildHashLookup(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             HashLookup<THashKey, HashLookupValueList<TElement, TOrderKey>> lookup = new HashLookup<
                 THashKey,
                 HashLookupValueList<TElement, TOrderKey>
@@ -340,7 +346,8 @@ namespace System.Linq.Parallel
 
             public JoinBaseHashBuilder(
                 HashLookup<THashKey, HashLookupValueList<TElement, TOrderKey>> baseLookup
-            ) {
+            )
+            {
                 Debug.Assert(baseLookup != null);
 
                 _base = baseLookup;
@@ -381,7 +388,8 @@ namespace System.Linq.Parallel
 
             internal JoinHashLookup(
                 HashLookup<THashKey, HashLookupValueList<TElement, TOrderKey>> baseLookup
-            ) {
+            )
+            {
                 Debug.Assert(baseLookup != null);
 
                 _base = baseLookup;
@@ -390,7 +398,8 @@ namespace System.Linq.Parallel
             public override bool TryGetValue(
                 THashKey key,
                 ref HashLookupValueList<TElement, TOrderKey> value
-            ) {
+            )
+            {
                 return _base.TryGetValue(key, ref value);
             }
         }

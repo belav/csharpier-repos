@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 ImmutableArray<Diagnostic> pragmaDiagnostics,
                 FixAllState fixAllState,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // This is a temporary generated code action, which doesn't need telemetry, hence suppressing RS0005.
 #pragma warning disable RS0005 // Do not use generic CodeAction.Create to create CodeAction
                 return CodeAction.Create(
@@ -54,7 +55,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 ImmutableArray<IPragmaBasedCodeAction> pragmaActions,
                 ImmutableArray<Diagnostic> diagnostics,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // We apply all the pragma suppression fixes sequentially.
                 // At every application, we track the updated locations for remaining diagnostics in the document.
                 var currentDiagnosticSpans = new Dictionary<Diagnostic, TextSpan>();
@@ -74,7 +76,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                             diagnostic,
                             out var currentDiagnosticSpan
                         )
-                    ) {
+                    )
+                    {
                         // Diagnostic whose location conflicts with a prior fix.
                         continue;
                     }
@@ -165,7 +168,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 bool includeStartTokenChange,
                 bool includeEndTokenChange,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var newDocument = await pragmaAction.GetChangedDocumentAsync(
                         includeStartTokenChange,
                         includeEndTokenChange,
@@ -180,7 +184,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 ImmutableArray<Diagnostic> diagnostics,
                 Dictionary<Diagnostic, TextSpan> currentDiagnosticSpans,
                 IEnumerable<TextChange> textChanges
-            ) {
+            )
+            {
                 static bool IsPriorSpan(TextSpan span, TextChange textChange) =>
                     span.End <= textChange.Span.Start;
                 static bool IsFollowingSpan(TextSpan span, TextChange textChange) =>

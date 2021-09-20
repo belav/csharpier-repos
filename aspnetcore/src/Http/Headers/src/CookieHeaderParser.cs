@@ -13,7 +13,8 @@ namespace Microsoft.Net.Http.Headers
             StringSegment value,
             ref int index,
             out CookieHeaderValue? cookieValue
-        ) {
+        )
+        {
             cookieValue = null;
 
             if (
@@ -24,7 +25,8 @@ namespace Microsoft.Net.Http.Headers
                     out var parsedName,
                     out var parsedValue
                 )
-            ) {
+            )
+            {
                 return false;
             }
 

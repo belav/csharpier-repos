@@ -38,7 +38,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
             ILogger logger,
             RazorProjectItem projectItem,
             out string template
-        ) {
+        )
+        {
             if (projectItem == null)
             {
                 throw new ArgumentNullException(nameof(projectItem));
@@ -85,7 +86,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
                 string basePath,
                 string path,
                 string fileName
-            ) {
+            )
+            {
                 return Enumerable.Empty<RazorProjectItem>();
             }
 

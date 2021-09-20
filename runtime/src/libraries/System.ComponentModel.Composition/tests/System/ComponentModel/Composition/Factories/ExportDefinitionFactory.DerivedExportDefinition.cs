@@ -16,7 +16,8 @@ namespace System.ComponentModel.Composition.Factories
             public DerivedExportDefinition(
                 string contractName,
                 IDictionary<string, object> metadata
-            ) {
+            )
+            {
                 _contractName = contractName;
                 _metadata = metadata ?? new Dictionary<string, object>();
             }

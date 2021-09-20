@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             string source,
             MetadataReference[] additionalRefs = null,
             string expectedOutput = null
-        ) {
+        )
+        {
             var isWin8 = OSVersion.IsWin8;
             return testBase.CompileAndVerifyWithWinRt(
                 source,

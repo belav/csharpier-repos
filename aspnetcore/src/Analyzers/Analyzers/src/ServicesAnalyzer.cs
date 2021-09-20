@@ -34,7 +34,8 @@ namespace Microsoft.AspNetCore.Analyzers
                             invocation.Arguments[0].Parameter?.Type,
                             _context.StartupSymbols.IServiceCollection
                         )
-                    ) {
+                    )
+                    {
                         services.Add(new ServicesItem(invocation));
                     }
                 },

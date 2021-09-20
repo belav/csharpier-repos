@@ -512,7 +512,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
             {
                 if (
                     ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "+", "E", "ConvE")
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }
@@ -535,7 +536,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
                         "ConvInt",
                         "E"
                     )
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }
@@ -557,7 +559,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
                         "E",
                         "ConvInt"
                     )
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }
@@ -579,7 +582,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
                         "E",
                         "ConvInt"
                     )
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }
@@ -601,7 +605,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
                         "ConvInt",
                         "E"
                     )
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }
@@ -802,7 +807,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
                         "E?",
                         "ConvE"
                     )
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }
@@ -826,7 +832,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
                         "ConvInt",
                         "E?"
                     )
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }
@@ -848,7 +855,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
                         "E?",
                         "ConvInt"
                     )
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }
@@ -870,7 +878,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
                         "E?",
                         "ConvInt"
                     )
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }
@@ -892,7 +901,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
                         "ConvInt",
                         "E?"
                     )
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }
@@ -1093,7 +1103,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
                         "E?",
                         "ConvE"
                     )
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }
@@ -1117,7 +1128,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
                         "ConvInt",
                         "E?"
                     )
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }
@@ -1139,7 +1151,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
                         "E?",
                         "ConvInt"
                     )
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }
@@ -1161,7 +1174,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
                         "E?",
                         "ConvInt"
                     )
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }
@@ -1183,7 +1197,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
                         "ConvInt",
                         "E?"
                     )
-                ) {
+                )
+                {
                     flag = 0;
                 }
             }
@@ -1279,7 +1294,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
             string[] exp_msg,
             string tip,
             Func<dynamic, dynamic> test
-        ) {
+        )
+        {
             int flag = 1;
             try
             {

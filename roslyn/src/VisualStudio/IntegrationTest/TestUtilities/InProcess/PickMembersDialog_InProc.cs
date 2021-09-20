@@ -29,7 +29,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 var cancellationTokenSource = new CancellationTokenSource(
                     Helper.HangMitigatingTimeout
                 )
-            ) {
+            )
+            {
                 var cancellationToken = cancellationTokenSource.Token;
                 while (true)
                 {
@@ -57,7 +58,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 var cancellationTokenSource = new CancellationTokenSource(
                     Helper.HangMitigatingTimeout
                 )
-            ) {
+            )
+            {
                 var cancellationToken = cancellationTokenSource.Token;
                 while (true)
                 {
@@ -81,11 +83,13 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 var cancellationTokenSource = new CancellationTokenSource(
                     Helper.HangMitigatingTimeout
                 )
-            ) {
+            )
+            {
                 if (
                     JoinableTaskFactory.Run(() => TryGetDialogAsync(cancellationTokenSource.Token))
                     is null
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -100,7 +104,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 var cancellationTokenSource = new CancellationTokenSource(
                     Helper.HangMitigatingTimeout
                 )
-            ) {
+            )
+            {
                 JoinableTaskFactory.Run(
                     () =>
                         ClickAsync(
@@ -117,7 +122,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 var cancellationTokenSource = new CancellationTokenSource(
                     Helper.HangMitigatingTimeout
                 )
-            ) {
+            )
+            {
                 JoinableTaskFactory.Run(
                     () =>
                         ClickAsync(
@@ -134,7 +140,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 var cancellationTokenSource = new CancellationTokenSource(
                     Helper.HangMitigatingTimeout
                 )
-            ) {
+            )
+            {
                 JoinableTaskFactory.Run(
                     () =>
                         ClickAsync(
@@ -160,7 +167,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         private async Task ClickAsync(
             Func<PickMembersDialog.TestAccessor, ButtonBase> buttonSelector,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             await JoinableTaskFactory.SwitchToMainThreadAsync(alwaysYield: true, cancellationToken);
             var dialog = await GetDialogAsync(cancellationToken);
             var button = buttonSelector(dialog.GetTestAccessor());

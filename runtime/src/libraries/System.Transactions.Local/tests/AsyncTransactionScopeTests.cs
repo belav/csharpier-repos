@@ -107,7 +107,8 @@ namespace System.Transactions.Tests
                                 new Guid("8ac2d80a-1f1a-431b-ace4-bff8824aef0b"),
                                 System.Diagnostics.Tracing.EventLevel.Verbose
                             )
-                        ) {
+                        )
+                        {
                             var events = new ConcurrentQueue<EventWrittenEventArgs>();
                             try
                             {
@@ -750,7 +751,8 @@ namespace System.Transactions.Tests
 
                                                 using (
                                                     TransactionScope scope = new TransactionScope()
-                                                ) {
+                                                )
+                                                {
                                                     txId1 = AssertAndGetCurrentTransactionId();
                                                     Task task = DoAsyncTSTaskWorkAsync(
                                                         false,
@@ -814,7 +816,8 @@ namespace System.Transactions.Tests
                       : TransactionScopeOption.Required,
                     TransactionScopeAsyncFlowOption.Enabled
                 )
-            ) {
+            )
+            {
                 txId1 = AssertAndGetCurrentTransactionId();
                 DependentTransaction dependentTx = Transaction.Current.DependentClone(
                     DependentCloneOption.BlockCommitUntilComplete
@@ -864,7 +867,8 @@ namespace System.Transactions.Tests
                             TransactionScope scope3 = new TransactionScope(
                                 TransactionScopeOption.RequiresNew
                             )
-                        ) {
+                        )
+                        {
                             txId7 = AssertAndGetCurrentTransactionId();
                             scope3.Complete();
                         }
@@ -907,7 +911,8 @@ namespace System.Transactions.Tests
             bool parentrequiresNew,
             bool childRequiresNew,
             string txId
-        ) {
+        )
+        {
             string txId1;
             string txId2;
 
@@ -919,7 +924,8 @@ namespace System.Transactions.Tests
                       ? TransactionScopeOption.RequiresNew
                       : TransactionScopeOption.Required
                 )
-            ) {
+            )
+            {
                 txId1 = AssertAndGetCurrentTransactionId();
                 AsyncTSAndDependantClone(childRequiresNew, true, txId1);
                 txId2 = AssertAndGetCurrentTransactionId();
@@ -960,7 +966,8 @@ namespace System.Transactions.Tests
                       : TransactionScopeOption.Required,
                     TransactionScopeAsyncFlowOption.Enabled
                 )
-            ) {
+            )
+            {
                 txId1 = AssertAndGetCurrentTransactionId();
 
                 task1 = Task.Run(
@@ -1022,7 +1029,8 @@ namespace System.Transactions.Tests
                       ? TransactionScopeOption.RequiresNew
                       : TransactionScopeOption.Required
                 )
-            ) {
+            )
+            {
                 txId1 = AssertAndGetCurrentTransactionId();
                 Task task = DoTaskWorkAsync(requiresNew, false, txId1);
                 txId2 = AssertAndGetCurrentTransactionId();
@@ -1077,7 +1085,8 @@ namespace System.Transactions.Tests
                       : TransactionScopeOption.Required,
                     TransactionScopeAsyncFlowOption.Enabled
                 )
-            ) {
+            )
+            {
                 txId1 = AssertAndGetCurrentTransactionId();
 
                 task1 = Task.Run(
@@ -1222,7 +1231,8 @@ namespace System.Transactions.Tests
 
                 using (
                     TransactionScope scope3 = new TransactionScope(TransactionScopeOption.Suppress)
-                ) {
+                )
+                {
                     AssertTransactionNull();
                     scope3.Complete();
                 }
@@ -1233,7 +1243,8 @@ namespace System.Transactions.Tests
                     TransactionScope scope4 = new TransactionScope(
                         TransactionScopeOption.RequiresNew
                     )
-                ) {
+                )
+                {
                     txId3 = AssertAndGetCurrentTransactionId();
                     scope4.Complete();
                 }
@@ -1376,7 +1387,8 @@ namespace System.Transactions.Tests
             TransactionScopeAsyncFlowOption parentAsyncFlowOption,
             TransactionScopeOption childScopeOption,
             TransactionScopeAsyncFlowOption childAsyncFlowOption
-        ) {
+        )
+        {
             string txId1;
             string txId2;
             string txId3;
@@ -1388,7 +1400,8 @@ namespace System.Transactions.Tests
                     parentScopeOption,
                     parentAsyncFlowOption
                 )
-            ) {
+            )
+            {
                 txId1 = AssertAndGetCurrentTransactionId(parentScopeOption);
 
                 using (
@@ -1396,7 +1409,8 @@ namespace System.Transactions.Tests
                         childScopeOption,
                         childAsyncFlowOption
                     )
-                ) {
+                )
+                {
                     txId2 = AssertAndGetCurrentTransactionId(childScopeOption);
                     child.Complete();
                 }
@@ -1554,7 +1568,8 @@ namespace System.Transactions.Tests
             TransactionScopeAsyncFlowOption child1AsyncFlowOption,
             TransactionScopeOption child2ScopeOption,
             TransactionScopeAsyncFlowOption child2AsyncFlowOption
-        ) {
+        )
+        {
             string txId1;
             string txId2;
             string txId3;
@@ -1572,7 +1587,8 @@ namespace System.Transactions.Tests
                         child1ScopeOption,
                         child1AsyncFlowOption
                     )
-                ) {
+                )
+                {
                     txId2 = AssertAndGetCurrentTransactionId(child1ScopeOption);
                     child1.Complete();
                 }
@@ -1584,7 +1600,8 @@ namespace System.Transactions.Tests
                         child2ScopeOption,
                         child2AsyncFlowOption
                     )
-                ) {
+                )
+                {
                     txId4 = AssertAndGetCurrentTransactionId(child2ScopeOption);
                     child2.Complete();
                 }
@@ -1736,7 +1753,8 @@ namespace System.Transactions.Tests
             TransactionScopeAsyncFlowOption asyncFlowOption3,
             TransactionScopeOption scopeOption,
             bool nested
-        ) {
+        )
+        {
             string txId1;
             string txId2;
             string txId3;
@@ -1749,21 +1767,24 @@ namespace System.Transactions.Tests
             {
                 using (
                     TransactionScope scope1 = new TransactionScope(scopeOption, asyncFlowOption1)
-                ) {
+                )
+                {
                     txId1 = AssertAndGetCurrentTransactionId(scopeOption);
                     using (
                         TransactionScope scope2 = new TransactionScope(
                             scopeOption,
                             asyncFlowOption2
                         )
-                    ) {
+                    )
+                    {
                         txId2 = AssertAndGetCurrentTransactionId(scopeOption);
                         using (
                             TransactionScope scope3 = new TransactionScope(
                                 scopeOption,
                                 asyncFlowOption3
                             )
-                        ) {
+                        )
+                        {
                             txId3 = AssertAndGetCurrentTransactionId(scopeOption);
                             scope3.Complete();
                         }
@@ -1794,7 +1815,8 @@ namespace System.Transactions.Tests
             {
                 using (
                     TransactionScope scope1 = new TransactionScope(scopeOption, asyncFlowOption1)
-                ) {
+                )
+                {
                     txId1 = AssertAndGetCurrentTransactionId(scopeOption);
                     scope1.Complete();
                 }
@@ -1802,7 +1824,8 @@ namespace System.Transactions.Tests
                 AssertTransactionNull();
                 using (
                     TransactionScope scope2 = new TransactionScope(scopeOption, asyncFlowOption2)
-                ) {
+                )
+                {
                     txId2 = AssertAndGetCurrentTransactionId(scopeOption);
                     scope2.Complete();
                 }
@@ -1810,7 +1833,8 @@ namespace System.Transactions.Tests
                 AssertTransactionNull();
                 using (
                     TransactionScope scope3 = new TransactionScope(scopeOption, asyncFlowOption3)
-                ) {
+                )
+                {
                     txId3 = AssertAndGetCurrentTransactionId(scopeOption);
                     scope3.Complete();
                 }
@@ -1966,7 +1990,8 @@ namespace System.Transactions.Tests
                     TransactionScopeOption.Required,
                     asyncFlowOption
                 )
-            ) {
+            )
+            {
                 txId1 = AssertAndGetCurrentTransactionId();
 
                 ThreadSyncObject context = new ThreadSyncObject()
@@ -2015,7 +2040,8 @@ namespace System.Transactions.Tests
                     TransactionScopeOption.Required,
                     asyncFlowOption
                 )
-            ) {
+            )
+            {
                 txId1 = AssertAndGetCurrentTransactionId();
 
                 ThreadSyncObject context = new ThreadSyncObject()
@@ -2055,7 +2081,8 @@ namespace System.Transactions.Tests
                     TransactionScopeOption.RequiresNew,
                     TransactionScopeAsyncFlowOption.Enabled
                 )
-            ) {
+            )
+            {
                 txId1 = AssertAndGetCurrentTransactionId();
                 // At some point we realize that we can't complete our work, so enqueue it to be completed later
                 s_workQueue.Add(Tuple.Create(i, completionSource, Transaction.Current));
@@ -2126,7 +2153,8 @@ namespace System.Transactions.Tests
                     TransactionScopeOption.Required,
                     TransactionScopeAsyncFlowOption.Enabled
                 )
-            ) {
+            )
+            {
                 txId2 = AssertAndGetCurrentTransactionId();
                 scope.Complete();
             }
@@ -2159,7 +2187,8 @@ namespace System.Transactions.Tests
                       ? TransactionScopeOption.RequiresNew
                       : TransactionScopeOption.Required
                 )
-            ) {
+            )
+            {
                 txId1 = AssertAndGetCurrentTransactionId();
                 result = DoWork(txId1);
                 txId2 = AssertAndGetCurrentTransactionId();
@@ -2200,7 +2229,8 @@ namespace System.Transactions.Tests
                       : TransactionScopeOption.Required,
                     TransactionScopeAsyncFlowOption.Enabled
                 )
-            ) {
+            )
+            {
                 txId1 = AssertAndGetCurrentTransactionId();
                 result = await DoAsyncWorkAsync(txId1);
                 txId2 = AssertAndGetCurrentTransactionId();
@@ -2220,7 +2250,8 @@ namespace System.Transactions.Tests
             bool asyncWorkBeforeChild,
             bool asyncWorkAfterChild,
             string txId
-        ) {
+        )
+        {
             string txId1 = null;
             string txId2 = null;
             string txId3 = null;
@@ -2232,7 +2263,8 @@ namespace System.Transactions.Tests
                       : TransactionScopeOption.Required,
                     TransactionScopeAsyncFlowOption.Enabled
                 )
-            ) {
+            )
+            {
                 txId1 = AssertAndGetCurrentTransactionId();
 
                 if (asyncWorkBeforeChild)
@@ -2272,7 +2304,8 @@ namespace System.Transactions.Tests
             bool childRequiresNew,
             bool asyncChild,
             string txId
-        ) {
+        )
+        {
             string txId1 = null;
             string txId2 = null;
             Task<string> task = null;
@@ -2283,7 +2316,8 @@ namespace System.Transactions.Tests
                       ? TransactionScopeOption.RequiresNew
                       : TransactionScopeOption.Required
                 )
-            ) {
+            )
+            {
                 txId1 = AssertAndGetCurrentTransactionId();
 
                 if (asyncChild)
@@ -2318,7 +2352,8 @@ namespace System.Transactions.Tests
             bool asyncWorkBeforeChildL3,
             bool asyncWorkAfterChildL3,
             string txId
-        ) {
+        )
+        {
             string txId1;
             string txId2;
 
@@ -2330,7 +2365,8 @@ namespace System.Transactions.Tests
                       ? TransactionScopeOption.RequiresNew
                       : TransactionScopeOption.Required
                 )
-            ) {
+            )
+            {
                 txId1 = AssertAndGetCurrentTransactionId();
                 Task<string> task = DoAsyncTSL2NestedTxWorkAsync(
                     childL2RequiresNew,
@@ -2356,7 +2392,8 @@ namespace System.Transactions.Tests
             bool childL3RequiresNew,
             bool asyncChildL3,
             string txId
-        ) {
+        )
+        {
             string txId1;
             string txId2;
 
@@ -2368,7 +2405,8 @@ namespace System.Transactions.Tests
                       ? TransactionScopeOption.RequiresNew
                       : TransactionScopeOption.Required
                 )
-            ) {
+            )
+            {
                 txId1 = AssertAndGetCurrentTransactionId();
                 SyncTSL2NestedTxWork(childL2RequiresNew, childL3RequiresNew, asyncChildL3, txId1);
                 txId2 = AssertAndGetCurrentTransactionId();
@@ -2387,7 +2425,8 @@ namespace System.Transactions.Tests
             bool asyncWorkBeforeChildL3,
             bool asyncWorkAfterChildL3,
             string txId
-        ) {
+        )
+        {
             string txId1;
             string txId2;
             string result = null;
@@ -2400,7 +2439,8 @@ namespace System.Transactions.Tests
                       : TransactionScopeOption.Required,
                     TransactionScopeAsyncFlowOption.Enabled
                 )
-            ) {
+            )
+            {
                 txId1 = AssertAndGetCurrentTransactionId();
                 result = await DoAsyncTSL2NestedTxWorkAsync(
                     childL2RequiresNew,
@@ -2429,7 +2469,8 @@ namespace System.Transactions.Tests
             bool asyncWorkBeforeChildL2,
             bool asyncWorkAfterChildL2,
             string txId
-        ) {
+        )
+        {
             string txId1;
             string txId2;
             string txId3;
@@ -2444,7 +2485,8 @@ namespace System.Transactions.Tests
                       : TransactionScopeOption.Required,
                     TransactionScopeAsyncFlowOption.Enabled
                 )
-            ) {
+            )
+            {
                 txId1 = AssertAndGetCurrentTransactionId();
 
                 if (asyncWorkBeforeChildL2)
@@ -2525,7 +2567,8 @@ namespace System.Transactions.Tests
             bool parentRequiresNew,
             bool childRequiresNew,
             string txId
-        ) {
+        )
+        {
             string txId1 = null;
             string txId2 = null;
             AssertTransaction(txId);
@@ -2536,7 +2579,8 @@ namespace System.Transactions.Tests
                       ? TransactionScopeOption.RequiresNew
                       : TransactionScopeOption.Required
                 )
-            ) {
+            )
+            {
                 txId1 = AssertAndGetCurrentTransactionId();
                 DoTaskUnderAsyncTS(childRequiresNew, txId1);
                 txId2 = AssertAndGetCurrentTransactionId();
@@ -2560,7 +2604,8 @@ namespace System.Transactions.Tests
                       : TransactionScopeOption.Required,
                     TransactionScopeAsyncFlowOption.Enabled
                 )
-            ) {
+            )
+            {
                 txId1 = AssertAndGetCurrentTransactionId();
                 DoALotOfWork(txId1);
                 txId2 = AssertAndGetCurrentTransactionId();
@@ -2588,7 +2633,8 @@ namespace System.Transactions.Tests
             string parentTxId,
             string beforeTxId,
             string afterTxId
-        ) {
+        )
+        {
             Assert.Equal(beforeTxId, afterTxId);
             if (requiresNew)
             {
@@ -2661,7 +2707,8 @@ namespace System.Transactions.Tests
         private static void SetExceptionInjection(
             bool exceptionDefaultOrBeforeAwait,
             bool exceptionAfterAwait
-        ) {
+        )
+        {
             s_throwExceptionDefaultOrBeforeAwait = exceptionDefaultOrBeforeAwait;
             s_throwExceptionAfterAwait = exceptionAfterAwait;
         }
@@ -2676,7 +2723,8 @@ namespace System.Transactions.Tests
             bool exceptionDefaultOrBeforeAwait,
             bool exceptionAfterAwait,
             Action action
-        ) {
+        )
+        {
             bool hasException = false;
 
             SetExceptionInjection(exceptionDefaultOrBeforeAwait, exceptionAfterAwait);

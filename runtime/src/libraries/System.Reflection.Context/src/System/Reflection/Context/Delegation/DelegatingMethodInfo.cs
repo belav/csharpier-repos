@@ -155,7 +155,8 @@ namespace System.Reflection.Context.Delegation
             Binder binder,
             object[] parameters,
             CultureInfo culture
-        ) {
+        )
+        {
             return UnderlyingMethod.Invoke(obj, invokeAttr, binder, parameters, culture);
         }
 

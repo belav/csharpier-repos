@@ -16,7 +16,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider
             StringBuilder commandStringBuilder,
             ModificationCommand command,
             int commandPosition
-        ) {
+        )
+        {
             AppendInsertOperationCalls++;
             return base.AppendInsertOperation(commandStringBuilder, command, commandPosition);
         }
@@ -25,7 +26,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider
             StringBuilder commandStringBuilder,
             ModificationCommand command,
             int commandPosition
-        ) {
+        )
+        {
             AppendUpdateOperationCalls++;
             return base.AppendUpdateOperation(commandStringBuilder, command, commandPosition);
         }
@@ -34,7 +36,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider
             StringBuilder commandStringBuilder,
             ModificationCommand command,
             int commandPosition
-        ) {
+        )
+        {
             AppendDeleteOperationCalls++;
             return base.AppendDeleteOperation(commandStringBuilder, command, commandPosition);
         }
@@ -65,7 +68,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider
             string name,
             string schema,
             int commandPosition
-        ) {
+        )
+        {
             commandStringBuilder.Append("SELECT provider_specific_rowcount();")
                 .Append(Environment.NewLine)
                 .Append(Environment.NewLine);

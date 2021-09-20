@@ -105,9 +105,8 @@ namespace System.Net.Http.Functional.Tests
     public sealed class PlatformHandler_HttpClientHandler_Decompression_Tests
         : HttpClientHandler_Decompression_Test
     {
-        public PlatformHandler_HttpClientHandler_Decompression_Tests(
-            ITestOutputHelper output
-        ) : base(output) { }
+        public PlatformHandler_HttpClientHandler_Decompression_Tests(ITestOutputHelper output)
+            : base(output) { }
     }
 
     public sealed class PlatformHandler_HttpClientHandler_DangerousAcceptAllCertificatesValidator_Test
@@ -122,9 +121,8 @@ namespace System.Net.Http.Functional.Tests
     public sealed class PlatformHandler_HttpClientHandler_ClientCertificates_Test
         : HttpClientHandler_ClientCertificates_Test
     {
-        public PlatformHandler_HttpClientHandler_ClientCertificates_Test(
-            ITestOutputHelper output
-        ) : base(output) { }
+        public PlatformHandler_HttpClientHandler_ClientCertificates_Test(ITestOutputHelper output)
+            : base(output) { }
     }
 
     public sealed class PlatformHandler_HttpClientHandler_DefaultProxyCredentials_Test
@@ -146,9 +144,8 @@ namespace System.Net.Http.Functional.Tests
     public sealed class PlatformHandler_HttpClientHandler_ServerCertificates_Test
         : HttpClientHandler_ServerCertificates_Test
     {
-        public PlatformHandler_HttpClientHandler_ServerCertificates_Test(
-            ITestOutputHelper output
-        ) : base(output) { }
+        public PlatformHandler_HttpClientHandler_ServerCertificates_Test(ITestOutputHelper output)
+            : base(output) { }
     }
 
     public sealed class PlatformHandler_PostScenarioTest : PostScenarioTest
@@ -234,9 +231,8 @@ namespace System.Net.Http.Functional.Tests
     public sealed class PlatformHandler_HttpClientHandler_Authentication_Test
         : HttpClientHandler_Authentication_Test
     {
-        public PlatformHandler_HttpClientHandler_Authentication_Test(
-            ITestOutputHelper output
-        ) : base(output) { }
+        public PlatformHandler_HttpClientHandler_Authentication_Test(ITestOutputHelper output)
+            : base(output) { }
     }
 
 #if NETCOREAPP
@@ -258,9 +254,8 @@ namespace System.Net.Http.Functional.Tests
     {
         protected override Version UseVersion => HttpVersion20.Value;
 
-        public PlatformHandler_HttpClientHandler_Asynchrony_Http2_Test(
-            ITestOutputHelper output
-        ) : base(output) { }
+        public PlatformHandler_HttpClientHandler_Asynchrony_Http2_Test(ITestOutputHelper output)
+            : base(output) { }
     }
 
     public sealed class PlatformHandler_HttpProtocol_Http2_Tests : HttpProtocolTests
@@ -299,9 +294,8 @@ namespace System.Net.Http.Functional.Tests
     {
         protected override Version UseVersion => HttpVersion20.Value;
 
-        public PlatformHandler_HttpClientHandler_Decompression_Http2_Tests(
-            ITestOutputHelper output
-        ) : base(output) { }
+        public PlatformHandler_HttpClientHandler_Decompression_Http2_Tests(ITestOutputHelper output)
+            : base(output) { }
     }
 
     public sealed class PlatformHandler_HttpClientHandler_DangerousAcceptAllCertificatesValidator_Http2_Test
@@ -369,9 +363,8 @@ namespace System.Net.Http.Functional.Tests
     {
         protected override Version UseVersion => HttpVersion20.Value;
 
-        public PlatformHandler_HttpClientHandler_SslProtocols_Http2_Test(
-            ITestOutputHelper output
-        ) : base(output) { }
+        public PlatformHandler_HttpClientHandler_SslProtocols_Http2_Test(ITestOutputHelper output)
+            : base(output) { }
     }
 
     public sealed class PlatformHandler_HttpClientHandler_Proxy_Http2_Test
@@ -458,9 +451,8 @@ namespace System.Net.Http.Functional.Tests
     {
         protected override Version UseVersion => HttpVersion20.Value;
 
-        public PlatformHandler_HttpClientHandler_Cancellation_Http2_Test(
-            ITestOutputHelper output
-        ) : base(output) { }
+        public PlatformHandler_HttpClientHandler_Cancellation_Http2_Test(ITestOutputHelper output)
+            : base(output) { }
     }
 
     public sealed class PlatformHandler_HttpClientHandler_Authentication_Http2_Test
@@ -468,9 +460,8 @@ namespace System.Net.Http.Functional.Tests
     {
         protected override Version UseVersion => HttpVersion20.Value;
 
-        public PlatformHandler_HttpClientHandler_Authentication_Http2_Test(
-            ITestOutputHelper output
-        ) : base(output) { }
+        public PlatformHandler_HttpClientHandler_Authentication_Http2_Test(ITestOutputHelper output)
+            : base(output) { }
     }
 #endif
     public sealed class PlatformHandler_ResponseStream_Http2_Test : ResponseStreamTest

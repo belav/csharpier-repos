@@ -104,7 +104,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             HttpProtocols serverProtocols,
             string request,
             string expectedResponse
-        ) {
+        )
+        {
             var testContext = new TestServiceContext(LoggerFactory);
             var listenOptions = new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0))
             {
@@ -117,7 +118,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     testContext,
                     listenOptions
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     await connection.Send(request);
@@ -143,7 +145,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     testContext,
                     listenOptions
                 )
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     await connection.WaitForConnectionClose();

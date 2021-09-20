@@ -137,7 +137,8 @@ namespace System.DirectoryServices.AccountManagement
                     "",
                     AuthenticationTypes.Anonymous
                 )
-            ) {
+            )
+            {
                 string ctxBaseDN = (string)this.ctxBase.Properties["distinguishedName"][0];
                 int maxMatchLength = -1;
                 foreach (string partitionDN in rootDse.Properties["namingContexts"])
@@ -145,7 +146,8 @@ namespace System.DirectoryServices.AccountManagement
                     if (
                         (partitionDN.Length > maxMatchLength)
                         && ctxBaseDN.EndsWith(partitionDN, StringComparison.OrdinalIgnoreCase)
-                    ) {
+                    )
+                    {
                         maxMatchLength = partitionDN.Length;
                         this.contextBasePartitionDN = partitionDN;
                     }
@@ -231,7 +233,8 @@ namespace System.DirectoryServices.AccountManagement
             if (
                 ((this.contextOptions & ContextOptions.Signing) != 0)
                 && ((this.contextOptions & ContextOptions.Sealing) != 0)
-            ) {
+            )
+            {
                 try
                 {
                     de.Invoke(
@@ -294,7 +297,8 @@ namespace System.DirectoryServices.AccountManagement
             AuthenticablePrincipal p,
             string oldPassword,
             string newPassword
-        ) {
+        )
+        {
             Debug.Assert(p.fakePrincipal == false);
 
             // Shouldn't be being called if this is the case
@@ -339,7 +343,8 @@ namespace System.DirectoryServices.AccountManagement
                         credentials == null ? null : credentials.Password,
                         authTypes
                     )
-                ) {
+                )
+                {
                     if (deRoot.Properties["schemaNamingContext"].Count == 0)
                     {
                         GlobalDebug.WriteLineIf(
@@ -363,7 +368,8 @@ namespace System.DirectoryServices.AccountManagement
                         credentials == null ? null : credentials.Password,
                         authTypes
                     )
-                ) {
+                )
+                {
                     using (DirectorySearcher dirSearcher = new DirectorySearcher(deSCN))
                     {
                         dirSearcher.Filter =
@@ -427,7 +433,8 @@ namespace System.DirectoryServices.AccountManagement
             if (
                 principalType == typeof(AuthenticablePrincipal)
                 || principalType == typeof(Principal)
-            ) {
+            )
+            {
                 lock (_objectListLock)
                 {
                     if (null == _cachedBindableObjectList)

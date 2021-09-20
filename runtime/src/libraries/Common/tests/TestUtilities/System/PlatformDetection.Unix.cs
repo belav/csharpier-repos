@@ -236,7 +236,8 @@ namespace System
             int minor = -1,
             int build = -1,
             int revision = -1
-        ) {
+        )
+        {
             return IsDistroAndVersion(
                 (distro) => distro == "rhel" || distro == "centos",
                 major,
@@ -261,7 +262,8 @@ namespace System
             int minor = -1,
             int build = -1,
             int revision = -1
-        ) {
+        )
+        {
             return IsDistroAndVersion(
                 distro => (distro == distroId),
                 major,
@@ -286,7 +288,8 @@ namespace System
             int minor = -1,
             int build = -1,
             int revision = -1
-        ) {
+        )
+        {
             return IsDistroAndVersionOrHigher(
                 distro => (distro == distroId),
                 major,
@@ -302,14 +305,16 @@ namespace System
             int minor = -1,
             int build = -1,
             int revision = -1
-        ) {
+        )
+        {
             if (IsLinux)
             {
                 DistroInfo v = GetDistroInfo();
                 if (
                     distroPredicate(v.Id)
                     && VersionEquivalentTo(major, minor, build, revision, v.VersionId)
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -323,14 +328,16 @@ namespace System
             int minor = -1,
             int build = -1,
             int revision = -1
-        ) {
+        )
+        {
             if (IsLinux)
             {
                 DistroInfo v = GetDistroInfo();
                 if (
                     distroPredicate(v.Id)
                     && VersionEquivalentToOrHigher(major, minor, build, revision, v.VersionId)
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -344,7 +351,8 @@ namespace System
             int build,
             int revision,
             Version actualVersionId
-        ) {
+        )
+        {
             return (major == -1 || major == actualVersionId.Major)
                 && (minor == -1 || minor == actualVersionId.Minor)
                 && (build == -1 || build == actualVersionId.Build)
@@ -357,7 +365,8 @@ namespace System
             int build,
             int revision,
             Version actualVersionId
-        ) {
+        )
+        {
             return VersionEquivalentTo(major, minor, build, revision, actualVersionId)
                 || (
                     actualVersionId.Major > major

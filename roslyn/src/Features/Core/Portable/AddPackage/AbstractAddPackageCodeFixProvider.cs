@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.AddPackage
         protected AbstractAddPackageCodeFixProvider(
             IPackageInstallerService packageInstallerService,
             ISymbolSearchService symbolSearchService
-        ) {
+        )
+        {
             _packageInstallerService = packageInstallerService;
             _symbolSearchService = symbolSearchService;
         }
@@ -40,7 +41,8 @@ namespace Microsoft.CodeAnalysis.AddPackage
         protected async Task<ImmutableArray<CodeAction>> GetAddPackagesCodeActionsAsync(
             CodeFixContext context,
             ISet<string> assemblyNames
-        ) {
+        )
+        {
             var document = context.Document;
             var cancellationToken = context.CancellationToken;
 
@@ -66,7 +68,8 @@ namespace Microsoft.CodeAnalysis.AddPackage
                 && installerService != null
                 && searchNugetPackages
                 && installerService.IsEnabled(document.Project.Id)
-            ) {
+            )
+            {
                 var packageSources = installerService.TryGetPackageSources();
 
                 foreach (var packageSource in packageSources)
@@ -106,7 +109,8 @@ namespace Microsoft.CodeAnalysis.AddPackage
             ISymbolSearchService searchService,
             ISet<string> assemblyNames,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             var result = new HashSet<PackageWithAssemblyResult>();
 

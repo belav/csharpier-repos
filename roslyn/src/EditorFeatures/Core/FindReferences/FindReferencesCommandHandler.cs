@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.Editor.FindReferences
         public FindReferencesCommandHandler(
             IStreamingFindUsagesPresenter streamingPresenter,
             IAsynchronousOperationListenerProvider listenerProvider
-        ) {
+        )
+        {
             Contract.ThrowIfNull(listenerProvider);
 
             _streamingPresenter = streamingPresenter;
@@ -97,7 +98,8 @@ namespace Microsoft.CodeAnalysis.Editor.FindReferences
             int caretPosition,
             Document document,
             IFindUsagesService findUsagesService
-        ) {
+        )
+        {
             // See if we're running on a host that can provide streaming results.
             // We'll both need a FAR service that can stream results to us, and
             // a presenter that can accept streamed results.
@@ -120,7 +122,8 @@ namespace Microsoft.CodeAnalysis.Editor.FindReferences
             int caretPosition,
             IFindUsagesService findUsagesService,
             IStreamingFindUsagesPresenter presenter
-        ) {
+        )
+        {
             try
             {
                 using var token = _asyncListener.BeginAsyncOperation(
@@ -144,7 +147,8 @@ namespace Microsoft.CodeAnalysis.Editor.FindReferences
                         KeyValueLogMessage.Create(LogType.UserAction, m => m["type"] = "streaming"),
                         context.CancellationToken
                     )
-                ) {
+                )
+                {
                     try
                     {
                         await findUsagesService.FindReferencesAsync(

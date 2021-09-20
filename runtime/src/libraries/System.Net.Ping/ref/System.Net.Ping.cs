@@ -50,14 +50,16 @@ namespace System.Net.NetworkInformation
         public System.Net.NetworkInformation.PingReply Send(
             System.Net.IPAddress address,
             int timeout
-        ) {
+        )
+        {
             throw null;
         }
         public System.Net.NetworkInformation.PingReply Send(
             System.Net.IPAddress address,
             int timeout,
             byte[] buffer
-        ) {
+        )
+        {
             throw null;
         }
         public System.Net.NetworkInformation.PingReply Send(
@@ -65,7 +67,8 @@ namespace System.Net.NetworkInformation
             int timeout,
             byte[] buffer,
             System.Net.NetworkInformation.PingOptions? options
-        ) {
+        )
+        {
             throw null;
         }
         public System.Net.NetworkInformation.PingReply Send(string hostNameOrAddress)
@@ -80,7 +83,8 @@ namespace System.Net.NetworkInformation
             string hostNameOrAddress,
             int timeout,
             byte[] buffer
-        ) {
+        )
+        {
             throw null;
         }
         public System.Net.NetworkInformation.PingReply Send(
@@ -88,7 +92,8 @@ namespace System.Net.NetworkInformation
             int timeout,
             byte[] buffer,
             System.Net.NetworkInformation.PingOptions? options
-        ) {
+        )
+        {
             throw null;
         }
         public void SendAsync(
@@ -124,20 +129,23 @@ namespace System.Net.NetworkInformation
         public void SendAsyncCancel() { }
         public System.Threading.Tasks.Task<System.Net.NetworkInformation.PingReply> SendPingAsync(
             System.Net.IPAddress address
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<System.Net.NetworkInformation.PingReply> SendPingAsync(
             System.Net.IPAddress address,
             int timeout
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<System.Net.NetworkInformation.PingReply> SendPingAsync(
             System.Net.IPAddress address,
             int timeout,
             byte[] buffer
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<System.Net.NetworkInformation.PingReply> SendPingAsync(
@@ -145,25 +153,29 @@ namespace System.Net.NetworkInformation
             int timeout,
             byte[] buffer,
             System.Net.NetworkInformation.PingOptions? options
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<System.Net.NetworkInformation.PingReply> SendPingAsync(
             string hostNameOrAddress
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<System.Net.NetworkInformation.PingReply> SendPingAsync(
             string hostNameOrAddress,
             int timeout
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<System.Net.NetworkInformation.PingReply> SendPingAsync(
             string hostNameOrAddress,
             int timeout,
             byte[] buffer
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<System.Net.NetworkInformation.PingReply> SendPingAsync(
@@ -171,7 +183,8 @@ namespace System.Net.NetworkInformation
             int timeout,
             byte[] buffer,
             System.Net.NetworkInformation.PingOptions? options
-        ) {
+        )
+        {
             throw null;
         }
     }

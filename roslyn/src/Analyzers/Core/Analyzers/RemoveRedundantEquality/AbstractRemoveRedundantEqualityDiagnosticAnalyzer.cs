@@ -15,18 +15,18 @@ namespace Microsoft.CodeAnalysis.RemoveRedundantEquality
     {
         private readonly ISyntaxFacts _syntaxFacts;
 
-        protected AbstractRemoveRedundantEqualityDiagnosticAnalyzer(
-            ISyntaxFacts syntaxFacts
-        ) : base(
-            IDEDiagnosticIds.RemoveRedundantEqualityDiagnosticId,
-            EnforceOnBuildValues.RemoveRedundantEquality,
-            option: null,
-            new LocalizableResourceString(
-                nameof(AnalyzersResources.Remove_redundant_equality),
-                AnalyzersResources.ResourceManager,
-                typeof(AnalyzersResources)
+        protected AbstractRemoveRedundantEqualityDiagnosticAnalyzer(ISyntaxFacts syntaxFacts)
+            : base(
+                IDEDiagnosticIds.RemoveRedundantEqualityDiagnosticId,
+                EnforceOnBuildValues.RemoveRedundantEquality,
+                option: null,
+                new LocalizableResourceString(
+                    nameof(AnalyzersResources.Remove_redundant_equality),
+                    AnalyzersResources.ResourceManager,
+                    typeof(AnalyzersResources)
+                )
             )
-        ) {
+        {
             _syntaxFacts = syntaxFacts;
         }
 
@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.RemoveRedundantEquality
             if (
                 operation.OperatorKind
                 is not (BinaryOperatorKind.Equals or BinaryOperatorKind.NotEquals)
-            ) {
+            )
+            {
                 return;
             }
 
@@ -68,7 +69,8 @@ namespace Microsoft.CodeAnalysis.RemoveRedundantEquality
             if (
                 rightOperand.Type.SpecialType != SpecialType.System_Boolean
                 || leftOperand.Type.SpecialType != SpecialType.System_Boolean
-            ) {
+            )
+            {
                 return;
             }
 
@@ -118,7 +120,8 @@ namespace Microsoft.CodeAnalysis.RemoveRedundantEquality
                     operand.ConstantValue.HasValue
                     && operand.Kind == OperationKind.Literal
                     && operand.ConstantValue.Value is bool constValue
-                ) {
+                )
+                {
                     return constValue;
                 }
 

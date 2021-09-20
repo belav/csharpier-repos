@@ -113,7 +113,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         [InlineData(true)]
         public async Task BindModel_ComplexCollection_BindingContextModelNonNull_Succeeds(
             bool isReadOnly
-        ) {
+        )
+        {
             // Arrange
             var valueProvider = new SimpleValueProvider
             {
@@ -175,7 +176,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         [InlineData(true)]
         public async Task BindModel_SimpleCollection_BindingContextModelNonNull_Succeeds(
             bool isReadOnly
-        ) {
+        )
+        {
             // Arrange
             var valueProvider = new SimpleValueProvider
             {
@@ -251,7 +253,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         public async Task CollectionModelBinder_CreatesEmptyCollection_IfIsTopLevelObject(
             bool allowValidatingTopLevelNodes,
             bool isBindingRequired
-        ) {
+        )
+        {
             // Arrange
             var binder = new CollectionModelBinder<string>(
                 new StubModelBinder(result: ModelBindingResult.Failed()),
@@ -378,7 +381,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             string prefix,
             bool allowValidatingTopLevelNodes,
             bool isBindingRequired
-        ) {
+        )
+        {
             // Arrange
             var binder = new CollectionModelBinder<string>(
                 new StubModelBinder(result: ModelBindingResult.Failed()),
@@ -477,7 +481,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         private static DefaultModelBindingContext GetModelBindingContext(
             IValueProvider valueProvider,
             bool isReadOnly = false
-        ) {
+        )
+        {
             var metadataProvider = new TestModelMetadataProvider();
             metadataProvider.ForProperty<ModelWithIListProperty>(
                     nameof(ModelWithIListProperty.ListProperty)

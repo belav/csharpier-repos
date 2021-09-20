@@ -143,7 +143,8 @@ public static class Program
         object expected,
         object actual,
         [CallerLineNumber] int line = 0
-    ) {
+    )
+    {
         if (expected != actual)
         {
             returnCode++;

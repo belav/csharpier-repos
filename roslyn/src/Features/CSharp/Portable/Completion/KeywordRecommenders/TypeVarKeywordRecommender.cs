@@ -19,13 +19,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             int position,
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var token = context.TargetToken;
 
             if (
                 token.Kind() == SyntaxKind.OpenBracketToken
                 && token.Parent.IsKind(SyntaxKind.AttributeList)
-            ) {
+            )
+            {
                 var typeParameters = token.GetAncestor<TypeParameterListSyntax>();
                 var type = typeParameters.GetAncestorOrThis<TypeDeclarationSyntax>();
 

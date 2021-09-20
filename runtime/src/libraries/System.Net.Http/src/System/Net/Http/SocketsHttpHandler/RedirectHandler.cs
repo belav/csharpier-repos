@@ -18,7 +18,8 @@ namespace System.Net.Http
             int maxAutomaticRedirections,
             HttpMessageHandlerStage initialInnerHandler,
             HttpMessageHandlerStage redirectInnerHandler
-        ) {
+        )
+        {
             Debug.Assert(initialInnerHandler != null);
             Debug.Assert(redirectInnerHandler != null);
             Debug.Assert(maxAutomaticRedirections > 0);
@@ -32,7 +33,8 @@ namespace System.Net.Http
             HttpRequestMessage request,
             bool async,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             HttpResponseMessage response = await _initialInnerHandler.SendAsync(
                     request,
                     async,
@@ -146,7 +148,8 @@ namespace System.Net.Http
             if (
                 HttpUtilities.IsSupportedSecureScheme(requestUri.Scheme)
                 && !HttpUtilities.IsSupportedSecureScheme(location.Scheme)
-            ) {
+            )
+            {
                 if (NetEventSource.Log.IsEnabled())
                 {
                     TraceError(
@@ -164,7 +167,8 @@ namespace System.Net.Http
         private static bool RequestRequiresForceGet(
             HttpStatusCode statusCode,
             HttpMethod requestMethod
-        ) {
+        )
+        {
             switch (statusCode)
             {
                 case HttpStatusCode.Moved:

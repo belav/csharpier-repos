@@ -382,7 +382,8 @@ namespace System.Net
             int offset,
             int count,
             byte[] expandedBytes
-        ) {
+        )
+        {
             int pos = 0;
             int end = offset + count;
             Debug.Assert(offset < end && end <= originalBytes.Length);
@@ -645,7 +646,8 @@ namespace System.Net
             uint smpChar,
             out char leadingSurrogate,
             out char trailingSurrogate
-        ) {
+        )
+        {
             Debug.Assert(UNICODE_PLANE01_START <= smpChar && smpChar <= UNICODE_PLANE16_END);
 
             int utf32 = (int)(smpChar - UNICODE_PLANE01_START);
@@ -656,7 +658,8 @@ namespace System.Net
         private static int GetNextUnicodeScalarValueFromUtf16Surrogate(
             ReadOnlySpan<char> input,
             ref int index
-        ) {
+        )
+        {
             // invariants
             Debug.Assert(input.Length - index >= 1);
             Debug.Assert(char.IsSurrogate(input[index]));

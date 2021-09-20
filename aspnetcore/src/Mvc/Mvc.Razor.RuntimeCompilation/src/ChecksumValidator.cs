@@ -76,7 +76,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
                     sourceDocument.GetChecksumAlgorithm(),
                     primaryChecksum.ChecksumAlgorithm
                 ) || !ChecksumsEqual(primaryChecksum.Checksum, sourceDocument.GetChecksum())
-            ) {
+            )
+            {
                 // Main file exists, but checksums not equal.
                 return false;
             }
@@ -90,7 +91,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
                         checksum.Identifier,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     // Ignore primary checksum on this pass.
                     continue;
                 }
@@ -108,7 +110,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
                         sourceDocument.GetChecksumAlgorithm(),
                         checksum.ChecksumAlgorithm
                     ) || !ChecksumsEqual(checksum.Checksum, sourceDocument.GetChecksum())
-                ) {
+                )
+                {
                     // Import file exists, but checksums not equal.
                     return false;
                 }

@@ -432,7 +432,8 @@ public delegate int Delegate(ref $$ int p);"
         [CombinatorialData]
         public async Task TestRefReadonlyNotAsParameterModifierInLocalFunctions(
             bool topLevelStatement
-        ) {
+        )
+        {
             await VerifyAbsenceAsync(
                 AddInsideMethod(
                     @"void localFunc(ref $$ int p) { }",

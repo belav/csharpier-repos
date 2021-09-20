@@ -882,7 +882,8 @@ namespace System.Net.Primitives.Unit.Tests
             string url,
             string domain,
             int? version
-        ) {
+        )
+        {
             var uri = new Uri(url);
 
             string cookie =
@@ -951,7 +952,8 @@ namespace System.Net.Primitives.Unit.Tests
         public void GetCookies_DefaultPathCalculationFollowsRfc6265(
             string uriString,
             string expectedPath
-        ) {
+        )
+        {
             Cookie cookie = new Cookie("n", "v");
             Uri uri = new Uri(uriString);
 
@@ -998,7 +1000,8 @@ namespace System.Net.Primitives.Unit.Tests
             string[] cookiePaths,
             string requestPath,
             int expectedMatches
-        ) {
+        )
+        {
             CookieContainer container = new CookieContainer();
 
             int i = 0;

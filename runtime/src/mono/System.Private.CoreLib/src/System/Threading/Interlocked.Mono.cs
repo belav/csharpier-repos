@@ -28,7 +28,8 @@ namespace System.Threading
             ref object? location1,
             object? value,
             object? comparand
-        ) {
+        )
+        {
             // This avoids coop handles, esp. on the output which would be particularly inefficient.
             // Passing everything by ref is equivalent to coop handles -- ref to locals at least.
             //
@@ -84,7 +85,8 @@ namespace System.Threading
         public static object? Exchange(
             [NotNullIfNotNull("value")] ref object? location1,
             object? value
-        ) {
+        )
+        {
             // See CompareExchange(object) for comments.
             object? result = null;
             Exchange(ref location1, ref value, ref result);

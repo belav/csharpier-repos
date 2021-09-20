@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.ExtractClass
             string typeName,
             bool sameFile,
             ImmutableArray<ExtractClassMemberAnalysisResult> memberAnalysisResults
-        ) {
+        )
+        {
             FileName = fileName;
             TypeName = typeName;
             MemberAnalysisResults = memberAnalysisResults;

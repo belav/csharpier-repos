@@ -68,7 +68,8 @@ namespace Microsoft.CodeAnalysis.InvertIf
             TIfStatementSyntax ifNode,
             SemanticModel semanticModel,
             out SyntaxNode subsequentSingleExitPointOpt
-        ) {
+        )
+        {
             subsequentSingleExitPointOpt = null;
 
             if (!IsElseless(ifNode))
@@ -136,7 +137,8 @@ namespace Microsoft.CodeAnalysis.InvertIf
                         && SubsequentStatementsAreInTheSameBlock(ifNode, subsequentStatementRanges)
                         && ifBodySingleExitPointOpt?.RawKind
                             == GetNearmostParentJumpStatementRawKind(ifNode)
-                    ) {
+                    )
+                    {
                         // (3) Inverse of the case (2). Safe to move all subsequent statements to if-body.
                         //
                         //  while (condition) {
@@ -186,7 +188,8 @@ namespace Microsoft.CodeAnalysis.InvertIf
                 if (
                     subsequentSingleExitPointOpt != null
                     && SingleSubsequentStatement(subsequentStatementRanges)
-                ) {
+                )
+                {
                     // (5) if-body end-point is reachable but the next statement is a only jump-statement.
                     //     This usually happens in a switch-statement. We invert and use that jump-statement.
                     //
@@ -261,7 +264,8 @@ namespace Microsoft.CodeAnalysis.InvertIf
             Document document,
             TIfStatementSyntax ifNode,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
@@ -294,7 +298,8 @@ namespace Microsoft.CodeAnalysis.InvertIf
             ImmutableArray<StatementRange> subsequentStatementRanges,
             out bool subsequentEndPointIsReachable,
             out SyntaxNode subsequentSingleExitPointOpt
-        ) {
+        )
+        {
             subsequentEndPointIsReachable = true;
             subsequentSingleExitPointOpt = null;
 
@@ -319,7 +324,8 @@ namespace Microsoft.CodeAnalysis.InvertIf
             StatementRange statementRange,
             out bool endPointIsReachable,
             out SyntaxNode singleExitPointOpt
-        ) {
+        )
+        {
             var flow = semanticModel.AnalyzeControlFlow(
                 statementRange.FirstStatement,
                 statementRange.LastStatement
@@ -332,7 +338,8 @@ namespace Microsoft.CodeAnalysis.InvertIf
         private static bool SubsequentStatementsAreInTheSameBlock(
             TIfStatementSyntax ifNode,
             ImmutableArray<StatementRange> subsequentStatementRanges
-        ) {
+        )
+        {
             return subsequentStatementRanges.Length == 1
                 && ifNode.Parent == subsequentStatementRanges[0].Parent;
         }
@@ -380,7 +387,8 @@ namespace Microsoft.CodeAnalysis.InvertIf
 
         private ImmutableArray<StatementRange> GetSubsequentStatementRanges(
             TIfStatementSyntax ifNode
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<StatementRange>.GetInstance(out var builder);
 
             TStatementSyntax innerStatement = ifNode;
@@ -455,7 +463,8 @@ namespace Microsoft.CodeAnalysis.InvertIf
             InvertIfStyle invertIfStyle,
             SyntaxNode subsequentSingleExitPointOpt,
             SyntaxNode negatedExpression
-        ) {
+        )
+        {
             switch (invertIfStyle)
             {
                 case InvertIfStyle.IfWithElse_SwapIfBodyWithElseBody:

@@ -116,7 +116,8 @@ namespace Microsoft.Extensions.Logging.Test
         [InlineData("UseAppFilters_StartsThisWay:Debug;")]
         public void FilterSpecs_IncreaseLoggingLevelForOneCategory_DisablesExistingRulesByDefault(
             string prefix
-        ) {
+        )
+        {
             using (var testListener = new TestEventListener())
             {
                 var loggerFactory = LoggerFactory.Create(
@@ -603,7 +604,8 @@ namespace Microsoft.Extensions.Logging.Test
                     if (
                         eventJson.Contains(@"""__EVENT_NAME"":""FormattedMessage""")
                         && eventJson.Contains(@"""EventName"":"""",")
-                    ) {
+                    )
+                    {
                         containsNullEventName = true;
                     }
                     if (eventJson.Contains(@"""FormattedMessage"":""Logger1 Event1 Debug 1"""))
@@ -656,7 +658,8 @@ namespace Microsoft.Extensions.Logging.Test
                     if (
                         eventJson.Contains(@"""__EVENT_NAME"":""MessageJson""")
                         && eventJson.Contains(@"""EventName"":"""",")
-                    ) {
+                    )
+                    {
                         containsNullEventName = true;
                     }
                     if (eventJson.Contains(@"""FormattedMessage"":""formattedMessage"""))
@@ -699,7 +702,8 @@ namespace Microsoft.Extensions.Logging.Test
                     if (
                         eventJson.Contains(@"""__EVENT_NAME"":""ActivityJsonStart""")
                         && eventJson.Contains(@"""LoggerName"":"""",")
-                    ) {
+                    )
+                    {
                         containsNullLoggerName = true;
                     }
                 }
@@ -740,7 +744,8 @@ namespace Microsoft.Extensions.Logging.Test
                     13,
                     DoubleParam1
                 )
-            ) {
+            )
+            {
                 logger1.LogError(
                     new EventId(4, "ErrorEvent"),
                     "Logger1 Event4 Error {stringParam} {guidParam}",
@@ -759,7 +764,8 @@ namespace Microsoft.Extensions.Logging.Test
 
                 using (
                     logger3.BeginScope("Inner scope {timeParam} {guidParam}", TimeParam, GuidParam)
-                ) {
+                )
+                {
                     logger2.LogWarning(new EventId(6), "Logger2 Event6 Warning NoParams");
                 }
 
@@ -783,7 +789,8 @@ namespace Microsoft.Extensions.Logging.Test
         private static void VerifyEvents(
             TestEventListener eventListener,
             params string[] verifierIDs
-        ) {
+        )
+        {
             Assert.Collection(
                 eventListener.Events,
                 verifierIDs.Select(id => EventVerifiers[id]).ToArray()
@@ -798,7 +805,8 @@ namespace Microsoft.Extensions.Logging.Test
             string eventIdName,
             LogLevel? level,
             params string[] fragments
-        ) {
+        )
+        {
             Assert.True(
                 eventJson.Contains(@"""__EVENT_NAME"":""" + eventName + @""""),
                 $"Event name does not match. Expected {eventName}, event data is '{eventJson}'"
@@ -891,7 +899,8 @@ namespace Microsoft.Extensions.Logging.Test
 
             protected override void OnEventSourceCreated(
                 System.Diagnostics.Tracing.EventSource eventSource
-            ) {
+            )
+            {
                 if (eventSource.Name == "Microsoft-Extensions-Logging")
                 {
                     _loggingEventSource = eventSource;
@@ -945,7 +954,8 @@ namespace Microsoft.Extensions.Logging.Test
                         if (
                             eventWrittenArgs.Payload[i] == null
                             || IsPrimitive(eventWrittenArgs.Payload[i].GetType())
-                        ) {
+                        )
+                        {
                             writer.WriteValue(eventWrittenArgs.Payload[i]);
                         }
                         else if (eventWrittenArgs.Payload[i] is IDictionary<string, object>)

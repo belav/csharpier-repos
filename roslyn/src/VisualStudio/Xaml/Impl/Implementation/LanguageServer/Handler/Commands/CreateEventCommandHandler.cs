@@ -35,7 +35,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
             ExecuteCommandParams request,
             RequestContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(request.Arguments);
 
             var document = context.Document;

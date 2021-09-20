@@ -15,7 +15,8 @@ namespace System.Composition.Hosting.Core.Tests
                 CompositionHost host = CompositionHost.CreateCompositionHost(
                     new ExportDescriptorProvider[0]
                 )
-            ) {
+            )
+            {
                 Assert.True(
                     host.TryGetExport(
                         new CompositionContract(typeof(CompositionContext)),
@@ -34,7 +35,8 @@ namespace System.Composition.Hosting.Core.Tests
                 object Activator(
                     LifetimeContext activatorContext,
                     CompositionOperation activatorOperation
-                ) {
+                )
+                {
                     Assert.Same(context, activatorContext);
 
                     activatorOperation.AddNonPrerequisiteAction(NonPrequisiteAction1);
@@ -76,7 +78,8 @@ namespace System.Composition.Hosting.Core.Tests
                 CompositionHost host = CompositionHost.CreateCompositionHost(
                     new ExportDescriptorProvider[0]
                 )
-            ) {
+            )
+            {
                 Assert.True(
                     host.TryGetExport(
                         new CompositionContract(typeof(CompositionContext)),
@@ -108,7 +111,8 @@ namespace System.Composition.Hosting.Core.Tests
                 CompositionHost host = CompositionHost.CreateCompositionHost(
                     new ExportDescriptorProvider[0]
                 )
-            ) {
+            )
+            {
                 Assert.True(
                     host.TryGetExport(
                         new CompositionContract(typeof(CompositionContext)),
@@ -137,7 +141,8 @@ namespace System.Composition.Hosting.Core.Tests
                 CompositionHost host = CompositionHost.CreateCompositionHost(
                     new ExportDescriptorProvider[0]
                 )
-            ) {
+            )
+            {
                 Assert.True(
                     host.TryGetExport(
                         new CompositionContract(typeof(CompositionContext)),

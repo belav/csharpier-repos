@@ -504,14 +504,16 @@ namespace System.Xml.Xsl.Xslt
                                 || local == "quot"
                                 || local == "apos"
                             )
-                        ) {
+                        )
+                        {
                             // Special treatment for character and built-in entities
                             ExtendRecordBuffer(curTextNode);
                             FillupCharacterEntityRecord(ref _records[curTextNode]);
                             if (
                                 textIsWhite
                                 && !XmlCharType.IsOnlyWhitespace(_records[curTextNode].value)
-                            ) {
+                            )
+                            {
                                 textIsWhite = false;
                             }
                             curTextNode++;
@@ -934,7 +936,8 @@ namespace System.Xml.Xsl.Xslt
                         if (
                             Ref.Equal(localName, attributes[kwd].name)
                             && (attributes[kwd].flags & OptOrReq) != 0
-                        ) {
+                        )
+                        {
                             _xsltAttributeNumber[kwd] = attNum;
                             break;
                         }
@@ -948,7 +951,8 @@ namespace System.Xml.Xsl.Xslt
                         }
                         else if (
                             Ref.Equal(localName, _atoms.ExtensionElementPrefixes) && (SS || V2)
-                        ) {
+                        )
+                        {
                             attExtension = attNum;
                         }
                         else if (Ref.Equal(localName, _atoms.XPathDefaultNamespace) && (V2))
@@ -1026,7 +1030,8 @@ namespace System.Xml.Xsl.Xslt
                         || _compiler.Version == 1
                             && (flags & XsltLoader.V1Req) != 0
                             && (!ForwardCompatibility || (flags & XsltLoader.V2Req) != 0)
-                    ) {
+                    )
+                    {
                         ReportError( /*[XT_001]*/
                             SR.Xslt_MissingAttribute,
                             attributes[i].name
@@ -1200,7 +1205,8 @@ namespace System.Xml.Xsl.Xslt
                                     list[idx].Length == 0
                                     && _compiler.Version != 1
                                     && !BackwardCompatibility
-                                ) {
+                                )
+                                {
                                     ReportError( /*[XTSE0809]*/
                                         SR.Xslt_ExcludeDefault
                                     );
@@ -1263,7 +1269,8 @@ namespace System.Xml.Xsl.Xslt
                             list[col], /*throw:*/
                             false
                         ) != null
-                    ) {
+                    )
+                    {
                         break;
                     }
                 }

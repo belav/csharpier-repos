@@ -54,7 +54,8 @@ namespace Microsoft.CodeAnalysis
                 WeakReference<IAssemblySymbol> primaryAssemblySymbol,
                 WeakReference<ITypeSymbol?> primaryDynamicSymbol,
                 ImmutableArray<(int hashCode, WeakReference<ISymbol> symbol)> secondaryReferencedSymbols
-            ) {
+            )
+            {
                 PrimaryAssemblySymbol = primaryAssemblySymbol;
                 PrimaryDynamicSymbol = primaryDynamicSymbol;
                 SecondaryReferencedSymbols = secondaryReferencedSymbols;

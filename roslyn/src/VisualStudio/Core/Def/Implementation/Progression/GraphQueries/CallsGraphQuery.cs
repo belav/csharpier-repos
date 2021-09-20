@@ -21,7 +21,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             Solution solution,
             IGraphContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var graphBuilder = await GraphBuilder.CreateForInputNodesAsync(
                     solution,
                     context.InputNodes,
@@ -41,7 +42,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                                 cancellationToken
                             )
                             .ConfigureAwait(false)
-                    ) {
+                    )
+                    {
                         cancellationToken.ThrowIfCancellationRequested();
 
                         var newNode = await graphBuilder.AddNodeAsync(newSymbol, relatedNode: node)
@@ -58,7 +60,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             ISymbol symbol,
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<ISymbol>.GetInstance(out var symbols);
 
             foreach (var reference in symbol.DeclaringSyntaxReferences)
@@ -70,7 +73,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                     var syntaxNode in (
                         await reference.GetSyntaxAsync(cancellationToken).ConfigureAwait(false)
                     ).DescendantNodes()
-                ) {
+                )
+                {
                     cancellationToken.ThrowIfCancellationRequested();
 
                     var newSymbol =
@@ -82,7 +86,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                             newSymbol.CanBeReferencedByName
                             || ((IMethodSymbol)newSymbol).MethodKind == MethodKind.Constructor
                         )
-                    ) {
+                    )
+                    {
                         symbols.Add(newSymbol);
                     }
                 }

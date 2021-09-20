@@ -101,7 +101,8 @@ namespace Microsoft.CodeAnalysis
         public static Checksum Create(
             WellKnownSynchronizationKind kind,
             IEnumerable<Checksum> checksums
-        ) {
+        )
+        {
             using var stream = SerializableBytes.CreateWritableStream();
 
             using (var writer = new ObjectWriter(stream, leaveOpen: true))
@@ -140,7 +141,8 @@ namespace Microsoft.CodeAnalysis
             WellKnownSynchronizationKind kind,
             T value,
             ISerializerService serializer
-        ) {
+        )
+        {
             using var stream = SerializableBytes.CreateWritableStream();
             using var context = SolutionReplicationContext.Create();
 

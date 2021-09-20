@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private BoundExpression BindAwait(
             AwaitExpressionSyntax node,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             BoundExpression expression = BindRValueWithoutTargetType(node.Expression, diagnostics);
 
             return BindAwait(expression, node, diagnostics);
@@ -30,7 +31,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression expression,
             SyntaxNode node,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             bool hasErrors = false;
             var placeholder = new BoundAwaitableValuePlaceholder(
                 expression.Syntax,
@@ -63,7 +65,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Location location,
             BindingDiagnosticBag diagnostics,
             ref bool hasErrors
-        ) {
+        )
+        {
             hasErrors |= ReportBadAwaitWithoutAsync(location, diagnostics);
             hasErrors |= ReportBadAwaitContext(node, location, diagnostics);
         }
@@ -74,7 +77,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics,
             ref bool hasErrors,
             BoundExpression? expressionOpt = null
-        ) {
+        )
+        {
             bool hasGetAwaitableErrors = !GetAwaitableExpressionInfo(
                 expressionOpt ?? placeholder,
                 placeholder,
@@ -246,7 +250,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxNode node,
             Location location,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             if (this.InUnsafeRegion && !this.Flags.Includes(BinderFlags.AllowAwaitInUnsafeContext))
             {
                 Error(diagnostics, ErrorCode.ERR_AwaitInUnsafeContext, location);
@@ -267,7 +272,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 && (node.SyntaxTree as CSharpSyntaxTree)?.Options?.IsFeatureEnabled(
                     MessageID.IDS_AwaitInCatchAndFinally
                 ) == false
-            ) {
+            )
+            {
                 Error(diagnostics, ErrorCode.ERR_BadAwaitInFinally, location);
                 return true;
             }
@@ -276,7 +282,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 && (node.SyntaxTree as CSharpSyntaxTree)?.Options?.IsFeatureEnabled(
                     MessageID.IDS_AwaitInCatchAndFinally
                 ) == false
-            ) {
+            )
+            {
                 Error(diagnostics, ErrorCode.ERR_BadAwaitInCatch, location);
                 return true;
             }
@@ -295,7 +302,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             out BoundExpression? getAwaiterGetResultCall,
             SyntaxNode node,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             return GetAwaitableExpressionInfo(
                 expression,
                 expression,
@@ -319,7 +327,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             out BoundExpression? getAwaiterGetResultCall,
             SyntaxNode node,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             Debug.Assert(
                 TypeSymbol.Equals(
                     expression.Type,
@@ -376,7 +385,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression expression,
             SyntaxNode node,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             if (expression.HasAnyErrors)
             {
                 // The appropriate diagnostics have already been reported.
@@ -408,7 +418,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxNode node,
             BindingDiagnosticBag diagnostics,
             [NotNullWhen(true)] out BoundExpression? getAwaiterCall
-        ) {
+        )
+        {
             RoslynDebug.Assert(expression.Type is object);
             if (expression.Type.IsVoidType())
             {
@@ -466,7 +477,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol awaitedExpressionType,
             BindingDiagnosticBag diagnostics,
             [NotNullWhen(true)] out PropertySymbol? isCompletedProperty
-        ) {
+        )
+        {
             var receiver = new BoundLiteral(node, ConstantValue.Null, awaiterType);
             var name = WellKnownMemberNames.IsCompleted;
             var qualified = BindInstanceMemberAccess(
@@ -535,7 +547,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol awaiterType,
             SyntaxNode node,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var INotifyCompletion = GetWellKnownType(
                 WellKnownType.System_Runtime_CompilerServices_INotifyCompletion,
                 diagnostics,
@@ -581,7 +594,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics,
             out MethodSymbol? getResultMethod,
             [NotNullWhen(true)] out BoundExpression? getAwaiterGetResultCall
-        ) {
+        )
+        {
             var awaiterType = awaiterExpression.Type;
             getAwaiterGetResultCall = MakeInvocationExpression(
                 node,

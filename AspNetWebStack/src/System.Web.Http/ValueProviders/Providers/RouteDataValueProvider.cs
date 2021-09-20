@@ -15,7 +15,8 @@ namespace System.Web.Http.ValueProviders.Providers
 
         internal static IEnumerable<KeyValuePair<string, string>> GetRouteValues(
             IHttpRouteData routeData
-        ) {
+        )
+        {
             foreach (KeyValuePair<string, object> pair in routeData.Values)
             {
                 string value = (pair.Value == null) ? null : pair.Value.ToString();

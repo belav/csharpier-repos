@@ -44,7 +44,8 @@ namespace BuildValidator
                 peReader.PEHeaders is null
                 || peReader.PEHeaders.PEHeader is null
                 || peReader.PEHeaders.CorHeader is null
-            ) {
+            )
+            {
                 return false;
             }
 

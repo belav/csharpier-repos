@@ -332,7 +332,8 @@ namespace System.Linq.Expressions.Interpreter
                     if (
                         !valueType.HasReferenceConversionTo(_t)
                         && !valueType.HasIdentityPrimitiveOrNullableConversionTo(_t)
-                    ) {
+                    )
+                    {
                         throw new InvalidCastException();
                     }
 
@@ -502,7 +503,8 @@ namespace System.Linq.Expressions.Interpreter
         public QuoteInstruction(
             Expression operand,
             Dictionary<ParameterExpression, LocalVariable>? hoistedVariables
-        ) {
+        )
+        {
             _operand = operand;
             _hoistedVariables = hoistedVariables;
         }
@@ -543,7 +545,8 @@ namespace System.Linq.Expressions.Interpreter
             internal ExpressionQuoter(
                 Dictionary<ParameterExpression, LocalVariable> hoistedVariables,
                 InterpretedFrame frame
-            ) {
+            )
+            {
                 _variables = hoistedVariables;
                 _frame = frame;
             }
@@ -612,7 +615,8 @@ namespace System.Linq.Expressions.Interpreter
 
             protected internal override Expression VisitRuntimeVariables(
                 RuntimeVariablesExpression node
-            ) {
+            )
+            {
                 int count = node.Variables.Count;
                 var boxes = new List<IStrongBox>();
                 var vars = new List<ParameterExpression>();
@@ -667,7 +671,8 @@ namespace System.Linq.Expressions.Interpreter
                 IRuntimeVariables first,
                 IRuntimeVariables second,
                 int[] indexes
-            ) {
+            )
+            {
                 return new RuntimeOps.MergedRuntimeVariables(first, second, indexes);
             }
 

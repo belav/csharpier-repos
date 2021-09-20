@@ -71,7 +71,8 @@ MII
                     TestData.RsaCertificate,
                     TestData.RsaPkcs1Key
                 )
-            ) {
+            )
+            {
                 string content = Convert.ToBase64String(cert.Export(X509ContentType.Pkcs12));
                 string certContents =
                     $@"
@@ -108,7 +109,8 @@ MII
                     TestData.RsaCertificate,
                     TestData.RsaPkcs1Key
                 )
-            ) {
+            )
+            {
                 Assert.Equal("A33348E44A047A121F44E810E888899781E1FF19", cert.Thumbprint);
                 AssertKeysMatch(TestData.RsaPkcs1Key, cert.GetRSAPrivateKey);
             }
@@ -122,7 +124,8 @@ MII
                     TestData.RsaCertificate,
                     TestData.RsaPkcs8Key
                 )
-            ) {
+            )
+            {
                 Assert.Equal("A33348E44A047A121F44E810E888899781E1FF19", cert.Thumbprint);
                 AssertKeysMatch(TestData.RsaPkcs8Key, cert.GetRSAPrivateKey);
             }
@@ -134,7 +137,8 @@ MII
             string pemAggregate = TestData.RsaCertificate + TestData.RsaPkcs8Key;
             using (
                 X509Certificate2 cert = X509Certificate2.CreateFromPem(pemAggregate, pemAggregate)
-            ) {
+            )
+            {
                 Assert.Equal("A33348E44A047A121F44E810E888899781E1FF19", cert.Thumbprint);
                 AssertKeysMatch(TestData.RsaPkcs8Key, cert.GetRSAPrivateKey);
             }
@@ -146,7 +150,8 @@ MII
             string pemAggregate = TestData.RsaCertificate + TestData.RsaPkcs1Key;
             using (
                 X509Certificate2 cert = X509Certificate2.CreateFromPem(pemAggregate, pemAggregate)
-            ) {
+            )
+            {
                 Assert.Equal("A33348E44A047A121F44E810E888899781E1FF19", cert.Thumbprint);
                 AssertKeysMatch(TestData.RsaPkcs1Key, cert.GetRSAPrivateKey);
             }
@@ -161,7 +166,8 @@ MII
                     certAggregate,
                     TestData.RsaPkcs1Key
                 )
-            ) {
+            )
+            {
                 Assert.Equal("A33348E44A047A121F44E810E888899781E1FF19", cert.Thumbprint);
                 AssertKeysMatch(TestData.RsaPkcs1Key, cert.GetRSAPrivateKey);
             }
@@ -176,7 +182,8 @@ MII
                     TestData.RsaCertificate,
                     keyAggregate
                 )
-            ) {
+            )
+            {
                 Assert.Equal("A33348E44A047A121F44E810E888899781E1FF19", cert.Thumbprint);
                 AssertKeysMatch(TestData.RsaPkcs1Key, cert.GetRSAPrivateKey);
             }
@@ -191,7 +198,8 @@ MII
                     TestData.RsaCertificate,
                     keyAggregate
                 )
-            ) {
+            )
+            {
                 Assert.Equal("A33348E44A047A121F44E810E888899781E1FF19", cert.Thumbprint);
                 AssertKeysMatch(TestData.RsaPkcs1Key, cert.GetRSAPrivateKey);
             }
@@ -206,7 +214,8 @@ MII
                     TestData.RsaCertificate,
                     keyAggregate
                 )
-            ) {
+            )
+            {
                 Assert.Equal("A33348E44A047A121F44E810E888899781E1FF19", cert.Thumbprint);
                 AssertKeysMatch(TestData.RsaPkcs1Key, cert.GetRSAPrivateKey);
             }
@@ -293,7 +302,8 @@ MII
                     TestData.ECDsaCertificate,
                     TestData.ECDsaECPrivateKey
                 )
-            ) {
+            )
+            {
                 Assert.Equal("E844FA74BC8DCE46EF4F8605EA00008F161AB56F", cert.Thumbprint);
                 AssertKeysMatch(TestData.ECDsaECPrivateKey, cert.GetECDsaPrivateKey);
             }
@@ -307,7 +317,8 @@ MII
                     TestData.ECDsaCertificate,
                     TestData.ECDsaPkcs8Key
                 )
-            ) {
+            )
+            {
                 Assert.Equal("E844FA74BC8DCE46EF4F8605EA00008F161AB56F", cert.Thumbprint);
                 AssertKeysMatch(TestData.ECDsaPkcs8Key, cert.GetECDsaPrivateKey);
             }
@@ -337,7 +348,8 @@ MII
                     TestData.EcDhCertificate,
                     TestData.EcDhPkcs8Key
                 )
-            ) {
+            )
+            {
                 Assert.Equal("6EAE9D3E34F7672106585583AA4623B6CC5AE2F7", cert.Thumbprint);
                 AssertKeysMatch(TestData.EcDhPkcs8Key, cert.GetECDiffieHellmanPrivateKey);
             }
@@ -351,7 +363,8 @@ MII
                     TestData.DsaCertificate,
                     TestData.DsaPkcs8Key
                 )
-            ) {
+            )
+            {
                 Assert.Equal("35052C549E4E7805E4EA204C2BE7F4BC19B88EC8", cert.Thumbprint);
                 AssertKeysMatch(TestData.DsaPkcs8Key, cert.GetDSAPrivateKey);
             }
@@ -399,7 +412,8 @@ MII
                     aggregatePem.FilePath,
                     aggregatePem.FilePath
                 )
-            ) {
+            )
+            {
                 Assert.Equal("A33348E44A047A121F44E810E888899781E1FF19", cert.Thumbprint);
                 AssertKeysMatch(TestData.RsaPkcs1Key, cert.GetRSAPrivateKey);
             }
@@ -415,7 +429,8 @@ MII
                     certPem.FilePath,
                     keyPem.FilePath
                 )
-            ) {
+            )
+            {
                 Assert.Equal("A33348E44A047A121F44E810E888899781E1FF19", cert.Thumbprint);
                 AssertKeysMatch(TestData.RsaPkcs1Key, cert.GetRSAPrivateKey);
             }
@@ -435,7 +450,8 @@ MII
                     certPem.FilePath,
                     keyPem.FilePath
                 )
-            ) {
+            )
+            {
                 Assert.Equal("A33348E44A047A121F44E810E888899781E1FF19", cert.Thumbprint);
                 AssertKeysMatch(TestData.RsaPkcs1Key, cert.GetRSAPrivateKey);
             }
@@ -461,7 +477,8 @@ MII
                     certAndKey.FilePath,
                     "test"
                 )
-            ) {
+            )
+            {
                 Assert.Equal("A33348E44A047A121F44E810E888899781E1FF19", cert.Thumbprint);
                 AssertKeysMatch(TestData.RsaEncryptedPkcs8Key, cert.GetRSAPrivateKey, "test");
             }
@@ -481,7 +498,8 @@ MII
                     "test",
                     aggregatePem.FilePath
                 )
-            ) {
+            )
+            {
                 Assert.Equal("A33348E44A047A121F44E810E888899781E1FF19", cert.Thumbprint);
                 AssertKeysMatch(TestData.RsaEncryptedPkcs8Key, cert.GetRSAPrivateKey, "test");
             }
@@ -498,7 +516,8 @@ MII
                     "test",
                     keyPem.FilePath
                 )
-            ) {
+            )
+            {
                 Assert.Equal("A33348E44A047A121F44E810E888899781E1FF19", cert.Thumbprint);
                 AssertKeysMatch(TestData.RsaEncryptedPkcs8Key, cert.GetRSAPrivateKey, "test");
             }
@@ -519,7 +538,8 @@ MII
                     "test",
                     keyPem.FilePath
                 )
-            ) {
+            )
+            {
                 Assert.Equal("A33348E44A047A121F44E810E888899781E1FF19", cert.Thumbprint);
                 AssertKeysMatch(TestData.RsaEncryptedPkcs8Key, cert.GetRSAPrivateKey, "test");
             }

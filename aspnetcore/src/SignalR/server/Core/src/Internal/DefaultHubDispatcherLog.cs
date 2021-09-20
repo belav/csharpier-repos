@@ -189,7 +189,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
         public static void ReceivedHubInvocation(
             ILogger logger,
             InvocationMessage invocationMessage
-        ) {
+        )
+        {
             _receivedHubInvocation(logger, invocationMessage, null);
         }
 
@@ -212,7 +213,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
             ILogger logger,
             string invocationId,
             ObjectMethodExecutor objectMethodExecutor
-        ) {
+        )
+        {
             var resultType =
                 objectMethodExecutor.AsyncResultType == null
                     ? objectMethodExecutor.MethodReturnType
@@ -224,7 +226,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
             ILogger logger,
             string? invocationId,
             ObjectMethodExecutor objectMethodExecutor
-        ) {
+        )
+        {
             if (logger.IsEnabled(LogLevel.Trace))
             {
                 var resultType =
@@ -239,7 +242,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
             ILogger logger,
             string hubMethod,
             Exception exception
-        ) {
+        )
+        {
             _failedInvokingHubMethod(logger, hubMethod, exception);
         }
 
@@ -261,21 +265,24 @@ namespace Microsoft.AspNetCore.SignalR.Internal
         public static void ReceivedStreamHubInvocation(
             ILogger logger,
             StreamInvocationMessage invocationMessage
-        ) {
+        )
+        {
             _receivedStreamHubInvocation(logger, invocationMessage, null);
         }
 
         public static void StreamingMethodCalledWithInvoke(
             ILogger logger,
             HubMethodInvocationMessage invocationMessage
-        ) {
+        )
+        {
             _streamingMethodCalledWithInvoke(logger, invocationMessage, null);
         }
 
         public static void NonStreamingMethodCalledWithStream(
             ILogger logger,
             HubMethodInvocationMessage invocationMessage
-        ) {
+        )
+        {
             _nonStreamingMethodCalledWithStream(logger, invocationMessage, null);
         }
 
@@ -318,7 +325,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
             ILogger logger,
             string hubMethod,
             Exception exception
-        ) {
+        )
+        {
             _invalidHubParameters(logger, hubMethod, exception);
         }
 

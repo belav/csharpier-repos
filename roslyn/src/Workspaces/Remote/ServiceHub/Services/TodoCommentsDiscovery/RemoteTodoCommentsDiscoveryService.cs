@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public ValueTask ComputeTodoCommentsAsync(
             RemoteServiceCallbackId callbackId,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 cancellationToken =>
                 {

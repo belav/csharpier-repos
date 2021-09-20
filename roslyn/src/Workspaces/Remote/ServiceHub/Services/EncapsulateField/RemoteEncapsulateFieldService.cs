@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.Remote
             ImmutableArray<string> fieldSymbolKeys,
             bool updateReferences,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 async cancellationToken =>
                 {

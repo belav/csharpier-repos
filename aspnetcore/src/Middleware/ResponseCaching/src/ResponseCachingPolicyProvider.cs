@@ -44,7 +44,8 @@ namespace Microsoft.AspNetCore.ResponseCaching
                         cacheControl,
                         CacheControlHeaderValue.NoCacheString
                     )
-                ) {
+                )
+                {
                     context.Logger.RequestWithNoCacheNotCacheable();
                     return false;
                 }
@@ -57,7 +58,8 @@ namespace Microsoft.AspNetCore.ResponseCaching
                         requestHeaders[HeaderNames.Pragma],
                         CacheControlHeaderValue.NoCacheString
                     )
-                ) {
+                )
+                {
                     context.Logger.RequestWithPragmaNoCacheNotCacheable();
                     return false;
                 }
@@ -87,7 +89,8 @@ namespace Microsoft.AspNetCore.ResponseCaching
                     responseCacheControlHeader,
                     CacheControlHeaderValue.PublicString
                 )
-            ) {
+            )
+            {
                 context.Logger.ResponseWithoutPublicNotCacheable();
                 return false;
             }
@@ -98,7 +101,8 @@ namespace Microsoft.AspNetCore.ResponseCaching
                     responseCacheControlHeader,
                     CacheControlHeaderValue.NoStoreString
                 )
-            ) {
+            )
+            {
                 context.Logger.ResponseWithNoStoreNotCacheable();
                 return false;
             }
@@ -109,7 +113,8 @@ namespace Microsoft.AspNetCore.ResponseCaching
                     responseCacheControlHeader,
                     CacheControlHeaderValue.NoCacheString
                 )
-            ) {
+            )
+            {
                 context.Logger.ResponseWithNoCacheNotCacheable();
                 return false;
             }
@@ -128,7 +133,8 @@ namespace Microsoft.AspNetCore.ResponseCaching
             if (
                 varyHeader.Count == 1
                 && string.Equals(varyHeader, "*", StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 context.Logger.ResponseWithVaryStarNotCacheable();
                 return false;
             }
@@ -139,7 +145,8 @@ namespace Microsoft.AspNetCore.ResponseCaching
                     responseCacheControlHeader,
                     CacheControlHeaderValue.PrivateString
                 )
-            ) {
+            )
+            {
                 context.Logger.ResponseWithPrivateNotCacheable();
                 return false;
             }
@@ -158,7 +165,8 @@ namespace Microsoft.AspNetCore.ResponseCaching
                     !context.ResponseSharedMaxAge.HasValue
                     && !context.ResponseMaxAge.HasValue
                     && context.ResponseTime!.Value >= context.ResponseExpires
-                ) {
+                )
+                {
                     context.Logger.ExpirationExpiresExceeded(
                         context.ResponseTime.Value,
                         context.ResponseExpires.Value
@@ -220,7 +228,8 @@ namespace Microsoft.AspNetCore.ResponseCaching
                     CacheControlHeaderValue.MinFreshString,
                     out var minFresh
                 )
-            ) {
+            )
+            {
                 age += minFresh.Value;
                 context.Logger.ExpirationMinFreshAdded(minFresh.Value);
             }
@@ -270,7 +279,8 @@ namespace Microsoft.AspNetCore.ResponseCaching
                             cachedCacheControlHeaders,
                             CacheControlHeaderValue.ProxyRevalidateString
                         )
-                    ) {
+                    )
+                    {
                         context.Logger.ExpirationMustRevalidate(age, lowestMaxAge.Value);
                         return false;
                     }
@@ -317,7 +327,8 @@ namespace Microsoft.AspNetCore.ResponseCaching
                             out expires
                         )
                         && context.ResponseTime!.Value >= expires
-                    ) {
+                    )
+                    {
                         context.Logger.ExpirationExpiresExceeded(
                             context.ResponseTime.Value,
                             expires

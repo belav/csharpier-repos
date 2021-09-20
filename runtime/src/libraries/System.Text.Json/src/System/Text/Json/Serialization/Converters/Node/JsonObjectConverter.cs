@@ -12,7 +12,8 @@ namespace System.Text.Json.Serialization.Converters
             Utf8JsonWriter writer,
             JsonObject value,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             Debug.Assert(value != null);
             value.WriteTo(writer, options);
         }
@@ -21,7 +22,8 @@ namespace System.Text.Json.Serialization.Converters
             ref Utf8JsonReader reader,
             Type typeToConvert,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             switch (reader.TokenType)
             {
                 case JsonTokenType.StartObject:

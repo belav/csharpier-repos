@@ -134,7 +134,8 @@ WHERE ([f0].[LastName] LIKE N'') OR (CHARINDEX([f0].[LastName], [f].[FirstName])
 
         public override async Task String_contains_on_argument_with_wildcard_column_negated(
             bool async
-        ) {
+        )
+        {
             await base.String_contains_on_argument_with_wildcard_column_negated(async);
 
             AssertSql(
@@ -185,7 +186,8 @@ WHERE 0 = 1"
 
         public override async Task String_starts_with_on_argument_with_wildcard_parameter(
             bool async
-        ) {
+        )
+        {
             await base.String_starts_with_on_argument_with_wildcard_parameter(async);
 
             AssertSql(
@@ -290,7 +292,8 @@ WHERE ([f0].[LastName] = N'') OR ([f].[FirstName] IS NOT NULL AND ([f0].[LastNam
 
         public override async Task String_starts_with_on_argument_with_wildcard_column_negated(
             bool async
-        ) {
+        )
+        {
             await base.String_starts_with_on_argument_with_wildcard_column_negated(async);
 
             AssertSql(
@@ -404,7 +407,8 @@ WHERE ([f0].[LastName] = N'') OR ([f].[FirstName] IS NOT NULL AND ([f0].[LastNam
 
         public override async Task String_ends_with_on_argument_with_wildcard_column_negated(
             bool async
-        ) {
+        )
+        {
             await base.String_ends_with_on_argument_with_wildcard_column_negated(async);
 
             AssertSql(

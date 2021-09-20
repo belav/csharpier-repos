@@ -34,7 +34,8 @@ namespace Microsoft.AspNetCore.Http
             long length,
             string name,
             string fileName
-        ) {
+        )
+        {
             _baseStream = baseStream;
             _baseStreamOffset = baseStreamOffset;
             Length = length;
@@ -113,7 +114,8 @@ namespace Microsoft.AspNetCore.Http
         public async Task CopyToAsync(
             Stream target,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             if (target == null)
             {
                 throw new ArgumentNullException(nameof(target));

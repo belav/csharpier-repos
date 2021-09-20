@@ -73,7 +73,8 @@ namespace Microsoft.CodeAnalysis.SimplifyLinqExpression
                     enumerableType,
                     out var linqMethodSymbols
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -93,7 +94,8 @@ namespace Microsoft.CodeAnalysis.SimplifyLinqExpression
             static bool TryGetEnumerableTypeSymbol(
                 Compilation compilation,
                 [NotNullWhen(true)] out INamedTypeSymbol? enumerableType
-            ) {
+            )
+            {
                 enumerableType = compilation.GetTypeByMetadataName(typeof(Enumerable)?.FullName!);
                 return enumerableType is not null;
             }
@@ -101,18 +103,21 @@ namespace Microsoft.CodeAnalysis.SimplifyLinqExpression
             static bool TryGetLinqWhereExtensionMethod(
                 INamedTypeSymbol enumerableType,
                 [NotNullWhen(true)] out IMethodSymbol? whereMethod
-            ) {
+            )
+            {
                 foreach (
                     var whereMethodSymbol in enumerableType.GetMembers(nameof(Enumerable.Where))
                         .OfType<IMethodSymbol>()
-                ) {
+                )
+                {
                     var parameters = whereMethodSymbol.Parameters;
 
                     if (
                         parameters.Length == 2
                         && parameters.Last().Type is INamedTypeSymbol systemFunc
                         && systemFunc.Arity == 2
-                    ) {
+                    )
+                    {
                         // This is the where overload that does not take and index (i.e. Where(source, Func<T, bool>) vs Where(source, Func<T, int, bool>))
                         whereMethod = whereMethodSymbol;
                         return true;
@@ -126,7 +131,8 @@ namespace Microsoft.CodeAnalysis.SimplifyLinqExpression
             static bool TryGetLinqMethodsThatDoNotReturnEnumerables(
                 INamedTypeSymbol enumerableType,
                 out ImmutableArray<IMethodSymbol> linqMethods
-            ) {
+            )
+            {
                 using var _ = ArrayBuilder<IMethodSymbol>.GetInstance(
                     out var linqMethodSymbolsBuilder
                 );
@@ -135,7 +141,8 @@ namespace Microsoft.CodeAnalysis.SimplifyLinqExpression
                     if (
                         s_nonEnumerableReturningLinqMethodNames.Contains(method.Name)
                         && method.Parameters is { Length: 1 }
-                    ) {
+                    )
+                    {
                         linqMethodSymbolsBuilder.AddRange(method);
                     }
                 }
@@ -150,11 +157,13 @@ namespace Microsoft.CodeAnalysis.SimplifyLinqExpression
             INamedTypeSymbol enumerableType,
             IMethodSymbol whereMethod,
             ImmutableArray<IMethodSymbol> linqMethods
-        ) {
+        )
+        {
             if (
                 context.Operation.Syntax.GetDiagnostics()
                     .Any(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error)
-            ) {
+            )
+            {
                 // Do not analyze linq methods that contain diagnostics.
                 return;
             }
@@ -162,7 +171,8 @@ namespace Microsoft.CodeAnalysis.SimplifyLinqExpression
             if (
                 context.Operation is not IInvocationOperation invocation
                 || !IsWhereLinqMethod(invocation)
-            ) {
+            )
+            {
                 // we only care about Where methods on linq expressions
                 return;
             }
@@ -170,7 +180,8 @@ namespace Microsoft.CodeAnalysis.SimplifyLinqExpression
             if (
                 TryGetNextInvocationInChain(invocation) is not IInvocationOperation nextInvocation
                 || !IsInvocationNonEnumerableReturningLinqMethod(nextInvocation)
-            ) {
+            )
+            {
                 // Invocation is not part of a chain of invocations (i.e. Where(x => x is not null).First())
                 return;
             }
@@ -178,14 +189,16 @@ namespace Microsoft.CodeAnalysis.SimplifyLinqExpression
             if (
                 TryGetSymbolOfMemberAccess(invocation) is not INamedTypeSymbol targetTypeSymbol
                 || TryGetMethodName(nextInvocation) is not string name
-            ) {
+            )
+            {
                 return;
             }
 
             if (
                 !targetTypeSymbol.Equals(enumerableType, SymbolEqualityComparer.Default)
                 && targetTypeSymbol.MemberNames.Contains(name)
-            ) {
+            )
+            {
                 // Do not offer to transpose if there is already a member on the collection named the same as the linq extension method
                 // example: list.Where(x => x != null).Count() cannot be changed to list.Count(x => x != null) as List<T> already has a member named Count
                 return;
@@ -228,7 +241,8 @@ namespace Microsoft.CodeAnalysis.SimplifyLinqExpression
                         is TMemberAccessExpressionSyntax memberAccess
                     && SyntaxFacts.GetExpressionOfMemberAccessExpression(memberAccess)
                         is SyntaxNode expression
-                ) {
+                )
+                {
                     return invocation.SemanticModel?.GetTypeInfo(expression).Type
                         as INamedTypeSymbol;
                 }
@@ -242,7 +256,8 @@ namespace Microsoft.CodeAnalysis.SimplifyLinqExpression
                     invocation.Syntax is TInvocationExpressionSyntax invocationNode
                     && SyntaxFacts.GetExpressionOfInvocationExpression(invocationNode)
                         is TMemberAccessExpressionSyntax memberAccess
-                ) {
+                )
+                {
                     return SyntaxFacts.GetNameOfMemberAccessExpression(memberAccess)
                         .GetText()
                         .ToString();

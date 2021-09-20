@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.Operations
         public DisposeOperationInfo(
             IMethodSymbol? disposeMethod,
             ImmutableArray<IArgumentOperation> disposeArguments
-        ) {
+        )
+        {
             DisposeMethod = disposeMethod;
             DisposeArguments = disposeArguments;
         }

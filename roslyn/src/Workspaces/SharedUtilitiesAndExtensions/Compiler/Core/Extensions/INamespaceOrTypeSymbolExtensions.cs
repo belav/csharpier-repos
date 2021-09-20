@@ -52,7 +52,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             IReadOnlyList<string> names1,
             IReadOnlyList<string> names2,
             bool placeSystemNamespaceFirst
-        ) {
+        )
+        {
             for (var i = 0; i < Math.Min(names1.Count, names2.Count); i++)
             {
                 var name1 = names1[i];
@@ -86,14 +87,16 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         private static void GetNameParts(
             INamespaceOrTypeSymbol? namespaceOrTypeSymbol,
             List<string> result
-        ) {
+        )
+        {
             if (
                 namespaceOrTypeSymbol == null
                 || (
                     namespaceOrTypeSymbol.IsNamespace
                     && ((INamespaceSymbol)namespaceOrTypeSymbol).IsGlobalNamespace
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -108,7 +111,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static IEnumerable<INamedTypeSymbol> GetAllTypes(
             this INamespaceOrTypeSymbol namespaceOrTypeSymbol,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var stack = new Stack<INamespaceOrTypeSymbol>();
             stack.Push(namespaceOrTypeSymbol);
 

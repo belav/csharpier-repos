@@ -24,7 +24,8 @@ namespace System.Web.Mvc.Routing
                 innerRoute.Constraints,
                 innerRoute.DataTokens,
                 innerRoute.RouteHandler
-            ) {
+            )
+        {
             if (innerRoute == null)
             {
                 throw Error.ArgumentNull("innerRoute");
@@ -42,7 +43,8 @@ namespace System.Web.Mvc.Routing
         public override VirtualPathData GetVirtualPath(
             RequestContext requestContext,
             RouteValueDictionary values
-        ) {
+        )
+        {
             return _innerRoute.GetVirtualPath(requestContext, values);
         }
     }

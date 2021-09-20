@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
         protected override bool IncludeAccessibility(
             IMethodSymbol method,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var declaration = (MethodDeclarationSyntax)method.DeclaringSyntaxReferences[
                 0
             ].GetSyntax(cancellationToken);
@@ -72,7 +73,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             CompletionItem completionItem,
             SyntaxTree tree,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var tokenSpanEnd = MemberInsertionCompletionItem.GetTokenSpanEnd(completionItem);
             return tree.FindTokenOnLeftOfPosition(tokenSpanEnd, cancellationToken);
         }
@@ -81,7 +83,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             SourceText text,
             int characterPosition,
             OptionSet options
-        ) {
+        )
+        {
             var ch = text[characterPosition];
             return ch == ' '
                 || (
@@ -111,7 +114,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             CancellationToken cancellationToken,
             out DeclarationModifiers modifiers,
             out SyntaxToken token
-        ) {
+        )
+        {
             var touchingToken = tree.FindTokenOnLeftOfPosition(position, cancellationToken);
             var targetToken = touchingToken.GetPreviousTokenIfTouchingWord(position);
             var text = tree.GetText(cancellationToken);
@@ -126,7 +130,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     targetToken.Kind() == SyntaxKind.IdentifierToken
                     && targetToken.HasMatchingText(SyntaxKind.PartialKeyword)
                 )
-            ) {
+            )
+            {
                 return !IsOnSameLine(touchingToken.GetNextToken(), touchingToken, text)
                     && VerifyModifiers(tree, position, cancellationToken, out modifiers);
             }
@@ -139,7 +144,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             int position,
             CancellationToken cancellationToken,
             out DeclarationModifiers modifiers
-        ) {
+        )
+        {
             var touchingToken = tree.FindTokenOnLeftOfPosition(position, cancellationToken);
             var token = touchingToken.GetPreviousToken();
 
@@ -168,7 +174,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             SyntaxToken syntaxToken,
             SyntaxToken touchingToken,
             SourceText text
-        ) {
+        )
+        {
             return !syntaxToken.IsKind(SyntaxKind.None)
                 && !touchingToken.IsKind(SyntaxKind.None)
                 && text.Lines.IndexOf(syntaxToken.SpanStart)

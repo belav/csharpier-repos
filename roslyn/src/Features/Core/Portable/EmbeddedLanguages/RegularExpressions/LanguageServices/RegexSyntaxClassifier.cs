@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
             SemanticModel semanticModel,
             ArrayBuilder<ClassifiedSpan> result,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (_info.StringLiteralTokenKind != token.RawKind)
             {
                 return;
@@ -53,7 +54,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
                     RegularExpressionsOptions.ColorizeRegexPatterns,
                     semanticModel.Language
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -88,7 +90,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
             RegexNode node,
             Visitor visitor,
             ArrayBuilder<ClassifiedSpan> result
-        ) {
+        )
+        {
             node.Accept(visitor);
 
             foreach (var child in node)
@@ -107,7 +110,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
         private static void AddTriviaClassifications(
             RegexToken token,
             ArrayBuilder<ClassifiedSpan> result
-        ) {
+        )
+        {
             foreach (var trivia in token.LeadingTrivia)
             {
                 AddTriviaClassifications(trivia, result);
@@ -117,7 +121,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
         private static void AddTriviaClassifications(
             RegexTrivia trivia,
             ArrayBuilder<ClassifiedSpan> result
-        ) {
+        )
+        {
             if (trivia.Kind == RegexKind.CommentTrivia && trivia.VirtualChars.Length > 0)
             {
                 result.Add(

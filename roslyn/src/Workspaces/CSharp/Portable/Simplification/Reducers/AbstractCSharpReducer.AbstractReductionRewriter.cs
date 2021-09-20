@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                 ParseOptions parseOptions,
                 OptionSet optionSet,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 ParseOptions = (CSharpParseOptions)parseOptions;
                 OptionSet = optionSet;
                 CancellationToken = cancellationToken;
@@ -176,7 +177,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                     CancellationToken,
                     SyntaxToken
                 > simplifier
-            ) {
+            )
+            {
                 this.CancellationToken.ThrowIfCancellationRequested();
 
                 return token.HasAnnotation(Simplifier.Annotation)
@@ -186,7 +188,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
 
             public override SyntaxNode VisitElementAccessExpression(
                 ElementAccessExpressionSyntax node
-            ) {
+            )
+            {
                 // Note that we prefer simplifying the argument list before the expression
                 var argumentList = (BracketedArgumentListSyntax)this.Visit(node.ArgumentList);
                 var expression = (ExpressionSyntax)this.Visit(node.Expression);
@@ -207,7 +210,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                 SyntaxNodeOrToken nodeOrToken,
                 SemanticModel semanticModel,
                 bool simplifyAllDescendants
-            ) {
+            )
+            {
                 this.SemanticModel = semanticModel;
                 this.alwaysSimplify = simplifyAllDescendants;
                 this.HasMoreWork = false;

@@ -59,7 +59,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public static void ParseAndValidate(
             string text,
             params DiagnosticDescription[] expectedErrors
-        ) {
+        )
+        {
             var parsedTree = ParseWithRoundTripCheck(text);
             var actualErrors = parsedTree.GetDiagnostics();
             actualErrors.Verify(expectedErrors);
@@ -69,7 +70,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             string text,
             CSharpParseOptions options,
             params DiagnosticDescription[] expectedErrors
-        ) {
+        )
+        {
             var parsedTree = ParseWithRoundTripCheck(text, options: options);
             var actualErrors = parsedTree.GetDiagnostics();
             actualErrors.Verify(expectedErrors);
@@ -78,7 +80,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public static void ParseAndValidateFirst(
             string text,
             DiagnosticDescription expectedFirstError
-        ) {
+        )
+        {
             var parsedTree = ParseWithRoundTripCheck(text);
             var actualErrors = parsedTree.GetDiagnostics();
             actualErrors.Take(1).Verify(expectedFirstError);
@@ -107,7 +110,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             string text,
             ParseOptions? options,
             params DiagnosticDescription[] expectedErrors
-        ) {
+        )
+        {
             var node = SyntaxFactory.ParseStatement(text, options: options);
             // we validate the text roundtrips
             Assert.Equal(text, node.ToFullString());
@@ -120,7 +124,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             string text,
             ParseOptions options,
             params DiagnosticDescription[] expectedErrors
-        ) {
+        )
+        {
             UsingDeclaration(
                 text,
                 offset: 0,
@@ -136,7 +141,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             ParseOptions? options = null,
             bool consumeFullText = true,
             params DiagnosticDescription[] expectedErrors
-        ) {
+        )
+        {
             var node = SyntaxFactory.ParseMemberDeclaration(text, offset, options, consumeFullText);
             Debug.Assert(node is object);
             if (consumeFullText)
@@ -154,7 +160,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             string text,
             ParseOptions? options,
             params DiagnosticDescription[] expectedErrors
-        ) {
+        )
+        {
             UsingNode(text, SyntaxFactory.ParseExpression(text, options: options), expectedErrors);
         }
 
@@ -162,7 +169,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             string text,
             CSharpSyntaxNode node,
             DiagnosticDescription[] expectedErrors
-        ) {
+        )
+        {
             // we validate the text roundtrips
             Assert.Equal(text, node.ToFullString());
             var actualErrors = node.GetDiagnostics();
@@ -203,7 +211,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             string text,
             CSharpParseOptions options,
             params DiagnosticDescription[] expectedErrors
-        ) {
+        )
+        {
             var node = ParseNode(text, options);
             UsingNode(text, node, expectedErrors);
             return node;
@@ -407,7 +416,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 while (
                     lexer.Lex(Syntax.InternalSyntax.LexerMode.Syntax) is var token
                     && token.Kind != SyntaxKind.EndOfFileToken
-                ) {
+                )
+                {
                     tokensBuilder.Add(token);
                 }
 

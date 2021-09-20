@@ -54,7 +54,8 @@ namespace Internal.Win32
             if (
                 errorCode == Interop.Errors.ERROR_FILE_NOT_FOUND
                 || errorCode == Interop.Errors.ERROR_FILENAME_EXCED_RANGE
-            ) {
+            )
+            {
                 if (throwOnMissingValue)
                 {
                     throw new ArgumentException(SR.Arg_RegSubKeyValueAbsent);
@@ -109,7 +110,8 @@ namespace Internal.Win32
             if (
                 ret == Interop.Errors.ERROR_ACCESS_DENIED
                 || ret == Interop.Errors.ERROR_BAD_IMPERSONATION_LEVEL
-            ) {
+            )
+            {
                 // We need to throw SecurityException here for compatibility reasons,
                 // although UnauthorizedAccessException will make more sense.
                 throw new SecurityException(SR.Security_RegistryPermission);
@@ -141,7 +143,8 @@ namespace Internal.Win32
                             null
                         )
                     ) != Interop.Errors.ERROR_NO_MORE_ITEMS
-                ) {
+                )
+                {
                     switch (result)
                     {
                         case Interop.Errors.ERROR_SUCCESS:
@@ -196,7 +199,8 @@ namespace Internal.Win32
                             null
                         )
                     ) != Interop.Errors.ERROR_NO_MORE_ITEMS
-                ) {
+                )
+                {
                     switch (result)
                     {
                         // The size is only ever reported back correctly in the case

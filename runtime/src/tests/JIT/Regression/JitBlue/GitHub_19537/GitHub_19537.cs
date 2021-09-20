@@ -318,7 +318,8 @@ public class Test
             float m42,
             float m43,
             float m44
-        ) {
+        )
+        {
             this.M11 = m11;
             this.M12 = m12;
             this.M13 = m13;

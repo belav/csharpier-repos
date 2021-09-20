@@ -1418,7 +1418,8 @@ public class Tests
         Func<object, Pair<double, int>, Pair<double, int>> del3 = delegate(
             object o,
             Pair<double, int> p
-        ) {
+        )
+        {
             return p;
         };
         var r1 = call_del<Pair<int, int>>(new Pair<int, int> { First = 1, Second = 2 }, del1);
@@ -2186,7 +2187,8 @@ public class Tests
             byte b6,
             byte b7,
             byte b8
-        ) {
+        )
+        {
             return b1 + b2 + b3 + b4 + b5 + b6 + b7 + b8;
         }
         public int SBytes(
@@ -2203,7 +2205,8 @@ public class Tests
             sbyte b2,
             sbyte b3,
             sbyte b4
-        ) {
+        )
+        {
             return b1 + b2 + b3 + b4;
         }
         public int Shorts(
@@ -2220,7 +2223,8 @@ public class Tests
             short b2,
             short b3,
             short b4
-        ) {
+        )
+        {
             return b1 + b2 + b3 + b4;
         }
         public int UShorts(
@@ -2237,7 +2241,8 @@ public class Tests
             ushort b2,
             ushort b3,
             ushort b4
-        ) {
+        )
+        {
             return b1 + b2 + b3 + b4;
         }
         public int Ints(
@@ -2254,7 +2259,8 @@ public class Tests
             int i2,
             int i3,
             int i4
-        ) {
+        )
+        {
             return i1 + i2 + i3 + i4;
         }
         public int UInts(
@@ -2271,7 +2277,8 @@ public class Tests
             uint i2,
             uint i3,
             uint i4
-        ) {
+        )
+        {
             return (int)(i1 + i2 + i3 + i4);
         }
         public int Structs(
@@ -2285,7 +2292,8 @@ public class Tests
             int a7,
             int dummy8,
             BStruct s
-        ) {
+        )
+        {
             return s.a + s.b + s.c + s.d;
         }
         public int Floats(
@@ -2302,7 +2310,8 @@ public class Tests
             double d10,
             float s11,
             float s12
-        ) {
+        )
+        {
             return (int)d9 + (int)d10 + (int)s11 + (int)s12;
         }
         public void Generic<T2>(
@@ -2320,7 +2329,8 @@ public class Tests
             T2 i2,
             T2 i3,
             T2 i4
-        ) {
+        )
+        {
             arr[0] = i1;
             arr[1] = i2;
             arr[2] = i3;
@@ -2414,7 +2424,8 @@ public class Tests
             string s12,
             string s13,
             T t
-        ) {
+        )
+        {
             return t;
         }
     }
@@ -2560,7 +2571,8 @@ public class Tests
             Func<TInput, TOutput> convert,
             TInput[] testValues,
             TOutput[] expectedValues
-        ) {
+        )
+        {
             MyAssert.Equal(expectedValues.Length, testValues.Length);
 
             for (int i = 0; i < testValues.Length; i++)

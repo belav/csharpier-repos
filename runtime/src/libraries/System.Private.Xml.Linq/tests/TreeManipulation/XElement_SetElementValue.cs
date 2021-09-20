@@ -267,7 +267,8 @@ namespace XLinqTests
             XName newName,
             string newValue,
             bool isCopy
-        ) {
+        )
+        {
             bool wasReplace = false;
             foreach (XNode node in parent.Nodes())
             {

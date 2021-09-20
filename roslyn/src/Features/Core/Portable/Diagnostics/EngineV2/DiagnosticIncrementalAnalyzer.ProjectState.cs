@@ -50,7 +50,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 Project project,
                 bool avoidLoadingData,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // make a copy of last result.
                 var lastResult = _lastResult;
                 Contract.ThrowIfFalse(lastResult.ProjectId == project.Id);
@@ -111,7 +112,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                                 cancellationToken
                             )
                             .ConfigureAwait(false)
-                    ) {
+                    )
+                    {
                         Debug.Assert(lastResult.Version == VersionStamp.Default);
                         // this can happen if we merged back active file diagnostics back to project state but
                         // project state didn't have diagnostics for the file yet. (since project state was staled)
@@ -128,7 +130,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                             cancellationToken
                         )
                         .ConfigureAwait(false)
-                ) {
+                )
+                {
                     // this can happen if SaveAsync is not yet called but active file merge happened. one of case is if user did build before the very first
                     // analysis happened.
                 }
@@ -144,7 +147,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 TextDocument document,
                 bool avoidLoadingData,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // make a copy of last result.
                 var lastResult = _lastResult;
                 Contract.ThrowIfFalse(lastResult.ProjectId == document.Project.Id);
@@ -191,7 +195,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                             cancellationToken
                         )
                         .ConfigureAwait(false)
-                ) {
+                )
+                {
                     Debug.Assert(lastResult.Version == VersionStamp.Default);
                     // this can happen if we merged back active file diagnostics back to project state but
                     // project state didn't have diagnostics for the file yet. (since project state was staled)
@@ -208,7 +213,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 Project project,
                 bool avoidLoadingData,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // make a copy of last result.
                 var lastResult = _lastResult;
                 Contract.ThrowIfFalse(lastResult.ProjectId == project.Id);
@@ -255,7 +261,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                             cancellationToken
                         )
                         .ConfigureAwait(false)
-                ) {
+                )
+                {
                     // this can happen if SaveAsync is not yet called but active file merge happened. one of case is if user did build before the very first
                     // analysis happened.
                 }
@@ -276,7 +283,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 Project project,
                 DiagnosticAnalysisResult result,
                 IPersistentStorageService? persistentService
-            ) {
+            )
+            {
                 Contract.ThrowIfTrue(result.IsAggregatedForm);
                 Contract.ThrowIfNull(result.DocumentIds);
 
@@ -359,7 +367,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 IPersistentStorageService persistentService,
                 ActiveFileState state,
                 TextDocument document
-            ) {
+            )
+            {
                 Contract.ThrowIfFalse(state.DocumentId == document.Id);
 
                 // merge active file state to project state
@@ -392,7 +401,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     && syntax.Version != VersionStamp.Default
                     && syntax.Version == semantic.Version
                     && syntax.Version == lastResult.Version
-                ) {
+                )
+                {
                     // all data is in sync already.
                     return;
                 }
@@ -449,7 +459,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 IPersistentStorageService persistentService,
                 Project project,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // loading data can be cancelled any time.
                 var version = await GetDiagnosticVersionAsync(project, cancellationToken)
                     .ConfigureAwait(false);
@@ -469,7 +480,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                                 cancellationToken
                             )
                             .ConfigureAwait(false)
-                    ) {
+                    )
+                    {
                         continue;
                     }
                 }
@@ -483,7 +495,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                             cancellationToken
                         )
                         .ConfigureAwait(false)
-                ) {
+                )
+                {
                     return DiagnosticAnalysisResult.CreateEmpty(project.Id, VersionStamp.Default);
                 }
 
@@ -494,7 +507,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 IPersistentStorageService persistentService,
                 TextDocument document,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // loading data can be cancelled any time.
                 var project = document.Project;
 
@@ -512,7 +526,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                             cancellationToken
                         )
                         .ConfigureAwait(false)
-                ) {
+                )
+                {
                     return DiagnosticAnalysisResult.CreateEmpty(project.Id, VersionStamp.Default);
                 }
 
@@ -523,7 +538,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 IPersistentStorageService persistentService,
                 Project project,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // loading data can be cancelled any time.
                 var version = await GetDiagnosticVersionAsync(project, cancellationToken)
                     .ConfigureAwait(false);
@@ -539,7 +555,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                             cancellationToken
                         )
                         .ConfigureAwait(false)
-                ) {
+                )
+                {
                     return DiagnosticAnalysisResult.CreateEmpty(project.Id, VersionStamp.Default);
                 }
 
@@ -554,7 +571,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 object key,
                 string stateKey,
                 ImmutableArray<DiagnosticData> diagnostics
-            ) {
+            )
+            {
                 Contract.ThrowIfFalse(document == null || document.Project == project);
 
                 // try to serialize it
@@ -569,7 +587,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                             CancellationToken.None
                         )
                         .ConfigureAwait(false)
-                ) {
+                )
+                {
                     // we succeeded saving it to persistent storage. remove it from in memory cache if it exists
                     RemoveInMemoryCacheEntry(key, stateKey);
                     return;
@@ -589,7 +608,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 TextDocument document,
                 Builder builder,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var success = true;
                 var project = document.Project;
                 var documentId = document.Id;
@@ -660,7 +680,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 Project project,
                 Builder builder,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var diagnostics = await DeserializeDiagnosticsAsync(
                         persistentService,
                         serializer,
@@ -688,13 +709,15 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 object key,
                 string stateKey,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Contract.ThrowIfFalse(document == null || document.Project == project);
 
                 if (
                     InMemoryStorage.TryGetValue(_owner.Analyzer, (key, stateKey), out var entry)
                     && serializer.Version == entry.Version
-                ) {
+                )
+                {
                     return ValueTaskFactory.FromResult(entry.Diagnostics);
                 }
 
@@ -757,7 +780,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     Project project,
                     VersionStamp version,
                     ImmutableHashSet<DocumentId>? documentIds = null
-                ) {
+                )
+                {
                     _project = project;
                     _version = version;
                     _documentIds = documentIds;
@@ -788,7 +812,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     >.Builder? locals,
                     DocumentId documentId,
                     ImmutableArray<DiagnosticData> diagnostics
-                ) {
+                )
+                {
                     if (_project.GetDocument(documentId)?.SupportsDiagnostics() == false)
                     {
                         return;

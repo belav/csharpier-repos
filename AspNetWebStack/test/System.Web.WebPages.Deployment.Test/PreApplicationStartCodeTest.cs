@@ -811,7 +811,8 @@ In order to use this site, specify a version in the site’s web.config file. Fo
         private static void VerifyVersionFile(
             TestBuildManager buildManager,
             Version webPagesVersion
-        ) {
+        )
+        {
             var content = Encoding.UTF8.GetString(buildManager.Stream.ToArray());
             Version version = Version.Parse(content);
             Assert.Equal(webPagesVersion, version);

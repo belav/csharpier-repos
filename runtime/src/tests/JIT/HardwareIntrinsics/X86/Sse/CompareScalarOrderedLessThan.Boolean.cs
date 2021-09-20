@@ -138,7 +138,8 @@ namespace JIT.HardwareIntrinsics.X86
                     (alignment != 32 && alignment != 16)
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfinArray2
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -212,14 +213,16 @@ namespace JIT.HardwareIntrinsics.X86
 
             public void RunStructFldScenario(
                 BooleanBinaryOpTest__CompareScalarOrderedLessThanBoolean testClass
-            ) {
+            )
+            {
                 var result = Sse.CompareScalarOrderedLessThan(_fld1, _fld2);
                 testClass.ValidateResult(_fld1, _fld2, result);
             }
 
             public void RunStructFldScenario_Load(
                 BooleanBinaryOpTest__CompareScalarOrderedLessThanBoolean testClass
-            ) {
+            )
+            {
                 fixed (Vector128<Single>* pFld1 = &_fld1)fixed (Vector128<Single>* pFld2 = &_fld2)
                 {
                     var result = Sse.CompareScalarOrderedLessThan(
@@ -421,7 +424,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             fixed (Vector128<Single>* pClsVar1 = &_clsVar1)fixed (
                 Vector128<Single>* pClsVar2 = &_clsVar2
-            ) {
+            )
+            {
                 var result = Sse.CompareScalarOrderedLessThan(
                     Sse.LoadVector128((Single*)(pClsVar1)),
                     Sse.LoadVector128((Single*)(pClsVar2))
@@ -482,7 +486,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             fixed (Vector128<Single>* pFld1 = &test._fld1)fixed (
                 Vector128<Single>* pFld2 = &test._fld2
-            ) {
+            )
+            {
                 var result = Sse.CompareScalarOrderedLessThan(
                     Sse.LoadVector128((Single*)(pFld1)),
                     Sse.LoadVector128((Single*)(pFld2))
@@ -580,7 +585,8 @@ namespace JIT.HardwareIntrinsics.X86
             Vector128<Single> op2,
             bool result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Single[] inArray1 = new Single[Op1ElementCount];
             Single[] inArray2 = new Single[Op2ElementCount];
 
@@ -595,7 +601,8 @@ namespace JIT.HardwareIntrinsics.X86
             void* op2,
             bool result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Single[] inArray1 = new Single[Op1ElementCount];
             Single[] inArray2 = new Single[Op2ElementCount];
 
@@ -618,7 +625,8 @@ namespace JIT.HardwareIntrinsics.X86
             Single[] right,
             bool result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if ((left[0] < right[0]) != result)

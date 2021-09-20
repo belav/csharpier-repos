@@ -231,7 +231,8 @@ namespace System.Security.Cryptography.Cng.Tests
             int keySize,
             string curveName,
             CngAlgorithm algorithm
-        ) {
+        )
+        {
             using (ECDsaCng cng = (ECDsaCng)ECDsaFactory.Create(keySize))
             {
                 Assert.Equal(keySize, cng.KeySize);

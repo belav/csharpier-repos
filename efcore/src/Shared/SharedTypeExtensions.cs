@@ -126,7 +126,8 @@ namespace System
                     || genericDefinition == typeof(Tuple<, , , , , , >)
                     || genericDefinition == typeof(Tuple<, , , , , , , >)
                     || genericDefinition == typeof(Tuple<, , , , , , , >)
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -149,7 +150,8 @@ namespace System
             this Type type,
             string name,
             params Type[] parameters
-        ) {
+        )
+        {
             var method = type.GetTypeInfo().GetMethod(name, parameters);
 
             if (method == null && parameters.Length == 0)
@@ -213,7 +215,8 @@ namespace System
             this Type type,
             string name,
             params Type[] parameters
-        ) {
+        )
+        {
             var method = type.GetTypeInfo().GetRuntimeMethod(name, parameters);
             if (method == null)
             {
@@ -298,7 +301,8 @@ namespace System
         {
             if (
                 propertyType.IsAssignableFrom(fieldType) || fieldType.IsAssignableFrom(propertyType)
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -313,7 +317,8 @@ namespace System
         public static IEnumerable<Type> GetGenericTypeImplementations(
             this Type type,
             Type interfaceOrBaseType
-        ) {
+        )
+        {
             var typeInfo = type.GetTypeInfo();
             if (!typeInfo.IsGenericTypeDefinition)
             {
@@ -325,7 +330,8 @@ namespace System
                     if (
                         baseType.IsGenericType
                         && baseType.GetGenericTypeDefinition() == interfaceOrBaseType
-                    ) {
+                    )
+                    {
                         yield return baseType;
                     }
                 }
@@ -376,7 +382,8 @@ namespace System
         public static IEnumerable<PropertyInfo> GetPropertiesInHierarchy(
             this Type type,
             string name
-        ) {
+        )
+        {
             var currentType = type;
             do
             {
@@ -386,7 +393,8 @@ namespace System
                     if (
                         propertyInfo.Name.Equals(name, StringComparison.Ordinal)
                         && !(propertyInfo.GetMethod ?? propertyInfo.SetMethod)!.IsStatic
-                    ) {
+                    )
+                    {
                         yield return propertyInfo;
                     }
                 }
@@ -406,7 +414,8 @@ namespace System
                 foreach (
                     var propertyInfo in currentType.GetRuntimeProperties()
                         .Where(pi => !(pi.GetMethod ?? pi.SetMethod)!.IsStatic)
-                ) {
+                )
+                {
                     yield return propertyInfo;
                 }
 
@@ -551,7 +560,8 @@ namespace System
             Type[] genericArguments,
             int length,
             bool fullName
-        ) {
+        )
+        {
             var offset = type.IsNested ? type.DeclaringType!.GetGenericArguments().Length : 0;
 
             if (fullName)

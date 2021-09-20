@@ -36,7 +36,8 @@ namespace Internal.Cryptography.Pal.AnyOS
                 X509Certificate2Collection originatorCerts,
                 X509Certificate2Collection extraStore,
                 out Exception? exception
-            ) {
+            )
+            {
                 // When encryptedContent is null Windows seems to decrypt the CEK first,
                 // then return a 0 byte answer.
 
@@ -100,7 +101,8 @@ namespace Internal.Cryptography.Pal.AnyOS
                 ReadOnlyMemory<byte>? content,
                 AlgorithmIdentifierAsn contentEncryptionAlgorithm,
                 out Exception? exception
-            ) {
+            )
+            {
                 if (content == null)
                 {
                     exception = null;
@@ -168,7 +170,8 @@ namespace Internal.Cryptography.Pal.AnyOS
                 byte[] cek,
                 AlgorithmIdentifierAsn contentEncryptionAlgorithm,
                 out Exception? exception
-            ) {
+            )
+            {
                 exception = null;
                 int encryptedContentLength = encryptedContent.Length;
                 byte[]? encryptedContentArray = CryptoPool.Rent(encryptedContentLength);

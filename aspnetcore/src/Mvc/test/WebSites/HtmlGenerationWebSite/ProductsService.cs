@@ -25,7 +25,8 @@ namespace HtmlGenerationWebSite
         public ProductsService(
             IMemoryCache memoryCache,
             ISignalTokenProviderService<Product> tokenProviderService
-        ) {
+        )
+        {
             _memoryCache = memoryCache;
             _tokenProviderService = tokenProviderService;
         }

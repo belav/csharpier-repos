@@ -86,7 +86,8 @@ namespace Microsoft.AspNetCore.Internal
                     Interlocked.CompareExchange(ref _callback, continuation, null),
                     _callbackCompleted
                 )
-            ) {
+            )
+            {
                 Task.Run(continuation);
             }
         }

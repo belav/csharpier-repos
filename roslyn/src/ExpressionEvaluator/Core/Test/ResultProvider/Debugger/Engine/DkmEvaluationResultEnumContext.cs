@@ -31,7 +31,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
             DkmStackWalkFrame StackFrame,
             DkmInspectionContext InspectionContext,
             DkmDataItem DataItem
-        ) {
+        )
+        {
             var enumContext = new DkmEvaluationResultEnumContext(Count, InspectionContext);
             if (DataItem != null)
             {
@@ -45,7 +46,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
             int startIndex,
             int count,
             DkmCompletionRoutine<DkmEvaluationEnumAsyncResult> completionRoutine
-        ) {
+        )
+        {
             InspectionContext.InspectionSession.InvokeResultProvider(
                 this,
                 MethodId.GetItems,

@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
             TextSpan span,
             int baseIndentation,
             AbstractFormattingRule? vbHelperFormattingRule = null
-        ) {
+        )
+        {
             _span = span;
             SetInnermostNodeForSpan(root, ref _span, out _token1, out _token2, out _commonNode);
 
@@ -36,7 +37,8 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
             List<IndentBlockOperation> list,
             SyntaxNode node,
             in NextIndentBlockOperationAction nextOperation
-        ) {
+        )
+        {
             // for the common node itself, return absolute indentation
             if (_commonNode == node)
             {
@@ -70,7 +72,8 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
             List<IndentBlockOperation> list,
             SyntaxNode node,
             in NextIndentBlockOperationAction nextOperation
-        ) {
+        )
+        {
             if (_vbHelperFormattingRule == null)
             {
                 base.AddIndentBlockOperations(list, node, in nextOperation);
@@ -134,7 +137,8 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
 
         private IndentBlockOperation CloneAndAdjustFormattingOperation(
             IndentBlockOperation operation
-        ) {
+        )
+        {
             switch (operation.Option & IndentBlockOption.PositionMask)
             {
                 case IndentBlockOption.RelativeToFirstTokenOnBaseTokenLine:
@@ -172,7 +176,8 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
             out SyntaxToken token1,
             out SyntaxToken token2,
             out SyntaxNode? commonNode
-        ) {
+        )
+        {
             commonNode = null;
 
             GetTokens(root, span, out token1, out token2);
@@ -192,7 +197,8 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
             TextSpan span,
             out SyntaxToken token1,
             out SyntaxToken token2
-        ) {
+        )
+        {
             // get tokens within given span
             token1 = root.FindToken(span.Start);
             token2 = root.FindTokenFromEnd(span.End);
@@ -214,7 +220,8 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
             TextSpan span,
             SyntaxToken token1,
             SyntaxToken token2
-        ) {
+        )
+        {
             var tree = token1.SyntaxTree;
             RoslynDebug.AssertNotNull(tree);
 

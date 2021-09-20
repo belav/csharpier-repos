@@ -71,7 +71,8 @@ namespace Microsoft.EntityFrameworkCore
 
         public static RelationalConnectionDependencies CreateDependencies(
             DbContextOptions options = null
-        ) {
+        )
+        {
             options ??=
                 new DbContextOptionsBuilder().UseSqlServer(
                     @"Server=(localdb)\MSSQLLocalDB;Database=SqlServerConnectionTest"
@@ -118,7 +119,8 @@ namespace Microsoft.EntityFrameworkCore
 
         private static IDbContextOptions CreateOptions(
             RelationalOptionsExtension optionsExtension = null
-        ) {
+        )
+        {
             var optionsBuilder = new DbContextOptionsBuilder();
 
             ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(

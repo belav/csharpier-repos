@@ -901,7 +901,8 @@ namespace System.Web.Helpers.Test
         private static void AssertBuiltChartAction(
             Chart chart,
             Action<UI.DataVisualization.Charting.Chart> action
-        ) {
+        )
+        {
             bool actionCalled = false;
             chart.ExecuteChartAction(
                 c =>

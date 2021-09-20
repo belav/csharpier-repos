@@ -12,9 +12,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
     public class NewtonsoftJsonInputFormatterTest
         : JsonInputFormatterTestBase<FormatterWebSite.Startup>
     {
-        public NewtonsoftJsonInputFormatterTest(
-            MvcTestFixture<FormatterWebSite.Startup> fixture
-        ) : base(fixture) { }
+        public NewtonsoftJsonInputFormatterTest(MvcTestFixture<FormatterWebSite.Startup> fixture)
+            : base(fixture) { }
 
         [Fact] // This test covers the 2.0 behavior. JSON.Net error messages are not preserved.
         public virtual async Task JsonInputFormatter_SuppliedJsonDeserializationErrorMessage()
@@ -43,7 +42,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task JsonInputFormatter_ReturnsBadRequest_ForEmptyRequestBody(
             string requestContentType,
             string jsonInput
-        ) {
+        )
+        {
             // Arrange
             var content = new StringContent(jsonInput, Encoding.UTF8, requestContentType);
 

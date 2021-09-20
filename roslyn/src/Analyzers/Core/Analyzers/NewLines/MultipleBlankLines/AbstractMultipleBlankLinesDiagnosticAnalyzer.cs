@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.NewLines.MultipleBlankLines
                     AnalyzersResources.ResourceManager,
                     typeof(AnalyzersResources)
                 )
-            ) {
+            )
+        {
             _syntaxFacts = syntaxFacts;
         }
 
@@ -59,7 +60,8 @@ namespace Microsoft.CodeAnalysis.NewLines.MultipleBlankLines
             ReportDiagnostic severity,
             SyntaxNode node,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             // Don't bother analyzing nodes that have syntax errors in them.
@@ -79,7 +81,8 @@ namespace Microsoft.CodeAnalysis.NewLines.MultipleBlankLines
             SyntaxTreeAnalysisContext context,
             ReportDiagnostic severity,
             SyntaxToken token
-        ) {
+        )
+        {
             if (token.ContainsDiagnostics)
                 return;
 

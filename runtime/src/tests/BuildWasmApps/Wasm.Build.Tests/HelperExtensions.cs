@@ -83,7 +83,8 @@ namespace Wasm.Build.Tests
         public static IEnumerable<IEnumerable<object?>> WithRunHosts(
             this IEnumerable<IEnumerable<object?>> data,
             RunHost hosts
-        ) {
+        )
+        {
             IEnumerable<object?> hostsEnumerable = hosts.Enumerate();
             if (hosts == RunHost.None)
                 return data.Select(d => d.Append((object?)Path.GetRandomFileName()));

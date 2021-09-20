@@ -38,7 +38,8 @@ namespace Castle.DynamicProxy.Tests.Interceptors
                     if (
                         (required.BadValue == null && args[i] == null)
                         || (required.BadValue != null && required.BadValue.Equals(args[i]))
-                    ) {
+                    )
+                    {
                         args[i] = required.DefaultValue;
                     }
                 }

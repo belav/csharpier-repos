@@ -70,7 +70,8 @@ namespace System.Web.Http.Controllers
                 Func<Task<HttpResponseMessage>>,
                 Task<HttpResponseMessage>
             > implementation
-        ) {
+        )
+        {
             Mock<IAuthorizationFilter> filterMock = new Mock<IAuthorizationFilter>();
             filterMock.Setup(
                     f =>

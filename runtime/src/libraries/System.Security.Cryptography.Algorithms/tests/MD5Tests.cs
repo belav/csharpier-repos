@@ -17,7 +17,8 @@ namespace System.Security.Cryptography.Hashing.Algorithms.Tests
             ReadOnlySpan<byte> source,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             return MD5.TryHashData(source, destination, out bytesWritten);
         }
 

@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             ImmutableArray<Parameter> remainingEditableParameters,
             ExistingParameter? paramsParameter,
             int selectedIndex
-        ) {
+        )
+        {
             ThisParameter = thisParameter;
             ParametersWithoutDefaultValues = parametersWithoutDefaultValues;
             RemainingEditableParameters = remainingEditableParameters;
@@ -34,7 +35,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             ImmutableArray<Parameter> parameters,
             bool isExtensionMethod,
             int selectedIndex
-        ) {
+        )
+        {
             var parametersList = parameters.ToList();
             ExistingParameter? thisParameter = null;
             var parametersWithoutDefaultValues = ArrayBuilder<Parameter>.GetInstance();

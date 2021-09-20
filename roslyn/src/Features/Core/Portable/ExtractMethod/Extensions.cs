@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
         public static ITypeSymbol? GetLambdaOrAnonymousMethodReturnType(
             this SemanticModel binding,
             SyntaxNode node
-        ) {
+        )
+        {
             var info = binding.GetSymbolInfo(node);
             if (info.Symbol == null)
             {

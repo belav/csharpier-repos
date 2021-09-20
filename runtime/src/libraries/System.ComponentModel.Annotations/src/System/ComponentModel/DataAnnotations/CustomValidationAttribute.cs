@@ -156,7 +156,8 @@ namespace System.ComponentModel.DataAnnotations
         protected override ValidationResult? IsValid(
             object? value,
             ValidationContext validationContext
-        ) {
+        )
+        {
             // If attribute is not valid, throw an exception right away to inform the developer
             ThrowIfAttributeNotWellFormed();
 
@@ -313,7 +314,8 @@ namespace System.ComponentModel.DataAnnotations
                 if (
                     (parameterInfos.Length != 2)
                     || (parameterInfos[1].ParameterType != typeof(ValidationContext))
-                ) {
+                )
+                {
                     return SR.Format(
                         SR.CustomValidationAttribute_Method_Signature,
                         Method,
@@ -360,7 +362,8 @@ namespace System.ComponentModel.DataAnnotations
                         !expectedValueType.IsGenericType
                         || expectedValueType.GetGenericTypeDefinition() != typeof(Nullable<>)
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 

@@ -101,7 +101,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.FullyQualify
             string containerName,
             bool resultingSymbolIsType,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var simpleName = (SimpleNameSyntax)node;
 
             var leadingTrivia = simpleName.GetLeadingTrivia();
@@ -130,7 +131,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.FullyQualify
                         Alias: null,
                         StaticKeyword: { RawKind: 0 }
                     } usingDirective
-            ) {
+            )
+            {
                 var newUsingDirective = usingDirective.WithStaticKeyword(
                         SyntaxFactory.Token(SyntaxKind.StaticKeyword)
                     )

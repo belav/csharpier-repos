@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
         public ActualApiResponseMetadata(
             ReturnStatementSyntax returnStatement,
             ITypeSymbol returnType
-        ) {
+        )
+        {
             ReturnStatement = returnStatement;
             ReturnType = returnType;
             _statusCode = null;
@@ -24,7 +25,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             ReturnStatementSyntax returnStatement,
             int statusCode,
             ITypeSymbol? returnType
-        ) {
+        )
+        {
             ReturnStatement = returnStatement;
             _statusCode = statusCode;
             ReturnType = returnType;

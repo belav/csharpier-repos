@@ -28,11 +28,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
             ITrackingSpan applicableToSpan,
             SignatureHelpItem signatureHelpItem,
             int selectedParameterIndex
-        ) {
+        )
+        {
             if (
                 selectedParameterIndex < -1
                 || selectedParameterIndex >= signatureHelpItem.Parameters.Length
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(nameof(selectedParameterIndex));
             }
 
@@ -238,7 +240,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
             IList<TaggedText> values,
             List<TaggedText> parts,
             List<TaggedText> prettyPrintedParts
-        ) {
+        )
+        {
             parts.AddRange(values);
             prettyPrintedParts.AddRange(values);
         }
@@ -247,7 +250,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
             string text,
             StringBuilder content,
             StringBuilder prettyPrintedContent
-        ) {
+        )
+        {
             content.Append(text);
             prettyPrintedContent.Append(text);
         }
@@ -255,7 +259,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
         private static IList<TaggedText> AddOptionalBrackets(
             bool isOptional,
             IList<TaggedText> list
-        ) {
+        )
+        {
             if (isOptional)
             {
                 var result = new List<TaggedText>();

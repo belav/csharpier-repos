@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared
             if (
                 string.IsNullOrWhiteSpace(link)
                 || !Uri.IsWellFormedUriString(link, UriKind.Absolute)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -56,7 +57,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared
             string? title,
             string? language,
             string? rawHelpLink
-        ) {
+        )
+        {
             if (string.IsNullOrWhiteSpace(diagnosticId))
             {
                 return null;

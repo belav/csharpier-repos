@@ -277,7 +277,8 @@ namespace System.ComponentModel.Tests
             if (
                 expected is InstanceDescriptor expectedDescriptor
                 && actual is InstanceDescriptor actualDescriptor
-            ) {
+            )
+            {
                 Assert.Equal(expectedDescriptor.MemberInfo, actualDescriptor.MemberInfo);
                 Assert.Equal(expectedDescriptor.Arguments, actualDescriptor.Arguments);
                 Assert.Equal(expectedDescriptor.IsComplete, actualDescriptor.IsComplete);
@@ -309,7 +310,8 @@ namespace System.ComponentModel.Tests
                 object source,
                 object expected,
                 CultureInfo culture = null
-            ) {
+            )
+            {
                 return new ConvertTest
                 {
                     Source = source,
@@ -329,8 +331,9 @@ namespace System.ComponentModel.Tests
             public static ConvertTest Throws<TNetCoreException, TNetFrameworkException>(
                 object source,
                 CultureInfo culture = null
-            ) where TNetCoreException : Exception
-              where TNetFrameworkException : Exception
+            )
+                where TNetCoreException : Exception
+                where TNetFrameworkException : Exception
             {
                 return new ConvertTest
                 {
@@ -346,7 +349,8 @@ namespace System.ComponentModel.Tests
                 object source,
                 Type destinationType = null,
                 CultureInfo culture = null
-            ) {
+            )
+            {
                 return new ConvertTest
                 {
                     Source = source,

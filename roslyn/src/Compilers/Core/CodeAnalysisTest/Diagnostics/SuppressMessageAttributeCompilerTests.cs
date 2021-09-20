@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
             DiagnosticAnalyzer[] analyzers,
             DiagnosticDescription[] diagnostics,
             string rootNamespace = null
-        ) {
+        )
+        {
             Assert.True(
                 analyzers != null && analyzers.Length > 0,
                 "Must specify at least one diagnostic analyzer to test suppression"
@@ -85,7 +86,8 @@ namespace System.Diagnostics.CodeAnalysis
             string source,
             string language,
             string rootNamespace
-        ) {
+        )
+        {
             string fileName = language == LanguageNames.CSharp ? "Test.cs" : "Test.vb";
             string projectName = "TestProject";
             var references = s_references.Value;

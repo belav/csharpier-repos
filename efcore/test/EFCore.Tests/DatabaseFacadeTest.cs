@@ -190,7 +190,8 @@ namespace Microsoft.EntityFrameworkCore
             public Task CreateSavepointAsync(
                 string name,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 CreateSavepointCalls++;
                 return Task.CompletedTask;
             }
@@ -200,7 +201,8 @@ namespace Microsoft.EntityFrameworkCore
             public Task RollbackToSavepointAsync(
                 string name,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 RollbackSavepointCalls++;
                 return Task.CompletedTask;
             }
@@ -210,7 +212,8 @@ namespace Microsoft.EntityFrameworkCore
             public Task ReleaseSavepointAsync(
                 string name,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 ReleaseSavepointCalls++;
                 return Task.CompletedTask;
             }

@@ -24,7 +24,8 @@ namespace Microsoft.Extensions.DependencyModel
             string application,
             string sharedRuntime,
             IEnumerable<string> nonApplicationPaths
-        ) {
+        )
+        {
             Application = application;
             SharedRuntime = sharedRuntime;
             NonApplicationPaths = nonApplicationPaths ?? Enumerable.Empty<string>();

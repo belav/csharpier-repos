@@ -64,7 +64,8 @@ namespace AnalyzerRunner
                 !incrementalAnalyzerRunner.HasAnalyzers
                 && !diagnosticAnalyzerRunner.HasAnalyzers
                 && !codeRefactoringRunner.HasRefactorings
-            ) {
+            )
+            {
                 WriteLine("No analyzers found", ConsoleColor.Red);
                 PrintHelp();
                 return;
@@ -148,7 +149,8 @@ namespace AnalyzerRunner
         private static async Task ShowCompilerDiagnosticsAsync(
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var projectIds = solution.ProjectIds;
 
             foreach (var projectId in projectIds)
@@ -206,7 +208,8 @@ namespace AnalyzerRunner
         private static void ShowSolutionStatistics(
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var projects = solution.Projects.Where(
                     project =>
                         project.Language == LanguageNames.CSharp
@@ -227,7 +230,8 @@ namespace AnalyzerRunner
         private static Statistic GetSolutionStatistics(
             IEnumerable<Project> projects,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var sums = new ConcurrentBag<Statistic>();
 
             Parallel.ForEach(
@@ -254,7 +258,8 @@ namespace AnalyzerRunner
         private static async Task<Statistic> GetSolutionStatisticsAsync(
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var tree = await document.GetSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
 
             var root = await tree.GetRootAsync(cancellationToken).ConfigureAwait(false);

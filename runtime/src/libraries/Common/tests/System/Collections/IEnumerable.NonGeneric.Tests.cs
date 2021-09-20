@@ -141,7 +141,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void IEnumerable_NonGeneric_Enumerator_MoveNext_ModifiedBeforeEnumeration_ThrowsInvalidOperationException(
             int count
-        ) {
+        )
+        {
             Assert.All(
                 GetModifyEnumerables(ModifyEnumeratorThrows),
                 ModifyEnumerable =>
@@ -158,7 +159,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void IEnumerable_NonGeneric_Enumerator_MoveNext_ModifiedDuringEnumeration_ThrowsInvalidOperationException(
             int count
-        ) {
+        )
+        {
             Assert.All(
                 GetModifyEnumerables(ModifyEnumeratorThrows),
                 ModifyEnumerable =>
@@ -177,7 +179,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void IEnumerable_NonGeneric_Enumerator_MoveNext_ModifiedAfterEnumeration_ThrowsInvalidOperationException(
             int count
-        ) {
+        )
+        {
             Assert.All(
                 GetModifyEnumerables(ModifyEnumeratorThrows),
                 ModifyEnumerable =>
@@ -210,7 +213,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void IEnumerable_NonGeneric_Enumerator_Current_ReturnsSameValueOnRepeatedCalls(
             int count
-        ) {
+        )
+        {
             IEnumerator enumerator = NonGenericIEnumerableFactory(count).GetEnumerator();
             while (enumerator.MoveNext())
             {
@@ -225,7 +229,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void IEnumerable_NonGeneric_Enumerator_Current_ReturnsSameObjectsOnDifferentEnumerators(
             int count
-        ) {
+        )
+        {
             // Ensures that the elements returned from enumeration are exactly the same collection of
             // elements returned from a previous enumeration
             IEnumerable enumerable = NonGenericIEnumerableFactory(count);
@@ -272,7 +277,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public virtual void Enumerator_Current_ModifiedDuringEnumeration_UndefinedBehavior(
             int count
-        ) {
+        )
+        {
             Assert.All(
                 GetModifyEnumerables(ModifyEnumeratorThrows),
                 ModifyEnumerable =>
@@ -310,7 +316,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void IEnumerable_NonGeneric_Enumerator_Reset_ModifiedBeforeEnumeration_ThrowsInvalidOperationException(
             int count
-        ) {
+        )
+        {
             Assert.All(
                 GetModifyEnumerables(ModifyEnumeratorThrows),
                 ModifyEnumerable =>
@@ -327,7 +334,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void IEnumerable_NonGeneric_Enumerator_Reset_ModifiedDuringEnumeration_ThrowsInvalidOperationException(
             int count
-        ) {
+        )
+        {
             Assert.All(
                 GetModifyEnumerables(ModifyEnumeratorThrows),
                 ModifyEnumerable =>
@@ -346,7 +354,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void IEnumerable_NonGeneric_Enumerator_Reset_ModifiedAfterEnumeration_ThrowsInvalidOperationException(
             int count
-        ) {
+        )
+        {
             Assert.All(
                 GetModifyEnumerables(ModifyEnumeratorThrows),
                 ModifyEnumerable =>

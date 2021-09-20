@@ -67,7 +67,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual string? SetColumnName(
             string? columnName,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             EnsureMutable();
 
             _columnName = columnName;
@@ -104,7 +105,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public static IRelationalPropertyOverrides? Find(
             IReadOnlyProperty property,
             in StoreObjectIdentifier storeObject
-        ) {
+        )
+        {
             var tableOverrides = (SortedDictionary<
                 StoreObjectIdentifier,
                 IRelationalPropertyOverrides
@@ -124,7 +126,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public static RelationalPropertyOverrides GetOrCreate(
             IMutableProperty property,
             in StoreObjectIdentifier storeObject
-        ) {
+        )
+        {
             var tableOverrides = (SortedDictionary<
                 StoreObjectIdentifier,
                 IRelationalPropertyOverrides

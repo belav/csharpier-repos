@@ -160,7 +160,8 @@ namespace BenchmarksGame
             byte b,
             byte nb,
             long mask
-        ) {
+        )
+        {
             if (nb == b)
             {
                 Wrapper w;
@@ -235,7 +236,8 @@ namespace BenchmarksGame
             int l,
             long mask,
             Func<Dictionary<long, Wrapper>, string> summary
-        ) {
+        )
+        {
             return Task.Factory.ContinueWhenAll(
                 new[]
                 {
@@ -260,7 +262,8 @@ namespace BenchmarksGame
             int fragmentLength,
             int[] expected,
             ref bool ok
-        ) {
+        )
+        {
             var sb = new StringBuilder();
             double percent = 100.0 / freq.Values.Sum(i => i.v);
             int idx = 0;
@@ -286,7 +289,8 @@ namespace BenchmarksGame
             string fragment,
             int expected,
             ref bool ok
-        ) {
+        )
+        {
             long key = 0;
             for (int i = 0; i < fragment.Length; ++i)
                 key = (key << 2) | tonum[fragment[i]];

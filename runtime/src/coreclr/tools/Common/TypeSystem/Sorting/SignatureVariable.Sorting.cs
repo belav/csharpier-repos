@@ -11,7 +11,8 @@ namespace Internal.TypeSystem
         protected internal sealed override int CompareToImpl(
             TypeDesc other,
             TypeSystemComparer comparer
-        ) {
+        )
+        {
             return ((SignatureVariable)other).Index - Index;
         }
     }

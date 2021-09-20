@@ -28,7 +28,8 @@ namespace Microsoft.WebAssembly.Diagnostics
             SessionId session_id,
             int scope_id,
             ILogger logger
-        ) {
+        )
+        {
             sessionId = session_id;
             scopeId = scope_id;
             this.proxy = proxy;

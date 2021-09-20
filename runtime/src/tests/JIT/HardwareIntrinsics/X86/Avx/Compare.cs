@@ -34,7 +34,8 @@ namespace IntelHardwareIntrinsicTest
                         new double[4] { 1, 1, 50, 0 },
                         new double[4]
                     )
-                ) {
+                )
+                {
                     var vf1 = Unsafe.Read<Vector256<float>>(floatTable.inArray1Ptr);
                     var vf2 = Unsafe.Read<Vector256<float>>(floatTable.inArray2Ptr);
                     var vf3 = Avx.Compare(vf1, vf2, FloatComparisonMode.OrderedEqualNonSignaling);
@@ -50,7 +51,8 @@ namespace IntelHardwareIntrinsicTest
                         if (
                             BitConverter.SingleToInt32Bits(floatTable.outArray[i])
                             != (floatTable.inArray1[i] == floatTable.inArray2[i] ? -1 : 0)
-                        ) {
+                        )
+                        {
                             Console.WriteLine("Avx Compare failed on float:");
                             foreach (var item in floatTable.outArray)
                             {
@@ -66,7 +68,8 @@ namespace IntelHardwareIntrinsicTest
                         if (
                             BitConverter.DoubleToInt64Bits(doubleTable.outArray[i])
                             != (doubleTable.inArray1[i] == doubleTable.inArray2[i] ? -1 : 0)
-                        ) {
+                        )
+                        {
                             Console.WriteLine("Avx Compare failed on double:");
                             foreach (var item in doubleTable.outArray)
                             {
@@ -100,7 +103,8 @@ namespace IntelHardwareIntrinsicTest
                         if (
                             BitConverter.SingleToInt32Bits(floatTable.outArray[i])
                             != (floatTable.inArray1[i] == floatTable.inArray2[i] ? -1 : 0)
-                        ) {
+                        )
+                        {
                             Console.WriteLine("Avx Compare Vector128 failed on float:");
                             foreach (var item in floatTable.outArray)
                             {
@@ -116,7 +120,8 @@ namespace IntelHardwareIntrinsicTest
                         if (
                             BitConverter.DoubleToInt64Bits(doubleTable.outArray[i])
                             != (doubleTable.inArray1[i] == doubleTable.inArray2[i] ? -1 : 0)
-                        ) {
+                        )
+                        {
                             Console.WriteLine("Avx Compare Vector128 failed on double:");
                             foreach (var item in doubleTable.outArray)
                             {

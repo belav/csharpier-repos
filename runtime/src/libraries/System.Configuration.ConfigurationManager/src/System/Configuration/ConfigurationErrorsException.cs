@@ -63,11 +63,8 @@ namespace System.Configuration
         public ConfigurationErrorsException(string message, XmlReader reader)
             : this(message, null, GetFilename(reader), GetLineNumber(reader)) { }
 
-        public ConfigurationErrorsException(
-            string message,
-            Exception inner,
-            XmlReader reader
-        ) : this(message, inner, GetFilename(reader), GetLineNumber(reader)) { }
+        public ConfigurationErrorsException(string message, Exception inner, XmlReader reader)
+            : this(message, inner, GetFilename(reader), GetLineNumber(reader)) { }
 
         internal ConfigurationErrorsException(string message, IConfigErrorInfo errorInfo)
             : this(
@@ -81,12 +78,13 @@ namespace System.Configuration
             string message,
             Exception inner,
             IConfigErrorInfo errorInfo
-        ) : this(
-            message,
-            inner,
-            GetConfigErrorInfoFilename(errorInfo),
-            GetConfigErrorInfoLineNumber(errorInfo)
-        ) { }
+        )
+            : this(
+                message,
+                inner,
+                GetConfigErrorInfoFilename(errorInfo),
+                GetConfigErrorInfoLineNumber(errorInfo)
+            ) { }
 
         internal ConfigurationErrorsException(ConfigurationException e)
             : this(e?.BareMessage, e?.InnerException, e?.Filename, e?.Line ?? 0) { }
@@ -110,10 +108,8 @@ namespace System.Configuration
             coll.CopyTo(_errors, 0);
         }
 
-        protected ConfigurationErrorsException(
-            SerializationInfo info,
-            StreamingContext context
-        ) : base(info, context)
+        protected ConfigurationErrorsException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
             int firstLine;
             int count;
@@ -216,7 +212,8 @@ namespace System.Configuration
 
         private static ConfigurationException GetFirstException(
             ICollection<ConfigurationException> coll
-        ) {
+        )
+        {
             foreach (ConfigurationException e in coll)
                 return e;
 

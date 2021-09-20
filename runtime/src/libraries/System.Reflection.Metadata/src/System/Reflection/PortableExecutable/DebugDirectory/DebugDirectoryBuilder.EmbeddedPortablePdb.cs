@@ -21,7 +21,8 @@ namespace System.Reflection.PortableExecutable
         public void AddEmbeddedPortablePdbEntry(
             BlobBuilder debugMetadata,
             ushort portablePdbVersion
-        ) {
+        )
+        {
             if (debugMetadata == null)
             {
                 Throw.ArgumentNull(nameof(debugMetadata));
@@ -45,7 +46,8 @@ namespace System.Reflection.PortableExecutable
         private static int WriteEmbeddedPortablePdbData(
             BlobBuilder builder,
             BlobBuilder debugMetadata
-        ) {
+        )
+        {
             int start = builder.Count;
 
             // header (signature, decompressed size):
@@ -60,7 +62,8 @@ namespace System.Reflection.PortableExecutable
                     CompressionLevel.Optimal,
                     leaveOpen: true
                 )
-            ) {
+            )
+            {
                 foreach (var blob in debugMetadata.GetBlobs())
                 {
                     var segment = blob.GetBytes();

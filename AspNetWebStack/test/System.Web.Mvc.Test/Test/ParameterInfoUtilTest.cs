@@ -123,7 +123,8 @@ namespace System.Web.Mvc.Test
         private static void DefaultValueAttributeHelper<TParam>(
             TParam expectedValue,
             string paramName
-        ) {
+        )
+        {
             ParameterTestHelper<TParam>(expectedValue, paramName, "AttributeDefaultValues");
         }
 
@@ -136,7 +137,8 @@ namespace System.Web.Mvc.Test
             TParam expectedValue,
             string paramName,
             string actionMethodName
-        ) {
+        )
+        {
             ParameterInfo pInfo = typeof(MyController).GetMethod(actionMethodName)
                 .GetParameters()
                 .Single(p => p.Name == paramName);

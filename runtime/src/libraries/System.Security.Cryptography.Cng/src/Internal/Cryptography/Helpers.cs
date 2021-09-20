@@ -81,7 +81,8 @@ namespace Internal.Cryptography
             this SafeNCryptHandle ncryptHandle,
             string propertyName,
             CngPropertyOptions options
-        ) {
+        )
+        {
             unsafe
             {
                 int numBytesNeeded;
@@ -128,7 +129,8 @@ namespace Internal.Cryptography
             this SafeNCryptHandle ncryptHandle,
             string propertyName,
             CngPropertyOptions options
-        ) {
+        )
+        {
             byte[]? value = ncryptHandle.GetProperty(propertyName, options);
             if (value == null)
                 return null; // .NET Framework compat: return null if key not present.
@@ -152,7 +154,8 @@ namespace Internal.Cryptography
             this SafeNCryptHandle ncryptHandle,
             string propertyName,
             CngPropertyOptions options
-        ) {
+        )
+        {
             byte[]? value = ncryptHandle.GetProperty(propertyName, options);
             if (value == null)
                 return 0; // .NET Framework compat: return 0 if key not present.
@@ -167,7 +170,8 @@ namespace Internal.Cryptography
             this SafeNCryptHandle ncryptHandle,
             string propertyName,
             CngPropertyOptions options
-        ) {
+        )
+        {
             unsafe
             {
                 int numBytesNeeded;
@@ -194,7 +198,8 @@ namespace Internal.Cryptography
         public static void SetExportPolicy(
             this SafeNCryptKeyHandle keyHandle,
             CngExportPolicies exportPolicy
-        ) {
+        )
+        {
             unsafe
             {
                 ErrorCode errorCode = Interop.NCrypt.NCryptSetProperty(

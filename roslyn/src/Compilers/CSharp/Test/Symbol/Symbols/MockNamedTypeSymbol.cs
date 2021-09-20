@@ -153,7 +153,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             string name,
             IEnumerable<Symbol> children,
             TypeKind kind = TypeKind.Class
-        ) {
+        )
+        {
             _name = name;
             _children = children;
             _typeKind = kind;
@@ -204,7 +205,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         internal override ImmutableArray<NamedTypeSymbol> InterfacesNoUseSiteDiagnostics(
             ConsList<TypeSymbol> basesBeingResolved
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -215,13 +217,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         internal override NamedTypeSymbol GetDeclaredBaseType(
             ConsList<TypeSymbol> basesBeingResolved
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
         internal override ImmutableArray<NamedTypeSymbol> GetDeclaredInterfaces(
             ConsList<TypeSymbol> basesBeingResolved
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 

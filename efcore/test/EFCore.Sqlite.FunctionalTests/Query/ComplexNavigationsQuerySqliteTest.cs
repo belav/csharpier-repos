@@ -11,9 +11,8 @@ namespace Microsoft.EntityFrameworkCore.Query
     public class ComplexNavigationsQuerySqliteTest
         : ComplexNavigationsQueryRelationalTestBase<ComplexNavigationsQuerySqliteFixture>
     {
-        public ComplexNavigationsQuerySqliteTest(
-            ComplexNavigationsQuerySqliteFixture fixture
-        ) : base(fixture) { }
+        public ComplexNavigationsQuerySqliteTest(ComplexNavigationsQuerySqliteFixture fixture)
+            : base(fixture) { }
 
         [ConditionalTheory(Skip = "Issue #17230")]
         public override Task Include_inside_subquery(bool async)

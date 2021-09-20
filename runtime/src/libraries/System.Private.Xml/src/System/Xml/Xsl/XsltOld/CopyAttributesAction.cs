@@ -34,7 +34,8 @@ namespace System.Xml.Xsl.XsltOld
                     case Initialized:
                         if (
                             !frame.Node!.HasAttributes || frame.Node.MoveToFirstAttribute() == false
-                        ) {
+                        )
+                        {
                             frame.Finished();
                             break;
                         }

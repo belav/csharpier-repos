@@ -200,7 +200,8 @@ namespace System.Threading.Tests
             EventResetMode mode,
             EventWaitHandleRights rights,
             AccessControlType accessControl
-        ) {
+        )
+        {
             EventWaitHandleSecurity security = GetEventWaitHandleSecurity(
                 WellKnownSidType.BuiltinUsersSid,
                 rights,
@@ -410,7 +411,8 @@ namespace System.Threading.Tests
             WellKnownSidType sid,
             EventWaitHandleRights rights,
             AccessControlType accessControl
-        ) {
+        )
+        {
             EventWaitHandleSecurity security = new EventWaitHandleSecurity();
             SecurityIdentifier identity = new SecurityIdentifier(sid, null);
             EventWaitHandleAccessRule accessRule = new EventWaitHandleAccessRule(
@@ -428,7 +430,8 @@ namespace System.Threading.Tests
             string name,
             EventWaitHandleSecurity expectedSecurity,
             bool expectedCreatedNew
-        ) {
+        )
+        {
             EventWaitHandle handle = EventWaitHandleAcl.Create(
                 initialState,
                 mode,
@@ -447,7 +450,8 @@ namespace System.Threading.Tests
             string name,
             EventWaitHandleSecurity expectedSecurity,
             bool expectedCreatedNew
-        ) {
+        )
+        {
             EventWaitHandle eventHandle = CreateEventWaitHandle(
                 initialState,
                 mode,
@@ -480,7 +484,8 @@ namespace System.Threading.Tests
         private void VerifyEventWaitHandleSecurity(
             EventWaitHandleSecurity expectedSecurity,
             EventWaitHandleSecurity actualSecurity
-        ) {
+        )
+        {
             Assert.Equal(typeof(EventWaitHandleRights), expectedSecurity.AccessRightType);
             Assert.Equal(typeof(EventWaitHandleRights), actualSecurity.AccessRightType);
 
@@ -520,7 +525,8 @@ namespace System.Threading.Tests
         private bool AreAccessRulesEqual(
             EventWaitHandleAccessRule expectedRule,
             EventWaitHandleAccessRule actualRule
-        ) {
+        )
+        {
             return expectedRule.AccessControlType == actualRule.AccessControlType
                 && expectedRule.EventWaitHandleRights == actualRule.EventWaitHandleRights
                 && expectedRule.InheritanceFlags == actualRule.InheritanceFlags

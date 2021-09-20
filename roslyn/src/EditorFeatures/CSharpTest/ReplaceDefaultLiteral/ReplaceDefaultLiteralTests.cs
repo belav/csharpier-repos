@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDefaultLiteral
             string initialMarkup,
             string expectedMarkup,
             ImmutableArray<LanguageVersion> versions
-        ) {
+        )
+        {
             foreach (var version in versions)
             {
                 await TestInRegularAndScriptAsync(
@@ -59,7 +60,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDefaultLiteral
         private async Task TestMissingWithLanguageVersionsAsync(
             string initialMarkup,
             ImmutableArray<LanguageVersion> versions
-        ) {
+        )
+        {
             foreach (var version in versions)
             {
                 await TestMissingInRegularAndScriptAsync(
@@ -367,7 +369,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDefaultLiteral
         [InlineData("")]
         public async Task TestCSharp7_1_InCasePatternSwitchLabel_NotForInvalidType(
             string expression
-        ) {
+        )
+        {
             await TestMissingWithLanguageVersionsAsync(
                 $@"class C
 {{
@@ -587,7 +590,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDefaultLiteral
         [InlineData("[System.Flags] enum Enum { Some = 0 }")]
         public async Task TestCSharp7_1_InIsPattern_CustomEnum_WithoutSpecialMember(
             string enumDeclaration
-        ) {
+        )
+        {
             await TestWithLanguageVersionsAsync(
                 $@"class C
 {{
@@ -623,7 +627,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDefaultLiteral
         [InlineData("[System.FlagsAttribute] enum Enum { None = 0, Some = 1 }")]
         public async Task TestCSharp7_1_InIsPattern_CustomEnum_WithSpecialMember(
             string enumDeclaration
-        ) {
+        )
+        {
             await TestWithLanguageVersionsAsync(
                 $@"class C
 {{
@@ -698,7 +703,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDefaultLiteral
         [InlineData("delegate void Container<T>();")]
         public async Task TestCSharp7_1_InIsPattern_CustomReferenceTypeOfAnonymousType(
             string typeDeclaration
-        ) {
+        )
+        {
             await TestWithLanguageVersionsAsync(
                 $@"class C
 {{
@@ -747,7 +753,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDefaultLiteral
             string @namespace,
             string type,
             string member
-        ) {
+        )
+        {
             await TestWithLanguageVersionsAsync(
                 $@"class C
 {{
@@ -775,7 +782,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDefaultLiteral
             string @namespace,
             string type,
             string member
-        ) {
+        )
+        {
             await TestWithLanguageVersionsAsync(
                 $@"using {@namespace};
 class C
@@ -803,7 +811,8 @@ class C
         [InlineData("UIntPtr")]
         public async Task TestCSharp7_1_InIsPattern_NotForSpecialTypeUnqualifiedWithoutUsing(
             string type
-        ) {
+        )
+        {
             await TestMissingWithLanguageVersionsAsync(
                 $@"class C
 {{

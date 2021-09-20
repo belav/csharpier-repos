@@ -156,7 +156,8 @@ namespace System.Threading
             [AllowNull] ref T target,
             ref bool initialized,
             [NotNullIfNotNull("syncLock")] ref object? syncLock
-        ) {
+        )
+        {
             // Fast path.
             if (Volatile.Read(ref initialized))
             {
@@ -227,7 +228,8 @@ namespace System.Threading
             ref bool initialized,
             [NotNullIfNotNull("syncLock")] ref object? syncLock,
             Func<T> valueFactory
-        ) {
+        )
+        {
             // Fast path.
             if (Volatile.Read(ref initialized))
             {
@@ -255,7 +257,8 @@ namespace System.Threading
             ref bool initialized,
             [NotNull] ref object? syncLock,
             Func<T> valueFactory
-        ) {
+        )
+        {
             // Lazily initialize the lock if necessary and then double check if initialization is still required.
             lock (EnsureLockInitialized(ref syncLock))
             {

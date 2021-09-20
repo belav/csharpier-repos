@@ -21,22 +21,23 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             bool isImplicit,
             ImmutableArray<AttributeData> toTypeAttributes,
             string documentationCommentXml
-        ) : base(
-            containingType,
-            attributes,
-            declaredAccessibility,
-            modifiers,
-            returnType: toType,
-            refKind: RefKind.None,
-            explicitInterfaceImplementations: default,
-            name: isImplicit
-              ? WellKnownMemberNames.ImplicitConversionName
-              : WellKnownMemberNames.ExplicitConversionName,
-            typeParameters: ImmutableArray<ITypeParameterSymbol>.Empty,
-            parameters: ImmutableArray.Create(fromType),
-            returnTypeAttributes: toTypeAttributes,
-            documentationCommentXml
-        ) { }
+        )
+            : base(
+                containingType,
+                attributes,
+                declaredAccessibility,
+                modifiers,
+                returnType: toType,
+                refKind: RefKind.None,
+                explicitInterfaceImplementations: default,
+                name: isImplicit
+                  ? WellKnownMemberNames.ImplicitConversionName
+                  : WellKnownMemberNames.ExplicitConversionName,
+                typeParameters: ImmutableArray<ITypeParameterSymbol>.Empty,
+                parameters: ImmutableArray.Create(fromType),
+                returnTypeAttributes: toTypeAttributes,
+                documentationCommentXml
+            ) { }
 
         public override MethodKind MethodKind => MethodKind.Conversion;
     }

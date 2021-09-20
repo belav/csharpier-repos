@@ -536,7 +536,8 @@ namespace structinreg
                             || par.f != 6
                             || par.g != 7
                             || par.h != 8
-                        ) {
+                        )
+                        {
                             throw new System.Exception();
                         }
                     },
@@ -603,7 +604,8 @@ namespace structinreg
                             || par.g != 7
                             || par.h != 8
                             || par.i != 9
-                        ) {
+                        )
+                        {
                             throw new System.Exception();
                         }
                     },
@@ -675,7 +677,8 @@ namespace structinreg
                             || par.g != 7
                             || par.h != 8
                             || par.i != 9
-                        ) {
+                        )
+                        {
                             throw new System.Exception();
                         }
                     },
@@ -1000,7 +1003,8 @@ namespace structinreg
                             || par.f != 6
                             || par.g != 7
                             || par.h != 8
-                        ) {
+                        )
+                        {
                             throw new System.Exception();
                         }
                     },
@@ -1026,7 +1030,8 @@ namespace structinreg
                     || s10r.f != 6
                     || s10r.g != 7
                     || s10r.h != 8
-                ) {
+                )
+                {
                     throw new System.Exception();
                 }
 
@@ -1086,7 +1091,8 @@ namespace structinreg
                             || par.g != 7
                             || par.h != 8
                             || par.i != 9
-                        ) {
+                        )
+                        {
                             throw new System.Exception();
                         }
                     },
@@ -1114,7 +1120,8 @@ namespace structinreg
                     || s12r.g != 7
                     || s12r.h != 8
                     || s12r.i != 9
-                ) {
+                )
+                {
                     throw new System.Exception();
                 }
 
@@ -1177,7 +1184,8 @@ namespace structinreg
                             || par.g != 7
                             || par.h != 8
                             || par.i != 9
-                        ) {
+                        )
+                        {
                             throw new System.Exception();
                         }
                     },
@@ -1205,7 +1213,8 @@ namespace structinreg
                     || s15r.g != 7
                     || s15r.h != 8
                     || s15r.i != 9
-                ) {
+                )
+                {
                     throw new System.Exception();
                 }
 
@@ -1380,7 +1389,8 @@ namespace structinreg
                 || par2.y != 4
                 || par3.x != 5
                 || par3.y != 6
-            ) {
+            )
+            {
                 throw new System.Exception();
             }
         }

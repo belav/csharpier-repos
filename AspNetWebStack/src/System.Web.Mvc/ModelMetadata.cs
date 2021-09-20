@@ -50,7 +50,8 @@ namespace System.Web.Mvc
             Func<object> modelAccessor,
             Type modelType,
             string propertyName
-        ) {
+        )
+        {
             if (provider == null)
             {
                 throw new ArgumentNullException("provider");
@@ -273,7 +274,8 @@ namespace System.Web.Mvc
         public static ModelMetadata FromLambdaExpression<TParameter, TValue>(
             Expression<Func<TParameter, TValue>> expression,
             ViewDataDictionary<TParameter> viewData
-        ) {
+        )
+        {
             return FromLambdaExpression(expression, viewData, metadataProvider: null);
         }
 
@@ -281,7 +283,8 @@ namespace System.Web.Mvc
             Expression<Func<TParameter, TValue>> expression,
             ViewDataDictionary<TParameter> viewData,
             ModelMetadataProvider metadataProvider
-        ) {
+        )
+        {
             if (expression == null)
             {
                 throw new ArgumentNullException("expression");
@@ -359,7 +362,8 @@ namespace System.Web.Mvc
         private static ModelMetadata FromModel(
             ViewDataDictionary viewData,
             ModelMetadataProvider metadataProvider
-        ) {
+        )
+        {
             return viewData.ModelMetadata
                 ?? GetMetadataFromProvider(
                     null,
@@ -374,7 +378,8 @@ namespace System.Web.Mvc
         public static ModelMetadata FromStringExpression(
             string expression,
             ViewDataDictionary viewData
-        ) {
+        )
+        {
             return FromStringExpression(expression, viewData, metadataProvider: null);
         }
 
@@ -382,7 +387,8 @@ namespace System.Web.Mvc
             string expression,
             ViewDataDictionary viewData,
             ModelMetadataProvider metadataProvider
-        ) {
+        )
+        {
             if (expression == null)
             {
                 throw new ArgumentNullException("expression");
@@ -465,7 +471,8 @@ namespace System.Web.Mvc
             object container,
             Type containerType,
             ModelMetadataProvider metadataProvider
-        ) {
+        )
+        {
             metadataProvider = metadataProvider ?? ModelMetadataProviders.Current;
             if (containerType != null && !String.IsNullOrEmpty(propertyName))
             {

@@ -45,7 +45,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
             HtmlEncoder htmlEncoder,
             ViewContext viewContext,
             TextWriter writer
-        ) {
+        )
+        {
             if (viewComponentDescriptor == null)
             {
                 throw new ArgumentNullException(nameof(viewComponentDescriptor));

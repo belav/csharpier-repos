@@ -38,7 +38,8 @@ namespace System.Collections.ObjectModel.Tests
         [InlineData(int.MinValue)]
         public void Ctor_InvalidDictionaryCreationThreshold_ThrowsArgumentOutOfRangeException(
             int dictionaryCreationThreshold
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "dictionaryCreationThreshold",
                 () => new TestKeyedCollectionOfIKeyedItem<string, int>(dictionaryCreationThreshold)

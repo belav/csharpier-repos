@@ -49,7 +49,8 @@ namespace System.Runtime.Serialization
         public static void ThrowIfDeserializationInProgress(
             string switchSuffix,
             ref int cachedValue
-        ) {
+        )
+        {
             s_throwIfDeserializationInProgressWithSwitch?.Invoke(switchSuffix, ref cachedValue);
         }
     }

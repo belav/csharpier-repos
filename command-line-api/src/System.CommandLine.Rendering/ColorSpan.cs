@@ -12,7 +12,8 @@ namespace System.CommandLine.Rendering
             : base(
                 GetName(rgbColor) ?? throw new ArgumentNullException(nameof(rgbColor)),
                 ansiControlCode
-            ) {
+            )
+        {
             RgbColor = rgbColor;
         }
 

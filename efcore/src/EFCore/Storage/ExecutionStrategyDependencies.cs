@@ -57,7 +57,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             ICurrentDbContext currentContext,
             IDbContextOptions options,
             IDiagnosticsLogger<DbLoggerCategory.Infrastructure> logger
-        ) {
+        )
+        {
             Check.NotNull(currentContext, nameof(currentContext));
 
             Options = options;

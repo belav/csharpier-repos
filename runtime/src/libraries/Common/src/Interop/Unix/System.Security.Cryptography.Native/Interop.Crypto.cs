@@ -191,7 +191,8 @@ internal static partial class Interop
         internal static byte[] GetDynamicBuffer<THandle>(
             NegativeSizeReadMethod<THandle> method,
             THandle handle
-        ) {
+        )
+        {
             int negativeSize = method(handle, null, 0);
 
             if (negativeSize > 0)

@@ -73,7 +73,8 @@ namespace System.IO.Tests
                     FileAccess.Write,
                     FileAccess.Read
                 }
-            ) {
+            )
+            {
                 foreach (FileShare share in s_shares)
                 {
                     try
@@ -105,7 +106,8 @@ namespace System.IO.Tests
                                 FileAccess.Write,
                                 FileAccess.Read
                             }
-                        ) {
+                        )
+                        {
                             foreach (FileShare share in s_shares)
                             {
                                 string fileName = GetTestFilePath(i++);
@@ -167,7 +169,8 @@ namespace System.IO.Tests
                     FileAccess.Write,
                     FileAccess.Read
                 }
-            ) {
+            )
+            {
                 foreach (FileShare share in s_shares)
                 {
                     try
@@ -201,7 +204,8 @@ namespace System.IO.Tests
                     FileAccess.ReadWrite,
                     FileShare.None
                 )
-            ) {
+            )
+            {
                 fs.Write(new byte[] { 42 }, 0, 1);
                 fs.Flush();
                 FSAssert.ThrowsSharingViolation(

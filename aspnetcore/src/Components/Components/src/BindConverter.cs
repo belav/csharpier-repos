@@ -435,7 +435,8 @@ namespace Microsoft.AspNetCore.Components
             DateTime value,
             string? format,
             CultureInfo? culture
-        ) {
+        )
+        {
             if (format != null)
             {
                 return value.ToString(format, culture ?? CultureInfo.CurrentCulture);
@@ -489,7 +490,8 @@ namespace Microsoft.AspNetCore.Components
             DateTime? value,
             string? format,
             CultureInfo? culture
-        ) {
+        )
+        {
             if (value == null)
             {
                 return null;
@@ -506,7 +508,8 @@ namespace Microsoft.AspNetCore.Components
         private static string? FormatNullableDateTimeValueCore(
             DateTime? value,
             CultureInfo? culture
-        ) {
+        )
+        {
             if (value == null)
             {
                 return null;
@@ -555,7 +558,8 @@ namespace Microsoft.AspNetCore.Components
             DateTimeOffset value,
             string? format,
             CultureInfo? culture
-        ) {
+        )
+        {
             if (format != null)
             {
                 return value.ToString(format, culture ?? CultureInfo.CurrentCulture);
@@ -567,7 +571,8 @@ namespace Microsoft.AspNetCore.Components
         private static string FormatDateTimeOffsetValueCore(
             DateTimeOffset value,
             CultureInfo? culture
-        ) {
+        )
+        {
             return value.ToString(culture ?? CultureInfo.CurrentCulture);
         }
 
@@ -611,7 +616,8 @@ namespace Microsoft.AspNetCore.Components
             DateTimeOffset? value,
             string? format,
             CultureInfo? culture
-        ) {
+        )
+        {
             if (value == null)
             {
                 return null;
@@ -628,7 +634,8 @@ namespace Microsoft.AspNetCore.Components
         private static string? FormatNullableDateTimeOffsetValueCore(
             DateTimeOffset? value,
             CultureInfo? culture
-        ) {
+        )
+        {
             if (value == null)
             {
                 return null;
@@ -686,7 +693,8 @@ namespace Microsoft.AspNetCore.Components
             object? obj,
             CultureInfo? culture,
             out string? value
-        ) {
+        )
+        {
             // We expect the input to already be a string.
             value = (string?)obj;
             return true;
@@ -715,7 +723,8 @@ namespace Microsoft.AspNetCore.Components
             object? obj,
             CultureInfo? culture,
             out bool? value
-        ) {
+        )
+        {
             return ConvertToNullableBoolCore(obj, culture, out value);
         }
 
@@ -734,7 +743,8 @@ namespace Microsoft.AspNetCore.Components
             object? obj,
             CultureInfo? culture,
             out bool? value
-        ) {
+        )
+        {
             // We expect the input to already be a bool.
             value = (bool?)obj;
             return true;
@@ -763,7 +773,8 @@ namespace Microsoft.AspNetCore.Components
             object? obj,
             CultureInfo? culture,
             out int? value
-        ) {
+        )
+        {
             return ConvertToNullableIntCore(obj, culture, out value);
         }
 
@@ -786,7 +797,8 @@ namespace Microsoft.AspNetCore.Components
                     culture ?? CultureInfo.CurrentCulture,
                     out var converted
                 )
-            ) {
+            )
+            {
                 value = default;
                 return false;
             }
@@ -799,7 +811,8 @@ namespace Microsoft.AspNetCore.Components
             object? obj,
             CultureInfo? culture,
             out int? value
-        ) {
+        )
+        {
             var text = (string?)obj;
             if (string.IsNullOrEmpty(text))
             {
@@ -814,7 +827,8 @@ namespace Microsoft.AspNetCore.Components
                     culture ?? CultureInfo.CurrentCulture,
                     out var converted
                 )
-            ) {
+            )
+            {
                 value = default;
                 return false;
             }
@@ -846,7 +860,8 @@ namespace Microsoft.AspNetCore.Components
             object? obj,
             CultureInfo? culture,
             out long? value
-        ) {
+        )
+        {
             return ConvertToNullableLongCore(obj, culture, out value);
         }
 
@@ -869,7 +884,8 @@ namespace Microsoft.AspNetCore.Components
                     culture ?? CultureInfo.CurrentCulture,
                     out var converted
                 )
-            ) {
+            )
+            {
                 value = default;
                 return false;
             }
@@ -882,7 +898,8 @@ namespace Microsoft.AspNetCore.Components
             object? obj,
             CultureInfo? culture,
             out long? value
-        ) {
+        )
+        {
             var text = (string?)obj;
             if (string.IsNullOrEmpty(text))
             {
@@ -897,7 +914,8 @@ namespace Microsoft.AspNetCore.Components
                     culture ?? CultureInfo.CurrentCulture,
                     out var converted
                 )
-            ) {
+            )
+            {
                 value = default;
                 return false;
             }
@@ -929,7 +947,8 @@ namespace Microsoft.AspNetCore.Components
             object? obj,
             CultureInfo? culture,
             out short? value
-        ) {
+        )
+        {
             return ConvertToNullableShort(obj, culture, out value);
         }
 
@@ -952,7 +971,8 @@ namespace Microsoft.AspNetCore.Components
                     culture ?? CultureInfo.CurrentCulture,
                     out var converted
                 )
-            ) {
+            )
+            {
                 value = default;
                 return false;
             }
@@ -965,7 +985,8 @@ namespace Microsoft.AspNetCore.Components
             object? obj,
             CultureInfo? culture,
             out short? value
-        ) {
+        )
+        {
             var text = (string?)obj;
             if (string.IsNullOrEmpty(text))
             {
@@ -980,7 +1001,8 @@ namespace Microsoft.AspNetCore.Components
                     culture ?? CultureInfo.CurrentCulture,
                     out var converted
                 )
-            ) {
+            )
+            {
                 value = default;
                 return false;
             }
@@ -1012,7 +1034,8 @@ namespace Microsoft.AspNetCore.Components
             object? obj,
             CultureInfo? culture,
             out float? value
-        ) {
+        )
+        {
             return ConvertToNullableFloatCore(obj, culture, out value);
         }
 
@@ -1035,7 +1058,8 @@ namespace Microsoft.AspNetCore.Components
                     culture ?? CultureInfo.CurrentCulture,
                     out var converted
                 )
-            ) {
+            )
+            {
                 value = default;
                 return false;
             }
@@ -1054,7 +1078,8 @@ namespace Microsoft.AspNetCore.Components
             object? obj,
             CultureInfo? culture,
             out float? value
-        ) {
+        )
+        {
             var text = (string?)obj;
             if (string.IsNullOrEmpty(text))
             {
@@ -1069,7 +1094,8 @@ namespace Microsoft.AspNetCore.Components
                     culture ?? CultureInfo.CurrentCulture,
                     out var converted
                 )
-            ) {
+            )
+            {
                 value = default;
                 return false;
             }
@@ -1107,7 +1133,8 @@ namespace Microsoft.AspNetCore.Components
             object? obj,
             CultureInfo? culture,
             out double? value
-        ) {
+        )
+        {
             return ConvertToNullableDoubleCore(obj, culture, out value);
         }
 
@@ -1131,7 +1158,8 @@ namespace Microsoft.AspNetCore.Components
                     culture ?? CultureInfo.CurrentCulture,
                     out var converted
                 )
-            ) {
+            )
+            {
                 value = default;
                 return false;
             }
@@ -1150,7 +1178,8 @@ namespace Microsoft.AspNetCore.Components
             object? obj,
             CultureInfo? culture,
             out double? value
-        ) {
+        )
+        {
             var text = (string?)obj;
             if (string.IsNullOrEmpty(text))
             {
@@ -1165,7 +1194,8 @@ namespace Microsoft.AspNetCore.Components
                     culture ?? CultureInfo.CurrentCulture,
                     out var converted
                 )
-            ) {
+            )
+            {
                 value = default;
                 return false;
             }
@@ -1203,7 +1233,8 @@ namespace Microsoft.AspNetCore.Components
             object? obj,
             CultureInfo? culture,
             out decimal? value
-        ) {
+        )
+        {
             return ConvertToNullableDecimalCore(obj, culture, out value);
         }
 
@@ -1215,7 +1246,8 @@ namespace Microsoft.AspNetCore.Components
             object? obj,
             CultureInfo? culture,
             out decimal value
-        ) {
+        )
+        {
             var text = (string?)obj;
             if (string.IsNullOrEmpty(text))
             {
@@ -1230,7 +1262,8 @@ namespace Microsoft.AspNetCore.Components
                     culture ?? CultureInfo.CurrentCulture,
                     out var converted
                 )
-            ) {
+            )
+            {
                 value = default;
                 return false;
             }
@@ -1243,7 +1276,8 @@ namespace Microsoft.AspNetCore.Components
             object? obj,
             CultureInfo? culture,
             out decimal? value
-        ) {
+        )
+        {
             var text = (string?)obj;
             if (string.IsNullOrEmpty(text))
             {
@@ -1258,7 +1292,8 @@ namespace Microsoft.AspNetCore.Components
                     culture ?? CultureInfo.CurrentCulture,
                     out var converted
                 )
-            ) {
+            )
+            {
                 value = default;
                 return false;
             }
@@ -1278,7 +1313,8 @@ namespace Microsoft.AspNetCore.Components
             object? obj,
             CultureInfo? culture,
             out DateTime value
-        ) {
+        )
+        {
             return ConvertToDateTimeCore(obj, culture, out value);
         }
 
@@ -1295,7 +1331,8 @@ namespace Microsoft.AspNetCore.Components
             CultureInfo? culture,
             string format,
             out DateTime value
-        ) {
+        )
+        {
             return ConvertToDateTimeCore(obj, culture, format, out value);
         }
 
@@ -1310,7 +1347,8 @@ namespace Microsoft.AspNetCore.Components
             object? obj,
             CultureInfo? culture,
             out DateTime? value
-        ) {
+        )
+        {
             return ConvertToNullableDateTimeCore(obj, culture, out value);
         }
 
@@ -1327,7 +1365,8 @@ namespace Microsoft.AspNetCore.Components
             CultureInfo? culture,
             string format,
             out DateTime? value
-        ) {
+        )
+        {
             return ConvertToNullableDateTimeCore(obj, culture, format, out value);
         }
 
@@ -1343,7 +1382,8 @@ namespace Microsoft.AspNetCore.Components
             object? obj,
             CultureInfo? culture,
             out DateTime value
-        ) {
+        )
+        {
             return ConvertToDateTimeCore(obj, culture, format: null, out value);
         }
 
@@ -1352,7 +1392,8 @@ namespace Microsoft.AspNetCore.Components
             CultureInfo? culture,
             string? format,
             out DateTime value
-        ) {
+        )
+        {
             var text = (string?)obj;
             if (string.IsNullOrEmpty(text))
             {
@@ -1369,7 +1410,8 @@ namespace Microsoft.AspNetCore.Components
                     DateTimeStyles.None,
                     out var converted
                 )
-            ) {
+            )
+            {
                 value = converted;
                 return true;
             }
@@ -1381,7 +1423,8 @@ namespace Microsoft.AspNetCore.Components
                     DateTimeStyles.None,
                     out converted
                 )
-            ) {
+            )
+            {
                 value = converted;
                 return true;
             }
@@ -1394,7 +1437,8 @@ namespace Microsoft.AspNetCore.Components
             object? obj,
             CultureInfo? culture,
             out DateTime? value
-        ) {
+        )
+        {
             return ConvertToNullableDateTimeCore(obj, culture, format: null, out value);
         }
 
@@ -1403,7 +1447,8 @@ namespace Microsoft.AspNetCore.Components
             CultureInfo? culture,
             string? format,
             out DateTime? value
-        ) {
+        )
+        {
             var text = (string?)obj;
             if (string.IsNullOrEmpty(text))
             {
@@ -1420,7 +1465,8 @@ namespace Microsoft.AspNetCore.Components
                     DateTimeStyles.None,
                     out var converted
                 )
-            ) {
+            )
+            {
                 value = converted;
                 return true;
             }
@@ -1432,7 +1478,8 @@ namespace Microsoft.AspNetCore.Components
                     DateTimeStyles.None,
                     out converted
                 )
-            ) {
+            )
+            {
                 value = converted;
                 return true;
             }
@@ -1452,7 +1499,8 @@ namespace Microsoft.AspNetCore.Components
             object? obj,
             CultureInfo? culture,
             out DateTimeOffset value
-        ) {
+        )
+        {
             return ConvertToDateTimeOffsetCore(obj, culture, out value);
         }
 
@@ -1469,7 +1517,8 @@ namespace Microsoft.AspNetCore.Components
             CultureInfo? culture,
             string format,
             out DateTimeOffset value
-        ) {
+        )
+        {
             return ConvertToDateTimeOffsetCore(obj, culture, format, out value);
         }
 
@@ -1484,7 +1533,8 @@ namespace Microsoft.AspNetCore.Components
             object? obj,
             CultureInfo? culture,
             out DateTimeOffset? value
-        ) {
+        )
+        {
             return ConvertToNullableDateTimeOffsetCore(obj, culture, out value);
         }
 
@@ -1501,7 +1551,8 @@ namespace Microsoft.AspNetCore.Components
             CultureInfo? culture,
             string format,
             out DateTimeOffset? value
-        ) {
+        )
+        {
             return ConvertToNullableDateTimeOffsetCore(obj, culture, format, out value);
         }
 
@@ -1518,7 +1569,8 @@ namespace Microsoft.AspNetCore.Components
             object? obj,
             CultureInfo? culture,
             out DateTimeOffset value
-        ) {
+        )
+        {
             return ConvertToDateTimeOffsetCore(obj, culture, format: null, out value);
         }
 
@@ -1527,7 +1579,8 @@ namespace Microsoft.AspNetCore.Components
             CultureInfo? culture,
             string? format,
             out DateTimeOffset value
-        ) {
+        )
+        {
             var text = (string?)obj;
             if (string.IsNullOrEmpty(text))
             {
@@ -1544,7 +1597,8 @@ namespace Microsoft.AspNetCore.Components
                     DateTimeStyles.None,
                     out var converted
                 )
-            ) {
+            )
+            {
                 value = converted;
                 return true;
             }
@@ -1556,7 +1610,8 @@ namespace Microsoft.AspNetCore.Components
                     DateTimeStyles.None,
                     out converted
                 )
-            ) {
+            )
+            {
                 value = converted;
                 return true;
             }
@@ -1569,7 +1624,8 @@ namespace Microsoft.AspNetCore.Components
             object? obj,
             CultureInfo? culture,
             out DateTimeOffset? value
-        ) {
+        )
+        {
             return ConvertToNullableDateTimeOffsetCore(obj, culture, format: null, out value);
         }
 
@@ -1578,7 +1634,8 @@ namespace Microsoft.AspNetCore.Components
             CultureInfo? culture,
             string? format,
             out DateTimeOffset? value
-        ) {
+        )
+        {
             var text = (string?)obj;
             if (string.IsNullOrEmpty(text))
             {
@@ -1595,7 +1652,8 @@ namespace Microsoft.AspNetCore.Components
                     DateTimeStyles.None,
                     out var converted
                 )
-            ) {
+            )
+            {
                 value = converted;
                 return true;
             }
@@ -1607,7 +1665,8 @@ namespace Microsoft.AspNetCore.Components
                     DateTimeStyles.None,
                     out converted
                 )
-            ) {
+            )
+            {
                 value = converted;
                 return true;
             }
@@ -1779,7 +1838,8 @@ namespace Microsoft.AspNetCore.Components
                     else if (
                         typeof(T).IsEnum
                         || Nullable.GetUnderlyingType(typeof(T)) is Type { IsEnum: true } innerType
-                    ) {
+                    )
+                    {
                         formatter = (BindFormatter<T>)FormatEnumValueCore<T>;
                     }
                     else
@@ -1930,7 +1990,8 @@ namespace Microsoft.AspNetCore.Components
                     }
                     else if (
                         Nullable.GetUnderlyingType(typeof(T)) is Type innerType && innerType.IsEnum
-                    ) {
+                    )
+                    {
                         // We have to deal invoke this dynamically to work around the type constraint on Enum.TryParse.
                         var method = _convertToNullableEnum ??= typeof(BindConverter).GetMethod(
                             nameof(ConvertToNullableEnum),

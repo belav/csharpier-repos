@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.SyncNamespace
             if (
                 document.Project.Solution.Workspace.Kind == WorkspaceKind.MiscellaneousFiles
                 || document.IsGeneratedCode(cancellationToken)
-            ) {
+            )
+            {
                 return;
             }
 

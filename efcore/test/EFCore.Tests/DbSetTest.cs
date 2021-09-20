@@ -357,7 +357,8 @@ namespace Microsoft.EntityFrameworkCore
             Func<DbSet<Category>, Category, ValueTask<EntityEntry<Category>>> categoryAdder,
             Func<DbSet<Product>, Product, ValueTask<EntityEntry<Product>>> productAdder,
             EntityState expectedState
-        ) {
+        )
+        {
             using var context = new EarlyLearningCenter();
             var category1 = new Category { Id = 1, Name = "Beverages" };
             var category2 = new Category { Id = 2, Name = "Foods" };
@@ -475,7 +476,8 @@ namespace Microsoft.EntityFrameworkCore
             Func<EarlyLearningCenter, Category[], Task> categoryAdder,
             Func<EarlyLearningCenter, Product[], Task> productAdder,
             EntityState expectedState
-        ) {
+        )
+        {
             using var context = new EarlyLearningCenter();
             var category1 = new Category { Id = 1, Name = "Beverages" };
             var category2 = new Category { Id = 2, Name = "Foods" };
@@ -537,7 +539,8 @@ namespace Microsoft.EntityFrameworkCore
         private static void TrackNoEntitiesTest(
             Action<EarlyLearningCenter> categoryAdder,
             Action<EarlyLearningCenter> productAdder
-        ) {
+        )
+        {
             using var context = new EarlyLearningCenter();
             categoryAdder(context);
             productAdder(context);
@@ -617,7 +620,8 @@ namespace Microsoft.EntityFrameworkCore
             Func<EarlyLearningCenter, IEnumerable<Category>, Task> categoryAdder,
             Func<EarlyLearningCenter, IEnumerable<Product>, Task> productAdder,
             EntityState expectedState
-        ) {
+        )
+        {
             using var context = new EarlyLearningCenter();
             var category1 = new Category { Id = 1, Name = "Beverages" };
             var category2 = new Category { Id = 2, Name = "Foods" };
@@ -691,7 +695,8 @@ namespace Microsoft.EntityFrameworkCore
         private static void TrackNoEntitiesTestEnumerable(
             Action<EarlyLearningCenter, IEnumerable<Category>> categoryAdder,
             Action<EarlyLearningCenter, IEnumerable<Product>> productAdder
-        ) {
+        )
+        {
             using var context = new EarlyLearningCenter();
             categoryAdder(context, new HashSet<Category>());
             productAdder(context, new HashSet<Product>());
@@ -867,7 +872,8 @@ namespace Microsoft.EntityFrameworkCore
             Func<EarlyLearningCenter, Category, Task> action,
             EntityState initialState,
             EntityState expectedState
-        ) {
+        )
+        {
             using var context = new EarlyLearningCenter();
             var entity = new Category { Id = 1, Name = "Beverages" };
             var entry = context.Entry(entity);

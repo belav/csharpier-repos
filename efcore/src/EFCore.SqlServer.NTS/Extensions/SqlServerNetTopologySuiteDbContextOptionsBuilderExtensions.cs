@@ -19,7 +19,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns> The options builder so that further configuration can be chained. </returns>
         public static SqlServerDbContextOptionsBuilder UseNetTopologySuite(
             this SqlServerDbContextOptionsBuilder optionsBuilder
-        ) {
+        )
+        {
             Check.NotNull(optionsBuilder, nameof(optionsBuilder));
 
             var coreOptionsBuilder =

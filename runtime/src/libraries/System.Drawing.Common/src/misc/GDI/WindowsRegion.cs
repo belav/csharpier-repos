@@ -89,7 +89,8 @@ namespace System.Drawing.Internal
             WindowsRegion region1,
             WindowsRegion region2,
             Interop.Gdi32.CombineMode mode
-        ) {
+        )
+        {
             return Interop.Gdi32.CombineRgn(
                 new HandleRef(this, HRegion),
                 new HandleRef(region1, region1.HRegion),

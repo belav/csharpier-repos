@@ -1293,7 +1293,8 @@ namespace System.Text.Tests
             int charCount,
             byte[] b,
             int byteCount
-        ) {
+        )
+        {
             Encoding encoding = Encoding.UTF8;
             fixed (char* pChar = c)fixed (byte* pByte = b)
             {
@@ -1345,7 +1346,8 @@ namespace System.Text.Tests
         public void Encode_InvalidChars_WithCustomReplacementFallback(
             string replacementString,
             string expected
-        ) {
+        )
+        {
             byte[] expectedUtf8Output = expected.SelectMany(
                     ch =>
                         (ch == '\uFFFD') ? new byte[] { 0xEF, 0xBF, 0xBD } : new byte[] { (byte)ch }

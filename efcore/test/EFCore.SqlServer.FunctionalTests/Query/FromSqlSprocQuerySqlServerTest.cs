@@ -47,7 +47,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         public override async Task From_sql_queryable_stored_procedure_re_projection_on_client(
             bool async
-        ) {
+        )
+        {
             await base.From_sql_queryable_stored_procedure_re_projection_on_client(async);
 
             AssertSql("[dbo].[Ten Most Expensive Products]");
@@ -55,7 +56,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         public override async Task From_sql_queryable_stored_procedure_composed_on_client(
             bool async
-        ) {
+        )
+        {
             await base.From_sql_queryable_stored_procedure_composed_on_client(async);
 
             AssertSql("[dbo].[Ten Most Expensive Products]");
@@ -63,7 +65,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         public override async Task From_sql_queryable_stored_procedure_with_parameter_composed_on_client(
             bool async
-        ) {
+        )
+        {
             await base.From_sql_queryable_stored_procedure_with_parameter_composed_on_client(async);
 
             AssertSql(

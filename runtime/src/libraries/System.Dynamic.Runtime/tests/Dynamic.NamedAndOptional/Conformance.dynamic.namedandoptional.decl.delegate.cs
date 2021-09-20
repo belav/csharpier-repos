@@ -398,7 +398,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
             dynamic i = default(dynamic),
             dynamic j = null,
             dynamic t = default(object)
-        ) {
+        )
+        {
             if (i == 1)
                 return 1;
             else if (i == 2)
@@ -410,7 +411,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
             dynamic i,
             dynamic j = default(object),
             dynamic t = default(dynamic)
-        ) {
+        )
+        {
             if (i == 1)
                 return 1;
             else if (i == 2)

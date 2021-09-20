@@ -142,7 +142,8 @@ namespace JIT.HardwareIntrinsics.X86
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfinArray2
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -229,7 +230,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             public void RunStructFldScenario_Load(
                 SimpleBinaryOpTest__MultiplyAddAdjacentInt16 testClass
-            ) {
+            )
+            {
                 fixed (Vector128<Byte>* pFld1 = &_fld1)fixed (Vector128<SByte>* pFld2 = &_fld2)
                 {
                     var result = Ssse3.MultiplyAddAdjacent(
@@ -446,7 +448,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             fixed (Vector128<Byte>* pClsVar1 = &_clsVar1)fixed (
                 Vector128<SByte>* pClsVar2 = &_clsVar2
-            ) {
+            )
+            {
                 var result = Ssse3.MultiplyAddAdjacent(
                     Sse2.LoadVector128((Byte*)(pClsVar1)),
                     Sse2.LoadVector128((SByte*)(pClsVar2))
@@ -512,7 +515,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             fixed (Vector128<Byte>* pFld1 = &test._fld1)fixed (
                 Vector128<SByte>* pFld2 = &test._fld2
-            ) {
+            )
+            {
                 var result = Ssse3.MultiplyAddAdjacent(
                     Sse2.LoadVector128((Byte*)(pFld1)),
                     Sse2.LoadVector128((SByte*)(pFld2))
@@ -616,7 +620,8 @@ namespace JIT.HardwareIntrinsics.X86
             Vector128<SByte> op2,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Byte[] inArray1 = new Byte[Op1ElementCount];
             SByte[] inArray2 = new SByte[Op2ElementCount];
             Int16[] outArray = new Int16[RetElementCount];
@@ -637,7 +642,8 @@ namespace JIT.HardwareIntrinsics.X86
             void* op2,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Byte[] inArray1 = new Byte[Op1ElementCount];
             SByte[] inArray2 = new SByte[Op2ElementCount];
             Int16[] outArray = new Int16[RetElementCount];
@@ -666,7 +672,8 @@ namespace JIT.HardwareIntrinsics.X86
             SByte[] right,
             Int16[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (
@@ -676,7 +683,8 @@ namespace JIT.HardwareIntrinsics.X86
                     short.MinValue,
                     short.MaxValue
                 )
-            ) {
+            )
+            {
                 succeeded = false;
             }
             else
@@ -693,7 +701,8 @@ namespace JIT.HardwareIntrinsics.X86
                             short.MinValue,
                             short.MaxValue
                         )
-                    ) {
+                    )
+                    {
                         succeeded = false;
                         break;
                     }

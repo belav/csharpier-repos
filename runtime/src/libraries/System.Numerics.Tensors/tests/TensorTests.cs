@@ -293,7 +293,8 @@ namespace System.Numerics.Tensors.Tests
         [MemberData(nameof(GetSingleTensorConstructors))]
         public void ConstructTensorFromArrayRank3WithLowerBounds(
             TensorConstructor tensorConstructor
-        ) {
+        )
+        {
             var dimensions = new[] { 2, 3, 4 };
             var lowerBounds = new[] { 0, 5, 200 };
             var arrayWithLowerBounds = Array.CreateInstance(typeof(int), dimensions, lowerBounds);
@@ -328,7 +329,8 @@ namespace System.Numerics.Tensors.Tests
         public void StructurallyEqualTensor(
             TensorConstructor leftConstructor,
             TensorConstructor rightConstructor
-        ) {
+        )
+        {
             var arr = new[,,]
             {
                 { { 0, 1, 2 }, { 3, 4, 5 } },
@@ -1180,7 +1182,8 @@ namespace System.Numerics.Tensors.Tests
         public void Divide(
             TensorConstructor dividendConstructor,
             TensorConstructor divisorConstructor
-        ) {
+        )
+        {
             var dividend = dividendConstructor.CreateFromArray<int>(
                 new[,] { { 0, 1, 4 }, { 9, 16, 25 } }
             );
@@ -1220,7 +1223,8 @@ namespace System.Numerics.Tensors.Tests
         public void Modulo(
             TensorConstructor dividendConstructor,
             TensorConstructor divisorConstructor
-        ) {
+        )
+        {
             var dividend = dividendConstructor.CreateFromArray<int>(
                 new[,] { { 0, 3, 8 }, { 11, 14, 17 } }
             );
@@ -1388,7 +1392,8 @@ namespace System.Numerics.Tensors.Tests
         public void ElementWiseEquals(
             TensorConstructor leftConstructor,
             TensorConstructor rightConstructor
-        ) {
+        )
+        {
             var left = leftConstructor.CreateFromArray<int>(new[,] { { 0, 1, 2 }, { 3, 4, 5 } });
             var right = rightConstructor.CreateFromArray<int>(new[,] { { 0, 1, -2 }, { 2, 3, 5 } });
 
@@ -1404,7 +1409,8 @@ namespace System.Numerics.Tensors.Tests
         public void ElementWiseNotEquals(
             TensorConstructor leftConstructor,
             TensorConstructor rightConstructor
-        ) {
+        )
+        {
             var left = leftConstructor.CreateFromArray<int>(new[,] { { 0, 1, 2 }, { 3, 4, 5 } });
             var right = rightConstructor.CreateFromArray<int>(new[,] { { 0, 1, -2 }, { 2, 3, 5 } });
 
@@ -1420,7 +1426,8 @@ namespace System.Numerics.Tensors.Tests
         public void MatrixMultiply(
             TensorConstructor leftConstructor,
             TensorConstructor rightConstructor
-        ) {
+        )
+        {
             var left = leftConstructor.CreateFromArray<int>(new[,] { { 0, 1, 2 }, { 3, 4, 5 } });
 
             var right = rightConstructor.CreateFromArray<int>(
@@ -1489,7 +1496,8 @@ namespace System.Numerics.Tensors.Tests
         public void ContractWithSingleLengthDimension(
             TensorConstructor leftConstructor,
             TensorConstructor rightConstructor
-        ) {
+        )
+        {
             var left = leftConstructor.CreateFromArray<int>(new[,] { { 1, 2, 3 }, { 4, 5, 6 }, });
 
             var right = rightConstructor.CreateFromArray<int>(
@@ -1516,7 +1524,8 @@ namespace System.Numerics.Tensors.Tests
         public void ContractMismatchedDimensions(
             TensorConstructor leftConstructor,
             TensorConstructor rightConstructor
-        ) {
+        )
+        {
             var left = leftConstructor.CreateFromArray<int>(new[] { 0, 1, 2, 3 });
 
             var right = rightConstructor.CreateFromArray<int>(new[,] { { 0 }, { 1 }, { 2 } });
@@ -1585,7 +1594,8 @@ namespace System.Numerics.Tensors.Tests
         public void ToOtherTensor(
             TensorConstructor sourceConstructor,
             TensorConstructor resultConstructor
-        ) {
+        )
+        {
             var array = new[,,]
             {
                 { { 0, 1, 0, 0 }, { 0, 0, 0, 9 }, { 2, 0, 5, 0 } },

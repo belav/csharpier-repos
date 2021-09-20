@@ -76,7 +76,8 @@ namespace System.ComponentModel.Tests
             RunInstallerAttribute attribute,
             object other,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, attribute.Equals(other));
             if (other is RunInstallerAttribute)
             {

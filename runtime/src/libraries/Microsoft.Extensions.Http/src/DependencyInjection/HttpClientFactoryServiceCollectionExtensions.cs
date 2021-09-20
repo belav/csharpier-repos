@@ -102,7 +102,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IHttpClientBuilder AddHttpClient(
             this IServiceCollection services,
             string name
-        ) {
+        )
+        {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));
@@ -139,7 +140,8 @@ namespace Microsoft.Extensions.DependencyInjection
             this IServiceCollection services,
             string name,
             Action<HttpClient> configureClient
-        ) {
+        )
+        {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));
@@ -183,7 +185,8 @@ namespace Microsoft.Extensions.DependencyInjection
             this IServiceCollection services,
             string name,
             Action<IServiceProvider, HttpClient> configureClient
-        ) {
+        )
+        {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));
@@ -418,10 +421,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </remarks>
         public static IHttpClientBuilder AddHttpClient<
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TClient
-        >(
-            this IServiceCollection services,
-            Action<HttpClient> configureClient
-        ) where TClient : class
+        >(this IServiceCollection services, Action<HttpClient> configureClient)
+            where TClient : class
         {
             if (services == null)
             {
@@ -467,10 +468,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </remarks>
         public static IHttpClientBuilder AddHttpClient<
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TClient
-        >(
-            this IServiceCollection services,
-            Action<IServiceProvider, HttpClient> configureClient
-        ) where TClient : class
+        >(this IServiceCollection services, Action<IServiceProvider, HttpClient> configureClient)
+            where TClient : class
         {
             if (services == null)
             {
@@ -522,11 +521,9 @@ namespace Microsoft.Extensions.DependencyInjection
             TClient,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
                 TImplementation
-        >(
-            this IServiceCollection services,
-            Action<HttpClient> configureClient
-        ) where TClient : class
-          where TImplementation : class, TClient
+        >(this IServiceCollection services, Action<HttpClient> configureClient)
+            where TClient : class
+            where TImplementation : class, TClient
         {
             if (services == null)
             {
@@ -578,11 +575,9 @@ namespace Microsoft.Extensions.DependencyInjection
             TClient,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
                 TImplementation
-        >(
-            this IServiceCollection services,
-            Action<IServiceProvider, HttpClient> configureClient
-        ) where TClient : class
-          where TImplementation : class, TClient
+        >(this IServiceCollection services, Action<IServiceProvider, HttpClient> configureClient)
+            where TClient : class
+            where TImplementation : class, TClient
         {
             if (services == null)
             {
@@ -631,11 +626,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </remarks>
         public static IHttpClientBuilder AddHttpClient<
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TClient
-        >(
-            this IServiceCollection services,
-            string name,
-            Action<HttpClient> configureClient
-        ) where TClient : class
+        >(this IServiceCollection services, string name, Action<HttpClient> configureClient)
+            where TClient : class
         {
             if (services == null)
             {
@@ -751,12 +743,9 @@ namespace Microsoft.Extensions.DependencyInjection
             TClient,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
                 TImplementation
-        >(
-            this IServiceCollection services,
-            string name,
-            Action<HttpClient> configureClient
-        ) where TClient : class
-          where TImplementation : class, TClient
+        >(this IServiceCollection services, string name, Action<HttpClient> configureClient)
+            where TClient : class
+            where TImplementation : class, TClient
         {
             if (services == null)
             {
@@ -819,8 +808,9 @@ namespace Microsoft.Extensions.DependencyInjection
             this IServiceCollection services,
             string name,
             Action<IServiceProvider, HttpClient> configureClient
-        ) where TClient : class
-          where TImplementation : class, TClient
+        )
+            where TClient : class
+            where TImplementation : class, TClient
         {
             if (services == null)
             {
@@ -873,8 +863,9 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IHttpClientBuilder AddHttpClient<TClient, TImplementation>(
             this IServiceCollection services,
             Func<HttpClient, TImplementation> factory
-        ) where TClient : class
-          where TImplementation : class, TClient
+        )
+            where TClient : class
+            where TImplementation : class, TClient
         {
             if (services == null)
             {
@@ -922,8 +913,9 @@ namespace Microsoft.Extensions.DependencyInjection
             this IServiceCollection services,
             string name,
             Func<HttpClient, TImplementation> factory
-        ) where TClient : class
-          where TImplementation : class, TClient
+        )
+            where TClient : class
+            where TImplementation : class, TClient
         {
             if (services == null)
             {
@@ -975,8 +967,9 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IHttpClientBuilder AddHttpClient<TClient, TImplementation>(
             this IServiceCollection services,
             Func<HttpClient, IServiceProvider, TImplementation> factory
-        ) where TClient : class
-          where TImplementation : class, TClient
+        )
+            where TClient : class
+            where TImplementation : class, TClient
         {
             if (services == null)
             {
@@ -1022,8 +1015,9 @@ namespace Microsoft.Extensions.DependencyInjection
             this IServiceCollection services,
             string name,
             Func<HttpClient, IServiceProvider, TImplementation> factory
-        ) where TClient : class
-          where TImplementation : class, TClient
+        )
+            where TClient : class
+            where TImplementation : class, TClient
         {
             if (services == null)
             {

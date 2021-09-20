@@ -60,7 +60,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                         document.Project.Solution.Workspace
                         is VisualStudioWorkspaceImpl visualStudioWorkspace
                     )
-                ) {
+                )
+                {
                     return NoOpFormattingRule.Instance;
                 }
 
@@ -123,13 +124,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 Document document,
                 TextSpan span,
                 IList<TextChange> changes
-            ) {
+            )
+            {
                 if (
                     !(
                         document.Project.Solution.Workspace
                         is VisualStudioWorkspaceImpl visualStudioWorkspace
                     )
-                ) {
+                )
+                {
                     return changes;
                 }
 

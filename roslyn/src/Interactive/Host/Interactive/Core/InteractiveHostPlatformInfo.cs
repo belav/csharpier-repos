@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.Interactive
         public InteractiveHostPlatformInfo(
             ImmutableArray<string> platformAssemblyPaths,
             bool hasGlobalAssemblyCache
-        ) {
+        )
+        {
             Debug.Assert(!platformAssemblyPaths.IsDefault);
 
             HasGlobalAssemblyCache = hasGlobalAssemblyCache;

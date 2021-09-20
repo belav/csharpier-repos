@@ -81,7 +81,8 @@ namespace System.Net.Http.Tests
             AuthenticationHeaderValue expectedResult,
             int expectedIndex,
             bool supportMultipleValues
-        ) {
+        )
+        {
             HttpHeaderParser parser = null;
             if (supportMultipleValues)
             {
@@ -105,7 +106,8 @@ namespace System.Net.Http.Tests
             string input,
             int startIndex,
             bool supportMultipleValues
-        ) {
+        )
+        {
             HttpHeaderParser parser = null;
             if (supportMultipleValues)
             {

@@ -41,7 +41,8 @@ namespace Tests.System.IO
             string second,
             bool ignoreCase,
             int expected
-        ) {
+        )
+        {
             Assert.Equal(
                 expected,
                 PathInternal.EqualStartingCharacterCount(first, second, ignoreCase)

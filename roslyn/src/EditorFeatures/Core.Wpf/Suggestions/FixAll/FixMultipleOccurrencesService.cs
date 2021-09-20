@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
             string waitDialogTitle,
             string waitDialogMessage,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var fixMultipleState = FixAllState.Create(
                 fixAllProvider,
                 diagnosticsToFix,
@@ -65,7 +66,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
             string waitDialogTitle,
             string waitDialogMessage,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var fixMultipleState = FixAllState.Create(
                 fixAllProvider,
                 diagnosticsToFix,
@@ -88,7 +90,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
             string title,
             string waitDialogMessage,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var fixMultipleCodeAction = new FixMultipleCodeAction(
                 fixAllState,
                 title,

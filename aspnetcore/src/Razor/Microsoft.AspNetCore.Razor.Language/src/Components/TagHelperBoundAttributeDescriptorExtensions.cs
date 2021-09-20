@@ -132,7 +132,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         /// <returns>Returns <c>true</c> if the property is parameterized child content, otherwise <c>false</c>.</returns>
         public static bool IsParameterizedChildContentProperty(
             this BoundAttributeDescriptor attribute
-        ) {
+        )
+        {
             if (attribute == null)
             {
                 throw new ArgumentNullException(nameof(attribute));
@@ -154,7 +155,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         /// <returns>Returns <c>true</c> if the property is parameterized child content, otherwise <c>false</c>.</returns>
         public static bool IsParameterizedChildContentProperty(
             this BoundAttributeDescriptorBuilder attribute
-        ) {
+        )
+        {
             if (attribute == null)
             {
                 throw new ArgumentNullException(nameof(attribute));
@@ -179,7 +181,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         /// </returns>
         public static bool IsChildContentParameterNameProperty(
             this BoundAttributeDescriptor attribute
-        ) {
+        )
+        {
             if (attribute == null)
             {
                 throw new ArgumentNullException(nameof(attribute));

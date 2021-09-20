@@ -28,7 +28,8 @@ internal class LocallocTest
         int k,
         int l,
         int m
-    ) {
+    )
+    {
         return a + b + c + d + e + f + g + h + j + k + l + m;
     }
 

@@ -79,7 +79,8 @@ namespace System.IO.Tests
         {
             using (
                 FileStream fs = new FileStream(GetTestFilePath(), FileMode.Create, FileAccess.Write)
-            ) {
+            )
+            {
                 using (FileStream fsw = CreateFileStream(fs.SafeFileHandle, FileAccess.Write))
                 {
                     Assert.False(fsw.CanRead);

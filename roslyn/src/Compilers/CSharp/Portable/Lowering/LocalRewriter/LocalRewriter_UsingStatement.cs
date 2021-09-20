@@ -74,7 +74,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             MethodArgumentInfo? patternDisposeInfo,
             BoundAwaitableInfo? awaitOpt,
             SyntaxToken awaitKeyword
-        ) {
+        )
+        {
             Debug.Assert(declarations != null);
 
             BoundBlock result = body;
@@ -102,7 +103,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private BoundStatement MakeLocalUsingDeclarationStatement(
             BoundUsingLocalDeclarations usingDeclarations,
             ImmutableArray<BoundStatement> statements
-        ) {
+        )
+        {
             LocalDeclarationStatementSyntax syntax =
                 (LocalDeclarationStatementSyntax)usingDeclarations.Syntax;
             BoundBlock body = new BoundBlock(syntax, ImmutableArray<LocalSymbol>.Empty, statements);
@@ -127,7 +129,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private BoundBlock MakeExpressionUsingStatement(
             BoundUsingStatement node,
             BoundBlock tryBlock
-        ) {
+        )
+        {
             Debug.Assert(node.ExpressionOpt != null);
             Debug.Assert(node.DeclarationsOpt == null);
 
@@ -255,7 +258,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxToken awaitKeywordOpt,
             BoundAwaitableInfo? awaitOpt,
             MethodArgumentInfo? patternDisposeInfo
-        ) {
+        )
+        {
             Debug.Assert(localDeclaration.InitializerOpt is { });
             SyntaxNode declarationSyntax = localDeclaration.Syntax;
 
@@ -352,7 +356,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxToken awaitKeywordOpt,
             BoundAwaitableInfo? awaitOpt,
             MethodArgumentInfo? patternDisposeInfo
-        ) {
+        )
+        {
             // SPEC: When ResourceType is a non-nullable value type, the expansion is:
             // SPEC:
             // SPEC: {
@@ -512,7 +517,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             MethodArgumentInfo? disposeInfo,
             BoundAwaitableInfo? awaitOpt,
             SyntaxToken awaitKeyword
-        ) {
+        )
+        {
             Debug.Assert(awaitOpt is null || awaitKeyword != default);
 
             // If we don't have an explicit dispose method, try and get the special member for IDisposable/IAsyncDisposable
@@ -595,7 +601,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxNode syntax,
             BoundExpression? expression,
             bool assertParametersAreOptional = true
-        ) {
+        )
+        {
             MethodSymbol method = methodArgumentInfo.Method;
 
 #if DEBUG

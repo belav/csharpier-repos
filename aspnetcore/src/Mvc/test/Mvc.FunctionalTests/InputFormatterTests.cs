@@ -53,7 +53,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [InlineData("unicode")]
         public async Task CustomFormatter_IsSelected_ForSupportedContentTypeAndEncoding(
             string encoding
-        ) {
+        )
+        {
             // Arrange
             var content = new StringContent(
                 "Test Content",

@@ -357,7 +357,8 @@ namespace System.Threading.Tests
                     outboundName,
                     inboundName
                 )
-            ) {
+            )
+            {
                 // Repeatedly wait for count in one semaphore and then release count into the other
                 for (int i = 0; i < 10; i++)
                 {

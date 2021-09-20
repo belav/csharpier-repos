@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundExpression Replacement(
             SyntaxNode node,
             Func<NamedTypeSymbol, BoundExpression> makeFrame
-        ) {
+        )
+        {
             var frame = makeFrame(this.HoistedField.ContainingType);
             var field = this.HoistedField.AsMember((NamedTypeSymbol)frame.Type);
             return new BoundFieldAccess(node, frame, field, constantValueOpt: null);
@@ -66,7 +67,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundExpression Replacement(
             SyntaxNode node,
             Func<NamedTypeSymbol, BoundExpression> makeFrame
-        ) {
+        )
+        {
             var frame = makeFrame(this.HoistedField.ContainingType);
             var field = this.HoistedField.AsMember((NamedTypeSymbol)frame.Type);
             return new BoundFieldAccess(node, frame, field, constantValueOpt: null);
@@ -91,7 +93,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundExpression Replacement(
             SyntaxNode node,
             Func<NamedTypeSymbol, BoundExpression> makeFrame
-        ) {
+        )
+        {
             // By returning the same replacement each time, it is possible we
             // are constructing a DAG instead of a tree for the translation.
             // Because the bound trees are immutable that is usually harmless.

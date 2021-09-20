@@ -10,7 +10,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
     {
         public static IReadOnlyList<ClassifiedSpanInternal> GetClassifiedSpans(
             this RazorSyntaxTree syntaxTree
-        ) {
+        )
+        {
             if (syntaxTree == null)
             {
                 throw new ArgumentNullException(nameof(syntaxTree));
@@ -24,7 +25,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
         public static IReadOnlyList<TagHelperSpanInternal> GetTagHelperSpans(
             this RazorSyntaxTree syntaxTree
-        ) {
+        )
+        {
             if (syntaxTree == null)
             {
                 throw new ArgumentNullException(nameof(syntaxTree));

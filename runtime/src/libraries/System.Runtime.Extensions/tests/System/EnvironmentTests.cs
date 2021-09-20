@@ -230,7 +230,8 @@ namespace System.Tests
             int minor,
             int build,
             int revision
-        ) {
+        )
+        {
             var getOSMethod = typeof(Environment).GetMethod(
                 "GetOperatingSystem",
                 BindingFlags.Static | BindingFlags.NonPublic
@@ -316,7 +317,8 @@ namespace System.Tests
                 RemoteInvokeHandle handle = RemoteExecutor.Invoke(
                     () => Environment.FailFast("message")
                 )
-            ) {
+            )
+            {
                 Process p = handle.Process;
                 handle.Process = null;
                 p.WaitForExit();
@@ -327,7 +329,8 @@ namespace System.Tests
                 RemoteInvokeHandle handle = RemoteExecutor.Invoke(
                     () => Environment.FailFast("message", new Exception("uh oh"))
                 )
-            ) {
+            )
+            {
                 Process p = handle.Process;
                 handle.Process = null;
                 p.WaitForExit();
@@ -353,7 +356,8 @@ namespace System.Tests
                     () => Environment.FailFast("message", new ArgumentException("bad arg")),
                     new RemoteInvokeOptions { StartInfo = psi }
                 )
-            ) {
+            )
+            {
                 Process p = handle.Process;
                 handle.Process = null;
                 p.WaitForExit();
@@ -383,7 +387,8 @@ namespace System.Tests
                         Environment.FailFast("message", new StackOverflowException("SO exception")),
                     new RemoteInvokeOptions { StartInfo = psi }
                 )
-            ) {
+            )
+            {
                 Process p = handle.Process;
                 handle.Process = null;
                 p.WaitForExit();
@@ -419,7 +424,8 @@ namespace System.Tests
                         ),
                     new RemoteInvokeOptions { StartInfo = psi }
                 )
-            ) {
+            )
+            {
                 Process p = handle.Process;
                 handle.Process = null;
                 p.WaitForExit();
@@ -462,7 +468,8 @@ namespace System.Tests
         [InlineData(Environment.SpecialFolder.Templates)]
         public void GetFolderPath_Unix_SpecialFolderDoesNotExist_CreatesSuccessfully(
             Environment.SpecialFolder folder
-        ) {
+        )
+        {
             string path = Environment.GetFolderPath(
                 folder,
                 Environment.SpecialFolderOption.DoNotVerify
@@ -542,7 +549,8 @@ namespace System.Tests
         public void GetFolderPath_Unix_NonEmptyFolderPaths(
             Environment.SpecialFolder folder,
             Environment.SpecialFolderOption option
-        ) {
+        )
+        {
             Assert.NotEmpty(Environment.GetFolderPath(folder, option));
             if (option == Environment.SpecialFolderOption.None)
             {
@@ -565,7 +573,8 @@ namespace System.Tests
         public void GetFolderPath_OSX_NonEmptyFolderPaths(
             Environment.SpecialFolder folder,
             Environment.SpecialFolderOption option
-        ) {
+        )
+        {
             Assert.NotEmpty(Environment.GetFolderPath(folder, option));
             if (option == Environment.SpecialFolderOption.None)
             {

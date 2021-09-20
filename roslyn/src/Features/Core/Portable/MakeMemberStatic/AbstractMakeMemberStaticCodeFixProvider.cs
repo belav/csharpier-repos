@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.MakeMemberStatic
                 && IsValidMemberNode(
                     context.Diagnostics[0].Location?.FindNode(context.CancellationToken)
                 )
-            ) {
+            )
+            {
                 context.RegisterCodeFix(
                     new MyCodeAction(c => FixAsync(context.Document, context.Diagnostics[0], c)),
                     context.Diagnostics
@@ -42,7 +43,8 @@ namespace Microsoft.CodeAnalysis.MakeMemberStatic
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             for (var i = 0; i < diagnostics.Length; i++)
             {
                 var declaration = diagnostics[i].Location?.FindNode(cancellationToken);
@@ -64,13 +66,12 @@ namespace Microsoft.CodeAnalysis.MakeMemberStatic
 
         private class MyCodeAction : CodeAction.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                FeaturesResources.Make_member_static,
-                createChangedDocument,
-                nameof(AbstractMakeMemberStaticCodeFixProvider)
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    FeaturesResources.Make_member_static,
+                    createChangedDocument,
+                    nameof(AbstractMakeMemberStaticCodeFixProvider)
+                ) { }
         }
     }
 }

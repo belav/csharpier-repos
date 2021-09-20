@@ -69,7 +69,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         public void ChunkedPrefixReturnsSegmentThatDoesNotNeedToMove(
             int dataCount,
             bool expectSlice
-        ) {
+        )
+        {
             // Will call GetMemory on at least 5 bytes from the Http1OutputProducer
             var prefixLength = ChunkWriter.GetPrefixBytesForChunk(
                 dataCount,

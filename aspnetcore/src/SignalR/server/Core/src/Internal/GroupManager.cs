@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
             string connectionId,
             string groupName,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return _lifetimeManager.AddToGroupAsync(connectionId, groupName, cancellationToken);
         }
 
@@ -27,7 +28,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
             string connectionId,
             string groupName,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return _lifetimeManager.RemoveFromGroupAsync(
                 connectionId,
                 groupName,

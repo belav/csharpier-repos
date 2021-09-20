@@ -280,7 +280,8 @@ namespace Newtonsoft.Json.Serialization
             JsonWriter jsonWriter,
             object? value,
             Type? rootType
-        ) {
+        )
+        {
             if (_serializerWriter != null)
             {
                 _serializerWriter.Serialize(jsonWriter, value, rootType);

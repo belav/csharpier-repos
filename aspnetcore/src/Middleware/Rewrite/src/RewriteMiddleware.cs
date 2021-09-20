@@ -36,7 +36,8 @@ namespace Microsoft.AspNetCore.Rewrite
             IWebHostEnvironment hostingEnvironment,
             ILoggerFactory loggerFactory,
             IOptions<RewriteOptions> options
-        ) {
+        )
+        {
             if (next == null)
             {
                 throw new ArgumentNullException(nameof(next));

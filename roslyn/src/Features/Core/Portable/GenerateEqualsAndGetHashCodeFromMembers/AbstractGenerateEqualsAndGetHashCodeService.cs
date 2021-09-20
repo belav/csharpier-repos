@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
         public async Task<Document> FormatDocumentAsync(
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var rules = new List<AbstractFormattingRule>
             {
                 new FormatLargeBinaryExpressionRule(
@@ -60,7 +61,8 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
             ImmutableArray<ISymbol> members,
             string localNameOpt,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var compilation = await document.Project.GetCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
             var tree = await document.GetSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
@@ -81,7 +83,8 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
             ImmutableArray<ISymbol> members,
             INamedTypeSymbol constructedEquatableType,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
             return document.GetLanguageService<SyntaxGenerator>()
@@ -98,7 +101,8 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
             Document document,
             INamedTypeSymbol containingType,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var compilation = await document.Project.GetCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
             var tree = await document.GetSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
@@ -173,7 +177,8 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
             INamedTypeSymbol namedType,
             ImmutableArray<ISymbol> members,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var compilation = await document.Project.GetCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
             var factory = document.GetLanguageService<SyntaxGenerator>();
@@ -185,7 +190,8 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
             Compilation compilation,
             INamedTypeSymbol namedType,
             ImmutableArray<ISymbol> members
-        ) {
+        )
+        {
             var statements = CreateGetHashCodeStatements(factory, compilation, namedType, members);
 
             return CodeGenerationSymbolFactory.CreateMethodSymbol(
@@ -207,7 +213,8 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
             Compilation compilation,
             INamedTypeSymbol namedType,
             ImmutableArray<ISymbol> members
-        ) {
+        )
+        {
             // See if there's an accessible System.HashCode we can call into to do all the work.
             var hashCodeType = compilation.GetTypeByMetadataName("System.HashCode");
             if (hashCodeType != null && !hashCodeType.IsAccessibleWithin(namedType))

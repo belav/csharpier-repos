@@ -45,7 +45,8 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.Configurat
 
         IAuthenticatedEncryptorDescriptor IInternalAlgorithmConfiguration.CreateDescriptorFromSecret(
             ISecret secret
-        ) {
+        )
+        {
             return new AuthenticatedEncryptorDescriptor(this, secret);
         }
 

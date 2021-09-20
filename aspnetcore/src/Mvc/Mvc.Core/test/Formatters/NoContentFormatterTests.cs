@@ -37,7 +37,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             bool declaredTypeAsString,
             bool expected,
             bool useNonNullContentType
-        ) {
+        )
+        {
             // Arrange
             var type = declaredTypeAsString ? typeof(string) : typeof(object);
             var contentType = useNonNullContentType
@@ -94,7 +95,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             string value,
             bool treatNullValueAsNoContent,
             bool expected
-        ) {
+        )
+        {
             // Arrange
             var context = new OutputFormatterWriteContext(
                 new DefaultHttpContext(),

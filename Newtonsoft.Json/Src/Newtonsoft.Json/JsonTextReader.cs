@@ -178,7 +178,8 @@ namespace Newtonsoft.Json
                     else if (
                         _stringReference.Length == 36
                         && ConvertUtils.TryConvertGuid(_stringReference.ToString(), out g)
-                    ) {
+                    )
+                    {
                         data = g.ToByteArray();
                     }
                     else
@@ -232,7 +233,8 @@ namespace Newtonsoft.Json
                                     Culture,
                                     out DateTime dt
                                 )
-                            ) {
+                            )
+                            {
                                 SetToken(JsonToken.Date, dt, false);
                                 return;
                             }
@@ -247,7 +249,8 @@ namespace Newtonsoft.Json
                                     Culture,
                                     out DateTimeOffset dt
                                 )
-                            ) {
+                            )
+                            {
                                 SetToken(JsonToken.Date, dt, false);
                                 return;
                             }
@@ -267,7 +270,8 @@ namespace Newtonsoft.Json
             char[] dst,
             int dstOffset,
             int count
-        ) {
+        )
+        {
             const int charByteCount = 2;
 
             Buffer.BlockCopy(
@@ -618,7 +622,8 @@ namespace Newtonsoft.Json
                                     _currentState == State.Array
                                     || _currentState == State.ArrayStart
                                     || _currentState == State.PostValue
-                                ) {
+                                )
+                                {
                                     SetToken(JsonToken.EndArray);
                                     return null;
                                 }
@@ -757,7 +762,8 @@ namespace Newtonsoft.Json
                                     _currentState == State.Array
                                     || _currentState == State.ArrayStart
                                     || _currentState == State.PostValue
-                                ) {
+                                )
+                                {
                                     SetToken(JsonToken.EndArray);
                                     return null;
                                 }
@@ -930,7 +936,8 @@ namespace Newtonsoft.Json
                                     _currentState == State.Array
                                     || _currentState == State.ArrayStart
                                     || _currentState == State.PostValue
-                                ) {
+                                )
+                                {
                                     SetToken(JsonToken.EndArray);
                                     return null;
                                 }
@@ -1066,7 +1073,8 @@ namespace Newtonsoft.Json
                                     _currentState == State.Array
                                     || _currentState == State.ArrayStart
                                     || _currentState == State.PostValue
-                                ) {
+                                )
+                                {
                                     SetToken(JsonToken.EndArray);
                                     return null;
                                 }
@@ -1330,7 +1338,8 @@ namespace Newtonsoft.Json
                                             EnsureChars(2, true)
                                             && _chars[_charPos] == '\\'
                                             && _chars[_charPos + 1] == 'u'
-                                        ) {
+                                        )
+                                        {
                                             char highSurrogate = writeChar;
 
                                             _charPos += 2;
@@ -1418,7 +1427,8 @@ namespace Newtonsoft.Json
             int charPos,
             int initialPosition,
             int lastWritePosition
-        ) {
+        )
+        {
             MiscellaneousUtils.Assert(_chars != null);
 
             if (initialPosition == lastWritePosition)
@@ -1585,7 +1595,8 @@ namespace Newtonsoft.Json
                         || currentChar == ']'
                         || currentChar == ')'
                         || currentChar == '/'
-                    ) {
+                    )
+                    {
                         return true;
                     }
 
@@ -2264,7 +2275,8 @@ namespace Newtonsoft.Json
                                     CultureInfo.InvariantCulture,
                                     out _
                                 )
-                            ) {
+                            )
+                            {
                                 throw ThrowReaderError(
                                     "Input string '{0}' is not a valid number.".FormatWith(
                                         CultureInfo.InvariantCulture,
@@ -2454,7 +2466,8 @@ namespace Newtonsoft.Json
                                     CultureInfo.InvariantCulture,
                                     out double value
                                 )
-                            ) {
+                            )
+                            {
                                 numberValue = value;
                             }
                             else
@@ -2581,7 +2594,8 @@ namespace Newtonsoft.Json
                                             CultureInfo.InvariantCulture,
                                             out double d
                                         )
-                                    ) {
+                                    )
+                                    {
                                         numberValue = d;
                                     }
                                     else
@@ -3030,7 +3044,8 @@ namespace Newtonsoft.Json
                     CurrentState == State.Start
                     && LinePosition == 0
                     && TokenType != JsonToken.Comment
-                ) {
+                )
+                {
                     return 0;
                 }
 

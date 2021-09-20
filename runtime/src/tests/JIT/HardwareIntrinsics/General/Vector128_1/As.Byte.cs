@@ -223,7 +223,8 @@ namespace JIT.HardwareIntrinsics.General
             Byte[] valueElements,
             Type targetType,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             for (var i = 0; i < ElementCount; i++)

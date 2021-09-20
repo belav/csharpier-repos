@@ -71,7 +71,8 @@ namespace JIT.HardwareIntrinsics.General
             Vector256<Single> result,
             Single expectedValue,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Single[] resultElements = new Single[ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<Single, byte>(ref resultElements[0]), result);
             ValidateResult(resultElements, expectedValue, method);
@@ -81,7 +82,8 @@ namespace JIT.HardwareIntrinsics.General
             Single[] resultElements,
             Single expectedValue,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (resultElements[0] != expectedValue)

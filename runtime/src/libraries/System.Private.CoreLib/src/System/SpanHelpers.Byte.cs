@@ -19,7 +19,8 @@ namespace System
             int searchSpaceLength,
             ref byte value,
             int valueLength
-        ) {
+        )
+        {
             Debug.Assert(searchSpaceLength >= 0);
             Debug.Assert(valueLength >= 0);
 
@@ -70,7 +71,8 @@ namespace System
             int searchSpaceLength,
             ref byte value,
             int valueLength
-        ) {
+        )
+        {
             Debug.Assert(searchSpaceLength >= 0);
             Debug.Assert(valueLength >= 0);
 
@@ -103,7 +105,8 @@ namespace System
             int searchSpaceLength,
             ref byte value,
             int valueLength
-        ) {
+        )
+        {
             Debug.Assert(searchSpaceLength >= 0);
             Debug.Assert(valueLength >= 0);
 
@@ -153,7 +156,8 @@ namespace System
                     || uValue == Unsafe.AddByteOffset(ref searchSpace, offset + 5)
                     || uValue == Unsafe.AddByteOffset(ref searchSpace, offset + 6)
                     || uValue == Unsafe.AddByteOffset(ref searchSpace, offset + 7)
-                ) {
+                )
+                {
                     goto Found;
                 }
 
@@ -169,7 +173,8 @@ namespace System
                     || uValue == Unsafe.AddByteOffset(ref searchSpace, offset + 1)
                     || uValue == Unsafe.AddByteOffset(ref searchSpace, offset + 2)
                     || uValue == Unsafe.AddByteOffset(ref searchSpace, offset + 3)
-                ) {
+                )
+                {
                     goto Found;
                 }
 
@@ -306,7 +311,8 @@ namespace System
                             ((nuint)(uint)Unsafe.AsPointer(ref searchSpace) + offset)
                             & (nuint)(Vector256<byte>.Count - 1)
                         ) != 0
-                    ) {
+                    )
+                    {
                         // Not currently aligned to Vector256 (is aligned to Vector128); this can cause a problem for searches
                         // with no upper bound e.g. String.strlen.
                         // Start with a check on Vector128 to align to Vector256, before moving to processing Vector256.
@@ -494,7 +500,8 @@ namespace System
             int searchSpaceLength,
             ref byte value,
             int valueLength
-        ) {
+        )
+        {
             Debug.Assert(searchSpaceLength >= 0);
             Debug.Assert(valueLength >= 0);
 
@@ -985,7 +992,8 @@ namespace System
             byte value1,
             byte value2,
             int length
-        ) {
+        )
+        {
             Debug.Assert(length >= 0);
 
             uint uValue0 = value0; // Use uint for comparisons to avoid unnecessary 8->32 extensions
@@ -1418,7 +1426,8 @@ namespace System
             byte value1,
             byte value2,
             int length
-        ) {
+        )
+        {
             Debug.Assert(length >= 0);
 
             uint uValue0 = value0; // Use uint for comparisons to avoid unnecessary 8->32 extensions
@@ -1727,7 +1736,8 @@ namespace System
                 if (
                     LoadVector(ref first, lengthToExamine)
                     == LoadVector(ref second, lengthToExamine)
-                ) {
+                )
+                {
                     // C# compiler inverts this test, making the outer goto the conditional jmp.
                     goto Equal;
                 }
@@ -1814,7 +1824,8 @@ namespace System
             int firstLength,
             ref byte second,
             int secondLength
-        ) {
+        )
+        {
             Debug.Assert(firstLength >= 0);
             Debug.Assert(secondLength >= 0);
 
@@ -2138,7 +2149,8 @@ namespace System
             Vector128<byte> mask,
             Vector128<byte> compareResult,
             ref int matchedLane
-        ) {
+        )
+        {
             Debug.Assert(AdvSimd.Arm64.IsSupported);
 
             // Find the first lane that is set inside compareResult.

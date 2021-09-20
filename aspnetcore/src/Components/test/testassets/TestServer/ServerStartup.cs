@@ -30,7 +30,8 @@ namespace TestServer
             IApplicationBuilder app,
             IWebHostEnvironment env,
             ResourceRequestLog resourceRequestLog
-        ) {
+        )
+        {
             var enUs = new CultureInfo("en-US");
             CultureInfo.DefaultThreadCurrentCulture = enUs;
             CultureInfo.DefaultThreadCurrentUICulture = enUs;
@@ -53,7 +54,8 @@ namespace TestServer
                                     "/images/blazor_logo_1000x.png",
                                     StringComparison.Ordinal
                                 )
-                            ) {
+                            )
+                            {
                                 resourceRequestLog.AddRequest(context.Request);
                             }
 

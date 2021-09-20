@@ -28,7 +28,8 @@ namespace System.Web.Cors
         public virtual CorsResult EvaluatePolicy(
             CorsRequestContext requestContext,
             CorsPolicy policy
-        ) {
+        )
+        {
             if (requestContext == null)
             {
                 throw new ArgumentNullException("requestContext");
@@ -87,7 +88,8 @@ namespace System.Web.Cors
             CorsRequestContext requestContext,
             CorsPolicy policy,
             CorsResult result
-        ) {
+        )
+        {
             if (requestContext == null)
             {
                 throw new ArgumentNullException("requestContext");
@@ -104,7 +106,8 @@ namespace System.Web.Cors
             if (
                 policy.AllowAnyMethod
                 || policy.Methods.Contains(requestContext.AccessControlRequestMethod)
-            ) {
+            )
+            {
                 result.AllowedMethods.Add(requestContext.AccessControlRequestMethod);
             }
             else
@@ -139,7 +142,8 @@ namespace System.Web.Cors
             CorsRequestContext requestContext,
             CorsPolicy policy,
             CorsResult result
-        ) {
+        )
+        {
             if (requestContext == null)
             {
                 throw new ArgumentNullException("requestContext");
@@ -156,7 +160,8 @@ namespace System.Web.Cors
             if (
                 policy.AllowAnyHeader
                 || requestContext.AccessControlRequestHeaders.IsSubsetOf(policy.Headers)
-            ) {
+            )
+            {
                 AddHeaderValues(result.AllowedHeaders, requestContext.AccessControlRequestHeaders);
             }
             else
@@ -191,7 +196,8 @@ namespace System.Web.Cors
             CorsRequestContext requestContext,
             CorsPolicy policy,
             CorsResult result
-        ) {
+        )
+        {
             if (requestContext == null)
             {
                 throw new ArgumentNullException("requestContext");

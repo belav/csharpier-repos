@@ -209,7 +209,8 @@ namespace System.Linq.Expressions.Tests
             byte? a,
             byte? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool?>> e = Expression.Lambda<Func<bool?>>(
                 Expression.GreaterThan(
                     Expression.Constant(a, typeof(byte?)),
@@ -229,7 +230,8 @@ namespace System.Linq.Expressions.Tests
             char? a,
             char? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool?>> e = Expression.Lambda<Func<bool?>>(
                 Expression.GreaterThan(
                     Expression.Constant(a, typeof(char?)),
@@ -249,7 +251,8 @@ namespace System.Linq.Expressions.Tests
             decimal? a,
             decimal? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool?>> e = Expression.Lambda<Func<bool?>>(
                 Expression.GreaterThan(
                     Expression.Constant(a, typeof(decimal?)),
@@ -269,7 +272,8 @@ namespace System.Linq.Expressions.Tests
             double? a,
             double? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool?>> e = Expression.Lambda<Func<bool?>>(
                 Expression.GreaterThan(
                     Expression.Constant(a, typeof(double?)),
@@ -289,7 +293,8 @@ namespace System.Linq.Expressions.Tests
             float? a,
             float? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool?>> e = Expression.Lambda<Func<bool?>>(
                 Expression.GreaterThan(
                     Expression.Constant(a, typeof(float?)),
@@ -309,7 +314,8 @@ namespace System.Linq.Expressions.Tests
             int? a,
             int? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool?>> e = Expression.Lambda<Func<bool?>>(
                 Expression.GreaterThan(
                     Expression.Constant(a, typeof(int?)),
@@ -329,7 +335,8 @@ namespace System.Linq.Expressions.Tests
             long? a,
             long? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool?>> e = Expression.Lambda<Func<bool?>>(
                 Expression.GreaterThan(
                     Expression.Constant(a, typeof(long?)),
@@ -349,7 +356,8 @@ namespace System.Linq.Expressions.Tests
             sbyte? a,
             sbyte? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool?>> e = Expression.Lambda<Func<bool?>>(
                 Expression.GreaterThan(
                     Expression.Constant(a, typeof(sbyte?)),
@@ -369,7 +377,8 @@ namespace System.Linq.Expressions.Tests
             short? a,
             short? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool?>> e = Expression.Lambda<Func<bool?>>(
                 Expression.GreaterThan(
                     Expression.Constant(a, typeof(short?)),
@@ -389,7 +398,8 @@ namespace System.Linq.Expressions.Tests
             uint? a,
             uint? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool?>> e = Expression.Lambda<Func<bool?>>(
                 Expression.GreaterThan(
                     Expression.Constant(a, typeof(uint?)),
@@ -409,7 +419,8 @@ namespace System.Linq.Expressions.Tests
             ulong? a,
             ulong? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool?>> e = Expression.Lambda<Func<bool?>>(
                 Expression.GreaterThan(
                     Expression.Constant(a, typeof(ulong?)),
@@ -429,7 +440,8 @@ namespace System.Linq.Expressions.Tests
             ushort? a,
             ushort? b,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool?>> e = Expression.Lambda<Func<bool?>>(
                 Expression.GreaterThan(
                     Expression.Constant(a, typeof(ushort?)),

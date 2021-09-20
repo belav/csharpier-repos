@@ -28,7 +28,8 @@ namespace System.Net
             ListenerAsyncResult asyncResult,
             uint errorCode,
             uint numBytes
-        ) {
+        )
+        {
             object? result = null;
             try
             {
@@ -38,7 +39,8 @@ namespace System.Net
                 if (
                     errorCode != Interop.HttpApi.ERROR_SUCCESS
                     && errorCode != Interop.HttpApi.ERROR_MORE_DATA
-                ) {
+                )
+                {
                     asyncResult.ErrorCode = (int)errorCode;
                     result = new HttpListenerException((int)errorCode);
                 }
@@ -59,7 +61,8 @@ namespace System.Net
                                     listenerSession,
                                     asyncResult._requestContext!
                                 )
-                            ) {
+                            )
+                            {
                                 result = listenerSession.Listener.HandleAuthentication(
                                     listenerSession,
                                     asyncResult._requestContext!,
@@ -107,7 +110,8 @@ namespace System.Net
                         if (
                             statusCode != Interop.HttpApi.ERROR_SUCCESS
                             && statusCode != Interop.HttpApi.ERROR_IO_PENDING
-                        ) {
+                        )
+                        {
                             // someother bad error, possible return values are:
                             // ERROR_INVALID_HANDLE, ERROR_INSUFFICIENT_BUFFER, ERROR_OPERATION_ABORTED
                             result = new HttpListenerException((int)statusCode);
@@ -136,7 +140,8 @@ namespace System.Net
             uint errorCode,
             uint numBytes,
             NativeOverlapped* nativeOverlapped
-        ) {
+        )
+        {
             ListenerAsyncResult asyncResult =
                 (ListenerAsyncResult)ThreadPoolBoundHandle.GetNativeOverlappedState(
                     nativeOverlapped
@@ -176,7 +181,8 @@ namespace System.Net
                 if (
                     statusCode == Interop.HttpApi.ERROR_INVALID_PARAMETER
                     && _requestContext.RequestBlob->RequestId != 0
-                ) {
+                )
+                {
                     // we might get this if somebody stole our RequestId,
                     // set RequestId to 0 and start all over again with the buffer we just allocated
                     _requestContext.RequestBlob->RequestId = 0;
@@ -196,7 +202,8 @@ namespace System.Net
                 else if (
                     statusCode == Interop.HttpApi.ERROR_SUCCESS
                     && HttpListener.SkipIOCPCallbackOnSuccess
-                ) {
+                )
+                {
                     // IO operation completed synchronously - callback won't be called to signal completion.
                     IOCompleted(this, statusCode, bytesTransferred);
                 }

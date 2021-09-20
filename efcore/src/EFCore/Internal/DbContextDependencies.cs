@@ -44,7 +44,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
             IStateManager stateManager,
             IDiagnosticsLogger<DbLoggerCategory.Update> updateLogger,
             IDiagnosticsLogger<DbLoggerCategory.Infrastructure> infrastructureLogger
-        ) {
+        )
+        {
             ChangeDetector = changeDetector;
             SetSource = setSource;
             EntityGraphAttacher = entityGraphAttacher;

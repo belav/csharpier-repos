@@ -123,7 +123,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
                 var columnIndex = 0;
                 columnIndex < modificationCommand.ColumnModifications.Count;
                 columnIndex++
-            ) {
+            )
+            {
                 var columnModification = modificationCommand.ColumnModifications[columnIndex];
                 if (columnModification.UseCurrentValueParameter)
                 {
@@ -201,7 +202,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
                 if (
                     _bulkInsertCommands.Count > 0
                     && !CanBeInsertedInSameStatement(_bulkInsertCommands[0], newModificationCommand)
-                ) {
+                )
+                {
                     CachedCommandText.Append(GetBulkInsertCommandText(commandPosition));
                     _bulkInsertCommands.Clear();
                 }

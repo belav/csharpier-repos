@@ -46,7 +46,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             Workspace workspace,
             IAsynchronousOperationListener asyncListener,
             IThreadingContext threadingContext
-        ) {
+        )
+        {
             _parentGeneratorItem = parentGeneratorItem;
             _workspace = workspace;
             _asyncListener = asyncListener;
@@ -69,7 +70,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         private async Task UpdateSourceGeneratedFileItemsAsync(
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var project = solution.GetProject(_parentGeneratorItem.ProjectId);
 
             if (project == null)
@@ -120,7 +122,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                         !sourceGeneratedDocumentsForGeneratorById.Remove(
                             ((SourceGeneratedFileItem)_items[i]).DocumentId
                         )
-                    ) {
+                    )
+                    {
                         _items.RemoveAt(i);
                         i--;
                     }
@@ -150,7 +153,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                                 document.HintName,
                                 ((SourceGeneratedFileItem)_items[mid]).HintName
                             ) < 0
-                        ) {
+                        )
+                        {
                             high = mid;
                         }
                         else

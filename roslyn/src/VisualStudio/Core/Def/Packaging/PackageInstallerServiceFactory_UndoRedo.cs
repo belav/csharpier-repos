@@ -20,7 +20,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
             EnvDTE.DTE dte,
             EnvDTE.Project dteProject,
             IOleUndoManager undoManager
-        ) {
+        )
+        {
             var installed = TryInstallPackage(
                 source,
                 packageName,
@@ -57,7 +58,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
             EnvDTE.DTE dte,
             EnvDTE.Project dteProject,
             IOleUndoManager undoManager
-        ) {
+        )
+        {
             var uninstalled = TryUninstallPackage(packageName, dte, dteProject);
             if (uninstalled)
             {
@@ -99,7 +101,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
                 EnvDTE.DTE dte,
                 EnvDTE.Project dteProject,
                 IOleUndoManager undoManager
-            ) {
+            )
+            {
                 this.packageInstallerService = packageInstallerService;
                 this.source = source;
                 this.packageName = packageName;
@@ -130,16 +133,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
                 EnvDTE.DTE dte,
                 EnvDTE.Project dteProject,
                 IOleUndoManager undoManager
-            ) : base(
-                packageInstallerService,
-                source,
-                packageName,
-                versionOpt,
-                includePrerelease,
-                dte,
-                dteProject,
-                undoManager
-            ) { }
+            )
+                : base(
+                    packageInstallerService,
+                    source,
+                    packageName,
+                    versionOpt,
+                    includePrerelease,
+                    dte,
+                    dteProject,
+                    undoManager
+                ) { }
 
             public override void Do(IOleUndoManager pUndoManager)
             {
@@ -169,16 +173,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
                 EnvDTE.DTE dte,
                 EnvDTE.Project dteProject,
                 IOleUndoManager undoManager
-            ) : base(
-                packageInstallerService,
-                source,
-                packageName,
-                versionOpt,
-                includePrerelease,
-                dte,
-                dteProject,
-                undoManager
-            ) { }
+            )
+                : base(
+                    packageInstallerService,
+                    source,
+                    packageName,
+                    versionOpt,
+                    includePrerelease,
+                    dte,
+                    dteProject,
+                    undoManager
+                ) { }
 
             public override void GetDescription(out string pBstr) =>
                 pBstr = string.Format(ServicesVSResources.Install_0, packageName);

@@ -58,14 +58,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                         FunctionId.Completion_SnippetCompletionProvider_GetItemsWorker_CSharp,
                         cancellationToken
                     )
-                ) {
+                )
+                {
                     // TODO (https://github.com/dotnet/roslyn/issues/5107): Enable in Interactive.
                     var workspace = document.Project.Solution.Workspace;
                     if (
                         !workspace.CanApplyChange(ApplyChangesKind.ChangeDocument)
                         || workspace.Kind == WorkspaceKind.Debugger
                         || workspace.Kind == WorkspaceKind.Interactive
-                    ) {
+                    )
+                    {
                         return;
                     }
 
@@ -88,7 +90,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             Document document,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxTree = await document.GetRequiredSyntaxTreeAsync(cancellationToken)
                 .ConfigureAwait(false);
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
@@ -109,7 +112,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     await syntaxTree.GetRootAsync(cancellationToken).ConfigureAwait(false),
                     position
                 ) is EnumDeclarationSyntax
-            ) {
+            )
+            {
                 return ImmutableArray<CompletionItem>.Empty;
             }
 
@@ -138,7 +142,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                         SyntaxKind.EndRegionKeyword,
                         SyntaxKind.WarningKeyword
                     )
-                ) {
+                )
+                {
                     var semanticModel = await document.ReuseExistingSpeculativeModelAsync(
                             position,
                             cancellationToken
@@ -187,7 +192,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                         cancellationToken
                     )
                     || semanticFacts.IsLabelContext(semanticModel, position, cancellationToken)
-                ) {
+                )
+                {
                     return GetSnippetCompletionItems(
                         document.Project.Solution.Workspace,
                         semanticModel,
@@ -212,7 +218,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             bool isPreProcessorContext,
             bool isTupleContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var service = workspace.Services.GetLanguageServices(semanticModel.Language)
                 .GetService<ISnippetInfoService>();
             if (service == null)

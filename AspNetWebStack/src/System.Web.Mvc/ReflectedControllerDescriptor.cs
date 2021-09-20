@@ -33,7 +33,8 @@ namespace System.Web.Mvc
         public override ActionDescriptor FindAction(
             ControllerContext controllerContext,
             string actionName
-        ) {
+        )
+        {
             if (controllerContext == null)
             {
                 throw new ArgumentNullException("controllerContext");

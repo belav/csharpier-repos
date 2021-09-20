@@ -83,7 +83,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
 
         private static PropertyActivator<ViewComponentContext> CreateActivateInfo(
             PropertyInfo property
-        ) {
+        )
+        {
             return new PropertyActivator<ViewComponentContext>(property, context => context);
         }
 

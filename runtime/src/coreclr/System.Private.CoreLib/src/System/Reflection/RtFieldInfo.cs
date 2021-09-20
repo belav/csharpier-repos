@@ -206,7 +206,8 @@ namespace System.Reflection
             BindingFlags invokeAttr,
             Binder? binder,
             CultureInfo? culture
-        ) {
+        )
+        {
             INVOCATION_FLAGS invocationFlags = InvocationFlags;
             RuntimeType? declaringType = DeclaringType as RuntimeType;
 

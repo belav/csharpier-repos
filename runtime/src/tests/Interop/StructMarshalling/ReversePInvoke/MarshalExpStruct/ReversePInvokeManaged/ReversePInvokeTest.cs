@@ -68,7 +68,8 @@ public class Test
 
     public static bool TestMethod_DoCallBack_MarshalStructByRef_InnerExplicit_Cdecl(
         ref InnerExplicit inner2
-    ) {
+    )
+    {
         Console.WriteLine("Reverse,Pinvoke,By Ref,Cdecl");
         InnerExplicit source_ie = new InnerExplicit();
         source_ie.f1 = 77;
@@ -99,7 +100,8 @@ public class Test
 
     public static bool TestMethod_DoCallBack_MarshalStructByRef_InnerArrayExplicit_Cdecl(
         ref InnerArrayExplicit iae
-    ) {
+    )
+    {
         Console.WriteLine("Reverse,Pinvoke,By Ref,Cdecl");
         InnerArrayExplicit source_iae = Helper.NewInnerArrayExplicit(77, 77.0F, "Native", "Native");
         Assert.IsTrue(
@@ -195,7 +197,8 @@ public class Test
 
     public static bool TestMethod_DoCallBack_MarshalStructByRef_ByteStructPack2Explicit_Cdecl(
         ref ByteStructPack2Explicit bspe
-    ) {
+    )
+    {
         Console.WriteLine("Reverse,Pinvoke,By Ref,Cdecl");
         ByteStructPack2Explicit change_bspe = Helper.NewByteStructPack2Explicit(64, 64);
         Assert.IsTrue(
@@ -224,7 +227,8 @@ public class Test
 
     public static bool TestMethod_DoCallBack_MarshalStructByRef_ShortStructPack4Explicit_Cdecl(
         ref ShortStructPack4Explicit sspe
-    ) {
+    )
+    {
         Console.WriteLine("Reverse,Pinvoke,By Ref,Cdecl");
         ShortStructPack4Explicit change_sspe = Helper.NewShortStructPack4Explicit(64, 64);
         Assert.IsTrue(
@@ -253,7 +257,8 @@ public class Test
 
     public static bool TestMethod_DoCallBack_MarshalStructByRef_IntStructPack8Explicit_Cdecl(
         ref IntStructPack8Explicit ispe
-    ) {
+    )
+    {
         Console.WriteLine("Reverse,Pinvoke,By Ref,Cdecl");
         IntStructPack8Explicit change_ispe = Helper.NewIntStructPack8Explicit(64, 64);
         Assert.IsTrue(
@@ -282,7 +287,8 @@ public class Test
 
     public static bool TestMethod_DoCallBack_MarshalStructByRef_LongStructPack16Explicit_Cdecl(
         ref LongStructPack16Explicit lspe
-    ) {
+    )
+    {
         Console.WriteLine("Reverse,Pinvoke,By Ref,Cdecl");
         LongStructPack16Explicit change_lspe = Helper.NewLongStructPack16Explicit(64, 64);
         Assert.IsTrue(
@@ -341,7 +347,8 @@ public class Test
 
     public static bool TestMethod_DoCallBack_MarshalStructByRef_InnerExplicit_Stdcall(
         ref InnerExplicit inner2
-    ) {
+    )
+    {
         Console.WriteLine("Reverse,Pinvoke,By Ref,Stdcall");
         InnerExplicit source_ie = new InnerExplicit();
         source_ie.f1 = 77;
@@ -372,7 +379,8 @@ public class Test
 
     public static bool TestMethod_DoCallBack_MarshalStructByRef_InnerArrayExplicit_Stdcall(
         ref InnerArrayExplicit iae
-    ) {
+    )
+    {
         Console.WriteLine("Reverse,Pinvoke,By Ref,Stdcall");
         InnerArrayExplicit source_iae = Helper.NewInnerArrayExplicit(77, 77.0F, "Native", "Native");
         Assert.IsTrue(
@@ -468,7 +476,8 @@ public class Test
 
     public static bool TestMethod_DoCallBack_MarshalStructByRef_ByteStructPack2Explicit_Stdcall(
         ref ByteStructPack2Explicit bspe
-    ) {
+    )
+    {
         Console.WriteLine("Reverse,Pinvoke,By Ref,Stdcall");
         ByteStructPack2Explicit change_bspe = Helper.NewByteStructPack2Explicit(64, 64);
         Assert.IsTrue(
@@ -497,7 +506,8 @@ public class Test
 
     public static bool TestMethod_DoCallBack_MarshalStructByRef_ShortStructPack4Explicit_Stdcall(
         ref ShortStructPack4Explicit sspe
-    ) {
+    )
+    {
         Console.WriteLine("Reverse,Pinvoke,By Ref,Stdcall");
         ShortStructPack4Explicit change_sspe = Helper.NewShortStructPack4Explicit(64, 64);
         Assert.IsTrue(
@@ -526,7 +536,8 @@ public class Test
 
     public static bool TestMethod_DoCallBack_MarshalStructByRef_IntStructPack8Explicit_Stdcall(
         ref IntStructPack8Explicit ispe
-    ) {
+    )
+    {
         Console.WriteLine("Reverse,Pinvoke,By Ref,Stdcall");
         IntStructPack8Explicit change_ispe = Helper.NewIntStructPack8Explicit(64, 64);
         Assert.IsTrue(
@@ -555,7 +566,8 @@ public class Test
 
     public static bool TestMethod_DoCallBack_MarshalStructByRef_LongStructPack16Explicit_Stdcall(
         ref LongStructPack16Explicit lspe
-    ) {
+    )
+    {
         Console.WriteLine("Reverse,Pinvoke,By Ref,Stdcall");
         LongStructPack16Explicit change_lspe = Helper.NewLongStructPack16Explicit(64, 64);
         Assert.IsTrue(
@@ -613,7 +625,8 @@ public class Test
 
     public static bool TestMethod_DoCallBack_MarshalStructByVal_InnerExplicit_Cdecl(
         InnerExplicit inner2
-    ) {
+    )
+    {
         Console.WriteLine("Reverse,Pinvoke,By Val,Cdecl");
         InnerExplicit source_ie = new InnerExplicit();
         source_ie.f1 = 1;
@@ -642,7 +655,8 @@ public class Test
 
     public static bool TestMethod_DoCallBack_MarshalStructByVal_InnerArrayExplicit_Cdecl(
         InnerArrayExplicit iae
-    ) {
+    )
+    {
         Console.WriteLine("Reverse,Pinvoke,By Val,Cdecl");
         InnerArrayExplicit source_iae = Helper.NewInnerArrayExplicit(
             1,
@@ -743,7 +757,8 @@ public class Test
 
     public static bool TestMethod_DoCallBack_MarshalStructByVal_ByteStructPack2Explicit_Cdecl(
         ByteStructPack2Explicit bspe
-    ) {
+    )
+    {
         Console.WriteLine("Reverse,Pinvoke,By Val,Cdecl");
         ByteStructPack2Explicit change_bspe = Helper.NewByteStructPack2Explicit(32, 32);
         Assert.IsTrue(
@@ -772,7 +787,8 @@ public class Test
 
     public static bool TestMethod_DoCallBack_MarshalStructByVal_ShortStructPack4Explicit_Cdecl(
         ShortStructPack4Explicit sspe
-    ) {
+    )
+    {
         Console.WriteLine("Reverse,Pinvoke,By Val,Cdecl");
         ShortStructPack4Explicit change_sspe = Helper.NewShortStructPack4Explicit(32, 32);
         Assert.IsTrue(
@@ -801,7 +817,8 @@ public class Test
 
     public static bool TestMethod_DoCallBack_MarshalStructByVal_IntStructPack8Explicit_Cdecl(
         IntStructPack8Explicit ispe
-    ) {
+    )
+    {
         Console.WriteLine("Reverse,Pinvoke,By Val,Cdecl");
         IntStructPack8Explicit change_ispe = Helper.NewIntStructPack8Explicit(32, 32);
         Assert.IsTrue(
@@ -830,7 +847,8 @@ public class Test
 
     public static bool TestMethod_DoCallBack_MarshalStructByVal_LongStructPack16Explicit_Cdecl(
         LongStructPack16Explicit lspe
-    ) {
+    )
+    {
         Console.WriteLine("Reverse,Pinvoke,By Val,Cdecl");
         LongStructPack16Explicit change_lspe = Helper.NewLongStructPack16Explicit(32, 32);
         Assert.IsTrue(
@@ -888,7 +906,8 @@ public class Test
 
     public static bool TestMethod_DoCallBack_MarshalStructByVal_InnerExplicit_Stdcall(
         InnerExplicit inner2
-    ) {
+    )
+    {
         Console.WriteLine("Reverse,Pinvoke,By Val,Stdcall");
         InnerExplicit source_ie = new InnerExplicit();
         source_ie.f1 = 1;
@@ -917,7 +936,8 @@ public class Test
 
     public static bool TestMethod_DoCallBack_MarshalStructByVal_InnerArrayExplicit_Stdcall(
         InnerArrayExplicit iae
-    ) {
+    )
+    {
         Console.WriteLine("Reverse,Pinvoke,By Val,Stdcall");
         InnerArrayExplicit source_iae = Helper.NewInnerArrayExplicit(
             1,
@@ -1018,7 +1038,8 @@ public class Test
 
     public static bool TestMethod_DoCallBack_MarshalStructByVal_ByteStructPack2Explicit_Stdcall(
         ByteStructPack2Explicit bspe
-    ) {
+    )
+    {
         Console.WriteLine("Reverse,Pinvoke,By Val,Stdcall");
         ByteStructPack2Explicit change_bspe = Helper.NewByteStructPack2Explicit(32, 32);
         Assert.IsTrue(
@@ -1047,7 +1068,8 @@ public class Test
 
     public static bool TestMethod_DoCallBack_MarshalStructByVal_ShortStructPack4Explicit_Stdcall(
         ShortStructPack4Explicit sspe
-    ) {
+    )
+    {
         Console.WriteLine("Reverse,Pinvoke,By Val,Stdcall");
         ShortStructPack4Explicit change_sspe = Helper.NewShortStructPack4Explicit(32, 32);
         Assert.IsTrue(
@@ -1076,7 +1098,8 @@ public class Test
 
     public static bool TestMethod_DoCallBack_MarshalStructByVal_IntStructPack8Explicit_Stdcall(
         IntStructPack8Explicit ispe
-    ) {
+    )
+    {
         Console.WriteLine("Reverse,Pinvoke,By Val,Stdcall");
         IntStructPack8Explicit change_ispe = Helper.NewIntStructPack8Explicit(32, 32);
         Assert.IsTrue(
@@ -1105,7 +1128,8 @@ public class Test
 
     public static bool TestMethod_DoCallBack_MarshalStructByVal_LongStructPack16Explicit_Stdcall(
         LongStructPack16Explicit lspe
-    ) {
+    )
+    {
         Console.WriteLine("Reverse,Pinvoke,By Val,Stdcall");
         LongStructPack16Explicit change_lspe = Helper.NewLongStructPack16Explicit(32, 32);
         Assert.IsTrue(

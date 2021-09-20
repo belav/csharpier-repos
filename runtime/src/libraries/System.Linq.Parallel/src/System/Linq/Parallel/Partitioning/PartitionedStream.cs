@@ -39,7 +39,8 @@ namespace System.Linq.Parallel
             int partitionCount,
             IComparer<TKey> keyComparer,
             OrdinalIndexState indexState
-        ) {
+        )
+        {
             Debug.Assert(partitionCount > 0);
             _partitions = new QueryOperatorEnumerator<TElement, TKey>[partitionCount];
             _keyComparer = keyComparer;

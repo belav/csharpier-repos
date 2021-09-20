@@ -47,11 +47,8 @@ namespace System.Reflection
         {
             private Module module;
 
-            public unsafe UnmanagedMemoryStreamForModule(
-                byte* pointer,
-                long length,
-                Module module
-            ) : base(pointer, length)
+            public unsafe UnmanagedMemoryStreamForModule(byte* pointer, long length, Module module)
+                : base(pointer, length)
             {
                 this.module = module;
             }
@@ -125,7 +122,8 @@ namespace System.Reflection
         internal static AssemblyName? CreateAssemblyName(
             string assemblyString,
             out RuntimeAssembly? assemblyFromResolveEvent
-        ) {
+        )
+        {
             if (assemblyString == null)
                 throw new ArgumentNullException(nameof(assemblyString));
 
@@ -186,7 +184,8 @@ namespace System.Reflection
             Type type,
             List<Type> types,
             List<Exception> exceptions
-        ) {
+        )
+        {
             Type[] nestedTypes;
 
             try
@@ -359,7 +358,8 @@ namespace System.Reflection
                 var nativeNames = new Mono.SafeGPtrArrayHandle(
                     InternalGetReferencedAssemblies(assembly)
                 )
-            ) {
+            )
+            {
                 int numAssemblies = nativeNames.Length;
                 try
                 {
@@ -421,7 +421,8 @@ namespace System.Reflection
             CultureInfo culture,
             Version? version,
             bool throwOnFileNotFound
-        ) {
+        )
+        {
             AssemblyName aname = assembly.GetName();
 
             var an = new AssemblyName();
@@ -498,7 +499,8 @@ namespace System.Reflection
             AssemblyName assemblyRef,
             ref StackCrawlMark stackMark,
             AssemblyLoadContext? assemblyLoadContext
-        ) {
+        )
+        {
             var assembly = (RuntimeAssembly)InternalLoad(
                 assemblyRef.FullName,
                 ref stackMark,

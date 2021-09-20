@@ -121,7 +121,8 @@ namespace System.Net.NetworkInformation
         public static bool TryParse(
             ReadOnlySpan<char> address,
             [NotNullWhen(true)] out PhysicalAddress? value
-        ) {
+        )
+        {
             int validSegmentLength;
             char? delimiter = null;
             byte[] buffer;
@@ -230,7 +231,8 @@ namespace System.Net.NetworkInformation
             ReadOnlySpan<char> address,
             char delimiter,
             out int value
-        ) {
+        )
+        {
             value = -1;
             int segments = 1;
             int validSegmentLength = 0;

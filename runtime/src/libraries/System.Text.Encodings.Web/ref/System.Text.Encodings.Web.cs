@@ -15,12 +15,14 @@ namespace System.Text.Encodings.Web
         }
         public static System.Text.Encodings.Web.HtmlEncoder Create(
             System.Text.Encodings.Web.TextEncoderSettings settings
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Text.Encodings.Web.HtmlEncoder Create(
             params System.Text.Unicode.UnicodeRange[] allowedRanges
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -37,12 +39,14 @@ namespace System.Text.Encodings.Web
         }
         public static System.Text.Encodings.Web.JavaScriptEncoder Create(
             System.Text.Encodings.Web.TextEncoderSettings settings
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Text.Encodings.Web.JavaScriptEncoder Create(
             params System.Text.Unicode.UnicodeRange[] allowedRanges
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -72,7 +76,8 @@ namespace System.Text.Encodings.Web
             out int charsConsumed,
             out int charsWritten,
             bool isFinalBlock = true
-        ) {
+        )
+        {
             throw null;
         }
         public virtual string Encode(string value)
@@ -85,7 +90,8 @@ namespace System.Text.Encodings.Web
             out int bytesConsumed,
             out int bytesWritten,
             bool isFinalBlock = true
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
@@ -146,12 +152,14 @@ namespace System.Text.Encodings.Web
         }
         public static System.Text.Encodings.Web.UrlEncoder Create(
             System.Text.Encodings.Web.TextEncoderSettings settings
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Text.Encodings.Web.UrlEncoder Create(
             params System.Text.Unicode.UnicodeRange[] allowedRanges
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -172,7 +180,8 @@ namespace System.Text.Unicode
         public static System.Text.Unicode.UnicodeRange Create(
             char firstCharacter,
             char lastCharacter
-        ) {
+        )
+        {
             throw null;
         }
     }

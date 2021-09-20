@@ -16,7 +16,8 @@ namespace System.Net
             bool checkCertName,
             bool isServer,
             string? hostName
-        ) {
+        )
+        {
             SslPolicyErrors errors = SslPolicyErrors.None;
 
             if (remoteCertificate == null)
@@ -41,7 +42,8 @@ namespace System.Net
                             remoteCertificate.NotBefore,
                             out int osStatus
                         )
-                    ) {
+                    )
+                    {
                         errors |= SslPolicyErrors.RemoteCertificateNameMismatch;
 
                         if (NetEventSource.Log.IsEnabled())
@@ -67,7 +69,8 @@ namespace System.Net
         internal static X509Certificate2? GetRemoteCertificate(
             SafeDeleteContext? securityContext,
             out X509Certificate2Collection? remoteCertificateStore
-        ) {
+        )
+        {
             if (securityContext == null)
             {
                 remoteCertificateStore = null;
@@ -81,7 +84,8 @@ namespace System.Net
         private static X509Certificate2? GetRemoteCertificate(
             SafeDeleteContext securityContext,
             X509Certificate2Collection? remoteCertificateStore
-        ) {
+        )
+        {
             if (securityContext == null)
             {
                 return null;
@@ -98,7 +102,8 @@ namespace System.Net
 
             using (
                 SafeX509ChainHandle chainHandle = Interop.AppleCrypto.SslCopyCertChain(sslContext)
-            ) {
+            )
+            {
                 long chainSize = Interop.AppleCrypto.X509ChainGetChainSize(chainHandle);
 
                 if (remoteCertificateStore != null)
@@ -147,7 +152,8 @@ namespace System.Net
                 SafeCFArrayHandle dnArray = Interop.AppleCrypto.SslCopyCADistinguishedNames(
                     sslContext
                 )
-            ) {
+            )
+            {
                 long size = Interop.CoreFoundation.CFArrayGetCount(dnArray);
 
                 if (size == 0)
@@ -163,7 +169,8 @@ namespace System.Net
 
                     using (
                         SafeCFDataHandle cfData = new SafeCFDataHandle(element, ownsHandle: false)
-                    ) {
+                    )
+                    {
                         byte[] dnData = Interop.CoreFoundation.CFGetData(cfData);
                         X500DistinguishedName dn = new X500DistinguishedName(dnData);
                         distinguishedNames[i] = dn.Name;

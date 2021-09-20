@@ -59,7 +59,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             foreach (var diagnostic in diagnostics)
             {
                 cancellationToken.ThrowIfCancellationRequested();
@@ -73,7 +74,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
             SyntaxEditor editor,
             Diagnostic diagnostic,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var ifStatementLocation = diagnostic.AdditionalLocations[0];
             var localDeclarationLocation = diagnostic.AdditionalLocations[1];
 
@@ -126,7 +128,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
             ImmutableArray<SyntaxTrivia> trivia,
             IfStatementSyntax originalIf,
             IfStatementSyntax currentIf
-        ) {
+        )
+        {
             var newIf = currentIf.ReplaceNode(currentIf.Condition, updatedCondition);
             newIf = originalIf.IsParentKind(SyntaxKind.ElseClause)
                 ? newIf.ReplaceToken(
@@ -140,9 +143,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(CSharpAnalyzersResources.Use_pattern_matching, createChangedDocument) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(CSharpAnalyzersResources.Use_pattern_matching, createChangedDocument) { }
         }
     }
 }

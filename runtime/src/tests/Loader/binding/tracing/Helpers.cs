@@ -108,7 +108,8 @@ namespace BinderTracingTests
             string assemblyName,
             string culture,
             string baseAssemblyDirectory = null
-        ) {
+        )
+        {
             return GetProbingFilePath(
                 pathSource,
                 assemblyName,
@@ -122,7 +123,8 @@ namespace BinderTracingTests
             ProbedPath.PathSource pathSource,
             string assemblyName,
             bool isExe
-        ) {
+        )
+        {
             return GetProbingFilePath(pathSource, assemblyName, isExe, null, null);
         }
 
@@ -132,7 +134,8 @@ namespace BinderTracingTests
             bool isExe,
             string culture,
             string baseAssemblyDirectory
-        ) {
+        )
+        {
             string baseDirectory =
                 baseAssemblyDirectory
                 ?? Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
@@ -181,7 +184,8 @@ namespace BinderTracingTests
             AssemblyName expected,
             AssemblyName actual,
             string propertyName
-        ) {
+        )
+        {
             Assert.IsTrue(
                 AssemblyNamesMatch(expected, actual),
                 $"Unexpected value for {propertyName} on event - expected: {expected}, actual: {actual}"
@@ -191,7 +195,8 @@ namespace BinderTracingTests
         private static void ValidateResolutionAttempts(
             List<ResolutionAttempt> expected,
             List<ResolutionAttempt> actual
-        ) {
+        )
+        {
             if (expected.Count > 0)
                 Assert.AreEqual(
                     expected.Count,
@@ -248,7 +253,8 @@ namespace BinderTracingTests
             List<HandlerInvocation> expected,
             List<HandlerInvocation> actual,
             string eventName
-        ) {
+        )
+        {
             Assert.AreEqual(
                 expected.Count,
                 actual.Count,
@@ -276,7 +282,8 @@ namespace BinderTracingTests
         private static void ValidateLoadFromHandlerInvocation(
             LoadFromHandlerInvocation expected,
             LoadFromHandlerInvocation actual
-        ) {
+        )
+        {
             if (expected == null || actual == null)
             {
                 Assert.IsNull(expected);
@@ -347,7 +354,8 @@ namespace BinderTracingTests
         private static void ValidateNestedBinds(
             List<BindOperation> expected,
             List<BindOperation> actual
-        ) {
+        )
+        {
             foreach (var match in expected)
             {
                 Predicate<BindOperation> pred = b => BindOperationsMatch(match, b);

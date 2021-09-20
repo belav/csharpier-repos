@@ -155,7 +155,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
                         arguments,
                         out _castSingleValue
                     )
-                ) {
+                )
+                {
                     // in this case, even though the type is generic, it's nothing we have recognized,
                     // thereforeit's the same as the non-generic case
                     _contractType = type;
@@ -185,7 +186,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
             bool isOpenGeneric,
             Type[] arguments,
             out Func<Export, object>? castFunction
-        ) {
+        )
+        {
             castFunction = null;
 
             if (genericType == LazyOfTType)

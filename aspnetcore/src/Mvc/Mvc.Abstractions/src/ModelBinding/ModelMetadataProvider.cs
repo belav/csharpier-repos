@@ -42,7 +42,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         public virtual ModelMetadata GetMetadataForParameter(
             ParameterInfo parameter,
             Type modelType
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
 
@@ -55,7 +56,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         public virtual ModelMetadata GetMetadataForProperty(
             PropertyInfo propertyInfo,
             Type modelType
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
 
@@ -68,7 +70,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         public virtual ModelMetadata GetMetadataForConstructor(
             ConstructorInfo constructor,
             Type modelType
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
     }

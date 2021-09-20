@@ -379,7 +379,8 @@ namespace System.Runtime.Intrinsics
             byte e5,
             byte e6,
             byte e7
-        ) {
+        )
+        {
             if (AdvSimd.IsSupported)
             {
                 return Create(e0, e1, e2, e3, e4, e5, e6, e7);
@@ -396,7 +397,8 @@ namespace System.Runtime.Intrinsics
                 byte e5,
                 byte e6,
                 byte e7
-            ) {
+            )
+            {
                 byte* pResult = stackalloc byte[8] { e0, e1, e2, e3, e4, e5, e6, e7, };
 
                 return Unsafe.AsRef<Vector64<byte>>(pResult);
@@ -473,7 +475,8 @@ namespace System.Runtime.Intrinsics
             sbyte e5,
             sbyte e6,
             sbyte e7
-        ) {
+        )
+        {
             if (AdvSimd.IsSupported)
             {
                 return Create(e0, e1, e2, e3, e4, e5, e6, e7);
@@ -490,7 +493,8 @@ namespace System.Runtime.Intrinsics
                 sbyte e5,
                 sbyte e6,
                 sbyte e7
-            ) {
+            )
+            {
                 sbyte* pResult = stackalloc sbyte[8] { e0, e1, e2, e3, e4, e5, e6, e7, };
 
                 return Unsafe.AsRef<Vector64<sbyte>>(pResult);

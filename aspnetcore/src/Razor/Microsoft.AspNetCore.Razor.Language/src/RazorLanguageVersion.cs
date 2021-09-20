@@ -47,7 +47,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             }
             else if (
                 string.Equals(languageVersion, "experimental", StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 version = Experimental;
                 return true;
             }

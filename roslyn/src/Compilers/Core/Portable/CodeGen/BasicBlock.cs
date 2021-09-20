@@ -389,7 +389,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
                         next != null
                         && next.BranchCode == ILOpCode.Nop
                         && next.HasNoRegularInstructions
-                    ) {
+                    )
+                    {
                         next = next.NextBlock;
                     }
 
@@ -403,7 +404,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
                     next.HasNoRegularInstructions
                     && next.BranchCode == this.BranchCode
                     && next.BranchBlock.Start == this.BranchBlock.Start
-                ) {
+                )
+                {
                     if (next.EnclosingHandler == this.EnclosingHandler)
                     {
                         var diff = this.BranchCode.Size() + this.BranchCode.GetBranchOperandSize();
@@ -444,7 +446,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
                     && next.NextBlock.Start == BranchBlock.Start
                     && (next.BranchCode == ILOpCode.Br || next.BranchCode == ILOpCode.Br_s)
                     && next.BranchBlock != next
-                ) {
+                )
+                {
                     ILOpCode revBrOp = this.GetReversedBranchOp();
 
                     if (revBrOp != ILOpCode.Nop)
@@ -507,7 +510,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
                     if (
                         BranchBlock.HasNoRegularInstructions
                         && BranchBlock.BranchCode == ILOpCode.Ret
-                    ) {
+                    )
+                    {
                         this.SetBranch(null, ILOpCode.Ret);
 
                         // curBranchCode.Size() + curBranchCode.BranchOperandSize() - Ret.Size()
@@ -525,7 +529,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
                 if (
                     curBranchCode.IsConditionalBranch()
                     && next.EnclosingHandler == this.EnclosingHandler
-                ) {
+                )
+                {
                     // check for branch to next,
                     // or if both blocks are identical
                     if (BranchBlock.Start - next.Start == 0 || AreIdentical(BranchBlock, next))
@@ -562,7 +567,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
                     one._branchCode == another._branchCode
                     && !one._branchCode.CanFallThrough()
                     && one._branchLabel == another._branchLabel
-                ) {
+                )
+                {
                     var instr1 = one.RegularInstructions;
                     var instr2 = another.RegularInstructions;
                     return instr1 == instr2 || instr1?.ContentEquals(instr2) == true;

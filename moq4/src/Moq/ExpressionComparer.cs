@@ -143,7 +143,8 @@ namespace Moq
             ReadOnlyCollection<T> x,
             ReadOnlyCollection<T> y,
             Func<T, T, bool> comparer
-        ) {
+        )
+        {
             if (x.Count != y.Count)
             {
                 return false;

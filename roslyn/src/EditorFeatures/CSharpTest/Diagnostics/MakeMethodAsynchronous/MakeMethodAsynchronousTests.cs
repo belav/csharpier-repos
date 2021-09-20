@@ -1124,7 +1124,8 @@ class C
             string initialReturn,
             string expectedReturn,
             string expectedName
-        ) {
+        )
+        {
             await TestInRegularAndScriptAsync(
                 $@"using System.Threading.Tasks;
 
@@ -1179,7 +1180,8 @@ class C
             int codeFixIndex,
             string expectedReturn,
             string expectedName
-        ) {
+        )
+        {
             await TestInRegularAndScriptAsync(
                 $@"using System.Threading.Tasks;
 

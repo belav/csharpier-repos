@@ -32,7 +32,8 @@ namespace Microsoft.AspNetCore.Testing
             DateHeaderValueManager dateHeaderValueManager = null,
             ConnectionManager connectionManager = null,
             Heartbeat heartbeat = null
-        ) {
+        )
+        {
             var context = new ServiceContext
             {
                 Log = log,
@@ -57,7 +58,8 @@ namespace Microsoft.AspNetCore.Testing
             IPEndPoint localEndPoint = null,
             IPEndPoint remoteEndPoint = null,
             ITimeoutControl timeoutControl = null
-        ) {
+        )
+        {
             var context = new HttpConnectionContext(
                 "TestConnectionId",
                 Server.Kestrel.Core.HttpProtocols.Http1,
@@ -82,7 +84,8 @@ namespace Microsoft.AspNetCore.Testing
             IPEndPoint localEndPoint = null,
             IPEndPoint remoteEndPoint = null,
             ITimeoutControl timeoutControl = null
-        ) {
+        )
+        {
             var http3ConnectionContext = new Http3ConnectionContext(
                 "TestConnectionId",
                 connectionContext ?? new TestMultiplexedConnectionContext(),
@@ -102,7 +105,8 @@ namespace Microsoft.AspNetCore.Testing
             KestrelServerOptions serverOptions,
             ILogger logger,
             Func<ListenOptions, Task> createBinding
-        ) {
+        )
+        {
             var context = new AddressBindContext(
                 serverAddressesFeature,
                 serverOptions,
@@ -118,7 +122,8 @@ namespace Microsoft.AspNetCore.Testing
             KestrelServerOptions serverOptions,
             ILogger logger,
             Func<ListenOptions, CancellationToken, Task> createBinding
-        ) {
+        )
+        {
             var context = new AddressBindContext(
                 serverAddressesFeature,
                 serverOptions,
@@ -144,7 +149,8 @@ namespace Microsoft.AspNetCore.Testing
             InputFlowControl connectionInputFlowControl = null,
             OutputFlowControl connectionOutputFlowControl = null,
             ITimeoutControl timeoutControl = null
-        ) {
+        )
+        {
             var context = new Http2StreamContext(
                 connectionId: connectionId ?? "TestConnectionId",
                 protocols: HttpProtocols.Http2,
@@ -176,7 +182,8 @@ namespace Microsoft.AspNetCore.Testing
             IPEndPoint remoteEndPoint = null,
             IDuplexPipe transport = null,
             ITimeoutControl timeoutControl = null
-        ) {
+        )
+        {
             var context = new Http3StreamContext(
                 connectionId: connectionId ?? "TestConnectionId",
                 protocols: HttpProtocols.Http3,
@@ -207,14 +214,16 @@ namespace Microsoft.AspNetCore.Testing
 
             public override ValueTask<ConnectionContext> AcceptAsync(
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 return default;
             }
 
             public override ValueTask<ConnectionContext> ConnectAsync(
                 IFeatureCollection features = null,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 return default;
             }
         }

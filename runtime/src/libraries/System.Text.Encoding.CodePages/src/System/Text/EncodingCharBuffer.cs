@@ -26,7 +26,8 @@ namespace System.Text
             int charCount,
             byte* byteStart,
             int byteCount
-        ) {
+        )
+        {
             _enc = enc;
             _decoder = decoder;
 

@@ -29,7 +29,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
             LibuvFunctions uv,
             LibuvTransportContext context,
             EndPoint endPoint
-        ) {
+        )
+        {
             Libuv = uv;
             TransportContext = context;
 
@@ -51,7 +52,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
 
         public async ValueTask<ConnectionContext> AcceptAsync(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (_disposed)
             {
                 throw new ObjectDisposedException(GetType().FullName);
@@ -83,7 +85,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
             if (
                 !await WaitAsync(Task.WhenAll(disposeTasks), TimeSpan.FromSeconds(5))
                     .ConfigureAwait(false)
-            ) {
+            )
+            {
                 Log.LogError(0, null, "Disposing listeners failed");
             }
         }
@@ -240,7 +243,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
             static async Task<(LibuvConnection, int)> AcceptAsync(
                 ListenerContext listener,
                 int slot
-            ) {
+            )
+            {
                 return (await listener.AcceptAsync(), slot);
             }
         }

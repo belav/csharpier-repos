@@ -190,13 +190,15 @@ namespace System.Xml.Schema
             if (
                 attdef.Presence == SchemaDeclBase.Use.Required
                 || attdef.Presence == SchemaDeclBase.Use.RequiredFixed
-            ) {
+            )
+            {
                 _hasRequiredAttribute = true;
             }
             if (
                 attdef.Presence == SchemaDeclBase.Use.Default
                 || attdef.Presence == SchemaDeclBase.Use.Fixed
-            ) { //Not adding RequiredFixed here
+            )
+            { //Not adding RequiredFixed here
                 if (_defaultAttdefs == null)
                 {
                     _defaultAttdefs = new List<IDtdDefaultAttributeInfo>();
@@ -255,7 +257,8 @@ namespace System.Xml.Schema
                             attdef.Presence == SchemaDeclBase.Use.Default
                             || attdef.Presence == SchemaDeclBase.Use.Fixed
                         )
-                    ) {
+                    )
+                    {
                         throw new XmlSchemaException(SR.Sch_StandAlone, string.Empty);
                     }
                 }

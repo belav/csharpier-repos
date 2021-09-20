@@ -114,7 +114,8 @@ namespace System.Reflection.Metadata.Ecma335
         public static unsafe int GetTableMetadataOffset(
             this MetadataReader reader,
             TableIndex tableIndex
-        ) {
+        )
+        {
             if (reader == null)
             {
                 Throw.ArgumentNull(nameof(reader));
@@ -126,7 +127,8 @@ namespace System.Reflection.Metadata.Ecma335
         private static MemoryBlock GetTableMetadataBlock(
             this MetadataReader reader,
             TableIndex tableIndex
-        ) {
+        )
+        {
             Debug.Assert(reader != null);
 
             return tableIndex switch
@@ -214,7 +216,8 @@ namespace System.Reflection.Metadata.Ecma335
         public static unsafe int GetHeapMetadataOffset(
             this MetadataReader reader,
             HeapIndex heapIndex
-        ) {
+        )
+        {
             if (reader == null)
             {
                 Throw.ArgumentNull(nameof(reader));
@@ -249,7 +252,8 @@ namespace System.Reflection.Metadata.Ecma335
         public static UserStringHandle GetNextHandle(
             this MetadataReader reader,
             UserStringHandle handle
-        ) {
+        )
+        {
             if (reader == null)
             {
                 Throw.ArgumentNull(nameof(reader));
@@ -292,7 +296,8 @@ namespace System.Reflection.Metadata.Ecma335
         /// <exception cref="ArgumentNullException"><paramref name="reader"/> is null.</exception>
         public static IEnumerable<EditAndContinueLogEntry> GetEditAndContinueLogEntries(
             this MetadataReader reader
-        ) {
+        )
+        {
             if (reader == null)
             {
                 throw new ArgumentNullException(nameof(reader));
@@ -313,7 +318,8 @@ namespace System.Reflection.Metadata.Ecma335
         /// <exception cref="ArgumentNullException"><paramref name="reader"/> is null.</exception>
         public static IEnumerable<EntityHandle> GetEditAndContinueMapEntries(
             this MetadataReader reader
-        ) {
+        )
+        {
             if (reader == null)
             {
                 throw new ArgumentNullException(nameof(reader));
@@ -334,7 +340,8 @@ namespace System.Reflection.Metadata.Ecma335
         /// </returns>
         public static IEnumerable<TypeDefinitionHandle> GetTypesWithProperties(
             this MetadataReader reader
-        ) {
+        )
+        {
             if (reader == null)
             {
                 throw new ArgumentNullException(nameof(reader));
@@ -355,7 +362,8 @@ namespace System.Reflection.Metadata.Ecma335
         /// </returns>
         public static IEnumerable<TypeDefinitionHandle> GetTypesWithEvents(
             this MetadataReader reader
-        ) {
+        )
+        {
             if (reader == null)
             {
                 throw new ArgumentNullException(nameof(reader));
@@ -374,7 +382,8 @@ namespace System.Reflection.Metadata.Ecma335
             this MetadataReader reader,
             EntityHandle typeHandle,
             byte rawTypeKind
-        ) {
+        )
+        {
             if (reader == null)
             {
                 throw new ArgumentNullException(nameof(reader));

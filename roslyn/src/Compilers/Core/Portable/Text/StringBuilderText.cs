@@ -93,7 +93,8 @@ namespace Microsoft.CodeAnalysis.Text
             char[] destination,
             int destinationIndex,
             int count
-        ) {
+        )
+        {
             _builder.CopyTo(sourceIndex, destination, destinationIndex, count);
         }
     }

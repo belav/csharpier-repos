@@ -21,7 +21,8 @@ namespace System.IO.Pipes
             HandleInheritability inheritability,
             int bufferSize,
             PipeSecurity? pipeSecurity
-        ) {
+        )
+        {
             return new AnonymousPipeServerStream(
                 direction,
                 inheritability,

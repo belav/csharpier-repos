@@ -267,7 +267,8 @@ namespace Microsoft.AspNetCore.ResponseCaching
             this ILogger logger,
             TimeSpan age,
             TimeSpan sharedMaxAge
-        ) {
+        )
+        {
             _expirationSharedMaxAgeExceeded(logger, age, sharedMaxAge, null);
         }
 
@@ -275,7 +276,8 @@ namespace Microsoft.AspNetCore.ResponseCaching
             this ILogger logger,
             TimeSpan age,
             TimeSpan maxAge
-        ) {
+        )
+        {
             _expirationMustRevalidate(logger, age, maxAge, null);
         }
 
@@ -284,7 +286,8 @@ namespace Microsoft.AspNetCore.ResponseCaching
             TimeSpan age,
             TimeSpan maxAge,
             TimeSpan maxStale
-        ) {
+        )
+        {
             _expirationMaxStaleSatisfied(logger, age, maxAge, maxStale, null);
         }
 
@@ -292,7 +295,8 @@ namespace Microsoft.AspNetCore.ResponseCaching
             this ILogger logger,
             TimeSpan age,
             TimeSpan sharedMaxAge
-        ) {
+        )
+        {
             _expirationMaxAgeExceeded(logger, age, sharedMaxAge, null);
         }
 
@@ -300,7 +304,8 @@ namespace Microsoft.AspNetCore.ResponseCaching
             this ILogger logger,
             DateTimeOffset responseTime,
             DateTimeOffset expires
-        ) {
+        )
+        {
             _expirationExpiresExceeded(logger, responseTime, expires, null);
         }
 
@@ -337,7 +342,8 @@ namespace Microsoft.AspNetCore.ResponseCaching
         internal static void ResponseWithUnsuccessfulStatusCodeNotCacheable(
             this ILogger logger,
             int statusCode
-        ) {
+        )
+        {
             _responseWithUnsuccessfulStatusCodeNotCacheable(logger, statusCode, null);
         }
 
@@ -349,7 +355,8 @@ namespace Microsoft.AspNetCore.ResponseCaching
         internal static void NotModifiedIfNoneMatchMatched(
             this ILogger logger,
             EntityTagHeaderValue etag
-        ) {
+        )
+        {
             _notModifiedIfNoneMatchMatched(logger, etag, null);
         }
 
@@ -357,7 +364,8 @@ namespace Microsoft.AspNetCore.ResponseCaching
             this ILogger logger,
             DateTimeOffset lastModified,
             DateTimeOffset ifModifiedSince
-        ) {
+        )
+        {
             _notModifiedIfModifiedSinceSatisfied(logger, lastModified, ifModifiedSince, null);
         }
 
@@ -385,7 +393,8 @@ namespace Microsoft.AspNetCore.ResponseCaching
             this ILogger logger,
             string headers,
             string queryKeys
-        ) {
+        )
+        {
             _varyByRulesUpdated(logger, headers, queryKeys, null);
         }
 
@@ -408,7 +417,8 @@ namespace Microsoft.AspNetCore.ResponseCaching
             this ILogger logger,
             TimeSpan age,
             TimeSpan maxAge
-        ) {
+        )
+        {
             _expirationInfiniteMaxStaleSatisfied(logger, age, maxAge, null);
         }
     }

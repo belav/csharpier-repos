@@ -25,7 +25,8 @@ namespace AutoMapper
         public ProfileMap(
             IProfileConfiguration profile,
             IGlobalConfigurationExpression configuration = null
-        ) {
+        )
+        {
             var globalProfile = (IProfileConfiguration)configuration;
             Name = profile.ProfileName;
             AllowNullCollections =
@@ -196,7 +197,8 @@ namespace AutoMapper
         private void BuildTypeMap(
             IGlobalConfiguration configurationProvider,
             ITypeMapConfiguration config
-        ) {
+        )
+        {
             var typeMap = new TypeMap(
                 config.SourceType,
                 config.DestinationType,
@@ -209,7 +211,8 @@ namespace AutoMapper
         private void Configure(
             ITypeMapConfiguration typeMapConfiguration,
             IGlobalConfiguration configurationProvider
-        ) {
+        )
+        {
             var typeMap = typeMapConfiguration.TypeMap;
             if (typeMap.IncludeAllDerivedTypes)
             {
@@ -220,7 +223,8 @@ namespace AutoMapper
         private static void IncludeAllDerived(
             IGlobalConfiguration configurationProvider,
             TypeMap typeMap
-        ) {
+        )
+        {
             foreach (
                 var derivedMap in configurationProvider.GetAllTypeMaps()
                     .Where(
@@ -229,7 +233,8 @@ namespace AutoMapper
                             && typeMap.SourceType.IsAssignableFrom(tm.SourceType)
                             && typeMap.DestinationType.IsAssignableFrom(tm.DestinationType)
                     )
-            ) {
+            )
+            {
                 typeMap.IncludeDerivedTypes(derivedMap.Types);
             }
         }
@@ -261,7 +266,8 @@ namespace AutoMapper
             ITypeMapConfiguration openMapConfig,
             in TypePair closedTypes,
             IGlobalConfiguration configurationProvider
-        ) {
+        )
+        {
             TypeMap closedMap;
             lock (configurationProvider)
             {
@@ -302,12 +308,14 @@ namespace AutoMapper
             TypeMap derivedMap,
             TypeMap currentMap,
             IGlobalConfiguration configurationProvider
-        ) {
+        )
+        {
             foreach (
                 var baseMap in configurationProvider.GetIncludedTypeMaps(
                     currentMap.IncludedBaseTypes
                 )
-            ) {
+            )
+            {
                 baseMap.IncludeDerivedTypes(currentMap.Types);
                 derivedMap.AddInheritedMap(baseMap);
                 ApplyBaseMaps(derivedMap, baseMap, configurationProvider);
@@ -340,7 +348,8 @@ namespace AutoMapper
             TypeMap baseMap,
             TypeMap typeMap,
             IGlobalConfiguration configurationProvider
-        ) {
+        )
+        {
             foreach (var derivedMap in configurationProvider.GetIncludedTypeMaps(typeMap))
             {
                 derivedMap.IncludeBaseTypes(typeMap.Types);
@@ -355,7 +364,8 @@ namespace AutoMapper
             string destMemberName,
             List<MemberInfo> members,
             bool reverseNamingConventions
-        ) {
+        )
+        {
             if (destMemberName == null)
             {
                 return false;
@@ -372,7 +382,8 @@ namespace AutoMapper
                         members,
                         reverseNamingConventions
                     )
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -402,7 +413,8 @@ namespace AutoMapper
             LambdaExpression memberExpression,
             ParameterExpression variable,
             LambdaExpression projectToCustomSource
-        ) {
+        )
+        {
             TypeMap = typeMap;
             MemberExpression = memberExpression;
             Variable = variable;

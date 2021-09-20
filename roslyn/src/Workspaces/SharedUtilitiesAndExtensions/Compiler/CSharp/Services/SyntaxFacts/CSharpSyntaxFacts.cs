@@ -133,7 +133,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
             [NotNullWhen(true)] SyntaxTree? syntaxTree,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (syntaxTree == null)
             {
                 return false;
@@ -148,7 +149,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
         public bool TryGetExternalSourceInfo(
             [NotNullWhen(true)] SyntaxNode? node,
             out ExternalSourceInfo info
-        ) {
+        )
+        {
             if (node is LineDirectiveTriviaSyntax lineDirective)
             {
                 if (lineDirective.Line.Kind() == SyntaxKind.DefaultKeyword)
@@ -159,7 +161,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
                 else if (
                     lineDirective.Line.Kind() == SyntaxKind.NumericLiteralToken
                     && lineDirective.Line.Value is int
-                ) {
+                )
+                {
                     info = new ExternalSourceInfo((int)lineDirective.Line.Value, false);
                     return true;
                 }
@@ -512,7 +515,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
         public bool IsTypeNamedVarInVariableOrFieldDeclaration(
             SyntaxToken token,
             [NotNullWhen(true)] SyntaxNode? parent
-        ) {
+        )
+        {
             var typedToken = token;
             var typedParent = parent;
 
@@ -524,7 +528,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
                         SyntaxKind.VariableDeclaration,
                         out VariableDeclarationSyntax? varDecl
                     )
-                ) {
+                )
+                {
                     declaredType = varDecl.Type;
                 }
                 else if (
@@ -532,7 +537,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
                         SyntaxKind.FieldDeclaration,
                         out FieldDeclarationSyntax? fieldDecl
                     )
-                ) {
+                )
+                {
                     declaredType = fieldDecl.Declaration.Type;
                 }
 
@@ -550,7 +556,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
                     SyntaxFacts.IsInTypeOnlyContext(typedParent)
                     && typedParent.IsKind(SyntaxKind.IdentifierName)
                     && token.ValueText == "dynamic"
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -576,7 +583,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
             if (
                 token.Kind() == SyntaxKind.CommaToken
                 && token.Parent.IsKind(SyntaxKind.OrderByClause)
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -588,7 +596,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
             out SyntaxNode expression,
             out SyntaxToken operatorToken,
             out SyntaxNode whenNotNull
-        ) {
+        )
+        {
             var conditionalAccess = (ConditionalAccessExpressionSyntax)node;
             expression = conditionalAccess.Expression;
             operatorToken = conditionalAccess.OperatorToken;
@@ -638,7 +647,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
             SyntaxNode? node,
             out SyntaxNode? expression,
             out SyntaxNode? argumentList
-        ) {
+        )
+        {
             var elementAccess = node as ElementAccessExpressionSyntax;
             expression = elementAccess?.Expression;
             argumentList = elementAccess?.ArgumentList;
@@ -715,7 +725,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
             bool includeSkipped,
             bool includeDirectives,
             bool includeDocumentationComments
-        ) {
+        )
+        {
             return node.FindTokenOnLeftOfPosition(
                 position,
                 includeSkipped,
@@ -730,7 +741,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
             bool includeSkipped,
             bool includeDirectives,
             bool includeDocumentationComments
-        ) {
+        )
+        {
             return node.FindTokenOnRightOfPosition(
                 position,
                 includeSkipped,
@@ -754,11 +766,13 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
         public bool IsMemberInitializerNamedAssignmentIdentifier(
             [NotNullWhen(true)] SyntaxNode? node,
             [NotNullWhen(true)] out SyntaxNode? initializedInstance
-        ) {
+        )
+        {
             initializedInstance = null;
             if (
                 node is IdentifierNameSyntax identifier && identifier.IsLeftSideOfAssignExpression()
-            ) {
+            )
+            {
                 if (identifier.Parent.IsParentKind(SyntaxKind.WithInitializerExpression))
                 {
                     var withInitializer = identifier.Parent.GetRequiredParent();
@@ -778,7 +792,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
                             SyntaxKind.SimpleAssignmentExpression,
                             out AssignmentExpressionSyntax? assignment
                         )
-                    ) {
+                    )
+                    {
                         initializedInstance = assignment.Left;
                         return true;
                     }
@@ -800,7 +815,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
             out SyntaxToken openParen,
             out SyntaxNode expression,
             out SyntaxToken closeParen
-        ) {
+        )
+        {
             var parenthesizedExpression = (ParenthesizedExpressionSyntax)node;
             openParen = parenthesizedExpression.OpenParenToken;
             expression = parenthesizedExpression.Expression;
@@ -814,7 +830,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
             SyntaxNode? root,
             int position,
             bool useFullSpan = true
-        ) {
+        )
+        {
             Contract.ThrowIfNull(root, "root");
             Contract.ThrowIfTrue(position < 0 || position > root.FullSpan.End, "position");
 
@@ -838,7 +855,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
                         (kind != SyntaxKind.GlobalStatement)
                         && (kind != SyntaxKind.IncompleteMember)
                         && (node is MemberDeclarationSyntax)
-                    ) {
+                    )
+                    {
                         return node;
                     }
                 }
@@ -870,7 +888,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
             SyntaxNode? node,
             DisplayNameOptions options,
             string? rootNamespace = null
-        ) {
+        )
+        {
             if (node == null)
             {
                 return string.Empty;
@@ -1010,7 +1029,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
         private static void AppendTypeParameterList(
             StringBuilder builder,
             TypeParameterListSyntax typeParameterList
-        ) {
+        )
+        {
             if (typeParameterList != null && typeParameterList.Parameters.Count > 0)
             {
                 builder.Append('<');
@@ -1064,7 +1084,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
             List<SyntaxNode> list,
             bool topLevel,
             bool methodLevel
-        ) {
+        )
+        {
             Debug.Assert(topLevel || methodLevel);
 
             foreach (var member in node.GetMembers())
@@ -1197,7 +1218,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
                 if (
                     node is InterpolatedStringTextSyntax
                     && parent is InterpolatedStringExpressionSyntax
-                ) {
+                )
+                {
                     node = parent;
                     break;
                 }
@@ -1223,7 +1245,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
         public IEnumerable<SyntaxNode> GetConstructors(
             SyntaxNode? root,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!(root is CompilationUnitSyntax compilationUnit))
             {
                 return SpecializedCollections.EmptyEnumerable<SyntaxNode>();
@@ -1238,7 +1261,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
             SyntaxList<MemberDeclarationSyntax> members,
             List<SyntaxNode> constructors,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             foreach (var member in members)
             {
                 cancellationToken.ThrowIfCancellationRequested();
@@ -1281,7 +1305,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
             SyntaxTree syntaxTree,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var trivia = syntaxTree.GetRoot(cancellationToken)
                 .FindTrivia(position, findInsideTrivia: false);
             if (trivia.Kind() == SyntaxKind.DisabledTextTrivia)
@@ -1392,7 +1417,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
             SyntaxNode node,
             out SyntaxNode expression,
             out SyntaxNode argumentList
-        ) {
+        )
+        {
             var invocation = (InvocationExpressionSyntax)node;
             expression = invocation.Expression;
             argumentList = invocation.ArgumentList;
@@ -1522,7 +1548,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
             out SyntaxNode left,
             out SyntaxToken operatorToken,
             out SyntaxNode right
-        ) {
+        )
+        {
             GetPartsOfAssignmentExpressionOrStatement(
                 ((ExpressionStatementSyntax)statement).Expression,
                 out left,
@@ -1536,7 +1563,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
             out SyntaxNode left,
             out SyntaxToken operatorToken,
             out SyntaxNode right
-        ) {
+        )
+        {
             var expression = statement;
             if (statement is ExpressionStatementSyntax expressionStatement)
             {
@@ -1557,7 +1585,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
             out SyntaxNode expression,
             out SyntaxToken operatorToken,
             out SyntaxNode name
-        ) {
+        )
+        {
             var memberAccess = (MemberAccessExpressionSyntax)node;
             expression = memberAccess.Expression;
             operatorToken = memberAccess.OperatorToken;
@@ -1576,7 +1605,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
         public bool IsDeclaratorOfLocalDeclarationStatement(
             SyntaxNode declarator,
             SyntaxNode localDeclarationStatement
-        ) {
+        )
+        {
             return (
                 (LocalDeclarationStatementSyntax)localDeclarationStatement
             ).Declaration.Variables.Contains((VariableDeclaratorSyntax)declarator);
@@ -1621,7 +1651,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
             out SyntaxNode left,
             out SyntaxToken operatorToken,
             out SyntaxNode right
-        ) {
+        )
+        {
             var binaryExpression = (BinaryExpressionSyntax)node;
             left = binaryExpression.Left;
             operatorToken = binaryExpression.OperatorToken;
@@ -1633,7 +1664,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
             out SyntaxNode condition,
             out SyntaxNode whenTrue,
             out SyntaxNode whenFalse
-        ) {
+        )
+        {
             var conditionalExpression = (ConditionalExpressionSyntax)node;
             condition = conditionalExpression.Condition;
             whenTrue = conditionalExpression.WhenTrue;
@@ -1690,7 +1722,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
             int position,
             bool fullHeader,
             [NotNullWhen(true)] out SyntaxNode? typeDeclaration
-        ) {
+        )
+        {
             var node = TryGetAncestorForLocation<BaseTypeDeclarationSyntax>(root, position);
             typeDeclaration = node;
             if (node == null)
@@ -1709,7 +1742,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
             SyntaxNode root,
             int position,
             [NotNullWhen(true)] out SyntaxNode? propertyDeclaration
-        ) {
+        )
+        {
             var node = TryGetAncestorForLocation<PropertyDeclarationSyntax>(root, position);
             propertyDeclaration = node;
             if (propertyDeclaration == null)
@@ -1725,7 +1759,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
             SyntaxNode root,
             int position,
             [NotNullWhen(true)] out SyntaxNode? parameter
-        ) {
+        )
+        {
             var node = TryGetAncestorForLocation<ParameterSyntax>(root, position);
             parameter = node;
             if (parameter == null)
@@ -1741,7 +1776,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
             SyntaxNode root,
             int position,
             [NotNullWhen(true)] out SyntaxNode? method
-        ) {
+        )
+        {
             var node = TryGetAncestorForLocation<MethodDeclarationSyntax>(root, position);
             method = node;
             if (method == null)
@@ -1757,7 +1793,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
             SyntaxNode root,
             int position,
             [NotNullWhen(true)] out SyntaxNode? localFunction
-        ) {
+        )
+        {
             var node = TryGetAncestorForLocation<LocalFunctionStatementSyntax>(root, position);
             localFunction = node;
             if (localFunction == null)
@@ -1773,7 +1810,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
             SyntaxNode root,
             int position,
             [NotNullWhen(true)] out SyntaxNode? localDeclaration
-        ) {
+        )
+        {
             var node = TryGetAncestorForLocation<LocalDeclarationStatementSyntax>(root, position);
             localDeclaration = node;
             if (localDeclaration == null)
@@ -1792,7 +1830,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
             SyntaxNode root,
             int position,
             [NotNullWhen(true)] out SyntaxNode? ifStatement
-        ) {
+        )
+        {
             var node = TryGetAncestorForLocation<IfStatementSyntax>(root, position);
             ifStatement = node;
             if (ifStatement == null)
@@ -1808,7 +1847,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
             SyntaxNode root,
             int position,
             [NotNullWhen(true)] out SyntaxNode? whileStatement
-        ) {
+        )
+        {
             var node = TryGetAncestorForLocation<WhileStatementSyntax>(root, position);
             whileStatement = node;
             if (whileStatement == null)
@@ -1824,7 +1864,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
             SyntaxNode root,
             int position,
             [NotNullWhen(true)] out SyntaxNode? foreachStatement
-        ) {
+        )
+        {
             var node = TryGetAncestorForLocation<ForEachStatementSyntax>(root, position);
             foreachStatement = node;
             if (foreachStatement == null)
@@ -1841,7 +1882,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
             SyntaxNode root,
             int position,
             [NotNullWhen(true)] out SyntaxNode? typeDeclaration
-        ) {
+        )
+        {
             var token = root.FindToken(position);
             var typeDecl = token.GetAncestor<TypeDeclarationSyntax>();
             typeDeclaration = typeDecl;
@@ -1855,7 +1897,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
             if (
                 position < typeDecl.OpenBraceToken.Span.End
                 || position > typeDecl.CloseBraceToken.Span.Start
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -1967,7 +2010,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
             SyntaxNode node,
             out SyntaxNode type,
             out SyntaxNode expression
-        ) {
+        )
+        {
             var cast = (CastExpressionSyntax)node;
             type = cast.Type;
             expression = cast.Expression;
@@ -1978,7 +2022,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
             if (
                 token.Kind() == SyntaxKind.OverrideKeyword
                 && token.Parent is MemberDeclarationSyntax member
-            ) {
+            )
+            {
                 return member.GetNameToken();
             }
 
@@ -1997,10 +2042,12 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
 
         public override SyntaxList<SyntaxNode> GetContentFromDocumentationCommentTriviaSyntax(
             SyntaxTrivia trivia
-        ) {
+        )
+        {
             if (
                 trivia.GetStructure() is DocumentationCommentTriviaSyntax documentationCommentTrivia
-            ) {
+            )
+            {
                 return documentationCommentTrivia.Content;
             }
 
@@ -2089,7 +2136,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
             out Accessibility accessibility,
             out DeclarationModifiers modifiers,
             out bool isDefault
-        ) {
+        )
+        {
             accessibility = Accessibility.NotApplicable;
             modifiers = DeclarationModifiers.None;
             isDefault = false;
@@ -2287,7 +2335,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
                     if (
                         !(declaration.Parent is AttributeListSyntax parentList)
                         || parentList.Attributes.Count > 1
-                    ) {
+                    )
+                    {
                         return DeclarationKind.Attribute;
                     }
                     break;
@@ -2323,7 +2372,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
             out SyntaxNode left,
             out SyntaxToken isToken,
             out SyntaxNode right
-        ) {
+        )
+        {
             var isPatternExpression = (IsPatternExpressionSyntax)node;
             left = isPatternExpression.Expression;
             isToken = isPatternExpression.IsKeyword;
@@ -2351,7 +2401,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
             SyntaxNode node,
             out SyntaxNode type,
             out SyntaxNode designation
-        ) {
+        )
+        {
             var declarationPattern = (DeclarationPatternSyntax)node;
             type = declarationPattern.Type;
             designation = declarationPattern.Designation;
@@ -2363,7 +2414,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
             out SyntaxNode? positionalPart,
             out SyntaxNode? propertyPart,
             out SyntaxNode? designation
-        ) {
+        )
+        {
             var recursivePattern = (RecursivePatternSyntax)node;
             type = recursivePattern.Type;
             positionalPart = recursivePattern.PositionalPatternClause;
@@ -2400,7 +2452,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
             out SyntaxToken openParen,
             out SyntaxNode pattern,
             out SyntaxToken closeParen
-        ) {
+        )
+        {
             var parenthesizedPattern = (ParenthesizedPatternSyntax)node;
             openParen = parenthesizedPattern.OpenParenToken;
             pattern = parenthesizedPattern.Pattern;
@@ -2412,7 +2465,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
             out SyntaxNode left,
             out SyntaxToken operatorToken,
             out SyntaxNode right
-        ) {
+        )
+        {
             var binaryPattern = (BinaryPatternSyntax)node;
             left = binaryPattern.Left;
             operatorToken = binaryPattern.OperatorToken;
@@ -2423,7 +2477,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
             SyntaxNode node,
             out SyntaxToken operatorToken,
             out SyntaxNode pattern
-        ) {
+        )
+        {
             var unaryPattern = (UnaryPatternSyntax)node;
             operatorToken = unaryPattern.OperatorToken;
             pattern = unaryPattern.Pattern;
@@ -2448,7 +2503,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
             out SyntaxToken stringStartToken,
             out SyntaxList<SyntaxNode> contents,
             out SyntaxToken stringEndToken
-        ) {
+        )
+        {
             var interpolatedStringExpression = (InterpolatedStringExpressionSyntax)node;
             stringStartToken = interpolatedStringExpression.StringStartToken;
             contents = interpolatedStringExpression.Contents;

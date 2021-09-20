@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
     {
         public OutputFormatterTest(
             MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting> fixture
-        ) {
+        )
+        {
             Client = fixture.CreateDefaultClient();
         }
 
@@ -27,7 +28,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [InlineData("ReturnObject_StringValue")]
         public async Task StringOutputFormatter_ForStringValues_GetsSelectedReturnsTextPlainContentType(
             string actionName
-        ) {
+        )
+        {
             // Arrange
             var expectedContentType = MediaTypeHeaderValue.Parse("text/plain;charset=utf-8");
             var expectedBody = actionName;
@@ -79,7 +81,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [InlineData("ReturnObject_NullValue")]
         public async Task NoContentFormatter_ForNullValue_ByDefault_GetsSelectedAndWritesResponse(
             string actionName
-        ) {
+        )
+        {
             // Arrange & Act
             var response = await Client.GetAsync("http://localhost/NoContent/" + actionName);
 
@@ -98,7 +101,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [InlineData("ReturnObject_NullValue")]
         public async Task NoContentFormatter_ForNullValue_AndTreatNullAsNoContentFlagSetToFalse_DoesNotGetSelected(
             string actionName
-        ) {
+        )
+        {
             // Arrange & Act
             var response = await Client.GetAsync(
                 "http://localhost/NoContentDoNotTreatNullValueAsNoContent/" + actionName

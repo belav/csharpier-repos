@@ -59,7 +59,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.M
         public FileWatchedPortableExecutableReferenceFactory(
             Lazy<VisualStudioWorkspace> visualStudioWorkspace,
             FileChangeWatcherProvider fileChangeWatcherProvider
-        ) {
+        )
+        {
             _visualStudioWorkspace = visualStudioWorkspace;
 
             // We will do a single directory watch on the Reference Assemblies folder to avoid having to create separate file
@@ -89,7 +90,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.M
         public PortableExecutableReference CreateReferenceAndStartWatchingFile(
             string fullFilePath,
             MetadataReferenceProperties properties
-        ) {
+        )
+        {
             lock (_gate)
             {
                 var reference = _visualStudioWorkspace.Value.CreatePortableExecutableReference(
@@ -142,7 +144,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.M
                         fullFilePath,
                         out var cancellationTokenSource
                     )
-                ) {
+                )
+                {
                     cancellationTokenSource.Cancel();
                     _metadataReferenceRefreshCancellationTokenSources.Remove(fullFilePath);
                 }

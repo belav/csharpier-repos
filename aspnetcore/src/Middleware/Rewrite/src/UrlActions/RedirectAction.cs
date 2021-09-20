@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Rewrite.UrlActions
             bool queryStringAppend,
             bool queryStringDelete,
             bool escapeBackReferences
-        ) {
+        )
+        {
             StatusCode = statusCode;
             Url = pattern;
             QueryStringAppend = queryStringAppend;
@@ -32,7 +33,8 @@ namespace Microsoft.AspNetCore.Rewrite.UrlActions
             RewriteContext context,
             BackReferenceCollection? ruleBackReferences,
             BackReferenceCollection? conditionBackReferences
-        ) {
+        )
+        {
             var pattern = Url!.Evaluate(context, ruleBackReferences, conditionBackReferences);
             var response = context.HttpContext.Response;
             var pathBase = context.HttpContext.Request.PathBase;
@@ -51,7 +53,8 @@ namespace Microsoft.AspNetCore.Rewrite.UrlActions
             if (
                 pattern.IndexOf(Uri.SchemeDelimiter, StringComparison.Ordinal) == -1
                 && pattern[0] != '/'
-            ) {
+            )
+            {
                 pattern = '/' + pattern;
             }
             response.StatusCode = StatusCode;

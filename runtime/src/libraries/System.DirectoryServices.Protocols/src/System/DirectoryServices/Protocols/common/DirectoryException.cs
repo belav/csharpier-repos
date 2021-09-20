@@ -28,10 +28,8 @@ namespace System.DirectoryServices.Protocols
     )]
     public class DirectoryOperationException : DirectoryException, ISerializable
     {
-        protected DirectoryOperationException(
-            SerializationInfo info,
-            StreamingContext context
-        ) : base(info, context) { }
+        protected DirectoryOperationException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
 
         public DirectoryOperationException() : base() { }
 

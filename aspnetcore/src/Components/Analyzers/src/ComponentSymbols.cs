@@ -69,7 +69,8 @@ namespace Microsoft.AspNetCore.Components.Analyzers
             INamedTypeSymbol cascadingParameterAttribute,
             INamedTypeSymbol parameterCaptureUnmatchedValuesRuntimeType,
             INamedTypeSymbol icomponentType
-        ) {
+        )
+        {
             ParameterAttribute = parameterAttribute;
             CascadingParameterAttribute = cascadingParameterAttribute;
             ParameterCaptureUnmatchedValuesRuntimeType = parameterCaptureUnmatchedValuesRuntimeType;

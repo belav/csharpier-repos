@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
 #pragma warning restore CS0618
             IHostApplicationLifetime applicationLifetime,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -75,7 +76,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
         public async ValueTask<IConnectionListener> BindAsync(
             EndPoint endpoint,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var transportContext = new LibuvTransportContext
             {
                 Options = _baseTransportContext.Options,

@@ -17,7 +17,8 @@ namespace System.Text.Json.Serialization.Converters
             Utf8JsonWriter writer,
             object value,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             if (value == null)
             {
                 writer.WriteNullValue();
@@ -44,7 +45,8 @@ namespace System.Text.Json.Serialization.Converters
             ref Utf8JsonReader reader,
             Type typeToConvert,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             switch (reader.TokenType)
             {
                 case JsonTokenType.Null:

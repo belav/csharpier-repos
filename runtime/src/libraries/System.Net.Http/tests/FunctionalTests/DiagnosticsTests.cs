@@ -132,7 +132,8 @@ namespace System.Net.Http.Functional.Tests
 
                         using (
                             DiagnosticListener.AllListeners.Subscribe(diagnosticListenerObserver)
-                        ) {
+                        )
+                        {
                             diagnosticListenerObserver.Enable(s => !s.Contains("HttpRequestOut"));
                             using (HttpClient client = CreateHttpClient(useVersionString))
                             {
@@ -204,7 +205,8 @@ namespace System.Net.Http.Functional.Tests
 
                         using (
                             DiagnosticListener.AllListeners.Subscribe(diagnosticListenerObserver)
-                        ) {
+                        )
+                        {
                             using (HttpClient client = CreateHttpClient(useVersionString))
                             {
                                 LoopbackServer.CreateServerAsync(
@@ -268,7 +270,8 @@ namespace System.Net.Http.Functional.Tests
                                 "Private.InternalDiagnostics.System.Net.Http",
                                 EventLevel.Verbose
                             )
-                        ) {
+                        )
+                        {
                             var events = new ConcurrentQueue<EventWrittenEventArgs>();
                             await listener.RunWithCallbackAsync(
                                 events.Enqueue,
@@ -304,7 +307,8 @@ namespace System.Net.Http.Functional.Tests
                                                 remoteServer,
                                                 content
                                             )
-                                        ) {
+                                        )
+                                        {
                                             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                                         }
                                     }
@@ -363,7 +367,8 @@ namespace System.Net.Http.Functional.Tests
 
                         using (
                             DiagnosticListener.AllListeners.Subscribe(diagnosticListenerObserver)
-                        ) {
+                        )
+                        {
                             diagnosticListenerObserver.Enable(s => !s.Contains("HttpRequestOut"));
                             using (HttpClient client = CreateHttpClient(useVersionString))
                             {
@@ -420,7 +425,8 @@ namespace System.Net.Http.Functional.Tests
 
                         using (
                             DiagnosticListener.AllListeners.Subscribe(diagnosticListenerObserver)
-                        ) {
+                        )
+                        {
                             diagnosticListenerObserver.Enable(s => !s.Contains("HttpRequestOut"));
                             using (HttpClient client = CreateHttpClient(useVersionString))
                             {
@@ -543,7 +549,8 @@ namespace System.Net.Http.Functional.Tests
 
                         using (
                             DiagnosticListener.AllListeners.Subscribe(diagnosticListenerObserver)
-                        ) {
+                        )
+                        {
                             diagnosticListenerObserver.Enable(s => s.Contains("HttpRequestOut"));
                             using (HttpClient client = CreateHttpClient(useVersionString))
                             {
@@ -680,7 +687,8 @@ namespace System.Net.Http.Functional.Tests
 
                         using (
                             DiagnosticListener.AllListeners.Subscribe(diagnosticListenerObserver)
-                        ) {
+                        )
+                        {
                             diagnosticListenerObserver.Enable(s => s.Contains("HttpRequestOut"));
                             using (HttpClient client = CreateHttpClient(useVersionString))
                             {
@@ -805,7 +813,8 @@ namespace System.Net.Http.Functional.Tests
 
                         using (
                             DiagnosticListener.AllListeners.Subscribe(diagnosticListenerObserver)
-                        ) {
+                        )
+                        {
                             diagnosticListenerObserver.Enable(s => s.Contains("HttpRequestOut"));
                             using (HttpClient client = CreateHttpClient(useVersionString))
                             {
@@ -890,7 +899,8 @@ namespace System.Net.Http.Functional.Tests
 
                         using (
                             DiagnosticListener.AllListeners.Subscribe(diagnosticListenerObserver)
-                        ) {
+                        )
+                        {
                             diagnosticListenerObserver.Enable();
                             using (HttpClient client = CreateHttpClient(useVersionString))
                             {
@@ -972,7 +982,8 @@ namespace System.Net.Http.Functional.Tests
 
                         using (
                             DiagnosticListener.AllListeners.Subscribe(diagnosticListenerObserver)
-                        ) {
+                        )
+                        {
                             diagnosticListenerObserver.Enable();
                             using (
                                 var request = new HttpRequestMessage(
@@ -1033,7 +1044,8 @@ namespace System.Net.Http.Functional.Tests
 
                         using (
                             DiagnosticListener.AllListeners.Subscribe(diagnosticListenerObserver)
-                        ) {
+                        )
+                        {
                             diagnosticListenerObserver.Enable(
                                 (s, r, _) =>
                                 {
@@ -1115,7 +1127,8 @@ namespace System.Net.Http.Functional.Tests
 
                         using (
                             DiagnosticListener.AllListeners.Subscribe(diagnosticListenerObserver)
-                        ) {
+                        )
+                        {
                             diagnosticListenerObserver.Enable();
                             using (HttpClient client = CreateHttpClient(useVersionString))
                             {
@@ -1187,7 +1200,8 @@ namespace System.Net.Http.Functional.Tests
 
                         using (
                             DiagnosticListener.AllListeners.Subscribe(diagnosticListenerObserver)
-                        ) {
+                        )
+                        {
                             diagnosticListenerObserver.Enable();
                             using (
                                 HttpClientHandler handler = CreateHttpClientHandler(
@@ -1280,7 +1294,8 @@ namespace System.Net.Http.Functional.Tests
 
                         using (
                             DiagnosticListener.AllListeners.Subscribe(diagnosticListenerObserver)
-                        ) {
+                        )
+                        {
                             diagnosticListenerObserver.Enable();
                             using (HttpClient client = CreateHttpClient(useVersionString))
                             {
@@ -1339,7 +1354,8 @@ namespace System.Net.Http.Functional.Tests
 
                         using (
                             DiagnosticListener.AllListeners.Subscribe(diagnosticListenerObserver)
-                        ) {
+                        )
+                        {
                             diagnosticListenerObserver.Enable(
                                 s => s.Equals("System.Net.Http.Exception")
                             );
@@ -1400,7 +1416,8 @@ namespace System.Net.Http.Functional.Tests
 
                         using (
                             DiagnosticListener.AllListeners.Subscribe(diagnosticListenerObserver)
-                        ) {
+                        )
+                        {
                             diagnosticListenerObserver.Enable(
                                 s => s.Equals("System.Net.Http.HttpRequestOut")
                             );
@@ -1496,7 +1513,8 @@ namespace System.Net.Http.Functional.Tests
         public void SendAsync_SuppressedGlobalStaticPropagationEnvVar(
             string envVarValue,
             bool isInstrumentationEnabled
-        ) {
+        )
+        {
             RemoteExecutor.Invoke(
                     (innerEnvVarValue, innerIsInstrumentationEnabled) =>
                     {
@@ -1517,7 +1535,8 @@ namespace System.Net.Http.Functional.Tests
 
                         using (
                             DiagnosticListener.AllListeners.Subscribe(diagnosticListenerObserver)
-                        ) {
+                        )
+                        {
                             diagnosticListenerObserver.Enable(
                                 s => s.Equals("System.Net.Http.HttpRequestOut")
                             );
@@ -1628,7 +1647,8 @@ namespace System.Net.Http.Functional.Tests
 
                         using (
                             DiagnosticListener.AllListeners.Subscribe(diagnosticListenerObserver)
-                        ) {
+                        )
+                        {
                             diagnosticListenerObserver.Enable();
                             using (HttpClient client = CreateHttpClient(useVersionString))
                             {
@@ -1681,7 +1701,8 @@ namespace System.Net.Http.Functional.Tests
                         var diagnosticListenerObserver = new FakeDiagnosticListenerObserver(null);
                         using (
                             DiagnosticListener.AllListeners.Subscribe(diagnosticListenerObserver)
-                        ) {
+                        )
+                        {
                             diagnosticListenerObserver.Enable();
 
                             using (MyHandler handler = new MyHandler())
@@ -1710,7 +1731,8 @@ namespace System.Net.Http.Functional.Tests
         private static T GetPropertyValueFromAnonymousTypeInstance<T>(
             object obj,
             string propertyName
-        ) {
+        )
+        {
             Type t = obj.GetType();
 
             PropertyInfo p = t.GetRuntimeProperty(propertyName);

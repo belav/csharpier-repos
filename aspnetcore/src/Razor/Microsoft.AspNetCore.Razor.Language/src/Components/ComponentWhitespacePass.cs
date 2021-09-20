@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         protected override void ExecuteCore(
             RazorCodeDocument codeDocument,
             DocumentIntermediateNode documentNode
-        ) {
+        )
+        {
             if (codeDocument == null)
             {
                 throw new ArgumentNullException(nameof(codeDocument));
@@ -88,7 +89,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 var preserveWhitespaceDirective in documentNode.FindDirectiveReferences(
                     ComponentPreserveWhitespaceDirective.Directive
                 )
-            ) {
+            )
+            {
                 var token = (
                     (DirectiveIntermediateNode)preserveWhitespaceDirective.Node
                 ).Tokens.FirstOrDefault();
@@ -110,7 +112,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             IntermediateNodeCollection nodes,
             TraversalDirection direction,
             int? startIndex = null
-        ) {
+        )
+        {
             var position = startIndex.GetValueOrDefault(
                 direction == TraversalDirection.Forwards ? 0 : nodes.Count - 1
             );

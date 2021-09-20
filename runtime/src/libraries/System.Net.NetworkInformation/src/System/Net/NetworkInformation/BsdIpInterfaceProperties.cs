@@ -75,7 +75,8 @@ namespace System.Net.NetworkInformation
 
         private static unsafe GatewayIPAddressInformationCollection GetGatewayAddresses(
             int interfaceIndex
-        ) {
+        )
+        {
             HashSet<IPAddress> addressSet = new HashSet<IPAddress>();
             if (
                 Interop.Sys.EnumerateGatewayAddressesForInterface(
@@ -101,7 +102,8 @@ namespace System.Net.NetworkInformation
                         addressSet.Add(ipAddress);
                     }
                 ) == -1
-            ) {
+            )
+            {
                 throw new NetworkInformationException(SR.net_PInvokeError);
             }
 

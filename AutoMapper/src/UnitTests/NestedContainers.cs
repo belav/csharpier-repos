@@ -27,7 +27,8 @@ namespace AutoMapper.UnitTests
                     int source,
                     int dest,
                     ResolutionContext context
-                ) {
+                )
+                {
                     return source + _value;
                 }
             }
@@ -40,7 +41,8 @@ namespace AutoMapper.UnitTests
                     int source,
                     int dest,
                     ResolutionContext context
-                ) {
+                )
+                {
                     return source + 1;
                 }
             }

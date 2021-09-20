@@ -60,7 +60,8 @@ namespace Microsoft.CodeAnalysis.CSharp.TypeStyle
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = editor.OriginalRoot;
 
             foreach (var diagnostic in diagnostics)
@@ -79,7 +80,8 @@ namespace Microsoft.CodeAnalysis.CSharp.TypeStyle
             SyntaxEditor editor,
             SyntaxNode node,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
             var declarationContext = node.Parent;
@@ -107,7 +109,8 @@ namespace Microsoft.CodeAnalysis.CSharp.TypeStyle
                         SyntaxKind.ParenthesizedVariableDesignation,
                         out ParenthesizedVariableDesignationSyntax variableDesignation
                     )
-                ) {
+                )
+                {
                     parensDesignation = variableDesignation;
                 }
             }
@@ -155,7 +158,8 @@ namespace Microsoft.CodeAnalysis.CSharp.TypeStyle
         private static ExpressionSyntax GenerateTupleDeclaration(
             ITypeSymbol typeSymbol,
             ParenthesizedVariableDesignationSyntax parensDesignation
-        ) {
+        )
+        {
             Debug.Assert(typeSymbol.IsTupleType);
             var elements = ((INamedTypeSymbol)typeSymbol).TupleElements;
             Debug.Assert(elements.Length == parensDesignation.Variables.Count);
@@ -212,13 +216,12 @@ namespace Microsoft.CodeAnalysis.CSharp.TypeStyle
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                CSharpAnalyzersResources.Use_explicit_type_instead_of_var,
-                createChangedDocument,
-                CSharpAnalyzersResources.Use_explicit_type_instead_of_var
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    CSharpAnalyzersResources.Use_explicit_type_instead_of_var,
+                    createChangedDocument,
+                    CSharpAnalyzersResources.Use_explicit_type_instead_of_var
+                ) { }
         }
     }
 }

@@ -24,7 +24,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns> The same service collection so that multiple calls can be chained. </returns>
         public static IServiceCollection AddEntityFrameworkSqlServerNetTopologySuite(
             this IServiceCollection serviceCollection
-        ) {
+        )
+        {
             Check.NotNull(serviceCollection, nameof(serviceCollection));
 
             serviceCollection.TryAddSingleton(NtsGeometryServices.Instance);

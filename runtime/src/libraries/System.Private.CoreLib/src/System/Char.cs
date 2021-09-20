@@ -419,7 +419,8 @@ namespace System
             out int charsWritten,
             ReadOnlySpan<char> format,
             IFormatProvider? provider
-        ) {
+        )
+        {
             if (!destination.IsEmpty)
             {
                 destination[0] = m_value;

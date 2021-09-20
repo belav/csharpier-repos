@@ -336,7 +336,8 @@ namespace Microsoft.AspNetCore.DataProtection
         /// </summary>
         private static RegistryPolicy WithUniqueTempRegKey(
             Func<RegistryKey, RegistryPolicy> testCode
-        ) {
+        )
+        {
             string uniqueName = Guid.NewGuid().ToString();
             var uniqueSubkey = LazyHkcuTempKey.Value.CreateSubKey(uniqueName);
             try

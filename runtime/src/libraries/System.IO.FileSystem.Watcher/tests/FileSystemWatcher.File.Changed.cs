@@ -21,7 +21,8 @@ namespace System.IO.Tests
             using (var file = new TempFile(Path.Combine(testDirectory.Path, "file")))
             using (
                 var watcher = new FileSystemWatcher(testDirectory.Path, Path.GetFileName(file.Path))
-            ) {
+            )
+            {
                 Action action = () =>
                     Directory.SetLastWriteTime(file.Path, DateTime.Now + TimeSpan.FromSeconds(10));
 

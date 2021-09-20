@@ -118,7 +118,8 @@ namespace System.Transactions
         internal virtual void ChangeStatePromoted(
             InternalEnlistment enlistment,
             IPromotedEnlistment promotedEnlistment
-        ) {
+        )
+        {
             Debug.Fail($"Invalid Event for InternalEnlistment State; Current State: {GetType()}");
             throw TransactionException.CreateEnlistmentStateException(
                 null,

@@ -200,7 +200,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
         private void OnBeforeDebuggingStateChanged(
             object sender,
             DebuggingStateChangedEventArgs args
-        ) {
+        )
+        {
             if (args.After == DebuggingState.Run)
             {
                 // It's too late for us to change anything, which means we can neither commit nor
@@ -235,7 +236,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                     FunctionId.Rename_CreateOpenTextBufferManagerForAllOpenDocs,
                     CancellationToken.None
                 )
-            ) {
+            )
+            {
                 var openBuffers = new HashSet<ITextBuffer>();
                 foreach (var d in _workspace.GetOpenDocumentIds())
                 {
@@ -275,7 +277,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 !selections.Any()
                 || selections.First().IsEmpty
                 || !startingSpan.Contains(selections.First())
-            ) {
+            )
+            {
                 _triggerView.SetSelection(new SnapshotSpan(triggerSpan.Snapshot, startingSpan));
             }
 
@@ -355,7 +358,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 
         private void UpdateReferenceLocationsTask(
             JoinableTask<IInlineRenameLocationSet> findRenameLocationsTask
-        ) {
+        )
+        {
             AssertIsForeground();
 
             var asyncToken = _asyncListener.BeginAsyncOperation("UpdateReferencesTask");
@@ -566,7 +570,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                         replacementText,
                         _cancellationTokenSource.Token
                     )
-                ) {
+                )
+                {
                     foreach (var openBuffer in _openTextBuffers.Values)
                     {
                         openBuffer.ApplyReplacementText();
@@ -714,7 +719,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
         private async Task<(IInlineRenameReplacementInfo replacementInfo, LinkedFileMergeSessionResult mergeResult)> ComputeMergeResultAsync(
             IInlineRenameReplacementInfo replacementInfo,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var diffMergingSession = new LinkedFileDiffMergingSession(
                 _baseSolution,
                 replacementInfo.NewSolution,
@@ -732,7 +738,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             IInlineRenameReplacementInfo replacementInfo,
             LinkedFileMergeSessionResult mergeResult,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             AssertIsForeground();
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -766,7 +773,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
         private void LogRenameSession(
             RenameLogMessage.UserActionOutcome outcome,
             bool previewChanges
-        ) {
+        )
+        {
             if (_conflictResolutionTask == null)
             {
                 return;
@@ -896,7 +904,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                     KeyValueLogMessage.Create(LogType.UserAction),
                     waitContext.CancellationToken
                 )
-            ) {
+            )
+            {
                 var newSolution =
                     _conflictResolutionTask.Join(waitContext.CancellationToken).NewSolution;
                 waitContext.AllowCancel = false;
@@ -957,7 +966,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                     changedDocumentIDs,
                     this.ReplacementText
                 )
-            ) {
+            )
+            {
                 var notificationService = _workspace.Services.GetService<INotificationService>();
                 notificationService.SendNotification(
                     EditorFeaturesResources.Rename_operation_was_cancelled_or_is_not_valid,
@@ -1016,7 +1026,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                         finalChangedIds,
                         this.ReplacementText
                     )
-                ) {
+                )
+                {
                     var notificationService =
                         _workspace.Services.GetService<INotificationService>();
                     notificationService.SendNotification(
@@ -1033,7 +1044,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
         internal bool TryGetContainingEditableSpan(
             SnapshotPoint point,
             out SnapshotSpan editableSpan
-        ) {
+        )
+        {
             editableSpan = default;
             if (!_openTextBuffers.TryGetValue(point.Snapshot.TextBuffer, out var bufferManager))
             {

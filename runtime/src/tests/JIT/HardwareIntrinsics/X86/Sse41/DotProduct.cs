@@ -28,7 +28,8 @@ namespace IntelHardwareIntrinsicTest
                         new float[4] { 22, -1, -50, 0 },
                         new float[4]
                     )
-                ) {
+                )
+                {
                     var vf1 = Unsafe.Read<Vector128<float>>(floatTable.inArray1Ptr);
                     var vf2 = Unsafe.Read<Vector128<float>>(floatTable.inArray2Ptr);
 
@@ -47,7 +48,8 @@ namespace IntelHardwareIntrinsicTest
                                             + (x[3] * y[3])
                                 )
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("SSE41 DotProduct failed on float:");
                         foreach (var item in floatTable.outArray)
                         {
@@ -68,7 +70,8 @@ namespace IntelHardwareIntrinsicTest
                                         result == (x[0] * y[0]) + (x[1] * y[1]) + (x[2] * y[2])
                                 )
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("SSE41 DotProduct failed on float:");
                         foreach (var item in floatTable.outArray)
                         {
@@ -85,7 +88,8 @@ namespace IntelHardwareIntrinsicTest
                         !floatTable.CheckResult(
                             (x, y, z) => z.All(result => result == ((x[0] * y[0]) + (x[1] * y[1])))
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("3 SSE41 DotProduct failed on float:");
                         foreach (var item in floatTable.outArray)
                         {
@@ -106,7 +110,8 @@ namespace IntelHardwareIntrinsicTest
                                 && z[1] == 0
                                 && z[3] == 0
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("SSE41 DotProduct failed on float:");
                         foreach (var item in floatTable.outArray)
                         {
@@ -136,7 +141,8 @@ namespace IntelHardwareIntrinsicTest
                                             + (x[3] * y[3])
                                 )
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("SSE41 DotProduct failed on float:");
                         foreach (var item in floatTable.outArray)
                         {
@@ -153,7 +159,8 @@ namespace IntelHardwareIntrinsicTest
                         new double[2] { 22, -1 },
                         new double[2]
                     )
-                ) {
+                )
+                {
                     var vf1 = Unsafe.Read<Vector128<double>>(doubleTable.inArray1Ptr);
                     var vf2 = Unsafe.Read<Vector128<double>>(doubleTable.inArray2Ptr);
 
@@ -164,7 +171,8 @@ namespace IntelHardwareIntrinsicTest
                         !doubleTable.CheckResult(
                             (x, y, z) => z.All(result => result == (x[0] * y[0]) + (x[1] * y[1]))
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("SSE41 DotProduct failed on double:");
                         foreach (var item in doubleTable.outArray)
                         {
@@ -181,7 +189,8 @@ namespace IntelHardwareIntrinsicTest
                         !doubleTable.CheckResult(
                             (x, y, z) => z.All(result => result == (x[0] * y[0]))
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("SSE41 DotProduct failed on double:");
                         foreach (var item in doubleTable.outArray)
                         {
@@ -231,7 +240,8 @@ namespace IntelHardwareIntrinsicTest
                         !doubleTable.CheckResult(
                             (x, y, z) => z.All(result => result == (x[0] * y[0]) + (x[1] * y[1]))
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("SSE41 DotProduct failed on double:");
                         foreach (var item in doubleTable.outArray)
                         {

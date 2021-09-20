@@ -122,7 +122,8 @@ namespace System.Web.Http
                     expectedExceptionLogger,
                     exceptionHandler
                 )
-            ) {
+            )
+            {
                 // Act
                 IExceptionLogger exceptionLogger = product.ExceptionLogger;
 
@@ -147,7 +148,8 @@ namespace System.Web.Http
                     exceptionLogger,
                     expectedExceptionHandler
                 )
-            ) {
+            )
+            {
                 // Act
                 IExceptionHandler exceptionHandler = product.ExceptionHandler;
 
@@ -454,7 +456,8 @@ namespace System.Web.Http
                     exceptionLogger,
                     exceptionHandler
                 )
-            ) {
+            )
+            {
                 CancellationToken cancellationToken = CreateCancellationToken();
 
                 // Act
@@ -520,7 +523,8 @@ namespace System.Web.Http
                     exceptionLogger,
                     exceptionHandler
                 )
-            ) {
+            )
+            {
                 CancellationToken cancellationToken = CreateCancellationToken();
 
                 // Act
@@ -566,7 +570,8 @@ namespace System.Web.Http
                     exceptionLogger,
                     exceptionHandler
                 )
-            ) {
+            )
+            {
                 CancellationToken cancellationToken = CreateCancellationToken();
 
                 // Act & Assert
@@ -615,7 +620,8 @@ namespace System.Web.Http
                         exceptionLogger,
                         exceptionHandler
                     )
-                ) {
+                )
+                {
                     CancellationToken cancellationToken = CreateCancellationToken();
 
                     // Act
@@ -754,7 +760,8 @@ namespace System.Web.Http
             HttpMessageHandler dispatcher,
             IExceptionLogger exceptionLogger,
             IExceptionHandler exceptionHandler
-        ) {
+        )
+        {
             return new HttpServer(configuration, dispatcher)
             {
                 ExceptionLogger = exceptionLogger,
@@ -812,7 +819,8 @@ namespace System.Web.Http
             protected override async Task<HttpResponseMessage> SendAsync(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 HttpRequestContext incomingContext = request.GetRequestContext();
 
                 if (incomingContext == null)
@@ -866,7 +874,8 @@ namespace System.Web.Http
             protected override async Task<HttpResponseMessage> SendAsync(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // dummy await so that the task doesn't get completed synchronously.
                 await Task.FromResult(42);
                 throw _exception;
@@ -885,7 +894,8 @@ namespace System.Web.Http
             public override IHttpRouteData GetRouteData(
                 string virtualPathRoot,
                 HttpRequestMessage request
-            ) {
+            )
+            {
                 throw _exception;
             }
         }

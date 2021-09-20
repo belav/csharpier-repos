@@ -52,7 +52,8 @@ namespace ILCompiler
             string callChainProfileFile,
             CompilerTypeSystemContext context,
             IEnumerable<ModuleDesc> referenceableModules
-        ) {
+        )
+        {
             _referenceableModules = referenceableModules;
             var analysisData = ReadCallChainAnalysisData(callChainProfileFile);
             _resolvedProfileData = ResolveMethods(analysisData, context);
@@ -64,7 +65,8 @@ namespace ILCompiler
         private Dictionary<MethodDesc, Dictionary<MethodDesc, int>> ResolveMethods(
             Dictionary<string, Dictionary<string, int>> profileData,
             CompilerTypeSystemContext context
-        ) {
+        )
+        {
             var resolvedProfileData = new Dictionary<MethodDesc, Dictionary<MethodDesc, int>>();
             Dictionary<string, MethodDesc> nameToMethodDescMap = new Dictionary<
                 string,
@@ -118,7 +120,8 @@ namespace ILCompiler
             Dictionary<string, MethodDesc> nameToMethodDescMap,
             string methodName,
             CompilerTypeSystemContext context
-        ) {
+        )
+        {
             MethodDesc resolvedMethod = null;
             if (nameToMethodDescMap.ContainsKey(methodName))
             {
@@ -165,7 +168,8 @@ namespace ILCompiler
                 || splitMethodName[0].EndsWith(".ni.dll")
                 || splitMethodName[0].EndsWith(".exe")
                 || splitMethodName[0].EndsWith(".ni.exe")
-            ) {
+            )
+            {
                 // Native stack frame for the method name. This happens for managed methods in native images
                 // (Remember, this is .NET Framework data we're starting with)
                 string moduleSimpleName = Path.ChangeExtension(splitMethodName[0], null);
@@ -271,7 +275,8 @@ namespace ILCompiler
             ModuleDesc module,
             string namespaceAndTypeName,
             string methodName
-        ) {
+        )
+        {
             TypeDesc resolvedType = module.GetTypeByCustomAttributeTypeName(
                 namespaceAndTypeName,
                 false,
@@ -300,7 +305,8 @@ namespace ILCompiler
 
         private Dictionary<string, Dictionary<string, int>> ReadCallChainAnalysisData(
             string jsonProfileFile
-        ) {
+        )
+        {
             Dictionary<string, Dictionary<string, int>> profileData = new Dictionary<
                 string,
                 Dictionary<string, int>
@@ -323,7 +329,8 @@ namespace ILCompiler
                         {
                             foreach (
                                 JsonElement followingMethods in methodListArray.EnumerateArray()
-                            ) {
+                            )
+                            {
                                 followingMethodList.Add(followingMethods.GetString());
                             }
 

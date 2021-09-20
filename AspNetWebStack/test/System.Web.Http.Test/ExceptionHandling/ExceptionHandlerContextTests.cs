@@ -138,7 +138,8 @@ namespace System.Web.Http.ExceptionHandling
 
         private static ExceptionHandlerContext CreateProductUnderTest(
             ExceptionContext exceptionContext
-        ) {
+        )
+        {
             return new ExceptionHandlerContext(exceptionContext);
         }
     }

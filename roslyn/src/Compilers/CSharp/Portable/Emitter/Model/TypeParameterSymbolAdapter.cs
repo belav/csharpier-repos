@@ -122,7 +122,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         Cci.INamespaceTypeDefinition Cci.ITypeReference.AsNamespaceTypeDefinition(
             EmitContext context
-        ) {
+        )
+        {
             return null;
         }
 
@@ -233,7 +234,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         IEnumerable<Cci.TypeReferenceWithAttributes> Cci.IGenericParameter.GetConstraints(
             EmitContext context
-        ) {
+        )
+        {
             var moduleBeingBuilt = (PEModuleBuilder)context.Module;
 
             var seenValueType = false;

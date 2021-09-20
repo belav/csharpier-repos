@@ -38,7 +38,8 @@ namespace Microsoft.TestCommon
                         parsedMediaType2.Type,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     if (parsedMediaType1.IsAllMediaRange)
                     {
                         return 1;
@@ -54,7 +55,8 @@ namespace Microsoft.TestCommon
                         parsedMediaType2.SubType,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     if (parsedMediaType1.IsSubTypeMediaRange)
                     {
                         return 1;
@@ -86,7 +88,8 @@ namespace Microsoft.TestCommon
         private static int CompareBasedOnQualityFactor(
             ParsedMediaTypeHeaderValue parsedMediaType1,
             ParsedMediaTypeHeaderValue parsedMediaType2
-        ) {
+        )
+        {
             double qualityDifference =
                 parsedMediaType1.QualityFactor - parsedMediaType2.QualityFactor;
             if (qualityDifference < 0)

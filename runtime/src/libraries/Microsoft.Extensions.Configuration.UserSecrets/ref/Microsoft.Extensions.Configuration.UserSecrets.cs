@@ -11,14 +11,16 @@ namespace Microsoft.Extensions.Configuration
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder AddUserSecrets(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder configuration,
             System.Reflection.Assembly assembly
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder AddUserSecrets(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder configuration,
             System.Reflection.Assembly assembly,
             bool optional
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder AddUserSecrets(
@@ -26,20 +28,23 @@ namespace Microsoft.Extensions.Configuration
             System.Reflection.Assembly assembly,
             bool optional,
             bool reloadOnChange
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder AddUserSecrets(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder configuration,
             string userSecretsId
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder AddUserSecrets(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder configuration,
             string userSecretsId,
             bool reloadOnChange
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder AddUserSecrets<T>(

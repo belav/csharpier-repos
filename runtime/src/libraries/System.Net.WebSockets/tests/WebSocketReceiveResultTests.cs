@@ -38,7 +38,8 @@ namespace System.Net.WebSockets.Tests
             bool endOfMessage,
             WebSocketCloseStatus? closeStatus,
             string closeStatusDescription
-        ) {
+        )
+        {
             WebSocketReceiveResult wsrr;
 
             if (closeStatus == null && closeStatusDescription == null)

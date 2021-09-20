@@ -203,7 +203,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
         private static Compilation CreateCompilation(
             string source,
             CSharpParseOptions parseOptions = null
-        ) {
+        )
+        {
             string fileName = "Test.cs";
             string projectName = "TestProject";
 

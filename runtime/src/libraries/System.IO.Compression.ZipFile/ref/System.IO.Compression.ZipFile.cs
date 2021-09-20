@@ -48,14 +48,16 @@ namespace System.IO.Compression
         public static System.IO.Compression.ZipArchive Open(
             string archiveFileName,
             System.IO.Compression.ZipArchiveMode mode
-        ) {
+        )
+        {
             throw null;
         }
         public static System.IO.Compression.ZipArchive Open(
             string archiveFileName,
             System.IO.Compression.ZipArchiveMode mode,
             System.Text.Encoding? entryNameEncoding
-        ) {
+        )
+        {
             throw null;
         }
         public static System.IO.Compression.ZipArchive OpenRead(string archiveFileName)
@@ -72,7 +74,8 @@ namespace System.IO.Compression
             this System.IO.Compression.ZipArchive destination,
             string sourceFileName,
             string entryName
-        ) {
+        )
+        {
             throw null;
         }
         public static System.IO.Compression.ZipArchiveEntry CreateEntryFromFile(
@@ -80,7 +83,8 @@ namespace System.IO.Compression
             string sourceFileName,
             string entryName,
             System.IO.Compression.CompressionLevel compressionLevel
-        ) {
+        )
+        {
             throw null;
         }
         public static void ExtractToDirectory(

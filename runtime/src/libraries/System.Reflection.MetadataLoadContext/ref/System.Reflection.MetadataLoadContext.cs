@@ -31,7 +31,8 @@ namespace System.Reflection
         }
         public System.Reflection.Assembly LoadFromAssemblyName(
             System.Reflection.AssemblyName assemblyName
-        ) {
+        )
+        {
             throw null;
         }
         public System.Reflection.Assembly LoadFromAssemblyName(string assemblyName)
@@ -58,7 +59,8 @@ namespace System.Reflection
         public override System.Reflection.Assembly? Resolve(
             System.Reflection.MetadataLoadContext context,
             System.Reflection.AssemblyName assemblyName
-        ) {
+        )
+        {
             throw null;
         }
     }

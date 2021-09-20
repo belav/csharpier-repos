@@ -54,7 +54,8 @@ namespace System.Threading.Tasks.Tests
         [InlineData(CtorMode.ValueTaskSource)]
         public void NonGeneric_CreateFromSuccessfullyCompleted_IsCompletedSuccessfully(
             CtorMode mode
-        ) {
+        )
+        {
             ValueTask t =
                 mode == CtorMode.Result
                     ? default
@@ -714,7 +715,8 @@ namespace System.Threading.Tasks.Tests
         [InlineData(true)]
         public async Task Generic_CreateFromValueTaskSource_Await_Normal(
             bool? continueOnCapturedContext
-        ) {
+        )
+        {
             var mre = new ManualResetValueTaskSource<int>();
             var t = new ValueTask<int>(mre, 0);
             var ignored = Task.Delay(1).ContinueWith(_ => mre.SetResult(42));
@@ -817,7 +819,8 @@ namespace System.Threading.Tasks.Tests
         public async Task NonGeneric_ConfiguredAwaiter_OnCompleted(
             CtorMode mode,
             bool continueOnCapturedContext
-        ) {
+        )
+        {
             ValueTask t =
                 mode == CtorMode.Result
                     ? new ValueTask()
@@ -842,7 +845,8 @@ namespace System.Threading.Tasks.Tests
         public async Task NonGeneric_ConfiguredAwaiter_UnsafeOnCompleted(
             CtorMode mode,
             bool continueOnCapturedContext
-        ) {
+        )
+        {
             ValueTask t =
                 mode == CtorMode.Result
                     ? new ValueTask()
@@ -867,7 +871,8 @@ namespace System.Threading.Tasks.Tests
         public async Task Generic_ConfiguredAwaiter_OnCompleted(
             CtorMode mode,
             bool continueOnCapturedContext
-        ) {
+        )
+        {
             ValueTask<int> t =
                 mode == CtorMode.Result
                     ? new ValueTask<int>(42)
@@ -895,7 +900,8 @@ namespace System.Threading.Tasks.Tests
         public async Task Generic_ConfiguredAwaiter_UnsafeOnCompleted(
             CtorMode mode,
             bool continueOnCapturedContext
-        ) {
+        )
+        {
             ValueTask<int> t =
                 mode == CtorMode.Result
                     ? new ValueTask<int>(42)
@@ -1018,7 +1024,8 @@ namespace System.Threading.Tasks.Tests
             CtorMode mode,
             bool continueOnCapturedContext,
             bool sync
-        ) {
+        )
+        {
             await Task.Run(
                 async () =>
                 {
@@ -1073,7 +1080,8 @@ namespace System.Threading.Tasks.Tests
             CtorMode mode,
             bool continueOnCapturedContext,
             bool sync
-        ) {
+        )
+        {
             await Task.Run(
                 async () =>
                 {

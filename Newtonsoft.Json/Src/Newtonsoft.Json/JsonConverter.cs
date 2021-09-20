@@ -97,7 +97,8 @@ namespace Newtonsoft.Json
             JsonWriter writer,
             object? value,
             JsonSerializer serializer
-        ) {
+        )
+        {
             if (!(value != null ? value is T : ReflectionUtils.IsNullable(typeof(T))))
             {
                 throw new JsonSerializationException(
@@ -131,7 +132,8 @@ namespace Newtonsoft.Json
             Type objectType,
             object? existingValue,
             JsonSerializer serializer
-        ) {
+        )
+        {
             bool existingIsNull = existingValue == null;
             if (!(existingIsNull || existingValue is T))
             {

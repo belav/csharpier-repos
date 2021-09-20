@@ -83,7 +83,8 @@ namespace Microsoft.CodeAnalysis
             ImmutableArray<GeneratedSourceResult> generatedSources,
             ImmutableArray<Diagnostic> diagnostics,
             Exception? exception
-        ) {
+        )
+        {
             Debug.Assert(
                 exception is null || (generatedSources.IsEmpty && diagnostics.Length == 1)
             );

@@ -23,7 +23,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library
             SYMBOL_DESCRIPTION_NODE[] rgSymbolNodes,
             uint ulcNodes,
             out IVsNavInfo ppNavInfo
-        ) {
+        )
+        {
             ppNavInfo = null;
             return VSConstants.E_NOTIMPL;
         }
@@ -58,7 +59,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library
             uint flags,
             VSOBSEARCHCRITERIA2[] pobSrch,
             out IVsObjectList2 ppIVsObjectList2
-        ) {
+        )
+        {
             ppIVsObjectList2 = null;
             return VSConstants.E_NOTIMPL;
         }

@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             SignatureHelpTriggerReason triggerReason,
             CancellationToken cancellationToken,
             out InvocationExpressionSyntax expression
-        ) {
+        )
+        {
             if (
                 !CommonSignatureHelpUtilities.TryGetSyntax(
                     root,
@@ -61,7 +62,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                     cancellationToken,
                     out expression
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -77,7 +79,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
         private static bool IsArgumentListToken(
             InvocationExpressionSyntax expression,
             SyntaxToken token
-        ) {
+        )
+        {
             return expression.ArgumentList.Span.Contains(token.SpanStart)
                 && token != expression.ArgumentList.CloseParenToken;
         }
@@ -87,7 +90,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             int position,
             SignatureHelpTriggerInfo triggerInfo,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
             if (
@@ -99,7 +103,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                     cancellationToken,
                     out var invocationExpression
                 )
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -133,7 +138,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             if (
                 symbolInfo.Symbol is IMethodSymbol matchedMethodSymbol
                 && matchedMethodSymbol.IsGenericMethod
-            ) {
+            )
+            {
                 methodGroup = methodGroup.SelectAsArray(
                     m => Equals(matchedMethodSymbol.OriginalDefinition, m) ? matchedMethodSymbol : m
                 );
@@ -189,7 +195,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             if (
                 invokedType is INamedTypeSymbol expressionType
                 && expressionType.TypeKind == TypeKind.Delegate
-            ) {
+            )
+            {
                 var items = GetDelegateInvokeItems(
                     invocationExpression,
                     semanticModel,
@@ -249,7 +256,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             ISyntaxFactsService syntaxFacts,
             TextSpan currentSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 TryGetInvocationExpression(
                     root,
@@ -261,7 +269,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                 )
                 && currentSpan.Start
                     == SignatureHelpUtilities.GetSignatureHelpSpan(expression.ArgumentList).Start
-            ) {
+            )
+            {
                 return SignatureHelpUtilities.GetSignatureHelpState(
                     expression.ArgumentList,
                     position

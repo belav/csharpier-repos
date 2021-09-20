@@ -149,7 +149,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
             );
             foreach (
                 (FieldSymbol field, int index) in _underlyingType.TupleFieldDefinitionsToIndexMap
-            ) {
+            )
+            {
                 retargetedMap.Add(this.RetargetingTranslator.Retarget(field), index);
             }
 
@@ -255,7 +256,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
         internal override IEnumerable<CSharpAttributeData> GetCustomAttributesToEmit(
             PEModuleBuilder moduleBuilder
-        ) {
+        )
+        {
             return this.RetargetingTranslator.RetargetAttributes(
                 _underlyingType.GetCustomAttributesToEmit(moduleBuilder)
             );
@@ -282,7 +284,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
         private static ExtendedErrorTypeSymbol CyclicInheritanceError(
             RetargetingNamedTypeSymbol type,
             TypeSymbol declaredBase
-        ) {
+        )
+        {
             var info = new CSDiagnosticInfo(ErrorCode.ERR_ImportedCircularBase, declaredBase, type);
             return new ExtendedErrorTypeSymbol(
                 declaredBase,
@@ -316,7 +319,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                     if (
                         (object)acyclicBase != null
                         && BaseTypeAnalysis.TypeDependsOn(acyclicBase, this)
-                    ) {
+                    )
+                    {
                         return CyclicInheritanceError(this, acyclicBase);
                     }
 
@@ -333,7 +337,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
         internal override ImmutableArray<NamedTypeSymbol> InterfacesNoUseSiteDiagnostics(
             ConsList<TypeSymbol> basesBeingResolved
-        ) {
+        )
+        {
             if (_lazyInterfaces.IsDefault)
             {
                 var declaredInterfaces = GetDeclaredInterfaces(basesBeingResolved);
@@ -367,7 +372,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
         internal override NamedTypeSymbol GetDeclaredBaseType(
             ConsList<TypeSymbol> basesBeingResolved
-        ) {
+        )
+        {
             if (ReferenceEquals(_lazyDeclaredBaseType, ErrorTypeSymbol.UnknownResultType))
             {
                 var underlyingBase = _underlyingType.GetDeclaredBaseType(basesBeingResolved);
@@ -390,7 +396,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
         internal override ImmutableArray<NamedTypeSymbol> GetDeclaredInterfaces(
             ConsList<TypeSymbol> basesBeingResolved
-        ) {
+        )
+        {
             if (_lazyDeclaredInterfaces.IsDefault)
             {
                 var underlyingBaseInterfaces = _underlyingType.GetDeclaredInterfaces(

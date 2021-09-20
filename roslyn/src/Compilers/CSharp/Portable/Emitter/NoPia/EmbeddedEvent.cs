@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
 
         protected override IEnumerable<CSharpAttributeData> GetCustomAttributesToEmit(
             PEModuleBuilder moduleBuilder
-        ) {
+        )
+        {
             return UnderlyingEvent.AdaptedEventSymbol.GetCustomAttributesToEmit(moduleBuilder);
         }
 
@@ -41,7 +42,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
             PEModuleBuilder moduleBuilder,
             SyntaxNode syntaxNodeOpt,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             return moduleBuilder.Translate(
                 UnderlyingEvent.AdaptedEventSymbol.Type,
                 syntaxNodeOpt,
@@ -68,7 +70,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
             SyntaxNode syntaxNodeOpt,
             DiagnosticBag diagnostics,
             bool isUsedForComAwareEventBinding
-        ) {
+        )
+        {
             // If the event happens to belong to a class with a ComEventInterfaceAttribute, there will also be
             // a paired method living on its source interface. The ComAwareEventInfo class expects to find this
             // method through reflection. If we embed an event, therefore, we must ensure that the associated source
@@ -83,7 +86,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
                         underlyingContainingType,
                         AttributeDescription.ComEventInterfaceAttribute
                     )
-                ) {
+                )
+                {
                     bool foundMatch = false;
                     NamedTypeSymbol sourceInterface = null;
 
@@ -102,14 +106,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
 
                             foreach (
                                 NamedTypeSymbol source in sourceInterface.AllInterfacesNoUseSiteDiagnostics
-                            ) {
+                            )
+                            {
                                 if (
                                     EmbedMatchingInterfaceMethods(
                                         source,
                                         syntaxNodeOpt,
                                         diagnostics
                                     )
-                                ) {
+                                )
+                                {
                                     foundMatch = true;
                                 }
                             }
@@ -163,13 +169,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
             NamedTypeSymbol sourceInterface,
             SyntaxNode syntaxNodeOpt,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             bool foundMatch = false;
             foreach (
                 Symbol m in sourceInterface.GetMembers(
                     UnderlyingEvent.AdaptedEventSymbol.MetadataName
                 )
-            ) {
+            )
+            {
                 if (m.Kind == SymbolKind.Method)
                 {
                     TypeManager.EmbedMethodIfNeedTo(

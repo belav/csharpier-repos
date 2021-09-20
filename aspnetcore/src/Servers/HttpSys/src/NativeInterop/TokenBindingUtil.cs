@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
     {
         private static byte[] ExtractIdentifierBlob(
             TOKENBINDING_RESULT_DATA* pTokenBindingResultData
-        ) {
+        )
+        {
             // Per http://tools.ietf.org/html/draft-ietf-tokbind-protocol-00, Sec. 4,
             // the identifier is a tuple which contains (token binding type, hash algorithm
             // signature algorithm, key data). We'll strip off the token binding type and
@@ -39,7 +40,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
         public static byte[]? GetProvidedTokenIdFromBindingInfo(
             HTTP_REQUEST_TOKEN_BINDING_INFO* pTokenBindingInfo,
             out byte[]? referredId
-        ) {
+        )
+        {
             byte[]? providedId = null;
             referredId = null;
 
@@ -70,7 +72,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     if (
                         pThisResultData->identifierData->bindingType
                         == TOKENBINDING_TYPE.TOKENBINDING_TYPE_PROVIDED
-                    ) {
+                    )
+                    {
                         if (providedId != null)
                         {
                             return null; // It is invalid to have more than one 'provided' identifier.
@@ -80,7 +83,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     else if (
                         pThisResultData->identifierData->bindingType
                         == TOKENBINDING_TYPE.TOKENBINDING_TYPE_REFERRED
-                    ) {
+                    )
+                    {
                         if (referredId != null)
                         {
                             return null; // It is invalid to have more than one 'referred' identifier.

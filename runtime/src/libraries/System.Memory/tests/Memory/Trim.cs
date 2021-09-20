@@ -105,7 +105,8 @@ namespace System.MemoryTests
             int[] values,
             int[] trims,
             int[] expected
-        ) {
+        )
+        {
             Memory<int> memory = new Memory<int>(values).TrimStart(trims);
             Assert.True(System.Linq.Enumerable.SequenceEqual(expected, memory.ToArray()));
 

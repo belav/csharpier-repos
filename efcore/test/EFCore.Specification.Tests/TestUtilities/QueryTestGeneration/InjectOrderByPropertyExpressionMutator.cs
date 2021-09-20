@@ -50,7 +50,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration
                     property.PropertyType.IsGenericType
                     && property.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>)
                 )
-            ) {
+            )
+            {
                 var nullablePropertyType = typeof(Nullable<>).MakeGenericType(
                     property.PropertyType
                 );
@@ -113,7 +114,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration
                         || methodCallExpression.Method.Name == "ThenBy"
                         || methodCallExpression.Method.Name == "ThenByDescending"
                     )
-                ) {
+                )
+                {
                     insideThenInclude = _insideThenInclude;
                     _insideThenInclude = true;
                 }
@@ -123,7 +125,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration
                     && expression != null
                     && IsQueryableResult(expression)
                     && !FoundExpressions.ContainsKey(expression)
-                ) {
+                )
+                {
                     var validProperties = GetValidPropertiesForOrderBy(expression);
                     validProperties = _mutator.FilterPropertyInfos(
                         expression.Type.GetGenericArguments()[0],

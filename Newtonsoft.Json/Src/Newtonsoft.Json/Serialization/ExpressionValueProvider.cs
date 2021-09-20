@@ -81,7 +81,8 @@ namespace Newtonsoft.Json.Serialization
                         !ReflectionUtils.IsNullable(
                             ReflectionUtils.GetMemberUnderlyingType(_memberInfo)
                         )
-                    ) {
+                    )
+                    {
                         throw new JsonSerializationException(
                             "Incompatible value. Cannot set {0} to null.".FormatWith(
                                 CultureInfo.InvariantCulture,
@@ -93,7 +94,8 @@ namespace Newtonsoft.Json.Serialization
                 else if (
                     !ReflectionUtils.GetMemberUnderlyingType(_memberInfo)
                         .IsAssignableFrom(value.GetType())
-                ) {
+                )
+                {
                     throw new JsonSerializationException(
                         "Incompatible value. Cannot set {0} to type {1}.".FormatWith(
                             CultureInfo.InvariantCulture,

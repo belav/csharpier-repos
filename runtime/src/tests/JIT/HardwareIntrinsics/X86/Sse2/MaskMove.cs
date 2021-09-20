@@ -45,7 +45,8 @@ namespace IntelHardwareIntrinsicTest
                         },
                         new byte[16]
                     )
-                ) {
+                )
+                {
                     Unsafe.Write(byteTable.outArrayPtr, Vector128<byte>.Zero);
 
                     var vf1 = Unsafe.Read<Vector128<byte>>(byteTable.inArray1Ptr);
@@ -56,7 +57,8 @@ namespace IntelHardwareIntrinsicTest
                         !byteTable.CheckResult(
                             (left, right, result) => result == (((right & 128) != 0) ? left : 0)
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("SSE MaskMove failed on byte:");
                         foreach (var item in byteTable.outArray)
                         {
@@ -73,7 +75,8 @@ namespace IntelHardwareIntrinsicTest
                         new sbyte[16] { -1, 0, -1, 0, -1, 0, -1, 0, 0, -1, 0, -1, 0, -1, 0, -1 },
                         new sbyte[16]
                     )
-                ) {
+                )
+                {
                     Unsafe.Write(sbyteTable.outArrayPtr, Vector128<sbyte>.Zero);
 
                     var vf1 = Unsafe.Read<Vector128<sbyte>>(sbyteTable.inArray1Ptr);
@@ -84,7 +87,8 @@ namespace IntelHardwareIntrinsicTest
                         !sbyteTable.CheckResult(
                             (left, right, result) => result == (((right & -128) != 0) ? left : 0)
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("SSE MaskMove failed on sbyte:");
                         foreach (var item in sbyteTable.outArray)
                         {

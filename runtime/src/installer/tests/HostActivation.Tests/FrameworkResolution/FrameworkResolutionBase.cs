@@ -25,11 +25,13 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             TestSettings settings,
             Action<CommandResult> resultAction = null,
             bool multiLevelLookup = false
-        ) {
+        )
+        {
             using (
                 DotNetCliExtensions.DotNetCliCustomizer dotnetCustomizer =
                     settings.DotnetCustomizer == null ? null : dotnet.Customize()
-            ) {
+            )
+            {
                 settings.DotnetCustomizer?.Invoke(dotnetCustomizer);
 
                 if (settings.RuntimeConfigCustomizer != null)

@@ -78,7 +78,8 @@ namespace Microsoft.Win32
             Type targetClass,
             short options,
             CultureInfo culture
-        ) {
+        )
+        {
             if (targetClass == null)
                 throw new ArgumentNullException(nameof(targetClass));
             if (culture == null)

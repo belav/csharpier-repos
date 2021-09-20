@@ -2663,7 +2663,8 @@ namespace System.Web.Mvc.Test
                 ITypeDescriptorContext context,
                 CultureInfo culture,
                 object value
-            ) {
+            )
+            {
                 string stringValue = value as string;
                 if (stringValue == null || stringValue.Length < 3)
                 {
@@ -2677,7 +2678,8 @@ namespace System.Web.Mvc.Test
                 CultureInfo culture,
                 object value,
                 Type destinationType
-            ) {
+            )
+            {
                 StringContainer container = value as StringContainer;
                 if (container.Value == null || container.Value.Length < 3)
                 {
@@ -2708,7 +2710,8 @@ namespace System.Web.Mvc.Test
             public object BindModel(
                 ControllerContext controllerContext,
                 ModelBindingContext bindingContext
-            ) {
+            )
+            {
                 MyStringModel castModel = bindingContext.Model as MyStringModel;
                 if (castModel != null)
                 {
@@ -2754,7 +2757,8 @@ namespace System.Web.Mvc.Test
                 ControllerContext controllerContext,
                 ModelBindingContext bindingContext,
                 PropertyDescriptor property
-            ) {
+            )
+            {
                 base.BindProperty(controllerContext, bindingContext, property);
             }
 
@@ -2762,7 +2766,8 @@ namespace System.Web.Mvc.Test
                 ControllerContext controllerContext,
                 ModelBindingContext bindingContext,
                 PropertyDescriptor property
-            ) {
+            )
+            {
                 PublicBindProperty(controllerContext, bindingContext, property);
             }
 
@@ -2770,7 +2775,8 @@ namespace System.Web.Mvc.Test
                 ControllerContext controllerContext,
                 ModelBindingContext bindingContext,
                 Type modelType
-            ) {
+            )
+            {
                 return base.CreateModel(controllerContext, bindingContext, modelType);
             }
 
@@ -2778,28 +2784,32 @@ namespace System.Web.Mvc.Test
                 ControllerContext controllerContext,
                 ModelBindingContext bindingContext,
                 Type modelType
-            ) {
+            )
+            {
                 return PublicCreateModel(controllerContext, bindingContext, modelType);
             }
 
             public virtual IEnumerable<PropertyDescriptor> PublicGetFilteredModelProperties(
                 ControllerContext controllerContext,
                 ModelBindingContext bindingContext
-            ) {
+            )
+            {
                 return base.GetFilteredModelProperties(controllerContext, bindingContext);
             }
 
             public virtual PropertyDescriptorCollection PublicGetModelProperties(
                 ControllerContext controllerContext,
                 ModelBindingContext bindingContext
-            ) {
+            )
+            {
                 return base.GetModelProperties(controllerContext, bindingContext);
             }
 
             protected override PropertyDescriptorCollection GetModelProperties(
                 ControllerContext controllerContext,
                 ModelBindingContext bindingContext
-            ) {
+            )
+            {
                 return PublicGetModelProperties(controllerContext, bindingContext);
             }
 
@@ -2821,28 +2831,32 @@ namespace System.Web.Mvc.Test
             public virtual bool PublicOnModelUpdating(
                 ControllerContext controllerContext,
                 ModelBindingContext bindingContext
-            ) {
+            )
+            {
                 return base.OnModelUpdating(controllerContext, bindingContext);
             }
 
             protected override bool OnModelUpdating(
                 ControllerContext controllerContext,
                 ModelBindingContext bindingContext
-            ) {
+            )
+            {
                 return PublicOnModelUpdating(controllerContext, bindingContext);
             }
 
             public virtual void PublicOnModelUpdated(
                 ControllerContext controllerContext,
                 ModelBindingContext bindingContext
-            ) {
+            )
+            {
                 base.OnModelUpdated(controllerContext, bindingContext);
             }
 
             protected override void OnModelUpdated(
                 ControllerContext controllerContext,
                 ModelBindingContext bindingContext
-            ) {
+            )
+            {
                 PublicOnModelUpdated(controllerContext, bindingContext);
             }
 
@@ -2851,7 +2865,8 @@ namespace System.Web.Mvc.Test
                 ModelBindingContext bindingContext,
                 PropertyDescriptor property,
                 object value
-            ) {
+            )
+            {
                 return base.OnPropertyValidating(
                     controllerContext,
                     bindingContext,
@@ -2865,7 +2880,8 @@ namespace System.Web.Mvc.Test
                 ModelBindingContext bindingContext,
                 PropertyDescriptor property,
                 object value
-            ) {
+            )
+            {
                 return PublicOnPropertyValidating(
                     controllerContext,
                     bindingContext,
@@ -2879,7 +2895,8 @@ namespace System.Web.Mvc.Test
                 ModelBindingContext bindingContext,
                 PropertyDescriptor property,
                 object value
-            ) {
+            )
+            {
                 base.OnPropertyValidated(controllerContext, bindingContext, property, value);
             }
 
@@ -2888,7 +2905,8 @@ namespace System.Web.Mvc.Test
                 ModelBindingContext bindingContext,
                 PropertyDescriptor property,
                 object value
-            ) {
+            )
+            {
                 PublicOnPropertyValidated(controllerContext, bindingContext, property, value);
             }
 
@@ -2897,7 +2915,8 @@ namespace System.Web.Mvc.Test
                 ModelBindingContext bindingContext,
                 PropertyDescriptor property,
                 object value
-            ) {
+            )
+            {
                 base.SetProperty(controllerContext, bindingContext, property, value);
             }
 
@@ -2906,7 +2925,8 @@ namespace System.Web.Mvc.Test
                 ModelBindingContext bindingContext,
                 PropertyDescriptor property,
                 object value
-            ) {
+            )
+            {
                 PublicSetProperty(controllerContext, bindingContext, property, value);
             }
         }

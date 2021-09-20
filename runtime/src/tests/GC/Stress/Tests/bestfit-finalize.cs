@@ -156,7 +156,8 @@ namespace Fragment
                         (!Int32.TryParse(args[0], out numIterations))
                         || (!Int32.TryParse(args[1], out NumRequests))
                         || (!Int32.TryParse(args[2], out AllocationVolume))
-                    ) {
+                    )
+                    {
                         goto default;
                     }
 

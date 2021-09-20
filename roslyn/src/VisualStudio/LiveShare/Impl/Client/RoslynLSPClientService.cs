@@ -29,7 +29,8 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
         public Task<ICollaborationService> CreateServiceAsync(
             CollaborationSession collaborationSession,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var languageServerGuestService =
                 (LS.ILanguageServerGuestService)collaborationSession.GetService(
                     typeof(LS.ILanguageServerGuestService)
@@ -58,7 +59,8 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
                     collaborationSession.RemoteServiceNames.Contains(
                         languageSpecificLspServerProviderName
                     )
-                ) {
+                )
+                {
                     ActiveLanguageServerClient =
                         languageServerGuestService.CreateLanguageServerClient(
                             languageSpecificLspServerProviderName
@@ -66,7 +68,8 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
                 }
                 else if (
                     collaborationSession.RemoteServiceNames.Contains(roslynLspServerProviderName)
-                ) {
+                )
+                {
                     ActiveLanguageServerClient =
                         languageServerGuestService.CreateLanguageServerClient(
                             roslynLspServerProviderName

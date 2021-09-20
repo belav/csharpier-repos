@@ -17,21 +17,24 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
         {
             using (
                 ECDiffieHellman ecdh = ECDiffieHellmanFactory.Create(ECCurve.NamedCurves.nistP256)
-            ) {
+            )
+            {
                 Assert.Equal(256, ecdh.KeySize);
                 ecdh.Exercise();
             }
 
             using (
                 ECDiffieHellman ecdh = ECDiffieHellmanFactory.Create(ECCurve.NamedCurves.nistP384)
-            ) {
+            )
+            {
                 Assert.Equal(384, ecdh.KeySize);
                 ecdh.Exercise();
             }
 
             using (
                 ECDiffieHellman ecdh = ECDiffieHellmanFactory.Create(ECCurve.NamedCurves.nistP521)
-            ) {
+            )
+            {
                 Assert.Equal(521, ecdh.KeySize);
                 ecdh.Exercise();
             }

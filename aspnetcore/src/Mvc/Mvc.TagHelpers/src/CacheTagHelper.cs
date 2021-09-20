@@ -42,10 +42,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         /// <param name="factory">The factory containing the private <see cref="IMemoryCache"/> instance
         /// used by the <see cref="CacheTagHelper"/>.</param>
         /// <param name="htmlEncoder">The <see cref="HtmlEncoder"/> to use.</param>
-        public CacheTagHelper(
-            CacheTagHelperMemoryCacheFactory factory,
-            HtmlEncoder htmlEncoder
-        ) : base(htmlEncoder)
+        public CacheTagHelper(CacheTagHelperMemoryCacheFactory factory, HtmlEncoder htmlEncoder)
+            : base(htmlEncoder)
         {
             MemoryCache = factory.Cache;
         }
@@ -101,7 +99,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         private async Task<IHtmlContent> CreateCacheEntry(
             CacheTagKey cacheKey,
             TagHelperOutput output
-        ) {
+        )
+        {
             var tokenSource = new CancellationTokenSource();
 
             var options = GetMemoryCacheEntryOptions();

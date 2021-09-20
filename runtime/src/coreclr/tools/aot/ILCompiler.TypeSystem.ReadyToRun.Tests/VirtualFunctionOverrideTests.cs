@@ -353,7 +353,8 @@ namespace TypeSystemTests
             MetadataType type,
             out MethodDesc md1,
             out MethodDesc md2
-        ) {
+        )
+        {
             var algo = new MetadataVirtualMethodAlgorithm();
             var stringType = _context.GetWellKnownType(WellKnownType.String);
 

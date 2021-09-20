@@ -126,7 +126,8 @@ namespace System.Web.Http.WebHost
                             context.ExceptionContext.Exception
                         )
                     )
-                ) {
+                )
+                {
                     AssertErrorResponse(expectedResponse, response);
                 }
             }
@@ -170,7 +171,8 @@ namespace System.Web.Http.WebHost
                             context.ExceptionContext.Exception
                         )
                     )
-                ) {
+                )
+                {
                     AssertErrorResponse(expectedResponse, response);
                 }
             }
@@ -346,7 +348,8 @@ namespace System.Web.Http.WebHost
         private static void AssertErrorResponse(
             HttpResponseMessage expected,
             HttpResponseMessage actual
-        ) {
+        )
+        {
             Assert.NotNull(expected); // Guard
             ObjectContent<HttpError> expectedContent = Assert.IsType<ObjectContent<HttpError>>(
                 expected.Content
@@ -382,7 +385,8 @@ namespace System.Web.Http.WebHost
             IDictionary<string, object> source,
             string prefix,
             IDictionary<string, object> destination
-        ) {
+        )
+        {
             foreach (string key in source.Keys)
             {
                 object value = source[key];
@@ -436,7 +440,8 @@ namespace System.Web.Http.WebHost
 
         private static WebHostExceptionHandler CreateProductUnderTest(
             IExceptionHandler innerHandler
-        ) {
+        )
+        {
             return new WebHostExceptionHandler(innerHandler);
         }
 
@@ -459,14 +464,16 @@ namespace System.Web.Http.WebHost
         private static ExceptionHandlerContext CreateValidContext(
             HttpRequestMessage request,
             ExceptionContextCatchBlock catchBlock
-        ) {
+        )
+        {
             return CreateContext(CreateMinimalValidExceptionContext(catchBlock, request));
         }
 
         private static ExceptionContext CreateMinimalValidExceptionContext(
             ExceptionContextCatchBlock catchBlock,
             HttpRequestMessage request = null
-        ) {
+        )
+        {
             return new ExceptionContext(new InvalidOperationException(), catchBlock)
             {
                 Request = request,

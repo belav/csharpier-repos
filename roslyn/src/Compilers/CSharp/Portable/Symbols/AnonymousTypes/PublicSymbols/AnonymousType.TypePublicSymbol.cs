@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             internal AnonymousTypePublicSymbol(
                 AnonymousTypeManager manager,
                 AnonymousTypeDescriptor typeDescr
-            ) {
+            )
+            {
                 typeDescr.AssertIsGood();
 
                 this.Manager = manager;
@@ -214,7 +215,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             internal override ImmutableArray<NamedTypeSymbol> InterfacesNoUseSiteDiagnostics(
                 ConsList<TypeSymbol> basesBeingResolved
-            ) {
+            )
+            {
                 return ImmutableArray<NamedTypeSymbol>.Empty;
             }
 
@@ -328,13 +330,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             internal override NamedTypeSymbol GetDeclaredBaseType(
                 ConsList<TypeSymbol> basesBeingResolved
-            ) {
+            )
+            {
                 return this.Manager.System_Object;
             }
 
             internal override ImmutableArray<NamedTypeSymbol> GetDeclaredInterfaces(
                 ConsList<TypeSymbol> basesBeingResolved
-            ) {
+            )
+            {
                 return ImmutableArray<NamedTypeSymbol>.Empty;
             }
 

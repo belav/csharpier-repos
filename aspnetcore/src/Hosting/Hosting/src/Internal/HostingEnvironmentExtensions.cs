@@ -84,7 +84,8 @@ namespace Microsoft.AspNetCore.Hosting
             this IWebHostEnvironment hostingEnvironment,
             string contentRootPath,
             WebHostOptions options
-        ) {
+        )
+        {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));

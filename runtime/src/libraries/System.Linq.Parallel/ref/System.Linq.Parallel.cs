@@ -19,14 +19,16 @@ namespace System.Linq
         public static TSource Aggregate<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, TSource, TSource> func
-        ) {
+        )
+        {
             throw null;
         }
         public static TAccumulate Aggregate<TSource, TAccumulate>(
             this System.Linq.ParallelQuery<TSource> source,
             TAccumulate seed,
             System.Func<TAccumulate, TSource, TAccumulate> func
-        ) {
+        )
+        {
             throw null;
         }
         public static TResult Aggregate<TSource, TAccumulate, TResult>(
@@ -35,7 +37,8 @@ namespace System.Linq
             System.Func<TAccumulate, TSource, TAccumulate> updateAccumulatorFunc,
             System.Func<TAccumulate, TAccumulate, TAccumulate> combineAccumulatorsFunc,
             System.Func<TAccumulate, TResult> resultSelector
-        ) {
+        )
+        {
             throw null;
         }
         public static TResult Aggregate<TSource, TAccumulate, TResult>(
@@ -44,7 +47,8 @@ namespace System.Linq
             System.Func<TAccumulate, TSource, TAccumulate> updateAccumulatorFunc,
             System.Func<TAccumulate, TAccumulate, TAccumulate> combineAccumulatorsFunc,
             System.Func<TAccumulate, TResult> resultSelector
-        ) {
+        )
+        {
             throw null;
         }
         public static TResult Aggregate<TSource, TAccumulate, TResult>(
@@ -52,13 +56,15 @@ namespace System.Linq
             TAccumulate seed,
             System.Func<TAccumulate, TSource, TAccumulate> func,
             System.Func<TAccumulate, TResult> resultSelector
-        ) {
+        )
+        {
             throw null;
         }
         public static bool All<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, bool> predicate
-        ) {
+        )
+        {
             throw null;
         }
         public static bool Any<TSource>(this System.Linq.ParallelQuery<TSource> source)
@@ -68,12 +74,14 @@ namespace System.Linq
         public static bool Any<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, bool> predicate
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Collections.Generic.IEnumerable<TSource> AsEnumerable<TSource>(
             this System.Linq.ParallelQuery<TSource> source
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.ParallelQuery AsOrdered(this System.Linq.ParallelQuery source)
@@ -82,32 +90,38 @@ namespace System.Linq
         }
         public static System.Linq.ParallelQuery<TSource> AsOrdered<TSource>(
             this System.Linq.ParallelQuery<TSource> source
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.ParallelQuery AsParallel(
             this System.Collections.IEnumerable source
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.ParallelQuery<TSource> AsParallel<TSource>(
             this System.Collections.Concurrent.Partitioner<TSource> source
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.ParallelQuery<TSource> AsParallel<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Collections.Generic.IEnumerable<TSource> AsSequential<TSource>(
             this System.Linq.ParallelQuery<TSource> source
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.ParallelQuery<TSource> AsUnordered<TSource>(
             this System.Linq.ParallelQuery<TSource> source
-        ) {
+        )
+        {
             throw null;
         }
         public static decimal Average(this System.Linq.ParallelQuery<decimal> source)
@@ -153,66 +167,77 @@ namespace System.Linq
         public static decimal Average<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, decimal> selector
-        ) {
+        )
+        {
             throw null;
         }
         public static double Average<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, double> selector
-        ) {
+        )
+        {
             throw null;
         }
         public static double Average<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, int> selector
-        ) {
+        )
+        {
             throw null;
         }
         public static double Average<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, long> selector
-        ) {
+        )
+        {
             throw null;
         }
         public static decimal? Average<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, decimal?> selector
-        ) {
+        )
+        {
             throw null;
         }
         public static double? Average<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, double?> selector
-        ) {
+        )
+        {
             throw null;
         }
         public static double? Average<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, int?> selector
-        ) {
+        )
+        {
             throw null;
         }
         public static double? Average<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, long?> selector
-        ) {
+        )
+        {
             throw null;
         }
         public static float? Average<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, float?> selector
-        ) {
+        )
+        {
             throw null;
         }
         public static float Average<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, float> selector
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.ParallelQuery<TResult> Cast<TResult>(
             this System.Linq.ParallelQuery source
-        ) {
+        )
+        {
             throw null;
         }
         [System.ObsoleteAttribute(
@@ -221,26 +246,30 @@ namespace System.Linq
         public static System.Linq.ParallelQuery<TSource> Concat<TSource>(
             this System.Linq.ParallelQuery<TSource> first,
             System.Collections.Generic.IEnumerable<TSource> second
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.ParallelQuery<TSource> Concat<TSource>(
             this System.Linq.ParallelQuery<TSource> first,
             System.Linq.ParallelQuery<TSource> second
-        ) {
+        )
+        {
             throw null;
         }
         public static bool Contains<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             TSource value
-        ) {
+        )
+        {
             throw null;
         }
         public static bool Contains<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             TSource value,
             System.Collections.Generic.IEqualityComparer<TSource>? comparer
-        ) {
+        )
+        {
             throw null;
         }
         public static int Count<TSource>(this System.Linq.ParallelQuery<TSource> source)
@@ -250,41 +279,48 @@ namespace System.Linq
         public static int Count<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, bool> predicate
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.ParallelQuery<TSource> DefaultIfEmpty<TSource>(
             this System.Linq.ParallelQuery<TSource> source
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.ParallelQuery<TSource> DefaultIfEmpty<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             TSource defaultValue
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.ParallelQuery<TSource> Distinct<TSource>(
             this System.Linq.ParallelQuery<TSource> source
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.ParallelQuery<TSource> Distinct<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Collections.Generic.IEqualityComparer<TSource>? comparer
-        ) {
+        )
+        {
             throw null;
         }
         public static TSource? ElementAtOrDefault<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             int index
-        ) {
+        )
+        {
             throw null;
         }
         public static TSource ElementAt<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             int index
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.ParallelQuery<TResult> Empty<TResult>()
@@ -297,7 +333,8 @@ namespace System.Linq
         public static System.Linq.ParallelQuery<TSource> Except<TSource>(
             this System.Linq.ParallelQuery<TSource> first,
             System.Collections.Generic.IEnumerable<TSource> second
-        ) {
+        )
+        {
             throw null;
         }
         [System.ObsoleteAttribute(
@@ -307,31 +344,36 @@ namespace System.Linq
             this System.Linq.ParallelQuery<TSource> first,
             System.Collections.Generic.IEnumerable<TSource> second,
             System.Collections.Generic.IEqualityComparer<TSource>? comparer
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.ParallelQuery<TSource> Except<TSource>(
             this System.Linq.ParallelQuery<TSource> first,
             System.Linq.ParallelQuery<TSource> second
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.ParallelQuery<TSource> Except<TSource>(
             this System.Linq.ParallelQuery<TSource> first,
             System.Linq.ParallelQuery<TSource> second,
             System.Collections.Generic.IEqualityComparer<TSource>? comparer
-        ) {
+        )
+        {
             throw null;
         }
         public static TSource? FirstOrDefault<TSource>(
             this System.Linq.ParallelQuery<TSource> source
-        ) {
+        )
+        {
             throw null;
         }
         public static TSource? FirstOrDefault<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, bool> predicate
-        ) {
+        )
+        {
             throw null;
         }
         public static TSource First<TSource>(this System.Linq.ParallelQuery<TSource> source)
@@ -341,7 +383,8 @@ namespace System.Linq
         public static TSource First<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, bool> predicate
-        ) {
+        )
+        {
             throw null;
         }
         public static void ForAll<TSource>(
@@ -362,7 +405,8 @@ namespace System.Linq
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, TKey> keySelector,
             System.Collections.Generic.IEqualityComparer<TKey>? comparer
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.ParallelQuery<System.Linq.IGrouping<TKey, TElement>> GroupBy<
@@ -373,7 +417,8 @@ namespace System.Linq
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, TKey> keySelector,
             System.Func<TSource, TElement> elementSelector
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.ParallelQuery<System.Linq.IGrouping<TKey, TElement>> GroupBy<
@@ -385,7 +430,8 @@ namespace System.Linq
             System.Func<TSource, TKey> keySelector,
             System.Func<TSource, TElement> elementSelector,
             System.Collections.Generic.IEqualityComparer<TKey>? comparer
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.ParallelQuery<TResult> GroupBy<TSource, TKey, TResult>(
@@ -396,7 +442,8 @@ namespace System.Linq
                 System.Collections.Generic.IEnumerable<TSource>,
                 TResult
             > resultSelector
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.ParallelQuery<TResult> GroupBy<TSource, TKey, TResult>(
@@ -408,7 +455,8 @@ namespace System.Linq
                 TResult
             > resultSelector,
             System.Collections.Generic.IEqualityComparer<TKey>? comparer
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.ParallelQuery<TResult> GroupBy<TSource, TKey, TElement, TResult>(
@@ -420,7 +468,8 @@ namespace System.Linq
                 System.Collections.Generic.IEnumerable<TElement>,
                 TResult
             > resultSelector
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.ParallelQuery<TResult> GroupBy<TSource, TKey, TElement, TResult>(
@@ -433,7 +482,8 @@ namespace System.Linq
                 TResult
             > resultSelector,
             System.Collections.Generic.IEqualityComparer<TKey>? comparer
-        ) {
+        )
+        {
             throw null;
         }
         [System.ObsoleteAttribute(
@@ -449,7 +499,8 @@ namespace System.Linq
                 System.Collections.Generic.IEnumerable<TInner>,
                 TResult
             > resultSelector
-        ) {
+        )
+        {
             throw null;
         }
         [System.ObsoleteAttribute(
@@ -466,7 +517,8 @@ namespace System.Linq
                 TResult
             > resultSelector,
             System.Collections.Generic.IEqualityComparer<TKey>? comparer
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.ParallelQuery<TResult> GroupJoin<TOuter, TInner, TKey, TResult>(
@@ -479,7 +531,8 @@ namespace System.Linq
                 System.Collections.Generic.IEnumerable<TInner>,
                 TResult
             > resultSelector
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.ParallelQuery<TResult> GroupJoin<TOuter, TInner, TKey, TResult>(
@@ -493,7 +546,8 @@ namespace System.Linq
                 TResult
             > resultSelector,
             System.Collections.Generic.IEqualityComparer<TKey>? comparer
-        ) {
+        )
+        {
             throw null;
         }
         [System.ObsoleteAttribute(
@@ -502,7 +556,8 @@ namespace System.Linq
         public static System.Linq.ParallelQuery<TSource> Intersect<TSource>(
             this System.Linq.ParallelQuery<TSource> first,
             System.Collections.Generic.IEnumerable<TSource> second
-        ) {
+        )
+        {
             throw null;
         }
         [System.ObsoleteAttribute(
@@ -512,20 +567,23 @@ namespace System.Linq
             this System.Linq.ParallelQuery<TSource> first,
             System.Collections.Generic.IEnumerable<TSource> second,
             System.Collections.Generic.IEqualityComparer<TSource>? comparer
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.ParallelQuery<TSource> Intersect<TSource>(
             this System.Linq.ParallelQuery<TSource> first,
             System.Linq.ParallelQuery<TSource> second
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.ParallelQuery<TSource> Intersect<TSource>(
             this System.Linq.ParallelQuery<TSource> first,
             System.Linq.ParallelQuery<TSource> second,
             System.Collections.Generic.IEqualityComparer<TSource>? comparer
-        ) {
+        )
+        {
             throw null;
         }
         [System.ObsoleteAttribute(
@@ -537,7 +595,8 @@ namespace System.Linq
             System.Func<TOuter, TKey> outerKeySelector,
             System.Func<TInner, TKey> innerKeySelector,
             System.Func<TOuter, TInner, TResult> resultSelector
-        ) {
+        )
+        {
             throw null;
         }
         [System.ObsoleteAttribute(
@@ -550,7 +609,8 @@ namespace System.Linq
             System.Func<TInner, TKey> innerKeySelector,
             System.Func<TOuter, TInner, TResult> resultSelector,
             System.Collections.Generic.IEqualityComparer<TKey>? comparer
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.ParallelQuery<TResult> Join<TOuter, TInner, TKey, TResult>(
@@ -559,7 +619,8 @@ namespace System.Linq
             System.Func<TOuter, TKey> outerKeySelector,
             System.Func<TInner, TKey> innerKeySelector,
             System.Func<TOuter, TInner, TResult> resultSelector
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.ParallelQuery<TResult> Join<TOuter, TInner, TKey, TResult>(
@@ -569,18 +630,21 @@ namespace System.Linq
             System.Func<TInner, TKey> innerKeySelector,
             System.Func<TOuter, TInner, TResult> resultSelector,
             System.Collections.Generic.IEqualityComparer<TKey>? comparer
-        ) {
+        )
+        {
             throw null;
         }
         public static TSource? LastOrDefault<TSource>(
             this System.Linq.ParallelQuery<TSource> source
-        ) {
+        )
+        {
             throw null;
         }
         public static TSource? LastOrDefault<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, bool> predicate
-        ) {
+        )
+        {
             throw null;
         }
         public static TSource Last<TSource>(this System.Linq.ParallelQuery<TSource> source)
@@ -590,7 +654,8 @@ namespace System.Linq
         public static TSource Last<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, bool> predicate
-        ) {
+        )
+        {
             throw null;
         }
         public static long LongCount<TSource>(this System.Linq.ParallelQuery<TSource> source)
@@ -600,7 +665,8 @@ namespace System.Linq
         public static long LongCount<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, bool> predicate
-        ) {
+        )
+        {
             throw null;
         }
         public static decimal Max(this System.Linq.ParallelQuery<decimal> source)
@@ -650,67 +716,78 @@ namespace System.Linq
         public static decimal Max<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, decimal> selector
-        ) {
+        )
+        {
             throw null;
         }
         public static double Max<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, double> selector
-        ) {
+        )
+        {
             throw null;
         }
         public static int Max<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, int> selector
-        ) {
+        )
+        {
             throw null;
         }
         public static long Max<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, long> selector
-        ) {
+        )
+        {
             throw null;
         }
         public static decimal? Max<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, decimal?> selector
-        ) {
+        )
+        {
             throw null;
         }
         public static double? Max<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, double?> selector
-        ) {
+        )
+        {
             throw null;
         }
         public static int? Max<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, int?> selector
-        ) {
+        )
+        {
             throw null;
         }
         public static long? Max<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, long?> selector
-        ) {
+        )
+        {
             throw null;
         }
         public static float? Max<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, float?> selector
-        ) {
+        )
+        {
             throw null;
         }
         public static float Max<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, float> selector
-        ) {
+        )
+        {
             throw null;
         }
         public static TResult? Max<TSource, TResult>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, TResult> selector
-        ) {
+        )
+        {
             throw null;
         }
         public static decimal Min(this System.Linq.ParallelQuery<decimal> source)
@@ -760,98 +837,114 @@ namespace System.Linq
         public static decimal Min<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, decimal> selector
-        ) {
+        )
+        {
             throw null;
         }
         public static double Min<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, double> selector
-        ) {
+        )
+        {
             throw null;
         }
         public static int Min<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, int> selector
-        ) {
+        )
+        {
             throw null;
         }
         public static long Min<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, long> selector
-        ) {
+        )
+        {
             throw null;
         }
         public static decimal? Min<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, decimal?> selector
-        ) {
+        )
+        {
             throw null;
         }
         public static double? Min<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, double?> selector
-        ) {
+        )
+        {
             throw null;
         }
         public static int? Min<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, int?> selector
-        ) {
+        )
+        {
             throw null;
         }
         public static long? Min<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, long?> selector
-        ) {
+        )
+        {
             throw null;
         }
         public static float? Min<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, float?> selector
-        ) {
+        )
+        {
             throw null;
         }
         public static float Min<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, float> selector
-        ) {
+        )
+        {
             throw null;
         }
         public static TResult? Min<TSource, TResult>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, TResult> selector
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.ParallelQuery<TResult> OfType<TResult>(
             this System.Linq.ParallelQuery source
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.OrderedParallelQuery<TSource> OrderByDescending<TSource, TKey>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, TKey> keySelector
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.OrderedParallelQuery<TSource> OrderByDescending<TSource, TKey>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, TKey> keySelector,
             System.Collections.Generic.IComparer<TKey>? comparer
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.OrderedParallelQuery<TSource> OrderBy<TSource, TKey>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, TKey> keySelector
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.OrderedParallelQuery<TSource> OrderBy<TSource, TKey>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, TKey> keySelector,
             System.Collections.Generic.IComparer<TKey>? comparer
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.ParallelQuery<int> Range(int start, int count)
@@ -864,19 +957,22 @@ namespace System.Linq
         }
         public static System.Linq.ParallelQuery<TSource> Reverse<TSource>(
             this System.Linq.ParallelQuery<TSource> source
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.ParallelQuery<TResult> SelectMany<TSource, TResult>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, System.Collections.Generic.IEnumerable<TResult>> selector
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.ParallelQuery<TResult> SelectMany<TSource, TResult>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, int, System.Collections.Generic.IEnumerable<TResult>> selector
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.ParallelQuery<TResult> SelectMany<TSource, TCollection, TResult>(
@@ -886,7 +982,8 @@ namespace System.Linq
                 System.Collections.Generic.IEnumerable<TCollection>
             > collectionSelector,
             System.Func<TSource, TCollection, TResult> resultSelector
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.ParallelQuery<TResult> SelectMany<TSource, TCollection, TResult>(
@@ -897,19 +994,22 @@ namespace System.Linq
                 System.Collections.Generic.IEnumerable<TCollection>
             > collectionSelector,
             System.Func<TSource, TCollection, TResult> resultSelector
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.ParallelQuery<TResult> Select<TSource, TResult>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, int, TResult> selector
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.ParallelQuery<TResult> Select<TSource, TResult>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, TResult> selector
-        ) {
+        )
+        {
             throw null;
         }
         [System.ObsoleteAttribute(
@@ -918,7 +1018,8 @@ namespace System.Linq
         public static bool SequenceEqual<TSource>(
             this System.Linq.ParallelQuery<TSource> first,
             System.Collections.Generic.IEnumerable<TSource> second
-        ) {
+        )
+        {
             throw null;
         }
         [System.ObsoleteAttribute(
@@ -928,31 +1029,36 @@ namespace System.Linq
             this System.Linq.ParallelQuery<TSource> first,
             System.Collections.Generic.IEnumerable<TSource> second,
             System.Collections.Generic.IEqualityComparer<TSource>? comparer
-        ) {
+        )
+        {
             throw null;
         }
         public static bool SequenceEqual<TSource>(
             this System.Linq.ParallelQuery<TSource> first,
             System.Linq.ParallelQuery<TSource> second
-        ) {
+        )
+        {
             throw null;
         }
         public static bool SequenceEqual<TSource>(
             this System.Linq.ParallelQuery<TSource> first,
             System.Linq.ParallelQuery<TSource> second,
             System.Collections.Generic.IEqualityComparer<TSource>? comparer
-        ) {
+        )
+        {
             throw null;
         }
         public static TSource? SingleOrDefault<TSource>(
             this System.Linq.ParallelQuery<TSource> source
-        ) {
+        )
+        {
             throw null;
         }
         public static TSource? SingleOrDefault<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, bool> predicate
-        ) {
+        )
+        {
             throw null;
         }
         public static TSource Single<TSource>(this System.Linq.ParallelQuery<TSource> source)
@@ -962,25 +1068,29 @@ namespace System.Linq
         public static TSource Single<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, bool> predicate
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.ParallelQuery<TSource> SkipWhile<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, bool> predicate
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.ParallelQuery<TSource> SkipWhile<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, int, bool> predicate
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.ParallelQuery<TSource> Skip<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             int count
-        ) {
+        )
+        {
             throw null;
         }
         public static decimal Sum(this System.Linq.ParallelQuery<decimal> source)
@@ -1026,105 +1136,122 @@ namespace System.Linq
         public static decimal Sum<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, decimal> selector
-        ) {
+        )
+        {
             throw null;
         }
         public static double Sum<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, double> selector
-        ) {
+        )
+        {
             throw null;
         }
         public static int Sum<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, int> selector
-        ) {
+        )
+        {
             throw null;
         }
         public static long Sum<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, long> selector
-        ) {
+        )
+        {
             throw null;
         }
         public static decimal? Sum<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, decimal?> selector
-        ) {
+        )
+        {
             throw null;
         }
         public static double? Sum<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, double?> selector
-        ) {
+        )
+        {
             throw null;
         }
         public static int? Sum<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, int?> selector
-        ) {
+        )
+        {
             throw null;
         }
         public static long? Sum<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, long?> selector
-        ) {
+        )
+        {
             throw null;
         }
         public static float? Sum<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, float?> selector
-        ) {
+        )
+        {
             throw null;
         }
         public static float Sum<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, float> selector
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.ParallelQuery<TSource> TakeWhile<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, bool> predicate
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.ParallelQuery<TSource> TakeWhile<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, int, bool> predicate
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.ParallelQuery<TSource> Take<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             int count
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.OrderedParallelQuery<TSource> ThenByDescending<TSource, TKey>(
             this System.Linq.OrderedParallelQuery<TSource> source,
             System.Func<TSource, TKey> keySelector
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.OrderedParallelQuery<TSource> ThenByDescending<TSource, TKey>(
             this System.Linq.OrderedParallelQuery<TSource> source,
             System.Func<TSource, TKey> keySelector,
             System.Collections.Generic.IComparer<TKey>? comparer
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.OrderedParallelQuery<TSource> ThenBy<TSource, TKey>(
             this System.Linq.OrderedParallelQuery<TSource> source,
             System.Func<TSource, TKey> keySelector
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.OrderedParallelQuery<TSource> ThenBy<TSource, TKey>(
             this System.Linq.OrderedParallelQuery<TSource> source,
             System.Func<TSource, TKey> keySelector,
             System.Collections.Generic.IComparer<TKey>? comparer
-        ) {
+        )
+        {
             throw null;
         }
         public static TSource[] ToArray<TSource>(this System.Linq.ParallelQuery<TSource> source)
@@ -1134,10 +1261,8 @@ namespace System.Linq
         public static System.Collections.Generic.Dictionary<TKey, TSource> ToDictionary<
             TSource,
             TKey
-        >(
-            this System.Linq.ParallelQuery<TSource> source,
-            System.Func<TSource, TKey> keySelector
-        ) where TKey : notnull
+        >(this System.Linq.ParallelQuery<TSource> source, System.Func<TSource, TKey> keySelector)
+            where TKey : notnull
         {
             throw null;
         }
@@ -1179,7 +1304,8 @@ namespace System.Linq
         }
         public static System.Collections.Generic.List<TSource> ToList<TSource>(
             this System.Linq.ParallelQuery<TSource> source
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.ILookup<TKey, TSource> ToLookup<TSource, TKey>(
@@ -1220,7 +1346,8 @@ namespace System.Linq
         public static System.Linq.ParallelQuery<TSource> Union<TSource>(
             this System.Linq.ParallelQuery<TSource> first,
             System.Collections.Generic.IEnumerable<TSource> second
-        ) {
+        )
+        {
             throw null;
         }
         [System.ObsoleteAttribute(
@@ -1230,56 +1357,65 @@ namespace System.Linq
             this System.Linq.ParallelQuery<TSource> first,
             System.Collections.Generic.IEnumerable<TSource> second,
             System.Collections.Generic.IEqualityComparer<TSource>? comparer
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.ParallelQuery<TSource> Union<TSource>(
             this System.Linq.ParallelQuery<TSource> first,
             System.Linq.ParallelQuery<TSource> second
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.ParallelQuery<TSource> Union<TSource>(
             this System.Linq.ParallelQuery<TSource> first,
             System.Linq.ParallelQuery<TSource> second,
             System.Collections.Generic.IEqualityComparer<TSource>? comparer
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.ParallelQuery<TSource> Where<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, bool> predicate
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.ParallelQuery<TSource> Where<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, int, bool> predicate
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.ParallelQuery<TSource> WithCancellation<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.ParallelQuery<TSource> WithDegreeOfParallelism<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             int degreeOfParallelism
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.ParallelQuery<TSource> WithExecutionMode<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Linq.ParallelExecutionMode executionMode
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.ParallelQuery<TSource> WithMergeOptions<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Linq.ParallelMergeOptions mergeOptions
-        ) {
+        )
+        {
             throw null;
         }
         [System.ObsoleteAttribute(
@@ -1289,14 +1425,16 @@ namespace System.Linq
             this System.Linq.ParallelQuery<TFirst> first,
             System.Collections.Generic.IEnumerable<TSecond> second,
             System.Func<TFirst, TSecond, TResult> resultSelector
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Linq.ParallelQuery<TResult> Zip<TFirst, TSecond, TResult>(
             this System.Linq.ParallelQuery<TFirst> first,
             System.Linq.ParallelQuery<TSecond> second,
             System.Func<TFirst, TSecond, TResult> resultSelector
-        ) {
+        )
+        {
             throw null;
         }
     }

@@ -94,7 +94,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Diagnostics
             if (
                 diagnostic.Severity == DiagnosticSeverity.Error
                 && diagnostic.CustomTags.Contains(WellKnownDiagnosticTags.EditAndContinue)
-            ) {
+            )
+            {
                 return EditAndContinueErrorTypeDefinition.Name;
             }
 

@@ -36,7 +36,8 @@ internal class M
                 GenericClass<int>.StaticGenericMethod<int[]>(new int[] { 1, 2, 3 }, typeof(int[])),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClass<int>.StaticGenericMethod<int[]>(new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -57,7 +58,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClass<int>.StaticGenericMethod<string[]>(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -96,7 +98,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClass<string>.StaticGenericMethod<int[]>(new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -117,7 +120,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClass<string>.StaticGenericMethod<string[]>(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -156,7 +160,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClass<int[]>.StaticGenericMethod<int[]>(new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -177,7 +182,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClass<int[]>.StaticGenericMethod<string[]>(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -216,7 +222,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClass<string[]>.StaticGenericMethod<int[]>(new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -237,7 +244,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClass<string[]>.StaticGenericMethod<string[]>(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -276,7 +284,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClass<int>.StaticNonGenericMethodIntArray(new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -297,7 +306,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClass<int>.StaticNonGenericMethodStringArray(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -336,7 +346,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClass<string>.StaticNonGenericMethodIntArray(new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -357,7 +368,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClass<string>.StaticNonGenericMethodStringArray(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -396,7 +408,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClass<int[]>.StaticNonGenericMethodIntArray(new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -417,7 +430,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClass<int[]>.StaticNonGenericMethodStringArray(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -456,7 +470,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClass<string[]>.StaticNonGenericMethodIntArray(new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -477,7 +492,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClass<string[]>.StaticNonGenericMethodStringArray(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -509,7 +525,8 @@ internal class M
                 "aaaa",
                 typeof(string)
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClass<int>.StaticGenericMethodUsesClassTypeParam<string>(27, \"aaaa\", typeof(string)) to be \"aaaa\", but found '"
                     + GenericClass<int>.StaticGenericMethodUsesClassTypeParam<string>(
@@ -530,7 +547,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClass<int>.StaticGenericMethodUsesClassTypeParam<int[]>(27, new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -553,7 +571,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClass<int>.StaticGenericMethodUsesClassTypeParam<string[]>(27, new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -569,7 +588,8 @@ internal class M
 
         if (
             GenericClass<string>.StaticGenericMethodUsesClassTypeParam<int>("", 1, typeof(int)) != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClass<string>.StaticGenericMethodUsesClassTypeParam<int>(\"\", 1, typeof(int)) to be 1, but found '"
                     + GenericClass<string>.StaticGenericMethodUsesClassTypeParam<int>(
@@ -587,7 +607,8 @@ internal class M
                 "aaaa",
                 typeof(string)
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClass<string>.StaticGenericMethodUsesClassTypeParam<string>(\"\", \"aaaa\", typeof(string)) to be \"aaaa\", but found '"
                     + GenericClass<string>.StaticGenericMethodUsesClassTypeParam<string>(
@@ -608,7 +629,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClass<string>.StaticGenericMethodUsesClassTypeParam<int[]>(\"\", new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -631,7 +653,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClass<string>.StaticGenericMethodUsesClassTypeParam<string[]>(\"\", new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -651,7 +674,8 @@ internal class M
                 1,
                 typeof(int)
             ) != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClass<int[]>.StaticGenericMethodUsesClassTypeParam<int>(new int[0], 1, typeof(int)) to be 1, but found '"
                     + GenericClass<int[]>.StaticGenericMethodUsesClassTypeParam<int>(
@@ -669,7 +693,8 @@ internal class M
                 "aaaa",
                 typeof(string)
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClass<int[]>.StaticGenericMethodUsesClassTypeParam<string>(new int[0], \"aaaa\", typeof(string)) to be \"aaaa\", but found '"
                     + GenericClass<int[]>.StaticGenericMethodUsesClassTypeParam<string>(
@@ -690,7 +715,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClass<int[]>.StaticGenericMethodUsesClassTypeParam<int[]>(new int[0], new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -713,7 +739,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClass<int[]>.StaticGenericMethodUsesClassTypeParam<string[]>(new int[0], new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -733,7 +760,8 @@ internal class M
                 1,
                 typeof(int)
             ) != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClass<string[]>.StaticGenericMethodUsesClassTypeParam<int>(new string[0], 1, typeof(int)) to be 1, but found '"
                     + GenericClass<string[]>.StaticGenericMethodUsesClassTypeParam<int>(
@@ -751,7 +779,8 @@ internal class M
                 "aaaa",
                 typeof(string)
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClass<string[]>.StaticGenericMethodUsesClassTypeParam<string>(new string[0], \"aaaa\", typeof(string)) to be \"aaaa\", but found '"
                     + GenericClass<string[]>.StaticGenericMethodUsesClassTypeParam<string>(
@@ -772,7 +801,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClass<string[]>.StaticGenericMethodUsesClassTypeParam<int[]>(new string[0], new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -795,7 +825,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClass<string[]>.StaticGenericMethodUsesClassTypeParam<string[]>(new string[0], new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -815,7 +846,8 @@ internal class M
                 1,
                 typeof(int)
             ) != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClass<int>.StaticNonGenericMethodIntUsesClassTypeParam(Int32.MaxValue, 1, typeof(int)) to be 1, but found '"
                     + GenericClass<int>.StaticNonGenericMethodIntUsesClassTypeParam(
@@ -833,7 +865,8 @@ internal class M
                 "aaaa",
                 typeof(string)
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClass<int>.StaticNonGenericMethodString(Int32.MaxValue, \"aaaa\", typeof(string)) to be \"aaaa\", but found '"
                     + GenericClass<int>.StaticNonGenericMethodStringUsesClassTypeParam(
@@ -854,7 +887,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClass<int>.StaticNonGenericMethodIntArrayUsesClassTypeParam(Int32.MaxValue, new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -877,7 +911,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClass<int>.StaticNonGenericMethodStringArrayUsesClassTypeParam(Int32.MaxValue, new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -897,7 +932,8 @@ internal class M
                 1,
                 typeof(int)
             ) != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClass<string>.StaticNonGenericMethodIntUsesClassTypeParam(\"wxyzabcdefgh\", 1, typeof(int)) to be 1, but found '"
                     + GenericClass<string>.StaticNonGenericMethodIntUsesClassTypeParam(
@@ -915,7 +951,8 @@ internal class M
                 "aaaa",
                 typeof(string)
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClass<string>.StaticNonGenericMethodString(\"wxyzabcdefgh\", \"aaaa\", typeof(string)) to be \"aaaa\", but found '"
                     + GenericClass<string>.StaticNonGenericMethodStringUsesClassTypeParam(
@@ -936,7 +973,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClass<string>.StaticNonGenericMethodIntArrayUsesClassTypeParam(\"wxyzabcdefgh\", new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -959,7 +997,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClass<string>.StaticNonGenericMethodStringArrayUsesClassTypeParam(\"wxyzabcdefgh\", new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -979,7 +1018,8 @@ internal class M
                 1,
                 typeof(int)
             ) != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClass<int[]>.StaticNonGenericMethodIntUsesClassTypeParam(new int[] {Int32.MaxValue, Int32.MinValue}, 1, typeof(int)) to be 1, but found '"
                     + GenericClass<int[]>.StaticNonGenericMethodIntUsesClassTypeParam(
@@ -997,7 +1037,8 @@ internal class M
                 "aaaa",
                 typeof(string)
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClass<int[]>.StaticNonGenericMethodString(new int[] {Int32.MaxValue, Int32.MinValue}, \"aaaa\", typeof(string)) to be \"aaaa\", but found '"
                     + GenericClass<int[]>.StaticNonGenericMethodStringUsesClassTypeParam(
@@ -1018,7 +1059,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClass<int[]>.StaticNonGenericMethodIntArrayUsesClassTypeParam(new int[] {Int32.MaxValue, Int32.MinValue}, new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -1041,7 +1083,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClass<int[]>.StaticNonGenericMethodStringArrayUsesClassTypeParam(new int[] {Int32.MaxValue, Int32.MinValue}, new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -1061,7 +1104,8 @@ internal class M
                 1,
                 typeof(int)
             ) != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClass<string[]>.StaticNonGenericMethodIntUsesClassTypeParam(new string[1000], 1, typeof(int)) to be 1, but found '"
                     + GenericClass<string[]>.StaticNonGenericMethodIntUsesClassTypeParam(
@@ -1079,7 +1123,8 @@ internal class M
                 "aaaa",
                 typeof(string)
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClass<string[]>.StaticNonGenericMethodString(new string[1000], \"aaaa\", typeof(string)) to be \"aaaa\", but found '"
                     + GenericClass<string[]>.StaticNonGenericMethodStringUsesClassTypeParam(
@@ -1100,7 +1145,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClass<string[]>.StaticNonGenericMethodIntArrayUsesClassTypeParam(new string[1000], new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -1123,7 +1169,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClass<string[]>.StaticNonGenericMethodStringArrayUsesClassTypeParam(new string[1000], new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -1173,7 +1220,8 @@ internal class M
                 GenericClassInt.GenericMethod<int[]>(new int[] { 1, 2, 3 }, typeof(int[])),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInt.GenericMethod<int[]>(new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -1191,7 +1239,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInt.GenericMethod<string[]>(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -1227,7 +1276,8 @@ internal class M
                 GenericClassString.GenericMethod<int[]>(new int[] { 1, 2, 3 }, typeof(int[])),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassString.GenericMethod<int[]>(new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -1248,7 +1298,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassString.GenericMethod<string[]>(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -1284,7 +1335,8 @@ internal class M
                 GenericClassIntArray.GenericMethod<int[]>(new int[] { 1, 2, 3 }, typeof(int[])),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassIntArray.GenericMethod<int[]>(new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -1305,7 +1357,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassIntArray.GenericMethod<string[]>(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -1341,7 +1394,8 @@ internal class M
                 GenericClassStringArray.GenericMethod<int[]>(new int[] { 1, 2, 3 }, typeof(int[])),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassStringArray.GenericMethod<int[]>(new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -1362,7 +1416,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassStringArray.GenericMethod<string[]>(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -1398,7 +1453,8 @@ internal class M
                 GenericClassInt.NonGenericMethodIntArray(new int[] { 1, 2, 3 }, typeof(int[])),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInt.NonGenericMethodIntArray(new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -1419,7 +1475,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInt.NonGenericMethodStringArray(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -1455,7 +1512,8 @@ internal class M
                 GenericClassString.NonGenericMethodIntArray(new int[] { 1, 2, 3 }, typeof(int[])),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassString.NonGenericMethodIntArray(new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -1476,7 +1534,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassString.NonGenericMethodStringArray(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -1512,7 +1571,8 @@ internal class M
                 GenericClassIntArray.NonGenericMethodIntArray(new int[] { 1, 2, 3 }, typeof(int[])),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassIntArray.NonGenericMethodIntArray(new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -1533,7 +1593,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassIntArray.NonGenericMethodStringArray(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -1572,7 +1633,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassStringArray.NonGenericMethodIntArray(new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -1593,7 +1655,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassStringArray.NonGenericMethodStringArray(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -1618,7 +1681,8 @@ internal class M
         if (
             GenericClassInt.GenericMethodUsesClassTypeParam<string>(27, "aaaa", typeof(string))
             != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInt.GenericMethodUsesClassTypeParam<string>(27, \"aaaa\", typeof(string)) to be \"aaaa\", but found '"
                     + GenericClassInt.GenericMethodUsesClassTypeParam<string>(
@@ -1639,7 +1703,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInt.GenericMethodUsesClassTypeParam<int[]>(27, new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -1662,7 +1727,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInt.GenericMethodUsesClassTypeParam<string[]>(27, new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -1688,7 +1754,8 @@ internal class M
         if (
             GenericClassString.GenericMethodUsesClassTypeParam<string>("", "aaaa", typeof(string))
             != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassString.GenericMethodUsesClassTypeParam<string>(\"\", \"aaaa\", typeof(string)) to be \"aaaa\", but found '"
                     + GenericClassString.GenericMethodUsesClassTypeParam<string>(
@@ -1709,7 +1776,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassString.GenericMethodUsesClassTypeParam<int[]>(\"\", new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -1732,7 +1800,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassString.GenericMethodUsesClassTypeParam<string[]>(\"\", new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -1749,7 +1818,8 @@ internal class M
         if (
             GenericClassIntArray.GenericMethodUsesClassTypeParam<int>(new int[0], 1, typeof(int))
             != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassIntArray.GenericMethodUsesClassTypeParam<int>(new int[0], 1, typeof(int)) to be 1, but found '"
                     + GenericClassIntArray.GenericMethodUsesClassTypeParam<int>(
@@ -1767,7 +1837,8 @@ internal class M
                 "aaaa",
                 typeof(string)
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassIntArray.GenericMethodUsesClassTypeParam<string>(new int[0], \"aaaa\", typeof(string)) to be \"aaaa\", but found '"
                     + GenericClassIntArray.GenericMethodUsesClassTypeParam<string>(
@@ -1788,7 +1859,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassIntArray.GenericMethodUsesClassTypeParam<int[]>(new int[0], new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -1811,7 +1883,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassIntArray.GenericMethodUsesClassTypeParam<string[]>(new int[0], new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -1831,7 +1904,8 @@ internal class M
                 1,
                 typeof(int)
             ) != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassStringArray.GenericMethodUsesClassTypeParam<int>(new string[0], 1, typeof(int)) to be 1, but found '"
                     + GenericClassStringArray.GenericMethodUsesClassTypeParam<int>(
@@ -1849,7 +1923,8 @@ internal class M
                 "aaaa",
                 typeof(string)
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassStringArray.GenericMethodUsesClassTypeParam<string>(new string[0], \"aaaa\", typeof(string)) to be \"aaaa\", but found '"
                     + GenericClassStringArray.GenericMethodUsesClassTypeParam<string>(
@@ -1870,7 +1945,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassStringArray.GenericMethodUsesClassTypeParam<int[]>(new string[0], new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -1893,7 +1969,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassStringArray.GenericMethodUsesClassTypeParam<string[]>(new string[0], new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -1910,7 +1987,8 @@ internal class M
         if (
             GenericClassInt.NonGenericMethodIntUsesClassTypeParam(Int32.MaxValue, 1, typeof(int))
             != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInt.NonGenericMethodIntUsesClassTypeParam(Int32.MaxValue, 1, typeof(int)) to be 1, but found '"
                     + GenericClassInt.NonGenericMethodIntUsesClassTypeParam(
@@ -1928,7 +2006,8 @@ internal class M
                 "aaaa",
                 typeof(string)
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInt.NonGenericMethodString(Int32.MaxValue, \"aaaa\", typeof(string)) to be \"aaaa\", but found '"
                     + GenericClassInt.NonGenericMethodStringUsesClassTypeParam(
@@ -1949,7 +2028,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInt.NonGenericMethodIntArrayUsesClassTypeParam(Int32.MaxValue, new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -1972,7 +2052,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInt.NonGenericMethodStringArrayUsesClassTypeParam(Int32.MaxValue, new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -1989,7 +2070,8 @@ internal class M
         if (
             GenericClassString.NonGenericMethodIntUsesClassTypeParam("wxyzabcdefgh", 1, typeof(int))
             != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassString.NonGenericMethodIntUsesClassTypeParam(\"wxyzabcdefgh\", 1, typeof(int)) to be 1, but found '"
                     + GenericClassString.NonGenericMethodIntUsesClassTypeParam(
@@ -2007,7 +2089,8 @@ internal class M
                 "aaaa",
                 typeof(string)
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassString.NonGenericMethodString(\"wxyzabcdefgh\", \"aaaa\", typeof(string)) to be \"aaaa\", but found '"
                     + GenericClassString.NonGenericMethodStringUsesClassTypeParam(
@@ -2028,7 +2111,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassString.NonGenericMethodIntArrayUsesClassTypeParam(\"wxyzabcdefgh\", new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -2051,7 +2135,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassString.NonGenericMethodStringArrayUsesClassTypeParam(\"wxyzabcdefgh\", new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -2071,7 +2156,8 @@ internal class M
                 1,
                 typeof(int)
             ) != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassIntArray.NonGenericMethodIntUsesClassTypeParam(new int[] {Int32.MaxValue, Int32.MinValue}, 1, typeof(int)) to be 1, but found '"
                     + GenericClassIntArray.NonGenericMethodIntUsesClassTypeParam(
@@ -2089,7 +2175,8 @@ internal class M
                 "aaaa",
                 typeof(string)
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassIntArray.NonGenericMethodString(new int[] {Int32.MaxValue, Int32.MinValue}, \"aaaa\", typeof(string)) to be \"aaaa\", but found '"
                     + GenericClassIntArray.NonGenericMethodStringUsesClassTypeParam(
@@ -2110,7 +2197,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassIntArray.NonGenericMethodIntArrayUsesClassTypeParam(new int[] {Int32.MaxValue, Int32.MinValue}, new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -2133,7 +2221,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassIntArray.NonGenericMethodStringArrayUsesClassTypeParam(new int[] {Int32.MaxValue, Int32.MinValue}, new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -2153,7 +2242,8 @@ internal class M
                 1,
                 typeof(int)
             ) != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassStringArray.NonGenericMethodIntUsesClassTypeParam(new string[1000], 1, typeof(int)) to be 1, but found '"
                     + GenericClassStringArray.NonGenericMethodIntUsesClassTypeParam(
@@ -2171,7 +2261,8 @@ internal class M
                 "aaaa",
                 typeof(string)
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassStringArray.NonGenericMethodString(new string[1000], \"aaaa\", typeof(string)) to be \"aaaa\", but found '"
                     + GenericClassStringArray.NonGenericMethodStringUsesClassTypeParam(
@@ -2192,7 +2283,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassStringArray.NonGenericMethodIntArrayUsesClassTypeParam(new string[1000], new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -2215,7 +2307,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassStringArray.NonGenericMethodStringArrayUsesClassTypeParam(new string[1000], new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -2287,7 +2380,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInt.VirtualGenericMethod<int[]>(new int[] {1,2,3} typeof(int[]), true) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -2310,7 +2404,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInt.VirtualGenericMethod<string[]>(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[]), true) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -2351,7 +2446,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassString.VirtualGenericMethod<int[]>(new int[] {1,2,3} typeof(int[]), true) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -2374,7 +2470,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassString.VirtualGenericMethod<string[]>(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[]), true) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -2400,7 +2497,8 @@ internal class M
         if (
             GenericClassIntArray.VirtualGenericMethod<string>("aaaa", typeof(string), true)
             != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassIntArray.VirtualGenericMethod<string>(\"aaaa\", typeof(string, true)) to be \"aaaa\", but found '"
                     + GenericClassIntArray.VirtualGenericMethod<string>(
@@ -2421,7 +2519,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassIntArray.VirtualGenericMethod<int[]>(new int[] {1,2,3} typeof(int[]), true) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -2444,7 +2543,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassIntArray.VirtualGenericMethod<string[]>(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[]), true) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -2470,7 +2570,8 @@ internal class M
         if (
             GenericClassStringArray.VirtualGenericMethod<string>("aaaa", typeof(string), true)
             != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassStringArray.VirtualGenericMethod<string>(\"aaaa\", typeof(string, true)) to be \"aaaa\", but found '"
                     + GenericClassStringArray.VirtualGenericMethod<string>(
@@ -2491,7 +2592,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassStringArray.VirtualGenericMethod<int[]>(new int[] {1,2,3} typeof(int[]), true) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -2514,7 +2616,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassStringArray.VirtualGenericMethod<string[]>(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[]), true) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -2555,7 +2658,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInt.VirtualNonGenericMethodIntArray(new int[] {1,2,3} typeof(int[]), true) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -2578,7 +2682,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInt.VirtualNonGenericMethodStringArray(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[]), true) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -2603,7 +2708,8 @@ internal class M
 
         if (
             GenericClassString.VirtualNonGenericMethodString("aaaa", typeof(string), true) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassString.VirtualNonGenericMethodString(\"aaaa\", typeof(string, true)) to be \"aaaa\", but found '"
                     + GenericClassString.VirtualNonGenericMethodString("aaaa", typeof(string), true)
@@ -2620,7 +2726,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassString.VirtualNonGenericMethodIntArray(new int[] {1,2,3} typeof(int[]), true) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -2643,7 +2750,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassString.VirtualNonGenericMethodStringArray(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[]), true) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -2669,7 +2777,8 @@ internal class M
         if (
             GenericClassIntArray.VirtualNonGenericMethodString("aaaa", typeof(string), true)
             != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassIntArray.VirtualNonGenericMethodString(\"aaaa\", typeof(string, true)) to be \"aaaa\", but found '"
                     + GenericClassIntArray.VirtualNonGenericMethodString(
@@ -2690,7 +2799,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassIntArray.VirtualNonGenericMethodIntArray(new int[] {1,2,3} typeof(int[]), true) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -2713,7 +2823,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassIntArray.VirtualNonGenericMethodStringArray(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[]), true) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -2739,7 +2850,8 @@ internal class M
         if (
             GenericClassStringArray.VirtualNonGenericMethodString("aaaa", typeof(string), true)
             != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassStringArray.VirtualNonGenericMethodString(\"aaaa\", typeof(string, true)) to be \"aaaa\", but found '"
                     + GenericClassStringArray.VirtualNonGenericMethodString(
@@ -2760,7 +2872,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassStringArray.VirtualNonGenericMethodIntArray(new int[] {1,2,3} typeof(int[]), true) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -2783,7 +2896,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassStringArray.VirtualNonGenericMethodStringArray(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[]), true) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -2800,7 +2914,8 @@ internal class M
         if (
             GenericClassInt.VirtualGenericMethodUsesClassTypeParam<int>(27, 1, typeof(int), true)
             != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInt.VirtualGenericMethodUsesClassTypeParam<int>(27, 1, typeof(int, true)) to be 1, but found '"
                     + GenericClassInt.VirtualGenericMethodUsesClassTypeParam<int>(
@@ -2820,7 +2935,8 @@ internal class M
                 typeof(string),
                 true
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInt.VirtualGenericMethodUsesClassTypeParam<string>(27, \"aaaa\", typeof(string, true)) to be \"aaaa\", but found '"
                     + GenericClassInt.VirtualGenericMethodUsesClassTypeParam<string>(
@@ -2843,7 +2959,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInt.VirtualGenericMethodUsesClassTypeParam<int[]>(27, new int[] {1,2,3} typeof(int[]), true) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -2868,7 +2985,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInt.VirtualGenericMethodUsesClassTypeParam<string[]>(27, new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[]), true) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -2886,7 +3004,8 @@ internal class M
         if (
             GenericClassString.VirtualGenericMethodUsesClassTypeParam<int>("", 1, typeof(int), true)
             != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassString.VirtualGenericMethodUsesClassTypeParam<int>(\"\", 1, typeof(int, true)) to be 1, but found '"
                     + GenericClassString.VirtualGenericMethodUsesClassTypeParam<int>(
@@ -2906,7 +3025,8 @@ internal class M
                 typeof(string),
                 true
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassString.VirtualGenericMethodUsesClassTypeParam<string>(\"\", \"aaaa\", typeof(string, true)) to be \"aaaa\", but found '"
                     + GenericClassString.VirtualGenericMethodUsesClassTypeParam<string>(
@@ -2929,7 +3049,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassString.VirtualGenericMethodUsesClassTypeParam<int[]>(\"\", new int[] {1,2,3} typeof(int[]), true) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -2954,7 +3075,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassString.VirtualGenericMethodUsesClassTypeParam<string[]>(\"\", new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[]), true) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -2976,7 +3098,8 @@ internal class M
                 typeof(int),
                 true
             ) != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassIntArray.VirtualGenericMethodUsesClassTypeParam<int>(new int[0], 1, typeof(int, true)) to be 1, but found '"
                     + GenericClassIntArray.VirtualGenericMethodUsesClassTypeParam<int>(
@@ -2996,7 +3119,8 @@ internal class M
                 typeof(string),
                 true
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassIntArray.VirtualGenericMethodUsesClassTypeParam<string>(new int[0], \"aaaa\", typeof(string, true)) to be \"aaaa\", but found '"
                     + GenericClassIntArray.VirtualGenericMethodUsesClassTypeParam<string>(
@@ -3019,7 +3143,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassIntArray.VirtualGenericMethodUsesClassTypeParam<int[]>(new int[0], new int[] {1,2,3} typeof(int[]), true) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -3044,7 +3169,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassIntArray.VirtualGenericMethodUsesClassTypeParam<string[]>(new int[0], new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[]), true) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -3066,7 +3192,8 @@ internal class M
                 typeof(int),
                 true
             ) != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassStringArray.VirtualGenericMethodUsesClassTypeParam<int>(new string[0], 1, typeof(int, true)) to be 1, but found '"
                     + GenericClassStringArray.VirtualGenericMethodUsesClassTypeParam<int>(
@@ -3086,7 +3213,8 @@ internal class M
                 typeof(string),
                 true
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassStringArray.VirtualGenericMethodUsesClassTypeParam<string>(new string[0], \"aaaa\", typeof(string, true)) to be \"aaaa\", but found '"
                     + GenericClassStringArray.VirtualGenericMethodUsesClassTypeParam<string>(
@@ -3109,7 +3237,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassStringArray.VirtualGenericMethodUsesClassTypeParam<int[]>(new string[0], new int[] {1,2,3} typeof(int[]), true) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -3134,7 +3263,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassStringArray.VirtualGenericMethodUsesClassTypeParam<string[]>(new string[0], new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[]), true) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -3156,7 +3286,8 @@ internal class M
                 typeof(int),
                 true
             ) != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInt.VirtualNonGenericMethodIntUsesClassTypeParam(Int32.MaxValue, 1, typeof(int, true)) to be 1, but found '"
                     + GenericClassInt.VirtualNonGenericMethodIntUsesClassTypeParam(
@@ -3176,7 +3307,8 @@ internal class M
                 typeof(string),
                 true
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInt.VirtualNonGenericMethodString(Int32.MaxValue, \"aaaa\", typeof(string, true)) to be \"aaaa\", but found '"
                     + GenericClassInt.VirtualNonGenericMethodStringUsesClassTypeParam(
@@ -3199,7 +3331,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInt.VirtualNonGenericMethodIntArrayUsesClassTypeParam(Int32.MaxValue, new int[] {1,2,3} typeof(int[]), true) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -3224,7 +3357,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInt.VirtualNonGenericMethodStringArrayUsesClassTypeParam(Int32.MaxValue, new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[]), true) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -3246,7 +3380,8 @@ internal class M
                 typeof(int),
                 true
             ) != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassString.VirtualNonGenericMethodIntUsesClassTypeParam(\"wxyzabcdefgh\", 1, typeof(int, true)) to be 1, but found '"
                     + GenericClassString.VirtualNonGenericMethodIntUsesClassTypeParam(
@@ -3266,7 +3401,8 @@ internal class M
                 typeof(string),
                 true
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassString.VirtualNonGenericMethodString(\"wxyzabcdefgh\", \"aaaa\", typeof(string, true)) to be \"aaaa\", but found '"
                     + GenericClassString.VirtualNonGenericMethodStringUsesClassTypeParam(
@@ -3289,7 +3425,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassString.VirtualNonGenericMethodIntArrayUsesClassTypeParam(\"wxyzabcdefgh\", new int[] {1,2,3} typeof(int[]), true) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -3314,7 +3451,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassString.VirtualNonGenericMethodStringArrayUsesClassTypeParam(\"wxyzabcdefgh\", new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[]), true) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -3336,7 +3474,8 @@ internal class M
                 typeof(int),
                 true
             ) != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassIntArray.VirtualNonGenericMethodIntUsesClassTypeParam(new int[] {Int32.MaxValue, Int32.MinValue}, 1, typeof(int, true)) to be 1, but found '"
                     + GenericClassIntArray.VirtualNonGenericMethodIntUsesClassTypeParam(
@@ -3356,7 +3495,8 @@ internal class M
                 typeof(string),
                 true
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassIntArray.VirtualNonGenericMethodString(new int[] {Int32.MaxValue, Int32.MinValue}, \"aaaa\", typeof(string, true)) to be \"aaaa\", but found '"
                     + GenericClassIntArray.VirtualNonGenericMethodStringUsesClassTypeParam(
@@ -3379,7 +3519,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassIntArray.VirtualNonGenericMethodIntArrayUsesClassTypeParam(new int[] {Int32.MaxValue, Int32.MinValue}, new int[] {1,2,3} typeof(int[]), true) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -3404,7 +3545,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassIntArray.VirtualNonGenericMethodStringArrayUsesClassTypeParam(new int[] {Int32.MaxValue, Int32.MinValue}, new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[]), true) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -3426,7 +3568,8 @@ internal class M
                 typeof(int),
                 true
             ) != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassStringArray.VirtualNonGenericMethodIntUsesClassTypeParam(new string[1000], 1, typeof(int, true)) to be 1, but found '"
                     + GenericClassStringArray.VirtualNonGenericMethodIntUsesClassTypeParam(
@@ -3446,7 +3589,8 @@ internal class M
                 typeof(string),
                 true
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassStringArray.VirtualNonGenericMethodString(new string[1000], \"aaaa\", typeof(string, true)) to be \"aaaa\", but found '"
                     + GenericClassStringArray.VirtualNonGenericMethodStringUsesClassTypeParam(
@@ -3469,7 +3613,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassStringArray.VirtualNonGenericMethodIntArrayUsesClassTypeParam(new string[1000], new int[] {1,2,3} typeof(int[]), true) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -3494,7 +3639,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassStringArray.VirtualNonGenericMethodStringArrayUsesClassTypeParam(new string[1000], new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[]), true) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -3512,7 +3658,8 @@ internal class M
         if (
             GenericClassInheritsFromGenericClassInt.VirtualGenericMethod<int>(1, typeof(int), false)
             != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassInt.VirtualGenericMethod<int>(1, typeof(int, false)) to be 1, but found '"
                     + GenericClassInheritsFromGenericClassInt.VirtualGenericMethod<int>(
@@ -3530,7 +3677,8 @@ internal class M
                 typeof(string),
                 false
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassInt.VirtualGenericMethod<string>(\"aaaa\", typeof(string, false)) to be \"aaaa\", but found '"
                     + GenericClassInheritsFromGenericClassInt.VirtualGenericMethod<string>(
@@ -3551,7 +3699,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassInt.VirtualGenericMethod<int[]>(new int[] {1,2,3} typeof(int[]), false) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -3574,7 +3723,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassInt.VirtualGenericMethod<string[]>(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[]), false) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -3594,7 +3744,8 @@ internal class M
                 typeof(int),
                 false
             ) != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassString.VirtualGenericMethod<int>(1, typeof(int, false)) to be 1, but found '"
                     + GenericClassInheritsFromGenericClassString.VirtualGenericMethod<int>(
@@ -3612,7 +3763,8 @@ internal class M
                 typeof(string),
                 false
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassString.VirtualGenericMethod<string>(\"aaaa\", typeof(string, false)) to be \"aaaa\", but found '"
                     + GenericClassInheritsFromGenericClassString.VirtualGenericMethod<string>(
@@ -3633,7 +3785,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassString.VirtualGenericMethod<int[]>(new int[] {1,2,3} typeof(int[]), false) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -3656,7 +3809,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassString.VirtualGenericMethod<string[]>(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[]), false) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -3676,7 +3830,8 @@ internal class M
                 typeof(int),
                 false
             ) != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassIntArray.VirtualGenericMethod<int>(1, typeof(int, false)) to be 1, but found '"
                     + GenericClassInheritsFromGenericClassIntArray.VirtualGenericMethod<int>(
@@ -3694,7 +3849,8 @@ internal class M
                 typeof(string),
                 false
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassIntArray.VirtualGenericMethod<string>(\"aaaa\", typeof(string, false)) to be \"aaaa\", but found '"
                     + GenericClassInheritsFromGenericClassIntArray.VirtualGenericMethod<string>(
@@ -3715,7 +3871,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassIntArray.VirtualGenericMethod<int[]>(new int[] {1,2,3} typeof(int[]), false) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -3738,7 +3895,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassIntArray.VirtualGenericMethod<string[]>(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[]), false) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -3758,7 +3916,8 @@ internal class M
                 typeof(int),
                 false
             ) != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassStringArray.VirtualGenericMethod<int>(1, typeof(int, false)) to be 1, but found '"
                     + GenericClassInheritsFromGenericClassStringArray.VirtualGenericMethod<int>(
@@ -3776,7 +3935,8 @@ internal class M
                 typeof(string),
                 false
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassStringArray.VirtualGenericMethod<string>(\"aaaa\", typeof(string, false)) to be \"aaaa\", but found '"
                     + GenericClassInheritsFromGenericClassStringArray.VirtualGenericMethod<string>(
@@ -3797,7 +3957,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassStringArray.VirtualGenericMethod<int[]>(new int[] {1,2,3} typeof(int[]), false) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -3820,7 +3981,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassStringArray.VirtualGenericMethod<string[]>(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[]), false) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -3840,7 +4002,8 @@ internal class M
                 typeof(int),
                 false
             ) != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassInt.VirtualNonGenericMethodInt(1, typeof(int, false)) to be 1, but found '"
                     + GenericClassInheritsFromGenericClassInt.VirtualNonGenericMethodInt(
@@ -3858,7 +4021,8 @@ internal class M
                 typeof(string),
                 false
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassInt.VirtualNonGenericMethodString(\"aaaa\", typeof(string, false)) to be \"aaaa\", but found '"
                     + GenericClassInheritsFromGenericClassInt.VirtualNonGenericMethodString(
@@ -3879,7 +4043,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassInt.VirtualNonGenericMethodIntArray(new int[] {1,2,3} typeof(int[]), false) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -3902,7 +4067,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassInt.VirtualNonGenericMethodStringArray(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[]), false) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -3922,7 +4088,8 @@ internal class M
                 typeof(int),
                 false
             ) != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassString.VirtualNonGenericMethodInt(1, typeof(int, false)) to be 1, but found '"
                     + GenericClassInheritsFromGenericClassString.VirtualNonGenericMethodInt(
@@ -3940,7 +4107,8 @@ internal class M
                 typeof(string),
                 false
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassString.VirtualNonGenericMethodString(\"aaaa\", typeof(string, false)) to be \"aaaa\", but found '"
                     + GenericClassInheritsFromGenericClassString.VirtualNonGenericMethodString(
@@ -3961,7 +4129,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassString.VirtualNonGenericMethodIntArray(new int[] {1,2,3} typeof(int[]), false) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -3984,7 +4153,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassString.VirtualNonGenericMethodStringArray(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[]), false) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -4004,7 +4174,8 @@ internal class M
                 typeof(int),
                 false
             ) != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassIntArray.VirtualNonGenericMethodInt(1, typeof(int, false)) to be 1, but found '"
                     + GenericClassInheritsFromGenericClassIntArray.VirtualNonGenericMethodInt(
@@ -4022,7 +4193,8 @@ internal class M
                 typeof(string),
                 false
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassIntArray.VirtualNonGenericMethodString(\"aaaa\", typeof(string, false)) to be \"aaaa\", but found '"
                     + GenericClassInheritsFromGenericClassIntArray.VirtualNonGenericMethodString(
@@ -4043,7 +4215,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassIntArray.VirtualNonGenericMethodIntArray(new int[] {1,2,3} typeof(int[]), false) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -4066,7 +4239,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassIntArray.VirtualNonGenericMethodStringArray(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[]), false) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -4086,7 +4260,8 @@ internal class M
                 typeof(int),
                 false
             ) != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassStringArray.VirtualNonGenericMethodInt(1, typeof(int, false)) to be 1, but found '"
                     + GenericClassInheritsFromGenericClassStringArray.VirtualNonGenericMethodInt(
@@ -4104,7 +4279,8 @@ internal class M
                 typeof(string),
                 false
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassStringArray.VirtualNonGenericMethodString(\"aaaa\", typeof(string, false)) to be \"aaaa\", but found '"
                     + GenericClassInheritsFromGenericClassStringArray.VirtualNonGenericMethodString(
@@ -4125,7 +4301,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassStringArray.VirtualNonGenericMethodIntArray(new int[] {1,2,3} typeof(int[]), false) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -4148,7 +4325,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassStringArray.VirtualNonGenericMethodStringArray(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[]), false) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -4169,7 +4347,8 @@ internal class M
                 typeof(int),
                 false
             ) != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassInt.VirtualGenericMethodUsesClassTypeParam<int>(27, 1, typeof(int, false)) to be 1, but found '"
                     + GenericClassInheritsFromGenericClassInt.VirtualGenericMethodUsesClassTypeParam<int>(
@@ -4189,7 +4368,8 @@ internal class M
                 typeof(string),
                 false
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassInt.VirtualGenericMethodUsesClassTypeParam<string>(27, \"aaaa\", typeof(string, false)) to be \"aaaa\", but found '"
                     + GenericClassInheritsFromGenericClassInt.VirtualGenericMethodUsesClassTypeParam<string>(
@@ -4212,7 +4392,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassInt.VirtualGenericMethodUsesClassTypeParam<int[]>(27, new int[] {1,2,3} typeof(int[]), false) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -4237,7 +4418,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassInt.VirtualGenericMethodUsesClassTypeParam<string[]>(27, new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[]), false) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -4259,7 +4441,8 @@ internal class M
                 typeof(int),
                 false
             ) != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassString.VirtualGenericMethodUsesClassTypeParam<int>(\"\", 1, typeof(int, false)) to be 1, but found '"
                     + GenericClassInheritsFromGenericClassString.VirtualGenericMethodUsesClassTypeParam<int>(
@@ -4279,7 +4462,8 @@ internal class M
                 typeof(string),
                 false
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassString.VirtualGenericMethodUsesClassTypeParam<string>(\"\", \"aaaa\", typeof(string, false)) to be \"aaaa\", but found '"
                     + GenericClassInheritsFromGenericClassString.VirtualGenericMethodUsesClassTypeParam<string>(
@@ -4302,7 +4486,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassString.VirtualGenericMethodUsesClassTypeParam<int[]>(\"\", new int[] {1,2,3} typeof(int[]), false) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -4327,7 +4512,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassString.VirtualGenericMethodUsesClassTypeParam<string[]>(\"\", new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[]), false) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -4349,7 +4535,8 @@ internal class M
                 typeof(int),
                 false
             ) != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassIntArray.VirtualGenericMethodUsesClassTypeParam<int>(new int[0], 1, typeof(int, false)) to be 1, but found '"
                     + GenericClassInheritsFromGenericClassIntArray.VirtualGenericMethodUsesClassTypeParam<int>(
@@ -4369,7 +4556,8 @@ internal class M
                 typeof(string),
                 false
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassIntArray.VirtualGenericMethodUsesClassTypeParam<string>(new int[0], \"aaaa\", typeof(string, false)) to be \"aaaa\", but found '"
                     + GenericClassInheritsFromGenericClassIntArray.VirtualGenericMethodUsesClassTypeParam<string>(
@@ -4392,7 +4580,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassIntArray.VirtualGenericMethodUsesClassTypeParam<int[]>(new int[0], new int[] {1,2,3} typeof(int[]), false) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -4417,7 +4606,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassIntArray.VirtualGenericMethodUsesClassTypeParam<string[]>(new int[0], new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[]), false) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -4439,7 +4629,8 @@ internal class M
                 typeof(int),
                 false
             ) != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassStringArray.VirtualGenericMethodUsesClassTypeParam<int>(new string[0], 1, typeof(int, false)) to be 1, but found '"
                     + GenericClassInheritsFromGenericClassStringArray.VirtualGenericMethodUsesClassTypeParam<int>(
@@ -4459,7 +4650,8 @@ internal class M
                 typeof(string),
                 false
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassStringArray.VirtualGenericMethodUsesClassTypeParam<string>(new string[0], \"aaaa\", typeof(string, false)) to be \"aaaa\", but found '"
                     + GenericClassInheritsFromGenericClassStringArray.VirtualGenericMethodUsesClassTypeParam<string>(
@@ -4482,7 +4674,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassStringArray.VirtualGenericMethodUsesClassTypeParam<int[]>(new string[0], new int[] {1,2,3} typeof(int[]), false) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -4507,7 +4700,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassStringArray.VirtualGenericMethodUsesClassTypeParam<string[]>(new string[0], new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[]), false) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -4529,7 +4723,8 @@ internal class M
                 typeof(int),
                 false
             ) != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassInt.VirtualNonGenericMethodIntUsesClassTypeParam(Int32.MaxValue, 1, typeof(int, false)) to be 1, but found '"
                     + GenericClassInheritsFromGenericClassInt.VirtualNonGenericMethodIntUsesClassTypeParam(
@@ -4549,7 +4744,8 @@ internal class M
                 typeof(string),
                 false
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassInt.VirtualNonGenericMethodString(Int32.MaxValue, \"aaaa\", typeof(string, false)) to be \"aaaa\", but found '"
                     + GenericClassInheritsFromGenericClassInt.VirtualNonGenericMethodStringUsesClassTypeParam(
@@ -4572,7 +4768,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassInt.VirtualNonGenericMethodIntArrayUsesClassTypeParam(Int32.MaxValue, new int[] {1,2,3} typeof(int[]), false) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -4597,7 +4794,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassInt.VirtualNonGenericMethodStringArrayUsesClassTypeParam(Int32.MaxValue, new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[]), false) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -4619,7 +4817,8 @@ internal class M
                 typeof(int),
                 false
             ) != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassString.VirtualNonGenericMethodIntUsesClassTypeParam(\"wxyzabcdefgh\", 1, typeof(int, false)) to be 1, but found '"
                     + GenericClassInheritsFromGenericClassString.VirtualNonGenericMethodIntUsesClassTypeParam(
@@ -4639,7 +4838,8 @@ internal class M
                 typeof(string),
                 false
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassString.VirtualNonGenericMethodString(\"wxyzabcdefgh\", \"aaaa\", typeof(string, false)) to be \"aaaa\", but found '"
                     + GenericClassInheritsFromGenericClassString.VirtualNonGenericMethodStringUsesClassTypeParam(
@@ -4662,7 +4862,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassString.VirtualNonGenericMethodIntArrayUsesClassTypeParam(\"wxyzabcdefgh\", new int[] {1,2,3} typeof(int[]), false) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -4687,7 +4888,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassString.VirtualNonGenericMethodStringArrayUsesClassTypeParam(\"wxyzabcdefgh\", new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[]), false) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -4709,7 +4911,8 @@ internal class M
                 typeof(int),
                 false
             ) != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassIntArray.VirtualNonGenericMethodIntUsesClassTypeParam(new int[] {Int32.MaxValue, Int32.MinValue}, 1, typeof(int, false)) to be 1, but found '"
                     + GenericClassInheritsFromGenericClassIntArray.VirtualNonGenericMethodIntUsesClassTypeParam(
@@ -4729,7 +4932,8 @@ internal class M
                 typeof(string),
                 false
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassIntArray.VirtualNonGenericMethodString(new int[] {Int32.MaxValue, Int32.MinValue}, \"aaaa\", typeof(string, false)) to be \"aaaa\", but found '"
                     + GenericClassInheritsFromGenericClassIntArray.VirtualNonGenericMethodStringUsesClassTypeParam(
@@ -4752,7 +4956,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassIntArray.VirtualNonGenericMethodIntArrayUsesClassTypeParam(new int[] {Int32.MaxValue, Int32.MinValue}, new int[] {1,2,3} typeof(int[]), false) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -4777,7 +4982,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassIntArray.VirtualNonGenericMethodStringArrayUsesClassTypeParam(new int[] {Int32.MaxValue, Int32.MinValue}, new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[]), false) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -4799,7 +5005,8 @@ internal class M
                 typeof(int),
                 false
             ) != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassStringArray.VirtualNonGenericMethodIntUsesClassTypeParam(new string[1000], 1, typeof(int, false)) to be 1, but found '"
                     + GenericClassInheritsFromGenericClassStringArray.VirtualNonGenericMethodIntUsesClassTypeParam(
@@ -4819,7 +5026,8 @@ internal class M
                 typeof(string),
                 false
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassStringArray.VirtualNonGenericMethodString(new string[1000], \"aaaa\", typeof(string, false)) to be \"aaaa\", but found '"
                     + GenericClassInheritsFromGenericClassStringArray.VirtualNonGenericMethodStringUsesClassTypeParam(
@@ -4842,7 +5050,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassStringArray.VirtualNonGenericMethodIntArrayUsesClassTypeParam(new string[1000], new int[] {1,2,3} typeof(int[]), false) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -4867,7 +5076,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassStringArray.VirtualNonGenericMethodStringArrayUsesClassTypeParam(new string[1000], new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[]), false) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -4888,7 +5098,8 @@ internal class M
                 typeof(int),
                 false
             ) != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassInt.VirtualGenericMethod<int>(1, typeof(int, false)) to be 1, but found '"
                     + GenericClassInheritsFromGenericClassCastAsGenericClassInt.VirtualGenericMethod<int>(
@@ -4906,7 +5117,8 @@ internal class M
                 typeof(string),
                 false
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassInt.VirtualGenericMethod<string>(\"aaaa\", typeof(string, false)) to be \"aaaa\", but found '"
                     + GenericClassInheritsFromGenericClassCastAsGenericClassInt.VirtualGenericMethod<string>(
@@ -4927,7 +5139,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassInt.VirtualGenericMethod<int[]>(new int[] {1,2,3} typeof(int[]), false) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -4950,7 +5163,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassInt.VirtualGenericMethod<string[]>(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[]), false) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -4970,7 +5184,8 @@ internal class M
                 typeof(int),
                 false
             ) != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassString.VirtualGenericMethod<int>(1, typeof(int, false)) to be 1, but found '"
                     + GenericClassInheritsFromGenericClassCastAsGenericClassString.VirtualGenericMethod<int>(
@@ -4988,7 +5203,8 @@ internal class M
                 typeof(string),
                 false
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassString.VirtualGenericMethod<string>(\"aaaa\", typeof(string, false)) to be \"aaaa\", but found '"
                     + GenericClassInheritsFromGenericClassCastAsGenericClassString.VirtualGenericMethod<string>(
@@ -5009,7 +5225,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassString.VirtualGenericMethod<int[]>(new int[] {1,2,3} typeof(int[]), false) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -5032,7 +5249,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassString.VirtualGenericMethod<string[]>(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[]), false) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -5052,7 +5270,8 @@ internal class M
                 typeof(int),
                 false
             ) != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassIntArray.VirtualGenericMethod<int>(1, typeof(int, false)) to be 1, but found '"
                     + GenericClassInheritsFromGenericClassCastAsGenericClassIntArray.VirtualGenericMethod<int>(
@@ -5070,7 +5289,8 @@ internal class M
                 typeof(string),
                 false
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassIntArray.VirtualGenericMethod<string>(\"aaaa\", typeof(string, false)) to be \"aaaa\", but found '"
                     + GenericClassInheritsFromGenericClassCastAsGenericClassIntArray.VirtualGenericMethod<string>(
@@ -5091,7 +5311,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassIntArray.VirtualGenericMethod<int[]>(new int[] {1,2,3} typeof(int[]), false) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -5114,7 +5335,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassIntArray.VirtualGenericMethod<string[]>(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[]), false) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -5134,7 +5356,8 @@ internal class M
                 typeof(int),
                 false
             ) != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassStringArray.VirtualGenericMethod<int>(1, typeof(int, false)) to be 1, but found '"
                     + GenericClassInheritsFromGenericClassCastAsGenericClassStringArray.VirtualGenericMethod<int>(
@@ -5152,7 +5375,8 @@ internal class M
                 typeof(string),
                 false
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassStringArray.VirtualGenericMethod<string>(\"aaaa\", typeof(string, false)) to be \"aaaa\", but found '"
                     + GenericClassInheritsFromGenericClassCastAsGenericClassStringArray.VirtualGenericMethod<string>(
@@ -5173,7 +5397,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassStringArray.VirtualGenericMethod<int[]>(new int[] {1,2,3} typeof(int[]), false) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -5196,7 +5421,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassStringArray.VirtualGenericMethod<string[]>(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[]), false) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -5216,7 +5442,8 @@ internal class M
                 typeof(int),
                 false
             ) != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassInt.VirtualNonGenericMethodInt(1, typeof(int, false)) to be 1, but found '"
                     + GenericClassInheritsFromGenericClassCastAsGenericClassInt.VirtualNonGenericMethodInt(
@@ -5234,7 +5461,8 @@ internal class M
                 typeof(string),
                 false
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassInt.VirtualNonGenericMethodString(\"aaaa\", typeof(string, false)) to be \"aaaa\", but found '"
                     + GenericClassInheritsFromGenericClassCastAsGenericClassInt.VirtualNonGenericMethodString(
@@ -5255,7 +5483,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassInt.VirtualNonGenericMethodIntArray(new int[] {1,2,3} typeof(int[]), false) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -5278,7 +5507,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassInt.VirtualNonGenericMethodStringArray(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[]), false) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -5298,7 +5528,8 @@ internal class M
                 typeof(int),
                 false
             ) != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassString.VirtualNonGenericMethodInt(1, typeof(int, false)) to be 1, but found '"
                     + GenericClassInheritsFromGenericClassCastAsGenericClassString.VirtualNonGenericMethodInt(
@@ -5316,7 +5547,8 @@ internal class M
                 typeof(string),
                 false
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassString.VirtualNonGenericMethodString(\"aaaa\", typeof(string, false)) to be \"aaaa\", but found '"
                     + GenericClassInheritsFromGenericClassCastAsGenericClassString.VirtualNonGenericMethodString(
@@ -5337,7 +5569,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassString.VirtualNonGenericMethodIntArray(new int[] {1,2,3} typeof(int[]), false) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -5360,7 +5593,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassString.VirtualNonGenericMethodStringArray(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[]), false) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -5380,7 +5614,8 @@ internal class M
                 typeof(int),
                 false
             ) != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassIntArray.VirtualNonGenericMethodInt(1, typeof(int, false)) to be 1, but found '"
                     + GenericClassInheritsFromGenericClassCastAsGenericClassIntArray.VirtualNonGenericMethodInt(
@@ -5398,7 +5633,8 @@ internal class M
                 typeof(string),
                 false
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassIntArray.VirtualNonGenericMethodString(\"aaaa\", typeof(string, false)) to be \"aaaa\", but found '"
                     + GenericClassInheritsFromGenericClassCastAsGenericClassIntArray.VirtualNonGenericMethodString(
@@ -5419,7 +5655,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassIntArray.VirtualNonGenericMethodIntArray(new int[] {1,2,3} typeof(int[]), false) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -5442,7 +5679,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassIntArray.VirtualNonGenericMethodStringArray(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[]), false) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -5462,7 +5700,8 @@ internal class M
                 typeof(int),
                 false
             ) != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassStringArray.VirtualNonGenericMethodInt(1, typeof(int, false)) to be 1, but found '"
                     + GenericClassInheritsFromGenericClassCastAsGenericClassStringArray.VirtualNonGenericMethodInt(
@@ -5480,7 +5719,8 @@ internal class M
                 typeof(string),
                 false
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassStringArray.VirtualNonGenericMethodString(\"aaaa\", typeof(string, false)) to be \"aaaa\", but found '"
                     + GenericClassInheritsFromGenericClassCastAsGenericClassStringArray.VirtualNonGenericMethodString(
@@ -5501,7 +5741,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassStringArray.VirtualNonGenericMethodIntArray(new int[] {1,2,3} typeof(int[]), false) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -5524,7 +5765,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassStringArray.VirtualNonGenericMethodStringArray(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[]), false) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -5545,7 +5787,8 @@ internal class M
                 typeof(int),
                 false
             ) != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassInt.VirtualGenericMethodUsesClassTypeParam<int>(27, 1, typeof(int, false)) to be 1, but found '"
                     + GenericClassInheritsFromGenericClassCastAsGenericClassInt.VirtualGenericMethodUsesClassTypeParam<int>(
@@ -5565,7 +5808,8 @@ internal class M
                 typeof(string),
                 false
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassInt.VirtualGenericMethodUsesClassTypeParam<string>(27, \"aaaa\", typeof(string, false)) to be \"aaaa\", but found '"
                     + GenericClassInheritsFromGenericClassCastAsGenericClassInt.VirtualGenericMethodUsesClassTypeParam<string>(
@@ -5588,7 +5832,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassInt.VirtualGenericMethodUsesClassTypeParam<int[]>(27, new int[] {1,2,3} typeof(int[]), false) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -5613,7 +5858,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassInt.VirtualGenericMethodUsesClassTypeParam<string[]>(27, new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[]), false) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -5635,7 +5881,8 @@ internal class M
                 typeof(int),
                 false
             ) != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassString.VirtualGenericMethodUsesClassTypeParam<int>(\"\", 1, typeof(int, false)) to be 1, but found '"
                     + GenericClassInheritsFromGenericClassCastAsGenericClassString.VirtualGenericMethodUsesClassTypeParam<int>(
@@ -5655,7 +5902,8 @@ internal class M
                 typeof(string),
                 false
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassString.VirtualGenericMethodUsesClassTypeParam<string>(\"\", \"aaaa\", typeof(string, false)) to be \"aaaa\", but found '"
                     + GenericClassInheritsFromGenericClassCastAsGenericClassString.VirtualGenericMethodUsesClassTypeParam<string>(
@@ -5678,7 +5926,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassString.VirtualGenericMethodUsesClassTypeParam<int[]>(\"\", new int[] {1,2,3} typeof(int[]), false) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -5703,7 +5952,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassString.VirtualGenericMethodUsesClassTypeParam<string[]>(\"\", new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[]), false) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -5725,7 +5975,8 @@ internal class M
                 typeof(int),
                 false
             ) != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassIntArray.VirtualGenericMethodUsesClassTypeParam<int>(new int[0], 1, typeof(int, false)) to be 1, but found '"
                     + GenericClassInheritsFromGenericClassCastAsGenericClassIntArray.VirtualGenericMethodUsesClassTypeParam<int>(
@@ -5745,7 +5996,8 @@ internal class M
                 typeof(string),
                 false
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassIntArray.VirtualGenericMethodUsesClassTypeParam<string>(new int[0], \"aaaa\", typeof(string, false)) to be \"aaaa\", but found '"
                     + GenericClassInheritsFromGenericClassCastAsGenericClassIntArray.VirtualGenericMethodUsesClassTypeParam<string>(
@@ -5768,7 +6020,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassIntArray.VirtualGenericMethodUsesClassTypeParam<int[]>(new int[0], new int[] {1,2,3} typeof(int[]), false) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -5793,7 +6046,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassIntArray.VirtualGenericMethodUsesClassTypeParam<string[]>(new int[0], new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[]), false) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -5815,7 +6069,8 @@ internal class M
                 typeof(int),
                 false
             ) != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassStringArray.VirtualGenericMethodUsesClassTypeParam<int>(new string[0], 1, typeof(int, false)) to be 1, but found '"
                     + GenericClassInheritsFromGenericClassCastAsGenericClassStringArray.VirtualGenericMethodUsesClassTypeParam<int>(
@@ -5835,7 +6090,8 @@ internal class M
                 typeof(string),
                 false
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassStringArray.VirtualGenericMethodUsesClassTypeParam<string>(new string[0], \"aaaa\", typeof(string, false)) to be \"aaaa\", but found '"
                     + GenericClassInheritsFromGenericClassCastAsGenericClassStringArray.VirtualGenericMethodUsesClassTypeParam<string>(
@@ -5858,7 +6114,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassStringArray.VirtualGenericMethodUsesClassTypeParam<int[]>(new string[0], new int[] {1,2,3} typeof(int[]), false) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -5883,7 +6140,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassStringArray.VirtualGenericMethodUsesClassTypeParam<string[]>(new string[0], new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[]), false) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -5905,7 +6163,8 @@ internal class M
                 typeof(int),
                 false
             ) != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassInt.VirtualNonGenericMethodIntUsesClassTypeParam(Int32.MaxValue, 1, typeof(int, false)) to be 1, but found '"
                     + GenericClassInheritsFromGenericClassCastAsGenericClassInt.VirtualNonGenericMethodIntUsesClassTypeParam(
@@ -5925,7 +6184,8 @@ internal class M
                 typeof(string),
                 false
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassInt.VirtualNonGenericMethodString(Int32.MaxValue, \"aaaa\", typeof(string, false)) to be \"aaaa\", but found '"
                     + GenericClassInheritsFromGenericClassCastAsGenericClassInt.VirtualNonGenericMethodStringUsesClassTypeParam(
@@ -5948,7 +6208,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassInt.VirtualNonGenericMethodIntArrayUsesClassTypeParam(Int32.MaxValue, new int[] {1,2,3} typeof(int[]), false) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -5973,7 +6234,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassInt.VirtualNonGenericMethodStringArrayUsesClassTypeParam(Int32.MaxValue, new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[]), false) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -5995,7 +6257,8 @@ internal class M
                 typeof(int),
                 false
             ) != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassString.VirtualNonGenericMethodIntUsesClassTypeParam(\"wxyzabcdefgh\", 1, typeof(int, false)) to be 1, but found '"
                     + GenericClassInheritsFromGenericClassCastAsGenericClassString.VirtualNonGenericMethodIntUsesClassTypeParam(
@@ -6015,7 +6278,8 @@ internal class M
                 typeof(string),
                 false
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassString.VirtualNonGenericMethodString(\"wxyzabcdefgh\", \"aaaa\", typeof(string, false)) to be \"aaaa\", but found '"
                     + GenericClassInheritsFromGenericClassCastAsGenericClassString.VirtualNonGenericMethodStringUsesClassTypeParam(
@@ -6038,7 +6302,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassString.VirtualNonGenericMethodIntArrayUsesClassTypeParam(\"wxyzabcdefgh\", new int[] {1,2,3} typeof(int[]), false) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -6063,7 +6328,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassString.VirtualNonGenericMethodStringArrayUsesClassTypeParam(\"wxyzabcdefgh\", new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[]), false) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -6085,7 +6351,8 @@ internal class M
                 typeof(int),
                 false
             ) != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassIntArray.VirtualNonGenericMethodIntUsesClassTypeParam(new int[] {Int32.MaxValue, Int32.MinValue}, 1, typeof(int, false)) to be 1, but found '"
                     + GenericClassInheritsFromGenericClassCastAsGenericClassIntArray.VirtualNonGenericMethodIntUsesClassTypeParam(
@@ -6105,7 +6372,8 @@ internal class M
                 typeof(string),
                 false
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassIntArray.VirtualNonGenericMethodString(new int[] {Int32.MaxValue, Int32.MinValue}, \"aaaa\", typeof(string, false)) to be \"aaaa\", but found '"
                     + GenericClassInheritsFromGenericClassCastAsGenericClassIntArray.VirtualNonGenericMethodStringUsesClassTypeParam(
@@ -6128,7 +6396,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassIntArray.VirtualNonGenericMethodIntArrayUsesClassTypeParam(new int[] {Int32.MaxValue, Int32.MinValue}, new int[] {1,2,3} typeof(int[]), false) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -6153,7 +6422,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassIntArray.VirtualNonGenericMethodStringArrayUsesClassTypeParam(new int[] {Int32.MaxValue, Int32.MinValue}, new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[]), false) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -6175,7 +6445,8 @@ internal class M
                 typeof(int),
                 false
             ) != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassStringArray.VirtualNonGenericMethodIntUsesClassTypeParam(new string[1000], 1, typeof(int, false)) to be 1, but found '"
                     + GenericClassInheritsFromGenericClassCastAsGenericClassStringArray.VirtualNonGenericMethodIntUsesClassTypeParam(
@@ -6195,7 +6466,8 @@ internal class M
                 typeof(string),
                 false
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassStringArray.VirtualNonGenericMethodString(new string[1000], \"aaaa\", typeof(string, false)) to be \"aaaa\", but found '"
                     + GenericClassInheritsFromGenericClassCastAsGenericClassStringArray.VirtualNonGenericMethodStringUsesClassTypeParam(
@@ -6218,7 +6490,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassStringArray.VirtualNonGenericMethodIntArrayUsesClassTypeParam(new string[1000], new int[] {1,2,3} typeof(int[]), false) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -6243,7 +6516,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassStringArray.VirtualNonGenericMethodStringArrayUsesClassTypeParam(new string[1000], new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[]), false) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -6296,7 +6570,8 @@ internal class M
                 GenericClassInt.GenericMethod<int[]>(new int[] { 1, 2, 3 }, typeof(int[])),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInt.GenericMethod<int[]>(new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -6314,7 +6589,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInt.GenericMethod<string[]>(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -6350,7 +6626,8 @@ internal class M
                 GenericClassString.GenericMethod<int[]>(new int[] { 1, 2, 3 }, typeof(int[])),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassString.GenericMethod<int[]>(new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -6371,7 +6648,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassString.GenericMethod<string[]>(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -6407,7 +6685,8 @@ internal class M
                 GenericClassIntArray.GenericMethod<int[]>(new int[] { 1, 2, 3 }, typeof(int[])),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassIntArray.GenericMethod<int[]>(new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -6428,7 +6707,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassIntArray.GenericMethod<string[]>(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -6464,7 +6744,8 @@ internal class M
                 GenericClassStringArray.GenericMethod<int[]>(new int[] { 1, 2, 3 }, typeof(int[])),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassStringArray.GenericMethod<int[]>(new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -6485,7 +6766,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassStringArray.GenericMethod<string[]>(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -6521,7 +6803,8 @@ internal class M
                 GenericClassInt.NonGenericMethodIntArray(new int[] { 1, 2, 3 }, typeof(int[])),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInt.NonGenericMethodIntArray(new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -6542,7 +6825,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInt.NonGenericMethodStringArray(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -6578,7 +6862,8 @@ internal class M
                 GenericClassString.NonGenericMethodIntArray(new int[] { 1, 2, 3 }, typeof(int[])),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassString.NonGenericMethodIntArray(new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -6599,7 +6884,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassString.NonGenericMethodStringArray(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -6635,7 +6921,8 @@ internal class M
                 GenericClassIntArray.NonGenericMethodIntArray(new int[] { 1, 2, 3 }, typeof(int[])),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassIntArray.NonGenericMethodIntArray(new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -6656,7 +6943,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassIntArray.NonGenericMethodStringArray(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -6695,7 +6983,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassStringArray.NonGenericMethodIntArray(new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -6716,7 +7005,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassStringArray.NonGenericMethodStringArray(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -6741,7 +7031,8 @@ internal class M
         if (
             GenericClassInt.GenericMethodUsesClassTypeParam<string>(27, "aaaa", typeof(string))
             != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInt.GenericMethodUsesClassTypeParam<string>(27, \"aaaa\", typeof(string)) to be \"aaaa\", but found '"
                     + GenericClassInt.GenericMethodUsesClassTypeParam<string>(
@@ -6762,7 +7053,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInt.GenericMethodUsesClassTypeParam<int[]>(27, new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -6785,7 +7077,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInt.GenericMethodUsesClassTypeParam<string[]>(27, new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -6811,7 +7104,8 @@ internal class M
         if (
             GenericClassString.GenericMethodUsesClassTypeParam<string>("", "aaaa", typeof(string))
             != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassString.GenericMethodUsesClassTypeParam<string>(\"\", \"aaaa\", typeof(string)) to be \"aaaa\", but found '"
                     + GenericClassString.GenericMethodUsesClassTypeParam<string>(
@@ -6832,7 +7126,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassString.GenericMethodUsesClassTypeParam<int[]>(\"\", new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -6855,7 +7150,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassString.GenericMethodUsesClassTypeParam<string[]>(\"\", new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -6872,7 +7168,8 @@ internal class M
         if (
             GenericClassIntArray.GenericMethodUsesClassTypeParam<int>(new int[0], 1, typeof(int))
             != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassIntArray.GenericMethodUsesClassTypeParam<int>(new int[0], 1, typeof(int)) to be 1, but found '"
                     + GenericClassIntArray.GenericMethodUsesClassTypeParam<int>(
@@ -6890,7 +7187,8 @@ internal class M
                 "aaaa",
                 typeof(string)
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassIntArray.GenericMethodUsesClassTypeParam<string>(new int[0], \"aaaa\", typeof(string)) to be \"aaaa\", but found '"
                     + GenericClassIntArray.GenericMethodUsesClassTypeParam<string>(
@@ -6911,7 +7209,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassIntArray.GenericMethodUsesClassTypeParam<int[]>(new int[0], new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -6934,7 +7233,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassIntArray.GenericMethodUsesClassTypeParam<string[]>(new int[0], new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -6954,7 +7254,8 @@ internal class M
                 1,
                 typeof(int)
             ) != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassStringArray.GenericMethodUsesClassTypeParam<int>(new string[0], 1, typeof(int)) to be 1, but found '"
                     + GenericClassStringArray.GenericMethodUsesClassTypeParam<int>(
@@ -6972,7 +7273,8 @@ internal class M
                 "aaaa",
                 typeof(string)
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassStringArray.GenericMethodUsesClassTypeParam<string>(new string[0], \"aaaa\", typeof(string)) to be \"aaaa\", but found '"
                     + GenericClassStringArray.GenericMethodUsesClassTypeParam<string>(
@@ -6993,7 +7295,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassStringArray.GenericMethodUsesClassTypeParam<int[]>(new string[0], new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -7016,7 +7319,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassStringArray.GenericMethodUsesClassTypeParam<string[]>(new string[0], new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -7033,7 +7337,8 @@ internal class M
         if (
             GenericClassInt.NonGenericMethodIntUsesClassTypeParam(Int32.MaxValue, 1, typeof(int))
             != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInt.NonGenericMethodIntUsesClassTypeParam(Int32.MaxValue, 1, typeof(int)) to be 1, but found '"
                     + GenericClassInt.NonGenericMethodIntUsesClassTypeParam(
@@ -7051,7 +7356,8 @@ internal class M
                 "aaaa",
                 typeof(string)
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInt.NonGenericMethodString(Int32.MaxValue, \"aaaa\", typeof(string)) to be \"aaaa\", but found '"
                     + GenericClassInt.NonGenericMethodStringUsesClassTypeParam(
@@ -7072,7 +7378,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInt.NonGenericMethodIntArrayUsesClassTypeParam(Int32.MaxValue, new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -7095,7 +7402,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInt.NonGenericMethodStringArrayUsesClassTypeParam(Int32.MaxValue, new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -7112,7 +7420,8 @@ internal class M
         if (
             GenericClassString.NonGenericMethodIntUsesClassTypeParam("wxyzabcdefgh", 1, typeof(int))
             != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassString.NonGenericMethodIntUsesClassTypeParam(\"wxyzabcdefgh\", 1, typeof(int)) to be 1, but found '"
                     + GenericClassString.NonGenericMethodIntUsesClassTypeParam(
@@ -7130,7 +7439,8 @@ internal class M
                 "aaaa",
                 typeof(string)
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassString.NonGenericMethodString(\"wxyzabcdefgh\", \"aaaa\", typeof(string)) to be \"aaaa\", but found '"
                     + GenericClassString.NonGenericMethodStringUsesClassTypeParam(
@@ -7151,7 +7461,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassString.NonGenericMethodIntArrayUsesClassTypeParam(\"wxyzabcdefgh\", new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -7174,7 +7485,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassString.NonGenericMethodStringArrayUsesClassTypeParam(\"wxyzabcdefgh\", new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -7194,7 +7506,8 @@ internal class M
                 1,
                 typeof(int)
             ) != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassIntArray.NonGenericMethodIntUsesClassTypeParam(new int[] {Int32.MaxValue, Int32.MinValue}, 1, typeof(int)) to be 1, but found '"
                     + GenericClassIntArray.NonGenericMethodIntUsesClassTypeParam(
@@ -7212,7 +7525,8 @@ internal class M
                 "aaaa",
                 typeof(string)
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassIntArray.NonGenericMethodString(new int[] {Int32.MaxValue, Int32.MinValue}, \"aaaa\", typeof(string)) to be \"aaaa\", but found '"
                     + GenericClassIntArray.NonGenericMethodStringUsesClassTypeParam(
@@ -7233,7 +7547,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassIntArray.NonGenericMethodIntArrayUsesClassTypeParam(new int[] {Int32.MaxValue, Int32.MinValue}, new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -7256,7 +7571,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassIntArray.NonGenericMethodStringArrayUsesClassTypeParam(new int[] {Int32.MaxValue, Int32.MinValue}, new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -7276,7 +7592,8 @@ internal class M
                 1,
                 typeof(int)
             ) != 1
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassStringArray.NonGenericMethodIntUsesClassTypeParam(new string[1000], 1, typeof(int)) to be 1, but found '"
                     + GenericClassStringArray.NonGenericMethodIntUsesClassTypeParam(
@@ -7294,7 +7611,8 @@ internal class M
                 "aaaa",
                 typeof(string)
             ) != "aaaa"
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassStringArray.NonGenericMethodString(new string[1000], \"aaaa\", typeof(string)) to be \"aaaa\", but found '"
                     + GenericClassStringArray.NonGenericMethodStringUsesClassTypeParam(
@@ -7315,7 +7633,8 @@ internal class M
                 ),
                 new int[] { 1, 2, 3 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassStringArray.NonGenericMethodIntArrayUsesClassTypeParam(new string[1000], new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
@@ -7338,7 +7657,8 @@ internal class M
                 ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassStringArray.NonGenericMethodStringArrayUsesClassTypeParam(new string[1000], new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
@@ -7409,7 +7729,8 @@ internal class M
                 GenericClassInt.nongenericIntArrayField,
                 new int[] { 0, Int32.MaxValue, Int32.MinValue }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInt.nongenericIntArrayField to be 'new int[]{0, "
                     + Int32.MaxValue
@@ -7426,7 +7747,8 @@ internal class M
                 GenericClassInt.nongenericStringArrayField,
                 new string[] { "", "", "", " " }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInt.nongenericStringArrayField to be 'new string[]{\"\",\"\",\"\",\" \"}', but found '"
                     + Utils.BuildArrayString<string>(GenericClassInt.nongenericStringArrayField)
@@ -7480,7 +7802,8 @@ internal class M
                 GenericClassString.nongenericIntArrayField,
                 new int[] { 0, Int32.MaxValue, Int32.MinValue }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassString.nongenericIntArrayField to be 'new int[]{0, "
                     + Int32.MaxValue
@@ -7497,7 +7820,8 @@ internal class M
                 GenericClassString.nongenericStringArrayField,
                 new string[] { "", "", "", " " }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassString.nongenericStringArrayField to be 'new string[]{\"\",\"\",\"\",\" \"}', but found '"
                     + Utils.BuildArrayString<string>(GenericClassString.nongenericStringArrayField)
@@ -7552,7 +7876,8 @@ internal class M
                 GenericClassIntArray.nongenericIntArrayField,
                 new int[] { 0, Int32.MaxValue, Int32.MinValue }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassIntArray.nongenericIntArrayField to be 'new int[]{0, "
                     + Int32.MaxValue
@@ -7569,7 +7894,8 @@ internal class M
                 GenericClassIntArray.nongenericStringArrayField,
                 new string[] { "", "", "", " " }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassIntArray.nongenericStringArrayField to be 'new string[]{\"\",\"\",\"\",\" \"}', but found '"
                     + Utils.BuildArrayString<string>(
@@ -7595,7 +7921,8 @@ internal class M
                 GenericClassStringArray.genericField,
                 new string[] { " ", "", "", " " }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassStringArray.genericField to be 'new string[]{\" \",\"\",\"\",\" \"}', but found '"
                     + Utils.BuildArrayString<string>(GenericClassStringArray.genericField)
@@ -7630,7 +7957,8 @@ internal class M
                 GenericClassStringArray.nongenericIntArrayField,
                 new int[] { 0, Int32.MaxValue, Int32.MinValue }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassStringArray.nongenericIntArrayField to be 'new int[]{0, "
                     + Int32.MaxValue
@@ -7647,7 +7975,8 @@ internal class M
                 GenericClassStringArray.nongenericStringArrayField,
                 new string[] { "", "", "", " " }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassStringArray.nongenericStringArrayField to be 'new string[]{\"\",\"\",\"\",\" \"}', but found '"
                     + Utils.BuildArrayString<string>(
@@ -7719,7 +8048,8 @@ internal class M
                 GenericClassInt.nongenericIntArrayProperty,
                 new int[] { 0, Int32.MaxValue, Int32.MinValue }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInt.nongenericIntArrayProperty to be 'new int[]{0, "
                     + Int32.MaxValue
@@ -7736,7 +8066,8 @@ internal class M
                 GenericClassInt.nongenericStringArrayProperty,
                 new string[] { "", "", "", " " }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInt.nongenericStringArrayProperty to be 'new string[]{\"\",\"\",\"\",\" \"}', but found '"
                     + Utils.BuildArrayString<string>(GenericClassInt.nongenericStringArrayProperty)
@@ -7793,7 +8124,8 @@ internal class M
                 GenericClassString.nongenericIntArrayProperty,
                 new int[] { 0, Int32.MaxValue, Int32.MinValue }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassString.nongenericIntArrayProperty to be 'new int[]{0, "
                     + Int32.MaxValue
@@ -7810,7 +8142,8 @@ internal class M
                 GenericClassString.nongenericStringArrayProperty,
                 new string[] { "", "", "", " " }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassString.nongenericStringArrayProperty to be 'new string[]{\"\",\"\",\"\",\" \"}', but found '"
                     + Utils.BuildArrayString<string>(
@@ -7836,7 +8169,8 @@ internal class M
                 GenericClassIntArray.genericProperty,
                 new int[] { 6, 4, 2, 1, 0 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassIntArray.genericProperty to be 'new int[]{6,4,2,1,0}', but found '"
                     + Utils.BuildArrayString<int>(GenericClassIntArray.genericProperty)
@@ -7871,7 +8205,8 @@ internal class M
                 GenericClassIntArray.nongenericIntArrayProperty,
                 new int[] { 0, Int32.MaxValue, Int32.MinValue }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassIntArray.nongenericIntArrayProperty to be 'new int[]{0, "
                     + Int32.MaxValue
@@ -7888,7 +8223,8 @@ internal class M
                 GenericClassIntArray.nongenericStringArrayProperty,
                 new string[] { "", "", "", " " }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassIntArray.nongenericStringArrayProperty to be 'new string[]{\"\",\"\",\"\",\" \"}', but found '"
                     + Utils.BuildArrayString<string>(
@@ -7914,7 +8250,8 @@ internal class M
                 GenericClassStringArray.genericProperty,
                 new string[] { " ", "", "", " " }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassStringArray.genericProperty to be 'new string[]{\" \",\"\",\"\",\" \"}', but found '"
                     + Utils.BuildArrayString<string>(GenericClassStringArray.genericProperty)
@@ -7949,7 +8286,8 @@ internal class M
                 GenericClassStringArray.nongenericIntArrayProperty,
                 new int[] { 0, Int32.MaxValue, Int32.MinValue }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassStringArray.nongenericIntArrayProperty to be 'new int[]{0, "
                     + Int32.MaxValue
@@ -7968,7 +8306,8 @@ internal class M
                 GenericClassStringArray.nongenericStringArrayProperty,
                 new string[] { "", "", "", " " }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassStringArray.nongenericStringArrayProperty to be 'new string[]{\"\",\"\",\"\",\" \"}', but found '"
                     + Utils.BuildArrayString<string>(
@@ -8066,7 +8405,8 @@ internal class M
                 GenericClassInt.nongenericIntArrayVirtualProperty,
                 new int[] { 0, Int32.MaxValue, Int32.MinValue }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInt.nongenericIntArrayVirtualProperty to be 'new int[]{0, "
                     + Int32.MaxValue
@@ -8083,7 +8423,8 @@ internal class M
                 GenericClassInt.nongenericStringArrayVirtualProperty,
                 new string[] { "", "", "", " " }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInt.nongenericStringArrayVirtualProperty to be 'new string[]{\"\",\"\",\"\",\" \"}', but found '"
                     + Utils.BuildArrayString<string>(
@@ -8142,7 +8483,8 @@ internal class M
                 GenericClassString.nongenericIntArrayVirtualProperty,
                 new int[] { 0, Int32.MaxValue, Int32.MinValue }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassString.nongenericIntArrayVirtualProperty to be 'new int[]{0, "
                     + Int32.MaxValue
@@ -8161,7 +8503,8 @@ internal class M
                 GenericClassString.nongenericStringArrayVirtualProperty,
                 new string[] { "", "", "", " " }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassString.nongenericStringArrayVirtualProperty to be 'new string[]{\"\",\"\",\"\",\" \"}', but found '"
                     + Utils.BuildArrayString<string>(
@@ -8193,7 +8536,8 @@ internal class M
                 GenericClassIntArray.genericVirtualProperty,
                 new int[] { 6, 4, 2, 1, 0 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassIntArray.genericVirtualProperty to be 'new int[]{6,4,2,1,0}', but found '"
                     + Utils.BuildArrayString<int>(GenericClassIntArray.genericVirtualProperty)
@@ -8228,7 +8572,8 @@ internal class M
                 GenericClassIntArray.nongenericIntArrayVirtualProperty,
                 new int[] { 0, Int32.MaxValue, Int32.MinValue }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassIntArray.nongenericIntArrayVirtualProperty to be 'new int[]{0, "
                     + Int32.MaxValue
@@ -8247,7 +8592,8 @@ internal class M
                 GenericClassIntArray.nongenericStringArrayVirtualProperty,
                 new string[] { "", "", "", " " }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassIntArray.nongenericStringArrayVirtualProperty to be 'new string[]{\"\",\"\",\"\",\" \"}', but found '"
                     + Utils.BuildArrayString<string>(
@@ -8279,7 +8625,8 @@ internal class M
                 GenericClassStringArray.genericVirtualProperty,
                 new string[] { " ", "", "", " " }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassStringArray.genericVirtualProperty to be 'new string[]{\" \",\"\",\"\",\" \"}', but found '"
                     + Utils.BuildArrayString<string>(GenericClassStringArray.genericVirtualProperty)
@@ -8314,7 +8661,8 @@ internal class M
                 GenericClassStringArray.nongenericIntArrayVirtualProperty,
                 new int[] { 0, Int32.MaxValue, Int32.MinValue }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassStringArray.nongenericIntArrayVirtualProperty to be 'new int[]{0, "
                     + Int32.MaxValue
@@ -8333,7 +8681,8 @@ internal class M
                 GenericClassStringArray.nongenericStringArrayVirtualProperty,
                 new string[] { "", "", "", " " }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassStringArray.nongenericStringArrayVirtualProperty to be 'new string[]{\"\",\"\",\"\",\" \"}', but found '"
                     + Utils.BuildArrayString<string>(
@@ -8398,7 +8747,8 @@ internal class M
                 GenericClassInheritsFromGenericClassInt.nongenericIntArrayVirtualProperty,
                 new int[] { 0, Int32.MaxValue, Int32.MinValue }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassInt.nongenericIntArrayVirtualProperty to be 'new int[]{0, "
                     + Int32.MaxValue
@@ -8417,7 +8767,8 @@ internal class M
                 GenericClassInheritsFromGenericClassInt.nongenericStringArrayVirtualProperty,
                 new string[] { "", "", "", " " }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassInt.nongenericStringArrayVirtualProperty to be 'new string[]{\"\",\"\",\"\",\" \"}', but found '"
                     + Utils.BuildArrayString<string>(
@@ -8453,7 +8804,8 @@ internal class M
         if (
             GenericClassInheritsFromGenericClassString.nongenericIntVirtualProperty
             != Int32.MinValue
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassString.nongenericIntVirtualProperty to be '"
                     + Int32.MinValue
@@ -8479,7 +8831,8 @@ internal class M
                 GenericClassInheritsFromGenericClassString.nongenericIntArrayVirtualProperty,
                 new int[] { 0, Int32.MaxValue, Int32.MinValue }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassString.nongenericIntArrayVirtualProperty to be 'new int[]{0, "
                     + Int32.MaxValue
@@ -8498,7 +8851,8 @@ internal class M
                 GenericClassInheritsFromGenericClassString.nongenericStringArrayVirtualProperty,
                 new string[] { "", "", "", " " }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassString.nongenericStringArrayVirtualProperty to be 'new string[]{\"\",\"\",\"\",\" \"}', but found '"
                     + Utils.BuildArrayString<string>(
@@ -8532,7 +8886,8 @@ internal class M
                 GenericClassInheritsFromGenericClassIntArray.genericVirtualProperty,
                 new int[] { 6, 4, 2, 1, 0 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassIntArray.genericVirtualProperty to be 'new int[]{6,4,2,1,0}', but found '"
                     + Utils.BuildArrayString<int>(
@@ -8545,7 +8900,8 @@ internal class M
         if (
             GenericClassInheritsFromGenericClassIntArray.nongenericIntVirtualProperty
             != Int32.MinValue
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassIntArray.nongenericIntVirtualProperty to be '"
                     + Int32.MinValue
@@ -8571,7 +8927,8 @@ internal class M
                 GenericClassInheritsFromGenericClassIntArray.nongenericIntArrayVirtualProperty,
                 new int[] { 0, Int32.MaxValue, Int32.MinValue }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassIntArray.nongenericIntArrayVirtualProperty to be 'new int[]{0, "
                     + Int32.MaxValue
@@ -8590,7 +8947,8 @@ internal class M
                 GenericClassInheritsFromGenericClassIntArray.nongenericStringArrayVirtualProperty,
                 new string[] { "", "", "", " " }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassIntArray.nongenericStringArrayVirtualProperty to be 'new string[]{\"\",\"\",\"\",\" \"}', but found '"
                     + Utils.BuildArrayString<string>(
@@ -8620,7 +8978,8 @@ internal class M
                 GenericClassInheritsFromGenericClassStringArray.genericVirtualProperty,
                 new string[] { " ", "", "", " " }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassStringArray.genericVirtualProperty to be 'new string[]{\" \",\"\",\"\",\" \"}', but found '"
                     + Utils.BuildArrayString<string>(
@@ -8633,7 +8992,8 @@ internal class M
         if (
             GenericClassInheritsFromGenericClassStringArray.nongenericIntVirtualProperty
             != Int32.MinValue
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassStringArray.nongenericIntVirtualProperty to be '"
                     + Int32.MinValue
@@ -8659,7 +9019,8 @@ internal class M
                 GenericClassInheritsFromGenericClassStringArray.nongenericIntArrayVirtualProperty,
                 new int[] { 0, Int32.MaxValue, Int32.MinValue }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassStringArray.nongenericIntArrayVirtualProperty to be 'new int[]{0, "
                     + Int32.MaxValue
@@ -8678,7 +9039,8 @@ internal class M
                 GenericClassInheritsFromGenericClassStringArray.nongenericStringArrayVirtualProperty,
                 new string[] { "", "", "", " " }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassStringArray.nongenericStringArrayVirtualProperty to be 'new string[]{\"\",\"\",\"\",\" \"}', but found '"
                     + Utils.BuildArrayString<string>(
@@ -8702,7 +9064,8 @@ internal class M
         if (
             GenericClassInheritsFromGenericClassCastAsGenericClassInt.genericVirtualProperty
             != Int32.MaxValue
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassInt.genericVirtualProperty to be '"
                     + Int32.MaxValue
@@ -8715,7 +9078,8 @@ internal class M
         if (
             GenericClassInheritsFromGenericClassCastAsGenericClassInt.nongenericIntVirtualProperty
             != Int32.MinValue
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassInt.nongenericIntVirtualProperty to be '"
                     + Int32.MinValue
@@ -8728,7 +9092,8 @@ internal class M
         if (
             GenericClassInheritsFromGenericClassCastAsGenericClassInt.nongenericStringVirtualProperty
             != ""
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassInt.nongenericStringVirtualProperty to be '"
                     + ""
@@ -8743,7 +9108,8 @@ internal class M
                 GenericClassInheritsFromGenericClassCastAsGenericClassInt.nongenericIntArrayVirtualProperty,
                 new int[] { 0, Int32.MaxValue, Int32.MinValue }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassInt.nongenericIntArrayVirtualProperty to be 'new int[]{0, "
                     + Int32.MaxValue
@@ -8762,7 +9128,8 @@ internal class M
                 GenericClassInheritsFromGenericClassCastAsGenericClassInt.nongenericStringArrayVirtualProperty,
                 new string[] { "", "", "", " " }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassInt.nongenericStringArrayVirtualProperty to be 'new string[]{\"\",\"\",\"\",\" \"}', but found '"
                     + Utils.BuildArrayString<string>(
@@ -8786,7 +9153,8 @@ internal class M
         if (
             GenericClassInheritsFromGenericClassCastAsGenericClassString.genericVirtualProperty
             != string.Empty
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassString.genericVirtualProperty to be '"
                     + string.Empty
@@ -8799,7 +9167,8 @@ internal class M
         if (
             GenericClassInheritsFromGenericClassCastAsGenericClassString.nongenericIntVirtualProperty
             != Int32.MinValue
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassString.nongenericIntVirtualProperty to be '"
                     + Int32.MinValue
@@ -8812,7 +9181,8 @@ internal class M
         if (
             GenericClassInheritsFromGenericClassCastAsGenericClassString.nongenericStringVirtualProperty
             != ""
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassString.nongenericStringVirtualProperty to be '"
                     + ""
@@ -8827,7 +9197,8 @@ internal class M
                 GenericClassInheritsFromGenericClassCastAsGenericClassString.nongenericIntArrayVirtualProperty,
                 new int[] { 0, Int32.MaxValue, Int32.MinValue }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassString.nongenericIntArrayVirtualProperty to be 'new int[]{0, "
                     + Int32.MaxValue
@@ -8846,7 +9217,8 @@ internal class M
                 GenericClassInheritsFromGenericClassCastAsGenericClassString.nongenericStringArrayVirtualProperty,
                 new string[] { "", "", "", " " }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassString.nongenericStringArrayVirtualProperty to be 'new string[]{\"\",\"\",\"\",\" \"}', but found '"
                     + Utils.BuildArrayString<string>(
@@ -8872,7 +9244,8 @@ internal class M
                 GenericClassInheritsFromGenericClassCastAsGenericClassIntArray.genericVirtualProperty,
                 new int[] { 6, 4, 2, 1, 0 }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassIntArray.genericVirtualProperty to be 'new int[]{6,4,2,1,0}', but found '"
                     + Utils.BuildArrayString<int>(
@@ -8885,7 +9258,8 @@ internal class M
         if (
             GenericClassInheritsFromGenericClassCastAsGenericClassIntArray.nongenericIntVirtualProperty
             != Int32.MinValue
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassIntArray.nongenericIntVirtualProperty to be '"
                     + Int32.MinValue
@@ -8898,7 +9272,8 @@ internal class M
         if (
             GenericClassInheritsFromGenericClassCastAsGenericClassIntArray.nongenericStringVirtualProperty
             != ""
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassIntArray.nongenericStringVirtualProperty to be '"
                     + ""
@@ -8913,7 +9288,8 @@ internal class M
                 GenericClassInheritsFromGenericClassCastAsGenericClassIntArray.nongenericIntArrayVirtualProperty,
                 new int[] { 0, Int32.MaxValue, Int32.MinValue }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassIntArray.nongenericIntArrayVirtualProperty to be 'new int[]{0, "
                     + Int32.MaxValue
@@ -8932,7 +9308,8 @@ internal class M
                 GenericClassInheritsFromGenericClassCastAsGenericClassIntArray.nongenericStringArrayVirtualProperty,
                 new string[] { "", "", "", " " }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassIntArray.nongenericStringArrayVirtualProperty to be 'new string[]{\"\",\"\",\"\",\" \"}', but found '"
                     + Utils.BuildArrayString<string>(
@@ -8958,7 +9335,8 @@ internal class M
                 GenericClassInheritsFromGenericClassCastAsGenericClassStringArray.genericVirtualProperty,
                 new string[] { " ", "", "", " " }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassStringArray.genericVirtualProperty to be 'new string[]{\" \",\"\",\"\",\" \"}', but found '"
                     + Utils.BuildArrayString<string>(
@@ -8971,7 +9349,8 @@ internal class M
         if (
             GenericClassInheritsFromGenericClassCastAsGenericClassStringArray.nongenericIntVirtualProperty
             != Int32.MinValue
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassStringArray.nongenericIntVirtualProperty to be '"
                     + Int32.MinValue
@@ -8984,7 +9363,8 @@ internal class M
         if (
             GenericClassInheritsFromGenericClassCastAsGenericClassStringArray.nongenericStringVirtualProperty
             != ""
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassStringArray.nongenericStringVirtualProperty to be '"
                     + ""
@@ -8999,7 +9379,8 @@ internal class M
                 GenericClassInheritsFromGenericClassCastAsGenericClassStringArray.nongenericIntArrayVirtualProperty,
                 new int[] { 0, Int32.MaxValue, Int32.MinValue }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassStringArray.nongenericIntArrayVirtualProperty to be 'new int[]{0, "
                     + Int32.MaxValue
@@ -9018,7 +9399,8 @@ internal class M
                 GenericClassInheritsFromGenericClassCastAsGenericClassStringArray.nongenericStringArrayVirtualProperty,
                 new string[] { "", "", "", " " }
             )
-        ) {
+        )
+        {
             Utils.Fail(
                 "Expected returned value of GenericClassInheritsFromGenericClassCastAsGenericClassStringArray.nongenericStringArrayVirtualProperty to be 'new string[]{\"\",\"\",\"\",\" \"}', but found '"
                     + Utils.BuildArrayString<string>(

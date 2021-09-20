@@ -177,7 +177,8 @@ namespace System.Text.Json.Node
         /// </returns>
         bool ICollection<KeyValuePair<string, JsonNode?>>.Remove(
             KeyValuePair<string, JsonNode?> item
-        ) {
+        )
+        {
             if (Dictionary.Remove(item))
             {
                 JsonNode? node = item.Value;
@@ -215,7 +216,8 @@ namespace System.Text.Json.Node
         bool IDictionary<string, JsonNode?>.TryGetValue(
             string propertyName,
             [NotNullWhen(true)] out JsonNode? jsonNode
-        ) {
+        )
+        {
             if (propertyName == null)
             {
                 throw new ArgumentNullException(nameof(propertyName));

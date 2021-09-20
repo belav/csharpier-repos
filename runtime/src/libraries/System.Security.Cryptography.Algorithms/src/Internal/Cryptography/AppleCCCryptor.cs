@@ -171,7 +171,8 @@ namespace Internal.Cryptography
             Interop.AppleCrypto.PAL_SymmetricAlgorithm algorithm,
             CipherMode cipherMode,
             int feedbackSizeInBytes
-        ) {
+        )
+        {
             switch (cipherMode)
             {
                 case CipherMode.CBC:

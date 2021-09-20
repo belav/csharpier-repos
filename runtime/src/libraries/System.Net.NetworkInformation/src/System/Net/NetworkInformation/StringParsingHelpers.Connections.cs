@@ -36,7 +36,8 @@ namespace System.Net.NetworkInformation
         internal static TcpConnectionInformation[] ParseActiveTcpConnectionsFromFiles(
             string tcp4ConnectionsFile,
             string tcp6ConnectionsFile
-        ) {
+        )
+        {
             if (!File.Exists(tcp4ConnectionsFile) || !File.Exists(tcp6ConnectionsFile))
             {
                 throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
@@ -112,7 +113,8 @@ namespace System.Net.NetworkInformation
         internal static IPEndPoint[] ParseActiveTcpListenersFromFiles(
             string tcp4ConnectionsFile,
             string tcp6ConnectionsFile
-        ) {
+        )
+        {
             if (!File.Exists(tcp4ConnectionsFile) || !File.Exists(tcp6ConnectionsFile))
             {
                 throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
@@ -192,7 +194,8 @@ namespace System.Net.NetworkInformation
         public static IPEndPoint[] ParseActiveUdpListenersFromFiles(
             string udp4File,
             string udp6File
-        ) {
+        )
+        {
             if (!File.Exists(udp4File) || !File.Exists(udp6File))
             {
                 throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
@@ -265,7 +268,8 @@ namespace System.Net.NetworkInformation
                     CultureInfo.InvariantCulture,
                     out nativeTcpState
                 )
-            ) {
+            )
+            {
                 throw ExceptionHelper.CreateForParseFailure();
             }
 
@@ -302,7 +306,8 @@ namespace System.Net.NetworkInformation
                     CultureInfo.InvariantCulture,
                     out localPort
                 )
-            ) {
+            )
+            {
                 throw ExceptionHelper.CreateForParseFailure();
             }
 
@@ -332,7 +337,8 @@ namespace System.Net.NetworkInformation
                     CultureInfo.InvariantCulture,
                     out port
                 )
-            ) {
+            )
+            {
                 throw ExceptionHelper.CreateForParseFailure();
             }
 
@@ -374,7 +380,8 @@ namespace System.Net.NetworkInformation
                     CultureInfo.InvariantCulture,
                     out addressValue
                 )
-            ) {
+            )
+            {
                 throw ExceptionHelper.CreateForParseFailure();
             }
 

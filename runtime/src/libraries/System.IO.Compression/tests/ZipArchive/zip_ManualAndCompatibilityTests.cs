@@ -22,7 +22,8 @@ namespace System.IO.Compression.Tests
             string zipFolder,
             bool requireExplicit,
             bool checkTimes
-        ) {
+        )
+        {
             IsZipSameAsDir(
                 await StreamHelpers.CreateTempCopyStream(compat(zipFile)),
                 zfolder(zipFolder),
@@ -55,7 +56,8 @@ namespace System.IO.Compression.Tests
             string withoutTrailing,
             bool requireExplicit,
             bool checkTimes
-        ) {
+        )
+        {
             IsZipSameAsDir(
                 await StreamHelpers.CreateTempCopyStream(compat(withTrailing)),
                 compat(withoutTrailing),
@@ -82,7 +84,8 @@ namespace System.IO.Compression.Tests
         public static async Task ZipWithInvalidFileNames_ParsedBasedOnSourceOS(
             string zipName,
             string fileName
-        ) {
+        )
+        {
             using (Stream stream = await StreamHelpers.CreateTempCopyStream(compat(zipName)))
             using (ZipArchive archive = new ZipArchive(stream))
             {
@@ -128,7 +131,8 @@ namespace System.IO.Compression.Tests
                 MemoryStream expectedArchiveStream = await StreamHelpers.CreateTempCopyStream(
                     compat(zipFile)
                 )
-            ) {
+            )
+            {
                 byte[] localFileHeaderSignature = new byte[] { 0x50, 0x4b, 0x03, 0x04 };
 
                 // Produce a ZipFile
@@ -149,7 +153,8 @@ namespace System.IO.Compression.Tests
                             localFileHeaderSignature
                         )
                     ) != -1
-                ) {
+                )
+                {
                     actualIndex = FindIndexOfSequence(
                         actualBytes,
                         actualIndex,
@@ -204,13 +209,15 @@ namespace System.IO.Compression.Tests
         public static async Task ZipBinaryCompat_CentralDirectoryHeaders(
             string zipFile,
             string zipFolder
-        ) {
+        )
+        {
             using (MemoryStream actualArchiveStream = new MemoryStream())
             using (
                 MemoryStream expectedArchiveStream = await StreamHelpers.CreateTempCopyStream(
                     compat(zipFile)
                 )
-            ) {
+            )
+            {
                 byte[] signature = new byte[] { 0x50, 0x4b, 0x03, 0x04 };
 
                 // Produce a ZipFile
@@ -226,7 +233,8 @@ namespace System.IO.Compression.Tests
                 while (
                     (expectedIndex = FindIndexOfSequence(expectedBytes, expectedIndex, signature))
                     != -1
-                ) {
+                )
+                {
                     actualIndex = FindIndexOfSequence(actualBytes, actualIndex, signature);
                     Assert.NotEqual(-1, actualIndex);
                     for (int i = 0; i < 16; i++)
@@ -252,12 +260,14 @@ namespace System.IO.Compression.Tests
             byte[] bytesToSearch,
             int startIndex,
             byte[] sequenceToFind
-        ) {
+        )
+        {
             for (
                 int index = startIndex;
                 index < bytesToSearch.Length - sequenceToFind.Length;
                 index++
-            ) {
+            )
+            {
                 bool equal = true;
                 for (int i = 0; i < sequenceToFind.Length; i++)
                 {

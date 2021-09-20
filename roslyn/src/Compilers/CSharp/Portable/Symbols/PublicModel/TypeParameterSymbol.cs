@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
         protected override ITypeSymbol WithNullableAnnotation(
             CodeAnalysis.NullableAnnotation nullableAnnotation
-        ) {
+        )
+        {
             Debug.Assert(nullableAnnotation != _underlying.DefaultNullableAnnotation);
             Debug.Assert(nullableAnnotation != this.NullableAnnotation);
             return new TypeParameterSymbol(_underlying, nullableAnnotation);

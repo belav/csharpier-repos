@@ -27,7 +27,8 @@ namespace AutoMapper.Internal.Mappers
             MemberMap memberMap,
             Expression sourceExpression,
             Expression destExpression
-        ) {
+        )
+        {
             var destinationType = destExpression.Type;
             if (destinationType.IsArray)
             {
@@ -45,7 +46,8 @@ namespace AutoMapper.Internal.Mappers
             if (
                 destinationType.IsGenericType(typeof(ReadOnlyDictionary<, >))
                 || destinationType.IsGenericType(typeof(IReadOnlyDictionary<, >))
-            ) {
+            )
+            {
                 return MapReadOnlyCollection(
                     typeof(Dictionary<, >),
                     typeof(ReadOnlyDictionary<, >)
@@ -54,14 +56,16 @@ namespace AutoMapper.Internal.Mappers
             if (
                 destinationType == sourceExpression.Type
                 && destinationType.Name == nameof(NameValueCollection)
-            ) {
+            )
+            {
                 return CreateNameValueCollection(sourceExpression);
             }
             return MapCollectionCore(destExpression);
             Expression MapReadOnlyCollection(
                 Type genericCollectionType,
                 Type genericReadOnlyCollectionType
-            ) {
+            )
+            {
                 var destinationTypeArguments = destinationType.GenericTypeArguments;
                 var closedCollectionType = genericCollectionType.MakeGenericType(
                     destinationTypeArguments
@@ -214,7 +218,8 @@ namespace AutoMapper.Internal.Mappers
                 Array source,
                 Type destinationElementType,
                 ResolutionContext context
-            ) {
+            )
+            {
                 var sourceElementType = source.GetType().GetElementType();
                 var destinationArray = Array.CreateInstance(
                     destinationElementType,
@@ -234,7 +239,8 @@ namespace AutoMapper.Internal.Mappers
                 ProfileMap profileMap,
                 Expression sourceExpression,
                 Type destinationType
-            ) {
+            )
+            {
                 var destinationElementType = destinationType.GetElementType();
                 if (destinationType.GetArrayRank() > 1)
                 {
@@ -304,7 +310,8 @@ namespace AutoMapper.Internal.Mappers
                             sourceElementType,
                             destinationElementType
                         ) != null
-                    ) {
+                    )
+                    {
                         return null;
                     }
                     return Block(
@@ -325,7 +332,8 @@ namespace AutoMapper.Internal.Mappers
                             sourceElementType,
                             destinationElementType
                         ) != null
-                    ) {
+                    )
+                    {
                         return null;
                     }
                     return Call(

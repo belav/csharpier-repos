@@ -51,13 +51,15 @@ namespace System.Security.Principal
         public static bool operator ==(
             System.Security.Principal.IdentityReference? left,
             System.Security.Principal.IdentityReference? right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Security.Principal.IdentityReference? left,
             System.Security.Principal.IdentityReference? right
-        ) {
+        )
+        {
             throw null;
         }
         public abstract override string ToString();
@@ -106,13 +108,15 @@ namespace System.Security.Principal
         }
         public System.Security.Principal.IdentityReferenceCollection Translate(
             System.Type targetType
-        ) {
+        )
+        {
             throw null;
         }
         public System.Security.Principal.IdentityReferenceCollection Translate(
             System.Type targetType,
             bool forceSuccess
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -126,7 +130,8 @@ namespace System.Security.Principal
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? o
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -140,13 +145,15 @@ namespace System.Security.Principal
         public static bool operator ==(
             System.Security.Principal.NTAccount? left,
             System.Security.Principal.NTAccount? right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Security.Principal.NTAccount? left,
             System.Security.Principal.NTAccount? right
-        ) {
+        )
+        {
             throw null;
         }
         public override string ToString()
@@ -155,7 +162,8 @@ namespace System.Security.Principal
         }
         public override System.Security.Principal.IdentityReference Translate(
             System.Type targetType
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -190,7 +198,8 @@ namespace System.Security.Principal
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? o
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(System.Security.Principal.SecurityIdentifier sid)
@@ -221,13 +230,15 @@ namespace System.Security.Principal
         public static bool operator ==(
             System.Security.Principal.SecurityIdentifier? left,
             System.Security.Principal.SecurityIdentifier? right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Security.Principal.SecurityIdentifier? left,
             System.Security.Principal.SecurityIdentifier? right
-        ) {
+        )
+        {
             throw null;
         }
         public override string ToString()
@@ -236,7 +247,8 @@ namespace System.Security.Principal
         }
         public override System.Security.Principal.IdentityReference Translate(
             System.Type targetType
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -487,7 +499,8 @@ namespace System.Security.Principal
         }
         public static System.Security.Principal.WindowsIdentity GetCurrent(
             System.Security.Principal.TokenAccessLevels desiredAccess
-        ) {
+        )
+        {
             throw null;
         }
         public static void RunImpersonated(
@@ -497,19 +510,22 @@ namespace System.Security.Principal
         public static System.Threading.Tasks.Task RunImpersonatedAsync(
             Microsoft.Win32.SafeHandles.SafeAccessTokenHandle safeAccessTokenHandle,
             System.Func<System.Threading.Tasks.Task> func
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task<T> RunImpersonatedAsync<T>(
             Microsoft.Win32.SafeHandles.SafeAccessTokenHandle safeAccessTokenHandle,
             System.Func<System.Threading.Tasks.Task<T>> func
-        ) {
+        )
+        {
             throw null;
         }
         public static T RunImpersonated<T>(
             Microsoft.Win32.SafeHandles.SafeAccessTokenHandle safeAccessTokenHandle,
             System.Func<T> func
-        ) {
+        )
+        {
             throw null;
         }
         void System.Runtime.Serialization.IDeserializationCallback.OnDeserialization(

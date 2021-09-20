@@ -108,7 +108,8 @@ namespace System.Net.Http.Tests
             int index,
             TransferCodingHeaderValue expectedResult,
             int expectedIndex
-        ) {
+        )
+        {
             TransferCodingHeaderParser parser = TransferCodingHeaderParser.MultipleValueParser;
             object result = null;
             Assert.True(

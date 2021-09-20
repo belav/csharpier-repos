@@ -166,7 +166,8 @@ End Class
             string outputPath,
             out List<string> expectedReads,
             out List<string> expectedWrites
-        ) {
+        )
+        {
             expectedReads = new List<string>();
             expectedReads.AddRange(cmd.Arguments.MetadataReferences.Select(r => r.Reference));
 
@@ -175,7 +176,8 @@ End Class
                 {
                     DefaultCoreLibraryReference: { } reference
                 }
-            ) {
+            )
+            {
                 expectedReads.Add(reference.Reference);
             }
 
@@ -194,7 +196,8 @@ End Class
             List<string> expectedReads,
             List<string> expectedWrites,
             string touchedFilesBase
-        ) {
+        )
+        {
             var touchedReadPath = touchedFilesBase + ".read";
             var touchedWritesPath = touchedFilesBase + ".write";
 

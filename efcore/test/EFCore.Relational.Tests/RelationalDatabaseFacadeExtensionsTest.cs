@@ -158,7 +158,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(false)]
         public async Task Begin_transaction_ignores_isolation_level_on_non_relational_provider(
             bool async
-        ) {
+        )
+        {
             var context = InMemoryTestHelpers.Instance.CreateContext(
                 new ServiceCollection().AddScoped<
                     IDbContextTransactionManager,
@@ -199,7 +200,8 @@ namespace Microsoft.EntityFrameworkCore
 
             public Task<IDbContextTransaction> BeginTransactionAsync(
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 BeginAsyncCount++;
                 return Task.FromResult<IDbContextTransaction>(new InMemoryTransaction());
             }

@@ -181,7 +181,8 @@ namespace System.Tests
             EnvironmentVariableTarget target,
             Action action,
             Action cleanUp = null
-        ) {
+        )
+        {
             bool shouldCleanUp = cleanUp != null;
             try
             {

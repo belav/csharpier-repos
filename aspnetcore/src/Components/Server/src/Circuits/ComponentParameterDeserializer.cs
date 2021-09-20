@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Components.Server
         public ComponentParameterDeserializer(
             ILogger<ComponentParameterDeserializer> logger,
             ComponentParametersTypeCache parametersCache
-        ) {
+        )
+        {
             _logger = logger;
             _parametersCache = parametersCache;
         }
@@ -26,7 +27,8 @@ namespace Microsoft.AspNetCore.Components.Server
             IList<ComponentParameter> parametersDefinitions,
             IList<object> parameterValues,
             out ParameterView parameters
-        ) {
+        )
+        {
             parameters = default;
             var parametersDictionary = new Dictionary<string, object>();
 

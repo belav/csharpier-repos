@@ -24,7 +24,8 @@ namespace System.Configuration
             string protectionProviderName,
             OverrideModeSetting overrideMode,
             bool skipInChildApps
-        ) {
+        )
+        {
             ConfigKey = configKey;
             DefinitionConfigPath = definitionConfigPath;
             TargetConfigPath = targetConfigPath;

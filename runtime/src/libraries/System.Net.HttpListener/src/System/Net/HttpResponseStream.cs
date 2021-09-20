@@ -42,7 +42,8 @@ namespace System.Net
             int size,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             throw new InvalidOperationException(SR.net_writeonlystream);
         }
 
@@ -73,7 +74,8 @@ namespace System.Net
             int count,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             ValidateBufferArguments(buffer, offset, count);
 
             if (NetEventSource.Log.IsEnabled())

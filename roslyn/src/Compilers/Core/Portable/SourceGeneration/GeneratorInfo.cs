@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis
             EditCallback<AdditionalFileEdit>? editCallback,
             SyntaxContextReceiverCreator? receiverCreator,
             Action<GeneratorPostInitializationContext>? postInitCallback
-        ) {
+        )
+        {
             EditCallback = editCallback;
             SyntaxContextReceiverCreator = receiverCreator;
             PostInitCallback = postInitCallback;

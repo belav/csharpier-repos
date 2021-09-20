@@ -28,7 +28,8 @@ namespace Microsoft.AspNetCore.Diagnostics.HealthChecks
             RequestDelegate next,
             IOptions<HealthCheckOptions> healthCheckOptions,
             HealthCheckService healthCheckService
-        ) {
+        )
+        {
             if (next == null)
             {
                 throw new ArgumentNullException(nameof(next));
@@ -73,7 +74,8 @@ namespace Microsoft.AspNetCore.Diagnostics.HealthChecks
                     result.Status,
                     out var statusCode
                 )
-            ) {
+            )
+            {
                 var message =
                     $"No status code mapping found for {nameof(HealthStatus)} value: {result.Status}."
                     + $"{nameof(HealthCheckOptions)}.{nameof(HealthCheckOptions.ResultStatusCodes)} must contain"

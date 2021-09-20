@@ -199,7 +199,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             EntityType targetType,
             bool? shouldBeCollection,
             bool shouldThrow
-        ) {
+        )
+        {
             if (!navigationProperty.DeclaringType!.IsAssignableFrom(sourceType.ClrType))
             {
                 if (shouldThrow)
@@ -220,7 +221,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             if (
                 shouldBeCollection.Value
                 && navigationTargetClrType?.IsAssignableFrom(targetClrType) != true
-            ) {
+            )
+            {
                 if (shouldThrow)
                 {
                     throw new InvalidOperationException(
@@ -239,7 +241,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             if (
                 !shouldBeCollection.Value
                 && !navigationProperty.GetMemberType().IsAssignableFrom(targetClrType)
-            ) {
+            )
+            {
                 if (shouldThrow)
                 {
                     throw new InvalidOperationException(

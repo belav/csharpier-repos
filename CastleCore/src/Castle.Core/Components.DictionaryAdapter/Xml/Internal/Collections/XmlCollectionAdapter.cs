@@ -33,7 +33,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             IXmlNode parentNode,
             IDictionaryAdapter parentObject,
             IXmlCollectionAccessor accessor
-        ) {
+        )
+        {
             items = new List<XmlCollectionItem<T>>();
 
             this.accessor = accessor;

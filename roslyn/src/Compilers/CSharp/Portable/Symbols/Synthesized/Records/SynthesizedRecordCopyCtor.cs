@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             SyntheticBoundNodeFactory F,
             ArrayBuilder<BoundStatement> statements,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             // Tracking issue for copy constructor in inheritance scenario: https://github.com/dotnet/roslyn/issues/44902
             // Write assignments to fields
             // .ctor(DerivedRecordType original) : base((BaseRecordType)original)
@@ -65,7 +66,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             NamedTypeSymbol containingType,
             NamedTypeSymbol within,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             MethodSymbol? bestCandidate = null;
             int bestModifierCountSoFar = -1; // stays as -1 unless we hit an ambiguity
             foreach (var member in containingType.InstanceConstructors)
@@ -74,7 +76,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     HasCopyConstructorSignature(member)
                     && !member.HasUnsupportedMetadata
                     && AccessCheck.IsSymbolAccessible(member, within, ref useSiteInfo)
-                ) {
+                )
+                {
                     // If one has fewer custom modifiers, that is better
                     // (see OverloadResolution.BetterFunctionMember)
 

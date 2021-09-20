@@ -25,7 +25,8 @@ namespace RedisSample
                     .AddDataProtection()
                     .PersistKeysToStackExchangeRedis(redis, "DataProtection-Keys")
                     .Services.BuildServiceProvider()
-            ) {
+            )
+            {
                 // Run a sample payload
                 var protector = services.GetDataProtector("sample-purpose");
                 var protectedData = protector.Protect("Hello world!");

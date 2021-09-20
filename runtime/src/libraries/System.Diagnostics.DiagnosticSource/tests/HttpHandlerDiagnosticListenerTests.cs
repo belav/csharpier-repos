@@ -38,7 +38,8 @@ namespace System.Diagnostics.Tests
                         }
                     )
                 )
-            ) {
+            )
+            {
                 Assert.True(
                     listenerFound,
                     "The Http Diagnostic Listener didn't get added to the AllListeners list."
@@ -293,7 +294,8 @@ namespace System.Diagnostics.Tests
                         HttpMethod.Get,
                         Configuration.Http.RemoteEchoServer
                     )
-                ) {
+                )
+                {
                     request.Headers.Add("Request-Id", "|rootId.1.");
                     (await client.SendAsync(request)).Dispose();
                 }
@@ -327,7 +329,8 @@ namespace System.Diagnostics.Tests
                                     HttpMethod.Get,
                                     Configuration.Http.RemoteEchoServer
                                 )
-                            ) {
+                            )
+                            {
                                 request.Headers.Add(
                                     "traceparent",
                                     "00-abcdef0123456789abcdef0123456789-abcdef0123456789-01"
@@ -471,7 +474,8 @@ namespace System.Diagnostics.Tests
                         cts.Cancel();
                     }
                 )
-            ) {
+            )
+            {
                 using (var client = new HttpClient())
                 {
                     var ex = await Assert.ThrowsAnyAsync<Exception>(
@@ -803,7 +807,8 @@ namespace System.Diagnostics.Tests
                                             WebRequest,
                                             WebResponse
                                         > currentTuple in requestData.Values
-                                    ) {
+                                    )
+                                    {
                                         if (currentTuple != null && currentTuple.Item1 == request)
                                         {
                                             // Found it!
@@ -827,7 +832,8 @@ namespace System.Diagnostics.Tests
                                     Uri,
                                     Tuple<WebRequest, WebResponse>
                                 > pair in requestData
-                            ) {
+                            )
+                            {
                                 if (successfulTasks.Any(t => t.Key == pair.Key))
                                 {
                                     Assert.NotNull(pair.Value);

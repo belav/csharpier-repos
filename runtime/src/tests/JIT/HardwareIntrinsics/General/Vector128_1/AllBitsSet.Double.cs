@@ -76,7 +76,8 @@ namespace JIT.HardwareIntrinsics.General
         private unsafe void ValidateResult(
             Double[] resultElements,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
             for (var i = 0; i < ElementCount; i++)
             {

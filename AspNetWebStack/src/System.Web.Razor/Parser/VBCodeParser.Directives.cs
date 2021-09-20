@@ -137,7 +137,8 @@ namespace System.Web.Razor.Parser
             if (
                 firstAfterKeyword == VBSymbolType.WhiteSpace
                 || firstAfterKeyword == VBSymbolType.NewLine
-            ) {
+            )
+            {
                 Span.EditHandler.AcceptedCharacters = AcceptedCharacters.None;
             }
             Output(SpanKind.MetaCode);
@@ -206,7 +207,8 @@ namespace System.Web.Razor.Parser
                     VBSymbolType.RightParenthesis,
                     parensStart
                 )
-            ) {
+            )
+            {
                 Context.OnError(
                     parensStart,
                     RazorResources.ParseError_UnterminatedHelperParameterList
@@ -239,7 +241,8 @@ namespace System.Web.Razor.Parser
                         PushSpanConfig(
                             StatementBlockSpanConfiguration(new StatementCodeGenerator())
                         )
-                    ) {
+                    )
+                    {
                         try
                         {
                             if (
@@ -248,7 +251,8 @@ namespace System.Web.Razor.Parser
                                     blockStart,
                                     allowAllTransitions: true
                                 )
-                            ) {
+                            )
+                            {
                                 if (Context.LastAcceptedCharacters != AcceptedCharacters.Any)
                                 {
                                     AddMarkerSymbolIfNecessary();
@@ -376,7 +380,8 @@ namespace System.Web.Razor.Parser
             BlockType blockType,
             SpanCodeGenerator codeGenerator,
             bool allowMarkup
-        ) {
+        )
+        {
             return () =>
             {
                 SourceLocation blockStart = CurrentLocation;
@@ -413,7 +418,8 @@ namespace System.Web.Razor.Parser
             string directive,
             SourceLocation blockStart,
             bool allowAllTransitions
-        ) {
+        )
+        {
             while (!EndOfFile)
             {
                 VBSymbol lastWhitespace = AcceptWhiteSpaceInLines();
@@ -422,7 +428,8 @@ namespace System.Web.Razor.Parser
                         allowTemplatesAndComments: allowAllTransitions,
                         allowTransitions: allowAllTransitions
                     )
-                ) {
+                )
+                {
                     HandleEmbeddedTransition(lastWhitespace);
                 }
                 else

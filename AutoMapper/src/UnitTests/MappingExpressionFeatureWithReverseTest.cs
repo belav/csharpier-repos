@@ -221,7 +221,8 @@ namespace AutoMapper.UnitTests
             protected MappingExpressionFeatureBase(
                 int value,
                 Func<IMappingFeature> reverseMappingExpressionFeature
-            ) {
+            )
+            {
                 Value = value;
                 _reverseMappingExpressionFeature = reverseMappingExpressionFeature;
             }

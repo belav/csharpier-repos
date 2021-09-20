@@ -150,7 +150,8 @@ WHERE [e].[EmployeeID] = 1"
 
         public override async Task Select_bool_closure_with_order_parameter_with_cast_to_nullable(
             bool async
-        ) {
+        )
+        {
             await base.Select_bool_closure_with_order_parameter_with_cast_to_nullable(async);
 
             AssertSql(
@@ -450,7 +451,8 @@ WHERE [c].[CustomerID] LIKE N'A%'"
 
         public override async Task Select_non_matching_value_types_int_to_long_introduces_explicit_cast(
             bool async
-        ) {
+        )
+        {
             await base.Select_non_matching_value_types_int_to_long_introduces_explicit_cast(async);
 
             AssertSql(
@@ -463,7 +465,8 @@ ORDER BY [o].[OrderID]"
 
         public override async Task Select_non_matching_value_types_nullable_int_to_long_introduces_explicit_cast(
             bool async
-        ) {
+        )
+        {
             await base.Select_non_matching_value_types_nullable_int_to_long_introduces_explicit_cast(
                 async
             );
@@ -478,7 +481,8 @@ ORDER BY [o].[OrderID]"
 
         public override async Task Select_non_matching_value_types_nullable_int_to_int_doesnt_introduce_explicit_cast(
             bool async
-        ) {
+        )
+        {
             await base.Select_non_matching_value_types_nullable_int_to_int_doesnt_introduce_explicit_cast(
                 async
             );
@@ -493,7 +497,8 @@ ORDER BY [o].[OrderID]"
 
         public override async Task Select_non_matching_value_types_int_to_nullable_int_doesnt_introduce_explicit_cast(
             bool async
-        ) {
+        )
+        {
             await base.Select_non_matching_value_types_int_to_nullable_int_doesnt_introduce_explicit_cast(
                 async
             );
@@ -508,7 +513,8 @@ ORDER BY [o].[OrderID]"
 
         public override async Task Select_non_matching_value_types_from_binary_expression_introduces_explicit_cast(
             bool async
-        ) {
+        )
+        {
             await base.Select_non_matching_value_types_from_binary_expression_introduces_explicit_cast(
                 async
             );
@@ -523,7 +529,8 @@ ORDER BY [o].[OrderID]"
 
         public override async Task Select_non_matching_value_types_from_binary_expression_nested_introduces_top_level_explicit_cast(
             bool async
-        ) {
+        )
+        {
             await base.Select_non_matching_value_types_from_binary_expression_nested_introduces_top_level_explicit_cast(
                 async
             );
@@ -538,7 +545,8 @@ ORDER BY [o].[OrderID]"
 
         public override async Task Select_non_matching_value_types_from_unary_expression_introduces_explicit_cast1(
             bool async
-        ) {
+        )
+        {
             await base.Select_non_matching_value_types_from_unary_expression_introduces_explicit_cast1(
                 async
             );
@@ -553,7 +561,8 @@ ORDER BY [o].[OrderID]"
 
         public override async Task Select_non_matching_value_types_from_unary_expression_introduces_explicit_cast2(
             bool async
-        ) {
+        )
+        {
             await base.Select_non_matching_value_types_from_unary_expression_introduces_explicit_cast2(
                 async
             );
@@ -568,7 +577,8 @@ ORDER BY [o].[OrderID]"
 
         public override async Task Select_non_matching_value_types_from_length_introduces_explicit_cast(
             bool async
-        ) {
+        )
+        {
             await base.Select_non_matching_value_types_from_length_introduces_explicit_cast(async);
 
             AssertSql(
@@ -581,7 +591,8 @@ ORDER BY [o].[OrderID]"
 
         public override async Task Select_non_matching_value_types_from_method_call_introduces_explicit_cast(
             bool async
-        ) {
+        )
+        {
             await base.Select_non_matching_value_types_from_method_call_introduces_explicit_cast(
                 async
             );
@@ -596,7 +607,8 @@ ORDER BY [o].[OrderID]"
 
         public override async Task Select_non_matching_value_types_from_anonymous_type_introduces_explicit_cast(
             bool async
-        ) {
+        )
+        {
             await base.Select_non_matching_value_types_from_anonymous_type_introduces_explicit_cast(
                 async
             );
@@ -676,7 +688,8 @@ WHERE [o].[OrderID] < 10300"
 
         public override async Task Project_single_element_from_collection_with_OrderBy_Take_and_FirstOrDefault(
             bool async
-        ) {
+        )
+        {
             await base.Project_single_element_from_collection_with_OrderBy_Take_and_FirstOrDefault(
                 async
             );
@@ -697,7 +710,8 @@ FROM [Customers] AS [c]"
 
         public override async Task Project_single_element_from_collection_with_OrderBy_Skip_and_FirstOrDefault(
             bool async
-        ) {
+        )
+        {
             await base.Project_single_element_from_collection_with_OrderBy_Skip_and_FirstOrDefault(
                 async
             );
@@ -715,7 +729,8 @@ FROM [Customers] AS [c]"
 
         public override async Task Project_single_element_from_collection_with_OrderBy_Distinct_and_FirstOrDefault(
             bool async
-        ) {
+        )
+        {
             await base.Project_single_element_from_collection_with_OrderBy_Distinct_and_FirstOrDefault(
                 async
             );
@@ -731,7 +746,8 @@ FROM [Customers] AS [c]"
 
         public override async Task Project_single_element_from_collection_with_OrderBy_Distinct_and_FirstOrDefault_followed_by_projecting_length(
             bool async
-        ) {
+        )
+        {
             await base.Project_single_element_from_collection_with_OrderBy_Distinct_and_FirstOrDefault_followed_by_projecting_length(
                 async
             );
@@ -750,7 +766,8 @@ FROM [Customers] AS [c]"
 
         public override async Task Project_single_element_from_collection_with_OrderBy_Take_and_SingleOrDefault(
             bool async
-        ) {
+        )
+        {
             await base.Project_single_element_from_collection_with_OrderBy_Take_and_SingleOrDefault(
                 async
             );
@@ -772,7 +789,8 @@ WHERE [c].[CustomerID] = N'ALFKI'"
 
         public override async Task Project_single_element_from_collection_with_OrderBy_Take_and_FirstOrDefault_with_parameter(
             bool async
-        ) {
+        )
+        {
             await base.Project_single_element_from_collection_with_OrderBy_Take_and_FirstOrDefault_with_parameter(
                 async
             );
@@ -795,7 +813,8 @@ FROM [Customers] AS [c]"
 
         public override async Task Project_single_element_from_collection_with_multiple_OrderBys_Take_and_FirstOrDefault(
             bool async
-        ) {
+        )
+        {
             await base.Project_single_element_from_collection_with_multiple_OrderBys_Take_and_FirstOrDefault(
                 async
             );
@@ -816,7 +835,8 @@ FROM [Customers] AS [c]"
 
         public override async Task Project_single_element_from_collection_with_multiple_OrderBys_Take_and_FirstOrDefault_followed_by_projection_of_length_property(
             bool async
-        ) {
+        )
+        {
             await base.Project_single_element_from_collection_with_multiple_OrderBys_Take_and_FirstOrDefault_followed_by_projection_of_length_property(
                 async
             );
@@ -826,7 +846,8 @@ FROM [Customers] AS [c]"
 
         public override async Task Project_single_element_from_collection_with_multiple_OrderBys_Take_and_FirstOrDefault_2(
             bool async
-        ) {
+        )
+        {
             await base.Project_single_element_from_collection_with_multiple_OrderBys_Take_and_FirstOrDefault_2(
                 async
             );
@@ -847,7 +868,8 @@ FROM [Customers] AS [c]"
 
         public override async Task Project_single_element_from_collection_with_OrderBy_over_navigation_Take_and_FirstOrDefault(
             bool async
-        ) {
+        )
+        {
             await base.Project_single_element_from_collection_with_OrderBy_over_navigation_Take_and_FirstOrDefault(
                 async
             );
@@ -870,7 +892,8 @@ WHERE [o].[OrderID] < 10300"
 
         public override async Task Project_single_element_from_collection_with_OrderBy_over_navigation_Take_and_FirstOrDefault_2(
             bool async
-        ) {
+        )
+        {
             await base.Project_single_element_from_collection_with_OrderBy_over_navigation_Take_and_FirstOrDefault_2(
                 async
             );
@@ -1024,7 +1047,8 @@ FROM [Orders] AS [o]"
 
         public override async Task Anonymous_projection_with_repeated_property_being_ordered(
             bool async
-        ) {
+        )
+        {
             await base.Anonymous_projection_with_repeated_property_being_ordered(async);
 
             AssertSql(
@@ -1036,7 +1060,8 @@ ORDER BY [c].[CustomerID]"
 
         public override async Task Anonymous_projection_with_repeated_property_being_ordered_2(
             bool async
-        ) {
+        )
+        {
             await base.Anonymous_projection_with_repeated_property_being_ordered_2(async);
 
             AssertSql(
@@ -1106,7 +1131,8 @@ WHERE CAST([o0].[Discount] AS float) >= 0.25E0"
 
         public override async Task SelectMany_without_result_selector_naked_collection_navigation(
             bool async
-        ) {
+        )
+        {
             await base.SelectMany_without_result_selector_naked_collection_navigation(async);
 
             AssertSql(
@@ -1118,7 +1144,8 @@ INNER JOIN [Orders] AS [o] ON [c].[CustomerID] = [o].[CustomerID]"
 
         public override async Task SelectMany_without_result_selector_collection_navigation_composed(
             bool async
-        ) {
+        )
+        {
             await base.SelectMany_without_result_selector_collection_navigation_composed(async);
 
             AssertSql(
@@ -1239,7 +1266,8 @@ OUTER APPLY (
 
         public override async Task FirstOrDefault_over_empty_collection_of_value_type_returns_correct_results(
             bool async
-        ) {
+        )
+        {
             await base.FirstOrDefault_over_empty_collection_of_value_type_returns_correct_results(
                 async
             );
@@ -1257,7 +1285,8 @@ WHERE [c].[CustomerID] = N'FISSA'"
 
         public override async Task Project_non_nullable_value_after_FirstOrDefault_on_empty_collection(
             bool async
-        ) {
+        )
+        {
             await base.Project_non_nullable_value_after_FirstOrDefault_on_empty_collection(async);
 
             AssertSql(
@@ -1295,7 +1324,8 @@ ORDER BY [c].[CustomerID], [t].[OrderID]"
 
         public override async Task Filtered_collection_projection_with_to_list_is_tracked(
             bool async
-        ) {
+        )
+        {
             await base.Filtered_collection_projection_with_to_list_is_tracked(async);
 
             AssertSql(
@@ -1313,7 +1343,8 @@ ORDER BY [c].[CustomerID], [t].[OrderID]"
 
         public override async Task SelectMany_with_collection_being_correlated_subquery_which_references_inner_and_outer_entity(
             bool async
-        ) {
+        )
+        {
             await base.SelectMany_with_collection_being_correlated_subquery_which_references_inner_and_outer_entity(
                 async
             );
@@ -1331,7 +1362,8 @@ CROSS APPLY (
 
         public override async Task SelectMany_with_collection_being_correlated_subquery_which_references_non_mapped_properties_from_inner_and_outer_entity(
             bool async
-        ) {
+        )
+        {
             await base.SelectMany_with_collection_being_correlated_subquery_which_references_non_mapped_properties_from_inner_and_outer_entity(
                 async
             );
@@ -1341,7 +1373,8 @@ CROSS APPLY (
 
         public override async Task Select_with_complex_expression_that_can_be_funcletized(
             bool async
-        ) {
+        )
+        {
             await base.Select_with_complex_expression_that_can_be_funcletized(async);
 
             AssertSql(
@@ -1353,7 +1386,8 @@ WHERE [c].[CustomerID] = N'ALFKI'"
 
         public override async Task Select_chained_entity_navigation_doesnt_materialize_intermittent_entities(
             bool async
-        ) {
+        )
+        {
             await base.Select_chained_entity_navigation_doesnt_materialize_intermittent_entities(
                 async
             );
@@ -1410,7 +1444,8 @@ CROSS APPLY (
 
         public override async Task Collection_FirstOrDefault_with_entity_equality_check_in_projection(
             bool async
-        ) {
+        )
+        {
             await base.Collection_FirstOrDefault_with_entity_equality_check_in_projection(async);
 
             AssertSql(" ");
@@ -1418,7 +1453,8 @@ CROSS APPLY (
 
         public override async Task Collection_FirstOrDefault_with_nullable_unsigned_int_column(
             bool async
-        ) {
+        )
+        {
             await base.Collection_FirstOrDefault_with_nullable_unsigned_int_column(async);
 
             AssertSql(
@@ -1447,7 +1483,8 @@ WHERE [c].[CustomerID] LIKE N'A%'"
 
         public override async Task LastOrDefault_member_access_in_projection_translates_to_server(
             bool async
-        ) {
+        )
+        {
             await base.LastOrDefault_member_access_in_projection_translates_to_server(async);
 
             AssertSql(
@@ -1474,7 +1511,8 @@ WHERE [c].[CustomerID] = N'ALFKI'"
 
         public override async Task Projection_with_parameterized_constructor_with_member_assignment(
             bool async
-        ) {
+        )
+        {
             await base.Projection_with_parameterized_constructor_with_member_assignment(async);
 
             AssertSql(
@@ -1598,7 +1636,8 @@ ORDER BY [c].[CustomerID]"
 
         public override async Task Projecting_multiple_collection_with_same_constant_works(
             bool async
-        ) {
+        )
+        {
             await base.Projecting_multiple_collection_with_same_constant_works(async);
 
             AssertSql(
@@ -1613,7 +1652,8 @@ ORDER BY [c].[CustomerID], [o].[OrderID], [o0].[OrderID]"
 
         public override async Task Custom_projection_reference_navigation_PK_to_FK_optimization(
             bool async
-        ) {
+        )
+        {
             await base.Custom_projection_reference_navigation_PK_to_FK_optimization(async);
 
             AssertSql(
@@ -1625,7 +1665,8 @@ LEFT JOIN [Customers] AS [c] ON [o].[CustomerID] = [c].[CustomerID]"
 
         public override async Task Projecting_Length_of_a_string_property_after_FirstOrDefault_on_correlated_collection(
             bool async
-        ) {
+        )
+        {
             await base.Projecting_Length_of_a_string_property_after_FirstOrDefault_on_correlated_collection(
                 async
             );
@@ -1657,7 +1698,8 @@ ORDER BY [c].[CustomerID]"
 
         public override async Task Projecting_count_of_navigation_which_is_generic_collection(
             bool async
-        ) {
+        )
+        {
             await base.Projecting_count_of_navigation_which_is_generic_collection(async);
 
             AssertSql(
@@ -1672,7 +1714,8 @@ ORDER BY [c].[CustomerID]"
 
         public override async Task Projection_take_projection_doesnt_project_intermittent_column(
             bool async
-        ) {
+        )
+        {
             await base.Projection_take_projection_doesnt_project_intermittent_column(async);
 
             AssertSql(
@@ -1686,7 +1729,8 @@ ORDER BY [c].[CustomerID]"
 
         public override async Task Projection_skip_projection_doesnt_project_intermittent_column(
             bool async
-        ) {
+        )
+        {
             await base.Projection_skip_projection_doesnt_project_intermittent_column(async);
 
             AssertSql(
@@ -1701,7 +1745,8 @@ OFFSET @__p_0 ROWS"
 
         public override async Task Projection_Distinct_projection_preserves_columns_used_for_distinct_in_subquery(
             bool async
-        ) {
+        )
+        {
             await base.Projection_Distinct_projection_preserves_columns_used_for_distinct_in_subquery(
                 async
             );
@@ -1735,7 +1780,8 @@ ORDER BY [t].[CustomerID]"
 
         public override async Task Do_not_erase_projection_mapping_when_adding_single_projection(
             bool async
-        ) {
+        )
+        {
             await base.Do_not_erase_projection_mapping_when_adding_single_projection(async);
 
             AssertSql(
@@ -1807,7 +1853,8 @@ ORDER BY [t].[CustomerID], [t0].[OrderID]"
 
         public override async Task Correlated_collection_after_distinct_with_complex_projection_containing_original_identifier(
             bool async
-        ) {
+        )
+        {
             await base.Correlated_collection_after_distinct_with_complex_projection_containing_original_identifier(
                 async
             );
@@ -1829,7 +1876,8 @@ ORDER BY [t].[OrderID], [t0].[Inner]"
 
         public override async Task Correlated_collection_after_distinct_not_containing_original_identifier(
             bool async
-        ) {
+        )
+        {
             await base.Correlated_collection_after_distinct_not_containing_original_identifier(
                 async
             );
@@ -1851,7 +1899,8 @@ ORDER BY [t].[OrderDate], [t].[CustomerID], [t0].[Inner]"
 
         public override async Task Correlated_collection_after_distinct_with_complex_projection_not_containing_original_identifier(
             bool async
-        ) {
+        )
+        {
             await base.Correlated_collection_after_distinct_with_complex_projection_not_containing_original_identifier(
                 async
             );
@@ -1873,7 +1922,8 @@ ORDER BY [t].[OrderDate], [t].[CustomerID], [t].[Complex], [t0].[Inner]"
 
         public override async Task Correlated_collection_after_groupby_with_complex_projection_containing_original_identifier(
             bool async
-        ) {
+        )
+        {
             await base.Correlated_collection_after_groupby_with_complex_projection_containing_original_identifier(
                 async
             );
@@ -1972,7 +2022,8 @@ ORDER BY [c].[CustomerID], [t0].[OrderID], [t1].[OrderID], [t1].[OrderID0], [t1]
 
         public override async Task Collection_projection_selecting_outer_element_followed_by_take(
             bool async
-        ) {
+        )
+        {
             await base.Collection_projection_selecting_outer_element_followed_by_take(async);
 
             AssertSql(
@@ -2001,7 +2052,8 @@ ORDER BY [t].[CustomerID], [t0].[OrderID], [t0].[OrderID0]"
 
         public override async Task Take_on_top_level_and_on_collection_projection_with_outer_apply(
             bool async
-        ) {
+        )
+        {
             await base.Take_on_top_level_and_on_collection_projection_with_outer_apply(async);
 
             AssertSql(

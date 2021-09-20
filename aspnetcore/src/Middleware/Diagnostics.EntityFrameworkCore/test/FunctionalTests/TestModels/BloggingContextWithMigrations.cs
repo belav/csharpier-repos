@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Tests
         // Providing a factory method so that the ctor is hidden from DI
         public static BloggingContextWithMigrations CreateWithoutExternalServiceProvider(
             DbContextOptions options
-        ) {
+        )
+        {
             return new BloggingContextWithMigrations(options);
         }
 

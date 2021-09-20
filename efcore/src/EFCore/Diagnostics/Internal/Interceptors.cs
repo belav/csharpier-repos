@@ -33,7 +33,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             IServiceProvider serviceProvider,
             IEnumerable<IInterceptor> injectedInterceptors,
             IEnumerable<IInterceptorAggregator> interceptorAggregators
-        ) {
+        )
+        {
             _serviceProvider = serviceProvider;
             _injectedInterceptors = injectedInterceptors;
             _aggregators = interceptorAggregators.ToDictionary(i => i.InterceptorType);

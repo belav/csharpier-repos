@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             FindReferencesSearchOptions options,
             FindReferencesCascadeDirection cascadeDirection,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var result = await base.DetermineCascadedSymbolsAsync(
                     symbol,
                     solution,
@@ -53,7 +54,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             IImmutableSet<Document>? documents,
             FindReferencesSearchOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // First, find any documents with the full name of the accessor (i.e. get_Goo).
             // This will find explicit calls to the method (which can happen when C# references
             // a VB parameterized property).
@@ -69,7 +71,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             if (
                 symbol.AssociatedSymbol is IPropertySymbol property
                 && options.AssociatePropertyReferencesWithSpecificAccessor
-            ) {
+            )
+            {
                 // we want to associate normal property references with the specific accessor being
                 // referenced.  So we also need to include documents with our property's name. Just
                 // defer to the Property finder to find these docs and combine them with the result.
@@ -97,7 +100,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             SemanticModel semanticModel,
             FindReferencesSearchOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var references = await FindReferencesInDocumentUsingSymbolNameAsync(
                     symbol,
                     document,
@@ -109,7 +113,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             if (
                 symbol.AssociatedSymbol is IPropertySymbol property
                 && options.AssociatePropertyReferencesWithSpecificAccessor
-            ) {
+            )
+            {
                 var propertyReferences =
                     await ReferenceFinders.Property.FindReferencesInDocumentAsync(
                             property,

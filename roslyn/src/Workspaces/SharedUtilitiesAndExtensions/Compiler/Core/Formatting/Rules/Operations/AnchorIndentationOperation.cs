@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
             SyntaxToken startToken,
             SyntaxToken endToken,
             TextSpan textSpan
-        ) {
+        )
+        {
             Contract.ThrowIfTrue(anchorToken.RawKind == 0);
             Contract.ThrowIfTrue(textSpan.Start < 0 || textSpan.Length < 0);
 

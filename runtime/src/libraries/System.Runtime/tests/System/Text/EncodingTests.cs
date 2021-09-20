@@ -111,7 +111,8 @@ namespace System.Text.Tests
         public void GetEncoding_FromProvider_ByEncodingName_WithDisallowedEncoding_Throws(
             string encodingName,
             int codePage
-        ) {
+        )
+        {
             Mock<Encoding> mockEncoding = new Mock<Encoding>();
             mockEncoding.Setup(o => o.CodePage).Returns(codePage);
 
@@ -149,7 +150,8 @@ namespace System.Text.Tests
         public void GetEncodings_BuiltIn_DoesNotContainDisallowedEncodings(
             string encodingName,
             int codePage
-        ) {
+        )
+        {
             foreach (EncodingInfo encodingInfo in Encoding.GetEncodings())
             {
                 Assert.NotEqual(encodingName, encodingInfo.Name, StringComparer.OrdinalIgnoreCase);
@@ -165,7 +167,8 @@ namespace System.Text.Tests
         public void GetEncodings_FromProvider_DoesNotContainDisallowedEncodings(
             string encodingName,
             int codePage
-        ) {
+        )
+        {
             Mock<EncodingProvider> mockProvider = new Mock<EncodingProvider>(MockBehavior.Strict);
             mockProvider.Setup(o => o.GetEncodings())
                 .Returns(

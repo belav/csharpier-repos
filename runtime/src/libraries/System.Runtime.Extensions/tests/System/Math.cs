@@ -1167,7 +1167,8 @@ namespace System.Tests
             double x,
             double expectedResult,
             double allowedVariance
-        ) {
+        )
+        {
             AssertEqual(expectedResult, Math.Atan2(y, x), allowedVariance);
         }
 
@@ -1211,7 +1212,8 @@ namespace System.Tests
             double value,
             double expectedResult,
             double allowedVariance
-        ) {
+        )
+        {
             AssertEqual(expectedResult, Math.Ceiling(value), allowedVariance);
         }
 
@@ -1226,7 +1228,8 @@ namespace System.Tests
             double value,
             double expectedResult,
             double allowedVariance
-        ) {
+        )
+        {
             AssertEqual(expectedResult, Math.Ceiling(value), allowedVariance);
         }
 
@@ -1399,7 +1402,8 @@ namespace System.Tests
             double value,
             double expectedResult,
             double allowedVariance
-        ) {
+        )
+        {
             AssertEqual(expectedResult, Math.Floor(value), allowedVariance);
         }
 
@@ -2577,7 +2581,8 @@ namespace System.Tests
             double value,
             double expectedResult,
             double allowedVariance
-        ) {
+        )
+        {
             AssertEqual(expectedResult, Math.ReciprocalEstimate(value), allowedVariance);
         }
 
@@ -2671,7 +2676,8 @@ namespace System.Tests
             double value,
             double expectedResult,
             double allowedVariance
-        ) {
+        )
+        {
             AssertEqual(expectedResult, Math.ReciprocalSqrtEstimate(value), allowedVariance);
         }
 
@@ -3038,7 +3044,8 @@ namespace System.Tests
             double expectedResultCos,
             double allowedVarianceSin,
             double allowedVarianceCos
-        ) {
+        )
+        {
             (double resultSin, double resultCos) = Math.SinCos(value);
             AssertEqual(expectedResultSin, resultSin, allowedVarianceSin);
             AssertEqual(expectedResultCos, resultCos, allowedVarianceCos);
@@ -3285,7 +3292,8 @@ namespace System.Tests
             sbyte divisor,
             sbyte expectedQuotient,
             sbyte expectedRemainder
-        ) {
+        )
+        {
             if (divisor == 0)
             {
                 Assert.Throws<DivideByZeroException>(() => Math.DivRem(dividend, divisor));
@@ -3315,7 +3323,8 @@ namespace System.Tests
             byte divisor,
             byte expectedQuotient,
             byte expectedRemainder
-        ) {
+        )
+        {
             if (divisor == 0)
             {
                 Assert.Throws<DivideByZeroException>(() => Math.DivRem(dividend, divisor));
@@ -3350,7 +3359,8 @@ namespace System.Tests
             short divisor,
             short expectedQuotient,
             short expectedRemainder
-        ) {
+        )
+        {
             if (divisor == 0)
             {
                 Assert.Throws<DivideByZeroException>(() => Math.DivRem(dividend, divisor));
@@ -3381,7 +3391,8 @@ namespace System.Tests
             ushort divisor,
             ushort expectedQuotient,
             ushort expectedRemainder
-        ) {
+        )
+        {
             if (divisor == 0)
             {
                 Assert.Throws<DivideByZeroException>(() => Math.DivRem(dividend, divisor));
@@ -3410,7 +3421,8 @@ namespace System.Tests
             int divisor,
             int expectedQuotient,
             int expectedRemainder
-        ) {
+        )
+        {
             if (divisor == 0)
             {
                 Assert.Throws<DivideByZeroException>(() => Math.DivRem(dividend, divisor));
@@ -3451,7 +3463,8 @@ namespace System.Tests
             uint divisor,
             uint expectedQuotient,
             uint expectedRemainder
-        ) {
+        )
+        {
             if (divisor == 0)
             {
                 Assert.Throws<DivideByZeroException>(() => Math.DivRem(dividend, divisor));
@@ -3485,7 +3498,8 @@ namespace System.Tests
             long divisor,
             long expectedQuotient,
             long expectedRemainder
-        ) {
+        )
+        {
             if (divisor == 0)
             {
                 Assert.Throws<DivideByZeroException>(() => Math.DivRem(dividend, divisor));
@@ -3531,7 +3545,8 @@ namespace System.Tests
             ulong divisor,
             ulong expectedQuotient,
             ulong expectedRemainder
-        ) {
+        )
+        {
             if (divisor == 0)
             {
                 Assert.Throws<DivideByZeroException>(() => Math.DivRem(dividend, divisor));
@@ -3559,7 +3574,8 @@ namespace System.Tests
             nint divisor,
             nint expectedQuotient,
             nint expectedRemainder
-        ) {
+        )
+        {
             if (divisor == 0)
             {
                 Assert.Throws<DivideByZeroException>(() => Math.DivRem(dividend, divisor));
@@ -3578,7 +3594,8 @@ namespace System.Tests
             nuint divisor,
             nuint expectedQuotient,
             nuint expectedRemainder
-        ) {
+        )
+        {
             if (divisor == 0)
             {
                 Assert.Throws<DivideByZeroException>(() => Math.DivRem(dividend, divisor));
@@ -4479,7 +4496,8 @@ namespace System.Tests
             double expected,
             int digits,
             MidpointRounding mode
-        ) {
+        )
+        {
             Assert.Equal(expected, Math.Round(x, digits, mode));
         }
 
@@ -4490,7 +4508,8 @@ namespace System.Tests
             decimal expected,
             int digits,
             MidpointRounding mode
-        ) {
+        )
+        {
             Assert.Equal(expected, Math.Round(x, digits, mode));
         }
 

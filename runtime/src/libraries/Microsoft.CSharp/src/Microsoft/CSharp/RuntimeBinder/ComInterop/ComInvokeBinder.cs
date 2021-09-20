@@ -47,7 +47,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             Expression method,
             Expression dispatch,
             ComMethodDesc methodDesc
-        ) {
+        )
+        {
             Debug.Assert(callInfo != null);
             Debug.Assert(args != null);
             Debug.Assert(isByRef != null);
@@ -139,7 +140,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             ref ParameterExpression var,
             Type type,
             string name
-        ) {
+        )
+        {
             if (var != null)
             {
                 return var;

@@ -69,7 +69,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
             EmbeddedLanguageInfo info,
             INamedTypeSymbol regexType,
             HashSet<string> methodNamesOfInterest
-        ) {
+        )
+        {
             _info = info;
             _regexType = regexType;
             _methodNamesOfInterest = methodNamesOfInterest;
@@ -78,7 +79,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
         public static RegexPatternDetector TryGetOrCreate(
             Compilation compilation,
             EmbeddedLanguageInfo info
-        ) {
+        )
+        {
             // Do a quick non-allocating check first.
             if (_modelToDetector.TryGetValue(compilation, out var detector))
             {
@@ -91,7 +93,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
         private static RegexPatternDetector TryCreate(
             Compilation compilation,
             EmbeddedLanguageInfo info
-        ) {
+        )
+        {
             var regexType = compilation.GetTypeByMetadataName(typeof(Regex).FullName);
             if (regexType == null)
             {
@@ -115,7 +118,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
             SyntaxToken token,
             ISyntaxFacts syntaxFacts,
             out RegexOptions options
-        ) {
+        )
+        {
             if (
                 HasRegexLanguageComment(
                     token.GetPreviousToken().TrailingTrivia,
@@ -144,7 +148,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
             SyntaxTriviaList list,
             ISyntaxFacts syntaxFacts,
             out RegexOptions options
-        ) {
+        )
+        {
             foreach (var trivia in list)
             {
                 if (HasRegexLanguageComment(trivia, syntaxFacts, out options))
@@ -161,7 +166,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
             SyntaxTrivia trivia,
             ISyntaxFacts syntaxFacts,
             out RegexOptions options
-        ) {
+        )
+        {
             if (syntaxFacts.IsRegularComment(trivia))
             {
                 // Note: ToString on SyntaxTrivia is non-allocating.  It will just return the
@@ -223,7 +229,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
         private static HashSet<string> GetMethodNamesOfInterest(
             INamedTypeSymbol regexType,
             ISyntaxFacts syntaxFacts
-        ) {
+        )
+        {
             var result = syntaxFacts.IsCaseSensitive
                 ? new HashSet<string>()
                 : new HashSet<string>(StringComparer.OrdinalIgnoreCase);
@@ -245,7 +252,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
             SemanticModel semanticModel,
             CancellationToken cancellationToken,
             out RegexOptions options
-        ) {
+        )
+        {
             options = default;
             if (!IsPossiblyPatternToken(token, _info.SyntaxFacts))
             {
@@ -291,7 +299,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
                             cancellationToken,
                             out options
                         )
-                    ) {
+                    )
+                    {
                         return true;
                     }
 
@@ -305,7 +314,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
                                 cancellationToken,
                                 out options
                             )
-                        ) {
+                        )
+                        {
                             return true;
                         }
                     }
@@ -365,13 +375,15 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
             ISymbol method,
             CancellationToken cancellationToken,
             out RegexOptions options
-        ) {
+        )
+        {
             if (
                 method != null
                 && method.DeclaredAccessibility == Accessibility.Public
                 && method.IsStatic
                 && _regexType.Equals(method.ContainingType)
-            ) {
+            )
+            {
                 return AnalyzeStringLiteral(
                     argumentNode,
                     semanticModel,
@@ -388,7 +400,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
             SyntaxToken token,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!this.IsRegexPattern(token, semanticModel, cancellationToken, out var options))
             {
                 return null;
@@ -403,7 +416,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
             SemanticModel semanticModel,
             CancellationToken cancellationToken,
             out RegexOptions options
-        ) {
+        )
+        {
             options = default;
 
             var parameter = _info.SemanticFacts.FindParameterForArgument(
@@ -424,7 +438,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
             SyntaxNode argumentNode,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxFacts = _info.SyntaxFacts;
             var argumentList = argumentNode.Parent;
             var arguments = syntaxFacts.GetArgumentsOfArgumentList(argumentList);

@@ -31,13 +31,14 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
         protected AsynchronousViewTaggerProvider(
             IAsynchronousOperationListener asyncListener,
             IForegroundNotificationService notificationService
-        ) : this(
-            (
-                (Implementation.ForegroundNotification.ForegroundNotificationService)notificationService
-            ).ThreadingContext,
-            asyncListener,
-            notificationService
-        ) { }
+        )
+            : this(
+                (
+                    (Implementation.ForegroundNotification.ForegroundNotificationService)notificationService
+                ).ThreadingContext,
+                asyncListener,
+                notificationService
+            ) { }
 
         public IAccurateTagger<T> CreateTagger<T>(ITextView textView, ITextBuffer subjectBuffer)
             where T : ITag

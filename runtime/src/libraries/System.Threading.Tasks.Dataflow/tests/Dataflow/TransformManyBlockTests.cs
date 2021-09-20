@@ -147,7 +147,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
                             new ExecutionDataflowBlockOptions { BoundedCapacity = bounded ? 1 : -1 }
                         )
                     }
-                ) {
+                )
+                {
                     Assert.True(tb.Post(0));
                     tb.Complete();
                     Assert.False(tb.Post(0));
@@ -175,7 +176,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
                             i => Task.Run(() => DataflowTestHelpers.ToEnumerable(i))
                         )
                     }
-                ) {
+                )
+                {
                     var values = new int[Messages];
                     var targets = new ActionBlock<int>[Messages];
                     for (int i = 0; i < Messages; i++)
@@ -212,7 +214,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
                             i => Task.Run(() => Enumerable.Repeat(i * 2, 1))
                         )
                     }
-                ) {
+                )
+                {
                     tb.PostRange(0, 5);
 
                     for (int i = 0; i < 5; i++)
@@ -346,7 +349,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
                             options
                         )
                     }
-                ) {
+                )
+                {
                     var sendAsync = new Task<bool>[boundedCapacity + Excess];
                     for (int i = 0; i < boundedCapacity + Excess; i++)
                     {
@@ -800,7 +804,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
                                 new List<int> { 0 },
                                 new Collection<int> { 0 }
                             }
-                        ) {
+                        )
+                        {
                             int nextExpectedValue = 1;
 
                             TransformManyBlock<int, int> transform = null;
@@ -1034,7 +1039,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
             IEnumerable<int> BlockableIterator(
                 ManualResetEventSlim wait,
                 ManualResetEventSlim release
-            ) {
+            )
+            {
                 release.Set();
                 wait.Wait();
                 yield return 42;

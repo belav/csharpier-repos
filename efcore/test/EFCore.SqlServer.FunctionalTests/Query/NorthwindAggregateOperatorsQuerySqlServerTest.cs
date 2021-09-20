@@ -218,7 +218,8 @@ FROM [Order Details] AS [o]"
 
         public override async Task Average_with_division_on_decimal_no_significant_digits(
             bool async
-        ) {
+        )
+        {
             await base.Average_with_division_on_decimal_no_significant_digits(async);
 
             AssertSql(
@@ -638,7 +639,8 @@ WHERE ([c].[CustomerID] = N'ALFKI') AND ((
 
         public override async Task Multiple_collection_navigation_with_FirstOrDefault_chained(
             bool async
-        ) {
+        )
+        {
             await base.Multiple_collection_navigation_with_FirstOrDefault_chained(async);
 
             AssertSql(
@@ -665,7 +667,8 @@ ORDER BY [c].[CustomerID]"
 
         public override async Task Multiple_collection_navigation_with_FirstOrDefault_chained_projecting_scalar(
             bool async
-        ) {
+        )
+        {
             await base.Multiple_collection_navigation_with_FirstOrDefault_chained_projecting_scalar(
                 async
             );
@@ -926,7 +929,8 @@ WHERE [c].[CustomerID] IN (N'ABCDE', N'ANATR')"
 
         public override async Task Contains_with_local_non_primitive_list_inline_closure_mix(
             bool async
-        ) {
+        )
+        {
             await base.Contains_with_local_non_primitive_list_inline_closure_mix(async);
 
             AssertSql(
@@ -985,7 +989,8 @@ WHERE [c].[CustomerID] IN (N'ALFKI', N'ABCDE') AND [c].[CustomerID] IN (N'ABCDE'
 
         public override async Task Contains_with_local_collection_complex_predicate_not_matching_ins1(
             bool async
-        ) {
+        )
+        {
             await base.Contains_with_local_collection_complex_predicate_not_matching_ins1(async);
             // issue #18791
             //            AssertSql(
@@ -996,7 +1001,8 @@ WHERE [c].[CustomerID] IN (N'ALFKI', N'ABCDE') AND [c].[CustomerID] IN (N'ABCDE'
 
         public override async Task Contains_with_local_collection_complex_predicate_not_matching_ins2(
             bool async
-        ) {
+        )
+        {
             await base.Contains_with_local_collection_complex_predicate_not_matching_ins2(async);
             // issue #18791
             //            AssertSql(
@@ -1093,7 +1099,8 @@ ORDER BY [o].[OrderID]"
 
         public override async Task Average_with_non_matching_types_in_projection_doesnt_produce_second_explicit_cast(
             bool async
-        ) {
+        )
+        {
             await base.Average_with_non_matching_types_in_projection_doesnt_produce_second_explicit_cast(
                 async
             );
@@ -1107,7 +1114,8 @@ WHERE [o].[CustomerID] IS NOT NULL AND ([o].[CustomerID] LIKE N'A%')"
 
         public override async Task Max_with_non_matching_types_in_projection_introduces_explicit_cast(
             bool async
-        ) {
+        )
+        {
             await base.Max_with_non_matching_types_in_projection_introduces_explicit_cast(async);
 
             AssertSql(
@@ -1119,7 +1127,8 @@ WHERE [o].[CustomerID] IS NOT NULL AND ([o].[CustomerID] LIKE N'A%')"
 
         public override async Task Min_with_non_matching_types_in_projection_introduces_explicit_cast(
             bool async
-        ) {
+        )
+        {
             await base.Min_with_non_matching_types_in_projection_introduces_explicit_cast(async);
 
             AssertSql(
@@ -1187,7 +1196,8 @@ END"
 
         public override async Task List_Contains_over_entityType_should_rewrite_to_identity_equality(
             bool async
-        ) {
+        )
+        {
             await base.List_Contains_over_entityType_should_rewrite_to_identity_equality(async);
 
             AssertSql(
@@ -1270,7 +1280,8 @@ WHERE [c].[CustomerID] = N'ALFKI'"
 
         public override async Task Contains_over_entityType_with_null_should_rewrite_to_false(
             bool async
-        ) {
+        )
+        {
             await base.Contains_over_entityType_with_null_should_rewrite_to_false(async);
 
             AssertSql(@"SELECT CAST(0 AS bit)");
@@ -1278,7 +1289,8 @@ WHERE [c].[CustomerID] = N'ALFKI'"
 
         public override async Task Contains_over_entityType_with_null_should_rewrite_to_identity_equality_subquery(
             bool async
-        ) {
+        )
+        {
             await base.Contains_over_entityType_with_null_should_rewrite_to_identity_equality_subquery(
                 async
             );
@@ -1292,7 +1304,8 @@ WHERE 0 = 1"
 
         public override async Task Contains_over_scalar_with_null_should_rewrite_to_identity_equality_subquery(
             bool async
-        ) {
+        )
+        {
             await base.Contains_over_scalar_with_null_should_rewrite_to_identity_equality_subquery(
                 async
             );
@@ -1309,7 +1322,8 @@ WHERE EXISTS (
 
         public override async Task Contains_over_entityType_with_null_should_rewrite_to_identity_equality_subquery_negated(
             bool async
-        ) {
+        )
+        {
             await base.Contains_over_entityType_with_null_should_rewrite_to_identity_equality_subquery_negated(
                 async
             );
@@ -1326,7 +1340,8 @@ WHERE NOT (EXISTS (
 
         public override async Task Contains_over_entityType_with_null_should_rewrite_to_identity_equality_subquery_complex(
             bool async
-        ) {
+        )
+        {
             await base.Contains_over_entityType_with_null_should_rewrite_to_identity_equality_subquery_complex(
                 async
             );
@@ -1352,7 +1367,8 @@ END"
 
         public override async Task Contains_over_nullable_scalar_with_null_in_subquery_translated_correctly(
             bool async
-        ) {
+        )
+        {
             await base.Contains_over_nullable_scalar_with_null_in_subquery_translated_correctly(
                 async
             );
@@ -1371,7 +1387,8 @@ FROM [Orders] AS [o]"
 
         public override async Task Contains_over_non_nullable_scalar_with_null_in_subquery_simplifies_to_false(
             bool async
-        ) {
+        )
+        {
             await base.Contains_over_non_nullable_scalar_with_null_in_subquery_simplifies_to_false(
                 async
             );
@@ -1384,7 +1401,8 @@ FROM [Orders] AS [o]"
 
         public override async Task Contains_over_entityType_should_materialize_when_composite(
             bool async
-        ) {
+        )
+        {
             await base.Contains_over_entityType_should_materialize_when_composite(async);
 
             AssertSql(
@@ -1399,7 +1417,8 @@ WHERE ([o].[ProductID] = 42) AND EXISTS (
 
         public override async Task Contains_over_entityType_should_materialize_when_composite2(
             bool async
-        ) {
+        )
+        {
             await base.Contains_over_entityType_should_materialize_when_composite2(async);
 
             AssertSql(
@@ -1414,7 +1433,8 @@ WHERE ([o].[ProductID] = 42) AND EXISTS (
 
         public override async Task String_FirstOrDefault_in_projection_does_not_do_client_eval(
             bool async
-        ) {
+        )
+        {
             await base.String_FirstOrDefault_in_projection_does_not_do_client_eval(async);
 
             AssertSql(
@@ -1567,7 +1587,8 @@ LEFT JOIN [Products] AS [p] ON 1 = 1"
 
         public override async Task Collection_Last_member_access_in_projection_translated(
             bool async
-        ) {
+        )
+        {
             await base.Collection_Last_member_access_in_projection_translated(async);
 
             AssertSql(
@@ -1583,7 +1604,8 @@ WHERE ([c].[CustomerID] LIKE N'F%') AND ((
 
         public override async Task Collection_LastOrDefault_member_access_in_projection_translated(
             bool async
-        ) {
+        )
+        {
             await base.Collection_LastOrDefault_member_access_in_projection_translated(async);
 
             AssertSql(

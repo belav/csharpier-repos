@@ -36,7 +36,8 @@ namespace System.Formats.Asn1.Tests.Writer
             AsnEncodingRules ruleSet,
             string expectedHex,
             Enum value
-        ) {
+        )
+        {
             AsnWriter writer = new AsnWriter(ruleSet);
             writer.WriteNamedBitList(value);
 
@@ -68,7 +69,8 @@ namespace System.Formats.Asn1.Tests.Writer
             AsnEncodingRules ruleSet,
             string expectedHex,
             Enum value
-        ) {
+        )
+        {
             int ruleSetVal = (int)ruleSet;
             TagClass tagClass = (TagClass)(byte)(ruleSetVal << 6);
 

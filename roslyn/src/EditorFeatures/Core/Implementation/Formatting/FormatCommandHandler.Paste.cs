@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Formatting
             PasteCommandArgs args,
             Action nextHandler,
             CommandExecutionContext context
-        ) {
+        )
+        {
             using var _ = context.OperationContext.AddScope(
                 allowCancellation: true,
                 EditorFeaturesResources.Formatting_pasted_text
@@ -58,7 +59,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Formatting
             PasteCommandArgs args,
             SnapshotPoint? caretPosition,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!args.SubjectBuffer.CanApplyChangeDocumentToWorkspace())
             {
                 return;
@@ -67,7 +69,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Formatting
             if (
                 !args.SubjectBuffer.GetFeatureOnOffOption(FeatureOnOffOptions.FormatOnPaste)
                 || !caretPosition.HasValue
-            ) {
+            )
+            {
                 return;
             }
 
@@ -89,7 +92,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Formatting
             if (
                 formattingRuleService != null
                 && formattingRuleService.ShouldNotFormatOrCommitOnPaste(document)
-            ) {
+            )
+            {
                 return;
             }
 

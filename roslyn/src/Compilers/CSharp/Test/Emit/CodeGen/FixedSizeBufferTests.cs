@@ -1085,7 +1085,8 @@ class Program
         {
             foreach (
                 var layout in new[] { LayoutKind.Auto, LayoutKind.Explicit, LayoutKind.Sequential }
-            ) {
+            )
+            {
                 foreach (
                     var charSet in new[]
                     {
@@ -1094,7 +1095,8 @@ class Program
                         CharSet.None,
                         CharSet.Unicode
                     }
-                ) {
+                )
+                {
                     var text =
                         @"
 using System;
@@ -1146,7 +1148,8 @@ public unsafe struct Test
         {
             foreach (
                 var layout in new[] { LayoutKind.Auto, LayoutKind.Explicit, LayoutKind.Sequential }
-            ) {
+            )
+            {
                 var text =
                     @"
 using System;

@@ -92,7 +92,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                 ISymbol symbol,
                 IOperation operation,
                 bool maybeWritten
-            ) {
+            )
+            {
                 if (!_reachingWrites.TryGetValue(symbol, out var values))
                 {
                     values = PooledHashSet<IOperation>.GetInstance();
@@ -152,7 +153,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                 BasicBlockAnalysisData data1,
                 BasicBlockAnalysisData data2,
                 Action<BasicBlockAnalysisData> trackAllocatedData
-            ) {
+            )
+            {
                 // Ensure that we don't return 'null' data if other the other data is non-null,
                 // even if latter is Empty.
                 if (data1 == null)
@@ -198,7 +200,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
             private static void AddEntries(
                 Dictionary<ISymbol, PooledHashSet<IOperation>> result,
                 BasicBlockAnalysisData source
-            ) {
+            )
+            {
                 if (source != null)
                 {
                     foreach (var (symbol, operations) in source._reachingWrites)

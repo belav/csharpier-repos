@@ -3559,7 +3559,8 @@ public class C { } // end"
             SyntaxNode declaration,
             string name,
             string[] remainingNames
-        ) {
+        )
+        {
             var newDecl = Generator.RemoveNode(
                 declaration,
                 Generator.GetNamespaceImports(declaration).First(m => Generator.GetName(m) == name)

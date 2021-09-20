@@ -35,7 +35,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 OptionSet options,
                 SyntaxNode node,
                 EnvDTE.vsCMPart part
-            ) {
+            )
+            {
                 switch (node.Kind())
                 {
                     case SyntaxKind.ArrowExpressionClause:
@@ -97,7 +98,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 OptionSet options,
                 SyntaxNode node,
                 EnvDTE.vsCMPart part
-            ) {
+            )
+            {
                 switch (node.Kind())
                 {
                     case SyntaxKind.ArrowExpressionClause:
@@ -168,7 +170,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 SyntaxToken openBrace,
                 SyntaxToken closeBrace,
                 int memberStartColumn
-            ) {
+            )
+            {
                 Debug.Assert(!openBrace.IsMissing);
                 Debug.Assert(!closeBrace.IsMissing);
                 Debug.Assert(memberStartColumn >= 0);
@@ -198,7 +201,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 if (
                     openBraceLine.LineNumber + 1 < closeBraceLine.LineNumber
                     && openBraceLine.LineNumber < text.Lines.IndexOf(tokenAfterOpenBrace.SpanStart)
-                ) {
+                )
+                {
                     var lineAfterOpenBrace = text.Lines[openBraceLine.LineNumber + 1];
                     var firstNonWhitespaceOffset =
                         lineAfterOpenBrace.GetFirstNonWhitespaceOffset() ?? -1;
@@ -263,7 +267,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 SourceText text,
                 ArrowExpressionClauseSyntax node,
                 EnvDTE.vsCMPart part
-            ) {
+            )
+            {
                 int startPosition;
 
                 switch (part)
@@ -287,7 +292,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 SourceText text,
                 AttributeSyntax node,
                 EnvDTE.vsCMPart part
-            ) {
+            )
+            {
                 int startPosition;
 
                 switch (part)
@@ -323,7 +329,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 SourceText text,
                 AttributeArgumentSyntax node,
                 EnvDTE.vsCMPart part
-            ) {
+            )
+            {
                 int startPosition;
 
                 switch (part)
@@ -356,7 +363,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 SourceText text,
                 BaseTypeDeclarationSyntax node,
                 EnvDTE.vsCMPart part
-            ) {
+            )
+            {
                 int startPosition;
 
                 switch (part)
@@ -408,7 +416,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 OptionSet options,
                 BaseMethodDeclarationSyntax node,
                 EnvDTE.vsCMPart part
-            ) {
+            )
+            {
                 int startPosition;
 
                 switch (part)
@@ -491,7 +500,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                             node.Body == null
                             || node.Body.OpenBraceToken.IsMissing
                             || node.Body.CloseBraceToken.IsMissing
-                        ) {
+                        )
+                        {
                             throw Exceptions.ThrowEFail();
                         }
 
@@ -506,7 +516,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
 
             private AccessorDeclarationSyntax FindFirstAccessorNode(
                 BasePropertyDeclarationSyntax node
-            ) {
+            )
+            {
                 if (node.AccessorList == null)
                 {
                     return null;
@@ -520,7 +531,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 OptionSet options,
                 BasePropertyDeclarationSyntax node,
                 EnvDTE.vsCMPart part
-            ) {
+            )
+            {
                 int startPosition;
 
                 switch (part)
@@ -584,7 +596,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                     case EnvDTE.vsCMPart.vsCMPartBody:
                         if (
                             node.AccessorList != null && !node.AccessorList.OpenBraceToken.IsMissing
-                        ) {
+                        )
+                        {
                             var line = text.Lines.GetLineFromPosition(node.SpanStart);
                             var indentation =
                                 line.GetColumnOfFirstNonWhitespaceCharacterOrEndOfLine(
@@ -614,7 +627,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 OptionSet options,
                 AccessorDeclarationSyntax node,
                 EnvDTE.vsCMPart part
-            ) {
+            )
+            {
                 int startPosition;
 
                 switch (part)
@@ -659,7 +673,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                             node.Body == null
                             || node.Body.OpenBraceToken.IsMissing
                             || node.Body.CloseBraceToken.IsMissing
-                        ) {
+                        )
+                        {
                             throw Exceptions.ThrowEFail();
                         }
 
@@ -676,7 +691,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 SourceText text,
                 NamespaceDeclarationSyntax node,
                 EnvDTE.vsCMPart part
-            ) {
+            )
+            {
                 int startPosition;
 
                 switch (part)
@@ -719,7 +735,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 SourceText text,
                 DelegateDeclarationSyntax node,
                 EnvDTE.vsCMPart part
-            ) {
+            )
+            {
                 int startPosition;
 
                 switch (part)
@@ -762,7 +779,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 SourceText text,
                 UsingDirectiveSyntax node,
                 EnvDTE.vsCMPart part
-            ) {
+            )
+            {
                 int startPosition;
 
                 switch (part)
@@ -798,7 +816,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 SourceText text,
                 VariableDeclaratorSyntax node,
                 EnvDTE.vsCMPart part
-            ) {
+            )
+            {
                 var field = node.FirstAncestorOrSelf<BaseFieldDeclarationSyntax>();
                 int startPosition;
 
@@ -842,7 +861,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 SourceText text,
                 EnumMemberDeclarationSyntax node,
                 EnvDTE.vsCMPart part
-            ) {
+            )
+            {
                 int startPosition;
 
                 switch (part)
@@ -885,7 +905,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 SourceText text,
                 ParameterSyntax node,
                 EnvDTE.vsCMPart part
-            ) {
+            )
+            {
                 int startPosition;
 
                 switch (part)
@@ -928,7 +949,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 SourceText text,
                 ArrowExpressionClauseSyntax node,
                 EnvDTE.vsCMPart part
-            ) {
+            )
+            {
                 int endPosition;
 
                 switch (part)
@@ -949,7 +971,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 SourceText text,
                 AttributeSyntax node,
                 EnvDTE.vsCMPart part
-            ) {
+            )
+            {
                 int endPosition;
 
                 switch (part)
@@ -985,7 +1008,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 SourceText text,
                 AttributeArgumentSyntax node,
                 EnvDTE.vsCMPart part
-            ) {
+            )
+            {
                 int endPosition;
 
                 switch (part)
@@ -1018,7 +1042,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 SourceText text,
                 BaseTypeDeclarationSyntax node,
                 EnvDTE.vsCMPart part
-            ) {
+            )
+            {
                 int endPosition;
 
                 switch (part)
@@ -1062,7 +1087,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 SourceText text,
                 BaseMethodDeclarationSyntax node,
                 EnvDTE.vsCMPart part
-            ) {
+            )
+            {
                 int endPosition;
 
                 switch (part)
@@ -1131,7 +1157,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                             node.Body == null
                             || node.Body.OpenBraceToken.IsMissing
                             || node.Body.CloseBraceToken.IsMissing
-                        ) {
+                        )
+                        {
                             throw Exceptions.ThrowEFail();
                         }
 
@@ -1148,7 +1175,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 SourceText text,
                 BasePropertyDeclarationSyntax node,
                 EnvDTE.vsCMPart part
-            ) {
+            )
+            {
                 int endPosition;
 
                 switch (part)
@@ -1199,7 +1227,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                         if (
                             node.AccessorList != null
                             && !node.AccessorList.CloseBraceToken.IsMissing
-                        ) {
+                        )
+                        {
                             return GetBodyEndPoint(text, node.AccessorList.CloseBraceToken);
                         }
 
@@ -1216,7 +1245,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 SourceText text,
                 AccessorDeclarationSyntax node,
                 EnvDTE.vsCMPart part
-            ) {
+            )
+            {
                 int endPosition;
 
                 switch (part)
@@ -1242,7 +1272,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                             node.Body == null
                             || node.Body.OpenBraceToken.IsMissing
                             || node.Body.CloseBraceToken.IsMissing
-                        ) {
+                        )
+                        {
                             throw Exceptions.ThrowEFail();
                         }
 
@@ -1259,7 +1290,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 SourceText text,
                 DelegateDeclarationSyntax node,
                 EnvDTE.vsCMPart part
-            ) {
+            )
+            {
                 int endPosition;
 
                 switch (part)
@@ -1303,7 +1335,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 SourceText text,
                 NamespaceDeclarationSyntax node,
                 EnvDTE.vsCMPart part
-            ) {
+            )
+            {
                 int endPosition;
 
                 switch (part)
@@ -1346,7 +1379,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 SourceText text,
                 UsingDirectiveSyntax node,
                 EnvDTE.vsCMPart part
-            ) {
+            )
+            {
                 int endPosition;
 
                 switch (part)
@@ -1382,7 +1416,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 SourceText text,
                 EnumMemberDeclarationSyntax node,
                 EnvDTE.vsCMPart part
-            ) {
+            )
+            {
                 int endPosition;
 
                 switch (part)
@@ -1426,7 +1461,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 SourceText text,
                 VariableDeclaratorSyntax node,
                 EnvDTE.vsCMPart part
-            ) {
+            )
+            {
                 var field = node.FirstAncestorOrSelf<BaseFieldDeclarationSyntax>();
                 int endPosition;
 
@@ -1471,7 +1507,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 SourceText text,
                 ParameterSyntax node,
                 EnvDTE.vsCMPart part
-            ) {
+            )
+            {
                 int endPosition;
 
                 switch (part)

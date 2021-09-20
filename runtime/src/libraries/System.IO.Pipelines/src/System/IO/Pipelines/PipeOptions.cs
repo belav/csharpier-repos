@@ -31,7 +31,8 @@ namespace System.IO.Pipelines
             long resumeWriterThreshold = -1,
             int minimumSegmentSize = -1,
             bool useSynchronizationContext = true
-        ) {
+        )
+        {
             MinimumSegmentSize =
                 minimumSegmentSize == -1 ? DefaultMinimumSegmentSize : minimumSegmentSize;
 

@@ -15,7 +15,8 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
             List<SslApplicationProtocol> alpnProtocols,
             [NotNull] out MemoryHandle[]? handles,
             [NotNull] out QuicBuffer[]? buffers
-        ) {
+        )
+        {
             handles = ArrayPool<MemoryHandle>.Shared.Rent(alpnProtocols.Count);
             buffers = ArrayPool<QuicBuffer>.Shared.Rent(alpnProtocols.Count);
 

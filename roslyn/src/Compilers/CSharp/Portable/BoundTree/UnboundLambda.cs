@@ -60,7 +60,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeWithAnnotations typeWithAnnotations,
             ImmutableArray<DiagnosticInfo> useSiteDiagnostics,
             ImmutableArray<AssemblySymbol> dependencies
-        ) {
+        )
+        {
             NumExpressions = numExpressions;
             HadExpressionlessReturn = hadExpressionlessReturn;
             RefKind = refKind;
@@ -102,15 +103,17 @@ namespace Microsoft.CodeAnalysis.CSharp
             Binder binder,
             TypeSymbol delegateType,
             InferredLambdaReturnType inferredReturnType
-        ) : this(
-            syntax,
-            unboundLambda.WithNoCache(),
-            (LambdaSymbol)binder.ContainingMemberOrLambda,
-            body,
-            diagnostics,
-            binder,
-            delegateType
-        ) {
+        )
+            : this(
+                syntax,
+                unboundLambda.WithNoCache(),
+                (LambdaSymbol)binder.ContainingMemberOrLambda,
+                body,
+                diagnostics,
+                binder,
+                delegateType
+            )
+        {
             InferredReturnType = inferredReturnType;
 
             Debug.Assert(
@@ -125,7 +128,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public TypeWithAnnotations GetInferredReturnType(
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             // Nullability (and conversions) are ignored.
             return GetInferredReturnType(conversions: null, nullableState: null, ref useSiteInfo);
         }
@@ -139,7 +143,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ConversionsBase conversions,
             NullableWalker.VariableState nullableState,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             if (!InferredReturnType.UseSiteDiagnostics.IsEmpty)
             {
                 useSiteInfo.AddDiagnostics(InferredReturnType.UseSiteDiagnostics);
@@ -225,7 +230,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol delegateType,
             bool isAsync,
             ConversionsBase conversions
-        ) {
+        )
+        {
             return InferReturnTypeImpl(
                 returnTypes,
                 node,
@@ -244,7 +250,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol delegateType,
             bool isAsync,
             ConversionsBase conversions
-        ) {
+        )
+        {
             return InferReturnTypeImpl(
                 returnTypes,
                 node,
@@ -267,7 +274,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool isAsync,
             ConversionsBase conversions,
             bool withDependencies
-        ) {
+        )
+        {
             var types = ArrayBuilder<(BoundExpression, TypeWithAnnotations)>.GetInstance();
             bool hasReturnWithoutArgument = false;
             RefKind refKind = RefKind.None;
@@ -323,7 +331,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool isAsync,
             BoundNode node,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             TypeWithAnnotations bestResultType;
             int n = returns.Count;
             switch (n)
@@ -431,7 +440,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             public static void GetReturnTypes(
                 ArrayBuilder<(BoundReturnStatement, TypeWithAnnotations)> builder,
                 BoundBlock block
-            ) {
+            )
+            {
                 var visitor = new BoundLambda.BlockReturns(builder);
                 visitor.Visit(block);
             }
@@ -448,7 +458,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             protected override BoundExpression VisitExpressionWithoutStackGuard(
                 BoundExpression node
-            ) {
+            )
+            {
                 throw ExceptionUtilities.Unreachable;
             }
 
@@ -485,21 +496,23 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<bool> discardsOpt,
             bool isAsync,
             bool isStatic
-        ) : this(
-            syntax,
-            new PlainUnboundLambdaState(
-                binder,
-                names,
-                discardsOpt,
-                types,
-                refKinds,
-                isAsync,
-                isStatic,
-                includeCache: true
-            ),
-            withDependencies,
-            !types.IsDefault && types.Any(t => t.Type?.Kind == SymbolKind.ErrorType)
-        ) {
+        )
+            : this(
+                syntax,
+                new PlainUnboundLambdaState(
+                    binder,
+                    names,
+                    discardsOpt,
+                    types,
+                    refKinds,
+                    isAsync,
+                    isStatic,
+                    includeCache: true
+                ),
+                withDependencies,
+                !types.IsDefault && types.Any(t => t.Type?.Kind == SymbolKind.ErrorType)
+            )
+        {
             Debug.Assert(binder != null);
             Debug.Assert(syntax.IsAnonymousFunction());
             this.Data.SetUnboundLambda(this);
@@ -592,7 +605,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public void GenerateAnonymousFunctionConversionError(
             BindingDiagnosticBag diagnostics,
             TypeSymbol targetType
-        ) {
+        )
+        {
             Data.GenerateAnonymousFunctionConversionError(diagnostics, targetType);
         }
         public bool GenerateSummaryErrors(BindingDiagnosticBag diagnostics)
@@ -725,7 +739,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public virtual void GenerateAnonymousFunctionConversionError(
             BindingDiagnosticBag diagnostics,
             TypeSymbol targetType
-        ) {
+        )
+        {
             this.Binder.GenerateAnonymousFunctionConversionError(
                 diagnostics,
                 _unboundLambda.Syntax,
@@ -778,7 +793,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private TypeWithAnnotations DelegateReturnTypeWithAnnotations(
             MethodSymbol invokeMethod,
             out RefKind refKind
-        ) {
+        )
+        {
             if ((object)invokeMethod == null)
             {
                 refKind = CodeAnalysis.RefKind.None;
@@ -837,7 +853,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     returnType,
                     TypeCompareKind.ConsiderEverything
                 )
-            ) {
+            )
+            {
                 lambdaBodyBinder = returnInferenceLambda.Binder;
                 block = CreateBlockFromLambdaExpressionBody(
                     lambdaBodyBinder,
@@ -894,7 +911,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     compilation.ShouldEmitNullableAttributes(lambdaSymbol)
                     && returnType.NeedsNullableAttribute()
-                ) {
+                )
+                {
                     compilation.EnsureNullableAttributeExists(
                         diagnostics,
                         lambdaSymbol.DiagnosticLocation,
@@ -948,14 +966,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 IsAsync
                 && !ErrorFacts.PreventsSuccessfulDelegateConversion(diagnostics.DiagnosticBag)
-            ) {
+            )
+            {
                 if (
                     returnType.HasType
                     && // Can be null if "delegateType" is not actually a delegate type.
                     !returnType.IsVoidType()
                     && !returnType.Type.IsNonGenericTaskType(compilation)
                     && !returnType.Type.IsGenericTaskType(compilation)
-                ) {
+                )
+                {
                     // Cannot convert async {0} to delegate type '{1}'. An async {0} may return void, Task or Task&lt;T&gt;, none of which are convertible to '{1}'.
                     diagnostics.Add(
                         ErrorCode.ERR_CantConvAsyncAnonFuncReturns,
@@ -1010,7 +1030,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal LambdaSymbol CreateLambdaSymbol(
             NamedTypeSymbol delegateType,
             Symbol containingSymbol
-        ) {
+        )
+        {
             var invokeMethod = DelegateInvokeMethod(delegateType);
             var returnType = DelegateReturnTypeWithAnnotations(invokeMethod, out RefKind refKind);
             var cacheKey = ReturnInferenceCacheKey.Create(delegateType, IsAsync);
@@ -1026,7 +1047,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private void ValidateUnsafeParameters(
             BindingDiagnosticBag diagnostics,
             ImmutableArray<TypeWithAnnotations> targetParameterTypes
-        ) {
+        )
+        {
             // It is legal to use a delegate type that has unsafe parameter types inside
             // a safe context if the anonymous method has no parameter list!
             //
@@ -1057,7 +1079,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             NamedTypeSymbol delegateType,
             ImmutableArray<TypeWithAnnotations> parameterTypes,
             ImmutableArray<RefKind> parameterRefKinds
-        ) {
+        )
+        {
             (var lambdaSymbol, var block, var lambdaBodyBinder, var diagnostics) =
                 BindWithParameterAndReturnType(
                     parameterTypes,
@@ -1108,7 +1131,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private (LambdaSymbol lambdaSymbol, BoundBlock block, ExecutableCodeBinder lambdaBodyBinder, BindingDiagnosticBag diagnostics) BindWithDelegateAndReturnType(
             NamedTypeSymbol delegateType,
             TypeWithAnnotations returnType
-        ) {
+        )
+        {
             var cacheKey = ReturnInferenceCacheKey.Create(delegateType, IsAsync);
             return BindWithParameterAndReturnType(
                 cacheKey.ParameterTypes,
@@ -1121,7 +1145,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<TypeWithAnnotations> parameterTypes,
             ImmutableArray<RefKind> parameterRefKinds,
             TypeWithAnnotations returnType
-        ) {
+        )
+        {
             var diagnostics = BindingDiagnosticBag.GetInstance(
                 withDiagnostics: true,
                 _unboundLambda.WithDependencies
@@ -1179,7 +1204,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ImmutableArray<TypeWithAnnotations> parameterTypes,
                 ImmutableArray<RefKind> parameterRefKinds,
                 NamedTypeSymbol taskLikeReturnTypeOpt
-            ) {
+            )
+            {
                 Debug.Assert(parameterTypes.Length == parameterRefKinds.Length);
                 Debug.Assert(
                     (object)taskLikeReturnTypeOpt == null
@@ -1210,7 +1236,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         this.TaskLikeReturnTypeOpt,
                         TypeCompareKind.ConsiderEverything2
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -1222,7 +1249,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             TypeCompareKind.ConsiderEverything
                         )
                         || other.ParameterRefKinds[i] != this.ParameterRefKinds[i]
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }
@@ -1285,7 +1313,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     parameterTypes.IsEmpty
                     && parameterRefKinds.IsEmpty
                     && (object)taskLikeReturnTypeOpt == null
-                ) {
+                )
+                {
                     return Empty;
                 }
 
@@ -1405,7 +1434,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private static BoundLambda GuessBestBoundLambda<T>(
             ImmutableDictionary<T, BoundLambda> candidates
-        ) {
+        )
+        {
             switch (candidates.Count)
             {
                 case 0:
@@ -1540,7 +1570,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private static bool PreventsSuccessfulDelegateConversion(
             FirstAmongEqualsSet<Diagnostic> set
-        ) {
+        )
+        {
             foreach (var diagnostic in set)
             {
                 if (ErrorFacts.PreventsSuccessfulDelegateConversion((ErrorCode)diagnostic.Code))
@@ -1553,7 +1584,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private static FirstAmongEqualsSet<Diagnostic> CreateFirstAmongEqualsSet(
             ImmutableArray<Diagnostic> bag
-        ) {
+        )
+        {
             // For the purposes of lambda error reporting we wish to compare
             // diagnostics for equality only considering their code and location,
             // but not other factors such as the values supplied for the
@@ -1747,7 +1779,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             RefKind: Microsoft.CodeAnalysis.RefKind.None,
                             ExpressionOpt: BoundExpression expr
                         }
-                ) {
+                )
+                {
                     return expr;
                 }
             }
@@ -1758,7 +1791,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Binder lambdaBodyBinder,
             BoundExpression expression,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             return lambdaBodyBinder.CreateBlockFromExpression(
                 (ExpressionSyntax)this.Body,
                 expression,
@@ -1770,7 +1804,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             LambdaSymbol lambdaSymbol,
             Binder lambdaBodyBinder,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             if (this.IsExpressionLambda)
             {
                 return lambdaBodyBinder.BindLambdaExpressionAsBlock(

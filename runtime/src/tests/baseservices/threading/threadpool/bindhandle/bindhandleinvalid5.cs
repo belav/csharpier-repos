@@ -32,7 +32,8 @@ class BindHandleInvalid3
                         0x10000,
                         true
                     )
-                ) {
+                )
+                {
                     ThreadPool.BindHandle(fs1.SafeFileHandle);
                 }
             }

@@ -41,7 +41,8 @@ namespace System.Diagnostics.Tracing
             Guid activityId,
             Guid childActivityId,
             ReadOnlySpan<byte> payload
-        ) {
+        )
+        {
             // A simple fix to avoid dependencies brought by this method if event source is disabled via a feature switch.
             // Should be reconsidered when https://github.com/dotnet/runtime/issues/43657 is done.
             if (!IsSupported)

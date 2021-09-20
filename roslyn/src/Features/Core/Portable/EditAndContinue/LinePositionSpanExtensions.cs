@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         internal static TextSpan GetTextSpanSafe(
             this TextLineCollection lines,
             LinePositionSpan span
-        ) {
+        )
+        {
             if (lines.Count == 0)
             {
                 return default;

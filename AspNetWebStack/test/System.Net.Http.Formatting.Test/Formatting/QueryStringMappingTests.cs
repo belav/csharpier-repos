@@ -40,7 +40,8 @@ namespace System.Net.Http.Formatting
             string queryStringParameterName,
             string queryStringParameterValue,
             MediaTypeHeaderValue mediaType
-        ) {
+        )
+        {
             QueryStringMapping mapping = new QueryStringMapping(
                 queryStringParameterName,
                 queryStringParameterValue,
@@ -61,7 +62,8 @@ namespace System.Net.Http.Formatting
         public void ConstructorThrowsWithEmptyQueryParameterName(
             MediaTypeHeaderValue mediaType,
             string queryStringParameterName
-        ) {
+        )
+        {
             Assert.ThrowsArgumentNull(
                 () => new QueryStringMapping(queryStringParameterName, "json", mediaType),
                 "queryStringParameterName"
@@ -78,7 +80,8 @@ namespace System.Net.Http.Formatting
         public void ConstructorThrowsWithEmptyQueryParameterValue(
             MediaTypeHeaderValue mediaType,
             string queryStringParameterValue
-        ) {
+        )
+        {
             Assert.ThrowsArgumentNull(
                 () => new QueryStringMapping("query", queryStringParameterValue, mediaType),
                 "queryStringParameterValue"
@@ -95,7 +98,8 @@ namespace System.Net.Http.Formatting
         public void ConstructorThrowsWithNullMediaTypeHeaderValue(
             string queryStringParameterName,
             string queryStringParameterValue
-        ) {
+        )
+        {
             Assert.ThrowsArgumentNull(
                 () =>
                     new QueryStringMapping(
@@ -120,7 +124,8 @@ namespace System.Net.Http.Formatting
             string queryStringParameterName,
             string queryStringParameterValue,
             string mediaType
-        ) {
+        )
+        {
             QueryStringMapping mapping = new QueryStringMapping(
                 queryStringParameterName,
                 queryStringParameterValue,
@@ -141,7 +146,8 @@ namespace System.Net.Http.Formatting
         public void Constructor1ThrowsWithEmptyQueryParameterName(
             string mediaType,
             string queryStringParameterName
-        ) {
+        )
+        {
             Assert.ThrowsArgumentNull(
                 () => new QueryStringMapping(queryStringParameterName, "json", mediaType),
                 "queryStringParameterName"
@@ -158,7 +164,8 @@ namespace System.Net.Http.Formatting
         public void Constructor1ThrowsWithEmptyQueryParameterValue(
             string mediaType,
             string queryStringParameterValue
-        ) {
+        )
+        {
             Assert.ThrowsArgumentNull(
                 () => new QueryStringMapping("query", queryStringParameterValue, mediaType),
                 "queryStringParameterValue"
@@ -178,7 +185,8 @@ namespace System.Net.Http.Formatting
             string queryStringParameterName,
             string queryStringParameterValue,
             string mediaType
-        ) {
+        )
+        {
             GC.KeepAlive(mediaType); // Mark parameter as used. See xUnit1026, [Theory] method doesn't use all parameters.
             Assert.ThrowsArgumentNull(
                 () =>
@@ -207,7 +215,8 @@ namespace System.Net.Http.Formatting
             string queryStringParameterValue,
             string mediaType,
             string uriBase
-        ) {
+        )
+        {
             QueryStringMapping mapping = new QueryStringMapping(
                 queryStringParameterName,
                 queryStringParameterValue,
@@ -234,7 +243,8 @@ namespace System.Net.Http.Formatting
             string queryStringParameterValue,
             string mediaType,
             string uriBase
-        ) {
+        )
+        {
             QueryStringMapping mapping = new QueryStringMapping(
                 queryStringParameterName,
                 queryStringParameterValue,
@@ -262,7 +272,8 @@ namespace System.Net.Http.Formatting
             string queryStringParameterValue,
             string mediaType,
             string uriBase
-        ) {
+        )
+        {
             QueryStringMapping mapping = new QueryStringMapping(
                 queryStringParameterName,
                 queryStringParameterValue,
@@ -287,7 +298,8 @@ namespace System.Net.Http.Formatting
             string queryStringParameterName,
             string queryStringParameterValue,
             string mediaType
-        ) {
+        )
+        {
             QueryStringMapping mapping = new QueryStringMapping(
                 queryStringParameterName,
                 queryStringParameterValue,
@@ -309,7 +321,8 @@ namespace System.Net.Http.Formatting
             string queryStringParameterName,
             string queryStringParameterValue,
             string mediaType
-        ) {
+        )
+        {
             QueryStringMapping mapping = new QueryStringMapping(
                 queryStringParameterName,
                 queryStringParameterValue,

@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public ComponentCodeTarget(
             RazorCodeGenerationOptions options,
             IEnumerable<ICodeTargetExtension> extensions
-        ) {
+        )
+        {
             _options = options;
 
             // Components provide some built-in target extensions that don't apply to

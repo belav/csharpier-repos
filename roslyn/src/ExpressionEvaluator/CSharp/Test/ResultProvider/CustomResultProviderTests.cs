@@ -154,7 +154,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 string resultName,
                 string resultFullName,
                 DkmCompletionRoutine<DkmEvaluationAsyncResult> completionRoutine
-            ) {
+            )
+            {
                 clrValue.GetResult(
                     workList,
                     declaredType,
@@ -218,7 +219,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 int initialRequestSize,
                 DkmInspectionContext inspectionContext,
                 DkmCompletionRoutine<DkmGetChildrenAsyncResult> completionRoutine
-            ) {
+            )
+            {
                 evaluationResult.GetChildren(
                     workList,
                     initialRequestSize,
@@ -233,7 +235,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 int startIndex,
                 int count,
                 DkmCompletionRoutine<DkmEvaluationEnumAsyncResult> completionRoutine
-            ) {
+            )
+            {
                 enumContext.GetItems(workList, startIndex, count, completionRoutine);
             }
 
@@ -260,14 +263,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 DkmClrType clrType,
                 DkmClrCustomTypeInfo customTypeInfo,
                 ReadOnlyCollection<string> formatSpecifiers
-            ) {
+            )
+            {
                 return inspectionContext.GetTypeName(clrType, customTypeInfo, formatSpecifiers);
             }
 
             string IDkmClrFormatter.GetUnderlyingString(
                 DkmClrValue clrValue,
                 DkmInspectionContext inspectionContext
-            ) {
+            )
+            {
                 return clrValue.GetUnderlyingString(inspectionContext);
             }
 
@@ -275,14 +280,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 DkmClrValue clrValue,
                 DkmInspectionContext inspectionContext,
                 ReadOnlyCollection<string> formatSpecifiers
-            ) {
+            )
+            {
                 return clrValue.GetValueString(inspectionContext, formatSpecifiers);
             }
 
             bool IDkmClrFormatter.HasUnderlyingString(
                 DkmClrValue clrValue,
                 DkmInspectionContext inspectionContext
-            ) {
+            )
+            {
                 return clrValue.HasUnderlyingString(inspectionContext);
             }
 
@@ -291,7 +298,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 DkmClrCustomTypeInfo customTypeInfo,
                 DkmInspectionContext inspectionContext,
                 ReadOnlyCollection<string> formatSpecifiers
-            ) {
+            )
+            {
                 return ((IDkmClrFormatter2)_fallback).GetValueString(
                     value,
                     customTypeInfo,
@@ -304,7 +312,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 DkmClrValue value,
                 DkmInspectionContext inspectionContext,
                 DkmClrCustomTypeInfo customTypeInfo
-            ) {
+            )
+            {
                 return ((IDkmClrFormatter2)_fallback).GetEditableValueString(
                     value,
                     inspectionContext,
@@ -316,14 +325,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 DkmInspectionContext inspectionContext,
                 DkmClrType clrType,
                 DkmClrCustomTypeInfo customTypeInfo
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             string IDkmClrFullNameProvider.GetClrArrayIndexExpression(
                 DkmInspectionContext inspectionContext,
                 string[] indices
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -333,7 +344,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 DkmClrType type,
                 DkmClrCustomTypeInfo customTypeInfo,
                 DkmClrCastExpressionOptions castExpressionOptions
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -342,14 +354,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 DkmClrType type,
                 DkmClrCustomTypeInfo customTypeInfo,
                 string[] arguments
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             string IDkmClrFullNameProvider.GetClrValidIdentifier(
                 DkmInspectionContext inspectionContext,
                 string identifier
-            ) {
+            )
+            {
                 return ((IDkmClrFullNameProvider)_fallback).GetClrValidIdentifier(
                     inspectionContext,
                     identifier
@@ -360,7 +374,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 DkmInspectionContext inspectionContext,
                 string expression,
                 out ReadOnlyCollection<string> formatSpecifiers
-            ) {
+            )
+            {
                 return ((IDkmClrFullNameProvider)_fallback).GetClrExpressionAndFormatSpecifiers(
                     inspectionContext,
                     expression,
@@ -371,7 +386,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             bool IDkmClrFullNameProvider.ClrExpressionMayRequireParentheses(
                 DkmInspectionContext inspectionContext,
                 string expression
-            ) {
+            )
+            {
                 return ((IDkmClrFullNameProvider)_fallback).ClrExpressionMayRequireParentheses(
                     inspectionContext,
                     expression
@@ -386,7 +402,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 string memberName,
                 bool memberAccessRequiresExplicitCast,
                 bool memberIsStatic
-            ) {
+            )
+            {
                 return ((IDkmClrFullNameProvider)_fallback).GetClrMemberName(
                     inspectionContext,
                     parentFullName,
@@ -400,13 +417,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             string IDkmClrFullNameProvider.GetClrExpressionForNull(
                 DkmInspectionContext inspectionContext
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
             string IDkmClrFullNameProvider.GetClrExpressionForThis(
                 DkmInspectionContext inspectionContext
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }

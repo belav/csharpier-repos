@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                 ISymbol symbol,
                 bool canImplementImplicitly,
                 IDocumentationCommentFormattingService docCommentFormattingService
-            ) {
+            )
+            {
                 _symbol = symbol;
                 CanImplementImplicitly = canImplementImplicitly;
                 DocCommentFormattingService = docCommentFormattingService;

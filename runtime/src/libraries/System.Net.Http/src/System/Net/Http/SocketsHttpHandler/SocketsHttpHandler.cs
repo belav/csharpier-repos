@@ -201,7 +201,8 @@ namespace System.Net.Http
                 if (
                     (value < TimeSpan.Zero && value != Timeout.InfiniteTimeSpan)
                     || (value.TotalMilliseconds > int.MaxValue)
-                ) {
+                )
+                {
                     throw new ArgumentOutOfRangeException(nameof(value));
                 }
 
@@ -280,7 +281,8 @@ namespace System.Net.Http
                 if (
                     (value <= TimeSpan.Zero && value != Timeout.InfiniteTimeSpan)
                     || (value.TotalMilliseconds > int.MaxValue)
-                ) {
+                )
+                {
                     throw new ArgumentOutOfRangeException(nameof(value));
                 }
 
@@ -297,7 +299,8 @@ namespace System.Net.Http
                 if (
                     (value < TimeSpan.Zero && value != Timeout.InfiniteTimeSpan)
                     || (value.TotalMilliseconds > int.MaxValue)
-                ) {
+                )
+                {
                     throw new ArgumentOutOfRangeException(nameof(value));
                 }
 
@@ -549,7 +552,8 @@ namespace System.Net.Http
         protected internal override HttpResponseMessage Send(
             HttpRequestMessage request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (request.Version.Major >= 2)
             {
                 throw new NotSupportedException(
@@ -584,7 +588,8 @@ namespace System.Net.Http
         protected internal override Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             CheckDisposed();
             HttpMessageHandler handler = _handler ?? SetupHandlerChain();
 

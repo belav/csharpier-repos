@@ -28,7 +28,8 @@ namespace Castle.DynamicProxy.Contributors
             MethodInfo method,
             IProxyGenerationHook hook,
             bool isStandalone
-        ) {
+        )
+        {
             if (method.Name == "Invoke" && method.DeclaringType.IsDelegateType())
             {
                 return new MetaMethod(method, method, isStandalone, true, false);

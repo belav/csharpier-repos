@@ -22,7 +22,8 @@ namespace System.Collections.Tests
             int enumerableLength,
             int numberOfMatchingElements,
             int numberOfDuplicateElements
-        ) {
+        )
+        {
             List<T> list = GenericListFactory(listLength);
             List<T> listBeforeAdd = list.ToList();
             IEnumerable<T> enumerable = CreateEnumerable(

@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
         internal static TestWorkspace CreateInteractiveWorkspace(
             string fileContent,
             ExportProvider exportProvider
-        ) {
+        )
+        {
             var workspaceDefinition =
                 $@"
 <Workspace>

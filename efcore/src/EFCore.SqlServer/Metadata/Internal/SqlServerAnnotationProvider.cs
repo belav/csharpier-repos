@@ -30,9 +30,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Metadata.Internal
         ///     Initializes a new instance of this class.
         /// </summary>
         /// <param name="dependencies"> Parameter object containing dependencies for this service. </param>
-        public SqlServerAnnotationProvider(
-            RelationalAnnotationProviderDependencies dependencies
-        ) : base(dependencies) { }
+        public SqlServerAnnotationProvider(RelationalAnnotationProviderDependencies dependencies)
+            : base(dependencies) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -84,7 +83,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Metadata.Internal
                         !t.IsExcludedFromMigrations
                         && (t[SqlServerAnnotationNames.MemoryOptimized] as bool? == true)
                 )
-            ) {
+            )
+            {
                 yield return new Annotation(SqlServerAnnotationNames.MemoryOptimized, true);
             }
         }
@@ -120,7 +120,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Metadata.Internal
             if (
                 key.IsClustered(StoreObjectIdentifier.Table(table.Name, table.Schema))
                 is bool isClustered
-            ) {
+            )
+            {
                 yield return new Annotation(SqlServerAnnotationNames.Clustered, isClustered);
             }
         }
@@ -141,7 +142,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Metadata.Internal
             if (
                 modelIndex.IsClustered(StoreObjectIdentifier.Table(table.Name, table.Schema))
                 is bool isClustered
-            ) {
+            )
+            {
                 yield return new Annotation(SqlServerAnnotationNames.Clustered, isClustered);
             }
 

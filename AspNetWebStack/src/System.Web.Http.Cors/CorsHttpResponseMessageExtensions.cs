@@ -27,7 +27,8 @@ namespace System.Web.Http.Cors
         public static void WriteCorsHeaders(
             this HttpResponseMessage response,
             CorsResult corsResult
-        ) {
+        )
+        {
             if (response == null)
             {
                 throw new ArgumentNullException("response");

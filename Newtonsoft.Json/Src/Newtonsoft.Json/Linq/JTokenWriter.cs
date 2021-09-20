@@ -490,14 +490,16 @@ namespace Newtonsoft.Json.Linq
             bool writeChildren,
             bool writeDateConstructorAsDate,
             bool writeComments
-        ) {
+        )
+        {
             // cloning the token rather than reading then writing it doesn't lose some type information, e.g. Guid, byte[], etc
             if (
                 reader is JTokenReader tokenReader
                 && writeChildren
                 && writeDateConstructorAsDate
                 && writeComments
-            ) {
+            )
+            {
                 if (tokenReader.TokenType == JsonToken.None)
                 {
                     if (!tokenReader.Read())

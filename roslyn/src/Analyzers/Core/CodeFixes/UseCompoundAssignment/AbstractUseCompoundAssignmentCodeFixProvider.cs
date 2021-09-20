@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.UseCompoundAssignment
 
         protected AbstractUseCompoundAssignmentCodeFixProvider(
             ImmutableArray<(TSyntaxKind exprKind, TSyntaxKind assignmentKind, TSyntaxKind tokenKind)> kinds
-        ) {
+        )
+        {
             UseCompoundAssignmentUtilities.GenerateMaps(
                 kinds,
                 out _binaryToAssignmentMap,
@@ -72,7 +73,8 @@ namespace Microsoft.CodeAnalysis.UseCompoundAssignment
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
             var syntaxKinds = syntaxFacts.SyntaxKinds;
 
@@ -108,7 +110,8 @@ namespace Microsoft.CodeAnalysis.UseCompoundAssignment
                             diagnostic.Properties.ContainsKey(
                                 UseCompoundAssignmentUtilities.Increment
                             )
-                        ) {
+                        )
+                        {
                             return Increment((TExpressionSyntax)leftOfAssign);
                         }
 
@@ -116,7 +119,8 @@ namespace Microsoft.CodeAnalysis.UseCompoundAssignment
                             diagnostic.Properties.ContainsKey(
                                 UseCompoundAssignmentUtilities.Decrement
                             )
-                        ) {
+                        )
+                        {
                             return Decrement((TExpressionSyntax)leftOfAssign);
                         }
 
@@ -139,13 +143,12 @@ namespace Microsoft.CodeAnalysis.UseCompoundAssignment
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                AnalyzersResources.Use_compound_assignment,
-                createChangedDocument,
-                AnalyzersResources.Use_compound_assignment
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    AnalyzersResources.Use_compound_assignment,
+                    createChangedDocument,
+                    AnalyzersResources.Use_compound_assignment
+                ) { }
         }
     }
 }

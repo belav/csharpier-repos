@@ -511,7 +511,8 @@ namespace Internal.NativeFormat
             Vertex containingType,
             Vertex methodNameAndSig,
             Vertex[] args
-        ) {
+        )
+        {
             MethodSignature sig = new MethodSignature(
                 flags,
                 fptrReferenceId,
@@ -551,7 +552,8 @@ namespace Internal.NativeFormat
             uint genericArgCount,
             Vertex returnType,
             Vertex[] parameters
-        ) {
+        )
+        {
             MethodSigSignature sig = new MethodSigSignature(
                 callingConvention,
                 genericArgCount,
@@ -584,7 +586,8 @@ namespace Internal.NativeFormat
             uint rank,
             uint[] bounds,
             uint[] lowerBounds
-        ) {
+        )
+        {
             MDArrayTypeSignature sig = new MDArrayTypeSignature(
                 elementType,
                 rank,
@@ -1051,7 +1054,8 @@ namespace Internal.NativeFormat
             Vertex containingType,
             Vertex methodNameAndSig,
             Vertex[] args
-        ) {
+        )
+        {
             _flags = flags;
             _fptrReferenceId = fptrReferenceId;
             _containingType = containingType;
@@ -1104,7 +1108,8 @@ namespace Internal.NativeFormat
                     && Object.Equals(_containingType, other._containingType)
                     && Object.Equals(_methodNameAndSig, other._methodNameAndSig)
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -1319,7 +1324,8 @@ namespace Internal.NativeFormat
             uint genericArgCount,
             Vertex returnType,
             Vertex[] parameters
-        ) {
+        )
+        {
             _callingConvention = callingConvention;
             _returnType = returnType;
             _genericArgCount = genericArgCount;
@@ -1367,7 +1373,8 @@ namespace Internal.NativeFormat
                     && _parameters.Length == other._parameters.Length
                     && Object.Equals(_returnType, other._returnType)
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -1533,7 +1540,8 @@ namespace Internal.NativeFormat
             uint rank,
             uint[] bounds,
             uint[] lowerBounds
-        ) {
+        )
+        {
             Debug.Assert(bounds != null && lowerBounds != null);
 
             _arrayElementType = arrayElementType;
@@ -1585,7 +1593,8 @@ namespace Internal.NativeFormat
                 || _rank != other._rank
                 || _bounds.Length != other._bounds.Length
                 || _lowerBounds.Length != other._lowerBounds.Length
-            ) {
+            )
+            {
                 return false;
             }
             for (int i = 0; i < _bounds.Length; i++)
@@ -1724,11 +1733,8 @@ namespace Internal.NativeFormat
     {
         private BlobVertex _blob;
 
-        public EntryPointWithBlobVertex(
-            uint methodIndex,
-            BlobVertex fixups,
-            BlobVertex blob
-        ) : base(methodIndex, fixups)
+        public EntryPointWithBlobVertex(uint methodIndex, BlobVertex fixups, BlobVertex blob)
+            : base(methodIndex, fixups)
         {
             _blob = blob;
         }
@@ -2194,7 +2200,8 @@ namespace Internal.NativeFormat
             int patchOffset,
             int entryIndexSize,
             int entryIndex
-        ) {
+        )
+        {
             if (entryIndexSize == 0)
             {
                 writer.PatchByteAt(patchOffset, (byte)entryIndex);

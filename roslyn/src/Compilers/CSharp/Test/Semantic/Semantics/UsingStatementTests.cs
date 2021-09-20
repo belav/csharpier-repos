@@ -2130,7 +2130,8 @@ class C
         private UsingStatementSyntax GetUsingStatements(
             CSharpCompilation compilation,
             int index = 1
-        ) {
+        )
+        {
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
             var usingStatements = tree.GetCompilationUnitRoot()
@@ -2144,7 +2145,8 @@ class C
             CSharpCompilation compilation,
             int index = 1,
             params string[] variables
-        ) {
+        )
+        {
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
@@ -2166,7 +2168,8 @@ class C
             CSharpCompilation compilation,
             ISymbol symbol,
             int index = 1
-        ) {
+        )
+        {
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
@@ -2186,7 +2189,8 @@ class C
             CSharpCompilation compilation,
             ISymbol symbol,
             int index = 1
-        ) {
+        )
+        {
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
             var usingStatements = tree.GetCompilationUnitRoot()

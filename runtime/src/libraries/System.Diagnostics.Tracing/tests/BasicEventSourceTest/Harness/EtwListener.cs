@@ -40,7 +40,8 @@ namespace BasicEventSourceTests
         public EtwListener(
             string dataFileName = "EventSourceTestData.etl",
             string sessionName = "EventSourceTestSession"
-        ) {
+        )
+        {
             _dataFileName = dataFileName;
 
             // Today you have to be Admin to turn on ETW events (anyone can write ETW events).
@@ -80,7 +81,8 @@ namespace BasicEventSourceTests
             string eventSourceName,
             EventCommand command,
             FilteringOptions options = null
-        ) {
+        )
+        {
             if (command == EventCommand.Enable)
             {
                 if (options == null)

@@ -30,7 +30,8 @@ namespace System.Net.Http.Headers
             int startIndex,
             object? storeValue,
             out object? parsedValue
-        ) {
+        )
+        {
             parsedValue = null;
 
             int numberLength = HttpRuleParser.GetNumberLength(value, startIndex, false);

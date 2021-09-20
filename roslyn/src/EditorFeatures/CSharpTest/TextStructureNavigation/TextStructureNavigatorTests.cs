@@ -342,7 +342,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TextStructureNavigation
             bool isSignificant,
             int start,
             int length
-        ) {
+        )
+        {
             AssertExtent(code, pos, isSignificant, start, length, null);
             AssertExtent(code, pos, isSignificant, start, length, Options.Script);
         }
@@ -354,7 +355,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TextStructureNavigation
             int start,
             int length,
             CSharpParseOptions options
-        ) {
+        )
+        {
             using var workspace = TestWorkspace.CreateCSharp(code, options);
             var buffer = workspace.Documents.First().GetTextBuffer();
 
@@ -380,7 +382,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TextStructureNavigation
             int startLength,
             int endPosition,
             int endLength
-        ) {
+        )
+        {
             TestNavigator(code, func, startPosition, startLength, endPosition, endLength, null);
             TestNavigator(
                 code,
@@ -401,7 +404,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TextStructureNavigation
             int endPosition,
             int endLength,
             CSharpParseOptions options
-        ) {
+        )
+        {
             using var workspace = TestWorkspace.CreateCSharp(code, options);
             var buffer = workspace.Documents.First().GetTextBuffer();
 

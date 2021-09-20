@@ -70,7 +70,8 @@ namespace System.Management
             ManagementScope scope,
             EnumerationOptions options,
             IEnumWbemClassObject enumWbem
-        ) {
+        )
+        {
             if (null != options)
                 this.options = (EnumerationOptions)options.Clone();
             else
@@ -409,7 +410,8 @@ namespace System.Management
             internal ManagementObjectEnumerator(
                 ManagementObjectCollection collectionObject,
                 IEnumWbemClassObject enumWbem
-            ) {
+            )
+            {
                 this.enumWbem = enumWbem;
                 this.collectionObject = collectionObject;
                 cachedObjects = new IWbemClassObjectFreeThreaded[

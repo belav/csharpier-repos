@@ -233,7 +233,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         private TestController CreateController(
             ActionContext actionContext,
             IModelMetadataProvider metadataProvider
-        ) {
+        )
+        {
             return CreateController(actionContext, metadataProvider, _ => { });
         }
 
@@ -241,7 +242,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             ActionContext actionContext,
             IModelMetadataProvider metadataProvider,
             Action<MvcOptions> optionsConfigurator
-        ) {
+        )
+        {
             var options = actionContext.HttpContext.RequestServices.GetRequiredService<
                 IOptions<MvcOptions>
             >();

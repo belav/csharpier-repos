@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.Host
         public EventListenerTracker(
             IEnumerable<Lazy<IEventListener, EventListenerMetadata>> eventListeners,
             string kind
-        ) {
+        )
+        {
             _eventListenerInitialized = new HashSet<string>();
             _eventListeners = eventListeners.Where(el => el.Metadata.Service == kind)
                 .ToImmutableArray();
@@ -56,7 +57,8 @@ namespace Microsoft.CodeAnalysis.Host
         public static IEnumerable<IEventListener<TService>> GetListeners(
             Workspace workspace,
             IEnumerable<Lazy<IEventListener, EventListenerMetadata>> eventListeners
-        ) {
+        )
+        {
             return eventListeners.Where(l => l.Metadata.WorkspaceKinds.Contains(workspace.Kind))
                 .Select(l => l.Value)
                 .OfType<IEventListener<TService>>();

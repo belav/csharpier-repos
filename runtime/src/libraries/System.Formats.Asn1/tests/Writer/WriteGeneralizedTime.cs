@@ -143,7 +143,8 @@ namespace System.Formats.Asn1.Tests.Writer
             DateTimeOffset input,
             bool omitFractionalSeconds,
             string expectedHexPayload
-        ) {
+        )
+        {
             AsnWriter writer = new AsnWriter(AsnEncodingRules.BER);
             writer.WriteGeneralizedTime(input, omitFractionalSeconds: omitFractionalSeconds);
 
@@ -156,7 +157,8 @@ namespace System.Formats.Asn1.Tests.Writer
             DateTimeOffset input,
             bool omitFractionalSeconds,
             string expectedHexPayload
-        ) {
+        )
+        {
             AsnWriter writer = new AsnWriter(AsnEncodingRules.BER);
             Asn1Tag tag = new Asn1Tag(TagClass.Application, 11);
             writer.WriteGeneralizedTime(input, omitFractionalSeconds, tag);
@@ -170,7 +172,8 @@ namespace System.Formats.Asn1.Tests.Writer
             DateTimeOffset input,
             bool omitFractionalSeconds,
             string expectedHexPayload
-        ) {
+        )
+        {
             AsnWriter writer = new AsnWriter(AsnEncodingRules.CER);
             writer.WriteGeneralizedTime(input, omitFractionalSeconds);
 
@@ -183,7 +186,8 @@ namespace System.Formats.Asn1.Tests.Writer
             DateTimeOffset input,
             bool omitFractionalSeconds,
             string expectedHexPayload
-        ) {
+        )
+        {
             AsnWriter writer = new AsnWriter(AsnEncodingRules.CER);
             Asn1Tag tag = new Asn1Tag(TagClass.Private, 95);
             writer.WriteGeneralizedTime(input, omitFractionalSeconds, tag);
@@ -197,7 +201,8 @@ namespace System.Formats.Asn1.Tests.Writer
             DateTimeOffset input,
             bool omitFractionalSeconds,
             string expectedHexPayload
-        ) {
+        )
+        {
             AsnWriter writer = new AsnWriter(AsnEncodingRules.DER);
             writer.WriteGeneralizedTime(input, omitFractionalSeconds);
 
@@ -210,7 +215,8 @@ namespace System.Formats.Asn1.Tests.Writer
             DateTimeOffset input,
             bool omitFractionalSeconds,
             string expectedHexPayload
-        ) {
+        )
+        {
             AsnWriter writer = new AsnWriter(AsnEncodingRules.DER);
             Asn1Tag tag = new Asn1Tag(TagClass.ContextSpecific, 3);
             writer.WriteGeneralizedTime(input, omitFractionalSeconds, tag);
@@ -228,7 +234,8 @@ namespace System.Formats.Asn1.Tests.Writer
         public void VerifyWriteGeneralizedTime_Null(
             AsnEncodingRules ruleSet,
             bool omitFractionalSeconds
-        ) {
+        )
+        {
             AsnWriter writer = new AsnWriter(ruleSet);
 
             AssertExtensions.Throws<ArgumentException>(

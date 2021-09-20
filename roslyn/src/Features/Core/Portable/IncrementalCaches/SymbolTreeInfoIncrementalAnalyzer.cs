@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.IncrementalCaches
             public SymbolTreeInfoIncrementalAnalyzer(
                 ConcurrentDictionary<ProjectId, SymbolTreeInfo> projectToInfo,
                 ConcurrentDictionary<MetadataId, MetadataInfo> metadataIdToInfo
-            ) {
+            )
+            {
                 _projectIdToInfo = projectToInfo;
                 _metadataIdToInfo = metadataIdToInfo;
             }
@@ -41,7 +42,8 @@ namespace Microsoft.CodeAnalysis.IncrementalCaches
                 SyntaxNode bodyOpt,
                 InvocationReasons reasons,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (!SupportAnalysis(document.Project))
                     return;
 
@@ -74,7 +76,8 @@ namespace Microsoft.CodeAnalysis.IncrementalCaches
                 bool semanticsChanged,
                 InvocationReasons reasons,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (!SupportAnalysis(project))
                     return Task.CompletedTask;
 
@@ -84,7 +87,8 @@ namespace Microsoft.CodeAnalysis.IncrementalCaches
             private async Task UpdateSymbolTreeInfoAsync(
                 Project project,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Debug.Assert(SupportAnalysis(project));
 
                 // Produce the indices for the source and metadata symbols in parallel.
@@ -109,7 +113,8 @@ namespace Microsoft.CodeAnalysis.IncrementalCaches
             private async Task UpdateSourceSymbolTreeInfoAsync(
                 Project project,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var checksum = await SymbolTreeInfo.GetSourceSymbolsChecksumAsync(
                         project,
                         cancellationToken
@@ -118,7 +123,8 @@ namespace Microsoft.CodeAnalysis.IncrementalCaches
                 if (
                     !_projectIdToInfo.TryGetValue(project.Id, out var projectInfo)
                     || projectInfo.Checksum != checksum
-                ) {
+                )
+                {
                     projectInfo = await SymbolTreeInfo.GetInfoForSourceAssemblyAsync(
                             project,
                             checksum,
@@ -142,7 +148,8 @@ namespace Microsoft.CodeAnalysis.IncrementalCaches
             private async Task UpdateReferencesAsync(
                 Project project,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // Process all metadata references. If it remote workspace, do this in parallel.
                 using var pendingTasks = new TemporaryArray<Task>();
 
@@ -182,7 +189,8 @@ namespace Microsoft.CodeAnalysis.IncrementalCaches
                     Project project,
                     PortableExecutableReference reference,
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     var metadataId = SymbolTreeInfo.GetMetadataIdNoThrow(reference);
                     if (metadataId == null)
                         return;
@@ -198,7 +206,8 @@ namespace Microsoft.CodeAnalysis.IncrementalCaches
                     if (
                         !metadataIdToInfo.TryGetValue(metadataId, out var metadataInfo)
                         || metadataInfo.SymbolTreeInfo.Checksum != checksum
-                    ) {
+                    )
+                    {
                         var info = await SymbolTreeInfo.GetInfoForMetadataReferenceAsync(
                                 project.Solution,
                                 reference,
@@ -235,7 +244,8 @@ namespace Microsoft.CodeAnalysis.IncrementalCaches
             public override Task RemoveProjectAsync(
                 ProjectId projectId,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 _projectIdToInfo.TryRemove(projectId, out _);
                 RemoveMetadataReferences(projectId);
 

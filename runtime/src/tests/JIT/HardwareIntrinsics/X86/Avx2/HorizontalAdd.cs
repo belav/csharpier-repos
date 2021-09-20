@@ -70,7 +70,8 @@ namespace IntelHardwareIntrinsicTest
                         new int[8] { 22, 1, 50, 0, 22, 1, 50, 0 },
                         new int[8]
                     )
-                ) {
+                )
+                {
                     var vs1 = Unsafe.Read<Vector256<short>>(shortTable.inArray1Ptr);
                     var vs2 = Unsafe.Read<Vector256<short>>(shortTable.inArray2Ptr);
                     var vs3 = Avx2.HorizontalAdd(vs1, vs2);
@@ -143,7 +144,8 @@ namespace IntelHardwareIntrinsicTest
                             shortTable.inArray2[15] + shortTable.inArray2[14]
                             != shortTable.outArray[15]
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("AVX2 HorizontalAdd failed on short:");
 
                         testResult = Fail;
@@ -158,7 +160,8 @@ namespace IntelHardwareIntrinsicTest
                         || (intTable.inArray1[7] + intTable.inArray1[6] != intTable.outArray[5])
                         || (intTable.inArray2[5] + intTable.inArray2[4] != intTable.outArray[6])
                         || (intTable.inArray2[7] + intTable.inArray2[6] != intTable.outArray[7])
-                    ) {
+                    )
+                    {
                         Console.WriteLine("AVX2 HorizontalAdd failed on int:");
 
                         testResult = Fail;

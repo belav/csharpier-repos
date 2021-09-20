@@ -21,7 +21,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.CodeStyle
                 CodeStyleSetting result,
                 string keyName,
                 out object? content
-            ) {
+            )
+            {
                 content = keyName switch
                 {
                     ColumnDefinitions.CodeStyle.Description => result.Description,

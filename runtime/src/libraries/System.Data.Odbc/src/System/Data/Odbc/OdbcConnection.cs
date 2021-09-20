@@ -191,7 +191,8 @@ namespace System.Data.Odbc
                     // protected against null and index out of range. Number cannot be bigger than 99
                     if (
                         ProviderInfo.DriverVersion != null && ProviderInfo.DriverVersion.Length >= 2
-                    ) {
+                    )
+                    {
                         try
                         { // mdac 89269: driver may return malformatted string
                             ProviderInfo.IsV3Driver = (
@@ -379,7 +380,8 @@ namespace System.Data.Odbc
                 if (
                     (ODBC32.RetCode.SUCCESS == retcode)
                     || (ODBC32.RetCode.SUCCESS_WITH_INFO == retcode)
-                ) {
+                )
+                {
                     value = (
                         BitConverter.IsLittleEndian ? Encoding.Unicode : Encoding.BigEndianUnicode
                     ).GetString(buffer, 0, Math.Min(cbActual, buffer.Length));
@@ -414,7 +416,8 @@ namespace System.Data.Odbc
                 if (
                     (ODBC32.RetCode.SUCCESS == retcode)
                     || (ODBC32.RetCode.SUCCESS_WITH_INFO == retcode)
-                ) {
+                )
+                {
                     retval = BitConverter.ToInt32(buffer, 0);
                 }
                 else
@@ -491,7 +494,8 @@ namespace System.Data.Odbc
                 }
                 if (
                     retcode == ODBC32.RetCode.SUCCESS || retcode == ODBC32.RetCode.SUCCESS_WITH_INFO
-                ) {
+                )
+                {
                     value = (
                         BitConverter.IsLittleEndian ? Encoding.Unicode : Encoding.BigEndianUnicode
                     ).GetString(buffer, 0, Math.Min(cbActual, buffer.Length));

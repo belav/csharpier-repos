@@ -46,7 +46,8 @@ namespace System.Web.WebPages
             IEnumerable<string> varyByHeaders = null,
             IEnumerable<string> varyByContentEncodings = null,
             HttpCacheability cacheability = HttpCacheability.Public
-        ) {
+        )
+        {
             OutputCache(
                 new HttpContextWrapper(HttpContext.Current),
                 response.Cache,
@@ -68,7 +69,8 @@ namespace System.Web.WebPages
             IEnumerable<string> varyByHeaders,
             IEnumerable<string> varyByContentEncodings,
             HttpCacheability cacheability
-        ) {
+        )
+        {
             cache.SetCacheability(cacheability);
             cache.SetExpires(httpContext.Timestamp.AddSeconds(numberOfSeconds));
             cache.SetMaxAge(new TimeSpan(0, 0, numberOfSeconds));

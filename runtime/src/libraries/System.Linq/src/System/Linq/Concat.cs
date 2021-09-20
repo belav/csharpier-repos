@@ -11,7 +11,8 @@ namespace System.Linq
         public static IEnumerable<TSource> Concat<TSource>(
             this IEnumerable<TSource> first,
             IEnumerable<TSource> second
-        ) {
+        )
+        {
             if (first == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.first);
@@ -136,7 +137,8 @@ namespace System.Linq
                 IEnumerable<TSource> head,
                 int headIndex,
                 bool hasOnlyCollections
-            ) {
+            )
+            {
                 Debug.Assert(tail != null);
                 Debug.Assert(head != null);
                 Debug.Assert(headIndex >= 2);

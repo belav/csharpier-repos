@@ -13,7 +13,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
 
         public PreallocatedTagHelperPropertyIntermediateNode(
             DefaultTagHelperPropertyIntermediateNode propertyNode
-        ) {
+        )
+        {
             if (propertyNode == null)
             {
                 throw new ArgumentNullException(nameof(propertyNode));

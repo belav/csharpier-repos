@@ -24,7 +24,8 @@ namespace System.IO.Packaging
             System.Uri packageUri,
             System.Uri? partUri,
             string? fragment
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Uri GetPackageUri(System.Uri packUri)

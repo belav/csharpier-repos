@@ -38,13 +38,14 @@ namespace System.Web.Http.Results
             MediaTypeFormatter formatter,
             MediaTypeHeaderValue mediaType,
             HttpRequestMessage request
-        ) : this(
-            statusCode,
-            content,
-            formatter,
-            mediaType,
-            new StatusCodeResult.DirectDependencyProvider(request)
-        ) { }
+        )
+            : this(
+                statusCode,
+                content,
+                formatter,
+                mediaType,
+                new StatusCodeResult.DirectDependencyProvider(request)
+            ) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FormattedContentResult{T}"/> class with the values provided.
@@ -63,13 +64,14 @@ namespace System.Web.Http.Results
             MediaTypeFormatter formatter,
             MediaTypeHeaderValue mediaType,
             ApiController controller
-        ) : this(
-            statusCode,
-            content,
-            formatter,
-            mediaType,
-            new StatusCodeResult.ApiControllerDependencyProvider(controller)
-        ) { }
+        )
+            : this(
+                statusCode,
+                content,
+                formatter,
+                mediaType,
+                new StatusCodeResult.ApiControllerDependencyProvider(controller)
+            ) { }
 
         private FormattedContentResult(
             HttpStatusCode statusCode,
@@ -77,7 +79,8 @@ namespace System.Web.Http.Results
             MediaTypeFormatter formatter,
             MediaTypeHeaderValue mediaType,
             StatusCodeResult.IDependencyProvider dependencies
-        ) {
+        )
+        {
             if (formatter == null)
             {
                 throw new ArgumentNullException("formatter");
@@ -142,7 +145,8 @@ namespace System.Web.Http.Results
             MediaTypeFormatter formatter,
             MediaTypeHeaderValue mediaType,
             HttpRequestMessage request
-        ) {
+        )
+        {
             HttpResponseMessage response = new HttpResponseMessage(statusCode);
 
             try

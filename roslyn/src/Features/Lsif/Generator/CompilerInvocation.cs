@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
             HostLanguageServices languageServices,
             string projectFilePath,
             OptionSet options
-        ) {
+        )
+        {
             Compilation = compilation;
             LanguageServices = languageServices;
             ProjectFilePath = projectFilePath;
@@ -193,7 +194,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
                             potentialPathMapping.From,
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         return potentialPathMapping.To;
                     }
 
@@ -207,7 +209,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
                             fromWithDirectorySuffix,
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         // Trim off any leading \, which would happen if you have a path like C:\Directory\\File.cs with a double slash, and happen to be
                         // mapping C:\Directory somewhere.
                         var relativePath = unmappedPath.Substring(fromWithDirectorySuffix.Length)

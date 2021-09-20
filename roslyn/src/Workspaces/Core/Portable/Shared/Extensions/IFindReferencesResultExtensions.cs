@@ -26,14 +26,16 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static ImmutableArray<ReferencedSymbol> FilterToItemsToShow(
             this ImmutableArray<ReferencedSymbol> result,
             FindReferencesSearchOptions options
-        ) {
+        )
+        {
             return result.WhereAsArray(r => ShouldShow(r, options));
         }
 
         public static bool ShouldShow(
             this ReferencedSymbol referencedSymbol,
             FindReferencesSearchOptions options
-        ) {
+        )
+        {
             // If the reference has any locations then we will present it.
             if (referencedSymbol.Locations.Any())
             {
@@ -50,7 +52,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this ISymbol definition,
             FindReferencesSearchOptions options,
             bool showMetadataSymbolsWithoutReferences
-        ) {
+        )
+        {
             // If the definition is implicit and we have no references, then we don't want to
             // clutter the UI with it.
             if (definition.IsImplicitlyDeclared)
@@ -87,7 +90,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             if (
                 showMetadataSymbolsWithoutReferences
                 && definition.Locations.Any(loc => loc.IsInMetadata)
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -97,7 +101,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static ImmutableArray<ReferencedSymbol> FilterToAliasMatches(
             this ImmutableArray<ReferencedSymbol> result,
             IAliasSymbol? aliasSymbol
-        ) {
+        )
+        {
             if (aliasSymbol == null)
             {
                 return result;
@@ -119,7 +124,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this ImmutableArray<ReferencedSymbol> result,
             Solution solution,
             ISymbol symbol
-        ) {
+        )
+        {
             return symbol.IsOrdinaryMethod()
               ? FilterNonMatchingMethodNamesWorker(result, solution, symbol)
               : result;
@@ -129,7 +135,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             ImmutableArray<ReferencedSymbol> references,
             Solution solution,
             ISymbol symbol
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<ReferencedSymbol>.GetInstance(out var result);
             foreach (var reference in references)
             {
@@ -142,7 +149,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 if (
                     reference.Definition.IsOrdinaryMethod()
                     && !comparer.Equals(reference.Definition.Name, symbol.Name)
-                ) {
+                )
+                {
                     continue;
                 }
 

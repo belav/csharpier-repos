@@ -37,7 +37,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         private static async Task AddValueProviderAsync(
             ValueProviderFactoryContext context,
             HttpRequest request
-        ) {
+        )
+        {
             IFormCollection form;
 
             try

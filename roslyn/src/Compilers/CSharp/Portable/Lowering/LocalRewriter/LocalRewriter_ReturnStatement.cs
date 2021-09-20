@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                               )
                     )
                 )
-            ) {
+            )
+            {
                 rewritten = _instrumenter.InstrumentReturnStatement(node, rewritten);
             }
 

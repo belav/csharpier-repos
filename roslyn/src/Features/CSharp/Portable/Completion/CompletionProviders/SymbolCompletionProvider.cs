@@ -55,7 +55,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 
             static CompletionItemRules MakeRule(
                 (bool importDirective, bool preselect, bool tupleLiteral) context
-            ) {
+            )
+            {
                 // '<' should not filter the completion list, even though it's in generic items like IList<>
                 var generalBaseline = CompletionItemRules.Default.WithFilterCharacterRule(
                         CharacterSetModificationRule.Create(
@@ -108,7 +109,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             int position,
             OptionSet options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (context != null && ShouldTriggerInArgumentLists(options))
             {
                 // Avoid preselection & hard selection when triggered via insertion in an argument list.
@@ -123,7 +125,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                             cancellationToken
                         )
                         .ConfigureAwait(false) == true
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -138,7 +141,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             SourceText text,
             int characterPosition,
             OptionSet options
-        ) {
+        )
+        {
             return ShouldTriggerInArgumentLists(options)
               ? CompletionUtilities.IsTriggerCharacterOrArgumentListCharacter(
                     text,
@@ -154,7 +158,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             CompletionTrigger trigger,
             OptionSet options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (trigger.Kind == CompletionTriggerKind.Insertion && caretPosition > 0)
             {
                 var result = await IsTriggerOnDotAsync(
@@ -170,7 +175,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     ShouldTriggerInArgumentLists(
                         await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false)
                     )
-                ) {
+                )
+                {
                     result = await IsTriggerInArgumentListAsync(
                             document,
                             caretPosition - 1,
@@ -206,7 +212,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             Document document,
             int characterPosition,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
             if (!CompletionUtilities.IsArgumentListCharacter(text[characterPosition]))
             {
@@ -224,7 +231,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     SyntaxKind.AttributeArgumentList,
                     SyntaxKind.ArrayRankSpecifier
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -254,7 +262,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
         protected override CompletionItemRules GetCompletionItemRules(
             ImmutableArray<(ISymbol symbol, bool preselect)> symbols,
             CSharpSyntaxContext context
-        ) {
+        )
+        {
             var preselect = symbols.Any(t => t.preselect);
             s_cachedRules.TryGetValue(
                 ValueTuple.Create(
@@ -276,7 +285,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             ImmutableArray<(ISymbol symbol, bool preselect)> symbols,
             CSharpSyntaxContext context,
             SupportedPlatformData? supportedPlatformData
-        ) {
+        )
+        {
             var item = base.CreateItem(
                 completionContext,
                 displayText,
@@ -311,7 +321,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             else if (
                 symbol.IsKind(SymbolKind.NamedType)
                 || symbol is IAliasSymbol aliasSymbol && aliasSymbol.Target.IsType
-            ) {
+            )
+            {
                 // If this is a type symbol/alias symbol, also consider appending parenthesis when later, it is committed by using special characters,
                 // and the type is used as constructor
                 if (context.IsObjectCreationTypeContext)
@@ -325,7 +336,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
         {
             if (
                 ch is ';' or '.' && SymbolCompletionItem.GetShouldProvideParenthesisCompletion(item)
-            ) {
+            )
+            {
                 CompletionProvidersLogger.LogCustomizedCommitToAddParenthesis(ch);
                 return SymbolCompletionItem.GetInsertionText(item) + "()";
             }

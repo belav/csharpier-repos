@@ -320,7 +320,8 @@ namespace System
             bool reflectionOnly,
             ref StackCrawlMark stackMark,
             bool loadTypeFromPartialName
-        ) {
+        )
+        {
             if (typeName == null)
                 throw new ArgumentNullException(nameof(typeName));
 
@@ -375,7 +376,8 @@ namespace System
         internal static IntPtr[]? CopyRuntimeTypeHandles(
             RuntimeTypeHandle[]? inHandles,
             out int length
-        ) {
+        )
+        {
             if (inHandles == null || inHandles.Length == 0)
             {
                 length = 0;

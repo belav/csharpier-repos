@@ -90,7 +90,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 Action<int, TokenStream, TriviaData> formattingResultApplier,
                 CancellationToken cancellationToken,
                 int tokenPairIndex = TokenPairIndexNotNeeded
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }

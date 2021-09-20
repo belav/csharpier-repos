@@ -80,7 +80,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts
             while (
                 frame.SegmentIndex == frame.SegmentGroup.Count
                 && frame.SegmentGroupIndex != Pattern.Contains.Count
-            ) {
+            )
+            {
                 frame.SegmentGroupIndex += 1;
                 frame.SegmentIndex = 0;
                 if (frame.SegmentGroupIndex < Pattern.Contains.Count)

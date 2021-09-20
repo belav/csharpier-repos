@@ -40,7 +40,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CommonControls
             string generatedNameTypeParameterSuffix,
             ImmutableArray<string> conflictingNames,
             ISyntaxFactsService? syntaxFactsService
-        ) {
+        )
+        {
             _defaultName = defaultName;
             _fileExtension = languageName == LanguageNames.CSharp ? ".cs" : ".vb";
             _languageName = languageName;
@@ -130,7 +131,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CommonControls
             if (
                 !Path.GetExtension(trimmedFileName)
                     .Equals(_fileExtension, StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 message = string.Format(
                     ServicesVSResources.File_name_must_have_the_0_extension,
                     _fileExtension

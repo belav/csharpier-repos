@@ -37,10 +37,12 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             PgoTraceProcess traceProcess,
             int clrInstanceID,
             Logger logger
-        ) {
+        )
+        {
             foreach (
                 var traceData in traceProcess.TraceProcess.EventsInProcess.ByEventType<ModuleLoadUnloadTraceData>()
-            ) {
+            )
+            {
                 if (traceData.ModuleILPath != null)
                 {
                     _normalizedFilePathToFilePath[traceData.ModuleILPath] = traceData.ModuleILPath;
@@ -131,7 +133,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
         public override ModuleDesc ResolveAssembly(
             System.Reflection.AssemblyName name,
             bool throwIfNotFound
-        ) {
+        )
+        {
             // TODO: catch typesystem BadImageFormatException and throw a new one that also captures the
             // assembly name that caused the failure. (Along with the reason, which makes this rather annoying).
             return GetModuleForSimpleName(name.Name, throwIfNotFound);
@@ -227,7 +230,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             string filePath,
             byte[] moduleData,
             bool useForBinding
-        ) {
+        )
+        {
             // This method is not expected to be called frequently. Linear search is acceptable.
             foreach (var entry in ModuleHashtable.Enumerator.Get(_moduleHashtable))
             {
@@ -263,7 +267,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             string filePath,
             byte[] moduleBytes,
             out MemoryMappedViewAccessor mappedViewAccessor
-        ) {
+        )
+        {
             // If moduleBytes is specified create PEReader from the in memory array, not from a file on disk
             if (moduleBytes != null)
             {
@@ -330,7 +335,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             string expectedSimpleName,
             byte[] moduleDataBytes,
             bool useForBinding
-        ) {
+        )
+        {
             MemoryMappedViewAccessor mappedViewAccessor = null;
             PdbSymbolReader pdbReader = null;
             try
@@ -446,7 +452,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             MetadataReader metadataReader,
             AssemblyReferenceHandle assemblyReferenceHandle,
             string parentFile
-        ) {
+        )
+        {
             EcmaAssembly ecmaAssembly = (EcmaAssembly)this.GetModuleForSimpleName(
                 metadataReader.GetString(
                     metadataReader.GetAssemblyReference(assemblyReferenceHandle).Name

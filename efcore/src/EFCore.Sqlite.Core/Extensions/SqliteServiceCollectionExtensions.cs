@@ -48,7 +48,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </returns>
         public static IServiceCollection AddEntityFrameworkSqlite(
             this IServiceCollection serviceCollection
-        ) {
+        )
+        {
             Check.NotNull(serviceCollection, nameof(serviceCollection));
 
             var builder = new EntityFrameworkRelationalServicesBuilder(serviceCollection).TryAdd<

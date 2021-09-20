@@ -91,7 +91,8 @@ namespace Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer
             ILogger logger,
             DiagnosticSource diagnosticSource,
             CancellationToken applicationStoppingToken
-        ) {
+        )
+        {
             if (portNumber == default(int))
             {
                 portNumber = TcpPortFinder.FindAvailablePort();

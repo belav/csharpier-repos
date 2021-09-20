@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Razor
             if (
                 compilation.GetTypeByMetadataName(ComponentsApi.EventHandlerAttribute.FullTypeName)
                 is not INamedTypeSymbol eventHandlerAttribute
-            ) {
+            )
+            {
                 // If we can't find EventHandlerAttribute, then just bail. We won't discover anything.
                 return;
             }
@@ -48,7 +49,8 @@ namespace Microsoft.CodeAnalysis.Razor
             TagHelperDescriptorProviderContext context,
             Compilation compilation,
             INamedTypeSymbol eventHandlerAttribute
-        ) {
+        )
+        {
             var types = new List<INamedTypeSymbol>();
             var visitor = new EventHandlerDataVisitor(types);
 
@@ -64,7 +66,8 @@ namespace Microsoft.CodeAnalysis.Razor
                 {
                     if (
                         compilation.GetAssemblyOrModuleSymbol(reference) is IAssemblySymbol assembly
-                    ) {
+                    )
+                    {
                         visitor.Visit(assembly.GlobalNamespace);
                     }
                 }
@@ -89,7 +92,8 @@ namespace Microsoft.CodeAnalysis.Razor
                             attribute.AttributeClass,
                             eventHandlerAttribute
                         )
-                    ) {
+                    )
+                    {
                         var enablePreventDefault = false;
                         var enableStopPropagation = false;
                         if (attribute.ConstructorArguments.Length == 4)
@@ -293,7 +297,8 @@ namespace Microsoft.CodeAnalysis.Razor
                 INamedTypeSymbol eventArgsType,
                 bool enablePreventDefault,
                 bool enableStopPropagation
-            ) {
+            )
+            {
                 Assembly = assembly;
                 TypeName = typeName;
                 Attribute = element;
@@ -329,7 +334,8 @@ namespace Microsoft.CodeAnalysis.Razor
                 if (
                     symbol.Name == "EventHandlers"
                     && symbol.DeclaredAccessibility == Accessibility.Public
-                ) {
+                )
+                {
                     _results.Add(symbol);
                 }
             }
@@ -349,7 +355,8 @@ namespace Microsoft.CodeAnalysis.Razor
                 if (
                     symbol.Name != null
                     && !symbol.Name.StartsWith("System.", StringComparison.Ordinal)
-                ) {
+                )
+                {
                     Visit(symbol.GlobalNamespace);
                 }
             }

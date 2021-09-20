@@ -51,14 +51,16 @@ namespace Microsoft.EntityFrameworkCore
 
             using (
                 var context = new ImplicitServicesExplicitConfigBlogContext(optionsBuilder.Options)
-            ) {
+            )
+            {
                 context.Blogs.Add(new Blog { Name = "The Waffle Cart" });
                 context.SaveChanges();
             }
 
             using (
                 var context = new ImplicitServicesExplicitConfigBlogContext(optionsBuilder.Options)
-            ) {
+            )
+            {
                 var blog = context.Blogs.SingleOrDefault();
 
                 Assert.NotEqual(0, blog.Id);
@@ -299,7 +301,8 @@ namespace Microsoft.EntityFrameworkCore
 
             public InjectContextAndConfigurationController(
                 InjectContextAndConfigurationBlogContext context
-            ) {
+            )
+            {
                 Assert.NotNull(context);
 
                 _context = context;
@@ -417,7 +420,8 @@ namespace Microsoft.EntityFrameworkCore
 
             public InjectDifferentConfigurationsBlogController(
                 InjectDifferentConfigurationsBlogContext context
-            ) {
+            )
+            {
                 Assert.NotNull(context);
 
                 _context = context;
@@ -445,7 +449,8 @@ namespace Microsoft.EntityFrameworkCore
 
             public InjectDifferentConfigurationsAccountController(
                 InjectDifferentConfigurationsAccountContext context
-            ) {
+            )
+            {
                 Assert.NotNull(context);
 
                 _context = context;

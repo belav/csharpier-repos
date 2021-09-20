@@ -201,7 +201,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         internal void AddAnalyzers(
             ImmutableArray<DiagnosticAnalyzer>.Builder builder,
             string language
-        ) {
+        )
+        {
             _diagnosticAnalyzers.AddExtensions(builder, language);
         }
 
@@ -211,14 +212,16 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         internal void AddGenerators(
             ImmutableArray<ISourceGenerator>.Builder builder,
             string language
-        ) {
+        )
+        {
             _generators.AddExtensions(builder, language);
         }
 
         private static AnalyzerLoadFailureEventArgs CreateAnalyzerFailedArgs(
             Exception e,
             string? typeName = null
-        ) {
+        )
+        {
             // unwrap:
             e = (e as TargetInvocationException) ?? e;
 
@@ -254,7 +257,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             string fullPath,
             Type attributeType,
             AttributeLanguagesFunc languagesFunc
-        ) {
+        )
+        {
             using var assembly = AssemblyMetadata.CreateFromFile(fullPath);
 
             // This is longer than strictly necessary to avoid thrashing the GC with string allocations
@@ -287,7 +291,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             PEModule peModule,
             Type attributeType,
             AttributeLanguagesFunc languagesFunc
-        ) {
+        )
+        {
             IEnumerable<string>? result = null;
             foreach (CustomAttributeHandle customAttrHandle in typeDef.GetCustomAttributes())
             {
@@ -298,10 +303,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                         attributeType.Name,
                         ctor: out _
                     )
-                ) {
+                )
+                {
                     if (
                         languagesFunc(peModule, customAttrHandle) is { } attributeSupportedLanguages
-                    ) {
+                    )
+                    {
                         if (result is null)
                         {
                             result = attributeSupportedLanguages;
@@ -322,7 +329,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         private static IEnumerable<string> GetDiagnosticsAnalyzerSupportedLanguages(
             PEModule peModule,
             CustomAttributeHandle customAttrHandle
-        ) {
+        )
+        {
             // The DiagnosticAnalyzerAttribute has one constructor, which has a string parameter for the
             // first supported language and an array parameter for additional supported languages.
             // Parse the argument blob to extract the languages.
@@ -335,7 +343,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         private static IEnumerable<string> GetGeneratorSupportedLanguages(
             PEModule peModule,
             CustomAttributeHandle customAttrHandle
-        ) {
+        )
+        {
             // The GeneratorAttribute has two constructors: one default, and one with a string parameter for the
             // first supported language and an array parameter for additional supported languages.
             BlobReader argsReader = peModule.GetMemoryReaderOrThrow(
@@ -363,7 +372,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     string firstLanguageName;
                     if (
                         !PEModule.CrackStringInAttributeValue(out firstLanguageName, ref argsReader)
-                    ) {
+                    )
+                    {
                         return SpecializedCollections.EmptyEnumerable<string>();
                     }
 
@@ -373,7 +383,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                             out additionalLanguageNames,
                             ref argsReader
                         )
-                    ) {
+                    )
+                    {
                         if (additionalLanguageNames.Length == 0)
                         {
                             return SpecializedCollections.SingletonEnumerable(firstLanguageName);
@@ -425,7 +436,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 Type attributeType,
                 AttributeLanguagesFunc languagesFunc,
                 bool allowNetFramework
-            ) {
+            )
+            {
                 _reference = reference;
                 _attributeType = attributeType;
                 _languagesFunc = languagesFunc;
@@ -451,7 +463,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             private static ImmutableArray<TExtension> CreateExtensionsForAllLanguages(
                 Extensions<TExtension> extensions,
                 bool includeDuplicates
-            ) {
+            )
+            {
                 // Get all analyzers in the assembly.
                 var map = ImmutableSortedDictionary.CreateBuilder<
                     string,
@@ -506,7 +519,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             private static ImmutableArray<TExtension> CreateLanguageSpecificExtensions(
                 string language,
                 Extensions<TExtension> extensions
-            ) {
+            )
+            {
                 // Get all analyzers in the assembly for the given language.
                 var builder = ImmutableArray.CreateBuilder<TExtension>();
                 extensions.AddExtensions(builder, language);
@@ -537,7 +551,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
             internal void AddExtensions(
                 ImmutableSortedDictionary<string, ImmutableArray<TExtension>>.Builder builder
-            ) {
+            )
+            {
                 ImmutableSortedDictionary<string, ImmutableSortedSet<string>> analyzerTypeNameMap;
                 Assembly analyzerAssembly;
 
@@ -650,14 +665,16 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 ImmutableSortedDictionary<string, ImmutableSortedSet<string>> analyzerTypeNameMap,
                 string language,
                 ref bool reportedError
-            ) {
+            )
+            {
                 ImmutableSortedSet<string>? languageSpecificAnalyzerTypeNames;
                 if (
                     !analyzerTypeNameMap.TryGetValue(
                         language,
                         out languageSpecificAnalyzerTypeNames
                     )
-                ) {
+                )
+                {
                     return ImmutableArray<TExtension>.Empty;
                 }
                 return this.GetAnalyzersForTypeNames(
@@ -671,7 +688,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 Assembly analyzerAssembly,
                 IEnumerable<string> analyzerTypeNames,
                 ref bool reportedError
-            ) {
+            )
+            {
                 var analyzers = ImmutableArray.CreateBuilder<TExtension>();
 
                 // Given the type names, get the actual System.Type and try to create an instance of the type through reflection.
@@ -709,7 +727,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                                 ".NETFramework",
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             _reference.AnalyzerLoadFailed?.Invoke(
                                 _reference,
                                 new AnalyzerLoadFailureEventArgs(

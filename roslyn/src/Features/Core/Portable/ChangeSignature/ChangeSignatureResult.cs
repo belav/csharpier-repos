@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             bool previewChanges = false,
             ChangeSignatureFailureKind? changeSignatureFailureKind = null,
             string? confirmationMessage = null
-        ) {
+        )
+        {
             Succeeded = succeeded;
             UpdatedSolution = updatedSolution;
             Name = name;

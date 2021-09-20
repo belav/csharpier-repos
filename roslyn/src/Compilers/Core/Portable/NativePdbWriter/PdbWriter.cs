@@ -46,7 +46,8 @@ namespace Microsoft.Cci
             string fileName,
             Func<ISymWriterMetadataProvider, SymUnmanagedWriter> symWriterFactory,
             HashAlgorithmName hashAlgorithmNameOpt
-        ) {
+        )
+        {
             _fileName = fileName;
             _symWriterFactory = symWriterFactory;
             _hashAlgorithmNameOpt = hashAlgorithmNameOpt;
@@ -73,7 +74,8 @@ namespace Microsoft.Cci
             IMethodBody methodBody,
             StandaloneSignatureHandle localSignatureHandleOpt,
             CustomDebugInfoWriter customDebugInfoWriter
-        ) {
+        )
+        {
             Debug.Assert(_metadataWriter != null);
 
             // A state machine kickoff method doesn't have sequence points as it only contains generated code.
@@ -119,7 +121,8 @@ namespace Microsoft.Cci
                         methodHandle,
                         out forwardToMethod
                     )
-                ) {
+                )
+                {
                     if (forwardToMethod != null)
                     {
                         UsingNamespace(
@@ -286,7 +289,8 @@ namespace Microsoft.Cci
             UsedNamespaceOrType import,
             HashSet<string> declaredExternAliasesOpt,
             bool isProjectLevel
-        ) {
+        )
+        {
             // NOTE: Dev12 has related cases "I" and "O" in EMITTER::ComputeDebugNamespace,
             // but they were probably implementation details that do not affect Roslyn.
 
@@ -490,7 +494,8 @@ namespace Microsoft.Cci
         private string GetAssemblyReferenceAlias(
             IAssemblyReference assembly,
             HashSet<string> declaredExternAliases
-        ) {
+        )
+        {
             // no extern alias defined in scope at all -> error in compiler
             Debug.Assert(declaredExternAliases != null);
 
@@ -524,7 +529,8 @@ namespace Microsoft.Cci
         private void DefineLocalScopes(
             ImmutableArray<LocalScope> scopes,
             StandaloneSignatureHandle localSignatureHandleOpt
-        ) {
+        )
+        {
             // VB scope ranges are end-inclusive
             bool endInclusive = this.Module.GenerateVisualBasicStylePdb;
 
@@ -569,7 +575,8 @@ namespace Microsoft.Cci
         private void DefineScopeLocals(
             LocalScope currentScope,
             StandaloneSignatureHandle localSignatureHandleOpt
-        ) {
+        )
+        {
             foreach (ILocalDefinition scopeConstant in currentScope.Constants)
             {
                 var signatureHandle = _metadataWriter.SerializeLocalConstantStandAloneSignature(
@@ -793,7 +800,8 @@ namespace Microsoft.Cci
         // If left unfixed, such scenarios will lead to crashes if happen in winmdobj projects
         public void AssertAllDefinitionsHaveTokens(
             MultiDictionary<DebugSourceDocument, DefinitionWithLocation> file2definitions
-        ) {
+        )
+        {
             foreach (var kvp in file2definitions)
             {
                 foreach (var definition in kvp.Value)
@@ -809,7 +817,8 @@ namespace Microsoft.Cci
         // Note: only used for WinMD
         public void WriteDefinitionLocations(
             MultiDictionary<DebugSourceDocument, DefinitionWithLocation> file2definitions
-        ) {
+        )
+        {
             // Only open and close the map if we have any mapping.
             bool open = false;
 
@@ -882,11 +891,13 @@ namespace Microsoft.Cci
         /// </remarks>
         public void WriteRemainingDebugDocuments(
             IReadOnlyDictionary<string, DebugSourceDocument> documents
-        ) {
+        )
+        {
             foreach (
                 var kvp in documents.Where(kvp => !_documentIndex.ContainsKey(kvp.Value))
                     .OrderBy(kvp => kvp.Key)
-            ) {
+            )
+            {
                 AddDocumentIndex(kvp.Value);
             }
         }

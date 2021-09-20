@@ -132,7 +132,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             string input,
             int startIndex,
             out int length
-        ) {
+        )
+        {
             var nestedCount = 0;
             return GetExpressionLength(
                 input,
@@ -151,7 +152,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             string input,
             int startIndex,
             out int length
-        ) {
+        )
+        {
             Debug.Assert(input != null);
             Debug.Assert((startIndex >= 0) && (startIndex < input.Length));
 
@@ -193,7 +195,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             bool supportsNesting,
             ref int nestedCount,
             out int length
-        ) {
+        )
+        {
             Debug.Assert(input != null);
             Debug.Assert((startIndex >= 0) && (startIndex < input.Length));
 
@@ -215,7 +218,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                         GetQuotedPairLength(input, current, out var quotedPairLength)
                         == HttpParseResult.Parsed
                     )
-                ) {
+                )
+                {
                     // We ignore invalid quoted-pairs. Invalid quoted-pairs may mean that it looked like a quoted pair,
                     // but we actually have a quoted-string: e.g. "\ü" ('\' followed by a char >127 - quoted-pair only
                     // allows ASCII chars after '\'; qdtext allows both '\' and >127 chars).

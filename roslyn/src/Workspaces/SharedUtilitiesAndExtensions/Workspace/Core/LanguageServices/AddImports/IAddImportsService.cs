@@ -59,7 +59,8 @@ namespace Microsoft.CodeAnalysis.AddImports
             bool placeSystemNamespaceFirst,
             bool allowInHiddenRegions,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return service.AddImports(
                 compilation,
                 root,

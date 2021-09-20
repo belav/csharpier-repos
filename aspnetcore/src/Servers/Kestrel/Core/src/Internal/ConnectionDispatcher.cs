@@ -25,7 +25,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
             ServiceContext serviceContext,
             Func<T, Task> connectionDelegate,
             TransportConnectionManager transportConnectionManager
-        ) {
+        )
+        {
             _serviceContext = serviceContext;
             _connectionDelegate = connectionDelegate;
             _transportConnectionManager = transportConnectionManager;

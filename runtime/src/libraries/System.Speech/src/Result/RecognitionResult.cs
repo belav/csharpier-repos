@@ -26,7 +26,8 @@ namespace System.Speech.Recognition
             ISpRecoResult recoResult,
             byte[] sapiResultBlob,
             int maxAlternates
-        ) {
+        )
+        {
             Initialize(recognizer, recoResult, sapiResultBlob, maxAlternates);
         }
 
@@ -57,7 +58,8 @@ namespace System.Speech.Recognition
                         && mi.Name != "_audio"
                         && mi.Name != "_audio"
                     )
-                ) {
+                )
+                {
                     fi.SetValue(this, info.GetValue(fi.Name, fi.FieldType));
                 }
             }
@@ -69,7 +71,8 @@ namespace System.Speech.Recognition
         public RecognizedAudio GetAudioForWordRange(
             RecognizedWordUnit firstWord,
             RecognizedWordUnit lastWord
-        ) {
+        )
+        {
             Helpers.ThrowIfNull(firstWord, nameof(firstWord));
             Helpers.ThrowIfNull(lastWord, nameof(lastWord));
 
@@ -101,7 +104,8 @@ namespace System.Speech.Recognition
                             || phrase.Semantics == null
                             || (sml == null && sml != null)
                             || (audio == null && audio != null)
-                        ) {
+                        )
+                        {
                             throw new SerializationException();
                         }
                     }
@@ -127,7 +131,8 @@ namespace System.Speech.Recognition
                         && mi.Name != "_audio"
                         && mi.Name != "_audio"
                     )
-                ) {
+                )
+                {
                     info.AddValue(mi.Name, ((FieldInfo)mi).GetValue(this));
                 }
             }
@@ -334,7 +339,8 @@ namespace System.Speech.Recognition
             ISpRecoResult recoResult,
             byte[] sapiResultBlob,
             int maxAlternates
-        ) {
+        )
+        {
             // record parameters
             _recognizer = recognizer;
             _maxAlternates = maxAlternates;
@@ -437,7 +443,8 @@ namespace System.Speech.Recognition
         private Collection<RecognizedPhrase> ExtractAlternates(
             int numberOfAlternates,
             bool isSapi53Header
-        ) {
+        )
+        {
             Collection<RecognizedPhrase> alternates = new();
 
             if (numberOfAlternates > 0)

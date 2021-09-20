@@ -54,7 +54,8 @@ namespace System.Drawing.Printing.Tests
             PrinterUnit fromUnit,
             PrinterUnit toUnit,
             int expectedResult
-        ) {
+        )
+        {
             var converted = PrinterUnitConvert.Convert(100, fromUnit, toUnit);
             Assert.Equal(expectedResult, converted);
         }
@@ -96,7 +97,8 @@ namespace System.Drawing.Printing.Tests
             PrinterUnit toUnit,
             int expectedX,
             int expectedY
-        ) {
+        )
+        {
             var converted = PrinterUnitConvert.Convert(new Point(100, 1000), fromUnit, toUnit);
             Assert.Equal(new Point(expectedX, expectedY), converted);
         }
@@ -138,7 +140,8 @@ namespace System.Drawing.Printing.Tests
             PrinterUnit toUnit,
             int expectedLeftValue,
             int expectedRightValue
-        ) {
+        )
+        {
             var converted = PrinterUnitConvert.Convert(
                 new Rectangle(100, 1000, 100, 1000),
                 fromUnit,
@@ -192,7 +195,8 @@ namespace System.Drawing.Printing.Tests
             PrinterUnit toUnit,
             int expectedX,
             int expectedY
-        ) {
+        )
+        {
             var converted = PrinterUnitConvert.Convert(new Size(100, 1000), fromUnit, toUnit);
             Assert.Equal(new Size(expectedX, expectedY), converted);
         }
@@ -291,7 +295,8 @@ namespace System.Drawing.Printing.Tests
             int expectedRight,
             int expectedTop,
             int expectedBottom
-        ) {
+        )
+        {
             var converted = PrinterUnitConvert.Convert(
                 new Margins(100, 1000, 100, 1000),
                 fromUnit,

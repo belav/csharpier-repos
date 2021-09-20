@@ -29,7 +29,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             Solution solution,
             IGraphContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var graphBuilder = await GraphBuilder.CreateForInputNodesAsync(
                     solution,
                     context.InputNodes,
@@ -49,7 +50,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             Project project,
             GraphBuilder graphBuilder,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var cacheService = project.Solution.Services.CacheService;
             if (cacheService != null)
             {
@@ -87,7 +89,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             INamedTypeSymbol namedType,
             GraphBuilder graphBuilder,
             IEnumerable<SyntaxTree> syntaxTrees
-        ) {
+        )
+        {
             // If this named type is contained in a parent type, then just link farther up
             if (namedType.ContainingType != null)
             {
@@ -134,7 +137,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             Project project,
             ISymbol symbol,
             GraphBuilder graphBuilder
-        ) {
+        )
+        {
             var member = symbol;
             Contract.ThrowIfNull(member.ContainingType);
 
@@ -157,7 +161,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
         internal async Task<ImmutableArray<ISymbol>> FindNavigableSourceSymbolsAsync(
             Project project,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ImmutableArray<ISymbol> declarations;
 
             // FindSourceDeclarationsWithPatternAsync calls into OOP to do the search; if something goes badly it
@@ -199,7 +204,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                     symbol.IsConstructor()
                     || symbol.IsStaticConstructor()
                     || symbol is INamespaceSymbol
-                ) {
+                )
+                {
                     continue;
                 }
 

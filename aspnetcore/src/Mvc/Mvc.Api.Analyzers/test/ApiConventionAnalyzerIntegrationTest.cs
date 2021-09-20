@@ -234,7 +234,8 @@ namespace Test
             DiagnosticDescriptor descriptor,
             object[] args,
             [CallerMemberName] string testMethod = ""
-        ) {
+        )
+        {
             // Arrange
             var testSource = MvcTestSource.Read(GetType().Name, testMethod);
             var expectedLocation = testSource.DefaultMarkerLocation;
@@ -268,7 +269,8 @@ namespace Test
 
             protected override CompilationOptions ConfigureCompilationOptions(
                 CompilationOptions options
-            ) {
+            )
+            {
                 var compilationOptions = base.ConfigureCompilationOptions(options);
 
                 // 10006 is disabled by default. Explicitly enable it so we can correctly validate no diagnostics

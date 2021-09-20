@@ -237,7 +237,8 @@ namespace Internal.TypeSystem.Ecma
         public static PdbSymbolReader TryOpenSymbolReaderForMetadataFile(
             string metadataFileName,
             string searchPath
-        ) {
+        )
+        {
             try
             {
                 if (s_metadataDispenser == null || s_symBinder == null)

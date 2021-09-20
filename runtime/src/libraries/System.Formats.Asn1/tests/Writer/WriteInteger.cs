@@ -123,7 +123,8 @@ namespace System.Formats.Asn1.Tests.Writer
             AsnEncodingRules ruleSet,
             long value,
             string expectedHex
-        ) {
+        )
+        {
             AsnWriter writer = new AsnWriter(ruleSet);
             writer.WriteInteger(value);
 
@@ -200,7 +201,8 @@ namespace System.Formats.Asn1.Tests.Writer
             AsnEncodingRules ruleSet,
             ulong value,
             string expectedHex
-        ) {
+        )
+        {
             AsnWriter writer = new AsnWriter(ruleSet);
             writer.WriteInteger(value);
 
@@ -236,7 +238,8 @@ namespace System.Formats.Asn1.Tests.Writer
             AsnEncodingRules ruleSet,
             string decimalValue,
             string expectedHex
-        ) {
+        )
+        {
             BigInteger value = BigInteger.Parse(decimalValue);
 
             AsnWriter writer = new AsnWriter(ruleSet);
@@ -253,7 +256,8 @@ namespace System.Formats.Asn1.Tests.Writer
             AsnEncodingRules ruleSet,
             long value,
             string expectedHex
-        ) {
+        )
+        {
             AsnWriter writer = new AsnWriter(ruleSet);
             writer.WriteInteger(value, new Asn1Tag(TagClass.Application, 7));
 
@@ -268,7 +272,8 @@ namespace System.Formats.Asn1.Tests.Writer
             AsnEncodingRules ruleSet,
             ulong value,
             string expectedHex
-        ) {
+        )
+        {
             AsnWriter writer = new AsnWriter(ruleSet);
             writer.WriteInteger(value, new Asn1Tag(TagClass.ContextSpecific, 9));
 
@@ -296,7 +301,8 @@ namespace System.Formats.Asn1.Tests.Writer
             AsnEncodingRules ruleSet,
             string decimalValue,
             string expectedHex
-        ) {
+        )
+        {
             BigInteger value = BigInteger.Parse(decimalValue);
 
             AsnWriter writer = new AsnWriter(ruleSet);
@@ -452,7 +458,8 @@ namespace System.Formats.Asn1.Tests.Writer
         [InlineData("007F")]
         public void VerifyWriteIntegerUnsigned_Application3_InvalidEncodedValue_Throws(
             string valueHex
-        ) {
+        )
+        {
             AsnWriter writer = new AsnWriter(AsnEncodingRules.BER);
             Asn1Tag tag = new Asn1Tag(TagClass.Application, 3);
 

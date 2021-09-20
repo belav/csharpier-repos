@@ -28,7 +28,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
         public InMemoryStoreCache(
             IInMemoryTableFactory tableFactory,
             IInMemorySingletonOptions? options
-        ) {
+        )
+        {
             _tableFactory = tableFactory;
 
             if (options?.DatabaseRoot != null)

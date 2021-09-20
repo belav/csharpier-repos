@@ -102,7 +102,8 @@ namespace System.Formats.Cbor.Tests
         public static void WriteUInt64_SingleValue_HappyPath(
             ulong input,
             string hexExpectedEncoding
-        ) {
+        )
+        {
             byte[] expectedEncoding = hexExpectedEncoding.HexToByteArray();
             var writer = new CborWriter();
             writer.WriteUInt64(input);
@@ -146,7 +147,8 @@ namespace System.Formats.Cbor.Tests
         public static void WriteCborNegativeIntegerRepresentation_SingleValue_HappyPath(
             ulong input,
             string hexExpectedEncoding
-        ) {
+        )
+        {
             byte[] expectedEncoding = hexExpectedEncoding.HexToByteArray();
             var writer = new CborWriter();
             writer.WriteCborNegativeIntegerRepresentation(input);

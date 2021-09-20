@@ -333,7 +333,8 @@ namespace System.Globalization
             string str,
             int index,
             out int charLength
-        ) {
+        )
+        {
             Debug.Assert(str != null, "str can not be null");
             Debug.Assert(str.Length > 0, "str.Length > 0");
             Debug.Assert(index >= 0 && index < str.Length, "index >= 0 && index < str.Length");

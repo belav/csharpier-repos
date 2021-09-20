@@ -10,7 +10,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             int defaultDestination,
             int existDestination,
             params (string text, int destination)[] entries
-        ) {
+        )
+        {
             return new LinearSearchJumpTable(defaultDestination, existDestination, entries);
         }
     }

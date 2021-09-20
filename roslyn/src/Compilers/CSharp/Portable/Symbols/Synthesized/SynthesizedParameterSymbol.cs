@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             int ordinal,
             RefKind refKind,
             string name = ""
-        ) {
+        )
+        {
             RoslynDebug.Assert(type.HasType);
             RoslynDebug.Assert(name != null);
             RoslynDebug.Assert(ordinal >= 0);
@@ -135,7 +136,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void AddSynthesizedAttributes(
             PEModuleBuilder moduleBuilder,
             ref ArrayBuilder<SynthesizedAttributeData> attributes
-        ) {
+        )
+        {
             // Emit [Dynamic] on synthesized parameter symbols when the original parameter was dynamic
             // in order to facilitate debugging.  In the case the necessary attributes are missing
             // this is a no-op.  Emitting an error here, or when the original parameter was bound, would
@@ -149,7 +151,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     Location.None
                 )
                 && compilation.CanEmitBoolean()
-            ) {
+            )
+            {
                 AddSynthesizedAttribute(
                     ref attributes,
                     compilation.SynthesizeDynamicAttribute(
@@ -175,7 +178,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     Location.None
                 )
                 && compilation.CanEmitSpecialType(SpecialType.System_String)
-            ) {
+            )
+            {
                 AddSynthesizedAttribute(
                     ref attributes,
                     compilation.SynthesizeTupleNamesAttribute(type.Type)
@@ -222,7 +226,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             string name = "",
             ImmutableArray<CustomModifier> refCustomModifiers = default,
             SourceComplexParameterSymbol? baseParameterForAttributes = null
-        ) {
+        )
+        {
             if (refCustomModifiers.IsDefaultOrEmpty && baseParameterForAttributes is null)
             {
                 return new SynthesizedParameterSymbol(container, type, ordinal, refKind, name);
@@ -249,7 +254,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal static ImmutableArray<ParameterSymbol> DeriveParameters(
             MethodSymbol sourceMethod,
             MethodSymbol destinationMethod
-        ) {
+        )
+        {
             var builder = ArrayBuilder<ParameterSymbol>.GetInstance();
 
             foreach (var oldParam in sourceMethod.Parameters)

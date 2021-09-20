@@ -308,7 +308,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void TimeToLive_GetWithElementExtension_ReturnsExpected(
             object value,
             TimeSpan? expectedValue
-        ) {
+        )
+        {
             var feed = new SyndicationFeed();
             feed.ElementExtensions.Add(new SyndicationElementExtension("other", "", 10));
             feed.ElementExtensions.Add(new SyndicationElementExtension("ttl", "other", 10));

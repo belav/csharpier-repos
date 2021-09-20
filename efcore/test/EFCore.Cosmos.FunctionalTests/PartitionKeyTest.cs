@@ -99,7 +99,8 @@ OFFSET 0 LIMIT 1";
             Func<PartitionKeyContext, Task<Customer>> readLastTask,
             Func<PartitionKeyContext, Task<List<Customer>>> readListTask,
             int listCount
-        ) {
+        )
+        {
             var customer1 = new Customer { Id = 42, Name = "Theon", PartitionKey = 1 };
 
             var customer2 = new Customer { Id = 42, Name = "Theon Twin", PartitionKey = 2 };

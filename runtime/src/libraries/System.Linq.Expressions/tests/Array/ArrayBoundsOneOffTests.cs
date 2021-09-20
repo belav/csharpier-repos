@@ -40,7 +40,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void ArrayBoundsMultiDimensionalNegativeThrowsOverflowException(
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<int, int, int[,]>> e = (a, b) => new int[a, b];
             Func<int, int, int[,]> f = e.Compile(useInterpreter);
 

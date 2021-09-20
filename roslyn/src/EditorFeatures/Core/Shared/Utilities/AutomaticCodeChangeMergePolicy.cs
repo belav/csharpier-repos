@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
         public bool CanMerge(
             ITextUndoTransaction newerTransaction,
             ITextUndoTransaction olderTransaction
-        ) {
+        )
+        {
             // We want to merge with any other transaction of our policy type
             return true;
         }
@@ -25,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
         public void PerformTransactionMerge(
             ITextUndoTransaction existingTransaction,
             ITextUndoTransaction newTransaction
-        ) {
+        )
+        {
             // Add all of our commit primitives into the existing transaction
             foreach (var primitive in newTransaction.UndoPrimitives)
             {

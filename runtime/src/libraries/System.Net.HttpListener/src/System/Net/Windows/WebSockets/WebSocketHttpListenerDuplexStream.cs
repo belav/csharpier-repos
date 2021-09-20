@@ -47,7 +47,8 @@ namespace System.Net.WebSockets
             HttpRequestStream inputStream,
             HttpResponseStream outputStream,
             HttpListenerContext context
-        ) {
+        )
+        {
             Debug.Assert(inputStream != null, "'inputStream' MUST NOT be NULL.");
             Debug.Assert(outputStream != null, "'outputStream' MUST NOT be NULL.");
             Debug.Assert(context != null, "'context' MUST NOT be NULL.");
@@ -106,7 +107,8 @@ namespace System.Net.WebSockets
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             WebSocketValidate.ValidateBuffer(buffer, offset, count);
 
             return ReadAsyncCore(buffer, offset, count, cancellationToken);
@@ -117,7 +119,8 @@ namespace System.Net.WebSockets
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             CancellationTokenRegistration cancellationTokenRegistration = default;
 
             int bytesRead = 0;
@@ -273,13 +276,15 @@ namespace System.Net.WebSockets
                     statusCode != Interop.HttpApi.ERROR_SUCCESS
                     && statusCode != Interop.HttpApi.ERROR_IO_PENDING
                     && statusCode != Interop.HttpApi.ERROR_HANDLE_EOF
-                ) {
+                )
+                {
                     throw new HttpListenerException((int)statusCode);
                 }
                 else if (
                     statusCode == Interop.HttpApi.ERROR_SUCCESS
                     && HttpListener.SkipIOCPCallbackOnSuccess
-                ) {
+                )
+                {
                     // IO operation completed synchronously. No IO completion port callback is used because
                     // it was disabled in SwitchToOpaqueMode()
                     eventArgs.FinishOperationSuccess((int)bytesReturned, true);
@@ -323,7 +328,8 @@ namespace System.Net.WebSockets
             int count,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             return _inputStream.BeginRead(buffer, offset, count, callback, state);
         }
 
@@ -335,7 +341,8 @@ namespace System.Net.WebSockets
         public Task MultipleWriteAsync(
             IList<ArraySegment<byte>> sendBuffers,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(_inOpaqueMode, "The stream MUST be in opaque mode at this point.");
             Debug.Assert(sendBuffers != null, "'sendBuffers' MUST NOT be NULL.");
             Debug.Assert(
@@ -355,7 +362,8 @@ namespace System.Net.WebSockets
         private async Task MultipleWriteAsyncCore(
             IList<ArraySegment<byte>> sendBuffers,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(sendBuffers != null, "'sendBuffers' MUST NOT be NULL.");
             Debug.Assert(sendBuffers.Count == 2, "'sendBuffers.Count' MUST be '2' at this point.");
 
@@ -413,7 +421,8 @@ namespace System.Net.WebSockets
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             WebSocketValidate.ValidateBuffer(buffer, offset, count);
 
             return WriteAsyncCore(buffer, offset, count, cancellationToken);
@@ -424,7 +433,8 @@ namespace System.Net.WebSockets
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             CancellationTokenRegistration cancellationTokenRegistration = default;
 
             try
@@ -531,13 +541,15 @@ namespace System.Net.WebSockets
                 if (
                     statusCode != Interop.HttpApi.ERROR_SUCCESS
                     && statusCode != Interop.HttpApi.ERROR_IO_PENDING
-                ) {
+                )
+                {
                     throw new HttpListenerException((int)statusCode);
                 }
                 else if (
                     statusCode == Interop.HttpApi.ERROR_SUCCESS
                     && HttpListener.SkipIOCPCallbackOnSuccess
-                ) {
+                )
+                {
                     // IO operation completed synchronously - callback won't be called to signal completion.
                     eventArgs.FinishOperationSuccess((int)bytesSent, true);
                     completedAsynchronouslyOrWithError = false;
@@ -570,7 +582,8 @@ namespace System.Net.WebSockets
             int count,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             return _outputStream.BeginWrite(buffer, offset, count, callback, state);
         }
 
@@ -1027,7 +1040,8 @@ namespace System.Net.WebSockets
             internal void StartOperationCommon(
                 WebSocketHttpListenerDuplexStream currentStream,
                 ThreadPoolBoundHandle boundHandle
-            ) {
+            )
+            {
                 // Change status to "in-use".
                 if (Interlocked.CompareExchange(ref _operating, InProgress, Free) != Free)
                 {
@@ -1268,11 +1282,13 @@ namespace System.Net.WebSockets
                 uint errorCode,
                 uint numBytes,
                 NativeOverlapped* nativeOverlapped
-            ) {
+            )
+            {
                 if (
                     errorCode == Interop.HttpApi.ERROR_SUCCESS
                     || errorCode == Interop.HttpApi.ERROR_HANDLE_EOF
-                ) {
+                )
+                {
                     FinishOperationSuccess((int)numBytes, false);
                 }
                 else

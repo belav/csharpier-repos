@@ -74,7 +74,8 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
             uint frameSize,
             uint untrackedCnt,
             uint varPtrTableSize
-        ) {
+        )
+        {
             PrologSize = prologSize;
             EpilogSize = epilogSize;
             EpilogCount = epilogCount;

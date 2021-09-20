@@ -26,7 +26,8 @@ namespace System.Text.Json.Serialization.Converters
             ref Utf8JsonReader reader,
             ref ReadStack state,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             JsonTypeInfo typeInfo = state.Current.JsonTypeInfo;
 
             if (TypeToConvert.IsInterface || TypeToConvert.IsAbstract)
@@ -73,7 +74,8 @@ namespace System.Text.Json.Serialization.Converters
             TCollection value,
             JsonSerializerOptions options,
             ref WriteStack state
-        ) {
+        )
+        {
             IList list = value;
 
             // Using an index is 2x faster than using an enumerator.

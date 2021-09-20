@@ -48,7 +48,8 @@ namespace Microsoft.WebMatrix.Utility
             string challenge,
             WebRequest request,
             ICredentials credentials
-        ) {
+        )
+        {
             HttpWebRequest httpWebRequest = request as HttpWebRequest;
             if (httpWebRequest == null)
             {
@@ -59,7 +60,8 @@ namespace Microsoft.WebMatrix.Utility
             if (
                 challenge == null
                 || !challenge.StartsWith(AuthenticationTypeName, StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -69,7 +71,8 @@ namespace Microsoft.WebMatrix.Utility
         Authorization IAuthenticationModule.PreAuthenticate(
             WebRequest request,
             ICredentials credentials
-        ) {
+        )
+        {
             HttpWebRequest httpWebRequest = request as HttpWebRequest;
 
             if (httpWebRequest == null)
@@ -101,7 +104,8 @@ namespace Microsoft.WebMatrix.Utility
             if (
                 policy != null
                 && !policy.ShouldSendCredential(httpWebRequest.RequestUri, httpWebRequest, nc, this)
-            ) {
+            )
+            {
                 return null;
             }
 

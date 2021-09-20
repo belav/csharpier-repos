@@ -32,9 +32,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public SqliteAnnotationProvider(
-            RelationalAnnotationProviderDependencies dependencies
-        ) : base(dependencies) { }
+        public SqliteAnnotationProvider(RelationalAnnotationProviderDependencies dependencies)
+            : base(dependencies) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -47,7 +46,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Metadata.Internal
             if (
                 model.Tables.SelectMany(t => t.Columns)
                     .Any(c => SqliteTypeMappingSource.IsSpatialiteType(c.StoreType))
-            ) {
+            )
+            {
                 yield return new Annotation(SqliteAnnotationNames.InitSpatialMetaData, true);
             }
         }
@@ -71,7 +71,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Metadata.Internal
                 && property.ValueGenerated == ValueGenerated.OnAdd
                 && property.ClrType.UnwrapNullableType().IsInteger()
                 && !HasConverter(property)
-            ) {
+            )
+            {
                 yield return new Annotation(SqliteAnnotationNames.Autoincrement, true);
             }
 

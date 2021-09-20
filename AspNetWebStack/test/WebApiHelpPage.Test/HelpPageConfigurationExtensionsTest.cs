@@ -248,7 +248,8 @@ namespace WebApiHelpPageWebHost.UnitTest
         public void GetHelpPageApiModel_ReturnsExpectedRequestModelDescription(
             string apiId,
             bool hasRequestModelDescription
-        ) {
+        )
+        {
             HttpConfiguration config = new HttpConfiguration();
             config.Routes.MapHttpRoute(
                 "Default",

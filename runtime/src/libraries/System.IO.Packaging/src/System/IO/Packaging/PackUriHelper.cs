@@ -287,7 +287,8 @@ namespace System.IO.Packaging
                     PackageRelationship.ContainerRelationshipPartName,
                     relationshipPartUri
                 ) == 0
-            ) {
+            )
+            {
                 return PackageRootUri;
             }
             else
@@ -347,7 +348,8 @@ namespace System.IO.Packaging
         internal static bool TryValidatePartUri(
             Uri partUri,
             [NotNullWhen(true)] out ValidatedPartUri? validatedPartUri
-        ) {
+        )
+        {
             var validatedUri = partUri as ValidatedPartUri;
             if (validatedUri != null)
             {
@@ -423,7 +425,8 @@ namespace System.IO.Packaging
         private static Exception? GetExceptionIfPartUriInvalid(
             Uri partUri,
             out string partUriString
-        ) {
+        )
+        {
             partUriString = string.Empty;
 
             if (partUri == null)
@@ -551,7 +554,8 @@ namespace System.IO.Packaging
         // Resolved URI - `http://m
         private static ArgumentException? GetExceptionIfPartNameStartsWithTwoSlashes(
             string partName
-        ) {
+        )
+        {
             if (partName.Length > 1)
             {
                 if (partName[0] == ForwardSlashChar && partName[1] == ForwardSlashChar)
@@ -905,7 +909,8 @@ namespace System.IO.Packaging
                 if (
                     (segments.Length >= 3)
                     && (segments[segments.Length - 1].Length > RelationshipPartExtensionName.Length)
-                ) {
+                )
+                {
                     // look for "_RELS" segment which must be second last segment
                     result = (
                         string.CompareOrdinal(
@@ -924,7 +929,8 @@ namespace System.IO.Packaging
                             RelsrelsUpperCaseExtension,
                             StringComparison.Ordinal
                         )
-                    ) {
+                    )
+                    {
                         // look for "_rels" segment in the third last segment
                         if (
                             string.CompareOrdinal(

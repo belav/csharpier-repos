@@ -34,7 +34,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
             AlwaysActivateInProcLanguageClient languageClient,
             Lazy<ILanguageClientBroker> languageClientBroker,
             IAsynchronousOperationListenerProvider listenerProvider
-        ) {
+        )
+        {
             _languageClient = languageClient;
             _languageClientBroker = languageClientBroker;
             _asynchronousOperationListener = listenerProvider.GetListener(

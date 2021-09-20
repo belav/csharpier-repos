@@ -92,7 +92,8 @@ namespace System.Runtime.InteropServices.JavaScript
                     !_boundObjects.TryGetValue(jsId, out WeakReference<JSObject>? reference)
                     || !reference.TryGetTarget(out target)
                     || target.IsDisposed
-                ) {
+                )
+                {
                     IntPtr jsIntPtr = (IntPtr)jsId;
                     target =
                         mappedType > 0
@@ -120,7 +121,8 @@ namespace System.Runtime.InteropServices.JavaScript
                     if (
                         !wr.TryGetTarget(out JSObject? instance)
                         || (instance.Int32Handle != (int)(IntPtr)h && h.IsAllocated)
-                    ) {
+                    )
+                    {
                         throw new JSException(SR.Format(SR.MultipleHandlesPointingJsId, jsId));
                     }
 

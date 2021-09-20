@@ -67,7 +67,8 @@ namespace System.Linq.Parallel
             Func<TInputOutput, TKey2> key2Selector,
             IComparer<TKey2>? key2Comparer,
             bool descending
-        ) {
+        )
+        {
             key2Comparer = key2Comparer ?? Util.GetDefaultComparer<TKey2>();
 
             if (descending)
@@ -98,7 +99,8 @@ namespace System.Linq.Parallel
         internal override QueryResults<TInputOutput> Open(
             QuerySettings settings,
             bool preferStriping
-        ) {
+        )
+        {
             QueryResults<TInputOutput> childQueryResults = Child.Open(settings, false);
             return new SortQueryOperatorResults<TInputOutput, TSortKey>(
                 childQueryResults,
@@ -112,7 +114,8 @@ namespace System.Linq.Parallel
             IPartitionedStreamRecipient<TInputOutput> recipient,
             bool preferStriping,
             QuerySettings settings
-        ) {
+        )
+        {
             PartitionedStream<TInputOutput, TSortKey> outputStream = new PartitionedStream<
                 TInputOutput,
                 TSortKey
@@ -164,7 +167,8 @@ namespace System.Linq.Parallel
             QueryResults<TInputOutput> childQueryResults,
             SortQueryOperator<TInputOutput, TSortKey> op,
             QuerySettings settings
-        ) {
+        )
+        {
             _childQueryResults = childQueryResults;
             _op = op;
             _settings = settings;
@@ -177,7 +181,8 @@ namespace System.Linq.Parallel
 
         internal override void GivePartitionedStream(
             IPartitionedStreamRecipient<TInputOutput> recipient
-        ) {
+        )
+        {
             _childQueryResults.GivePartitionedStream(
                 new ChildResultsRecipient(recipient, _op, _settings)
             );
@@ -193,7 +198,8 @@ namespace System.Linq.Parallel
                 IPartitionedStreamRecipient<TInputOutput> outputRecipient,
                 SortQueryOperator<TInputOutput, TSortKey> op,
                 QuerySettings settings
-            ) {
+            )
+            {
                 _outputRecipient = outputRecipient;
                 _op = op;
                 _settings = settings;
@@ -228,7 +234,8 @@ namespace System.Linq.Parallel
         internal SortQueryOperatorEnumerator(
             QueryOperatorEnumerator<TInputOutput, TKey> source,
             Func<TInputOutput, TSortKey> keySelector
-        ) {
+        )
+        {
             Debug.Assert(source != null);
             Debug.Assert(keySelector != null, "need a key comparer");
 
@@ -245,7 +252,8 @@ namespace System.Linq.Parallel
         internal override bool MoveNext(
             [MaybeNullWhen(false), AllowNull] ref TInputOutput currentElement,
             [AllowNull] ref TSortKey currentKey
-        ) {
+        )
+        {
             Debug.Assert(_source != null);
 
             TKey keyUnused = default(TKey)!;

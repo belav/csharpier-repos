@@ -127,7 +127,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         public async Task Parameter_Unused_NonPrivate_NotApplicable(
             string typeAccessibility,
             string methodAccessibility
-        ) {
+        )
+        {
             await TestDiagnosticMissingAsync(
                 $@"{typeAccessibility} class C
 {{
@@ -149,7 +150,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         public async Task Parameter_Unused_NonPublicMethod(
             string typeAccessibility,
             string methodAccessibility
-        ) {
+        )
+        {
             await TestDiagnosticsAsync(
                 $@"{typeAccessibility} class C
 {{
@@ -1149,7 +1151,8 @@ class C
         public async Task Parameter_ConstructorsWithSpecialAttributes(
             string attributeNamespace,
             string attributeName
-        ) {
+        )
+        {
             await TestDiagnosticMissingAsync(
                 $@"
 namespace {attributeNamespace}

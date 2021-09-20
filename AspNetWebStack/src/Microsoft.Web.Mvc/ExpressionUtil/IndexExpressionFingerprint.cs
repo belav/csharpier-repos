@@ -20,11 +20,8 @@ namespace Microsoft.Web.Mvc.ExpressionUtil
     )]
     internal sealed class IndexExpressionFingerprint : ExpressionFingerprint
     {
-        public IndexExpressionFingerprint(
-            ExpressionType nodeType,
-            Type type,
-            PropertyInfo indexer
-        ) : base(nodeType, type)
+        public IndexExpressionFingerprint(ExpressionType nodeType, Type type, PropertyInfo indexer)
+            : base(nodeType, type)
         {
             // Other properties on IndexExpression (like the argument count) are simply derived
             // from Type and Indexer, so they're not necessary for inclusion in the fingerprint.

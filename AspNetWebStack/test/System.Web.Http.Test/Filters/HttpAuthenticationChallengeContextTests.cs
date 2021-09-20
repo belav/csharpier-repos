@@ -144,7 +144,8 @@ namespace System.Web.Http.Controllers
         private static HttpAuthenticationChallengeContext CreateProductUnderTest(
             HttpActionContext actionContext,
             IHttpActionResult result
-        ) {
+        )
+        {
             return new HttpAuthenticationChallengeContext(actionContext, result);
         }
 

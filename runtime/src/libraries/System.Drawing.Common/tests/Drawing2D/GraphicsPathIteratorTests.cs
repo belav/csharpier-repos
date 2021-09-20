@@ -331,7 +331,8 @@ namespace System.Drawing.Drawing2D.Tests
         public void Enumerate_PointsTypesMismatch_ThrowsArgumentException(
             PointF[] points,
             byte[] types
-        ) {
+        )
+        {
             using (GraphicsPath gp = new GraphicsPath())
             using (GraphicsPathIterator gpi = new GraphicsPathIterator(gp))
             {
@@ -354,7 +355,8 @@ namespace System.Drawing.Drawing2D.Tests
         public void Enumerate_NullPointsTypes_ThrowsNullReferenceException(
             PointF[] points,
             byte[] types
-        ) {
+        )
+        {
             using (GraphicsPath gp = new GraphicsPath())
             using (GraphicsPathIterator gpi = new GraphicsPathIterator(gp))
             {
@@ -367,7 +369,8 @@ namespace System.Drawing.Drawing2D.Tests
         public void CopyData_PointsTypesMismatch_ThrowsArgumentException(
             PointF[] points,
             byte[] types
-        ) {
+        )
+        {
             using (GraphicsPath gp = new GraphicsPath())
             using (GraphicsPathIterator gpi = new GraphicsPathIterator(gp))
             {
@@ -383,7 +386,8 @@ namespace System.Drawing.Drawing2D.Tests
         public void CopyData_NullPointsTypes_ThrowsNullReferenceException(
             PointF[] points,
             byte[] types
-        ) {
+        )
+        {
             using (GraphicsPath gp = new GraphicsPath())
             using (GraphicsPathIterator gpi = new GraphicsPathIterator(gp))
             {
@@ -399,7 +403,8 @@ namespace System.Drawing.Drawing2D.Tests
         public void CopyData_StartEndIndexesOutOfRange_ThrowsArgumentException(
             int startIndex,
             int endIndex
-        ) {
+        )
+        {
             PointF[] resultPoints = new PointF[0];
             byte[] resultTypes = new byte[0];
 
@@ -427,7 +432,8 @@ namespace System.Drawing.Drawing2D.Tests
             byte[] types,
             int startIndex,
             int endIndex
-        ) {
+        )
+        {
             PointF[] resultPoints = new PointF[points.Length];
             byte[] resultTypes = new byte[points.Length];
 

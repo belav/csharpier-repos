@@ -52,7 +52,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             object fallThroughLabel,
             Cci.PrimitiveTypeCode keyTypeCode,
             LocalOrParameter key
-        ) {
+        )
+        {
             _builder = builder;
             _key = key;
             _keyTypeCode = keyTypeCode;
@@ -143,7 +144,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
         private static int CompareIntegralSwitchLabels(
             KeyValuePair<ConstantValue, object> first,
             KeyValuePair<ConstantValue, object> second
-        ) {
+        )
+        {
             ConstantValue firstConstant = first.Key;
             ConstantValue secondConstant = second.Key;
 
@@ -191,7 +193,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
         private ImmutableArray<SwitchBucket> GenerateSwitchBuckets(
             int startLabelIndex,
             int endLabelIndex
-        ) {
+        )
+        {
             Debug.Assert(startLabelIndex >= 0 && startLabelIndex <= endLabelIndex);
             Debug.Assert(_sortedCaseLabels.Length > endLabelIndex);
 
@@ -298,7 +301,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             ImmutableArray<SwitchBucket> switchBuckets,
             int low,
             int high
-        ) {
+        )
+        {
             for (int i = low; i < high; i++)
             {
                 var nextBucketLabel = new object();
@@ -315,7 +319,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             ImmutableArray<SwitchBucket> switchBuckets,
             int low,
             int high
-        ) {
+        )
+        {
             // if (high - low + 1 <= LinearSearchThreshold)
             if (high - low < LinearSearchThreshold)
             {
@@ -468,7 +473,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             ILOpCode branchCode,
             ConstantValue constant,
             object targetLabel
-        ) {
+        )
+        {
             Debug.Assert(branchCode.IsBranch());
             RoslynDebug.Assert(
                 constant != null
@@ -512,7 +518,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             ConstantValue startConstant,
             ConstantValue endConstant,
             object targetLabel
-        ) {
+        )
+        {
             _builder.EmitLoad(_key);
 
             // Normalize the key to 0 if needed
@@ -581,7 +588,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             ConstantValue startConstant,
             ConstantValue endConstant,
             object bucketFallThroughLabel
-        ) {
+        )
+        {
             _builder.EmitLoad(_key);
 
             // Normalize the key to 0 if needed
@@ -609,7 +617,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             ConstantValue startConstant,
             ConstantValue endConstant,
             object bucketFallThroughLabel
-        ) {
+        )
+        {
             // switch treats key as an unsigned int.
             // this ensures that normalization does not introduce [over|under]flows issues with 32bit or shorter keys.
             // 64bit values, however must be checked before 32bit truncation happens.

@@ -76,7 +76,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </remarks>
         public new virtual Task<CSharpSyntaxNode> GetRootAsync(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return Task.FromResult(
                 this.TryGetRoot(out CSharpSyntaxNode? node) ? node : this.GetRoot(cancellationToken)
             );
@@ -91,7 +92,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <exception cref="InvalidCastException">Throws this exception if <see cref="SyntaxTree.HasCompilationUnitRoot"/> is false.</exception>
         public CompilationUnitSyntax GetCompilationUnitRoot(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return (CompilationUnitSyntax)this.GetRoot(cancellationToken);
         }
 
@@ -180,7 +182,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private bool IsPreprocessorSymbolDefined(
             InternalSyntax.DirectiveStack directives,
             string symbolName
-        ) {
+        )
+        {
             switch (directives.IsDefined(symbolName))
             {
                 case InternalSyntax.DefineState.Defined:
@@ -259,7 +262,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             }
                         }
                     )
-            ) {
+            )
+            {
                 currentState = directive.ApplyDirectives(currentState);
 
                 switch (directive.Kind())
@@ -335,7 +339,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CSharpParseOptions? options = null,
             string path = "",
             Encoding? encoding = null
-        ) {
+        )
+        {
 #pragma warning disable CS0618 // We are calling into the obsolete member as that's the one that still does the real work
             return Create(root, options, path, encoding, diagnosticOptions: null);
 #pragma warning restore CS0618
@@ -362,7 +367,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableDictionary<string, ReportDiagnostic>? diagnosticOptions,
             // obsolete parameter -- unused
             bool? isGeneratedCode
-        ) {
+        )
+        {
             if (root == null)
             {
                 throw new ArgumentNullException(nameof(root));
@@ -394,7 +400,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CSharpSyntaxNode root,
             SourceText text,
             CSharpParseOptions options
-        ) {
+        )
+        {
             Debug.Assert(root != null);
 
             return new DebuggerSyntaxTree(root, text, options);
@@ -433,7 +440,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SourceText text,
             CSharpParseOptions? options = null,
             string path = ""
-        ) {
+        )
+        {
             return new LazySyntaxTree(
                 text,
                 options ?? CSharpParseOptions.Default,
@@ -455,7 +463,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string path = "",
             Encoding? encoding = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
 #pragma warning disable CS0618 // We are calling into the obsolete member as that's the one that still does the real work
             return ParseText(
                 text,
@@ -488,7 +497,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableDictionary<string, ReportDiagnostic>? diagnosticOptions,
             bool? isGeneratedCode,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return ParseText(
                 SourceText.From(text, encoding),
                 options,
@@ -511,7 +521,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CSharpParseOptions? options = null,
             string path = "",
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
 #pragma warning disable CS0618 // We are calling into the obsolete member as that's the one that still does the real work
             return ParseText(text, options, path, diagnosticOptions: null, cancellationToken);
 #pragma warning restore CS0618
@@ -536,7 +547,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableDictionary<string, ReportDiagnostic>? diagnosticOptions,
             bool? isGeneratedCode,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (text == null)
             {
                 throw new ArgumentNullException(nameof(text));
@@ -616,7 +628,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 workingChanges.Count == 1
                 && workingChanges[0].Span == new TextSpan(0, this.Length)
                 && workingChanges[0].NewLength == newText.Length
-            ) {
+            )
+            {
                 // parser will do a full parse if we give it no changes
                 workingChanges = null;
                 oldTree = null;
@@ -694,7 +707,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override FileLinePositionSpan GetLineSpan(
             TextSpan span,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return new FileLinePositionSpan(
                 this.FilePath,
                 GetLinePosition(span.Start),
@@ -721,7 +735,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override FileLinePositionSpan GetMappedLineSpan(
             TextSpan span,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (_lazyLineDirectiveMap == null)
             {
                 // Create the line directive map on demand.
@@ -742,7 +757,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override LineVisibility GetLineVisibility(
             int position,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (_lazyLineDirectiveMap == null)
             {
                 // Create the line directive map on demand.
@@ -769,7 +785,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal override FileLinePositionSpan GetMappedLineSpanAndVisibility(
             TextSpan span,
             out bool isHiddenPosition
-        ) {
+        )
+        {
             if (_lazyLineDirectiveMap == null)
             {
                 // Create the line directive map on demand.
@@ -850,7 +867,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal bool IsGeneratedCode(
             SyntaxTreeOptionsProvider? provider,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return provider?.IsGenerated(this, cancellationToken) switch
             {
                 null or GeneratedKind.Unknown => isGeneratedHeuristic(),
@@ -1000,7 +1018,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </remarks>
         public override IEnumerable<Diagnostic> GetDiagnostics(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return this.GetDiagnostics(this.GetRoot(cancellationToken));
         }
 
@@ -1015,7 +1034,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         protected override async Task<SyntaxNode> GetRootAsyncCore(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return await this.GetRootAsync(cancellationToken).ConfigureAwait(false);
         }
 

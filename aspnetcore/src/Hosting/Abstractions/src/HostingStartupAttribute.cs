@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.Hosting
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
             )]
                 Type hostingStartupType
-        ) {
+        )
+        {
             if (hostingStartupType == null)
             {
                 throw new ArgumentNullException(nameof(hostingStartupType));

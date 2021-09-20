@@ -53,7 +53,8 @@ namespace Tests.Collections
             object[] items,
             int startIndex,
             int count
-        ) {
+        )
+        {
             int numToInsert = items.Length - startIndex;
             if (count < numToInsert)
             {
@@ -804,7 +805,8 @@ namespace Tests.Collections
                 && !ExpectedIsReadOnly
                 && !ItemsMustBeNonNull
                 && !ItemsMustBeUnique
-            ) {
+            )
+            {
                 IList list = GetList(null);
                 object[] items = GenerateItems(16);
                 list.Add(items);

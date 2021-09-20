@@ -24,7 +24,8 @@ namespace System.Linq.Parallel.Tests
             foreach (
                 IGrouping<int, int> group in UnorderedSources.Default(count)
                     .GroupBy(x => x % GroupFactor)
-            ) {
+            )
+            {
                 groupsSeen.Add(group.Key);
 
                 IntegerRangeSet elementsSeen = new IntegerRangeSet(
@@ -99,7 +100,8 @@ namespace System.Linq.Parallel.Tests
                 IGrouping<int, int> group in UnorderedSources.Default(count)
                     .GroupBy(x => x % GroupFactor)
                     .ToList()
-            ) {
+            )
+            {
                 groupsSeen.Add(group.Key);
 
                 IntegerRangeSet elementsSeen = new IntegerRangeSet(
@@ -163,7 +165,8 @@ namespace System.Linq.Parallel.Tests
         public static void GroupBy_NotPipelined_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             GroupBy_NotPipelined(labeled, count);
         }
 
@@ -181,7 +184,8 @@ namespace System.Linq.Parallel.Tests
             foreach (
                 IGrouping<int, int> group in UnorderedSources.Default(count)
                     .GroupBy(x => x, new ModularCongruenceComparer(GroupFactor))
-            ) {
+            )
+            {
                 groupsSeen.Add(group.Key % GroupFactor);
 
                 IntegerRangeSet elementsSeen = new IntegerRangeSet(
@@ -221,7 +225,8 @@ namespace System.Linq.Parallel.Tests
                     x => x,
                     new ModularCongruenceComparer(GroupFactor)
                 )
-            ) {
+            )
+            {
                 int elementsSeen = groupsSeen;
                 Assert.Equal(groupsSeen++, group.Key % GroupFactor);
 
@@ -244,7 +249,8 @@ namespace System.Linq.Parallel.Tests
         public static void GroupBy_CustomComparator_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             GroupBy_CustomComparator(labeled, count);
         }
 
@@ -262,7 +268,8 @@ namespace System.Linq.Parallel.Tests
             foreach (
                 IGrouping<int, int> group in UnorderedSources.Default(count)
                     .GroupBy(x => x % GroupFactor, x => -x)
-            ) {
+            )
+            {
                 groupsSeen.Add(group.Key);
 
                 int expected = 1 + (count - (group.Key + 1)) / GroupFactor;
@@ -324,7 +331,8 @@ namespace System.Linq.Parallel.Tests
         public static void GroupBy_ElementSelector_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             GroupBy_ElementSelector(labeled, count);
         }
 
@@ -343,7 +351,8 @@ namespace System.Linq.Parallel.Tests
                 IGrouping<int, int> group in UnorderedSources.Default(count)
                     .GroupBy(x => x % GroupFactor, y => -y)
                     .ToList()
-            ) {
+            )
+            {
                 groupsSeen.Add(group.Key);
 
                 int expected = 1 + (count - (group.Key + 1)) / GroupFactor;
@@ -377,12 +386,14 @@ namespace System.Linq.Parallel.Tests
         public static void GroupBy_ElementSelector_NotPipelined(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             ParallelQuery<int> query = labeled.Item;
             int groupsSeen = 0;
             foreach (
                 IGrouping<int, int> group in query.GroupBy(x => x % GroupFactor, y => -y).ToList()
-            ) {
+            )
+            {
                 Assert.Equal(groupsSeen++, group.Key);
 
                 int elementsSeen = -group.Key;
@@ -408,7 +419,8 @@ namespace System.Linq.Parallel.Tests
         public static void GroupBy_ElementSelector_NotPipelined_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             GroupBy_ElementSelector_NotPipelined(labeled, count);
         }
 
@@ -429,7 +441,8 @@ namespace System.Linq.Parallel.Tests
                         x => x % GroupFactor,
                         (key, elements) => KeyValuePair.Create(key, elements)
                     )
-            ) {
+            )
+            {
                 groupsSeen.Add(group.Key);
                 IntegerRangeSet elementsSeen = new IntegerRangeSet(
                     0,
@@ -470,7 +483,8 @@ namespace System.Linq.Parallel.Tests
                     x => x % GroupFactor,
                     (key, elements) => KeyValuePair.Create(key, elements)
                 )
-            ) {
+            )
+            {
                 Assert.Equal(groupsSeen++, group.Key);
                 int elementsSeen = group.Key;
                 Assert.All(
@@ -495,7 +509,8 @@ namespace System.Linq.Parallel.Tests
         public static void GroupBy_ResultSelector_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             GroupBy_ResultSelector(labeled, count);
         }
 
@@ -517,7 +532,8 @@ namespace System.Linq.Parallel.Tests
                         (key, elements) => KeyValuePair.Create(key, elements),
                         new ModularCongruenceComparer(GroupFactor)
                     )
-            ) {
+            )
+            {
                 groupsSeen.Add(group.Key % GroupFactor);
                 IntegerRangeSet elementsSeen = new IntegerRangeSet(
                     0,
@@ -552,7 +568,8 @@ namespace System.Linq.Parallel.Tests
         public static void GroupBy_ResultSelector_CustomComparator(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             ParallelQuery<int> query = labeled.Item;
             int groupsSeen = 0;
             foreach (
@@ -561,7 +578,8 @@ namespace System.Linq.Parallel.Tests
                     (key, elements) => KeyValuePair.Create(key, elements),
                     new ModularCongruenceComparer(GroupFactor)
                 )
-            ) {
+            )
+            {
                 int elementsSeen = groupsSeen;
                 Assert.Equal(groupsSeen++, group.Key % GroupFactor);
                 Assert.All(
@@ -586,7 +604,8 @@ namespace System.Linq.Parallel.Tests
         public static void GroupBy_ResultSelector_CustomComparator_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             GroupBy_ResultSelector_CustomComparator(labeled, count);
         }
 
@@ -608,7 +627,8 @@ namespace System.Linq.Parallel.Tests
                         x => -x,
                         (key, elements) => KeyValuePair.Create(key, elements)
                     )
-            ) {
+            )
+            {
                 groupsSeen.Add(group.Key);
                 int expected = 1 + (count - (group.Key + 1)) / GroupFactor;
                 IntegerRangeSet elementsSeen = new IntegerRangeSet(1 - expected, expected);
@@ -641,7 +661,8 @@ namespace System.Linq.Parallel.Tests
         public static void GroupBy_ElementSelector_ResultSelector(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             ParallelQuery<int> query = labeled.Item;
             int groupsSeen = 0;
             foreach (
@@ -650,7 +671,8 @@ namespace System.Linq.Parallel.Tests
                     x => -x,
                     (key, elements) => KeyValuePair.Create(key, elements)
                 )
-            ) {
+            )
+            {
                 Assert.Equal(groupsSeen++, group.Key);
                 int elementsSeen = -group.Key;
                 Assert.All(
@@ -675,7 +697,8 @@ namespace System.Linq.Parallel.Tests
         public static void GroupBy_ElementSelector_ResultSelector_Longrunning(
             Labeled<ParallelQuery<int>> labeled,
             int count
-        ) {
+        )
+        {
             GroupBy_ElementSelector_ResultSelector(labeled, count);
         }
 

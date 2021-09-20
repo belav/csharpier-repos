@@ -22,7 +22,8 @@ namespace System.Net.Mail
             object sessionCookie,
             string? spn,
             ChannelBinding? channelBindingToken
-        ) {
+        )
+        {
             try
             {
                 lock (_sessions)
@@ -117,7 +118,8 @@ namespace System.Net.Mail
         private string? GetSecurityLayerOutgoingBlob(
             string? challenge,
             NTAuthentication clientContext
-        ) {
+        )
+        {
             // must have a security layer challenge
 
             if (challenge == null)
@@ -170,7 +172,8 @@ namespace System.Net.Mail
                 || // rest value 0
                 input[2] != 0
                 || input[3] != 0
-            ) {
+            )
+            {
                 return null;
             }
 

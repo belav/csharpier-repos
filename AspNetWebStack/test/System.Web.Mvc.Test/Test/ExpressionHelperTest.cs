@@ -191,7 +191,8 @@ namespace System.Web.Mvc.Test
         public void GetExpressionText_WithComplicatedLambdaExpressions_ReturnsExpectedText(
             LambdaExpression expression,
             string expectedText
-        ) {
+        )
+        {
             // Arrange & Act
             var result = ExpressionHelper.GetExpressionText(expression);
 

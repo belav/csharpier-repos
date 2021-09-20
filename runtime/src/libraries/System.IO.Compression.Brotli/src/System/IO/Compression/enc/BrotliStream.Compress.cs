@@ -22,11 +22,8 @@ namespace System.IO.Compression
         /// <param name="stream">The stream to compress.</param>
         /// <param name="compressionLevel">One of the enumeration values that indicates whether to emphasize speed or compression efficiency when compressing the stream.</param>
         /// <param name="leaveOpen"><see langword="true" /> to leave the stream open after disposing the <see cref="System.IO.Compression.BrotliStream" /> object; otherwise, <see langword="false" />.</param>
-        public BrotliStream(
-            Stream stream,
-            CompressionLevel compressionLevel,
-            bool leaveOpen
-        ) : this(stream, CompressionMode.Compress, leaveOpen)
+        public BrotliStream(Stream stream, CompressionLevel compressionLevel, bool leaveOpen)
+            : this(stream, CompressionMode.Compress, leaveOpen)
         {
             _encoder.SetQuality(BrotliUtils.GetQualityFromCompressionLevel(compressionLevel));
         }
@@ -137,7 +134,8 @@ namespace System.IO.Compression
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ValidateBufferArguments(buffer, offset, count);
             return WriteAsync(new ReadOnlyMemory<byte>(buffer, offset, count), cancellationToken)
                 .AsTask();
@@ -153,7 +151,8 @@ namespace System.IO.Compression
         public override ValueTask WriteAsync(
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             if (_mode != CompressionMode.Compress)
                 throw new InvalidOperationException(
                     SR.BrotliStream_Decompress_UnsupportedOperation
@@ -170,7 +169,8 @@ namespace System.IO.Compression
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken,
             bool isFinalBlock = false
-        ) {
+        )
+        {
             AsyncOperationStarting();
             try
             {

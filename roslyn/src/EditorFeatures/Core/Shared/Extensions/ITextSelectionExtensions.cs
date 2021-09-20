@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
         public static NormalizedSnapshotSpanCollection GetSnapshotSpansOnBuffer(
             this ITextSelection selection,
             ITextBuffer subjectBuffer
-        ) {
+        )
+        {
             Contract.ThrowIfNull(selection);
             Contract.ThrowIfNull(subjectBuffer);
 

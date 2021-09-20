@@ -47,7 +47,8 @@ namespace System.Dynamic
         public sealed override DynamicMetaObject Bind(
             DynamicMetaObject target,
             DynamicMetaObject[] args
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(target, nameof(target));
             ContractUtils.RequiresNotNull(args, nameof(args));
             ContractUtils.Requires(args.Length == 1, nameof(args));
@@ -72,7 +73,8 @@ namespace System.Dynamic
         public DynamicMetaObject FallbackSetMember(
             DynamicMetaObject target,
             DynamicMetaObject value
-        ) {
+        )
+        {
             return FallbackSetMember(target, value, null);
         }
 

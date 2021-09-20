@@ -4906,7 +4906,8 @@ namespace System.Text.RegularExpressions.Tests
             string input,
             RegexOptions options,
             string[] expectedGroups
-        ) {
+        )
+        {
             if (cultureName is null)
             {
                 CultureInfo culture = CultureInfo.CurrentCulture;
@@ -4924,7 +4925,8 @@ namespace System.Text.RegularExpressions.Tests
                 string input,
                 RegexOptions options,
                 string[] expectedGroups
-            ) {
+            )
+            {
                 Regex regex = new Regex(pattern, options);
                 Match match = regex.Match(input);
                 Assert.True(match.Success);

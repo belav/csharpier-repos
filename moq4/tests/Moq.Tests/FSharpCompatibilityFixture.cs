@@ -162,7 +162,8 @@ namespace Moq.Tests
         [MemberData(nameof(FSharpProperties))]
         public void All_FSharp_properties_have_accessors_marked_as_specialname(
             PropertyInfo property
-        ) {
+        )
+        {
             Assert.All(
                 @property.GetAccessors(),
                 accessor =>

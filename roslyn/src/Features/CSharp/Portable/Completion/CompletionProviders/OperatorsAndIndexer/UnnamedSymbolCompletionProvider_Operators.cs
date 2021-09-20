@@ -118,7 +118,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             CompletionContext context,
             string opName,
             IEnumerable<ISymbol> operators
-        ) {
+        )
+        {
             if (!s_operatorNameToInfo.TryGetValue(opName, out var sortOrderAndPosition))
                 return;
 
@@ -149,7 +150,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             Document document,
             CompletionItem item,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var opName = item.Properties[OperatorName];
             var opPosition = GetOperatorPosition(opName);
 

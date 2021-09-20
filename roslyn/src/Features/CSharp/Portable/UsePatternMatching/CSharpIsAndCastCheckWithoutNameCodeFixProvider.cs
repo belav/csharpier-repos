@@ -59,7 +59,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(diagnostics.Length == 1);
             var location = diagnostics[0].Location;
             var isExpression = (BinaryExpressionSyntax)location.FindNode(
@@ -91,9 +92,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
 
         private class MyCodeAction : CodeAction.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(CSharpAnalyzersResources.Use_pattern_matching, createChangedDocument) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(CSharpAnalyzersResources.Use_pattern_matching, createChangedDocument) { }
 
             internal override CodeActionPriority Priority => CodeActionPriority.Low;
         }

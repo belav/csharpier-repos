@@ -23,7 +23,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
         public bool BindModel(
             ControllerContext controllerContext,
             ExtensibleModelBindingContext bindingContext
-        ) {
+        )
+        {
             ModelBinderUtil.ValidateBindingContext(bindingContext);
 
             ValueProviderResult valueProviderResult = bindingContext.ValueProvider.GetValue(

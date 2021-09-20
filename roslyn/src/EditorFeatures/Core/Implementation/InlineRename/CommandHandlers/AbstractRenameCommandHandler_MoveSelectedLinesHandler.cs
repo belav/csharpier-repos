@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
         public bool ExecuteCommand(
             MoveSelectedLinesUpCommandArgs args,
             CommandExecutionContext context
-        ) {
+        )
+        {
             CommitIfActive(args);
             return false;
         }
@@ -28,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
         public bool ExecuteCommand(
             MoveSelectedLinesDownCommandArgs args,
             CommandExecutionContext context
-        ) {
+        )
+        {
             CommitIfActive(args);
             return false;
         }

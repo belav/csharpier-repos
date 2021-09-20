@@ -62,7 +62,8 @@ namespace Microsoft.CodeAnalysis
         internal bool TryGetStateMachineType(
             TMethodSymbol method,
             [NotNullWhen(true)] out TNamedTypeSymbol? stateMachineType
-        ) {
+        )
+        {
             Debug.Assert(Frozen);
 
             stateMachineType = null;

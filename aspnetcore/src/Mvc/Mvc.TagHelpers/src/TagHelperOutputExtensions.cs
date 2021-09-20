@@ -50,7 +50,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             this TagHelperOutput tagHelperOutput,
             string attributeName,
             TagHelperContext context
-        ) {
+        )
+        {
             if (tagHelperOutput == null)
             {
                 throw new ArgumentNullException(nameof(tagHelperOutput));
@@ -82,7 +83,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                             context.AllAttributes[i].Name,
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         CopyHtmlAttribute(i, tagHelperOutput, context);
                         copiedAttribute = true;
                     }
@@ -112,7 +114,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         public static void MergeAttributes(
             this TagHelperOutput tagHelperOutput,
             TagBuilder tagBuilder
-        ) {
+        )
+        {
             if (tagHelperOutput == null)
             {
                 throw new ArgumentNullException(nameof(tagHelperOutput));
@@ -157,7 +160,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         public static void RemoveRange(
             this TagHelperOutput tagHelperOutput,
             IEnumerable<TagHelperAttribute> attributes
-        ) {
+        )
+        {
             if (tagHelperOutput == null)
             {
                 throw new ArgumentNullException(nameof(tagHelperOutput));
@@ -185,7 +189,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             this TagHelperOutput tagHelperOutput,
             string classValue,
             HtmlEncoder htmlEncoder
-        ) {
+        )
+        {
             if (tagHelperOutput == null)
             {
                 throw new ArgumentNullException(nameof(tagHelperOutput));
@@ -205,7 +210,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 || encodedSpaceChars.Any(
                     value => classValue.IndexOf(value, StringComparison.Ordinal) >= 0
                 )
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     Resources.ArgumentCannotContainHtmlSpace,
                     nameof(classValue)
@@ -217,7 +223,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     "class",
                     out TagHelperAttribute classAttribute
                 )
-            ) {
+            )
+            {
                 tagHelperOutput.Attributes.Add("class", classValue);
             }
             else
@@ -270,7 +277,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             this TagHelperOutput tagHelperOutput,
             string classValue,
             HtmlEncoder htmlEncoder
-        ) {
+        )
+        {
             if (tagHelperOutput == null)
             {
                 throw new ArgumentNullException(nameof(tagHelperOutput));
@@ -285,7 +293,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 || encodedSpaceChars.Any(
                     value => classValue.IndexOf(value, StringComparison.Ordinal) >= 0
                 )
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     Resources.ArgumentCannotContainHtmlSpace,
                     nameof(classValue)
@@ -297,7 +306,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     "class",
                     out TagHelperAttribute classAttribute
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -355,7 +365,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         private static string ExtractClassValue(
             TagHelperAttribute classAttribute,
             HtmlEncoder htmlEncoder
-        ) {
+        )
+        {
             string extractedClassValue;
             switch (classAttribute.Value)
             {
@@ -384,7 +395,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             int allAttributeIndex,
             TagHelperOutput tagHelperOutput,
             TagHelperContext context
-        ) {
+        )
+        {
             var allAttributes = context.AllAttributes;
             var existingAttribute = allAttributes[allAttributeIndex];
 

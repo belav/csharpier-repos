@@ -20,14 +20,16 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 result.Result != null
                 && !_visitedFirstTokenStart
                 && IsValidTokenType(result.Result.Kind)
-            ) {
+            )
+            {
                 _visitedFirstTokenStart = true;
             }
             else if (
                 result.Result != null
                 && _visitedFirstTokenStart
                 && result.Result.Kind == SyntaxKind.NewLine
-            ) {
+            )
+            {
                 _visitedFirstTokenLineEnd = true;
             }
 

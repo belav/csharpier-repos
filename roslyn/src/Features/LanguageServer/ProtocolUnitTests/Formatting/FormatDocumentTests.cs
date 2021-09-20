@@ -124,7 +124,8 @@ void M()
             Uri uri,
             bool insertSpaces = true,
             int tabSize = 4
-        ) {
+        )
+        {
             return await testLspServer.ExecuteRequestAsync<
                 LSP.DocumentFormattingParams,
                 LSP.TextEdit[]

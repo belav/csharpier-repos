@@ -11,7 +11,8 @@ namespace System.Web.Http.SelfHost.ServiceModel
     {
         internal static AuthenticationSchemes MapToAuthenticationScheme(
             HttpProxyCredentialType proxyCredentialType
-        ) {
+        )
+        {
             switch (proxyCredentialType)
             {
                 case HttpProxyCredentialType.None:

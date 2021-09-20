@@ -56,7 +56,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             IModelCustomizer modelCustomizer,
             IModelCacheKeyFactory modelCacheKeyFactory,
             IMemoryCache memoryCache
-        ) {
+        )
+        {
             Check.NotNull(modelCustomizer, nameof(modelCustomizer));
             Check.NotNull(modelCacheKeyFactory, nameof(modelCacheKeyFactory));
             Check.NotNull(memoryCache, nameof(memoryCache));

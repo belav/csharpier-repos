@@ -410,7 +410,8 @@ namespace BinderTracingTests
         private string GetMissingAssemblyBindStartMessage(
             EventWrittenEventArgs data,
             string parsedEventAsString
-        ) {
+        )
+        {
             var msg = new System.Text.StringBuilder();
             msg.AppendLine(
                 $"{data.EventName} (ActivityId: {data.ActivityId}) should have a matching AssemblyBindStart"
@@ -441,7 +442,8 @@ namespace BinderTracingTests
         private BindOperation ParseAssemblyLoadStartEvent(
             EventWrittenEventArgs data,
             Func<string, string> getDataString
-        ) {
+        )
+        {
             var bindOperation = new BindOperation()
             {
                 AssemblyName = new AssemblyName(getDataString("AssemblyName")),
@@ -463,7 +465,8 @@ namespace BinderTracingTests
         private ResolutionAttempt ParseResolutionAttemptedEvent(
             Func<string, object> getData,
             Func<string, string> getDataString
-        ) {
+        )
+        {
             var attempt = new ResolutionAttempt()
             {
                 AssemblyName = new AssemblyName(getDataString("AssemblyName")),
@@ -503,7 +506,8 @@ namespace BinderTracingTests
         private LoadFromHandlerInvocation ParseLoadFromHandlerInvokedEvent(
             Func<string, object> getData,
             Func<string, string> getDataString
-        ) {
+        )
+        {
             var loadFrom = new LoadFromHandlerInvocation()
             {
                 AssemblyName = new AssemblyName(getDataString("AssemblyName")),
@@ -517,7 +521,8 @@ namespace BinderTracingTests
         private ProbedPath ParseKnownPathProbedEvent(
             Func<string, object> getData,
             Func<string, string> getDataString
-        ) {
+        )
+        {
             var probedPath = new ProbedPath()
             {
                 FilePath = getDataString("FilePath"),

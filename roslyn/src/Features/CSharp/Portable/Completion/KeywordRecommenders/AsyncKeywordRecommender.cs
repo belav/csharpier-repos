@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             int position,
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (context.TargetToken.IsKindOrHasMatchingText(SyntaxKind.PartialKeyword))
             {
                 return false;
@@ -51,7 +52,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             int position,
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return context.IsGlobalStatementContext
                 || context.SyntaxTree.IsGlobalMemberDeclarationContext(
                     position,

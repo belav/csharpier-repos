@@ -139,7 +139,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
         [MemberData(nameof(UnauthorizedPagesAllowAnonymous))]
         public async Task AnonymousUserAllowedAccessToPages_WithGlobalAuthorizationFilter(
             string url
-        ) {
+        )
+        {
             // Arrange
             void TestServicesConfiguration(IServiceCollection services) =>
                 services.SetupGlobalAuthorizeFilter();

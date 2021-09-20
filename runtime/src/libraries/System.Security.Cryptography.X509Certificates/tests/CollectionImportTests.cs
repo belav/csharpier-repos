@@ -226,7 +226,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     TestData.PfxDataPassword,
                     keyStorageFlags
                 )
-            ) {
+            )
+            {
                 X509Certificate2Collection cc2 = ic.Collection;
                 int count = cc2.Count;
                 Assert.Equal(1, count);
@@ -237,14 +238,16 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [MemberData(nameof(StorageFlags))]
         public static void ImportPkcs12Bytes_Single_VerifyContents_ArrayString(
             X509KeyStorageFlags keyStorageFlags
-        ) {
+        )
+        {
             using (
                 ImportedCollection ic = Cert.Import(
                     TestData.PfxData,
                     TestData.PfxDataPassword,
                     keyStorageFlags
                 )
-            ) {
+            )
+            {
                 ImportPkcs12Bytes_Single_VerifyContents(ic);
             }
         }
@@ -253,7 +256,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [MemberData(nameof(StorageFlags))]
         public static void ImportPkcs12Bytes_Single_VerifyContents_SpanSpan(
             X509KeyStorageFlags keyStorageFlags
-        ) {
+        )
+        {
             ReadOnlySpan<byte> rawData = TestData.PfxData.AsSpan();
             ReadOnlySpan<char> password = TestData.PfxDataPassword.AsSpan();
 
@@ -271,7 +275,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     TestData.PfxDataPassword,
                     Cert.EphemeralIfPossible
                 )
-            ) {
+            )
+            {
                 X509Certificate2Collection cc2 = ic.Collection;
                 int count = cc2.Count;
                 Assert.Equal(1, count);
@@ -297,7 +302,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     TestData.PfxDataPassword,
                     keyStorageFlags
                 )
-            ) {
+            )
+            {
                 X509Certificate2Collection cc2 = ic.Collection;
                 int count = cc2.Count;
                 Assert.Equal(1, count);
@@ -315,7 +321,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
             using (
                 ImportedCollection ic = Cert.Import(TestFiles.PfxFile, password, keyStorageFlags)
-            ) {
+            )
+            {
                 X509Certificate2Collection cc2 = ic.Collection;
                 int count = cc2.Count;
                 Assert.Equal(1, count);
@@ -332,7 +339,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     TestData.ChainPfxPassword,
                     keyStorageFlags
                 )
-            ) {
+            )
+            {
                 X509Certificate2Collection certs = ic.Collection;
                 int count = certs.Count;
                 Assert.Equal(3, count);
@@ -349,7 +357,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     TestData.ChainPfxPassword,
                     keyStorageFlags
                 )
-            ) {
+            )
+            {
                 X509Certificate2Collection certs = ic.Collection;
                 int count = certs.Count;
                 Assert.Equal(3, count);
@@ -360,7 +369,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [MemberData(nameof(StorageFlags))]
         public static void ImportPkcs12ByteSpan_Chain_SpanPassword(
             X509KeyStorageFlags keyStorageFlags
-        ) {
+        )
+        {
             ReadOnlySpan<byte> data = TestData.ChainPfxBytes.AsSpan();
             ReadOnlySpan<char> password = TestData.ChainPfxPassword.AsSpan();
 
@@ -382,7 +392,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     TestData.ChainPfxPassword,
                     keyStorageFlags
                 )
-            ) {
+            )
+            {
                 X509Certificate2Collection certs = ic.Collection;
                 int count = certs.Count;
                 Assert.Equal(3, count);
@@ -393,14 +404,16 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [MemberData(nameof(StorageFlags))]
         public static void ImportPkcs12File_Chain_VerifyContents(
             X509KeyStorageFlags keyStorageFlags
-        ) {
+        )
+        {
             using (
                 ImportedCollection ic = Cert.Import(
                     TestFiles.ChainPfxFile,
                     TestData.ChainPfxPassword,
                     keyStorageFlags
                 )
-            ) {
+            )
+            {
                 X509Certificate2Collection certs = ic.Collection;
                 int count = certs.Count;
                 Assert.Equal(3, count);

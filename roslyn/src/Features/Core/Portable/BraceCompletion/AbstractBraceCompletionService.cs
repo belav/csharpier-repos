@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.BraceCompletion
         public async Task<BraceCompletionResult?> GetBraceCompletionAsync(
             BraceCompletionContext braceCompletionContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var closingPoint = braceCompletionContext.ClosingPoint;
             if (closingPoint < 1)
             {
@@ -97,7 +98,8 @@ namespace Microsoft.CodeAnalysis.BraceCompletion
             int openingPosition,
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (OpeningBrace != brace)
             {
                 return false;
@@ -115,7 +117,8 @@ namespace Microsoft.CodeAnalysis.BraceCompletion
             Document document,
             int caretLocation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
             var leftToken = root.FindTokenOnLeftOfPosition(caretLocation);
@@ -143,7 +146,8 @@ namespace Microsoft.CodeAnalysis.BraceCompletion
             int position,
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (token.SpanStart != position)
             {
                 return SpecializedTasks.False;
@@ -164,7 +168,8 @@ namespace Microsoft.CodeAnalysis.BraceCompletion
         protected async Task<bool> AllowOverTypeInUserCodeWithValidClosingTokenAsync(
             BraceCompletionContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var tree = await context.Document.GetRequiredSyntaxTreeAsync(cancellationToken)
                 .ConfigureAwait(false);
             var syntaxFactsService =
@@ -191,7 +196,8 @@ namespace Microsoft.CodeAnalysis.BraceCompletion
         protected Task<bool> AllowOverTypeWithValidClosingTokenAsync(
             BraceCompletionContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return CheckClosingTokenKindAsync(
                 context.Document,
                 context.ClosingPoint,
@@ -211,7 +217,8 @@ namespace Microsoft.CodeAnalysis.BraceCompletion
             Document document,
             int closingPosition,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
             var closingToken = root.FindTokenFromEnd(
@@ -268,7 +275,8 @@ namespace Microsoft.CodeAnalysis.BraceCompletion
             int position,
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
             var index = position - 1;
             var openBraceCount = 0;

@@ -402,7 +402,8 @@ namespace Microsoft.CodeAnalysis
                     namedTypeSymbol.IsTupleType
                     && namedTypeSymbol.TupleUnderlyingType is INamedTypeSymbol underlyingType
                     && underlyingType != namedTypeSymbol
-                ) {
+                )
+                {
                     // A tuple is a named type with some added information
                     // We only need to store this extra information if there is some
                     // (ie. the current type differs from the underlying type, which has no element names)

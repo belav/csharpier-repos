@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override ImmutableArray<MetadataReference> GetUsedAssemblyReferences(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             ConcurrentSet<AssemblySymbol>? usedAssemblies = GetCompleteSetOfUsedAssemblies(
                 cancellationToken
             );
@@ -55,7 +56,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             reference,
                             out ImmutableArray<MetadataReference> merged
                         )
-                    ) {
+                    )
+                    {
                         // Include all "merged" references as well because they might "define" used extern aliases.
                         setOfReferences.AddAll(merged);
                     }
@@ -78,7 +80,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private ConcurrentSet<AssemblySymbol>? GetCompleteSetOfUsedAssemblies(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!_usedAssemblyReferencesFrozen && !Volatile.Read(ref _usedAssemblyReferencesFrozen))
             {
                 var diagnostics = new BindingDiagnosticBag(
@@ -130,7 +133,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 AssemblySymbol assembly,
                 bool includeMainModule,
                 ArrayBuilder<AssemblySymbol> stack
-            ) {
+            )
+            {
                 for (int i = (includeMainModule ? 0 : 1); i < assembly.Modules.Length; i++)
                 {
                     foreach (var dependency in assembly.Modules[i].ReferencedAssemblySymbols)
@@ -143,11 +147,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             void completeTheSetOfUsedAssemblies(
                 bool seenErrors,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (
                     _usedAssemblyReferencesFrozen
                     || Volatile.Read(ref _usedAssemblyReferencesFrozen)
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -166,7 +172,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         foreach (
                             var dependency in SourceAssembly.Modules[i].ReferencedAssemblySymbols
-                        ) {
+                        )
+                        {
                             AddUsedAssembly(dependency);
                         }
                     }
@@ -174,7 +181,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (
                         _usedAssemblyReferencesFrozen
                         || Volatile.Read(ref _usedAssemblyReferencesFrozen)
-                    ) {
+                    )
+                    {
                         return;
                     }
 
@@ -187,7 +195,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             if (
                                 _usedAssemblyReferencesFrozen
                                 || Volatile.Read(ref _usedAssemblyReferencesFrozen)
-                            ) {
+                            )
+                            {
                                 return;
                             }
 
@@ -232,11 +241,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                                         {
                                             foreach (
                                                 AssemblySymbol underlyingDependency in retargetingAssembly.UnderlyingAssembly.SourceModule.ReferencedAssemblySymbols
-                                            ) {
+                                            )
+                                            {
                                                 if (
                                                     !underlyingDependency.IsLinked
                                                     && usedAssemblies.Contains(underlyingDependency)
-                                                ) {
+                                                )
+                                                {
                                                     AssemblySymbol dependency;
 
                                                     if (
@@ -248,7 +259,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                                             underlyingDependency,
                                                             out dependency
                                                         )
-                                                    ) {
+                                                    )
+                                                    {
                                                         Debug.Assert(
                                                             retargetingAssembly.Modules[
                                                                 0

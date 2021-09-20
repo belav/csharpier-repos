@@ -15,7 +15,8 @@ namespace System.Data.Odbc
             OdbcConnection connection,
             IsolationLevel isolevel,
             OdbcConnectionHandle handle
-        ) {
+        )
+        {
             _connection = connection;
             _isolevel = isolevel;
             _handle = handle;

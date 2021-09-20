@@ -25,7 +25,8 @@ namespace Roslyn.Test.Utilities
 
         public MockSymUnmanagedReader(
             ImmutableDictionary<int, MethodDebugInfoBytes> methodDebugInfoMap
-        ) {
+        )
+        {
             _methodDebugInfoMap = methodDebugInfoMap;
         }
 
@@ -56,7 +57,8 @@ namespace Roslyn.Test.Utilities
             int bufferLength,
             out int count,
             byte[] customDebugInformation
-        ) {
+        )
+        {
             // The EE should never be calling ISymUnmanagedReader.GetSymAttribute.
             // In order to account for EnC updates, it should always be calling
             // ISymUnmanagedReader3.GetSymAttributeByVersion instead.
@@ -70,7 +72,8 @@ namespace Roslyn.Test.Utilities
             int bufferLength,
             out int count,
             byte[] customDebugInformation
-        ) {
+        )
+        {
             Assert.Equal(1, version);
 
             Assert.Equal("MD2", name);
@@ -93,7 +96,8 @@ namespace Roslyn.Test.Utilities
             Guid languageVendor,
             Guid documentType,
             out ISymUnmanagedDocument document
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -112,7 +116,8 @@ namespace Roslyn.Test.Utilities
             int bufferLength,
             out int count,
             ISymUnmanagedVariable[] variables
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -120,7 +125,8 @@ namespace Roslyn.Test.Utilities
             int bufferLength,
             out int count,
             ISymUnmanagedVariable[] variables
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -129,7 +135,8 @@ namespace Roslyn.Test.Utilities
             int line,
             int column,
             out ISymUnmanagedMethod method
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -137,7 +144,8 @@ namespace Roslyn.Test.Utilities
             int bufferLength,
             out int count,
             ISymUnmanagedNamespace[] namespaces
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -146,7 +154,8 @@ namespace Roslyn.Test.Utilities
             string fileName,
             string searchPath,
             IStream stream
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -172,7 +181,8 @@ namespace Roslyn.Test.Utilities
             int bufferLength,
             out int count,
             ISymUnmanagedMethod[] methods
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -180,7 +190,8 @@ namespace Roslyn.Test.Utilities
             ISymUnmanagedDocument document,
             out int version,
             out bool isCurrent
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -193,7 +204,8 @@ namespace Roslyn.Test.Utilities
             int methodToken,
             int version,
             out ISymUnmanagedMethod method
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -203,7 +215,8 @@ namespace Roslyn.Test.Utilities
             int bufferLength,
             out int count,
             byte[] customDebugInformation
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -212,7 +225,8 @@ namespace Roslyn.Test.Utilities
             int bufferLength,
             out int count,
             ISymUnmanagedMethod[] methods
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -223,7 +237,8 @@ namespace Roslyn.Test.Utilities
             int bufferLength,
             out int count,
             byte[] customDebugInformation
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
     }
@@ -258,7 +273,8 @@ namespace Roslyn.Test.Utilities
             int[] columns,
             int[] endLines,
             int[] endColumns
-        ) {
+        )
+        {
             pcPoints = 1;
             offsets[0] = 0;
             documents[0] = null;
@@ -279,7 +295,8 @@ namespace Roslyn.Test.Utilities
             int line,
             int column,
             out int retVal
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -287,7 +304,8 @@ namespace Roslyn.Test.Utilities
             int cParams,
             out int pcParams,
             ISymUnmanagedVariable[] parms
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -298,7 +316,8 @@ namespace Roslyn.Test.Utilities
             int cRanges,
             out int pcRanges,
             int[] ranges
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -312,7 +331,8 @@ namespace Roslyn.Test.Utilities
             int[] lines,
             int[] columns,
             out bool retVal
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -336,7 +356,8 @@ namespace Roslyn.Test.Utilities
             ISymUnmanagedConstant[] constants = null,
             int startOffset = 0,
             int endOffset = 1
-        ) {
+        )
+        {
             _children = children;
             _namespaces = namespaces;
             _constants = constants ?? new ISymUnmanagedConstant[0];
@@ -400,7 +421,8 @@ namespace Roslyn.Test.Utilities
             int cConstants,
             out int pcConstants,
             ISymUnmanagedConstant[] constants
-        ) {
+        )
+        {
             pcConstants = _constants.Length;
             if (constants != null)
             {
@@ -435,7 +457,8 @@ namespace Roslyn.Test.Utilities
             int cNameSpaces,
             out int pcNameSpaces,
             ISymUnmanagedNamespace[] namespaces
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -443,7 +466,8 @@ namespace Roslyn.Test.Utilities
             int cVars,
             out int pcVars,
             ISymUnmanagedVariable[] pVars
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
     }
@@ -460,7 +484,8 @@ namespace Roslyn.Test.Utilities
             string name,
             object value,
             GetSignatureDelegate getSignature
-        ) {
+        )
+        {
             _name = name;
             _value = value;
             _getSignature = getSignature;
@@ -496,7 +521,8 @@ namespace Roslyn.Test.Utilities
             int numDesired,
             out int numRead,
             T[] destination
-        ) {
+        )
+        {
             if (destination == null)
             {
                 Assert.Equal(0, numDesired);

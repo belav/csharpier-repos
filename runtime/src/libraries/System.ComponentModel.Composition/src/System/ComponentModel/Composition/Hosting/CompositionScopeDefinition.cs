@@ -34,7 +34,8 @@ namespace System.ComponentModel.Composition.Hosting
         public CompositionScopeDefinition(
             ComposablePartCatalog catalog,
             IEnumerable<CompositionScopeDefinition> children
-        ) {
+        )
+        {
             Requires.NotNull(catalog, nameof(catalog));
             Requires.NullOrNotNullElements(children, nameof(children));
 
@@ -51,7 +52,8 @@ namespace System.ComponentModel.Composition.Hosting
             ComposablePartCatalog catalog,
             IEnumerable<CompositionScopeDefinition> children,
             IEnumerable<ExportDefinition> publicSurface
-        ) {
+        )
+        {
             Requires.NotNull(catalog, nameof(catalog));
             Requires.NullOrNotNullElements(children, nameof(children));
             Requires.NullOrNotNullElements(publicSurface, nameof(publicSurface));
@@ -69,7 +71,8 @@ namespace System.ComponentModel.Composition.Hosting
             ComposablePartCatalog catalog,
             IEnumerable<CompositionScopeDefinition>? children,
             IEnumerable<ExportDefinition>? publicSurface
-        ) {
+        )
+        {
             _catalog = catalog;
             if (children != null)
             {
@@ -190,7 +193,8 @@ namespace System.ComponentModel.Composition.Hosting
         /// </remarks>
         public override IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>> GetExports(
             ImportDefinition definition
-        ) {
+        )
+        {
             ThrowIfDisposed();
 
             Debug.Assert(_catalog != null);

@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Razor.Hosting
             Type type,
             string identifier,
             object[] metadata = null
-        ) {
+        )
+        {
             return new TestRazorCompiledItem(type, "mvc.1.0.razor-page", identifier, metadata);
         }
 
@@ -33,7 +34,8 @@ namespace Microsoft.AspNetCore.Razor.Hosting
             Type type,
             string identifier,
             object[] metadata = null
-        ) {
+        )
+        {
             return new TestRazorCompiledItem(type, "mvc.1.0.razor-page", identifier, metadata);
         }
 

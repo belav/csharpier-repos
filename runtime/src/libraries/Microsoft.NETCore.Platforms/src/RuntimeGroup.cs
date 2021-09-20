@@ -39,7 +39,8 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
             bool omitVersionDelimiter = false,
             bool applyVersionsToParent = false,
             IEnumerable<string> additionalQualifiers = null
-        ) {
+        )
+        {
             BaseRID = baseRID;
             Parent = parent;
             Versions = new HashSet<RuntimeVersion>();
@@ -115,7 +116,8 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
             RuntimeVersion version = null,
             string architecture = null,
             string qualifier = null
-        ) {
+        )
+        {
             return new RID()
             {
                 BaseRID = baseRid,

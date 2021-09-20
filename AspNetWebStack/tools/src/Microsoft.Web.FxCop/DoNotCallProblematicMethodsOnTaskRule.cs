@@ -33,7 +33,8 @@ namespace Microsoft.Web.FxCop
                 if (
                     _problematicMethods.TryGetValue(method.Name.Name, out message)
                     && method.DeclaringType.IsTask()
-                ) {
+                )
+                {
                     Problems.Add(
                         new Problem(
                             GetResolution(method.Name.Name, message),

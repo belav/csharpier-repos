@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
         public static IList<DeclaredApiResponseMetadata> GetDeclaredResponseMetadata(
             in ApiControllerSymbolCache symbolCache,
             IMethodSymbol method
-        ) {
+        )
+        {
             var metadataItems = GetResponseMetadataFromMethodAttributes(symbolCache, method);
             if (metadataItems.Count != 0)
             {
@@ -47,7 +48,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
         public static ITypeSymbol GetErrorResponseType(
             in ApiControllerSymbolCache symbolCache,
             IMethodSymbol method
-        ) {
+        )
+        {
             var errorTypeAttribute =
                 method.GetAttributes(symbolCache.ProducesErrorResponseTypeAttribute)
                     .FirstOrDefault()
@@ -66,7 +68,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                 && errorTypeAttribute.ConstructorArguments.Length == 1
                 && errorTypeAttribute.ConstructorArguments[0].Kind == TypedConstantKind.Type
                 && errorTypeAttribute.ConstructorArguments[0].Value is ITypeSymbol typeSymbol
-            ) {
+            )
+            {
                 errorType = typeSymbol;
             }
 
@@ -77,7 +80,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             in ApiControllerSymbolCache symbolCache,
             IMethodSymbol method,
             IReadOnlyList<ITypeSymbol> conventionTypes
-        ) {
+        )
+        {
             var conventionMethod = GetMethodFromConventionMethodAttribute(symbolCache, method);
             if (conventionMethod == null)
             {
@@ -95,7 +99,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
         private static IMethodSymbol? GetMethodFromConventionMethodAttribute(
             in ApiControllerSymbolCache symbolCache,
             IMethodSymbol method
-        ) {
+        )
+        {
             var attribute = method.GetAttributes(
                     symbolCache.ApiConventionMethodAttribute,
                     inherit: true
@@ -115,14 +120,16 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             if (
                 attribute.ConstructorArguments[0].Kind != TypedConstantKind.Type
                 || !(attribute.ConstructorArguments[0].Value is ITypeSymbol conventionType)
-            ) {
+            )
+            {
                 return null;
             }
 
             if (
                 attribute.ConstructorArguments[1].Kind != TypedConstantKind.Primitive
                 || !(attribute.ConstructorArguments[1].Value is string conventionMethodName)
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -141,16 +148,19 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             in ApiControllerSymbolCache symbolCache,
             IMethodSymbol method,
             IReadOnlyList<ITypeSymbol> conventionTypes
-        ) {
+        )
+        {
             foreach (var conventionType in conventionTypes)
             {
                 foreach (
                     var conventionMethod in conventionType.GetMembers().OfType<IMethodSymbol>()
-                ) {
+                )
+                {
                     if (
                         !conventionMethod.IsStatic
                         || conventionMethod.DeclaredAccessibility != Accessibility.Public
-                    ) {
+                    )
+                    {
                         continue;
                     }
 
@@ -167,7 +177,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
         private static IList<DeclaredApiResponseMetadata> GetResponseMetadataFromMethodAttributes(
             in ApiControllerSymbolCache symbolCache,
             IMethodSymbol methodSymbol
-        ) {
+        )
+        {
             var metadataItems = new List<DeclaredApiResponseMetadata>();
             var responseMetadataAttributes = methodSymbol.GetAttributes(
                 symbolCache.ProducesResponseTypeAttribute,
@@ -206,7 +217,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
         internal static IReadOnlyList<ITypeSymbol> GetConventionTypes(
             in ApiControllerSymbolCache symbolCache,
             IMethodSymbol method
-        ) {
+        )
+        {
             var attributes = method.ContainingType.GetAttributes(
                     symbolCache.ApiConventionTypeAttribute,
                     inherit: true
@@ -228,7 +240,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                     attribute.ConstructorArguments.Length != 1
                     || attribute.ConstructorArguments[0].Kind != TypedConstantKind.Type
                     || !(attribute.ConstructorArguments[0].Value is ITypeSymbol conventionType)
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -251,7 +264,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                     && (namedArgumentValue.Type.SpecialType & SpecialType.System_Int32)
                         == SpecialType.System_Int32
                     && namedArgumentValue.Value is int statusCode
-                ) {
+                )
+                {
                     return statusCode;
                 }
             }
@@ -273,7 +287,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                     )
                     && (parameter.Type.SpecialType & SpecialType.System_Int32)
                         == SpecialType.System_Int32
-                ) {
+                )
+                {
                     if (attribute.ConstructorArguments.Length < i)
                     {
                         return DefaultStatusCode;
@@ -283,7 +298,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                     if (
                         argument.Kind == TypedConstantKind.Primitive
                         && argument.Value is int statusCode
-                    ) {
+                    )
+                    {
                         return statusCode;
                     }
                 }

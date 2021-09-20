@@ -36,7 +36,8 @@ namespace System.Text.Encodings.Web.Tests
             char replacementChar,
             JavaScriptEncoder encoder,
             bool requiresEscaping
-        ) {
+        )
+        {
             Assert.Equal(-1, encoder.FindFirstCharacterToEncodeUtf8(default));
             fixed (char* ptr = string.Empty)
             {
@@ -185,7 +186,8 @@ namespace System.Text.Encodings.Web.Tests
             char replacementChar,
             JavaScriptEncoder encoder,
             bool requiresEscaping
-        ) {
+        )
+        {
             var random = new Random(42);
             for (int dataLength = 1; dataLength < 50; dataLength++)
             {
@@ -343,7 +345,8 @@ namespace System.Text.Encodings.Web.Tests
         public unsafe void InvalidFindFirstCharacterToEncode(
             char replacementChar,
             JavaScriptEncoder encoder
-        ) {
+        )
+        {
             var random = new Random(42);
             for (int dataLength = 0; dataLength < 47; dataLength++)
             {
@@ -667,7 +670,8 @@ namespace System.Text.Encodings.Web.Tests
         public void JavaScriptEncode_AllRangesAllowed_StillEncodesForbiddenChars_Simple(
             string input,
             string expected
-        ) {
+        )
+        {
             // Arrange
             JavaScriptEncoder encoder = JavaScriptEncoder.Create(UnicodeRanges.All);
 

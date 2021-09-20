@@ -824,7 +824,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         private static void AssertConverters(
             IList<ValueConverterInfo> converterInfos,
             params (Type InfoType, ConverterMappingHints Hints)[] converterTypes
-        ) {
+        )
+        {
             Assert.Equal(converterTypes.Length, converterInfos.Count);
 
             for (var i = 0; i < converterTypes.Length; i++)
@@ -839,7 +840,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         private static void AssertHints(
             ConverterMappingHints expected,
             ConverterMappingHints actual
-        ) {
+        )
+        {
             Assert.Equal(actual?.IsUnicode, expected?.IsUnicode);
             Assert.Equal(actual?.Precision, expected?.Precision);
             Assert.Equal(actual?.Scale, expected?.Scale);

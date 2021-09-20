@@ -302,7 +302,8 @@ namespace System.Web.Mvc.Test
             protected override IView CreatePartialView(
                 ControllerContext controllerContext,
                 string partialPath
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -310,7 +311,8 @@ namespace System.Web.Mvc.Test
                 ControllerContext controllerContext,
                 string viewPath,
                 string masterPath
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 

@@ -126,7 +126,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ArrayBuilder<Symbol> symbols,
             BoundNode parent,
             Binder binder
-        ) {
+        )
+        {
             switch (node.Kind)
             {
                 case BoundKind.MethodGroup:
@@ -218,7 +219,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal static bool IsExpressionOfComImportType(
             [NotNullWhen(true)] this BoundExpression? expressionOpt
-        ) {
+        )
+        {
             // NOTE: Dev11 also returns false if expressionOpt is a TypeExpression.  Unfortunately,
             // that makes it impossible to handle TypeOrValueExpression in a consistent way, since
             // we don't know whether it's a type until after overload resolution and we can't do

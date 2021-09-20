@@ -31,9 +31,7 @@ namespace System.Runtime.InteropServices
             HResult = HResults.COR_E_SAFEARRAYRANKMISMATCH;
         }
 
-        protected SafeArrayRankMismatchException(
-            SerializationInfo info,
-            StreamingContext context
-        ) : base(info, context) { }
+        protected SafeArrayRankMismatchException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

@@ -12,10 +12,8 @@ namespace System.Reflection.TypeLoading.Ecma
     {
         private readonly IRoMethodBase _roMethodBase;
 
-        internal EcmaMethodBody(
-            IRoMethodBase roMethodBase,
-            MethodBodyBlock methodBodyBlock
-        ) : base()
+        internal EcmaMethodBody(IRoMethodBase roMethodBase, MethodBodyBlock methodBodyBlock)
+            : base()
         {
             _roMethodBase = roMethodBase;
             _neverAccessThisExceptThroughBlockProperty = methodBodyBlock;

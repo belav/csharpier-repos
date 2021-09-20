@@ -21,7 +21,8 @@ namespace System.Formats.Asn1.Tests.Reader
             string description,
             AsnEncodingRules ruleSet,
             string inputHex
-        ) {
+        )
+        {
             _ = description;
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
@@ -47,7 +48,8 @@ namespace System.Formats.Asn1.Tests.Reader
             int expectedUnusedBitCount,
             int expectedLength,
             string inputHex
-        ) {
+        )
+        {
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
 
@@ -76,7 +78,8 @@ namespace System.Formats.Asn1.Tests.Reader
             string description,
             AsnEncodingRules ruleSet,
             string inputHex
-        ) {
+        )
+        {
             _ = description;
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
@@ -251,7 +254,8 @@ namespace System.Formats.Asn1.Tests.Reader
             string inputHex,
             string expectedHex,
             int expectedUnusedBitCount
-        ) {
+        )
+        {
             byte[] inputData = inputHex.HexToByteArray();
             byte[] output = new byte[expectedHex.Length / 2];
             AsnReader reader = new AsnReader(inputData, ruleSet);
@@ -353,7 +357,8 @@ namespace System.Formats.Asn1.Tests.Reader
             string description,
             AsnEncodingRules ruleSet,
             string inputHex
-        ) {
+        )
+        {
             _ = description;
             byte[] inputData = inputHex.HexToByteArray();
             TryReadBitString_Throws_Helper(ruleSet, inputData);
@@ -711,7 +716,8 @@ namespace System.Formats.Asn1.Tests.Reader
             string inputHex,
             TagClass tagClass,
             int tagValue
-        ) {
+        )
+        {
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
             Asn1Tag correctConstructed = new Asn1Tag(tagClass, tagValue, true);

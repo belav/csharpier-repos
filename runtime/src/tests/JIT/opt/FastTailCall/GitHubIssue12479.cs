@@ -14,7 +14,8 @@ public class GitHubIssue12479
         int six,
         int seven,
         int eight
-    ) {
+    )
+    {
         int count = 0;
 
         // Make sure this is not inlined.
@@ -39,7 +40,8 @@ public class GitHubIssue12479
         float six,
         float seven,
         float eight
-    ) {
+    )
+    {
         if (one % 2 == 0)
         {
             // Eight outgoing arguments, six passed in registers, two on the stack.

@@ -22,7 +22,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.MoveToNamespace
             ImmutableArray<string> availableNamespaces,
             ISyntaxFacts syntaxFacts,
             ImmutableArray<string> namespaceHistory
-        ) {
+        )
+        {
             _syntaxFacts = syntaxFacts ?? throw new ArgumentNullException(nameof(syntaxFacts));
             _namespaceName = defaultNamespace;
             AvailableNamespaces = namespaceHistory.Select(n => new NamespaceItem(true, n))
@@ -38,7 +39,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.MoveToNamespace
         private void MoveToNamespaceDialogViewModel_PropertyChanged(
             object sender,
             PropertyChangedEventArgs e
-        ) {
+        )
+        {
             switch (e.PropertyName)
             {
                 case nameof(NamespaceName):

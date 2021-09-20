@@ -40,7 +40,8 @@ namespace System.Buffers.Text
             out int bytesConsumed,
             out int bytesWritten,
             bool isFinalBlock = true
-        ) {
+        )
+        {
             if (utf8.IsEmpty)
             {
                 bytesConsumed = 0;
@@ -50,7 +51,8 @@ namespace System.Buffers.Text
 
             fixed (byte* srcBytes = &MemoryMarshal.GetReference(utf8))fixed (
                 byte* destBytes = &MemoryMarshal.GetReference(bytes)
-            ) {
+            )
+            {
                 int srcLength = utf8.Length & ~0x3; // only decode input up to the closest multiple of 4.
                 int destLength = bytes.Length;
                 int maxSrcLength = srcLength;
@@ -279,7 +281,8 @@ namespace System.Buffers.Text
         public static unsafe OperationStatus DecodeFromUtf8InPlace(
             Span<byte> buffer,
             out int bytesWritten
-        ) {
+        )
+        {
             if (buffer.IsEmpty)
             {
                 bytesWritten = 0;
@@ -382,7 +385,8 @@ namespace System.Buffers.Text
             int destLength,
             byte* srcStart,
             byte* destStart
-        ) {
+        )
+        {
             // If we have AVX2 support, pick off 32 bytes at a time for as long as we can,
             // but make sure that we quit before seeing any == markers at the end of the
             // string. Also, because we write 8 zeroes at the end of the output, ensure
@@ -481,7 +485,8 @@ namespace System.Buffers.Text
             int destLength,
             byte* srcStart,
             byte* destStart
-        ) {
+        )
+        {
             // If we have SSSE3 support, pick off 16 bytes at a time for as long as we can,
             // but make sure that we quit before seeing any == markers at the end of the
             // string. Also, because we write four zeroes at the end of the output, ensure

@@ -50,7 +50,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             SpecialMember.System_Nullable_T__ctor,
                             out MethodSymbol nullableCtor
                         )
-                    ) {
+                    )
+                    {
                         return BadExpression(node.Syntax, node.Type, node);
                     }
 
@@ -96,7 +97,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundRangeExpression node,
             BoundExpression? left,
             BoundExpression? right
-        ) {
+        )
+        {
             Debug.Assert(node.Type.IsNullableType());
             Debug.Assert(
                 left?.Type?.IsNullableType() == true || right?.Type?.IsNullableType() == true
@@ -122,7 +124,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     SpecialMember.System_Nullable_T__ctor,
                     out MethodSymbol nullableCtor
                 )
-            ) {
+            )
+            {
                 return BadExpression(node.Syntax, node.Type, node);
             }
 
@@ -208,7 +211,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             MethodSymbol constructionMethod,
             BoundExpression? left,
             BoundExpression? right
-        ) {
+        )
+        {
             var F = _factory;
             // The construction method may vary based on what well-known
             // members were available during binding. Depending on which member

@@ -62,7 +62,8 @@ namespace R2RTest
                     if (
                         Path.GetFileNameWithoutExtension(_dotnetCli)
                             .Equals("r2rtest", StringComparison.OrdinalIgnoreCase)
-                    ) {
+                    )
+                    {
                         throw new ArgumentException(
                             "Error: --dotnet-cli argument is required to run crossgen2. Cannot use the host running r2rtest itself when launched by its native app host."
                         );
@@ -119,7 +120,8 @@ namespace R2RTest
             bool isFramework,
             IEnumerable<string> overrideReferencePaths = null,
             string overrideOutputPath = null
-        ) {
+        )
+        {
             List<CompilerRunner> runners = new List<CompilerRunner>();
 
             if (!NoCrossgen2)

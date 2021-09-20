@@ -174,7 +174,8 @@ namespace System.Net.Mime.Tests
             int expectedSecond,
             string expectedTimeZoneOffset,
             DateTimeKind expectedKind
-        ) {
+        )
+        {
             var smtpDt = new SmtpDateTime(DateTime.Now);
 
             DateTime result = smtpDt.ParseValue(input, out string timeZoneOffset);

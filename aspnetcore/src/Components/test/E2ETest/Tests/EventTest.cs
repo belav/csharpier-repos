@@ -254,7 +254,8 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
         [InlineData("#disabled-textarea")]
         public void InteractiveElementWithDisabledAttributeDoesNotRespondToMouseEvents(
             string elementSelector
-        ) {
+        )
+        {
             Browser.MountTestComponent<EventDisablingComponent>();
             var element = Browser.Exists(By.CssSelector(elementSelector));
             var eventLog = Browser.Exists(By.Id("event-log"));

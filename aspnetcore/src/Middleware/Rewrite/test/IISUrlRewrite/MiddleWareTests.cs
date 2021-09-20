@@ -811,7 +811,8 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.UrlRewrite
         public async Task Invoke_ReverseProxyToAnotherSiteUsingXmlConfiguredRewriteMap(
             string requestUri,
             string expectedRewrittenUri
-        ) {
+        )
+        {
             var options = new RewriteOptions().AddIISUrlRewrite(
                 new StringReader(
                     @"
@@ -914,7 +915,8 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.UrlRewrite
             string conditionInputPattern,
             string expectedResult,
             int uriMatchPart
-        ) {
+        )
+        {
             // arrange
             var inputParser = new InputParser();
 

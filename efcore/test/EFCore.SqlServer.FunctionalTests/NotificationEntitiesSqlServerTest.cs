@@ -8,9 +8,8 @@ namespace Microsoft.EntityFrameworkCore
     public class NotificationEntitiesSqlServerTest
         : NotificationEntitiesTestBase<NotificationEntitiesSqlServerTest.NotificationEntitiesSqlServerFixture>
     {
-        public NotificationEntitiesSqlServerTest(
-            NotificationEntitiesSqlServerFixture fixture
-        ) : base(fixture) { }
+        public NotificationEntitiesSqlServerTest(NotificationEntitiesSqlServerFixture fixture)
+            : base(fixture) { }
 
         public class NotificationEntitiesSqlServerFixture : NotificationEntitiesFixtureBase
         {

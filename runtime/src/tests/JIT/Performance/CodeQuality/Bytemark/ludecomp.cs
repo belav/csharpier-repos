@@ -154,7 +154,8 @@ internal class LUDecomp : LUStruct
         double[][][] abase,
         double[][] bbase,
         int numarrays
-    ) {
+    )
+    {
         double[][] locabase;
         double[] locbbase;
         long elapsed;

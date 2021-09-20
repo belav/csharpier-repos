@@ -135,7 +135,8 @@ namespace Microsoft.EntityFrameworkCore
         private async Task<IEnumerable<List<long>>> GenerateValuesInMultipleThreads(
             int threadCount,
             int valueCount
-        ) {
+        )
+        {
             const int blockSize = 10;
 
             var serviceProvider = SqlServerTestHelpers.Instance.CreateServiceProvider();
@@ -226,7 +227,8 @@ namespace Microsoft.EntityFrameworkCore
 
         private static ISqlServerConnection CreateConnection(
             IServiceProvider serviceProvider = null
-        ) {
+        )
+        {
             serviceProvider ??= SqlServerTestHelpers.Instance.CreateServiceProvider();
 
             return SqlServerTestHelpers.Instance.CreateContextServices(serviceProvider)
@@ -274,7 +276,8 @@ namespace Microsoft.EntityFrameworkCore
                 public Task<int> ExecuteNonQueryAsync(
                     RelationalCommandParameterObject parameterObject,
                     CancellationToken cancellationToken = default
-                ) {
+                )
+                {
                     throw new NotImplementedException();
                 }
 
@@ -291,14 +294,16 @@ namespace Microsoft.EntityFrameworkCore
 
                 public RelationalDataReader ExecuteReader(
                     RelationalCommandParameterObject parameterObject
-                ) {
+                )
+                {
                     throw new NotImplementedException();
                 }
 
                 public Task<RelationalDataReader> ExecuteReaderAsync(
                     RelationalCommandParameterObject parameterObject,
                     CancellationToken cancellationToken = default
-                ) {
+                )
+                {
                     throw new NotImplementedException();
                 }
 

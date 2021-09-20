@@ -226,7 +226,8 @@ namespace Newtonsoft.Json.Utilities
             Type propertyType,
             IList<Type> indexParameters,
             object? placeholder2
-        ) {
+        )
+        {
             IEnumerable<PropertyInfo> propertyInfos = type.GetProperties(bindingFlags);
 
             return propertyInfos.Where(
@@ -246,7 +247,8 @@ namespace Newtonsoft.Json.Utilities
                                 !p.GetIndexParameters()
                                     .Select(ip => ip.ParameterType)
                                     .SequenceEqual(indexParameters)
-                            ) {
+                            )
+                            {
                                 return false;
                             }
                         }
@@ -262,7 +264,8 @@ namespace Newtonsoft.Json.Utilities
             string name,
             MemberTypes memberType,
             BindingFlags bindingFlags
-        ) {
+        )
+        {
 #if PORTABLE
             return type.GetMemberInternal(name, memberType, bindingFlags);
 #else
@@ -324,7 +327,8 @@ namespace Newtonsoft.Json.Utilities
             object? placeHolder1,
             IList<Type> parameterTypes,
             object? placeHolder2
-        ) {
+        )
+        {
             return MethodBinder.SelectMethod(
                 type.GetTypeInfo()
                     .DeclaredMethods.Where(
@@ -342,7 +346,8 @@ namespace Newtonsoft.Json.Utilities
         public static IEnumerable<ConstructorInfo> GetConstructors(
             this Type type,
             BindingFlags bindingFlags
-        ) {
+        )
+        {
             return type.GetTypeInfo()
                 .DeclaredConstructors.Where(c => TestAccessibility(c, bindingFlags));
         }
@@ -358,7 +363,8 @@ namespace Newtonsoft.Json.Utilities
             object? placeholder1,
             IList<Type> parameterTypes,
             object? placeholder2
-        ) {
+        )
+        {
             return MethodBinder.SelectMethod(type.GetConstructors(bindingFlags), parameterTypes);
         }
 
@@ -371,7 +377,8 @@ namespace Newtonsoft.Json.Utilities
             this Type type,
             string member,
             BindingFlags bindingFlags
-        ) {
+        )
+        {
             return type.GetMemberInternal(member, null, bindingFlags);
         }
 
@@ -380,7 +387,8 @@ namespace Newtonsoft.Json.Utilities
             string member,
             MemberTypes? memberType,
             BindingFlags bindingFlags
-        ) {
+        )
+        {
             return type.GetTypeInfo()
                 .GetMembersRecursive()
                 .Where(
@@ -413,7 +421,8 @@ namespace Newtonsoft.Json.Utilities
         public static IEnumerable<PropertyInfo> GetProperties(
             this Type type,
             BindingFlags bindingFlags
-        ) {
+        )
+        {
             IList<PropertyInfo> properties =
                 (bindingFlags.HasFlag(BindingFlags.DeclaredOnly))
                     ? type.GetTypeInfo().DeclaredProperties.ToList()
@@ -506,7 +515,8 @@ namespace Newtonsoft.Json.Utilities
             this Type type,
             string name,
             BindingFlags bindingFlags
-        ) {
+        )
+        {
             PropertyInfo property = type.GetTypeInfo().GetDeclaredProperty(name);
             if (property == null || !TestAccessibility(property, bindingFlags))
             {
@@ -648,7 +658,8 @@ namespace Newtonsoft.Json.Utilities
             string fullTypeName,
             bool searchInterfaces,
             [NotNullWhen(true)] out Type? match
-        ) {
+        )
+        {
             Type current = type;
 
             while (current != null)
@@ -682,7 +693,8 @@ namespace Newtonsoft.Json.Utilities
             this Type type,
             string fullTypeName,
             bool searchInterfaces
-        ) {
+        )
+        {
             return type.AssignableToTypeName(fullTypeName, searchInterfaces, out _);
         }
 

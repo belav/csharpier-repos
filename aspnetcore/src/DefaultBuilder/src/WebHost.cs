@@ -102,7 +102,8 @@ namespace Microsoft.AspNetCore
             Action<IServiceCollection>? configureServices,
             Action<IApplicationBuilder> app,
             string? applicationName
-        ) {
+        )
+        {
             var builder = CreateDefaultBuilder();
 
             if (!string.IsNullOrEmpty(url))
@@ -299,7 +300,8 @@ namespace Microsoft.AspNetCore
                                 hostingContext.Configuration["ForwardedHeaders_Enabled"],
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             services.Configure<ForwardedHeadersOptions>(
                                 options =>
                                 {

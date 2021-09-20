@@ -333,7 +333,8 @@ namespace System.Net.Http
             // If we get response status >= 300, we will not send the request body.
             public async ValueTask<bool> WaitFor100ContinueAsync(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Debug.Assert(_request?.Content != null);
                 if (NetEventSource.Log.IsEnabled())
                     Trace($"Waiting to send request body content for 100-Continue.");
@@ -366,7 +367,8 @@ namespace System.Net.Http
                         _connection._pool.Settings._expect100ContinueTimeout,
                         Timeout.InfiniteTimeSpan
                     ).ConfigureAwait(false)
-                ) {
+                )
+                {
                     bool shouldSendContent = await waiter.Task.ConfigureAwait(false);
                     // By now, either we got a response from the server or the timer expired or cancellation was requested.
                     CancellationHelper.ThrowIfCancellationRequested(cancellationToken);
@@ -699,7 +701,8 @@ namespace System.Net.Http
                         if (
                             _response.StatusCode == HttpStatusCode.Continue
                             && _expect100ContinueWaiter != null
-                        ) {
+                        )
+                        {
                             if (NetEventSource.Log.IsEnabled())
                                 Trace("Received 100-Continue status.");
                             _expect100ContinueWaiter.TrySetResult(true);
@@ -750,7 +753,8 @@ namespace System.Net.Http
                     if (
                         _responseProtocolState != ResponseProtocolState.ExpectingHeaders
                         && _responseProtocolState != ResponseProtocolState.ExpectingTrailingHeaders
-                    ) {
+                    )
+                    {
                         if (NetEventSource.Log.IsEnabled())
                             Trace("Received header before status.");
                         throw new HttpRequestException(SR.net_http_invalid_response);
@@ -778,7 +782,8 @@ namespace System.Net.Http
                     }
                     else if (
                         (descriptor.HeaderType & HttpHeaderType.Content) == HttpHeaderType.Content
-                    ) {
+                    )
+                    {
                         Debug.Assert(_response != null && _response.Content != null);
                         string headerValue = descriptor.GetHeaderValue(value, valueEncoding);
                         _response.Content.Headers.TryAddWithoutValidation(descriptor, headerValue);
@@ -1005,7 +1010,8 @@ namespace System.Net.Http
                 Exception resetException,
                 Http2ProtocolErrorCode? resetStreamErrorCode = null,
                 bool canRetry = false
-            ) {
+            )
+            {
                 if (NetEventSource.Log.IsEnabled())
                     Trace(
                         $"{nameof(resetException)}={resetException}, {nameof(resetStreamErrorCode)}={resetStreamErrorCode}"
@@ -1024,7 +1030,8 @@ namespace System.Net.Http
                     if (
                         _requestCompletionState == StreamCompletionState.Completed
                         && _responseCompletionState == StreamCompletionState.Completed
-                    ) {
+                    )
+                    {
                         return;
                     }
 
@@ -1051,7 +1058,8 @@ namespace System.Net.Http
                     if (
                         resetStreamErrorCode == Http2ProtocolErrorCode.NoError
                         && _responseCompletionState == StreamCompletionState.Completed
-                    ) {
+                    )
+                    {
                         if (_requestCompletionState == StreamCompletionState.InProgress)
                         {
                             _requestBodyAbandoned = true;
@@ -1111,7 +1119,8 @@ namespace System.Net.Http
                         _responseProtocolState == ResponseProtocolState.ExpectingHeaders
                         || _responseProtocolState == ResponseProtocolState.ExpectingIgnoredHeaders
                         || _responseProtocolState == ResponseProtocolState.ExpectingStatus
-                    ) {
+                    )
+                    {
                         Debug.Assert(!_hasWaiter);
                         _hasWaiter = true;
                         _waitSource.Reset();
@@ -1120,7 +1129,8 @@ namespace System.Net.Http
                     else if (
                         _responseProtocolState == ResponseProtocolState.ExpectingData
                         || _responseProtocolState == ResponseProtocolState.ExpectingTrailingHeaders
-                    ) {
+                    )
+                    {
                         return (false, false);
                     }
                     else
@@ -1215,7 +1225,8 @@ namespace System.Net.Http
             private (bool wait, int bytesRead) TryReadFromBuffer(
                 Span<byte> buffer,
                 bool partOfSyncRead = false
-            ) {
+            )
+            {
                 Debug.Assert(buffer.Length > 0);
 
                 Debug.Assert(!Monitor.IsEntered(SyncObject));
@@ -1285,7 +1296,8 @@ namespace System.Net.Http
                 Memory<byte> buffer,
                 HttpResponseMessage responseMessage,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (buffer.Length == 0)
                 {
                     return 0;
@@ -1317,7 +1329,8 @@ namespace System.Net.Http
                 HttpResponseMessage responseMessage,
                 Stream destination,
                 int bufferSize
-            ) {
+            )
+            {
                 byte[] buffer = ArrayPool<byte>.Shared.Rent(bufferSize);
                 try
                 {
@@ -1361,7 +1374,8 @@ namespace System.Net.Http
                 Stream destination,
                 int bufferSize,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 byte[] buffer = ArrayPool<byte>.Shared.Rent(bufferSize);
                 try
                 {
@@ -1412,7 +1426,8 @@ namespace System.Net.Http
             private async ValueTask SendDataAsync(
                 ReadOnlyMemory<byte> buffer,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Debug.Assert(_requestBodyCancellationSource != null);
 
                 // Cancel the request body sending if cancellation is requested on the supplied cancellation token.
@@ -1487,7 +1502,8 @@ namespace System.Net.Http
                     if (
                         _responseBuffer.IsEmpty
                         && _responseProtocolState == ResponseProtocolState.Complete
-                    ) {
+                    )
+                    {
                         fullyConsumed = true;
                     }
                 }
@@ -1672,7 +1688,8 @@ namespace System.Net.Http
                 public override ValueTask<int> ReadAsync(
                     Memory<byte> destination,
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     Http2Stream? http2Stream = _http2Stream;
 
                     if (http2Stream == null)
@@ -1711,7 +1728,8 @@ namespace System.Net.Http
                     Stream destination,
                     int bufferSize,
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     ValidateCopyToArguments(destination, bufferSize);
                     Http2Stream? http2Stream = _http2Stream;
                     return http2Stream is null
@@ -1775,7 +1793,8 @@ namespace System.Net.Http
                 public override ValueTask WriteAsync(
                     ReadOnlyMemory<byte> buffer,
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     BytesWritten += buffer.Length;
 
                     Http2Stream? http2Stream = _http2Stream;

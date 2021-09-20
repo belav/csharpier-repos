@@ -81,7 +81,8 @@ namespace Microsoft.AspNetCore.SpaServices.AngularCli
             ILogger logger,
             DiagnosticSource diagnosticSource,
             CancellationToken applicationStoppingToken
-        ) {
+        )
+        {
             if (portNumber == default(int))
             {
                 portNumber = TcpPortFinder.FindAvailablePort();

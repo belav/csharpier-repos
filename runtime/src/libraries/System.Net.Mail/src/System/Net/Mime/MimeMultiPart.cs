@@ -218,7 +218,8 @@ namespace System.Net.Mime
             AsyncCallback? callback,
             bool allowUnicode,
             object? state
-        ) {
+        )
+        {
             _allowUnicode = allowUnicode;
             PrepareHeaders(allowUnicode);
             writer.WriteHeaders(Headers, allowUnicode);
@@ -241,7 +242,8 @@ namespace System.Net.Mime
                 BaseWriter writer,
                 LazyAsyncResult result,
                 IEnumerator<MimeBasePart> partsEnumerator
-            ) {
+            )
+            {
                 _writer = writer;
                 _result = result;
                 _partsEnumerator = partsEnumerator;

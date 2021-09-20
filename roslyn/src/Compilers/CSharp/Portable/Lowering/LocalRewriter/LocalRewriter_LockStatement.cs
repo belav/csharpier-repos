@@ -75,7 +75,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     WellKnownMember.System_Threading_Monitor__Exit,
                     out exitMethod
                 )
-            ) {
+            )
+            {
                 exitCallExpr = BoundCall.Synthesized(
                     lockSyntax,
                     receiverOpt: null,
@@ -114,7 +115,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 )
                 && // If we didn't find the overload introduced in .NET 4.0, then use the older one.
                 enterMethod.ParameterCount == 2
-            ) {
+            )
+            {
                 // C# 4.0+ version
                 // L $lock = `argument`;                      // sequence point
                 // bool $lockTaken = false;
@@ -243,7 +245,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private BoundStatement InstrumentLockTargetCapture(
             BoundLockStatement original,
             BoundStatement lockTargetCapture
-        ) {
+        )
+        {
             return this.Instrument
               ? _instrumenter.InstrumentLockTargetCapture(original, lockTargetCapture)
               : lockTargetCapture;

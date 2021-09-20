@@ -15,7 +15,8 @@ namespace System.Collections.Immutable.Tests
             Func<TCollection, int, int, int> indexOfItemIndex,
             Func<TCollection, int, int, int, int> indexOfItemIndexCount,
             Func<TCollection, int, int, int, IEqualityComparer<int>, int> indexOfItemIndexCountEQ
-        ) {
+        )
+        {
             var emptyCollection = factory(new int[0]);
             var collection1256 = factory(new[] { 1, 2, 5, 6 });
 
@@ -143,7 +144,8 @@ namespace System.Collections.Immutable.Tests
                 IEqualityComparer<int>,
                 int
             > lastIndexOfItemIndexCountEQ
-        ) {
+        )
+        {
             var emptyCollection = factory(new int[0]);
             var collection1256 = factory(new[] { 1, 2, 5, 6 });
 

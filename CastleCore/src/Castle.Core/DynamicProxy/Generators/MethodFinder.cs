@@ -34,7 +34,8 @@ namespace Castle.DynamicProxy.Generators
             if (
                 (flags & ~(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance))
                 != 0
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     "MethodFinder only supports the Public, NonPublic, and Instance binding flags.",
                     nameof(flags)
@@ -65,7 +66,8 @@ namespace Castle.DynamicProxy.Generators
         private static MethodInfo[] MakeFilteredCopy(
             MethodInfo[] methodsInCache,
             BindingFlags visibilityFlags
-        ) {
+        )
+        {
             if ((visibilityFlags & ~(BindingFlags.Public | BindingFlags.NonPublic)) != 0)
             {
                 throw new ArgumentException(

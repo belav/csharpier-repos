@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Adornments
             IViewTagAggregatorFactoryService aggregatorService,
             IAsynchronousOperationListener asyncListener,
             string adornmentLayerName
-        ) {
+        )
+        {
             Contract.ThrowIfNull(threadingContext);
             Contract.ThrowIfNull(textView);
             Contract.ThrowIfNull(aggregatorService);
@@ -71,7 +72,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Adornments
             IViewTagAggregatorFactoryService tagAggregatorFactoryService,
             IAsynchronousOperationListener asyncListener,
             string adornmentLayerName
-        ) {
+        )
+        {
             Contract.ThrowIfNull(threadingContext);
             Contract.ThrowIfNull(textView);
             Contract.ThrowIfNull(tagAggregatorFactoryService);
@@ -155,7 +157,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Adornments
         private static NormalizedSnapshotSpanCollection TranslateAndNormalize(
             IEnumerable<IMappingSpan> spans,
             ITextSnapshot targetSnapshot
-        ) {
+        )
+        {
             Contract.ThrowIfNull(spans);
 
             var translated = spans.SelectMany(span => span.GetSpans(targetSnapshot));
@@ -207,7 +210,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Adornments
                                     _asyncListener.BeginAsyncOperation(
                                         GetType() + ".OnTagsChanged.2"
                                     )
-                                ) {
+                                )
+                                {
                                     await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
                                         alwaysYield: true
                                     );
@@ -232,7 +236,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Adornments
                     FunctionId.Tagger_AdornmentManager_UpdateInvalidSpans,
                     CancellationToken.None
                 )
-            ) {
+            )
+            {
                 // this method should only run on UI thread as we do WPF here.
                 Contract.ThrowIfFalse(_textView.VisualElement.Dispatcher.CheckAccess());
 
@@ -268,7 +273,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Adornments
         private void UpdateSpans_CallOnlyOnUIThread(
             NormalizedSnapshotSpanCollection changedSpanCollection,
             bool removeOldTags
-        ) {
+        )
+        {
             Contract.ThrowIfNull(changedSpanCollection);
 
             // this method should only run on UI thread as we do WPF here.
@@ -332,7 +338,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Adornments
 
                     if (
                         !TryMapToSingleSnapshotSpan(tagMappingSpan.Span, viewSnapshot, out var span)
-                    ) {
+                    )
+                    {
                         continue;
                     }
 
@@ -372,7 +379,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Adornments
             IMappingSpan mappingSpan,
             ITextSnapshot viewSnapshot,
             out SnapshotSpan span
-        ) {
+        )
+        {
             // IMappingSpan.GetSpans is a surprisingly expensive function that allocates multiple
             // lists and collection if the view buffer is same as anchor we could just map the
             // anchor to the viewSnapshot however, since the _anchor is not available, we have to

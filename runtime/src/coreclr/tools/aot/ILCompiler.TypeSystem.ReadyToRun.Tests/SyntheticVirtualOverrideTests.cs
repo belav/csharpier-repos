@@ -214,7 +214,8 @@ namespace TypeSystemTests
                 if (
                     mdType.Name == "StructWithNoEqualsAndGetHashCode"
                     || mdType.Name == "ClassWithInjectedEqualsAndGetHashCode"
-                ) {
+                )
+                {
                     yield return GetEqualsMethod(type);
                     yield return GetGetHashCodeMethod(type);
                 }

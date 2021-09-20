@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
             SyntaxNode ifOrElseIf,
             CancellationToken cancellationToken,
             out SyntaxNode outerIfOrElseIf
-        ) {
+        )
+        {
             var syntaxFacts = document.GetLanguageService<ISyntaxFactsService>();
             var ifGenerator = document.GetLanguageService<IIfLikeStatementGenerator>();
 
@@ -73,7 +74,8 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
             SyntaxNode ifOrElseIf,
             CancellationToken cancellationToken,
             out SyntaxNode innerIfStatement
-        ) {
+        )
+        {
             var syntaxFacts = document.GetLanguageService<ISyntaxFactsService>();
             var ifGenerator = document.GetLanguageService<IIfLikeStatementGenerator>();
 
@@ -102,7 +104,8 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
             SyntaxNode root,
             SyntaxNode outerIfOrElseIf,
             SyntaxNode innerIfStatement
-        ) {
+        )
+        {
             var syntaxFacts = document.GetLanguageService<ISyntaxFactsService>();
             var ifGenerator = document.GetLanguageService<IIfLikeStatementGenerator>();
             var generator = document.GetLanguageService<SyntaxGenerator>();
@@ -130,7 +133,8 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
             IIfLikeStatementGenerator ifGenerator,
             SyntaxNode statement,
             out SyntaxNode ifOrElseIf
-        ) {
+        )
+        {
             // Check whether the statement is a first statement inside an if or else if.
             // If it's inside a block, it has to be the first statement of the block.
 
@@ -146,7 +150,8 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
                     if (
                         rootStatements.Count > 0
                         && ifGenerator.IsIfOrElseIf(rootStatements[0].Parent)
-                    ) {
+                    )
+                    {
                         ifOrElseIf = rootStatements[0].Parent;
                         return true;
                     }
@@ -162,7 +167,8 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
             IIfLikeStatementGenerator ifGenerator,
             SyntaxNode ifOrElseIf,
             out SyntaxNode ifStatement
-        ) {
+        )
+        {
             // Check whether the first statement inside an if or else if is an if statement.
             // If the if statement is inside a block, it has to be the first statement of the block.
 
@@ -191,7 +197,8 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
             SyntaxNode outerIfOrElseIf,
             SyntaxNode innerIfStatement,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // We can only merge this with the outer if statement if any inner else-if and else clauses are equal
             // to else-if and else clauses following the outer if statement because we'll be removing the inner ones.
             // Example of what we can merge:
@@ -212,7 +219,8 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
                     ifGenerator.GetElseIfAndElseClauses(innerIfStatement),
                     (a, b) => IsElseIfOrElseClauseEquivalent(syntaxFacts, ifGenerator, a, b)
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -262,7 +270,8 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
                         remainingOuterStatements.Take(statements.Count - 1),
                         syntaxFacts.AreEquivalent
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -282,7 +291,8 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
             IIfLikeStatementGenerator ifGenerator,
             SyntaxNode elseIfOrElseClause1,
             SyntaxNode elseIfOrElseClause2
-        ) {
+        )
+        {
             // Compare Else/ElseIf clauses for equality.
 
             var isIfStatement = ifGenerator.IsIfOrElseIf(elseIfOrElseClause1);
@@ -322,10 +332,11 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
                 Func<CancellationToken, Task<Document>> createChangedDocument,
                 MergeDirection direction,
                 string ifKeywordText
-            ) : base(
-                string.Format(GetResourceText(direction), ifKeywordText),
-                createChangedDocument
-            ) { }
+            )
+                : base(
+                    string.Format(GetResourceText(direction), ifKeywordText),
+                    createChangedDocument
+                ) { }
 
             private static string GetResourceText(MergeDirection direction) =>
                 direction == MergeDirection.Up

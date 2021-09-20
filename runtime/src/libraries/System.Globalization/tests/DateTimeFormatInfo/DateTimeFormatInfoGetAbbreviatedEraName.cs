@@ -38,7 +38,8 @@ namespace System.Globalization.Tests
             DateTimeFormatInfo format,
             int era,
             string expected
-        ) {
+        )
+        {
             Assert.Equal(expected, format.GetAbbreviatedEraName(era));
         }
 

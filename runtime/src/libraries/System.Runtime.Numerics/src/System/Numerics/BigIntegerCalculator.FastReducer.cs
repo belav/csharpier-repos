@@ -69,7 +69,8 @@ namespace System.Numerics
                 int rightLength,
                 uint[] bits,
                 int k
-            ) {
+            )
+            {
                 Debug.Assert(left != null);
                 Debug.Assert(left.Length >= leftLength);
                 Debug.Assert(right != null);
@@ -92,7 +93,8 @@ namespace System.Numerics
                         uint* l = left,
                             r = right,
                             b = bits
-                    ) {
+                    )
+                    {
                         if (leftLength < rightLength)
                         {
                             Multiply(
@@ -130,7 +132,8 @@ namespace System.Numerics
                 int rightLength,
                 uint[] modulus,
                 int k
-            ) {
+            )
+            {
                 Debug.Assert(left != null);
                 Debug.Assert(left.Length >= leftLength);
                 Debug.Assert(right != null);
@@ -150,7 +153,8 @@ namespace System.Numerics
                     uint* l = left,
                         r = right,
                         m = modulus
-                ) {
+                )
+                {
                     SubtractSelf(l, leftLength, r, rightLength);
                     leftLength = ActualLength(left, leftLength);
 

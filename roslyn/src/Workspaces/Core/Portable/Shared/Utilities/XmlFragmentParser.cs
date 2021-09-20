@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             string xmlFragment,
             Action<XmlReader, TArg> callback,
             TArg arg
-        ) {
+        )
+        {
             var instance = s_pool.Allocate();
             try
             {
@@ -219,7 +220,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 char[] dest,
                 ref int destIndex,
                 ref int destCount
-            ) {
+            )
+            {
                 if (destCount == 0 || srcIndex < 0 || srcIndex >= src.Length)
                 {
                     return 0;

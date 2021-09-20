@@ -16,7 +16,8 @@ namespace System.Security.Cryptography.Hashing.Algorithms.Tests
             ReadOnlySpan<byte> source,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             return SHA512.TryHashData(source, destination, out bytesWritten);
         }
 

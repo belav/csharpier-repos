@@ -32,7 +32,8 @@ namespace System.Globalization
         private static void LoadAppLocalIcuCore(
             ReadOnlySpan<char> version,
             ReadOnlySpan<char> suffix
-        ) {
+        )
+        {
             const string extension = ".dll";
             const string icuucBase = "icuuc";
             const string icuinBase = "icuin";

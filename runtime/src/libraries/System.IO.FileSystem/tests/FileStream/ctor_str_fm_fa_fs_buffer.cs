@@ -16,7 +16,8 @@ namespace System.IO.Tests
             FileMode mode,
             FileAccess access,
             FileShare share
-        ) {
+        )
+        {
             return CreateFileStream(path, mode, access, share, c_DefaultBufferSize);
         }
 
@@ -26,7 +27,8 @@ namespace System.IO.Tests
             FileAccess access,
             FileShare share,
             int bufferSize
-        ) {
+        )
+        {
             return new FileStream(path, mode, access, share, bufferSize);
         }
 

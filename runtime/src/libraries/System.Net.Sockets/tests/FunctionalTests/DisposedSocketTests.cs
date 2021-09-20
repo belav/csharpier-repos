@@ -21,7 +21,8 @@ namespace System.Net.Sockets.Tests
 
         private static Socket GetDisposedSocket(
             AddressFamily addressFamily = AddressFamily.InterNetwork
-        ) {
+        )
+        {
             using (var socket = new Socket(addressFamily, SocketType.Stream, ProtocolType.Tcp))
             {
                 return socket;
@@ -1111,7 +1112,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Stream,
                     ProtocolType.Tcp
                 )
-            ) {
+            )
+            {
                 listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listener.Listen();
 

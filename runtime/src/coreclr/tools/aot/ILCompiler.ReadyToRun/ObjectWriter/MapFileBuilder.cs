@@ -187,7 +187,8 @@ namespace ILCompiler.PEWriter
                 OutputNode node in _outputInfoBuilder.Nodes.Where(node => node.Relocations != 0)
                     .OrderByDescending(node => node.Relocations)
                     .Take(NumberOfTopNodesByRelocType)
-            ) {
+            )
+            {
                 writer.Write($"{node.Relocations, 8} | ");
                 if (_outputInfoBuilder.FindSymbol(node, out int symbolIndex))
                 {
@@ -205,7 +206,8 @@ namespace ILCompiler.PEWriter
                 int sectionIndex = 0;
                 sectionIndex < _outputInfoBuilder.Sections.Count;
                 sectionIndex++
-            ) {
+            )
+            {
                 Section section = _outputInfoBuilder.Sections[sectionIndex];
                 writer.Write($"{sectionIndex, 5} | ");
                 writer.Write($"0x{section.FilePosWhenPlaced:X8} | ");
@@ -227,7 +229,8 @@ namespace ILCompiler.PEWriter
             while (
                 nodeIndex < _outputInfoBuilder.Nodes.Count
                 || symbolIndex < _outputInfoBuilder.Symbols.Count
-            ) {
+            )
+            {
                 if (
                     nodeIndex >= _outputInfoBuilder.Nodes.Count
                     || symbolIndex < _outputInfoBuilder.Symbols.Count
@@ -235,7 +238,8 @@ namespace ILCompiler.PEWriter
                             _outputInfoBuilder.Symbols[symbolIndex],
                             _outputInfoBuilder.Nodes[nodeIndex]
                         ) < 0
-                ) {
+                )
+                {
                     // No more nodes or next symbol is below next node - emit symbol
                     OutputSymbol symbol = _outputInfoBuilder.Symbols[symbolIndex++];
                     Section section = _outputInfoBuilder.Sections[symbol.SectionIndex];
@@ -261,7 +265,8 @@ namespace ILCompiler.PEWriter
                             node,
                             _outputInfoBuilder.Symbols[symbolIndex]
                         ) == 0
-                    ) {
+                    )
+                    {
                         OutputSymbol symbol = _outputInfoBuilder.Symbols[symbolIndex++];
                         writer.Write($"{symbol.Name}");
                     }
@@ -280,7 +285,8 @@ namespace ILCompiler.PEWriter
             while (
                 nodeIndex < _outputInfoBuilder.Nodes.Count
                 || symbolIndex < _outputInfoBuilder.Symbols.Count
-            ) {
+            )
+            {
                 if (
                     nodeIndex >= _outputInfoBuilder.Nodes.Count
                     || symbolIndex < _outputInfoBuilder.Symbols.Count
@@ -288,7 +294,8 @@ namespace ILCompiler.PEWriter
                             _outputInfoBuilder.Symbols[symbolIndex],
                             _outputInfoBuilder.Nodes[nodeIndex]
                         ) < 0
-                ) {
+                )
+                {
                     // No more nodes or next symbol is below next node - emit symbol
                     OutputSymbol symbol = _outputInfoBuilder.Symbols[symbolIndex++];
                     Section section = _outputInfoBuilder.Sections[symbol.SectionIndex];
@@ -315,7 +322,8 @@ namespace ILCompiler.PEWriter
                             node,
                             _outputInfoBuilder.Symbols[symbolIndex]
                         ) == 0
-                    ) {
+                    )
+                    {
                         OutputSymbol symbol = _outputInfoBuilder.Symbols[symbolIndex++];
                         writer.Write($"{symbol.Name}");
                     }

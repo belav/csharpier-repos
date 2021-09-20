@@ -58,7 +58,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Progression
         public IEnumerable<SyntaxNode> GetTopLevelNodesFromDocument(
             SyntaxNode root,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // We implement this method lazily so we are able to abort as soon as we need to.
             if (!cancellationToken.IsCancellationRequested)
             {
@@ -80,7 +81,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Progression
                             || node.Kind() == SyntaxKind.VariableDeclarator
                             || node.Kind() == SyntaxKind.MethodDeclaration
                             || node.Kind() == SyntaxKind.PropertyDeclaration
-                        ) {
+                        )
+                        {
                             yield return node;
                         }
                         else
@@ -105,7 +107,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Progression
             ISymbol symbol,
             bool includeContainingSymbol,
             SymbolDisplayFormat displayFormat
-        ) {
+        )
+        {
             var label = symbol.ToDisplayString(displayFormat);
 
             var typeToShow = GetType(symbol);

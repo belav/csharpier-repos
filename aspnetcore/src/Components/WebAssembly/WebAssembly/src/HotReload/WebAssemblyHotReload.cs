@@ -55,7 +55,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.HotReload
                 if (
                     _deltas.TryGetValue(moduleId.Value, out var result)
                     && _appliedAssemblies.TryAdd(loadedAssembly, loadedAssembly)
-                ) {
+                )
+                {
                     // A delta for this specific Module exists and we haven't called ApplyUpdate on this instance of Assembly as yet.
                     foreach (var (metadataDelta, ilDelta) in CollectionsMarshal.AsSpan(result))
                     {
@@ -89,7 +90,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.HotReload
             string moduleIdString,
             byte[] metadataDelta,
             byte[] ilDeta
-        ) {
+        )
+        {
             var moduleId = Guid.Parse(moduleIdString);
             var assembly = AppDomain.CurrentDomain.GetAssemblies()
                 .FirstOrDefault(
@@ -140,7 +142,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.HotReload
             {
                 foreach (
                     var attribute in assembly.GetCustomAttributes<MetadataUpdateHandlerAttribute>()
-                ) {
+                )
+                {
                     var handlerType = attribute.HandlerType;
 
                     var methodFound = false;

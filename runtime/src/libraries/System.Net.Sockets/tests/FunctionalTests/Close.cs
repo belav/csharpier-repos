@@ -12,7 +12,8 @@ namespace System.Net.Sockets.Tests
         {
             using (
                 var s = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
-            ) {
+            )
+            {
                 s.Close();
             }
         }
@@ -25,7 +26,8 @@ namespace System.Net.Sockets.Tests
         {
             using (
                 var s = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
-            ) {
+            )
+            {
                 s.Close(timeout);
             }
         }
@@ -35,7 +37,8 @@ namespace System.Net.Sockets.Tests
         {
             using (
                 var s = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
-            ) {
+            )
+            {
                 Assert.Throws<ArgumentOutOfRangeException>(() => s.Close(-2));
             }
         }

@@ -68,7 +68,8 @@ namespace System.Runtime.Intrinsics.X86
             public static Vector128<double> ConvertScalarToVector128Double(
                 Vector128<double> upper,
                 long value
-            ) {
+            )
+            {
                 throw new PlatformNotSupportedException();
             }
 
@@ -431,7 +432,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<ushort> CompareEqual(
             Vector128<ushort> left,
             Vector128<ushort> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -457,7 +459,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<double> CompareEqual(
             Vector128<double> left,
             Vector128<double> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -468,7 +471,8 @@ namespace System.Runtime.Intrinsics.X86
         public static bool CompareScalarOrderedEqual(
             Vector128<double> left,
             Vector128<double> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -479,7 +483,8 @@ namespace System.Runtime.Intrinsics.X86
         public static bool CompareScalarUnorderedEqual(
             Vector128<double> left,
             Vector128<double> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -490,7 +495,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<double> CompareScalarEqual(
             Vector128<double> left,
             Vector128<double> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -501,7 +507,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<sbyte> CompareGreaterThan(
             Vector128<sbyte> left,
             Vector128<sbyte> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -511,7 +518,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<short> CompareGreaterThan(
             Vector128<short> left,
             Vector128<short> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -529,7 +537,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<double> CompareGreaterThan(
             Vector128<double> left,
             Vector128<double> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -540,7 +549,8 @@ namespace System.Runtime.Intrinsics.X86
         public static bool CompareScalarOrderedGreaterThan(
             Vector128<double> left,
             Vector128<double> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -551,7 +561,8 @@ namespace System.Runtime.Intrinsics.X86
         public static bool CompareScalarUnorderedGreaterThan(
             Vector128<double> left,
             Vector128<double> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -562,7 +573,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<double> CompareScalarGreaterThan(
             Vector128<double> left,
             Vector128<double> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -573,7 +585,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<double> CompareGreaterThanOrEqual(
             Vector128<double> left,
             Vector128<double> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -584,7 +597,8 @@ namespace System.Runtime.Intrinsics.X86
         public static bool CompareScalarOrderedGreaterThanOrEqual(
             Vector128<double> left,
             Vector128<double> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -595,7 +609,8 @@ namespace System.Runtime.Intrinsics.X86
         public static bool CompareScalarUnorderedGreaterThanOrEqual(
             Vector128<double> left,
             Vector128<double> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -606,7 +621,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<double> CompareScalarGreaterThanOrEqual(
             Vector128<double> left,
             Vector128<double> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -617,7 +633,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<sbyte> CompareLessThan(
             Vector128<sbyte> left,
             Vector128<sbyte> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -627,7 +644,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<short> CompareLessThan(
             Vector128<short> left,
             Vector128<short> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -645,7 +663,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<double> CompareLessThan(
             Vector128<double> left,
             Vector128<double> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -656,7 +675,8 @@ namespace System.Runtime.Intrinsics.X86
         public static bool CompareScalarOrderedLessThan(
             Vector128<double> left,
             Vector128<double> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -667,7 +687,8 @@ namespace System.Runtime.Intrinsics.X86
         public static bool CompareScalarUnorderedLessThan(
             Vector128<double> left,
             Vector128<double> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -678,7 +699,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<double> CompareScalarLessThan(
             Vector128<double> left,
             Vector128<double> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -689,7 +711,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<double> CompareLessThanOrEqual(
             Vector128<double> left,
             Vector128<double> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -700,7 +723,8 @@ namespace System.Runtime.Intrinsics.X86
         public static bool CompareScalarOrderedLessThanOrEqual(
             Vector128<double> left,
             Vector128<double> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -711,7 +735,8 @@ namespace System.Runtime.Intrinsics.X86
         public static bool CompareScalarUnorderedLessThanOrEqual(
             Vector128<double> left,
             Vector128<double> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -722,7 +747,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<double> CompareScalarLessThanOrEqual(
             Vector128<double> left,
             Vector128<double> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -733,7 +759,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<double> CompareNotEqual(
             Vector128<double> left,
             Vector128<double> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -744,7 +771,8 @@ namespace System.Runtime.Intrinsics.X86
         public static bool CompareScalarOrderedNotEqual(
             Vector128<double> left,
             Vector128<double> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -755,7 +783,8 @@ namespace System.Runtime.Intrinsics.X86
         public static bool CompareScalarUnorderedNotEqual(
             Vector128<double> left,
             Vector128<double> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -766,7 +795,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<double> CompareScalarNotEqual(
             Vector128<double> left,
             Vector128<double> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -777,7 +807,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<double> CompareNotGreaterThan(
             Vector128<double> left,
             Vector128<double> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -788,7 +819,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<double> CompareScalarNotGreaterThan(
             Vector128<double> left,
             Vector128<double> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -799,7 +831,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<double> CompareNotGreaterThanOrEqual(
             Vector128<double> left,
             Vector128<double> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -810,7 +843,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<double> CompareScalarNotGreaterThanOrEqual(
             Vector128<double> left,
             Vector128<double> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -821,7 +855,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<double> CompareNotLessThan(
             Vector128<double> left,
             Vector128<double> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -832,7 +867,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<double> CompareScalarNotLessThan(
             Vector128<double> left,
             Vector128<double> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -843,7 +879,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<double> CompareNotLessThanOrEqual(
             Vector128<double> left,
             Vector128<double> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -854,7 +891,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<double> CompareScalarNotLessThanOrEqual(
             Vector128<double> left,
             Vector128<double> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -865,7 +903,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<double> CompareOrdered(
             Vector128<double> left,
             Vector128<double> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -876,7 +915,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<double> CompareScalarOrdered(
             Vector128<double> left,
             Vector128<double> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -887,7 +927,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<double> CompareUnordered(
             Vector128<double> left,
             Vector128<double> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -898,7 +939,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<double> CompareScalarUnordered(
             Vector128<double> left,
             Vector128<double> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -983,7 +1025,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<double> ConvertScalarToVector128Double(
             Vector128<double> upper,
             int value
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -993,7 +1036,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<double> ConvertScalarToVector128Double(
             Vector128<double> upper,
             Vector128<float> value
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1011,7 +1055,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<float> ConvertScalarToVector128Single(
             Vector128<float> upper,
             Vector128<double> value
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1065,7 +1110,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<double> DivideScalar(
             Vector128<double> left,
             Vector128<double> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -1318,7 +1364,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<sbyte> source,
             Vector128<sbyte> mask,
             sbyte* address
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1329,7 +1376,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<byte> source,
             Vector128<byte> mask,
             byte* address
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -1485,7 +1533,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<double> MultiplyScalar(
             Vector128<double> left,
             Vector128<double> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -1504,7 +1553,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<ushort> MultiplyHigh(
             Vector128<ushort> left,
             Vector128<ushort> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -1515,7 +1565,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<int> MultiplyAddAdjacent(
             Vector128<short> left,
             Vector128<short> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -1616,7 +1667,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<sbyte> PackSignedSaturate(
             Vector128<short> left,
             Vector128<short> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1635,7 +1687,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<byte> PackUnsignedSaturate(
             Vector128<short> left,
             Vector128<short> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -1646,7 +1699,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<ushort> SumAbsoluteDifferences(
             Vector128<byte> left,
             Vector128<byte> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -1674,7 +1728,8 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<double> left,
             Vector128<double> right,
             byte control
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -1719,7 +1774,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<short> ShiftLeftLogical(
             Vector128<short> value,
             Vector128<short> count
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1729,7 +1785,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<ushort> ShiftLeftLogical(
             Vector128<ushort> value,
             Vector128<ushort> count
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1763,7 +1820,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<ulong> ShiftLeftLogical(
             Vector128<ulong> value,
             Vector128<ulong> count
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -1823,7 +1881,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<sbyte> ShiftLeftLogical128BitLane(
             Vector128<sbyte> value,
             byte numBytes
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1833,7 +1892,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<byte> ShiftLeftLogical128BitLane(
             Vector128<byte> value,
             byte numBytes
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1843,7 +1903,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<short> ShiftLeftLogical128BitLane(
             Vector128<short> value,
             byte numBytes
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1853,7 +1914,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<ushort> ShiftLeftLogical128BitLane(
             Vector128<ushort> value,
             byte numBytes
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1871,7 +1933,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<uint> ShiftLeftLogical128BitLane(
             Vector128<uint> value,
             byte numBytes
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1881,7 +1944,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<long> ShiftLeftLogical128BitLane(
             Vector128<long> value,
             byte numBytes
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1891,7 +1955,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<ulong> ShiftLeftLogical128BitLane(
             Vector128<ulong> value,
             byte numBytes
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -1902,7 +1967,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<short> ShiftRightArithmetic(
             Vector128<short> value,
             Vector128<short> count
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1912,7 +1978,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<int> ShiftRightArithmetic(
             Vector128<int> value,
             Vector128<int> count
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -1940,7 +2007,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<short> ShiftRightLogical(
             Vector128<short> value,
             Vector128<short> count
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1950,7 +2018,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<ushort> ShiftRightLogical(
             Vector128<ushort> value,
             Vector128<ushort> count
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1968,7 +2037,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<uint> ShiftRightLogical(
             Vector128<uint> value,
             Vector128<uint> count
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1978,7 +2048,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<long> ShiftRightLogical(
             Vector128<long> value,
             Vector128<long> count
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -1988,7 +2059,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<ulong> ShiftRightLogical(
             Vector128<ulong> value,
             Vector128<ulong> count
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -2048,7 +2120,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<sbyte> ShiftRightLogical128BitLane(
             Vector128<sbyte> value,
             byte numBytes
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -2058,7 +2131,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<byte> ShiftRightLogical128BitLane(
             Vector128<byte> value,
             byte numBytes
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -2068,7 +2142,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<short> ShiftRightLogical128BitLane(
             Vector128<short> value,
             byte numBytes
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -2078,7 +2153,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<ushort> ShiftRightLogical128BitLane(
             Vector128<ushort> value,
             byte numBytes
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -2088,7 +2164,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<int> ShiftRightLogical128BitLane(
             Vector128<int> value,
             byte numBytes
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -2098,7 +2175,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<uint> ShiftRightLogical128BitLane(
             Vector128<uint> value,
             byte numBytes
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -2108,7 +2186,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<long> ShiftRightLogical128BitLane(
             Vector128<long> value,
             byte numBytes
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -2118,7 +2197,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<ulong> ShiftRightLogical128BitLane(
             Vector128<ulong> value,
             byte numBytes
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -2525,7 +2605,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<double> SubtractScalar(
             Vector128<double> left,
             Vector128<double> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -2536,7 +2617,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<sbyte> SubtractSaturate(
             Vector128<sbyte> left,
             Vector128<sbyte> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -2546,7 +2628,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<short> SubtractSaturate(
             Vector128<short> left,
             Vector128<short> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
         /// <summary>
@@ -2564,7 +2647,8 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<ushort> SubtractSaturate(
             Vector128<ushort> left,
             Vector128<ushort> right
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 

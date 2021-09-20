@@ -235,7 +235,8 @@ namespace System.Linq.Expressions.Compiler
 
         protected internal override Expression VisitRuntimeVariables(
             RuntimeVariablesExpression node
-        ) {
+        )
+        {
             foreach (ParameterExpression v in node.Variables)
             {
                 // Force hoisting of these variables

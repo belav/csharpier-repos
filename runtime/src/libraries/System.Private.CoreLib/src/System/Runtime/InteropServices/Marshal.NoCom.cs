@@ -72,7 +72,8 @@ namespace System.Runtime.InteropServices
             object o,
             Type T,
             CustomQueryInterfaceMode mode
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException(SR.PlatformNotSupported_ComInterop);
         }
 

@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
             CodeFixContext context,
             Diagnostic diagnostic,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var options = await GetOptionsAsync(context.Document, cancellationToken)
                 .ConfigureAwait(false);
             var tree = await context.Document.GetSyntaxTreeAsync(cancellationToken)
@@ -70,7 +71,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         private static async Task<OptionSet> GetOptionsAsync(
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var tree = await document.GetSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
             var analyzerConfigOptions =
                 document.Project.AnalyzerOptions.AnalyzerConfigOptionsProvider.GetOptions(tree);

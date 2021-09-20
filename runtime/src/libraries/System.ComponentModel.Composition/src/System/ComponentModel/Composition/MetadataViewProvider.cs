@@ -14,7 +14,8 @@ namespace System.ComponentModel.Composition
     {
         public static TMetadataView GetMetadataView<TMetadataView>(
             IDictionary<string, object?> metadata
-        ) {
+        )
+        {
             if (metadata == null)
             {
                 throw new ArgumentNullException(nameof(metadata));
@@ -175,7 +176,8 @@ namespace System.ComponentModel.Composition
                 ExportServices.IsDefaultMetadataViewType(metadataViewType)
                 || metadataViewType.IsInterface
                 || ExportServices.IsDictionaryConstructorViewType(metadataViewType)
-            ) {
+            )
+            {
                 return true;
             }
 

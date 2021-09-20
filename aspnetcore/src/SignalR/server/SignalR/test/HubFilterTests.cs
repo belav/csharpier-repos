@@ -140,7 +140,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         private async Task AssertMethodsCalled(
             IServiceProvider serviceProvider,
             TcsService tcsService
-        ) {
+        )
+        {
             var connectionHandler = serviceProvider.GetService<HubConnectionHandler<MethodHub>>();
 
             using (var client = new TestClient())

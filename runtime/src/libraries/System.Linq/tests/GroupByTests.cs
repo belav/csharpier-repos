@@ -14,7 +14,8 @@ namespace System.Linq.Tests
             IEnumerable<TKey> keys,
             IEnumerable<TElement> elements,
             IEnumerable<IGrouping<TKey, TElement>> grouping
-        ) {
+        )
+        {
             AssertGroupingCorrect<TKey, TElement>(
                 keys,
                 elements,
@@ -28,7 +29,8 @@ namespace System.Linq.Tests
             IEnumerable<TElement> elements,
             IEnumerable<IGrouping<TKey, TElement>> grouping,
             IEqualityComparer<TKey> keyComparer
-        ) {
+        )
+        {
             if (grouping == null)
             {
                 Assert.Null(elements);

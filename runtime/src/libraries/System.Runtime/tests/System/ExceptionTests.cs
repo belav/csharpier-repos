@@ -136,7 +136,8 @@ namespace System.Tests
 
         private static (string, string, int) ThrowAndRethrowSameMethod(
             out (string, string, int) rethrownExceptionStackFrame
-        ) {
+        )
+        {
             try
             {
                 rethrownExceptionStackFrame = GetSourceInformation(1);
@@ -167,7 +168,8 @@ namespace System.Tests
 
         private static void ThrowAndRethrowOtherMethod(
             out (string, string, int) rethrownExceptionStackFrame
-        ) {
+        )
+        {
             try
             {
                 rethrownExceptionStackFrame = GetSourceInformation(1);
@@ -194,7 +196,8 @@ namespace System.Tests
             (string CallerMemberName, string SourceFilePath, int SourceLineNumber) expectedStackFrame,
             string reportedCallStack,
             int skipFrames
-        ) {
+        )
+        {
             try
             {
                 string frameParserRegex;
@@ -249,7 +252,8 @@ namespace System.Tests
             [CallerMemberName] string memberName = "",
             [CallerFilePath] string sourceFilePath = "",
             [CallerLineNumber] int sourceLineNumber = 0
-        ) {
+        )
+        {
             return (memberName, sourceFilePath, sourceLineNumber + offset);
         }
     }

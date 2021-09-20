@@ -31,7 +31,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             IModelBinder keyBinder,
             IModelBinder valueBinder,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             if (keyBinder == null)
             {
                 throw new ArgumentNullException(nameof(keyBinder));
@@ -128,7 +129,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             IModelBinder binder,
             string propertyName,
             string propertyModelName
-        ) {
+        )
+        {
             var propertyModelMetadata = bindingContext.ModelMetadata.Properties[propertyName]!;
 
             using (
@@ -138,7 +140,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                     modelName: propertyModelName,
                     model: null
                 )
-            ) {
+            )
+            {
                 await binder.BindModelAsync(bindingContext);
 
                 return bindingContext.Result;

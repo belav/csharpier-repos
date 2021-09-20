@@ -95,7 +95,8 @@ namespace System.Reflection.Emit
         internal ModuleBuilder(
             AssemblyBuilder assemblyBuilder,
             InternalModuleBuilder internalModuleBuilder
-        ) {
+        )
+        {
             _internalModuleBuilder = internalModuleBuilder;
             _assemblyBuilder = assemblyBuilder;
         }
@@ -110,7 +111,8 @@ namespace System.Reflection.Emit
             if (
                 _typeBuilderDict.TryGetValue(strTypeName, out Type? foundType)
                 && ReferenceEquals(foundType.DeclaringType, enclosingType)
-            ) {
+            )
+            {
                 // Cannot have two types with the same name
                 throw new ArgumentException(SR.Argument_DuplicateTypeName);
             }
@@ -172,7 +174,8 @@ namespace System.Reflection.Emit
             string methodName,
             byte[] signature,
             int length
-        ) {
+        )
+        {
             ModuleBuilder thisModule = this;
             return GetMemberRefFromSignature(
                 new QCallModule(ref thisModule),
@@ -230,7 +233,8 @@ namespace System.Reflection.Emit
             int tkType,
             RuntimeTypeHandle declaringType,
             RuntimeFieldInfo runtimeField
-        ) {
+        )
+        {
             Debug.Assert(runtimeField != null);
 
             ModuleBuilder thisModule = this;
@@ -525,7 +529,8 @@ namespace System.Reflection.Emit
             Type[][]? optionalCustomModifiers,
             Type[]? optionalParameterTypes,
             int cGenericParameters
-        ) {
+        )
+        {
             SignatureHelper sig = SignatureHelper.GetMethodSigHelper(
                 this,
                 call,
@@ -861,7 +866,8 @@ namespace System.Reflection.Emit
             int metadataToken,
             Type[]? genericTypeArguments,
             Type[]? genericMethodArguments
-        ) {
+        )
+        {
             return InternalModule.ResolveMethod(
                 metadataToken,
                 genericTypeArguments,
@@ -874,7 +880,8 @@ namespace System.Reflection.Emit
             int metadataToken,
             Type[]? genericTypeArguments,
             Type[]? genericMethodArguments
-        ) {
+        )
+        {
             return InternalModule.ResolveField(
                 metadataToken,
                 genericTypeArguments,
@@ -887,7 +894,8 @@ namespace System.Reflection.Emit
             int metadataToken,
             Type[]? genericTypeArguments,
             Type[]? genericMethodArguments
-        ) {
+        )
+        {
             return InternalModule.ResolveType(
                 metadataToken,
                 genericTypeArguments,
@@ -900,7 +908,8 @@ namespace System.Reflection.Emit
             int metadataToken,
             Type[]? genericTypeArguments,
             Type[]? genericMethodArguments
-        ) {
+        )
+        {
             return InternalModule.ResolveMember(
                 metadataToken,
                 genericTypeArguments,
@@ -917,7 +926,8 @@ namespace System.Reflection.Emit
         public override void GetPEKind(
             out PortableExecutableKinds peKind,
             out ImageFileMachine machine
-        ) {
+        )
+        {
             InternalModule.GetPEKind(out peKind, out machine);
         }
 
@@ -955,7 +965,8 @@ namespace System.Reflection.Emit
             CallingConventions callConvention,
             Type[]? types,
             ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             // Cannot call InternalModule.GetMethods because it doesn't allow types to be null
             return InternalModule.GetMethodInternal(
                 name,
@@ -1013,7 +1024,8 @@ namespace System.Reflection.Emit
             string name,
             TypeAttributes attr,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type? parent
-        ) {
+        )
+        {
             lock (SyncRoot)
             {
                 AssemblyBuilder.CheckContext(parent);
@@ -1034,7 +1046,8 @@ namespace System.Reflection.Emit
             TypeAttributes attr,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type? parent,
             int typesize
-        ) {
+        )
+        {
             lock (SyncRoot)
             {
                 return DefineTypeNoLock(
@@ -1054,7 +1067,8 @@ namespace System.Reflection.Emit
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type? parent,
             PackingSize packingSize,
             int typesize
-        ) {
+        )
+        {
             lock (SyncRoot)
             {
                 return DefineTypeNoLock(name, attr, parent, null, packingSize, typesize);
@@ -1066,7 +1080,8 @@ namespace System.Reflection.Emit
             TypeAttributes attr,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type? parent,
             Type[]? interfaces
-        ) {
+        )
+        {
             lock (SyncRoot)
             {
                 return DefineTypeNoLock(
@@ -1087,7 +1102,8 @@ namespace System.Reflection.Emit
             Type[]? interfaces,
             PackingSize packingSize,
             int typesize
-        ) {
+        )
+        {
             return new TypeBuilder(
                 name,
                 attr,
@@ -1105,7 +1121,8 @@ namespace System.Reflection.Emit
             TypeAttributes attr,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type? parent,
             PackingSize packsize
-        ) {
+        )
+        {
             lock (SyncRoot)
             {
                 return DefineTypeNoLock(name, attr, parent, packsize);
@@ -1117,7 +1134,8 @@ namespace System.Reflection.Emit
             TypeAttributes attr,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type? parent,
             PackingSize packsize
-        ) {
+        )
+        {
             return new TypeBuilder(
                 name,
                 attr,
@@ -1155,7 +1173,8 @@ namespace System.Reflection.Emit
             string name,
             TypeAttributes visibility,
             Type underlyingType
-        ) {
+        )
+        {
             return new EnumBuilder(name, underlyingType, visibility, this);
         }
 
@@ -1172,7 +1191,8 @@ namespace System.Reflection.Emit
             Type[]? parameterTypes,
             CallingConvention nativeCallConv,
             CharSet nativeCharSet
-        ) {
+        )
+        {
             return DefinePInvokeMethod(
                 name,
                 dllName,
@@ -1196,7 +1216,8 @@ namespace System.Reflection.Emit
             Type[]? parameterTypes,
             CallingConvention nativeCallConv,
             CharSet nativeCharSet
-        ) {
+        )
+        {
             lock (SyncRoot)
             {
                 // Global methods must be static.
@@ -1227,7 +1248,8 @@ namespace System.Reflection.Emit
             MethodAttributes attributes,
             Type? returnType,
             Type[]? parameterTypes
-        ) {
+        )
+        {
             return DefineGlobalMethod(
                 name,
                 attributes,
@@ -1243,7 +1265,8 @@ namespace System.Reflection.Emit
             CallingConventions callingConvention,
             Type? returnType,
             Type[]? parameterTypes
-        ) {
+        )
+        {
             return DefineGlobalMethod(
                 name,
                 attributes,
@@ -1267,7 +1290,8 @@ namespace System.Reflection.Emit
             Type[]? parameterTypes,
             Type[][]? requiredParameterTypeCustomModifiers,
             Type[][]? optionalParameterTypeCustomModifiers
-        ) {
+        )
+        {
             lock (SyncRoot)
             {
                 return DefineGlobalMethodNoLock(
@@ -1294,7 +1318,8 @@ namespace System.Reflection.Emit
             Type[]? parameterTypes,
             Type[][]? requiredParameterTypeCustomModifiers,
             Type[][]? optionalParameterTypeCustomModifiers
-        ) {
+        )
+        {
             if (_moduleData._hasGlobalBeenCreated)
             {
                 throw new InvalidOperationException(SR.InvalidOperation_GlobalsHaveBeenCreated);
@@ -1361,7 +1386,8 @@ namespace System.Reflection.Emit
             string name,
             byte[] data,
             FieldAttributes attributes
-        ) {
+        )
+        {
             // This method will define an initialized Data in .sdata.
             // We will create a fake TypeDef to represent the data with size. This TypeDef
             // will be the signature for the Field.
@@ -1376,7 +1402,8 @@ namespace System.Reflection.Emit
             string name,
             byte[] data,
             FieldAttributes attributes
-        ) {
+        )
+        {
             // This method will define an initialized Data in .sdata.
             // We will create a fake TypeDef to represent the data with size. This TypeDef
             // will be the signature for the Field.
@@ -1392,7 +1419,8 @@ namespace System.Reflection.Emit
             string name,
             int size,
             FieldAttributes attributes
-        ) {
+        )
+        {
             lock (SyncRoot)
             {
                 return DefineUninitializedDataNoLock(name, size, attributes);
@@ -1403,7 +1431,8 @@ namespace System.Reflection.Emit
             string name,
             int size,
             FieldAttributes attributes
-        ) {
+        )
+        {
             // This method will define an uninitialized Data in .sdata.
             // We will create a fake TypeDef to represent the data with size. This TypeDef
             // will be the signature for the Field.
@@ -1470,7 +1499,8 @@ namespace System.Reflection.Emit
                 || type.IsGenericParameter
                 || type.IsArray
                 || type.IsPointer
-            ) {
+            )
+            {
                 byte[] sig = SignatureHelper.GetTypeSigToken(this, type)
                     .InternalGetSignature(out int length);
                 return GetTokenFromTypeSpec(sig, length);
@@ -1687,7 +1717,8 @@ namespace System.Reflection.Emit
             MethodBase method,
             Type[]? optionalParameterTypes,
             bool useMethodDef
-        ) {
+        )
+        {
             int tk;
             MethodInfo? methodInfo = method as MethodInfo;
 
@@ -1711,7 +1742,8 @@ namespace System.Reflection.Emit
                         methodInfoUnbound.DeclaringType != null
                         && methodInfoUnbound.DeclaringType.IsGenericType
                     )
-                ) {
+                )
+                {
                     tk = GetMemberRefToken(methodInfoUnbound, null);
                 }
                 else
@@ -1745,7 +1777,8 @@ namespace System.Reflection.Emit
                 if (
                     ((method.CallingConvention & CallingConventions.VarArgs) == 0)
                     && (method.DeclaringType == null || !method.DeclaringType.IsGenericType)
-                ) {
+                )
+                {
                     if (methodInfo != null)
                     {
                         tk = GetMethodToken(methodInfo);
@@ -1770,7 +1803,8 @@ namespace System.Reflection.Emit
             CallingConventions callingConvention,
             Type? returnType,
             Type[]? parameterTypes
-        ) {
+        )
+        {
             lock (SyncRoot)
             {
                 return GetArrayMethodTokenNoLock(
@@ -1789,7 +1823,8 @@ namespace System.Reflection.Emit
             CallingConventions callingConvention,
             Type? returnType,
             Type[]? parameterTypes
-        ) {
+        )
+        {
             if (arrayClass == null)
             {
                 throw new ArgumentNullException(nameof(arrayClass));
@@ -1841,7 +1876,8 @@ namespace System.Reflection.Emit
             CallingConventions callingConvention,
             Type? returnType,
             Type[]? parameterTypes
-        ) {
+        )
+        {
             AssemblyBuilder.CheckContext(returnType, arrayClass);
             AssemblyBuilder.CheckContext(parameterTypes);
 
@@ -2095,7 +2131,8 @@ namespace System.Reflection.Emit
             Guid language,
             Guid languageVendor,
             Guid documentType
-        ) {
+        )
+        {
             // url cannot be null but can be an empty string
             if (url == null)
             {
@@ -2113,7 +2150,8 @@ namespace System.Reflection.Emit
             Guid language,
             Guid languageVendor,
             Guid documentType
-        ) {
+        )
+        {
             if (_iSymWriter == null)
             {
                 // Cannot DefineDocument when it is not a debug module

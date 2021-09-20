@@ -11,7 +11,8 @@ namespace Internal.TypeSystem
             string typeName,
             string assemblyName,
             string messageArg
-        ) {
+        )
+        {
             throw new TypeSystemException.TypeLoadException(id, typeName, assemblyName, messageArg);
         }
 
@@ -20,7 +21,8 @@ namespace Internal.TypeSystem
             ExceptionStringID id,
             string typeName,
             string assemblyName
-        ) {
+        )
+        {
             throw new TypeSystemException.TypeLoadException(id, typeName, assemblyName);
         }
 
@@ -29,7 +31,8 @@ namespace Internal.TypeSystem
             TypeDesc owningType,
             string methodName,
             MethodSignature signature
-        ) {
+        )
+        {
             throw new TypeSystemException.MissingMethodException(
                 ExceptionStringID.MissingMethod,
                 Format.Method(owningType, methodName, signature)

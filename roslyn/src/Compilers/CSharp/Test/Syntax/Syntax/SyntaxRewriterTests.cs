@@ -806,7 +806,8 @@ class C { }
             string output,
             GreenRewriter rewriter,
             bool isExpr
-        ) {
+        )
+        {
             var red = isExpr
                 ? (CSharpSyntaxNode)SyntaxFactory.ParseExpression(input)
                 : SyntaxFactory.ParseStatement(input);
@@ -856,21 +857,24 @@ class C { }
                 Func<InternalSyntax.CSharpSyntaxNode, InternalSyntax.CSharpSyntaxNode> rewriteNode =
                     null,
                 Func<InternalSyntax.SyntaxToken, InternalSyntax.SyntaxToken> rewriteToken = null
-            ) {
+            )
+            {
                 _rewriteNode = rewriteNode;
                 _rewriteToken = rewriteToken;
             }
 
             public override InternalSyntax.CSharpSyntaxNode Visit(
                 InternalSyntax.CSharpSyntaxNode node
-            ) {
+            )
+            {
                 var visited = base.Visit(node);
                 return _rewriteNode == null ? visited : _rewriteNode(visited);
             }
 
             public override InternalSyntax.CSharpSyntaxNode VisitToken(
                 InternalSyntax.SyntaxToken token
-            ) {
+            )
+            {
                 var visited = (InternalSyntax.SyntaxToken)base.VisitToken(token);
                 return _rewriteToken == null ? visited : _rewriteToken(visited);
             }
@@ -889,7 +893,8 @@ class C { }
                 Func<SyntaxNode, SyntaxNode> rewriteNode = null,
                 Func<SyntaxToken, SyntaxToken> rewriteToken = null,
                 Func<SyntaxTrivia, SyntaxTrivia> rewriteTrivia = null
-            ) {
+            )
+            {
                 _rewriteNode = rewriteNode;
                 _rewriteToken = rewriteToken;
                 _rewriteTrivia = rewriteTrivia;

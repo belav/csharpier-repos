@@ -117,7 +117,8 @@ namespace System.ComponentModel.Design.Serialization
                     new RelationshipEntry(source),
                     out RelationshipEntry retVal
                 ) && retVal._owner.IsAlive
-            ) {
+            )
+            {
                 return new MemberRelationship(retVal._owner.Target, retVal._member);
             }
 
@@ -132,7 +133,8 @@ namespace System.ComponentModel.Design.Serialization
         protected virtual void SetRelationship(
             MemberRelationship source,
             MemberRelationship relationship
-        ) {
+        )
+        {
             if (!relationship.IsEmpty && !SupportsRelationship(source, relationship))
             {
                 ThrowRelationshipNotSupported(source, relationship);
@@ -149,7 +151,8 @@ namespace System.ComponentModel.Design.Serialization
         private static void ThrowRelationshipNotSupported(
             MemberRelationship source,
             MemberRelationship relationship
-        ) {
+        )
+        {
             string sourceName = TypeDescriptor.GetComponentName(source.Owner);
             string relName = TypeDescriptor.GetComponentName(relationship.Owner);
             if (sourceName == null)

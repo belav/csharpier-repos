@@ -327,7 +327,8 @@ namespace System.Xml.XPath
                         attribute.Name.LocalName == localName
                         && attribute.Name.NamespaceName == namespaceName
                         && !attribute.IsNamespaceDeclaration
-                    ) {
+                    )
+                    {
                         _source = attribute;
                         return true;
                     }
@@ -346,7 +347,8 @@ namespace System.Xml.XPath
                     if (
                         element.Name.LocalName == localName
                         && element.Name.NamespaceName == namespaceName
-                    ) {
+                    )
+                    {
                         _source = element;
                         return true;
                     }
@@ -526,7 +528,8 @@ namespace System.Xml.XPath
                     if (
                         element.Name.LocalName == localName
                         && element.Name.NamespaceName == namespaceName
-                    ) {
+                    )
+                    {
                         _source = element;
                         return true;
                     }
@@ -548,7 +551,8 @@ namespace System.Xml.XPath
                         (TextMask & mask) != 0
                         && container.GetParent() == null
                         && container is XDocument
-                    ) {
+                    )
+                    {
                         mask &= ~TextMask;
                     }
                     XNode? next = null;
@@ -562,7 +566,8 @@ namespace System.Xml.XPath
                         if (
                             ((1 << (int)next.NodeType) & mask) != 0
                             && !(node is XText && next is XText)
-                        ) {
+                        )
+                        {
                             _source = next;
                             return true;
                         }
@@ -584,7 +589,8 @@ namespace System.Xml.XPath
                         XAttribute? attribute = currentAttribute.NextAttribute;
                         attribute != null;
                         attribute = attribute.NextAttribute
-                    ) {
+                    )
+                    {
                         if (!attribute.IsNamespaceDeclaration)
                         {
                             _source = attribute;
@@ -633,7 +639,8 @@ namespace System.Xml.XPath
                                 GetXmlNamespaceDeclaration(),
                                 _parent
                             )
-                        ) {
+                        )
+                        {
                             a = GetXmlNamespaceDeclaration();
                         }
                         break;
@@ -998,7 +1005,8 @@ namespace System.Xml.XPath
             this XNode node,
             string expression,
             IXmlNamespaceResolver? resolver
-        ) {
+        )
+        {
             if (node == null)
                 throw new ArgumentNullException(nameof(node));
             return default(XPathEvaluator).Evaluate<object>(node, expression, resolver);
@@ -1027,7 +1035,8 @@ namespace System.Xml.XPath
             this XNode node,
             string expression,
             IXmlNamespaceResolver? resolver
-        ) {
+        )
+        {
             return node.XPathSelectElements(expression, resolver).FirstOrDefault();
         }
 
@@ -1054,7 +1063,8 @@ namespace System.Xml.XPath
             this XNode node,
             string expression,
             IXmlNamespaceResolver? resolver
-        ) {
+        )
+        {
             if (node == null)
                 throw new ArgumentNullException(nameof(node));
             return (IEnumerable<XElement>)default(XPathEvaluator).Evaluate<XElement>(

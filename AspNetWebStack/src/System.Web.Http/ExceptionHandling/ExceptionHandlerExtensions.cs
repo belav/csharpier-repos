@@ -24,7 +24,8 @@ namespace System.Web.Http.ExceptionHandling
             this IExceptionHandler handler,
             ExceptionContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (handler == null)
             {
                 throw new ArgumentNullException("handler");
@@ -43,7 +44,8 @@ namespace System.Web.Http.ExceptionHandling
             IExceptionHandler handler,
             ExceptionHandlerContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.Assert(handler != null);
             Contract.Assert(context != null);
 

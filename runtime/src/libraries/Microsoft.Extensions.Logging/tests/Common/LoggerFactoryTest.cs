@@ -632,7 +632,8 @@ namespace Microsoft.Extensions.Logging.Test
                 TState state,
                 Exception exception,
                 Func<TState, Exception, string> formatter
-            ) {
+            )
+            {
                 LogText.Add(formatter(state, exception));
                 _scopeProvider.ForEachScope(
                     (scope, builder) => builder.Add(scope.ToString()),
@@ -674,7 +675,8 @@ namespace Microsoft.Extensions.Logging.Test
                 TState state,
                 Exception exception,
                 Func<TState, Exception, string> formatter
-            ) {
+            )
+            {
                 LogText.Add(formatter(state, exception));
 
                 // Notice that other ILoggers maybe not call "ToString()" on the scope but enumerate it and this isn't covered by this implementation.

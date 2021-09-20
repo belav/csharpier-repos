@@ -170,7 +170,8 @@ namespace System.Reflection.Metadata
             Stream stream,
             MetadataStreamOptions options = MetadataStreamOptions.Default,
             int size = 0
-        ) {
+        )
+        {
             if (stream == null)
             {
                 throw new ArgumentNullException(nameof(stream));
@@ -269,7 +270,8 @@ namespace System.Reflection.Metadata
         public unsafe MetadataReader GetMetadataReader(
             MetadataReaderOptions options = MetadataReaderOptions.Default,
             MetadataStringDecoder? utf8Decoder = null
-        ) {
+        )
+        {
             var cachedReader = _lazyMetadataReader;
 
             if (CanReuseReader(cachedReader, options, utf8Decoder))
@@ -307,7 +309,8 @@ namespace System.Reflection.Metadata
             MetadataReader? reader,
             MetadataReaderOptions options,
             MetadataStringDecoder? utf8DecoderOpt
-        ) {
+        )
+        {
             return reader != null
                 && reader.Options == options
                 && ReferenceEquals(

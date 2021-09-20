@@ -131,7 +131,8 @@ namespace System.Net.Http.Internal
             int count,
             AsyncCallback callback,
             object state
-        ) {
+        )
+        {
             return base.BeginRead(
                 buffer,
                 offset,
@@ -151,7 +152,8 @@ namespace System.Net.Http.Internal
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return base.ReadAsync(
                 buffer,
                 offset,
@@ -212,7 +214,8 @@ namespace System.Net.Http.Internal
             int count,
             AsyncCallback callback,
             object state
-        ) {
+        )
+        {
             throw Error.NotSupported(Properties.Resources.ByteRangeStreamReadOnly);
         }
 
@@ -226,7 +229,8 @@ namespace System.Net.Http.Internal
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw Error.NotSupported(Properties.Resources.ByteRangeStreamReadOnly);
         }
 

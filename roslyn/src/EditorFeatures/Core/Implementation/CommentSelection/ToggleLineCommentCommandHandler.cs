@@ -70,7 +70,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
             NormalizedSnapshotSpanCollection selectedSpans,
             ValueTuple command,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (
                 Logger.LogBlock(
                     FunctionId.CommandHandler_ToggleLineComment,
@@ -84,7 +85,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
                     ),
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 var commentInfo = await service.GetInfoAsync(
                         document,
                         selectedSpans.First().Span.ToTextSpan(),
@@ -103,7 +105,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
         private static CommentSelectionResult ToggleLineComment(
             CommentSelectionInfo commentInfo,
             NormalizedSnapshotSpanCollection selectedSpans
-        ) {
+        )
+        {
             var textChanges = ArrayBuilder<TextChange>.GetInstance();
             var trackingSpans = ArrayBuilder<CommentTrackingSpan>.GetInstance();
 
@@ -120,7 +123,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
                 linesInSelections.Values.Any(
                     lines => SelectionHasUncommentedLines(lines, commentInfo)
                 )
-            ) {
+            )
+            {
                 foreach (var selection in linesInSelections)
                 {
                     CommentLines(
@@ -159,7 +163,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
             ArrayBuilder<TextChange> textChanges,
             ArrayBuilder<CommentTrackingSpan> trackingSpans,
             CommentSelectionInfo commentInfo
-        ) {
+        )
+        {
             foreach (var line in commentedLines)
             {
                 if (!line.IsEmptyOrWhitespace())
@@ -185,7 +190,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
             ArrayBuilder<TextChange> textChanges,
             ArrayBuilder<CommentTrackingSpan> trackingSpans,
             CommentSelectionInfo commentInfo
-        ) {
+        )
+        {
             var indentation = DetermineSmallestIndent(
                 selectedSpan,
                 linesInSelection.First(),
@@ -237,7 +243,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
         private static bool IsLineCommentedOrEmpty(
             ITextSnapshotLine line,
             CommentSelectionInfo info
-        ) {
+        )
+        {
             var lineText = line.GetText();
             // We don't add / remove anything for empty lines.
             return lineText.Trim()

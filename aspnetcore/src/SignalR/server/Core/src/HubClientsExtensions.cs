@@ -33,7 +33,8 @@ namespace Microsoft.AspNetCore.SignalR
             this IHubClients<T> hubClients,
             string excludedConnectionId1,
             string excludedConnectionId2
-        ) {
+        )
+        {
             return hubClients.AllExcept(new[] { excludedConnectionId1, excludedConnectionId2 });
         }
 
@@ -50,7 +51,8 @@ namespace Microsoft.AspNetCore.SignalR
             string excludedConnectionId1,
             string excludedConnectionId2,
             string excludedConnectionId3
-        ) {
+        )
+        {
             return hubClients.AllExcept(
                 new[] { excludedConnectionId1, excludedConnectionId2, excludedConnectionId3 }
             );
@@ -71,7 +73,8 @@ namespace Microsoft.AspNetCore.SignalR
             string excludedConnectionId2,
             string excludedConnectionId3,
             string excludedConnectionId4
-        ) {
+        )
+        {
             return hubClients.AllExcept(
                 new[]
                 {
@@ -100,7 +103,8 @@ namespace Microsoft.AspNetCore.SignalR
             string excludedConnectionId3,
             string excludedConnectionId4,
             string excludedConnectionId5
-        ) {
+        )
+        {
             return hubClients.AllExcept(
                 new[]
                 {
@@ -132,7 +136,8 @@ namespace Microsoft.AspNetCore.SignalR
             string excludedConnectionId4,
             string excludedConnectionId5,
             string excludedConnectionId6
-        ) {
+        )
+        {
             return hubClients.AllExcept(
                 new[]
                 {
@@ -167,7 +172,8 @@ namespace Microsoft.AspNetCore.SignalR
             string excludedConnectionId5,
             string excludedConnectionId6,
             string excludedConnectionId7
-        ) {
+        )
+        {
             return hubClients.AllExcept(
                 new[]
                 {
@@ -205,7 +211,8 @@ namespace Microsoft.AspNetCore.SignalR
             string excludedConnectionId6,
             string excludedConnectionId7,
             string excludedConnectionId8
-        ) {
+        )
+        {
             return hubClients.AllExcept(
                 new[]
                 {
@@ -230,7 +237,8 @@ namespace Microsoft.AspNetCore.SignalR
         public static T AllExcept<T>(
             this IHubClients<T> hubClients,
             IEnumerable<string> excludedConnectionIds
-        ) {
+        )
+        {
             return hubClients.AllExcept(excludedConnectionIds.ToList());
         }
 
@@ -256,7 +264,8 @@ namespace Microsoft.AspNetCore.SignalR
             this IHubClients<T> hubClients,
             string connection1,
             string connection2
-        ) {
+        )
+        {
             return hubClients.Clients(new[] { connection1, connection2 });
         }
 
@@ -273,7 +282,8 @@ namespace Microsoft.AspNetCore.SignalR
             string connection1,
             string connection2,
             string connection3
-        ) {
+        )
+        {
             return hubClients.Clients(new[] { connection1, connection2, connection3 });
         }
 
@@ -292,7 +302,8 @@ namespace Microsoft.AspNetCore.SignalR
             string connection2,
             string connection3,
             string connection4
-        ) {
+        )
+        {
             return hubClients.Clients(new[] { connection1, connection2, connection3, connection4 });
         }
 
@@ -313,7 +324,8 @@ namespace Microsoft.AspNetCore.SignalR
             string connection3,
             string connection4,
             string connection5
-        ) {
+        )
+        {
             return hubClients.Clients(
                 new[] { connection1, connection2, connection3, connection4, connection5 }
             );
@@ -338,7 +350,8 @@ namespace Microsoft.AspNetCore.SignalR
             string connection4,
             string connection5,
             string connection6
-        ) {
+        )
+        {
             return hubClients.Clients(
                 new[]
                 {
@@ -373,7 +386,8 @@ namespace Microsoft.AspNetCore.SignalR
             string connection5,
             string connection6,
             string connection7
-        ) {
+        )
+        {
             return hubClients.Clients(
                 new[]
                 {
@@ -411,7 +425,8 @@ namespace Microsoft.AspNetCore.SignalR
             string connection6,
             string connection7,
             string connection8
-        ) {
+        )
+        {
             return hubClients.Clients(
                 new[]
                 {
@@ -436,7 +451,8 @@ namespace Microsoft.AspNetCore.SignalR
         public static T Clients<T>(
             this IHubClients<T> hubClients,
             IEnumerable<string> connectionIds
-        ) {
+        )
+        {
             return hubClients.Clients(connectionIds.ToList());
         }
 
@@ -476,7 +492,8 @@ namespace Microsoft.AspNetCore.SignalR
             string group1,
             string group2,
             string group3
-        ) {
+        )
+        {
             return hubClients.Groups(new[] { group1, group2, group3 });
         }
 
@@ -495,7 +512,8 @@ namespace Microsoft.AspNetCore.SignalR
             string group2,
             string group3,
             string group4
-        ) {
+        )
+        {
             return hubClients.Groups(new[] { group1, group2, group3, group4 });
         }
 
@@ -516,7 +534,8 @@ namespace Microsoft.AspNetCore.SignalR
             string group3,
             string group4,
             string group5
-        ) {
+        )
+        {
             return hubClients.Groups(new[] { group1, group2, group3, group4, group5 });
         }
 
@@ -539,7 +558,8 @@ namespace Microsoft.AspNetCore.SignalR
             string group4,
             string group5,
             string group6
-        ) {
+        )
+        {
             return hubClients.Groups(new[] { group1, group2, group3, group4, group5, group6 });
         }
 
@@ -564,7 +584,8 @@ namespace Microsoft.AspNetCore.SignalR
             string group5,
             string group6,
             string group7
-        ) {
+        )
+        {
             return hubClients.Groups(
                 new[] { group1, group2, group3, group4, group5, group6, group7 }
             );
@@ -593,7 +614,8 @@ namespace Microsoft.AspNetCore.SignalR
             string group6,
             string group7,
             string group8
-        ) {
+        )
+        {
             return hubClients.Groups(
                 new[] { group1, group2, group3, group4, group5, group6, group7, group8 }
             );
@@ -621,7 +643,8 @@ namespace Microsoft.AspNetCore.SignalR
             this IHubClients<T> hubClients,
             string groupName,
             string excludedConnectionId1
-        ) {
+        )
+        {
             return hubClients.GroupExcept(groupName, new[] { excludedConnectionId1 });
         }
 
@@ -638,7 +661,8 @@ namespace Microsoft.AspNetCore.SignalR
             string groupName,
             string excludedConnectionId1,
             string excludedConnectionId2
-        ) {
+        )
+        {
             return hubClients.GroupExcept(
                 groupName,
                 new[] { excludedConnectionId1, excludedConnectionId2 }
@@ -660,7 +684,8 @@ namespace Microsoft.AspNetCore.SignalR
             string excludedConnectionId1,
             string excludedConnectionId2,
             string excludedConnectionId3
-        ) {
+        )
+        {
             return hubClients.GroupExcept(
                 groupName,
                 new[] { excludedConnectionId1, excludedConnectionId2, excludedConnectionId3 }
@@ -684,7 +709,8 @@ namespace Microsoft.AspNetCore.SignalR
             string excludedConnectionId2,
             string excludedConnectionId3,
             string excludedConnectionId4
-        ) {
+        )
+        {
             return hubClients.GroupExcept(
                 groupName,
                 new[]
@@ -716,7 +742,8 @@ namespace Microsoft.AspNetCore.SignalR
             string excludedConnectionId3,
             string excludedConnectionId4,
             string excludedConnectionId5
-        ) {
+        )
+        {
             return hubClients.GroupExcept(
                 groupName,
                 new[]
@@ -751,7 +778,8 @@ namespace Microsoft.AspNetCore.SignalR
             string excludedConnectionId4,
             string excludedConnectionId5,
             string excludedConnectionId6
-        ) {
+        )
+        {
             return hubClients.GroupExcept(
                 groupName,
                 new[]
@@ -789,7 +817,8 @@ namespace Microsoft.AspNetCore.SignalR
             string excludedConnectionId5,
             string excludedConnectionId6,
             string excludedConnectionId7
-        ) {
+        )
+        {
             return hubClients.GroupExcept(
                 groupName,
                 new[]
@@ -830,7 +859,8 @@ namespace Microsoft.AspNetCore.SignalR
             string excludedConnectionId6,
             string excludedConnectionId7,
             string excludedConnectionId8
-        ) {
+        )
+        {
             return hubClients.GroupExcept(
                 groupName,
                 new[]
@@ -858,7 +888,8 @@ namespace Microsoft.AspNetCore.SignalR
             this IHubClients<T> hubClients,
             string groupName,
             IEnumerable<string> excludedConnectionIds
-        ) {
+        )
+        {
             return hubClients.GroupExcept(groupName, excludedConnectionIds.ToList());
         }
 
@@ -898,7 +929,8 @@ namespace Microsoft.AspNetCore.SignalR
             string user1,
             string user2,
             string user3
-        ) {
+        )
+        {
             return hubClients.Users(new[] { user1, user2, user3 });
         }
 
@@ -917,7 +949,8 @@ namespace Microsoft.AspNetCore.SignalR
             string user2,
             string user3,
             string user4
-        ) {
+        )
+        {
             return hubClients.Users(new[] { user1, user2, user3, user4 });
         }
 
@@ -938,7 +971,8 @@ namespace Microsoft.AspNetCore.SignalR
             string user3,
             string user4,
             string user5
-        ) {
+        )
+        {
             return hubClients.Users(new[] { user1, user2, user3, user4, user5 });
         }
 
@@ -961,7 +995,8 @@ namespace Microsoft.AspNetCore.SignalR
             string user4,
             string user5,
             string user6
-        ) {
+        )
+        {
             return hubClients.Users(new[] { user1, user2, user3, user4, user5, user6 });
         }
 
@@ -986,7 +1021,8 @@ namespace Microsoft.AspNetCore.SignalR
             string user5,
             string user6,
             string user7
-        ) {
+        )
+        {
             return hubClients.Users(new[] { user1, user2, user3, user4, user5, user6, user7 });
         }
 
@@ -1013,7 +1049,8 @@ namespace Microsoft.AspNetCore.SignalR
             string user6,
             string user7,
             string user8
-        ) {
+        )
+        {
             return hubClients.Users(
                 new[] { user1, user2, user3, user4, user5, user6, user7, user8 }
             );

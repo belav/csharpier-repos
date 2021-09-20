@@ -26,7 +26,8 @@ namespace Microsoft.Extensions.Internal
             Expression coercerExpression,
             Type coercerResultType,
             AwaitableInfo coercedAwaitableInfo
-        ) {
+        )
+        {
             CoercerExpression = coercerExpression;
             CoercerResultType = coercerResultType;
             AwaitableInfo = coercedAwaitableInfo;
@@ -48,7 +49,8 @@ namespace Microsoft.Extensions.Internal
                     out var coercerExpression,
                     out var coercerResultType
                 )
-            ) {
+            )
+            {
                 if (AwaitableInfo.IsTypeAwaitable(coercerResultType, out var coercedAwaitableInfo))
                 {
                     info = new CoercedAwaitableInfo(

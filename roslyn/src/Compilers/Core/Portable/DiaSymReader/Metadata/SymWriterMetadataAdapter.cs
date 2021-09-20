@@ -39,7 +39,8 @@ namespace Microsoft.DiaSymReader
             [Out] int* qualifiedNameLength,
             [Out] TypeAttributes* attributes,
             [Out] int* baseType
-        ) {
+        )
+        {
             Debug.Assert(baseType == null);
 
             if (
@@ -49,7 +50,8 @@ namespace Microsoft.DiaSymReader
                     out var typeName,
                     out var attrib
                 )
-            ) {
+            )
+            {
                 return HResult.E_INVALIDARG;
             }
 
@@ -101,7 +103,8 @@ namespace Microsoft.DiaSymReader
             [Out] int* signatureLength,
             [Out] int* relativeVirtualAddress,
             [Out] MethodImplAttributes* implAttributes
-        ) {
+        )
+        {
             Debug.Assert(attributes == null);
             Debug.Assert(signature == null);
             Debug.Assert(signatureLength == null);
@@ -114,7 +117,8 @@ namespace Microsoft.DiaSymReader
                     out var nameStr,
                     out var declaringTypeToken
                 )
-            ) {
+            )
+            {
                 return HResult.E_INVALIDARG;
             }
 

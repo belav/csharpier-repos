@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Utilities
         public static async Task<int> PerformRestore(
             string workspaceFilePath,
             ITestOutputHelper output
-        ) {
+        )
+        {
             var workspacePath = Path.Combine(
                 TestProjectsPathHelper.GetProjectsDirectory(),
                 workspaceFilePath

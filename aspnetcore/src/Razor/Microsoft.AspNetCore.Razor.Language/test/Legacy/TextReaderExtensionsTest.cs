@@ -149,7 +149,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             string expectedOutput,
             int expectedPeek,
             Func<TextReader, string> action
-        ) {
+        )
+        {
             // Arrange
             var reader = new StringReader(testString);
 

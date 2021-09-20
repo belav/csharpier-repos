@@ -273,7 +273,8 @@ namespace System.Net.Formatting.Tests
             MemoryStream ms,
             Type tSource,
             MediaTypeFormatter formatter
-        ) {
+        )
+        {
             bool f = formatter.CanReadType(tSource);
             Assert.True(f);
 
@@ -292,7 +293,8 @@ namespace System.Net.Formatting.Tests
             object obj,
             Type tSource,
             MediaTypeFormatter formatter
-        ) {
+        )
+        {
             bool f = formatter.CanWriteType(tSource);
             Assert.True(f);
 

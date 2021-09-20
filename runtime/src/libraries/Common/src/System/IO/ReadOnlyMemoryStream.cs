@@ -131,7 +131,8 @@ namespace System.IO
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ValidateBufferArguments(buffer, offset, count);
             EnsureNotClosed();
             return cancellationToken.IsCancellationRequested
@@ -143,7 +144,8 @@ namespace System.IO
         public override ValueTask<int> ReadAsync(
             Memory<byte> buffer,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             EnsureNotClosed();
             return cancellationToken.IsCancellationRequested
               ? ValueTask.FromCanceled<int>(cancellationToken)
@@ -180,7 +182,8 @@ namespace System.IO
             Stream destination,
             int bufferSize,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ValidateCopyToArguments(destination, bufferSize);
             EnsureNotClosed();
             return _content.Length > _position

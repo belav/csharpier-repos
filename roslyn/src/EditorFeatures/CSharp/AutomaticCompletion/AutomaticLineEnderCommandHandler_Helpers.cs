@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
             SyntaxNode anchorNode,
             ImmutableArray<StatementSyntax> nodesToInsert,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var rootEditor = new SyntaxEditor(root, document.Project.Solution.Workspace);
 
             // 1. Insert the node before anchor node
@@ -65,7 +66,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
             SyntaxNode oldNode,
             SyntaxNode newNode,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // 1. Tag the new node so that it could be found later.
             var annotatedNewNode = newNode.WithAdditionalAnnotations(s_replacementNodeAnnotation);
 
@@ -99,7 +101,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
             SyntaxNode embeddedStatementOwner,
             IEditorOptions editorOptions,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // If there is no inner statement, just add an empty block to it.
             // e.g.
             // class Bar
@@ -203,7 +206,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
             IEditorOptions editorOptions,
             StatementSyntax innerStatement,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // If this do statement doesn't end with the 'while' parts
             // e.g:
             // before:
@@ -220,7 +224,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
                 && doStatementNode.SemicolonToken.IsMissing
                 && doStatementNode.OpenParenToken.IsMissing
                 && doStatementNode.CloseParenToken.IsMissing
-            ) {
+            )
+            {
                 return ReplaceStatementOwnerAndInsertStatement(
                     document,
                     root,
@@ -262,7 +267,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
             IEditorOptions editorOptions,
             StatementSyntax innerStatement,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // This ifStatement doesn't have an else clause, and its parent is a Block.
             // Insert the innerStatement next to the ifStatement
             // e.g.
@@ -318,7 +324,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
             IEditorOptions editorOptions,
             StatementSyntax innerStatement,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // If this is an 'els$$e if(true)' statement,
             // then treat it as the selected node is the nested if statement
             if (elseClauseNode.Statement is IfStatementSyntax)
@@ -401,7 +408,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
             ObjectCreationExpressionSyntax objectCreationExpressionNode,
             bool addOrRemoveInitializer,
             IEditorOptions editorOptions
-        ) {
+        )
+        {
             // 1. Add '()' after the type.
             // e.g. var c = new Bar => var c = new Bar()
             var objectCreationNodeWithArgumentList = WithArgumentListIfNeeded(
@@ -423,7 +431,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
                 nextToken.IsKind(SyntaxKind.SemicolonToken)
                 && nextToken.Parent != null
                 && nextToken.Parent.Contains(objectCreationExpressionNode)
-            ) {
+            )
+            {
                 var objectCreationNodeContainer = nextToken.Parent;
                 // Replace the old object creation node and add the semicolon token.
                 // Note: need to move the trailing trivia of the objectCreationExpressionNode after the semicolon token
@@ -458,7 +467,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
         /// </summary>
         private static ObjectCreationExpressionSyntax WithArgumentListIfNeeded(
             ObjectCreationExpressionSyntax objectCreationExpressionNode
-        ) {
+        )
+        {
             var argumentList = objectCreationExpressionNode.ArgumentList;
             var hasArgumentList = argumentList != null && !argumentList.IsMissing;
             if (!hasArgumentList)
@@ -616,12 +626,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
 
         private static bool ShouldAddBraceForAccessorDeclaration(
             AccessorDeclarationSyntax accessorDeclarationNode
-        ) {
+        )
+        {
             if (
                 accessorDeclarationNode.Body == null
                 && accessorDeclarationNode.ExpressionBody == null
                 && accessorDeclarationNode.SemicolonToken.IsMissing
-            ) {
+            )
+            {
                 // If the accessor doesn't have body, expression body and semicolon, let's check this case
                 // for both event and property,
                 // e.g.
@@ -637,7 +649,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
                 if (
                     parent is AccessorListSyntax accessorListNode
                     && parentOfParent is PropertyDeclarationSyntax
-                ) {
+                )
+                {
                     var otherAccessors = accessorListNode.Accessors.Except(
                             new[] { accessorDeclarationNode }
                         )
@@ -673,11 +686,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
         private static bool ShouldAddBraceForIndexerDeclaration(
             IndexerDeclarationSyntax indexerDeclarationNode,
             int caretPosition
-        ) {
+        )
+        {
             if (
                 WithinAttributeLists(indexerDeclarationNode, caretPosition)
                 || WithinBraces(indexerDeclarationNode.AccessorList, caretPosition)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -695,7 +710,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
                     || indexerDeclarationNode.AccessorList.IsMissing
                 )
                 && indexerDeclarationNode.ExpressionBody == null
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -786,7 +802,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
         private static bool ShouldAddBraceForElseClause(
             ElseClauseSyntax elseClauseNode,
             int caretPosition
-        ) {
+        )
+        {
             // In case it is an else-if clause, if the statement is IfStatement, use its insertion statement
             // otherwise, use the end of the else keyword
             // Example:
@@ -911,7 +928,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
         /// </summary>
         private static bool ShouldRemoveBraceForObjectCreationExpression(
             ObjectCreationExpressionSyntax objectCreationExpressionNode
-        ) {
+        )
+        {
             var initializer = objectCreationExpressionNode.Initializer;
             return initializer != null && initializer.Expressions.IsEmpty();
         }
@@ -934,7 +952,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
         private static bool ShouldRemoveBraceForPropertyDeclaration(
             PropertyDeclarationSyntax propertyDeclarationNode,
             int caretPosition
-        ) {
+        )
+        {
             // If a property just has an empty accessorList, like
             // int i $${ }
             // then remove the braces and change it to a field
@@ -942,7 +961,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
             if (
                 propertyDeclarationNode.AccessorList != null
                 && propertyDeclarationNode.ExpressionBody == null
-            ) {
+            )
+            {
                 var accessorList = propertyDeclarationNode.AccessorList;
                 return accessorList.Span.Contains(caretPosition)
                     && accessorList.Accessors.IsEmpty();
@@ -954,7 +974,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
         private static bool ShouldRemoveBraceForEventDeclaration(
             EventDeclarationSyntax eventDeclarationNode,
             int caretPosition
-        ) {
+        )
+        {
             // If an event declaration just has an empty accessorList,
             // like
             // event EventHandler e$$  { }
@@ -1143,7 +1164,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
             SyntaxNode embeddedStatementOwner,
             IEditorOptions editorOptions,
             StatementSyntax? extraNodeInsertedBetweenBraces = null
-        ) {
+        )
+        {
             var block =
                 extraNodeInsertedBetweenBraces != null
                     ? GetBlockNode(editorOptions)
@@ -1198,7 +1220,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
         /// </summary>
         private static ObjectCreationExpressionSyntax RemoveInitializerForObjectCreationExpression(
             ObjectCreationExpressionSyntax objectCreationExpressionNode
-        ) {
+        )
+        {
             var objectCreationNodeWithoutInitializer = objectCreationExpressionNode.WithInitializer(
                 null
             );

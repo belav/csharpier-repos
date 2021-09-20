@@ -240,7 +240,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
                                 _incomingFrame,
                                 out var framePayload
                             )
-                        ) {
+                        )
+                        {
                             Log.Http3FrameReceived(
                                 _context.ConnectionId,
                                 _streamIdFeature.StreamId,
@@ -460,7 +461,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
                     initiator,
                     GracefulCloseInitiator.None
                 ) == GracefulCloseInitiator.None
-            ) {
+            )
+            {
                 Input.CancelPendingRead();
             }
         }

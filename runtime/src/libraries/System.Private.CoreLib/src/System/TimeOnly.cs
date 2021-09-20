@@ -366,7 +366,8 @@ namespace System
             ReadOnlySpan<char> s,
             IFormatProvider? provider = default,
             DateTimeStyles style = DateTimeStyles.None
-        ) {
+        )
+        {
             ParseFailureKind result = TryParseInternal(s, provider, style, out TimeOnly timeOnly);
             if (result != ParseFailureKind.None)
             {
@@ -393,7 +394,8 @@ namespace System
             ReadOnlySpan<char> format,
             IFormatProvider? provider = default,
             DateTimeStyles style = DateTimeStyles.None
-        ) {
+        )
+        {
             ParseFailureKind result = TryParseExactInternal(
                 s,
                 format,
@@ -433,7 +435,8 @@ namespace System
             string[] formats,
             IFormatProvider? provider,
             DateTimeStyles style = DateTimeStyles.None
-        ) {
+        )
+        {
             ParseFailureKind result = TryParseExactInternal(
                 s,
                 formats,
@@ -467,7 +470,8 @@ namespace System
             string s,
             IFormatProvider? provider,
             DateTimeStyles style = DateTimeStyles.None
-        ) {
+        )
+        {
             if (s == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
             return Parse(s.AsSpan(), provider, style);
@@ -497,7 +501,8 @@ namespace System
             string format,
             IFormatProvider? provider,
             DateTimeStyles style = DateTimeStyles.None
-        ) {
+        )
+        {
             if (s == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
             if (format == null)
@@ -529,7 +534,8 @@ namespace System
             string[] formats,
             IFormatProvider? provider,
             DateTimeStyles style = DateTimeStyles.None
-        ) {
+        )
+        {
             if (s == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
             return ParseExact(s.AsSpan(), formats, provider, style);
@@ -563,7 +569,8 @@ namespace System
             IFormatProvider? provider,
             DateTimeStyles style,
             out TimeOnly result
-        ) {
+        )
+        {
             if ((style & ~DateTimeStyles.AllowWhiteSpaces) != 0)
             {
                 result = default;
@@ -581,7 +588,8 @@ namespace System
                     style,
                     ref dtResult
                 )
-            ) {
+            )
+            {
                 result = default;
                 return ParseFailureKind.FormatWithOriginalDateTime;
             }
@@ -635,7 +643,8 @@ namespace System
             IFormatProvider? provider,
             DateTimeStyles style,
             out TimeOnly result
-        ) {
+        )
+        {
             if ((style & ~DateTimeStyles.AllowWhiteSpaces) != 0)
             {
                 result = default;
@@ -671,7 +680,8 @@ namespace System
                     style,
                     ref dtResult
                 )
-            ) {
+            )
+            {
                 result = default;
                 return ParseFailureKind.FormatWithOriginalDateTime;
             }
@@ -724,7 +734,8 @@ namespace System
             IFormatProvider? provider,
             DateTimeStyles style,
             out TimeOnly result
-        ) {
+        )
+        {
             if ((style & ~DateTimeStyles.AllowWhiteSpaces) != 0 || formats == null)
             {
                 result = default;
@@ -768,7 +779,8 @@ namespace System
                 if (
                     DateTimeParse.TryParseExact(s, format, dtfiToUse, style, ref dtResult)
                     && ((dtResult.flags & ParseFlagsTimeMask) == 0)
-                ) {
+                )
+                {
                     result = new TimeOnly(dtResult.parsedDate.TimeOfDay.Ticks);
                     return ParseFailureKind.None;
                 }
@@ -800,7 +812,8 @@ namespace System
             IFormatProvider? provider,
             DateTimeStyles style,
             out TimeOnly result
-        ) {
+        )
+        {
             if (s == null)
             {
                 result = default;
@@ -837,7 +850,8 @@ namespace System
             IFormatProvider? provider,
             DateTimeStyles style,
             out TimeOnly result
-        ) {
+        )
+        {
             if (s == null || format == null)
             {
                 result = default;
@@ -872,7 +886,8 @@ namespace System
             IFormatProvider? provider,
             DateTimeStyles style,
             out TimeOnly result
-        ) {
+        )
+        {
             if (s == null)
             {
                 result = default;
@@ -1019,7 +1034,8 @@ namespace System
             out int charsWritten,
             ReadOnlySpan<char> format = default(ReadOnlySpan<char>),
             IFormatProvider? provider = null
-        ) {
+        )
+        {
             if (format.Length == 0)
             {
                 format = "t";
@@ -1039,7 +1055,8 @@ namespace System
                                 _ticks % TimeSpan.TicksPerSecond,
                                 destination
                             )
-                        ) {
+                        )
+                        {
                             charsWritten = 0;
                             return false;
                         }

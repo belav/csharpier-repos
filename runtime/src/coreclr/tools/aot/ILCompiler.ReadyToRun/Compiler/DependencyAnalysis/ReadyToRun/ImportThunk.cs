@@ -36,7 +36,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             ReadyToRunHelper helperId,
             ImportSectionNode containingImportSection,
             bool useVirtualCall
-        ) {
+        )
+        {
             _helperCell = factory.GetReadyToRunHelperCell(helperId);
             _containingImportSection = containingImportSection;
 
@@ -53,7 +54,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 || helperId == ReadyToRunHelper.DelayLoad_Helper
                 || helperId == ReadyToRunHelper.DelayLoad_Helper_Obj
                 || helperId == ReadyToRunHelper.DelayLoad_Helper_ObjObj
-            ) {
+            )
+            {
                 _thunkKind = Kind.DelayLoadHelper;
             }
             else

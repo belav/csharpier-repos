@@ -77,7 +77,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 IAsynchronousOperationListener asyncListener,
                 ClassificationTypeMap typeMap,
                 TimeSpan diffTimeout
-            ) {
+            )
+            {
                 _subjectBuffer = subjectBuffer;
                 _notificationService = notificationService;
                 _listener = asyncListener;
@@ -199,7 +200,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             private async Task EnqueueProcessSnapshotWorkerAsync(
                 Document currentDocument,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var currentText = await currentDocument.GetTextAsync(cancellationToken)
                     .ConfigureAwait(false);
                 var currentSnapshot = currentText.FindCorrespondingEditorTextSnapshot();
@@ -255,7 +257,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 Document currentDocument,
                 ITextSnapshot currentSnapshot,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // We don't need to grab _lastProcessedDocument in a lock.  We don't care which version of the previous
                 // doc we grab, just that we grab some prior version.  This is only used to narrow down the changed range we
                 // specify, so it's ok if it's slightly larger because we read in a change from a couple of edits ago.
@@ -292,7 +295,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                     if (
                         snapshot.Version.ReiteratedVersionNumber
                         != changeSpan.Snapshot.Version.ReiteratedVersionNumber
-                    ) {
+                    )
+                    {
                         // wait for next call
                         return;
                     }
@@ -305,13 +309,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
 
             public IEnumerable<ITagSpan<IClassificationTag>> GetTags(
                 NormalizedSnapshotSpanCollection spans
-            ) {
+            )
+            {
                 using (
                     Logger.LogBlock(
                         FunctionId.Tagger_SyntacticClassification_TagComputer_GetTags,
                         CancellationToken.None
                     )
-                ) {
+                )
+                {
                     if (spans.Count > 0 && _workspace != null)
                     {
                         var result = GetTagsWorker(spans);
@@ -336,7 +342,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
 
             private IEnumerable<ITagSpan<IClassificationTag>> GetTagsWorker(
                 NormalizedSnapshotSpanCollection spans
-            ) {
+            )
+            {
                 var classificationService = TryGetClassificationService(spans[0].Snapshot);
                 if (classificationService == null)
                     return null;
@@ -359,7 +366,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 IClassificationService classificationService,
                 SnapshotSpan span,
                 List<ClassifiedSpan> classifiedSpans
-            ) {
+            )
+            {
                 // First, get the tree and snapshot that we'll be operating over.
                 // From this point on we'll do all operations over these values.
                 ITextSnapshot lastSnapshot;
@@ -387,7 +395,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 if (
                     lastSnapshot.Version.ReiteratedVersionNumber
                     == span.Snapshot.Version.ReiteratedVersionNumber
-                ) {
+                )
+                {
                     AddClassifiedSpansForCurrentTree(
                         classificationService,
                         span,
@@ -418,7 +427,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 SnapshotSpan span,
                 Document document,
                 List<ClassifiedSpan> classifiedSpans
-            ) {
+            )
+            {
                 if (!_lastLineCache.TryUseCache(span, out var tempList))
                 {
                     tempList = ClassificationUtilities.GetOrCreateClassifiedSpanList();
@@ -446,7 +456,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 ITextSnapshot lastSnapshot,
                 Document lastDocument,
                 List<ClassifiedSpan> classifiedSpans
-            ) {
+            )
+            {
                 // Slightly more complicated case.  They're asking for the classifications for a
                 // different snapshot than what we have a parse tree for.  So we first translate the span
                 // that they're asking for so that is maps onto the tree that we have spans for.  We then
@@ -528,7 +539,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 IClassificationService classificationService,
                 SnapshotSpan span,
                 List<ClassifiedSpan> classifiedSpans
-            ) {
+            )
+            {
                 classificationService.AddLexicalClassifications(
                     span.Snapshot.AsText(),
                     span.Span.ToTextSpan(),
@@ -540,7 +552,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             private void OnDocumentActiveContextChanged(
                 object sender,
                 DocumentActiveContextChangedEventArgs args
-            ) {
+            )
+            {
                 if (_workspace != null && _workspace == args.Solution.Workspace)
                 {
                     ProcessIfThisDocument(args.Solution, args.NewActiveContextDocumentId);
@@ -611,7 +624,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             private async Task UpdateLastParsedDocumentAsync(
                 Solution newSolution,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // lastParsedDocument only updated in the same sequential queue so don't need lock to use it
                 var lastDocument = Volatile.Read(ref _lastProcessedDocument);
                 if (lastDocument == null)

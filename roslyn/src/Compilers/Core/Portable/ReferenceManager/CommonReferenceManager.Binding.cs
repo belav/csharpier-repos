@@ -109,7 +109,8 @@ namespace Microsoft.CodeAnalysis
             [In, Out] DiagnosticBag resolutionDiagnostics,
             out bool hasCircularReference,
             out int corLibraryIndex
-        ) {
+        )
+        {
             Debug.Assert(explicitAssemblies[0] is AssemblyDataForAssemblyBeingBuilt);
             Debug.Assert(explicitReferences.Length == explicitReferenceMap.Length);
 
@@ -194,7 +195,8 @@ namespace Microsoft.CodeAnalysis
                             allAssemblies,
                             corLibraryIndex
                         )
-                    ) {
+                    )
+                    {
                         return boundInputs;
                     }
                 }
@@ -238,7 +240,8 @@ namespace Microsoft.CodeAnalysis
                 PortableExecutableReference?
             > implicitReferenceResolutions,
             DiagnosticBag resolutionDiagnostics
-        ) {
+        )
+        {
             Debug.Assert(explicitAssemblies[0] is AssemblyDataForAssemblyBeingBuilt);
             Debug.Assert(referenceBindings.Count == explicitAssemblies.Length);
             Debug.Assert(explicitReferences.Length == explicitReferenceMap.Length);
@@ -298,7 +301,8 @@ namespace Microsoft.CodeAnalysis
                                 out AssemblyMetadata? resolvedAssemblyMetadata,
                                 out PortableExecutableReference? resolvedReference
                             )
-                        ) {
+                        )
+                        {
                             // Note the failure, but do not commit it to implicitReferenceResolutions until we are done with resolving all missing references.
                             resolutionFailures.Add(binding.ReferenceIdentity);
                             continue;
@@ -388,7 +392,8 @@ namespace Microsoft.CodeAnalysis
                     int bindingsIndex = 0;
                     bindingsIndex < referenceBindings.Count;
                     bindingsIndex++
-                ) {
+                )
+                {
                     var referenceBinding = referenceBindings[bindingsIndex];
 
                     for (int i = 0; i < referenceBinding.Length; i++)
@@ -444,7 +449,8 @@ namespace Microsoft.CodeAnalysis
             ArrayBuilder<AssemblyReferenceBinding[]> referenceBindings,
             int totalReferencedAssemblyCount,
             [Out] ArrayBuilder<(MetadataReference, ArraySegment<AssemblyReferenceBinding>)> result
-        ) {
+        )
+        {
             Debug.Assert(result.Count == 0);
 
             // maps module index to explicitReferences index
@@ -482,12 +488,14 @@ namespace Microsoft.CodeAnalysis
                 int referenceIndex = 0;
                 referenceIndex < explicitReferenceMap.Length;
                 referenceIndex++
-            ) {
+            )
+            {
                 var explicitReferenceMapping = explicitReferenceMap[referenceIndex];
                 if (
                     explicitReferenceMapping.IsSkipped
                     || explicitReferenceMapping.Kind == MetadataImageKind.Module
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -509,7 +517,8 @@ namespace Microsoft.CodeAnalysis
         private static ImmutableArray<int> CalculateModuleToReferenceMap(
             ImmutableArray<PEModule> modules,
             ImmutableArray<ResolvedReference> resolvedReferences
-        ) {
+        )
+        {
             if (modules.Length == 0)
             {
                 return ImmutableArray<int>.Empty;
@@ -524,7 +533,8 @@ namespace Microsoft.CodeAnalysis
                 if (
                     !resolvedReference.IsSkipped
                     && resolvedReference.Kind == MetadataImageKind.Module
-                ) {
+                )
+                {
                     result[resolvedReference.Index] = i;
                 }
             }
@@ -536,7 +546,8 @@ namespace Microsoft.CodeAnalysis
             ImmutableArray<MetadataReference> references,
             Dictionary<MetadataReference, MergedAliases>? propertyMapOpt,
             int explicitAssemblyCount
-        ) {
+        )
+        {
             var result = ArrayBuilder<ResolvedReference>.GetInstance(references.Length);
             for (int i = 0; i < references.Length; i++)
             {
@@ -558,7 +569,8 @@ namespace Microsoft.CodeAnalysis
             ArrayBuilder<AssemblyReferenceBinding[]> referenceBindings,
             int explicitAssemblyCount,
             ArrayBuilder<AssemblyData> implicitAssemblies
-        ) {
+        )
+        {
             var referenceBindingsOfAssemblyBeingBuilt = referenceBindings[0];
 
             // add implicitly resolved assemblies to the bindings of the assembly being built:
@@ -632,7 +644,8 @@ namespace Microsoft.CodeAnalysis
             [NotNullWhen(true)] out AssemblyIdentity? resolvedAssemblyIdentity,
             [NotNullWhen(true)] out AssemblyMetadata? resolvedAssemblyMetadata,
             [NotNullWhen(true)] out PortableExecutableReference? resolvedReference
-        ) {
+        )
+        {
             resolvedAssemblyIdentity = null;
             resolvedAssemblyMetadata = null;
             bool isNewlyResolvedReference = false;
@@ -672,7 +685,8 @@ namespace Microsoft.CodeAnalysis
                 isNewlyResolvedReference
                 && IdentityComparer.Compare(referenceIdentity, resolvedAssembly.Identity)
                     == AssemblyIdentityComparer.ComparisonResult.NotEquivalent
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -688,7 +702,8 @@ namespace Microsoft.CodeAnalysis
             AssemblyMetadata assemblyMetadata,
             PortableExecutableReference peReference,
             MetadataImportOptions importOptions
-        ) {
+        )
+        {
             var assembly = assemblyMetadata.GetAssembly();
             Debug.Assert(assembly is object);
             return CreateAssemblyDataForFile(
@@ -706,7 +721,8 @@ namespace Microsoft.CodeAnalysis
             TAssemblySymbol[] candidateInputAssemblySymbols,
             ImmutableArray<AssemblyData> assemblies,
             int corLibraryIndex
-        ) {
+        )
+        {
             int totalAssemblies = assemblies.Length;
             for (int i = 1; i < totalAssemblies; i++)
             {
@@ -756,7 +772,8 @@ namespace Microsoft.CodeAnalysis
                             if (
                                 assemblies[j].IsMatchingAssembly(assembly)
                                 && IsLinked(assembly) == assemblies[j].IsLinked
-                            ) {
+                            )
+                            {
                                 candidateInputAssemblySymbols[j] = assembly;
                                 match = true;
                                 // We could break out of the loop unless assemblies array
@@ -814,7 +831,8 @@ namespace Microsoft.CodeAnalysis
                                         candidateInputAssemblySymbols[corLibraryIndex],
                                         GetCorLibrary(candidateInputAssemblySymbols[j])
                                     )
-                                ) {
+                                )
+                                {
                                     // I am leaving the Assert here because it will likely indicate a bug somewhere.
                                     Debug.Assert(
                                         candidateInputAssemblySymbols[corLibraryIndex] == null
@@ -856,7 +874,8 @@ namespace Microsoft.CodeAnalysis
             TAssemblySymbol[] candidateInputAssemblySymbols,
             ImmutableArray<AssemblyData> assemblies,
             int corLibraryIndex
-        ) {
+        )
+        {
             // Queue of references we need to examine for consistency
             Queue<AssemblyReferenceCandidate> candidatesToExamine =
                 new Queue<AssemblyReferenceCandidate>();
@@ -942,7 +961,8 @@ namespace Microsoft.CodeAnalysis
                         if (
                             IsLinked(candidate.AssemblySymbol)
                             != assemblies[candidateIndex].IsLinked
-                        ) {
+                        )
+                        {
                             match = false;
                             break; // Stop processing items from candidatesToExamine queue.
                         }
@@ -1016,7 +1036,8 @@ namespace Microsoft.CodeAnalysis
                                 !assemblies[definitionIndex].IsMatchingAssembly(
                                     currentCandidateReferencedSymbol
                                 )
-                            ) {
+                            )
+                            {
                                 // Mismatch between versions?
                                 match = false;
                                 break; // Stop processing references.
@@ -1033,7 +1054,8 @@ namespace Microsoft.CodeAnalysis
                             if (
                                 IsLinked(currentCandidateReferencedSymbol)
                                 != assemblies[definitionIndex].IsLinked
-                            ) {
+                            )
+                            {
                                 // Mismatch between reference kind.
                                 match = false;
                                 break; // Stop processing references.
@@ -1088,7 +1110,8 @@ namespace Microsoft.CodeAnalysis
                                     !assemblies[corLibraryIndex].IsMatchingAssembly(
                                         candidateCorLibrary
                                     )
-                                ) {
+                                )
+                                {
                                     // Mismatch between versions?
                                     match = false;
                                     break; // Stop processing references.
@@ -1129,7 +1152,8 @@ namespace Microsoft.CodeAnalysis
 
         private static bool CheckCircularReference(
             IReadOnlyList<AssemblyReferenceBinding[]> referenceBindings
-        ) {
+        )
+        {
             for (int i = 1; i < referenceBindings.Count; i++)
             {
                 foreach (AssemblyReferenceBinding index in referenceBindings[i])
@@ -1150,7 +1174,8 @@ namespace Microsoft.CodeAnalysis
                 string,
                 List<ReferencedAssemblyIdentity>
             > assemblyReferencesBySimpleName
-        ) {
+        )
+        {
             var value = assemblyReferencesBySimpleName[identity.Name][0];
             Debug.Assert(value.Identity is object);
             return value.Identity.Version != identity.Version;
@@ -1163,7 +1188,8 @@ namespace Microsoft.CodeAnalysis
                 List<ReferencedAssemblyIdentity>
             > assemblyReferencesBySimpleName,
             bool supersedeLowerVersions
-        ) {
+        )
+        {
             // Figure out COR library for this compilation.
             ArrayBuilder<int>? corLibraryCandidates = null;
 
@@ -1185,7 +1211,8 @@ namespace Microsoft.CodeAnalysis
                         !supersedeLowerVersions
                         || !IsSuperseded(assembly.Identity, assemblyReferencesBySimpleName)
                     )
-                ) {
+                )
+                {
                     // We have referenced assembly that doesn't have assembly references,
                     // check if it declares baseless System.Object.
 
@@ -1239,7 +1266,8 @@ namespace Microsoft.CodeAnalysis
         internal static bool InternalsMayBeVisibleToAssemblyBeingCompiled(
             string compilationName,
             PEAssembly assembly
-        ) {
+        )
+        {
             return !assembly.GetInternalsVisibleToPublicKeys(compilationName).IsEmpty();
         }
 

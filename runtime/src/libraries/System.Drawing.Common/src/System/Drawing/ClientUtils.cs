@@ -142,7 +142,8 @@ namespace System.Drawing
                 WeakRefCollection destinationList,
                 int destinationIndex,
                 int length
-            ) {
+            )
+            {
                 if (sourceIndex < destinationIndex)
                 {
                     // We need to copy from the back forward to prevent overwrite if source and

@@ -553,7 +553,8 @@ namespace X
 ";
             foreach (
                 DocumentationMode documentationMode in Enum.GetValues(typeof(DocumentationMode))
-            ) {
+            )
+            {
                 var compilation = CreateCompilation(
                     source,
                     parseOptions: TestOptions.Regular.WithDocumentationMode(documentationMode)

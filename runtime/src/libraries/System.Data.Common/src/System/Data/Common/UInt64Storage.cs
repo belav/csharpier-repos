@@ -271,7 +271,8 @@ namespace System.Data.Common
             object store,
             BitArray nullbits,
             int storeIndex
-        ) {
+        )
+        {
             ulong[] typedStore = (ulong[])store;
             typedStore[storeIndex] = _values[record];
             nullbits.Set(storeIndex, !HasValue(record));

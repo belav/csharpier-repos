@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
 
             public FixMultipleDiagnosticProvider(
                 ImmutableDictionary<Document, ImmutableArray<Diagnostic>> diagnosticsMap
-            ) {
+            )
+            {
                 DocumentDiagnosticsMap = diagnosticsMap;
                 ProjectDiagnosticsMap =
                     ImmutableDictionary<Project, ImmutableArray<Diagnostic>>.Empty;
@@ -37,7 +38,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
 
             public FixMultipleDiagnosticProvider(
                 ImmutableDictionary<Project, ImmutableArray<Diagnostic>> diagnosticsMap
-            ) {
+            )
+            {
                 ProjectDiagnosticsMap = diagnosticsMap;
                 DocumentDiagnosticsMap =
                     ImmutableDictionary<Document, ImmutableArray<Diagnostic>>.Empty;
@@ -46,7 +48,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             public override Task<IEnumerable<Diagnostic>> GetAllDiagnosticsAsync(
                 Project project,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var allDiagnosticsBuilder = ArrayBuilder<Diagnostic>.GetInstance();
                 ImmutableArray<Diagnostic> diagnostics;
                 if (!DocumentDiagnosticsMap.IsEmpty)
@@ -73,7 +76,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             public override Task<IEnumerable<Diagnostic>> GetDocumentDiagnosticsAsync(
                 Document document,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (DocumentDiagnosticsMap.TryGetValue(document, out var diagnostics))
                 {
                     return Task.FromResult<IEnumerable<Diagnostic>>(diagnostics);
@@ -85,7 +89,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             public override Task<IEnumerable<Diagnostic>> GetProjectDiagnosticsAsync(
                 Project project,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (ProjectDiagnosticsMap.TryGetValue(project, out var diagnostics))
                 {
                     return Task.FromResult<IEnumerable<Diagnostic>>(diagnostics);

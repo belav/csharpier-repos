@@ -152,7 +152,8 @@ namespace Microsoft.Cci
             string xString,
             int yOrdinal,
             string yString
-        ) {
+        )
+        {
             if (xString == null)
             {
                 if (yString == null)
@@ -178,7 +179,8 @@ namespace Microsoft.Cci
         //Where strings and ordinals are compared, strings are less than ordinals.
         internal static IEnumerable<IWin32Resource> SortResources(
             IEnumerable<IWin32Resource> resources
-        ) {
+        )
+        {
             return resources.OrderBy(CompareResources);
         }
 
@@ -186,7 +188,8 @@ namespace Microsoft.Cci
             BlobBuilder builder,
             IEnumerable<IWin32Resource> theResources,
             int resourcesRva
-        ) {
+        )
+        {
             theResources = SortResources(theResources);
 
             Directory typeDirectory = new Directory(string.Empty, 0);
@@ -278,7 +281,8 @@ namespace Microsoft.Cci
             uint sizeOfDirectoryTree,
             int virtualAddressBase,
             BlobBuilder dataWriter
-        ) {
+        )
+        {
             writer.WriteUInt32(0); // Characteristics
             writer.WriteUInt32(0); // Timestamp
             writer.WriteUInt32(0); // Version
@@ -388,7 +392,8 @@ namespace Microsoft.Cci
         private static uint SizeOfDirectory(
             Directory /*!*/
             directory
-        ) {
+        )
+        {
             uint n = (uint)directory.Entries.Count;
             uint size = 16 + 8 * n;
             for (int i = 0; i < n; i++)
@@ -407,7 +412,8 @@ namespace Microsoft.Cci
             BlobBuilder builder,
             ResourceSection resourceSections,
             int resourcesRva
-        ) {
+        )
+        {
             var sectionWriter = new BlobWriter(
                 builder.ReserveBytes(resourceSections.SectionBytes.Length)
             );

@@ -34,7 +34,8 @@ using (
         inFileName,
         new XmlReaderSettings { DtdProcessing = DtdProcessing.Prohibit }
     )
-) {
+)
+{
     tree = (Tree?)serializer.Deserialize(reader);
 }
 

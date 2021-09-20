@@ -19,7 +19,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ExternalAccess.ProjectSystem.A
         public ProjectSystemReferenceUpdate(
             ProjectSystemUpdateAction action,
             ProjectSystemReferenceInfo referenceInfo
-        ) {
+        )
+        {
             Action = action;
             ReferenceInfo = referenceInfo;
         }

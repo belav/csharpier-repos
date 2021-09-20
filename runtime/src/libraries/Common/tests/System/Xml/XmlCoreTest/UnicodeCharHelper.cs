@@ -1275,7 +1275,8 @@ namespace XmlCoreTest.Common
         public static bool IsW3C_IsValidXmlSurrogateChar(
             char lowSurrogateChar,
             char highSurrogateChar
-        ) {
+        )
+        {
             return (s_charTypeTable[lowSurrogateChar] & CharType.SurrogateLowChar) != 0
                 && (s_charTypeTable[highSurrogateChar] & CharType.SurrogateHighChar) != 0;
         }

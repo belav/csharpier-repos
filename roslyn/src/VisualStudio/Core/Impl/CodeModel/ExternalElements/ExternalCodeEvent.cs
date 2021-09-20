@@ -20,16 +20,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
             CodeModelState state,
             ProjectId projectId,
             IEventSymbol symbol
-        ) {
+        )
+        {
             var element = new ExternalCodeEvent(state, projectId, symbol);
             return (EnvDTE80.CodeEvent)ComAggregate.CreateAggregatedObject(element);
         }
 
-        private ExternalCodeEvent(
-            CodeModelState state,
-            ProjectId projectId,
-            IEventSymbol symbol
-        ) : base(state, projectId, symbol) { }
+        private ExternalCodeEvent(CodeModelState state, ProjectId projectId, IEventSymbol symbol)
+            : base(state, projectId, symbol) { }
 
         private IEventSymbol EventSymbol
         {

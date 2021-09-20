@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             foreach (
                 var recommenderType in typeof(AbstractSyntacticSingleKeywordRecommender).Assembly.GetTypes()
-            ) {
+            )
+            {
                 if (recommenderType.IsSubclassOf(typeof(AbstractSyntacticSingleKeywordRecommender)))
                 {
                     try

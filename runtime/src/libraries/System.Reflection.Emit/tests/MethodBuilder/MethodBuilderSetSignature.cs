@@ -362,7 +362,8 @@ namespace System.Reflection.Emit.Tests
             TypeBuilder type,
             MethodBuilder method,
             Type desiredReturnType
-        ) {
+        )
+        {
             Type ret = type.CreateTypeInfo().AsType();
             MethodInfo methodInfo = method.GetBaseDefinition();
             Type actualReturnType = methodInfo.ReturnType;

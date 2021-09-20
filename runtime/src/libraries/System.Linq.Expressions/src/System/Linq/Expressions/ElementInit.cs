@@ -89,7 +89,8 @@ namespace System.Linq.Expressions
         public static ElementInit ElementInit(
             MethodInfo addMethod,
             IEnumerable<Expression> arguments
-        ) {
+        )
+        {
             ContractUtils.RequiresNotNull(addMethod, nameof(addMethod));
             ContractUtils.RequiresNotNull(arguments, nameof(arguments));
 

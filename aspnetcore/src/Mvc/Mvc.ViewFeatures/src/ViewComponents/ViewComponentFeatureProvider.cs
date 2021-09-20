@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
         public void PopulateFeature(
             IEnumerable<ApplicationPart> parts,
             ViewComponentFeature feature
-        ) {
+        )
+        {
             if (parts == null)
             {
                 throw new ArgumentNullException(nameof(parts));
@@ -30,11 +31,13 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
 
             foreach (
                 var type in parts.OfType<IApplicationPartTypeProvider>().SelectMany(p => p.Types)
-            ) {
+            )
+            {
                 if (
                     ViewComponentConventions.IsComponent(type)
                     && !feature.ViewComponents.Contains(type)
-                ) {
+                )
+                {
                     feature.ViewComponents.Add(type);
                 }
             }

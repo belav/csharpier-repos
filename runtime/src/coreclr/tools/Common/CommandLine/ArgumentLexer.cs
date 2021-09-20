@@ -11,7 +11,8 @@ namespace Internal.CommandLine
         public static IReadOnlyList<ArgumentToken> Lex(
             IEnumerable<string> args,
             Func<string, IEnumerable<string>> responseFileReader = null
-        ) {
+        )
+        {
             var result = new List<ArgumentToken>();
 
             // We'll split the arguments into tokens.
@@ -113,7 +114,8 @@ namespace Internal.CommandLine
         private static IEnumerable<string> ExpandResponseFiles(
             IEnumerable<string> args,
             Func<string, IEnumerable<string>> responseFileReader
-        ) {
+        )
+        {
             foreach (var arg in args)
             {
                 if (responseFileReader == null || !arg.StartsWith(@"@"))
@@ -173,7 +175,8 @@ namespace Internal.CommandLine
             string prefix,
             out string modifier,
             out string remainder
-        ) {
+        )
+        {
             if (text.StartsWith(prefix))
             {
                 remainder = text.Substring(prefix.Length);

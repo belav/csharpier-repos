@@ -29,7 +29,8 @@ namespace System.Reflection.Metadata.Tests
             // validate sizes table rows that reference guids:
             using (
                 var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
-            ) {
+            )
+            {
                 var mdReader = mdProvider.GetMetadataReader();
 
                 Assert.Equal(2 + 3 * 2 + 2, mdReader.ModuleTable.RowSize);
@@ -104,7 +105,8 @@ namespace System.Reflection.Metadata.Tests
             // validate sizes table rows that reference guids:
             using (
                 var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
-            ) {
+            )
+            {
                 const int LARGE = 4;
 
                 var mdReader = mdProvider.GetMetadataReader();
@@ -179,7 +181,8 @@ namespace System.Reflection.Metadata.Tests
             // validate sizes table rows that reference guids:
             using (
                 var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
-            ) {
+            )
+            {
                 const int LARGE = 4;
 
                 var mdReader = mdProvider.GetMetadataReader();
@@ -254,7 +257,8 @@ namespace System.Reflection.Metadata.Tests
             // validate sizes table rows that reference guids:
             using (
                 var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
-            ) {
+            )
+            {
                 const int LARGE = 4;
 
                 var mdReader = mdProvider.GetMetadataReader();
@@ -335,7 +339,8 @@ namespace System.Reflection.Metadata.Tests
             // validate sizes table rows that reference guids:
             using (
                 var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
-            ) {
+            )
+            {
                 const int LARGE = 4;
 
                 var mdReader = mdProvider.GetMetadataReader();
@@ -421,7 +426,8 @@ namespace System.Reflection.Metadata.Tests
             // validate sizes table rows that reference guids:
             using (
                 var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
-            ) {
+            )
+            {
                 const int LARGE = 4;
 
                 var mdReader = mdProvider.GetMetadataReader();
@@ -507,7 +513,8 @@ namespace System.Reflection.Metadata.Tests
             // validate sizes table rows that reference guids:
             using (
                 var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
-            ) {
+            )
+            {
                 const int LARGE = 4;
 
                 var mdReader = mdProvider.GetMetadataReader();
@@ -584,7 +591,8 @@ namespace System.Reflection.Metadata.Tests
             // validate sizes table rows that reference guids:
             using (
                 var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
-            ) {
+            )
+            {
                 const int LARGE = 4;
 
                 var mdReader = mdProvider.GetMetadataReader();
@@ -663,7 +671,8 @@ namespace System.Reflection.Metadata.Tests
             // validate sizes table rows that reference guids:
             using (
                 var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
-            ) {
+            )
+            {
                 const int LARGE = 4;
 
                 var mdReader = mdProvider.GetMetadataReader();
@@ -742,7 +751,8 @@ namespace System.Reflection.Metadata.Tests
             // validate sizes table rows that reference guids:
             using (
                 var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
-            ) {
+            )
+            {
                 const int LARGE = 4;
 
                 var mdReader = mdProvider.GetMetadataReader();
@@ -826,7 +836,8 @@ namespace System.Reflection.Metadata.Tests
             // validate sizes table rows that reference guids:
             using (
                 var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
-            ) {
+            )
+            {
                 const int LARGE = 4;
 
                 var mdReader = mdProvider.GetMetadataReader();
@@ -912,7 +923,8 @@ namespace System.Reflection.Metadata.Tests
             // validate sizes table rows that reference guids:
             using (
                 var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
-            ) {
+            )
+            {
                 const int LARGE = 4;
 
                 var mdReader = mdProvider.GetMetadataReader();
@@ -989,7 +1001,8 @@ namespace System.Reflection.Metadata.Tests
             // validate sizes table rows that reference guids:
             using (
                 var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
-            ) {
+            )
+            {
                 const int LARGE = 4;
 
                 var mdReader = mdProvider.GetMetadataReader();
@@ -1072,7 +1085,8 @@ namespace System.Reflection.Metadata.Tests
             // validate sizes table rows that reference guids:
             using (
                 var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
-            ) {
+            )
+            {
                 const int LARGE = 4;
 
                 var mdReader = mdProvider.GetMetadataReader();
@@ -1153,7 +1167,8 @@ namespace System.Reflection.Metadata.Tests
             // validate sizes table rows that reference guids:
             using (
                 var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
-            ) {
+            )
+            {
                 const int LARGE = 4;
 
                 var mdReader = mdProvider.GetMetadataReader();
@@ -1230,7 +1245,8 @@ namespace System.Reflection.Metadata.Tests
             // validate sizes table rows that reference guids:
             using (
                 var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
-            ) {
+            )
+            {
                 const int LARGE = 4;
 
                 var mdReader = mdProvider.GetMetadataReader();
@@ -1311,7 +1327,8 @@ namespace System.Reflection.Metadata.Tests
             // validate sizes table rows that reference guids:
             using (
                 var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
-            ) {
+            )
+            {
                 const int LARGE = 4;
 
                 var mdReader = mdProvider.GetMetadataReader();
@@ -1388,7 +1405,8 @@ namespace System.Reflection.Metadata.Tests
             // validate sizes table rows that reference guids:
             using (
                 var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
-            ) {
+            )
+            {
                 const int LARGE = 4;
 
                 var mdReader = mdProvider.GetMetadataReader();
@@ -1465,7 +1483,8 @@ namespace System.Reflection.Metadata.Tests
             // validate sizes table rows that reference guids:
             using (
                 var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
-            ) {
+            )
+            {
                 const int LARGE = 4;
 
                 var mdReader = mdProvider.GetMetadataReader();
@@ -1551,7 +1570,8 @@ namespace System.Reflection.Metadata.Tests
             // validate sizes table rows that reference guids:
             using (
                 var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
-            ) {
+            )
+            {
                 const int LARGE = 4;
 
                 var mdReader = mdProvider.GetMetadataReader();
@@ -1630,7 +1650,8 @@ namespace System.Reflection.Metadata.Tests
             // validate sizes table rows that reference guids:
             using (
                 var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
-            ) {
+            )
+            {
                 const int LARGE = 4;
 
                 var mdReader = mdProvider.GetMetadataReader();
@@ -1715,7 +1736,8 @@ namespace System.Reflection.Metadata.Tests
             // validate sizes table rows that reference guids:
             using (
                 var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
-            ) {
+            )
+            {
                 const int LARGE = 4;
 
                 var mdReader = mdProvider.GetMetadataReader();
@@ -1792,7 +1814,8 @@ namespace System.Reflection.Metadata.Tests
             // validate sizes table rows that reference guids:
             using (
                 var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
-            ) {
+            )
+            {
                 const int LARGE = 4;
 
                 var mdReader = mdProvider.GetMetadataReader();
@@ -1874,7 +1897,8 @@ namespace System.Reflection.Metadata.Tests
             // validate sizes table rows that reference guids:
             using (
                 var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
-            ) {
+            )
+            {
                 const int LARGE = 4;
 
                 var mdReader = mdProvider.GetMetadataReader();
@@ -1954,7 +1978,8 @@ namespace System.Reflection.Metadata.Tests
             // validate sizes table rows that reference guids:
             using (
                 var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
-            ) {
+            )
+            {
                 const int LARGE = 4;
 
                 var mdReader = mdProvider.GetMetadataReader();
@@ -2034,7 +2059,8 @@ namespace System.Reflection.Metadata.Tests
             // validate sizes table rows that reference guids:
             using (
                 var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
-            ) {
+            )
+            {
                 const int LARGE = 4;
 
                 var mdReader = mdProvider.GetMetadataReader();
@@ -2116,7 +2142,8 @@ namespace System.Reflection.Metadata.Tests
             // validate sizes table rows that reference guids:
             using (
                 var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
-            ) {
+            )
+            {
                 const int LARGE = 4;
 
                 var mdReader = mdProvider.GetMetadataReader();
@@ -2200,7 +2227,8 @@ namespace System.Reflection.Metadata.Tests
             // validate sizes table rows that reference guids:
             using (
                 var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
-            ) {
+            )
+            {
                 const int LARGE = 4;
 
                 var mdReader = mdProvider.GetMetadataReader();
@@ -2277,7 +2305,8 @@ namespace System.Reflection.Metadata.Tests
             // validate sizes table rows that reference guids:
             using (
                 var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
-            ) {
+            )
+            {
                 const int LARGE = 4;
 
                 var mdReader = mdProvider.GetMetadataReader();
@@ -2354,7 +2383,8 @@ namespace System.Reflection.Metadata.Tests
             // validate sizes table rows that reference guids:
             using (
                 var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
-            ) {
+            )
+            {
                 const int LARGE = 4;
 
                 var mdReader = mdProvider.GetMetadataReader();
@@ -2431,7 +2461,8 @@ namespace System.Reflection.Metadata.Tests
             // validate sizes table rows that reference guids:
             using (
                 var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
-            ) {
+            )
+            {
                 const int LARGE = 4;
 
                 var mdReader = mdProvider.GetMetadataReader();
@@ -2550,7 +2581,8 @@ namespace System.Reflection.Metadata.Tests
             // validate sizes table rows that reference guids:
             using (
                 var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
-            ) {
+            )
+            {
                 var mdReader = mdProvider.GetMetadataReader();
 
                 Assert.Equal(2 + 3 * 2 + 2, mdReader.ModuleTable.RowSize);

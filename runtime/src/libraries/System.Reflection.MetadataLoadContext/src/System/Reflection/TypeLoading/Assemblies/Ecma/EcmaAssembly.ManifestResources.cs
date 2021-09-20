@@ -24,7 +24,8 @@ namespace System.Reflection.TypeLoading.Ecma
             if (
                 internalManifestResourceInfo.ResourceLocation
                 == ResourceLocation.ContainedInAnotherAssembly
-            ) {
+            )
+            {
                 // Must get resource info from other assembly, and OR in the contained in another assembly information
                 ManifestResourceInfo underlyingManifestResourceInfo =
                     internalManifestResourceInfo.ReferencedAssembly.GetManifestResourceInfo(
@@ -89,7 +90,8 @@ namespace System.Reflection.TypeLoading.Ecma
                 if (
                     internalManifestResourceInfo.ResourceLocation
                     == ResourceLocation.ContainedInAnotherAssembly
-                ) {
+                )
+                {
                     return internalManifestResourceInfo.ReferencedAssembly.GetManifestResourceStream(
                         name
                     );

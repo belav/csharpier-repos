@@ -39,7 +39,8 @@ namespace Microsoft.AspNetCore.Mvc.Cors
                     out var accessControlRequestMethod
                 )
                 && !StringValues.IsNullOrEmpty(accessControlRequestMethod)
-            ) {
+            )
+            {
                 // Read interface .Count once rather than per iteration
                 var methodsCount = methods.Count;
                 for (var i = 0; i < methodsCount; i++)
@@ -51,7 +52,8 @@ namespace Microsoft.AspNetCore.Mvc.Cors
                             accessControlRequestMethod,
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }

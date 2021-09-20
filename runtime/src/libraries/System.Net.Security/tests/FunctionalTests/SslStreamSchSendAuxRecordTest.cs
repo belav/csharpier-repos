@@ -53,7 +53,8 @@ namespace System.Net.Security.Tests
                             server.Stream.CipherAlgorithm == CipherAlgorithmType.None
                             || server.Stream.CipherAlgorithm == CipherAlgorithmType.Null
                             || server.Stream.CipherAlgorithm == CipherAlgorithmType.Rc4
-                        ) {
+                        )
+                        {
                             serverAuxRecordDetectedInconclusive = true;
                         }
 
@@ -109,7 +110,8 @@ namespace System.Net.Security.Tests
                             client.Stream.CipherAlgorithm == CipherAlgorithmType.None
                             || client.Stream.CipherAlgorithm == CipherAlgorithmType.Null
                             || client.Stream.CipherAlgorithm == CipherAlgorithmType.Rc4
-                        ) {
+                        )
+                        {
                             clientAuxRecordDetectedInconclusive = true;
                         }
 

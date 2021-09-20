@@ -122,7 +122,8 @@ namespace System.Management
             string op,
             ref bool bTokenFound,
             ref string tokenValue
-        ) {
+        )
+        {
             if (bTokenFound)
                 throw new ArgumentException(SR.InvalidQueryDuplicatedToken); // Invalid query - duplicate token
 
@@ -657,7 +658,8 @@ namespace System.Management
                 if (
                     queryOrClassName.TrimStart()
                         .StartsWith(TokenSelect, StringComparison.OrdinalIgnoreCase)
-                ) {
+                )
+                {
                     // Looks to be a query - do further checking.
                     //
                     QueryString = queryOrClassName; // Parse/validate; may throw.
@@ -1361,7 +1363,8 @@ namespace System.Management
                 if (
                     queryOrSourceObject.TrimStart()
                         .StartsWith(TokenAssociators, StringComparison.OrdinalIgnoreCase)
-                ) {
+                )
+                {
                     // Looks to be a query - do further checking.
                     //
                     QueryString = queryOrSourceObject; // Parse/validate; may throw.
@@ -1418,7 +1421,8 @@ namespace System.Management
             string relatedRole,
             string thisRole,
             bool classDefinitionsOnly
-        ) {
+        )
+        {
             this.isSchemaQuery = false;
             this.sourceObject = sourceObject;
             this.relatedClass = relatedClass;
@@ -1454,7 +1458,8 @@ namespace System.Management
             string relationshipQualifier,
             string relatedRole,
             string thisRole
-        ) {
+        )
+        {
             if (isSchemaQuery == false)
                 throw new ArgumentException(SR.InvalidQuery, nameof(isSchemaQuery));
 
@@ -1726,7 +1731,8 @@ namespace System.Management
                 || !(ThisRole.Length == 0)
                 || classDefinitionsOnly
                 || isSchemaQuery
-            ) {
+            )
+            {
                 s = s + " " + TokenWhere;
 
                 //"ResultClass"
@@ -2024,7 +2030,8 @@ namespace System.Management
                                 StringComparison.OrdinalIgnoreCase
                             )
                         )
-                    ) {
+                    )
+                    {
                         ParseToken(ref q, TokenSchemaOnly, ref bSchemaOnlyFound);
                         tempIsSchemaQuery = true;
                     }
@@ -2041,7 +2048,8 @@ namespace System.Management
                                 StringComparison.OrdinalIgnoreCase
                             )
                         )
-                    ) {
+                    )
+                    {
                         ParseToken(ref q, TokenClassDefsOnly, ref bClassDefsOnlyFound);
                         tempClassDefsOnly = true;
                     }
@@ -2211,7 +2219,8 @@ namespace System.Management
                 if (
                     queryOrSourceObject.TrimStart()
                         .StartsWith(TokenReferences, StringComparison.OrdinalIgnoreCase)
-                ) {
+                )
+                {
                     // Looks to be a query - do further checking.
                     //
                     QueryString = queryOrSourceObject; // Parse/validate; may throw.
@@ -2261,7 +2270,8 @@ namespace System.Management
             string relationshipQualifier,
             string thisRole,
             bool classDefinitionsOnly
-        ) {
+        )
+        {
             this.isSchemaQuery = false;
             this.sourceObject = sourceObject;
             this.relationshipClass = relationshipClass;
@@ -2288,7 +2298,8 @@ namespace System.Management
             string relationshipClass,
             string relationshipQualifier,
             string thisRole
-        ) {
+        )
+        {
             if (isSchemaQuery == false)
                 throw new ArgumentException(SR.InvalidQuery, nameof(isSchemaQuery));
 
@@ -2463,7 +2474,8 @@ namespace System.Management
                 || !(ThisRole.Length == 0)
                 || classDefinitionsOnly
                 || isSchemaQuery
-            ) {
+            )
+            {
                 s = s + " " + TokenWhere;
 
                 //"ResultClass"
@@ -2680,7 +2692,8 @@ namespace System.Management
                                 StringComparison.OrdinalIgnoreCase
                             )
                         )
-                    ) {
+                    )
+                    {
                         ParseToken(ref q, TokenClassDefsOnly, ref bClassDefsOnlyFound);
                         tempClassDefsOnly = true;
                     }
@@ -2697,7 +2710,8 @@ namespace System.Management
                                 StringComparison.OrdinalIgnoreCase
                             )
                         )
-                    ) {
+                    )
+                    {
                         ParseToken(ref q, TokenSchemaOnly, ref bSchemaOnlyFound);
                         tempSchemaOnly = true;
                     }
@@ -2948,7 +2962,8 @@ namespace System.Management
                 if (
                     queryOrEventClassName.TrimStart()
                         .StartsWith(TokenSelectAll, StringComparison.OrdinalIgnoreCase)
-                ) {
+                )
+                {
                     QueryString = queryOrEventClassName; // Parse/validate; may throw.
                 }
                 else
@@ -3042,11 +3057,8 @@ namespace System.Management
         ///                            "TargetInstance isa ""Win32_Service""")
         ///    </code>
         /// </example>
-        public WqlEventQuery(
-            string eventClassName,
-            TimeSpan withinInterval,
-            string condition
-        ) : this(eventClassName, withinInterval, condition, TimeSpan.Zero, null, null) { }
+        public WqlEventQuery(string eventClassName, TimeSpan withinInterval, string condition)
+            : this(eventClassName, withinInterval, condition, TimeSpan.Zero, null, null) { }
 
         /// <summary>
         /// <para> Initializes a new instance of the <see cref='System.Management.WqlEventQuery'/>
@@ -3076,11 +3088,8 @@ namespace System.Management
         ///                            t)
         ///    </code>
         /// </example>
-        public WqlEventQuery(
-            string eventClassName,
-            string condition,
-            TimeSpan groupWithinInterval
-        ) : this(eventClassName, TimeSpan.Zero, condition, groupWithinInterval, null, null) { }
+        public WqlEventQuery(string eventClassName, string condition, TimeSpan groupWithinInterval)
+            : this(eventClassName, TimeSpan.Zero, condition, groupWithinInterval, null, null) { }
 
         /// <summary>
         /// <para> Initializes a new instance of the <see cref='System.Management.WqlEventQuery'/>
@@ -3122,14 +3131,15 @@ namespace System.Management
             string condition,
             TimeSpan groupWithinInterval,
             string[] groupByPropertyList
-        ) : this(
-            eventClassName,
-            TimeSpan.Zero,
-            condition,
-            groupWithinInterval,
-            groupByPropertyList,
-            null
-        ) { }
+        )
+            : this(
+                eventClassName,
+                TimeSpan.Zero,
+                condition,
+                groupWithinInterval,
+                groupByPropertyList,
+                null
+            ) { }
 
         /// <summary>
         /// <para> Initializes a new instance of the <see cref='System.Management.WqlEventQuery'/>
@@ -3175,7 +3185,8 @@ namespace System.Management
             TimeSpan groupWithinInterval,
             string[] groupByPropertyList,
             string havingCondition
-        ) {
+        )
+        {
             this.eventClassName = eventClassName;
             this.withinInterval = withinInterval;
             this.condition = condition;
@@ -3610,7 +3621,8 @@ namespace System.Management
                         StringComparison.OrdinalIgnoreCase
                     )
                 )
-            ) {
+            )
+            {
                 string intervalString = null;
                 bFound = false;
                 ParseToken(ref q, keyword, null, ref bFound, ref intervalString);
@@ -3652,7 +3664,8 @@ namespace System.Management
                             StringComparison.OrdinalIgnoreCase
                         )
                     )
-                ) {
+                )
+                {
                     q = q.Remove(0, keyword.Length);
                     if (null != groupByPropertyList)
                         groupByPropertyList.Clear();
@@ -3704,7 +3717,8 @@ namespace System.Management
                             StringComparison.OrdinalIgnoreCase
                         )
                     )
-                ) { //the rest until the end is assumed to be the having condition
+                )
+                { //the rest until the end is assumed to be the having condition
                     q = q.Remove(0, keyword.Length);
 
                     if (q.Length == 0) //bad query
@@ -3830,7 +3844,8 @@ namespace System.Management
             CultureInfo culture,
             object value,
             Type destinationType
-        ) {
+        )
+        {
             if (destinationType == null)
             {
                 throw new ArgumentNullException(nameof(destinationType));

@@ -13,7 +13,8 @@ namespace System.Reflection.Metadata.Ecma335.Tests
         {
             using (
                 var provider = MetadataReaderProvider.FromMetadataImage(metadata.ToImmutableArray())
-            ) {
+            )
+            {
                 return provider.GetMetadataReader().MetadataVersion;
             }
         }

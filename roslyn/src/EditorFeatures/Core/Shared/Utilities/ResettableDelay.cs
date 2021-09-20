@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
             int delayInMilliseconds,
             IExpeditableDelaySource expeditableDelaySource,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             Contract.ThrowIfFalse(delayInMilliseconds >= 50, "Perf, only use delays >= 50ms");
             _delayInMilliseconds = delayInMilliseconds;
 
@@ -61,7 +62,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
         private async Task StartTimerAsync(
             IExpeditableDelaySource expeditableDelaySource,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 do
@@ -73,7 +75,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
                                 cancellationToken
                             )
                             .ConfigureAwait(false)
-                    ) {
+                    )
+                    {
                         // The operation is being expedited.
                         break;
                     }

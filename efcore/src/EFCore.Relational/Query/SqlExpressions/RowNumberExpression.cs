@@ -84,7 +84,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         public virtual RowNumberExpression Update(
             IReadOnlyList<SqlExpression>? partitions,
             IReadOnlyList<OrderingExpression> orderings
-        ) {
+        )
+        {
             Check.NotNull(orderings, nameof(orderings));
 
             return

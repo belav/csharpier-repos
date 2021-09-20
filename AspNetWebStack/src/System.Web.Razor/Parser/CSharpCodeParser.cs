@@ -93,7 +93,8 @@ namespace System.Web.Razor.Parser
             Action<bool> handler,
             bool topLevel,
             params CSharpKeyword[] keywords
-        ) {
+        )
+        {
             foreach (CSharpKeyword keyword in keywords)
             {
                 _keywordParsers.Add(keyword, handler);
@@ -139,7 +140,8 @@ namespace System.Web.Razor.Parser
         protected static Func<CSharpSymbol, bool> IsSpacingToken(
             bool includeNewLines,
             bool includeComments
-        ) {
+        )
+        {
             return sym =>
                 sym.Type == CSharpSymbolType.WhiteSpace
                 || (includeNewLines && sym.Type == CSharpSymbolType.NewLine)
@@ -167,7 +169,8 @@ namespace System.Web.Razor.Parser
                         At(CSharpSymbolType.StringLiteral)
                         && CurrentSymbol.Content.Length > 0
                         && CurrentSymbol.Content[0] == SyntaxConstants.TransitionCharacter
-                    ) {
+                    )
+                    {
                         Tuple<CSharpSymbol, CSharpSymbol> split = Language.SplitSymbol(
                             CurrentSymbol,
                             1,
@@ -369,7 +372,8 @@ namespace System.Web.Razor.Parser
                         span.CodeGenerator = new ExpressionCodeGenerator();
                     }
                 )
-            ) {
+            )
+            {
                 do
                 {
                     if (AtIdentifier(allowKeywords: true))
@@ -390,7 +394,8 @@ namespace System.Web.Razor.Parser
                 if (
                     CurrentSymbol.Type == CSharpSymbolType.LeftParenthesis
                     || CurrentSymbol.Type == CSharpSymbolType.LeftBracket
-                ) {
+                )
+                {
                     // If we end within "(", whitespace is fine
                     Span.EditHandler.AcceptedCharacters = AcceptedCharacters.Any;
 
@@ -405,7 +410,8 @@ namespace System.Web.Razor.Parser
                                 span.EditHandler.AcceptedCharacters = AcceptedCharacters.Any;
                             }
                         )
-                    ) {
+                    )
+                    {
                         right = Language.FlipBracket(CurrentSymbol.Type);
                         success = Balance(
                             BalancingModes.BacktrackOnFailure
@@ -491,7 +497,8 @@ namespace System.Web.Razor.Parser
                 && captureWhitespaceToEndOfLine
                 && !Context.DesignTimeMode
                 && !IsNested
-            ) {
+            )
+            {
                 CaptureWhitespaceAtEndOfCodeOnlyLine();
             }
             else
@@ -622,7 +629,8 @@ namespace System.Web.Razor.Parser
         protected override bool IsAtEmbeddedTransition(
             bool allowTemplatesAndComments,
             bool allowTransitions
-        ) {
+        )
+        {
             // No embedded transitions in C#, so ignore that param
             return allowTemplatesAndComments
                 && (

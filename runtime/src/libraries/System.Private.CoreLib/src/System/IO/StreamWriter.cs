@@ -160,7 +160,8 @@ namespace System.IO
             bool append,
             Encoding encoding,
             int bufferSize
-        ) {
+        )
+        {
             if (path == null)
                 throw new ArgumentNullException(nameof(path));
             if (encoding == null)
@@ -419,7 +420,8 @@ namespace System.IO
                 buffer.Length <= 4
                 && // Threshold of 4 chosen based on perf experimentation
                 buffer.Length <= _charLen - _charPos
-            ) {
+            )
+            {
                 // For very short buffers and when we don't need to worry about running out of space
                 // in the char buffer, just copy the chars individually.
                 for (int i = 0; i < buffer.Length; i++)
@@ -440,7 +442,8 @@ namespace System.IO
 
                 fixed (char* bufferPtr = &MemoryMarshal.GetReference(buffer))fixed (
                     char* dstPtr = &charBuffer[0]
-                ) {
+                )
+                {
                     char* srcPtr = bufferPtr;
                     int count = buffer.Length;
                     int dstPos = _charPos; // use a local copy of _charPos for safety
@@ -769,7 +772,8 @@ namespace System.IO
         public override Task WriteAsync(
             ReadOnlyMemory<char> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (GetType() != typeof(StreamWriter))
             {
                 // If a derived type may have overridden existing WriteASync(char[], ...) behavior, make sure we use it.
@@ -797,7 +801,8 @@ namespace System.IO
             ReadOnlyMemory<char> source,
             bool appendNewLine,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             int copied = 0;
             while (copied < source.Length)
             {
@@ -966,7 +971,8 @@ namespace System.IO
         public override Task WriteLineAsync(
             ReadOnlyMemory<char> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (GetType() != typeof(StreamWriter))
             {
                 return base.WriteLineAsync(buffer, cancellationToken);
@@ -1018,7 +1024,8 @@ namespace System.IO
             bool flushStream,
             bool flushEncoder,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (cancellationToken.IsCancellationRequested)
             {
                 return Task.FromCanceled(cancellationToken);
@@ -1039,7 +1046,8 @@ namespace System.IO
                 bool flushStream,
                 bool flushEncoder,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (!_haveWrittenPreamble)
                 {
                     _haveWrittenPreamble = true;

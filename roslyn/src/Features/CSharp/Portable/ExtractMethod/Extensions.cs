@@ -81,7 +81,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     || n is AccessorDeclarationSyntax
                     || n is BlockSyntax
                     || n is GlobalStatementSyntax
-                ) {
+                )
+                {
                     return true;
                 }
 
@@ -148,7 +149,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
         public static bool ContainArgumentlessThrowWithoutEnclosingCatch(
             this IEnumerable<SyntaxToken> tokens,
             TextSpan textSpan
-        ) {
+        )
+        {
             foreach (var token in tokens)
             {
                 if (token.Kind() != SyntaxKind.ThrowKeyword)
@@ -159,7 +161,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 if (
                     !(token.Parent is ThrowStatementSyntax throwStatement)
                     || throwStatement.Expression != null
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -176,7 +179,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
         public static bool ContainPreprocessorCrossOver(
             this IEnumerable<SyntaxToken> tokens,
             TextSpan textSpan
-        ) {
+        )
+        {
             var activeRegions = 0;
             var activeIfs = 0;
 
@@ -274,11 +278,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
         public static bool BetweenFieldAndNonFieldMember(
             this SyntaxToken token1,
             SyntaxToken token2
-        ) {
+        )
+        {
             if (
                 token1.RawKind != (int)SyntaxKind.SemicolonToken
                 || !(token1.Parent is FieldDeclarationSyntax)
-            ) {
+            )
+            {
                 return false;
             }
 

@@ -57,7 +57,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             if (
                 binaryExpression.NodeType == ExpressionType.ArrayIndex
                 && binaryExpression.Left.Type == typeof(byte[])
-            ) {
+            )
+            {
                 var left = Visit(binaryExpression.Left);
                 var right = Visit(binaryExpression.Right);
 
@@ -109,7 +110,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             if (
                 unaryExpression.NodeType == ExpressionType.ArrayLength
                 && unaryExpression.Operand.Type == typeof(byte[])
-            ) {
+            )
+            {
                 if (!(base.Visit(unaryExpression.Operand) is SqlExpression sqlExpression))
                 {
                     return QueryCompilationContext.NotTranslatedExpression;

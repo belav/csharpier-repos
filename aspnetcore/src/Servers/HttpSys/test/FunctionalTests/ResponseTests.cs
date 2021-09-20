@@ -29,7 +29,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
                 HttpResponseMessage response = await SendRequestAsync(address);
                 Assert.Equal(200, (int)response.StatusCode);
                 Assert.Equal("OK", response.ReasonPhrase);
@@ -52,7 +53,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
                 HttpResponseMessage response = await SendRequestAsync(address);
                 Assert.Equal(201, (int)response.StatusCode);
                 Assert.Equal("Created", response.ReasonPhrase);
@@ -77,7 +79,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
                 HttpResponseMessage response = await SendRequestAsync(address);
                 Assert.Equal(201, (int)response.StatusCode);
                 Assert.Equal("CustomReasonPhrase", response.ReasonPhrase);
@@ -99,7 +102,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
                 HttpResponseMessage response = await SendRequestAsync(address);
                 Assert.Equal(901, (int)response.StatusCode);
                 Assert.Equal(string.Empty, response.ReasonPhrase);
@@ -120,7 +124,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
                 HttpResponseMessage response = await SendRequestAsync(address);
                 Assert.Equal(500, (int)response.StatusCode);
             }
@@ -139,7 +144,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
                 HttpResponseMessage response = await SendRequestAsync(address);
                 Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);
             }
@@ -181,7 +187,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address);
                 Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                 await onStartingCalled.Task.TimeoutAfter(TimeSpan.FromSeconds(1));
@@ -224,7 +231,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address);
                 Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);
                 await onStartingCalled.Task.TimeoutAfter(TimeSpan.FromSeconds(1));
@@ -270,7 +278,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         return Task.FromResult(0);
                     }
                 )
-            ) {
+            )
+            {
                 var response = await SendRequestAsync(address);
                 Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                 await onStartingCalled.Task.TimeoutAfter(TimeSpan.FromSeconds(1));

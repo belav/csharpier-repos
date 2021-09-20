@@ -38,7 +38,8 @@ namespace System.Web.Http.Tracing.Tracers
         Task<HttpResponseMessage> IHttpActionInvoker.InvokeActionAsync(
             HttpActionContext actionContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (actionContext == null)
             {
                 throw new ArgumentNullException("actionContext");

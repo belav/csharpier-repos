@@ -23,7 +23,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IMvcCoreBuilder AddXmlOptions(
             this IMvcCoreBuilder builder,
             Action<MvcXmlOptions> setupAction
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -45,7 +46,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns>The <see cref="IMvcCoreBuilder"/>.</returns>
         public static IMvcCoreBuilder AddXmlDataContractSerializerFormatters(
             this IMvcCoreBuilder builder
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -64,7 +66,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IMvcCoreBuilder AddXmlDataContractSerializerFormatters(
             this IMvcCoreBuilder builder,
             Action<MvcXmlOptions> setupAction
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -105,7 +108,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IMvcCoreBuilder AddXmlSerializerFormatters(
             this IMvcCoreBuilder builder,
             Action<MvcXmlOptions> setupAction
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -119,7 +123,8 @@ namespace Microsoft.Extensions.DependencyInjection
         // Internal for testing.
         internal static void AddXmlDataContractSerializerFormatterServices(
             IServiceCollection services
-        ) {
+        )
+        {
             services.TryAddEnumerable(
                 ServiceDescriptor.Transient<
                     IConfigureOptions<MvcOptions>,

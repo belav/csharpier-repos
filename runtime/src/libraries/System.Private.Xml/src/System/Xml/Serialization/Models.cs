@@ -108,7 +108,8 @@ namespace System.Xml.Serialization
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type,
             TypeDesc typeDesc,
             ModelScope scope
-        ) {
+        )
+        {
             _scope = scope;
             _type = type;
             _typeDesc = typeDesc;
@@ -351,7 +352,8 @@ namespace System.Xml.Serialization
             bool checkSpecified,
             bool checkShouldPersist,
             bool readOnly
-        ) {
+        )
+        {
             _fieldTypeDesc = fieldTypeDesc;
             _name = name;
             _fieldType = fieldType;
@@ -411,7 +413,8 @@ namespace System.Xml.Serialization
                     if (
                         _checkSpecified != SpecifiedAccessor.None
                         && specifiedProperty.PropertyType != typeof(bool)
-                    ) {
+                    )
+                    {
                         throw new InvalidOperationException(
                             SR.Format(
                                 SR.XmlInvalidSpecifiedType,

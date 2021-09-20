@@ -9,7 +9,8 @@ namespace System.Buffers.Text
             ReadOnlySpan<byte> source,
             out byte value,
             out int bytesConsumed
-        ) {
+        )
+        {
             if (source.Length < 1)
                 goto FalseExit;
 
@@ -78,7 +79,8 @@ namespace System.Buffers.Text
             ReadOnlySpan<byte> source,
             out ushort value,
             out int bytesConsumed
-        ) {
+        )
+        {
             if (source.Length < 1)
                 goto FalseExit;
 
@@ -163,7 +165,8 @@ namespace System.Buffers.Text
             ReadOnlySpan<byte> source,
             out uint value,
             out int bytesConsumed
-        ) {
+        )
+        {
             if (source.Length < 1)
                 goto FalseExit;
 
@@ -291,7 +294,8 @@ namespace System.Buffers.Text
             ReadOnlySpan<byte> source,
             out ulong value,
             out int bytesConsumed
-        ) {
+        )
+        {
             if (source.Length < 1)
             {
                 bytesConsumed = 0;
@@ -343,7 +347,8 @@ namespace System.Buffers.Text
                     int index = ParserHelpers.Int64OverflowLength - 1;
                     index < source.Length;
                     index++
-                ) {
+                )
+                {
                     ulong nextDigit = source[index] - 48u; // '0'
                     if (nextDigit > 9)
                     {
@@ -356,7 +361,8 @@ namespace System.Buffers.Text
                     if (
                         parsedValue > ulong.MaxValue / 10
                         || (parsedValue == ulong.MaxValue / 10 && nextDigit > 5)
-                    ) {
+                    )
+                    {
                         bytesConsumed = 0;
                         value = default;
                         return false;

@@ -173,7 +173,8 @@ namespace System.Xml.Xsl.XsltOld
                     new XmlQualifiedName(mainNode.LocalName, mainNode.NamespaceURI)
                 )
                 && _isXmlOutput
-            ) {
+            )
+            {
                 record.Manager.CurrentElementScope.ToCData = true;
             }
 
@@ -411,7 +412,8 @@ namespace System.Xml.Xsl.XsltOld
                     if (
                         node.NamespaceURI.Length == 0
                         && string.Equals("html", node.LocalName, StringComparison.OrdinalIgnoreCase)
-                    ) {
+                    )
+                    {
                         method = XsltOutput.OutputMethod.Html;
                     }
                     break;
@@ -775,7 +777,8 @@ namespace System.Xml.Xsl.XsltOld
                         attrValue,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     // Since the name of the attribute = the value of the attribute,
                     // this is a boolean attribute whose value should be suppressed
                     continue;

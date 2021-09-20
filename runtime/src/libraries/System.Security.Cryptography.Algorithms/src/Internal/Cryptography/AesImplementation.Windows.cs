@@ -17,7 +17,8 @@ namespace Internal.Cryptography
             int paddingSize,
             int feedbackSize,
             bool encrypting
-        ) {
+        )
+        {
             SafeAlgorithmHandle algorithm = AesBCryptModes.GetSharedHandle(
                 cipherMode,
                 feedbackSize

@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
             private Model SetModelExplicitlySelectedItemInBackground(
                 Model model,
                 Func<Model, SignatureHelpItem> selector
-            ) {
+            )
+            {
                 AssertIsBackground();
 
                 if (model == null)

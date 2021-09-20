@@ -47,7 +47,8 @@ namespace System.Web.WebPages.Instrumentation
             int startPosition,
             int length,
             bool isLiteral
-        ) {
+        )
+        {
             if (IsAvailable)
             {
                 PageInstrumentationServiceAdapter instrumentationService =
@@ -55,7 +56,8 @@ namespace System.Web.WebPages.Instrumentation
                 if (
                     instrumentationService != null
                     && instrumentationService.ExecutionListeners.Count > 0
-                ) {
+                )
+                {
                     var instrumentationContext = CreateContext(
                         virtualPath,
                         writer,
@@ -65,7 +67,8 @@ namespace System.Web.WebPages.Instrumentation
                     );
                     foreach (
                         PageExecutionListenerAdapter listener in instrumentationService.ExecutionListeners
-                    ) {
+                    )
+                    {
                         listener.BeginContext(instrumentationContext);
                     }
                 }
@@ -79,7 +82,8 @@ namespace System.Web.WebPages.Instrumentation
             int startPosition,
             int length,
             bool isLiteral
-        ) {
+        )
+        {
             if (IsAvailable)
             {
                 PageInstrumentationServiceAdapter instrumentationService =
@@ -87,7 +91,8 @@ namespace System.Web.WebPages.Instrumentation
                 if (
                     instrumentationService != null
                     && instrumentationService.ExecutionListeners.Count > 0
-                ) {
+                )
+                {
                     var instrumentationContext = CreateContext(
                         virtualPath,
                         writer,
@@ -97,7 +102,8 @@ namespace System.Web.WebPages.Instrumentation
                     );
                     foreach (
                         PageExecutionListenerAdapter listener in instrumentationService.ExecutionListeners
-                    ) {
+                    )
+                    {
                         listener.EndContext(instrumentationContext);
                     }
                 }
@@ -110,7 +116,8 @@ namespace System.Web.WebPages.Instrumentation
             int startPosition,
             int length,
             bool isLiteral
-        ) {
+        )
+        {
             return new PageExecutionContextAdapter()
             {
                 VirtualPath = virtualPath,
@@ -136,7 +143,8 @@ namespace System.Web.WebPages.Instrumentation
 
         private PageInstrumentationServiceAdapter GetInstrumentationServiceUncached(
             HttpContextBase context
-        ) {
+        )
+        {
             HttpContextAdapter ctx = new HttpContextAdapter(context);
             return ctx.PageInstrumentation;
         }

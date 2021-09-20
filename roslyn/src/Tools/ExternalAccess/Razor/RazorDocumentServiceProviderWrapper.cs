@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
 
         public RazorDocumentServiceProviderWrapper(
             IRazorDocumentServiceProvider innerDocumentServiceProvider
-        ) {
+        )
+        {
             _innerDocumentServiceProvider =
                 innerDocumentServiceProvider
                 ?? throw new ArgumentNullException(nameof(innerDocumentServiceProvider));

@@ -60,7 +60,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
             string? workspaceKind = null,
             bool makeSeparateBufferForCursor = false,
             ImmutableArray<string> roles = default
-        ) {
+        )
+        {
             Workspace = TestWorkspace.CreateWorkspace(
                 workspaceElement,
                 composition: composition,
@@ -92,7 +93,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
                         "Selection",
                         out var selectionSpanList
                     )
-                ) {
+                )
+                {
                     var firstSpan = selectionSpanList.First();
                     var lastSpan = selectionSpanList.Last();
                     var cursorPosition = cursorDocument.CursorPosition!.Value;
@@ -547,7 +549,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
         public void SendTypeChars(
             string typeChars,
             Action<TypeCharCommandArgs, Action, CommandExecutionContext> commandHandler
-        ) {
+        )
+        {
             foreach (var ch in typeChars)
             {
                 var localCh = ch;

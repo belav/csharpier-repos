@@ -29,7 +29,8 @@ namespace System.CodeDom.Compiler.Tests
             int column,
             string errorNumber,
             string errorText
-        ) {
+        )
+        {
             var error = new CompilerError(fileName, line, column, errorNumber, errorText);
             Assert.Equal(column, error.Column);
             Assert.Equal(errorNumber, error.ErrorNumber);

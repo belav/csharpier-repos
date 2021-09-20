@@ -36,7 +36,8 @@ namespace Microsoft.Web.Mvc.Resources
             object model,
             ContentType responseFormat,
             HttpStatusCode statusCode
-        ) {
+        )
+        {
             _model = model;
             _responseFormat = responseFormat;
             _statusCode = statusCode;
@@ -61,7 +62,8 @@ namespace Microsoft.Web.Mvc.Resources
             ControllerContext context,
             object model,
             ContentType responseFormat
-        ) {
+        )
+        {
             if (!FormatManager.Current.CanSerialize(responseFormat))
             {
                 return false;

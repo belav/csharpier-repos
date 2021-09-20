@@ -498,7 +498,8 @@ namespace System.Web.Http.ModelBinding
             public bool BindModel(
                 HttpActionContext actionContext,
                 ModelBindingContext bindingContext
-            ) {
+            )
+            {
                 ValueProviderResult valueResult = bindingContext.ValueProvider.GetValue(
                     bindingContext.ModelName
                 );

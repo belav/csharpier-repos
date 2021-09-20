@@ -20,7 +20,8 @@ namespace System.Net
             bool finished,
             string? connectionGroupId,
             bool mutualAuth
-        ) {
+        )
+        {
             Message = string.IsNullOrEmpty(token) ? null : token;
             ConnectionGroupId = string.IsNullOrEmpty(connectionGroupId) ? null : connectionGroupId;
             Complete = finished;

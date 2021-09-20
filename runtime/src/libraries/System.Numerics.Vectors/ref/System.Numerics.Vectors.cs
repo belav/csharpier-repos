@@ -34,7 +34,8 @@ namespace System.Numerics
         public static System.Numerics.Matrix3x2 Add(
             System.Numerics.Matrix3x2 value1,
             System.Numerics.Matrix3x2 value2
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Matrix3x2 CreateRotation(float radians)
@@ -44,7 +45,8 @@ namespace System.Numerics
         public static System.Numerics.Matrix3x2 CreateRotation(
             float radians,
             System.Numerics.Vector2 centerPoint
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Matrix3x2 CreateScale(System.Numerics.Vector2 scales)
@@ -54,7 +56,8 @@ namespace System.Numerics
         public static System.Numerics.Matrix3x2 CreateScale(
             System.Numerics.Vector2 scales,
             System.Numerics.Vector2 centerPoint
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Matrix3x2 CreateScale(float scale)
@@ -64,7 +67,8 @@ namespace System.Numerics
         public static System.Numerics.Matrix3x2 CreateScale(
             float scale,
             System.Numerics.Vector2 centerPoint
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Matrix3x2 CreateScale(float xScale, float yScale)
@@ -75,7 +79,8 @@ namespace System.Numerics
             float xScale,
             float yScale,
             System.Numerics.Vector2 centerPoint
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Matrix3x2 CreateSkew(float radiansX, float radiansY)
@@ -86,7 +91,8 @@ namespace System.Numerics
             float radiansX,
             float radiansY,
             System.Numerics.Vector2 centerPoint
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Matrix3x2 CreateTranslation(System.Numerics.Vector2 position)
@@ -103,7 +109,8 @@ namespace System.Numerics
         }
         public override readonly bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public readonly float GetDeterminant()
@@ -117,26 +124,30 @@ namespace System.Numerics
         public static bool Invert(
             System.Numerics.Matrix3x2 matrix,
             out System.Numerics.Matrix3x2 result
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Matrix3x2 Lerp(
             System.Numerics.Matrix3x2 matrix1,
             System.Numerics.Matrix3x2 matrix2,
             float amount
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Matrix3x2 Multiply(
             System.Numerics.Matrix3x2 value1,
             System.Numerics.Matrix3x2 value2
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Matrix3x2 Multiply(
             System.Numerics.Matrix3x2 value1,
             float value2
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Matrix3x2 Negate(System.Numerics.Matrix3x2 value)
@@ -146,37 +157,43 @@ namespace System.Numerics
         public static System.Numerics.Matrix3x2 operator +(
             System.Numerics.Matrix3x2 value1,
             System.Numerics.Matrix3x2 value2
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator ==(
             System.Numerics.Matrix3x2 value1,
             System.Numerics.Matrix3x2 value2
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Numerics.Matrix3x2 value1,
             System.Numerics.Matrix3x2 value2
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Matrix3x2 operator *(
             System.Numerics.Matrix3x2 value1,
             System.Numerics.Matrix3x2 value2
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Matrix3x2 operator *(
             System.Numerics.Matrix3x2 value1,
             float value2
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Matrix3x2 operator -(
             System.Numerics.Matrix3x2 value1,
             System.Numerics.Matrix3x2 value2
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Matrix3x2 operator -(System.Numerics.Matrix3x2 value)
@@ -186,7 +203,8 @@ namespace System.Numerics
         public static System.Numerics.Matrix3x2 Subtract(
             System.Numerics.Matrix3x2 value1,
             System.Numerics.Matrix3x2 value2
-        ) {
+        )
+        {
             throw null;
         }
         public override readonly string ToString()
@@ -233,7 +251,8 @@ namespace System.Numerics
             float m42,
             float m43,
             float m44
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Matrix4x4 Identity
@@ -252,7 +271,8 @@ namespace System.Numerics
         public static System.Numerics.Matrix4x4 Add(
             System.Numerics.Matrix4x4 value1,
             System.Numerics.Matrix4x4 value2
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Matrix4x4 CreateBillboard(
@@ -260,7 +280,8 @@ namespace System.Numerics
             System.Numerics.Vector3 cameraPosition,
             System.Numerics.Vector3 cameraUpVector,
             System.Numerics.Vector3 cameraForwardVector
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Matrix4x4 CreateConstrainedBillboard(
@@ -269,32 +290,37 @@ namespace System.Numerics
             System.Numerics.Vector3 rotateAxis,
             System.Numerics.Vector3 cameraForwardVector,
             System.Numerics.Vector3 objectForwardVector
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Matrix4x4 CreateFromAxisAngle(
             System.Numerics.Vector3 axis,
             float angle
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Matrix4x4 CreateFromQuaternion(
             System.Numerics.Quaternion quaternion
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Matrix4x4 CreateFromYawPitchRoll(
             float yaw,
             float pitch,
             float roll
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Matrix4x4 CreateLookAt(
             System.Numerics.Vector3 cameraPosition,
             System.Numerics.Vector3 cameraTarget,
             System.Numerics.Vector3 cameraUpVector
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Matrix4x4 CreateOrthographic(
@@ -302,7 +328,8 @@ namespace System.Numerics
             float height,
             float zNearPlane,
             float zFarPlane
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Matrix4x4 CreateOrthographicOffCenter(
@@ -312,7 +339,8 @@ namespace System.Numerics
             float top,
             float zNearPlane,
             float zFarPlane
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Matrix4x4 CreatePerspective(
@@ -320,7 +348,8 @@ namespace System.Numerics
             float height,
             float nearPlaneDistance,
             float farPlaneDistance
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Matrix4x4 CreatePerspectiveFieldOfView(
@@ -328,7 +357,8 @@ namespace System.Numerics
             float aspectRatio,
             float nearPlaneDistance,
             float farPlaneDistance
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Matrix4x4 CreatePerspectiveOffCenter(
@@ -338,7 +368,8 @@ namespace System.Numerics
             float top,
             float nearPlaneDistance,
             float farPlaneDistance
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Matrix4x4 CreateReflection(System.Numerics.Plane value)
@@ -352,7 +383,8 @@ namespace System.Numerics
         public static System.Numerics.Matrix4x4 CreateRotationX(
             float radians,
             System.Numerics.Vector3 centerPoint
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Matrix4x4 CreateRotationY(float radians)
@@ -362,7 +394,8 @@ namespace System.Numerics
         public static System.Numerics.Matrix4x4 CreateRotationY(
             float radians,
             System.Numerics.Vector3 centerPoint
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Matrix4x4 CreateRotationZ(float radians)
@@ -372,7 +405,8 @@ namespace System.Numerics
         public static System.Numerics.Matrix4x4 CreateRotationZ(
             float radians,
             System.Numerics.Vector3 centerPoint
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Matrix4x4 CreateScale(System.Numerics.Vector3 scales)
@@ -382,7 +416,8 @@ namespace System.Numerics
         public static System.Numerics.Matrix4x4 CreateScale(
             System.Numerics.Vector3 scales,
             System.Numerics.Vector3 centerPoint
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Matrix4x4 CreateScale(float scale)
@@ -392,14 +427,16 @@ namespace System.Numerics
         public static System.Numerics.Matrix4x4 CreateScale(
             float scale,
             System.Numerics.Vector3 centerPoint
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Matrix4x4 CreateScale(
             float xScale,
             float yScale,
             float zScale
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Matrix4x4 CreateScale(
@@ -407,13 +444,15 @@ namespace System.Numerics
             float yScale,
             float zScale,
             System.Numerics.Vector3 centerPoint
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Matrix4x4 CreateShadow(
             System.Numerics.Vector3 lightDirection,
             System.Numerics.Plane plane
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Matrix4x4 CreateTranslation(System.Numerics.Vector3 position)
@@ -424,14 +463,16 @@ namespace System.Numerics
             float xPosition,
             float yPosition,
             float zPosition
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Matrix4x4 CreateWorld(
             System.Numerics.Vector3 position,
             System.Numerics.Vector3 forward,
             System.Numerics.Vector3 up
-        ) {
+        )
+        {
             throw null;
         }
         public static bool Decompose(
@@ -439,7 +480,8 @@ namespace System.Numerics
             out System.Numerics.Vector3 scale,
             out System.Numerics.Quaternion rotation,
             out System.Numerics.Vector3 translation
-        ) {
+        )
+        {
             throw null;
         }
         public readonly bool Equals(System.Numerics.Matrix4x4 other)
@@ -448,7 +490,8 @@ namespace System.Numerics
         }
         public override readonly bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public readonly float GetDeterminant()
@@ -462,26 +505,30 @@ namespace System.Numerics
         public static bool Invert(
             System.Numerics.Matrix4x4 matrix,
             out System.Numerics.Matrix4x4 result
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Matrix4x4 Lerp(
             System.Numerics.Matrix4x4 matrix1,
             System.Numerics.Matrix4x4 matrix2,
             float amount
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Matrix4x4 Multiply(
             System.Numerics.Matrix4x4 value1,
             System.Numerics.Matrix4x4 value2
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Matrix4x4 Multiply(
             System.Numerics.Matrix4x4 value1,
             float value2
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Matrix4x4 Negate(System.Numerics.Matrix4x4 value)
@@ -491,37 +538,43 @@ namespace System.Numerics
         public static System.Numerics.Matrix4x4 operator +(
             System.Numerics.Matrix4x4 value1,
             System.Numerics.Matrix4x4 value2
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator ==(
             System.Numerics.Matrix4x4 value1,
             System.Numerics.Matrix4x4 value2
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Numerics.Matrix4x4 value1,
             System.Numerics.Matrix4x4 value2
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Matrix4x4 operator *(
             System.Numerics.Matrix4x4 value1,
             System.Numerics.Matrix4x4 value2
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Matrix4x4 operator *(
             System.Numerics.Matrix4x4 value1,
             float value2
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Matrix4x4 operator -(
             System.Numerics.Matrix4x4 value1,
             System.Numerics.Matrix4x4 value2
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Matrix4x4 operator -(System.Numerics.Matrix4x4 value)
@@ -531,7 +584,8 @@ namespace System.Numerics
         public static System.Numerics.Matrix4x4 Subtract(
             System.Numerics.Matrix4x4 value1,
             System.Numerics.Matrix4x4 value2
-        ) {
+        )
+        {
             throw null;
         }
         public override readonly string ToString()
@@ -541,7 +595,8 @@ namespace System.Numerics
         public static System.Numerics.Matrix4x4 Transform(
             System.Numerics.Matrix4x4 value,
             System.Numerics.Quaternion rotation
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Matrix4x4 Transpose(System.Numerics.Matrix4x4 matrix)
@@ -569,7 +624,8 @@ namespace System.Numerics
             System.Numerics.Vector3 point1,
             System.Numerics.Vector3 point2,
             System.Numerics.Vector3 point3
-        ) {
+        )
+        {
             throw null;
         }
         public static float Dot(System.Numerics.Plane plane, System.Numerics.Vector4 value)
@@ -579,7 +635,8 @@ namespace System.Numerics
         public static float DotCoordinate(
             System.Numerics.Plane plane,
             System.Numerics.Vector3 value
-        ) {
+        )
+        {
             throw null;
         }
         public static float DotNormal(System.Numerics.Plane plane, System.Numerics.Vector3 value)
@@ -592,7 +649,8 @@ namespace System.Numerics
         }
         public override readonly bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public override readonly int GetHashCode()
@@ -618,13 +676,15 @@ namespace System.Numerics
         public static System.Numerics.Plane Transform(
             System.Numerics.Plane plane,
             System.Numerics.Matrix4x4 matrix
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Plane Transform(
             System.Numerics.Plane plane,
             System.Numerics.Quaternion rotation
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -653,13 +713,15 @@ namespace System.Numerics
         public static System.Numerics.Quaternion Add(
             System.Numerics.Quaternion value1,
             System.Numerics.Quaternion value2
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Quaternion Concatenate(
             System.Numerics.Quaternion value1,
             System.Numerics.Quaternion value2
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Quaternion Conjugate(System.Numerics.Quaternion value)
@@ -669,31 +731,36 @@ namespace System.Numerics
         public static System.Numerics.Quaternion CreateFromAxisAngle(
             System.Numerics.Vector3 axis,
             float angle
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Quaternion CreateFromRotationMatrix(
             System.Numerics.Matrix4x4 matrix
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Quaternion CreateFromYawPitchRoll(
             float yaw,
             float pitch,
             float roll
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Quaternion Divide(
             System.Numerics.Quaternion value1,
             System.Numerics.Quaternion value2
-        ) {
+        )
+        {
             throw null;
         }
         public static float Dot(
             System.Numerics.Quaternion quaternion1,
             System.Numerics.Quaternion quaternion2
-        ) {
+        )
+        {
             throw null;
         }
         public readonly bool Equals(System.Numerics.Quaternion other)
@@ -702,7 +769,8 @@ namespace System.Numerics
         }
         public override readonly bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public override readonly int GetHashCode()
@@ -725,19 +793,22 @@ namespace System.Numerics
             System.Numerics.Quaternion quaternion1,
             System.Numerics.Quaternion quaternion2,
             float amount
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Quaternion Multiply(
             System.Numerics.Quaternion value1,
             System.Numerics.Quaternion value2
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Quaternion Multiply(
             System.Numerics.Quaternion value1,
             float value2
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Quaternion Negate(System.Numerics.Quaternion value)
@@ -751,43 +822,50 @@ namespace System.Numerics
         public static System.Numerics.Quaternion operator +(
             System.Numerics.Quaternion value1,
             System.Numerics.Quaternion value2
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Quaternion operator /(
             System.Numerics.Quaternion value1,
             System.Numerics.Quaternion value2
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator ==(
             System.Numerics.Quaternion value1,
             System.Numerics.Quaternion value2
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Numerics.Quaternion value1,
             System.Numerics.Quaternion value2
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Quaternion operator *(
             System.Numerics.Quaternion value1,
             System.Numerics.Quaternion value2
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Quaternion operator *(
             System.Numerics.Quaternion value1,
             float value2
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Quaternion operator -(
             System.Numerics.Quaternion value1,
             System.Numerics.Quaternion value2
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Quaternion operator -(System.Numerics.Quaternion value)
@@ -798,13 +876,15 @@ namespace System.Numerics
             System.Numerics.Quaternion quaternion1,
             System.Numerics.Quaternion quaternion2,
             float amount
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Quaternion Subtract(
             System.Numerics.Quaternion value1,
             System.Numerics.Quaternion value2
-        ) {
+        )
+        {
             throw null;
         }
         public override readonly string ToString()
@@ -839,8 +919,9 @@ namespace System.Numerics
         }
         public static System.Numerics.Vector<TTo> As<TFrom, TTo>(
             this System.Numerics.Vector<TFrom> vector
-        ) where TFrom : struct
-          where TTo : struct
+        )
+            where TFrom : struct
+            where TTo : struct
         {
             throw null;
         }
@@ -924,26 +1005,30 @@ namespace System.Numerics
         }
         public static System.Numerics.Vector<System.Double> Ceiling(
             System.Numerics.Vector<System.Double> value
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector<System.Single> Ceiling(
             System.Numerics.Vector<System.Single> value
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector<System.Single> ConditionalSelect(
             System.Numerics.Vector<System.Int32> condition,
             System.Numerics.Vector<System.Single> left,
             System.Numerics.Vector<System.Single> right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector<System.Double> ConditionalSelect(
             System.Numerics.Vector<System.Int64> condition,
             System.Numerics.Vector<System.Double> left,
             System.Numerics.Vector<System.Double> right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector<T> ConditionalSelect<T>(
@@ -956,46 +1041,54 @@ namespace System.Numerics
         }
         public static System.Numerics.Vector<System.Double> ConvertToDouble(
             System.Numerics.Vector<System.Int64> value
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
         public static System.Numerics.Vector<System.Double> ConvertToDouble(
             System.Numerics.Vector<System.UInt64> value
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector<System.Int32> ConvertToInt32(
             System.Numerics.Vector<System.Single> value
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector<System.Int64> ConvertToInt64(
             System.Numerics.Vector<System.Double> value
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector<System.Single> ConvertToSingle(
             System.Numerics.Vector<System.Int32> value
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
         public static System.Numerics.Vector<System.Single> ConvertToSingle(
             System.Numerics.Vector<System.UInt32> value
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
         public static System.Numerics.Vector<System.UInt32> ConvertToUInt32(
             System.Numerics.Vector<System.Single> value
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
         public static System.Numerics.Vector<System.UInt64> ConvertToUInt64(
             System.Numerics.Vector<System.Double> value
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector<T> Divide<T>(
@@ -1013,25 +1106,29 @@ namespace System.Numerics
         public static System.Numerics.Vector<System.Int64> Equals(
             System.Numerics.Vector<System.Double> left,
             System.Numerics.Vector<System.Double> right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector<System.Int32> Equals(
             System.Numerics.Vector<System.Int32> left,
             System.Numerics.Vector<System.Int32> right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector<System.Int64> Equals(
             System.Numerics.Vector<System.Int64> left,
             System.Numerics.Vector<System.Int64> right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector<System.Int32> Equals(
             System.Numerics.Vector<System.Single> left,
             System.Numerics.Vector<System.Single> right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool EqualsAll<T>(
@@ -1057,36 +1154,42 @@ namespace System.Numerics
         }
         public static System.Numerics.Vector<System.Double> Floor(
             System.Numerics.Vector<System.Double> value
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector<System.Single> Floor(
             System.Numerics.Vector<System.Single> value
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector<System.Int64> GreaterThan(
             System.Numerics.Vector<System.Double> left,
             System.Numerics.Vector<System.Double> right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector<System.Int32> GreaterThan(
             System.Numerics.Vector<System.Int32> left,
             System.Numerics.Vector<System.Int32> right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector<System.Int64> GreaterThan(
             System.Numerics.Vector<System.Int64> left,
             System.Numerics.Vector<System.Int64> right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector<System.Int32> GreaterThan(
             System.Numerics.Vector<System.Single> left,
             System.Numerics.Vector<System.Single> right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool GreaterThanAll<T>(
@@ -1106,25 +1209,29 @@ namespace System.Numerics
         public static System.Numerics.Vector<System.Int64> GreaterThanOrEqual(
             System.Numerics.Vector<System.Double> left,
             System.Numerics.Vector<System.Double> right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector<System.Int32> GreaterThanOrEqual(
             System.Numerics.Vector<System.Int32> left,
             System.Numerics.Vector<System.Int32> right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector<System.Int64> GreaterThanOrEqual(
             System.Numerics.Vector<System.Int64> left,
             System.Numerics.Vector<System.Int64> right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector<System.Int32> GreaterThanOrEqual(
             System.Numerics.Vector<System.Single> left,
             System.Numerics.Vector<System.Single> right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool GreaterThanOrEqualAll<T>(
@@ -1158,25 +1265,29 @@ namespace System.Numerics
         public static System.Numerics.Vector<System.Int64> LessThan(
             System.Numerics.Vector<System.Double> left,
             System.Numerics.Vector<System.Double> right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector<System.Int32> LessThan(
             System.Numerics.Vector<System.Int32> left,
             System.Numerics.Vector<System.Int32> right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector<System.Int64> LessThan(
             System.Numerics.Vector<System.Int64> left,
             System.Numerics.Vector<System.Int64> right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector<System.Int32> LessThan(
             System.Numerics.Vector<System.Single> left,
             System.Numerics.Vector<System.Single> right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool LessThanAll<T>(
@@ -1196,25 +1307,29 @@ namespace System.Numerics
         public static System.Numerics.Vector<System.Int64> LessThanOrEqual(
             System.Numerics.Vector<System.Double> left,
             System.Numerics.Vector<System.Double> right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector<System.Int32> LessThanOrEqual(
             System.Numerics.Vector<System.Int32> left,
             System.Numerics.Vector<System.Int32> right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector<System.Int64> LessThanOrEqual(
             System.Numerics.Vector<System.Int64> left,
             System.Numerics.Vector<System.Int64> right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector<System.Int32> LessThanOrEqual(
             System.Numerics.Vector<System.Single> left,
             System.Numerics.Vector<System.Single> right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool LessThanOrEqualAll<T>(
@@ -1279,47 +1394,54 @@ namespace System.Numerics
         public static System.Numerics.Vector<System.Single> Narrow(
             System.Numerics.Vector<System.Double> low,
             System.Numerics.Vector<System.Double> high
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
         public static System.Numerics.Vector<System.SByte> Narrow(
             System.Numerics.Vector<System.Int16> low,
             System.Numerics.Vector<System.Int16> high
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector<System.Int16> Narrow(
             System.Numerics.Vector<System.Int32> low,
             System.Numerics.Vector<System.Int32> high
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector<System.Int32> Narrow(
             System.Numerics.Vector<System.Int64> low,
             System.Numerics.Vector<System.Int64> high
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
         public static System.Numerics.Vector<System.Byte> Narrow(
             System.Numerics.Vector<System.UInt16> low,
             System.Numerics.Vector<System.UInt16> high
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
         public static System.Numerics.Vector<System.UInt16> Narrow(
             System.Numerics.Vector<System.UInt32> low,
             System.Numerics.Vector<System.UInt32> high
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
         public static System.Numerics.Vector<System.UInt32> Narrow(
             System.Numerics.Vector<System.UInt64> low,
             System.Numerics.Vector<System.UInt64> high
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector<T> Negate<T>(System.Numerics.Vector<T> value)
@@ -1349,21 +1471,24 @@ namespace System.Numerics
             System.Numerics.Vector<System.Byte> source,
             out System.Numerics.Vector<System.UInt16> low,
             out System.Numerics.Vector<System.UInt16> high
-        ) {
+        )
+        {
             throw null;
         }
         public static void Widen(
             System.Numerics.Vector<System.Int16> source,
             out System.Numerics.Vector<System.Int32> low,
             out System.Numerics.Vector<System.Int32> high
-        ) {
+        )
+        {
             throw null;
         }
         public static void Widen(
             System.Numerics.Vector<System.Int32> source,
             out System.Numerics.Vector<System.Int64> low,
             out System.Numerics.Vector<System.Int64> high
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
@@ -1371,14 +1496,16 @@ namespace System.Numerics
             System.Numerics.Vector<System.SByte> source,
             out System.Numerics.Vector<System.Int16> low,
             out System.Numerics.Vector<System.Int16> high
-        ) {
+        )
+        {
             throw null;
         }
         public static void Widen(
             System.Numerics.Vector<System.Single> source,
             out System.Numerics.Vector<System.Double> low,
             out System.Numerics.Vector<System.Double> high
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
@@ -1386,7 +1513,8 @@ namespace System.Numerics
             System.Numerics.Vector<System.UInt16> source,
             out System.Numerics.Vector<System.UInt32> low,
             out System.Numerics.Vector<System.UInt32> high
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
@@ -1394,7 +1522,8 @@ namespace System.Numerics
             System.Numerics.Vector<System.UInt32> source,
             out System.Numerics.Vector<System.UInt64> low,
             out System.Numerics.Vector<System.UInt64> high
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector<T> Xor<T>(
@@ -1444,14 +1573,16 @@ namespace System.Numerics
         public static System.Numerics.Vector2 Add(
             System.Numerics.Vector2 left,
             System.Numerics.Vector2 right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector2 Clamp(
             System.Numerics.Vector2 value1,
             System.Numerics.Vector2 min,
             System.Numerics.Vector2 max
-        ) {
+        )
+        {
             throw null;
         }
         public readonly void CopyTo(float[] array) { }
@@ -1468,13 +1599,15 @@ namespace System.Numerics
         public static float DistanceSquared(
             System.Numerics.Vector2 value1,
             System.Numerics.Vector2 value2
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector2 Divide(
             System.Numerics.Vector2 left,
             System.Numerics.Vector2 right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector2 Divide(System.Numerics.Vector2 left, float divisor)
@@ -1491,7 +1624,8 @@ namespace System.Numerics
         }
         public override readonly bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public override readonly int GetHashCode()
@@ -1510,25 +1644,29 @@ namespace System.Numerics
             System.Numerics.Vector2 value1,
             System.Numerics.Vector2 value2,
             float amount
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector2 Max(
             System.Numerics.Vector2 value1,
             System.Numerics.Vector2 value2
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector2 Min(
             System.Numerics.Vector2 value1,
             System.Numerics.Vector2 value2
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector2 Multiply(
             System.Numerics.Vector2 left,
             System.Numerics.Vector2 right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector2 Multiply(System.Numerics.Vector2 left, float right)
@@ -1550,19 +1688,22 @@ namespace System.Numerics
         public static System.Numerics.Vector2 operator +(
             System.Numerics.Vector2 left,
             System.Numerics.Vector2 right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector2 operator /(
             System.Numerics.Vector2 left,
             System.Numerics.Vector2 right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector2 operator /(
             System.Numerics.Vector2 value1,
             float value2
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator ==(System.Numerics.Vector2 left, System.Numerics.Vector2 right)
@@ -1576,7 +1717,8 @@ namespace System.Numerics
         public static System.Numerics.Vector2 operator *(
             System.Numerics.Vector2 left,
             System.Numerics.Vector2 right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector2 operator *(System.Numerics.Vector2 left, float right)
@@ -1590,7 +1732,8 @@ namespace System.Numerics
         public static System.Numerics.Vector2 operator -(
             System.Numerics.Vector2 left,
             System.Numerics.Vector2 right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector2 operator -(System.Numerics.Vector2 value)
@@ -1600,7 +1743,8 @@ namespace System.Numerics
         public static System.Numerics.Vector2 Reflect(
             System.Numerics.Vector2 vector,
             System.Numerics.Vector2 normal
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector2 SquareRoot(System.Numerics.Vector2 value)
@@ -1610,7 +1754,8 @@ namespace System.Numerics
         public static System.Numerics.Vector2 Subtract(
             System.Numerics.Vector2 left,
             System.Numerics.Vector2 right
-        ) {
+        )
+        {
             throw null;
         }
         public override readonly string ToString()
@@ -1628,31 +1773,36 @@ namespace System.Numerics
         public static System.Numerics.Vector2 Transform(
             System.Numerics.Vector2 position,
             System.Numerics.Matrix3x2 matrix
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector2 Transform(
             System.Numerics.Vector2 position,
             System.Numerics.Matrix4x4 matrix
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector2 Transform(
             System.Numerics.Vector2 value,
             System.Numerics.Quaternion rotation
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector2 TransformNormal(
             System.Numerics.Vector2 normal,
             System.Numerics.Matrix3x2 matrix
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector2 TransformNormal(
             System.Numerics.Vector2 normal,
             System.Numerics.Matrix4x4 matrix
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1704,14 +1854,16 @@ namespace System.Numerics
         public static System.Numerics.Vector3 Add(
             System.Numerics.Vector3 left,
             System.Numerics.Vector3 right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector3 Clamp(
             System.Numerics.Vector3 value1,
             System.Numerics.Vector3 min,
             System.Numerics.Vector3 max
-        ) {
+        )
+        {
             throw null;
         }
         public readonly void CopyTo(float[] array) { }
@@ -1724,7 +1876,8 @@ namespace System.Numerics
         public static System.Numerics.Vector3 Cross(
             System.Numerics.Vector3 vector1,
             System.Numerics.Vector3 vector2
-        ) {
+        )
+        {
             throw null;
         }
         public static float Distance(System.Numerics.Vector3 value1, System.Numerics.Vector3 value2)
@@ -1734,13 +1887,15 @@ namespace System.Numerics
         public static float DistanceSquared(
             System.Numerics.Vector3 value1,
             System.Numerics.Vector3 value2
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector3 Divide(
             System.Numerics.Vector3 left,
             System.Numerics.Vector3 right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector3 Divide(System.Numerics.Vector3 left, float divisor)
@@ -1757,7 +1912,8 @@ namespace System.Numerics
         }
         public override readonly bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public override readonly int GetHashCode()
@@ -1776,25 +1932,29 @@ namespace System.Numerics
             System.Numerics.Vector3 value1,
             System.Numerics.Vector3 value2,
             float amount
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector3 Max(
             System.Numerics.Vector3 value1,
             System.Numerics.Vector3 value2
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector3 Min(
             System.Numerics.Vector3 value1,
             System.Numerics.Vector3 value2
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector3 Multiply(
             System.Numerics.Vector3 left,
             System.Numerics.Vector3 right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector3 Multiply(System.Numerics.Vector3 left, float right)
@@ -1816,19 +1976,22 @@ namespace System.Numerics
         public static System.Numerics.Vector3 operator +(
             System.Numerics.Vector3 left,
             System.Numerics.Vector3 right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector3 operator /(
             System.Numerics.Vector3 left,
             System.Numerics.Vector3 right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector3 operator /(
             System.Numerics.Vector3 value1,
             float value2
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator ==(System.Numerics.Vector3 left, System.Numerics.Vector3 right)
@@ -1842,7 +2005,8 @@ namespace System.Numerics
         public static System.Numerics.Vector3 operator *(
             System.Numerics.Vector3 left,
             System.Numerics.Vector3 right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector3 operator *(System.Numerics.Vector3 left, float right)
@@ -1856,7 +2020,8 @@ namespace System.Numerics
         public static System.Numerics.Vector3 operator -(
             System.Numerics.Vector3 left,
             System.Numerics.Vector3 right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector3 operator -(System.Numerics.Vector3 value)
@@ -1866,7 +2031,8 @@ namespace System.Numerics
         public static System.Numerics.Vector3 Reflect(
             System.Numerics.Vector3 vector,
             System.Numerics.Vector3 normal
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector3 SquareRoot(System.Numerics.Vector3 value)
@@ -1876,7 +2042,8 @@ namespace System.Numerics
         public static System.Numerics.Vector3 Subtract(
             System.Numerics.Vector3 left,
             System.Numerics.Vector3 right
-        ) {
+        )
+        {
             throw null;
         }
         public override readonly string ToString()
@@ -1894,19 +2061,22 @@ namespace System.Numerics
         public static System.Numerics.Vector3 Transform(
             System.Numerics.Vector3 position,
             System.Numerics.Matrix4x4 matrix
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector3 Transform(
             System.Numerics.Vector3 value,
             System.Numerics.Quaternion rotation
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector3 TransformNormal(
             System.Numerics.Vector3 normal,
             System.Numerics.Matrix4x4 matrix
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1967,14 +2137,16 @@ namespace System.Numerics
         public static System.Numerics.Vector4 Add(
             System.Numerics.Vector4 left,
             System.Numerics.Vector4 right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector4 Clamp(
             System.Numerics.Vector4 value1,
             System.Numerics.Vector4 min,
             System.Numerics.Vector4 max
-        ) {
+        )
+        {
             throw null;
         }
         public readonly void CopyTo(float[] array) { }
@@ -1991,13 +2163,15 @@ namespace System.Numerics
         public static float DistanceSquared(
             System.Numerics.Vector4 value1,
             System.Numerics.Vector4 value2
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector4 Divide(
             System.Numerics.Vector4 left,
             System.Numerics.Vector4 right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector4 Divide(System.Numerics.Vector4 left, float divisor)
@@ -2014,7 +2188,8 @@ namespace System.Numerics
         }
         public override readonly bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public override readonly int GetHashCode()
@@ -2033,25 +2208,29 @@ namespace System.Numerics
             System.Numerics.Vector4 value1,
             System.Numerics.Vector4 value2,
             float amount
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector4 Max(
             System.Numerics.Vector4 value1,
             System.Numerics.Vector4 value2
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector4 Min(
             System.Numerics.Vector4 value1,
             System.Numerics.Vector4 value2
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector4 Multiply(
             System.Numerics.Vector4 left,
             System.Numerics.Vector4 right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector4 Multiply(System.Numerics.Vector4 left, float right)
@@ -2073,19 +2252,22 @@ namespace System.Numerics
         public static System.Numerics.Vector4 operator +(
             System.Numerics.Vector4 left,
             System.Numerics.Vector4 right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector4 operator /(
             System.Numerics.Vector4 left,
             System.Numerics.Vector4 right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector4 operator /(
             System.Numerics.Vector4 value1,
             float value2
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator ==(System.Numerics.Vector4 left, System.Numerics.Vector4 right)
@@ -2099,7 +2281,8 @@ namespace System.Numerics
         public static System.Numerics.Vector4 operator *(
             System.Numerics.Vector4 left,
             System.Numerics.Vector4 right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector4 operator *(System.Numerics.Vector4 left, float right)
@@ -2113,7 +2296,8 @@ namespace System.Numerics
         public static System.Numerics.Vector4 operator -(
             System.Numerics.Vector4 left,
             System.Numerics.Vector4 right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector4 operator -(System.Numerics.Vector4 value)
@@ -2127,7 +2311,8 @@ namespace System.Numerics
         public static System.Numerics.Vector4 Subtract(
             System.Numerics.Vector4 left,
             System.Numerics.Vector4 right
-        ) {
+        )
+        {
             throw null;
         }
         public override readonly string ToString()
@@ -2145,37 +2330,43 @@ namespace System.Numerics
         public static System.Numerics.Vector4 Transform(
             System.Numerics.Vector2 position,
             System.Numerics.Matrix4x4 matrix
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector4 Transform(
             System.Numerics.Vector2 value,
             System.Numerics.Quaternion rotation
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector4 Transform(
             System.Numerics.Vector3 position,
             System.Numerics.Matrix4x4 matrix
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector4 Transform(
             System.Numerics.Vector3 value,
             System.Numerics.Quaternion rotation
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector4 Transform(
             System.Numerics.Vector4 vector,
             System.Numerics.Matrix4x4 matrix
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector4 Transform(
             System.Numerics.Vector4 value,
             System.Numerics.Quaternion rotation
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -2234,7 +2425,8 @@ namespace System.Numerics
         }
         public override readonly bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public override readonly int GetHashCode()
@@ -2244,115 +2436,135 @@ namespace System.Numerics
         public static System.Numerics.Vector<T> operator +(
             System.Numerics.Vector<T> left,
             System.Numerics.Vector<T> right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector<T> operator &(
             System.Numerics.Vector<T> left,
             System.Numerics.Vector<T> right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector<T> operator |(
             System.Numerics.Vector<T> left,
             System.Numerics.Vector<T> right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector<T> operator /(
             System.Numerics.Vector<T> left,
             System.Numerics.Vector<T> right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator ==(
             System.Numerics.Vector<T> left,
             System.Numerics.Vector<T> right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector<T> operator ^(
             System.Numerics.Vector<T> left,
             System.Numerics.Vector<T> right
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Numerics.Vector<System.Byte>(
             System.Numerics.Vector<T> value
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Numerics.Vector<System.Double>(
             System.Numerics.Vector<T> value
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Numerics.Vector<System.Int16>(
             System.Numerics.Vector<T> value
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Numerics.Vector<System.Int32>(
             System.Numerics.Vector<T> value
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Numerics.Vector<System.Int64>(
             System.Numerics.Vector<T> value
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
         public static explicit operator System.Numerics.Vector<System.SByte>(
             System.Numerics.Vector<T> value
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Numerics.Vector<System.Single>(
             System.Numerics.Vector<T> value
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
         public static explicit operator System.Numerics.Vector<System.UInt16>(
             System.Numerics.Vector<T> value
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
         public static explicit operator System.Numerics.Vector<System.UInt32>(
             System.Numerics.Vector<T> value
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
         public static explicit operator System.Numerics.Vector<System.UInt64>(
             System.Numerics.Vector<T> value
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Numerics.Vector<T> left,
             System.Numerics.Vector<T> right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector<T> operator *(
             System.Numerics.Vector<T> left,
             System.Numerics.Vector<T> right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector<T> operator *(
             System.Numerics.Vector<T> value,
             T factor
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector<T> operator *(
             T factor,
             System.Numerics.Vector<T> value
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector<T> operator ~(System.Numerics.Vector<T> value)
@@ -2362,7 +2574,8 @@ namespace System.Numerics
         public static System.Numerics.Vector<T> operator -(
             System.Numerics.Vector<T> left,
             System.Numerics.Vector<T> right
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Numerics.Vector<T> operator -(System.Numerics.Vector<T> value)

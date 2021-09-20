@@ -163,7 +163,8 @@ namespace System.Net.Http
         protected override System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> SendAsync(
             System.Net.Http.HttpRequestMessage request,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
     }

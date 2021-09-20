@@ -77,7 +77,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ForegroundNotification
             int delay,
             IAsyncToken asyncToken,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(delay >= 0);
 
             if (cancellationToken.IsCancellationRequested)
@@ -101,7 +102,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ForegroundNotification
             int delay,
             IAsyncToken asyncToken,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(delay >= 0);
 
             if (cancellationToken.IsCancellationRequested)
@@ -171,7 +173,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ForegroundNotification
                     FunctionId.ForegroundNotificationService_NotifyOnForeground,
                     CancellationToken.None
                 )
-            ) {
+            )
+            {
                 var processedCount = 0;
                 var startProcessingTime = Environment.TickCount;
                 while (_workQueue.TryGetWorkItem(startProcessingTime, out var pendingWork))
@@ -222,7 +225,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ForegroundNotification
                     if (
                         IsInputPending()
                         || Environment.TickCount - startProcessingTime > DefaultTimeSliceInMS
-                    ) {
+                    )
+                    {
                         return;
                     }
                 }
@@ -279,7 +283,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ForegroundNotification
                 Func<bool> func,
                 IAsyncToken asyncToken,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 this.MinimumRunPointInMS = minimumRunPointInMS;
                 this.DoWorkAction = action;
                 this.DoWorkFunc = func;
@@ -455,7 +460,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ForegroundNotification
                         LinkedListNode<PendingWork> current = _list.First, next = current?.Next;
                         current != null;
                         current = next, next = current?.Next
-                    ) {
+                    )
+                    {
                         if (current.Value.CancellationToken.IsCancellationRequested)
                         {
                             _list.Remove(current);

@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
                 ITextView textView,
                 TaggerDelay textChangeDelay,
                 TaggerDelay scrollChangeDelay
-            ) {
+            )
+            {
                 Debug.Assert(textView != null);
                 _foregroundObject = new ForegroundThreadAffinitizedObject(threadingContext);
                 _textView = textView;
@@ -90,7 +91,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
                     if (
                         _viewTextSnapshot == lastViewTextSnapshot
                         && _viewVisualSnapshot == lastViewVisualSnapshot
-                    ) {
+                    )
+                    {
                         // We scrolled.
                         RaiseChanged(_scrollChangeDelay);
                     }

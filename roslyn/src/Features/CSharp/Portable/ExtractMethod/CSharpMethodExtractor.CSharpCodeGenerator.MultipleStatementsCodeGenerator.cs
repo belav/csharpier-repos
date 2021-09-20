@@ -66,7 +66,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                         var statement in GetStatementsFromContainer(
                             firstStatementUnderContainer.Parent
                         )
-                    ) {
+                    )
+                    {
                         // reset first seen
                         if (!firstSeen)
                         {
@@ -93,7 +94,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
                 protected override SyntaxNode GetOutermostCallSiteContainerToProcess(
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     var callSiteContainer = GetCallSiteContainerFromOutermostMoveInVariable(
                         cancellationToken
                     );
@@ -111,7 +113,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
                 private static SyntaxList<StatementSyntax> GetStatementsFromContainer(
                     SyntaxNode node
-                ) {
+                )
+                {
                     Contract.ThrowIfNull(node);
                     Contract.ThrowIfFalse(node.IsStatementContainerNode());
 
@@ -131,7 +134,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
                 protected override Task<SyntaxNode> GetStatementOrInitializerContainingInvocationToExtractedMethodAsync(
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     var statement = GetStatementContainingInvocationToExtractedMethodWorker();
                     return Task.FromResult<SyntaxNode>(
                         statement.WithAdditionalAnnotations(CallSiteAnnotation)

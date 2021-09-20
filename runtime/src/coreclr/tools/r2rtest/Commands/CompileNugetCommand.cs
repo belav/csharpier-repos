@@ -57,7 +57,8 @@ namespace R2RTest
                 StreamWriter nugetLog = File.CreateText(
                     Path.Combine(nugetOutputFolder, "nugetLog.txt")
                 )
-            ) {
+            )
+            {
                 foreach (var package in packageList)
                 {
                     nugetLog.WriteLine($"Creating empty app for {package}");

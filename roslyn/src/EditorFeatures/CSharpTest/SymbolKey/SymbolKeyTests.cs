@@ -178,7 +178,8 @@ class Program
             async Task<(Compilation bodyCompilation, Compilation referenceCompilation)> GetCompilationsAsync(
                 Project bodyProject,
                 Project referenceProject
-            ) {
+            )
+            {
                 // Randomize the order that we get compilations (and thus populate our internal caches).
                 Compilation bodyCompilation,
                     referenceCompilation;
@@ -199,7 +200,8 @@ class Program
             async Task<(ISymbol bodyLocalSymbol, ISymbol referenceAssemblySymbol)> GetSymbolsAsync(
                 Compilation bodyCompilation,
                 Compilation referenceCompilation
-            ) {
+            )
+            {
                 // Randomize the order that we get symbols from each project.
                 ISymbol bodyLocalSymbol,
                     referenceAssemblySymbol;
@@ -237,7 +239,8 @@ class Program
                 Solution solution,
                 ISymbol bodyLocalSymbol,
                 ISymbol referenceAssemblySymbol
-            ) {
+            )
+            {
                 // Randomize the order that we get try to get the originating project for the symbol.
                 ProjectId bodyLocalProjectId,
                     referenceAssemblyProjectId;

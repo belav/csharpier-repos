@@ -56,7 +56,8 @@ namespace System.Diagnostics.Eventing.Reader
             EventLogSession session,
             CultureInfo targetCultureInfo,
             string logFilePath
-        ) {
+        )
+        {
             if (targetCultureInfo == null)
                 targetCultureInfo = CultureInfo.CurrentCulture;
 
@@ -390,7 +391,8 @@ namespace System.Diagnostics.Eventing.Reader
         internal object GetProviderListProperty(
             EventLogHandle providerHandle,
             UnsafeNativeMethods.EvtPublisherMetadataPropertyId metadataProperty
-        ) {
+        )
+        {
             EventLogHandle elHandle = EventLogHandle.Zero;
 
             try

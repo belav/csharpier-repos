@@ -54,7 +54,8 @@ namespace System.Reflection.Tests
                 if (
                     ehc.Flags != ExceptionHandlingClauseOptions.Finally
                     && ehc.Flags != ExceptionHandlingClauseOptions.Filter
-                ) {
+                )
+                {
                     Assert.Equal(typeof(Exception), ehc.CatchType);
                     Assert.Equal(19, ehc.HandlerLength);
                     Assert.Equal(70, ehc.HandlerOffset);
@@ -88,7 +89,8 @@ namespace System.Reflection.Tests
                 if (
                     ehc.Flags != ExceptionHandlingClauseOptions.Finally
                     && ehc.Flags != ExceptionHandlingClauseOptions.Filter
-                ) {
+                )
+                {
                     Assert.Equal(typeof(Exception), ehc.CatchType);
                     Assert.Equal(14, ehc.HandlerLength);
                     Assert.Equal(58, ehc.HandlerOffset);

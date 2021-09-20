@@ -635,7 +635,8 @@ namespace System.Security.Cryptography.CryptoConfigTests
             string name,
             string typeName,
             bool supportsUnixMac
-        ) {
+        )
+        {
             bool isWindows = OperatingSystem.IsWindows();
 
             if (supportsUnixMac || isWindows)
@@ -736,7 +737,8 @@ namespace System.Security.Cryptography.CryptoConfigTests
         public static void EncodeOID_Value_Boundary_And_Compat(
             uint elementValue,
             string expectedEncoding
-        ) {
+        )
+        {
             // Boundary cases in EncodeOID; output may produce the wrong value mathematically due to encoding
             // algorithm semantics but included here for compat reasons.
             byte[] actual = CryptoConfig.EncodeOID("1." + elementValue.ToString());

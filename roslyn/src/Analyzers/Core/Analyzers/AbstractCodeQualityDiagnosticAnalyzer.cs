@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.CodeQuality
         protected AbstractCodeQualityDiagnosticAnalyzer(
             ImmutableArray<DiagnosticDescriptor> descriptors,
             GeneratedCodeAnalysisFlags generatedCodeAnalysisFlags
-        ) {
+        )
+        {
             SupportedDiagnostics = descriptors;
             _generatedCodeAnalysisFlags = generatedCodeAnalysisFlags;
         }

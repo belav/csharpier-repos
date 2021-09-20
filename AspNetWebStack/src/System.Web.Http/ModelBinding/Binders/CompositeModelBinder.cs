@@ -29,7 +29,8 @@ namespace System.Web.Http.ModelBinding.Binders
         public virtual bool BindModel(
             HttpActionContext actionContext,
             ModelBindingContext bindingContext
-        ) {
+        )
+        {
             ModelBindingContext newBindingContext = CreateNewBindingContext(
                 bindingContext,
                 bindingContext.ModelName
@@ -40,7 +41,8 @@ namespace System.Web.Http.ModelBinding.Binders
                 !boundSuccessfully
                 && !String.IsNullOrEmpty(bindingContext.ModelName)
                 && bindingContext.FallbackToEmptyPrefix
-            ) {
+            )
+            {
                 // fallback to empty prefix?
                 newBindingContext = CreateNewBindingContext(
                     bindingContext,
@@ -61,7 +63,8 @@ namespace System.Web.Http.ModelBinding.Binders
             if (
                 !newBindingContext.ModelMetadata.IsComplexType
                 && String.IsNullOrEmpty(newBindingContext.ModelName)
-            ) {
+            )
+            {
                 newBindingContext.ValidationNode = new Validation.ModelValidationNode(
                     newBindingContext.ModelMetadata,
                     bindingContext.ModelName
@@ -84,7 +87,8 @@ namespace System.Web.Http.ModelBinding.Binders
         private static ModelBindingContext CreateNewBindingContext(
             ModelBindingContext oldBindingContext,
             string modelName
-        ) {
+        )
+        {
             ModelBindingContext newBindingContext = new ModelBindingContext
             {
                 ModelMetadata = oldBindingContext.ModelMetadata,

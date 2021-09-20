@@ -49,14 +49,16 @@ namespace Microsoft.AspNetCore.Razor.Language
             IReadOnlyList<KeyValuePair<string, string>> attributes,
             string parentTagName,
             bool parentIsTagHelper
-        ) {
+        )
+        {
             if (
                 !string.IsNullOrEmpty(_tagHelperPrefix)
                 && (
                     tagName.Length <= _tagHelperPrefix.Length
                     || !tagName.StartsWith(_tagHelperPrefix, StringComparison.OrdinalIgnoreCase)
                 )
-            ) {
+            )
+            {
                 // The tagName doesn't have the tag helper prefix, we can short circuit.
                 return null;
             }
@@ -69,7 +71,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                     TagHelperMatchingConventions.ElementCatchAllName,
                     out HashSet<TagHelperDescriptor> catchAllDescriptors
                 )
-            ) {
+            )
+            {
                 descriptors = new HashSet<TagHelperDescriptor>(TagHelperDescriptorComparer.Default);
             }
             else
@@ -84,7 +87,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                     tagName,
                     out HashSet<TagHelperDescriptor> matchingDescriptors
                 )
-            ) {
+            )
+            {
                 descriptors = matchingDescriptors.Concat(descriptors);
             }
 
@@ -115,7 +119,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                             attributes,
                             rule
                         )
-                    ) {
+                    )
+                    {
                         if (applicableRules is null)
                         {
                             applicableRules = new List<TagMatchingRuleDescriptor>();
@@ -173,7 +178,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                         registrationKey,
                         out HashSet<TagHelperDescriptor> descriptorSet
                     )
-                ) {
+                )
+                {
                     descriptorSet = new HashSet<TagHelperDescriptor>(
                         TagHelperDescriptorComparer.Default
                     );

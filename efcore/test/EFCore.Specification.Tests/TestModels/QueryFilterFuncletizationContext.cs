@@ -99,7 +99,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         private static void ConfigureFilterParams(
             EntityTypeBuilder<LocalMethodParamsFilter> builder,
             QueryFilterFuncletizationContext context
-        ) {
+        )
+        {
             builder.HasQueryFilter(e => e.IsEnabled == context.Property);
         }
 
@@ -164,7 +165,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             public void Configure(
                 EntityTypeBuilder<EntityTypeConfigurationMethodCallFilter> builder
-            ) {
+            )
+            {
                 builder.HasQueryFilter(e => e.Tenant == Wrapper.Context.GetId());
             }
         }
@@ -181,7 +183,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             public void Configure(
                 EntityTypeBuilder<EntityTypeConfigurationPropertyChainFilter> builder
-            ) {
+            )
+            {
                 builder.HasQueryFilter(
                     e => e.IsEnabled == _wrapper.Context.IndirectionFlag.Enabled
                 );
@@ -275,14 +278,16 @@ namespace Microsoft.EntityFrameworkCore.Query
         public static void BuilderFilter(
             this EntityTypeBuilder<ExtensionBuilderFilter> builder,
             QueryFilterFuncletizationContext context
-        ) {
+        )
+        {
             builder.HasQueryFilter(e => e.IsEnabled == context.Field);
         }
 
         public static void ContextFilter(
             this DbContextWrapper wrapper,
             EntityTypeBuilder<ExtensionContextFilter> builder
-        ) {
+        )
+        {
             builder.HasQueryFilter(e => e.IsEnabled == wrapper.Context.IndirectionFlag.Enabled);
         }
     }
@@ -296,7 +301,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         public static void ConfigureFilter(
             EntityTypeBuilder<RemoteMethodParamsFilter> builder,
             DbContextWrapper wrapper
-        ) {
+        )
+        {
             builder.HasQueryFilter(e => e.Tenant == wrapper.Context.IndirectionFlag.GetId());
         }
     }

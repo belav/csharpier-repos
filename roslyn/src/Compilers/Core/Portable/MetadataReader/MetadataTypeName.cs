@@ -72,7 +72,8 @@ namespace Microsoft.CodeAnalysis
             string fullName,
             bool useCLSCompliantNameArityEncoding = false,
             int forcedArity = -1
-        ) {
+        )
+        {
             Debug.Assert(fullName != null);
             Debug.Assert(forcedArity >= -1 && forcedArity < short.MaxValue);
             Debug.Assert(
@@ -101,7 +102,8 @@ namespace Microsoft.CodeAnalysis
             string typeName,
             bool useCLSCompliantNameArityEncoding = false,
             int forcedArity = -1
-        ) {
+        )
+        {
             Debug.Assert(namespaceName != null);
             Debug.Assert(typeName != null);
             Debug.Assert(forcedArity >= -1 && forcedArity < short.MaxValue);
@@ -131,7 +133,8 @@ namespace Microsoft.CodeAnalysis
             string typeName,
             bool useCLSCompliantNameArityEncoding = false,
             int forcedArity = -1
-        ) {
+        )
+        {
             Debug.Assert(typeName != null);
             Debug.Assert(
                 !typeName.Contains(MetadataHelpers.DotDelimiterString)

@@ -233,7 +233,8 @@ namespace System.Net
             HttpResponseStreamAsyncResult? asyncResult,
             Interop.HttpApi.HTTP_FLAGS flags,
             bool isWebSocketHandshake
-        ) {
+        )
+        {
             if (NetEventSource.Log.IsEnabled())
                 NetEventSource.Info(
                     this,
@@ -330,7 +331,8 @@ namespace System.Net
                                 asyncResult != null
                                 && statusCode == Interop.HttpApi.ERROR_SUCCESS
                                 && HttpListener.SkipIOCPCallbackOnSuccess
-                            ) {
+                            )
+                            {
                                 asyncResult.IOCompleted(statusCode, bytesSent);
                                 // IO operation completed synchronously - callback won't be called to signal completion.
                             }
@@ -358,7 +360,8 @@ namespace System.Net
                             asyncResult != null
                             && statusCode == Interop.HttpApi.ERROR_SUCCESS
                             && HttpListener.SkipIOCPCallbackOnSuccess
-                        ) {
+                        )
+                        {
                             asyncResult.IOCompleted(statusCode, bytesSent);
                             // IO operation completed synchronously - callback won't be called to signal completion.
                         }
@@ -470,7 +473,8 @@ namespace System.Net
             if (
                 HttpListenerContext.MutualAuthentication != null
                 && HttpListenerContext.MutualAuthentication.Length > 0
-            ) {
+            )
+            {
                 Headers[HttpResponseHeader.WwwAuthenticate] =
                     HttpListenerContext.MutualAuthentication;
             }
@@ -480,7 +484,8 @@ namespace System.Net
         private List<GCHandle>? SerializeHeaders(
             ref Interop.HttpApi.HTTP_RESPONSE_HEADERS headers,
             bool isWebSocketHandshake
-        ) {
+        )
+        {
             Interop.HttpApi.HTTP_UNKNOWN_HEADER[]? unknownHeaders = null;
             List<GCHandle> pinnedHeaders;
             GCHandle gcHandle;
@@ -544,7 +549,8 @@ namespace System.Net
                 if (
                     lookup == (int)HttpResponseHeader.SetCookie
                     || isWebSocketHandshake && lookup == (int)HttpResponseHeader.Connection
-                ) {
+                )
+                {
                     lookup = -1;
                 }
 
@@ -569,7 +575,8 @@ namespace System.Net
                         if (
                             lookup == (int)HttpResponseHeader.SetCookie
                             || isWebSocketHandshake && lookup == (int)HttpResponseHeader.Connection
-                        ) {
+                        )
+                        {
                             lookup = -1;
                         }
                         if (NetEventSource.Log.IsEnabled())
@@ -599,7 +606,8 @@ namespace System.Net
                                 int headerValueIndex = 0;
                                 headerValueIndex < headerValues.Length;
                                 headerValueIndex++
-                            ) {
+                            )
+                            {
                                 //Add Name
                                 bytes = new byte[WebHeaderEncoding.GetByteCount(headerName)];
                                 unknownHeaders[headers.UnknownHeaderCount].NameLength =

@@ -31,7 +31,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             Type? declaredModelType,
             IModelMetadataProvider metadataProvider,
             PropertyValueAccessors propertyValueAccessors
-        ) {
+        )
+        {
             _metadataProvider = metadataProvider;
 
             // In the absence of a model on the current type, we'll attempt to use ViewDataDictionary<object> on the current type.
@@ -90,7 +91,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
         private static PropertyActivator<ViewContext> CreateActivateInfo(
             PropertyInfo property,
             PropertyValueAccessors valueAccessors
-        ) {
+        )
+        {
             Func<ViewContext, object> valueAccessor;
             if (typeof(ViewDataDictionary).IsAssignableFrom(property.PropertyType))
             {

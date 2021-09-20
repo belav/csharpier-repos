@@ -86,7 +86,8 @@ internal static class MinimizeUtil
             string unitDirPath,
             string sourceDirectory,
             string destinationDirectory
-        ) {
+        )
+        {
             string? lastOutputDirectory = null;
             foreach (
                 var sourceFilePath in Directory.EnumerateFiles(
@@ -94,7 +95,8 @@ internal static class MinimizeUtil
                     "*",
                     SearchOption.AllDirectories
                 )
-            ) {
+            )
+            {
                 var currentDirName = Path.GetDirectoryName(sourceFilePath)!;
                 var currentRelativeDirectory = Path.GetRelativePath(
                     sourceDirectory,
@@ -114,7 +116,8 @@ internal static class MinimizeUtil
                 if (
                     fileName.EndsWith(".dll", StringComparison.Ordinal)
                     && TryGetMvid(sourceFilePath, out var mvid)
-                ) {
+                )
+                {
                     var filePathInfo = new FilePathInfo(
                         RelativeDirectory: currentRelativeDirectory,
                         Directory: currentDirName,
@@ -211,7 +214,8 @@ internal static class MinimizeUtil
             static void writeWindowsRehydrateContent(
                 StringBuilder builder,
                 IGrouping<string, (Guid Id, FilePathInfo FilePath)> group
-            ) {
+            )
+            {
                 builder.AppendLine("@echo off");
                 var count = 0;
                 foreach (var tuple in group)
@@ -262,7 +266,8 @@ scriptroot=""$( cd -P ""$( dirname ""$source"" )"" && pwd )""
             static void writeUnixRehydrateContent(
                 StringBuilder builder,
                 IGrouping<string, (Guid Id, FilePathInfo FilePath)> group
-            ) {
+            )
+            {
                 writeUnixHeaderContent(builder);
 
                 var count = 0;

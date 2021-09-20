@@ -84,7 +84,8 @@ namespace System.Collections.Generic
             int length,
             T value,
             IComparer<T> comparer
-        ) {
+        )
+        {
             Debug.Assert(array != null, "Check the arguments in the caller!");
             Debug.Assert(
                 index >= 0 && length >= 0 && (array.Length - index >= length),
@@ -310,7 +311,8 @@ namespace System.Collections.Generic
                             typeof(T) == typeof(double)
                             || typeof(T) == typeof(float)
                             || typeof(T) == typeof(Half)
-                        ) {
+                        )
+                        {
                             int nanLeft = SortUtils.MoveNansToFront(keys, default(Span<byte>));
                             if (nanLeft == keys.Length)
                             {
@@ -574,7 +576,8 @@ namespace System.Collections.Generic
                 if (
                     child < n
                     && (keys[child - 1] == null || LessThan(ref keys[child - 1], ref keys[child]))
-                ) {
+                )
+                {
                     child++;
                 }
 
@@ -601,7 +604,8 @@ namespace System.Collections.Generic
                         t == null
                         || LessThan(ref t, ref Unsafe.Add(ref MemoryMarshal.GetReference(keys), j))
                     )
-                ) {
+                )
+                {
                     Unsafe.Add(ref MemoryMarshal.GetReference(keys), j + 1) = Unsafe.Add(
                         ref MemoryMarshal.GetReference(keys),
                         j
@@ -720,7 +724,8 @@ namespace System.Collections.Generic
             IComparer<TKey> comparer,
             int i,
             int j
-        ) {
+        )
+        {
             Debug.Assert(comparer != null);
             Debug.Assert(0 <= i && i < keys.Length && i < values.Length);
             Debug.Assert(0 <= j && j < keys.Length && j < values.Length);
@@ -756,7 +761,8 @@ namespace System.Collections.Generic
             Span<TKey> keys,
             Span<TValue> values,
             IComparer<TKey> comparer
-        ) {
+        )
+        {
             Debug.Assert(comparer != null);
             Debug.Assert(keys.Length == values.Length);
 
@@ -771,7 +777,8 @@ namespace System.Collections.Generic
             Span<TValue> values,
             int depthLimit,
             IComparer<TKey> comparer
-        ) {
+        )
+        {
             Debug.Assert(!keys.IsEmpty);
             Debug.Assert(values.Length == keys.Length);
             Debug.Assert(depthLimit >= 0);
@@ -836,7 +843,8 @@ namespace System.Collections.Generic
             Span<TKey> keys,
             Span<TValue> values,
             IComparer<TKey> comparer
-        ) {
+        )
+        {
             Debug.Assert(keys.Length >= Array.IntrosortSizeThreshold);
             Debug.Assert(comparer != null);
 
@@ -900,7 +908,8 @@ namespace System.Collections.Generic
             int i,
             int n,
             IComparer<TKey> comparer
-        ) {
+        )
+        {
             Debug.Assert(comparer != null);
 
             TKey d = keys[i - 1];
@@ -930,7 +939,8 @@ namespace System.Collections.Generic
             Span<TKey> keys,
             Span<TValue> values,
             IComparer<TKey> comparer
-        ) {
+        )
+        {
             Debug.Assert(comparer != null);
 
             for (int i = 0; i < keys.Length - 1; i++)
@@ -972,7 +982,8 @@ namespace System.Collections.Generic
                             typeof(TKey) == typeof(double)
                             || typeof(TKey) == typeof(float)
                             || typeof(TKey) == typeof(Half)
-                        ) {
+                        )
+                        {
                             int nanLeft = SortUtils.MoveNansToFront(keys, values);
                             if (nanLeft == keys.Length)
                             {
@@ -1008,7 +1019,8 @@ namespace System.Collections.Generic
             Span<TValue> values,
             int i,
             int j
-        ) {
+        )
+        {
             Debug.Assert(i != j);
 
             ref TKey keyRef = ref keys[i];
@@ -1163,7 +1175,8 @@ namespace System.Collections.Generic
                 if (
                     child < n
                     && (keys[child - 1] == null || LessThan(ref keys[child - 1], ref keys[child]))
-                ) {
+                )
+                {
                     child++;
                 }
 
@@ -1291,7 +1304,8 @@ namespace System.Collections.Generic
                     (typeof(TKey) == typeof(double) && double.IsNaN((double)(object)keys[i]))
                     || (typeof(TKey) == typeof(float) && float.IsNaN((float)(object)keys[i]))
                     || (typeof(TKey) == typeof(Half) && Half.IsNaN((Half)(object)keys[i]))
-                ) {
+                )
+                {
                     TKey temp = keys[left];
                     keys[left] = keys[i];
                     keys[i] = temp;

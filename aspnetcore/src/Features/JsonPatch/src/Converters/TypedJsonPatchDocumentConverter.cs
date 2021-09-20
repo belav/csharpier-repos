@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Converters
             Type objectType,
             object existingValue,
             JsonSerializer serializer
-        ) {
+        )
+        {
             try
             {
                 if (reader.TokenType == JsonToken.Null)

@@ -81,7 +81,8 @@ internal class Program
                 && (int)listener.LogDataPayload[0] == testData.TestInt
                 && (int)((IDictionary<string, object>)listener.LogDataPayload[1])["SubInt"]
                     == testData.SubData.SubInt
-            ) {
+            )
+            {
                 return 100;
             }
 

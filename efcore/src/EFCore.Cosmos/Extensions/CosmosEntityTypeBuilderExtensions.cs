@@ -26,7 +26,8 @@ namespace Microsoft.EntityFrameworkCore
         public static EntityTypeBuilder ToContainer(
             this EntityTypeBuilder entityTypeBuilder,
             string? name
-        ) {
+        )
+        {
             Check.NotNull(entityTypeBuilder, nameof(entityTypeBuilder));
             Check.NullButNotEmpty(name, nameof(name));
 
@@ -62,7 +63,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionEntityTypeBuilder entityTypeBuilder,
             string? name,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             if (!entityTypeBuilder.CanSetContainer(name, fromDataAnnotation))
             {
                 return null;
@@ -85,7 +87,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionEntityTypeBuilder entityTypeBuilder,
             string? name,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             Check.NotNull(entityTypeBuilder, nameof(entityTypeBuilder));
             Check.NullButNotEmpty(name, nameof(name));
 
@@ -105,7 +108,8 @@ namespace Microsoft.EntityFrameworkCore
         public static OwnedNavigationBuilder ToJsonProperty(
             this OwnedNavigationBuilder entityTypeBuilder,
             string? name
-        ) {
+        )
+        {
             entityTypeBuilder.OwnedEntityType.SetContainingPropertyName(name);
 
             return entityTypeBuilder;
@@ -120,11 +124,9 @@ namespace Microsoft.EntityFrameworkCore
         public static OwnedNavigationBuilder<TEntity, TDependentEntity> ToJsonProperty<
             TEntity,
             TDependentEntity
-        >(
-            this OwnedNavigationBuilder<TEntity, TDependentEntity> entityTypeBuilder,
-            string? name
-        ) where TEntity : class
-          where TDependentEntity : class
+        >(this OwnedNavigationBuilder<TEntity, TDependentEntity> entityTypeBuilder, string? name)
+            where TEntity : class
+            where TDependentEntity : class
         {
             entityTypeBuilder.OwnedEntityType.SetContainingPropertyName(name);
 
@@ -145,7 +147,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionEntityTypeBuilder entityTypeBuilder,
             string? name,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             if (!entityTypeBuilder.CanSetJsonProperty(name, fromDataAnnotation))
             {
                 return null;
@@ -168,7 +171,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionEntityTypeBuilder entityTypeBuilder,
             string? name,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             Check.NotNull(entityTypeBuilder, nameof(entityTypeBuilder));
             Check.NullButNotEmpty(name, nameof(name));
 
@@ -188,7 +192,8 @@ namespace Microsoft.EntityFrameworkCore
         public static EntityTypeBuilder HasPartitionKey(
             this EntityTypeBuilder entityTypeBuilder,
             string? name
-        ) {
+        )
+        {
             entityTypeBuilder.Metadata.SetPartitionKeyPropertyName(name);
 
             return entityTypeBuilder;
@@ -244,7 +249,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionEntityTypeBuilder entityTypeBuilder,
             string? name,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             if (!entityTypeBuilder.CanSetPartitionKey(name, fromDataAnnotation))
             {
                 return null;
@@ -267,7 +273,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionEntityTypeBuilder entityTypeBuilder,
             string? name,
             bool fromDataAnnotation = false
-        ) {
+        )
+        {
             Check.NotNull(entityTypeBuilder, nameof(entityTypeBuilder));
             Check.NullButNotEmpty(name, nameof(name));
 

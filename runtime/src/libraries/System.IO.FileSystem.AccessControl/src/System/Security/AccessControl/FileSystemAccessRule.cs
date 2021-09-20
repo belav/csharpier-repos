@@ -15,27 +15,29 @@ namespace System.Security.AccessControl
             IdentityReference identity,
             FileSystemRights fileSystemRights,
             AccessControlType type
-        ) : this(
-            identity,
-            AccessMaskFromRights(fileSystemRights, type),
-            false,
-            InheritanceFlags.None,
-            PropagationFlags.None,
-            type
-        ) { }
+        )
+            : this(
+                identity,
+                AccessMaskFromRights(fileSystemRights, type),
+                false,
+                InheritanceFlags.None,
+                PropagationFlags.None,
+                type
+            ) { }
 
         public FileSystemAccessRule(
             string identity,
             FileSystemRights fileSystemRights,
             AccessControlType type
-        ) : this(
-            new NTAccount(identity),
-            AccessMaskFromRights(fileSystemRights, type),
-            false,
-            InheritanceFlags.None,
-            PropagationFlags.None,
-            type
-        ) { }
+        )
+            : this(
+                new NTAccount(identity),
+                AccessMaskFromRights(fileSystemRights, type),
+                false,
+                InheritanceFlags.None,
+                PropagationFlags.None,
+                type
+            ) { }
 
         //
         // Constructor for creating access rules for folder objects
@@ -47,14 +49,15 @@ namespace System.Security.AccessControl
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
             AccessControlType type
-        ) : this(
-            identity,
-            AccessMaskFromRights(fileSystemRights, type),
-            false,
-            inheritanceFlags,
-            propagationFlags,
-            type
-        ) { }
+        )
+            : this(
+                identity,
+                AccessMaskFromRights(fileSystemRights, type),
+                false,
+                inheritanceFlags,
+                propagationFlags,
+                type
+            ) { }
 
         public FileSystemAccessRule(
             string identity,
@@ -62,14 +65,15 @@ namespace System.Security.AccessControl
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
             AccessControlType type
-        ) : this(
-            new NTAccount(identity),
-            AccessMaskFromRights(fileSystemRights, type),
-            false,
-            inheritanceFlags,
-            propagationFlags,
-            type
-        ) { }
+        )
+            : this(
+                new NTAccount(identity),
+                AccessMaskFromRights(fileSystemRights, type),
+                false,
+                inheritanceFlags,
+                propagationFlags,
+                type
+            ) { }
 
         //
         // Internal constructor to be called by public constructors
@@ -98,7 +102,8 @@ namespace System.Security.AccessControl
         internal static int AccessMaskFromRights(
             FileSystemRights fileSystemRights,
             AccessControlType controlType
-        ) {
+        )
+        {
             if (fileSystemRights < 0 || fileSystemRights > FileSystemRights.FullControl)
                 throw new ArgumentOutOfRangeException(
                     nameof(fileSystemRights),

@@ -69,7 +69,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         private IReadOnlyList<MigrationOperation> RewriteOperations(
             IReadOnlyList<MigrationOperation> migrationOperations,
             IModel? model
-        ) {
+        )
+        {
             var operations = new List<MigrationOperation>();
             var rebuilds = new Dictionary<(string Table, string? Schema), RebuildContext>();
             foreach (var operation in migrationOperations)
@@ -160,7 +161,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                                     )
                                     .Any()
                             )
-                        ) {
+                        )
+                        {
                             rebuild.OperationsToReplace.Add(createIndexOperation);
                             rebuild.CreateIndexesDeferred.Add(createIndexOperation.Name);
                         }
@@ -208,7 +210,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                                 (addColumnOperation.Table, addColumnOperation.Schema),
                                 out var rebuild
                             ) && rebuild.DropColumnsDeferred.Contains(addColumnOperation.Name)
-                        ) {
+                        )
+                        {
                             rebuild.OperationsToReplace.Add(addColumnOperation);
                             rebuild.AddColumnsDeferred.Add(
                                 addColumnOperation.Name,
@@ -233,7 +236,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                                 (renameColumnOperation.Table, renameColumnOperation.Schema),
                                 out var rebuild
                             )
-                        ) {
+                        )
+                        {
                             if (rebuild.DropColumnsDeferred.Contains(renameColumnOperation.NewName))
                             {
                                 rebuild.OperationsToReplace.Add(renameColumnOperation);
@@ -256,7 +260,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                                 (renameTableOperation.Name, renameTableOperation.Schema),
                                 out var rebuild
                             )
-                        ) {
+                        )
+                        {
                             rebuilds.Add(
                                 (
                                     renameTableOperation.NewName ?? renameTableOperation.Name,
@@ -295,7 +300,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                                 (tableOperation.Table, tableOperation.Schema),
                                 out var rebuild
                             )
-                        ) {
+                        )
+                        {
                             rebuild.OperationsToWarnFor.Add(operation);
                         }
 
@@ -389,7 +395,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
 
                 foreach (
                     var uniqueConstraint in table.UniqueConstraints.Where(c => !c.GetIsPrimaryKey())
-                ) {
+                )
+                {
                     createTableOperation.UniqueConstraints.Add(
                         AddUniqueConstraintOperation.CreateFrom(uniqueConstraint)
                     );
@@ -427,7 +434,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                     if (
                         column.ComputedColumnSql != null
                         || rebuild.Value.AddColumnsDeferred.ContainsKey(column.Name)
-                    ) {
+                    )
+                    {
                         continue;
                     }
 
@@ -573,11 +581,13 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             AlterDatabaseOperation operation,
             IModel? model,
             MigrationCommandListBuilder builder
-        ) {
+        )
+        {
             if (
                 operation[SqliteAnnotationNames.InitSpatialMetaData] as bool? != true
                 || operation.OldDatabase[SqliteAnnotationNames.InitSpatialMetaData] as bool? == true
-            ) {
+            )
+            {
                 return;
             }
 
@@ -599,7 +609,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             IModel? model,
             MigrationCommandListBuilder builder,
             bool terminate
-        ) {
+        )
+        {
             if (!IsSpatialiteColumn(operation, model))
             {
                 base.Generate(operation, model, builder, terminate);
@@ -658,7 +669,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             IModel? model,
             MigrationCommandListBuilder builder,
             bool terminate
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
@@ -699,7 +711,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             RenameTableOperation operation,
             IModel? model,
             MigrationCommandListBuilder builder
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
@@ -725,7 +738,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             RenameColumnOperation operation,
             IModel? model,
             MigrationCommandListBuilder builder
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
@@ -752,7 +766,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             IModel? model,
             MigrationCommandListBuilder builder,
             bool terminate = true
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
@@ -847,7 +862,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             CreateTableOperation operation,
             IModel? model,
             MigrationCommandListBuilder builder
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
@@ -865,7 +881,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             CreateTableOperation operation,
             IModel? model,
             MigrationCommandListBuilder builder
-        ) {
+        )
+        {
             for (var i = 0; i < operation.Columns.Count; i++)
             {
                 var column = operation.Columns[i];
@@ -907,7 +924,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             ColumnOperation operation,
             IModel? model,
             MigrationCommandListBuilder builder
-        ) {
+        )
+        {
             base.ColumnDefinition(schema, table, name, operation, model, builder);
 
             var inlinePk = operation[SqliteAnnotationNames.InlinePrimaryKey] as bool?;
@@ -1120,7 +1138,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             ColumnOperation operation,
             IModel? model,
             MigrationCommandListBuilder builder
-        ) {
+        )
+        {
             builder.Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(name));
 
             builder.Append(" AS (").Append(operation.ComputedColumnSql!).Append(")");

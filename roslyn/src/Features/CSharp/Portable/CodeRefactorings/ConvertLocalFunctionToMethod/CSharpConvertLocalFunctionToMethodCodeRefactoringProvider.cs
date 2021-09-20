@@ -85,7 +85,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ConvertLocalFunctionToM
             BlockSyntax parentBlock,
             LocalFunctionStatementSyntax localFunction,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
             var declaredSymbol = (IMethodSymbol)semanticModel.GetDeclaredSymbol(
@@ -235,7 +236,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ConvertLocalFunctionToM
                         SyntaxKind.InvocationExpression,
                         out InvocationExpressionSyntax invocation
                     )
-                ) {
+                )
+                {
                     if (hasAdditionalArguments)
                     {
                         var shouldUseNamedArguments =
@@ -370,7 +372,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ConvertLocalFunctionToM
         private static MethodDeclarationSyntax WithBodyFrom(
             MethodDeclarationSyntax method,
             LocalFunctionStatementSyntax localFunction
-        ) {
+        )
+        {
             return method.WithExpressionBody(localFunction.ExpressionBody)
                 .WithSemicolonToken(localFunction.SemicolonToken)
                 .WithBody(localFunction.Body);
@@ -379,7 +382,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ConvertLocalFunctionToM
         private static void GetCapturedTypeParameters(
             ISymbol symbol,
             List<ITypeParameterSymbol> typeParameters
-        ) {
+        )
+        {
             var containingSymbol = symbol.ContainingSymbol;
             if (containingSymbol != null && containingSymbol.Kind != SymbolKind.NamedType)
             {
@@ -394,7 +398,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ConvertLocalFunctionToM
             SemanticModel semanticModel,
             List<ITypeParameterSymbol> typeParameters,
             IEnumerable<ITypeParameterSymbol> reservedTypeParameters
-        ) {
+        )
+        {
             var unusedTypeParameters = typeParameters.ToList();
             foreach (var id in localFunction.DescendantNodes().OfType<IdentifierNameSyntax>())
             {
@@ -402,7 +407,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ConvertLocalFunctionToM
                 if (
                     symbol != null
                     && symbol.OriginalDefinition is ITypeParameterSymbol typeParameter
-                ) {
+                )
+                {
                     unusedTypeParameters.Remove(typeParameter);
                 }
             }

@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static TypeSymbol GetUnderlyingEffectiveType(
             TypeSymbol type,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             // Spec 6.4.4: User-defined implicit conversions
             // Spec 6.4.5: User-defined explicit conversions
             //
@@ -44,7 +45,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol type,
             bool includeBaseTypes,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             if ((object)type == null)
             {
                 return;

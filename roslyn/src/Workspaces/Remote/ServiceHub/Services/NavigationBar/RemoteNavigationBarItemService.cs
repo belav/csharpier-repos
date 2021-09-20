@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Remote
             DocumentId documentId,
             bool supportsCodeGeneration,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return RunServiceAsync(
                 async cancellationToken =>
                 {

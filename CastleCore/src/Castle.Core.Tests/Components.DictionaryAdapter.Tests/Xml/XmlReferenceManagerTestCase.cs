@@ -434,7 +434,8 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
                 object oldValue,
                 object newValue,
                 SetResult expectedResult
-            ) {
+            )
+            {
                 var cursor = SelectChild(parentNode, childName);
                 var node = cursor as IXmlNode;
                 var value = newValue as object;

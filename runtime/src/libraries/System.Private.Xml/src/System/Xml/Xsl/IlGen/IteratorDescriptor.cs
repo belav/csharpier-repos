@@ -83,7 +83,8 @@ namespace System.Xml.Xsl.IlGen
             int paramIndex,
             Type itemStorageType,
             bool isCached
-        ) {
+        )
+        {
             StorageDescriptor storage = default;
             storage._location = ItemLocation.Parameter;
             storage._locationObject = paramIndex;
@@ -119,7 +120,8 @@ namespace System.Xml.Xsl.IlGen
             LocalBuilder locIter,
             MethodInfo currentMethod,
             Type itemStorageType
-        ) {
+        )
+        {
             Debug.Assert(
                 currentMethod.ReturnType == itemStorageType,
                 "Type " + itemStorageType + " does not match type of Current property."
@@ -139,7 +141,8 @@ namespace System.Xml.Xsl.IlGen
             MethodInfo methGlobal,
             Type itemStorageType,
             bool isCached
-        ) {
+        )
+        {
             Debug.Assert(
                 methGlobal.ReturnType == itemStorageType
                     || typeof(IList<>).MakeGenericType(itemStorageType)

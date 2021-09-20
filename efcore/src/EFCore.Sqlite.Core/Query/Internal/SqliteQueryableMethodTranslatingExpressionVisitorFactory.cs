@@ -27,7 +27,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
         public SqliteQueryableMethodTranslatingExpressionVisitorFactory(
             QueryableMethodTranslatingExpressionVisitorDependencies dependencies,
             RelationalQueryableMethodTranslatingExpressionVisitorDependencies relationalDependencies
-        ) {
+        )
+        {
             Check.NotNull(dependencies, nameof(dependencies));
             Check.NotNull(relationalDependencies, nameof(relationalDependencies));
 
@@ -43,7 +44,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
         /// </summary>
         public virtual QueryableMethodTranslatingExpressionVisitor Create(
             QueryCompilationContext queryCompilationContext
-        ) {
+        )
+        {
             Check.NotNull(queryCompilationContext, nameof(queryCompilationContext));
 
             return new SqliteQueryableMethodTranslatingExpressionVisitor(

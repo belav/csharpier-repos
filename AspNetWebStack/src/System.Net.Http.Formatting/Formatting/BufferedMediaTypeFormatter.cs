@@ -72,7 +72,8 @@ namespace System.Net.Http.Formatting
             Stream writeStream,
             HttpContent content,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             WriteToStream(type, value, writeStream, content);
         }
 
@@ -92,7 +93,8 @@ namespace System.Net.Http.Formatting
             object value,
             Stream writeStream,
             HttpContent content
-        ) {
+        )
+        {
             throw Error.NotSupported(
                 Properties.Resources.MediaTypeFormatterCannotWriteSync,
                 GetType().Name
@@ -117,7 +119,8 @@ namespace System.Net.Http.Formatting
             HttpContent content,
             IFormatterLogger formatterLogger,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return ReadFromStream(type, readStream, content, formatterLogger);
         }
 
@@ -137,7 +140,8 @@ namespace System.Net.Http.Formatting
             Stream readStream,
             HttpContent content,
             IFormatterLogger formatterLogger
-        ) {
+        )
+        {
             throw Error.NotSupported(
                 Properties.Resources.MediaTypeFormatterCannotReadSync,
                 GetType().Name
@@ -151,7 +155,8 @@ namespace System.Net.Http.Formatting
             Stream writeStream,
             HttpContent content,
             TransportContext transportContext
-        ) {
+        )
+        {
             return WriteToStreamAsync(
                 type,
                 value,
@@ -174,7 +179,8 @@ namespace System.Net.Http.Formatting
             HttpContent content,
             TransportContext transportContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (type == null)
             {
                 throw Error.ArgumentNull("type");
@@ -202,7 +208,8 @@ namespace System.Net.Http.Formatting
             Stream writeStream,
             HttpContent content,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (Stream bufferedStream = GetBufferStream(writeStream, _bufferSizeInBytes))
             {
                 WriteToStream(type, value, bufferedStream, content, cancellationToken);
@@ -214,7 +221,8 @@ namespace System.Net.Http.Formatting
             Stream readStream,
             HttpContent content,
             IFormatterLogger formatterLogger
-        ) {
+        )
+        {
             return ReadFromStreamAsync(
                 type,
                 readStream,
@@ -235,7 +243,8 @@ namespace System.Net.Http.Formatting
             HttpContent content,
             IFormatterLogger formatterLogger,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (type == null)
             {
                 throw Error.ArgumentNull("type");
@@ -270,7 +279,8 @@ namespace System.Net.Http.Formatting
             HttpContent content,
             IFormatterLogger formatterLogger,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             object result;
             HttpContentHeaders contentHeaders = content == null ? null : content.Headers;
             if (contentHeaders != null && contentHeaders.ContentLength == 0)

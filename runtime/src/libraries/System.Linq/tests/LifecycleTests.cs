@@ -374,11 +374,8 @@ namespace System.Linq.Tests
 
         private sealed class Source : Operation<IEnumerable<int>>
         {
-            public Source(
-                string name,
-                IEnumerable<int> enumerable,
-                bool shortCircuits = false
-            ) : base(name, enumerable, shortCircuits) { }
+            public Source(string name, IEnumerable<int> enumerable, bool shortCircuits = false)
+                : base(name, enumerable, shortCircuits) { }
         }
 
         private sealed class Unary : Operation<Func<IEnumerable<int>, IEnumerable<int>>>
@@ -402,11 +399,8 @@ namespace System.Linq.Tests
 
         private sealed class Sink : Operation<Action<IEnumerable<int>>>
         {
-            public Sink(
-                string name,
-                Action<IEnumerable<int>> sink,
-                bool shortCircuits = false
-            ) : base(name, sink, shortCircuits) { }
+            public Sink(string name, Action<IEnumerable<int>> sink, bool shortCircuits = false)
+                : base(name, sink, shortCircuits) { }
         }
     }
 }

@@ -20,7 +20,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.Xunit
             ITestFrameworkDiscoveryOptions discoveryOptions,
             ITestMethod testMethod,
             IAttributeInfo theoryAttribute
-        ) {
+        )
+        {
             yield return new ConditionalTheoryTestCase(
                 DiagnosticMessageSink,
                 discoveryOptions.MethodDisplayOrDefault(),
@@ -34,7 +35,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.Xunit
             ITestMethod testMethod,
             IAttributeInfo theoryAttribute,
             object[] dataRow
-        ) {
+        )
+        {
             yield return new ConditionalFactTestCase(
                 DiagnosticMessageSink,
                 discoveryOptions.MethodDisplayOrDefault(),

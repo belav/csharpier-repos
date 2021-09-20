@@ -98,7 +98,8 @@ namespace Tracing.Tests.Common
     {
         public static SessionConfiguration InjectSentinel(
             this SessionConfiguration sessionConfiguration
-        ) {
+        )
+        {
             var newProviderList = new List<Provider>(sessionConfiguration.Providers);
             newProviderList.Add(new Provider("SentinelEventSource"));
             return new SessionConfiguration(
@@ -133,7 +134,8 @@ namespace Tracing.Tests.Common
             Action eventGeneratingAction,
             SessionConfiguration? sessionConfiguration = null,
             Func<EventPipeEventSource, Func<int>> optionalTraceValidator = null
-        ) {
+        )
+        {
             _eventGeneratingAction = eventGeneratingAction;
             _expectedEventCounts = expectedEventCounts;
             _sessionConfiguration =
@@ -233,7 +235,8 @@ namespace Tracing.Tests.Common
                                 out var sessionId
                             )
                         )
-                    ) {
+                    )
+                    {
                         if (sessionId == 0)
                         {
                             Logger.logger.Log("Failed to connect to EventPipe!");
@@ -251,7 +254,8 @@ namespace Tracing.Tests.Common
                         Logger.logger.Log("Creating EventPipeEventSource...");
                         using (
                             EventPipeEventSource source = new EventPipeEventSource(eventPipeStream)
-                        ) {
+                        )
+                        {
                             Logger.logger.Log("EventPipeEventSource created");
 
                             source.Dynamic.All += (eventData) =>
@@ -269,7 +273,8 @@ namespace Tracing.Tests.Common
                                             eventData.ProviderName,
                                             out _
                                         )
-                                    ) {
+                                    )
+                                    {
                                         _actualEventCounts[eventData.ProviderName]++;
                                     }
                                     else
@@ -459,7 +464,8 @@ namespace Tracing.Tests.Common
             Action eventGeneratingAction,
             SessionConfiguration? sessionConfiguration = null,
             Func<EventPipeEventSource, Func<int>> optionalTraceValidator = null
-        ) {
+        )
+        {
             Logger.logger.Log("==TEST STARTING==");
             var test = new IpcTraceTest(
                 expectedEventCounts,

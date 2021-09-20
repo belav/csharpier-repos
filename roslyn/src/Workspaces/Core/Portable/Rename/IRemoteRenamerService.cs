@@ -70,7 +70,8 @@ namespace Microsoft.CodeAnalysis.Rename
             bool renameInStrings,
             bool renameInComments,
             bool renameFile
-        ) {
+        )
+        {
             RenameOverloads = renameOverloads;
             RenameInStrings = renameInStrings;
             RenameInComments = renameInComments;
@@ -143,7 +144,8 @@ namespace Microsoft.CodeAnalysis.Rename
         public async Task<RenameLocations.SearchResult> RehydrateAsync(
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ImmutableArray<ReferenceLocation> implicitLocations = default;
             ImmutableArray<ISymbol> referencedSymbols = default;
 
@@ -229,7 +231,8 @@ namespace Microsoft.CodeAnalysis.Rename
             bool isRenamableAccessor,
             TextSpan containingLocationForStringOrComment,
             bool isWrittenTo
-        ) {
+        )
+        {
             Location = location;
             DocumentId = documentId;
             CandidateReason = candidateReason;
@@ -253,7 +256,8 @@ namespace Microsoft.CodeAnalysis.Rename
         public async Task<RenameLocation> RehydrateAsync(
             Solution solution,
             CancellationToken cancellation
-        ) {
+        )
+        {
             var document = solution.GetRequiredDocument(DocumentId);
             var tree = await document.GetRequiredSyntaxTreeAsync(cancellation)
                 .ConfigureAwait(false);
@@ -286,7 +290,8 @@ namespace Microsoft.CodeAnalysis.Rename
             Solution solution,
             SerializableRenameLocations locations,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (locations == null)
                 return null;
 
@@ -326,7 +331,8 @@ namespace Microsoft.CodeAnalysis.Rename
             SerializableSymbolAndProjectId? symbol,
             SerializableRenameOptionSet options,
             SerializableSearchResult? result
-        ) {
+        )
+        {
             Symbol = symbol;
             Options = options;
             Result = result;
@@ -345,7 +351,8 @@ namespace Microsoft.CodeAnalysis.Rename
         public SerializableConflictResolution(
             string? errorMessage,
             SuccessfulConflictResolution? resolution
-        ) {
+        )
+        {
             ErrorMessage = errorMessage;
             Resolution = resolution;
         }
@@ -353,7 +360,8 @@ namespace Microsoft.CodeAnalysis.Rename
         public async Task<ConflictResolution> RehydrateAsync(
             Solution oldSolution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (ErrorMessage != null)
                 return new ConflictResolution(ErrorMessage);
 
@@ -434,7 +442,8 @@ namespace Microsoft.CodeAnalysis.Rename
                 DocumentId,
                 ImmutableArray<RelatedLocation>
             > documentToRelatedLocationsMap
-        ) {
+        )
+        {
             ReplacementTextValid = replacementTextValid;
             RenamedDocument = renamedDocument;
             DocumentIds = documentIds;
@@ -450,7 +459,8 @@ namespace Microsoft.CodeAnalysis.Rename
     {
         public async Task<SerializableConflictResolution> DehydrateAsync(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (ErrorMessage != null)
                 return new SerializableConflictResolution(ErrorMessage, resolution: null);
 

@@ -187,7 +187,8 @@ namespace Microsoft.AspNetCore.Mvc
             IDictionary<string, string> attributes,
             string key,
             string value
-        ) {
+        )
+        {
             if (!attributes.ContainsKey(key))
             {
                 attributes.Add(key, value);
@@ -230,7 +231,8 @@ namespace Microsoft.AspNetCore.Mvc
                 && !string.IsNullOrEmpty(ErrorMessage)
                 && string.IsNullOrEmpty(ErrorMessageResourceName)
                 && ErrorMessageResourceType == null
-            ) {
+            )
+            {
                 return _stringLocalizer[ErrorMessage, displayName];
             }
 

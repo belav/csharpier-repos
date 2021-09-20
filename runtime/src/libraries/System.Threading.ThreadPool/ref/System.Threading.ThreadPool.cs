@@ -70,7 +70,8 @@ namespace System.Threading
             System.Action<TState> callBack,
             TState state,
             bool preferLocal
-        ) {
+        )
+        {
             throw null;
         }
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
@@ -80,7 +81,8 @@ namespace System.Threading
             object? state,
             int millisecondsTimeOutInterval,
             bool executeOnlyOnce
-        ) {
+        )
+        {
             throw null;
         }
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
@@ -90,7 +92,8 @@ namespace System.Threading
             object? state,
             long millisecondsTimeOutInterval,
             bool executeOnlyOnce
-        ) {
+        )
+        {
             throw null;
         }
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
@@ -100,7 +103,8 @@ namespace System.Threading
             object? state,
             System.TimeSpan timeout,
             bool executeOnlyOnce
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
@@ -111,7 +115,8 @@ namespace System.Threading
             object? state,
             uint millisecondsTimeOutInterval,
             bool executeOnlyOnce
-        ) {
+        )
+        {
             throw null;
         }
         public static bool SetMaxThreads(int workerThreads, int completionPortThreads)
@@ -125,26 +130,30 @@ namespace System.Threading
         [System.CLSCompliantAttribute(false)]
         public unsafe static bool UnsafeQueueNativeOverlapped(
             System.Threading.NativeOverlapped* overlapped
-        ) {
+        )
+        {
             throw null;
         }
         public static bool UnsafeQueueUserWorkItem(
             System.Threading.IThreadPoolWorkItem callBack,
             bool preferLocal
-        ) {
+        )
+        {
             throw null;
         }
         public static bool UnsafeQueueUserWorkItem(
             System.Threading.WaitCallback callBack,
             object? state
-        ) {
+        )
+        {
             throw null;
         }
         public static bool UnsafeQueueUserWorkItem<TState>(
             System.Action<TState> callBack,
             TState state,
             bool preferLocal
-        ) {
+        )
+        {
             throw null;
         }
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
@@ -154,7 +163,8 @@ namespace System.Threading
             object? state,
             int millisecondsTimeOutInterval,
             bool executeOnlyOnce
-        ) {
+        )
+        {
             throw null;
         }
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
@@ -164,7 +174,8 @@ namespace System.Threading
             object? state,
             long millisecondsTimeOutInterval,
             bool executeOnlyOnce
-        ) {
+        )
+        {
             throw null;
         }
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
@@ -174,7 +185,8 @@ namespace System.Threading
             object? state,
             System.TimeSpan timeout,
             bool executeOnlyOnce
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
@@ -185,7 +197,8 @@ namespace System.Threading
             object? state,
             uint millisecondsTimeOutInterval,
             bool executeOnlyOnce
-        ) {
+        )
+        {
             throw null;
         }
     }

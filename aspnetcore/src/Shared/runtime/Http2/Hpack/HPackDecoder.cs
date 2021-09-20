@@ -111,7 +111,8 @@ namespace System.Net.Http.HPack
             int maxDynamicTableSize,
             int maxHeadersLength,
             DynamicTable dynamicTable
-        ) {
+        )
+        {
             _maxDynamicTableSize = maxDynamicTableSize;
             _maxHeadersLength = maxHeadersLength;
             _dynamicTable = dynamicTable;
@@ -125,7 +126,8 @@ namespace System.Net.Http.HPack
             in ReadOnlySequence<byte> data,
             bool endHeaders,
             IHttpHeadersHandler handler
-        ) {
+        )
+        {
             foreach (ReadOnlyMemory<byte> segment in data)
             {
                 DecodeInternal(segment.Span, handler);
@@ -219,7 +221,8 @@ namespace System.Net.Http.HPack
             ReadOnlySpan<byte> data,
             ref int currentIndex,
             IHttpHeadersHandler handler
-        ) {
+        )
+        {
             if (currentIndex < data.Length)
             {
                 byte b = data[currentIndex++];
@@ -232,7 +235,8 @@ namespace System.Net.Http.HPack
                         StringLengthPrefix,
                         out int intResult
                     )
-                ) {
+                )
+                {
                     OnStringLength(intResult, nextState: State.HeaderValue);
 
                     if (intResult == 0)
@@ -257,7 +261,8 @@ namespace System.Net.Http.HPack
             ReadOnlySpan<byte> data,
             ref int currentIndex,
             IHttpHeadersHandler handler
-        ) {
+        )
+        {
             if (TryDecodeInteger(data, ref currentIndex, out int intResult))
             {
                 // IntegerDecoder disallows overlong encodings, where an integer is encoded with more bytes than is strictly required.
@@ -276,7 +281,8 @@ namespace System.Net.Http.HPack
             ReadOnlySpan<byte> data,
             ref int currentIndex,
             IHttpHeadersHandler handler
-        ) {
+        )
+        {
             if (TryDecodeInteger(data, ref currentIndex, out int intResult))
             {
                 // 0 should always be represented by a single byte, so we shouldn't need to check for it in the continuation case.
@@ -294,7 +300,8 @@ namespace System.Net.Http.HPack
             ReadOnlySpan<byte> data,
             ref int currentIndex,
             IHttpHeadersHandler handler
-        ) {
+        )
+        {
             if (TryDecodeInteger(data, ref currentIndex, out int intResult))
             {
                 OnIndexedHeaderField(intResult, handler);
@@ -305,7 +312,8 @@ namespace System.Net.Http.HPack
             ReadOnlySpan<byte> data,
             ref int currentIndex,
             IHttpHeadersHandler handler
-        ) {
+        )
+        {
             if (TryDecodeInteger(data, ref currentIndex, out int intResult))
             {
                 OnIndexedHeaderName(intResult);
@@ -317,7 +325,8 @@ namespace System.Net.Http.HPack
             ReadOnlySpan<byte> data,
             ref int currentIndex,
             IHttpHeadersHandler handler
-        ) {
+        )
+        {
             if (currentIndex < data.Length)
             {
                 byte b = data[currentIndex++];
@@ -330,7 +339,8 @@ namespace System.Net.Http.HPack
                         StringLengthPrefix,
                         out int intResult
                     )
-                ) {
+                )
+                {
                     if (intResult == 0)
                     {
                         throw new HPackDecodingException(
@@ -353,7 +363,8 @@ namespace System.Net.Http.HPack
             ReadOnlySpan<byte> data,
             ref int currentIndex,
             IHttpHeadersHandler handler
-        ) {
+        )
+        {
             if (currentIndex < data.Length)
             {
                 Debug.Assert(_state == State.Ready, "Should be ready to parse a new header.");
@@ -376,7 +387,8 @@ namespace System.Net.Http.HPack
                                 IndexedHeaderFieldPrefix,
                                 out int intResult
                             )
-                        ) {
+                        )
+                        {
                             OnIndexedHeaderField(intResult, handler);
                         }
                         else
@@ -439,7 +451,8 @@ namespace System.Net.Http.HPack
                                 DynamicTableSizeUpdatePrefix,
                                 out int intResult
                             )
-                        ) {
+                        )
+                        {
                             SetDynamicHeaderTableSize(intResult);
                         }
                         else
@@ -461,7 +474,8 @@ namespace System.Net.Http.HPack
             byte indexPrefix,
             bool index,
             IHttpHeadersHandler handler
-        ) {
+        )
+        {
             _headersObserved = true;
 
             _index = index;
@@ -491,7 +505,8 @@ namespace System.Net.Http.HPack
             ReadOnlySpan<byte> data,
             ref int currentIndex,
             IHttpHeadersHandler handler
-        ) {
+        )
+        {
             // Read remaining chars, up to the length of the current data
             int count = Math.Min(_stringLength - _stringIndex, data.Length - currentIndex);
 
@@ -526,7 +541,8 @@ namespace System.Net.Http.HPack
             ReadOnlySpan<byte> data,
             ref int currentIndex,
             IHttpHeadersHandler handler
-        ) {
+        )
+        {
             // Read remaining chars, up to the length of the current data
             int count = Math.Min(_stringLength - _stringIndex, data.Length - currentIndex);
 

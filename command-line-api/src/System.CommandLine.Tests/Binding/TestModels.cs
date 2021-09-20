@@ -12,7 +12,8 @@ namespace System.CommandLine.Tests.Binding
             int intOption = 123,
             string stringOption = "the default",
             bool boolOption = false
-        ) {
+        )
+        {
             IntOption = intOption;
             StringOption = stringOption;
             BoolOption = boolOption;
@@ -97,7 +98,8 @@ namespace System.CommandLine.Tests.Binding
             int i = 123,
             string s = "the default",
             bool b = false
-        ) {
+        )
+        {
             IntOption = i;
             StringOption = s;
             BoolOption = b;

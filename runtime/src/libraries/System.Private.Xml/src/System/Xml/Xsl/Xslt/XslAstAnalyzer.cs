@@ -322,7 +322,8 @@ namespace System.Xml.Xsl.Xslt
             if (
                 _currentTemplate != null
                 && (node.NodeType == XslNodeType.Variable || node.NodeType == XslNodeType.Param)
-            ) {
+            )
+            {
                 _scope.AddVariable(node.Name!, (VarPar)node);
             }
             Debug.Assert(
@@ -654,7 +655,8 @@ namespace System.Xml.Xsl.Xslt
             if (
                 _compiler!.AttributeSets.TryGetValue(node.Name!, out AttributeSet? attSet)
                 && _currentTemplate != null
-            ) {
+            )
+            {
                 if (_forEachDepth == 0)
                 {
                     // Naked [xsl:]use-attribute-sets, attSet would take its focus from currentTemplate
@@ -863,7 +865,8 @@ namespace System.Xml.Xsl.Xslt
                 template != null
                 && // This ProteTemplate is Template
                 _revApplyTemplatesGraph!.TryGetValue(template.Mode, out list) // list - ProtoTemplates that have apply-templatess mode="{template.Mode}"
-            ) {
+            )
+            {
                 _revApplyTemplatesGraph.Remove(template.Mode); // to prevent recursion remove this list from dictionary
                 foreach (ProtoTemplate u in list)
                 {
@@ -1058,14 +1061,16 @@ namespace System.Xml.Xsl.Xslt
                 XPathNodeType nodeType,
                 string? prefix,
                 string? name
-            ) {
+            )
+            {
                 _typeDonor = null;
                 if (
                     xpathAxis == XPathAxis.Self
                     && nodeType == XPathNodeType.All
                     && prefix == null
                     && name == null
-                ) {
+                )
+                {
                     return XslFlags.Current | XslFlags.Node;
                 }
                 else
@@ -1138,7 +1143,8 @@ namespace System.Xml.Xsl.Xslt
                                 || funcId == XPathBuilder.FuncId.StringLength
                                 || funcId == XPathBuilder.FuncId.Normalize
                             )
-                        ) {
+                        )
+                        {
                             funcFlags |= XslFlags.Current;
                         }
                     }

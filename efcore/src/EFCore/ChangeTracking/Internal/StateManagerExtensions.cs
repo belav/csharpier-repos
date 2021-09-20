@@ -25,14 +25,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             bool modified = false,
             bool deleted = false,
             bool unchanged = false
-        ) {
+        )
+        {
             var list = new List<InternalEntityEntry>(
                 stateManager.GetCountForState(added, modified, deleted, unchanged)
             );
 
             foreach (
                 var entry in stateManager.GetEntriesForState(added, modified, deleted, unchanged)
-            ) {
+            )
+            {
                 list.Add(entry);
             }
 

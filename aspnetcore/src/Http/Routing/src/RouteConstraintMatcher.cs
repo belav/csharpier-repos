@@ -34,7 +34,8 @@ namespace Microsoft.AspNetCore.Routing
             IRouter route,
             RouteDirection routeDirection,
             ILogger logger
-        ) {
+        )
+        {
             if (routeValues == null)
             {
                 throw new ArgumentNullException(nameof(routeValues));

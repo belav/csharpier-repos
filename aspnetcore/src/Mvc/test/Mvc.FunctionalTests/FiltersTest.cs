@@ -58,7 +58,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task MiddlewareFilter_LocalizationMiddlewareRegistration_UsesRouteDataToFindCulture(
             string culture,
             string expected
-        ) {
+        )
+        {
             // Arrange & Act
             var response = await Client.GetAsync($"{culture}/Filters/MiddlewareFilterTest");
 

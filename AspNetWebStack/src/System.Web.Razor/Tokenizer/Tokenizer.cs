@@ -120,7 +120,8 @@ namespace System.Web.Razor.Tokenizer
                 !EndOfFile
                 && position < input.Length
                 && charFilter(CurrentCharacter) == charFilter(input[position++])
-            ) {
+            )
+            {
                 TakeCurrent();
             }
             return position == input.Length;
@@ -154,7 +155,8 @@ namespace System.Web.Razor.Tokenizer
             // Verify the symbol can be resumed
             if (
                 previous.Start.AbsoluteIndex + previous.Content.Length != CurrentStart.AbsoluteIndex
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     RazorResources.Tokenizer_CannotResumeSymbolUnlessIsPrevious
                 );

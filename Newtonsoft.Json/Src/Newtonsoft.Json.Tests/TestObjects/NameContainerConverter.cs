@@ -48,7 +48,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
             Type objectType,
             object existingValue,
             JsonSerializer serializer
-        ) {
+        )
+        {
             NameContainer nameContainer = new NameContainer();
             nameContainer.Value = (string)reader.Value;
 

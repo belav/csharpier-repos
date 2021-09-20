@@ -55,7 +55,8 @@ namespace System.Drawing.Printing
             Rectangle marginBounds,
             Rectangle pageBounds,
             PageSettings pageSettings
-        ) {
+        )
+        {
             this.graphics = graphics;
             this.marginBounds = marginBounds;
             this.pageBounds = pageBounds;

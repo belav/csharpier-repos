@@ -107,7 +107,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
                 ILogger logger,
                 string uri,
                 bool isIntercepted
-            ) {
+            )
+            {
                 _receivedLocationChangedNotification(logger, uri, isIntercepted, null);
             }
         }

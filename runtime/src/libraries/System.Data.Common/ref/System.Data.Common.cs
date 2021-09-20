@@ -103,28 +103,32 @@ namespace System.Data
             string? name,
             System.Data.DataColumn column,
             bool primaryKey
-        ) {
+        )
+        {
             throw null;
         }
         public System.Data.Constraint Add(
             string? name,
             System.Data.DataColumn primaryKeyColumn,
             System.Data.DataColumn foreignKeyColumn
-        ) {
+        )
+        {
             throw null;
         }
         public System.Data.Constraint Add(
             string? name,
             System.Data.DataColumn[] columns,
             bool primaryKey
-        ) {
+        )
+        {
             throw null;
         }
         public System.Data.Constraint Add(
             string? name,
             System.Data.DataColumn[] primaryKeyColumns,
             System.Data.DataColumn[] foreignKeyColumns
-        ) {
+        )
+        {
             throw null;
         }
         public void AddRange(System.Data.Constraint[]? constraints) { }
@@ -431,7 +435,8 @@ namespace System.Data
             byte[] buffer,
             int bufferOffset,
             int length
-        ) {
+        )
+        {
             throw null;
         }
         public static char GetChar(this System.Data.Common.DbDataReader reader, string name)
@@ -445,7 +450,8 @@ namespace System.Data
             char[] buffer,
             int bufferOffset,
             int length
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -454,19 +460,22 @@ namespace System.Data
         public static System.Data.Common.DbDataReader GetData(
             this System.Data.Common.DbDataReader reader,
             string name
-        ) {
+        )
+        {
             throw null;
         }
         public static string GetDataTypeName(
             this System.Data.Common.DbDataReader reader,
             string name
-        ) {
+        )
+        {
             throw null;
         }
         public static System.DateTime GetDateTime(
             this System.Data.Common.DbDataReader reader,
             string name
-        ) {
+        )
+        {
             throw null;
         }
         public static decimal GetDecimal(this System.Data.Common.DbDataReader reader, string name)
@@ -480,7 +489,8 @@ namespace System.Data
         public static System.Type GetFieldType(
             this System.Data.Common.DbDataReader reader,
             string name
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task<T> GetFieldValueAsync<T>(
@@ -488,7 +498,8 @@ namespace System.Data
             string name,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public static T GetFieldValue<T>(this System.Data.Common.DbDataReader reader, string name)
@@ -521,7 +532,8 @@ namespace System.Data
         public static System.Type GetProviderSpecificFieldType(
             this System.Data.Common.DbDataReader reader,
             string name
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -530,13 +542,15 @@ namespace System.Data
         public static object GetProviderSpecificValue(
             this System.Data.Common.DbDataReader reader,
             string name
-        ) {
+        )
+        {
             throw null;
         }
         public static System.IO.Stream GetStream(
             this System.Data.Common.DbDataReader reader,
             string name
-        ) {
+        )
+        {
             throw null;
         }
         public static string GetString(this System.Data.Common.DbDataReader reader, string name)
@@ -546,7 +560,8 @@ namespace System.Data
         public static System.IO.TextReader GetTextReader(
             this System.Data.Common.DbDataReader reader,
             string name
-        ) {
+        )
+        {
             throw null;
         }
         public static object GetValue(this System.Data.Common.DbDataReader reader, string name)
@@ -562,7 +577,8 @@ namespace System.Data
             string name,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -694,13 +710,15 @@ namespace System.Data
         public virtual System.Data.DataRelation Add(
             System.Data.DataColumn parentColumn,
             System.Data.DataColumn childColumn
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Data.DataRelation Add(
             System.Data.DataColumn[] parentColumns,
             System.Data.DataColumn[] childColumns
-        ) {
+        )
+        {
             throw null;
         }
         public void Add(System.Data.DataRelation relation) { }
@@ -708,7 +726,8 @@ namespace System.Data
             string? name,
             System.Data.DataColumn parentColumn,
             System.Data.DataColumn childColumn
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Data.DataRelation Add(
@@ -716,14 +735,16 @@ namespace System.Data
             System.Data.DataColumn parentColumn,
             System.Data.DataColumn childColumn,
             bool createConstraints
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Data.DataRelation Add(
             string? name,
             System.Data.DataColumn[] parentColumns,
             System.Data.DataColumn[] childColumns
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Data.DataRelation Add(
@@ -731,7 +752,8 @@ namespace System.Data
             System.Data.DataColumn[] parentColumns,
             System.Data.DataColumn[] childColumns,
             bool createConstraints
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual void AddCore(System.Data.DataRelation relation) { }
@@ -847,7 +869,8 @@ namespace System.Data
         public System.Data.DataRow[] GetChildRows(
             System.Data.DataRelation? relation,
             System.Data.DataRowVersion version
-        ) {
+        )
+        {
             throw null;
         }
         public System.Data.DataRow[] GetChildRows(string? relationName)
@@ -857,7 +880,8 @@ namespace System.Data
         public System.Data.DataRow[] GetChildRows(
             string? relationName,
             System.Data.DataRowVersion version
-        ) {
+        )
+        {
             throw null;
         }
         public string GetColumnError(System.Data.DataColumn column)
@@ -883,7 +907,8 @@ namespace System.Data
         public System.Data.DataRow? GetParentRow(
             System.Data.DataRelation? relation,
             System.Data.DataRowVersion version
-        ) {
+        )
+        {
             throw null;
         }
         public System.Data.DataRow? GetParentRow(string? relationName)
@@ -893,7 +918,8 @@ namespace System.Data
         public System.Data.DataRow? GetParentRow(
             string? relationName,
             System.Data.DataRowVersion version
-        ) {
+        )
+        {
             throw null;
         }
         public System.Data.DataRow[] GetParentRows(System.Data.DataRelation? relation)
@@ -903,7 +929,8 @@ namespace System.Data
         public System.Data.DataRow[] GetParentRows(
             System.Data.DataRelation? relation,
             System.Data.DataRowVersion version
-        ) {
+        )
+        {
             throw null;
         }
         public System.Data.DataRow[] GetParentRows(string? relationName)
@@ -913,7 +940,8 @@ namespace System.Data
         public System.Data.DataRow[] GetParentRows(
             string? relationName,
             System.Data.DataRowVersion version
-        ) {
+        )
+        {
             throw null;
         }
         public bool HasVersion(System.Data.DataRowVersion version)
@@ -1062,7 +1090,8 @@ namespace System.Data
             this System.Data.DataRow row,
             System.Data.DataColumn column,
             System.Data.DataRowVersion version
-        ) {
+        )
+        {
             throw null;
         }
         public static T? Field<T>(this System.Data.DataRow row, int columnIndex)
@@ -1073,7 +1102,8 @@ namespace System.Data
             this System.Data.DataRow row,
             int columnIndex,
             System.Data.DataRowVersion version
-        ) {
+        )
+        {
             throw null;
         }
         public static T? Field<T>(this System.Data.DataRow row, string columnName)
@@ -1084,7 +1114,8 @@ namespace System.Data
             this System.Data.DataRow row,
             string columnName,
             System.Data.DataRowVersion version
-        ) {
+        )
+        {
             throw null;
         }
         public static void SetField<T>(
@@ -1178,7 +1209,8 @@ namespace System.Data
         public System.Data.DataView CreateChildView(
             System.Data.DataRelation relation,
             bool followParent
-        ) {
+        )
+        {
             throw null;
         }
         public System.Data.DataView CreateChildView(string relationName)
@@ -1240,7 +1272,8 @@ namespace System.Data
         )]
         System.ComponentModel.EventDescriptorCollection System.ComponentModel.ICustomTypeDescriptor.GetEvents(
             System.Attribute[] attributes
-        ) {
+        )
+        {
             throw null;
         }
         System.ComponentModel.PropertyDescriptorCollection System.ComponentModel.ICustomTypeDescriptor.GetProperties()
@@ -1252,12 +1285,14 @@ namespace System.Data
         )]
         System.ComponentModel.PropertyDescriptorCollection System.ComponentModel.ICustomTypeDescriptor.GetProperties(
             System.Attribute[] attributes
-        ) {
+        )
+        {
             throw null;
         }
         object System.ComponentModel.ICustomTypeDescriptor.GetPropertyOwner(
             System.ComponentModel.PropertyDescriptor pd
-        ) {
+        )
+        {
             throw null;
         }
 #nullable enable
@@ -1418,18 +1453,21 @@ namespace System.Data
         }
         public System.Data.DataTableReader CreateDataReader(
             params System.Data.DataTable[] dataTables
-        ) {
+        )
+        {
             throw null;
         }
         protected System.Data.SchemaSerializationMode DetermineSchemaSerializationMode(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) {
+        )
+        {
             throw null;
         }
         protected System.Data.SchemaSerializationMode DetermineSchemaSerializationMode(
             System.Xml.XmlReader reader
-        ) {
+        )
+        {
             throw null;
         }
         public void EndInit() { }
@@ -1443,7 +1481,8 @@ namespace System.Data
         }
         public static System.Xml.Schema.XmlSchemaComplexType GetDataSetSchema(
             System.Xml.Schema.XmlSchemaSet? schemaSet
-        ) {
+        )
+        {
             throw null;
         }
         public virtual void GetObjectData(
@@ -1482,7 +1521,8 @@ namespace System.Data
         protected bool IsBinarySerialized(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) {
+        )
+        {
             throw null;
         }
         public void Load(
@@ -1533,7 +1573,8 @@ namespace System.Data
         public System.Data.XmlReadMode ReadXml(
             System.IO.Stream? stream,
             System.Data.XmlReadMode mode
-        ) {
+        )
+        {
             throw null;
         }
         public System.Data.XmlReadMode ReadXml(System.IO.TextReader? reader)
@@ -1543,7 +1584,8 @@ namespace System.Data
         public System.Data.XmlReadMode ReadXml(
             System.IO.TextReader? reader,
             System.Data.XmlReadMode mode
-        ) {
+        )
+        {
             throw null;
         }
         public System.Data.XmlReadMode ReadXml(string fileName)
@@ -1561,7 +1603,8 @@ namespace System.Data
         public System.Data.XmlReadMode ReadXml(
             System.Xml.XmlReader? reader,
             System.Data.XmlReadMode mode
-        ) {
+        )
+        {
             throw null;
         }
         public void ReadXmlSchema(System.IO.Stream? stream) { }
@@ -1885,7 +1928,8 @@ namespace System.Data
         }
         public static System.Xml.Schema.XmlSchemaComplexType GetDataTableSchema(
             System.Xml.Schema.XmlSchemaSet? schemaSet
-        ) {
+        )
+        {
             throw null;
         }
         public System.Data.DataRow[] GetErrors()
@@ -1993,7 +2037,8 @@ namespace System.Data
             string? filterExpression,
             string? sort,
             System.Data.DataViewRowState recordStates
-        ) {
+        )
+        {
             throw null;
         }
         System.Collections.IList System.ComponentModel.IListSource.GetList()
@@ -2167,7 +2212,8 @@ namespace System.Data
         }
         public static System.Data.EnumerableRowCollection<System.Data.DataRow> AsEnumerable(
             this System.Data.DataTable source
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.DataTable CopyToDataTable<T>(
@@ -2247,7 +2293,8 @@ namespace System.Data
             byte[]? buffer,
             int bufferIndex,
             int length
-        ) {
+        )
+        {
             throw null;
         }
         public override char GetChar(int ordinal)
@@ -2260,7 +2307,8 @@ namespace System.Data
             char[]? buffer,
             int bufferIndex,
             int length
-        ) {
+        )
+        {
             throw null;
         }
         public override string GetDataTypeName(int ordinal)
@@ -2616,7 +2664,8 @@ namespace System.Data
         int System.ComponentModel.IBindingList.Find(
             System.ComponentModel.PropertyDescriptor property,
             object key
-        ) {
+        )
+        {
             throw null;
         }
         void System.ComponentModel.IBindingList.RemoveIndex(
@@ -2629,12 +2678,14 @@ namespace System.Data
         void System.ComponentModel.IBindingListView.RemoveFilter() { }
         System.ComponentModel.PropertyDescriptorCollection System.ComponentModel.ITypedList.GetItemProperties(
             System.ComponentModel.PropertyDescriptor[] listAccessors
-        ) {
+        )
+        {
             throw null;
         }
         string System.ComponentModel.ITypedList.GetListName(
             System.ComponentModel.PropertyDescriptor[] listAccessors
-        ) {
+        )
+        {
             throw null;
         }
 #nullable enable
@@ -2654,7 +2705,8 @@ namespace System.Data
             string? tableName,
             bool distinct,
             params string[] columnNames
-        ) {
+        )
+        {
             throw null;
         }
         protected void UpdateIndex() { }
@@ -2805,7 +2857,8 @@ namespace System.Data
         int System.ComponentModel.IBindingList.Find(
             System.ComponentModel.PropertyDescriptor property,
             object key
-        ) {
+        )
+        {
             throw null;
         }
         void System.ComponentModel.IBindingList.RemoveIndex(
@@ -2814,12 +2867,14 @@ namespace System.Data
         void System.ComponentModel.IBindingList.RemoveSort() { }
         System.ComponentModel.PropertyDescriptorCollection System.ComponentModel.ITypedList.GetItemProperties(
             System.ComponentModel.PropertyDescriptor[] listAccessors
-        ) {
+        )
+        {
             throw null;
         }
         string System.ComponentModel.ITypedList.GetListName(
             System.ComponentModel.PropertyDescriptor[] listAccessors
-        ) {
+        )
+        {
             throw null;
         }
 #nullable enable
@@ -3024,7 +3079,8 @@ namespace System.Data
     {
         public static System.Data.EnumerableRowCollection<TResult> Cast<TResult>(
             this System.Data.EnumerableRowCollection source
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.OrderedEnumerableRowCollection<TRow> OrderByDescending<
@@ -3033,7 +3089,8 @@ namespace System.Data
         >(
             this System.Data.EnumerableRowCollection<TRow> source,
             System.Func<TRow, TKey> keySelector
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.OrderedEnumerableRowCollection<TRow> OrderByDescending<
@@ -3043,58 +3100,67 @@ namespace System.Data
             this System.Data.EnumerableRowCollection<TRow> source,
             System.Func<TRow, TKey> keySelector,
             System.Collections.Generic.IComparer<TKey> comparer
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.OrderedEnumerableRowCollection<TRow> OrderBy<TRow, TKey>(
             this System.Data.EnumerableRowCollection<TRow> source,
             System.Func<TRow, TKey> keySelector
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.OrderedEnumerableRowCollection<TRow> OrderBy<TRow, TKey>(
             this System.Data.EnumerableRowCollection<TRow> source,
             System.Func<TRow, TKey> keySelector,
             System.Collections.Generic.IComparer<TKey> comparer
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.EnumerableRowCollection<S> Select<TRow, S>(
             this System.Data.EnumerableRowCollection<TRow> source,
             System.Func<TRow, S> selector
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.OrderedEnumerableRowCollection<TRow> ThenByDescending<TRow, TKey>(
             this System.Data.OrderedEnumerableRowCollection<TRow> source,
             System.Func<TRow, TKey> keySelector
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.OrderedEnumerableRowCollection<TRow> ThenByDescending<TRow, TKey>(
             this System.Data.OrderedEnumerableRowCollection<TRow> source,
             System.Func<TRow, TKey> keySelector,
             System.Collections.Generic.IComparer<TKey> comparer
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.OrderedEnumerableRowCollection<TRow> ThenBy<TRow, TKey>(
             this System.Data.OrderedEnumerableRowCollection<TRow> source,
             System.Func<TRow, TKey> keySelector
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.OrderedEnumerableRowCollection<TRow> ThenBy<TRow, TKey>(
             this System.Data.OrderedEnumerableRowCollection<TRow> source,
             System.Func<TRow, TKey> keySelector,
             System.Collections.Generic.IComparer<TKey> comparer
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.EnumerableRowCollection<TRow> Where<TRow>(
             this System.Data.EnumerableRowCollection<TRow> source,
             System.Func<TRow, bool> predicate
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -3712,10 +3778,8 @@ namespace System.Data
         public static System.Data.OrderedEnumerableRowCollection<TRow> OrderByDescending<
             TRow,
             TKey
-        >(
-            this System.Data.TypedTableBase<TRow> source,
-            System.Func<TRow, TKey> keySelector
-        ) where TRow : System.Data.DataRow
+        >(this System.Data.TypedTableBase<TRow> source, System.Func<TRow, TKey> keySelector)
+            where TRow : System.Data.DataRow
         {
             throw null;
         }
@@ -3958,13 +4022,15 @@ namespace System.Data.Common
             System.Data.IDataReader dataReader,
             int startRecord,
             int maxRecords
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual int Fill(
             System.Data.DataTable dataTable,
             System.Data.IDataReader dataReader
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual int Fill(
@@ -3972,13 +4038,15 @@ namespace System.Data.Common
             System.Data.IDataReader dataReader,
             int startRecord,
             int maxRecords
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Data.DataTable[] FillSchema(
             System.Data.DataSet dataSet,
             System.Data.SchemaType schemaType
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual System.Data.DataTable[] FillSchema(
@@ -3986,14 +4054,16 @@ namespace System.Data.Common
             System.Data.SchemaType schemaType,
             string srcTable,
             System.Data.IDataReader dataReader
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual System.Data.DataTable? FillSchema(
             System.Data.DataTable dataTable,
             System.Data.SchemaType schemaType,
             System.Data.IDataReader dataReader
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -4063,7 +4133,8 @@ namespace System.Data.Common
             System.Data.DataTable dataTable,
             System.Type? dataType,
             System.Data.MissingSchemaAction schemaAction
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -4075,7 +4146,8 @@ namespace System.Data.Common
             System.Data.DataTable dataTable,
             System.Type? dataType,
             System.Data.MissingSchemaAction schemaAction
-        ) {
+        )
+        {
             throw null;
         }
         object System.ICloneable.Clone()
@@ -4179,7 +4251,8 @@ namespace System.Data.Common
             System.Data.Common.DataColumnMappingCollection? columnMappings,
             string sourceColumn,
             System.Data.MissingMappingAction mappingAction
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -4192,7 +4265,8 @@ namespace System.Data.Common
             System.Data.DataTable dataTable,
             System.Data.MissingMappingAction mappingAction,
             System.Data.MissingSchemaAction schemaAction
-        ) {
+        )
+        {
             throw null;
         }
         public System.Collections.IEnumerator GetEnumerator()
@@ -4220,12 +4294,14 @@ namespace System.Data.Common
         System.Data.IColumnMapping System.Data.IColumnMappingCollection.Add(
             string? sourceColumnName,
             string? dataSetColumnName
-        ) {
+        )
+        {
             throw null;
         }
         System.Data.IColumnMapping System.Data.IColumnMappingCollection.GetByDataSetColumn(
             string dataSetColumnName
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -4272,7 +4348,8 @@ namespace System.Data.Common
         public System.Data.Common.DataColumnMapping? GetColumnMappingBySchemaAction(
             string sourceColumn,
             System.Data.MissingMappingAction mappingAction
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -4284,7 +4361,8 @@ namespace System.Data.Common
             System.Data.DataTable dataTable,
             System.Data.MissingMappingAction mappingAction,
             System.Data.MissingSchemaAction schemaAction
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -4293,7 +4371,8 @@ namespace System.Data.Common
         public System.Data.DataTable? GetDataTableBySchemaAction(
             System.Data.DataSet dataSet,
             System.Data.MissingSchemaAction schemaAction
-        ) {
+        )
+        {
             throw null;
         }
         object System.ICloneable.Clone()
@@ -4407,7 +4486,8 @@ namespace System.Data.Common
             string sourceTable,
             string dataSetTable,
             System.Data.MissingMappingAction mappingAction
-        ) {
+        )
+        {
             throw null;
         }
         public int IndexOf(object? value)
@@ -4431,12 +4511,14 @@ namespace System.Data.Common
         System.Data.ITableMapping System.Data.ITableMappingCollection.Add(
             string sourceTableName,
             string dataSetTableName
-        ) {
+        )
+        {
             throw null;
         }
         System.Data.ITableMapping System.Data.ITableMappingCollection.GetByDataSetTable(
             string dataSetTableName
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -4652,7 +4734,8 @@ namespace System.Data.Common
         protected virtual System.Threading.Tasks.Task<System.Data.Common.DbDataReader> ExecuteDbDataReaderAsync(
             System.Data.CommandBehavior behavior,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public abstract int ExecuteNonQuery();
@@ -4662,7 +4745,8 @@ namespace System.Data.Common
         }
         public virtual System.Threading.Tasks.Task<int> ExecuteNonQueryAsync(
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Data.Common.DbDataReader ExecuteReader()
@@ -4679,18 +4763,21 @@ namespace System.Data.Common
         }
         public System.Threading.Tasks.Task<System.Data.Common.DbDataReader> ExecuteReaderAsync(
             System.Data.CommandBehavior behavior
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<System.Data.Common.DbDataReader> ExecuteReaderAsync(
             System.Data.CommandBehavior behavior,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<System.Data.Common.DbDataReader> ExecuteReaderAsync(
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public abstract object? ExecuteScalar();
@@ -4700,14 +4787,16 @@ namespace System.Data.Common
         }
         public virtual System.Threading.Tasks.Task<object?> ExecuteScalarAsync(
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public abstract void Prepare();
         public virtual System.Threading.Tasks.Task PrepareAsync(
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         System.Data.IDbDataParameter System.Data.IDbCommand.CreateParameter()
@@ -4720,7 +4809,8 @@ namespace System.Data.Common
         }
         System.Data.IDataReader System.Data.IDbCommand.ExecuteReader(
             System.Data.CommandBehavior behavior
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -4812,7 +4902,8 @@ namespace System.Data.Common
         protected abstract string GetParameterPlaceholder(int parameterOrdinal);
         protected virtual System.Data.DataTable? GetSchemaTable(
             System.Data.Common.DbCommand sourceCommand
-        ) {
+        )
+        {
             throw null;
         }
         public System.Data.Common.DbCommand GetUpdateCommand()
@@ -4825,7 +4916,8 @@ namespace System.Data.Common
         }
         protected virtual System.Data.Common.DbCommand InitializeCommand(
             System.Data.Common.DbCommand? command
-        ) {
+        )
+        {
             throw null;
         }
         public virtual string QuoteIdentifier(string unquotedIdentifier)
@@ -4882,7 +4974,8 @@ namespace System.Data.Common
         protected virtual System.Threading.Tasks.ValueTask<System.Data.Common.DbTransaction> BeginDbTransactionAsync(
             System.Data.IsolationLevel isolationLevel,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Data.Common.DbTransaction BeginTransaction()
@@ -4891,20 +4984,23 @@ namespace System.Data.Common
         }
         public System.Data.Common.DbTransaction BeginTransaction(
             System.Data.IsolationLevel isolationLevel
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.ValueTask<System.Data.Common.DbTransaction> BeginTransactionAsync(
             System.Data.IsolationLevel isolationLevel,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.ValueTask<System.Data.Common.DbTransaction> BeginTransactionAsync(
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public abstract void ChangeDatabase(string databaseName);
@@ -4912,7 +5008,8 @@ namespace System.Data.Common
             string databaseName,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public abstract void Close();
@@ -4941,25 +5038,29 @@ namespace System.Data.Common
         public virtual System.Data.DataTable GetSchema(
             string collectionName,
             string?[] restrictionValues
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Threading.Tasks.Task<System.Data.DataTable> GetSchemaAsync(
             System.Threading.CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Threading.Tasks.Task<System.Data.DataTable> GetSchemaAsync(
             string collectionName,
             System.Threading.CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Threading.Tasks.Task<System.Data.DataTable> GetSchemaAsync(
             string collectionName,
             string?[] restrictionValues,
             System.Threading.CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual void OnStateChange(System.Data.StateChangeEventArgs stateChange) { }
@@ -4970,7 +5071,8 @@ namespace System.Data.Common
         }
         public virtual System.Threading.Tasks.Task OpenAsync(
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         System.Data.IDbTransaction System.Data.IDbConnection.BeginTransaction()
@@ -4979,7 +5081,8 @@ namespace System.Data.Common
         }
         System.Data.IDbTransaction System.Data.IDbConnection.BeginTransaction(
             System.Data.IsolationLevel isolationLevel
-        ) {
+        )
+        {
             throw null;
         }
         System.Data.IDbCommand System.Data.IDbConnection.CreateCommand()
@@ -5082,7 +5185,8 @@ namespace System.Data.Common
         }
         public virtual bool EquivalentTo(
             System.Data.Common.DbConnectionStringBuilder connectionStringBuilder
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual void GetProperties(System.Collections.Hashtable propertyDescriptors) { }
@@ -5149,7 +5253,8 @@ namespace System.Data.Common
         )]
         System.ComponentModel.EventDescriptorCollection System.ComponentModel.ICustomTypeDescriptor.GetEvents(
             System.Attribute[] attributes
-        ) {
+        )
+        {
             throw null;
         }
         System.ComponentModel.PropertyDescriptorCollection System.ComponentModel.ICustomTypeDescriptor.GetProperties()
@@ -5161,12 +5266,14 @@ namespace System.Data.Common
         )]
         System.ComponentModel.PropertyDescriptorCollection System.ComponentModel.ICustomTypeDescriptor.GetProperties(
             System.Attribute[] attributes
-        ) {
+        )
+        {
             throw null;
         }
         object System.ComponentModel.ICustomTypeDescriptor.GetPropertyOwner(
             System.ComponentModel.PropertyDescriptor pd
-        ) {
+        )
+        {
             throw null;
         }
         public override string ToString()
@@ -5176,7 +5283,8 @@ namespace System.Data.Common
         public virtual bool TryGetValue(
             string keyword,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] out object? value
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -5266,7 +5374,8 @@ namespace System.Data.Common
             System.Data.IDbCommand? command,
             System.Data.StatementType statementType,
             System.Data.Common.DataTableMapping tableMapping
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual System.Data.Common.RowUpdatingEventArgs CreateRowUpdatingEvent(
@@ -5274,7 +5383,8 @@ namespace System.Data.Common
             System.Data.IDbCommand? command,
             System.Data.StatementType statementType,
             System.Data.Common.DataTableMapping tableMapping
-        ) {
+        )
+        {
             throw null;
         }
         protected override void Dispose(bool disposing) { }
@@ -5291,7 +5401,8 @@ namespace System.Data.Common
             int startRecord,
             int maxRecords,
             string srcTable
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual int Fill(
@@ -5301,7 +5412,8 @@ namespace System.Data.Common
             string srcTable,
             System.Data.IDbCommand command,
             System.Data.CommandBehavior behavior
-        ) {
+        )
+        {
             throw null;
         }
         public int Fill(System.Data.DataSet dataSet, string srcTable)
@@ -5316,7 +5428,8 @@ namespace System.Data.Common
             System.Data.DataTable dataTable,
             System.Data.IDbCommand command,
             System.Data.CommandBehavior behavior
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual int Fill(
@@ -5325,7 +5438,8 @@ namespace System.Data.Common
             int maxRecords,
             System.Data.IDbCommand command,
             System.Data.CommandBehavior behavior
-        ) {
+        )
+        {
             throw null;
         }
         public int Fill(int startRecord, int maxRecords, params System.Data.DataTable[] dataTables)
@@ -5335,7 +5449,8 @@ namespace System.Data.Common
         public override System.Data.DataTable[] FillSchema(
             System.Data.DataSet dataSet,
             System.Data.SchemaType schemaType
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual System.Data.DataTable[] FillSchema(
@@ -5344,20 +5459,23 @@ namespace System.Data.Common
             System.Data.IDbCommand command,
             string srcTable,
             System.Data.CommandBehavior behavior
-        ) {
+        )
+        {
             throw null;
         }
         public System.Data.DataTable[] FillSchema(
             System.Data.DataSet dataSet,
             System.Data.SchemaType schemaType,
             string srcTable
-        ) {
+        )
+        {
             throw null;
         }
         public System.Data.DataTable? FillSchema(
             System.Data.DataTable dataTable,
             System.Data.SchemaType schemaType
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual System.Data.DataTable? FillSchema(
@@ -5365,20 +5483,23 @@ namespace System.Data.Common
             System.Data.SchemaType schemaType,
             System.Data.IDbCommand command,
             System.Data.CommandBehavior behavior
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual System.Data.IDataParameter GetBatchedParameter(
             int commandIdentifier,
             int parameterIndex
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual bool GetBatchedRecordsAffected(
             int commandIdentifier,
             out int recordsAffected,
             out System.Exception? error
-        ) {
+        )
+        {
             throw null;
         }
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -5403,7 +5524,8 @@ namespace System.Data.Common
         protected virtual int Update(
             System.Data.DataRow[] dataRows,
             System.Data.Common.DataTableMapping tableMapping
-        ) {
+        )
+        {
             throw null;
         }
         public override int Update(System.Data.DataSet dataSet)
@@ -5497,7 +5619,8 @@ namespace System.Data.Common
         public virtual System.Threading.Tasks.Task<T> GetFieldValueAsync<T>(
             int ordinal,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public virtual T GetFieldValue<T>(int ordinal)
@@ -5538,12 +5661,14 @@ namespace System.Data.Common
         }
         public virtual System.Threading.Tasks.Task<System.Data.DataTable?> GetSchemaTableAsync(
             System.Threading.CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Threading.Tasks.Task<System.Collections.ObjectModel.ReadOnlyCollection<System.Data.Common.DbColumn>> GetColumnSchemaAsync(
             System.Threading.CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.IO.Stream GetStream(int ordinal)
@@ -5565,7 +5690,8 @@ namespace System.Data.Common
         public virtual System.Threading.Tasks.Task<bool> IsDBNullAsync(
             int ordinal,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public abstract bool NextResult();
@@ -5575,7 +5701,8 @@ namespace System.Data.Common
         }
         public virtual System.Threading.Tasks.Task<bool> NextResultAsync(
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public abstract bool Read();
@@ -5585,7 +5712,8 @@ namespace System.Data.Common
         }
         public virtual System.Threading.Tasks.Task<bool> ReadAsync(
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         System.Data.IDataReader System.Data.IDataRecord.GetData(int ordinal)
@@ -5601,7 +5729,8 @@ namespace System.Data.Common
         }
         public static System.Collections.ObjectModel.ReadOnlyCollection<System.Data.Common.DbColumn> GetColumnSchema(
             this System.Data.Common.DbDataReader reader
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -5695,7 +5824,8 @@ namespace System.Data.Common
         )]
         System.ComponentModel.EventDescriptorCollection System.ComponentModel.ICustomTypeDescriptor.GetEvents(
             System.Attribute[] attributes
-        ) {
+        )
+        {
             throw null;
         }
         System.ComponentModel.PropertyDescriptorCollection System.ComponentModel.ICustomTypeDescriptor.GetProperties()
@@ -5707,12 +5837,14 @@ namespace System.Data.Common
         )]
         System.ComponentModel.PropertyDescriptorCollection System.ComponentModel.ICustomTypeDescriptor.GetProperties(
             System.Attribute[] attributes
-        ) {
+        )
+        {
             throw null;
         }
         object System.ComponentModel.ICustomTypeDescriptor.GetPropertyOwner(
             System.ComponentModel.PropertyDescriptor pd
-        ) {
+        )
+        {
             throw null;
         }
 #nullable enable
@@ -6012,12 +6144,14 @@ namespace System.Data.Common
     {
         public static System.Data.Common.DbProviderFactory? GetFactory(
             System.Data.Common.DbConnection connection
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.Common.DbProviderFactory GetFactory(
             System.Data.DataRow providerRow
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.Common.DbProviderFactory GetFactory(string providerInvariantName)
@@ -6048,7 +6182,8 @@ namespace System.Data.Common
             string providerInvariantName,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Data.Common.DbProviderFactory? factory
-        ) {
+        )
+        {
             throw null;
         }
         public static bool UnregisterFactory(string providerInvariantName)
@@ -6134,7 +6269,8 @@ namespace System.Data.Common
         public virtual System.Threading.Tasks.Task CommitAsync(
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public void Dispose() { }
@@ -6147,7 +6283,8 @@ namespace System.Data.Common
         public virtual System.Threading.Tasks.Task RollbackAsync(
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         public virtual bool SupportsSavepoints
@@ -6157,19 +6294,22 @@ namespace System.Data.Common
         public virtual System.Threading.Tasks.Task SaveAsync(
             string savepointName,
             System.Threading.CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Threading.Tasks.Task RollbackAsync(
             string savepointName,
             System.Threading.CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Threading.Tasks.Task ReleaseAsync(
             string savepointName,
             System.Threading.CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             throw null;
         }
         public virtual void Save(string savepointName)
@@ -6380,7 +6520,8 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlBinary Add(
             System.Data.SqlTypes.SqlBinary x,
             System.Data.SqlTypes.SqlBinary y
-        ) {
+        )
+        {
             throw null;
         }
         public int CompareTo(System.Data.SqlTypes.SqlBinary value)
@@ -6394,13 +6535,15 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlBinary Concat(
             System.Data.SqlTypes.SqlBinary x,
             System.Data.SqlTypes.SqlBinary y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean Equals(
             System.Data.SqlTypes.SqlBinary x,
             System.Data.SqlTypes.SqlBinary y
-        ) {
+        )
+        {
             throw null;
         }
         public override bool Equals(object? value)
@@ -6413,49 +6556,57 @@ namespace System.Data.SqlTypes
         }
         public static System.Xml.XmlQualifiedName GetXsdType(
             System.Xml.Schema.XmlSchemaSet schemaSet
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean GreaterThan(
             System.Data.SqlTypes.SqlBinary x,
             System.Data.SqlTypes.SqlBinary y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean GreaterThanOrEqual(
             System.Data.SqlTypes.SqlBinary x,
             System.Data.SqlTypes.SqlBinary y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean LessThan(
             System.Data.SqlTypes.SqlBinary x,
             System.Data.SqlTypes.SqlBinary y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean LessThanOrEqual(
             System.Data.SqlTypes.SqlBinary x,
             System.Data.SqlTypes.SqlBinary y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean NotEquals(
             System.Data.SqlTypes.SqlBinary x,
             System.Data.SqlTypes.SqlBinary y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBinary operator +(
             System.Data.SqlTypes.SqlBinary x,
             System.Data.SqlTypes.SqlBinary y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator ==(
             System.Data.SqlTypes.SqlBinary x,
             System.Data.SqlTypes.SqlBinary y
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator byte[]?(System.Data.SqlTypes.SqlBinary x)
@@ -6464,19 +6615,22 @@ namespace System.Data.SqlTypes
         }
         public static explicit operator System.Data.SqlTypes.SqlBinary(
             System.Data.SqlTypes.SqlGuid x
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator >(
             System.Data.SqlTypes.SqlBinary x,
             System.Data.SqlTypes.SqlBinary y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator >=(
             System.Data.SqlTypes.SqlBinary x,
             System.Data.SqlTypes.SqlBinary y
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Data.SqlTypes.SqlBinary(byte[] x)
@@ -6486,19 +6640,22 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlBoolean operator !=(
             System.Data.SqlTypes.SqlBinary x,
             System.Data.SqlTypes.SqlBinary y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator <(
             System.Data.SqlTypes.SqlBinary x,
             System.Data.SqlTypes.SqlBinary y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator <=(
             System.Data.SqlTypes.SqlBinary x,
             System.Data.SqlTypes.SqlBinary y
-        ) {
+        )
+        {
             throw null;
         }
         System.Xml.Schema.XmlSchema? System.Xml.Serialization.IXmlSerializable.GetSchema()
@@ -6559,7 +6716,8 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlBoolean And(
             System.Data.SqlTypes.SqlBoolean x,
             System.Data.SqlTypes.SqlBoolean y
-        ) {
+        )
+        {
             throw null;
         }
         public int CompareTo(System.Data.SqlTypes.SqlBoolean value)
@@ -6573,7 +6731,8 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlBoolean Equals(
             System.Data.SqlTypes.SqlBoolean x,
             System.Data.SqlTypes.SqlBoolean y
-        ) {
+        )
+        {
             throw null;
         }
         public override bool Equals(object? value)
@@ -6586,66 +6745,77 @@ namespace System.Data.SqlTypes
         }
         public static System.Xml.XmlQualifiedName GetXsdType(
             System.Xml.Schema.XmlSchemaSet schemaSet
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean GreaterThan(
             System.Data.SqlTypes.SqlBoolean x,
             System.Data.SqlTypes.SqlBoolean y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean GreaterThanOrEquals(
             System.Data.SqlTypes.SqlBoolean x,
             System.Data.SqlTypes.SqlBoolean y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean LessThan(
             System.Data.SqlTypes.SqlBoolean x,
             System.Data.SqlTypes.SqlBoolean y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean LessThanOrEquals(
             System.Data.SqlTypes.SqlBoolean x,
             System.Data.SqlTypes.SqlBoolean y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean NotEquals(
             System.Data.SqlTypes.SqlBoolean x,
             System.Data.SqlTypes.SqlBoolean y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean OnesComplement(
             System.Data.SqlTypes.SqlBoolean x
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator &(
             System.Data.SqlTypes.SqlBoolean x,
             System.Data.SqlTypes.SqlBoolean y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator |(
             System.Data.SqlTypes.SqlBoolean x,
             System.Data.SqlTypes.SqlBoolean y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator ==(
             System.Data.SqlTypes.SqlBoolean x,
             System.Data.SqlTypes.SqlBoolean y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator ^(
             System.Data.SqlTypes.SqlBoolean x,
             System.Data.SqlTypes.SqlBoolean y
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator bool(System.Data.SqlTypes.SqlBoolean x)
@@ -6654,47 +6824,56 @@ namespace System.Data.SqlTypes
         }
         public static explicit operator System.Data.SqlTypes.SqlBoolean(
             System.Data.SqlTypes.SqlByte x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlBoolean(
             System.Data.SqlTypes.SqlDecimal x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlBoolean(
             System.Data.SqlTypes.SqlDouble x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlBoolean(
             System.Data.SqlTypes.SqlInt16 x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlBoolean(
             System.Data.SqlTypes.SqlInt32 x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlBoolean(
             System.Data.SqlTypes.SqlInt64 x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlBoolean(
             System.Data.SqlTypes.SqlMoney x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlBoolean(
             System.Data.SqlTypes.SqlSingle x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlBoolean(
             System.Data.SqlTypes.SqlString x
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator false(System.Data.SqlTypes.SqlBoolean x)
@@ -6704,13 +6883,15 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlBoolean operator >(
             System.Data.SqlTypes.SqlBoolean x,
             System.Data.SqlTypes.SqlBoolean y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator >=(
             System.Data.SqlTypes.SqlBoolean x,
             System.Data.SqlTypes.SqlBoolean y
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Data.SqlTypes.SqlBoolean(bool x)
@@ -6720,19 +6901,22 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlBoolean operator !=(
             System.Data.SqlTypes.SqlBoolean x,
             System.Data.SqlTypes.SqlBoolean y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator <(
             System.Data.SqlTypes.SqlBoolean x,
             System.Data.SqlTypes.SqlBoolean y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator <=(
             System.Data.SqlTypes.SqlBoolean x,
             System.Data.SqlTypes.SqlBoolean y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator !(System.Data.SqlTypes.SqlBoolean x)
@@ -6750,7 +6934,8 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlBoolean Or(
             System.Data.SqlTypes.SqlBoolean x,
             System.Data.SqlTypes.SqlBoolean y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean Parse(string s)
@@ -6806,7 +6991,8 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlBoolean Xor(
             System.Data.SqlTypes.SqlBoolean x,
             System.Data.SqlTypes.SqlBoolean y
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -6836,19 +7022,22 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlByte Add(
             System.Data.SqlTypes.SqlByte x,
             System.Data.SqlTypes.SqlByte y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlByte BitwiseAnd(
             System.Data.SqlTypes.SqlByte x,
             System.Data.SqlTypes.SqlByte y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlByte BitwiseOr(
             System.Data.SqlTypes.SqlByte x,
             System.Data.SqlTypes.SqlByte y
-        ) {
+        )
+        {
             throw null;
         }
         public int CompareTo(System.Data.SqlTypes.SqlByte value)
@@ -6862,13 +7051,15 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlByte Divide(
             System.Data.SqlTypes.SqlByte x,
             System.Data.SqlTypes.SqlByte y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean Equals(
             System.Data.SqlTypes.SqlByte x,
             System.Data.SqlTypes.SqlByte y
-        ) {
+        )
+        {
             throw null;
         }
         public override bool Equals(object? value)
@@ -6881,55 +7072,64 @@ namespace System.Data.SqlTypes
         }
         public static System.Xml.XmlQualifiedName GetXsdType(
             System.Xml.Schema.XmlSchemaSet schemaSet
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean GreaterThan(
             System.Data.SqlTypes.SqlByte x,
             System.Data.SqlTypes.SqlByte y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean GreaterThanOrEqual(
             System.Data.SqlTypes.SqlByte x,
             System.Data.SqlTypes.SqlByte y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean LessThan(
             System.Data.SqlTypes.SqlByte x,
             System.Data.SqlTypes.SqlByte y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean LessThanOrEqual(
             System.Data.SqlTypes.SqlByte x,
             System.Data.SqlTypes.SqlByte y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlByte Mod(
             System.Data.SqlTypes.SqlByte x,
             System.Data.SqlTypes.SqlByte y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlByte Modulus(
             System.Data.SqlTypes.SqlByte x,
             System.Data.SqlTypes.SqlByte y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlByte Multiply(
             System.Data.SqlTypes.SqlByte x,
             System.Data.SqlTypes.SqlByte y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean NotEquals(
             System.Data.SqlTypes.SqlByte x,
             System.Data.SqlTypes.SqlByte y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlByte OnesComplement(System.Data.SqlTypes.SqlByte x)
@@ -6939,42 +7139,49 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlByte operator +(
             System.Data.SqlTypes.SqlByte x,
             System.Data.SqlTypes.SqlByte y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlByte operator &(
             System.Data.SqlTypes.SqlByte x,
             System.Data.SqlTypes.SqlByte y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlByte operator |(
             System.Data.SqlTypes.SqlByte x,
             System.Data.SqlTypes.SqlByte y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlByte operator /(
             System.Data.SqlTypes.SqlByte x,
             System.Data.SqlTypes.SqlByte y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator ==(
             System.Data.SqlTypes.SqlByte x,
             System.Data.SqlTypes.SqlByte y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlByte operator ^(
             System.Data.SqlTypes.SqlByte x,
             System.Data.SqlTypes.SqlByte y
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlByte(
             System.Data.SqlTypes.SqlBoolean x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator byte(System.Data.SqlTypes.SqlByte x)
@@ -6983,54 +7190,64 @@ namespace System.Data.SqlTypes
         }
         public static explicit operator System.Data.SqlTypes.SqlByte(
             System.Data.SqlTypes.SqlDecimal x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlByte(
             System.Data.SqlTypes.SqlDouble x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlByte(
             System.Data.SqlTypes.SqlInt16 x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlByte(
             System.Data.SqlTypes.SqlInt32 x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlByte(
             System.Data.SqlTypes.SqlInt64 x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlByte(
             System.Data.SqlTypes.SqlMoney x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlByte(
             System.Data.SqlTypes.SqlSingle x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlByte(
             System.Data.SqlTypes.SqlString x
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator >(
             System.Data.SqlTypes.SqlByte x,
             System.Data.SqlTypes.SqlByte y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator >=(
             System.Data.SqlTypes.SqlByte x,
             System.Data.SqlTypes.SqlByte y
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Data.SqlTypes.SqlByte(byte x)
@@ -7040,31 +7257,36 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlBoolean operator !=(
             System.Data.SqlTypes.SqlByte x,
             System.Data.SqlTypes.SqlByte y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator <(
             System.Data.SqlTypes.SqlByte x,
             System.Data.SqlTypes.SqlByte y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator <=(
             System.Data.SqlTypes.SqlByte x,
             System.Data.SqlTypes.SqlByte y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlByte operator %(
             System.Data.SqlTypes.SqlByte x,
             System.Data.SqlTypes.SqlByte y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlByte operator *(
             System.Data.SqlTypes.SqlByte x,
             System.Data.SqlTypes.SqlByte y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlByte operator ~(System.Data.SqlTypes.SqlByte x)
@@ -7074,7 +7296,8 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlByte operator -(
             System.Data.SqlTypes.SqlByte x,
             System.Data.SqlTypes.SqlByte y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlByte Parse(string s)
@@ -7084,7 +7307,8 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlByte Subtract(
             System.Data.SqlTypes.SqlByte x,
             System.Data.SqlTypes.SqlByte y
-        ) {
+        )
+        {
             throw null;
         }
         System.Xml.Schema.XmlSchema System.Xml.Serialization.IXmlSerializable.GetSchema()
@@ -7136,7 +7360,8 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlByte Xor(
             System.Data.SqlTypes.SqlByte x,
             System.Data.SqlTypes.SqlByte y
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -7190,17 +7415,20 @@ namespace System.Data.SqlTypes
         }
         public static System.Xml.XmlQualifiedName GetXsdType(
             System.Xml.Schema.XmlSchemaSet schemaSet
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlBytes(
             System.Data.SqlTypes.SqlBinary value
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlBinary(
             System.Data.SqlTypes.SqlBytes value
-        ) {
+        )
+        {
             throw null;
         }
         public long Read(long offset, byte[] buffer, int offsetInBuffer, int count)
@@ -7269,17 +7497,20 @@ namespace System.Data.SqlTypes
         }
         public static System.Xml.XmlQualifiedName GetXsdType(
             System.Xml.Schema.XmlSchemaSet schemaSet
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlString(
             System.Data.SqlTypes.SqlChars value
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlChars(
             System.Data.SqlTypes.SqlString value
-        ) {
+        )
+        {
             throw null;
         }
         public long Read(long offset, char[] buffer, int offsetInBuffer, int count)
@@ -7352,7 +7583,8 @@ namespace System.Data.SqlTypes
             int minute,
             int second,
             double millisecond
-        ) {
+        )
+        {
             throw null;
         }
         public SqlDateTime(
@@ -7363,7 +7595,8 @@ namespace System.Data.SqlTypes
             int minute,
             int second,
             int bilisecond
-        ) {
+        )
+        {
             throw null;
         }
         public int DayTicks
@@ -7385,7 +7618,8 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlDateTime Add(
             System.Data.SqlTypes.SqlDateTime x,
             System.TimeSpan t
-        ) {
+        )
+        {
             throw null;
         }
         public int CompareTo(System.Data.SqlTypes.SqlDateTime value)
@@ -7399,7 +7633,8 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlBoolean Equals(
             System.Data.SqlTypes.SqlDateTime x,
             System.Data.SqlTypes.SqlDateTime y
-        ) {
+        )
+        {
             throw null;
         }
         public override bool Equals(object? value)
@@ -7412,49 +7647,57 @@ namespace System.Data.SqlTypes
         }
         public static System.Xml.XmlQualifiedName GetXsdType(
             System.Xml.Schema.XmlSchemaSet schemaSet
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean GreaterThan(
             System.Data.SqlTypes.SqlDateTime x,
             System.Data.SqlTypes.SqlDateTime y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean GreaterThanOrEqual(
             System.Data.SqlTypes.SqlDateTime x,
             System.Data.SqlTypes.SqlDateTime y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean LessThan(
             System.Data.SqlTypes.SqlDateTime x,
             System.Data.SqlTypes.SqlDateTime y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean LessThanOrEqual(
             System.Data.SqlTypes.SqlDateTime x,
             System.Data.SqlTypes.SqlDateTime y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean NotEquals(
             System.Data.SqlTypes.SqlDateTime x,
             System.Data.SqlTypes.SqlDateTime y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlDateTime operator +(
             System.Data.SqlTypes.SqlDateTime x,
             System.TimeSpan t
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator ==(
             System.Data.SqlTypes.SqlDateTime x,
             System.Data.SqlTypes.SqlDateTime y
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.DateTime(System.Data.SqlTypes.SqlDateTime x)
@@ -7463,19 +7706,22 @@ namespace System.Data.SqlTypes
         }
         public static explicit operator System.Data.SqlTypes.SqlDateTime(
             System.Data.SqlTypes.SqlString x
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator >(
             System.Data.SqlTypes.SqlDateTime x,
             System.Data.SqlTypes.SqlDateTime y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator >=(
             System.Data.SqlTypes.SqlDateTime x,
             System.Data.SqlTypes.SqlDateTime y
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Data.SqlTypes.SqlDateTime(System.DateTime value)
@@ -7485,25 +7731,29 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlBoolean operator !=(
             System.Data.SqlTypes.SqlDateTime x,
             System.Data.SqlTypes.SqlDateTime y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator <(
             System.Data.SqlTypes.SqlDateTime x,
             System.Data.SqlTypes.SqlDateTime y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator <=(
             System.Data.SqlTypes.SqlDateTime x,
             System.Data.SqlTypes.SqlDateTime y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlDateTime operator -(
             System.Data.SqlTypes.SqlDateTime x,
             System.TimeSpan t
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlDateTime Parse(string s)
@@ -7513,7 +7763,8 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlDateTime Subtract(
             System.Data.SqlTypes.SqlDateTime x,
             System.TimeSpan t
-        ) {
+        )
+        {
             throw null;
         }
         System.Xml.Schema.XmlSchema? System.Xml.Serialization.IXmlSerializable.GetSchema()
@@ -7551,7 +7802,8 @@ namespace System.Data.SqlTypes
             int data2,
             int data3,
             int data4
-        ) {
+        )
+        {
             throw null;
         }
         public SqlDecimal(byte bPrecision, byte bScale, bool fPositive, int[] bits)
@@ -7609,14 +7861,16 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlDecimal Add(
             System.Data.SqlTypes.SqlDecimal x,
             System.Data.SqlTypes.SqlDecimal y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlDecimal AdjustScale(
             System.Data.SqlTypes.SqlDecimal n,
             int digits,
             bool fRound
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlDecimal Ceiling(System.Data.SqlTypes.SqlDecimal n)
@@ -7635,19 +7889,22 @@ namespace System.Data.SqlTypes
             System.Data.SqlTypes.SqlDecimal n,
             int precision,
             int scale
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlDecimal Divide(
             System.Data.SqlTypes.SqlDecimal x,
             System.Data.SqlTypes.SqlDecimal y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean Equals(
             System.Data.SqlTypes.SqlDecimal x,
             System.Data.SqlTypes.SqlDecimal y
-        ) {
+        )
+        {
             throw null;
         }
         public override bool Equals(object? value)
@@ -7664,66 +7921,77 @@ namespace System.Data.SqlTypes
         }
         public static System.Xml.XmlQualifiedName GetXsdType(
             System.Xml.Schema.XmlSchemaSet schemaSet
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean GreaterThan(
             System.Data.SqlTypes.SqlDecimal x,
             System.Data.SqlTypes.SqlDecimal y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean GreaterThanOrEqual(
             System.Data.SqlTypes.SqlDecimal x,
             System.Data.SqlTypes.SqlDecimal y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean LessThan(
             System.Data.SqlTypes.SqlDecimal x,
             System.Data.SqlTypes.SqlDecimal y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean LessThanOrEqual(
             System.Data.SqlTypes.SqlDecimal x,
             System.Data.SqlTypes.SqlDecimal y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlDecimal Multiply(
             System.Data.SqlTypes.SqlDecimal x,
             System.Data.SqlTypes.SqlDecimal y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean NotEquals(
             System.Data.SqlTypes.SqlDecimal x,
             System.Data.SqlTypes.SqlDecimal y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlDecimal operator +(
             System.Data.SqlTypes.SqlDecimal x,
             System.Data.SqlTypes.SqlDecimal y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlDecimal operator /(
             System.Data.SqlTypes.SqlDecimal x,
             System.Data.SqlTypes.SqlDecimal y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator ==(
             System.Data.SqlTypes.SqlDecimal x,
             System.Data.SqlTypes.SqlDecimal y
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlDecimal(
             System.Data.SqlTypes.SqlBoolean x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator decimal(System.Data.SqlTypes.SqlDecimal x)
@@ -7732,17 +8000,20 @@ namespace System.Data.SqlTypes
         }
         public static explicit operator System.Data.SqlTypes.SqlDecimal(
             System.Data.SqlTypes.SqlDouble x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlDecimal(
             System.Data.SqlTypes.SqlSingle x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlDecimal(
             System.Data.SqlTypes.SqlString x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlDecimal(double x)
@@ -7752,38 +8023,45 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlBoolean operator >(
             System.Data.SqlTypes.SqlDecimal x,
             System.Data.SqlTypes.SqlDecimal y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator >=(
             System.Data.SqlTypes.SqlDecimal x,
             System.Data.SqlTypes.SqlDecimal y
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Data.SqlTypes.SqlDecimal(
             System.Data.SqlTypes.SqlByte x
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Data.SqlTypes.SqlDecimal(
             System.Data.SqlTypes.SqlInt16 x
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Data.SqlTypes.SqlDecimal(
             System.Data.SqlTypes.SqlInt32 x
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Data.SqlTypes.SqlDecimal(
             System.Data.SqlTypes.SqlInt64 x
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Data.SqlTypes.SqlDecimal(
             System.Data.SqlTypes.SqlMoney x
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Data.SqlTypes.SqlDecimal(decimal x)
@@ -7797,31 +8075,36 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlBoolean operator !=(
             System.Data.SqlTypes.SqlDecimal x,
             System.Data.SqlTypes.SqlDecimal y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator <(
             System.Data.SqlTypes.SqlDecimal x,
             System.Data.SqlTypes.SqlDecimal y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator <=(
             System.Data.SqlTypes.SqlDecimal x,
             System.Data.SqlTypes.SqlDecimal y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlDecimal operator *(
             System.Data.SqlTypes.SqlDecimal x,
             System.Data.SqlTypes.SqlDecimal y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlDecimal operator -(
             System.Data.SqlTypes.SqlDecimal x,
             System.Data.SqlTypes.SqlDecimal y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlDecimal operator -(System.Data.SqlTypes.SqlDecimal x)
@@ -7835,13 +8118,15 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlDecimal Power(
             System.Data.SqlTypes.SqlDecimal n,
             double exp
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlDecimal Round(
             System.Data.SqlTypes.SqlDecimal n,
             int position
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlInt32 Sign(System.Data.SqlTypes.SqlDecimal n)
@@ -7851,7 +8136,8 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlDecimal Subtract(
             System.Data.SqlTypes.SqlDecimal x,
             System.Data.SqlTypes.SqlDecimal y
-        ) {
+        )
+        {
             throw null;
         }
         System.Xml.Schema.XmlSchema? System.Xml.Serialization.IXmlSerializable.GetSchema()
@@ -7907,7 +8193,8 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlDecimal Truncate(
             System.Data.SqlTypes.SqlDecimal n,
             int position
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -7937,7 +8224,8 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlDouble Add(
             System.Data.SqlTypes.SqlDouble x,
             System.Data.SqlTypes.SqlDouble y
-        ) {
+        )
+        {
             throw null;
         }
         public int CompareTo(System.Data.SqlTypes.SqlDouble value)
@@ -7951,13 +8239,15 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlDouble Divide(
             System.Data.SqlTypes.SqlDouble x,
             System.Data.SqlTypes.SqlDouble y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean Equals(
             System.Data.SqlTypes.SqlDouble x,
             System.Data.SqlTypes.SqlDouble y
-        ) {
+        )
+        {
             throw null;
         }
         public override bool Equals(object? value)
@@ -7970,66 +8260,77 @@ namespace System.Data.SqlTypes
         }
         public static System.Xml.XmlQualifiedName GetXsdType(
             System.Xml.Schema.XmlSchemaSet schemaSet
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean GreaterThan(
             System.Data.SqlTypes.SqlDouble x,
             System.Data.SqlTypes.SqlDouble y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean GreaterThanOrEqual(
             System.Data.SqlTypes.SqlDouble x,
             System.Data.SqlTypes.SqlDouble y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean LessThan(
             System.Data.SqlTypes.SqlDouble x,
             System.Data.SqlTypes.SqlDouble y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean LessThanOrEqual(
             System.Data.SqlTypes.SqlDouble x,
             System.Data.SqlTypes.SqlDouble y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlDouble Multiply(
             System.Data.SqlTypes.SqlDouble x,
             System.Data.SqlTypes.SqlDouble y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean NotEquals(
             System.Data.SqlTypes.SqlDouble x,
             System.Data.SqlTypes.SqlDouble y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlDouble operator +(
             System.Data.SqlTypes.SqlDouble x,
             System.Data.SqlTypes.SqlDouble y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlDouble operator /(
             System.Data.SqlTypes.SqlDouble x,
             System.Data.SqlTypes.SqlDouble y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator ==(
             System.Data.SqlTypes.SqlDouble x,
             System.Data.SqlTypes.SqlDouble y
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlDouble(
             System.Data.SqlTypes.SqlBoolean x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator double(System.Data.SqlTypes.SqlDouble x)
@@ -8038,54 +8339,64 @@ namespace System.Data.SqlTypes
         }
         public static explicit operator System.Data.SqlTypes.SqlDouble(
             System.Data.SqlTypes.SqlString x
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator >(
             System.Data.SqlTypes.SqlDouble x,
             System.Data.SqlTypes.SqlDouble y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator >=(
             System.Data.SqlTypes.SqlDouble x,
             System.Data.SqlTypes.SqlDouble y
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Data.SqlTypes.SqlDouble(
             System.Data.SqlTypes.SqlByte x
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Data.SqlTypes.SqlDouble(
             System.Data.SqlTypes.SqlDecimal x
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Data.SqlTypes.SqlDouble(
             System.Data.SqlTypes.SqlInt16 x
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Data.SqlTypes.SqlDouble(
             System.Data.SqlTypes.SqlInt32 x
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Data.SqlTypes.SqlDouble(
             System.Data.SqlTypes.SqlInt64 x
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Data.SqlTypes.SqlDouble(
             System.Data.SqlTypes.SqlMoney x
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Data.SqlTypes.SqlDouble(
             System.Data.SqlTypes.SqlSingle x
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Data.SqlTypes.SqlDouble(double x)
@@ -8095,31 +8406,36 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlBoolean operator !=(
             System.Data.SqlTypes.SqlDouble x,
             System.Data.SqlTypes.SqlDouble y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator <(
             System.Data.SqlTypes.SqlDouble x,
             System.Data.SqlTypes.SqlDouble y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator <=(
             System.Data.SqlTypes.SqlDouble x,
             System.Data.SqlTypes.SqlDouble y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlDouble operator *(
             System.Data.SqlTypes.SqlDouble x,
             System.Data.SqlTypes.SqlDouble y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlDouble operator -(
             System.Data.SqlTypes.SqlDouble x,
             System.Data.SqlTypes.SqlDouble y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlDouble operator -(System.Data.SqlTypes.SqlDouble x)
@@ -8133,7 +8449,8 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlDouble Subtract(
             System.Data.SqlTypes.SqlDouble x,
             System.Data.SqlTypes.SqlDouble y
-        ) {
+        )
+        {
             throw null;
         }
         System.Xml.Schema.XmlSchema? System.Xml.Serialization.IXmlSerializable.GetSchema()
@@ -8212,7 +8529,8 @@ namespace System.Data.SqlTypes
             byte i,
             byte j,
             byte k
-        ) {
+        )
+        {
             throw null;
         }
         public SqlGuid(string s)
@@ -8238,7 +8556,8 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlBoolean Equals(
             System.Data.SqlTypes.SqlGuid x,
             System.Data.SqlTypes.SqlGuid y
-        ) {
+        )
+        {
             throw null;
         }
         public override bool Equals(object? value)
@@ -8251,48 +8570,56 @@ namespace System.Data.SqlTypes
         }
         public static System.Xml.XmlQualifiedName GetXsdType(
             System.Xml.Schema.XmlSchemaSet schemaSet
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean GreaterThan(
             System.Data.SqlTypes.SqlGuid x,
             System.Data.SqlTypes.SqlGuid y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean GreaterThanOrEqual(
             System.Data.SqlTypes.SqlGuid x,
             System.Data.SqlTypes.SqlGuid y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean LessThan(
             System.Data.SqlTypes.SqlGuid x,
             System.Data.SqlTypes.SqlGuid y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean LessThanOrEqual(
             System.Data.SqlTypes.SqlGuid x,
             System.Data.SqlTypes.SqlGuid y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean NotEquals(
             System.Data.SqlTypes.SqlGuid x,
             System.Data.SqlTypes.SqlGuid y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator ==(
             System.Data.SqlTypes.SqlGuid x,
             System.Data.SqlTypes.SqlGuid y
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlGuid(
             System.Data.SqlTypes.SqlBinary x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Guid(System.Data.SqlTypes.SqlGuid x)
@@ -8301,19 +8628,22 @@ namespace System.Data.SqlTypes
         }
         public static explicit operator System.Data.SqlTypes.SqlGuid(
             System.Data.SqlTypes.SqlString x
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator >(
             System.Data.SqlTypes.SqlGuid x,
             System.Data.SqlTypes.SqlGuid y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator >=(
             System.Data.SqlTypes.SqlGuid x,
             System.Data.SqlTypes.SqlGuid y
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Data.SqlTypes.SqlGuid(System.Guid x)
@@ -8323,19 +8653,22 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlBoolean operator !=(
             System.Data.SqlTypes.SqlGuid x,
             System.Data.SqlTypes.SqlGuid y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator <(
             System.Data.SqlTypes.SqlGuid x,
             System.Data.SqlTypes.SqlGuid y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator <=(
             System.Data.SqlTypes.SqlGuid x,
             System.Data.SqlTypes.SqlGuid y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlGuid Parse(string s)
@@ -8391,19 +8724,22 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlInt16 Add(
             System.Data.SqlTypes.SqlInt16 x,
             System.Data.SqlTypes.SqlInt16 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlInt16 BitwiseAnd(
             System.Data.SqlTypes.SqlInt16 x,
             System.Data.SqlTypes.SqlInt16 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlInt16 BitwiseOr(
             System.Data.SqlTypes.SqlInt16 x,
             System.Data.SqlTypes.SqlInt16 y
-        ) {
+        )
+        {
             throw null;
         }
         public int CompareTo(System.Data.SqlTypes.SqlInt16 value)
@@ -8417,13 +8753,15 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlInt16 Divide(
             System.Data.SqlTypes.SqlInt16 x,
             System.Data.SqlTypes.SqlInt16 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean Equals(
             System.Data.SqlTypes.SqlInt16 x,
             System.Data.SqlTypes.SqlInt16 y
-        ) {
+        )
+        {
             throw null;
         }
         public override bool Equals(object? value)
@@ -8436,55 +8774,64 @@ namespace System.Data.SqlTypes
         }
         public static System.Xml.XmlQualifiedName GetXsdType(
             System.Xml.Schema.XmlSchemaSet schemaSet
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean GreaterThan(
             System.Data.SqlTypes.SqlInt16 x,
             System.Data.SqlTypes.SqlInt16 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean GreaterThanOrEqual(
             System.Data.SqlTypes.SqlInt16 x,
             System.Data.SqlTypes.SqlInt16 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean LessThan(
             System.Data.SqlTypes.SqlInt16 x,
             System.Data.SqlTypes.SqlInt16 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean LessThanOrEqual(
             System.Data.SqlTypes.SqlInt16 x,
             System.Data.SqlTypes.SqlInt16 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlInt16 Mod(
             System.Data.SqlTypes.SqlInt16 x,
             System.Data.SqlTypes.SqlInt16 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlInt16 Modulus(
             System.Data.SqlTypes.SqlInt16 x,
             System.Data.SqlTypes.SqlInt16 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlInt16 Multiply(
             System.Data.SqlTypes.SqlInt16 x,
             System.Data.SqlTypes.SqlInt16 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean NotEquals(
             System.Data.SqlTypes.SqlInt16 x,
             System.Data.SqlTypes.SqlInt16 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlInt16 OnesComplement(System.Data.SqlTypes.SqlInt16 x)
@@ -8494,52 +8841,61 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlInt16 operator +(
             System.Data.SqlTypes.SqlInt16 x,
             System.Data.SqlTypes.SqlInt16 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlInt16 operator &(
             System.Data.SqlTypes.SqlInt16 x,
             System.Data.SqlTypes.SqlInt16 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlInt16 operator |(
             System.Data.SqlTypes.SqlInt16 x,
             System.Data.SqlTypes.SqlInt16 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlInt16 operator /(
             System.Data.SqlTypes.SqlInt16 x,
             System.Data.SqlTypes.SqlInt16 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator ==(
             System.Data.SqlTypes.SqlInt16 x,
             System.Data.SqlTypes.SqlInt16 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlInt16 operator ^(
             System.Data.SqlTypes.SqlInt16 x,
             System.Data.SqlTypes.SqlInt16 y
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlInt16(
             System.Data.SqlTypes.SqlBoolean x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlInt16(
             System.Data.SqlTypes.SqlDecimal x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlInt16(
             System.Data.SqlTypes.SqlDouble x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator short(System.Data.SqlTypes.SqlInt16 x)
@@ -8548,44 +8904,52 @@ namespace System.Data.SqlTypes
         }
         public static explicit operator System.Data.SqlTypes.SqlInt16(
             System.Data.SqlTypes.SqlInt32 x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlInt16(
             System.Data.SqlTypes.SqlInt64 x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlInt16(
             System.Data.SqlTypes.SqlMoney x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlInt16(
             System.Data.SqlTypes.SqlSingle x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlInt16(
             System.Data.SqlTypes.SqlString x
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator >(
             System.Data.SqlTypes.SqlInt16 x,
             System.Data.SqlTypes.SqlInt16 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator >=(
             System.Data.SqlTypes.SqlInt16 x,
             System.Data.SqlTypes.SqlInt16 y
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Data.SqlTypes.SqlInt16(
             System.Data.SqlTypes.SqlByte x
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Data.SqlTypes.SqlInt16(short x)
@@ -8595,31 +8959,36 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlBoolean operator !=(
             System.Data.SqlTypes.SqlInt16 x,
             System.Data.SqlTypes.SqlInt16 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator <(
             System.Data.SqlTypes.SqlInt16 x,
             System.Data.SqlTypes.SqlInt16 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator <=(
             System.Data.SqlTypes.SqlInt16 x,
             System.Data.SqlTypes.SqlInt16 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlInt16 operator %(
             System.Data.SqlTypes.SqlInt16 x,
             System.Data.SqlTypes.SqlInt16 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlInt16 operator *(
             System.Data.SqlTypes.SqlInt16 x,
             System.Data.SqlTypes.SqlInt16 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlInt16 operator ~(System.Data.SqlTypes.SqlInt16 x)
@@ -8629,7 +8998,8 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlInt16 operator -(
             System.Data.SqlTypes.SqlInt16 x,
             System.Data.SqlTypes.SqlInt16 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlInt16 operator -(System.Data.SqlTypes.SqlInt16 x)
@@ -8643,7 +9013,8 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlInt16 Subtract(
             System.Data.SqlTypes.SqlInt16 x,
             System.Data.SqlTypes.SqlInt16 y
-        ) {
+        )
+        {
             throw null;
         }
         System.Xml.Schema.XmlSchema? System.Xml.Serialization.IXmlSerializable.GetSchema()
@@ -8695,7 +9066,8 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlInt16 Xor(
             System.Data.SqlTypes.SqlInt16 x,
             System.Data.SqlTypes.SqlInt16 y
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -8725,19 +9097,22 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlInt32 Add(
             System.Data.SqlTypes.SqlInt32 x,
             System.Data.SqlTypes.SqlInt32 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlInt32 BitwiseAnd(
             System.Data.SqlTypes.SqlInt32 x,
             System.Data.SqlTypes.SqlInt32 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlInt32 BitwiseOr(
             System.Data.SqlTypes.SqlInt32 x,
             System.Data.SqlTypes.SqlInt32 y
-        ) {
+        )
+        {
             throw null;
         }
         public int CompareTo(System.Data.SqlTypes.SqlInt32 value)
@@ -8751,13 +9126,15 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlInt32 Divide(
             System.Data.SqlTypes.SqlInt32 x,
             System.Data.SqlTypes.SqlInt32 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean Equals(
             System.Data.SqlTypes.SqlInt32 x,
             System.Data.SqlTypes.SqlInt32 y
-        ) {
+        )
+        {
             throw null;
         }
         public override bool Equals(object? value)
@@ -8770,55 +9147,64 @@ namespace System.Data.SqlTypes
         }
         public static System.Xml.XmlQualifiedName GetXsdType(
             System.Xml.Schema.XmlSchemaSet schemaSet
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean GreaterThan(
             System.Data.SqlTypes.SqlInt32 x,
             System.Data.SqlTypes.SqlInt32 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean GreaterThanOrEqual(
             System.Data.SqlTypes.SqlInt32 x,
             System.Data.SqlTypes.SqlInt32 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean LessThan(
             System.Data.SqlTypes.SqlInt32 x,
             System.Data.SqlTypes.SqlInt32 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean LessThanOrEqual(
             System.Data.SqlTypes.SqlInt32 x,
             System.Data.SqlTypes.SqlInt32 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlInt32 Mod(
             System.Data.SqlTypes.SqlInt32 x,
             System.Data.SqlTypes.SqlInt32 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlInt32 Modulus(
             System.Data.SqlTypes.SqlInt32 x,
             System.Data.SqlTypes.SqlInt32 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlInt32 Multiply(
             System.Data.SqlTypes.SqlInt32 x,
             System.Data.SqlTypes.SqlInt32 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean NotEquals(
             System.Data.SqlTypes.SqlInt32 x,
             System.Data.SqlTypes.SqlInt32 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlInt32 OnesComplement(System.Data.SqlTypes.SqlInt32 x)
@@ -8828,52 +9214,61 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlInt32 operator +(
             System.Data.SqlTypes.SqlInt32 x,
             System.Data.SqlTypes.SqlInt32 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlInt32 operator &(
             System.Data.SqlTypes.SqlInt32 x,
             System.Data.SqlTypes.SqlInt32 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlInt32 operator |(
             System.Data.SqlTypes.SqlInt32 x,
             System.Data.SqlTypes.SqlInt32 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlInt32 operator /(
             System.Data.SqlTypes.SqlInt32 x,
             System.Data.SqlTypes.SqlInt32 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator ==(
             System.Data.SqlTypes.SqlInt32 x,
             System.Data.SqlTypes.SqlInt32 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlInt32 operator ^(
             System.Data.SqlTypes.SqlInt32 x,
             System.Data.SqlTypes.SqlInt32 y
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlInt32(
             System.Data.SqlTypes.SqlBoolean x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlInt32(
             System.Data.SqlTypes.SqlDecimal x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlInt32(
             System.Data.SqlTypes.SqlDouble x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator int(System.Data.SqlTypes.SqlInt32 x)
@@ -8882,44 +9277,52 @@ namespace System.Data.SqlTypes
         }
         public static explicit operator System.Data.SqlTypes.SqlInt32(
             System.Data.SqlTypes.SqlInt64 x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlInt32(
             System.Data.SqlTypes.SqlMoney x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlInt32(
             System.Data.SqlTypes.SqlSingle x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlInt32(
             System.Data.SqlTypes.SqlString x
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator >(
             System.Data.SqlTypes.SqlInt32 x,
             System.Data.SqlTypes.SqlInt32 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator >=(
             System.Data.SqlTypes.SqlInt32 x,
             System.Data.SqlTypes.SqlInt32 y
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Data.SqlTypes.SqlInt32(
             System.Data.SqlTypes.SqlByte x
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Data.SqlTypes.SqlInt32(
             System.Data.SqlTypes.SqlInt16 x
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Data.SqlTypes.SqlInt32(int x)
@@ -8929,31 +9332,36 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlBoolean operator !=(
             System.Data.SqlTypes.SqlInt32 x,
             System.Data.SqlTypes.SqlInt32 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator <(
             System.Data.SqlTypes.SqlInt32 x,
             System.Data.SqlTypes.SqlInt32 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator <=(
             System.Data.SqlTypes.SqlInt32 x,
             System.Data.SqlTypes.SqlInt32 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlInt32 operator %(
             System.Data.SqlTypes.SqlInt32 x,
             System.Data.SqlTypes.SqlInt32 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlInt32 operator *(
             System.Data.SqlTypes.SqlInt32 x,
             System.Data.SqlTypes.SqlInt32 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlInt32 operator ~(System.Data.SqlTypes.SqlInt32 x)
@@ -8963,7 +9371,8 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlInt32 operator -(
             System.Data.SqlTypes.SqlInt32 x,
             System.Data.SqlTypes.SqlInt32 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlInt32 operator -(System.Data.SqlTypes.SqlInt32 x)
@@ -8977,7 +9386,8 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlInt32 Subtract(
             System.Data.SqlTypes.SqlInt32 x,
             System.Data.SqlTypes.SqlInt32 y
-        ) {
+        )
+        {
             throw null;
         }
         System.Xml.Schema.XmlSchema? System.Xml.Serialization.IXmlSerializable.GetSchema()
@@ -9029,7 +9439,8 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlInt32 Xor(
             System.Data.SqlTypes.SqlInt32 x,
             System.Data.SqlTypes.SqlInt32 y
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -9059,19 +9470,22 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlInt64 Add(
             System.Data.SqlTypes.SqlInt64 x,
             System.Data.SqlTypes.SqlInt64 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlInt64 BitwiseAnd(
             System.Data.SqlTypes.SqlInt64 x,
             System.Data.SqlTypes.SqlInt64 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlInt64 BitwiseOr(
             System.Data.SqlTypes.SqlInt64 x,
             System.Data.SqlTypes.SqlInt64 y
-        ) {
+        )
+        {
             throw null;
         }
         public int CompareTo(System.Data.SqlTypes.SqlInt64 value)
@@ -9085,13 +9499,15 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlInt64 Divide(
             System.Data.SqlTypes.SqlInt64 x,
             System.Data.SqlTypes.SqlInt64 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean Equals(
             System.Data.SqlTypes.SqlInt64 x,
             System.Data.SqlTypes.SqlInt64 y
-        ) {
+        )
+        {
             throw null;
         }
         public override bool Equals(object? value)
@@ -9104,55 +9520,64 @@ namespace System.Data.SqlTypes
         }
         public static System.Xml.XmlQualifiedName GetXsdType(
             System.Xml.Schema.XmlSchemaSet schemaSet
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean GreaterThan(
             System.Data.SqlTypes.SqlInt64 x,
             System.Data.SqlTypes.SqlInt64 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean GreaterThanOrEqual(
             System.Data.SqlTypes.SqlInt64 x,
             System.Data.SqlTypes.SqlInt64 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean LessThan(
             System.Data.SqlTypes.SqlInt64 x,
             System.Data.SqlTypes.SqlInt64 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean LessThanOrEqual(
             System.Data.SqlTypes.SqlInt64 x,
             System.Data.SqlTypes.SqlInt64 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlInt64 Mod(
             System.Data.SqlTypes.SqlInt64 x,
             System.Data.SqlTypes.SqlInt64 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlInt64 Modulus(
             System.Data.SqlTypes.SqlInt64 x,
             System.Data.SqlTypes.SqlInt64 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlInt64 Multiply(
             System.Data.SqlTypes.SqlInt64 x,
             System.Data.SqlTypes.SqlInt64 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean NotEquals(
             System.Data.SqlTypes.SqlInt64 x,
             System.Data.SqlTypes.SqlInt64 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlInt64 OnesComplement(System.Data.SqlTypes.SqlInt64 x)
@@ -9162,52 +9587,61 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlInt64 operator +(
             System.Data.SqlTypes.SqlInt64 x,
             System.Data.SqlTypes.SqlInt64 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlInt64 operator &(
             System.Data.SqlTypes.SqlInt64 x,
             System.Data.SqlTypes.SqlInt64 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlInt64 operator |(
             System.Data.SqlTypes.SqlInt64 x,
             System.Data.SqlTypes.SqlInt64 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlInt64 operator /(
             System.Data.SqlTypes.SqlInt64 x,
             System.Data.SqlTypes.SqlInt64 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator ==(
             System.Data.SqlTypes.SqlInt64 x,
             System.Data.SqlTypes.SqlInt64 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlInt64 operator ^(
             System.Data.SqlTypes.SqlInt64 x,
             System.Data.SqlTypes.SqlInt64 y
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlInt64(
             System.Data.SqlTypes.SqlBoolean x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlInt64(
             System.Data.SqlTypes.SqlDecimal x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlInt64(
             System.Data.SqlTypes.SqlDouble x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator long(System.Data.SqlTypes.SqlInt64 x)
@@ -9216,44 +9650,52 @@ namespace System.Data.SqlTypes
         }
         public static explicit operator System.Data.SqlTypes.SqlInt64(
             System.Data.SqlTypes.SqlMoney x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlInt64(
             System.Data.SqlTypes.SqlSingle x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlInt64(
             System.Data.SqlTypes.SqlString x
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator >(
             System.Data.SqlTypes.SqlInt64 x,
             System.Data.SqlTypes.SqlInt64 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator >=(
             System.Data.SqlTypes.SqlInt64 x,
             System.Data.SqlTypes.SqlInt64 y
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Data.SqlTypes.SqlInt64(
             System.Data.SqlTypes.SqlByte x
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Data.SqlTypes.SqlInt64(
             System.Data.SqlTypes.SqlInt16 x
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Data.SqlTypes.SqlInt64(
             System.Data.SqlTypes.SqlInt32 x
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Data.SqlTypes.SqlInt64(long x)
@@ -9263,31 +9705,36 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlBoolean operator !=(
             System.Data.SqlTypes.SqlInt64 x,
             System.Data.SqlTypes.SqlInt64 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator <(
             System.Data.SqlTypes.SqlInt64 x,
             System.Data.SqlTypes.SqlInt64 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator <=(
             System.Data.SqlTypes.SqlInt64 x,
             System.Data.SqlTypes.SqlInt64 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlInt64 operator %(
             System.Data.SqlTypes.SqlInt64 x,
             System.Data.SqlTypes.SqlInt64 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlInt64 operator *(
             System.Data.SqlTypes.SqlInt64 x,
             System.Data.SqlTypes.SqlInt64 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlInt64 operator ~(System.Data.SqlTypes.SqlInt64 x)
@@ -9297,7 +9744,8 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlInt64 operator -(
             System.Data.SqlTypes.SqlInt64 x,
             System.Data.SqlTypes.SqlInt64 y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlInt64 operator -(System.Data.SqlTypes.SqlInt64 x)
@@ -9311,7 +9759,8 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlInt64 Subtract(
             System.Data.SqlTypes.SqlInt64 x,
             System.Data.SqlTypes.SqlInt64 y
-        ) {
+        )
+        {
             throw null;
         }
         System.Xml.Schema.XmlSchema? System.Xml.Serialization.IXmlSerializable.GetSchema()
@@ -9363,7 +9812,8 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlInt64 Xor(
             System.Data.SqlTypes.SqlInt64 x,
             System.Data.SqlTypes.SqlInt64 y
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -9405,7 +9855,8 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlMoney Add(
             System.Data.SqlTypes.SqlMoney x,
             System.Data.SqlTypes.SqlMoney y
-        ) {
+        )
+        {
             throw null;
         }
         public int CompareTo(System.Data.SqlTypes.SqlMoney value)
@@ -9419,13 +9870,15 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlMoney Divide(
             System.Data.SqlTypes.SqlMoney x,
             System.Data.SqlTypes.SqlMoney y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean Equals(
             System.Data.SqlTypes.SqlMoney x,
             System.Data.SqlTypes.SqlMoney y
-        ) {
+        )
+        {
             throw null;
         }
         public override bool Equals(object? value)
@@ -9438,76 +9891,89 @@ namespace System.Data.SqlTypes
         }
         public static System.Xml.XmlQualifiedName GetXsdType(
             System.Xml.Schema.XmlSchemaSet schemaSet
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean GreaterThan(
             System.Data.SqlTypes.SqlMoney x,
             System.Data.SqlTypes.SqlMoney y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean GreaterThanOrEqual(
             System.Data.SqlTypes.SqlMoney x,
             System.Data.SqlTypes.SqlMoney y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean LessThan(
             System.Data.SqlTypes.SqlMoney x,
             System.Data.SqlTypes.SqlMoney y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean LessThanOrEqual(
             System.Data.SqlTypes.SqlMoney x,
             System.Data.SqlTypes.SqlMoney y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlMoney Multiply(
             System.Data.SqlTypes.SqlMoney x,
             System.Data.SqlTypes.SqlMoney y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean NotEquals(
             System.Data.SqlTypes.SqlMoney x,
             System.Data.SqlTypes.SqlMoney y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlMoney operator +(
             System.Data.SqlTypes.SqlMoney x,
             System.Data.SqlTypes.SqlMoney y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlMoney operator /(
             System.Data.SqlTypes.SqlMoney x,
             System.Data.SqlTypes.SqlMoney y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator ==(
             System.Data.SqlTypes.SqlMoney x,
             System.Data.SqlTypes.SqlMoney y
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlMoney(
             System.Data.SqlTypes.SqlBoolean x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlMoney(
             System.Data.SqlTypes.SqlDecimal x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlMoney(
             System.Data.SqlTypes.SqlDouble x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator decimal(System.Data.SqlTypes.SqlMoney x)
@@ -9516,12 +9982,14 @@ namespace System.Data.SqlTypes
         }
         public static explicit operator System.Data.SqlTypes.SqlMoney(
             System.Data.SqlTypes.SqlSingle x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlMoney(
             System.Data.SqlTypes.SqlString x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlMoney(double x)
@@ -9531,33 +9999,39 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlBoolean operator >(
             System.Data.SqlTypes.SqlMoney x,
             System.Data.SqlTypes.SqlMoney y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator >=(
             System.Data.SqlTypes.SqlMoney x,
             System.Data.SqlTypes.SqlMoney y
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Data.SqlTypes.SqlMoney(
             System.Data.SqlTypes.SqlByte x
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Data.SqlTypes.SqlMoney(
             System.Data.SqlTypes.SqlInt16 x
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Data.SqlTypes.SqlMoney(
             System.Data.SqlTypes.SqlInt32 x
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Data.SqlTypes.SqlMoney(
             System.Data.SqlTypes.SqlInt64 x
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Data.SqlTypes.SqlMoney(decimal x)
@@ -9571,31 +10045,36 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlBoolean operator !=(
             System.Data.SqlTypes.SqlMoney x,
             System.Data.SqlTypes.SqlMoney y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator <(
             System.Data.SqlTypes.SqlMoney x,
             System.Data.SqlTypes.SqlMoney y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator <=(
             System.Data.SqlTypes.SqlMoney x,
             System.Data.SqlTypes.SqlMoney y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlMoney operator *(
             System.Data.SqlTypes.SqlMoney x,
             System.Data.SqlTypes.SqlMoney y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlMoney operator -(
             System.Data.SqlTypes.SqlMoney x,
             System.Data.SqlTypes.SqlMoney y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlMoney operator -(System.Data.SqlTypes.SqlMoney x)
@@ -9609,7 +10088,8 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlMoney Subtract(
             System.Data.SqlTypes.SqlMoney x,
             System.Data.SqlTypes.SqlMoney y
-        ) {
+        )
+        {
             throw null;
         }
         System.Xml.Schema.XmlSchema? System.Xml.Serialization.IXmlSerializable.GetSchema()
@@ -9717,7 +10197,8 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlSingle Add(
             System.Data.SqlTypes.SqlSingle x,
             System.Data.SqlTypes.SqlSingle y
-        ) {
+        )
+        {
             throw null;
         }
         public int CompareTo(System.Data.SqlTypes.SqlSingle value)
@@ -9731,13 +10212,15 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlSingle Divide(
             System.Data.SqlTypes.SqlSingle x,
             System.Data.SqlTypes.SqlSingle y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean Equals(
             System.Data.SqlTypes.SqlSingle x,
             System.Data.SqlTypes.SqlSingle y
-        ) {
+        )
+        {
             throw null;
         }
         public override bool Equals(object? value)
@@ -9750,71 +10233,83 @@ namespace System.Data.SqlTypes
         }
         public static System.Xml.XmlQualifiedName GetXsdType(
             System.Xml.Schema.XmlSchemaSet schemaSet
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean GreaterThan(
             System.Data.SqlTypes.SqlSingle x,
             System.Data.SqlTypes.SqlSingle y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean GreaterThanOrEqual(
             System.Data.SqlTypes.SqlSingle x,
             System.Data.SqlTypes.SqlSingle y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean LessThan(
             System.Data.SqlTypes.SqlSingle x,
             System.Data.SqlTypes.SqlSingle y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean LessThanOrEqual(
             System.Data.SqlTypes.SqlSingle x,
             System.Data.SqlTypes.SqlSingle y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlSingle Multiply(
             System.Data.SqlTypes.SqlSingle x,
             System.Data.SqlTypes.SqlSingle y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean NotEquals(
             System.Data.SqlTypes.SqlSingle x,
             System.Data.SqlTypes.SqlSingle y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlSingle operator +(
             System.Data.SqlTypes.SqlSingle x,
             System.Data.SqlTypes.SqlSingle y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlSingle operator /(
             System.Data.SqlTypes.SqlSingle x,
             System.Data.SqlTypes.SqlSingle y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator ==(
             System.Data.SqlTypes.SqlSingle x,
             System.Data.SqlTypes.SqlSingle y
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlSingle(
             System.Data.SqlTypes.SqlBoolean x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlSingle(
             System.Data.SqlTypes.SqlDouble x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator float(System.Data.SqlTypes.SqlSingle x)
@@ -9823,49 +10318,58 @@ namespace System.Data.SqlTypes
         }
         public static explicit operator System.Data.SqlTypes.SqlSingle(
             System.Data.SqlTypes.SqlString x
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator >(
             System.Data.SqlTypes.SqlSingle x,
             System.Data.SqlTypes.SqlSingle y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator >=(
             System.Data.SqlTypes.SqlSingle x,
             System.Data.SqlTypes.SqlSingle y
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Data.SqlTypes.SqlSingle(
             System.Data.SqlTypes.SqlByte x
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Data.SqlTypes.SqlSingle(
             System.Data.SqlTypes.SqlDecimal x
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Data.SqlTypes.SqlSingle(
             System.Data.SqlTypes.SqlInt16 x
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Data.SqlTypes.SqlSingle(
             System.Data.SqlTypes.SqlInt32 x
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Data.SqlTypes.SqlSingle(
             System.Data.SqlTypes.SqlInt64 x
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Data.SqlTypes.SqlSingle(
             System.Data.SqlTypes.SqlMoney x
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Data.SqlTypes.SqlSingle(float x)
@@ -9875,31 +10379,36 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlBoolean operator !=(
             System.Data.SqlTypes.SqlSingle x,
             System.Data.SqlTypes.SqlSingle y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator <(
             System.Data.SqlTypes.SqlSingle x,
             System.Data.SqlTypes.SqlSingle y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator <=(
             System.Data.SqlTypes.SqlSingle x,
             System.Data.SqlTypes.SqlSingle y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlSingle operator *(
             System.Data.SqlTypes.SqlSingle x,
             System.Data.SqlTypes.SqlSingle y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlSingle operator -(
             System.Data.SqlTypes.SqlSingle x,
             System.Data.SqlTypes.SqlSingle y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlSingle operator -(System.Data.SqlTypes.SqlSingle x)
@@ -9913,7 +10422,8 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlSingle Subtract(
             System.Data.SqlTypes.SqlSingle x,
             System.Data.SqlTypes.SqlSingle y
-        ) {
+        )
+        {
             throw null;
         }
         System.Xml.Schema.XmlSchema? System.Xml.Serialization.IXmlSerializable.GetSchema()
@@ -9982,7 +10492,8 @@ namespace System.Data.SqlTypes
             int lcid,
             System.Data.SqlTypes.SqlCompareOptions compareOptions,
             byte[] data
-        ) {
+        )
+        {
             throw null;
         }
         public SqlString(
@@ -9990,7 +10501,8 @@ namespace System.Data.SqlTypes
             System.Data.SqlTypes.SqlCompareOptions compareOptions,
             byte[] data,
             bool fUnicode
-        ) {
+        )
+        {
             throw null;
         }
         public SqlString(
@@ -9999,7 +10511,8 @@ namespace System.Data.SqlTypes
             byte[]? data,
             int index,
             int count
-        ) {
+        )
+        {
             throw null;
         }
         public SqlString(
@@ -10009,7 +10522,8 @@ namespace System.Data.SqlTypes
             int index,
             int count,
             bool fUnicode
-        ) {
+        )
+        {
             throw null;
         }
         public SqlString(string? data)
@@ -10024,7 +10538,8 @@ namespace System.Data.SqlTypes
             string? data,
             int lcid,
             System.Data.SqlTypes.SqlCompareOptions compareOptions
-        ) {
+        )
+        {
             throw null;
         }
         public System.Globalization.CompareInfo CompareInfo
@@ -10054,7 +10569,8 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlString Add(
             System.Data.SqlTypes.SqlString x,
             System.Data.SqlTypes.SqlString y
-        ) {
+        )
+        {
             throw null;
         }
         public System.Data.SqlTypes.SqlString Clone()
@@ -10063,7 +10579,8 @@ namespace System.Data.SqlTypes
         }
         public static System.Globalization.CompareOptions CompareOptionsFromSqlCompareOptions(
             System.Data.SqlTypes.SqlCompareOptions compareOptions
-        ) {
+        )
+        {
             throw null;
         }
         public int CompareTo(System.Data.SqlTypes.SqlString value)
@@ -10077,13 +10594,15 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlString Concat(
             System.Data.SqlTypes.SqlString x,
             System.Data.SqlTypes.SqlString y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean Equals(
             System.Data.SqlTypes.SqlString x,
             System.Data.SqlTypes.SqlString y
-        ) {
+        )
+        {
             throw null;
         }
         public override bool Equals(object? value)
@@ -10104,104 +10623,123 @@ namespace System.Data.SqlTypes
         }
         public static System.Xml.XmlQualifiedName GetXsdType(
             System.Xml.Schema.XmlSchemaSet schemaSet
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean GreaterThan(
             System.Data.SqlTypes.SqlString x,
             System.Data.SqlTypes.SqlString y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean GreaterThanOrEqual(
             System.Data.SqlTypes.SqlString x,
             System.Data.SqlTypes.SqlString y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean LessThan(
             System.Data.SqlTypes.SqlString x,
             System.Data.SqlTypes.SqlString y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean LessThanOrEqual(
             System.Data.SqlTypes.SqlString x,
             System.Data.SqlTypes.SqlString y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean NotEquals(
             System.Data.SqlTypes.SqlString x,
             System.Data.SqlTypes.SqlString y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlString operator +(
             System.Data.SqlTypes.SqlString x,
             System.Data.SqlTypes.SqlString y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator ==(
             System.Data.SqlTypes.SqlString x,
             System.Data.SqlTypes.SqlString y
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlString(
             System.Data.SqlTypes.SqlBoolean x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlString(
             System.Data.SqlTypes.SqlByte x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlString(
             System.Data.SqlTypes.SqlDateTime x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlString(
             System.Data.SqlTypes.SqlDecimal x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlString(
             System.Data.SqlTypes.SqlDouble x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlString(
             System.Data.SqlTypes.SqlGuid x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlString(
             System.Data.SqlTypes.SqlInt16 x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlString(
             System.Data.SqlTypes.SqlInt32 x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlString(
             System.Data.SqlTypes.SqlInt64 x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlString(
             System.Data.SqlTypes.SqlMoney x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator System.Data.SqlTypes.SqlString(
             System.Data.SqlTypes.SqlSingle x
-        ) {
+        )
+        {
             throw null;
         }
         public static explicit operator string(System.Data.SqlTypes.SqlString x)
@@ -10211,13 +10749,15 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlBoolean operator >(
             System.Data.SqlTypes.SqlString x,
             System.Data.SqlTypes.SqlString y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator >=(
             System.Data.SqlTypes.SqlString x,
             System.Data.SqlTypes.SqlString y
-        ) {
+        )
+        {
             throw null;
         }
         public static implicit operator System.Data.SqlTypes.SqlString(string x)
@@ -10227,19 +10767,22 @@ namespace System.Data.SqlTypes
         public static System.Data.SqlTypes.SqlBoolean operator !=(
             System.Data.SqlTypes.SqlString x,
             System.Data.SqlTypes.SqlString y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator <(
             System.Data.SqlTypes.SqlString x,
             System.Data.SqlTypes.SqlString y
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Data.SqlTypes.SqlBoolean operator <=(
             System.Data.SqlTypes.SqlString x,
             System.Data.SqlTypes.SqlString y
-        ) {
+        )
+        {
             throw null;
         }
         System.Xml.Schema.XmlSchema System.Xml.Serialization.IXmlSerializable.GetSchema()
@@ -10339,7 +10882,8 @@ namespace System.Data.SqlTypes
         }
         public static System.Xml.XmlQualifiedName GetXsdType(
             System.Xml.Schema.XmlSchemaSet schemaSet
-        ) {
+        )
+        {
             throw null;
         }
         System.Xml.Schema.XmlSchema? System.Xml.Serialization.IXmlSerializable.GetSchema()
@@ -10375,7 +10919,8 @@ namespace System.Xml
             string? prefix,
             string localName,
             string? namespaceURI
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Xml.XmlEntityReference CreateEntityReference(string name)

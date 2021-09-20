@@ -483,7 +483,8 @@ namespace System.Web.Razor.Parser
                         CurrentSymbol.Type == CSharpSymbolType.LessThan
                         || CurrentSymbol.Type == CSharpSymbolType.Transition
                     )
-                ) {
+                )
+                {
                     PutCurrentBack();
                 }
                 OtherParserBlock();
@@ -601,14 +602,16 @@ namespace System.Web.Razor.Parser
                     At(CSharpSymbolType.LeftBrace)
                     || At(CSharpSymbolType.LeftParenthesis)
                     || At(CSharpSymbolType.LeftBracket)
-                ) {
+                )
+                {
                     Accept(read);
                     if (
                         Balance(
                             BalancingModes.AllowCommentsAndTemplates
                                 | BalancingModes.BacktrackOnFailure
                         )
-                    ) {
+                    )
+                    {
                         Optional(CSharpSymbolType.RightBrace);
                     }
                     else
@@ -621,7 +624,8 @@ namespace System.Web.Razor.Parser
                 else if (
                     At(CSharpSymbolType.Transition)
                     && (NextIs(CSharpSymbolType.LessThan, CSharpSymbolType.Colon))
-                ) {
+                )
+                {
                     Accept(read);
                     Output(SpanKind.Code);
                     Template();

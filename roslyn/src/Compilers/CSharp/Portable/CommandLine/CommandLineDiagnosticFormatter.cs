@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string baseDirectory,
             bool displayFullPaths,
             bool displayEndLocations
-        ) {
+        )
+        {
             _baseDirectory = baseDirectory;
             _displayFullPaths = displayFullPaths;
             _displayEndLocations = displayEndLocations;
@@ -58,7 +59,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string path,
             string basePath,
             IFormatProvider formatter
-        ) {
+        )
+        {
             var normalizedPath = FileUtilities.NormalizeRelativePath(
                 path,
                 basePath,
@@ -88,7 +90,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             var normalizedDirectory = PathUtilities.GetDirectoryName(normalizedPath);
             if (
                 PathUtilities.IsSameDirectoryOrChildOf(normalizedDirectory, normalizedBaseDirectory)
-            ) {
+            )
+            {
                 return normalizedPath.Substring(
                     PathUtilities.IsDirectorySeparator(normalizedBaseDirectory.Last())
                       ? normalizedBaseDirectory.Length

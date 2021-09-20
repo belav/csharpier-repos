@@ -50,7 +50,8 @@ class ThreadStartStruct
             && "This is the string" == ((MyStruct)o).myStr
             && Int64.MaxValue == ((MyStruct)o).myLong
             && Double.MinValue == ((MyStruct)o).myDouble
-        ) {
+        )
+        {
             try
             {
                 ((MyStruct)o).myMutex.WaitOne();

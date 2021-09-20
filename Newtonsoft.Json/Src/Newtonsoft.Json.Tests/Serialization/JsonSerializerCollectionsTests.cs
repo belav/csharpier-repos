@@ -351,9 +351,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             public TestDictionaryPrivateParameterized() { }
 
             [JsonConstructor]
-            private TestDictionaryPrivateParameterized(
-                IEnumerable<KeyValuePair<string, int>> bars
-            ) : base(bars.ToDictionary(k => k.Key, k => k.Value)) { }
+            private TestDictionaryPrivateParameterized(IEnumerable<KeyValuePair<string, int>> bars)
+                : base(bars.ToDictionary(k => k.Key, k => k.Value)) { }
         }
 
         [Test]
@@ -554,7 +553,8 @@ namespace Newtonsoft.Json.Tests.Serialization
                     var j = onebasedArray.GetLowerBound(1);
                     j <= onebasedArray.GetUpperBound(1);
                     j++
-                ) {
+                )
+                {
                     onebasedArray.SetValue(i + "_" + j, new[] { i, j });
                 }
             }
@@ -2899,7 +2899,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             Type objectType,
             object existingValue,
             JsonSerializer serializer
-        ) {
+        )
+        {
             List<string> existingStrings = (List<string>)existingValue;
             List<string> newStrings = new List<string>(existingStrings);
 
@@ -2934,7 +2935,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             Type objectType,
             object existingValue,
             JsonSerializer serializer
-        ) {
+        )
+        {
             string existingString = (string)existingValue;
             string newString = existingString + (string)reader.Value;
 

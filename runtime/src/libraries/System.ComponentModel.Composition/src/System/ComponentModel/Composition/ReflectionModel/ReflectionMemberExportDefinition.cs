@@ -18,7 +18,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
             LazyMemberInfo member,
             ExportDefinition exportDefinition,
             ICompositionElement? origin
-        ) {
+        )
+        {
             if (exportDefinition == null)
             {
                 throw new ArgumentNullException(nameof(exportDefinition));

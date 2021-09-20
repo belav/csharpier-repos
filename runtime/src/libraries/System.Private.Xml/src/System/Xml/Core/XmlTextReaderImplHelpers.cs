@@ -160,7 +160,8 @@ namespace System.Xml
             }
             public override IDictionary<string, string> GetNamespacesInScope(
                 XmlNamespaceScope scope
-            ) {
+            )
+            {
                 return null!;
             }
             public override string LookupNamespace(string? prefix)
@@ -268,7 +269,8 @@ namespace System.Xml
             int IDtdParserAdapter.ParseNamedCharRef(
                 bool expand,
                 StringBuilder? internalSubsetBuilder
-            ) {
+            )
+            {
                 return _reader.DtdParserProxy_ParseNamedCharRef(expand, internalSubsetBuilder);
             }
 
@@ -313,7 +315,8 @@ namespace System.Xml
                 string systemId,
                 LineInfo keywordLineInfo,
                 LineInfo systemLiteralLineInfo
-            ) {
+            )
+            {
                 _reader.DtdParserProxy_OnSystemId(systemId, keywordLineInfo, systemLiteralLineInfo);
             }
 
@@ -321,7 +324,8 @@ namespace System.Xml
                 string publicId,
                 LineInfo keywordLineInfo,
                 LineInfo publicLiteralLineInfo
-            ) {
+            )
+            {
                 _reader.DtdParserProxy_OnPublicId(publicId, keywordLineInfo, publicLiteralLineInfo);
             }
 
@@ -555,7 +559,8 @@ namespace System.Xml
                 string localName,
                 string prefix,
                 string? nameWPrefix
-            ) {
+            )
+            {
                 Debug.Assert(localName != null);
                 Debug.Assert(localName.Length > 0);
 

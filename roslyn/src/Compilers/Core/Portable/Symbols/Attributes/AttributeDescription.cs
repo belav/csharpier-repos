@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis
             string name,
             byte[][] signatures,
             bool matchIgnoringCase = false
-        ) {
+        )
+        {
             RoslynDebug.Assert(@namespace != null);
             RoslynDebug.Assert(name != null);
             RoslynDebug.Assert(signatures != null);
@@ -107,7 +108,8 @@ namespace Microsoft.CodeAnalysis
                 string @namespace,
                 string name,
                 SerializationTypeCode underlying
-            ) {
+            )
+            {
                 Namespace = @namespace;
                 Name = name;
                 Underlying = underlying;

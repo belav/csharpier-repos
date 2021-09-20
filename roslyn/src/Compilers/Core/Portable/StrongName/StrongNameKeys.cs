@@ -77,7 +77,8 @@ namespace Microsoft.CodeAnalysis
             string? keyContainerName,
             string? keyFilePath,
             bool hasCounterSignature
-        ) {
+        )
+        {
             Debug.Assert(keyContainerName == null || keyPair.IsDefault);
             Debug.Assert(keyPair.IsDefault || keyFilePath != null);
 
@@ -94,7 +95,8 @@ namespace Microsoft.CodeAnalysis
             RSAParameters? privateKey,
             bool hasCounterSignature,
             CommonMessageProvider messageProvider
-        ) {
+        )
+        {
             Debug.Assert(!publicKey.IsDefaultOrEmpty);
 
             if (MetadataHelpers.IsValidPublicKey(publicKey))
@@ -124,7 +126,8 @@ namespace Microsoft.CodeAnalysis
         internal static StrongNameKeys Create(
             string? keyFilePath,
             CommonMessageProvider messageProvider
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(keyFilePath))
             {
                 return None;
@@ -158,7 +161,8 @@ namespace Microsoft.CodeAnalysis
             ImmutableArray<byte> keyFileContent,
             string keyFilePath,
             bool hasCounterSignature
-        ) {
+        )
+        {
             ImmutableArray<byte> keyPair;
             ImmutableArray<byte> publicKey;
             RSAParameters? privateKey = null;
@@ -180,7 +184,8 @@ namespace Microsoft.CodeAnalysis
                 }
                 else if (
                     CryptoBlobParser.TryParseKey(keyFileContent, out publicKey, out privateKey)
-                ) {
+                )
+                {
                     keyPair = keyFileContent;
                 }
                 else
@@ -213,7 +218,8 @@ namespace Microsoft.CodeAnalysis
             string? keyContainerName,
             bool hasCounterSignature,
             CommonMessageProvider messageProvider
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(keyFilePath) && string.IsNullOrEmpty(keyContainerName))
             {
                 return None;
@@ -261,7 +267,8 @@ namespace Microsoft.CodeAnalysis
             string? keyContainerName,
             object message,
             CommonMessageProvider messageProvider
-        ) {
+        )
+        {
             if (keyContainerName != null)
             {
                 return GetContainerError(messageProvider, keyContainerName, message);
@@ -277,7 +284,8 @@ namespace Microsoft.CodeAnalysis
             CommonMessageProvider messageProvider,
             string name,
             object message
-        ) {
+        )
+        {
             return messageProvider.CreateDiagnostic(
                 messageProvider.ERR_PublicKeyContainerFailure,
                 Location.None,
@@ -290,7 +298,8 @@ namespace Microsoft.CodeAnalysis
             CommonMessageProvider messageProvider,
             string path,
             object message
-        ) {
+        )
+        {
             return messageProvider.CreateDiagnostic(
                 messageProvider.ERR_PublicKeyFileFailure,
                 Location.None,

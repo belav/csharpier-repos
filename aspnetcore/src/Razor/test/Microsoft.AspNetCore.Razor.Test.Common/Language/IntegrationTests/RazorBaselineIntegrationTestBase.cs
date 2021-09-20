@@ -191,7 +191,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                         if (
                             sourceMapping.OriginalSpan.LineIndex >= linePragma.StartLineIndex
                             && sourceMapping.OriginalSpan.LineIndex <= linePragma.EndLineIndex
-                        ) {
+                        )
+                        {
                             // Found a match.
                             foundMatchingPragma = true;
                             break;
@@ -221,14 +222,16 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                         !string.IsNullOrWhiteSpace(content)
                         && classifiedSpan.BlockKind != BlockKindInternal.Directive
                         && classifiedSpan.SpanKind == SpanKindInternal.Code
-                    ) {
+                    )
+                    {
                         var foundMatchingPragma = false;
                         foreach (var linePragma in linePragmas)
                         {
                             if (
                                 classifiedSpan.Span.LineIndex >= linePragma.StartLineIndex
                                 && classifiedSpan.Span.LineIndex <= linePragma.EndLineIndex
-                            ) {
+                            )
+                            {
                                 // Found a match.
                                 foundMatchingPragma = true;
                                 break;

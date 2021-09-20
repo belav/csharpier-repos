@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         public void GetParameterDefaultValues_ReturnsExpectedValues(
             string methodName,
             object[] expectedValues
-        ) {
+        )
+        {
             // Arrange
             var methodInfo = typeof(TestObject).GetMethod(methodName);
 

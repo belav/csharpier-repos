@@ -879,7 +879,8 @@ namespace System.Collections
                 int count,
                 object? value,
                 IComparer? comparer
-            ) {
+            )
+            {
                 if (index < 0 || count < 0)
                     throw new ArgumentOutOfRangeException(
                         index < 0 ? nameof(index) : nameof(count),
@@ -1256,7 +1257,8 @@ namespace System.Collections
                     IListWrapper listWrapper,
                     int startIndex,
                     int count
-                ) {
+                )
+                {
                     _en = listWrapper.GetEnumerator();
                     _initialStartIndex = startIndex;
                     _initialCount = count;
@@ -1419,7 +1421,8 @@ namespace System.Collections
                 int count,
                 object? value,
                 IComparer? comparer
-            ) {
+            )
+            {
                 lock (_root)
                 {
                     return _list.BinarySearch(index, count, value, comparer);
@@ -1888,7 +1891,8 @@ namespace System.Collections
                 int count,
                 object? value,
                 IComparer? comparer
-            ) {
+            )
+            {
                 return _list.BinarySearch(index, count, value, comparer);
             }
 
@@ -2148,7 +2152,8 @@ namespace System.Collections
                 int count,
                 object? value,
                 IComparer? comparer
-            ) {
+            )
+            {
                 return _list.BinarySearch(index, count, value, comparer);
             }
 
@@ -2420,7 +2425,8 @@ namespace System.Collections
                 int count,
                 object? value,
                 IComparer? comparer
-            ) {
+            )
+            {
                 if (index < 0 || count < 0)
                     throw new ArgumentOutOfRangeException(
                         index < 0 ? nameof(index) : nameof(count),

@@ -68,7 +68,8 @@ namespace System.Net.Sockets.Tests
                     SocketType.Dgram,
                     ProtocolType.Udp
                 )
-            ) {
+            )
+            {
                 int port = receiver.BindToAnonymousPort(IPAddress.Loopback);
 
                 var waitHandle = new ManualResetEvent(false);

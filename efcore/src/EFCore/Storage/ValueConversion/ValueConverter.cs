@@ -38,7 +38,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
             LambdaExpression convertToProviderExpression,
             LambdaExpression convertFromProviderExpression,
             ConverterMappingHints? mappingHints = null
-        ) {
+        )
+        {
             Check.NotNull(convertToProviderExpression, nameof(convertToProviderExpression));
             Check.NotNull(convertFromProviderExpression, nameof(convertFromProviderExpression));
 
@@ -100,7 +101,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
             Type type,
             Type converterType,
             params Type[] supportedTypes
-        ) {
+        )
+        {
             Check.NotNull(type, nameof(type));
             Check.NotNull(converterType, nameof(converterType));
             Check.NotEmpty(supportedTypes, nameof(supportedTypes));
@@ -135,7 +137,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
             if (
                 ProviderClrType.UnwrapNullableType()
                 != secondConverter.ModelClrType.UnwrapNullableType()
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     CoreStrings.ConvertersCannotBeComposed(
                         ModelClrType.ShortDisplayName(),

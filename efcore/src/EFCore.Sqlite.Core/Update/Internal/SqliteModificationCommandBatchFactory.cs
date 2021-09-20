@@ -33,7 +33,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Update.Internal
         /// </summary>
         public SqliteModificationCommandBatchFactory(
             ModificationCommandBatchFactoryDependencies dependencies
-        ) {
+        )
+        {
             Check.NotNull(dependencies, nameof(dependencies));
 
             _dependencies = dependencies;

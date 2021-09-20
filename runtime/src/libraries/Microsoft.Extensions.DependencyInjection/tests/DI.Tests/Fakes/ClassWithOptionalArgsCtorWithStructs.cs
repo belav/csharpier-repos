@@ -31,7 +31,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests.Fakes
             Guid guidDefault = default(Guid),
             CustomStruct customStruct = new CustomStruct(),
             CustomStruct customStructDefault = default(CustomStruct)
-        ) {
+        )
+        {
             DateTime = dateTime;
             DateTimeDefault = dateTimeDefault;
             TimeSpan = timeSpan;

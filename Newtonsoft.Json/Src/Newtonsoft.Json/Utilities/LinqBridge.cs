@@ -79,7 +79,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
                     !(servesItself is TResult[])
                     || servesItself.GetType().GetElementType() == typeof(TResult)
                 )
-            ) {
+            )
+            {
                 return servesItself;
             }
 
@@ -159,7 +160,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static IEnumerable<TSource> Where<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, bool> predicate
-        ) {
+        )
+        {
             CheckNotNull(source, "source");
             CheckNotNull(predicate, "predicate");
 
@@ -169,7 +171,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         private static IEnumerable<TSource> WhereYield<TSource>(
             IEnumerable<TSource> source,
             Func<TSource, bool> predicate
-        ) {
+        )
+        {
             foreach (var item in source)
                 if (predicate(item))
                     yield return item;
@@ -182,7 +185,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static IEnumerable<TSource> Where<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, int, bool> predicate
-        ) {
+        )
+        {
             CheckNotNull(source, "source");
             CheckNotNull(predicate, "predicate");
 
@@ -192,7 +196,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         private static IEnumerable<TSource> WhereYield<TSource>(
             IEnumerable<TSource> source,
             Func<TSource, int, bool> predicate
-        ) {
+        )
+        {
             var i = 0;
             foreach (var item in source)
                 if (predicate(item, i++))
@@ -206,7 +211,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static IEnumerable<TResult> Select<TSource, TResult>(
             this IEnumerable<TSource> source,
             Func<TSource, TResult> selector
-        ) {
+        )
+        {
             CheckNotNull(source, "source");
             CheckNotNull(selector, "selector");
 
@@ -216,7 +222,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         private static IEnumerable<TResult> SelectYield<TSource, TResult>(
             IEnumerable<TSource> source,
             Func<TSource, TResult> selector
-        ) {
+        )
+        {
             foreach (var item in source)
                 yield return selector(item);
         }
@@ -229,7 +236,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static IEnumerable<TResult> Select<TSource, TResult>(
             this IEnumerable<TSource> source,
             Func<TSource, int, TResult> selector
-        ) {
+        )
+        {
             CheckNotNull(source, "source");
             CheckNotNull(selector, "selector");
 
@@ -239,7 +247,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         private static IEnumerable<TResult> SelectYield<TSource, TResult>(
             IEnumerable<TSource> source,
             Func<TSource, int, TResult> selector
-        ) {
+        )
+        {
             var i = 0;
             foreach (var item in source)
                 yield return selector(item, i++);
@@ -253,7 +262,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static IEnumerable<TResult> SelectMany<TSource, TResult>(
             this IEnumerable<TSource> source,
             Func<TSource, IEnumerable<TResult>> selector
-        ) {
+        )
+        {
             CheckNotNull(selector, "selector");
 
             return source.SelectMany((item, i) => selector(item));
@@ -269,7 +279,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static IEnumerable<TResult> SelectMany<TSource, TResult>(
             this IEnumerable<TSource> source,
             Func<TSource, int, IEnumerable<TResult>> selector
-        ) {
+        )
+        {
             CheckNotNull(selector, "selector");
 
             return source.SelectMany(selector, (item, subitem) => subitem);
@@ -285,7 +296,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             this IEnumerable<TSource> source,
             Func<TSource, IEnumerable<TCollection>> collectionSelector,
             Func<TSource, TCollection, TResult> resultSelector
-        ) {
+        )
+        {
             CheckNotNull(collectionSelector, "collectionSelector");
 
             return source.SelectMany((item, i) => collectionSelector(item), resultSelector);
@@ -303,7 +315,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             this IEnumerable<TSource> source,
             Func<TSource, int, IEnumerable<TCollection>> collectionSelector,
             Func<TSource, TCollection, TResult> resultSelector
-        ) {
+        )
+        {
             CheckNotNull(source, "source");
             CheckNotNull(collectionSelector, "collectionSelector");
             CheckNotNull(resultSelector, "resultSelector");
@@ -315,7 +328,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             this IEnumerable<TSource> source,
             Func<TSource, int, IEnumerable<TCollection>> collectionSelector,
             Func<TSource, TCollection, TResult> resultSelector
-        ) {
+        )
+        {
             var i = 0;
             foreach (var item in source)
                 foreach (var subitem in collectionSelector(item, i++))
@@ -329,7 +343,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static IEnumerable<TSource> TakeWhile<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, bool> predicate
-        ) {
+        )
+        {
             CheckNotNull(predicate, "predicate");
 
             return source.TakeWhile((item, i) => predicate(item));
@@ -343,7 +358,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static IEnumerable<TSource> TakeWhile<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, int, bool> predicate
-        ) {
+        )
+        {
             CheckNotNull(source, "source");
             CheckNotNull(predicate, "predicate");
 
@@ -353,7 +369,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         private static IEnumerable<TSource> TakeWhileYield<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, int, bool> predicate
-        ) {
+        )
+        {
             var i = 0;
             foreach (var item in source)
                 if (predicate(item, i++))
@@ -378,7 +395,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         private static TSource FirstImpl<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource> empty
-        ) {
+        )
+        {
             CheckNotNull(source, "source");
             MiscellaneousUtils.Assert(empty != null);
 
@@ -406,7 +424,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static TSource First<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, bool> predicate
-        ) {
+        )
+        {
             return First(source.Where(predicate));
         }
 
@@ -428,7 +447,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static TSource FirstOrDefault<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, bool> predicate
-        ) {
+        )
+        {
             return FirstOrDefault(source.Where(predicate));
         }
 
@@ -439,7 +459,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         private static TSource LastImpl<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource> empty
-        ) {
+        )
+        {
             CheckNotNull(source, "source");
 
             var list = source as IList<TSource>; // optimized case for lists
@@ -475,7 +496,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static TSource Last<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, bool> predicate
-        ) {
+        )
+        {
             return Last(source.Where(predicate));
         }
 
@@ -497,7 +519,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static TSource LastOrDefault<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, bool> predicate
-        ) {
+        )
+        {
             return LastOrDefault(source.Where(predicate));
         }
 
@@ -508,7 +531,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         private static TSource SingleImpl<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource> empty
-        ) {
+        )
+        {
             CheckNotNull(source, "source");
 
             using (var e = source.GetEnumerator())
@@ -545,7 +569,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static TSource Single<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, bool> predicate
-        ) {
+        )
+        {
             return Single(source.Where(predicate));
         }
 
@@ -570,7 +595,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static TSource SingleOrDefault<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, bool> predicate
-        ) {
+        )
+        {
             return SingleOrDefault(source.Where(predicate));
         }
 
@@ -607,7 +633,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static TSource ElementAtOrDefault<TSource>(
             this IEnumerable<TSource> source,
             int index
-        ) {
+        )
+        {
             CheckNotNull(source, "source");
 
             if (index < 0)
@@ -647,7 +674,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static IEnumerable<TSource> Take<TSource>(
             this IEnumerable<TSource> source,
             int count
-        ) {
+        )
+        {
             return source.Where((item, i) => i < count);
         }
 
@@ -659,7 +687,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static IEnumerable<TSource> Skip<TSource>(
             this IEnumerable<TSource> source,
             int count
-        ) {
+        )
+        {
             return source.Where((item, i) => i >= count);
         }
 
@@ -671,7 +700,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static IEnumerable<TSource> SkipWhile<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, bool> predicate
-        ) {
+        )
+        {
             CheckNotNull(predicate, "predicate");
 
             return source.SkipWhile((item, i) => predicate(item));
@@ -686,7 +716,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static IEnumerable<TSource> SkipWhile<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, int, bool> predicate
-        ) {
+        )
+        {
             CheckNotNull(source, "source");
             CheckNotNull(predicate, "predicate");
 
@@ -696,7 +727,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         private static IEnumerable<TSource> SkipWhileYield<TSource>(
             IEnumerable<TSource> source,
             Func<TSource, int, bool> predicate
-        ) {
+        )
+        {
             using (var e = source.GetEnumerator())
             {
                 for (var i = 0;; i++)
@@ -749,7 +781,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static int Count<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, bool> predicate
-        ) {
+        )
+        {
             return Count(source.Where(predicate));
         }
 
@@ -776,7 +809,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static long LongCount<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, bool> predicate
-        ) {
+        )
+        {
             return LongCount(source.Where(predicate));
         }
 
@@ -787,7 +821,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static IEnumerable<TSource> Concat<TSource>(
             this IEnumerable<TSource> first,
             IEnumerable<TSource> second
-        ) {
+        )
+        {
             CheckNotNull(first, "first");
             CheckNotNull(second, "second");
 
@@ -797,7 +832,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         private static IEnumerable<TSource> ConcatYield<TSource>(
             IEnumerable<TSource> first,
             IEnumerable<TSource> second
-        ) {
+        )
+        {
             foreach (var item in first)
                 yield return item;
 
@@ -854,7 +890,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static IEnumerable<TSource> Distinct<TSource>(
             this IEnumerable<TSource> source,
             IEqualityComparer<TSource> comparer
-        ) {
+        )
+        {
             CheckNotNull(source, "source");
 
             return DistinctYield(source, comparer);
@@ -863,7 +900,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         private static IEnumerable<TSource> DistinctYield<TSource>(
             IEnumerable<TSource> source,
             IEqualityComparer<TSource> comparer
-        ) {
+        )
+        {
             var set = new Dictionary<TSource, object>(comparer);
             var gotNull = false;
 
@@ -895,7 +933,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static ILookup<TKey, TSource> ToLookup<TSource, TKey>(
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector
-        ) {
+        )
+        {
             return ToLookup(
                 source,
                 keySelector,
@@ -914,7 +953,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector,
             IEqualityComparer<TKey> comparer
-        ) {
+        )
+        {
             return ToLookup(source, keySelector, e => e, comparer);
         }
 
@@ -928,7 +968,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector,
             Func<TSource, TElement> elementSelector
-        ) {
+        )
+        {
             return ToLookup(
                 source,
                 keySelector,
@@ -948,7 +989,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             Func<TSource, TKey> keySelector,
             Func<TSource, TElement> elementSelector,
             IEqualityComparer<TKey> comparer
-        ) {
+        )
+        {
             CheckNotNull(source, "source");
             CheckNotNull(keySelector, "keySelector");
             CheckNotNull(elementSelector, "elementSelector");
@@ -980,7 +1022,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static IEnumerable<IGrouping<TKey, TSource>> GroupBy<TSource, TKey>(
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector
-        ) {
+        )
+        {
             return GroupBy(
                 source,
                 keySelector, /* comparer */
@@ -998,7 +1041,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector,
             IEqualityComparer<TKey> comparer
-        ) {
+        )
+        {
             return GroupBy(source, keySelector, e => e, comparer);
         }
 
@@ -1012,7 +1056,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector,
             Func<TSource, TElement> elementSelector
-        ) {
+        )
+        {
             return GroupBy(
                 source,
                 keySelector,
@@ -1032,7 +1077,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             Func<TSource, TKey> keySelector,
             Func<TSource, TElement> elementSelector,
             IEqualityComparer<TKey> comparer
-        ) {
+        )
+        {
             CheckNotNull(source, "source");
             CheckNotNull(keySelector, "keySelector");
             CheckNotNull(elementSelector, "elementSelector");
@@ -1050,7 +1096,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector,
             Func<TKey, IEnumerable<TSource>, TResult> resultSelector
-        ) {
+        )
+        {
             return GroupBy(
                 source,
                 keySelector,
@@ -1071,7 +1118,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             Func<TSource, TKey> keySelector,
             Func<TKey, IEnumerable<TSource>, TResult> resultSelector,
             IEqualityComparer<TKey> comparer
-        ) {
+        )
+        {
             CheckNotNull(source, "source");
             CheckNotNull(keySelector, "keySelector");
             CheckNotNull(resultSelector, "resultSelector");
@@ -1090,7 +1138,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             Func<TSource, TKey> keySelector,
             Func<TSource, TElement> elementSelector,
             Func<TKey, IEnumerable<TElement>, TResult> resultSelector
-        ) {
+        )
+        {
             return GroupBy(
                 source,
                 keySelector,
@@ -1114,7 +1163,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             Func<TSource, TElement> elementSelector,
             Func<TKey, IEnumerable<TElement>, TResult> resultSelector,
             IEqualityComparer<TKey> comparer
-        ) {
+        )
+        {
             CheckNotNull(source, "source");
             CheckNotNull(keySelector, "keySelector");
             CheckNotNull(elementSelector, "elementSelector");
@@ -1131,7 +1181,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static TSource Aggregate<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, TSource, TSource> func
-        ) {
+        )
+        {
             CheckNotNull(source, "source");
             CheckNotNull(func, "func");
 
@@ -1153,7 +1204,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             this IEnumerable<TSource> source,
             TAccumulate seed,
             Func<TAccumulate, TSource, TAccumulate> func
-        ) {
+        )
+        {
             return Aggregate(source, seed, func, r => r);
         }
 
@@ -1168,7 +1220,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             TAccumulate seed,
             Func<TAccumulate, TSource, TAccumulate> func,
             Func<TAccumulate, TResult> resultSelector
-        ) {
+        )
+        {
             CheckNotNull(source, "source");
             CheckNotNull(func, "func");
             CheckNotNull(resultSelector, "resultSelector");
@@ -1189,7 +1242,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static IEnumerable<TSource> Union<TSource>(
             this IEnumerable<TSource> first,
             IEnumerable<TSource> second
-        ) {
+        )
+        {
             return Union(
                 first,
                 second, /* comparer */
@@ -1206,7 +1260,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             this IEnumerable<TSource> first,
             IEnumerable<TSource> second,
             IEqualityComparer<TSource> comparer
-        ) {
+        )
+        {
             return first.Concat(second).Distinct(comparer);
         }
 
@@ -1229,7 +1284,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static IEnumerable<TSource> DefaultIfEmpty<TSource>(
             this IEnumerable<TSource> source,
             TSource defaultValue
-        ) {
+        )
+        {
             CheckNotNull(source, "source");
 
             return DefaultIfEmptyYield(source, defaultValue);
@@ -1238,7 +1294,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         private static IEnumerable<TSource> DefaultIfEmptyYield<TSource>(
             IEnumerable<TSource> source,
             TSource defaultValue
-        ) {
+        )
+        {
             using (var e = source.GetEnumerator())
             {
                 if (!e.MoveNext())
@@ -1258,7 +1315,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static bool All<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, bool> predicate
-        ) {
+        )
+        {
             CheckNotNull(source, "source");
             CheckNotNull(predicate, "predicate");
 
@@ -1289,7 +1347,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static bool Any<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, bool> predicate
-        ) {
+        )
+        {
             foreach (TSource item in source)
             {
                 if (predicate(item))
@@ -1323,7 +1382,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             this IEnumerable<TSource> source,
             TSource value,
             IEqualityComparer<TSource> comparer
-        ) {
+        )
+        {
             CheckNotNull(source, "source");
 
             if (comparer == null)
@@ -1345,7 +1405,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static bool SequenceEqual<TSource>(
             this IEnumerable<TSource> first,
             IEnumerable<TSource> second
-        ) {
+        )
+        {
             return first.SequenceEqual(
                 second, /* comparer */
                 null
@@ -1361,7 +1422,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             this IEnumerable<TSource> first,
             IEnumerable<TSource> second,
             IEqualityComparer<TSource> comparer
-        ) {
+        )
+        {
             CheckNotNull(first, "first");
             CheckNotNull(second, "second");
 
@@ -1370,7 +1432,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             using (
                 IEnumerator<TSource> lhs = first.GetEnumerator(),
                     rhs = second.GetEnumerator()
-            ) {
+            )
+            {
                 do
                 {
                     if (!lhs.MoveNext())
@@ -1391,7 +1454,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         private static TSource MinMaxImpl<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, TSource, bool> lesser
-        ) {
+        )
+        {
             CheckNotNull(source, "source");
             MiscellaneousUtils.Assert(lesser != null);
 
@@ -1433,7 +1497,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static TResult Min<TSource, TResult>(
             this IEnumerable<TSource> source,
             Func<TSource, TResult> selector
-        ) {
+        )
+        {
             return source.Select(selector).Min();
         }
 
@@ -1455,7 +1520,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static TResult Max<TSource, TResult>(
             this IEnumerable<TSource> source,
             Func<TSource, TResult> selector
-        ) {
+        )
+        {
             return source.Select(selector).Max();
         }
 
@@ -1486,7 +1552,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static IOrderedEnumerable<TSource> OrderBy<TSource, TKey>(
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector
-        ) {
+        )
+        {
             return source.OrderBy(
                 keySelector, /* comparer */
                 null
@@ -1502,7 +1569,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector,
             IComparer<TKey> comparer
-        ) {
+        )
+        {
             CheckNotNull(source, "source");
             CheckNotNull(keySelector, "keySelector");
 
@@ -1521,7 +1589,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static IOrderedEnumerable<TSource> OrderByDescending<TSource, TKey>(
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector
-        ) {
+        )
+        {
             return source.OrderByDescending(
                 keySelector, /* comparer */
                 null
@@ -1537,7 +1606,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector,
             IComparer<TKey> comparer
-        ) {
+        )
+        {
             CheckNotNull(source, "source");
             CheckNotNull(source, "keySelector");
 
@@ -1557,7 +1627,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static IOrderedEnumerable<TSource> ThenBy<TSource, TKey>(
             this IOrderedEnumerable<TSource> source,
             Func<TSource, TKey> keySelector
-        ) {
+        )
+        {
             return source.ThenBy(
                 keySelector, /* comparer */
                 null
@@ -1573,7 +1644,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             this IOrderedEnumerable<TSource> source,
             Func<TSource, TKey> keySelector,
             IComparer<TKey> comparer
-        ) {
+        )
+        {
             CheckNotNull(source, "source");
 
             return source.CreateOrderedEnumerable(
@@ -1591,7 +1663,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static IOrderedEnumerable<TSource> ThenByDescending<TSource, TKey>(
             this IOrderedEnumerable<TSource> source,
             Func<TSource, TKey> keySelector
-        ) {
+        )
+        {
             return source.ThenByDescending(
                 keySelector, /* comparer */
                 null
@@ -1607,7 +1680,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             this IOrderedEnumerable<TSource> source,
             Func<TSource, TKey> keySelector,
             IComparer<TKey> comparer
-        ) {
+        )
+        {
             CheckNotNull(source, "source");
 
             return source.CreateOrderedEnumerable(
@@ -1626,7 +1700,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             IEnumerable<TSource> second,
             IEqualityComparer<TSource> comparer,
             bool flag
-        ) {
+        )
+        {
             CheckNotNull(first, "first");
             CheckNotNull(second, "second");
 
@@ -1658,7 +1733,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static IEnumerable<TSource> Intersect<TSource>(
             this IEnumerable<TSource> first,
             IEnumerable<TSource> second
-        ) {
+        )
+        {
             return first.Intersect(
                 second, /* comparer */
                 null
@@ -1674,7 +1750,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             this IEnumerable<TSource> first,
             IEnumerable<TSource> second,
             IEqualityComparer<TSource> comparer
-        ) {
+        )
+        {
             return IntersectExceptImpl(
                 first,
                 second,
@@ -1691,7 +1768,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static IEnumerable<TSource> Except<TSource>(
             this IEnumerable<TSource> first,
             IEnumerable<TSource> second
-        ) {
+        )
+        {
             return first.Except(
                 second, /* comparer */
                 null
@@ -1707,7 +1785,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             this IEnumerable<TSource> first,
             IEnumerable<TSource> second,
             IEqualityComparer<TSource> comparer
-        ) {
+        )
+        {
             return IntersectExceptImpl(
                 first,
                 second,
@@ -1725,7 +1804,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static Dictionary<TKey, TSource> ToDictionary<TSource, TKey>(
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector
-        ) {
+        )
+        {
             return source.ToDictionary(
                 keySelector, /* comparer */
                 null
@@ -1742,7 +1822,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector,
             IEqualityComparer<TKey> comparer
-        ) {
+        )
+        {
             return source.ToDictionary(keySelector, e => e);
         }
 
@@ -1756,7 +1837,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector,
             Func<TSource, TElement> elementSelector
-        ) {
+        )
+        {
             return source.ToDictionary(
                 keySelector,
                 elementSelector, /* comparer */
@@ -1775,7 +1857,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             Func<TSource, TKey> keySelector,
             Func<TSource, TElement> elementSelector,
             IEqualityComparer<TKey> comparer
-        ) {
+        )
+        {
             CheckNotNull(source, "source");
             CheckNotNull(keySelector, "keySelector");
             CheckNotNull(elementSelector, "elementSelector");
@@ -1813,7 +1896,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             Func<TOuter, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
             Func<TOuter, TInner, TResult> resultSelector
-        ) {
+        )
+        {
             return outer.Join(
                 inner,
                 outerKeySelector,
@@ -1836,7 +1920,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             Func<TInner, TKey> innerKeySelector,
             Func<TOuter, TInner, TResult> resultSelector,
             IEqualityComparer<TKey> comparer
-        ) {
+        )
+        {
             CheckNotNull(outer, "outer");
             CheckNotNull(inner, "inner");
             CheckNotNull(outerKeySelector, "outerKeySelector");
@@ -1862,7 +1947,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             Func<TOuter, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
             Func<TOuter, IEnumerable<TInner>, TResult> resultSelector
-        ) {
+        )
+        {
             return outer.GroupJoin(
                 inner,
                 outerKeySelector,
@@ -1886,7 +1972,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             Func<TInner, TKey> innerKeySelector,
             Func<TOuter, IEnumerable<TInner>, TResult> resultSelector,
             IEqualityComparer<TKey> comparer
-        ) {
+        )
+        {
             CheckNotNull(outer, "outer");
             CheckNotNull(inner, "inner");
             CheckNotNull(outerKeySelector, "outerKeySelector");
@@ -1946,7 +2033,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static int Sum<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, int> selector
-        ) {
+        )
+        {
             return source.Select(selector).Sum();
         }
 
@@ -1983,7 +2071,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static double Average<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, int> selector
-        ) {
+        )
+        {
             return source.Select(selector).Average();
         }
 
@@ -2011,7 +2100,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static int? Sum<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, int?> selector
-        ) {
+        )
+        {
             return source.Select(selector).Sum();
         }
 
@@ -2048,7 +2138,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static double? Average<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, int?> selector
-        ) {
+        )
+        {
             return source.Select(selector).Average();
         }
 
@@ -2072,7 +2163,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static int? Min<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, int?> selector
-        ) {
+        )
+        {
             return source.Select(selector).Min();
         }
 
@@ -2100,7 +2192,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static int? Max<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, int?> selector
-        ) {
+        )
+        {
             return source.Select(selector).Max();
         }
 
@@ -2128,7 +2221,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static long Sum<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, long> selector
-        ) {
+        )
+        {
             return source.Select(selector).Sum();
         }
 
@@ -2165,7 +2259,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static double Average<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, long> selector
-        ) {
+        )
+        {
             return source.Select(selector).Average();
         }
 
@@ -2193,7 +2288,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static long? Sum<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, long?> selector
-        ) {
+        )
+        {
             return source.Select(selector).Sum();
         }
 
@@ -2230,7 +2326,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static double? Average<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, long?> selector
-        ) {
+        )
+        {
             return source.Select(selector).Average();
         }
 
@@ -2254,7 +2351,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static long? Min<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, long?> selector
-        ) {
+        )
+        {
             return source.Select(selector).Min();
         }
 
@@ -2282,7 +2380,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static long? Max<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, long?> selector
-        ) {
+        )
+        {
             return source.Select(selector).Max();
         }
 
@@ -2310,7 +2409,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static float Sum<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, float> selector
-        ) {
+        )
+        {
             return source.Select(selector).Sum();
         }
 
@@ -2347,7 +2447,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static float Average<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, float> selector
-        ) {
+        )
+        {
             return source.Select(selector).Average();
         }
 
@@ -2375,7 +2476,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static float? Sum<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, float?> selector
-        ) {
+        )
+        {
             return source.Select(selector).Sum();
         }
 
@@ -2412,7 +2514,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static float? Average<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, float?> selector
-        ) {
+        )
+        {
             return source.Select(selector).Average();
         }
 
@@ -2436,7 +2539,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static float? Min<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, float?> selector
-        ) {
+        )
+        {
             return source.Select(selector).Min();
         }
 
@@ -2464,7 +2568,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static float? Max<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, float?> selector
-        ) {
+        )
+        {
             return source.Select(selector).Max();
         }
 
@@ -2492,7 +2597,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static double Sum<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, double> selector
-        ) {
+        )
+        {
             return source.Select(selector).Sum();
         }
 
@@ -2529,7 +2635,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static double Average<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, double> selector
-        ) {
+        )
+        {
             return source.Select(selector).Average();
         }
 
@@ -2557,7 +2664,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static double? Sum<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, double?> selector
-        ) {
+        )
+        {
             return source.Select(selector).Sum();
         }
 
@@ -2594,7 +2702,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static double? Average<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, double?> selector
-        ) {
+        )
+        {
             return source.Select(selector).Average();
         }
 
@@ -2618,7 +2727,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static double? Min<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, double?> selector
-        ) {
+        )
+        {
             return source.Select(selector).Min();
         }
 
@@ -2646,7 +2756,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static double? Max<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, double?> selector
-        ) {
+        )
+        {
             return source.Select(selector).Max();
         }
 
@@ -2674,7 +2785,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static decimal Sum<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, decimal> selector
-        ) {
+        )
+        {
             CheckNotNull(source, "source");
             CheckNotNull(selector, "selector");
 
@@ -2720,7 +2832,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static decimal Average<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, decimal> selector
-        ) {
+        )
+        {
             return source.Select(selector).Average();
         }
 
@@ -2748,7 +2861,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static decimal? Sum<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, decimal?> selector
-        ) {
+        )
+        {
             return source.Select(selector).Sum();
         }
 
@@ -2785,7 +2899,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static decimal? Average<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, decimal?> selector
-        ) {
+        )
+        {
             return source.Select(selector).Average();
         }
 
@@ -2809,7 +2924,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static decimal? Min<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, decimal?> selector
-        ) {
+        )
+        {
             return source.Select(selector).Min();
         }
 
@@ -2837,7 +2953,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public static decimal? Max<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, decimal?> selector
-        ) {
+        )
+        {
             return source.Select(selector).Max();
         }
     }
@@ -2941,7 +3058,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
 
         public IEnumerable<TResult> ApplyResultSelector<TResult>(
             Func<TKey, IEnumerable<TElement>, TResult> resultSelector
-        ) {
+        )
+        {
             if (resultSelector == null)
                 throw new ArgumentNullException("resultSelector");
 
@@ -2982,7 +3100,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             Func<T, K> keySelector,
             IComparer<K> comparer,
             bool descending
-        ) {
+        )
+        {
             if (source == null)
                 throw new ArgumentNullException("source");
             if (keySelector == null)
@@ -3008,7 +3127,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             Func<T, KK> keySelector,
             IComparer<KK> comparer,
             bool descending
-        ) {
+        )
+        {
             return new OrderedEnumerable<T, KK>(
                 _source,
                 _comparisons,

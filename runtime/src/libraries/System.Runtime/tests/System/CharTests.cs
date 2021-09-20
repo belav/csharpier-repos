@@ -65,7 +65,8 @@ namespace System.Tests
         [InlineData(int.MinValue)]
         public static void ConvertFromUtf32_InvalidUtf32_ThrowsArgumentOutOfRangeException(
             int utf32
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "utf32",
                 () => char.ConvertFromUtf32(utf32)
@@ -171,7 +172,8 @@ namespace System.Tests
             char highSurrogate,
             char lowSurrogate,
             int expected
-        ) {
+        )
+        {
             Assert.Equal(expected, char.ConvertToUtf32(highSurrogate, lowSurrogate));
         }
 
@@ -987,7 +989,8 @@ namespace System.Tests
                     UnicodeCategory.TitlecaseLetter,
                     UnicodeCategory.LetterNumber
                 )
-            ) {
+            )
+            {
                 Assert.Equal(c, char.ToLower(c));
             }
         }
@@ -1013,7 +1016,8 @@ namespace System.Tests
                     UnicodeCategory.TitlecaseLetter,
                     UnicodeCategory.LetterNumber
                 )
-            ) {
+            )
+            {
                 Assert.Equal(c, char.ToLowerInvariant(c));
             }
         }
@@ -1048,7 +1052,8 @@ namespace System.Tests
                     UnicodeCategory.TitlecaseLetter,
                     UnicodeCategory.LetterNumber
                 )
-            ) {
+            )
+            {
                 Assert.Equal(c, char.ToUpper(c));
             }
         }
@@ -1074,7 +1079,8 @@ namespace System.Tests
                     UnicodeCategory.TitlecaseLetter,
                     UnicodeCategory.LetterNumber
                 )
-            ) {
+            )
+            {
                 Assert.Equal(c, char.ToUpperInvariant(c));
             }
         }
@@ -1127,7 +1133,8 @@ namespace System.Tests
 
         private static IEnumerable<char> GetTestCharsNotInCategory(
             params UnicodeCategory[] categories
-        ) {
+        )
+        {
             Assert.Equal(s_latinTestSet.Length, s_unicodeTestSet.Length);
 
             for (int i = 0; i < s_latinTestSet.Length; i++)

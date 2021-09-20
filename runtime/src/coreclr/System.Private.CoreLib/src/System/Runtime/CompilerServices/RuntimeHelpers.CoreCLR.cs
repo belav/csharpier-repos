@@ -95,7 +95,8 @@ namespace System.Runtime.CompilerServices
         public static unsafe void PrepareMethod(
             RuntimeMethodHandle method,
             RuntimeTypeHandle[]? instantiation
-        ) {
+        )
+        {
             IRuntimeMethodInfo methodInfo = method.GetMethodInfo();
             if (methodInfo == null)
                 throw new ArgumentException(
@@ -171,7 +172,8 @@ namespace System.Runtime.CompilerServices
                     | DynamicallyAccessedMemberTypes.NonPublicConstructors
             )]
                 Type type
-        ) {
+        )
+        {
             if (type is not RuntimeType rt)
             {
                 if (type is null)
@@ -350,7 +352,8 @@ namespace System.Runtime.CompilerServices
             IntPtr callersRetAddrSlot,
             delegate* <IntPtr, IntPtr, PortableTailCallFrame*, void> callTarget,
             IntPtr retVal
-        ) {
+        )
+        {
             IntPtr callersRetAddr;
             TailCallTls* tls = GetTailCallInfo(callersRetAddrSlot, &callersRetAddr);
             PortableTailCallFrame* prevFrame = tls->Frame;
@@ -384,7 +387,8 @@ namespace System.Runtime.CompilerServices
                 // If the arg buffer is reporting inst argument, it is safe to abandon it now
                 if (
                     tls->ArgBuffer != IntPtr.Zero && *(int*)tls->ArgBuffer == 1 /* TAILCALLARGBUFFER_INSTARG_ONLY */
-                ) {
+                )
+                {
                     *(int*)tls->ArgBuffer =
                         2 /* TAILCALLARGBUFFER_ABANDONED */
                     ;

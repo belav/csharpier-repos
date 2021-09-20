@@ -191,7 +191,8 @@ internal static partial class Interop
             string name,
             out string format,
             out DriveType type
-        ) {
+        )
+        {
             byte* formatBuffer = stackalloc byte[MountPointFormatBufferSizeInBytes]; // format names should be small
             long numericFormat;
             int result = GetFormatInfoForMountPoint(

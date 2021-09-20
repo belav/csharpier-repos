@@ -23,9 +23,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.ValueConversion.Intern
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public GeometryValueConverter(
-            SqlServerBytesReader reader,
-            SqlServerBytesWriter writer
-        ) : base(g => new SqlBytes(writer.Write(g)), b => (TGeometry)reader.Read(b.Value)) { }
+        public GeometryValueConverter(SqlServerBytesReader reader, SqlServerBytesWriter writer)
+            : base(g => new SqlBytes(writer.Write(g)), b => (TGeometry)reader.Read(b.Value)) { }
     }
 }

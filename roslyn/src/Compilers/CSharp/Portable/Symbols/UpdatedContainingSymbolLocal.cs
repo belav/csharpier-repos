@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             SourceLocalSymbol underlyingLocal,
             Symbol updatedContainingSymbol,
             TypeWithAnnotations updatedType
-        ) {
+        )
+        {
             return new UpdatedContainingSymbolAndNullableAnnotationLocal(
                 underlyingLocal,
                 updatedContainingSymbol,
@@ -32,7 +33,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Symbol updatedContainingSymbol,
             TypeWithAnnotations updatedType,
             bool assertContaining
-        ) {
+        )
+        {
             RoslynDebug.Assert(underlyingLocal is object);
             RoslynDebug.Assert(updatedContainingSymbol is object);
             Debug.Assert(

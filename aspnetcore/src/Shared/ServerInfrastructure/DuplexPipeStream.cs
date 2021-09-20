@@ -71,7 +71,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
             int offset,
             int count,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return ReadAsyncInternal(new Memory<byte>(buffer, offset, count), cancellationToken)
                 .AsTask();
         }
@@ -79,7 +80,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
         public override ValueTask<int> ReadAsync(
             Memory<byte> destination,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return ReadAsyncInternal(destination, cancellationToken);
         }
 
@@ -93,7 +95,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _output.WriteAsync(buffer.AsMemory(offset, count), cancellationToken)
                 .GetAsTask();
         }
@@ -101,7 +104,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
         public override ValueTask WriteAsync(
             ReadOnlyMemory<byte> source,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return _output.WriteAsync(source, cancellationToken).GetAsValueTask();
         }
 
@@ -118,7 +122,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
         private async ValueTask<int> ReadAsyncInternal(
             Memory<byte> destination,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             while (true)
             {
                 var result = await _input.ReadAsync(cancellationToken);
@@ -160,7 +165,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
             int count,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             return TaskToApm.Begin(ReadAsync(buffer, offset, count), callback, state);
         }
 
@@ -175,7 +181,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
             int count,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             return TaskToApm.Begin(WriteAsync(buffer, offset, count), callback, state);
         }
 

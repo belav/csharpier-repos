@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider
             string fileName,
             TOptionsUpdater settingsUpdater,
             Workspace workspace
-        ) {
+        )
+        {
             FileName = fileName;
             SettingsUpdater = settingsUpdater;
             Workspace = workspace;
@@ -101,7 +102,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider
             public CombinedAnalyzerConfigOptions(
                 AnalyzerConfigOptions workspaceOptions,
                 AnalyzerConfigOptionsResult? result
-            ) {
+            )
+            {
                 _workspaceOptions = workspaceOptions;
                 _result = result;
             }
@@ -130,7 +132,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider
                     match.Success
                     && match.Groups["key"].Value is string isolatedKey
                     && _result.Value.TreeOptions.TryGetValue(isolatedKey, out var severity)
-                ) {
+                )
+                {
                     value = severity.ToEditorConfigString();
                     return true;
                 }

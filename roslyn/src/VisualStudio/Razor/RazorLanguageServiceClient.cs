@@ -49,7 +49,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Razor
             Solution solution,
             object? callbackTarget = null,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (solution == null)
             {
                 // keep old behavior for Razor
@@ -100,7 +101,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Razor
                 string targetName,
                 IReadOnlyList<object> arguments,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return _inner.KeepAliveSession.RunRemoteAsync(
                     targetName,
                     solution: null,
@@ -113,7 +115,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Razor
                 string targetName,
                 IReadOnlyList<object> arguments,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return _inner.KeepAliveSession.RunRemoteAsync<T>(
                     targetName,
                     solution: null,

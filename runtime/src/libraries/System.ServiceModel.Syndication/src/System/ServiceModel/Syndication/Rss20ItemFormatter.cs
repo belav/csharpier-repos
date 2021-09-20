@@ -45,10 +45,8 @@ namespace System.ServiceModel.Syndication
 
         public Rss20ItemFormatter(SyndicationItem itemToWrite) : this(itemToWrite, true) { }
 
-        public Rss20ItemFormatter(
-            SyndicationItem itemToWrite,
-            bool serializeExtensionsAsAtom
-        ) : base(itemToWrite)
+        public Rss20ItemFormatter(SyndicationItem itemToWrite, bool serializeExtensionsAsAtom)
+            : base(itemToWrite)
         {
             _feedSerializer = new Rss20FeedFormatter
             {
@@ -175,10 +173,8 @@ namespace System.ServiceModel.Syndication
 
         public Rss20ItemFormatter(TSyndicationItem itemToWrite) : base(itemToWrite) { }
 
-        public Rss20ItemFormatter(
-            TSyndicationItem itemToWrite,
-            bool serializeExtensionsAsAtom
-        ) : base(itemToWrite, serializeExtensionsAsAtom) { }
+        public Rss20ItemFormatter(TSyndicationItem itemToWrite, bool serializeExtensionsAsAtom)
+            : base(itemToWrite, serializeExtensionsAsAtom) { }
 
         protected override SyndicationItem CreateItemInstance() => new TSyndicationItem();
     }

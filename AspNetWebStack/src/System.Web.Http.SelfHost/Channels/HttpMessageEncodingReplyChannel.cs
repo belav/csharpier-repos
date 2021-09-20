@@ -33,7 +33,8 @@ namespace System.Web.Http.SelfHost.Channels
             TimeSpan timeout,
             AsyncCallback callback,
             object state
-        ) {
+        )
+        {
             return InnerChannel.BeginReceiveRequest(timeout, callback, state);
         }
 
@@ -41,7 +42,8 @@ namespace System.Web.Http.SelfHost.Channels
             TimeSpan timeout,
             AsyncCallback callback,
             object state
-        ) {
+        )
+        {
             return InnerChannel.BeginTryReceiveRequest(timeout, callback, state);
         }
 
@@ -49,7 +51,8 @@ namespace System.Web.Http.SelfHost.Channels
             TimeSpan timeout,
             AsyncCallback callback,
             object state
-        ) {
+        )
+        {
             return InnerChannel.BeginWaitForRequest(timeout, callback, state);
         }
 

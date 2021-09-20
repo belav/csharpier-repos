@@ -13,7 +13,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
             string propertyName,
             ModelMetadataProvider metadataProvider,
             out TModel model
-        ) {
+        )
+        {
             ExtensibleModelBindingContext propertyBindingContext =
                 new ExtensibleModelBindingContext(parentBindingContext)
                 {

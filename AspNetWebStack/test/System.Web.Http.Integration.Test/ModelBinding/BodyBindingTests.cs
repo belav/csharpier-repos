@@ -141,7 +141,8 @@ namespace System.Web.Http.ModelBinding
         public async Task Body_Binds_ComplexType_Type_Key_Value_Read(
             string action,
             string mediaType
-        ) {
+        )
+        {
             // Arrange
             ModelBindOrder expectedItem = new ModelBindOrder()
             {
@@ -176,7 +177,8 @@ namespace System.Web.Http.ModelBinding
         public async Task Body_Binds_ComplexType_Type_Whole_Body_Read(
             string action,
             string mediaType
-        ) {
+        )
+        {
             // Arrange
             ModelBindOrder expectedItem = new ModelBindOrder()
             {

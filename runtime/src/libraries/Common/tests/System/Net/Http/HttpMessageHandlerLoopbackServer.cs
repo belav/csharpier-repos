@@ -27,7 +27,8 @@ namespace System.Net.Test.Common
         public static async Task CreateClientAndServerAsync(
             Func<HttpMessageHandler, Uri, Task> clientFunc,
             Func<HttpMessageHandlerLoopbackServer, Task> serverFunc
-        ) {
+        )
+        {
             await clientFunc(
                     new LoopbackServerHttpMessageHandler(serverFunc),
                     new Uri("http://example.com")
@@ -39,7 +40,8 @@ namespace System.Net.Test.Common
             HttpStatusCode statusCode = HttpStatusCode.OK,
             IList<HttpHeaderData> headers = null,
             string content = ""
-        ) {
+        )
+        {
             ResponseStatusCode = statusCode;
             ResponseHeaders = headers;
             ReponseContentString = content;
@@ -51,7 +53,8 @@ namespace System.Net.Test.Common
             HttpStatusCode statusCode,
             IList<HttpHeaderData> headers,
             byte[] bytes
-        ) {
+        )
+        {
             ResponseStatusCode = statusCode;
             ResponseHeaders = headers;
             ReponseContentBytes = bytes;
@@ -74,7 +77,8 @@ namespace System.Net.Test.Common
 
             public LoopbackServerHttpMessageHandler(
                 Func<HttpMessageHandlerLoopbackServer, Task> serverFunc
-            ) {
+            )
+            {
                 _serverFunc = serverFunc;
             }
 
@@ -82,7 +86,8 @@ namespace System.Net.Test.Common
             protected override HttpResponseMessage Send(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return SendAsync(request, cancellationToken).GetAwaiter().GetResult();
             }
 #endif
@@ -90,7 +95,8 @@ namespace System.Net.Test.Common
             protected override async Task<HttpResponseMessage> SendAsync(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var server = new HttpMessageHandlerLoopbackServer(request);
                 await _serverFunc(server).ConfigureAwait(false);
 
@@ -112,7 +118,8 @@ namespace System.Net.Test.Common
                             "Content-Type",
                             StringComparison.InvariantCultureIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         response.Content.Headers.Remove("Content-Type");
                         response.Content.Headers.TryAddWithoutValidation(
                             "Content-Type",

@@ -34,9 +34,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.PullMemberUp
             "RS0034:Exported parts should have [ImportingConstructor]",
             Justification = "Used incorrectly by tests"
         )]
-        public CSharpPullMemberUpCodeRefactoringProvider(
-            IPullMemberUpOptionsService service
-        ) : base(service) { }
+        public CSharpPullMemberUpCodeRefactoringProvider(IPullMemberUpOptionsService service)
+            : base(service) { }
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

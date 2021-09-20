@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Editor.Xaml.OrganizeImports
         public async Task<Document> OrganizeImportsAsync(
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var options = await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
             var placeSystemNamespaceFirst = options.GetOption(
                 GenerationOptions.PlaceSystemNamespaceFirst

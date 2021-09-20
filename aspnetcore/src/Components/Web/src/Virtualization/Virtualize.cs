@@ -272,7 +272,8 @@ namespace Microsoft.AspNetCore.Components.Web.Virtualization
             float spacerSize,
             float spacerSeparation,
             float containerSize
-        ) {
+        )
+        {
             CalcualteItemDistribution(
                 spacerSize,
                 spacerSeparation,
@@ -297,7 +298,8 @@ namespace Microsoft.AspNetCore.Components.Web.Virtualization
             float spacerSize,
             float spacerSeparation,
             float containerSize
-        ) {
+        )
+        {
             CalcualteItemDistribution(
                 spacerSize,
                 spacerSeparation,
@@ -326,7 +328,8 @@ namespace Microsoft.AspNetCore.Components.Web.Virtualization
             float containerSize,
             out int itemsInSpacer,
             out int visibleItemCapacity
-        ) {
+        )
+        {
             if (_lastRenderedItemCount > 0)
             {
                 _itemSize =
@@ -407,7 +410,8 @@ namespace Microsoft.AspNetCore.Components.Web.Virtualization
                 if (
                     e is OperationCanceledException oce
                     && oce.CancellationToken == cancellationToken
-                ) {
+                )
+                {
                     // No-op; we canceled the operation, so it's fine to suppress this exception.
                 }
                 else
@@ -423,7 +427,8 @@ namespace Microsoft.AspNetCore.Components.Web.Virtualization
 
         private ValueTask<ItemsProviderResult<TItem>> DefaultItemsProvider(
             ItemsProviderRequest request
-        ) {
+        )
+        {
             return ValueTask.FromResult(
                 new ItemsProviderResult<TItem>(
                     Items!.Skip(request.StartIndex).Take(request.Count),

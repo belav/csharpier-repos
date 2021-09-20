@@ -23,7 +23,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper htmlHelper,
             string partialViewName,
             ViewDataDictionary viewData
-        ) {
+        )
+        {
             htmlHelper.RenderPartialInternal(
                 partialViewName,
                 viewData,
@@ -39,7 +40,8 @@ namespace System.Web.Mvc.Html
             this HtmlHelper htmlHelper,
             string partialViewName,
             object model
-        ) {
+        )
+        {
             htmlHelper.RenderPartialInternal(
                 partialViewName,
                 htmlHelper.ViewData,
@@ -55,7 +57,8 @@ namespace System.Web.Mvc.Html
             string partialViewName,
             object model,
             ViewDataDictionary viewData
-        ) {
+        )
+        {
             htmlHelper.RenderPartialInternal(
                 partialViewName,
                 viewData,

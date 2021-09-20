@@ -13,10 +13,8 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
         private TInnerChannel _innerChannel;
         private EventHandler _onInnerChannelFaulted;
 
-        protected LayeredChannel(
-            ChannelManagerBase channelManager,
-            TInnerChannel innerChannel
-        ) : base(channelManager)
+        protected LayeredChannel(ChannelManagerBase channelManager, TInnerChannel innerChannel)
+            : base(channelManager)
         {
             Contract.Assert(innerChannel != null);
 
@@ -61,7 +59,8 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
             TimeSpan timeout,
             AsyncCallback callback,
             object state
-        ) {
+        )
+        {
             return _innerChannel.BeginClose(timeout, callback, state);
         }
 
@@ -79,7 +78,8 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
             TimeSpan timeout,
             AsyncCallback callback,
             object state
-        ) {
+        )
+        {
             return _innerChannel.BeginOpen(timeout, callback, state);
         }
 

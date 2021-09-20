@@ -26,7 +26,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public virtual bool Equals(
             RequiredAttributeDescriptor descriptorX,
             RequiredAttributeDescriptor descriptorY
-        ) {
+        )
+        {
             if (object.ReferenceEquals(descriptorX, descriptorY))
             {
                 return true;

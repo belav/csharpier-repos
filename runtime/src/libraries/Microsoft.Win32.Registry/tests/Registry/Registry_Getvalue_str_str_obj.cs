@@ -99,7 +99,8 @@ namespace Microsoft.Win32.RegistryTests
             RegistryKey key,
             string valueName,
             bool useSeparator
-        ) {
+        )
+        {
             const int expectedValue = 11;
             const int defaultValue = 42;
             try
@@ -130,7 +131,8 @@ namespace Microsoft.Win32.RegistryTests
             RegistryKey key,
             string valueName,
             bool useSeparator
-        ) {
+        )
+        {
             // We ignore valueName because we test against default value
             valueName = null;
             try

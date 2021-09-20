@@ -22,20 +22,21 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             ImmutableArray<IParameterSymbol> parameters,
             ImmutableArray<AttributeData> returnTypeAttributes,
             string documentationCommentXml
-        ) : base(
-            containingType,
-            attributes,
-            accessibility,
-            modifiers,
-            returnType,
-            refKind: RefKind.None,
-            explicitInterfaceImplementations: default,
-            GetMetadataName(operatorKind),
-            typeParameters: ImmutableArray<ITypeParameterSymbol>.Empty,
-            parameters,
-            returnTypeAttributes,
-            documentationCommentXml
-        ) { }
+        )
+            : base(
+                containingType,
+                attributes,
+                accessibility,
+                modifiers,
+                returnType,
+                refKind: RefKind.None,
+                explicitInterfaceImplementations: default,
+                GetMetadataName(operatorKind),
+                typeParameters: ImmutableArray<ITypeParameterSymbol>.Empty,
+                parameters,
+                returnTypeAttributes,
+                documentationCommentXml
+            ) { }
 
         public override MethodKind MethodKind => MethodKind.UserDefinedOperator;
 

@@ -64,7 +64,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
                 NamingRule fieldNamingRule,
                 NamingRule propertyNamingRule,
                 NamingRule parameterNamingRule
-            ) {
+            )
+            {
                 _service = service;
                 _document = document;
                 _fieldNamingRule = fieldNamingRule;
@@ -80,7 +81,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
                 SemanticDocument document,
                 SyntaxNode node,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var fieldNamingRule = await document.Document.GetApplicableNamingRuleAsync(
                         SymbolKind.Field,
                         Accessibility.Private,
@@ -118,7 +120,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
             private async Task<bool> TryInitializeAsync(
                 SyntaxNode node,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (_service.IsConstructorInitializerGeneration(_document, node, cancellationToken))
                 {
                     if (
@@ -197,7 +200,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
                 ImmutableArray<Argument> arguments,
                 ImmutableArray<string> typeParametersNames,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return _service.GenerateParameterNames(
                     _document,
                     arguments,
@@ -264,7 +268,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
                 ImmutableArray<IParameterSymbol> allParameters,
                 ImmutableArray<TExpressionSyntax?> allExpressions,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Contract.ThrowIfNull(TypeToGenerateIn);
                 Contract.ThrowIfNull(TypeToGenerateIn.BaseType);
 
@@ -297,7 +302,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
                 ImmutableArray<TExpressionSyntax?> expressions,
                 ImmutableArray<IMethodSymbol> constructors,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Contract.ThrowIfNull(TypeToGenerateIn);
 
                 foreach (var constructor in constructors)
@@ -314,7 +320,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
                     if (
                         TypeToGenerateIn.Equals(constructor.ContainingType)
                         && constructor.Parameters.Select(p => p.Type).SequenceEqual(ParameterTypes)
-                    ) {
+                    )
+                    {
                         continue;
                     }
 
@@ -331,7 +338,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
                             constructor,
                             cancellationToken
                         )
-                    ) {
+                    )
+                    {
                         return constructor;
                     }
                 }
@@ -392,7 +400,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
 
             internal ImmutableArray<ITypeSymbol> GetParameterTypes(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var allTypeParameters = TypeToGenerateIn.GetAllTypeParameters();
                 var semanticModel = _document.SemanticModel;
                 var allTypes = _arguments.Select(
@@ -407,7 +416,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
                 ITypeSymbol typeSymbol,
                 SemanticModel semanticModel,
                 IEnumerable<ITypeParameterSymbol> allTypeParameters
-            ) {
+            )
+            {
                 var compilation = semanticModel.Compilation;
                 return typeSymbol.RemoveAnonymousTypes(compilation)
                     .RemoveUnavailableTypeParameters(compilation, allTypeParameters)
@@ -417,7 +427,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
             private async Task<bool> TryInitializeConstructorInitializerGenerationAsync(
                 SyntaxNode constructorInitializer,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (
                     _service.TryInitializeConstructorInitializerGeneration(
                         _document,
@@ -427,7 +438,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
                         out var arguments,
                         out var typeToGenerateIn
                     )
-                ) {
+                )
+                {
                     Token = token;
                     _arguments = arguments;
                     IsConstructorInitializerGeneration = true;
@@ -450,7 +462,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
             private async Task<bool> TryInitializeImplicitObjectCreationAsync(
                 SyntaxNode implicitObjectCreation,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (
                     _service.TryInitializeImplicitObjectCreation(
                         _document,
@@ -460,7 +473,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
                         out var arguments,
                         out var typeToGenerateIn
                     )
-                ) {
+                )
+                {
                     Token = token;
                     _arguments = arguments;
 
@@ -482,7 +496,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
             private async Task<bool> TryInitializeSimpleNameGenerationAsync(
                 SyntaxNode simpleName,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (
                     _service.TryInitializeSimpleNameGenerationState(
                         _document,
@@ -492,7 +507,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
                         out var arguments,
                         out var typeToGenerateIn
                     )
-                ) {
+                )
+                {
                     Token = token;
                     _arguments = arguments;
                 }
@@ -505,7 +521,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
                         out arguments,
                         out typeToGenerateIn
                     )
-                ) {
+                )
+                {
                     Token = token;
                     _arguments = arguments;
                     //// Attribute parameters are restricted to be constant values (simple types or string, etc).
@@ -565,7 +582,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
             private async Task<bool> TryDetermineTypeToGenerateInAsync(
                 INamedTypeSymbol original,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var definition = await SymbolFinder.FindSourceDefinitionAsync(
                         original,
                         _document.Project.Solution,
@@ -583,7 +601,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
                 ImmutableArray<ITypeSymbol> parameterTypes,
                 ImmutableArray<ParameterName> parameterNames,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var parameterToExistingMemberMap = ImmutableDictionary.CreateBuilder<
                     string,
                     ISymbol
@@ -635,7 +654,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
                 ImmutableDictionary<string, string>.Builder parameterToNewFieldMap,
                 ImmutableDictionary<string, string>.Builder parameterToNewPropertyMap,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var expectedFieldName = _fieldNamingRule.NamingStyle.MakeCompliant(
                         parameterName.NameBasedOnArgument
                     )
@@ -790,7 +810,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
                 bool withFields,
                 bool withProperties,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // See if there's an accessible base constructor that would accept these
                 // types, then just call into that instead of generating fields.
                 //
@@ -821,7 +842,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
                 bool withFields,
                 bool withProperties,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (_delegatedConstructor == null)
                     return null;
 
@@ -878,7 +900,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
                 bool withFields,
                 bool withProperties,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Contract.ThrowIfNull(TypeToGenerateIn);
 
                 var provider = document.Project.Solution.Workspace.Services.GetLanguageServices(
@@ -922,7 +945,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
                 bool withFields,
                 bool withProperties,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Contract.ThrowIfNull(TypeToGenerateIn);
 
                 var provider = document.Project.Solution.Workspace.Services.GetLanguageServices(

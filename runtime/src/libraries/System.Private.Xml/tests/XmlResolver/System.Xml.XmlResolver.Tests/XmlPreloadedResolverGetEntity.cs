@@ -17,7 +17,8 @@ namespace System.Xml.XmlResolver.Tests
             XmlKnownDtds dtd,
             string data,
             Uri uri
-        ) {
+        )
+        {
             var xmlResolver = new XmlPreloadedResolver(dtd);
             xmlResolver.Add(uri, data);
             return xmlResolver;

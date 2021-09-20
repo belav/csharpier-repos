@@ -36,7 +36,8 @@ namespace System.Collections.Tests
         /// </summary>
         protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(
             ModifyOperation operations
-        ) {
+        )
+        {
             if ((operations & ModifyOperation.Add) == ModifyOperation.Add)
             {
                 yield return (IEnumerable enumerable) =>
@@ -125,7 +126,8 @@ namespace System.Collections.Tests
             bool initializeFromCollection,
             Func<int, T> selector,
             int size
-        ) {
+        )
+        {
             Queue<T> q;
 
             if (initializeFromCollection)

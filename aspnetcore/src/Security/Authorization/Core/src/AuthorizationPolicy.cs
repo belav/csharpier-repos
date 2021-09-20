@@ -28,7 +28,8 @@ namespace Microsoft.AspNetCore.Authorization
         public AuthorizationPolicy(
             IEnumerable<IAuthorizationRequirement> requirements,
             IEnumerable<string> authenticationSchemes
-        ) {
+        )
+        {
             if (requirements == null)
             {
                 throw new ArgumentNullException(nameof(requirements));
@@ -113,7 +114,8 @@ namespace Microsoft.AspNetCore.Authorization
         public static async Task<AuthorizationPolicy?> CombineAsync(
             IAuthorizationPolicyProvider policyProvider,
             IEnumerable<IAuthorizeData> authorizeData
-        ) {
+        )
+        {
             if (policyProvider == null)
             {
                 throw new ArgumentNullException(nameof(policyProvider));

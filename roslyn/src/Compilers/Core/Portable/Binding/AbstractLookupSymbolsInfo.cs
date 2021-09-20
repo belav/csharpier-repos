@@ -188,7 +188,8 @@ namespace Microsoft.CodeAnalysis
             public void GetUniqueSymbolOrArities(
                 out IArityEnumerable? arities,
                 out TSymbol? uniqueSymbol
-            ) {
+            )
+            {
                 if (this.HasUniqueSymbol)
                 {
                     arities = null;
@@ -291,7 +292,8 @@ namespace Microsoft.CodeAnalysis
             string name,
             out IArityEnumerable? arities,
             out TSymbol? uniqueSymbol
-        ) {
+        )
+        {
             Debug.Assert(CanBeAdded(name));
 
             UniqueSymbolOrArities pair;

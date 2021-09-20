@@ -536,7 +536,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
         private static HttpConnectionManager CreateConnectionManager(
             ILoggerFactory loggerFactory,
             IHostApplicationLifetime lifetime = null
-        ) {
+        )
+        {
             lifetime = lifetime ?? new EmptyApplicationLifetime();
             return new HttpConnectionManager(
                 loggerFactory,

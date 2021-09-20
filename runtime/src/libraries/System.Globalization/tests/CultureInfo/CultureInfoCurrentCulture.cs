@@ -216,7 +216,8 @@ namespace System.Globalization.Tests
                         prefixedVariables,
                         x => ((string)de.Key).StartsWith(x, StringComparison.OrdinalIgnoreCase)
                     ) >= 0
-                ) {
+                )
+                {
                     environment[(string)de.Key] = (string)de.Value;
                 }
             }

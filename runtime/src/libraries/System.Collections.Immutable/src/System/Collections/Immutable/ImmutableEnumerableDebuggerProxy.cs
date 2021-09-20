@@ -19,9 +19,8 @@ namespace System.Collections.Immutable
         /// Initializes a new instance of the <see cref="ImmutableDictionaryDebuggerProxy{TKey, TValue}"/> class.
         /// </summary>
         /// <param name="dictionary">The enumerable to show in the debugger.</param>
-        public ImmutableDictionaryDebuggerProxy(
-            IImmutableDictionary<TKey, TValue> dictionary
-        ) : base(enumerable: dictionary) { }
+        public ImmutableDictionaryDebuggerProxy(IImmutableDictionary<TKey, TValue> dictionary)
+            : base(enumerable: dictionary) { }
     }
 
     /// <summary>

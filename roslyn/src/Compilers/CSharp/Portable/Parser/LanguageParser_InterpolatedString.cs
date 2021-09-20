@@ -76,7 +76,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     this.Options,
                     allowPreprocessorDirectives: false
                 )
-            ) {
+            )
+            {
                 // compute the positions of the interpolations in the original string literal, and also compute/preserve
                 // lexical errors
                 var info = default(Lexer.TokenInfo);
@@ -208,7 +209,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             string text,
             Lexer.Interpolation interpolation,
             bool isVerbatim
-        ) {
+        )
+        {
             SyntaxToken openBraceToken;
             ExpressionSyntax expression;
             InterpolationAlignmentClauseSyntax alignment = null;
@@ -231,7 +233,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     allowPreprocessorDirectives: false,
                     interpolationFollowedByColon: interpolation.HasColon
                 )
-            ) {
+            )
+            {
                 // TODO: some of the trivia in the interpolation maybe should be trailing trivia of the openBraceToken
                 using (var tempParser = new LanguageParser(tempLexer, null, null))
                 {
@@ -303,7 +306,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             string bodyText,
             bool isVerbatim,
             SyntaxKind kind
-        ) {
+        )
+        {
             var prefix = isVerbatim ? "@\"" : "\"";
             var fakeString = prefix + bodyText + "\"";
             using (
@@ -312,7 +316,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     this.Options,
                     allowPreprocessorDirectives: false
                 )
-            ) {
+            )
+            {
                 LexerMode mode = LexerMode.Syntax;
                 SyntaxToken token = tempLexer.Lex(ref mode);
                 Debug.Assert(token.Kind == SyntaxKind.StringLiteralToken);
@@ -345,7 +350,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             out ExpressionSyntax expr,
             out SyntaxToken commaToken,
             out ExpressionSyntax alignmentExpression
-        ) {
+        )
+        {
             openBraceToken = this.EatToken(SyntaxKind.OpenBraceToken);
             expr = this.ParseExpressionCore();
             if (this.CurrentToken.Kind == SyntaxKind.CommaToken)

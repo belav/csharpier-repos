@@ -36,7 +36,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             string name,
             string sql,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             Check.NotNull(entityType, nameof(entityType));
             Check.NotEmpty(name, nameof(name));
             Check.NotEmpty(sql, nameof(sql));
@@ -76,7 +77,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public static IEnumerable<ICheckConstraint> GetCheckConstraints(
             IReadOnlyEntityType entityType
-        ) {
+        )
+        {
             Check.NotNull(entityType, nameof(entityType));
 
             return GetConstraintsDictionary(entityType)?.Values
@@ -92,7 +94,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public static ICheckConstraint? FindCheckConstraint(
             IReadOnlyEntityType entityType,
             string name
-        ) {
+        )
+        {
             var dataDictionary = GetConstraintsDictionary(entityType);
 
             return dataDictionary == null
@@ -109,7 +112,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public static CheckConstraint? RemoveCheckConstraint(
             IMutableEntityType entityType,
             string name
-        ) {
+        )
+        {
             var dataDictionary = GetConstraintsDictionary(entityType);
 
             if (dataDictionary != null && dataDictionary.TryGetValue(name, out var constraint))

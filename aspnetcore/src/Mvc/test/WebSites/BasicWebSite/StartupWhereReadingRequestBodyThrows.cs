@@ -68,14 +68,16 @@ namespace BasicWebSite
                 int offset,
                 int count,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 throw new ConnectionResetException("Some error");
             }
 
             public override ValueTask<int> ReadAsync(
                 Memory<byte> buffer,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 throw new ConnectionResetException("Some error");
             }
 

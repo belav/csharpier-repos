@@ -28,7 +28,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 if (reader.TokenType == JsonTokenType.Null)
                 {
                     return -1;
@@ -41,7 +42,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 int value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }
@@ -116,7 +118,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 if (reader.TokenType == JsonTokenType.Null)
                 {
                     return new Point_2D_Struct(-1, -1);
@@ -129,7 +132,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 Point_2D_Struct value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }
@@ -231,7 +235,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 if (reader.TokenType == JsonTokenType.Null)
                 {
                     return -1;
@@ -244,7 +249,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 int? value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 if (!value.HasValue)
                 {
                     writer.WriteNumberValue(-1);
@@ -304,7 +310,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 if (reader.TokenType == JsonTokenType.Null)
                 {
                     return new Uri("https://default");
@@ -317,7 +324,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 Uri value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 if (value == null)
                 {
                     writer.WriteStringValue("https://default");
@@ -387,7 +395,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 if (reader.TokenType == JsonTokenType.Null)
                 {
                     return new Point_2D(-1, -1);
@@ -400,7 +409,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 Point_2D value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 if (value == null)
                 {
                     writer.WriteStartObject();
@@ -475,7 +485,8 @@ namespace System.Text.Json.Serialization.Tests
                     new ArrayBufferWriter<byte>(),
                     writerOptions
                 )
-            ) {
+            )
+            {
                 Assert.Throws<JsonException>(
                     () => JsonSerializer.Serialize(writer, new ClassWithUri(), options)
                 );
@@ -486,7 +497,8 @@ namespace System.Text.Json.Serialization.Tests
                     new ArrayBufferWriter<byte>(),
                     writerOptions
                 )
-            ) {
+            )
+            {
                 Assert.Throws<JsonException>(
                     () => JsonSerializer.Serialize(new StructWithObject(), options)
                 );
@@ -508,7 +520,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
 
@@ -516,7 +529,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 object value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 writer.WriteStartObject();
                 writer.WritePropertyName("hello");
                 writer.WriteNullValue();
@@ -575,7 +589,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 if (reader.TokenType == JsonTokenType.Null)
                 {
                     return "NullObject";
@@ -588,7 +603,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 object value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 if (value == null)
                 {
                     writer.WriteStringValue("NullObject");

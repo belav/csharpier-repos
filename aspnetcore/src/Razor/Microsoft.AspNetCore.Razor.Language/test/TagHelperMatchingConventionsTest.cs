@@ -167,7 +167,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             string attributeName,
             string attributeValue,
             bool expectedResult
-        ) {
+        )
+        {
             // Arrange
             var tagHelperBuilder = new DefaultTagHelperDescriptorBuilder(
                 TagHelperConventions.DefaultKind,

@@ -21,7 +21,8 @@ namespace System.Diagnostics
             IntPtr dataPtr,
             int totalBytes,
             out IntPtr res
-        ) {
+        )
+        {
             res = (IntPtr)(-1);
         }
 

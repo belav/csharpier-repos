@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
         public Task<ManagedEditAndContinueAvailability> GetAvailabilityAsync(
             Guid mvid,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (IsEditAndContinueAvailable != null)
             {
                 return Task.FromResult(IsEditAndContinueAvailable(mvid));

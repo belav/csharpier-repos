@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
             Document document,
             ISymbol selectedMember,
             INamedTypeSymbol destination
-        ) {
+        )
+        {
             var result = PullMembersUpOptionsBuilder.BuildPullMembersUpOptions(
                 destination,
                 ImmutableArray.Create((member: selectedMember, makeAbstract: false))
@@ -37,7 +38,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
             if (
                 result.PullUpOperationNeedsToDoExtraChanges
                 || IsSelectedMemberDeclarationAlreadyInDestination(selectedMember, destination)
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -59,7 +61,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
             Document document,
             PullMembersUpOptions pullMembersUpOptions,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (pullMembersUpOptions.Destination.TypeKind == TypeKind.Interface)
             {
                 return PullMembersIntoInterfaceAsync(
@@ -112,7 +115,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
             PullMembersUpOptions pullMemberUpOptions,
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var solutionEditor = new SolutionEditor(solution);
             var codeGenerationService =
                 document.Project.LanguageServices.GetRequiredService<ICodeGenerationService>();
@@ -179,7 +183,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
                         if (
                             analysisResult.ChangeOriginalToNonStatic
                             || analysisResult.ChangeOriginalToPublic
-                        ) {
+                        )
+                        {
                             ChangeMemberToPublicAndNonStatic(
                                 codeGenerationService,
                                 originalMemberEditor,
@@ -232,7 +237,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
             DocumentEditor editor,
             SyntaxNode memberDeclaration,
             ISymbol member
-        ) {
+        )
+        {
             var modifiers = DeclarationModifiers.From(member).WithIsStatic(false);
             // Event is different since several events may be declared in one line.
             if (member is IEventSymbol eventSymbol)
@@ -258,7 +264,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
             IEventSymbol eventSymbol,
             SyntaxNode eventDeclaration,
             DeclarationModifiers modifiers
-        ) {
+        )
+        {
             var declaration = editor.Generator.GetDeclaration(eventDeclaration);
             var isEventHasExplicitAddOrRemoveMethod =
                 (eventSymbol.AddMethod != null && !eventSymbol.AddMethod.IsImplicitlyDeclared)
@@ -304,7 +311,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
             PullMembersUpOptions result,
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var solutionEditor = new SolutionEditor(solution);
             var codeGenerationService =
                 document.Project.LanguageServices.GetRequiredService<ICodeGenerationService>();
@@ -328,7 +336,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
                     if (
                         memberResult.MakeMemberDeclarationAbstract
                         && !memberResult.Member.IsKind(SymbolKind.Field)
-                    ) {
+                    )
+                    {
                         // Change the member to abstract if user choose to make them abstract
                         return MakeAbstractVersion(memberResult.Member);
                     }
@@ -367,7 +376,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
                     if (
                         !analysisResult.MakeMemberDeclarationAbstract
                         || analysisResult.Member.IsAbstract
-                    ) {
+                    )
+                    {
                         originalMemberEditor.RemoveNode(
                             originalMemberEditor.Generator.GetDeclaration(syntax)
                         );
@@ -397,7 +407,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
                 && result.MemberAnalysisResults.Any(
                     analysis => analysis.Member.IsAbstract || analysis.MakeMemberDeclarationAbstract
                 )
-            ) {
+            )
+            {
                 var modifiers = DeclarationModifiers.From(result.Destination).WithIsAbstract(true);
                 newDestination = destinationEditor.Generator.WithModifiers(
                     newDestination,
@@ -454,7 +465,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
         > InitializeSymbolToDeclarationsMapAsync(
             PullMembersUpOptions result,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // One member may have multiple syntax nodes (e.g partial method).
             // Create a map from ISymbol to SyntaxNode find them more easily.
             var symbolToDeclarationsBuilder = ImmutableDictionary.CreateBuilder<
@@ -484,7 +496,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
         private static bool IsSelectedMemberDeclarationAlreadyInDestination(
             ISymbol selectedMember,
             INamedTypeSymbol destination
-        ) {
+        )
+        {
             if (destination.TypeKind == TypeKind.Interface)
             {
                 return IsSelectedMemberDeclarationAlreadyInDestinationInterface(
@@ -504,7 +517,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
         private static bool IsSelectedMemberDeclarationAlreadyInDestinationClass(
             ISymbol selectedMember,
             INamedTypeSymbol destination
-        ) {
+        )
+        {
             if (selectedMember is IFieldSymbol fieldSymbol)
             {
                 // If there is a member with same name in destination, pull the selected field will cause error,
@@ -533,7 +547,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
         private static bool IsSelectedMemberDeclarationAlreadyInDestinationInterface(
             ISymbol selectedMember,
             INamedTypeSymbol destination
-        ) {
+        )
+        {
             foreach (var interfaceMember in destination.GetMembers())
             {
                 var implementationOfMember =
@@ -545,7 +560,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
                         selectedMember,
                         implementationOfMember?.OriginalDefinition
                     )
-                ) {
+                )
+                {
                     return true;
                 }
             }

@@ -60,7 +60,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         string ToDebugString(
             MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault,
             int indent = 0
-        ) {
+        )
+        {
             var builder = new StringBuilder();
             var indentString = new string(' ', indent);
 
@@ -110,7 +111,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             if (
                 (options & MetadataDebugStringOptions.IncludePropertyIndexes) != 0
                 && ((AnnotatableBase)this).IsReadOnly
-            ) {
+            )
+            {
                 var indexes = ((ISkipNavigation)this).GetPropertyIndexes();
                 builder.Append(" ").Append(indexes.Index);
                 builder.Append(" ").Append(indexes.OriginalValueIndex);

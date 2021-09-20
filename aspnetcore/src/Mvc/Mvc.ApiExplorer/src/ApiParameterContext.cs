@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             IModelMetadataProvider metadataProvider,
             ControllerActionDescriptor actionDescriptor,
             IReadOnlyList<TemplatePart> routeParameters
-        ) {
+        )
+        {
             MetadataProvider = metadataProvider;
             ActionDescriptor = actionDescriptor;
             RouteParameters = routeParameters;

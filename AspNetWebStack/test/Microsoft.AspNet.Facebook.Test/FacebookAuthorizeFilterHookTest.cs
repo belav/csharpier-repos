@@ -23,7 +23,8 @@ namespace Microsoft.AspNet.Facebook.Test
         public void OnAuthorization_CannotCreateCookiesHookRedirectsToConfigValueOrDefault(
             string cannotCreateCookiesRedirectPath,
             string expectedRedirectPath
-        ) {
+        )
+        {
             // Arrange
             var config = BuildConfiguration("~/home/permissions", cannotCreateCookiesRedirectPath);
             var authorizeFilter = new FacebookAuthorizeFilter(config);
@@ -68,7 +69,8 @@ namespace Microsoft.AspNet.Facebook.Test
             string requestUrl,
             string permission,
             bool expectedTrigger
-        ) {
+        )
+        {
             // Arrange
             var config = BuildConfiguration("~/home/permissions");
             var authorizeFilter = new CustomDefaultAuthorizeFilter(config);
@@ -89,7 +91,8 @@ namespace Microsoft.AspNet.Facebook.Test
             string requestUrl,
             string permission,
             bool expectedTrigger
-        ) {
+        )
+        {
             // Arrange
             var config = BuildConfiguration("~/home/permissions");
             var authorizeFilter = new CustomDefaultAuthorizeFilter(config);
@@ -110,7 +113,8 @@ namespace Microsoft.AspNet.Facebook.Test
             string requestUrl,
             string permission,
             bool expectedTrigger
-        ) {
+        )
+        {
             // Arrange
             var config = BuildConfiguration("~/home/permissions");
             var authorizeFilter = new CustomDefaultAuthorizeFilter(config);
@@ -141,7 +145,8 @@ namespace Microsoft.AspNet.Facebook.Test
             string permission,
             string permissionInStatus,
             bool expectedTrigger
-        ) {
+        )
+        {
             var rawPermissionsStatus = new Dictionary<string, string>
             {
                 { "permission", permissionInStatus },
@@ -173,7 +178,8 @@ namespace Microsoft.AspNet.Facebook.Test
             string requestUrl,
             string permission,
             bool expectedTrigger
-        ) {
+        )
+        {
             // Arrange
             var config = BuildConfiguration("~/home/permissions");
             var authorizeFilter = new CustomDefaultAuthorizeFilter(config);
@@ -331,7 +337,8 @@ namespace Microsoft.AspNet.Facebook.Test
             string authorizationRedirectPath,
             string cannotCreateCookiesRedirectPath = null,
             PermissionsStatus userPermissionsStatus = null
-        ) {
+        )
+        {
             var client = MockHelpers.CreateFacebookClient();
             var permissionService = MockHelpers.CreatePermissionService(
                 new[] { "" },
@@ -352,7 +359,8 @@ namespace Microsoft.AspNet.Facebook.Test
             string requestUrl,
             string permission,
             HttpCookieCollection requestCookies = null
-        ) {
+        )
+        {
             var permissions = permission == null ? new string[0] : new string[] { permission };
 
             var requestUri = new Uri(requestUrl);

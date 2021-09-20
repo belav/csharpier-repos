@@ -73,7 +73,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_collection_split(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -90,7 +91,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Query_with_OfType_eagerly_loads_correct_owned_navigations_split(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(async, ss => ss.Set<OwnedPerson>().OfType<LeafA>().AsSplitQuery());
         }
 
@@ -125,7 +127,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Using_from_sql_on_owner_generates_join_with_table_for_owned_shared_dependents(
             bool async
-        ) {
+        )
+        {
             using var context = CreateContext();
             var query = context.Set<OwnedPerson>()
                 .FromSqlRaw(NormalizeDelimitersInRawString("SELECT * FROM [OwnedPerson]"));

@@ -56,7 +56,8 @@ namespace Microsoft.CodeAnalysis.NewLines.ConsecutiveStatementPlacement
             Document document,
             ImmutableArray<Diagnostic> diagnostics,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
 
@@ -94,13 +95,12 @@ namespace Microsoft.CodeAnalysis.NewLines.ConsecutiveStatementPlacement
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                CodeFixesResources.Add_blank_line_after_block,
-                createChangedDocument,
-                CodeFixesResources.Add_blank_line_after_block
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    CodeFixesResources.Add_blank_line_after_block,
+                    createChangedDocument,
+                    CodeFixesResources.Add_blank_line_after_block
+                ) { }
         }
     }
 }

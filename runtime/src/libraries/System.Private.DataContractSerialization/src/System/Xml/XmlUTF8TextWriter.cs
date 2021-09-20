@@ -430,7 +430,8 @@ namespace System.Xml
             byte[] localNameBuffer,
             int localNameOffset,
             int localNameLength
-        ) {
+        )
+        {
             WriteByte('<');
             if (prefixLength != 0)
             {
@@ -495,7 +496,8 @@ namespace System.Xml
             byte[] localNameBuffer,
             int localNameOffset,
             int localNameLength
-        ) {
+        )
+        {
             WriteBytes('<', '/');
             if (prefixLength != 0)
             {
@@ -545,7 +547,8 @@ namespace System.Xml
             byte[] nsBuffer,
             int nsOffset,
             int nsLength
-        ) {
+        )
+        {
             WriteStartXmlnsAttribute();
             if (prefixLength != 0)
             {
@@ -582,7 +585,8 @@ namespace System.Xml
             byte[] localNameBuffer,
             int localNameOffset,
             int localNameLength
-        ) {
+        )
+        {
             WriteByte(' ');
             if (prefixLength != 0)
             {
@@ -639,7 +643,8 @@ namespace System.Xml
             byte[] localNameBuffer,
             int localNameOffset,
             int localNameLength
-        ) {
+        )
+        {
             WriteUTF8Chars(localNameBuffer, localNameOffset, localNameLength);
         }
 
@@ -943,7 +948,8 @@ namespace System.Xml
             byte[] buffer,
             int offset,
             int count
-        ) {
+        )
+        {
             if (trailByteCount > 0)
             {
                 InternalWriteBase64Text(trailBytes, 0, trailByteCount);
@@ -957,7 +963,8 @@ namespace System.Xml
             byte[] buffer,
             int offset,
             int count
-        ) {
+        )
+        {
             if (trailByteCount > 0)
             {
                 await InternalWriteBase64TextAsync(trailBytes, 0, trailByteCount)

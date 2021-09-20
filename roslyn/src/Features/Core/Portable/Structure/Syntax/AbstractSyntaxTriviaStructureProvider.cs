@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.Structure
             ref TemporaryArray<BlockSpan> spans,
             BlockStructureOptionProvider optionProvider,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
     }

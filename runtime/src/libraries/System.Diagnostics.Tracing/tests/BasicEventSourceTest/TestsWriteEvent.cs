@@ -118,7 +118,8 @@ namespace BasicEventSourceTests
             Listener listener,
             bool useSelfDescribingEvents,
             bool isEtwListener = false
-        ) {
+        )
+        {
             using (var logger = new EventSourceTest(useSelfDescribingEvents))
             {
                 var tests = new List<SubTest>();
@@ -903,7 +904,8 @@ namespace BasicEventSourceTests
             int start,
             uint size,
             int n
-        ) {
+        )
+        {
             if (blob == null || start + size > blob.Length)
                 throw new ArgumentException("start + size must be smaller than blob.Length");
             fixed (byte* p = blob)EventWithBytePtrArg(size, p + start, n);

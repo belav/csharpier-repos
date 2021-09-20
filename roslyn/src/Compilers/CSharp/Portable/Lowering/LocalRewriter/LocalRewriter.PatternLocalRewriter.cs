@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 SyntaxNode node,
                 LocalRewriter localRewriter,
                 bool generateInstrumentation
-            ) {
+            )
+            {
                 _localRewriter = localRewriter;
                 _factory = localRewriter._factory;
                 GenerateInstrumentation = generateInstrumentation;
@@ -68,7 +69,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     SyntheticBoundNodeFactory factory,
                     SyntaxNode node,
                     bool generateSequencePoints
-                ) {
+                )
+                {
                     _factory = factory;
                     _node = node;
                     _generateSequencePoints = generateSequencePoints;
@@ -263,7 +265,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                     SpecialMember.System_Nullable_T_GetValueOrDefault,
                                     out MethodSymbol getValueOrDefault
                                 )
-                            ) {
+                            )
+                            {
                                 // As a special case, since the null test has already been done we can use Nullable<T>.GetValueOrDefault
                                 evaluated = _factory.Call(input, getValueOrDefault);
                             }
@@ -353,7 +356,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 SyntaxNode syntax,
                 BoundExpression rewrittenExpr,
                 BinaryOperatorKind operatorKind
-            ) {
+            )
+            {
                 if (rewrittenExpr.Type.IsPointerOrFunctionPointer())
                 {
                     TypeSymbol objectType = _factory.SpecialType(SpecialType.System_Object);
@@ -380,7 +384,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 SyntaxNode syntax,
                 BoundExpression input,
                 ConstantValue value
-            ) {
+            )
+            {
                 TypeSymbol comparisonType = input.Type.EnumUnderlyingTypeOrSelf();
                 var operatorType = Binder.RelationalOperatorType(comparisonType);
                 Debug.Assert(operatorType != BinaryOperatorKind.Error);
@@ -393,13 +398,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                 BoundExpression input,
                 BinaryOperatorKind operatorKind,
                 ConstantValue value
-            ) {
+            )
+            {
                 if (
                     input.Type.SpecialType == SpecialType.System_Double
                         && double.IsNaN(value.DoubleValue)
                     || input.Type.SpecialType == SpecialType.System_Single
                         && float.IsNaN(value.SingleValue)
-                ) {
+                )
+                {
                     Debug.Assert(operatorKind.Operator() == BinaryOperatorKind.Equal);
                     return _factory.MakeIsNotANumberTest(input);
                 }
@@ -409,7 +416,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     operatorKind.OperandTypes() == BinaryOperatorKind.Int
                     && comparisonType.SpecialType != SpecialType.System_Int32
-                ) {
+                )
+                {
                     // Promote operands to int before comparison for byte, sbyte, short, ushort
                     Debug.Assert(
                         comparisonType.SpecialType switch
@@ -452,7 +460,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 BoundDagEvaluation evaluation,
                 [NotNullWhen(true)] out BoundExpression sideEffect,
                 [NotNullWhen(true)] out BoundExpression testExpression
-            ) {
+            )
+            {
                 CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
                     _localRewriter.GetNewCompoundUseSiteInfo();
 
@@ -466,7 +475,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         TypeCompareKind.AllIgnoreOptions
                     )
                     && typeEvaluation1.Input == typeDecision.Input
-                ) {
+                )
+                {
                     BoundExpression input = _tempAllocator.GetTemp(test.Input);
                     BoundExpression output = _tempAllocator.GetTemp(
                         new BoundDagTemp(evaluation.Syntax, typeEvaluation1.Type, evaluation)
@@ -496,7 +506,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         || conv.IsBoxing
                     )
                     && typeEvaluation2.Input == nonNullTest.Input
-                ) {
+                )
+                {
                     BoundExpression input = _tempAllocator.GetTemp(test.Input);
                     var baseType = typeEvaluation2.Type;
                     BoundExpression output = _tempAllocator.GetTemp(
@@ -524,7 +535,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 BoundDecisionDag decisionDag,
                 Action<BoundExpression> addCode,
                 out BoundExpression savedInputExpression
-            ) {
+            )
+            {
                 Debug.Assert(loweredInput.Type is { });
 
                 // We share input variables if there is no when clause (because a when clause might mutate them).
@@ -541,7 +553,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     )
                     && loweredInput.GetRefKind() == RefKind.None
                     && !anyWhenClause
-                ) {
+                )
+                {
                     // If we're switching on a local variable and there is no when clause,
                     // we assume the value of the local variable does not change during the execution of the
                     // decision automaton and we just reuse the local variable when we need the input expression.
@@ -585,7 +598,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     && loweredInput.Syntax.Kind() == SyntaxKind.TupleExpression
                     && loweredInput is BoundObjectCreationExpression expr
                     && !decisionDag.TopologicallySortedNodes.Any(n => usesOriginalInput(n))
-                ) {
+                )
+                {
                     // If the switch governing expression is a tuple literal whose whole value is not used anywhere,
                     // (though perhaps its component parts are used), then we can save the component parts
                     // and assign them into temps (or perhaps user variables) to avoid the creation of
@@ -649,7 +663,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Action<BoundExpression> addCode,
                 bool canShareInputs,
                 out BoundExpression savedInputExpression
-            ) {
+            )
+            {
                 int count = loweredInput.Arguments.Length;
 
                 // first evaluate the inputs (in order) into temps
@@ -697,7 +712,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         canShareInputs
                         && (expr.Kind == BoundKind.Parameter || expr.Kind == BoundKind.Local)
                         && _tempAllocator.TrySetTemp(temp, expr)
-                    ) {
+                    )
+                    {
                         // we've arranged to use the input value from the variable it is already stored in
                     }
                     else
@@ -710,7 +726,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 BoundDecisionDagNode makeReplacement(
                     BoundDecisionDagNode node,
                     Func<BoundDecisionDagNode, BoundDecisionDagNode> replacement
-                ) {
+                )
+                {
                     switch (node)
                     {
                         case BoundEvaluationDecisionDagNode evalNode:
@@ -720,7 +737,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 && eval.Field is var field
                                 && field.CorrespondingTupleField != null
                                 && field.TupleElementIndex is int i
-                            ) {
+                            )
+                            {
                                 // The elements of an input tuple were evaluated beforehand, so don't need to be evaluated now.
                                 return replacement(evalNode.Next);
                             }

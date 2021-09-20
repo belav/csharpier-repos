@@ -53,7 +53,8 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
             TextSpan? span,
             AnalysisKind? analysisKind,
             DiagnosticAnalyzerInfoCache analyzerInfoCache
-        ) {
+        )
+        {
             _document =
                 documentId != null ? project.Solution.GetRequiredTextDocument(documentId) : null;
             _project = project;
@@ -73,7 +74,8 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
             bool logPerformanceInfo,
             bool getTelemetryInfo,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var (compilationWithAnalyzers, analyzerToIdMap) =
                 await GetOrCreateCompilationWithAnalyzersAsync(
                         _project,
@@ -133,7 +135,8 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
             bool logPerformanceInfo,
             bool getTelemetryInfo,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var documentAnalysisScope =
                 _document != null
                     ? new DocumentAnalysisScope(_document, _span, analyzers, _analysisKind!.Value)
@@ -187,7 +190,8 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
         private static ImmutableArray<(string analyzerId, SerializableDiagnosticMap diagnosticMap)> Dehydrate(
             ImmutableDictionary<DiagnosticAnalyzer, DiagnosticAnalysisResultBuilder> builderMap,
             BidirectionalMap<string, DiagnosticAnalyzer> analyzerToIdMap
-        ) {
+        )
+        {
             using var _ =
                 ArrayBuilder<(string analyzerId, SerializableDiagnosticMap diagnosticMap)>.GetInstance(
                     out var diagnostics
@@ -223,7 +227,8 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
             AnalysisResult analysisResult,
             ImmutableArray<DiagnosticAnalyzer> analyzers,
             BidirectionalMap<string, DiagnosticAnalyzer> analyzerToIdMap
-        ) {
+        )
+        {
             Func<DiagnosticAnalyzer, bool> shouldInclude;
             if (analyzers.Length < analysisResult.AnalyzerTelemetryInfo.Count)
             {
@@ -256,7 +261,8 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
         private static string GetAnalyzerId(
             BidirectionalMap<string, DiagnosticAnalyzer> analyzerMap,
             DiagnosticAnalyzer analyzer
-        ) {
+        )
+        {
             var analyzerId = analyzerMap.GetKeyOrDefault(analyzer);
             Contract.ThrowIfNull(analyzerId);
 
@@ -266,7 +272,8 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
         private static ImmutableArray<DiagnosticAnalyzer> GetAnalyzers(
             BidirectionalMap<string, DiagnosticAnalyzer> analyzerMap,
             IEnumerable<string> analyzerIds
-        ) {
+        )
+        {
             // TODO: this probably need to be cached as well in analyzer service?
             var builder = ImmutableArray.CreateBuilder<DiagnosticAnalyzer>();
 
@@ -288,7 +295,8 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
             Project project,
             bool isDocumentAnalysis,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var cacheEntry = await GetOrCreateCacheEntryAsync().ConfigureAwait(false);
             return (cacheEntry.CompilationWithAnalyzers, cacheEntry.AnalyzerToIdMap);
 
@@ -321,7 +329,8 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
         private static async Task<CompilationWithAnalyzersCacheEntry> CreateCompilationWithAnalyzersCacheEntryAsync(
             Project project,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // We could consider creating a service so that we don't do this repeatedly if this shows up as perf cost
             using var pooledObject = SharedPools.Default<HashSet<object>>().GetPooledObject();
             using var pooledMap = SharedPools.Default<Dictionary<string, DiagnosticAnalyzer>>()
@@ -335,7 +344,8 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
                 var reference in project.Solution.AnalyzerReferences.Concat(
                     project.AnalyzerReferences
                 )
-            ) {
+            )
+            {
                 if (!referenceSet.Add(reference.Id))
                 {
                     continue;
@@ -365,7 +375,8 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
                 Project project,
                 ImmutableArray<DiagnosticAnalyzer> analyzers,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // Always run analyzers concurrently in OOP
                 const bool concurrentAnalysis = true;
 
@@ -408,7 +419,8 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
             public CompilationWithAnalyzersCacheEntry(
                 CompilationWithAnalyzers compilationWithAnalyzers,
                 BidirectionalMap<string, DiagnosticAnalyzer> analyzerToIdMap
-            ) {
+            )
+            {
                 CompilationWithAnalyzers = compilationWithAnalyzers;
                 AnalyzerToIdMap = analyzerToIdMap;
             }

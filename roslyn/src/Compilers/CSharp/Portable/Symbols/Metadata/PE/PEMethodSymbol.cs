@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 SignatureHeader header,
                 ImmutableArray<ParameterSymbol> parameters,
                 PEParameterSymbol returnParam
-            ) {
+            )
+            {
                 this.Header = header;
                 this.Parameters = parameters;
                 this.ReturnParam = returnParam;
@@ -189,7 +190,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             public void InitializeIsExplicitOverride(
                 bool isExplicitFinalizerOverride,
                 bool isExplicitClassOverride
-            ) {
+            )
+            {
                 int bitsToSet =
                     (isExplicitFinalizerOverride ? IsExplicitFinalizerOverrideBit : 0)
                     | (isExplicitClassOverride ? IsExplicitClassOverrideBit : 0)
@@ -377,7 +379,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             PEModuleSymbol moduleSymbol,
             PENamedTypeSymbol containingType,
             MethodDefinitionHandle methodDef
-        ) {
+        )
+        {
             Debug.Assert((object)moduleSymbol != null);
             Debug.Assert((object)containingType != null);
             Debug.Assert(!methodDef.IsNil);
@@ -842,7 +845,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         private bool SetAssociatedPropertyOrEvent(
             Symbol propertyOrEventSymbol,
             MethodKind methodKind
-        ) {
+        )
+        {
             if ((object)_associatedPropertyOrEventOpt == null)
             {
                 Debug.Assert(
@@ -980,7 +984,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
         private ImmutableArray<TypeParameterSymbol> EnsureTypeParametersAreLoaded(
             ref DiagnosticInfo diagnosticInfo
-        ) {
+        )
+        {
             var typeParams = _lazyTypeParameters;
             if (!typeParams.IsDefault)
             {
@@ -995,7 +1000,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
         private ImmutableArray<TypeParameterSymbol> LoadTypeParameters(
             ref DiagnosticInfo diagnosticInfo
-        ) {
+        )
+        {
             try
             {
                 var moduleSymbol = _containingType.ContainingPEModule;
@@ -1048,7 +1054,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                         this.MethodKind == MethodKind.Ordinary
                         && IsValidExtensionMethodSignature()
                         && this.ContainingType.MightContainExtensionMethods
-                    ) {
+                    )
+                    {
                         var moduleSymbol = _containingType.ContainingPEModule;
                         isExtensionMethod = moduleSymbol.Module.HasExtensionAttribute(
                             _handle,
@@ -1219,7 +1226,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 || this.IsVararg
                 || this.ParameterCount != parameterCount
                 || this.IsParams()
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -1272,7 +1280,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                         )
                         && this.ReturnsVoid
                         && this.Arity == 0
-                    ) {
+                    )
+                    {
                         if (this.IsStatic)
                         {
                             if (Parameters.Length == 0)
@@ -1293,7 +1302,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     !this.HasRuntimeSpecialName
                     && this.IsStatic
                     && this.DeclaredAccessibility == Accessibility.Public
-                ) {
+                )
+                {
                     switch (_name)
                     {
                         case WellKnownMemberNames.AdditionOperatorName:
@@ -1353,7 +1363,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                                 this.ContainingType.TypeKind == TypeKind.Class
                                 && this.IsRuntimeFinalizer(skipFirstMethodKindCheck: true)
                             ) || this.IsExplicitFinalizerOverride
-                        ) {
+                        )
+                        {
                             return MethodKind.Destructor;
                         }
                         break;
@@ -1370,7 +1381,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                         if (
                             !SyntaxFacts.IsValidIdentifier(this.Name)
                             && !this.ExplicitInterfaceImplementations.IsEmpty
-                        ) {
+                        )
+                        {
                             return MethodKind.ExplicitInterfaceImplementation;
                         }
                         break;
@@ -1540,7 +1552,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             CultureInfo preferredCulture = null,
             bool expandIncludes = false,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             return PEDocumentationCommentUtils.GetDocumentationComment(
                 this,
                 _containingType.ContainingPEModule,
@@ -1565,7 +1578,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     diagnosticInfo == null
                     && GetUnmanagedCallersOnlyAttributeData(forceComplete: true)
                         is UnmanagedCallersOnlyAttributeData data
-                ) {
+                )
+                {
                     Debug.Assert(
                         !ReferenceEquals(data, UnmanagedCallersOnlyAttributeData.Uninitialized)
                     );
@@ -1580,7 +1594,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                             location: null,
                             diagnostics: null
                         )
-                    ) {
+                    )
+                    {
                         diagnosticInfo = new CSDiagnosticInfo(ErrorCode.ERR_BindToBogus, this);
                     }
                 }
@@ -1600,7 +1615,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
         private UseSiteInfo<AssemblySymbol> InitializeUseSiteDiagnostic(
             UseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             if (_packedFlags.IsUseSiteDiagnosticPopulated)
             {
                 return GetCachedUseSiteInfo();
@@ -1609,7 +1625,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             if (
                 useSiteInfo.DiagnosticInfo is object
                 || !useSiteInfo.SecondaryDependencies.IsNullOrEmpty()
-            ) {
+            )
+            {
                 useSiteInfo = AccessUncommonFields()
                     ._lazyCachedUseSiteInfo.InterlockedInitialize(PrimaryDependency, useSiteInfo);
             }
@@ -1707,7 +1724,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 #nullable enable
         internal override UnmanagedCallersOnlyAttributeData? GetUnmanagedCallersOnlyAttributeData(
             bool forceComplete
-        ) {
+        )
+        {
             if (!_packedFlags.IsUnmanagedCallersOnlyAttributePopulated)
             {
                 var containingModule = (PEModuleSymbol)ContainingModule;
@@ -1789,14 +1807,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         internal override void AddSynthesizedAttributes(
             PEModuleBuilder moduleBuilder,
             ref ArrayBuilder<SynthesizedAttributeData> attributes
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
 
         internal override void AddSynthesizedReturnTypeAttributes(
             PEModuleBuilder moduleBuilder,
             ref ArrayBuilder<SynthesizedAttributeData> attributes
-        ) {
+        )
+        {
             throw ExceptionUtilities.Unreachable;
         }
 

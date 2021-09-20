@@ -32,7 +32,8 @@ namespace System
             char lowSurr,
             out bool isSurrogatePair,
             bool isQuery
-        ) {
+        )
+        {
             Debug.Assert(char.IsHighSurrogate(highSurr));
 
             if (Rune.TryCreate(highSurr, lowSurr, out Rune rune))
@@ -95,7 +96,8 @@ namespace System
             int start,
             int end,
             UriComponents component
-        ) {
+        )
+        {
             int size = end - start;
             var dest =
                 size <= Uri.StackallocThreshold
@@ -119,7 +121,8 @@ namespace System
                             || ch == '%'
                             || CheckIsReserved(ch, component)
                             || UriHelper.IsNotSafeForUnescape(ch)
-                        ) {
+                        )
+                        {
                             // keep as is
                             dest.Append(pInput[i++]);
                             dest.Append(pInput[i++]);

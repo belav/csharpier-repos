@@ -33,10 +33,8 @@ namespace System.Security.Cryptography.X509Certificates
         public X500DistinguishedName(string distinguishedName)
             : this(distinguishedName, X500DistinguishedNameFlags.Reversed) { }
 
-        public X500DistinguishedName(
-            string distinguishedName,
-            X500DistinguishedNameFlags flag
-        ) : base(new Oid(null, null), Encode(distinguishedName, flag))
+        public X500DistinguishedName(string distinguishedName, X500DistinguishedNameFlags flag)
+            : base(new Oid(null, null), Encode(distinguishedName, flag))
         {
             _lazyDistinguishedName = distinguishedName;
         }

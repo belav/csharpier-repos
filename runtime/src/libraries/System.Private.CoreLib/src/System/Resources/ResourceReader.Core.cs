@@ -33,7 +33,8 @@ namespace System.Resources
             Stream stream,
             Dictionary<string, ResourceLocator> resCache,
             bool permitDeserialization
-        ) {
+        )
+        {
             Debug.Assert(stream != null, "Need a stream!");
             Debug.Assert(stream.CanRead, "Stream should be readable!");
             Debug.Assert(resCache != null, "Need a Dictionary!");
@@ -109,7 +110,8 @@ namespace System.Resources
             if (
                 Volatile.Read(ref s_binaryFormatterType) is null
                 || Volatile.Read(ref s_deserializeMethod) is null
-            ) {
+            )
+            {
                 Type binaryFormatterType = Type.GetType(
                     "System.Runtime.Serialization.Formatters.Binary.BinaryFormatter, System.Runtime.Serialization.Formatters",
                     throwOnError: true
@@ -142,7 +144,8 @@ namespace System.Resources
         // lightup code completes.
         private static Func<object, Stream, object> CreateUntypedDelegate<TInstance>(
             MethodInfo method
-        ) {
+        )
+        {
             Func<TInstance, Stream, object> typedDelegate =
                 (Func<TInstance, Stream, object>)Delegate.CreateDelegate(
                     typeof(Func<TInstance, Stream, object>),
@@ -162,7 +165,8 @@ namespace System.Resources
             string resourceName,
             out string resourceType,
             out byte[] resourceData
-        ) {
+        )
+        {
             if (resourceName == null)
                 throw new ArgumentNullException(nameof(resourceName));
             if (_resCache == null)
@@ -227,7 +231,8 @@ namespace System.Resources
                 if (
                     typeCode < 0
                     || typeCode >= ResourceTypeCode.StartOfUserTypes + _typeTable.Length
-                ) {
+                )
+                {
                     throw new BadImageFormatException(SR.BadImageFormat_InvalidType);
                 }
                 resourceType = TypeNameFromTypeCode(typeCode);

@@ -459,7 +459,8 @@ namespace Microsoft.AspNetCore.Owin
         void ICollection<KeyValuePair<string, object>>.CopyTo(
             KeyValuePair<string, object>[] array,
             int arrayIndex
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -568,7 +569,8 @@ namespace Microsoft.AspNetCore.Owin
                 Func<object> defaultFactory,
                 Action<object, object> setter,
                 Func<object> featureFactory
-            ) {
+            )
+            {
                 FeatureInterface = featureInterface;
                 Getter = getter;
                 Setter = setter;
@@ -653,14 +655,12 @@ namespace Microsoft.AspNetCore.Owin
             /// </summary>
             /// <param name="getter">Value getter delegate.</param>
             /// <param name="setter">Value setter delegate.</param>
-            public FeatureMap(
-                Func<TFeature, object> getter,
-                Action<TFeature, object> setter
-            ) : base(
-                typeof(TFeature),
-                feature => getter((TFeature)feature),
-                (feature, value) => setter((TFeature)feature, value)
-            ) { }
+            public FeatureMap(Func<TFeature, object> getter, Action<TFeature, object> setter)
+                : base(
+                    typeof(TFeature),
+                    feature => getter((TFeature)feature),
+                    (feature, value) => setter((TFeature)feature, value)
+                ) { }
 
             /// <summary>
             /// Initializes a new instance of <see cref="FeatureMap"/> for the specified feature interface type.
@@ -672,12 +672,13 @@ namespace Microsoft.AspNetCore.Owin
                 Func<TFeature, object> getter,
                 Func<object> defaultFactory,
                 Action<TFeature, object> setter
-            ) : base(
-                typeof(TFeature),
-                feature => getter((TFeature)feature),
-                defaultFactory,
-                (feature, value) => setter((TFeature)feature, value)
-            ) { }
+            )
+                : base(
+                    typeof(TFeature),
+                    feature => getter((TFeature)feature),
+                    defaultFactory,
+                    (feature, value) => setter((TFeature)feature, value)
+                ) { }
 
             /// <summary>
             /// Initializes a new instance of <see cref="FeatureMap"/> for the specified feature interface type.
@@ -691,13 +692,14 @@ namespace Microsoft.AspNetCore.Owin
                 Func<object> defaultFactory,
                 Action<TFeature, object> setter,
                 Func<TFeature> featureFactory
-            ) : base(
-                typeof(TFeature),
-                feature => getter((TFeature)feature),
-                defaultFactory,
-                (feature, value) => setter((TFeature)feature, value),
-                () => featureFactory()
-            ) { }
+            )
+                : base(
+                    typeof(TFeature),
+                    feature => getter((TFeature)feature),
+                    defaultFactory,
+                    (feature, value) => setter((TFeature)feature, value),
+                    () => featureFactory()
+                ) { }
         }
     }
 }

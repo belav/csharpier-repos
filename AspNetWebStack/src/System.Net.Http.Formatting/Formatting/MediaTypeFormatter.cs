@@ -190,7 +190,8 @@ namespace System.Net.Http.Formatting
             Stream readStream,
             HttpContent content,
             IFormatterLogger formatterLogger
-        ) {
+        )
+        {
             throw Error.NotSupported(
                 Properties.Resources.MediaTypeFormatterCannotRead,
                 GetType().Name
@@ -221,7 +222,8 @@ namespace System.Net.Http.Formatting
             HttpContent content,
             IFormatterLogger formatterLogger,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (cancellationToken.IsCancellationRequested)
             {
                 return TaskHelpers.Canceled<object>();
@@ -255,7 +257,8 @@ namespace System.Net.Http.Formatting
             Stream writeStream,
             HttpContent content,
             TransportContext transportContext
-        ) {
+        )
+        {
             // HttpContent.SerializeToStreamAsync doesn't take in a CancellationToken. So, there is no easy way to get the CancellationToken
             // to the formatter while writing response. We are cheating here by passing fake cancellation tokens. We should fix this
             // when we fix HttpContent.
@@ -296,7 +299,8 @@ namespace System.Net.Http.Formatting
             HttpContent content,
             TransportContext transportContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw Error.NotSupported(
                 Properties.Resources.MediaTypeFormatterCannotWrite,
                 GetType().Name
@@ -381,7 +385,8 @@ namespace System.Net.Http.Formatting
                                 supportedEncoding.WebName,
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             encoding = supportedEncoding;
                             break;
                         }
@@ -431,7 +436,8 @@ namespace System.Net.Http.Formatting
             Type type,
             HttpContentHeaders headers,
             MediaTypeHeaderValue mediaType
-        ) {
+        )
+        {
             if (type == null)
             {
                 throw Error.ArgumentNull("type");
@@ -491,7 +497,8 @@ namespace System.Net.Http.Formatting
             Type type,
             HttpRequestMessage request,
             MediaTypeHeaderValue mediaType
-        ) {
+        )
+        {
             if (type == null)
             {
                 throw Error.ArgumentNull("type");

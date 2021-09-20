@@ -139,7 +139,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Telemetry
             AnalyzerActionCounts actionCounts,
             int suppressionActionCounts,
             TimeSpan executionTime
-        ) {
+        )
+        {
             CompilationStartActionsCount = actionCounts.CompilationStartActionsCount;
             CompilationEndActionsCount = actionCounts.CompilationEndActionsCount;
             CompilationActionsCount = actionCounts.CompilationActionsCount;

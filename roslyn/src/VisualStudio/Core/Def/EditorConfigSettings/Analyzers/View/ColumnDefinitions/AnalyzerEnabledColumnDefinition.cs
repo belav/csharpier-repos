@@ -32,7 +32,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Analyzers
             ITableEntryHandle entry,
             bool singleColumnView,
             out FrameworkElement content
-        ) {
+        )
+        {
             var checkBox = new CheckBox();
             if (entry.TryGetValue(Name, out bool enabled))
             {

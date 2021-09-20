@@ -145,7 +145,8 @@ namespace Microsoft.Extensions.Options
             TDep1 dependency,
             TDep2 dependency2,
             Action<TOptions, TDep1, TDep2> action
-        ) {
+        )
+        {
             Name = name;
             Action = action;
             Dependency1 = dependency;
@@ -226,7 +227,8 @@ namespace Microsoft.Extensions.Options
             TDep2 dependency2,
             TDep3 dependency3,
             Action<TOptions, TDep1, TDep2, TDep3> action
-        ) {
+        )
+        {
             Name = name;
             Action = action;
             Dependency1 = dependency;
@@ -317,7 +319,8 @@ namespace Microsoft.Extensions.Options
             TDep3 dependency3,
             TDep4 dependency4,
             Action<TOptions, TDep1, TDep2, TDep3, TDep4> action
-        ) {
+        )
+        {
             Name = name;
             Action = action;
             Dependency1 = dependency1;
@@ -418,7 +421,8 @@ namespace Microsoft.Extensions.Options
             TDep4 dependency4,
             TDep5 dependency5,
             Action<TOptions, TDep1, TDep2, TDep3, TDep4, TDep5> action
-        ) {
+        )
+        {
             Name = name;
             Action = action;
             Dependency1 = dependency1;

@@ -52,7 +52,8 @@ namespace Microsoft.TestCommon
                     "at Microsoft.TestCommon.Assert.",
                     StringComparison.OrdinalIgnoreCase
                 )
-            ) {
+            )
+            {
                 return true;
             }
 

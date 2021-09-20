@@ -185,12 +185,14 @@ namespace Microsoft.CodeAnalysis.CodeStyle
                 IPerLanguageOption
             > supportedDiagnosticsWithPerLanguageOptions,
             string language
-        ) : this(
-            supportedDiagnosticsWithLangaugeSpecificOptions.Keys.Concat(
-                    supportedDiagnosticsWithPerLanguageOptions.Keys
-                )
-                .ToImmutableArray()
-        ) {
+        )
+            : this(
+                supportedDiagnosticsWithLangaugeSpecificOptions.Keys.Concat(
+                        supportedDiagnosticsWithPerLanguageOptions.Keys
+                    )
+                    .ToImmutableArray()
+            )
+        {
             foreach (var (descriptor, option) in supportedDiagnosticsWithLangaugeSpecificOptions)
                 AddDiagnosticIdToOptionMapping(descriptor.Id, option, language);
 
@@ -201,7 +203,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         private static void AddDiagnosticIdToOptionMapping(
             string diagnosticId,
             IPerLanguageOption? option
-        ) {
+        )
+        {
             if (option != null)
             {
                 AddDiagnosticIdToOptionMapping(diagnosticId, ImmutableHashSet.Create(option));
@@ -212,7 +215,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
             string diagnosticId,
             ILanguageSpecificOption? option,
             string language
-        ) {
+        )
+        {
             if (option != null)
             {
                 AddDiagnosticIdToOptionMapping(

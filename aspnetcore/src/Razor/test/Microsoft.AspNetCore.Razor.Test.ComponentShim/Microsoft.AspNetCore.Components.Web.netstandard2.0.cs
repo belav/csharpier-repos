@@ -57,13 +57,15 @@ namespace Microsoft.AspNetCore.Components.Forms
         public static string FieldCssClass(
             this Microsoft.AspNetCore.Components.Forms.EditContext editContext,
             in Microsoft.AspNetCore.Components.Forms.FieldIdentifier fieldIdentifier
-        ) {
+        )
+        {
             throw null;
         }
         public static string FieldCssClass<TField>(
             this Microsoft.AspNetCore.Components.Forms.EditContext editContext,
             System.Linq.Expressions.Expression<System.Func<TField>> accessor
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -200,7 +202,8 @@ namespace Microsoft.AspNetCore.Components.Forms
         }
         public override System.Threading.Tasks.Task SetParametersAsync(
             Microsoft.AspNetCore.Components.ParameterView parameters
-        ) {
+        )
+        {
             throw null;
         }
         protected abstract bool TryParseValueFromString(
@@ -219,7 +222,8 @@ namespace Microsoft.AspNetCore.Components.Forms
             string value,
             out bool result,
             out string validationErrorMessage
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -245,7 +249,8 @@ namespace Microsoft.AspNetCore.Components.Forms
             string value,
             out TValue result,
             out string validationErrorMessage
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -272,7 +277,8 @@ namespace Microsoft.AspNetCore.Components.Forms
             string value,
             out TValue result,
             out string validationErrorMessage
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -295,7 +301,8 @@ namespace Microsoft.AspNetCore.Components.Forms
             string value,
             out TValue result,
             out string validationErrorMessage
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -309,7 +316,8 @@ namespace Microsoft.AspNetCore.Components.Forms
             string value,
             out string result,
             out string validationErrorMessage
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -323,7 +331,8 @@ namespace Microsoft.AspNetCore.Components.Forms
             string value,
             out string result,
             out string validationErrorMessage
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1638,70 +1647,80 @@ namespace Microsoft.AspNetCore.Components.Web
             this Microsoft.AspNetCore.Components.EventCallbackFactory factory,
             object receiver,
             System.Action<Microsoft.AspNetCore.Components.Web.ClipboardEventArgs> callback
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.DragEventArgs> Create(
             this Microsoft.AspNetCore.Components.EventCallbackFactory factory,
             object receiver,
             System.Action<Microsoft.AspNetCore.Components.Web.DragEventArgs> callback
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.ErrorEventArgs> Create(
             this Microsoft.AspNetCore.Components.EventCallbackFactory factory,
             object receiver,
             System.Action<Microsoft.AspNetCore.Components.Web.ErrorEventArgs> callback
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.FocusEventArgs> Create(
             this Microsoft.AspNetCore.Components.EventCallbackFactory factory,
             object receiver,
             System.Action<Microsoft.AspNetCore.Components.Web.FocusEventArgs> callback
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.KeyboardEventArgs> Create(
             this Microsoft.AspNetCore.Components.EventCallbackFactory factory,
             object receiver,
             System.Action<Microsoft.AspNetCore.Components.Web.KeyboardEventArgs> callback
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.MouseEventArgs> Create(
             this Microsoft.AspNetCore.Components.EventCallbackFactory factory,
             object receiver,
             System.Action<Microsoft.AspNetCore.Components.Web.MouseEventArgs> callback
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.PointerEventArgs> Create(
             this Microsoft.AspNetCore.Components.EventCallbackFactory factory,
             object receiver,
             System.Action<Microsoft.AspNetCore.Components.Web.PointerEventArgs> callback
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.ProgressEventArgs> Create(
             this Microsoft.AspNetCore.Components.EventCallbackFactory factory,
             object receiver,
             System.Action<Microsoft.AspNetCore.Components.Web.ProgressEventArgs> callback
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.TouchEventArgs> Create(
             this Microsoft.AspNetCore.Components.EventCallbackFactory factory,
             object receiver,
             System.Action<Microsoft.AspNetCore.Components.Web.TouchEventArgs> callback
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.WheelEventArgs> Create(
             this Microsoft.AspNetCore.Components.EventCallbackFactory factory,
             object receiver,
             System.Action<Microsoft.AspNetCore.Components.Web.WheelEventArgs> callback
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.ClipboardEventArgs> Create(
@@ -1711,7 +1730,8 @@ namespace Microsoft.AspNetCore.Components.Web
                 Microsoft.AspNetCore.Components.Web.ClipboardEventArgs,
                 System.Threading.Tasks.Task
             > callback
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.DragEventArgs> Create(
@@ -1721,7 +1741,8 @@ namespace Microsoft.AspNetCore.Components.Web
                 Microsoft.AspNetCore.Components.Web.DragEventArgs,
                 System.Threading.Tasks.Task
             > callback
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.ErrorEventArgs> Create(
@@ -1731,7 +1752,8 @@ namespace Microsoft.AspNetCore.Components.Web
                 Microsoft.AspNetCore.Components.Web.ErrorEventArgs,
                 System.Threading.Tasks.Task
             > callback
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.FocusEventArgs> Create(
@@ -1741,7 +1763,8 @@ namespace Microsoft.AspNetCore.Components.Web
                 Microsoft.AspNetCore.Components.Web.FocusEventArgs,
                 System.Threading.Tasks.Task
             > callback
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.KeyboardEventArgs> Create(
@@ -1751,7 +1774,8 @@ namespace Microsoft.AspNetCore.Components.Web
                 Microsoft.AspNetCore.Components.Web.KeyboardEventArgs,
                 System.Threading.Tasks.Task
             > callback
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.MouseEventArgs> Create(
@@ -1761,7 +1785,8 @@ namespace Microsoft.AspNetCore.Components.Web
                 Microsoft.AspNetCore.Components.Web.MouseEventArgs,
                 System.Threading.Tasks.Task
             > callback
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.PointerEventArgs> Create(
@@ -1771,7 +1796,8 @@ namespace Microsoft.AspNetCore.Components.Web
                 Microsoft.AspNetCore.Components.Web.PointerEventArgs,
                 System.Threading.Tasks.Task
             > callback
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.ProgressEventArgs> Create(
@@ -1781,7 +1807,8 @@ namespace Microsoft.AspNetCore.Components.Web
                 Microsoft.AspNetCore.Components.Web.ProgressEventArgs,
                 System.Threading.Tasks.Task
             > callback
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.TouchEventArgs> Create(
@@ -1791,7 +1818,8 @@ namespace Microsoft.AspNetCore.Components.Web
                 Microsoft.AspNetCore.Components.Web.TouchEventArgs,
                 System.Threading.Tasks.Task
             > callback
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.WheelEventArgs> Create(
@@ -1801,7 +1829,8 @@ namespace Microsoft.AspNetCore.Components.Web
                 Microsoft.AspNetCore.Components.Web.WheelEventArgs,
                 System.Threading.Tasks.Task
             > callback
-        ) {
+        )
+        {
             throw null;
         }
     }

@@ -158,7 +158,8 @@ namespace Internal.Cryptography.Pal
                 void* privateKeyPtr,
                 Interop.AndroidCrypto.PAL_KeyAlgorithm privateKeyAlgorithm,
                 void* context
-            ) {
+            )
+            {
                 ref EnumCertificatesContext callbackContext = ref Unsafe.As<
                     byte,
                     EnumCertificatesContext

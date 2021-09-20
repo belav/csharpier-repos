@@ -111,7 +111,8 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
             SemanticModelAnalysisContext context,
             TPropertyDeclaration propertyDeclaration,
             List<AnalysisResult> analysisResults
-        ) {
+        )
+        {
             var cancellationToken = context.CancellationToken;
             var semanticModel = context.SemanticModel;
 
@@ -120,7 +121,8 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
                     semanticModel.GetDeclaredSymbol(propertyDeclaration, cancellationToken)
                     is IPropertySymbol property
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -155,7 +157,8 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
             if (
                 !CanExplicitInterfaceImplementationsBeFixed()
                 && property.ExplicitInterfaceImplementations.Length != 0
-            ) {
+            )
+            {
                 return;
             }
 
@@ -252,7 +255,8 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
                     fieldReference.GetSyntax(cancellationToken)
                     is TVariableDeclarator variableDeclarator
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -298,7 +302,8 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
             SemanticModel semanticModel,
             IMethodSymbol setMethod,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return CheckFieldAccessExpression(
                 semanticModel,
                 GetSetterExpression(setMethod, semanticModel, cancellationToken)
@@ -309,7 +314,8 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
             SemanticModel semanticModel,
             IMethodSymbol getMethod,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return CheckFieldAccessExpression(
                 semanticModel,
                 GetGetterExpression(getMethod, cancellationToken)
@@ -319,7 +325,8 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
         private static IFieldSymbol? CheckFieldAccessExpression(
             SemanticModel semanticModel,
             TExpression? expression
-        ) {
+        )
+        {
             if (expression == null)
             {
                 return null;
@@ -344,7 +351,8 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
             List<AnalysisResult> analysisResults,
             HashSet<IFieldSymbol> ineligibleFields,
             SemanticModelAnalysisContext context
-        ) {
+        )
+        {
             var ineligibleFieldsSet = new HashSet<IFieldSymbol>(ineligibleFields);
             foreach (var result in analysisResults)
             {
@@ -374,7 +382,8 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
                     compilation,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 return;
             }
 
@@ -428,7 +437,8 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
             SemanticModel semanticModel,
             Compilation compilation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return true;
         }
 
@@ -450,7 +460,8 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
                 TVariableDeclarator variableDeclarator,
                 SemanticModel semanticModel,
                 string symbolEquivalenceKey
-            ) {
+            )
+            {
                 Property = property;
                 Field = field;
                 PropertyDeclaration = propertyDeclaration;

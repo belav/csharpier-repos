@@ -112,7 +112,8 @@ namespace System.Reflection
             BindingFlags invokeAttr,
             Binder? binder,
             CultureInfo? culture
-        ) {
+        )
+        {
             throw new FieldAccessException(SR.Acc_ReadOnly);
         }
 

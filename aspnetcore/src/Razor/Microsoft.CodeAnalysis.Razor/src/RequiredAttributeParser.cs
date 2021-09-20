@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.Razor
         public static void AddRequiredAttributes(
             string requiredAttributes,
             TagMatchingRuleDescriptorBuilder ruleBuilder
-        ) {
+        )
+        {
             var requiredAttributeParser = new DefaultRequiredAttributeParser(requiredAttributes);
             requiredAttributeParser.AddRequiredAttributes(ruleBuilder);
         }
@@ -176,7 +177,8 @@ namespace Microsoft.CodeAnalysis.Razor
             private bool TryParseCssValueComparison(
                 RequiredAttributeDescriptorBuilder builder,
                 out RequiredAttributeDescriptor.ValueComparisonMode valueComparison
-            ) {
+            )
+            {
                 Debug.Assert(!AtEnd);
 
                 if (CssValueComparisons.TryGetValue(Current, out valueComparison))
@@ -284,7 +286,8 @@ namespace Microsoft.CodeAnalysis.Razor
                         attributeBuilder,
                         out RequiredAttributeDescriptor.ValueComparisonMode valueComparison
                     )
-                ) {
+                )
+                {
                     return false;
                 }
 
@@ -298,7 +301,8 @@ namespace Microsoft.CodeAnalysis.Razor
                 if (
                     valueComparison != RequiredAttributeDescriptor.ValueComparisonMode.None
                     && !TryParseCssValue(attributeBuilder)
-                ) {
+                )
+                {
                     return false;
                 }
 

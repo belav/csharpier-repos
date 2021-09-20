@@ -22,7 +22,8 @@ namespace System.Net.NameResolution.Tests
 
         private static async Task TestGetHostAddressesAsync(
             Func<Task<IPAddress[]>> getHostAddressesFunc
-        ) {
+        )
+        {
             Task<IPAddress[]> hostEntryTask1 = getHostAddressesFunc();
             Task<IPAddress[]> hostEntryTask2 = getHostAddressesFunc();
 
@@ -126,7 +127,8 @@ namespace System.Net.NameResolution.Tests
             bool useAsync,
             IPAddress address,
             AddressFamily family
-        ) {
+        )
+        {
             IPAddress[] addresses = useAsync
                 ? await Dns.GetHostAddressesAsync(address.ToString(), family)
                 : Dns.GetHostAddresses(address.ToString(), family);
@@ -160,7 +162,8 @@ namespace System.Net.NameResolution.Tests
             bool useAsync,
             string host,
             AddressFamily addressFamily
-        ) {
+        )
+        {
             IPAddress[] addresses = useAsync
                 ? await Dns.GetHostAddressesAsync(host, addressFamily)
                 : Dns.GetHostAddresses(host, addressFamily);

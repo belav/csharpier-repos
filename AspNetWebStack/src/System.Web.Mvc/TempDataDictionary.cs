@@ -157,26 +157,30 @@ namespace System.Web.Mvc
         void ICollection<KeyValuePair<string, object>>.CopyTo(
             KeyValuePair<string, object>[] array,
             int index
-        ) {
+        )
+        {
             ((ICollection<KeyValuePair<string, object>>)_data).CopyTo(array, index);
         }
 
         void ICollection<KeyValuePair<string, object>>.Add(
             KeyValuePair<string, object> keyValuePair
-        ) {
+        )
+        {
             _initialKeys.Add(keyValuePair.Key);
             ((ICollection<KeyValuePair<string, object>>)_data).Add(keyValuePair);
         }
 
         bool ICollection<KeyValuePair<string, object>>.Contains(
             KeyValuePair<string, object> keyValuePair
-        ) {
+        )
+        {
             return ((ICollection<KeyValuePair<string, object>>)_data).Contains(keyValuePair);
         }
 
         bool ICollection<KeyValuePair<string, object>>.Remove(
             KeyValuePair<string, object> keyValuePair
-        ) {
+        )
+        {
             _initialKeys.Remove(keyValuePair.Key);
             return ((ICollection<KeyValuePair<string, object>>)_data).Remove(keyValuePair);
         }

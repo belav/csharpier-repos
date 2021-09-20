@@ -38,7 +38,8 @@ namespace System.Net.Http.Formatting.Parsers
             HttpUnsortedRequest httpRequest,
             int maxRequestLineSize,
             int maxHeaderSize
-        ) {
+        )
+        {
             if (httpRequest == null)
             {
                 throw Error.ArgumentNull("httpRequest");

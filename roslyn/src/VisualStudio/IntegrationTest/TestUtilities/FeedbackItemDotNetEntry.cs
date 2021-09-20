@@ -62,7 +62,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
                 (obj is FeedbackItemDotNetEntry dotNetEntry)
                 && (EventId == dotNetEntry.EventId)
                 && (Data == dotNetEntry.Data)
-            ) {
+            )
+            {
                 return true;
             }
 

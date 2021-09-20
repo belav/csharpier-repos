@@ -56,7 +56,8 @@ class Program
         string randomCookie,
         bool swallowExcep = false,
         bool useEntryPointFilter = false
-    ) {
+    )
+    {
         EventLog logBefore = new EventLog("Application");
         int logBeforeCount = logBefore.Entries.Count;
 
@@ -128,7 +129,8 @@ class Program
     private static bool RunUnhandledExceptionTest(
         bool swallowExcep = false,
         bool useEntryPointFilter = false
-    ) {
+    )
+    {
         string cookie = RandomCookie();
         string[] logEntriesToCheck = { "unhandled exception", "ArgumentException", cookie };
         return LaunchTest(
@@ -158,7 +160,8 @@ class Program
         {
             if (
                 !System.Runtime.InteropServices.RuntimeInformation.OSDescription.Contains("Windows")
-            ) {
+            )
+            {
                 Console.WriteLine("WindowsEventLog Test: Passing on all non-Windows platform");
                 return 100;
             }

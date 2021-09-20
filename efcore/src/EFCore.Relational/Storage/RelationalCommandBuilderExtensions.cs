@@ -25,7 +25,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         public static IRelationalCommandBuilder AppendLine(
             this IRelationalCommandBuilder commandBuilder,
             string value
-        ) {
+        )
+        {
             Check.NotNull(commandBuilder, nameof(commandBuilder));
             Check.NotNull(value, nameof(value));
 
@@ -46,7 +47,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             this IRelationalCommandBuilder commandBuilder,
             string value,
             bool skipFinalNewline = false
-        ) {
+        )
+        {
             Check.NotNull(commandBuilder, nameof(commandBuilder));
             Check.NotNull(value, nameof(value));
 
@@ -105,7 +107,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             this IRelationalCommandBuilder commandBuilder,
             string invariantName,
             string name
-        ) {
+        )
+        {
             Check.NotNull(commandBuilder, nameof(commandBuilder));
             Check.NotEmpty(invariantName, nameof(invariantName));
             Check.NotEmpty(name, nameof(name));
@@ -144,7 +147,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             string name,
             RelationalTypeMapping typeMapping,
             bool nullable
-        ) {
+        )
+        {
             Check.NotNull(commandBuilder, nameof(commandBuilder));
             Check.NotEmpty(invariantName, nameof(invariantName));
             Check.NotEmpty(name, nameof(name));
@@ -175,7 +179,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             string invariantName,
             string name,
             IProperty property
-        ) {
+        )
+        {
             Check.NotNull(commandBuilder, nameof(commandBuilder));
             Check.NotEmpty(invariantName, nameof(invariantName));
             Check.NotEmpty(name, nameof(name));
@@ -212,7 +217,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             string name,
             RelationalTypeMapping relationalTypeMapping,
             bool? nullable
-        ) {
+        )
+        {
             Check.NotNull(commandBuilder, nameof(commandBuilder));
             Check.NotEmpty(invariantName, nameof(invariantName));
             Check.NotEmpty(name, nameof(name));
@@ -244,7 +250,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             this IRelationalCommandBuilder commandBuilder,
             string invariantName,
             IReadOnlyList<IRelationalParameter> subParameters
-        ) {
+        )
+        {
             Check.NotNull(commandBuilder, nameof(commandBuilder));
             Check.NotEmpty(invariantName, nameof(invariantName));
             Check.NotNull(subParameters, nameof(subParameters));
@@ -274,7 +281,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             this IRelationalCommandBuilder commandBuilder,
             string invariantName,
             DbParameter dbParameter
-        ) {
+        )
+        {
             Check.NotNull(commandBuilder, nameof(commandBuilder));
             Check.NotEmpty(invariantName, nameof(invariantName));
             Check.NotNull(dbParameter, nameof(dbParameter));
@@ -306,7 +314,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             string invariantName,
             string name,
             IProperty property
-        ) {
+        )
+        {
             Check.NotNull(commandBuilder, nameof(commandBuilder));
             Check.NotEmpty(invariantName, nameof(invariantName));
             Check.NotEmpty(name, nameof(name));

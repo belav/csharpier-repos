@@ -333,7 +333,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             ulong requestId,
             int httpStatusCode,
             IList<string>? authChallenges = null
-        ) {
+        )
+        {
             HttpApiTypes.HTTP_RESPONSE_V2 httpResponse = new HttpApiTypes.HTTP_RESPONSE_V2();
             httpResponse.Response_V1.Version = new HttpApiTypes.HTTP_VERSION();
             httpResponse.Response_V1.Version.MajorVersion = (ushort)1;
@@ -378,7 +379,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         int headerValueIndex = 0;
                         headerValueIndex < authChallenges.Count;
                         headerValueIndex++
-                    ) {
+                    )
+                    {
                         // Add Value
                         string headerValue = authChallenges[headerValueIndex];
                         byte[] bytes = HeaderEncoding.GetBytes(headerValue);

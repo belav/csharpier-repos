@@ -158,7 +158,8 @@ namespace System.Collections.Generic
         public PriorityQueue(
             IEnumerable<(TElement Element, TPriority Priority)> items,
             IComparer<TPriority>? comparer
-        ) {
+        )
+        {
             if (items is null)
             {
                 throw new ArgumentNullException(nameof(items));
@@ -268,7 +269,8 @@ namespace System.Collections.Generic
         public bool TryDequeue(
             [MaybeNullWhen(false)] out TElement element,
             [MaybeNullWhen(false)] out TPriority priority
-        ) {
+        )
+        {
             if (_size != 0)
             {
                 (element, priority) = _nodes[0];
@@ -296,7 +298,8 @@ namespace System.Collections.Generic
         public bool TryPeek(
             [MaybeNullWhen(false)] out TElement element,
             [MaybeNullWhen(false)] out TPriority priority
-        ) {
+        )
+        {
             if (_size != 0)
             {
                 (element, priority) = _nodes[0];
@@ -433,7 +436,8 @@ namespace System.Collections.Generic
             if (
                 elements is ICollection<(TElement Element, TPriority Priority)> collection
                 && (count = collection.Count) > _nodes.Length - _size
-            ) {
+            )
+            {
                 Grow(_size + count);
             }
 
@@ -632,7 +636,8 @@ namespace System.Collections.Generic
         private void MoveUpDefaultComparer(
             (TElement Element, TPriority Priority) node,
             int nodeIndex
-        ) {
+        )
+        {
             // Instead of swapping items all the way to the root, we will perform
             // a similar optimization as in the insertion sort.
 
@@ -666,7 +671,8 @@ namespace System.Collections.Generic
         private void MoveUpCustomComparer(
             (TElement Element, TPriority Priority) node,
             int nodeIndex
-        ) {
+        )
+        {
             // Instead of swapping items all the way to the root, we will perform
             // a similar optimization as in the insertion sort.
 
@@ -701,7 +707,8 @@ namespace System.Collections.Generic
         private void MoveDownDefaultComparer(
             (TElement Element, TPriority Priority) node,
             int nodeIndex
-        ) {
+        )
+        {
             // The node to move down will not actually be swapped every time.
             // Rather, values on the affected path will be moved up, thus leaving a free spot
             // for this value to drop in. Similar optimization as in the insertion sort.
@@ -726,7 +733,8 @@ namespace System.Collections.Generic
                     if (
                         Comparer<TPriority>.Default.Compare(nextChild.Priority, minChild.Priority)
                         < 0
-                    ) {
+                    )
+                    {
                         minChild = nextChild;
                         minChildIndex = i;
                     }
@@ -753,7 +761,8 @@ namespace System.Collections.Generic
         private void MoveDownCustomComparer(
             (TElement Element, TPriority Priority) node,
             int nodeIndex
-        ) {
+        )
+        {
             // The node to move down will not actually be swapped every time.
             // Rather, values on the affected path will be moved up, thus leaving a free spot
             // for this value to drop in. Similar optimization as in the insertion sort.

@@ -372,7 +372,8 @@ namespace PartialCompactionTest
             int minObject,
             int maxObject,
             List<Object> Arr
-        ) {
+        )
+        {
             int sizeCounter = 0;
             double pinnedCount = 0;
             double objectCount = 0;

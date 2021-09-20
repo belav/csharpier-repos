@@ -21,7 +21,8 @@ namespace System.ComponentModel
             CultureInfo culture,
             object value,
             Type destinationType
-        ) {
+        )
+        {
             if (destinationType == typeof(string) && value is ICollection)
             {
                 return SR.Collection;
@@ -42,7 +43,8 @@ namespace System.ComponentModel
             ITypeDescriptorContext context,
             object value,
             Attribute[] attributes
-        ) {
+        )
+        {
             return new PropertyDescriptorCollection(null);
         }
     }

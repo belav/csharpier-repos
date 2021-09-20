@@ -18,7 +18,8 @@ namespace System.Buffers
         private static ArgumentOutOfRangeException GetArgumentOutOfRangeException(
             int sourceLength,
             int offset
-        ) {
+        )
+        {
             if ((uint)offset > (uint)sourceLength)
             {
                 // Offset is negative or less than array length
@@ -38,7 +39,8 @@ namespace System.Buffers
 
         public static void ThrowInvalidOperationException_ReturningPinnedBlock(
             DiagnosticPoolBlock block
-        ) {
+        )
+        {
             throw new InvalidOperationException(GenerateMessage("Disposing pinned block", block));
         }
 
@@ -49,13 +51,15 @@ namespace System.Buffers
 
         public static void ThrowInvalidOperationException_BlockDoubleDispose(
             DiagnosticPoolBlock block
-        ) {
+        )
+        {
             throw new InvalidOperationException("Block is being disposed twice");
         }
 
         public static void ThrowInvalidOperationException_BlockReturnedToDisposedPool(
             DiagnosticPoolBlock block
-        ) {
+        )
+        {
             throw new InvalidOperationException(
                 GenerateMessage("Block is being returned to disposed pool", block)
             );
@@ -63,7 +67,8 @@ namespace System.Buffers
 
         public static void ThrowInvalidOperationException_BlockIsBackedByDisposedSlab(
             DiagnosticPoolBlock block
-        ) {
+        )
+        {
             throw new InvalidOperationException(
                 GenerateMessage("Block is backed by disposed slab", block)
             );
@@ -73,7 +78,8 @@ namespace System.Buffers
             int returned,
             int total,
             DiagnosticPoolBlock[] blocks
-        ) {
+        )
+        {
             throw new InvalidOperationException(
                 GenerateMessage(
                     $"Memory pool with active blocks is being disposed, {returned} of {total} returned",
@@ -86,7 +92,8 @@ namespace System.Buffers
             int returned,
             int total,
             DiagnosticPoolBlock[] blocks
-        ) {
+        )
+        {
             throw new InvalidOperationException(
                 GenerateMessage(
                     $"Blocks were not returned in time, {returned} of {total} returned ",
@@ -125,7 +132,8 @@ namespace System.Buffers
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static ArgumentOutOfRangeException GetArgumentOutOfRangeException_BufferRequestTooLarge(
             int maxSize
-        ) {
+        )
+        {
             return new ArgumentOutOfRangeException(
                 GetArgumentName(ExceptionArgument.size),
                 $"Cannot allocate more than {maxSize} bytes in a single buffer"
@@ -135,7 +143,8 @@ namespace System.Buffers
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static ObjectDisposedException GetObjectDisposedException(
             ExceptionArgument argument
-        ) {
+        )
+        {
             return new ObjectDisposedException(GetArgumentName(argument));
         }
 

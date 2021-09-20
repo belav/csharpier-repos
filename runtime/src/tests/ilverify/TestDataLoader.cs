@@ -88,7 +88,8 @@ namespace ILVerification.Tests
 
         private static TheoryData<TestCase> GetTestTypeFromDll(
             Func<string[], TypeDefinitionHandle, TestCase> typeSelector
-        ) {
+        )
+        {
             var retVal = new TheoryData<TestCase>();
 
             foreach (var testDllName in GetAllTestDlls())
@@ -188,7 +189,8 @@ namespace ILVerification.Tests
 
         private static TheoryData<TestCase> GetTestMethodsFromDll(
             Func<string[], MethodDefinitionHandle, TestCase> methodSelector
-        ) {
+        )
+        {
             var retVal = new TheoryData<TestCase>();
 
             foreach (var testDllName in GetAllTestDlls())
@@ -223,7 +225,8 @@ namespace ILVerification.Tests
         private static MethodDefinitionHandle HandleSpecialTests(
             string[] methodParams,
             EcmaMethod method
-        ) {
+        )
+        {
             if (!methodParams[0].StartsWith(SpecialTestPrefix))
                 return method.Handle;
 

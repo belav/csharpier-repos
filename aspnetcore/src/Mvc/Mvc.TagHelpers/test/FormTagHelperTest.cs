@@ -394,7 +394,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             bool? antiforgery,
             FormMethod method,
             string expectedPostContent
-        ) {
+        )
+        {
             // Arrange
             var viewContext = CreateViewContext();
             var expectedAttribute = new TagHelperAttribute(
@@ -1030,7 +1031,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         public async Task ProcessAsync_SupportsAntiforgeryIfActionIsSpecified(
             bool? antiforgery,
             string expectedPostContent
-        ) {
+        )
+        {
             // Arrange
             var viewContext = CreateViewContext();
             var generator = new Mock<IHtmlGenerator>();
@@ -1081,7 +1083,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         [InlineData("asp-route-")]
         public async Task ProcessAsync_ThrowsIfActionConflictsWithBoundAttributes(
             string propertyName
-        ) {
+        )
+        {
             // Arrange
             var formTagHelper = new FormTagHelper(
                 new TestableHtmlGenerator(new EmptyModelMetadataProvider())
@@ -1126,7 +1129,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         [InlineData("Controller")]
         public async Task ProcessAsync_ThrowsIfRouteAndActionOrControllerProvided(
             string propertyName
-        ) {
+        )
+        {
             // Arrange
             var formTagHelper = new FormTagHelper(
                 new TestableHtmlGenerator(new EmptyModelMetadataProvider())

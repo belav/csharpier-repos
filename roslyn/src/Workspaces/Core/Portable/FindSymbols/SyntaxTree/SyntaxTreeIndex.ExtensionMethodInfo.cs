@@ -51,7 +51,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     string,
                     ImmutableArray<int>
                 > receiverTypeNameToExtensionMethodMap
-            ) {
+            )
+            {
                 ReceiverTypeNameToExtensionMethodMap = receiverTypeNameToExtensionMethodMap;
             }
 

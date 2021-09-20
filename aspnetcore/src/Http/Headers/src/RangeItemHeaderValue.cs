@@ -108,7 +108,8 @@ namespace Microsoft.Net.Http.Headers
             StringSegment input,
             int startIndex,
             ICollection<RangeItemHeaderValue> rangeCollection
-        ) {
+        )
+        {
             Contract.Requires(startIndex >= 0);
             Contract.Ensures(
                 (Contract.Result<int>() == 0) || (rangeCollection.Count > 0),
@@ -171,7 +172,8 @@ namespace Microsoft.Net.Http.Headers
             StringSegment input,
             int startIndex,
             out RangeItemHeaderValue? parsedValue
-        ) {
+        )
+        {
             Contract.Requires(startIndex >= 0);
 
             // This parser parses number ranges: e.g. '1-2', '1-', '-2'.
@@ -238,7 +240,8 @@ namespace Microsoft.Net.Http.Headers
                     input.Subsegment(fromStartIndex, fromLength),
                     out from
                 )
-            ) {
+            )
+            {
                 return 0;
             }
 
@@ -250,7 +253,8 @@ namespace Microsoft.Net.Http.Headers
                     input.Subsegment(toStartIndex, toLength),
                     out to
                 )
-            ) {
+            )
+            {
                 return 0;
             }
 

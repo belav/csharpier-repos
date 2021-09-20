@@ -63,7 +63,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplaceDefaultLiteral
                     SyntaxKind.DefaultLiteralExpression,
                     out LiteralExpressionSyntax defaultLiteral
                 )
-            ) {
+            )
+            {
                 var semanticModel = await context.Document.GetSemanticModelAsync(
                         context.CancellationToken
                     )
@@ -94,7 +95,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplaceDefaultLiteral
             TextSpan span,
             SyntaxNode newExpression,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxRoot = await document.GetSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
 
@@ -113,7 +115,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplaceDefaultLiteral
             SemanticModel semanticModel,
             LiteralExpressionSyntax defaultLiteral,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var generator = SyntaxGenerator.GetGenerator(document);
 
             var type = semanticModel.GetTypeInfo(defaultLiteral, cancellationToken).ConvertedType;
@@ -123,7 +126,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplaceDefaultLiteral
                     IsFlagsEnum(type, semanticModel.Compilation)
                     && type.GetMembers("None").FirstOrDefault() is IFieldSymbol field
                     && IsZero(field.ConstantValue)
-                ) {
+                )
+                {
                     return GenerateMemberAccess("None");
                 }
                 else if (
@@ -132,20 +136,23 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplaceDefaultLiteral
                             typeof(CancellationToken).FullName
                         )
                     )
-                ) {
+                )
+                {
                     return GenerateMemberAccess(nameof(CancellationToken.None));
                 }
                 else if (
                     type.SpecialType == SpecialType.System_IntPtr
                     || type.SpecialType == SpecialType.System_UIntPtr
-                ) {
+                )
+                {
                     return GenerateMemberAccess(nameof(IntPtr.Zero));
                 }
                 else if (
                     semanticModel.GetConstantValue(defaultLiteral, cancellationToken)
                         is var constant
                     && constant.HasValue
-                ) {
+                )
+                {
                     var newLiteral = generator.LiteralExpression(constant.Value);
                     return (newLiteral, newLiteral.ToString());
                 }
@@ -205,11 +212,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplaceDefaultLiteral
             public MyCodeAction(
                 Func<CancellationToken, Task<Document>> createChangedDocument,
                 string literal
-            ) : base(
-                string.Format(CSharpFeaturesResources.Use_0, literal),
-                createChangedDocument,
-                CSharpFeaturesResources.Use_0
-            ) { }
+            )
+                : base(
+                    string.Format(CSharpFeaturesResources.Use_0, literal),
+                    createChangedDocument,
+                    CSharpFeaturesResources.Use_0
+                ) { }
         }
     }
 }

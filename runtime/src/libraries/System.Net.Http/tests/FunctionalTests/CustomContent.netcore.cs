@@ -35,7 +35,8 @@ namespace System.Net.Http.Functional.Tests
                 Stream destination,
                 int bufferSize,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var buffer = new byte[bufferSize];
                 int bytesRead;
                 while ((bytesRead = await ReadAsync(buffer, cancellationToken)) != 0)
@@ -48,7 +49,8 @@ namespace System.Net.Http.Functional.Tests
             public async override ValueTask<int> ReadAsync(
                 Memory<byte> destination,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (_failException != null)
                 {
                     throw _failException;

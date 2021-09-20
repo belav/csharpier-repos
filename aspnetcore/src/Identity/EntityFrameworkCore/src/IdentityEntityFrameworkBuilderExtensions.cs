@@ -34,7 +34,8 @@ namespace Microsoft.Extensions.DependencyInjection
             Type userType,
             Type roleType,
             Type contextType
-        ) {
+        )
+        {
             var identityUserType = FindGenericBaseType(userType, typeof(IdentityUser<>));
             if (identityUserType == null)
             {

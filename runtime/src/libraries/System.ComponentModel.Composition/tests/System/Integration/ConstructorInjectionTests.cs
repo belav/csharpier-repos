@@ -40,7 +40,8 @@ namespace Tests.Integration
                 [Import(AllowDefault = true)] IOptionalRef import,
                 [Import("ContractThatShouldNotBeFound", AllowDefault = true)] int value,
                 [Import(AllowDefault = true)] OptionalExportProvided provided
-            ) {
+            )
+            {
                 Assert.Null(import);
                 Assert.Equal(0, value);
                 Assert.NotNull(provided);
@@ -66,7 +67,8 @@ namespace Tests.Integration
             [ImportingConstructor]
             public AWithCollectionArgument(
                 [ImportMany("MyConstructorCollectionItem")] IEnumerable<int> values
-            ) {
+            )
+            {
                 this._values = values;
             }
 

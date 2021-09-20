@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.Routing
         public DefaultParameterPolicyFactory(
             IOptions<RouteOptions> options,
             IServiceProvider serviceProvider
-        ) {
+        )
+        {
             _options = options.Value;
             _serviceProvider = serviceProvider;
         }
@@ -24,7 +25,8 @@ namespace Microsoft.AspNetCore.Routing
         public override IParameterPolicy Create(
             RoutePatternParameterPart? parameter,
             IParameterPolicy parameterPolicy
-        ) {
+        )
+        {
             if (parameterPolicy == null)
             {
                 throw new ArgumentNullException(nameof(parameterPolicy));
@@ -41,7 +43,8 @@ namespace Microsoft.AspNetCore.Routing
         public override IParameterPolicy Create(
             RoutePatternParameterPart? parameter,
             string inlineText
-        ) {
+        )
+        {
             if (inlineText == null)
             {
                 throw new ArgumentNullException(nameof(inlineText));
@@ -76,7 +79,8 @@ namespace Microsoft.AspNetCore.Routing
         private IParameterPolicy InitializeRouteConstraint(
             bool optional,
             IRouteConstraint routeConstraint
-        ) {
+        )
+        {
             if (optional)
             {
                 routeConstraint = new OptionalRouteConstraint(routeConstraint);

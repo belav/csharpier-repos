@@ -705,7 +705,8 @@ namespace System.Diagnostics.Contracts
             string? userMessage,
             string? conditionText,
             Exception? innerException
-        ) {
+        )
+        {
             if (
                 failureKind < ContractFailureKind.Precondition
                 || failureKind > ContractFailureKind.Assume

@@ -60,7 +60,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 bool forceRenameOverloads,
                 ImmutableArray<DocumentSpan> definitionLocations,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 this.CanRename = true;
 
                 _refactorNotifyServices = refactorNotifyServices;
@@ -116,7 +117,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 InlineRenameLocation location,
                 string triggerText,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var searchName = this.RenameSymbol.Name;
                 if (_isRenamingAttributePrefix)
                 {
@@ -142,7 +144,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 string triggerText,
                 string replacementText,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var position = triggerText.LastIndexOf(replacementText, StringComparison.Ordinal);
 
                 if (_isRenamingAttributePrefix)
@@ -183,7 +186,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                         this.RenameSymbol.Kind == SymbolKind.Alias
                         && ((IAliasSymbol)this.RenameSymbol).Target.IsAttribute()
                     )
-                ) {
+                )
+                {
                     if (HasAttributeSuffix(this.RenameSymbol.Name))
                     {
                         return true;
@@ -210,7 +214,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             public async Task<IInlineRenameLocationSet> FindRenameLocationsAsync(
                 OptionSet? optionSet,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var solution = _document.Project.Solution;
                 var locations = await Renamer.FindRenameLocationsAsync(
                         solution,
@@ -227,7 +232,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 Workspace workspace,
                 IEnumerable<DocumentId> changedDocumentIDs,
                 string replacementText
-            ) {
+            )
+            {
                 return _refactorNotifyServices.TryOnBeforeGlobalSymbolRenamed(
                     workspace,
                     changedDocumentIDs,
@@ -241,7 +247,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 Workspace workspace,
                 IEnumerable<DocumentId> changedDocumentIDs,
                 string replacementText
-            ) {
+            )
+            {
                 return _refactorNotifyServices.TryOnAfterGlobalSymbolRenamed(
                     workspace,
                     changedDocumentIDs,
@@ -258,7 +265,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                     && _document.Project.Solution.Workspace.CanApplyChange(
                         ApplyChangesKind.ChangeDocumentInfo
                     )
-                ) {
+                )
+                {
                     if (RenameSymbol.Locations.Length > 1)
                     {
                         return InlineRenameFileRenameInfo.TypeWithMultipleLocations;
@@ -276,7 +284,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                             symbolSourceDocument,
                             RenameSymbol.Name
                         )
-                    ) {
+                    )
+                    {
                         return InlineRenameFileRenameInfo.Allowed;
                     }
 

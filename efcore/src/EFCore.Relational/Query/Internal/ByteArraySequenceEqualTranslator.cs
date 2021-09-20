@@ -41,7 +41,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             MethodInfo method,
             IReadOnlyList<SqlExpression> arguments,
             IDiagnosticsLogger<DbLoggerCategory.Query> logger
-        ) {
+        )
+        {
             Check.NotNull(method, nameof(method));
             Check.NotNull(arguments, nameof(arguments));
             Check.NotNull(logger, nameof(logger));
@@ -50,7 +51,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 method.IsGenericMethod
                 && method.GetGenericMethodDefinition().Equals(EnumerableMethods.SequenceEqual)
                 && arguments[0].Type == typeof(byte[])
-            ) {
+            )
+            {
                 return _sqlExpressionFactory.Equal(arguments[0], arguments[1]);
             }
 

@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         private static async Task TestWithUseExpressionBodyWhenOnSingleLine(
             string code,
             string fixedCode
-        ) {
+        )
+        {
             await new VerifyCS.Test
             {
                 TestCode = code,
@@ -58,7 +59,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
             string code,
             string fixedCode,
             ReferenceAssemblies? referenceAssemblies = null
-        ) {
+        )
+        {
             await new VerifyCS.Test
             {
                 TestCode = code,

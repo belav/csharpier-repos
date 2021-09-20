@@ -105,7 +105,8 @@ namespace Microsoft.AspNetCore.Components.Forms
             long sourceOffset,
             Memory<byte> destination,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (_isReadingCompleted)
             {
                 return 0;

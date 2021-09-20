@@ -20,7 +20,8 @@ namespace System.Formats.Asn1.Tests.Reader
             string description,
             AsnEncodingRules ruleSet,
             string inputHex
-        ) {
+        )
+        {
             _ = description;
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
@@ -42,7 +43,8 @@ namespace System.Formats.Asn1.Tests.Reader
             AsnEncodingRules ruleSet,
             int expectedLength,
             string inputHex
-        ) {
+        )
+        {
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
 
@@ -64,7 +66,8 @@ namespace System.Formats.Asn1.Tests.Reader
             string description,
             AsnEncodingRules ruleSet,
             string inputHex
-        ) {
+        )
+        {
             _ = description;
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
@@ -187,7 +190,8 @@ namespace System.Formats.Asn1.Tests.Reader
             AsnEncodingRules ruleSet,
             string inputHex,
             string expectedHex
-        ) {
+        )
+        {
             byte[] inputData = inputHex.HexToByteArray();
             byte[] output = new byte[expectedHex.Length / 2];
             AsnReader reader = new AsnReader(inputData, ruleSet);
@@ -205,7 +209,8 @@ namespace System.Formats.Asn1.Tests.Reader
         private static void TryReadOctetStringBytes_Throws_Helper(
             AsnEncodingRules ruleSet,
             byte[] input
-        ) {
+        )
+        {
             AsnReader reader = new AsnReader(input, ruleSet);
 
             Assert.Throws<AsnContentException>(
@@ -219,7 +224,8 @@ namespace System.Formats.Asn1.Tests.Reader
         private static void ReadOctetStringBytes_Throws_Helper(
             AsnEncodingRules ruleSet,
             byte[] input
-        ) {
+        )
+        {
             AsnReader reader = new AsnReader(input, ruleSet);
 
             Assert.Throws<AsnContentException>(
@@ -271,7 +277,8 @@ namespace System.Formats.Asn1.Tests.Reader
             string description,
             AsnEncodingRules ruleSet,
             string inputHex
-        ) {
+        )
+        {
             _ = description;
             byte[] inputData = inputHex.HexToByteArray();
             TryReadOctetStringBytes_Throws_Helper(ruleSet, inputData);
@@ -565,7 +572,8 @@ namespace System.Formats.Asn1.Tests.Reader
             string inputHex,
             TagClass tagClass,
             int tagValue
-        ) {
+        )
+        {
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
 

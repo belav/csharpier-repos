@@ -17,7 +17,8 @@ namespace System.Web.Razor.Tokenizer.Symbols
             string content,
             TType type,
             IEnumerable<RazorError> errors
-        ) {
+        )
+        {
             if (content == null)
             {
                 throw new ArgumentNullException("content");

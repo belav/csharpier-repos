@@ -30,7 +30,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Shared
         public CompositeImage(
             ImmutableArray<ImageCompositionLayer> layers,
             IImageHandle imageHandle
-        ) {
+        )
+        {
             this.Layers = layers;
             this.ImageHandle = imageHandle;
         }
@@ -96,7 +97,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Shared
             int virtualWidth = 16,
             int virtualYOffset = 0,
             int virtualXOffset = 0
-        ) {
+        )
+        {
             return new ImageCompositionLayer
             {
                 VirtualWidth = virtualWidth,

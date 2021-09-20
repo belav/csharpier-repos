@@ -51,11 +51,8 @@ namespace System.Globalization
             _invalidCultureId = invalidCultureId;
         }
 
-        public CultureNotFoundException(
-            string? paramName,
-            int invalidCultureId,
-            string? message
-        ) : base(message, paramName)
+        public CultureNotFoundException(string? paramName, int invalidCultureId, string? message)
+            : base(message, paramName)
         {
             _invalidCultureId = invalidCultureId;
         }

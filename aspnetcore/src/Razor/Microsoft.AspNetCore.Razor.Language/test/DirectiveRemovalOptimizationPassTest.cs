@@ -145,7 +145,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         private static DocumentIntermediateNode Lower(
             RazorCodeDocument codeDocument,
             RazorEngine engine
-        ) {
+        )
+        {
             for (var i = 0; i < engine.Phases.Count; i++)
             {
                 var phase = engine.Phases[i];

@@ -80,7 +80,8 @@ namespace Microsoft.Extensions.CommandLineUtils
                         endIndex != message.Length
                         && message[endIndex] >= 0x20
                         && message[endIndex] <= 0x3f
-                    ) {
+                    )
+                    {
                         endIndex += 1;
                     }
 
@@ -100,7 +101,8 @@ namespace Microsoft.Extensions.CommandLineUtils
                                     message.Substring(startIndex, endIndex - startIndex),
                                     out value
                                 )
-                            ) {
+                            )
+                            {
                                 switch (value)
                                 {
                                     case 1:

@@ -92,7 +92,8 @@ namespace Microsoft.AspNetCore.Components.Forms
 
         private static async Task<EditForm> RenderAndGetTestEditFormComponentAsync(
             TestEditFormHostComponent hostComponent
-        ) {
+        )
+        {
             var testRenderer = new TestRenderer();
             var componentId = testRenderer.AssignRootComponentId(hostComponent);
             await testRenderer.RenderRootComponentAsync(componentId);

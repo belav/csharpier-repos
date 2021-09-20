@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis
                 string documentationMemberID,
                 CultureInfo preferredCulture,
                 CancellationToken cancellationToken = default(CancellationToken)
-            ) {
+            )
+            {
                 return "";
             }
 

@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             TabKeyCommandArgs args,
             Action nextHandler,
             CommandExecutionContext context
-        ) {
+        )
+        {
             // If the Dashboard is focused, just navigate through its UI.
             if (DashboardShouldReceiveKeyboardNavigation(args.TextView))
             {
@@ -65,7 +66,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             BackTabKeyCommandArgs args,
             Action nextHandler,
             CommandExecutionContext context
-        ) {
+        )
+        {
             // If the Dashboard is focused, just navigate through its UI.
             if (DashboardShouldReceiveKeyboardNavigation(args.TextView))
             {

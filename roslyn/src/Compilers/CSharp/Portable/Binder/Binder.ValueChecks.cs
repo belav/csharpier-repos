@@ -166,7 +166,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundIndexerAccess indexerAccess,
             BindValueKind valueKind,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var useSetAccessor =
                 valueKind == BindValueKind.Assignable && !indexerAccess.Indexer.ReturnsByRef;
             var accessorForDefaultArguments = useSetAccessor
@@ -252,7 +253,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression expr,
             BindValueKind valueKind,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             switch (expr.Kind)
             {
                 case BoundKind.PropertyGroup:
@@ -312,7 +314,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             // "member is inaccessible") will be dropped.
             if (
                 expr.Kind == BoundKind.MethodGroup && valueKind != BindValueKind.RValueOrMethodGroup
-            ) {
+            )
+            {
                 var methodGroup = (BoundMethodGroup)expr;
                 CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
                     diagnostics
@@ -347,7 +350,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (
                         (object)otherSymbol != null
                         && receiver?.Kind == BoundKind.TypeOrValueExpression
-                    ) {
+                    )
+                    {
                         // Since we're not accessing a method, this can't be a Color Color case, so TypeOrValueExpression should not have been used.
                         // CAVEAT: otherSymbol could be invalid in some way (e.g. inaccessible), in which case we would have fallen back on a
                         // method group lookup (to allow for extension methods), which would have required a TypeOrValueExpression.
@@ -383,7 +387,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         diagnostics: diagnostics
                     )
                 || expr.HasAnyErrors && valueKind == BindValueKind.RValueOrMethodGroup
-            ) {
+            )
+            {
                 return expr;
             }
 
@@ -431,7 +436,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindValueKind valueKind,
             bool checkingReceiver,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             Debug.Assert(!checkingReceiver || expr.Type.IsValueType || expr.Type.IsTypeParameter());
 
             if (expr.HasAnyErrors)
@@ -485,7 +491,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 (expr.ConstantValue != null)
                 || (expr.Type.GetSpecialTypeSafe() == SpecialType.System_Void)
-            ) {
+            )
+            {
                 Error(diagnostics, GetStandardLvalueError(valueKind), node);
                 return false;
             }
@@ -588,7 +595,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             Compilation.GetWellKnownType(WellKnownType.System_Range),
                             TypeCompareKind.ConsiderEverything
                         )
-                    ) {
+                    )
+                    {
                         // Range indexer is an rvalue
                         Error(diagnostics, GetStandardLvalueError(valueKind), node);
                         return false;
@@ -626,7 +634,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (
                         receiver is BoundFieldAccess fieldAccess
                         && fieldAccess.FieldSymbol.IsFixedSizeBuffer
-                    ) {
+                    )
+                    {
                         return CheckValueKind(
                             node,
                             fieldAccess.ReceiverOpt,
@@ -687,7 +696,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 this.ContainingMemberOrLambda as MethodSymbol
                             )?.IsEffectivelyReadOnly == true
                         )
-                    ) {
+                    )
+                    {
                         Error(diagnostics, GetThisLvalueError(valueKind, isValueType), node, node);
                         return false;
                     }
@@ -748,7 +758,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 diagnostics: diagnostics
                             )
                         )
-                    ) {
+                    )
+                    {
                         return true;
                     }
                     // report standard lvalue error
@@ -779,7 +790,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static bool CheckNotNamespaceOrType(
             BoundExpression expr,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             switch (expr.Kind)
             {
                 case BoundKind.NamespaceExpression:
@@ -812,7 +824,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindValueKind valueKind,
             bool checkingReceiver,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             // Local constants are never variables. Local variables are sometimes
             // not to be treated as variables, if they are fixed, declared in a using,
             // or declared in a foreach.
@@ -834,7 +847,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     localSymbol.RefKind == RefKind.RefReadOnly
                     || (localSymbol.RefKind == RefKind.None && !localSymbol.IsWritableVariable)
-                ) {
+                )
+                {
                     ReportReadonlyLocalError(
                         node,
                         localSymbol,
@@ -878,7 +892,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             uint escapeTo,
             bool checkingReceiver,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             LocalSymbol localSymbol = local.LocalSymbol;
 
             // if local symbol can escape to the same or wider/shallower scope then escapeTo
@@ -939,7 +954,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindValueKind valueKind,
             bool checkingReceiver,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             ParameterSymbol parameterSymbol = parameter.ParameterSymbol;
 
             // all parameters can be passed by ref/out or assigned to
@@ -957,7 +973,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             else if (
                 parameterSymbol.RefKind == RefKind.None && RequiresRefAssignableVariable(valueKind)
-            ) {
+            )
+            {
                 Error(diagnostics, ErrorCode.ERR_RefLocalOrParamExpected, node);
                 return false;
             }
@@ -984,7 +1001,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             uint escapeTo,
             bool checkingReceiver,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             ParameterSymbol parameterSymbol = parameter.ParameterSymbol;
 
             // byval parameters can escape to method's top level. Others can escape further.
@@ -1022,7 +1040,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindValueKind valueKind,
             bool checkingReceiver,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var fieldSymbol = fieldAccess.FieldSymbol;
             var fieldIsStatic = fieldSymbol.IsStatic;
 
@@ -1060,7 +1079,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                       TypeCompareKind.ConsiderEverything2
                                   )
                         )
-                    ) {
+                    )
+                    {
                         if (containing.Kind == SymbolKind.Method)
                         {
                             MethodSymbol containingMethod = (MethodSymbol)containing;
@@ -1140,7 +1160,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundAssignmentOperator assignment,
             BindValueKind valueKind,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             // Only ref-assigns produce LValues
             if (assignment.IsRef)
             {
@@ -1163,7 +1184,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             uint escapeFrom,
             uint escapeTo,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var fieldSymbol = fieldAccess.FieldSymbol;
             // fields that are static or belong to reference types can ref escape anywhere
             if (fieldSymbol.IsStatic || fieldSymbol.ContainingType.IsReferenceType)
@@ -1188,7 +1210,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             uint escapeFrom,
             uint escapeTo,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var eventSymbol = eventAccess.EventSymbol;
 
             // field-like events that are static or belong to reference types can ref escape anywhere
@@ -1212,7 +1235,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundEventAccess boundEvent,
             BindValueKind valueKind,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             // Compound assignment (actually "event assignment") is allowed "everywhere", subject to the restrictions of
             // accessibility, use site errors, and receiver variable-ness (for structs).
             // Other operations are allowed only for field-like events and only where the backing field is accessible
@@ -1255,7 +1279,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             BindValueKind.Assignable,
                             diagnostics
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }
@@ -1282,7 +1307,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             valueKind,
                             diagnostics
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }
@@ -1296,7 +1322,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression receiver,
             BindValueKind kind,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             Debug.Assert(receiver != null);
             return Flags.Includes(BinderFlags.ObjectInitializerMember)
                     && receiver.Kind == BoundKind.ObjectOrCollectionValuePlaceholder
@@ -1345,7 +1372,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindValueKind valueKind,
             bool checkingReceiver,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             // A call can only be a variable if it returns by reference. If this is the case,
             // whether or not it is a valid variable depends on whether or not the call is the
             // RHS of a return or an assign by reference:
@@ -1369,7 +1397,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (
                 RequiresAssignableVariable(valueKind) && methodSymbol.RefKind == RefKind.RefReadOnly
-            ) {
+            )
+            {
                 ReportReadOnlyError(methodSymbol, node, valueKind, checkingReceiver, diagnostics);
                 return false;
             }
@@ -1389,7 +1418,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindValueKind valueKind,
             bool checkingReceiver,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             // SPEC: If the left operand is a property or indexer access, the property or indexer must
             // SPEC: have a set accessor. If this is not the case, a compile-time error occurs.
 
@@ -1405,7 +1435,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 (RequiresReferenceToLocation(valueKind) || checkingReceiver)
                 && propertySymbol.RefKind == RefKind.None
-            ) {
+            )
+            {
                 if (checkingReceiver)
                 {
                     // Error is associated with expression, not node which may be distinct.
@@ -1434,7 +1465,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 RequiresAssignableVariable(valueKind)
                 && propertySymbol.RefKind == RefKind.RefReadOnly
-            ) {
+            )
+            {
                 ReportReadOnlyError(propertySymbol, node, valueKind, checkingReceiver, diagnostics);
                 return false;
             }
@@ -1536,14 +1568,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                             setValueKind,
                             diagnostics
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
 
                     if (
                         IsBadBaseAccess(node, receiver, setMethod, diagnostics, propertySymbol)
                         || reportUseSite(setMethod)
-                    ) {
+                    )
+                    {
                         return false;
                     }
 
@@ -1613,7 +1647,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (
                         IsBadBaseAccess(node, receiver, getMethod, diagnostics, propertySymbol)
                         || reportUseSite(getMethod)
-                    ) {
+                    )
+                    {
                         return false;
                     }
 
@@ -1637,7 +1672,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         useSiteInfo.DiagnosticInfo,
                         propertySymbol.GetUseSiteInfo().DiagnosticInfo
                     )
-                ) {
+                )
+                {
                     return diagnostics.Add(useSiteInfo, propertySyntax);
                 }
                 else
@@ -1685,7 +1721,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Symbol member,
             BindingDiagnosticBag diagnostics,
             Symbol propertyOrEventSymbolOpt = null
-        ) {
+        )
+        {
             Debug.Assert(member.Kind != SymbolKind.Property);
             Debug.Assert(member.Kind != SymbolKind.Event);
 
@@ -1720,7 +1757,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<int> argsToParamsOpt,
             uint scopeOfTheContainingExpression,
             bool isRefEscape
-        ) {
+        )
+        {
             // SPEC: (also applies to the CheckInvocationEscape counterpart)
             //
             //            An lvalue resulting from a ref-returning method invocation e1.M(e2, ...) is ref-safe - to - escape the smallest of the following scopes:
@@ -1845,7 +1883,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             uint escapeTo,
             BindingDiagnosticBag diagnostics,
             bool isRefEscape
-        ) {
+        )
+        {
             // SPEC:
             //            In a method invocation, the following constraints apply:
             //•	If there is a ref or out argument to a ref struct type (including the receiver), with safe-to-escape E1, then
@@ -2000,7 +2039,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<int> argsToParamsOpt,
             uint scopeOfTheContainingExpression,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             // SPEC:
             // In a method invocation, the following constraints apply:
             // - If there is a ref or out argument of a ref struct type (including the receiver), with safe-to-escape E1, then
@@ -2041,7 +2081,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (
                         parameters[paramIndex].RefKind.IsWritableReference()
                         && argument.Type?.IsRefLikeType == true
-                    ) {
+                    )
+                    {
                         escapeTo = Math.Min(
                             escapeTo,
                             GetValEscape(argument, scopeOfTheContainingExpression)
@@ -2181,14 +2222,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<ParameterSymbol> parameters,
             ImmutableArray<int> argsToParamsOpt,
             ref ArrayBuilder<bool> inParametersMatchedWithArgs
-        ) {
+        )
+        {
             var effectiveRefKind = argRefKindsOpt.IsDefault
                 ? RefKind.None
                 : argRefKindsOpt[argIndex];
             if (
                 (effectiveRefKind == RefKind.None || effectiveRefKind == RefKind.In)
                 && argIndex < parameters.Length
-            ) {
+            )
+            {
                 var paramIndex = argsToParamsOpt.IsDefault ? argIndex : argsToParamsOpt[argIndex];
 
                 if (parameters[paramIndex].RefKind == RefKind.In)
@@ -2212,7 +2255,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static ParameterSymbol TryGetunmatchedInParameterAndFreeMatchedArgs(
             ImmutableArray<ParameterSymbol> parameters,
             ref ArrayBuilder<bool> inParametersMatchedWithArgs
-        ) {
+        )
+        {
             try
             {
                 if (!parameters.IsDefault)
@@ -2229,7 +2273,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             parameter.RefKind == RefKind.In
                             && inParametersMatchedWithArgs?[i] != true
                             && parameter.Type.IsRefLikeType == false
-                        ) {
+                        )
+                        {
                             return parameter;
                         }
                     }
@@ -2257,7 +2302,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindValueKind kind,
             bool checkingReceiver,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             Debug.Assert((object)local != null);
             Debug.Assert(kind != BindValueKind.RValue);
 
@@ -2416,7 +2462,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindValueKind kind,
             bool checkingReceiver,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             Debug.Assert((object)field != null);
             Debug.Assert(RequiresAssignableVariable(kind));
             Debug.Assert(field.Type != (object)null);
@@ -2464,7 +2511,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindValueKind kind,
             bool checkingReceiver,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             Debug.Assert((object)symbol != null);
             Debug.Assert(RequiresAssignableVariable(kind));
 
@@ -2503,7 +2551,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             uint escapeTo,
             bool isByRef,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             if (isByRef)
             {
                 if (
@@ -2515,7 +2564,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         checkingReceiver: false,
                         diagnostics: diagnostics
                     )
-                ) {
+                )
+                {
                     return expr;
                 }
             }
@@ -2530,7 +2580,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         checkingReceiver: false,
                         diagnostics: diagnostics
                     )
-                ) {
+                )
+                {
                     return expr;
                 }
             }
@@ -2761,7 +2812,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             uint escapeTo,
             bool checkingReceiver,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             Debug.Assert(!checkingReceiver || expr.Type.IsValueType || expr.Type.IsTypeParameter());
 
             if (escapeTo >= escapeFrom)
@@ -3078,7 +3130,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal static uint GetBroadestValEscape(
             BoundTupleExpression expr,
             uint scopeOfTheContainingExpression
-        ) {
+        )
+        {
             uint broadest = scopeOfTheContainingExpression;
             foreach (var element in expr.Arguments)
             {
@@ -3440,7 +3493,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static uint GetTupleValEscape(
             ImmutableArray<BoundExpression> elements,
             uint scopeOfTheContainingExpression
-        ) {
+        )
+        {
             uint narrowestScope = scopeOfTheContainingExpression;
             foreach (var element in elements)
             {
@@ -3456,7 +3510,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static uint GetValEscapeOfObjectInitializer(
             BoundObjectInitializerExpression initExpr,
             uint scopeOfTheContainingExpression
-        ) {
+        )
+        {
             var result = Binder.ExternalScope;
             foreach (var expression in initExpr.Initializers)
             {
@@ -3489,7 +3544,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static uint GetValEscape(
             ImmutableArray<BoundExpression> expressions,
             uint scopeOfTheContainingExpression
-        ) {
+        )
+        {
             var result = Binder.ExternalScope;
             foreach (var expression in expressions)
             {
@@ -3511,7 +3567,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             uint escapeTo,
             bool checkingReceiver,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             Debug.Assert(!checkingReceiver || expr.Type.IsValueType || expr.Type.IsTypeParameter());
 
             if (escapeTo >= escapeFrom)
@@ -4167,7 +4224,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             uint escapeFrom,
             uint escapeTo,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             foreach (var element in elements)
             {
                 if (
@@ -4179,7 +4237,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         checkingReceiver: false,
                         diagnostics: diagnostics
                     )
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -4192,7 +4251,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             uint escapeFrom,
             uint escapeTo,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             foreach (var expression in initExpr.Initializers)
             {
                 if (expression.Kind == BoundKind.AssignmentOperator)
@@ -4207,7 +4267,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             checkingReceiver: false,
                             diagnostics: diagnostics
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
 
@@ -4219,7 +4280,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             escapeTo,
                             diagnostics: diagnostics
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }
@@ -4234,7 +4296,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             checkingReceiver: false,
                             diagnostics: diagnostics
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }
@@ -4248,7 +4311,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             uint escapeFrom,
             uint escapeTo,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             foreach (var expression in expressions)
             {
                 if (
@@ -4260,7 +4324,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         checkingReceiver: false,
                         diagnostics: diagnostics
                     )
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -4296,7 +4361,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             MethodSymbol method,
             bool peVerifyCompatEnabled,
             HashSet<LocalSymbol> stackLocalsOpt
-        ) {
+        )
+        {
             Debug.Assert(method is object);
 
             switch (expression.Kind)
@@ -4306,7 +4372,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         addressKind == AddressKind.ReadOnly
                         && !expression.Type.IsValueType
                         && peVerifyCompatEnabled
-                    ) {
+                    )
+                    {
                         // due to array covariance getting a reference may throw ArrayTypeMismatch when element is not a struct,
                         // passing "readonly." prefix would prevent that, but it is unverifiable, so will make a copy in compat case
                         return false;
@@ -4460,7 +4527,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             MethodSymbol method,
             bool peVerifyCompatEnabled,
             HashSet<LocalSymbol> stackLocalsOpt
-        ) {
+        )
+        {
             Debug.Assert(method is object);
 
             FieldSymbol field = fieldAccess.FieldSymbol;
@@ -4534,7 +4602,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     method.ContainingType,
                     TypeCompareKind.AllIgnoreOptions
                 )
-            ) {
+            )
+            {
                 return false;
             }
 

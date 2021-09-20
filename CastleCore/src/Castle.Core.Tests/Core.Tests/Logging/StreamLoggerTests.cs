@@ -185,7 +185,8 @@ namespace Castle.Core.Logging.Tests
             LoggerLevel level,
             string expectedMessage,
             Exception expectedException
-        ) {
+        )
+        {
             stream.Seek(0, SeekOrigin.Begin);
 
             StreamReader reader = new StreamReader(stream);

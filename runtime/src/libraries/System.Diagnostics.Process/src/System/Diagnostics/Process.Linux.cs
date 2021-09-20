@@ -39,7 +39,8 @@ namespace System.Diagnostics
                         pid,
                         out Interop.procfs.ParsedStatus parsedStatus
                     )
-                ) {
+                )
+                {
                     ProcessInfo processInfo = ProcessManager.CreateProcessInfo(
                         ref parsedStat,
                         ref parsedStatus,
@@ -101,7 +102,8 @@ namespace System.Diagnostics
                                 text.AsSpan(btimeStart, btimeEnd - btimeStart),
                                 out long bootTimeSeconds
                             )
-                        ) {
+                        )
+                        {
                             return DateTime.UnixEpoch + TimeSpan.FromSeconds(bootTimeSeconds);
                         }
                     }
@@ -247,7 +249,8 @@ namespace System.Diagnostics
             IntPtr? newMax,
             out IntPtr resultingMin,
             out IntPtr resultingMax
-        ) {
+        )
+        {
             // RLIMIT_RSS with setrlimit not supported on Linux > 2.4.30.
             throw new PlatformNotSupportedException(SR.MinimumWorkingSetNotSupported);
         }
@@ -283,7 +286,8 @@ namespace System.Diagnostics
                         bufferSize: 1,
                         useAsync: false
                     )
-                ) {
+                )
+                {
                     Span<byte> buffer = stackalloc byte[512];
                     int bytesRead = 0;
                     while (true)

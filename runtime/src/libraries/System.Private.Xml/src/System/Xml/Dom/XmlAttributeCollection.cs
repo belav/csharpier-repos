@@ -67,7 +67,8 @@ namespace System.Xml
                         hash == node.LocalNameHash
                         && localName == node.LocalName
                         && namespaceURI == node.NamespaceURI
-                    ) {
+                    )
+                    {
                         return node;
                     }
                 }
@@ -86,7 +87,8 @@ namespace System.Xml
                     tmp.LocalNameHash == node.LocalNameHash
                     && tmp.Name == node.Name
                     && tmp.NamespaceURI == node.NamespaceURI
-                ) {
+                )
+                {
                     return i;
                 }
             }
@@ -103,7 +105,8 @@ namespace System.Xml
                     tmp.LocalNameHash == node.LocalNameHash
                     && tmp.LocalName == node.LocalName
                     && tmp.NamespaceURI == node.NamespaceURI
-                ) {
+                )
+                {
                     return i;
                 }
             }
@@ -350,7 +353,8 @@ namespace System.Xml
                     attrname != null
                     && attrname.Prefix == attr.XmlName.Prefix
                     && attrname.LocalName == attr.XmlName.LocalName
-                ) {
+                )
+                {
                     parent.OwnerDocument.AddElementWithId(attr.Value, parentElem); //add the element into the hashtable
                 }
             }
@@ -370,7 +374,8 @@ namespace System.Xml
                     attrname != null
                     && attrname.Prefix == attr.XmlName.Prefix
                     && attrname.LocalName == attr.XmlName.LocalName
-                ) {
+                )
+                {
                     parent.OwnerDocument.RemoveElementWithId(attr.Value, parentElem); //remove the element from the hashtable
                 }
             }
@@ -404,7 +409,8 @@ namespace System.Xml
                 attrname != null
                 && attrname.Prefix == attrPrefix
                 && attrname.LocalName == attrLocalName
-            ) {
+            )
+            {
                 return true;
             }
 

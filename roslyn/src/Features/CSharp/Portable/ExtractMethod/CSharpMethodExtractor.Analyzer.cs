@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 SelectionResult selectionResult,
                 bool localFunction,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var analyzer = new CSharpAnalyzer(
                     selectionResult,
                     localFunction,
@@ -49,7 +50,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 ITypeSymbol type,
                 VariableStyle style,
                 bool variableDeclared
-            ) {
+            )
+            {
                 return CreateFromSymbolCommon<LocalDeclarationStatementSyntax>(
                     compilation,
                     symbol,
@@ -61,7 +63,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
             protected override int GetIndexOfVariableInfoToUseAsReturnValue(
                 IList<VariableInfo> variableInfo
-            ) {
+            )
+            {
                 var numberOfOutParameters = 0;
                 var numberOfRefParameters = 0;
 
@@ -110,7 +113,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             protected override ITypeSymbol GetRangeVariableType(
                 SemanticModel model,
                 IRangeVariableSymbol symbol
-            ) {
+            )
+            {
                 var info = model.GetSpeculativeTypeInfo(
                     SelectionResult.FinalSpan.Start,
                     SyntaxFactory.ParseName(symbol.Name),
@@ -120,7 +124,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     Microsoft.CodeAnalysis.Shared.Extensions.ISymbolExtensions.IsErrorType(
                         info.Type
                     )
-                ) {
+                )
+                {
                     return null;
                 }
 
@@ -163,7 +168,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             protected override ITypeSymbol GetSymbolType(
                 SemanticModel semanticModel,
                 ISymbol symbol
-            ) {
+            )
+            {
                 var selectionOperation = semanticModel.GetOperation(
                     SelectionResult.GetContainingScope()
                 );

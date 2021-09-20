@@ -229,7 +229,8 @@ namespace JIT.HardwareIntrinsics.Arm
             UInt64 right,
             UInt64 result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             var isUnexpectedResult = false;
 
             isUnexpectedResult = Helpers.MultiplyHigh(left, right) != result;

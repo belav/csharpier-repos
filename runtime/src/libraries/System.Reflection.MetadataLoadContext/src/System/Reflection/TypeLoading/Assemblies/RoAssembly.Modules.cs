@@ -103,7 +103,8 @@ namespace System.Reflection.TypeLoading
                     includeManifestModule: true,
                     includeResourceModules: getResourceModules
                 )
-            ) {
+            )
+            {
                 RoModule module = GetRoModule(afi);
                 modules.Add(module);
             }
@@ -114,7 +115,8 @@ namespace System.Reflection.TypeLoading
             string moduleName,
             byte[]? rawModule,
             byte[]? rawSymbolStore
-        ) {
+        )
+        {
             if (moduleName == null)
                 throw new ArgumentNullException(nameof(moduleName));
             if (rawModule == null)
@@ -144,13 +146,15 @@ namespace System.Reflection.TypeLoading
             string name,
             bool includeManifestModule,
             out AssemblyFileInfo afi
-        ) {
+        )
+        {
             foreach (
                 AssemblyFileInfo candidate in GetAssemblyFileInfosFromManifest(
                     includeManifestModule: includeManifestModule,
                     includeResourceModules: true
                 )
-            ) {
+            )
+            {
                 if (name.Equals(candidate.Name, StringComparison.OrdinalIgnoreCase))
                 {
                     afi = candidate;

@@ -21,7 +21,8 @@ namespace System.DirectoryServices.ActiveDirectory
             string propertyName,
             ICollection classNames,
             bool onlyNames
-        ) {
+        )
+        {
             _schemaClass = schemaClass;
             _propertyName = propertyName;
             _isBound = isBound;
@@ -48,7 +49,8 @@ namespace System.DirectoryServices.ActiveDirectory
             bool isBound,
             string propertyName,
             ICollection classes
-        ) {
+        )
+        {
             _schemaClass = schemaClass;
             _propertyName = propertyName;
             _isBound = isBound;

@@ -38,7 +38,8 @@ namespace System.Web.Mvc
             ViewContext viewContext,
             IViewDataContainer viewDataContainer,
             RouteCollection routeCollection
-        ) {
+        )
+        {
             if (viewContext == null)
             {
                 throw new ArgumentNullException("viewContext");
@@ -286,7 +287,8 @@ namespace System.Web.Mvc
                 !String.IsNullOrEmpty(salt)
                 || !String.IsNullOrEmpty(domain)
                 || !String.IsNullOrEmpty(path)
-            ) {
+            )
+            {
                 throw new NotSupportedException(
                     "This method is deprecated. Use the AntiForgeryToken() method instead. To specify a custom domain for the generated cookie, use the <httpCookies> configuration element. To specify custom data to be embedded within the token, use the static AntiForgeryConfig.AdditionalDataProvider property."
                 );
@@ -381,7 +383,8 @@ namespace System.Web.Mvc
             ViewContext viewContext,
             string partialViewName,
             ViewEngineCollection viewEngineCollection
-        ) {
+        )
+        {
             ViewEngineResult result = viewEngineCollection.FindPartialView(
                 viewContext,
                 partialViewName
@@ -443,7 +446,8 @@ namespace System.Web.Mvc
             string controllerName,
             RouteValueDictionary routeValues,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             return GenerateLink(
                 requestContext,
                 routeCollection,
@@ -474,7 +478,8 @@ namespace System.Web.Mvc
             string fragment,
             RouteValueDictionary routeValues,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             return GenerateLinkInternal(
                 requestContext,
                 routeCollection,
@@ -504,7 +509,8 @@ namespace System.Web.Mvc
             RouteValueDictionary routeValues,
             IDictionary<string, object> htmlAttributes,
             bool includeImplicitMvcValues
-        ) {
+        )
+        {
             string url = UrlHelper.GenerateUrl(
                 routeName,
                 actionName,
@@ -536,7 +542,8 @@ namespace System.Web.Mvc
             string routeName,
             RouteValueDictionary routeValues,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             return GenerateRouteLink(
                 requestContext,
                 routeCollection,
@@ -563,7 +570,8 @@ namespace System.Web.Mvc
             string fragment,
             RouteValueDictionary routeValues,
             IDictionary<string, object> htmlAttributes
-        ) {
+        )
+        {
             return GenerateLinkInternal(
                 requestContext,
                 routeCollection,
@@ -641,7 +649,8 @@ namespace System.Web.Mvc
         public IDictionary<string, object> GetUnobtrusiveValidationAttributes(
             string name,
             ModelMetadata metadata
-        ) {
+        )
+        {
             Dictionary<string, object> results = new Dictionary<string, object>();
 
             // The ordering of these 3 checks (and the early exits) is for performance reasons.
@@ -717,7 +726,8 @@ namespace System.Web.Mvc
             if (
                 String.Equals(httpMethod, "GET", StringComparison.OrdinalIgnoreCase)
                 || String.Equals(httpMethod, "POST", StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     MvcResources.HtmlHelper_InvalidHttpMethod,
                     "httpMethod"
@@ -770,7 +780,8 @@ namespace System.Web.Mvc
             object model,
             TextWriter writer,
             ViewEngineCollection viewEngineCollection
-        ) {
+        )
+        {
             if (String.IsNullOrEmpty(partialViewName))
             {
                 throw new ArgumentException(MvcResources.Common_NullOrEmpty, "partialViewName");

@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.Rename
             bool isRenamableAccessor = false,
             bool isWrittenTo = false,
             TextSpan containingLocationForStringOrComment = default
-        ) {
+        )
+        {
             Location = location;
             DocumentId = documentId;
             CandidateReason = candidateReason;

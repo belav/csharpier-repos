@@ -46,7 +46,8 @@ namespace Microsoft.EntityFrameworkCore
         public static TResult Execute<TResult>(
             this IExecutionStrategy strategy,
             Func<TResult> operation
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
 
             return strategy.Execute(operation, operationScoped => operationScoped());
@@ -63,7 +64,8 @@ namespace Microsoft.EntityFrameworkCore
             this IExecutionStrategy strategy,
             TState state,
             Action<TState> operation
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
 
             strategy.Execute(
@@ -120,7 +122,8 @@ namespace Microsoft.EntityFrameworkCore
             this IExecutionStrategy strategy,
             Func<CancellationToken, Task> operation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
 
             return strategy.ExecuteAsync(
@@ -152,7 +155,8 @@ namespace Microsoft.EntityFrameworkCore
         public static Task<TResult> ExecuteAsync<TResult>(
             this IExecutionStrategy strategy,
             Func<Task<TResult>> operation
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
 
             return strategy.ExecuteAsync(
@@ -186,7 +190,8 @@ namespace Microsoft.EntityFrameworkCore
             this IExecutionStrategy strategy,
             Func<CancellationToken, Task<TResult>> operation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
 
             return strategy.ExecuteAsync(
@@ -212,7 +217,8 @@ namespace Microsoft.EntityFrameworkCore
             this IExecutionStrategy strategy,
             TState state,
             Func<TState, Task> operation
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
 
             return strategy.ExecuteAsync(
@@ -248,7 +254,8 @@ namespace Microsoft.EntityFrameworkCore
             TState state,
             Func<TState, CancellationToken, Task> operation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
 
             return strategy.ExecuteAsync(
@@ -283,7 +290,8 @@ namespace Microsoft.EntityFrameworkCore
             this IExecutionStrategy strategy,
             TState state,
             Func<TState, Task<TResult>> operation
-        ) {
+        )
+        {
             Check.NotNull(operation, nameof(operation));
 
             return strategy.ExecuteAsync(
@@ -835,7 +843,8 @@ namespace Microsoft.EntityFrameworkCore
                     await using (
                         var transaction = await beginTransaction(c, cancellationToken)
                             .ConfigureAwait(false)
-                    ) {
+                    )
+                    {
                         s.CommitFailed = false;
                         s.Result = await s.Operation(s.State, ct).ConfigureAwait(false);
                         s.CommitFailed = true;
@@ -859,7 +868,8 @@ namespace Microsoft.EntityFrameworkCore
                 Func<TState, TResult> operation,
                 Func<TState, bool> verifySucceeded,
                 TState state
-            ) {
+            )
+            {
                 Operation = operation;
                 VerifySucceeded = verifySucceeded;
                 State = state;
@@ -879,7 +889,8 @@ namespace Microsoft.EntityFrameworkCore
                 Func<TState, CancellationToken, Task<TResult>> operation,
                 Func<TState, CancellationToken, Task<bool>> verifySucceeded,
                 TState state
-            ) {
+            )
+            {
                 Operation = operation;
                 VerifySucceeded = verifySucceeded;
                 State = state;

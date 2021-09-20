@@ -20,7 +20,8 @@ namespace Microsoft.Web.Mvc.Resources
             this HtmlHelper html,
             string controllerName,
             object routeValues
-        ) {
+        )
+        {
             return html.BeginResourceForm(controllerName, routeValues, ActionType.Retrieve);
         }
 
@@ -37,7 +38,8 @@ namespace Microsoft.Web.Mvc.Resources
             string controllerName,
             object routeValues,
             ActionType actionType
-        ) {
+        )
+        {
             return html.BeginResourceForm(controllerName, routeValues, null, actionType);
         }
 
@@ -56,7 +58,8 @@ namespace Microsoft.Web.Mvc.Resources
             object routeValues,
             object htmlAttributes,
             ActionType actionType
-        ) {
+        )
+        {
             switch (actionType)
             {
                 case ActionType.GetUpdateForm:
@@ -109,7 +112,8 @@ namespace Microsoft.Web.Mvc.Resources
             this HtmlHelper html,
             string controllerName,
             object routeValues
-        ) {
+        )
+        {
             return html.ResourceLink(
                 controllerName,
                 controllerName,
@@ -131,7 +135,8 @@ namespace Microsoft.Web.Mvc.Resources
             string controllerName,
             string linkText,
             object routeValues
-        ) {
+        )
+        {
             return html.ResourceLink(controllerName, linkText, routeValues, ActionType.Retrieve);
         }
 
@@ -150,7 +155,8 @@ namespace Microsoft.Web.Mvc.Resources
             string linkText,
             object routeValues,
             ActionType actionType
-        ) {
+        )
+        {
             switch (actionType)
             {
                 case ActionType.GetUpdateForm:

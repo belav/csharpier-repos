@@ -92,7 +92,8 @@ namespace System.MemoryTests
         private static unsafe void AsMemory_Roundtrips_Core<T>(
             ReadOnlyMemory<T> readOnlyMemory,
             bool canBePinned
-        ) {
+        )
+        {
             Memory<T> memory = MemoryMarshal.AsMemory(readOnlyMemory);
             ReadOnlyMemory<T> readOnlyClone = memory;
 

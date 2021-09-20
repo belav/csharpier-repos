@@ -116,7 +116,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
             IReorderingBuffer? reorderingBuffer,
             ExecutionDataflowBlockOptions dataflowBlockOptions,
             TargetCoreOptions targetCoreOptions
-        ) {
+        )
+        {
             // Validate internal arguments
             Debug.Assert(owningTarget != null, "Core must be associated with a target block.");
             Debug.Assert(
@@ -142,7 +143,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
             if (
                 _dataflowBlockOptions.BoundedCapacity
                 != System.Threading.Tasks.Dataflow.DataflowBlockOptions.Unbounded
-            ) {
+            )
+            {
                 Debug.Assert(
                     _dataflowBlockOptions.BoundedCapacity > 0,
                     "Positive bounding count expected; should have been verified by options ctor"
@@ -165,7 +167,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
             bool storeExceptionEvenIfAlreadyCompleting = false,
             bool unwrapInnerExceptions = false,
             bool revertProcessingState = false
-        ) {
+        )
+        {
             Debug.Assert(
                 storeExceptionEvenIfAlreadyCompleting || !revertProcessingState,
                 "Indicating dirty processing state may only come with storeExceptionEvenIfAlreadyCompleting==true."
@@ -179,7 +182,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
                 if (
                     exception != null
                     && (!_decliningPermanently || storeExceptionEvenIfAlreadyCompleting)
-                ) {
+                )
+                {
                     Debug.Assert(
                         _numberOfOutstandingOperations > 0
                             || !storeExceptionEvenIfAlreadyCompleting,
@@ -221,7 +225,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
             TInput messageValue,
             ISourceBlock<TInput>? source,
             bool consumeToAccept
-        ) {
+        )
+        {
             // Validate arguments
             if (!messageHeader.IsValid)
                 throw new ArgumentException(
@@ -256,7 +261,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
                         && _boundingState.CountIsLessThanBound
                         && _boundingState.PostponedMessages.Count == 0
                     )
-                ) {
+                )
+                {
                     // Consume the message from the source if necessary
                     if (consumeToAccept)
                     {
@@ -541,7 +547,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
 
                 while (
                     numberOfMessagesProcessedByThisTask < maxMessagesPerTask && !CanceledOrFaulted
-                ) {
+                )
+                {
                     // If we're bounding, try to transfer a message from the postponed queue
                     // to the input queue.  This enables us to more quickly unblock sources
                     // sending data to the block (otherwise, no postponed messages will be consumed
@@ -556,7 +563,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
                             forPostponementTransfer: true,
                             result: out transferMessageWithId
                         )
-                    ) {
+                    )
+                    {
                         lock (IncomingLock)
                         {
                             Debug.Assert(
@@ -612,7 +620,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
                                     this,
                                     out messageWithId
                                 )
-                            ) {
+                            )
+                            {
                                 // Keep alive was unsuccessful.
                                 // Therefore ban further attempts temporarily.
                                 _keepAliveBanCounter = Common.KEEP_ALIVE_BAN_COUNT;
@@ -682,7 +691,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
         /// <returns>true if a message was found and removed; otherwise, false.</returns>
         private bool TryGetNextMessageForNewAsyncOperation(
             out KeyValuePair<TInput, long> messageWithId
-        ) {
+        )
+        {
             Debug.Assert(UsesAsyncCompletion, "Only valid to use when in async mode.");
             Common.ContractAssertMonitorStatus(IncomingLock, held: false);
 
@@ -739,7 +749,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
         /// <returns>true if a message could be removed and returned; otherwise, false.</returns>
         private bool TryGetNextAvailableOrPostponedMessage(
             out KeyValuePair<TInput, long> messageWithId
-        ) {
+        )
+        {
             Common.ContractAssertMonitorStatus(IncomingLock, held: false);
 
             // First try to get a message from our input buffer.
@@ -758,7 +769,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
                     forPostponementTransfer: false,
                     result: out messageWithId
                 )
-            ) {
+            )
+            {
                 return true;
             }
             // Otherwise, there's no message available.
@@ -782,7 +794,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
         private bool TryConsumePostponedMessage(
             bool forPostponementTransfer,
             out KeyValuePair<TInput, long> result
-        ) {
+        )
+        {
             Debug.Assert(
                 _dataflowBlockOptions.BoundedCapacity
                     != System.Threading.Tasks.Dataflow.DataflowBlockOptions.Unbounded,
@@ -814,7 +827,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
                     if (
                         !_boundingState!.CountIsLessThanBound
                         || !_boundingState.PostponedMessages.TryPop(out element)
-                    ) {
+                    )
+                    {
                         if (countIncrementedExpectingToGetItem)
                         {
                             countIncrementedExpectingToGetItem = false;
@@ -995,7 +1009,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
             if (
                 (_targetCoreOptions & TargetCoreOptions.RepresentsBlockCompletion) != 0
                 && (etwLog = DataflowEtwProvider.Log).IsEnabled()
-            ) {
+            )
+            {
                 etwLog.DataflowBlockCompleted(_owningTarget);
             }
 #endif

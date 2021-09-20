@@ -129,7 +129,8 @@ namespace System.Xml.Xsl.XsltOld
                 int minLength,
                 int groupSize,
                 string? groupSeparator
-            ) {
+            )
+            {
                 string str;
 
                 if (groupSize != 0 && groupSeparator != null)
@@ -274,7 +275,8 @@ namespace System.Xml.Xsl.XsltOld
             if (
                 endNode.NodeType == XPathNodeType.Attribute
                 || endNode.NodeType == XPathNodeType.Namespace
-            ) {
+            )
+            {
                 endNode = endNode.Clone();
                 endNode.MoveToParent();
             }
@@ -372,7 +374,8 @@ namespace System.Xml.Xsl.XsltOld
             XPathNavigator nav,
             Processor processor,
             XPathNavigator contextNode
-        ) {
+        )
+        {
             do
             {
                 if (_fromKey != Compiler.InvalidQueryKey && processor.Matches(nav, _fromKey))
@@ -473,7 +476,8 @@ namespace System.Xml.Xsl.XsltOld
                         if (
                             countNode.NodeType == XPathNodeType.Attribute
                             || countNode.NodeType == XPathNodeType.Namespace
-                        ) {
+                        )
+                        {
                             countNode.MoveToParent();
                         }
                         while (moveToCount(countNode, processor, contextNode))
@@ -527,7 +531,8 @@ namespace System.Xml.Xsl.XsltOld
             Processor processor,
             XPathNavigator contextNode,
             XPathNavigator nav
-        ) {
+        )
+        {
             if (_countKey != Compiler.InvalidQueryKey)
             {
                 return processor.Matches(nav, _countKey);
@@ -535,7 +540,8 @@ namespace System.Xml.Xsl.XsltOld
             if (
                 contextNode.Name == nav.Name
                 && BasicNodeType(contextNode.NodeType) == BasicNodeType(nav.NodeType)
-            ) {
+            )
+            {
                 return true;
             }
             return false;
@@ -565,7 +571,8 @@ namespace System.Xml.Xsl.XsltOld
             string? letter,
             string? groupingSep,
             string? groupingSize
-        ) {
+        )
+        {
             StringBuilder result = new StringBuilder();
             int cFormats = 0;
             if (tokens != null)
@@ -674,7 +681,8 @@ namespace System.Xml.Xsl.XsltOld
             int tokLen,
             out NumberingSequence seq,
             out int pminlen
-        ) {
+        )
+        {
             char wch = wsToken[startLen];
             bool UseArabic = false;
             pminlen = 1;

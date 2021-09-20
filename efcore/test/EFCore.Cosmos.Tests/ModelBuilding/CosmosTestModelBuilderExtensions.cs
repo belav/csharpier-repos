@@ -53,7 +53,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
         public static ModelBuilderTest.TestPropertyBuilder<TProperty> ToJsonProperty<TProperty>(
             this ModelBuilderTest.TestPropertyBuilder<TProperty> builder,
             string name
-        ) {
+        )
+        {
             switch (builder)
             {
                 case IInfrastructure<PropertyBuilder<TProperty>> genericBuilder:

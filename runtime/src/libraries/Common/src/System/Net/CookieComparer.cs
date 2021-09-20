@@ -12,7 +12,8 @@ namespace System.Net
             if (
                 (result = string.Compare(left.Name, right.Name, StringComparison.OrdinalIgnoreCase))
                 != 0
-            ) {
+            )
+            {
                 return result;
             }
 
@@ -24,7 +25,8 @@ namespace System.Net
                         StringComparison.OrdinalIgnoreCase
                     )
                 ) != 0
-            ) {
+            )
+            {
                 return result;
             }
 

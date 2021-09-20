@@ -134,7 +134,8 @@ class InactiveForeignException
                 if (
                     (stackTrace.IndexOf("ThrowEntryPoint") == -1)
                     || (stackTrace.IndexOf("Scenario2Helper") == -1)
-                ) {
+                )
+                {
                     Console.WriteLine("FAILED - unable to find expected stackTrace");
                 }
                 else
@@ -200,7 +201,8 @@ class InactiveForeignException
                 (stackTrace.IndexOf("ThrowEntryPoint") == -1)
                 || (stackTrace.IndexOf("Scenario2Helper") == -1)
                 || (stackTrace.IndexOf("Scenario3Helper") == -1)
-            ) {
+            )
+            {
                 Console.WriteLine("FAILED - unable to find expected stackTrace");
             }
             else
@@ -291,7 +293,8 @@ class InactiveForeignException
                 (stackTrace.IndexOf("ThrowEntryPointNestedHelper") == -1)
                 || (stackTrace.IndexOf("Scenario4") == -1)
                 || (stackTrace.IndexOf("ThrowEntryPoint2") != -1)
-            ) {
+            )
+            {
                 Console.WriteLine("FAILED - unable to find expected stackTrace");
             }
             else
@@ -333,7 +336,8 @@ class InactiveForeignException
             if (
                 (stackTrace.IndexOf("ThrowEntryPointInner") == -1)
                 || (stackTrace.IndexOf("Scenario5") == -1)
-            ) {
+            )
+            {
                 Console.WriteLine("FAILED - unable to find expected stackTrace");
             }
             else
@@ -474,7 +478,8 @@ class InactiveForeignException
             || (s1.IndexOf("Scenario9Helper") == -1)
             || (s2.IndexOf("Scenario9HelperInner") != -1)
             || (s2.IndexOf("Scenario9Helper") != -1)
-        ) {
+        )
+        {
             Console.WriteLine("S1: {0}\n", s1);
             Console.WriteLine("S2: {0}", s2);
             Console.WriteLine("FAILED");

@@ -26,7 +26,8 @@ namespace Generators
                 Compilation compilation,
                 Action<Diagnostic> reportDiagnostic,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 _compilation = compilation;
                 _cancellationToken = cancellationToken;
                 _reportDiagnostic = reportDiagnostic;
@@ -34,7 +35,8 @@ namespace Generators
 
             public EventSourceClass[] GetEventSourceClasses(
                 List<ClassDeclarationSyntax> classDeclarations
-            ) {
+            )
+            {
                 INamedTypeSymbol? autogenerateAttribute = _compilation.GetTypeByMetadataName(
                     "System.Diagnostics.Tracing.EventSourceAutoGenerateAttribute"
                 );
@@ -60,7 +62,8 @@ namespace Generators
                         SyntaxTree,
                         ClassDeclarationSyntax
                     >? group in classDeclarations.GroupBy(x => x.SyntaxTree)
-                ) {
+                )
+                {
                     SemanticModel? sm = null;
                     EventSourceClass? eventSourceClass = null;
                     foreach (ClassDeclarationSyntax? classDef in group)
@@ -82,7 +85,8 @@ namespace Generators
                                 if (
                                     sm.GetSymbolInfo(ca, _cancellationToken).Symbol
                                     is not IMethodSymbol caSymbol
-                                ) {
+                                )
+                                {
                                     // badly formed attribute definition, or not the right attribute
                                     continue;
                                 }
@@ -92,7 +96,8 @@ namespace Generators
                                         caSymbol.ContainingType,
                                         SymbolEqualityComparer.Default
                                     )
-                                ) {
+                                )
+                                {
                                     autoGenerate = true;
                                     continue;
                                 }
@@ -101,7 +106,8 @@ namespace Generators
                                         caSymbol.ContainingType,
                                         SymbolEqualityComparer.Default
                                     )
-                                ) {
+                                )
+                                {
                                     string nspace = string.Empty;
                                     NamespaceDeclarationSyntax? ns =
                                         classDef.Parent as NamespaceDeclarationSyntax;

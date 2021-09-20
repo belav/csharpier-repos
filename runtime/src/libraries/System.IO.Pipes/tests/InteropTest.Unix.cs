@@ -43,13 +43,15 @@ namespace System.IO.Pipes.Tests
         internal static bool TryGetImpersonationUserName(
             SafePipeHandle handle,
             out string impersonationUserName
-        ) {
+        )
+        {
             throw new Exception("Should not call on Unix.");
         }
         internal static bool TryGetNumberOfServerInstances(
             SafePipeHandle handle,
             out uint numberOfServerInstances
-        ) {
+        )
+        {
             throw new Exception("Should not call on Unix.");
         }
     }

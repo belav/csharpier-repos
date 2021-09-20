@@ -335,7 +335,8 @@ namespace System.Text.Tests
             int index,
             int count,
             byte[] expected
-        ) {
+        )
+        {
             EncodingHelpers.Encode(
                 new UTF7Encoding(allowOptionals),
                 source,

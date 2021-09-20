@@ -1020,7 +1020,8 @@ namespace System.Threading.Tests
                 bool isBlockingOperation,
                 Action rwlAction,
                 Action makeStateChangesOnSuccess
-            ) {
+            )
+            {
                 // Blocking operations are inherently nondeterministic in the order in which they are performed, so record a
                 // pending change before performing the operation. Since the state changes following some blocking operations
                 // may occur in any order, state verification is only done once there are no pending state changes. Non-blocking

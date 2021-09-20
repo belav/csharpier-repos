@@ -117,7 +117,8 @@ namespace System.Threading.Tests
             bool initiallyOwned,
             MutexRights rights,
             AccessControlType accessControl
-        ) {
+        )
+        {
             MutexSecurity security = GetMutexSecurity(
                 WellKnownSidType.BuiltinUsersSid,
                 rights,
@@ -292,7 +293,8 @@ namespace System.Threading.Tests
             WellKnownSidType sid,
             MutexRights rights,
             AccessControlType accessControl
-        ) {
+        )
+        {
             MutexSecurity security = new MutexSecurity();
             SecurityIdentifier identity = new SecurityIdentifier(sid, null);
             MutexAccessRule accessRule = new MutexAccessRule(identity, rights, accessControl);
@@ -305,7 +307,8 @@ namespace System.Threading.Tests
             string name,
             MutexSecurity expectedSecurity,
             bool expectedCreatedNew
-        ) {
+        )
+        {
             Mutex mutex = MutexAcl.Create(
                 initiallyOwned,
                 name,
@@ -339,7 +342,8 @@ namespace System.Threading.Tests
         private void VerifyMutexSecurity(
             MutexSecurity expectedSecurity,
             MutexSecurity actualSecurity
-        ) {
+        )
+        {
             Assert.Equal(typeof(MutexRights), expectedSecurity.AccessRightType);
             Assert.Equal(typeof(MutexRights), actualSecurity.AccessRightType);
 

@@ -93,7 +93,8 @@ namespace Microsoft.AspNetCore.Identity.Test
         protected virtual RoleManager<TRole> CreateRoleManager(
             object context = null,
             IServiceCollection services = null
-        ) {
+        )
+        {
             if (services == null)
             {
                 services = new ServiceCollection();
@@ -170,7 +171,8 @@ namespace Microsoft.AspNetCore.Identity.Test
                 UserManager<TUser> manager,
                 TUser user,
                 string password
-            ) {
+            )
+            {
                 return Task.FromResult(IdentityResult.Failed(ErrorMessage));
             }
 

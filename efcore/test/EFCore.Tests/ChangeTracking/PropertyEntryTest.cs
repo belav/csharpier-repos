@@ -1183,7 +1183,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 ChangeTrackingStrategy.ChangingAndChangedNotifications,
             ModelBuilder builder = null,
             bool finalize = true
-        ) {
+        )
+        {
             builder ??= InMemoryTestHelpers.Instance.CreateConventionBuilder();
 
             builder.HasChangeTrackingStrategy(fullNotificationStrategy);
@@ -1226,7 +1227,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             public PrimateContext(
                 ChangeTrackingStrategy fullNotificationStrategy =
                     ChangeTrackingStrategy.ChangingAndChangedNotifications
-            ) {
+            )
+            {
                 _fullNotificationStrategy = fullNotificationStrategy;
             }
 

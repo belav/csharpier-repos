@@ -39,7 +39,8 @@ namespace Microsoft.AspNetCore.WebUtilities
             BufferedReadStream stream,
             MultipartBoundary boundary,
             ArrayPool<byte> bytePool
-        ) {
+        )
+        {
             if (stream == null)
             {
                 throw new ArgumentNullException(nameof(stream));
@@ -141,7 +142,8 @@ namespace Microsoft.AspNetCore.WebUtilities
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
 
@@ -199,7 +201,8 @@ namespace Microsoft.AspNetCore.WebUtilities
                     out var matchOffset,
                     out var matchCount
                 )
-            ) {
+            )
+            {
                 // We found a possible match, return any data before it.
                 if (matchOffset > bufferedData.Offset)
                 {
@@ -247,7 +250,8 @@ namespace Microsoft.AspNetCore.WebUtilities
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (_finished)
             {
                 return 0;
@@ -259,7 +263,8 @@ namespace Microsoft.AspNetCore.WebUtilities
                     _boundary.FinalBoundaryLength,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 throw new IOException(
                     "Unexpected end of Stream, the content may have already been read by another component. "
                 );
@@ -330,7 +335,8 @@ namespace Microsoft.AspNetCore.WebUtilities
             byte[] matchBytes,
             out int matchOffset,
             out int matchCount
-        ) {
+        )
+        {
             // clear matchCount to zero
             matchCount = 0;
 
@@ -354,7 +360,8 @@ namespace Microsoft.AspNetCore.WebUtilities
                             0,
                             matchBytesLengthMinusOne
                         ) == 0
-                    ) {
+                    )
+                    {
                         matchCount = matchBytes.Length;
                         return true;
                     }
@@ -373,7 +380,8 @@ namespace Microsoft.AspNetCore.WebUtilities
                     matchCount = 0;
                     matchCount < matchBytes.Length && matchCount < countLimit;
                     matchCount++
-                ) {
+                )
+                {
                     if (matchBytes[matchCount] != segment1.Array![matchOffset + matchCount])
                     {
                         matchCount = 0;
@@ -394,7 +402,8 @@ namespace Microsoft.AspNetCore.WebUtilities
             byte[] buffer2,
             int offset2,
             int count
-        ) {
+        )
+        {
             for (; count-- > 0; offset1++, offset2++)
             {
                 if (buffer1[offset1] != buffer2[offset2])

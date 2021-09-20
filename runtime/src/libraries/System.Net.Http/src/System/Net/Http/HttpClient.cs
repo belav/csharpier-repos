@@ -178,7 +178,8 @@ namespace System.Net.Http
         private async Task<string> GetStringAsyncCore(
             HttpRequestMessage request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             bool telemetryStarted = StartSend(request);
             bool responseContentTelemetryStarted = false;
 
@@ -273,7 +274,8 @@ namespace System.Net.Http
         private async Task<byte[]> GetByteArrayAsyncCore(
             HttpRequestMessage request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             bool telemetryStarted = StartSend(request);
             bool responseContentTelemetryStarted = false;
 
@@ -373,7 +375,8 @@ namespace System.Net.Http
         private async Task<Stream> GetStreamAsyncCore(
             HttpRequestMessage request,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             bool telemetryStarted = StartSend(request);
 
             (
@@ -479,7 +482,8 @@ namespace System.Net.Http
             Uri? requestUri,
             HttpContent? content,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             HttpRequestMessage request = CreateRequestMessage(HttpMethod.Post, requestUri);
             request.Content = content;
             return SendAsync(request, cancellationToken);
@@ -501,7 +505,8 @@ namespace System.Net.Http
             Uri? requestUri,
             HttpContent? content,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             HttpRequestMessage request = CreateRequestMessage(HttpMethod.Put, requestUri);
             request.Content = content;
             return SendAsync(request, cancellationToken);
@@ -523,7 +528,8 @@ namespace System.Net.Http
             Uri? requestUri,
             HttpContent? content,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             HttpRequestMessage request = CreateRequestMessage(HttpMethod.Patch, requestUri);
             request.Content = content;
             return SendAsync(request, cancellationToken);
@@ -570,7 +576,8 @@ namespace System.Net.Http
             HttpRequestMessage request,
             HttpCompletionOption completionOption,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             CheckRequestBeforeSend(request);
             (
                 CancellationTokenSource cts,
@@ -636,7 +643,8 @@ namespace System.Net.Http
             HttpRequestMessage request,
             HttpCompletionOption completionOption,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Called outside of async state machine to propagate certain exception even without awaiting the returned task.
             CheckRequestBeforeSend(request);
             (
@@ -661,7 +669,8 @@ namespace System.Net.Http
                 bool disposeCts,
                 CancellationTokenSource pendingRequestsCts,
                 CancellationToken originalCancellationToken
-            ) {
+            )
+            {
                 bool telemetryStarted = StartSend(request);
                 bool responseContentTelemetryStarted = false;
                 HttpResponseMessage? response = null;
@@ -745,7 +754,8 @@ namespace System.Net.Http
             CancellationTokenSource cts,
             CancellationToken cancellationToken,
             CancellationTokenSource pendingRequestsCts
-        ) {
+        )
+        {
             LogRequestFailed(telemetryStarted);
 
             response?.Dispose();
@@ -756,7 +766,8 @@ namespace System.Net.Http
                 e is OperationCanceledException oce
                 && !cancellationToken.IsCancellationRequested
                 && !pendingRequestsCts.IsCancellationRequested
-            ) {
+            )
+            {
                 // If this exception is for cancellation, but cancellation wasn't requested, either by the caller's token or by the pending requests source,
                 // the only other cause could be a timeout.  Treat it as such.
                 e = toThrow = new TaskCanceledException(
@@ -797,7 +808,8 @@ namespace System.Net.Http
             bool disposeCts,
             bool telemetryStarted,
             bool responseContentTelemetryStarted
-        ) {
+        )
+        {
             // Log completion.
             if (HttpTelemetry.Log.IsEnabled() && telemetryStarted)
             {
@@ -951,7 +963,8 @@ namespace System.Net.Http
 
         private (CancellationTokenSource TokenSource, bool DisposeTokenSource, CancellationTokenSource PendingRequestsCts) PrepareCancellationTokenSource(
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // We need a CancellationTokenSource to use with the request.  We always have the global
             // _pendingRequestsCts to use, plus we may have a token provided by the caller, and we may
             // have a timeout.  If we have a timeout or a caller-provided token, we need to create a new
@@ -1007,7 +1020,8 @@ namespace System.Net.Http
         {
             if (
                 !AppContext.TryGetSwitch("System.Net.Http.UseNativeHttpHandler", out bool isEnabled)
-            ) {
+            )
+            {
                 return false;
             }
 

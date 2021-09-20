@@ -51,7 +51,8 @@ namespace System.IO.Packaging
         internal PackageRelationshipCollection(
             InternalRelationshipCollection relationships,
             string? filter
-        ) {
+        )
+        {
             Debug.Assert(relationships != null, "relationships parameter cannot be null");
 
             _relationships = relationships;

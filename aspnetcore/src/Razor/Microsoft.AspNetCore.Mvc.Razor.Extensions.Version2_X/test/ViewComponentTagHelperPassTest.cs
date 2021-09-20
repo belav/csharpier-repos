@@ -264,7 +264,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
         private DocumentIntermediateNode CreateIRDocument(
             RazorProjectEngine projectEngine,
             RazorCodeDocument codeDocument
-        ) {
+        )
+        {
             for (var i = 0; i < projectEngine.Phases.Count; i++)
             {
                 var phase = projectEngine.Phases[i];

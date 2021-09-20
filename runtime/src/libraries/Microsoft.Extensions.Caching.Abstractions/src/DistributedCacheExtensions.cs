@@ -48,7 +48,8 @@ namespace Microsoft.Extensions.Caching.Distributed
             string key,
             byte[] value,
             CancellationToken token = default(CancellationToken)
-        ) {
+        )
+        {
             if (key == null)
             {
                 throw new ArgumentNullException(nameof(key));
@@ -86,7 +87,8 @@ namespace Microsoft.Extensions.Caching.Distributed
             string key,
             string value,
             DistributedCacheEntryOptions options
-        ) {
+        )
+        {
             if (key == null)
             {
                 throw new ArgumentNullException(nameof(key));
@@ -112,7 +114,8 @@ namespace Microsoft.Extensions.Caching.Distributed
             string key,
             string value,
             CancellationToken token = default(CancellationToken)
-        ) {
+        )
+        {
             return cache.SetStringAsync(key, value, new DistributedCacheEntryOptions(), token);
         }
 
@@ -132,7 +135,8 @@ namespace Microsoft.Extensions.Caching.Distributed
             string value,
             DistributedCacheEntryOptions options,
             CancellationToken token = default(CancellationToken)
-        ) {
+        )
+        {
             if (key == null)
             {
                 throw new ArgumentNullException(nameof(key));
@@ -171,7 +175,8 @@ namespace Microsoft.Extensions.Caching.Distributed
             this IDistributedCache cache,
             string key,
             CancellationToken token = default(CancellationToken)
-        ) {
+        )
+        {
             byte[] data = await cache.GetAsync(key, token).ConfigureAwait(false);
             if (data == null)
             {

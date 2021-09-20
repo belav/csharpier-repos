@@ -21,7 +21,8 @@ namespace AutoMapper
             MemberInfo destinationMember,
             Type destinationMemberType,
             TypeMap typeMap
-        ) {
+        )
+        {
             TypeMap = typeMap;
             DestinationMember = destinationMember;
             DestinationType = destinationMemberType;
@@ -133,7 +134,8 @@ namespace AutoMapper
             ) != null;
         public void AddValueTransformation(
             ValueTransformerConfiguration valueTransformerConfiguration
-        ) {
+        )
+        {
             _valueTransformerConfigs ??= new();
             _valueTransformerConfigs.Add(valueTransformerConfiguration);
         }

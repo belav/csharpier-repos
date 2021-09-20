@@ -31,14 +31,15 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 bool includeContainingTypeAndMemberColumns,
                 bool includeKindColumn,
                 CancellationToken cancellationToken
-            ) : base(
-                presenter,
-                findReferencesWindow,
-                customColumns,
-                includeContainingTypeAndMemberColumns,
-                includeKindColumn,
-                cancellationToken
-            ) { }
+            )
+                : base(
+                    presenter,
+                    findReferencesWindow,
+                    customColumns,
+                    includeContainingTypeAndMemberColumns,
+                    includeKindColumn,
+                    cancellationToken
+                ) { }
 
             // We should never be called in a context where we get references.
             protected override ValueTask OnReferenceFoundWorkerAsync(
@@ -50,7 +51,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
 
             protected override async ValueTask OnDefinitionFoundWorkerAsync(
                 DefinitionItem definition
-            ) {
+            )
+            {
                 var definitionBucket = GetOrCreateDefinitionBucket(
                     definition,
                     expandedByDefault: true
@@ -112,7 +114,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             private async Task<Entry?> TryCreateEntryAsync(
                 RoslynDefinitionBucket definitionBucket,
                 DefinitionItem definition
-            ) {
+            )
+            {
                 var documentSpan = definition.SourceSpans[0];
                 var (guid, projectName, _) = GetGuidAndProjectInfo(documentSpan.Document);
                 var sourceText = await documentSpan.Document.GetTextAsync(CancellationToken)

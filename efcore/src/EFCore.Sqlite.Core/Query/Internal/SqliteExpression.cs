@@ -31,7 +31,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             SqlExpression timestring,
             IEnumerable<SqlExpression>? modifiers = null,
             RelationalTypeMapping? typeMapping = null
-        ) {
+        )
+        {
             modifiers ??= Enumerable.Empty<SqlExpression>();
 
             // If the inner call is another strftime then shortcut a double call
@@ -45,7 +46,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                 && rtrimFunction2.Arguments[0] is SqlFunctionExpression strftimeFunction
                 && strftimeFunction.Name == "strftime"
                 && strftimeFunction.Arguments!.Count > 1
-            ) {
+            )
+            {
                 // Use its timestring parameter directly in place of ours
                 timestring = strftimeFunction.Arguments[1];
 

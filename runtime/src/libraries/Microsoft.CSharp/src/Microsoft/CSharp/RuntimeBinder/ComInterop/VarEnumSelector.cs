@@ -173,7 +173,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         private static void CheckForAmbiguousMatch(
             Type argumentType,
             List<VarEnum> compatibleComTypes
-        ) {
+        )
+        {
             if (compatibleComTypes.Count <= 1)
             {
                 return;
@@ -283,7 +284,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         private static bool TryGetPrimitiveComTypeViaConversion(
             Type argumentType,
             out VarEnum primitiveVarEnum
-        ) {
+        )
+        {
             // Look for a unique type family that the argument can be converted to.
             List<VarEnum> compatibleComTypes = GetConversionsToComPrimitiveTypeFamilies(
                 argumentType
@@ -462,7 +464,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         private static SimpleArgBuilder GetSimpleArgBuilder(
             Type elementType,
             VarEnum elementVarEnum
-        ) {
+        )
+        {
             SimpleArgBuilder argBuilder;
 
             switch (elementVarEnum)

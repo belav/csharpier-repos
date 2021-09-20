@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             RenameParams request,
             RequestContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var document = context.Document;
             if (document != null)
             {

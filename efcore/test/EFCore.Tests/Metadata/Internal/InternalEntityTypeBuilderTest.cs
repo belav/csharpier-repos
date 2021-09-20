@@ -1058,7 +1058,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
         private void Test_removing_relationship_does_not_remove_contained_shadow_properties_if_referenced_elsewhere(
             Func<InternalEntityTypeBuilder, Property, object> shadowConfig
-        ) {
+        )
+        {
             var modelBuilder = CreateModelBuilder();
             var principalEntityBuilder = modelBuilder.Entity(
                 typeof(Customer),
@@ -1740,7 +1741,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
         private void Test_removing_index_does_not_remove_contained_shadow_properties_if_referenced_elsewhere(
             Func<InternalEntityTypeBuilder, Property, object> shadowConfig
-        ) {
+        )
+        {
             var modelBuilder = CreateModelBuilder();
             modelBuilder.Entity(typeof(Customer), ConfigurationSource.Explicit)
                 .PrimaryKey(
@@ -2115,7 +2117,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
         private void Test_removing_key_does_not_remove_contained_shadow_properties_if_referenced_elsewhere(
             Func<InternalEntityTypeBuilder, Property, object> shadowConfig
-        ) {
+        )
+        {
             var modelBuilder = CreateModelBuilder();
             modelBuilder.Entity(typeof(Customer), ConfigurationSource.Explicit)
                 .PrimaryKey(
@@ -3301,7 +3304,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public void Can_ignore_property_in_hierarchy(
             ConfigurationSource ignoreSource,
             ConfigurationSource addSource
-        ) {
+        )
+        {
             VerifyIgnoreProperty(
                 typeof(Order),
                 ignoreSource,
@@ -3418,7 +3422,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Func<InternalEntityTypeBuilder, bool> addMember,
             Func<InternalEntityTypeBuilder, bool> unignoreMember,
             string memberToIgnore
-        ) {
+        )
+        {
             var modelBuilder = CreateModelBuilder();
             var customerTypeBuilder = modelBuilder.Entity(
                 typeof(Customer),
@@ -3995,7 +4000,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public void Can_ignore_navigation_in_hierarchy(
             ConfigurationSource ignoreSource,
             ConfigurationSource addSource
-        ) {
+        )
+        {
             VerifyIgnoreNavigation(
                 typeof(Order),
                 ignoreSource,
@@ -4199,7 +4205,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public void Can_ignore_skip_navigation_in_hierarchy(
             ConfigurationSource ignoreSource,
             ConfigurationSource addSource
-        ) {
+        )
+        {
             VerifyIgnoreSkipNavigation(
                 typeof(Order),
                 ignoreSource,
@@ -4344,7 +4351,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             MemberType firstMemberType,
             MemberType secondMemberType,
             bool setBaseFirst
-        ) {
+        )
+        {
             VerifyOverrideMembers(
                 typeof(Order),
                 firstSource,
@@ -4378,7 +4386,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             MemberType firstMemberType,
             MemberType secondMemberType,
             bool setBaseFirst
-        ) {
+        )
+        {
             var modelBuilder = CreateModelBuilder();
             var productTypeBuilder = modelBuilder.Entity(
                 typeof(Product),
@@ -4410,7 +4419,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 || firstSource != ConfigurationSource.Explicit
                 || secondSource != ConfigurationSource.Explicit
                 || firstMemberType == secondMemberType
-            ) {
+            )
+            {
                 Assert.Equal(
                     (!setBaseFirst && firstEntityTypeBuilder != secondEntityTypeBuilder)
                         || firstMemberType == secondMemberType
@@ -4424,7 +4434,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 if (
                     firstMemberType == MemberType.Navigation
                     && secondMemberType == MemberType.Property
-                ) {
+                )
+                {
                     message = CoreStrings.PropertyCalledOnNavigation(
                         nameof(Order.Products),
                         nameof(SpecialOrder)
@@ -4457,7 +4468,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     || firstSource != ConfigurationSource.Explicit
                     || secondSource != ConfigurationSource.Explicit
                     || firstMemberType == secondMemberType
-                ) {
+                )
+                {
                     ConfigureOrdersHierarchy(modelBuilder);
                 }
                 else
@@ -4530,7 +4542,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             InternalEntityTypeBuilder entityTypeBuilder,
             MemberType memberType,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             switch (memberType)
             {
                 case MemberType.Property:
@@ -4569,7 +4582,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             InternalEntityTypeBuilder entityTypeBuilder,
             EntityType expectedDeclaringType,
             MemberType memberType
-        ) {
+        )
+        {
             Assert.Same(
                 memberType == MemberType.Property ? expectedDeclaringType : null,
                 GetDeclaringType(entityTypeBuilder, MemberType.Property)
@@ -4591,7 +4605,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         private EntityType GetDeclaringType(
             InternalEntityTypeBuilder entityTypeBuilder,
             MemberType memberType
-        ) {
+        )
+        {
             switch (memberType)
             {
                 case MemberType.Property:

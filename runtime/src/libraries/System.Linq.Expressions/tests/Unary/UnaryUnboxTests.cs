@@ -37,7 +37,8 @@ namespace System.Linq.Expressions.Tests
             Type type,
             bool shouldThrow,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<object>> e = Expression.Lambda<Func<object>>(
                 Expression.Convert(
                     Expression.Unbox(Expression.Constant(value, typeof(object)), type),

@@ -51,7 +51,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             ReadyToRunTableManager r2rManager = (ReadyToRunTableManager)factory.MetadataManager;
             foreach (
                 TypeInfo<TypeDefinitionHandle> defTypeInfo in r2rManager.GetDefinedTypes(_module)
-            ) {
+            )
+            {
                 TypeDefinitionHandle defTypeHandle = defTypeInfo.Handle;
                 int hashCode = 0;
                 for (;;)
@@ -80,7 +81,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
             foreach (
                 TypeInfo<ExportedTypeHandle> expTypeInfo in r2rManager.GetExportedTypes(_module)
-            ) {
+            )
+            {
                 ExportedTypeHandle expTypeHandle = expTypeInfo.Handle;
                 int hashCode = 0;
                 for (;;)

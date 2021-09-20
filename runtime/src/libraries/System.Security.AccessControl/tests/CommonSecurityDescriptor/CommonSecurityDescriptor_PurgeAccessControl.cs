@@ -86,7 +86,8 @@ namespace System.Security.AccessControl.Tests
             string sddl,
             string sidString,
             string verifierSddl
-        ) {
+        )
+        {
             CommonSecurityDescriptor commonSecurityDescriptor = null;
             string resultSddl = null;
             SecurityIdentifier sid = new SecurityIdentifier(

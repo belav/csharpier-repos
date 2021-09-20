@@ -1080,7 +1080,8 @@ public class Cls
         internal static IEnumerable<IdentifierNameSyntax> GetReferences(
             SyntaxTree tree,
             string name
-        ) {
+        )
+        {
             return tree.GetRoot()
                 .DescendantNodes()
                 .OfType<IdentifierNameSyntax>()
@@ -1090,7 +1091,8 @@ public class Cls
         private static IEnumerable<DeclarationExpressionSyntax> GetDeclarations(
             SyntaxTree tree,
             string name
-        ) {
+        )
+        {
             return tree.GetRoot()
                 .DescendantNodes()
                 .OfType<DeclarationExpressionSyntax>()
@@ -1105,14 +1107,16 @@ public class Cls
         internal static DeclarationExpressionSyntax GetOutVarDeclaration(
             SyntaxTree tree,
             string name
-        ) {
+        )
+        {
             return GetOutVarDeclarations(tree, name).Single();
         }
 
         private static IEnumerable<DeclarationExpressionSyntax> GetOutVarDeclarations(
             SyntaxTree tree,
             string name
-        ) {
+        )
+        {
             return tree.GetRoot()
                 .DescendantNodes()
                 .OfType<DeclarationExpressionSyntax>()
@@ -1134,7 +1138,8 @@ public class Cls
 
         private static IEnumerable<DeclarationExpressionSyntax> GetOutVarDeclarations(
             SyntaxTree tree
-        ) {
+        )
+        {
             return tree.GetRoot()
                 .DescendantNodes()
                 .OfType<DeclarationExpressionSyntax>()
@@ -1195,7 +1200,8 @@ public class Cls
             SemanticModel model,
             DeclarationExpressionSyntax decl,
             params IdentifierNameSyntax[] references
-        ) {
+        )
+        {
             VerifyModelForOutVarWithoutDataFlow(
                 model,
                 decl,
@@ -1209,7 +1215,8 @@ public class Cls
             DeclarationExpressionSyntax decl,
             bool isShadowed,
             params IdentifierNameSyntax[] references
-        ) {
+        )
+        {
             VerifyModelForOutVar(
                 model,
                 decl,
@@ -1225,7 +1232,8 @@ public class Cls
             SemanticModel model,
             DeclarationExpressionSyntax decl,
             params IdentifierNameSyntax[] references
-        ) {
+        )
+        {
             VerifyModelForOutVar(
                 model,
                 decl,
@@ -1242,7 +1250,8 @@ public class Cls
             SemanticModel model,
             DeclarationExpressionSyntax decl,
             params IdentifierNameSyntax[] references
-        ) {
+        )
+        {
             VerifyModelForOutVar(
                 model,
                 decl,
@@ -1258,7 +1267,8 @@ public class Cls
             SemanticModel model,
             DeclarationExpressionSyntax decl,
             params IdentifierNameSyntax[] references
-        ) {
+        )
+        {
             VerifyModelForOutVar(
                 model,
                 decl,
@@ -1274,7 +1284,8 @@ public class Cls
             SemanticModel model,
             DeclarationExpressionSyntax decl,
             IdentifierNameSyntax reference
-        ) {
+        )
+        {
             VerifyModelForOutVar(
                 model,
                 decl,
@@ -1295,7 +1306,8 @@ public class Cls
             bool verifyDataFlow = true,
             LocalDeclarationKind expectedLocalKind = LocalDeclarationKind.OutVariable,
             params IdentifierNameSyntax[] references
-        ) {
+        )
+        {
             var variableDeclaratorSyntax = GetVariableDesignation(decl);
             var symbol = model.GetDeclaredSymbol(variableDeclaratorSyntax);
             Assert.NotNull(symbol);
@@ -1362,7 +1374,8 @@ public class Cls
             DeclarationExpressionSyntax decl,
             ISymbol expectedSymbol = null,
             ITypeSymbol expectedType = null
-        ) {
+        )
+        {
             var symbolInfo = model.GetSymbolInfo(decl);
             Assert.Equal(expectedSymbol, symbolInfo.Symbol);
             Assert.Empty(symbolInfo.CandidateSymbols);
@@ -1467,7 +1480,8 @@ public class Cls
             SemanticModel model,
             ITypeSymbol expectedType,
             DeclarationExpressionSyntax decl
-        ) {
+        )
+        {
             // see https://github.com/dotnet/roslyn/issues/23006 and https://github.com/dotnet/roslyn/issues/23007 for more detail
 
             // unlike GetSymbolInfo or GetTypeInfo, GetOperation doesn't use SemanticModel's recovery mode.
@@ -1492,7 +1506,8 @@ public class Cls
             bool isExecutableCode,
             IdentifierNameSyntax[] references,
             ISymbol symbol
-        ) {
+        )
+        {
             var dataFlowParent = decl.Parent.Parent.Parent as ExpressionSyntax;
 
             if (dataFlowParent == null)
@@ -1561,7 +1576,8 @@ public class Cls
         private static void VerifyModelForOutVarDuplicateInSameScope(
             SemanticModel model,
             DeclarationExpressionSyntax decl
-        ) {
+        )
+        {
             var variableDesignationSyntax = GetVariableDesignation(decl);
             var symbol = model.GetDeclaredSymbol(variableDesignationSyntax);
             Assert.Equal(decl.Identifier().ValueText, symbol.Name);
@@ -1615,7 +1631,8 @@ public class Cls
         internal static void VerifyNotAnOutLocal(
             SemanticModel model,
             IdentifierNameSyntax reference
-        ) {
+        )
+        {
             var symbol = model.GetSymbolInfo(reference).Symbol;
 
             if (symbol.Kind == SymbolKind.Local)
@@ -1660,7 +1677,8 @@ public class Cls
 
         private static SingleVariableDesignationSyntax GetVariableDesignation(
             DeclarationExpressionSyntax decl
-        ) {
+        )
+        {
             return (SingleVariableDesignationSyntax)decl.Designation;
         }
 
@@ -1668,13 +1686,15 @@ public class Cls
             ExpressionSyntax dataFlowParent,
             DeclarationExpressionSyntax decl,
             IdentifierNameSyntax[] references
-        ) {
+        )
+        {
             foreach (var reference in references)
             {
                 if (
                     dataFlowParent.Span.Contains(reference.Span)
                     && reference.SpanStart > decl.SpanStart
-                ) {
+                )
+                {
                     if (IsRead(reference))
                     {
                         return true;
@@ -1693,7 +1713,8 @@ public class Cls
                     if (
                         ((ArgumentSyntax)reference.Parent).RefOrOutKeyword.Kind()
                         != SyntaxKind.OutKeyword
-                    ) {
+                    )
+                    {
                         return true;
                     }
                     break;
@@ -1725,7 +1746,8 @@ public class Cls
         private static bool ReadOutside(
             ExpressionSyntax dataFlowParent,
             IdentifierNameSyntax[] references
-        ) {
+        )
+        {
             foreach (var reference in references)
             {
                 if (!dataFlowParent.Span.Contains(reference.Span))
@@ -1744,7 +1766,8 @@ public class Cls
             ExpressionSyntax dataFlowParent,
             DeclarationExpressionSyntax decl,
             IdentifierNameSyntax[] references
-        ) {
+        )
+        {
             ForStatementSyntax forStatement;
 
             if (
@@ -1754,7 +1777,8 @@ public class Cls
                 && forStatement.Statement.DescendantNodes()
                     .OfType<ForStatementSyntax>()
                     .Any(f => f.Condition == null)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -1775,7 +1799,8 @@ public class Cls
                     ) == null
                     || methodDeclParent.Body.Statements.First() != containingReturnOrThrow
                 )
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -1802,7 +1827,8 @@ public class Cls
                                 .Any()
                         )
                     )
-                ) {
+                )
+                {
                     if (IsRead(reference))
                     {
                         return true;
@@ -1816,7 +1842,8 @@ public class Cls
         private static bool WrittenOutside(
             ExpressionSyntax dataFlowParent,
             IdentifierNameSyntax[] references
-        ) {
+        )
+        {
             foreach (var reference in references)
             {
                 if (!dataFlowParent.Span.Contains(reference.Span))
@@ -1838,7 +1865,8 @@ public class Cls
                 case SyntaxKind.Argument:
                     if (
                         ((ArgumentSyntax)reference.Parent).RefOrOutKeyword.Kind() != SyntaxKind.None
-                    ) {
+                    )
+                    {
                         return true;
                     }
                     break;
@@ -24509,7 +24537,8 @@ public class X
 
         private static void AssertContainedInDeclaratorArguments(
             params DeclarationExpressionSyntax[] decls
-        ) {
+        )
+        {
             foreach (var decl in decls)
             {
                 AssertContainedInDeclaratorArguments(decl);
@@ -26451,7 +26480,8 @@ public class X
             SemanticModel model,
             DeclarationExpressionSyntax decl,
             params IdentifierNameSyntax[] references
-        ) {
+        )
+        {
             var variableDeclaratorSyntax = GetVariableDesignation(decl);
             Assert.Null(model.GetDeclaredSymbol(variableDeclaratorSyntax));
             Assert.Null(model.GetDeclaredSymbol((SyntaxNode)variableDeclaratorSyntax));
@@ -26474,7 +26504,8 @@ public class X
         private static void VerifyModelNotSupported(
             SemanticModel model,
             params IdentifierNameSyntax[] references
-        ) {
+        )
+        {
             foreach (var reference in references)
             {
                 Assert.Null(model.GetSymbolInfo(reference).Symbol);
@@ -38548,7 +38579,8 @@ class Program
             SemanticModel model,
             DeclarationExpressionSyntax decl,
             params IdentifierNameSyntax[] references
-        ) {
+        )
+        {
             VerifyModelForOutField(model, decl, false, references);
         }
 
@@ -38556,7 +38588,8 @@ class Program
             SemanticModel model,
             DeclarationExpressionSyntax decl,
             params IdentifierNameSyntax[] references
-        ) {
+        )
+        {
             VerifyModelForOutField(model, decl, true, references);
         }
 
@@ -38565,7 +38598,8 @@ class Program
             DeclarationExpressionSyntax decl,
             bool duplicate,
             params IdentifierNameSyntax[] references
-        ) {
+        )
+        {
             var variableDesignationSyntax = GetVariableDesignation(decl);
             var symbol = model.GetDeclaredSymbol(variableDesignationSyntax);
             Assert.Equal(decl.Identifier().ValueText, symbol.Name);
@@ -42894,7 +42928,8 @@ static class Ext
     {
         internal static SingleVariableDesignationSyntax VariableDesignation(
             this DeclarationExpressionSyntax self
-        ) {
+        )
+        {
             return (SingleVariableDesignationSyntax)self.Designation;
         }
     }

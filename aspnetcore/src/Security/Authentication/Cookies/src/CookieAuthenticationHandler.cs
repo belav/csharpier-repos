@@ -94,7 +94,8 @@ namespace Microsoft.AspNetCore.Authentication.Cookies
             var allowRefresh = ticket.Properties.AllowRefresh ?? true;
             if (
                 issuedUtc != null && expiresUtc != null && Options.SlidingExpiration && allowRefresh
-            ) {
+            )
+            {
                 var timeElapsed = currentUtc.Subtract(issuedUtc.Value);
                 var timeRemaining = expiresUtc.Value.Subtract(currentUtc);
 
@@ -108,7 +109,8 @@ namespace Microsoft.AspNetCore.Authentication.Cookies
         private void RequestRefresh(
             AuthenticationTicket ticket,
             ClaimsPrincipal? replacedPrincipal = null
-        ) {
+        )
+        {
             var issuedUtc = ticket.Properties.IssuedUtc;
             var expiresUtc = ticket.Properties.ExpiresUtc;
 
@@ -126,7 +128,8 @@ namespace Microsoft.AspNetCore.Authentication.Cookies
         private AuthenticationTicket CloneTicket(
             AuthenticationTicket ticket,
             ClaimsPrincipal? replacedPrincipal
-        ) {
+        )
+        {
             var principal = replacedPrincipal ?? ticket.Principal;
             var newPrincipal = new ClaimsPrincipal();
             foreach (var identity in principal.Identities)
@@ -306,7 +309,8 @@ namespace Microsoft.AspNetCore.Authentication.Cookies
         protected async override Task HandleSignInAsync(
             ClaimsPrincipal user,
             AuthenticationProperties? properties
-        ) {
+        )
+        {
             if (user == null)
             {
                 throw new ArgumentNullException(nameof(user));
@@ -456,7 +460,8 @@ namespace Microsoft.AspNetCore.Authentication.Cookies
         private async Task ApplyHeaders(
             bool shouldRedirectToReturnUrl,
             AuthenticationProperties properties
-        ) {
+        )
+        {
             Response.Headers[HeaderNames.CacheControl] = HeaderValueNoCacheNoStore;
             Response.Headers[HeaderNames.Pragma] = HeaderValueNoCache;
             Response.Headers[HeaderNames.Expires] = HeaderValueEpocDate;

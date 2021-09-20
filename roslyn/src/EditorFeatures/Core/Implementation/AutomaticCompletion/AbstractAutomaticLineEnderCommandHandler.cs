@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AutomaticCompletion
         protected AbstractAutomaticLineEnderCommandHandler(
             ITextUndoHistoryRegistry undoRegistry,
             IEditorOperationsFactoryService editorOperationsFactoryService
-        ) {
+        )
+        {
             _undoRegistry = undoRegistry;
             _editorOperationsFactoryService = editorOperationsFactoryService;
         }
@@ -95,7 +96,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AutomaticCompletion
             AutomaticLineEnderCommandArgs args,
             Action nextHandler,
             CommandExecutionContext context
-        ) {
+        )
+        {
             // get editor operation
             var operations = _editorOperationsFactoryService.GetEditorOperations(args.TextView);
             if (operations == null)
@@ -117,7 +119,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AutomaticCompletion
                 !document.Project.Solution.Workspace.Options.GetOption(
                     InternalFeatureOnOffOptions.AutomaticLineEnder
                 )
-            ) {
+            )
+            {
                 NextAction(operations, nextHandler);
                 return;
             }
@@ -127,7 +130,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AutomaticCompletion
                     allowCancellation: true,
                     EditorFeaturesResources.Automatically_completing
                 )
-            ) {
+            )
+            {
                 var cancellationToken = context.OperationContext.UserCancellationToken;
 
                 // caret is not on the subject buffer. nothing we can do
@@ -225,7 +229,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AutomaticCompletion
             Document document,
             ITextSnapshotLine line,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = document.GetRequiredSyntaxRootSynchronously(cancellationToken);
             var text = root.SyntaxTree.GetText(cancellationToken);
 
@@ -250,7 +255,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AutomaticCompletion
                 string.IsNullOrWhiteSpace(
                     text.ToString(TextSpan.FromBounds(token.Span.End, line.End))
                 )
-            ) {
+            )
+            {
                 return line.End;
             }
 
@@ -272,7 +278,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AutomaticCompletion
             int insertPosition,
             SnapshotPoint caretPosition,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // 1. Move the caret to line end.
             textView.TryMoveCaretToAndEnsureVisible(caretPosition.GetContainingLine().End);
 

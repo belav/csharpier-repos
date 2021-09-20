@@ -107,7 +107,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                                     metadata.ContentTypes[j],
                                     StringComparison.Ordinal
                                 )
-                            ) {
+                            )
+                            {
                                 needs415Endpoint = false;
                                 break;
                             }
@@ -284,7 +285,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         public PolicyJumpTable BuildJumpTable(
             int exitDestination,
             IReadOnlyList<PolicyJumpTableEdge> edges
-        ) {
+        )
+        {
             if (edges == null)
             {
                 throw new ArgumentNullException(nameof(edges));
@@ -316,7 +318,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
 
         private static int GetNoContentTypeDestination(
             (MediaType mediaType, int destination)[] destinations
-        ) {
+        )
+        {
             for (var i = 0; i < destinations.Length; i++)
             {
                 if (!destinations[i].mediaType.Type.HasValue)
@@ -377,7 +380,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 int exitDestination,
                 int noContentTypeDestination,
                 (MediaType mediaType, int destination)[] destinations
-            ) {
+            )
+            {
                 _exitDestination = exitDestination;
                 _noContentTypeDestination = noContentTypeDestination;
                 _destinations = destinations;

@@ -74,7 +74,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int position
-        ) {
+        )
+        {
             First(labeled, count, position);
         }
 
@@ -85,7 +86,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int position
-        ) {
+        )
+        {
             // For unordered collections, which element is chosen isn't actually guaranteed, but an effect of the implementation.
             // If this test starts failing it should be split, and possibly mentioned in release notes.
             _ = count;
@@ -114,7 +116,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int position
-        ) {
+        )
+        {
             FirstOrDefault(labeled, count, position);
         }
 
@@ -136,7 +139,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int position
-        ) {
+        )
+        {
             _ = count;
             _ = position;
             ParallelQuery<int> query = labeled.Item;
@@ -150,7 +154,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int position
-        ) {
+        )
+        {
             _ = position;
             ParallelQuery<int> query = labeled.Item;
             IntegerRangeSet seen = new IntegerRangeSet(0, count);
@@ -178,7 +183,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int position
-        ) {
+        )
+        {
             First_NoMatch(labeled, count, position);
         }
 
@@ -189,7 +195,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int position
-        ) {
+        )
+        {
             _ = position;
             ParallelQuery<int> query = labeled.Item;
             IntegerRangeSet seen = new IntegerRangeSet(0, count);
@@ -217,7 +224,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int position
-        ) {
+        )
+        {
             FirstOrDefault_NoMatch(labeled, count, position);
         }
 

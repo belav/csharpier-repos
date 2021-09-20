@@ -104,7 +104,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         var totalDelay = TimeSpan.Zero;
                         totalDelay < _longDelay;
                         totalDelay += _shortDelay
-                    ) {
+                    )
+                    {
                         await connection.Send("1", "a", "");
 
                         testContext.MockSystemClock.UtcNow += _shortDelay;
@@ -138,7 +139,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         var totalDelay = TimeSpan.Zero;
                         totalDelay < _longDelay;
                         totalDelay += _shortDelay
-                    ) {
+                    )
+                    {
                         testContext.MockSystemClock.UtcNow += _shortDelay;
                         heartbeatManager.OnHeartbeat(testContext.SystemClock.UtcNow);
                     }
@@ -207,7 +209,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         var totalDelay = TimeSpan.Zero;
                         totalDelay < _longDelay;
                         totalDelay += _shortDelay
-                    ) {
+                    )
+                    {
                         testContext.MockSystemClock.UtcNow += _shortDelay;
                         heartbeatManager.OnHeartbeat(testContext.SystemClock.UtcNow);
                     }
@@ -223,7 +226,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             TestServiceContext context,
             CancellationToken longRunningCt = default,
             CancellationToken upgradeCt = default
-        ) {
+        )
+        {
             // Ensure request headers timeout is started as soon as the tests send requests.
             context.Scheduler = PipeScheduler.Inline;
             context.ServerOptions.AddServerHeader = false;
@@ -240,7 +244,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             HttpContext httpContext,
             CancellationToken longRunningCt,
             CancellationToken upgradeCt
-        ) {
+        )
+        {
             var ct = httpContext.RequestAborted;
             var responseStream = httpContext.Response.Body;
             var responseBytes = Encoding.ASCII.GetBytes("hello, world");
@@ -256,7 +261,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                 using (
                     var stream = await httpContext.Features.Get<IHttpUpgradeFeature>()
                         .UpgradeAsync()
-                ) {
+                )
+                {
                     await CancellationTokenAsTask(upgradeCt);
 
                     responseStream = stream;
@@ -275,7 +281,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
         private async Task ReceiveResponse(
             InMemoryConnection connection,
             TestServiceContext testContext
-        ) {
+        )
+        {
             await connection.Receive(
                 "HTTP/1.1 200 OK",
                 $"Date: {testContext.DateHeaderValue}",

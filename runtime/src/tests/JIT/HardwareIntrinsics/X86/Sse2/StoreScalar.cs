@@ -26,7 +26,8 @@ namespace IntelHardwareIntrinsicTest
                         new double[2] { 1, -5 },
                         new double[2]
                     )
-                ) {
+                )
+                {
                     var vf = Unsafe.Read<Vector128<double>>(doubleTable.inArrayPtr);
                     Sse2.StoreScalar((double*)(doubleTable.outArrayPtr), vf);
 
@@ -37,7 +38,8 @@ namespace IntelHardwareIntrinsicTest
                                     == BitConverter.DoubleToInt64Bits(y[0])
                                 && BitConverter.DoubleToInt64Bits(y[1]) == 0
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("Sse2 StoreScalar failed on double:");
                         foreach (var item in doubleTable.outArray)
                         {
@@ -53,7 +55,8 @@ namespace IntelHardwareIntrinsicTest
                         new long[2] { 1, -5 },
                         new long[2]
                     )
-                ) {
+                )
+                {
                     var vf = Unsafe.Read<Vector128<long>>(intTable.inArrayPtr);
                     Sse2.StoreScalar((long*)(intTable.outArrayPtr), vf);
 
@@ -74,7 +77,8 @@ namespace IntelHardwareIntrinsicTest
                         new ulong[2] { 1, 5 },
                         new ulong[2]
                     )
-                ) {
+                )
+                {
                     var vf = Unsafe.Read<Vector128<ulong>>(intTable.inArrayPtr);
                     Sse2.StoreScalar((ulong*)(intTable.outArrayPtr), vf);
 

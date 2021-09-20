@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.Classification
             Document newDocument,
             TimeSpan timeout,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // If they're the same doc, there is no change.
             if (oldDocument == newDocument)
                 return new TextChangeRange();
@@ -92,7 +93,8 @@ namespace Microsoft.CodeAnalysis.Classification
             TimeSpan timeout,
             SharedStopwatch stopwatch,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (oldRoot == newRoot)
                 return default;
 
@@ -178,7 +180,8 @@ namespace Microsoft.CodeAnalysis.Classification
             int? ComputeCommonLeftWidth(
                 Stack<SyntaxNodeOrToken> oldStack,
                 Stack<SyntaxNodeOrToken> newStack
-            ) {
+            )
+            {
                 while (oldStack.Count > 0 && newStack.Count > 0)
                 {
                     cancellationToken.ThrowIfCancellationRequested();
@@ -231,7 +234,8 @@ namespace Microsoft.CodeAnalysis.Classification
             int ComputeCommonRightWidth(
                 Stack<SyntaxNodeOrToken> oldStack,
                 Stack<SyntaxNodeOrToken> newStack
-            ) {
+            )
+            {
                 while (oldStack.Count > 0 && newStack.Count > 0)
                 {
                     cancellationToken.ThrowIfCancellationRequested();
@@ -256,7 +260,8 @@ namespace Microsoft.CodeAnalysis.Classification
                         currentOld.IsIncrementallyIdenticalTo(currentNew)
                         && currentOld.FullSpan.Start >= commonLeftWidth
                         && currentNew.FullSpan.Start >= commonLeftWidth
-                    ) {
+                    )
+                    {
                         continue;
                     }
 

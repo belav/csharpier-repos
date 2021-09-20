@@ -27,27 +27,29 @@ namespace Microsoft.CodeAnalysis.CSharp
         public MethodGroupResolution(
             MethodGroup methodGroup,
             ImmutableBindingDiagnostic<AssemblySymbol> diagnostics
-        ) : this(
-            methodGroup,
-            otherSymbol: null,
-            overloadResolutionResult: null,
-            analyzedArguments: null,
-            methodGroup.ResultKind,
-            diagnostics
-        ) { }
+        )
+            : this(
+                methodGroup,
+                otherSymbol: null,
+                overloadResolutionResult: null,
+                analyzedArguments: null,
+                methodGroup.ResultKind,
+                diagnostics
+            ) { }
 
         public MethodGroupResolution(
             Symbol otherSymbol,
             LookupResultKind resultKind,
             ImmutableBindingDiagnostic<AssemblySymbol> diagnostics
-        ) : this(
-            methodGroup: null,
-            otherSymbol,
-            overloadResolutionResult: null,
-            analyzedArguments: null,
-            resultKind,
-            diagnostics
-        ) { }
+        )
+            : this(
+                methodGroup: null,
+                otherSymbol,
+                overloadResolutionResult: null,
+                analyzedArguments: null,
+                resultKind,
+                diagnostics
+            ) { }
 
         public MethodGroupResolution(
             MethodGroup methodGroup,
@@ -56,7 +58,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             AnalyzedArguments analyzedArguments,
             LookupResultKind resultKind,
             ImmutableBindingDiagnostic<AssemblySymbol> diagnostics
-        ) {
+        )
+        {
             Debug.Assert((methodGroup == null) || (methodGroup.Methods.Count > 0));
             Debug.Assert((methodGroup == null) || ((object)otherSymbol == null));
             // Methods should be represented in the method group.

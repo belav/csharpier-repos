@@ -48,7 +48,8 @@ namespace Castle.Components.DictionaryAdapter
                     false,
                     (copied, s) => copied | s.Copy(this, other, ref selector)
                 )
-            ) {
+            )
+            {
                 return;
             }
 

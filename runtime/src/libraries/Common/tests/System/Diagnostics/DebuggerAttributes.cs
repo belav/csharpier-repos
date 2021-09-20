@@ -39,7 +39,8 @@ namespace System.Diagnostics
         internal static DebuggerAttributeInfo ValidateDebuggerTypeProxyProperties(
             Type type,
             object obj
-        ) {
+        )
+        {
             return ValidateDebuggerTypeProxyProperties(type, type.GenericTypeArguments, obj);
         }
 
@@ -47,7 +48,8 @@ namespace System.Diagnostics
             Type type,
             Type[] genericTypeArguments,
             object obj
-        ) {
+        )
+        {
             Type proxyType = GetProxyType(type, genericTypeArguments);
 
             // Create an instance of the proxy type, and make sure we can access all of the instance properties
@@ -79,7 +81,8 @@ namespace System.Diagnostics
 
         public static IEnumerable<PropertyInfo> GetDebuggerVisibleProperties(
             Type debuggerAttributeType
-        ) {
+        )
+        {
             // The debugger doesn't evaluate non-public members of type proxies. GetGetMethod returns null if the getter is non-public.
             IEnumerable<PropertyInfo> visibleProperties = debuggerAttributeType.GetProperties()
                 .Where(

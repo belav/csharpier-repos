@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers.ImportCompletion
                 string language,
                 ImmutableArray<TypeImportCompletionItemInfo> items,
                 int publicItemCount
-            ) {
+            )
+            {
                 Checksum = checksum;
                 Language = language;
 
@@ -50,7 +51,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers.ImportCompletion
                 bool isAttributeContext,
                 bool isCaseSensitive,
                 bool hideAdvancedMembers
-            ) {
+            )
+            {
                 var isSameLanguage = Language == language;
                 using var _ = ArrayBuilder<CompletionItem>.GetInstance(out var builder);
 
@@ -114,13 +116,15 @@ namespace Microsoft.CodeAnalysis.Completion.Providers.ImportCompletion
                 static CompletionItem GetAppropriateAttributeItem(
                     CompletionItem attributeItem,
                     bool isCaseSensitive
-                ) {
+                )
+                {
                     if (
                         attributeItem.DisplayText.TryGetWithoutAttributeSuffix(
                             isCaseSensitive: isCaseSensitive,
                             out var attributeNameWithoutSuffix
                         )
-                    ) {
+                    )
+                    {
                         // We don't want to cache this item.
                         return ImportCompletionItem.CreateAttributeItemWithoutSuffix(
                             attributeItem,
@@ -149,7 +153,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers.ImportCompletion
                     string language,
                     string genericTypeSuffix,
                     EditorBrowsableInfo editorBrowsableInfo
-                ) {
+                )
+                {
                     _checksum = checksum;
                     _language = language;
                     _genericTypeSuffix = genericTypeSuffix;
@@ -172,7 +177,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers.ImportCompletion
                     INamedTypeSymbol symbol,
                     string containingNamespace,
                     bool isPublic
-                ) {
+                )
+                {
                     // We want to cache items with EditoBrowsableState == Advanced regardless of current "hide adv members" option value
                     var (isBrowsable, isEditorBrowsableStateAdvanced) =
                         symbol.IsEditorBrowsableWithState(

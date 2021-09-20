@@ -61,7 +61,8 @@ namespace System.Linq.Expressions.Tests
                 ParameterExpression item,
                 Expression enumerable,
                 Expression body
-            ) {
+            )
+            {
                 ItemVariable = item;
                 Enumerable = enumerable;
                 Body = body;

@@ -39,7 +39,8 @@ public class TailCallOptTest
         TypedDouble typedDouble1,
         TypedDouble typedDouble2,
         TypedDouble typedDouble3
-    ) {
+    )
+    {
         double param = 19.0;
 
         Console.Write("Let's ");
@@ -65,7 +66,8 @@ public class TailCallOptTest
         double typedDoubleArg1,
         double typedDoubleArg2,
         double typedDoubleArg3
-    ) {
+    )
+    {
         Console.WriteLine(
             "{0} {1} {2} {3} {4}",
             doubleArg,
@@ -80,7 +82,8 @@ public class TailCallOptTest
             && (typedDoubleArg1 == 1.0)
             && (typedDoubleArg2 == 2.0)
             && (typedDoubleArg3 == 3.0)
-        ) {
+        )
+        {
             Console.WriteLine("PASSED");
             return true;
         }
@@ -104,7 +107,8 @@ public class TailCallOptTest
         TypedDouble typedDouble1,
         TwoInts twoInts,
         TypedDouble typedDouble3
-    ) {
+    )
+    {
         double param = 19.0;
 
         Console.Write("Let's ");
@@ -124,7 +128,8 @@ public class TailCallOptTest
         double typedDoubleArg1,
         double typedDoubleArg2,
         int i3
-    ) {
+    )
+    {
         Console.WriteLine("{0} {1} {2} {3} {4}", i1, i2, typedDoubleArg1, typedDoubleArg2, i3);
         if (
             (i1 == 3)
@@ -132,7 +137,8 @@ public class TailCallOptTest
             && (typedDoubleArg1 == 1.0)
             && (typedDoubleArg2 == 19)
             && (i3 == 11)
-        ) {
+        )
+        {
             Console.WriteLine("PASSED");
             return true;
         }

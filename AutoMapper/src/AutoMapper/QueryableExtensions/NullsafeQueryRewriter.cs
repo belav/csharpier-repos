@@ -103,7 +103,8 @@ namespace AutoMapper.QueryableExtensions
             Expression target,
             Expression expression,
             Func<Expression, Expression> update
-        ) {
+        )
+        {
             var fallback = Cache.GetOrAdd(target.Type);
 
             if (fallback != null)

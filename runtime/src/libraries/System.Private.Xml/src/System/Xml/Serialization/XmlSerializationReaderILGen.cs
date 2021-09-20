@@ -106,7 +106,8 @@ namespace System.Xml.Serialization
                 MemberMapping mapping,
                 bool multiRef,
                 string? choiceSource
-            ) {
+            )
+            {
                 _source = source;
                 _arrayName = arrayName + "_" + i.ToString(CultureInfo.InvariantCulture);
                 _choiceArrayName = "choice_" + _arrayName;
@@ -239,11 +240,8 @@ namespace System.Xml.Serialization
         }
 
         [RequiresUnreferencedCode("Creates XmlSerializationILGen")]
-        internal XmlSerializationReaderILGen(
-            TypeScope[] scopes,
-            string access,
-            string className
-        ) : base(scopes, access, className) { }
+        internal XmlSerializationReaderILGen(TypeScope[] scopes, string access, string className)
+            : base(scopes, access, className) { }
 
         [RequiresUnreferencedCode("calls WriteReflectionInit")]
         internal void GenerateBegin()
@@ -469,7 +467,8 @@ namespace System.Xml.Serialization
             MemberMapping mapping,
             string parent,
             TypeDesc parentTypeDesc
-        ) {
+        )
+        {
             if (mapping.ChoiceIdentifier == null)
                 return "";
             CodeIdentifier.CheckValidIdentifier(mapping.ChoiceIdentifier.MemberName);
@@ -601,7 +600,8 @@ namespace System.Xml.Serialization
                     && !(
                         mapping.Elements!.Length == 1 && mapping.Elements[0].Mapping is ArrayMapping
                     )
-                ) {
+                )
+                {
                     membersList.Add(anyMember);
                     textOrArrayMembersList.Add(anyMember);
                 }
@@ -1010,7 +1010,8 @@ namespace System.Xml.Serialization
                         (mapping.TypeDesc.FormatterName == "ByteArrayBase64" && source == "false")
                         || (mapping.TypeDesc.FormatterName == "ByteArrayHex" && source == "false")
                         || (mapping.TypeDesc.FormatterName == "XmlQualifiedName")
-                    ) {
+                    )
+                    {
                         bindingFlags = CodeGenerator.InstanceBindingFlags;
                         ilg.Ldarg(0);
                     }
@@ -1108,7 +1109,8 @@ namespace System.Xml.Serialization
             EnumMapping mapping,
             string typeName,
             out MethodBuilder? get_TableName
-        ) {
+        )
+        {
             get_TableName = null;
 
             CodeIdentifier.CheckValidIdentifier(typeName);
@@ -1318,12 +1320,14 @@ namespace System.Xml.Serialization
             StructMapping mapping,
             bool isTypedReturn,
             string returnTypeName
-        ) {
+        )
+        {
             for (
                 StructMapping? derived = mapping.DerivedMappings;
                 derived != null;
                 derived = derived.NextDerivedMapping
-            ) {
+            )
+            {
                 ilg.InitElseIf();
                 WriteQNameEqual("xsiType", derived.TypeName, derived.Namespace);
                 ilg.AndIf();
@@ -1737,7 +1741,8 @@ namespace System.Xml.Serialization
                 if (
                     structMapping.TypeDesc.Type != null
                     && typeof(XmlSchemaObject).IsAssignableFrom(structMapping.TypeDesc.Type)
-                ) {
+                )
+                {
                     MethodInfo XmlSerializationReader_set_DecodeName =
                         typeof(XmlSerializationReader).GetMethod(
                             "set_DecodeName",
@@ -1805,7 +1810,8 @@ namespace System.Xml.Serialization
                                     mapping.Elements[j].Name == null
                                     || mapping.Elements[j].Name.Length == 0
                                 )
-                            ) {
+                            )
+                            {
                                 anyElement = member;
                                 break;
                             }
@@ -1833,7 +1839,8 @@ namespace System.Xml.Serialization
                         mapping.Attribute == null
                         && mapping.Elements!.Length == 1
                         && mapping.Elements[0].Mapping is ArrayMapping
-                    ) {
+                    )
+                    {
                         Member arrayMember = new Member(
                             this,
                             source,
@@ -1860,7 +1867,8 @@ namespace System.Xml.Serialization
                                 mapping.Elements!.Length == 1
                                 && mapping.Elements[0].Mapping is ArrayMapping
                             )
-                        ) {
+                        )
+                        {
                             member.ParamsReadSource = null; // flat arrays -- don't want to count params read.
                             if (member != anyText && member != anyElement)
                             {
@@ -2099,7 +2107,8 @@ namespace System.Xml.Serialization
             Member? anyAttribute,
             string elseCall,
             LocalBuilder firstParam
-        ) {
+        )
+        {
             int count = 0;
             Member? xmlnsMember = null;
             var attributes = new List<AttributeAccessor>();
@@ -2457,7 +2466,8 @@ namespace System.Xml.Serialization
                 member.Mapping.CheckSpecified == SpecifiedAccessor.ReadWrite
                 && member.CheckSpecifiedSource != null
                 && member.CheckSpecifiedSource.Length > 0
-            ) {
+            )
+            {
                 ILGenSet(member.CheckSpecifiedSource, true);
             }
             if (member.ParamsReadSource != null)
@@ -2504,7 +2514,8 @@ namespace System.Xml.Serialization
                         if (
                             member.Source[member.Source.Length - 1] == '('
                             || member.Source[member.Source.Length - 1] == '{'
-                        ) {
+                        )
+                        {
                             WriteCreateInstance(a, typeDesc.CannotNew, typeDesc.Type!);
                             WriteSourceBegin(member.Source);
                             ilg.Ldloc(ilg.GetLocal(a));
@@ -2516,7 +2527,8 @@ namespace System.Xml.Serialization
                                 member.IsList
                                 && !member.Mapping.ReadOnly
                                 && member.Mapping.TypeDesc.IsNullable
-                            ) {
+                            )
+                            {
                                 // we need to new the Collections and ArrayLists
                                 ILGenLoad(member.Source, typeof(object));
                                 ilg.Load(null);
@@ -2606,7 +2618,8 @@ namespace System.Xml.Serialization
             string elseString,
             Member? anyElement,
             Member? anyText
-        ) {
+        )
+        {
             if (anyText != null)
             {
                 ilg.Load(null);
@@ -2778,7 +2791,8 @@ namespace System.Xml.Serialization
                     if (
                         text.Mapping!.TypeDesc == StringTypeDesc
                         || text.Mapping.TypeDesc!.FormatterName == "String"
-                    ) {
+                    )
+                    {
                         LocalBuilder tmpLoc = ilg.GetLocal("tmp");
                         MethodInfo XmlSerializationReader_ReadString =
                             typeof(XmlSerializationReader).GetMethod(
@@ -2855,7 +2869,8 @@ namespace System.Xml.Serialization
             Member[] members,
             Member? anyElement,
             string elementElseString
-        ) {
+        )
+        {
             int count = 0;
 
             bool isSequence = IsSequence(members);
@@ -3198,7 +3213,8 @@ namespace System.Xml.Serialization
                 if (
                     CodeGenerator.IsNullableGenericType(arrayElementType)
                     || arrayElementType.IsValueType
-                ) {
+                )
+                {
                     ilg.Ldelema(arrayElementType);
                 }
                 return;
@@ -3279,7 +3295,8 @@ namespace System.Xml.Serialization
                 if (
                     CodeGenerator.IsNullableGenericType(arrayElementType)
                     || arrayElementType.IsValueType
-                ) {
+                )
+                {
                     ilg.Stobj(arrayElementType);
                 }
                 else
@@ -3339,7 +3356,8 @@ namespace System.Xml.Serialization
             bool isNullable,
             int fixupIndex,
             int elementIndex
-        ) {
+        )
+        {
             MethodInfo XmlSerializationReader_ReadNull = typeof(XmlSerializationReader).GetMethod(
                 "ReadNull",
                 CodeGenerator.InstanceBindingFlags,
@@ -3461,7 +3479,8 @@ namespace System.Xml.Serialization
             bool readOnly,
             int fixupIndex,
             int elementIndex
-        ) {
+        )
+        {
             if (checkSpecified != null && checkSpecified.Length > 0)
             {
                 ILGenSet(checkSpecified, true);
@@ -3536,7 +3555,8 @@ namespace System.Xml.Serialization
                     element.Default != null
                     && element.Default != DBNull.Value
                     && element.Mapping.TypeDesc!.IsValueType
-                ) {
+                )
+                {
                     MethodInfo XmlSerializationReader_get_Reader =
                         typeof(XmlSerializationReader).GetMethod(
                             "get_Reader",
@@ -3819,14 +3839,16 @@ namespace System.Xml.Serialization
             SerializableMapping? mapping,
             string source,
             bool isWrappedAny
-        ) {
+        )
+        {
             if (mapping == null)
                 return;
             for (
                 SerializableMapping? derived = mapping.DerivedMappings;
                 derived != null;
                 derived = derived.NextDerivedMapping
-            ) {
+            )
+            {
                 Label labelTrue = ilg.DefineLabel();
                 Label labelEnd = ilg.DefineLabel();
                 LocalBuilder tserLoc = ilg.GetLocal("tser");
@@ -4048,7 +4070,8 @@ namespace System.Xml.Serialization
             string variableName,
             string initValue,
             TypeDesc arrayTypeDesc
-        ) {
+        )
+        {
             RaCodeGen.WriteArrayLocalDecl(
                 typeName,
                 variableName,

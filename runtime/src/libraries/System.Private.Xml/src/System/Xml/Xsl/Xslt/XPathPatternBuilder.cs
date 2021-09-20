@@ -115,7 +115,8 @@ namespace System.Xml.Xsl.Xslt
             XPathNodeType nodeType,
             string? name,
             string? nsUri
-        ) {
+        )
+        {
             QilNode nameTest = (
                 name != null && nsUri != null
                     ? f.Eq(f.NameOf(itr), f.QName(name, nsUri))
@@ -159,7 +160,8 @@ namespace System.Xml.Xsl.Xslt
             XPathNodeType nodeType,
             string? prefix,
             string? name
-        ) {
+        )
+        {
             Debug.Assert(
                 xpathAxis == XPathAxis.Child
                     || xpathAxis == XPathAxis.Attribute
@@ -285,7 +287,8 @@ namespace System.Xml.Xsl.Xslt
             QilNode node,
             QilNode condition,
             bool isReverseStep
-        ) {
+        )
+        {
             Debug.Fail("Should not call to this function.");
             return null;
         }
@@ -313,7 +316,8 @@ namespace System.Xml.Xsl.Xslt
             if (
                 _predicateEnvironment.numFixupLast == 0
                 && _predicateEnvironment.numFixupPosition == 0
-            ) {
+            )
+            {
                 foreach (var predicate in convertedPredicates)
                 {
                     nodeFilter.Body = _f.And(nodeFilter.Body, predicate);
@@ -520,7 +524,8 @@ namespace System.Xml.Xsl.Xslt
                 string name,
                 IList<QilNode> args,
                 IFocus env
-            ) {
+            )
+            {
                 return _baseEnvironment.ResolveFunction(prefix, name, args, env);
             }
             public string ResolvePrefix(string prefix)

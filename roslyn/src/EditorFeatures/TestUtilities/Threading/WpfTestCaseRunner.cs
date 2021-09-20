@@ -27,16 +27,18 @@ namespace Roslyn.Test.Utilities
             IMessageBus messageBus,
             ExceptionAggregator aggregator,
             CancellationTokenSource cancellationTokenSource
-        ) : base(
-            testCase,
-            displayName,
-            skipReason,
-            constructorArguments,
-            testMethodArguments,
-            messageBus,
-            aggregator,
-            cancellationTokenSource
-        ) {
+        )
+            : base(
+                testCase,
+                displayName,
+                skipReason,
+                constructorArguments,
+                testMethodArguments,
+                messageBus,
+                aggregator,
+                cancellationTokenSource
+            )
+        {
             SharedData = sharedData;
         }
 
@@ -51,7 +53,8 @@ namespace Roslyn.Test.Utilities
             IReadOnlyList<BeforeAfterTestAttribute> beforeAfterAttributes,
             ExceptionAggregator aggregator,
             CancellationTokenSource cancellationTokenSource
-        ) {
+        )
+        {
             var runner = new WpfTestRunner(
                 SharedData,
                 test,

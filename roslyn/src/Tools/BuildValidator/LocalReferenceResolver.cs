@@ -94,7 +94,8 @@ namespace BuildValidator
         public bool TryResolveReferences(
             MetadataReferenceInfo metadataReferenceInfo,
             [NotNullWhen(true)] out MetadataReference? metadataReference
-        ) {
+        )
+        {
             if (!TryGetAssemblyInfo(metadataReferenceInfo, out var assemblyInfo))
             {
                 metadataReference = null;
@@ -130,7 +131,8 @@ namespace BuildValidator
         public bool TryGetAssemblyInfo(
             MetadataReferenceInfo metadataReferenceInfo,
             [NotNullWhen(true)] out AssemblyInfo? assemblyInfo
-        ) {
+        )
+        {
             if (_mvidMap.TryGetValue(metadataReferenceInfo.ModuleVersionId, out assemblyInfo))
             {
                 return true;
@@ -153,7 +155,8 @@ namespace BuildValidator
                         metadataReferenceInfo.FileName,
                         SearchOption.AllDirectories
                     )
-                ) {
+                )
+                {
                     if (Util.GetPortableExecutableInfo(fileInfo.FullName) is not { } peInfo)
                     {
                         _logger.LogWarning($@"Could not read MVID from ""{fileInfo.FullName}""");

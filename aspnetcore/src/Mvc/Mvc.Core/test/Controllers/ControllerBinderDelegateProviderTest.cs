@@ -1003,7 +1003,8 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
             Func<object, object> propertyAccessor,
             object inputValue,
             object expectedValue
-        ) {
+        )
+        {
             // Arrange
             var actionDescriptor = GetActionDescriptor();
             actionDescriptor.BoundProperties.Add(
@@ -1182,7 +1183,8 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
         [MemberData(nameof(MultipleActionParametersAndValidationData))]
         public async Task MultipleActionParameter_ValidModelState(
             List<ParameterDescriptor> parameters
-        ) {
+        )
+        {
             // Since validation attribute is only present on the FromBody model's property(TransferInfo's AccountId),
             // validation should not trigger for the parameter which is bound from Uri.
 
@@ -1335,7 +1337,8 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
 
         private static ControllerContext GetControllerContext(
             ControllerActionDescriptor descriptor = null
-        ) {
+        )
+        {
             var services = new ServiceCollection();
             services.AddSingleton<ILoggerFactory>(NullLoggerFactory.Instance);
 
@@ -1367,7 +1370,8 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
 
         private static IModelValidatorProvider GetModelValidatorProvider(
             IModelValidator validator = null
-        ) {
+        )
+        {
             if (validator == null)
             {
                 validator = Mock.Of<IModelValidator>();
@@ -1418,7 +1422,8 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
             IModelMetadataProvider modelMetadataProvider = null,
             IModelBinderFactory factory = null,
             IModelValidatorProvider modelValidatorProvider = null
-        ) {
+        )
+        {
             if (factory == null)
             {
                 factory = TestModelBinderFactory.CreateDefault();
@@ -1448,7 +1453,8 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
         private static DefaultObjectValidator GetObjectValidator(
             IModelMetadataProvider modelMetadataProvider,
             IModelValidatorProvider validatorProvider
-        ) {
+        )
+        {
             return new DefaultObjectValidator(
                 modelMetadataProvider,
                 new[] { validatorProvider },
@@ -1566,7 +1572,8 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
                 ValidationStateDictionary validationState,
                 string prefix,
                 object model
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }

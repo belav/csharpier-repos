@@ -390,7 +390,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
 
         private static KeyAgreeRecipientInfo EncodeKeyAgreel(
             SubjectIdentifierType type = SubjectIdentifierType.IssuerAndSerialNumber
-        ) {
+        )
+        {
             ContentInfo contentInfo = new ContentInfo(new byte[] { 1, 2, 3 });
             EnvelopedCms ecms = new EnvelopedCms(contentInfo, TripleDesAlgId);
             using (X509Certificate2 cert = Certificates.DHKeyAgree1.GetCertificate())
@@ -412,7 +413,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
 
         private static KeyAgreeRecipientInfo FixedValueKeyAgree1(
             SubjectIdentifierType type = SubjectIdentifierType.IssuerAndSerialNumber
-        ) {
+        )
+        {
             byte[] encodedMessage;
             switch (type)
             {

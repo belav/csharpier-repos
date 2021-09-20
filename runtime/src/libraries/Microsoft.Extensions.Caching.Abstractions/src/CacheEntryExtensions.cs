@@ -29,7 +29,8 @@ namespace Microsoft.Extensions.Caching.Memory
         public static ICacheEntry AddExpirationToken(
             this ICacheEntry entry,
             IChangeToken expirationToken
-        ) {
+        )
+        {
             if (expirationToken == null)
             {
                 throw new ArgumentNullException(nameof(expirationToken));
@@ -60,7 +61,8 @@ namespace Microsoft.Extensions.Caching.Memory
         public static ICacheEntry SetAbsoluteExpiration(
             this ICacheEntry entry,
             DateTimeOffset absolute
-        ) {
+        )
+        {
             entry.AbsoluteExpiration = absolute;
             return entry;
         }
@@ -87,7 +89,8 @@ namespace Microsoft.Extensions.Caching.Memory
         public static ICacheEntry RegisterPostEvictionCallback(
             this ICacheEntry entry,
             PostEvictionDelegate callback
-        ) {
+        )
+        {
             if (callback == null)
             {
                 throw new ArgumentNullException(nameof(callback));
@@ -107,7 +110,8 @@ namespace Microsoft.Extensions.Caching.Memory
             this ICacheEntry entry,
             PostEvictionDelegate callback,
             object state
-        ) {
+        )
+        {
             if (callback == null)
             {
                 throw new ArgumentNullException(nameof(callback));
@@ -165,7 +169,8 @@ namespace Microsoft.Extensions.Caching.Memory
         public static ICacheEntry SetOptions(
             this ICacheEntry entry,
             MemoryCacheEntryOptions options
-        ) {
+        )
+        {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -184,7 +189,8 @@ namespace Microsoft.Extensions.Caching.Memory
 
             foreach (
                 PostEvictionCallbackRegistration postEvictionCallback in options.PostEvictionCallbacks
-            ) {
+            )
+            {
                 entry.RegisterPostEvictionCallback(
                     postEvictionCallback.EvictionCallback,
                     postEvictionCallback.State

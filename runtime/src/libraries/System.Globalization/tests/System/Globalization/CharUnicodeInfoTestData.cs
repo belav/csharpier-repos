@@ -64,7 +64,8 @@ namespace System.Globalization.Tests
                     int rangeCodePoint = s_rangeMinCodePoint + 1;
                     rangeCodePoint < codePoint;
                     rangeCodePoint++
-                ) {
+                )
+                {
                     // Assumes that all code points in the range have the same numeric value
                     // and general category
                     Parse(testCases, rangeCodePoint, charCategoryString, numericValueString);
@@ -115,7 +116,8 @@ namespace System.Globalization.Tests
             int codePoint,
             string charCategoryString,
             string numericValueString
-        ) {
+        )
+        {
             string codeValueRepresentation =
                 codePoint > char.MaxValue
                     ? char.ConvertFromUtf32(codePoint)

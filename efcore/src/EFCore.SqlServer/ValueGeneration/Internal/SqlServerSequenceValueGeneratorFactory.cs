@@ -44,7 +44,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.ValueGeneration.Internal
             ISqlServerConnection connection,
             IRawSqlCommandBuilder rawSqlCommandBuilder,
             IRelationalCommandDiagnosticsLogger commandLogger
-        ) {
+        )
+        {
             var type = property.ClrType.UnwrapNullableType().UnwrapEnumType();
 
             if (type == typeof(long))

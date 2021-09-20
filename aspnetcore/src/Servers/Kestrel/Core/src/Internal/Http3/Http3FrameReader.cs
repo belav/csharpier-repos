@@ -24,7 +24,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
             ref ReadOnlySequence<byte> readableBuffer,
             Http3RawFrame frame,
             out ReadOnlySequence<byte> framePayload
-        ) {
+        )
+        {
             framePayload = ReadOnlySequence<byte>.Empty;
             SequencePosition consumed;
             SequencePosition examined;

@@ -147,7 +147,8 @@ namespace WsFedSample
                     if (
                         context.Request.Path.Equals("/restricted")
                         && !user.Identities.Any(identity => identity.HasClaim("special", "true"))
-                    ) {
+                    )
+                    {
                         await context.ForbidAsync();
                         return;
                     }
@@ -184,7 +185,8 @@ namespace WsFedSample
         private static async Task WriteHtmlAsync(
             HttpResponse response,
             Func<HttpResponse, Task> writeContent
-        ) {
+        )
+        {
             var bootstrap =
                 "<link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css\" integrity=\"sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu\" crossorigin=\"anonymous\">";
 
@@ -200,7 +202,8 @@ namespace WsFedSample
             HttpResponse response,
             IEnumerable<string> columns,
             IEnumerable<IEnumerable<string>> data
-        ) {
+        )
+        {
             await response.WriteAsync("<table class=\"table table-condensed\">");
             await response.WriteAsync("<tr>");
             foreach (var column in columns)

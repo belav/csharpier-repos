@@ -1233,7 +1233,8 @@ i",
                         bufferSize: bytes.Length,
                         leaveOpen: true
                     )
-                ) {
+                )
+                {
                     var textFromStream = streamReader.ReadToEnd();
                     Assert.Equal(textFromStream, text);
                 }
@@ -1248,7 +1249,8 @@ i",
             int line = 0,
             int column = 0,
             string filename = null
-        ) {
+        )
+        {
             try
             {
                 var script = scriptProvider();

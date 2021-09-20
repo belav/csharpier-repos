@@ -29,7 +29,8 @@ namespace Microsoft.IO
             int length,
             TState state,
             SpanAction<char, TState> action
-        ) {
+        )
+        {
             if (action == null)
                 throw new ArgumentNullException(nameof(action));
 
@@ -65,7 +66,8 @@ namespace Microsoft.IO
             ReadOnlySpan<char> str0,
             ReadOnlySpan<char> str1,
             ReadOnlySpan<char> str2
-        ) {
+        )
+        {
             var result = new string('\0', checked(str0.Length + str1.Length + str2.Length));
             fixed (char* resultPtr = result)
             {

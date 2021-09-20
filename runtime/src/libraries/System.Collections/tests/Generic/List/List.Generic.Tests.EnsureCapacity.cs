@@ -63,7 +63,8 @@ namespace System.Collections.Tests
         [InlineData(5)]
         public void EnsureCapacity_RequestedCapacitySmallerThanOrEqualToCurrent_CapacityUnchanged(
             int currentCapacity
-        ) {
+        )
+        {
             var list = new List<T>(currentCapacity);
 
             for (int requestCapacity = 0; requestCapacity <= currentCapacity; requestCapacity++)
@@ -77,7 +78,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void EnsureCapacity_RequestedCapacitySmallerThanOrEqualToCount_CapacityUnchanged(
             int count
-        ) {
+        )
+        {
             List<T> list = GenericListFactory(count);
             var currentCapacity = list.Capacity;
 

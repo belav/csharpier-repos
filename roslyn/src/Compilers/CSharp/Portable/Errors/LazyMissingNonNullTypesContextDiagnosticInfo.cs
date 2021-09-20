@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private LazyMissingNonNullTypesContextDiagnosticInfo(
             TypeWithAnnotations type,
             DiagnosticInfo info
-        ) {
+        )
+        {
             Debug.Assert(type.HasType);
             _type = type;
             _info = info;
@@ -33,7 +34,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeWithAnnotations type,
             Location location,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             var rawInfos = ArrayBuilder<DiagnosticInfo>.GetInstance();
             GetRawDiagnosticInfos(
                 isNullableEnabled,
@@ -57,7 +59,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool isGeneratedCode,
             CSharpSyntaxTree tree,
             ArrayBuilder<DiagnosticInfo> infos
-        ) {
+        )
+        {
             const MessageID featureId = MessageID.IDS_FeatureNullableReferenceTypes;
             var info = featureId.GetFeatureAvailabilityDiagnosticInfo(tree.Options);
             if (info is object)
@@ -92,7 +95,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeWithAnnotations type,
             Location location,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             if (IsNullableReference(type.Type))
             {
                 ReportNullableReferenceTypesIfNeeded(
@@ -109,7 +113,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool isGeneratedCode,
             Location location,
             DiagnosticBag diagnostics
-        ) {
+        )
+        {
             var rawInfos = ArrayBuilder<DiagnosticInfo>.GetInstance();
             GetRawDiagnosticInfos(
                 isNullableEnabled,

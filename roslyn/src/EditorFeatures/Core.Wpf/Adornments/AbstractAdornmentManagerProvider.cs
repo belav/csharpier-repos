@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Adornments
             IThreadingContext threadingContext,
             IViewTagAggregatorFactoryService tagAggregatorFactoryService,
             IAsynchronousOperationListenerProvider listenerProvider
-        ) {
+        )
+        {
             _threadingContext = threadingContext;
             _tagAggregatorFactoryService = tagAggregatorFactoryService;
             _asyncListener = listenerProvider.GetListener(this.FeatureAttributeName);

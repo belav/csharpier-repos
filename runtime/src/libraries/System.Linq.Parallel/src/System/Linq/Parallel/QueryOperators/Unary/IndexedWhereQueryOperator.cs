@@ -77,7 +77,8 @@ namespace System.Linq.Parallel
         internal override QueryResults<TInputOutput> Open(
             QuerySettings settings,
             bool preferStriping
-        ) {
+        )
+        {
             QueryResults<TInputOutput> childQueryResults = Child.Open(settings, preferStriping);
             return new UnaryQueryOperatorResults(childQueryResults, this, settings, preferStriping);
         }
@@ -87,7 +88,8 @@ namespace System.Linq.Parallel
             IPartitionedStreamRecipient<TInputOutput> recipient,
             bool preferStriping,
             QuerySettings settings
-        ) {
+        )
+        {
             int partitionCount = inputStream.PartitionCount;
 
             // If the index is not correct, we need to reindex.
@@ -169,7 +171,8 @@ namespace System.Linq.Parallel
                 QueryOperatorEnumerator<TInputOutput, int> source,
                 Func<TInputOutput, int, bool> predicate,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Debug.Assert(source != null);
                 Debug.Assert(predicate != null);
                 _source = source;
@@ -184,7 +187,8 @@ namespace System.Linq.Parallel
             internal override bool MoveNext(
                 [MaybeNullWhen(false), AllowNull] ref TInputOutput currentElement,
                 ref int currentKey
-            ) {
+            )
+            {
                 Debug.Assert(_predicate != null, "expected a compiled operator");
 
                 // Iterate through the input until we reach the end of the sequence or find

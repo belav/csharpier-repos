@@ -30,7 +30,8 @@ namespace System.Xml.Tests
         public void PassNull_LocalName_NamespaceUri_Invalid_First_Second_Overload(
             string type,
             string overload
-        ) {
+        )
+        {
             XmlSchemaValidator val = CreateValidator(CreateSchemaSetFromXml("<root />"));
             string name = "root";
             string ns = "";
@@ -111,7 +112,8 @@ namespace System.Xml.Tests
             string elemType,
             XmlSchemaContentType schemaContentType,
             string overload
-        ) {
+        )
+        {
             XmlSchemaValidator val;
             XmlSchemaSet schemas = new XmlSchemaSet();
             XmlSchemaInfo info = new XmlSchemaInfo();
@@ -186,7 +188,8 @@ namespace System.Xml.Tests
         )]
         public void CheckSchemaLocationIs_UsedWhenSpecified_NotUsedWhenFlagIsNotSet(
             XmlSchemaValidationFlags allFlags
-        ) {
+        )
+        {
             XmlSchemaValidator val;
             XmlNamespaceManager ns = new XmlNamespaceManager(new NameTable());
             XmlSchemaSet schemas = new XmlSchemaSet();
@@ -252,7 +255,8 @@ namespace System.Xml.Tests
         )]
         public void CheckNoNamespaceSchemaLocationIs_UsedWhenSpecified_NotUsedWhenFlagIsSet(
             XmlSchemaValidationFlags allFlags
-        ) {
+        )
+        {
             XmlSchemaValidator val;
             XmlSchemaSet schemas = new XmlSchemaSet();
             XmlSchemaInfo info = new XmlSchemaInfo();

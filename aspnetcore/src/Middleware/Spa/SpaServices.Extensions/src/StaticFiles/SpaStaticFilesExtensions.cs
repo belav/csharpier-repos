@@ -25,7 +25,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static void AddSpaStaticFiles(
             this IServiceCollection services,
             Action<SpaStaticFilesOptions>? configuration = null
-        ) {
+        )
+        {
             services.AddSingleton<ISpaStaticFileProvider>(
                 serviceProvider =>
                 {
@@ -70,7 +71,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static void UseSpaStaticFiles(
             this IApplicationBuilder applicationBuilder,
             StaticFileOptions options
-        ) {
+        )
+        {
             if (applicationBuilder == null)
             {
                 throw new ArgumentNullException(nameof(applicationBuilder));
@@ -92,7 +94,8 @@ namespace Microsoft.Extensions.DependencyInjection
             this IApplicationBuilder app,
             StaticFileOptions staticFileOptions,
             bool allowFallbackOnServingWebRootFiles
-        ) {
+        )
+        {
             if (staticFileOptions == null)
             {
                 throw new ArgumentNullException(nameof(staticFileOptions));
@@ -129,7 +132,8 @@ namespace Microsoft.Extensions.DependencyInjection
             IApplicationBuilder app,
             bool allowFallbackOnServingWebRootFiles,
             out IFileProvider? fileProviderOrDefault
-        ) {
+        )
+        {
             var spaStaticFilesService =
                 app.ApplicationServices.GetService<ISpaStaticFileProvider>();
             if (spaStaticFilesService != null)

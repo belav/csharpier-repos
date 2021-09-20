@@ -98,7 +98,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.VirtualChars
             string startDelimiter,
             string endDelimiter,
             bool escapeBraces
-        ) {
+        )
+        {
             var tokenText = token.Text;
             if (startDelimiter.Length > 0 && !tokenText.StartsWith(startDelimiter))
             {
@@ -200,7 +201,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.VirtualChars
             string tokenText,
             int offset,
             int index
-        ) {
+        )
+        {
             // Copied from Lexer.ScanEscapeSequence.
             Debug.Assert(tokenText[index] == '\\');
 
@@ -262,7 +264,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.VirtualChars
             string tokenText,
             int offset,
             int index
-        ) {
+        )
+        {
             // Copied from Lexer.ScanEscapeSequence.
             Debug.Assert(tokenText[index] == '\\');
 
@@ -314,7 +317,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.VirtualChars
             string tokenText,
             int offset,
             int index
-        ) {
+        )
+        {
             // Copied from Lexer.ScanEscapeSequence.
             Debug.Assert(tokenText[index] == '\\');
 
@@ -339,7 +343,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.VirtualChars
             int offset,
             int index,
             char character
-        ) {
+        )
+        {
             var startIndex = index;
             Debug.Assert(tokenText[index] == '\\');
 

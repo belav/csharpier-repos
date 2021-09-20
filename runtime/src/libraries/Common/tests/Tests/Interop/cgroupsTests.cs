@@ -23,7 +23,8 @@ namespace Common.Tests
             bool expectedResult,
             string valueText,
             ulong expectedValue
-        ) {
+        )
+        {
             string path = GetTestFilePath();
             File.WriteAllText(path, valueText);
 
@@ -50,7 +51,8 @@ namespace Common.Tests
             string hierarchyRoot,
             string hierarchyMount,
             string cgroupPathRelativeToMount
-        ) {
+        )
+        {
             Assert.Equal(
                 expectedResult,
                 Interop.cgroups.FindCGroupPath(
@@ -142,7 +144,8 @@ namespace Common.Tests
             string subsystem,
             string expectedRoot,
             string expectedMount
-        ) {
+        )
+        {
             string path = GetTestFilePath();
             File.WriteAllText(path, procSelfMountInfoText);
 
@@ -181,7 +184,8 @@ namespace Common.Tests
             string procSelfCgroupText,
             string subsystem,
             string expectedMountPath
-        ) {
+        )
+        {
             string path = GetTestFilePath();
             File.WriteAllText(path, procSelfCgroupText);
 

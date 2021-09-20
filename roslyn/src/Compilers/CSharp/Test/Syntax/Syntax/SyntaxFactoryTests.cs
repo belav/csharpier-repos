@@ -250,7 +250,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 SyntaxKind kind = InternalSyntax.SyntaxToken.FirstTokenWithWellKnownText;
                 kind <= InternalSyntax.SyntaxToken.LastTokenWithWellKnownText;
                 kind++
-            ) {
+            )
+            {
                 if (!SyntaxFacts.IsAnyToken(kind))
                     continue;
 
@@ -281,7 +282,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 SyntaxKind kind = InternalSyntax.SyntaxToken.FirstTokenWithWellKnownText;
                 kind <= InternalSyntax.SyntaxToken.LastTokenWithWellKnownText;
                 kind++
-            ) {
+            )
+            {
                 if (!SyntaxFacts.IsAnyToken(kind))
                     continue;
 

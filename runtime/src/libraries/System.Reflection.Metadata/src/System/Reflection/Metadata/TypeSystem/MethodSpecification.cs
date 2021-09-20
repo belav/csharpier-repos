@@ -47,7 +47,8 @@ namespace System.Reflection.Metadata
         public ImmutableArray<TType> DecodeSignature<TType, TGenericContext>(
             ISignatureTypeProvider<TType, TGenericContext> provider,
             TGenericContext genericContext
-        ) {
+        )
+        {
             var decoder = new Ecma335.SignatureDecoder<TType, TGenericContext>(
                 provider,
                 _reader,

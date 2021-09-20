@@ -649,7 +649,8 @@ namespace Microsoft.AspNetCore.Components.Authorization
             string policy = null,
             string roles = null,
             object resource = null
-        ) {
+        )
+        {
             return new TestAuthStateProviderComponent(
                 builder =>
                 {

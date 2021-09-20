@@ -376,7 +376,8 @@ class C
         [InlineData(LanguageVersion.CSharp9)]
         public async Task Conversion_NonTargetTypedConditionalExpression(
             LanguageVersion languageVersion
-        ) {
+        )
+        {
             await TestInRegularAndScriptAsync(
                 @"
 class C
@@ -407,7 +408,8 @@ class C
         public async Task Conversion_TargetTypedConditionalExpression(
             LanguageVersion languageVersion,
             string expectedSubstitution
-        ) {
+        )
+        {
             await TestInRegularAndScriptAsync(
                 @"
 class C

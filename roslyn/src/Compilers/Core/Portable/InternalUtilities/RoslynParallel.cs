@@ -19,7 +19,8 @@ namespace Roslyn.Utilities
             int toExclusive,
             Action<int> body,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var parallelOptions = cancellationToken.CanBeCanceled
                 ? new ParallelOptions { CancellationToken = cancellationToken }
                 : DefaultParallelOptions;

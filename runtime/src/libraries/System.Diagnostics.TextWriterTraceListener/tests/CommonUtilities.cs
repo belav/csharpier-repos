@@ -26,7 +26,8 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
             int id,
             string format,
             object[] args
-        ) {
+        )
+        {
             if (
                 filter != null
                 && !filter.ShouldTrace(cache, source, eventType, id, format, args, null, null)
@@ -49,7 +50,8 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
             TraceEventType eventType,
             int id,
             object data
-        ) {
+        )
+        {
             if (
                 filter != null
                 && !filter.ShouldTrace(cache, source, eventType, id, null, null, data, null)
@@ -73,7 +75,8 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
             TraceEventType eventType,
             int id,
             object[] data
-        ) {
+        )
+        {
             if (
                 filter != null
                 && !filter.ShouldTrace(cache, source, eventType, id, null, null, data, null)
@@ -105,7 +108,8 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
             TraceEventType eventType,
             int id,
             string delimiter = DefaultDelimiter
-        ) {
+        )
+        {
             builder.Append(EscapedString(source));
             builder.Append(delimiter);
             builder.Append(eventType.ToString());
@@ -118,7 +122,8 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
             this StringBuilder builder,
             TraceEventCache cache,
             string delimiter = DefaultDelimiter
-        ) {
+        )
+        {
             if (cache != null)
             {
                 builder.Append(cache.ProcessId);

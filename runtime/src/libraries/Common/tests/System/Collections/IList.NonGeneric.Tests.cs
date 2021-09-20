@@ -99,7 +99,8 @@ namespace System.Collections.Tests
         /// </summary>
         protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(
             ModifyOperation operations
-        ) {
+        )
+        {
             if ((operations & ModifyOperation.Add) == ModifyOperation.Add)
             {
                 yield return (IEnumerable enumerable) =>
@@ -579,7 +580,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void IList_NonGeneric_Contains_ValidValueOnCollectionNotContainingThatValue(
             int count
-        ) {
+        )
+        {
             IList collection = NonGenericIListFactory(count);
             int seed = 4315;
             object item = CreateT(seed++);
@@ -592,7 +594,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void IList_NonGeneric_IList_NonGeneric_Contains_ValidValueOnCollectionContainingThatValue(
             int count
-        ) {
+        )
+        {
             IList collection = NonGenericIListFactory(count);
             foreach (object item in collection)
                 Assert.True(collection.Contains(item));
@@ -904,7 +907,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void IListNonGeneric_Remove_OnReadOnlyCollection_ThrowsNotSupportedException(
             int count
-        ) {
+        )
+        {
             if (IsReadOnly || ExpectedFixedSize)
             {
                 IList collection = NonGenericIListFactory(count);
@@ -921,7 +925,8 @@ namespace System.Collections.Tests
                 && !ExpectedFixedSize
                 && NullAllowed
                 && !Enumerable.Contains(InvalidValues, null)
-            ) {
+            )
+            {
                 int seed = count * 21;
                 IList collection = NonGenericIListFactory(count);
                 object value = null;
@@ -968,7 +973,8 @@ namespace System.Collections.Tests
                 && !ExpectedFixedSize
                 && NullAllowed
                 && !Enumerable.Contains(InvalidValues, null)
-            ) {
+            )
+            {
                 int seed = count * 21;
                 IList collection = NonGenericIListFactory(count);
                 object value = null;

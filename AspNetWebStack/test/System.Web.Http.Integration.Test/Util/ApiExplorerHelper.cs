@@ -18,7 +18,8 @@ namespace System.Web.Http.ApiExplorer
         public static void VerifyApiDescriptions(
             Collection<ApiDescription> apiDescriptions,
             List<object> expectedResults
-        ) {
+        )
+        {
             Assert.Equal(expectedResults.Count, apiDescriptions.Count);
             ApiDescription[] sortedDescriptions = apiDescriptions.OrderBy(
                     description => description.ID
@@ -63,7 +64,8 @@ namespace System.Web.Http.ApiExplorer
         public static DefaultHttpControllerSelector GetStrictControllerSelector(
             HttpConfiguration config,
             params Type[] controllerTypes
-        ) {
+        )
+        {
             Dictionary<string, HttpControllerDescriptor> controllerMapping = new Dictionary<
                 string,
                 HttpControllerDescriptor

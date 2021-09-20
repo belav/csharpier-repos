@@ -33,7 +33,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             bool expectedResult,
             string expectedKnownString,
             int intExpectedMethod
-        ) {
+        )
+        {
             var expectedMethod = (HttpMethod)intExpectedMethod;
             // Arrange
             var block = new ReadOnlySpan<byte>(Encoding.ASCII.GetBytes(input));
@@ -66,7 +67,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             bool expectedResult,
             string expectedKnownString,
             int intVersion
-        ) {
+        )
+        {
             var version = (HttpVersion)intVersion;
             // Arrange
             var block = new ReadOnlySpan<byte>(Encoding.ASCII.GetBytes(input));
@@ -145,7 +147,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             string input,
             string expected,
             Func<byte[], string> action
-        ) {
+        )
+        {
             // Act
             var knownString1 = action(Encoding.ASCII.GetBytes(input));
             var knownString2 = action(Encoding.ASCII.GetBytes(input));

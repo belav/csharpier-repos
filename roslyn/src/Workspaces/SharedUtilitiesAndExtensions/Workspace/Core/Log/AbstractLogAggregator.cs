@@ -132,7 +132,8 @@ namespace Microsoft.CodeAnalysis.Internal.Log
             int range,
             int? mode,
             int count
-        ) {
+        )
+        {
             this.Maximum = max;
             this.Minimum = min;
             this.Median = median;

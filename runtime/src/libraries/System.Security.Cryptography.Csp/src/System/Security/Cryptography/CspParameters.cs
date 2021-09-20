@@ -59,18 +59,16 @@ namespace System.Security.Cryptography
         public CspParameters(int dwTypeIn) : this(dwTypeIn, null, null) { }
         public CspParameters(int dwTypeIn, string? strProviderNameIn)
             : this(dwTypeIn, strProviderNameIn, null) { }
-        public CspParameters(
-            int dwTypeIn,
-            string? strProviderNameIn,
-            string? strContainerNameIn
-        ) : this(dwTypeIn, strProviderNameIn, strContainerNameIn, CspProviderFlags.NoFlags) { }
+        public CspParameters(int dwTypeIn, string? strProviderNameIn, string? strContainerNameIn)
+            : this(dwTypeIn, strProviderNameIn, strContainerNameIn, CspProviderFlags.NoFlags) { }
 
         internal CspParameters(
             int providerType,
             string? providerName,
             string? keyContainerName,
             CspProviderFlags flags
-        ) {
+        )
+        {
             ProviderType = providerType;
             ProviderName = providerName;
             KeyContainerName = keyContainerName;

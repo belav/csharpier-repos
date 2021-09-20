@@ -95,7 +95,8 @@ namespace System.PrivateUri.Tests
             string expectedLocalPath,
             string expectedAbsoluteUri,
             string expectedHost
-        ) {
+        )
+        {
             Uri actualUri = new Uri(uri);
             Assert.Equal(expectedAbsolutePath, actualUri.AbsolutePath);
             Assert.Equal(expectedLocalPath, actualUri.LocalPath);
@@ -1066,7 +1067,8 @@ namespace System.PrivateUri.Tests
             string absolutePath,
             string absoluteUri,
             string localPath
-        ) {
+        )
+        {
             var uri = new Uri(uriString);
 
             Assert.Equal(toString, uri.ToString());
@@ -1096,7 +1098,8 @@ namespace System.PrivateUri.Tests
             string uriString,
             int port,
             bool isDefaultPort
-        ) {
+        )
+        {
             Uri.TryCreate(uriString, UriKind.Absolute, out var uri);
             Assert.Equal(port, uri.Port);
             Assert.Equal(isDefaultPort, uri.IsDefaultPort);

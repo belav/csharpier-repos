@@ -51,7 +51,8 @@ namespace System.Linq.Parallel
                     ParallelMergeOptions.FullyBuffered,
                     true
                 )
-            ) {
+            )
+            {
                 // Just return null right away for empty results.
                 if (!enumerator.MoveNext())
                 {
@@ -98,7 +99,8 @@ namespace System.Linq.Parallel
             QueryOperatorEnumerator<long?, TKey> source,
             object? sharedData,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return new NullableLongMinMaxAggregationOperatorEnumerator<TKey>(
                 source,
                 index,

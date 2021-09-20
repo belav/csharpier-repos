@@ -23,7 +23,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
         public void RemoveReferenceToCodeDirectory(
             string assemblyFileName,
             ICSharpProjectRoot project
-        ) {
+        )
+        {
             var projectSite = GetProjectSite(project);
 
             var projectReferencesToRemove = VisualStudioProject.GetProjectReferences()
@@ -56,7 +57,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
             string[] previousAliases,
             int currentAliasesCount,
             string[] currentAliases
-        ) {
+        )
+        {
             var projectSite = GetProjectSite(project);
 
             using (VisualStudioProject.CreateBatchScope())
@@ -79,7 +81,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
             string assemblyFileName,
             ICSharpProjectRoot projectRoot,
             CompilerOptions optionID
-        ) {
+        )
+        {
             var projectSite = GetProjectSite(projectRoot);
 
             VisualStudioProject.AddProjectReference(

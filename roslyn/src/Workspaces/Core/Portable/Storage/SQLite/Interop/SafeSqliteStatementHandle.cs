@@ -15,10 +15,8 @@ namespace Microsoft.CodeAnalysis.SQLite.Interop
         private readonly SafeHandleLease _lease;
         private readonly SafeHandleLease _sqliteLease;
 
-        public SafeSqliteStatementHandle(
-            SafeSqliteHandle sqliteHandle,
-            sqlite3_stmt? wrapper
-        ) : base(invalidHandleValue: IntPtr.Zero, ownsHandle: true)
+        public SafeSqliteStatementHandle(SafeSqliteHandle sqliteHandle, sqlite3_stmt? wrapper)
+            : base(invalidHandleValue: IntPtr.Zero, ownsHandle: true)
         {
             _wrapper = wrapper;
             if (wrapper is not null)

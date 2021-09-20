@@ -23,7 +23,8 @@ public class Helper
         int actualSize,
         T[] expectedArray,
         int expectedSize
-    ) {
+    )
+    {
         int failures = 0;
         if (actualArray == null && expectedArray == null)
         {
@@ -89,7 +90,8 @@ public class Helper
         ref T arrSize,
         int actualArrSize,
         int expectedArrSize
-    ) {
+    )
+    {
         T[] actualArr = InitArray<T>(actualArrSize);
         if (!EqualArray<T>(arrArg, actualArrSize, actualArr, actualArrSize))
         {

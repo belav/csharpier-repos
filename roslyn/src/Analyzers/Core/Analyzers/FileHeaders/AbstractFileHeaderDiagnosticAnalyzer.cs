@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.FileHeaders
                     AnalyzersResources.ResourceManager,
                     typeof(AnalyzersResources)
                 )
-            ) {
+            )
+        {
             RoslynDebug.AssertNotNull(DescriptorId);
 
             var invalidHeaderTitle = new LocalizableResourceString(
@@ -82,7 +83,8 @@ namespace Microsoft.CodeAnalysis.FileHeaders
                     tree,
                     out var fileHeaderTemplate
                 ) || string.IsNullOrEmpty(fileHeaderTemplate)
-            ) {
+            )
+            {
                 return;
             }
 
@@ -128,7 +130,8 @@ namespace Microsoft.CodeAnalysis.FileHeaders
                         reformattedCopyrightTextParts[i].Trim(),
                         fileHeaderCopyrightTextParts[i].Trim()
                     ) != 0
-                ) {
+                )
+                {
                     return false;
                 }
             }

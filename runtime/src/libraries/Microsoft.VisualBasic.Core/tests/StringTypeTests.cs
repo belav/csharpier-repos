@@ -395,7 +395,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             string right,
             int expectedBinaryCompare,
             int expectedTextCompare
-        ) {
+        )
+        {
             Assert.Equal(expectedBinaryCompare, StringType.StrCmp(left, right, TextCompare: false));
             Assert.Equal(expectedTextCompare, StringType.StrCmp(left, right, TextCompare: true));
         }
@@ -442,7 +443,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             string pattern,
             bool expectedBinaryCompare,
             bool expectedTextCompare
-        ) {
+        )
+        {
             Assert.Equal(
                 expectedBinaryCompare,
                 StringType.StrLike(source, pattern, CompareMethod.Binary)

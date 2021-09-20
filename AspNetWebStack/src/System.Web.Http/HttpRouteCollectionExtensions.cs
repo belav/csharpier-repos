@@ -27,7 +27,8 @@ namespace System.Web.Http
             this HttpRouteCollection routes,
             string name,
             string routeTemplate
-        ) {
+        )
+        {
             return MapHttpRoute(
                 routes,
                 name,
@@ -51,7 +52,8 @@ namespace System.Web.Http
             string name,
             string routeTemplate,
             object defaults
-        ) {
+        )
+        {
             return MapHttpRoute(
                 routes,
                 name,
@@ -77,7 +79,8 @@ namespace System.Web.Http
             string routeTemplate,
             object defaults,
             object constraints
-        ) {
+        )
+        {
             return MapHttpRoute(routes, name, routeTemplate, defaults, constraints, handler: null);
         }
 
@@ -98,7 +101,8 @@ namespace System.Web.Http
             object defaults,
             object constraints,
             HttpMessageHandler handler
-        ) {
+        )
+        {
             if (routes == null)
             {
                 throw Error.ArgumentNull("routes");
@@ -136,7 +140,8 @@ namespace System.Web.Http
             string routeName,
             string routeTemplate,
             HttpBatchHandler batchHandler
-        ) {
+        )
+        {
             return routes.MapHttpRoute(
                 routeName,
                 routeTemplate,
@@ -156,7 +161,8 @@ namespace System.Web.Http
             this HttpRouteCollection routes,
             string routeName,
             string routeTemplate
-        ) {
+        )
+        {
             return IgnoreRoute(routes, routeName, routeTemplate, constraints: null);
         }
 
@@ -177,7 +183,8 @@ namespace System.Web.Http
             string routeName,
             string routeTemplate,
             object constraints
-        ) {
+        )
+        {
             if (routes == null)
             {
                 throw new ArgumentNullException("routes");
@@ -206,18 +213,20 @@ namespace System.Web.Http
                 string routeTemplate,
                 HttpRouteValueDictionary constraints,
                 HttpMessageHandler handler
-            ) : base(
-                routeTemplate,
-                constraints: constraints,
-                handler: handler,
-                dataTokens: null,
-                defaults: null
-            ) { }
+            )
+                : base(
+                    routeTemplate,
+                    constraints: constraints,
+                    handler: handler,
+                    dataTokens: null,
+                    defaults: null
+                ) { }
 
             public override IHttpVirtualPathData GetVirtualPath(
                 HttpRequestMessage request,
                 IDictionary<string, object> values
-            ) {
+            )
+            {
                 // Never match during route generation. This avoids the scenario where an IgnoreRoute with
                 // fairly relaxed constraints ends up eagerly matching all generated URLs.
                 return null;

@@ -34,7 +34,8 @@ namespace System.Text.Json.Serialization.Tests
             protected internal override Task<T> DeserializeWrapper<T>(
                 string json,
                 JsonSerializerOptions options = null
-            ) {
+            )
+            {
                 return Task.FromResult(JsonSerializer.Deserialize<T>(json, options));
             }
 
@@ -42,7 +43,8 @@ namespace System.Text.Json.Serialization.Tests
                 string json,
                 Type type,
                 JsonSerializerOptions options = null
-            ) {
+            )
+            {
                 return Task.FromResult(JsonSerializer.Deserialize(json, type, options));
             }
         }
@@ -52,7 +54,8 @@ namespace System.Text.Json.Serialization.Tests
             protected internal override async Task<T> DeserializeWrapper<T>(
                 string json,
                 JsonSerializerOptions options = null
-            ) {
+            )
+            {
                 if (options == null)
                 {
                     options = _optionsWithSmallBuffer;
@@ -68,7 +71,8 @@ namespace System.Text.Json.Serialization.Tests
                 string json,
                 Type type,
                 JsonSerializerOptions options = null
-            ) {
+            )
+            {
                 if (options == null)
                 {
                     options = _optionsWithSmallBuffer;
@@ -86,7 +90,8 @@ namespace System.Text.Json.Serialization.Tests
             protected internal override Task<T> DeserializeWrapper<T>(
                 string json,
                 JsonSerializerOptions options = null
-            ) {
+            )
+            {
                 return Task.FromResult(JsonSerializer.Deserialize<T>(json.AsSpan(), options));
             }
 
@@ -94,7 +99,8 @@ namespace System.Text.Json.Serialization.Tests
                 string json,
                 Type type,
                 JsonSerializerOptions options = null
-            ) {
+            )
+            {
                 return Task.FromResult(JsonSerializer.Deserialize(json.AsSpan(), type, options));
             }
         }

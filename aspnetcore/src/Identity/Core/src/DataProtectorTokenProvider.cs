@@ -29,7 +29,8 @@ namespace Microsoft.AspNetCore.Identity
             IDataProtectionProvider dataProtectionProvider,
             IOptions<DataProtectionTokenProviderOptions> options,
             ILogger<DataProtectorTokenProvider<TUser>> logger
-        ) {
+        )
+        {
             if (dataProtectionProvider == null)
             {
                 throw new ArgumentNullException(nameof(dataProtectionProvider));
@@ -90,7 +91,8 @@ namespace Microsoft.AspNetCore.Identity
             string purpose,
             UserManager<TUser> manager,
             TUser user
-        ) {
+        )
+        {
             if (user == null)
             {
                 throw new ArgumentNullException(nameof(user));
@@ -129,7 +131,8 @@ namespace Microsoft.AspNetCore.Identity
             string token,
             UserManager<TUser> manager,
             TUser user
-        ) {
+        )
+        {
             try
             {
                 var unprotectedData = Protector.Unprotect(Convert.FromBase64String(token));
@@ -211,7 +214,8 @@ namespace Microsoft.AspNetCore.Identity
         public virtual Task<bool> CanGenerateTwoFactorTokenAsync(
             UserManager<TUser> manager,
             TUser user
-        ) {
+        )
+        {
             return Task.FromResult(false);
         }
     }

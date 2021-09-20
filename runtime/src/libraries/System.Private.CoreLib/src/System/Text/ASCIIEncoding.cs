@@ -202,7 +202,8 @@ namespace System.Text
             int charsLength,
             EncoderFallback? fallback,
             out int charsConsumed
-        ) {
+        )
+        {
             // First: Can we short-circuit the entire calculation?
             // If an EncoderReplacementFallback is in use, all non-ASCII chars
             // (including surrogate halves) are replaced with the default string.
@@ -217,7 +218,8 @@ namespace System.Text
                     && replacementFallback.MaxCharCount == 1
                     && replacementFallback.DefaultString[0] <= 0x7F
                 )
-            ) {
+            )
+            {
                 // Unrecognized fallback mechanism - count chars manually.
 
                 byteCount = (int)ASCIIUtility.GetIndexOfFirstNonAsciiChar(
@@ -241,7 +243,8 @@ namespace System.Text
             int charCount,
             byte[] bytes,
             int byteIndex
-        ) {
+        )
+        {
             // Validate Parameters
 
             if (chars is null || bytes is null)
@@ -309,7 +312,8 @@ namespace System.Text
             int charCount,
             byte[] bytes,
             int byteIndex
-        ) {
+        )
+        {
             // Validate parameters
 
             if (chars is null || bytes is null)
@@ -393,7 +397,8 @@ namespace System.Text
 
             fixed (char* charsPtr = &MemoryMarshal.GetReference(chars))fixed (
                 byte* bytesPtr = &MemoryMarshal.GetReference(bytes)
-            ) {
+            )
+            {
                 return GetBytesCommon(charsPtr, chars.Length, bytesPtr, bytes.Length);
             }
         }
@@ -453,7 +458,8 @@ namespace System.Text
             byte* pBytes,
             int bytesLength,
             out int charsConsumed
-        ) {
+        )
+        {
             int bytesWritten = (int)ASCIIUtility.NarrowUtf16ToAscii(
                 pChars,
                 pBytes,
@@ -470,7 +476,8 @@ namespace System.Text
             Span<byte> bytes,
             int originalBytesLength,
             EncoderNLS? encoder
-        ) {
+        )
+        {
             // We special-case EncoderReplacementFallback if it's telling us to write a single ASCII char,
             // since we believe this to be relatively common and we can handle it more efficiently than
             // the base implementation.
@@ -480,7 +487,8 @@ namespace System.Text
                     is EncoderReplacementFallback replacementFallback
                 && replacementFallback.MaxCharCount == 1
                 && replacementFallback.DefaultString[0] <= 0x7F
-            ) {
+            )
+            {
                 byte replacementByte = (byte)replacementFallback.DefaultString[0];
 
                 int numElementsToConvert = Math.Min(chars.Length, bytes.Length);
@@ -488,7 +496,8 @@ namespace System.Text
 
                 fixed (char* pChars = &MemoryMarshal.GetReference(chars))fixed (
                     byte* pBytes = &MemoryMarshal.GetReference(bytes)
-                ) {
+                )
+                {
                     // In a loop, replace the non-convertible data, then bulk-convert as much as we can.
 
                     while (idx < numElementsToConvert)
@@ -660,7 +669,8 @@ namespace System.Text
             int bytesLength,
             DecoderFallback? fallback,
             out int bytesConsumed
-        ) {
+        )
+        {
             // First: Can we short-circuit the entire calculation?
             // If a DecoderReplacementFallback is in use, all non-ASCII bytes are replaced with
             // the default string. If the default string consists of a single BMP value, then we
@@ -671,7 +681,8 @@ namespace System.Text
             if (
                 !(fallback is DecoderReplacementFallback replacementFallback)
                 || replacementFallback.MaxCharCount != 1
-            ) {
+            )
+            {
                 // Unrecognized fallback mechanism - count bytes manually.
 
                 charCount = (int)ASCIIUtility.GetIndexOfFirstNonAsciiByte(
@@ -695,7 +706,8 @@ namespace System.Text
             int byteCount,
             char[] chars,
             int charIndex
-        ) {
+        )
+        {
             // Validate Parameters
 
             if (bytes is null || chars is null)
@@ -779,7 +791,8 @@ namespace System.Text
 
             fixed (byte* bytesPtr = &MemoryMarshal.GetReference(bytes))fixed (
                 char* charsPtr = &MemoryMarshal.GetReference(chars)
-            ) {
+            )
+            {
                 return GetCharsCommon(bytesPtr, bytes.Length, charsPtr, chars.Length);
             }
         }
@@ -839,7 +852,8 @@ namespace System.Text
             char* pChars,
             int charsLength,
             out int bytesConsumed
-        ) {
+        )
+        {
             int charsWritten = (int)ASCIIUtility.WidenAsciiToUtf16(
                 pBytes,
                 pChars,
@@ -856,7 +870,8 @@ namespace System.Text
             Span<char> chars,
             int originalCharsLength,
             DecoderNLS? decoder
-        ) {
+        )
+        {
             // We special-case DecoderReplacementFallback if it's telling us to write a single BMP char,
             // since we believe this to be relatively common and we can handle it more efficiently than
             // the base implementation.
@@ -865,7 +880,8 @@ namespace System.Text
                 (decoder is null ? DecoderFallback : decoder.Fallback)
                     is DecoderReplacementFallback replacementFallback
                 && replacementFallback.MaxCharCount == 1
-            ) {
+            )
+            {
                 char replacementChar = replacementFallback.DefaultString[0];
 
                 int numElementsToConvert = Math.Min(bytes.Length, chars.Length);
@@ -873,7 +889,8 @@ namespace System.Text
 
                 fixed (byte* pBytes = &MemoryMarshal.GetReference(bytes))fixed (
                     char* pChars = &MemoryMarshal.GetReference(chars)
-                ) {
+                )
+                {
                     // In a loop, replace the non-convertible data, then bulk-convert as much as we can.
 
                     while (idx < numElementsToConvert)
@@ -996,7 +1013,8 @@ namespace System.Text
             Rune value,
             Span<byte> bytes,
             out int bytesWritten
-        ) {
+        )
+        {
             if (value.IsAscii)
             {
                 if (!bytes.IsEmpty)
@@ -1022,7 +1040,8 @@ namespace System.Text
             ReadOnlySpan<byte> bytes,
             out Rune value,
             out int bytesConsumed
-        ) {
+        )
+        {
             if (!bytes.IsEmpty)
             {
                 byte b = bytes[0];

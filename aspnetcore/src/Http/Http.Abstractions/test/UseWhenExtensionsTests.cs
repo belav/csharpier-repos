@@ -142,7 +142,8 @@ namespace Microsoft.AspNetCore.Builder.Extensions
         private static Func<HttpContext, Func<Task>, Task> Increment(
             string key,
             bool terminate = false
-        ) {
+        )
+        {
             return (context, next) =>
             {
                 if (!context.Items.ContainsKey(key))

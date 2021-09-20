@@ -20,7 +20,8 @@ namespace System.Text.Json.Serialization.Converters
             in TValue value,
             JsonSerializerOptions options,
             ref ReadStack state
-        ) {
+        )
+        {
             ((TCollection)state.Current.ReturnValue!)[key] = value;
         }
 
@@ -41,7 +42,8 @@ namespace System.Text.Json.Serialization.Converters
             TCollection value,
             JsonSerializerOptions options,
             ref WriteStack state
-        ) {
+        )
+        {
             Dictionary<TKey, TValue>.Enumerator enumerator;
             if (state.Current.CollectionEnumerator == null)
             {
@@ -68,7 +70,8 @@ namespace System.Text.Json.Serialization.Converters
                 !state.SupportContinuation
                 && _valueConverter.CanUseDirectReadOrWrite
                 && state.Current.NumberHandling == null
-            ) {
+            )
+            {
                 // Fast path that avoids validation and extra indirection.
                 do
                 {

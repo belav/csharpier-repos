@@ -99,7 +99,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static AuthenticationBuilder AddCertificateCache(
             this AuthenticationBuilder builder,
             Action<CertificateValidationCacheOptions>? configureOptions = null
-        ) {
+        )
+        {
             builder.Services.AddSingleton<
                 ICertificateValidationCache,
                 CertificateValidationCache

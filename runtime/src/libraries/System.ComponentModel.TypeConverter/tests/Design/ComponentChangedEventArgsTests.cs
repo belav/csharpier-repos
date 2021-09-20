@@ -28,7 +28,8 @@ namespace System.ComponentModel.Design.Tests
             MemberDescriptor member,
             object oldValue,
             object newValue
-        ) {
+        )
+        {
             var eventArgs = new ComponentChangedEventArgs(component, member, oldValue, newValue);
             Assert.Same(component, eventArgs.Component);
             Assert.Same(member, eventArgs.Member);

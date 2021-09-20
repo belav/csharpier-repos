@@ -1080,7 +1080,8 @@ namespace System.Runtime.Caching
                         prev = _lastRefTail;
                         _cEntriesInFlush < maxFlush && !prev.IsInvalid;
                         prev = prevNext
-                    ) {
+                    )
+                    {
                         Debug.Assert(_cEntriesInUse > 0, "_cEntriesInUse > 0");
 
                         prevNext = (_pages[(prev.PageIndex)]._entries)[prev.Ref2Index]._ref2._prev;

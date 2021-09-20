@@ -38,7 +38,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Save_changed_optional_one_to_one_with_alternate_key(
             ChangeMechanism changeMechanism,
             bool useExistingEntities
-        ) {
+        )
+        {
             OptionalSingleAk2 new2 = null;
             OptionalSingleAk2Derived new2d = null;
             OptionalSingleAk2MoreDerived new2dd = null;
@@ -461,7 +462,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Save_required_one_to_one_changed_by_reference_with_alternate_key(
             ChangeMechanism changeMechanism,
             bool useExistingEntities
-        ) {
+        )
+        {
             RequiredSingleAk2 new2 = null;
             RequiredSingleComposite2 new2c = null;
             RequiredSingleAk1 new1 = null;
@@ -605,7 +607,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Save_required_non_PK_one_to_one_changed_by_reference_with_alternate_key(
             ChangeMechanism changeMechanism,
             bool useExistingEntities
-        ) {
+        )
+        {
             RequiredNonPkSingleAk2 new2 = null;
             RequiredNonPkSingleAk2Derived new2d = null;
             RequiredNonPkSingleAk2MoreDerived new2dd = null;
@@ -810,7 +813,8 @@ namespace Microsoft.EntityFrameworkCore
         )]
         public virtual void Sever_optional_one_to_one_with_alternate_key(
             ChangeMechanism changeMechanism
-        ) {
+        )
+        {
             Root root = null;
             OptionalSingleAk1 old1 = null;
             OptionalSingleAk2 old2 = null;
@@ -896,7 +900,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent))]
         public virtual void Sever_required_one_to_one_with_alternate_key(
             ChangeMechanism changeMechanism
-        ) {
+        )
+        {
             Root root = null;
             RequiredSingleAk1 old1 = null;
             RequiredSingleAk2 old2 = null;
@@ -971,7 +976,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent))]
         public virtual void Sever_required_non_PK_one_to_one_with_alternate_key(
             ChangeMechanism changeMechanism
-        ) {
+        )
+        {
             Root root = null;
             RequiredNonPkSingleAk1 old1 = null;
             RequiredNonPkSingleAk2 old2 = null;
@@ -1063,7 +1069,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Reparent_optional_one_to_one_with_alternate_key(
             ChangeMechanism changeMechanism,
             bool useExistingRoot
-        ) {
+        )
+        {
             Root newRoot = null;
             Root root;
             OptionalSingleAk1 old1 = null;
@@ -1181,7 +1188,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Reparent_required_one_to_one_with_alternate_key(
             ChangeMechanism changeMechanism,
             bool useExistingRoot
-        ) {
+        )
+        {
             Root newRoot = null;
             Root root;
             RequiredSingleAk1 old1 = null;
@@ -1299,7 +1307,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Reparent_required_non_PK_one_to_one_with_alternate_key(
             ChangeMechanism changeMechanism,
             bool useExistingRoot
-        ) {
+        )
+        {
             Root newRoot = null;
             Root root;
             RequiredNonPkSingleAk1 old1 = null;
@@ -1397,7 +1406,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Optional_one_to_one_with_alternate_key_are_orphaned(
             CascadeTiming cascadeDeleteTiming,
             CascadeTiming deleteOrphansTiming
-        ) {
+        )
+        {
             var removedId = 0;
             var orphanedId = 0;
             var orphanedIdC = 0;
@@ -1493,7 +1503,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Required_one_to_one_with_alternate_key_are_cascade_deleted(
             CascadeTiming cascadeDeleteTiming,
             CascadeTiming deleteOrphansTiming
-        ) {
+        )
+        {
             var removedId = 0;
             var orphanedId = 0;
             var orphanedIdC = 0;
@@ -1599,7 +1610,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Required_non_PK_one_to_one_with_alternate_key_are_cascade_deleted(
             CascadeTiming cascadeDeleteTiming,
             CascadeTiming deleteOrphansTiming
-        ) {
+        )
+        {
             var removedId = 0;
             var orphanedId = 0;
 
@@ -1694,7 +1706,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Required_one_to_one_with_alternate_key_are_cascade_deleted_in_store(
             CascadeTiming cascadeDeleteTiming,
             CascadeTiming deleteOrphansTiming
-        ) {
+        )
+        {
             var removedId = 0;
             var orphanedId = 0;
             var orphanedIdC = 0;
@@ -1811,7 +1824,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Required_non_PK_one_to_one_with_alternate_key_are_cascade_deleted_in_store(
             CascadeTiming cascadeDeleteTiming,
             CascadeTiming deleteOrphansTiming
-        ) {
+        )
+        {
             var removedId = 0;
             var orphanedId = 0;
 
@@ -1919,7 +1933,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Optional_one_to_one_with_alternate_key_are_orphaned_in_store(
             CascadeTiming cascadeDeleteTiming,
             CascadeTiming deleteOrphansTiming
-        ) {
+        )
+        {
             var removedId = 0;
             var orphanedId = 0;
             var orphanedIdC = 0;
@@ -2029,7 +2044,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Optional_one_to_one_with_alternate_key_are_orphaned_starting_detached(
             CascadeTiming cascadeDeleteTiming,
             CascadeTiming deleteOrphansTiming
-        ) {
+        )
+        {
             var removedId = 0;
             var orphanedId = 0;
             var orphanedIdC = 0;
@@ -2130,7 +2146,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Required_one_to_one_with_alternate_key_are_cascade_deleted_starting_detached(
             CascadeTiming cascadeDeleteTiming,
             CascadeTiming deleteOrphansTiming
-        ) {
+        )
+        {
             var removedId = 0;
             var orphanedId = 0;
             var orphanedIdC = 0;
@@ -2241,7 +2258,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Required_non_PK_one_to_one_with_alternate_key_are_cascade_deleted_starting_detached(
             CascadeTiming cascadeDeleteTiming,
             CascadeTiming deleteOrphansTiming
-        ) {
+        )
+        {
             var removedId = 0;
             var orphanedId = 0;
             Root root = null;
@@ -2342,7 +2360,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Required_one_to_one_with_alternate_key_are_cascade_detached_when_Added(
             CascadeTiming cascadeDeleteTiming,
             CascadeTiming deleteOrphansTiming
-        ) {
+        )
+        {
             var removedId = 0;
             var orphanedId = 0;
             var orphanedIdC = 0;
@@ -2453,7 +2472,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Required_non_PK_one_to_one_with_alternate_key_are_cascade_detached_when_Added(
             CascadeTiming cascadeDeleteTiming,
             CascadeTiming deleteOrphansTiming
-        ) {
+        )
+        {
             var removedId = 0;
             var orphanedId = 0;
 

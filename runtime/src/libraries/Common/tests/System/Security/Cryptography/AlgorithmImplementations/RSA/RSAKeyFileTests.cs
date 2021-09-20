@@ -1536,7 +1536,8 @@ gpX/dwXfODsj4zcOw4gyP70lDxUWLEPtxhS5Ti0FEuge1XKn3+GOp3clVjGpXKpJTNLsPA/wlqlo
             string password,
             PbeParameters pbeParameters,
             in RSAParameters expected
-        ) {
+        )
+        {
             ReadWriteKey(
                 base64EncPkcs8,
                 expected,
@@ -1559,7 +1560,8 @@ gpX/dwXfODsj4zcOw4gyP70lDxUWLEPtxhS5Ti0FEuge1XKn3+GOp3clVjGpXKpJTNLsPA/wlqlo
             byte[] passwordBytes,
             PbeParameters pbeParameters,
             in RSAParameters expected
-        ) {
+        )
+        {
             ReadWriteKey(
                 base64EncPkcs8,
                 expected,
@@ -1580,7 +1582,8 @@ gpX/dwXfODsj4zcOw4gyP70lDxUWLEPtxhS5Ti0FEuge1XKn3+GOp3clVjGpXKpJTNLsPA/wlqlo
         private static void ReadWriteBase64PublicPkcs1(
             string base64PublicPkcs1,
             in RSAParameters expected
-        ) {
+        )
+        {
             RSAParameters expectedPublic = new RSAParameters
             {
                 Modulus = expected.Modulus,
@@ -1601,7 +1604,8 @@ gpX/dwXfODsj4zcOw4gyP70lDxUWLEPtxhS5Ti0FEuge1XKn3+GOp3clVjGpXKpJTNLsPA/wlqlo
         private static void ReadWriteBase64SubjectPublicKeyInfo(
             string base64SubjectPublicKeyInfo,
             in RSAParameters expected
-        ) {
+        )
+        {
             RSAParameters expectedPublic = new RSAParameters
             {
                 Modulus = expected.Modulus,
@@ -1622,7 +1626,8 @@ gpX/dwXfODsj4zcOw4gyP70lDxUWLEPtxhS5Ti0FEuge1XKn3+GOp3clVjGpXKpJTNLsPA/wlqlo
         private static void ReadWriteBase64PrivatePkcs1(
             string base64PrivatePkcs1,
             in RSAParameters expected
-        ) {
+        )
+        {
             ReadWriteKey(
                 base64PrivatePkcs1,
                 expected,
@@ -1654,7 +1659,8 @@ gpX/dwXfODsj4zcOw4gyP70lDxUWLEPtxhS5Ti0FEuge1XKn3+GOp3clVjGpXKpJTNLsPA/wlqlo
             Func<RSA, byte[]> writeArrayFunc,
             WriteKeyToSpanFunc writeSpanFunc,
             bool isEncrypted = false
-        ) {
+        )
+        {
             bool isPrivateKey = expected.D != null;
 
             byte[] derBytes = Convert.FromBase64String(base64);

@@ -97,7 +97,8 @@ namespace System.Net.Http.Internal
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _innerStream.ReadAsync(buffer, offset, count, cancellationToken);
         }
 
@@ -108,7 +109,8 @@ namespace System.Net.Http.Internal
             int count,
             AsyncCallback callback,
             object state
-        ) {
+        )
+        {
             return _innerStream.BeginRead(buffer, offset, count, callback, state);
         }
 
@@ -148,7 +150,8 @@ namespace System.Net.Http.Internal
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _innerStream.WriteAsync(buffer, offset, count, cancellationToken);
         }
 
@@ -159,7 +162,8 @@ namespace System.Net.Http.Internal
             int count,
             AsyncCallback callback,
             object state
-        ) {
+        )
+        {
             return _innerStream.BeginWrite(buffer, offset, count, callback, state);
         }
 

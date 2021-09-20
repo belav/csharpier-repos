@@ -39,7 +39,8 @@ namespace System.Web.Mvc.Async
             EndInvokeDelegate<TResult> endDelegate,
             object tag = null,
             int timeout = Timeout.Infinite
-        ) {
+        )
+        {
             WrappedAsyncResult<TResult> asyncResult = new WrappedAsyncResult<TResult>(
                 beginDelegate,
                 endDelegate,
@@ -59,7 +60,8 @@ namespace System.Web.Mvc.Async
             object tag = null,
             int timeout = Timeout.Infinite,
             SynchronizationContext callbackSyncContext = null
-        ) {
+        )
+        {
             WrappedAsyncResult<TResult, TState> asyncResult = new WrappedAsyncResult<
                 TResult,
                 TState
@@ -77,7 +79,8 @@ namespace System.Web.Mvc.Async
             object tag = null,
             int timeout = Timeout.Infinite,
             SynchronizationContext callbackSyncContext = null
-        ) {
+        )
+        {
             WrappedAsyncVoid<TState> asyncResult = new WrappedAsyncVoid<TState>(
                 beginDelegate,
                 endDelegate,
@@ -97,7 +100,8 @@ namespace System.Web.Mvc.Async
             EndInvokeDelegate<TState, TResult> func,
             TState funcState,
             object tag
-        ) {
+        )
+        {
             // Frequently called, so use static delegates
 
             // Inline delegates that take a generic argument from a generic method don't get cached by the compiler so use a field from a static generic class
@@ -118,7 +122,8 @@ namespace System.Web.Mvc.Async
             object state,
             Action action,
             object tag
-        ) {
+        )
+        {
             return BeginSynchronous<AsyncVoid, Action>(
                 callback,
                 state,
@@ -388,7 +393,8 @@ namespace System.Web.Mvc.Async
             protected override IAsyncResult CallBeginDelegate(
                 AsyncCallback callback,
                 object callbackState
-            ) {
+            )
+            {
                 return _beginDelegate(callback, callbackState);
             }
 
@@ -425,7 +431,8 @@ namespace System.Web.Mvc.Async
             protected override IAsyncResult CallBeginDelegate(
                 AsyncCallback callback,
                 object callbackState
-            ) {
+            )
+            {
                 return _beginDelegate(callback, callbackState, _state);
             }
         }
@@ -458,7 +465,8 @@ namespace System.Web.Mvc.Async
             protected override IAsyncResult CallBeginDelegate(
                 AsyncCallback callback,
                 object callbackState
-            ) {
+            )
+            {
                 return _beginDelegate(callback, callbackState, _state);
             }
         }

@@ -35,14 +35,15 @@ namespace Microsoft.AspNetCore.Testing
             ITestMethod testMethod,
             string skipReason,
             object[] testMethodArguments = null
-        ) : this(
-            diagnosticMessageSink,
-            defaultMethodDisplay,
-            TestMethodDisplayOptions.None,
-            testMethod,
-            skipReason,
-            testMethodArguments
-        ) { }
+        )
+            : this(
+                diagnosticMessageSink,
+                defaultMethodDisplay,
+                TestMethodDisplayOptions.None,
+                testMethod,
+                skipReason,
+                testMethodArguments
+            ) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="XunitSkippedDataRowTestCase"/> class.
@@ -60,13 +61,15 @@ namespace Microsoft.AspNetCore.Testing
             ITestMethod testMethod,
             string skipReason,
             object[] testMethodArguments = null
-        ) : base(
-            diagnosticMessageSink,
-            defaultMethodDisplay,
-            defaultMethodDisplayOptions,
-            testMethod,
-            testMethodArguments
-        ) {
+        )
+            : base(
+                diagnosticMessageSink,
+                defaultMethodDisplay,
+                defaultMethodDisplayOptions,
+                testMethod,
+                testMethodArguments
+            )
+        {
             this.skipReason = skipReason;
         }
 

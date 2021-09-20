@@ -376,7 +376,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void WriteTo_HasDocument_SerializesExpected(
             ServiceDocument document,
             string expected
-        ) {
+        )
+        {
             var formatter = new AtomPub10ServiceDocumentFormatter(document);
             CompareHelper.AssertEqualWriteOutput(expected, writer => formatter.WriteTo(writer));
             CompareHelper.AssertEqualWriteOutput(expected, writer => document.Save(writer));

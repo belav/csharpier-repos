@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.Common
             ImmutableArray<EmbeddedSyntaxTrivia<TSyntaxKind>> trailingTrivia,
             ImmutableArray<EmbeddedDiagnostic> diagnostics,
             object value
-        ) {
+        )
+        {
             Debug.Assert(!leadingTrivia.IsDefault);
             Debug.Assert(!virtualChars.IsDefault);
             Debug.Assert(!trailingTrivia.IsDefault);
@@ -60,7 +61,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.Common
             Optional<ImmutableArray<EmbeddedSyntaxTrivia<TSyntaxKind>>> trailingTrivia = default,
             Optional<ImmutableArray<EmbeddedDiagnostic>> diagnostics = default,
             Optional<object> value = default
-        ) {
+        )
+        {
             return new EmbeddedSyntaxToken<TSyntaxKind>(
                 kind.HasValue ? kind.Value : Kind,
                 leadingTrivia.HasValue ? leadingTrivia.Value : LeadingTrivia,

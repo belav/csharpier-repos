@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             LookupOptions options,
             bool diagnose,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             if (options.IsAttributeTypeLookup())
             {
                 this.LookupAttributeType(
@@ -67,7 +68,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             int arity,
             LookupOptions options,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             foreach (var scope in new ExtensionMethodScopes(this))
             {
                 this.LookupExtensionMethodsInSingleBinder(
@@ -94,7 +96,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo,
             ConsList<TypeSymbol> basesBeingResolved = null,
             LookupOptions options = LookupOptions.Default
-        ) {
+        )
+        {
             Debug.Assert(options.AreValid());
 
             // don't create diagnosis instances unless lookup fails
@@ -137,7 +140,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             LookupOptions options,
             bool diagnose,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             Debug.Assert(result.IsClear);
             Debug.Assert(options.AreValid());
 
@@ -212,7 +216,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             LookupOptions options,
             bool diagnose,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             if ((object)qualifierOpt == null)
             {
                 this.LookupSymbolsInternal(
@@ -252,7 +257,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo,
             ConsList<TypeSymbol> basesBeingResolved = null,
             LookupOptions options = LookupOptions.Default
-        ) {
+        )
+        {
             Debug.Assert(options.AreValid());
 
             // don't create diagnosis unless lookup fails
@@ -297,7 +303,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Binder originalBinder,
             bool diagnose,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             Debug.Assert(options.AreValid());
 
             Debug.Assert(arity >= 0);
@@ -341,7 +348,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Binder originalBinder,
             bool diagnose,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             switch (type.TypeKind)
             {
                 case TypeKind.TypeParameter:
@@ -442,7 +450,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Binder originalBinder,
             bool diagnose,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             if (!errorType.CandidateSymbols.IsDefault && errorType.CandidateSymbols.Length == 1)
             {
                 // The dev11 IDE experience provided meaningful information about members of inaccessible types,
@@ -496,7 +505,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Binder originalBinder,
             bool diagnose,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             LookupResult submissionSymbols = LookupResult.GetInstance();
             LookupResult nonViable = LookupResult.GetInstance();
             SymbolKind? lookingForOverloadsOfKind = null;
@@ -506,7 +516,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 CSharpCompilation submission = Compilation;
                 submission != null;
                 submission = submission.PreviousSubmission
-            ) {
+            )
+            {
                 submissionSymbols.Clear();
 
                 var isCurrentSubmission = submission == Compilation;
@@ -537,7 +548,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     (options & LookupOptions.NamespaceAliasesOnly) == 0
                     && (object)submission.ScriptClass != null
-                ) {
+                )
+                {
                     LookupMembersWithoutInheritance(
                         submissionSymbols,
                         submission.ScriptClass,
@@ -559,7 +571,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             name,
                             originalBinder.IsSemanticModelBinder
                         )
-                    ) {
+                    )
+                    {
                         // using alias is ambiguous with another definition within the same submission iff the other definition is a 0-ary type or a non-type:
                         Symbol existingDefinition = submissionSymbols.Symbols.First();
                         if (existingDefinition.Kind != SymbolKind.NamedType || arity == 0)
@@ -638,7 +651,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (
                         submissionSymbols.Symbols.Count > 0
                         && submissionSymbols.Symbols.First().Kind != lookingForOverloadsOfKind.Value
-                    ) {
+                    )
+                    {
                         break;
                     }
 
@@ -670,7 +684,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Binder originalBinder,
             bool diagnose,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             var members = GetCandidateMembers(ns, name, options, originalBinder);
 
             foreach (Symbol member in members)
@@ -700,7 +715,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             int arity,
             LookupOptions options,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             var methods = ArrayBuilder<MethodSymbol>.GetInstance();
             var binder = scope.Binder;
             binder.GetCandidateExtensionMethods(
@@ -749,7 +765,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             LookupOptions options,
             bool diagnose,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             Debug.Assert(result.IsClear);
             Debug.Assert(options.AreValid());
             Debug.Assert(options.IsAttributeTypeLookup());
@@ -972,7 +989,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             LookupResult result,
             out Symbol symbol,
             ref CompoundUseSiteInfo<AssemblySymbol> attributeTypeViabilityUseSiteInfo
-        ) {
+        )
+        {
             if (IsAmbiguousResult(result, out symbol))
             {
                 return false;
@@ -996,7 +1014,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Symbol symbol,
             DiagnosticInfo diagInfo,
             bool diagnose
-        ) {
+        )
+        {
             Debug.Assert((object)symbol != null);
 
             symbol = UnwrapAliasNoDiagnostics(symbol);
@@ -1010,7 +1029,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool diagnose,
             ref DiagnosticInfo diagInfo,
             ref CompoundUseSiteInfo<AssemblySymbol> attributeTypeViabilityUseSiteInfo
-        ) {
+        )
+        {
             Debug.Assert((object)symbol != null);
 
             if (symbol.Kind == SymbolKind.NamedType)
@@ -1048,7 +1068,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             WellKnownType.System_Attribute,
                             ref useSiteInfo
                         )
-                    ) {
+                    )
+                    {
                         attributeTypeViabilityUseSiteInfo.MergeAndClear(ref useSiteInfo);
                         // Reuse existing diagnostic info.
                         return true;
@@ -1109,7 +1130,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool diagnose,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo,
             ConsList<TypeSymbol> basesBeingResolved
-        ) {
+        )
+        {
             var members = GetCandidateMembers(type, name, options, originalBinder);
 
             foreach (Symbol member in members)
@@ -1140,7 +1162,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Binder originalBinder,
             bool diagnose,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             LookupMembersInClass(
                 result,
                 type,
@@ -1167,7 +1190,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol accessThroughType,
             bool diagnose,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             Debug.Assert((object)type != null);
             Debug.Assert(!type.IsInterfaceType() && type.TypeKind != TypeKind.TypeParameter);
 
@@ -1218,14 +1242,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     result.IsMultiViable
                     && (tmpHidesMethodOrIndexers || !IsMethodOrIndexer(result.Symbols[0]))
-                ) {
+                )
+                {
                     break;
                 }
 
                 if (
                     basesBeingResolved != null
                     && basesBeingResolved.ContainsReference(type.OriginalDefinition)
-                ) {
+                )
+                {
                     var other = GetNearestOtherSymbol(basesBeingResolved, type);
                     var diagInfo = new CSDiagnosticInfo(ErrorCode.ERR_CircularBase, type, other);
                     var error = new ExtendedErrorTypeSymbol(
@@ -1280,7 +1306,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Binder originalBinder,
             bool diagnose,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             // While the fundamental idea is simple, the implementation has issues.
             // If we have no conflict with existing members, we also have to check
             // if we have a conflict with other interface members. An example would be
@@ -1328,7 +1355,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             // Dev11 searches all declared and undeclared base interfaces
             foreach (
                 var iface in type.AllInterfacesWithDefinitionUseSiteDiagnostics(ref useSiteInfo)
-            ) {
+            )
+            {
                 if (
                     ShouldAddWinRTMembersForInterface(
                         iface,
@@ -1339,7 +1367,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         inccSymbol,
                         inpcSymbol
                     )
-                ) {
+                )
+                {
                     LookupMembersWithoutInheritance(
                         tmp,
                         iface,
@@ -1395,7 +1424,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             out NamedTypeSymbol iCollectionSymbol,
             out NamedTypeSymbol inccSymbol,
             out NamedTypeSymbol inpcSymbol
-        ) {
+        )
+        {
             idictSymbol = Compilation.GetWellKnownType(
                 WellKnownType.System_Collections_Generic_IDictionary_KV
             );
@@ -1422,7 +1452,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             NamedTypeSymbol iCollectionSymbol,
             NamedTypeSymbol inccSymbol,
             NamedTypeSymbol inpcSymbol
-        ) {
+        )
+        {
             var iFaceOriginal = iface.OriginalDefinition;
             var iFaceSpecial = iFaceOriginal.SpecialType;
 
@@ -1474,12 +1505,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                         type.OriginalDefinition,
                         TypeCompareKind.ConsiderEverything2
                     )
-                ) {
+                )
+                {
                     if (
                         TypeSymbol.Equals(other, type, TypeCompareKind.ConsiderEverything2)
                         && list.Tail != null
                         && list.Tail != ConsList<TypeSymbol>.Empty
-                    ) {
+                    )
+                    {
                         other = list.Tail.Head;
                     }
                     break;
@@ -1505,7 +1538,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol accessThroughType,
             bool diagnose,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             Debug.Assert((object)type != null);
             Debug.Assert(type.IsInterface);
 
@@ -1524,7 +1558,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 (options & LookupOptions.NamespaceAliasesOnly) == 0
                 && !originalBinder.InCrefButNotParameterOrReturnType
-            ) {
+            )
+            {
                 LookupMembersInInterfacesWithoutInheritance(
                     current,
                     GetBaseInterfaces(type, basesBeingResolved, ref useSiteInfo),
@@ -1544,7 +1579,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             NamedTypeSymbol type,
             ConsList<TypeSymbol> basesBeingResolved,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             if (basesBeingResolved?.Any() != true)
             {
                 return type.AllInterfacesWithDefinitionUseSiteDiagnostics(ref useSiteInfo);
@@ -1604,7 +1640,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ArrayBuilder<NamedTypeSymbol> result,
                 ConsList<TypeSymbol> basesBeingResolved,
                 ConsList<NamedTypeSymbol> cycleGuard
-            ) {
+            )
+            {
                 NamedTypeSymbol originalDefinition;
 
                 if (
@@ -1613,7 +1650,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         originalDefinition = @interface.OriginalDefinition
                     )
                     && visited.Add(@interface)
-                ) {
+                )
+                {
                     if (!basesBeingResolved.ContainsReference(originalDefinition))
                     {
                         ImmutableArray<NamedTypeSymbol> baseInterfaces =
@@ -1652,7 +1690,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol accessThroughType,
             bool diagnose,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             if (interfaces.Length > 0)
             {
                 var tmp = LookupResult.GetInstance();
@@ -1699,7 +1738,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Binder originalBinder,
             bool diagnose,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             Debug.Assert((object)type != null);
             Debug.Assert(type.IsInterface);
 
@@ -1748,7 +1788,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Binder originalBinder,
             bool diagnose,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             Debug.Assert((object)typeParameter != null);
 
             if (
@@ -1756,7 +1797,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     options
                     & (LookupOptions.NamespaceAliasesOnly | LookupOptions.NamespacesOrTypesOnly)
                 ) != 0
-            ) {
+            )
+            {
                 return;
             }
 
@@ -1801,7 +1843,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             NamedTypeSymbol derivedType,
             ConsList<TypeSymbol> basesBeingResolved,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             Debug.Assert(
                 !TypeSymbol.Equals(baseType, derivedType, TypeCompareKind.ConsiderEverything2)
             );
@@ -1811,7 +1854,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
                 (object)b != null;
                 b = b.BaseTypeWithDefinitionUseSiteDiagnostics(ref useSiteInfo)
-            ) {
+            )
+            {
                 if (TypeSymbol.Equals(b, baseType, TypeCompareKind.ConsiderEverything2))
                     return true;
             }
@@ -1828,7 +1872,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             LookupResult resultHidden,
             ConsList<TypeSymbol> basesBeingResolved,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) {
+        )
+        {
             // Methods hide non-methods, non-methods hide everything.
 
             if (resultHiding.IsMultiViable && resultHidden.IsMultiViable)
@@ -1864,7 +1909,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                     useSiteInfo: ref useSiteInfo
                                 )
                                 && hiddenContainer.SpecialType != SpecialType.System_Object
-                            ) {
+                            )
+                            {
                                 continue; // not in inheritance relationship, so it cannot hide
                             }
                         }
@@ -1907,7 +1953,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string name,
             LookupOptions options,
             Binder originalBinder
-        ) {
+        )
+        {
             if ((options & LookupOptions.NamespacesOrTypesOnly) != 0 && nsOrType is TypeSymbol)
             {
                 return nsOrType.GetTypeMembers(name).Cast<NamedTypeSymbol, Symbol>();
@@ -1930,7 +1977,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             NamespaceOrTypeSymbol nsOrType,
             LookupOptions options,
             Binder originalBinder
-        ) {
+        )
+        {
             if ((options & LookupOptions.NamespacesOrTypesOnly) != 0 && nsOrType is TypeSymbol)
             {
                 return StaticCast<Symbol>.From(nsOrType.GetTypeMembersUnordered());
@@ -1960,7 +2008,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool diagnose,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo,
             ConsList<TypeSymbol> basesBeingResolved = null
-        ) {
+        )
+        {
             bool inaccessibleViaQualifier;
             DiagnosticInfo diagInfo;
 
@@ -1976,7 +2025,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 !this.Compilation.SourceModule.Equals(unwrappedSymbol.ContainingModule)
                 && unwrappedSymbol.IsHiddenByCodeAnalysisEmbeddedAttribute()
-            ) {
+            )
+            {
                 return LookupResult.Empty();
             }
             else if (WrongArity(symbol, arity, diagnose, options, out diagInfo))
@@ -1998,13 +2048,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             else if (
                 (options & LookupOptions.NamespacesOrTypesOnly) != 0
                 && !(unwrappedSymbol is NamespaceOrTypeSymbol)
-            ) {
+            )
+            {
                 return LookupResult.NotTypeOrNamespace(unwrappedSymbol, symbol, diagnose);
             }
             else if (
                 (options & LookupOptions.MustBeInvocableIfMember) != 0
                 && IsNonInvocableMember(unwrappedSymbol)
-            ) {
+            )
+            {
                 return LookupResult.NotInvocable(unwrappedSymbol, symbol, diagnose);
             }
             else if (InCref && !this.IsCrefAccessible(unwrappedSymbol))
@@ -2029,7 +2081,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ref useSiteInfo,
                     basesBeingResolved
                 )
-            ) {
+            )
+            {
                 if (!diagnose)
                 {
                     diagInfo = null;
@@ -2077,7 +2130,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             else if (
                 (options & LookupOptions.MustNotBeInstance) != 0 && IsInstance(unwrappedSymbol)
-            ) {
+            )
+            {
                 diagInfo = diagnose
                     ? new CSDiagnosticInfo(ErrorCode.ERR_ObjectProhibited, unwrappedSymbol)
                     : null;
@@ -2086,7 +2140,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             else if (
                 (options & LookupOptions.MustNotBeNamespace) != 0
                 && unwrappedSymbol.Kind == SymbolKind.Namespace
-            ) {
+            )
+            {
                 diagInfo = diagnose
                     ? new CSDiagnosticInfo(
                           ErrorCode.ERR_BadSKunknown,
@@ -2099,7 +2154,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             else if (
                 (options & LookupOptions.LabelsOnly) != 0
                 && unwrappedSymbol.Kind != SymbolKind.Label
-            ) {
+            )
+            {
                 diagInfo = diagnose
                     ? new CSDiagnosticInfo(ErrorCode.ERR_LabelNotFound, unwrappedSymbol.Name)
                     : null;
@@ -2122,7 +2178,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         || unwrappedSymbol.DeclaredAccessibility
                             == Accessibility.ProtectedOrInternal
                     ) && !options.IsAttributeTypeLookup()
-                ) {
+                )
+                {
                     var assemblyName = this.Compilation.AssemblyName;
                     if (assemblyName == null)
                     {
@@ -2225,7 +2282,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             LookupSymbolsInfo info,
             TypeSymbol accessThroughType,
             AliasSymbol aliasSymbol = null
-        ) {
+        )
+        {
             Debug.Assert(
                 symbol.Kind != SymbolKind.Alias,
                 "It is the caller's responsibility to unwrap aliased symbols."
@@ -2246,13 +2304,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 (options & LookupOptions.NamespacesOrTypesOnly) != 0
                 && !(symbol is NamespaceOrTypeSymbol)
-            ) {
+            )
+            {
                 return false;
             }
             else if (
                 (options & LookupOptions.MustBeInvocableIfMember) != 0
                 && IsNonInvocableMember(symbol)
-            ) {
+            )
+            {
                 return false;
             }
             else if (
@@ -2263,7 +2323,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                           ref discardedUseSiteInfo,
                           RefineAccessThroughType(options, accessThroughType)
                       )
-            ) {
+            )
+            {
                 return false;
             }
             else if ((options & LookupOptions.MustBeInstance) != 0 && !IsInstance(symbol))
@@ -2277,7 +2338,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             else if (
                 (options & LookupOptions.MustNotBeNamespace) != 0
                 && (symbol.Kind == SymbolKind.Namespace)
-            ) {
+            )
+            {
                 return false;
             }
             else
@@ -2292,7 +2354,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static TypeSymbol RefineAccessThroughType(
             LookupOptions options,
             TypeSymbol accessThroughType
-        ) {
+        )
+        {
             // Normally, when we access a protected instance member, we need to know the type of the receiver so we
             // can determine whether the member is actually accessible in the containing type.  There is one exception:
             // If the receiver is "base", then it's okay if the receiver type isn't derived from the containing type.
@@ -2333,7 +2396,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo,
             TypeSymbol accessThroughType = null,
             ConsList<TypeSymbol> basesBeingResolved = null
-        ) {
+        )
+        {
             bool failedThroughTypeCheck;
             return IsAccessible(
                 symbol,
@@ -2355,7 +2419,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             out bool failedThroughTypeCheck,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo,
             ConsList<TypeSymbol> basesBeingResolved = null
-        ) {
+        )
+        {
             if (this.Flags.Includes(BinderFlags.IgnoreAccessibility))
             {
                 failedThroughTypeCheck = false;
@@ -2381,7 +2446,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             out bool failedThroughTypeCheck,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo,
             ConsList<TypeSymbol> basesBeingResolved
-        ) {
+        )
+        {
             // By default, just delegate to containing binder.
             return Next.IsAccessibleHelper(
                 symbol,
@@ -2457,7 +2523,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool diagnose,
             LookupOptions options,
             out DiagnosticInfo diagInfo
-        ) {
+        )
+        {
             switch (symbol.Kind)
             {
                 case SymbolKind.NamedType:
@@ -2469,7 +2536,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         if (
                             namedType.Arity != arity
                             || options.IsAttributeTypeLookup() && arity != 0
-                        ) {
+                        )
+                        {
                             if (namedType.Arity == 0)
                             {
                                 // The non-generic {1} '{0}' cannot be used with type arguments
@@ -2557,7 +2625,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal void AddLookupSymbolsInfo(
             LookupSymbolsInfo result,
             LookupOptions options = LookupOptions.Default
-        ) {
+        )
+        {
             for (var scope = this; scope != null; scope = scope.Next)
             {
                 scope.AddLookupSymbolsInfoInSingleBinder(result, options, originalBinder: this);
@@ -2574,7 +2643,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             LookupSymbolsInfo info,
             LookupOptions options,
             Binder originalBinder
-        ) {
+        )
+        {
             // overridden in other binders
         }
 
@@ -2586,7 +2656,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             NamespaceOrTypeSymbol nsOrType,
             LookupOptions options,
             Binder originalBinder
-        ) {
+        )
+        {
             if (nsOrType.IsNamespace)
             {
                 AddMemberLookupSymbolsInfoInNamespace(
@@ -2612,7 +2683,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol type,
             LookupOptions options,
             Binder originalBinder
-        ) {
+        )
+        {
             switch (type.TypeKind)
             {
                 case TypeKind.TypeParameter:
@@ -2665,14 +2737,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol scriptClass,
             LookupOptions options,
             Binder originalBinder
-        ) {
+        )
+        {
             // TODO: we need tests
             // TODO: optimize lookup (there might be many interactions in the chain)
             for (
                 CSharpCompilation submission = Compilation;
                 submission != null;
                 submission = submission.PreviousSubmission
-            ) {
+            )
+            {
                 if ((object)submission.ScriptClass != null)
                 {
                     AddMemberLookupSymbolsInfoWithoutInheritance(
@@ -2690,7 +2764,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     (options & LookupOptions.LabelsOnly) == 0
                     && !(isCurrentSubmission && this.Flags.Includes(BinderFlags.InScriptUsing))
-                ) {
+                )
+                {
                     var submissionImports = submission.GetSubmissionImports();
                     if (!isCurrentSubmission)
                     {
@@ -2716,7 +2791,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             NamespaceSymbol ns,
             LookupOptions options,
             Binder originalBinder
-        ) {
+        )
+        {
             var candidateMembers =
                 result.FilterName != null
                     ? GetCandidateMembers(ns, result.FilterName, options, originalBinder)
@@ -2736,7 +2812,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             LookupOptions options,
             Binder originalBinder,
             TypeSymbol accessThroughType
-        ) {
+        )
+        {
             var candidateMembers =
                 result.FilterName != null
                     ? GetCandidateMembers(type, result.FilterName, options, originalBinder)
@@ -2750,7 +2827,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         result,
                         accessThroughType
                     )
-                ) {
+                )
+                {
                     result.AddSymbol(symbol, symbol.Name, symbol.GetArity());
                 }
             }
@@ -2762,7 +2840,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             LookupOptions options,
             Binder originalBinder,
             TypeSymbol accessThroughType
-        ) {
+        )
+        {
             NamedTypeSymbol idictSymbol,
                 iroDictSymbol,
                 iListSymbol,
@@ -2791,7 +2870,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         inccSymbol,
                         inpcSymbol
                     )
-                ) {
+                )
+                {
                     AddMemberLookupSymbolsInfoWithoutInheritance(
                         result,
                         iface,
@@ -2809,7 +2889,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             LookupOptions options,
             Binder originalBinder,
             TypeSymbol accessThroughType
-        ) {
+        )
+        {
             PooledHashSet<NamedTypeSymbol> visited = null;
             // We need a check for SpecialType.System_Void as its base type is
             // ValueType but we don't wish to return any members for void type
@@ -2861,7 +2942,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             LookupOptions options,
             Binder originalBinder,
             TypeSymbol accessThroughType
-        ) {
+        )
+        {
             AddMemberLookupSymbolsInfoWithoutInheritance(
                 result,
                 type,
@@ -2898,7 +2980,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeParameterSymbol type,
             LookupOptions options,
             Binder originalBinder
-        ) {
+        )
+        {
             if (type.TypeParameterKind == TypeParameterKind.Cref)
             {
                 return;

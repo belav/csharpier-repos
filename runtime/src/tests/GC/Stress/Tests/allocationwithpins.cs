@@ -324,7 +324,8 @@ internal class MemoryAlloc
             steadyPinningIndex = 0;
             steadyPinningIndex < steadyPinningArray.Length;
             steadyPinningIndex++
-        ) {
+        )
+        {
             steadyPinningArray[steadyPinningIndex] = new MiddlePin();
             steadyPinningHandles[steadyPinningIndex] = new GCHandle();
         }
@@ -377,7 +378,8 @@ internal class MemoryAlloc
                     int iCheckIndex = 0;
                     iCheckIndex < ((iCheckedEnd - lastChecked) / timeoutInterval);
                     iCheckIndex++
-                ) {
+                )
+                {
                     int iItemIndex =
                         (lastChecked + iCheckIndex * timeoutInterval + iIter) % _old.Length;
 
@@ -484,7 +486,8 @@ internal class MemoryAlloc
             steadyPinningIndex = 0;
             steadyPinningIndex < steadyPinningArray.Length;
             steadyPinningIndex++
-        ) {
+        )
+        {
             if (steadyPinningHandles[steadyPinningIndex].IsAllocated)
                 steadyPinningHandles[steadyPinningIndex].Free();
         }

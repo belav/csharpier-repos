@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Structure
         public override async Task<BlockStructure> GetBlockStructureAsync(
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var blockStructure = await _service.GetBlockStructureAsync(document, cancellationToken)
                 .ConfigureAwait(false);
             if (blockStructure != null)

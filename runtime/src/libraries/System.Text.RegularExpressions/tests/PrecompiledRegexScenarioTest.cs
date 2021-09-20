@@ -118,7 +118,8 @@ namespace RegexTestNamespace
                                 char.ToLower(runtext[num - num4--]),
                                 "\0\0\u0001\t"
                             )
-                        ) {
+                        )
+                        {
                             if (num4 <= 0)
                             {
                                 this.CheckTimeout();
@@ -130,7 +131,8 @@ namespace RegexTestNamespace
                                             char.ToLower(runtext[num++]),
                                             "\0\0\u0001\t"
                                         )
-                                    ) {
+                                    )
+                                    {
                                         num--;
                                         break;
                                     }
@@ -218,7 +220,8 @@ namespace RegexTestNamespace
                     || char.ToLower(runtext[num + 4]) != 'e'
                     || char.ToLower(runtext[num + 5]) != 's'
                     || char.ToLower(runtext[num + 6]) != 's'
-                ) {
+                )
+                {
                     goto IL_441;
                 }
                 num += 7;
@@ -293,7 +296,8 @@ namespace RegexTestNamespace
                             char.ToLower(runtext[num++]),
                             "\0\u0003\u0001\0\n\v\t"
                         )
-                    ) {
+                    )
+                    {
                         goto IL_63;
                     }
                 } while (num2 > 0);

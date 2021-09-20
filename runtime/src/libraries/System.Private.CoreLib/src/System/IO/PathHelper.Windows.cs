@@ -87,7 +87,8 @@ namespace System.IO
                         IntPtr.Zero
                     )
                 ) > builder.Capacity
-            ) {
+            )
+            {
                 // Reported size is greater than the buffer size. Increase the capacity.
                 builder.EnsureCapacity(checked((int)result));
             }
@@ -108,7 +109,8 @@ namespace System.IO
             ref ValueStringBuilder content,
             bool isDosUnc,
             ref ValueStringBuilder buffer
-        ) {
+        )
+        {
             int length = content.Length;
 
             length += isDosUnc
@@ -141,7 +143,8 @@ namespace System.IO
         internal static string TryExpandShortFileName(
             ref ValueStringBuilder outputBuilder,
             string? originalPath
-        ) {
+        )
+        {
             // We guarantee we'll expand short names for paths that only partially exist. As such, we need to find the part of the path that actually does exist. To
             // avoid allocating a lot we'll create only one input array and modify the contents with embedded nulls.
 
@@ -221,7 +224,8 @@ namespace System.IO
                     if (
                         error != Interop.Errors.ERROR_FILE_NOT_FOUND
                         && error != Interop.Errors.ERROR_PATH_NOT_FOUND
-                    ) {
+                    )
+                    {
                         // Some other failure, give up
                         break;
                     }

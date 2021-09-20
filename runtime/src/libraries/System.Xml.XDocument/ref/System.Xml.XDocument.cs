@@ -10,13 +10,15 @@ namespace System.Xml.Linq
     {
         public static System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> AncestorsAndSelf(
             this System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement?> source
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> AncestorsAndSelf(
             this System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement?> source,
             System.Xml.Linq.XName? name
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> Ancestors<T>(
@@ -34,18 +36,21 @@ namespace System.Xml.Linq
         }
         public static System.Collections.Generic.IEnumerable<System.Xml.Linq.XAttribute> Attributes(
             this System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement?> source
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Collections.Generic.IEnumerable<System.Xml.Linq.XAttribute> Attributes(
             this System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement?> source,
             System.Xml.Linq.XName? name
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Collections.Generic.IEnumerable<System.Xml.Linq.XNode> DescendantNodesAndSelf(
             this System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement?> source
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Collections.Generic.IEnumerable<System.Xml.Linq.XNode> DescendantNodes<T>(
@@ -56,13 +61,15 @@ namespace System.Xml.Linq
         }
         public static System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> DescendantsAndSelf(
             this System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement?> source
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> DescendantsAndSelf(
             this System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement?> source,
             System.Xml.Linq.XName? name
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> Descendants<T>(
@@ -216,7 +223,8 @@ namespace System.Xml.Linq
         [return: System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute("attribute")]
         public static explicit operator System.DateTimeOffset?(
             System.Xml.Linq.XAttribute? attribute
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
@@ -324,7 +332,8 @@ namespace System.Xml.Linq
         public override System.Threading.Tasks.Task WriteToAsync(
             System.Xml.XmlWriter writer,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -345,7 +354,8 @@ namespace System.Xml.Linq
         public override System.Threading.Tasks.Task WriteToAsync(
             System.Xml.XmlWriter writer,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -378,7 +388,8 @@ namespace System.Xml.Linq
         }
         public System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> Descendants(
             System.Xml.Linq.XName? name
-        ) {
+        )
+        {
             throw null;
         }
         public System.Xml.Linq.XElement? Element(System.Xml.Linq.XName name)
@@ -391,7 +402,8 @@ namespace System.Xml.Linq
         }
         public System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> Elements(
             System.Xml.Linq.XName? name
-        ) {
+        )
+        {
             throw null;
         }
         public System.Collections.Generic.IEnumerable<System.Xml.Linq.XNode> Nodes()
@@ -456,7 +468,8 @@ namespace System.Xml.Linq
         public static System.Xml.Linq.XDocument Load(
             System.IO.Stream stream,
             System.Xml.Linq.LoadOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.Linq.XDocument Load(System.IO.TextReader textReader)
@@ -466,7 +479,8 @@ namespace System.Xml.Linq
         public static System.Xml.Linq.XDocument Load(
             System.IO.TextReader textReader,
             System.Xml.Linq.LoadOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.Linq.XDocument Load(string uri)
@@ -476,7 +490,8 @@ namespace System.Xml.Linq
         public static System.Xml.Linq.XDocument Load(
             string uri,
             System.Xml.Linq.LoadOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.Linq.XDocument Load(System.Xml.XmlReader reader)
@@ -486,28 +501,32 @@ namespace System.Xml.Linq
         public static System.Xml.Linq.XDocument Load(
             System.Xml.XmlReader reader,
             System.Xml.Linq.LoadOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task<System.Xml.Linq.XDocument> LoadAsync(
             System.IO.Stream stream,
             System.Xml.Linq.LoadOptions options,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task<System.Xml.Linq.XDocument> LoadAsync(
             System.IO.TextReader textReader,
             System.Xml.Linq.LoadOptions options,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task<System.Xml.Linq.XDocument> LoadAsync(
             System.Xml.XmlReader reader,
             System.Xml.Linq.LoadOptions options,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.Linq.XDocument Parse(string text)
@@ -517,7 +536,8 @@ namespace System.Xml.Linq
         public static System.Xml.Linq.XDocument Parse(
             string text,
             System.Xml.Linq.LoadOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public void Save(System.IO.Stream stream) { }
@@ -531,27 +551,31 @@ namespace System.Xml.Linq
             System.IO.Stream stream,
             System.Xml.Linq.SaveOptions options,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task SaveAsync(
             System.IO.TextWriter textWriter,
             System.Xml.Linq.SaveOptions options,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task SaveAsync(
             System.Xml.XmlWriter writer,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public override void WriteTo(System.Xml.XmlWriter writer) { }
         public override System.Threading.Tasks.Task WriteToAsync(
             System.Xml.XmlWriter writer,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -592,7 +616,8 @@ namespace System.Xml.Linq
         public override System.Threading.Tasks.Task WriteToAsync(
             System.Xml.XmlWriter writer,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -653,7 +678,8 @@ namespace System.Xml.Linq
         }
         public System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> AncestorsAndSelf(
             System.Xml.Linq.XName? name
-        ) {
+        )
+        {
             throw null;
         }
         public System.Xml.Linq.XAttribute? Attribute(System.Xml.Linq.XName name)
@@ -666,7 +692,8 @@ namespace System.Xml.Linq
         }
         public System.Collections.Generic.IEnumerable<System.Xml.Linq.XAttribute> Attributes(
             System.Xml.Linq.XName? name
-        ) {
+        )
+        {
             throw null;
         }
         public System.Collections.Generic.IEnumerable<System.Xml.Linq.XNode> DescendantNodesAndSelf()
@@ -679,7 +706,8 @@ namespace System.Xml.Linq
         }
         public System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> DescendantsAndSelf(
             System.Xml.Linq.XName? name
-        ) {
+        )
+        {
             throw null;
         }
         public System.Xml.Linq.XNamespace GetDefaultNamespace()
@@ -701,7 +729,8 @@ namespace System.Xml.Linq
         public static System.Xml.Linq.XElement Load(
             System.IO.Stream stream,
             System.Xml.Linq.LoadOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.Linq.XElement Load(System.IO.TextReader textReader)
@@ -711,7 +740,8 @@ namespace System.Xml.Linq
         public static System.Xml.Linq.XElement Load(
             System.IO.TextReader textReader,
             System.Xml.Linq.LoadOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.Linq.XElement Load(string uri)
@@ -729,28 +759,32 @@ namespace System.Xml.Linq
         public static System.Xml.Linq.XElement Load(
             System.Xml.XmlReader reader,
             System.Xml.Linq.LoadOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task<System.Xml.Linq.XElement> LoadAsync(
             System.IO.Stream stream,
             System.Xml.Linq.LoadOptions options,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task<System.Xml.Linq.XElement> LoadAsync(
             System.IO.TextReader textReader,
             System.Xml.Linq.LoadOptions options,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Threading.Tasks.Task<System.Xml.Linq.XElement> LoadAsync(
             System.Xml.XmlReader reader,
             System.Xml.Linq.LoadOptions options,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
@@ -898,7 +932,8 @@ namespace System.Xml.Linq
         public static System.Xml.Linq.XElement Parse(
             string text,
             System.Xml.Linq.LoadOptions options
-        ) {
+        )
+        {
             throw null;
         }
         public void RemoveAll() { }
@@ -918,20 +953,23 @@ namespace System.Xml.Linq
             System.IO.Stream stream,
             System.Xml.Linq.SaveOptions options,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task SaveAsync(
             System.IO.TextWriter textWriter,
             System.Xml.Linq.SaveOptions options,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task SaveAsync(
             System.Xml.XmlWriter writer,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public void SetAttributeValue(System.Xml.Linq.XName name, object? value) { }
@@ -947,7 +985,8 @@ namespace System.Xml.Linq
         public override System.Threading.Tasks.Task WriteToAsync(
             System.Xml.XmlWriter writer,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -970,7 +1009,8 @@ namespace System.Xml.Linq
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.Linq.XName Get(string expandedName)
@@ -1033,7 +1073,8 @@ namespace System.Xml.Linq
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.Linq.XNamespace Get(string namespaceName)
@@ -1051,13 +1092,15 @@ namespace System.Xml.Linq
         public static System.Xml.Linq.XName operator +(
             System.Xml.Linq.XNamespace ns,
             string localName
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator ==(
             System.Xml.Linq.XNamespace? left,
             System.Xml.Linq.XNamespace? right
-        ) {
+        )
+        {
             throw null;
         }
         [System.CLSCompliantAttribute(false)]
@@ -1069,7 +1112,8 @@ namespace System.Xml.Linq
         public static bool operator !=(
             System.Xml.Linq.XNamespace? left,
             System.Xml.Linq.XNamespace? right
-        ) {
+        )
+        {
             throw null;
         }
         public override string ToString()
@@ -1106,7 +1150,8 @@ namespace System.Xml.Linq
         }
         public System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> Ancestors(
             System.Xml.Linq.XName? name
-        ) {
+        )
+        {
             throw null;
         }
         public static int CompareDocumentOrder(System.Xml.Linq.XNode? n1, System.Xml.Linq.XNode? n2)
@@ -1131,7 +1176,8 @@ namespace System.Xml.Linq
         }
         public System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> ElementsAfterSelf(
             System.Xml.Linq.XName? name
-        ) {
+        )
+        {
             throw null;
         }
         public System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> ElementsBeforeSelf()
@@ -1140,7 +1186,8 @@ namespace System.Xml.Linq
         }
         public System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> ElementsBeforeSelf(
             System.Xml.Linq.XName? name
-        ) {
+        )
+        {
             throw null;
         }
         public bool IsAfter(System.Xml.Linq.XNode? node)
@@ -1166,7 +1213,8 @@ namespace System.Xml.Linq
         public static System.Threading.Tasks.Task<System.Xml.Linq.XNode> ReadFromAsync(
             System.Xml.XmlReader reader,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public void Remove() { }
@@ -1321,7 +1369,8 @@ namespace System.Xml.Linq
         public override System.Threading.Tasks.Task WriteToAsync(
             System.Xml.XmlWriter writer,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1371,7 +1420,8 @@ namespace System.Xml.Linq
         public override System.Threading.Tasks.Task WriteToAsync(
             System.Xml.XmlWriter writer,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1382,12 +1432,14 @@ namespace System.Xml.Schema
     {
         public static System.Xml.Schema.IXmlSchemaInfo? GetSchemaInfo(
             this System.Xml.Linq.XAttribute source
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.Schema.IXmlSchemaInfo? GetSchemaInfo(
             this System.Xml.Linq.XElement source
-        ) {
+        )
+        {
             throw null;
         }
         public static void Validate(

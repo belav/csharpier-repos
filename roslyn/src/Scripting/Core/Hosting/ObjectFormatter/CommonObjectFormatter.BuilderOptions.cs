@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 string ellipsis,
                 int maximumLineLength,
                 int maximumOutputLength
-            ) {
+            )
+            {
                 Indentation = indentation;
                 NewLine = newLine;
                 Ellipsis = ellipsis;

@@ -99,7 +99,8 @@ namespace System.Net.Http.Headers
         public static bool TryParse(
             [NotNullWhen(true)] string? input,
             [NotNullWhen(true)] out RangeConditionHeaderValue? parsedValue
-        ) {
+        )
+        {
             int index = 0;
             parsedValue = null;
 
@@ -110,7 +111,8 @@ namespace System.Net.Http.Headers
                     ref index,
                     out object? output
                 )
-            ) {
+            )
+            {
                 parsedValue = (RangeConditionHeaderValue)output!;
                 return true;
             }
@@ -121,7 +123,8 @@ namespace System.Net.Http.Headers
             string? input,
             int startIndex,
             out object? parsedValue
-        ) {
+        )
+        {
             Debug.Assert(startIndex >= 0);
 
             parsedValue = null;
@@ -146,7 +149,8 @@ namespace System.Net.Http.Headers
             if (
                 (firstChar == '\"')
                 || (((firstChar == 'w') || (firstChar == 'W')) && (secondChar == '/'))
-            ) {
+            )
+            {
                 // trailing whitespace is removed by GetEntityTagLength()
                 int entityTagLength = EntityTagHeaderValue.GetEntityTagLength(
                     input,

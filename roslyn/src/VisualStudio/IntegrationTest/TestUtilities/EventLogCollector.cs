@@ -160,7 +160,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
                                 !string.IsNullOrWhiteSpace(
                                     GetEventRecordPropertyToString(eventLogRecord, FaultBucketIndex)
                                 )
-                            ) {
+                            )
+                            {
                                 watsonEntriesCount++;
                             }
                         }
@@ -280,7 +281,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         private static bool IsLastDayOrLastFiveRecentEntry(
             EventRecord eventLogRecord,
             int entriesCount
-        ) {
+        )
+        {
             // This is local time (it will be later converted to UTC when we send the feedback)
             if (
                 eventLogRecord.TimeCreated.HasValue
@@ -289,7 +291,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
                     (eventLogRecord.TimeCreated.Value > DateTime.Now.AddDays(-DaysToGetEventsFor))
                     || (entriesCount < MinimumEntries)
                 )
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -324,7 +327,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
                         FeedbackItemWatsonEntry.ApplicationNameIndex
                     )
                 )
-            ) {
+            )
+            {
                 return true;
             }
 
@@ -339,20 +343,23 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         private static bool IsValidDotNetEntry(
             EventRecord eventLogRecord,
             ref FeedbackItemDotNetEntry dotNetEntry
-        ) {
+        )
+        {
             if (
                 StringComparer.InvariantCultureIgnoreCase.Equals(
                     eventLogRecord.ProviderName,
                     DotNetProviderName
                 ) && s_dotNetEventId.Contains(eventLogRecord.Id)
-            ) {
+            )
+            {
                 dotNetEntry = new FeedbackItemDotNetEntry(eventLogRecord);
                 foreach (var app in VsRelatedExes)
                 {
                     if (
                         dotNetEntry.Data.IndexOf(app, StringComparison.InvariantCultureIgnoreCase)
                         >= 0
-                    ) {
+                    )
+                    {
                         return true;
                     }
                 }

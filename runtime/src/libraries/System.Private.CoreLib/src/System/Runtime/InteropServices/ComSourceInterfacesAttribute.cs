@@ -25,7 +25,8 @@ namespace System.Runtime.InteropServices
             Type sourceInterface1,
             Type sourceInterface2,
             Type sourceInterface3
-        ) {
+        )
+        {
             Value =
                 sourceInterface1.FullName
                 + "\0"
@@ -39,7 +40,8 @@ namespace System.Runtime.InteropServices
             Type sourceInterface2,
             Type sourceInterface3,
             Type sourceInterface4
-        ) {
+        )
+        {
             Value =
                 sourceInterface1.FullName
                 + "\0"

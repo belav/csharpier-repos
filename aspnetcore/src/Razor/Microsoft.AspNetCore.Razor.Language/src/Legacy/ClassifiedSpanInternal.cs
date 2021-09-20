@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             SpanKindInternal spanKind,
             BlockKindInternal blockKind,
             AcceptedCharactersInternal acceptedCharacters
-        ) {
+        )
+        {
             Span = span;
             BlockSpan = blockSpan;
             SpanKind = spanKind;

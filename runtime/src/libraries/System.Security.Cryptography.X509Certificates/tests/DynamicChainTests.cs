@@ -75,7 +75,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             X509ChainStatusFlags endEntityErrors,
             X509ChainStatusFlags intermediateErrors,
             X509ChainStatusFlags rootErrors
-        ) {
+        )
+        {
             string testName =
                 $"{nameof(BuildInvalidSignatureTwice)} {endEntityErrors} {intermediateErrors} {rootErrors}";
             TestDataGenerator.MakeTestChain3(
@@ -101,7 +102,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 DateTime input,
                 X509Certificate2 cert,
                 X509ChainStatusFlags flags
-            ) {
+            )
+            {
                 if ((flags & X509ChainStatusFlags.NotTimeValid) != 0)
                 {
                     return cert.NotBefore.AddMinutes(-1);
@@ -440,7 +442,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                         notAfter,
                         root.GetSerialNumber()
                     )
-                ) {
+                )
+                {
                     X509Chain chain = new X509Chain();
                     chain.ChainPolicy.RevocationMode = X509RevocationMode.NoCheck;
                     Assert.False(chain.Build(ee));
@@ -474,7 +477,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
                 using (
                     X509Certificate2 cert = req.CreateSelfSigned(now.AddDays(-1), now.AddDays(1))
-                ) {
+                )
+                {
                     Assert.Equal("CN=Test, OID.1.1.1.2.2.3=123 654 7890", cert.Subject);
                 }
             }
@@ -488,7 +492,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         public static void CustomRootTrustDoesNotTrustIntermediates(
             bool saveAllInCustomTrustStore,
             X509ChainStatusFlags chainFlags
-        ) {
+        )
+        {
             string testName =
                 $"{nameof(CustomRootTrustDoesNotTrustIntermediates)} {saveAllInCustomTrustStore} {chainFlags}";
             TestDataGenerator.MakeTestChain3(
@@ -995,7 +1000,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             SubjectAlternativeNameBuilder endEntitySanBuilder,
             Action<bool, X509Chain> body,
             [CallerMemberName] string testName = null
-        ) {
+        )
+        {
             X509Extension[] endEntityExtensions = new[]
             {
                 new X509BasicConstraintsExtension(
@@ -1058,7 +1064,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         private static X509Extension BuildPolicyConstraints(
             int? requireExplicitPolicySkipCerts = null,
             int? inhibitPolicyMappingSkipCerts = null
-        ) {
+        )
+        {
             // RFC 5280 4.2.1.11
             //    id-ce-policyConstraints OBJECT IDENTIFIER ::=  { id-ce 36 }
             //    PolicyConstraints ::= SEQUENCE {
@@ -1118,7 +1125,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
         private static X509Extension BuildPolicyMappings(
             params (string IssuerDomainPolicy, string SubjectDomainPolicy)[] policyMappings
-        ) {
+        )
+        {
             //    PolicyMappings ::= SEQUENCE SIZE (1..MAX) OF SEQUENCE {
             //         issuerDomainPolicy      CertPolicyId,
             //         subjectDomainPolicy     CertPolicyId }
@@ -1146,7 +1154,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             X509Certificate2 intermediateCertificate,
             X509Certificate2 endEntityCertificate,
             X509ChainStatusFlags expectedFlags = X509ChainStatusFlags.NoError
-        ) {
+        )
+        {
             using (ChainHolder chainHolder = new ChainHolder())
             {
                 X509Chain chain = chainHolder.Chain;

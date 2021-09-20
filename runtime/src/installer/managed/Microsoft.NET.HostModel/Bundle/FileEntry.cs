@@ -37,7 +37,8 @@ namespace Microsoft.NET.HostModel.Bundle
             long size,
             long compressedSize,
             uint bundleMajorVersion
-        ) {
+        )
+        {
             BundleMajorVersion = bundleMajorVersion;
             Type = fileType;
             RelativePath = relativePath.Replace('\\', DirectorySeparatorChar);

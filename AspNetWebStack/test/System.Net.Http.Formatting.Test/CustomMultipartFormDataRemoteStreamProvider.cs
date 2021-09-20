@@ -26,7 +26,8 @@ namespace System.Net.Http
         public override RemoteStreamInfo GetRemoteStream(
             HttpContent parent,
             HttpContentHeaders headers
-        ) {
+        )
+        {
             string fileName = headers.ContentDisposition.FileName;
             return _isResultNull
               ? null

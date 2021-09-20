@@ -149,7 +149,8 @@ namespace System.Reflection.Metadata
         public static bool operator ==(
             MethodDebugInformationHandle left,
             MethodDebugInformationHandle right
-        ) {
+        )
+        {
             return left._rowId == right._rowId;
         }
 
@@ -172,7 +173,8 @@ namespace System.Reflection.Metadata
         public static bool operator !=(
             MethodDebugInformationHandle left,
             MethodDebugInformationHandle right
-        ) {
+        )
+        {
             return left._rowId != right._rowId;
         }
 
@@ -581,7 +583,8 @@ namespace System.Reflection.Metadata
         public static bool operator ==(
             CustomDebugInformationHandle left,
             CustomDebugInformationHandle right
-        ) {
+        )
+        {
             return left._rowId == right._rowId;
         }
 
@@ -604,7 +607,8 @@ namespace System.Reflection.Metadata
         public static bool operator !=(
             CustomDebugInformationHandle left,
             CustomDebugInformationHandle right
-        ) {
+        )
+        {
             return left._rowId != right._rowId;
         }
     }

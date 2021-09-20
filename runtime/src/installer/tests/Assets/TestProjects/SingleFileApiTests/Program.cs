@@ -22,7 +22,8 @@ namespace SingleFileApiTests
                                 StringSplitOptions.RemoveEmptyEntries
                                     | StringSplitOptions.TrimEntries
                             )
-                        ) {
+                        )
+                        {
                             if (!File.Exists(deps_file_path))
                             {
                                 Console.WriteLine(
@@ -79,7 +80,8 @@ namespace SingleFileApiTests
                             var assemblyPath in (
                                 (string)AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES")
                             ).Split(Path.PathSeparator)
-                        ) {
+                        )
+                        {
                             Console.WriteLine(assemblyPath);
                         }
                         break;

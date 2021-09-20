@@ -10,7 +10,8 @@ namespace System.Web.Mvc
             int minRequiredPasswordLength,
             int minRequiredNonAlphanumericCharacters,
             string passwordStrengthRegularExpression
-        ) {
+        )
+        {
             ErrorMessage = errorMessage;
             ValidationType = "password";
 

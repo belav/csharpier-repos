@@ -97,7 +97,8 @@ namespace Microsoft.CodeAnalysis.Host
                     AsynchronousOperationListenerProvider.NullListener,
                     backOffTimeSpanInMS,
                     CancellationToken.None
-                ) {
+                )
+            {
                 _owner = owner;
                 _gate = new SemaphoreSlim(0);
 

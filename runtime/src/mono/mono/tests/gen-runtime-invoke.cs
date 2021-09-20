@@ -192,7 +192,8 @@ public class Tests
         string retVal,
         string[] types,
         string[] values
-    ) {
+    )
+    {
         testid_gen++;
 
         string callee_name = "meth_" + testid_gen;

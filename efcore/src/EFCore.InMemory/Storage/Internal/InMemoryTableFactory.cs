@@ -37,7 +37,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
         public InMemoryTableFactory(
             ILoggingOptions loggingOptions,
             IInMemorySingletonOptions options
-        ) {
+        )
+        {
             Check.NotNull(loggingOptions, nameof(loggingOptions));
             Check.NotNull(options, nameof(options));
 

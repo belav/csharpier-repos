@@ -59,7 +59,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             ActiveStatementFlags flags,
             LinePositionSpan span,
             ManagedInstructionId instructionId
-        ) {
+        )
+        {
             Debug.Assert(ordinal >= 0);
             Debug.Assert(primaryDocumentOrdinal >= 0);
             Debug.Assert(!documentIds.IsDefaultOrEmpty);

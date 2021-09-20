@@ -44,7 +44,8 @@ namespace System.Text.Tests
             int codePage,
             EncoderFallback encoderFallback,
             DecoderFallback decoderFallback
-        ) {
+        )
+        {
             CustomEncoding encoding = new CustomEncoding(
                 codePage,
                 encoderFallback,
@@ -78,7 +79,8 @@ namespace System.Text.Tests
             int codePage,
             EncoderFallback encoderFallback,
             DecoderFallback decoderFallback
-        ) {
+        )
+        {
             if (encoderFallback is null && encoding.IsLatin1())
             {
                 Assert.True(encoding.EncoderFallback.IsLatin1BestFitFallback());

@@ -18,21 +18,23 @@ namespace Microsoft.CodeAnalysis.CSharp.CommandLine
             BuildPaths buildPaths,
             string[] args,
             IAnalyzerAssemblyLoader analyzerLoader
-        ) : base(
-            CSharpCommandLineParser.Default,
-            responseFile,
-            args,
-            buildPaths,
-            Environment.GetEnvironmentVariable("LIB"),
-            analyzerLoader
-        ) { }
+        )
+            : base(
+                CSharpCommandLineParser.Default,
+                responseFile,
+                args,
+                buildPaths,
+                Environment.GetEnvironmentVariable("LIB"),
+                analyzerLoader
+            ) { }
 
         internal static int Run(
             string[] args,
             BuildPaths buildPaths,
             TextWriter textWriter,
             IAnalyzerAssemblyLoader analyzerLoader
-        ) {
+        )
+        {
             FatalError.Handler = FailFast.OnFatalException;
 
             var responseFile = Path.Combine(

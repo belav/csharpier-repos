@@ -183,16 +183,15 @@ namespace System.Xml.Resolvers
         public XmlPreloadedResolver(XmlResolver? fallbackResolver)
             : this(fallbackResolver, XmlKnownDtds.All, null) { }
 
-        public XmlPreloadedResolver(
-            XmlResolver? fallbackResolver,
-            XmlKnownDtds preloadedDtds
-        ) : this(fallbackResolver, preloadedDtds, null) { }
+        public XmlPreloadedResolver(XmlResolver? fallbackResolver, XmlKnownDtds preloadedDtds)
+            : this(fallbackResolver, preloadedDtds, null) { }
 
         public XmlPreloadedResolver(
             XmlResolver? fallbackResolver,
             XmlKnownDtds preloadedDtds,
             IEqualityComparer<Uri>? uriComparer
-        ) {
+        )
+        {
             _fallbackResolver = fallbackResolver;
             _mappings = new Dictionary<Uri, PreloadedData>(16, uriComparer);
             _preloadedDtds = preloadedDtds;
@@ -219,14 +218,16 @@ namespace System.Xml.Resolvers
             if (
                 relativeUri != null
                 && relativeUri.StartsWith("-//", StringComparison.CurrentCulture)
-            ) {
+            )
+            {
                 // 1) XHTML 1.0 public IDs
                 // 2) To make FxCop happy we need to use StartsWith() overload that takes StringComparison ->
                 //   .StartsWith(string) is equal to .StartsWith(string, StringComparison.CurrentCulture);
                 if (
                     (_preloadedDtds & XmlKnownDtds.Xhtml10) != 0
                     && relativeUri.StartsWith("-//W3C//", StringComparison.CurrentCulture)
-                ) {
+                )
+                {
                     for (int i = 0; i < s_xhtml10_Dtd.Length; i++)
                     {
                         if (relativeUri == s_xhtml10_Dtd[i].publicId)
@@ -271,7 +272,8 @@ namespace System.Xml.Resolvers
                 ofObjectToReturn == null
                 || ofObjectToReturn == typeof(Stream)
                 || ofObjectToReturn == typeof(object)
-            ) {
+            )
+            {
                 return data.AsStream();
             }
             else if (ofObjectToReturn == typeof(TextReader))

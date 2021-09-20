@@ -91,7 +91,8 @@ namespace Microsoft.AspNetCore.Components.Reflection
                             writers.CaptureUnmatchedValuesPropertyName,
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         isCaptureUnmatchedValuesParameterSetExplicitly = true;
                     }
 
@@ -175,7 +176,8 @@ namespace Microsoft.AspNetCore.Components.Reflection
                 PropertySetter writer,
                 string parameterName,
                 object value
-            ) {
+            )
+            {
                 try
                 {
                     writer.SetValue(target, value);
@@ -199,7 +201,8 @@ namespace Microsoft.AspNetCore.Components.Reflection
         private static void ThrowForUnknownIncomingParameterName(
             [DynamicallyAccessedMembers(Component)] Type targetType,
             string parameterName
-        ) {
+        )
+        {
             // We know we're going to throw by this stage, so it doesn't matter that the following
             // reflection code will be slow. We're just trying to help developers see what they did wrong.
             var propertyInfo = targetType.GetProperty(parameterName, _bindablePropertyFlags);
@@ -208,7 +211,8 @@ namespace Microsoft.AspNetCore.Components.Reflection
                 if (
                     !propertyInfo.IsDefined(typeof(ParameterAttribute))
                     && !propertyInfo.IsDefined(typeof(CascadingParameterAttribute))
-                ) {
+                )
+                {
                     throw new InvalidOperationException(
                         $"Object of type '{targetType.FullName}' has a property matching the name '{parameterName}', "
                             + $"but it does not have [{nameof(ParameterAttribute)}] or [{nameof(CascadingParameterAttribute)}] applied."
@@ -235,7 +239,8 @@ namespace Microsoft.AspNetCore.Components.Reflection
         private static void ThrowForSettingCascadingParameterWithNonCascadingValue(
             Type targetType,
             string parameterName
-        ) {
+        )
+        {
             throw new InvalidOperationException(
                 $"Object of type '{targetType.FullName}' has a property matching the name '{parameterName}', "
                     + $"but it does not have [{nameof(ParameterAttribute)}] applied."
@@ -246,7 +251,8 @@ namespace Microsoft.AspNetCore.Components.Reflection
         private static void ThrowForSettingParameterWithCascadingValue(
             Type targetType,
             string parameterName
-        ) {
+        )
+        {
             throw new InvalidOperationException(
                 $"The property '{parameterName}' on component type '{targetType.FullName}' cannot be set "
                     + $"using a cascading value."
@@ -258,7 +264,8 @@ namespace Microsoft.AspNetCore.Components.Reflection
             Type targetType,
             string parameterName,
             Dictionary<string, object> unmatched
-        ) {
+        )
+        {
             throw new InvalidOperationException(
                 $"The property '{parameterName}' on component type '{targetType.FullName}' cannot be set explicitly "
                     + $"when also used to capture unmatched values. Unmatched values:"
@@ -270,7 +277,8 @@ namespace Microsoft.AspNetCore.Components.Reflection
         [DoesNotReturn]
         private static void ThrowForMultipleCaptureUnmatchedValuesParameters(
             [DynamicallyAccessedMembers(Component)] Type targetType
-        ) {
+        )
+        {
             // We don't care about perf here, we want to report an accurate and useful error.
             var propertyNames = targetType.GetProperties(_bindablePropertyFlags)
                 .Where(
@@ -293,7 +301,8 @@ namespace Microsoft.AspNetCore.Components.Reflection
         private static void ThrowForInvalidCaptureUnmatchedValuesParameterType(
             Type targetType,
             PropertyInfo propertyInfo
-        ) {
+        )
+        {
             throw new InvalidOperationException(
                 $"The property '{propertyInfo.Name}' on component type '{targetType.FullName}' cannot be used "
                     + $"with '{nameof(ParameterAttribute)}.{nameof(ParameterAttribute.CaptureUnmatchedValues)}' because it has the wrong type. "
@@ -335,7 +344,8 @@ namespace Microsoft.AspNetCore.Components.Reflection
                     if (
                         parameterAttribute != null
                         && (propertyInfo.SetMethod == null || !propertyInfo.SetMethod.IsPublic)
-                    ) {
+                    )
+                    {
                         throw new InvalidOperationException(
                             $"The type '{targetType.FullName}' declares a parameter matching the name '{propertyName}' that is not public. Parameters must be public."
                         );
@@ -371,7 +381,8 @@ namespace Microsoft.AspNetCore.Components.Reflection
                             !propertyInfo.PropertyType.IsAssignableFrom(
                                 typeof(Dictionary<string, object>)
                             )
-                        ) {
+                        )
+                        {
                             ThrowForInvalidCaptureUnmatchedValuesParameterType(
                                 targetType,
                                 propertyInfo
@@ -391,7 +402,8 @@ namespace Microsoft.AspNetCore.Components.Reflection
             public bool TryGetValue(
                 string parameterName,
                 [MaybeNullWhen(false)] out PropertySetter writer
-            ) {
+            )
+            {
                 // In intensive parameter-passing scenarios, one of the most expensive things we do is the
                 // lookup from parameterName to writer. Pre-5.0 that was because of the string hashing.
                 // To optimize this, we now have a cache in front of the lookup which is keyed by parameterName's

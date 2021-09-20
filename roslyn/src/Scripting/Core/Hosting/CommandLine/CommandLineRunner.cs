@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             CommonCompiler compiler,
             ScriptCompiler scriptCompiler,
             ObjectFormatter objectFormatter
-        ) {
+        )
+        {
             Debug.Assert(console != null);
             Debug.Assert(compiler != null);
             Debug.Assert(scriptCompiler != null);
@@ -166,7 +167,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             CommonMessageProvider messageProvider,
             List<DiagnosticInfo> diagnostics,
             bool emitDebugInformation
-        ) {
+        )
+        {
             var touchedFilesLoggerOpt =
                 (arguments.TouchedFilesPath != null) ? new TouchedFileLogger() : null;
 
@@ -181,7 +183,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                     messageProvider,
                     resolvedReferences
                 )
-            ) {
+            )
+            {
                 // can't resolve some references
                 return null;
             }
@@ -205,7 +208,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
         internal static MetadataReferenceResolver GetMetadataReferenceResolver(
             CommandLineArguments arguments,
             TouchedFileLogger loggerOpt
-        ) {
+        )
+        {
             return RuntimeMetadataReferenceResolver.CreateCurrentPlatformResolver(
                 arguments.ReferencePaths,
                 arguments.BaseDirectory,
@@ -220,7 +224,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
         internal static SourceReferenceResolver GetSourceReferenceResolver(
             CommandLineArguments arguments,
             TouchedFileLogger loggerOpt
-        ) {
+        )
+        {
             return new CommonCompiler.LoggingSourceFileResolver(
                 arguments.SourcePaths,
                 arguments.BaseDirectory,
@@ -234,7 +239,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             SourceText code,
             ErrorLogger errorLogger,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var globals = new CommandLineScriptGlobals(_console.Out, _objectFormatter);
             globals.Args.AddRange(_compiler.Arguments.ScriptArguments);
 
@@ -272,7 +278,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             ScriptOptions options,
             string initialScriptCodeOpt,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var globals = new InteractiveScriptGlobals(_console.Out, _objectFormatter);
             globals.Args.AddRange(_compiler.Arguments.ScriptArguments);
 
@@ -380,7 +387,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             ref ScriptOptions options,
             bool displayResult,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var diagnostics = newScript.Compile(cancellationToken);
             DisplayDiagnostics(diagnostics);
             if (diagnostics.HasAnyErrors())
@@ -417,7 +425,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
         private static ScriptOptions UpdateOptions(
             ScriptOptions options,
             InteractiveScriptGlobals globals
-        ) {
+        )
+        {
             var currentMetadataResolver =
                 (RuntimeMetadataReferenceResolver)options.MetadataResolver;
             var currentSourceResolver =
@@ -449,7 +458,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
 
                 if (
                     e is FileLoadException && e.InnerException is InteractiveAssemblyLoaderException
-                ) {
+                )
+                {
                     _console.Error.WriteLine(e.InnerException.Message);
                 }
                 else

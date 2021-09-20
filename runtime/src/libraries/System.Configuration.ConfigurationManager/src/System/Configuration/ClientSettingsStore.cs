@@ -37,7 +37,8 @@ namespace System.Configuration
             Configuration config,
             string sectionName,
             bool declare
-        ) {
+        )
+        {
             string fullSectionName = UserSettingsGroupPrefix + sectionName;
             ClientSettingsSection section = null;
 
@@ -119,7 +120,8 @@ namespace System.Configuration
             string configFileName,
             string sectionName,
             bool isUserScoped
-        ) {
+        )
+        {
             IDictionary settings = new Hashtable();
 
             if (isUserScoped && !ConfigurationManagerInternalFactory.Instance.SupportsUserConfig)
@@ -282,7 +284,8 @@ namespace System.Configuration
             public override void Init(
                 IInternalConfigRoot configRoot,
                 params object[] hostInitParams
-            ) {
+            )
+            {
                 Debug.Fail("Did not expect to get called here");
             }
 
@@ -296,7 +299,8 @@ namespace System.Configuration
                 out string locationConfigPath,
                 IInternalConfigRoot configRoot,
                 params object[] hostInitConfigurationParams
-            ) {
+            )
+            {
                 ConfigurationUserLevel userLevel =
                     (ConfigurationUserLevel)hostInitConfigurationParams[0];
                 Host = TypeUtil.CreateInstance<IInternalConfigHost>(
@@ -372,7 +376,8 @@ namespace System.Configuration
                 string streamName,
                 string templateStreamName,
                 ref object writeContext
-            ) {
+            )
+            {
                 // On .NET Framework we do a bunch of work here around ensuring permissions and quotas
                 return Host.OpenStreamForWrite(streamName, templateStreamName, ref writeContext);
             }
@@ -385,7 +390,8 @@ namespace System.Configuration
                 string streamName,
                 bool success,
                 object writeContext
-            ) {
+            )
+            {
                 if (
                     string.Equals(
                         streamName,
@@ -397,7 +403,8 @@ namespace System.Configuration
                         ConfigurationManagerInternalFactory.Instance.ExeRoamingConfigPath,
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     Host.WriteCompleted(streamName, success, writeContext, true);
                 }
                 else

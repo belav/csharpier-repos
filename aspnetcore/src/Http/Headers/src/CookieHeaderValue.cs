@@ -123,7 +123,8 @@ namespace Microsoft.Net.Http.Headers
         public static bool TryParse(
             StringSegment input,
             [NotNullWhen(true)] out CookieHeaderValue? parsedValue
-        ) {
+        )
+        {
             var index = 0;
             return SingleValueParser.TryParseValue(input, ref index, out parsedValue!);
         }
@@ -157,7 +158,8 @@ namespace Microsoft.Net.Http.Headers
         public static bool TryParseList(
             IList<string>? inputs,
             [NotNullWhen(true)] out IList<CookieHeaderValue>? parsedValues
-        ) {
+        )
+        {
             return MultipleValueParser.TryParseValues(inputs, out parsedValues);
         }
 
@@ -170,7 +172,8 @@ namespace Microsoft.Net.Http.Headers
         public static bool TryParseStrictList(
             IList<string>? inputs,
             [NotNullWhen(true)] out IList<CookieHeaderValue>? parsedValues
-        ) {
+        )
+        {
             return MultipleValueParser.TryParseStrictValues(inputs, out parsedValues);
         }
 

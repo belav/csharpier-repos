@@ -83,7 +83,8 @@ namespace Microsoft.CodeAnalysis.NavigationBar
             string? containerName,
             SymbolKey? eventSymbolKey,
             SymbolKey? methodToReplicateSymbolKey
-        ) {
+        )
+        {
             Kind = kind;
             Text = text;
             Glyph = glyph;

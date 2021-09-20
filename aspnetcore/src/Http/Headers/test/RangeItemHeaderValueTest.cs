@@ -151,7 +151,8 @@ namespace Microsoft.Net.Http.Headers
         private static void CheckValidTryParse(
             string input,
             params Tuple<long?, long?>[] expectedRanges
-        ) {
+        )
+        {
             RangeHeaderValue result;
             Assert.True(RangeHeaderValue.TryParse("byte=" + input, out result), input);
 

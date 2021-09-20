@@ -94,7 +94,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         private static StringBuilder AppendSizeOrMax(
             this StringBuilder builder,
             DbParameter parameter
-        ) {
+        )
+        {
             if (parameter.Size > 0)
             {
                 builder.AppendSize(parameter);
@@ -110,7 +111,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         private static StringBuilder AppendPrecision(
             this StringBuilder builder,
             DbParameter parameter
-        ) {
+        )
+        {
             if (parameter.Precision > 0)
             {
                 builder.Append('(')
@@ -124,7 +126,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         private static StringBuilder AppendPrecisionAndScale(
             this StringBuilder builder,
             DbParameter parameter
-        ) {
+        )
+        {
             if (parameter.Precision > 0 && parameter.Scale > 0)
             {
                 builder.Append('(')

@@ -44,7 +44,8 @@ namespace Internal.Cryptography
                 string hashAlgorithmId,
                 ReadOnlySpan<byte> source,
                 Span<byte> destination
-            ) {
+            )
+            {
                 Interop.AppleCrypto.PAL_HashAlgorithm algorithm = HashAlgorithmToPal(
                     hashAlgorithmId
                 );
@@ -85,7 +86,8 @@ namespace Internal.Cryptography
             internal AppleHmacProvider(
                 Interop.AppleCrypto.PAL_HashAlgorithm algorithm,
                 ReadOnlySpan<byte> key
-            ) {
+            )
+            {
                 _key = key.ToArray();
                 int hashSizeInBytes = 0;
                 _ctx = Interop.AppleCrypto.HmacCreate(algorithm, ref hashSizeInBytes);

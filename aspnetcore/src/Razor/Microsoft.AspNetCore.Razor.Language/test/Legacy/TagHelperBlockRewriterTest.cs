@@ -152,7 +152,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         public static TagHelperDescriptor[] GetTagStructureCompatibilityDescriptors(
             TagStructure structure1,
             TagStructure structure2
-        ) {
+        )
+        {
             var descriptors = new TagHelperDescriptor[]
             {
                 TagHelperDescriptorBuilder.Create("InputTagHelper1", "SomeAssembly")
@@ -2640,7 +2641,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 bool allowConditionalDataDashAttributesInComponents = false,
                 bool allowCSharpInMarkupAttributeArea = true,
                 bool allowNullableForgivenessOperator = false
-            ) {
+            )
+            {
                 AllowMinimizedBooleanTagHelperAttributes = allowMinimizedBooleanTagHelperAttributes;
                 AllowHtmlCommentsInTagHelpers = allowHtmlCommentsInTagHelper;
                 AllowComponentFileKind = allowComponentFileKind;

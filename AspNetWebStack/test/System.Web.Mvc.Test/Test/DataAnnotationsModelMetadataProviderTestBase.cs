@@ -304,7 +304,8 @@ namespace System.Web.Mvc.Test
         public void DataTypeAttributeSetsHasNonDefaultEditFormat(
             string propertyName,
             bool expectedNonDefaultEditFormat
-        ) {
+        )
+        {
             // Arrange
             var provider = MakeProvider();
 
@@ -622,7 +623,8 @@ namespace System.Web.Mvc.Test
         public void DisplayFormatSetsHasNonDefaultEditFormat(
             string propertyName,
             bool expectedHasNonDefaultEditFormat
-        ) {
+        )
+        {
             // Arrange
             AssociatedMetadataProvider provider = MakeProvider();
 

@@ -90,7 +90,8 @@ namespace Microsoft.AspNetCore.Mvc
                 if (
                     !string.IsNullOrEmpty(requestContentType)
                     && !IsSubsetOfAnyContentType(requestContentType)
-                ) {
+                )
+                {
                     context.Result = new UnsupportedMediaTypeResult();
                 }
             }
@@ -193,7 +194,8 @@ namespace Microsoft.AspNetCore.Mvc
                             constraint is IConsumesActionConstraint
                             && constraint.Accept(tempContext)
                     )
-                ) {
+                )
+                {
                     // There is someone later in the chain which can handle the request.
                     // end the process here.
                     return false;

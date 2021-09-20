@@ -18,7 +18,8 @@ namespace MS.Internal.Xml.Linq.ComponentModel
         public override ICustomTypeDescriptor GetTypeDescriptor(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type,
             object instance
-        ) {
+        )
+        {
             return new XTypeDescriptor<T>(base.GetTypeDescriptor(type, instance));
         }
     }
@@ -227,7 +228,8 @@ namespace MS.Internal.Xml.Linq.ComponentModel
                         && _value.element != e
                         && _value.name != null
                         && (_value.name == e.Name || _value.name == _changeState)
-                    ) {
+                    )
+                    {
                         _changeState = null;
                         OnValueChanged(_value.element, EventArgs.Empty);
                     }
@@ -278,7 +280,8 @@ namespace MS.Internal.Xml.Linq.ComponentModel
                         && _value.element == e.Parent
                         && _value.name == e.Name
                         && _value.element.Element(_value.name) == e
-                    ) {
+                    )
+                    {
                         OnValueChanged(_value.element, EventArgs.Empty);
                     }
                     break;
@@ -298,7 +301,8 @@ namespace MS.Internal.Xml.Linq.ComponentModel
                             _value.element == e.Parent
                             && _value.name == e.Name
                             && _value.element.Element(_value.name) == e
-                        ) {
+                        )
+                        {
                             OnValueChanged(_value.element, EventArgs.Empty);
                         }
                         else if (_changeState == e)
@@ -361,7 +365,8 @@ namespace MS.Internal.Xml.Linq.ComponentModel
                         e != null
                         && _value.element == e.Parent
                         && (_value.name == e.Name || _value.name == null)
-                    ) {
+                    )
+                    {
                         OnValueChanged(_value.element, EventArgs.Empty);
                     }
                     break;
@@ -371,7 +376,8 @@ namespace MS.Internal.Xml.Linq.ComponentModel
                         e != null
                         && _value.element == (_changeState as XContainer)
                         && (_value.name == e.Name || _value.name == null)
-                    ) {
+                    )
+                    {
                         _changeState = null;
                         OnValueChanged(_value.element, EventArgs.Empty);
                     }
@@ -383,7 +389,8 @@ namespace MS.Internal.Xml.Linq.ComponentModel
                         && _value.element == e.Parent
                         && _value.name != null
                         && (_value.name == e.Name || _value.name == (_changeState as XName))
-                    ) {
+                    )
+                    {
                         _changeState = null;
                         OnValueChanged(_value.element, EventArgs.Empty);
                     }
@@ -530,7 +537,8 @@ namespace MS.Internal.Xml.Linq.ComponentModel
             Func<XElement, XName, IEnumerable<T>> func,
             XElement element,
             XName name
-        ) {
+        )
+        {
             if (func == null)
                 throw new ArgumentNullException(nameof(func));
             if (element == null)

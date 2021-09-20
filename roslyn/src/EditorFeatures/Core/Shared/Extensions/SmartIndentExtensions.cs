@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             this Indentation.IndentationResult result,
             ITextView textView,
             ITextSnapshotLine lineToBeIndented
-        ) {
+        )
+        {
             var position = new SnapshotPoint(lineToBeIndented.Snapshot, result.BasePosition);
             var pointInSurfaceSnapshot = textView.BufferGraph.MapUpToSnapshot(
                 position,

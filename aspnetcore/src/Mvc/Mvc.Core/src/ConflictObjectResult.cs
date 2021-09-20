@@ -29,9 +29,8 @@ namespace Microsoft.AspNetCore.Mvc
         /// Creates a new <see cref="ConflictObjectResult"/> instance.
         /// </summary>
         /// <param name="modelState"><see cref="ModelStateDictionary"/> containing the validation errors.</param>
-        public ConflictObjectResult(
-            [ActionResultObjectValue] ModelStateDictionary modelState
-        ) : base(new SerializableError(modelState))
+        public ConflictObjectResult([ActionResultObjectValue] ModelStateDictionary modelState)
+            : base(new SerializableError(modelState))
         {
             if (modelState == null)
             {

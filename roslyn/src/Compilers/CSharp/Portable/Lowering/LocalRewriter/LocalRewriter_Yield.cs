@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         && _factory.CurrentFunction?.IsAsync == false
                     )
                 )
-            ) {
+            )
+            {
                 result = _instrumenter.InstrumentYieldBreakStatement(node, result);
             }
 

@@ -66,7 +66,8 @@ namespace System.Data.ProviderBase
             bool gettingData,
             DataColumn? parentChapterColumn,
             object? parentChapterValue
-        ) {
+        )
+        {
             Debug.Assert(null != adapter, nameof(adapter));
             Debug.Assert(null != dataReader, nameof(dataReader));
             Debug.Assert(0 < dataReader.FieldCount, "FieldCount");
@@ -352,7 +353,8 @@ namespace System.Data.ProviderBase
                         if (
                             (null == xml)
                             && (_readerDataValues[i] is System.Data.SqlTypes.SqlString x)
-                        ) {
+                        )
+                        {
                             if (!x.IsNull)
                             {
                                 xml = x.Value;
@@ -644,7 +646,8 @@ namespace System.Data.ProviderBase
             bool gettingData,
             DataColumn? parentChapterColumn,
             object? chapterValue
-        ) {
+        )
+        {
             Debug.Assert(_dataTable != null);
             Debug.Assert(_fieldNames != null);
             Debug.Assert(_tableMapping != null);
@@ -873,7 +876,8 @@ namespace System.Data.ProviderBase
             bool gettingData,
             DataColumn? parentChapterColumn,
             object? chapterValue
-        ) {
+        )
+        {
             Debug.Assert(_dataTable != null);
             Debug.Assert(_schemaTable != null);
             Debug.Assert(_fieldNames != null);
@@ -1063,7 +1067,8 @@ namespace System.Data.ProviderBase
                         {
                             if (
                                 (basetable != commonBaseTable) && (!string.IsNullOrEmpty(basetable))
-                            ) {
+                            )
+                            {
                                 if (null == commonBaseTable)
                                 {
                                     commonBaseTable = basetable;
@@ -1079,7 +1084,8 @@ namespace System.Data.ProviderBase
                             if (
                                 schemaRow.IsAutoIncrement
                                 && DataColumn.IsAutoIncrementType(fieldType)
-                            ) {
+                            )
+                            {
                                 // CONSIDER: use T-SQL "IDENT_INCR('table_or_view')" and "IDENT_SEED('table_or_view')"
                                 //           functions to obtain the actual increment and seed values
                                 dataColumn.AutoIncrement = true;
@@ -1103,7 +1109,8 @@ namespace System.Data.ProviderBase
                             }
                             if (
                                 !schemaRow.AllowDBNull && (!schemaRow.IsReadOnly || schemaRow.IsKey)
-                            ) {
+                            )
+                            {
                                 dataColumn.AllowDBNull = false;
                             }
 
@@ -1129,7 +1136,8 @@ namespace System.Data.ProviderBase
                             if (
                                 fieldType == typeof(string)
                                 || (fieldType == typeof(SqlTypes.SqlString))
-                            ) {
+                            )
+                            {
                                 // schemaRow.Size is count of characters for string columns, count of bytes otherwise
                                 dataColumn.MaxLength = schemaRow.Size;
                             }
@@ -1252,7 +1260,8 @@ namespace System.Data.ProviderBase
                         !commonFromMultiTable
                         && !string.IsNullOrEmpty(commonBaseTable)
                         && string.IsNullOrEmpty(_dataTable.TableName)
-                    ) {
+                    )
+                    {
                         _dataTable.TableName = commonBaseTable;
                     }
                     if (gettingData)
@@ -1393,7 +1402,8 @@ namespace System.Data.ProviderBase
             DataColumnCollection columnCollection,
             DataColumn? chapterColumn,
             object? chapterValue
-        ) {
+        )
+        {
             object[] dataValues = new object[count];
 
             if (null == _indexMap)

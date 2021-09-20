@@ -218,7 +218,8 @@ namespace Microsoft.AspNetCore.Http
                             CultureInfo.InvariantCulture,
                             out portNumber
                         )
-                    ) {
+                    )
+                    {
                         hasSpecifiedPort = true;
                         host = address.Substring(
                             schemeDelimiterEnd,

@@ -14,7 +14,8 @@ namespace Test.Cryptography
             this SymmetricAlgorithm alg,
             byte[] plainText,
             int blockSizeMultipler = 1
-        ) {
+        )
+        {
             using (ICryptoTransform encryptor = alg.CreateEncryptor())
             {
                 return encryptor.Transform(plainText, blockSizeMultipler);
@@ -25,7 +26,8 @@ namespace Test.Cryptography
             this SymmetricAlgorithm alg,
             byte[] cipher,
             int blockSizeMultipler = 1
-        ) {
+        )
+        {
             using (ICryptoTransform decryptor = alg.CreateDecryptor())
             {
                 return decryptor.Transform(cipher, blockSizeMultipler);
@@ -36,7 +38,8 @@ namespace Test.Cryptography
             this ICryptoTransform transform,
             byte[] input,
             int blockSizeMultipler = 1
-        ) {
+        )
+        {
             List<byte> output = new List<byte>(input.Length);
             int blockSize = transform.InputBlockSize * blockSizeMultipler;
             for (int i = 0; i <= input.Length; i += blockSize)

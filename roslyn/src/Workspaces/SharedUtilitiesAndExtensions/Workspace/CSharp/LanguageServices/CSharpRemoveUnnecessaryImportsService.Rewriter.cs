@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryImports
                 ISet<UsingDirectiveSyntax> usingsToRemove,
                 out SyntaxList<UsingDirectiveSyntax> finalUsings,
                 out SyntaxTriviaList finalTrivia
-            ) {
+            )
+            {
                 var currentUsings = new List<UsingDirectiveSyntax>(usings);
 
                 finalTrivia = default;
@@ -102,7 +103,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryImports
             private ISet<UsingDirectiveSyntax> GetUsingsToRemove(
                 SyntaxList<UsingDirectiveSyntax> oldUsings,
                 SyntaxList<UsingDirectiveSyntax> newUsings
-            ) {
+            )
+            {
                 Debug.Assert(oldUsings.Count == newUsings.Count);
 
                 var result = new HashSet<UsingDirectiveSyntax>();
@@ -150,7 +152,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryImports
                     finalUsings.Count == 0
                     && resultCompilationUnit.Externs.Count == 0
                     && resultCompilationUnit.Members.Count >= 1
-                ) {
+                )
+                {
                     // We've removed all the usings and now the first thing in the namespace is a
                     // type.  In this case, remove any newlines preceding the type.
                     var firstToken = resultCompilationUnit.GetFirstToken();
@@ -199,7 +202,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryImports
                     finalUsings.Count == 0
                     && resultNamespace.Externs.Count == 0
                     && resultNamespace.Members.Count >= 1
-                ) {
+                )
+                {
                     // We've removed all the usings and now the first thing in the namespace is a
                     // type.  In this case, remove any newlines preceding the type.
                     var firstToken = resultNamespace.Members.First().GetFirstToken();

@@ -554,7 +554,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""City""] = @__city_0))"
         [ConditionalTheory(Skip = "Issue #17246")]
         public override async Task Where_method_call_nullable_type_closure_via_query_cache(
             bool async
-        ) {
+        )
+        {
             await base.Where_method_call_nullable_type_closure_via_query_cache(async);
 
             AssertSql(
@@ -575,7 +576,8 @@ WHERE ((c[""Discriminator""] = ""Employee"") AND (c[""ReportsTo""] = @__p_0))"
         [ConditionalTheory(Skip = "Issue #17246")]
         public override async Task Where_method_call_nullable_type_reverse_closure_via_query_cache(
             bool async
-        ) {
+        )
+        {
             await base.Where_method_call_nullable_type_reverse_closure_via_query_cache(async);
 
             AssertSql(
@@ -747,7 +749,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""City""] = @__InstanceField
 
         public override async Task Where_new_instance_field_access_closure_via_query_cache(
             bool async
-        ) {
+        )
+        {
             await base.Where_new_instance_field_access_closure_via_query_cache(async);
 
             AssertSql(
@@ -794,7 +797,8 @@ WHERE ((c[""Discriminator""] = ""Employee"") AND (c[""ReportsTo""] = @__p_0))"
         [ConditionalTheory(Skip = "Issue #17246")]
         public override async Task Where_simple_closure_via_query_cache_nullable_type_reverse(
             bool async
-        ) {
+        )
+        {
             await base.Where_simple_closure_via_query_cache_nullable_type_reverse(async);
 
             AssertSql(
@@ -945,7 +949,8 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         [ConditionalTheory(Skip = "Issue #17246")]
         public override async Task Where_client_deep_inside_predicate_and_server_top_level(
             bool async
-        ) {
+        )
+        {
             await base.Where_client_deep_inside_predicate_and_server_top_level(async);
 
             AssertSql(
@@ -980,7 +985,8 @@ WHERE ((c[""Discriminator""] = ""Employee"") AND (c[""EmployeeID""] = 1))"
         [ConditionalTheory(Skip = "Issue #17246")]
         public override async Task Where_equals_using_object_overload_on_mismatched_types(
             bool async
-        ) {
+        )
+        {
             await base.Where_equals_using_object_overload_on_mismatched_types(async);
 
             AssertSql(
@@ -1018,7 +1024,8 @@ WHERE (c[""Discriminator""] = ""Employee"")"
         [ConditionalTheory(Skip = "Issue #17246")]
         public override async Task Where_equals_on_mismatched_types_nullable_long_nullable_int(
             bool async
-        ) {
+        )
+        {
             await base.Where_equals_on_mismatched_types_nullable_long_nullable_int(async);
 
             AssertSql(
@@ -1596,7 +1603,8 @@ WHERE ((c[""Discriminator""] = ""Product"") AND (NOT(c[""Discontinued""]) = NOT(
 
         public override async Task Where_negated_boolean_expression_compared_to_another_negated_boolean_expression(
             bool async
-        ) {
+        )
+        {
             await base.Where_negated_boolean_expression_compared_to_another_negated_boolean_expression(
                 async
             );
@@ -1647,7 +1655,8 @@ WHERE ((c[""Discriminator""] = ""Product"") AND ((c[""ProductID""] > 50) != @__p
 
         public override async Task Where_bool_member_and_parameter_compared_to_binary_expression_nested(
             bool async
-        ) {
+        )
+        {
             await base.Where_bool_member_and_parameter_compared_to_binary_expression_nested(async);
 
             AssertSql(
@@ -1912,7 +1921,8 @@ WHERE ((c[""Discriminator""] = ""Product"") AND (c[""UnitsInStock""] < 20))"
 
         public override async Task Where_ternary_boolean_condition_with_another_condition(
             bool async
-        ) {
+        )
+        {
             await base.Where_ternary_boolean_condition_with_another_condition(async);
 
             AssertSql(
@@ -1926,7 +1936,8 @@ WHERE ((c[""Discriminator""] = ""Product"") AND ((c[""ProductID""] < @__productI
 
         public override async Task Where_ternary_boolean_condition_with_false_as_result_true(
             bool async
-        ) {
+        )
+        {
             await base.Where_ternary_boolean_condition_with_false_as_result_true(async);
 
             AssertSql(
@@ -1938,7 +1949,8 @@ WHERE ((c[""Discriminator""] = ""Product"") AND (c[""UnitsInStock""] >= 20))"
 
         public override async Task Where_ternary_boolean_condition_with_false_as_result_false(
             bool async
-        ) {
+        )
+        {
             await base.Where_ternary_boolean_condition_with_false_as_result_false(async);
 
             AssertSql(
@@ -2027,7 +2039,8 @@ WHERE (c[""Discriminator""] = ""Customer"")"
 
         public override async Task Where_compare_tuple_create_constructed_multi_value_equal(
             bool async
-        ) {
+        )
+        {
             await base.Where_compare_tuple_create_constructed_multi_value_equal(async);
 
             AssertSql(
@@ -2039,7 +2052,8 @@ WHERE (c[""Discriminator""] = ""Customer"")"
 
         public override async Task Where_compare_tuple_create_constructed_multi_value_not_equal(
             bool async
-        ) {
+        )
+        {
             await base.Where_compare_tuple_create_constructed_multi_value_not_equal(async);
 
             AssertSql(
@@ -2278,7 +2292,8 @@ WHERE ((c[""Discriminator""] = ""Product"") AND (true ? false : true))"
         [ConditionalTheory(Skip = "Issue#17246")]
         public override Task Filter_non_nullable_value_after_FirstOrDefault_on_empty_collection(
             bool async
-        ) {
+        )
+        {
             return base.Filter_non_nullable_value_after_FirstOrDefault_on_empty_collection(async);
         }
 
@@ -2297,7 +2312,8 @@ WHERE ((c[""Discriminator""] = ""Product"") AND (true ? false : true))"
         [ConditionalTheory(Skip = "Issue #17246")]
         public override async Task Using_same_parameter_twice_in_query_generates_one_sql_parameter(
             bool async
-        ) {
+        )
+        {
             await base.Using_same_parameter_twice_in_query_generates_one_sql_parameter(async);
 
             AssertSql(" ");

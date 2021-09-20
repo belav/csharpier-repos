@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             string text,
             CSharpParseOptions? options,
             params DiagnosticDescription[] expectedErrors
-        ) {
+        )
+        {
             var tree = SyntaxFactory.ParseSyntaxTree(text, options);
             UsingNode(text, tree.GetCompilationUnitRoot(), expectedErrors);
             return tree;
@@ -2320,7 +2321,8 @@ class C(int X, int Y)
             [CombinatorialValues(true, false)] bool withParameters,
             [CombinatorialValues(true, false)] bool withBaseArguments,
             [CombinatorialValues(true, false)] bool withBody
-        ) {
+        )
+        {
             var text =
                 typeKeyword
                 + " C"

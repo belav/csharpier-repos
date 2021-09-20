@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SplitComment
             Action callback,
             bool enabled,
             bool useTabs
-        ) {
+        )
+        {
             if (useTabs)
             {
                 // Make sure the tests seem well formed (i.e. no one accidentally replaced the tabs in them with spaces.
@@ -82,7 +83,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SplitComment
                     new ReturnKeyCommandArgs(view, view.TextBuffer),
                     TestCommandExecutionContext.Create()
                 )
-            ) {
+            )
+            {
                 callback();
             }
 
@@ -116,7 +118,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SplitComment
             string expectedOutputMarkup,
             bool enabled = true,
             bool useTabs = false
-        ) {
+        )
+        {
             TestWorker(
                 inputMarkup,
                 expectedOutputMarkup,

@@ -1513,7 +1513,8 @@ namespace System.Threading.Tasks.Tests
                     ParallelLoopState state,
                     long index,
                     long local
-                ) {
+                )
+                {
                     return local + index;
                 },
                 delegate(long local)
@@ -2132,7 +2133,8 @@ namespace System.Threading.Tasks.Tests
             bool gotCancellationException,
             bool reportedAsCompleted,
             int actuallyCompletedCount
-        ) {
+        )
+        {
             Assert.Equal(reportedAsCompleted, !gotCancellationException);
             if (reportedAsCompleted)
             {
@@ -2369,7 +2371,8 @@ namespace System.Threading.Tasks.Tests
 
             private static IEnumerable<TSource> DropIndices(
                 IEnumerable<KeyValuePair<long, TSource>> source
-            ) {
+            )
+            {
                 foreach (KeyValuePair<long, TSource> pair in source)
                 {
                     yield return pair.Value;
@@ -2378,7 +2381,8 @@ namespace System.Threading.Tasks.Tests
 
             private static IEnumerator<TSource> DropIndices(
                 IEnumerator<KeyValuePair<long, TSource>> source
-            ) {
+            )
+            {
                 while (source.MoveNext())
                 {
                     yield return source.Current.Value;
@@ -2395,7 +2399,8 @@ namespace System.Threading.Tasks.Tests
             Action action,
             CancellationToken token,
             string message
-        ) {
+        )
+        {
             OperationCanceledException operationCanceledEx =
                 Assert.Throws<OperationCanceledException>(action);
 

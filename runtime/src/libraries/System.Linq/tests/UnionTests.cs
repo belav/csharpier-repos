@@ -560,7 +560,8 @@ namespace System.Linq.Tests
             Func<TSource, TKey> keySelector,
             IEqualityComparer<TKey>? comparer,
             IEnumerable<TSource> expected
-        ) {
+        )
+        {
             Assert.Equal(expected, first.UnionBy(second, keySelector, comparer));
         }
 
@@ -572,7 +573,8 @@ namespace System.Linq.Tests
             Func<TSource, TKey> keySelector,
             IEqualityComparer<TKey>? comparer,
             IEnumerable<TSource> expected
-        ) {
+        )
+        {
             Assert.Equal(
                 expected,
                 first.RunOnce().UnionBy(second.RunOnce(), keySelector, comparer)

@@ -102,7 +102,8 @@ namespace Microsoft.AspNetCore.Mvc
         public void ProducesAttribute_UnParsableContentType_Throws(
             string content,
             string invalidContentType
-        ) {
+        )
+        {
             // Act
             var contentTypes = content.Split(',')
                 .Select(contentType => contentType.Trim())
@@ -132,7 +133,8 @@ namespace Microsoft.AspNetCore.Mvc
         public void ProducesAttribute_InvalidContentType_Throws(
             string content,
             string invalidContentType
-        ) {
+        )
+        {
             // Act
             var contentTypes = content.Split(',')
                 .Select(contentType => contentType.Trim())
@@ -175,7 +177,8 @@ namespace Microsoft.AspNetCore.Mvc
 
         private static ResultExecutedContext CreateResultExecutedContext(
             ResultExecutingContext context
-        ) {
+        )
+        {
             return new ResultExecutedContext(
                 context,
                 context.Filters,
@@ -186,7 +189,8 @@ namespace Microsoft.AspNetCore.Mvc
 
         private static ResultExecutingContext CreateResultExecutingContext(
             IFilterMetadata[] filters
-        ) {
+        )
+        {
             return new ResultExecutingContext(
                 CreateActionContext(),
                 filters,

@@ -62,7 +62,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     },
                     new TestServiceContext(LoggerFactory)
                 )
-            ) {
+            )
+            {
                 port = server.Port;
 
                 using var connection = server.CreateConnection();
@@ -199,7 +200,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         listenOptions.Protocols = HttpProtocols.Http2;
                     }
                 )
-            ) {
+            )
+            {
                 port = server.Port;
 
                 using var connection = server.CreateConnection();
@@ -354,7 +356,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         listenOptions.UseHttps(_x509Certificate2);
                     }
                 )
-            ) {
+            )
+            {
                 port = server.Port;
 
                 using var connection = server.CreateConnection();
@@ -479,7 +482,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         );
                     }
                 )
-            ) {
+            )
+            {
                 port = server.Port;
 
                 using var connection = server.CreateConnection();

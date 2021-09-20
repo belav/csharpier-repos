@@ -60,7 +60,8 @@ namespace System.IO.Pipelines
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return WriteCoreAsync(buffer.AsMemory(offset, count), cancellationToken).AsTask();
         }
 
@@ -68,7 +69,8 @@ namespace System.IO.Pipelines
         public override ValueTask WriteAsync(
             ReadOnlyMemory<byte> source,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             return WriteCoreAsync(source, cancellationToken);
         }
 #endif
@@ -76,7 +78,8 @@ namespace System.IO.Pipelines
         private ValueTask WriteCoreAsync(
             ReadOnlyMemory<byte> source,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (cancellationToken.IsCancellationRequested)
             {
                 return new ValueTask(Task.FromCanceled(cancellationToken));

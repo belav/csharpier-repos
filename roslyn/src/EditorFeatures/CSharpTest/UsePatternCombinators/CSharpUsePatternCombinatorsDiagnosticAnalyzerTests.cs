@@ -361,7 +361,8 @@ public class C
         [InlineData("||")]
         public async Task TestMissingInPropertyAccess_EnumCheckAndNullCheckOnOtherType(
             string logicalOperator
-        ) {
+        )
+        {
             await TestMissingAsync(
                 $@"using System.Diagnostics;
 

@@ -61,7 +61,8 @@ namespace System.Web.Http.Tracing.Tracers
             Type type,
             IEnumerable<MediaTypeFormatter> formatters,
             IFormatterLogger formatterLogger
-        ) {
+        )
+        {
             // Intercept this method solely to wrap formatters with request-aware formatter tracers
             // There is no other interception point where a request and a formatter are paired.
             return _innerBinding.ReadContentAsync(
@@ -78,7 +79,8 @@ namespace System.Web.Http.Tracing.Tracers
             IEnumerable<MediaTypeFormatter> formatters,
             IFormatterLogger formatterLogger,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _innerBinding.ReadContentAsync(
                 request,
                 type,
@@ -92,7 +94,8 @@ namespace System.Web.Http.Tracing.Tracers
             ModelMetadataProvider metadataProvider,
             HttpActionContext actionContext,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return _traceWriter.TraceBeginEndAsync(
                 actionContext.Request,
                 TraceCategories.ModelBindingCategory,
@@ -133,7 +136,8 @@ namespace System.Web.Http.Tracing.Tracers
         private IEnumerable<MediaTypeFormatter> CreateFormatterTracers(
             HttpRequestMessage request,
             IEnumerable<MediaTypeFormatter> formatters
-        ) {
+        )
+        {
             List<MediaTypeFormatter> formatterTracers = new List<MediaTypeFormatter>();
             foreach (MediaTypeFormatter formatter in formatters)
             {

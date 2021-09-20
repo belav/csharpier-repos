@@ -83,7 +83,8 @@ namespace System.Security.Cryptography.Xml.Tests
             Transform transform,
             Encoding encoding = null,
             XmlResolver resolver = null
-        ) {
+        )
+        {
             if (string.IsNullOrWhiteSpace(inputXml))
             {
                 throw new ArgumentException(
@@ -114,7 +115,8 @@ namespace System.Security.Cryptography.Xml.Tests
                         XmlResolver = resolver
                     }
                 )
-            ) {
+            )
+            {
                 doc.Load(reader);
                 transform.LoadInput(doc);
                 return StreamToString((Stream)transform.GetOutput(), actualEncoding);
@@ -195,7 +197,8 @@ namespace System.Security.Cryptography.Xml.Tests
         /// <returns></returns>
         public static IEnumerable<SymmetricAlgorithmFactory> GetSymmetricAlgorithms(
             bool skipDes = false
-        ) {
+        )
+        {
             if (!skipDes)
             {
                 yield return new SymmetricAlgorithmFactory("DES", () => DES.Create());
@@ -236,7 +239,8 @@ namespace System.Security.Cryptography.Xml.Tests
         {
             using (
                 Stream stream = typeof(TestHelpers).Assembly.GetManifestResourceStream(resourceName)
-            ) {
+            )
+            {
                 long length = stream.Length;
                 byte[] buffer = new byte[length];
                 stream.Read(buffer, 0, (int)length);

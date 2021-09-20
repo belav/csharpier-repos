@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             INamedTypeSymbol enumType,
             SpecialType underlyingSpecialType,
             object constantValue
-        ) {
+        )
+        {
             var expression = ExpressionGenerator.GenerateNonEnumValueExpression(
                 enumType.EnumUnderlyingType,
                 constantValue,

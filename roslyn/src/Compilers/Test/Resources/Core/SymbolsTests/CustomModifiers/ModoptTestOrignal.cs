@@ -20,7 +20,8 @@ namespace Metadata
             t,
             byte /*modopt*/
             v
-        ) {
+        )
+        {
             return 22;
         }
         // 2
@@ -29,7 +30,8 @@ namespace Metadata
             byte /*modopt*/
             t,
             byte v
-        ) {
+        )
+        {
             return 33;
         }
 

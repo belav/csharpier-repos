@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool getSymbol,
             ArrayBuilder<DeclarationInfo> builder,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ComputeDeclarations(
                 model,
                 associatedSymbol: null,
@@ -46,7 +47,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ArrayBuilder<DeclarationInfo> builder,
             CancellationToken cancellationToken,
             int? levelsToCompute = null
-        ) {
+        )
+        {
             ComputeDeclarations(
                 model,
                 associatedSymbol,
@@ -78,7 +80,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ArrayBuilder<DeclarationInfo> builder,
             int? levelsToCompute,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             if (shouldSkip(node, levelsToCompute))
@@ -146,7 +149,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         if (
                             recordDeclaration.BaseList?.Types.FirstOrDefault()
                             is PrimaryConstructorBaseTypeSyntax initializer
-                        ) {
+                        )
+                        {
                             codeBlocks = codeBlocks.Concat(initializer);
                         }
 
@@ -433,7 +437,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (
                         node is MethodDeclarationSyntax methodDecl
                         && methodDecl.TypeParameterList != null
-                    ) {
+                    )
+                    {
                         codeBlocks = codeBlocks.Concat(
                             GetTypeParameterListAttributes(methodDecl.TypeParameterList)
                         );
@@ -502,7 +507,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private static IEnumerable<SyntaxNode> GetAttributes(
             SyntaxList<AttributeListSyntax> attributeLists
-        ) {
+        )
+        {
             foreach (var attributeList in attributeLists)
             {
                 foreach (var attribute in attributeList.Attributes)
@@ -538,7 +544,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SemanticModel model,
             bool getSymbol,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // TODO: use 'model.GetDeclaredSymbol(expressionBody)' when compiler is fixed to return the getter symbol for it.
             var declaredAccessor = getSymbol
                 ? (

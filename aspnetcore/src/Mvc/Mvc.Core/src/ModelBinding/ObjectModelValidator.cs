@@ -26,7 +26,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         public ObjectModelValidator(
             IModelMetadataProvider modelMetadataProvider,
             IList<IModelValidatorProvider> validatorProviders
-        ) {
+        )
+        {
             if (modelMetadataProvider == null)
             {
                 throw new ArgumentNullException(nameof(modelMetadataProvider));
@@ -49,7 +50,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             ValidationStateDictionary? validationState,
             string? prefix,
             object? model
-        ) {
+        )
+        {
             var visitor = GetValidationVisitor(
                 actionContext,
                 _validatorProvider,
@@ -103,7 +105,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             object? model,
             ModelMetadata metadata,
             object? container
-        ) {
+        )
+        {
             var visitor = GetValidationVisitor(
                 actionContext,
                 _validatorProvider,

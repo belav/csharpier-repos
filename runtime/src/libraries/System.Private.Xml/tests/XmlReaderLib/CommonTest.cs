@@ -42,7 +42,8 @@ namespace System.Xml.Tests
                     || IsXmlNodeReader()
                     || IsXmlNodeReaderDataDoc()
                 )
-            ) {
+            )
+            {
                 CError.Compare(DataReader.LineNumber, 0, "LN");
                 CError.Compare(DataReader.LinePosition, 0, "LP");
             }
@@ -85,7 +86,8 @@ namespace System.Xml.Tests
             int expectedLine,
             int expectedPosition,
             string expectedErrorCode
-        ) {
+        )
+        {
             try
             {
                 ReloadSource(filename);
@@ -104,7 +106,8 @@ namespace System.Xml.Tests
             int expectedPosition,
             string expectedErrorCode,
             string varSetting
-        ) {
+        )
+        {
             try
             {
                 ReloadSource(filename);
@@ -127,7 +130,8 @@ namespace System.Xml.Tests
             int expectedLine,
             int expectedPosition,
             string expectedErrorCode
-        ) {
+        )
+        {
             try
             {
                 ReloadSource(new StringReader(strxml));
@@ -143,7 +147,8 @@ namespace System.Xml.Tests
             int expectedLine,
             int expectedPosition,
             string expectedErrorCode
-        ) {
+        )
+        {
             try
             {
                 while (DataReader.Read())
@@ -164,7 +169,8 @@ namespace System.Xml.Tests
             int expectedPosition,
             string expectedErrorCode,
             string varSetting
-        ) {
+        )
+        {
             while (DataReader.Read())
                 ;
             return true;
@@ -2441,7 +2447,8 @@ namespace System.Xml.Tests
                     || IsXmlTextReader()
                     || IsXmlValidatingReader()
                 )
-            ) {
+            )
+            {
                 return TEST_SKIPPED;
             }
 

@@ -117,7 +117,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                             if (
                                 entityType.FindKey(new[] { partitionKeyProperty, idProperty })
                                 == null
-                            ) {
+                            )
+                            {
                                 newKey = entityTypeBuilder.HasKey(
                                     new[] { idProperty, partitionKeyProperty }
                                 )?.Metadata;
@@ -140,7 +141,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             if (
                 idProperty != null
                 && idProperty.GetContainingKeys().Count() > (newKey == null ? 0 : 1)
-            ) {
+            )
+            {
                 foreach (var key in idProperty.GetContainingKeys().ToList())
                 {
                     if (key != newKey)
@@ -177,7 +179,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessEntityTypeAdded(
             IConventionEntityTypeBuilder entityTypeBuilder,
             IConventionContext<IConventionEntityTypeBuilder> context
-        ) {
+        )
+        {
             ProcessIdProperty(entityTypeBuilder);
             ProcessJObjectProperty(entityTypeBuilder);
         }
@@ -186,7 +189,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessForeignKeyOwnershipChanged(
             IConventionForeignKeyBuilder relationshipBuilder,
             IConventionContext<bool?> context
-        ) {
+        )
+        {
             ProcessIdProperty(relationshipBuilder.Metadata.DeclaringEntityType.Builder);
         }
 
@@ -195,7 +199,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionEntityTypeBuilder entityTypeBuilder,
             IConventionForeignKey foreignKey,
             IConventionContext<IConventionForeignKey> context
-        ) {
+        )
+        {
             if (foreignKey.IsOwnership)
             {
                 ProcessIdProperty(foreignKey.DeclaringEntityType.Builder);
@@ -206,7 +211,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessKeyAdded(
             IConventionKeyBuilder keyBuilder,
             IConventionContext<IConventionKeyBuilder> context
-        ) {
+        )
+        {
             var entityTypeBuilder = keyBuilder.Metadata.DeclaringEntityType.Builder;
             if (entityTypeBuilder.Metadata.GetKeys().Count() == 1)
             {
@@ -220,7 +226,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionEntityTypeBuilder entityTypeBuilder,
             IConventionKey key,
             IConventionContext<IConventionKey> context
-        ) {
+        )
+        {
             if (entityTypeBuilder.Metadata.IsKeyless)
             {
                 ProcessIdProperty(entityTypeBuilder);
@@ -234,7 +241,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionKey? newPrimaryKey,
             IConventionKey? previousPrimaryKey,
             IConventionContext<IConventionKey> context
-        ) {
+        )
+        {
             if (
                 (
                     newPrimaryKey != null
@@ -248,7 +256,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         p => p.GetJsonPropertyName() == IdPropertyJsonName
                     )
                 )
-            ) {
+            )
+            {
                 ProcessIdProperty(entityTypeBuilder);
             }
         }
@@ -259,7 +268,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionEntityType? newBaseType,
             IConventionEntityType? oldBaseType,
             IConventionContext<IConventionEntityType> context
-        ) {
+        )
+        {
             if (entityTypeBuilder.Metadata.BaseType == newBaseType)
             {
                 ProcessIdProperty(entityTypeBuilder);
@@ -274,11 +284,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionAnnotation? annotation,
             IConventionAnnotation? oldAnnotation,
             IConventionContext<IConventionAnnotation> context
-        ) {
+        )
+        {
             if (
                 name == CosmosAnnotationNames.ContainerName
                 && (annotation?.Value == null || oldAnnotation?.Value == null)
-            ) {
+            )
+            {
                 ProcessIdProperty(entityTypeBuilder);
             }
             else if (name == CosmosAnnotationNames.PartitionKeyName)
@@ -307,12 +319,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionAnnotation? annotation,
             IConventionAnnotation? oldAnnotation,
             IConventionContext<IConventionAnnotation> context
-        ) {
+        )
+        {
             if (
                 name == CosmosAnnotationNames.PropertyName
                 && (string?)annotation?.Value == IdPropertyJsonName
                 && propertyBuilder.Metadata.Name != DefaultIdPropertyName
-            ) {
+            )
+            {
                 var entityType = propertyBuilder.Metadata.DeclaringEntityType;
 
                 var idProperty = entityType.FindProperty(DefaultIdPropertyName);

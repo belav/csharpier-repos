@@ -19,7 +19,8 @@ namespace System.ComponentModel.Composition.Registration
                 Expression<Func<T, object>> propertyFilter,
                 Action<ImportBuilder> configureImport = null,
                 Action<ExportBuilder> configureExport = null
-            ) {
+            )
+            {
                 _propertyInfo = SelectProperties(propertyFilter);
                 _configureImport = configureImport;
                 _configureExport = configureExport;
@@ -79,7 +80,8 @@ namespace System.ComponentModel.Composition.Registration
 
             public ConstructorExpressionAdapter(
                 Expression<Func<ParameterImportBuilder, T>> selectConstructor
-            ) {
+            )
+            {
                 ParseSelectConstructor(selectConstructor);
             }
 
@@ -91,21 +93,24 @@ namespace System.ComponentModel.Composition.Registration
             public void ConfigureConstructorImports(
                 ParameterInfo parameterInfo,
                 ImportBuilder importBuilder
-            ) {
+            )
+            {
                 if (
                     _importBuilders != null
                     && _importBuilders.TryGetValue(
                         parameterInfo,
                         out Action<ImportBuilder> parameterImportBuilder
                     )
-                ) {
+                )
+                {
                     parameterImportBuilder(importBuilder);
                 }
             }
 
             private void ParseSelectConstructor(
                 Expression<Func<ParameterImportBuilder, T>> constructorFilter
-            ) {
+            )
+            {
                 if (constructorFilter == null)
                     throw new ArgumentNullException(nameof(constructorFilter));
 
@@ -161,7 +166,8 @@ namespace System.ComponentModel.Composition.Registration
 
             private static Expression<Func<ParameterImportBuilder, T>> Reduce(
                 Expression<Func<ParameterImportBuilder, T>> expr
-            ) {
+            )
+            {
                 while (expr.CanReduce)
                 {
                     expr.Reduce();
@@ -175,7 +181,8 @@ namespace System.ComponentModel.Composition.Registration
 
         public PartBuilder<T> SelectConstructor(
             Expression<Func<ParameterImportBuilder, T>> constructorFilter
-        ) {
+        )
+        {
             if (constructorFilter == null)
                 throw new ArgumentNullException(nameof(constructorFilter));
 
@@ -193,7 +200,8 @@ namespace System.ComponentModel.Composition.Registration
         public PartBuilder<T> ExportProperty(
             Expression<Func<T, object>> propertyFilter,
             Action<ExportBuilder> exportConfiguration
-        ) {
+        )
+        {
             if (propertyFilter == null)
                 throw new ArgumentNullException(nameof(propertyFilter));
 
@@ -211,7 +219,8 @@ namespace System.ComponentModel.Composition.Registration
         public PartBuilder<T> ExportProperty<TContract>(
             Expression<Func<T, object>> propertyFilter,
             Action<ExportBuilder> exportConfiguration
-        ) {
+        )
+        {
             if (propertyFilter == null)
                 throw new ArgumentNullException(nameof(propertyFilter));
 
@@ -229,7 +238,8 @@ namespace System.ComponentModel.Composition.Registration
         public PartBuilder<T> ImportProperty(
             Expression<Func<T, object>> propertyFilter,
             Action<ImportBuilder> importConfiguration
-        ) {
+        )
+        {
             if (propertyFilter == null)
                 throw new ArgumentNullException(nameof(propertyFilter));
 
@@ -247,7 +257,8 @@ namespace System.ComponentModel.Composition.Registration
         public PartBuilder<T> ImportProperty<TContract>(
             Expression<Func<T, object>> propertyFilter,
             Action<ImportBuilder> importConfiguration
-        ) {
+        )
+        {
             if (propertyFilter == null)
                 throw new ArgumentNullException(nameof(propertyFilter));
 

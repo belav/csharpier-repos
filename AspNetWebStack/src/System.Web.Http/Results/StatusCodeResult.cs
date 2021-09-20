@@ -62,7 +62,8 @@ namespace System.Web.Http.Results
         internal static HttpResponseMessage Execute(
             HttpStatusCode statusCode,
             HttpRequestMessage request
-        ) {
+        )
+        {
             HttpResponseMessage response = new HttpResponseMessage(statusCode);
 
             try

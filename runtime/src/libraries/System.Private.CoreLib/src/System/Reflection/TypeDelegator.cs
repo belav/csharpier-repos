@@ -29,7 +29,8 @@ namespace System.Reflection
         // TypeDelegator. The only purpose of the annotation here is to avoid dataflow warnings _within_ this type.
         public TypeDelegator(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type delegatingType
-        ) {
+        )
+        {
             if (delegatingType is null)
                 throw new ArgumentNullException(nameof(delegatingType));
 
@@ -49,7 +50,8 @@ namespace System.Reflection
             ParameterModifier[]? modifiers,
             CultureInfo? culture,
             string[]? namedParameters
-        ) {
+        )
+        {
             return typeImpl.InvokeMember(
                 name,
                 invokeAttr,
@@ -81,7 +83,8 @@ namespace System.Reflection
             CallingConventions callConvention,
             Type[] types,
             ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             return typeImpl.GetConstructor(bindingAttr, binder, callConvention, types, modifiers);
         }
 
@@ -103,7 +106,8 @@ namespace System.Reflection
             CallingConventions callConvention,
             Type[]? types,
             ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             // This is interesting there are two paths into the impl.  One that validates
             //  type as non-null and one where type may be null.
             if (types == null)
@@ -166,7 +170,8 @@ namespace System.Reflection
             Type? returnType,
             Type[]? types,
             ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             if (returnType == null && types == null)
                 return typeImpl.GetProperty(name, bindingAttr);
             else

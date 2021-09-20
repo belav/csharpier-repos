@@ -54,15 +54,17 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
             IVsHierarchy hierarchy,
             IServiceProvider serviceProvider,
             IThreadingContext threadingContext
-        ) : base(
-            projectSystemName,
-            hierarchy,
-            LanguageNames.CSharp,
-            isVsIntellisenseProject: projectRoot is IVsIntellisenseProject,
-            serviceProvider,
-            threadingContext,
-            externalErrorReportingPrefix: "CS"
-        ) {
+        )
+            : base(
+                projectSystemName,
+                hierarchy,
+                LanguageNames.CSharp,
+                isVsIntellisenseProject: projectRoot is IVsIntellisenseProject,
+                serviceProvider,
+                threadingContext,
+                externalErrorReportingPrefix: "CS"
+            )
+        {
             _projectRoot = projectRoot;
             _serviceProvider = serviceProvider;
             _warningNumberArrayPointer = Marshal.AllocHGlobal(0);
@@ -106,7 +108,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
 
         EnvDTE.FileCodeModel ICodeModelInstanceFactory.TryCreateFileCodeModelThroughProjectSystem(
             string filePath
-        ) {
+        )
+        {
             if (_projectRoot.CanCreateFileCodeModel(filePath))
             {
                 var iid = VSConstants.IID_IUnknown;

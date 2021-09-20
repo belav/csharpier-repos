@@ -69,7 +69,8 @@ namespace TestLibrary
             string assemblyPaths,
             string nativeSearchPaths,
             string resourceSearchPaths
-        ) {
+        )
+        {
             Set_corehost_resolve_component_dependencies_Values(
                 returnValue,
                 assemblyPaths,
@@ -123,7 +124,8 @@ namespace TestLibrary
 
         public static MockValues_corehost_set_error_writer Mock_corehost_set_error_writer(
             IntPtr existingErrorWriter
-        ) {
+        )
+        {
             Set_corehost_set_error_writer_returnValue(existingErrorWriter);
 
             return new MockValues_corehost_set_error_writer();

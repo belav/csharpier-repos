@@ -153,7 +153,8 @@ internal class r8div
                 || (d_l_op1 / d_l_op2 != d_l_op1 / (double)m_l_op2)
                 || (d_l_op1 / (double)m_l_op2 != d_l_op1 / i_l_op2)
                 || (d_l_op1 / i_l_op2 != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 1 failed");
                 passed = false;
             }
@@ -166,7 +167,8 @@ internal class r8div
                 || (d_l_op1 / s_d_s_op2 != d_l_op1 / (double)s_m_s_op2)
                 || (d_l_op1 / (double)s_m_s_op2 != d_l_op1 / s_i_s_op2)
                 || (d_l_op1 / s_i_s_op2 != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 2 failed");
                 passed = false;
             }
@@ -179,7 +181,8 @@ internal class r8div
                 || (d_l_op1 / d_f("op2") != d_l_op1 / (double)d_f("op2"))
                 || (d_l_op1 / (double)d_f("op2") != d_l_op1 / d_f("op2"))
                 || (d_l_op1 / d_f("op2") != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 3 failed");
                 passed = false;
             }
@@ -192,7 +195,8 @@ internal class r8div
                 || (d_l_op1 / cl1.d_cl_op2 != d_l_op1 / (double)cl1.m_cl_op2)
                 || (d_l_op1 / (double)cl1.m_cl_op2 != d_l_op1 / cl1.i_cl_op2)
                 || (d_l_op1 / cl1.i_cl_op2 != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 4 failed");
                 passed = false;
             }
@@ -205,7 +209,8 @@ internal class r8div
                 || (d_l_op1 / vt1.d_vt_op2 != d_l_op1 / (double)vt1.m_vt_op2)
                 || (d_l_op1 / (double)vt1.m_vt_op2 != d_l_op1 / vt1.i_vt_op2)
                 || (d_l_op1 / vt1.i_vt_op2 != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 5 failed");
                 passed = false;
             }
@@ -218,7 +223,8 @@ internal class r8div
                 || (d_l_op1 / d_arr1d_op2[0] != d_l_op1 / (double)m_arr1d_op2[0])
                 || (d_l_op1 / (double)m_arr1d_op2[0] != d_l_op1 / i_arr1d_op2[0])
                 || (d_l_op1 / i_arr1d_op2[0] != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 6 failed");
                 passed = false;
             }
@@ -252,7 +258,8 @@ internal class r8div
                     != d_l_op1 / i_arr2d_op2[index[0, 1], index[1, 0]]
                 )
                 || (d_l_op1 / i_arr2d_op2[index[0, 1], index[1, 0]] != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 7 failed");
                 passed = false;
             }
@@ -286,7 +293,8 @@ internal class r8div
                     != d_l_op1 / i_arr3d_op2[index[0, 0], 0, index[1, 1]]
                 )
                 || (d_l_op1 / i_arr3d_op2[index[0, 0], 0, index[1, 1]] != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 8 failed");
                 passed = false;
             }
@@ -299,7 +307,8 @@ internal class r8div
                 || (s_d_s_op1 / d_l_op2 != s_d_s_op1 / (double)m_l_op2)
                 || (s_d_s_op1 / (double)m_l_op2 != s_d_s_op1 / i_l_op2)
                 || (s_d_s_op1 / i_l_op2 != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 9 failed");
                 passed = false;
             }
@@ -312,7 +321,8 @@ internal class r8div
                 || (s_d_s_op1 / s_d_s_op2 != s_d_s_op1 / (double)s_m_s_op2)
                 || (s_d_s_op1 / (double)s_m_s_op2 != s_d_s_op1 / s_i_s_op2)
                 || (s_d_s_op1 / s_i_s_op2 != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 10 failed");
                 passed = false;
             }
@@ -325,7 +335,8 @@ internal class r8div
                 || (s_d_s_op1 / d_f("op2") != s_d_s_op1 / (double)d_f("op2"))
                 || (s_d_s_op1 / (double)d_f("op2") != s_d_s_op1 / d_f("op2"))
                 || (s_d_s_op1 / d_f("op2") != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 11 failed");
                 passed = false;
             }
@@ -338,7 +349,8 @@ internal class r8div
                 || (s_d_s_op1 / cl1.d_cl_op2 != s_d_s_op1 / (double)cl1.m_cl_op2)
                 || (s_d_s_op1 / (double)cl1.m_cl_op2 != s_d_s_op1 / cl1.i_cl_op2)
                 || (s_d_s_op1 / cl1.i_cl_op2 != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 12 failed");
                 passed = false;
             }
@@ -351,7 +363,8 @@ internal class r8div
                 || (s_d_s_op1 / vt1.d_vt_op2 != s_d_s_op1 / (double)vt1.m_vt_op2)
                 || (s_d_s_op1 / (double)vt1.m_vt_op2 != s_d_s_op1 / vt1.i_vt_op2)
                 || (s_d_s_op1 / vt1.i_vt_op2 != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 13 failed");
                 passed = false;
             }
@@ -364,7 +377,8 @@ internal class r8div
                 || (s_d_s_op1 / d_arr1d_op2[0] != s_d_s_op1 / (double)m_arr1d_op2[0])
                 || (s_d_s_op1 / (double)m_arr1d_op2[0] != s_d_s_op1 / i_arr1d_op2[0])
                 || (s_d_s_op1 / i_arr1d_op2[0] != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 14 failed");
                 passed = false;
             }
@@ -398,7 +412,8 @@ internal class r8div
                     != s_d_s_op1 / i_arr2d_op2[index[0, 1], index[1, 0]]
                 )
                 || (s_d_s_op1 / i_arr2d_op2[index[0, 1], index[1, 0]] != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 15 failed");
                 passed = false;
             }
@@ -432,7 +447,8 @@ internal class r8div
                     != s_d_s_op1 / i_arr3d_op2[index[0, 0], 0, index[1, 1]]
                 )
                 || (s_d_s_op1 / i_arr3d_op2[index[0, 0], 0, index[1, 1]] != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 16 failed");
                 passed = false;
             }
@@ -445,7 +461,8 @@ internal class r8div
                 || (d_f("op1") / d_l_op2 != d_f("op1") / (double)m_l_op2)
                 || (d_f("op1") / (double)m_l_op2 != d_f("op1") / i_l_op2)
                 || (d_f("op1") / i_l_op2 != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 17 failed");
                 passed = false;
             }
@@ -458,7 +475,8 @@ internal class r8div
                 || (d_f("op1") / s_d_s_op2 != d_f("op1") / (double)s_m_s_op2)
                 || (d_f("op1") / (double)s_m_s_op2 != d_f("op1") / s_i_s_op2)
                 || (d_f("op1") / s_i_s_op2 != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 18 failed");
                 passed = false;
             }
@@ -471,7 +489,8 @@ internal class r8div
                 || (d_f("op1") / d_f("op2") != d_f("op1") / (double)d_f("op2"))
                 || (d_f("op1") / (double)d_f("op2") != d_f("op1") / d_f("op2"))
                 || (d_f("op1") / d_f("op2") != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 19 failed");
                 passed = false;
             }
@@ -484,7 +503,8 @@ internal class r8div
                 || (d_f("op1") / cl1.d_cl_op2 != d_f("op1") / (double)cl1.m_cl_op2)
                 || (d_f("op1") / (double)cl1.m_cl_op2 != d_f("op1") / cl1.i_cl_op2)
                 || (d_f("op1") / cl1.i_cl_op2 != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 20 failed");
                 passed = false;
             }
@@ -497,7 +517,8 @@ internal class r8div
                 || (d_f("op1") / vt1.d_vt_op2 != d_f("op1") / (double)vt1.m_vt_op2)
                 || (d_f("op1") / (double)vt1.m_vt_op2 != d_f("op1") / vt1.i_vt_op2)
                 || (d_f("op1") / vt1.i_vt_op2 != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 21 failed");
                 passed = false;
             }
@@ -510,7 +531,8 @@ internal class r8div
                 || (d_f("op1") / d_arr1d_op2[0] != d_f("op1") / (double)m_arr1d_op2[0])
                 || (d_f("op1") / (double)m_arr1d_op2[0] != d_f("op1") / i_arr1d_op2[0])
                 || (d_f("op1") / i_arr1d_op2[0] != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 22 failed");
                 passed = false;
             }
@@ -544,7 +566,8 @@ internal class r8div
                     != d_f("op1") / i_arr2d_op2[index[0, 1], index[1, 0]]
                 )
                 || (d_f("op1") / i_arr2d_op2[index[0, 1], index[1, 0]] != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 23 failed");
                 passed = false;
             }
@@ -578,7 +601,8 @@ internal class r8div
                     != d_f("op1") / i_arr3d_op2[index[0, 0], 0, index[1, 1]]
                 )
                 || (d_f("op1") / i_arr3d_op2[index[0, 0], 0, index[1, 1]] != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 24 failed");
                 passed = false;
             }
@@ -591,7 +615,8 @@ internal class r8div
                 || (cl1.d_cl_op1 / d_l_op2 != cl1.d_cl_op1 / (double)m_l_op2)
                 || (cl1.d_cl_op1 / (double)m_l_op2 != cl1.d_cl_op1 / i_l_op2)
                 || (cl1.d_cl_op1 / i_l_op2 != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 25 failed");
                 passed = false;
             }
@@ -604,7 +629,8 @@ internal class r8div
                 || (cl1.d_cl_op1 / s_d_s_op2 != cl1.d_cl_op1 / (double)s_m_s_op2)
                 || (cl1.d_cl_op1 / (double)s_m_s_op2 != cl1.d_cl_op1 / s_i_s_op2)
                 || (cl1.d_cl_op1 / s_i_s_op2 != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 26 failed");
                 passed = false;
             }
@@ -617,7 +643,8 @@ internal class r8div
                 || (cl1.d_cl_op1 / d_f("op2") != cl1.d_cl_op1 / (double)d_f("op2"))
                 || (cl1.d_cl_op1 / (double)d_f("op2") != cl1.d_cl_op1 / d_f("op2"))
                 || (cl1.d_cl_op1 / d_f("op2") != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 27 failed");
                 passed = false;
             }
@@ -630,7 +657,8 @@ internal class r8div
                 || (cl1.d_cl_op1 / cl1.d_cl_op2 != cl1.d_cl_op1 / (double)cl1.m_cl_op2)
                 || (cl1.d_cl_op1 / (double)cl1.m_cl_op2 != cl1.d_cl_op1 / cl1.i_cl_op2)
                 || (cl1.d_cl_op1 / cl1.i_cl_op2 != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 28 failed");
                 passed = false;
             }
@@ -643,7 +671,8 @@ internal class r8div
                 || (cl1.d_cl_op1 / vt1.d_vt_op2 != cl1.d_cl_op1 / (double)vt1.m_vt_op2)
                 || (cl1.d_cl_op1 / (double)vt1.m_vt_op2 != cl1.d_cl_op1 / vt1.i_vt_op2)
                 || (cl1.d_cl_op1 / vt1.i_vt_op2 != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 29 failed");
                 passed = false;
             }
@@ -656,7 +685,8 @@ internal class r8div
                 || (cl1.d_cl_op1 / d_arr1d_op2[0] != cl1.d_cl_op1 / (double)m_arr1d_op2[0])
                 || (cl1.d_cl_op1 / (double)m_arr1d_op2[0] != cl1.d_cl_op1 / i_arr1d_op2[0])
                 || (cl1.d_cl_op1 / i_arr1d_op2[0] != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 30 failed");
                 passed = false;
             }
@@ -690,7 +720,8 @@ internal class r8div
                     != cl1.d_cl_op1 / i_arr2d_op2[index[0, 1], index[1, 0]]
                 )
                 || (cl1.d_cl_op1 / i_arr2d_op2[index[0, 1], index[1, 0]] != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 31 failed");
                 passed = false;
             }
@@ -724,7 +755,8 @@ internal class r8div
                     != cl1.d_cl_op1 / i_arr3d_op2[index[0, 0], 0, index[1, 1]]
                 )
                 || (cl1.d_cl_op1 / i_arr3d_op2[index[0, 0], 0, index[1, 1]] != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 32 failed");
                 passed = false;
             }
@@ -737,7 +769,8 @@ internal class r8div
                 || (vt1.d_vt_op1 / d_l_op2 != vt1.d_vt_op1 / (double)m_l_op2)
                 || (vt1.d_vt_op1 / (double)m_l_op2 != vt1.d_vt_op1 / i_l_op2)
                 || (vt1.d_vt_op1 / i_l_op2 != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 33 failed");
                 passed = false;
             }
@@ -750,7 +783,8 @@ internal class r8div
                 || (vt1.d_vt_op1 / s_d_s_op2 != vt1.d_vt_op1 / (double)s_m_s_op2)
                 || (vt1.d_vt_op1 / (double)s_m_s_op2 != vt1.d_vt_op1 / s_i_s_op2)
                 || (vt1.d_vt_op1 / s_i_s_op2 != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 34 failed");
                 passed = false;
             }
@@ -763,7 +797,8 @@ internal class r8div
                 || (vt1.d_vt_op1 / d_f("op2") != vt1.d_vt_op1 / (double)d_f("op2"))
                 || (vt1.d_vt_op1 / (double)d_f("op2") != vt1.d_vt_op1 / d_f("op2"))
                 || (vt1.d_vt_op1 / d_f("op2") != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 35 failed");
                 passed = false;
             }
@@ -776,7 +811,8 @@ internal class r8div
                 || (vt1.d_vt_op1 / cl1.d_cl_op2 != vt1.d_vt_op1 / (double)cl1.m_cl_op2)
                 || (vt1.d_vt_op1 / (double)cl1.m_cl_op2 != vt1.d_vt_op1 / cl1.i_cl_op2)
                 || (vt1.d_vt_op1 / cl1.i_cl_op2 != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 36 failed");
                 passed = false;
             }
@@ -789,7 +825,8 @@ internal class r8div
                 || (vt1.d_vt_op1 / vt1.d_vt_op2 != vt1.d_vt_op1 / (double)vt1.m_vt_op2)
                 || (vt1.d_vt_op1 / (double)vt1.m_vt_op2 != vt1.d_vt_op1 / vt1.i_vt_op2)
                 || (vt1.d_vt_op1 / vt1.i_vt_op2 != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 37 failed");
                 passed = false;
             }
@@ -802,7 +839,8 @@ internal class r8div
                 || (vt1.d_vt_op1 / d_arr1d_op2[0] != vt1.d_vt_op1 / (double)m_arr1d_op2[0])
                 || (vt1.d_vt_op1 / (double)m_arr1d_op2[0] != vt1.d_vt_op1 / i_arr1d_op2[0])
                 || (vt1.d_vt_op1 / i_arr1d_op2[0] != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 38 failed");
                 passed = false;
             }
@@ -836,7 +874,8 @@ internal class r8div
                     != vt1.d_vt_op1 / i_arr2d_op2[index[0, 1], index[1, 0]]
                 )
                 || (vt1.d_vt_op1 / i_arr2d_op2[index[0, 1], index[1, 0]] != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 39 failed");
                 passed = false;
             }
@@ -870,7 +909,8 @@ internal class r8div
                     != vt1.d_vt_op1 / i_arr3d_op2[index[0, 0], 0, index[1, 1]]
                 )
                 || (vt1.d_vt_op1 / i_arr3d_op2[index[0, 0], 0, index[1, 1]] != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 40 failed");
                 passed = false;
             }
@@ -883,7 +923,8 @@ internal class r8div
                 || (d_arr1d_op1[1] / d_l_op2 != d_arr1d_op1[1] / (double)m_l_op2)
                 || (d_arr1d_op1[1] / (double)m_l_op2 != d_arr1d_op1[1] / i_l_op2)
                 || (d_arr1d_op1[1] / i_l_op2 != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 41 failed");
                 passed = false;
             }
@@ -896,7 +937,8 @@ internal class r8div
                 || (d_arr1d_op1[1] / s_d_s_op2 != d_arr1d_op1[1] / (double)s_m_s_op2)
                 || (d_arr1d_op1[1] / (double)s_m_s_op2 != d_arr1d_op1[1] / s_i_s_op2)
                 || (d_arr1d_op1[1] / s_i_s_op2 != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 42 failed");
                 passed = false;
             }
@@ -909,7 +951,8 @@ internal class r8div
                 || (d_arr1d_op1[1] / d_f("op2") != d_arr1d_op1[1] / (double)d_f("op2"))
                 || (d_arr1d_op1[1] / (double)d_f("op2") != d_arr1d_op1[1] / d_f("op2"))
                 || (d_arr1d_op1[1] / d_f("op2") != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 43 failed");
                 passed = false;
             }
@@ -922,7 +965,8 @@ internal class r8div
                 || (d_arr1d_op1[1] / cl1.d_cl_op2 != d_arr1d_op1[1] / (double)cl1.m_cl_op2)
                 || (d_arr1d_op1[1] / (double)cl1.m_cl_op2 != d_arr1d_op1[1] / cl1.i_cl_op2)
                 || (d_arr1d_op1[1] / cl1.i_cl_op2 != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 44 failed");
                 passed = false;
             }
@@ -935,7 +979,8 @@ internal class r8div
                 || (d_arr1d_op1[1] / vt1.d_vt_op2 != d_arr1d_op1[1] / (double)vt1.m_vt_op2)
                 || (d_arr1d_op1[1] / (double)vt1.m_vt_op2 != d_arr1d_op1[1] / vt1.i_vt_op2)
                 || (d_arr1d_op1[1] / vt1.i_vt_op2 != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 45 failed");
                 passed = false;
             }
@@ -948,7 +993,8 @@ internal class r8div
                 || (d_arr1d_op1[1] / d_arr1d_op2[0] != d_arr1d_op1[1] / (double)m_arr1d_op2[0])
                 || (d_arr1d_op1[1] / (double)m_arr1d_op2[0] != d_arr1d_op1[1] / i_arr1d_op2[0])
                 || (d_arr1d_op1[1] / i_arr1d_op2[0] != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 46 failed");
                 passed = false;
             }
@@ -982,7 +1028,8 @@ internal class r8div
                     != d_arr1d_op1[1] / i_arr2d_op2[index[0, 1], index[1, 0]]
                 )
                 || (d_arr1d_op1[1] / i_arr2d_op2[index[0, 1], index[1, 0]] != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 47 failed");
                 passed = false;
             }
@@ -1016,7 +1063,8 @@ internal class r8div
                     != d_arr1d_op1[1] / i_arr3d_op2[index[0, 0], 0, index[1, 1]]
                 )
                 || (d_arr1d_op1[1] / i_arr3d_op2[index[0, 0], 0, index[1, 1]] != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 48 failed");
                 passed = false;
             }
@@ -1050,7 +1098,8 @@ internal class r8div
                     != d_arr2d_op1[index[0, 1], index[1, 0]] / i_l_op2
                 )
                 || (d_arr2d_op1[index[0, 1], index[1, 0]] / i_l_op2 != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 49 failed");
                 passed = false;
             }
@@ -1084,7 +1133,8 @@ internal class r8div
                     != d_arr2d_op1[index[0, 1], index[1, 0]] / s_i_s_op2
                 )
                 || (d_arr2d_op1[index[0, 1], index[1, 0]] / s_i_s_op2 != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 50 failed");
                 passed = false;
             }
@@ -1118,7 +1168,8 @@ internal class r8div
                     != d_arr2d_op1[index[0, 1], index[1, 0]] / d_f("op2")
                 )
                 || (d_arr2d_op1[index[0, 1], index[1, 0]] / d_f("op2") != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 51 failed");
                 passed = false;
             }
@@ -1152,7 +1203,8 @@ internal class r8div
                     != d_arr2d_op1[index[0, 1], index[1, 0]] / cl1.i_cl_op2
                 )
                 || (d_arr2d_op1[index[0, 1], index[1, 0]] / cl1.i_cl_op2 != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 52 failed");
                 passed = false;
             }
@@ -1186,7 +1238,8 @@ internal class r8div
                     != d_arr2d_op1[index[0, 1], index[1, 0]] / vt1.i_vt_op2
                 )
                 || (d_arr2d_op1[index[0, 1], index[1, 0]] / vt1.i_vt_op2 != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 53 failed");
                 passed = false;
             }
@@ -1220,7 +1273,8 @@ internal class r8div
                     != d_arr2d_op1[index[0, 1], index[1, 0]] / i_arr1d_op2[0]
                 )
                 || (d_arr2d_op1[index[0, 1], index[1, 0]] / i_arr1d_op2[0] != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 54 failed");
                 passed = false;
             }
@@ -1261,7 +1315,8 @@ internal class r8div
                     d_arr2d_op1[index[0, 1], index[1, 0]] / i_arr2d_op2[index[0, 1], index[1, 0]]
                     != 5
                 )
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 55 failed");
                 passed = false;
             }
@@ -1308,7 +1363,8 @@ internal class r8div
                     d_arr2d_op1[index[0, 1], index[1, 0]] / i_arr3d_op2[index[0, 0], 0, index[1, 1]]
                     != 5
                 )
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 56 failed");
                 passed = false;
             }
@@ -1342,7 +1398,8 @@ internal class r8div
                     != d_arr3d_op1[index[0, 0], 0, index[1, 1]] / i_l_op2
                 )
                 || (d_arr3d_op1[index[0, 0], 0, index[1, 1]] / i_l_op2 != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 57 failed");
                 passed = false;
             }
@@ -1376,7 +1433,8 @@ internal class r8div
                     != d_arr3d_op1[index[0, 0], 0, index[1, 1]] / s_i_s_op2
                 )
                 || (d_arr3d_op1[index[0, 0], 0, index[1, 1]] / s_i_s_op2 != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 58 failed");
                 passed = false;
             }
@@ -1410,7 +1468,8 @@ internal class r8div
                     != d_arr3d_op1[index[0, 0], 0, index[1, 1]] / d_f("op2")
                 )
                 || (d_arr3d_op1[index[0, 0], 0, index[1, 1]] / d_f("op2") != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 59 failed");
                 passed = false;
             }
@@ -1444,7 +1503,8 @@ internal class r8div
                     != d_arr3d_op1[index[0, 0], 0, index[1, 1]] / cl1.i_cl_op2
                 )
                 || (d_arr3d_op1[index[0, 0], 0, index[1, 1]] / cl1.i_cl_op2 != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 60 failed");
                 passed = false;
             }
@@ -1478,7 +1538,8 @@ internal class r8div
                     != d_arr3d_op1[index[0, 0], 0, index[1, 1]] / vt1.i_vt_op2
                 )
                 || (d_arr3d_op1[index[0, 0], 0, index[1, 1]] / vt1.i_vt_op2 != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 61 failed");
                 passed = false;
             }
@@ -1512,7 +1573,8 @@ internal class r8div
                     != d_arr3d_op1[index[0, 0], 0, index[1, 1]] / i_arr1d_op2[0]
                 )
                 || (d_arr3d_op1[index[0, 0], 0, index[1, 1]] / i_arr1d_op2[0] != 5)
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 62 failed");
                 passed = false;
             }
@@ -1559,7 +1621,8 @@ internal class r8div
                     d_arr3d_op1[index[0, 0], 0, index[1, 1]] / i_arr2d_op2[index[0, 1], index[1, 0]]
                     != 5
                 )
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 63 failed");
                 passed = false;
             }
@@ -1611,7 +1674,8 @@ internal class r8div
                         / i_arr3d_op2[index[0, 0], 0, index[1, 1]]
                     != 5
                 )
-            ) {
+            )
+            {
                 Console.WriteLine("testcase 64 failed");
                 passed = false;
             }

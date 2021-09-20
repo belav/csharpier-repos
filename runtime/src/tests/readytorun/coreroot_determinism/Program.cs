@@ -32,7 +32,8 @@ internal class Program
 
         foreach (
             string filename in Directory.GetFiles(superIlcFolder1, "*.dll").Select(Path.GetFileName)
-        ) {
+        )
+        {
             if (uniqueFilenames.Contains(filename))
                 continue;
 
@@ -82,7 +83,8 @@ internal class Program
     private static void PrepareCompilationInputFolder(
         string coreRootFolder,
         string compilationInputFolder
-    ) {
+    )
+    {
         if (Directory.Exists(compilationInputFolder))
         {
             Directory.Delete(compilationInputFolder, true);
@@ -100,7 +102,8 @@ internal class Program
         string coreRootFolder,
         string compilationInputFolder,
         string fileName
-    ) {
+    )
+    {
         File.Copy(
             Path.Combine(coreRootFolder, fileName),
             Path.Combine(compilationInputFolder, fileName)
@@ -112,7 +115,8 @@ internal class Program
         string coreRootPath,
         string compilationInputFolder,
         string outDir
-    ) {
+    )
+    {
         string superIlcPath = Path.Combine(coreRootPath, "R2RTest", "R2RTest.dll");
         string coreRunPath = Path.Combine(coreRootPath, OSExeSuffix("corerun"));
 

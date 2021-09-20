@@ -42,31 +42,33 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
             RequestDelegate app,
             TestServiceContext context,
             ListenOptions listenOptions
-        ) : this(
-            app,
-            context,
-            options => options.CodeBackedListenOptions.Add(listenOptions),
-            _ => { }
-        ) { }
+        )
+            : this(
+                app,
+                context,
+                options => options.CodeBackedListenOptions.Add(listenOptions),
+                _ => { }
+            ) { }
 
         public TestServer(
             RequestDelegate app,
             TestServiceContext context,
             Action<ListenOptions> configureListenOptions
-        ) : this(
-            app,
-            context,
-            options =>
-            {
-                var listenOptions = new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0))
+        )
+            : this(
+                app,
+                context,
+                options =>
                 {
-                    KestrelServerOptions = options
-                };
-                configureListenOptions(listenOptions);
-                options.CodeBackedListenOptions.Add(listenOptions);
-            },
-            _ => { }
-        ) { }
+                    var listenOptions = new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0))
+                    {
+                        KestrelServerOptions = options
+                    };
+                    configureListenOptions(listenOptions);
+                    options.CodeBackedListenOptions.Add(listenOptions);
+                },
+                _ => { }
+            ) { }
 
         public TestServer(
             RequestDelegate app,
@@ -79,7 +81,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
             TestServiceContext context,
             Action<KestrelServerOptions> configureKestrel,
             Action<IServiceCollection> configureServices
-        ) {
+        )
+        {
             _app = app;
             Context = context;
 

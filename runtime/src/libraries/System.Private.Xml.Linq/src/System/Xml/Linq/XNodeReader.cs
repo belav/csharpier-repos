@@ -1145,7 +1145,8 @@ namespace System.Xml.Linq
             XElement e,
             out string? localName,
             out string? namespaceName
-        ) {
+        )
+        {
             if (!string.IsNullOrEmpty(qualifiedName))
             {
                 int i = qualifiedName.IndexOf(':');

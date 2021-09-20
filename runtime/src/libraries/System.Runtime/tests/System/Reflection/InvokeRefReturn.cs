@@ -132,7 +132,8 @@ namespace System.Reflection.Tests
         private static void TestRefReturnInvoke<T>(
             T value,
             Func<PropertyInfo, TestClass<T>, object> invoker
-        ) {
+        )
+        {
             TestClass<T> tc = new TestClass<T>(value);
             PropertyInfo p = typeof(TestClass<T>).GetProperty(
                 nameof(TestClass<T>.RefReturningProp)

@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Core.IO
                 IntPtr httpContext,
                 IntPtr completionInfo,
                 IntPtr completionContext
-            ) {
+            )
+            {
                 var context = (WebSocketWriteOperation)GCHandle.FromIntPtr(
                     completionContext
                 ).Target!;
@@ -43,7 +44,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Core.IO
                 int chunkCount,
                 HttpApiTypes.HTTP_DATA_CHUNK* dataChunks,
                 out bool completionExpected
-            ) {
+            )
+            {
                 _thisHandle = GCHandle.Alloc(this);
                 return NativeMethods.HttpWebsocketsWriteBytes(
                     requestHandler,

@@ -114,7 +114,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             string iutQx,
             string iutQy,
             string iutZ
-        ) {
+        )
+        {
             Assert.True(namedCurve.IsNamed, "namedCurve.IsNamed");
             Assert.True(explicitCurve.IsExplicit, "explicitCurve.IsExplicit");
 
@@ -139,7 +140,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             ref ECParameters cavsParameters,
             ECCurve explicitCurve,
             byte[] iutZ
-        ) {
+        )
+        {
             using (ECDiffieHellman iut = ECDiffieHellmanFactory.Create())
             using (ECDiffieHellman cavs = ECDiffieHellmanFactory.Create())
             {
@@ -220,7 +222,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             HashAlgorithm zHasher,
             HashAlgorithmName zHashAlgorithm,
             byte[] iutZ
-        ) {
+        )
+        {
             byte[] result = iut.DeriveKeyFromHash(cavsPublic, zHashAlgorithm);
             byte[] hashedZ = zHasher.ComputeHash(iutZ);
             Assert.Equal(hashedZ.ByteArrayToHex(), result.ByteArrayToHex());

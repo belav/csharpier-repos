@@ -45,7 +45,8 @@ namespace System.ServiceModel.Syndication.Tests
                     "parent",
                     new XElement("ExtensionObject", new XElement("Value", 10))
                 ).CreateReader()
-            ) {
+            )
+            {
                 reader.MoveToElement();
                 var extension = new SyndicationElementExtension(
                     new XElement("ExtensionObject", new XElement("Value", 10)).CreateReader()
@@ -208,7 +209,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void Ctor_String_String_Object_XmlObjectSerializer(
             string outerName,
             string outerNamespace
-        ) {
+        )
+        {
             var extensionObject = new ExtensionObject { Value = 10 };
 
             // Get OuterName first.

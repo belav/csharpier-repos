@@ -31,7 +31,8 @@ namespace System.IO.Pipes.Tests
                     PipeOptions.None,
                     tokenImpersonationLevel
                 )
-            ) {
+            )
+            {
                 Task serverTask = server.WaitForConnectionAsync();
 
                 client.Connect();

@@ -51,14 +51,16 @@ namespace System.Net
         void ISerializable.GetObjectData(
             SerializationInfo serializationInfo,
             StreamingContext streamingContext
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
         protected override void GetObjectData(
             SerializationInfo serializationInfo,
             StreamingContext streamingContext
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException();
         }
 
@@ -66,7 +68,8 @@ namespace System.Net
             HttpResponseMessage _message,
             Uri requestUri,
             CookieContainer? cookieContainer
-        ) {
+        )
+        {
             _httpResponseMessage = _message;
             _requestUri = requestUri;
 
@@ -110,7 +113,8 @@ namespace System.Net
                         "Content-Type",
                         out IEnumerable<string>? values
                     )
-                ) {
+                )
+                {
                     // In most cases, there is only one media type value as per RFC. But for completeness, we
                     // return all values in cases of overly malformed strings.
                     return string.Join(',', values);
@@ -302,7 +306,8 @@ namespace System.Net
                         //search the parameters
                         while (
                             (i = srchString.IndexOf("charset", i, StringComparison.Ordinal)) >= 0
-                        ) {
+                        )
+                        {
                             i += 7;
 
                             //make sure the word starts with charset

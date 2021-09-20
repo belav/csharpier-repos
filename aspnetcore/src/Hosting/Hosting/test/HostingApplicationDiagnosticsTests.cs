@@ -335,7 +335,8 @@ namespace Microsoft.AspNetCore.Hosting.Tests
                             "Microsoft.AspNetCore.Hosting.HttpRequestIn",
                             StringComparison.Ordinal
                         )
-                    ) {
+                    )
+                    {
                         return true;
                     }
                     return false;
@@ -369,7 +370,8 @@ namespace Microsoft.AspNetCore.Hosting.Tests
                             "Microsoft.AspNetCore.Hosting.HttpRequestIn",
                             StringComparison.Ordinal
                         )
-                    ) {
+                    )
+                    {
                         return true;
                     }
                     return false;
@@ -420,7 +422,8 @@ namespace Microsoft.AspNetCore.Hosting.Tests
                             "Microsoft.AspNetCore.Hosting.HttpRequestIn",
                             StringComparison.Ordinal
                         )
-                    ) {
+                    )
+                    {
                         return true;
                     }
                     return false;
@@ -470,7 +473,8 @@ namespace Microsoft.AspNetCore.Hosting.Tests
                             "Microsoft.AspNetCore.Hosting.HttpRequestIn",
                             StringComparison.Ordinal
                         )
-                    ) {
+                    )
+                    {
                         return true;
                     }
                     return false;
@@ -521,7 +525,8 @@ namespace Microsoft.AspNetCore.Hosting.Tests
                             "Microsoft.AspNetCore.Hosting.HttpRequestIn",
                             StringComparison.Ordinal
                         )
-                    ) {
+                    )
+                    {
                         return true;
                     }
                     return false;
@@ -572,7 +577,8 @@ namespace Microsoft.AspNetCore.Hosting.Tests
                             "Microsoft.AspNetCore.Hosting.HttpRequestIn",
                             StringComparison.Ordinal
                         )
-                    ) {
+                    )
+                    {
                         return true;
                     }
                     return false;
@@ -618,7 +624,8 @@ namespace Microsoft.AspNetCore.Hosting.Tests
                             "Microsoft.AspNetCore.Hosting.HttpRequestIn",
                             StringComparison.Ordinal
                         )
-                    ) {
+                    )
+                    {
                         return true;
                     }
                     return false;
@@ -752,7 +759,8 @@ namespace Microsoft.AspNetCore.Hosting.Tests
             ActivitySource activitySource = null,
             ILogger logger = null,
             Action<DefaultHttpContext> configure = null
-        ) {
+        )
+        {
             var httpContextFactory = new Mock<IHttpContextFactory>();
 
             features = new FeatureCollection();

@@ -73,7 +73,8 @@ namespace ILVerify
             this TypeDesc currentType,
             MethodDesc targetMethod,
             TypeDesc instance = null
-        ) {
+        )
+        {
             // If generic method, check instantiation access
             if (
                 targetMethod.HasInstantiation
@@ -107,7 +108,8 @@ namespace ILVerify
             this TypeDesc currentType,
             FieldDesc targetField,
             TypeDesc instance = null
-        ) {
+        )
+        {
             // Check access to field owning type
             var targetFieldDef = (EcmaField)targetField.GetTypicalFieldDefinition();
             var currentTypeDef = (MetadataType)currentType.GetTypeDefinition();
@@ -128,7 +130,8 @@ namespace ILVerify
             TypeDesc targetType,
             MethodAttributes memberVisibility,
             TypeDesc instance
-        ) {
+        )
+        {
             if (instance == null)
                 instance = currentType;
 
@@ -204,7 +207,8 @@ namespace ILVerify
         private static bool CanAccessInstantiation(
             this TypeDesc currentType,
             Instantiation instantiation
-        ) {
+        )
+        {
             foreach (var inst in instantiation)
             {
                 if (!currentType.CanAccess(inst))
@@ -217,7 +221,8 @@ namespace ILVerify
         private static bool CanAccessMethodSignature(
             this TypeDesc currentType,
             MethodDesc targetMethod
-        ) {
+        )
+        {
             var methodSig = targetMethod.Signature;
 
             // Check return type
@@ -229,7 +234,8 @@ namespace ILVerify
                 !returnType.IsGenericParameter
                 && !returnType.IsSignatureVariable // Generic parameters are always accessible
                 && !returnType.IsVoid
-            ) {
+            )
+            {
                 if (!currentType.CanAccess(returnType))
                     return false;
             }
@@ -255,7 +261,8 @@ namespace ILVerify
             TypeDesc currentType,
             TypeDesc targetTypeDef,
             TypeDesc instanceType
-        ) {
+        )
+        {
             // if instanceType is generics and inherit from targetTypeDef members of targetTypeDef are accessible
             if (instanceType.IsGenericParameter)
             {
@@ -318,7 +325,8 @@ namespace ILVerify
                         "System.Runtime.CompilerServices",
                         "InternalsVisibleToAttribute"
                     )
-                ) {
+                )
+                {
                     AssemblyName friendAttributeName = new AssemblyName(
                         (string)attribute.FixedArguments[0].Value
                     );
@@ -364,7 +372,8 @@ namespace ILVerify
 
         private static MethodAttributes NestedToMethodAccessAttribute(
             TypeAttributes nestedVisibility
-        ) {
+        )
+        {
             switch (nestedVisibility & TypeAttributes.VisibilityMask)
             {
                 case TypeAttributes.NestedAssembly:

@@ -20,7 +20,8 @@ namespace System.IO.Tests
                     FileAccess.ReadWrite,
                     FileShare.Delete
                 )
-            ) {
+            )
+            {
                 Assert.True(File.Exists(fileName));
                 File.Delete(fileName);
                 if (OperatingSystem.IsWindows())
@@ -48,7 +49,8 @@ namespace System.IO.Tests
                     FileAccess.ReadWrite,
                     FileShare.Delete
                 )
-            ) {
+            )
+            {
                 Assert.True(File.Exists(fileName));
                 File.Move(fileName, newFileName);
                 Assert.False(File.Exists(fileName));
@@ -75,7 +77,8 @@ namespace System.IO.Tests
                     FileAccess.ReadWrite,
                     FileShare.Delete
                 )
-            ) {
+            )
+            {
                 File.Delete(fileName);
                 if (OperatingSystem.IsWindows())
                 {
@@ -109,7 +112,8 @@ namespace System.IO.Tests
                     FileAccess.ReadWrite,
                     FileShare.Delete
                 )
-            ) {
+            )
+            {
                 Assert.True(File.Exists(fileName));
                 File.Move(fileName, newFileName);
                 Assert.False(File.Exists(fileName));
@@ -130,7 +134,8 @@ namespace System.IO.Tests
                     FileAccess.ReadWrite,
                     FileShare.None
                 )
-            ) {
+            )
+            {
                 fs.WriteByte(0);
             }
 
@@ -146,7 +151,8 @@ namespace System.IO.Tests
                     FileAccess.ReadWrite,
                     FileShare.Delete | FileShare.ReadWrite
                 )
-            ) {
+            )
+            {
                 using (
                     FileStream fs2 = CreateFileStream(
                         fileName,
@@ -154,7 +160,8 @@ namespace System.IO.Tests
                         FileAccess.ReadWrite,
                         FileShare.Delete | FileShare.ReadWrite
                     )
-                ) {
+                )
+                {
                     File.Delete(fileName);
                     Assert.Equal(0, fs2.ReadByte());
 
@@ -218,7 +225,8 @@ namespace System.IO.Tests
                     FileAccess.ReadWrite,
                     FileShare.ReadWrite
                 )
-            ) {
+            )
+            {
                 FSAssert.ThrowsSharingViolation(() => File.Delete(fileName));
                 FSAssert.ThrowsSharingViolation(() => File.Move(fileName, newFileName));
             }

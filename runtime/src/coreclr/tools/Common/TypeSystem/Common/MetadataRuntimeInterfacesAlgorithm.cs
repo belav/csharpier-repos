@@ -39,7 +39,8 @@ namespace Internal.TypeSystem
         /// </summary>
         private DefType[] ComputeRuntimeInterfacesForInstantiatedType(
             InstantiatedType instantiatedType
-        ) {
+        )
+        {
             MetadataType uninstantiatedType = (MetadataType)instantiatedType.GetTypeDefinition();
 
             DefType[] genericTypeDefinitionInterfaces = uninstantiatedType.RuntimeInterfaces;
@@ -83,7 +84,8 @@ namespace Internal.TypeSystem
         private void BuildPostOrderInterfaceList(
             DefType iface,
             ref ArrayBuilder<DefType> interfacesArray
-        ) {
+        )
+        {
             if (interfacesArray.Contains(iface))
                 return;
 

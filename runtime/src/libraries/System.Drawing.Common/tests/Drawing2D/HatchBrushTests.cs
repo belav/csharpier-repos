@@ -41,7 +41,8 @@ namespace System.Drawing.Drawing2D.Tests
             HatchStyle hatchStyle,
             Color foreColor,
             Color backColor
-        ) {
+        )
+        {
             using (var brush = new HatchBrush(hatchStyle, foreColor, backColor))
             {
                 Assert.Equal(hatchStyle, brush.HatchStyle);
@@ -80,7 +81,8 @@ namespace System.Drawing.Drawing2D.Tests
                     Color.Magenta,
                     Color.Peru
                 )
-            ) {
+            )
+            {
                 HatchBrush clone = Assert.IsType<HatchBrush>(brush.Clone());
 
                 Assert.NotSame(clone, brush);

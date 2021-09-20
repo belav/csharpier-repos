@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             int position,
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (context.IsGlobalStatementContext)
             {
                 return true;
@@ -42,12 +43,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 
                     if (
                         node.IsKind(SyntaxKind.LockStatement, out LockStatementSyntax lockStatement)
-                    ) {
+                    )
+                    {
                         if (
                             lockStatement.Statement != null
                             && !lockStatement.Statement.IsMissing
                             && lockStatement.Statement.Span.Contains(position)
-                        ) {
+                        )
+                        {
                             return false;
                         }
                     }

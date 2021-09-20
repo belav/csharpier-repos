@@ -41,7 +41,8 @@ namespace Microsoft.AspNetCore.Diagnostics
             string? compiledContent,
             IEnumerable<DiagnosticMessage?>? messages,
             string? failureSummary
-        ) {
+        )
+        {
             SourceFilePath = sourceFilePath;
             SourceFileContent = sourceFileContent;
             CompiledContent = compiledContent;

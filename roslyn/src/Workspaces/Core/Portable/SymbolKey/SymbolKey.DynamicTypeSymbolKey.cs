@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis
             public static SymbolKeyResolution Resolve(
                 SymbolKeyReader reader,
                 out string? failureReason
-            ) {
+            )
+            {
                 failureReason = null;
                 return new SymbolKeyResolution(reader.Compilation.DynamicType);
             }

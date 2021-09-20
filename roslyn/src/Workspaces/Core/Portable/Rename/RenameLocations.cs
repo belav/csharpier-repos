@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.Rename
             Solution solution,
             RenameOptionSet options,
             SearchResult result
-        ) {
+        )
+        {
             Solution = solution;
             Symbol = symbol;
             Options = options;
@@ -54,7 +55,8 @@ namespace Microsoft.CodeAnalysis.Rename
             ImmutableArray<ISymbol> referencedSymbols,
             ImmutableArray<ReferenceLocation> implicitLocations,
             RenameOptionSet options
-        ) {
+        )
+        {
             return new RenameLocations(
                 symbol,
                 solution,
@@ -71,7 +73,8 @@ namespace Microsoft.CodeAnalysis.Rename
             Solution solution,
             RenameOptionSet optionSet,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(solution);
             Contract.ThrowIfNull(symbol);
 
@@ -86,7 +89,8 @@ namespace Microsoft.CodeAnalysis.Rename
                         cancellationToken,
                         out var serializedSymbol
                     )
-                ) {
+                )
+                {
                     var client = await RemoteHostClient.TryGetClientAsync(
                             solution.Workspace,
                             cancellationToken
@@ -144,7 +148,8 @@ namespace Microsoft.CodeAnalysis.Rename
             Solution solution,
             RenameOptionSet optionSet,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(symbol);
             using (Logger.LogBlock(FunctionId.Rename_AllRenameLocations, cancellationToken))
             {
@@ -228,7 +233,8 @@ namespace Microsoft.CodeAnalysis.Rename
             Solution solution,
             RenameOptionSet options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<SearchResult>.GetInstance(out var overloadsResult);
 
             if (options.RenameOverloads)
@@ -264,7 +270,8 @@ namespace Microsoft.CodeAnalysis.Rename
                             )
                             && member is IMethodSymbol
                             && !member.Equals(symbol)
-                        ) {
+                        )
+                        {
                             yield return member;
                         }
                     }
@@ -276,7 +283,8 @@ namespace Microsoft.CodeAnalysis.Rename
             ISymbol symbol,
             Solution solution,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var locations = ImmutableHashSet.CreateBuilder<RenameLocation>();
             var referenceSymbols = await SymbolFinder.FindRenamableReferencesAsync(
                     symbol,

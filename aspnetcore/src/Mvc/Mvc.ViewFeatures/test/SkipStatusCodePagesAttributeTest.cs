@@ -49,7 +49,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test
 
         private static ResourceExecutingContext CreateResourceExecutingContext(
             IFilterMetadata[] filters
-        ) {
+        )
+        {
             return new ResourceExecutingContext(
                 CreateActionContext(),
                 filters,

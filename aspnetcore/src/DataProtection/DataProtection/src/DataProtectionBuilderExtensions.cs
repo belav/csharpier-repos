@@ -39,7 +39,8 @@ namespace Microsoft.AspNetCore.DataProtection
         public static IDataProtectionBuilder SetApplicationName(
             this IDataProtectionBuilder builder,
             string applicationName
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -67,7 +68,8 @@ namespace Microsoft.AspNetCore.DataProtection
         public static IDataProtectionBuilder AddKeyEscrowSink(
             this IDataProtectionBuilder builder,
             IKeyEscrowSink sink
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -134,7 +136,8 @@ namespace Microsoft.AspNetCore.DataProtection
         public static IDataProtectionBuilder AddKeyEscrowSink(
             this IDataProtectionBuilder builder,
             Func<IServiceProvider, IKeyEscrowSink> factory
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -170,7 +173,8 @@ namespace Microsoft.AspNetCore.DataProtection
         public static IDataProtectionBuilder AddKeyManagementOptions(
             this IDataProtectionBuilder builder,
             Action<KeyManagementOptions> setupAction
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -196,7 +200,8 @@ namespace Microsoft.AspNetCore.DataProtection
         /// </remarks>
         public static IDataProtectionBuilder DisableAutomaticKeyGeneration(
             this IDataProtectionBuilder builder
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -221,7 +226,8 @@ namespace Microsoft.AspNetCore.DataProtection
         public static IDataProtectionBuilder PersistKeysToFileSystem(
             this IDataProtectionBuilder builder,
             DirectoryInfo directory
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -262,7 +268,8 @@ namespace Microsoft.AspNetCore.DataProtection
         public static IDataProtectionBuilder PersistKeysToRegistry(
             this IDataProtectionBuilder builder,
             RegistryKey registryKey
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -302,7 +309,8 @@ namespace Microsoft.AspNetCore.DataProtection
         public static IDataProtectionBuilder ProtectKeysWithCertificate(
             this IDataProtectionBuilder builder,
             X509Certificate2 certificate
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -346,7 +354,8 @@ namespace Microsoft.AspNetCore.DataProtection
         public static IDataProtectionBuilder ProtectKeysWithCertificate(
             this IDataProtectionBuilder builder,
             string thumbprint
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -398,7 +407,8 @@ namespace Microsoft.AspNetCore.DataProtection
         public static IDataProtectionBuilder UnprotectKeysWithAnyCertificate(
             this IDataProtectionBuilder builder,
             params X509Certificate2[] certificates
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -432,7 +442,8 @@ namespace Microsoft.AspNetCore.DataProtection
         [SupportedOSPlatform("windows")]
         public static IDataProtectionBuilder ProtectKeysWithDpapi(
             this IDataProtectionBuilder builder
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -457,7 +468,8 @@ namespace Microsoft.AspNetCore.DataProtection
         public static IDataProtectionBuilder ProtectKeysWithDpapi(
             this IDataProtectionBuilder builder,
             bool protectToLocalMachine
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -497,7 +509,8 @@ namespace Microsoft.AspNetCore.DataProtection
         [SupportedOSPlatform("windows")]
         public static IDataProtectionBuilder ProtectKeysWithDpapiNG(
             this IDataProtectionBuilder builder
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -529,7 +542,8 @@ namespace Microsoft.AspNetCore.DataProtection
             this IDataProtectionBuilder builder,
             string protectionDescriptorRule,
             DpapiNGProtectionDescriptorFlags flags
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -573,7 +587,8 @@ namespace Microsoft.AspNetCore.DataProtection
         public static IDataProtectionBuilder SetDefaultKeyLifetime(
             this IDataProtectionBuilder builder,
             TimeSpan lifetime
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -606,7 +621,8 @@ namespace Microsoft.AspNetCore.DataProtection
         public static IDataProtectionBuilder UseCryptographicAlgorithms(
             this IDataProtectionBuilder builder,
             AuthenticatedEncryptorConfiguration configuration
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -637,7 +653,8 @@ namespace Microsoft.AspNetCore.DataProtection
         public static IDataProtectionBuilder UseCustomCryptographicAlgorithms(
             this IDataProtectionBuilder builder,
             CngCbcAuthenticatedEncryptorConfiguration configuration
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -668,7 +685,8 @@ namespace Microsoft.AspNetCore.DataProtection
         public static IDataProtectionBuilder UseCustomCryptographicAlgorithms(
             this IDataProtectionBuilder builder,
             CngGcmAuthenticatedEncryptorConfiguration configuration
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -695,7 +713,8 @@ namespace Microsoft.AspNetCore.DataProtection
         public static IDataProtectionBuilder UseCustomCryptographicAlgorithms(
             this IDataProtectionBuilder builder,
             ManagedAuthenticatedEncryptorConfiguration configuration
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -712,7 +731,8 @@ namespace Microsoft.AspNetCore.DataProtection
         private static IDataProtectionBuilder UseCryptographicAlgorithmsCore(
             IDataProtectionBuilder builder,
             AlgorithmConfiguration configuration
-        ) {
+        )
+        {
             ((IInternalAlgorithmConfiguration)configuration).Validate(); // perform self-test
 
             builder.Services.Configure<KeyManagementOptions>(
@@ -737,7 +757,8 @@ namespace Microsoft.AspNetCore.DataProtection
         /// </remarks>
         public static IDataProtectionBuilder UseEphemeralDataProtectionProvider(
             this IDataProtectionBuilder builder
-        ) {
+        )
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));

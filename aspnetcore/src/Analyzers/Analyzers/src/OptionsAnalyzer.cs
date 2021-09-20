@@ -34,7 +34,8 @@ namespace Microsoft.AspNetCore.Analyzers
                             "Options",
                             StringComparison.Ordinal
                         )
-                    ) {
+                    )
+                    {
                         options.Add(
                             new OptionsItem(property.Property, operation.Value.ConstantValue.Value)
                         );

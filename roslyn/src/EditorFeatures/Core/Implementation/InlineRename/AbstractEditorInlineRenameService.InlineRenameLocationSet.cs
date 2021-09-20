@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             public InlineRenameLocationSet(
                 SymbolInlineRenameInfo renameInfo,
                 RenameLocations renameLocationSet
-            ) {
+            )
+            {
                 _renameInfo = renameInfo;
                 _renameLocationSet = renameLocationSet;
                 this.Locations = renameLocationSet.Locations.Where(RenameLocation.ShouldRename)
@@ -45,7 +46,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 string replacementText,
                 OptionSet optionSet,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var conflicts = await _renameLocationSet.ResolveConflictsAsync(
                         _renameInfo.GetFinalSymbolName(replacementText),
                         nonConflictSymbols: null,

@@ -240,7 +240,8 @@ namespace System.Threading.Tasks
             ref Segment segment,
             ref T[] array,
             [MaybeNullWhen(false)] out T result
-        ) {
+        )
+        {
             Debug.Assert(segment != null, "Expected a non-null segment.");
             Debug.Assert(array != null, "Expected a non-null item array.");
 
@@ -299,7 +300,8 @@ namespace System.Threading.Tasks
                     int pt = segment.m_state.m_first;
                     pt != segment.m_state.m_last;
                     pt = (pt + 1) & (segment.m_array.Length - 1)
-                ) {
+                )
+                {
                     yield return segment.m_array[pt];
                 }
             }
@@ -390,7 +392,8 @@ namespace System.Threading.Tasks
             /// <param name="queue">The queue being debugged.</param>
             public SingleProducerSingleConsumerQueue_DebugView(
                 SingleProducerSingleConsumerQueue<T> queue
-            ) {
+            )
+            {
                 Debug.Assert(queue != null, "Expected a non-null queue.");
                 m_queue = queue;
             }

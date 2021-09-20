@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis
             ITemporaryStorageService service,
             Compilation compilation,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             try
@@ -53,7 +54,8 @@ namespace Microsoft.CodeAnalysis
                         FunctionId.Workspace_SkeletonAssembly_EmitMetadataOnlyImage,
                         cancellationToken
                     )
-                ) {
+                )
+                {
                     // TODO: make it to use SerializableBytes.WritableStream rather than MemoryStream so that
                     //       we don't allocate anything for skeleton assembly.
                     using var stream = SerializableBytes.CreateWritableStream();
@@ -126,7 +128,8 @@ namespace Microsoft.CodeAnalysis
             ImmutableArray<string> aliases,
             bool embedInteropTypes,
             DocumentationProvider documentationProvider
-        ) {
+        )
+        {
             if (this.IsEmpty)
             {
                 return null;

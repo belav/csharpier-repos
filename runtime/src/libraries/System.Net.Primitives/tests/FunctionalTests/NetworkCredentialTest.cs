@@ -154,7 +154,8 @@ namespace System.Net.Primitives.Functional.Tests
         public static void SecurePassword_Password_RoundData_Test(
             string expectedSecurePassword,
             string expectedPassword
-        ) {
+        )
+        {
             NetworkCredential nc = new NetworkCredential();
             using (SecureString securePassword = AsSecureString(expectedSecurePassword))
             {

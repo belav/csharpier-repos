@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
             MethodInfo methodInfo,
             object[] testMethodArguments,
             ITestOutputHelper testOutputHelper
-        ) {
+        )
+        {
             base.Initialize(context, methodInfo, testMethodArguments, testOutputHelper);
             Fixture.Attach(this);
         }

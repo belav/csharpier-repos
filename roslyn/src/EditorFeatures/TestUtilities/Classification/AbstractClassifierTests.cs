@@ -52,7 +52,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Classification
             TestHost testHost,
             ParseOptions parseOptions,
             params FormattedClassification[] expected
-        ) {
+        )
+        {
             var start = allCode.IndexOf(code, StringComparison.Ordinal);
             var length = code.Length;
             var span = new TextSpan(start, length);
@@ -76,7 +77,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Classification
             TestHost testHost,
             ParseOptions[] parseOptionsSet,
             params FormattedClassification[] expected
-        ) {
+        )
+        {
             foreach (var parseOptions in parseOptionsSet)
             {
                 await TestAsync(code, allCode, testHost, parseOptions, expected);
@@ -88,7 +90,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Classification
             TestHost testHost,
             ParseOptions[] parseOptionsSet,
             params FormattedClassification[] expected
-        ) {
+        )
+        {
             await TestAsync(code, code, testHost, parseOptionsSet, expected);
         }
 
@@ -96,7 +99,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Classification
             string code,
             TestHost testHost,
             params FormattedClassification[] expected
-        ) {
+        )
+        {
             await DefaultTestAsync(code, code, testHost, expected);
         }
 
@@ -105,7 +109,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Classification
             string allCode,
             TestHost testHost,
             params FormattedClassification[] expected
-        ) {
+        )
+        {
             await DefaultTestAsync(code, allCode, testHost, expected);
         }
 
@@ -115,7 +120,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Classification
             TestHost testHost,
             ParseOptions[] parseOptionsSet,
             params FormattedClassification[] expected
-        ) {
+        )
+        {
             var allCode = WrapInClass(className, code);
 
             await TestAsync(code, allCode, testHost, parseOptionsSet, expected);
@@ -126,7 +132,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Classification
             string code,
             TestHost testHost,
             params FormattedClassification[] expected
-        ) {
+        )
+        {
             var allCode = WrapInClass(className, code);
 
             await DefaultTestAsync(code, allCode, testHost, expected);
@@ -137,7 +144,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Classification
             TestHost testHost,
             ParseOptions[] parseOptionsSet,
             params FormattedClassification[] expected
-        ) {
+        )
+        {
             return TestInClassAsync("C", code, testHost, parseOptionsSet, expected);
         }
 
@@ -145,7 +153,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Classification
             string code,
             TestHost testHost,
             params FormattedClassification[] expected
-        ) {
+        )
+        {
             return TestInClassAsync("C", code, testHost, expected);
         }
 
@@ -153,7 +162,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Classification
             string code,
             TestHost testHost,
             params FormattedClassification[] expected
-        ) {
+        )
+        {
             var allCode = WrapInExpression(code);
 
             await DefaultTestAsync(code, allCode, testHost, expected);
@@ -164,7 +174,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Classification
             ParseOptions[] parseOptionsSet,
             TestHost testHost,
             params FormattedClassification[] expected
-        ) {
+        )
+        {
             var allCode = WrapInExpression(code);
 
             await TestAsync(code, allCode, testHost, parseOptionsSet, expected);
@@ -177,7 +188,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Classification
             TestHost testHost,
             ParseOptions[] parseOptionsSet,
             params FormattedClassification[] expected
-        ) {
+        )
+        {
             var allCode = WrapInMethod(className, methodName, code);
 
             await TestAsync(code, allCode, testHost, parseOptionsSet, expected);
@@ -189,7 +201,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Classification
             string code,
             TestHost testHost,
             params FormattedClassification[] expected
-        ) {
+        )
+        {
             var allCode = WrapInMethod(className, methodName, code);
 
             await DefaultTestAsync(code, allCode, testHost, expected);
@@ -201,7 +214,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Classification
             TestHost testHost,
             ParseOptions[] parseOptionsSet,
             params FormattedClassification[] expected
-        ) {
+        )
+        {
             return TestInMethodAsync("C", methodName, code, testHost, parseOptionsSet, expected);
         }
 
@@ -210,7 +224,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Classification
             string code,
             TestHost testHost,
             params FormattedClassification[] expected
-        ) {
+        )
+        {
             return TestInMethodAsync("C", methodName, code, testHost, expected);
         }
 
@@ -219,7 +234,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Classification
             TestHost testHost,
             ParseOptions[] parseOptionsSet,
             params FormattedClassification[] expected
-        ) {
+        )
+        {
             return TestInMethodAsync("C", "M", code, testHost, parseOptionsSet, expected);
         }
 
@@ -227,7 +243,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Classification
             string code,
             TestHost testHost,
             params FormattedClassification[] expected
-        ) {
+        )
+        {
             return TestInMethodAsync("C", "M", code, testHost, expected);
         }
 
@@ -236,7 +253,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Classification
             TestHost testHost,
             ParseOptions[] parseOptionsSet,
             params FormattedClassification[] expected
-        ) {
+        )
+        {
             var allCode = WrapInNamespace(code);
 
             await TestAsync(code, allCode, testHost, parseOptionsSet, expected);
@@ -246,7 +264,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Classification
             string code,
             TestHost testHost,
             params FormattedClassification[] expected
-        ) {
+        )
+        {
             var allCode = WrapInNamespace(code);
 
             await DefaultTestAsync(code, allCode, testHost, expected);
@@ -263,7 +282,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Classification
         protected static async Task<ImmutableArray<ClassifiedSpan>> GetSemanticClassificationsAsync(
             Document document,
             TextSpan span
-        ) {
+        )
+        {
             var service = document.GetRequiredLanguageService<IClassificationService>();
 
             var result = new List<ClassifiedSpan>();
@@ -293,7 +313,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Classification
         protected static async Task<ImmutableArray<ClassifiedSpan>> GetAllClassificationsAsync(
             Document document,
             TextSpan span
-        ) {
+        )
+        {
             var semanticClassifications = await GetSemanticClassificationsAsync(document, span);
             var syntacticClassifications = await GetSyntacticClassificationsAsync(document, span);
 

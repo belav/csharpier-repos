@@ -137,7 +137,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void Ctor_Type_SyndicationElementExtension_XmlObjectSerializer(
             string type,
             XmlObjectSerializer dataContractSerializer
-        ) {
+        )
+        {
             var content = new XmlSyndicationContent(
                 type,
                 new ExtensionObject { Value = 10 },
@@ -180,7 +181,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void Ctor_Type_SyndicationElementExtension_XmlSerializer(
             string type,
             XmlSerializer serializer
-        ) {
+        )
+        {
             var content = new XmlSyndicationContent(
                 type,
                 new ExtensionObject { Value = 10 },
@@ -426,10 +428,8 @@ namespace System.ServiceModel.Syndication.Tests
         {
             public XmlSyndicationContentSubclass(XmlSyndicationContent source) : base(source) { }
 
-            public XmlSyndicationContentSubclass(
-                string type,
-                SyndicationElementExtension extension
-            ) : base(type, extension) { }
+            public XmlSyndicationContentSubclass(string type, SyndicationElementExtension extension)
+                : base(type, extension) { }
 
             public void WriteContentsToEntryPoint(XmlWriter writer) => WriteContentsTo(writer);
         }

@@ -33,7 +33,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
                     typeof(PreviewUpdater.PreviewTagger),
                     out PreviewUpdater.PreviewTagger tagger
                 )
-            ) {
+            )
+            {
                 return tagger as ITagger<T>;
             }
 

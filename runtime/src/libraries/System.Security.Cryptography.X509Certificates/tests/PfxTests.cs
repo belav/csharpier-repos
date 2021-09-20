@@ -28,7 +28,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     TestData.PfxDataPassword,
                     keyStorageFlags
                 )
-            ) {
+            )
+            {
                 byte[] expectedThumbprint =
                     "71cb4e2b02738ad44f8b382c93bd17ba665f9914".HexToByteArray();
 
@@ -66,7 +67,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     TestData.ChainPfxPassword,
                     keyStorageFlags
                 )
-            ) {
+            )
+            {
                 // While checking cert.HasPrivateKey first is most matching of the test description, asserting
                 // on the certificate's simple name will provide a more diagnosable failure.
                 Assert.Equal("test.local", cert.GetNameInfo(X509NameType.SimpleName, false));
@@ -108,7 +110,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     TestData.PfxDataPassword,
                     keyStorageFlags
                 )
-            ) {
+            )
+            {
                 byte[] rawData = c.RawData;
                 Assert.Equal(expectedRawData, rawData);
             }
@@ -124,7 +127,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     TestData.PfxDataPassword,
                     keyStorageFlags
                 )
-            ) {
+            )
+            {
                 bool hasPrivateKey = c.HasPrivateKey;
                 Assert.True(hasPrivateKey);
 
@@ -144,7 +148,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     TestData.PfxDataPassword,
                     Cert.EphemeralIfPossible
                 )
-            ) {
+            )
+            {
                 bool hasPrivateKey = c.HasPrivateKey;
                 Assert.True(hasPrivateKey);
 
@@ -177,7 +182,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     TestData.PfxDataPassword,
                     X509KeyStorageFlags.Exportable | keyStorageFlags
                 )
-            ) {
+            )
+            {
                 const string password = "NotVerySecret";
 
                 byte[] pkcs12 = cert.Export(X509ContentType.Pkcs12, password);
@@ -200,7 +206,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     "Test",
                     keyStorageFlags
                 )
-            ) {
+            )
+            {
                 using (ECDsa ecdsa = cert.GetECDsaPrivateKey())
                 {
                     Verify_ECDsaPrivateKey_WindowsPfx(ecdsa);
@@ -247,7 +254,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     "test",
                     keyStorageFlags
                 )
-            ) {
+            )
+            {
                 using (ECDiffieHellman ecdh = cert.GetECDiffieHellmanPrivateKey())
                 {
                     Verify_ECDHPrivateKey_WindowsPfx(ecdh);
@@ -295,7 +303,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     TestData.Dsa1024PfxPassword,
                     Cert.EphemeralIfPossible
                 )
-            ) {
+            )
+            {
                 AsymmetricAlgorithm alg = cert.PrivateKey;
                 Assert.NotNull(alg);
                 Assert.Same(alg, cert.PrivateKey);
@@ -479,7 +488,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     TestData.PfxDataPassword,
                     X509KeyStorageFlags.EphemeralKeySet
                 )
-            ) {
+            )
+            {
                 X509Certificate2 cert = importedCollection.Collection[0];
 
                 using (RSA rsa = cert.GetRSAPrivateKey())
@@ -539,7 +549,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     TestData.PfxDataPassword,
                     X509KeyStorageFlags.DefaultKeySet
                 )
-            ) {
+            )
+            {
                 X509Certificate2 cert = importedCollection.Collection[0];
 
                 using (RSA rsa = cert.GetRSAPrivateKey())

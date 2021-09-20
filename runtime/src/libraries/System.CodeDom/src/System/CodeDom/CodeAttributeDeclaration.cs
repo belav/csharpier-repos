@@ -29,7 +29,8 @@ namespace System.CodeDom
         public CodeAttributeDeclaration(
             CodeTypeReference attributeType,
             params CodeAttributeArgument[] arguments
-        ) {
+        )
+        {
             _attributeType = attributeType;
             if (attributeType != null)
             {

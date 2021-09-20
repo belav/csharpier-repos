@@ -63,7 +63,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeMethodAsynchronous
             IMethodSymbol methodSymbolOpt,
             SyntaxNode node,
             KnownTypes knownTypes
-        ) {
+        )
+        {
             switch (node)
             {
                 case MethodDeclarationSyntax method:
@@ -86,7 +87,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeMethodAsynchronous
             IMethodSymbol methodSymbol,
             MethodDeclarationSyntax method,
             KnownTypes knownTypes
-        ) {
+        )
+        {
             var newReturnType = FixMethodReturnType(
                 keepVoid,
                 methodSymbol,
@@ -105,7 +107,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeMethodAsynchronous
             IMethodSymbol methodSymbol,
             LocalFunctionStatementSyntax localFunction,
             KnownTypes knownTypes
-        ) {
+        )
+        {
             var newReturnType = FixMethodReturnType(
                 keepVoid,
                 methodSymbol,
@@ -124,7 +127,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeMethodAsynchronous
             IMethodSymbol methodSymbol,
             TypeSyntax returnTypeSyntax,
             KnownTypes knownTypes
-        ) {
+        )
+        {
             var newReturnType = returnTypeSyntax.WithAdditionalAnnotations(Formatter.Annotation);
 
             if (methodSymbol.ReturnsVoid)
@@ -214,7 +218,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeMethodAsynchronous
         private static SyntaxTokenList AddAsyncModifierWithCorrectedTrivia(
             SyntaxTokenList modifiers,
             ref TypeSyntax newReturnType
-        ) {
+        )
+        {
             if (modifiers.Any())
                 return modifiers.Add(s_asyncToken);
 

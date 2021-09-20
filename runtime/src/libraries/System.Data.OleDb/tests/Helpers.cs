@@ -45,7 +45,8 @@ namespace System.Data.OleDb.Tests
                         "en-US",
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     IsAvailable = false; // ActiveIssue: https://github.com/dotnet/runtime/issues/29969
                 }
                 ProviderName = IsAvailable ? ExpectedProviderName : null;

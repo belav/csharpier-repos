@@ -385,7 +385,8 @@ namespace System.Collections.ObjectModel.Tests
             ObservableCollection<string> collection,
             string itemToAdd,
             int? insertIndex = null
-        ) {
+        )
+        {
             INotifyPropertyChanged readOnlyPropertyChanged = readOnlyCol;
             readOnlyPropertyChanged.PropertyChanged += Collection_PropertyChanged;
             _expectedPropertyChanged = new[]
@@ -440,7 +441,8 @@ namespace System.Collections.ObjectModel.Tests
         public void ClearTest(
             ReadOnlyObservableCollection<string> readOnlyCol,
             ObservableCollection<string> collection
-        ) {
+        )
+        {
             INotifyPropertyChanged readOnlyPropertyChanged = readOnlyCol;
             readOnlyPropertyChanged.PropertyChanged += Collection_PropertyChanged;
             _expectedPropertyChanged = new[]
@@ -482,7 +484,8 @@ namespace System.Collections.ObjectModel.Tests
             ObservableCollection<string> collection,
             int oldIndex,
             int newIndex
-        ) {
+        )
+        {
             INotifyPropertyChanged readOnlyPropertyChanged = readOnlyCol;
             readOnlyPropertyChanged.PropertyChanged += Collection_PropertyChanged;
             _expectedPropertyChanged = new[] { new PropertyNameExpected(ITEMARRAY) };
@@ -524,7 +527,8 @@ namespace System.Collections.ObjectModel.Tests
             ObservableCollection<string> collection,
             int index,
             string newItem
-        ) {
+        )
+        {
             INotifyPropertyChanged readOnlyPropertyChanged = readOnlyCol;
             readOnlyPropertyChanged.PropertyChanged += Collection_PropertyChanged;
             _expectedPropertyChanged = new[] { new PropertyNameExpected(ITEMARRAY) };
@@ -572,7 +576,8 @@ namespace System.Collections.ObjectModel.Tests
             string itemToRemove,
             bool isSuccessfulRemove,
             bool hasDuplicates
-        ) {
+        )
+        {
             INotifyPropertyChanged readOnlyPropertyChanged = readOnlyCol;
             readOnlyPropertyChanged.PropertyChanged += Collection_PropertyChanged;
             _expectedPropertyChanged = new[]
@@ -639,7 +644,8 @@ namespace System.Collections.ObjectModel.Tests
             ReadOnlyObservableCollection<string> readOnlyCol,
             ObservableCollection<string> collection,
             int itemIndex
-        ) {
+        )
+        {
             INotifyPropertyChanged readOnlyPropertyChanged = readOnlyCol;
             readOnlyPropertyChanged.PropertyChanged += Collection_PropertyChanged;
             _expectedPropertyChanged = new[]

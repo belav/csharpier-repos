@@ -36,7 +36,8 @@ namespace Grpc.Testing
         public override async Task<SimpleResponse> UnaryCall(
             SimpleRequest request,
             ServerCallContext context
-        ) {
+        )
+        {
             await EnsureEchoMetadataAsync(context, request.ResponseCompressed?.Value ?? false);
             EnsureEchoStatus(request.ResponseStatus, context);
             EnsureCompression(request.ExpectCompressed, context);
@@ -52,7 +53,8 @@ namespace Grpc.Testing
             StreamingOutputCallRequest request,
             IServerStreamWriter<StreamingOutputCallResponse> responseStream,
             ServerCallContext context
-        ) {
+        )
+        {
             await EnsureEchoMetadataAsync(
                 context,
                 request.ResponseParameters.Any(rp => rp.Compressed?.Value ?? false)
@@ -76,7 +78,8 @@ namespace Grpc.Testing
         public override async Task<StreamingInputCallResponse> StreamingInputCall(
             IAsyncStreamReader<StreamingInputCallRequest> requestStream,
             ServerCallContext context
-        ) {
+        )
+        {
             await EnsureEchoMetadataAsync(context);
 
             int sum = 0;
@@ -96,7 +99,8 @@ namespace Grpc.Testing
             IAsyncStreamReader<StreamingOutputCallRequest> requestStream,
             IServerStreamWriter<StreamingOutputCallResponse> responseStream,
             ServerCallContext context
-        ) {
+        )
+        {
             await EnsureEchoMetadataAsync(context);
 
             await requestStream.ForEachAsync(
@@ -119,7 +123,8 @@ namespace Grpc.Testing
             IAsyncStreamReader<StreamingOutputCallRequest> requestStream,
             IServerStreamWriter<StreamingOutputCallResponse> responseStream,
             ServerCallContext context
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -131,7 +136,8 @@ namespace Grpc.Testing
         private static async Task EnsureEchoMetadataAsync(
             ServerCallContext context,
             bool enableCompression = false
-        ) {
+        )
+        {
             var echoInitialList = context.RequestHeaders.Where(
                     (entry) => entry.Key == "x-grpc-test-echo-initial"
                 )
@@ -171,7 +177,8 @@ namespace Grpc.Testing
         private static void EnsureCompression(
             BoolValue? expectCompressed,
             ServerCallContext context
-        ) {
+        )
+        {
             if (expectCompressed != null)
             {
                 // ServerCallContext.RequestHeaders filters out grpc-* headers

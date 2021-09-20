@@ -84,7 +84,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         public void ExpandLocations_ExpandsDirectories_WhenLocationContainsPage(
             string pageName,
             string[] expected
-        ) {
+        )
+        {
             // Arrange
             var context = CreateContext(pageName: pageName);
 
@@ -192,7 +193,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         private ViewLocationExpanderContext CreateContext(
             string viewName = "_LoginPartial.cshtml",
             string pageName = null
-        ) {
+        )
+        {
             var actionContext = new ActionContext
             {
                 ActionDescriptor = new PageActionDescriptor(),

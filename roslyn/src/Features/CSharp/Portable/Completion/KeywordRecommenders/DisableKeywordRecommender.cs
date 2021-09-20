@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             int position,
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var previousToken1 = context.TargetToken;
             var previousToken2 = previousToken1.GetPreviousToken(includeSkipped: true);
             var previousToken3 = previousToken2.GetPreviousToken(includeSkipped: true);
@@ -26,7 +27,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             if (
                 previousToken1.Kind() == SyntaxKind.NullableKeyword
                 && previousToken2.Kind() == SyntaxKind.HashToken
-            ) {
+            )
+            {
                 // # nullable |
                 // # nullable d|
                 return true;

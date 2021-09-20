@@ -47,7 +47,8 @@ namespace System.Xml.Xsl
             XmlResolver? dataSources,
             XsltArgumentList? argumentList,
             XmlWriter writer
-        ) {
+        )
+        {
             try
             {
                 if (writer is XmlAsyncCheckWriter)
@@ -63,7 +64,8 @@ namespace System.Xml.Xsl
                     && wellFormedWriter.RawWriter != null
                     && wellFormedWriter.WriteState == WriteState.Start
                     && wellFormedWriter.Settings.ConformanceLevel != ConformanceLevel.Document
-                ) {
+                )
+                {
                     // Extracted RawWriter from WellFormedWriter
                     Execute(
                         defaultDocument,
@@ -98,7 +100,8 @@ namespace System.Xml.Xsl
             XmlResolver? dataSources,
             XsltArgumentList? argumentList,
             XmlSequenceWriter results
-        ) {
+        )
+        {
             Debug.Assert(results != null);
 
             // Ensure that dataSources is always non-null

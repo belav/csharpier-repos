@@ -164,7 +164,8 @@ namespace System.Collections.Concurrent
                 WorkStealingQueue? queue = _workStealingQueues;
                 queue != null;
                 queue = queue._nextQueue
-            ) {
+            )
+            {
                 if (queue._ownerThreadId == currentThreadId)
                 {
                     return queue;
@@ -246,7 +247,8 @@ namespace System.Collections.Concurrent
                 if (
                     Interlocked.Read(ref _emptyToNonEmptyListTransitionCount)
                     == initialEmptyToNonEmptyCounts
-                ) {
+                )
+                {
                     // The version number matched, so we didn't get an item and we're confident enough
                     // in our steal attempt to say so.
                     return false;
@@ -265,12 +267,14 @@ namespace System.Collections.Concurrent
             WorkStealingQueue? endExclusive,
             [MaybeNullWhen(false)] out T result,
             bool take
-        ) {
+        )
+        {
             for (
                 WorkStealingQueue? queue = startInclusive;
                 queue != endExclusive;
                 queue = queue._nextQueue
-            ) {
+            )
+            {
                 if (queue!.TrySteal(out result, take))
                 {
                     return true;
@@ -365,7 +369,8 @@ namespace System.Collections.Concurrent
                 WorkStealingQueue? queue = _workStealingQueues;
                 queue != null;
                 queue = queue._nextQueue
-            ) {
+            )
+            {
                 i += queue.DangerousCopyTo(array, i);
             }
             return i - index;
@@ -489,7 +494,8 @@ namespace System.Collections.Concurrent
                     WorkStealingQueue? queue = _workStealingQueues;
                     queue != null;
                     queue = queue._nextQueue
-                ) {
+                )
+                {
                     T? ignored;
                     while (queue.TrySteal(out ignored, take: true))
                         ;
@@ -573,7 +579,8 @@ namespace System.Collections.Concurrent
                     WorkStealingQueue? queue = _workStealingQueues;
                     queue != null;
                     queue = queue._nextQueue
-                ) {
+                )
+                {
                     checked
                     {
                         count += queue.DangerousCount;
@@ -626,7 +633,8 @@ namespace System.Collections.Concurrent
                         WorkStealingQueue? queue = _workStealingQueues;
                         queue != null;
                         queue = queue._nextQueue
-                    ) {
+                    )
+                    {
                         if (!queue.IsEmpty)
                         {
                             return false;
@@ -717,7 +725,8 @@ namespace System.Collections.Concurrent
                     WorkStealingQueue? queue = _workStealingQueues;
                     queue != null;
                     queue = queue._nextQueue
-                ) {
+                )
+                {
                     if (queue._frozen)
                     {
                         queue._frozen = false;

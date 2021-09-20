@@ -128,7 +128,8 @@ namespace Microsoft.AspNetCore.Session
             CookieSecurePolicy cookieSecurePolicy,
             string requestUri,
             bool shouldBeSecureOnly
-        ) {
+        )
+        {
             using var host = new HostBuilder().ConfigureWebHost(
                     webHostBuilder =>
                     {
@@ -275,14 +276,16 @@ namespace Microsoft.AspNetCore.Session
                                             }
                                             else if (
                                                 context.Request.Path == new PathString("/second")
-                                            ) {
+                                            )
+                                            {
                                                 Assert.True(value.HasValue);
                                                 Assert.Equal(1, value);
                                                 context.Session.Remove("Key");
                                             }
                                             else if (
                                                 context.Request.Path == new PathString("/third")
-                                            ) {
+                                            )
+                                            {
                                                 Assert.False(value.HasValue);
                                                 value = 2;
                                             }
@@ -350,14 +353,16 @@ namespace Microsoft.AspNetCore.Session
                                             }
                                             else if (
                                                 context.Request.Path == new PathString("/second")
-                                            ) {
+                                            )
+                                            {
                                                 Assert.True(value.HasValue);
                                                 Assert.Equal(1, value);
                                                 context.Session.Clear();
                                             }
                                             else if (
                                                 context.Request.Path == new PathString("/third")
-                                            ) {
+                                            )
+                                            {
                                                 Assert.False(value.HasValue);
                                                 value = 2;
                                             }
@@ -485,7 +490,8 @@ namespace Microsoft.AspNetCore.Session
                                             }
                                             else if (
                                                 context.Request.Path == new PathString("/second")
-                                            ) {
+                                            )
+                                            {
                                                 Assert.False(value.HasValue);
                                                 value = 2;
                                             }
@@ -563,14 +569,16 @@ namespace Microsoft.AspNetCore.Session
                                             if (
                                                 context.Request.Path
                                                 == new PathString("/AddDataToSession")
-                                            ) {
+                                            )
+                                            {
                                                 context.Session.SetInt32("Key", 10);
                                                 responseData = "added data to session";
                                             }
                                             else if (
                                                 context.Request.Path
                                                 == new PathString("/AccessSessionData")
-                                            ) {
+                                            )
+                                            {
                                                 var value = context.Session.GetInt32("Key");
                                                 responseData =
                                                     (value == null)
@@ -580,7 +588,8 @@ namespace Microsoft.AspNetCore.Session
                                             else if (
                                                 context.Request.Path
                                                 == new PathString("/DoNotAccessSessionData")
-                                            ) {
+                                            )
+                                            {
                                                 responseData = "did not access session data";
                                             }
 
@@ -1553,7 +1562,8 @@ namespace Microsoft.AspNetCore.Session
                 byte[] value,
                 DistributedCacheEntryOptions options,
                 CancellationToken token = default
-            ) {
+            )
+            {
                 if (DisableSetAsync)
                 {
                     throw new InvalidOperationException();

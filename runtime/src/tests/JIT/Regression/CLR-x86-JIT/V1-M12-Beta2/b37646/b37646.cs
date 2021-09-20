@@ -17,7 +17,8 @@ namespace Test
             object param4,
             ref float[] param5,
             ref object[] param6
-        ) {
+        )
+        {
             return null;
         }
 

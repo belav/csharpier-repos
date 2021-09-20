@@ -41,7 +41,8 @@ namespace System.Xml.Tests
                     GetDummyXmlStream(),
                     new XmlReaderSettings() { Async = true }
                 )
-            ) {
+            )
+            {
                 reader.ReadAsync().Wait();
             }
         }
@@ -54,7 +55,8 @@ namespace System.Xml.Tests
                     GetDummyXmlStream(),
                     new XmlReaderSettings() { Async = async }
                 )
-            ) {
+            )
+            {
                 reader.Read();
             }
         }
@@ -67,7 +69,8 @@ namespace System.Xml.Tests
                     GetDummyXmlTextReader(),
                     new XmlReaderSettings() { Async = true }
                 )
-            ) {
+            )
+            {
                 reader.ReadAsync().Wait();
             }
         }
@@ -75,13 +78,15 @@ namespace System.Xml.Tests
         [Theory, InlineData(true), InlineData(false)]
         public static void ReadAfterInitializationWithTextReaderOnAsyncReaderDoesNotThrow(
             bool async
-        ) {
+        )
+        {
             using (
                 XmlReader reader = XmlReader.Create(
                     GetDummyXmlTextReader(),
                     new XmlReaderSettings() { Async = async }
                 )
-            ) {
+            )
+            {
                 reader.Read();
             }
         }
@@ -98,7 +103,8 @@ namespace System.Xml.Tests
                     "http://test.test/test.html",
                     new XmlReaderSettings() { Async = true }
                 )
-            ) {
+            )
+            {
                 Assert.Throws<System.Net.Http.HttpRequestException>(
                     () => reader.ReadAsync().GetAwaiter().GetResult()
                 );
@@ -117,7 +123,8 @@ namespace System.Xml.Tests
                     "http://test.test/test.html",
                     new XmlReaderSettings() { Async = true }
                 )
-            ) {
+            )
+            {
                 Assert.Throws<System.Net.Http.HttpRequestException>(() => reader.Read());
             }
         }
@@ -156,7 +163,8 @@ namespace System.Xml.Tests
                                 new DribbleReadXmlAsyncStream(_dummyXml),
                                 new XmlReaderSettings { Async = true, }
                             )
-                        ) {
+                        )
+                        {
                             while (reader.ReadAsync().GetAwaiter().GetResult())
                                 ;
                         }

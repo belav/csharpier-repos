@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             int count,
             bool visitAll,
             ref int index
-        ) {
+        )
+        {
             if (InRange(startIndex, count, index))
             {
                 rows.Add(GetRow(inspectionContext, value, parent));
@@ -40,7 +41,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmInspectionContext inspectionContext,
             DkmClrValue comObject,
             EvalResultDataItem parent
-        ) {
+        )
+        {
             try
             {
                 inspectionContext.RuntimeInstance.Process.GetNativeRuntimeInstance();

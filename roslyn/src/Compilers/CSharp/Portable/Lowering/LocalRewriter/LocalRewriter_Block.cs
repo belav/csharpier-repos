@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     node != _rootStatement
                     && (node.WasCompilerGenerated || node.Syntax.Kind() != SyntaxKind.Block)
                 )
-            ) {
+            )
+            {
                 return node.Update(node.Locals, node.LocalFunctions, builder.ToImmutableAndFree());
             }
 
@@ -41,7 +42,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             else if (
                 node == _rootStatement
                 && _factory.TopLevelMethod is SynthesizedSimpleProgramEntryPointSymbol entryPoint
-            ) {
+            )
+            {
                 builder.Insert(0, _factory.HiddenSequencePoint());
             }
 
@@ -71,7 +73,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ArrayBuilder<BoundStatement> builder,
             ImmutableArray<BoundStatement> statements,
             int startIndex = 0
-        ) {
+        )
+        {
             for (int i = startIndex; i < statements.Length; i++)
             {
                 BoundStatement? statement = VisitPossibleUsingDeclaration(
@@ -110,7 +113,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<BoundStatement> statements,
             int statementIndex,
             out bool replacedLocalDeclarations
-        ) {
+        )
+        {
             switch (node.Kind)
             {
                 case BoundKind.LabeledStatement:

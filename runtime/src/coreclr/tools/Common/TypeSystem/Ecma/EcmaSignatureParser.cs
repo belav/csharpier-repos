@@ -28,7 +28,8 @@ namespace Internal.TypeSystem.Ecma
             Func<EntityHandle, NotFoundBehavior, TypeDesc> typeResolver,
             BlobReader reader,
             NotFoundBehavior notFoundBehavior
-        ) {
+        )
+        {
             _notFoundBehavior = notFoundBehavior;
             _ecmaModule = null;
             _tsc = tsc;
@@ -43,7 +44,8 @@ namespace Internal.TypeSystem.Ecma
             EcmaModule ecmaModule,
             BlobReader reader,
             NotFoundBehavior notFoundBehavior
-        ) {
+        )
+        {
             _notFoundBehavior = notFoundBehavior;
             _ecmaModule = ecmaModule;
             _tsc = ecmaModule.Context;

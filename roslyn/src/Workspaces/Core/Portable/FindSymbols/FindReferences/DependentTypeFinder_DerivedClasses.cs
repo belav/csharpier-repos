@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             IImmutableSet<Project>? projects,
             bool transitive,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (s_isNonSealedClass(type))
             {
                 static bool TypeMatches(INamedTypeSymbol type, HashSet<INamedTypeSymbol> set) =>

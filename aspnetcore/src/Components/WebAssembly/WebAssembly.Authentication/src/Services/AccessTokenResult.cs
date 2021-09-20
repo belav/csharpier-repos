@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
             AccessTokenResultStatus status,
             AccessToken token,
             string redirectUrl
-        ) {
+        )
+        {
             Status = status;
             _token = token;
             RedirectUrl = redirectUrl;

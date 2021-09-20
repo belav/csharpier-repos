@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this ISymbol symbol,
             ISymbol within,
             ITypeSymbol? throughType = null
-        ) {
+        )
+        {
             if (within is IAssemblySymbol assembly)
             {
                 return symbol.IsAccessibleWithin(assembly, throughType);
@@ -39,7 +40,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this ISymbol symbol,
             IAssemblySymbol within,
             ITypeSymbol? throughType = null
-        ) {
+        )
+        {
             return IsSymbolAccessibleCore(symbol, within, throughType, out _);
         }
 
@@ -51,7 +53,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this ISymbol symbol,
             INamedTypeSymbol within,
             ITypeSymbol? throughType = null
-        ) {
+        )
+        {
             return IsSymbolAccessible(symbol, within, throughType, out _);
         }
 
@@ -65,7 +68,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             INamedTypeSymbol within,
             ITypeSymbol? throughType,
             out bool failedThroughTypeCheck
-        ) {
+        )
+        {
             return IsSymbolAccessibleCore(symbol, within, throughType, out failedThroughTypeCheck);
         }
 
@@ -84,7 +88,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             ISymbol within, // must be assembly or named type symbol
             ITypeSymbol? throughType,
             out bool failedThroughTypeCheck
-        ) {
+        )
+        {
             Contract.ThrowIfNull(symbol);
             Contract.ThrowIfNull(within);
             Debug.Assert(within is INamedTypeSymbol || within is IAssemblySymbol);
@@ -125,7 +130,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                             null,
                             out failedThroughTypeCheck
                         )
-                    ) {
+                    )
+                    {
                         return false;
                     }
 
@@ -138,7 +144,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                                 null,
                                 out failedThroughTypeCheck
                             )
-                        ) {
+                        )
+                        {
                             return false;
                         }
                     }
@@ -181,7 +188,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                         symbol.IsKind(SymbolKind.Method)
                         && ((IMethodSymbol)symbol).MethodKind == MethodKind.BuiltinOperator
                         && symbol.ContainingSymbol.IsKind(SymbolKind.DynamicType)
-                    ) {
+                    )
+                    {
                         return true;
                     }
 
@@ -199,7 +207,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                         symbol.IsKind(SymbolKind.Method)
                         && ((IMethodSymbol)symbol).MethodKind == MethodKind.BuiltinOperator
                         && symbol.ContainingSymbol.IsKind(SymbolKind.PointerType)
-                    ) {
+                    )
+                    {
                         return IsSymbolAccessibleCore(
                             ((IPointerTypeSymbol)symbol.ContainingSymbol).PointedAtType,
                             within,
@@ -245,7 +254,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                         typeArg.Kind != SymbolKind.TypeParameter
                         && typeArg.TypeKind != TypeKind.Error
                         && !IsSymbolAccessibleCore(typeArg, within, null, out _)
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }
@@ -273,7 +283,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             IAssemblySymbol assembly,
             Accessibility declaredAccessibility,
             ISymbol within
-        ) {
+        )
+        {
             Debug.Assert(within is INamedTypeSymbol || within is IAssemblySymbol);
             Contract.ThrowIfNull(assembly);
             var withinAssembly =
@@ -311,7 +322,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             ISymbol within,
             ITypeSymbol? throughType,
             out bool failedThroughTypeCheck
-        ) {
+        )
+        {
             Debug.Assert(within is INamedTypeSymbol || within is IAssemblySymbol);
             Contract.ThrowIfNull(containingType);
 
@@ -367,7 +379,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                         !withinAssembly.IsSameAssemblyOrHasFriendAccessTo(
                             containingType.ContainingAssembly
                         )
-                    ) {
+                    )
+                    {
                         // We require internal access.  If we don't have it, then this symbol is
                         // definitely not accessible to us.
                         return false;
@@ -387,7 +400,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                         withinAssembly.IsSameAssemblyOrHasFriendAccessTo(
                             containingType.ContainingAssembly
                         )
-                    ) {
+                    )
+                    {
                         // If we have internal access to this symbol, then that's sufficient.  no
                         // need to do the complicated protected case.
                         return true;
@@ -425,7 +439,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             ITypeSymbol? throughType,
             INamedTypeSymbol originalContainingType,
             out bool failedThroughTypeCheck
-        ) {
+        )
+        {
             failedThroughTypeCheck = false;
 
             // It is not an error to define protected member in a sealed Script class,
@@ -471,7 +486,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                         current.InheritsFromOrImplementsOrEqualsIgnoringConstruction(
                             originalContainingType
                         )
-                    ) {
+                    )
+                    {
                         // NOTE(cyrusn): We're continually walking up the 'throughType's inheritance
                         // chain.  We could compute it up front and cache it in a set.  However, i
                         // don't want to allocate memory in this function.  Also, in practice
@@ -483,7 +499,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                             || originalThroughType.InheritsFromOrImplementsOrEqualsIgnoringConstruction(
                                 current
                             )
-                        ) {
+                        )
+                        {
                             return true;
                         }
                         else
@@ -504,7 +521,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         private static bool IsPrivateSymbolAccessible(
             ISymbol within,
             INamedTypeSymbol originalContainingType
-        ) {
+        )
+        {
             Debug.Assert(within is INamedTypeSymbol || within is IAssemblySymbol);
 
             var withinType = within as INamedTypeSymbol;
@@ -523,7 +541,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         private static bool IsNestedWithinOriginalContainingType(
             INamedTypeSymbol withinType,
             INamedTypeSymbol originalContainingType
-        ) {
+        )
+        {
             Contract.ThrowIfNull(withinType);
             Contract.ThrowIfNull(originalContainingType);
 

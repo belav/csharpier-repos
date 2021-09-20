@@ -166,7 +166,8 @@ namespace Microsoft.AspNetCore.WebSockets.Test
             int count,
             AsyncCallback callback,
             object state
-        ) {
+        )
+        {
             // TODO: This option doesn't preserve the state object.
             // return ReadAsync(buffer, offset, count);
             return base.BeginRead(buffer, offset, count, callback, state);
@@ -183,7 +184,8 @@ namespace Microsoft.AspNetCore.WebSockets.Test
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (_terminated)
             {
                 return 0;
@@ -275,7 +277,8 @@ namespace Microsoft.AspNetCore.WebSockets.Test
             int count,
             AsyncCallback callback,
             object state
-        ) {
+        )
+        {
             Write(buffer, offset, count);
             var tcs = new TaskCompletionSource<object>(state);
             tcs.TrySetResult(null);
@@ -294,7 +297,8 @@ namespace Microsoft.AspNetCore.WebSockets.Test
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             VerifyBuffer(buffer, offset, count, allowEmpty: true);
             if (cancellationToken.IsCancellationRequested)
             {

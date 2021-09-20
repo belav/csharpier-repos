@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             CodeActionsCache codeActionsCache,
             ICodeFixService codeFixService,
             ICodeRefactoringService codeRefactoringService
-        ) {
+        )
+        {
             _codeActionsCache = codeActionsCache;
             _codeFixService = codeFixService;
             _codeRefactoringService = codeRefactoringService;
@@ -55,7 +56,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             LSP.VSCodeAction codeAction,
             RequestContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var document = context.Document;
             Contract.ThrowIfNull(document);
 

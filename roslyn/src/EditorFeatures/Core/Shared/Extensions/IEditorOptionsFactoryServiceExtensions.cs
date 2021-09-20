@@ -12,7 +12,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
         public static IEditorOptions GetEditorOptions(
             this IEditorOptionsFactoryService editorOptionsFactory,
             SourceText text
-        ) {
+        )
+        {
             var textBuffer = text.Container.TryGetTextBuffer();
             if (textBuffer != null)
             {
@@ -25,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
         public static IEditorOptions GetEditorOptions(
             this IEditorOptionsFactoryService editorOptionsFactory,
             Document document
-        ) {
+        )
+        {
             if (document.TryGetText(out var text))
             {
                 return editorOptionsFactory.GetEditorOptions(text);

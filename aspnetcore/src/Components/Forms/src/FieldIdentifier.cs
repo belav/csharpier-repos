@@ -90,7 +90,8 @@ namespace Microsoft.AspNetCore.Components.Forms
             Expression<Func<T>> accessor,
             out object model,
             out string fieldName
-        ) {
+        )
+        {
             var accessorBody = accessor.Body;
 
             // Unwrap casts to object
@@ -98,7 +99,8 @@ namespace Microsoft.AspNetCore.Components.Forms
                 accessorBody is UnaryExpression unaryExpression
                 && unaryExpression.NodeType == ExpressionType.Convert
                 && unaryExpression.Type == typeof(object)
-            ) {
+            )
+            {
                 accessorBody = unaryExpression.Operand;
             }
 

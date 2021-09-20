@@ -30,7 +30,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
             out SequencePosition consumed,
             out SequencePosition examined,
             out byte[]? message
-        ) {
+        )
+        {
             consumed = buffer.Start;
             examined = buffer.End;
             message = null;

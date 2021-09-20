@@ -20,7 +20,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         public AnalyzerNodeSetup(
             AnalyzerItemsTracker analyzerTracker,
             AnalyzersCommandHandler analyzerCommandHandler
-        ) {
+        )
+        {
             _analyzerTracker = analyzerTracker;
             _analyzerCommandHandler = analyzerCommandHandler;
         }

@@ -111,7 +111,8 @@ namespace Microsoft.AspNetCore.Authentication.Certificate
 
         private async Task<CertificateAuthenticationFailedContext> HandleFailureAsync(
             Exception error
-        ) {
+        )
+        {
             var authenticationFailedContext = new CertificateAuthenticationFailedContext(
                 Context,
                 Scheme,
@@ -126,13 +127,15 @@ namespace Microsoft.AspNetCore.Authentication.Certificate
 
         private async Task<AuthenticateResult> ValidateCertificateAsync(
             X509Certificate2 clientCertificate
-        ) {
+        )
+        {
             // If we have a self signed cert, and they're not allowed, exit early and not bother with
             // any other validations.
             if (
                 clientCertificate.IsSelfSigned()
                 && !Options.AllowedCertificateTypes.HasFlag(CertificateTypes.SelfSigned)
-            ) {
+            )
+            {
                 Logger.CertificateRejected("Self signed", clientCertificate.Subject);
                 return AuthenticateResult.Fail("Options do not allow self signed certificates.");
             }
@@ -142,7 +145,8 @@ namespace Microsoft.AspNetCore.Authentication.Certificate
             if (
                 !clientCertificate.IsSelfSigned()
                 && !Options.AllowedCertificateTypes.HasFlag(CertificateTypes.Chained)
-            ) {
+            )
+            {
                 Logger.CertificateRejected("Chained", clientCertificate.Subject);
                 return AuthenticateResult.Fail("Options do not allow chained certificates.");
             }

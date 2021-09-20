@@ -28,7 +28,8 @@ namespace Microsoft.Extensions.Logging.Console
             in LogEntry<TState> logEntry,
             IExternalScopeProvider scopeProvider,
             TextWriter textWriter
-        ) {
+        )
+        {
             string message = logEntry.Formatter(logEntry.State, logEntry.Exception);
             if (logEntry.Exception == null && message == null)
             {
@@ -74,7 +75,8 @@ namespace Microsoft.Extensions.Logging.Console
                         if (
                             logEntry.State
                             is IReadOnlyCollection<KeyValuePair<string, object>> stateProperties
-                        ) {
+                        )
+                        {
                             foreach (KeyValuePair<string, object> item in stateProperties)
                             {
                                 WriteItem(writer, item);
@@ -112,7 +114,8 @@ namespace Microsoft.Extensions.Logging.Console
         private void WriteScopeInformation(
             Utf8JsonWriter writer,
             IExternalScopeProvider scopeProvider
-        ) {
+        )
+        {
             if (FormatterOptions.IncludeScopes && scopeProvider != null)
             {
                 writer.WriteStartArray("Scopes");

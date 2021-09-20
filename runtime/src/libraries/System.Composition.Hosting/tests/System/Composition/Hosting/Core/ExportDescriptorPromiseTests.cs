@@ -35,7 +35,8 @@ namespace System.Composition.Hosting.Core.Tests
             string origin,
             bool isShared,
             IEnumerable<CompositionDependency> dependencies
-        ) {
+        )
+        {
             int calledDependencies = 0;
             int calledGetDescriptor = 0;
             var descriptor = ExportDescriptor.Create(Activator, new Dictionary<string, object>());

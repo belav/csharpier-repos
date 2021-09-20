@@ -19,7 +19,8 @@ namespace System.Web.Http.Tracing
                 || x.Level != y.Level
                 || x.Kind != y.Kind
                 || !Object.ReferenceEquals(x.Request, y.Request)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -31,7 +32,8 @@ namespace System.Web.Http.Tracing
                     if (
                         y.Exception == null
                         || !String.Equals(x.Exception.Message, y.Exception.Message)
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }

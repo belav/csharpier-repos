@@ -86,7 +86,8 @@ namespace Microsoft.Win32
             if (
                 baseKey != null
                 && keyName.StartsWith(baseKey.Name, StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 subKeyName =
                     (i == -1 || i == keyName.Length)
                         ? string.Empty
@@ -121,7 +122,8 @@ namespace Microsoft.Win32
             string? valueName,
             object value,
             RegistryValueKind valueKind
-        ) {
+        )
+        {
             RegistryKey basekey = GetBaseKeyFromKeyName(keyName, out string subKeyName);
 
             using (RegistryKey? key = basekey.CreateSubKey(subKeyName))

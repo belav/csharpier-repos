@@ -34,16 +34,18 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             bool hasUnmanagedConstraint,
             bool hasNotNullConstraint,
             int ordinal
-        ) : base(
-            containingType?.ContainingAssembly,
-            containingType,
-            attributes,
-            Accessibility.NotApplicable,
-            default,
-            name,
-            SpecialType.None,
-            nullableAnnotation
-        ) {
+        )
+            : base(
+                containingType?.ContainingAssembly,
+                containingType,
+                attributes,
+                Accessibility.NotApplicable,
+                default,
+                name,
+                SpecialType.None,
+                nullableAnnotation
+            )
+        {
             this.Variance = varianceKind;
             this.ConstraintTypes = constraintTypes;
             this.Ordinal = ordinal;
@@ -56,7 +58,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 
         protected override CodeGenerationTypeSymbol CloneWithNullableAnnotation(
             NullableAnnotation nullableAnnotation
-        ) {
+        )
+        {
             return new CodeGenerationTypeParameterSymbol(
                 this.ContainingType,
                 this.GetAttributes(),

@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryParentheses
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxFacts = document.GetLanguageService<ISyntaxFactsService>();
             var originalNodes = diagnostics.SelectAsArray(
                 d =>
@@ -68,13 +69,12 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryParentheses
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(
-                AnalyzersResources.Remove_unnecessary_parentheses,
-                createChangedDocument,
-                AnalyzersResources.Remove_unnecessary_parentheses
-            ) { }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(
+                    AnalyzersResources.Remove_unnecessary_parentheses,
+                    createChangedDocument,
+                    AnalyzersResources.Remove_unnecessary_parentheses
+                ) { }
         }
     }
 }

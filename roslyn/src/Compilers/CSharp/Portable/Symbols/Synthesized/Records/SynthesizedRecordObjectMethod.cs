@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         protected sealed override DeclarationModifiers MakeDeclarationModifiers(
             DeclarationModifiers allowedModifiers,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             const DeclarationModifiers result =
                 DeclarationModifiers.Public | DeclarationModifiers.Override;
             Debug.Assert((result & ~allowedModifiers) == 0);
@@ -43,7 +44,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             MethodSymbol overriding,
             SpecialMember overriddenSpecialMember,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             bool reportAnError = false;
 
             if (!overriding.IsOverride)
@@ -61,7 +63,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             is SourceMemberContainerTypeSymbol { IsRecord: true }
                         && overridden.ContainingModule == overriding.ContainingModule
                     )
-                ) {
+                )
+                {
                     MethodSymbol leastOverridden = overriding.GetLeastOverriddenMethod(
                         accessingTypeOpt: null
                     );

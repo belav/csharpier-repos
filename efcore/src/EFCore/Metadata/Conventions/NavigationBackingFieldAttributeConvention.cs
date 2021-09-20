@@ -31,7 +31,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionNavigationBuilder navigationBuilder,
             BackingFieldAttribute attribute,
             IConventionContext<IConventionNavigationBuilder> context
-        ) {
+        )
+        {
             navigationBuilder.HasField(attribute.Name, fromDataAnnotation: true);
         }
 
@@ -40,7 +41,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionSkipNavigationBuilder skipNavigationBuilder,
             BackingFieldAttribute attribute,
             IConventionContext<IConventionSkipNavigationBuilder> context
-        ) {
+        )
+        {
             skipNavigationBuilder.HasField(attribute.Name, fromDataAnnotation: true);
         }
     }

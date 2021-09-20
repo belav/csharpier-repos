@@ -102,7 +102,8 @@ namespace Microsoft.AspNetCore.NodeServices.Util
                 while (
                     (lineBreakPos = Array.IndexOf(buf, '\n', startPos, chunkLength - startPos)) >= 0
                     && startPos < chunkLength
-                ) {
+                )
+                {
                     var length = (lineBreakPos + 1) - startPos;
                     _linesBuffer.Append(buf, startPos, length);
                     OnCompleteLine(_linesBuffer.ToString());

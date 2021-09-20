@@ -24,7 +24,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             string generatedCode,
             RazorCodeGenerationOptions options,
             IEnumerable<RazorDiagnostic> diagnostics
-        ) {
+        )
+        {
             if (generatedCode == null)
             {
                 throw new ArgumentNullException(nameof(generatedCode));
@@ -55,7 +56,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             IEnumerable<RazorDiagnostic> diagnostics,
             IEnumerable<SourceMapping> sourceMappings,
             IEnumerable<LinePragma> linePragmas
-        ) {
+        )
+        {
             if (generatedCode == null)
             {
                 throw new ArgumentNullException(nameof(generatedCode));

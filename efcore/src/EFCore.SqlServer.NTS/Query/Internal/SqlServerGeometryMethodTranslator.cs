@@ -196,7 +196,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         public SqlServerGeometryMethodTranslator(
             IRelationalTypeMappingSource typeMappingSource,
             ISqlExpressionFactory sqlExpressionFactory
-        ) {
+        )
+        {
             _typeMappingSource = typeMappingSource;
             _sqlExpressionFactory = sqlExpressionFactory;
         }
@@ -212,7 +213,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             MethodInfo method,
             IReadOnlyList<SqlExpression> arguments,
             IDiagnosticsLogger<DbLoggerCategory.Query> logger
-        ) {
+        )
+        {
             Check.NotNull(method, nameof(method));
             Check.NotNull(arguments, nameof(arguments));
             Check.NotNull(logger, nameof(logger));
@@ -243,7 +245,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                         !isGeography
                         && _geometryMethodToFunctionName.TryGetValue(method, out functionName)
                     )
-                ) {
+                )
+                {
                     instance = _sqlExpressionFactory.ApplyTypeMapping(
                         instance,
                         _typeMappingSource.FindMapping(instance.Type, storeType)
@@ -350,14 +353,16 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         private IEnumerable<SqlExpression> Simplify(
             IEnumerable<SqlExpression> arguments,
             bool isGeography
-        ) {
+        )
+        {
             foreach (var argument in arguments)
             {
                 if (
                     argument is SqlConstantExpression constant
                     && constant.Value is Geometry geometry
                     && geometry.SRID == (isGeography ? 4326 : 0)
-                ) {
+                )
+                {
                     yield return _sqlExpressionFactory.Fragment("'" + geometry.AsText() + "'");
                     continue;
                 }

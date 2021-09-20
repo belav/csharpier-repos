@@ -14,7 +14,8 @@ namespace System.Net.Http
         public ByteArrayContent(byte[] content, int offset, int count) { }
         protected override System.IO.Stream CreateContentReadStream(
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         protected override System.Threading.Tasks.Task<System.IO.Stream> CreateContentReadStreamAsync()
@@ -29,14 +30,16 @@ namespace System.Net.Http
         protected override System.Threading.Tasks.Task SerializeToStreamAsync(
             System.IO.Stream stream,
             System.Net.TransportContext? context
-        ) {
+        )
+        {
             throw null;
         }
         protected override System.Threading.Tasks.Task SerializeToStreamAsync(
             System.IO.Stream stream,
             System.Net.TransportContext? context,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         protected internal override bool TryComputeLength(out long length)
@@ -63,13 +66,15 @@ namespace System.Net.Http
         protected internal override System.Net.Http.HttpResponseMessage Send(
             System.Net.Http.HttpRequestMessage request,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         protected internal override System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> SendAsync(
             System.Net.Http.HttpRequestMessage request,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -85,7 +90,8 @@ namespace System.Net.Http
             System.IO.Stream stream,
             System.Net.TransportContext? context,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -137,73 +143,85 @@ namespace System.Net.Http
         public void CancelPendingRequests() { }
         public System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> DeleteAsync(
             string? requestUri
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> DeleteAsync(
             string? requestUri,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> DeleteAsync(
             System.Uri? requestUri
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> DeleteAsync(
             System.Uri? requestUri,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         protected override void Dispose(bool disposing) { }
         public System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> GetAsync(
             string? requestUri
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> GetAsync(
             string? requestUri,
             System.Net.Http.HttpCompletionOption completionOption
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> GetAsync(
             string? requestUri,
             System.Net.Http.HttpCompletionOption completionOption,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> GetAsync(
             string? requestUri,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> GetAsync(
             System.Uri? requestUri
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> GetAsync(
             System.Uri? requestUri,
             System.Net.Http.HttpCompletionOption completionOption
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> GetAsync(
             System.Uri? requestUri,
             System.Net.Http.HttpCompletionOption completionOption,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> GetAsync(
             System.Uri? requestUri,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<byte[]> GetByteArrayAsync(string? requestUri)
@@ -213,7 +231,8 @@ namespace System.Net.Http
         public System.Threading.Tasks.Task<byte[]> GetByteArrayAsync(
             string? requestUri,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<byte[]> GetByteArrayAsync(System.Uri? requestUri)
@@ -223,7 +242,8 @@ namespace System.Net.Http
         public System.Threading.Tasks.Task<byte[]> GetByteArrayAsync(
             System.Uri? requestUri,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<System.IO.Stream> GetStreamAsync(string? requestUri)
@@ -233,7 +253,8 @@ namespace System.Net.Http
         public System.Threading.Tasks.Task<System.IO.Stream> GetStreamAsync(
             string? requestUri,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<System.IO.Stream> GetStreamAsync(System.Uri? requestUri)
@@ -243,7 +264,8 @@ namespace System.Net.Http
         public System.Threading.Tasks.Task<System.IO.Stream> GetStreamAsync(
             System.Uri? requestUri,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<string> GetStringAsync(string? requestUri)
@@ -253,7 +275,8 @@ namespace System.Net.Http
         public System.Threading.Tasks.Task<string> GetStringAsync(
             string? requestUri,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<string> GetStringAsync(System.Uri? requestUri)
@@ -263,85 +286,98 @@ namespace System.Net.Http
         public System.Threading.Tasks.Task<string> GetStringAsync(
             System.Uri? requestUri,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> PatchAsync(
             string? requestUri,
             System.Net.Http.HttpContent? content
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> PatchAsync(
             string? requestUri,
             System.Net.Http.HttpContent? content,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> PatchAsync(
             System.Uri? requestUri,
             System.Net.Http.HttpContent? content
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> PatchAsync(
             System.Uri? requestUri,
             System.Net.Http.HttpContent? content,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> PostAsync(
             string? requestUri,
             System.Net.Http.HttpContent? content
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> PostAsync(
             string? requestUri,
             System.Net.Http.HttpContent? content,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> PostAsync(
             System.Uri? requestUri,
             System.Net.Http.HttpContent? content
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> PostAsync(
             System.Uri? requestUri,
             System.Net.Http.HttpContent? content,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> PutAsync(
             string? requestUri,
             System.Net.Http.HttpContent? content
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> PutAsync(
             string? requestUri,
             System.Net.Http.HttpContent? content,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> PutAsync(
             System.Uri? requestUri,
             System.Net.Http.HttpContent? content
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> PutAsync(
             System.Uri? requestUri,
             System.Net.Http.HttpContent? content,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
@@ -353,7 +389,8 @@ namespace System.Net.Http
         public System.Net.Http.HttpResponseMessage Send(
             System.Net.Http.HttpRequestMessage request,
             System.Net.Http.HttpCompletionOption completionOption
-        ) {
+        )
+        {
             throw null;
         }
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
@@ -361,38 +398,44 @@ namespace System.Net.Http
             System.Net.Http.HttpRequestMessage request,
             System.Net.Http.HttpCompletionOption completionOption,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         public override System.Net.Http.HttpResponseMessage Send(
             System.Net.Http.HttpRequestMessage request,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> SendAsync(
             System.Net.Http.HttpRequestMessage request
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> SendAsync(
             System.Net.Http.HttpRequestMessage request,
             System.Net.Http.HttpCompletionOption completionOption
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> SendAsync(
             System.Net.Http.HttpRequestMessage request,
             System.Net.Http.HttpCompletionOption completionOption,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public override System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> SendAsync(
             System.Net.Http.HttpRequestMessage request,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -547,13 +590,15 @@ namespace System.Net.Http
         protected internal override System.Net.Http.HttpResponseMessage Send(
             System.Net.Http.HttpRequestMessage request,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         protected internal override System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> SendAsync(
             System.Net.Http.HttpRequestMessage request,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -581,25 +626,29 @@ namespace System.Net.Http
         public System.Threading.Tasks.Task CopyToAsync(
             System.IO.Stream stream,
             System.Net.TransportContext? context
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task CopyToAsync(
             System.IO.Stream stream,
             System.Net.TransportContext? context,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task CopyToAsync(
             System.IO.Stream stream,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual System.IO.Stream CreateContentReadStream(
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual System.Threading.Tasks.Task<System.IO.Stream> CreateContentReadStreamAsync()
@@ -608,7 +657,8 @@ namespace System.Net.Http
         }
         protected virtual System.Threading.Tasks.Task<System.IO.Stream> CreateContentReadStreamAsync(
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public void Dispose() { }
@@ -627,7 +677,8 @@ namespace System.Net.Http
         }
         public System.Threading.Tasks.Task<byte[]> ReadAsByteArrayAsync(
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.IO.Stream ReadAsStream()
@@ -644,7 +695,8 @@ namespace System.Net.Http
         }
         public System.Threading.Tasks.Task<System.IO.Stream> ReadAsStreamAsync(
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public System.Threading.Tasks.Task<string> ReadAsStringAsync()
@@ -653,7 +705,8 @@ namespace System.Net.Http
         }
         public System.Threading.Tasks.Task<string> ReadAsStringAsync(
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual void SerializeToStream(
@@ -669,7 +722,8 @@ namespace System.Net.Http
             System.IO.Stream stream,
             System.Net.TransportContext? context,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         protected internal abstract bool TryComputeLength(out long length);
@@ -682,7 +736,8 @@ namespace System.Net.Http
         protected internal virtual System.Net.Http.HttpResponseMessage Send(
             System.Net.Http.HttpRequestMessage request,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         protected internal abstract System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> SendAsync(
@@ -701,13 +756,15 @@ namespace System.Net.Http
         public virtual System.Net.Http.HttpResponseMessage Send(
             System.Net.Http.HttpRequestMessage request,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> SendAsync(
             System.Net.Http.HttpRequestMessage request,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -752,7 +809,8 @@ namespace System.Net.Http
         }
         public bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhen(true)] System.Net.Http.HttpMethod? other
-        ) {
+        )
+        {
             throw null;
         }
         public override bool Equals([System.Diagnostics.CodeAnalysis.NotNullWhen(true)] object? obj)
@@ -766,13 +824,15 @@ namespace System.Net.Http
         public static bool operator ==(
             System.Net.Http.HttpMethod? left,
             System.Net.Http.HttpMethod? right
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Net.Http.HttpMethod? left,
             System.Net.Http.HttpMethod? right
-        ) {
+        )
+        {
             throw null;
         }
         public override string ToString()
@@ -889,7 +949,8 @@ namespace System.Net.Http
         bool System.Collections.Generic.IDictionary<string, object?>.TryGetValue(
             string key,
             out object? value
-        ) {
+        )
+        {
             throw null;
         }
         object? System.Collections.Generic.IDictionary<string, object?>.this[string key]
@@ -928,7 +989,8 @@ namespace System.Net.Http
             >>.CopyTo(
             System.Collections.Generic.KeyValuePair<string, object?>[] array,
             int arrayIndex
-        ) {
+        )
+        {
             throw null;
         }
         int System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<
@@ -962,7 +1024,8 @@ namespace System.Net.Http
         public bool TryGetValue<TValue>(
             HttpRequestOptionsKey<TValue> key,
             [MaybeNullWhen(false)] out TValue value
-        ) {
+        )
+        {
             throw null;
         }
         public void Set<TValue>(HttpRequestOptionsKey<TValue> key, TValue value)
@@ -1045,13 +1108,15 @@ namespace System.Net.Http
         protected internal sealed override System.Net.Http.HttpResponseMessage Send(
             System.Net.Http.HttpRequestMessage request,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         protected internal sealed override System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> SendAsync(
             System.Net.Http.HttpRequestMessage request,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1071,7 +1136,8 @@ namespace System.Net.Http
         public virtual void Add(System.Net.Http.HttpContent content) { }
         protected override System.IO.Stream CreateContentReadStream(
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         protected override System.Threading.Tasks.Task<System.IO.Stream> CreateContentReadStreamAsync()
@@ -1080,7 +1146,8 @@ namespace System.Net.Http
         }
         protected override System.Threading.Tasks.Task<System.IO.Stream> CreateContentReadStreamAsync(
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         protected override void Dispose(bool disposing) { }
@@ -1096,14 +1163,16 @@ namespace System.Net.Http
         protected override System.Threading.Tasks.Task SerializeToStreamAsync(
             System.IO.Stream stream,
             System.Net.TransportContext? context
-        ) {
+        )
+        {
             throw null;
         }
         protected override System.Threading.Tasks.Task SerializeToStreamAsync(
             System.IO.Stream stream,
             System.Net.TransportContext? context,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
@@ -1126,7 +1195,8 @@ namespace System.Net.Http
             System.IO.Stream stream,
             System.Net.TransportContext? context,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1135,7 +1205,8 @@ namespace System.Net.Http
         public ReadOnlyMemoryContent(System.ReadOnlyMemory<byte> content) { }
         protected override System.IO.Stream CreateContentReadStream(
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         protected override System.Threading.Tasks.Task<System.IO.Stream> CreateContentReadStreamAsync()
@@ -1150,14 +1221,16 @@ namespace System.Net.Http
         protected override System.Threading.Tasks.Task SerializeToStreamAsync(
             System.IO.Stream stream,
             System.Net.TransportContext? context
-        ) {
+        )
+        {
             throw null;
         }
         protected override System.Threading.Tasks.Task SerializeToStreamAsync(
             System.IO.Stream stream,
             System.Net.TransportContext? context,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         protected internal override bool TryComputeLength(out long length)
@@ -1303,13 +1376,15 @@ namespace System.Net.Http
         protected internal override System.Net.Http.HttpResponseMessage Send(
             System.Net.Http.HttpRequestMessage request,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         protected internal override System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> SendAsync(
             System.Net.Http.HttpRequestMessage request,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         public bool EnableMultipleHttp2Connections
@@ -1380,7 +1455,8 @@ namespace System.Net.Http
         public StreamContent(System.IO.Stream content, int bufferSize) { }
         protected override System.IO.Stream CreateContentReadStream(
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         protected override System.Threading.Tasks.Task<System.IO.Stream> CreateContentReadStreamAsync()
@@ -1396,14 +1472,16 @@ namespace System.Net.Http
         protected override System.Threading.Tasks.Task SerializeToStreamAsync(
             System.IO.Stream stream,
             System.Net.TransportContext? context
-        ) {
+        )
+        {
             throw null;
         }
         protected override System.Threading.Tasks.Task SerializeToStreamAsync(
             System.IO.Stream stream,
             System.Net.TransportContext? context,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
         protected internal override bool TryComputeLength(out long length)
@@ -1416,16 +1494,14 @@ namespace System.Net.Http
         public StringContent(string content) : base(default(byte[])) { }
         public StringContent(string content, System.Text.Encoding? encoding) : base(default(byte[]))
         { }
-        public StringContent(
-            string content,
-            System.Text.Encoding? encoding,
-            string? mediaType
-        ) : base(default(byte[])) { }
+        public StringContent(string content, System.Text.Encoding? encoding, string? mediaType)
+            : base(default(byte[])) { }
         protected override System.Threading.Tasks.Task SerializeToStreamAsync(
             System.IO.Stream stream,
             System.Net.TransportContext? context,
             System.Threading.CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1468,7 +1544,8 @@ namespace System.Net.Http.Headers
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? input,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Net.Http.Headers.AuthenticationHeaderValue? parsedValue
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1575,7 +1652,8 @@ namespace System.Net.Http.Headers
         public static bool TryParse(
             string? input,
             out System.Net.Http.Headers.CacheControlHeaderValue? parsedValue
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1653,7 +1731,8 @@ namespace System.Net.Http.Headers
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? input,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Net.Http.Headers.ContentDispositionHeaderValue? parsedValue
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1711,7 +1790,8 @@ namespace System.Net.Http.Headers
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? input,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Net.Http.Headers.ContentRangeHeaderValue? parsedValue
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1755,7 +1835,8 @@ namespace System.Net.Http.Headers
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? input,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Net.Http.Headers.EntityTagHeaderValue? parsedValue
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1856,7 +1937,8 @@ namespace System.Net.Http.Headers
         public bool TryAddWithoutValidation(
             string name,
             System.Collections.Generic.IEnumerable<string?> values
-        ) {
+        )
+        {
             throw null;
         }
         public bool TryAddWithoutValidation(string name, string? value)
@@ -1867,7 +1949,8 @@ namespace System.Net.Http.Headers
             string name,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Collections.Generic.IEnumerable<string>? values
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -2192,7 +2275,8 @@ namespace System.Net.Http.Headers
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? input,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Net.Http.Headers.MediaTypeHeaderValue? parsedValue
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -2211,7 +2295,8 @@ namespace System.Net.Http.Headers
         }
         public static new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue Parse(
             string? input
-        ) {
+        )
+        {
             throw null;
         }
         object System.ICloneable.Clone()
@@ -2222,7 +2307,8 @@ namespace System.Net.Http.Headers
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? input,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Net.Http.Headers.MediaTypeWithQualityHeaderValue? parsedValue
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -2264,7 +2350,8 @@ namespace System.Net.Http.Headers
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? input,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Net.Http.Headers.NameValueHeaderValue? parsedValue
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -2292,7 +2379,8 @@ namespace System.Net.Http.Headers
         }
         public static new System.Net.Http.Headers.NameValueWithParametersHeaderValue Parse(
             string? input
-        ) {
+        )
+        {
             throw null;
         }
         object System.ICloneable.Clone()
@@ -2307,7 +2395,8 @@ namespace System.Net.Http.Headers
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? input,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Net.Http.Headers.NameValueWithParametersHeaderValue? parsedValue
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -2347,7 +2436,8 @@ namespace System.Net.Http.Headers
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? input,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Net.Http.Headers.ProductHeaderValue? parsedValue
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -2388,7 +2478,8 @@ namespace System.Net.Http.Headers
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string input,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Net.Http.Headers.ProductInfoHeaderValue? parsedValue
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -2429,7 +2520,8 @@ namespace System.Net.Http.Headers
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? input,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Net.Http.Headers.RangeConditionHeaderValue? parsedValue
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -2470,7 +2562,8 @@ namespace System.Net.Http.Headers
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? input,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Net.Http.Headers.RangeHeaderValue? parsedValue
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -2538,7 +2631,8 @@ namespace System.Net.Http.Headers
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? input,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Net.Http.Headers.RetryConditionHeaderValue? parsedValue
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -2578,7 +2672,8 @@ namespace System.Net.Http.Headers
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? input,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Net.Http.Headers.StringWithQualityHeaderValue? parsedValue
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -2620,7 +2715,8 @@ namespace System.Net.Http.Headers
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? input,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Net.Http.Headers.TransferCodingHeaderValue? parsedValue
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -2639,7 +2735,8 @@ namespace System.Net.Http.Headers
         }
         public static new System.Net.Http.Headers.TransferCodingWithQualityHeaderValue Parse(
             string? input
-        ) {
+        )
+        {
             throw null;
         }
         object System.ICloneable.Clone()
@@ -2650,7 +2747,8 @@ namespace System.Net.Http.Headers
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? input,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Net.Http.Headers.TransferCodingWithQualityHeaderValue? parsedValue
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -2704,7 +2802,8 @@ namespace System.Net.Http.Headers
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? input,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Net.Http.Headers.ViaHeaderValue? parsedValue
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -2753,7 +2852,8 @@ namespace System.Net.Http.Headers
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? input,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Net.Http.Headers.WarningHeaderValue? parsedValue
-        ) {
+        )
+        {
             throw null;
         }
     }

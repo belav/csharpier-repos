@@ -52,7 +52,8 @@ namespace System.Formats.Asn1.Tests.Reader
             AsnEncodingRules ruleSet,
             string inputHex,
             string expectedValue
-        ) {
+        )
+        {
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
             string value = reader.ReadCharacterString(UniversalTagNumber.T61String);
@@ -66,7 +67,8 @@ namespace System.Formats.Asn1.Tests.Reader
             AsnEncodingRules ruleSet,
             string inputHex,
             string expectedValue
-        ) {
+        )
+        {
             byte[] inputData = inputHex.HexToByteArray();
             char[] output = new char[expectedValue.Length];
 

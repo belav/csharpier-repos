@@ -11,9 +11,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
             Http2SettingsParameter parameter,
             long lowerBound,
             long upperBound
-        ) : base(
-            $"HTTP/2 SETTINGS parameter {parameter} must be set to a value between {lowerBound} and {upperBound}"
-        ) {
+        )
+            : base(
+                $"HTTP/2 SETTINGS parameter {parameter} must be set to a value between {lowerBound} and {upperBound}"
+            )
+        {
             Parameter = parameter;
         }
 

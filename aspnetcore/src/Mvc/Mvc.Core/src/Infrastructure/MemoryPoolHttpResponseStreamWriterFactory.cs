@@ -44,7 +44,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         public MemoryPoolHttpResponseStreamWriterFactory(
             ArrayPool<byte> bytePool,
             ArrayPool<char> charPool
-        ) {
+        )
+        {
             if (bytePool == null)
             {
                 throw new ArgumentNullException(nameof(bytePool));

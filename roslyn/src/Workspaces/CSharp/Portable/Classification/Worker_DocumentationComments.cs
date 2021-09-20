@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
     {
         private void ClassifyDocumentationComment(
             DocumentationCommentTriviaSyntax documentationComment
-        ) {
+        )
+        {
             if (!_textSpan.OverlapsWith(documentationComment.Span))
             {
                 return;

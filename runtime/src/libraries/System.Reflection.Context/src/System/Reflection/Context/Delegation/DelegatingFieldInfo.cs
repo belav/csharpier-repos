@@ -124,7 +124,8 @@ namespace System.Reflection.Context.Delegation
             BindingFlags invokeAttr,
             Binder binder,
             CultureInfo culture
-        ) {
+        )
+        {
             UnderlyingField.SetValue(obj, value, invokeAttr, binder, culture);
         }
 

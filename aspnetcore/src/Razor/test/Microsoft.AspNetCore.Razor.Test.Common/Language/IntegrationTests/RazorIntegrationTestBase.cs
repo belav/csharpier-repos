@@ -120,7 +120,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
         private RazorProjectEngine CreateProjectEngine(
             RazorConfiguration configuration,
             MetadataReference[] references
-        ) {
+        )
+        {
             return RazorProjectEngine.Create(
                 configuration,
                 FileSystem,
@@ -155,7 +156,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
             string cshtmlContent,
             string fileKind = null,
             string cssScope = null
-        ) {
+        )
+        {
             var fullPath = WorkingDirectory + PathSeparator + cshtmlRelativePath;
 
             // FilePaths in Razor are **always** are of the form '/a/b/c.cshtml'
@@ -186,7 +188,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
             string cshtmlContent,
             bool throwOnFailure = true,
             string cssScope = null
-        ) {
+        )
+        {
             return CompileToCSharp(
                 DefaultFileName,
                 cshtmlContent,
@@ -201,7 +204,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
             bool throwOnFailure = true,
             string fileKind = null,
             string cssScope = null
-        ) {
+        )
+        {
             if (DeclarationOnly && DesignTime)
             {
                 throw new InvalidOperationException(
@@ -338,7 +342,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
         protected CompileToAssemblyResult CompileToAssembly(
             string cshtmlRelativePath,
             string cshtmlContent
-        ) {
+        )
+        {
             var cSharpResult = CompileToCSharp(cshtmlRelativePath, cshtmlContent);
             return CompileToAssembly(cSharpResult);
         }
@@ -346,7 +351,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
         protected CompileToAssemblyResult CompileToAssembly(
             CompileToCSharpResult cSharpResult,
             bool throwOnFailure = true
-        ) {
+        )
+        {
             if (cSharpResult.Diagnostics.Any() && throwOnFailure)
             {
                 var diagnosticsLog = string.Join(
@@ -403,14 +409,16 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
         protected IComponent CompileToComponent(
             CompileToCSharpResult cSharpResult,
             string fullTypeName
-        ) {
+        )
+        {
             return CompileToComponent(CompileToAssembly(cSharpResult), fullTypeName);
         }
 
         protected IComponent CompileToComponent(
             CompileToAssemblyResult assemblyResult,
             string fullTypeName
-        ) {
+        )
+        {
             var componentType = assemblyResult.Assembly.GetType(fullTypeName);
             if (componentType == null)
             {

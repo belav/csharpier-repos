@@ -34,7 +34,8 @@ namespace Microsoft.AspNetCore.Connections.Experimental
         /// <inheritdoc />
         public IMultiplexedConnectionBuilder Use(
             Func<MultiplexedConnectionDelegate, MultiplexedConnectionDelegate> middleware
-        ) {
+        )
+        {
             _components.Add(middleware);
             return this;
         }

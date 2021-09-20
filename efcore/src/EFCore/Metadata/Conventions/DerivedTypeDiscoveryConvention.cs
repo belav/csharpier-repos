@@ -21,9 +21,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         ///     Creates a new instance of <see cref="DerivedTypeDiscoveryConvention" />.
         /// </summary>
         /// <param name="dependencies"> Parameter object containing dependencies for this convention. </param>
-        public DerivedTypeDiscoveryConvention(
-            ProviderConventionSetBuilderDependencies dependencies
-        ) : base(dependencies) { }
+        public DerivedTypeDiscoveryConvention(ProviderConventionSetBuilderDependencies dependencies)
+            : base(dependencies) { }
 
         /// <summary>
         ///     Called after an entity type is added to the model.
@@ -33,7 +32,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessEntityTypeAdded(
             IConventionEntityTypeBuilder entityTypeBuilder,
             IConventionContext<IConventionEntityTypeBuilder> context
-        ) {
+        )
+        {
             var entityType = entityTypeBuilder.Metadata;
             var clrType = entityType.ClrType;
             if (
@@ -42,7 +42,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 || entityType.HasDefiningNavigation()
                 || entityType.Model.IsOwned(clrType)
                 || entityType.FindOwnership() != null
-            ) {
+            )
+            {
                 return;
             }
 
@@ -65,7 +66,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                             && FindClosestBaseType(directlyDerivedType) == entityType
                         )
                     )
-                ) {
+                )
+                {
                     directlyDerivedType.Builder.HasBaseType(entityType);
                 }
             }

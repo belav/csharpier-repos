@@ -295,7 +295,8 @@ namespace System.Reflection.Tests
         public static void GetEnumUnderlyingType(
             TypeWrapper enumTypeW,
             TypeWrapper expectedUnderlyingTypeW
-        ) {
+        )
+        {
             Type enumType = enumTypeW?.Type;
             Type expectedUnderlyingType = expectedUnderlyingTypeW?.Type;
 
@@ -609,7 +610,8 @@ namespace System.Reflection.Tests
                 MetadataLoadContext lc = new MetadataLoadContext(
                     new EmptyCoreMetadataAssemblyResolver()
                 )
-            ) {
+            )
+            {
                 Assembly a = lc.LoadFromByteArray(TestData.s_SimpleAssemblyImage);
                 // Create big hash collisions in GetTypeCoreCache.
                 for (int i = 0; i < 1000; i++)
@@ -630,7 +632,8 @@ namespace System.Reflection.Tests
                 MetadataLoadContext lc = new MetadataLoadContext(
                     new EmptyCoreMetadataAssemblyResolver()
                 )
-            ) {
+            )
+            {
                 Assembly a = lc.LoadFromAssemblyPath(
                     AssemblyPathHelper.GetAssemblyLocation(
                         typeof(SampleMetadata.NS0.SameNamedType).Assembly
@@ -655,7 +658,8 @@ namespace System.Reflection.Tests
                 MetadataLoadContext lc = new MetadataLoadContext(
                     new EmptyCoreMetadataAssemblyResolver()
                 )
-            ) {
+            )
+            {
                 // Make sure the tricky corner case of a null/empty namespace is covered.
                 Assembly a = lc.LoadFromAssemblyPath(
                     AssemblyPathHelper.GetAssemblyLocation(typeof(TopLevelType).Assembly)
@@ -697,7 +701,8 @@ namespace System.Reflection.Tests
                 MetadataLoadContext lc = new MetadataLoadContext(
                     new EmptyCoreMetadataAssemblyResolver()
                 )
-            ) {
+            )
+            {
                 Assembly a = lc.LoadFromByteArray(TestData.s_TypeWithStrangeCharacters);
                 Type[] types = a.GetTypes();
                 Assert.Equal(1, types.Length);

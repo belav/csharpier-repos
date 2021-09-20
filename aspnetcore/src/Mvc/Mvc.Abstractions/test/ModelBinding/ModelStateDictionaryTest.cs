@@ -428,7 +428,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         [InlineData("[0].foo.bar[0]")]
         public void GetFieldValidationState_IndexedPrefix_ReturnsInvalidIfKeyChildContainsErrors(
             string key
-        ) {
+        )
+        {
             // Arrange
             var dictionary = new ModelStateDictionary();
             dictionary.AddModelError(key, "error text");
@@ -445,7 +446,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         [InlineData("[0].foo.bar[0]")]
         public void GetFieldValidationState_IndexedPrefix_ReturnsValidIfModelStateDoesNotContainErrors(
             string key
-        ) {
+        )
+        {
             // Arrange
             var dictionary = new ModelStateDictionary();
             dictionary.MarkFieldValid(key);
@@ -711,7 +713,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         [InlineData("user.Age")]
         public void GetFieldValidity_ReturnsInvalid_IfAllKeysAreValidatedAndAnyEntryIsInvalid(
             string key
-        ) {
+        )
+        {
             // Arrange
             var dictionary = new ModelStateDictionary();
             dictionary.MarkFieldValid("user.Address");
@@ -731,7 +734,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         [InlineData("[0].product")]
         public void GetFieldValidity_ReturnsInvalid_IfAllKeysAreValidatedAndAnyEntryIsInvalid_Collection(
             string key
-        ) {
+        )
+        {
             // Arrange
             var dictionary = new ModelStateDictionary();
             dictionary.MarkFieldValid("[0].product.Name");

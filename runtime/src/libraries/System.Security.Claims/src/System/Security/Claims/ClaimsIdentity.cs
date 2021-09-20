@@ -114,17 +114,14 @@ namespace System.Security.Claims
         /// <param name="nameType">The <see cref="Claim.Type"/> used when obtaining the value of <see cref="ClaimsIdentity.Name"/>.</param>
         /// <param name="roleType">The <see cref="Claim.Type"/> used when performing logic for <see cref="ClaimsPrincipal.IsInRole"/>.</param>
         /// <remarks><seealso cref="ClaimsIdentity(IIdentity, IEnumerable{Claim}, string, string, string)"/> for details on how internal values are set.</remarks>
-        public ClaimsIdentity(
-            string? authenticationType,
-            string? nameType,
-            string? roleType
-        ) : this(
-            (IIdentity?)null,
-            (IEnumerable<Claim>?)null,
-            authenticationType,
-            nameType,
-            roleType
-        ) { }
+        public ClaimsIdentity(string? authenticationType, string? nameType, string? roleType)
+            : this(
+                (IIdentity?)null,
+                (IEnumerable<Claim>?)null,
+                authenticationType,
+                nameType,
+                roleType
+            ) { }
 
         /// <summary>
         /// Initializes an instance of <see cref="ClaimsIdentity"/>.
@@ -161,7 +158,8 @@ namespace System.Security.Claims
             string? authenticationType,
             string? nameType,
             string? roleType
-        ) {
+        )
+        {
             ClaimsIdentity? claimsIdentity = identity as ClaimsIdentity;
 
             _authenticationType =
@@ -736,7 +734,8 @@ namespace System.Security.Claims
                     claim != null
                     && string.Equals(claim.Type, type, StringComparison.OrdinalIgnoreCase)
                     && string.Equals(claim.Value, value, StringComparison.Ordinal)
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -764,7 +763,8 @@ namespace System.Security.Claims
             if (
                 (mask & SerializationMask.AuthenticationType)
                 == SerializationMask.AuthenticationType
-            ) {
+            )
+            {
                 _authenticationType = reader.ReadString();
                 numPropertiesRead++;
             }
@@ -891,7 +891,8 @@ namespace System.Security.Claims
                     ClaimsIdentity.DefaultNameClaimType,
                     StringComparison.Ordinal
                 )
-            ) {
+            )
+            {
                 mask |= SerializationMask.NameClaimType;
                 numberOfPropertiesWritten++;
             }
@@ -902,7 +903,8 @@ namespace System.Security.Claims
                     ClaimsIdentity.DefaultRoleClaimType,
                     StringComparison.Ordinal
                 )
-            ) {
+            )
+            {
                 mask |= SerializationMask.RoleClaimType;
                 numberOfPropertiesWritten++;
             }
@@ -936,7 +938,8 @@ namespace System.Security.Claims
             if (
                 (mask & SerializationMask.AuthenticationType)
                 == SerializationMask.AuthenticationType
-            ) {
+            )
+            {
                 writer.Write(_authenticationType!);
             }
 

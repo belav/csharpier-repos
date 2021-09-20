@@ -1475,7 +1475,8 @@ namespace XLinqTests
             string actualXml,
             string expectedXml,
             ConformanceLevel conformanceLevel
-        ) {
+        )
+        {
             var rs = new XmlReaderSettings();
             rs.ConformanceLevel = conformanceLevel;
 

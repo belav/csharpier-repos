@@ -34,7 +34,8 @@ namespace System.CodeDom.Tests
             CodeExpression targetObject,
             string eventName,
             CodeExpression listener
-        ) {
+        )
+        {
             var attachEvent = new CodeAttachEventStatement(targetObject, eventName, listener);
             Assert.Equal(targetObject, attachEvent.Event.TargetObject);
             Assert.Equal(eventName ?? string.Empty, attachEvent.Event.EventName);
@@ -60,7 +61,8 @@ namespace System.CodeDom.Tests
         public void Ctor_CodeEventReferenceExpression_CodeExpression(
             CodeEventReferenceExpression eventExpresion,
             CodeExpression listener
-        ) {
+        )
+        {
             var attachEvent = new CodeAttachEventStatement(eventExpresion, listener);
             Assert.Equal(
                 (eventExpresion ?? new CodeEventReferenceExpression()).TargetObject,
@@ -78,7 +80,8 @@ namespace System.CodeDom.Tests
         public void Event_Set_Get_ReturnsExpected(
             CodeEventReferenceExpression value,
             CodeExpression listener
-        ) {
+        )
+        {
             _ = listener;
             var attachEvent = new CodeAttachEventStatement();
             attachEvent.Event = value;

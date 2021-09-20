@@ -87,7 +87,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     OneOrMany.Create(this.AttributeDeclarationSyntaxList),
                     ref _lazyCustomAttributesBag
                 )
-            ) {
+            )
+            {
                 var completed = state.NotePartComplete(CompletionPart.Attributes);
                 Debug.Assert(completed);
             }
@@ -120,7 +121,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 AttributeSyntax,
                 AttributeLocation
             > arguments
-        ) {
+        )
+        {
             CSharpAttributeData boundAttribute;
             ObsoleteAttributeData obsoleteData;
 
@@ -130,7 +132,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     out boundAttribute,
                     out obsoleteData
                 )
-            ) {
+            )
+            {
                 if (obsoleteData != null)
                 {
                     arguments.GetOrCreateData<CommonFieldEarlyWellKnownAttributeData>().ObsoleteAttributeData =
@@ -161,7 +164,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (
                     lazyCustomAttributesBag != null
                     && lazyCustomAttributesBag.IsEarlyDecodedWellKnownAttributeDataComputed
-                ) {
+                )
+                {
                     var data =
                         (CommonFieldEarlyWellKnownAttributeData)lazyCustomAttributesBag.EarlyDecodedWellKnownAttributeData;
                     return data != null ? data.ObsoleteAttributeData : null;
@@ -177,7 +181,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 CSharpAttributeData,
                 AttributeLocation
             > arguments
-        ) {
+        )
+        {
             Debug.Assert((object)arguments.AttributeSyntaxOpt != null);
             var diagnostics = (BindingDiagnosticBag)arguments.Diagnostics;
 
@@ -252,12 +257,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ) { }
             else if (
                 attribute.IsTargetAttribute(this, AttributeDescription.DateTimeConstantAttribute)
-            ) {
+            )
+            {
                 VerifyConstantValueMatches(attribute.DecodeDateTimeConstantValue(), ref arguments);
             }
             else if (
                 attribute.IsTargetAttribute(this, AttributeDescription.DecimalConstantAttribute)
-            ) {
+            )
+            {
                 VerifyConstantValueMatches(attribute.DecodeDecimalConstantValue(), ref arguments);
             }
             else if (attribute.IsTargetAttribute(this, AttributeDescription.AllowNullAttribute))
@@ -286,7 +293,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         private static FlowAnalysisAnnotations DecodeFlowAnalysisAttributes(
             FieldWellKnownAttributeData attributeData
-        ) {
+        )
+        {
             var annotations = FlowAnalysisAnnotations.None;
             if (attributeData != null)
             {
@@ -314,7 +322,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 CSharpAttributeData,
                 AttributeLocation
             > arguments
-        ) {
+        )
+        {
             if (!attrValue.IsBad)
             {
                 var data = arguments.GetOrCreateData<FieldWellKnownAttributeData>();
@@ -334,7 +343,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             (object)constValue != null
                             && !constValue.IsBad
                             && constValue != attrValue
-                        ) {
+                        )
+                        {
                             diagnostics.Add(
                                 ErrorCode.ERR_FieldHasMultipleDistinctConstantValues,
                                 arguments.AttributeSyntaxOpt.Location
@@ -382,7 +392,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             BindingDiagnosticBag diagnostics,
             AttributeLocation symbolPart,
             WellKnownAttributeData decodedData
-        ) {
+        )
+        {
             Debug.Assert(!boundAttributes.IsDefault);
             Debug.Assert(!allAttributeSyntaxNodes.IsDefault);
             Debug.Assert(boundAttributes.Length == allAttributeSyntaxNodes.Length);
@@ -476,7 +487,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void AddSynthesizedAttributes(
             PEModuleBuilder moduleBuilder,
             ref ArrayBuilder<SynthesizedAttributeData> attributes
-        ) {
+        )
+        {
             base.AddSynthesizedAttributes(moduleBuilder, ref attributes);
 
             var compilation = this.DeclaringCompilation;

@@ -171,7 +171,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             ref int pNumRegistersUsed,
             CorElementType typ,
             TypeHandle thArgType
-        ) {
+        )
+        {
             Debug.Assert(IsX86);
 
             //        LIMITED_METHOD_CONTRACT;
@@ -255,7 +256,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             if (
                 (typeOfEmbeddedField != null)
                 && ((typeOfEmbeddedField.IsValueType) || (typeOfEmbeddedField.IsPointer))
-            ) {
+            )
+            {
                 switch (typeOfEmbeddedField.UnderlyingType.Category)
                 {
                     case TypeFlags.IntPtr:
@@ -314,7 +316,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             bool isVarArgMethod,
             out bool usesRetBuffer,
             out uint fpReturnSize
-        ) {
+        )
+        {
             usesRetBuffer = false;
             fpReturnSize = 0;
 
@@ -357,7 +360,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                                     if (
                                         descriptor.eightByteClassifications0
                                         == SystemVClassificationType.SystemVClassificationTypeSSE
-                                    ) {
+                                    )
+                                    {
                                         // Structs occupying just one eightbyte are treated as int / double
                                         fpReturnSize = sizeof(double);
                                     }
@@ -370,14 +374,16 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                                     if (
                                         descriptor.eightByteClassifications0
                                         == SystemVClassificationType.SystemVClassificationTypeSSE
-                                    ) {
+                                    )
+                                    {
                                         fpReturnSize += 1;
                                     }
 
                                     if (
                                         descriptor.eightByteClassifications0
                                         == SystemVClassificationType.SystemVClassificationTypeSSE
-                                    ) {
+                                    )
+                                    {
                                         fpReturnSize += 2;
                                     }
                                 }

@@ -87,7 +87,8 @@ namespace ILCompiler
             if (
                 type1.GetTypeDefinition() != type2.GetTypeDefinition()
                 || !Equals(type1.Instantiation, type2.Instantiation)
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -110,7 +111,8 @@ namespace ILCompiler
                 || method1.Signature.Length != method2.Signature.Length
                 || !Equals(method1.Instantiation, method2.Instantiation)
                 || !Equals(method1.Signature.ReturnType, method2.Signature.ReturnType)
-            ) {
+            )
+            {
                 return false;
             }
             for (int argIndex = 0; argIndex < method1.Signature.Length; argIndex++)
@@ -126,7 +128,8 @@ namespace ILCompiler
         public static bool Equals(
             MethodWithToken methodWithToken1,
             MethodWithToken methodWithToken2
-        ) {
+        )
+        {
             if (methodWithToken1 == methodWithToken2)
             {
                 return true;

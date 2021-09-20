@@ -29,7 +29,8 @@ namespace System.ComponentModel.Composition
             ImportCardinality cardinality,
             bool isRecomposable,
             params string[] contractNames
-        ) {
+        )
+        {
             if (exportContractName != null)
             {
                 var definition = ExportDefinitionFactory.Create(exportContractName);

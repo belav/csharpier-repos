@@ -35,7 +35,8 @@ namespace System.Web.Mvc
         internal static IModelBinder GetBinderFromAttributes(
             ICustomAttributeProvider element,
             Action<ICustomAttributeProvider> errorAction
-        ) {
+        )
+        {
             CustomModelBinderAttribute[] attrs =
                 (CustomModelBinderAttribute[])element.GetCustomAttributes(
                     typeof(CustomModelBinderAttribute),

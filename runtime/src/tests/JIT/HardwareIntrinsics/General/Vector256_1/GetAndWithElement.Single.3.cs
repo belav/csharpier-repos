@@ -204,7 +204,8 @@ namespace JIT.HardwareIntrinsics.General
             Single result,
             Single[] values,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             if (result != values[3])
             {
                 Succeeded = false;
@@ -225,7 +226,8 @@ namespace JIT.HardwareIntrinsics.General
             Single[] values,
             Single insertedValue,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Single[] resultElements = new Single[ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<Single, byte>(ref resultElements[0]), result);
             ValidateWithResult(resultElements, values, insertedValue, method);
@@ -236,7 +238,8 @@ namespace JIT.HardwareIntrinsics.General
             Single[] values,
             Single insertedValue,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             for (int i = 0; i < ElementCount; i++)

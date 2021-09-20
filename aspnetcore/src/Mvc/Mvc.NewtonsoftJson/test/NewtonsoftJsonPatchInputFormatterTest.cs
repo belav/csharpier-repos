@@ -178,7 +178,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         public void CanRead_ReturnsTrueOnlyForJsonPatchContentType(
             string requestContentType,
             bool expectedCanRead
-        ) {
+        )
+        {
             // Arrange
             var formatter = CreateFormatter();
 
@@ -262,7 +263,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
 
         private NewtonsoftJsonPatchInputFormatter CreateFormatter(
             bool allowInputFormatterExceptionMessages = false
-        ) {
+        )
+        {
             return new NewtonsoftJsonPatchInputFormatter(
                 NullLogger.Instance,
                 _serializerSettings,
@@ -279,7 +281,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         private InputFormatterContext CreateInputFormatterContext(
             Type modelType,
             HttpContext httpContext
-        ) {
+        )
+        {
             var provider = new EmptyModelMetadataProvider();
             var metadata = provider.GetMetadataForType(modelType);
 
@@ -295,7 +298,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         private static HttpContext CreateHttpContext(
             byte[] contentBytes,
             string contentType = "application/json-patch+json"
-        ) {
+        )
+        {
             var request = new Mock<HttpRequest>();
             var headers = new Mock<IHeaderDictionary>();
             request.SetupGet(r => r.Headers).Returns(headers.Object);

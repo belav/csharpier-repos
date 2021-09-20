@@ -142,7 +142,8 @@ public class FastTailCallCandidates
         int arg5,
         int arg6,
         int retValue = 10
-    ) {
+    )
+    {
         retValue += 1;
 
         if (retValue == 100)
@@ -181,7 +182,8 @@ public class FastTailCallCandidates
         float arg5,
         float arg6,
         int retValue = 10
-    ) {
+    )
+    {
         retValue += 1;
 
         if (retValue == 100)
@@ -193,7 +195,8 @@ public class FastTailCallCandidates
                 || arg4 != 13.0f
                 || arg5 != 14.0f
                 || arg6 != 15.0f
-            ) {
+            )
+            {
                 return 102;
             }
 
@@ -232,7 +235,8 @@ public class FastTailCallCandidates
         float argf5,
         float argf6,
         int retValue = 10
-    ) {
+    )
+    {
         retValue += 1;
 
         if (retValue == 100)
@@ -250,7 +254,8 @@ public class FastTailCallCandidates
                 || argf4 != 13.0f
                 || argf5 != 14.0f
                 || argf6 != 15.0f
-            ) {
+            )
+            {
                 return 103;
             }
 
@@ -294,7 +299,8 @@ public class FastTailCallCandidates
         int twelve,
         int thirteen,
         int fourteen
-    ) {
+    )
+    {
         if (one == 1)
         {
             two = one + two;
@@ -395,7 +401,8 @@ public class FastTailCallCandidates
         int fourth,
         int fifth,
         int sixth
-    ) {
+    )
+    {
         if (one % 2 == 0)
         {
             return DoNotFastTailCallHelper(
@@ -495,7 +502,8 @@ public class FastTailCallCandidates
         double six,
         double seven,
         double eight
-    ) {
+    )
+    {
         int count = 0;
         for (double i = 0; i < one; ++i)
         {
@@ -542,7 +550,8 @@ public class FastTailCallCandidates
         double two,
         double three,
         double four
-    ) {
+    )
+    {
         if (one % 2 == 0)
         {
             double a = one * 100;
@@ -572,7 +581,8 @@ public class FastTailCallCandidates
         double eight,
         double nine,
         double ten
-    ) {
+    )
+    {
         int count = 0;
         for (double i = 0; i < one; ++i)
         {
@@ -625,7 +635,8 @@ public class FastTailCallCandidates
         double seven,
         double eight,
         HFASize32 s1
-    ) {
+    )
+    {
         if (one % 2 == 0)
         {
             double a = one * 100;
@@ -695,7 +706,8 @@ public class FastTailCallCandidates
         double six,
         double seven,
         double eight
-    ) {
+    )
+    {
         if (one % 2 == 0)
         {
             double a = one * 100;
@@ -725,7 +737,8 @@ public class FastTailCallCandidates
         double seven,
         double eight,
         HFASize16 s1
-    ) {
+    )
+    {
         int count = 0;
         for (double i = 0; i < one; ++i)
         {
@@ -786,7 +799,8 @@ public class FastTailCallCandidates
         double eight,
         double nine,
         double ten
-    ) {
+    )
+    {
         if (one % 2 == 0)
         {
             double a = one * 100;
@@ -987,7 +1001,8 @@ public class FastTailCallCandidates
         int eight,
         StructSizeEightNotExplicit s1,
         StructSizeEightNotExplicit s2
-    ) {
+    )
+    {
         int count = 0;
         for (int i = 0; i < s1.a; ++i)
         {
@@ -1033,7 +1048,8 @@ public class FastTailCallCandidates
         int seven,
         int eight,
         StructSizeSixteenNotExplicit s1
-    ) {
+    )
+    {
         if (one % 2 == 0)
         {
             long a = one * 100;
@@ -1178,7 +1194,8 @@ public class FastTailCallCandidates
         StructSizeEightIntNotExplicit sstf3,
         StructSizeEightIntNotExplicit sstf4,
         StructSizeEightIntNotExplicit sstf5
-    ) {
+    )
+    {
         int a = sstf.a;
         int b = sstf.b;
 
@@ -1445,7 +1462,8 @@ public class FastTailCallCandidates
         long eight,
         long nine,
         long ten
-    ) {
+    )
+    {
         int count = 0;
         for (int i = 0; i < one * 100; ++i)
         {
@@ -1507,7 +1525,8 @@ public class FastTailCallCandidates
     /// </summary>
     public static int CalleeEnregisterableAmd64WindowsStructs8Bytes(
         StructSizeEightNotExplicit eightByteStruct
-    ) {
+    )
+    {
         long a = eightByteStruct.a;
 
         // Force this to not be inlined

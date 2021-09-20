@@ -39,7 +39,8 @@ namespace Microsoft.AspNetCore.Components.WebView.WindowsForms
         public static void Remove(
             this ObservableCollection<RootComponent> components,
             string selector
-        ) {
+        )
+        {
             for (var i = 0; i < components.Count; i++)
             {
                 if (components[i].Selector.Equals(selector, StringComparison.Ordinal))

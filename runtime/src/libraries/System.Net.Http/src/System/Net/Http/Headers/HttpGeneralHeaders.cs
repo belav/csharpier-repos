@@ -79,7 +79,8 @@ namespace System.Net.Http.Headers
                     KnownHeaders.Connection.Descriptor,
                     HeaderUtilities.ConnectionClose
                 )
-            ) {
+            )
+            {
                 return true;
             }
             if (headers != null && headers._connectionCloseSet)
@@ -140,7 +141,8 @@ namespace System.Net.Http.Headers
         internal static bool? GetTransferEncodingChunked(
             HttpHeaders parent,
             HttpGeneralHeaders? headers
-        ) {
+        )
+        {
             // If we've already initialized the transfer encoding header value collection
             // and it contains the special value, or if we haven't and the headers contain
             // the parsed special value, return true.  We don't just access TransferEncodingCore,
@@ -157,7 +159,8 @@ namespace System.Net.Http.Headers
                     KnownHeaders.TransferEncoding.Descriptor,
                     HeaderUtilities.TransferEncodingChunked
                 )
-            ) {
+            )
+            {
                 return true;
             }
             if (headers != null && headers._transferEncodingChunkedSet)

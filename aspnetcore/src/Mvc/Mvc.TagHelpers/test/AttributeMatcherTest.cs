@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         [InlineData(new object[] { new[] { "first-attr", "second-attr" } })]
         public void TryDetermineMode_ReturnsFalseIfNoAttributeMatchesAllRequiredAttributes(
             string[] modeAttributes
-        ) {
+        )
+        {
             // Arrange
             var modeInfos = new[] { new ModeAttributes<Mode>(Mode.A, modeAttributes) };
             var attributes = new TagHelperAttributeList

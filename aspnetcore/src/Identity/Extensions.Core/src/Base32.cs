@@ -113,7 +113,8 @@ namespace Microsoft.AspNetCore.Identity
             out byte f,
             out byte g,
             out byte h
-        ) {
+        )
+        {
             uint b1,
                 b2,
                 b3,

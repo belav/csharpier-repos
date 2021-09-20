@@ -305,7 +305,8 @@ namespace Moq
                 var setup in this.MutableSetups.ToArray(
                     setup => !setup.IsOverridden && !setup.IsConditional && predicate(setup)
                 )
-            ) {
+            )
+            {
                 try
                 {
                     setup.Verify(recursive: true, predicate, verifiedMocks);
@@ -334,7 +335,8 @@ namespace Moq
             LambdaExpression expression,
             Times times,
             string failMessage
-        ) {
+        )
+        {
             Guard.NotNull(times, nameof(times));
 
             var invocationCount = Mock.GetMatchingInvocationCount(
@@ -368,7 +370,8 @@ namespace Moq
             LambdaExpression expression,
             Times times,
             string failMessage
-        ) {
+        )
+        {
             Guard.NotNull(expression, nameof(expression));
 
             if (!expression.IsPropertyIndexer()) // guard because `.ToPropertyInfo()` doesn't (yet) work for indexers
@@ -385,7 +388,8 @@ namespace Moq
             LambdaExpression expression,
             Times times,
             string failMessage
-        ) {
+        )
+        {
             Guard.NotNull(expression, nameof(expression));
             Guard.IsAssignmentToPropertyOrIndexer(expression, nameof(expression));
 
@@ -397,7 +401,8 @@ namespace Moq
             LambdaExpression expression,
             Times times,
             string failMessage
-        ) {
+        )
+        {
             Guard.NotNull(expression, nameof(expression));
             Guard.IsEventAdd(expression, nameof(expression));
 
@@ -409,7 +414,8 @@ namespace Moq
             LambdaExpression expression,
             Times times,
             string failMessage
-        ) {
+        )
+        {
             Guard.NotNull(expression, nameof(expression));
             Guard.IsEventRemove(expression, nameof(expression));
 
@@ -476,7 +482,8 @@ namespace Moq
             Mock mock,
             LambdaExpression expression,
             out List<Pair<Invocation, InvocationShape>> invocationsToBeMarkedAsVerified
-        ) {
+        )
+        {
             Debug.Assert(mock != null);
             Debug.Assert(expression != null);
 
@@ -494,7 +501,8 @@ namespace Moq
             in ImmutablePopOnlyStack<InvocationShape> parts,
             HashSet<Mock> visitedInnerMocks,
             List<Pair<Invocation, InvocationShape>> invocationsToBeMarkedAsVerified
-        ) {
+        )
+        {
             Debug.Assert(mock != null);
             Debug.Assert(!parts.Empty);
             Debug.Assert(visitedInnerMocks != null);
@@ -512,7 +520,8 @@ namespace Moq
             var count = 0;
             foreach (
                 var matchingInvocation in mock.MutableInvocations.ToArray().Where(part.IsMatch)
-            ) {
+            )
+            {
                 invocationsToBeMarkedAsVerified.Add(
                     new Pair<Invocation, InvocationShape>(matchingInvocation, part)
                 );
@@ -536,7 +545,8 @@ namespace Moq
                     if (
                         Awaitable.TryGetResultRecursive(matchingInvocation.ReturnValue)
                         is IMocked mocked
-                    ) {
+                    )
+                    {
                         count += Mock.GetMatchingInvocationCount(
                             mocked.Mock,
                             remainingParts,
@@ -558,7 +568,8 @@ namespace Moq
             Mock mock,
             LambdaExpression expression,
             Condition condition
-        ) {
+        )
+        {
             Guard.NotNull(expression, nameof(expression));
 
             return Mock.SetupRecursive(
@@ -582,7 +593,8 @@ namespace Moq
             Mock mock,
             LambdaExpression expression,
             Condition condition
-        ) {
+        )
+        {
             Guard.NotNull(expression, nameof(expression));
 
             if (!expression.IsPropertyIndexer()) // guard because `.ToPropertyInfo()` doesn't (yet) work for indexers
@@ -598,7 +610,8 @@ namespace Moq
             Mock mock,
             LambdaExpression expression,
             Condition condition
-        ) {
+        )
+        {
             Guard.NotNull(expression, nameof(expression));
             Guard.IsAssignmentToPropertyOrIndexer(expression, nameof(expression));
 
@@ -612,7 +625,8 @@ namespace Moq
             LambdaExpression expression,
             PropertyInfo propertyToSet,
             object value
-        ) {
+        )
+        {
             Guard.NotNull(expression, nameof(expression));
 
             Mock.SetupRecursive<MethodCall>(
@@ -653,7 +667,8 @@ namespace Moq
             Mock mock,
             LambdaExpression expression,
             Condition condition
-        ) {
+        )
+        {
             Guard.NotNull(expression, nameof(expression));
             Guard.IsEventAdd(expression, nameof(expression));
 
@@ -664,7 +679,8 @@ namespace Moq
             Mock mock,
             LambdaExpression expression,
             Condition condition
-        ) {
+        )
+        {
             Guard.NotNull(expression, nameof(expression));
             Guard.IsEventRemove(expression, nameof(expression));
 
@@ -770,7 +786,8 @@ namespace Moq
         internal static void SetupAllProperties(
             Mock mock,
             DefaultValueProvider defaultValueProvider
-        ) {
+        )
+        {
             mock.MutableSetups.RemoveAllPropertyAccessorSetups();
             // Removing all the previous properties setups to keep the behaviour of overriding
             // existing setups in `SetupAllProperties`.
@@ -804,7 +821,8 @@ namespace Moq
             LambdaExpression expression,
             Stack<InvocationShape> parts,
             object[] arguments
-        ) {
+        )
+        {
             const BindingFlags bindingFlags =
                 BindingFlags.Public
                 | BindingFlags.NonPublic
@@ -922,7 +940,8 @@ namespace Moq
             MethodInfo method,
             out Mock candidateInnerMock,
             DefaultValueProvider useAlternateProvider = null
-        ) {
+        )
+        {
             Debug.Assert(method != null);
             Debug.Assert(method.ReturnType != null);
             Debug.Assert(method.ReturnType != typeof(void));
@@ -932,7 +951,8 @@ namespace Moq
                     method.ReturnType,
                     out object configuredDefaultValue
                 )
-            ) {
+            )
+            {
                 candidateInnerMock = null;
                 return configuredDefaultValue;
             }

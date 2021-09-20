@@ -17,7 +17,8 @@ namespace System.Security.Cryptography.Xml
             SortedList attrListToRender,
             SortedList nsListToRender,
             Hashtable nsLocallyDeclared
-        ) {
+        )
+        {
             foreach (object a in nsListToRender.GetKeyList())
             {
                 if (Utils.HasNamespacePrefix((XmlAttribute)a, nsPrefix))
@@ -57,7 +58,8 @@ namespace System.Security.Cryptography.Xml
                     uAncestral != null
                     && uDepth > rDepth
                     && Utils.IsNonRedundantNamespaceDecl(uAncestral, rAncestral)
-                ) {
+                )
+                {
                     if (Utils.IsXmlNamespaceNode(uAncestral))
                         attrListToRender.Add(uAncestral, null);
                     else
@@ -71,7 +73,8 @@ namespace System.Security.Cryptography.Xml
             SortedList attrListToRender,
             SortedList nsListToRender,
             Hashtable nsLocallyDeclared
-        ) {
+        )
+        {
             XmlAttribute attrib = null;
             object[] attrs = new object[nsLocallyDeclared.Count];
             nsLocallyDeclared.Values.CopyTo(attrs, 0);
@@ -113,7 +116,8 @@ namespace System.Security.Cryptography.Xml
             XmlAttribute attr,
             SortedList nsListToRender,
             Hashtable nsLocallyDeclared
-        ) {
+        )
+        {
             nsLocallyDeclared.Add(Utils.GetNamespacePrefix(attr), attr);
         }
 
@@ -122,7 +126,8 @@ namespace System.Security.Cryptography.Xml
             SortedList nsListToRender,
             SortedList attrListToRender,
             Hashtable nsLocallyDeclared
-        ) {
+        )
+        {
             nsLocallyDeclared.Add(Utils.GetNamespacePrefix(attr), attr);
         }
     }

@@ -57,7 +57,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             ICommandBatchPreparer batchPreparer,
             IBatchExecutor batchExecutor,
             IRelationalConnection connection
-        ) {
+        )
+        {
             Check.NotNull(batchPreparer, nameof(batchPreparer));
             Check.NotNull(batchExecutor, nameof(batchExecutor));
             Check.NotNull(connection, nameof(connection));

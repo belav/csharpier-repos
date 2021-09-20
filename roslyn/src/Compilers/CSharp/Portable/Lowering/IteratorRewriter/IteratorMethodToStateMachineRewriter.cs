@@ -67,18 +67,20 @@ namespace Microsoft.CodeAnalysis.CSharp
             VariableSlotAllocator slotAllocatorOpt,
             int nextFreeHoistedLocalSlot,
             BindingDiagnosticBag diagnostics
-        ) : base(
-            F,
-            originalMethod,
-            state,
-            hoistedVariables,
-            nonReusableLocalProxies,
-            synthesizedLocalOrdinals,
-            slotAllocatorOpt,
-            nextFreeHoistedLocalSlot,
-            diagnostics,
-            useFinalizerBookkeeping: false
-        ) {
+        )
+            : base(
+                F,
+                originalMethod,
+                state,
+                hoistedVariables,
+                nonReusableLocalProxies,
+                synthesizedLocalOrdinals,
+                slotAllocatorOpt,
+                nextFreeHoistedLocalSlot,
+                diagnostics,
+                useFinalizerBookkeeping: false
+            )
+        {
             _current = current;
         }
 
@@ -86,7 +88,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundStatement body,
             SynthesizedImplementationMethod moveNextMethod,
             SynthesizedImplementationMethod disposeMethod
-        ) {
+        )
+        {
             // scan body for yielding try blocks
             _yieldsInTryAnalysis = new YieldsInTryAnalysis(body);
             if (_yieldsInTryAnalysis.ContainsYieldsInTrys())

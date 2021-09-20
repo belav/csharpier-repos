@@ -171,7 +171,8 @@ namespace Microsoft.CodeAnalysis.Differencing
             if (
                 (wChildren = Comparer.GetChildren(w)) == null
                 || (xChildren = Comparer.GetChildren(x)) == null
-            ) {
+            )
+            {
                 return;
             }
 
@@ -241,7 +242,8 @@ namespace Microsoft.CodeAnalysis.Differencing
                     _match.TryGetPartnerInTree2(a, out var b)
                     && Comparer.GetParent(b).Equals(x)
                     && !ContainsPair(s, a, b)
-                ) {
+                )
+                {
                     Debug.Assert(Comparer.TreesEqual(a, Root1));
                     Debug.Assert(Comparer.TreesEqual(b, Root2));
 

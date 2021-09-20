@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextStructureNavigation
             ITextStructureNavigatorSelectorService selectorService,
             IContentTypeRegistryService contentTypeService,
             IWaitIndicator waitIndicator
-        ) {
+        )
+        {
             Contract.ThrowIfNull(selectorService);
             Contract.ThrowIfNull(contentTypeService);
 

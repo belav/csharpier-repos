@@ -139,7 +139,8 @@ namespace System.IO.Enumeration
                                     _entry.Name[1] == 0
                                     || (_entry.Name[1] == '.' && _entry.Name[2] == 0)
                                 )
-                            ) {
+                            )
+                            {
                                 // "." or "..", don't process unless the option is set
                                 if (!_options.ReturnSpecialDirectories)
                                     continue;
@@ -167,7 +168,8 @@ namespace System.IO.Enumeration
                                 _options.RecurseSubdirectories
                                 && _remainingRecursionDepth > 0
                                 && ShouldRecurseIntoEntry(ref entry)
-                            ) {
+                            )
+                            {
                                 // Recursion is on and the directory was accepted, Queue it
                                 if (_pending == null)
                                     _pending = new Queue<(string Path, int RemainingDepth)>();

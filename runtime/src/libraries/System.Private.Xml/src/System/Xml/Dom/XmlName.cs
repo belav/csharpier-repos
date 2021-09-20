@@ -25,7 +25,8 @@ namespace System.Xml
             XmlDocument ownerDoc,
             XmlName next,
             IXmlSchemaInfo? schemaInfo
-        ) {
+        )
+        {
             if (schemaInfo == null)
             {
                 return new XmlName(prefix, localName, ns, hashCode, ownerDoc, next);
@@ -43,7 +44,8 @@ namespace System.Xml
             int hashCode,
             XmlDocument ownerDoc,
             XmlName next
-        ) {
+        )
+        {
             _prefix = prefix;
             _localName = localName;
             _ns = ns;
@@ -272,7 +274,8 @@ namespace System.Xml
                 && (object?)schemaInfo.SchemaType == (object?)_schemaType
                 && (object?)schemaInfo.SchemaElement == (object?)(_decl as XmlSchemaElement)
                 && (object?)schemaInfo.SchemaAttribute == (object?)(_decl as XmlSchemaAttribute)
-            ) {
+            )
+            {
                 return true;
             }
             return false;

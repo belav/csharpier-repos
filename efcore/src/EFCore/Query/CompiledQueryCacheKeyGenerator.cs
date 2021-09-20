@@ -33,7 +33,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <param name="dependencies"> Parameter object containing dependencies for this service. </param>
         public CompiledQueryCacheKeyGenerator(
             CompiledQueryCacheKeyGeneratorDependencies dependencies
-        ) {
+        )
+        {
             Check.NotNull(dependencies, nameof(dependencies));
 
             Dependencies = dependencies;
@@ -100,7 +101,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 IModel model,
                 QueryTrackingBehavior queryTrackingBehavior,
                 bool async
-            ) {
+            )
+            {
                 _query = query;
                 _model = model;
                 _queryTrackingBehavior = queryTrackingBehavior;

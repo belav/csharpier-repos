@@ -31,7 +31,8 @@ namespace System.Net.Http.Json
             Type inputType,
             MediaTypeHeaderValue? mediaType,
             JsonSerializerOptions? options
-        ) {
+        )
+        {
             if (inputType == null)
             {
                 throw new ArgumentNullException(nameof(inputType));
@@ -76,7 +77,8 @@ namespace System.Net.Http.Json
             Stream targetStream,
             bool async,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Encoding? targetEncoding = GetEncoding(Headers.ContentType?.CharSet);
 
             // Wrap provided stream into a transcoding stream that buffers the data transcoded from utf-8 to the targetEncoding.
@@ -132,7 +134,8 @@ namespace System.Net.Http.Json
                         targetStream,
                         targetEncoding
                     )
-                ) {
+                )
+                {
                     await JsonSerializer.SerializeAsync(
                             transcodingStream,
                             Value,
@@ -189,7 +192,8 @@ namespace System.Net.Http.Json
                         charset.Length > 2
                         && charset[0] == '\"'
                         && charset[charset.Length - 1] == '\"'
-                    ) {
+                    )
+                    {
                         encoding = Encoding.GetEncoding(charset.Substring(1, charset.Length - 2));
                     }
                     else

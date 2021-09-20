@@ -429,7 +429,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             string projectName,
             string projectFileExtension,
             string projectFileContent
-        ) {
+        )
+        {
             var projectPath = Path.Combine(DirectoryName, projectName);
             Directory.CreateDirectory(projectPath);
 
@@ -448,7 +449,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                     projectTemplate,
                     out var csharpProjectTemplate
                 )
-            ) {
+            )
+            {
                 return _solution.GetProjectTemplate(csharpProjectTemplate, languageName);
             }
 
@@ -458,7 +460,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                     projectTemplate,
                     out var visualBasicProjectTemplate
                 )
-            ) {
+            )
+            {
                 return _solution.GetProjectTemplate(visualBasicProjectTemplate, languageName);
             }
 
@@ -651,7 +654,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             public int OnBeforeUnloadProject(
                 IVsHierarchy pRealHierarchy,
                 IVsHierarchy pStubHierarchy
-            ) {
+            )
+            {
                 return VSConstants.S_OK;
             }
 
@@ -705,7 +709,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             string fileName,
             string contents = null,
             bool open = false
-        ) {
+        )
+        {
             var project = GetProject(projectName);
             if (project.ProjectItems.Cast<EnvDTE.ProjectItem>().Any(x => x.Name == fileName))
             {
@@ -729,7 +734,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             string fileName,
             string contents = null,
             bool open = false
-        ) {
+        )
+        {
             void SetText(string text)
             {
                 InvokeOnUIThread(
@@ -787,7 +793,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             string fileName,
             string contents = null,
             bool open = false
-        ) {
+        )
+        {
             var project = GetProject(projectName);
             var projectDirectory = Path.GetDirectoryName(project.FullName);
             var filePath = Path.Combine(projectDirectory, fileName);
@@ -964,7 +971,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 int fSucceeded,
                 int fModified,
                 int fCancelCommand
-            ) {
+            )
+            {
                 OnUpdateSolutionDone?.Invoke(fSucceeded != 0, fModified != 0, fCancelCommand != 0);
                 return 0;
             }
@@ -1000,7 +1008,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 int fSucceeded,
                 int fModified,
                 int fCancelCommand
-            ) {
+            )
+            {
                 OnUpdateSolutionDone?.Invoke(fSucceeded != 0, fModified != 0, fCancelCommand != 0);
                 return 0;
             }
@@ -1027,7 +1036,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 IVsCfg pCfgSln,
                 uint dwAction,
                 ref int pfCancel
-            ) {
+            )
+            {
                 OnUpdateProjectConfigBegin?.Invoke(pHierProj, pCfgProj);
                 return 0;
             }
@@ -1039,7 +1049,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 uint dwAction,
                 int fSuccess,
                 int fCancel
-            ) {
+            )
+            {
                 OnUpdateProjectConfigDone?.Invoke(pHierProj, pCfgProj, fSuccess);
                 return 0;
             }
@@ -1151,7 +1162,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             string relativeFilePath,
             Guid logicalView,
             bool saveFile
-        ) {
+        )
+        {
             InvokeOnUIThread(
                 cancellationToken =>
                 {
@@ -1168,7 +1180,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                             out _,
                             out var windowFrame
                         )
-                    ) {
+                    )
+                    {
                         throw new InvalidOperationException(
                             $"File '{filePath}' is not open in logical view '{logicalView}'"
                         );
@@ -1249,7 +1262,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         private string GetAbsolutePathForProjectRelativeFilePath(
             string projectName,
             string relativeFilePath
-        ) {
+        )
+        {
             var project = _solution.Projects.Cast<EnvDTE.Project>()
                 .First(x => x.Name == projectName);
             var projectPath = Path.GetDirectoryName(project.FullName);
@@ -1350,7 +1364,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         private static EnvDTE.UIHierarchyItem FindItemAtPath(
             EnvDTE.UIHierarchyItems currentItems,
             string[] path
-        ) {
+        )
+        {
             EnvDTE.UIHierarchyItem item = null;
             foreach (var name in path)
             {
@@ -1371,7 +1386,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         private static EnvDTE.UIHierarchyItem FindFirstItemRecursively(
             EnvDTE.UIHierarchyItems currentItems,
             string itemName
-        ) {
+        )
+        {
             if (currentItems == null)
             {
                 return null;

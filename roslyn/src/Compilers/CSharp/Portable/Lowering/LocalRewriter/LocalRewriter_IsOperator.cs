@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundTypeExpression rewrittenTargetType,
             Conversion conversion,
             TypeSymbol rewrittenType
-        ) {
+        )
+        {
             if (rewrittenOperand.Kind == BoundKind.MethodGroup)
             {
                 var methodGroup = (BoundMethodGroup)rewrittenOperand;
@@ -98,7 +99,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression loweredOperand,
             ConstantValue constantValue,
             TypeSymbol type
-        ) {
+        )
+        {
             Debug.Assert(
                 constantValue == ConstantValue.True || constantValue == ConstantValue.False
             );

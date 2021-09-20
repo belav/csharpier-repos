@@ -164,7 +164,8 @@ namespace System.Web.Helpers
             if (
                 _dynamic != null
                 && DynamicHelper.TryGetMemberValue(_dynamic, memberName, out result)
-            ) {
+            )
+            {
                 return true;
             }
 

@@ -241,7 +241,8 @@ namespace Microsoft.Extensions.Hosting.Tests
                     )
                     .UseEnvironment(expected)
                     .Build()
-            ) {
+            )
+            {
                 Assert.Equal(
                     expected,
                     host.Services.GetService<IHostEnvironment>().EnvironmentName
@@ -268,7 +269,8 @@ namespace Microsoft.Extensions.Hosting.Tests
                     )
                     .UseContentRoot("/")
                     .Build()
-            ) {
+            )
+            {
                 Assert.Equal("/", host.Services.GetService<IHostEnvironment>().ContentRootPath);
             }
         }
@@ -291,7 +293,8 @@ namespace Microsoft.Extensions.Hosting.Tests
                         }
                     )
                     .Build()
-            ) {
+            )
+            {
                 var env = host.Services.GetRequiredService<IHostEnvironment>();
 
                 Assert.Equal("MyProjectReference", env.ApplicationName);
@@ -562,7 +565,8 @@ namespace Microsoft.Extensions.Hosting.Tests
                         }
                     )
                     .Build()
-            ) {
+            )
+            {
                 var env = host.Services.GetRequiredService<IHostEnvironment>();
 
                 Assert.Equal(Path.GetFullPath("."), env.ContentRootPath);
@@ -639,7 +643,8 @@ namespace Microsoft.Extensions.Hosting.Tests
         [InlineData(BackgroundServiceExceptionBehavior.StopHost)]
         public void HostBuilderCanConfigureBackgroundServiceExceptionBehavior(
             BackgroundServiceExceptionBehavior testBehavior
-        ) {
+        )
+        {
             using IHost host = new HostBuilder().ConfigureServices(
                     services =>
                         services.Configure<HostOptions>(

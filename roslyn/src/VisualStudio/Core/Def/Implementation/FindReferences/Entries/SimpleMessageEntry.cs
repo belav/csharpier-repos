@@ -29,7 +29,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 RoslynDefinitionBucket definitionBucket,
                 RoslynDefinitionBucket? navigationBucket,
                 string message
-            ) {
+            )
+            {
                 var referenceEntry = new SimpleMessageEntry(
                     definitionBucket,
                     navigationBucket,

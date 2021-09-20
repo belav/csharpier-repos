@@ -36,7 +36,8 @@ namespace System.Web.Http.SelfHost
         public async Task SendAsync_Direct_Returns_OK_For_Successful_ObjectContent_Write(
             string uri,
             TransferMode transferMode
-        ) {
+        )
+        {
             using (var port = new PortReserver())
             {
                 // Arrange & Act
@@ -58,7 +59,8 @@ namespace System.Web.Http.SelfHost
         public async Task SendAsync_ServiceModel_Returns_OK_For_Successful_ObjectContent_Write(
             string uri,
             TransferMode transferMode
-        ) {
+        )
+        {
             using (var port = new PortReserver())
             {
                 // Arrange
@@ -91,7 +93,8 @@ namespace System.Web.Http.SelfHost
         public async Task SendAsync_Direct_Returns_OK_For_Successful_Stream_Write(
             string uri,
             TransferMode transferMode
-        ) {
+        )
+        {
             using (var port = new PortReserver())
             {
                 // Arrange & Act
@@ -120,7 +123,8 @@ namespace System.Web.Http.SelfHost
         public async Task SendAsync_ServiceModel_Returns_OK_For_Successful_Stream_Write(
             string uri,
             TransferMode transferMode
-        ) {
+        )
+        {
             using (var port = new PortReserver())
             {
                 // Arrange & Act
@@ -146,7 +150,8 @@ namespace System.Web.Http.SelfHost
         public async Task SendAsync_Direct_Throws_When_ObjectContent_CopyToAsync_Throws(
             string uri,
             TransferMode transferMode
-        ) {
+        )
+        {
             using (var port = new PortReserver())
             {
                 // Arrange & Act & Assert
@@ -167,7 +172,8 @@ namespace System.Web.Http.SelfHost
         public async Task SendAsync_ServiceModel_Closes_Connection_When_ObjectContent_CopyToAsync_Throws(
             string uri,
             TransferMode transferMode
-        ) {
+        )
+        {
             using (var port = new PortReserver())
             {
                 // Arrange
@@ -189,7 +195,8 @@ namespace System.Web.Http.SelfHost
         public async Task SendAsync_Direct_Throws_When_StreamContent_Throws(
             string uri,
             TransferMode transferMode
-        ) {
+        )
+        {
             using (var port = new PortReserver())
             {
                 // Arrange & Act & Assert
@@ -208,7 +215,8 @@ namespace System.Web.Http.SelfHost
         public async Task SendAsync_ServiceModel_Throws_When_StreamContent_Throws(
             string uri,
             TransferMode transferMode
-        ) {
+        )
+        {
             using (var port = new PortReserver())
             {
                 // Arrange
@@ -255,7 +263,8 @@ namespace System.Web.Http.SelfHost
                     HttpSelfHostConfiguration expectedConfiguration = new HttpSelfHostConfiguration(
                         baseUri
                     )
-                ) {
+                )
+                {
                     expectedConfiguration.HostNameComparisonMode = HostNameComparisonMode.Exact;
 
                     using (HttpMessageHandler dispatcher = new LambdaHttpMessageHandler(sendAsync))
@@ -271,7 +280,8 @@ namespace System.Web.Http.SelfHost
                             HttpMethod.Get,
                             baseUri
                         )
-                    ) {
+                    )
+                    {
                         await server.OpenAsync();
 
                         // Act
@@ -321,7 +331,8 @@ namespace System.Web.Http.SelfHost
         public async Task Get_Returns_Hard404_If_IgnoreRouteDoesNotMatch(
             string uri,
             TransferMode transferMode
-        ) {
+        )
+        {
             using (var port = new PortReserver())
             {
                 // Arrange & Act
@@ -345,7 +356,8 @@ namespace System.Web.Http.SelfHost
         public async Task Get_Returns_Hard404_If_IgnoreRoute_WithConstraints_ConstraintsMatched(
             string uri,
             TransferMode transferMode
-        ) {
+        )
+        {
             using (var port = new PortReserver())
             {
                 // Arrange & Act
@@ -369,7 +381,8 @@ namespace System.Web.Http.SelfHost
         public async Task Get_Returns_Value_If_IgnoreRoute_WithConstraints_ConstraintsNotMatched(
             string uri,
             TransferMode transferMode
-        ) {
+        )
+        {
             using (var port = new PortReserver())
             {
                 // Arrange & Act
@@ -391,7 +404,8 @@ namespace System.Web.Http.SelfHost
         public async Task Get_Returns_Success_If_OtherRouteMatched(
             string uri,
             TransferMode transferMode
-        ) {
+        )
+        {
             using (var port = new PortReserver())
             {
                 // Arrange & Act
@@ -471,7 +485,8 @@ namespace System.Web.Http.SelfHost
             protected override async Task SerializeToStreamAsync(
                 Stream stream,
                 TransportContext context
-            ) {
+            )
+            {
                 await base.SerializeToStreamAsync(stream, context);
                 throw new InvalidOperationException("ThrowAfterWriteStream");
             }
@@ -481,7 +496,8 @@ namespace System.Web.Http.SelfHost
             PortReserver port,
             TransferMode transferMode,
             bool ignoreRoute = false
-        ) {
+        )
+        {
             HttpSelfHostConfiguration config = new HttpSelfHostConfiguration(
                 BaseUri(port, transferMode)
             );
@@ -513,13 +529,15 @@ namespace System.Web.Http.SelfHost
                 string parameterName,
                 IDictionary<string, object> values,
                 HttpRouteDirection routeDirection
-            ) {
+            )
+            {
                 long id;
                 if (
                     values.ContainsKey("id")
                     && Int64.TryParse(values["id"].ToString(), out id)
                     && (id == 10 || id == 15 || id == 20)
-                ) {
+                )
+                {
                     return true;
                 }
 
@@ -542,14 +560,16 @@ namespace System.Web.Http.SelfHost
 
             public LambdaHttpMessageHandler(
                 Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> sendAsync
-            ) {
+            )
+            {
                 _sendAsync = sendAsync;
             }
 
             protected override Task<HttpResponseMessage> SendAsync(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return _sendAsync.Invoke(request, cancellationToken);
             }
         }

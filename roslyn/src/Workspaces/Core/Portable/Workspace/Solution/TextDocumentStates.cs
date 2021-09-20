@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis
         private TextDocumentStates(
             ImmutableList<DocumentId> ids,
             ImmutableSortedDictionary<DocumentId, TState> map
-        ) {
+        )
+        {
             _ids = ids;
             _map = map;
         }
@@ -59,14 +60,15 @@ namespace Microsoft.CodeAnalysis
         public TextDocumentStates(
             IEnumerable<DocumentInfo> infos,
             Func<DocumentInfo, TState> stateConstructor
-        ) : this(
-            infos.Select(info => info.Id).ToImmutableList(),
-            infos.ToImmutableSortedDictionary(
-                info => info.Id,
-                stateConstructor,
-                DocumentIdComparer.Instance
-            )
-        ) { }
+        )
+            : this(
+                infos.Select(info => info.Id).ToImmutableList(),
+                infos.ToImmutableSortedDictionary(
+                    info => info.Id,
+                    stateConstructor,
+                    DocumentIdComparer.Instance
+                )
+            ) { }
 
         public TextDocumentStates<TState> WithCompilationOrder(ImmutableList<DocumentId> ids) =>
             new(ids, _map);
@@ -125,7 +127,8 @@ namespace Microsoft.CodeAnalysis
         public ImmutableArray<TValue> SelectAsArray<TValue, TArg>(
             Func<TState, TArg, TValue> selector,
             TArg arg
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<TValue>.GetInstance(out var builder);
 
             foreach (var (_, state) in _map)
@@ -140,7 +143,8 @@ namespace Microsoft.CodeAnalysis
             Func<TState, TArg, CancellationToken, ValueTask<TValue>> selector,
             TArg arg,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<TValue>.GetInstance(out var builder);
 
             foreach (var (_, state) in _map)
@@ -169,7 +173,8 @@ namespace Microsoft.CodeAnalysis
         public TextDocumentStates<TState> UpdateStates<TArg>(
             Func<TState, TArg, TState> transformation,
             TArg arg
-        ) {
+        )
+        {
             var builder = _map.ToBuilder();
 
             foreach (var (id, state) in _map)
@@ -187,7 +192,8 @@ namespace Microsoft.CodeAnalysis
             TextDocumentStates<TState> oldStates,
             bool ignoreUnchangedContent = false,
             bool ignoreUnchangeableDocuments = false
-        ) {
+        )
+        {
             Contract.ThrowIfTrue(!ignoreUnchangedContent && ignoreUnchangeableDocuments);
 
             foreach (var id in Ids)
@@ -207,7 +213,8 @@ namespace Microsoft.CodeAnalysis
                 if (
                     ignoreUnchangedContent
                     && !newState.HasTextChanged(oldState, ignoreUnchangeableDocuments)
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -234,7 +241,8 @@ namespace Microsoft.CodeAnalysis
         private static IEnumerable<DocumentId> Except(
             IEnumerable<DocumentId> ids,
             ImmutableSortedDictionary<DocumentId, TState> map
-        ) {
+        )
+        {
             foreach (var id in ids)
             {
                 if (!map.ContainsKey(id))

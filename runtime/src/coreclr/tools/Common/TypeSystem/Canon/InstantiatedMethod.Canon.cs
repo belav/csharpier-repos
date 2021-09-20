@@ -50,7 +50,8 @@ namespace Internal.TypeSystem
                 if (
                     (kind == CanonicalFormKind.Specific)
                     && canonicalMethodResult.IsCanonicalMethod(CanonicalFormKind.Universal)
-                ) {
+                )
+                {
                     canonicalMethodResult =
                         (InstantiatedMethod)canonicalMethodResult.GetCanonMethodTarget(
                             CanonicalFormKind.Universal

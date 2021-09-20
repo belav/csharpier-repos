@@ -30,7 +30,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Https
             string storeName,
             StoreLocation storeLocation,
             bool allowInvalid
-        ) {
+        )
+        {
             using (var store = new X509Store(storeName, storeLocation))
             {
                 X509Certificate2Collection? storeCertificates = null;
@@ -94,7 +95,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Https
 
             foreach (
                 var extension in certificate.Extensions.OfType<X509EnhancedKeyUsageExtension>()
-            ) {
+            )
+            {
                 hasEkuExtension = true;
                 foreach (var oid in extension.EnhancedKeyUsages)
                 {
@@ -115,7 +117,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Https
         private static void DisposeCertificates(
             X509Certificate2Collection? certificates,
             X509Certificate2? except
-        ) {
+        )
+        {
             if (certificates != null)
             {
                 foreach (var certificate in certificates)

@@ -392,7 +392,8 @@ public static class Program
 
     private static async Task WaitUntilMaxExecutionTimeElapsedOrKeyboardInterrupt(
         TimeSpan? maxExecutionTime = null
-    ) {
+    )
+    {
         var tcs = new TaskCompletionSource<bool>();
         Console.CancelKeyPress += (sender, args) =>
         {

@@ -46,10 +46,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UseConditionalExpression
         protected override StatementSyntax WrapWithBlockIfAppropriate(
             IfStatementSyntax ifStatement,
             StatementSyntax statement
-        ) {
+        )
+        {
             if (
                 ifStatement.Parent is ElseClauseSyntax && ifStatement.Statement is BlockSyntax block
-            ) {
+            )
+            {
                 return block.WithStatements(SyntaxFactory.SingletonList(statement))
                     .WithAdditionalAnnotations(Formatter.Annotation);
             }

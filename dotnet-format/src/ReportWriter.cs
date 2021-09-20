@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.Tools
             string reportPath,
             IEnumerable<FormattedFile> formattedFiles,
             ILogger logger
-        ) {
+        )
+        {
             var reportFilePath = GetReportFilePath(reportPath);
             var reportFolderPath = Path.GetDirectoryName(reportFilePath);
 

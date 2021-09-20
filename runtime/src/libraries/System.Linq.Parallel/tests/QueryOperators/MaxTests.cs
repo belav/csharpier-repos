@@ -73,7 +73,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int max
-        ) {
+        )
+        {
             Max_Int(labeled, count, max);
         }
 
@@ -122,7 +123,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             long max
-        ) {
+        )
+        {
             Max_Long(labeled, count, max);
         }
 
@@ -132,7 +134,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             long max
-        ) {
+        )
+        {
             ParallelQuery<int> query = labeled.Item;
             Assert.Equal(max, query.Select(x => x >= count / 2 ? (long?)x : null).Max());
             Assert.Equal(-count / 2, query.Max(x => x >= count / 2 ? -(long?)x : null));
@@ -144,7 +147,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             long max
-        ) {
+        )
+        {
             _ = count;
             _ = max;
             ParallelQuery<int> query = labeled.Item;
@@ -184,7 +188,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             float max
-        ) {
+        )
+        {
             Max_Float(labeled, count, max);
         }
 
@@ -194,7 +199,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             float max
-        ) {
+        )
+        {
             ParallelQuery<int> query = labeled.Item;
             Assert.Equal(max, query.Select(x => x >= count / 2 ? (float?)x : null).Max());
             Assert.Equal(-count / 2, query.Max(x => x >= count / 2 ? -(float?)x : null));
@@ -206,7 +212,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             float max
-        ) {
+        )
+        {
             _ = count;
             _ = max;
             ParallelQuery<int> query = labeled.Item;
@@ -246,7 +253,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             double max
-        ) {
+        )
+        {
             Max_Double(labeled, count, max);
         }
 
@@ -256,7 +264,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             double max
-        ) {
+        )
+        {
             ParallelQuery<int> query = labeled.Item;
             Assert.Equal(max, query.Select(x => x >= count / 2 ? (double?)x : null).Max());
             Assert.Equal(-count / 2, query.Max(x => x >= count / 2 ? -(double?)x : null));
@@ -268,7 +277,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             double max
-        ) {
+        )
+        {
             _ = count;
             _ = max;
             ParallelQuery<int> query = labeled.Item;
@@ -301,7 +311,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             decimal max
-        ) {
+        )
+        {
             Max_Decimal(labeled, count, max);
         }
 
@@ -311,7 +322,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             decimal max
-        ) {
+        )
+        {
             ParallelQuery<int> query = labeled.Item;
             Assert.Equal(max, query.Select(x => x >= count / 2 ? (decimal?)x : null).Max());
             Assert.Equal(-count / 2, query.Max(x => x >= count / 2 ? -(decimal?)x : null));
@@ -323,7 +335,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             decimal max
-        ) {
+        )
+        {
             _ = count;
             _ = max;
             ParallelQuery<int> query = labeled.Item;
@@ -361,7 +374,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int max
-        ) {
+        )
+        {
             Max_Other(labeled, count, max);
         }
 
@@ -371,7 +385,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int max
-        ) {
+        )
+        {
             _ = count;
             _ = max;
             NotComparable a = new NotComparable(0);
@@ -384,7 +399,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int max
-        ) {
+        )
+        {
             ParallelQuery<int> query = labeled.Item;
             Assert.Equal(
                 max,
@@ -412,7 +428,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int max
-        ) {
+        )
+        {
             _ = count;
             _ = max;
             ParallelQuery<int> query = labeled.Item;

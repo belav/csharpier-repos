@@ -89,7 +89,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             string originalPath,
             [NotNullWhen(true)] out string? pathBase,
             [NotNullWhen(true)] out string? remainingPath
-        ) {
+        )
+        {
             var originalPathString = new PathString(originalPath);
             var found = false;
             pathBase = null;
@@ -273,7 +274,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                                 != UnsafeNclNativeMethods.ErrorCodes.ERROR_ALREADY_EXISTS
                         )
                         || index == MaxRetries - 1
-                    ) {
+                    )
+                    {
                         throw;
                     }
                 }

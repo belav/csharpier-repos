@@ -39,7 +39,8 @@ namespace System.Web.Mvc
             TKey key,
             Func<TArgument, TValue> creator,
             TArgument state
-        ) {
+        )
+        {
             // first, see if the item already exists in the cache
             _readerWriterLock.EnterReadLock();
             try

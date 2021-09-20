@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             OperatorDeclarationSyntax syntax,
             bool isNullableAnalysisEnabled,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var location = syntax.OperatorToken.GetLocation();
 
             string name = OperatorFacts.OperatorNameFromDeclaration(syntax);
@@ -44,25 +45,28 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             OperatorDeclarationSyntax syntax,
             bool isNullableAnalysisEnabled,
             BindingDiagnosticBag diagnostics
-        ) : base(
-            MethodKind.UserDefinedOperator,
-            name,
-            containingType,
-            location,
-            syntax,
-            MakeDeclarationModifiers(syntax, location, diagnostics),
-            hasBody: syntax.HasAnyBody(),
-            isExpressionBodied: syntax.Body == null && syntax.ExpressionBody != null,
-            isIterator: SyntaxFacts.HasYieldOperations(syntax.Body),
-            isNullableAnalysisEnabled: isNullableAnalysisEnabled,
-            diagnostics
-        ) {
+        )
+            : base(
+                MethodKind.UserDefinedOperator,
+                name,
+                containingType,
+                location,
+                syntax,
+                MakeDeclarationModifiers(syntax, location, diagnostics),
+                hasBody: syntax.HasAnyBody(),
+                isExpressionBodied: syntax.Body == null && syntax.ExpressionBody != null,
+                isIterator: SyntaxFacts.HasYieldOperations(syntax.Body),
+                isNullableAnalysisEnabled: isNullableAnalysisEnabled,
+                diagnostics
+            )
+        {
             CheckForBlockAndExpressionBody(syntax.Body, syntax.ExpressionBody, syntax, diagnostics);
 
             if (
                 name != WellKnownMemberNames.EqualityOperatorName
                 && name != WellKnownMemberNames.InequalityOperatorName
-            ) {
+            )
+            {
                 CheckFeatureAvailabilityAndRuntimeSupport(
                     syntax,
                     location,
@@ -102,7 +106,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         protected override (TypeWithAnnotations ReturnType, ImmutableArray<ParameterSymbol> Parameters) MakeParametersAndBindReturnType(
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             OperatorDeclarationSyntax declarationSyntax = GetSyntax();
             return MakeParametersAndBindReturnType(
                 declarationSyntax,

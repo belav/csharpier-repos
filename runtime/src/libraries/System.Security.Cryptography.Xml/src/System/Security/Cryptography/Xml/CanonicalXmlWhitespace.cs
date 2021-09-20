@@ -30,7 +30,8 @@ namespace System.Security.Cryptography.Xml
             StringBuilder strBuilder,
             DocPosition docPos,
             AncestralNamespaceContextManager anc
-        ) {
+        )
+        {
             if (IsInNodeSet && docPos == DocPosition.InRootElement)
                 strBuilder.Append(Utils.EscapeWhitespaceData(Value));
         }
@@ -39,7 +40,8 @@ namespace System.Security.Cryptography.Xml
             HashAlgorithm hash,
             DocPosition docPos,
             AncestralNamespaceContextManager anc
-        ) {
+        )
+        {
             if (IsInNodeSet && docPos == DocPosition.InRootElement)
             {
                 UTF8Encoding utf8 = new UTF8Encoding(false);

@@ -68,7 +68,8 @@ namespace System.Reflection.TypeLoading.Ecma
             TypeContext typeContext = instantiation.ToTypeContext();
             foreach (
                 InterfaceImplementationHandle h in TypeDefinition.GetInterfaceImplementations()
-            ) {
+            )
+            {
                 InterfaceImplementation ifc = h.GetInterfaceImplementation(reader);
                 yield return ifc.Interface.ResolveTypeDefRefOrSpec(module, typeContext);
             }
@@ -150,7 +151,8 @@ namespace System.Reflection.TypeLoading.Ecma
         internal sealed override bool IsTypeNameEqual(
             ReadOnlySpan<byte> ns,
             ReadOnlySpan<byte> name
-        ) {
+        )
+        {
             MetadataReader reader = Reader;
             TypeDefinition td = TypeDefinition;
             return td.Name.Equals(name, reader) && td.Namespace.Equals(ns, reader);

@@ -191,31 +191,36 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                     if (
                         XmlNames.ElementEquals(localName, XmlNames.ExampleElementName)
                         && _comment.ExampleText == null
-                    ) {
+                    )
+                    {
                         _comment.ExampleText = TrimEachLine(reader.ReadInnerXml());
                     }
                     else if (
                         XmlNames.ElementEquals(localName, XmlNames.SummaryElementName)
                         && _comment.SummaryText == null
-                    ) {
+                    )
+                    {
                         _comment.SummaryText = TrimEachLine(reader.ReadInnerXml());
                     }
                     else if (
                         XmlNames.ElementEquals(localName, XmlNames.ReturnsElementName)
                         && _comment.ReturnsText == null
-                    ) {
+                    )
+                    {
                         _comment.ReturnsText = TrimEachLine(reader.ReadInnerXml());
                     }
                     else if (
                         XmlNames.ElementEquals(localName, XmlNames.ValueElementName)
                         && _comment.ValueText == null
-                    ) {
+                    )
+                    {
                         _comment.ValueText = TrimEachLine(reader.ReadInnerXml());
                     }
                     else if (
                         XmlNames.ElementEquals(localName, XmlNames.RemarksElementName)
                         && _comment.RemarksText == null
-                    ) {
+                    )
+                    {
                         _comment.RemarksText = TrimEachLine(reader.ReadInnerXml());
                     }
                     else if (XmlNames.ElementEquals(localName, XmlNames.ParameterElementName))
@@ -226,7 +231,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                         if (
                             !string.IsNullOrWhiteSpace(name)
                             && !_comment._parameterTexts.ContainsKey(name)
-                        ) {
+                        )
+                        {
                             (
                                 _parameterNamesBuilder
                                 ?? (_parameterNamesBuilder = ImmutableArray.CreateBuilder<string>())
@@ -242,7 +248,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                         if (
                             !string.IsNullOrWhiteSpace(name)
                             && !_comment._typeParameterTexts.ContainsKey(name)
-                        ) {
+                        )
+                        {
                             (
                                 _typeParameterNamesBuilder
                                 ?? (
@@ -263,7 +270,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                             if (
                                 _exceptionTextBuilders == null
                                 || !_exceptionTextBuilders.ContainsKey(type)
-                            ) {
+                            )
+                            {
                                 (
                                     _exceptionTypesBuilder
                                     ?? (

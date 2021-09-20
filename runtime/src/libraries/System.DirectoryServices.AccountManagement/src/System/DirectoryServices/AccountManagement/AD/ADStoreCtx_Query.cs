@@ -543,7 +543,8 @@ namespace System.DirectoryServices.AccountManagement
         protected static string DefaultValueBoolConverter(
             FilterBase filter,
             string suggestedAdProperty
-        ) {
+        )
+        {
             Debug.Assert(NonPresentAttrDefaultStateMapping != null);
             Debug.Assert(NonPresentAttrDefaultStateMapping.ContainsKey(suggestedAdProperty));
 
@@ -632,7 +633,8 @@ namespace System.DirectoryServices.AccountManagement
             string identityFormat,
             ref string filter,
             bool throwOnFail
-        ) {
+        )
+        {
             if (identity == null)
                 identity = "";
 
@@ -697,7 +699,8 @@ namespace System.DirectoryServices.AccountManagement
                     if (
                         false
                         == SecurityIdentityClaimConverterHelper(identity, false, sb, throwOnFail)
-                    ) {
+                    )
+                    {
                         return false;
                     }
                     break;
@@ -749,7 +752,8 @@ namespace System.DirectoryServices.AccountManagement
         protected static string IdentityClaimConverter(
             FilterBase filter,
             string suggestedAdProperty
-        ) {
+        )
+        {
             IdentityClaim ic = (IdentityClaim)filter.Value;
 
             if (ic.UrnScheme == null)
@@ -773,7 +777,8 @@ namespace System.DirectoryServices.AccountManagement
             bool useSidHistory,
             StringBuilder filter,
             bool throwOnFail
-        ) {
+        )
+        {
             // String is in SDDL format.  Translate it to ldap hex format
 
             IntPtr pBytePtr = IntPtr.Zero;
@@ -854,7 +859,8 @@ namespace System.DirectoryServices.AccountManagement
         protected static string UserAccountControlConverter(
             FilterBase filter,
             string suggestedAdProperty
-        ) {
+        )
+        {
             Debug.Assert(
                 string.Equals(
                     suggestedAdProperty,
@@ -971,7 +977,8 @@ namespace System.DirectoryServices.AccountManagement
         protected static string ExpirationDateConverter(
             FilterBase filter,
             string suggestedAdProperty
-        ) {
+        )
+        {
             Debug.Assert(
                 string.Equals(
                     suggestedAdProperty,
@@ -1051,7 +1058,8 @@ namespace System.DirectoryServices.AccountManagement
         protected static string DefaultValutMatchingDateTimeConverter(
             FilterBase filter,
             string suggestedAdProperty
-        ) {
+        )
+        {
             Debug.Assert(filter.Value is QbeMatchType);
 
             QbeMatchType qmt = (QbeMatchType)filter.Value;
@@ -1072,7 +1080,8 @@ namespace System.DirectoryServices.AccountManagement
         protected static string MatchingDateTimeConverter(
             FilterBase filter,
             string suggestedAdProperty
-        ) {
+        )
+        {
             Debug.Assert(filter.Value is QbeMatchType);
 
             QbeMatchType qmt = (QbeMatchType)filter.Value;
@@ -1182,7 +1191,8 @@ namespace System.DirectoryServices.AccountManagement
             DateTime defaultValue,
             bool requirePresence,
             MatchType mt
-        ) {
+        )
+        {
             string ldapSearchValue = null;
             string ldapDefaultValue = null;
             bool defaultNeeded = false;
@@ -1289,7 +1299,8 @@ namespace System.DirectoryServices.AccountManagement
             Type type,
             object value,
             MatchType mt
-        ) {
+        )
+        {
             StringBuilder ldapFilter = new StringBuilder("(");
             string ldapValue;
 
@@ -1388,7 +1399,8 @@ namespace System.DirectoryServices.AccountManagement
         protected static string ExtensionCacheConverter(
             FilterBase filter,
             string suggestedAdProperty
-        ) {
+        )
+        {
             GlobalDebug.WriteLineIf(GlobalDebug.Info, "ADStoreCtx", "ExtensionCacheConverter ");
 
             StringBuilder query = new StringBuilder();
@@ -1464,7 +1476,8 @@ namespace System.DirectoryServices.AccountManagement
         private void AddPropertySetToTypePropListMap(
             Type principalType,
             StringCollection propertySet
-        ) {
+        )
+        {
             lock (TypeToLdapPropListMap)
             {
                 if (!TypeToLdapPropListMap[this.MappingTableIndex].ContainsKey(principalType))

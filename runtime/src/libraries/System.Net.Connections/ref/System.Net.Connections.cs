@@ -31,7 +31,8 @@ namespace System.Net.Connections
             System.Net.Connections.IConnectionProperties? properties = null,
             System.Net.EndPoint? localEndPoint = null,
             System.Net.EndPoint? remoteEndPoint = null
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Net.Connections.Connection FromStream(
@@ -40,7 +41,8 @@ namespace System.Net.Connections
             System.Net.Connections.IConnectionProperties? properties = null,
             System.Net.EndPoint? localEndPoint = null,
             System.Net.EndPoint? remoteEndPoint = null
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -55,7 +57,8 @@ namespace System.Net.Connections
                 System.Net.Connections.ConnectionCloseMethod.GracefulShutdown,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         protected abstract System.Threading.Tasks.ValueTask CloseAsyncCore(
@@ -84,13 +87,15 @@ namespace System.Net.Connections
                 System.Threading.CancellationToken,
                 System.Threading.Tasks.ValueTask<System.Net.Connections.Connection>
             > filter
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryGet<T>(
             this System.Net.Connections.IConnectionProperties properties,
             [System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute(false)] out T property
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -180,7 +185,8 @@ namespace System.Net.Connections
             System.Net.Connections.IConnectionProperties? options = null,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
-        ) {
+        )
+        {
             throw null;
         }
         protected virtual System.Net.Sockets.Socket CreateSocket(
@@ -189,7 +195,8 @@ namespace System.Net.Connections
             System.Net.Sockets.ProtocolType protocolType,
             System.Net.EndPoint? endPoint,
             System.Net.Connections.IConnectionProperties? options
-        ) {
+        )
+        {
             throw null;
         }
     }

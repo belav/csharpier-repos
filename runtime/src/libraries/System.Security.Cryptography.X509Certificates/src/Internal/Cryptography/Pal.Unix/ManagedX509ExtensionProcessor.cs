@@ -31,7 +31,8 @@ namespace Internal.Cryptography.Pal
         public virtual void DecodeX509KeyUsageExtension(
             byte[] encoded,
             out X509KeyUsageFlags keyUsages
-        ) {
+        )
+        {
             KeyUsageFlagsAsn keyUsagesAsn;
 
             try
@@ -77,7 +78,8 @@ namespace Internal.Cryptography.Pal
             bool certificateAuthority,
             bool hasPathLengthConstraint,
             int pathLengthConstraint
-        ) {
+        )
+        {
             BasicConstraintsAsn constraints = default;
 
             constraints.CA = certificateAuthority;
@@ -96,7 +98,8 @@ namespace Internal.Cryptography.Pal
             out bool certificateAuthority,
             out bool hasPathLengthConstraint,
             out int pathLengthConstraint
-        ) {
+        )
+        {
             // No RFC nor ITU document describes the layout of the 2.5.29.10 structure,
             // and OpenSSL doesn't have a decoder for it, either.
             //
@@ -110,7 +113,8 @@ namespace Internal.Cryptography.Pal
             out bool certificateAuthority,
             out bool hasPathLengthConstraint,
             out int pathLengthConstraint
-        ) {
+        )
+        {
             BasicConstraintsAsn constraints = BasicConstraintsAsn.Decode(
                 encoded,
                 AsnEncodingRules.BER
@@ -147,7 +151,8 @@ namespace Internal.Cryptography.Pal
         public virtual void DecodeX509EnhancedKeyUsageExtension(
             byte[] encoded,
             out OidCollection usages
-        ) {
+        )
+        {
             // https://tools.ietf.org/html/rfc5924#section-4.1
             //
             // ExtKeyUsageSyntax ::= SEQUENCE SIZE (1..MAX) OF KeyPurposeId
@@ -174,7 +179,8 @@ namespace Internal.Cryptography.Pal
 
         public virtual byte[] EncodeX509SubjectKeyIdentifierExtension(
             ReadOnlySpan<byte> subjectKeyIdentifier
-        ) {
+        )
+        {
             // https://tools.ietf.org/html/rfc5280#section-4.2.1.2
             //
             // subjectKeyIdentifier EXTENSION ::= {
@@ -194,7 +200,8 @@ namespace Internal.Cryptography.Pal
         public virtual void DecodeX509SubjectKeyIdentifierExtension(
             byte[] encoded,
             out byte[] subjectKeyIdentifier
-        ) {
+        )
+        {
             subjectKeyIdentifier = DecodeX509SubjectKeyIdentifierExtension(encoded);
         }
 

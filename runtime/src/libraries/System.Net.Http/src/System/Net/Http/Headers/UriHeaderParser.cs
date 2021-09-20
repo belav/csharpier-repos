@@ -27,7 +27,8 @@ namespace System.Net.Http.Headers
             object? storeValue,
             ref int index,
             [NotNullWhen(true)] out object? parsedValue
-        ) {
+        )
+        {
             parsedValue = null;
 
             // Some headers support empty/null values. This one doesn't.

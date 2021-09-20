@@ -7,10 +7,8 @@ namespace System.Web.WebPages
     {
         private readonly SupportedValidationDataType _dataType;
 
-        public DataTypeValidator(
-            SupportedValidationDataType type,
-            string errorMessage = null
-        ) : base(errorMessage)
+        public DataTypeValidator(SupportedValidationDataType type, string errorMessage = null)
+            : base(errorMessage)
         {
             _dataType = type;
         }

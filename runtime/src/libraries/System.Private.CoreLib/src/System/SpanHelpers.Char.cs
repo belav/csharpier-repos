@@ -19,7 +19,8 @@ namespace System
             int searchSpaceLength,
             ref char value,
             int valueLength
-        ) {
+        )
+        {
             Debug.Assert(searchSpaceLength >= 0);
             Debug.Assert(valueLength >= 0);
 
@@ -56,7 +57,8 @@ namespace System
                         ref Unsafe.As<char, byte>(ref valueTail),
                         (nuint)(uint)valueTailLength * 2
                     )
-                ) {
+                )
+                {
                     return index; // The tail matched. Return a successful find.
                 }
 
@@ -72,7 +74,8 @@ namespace System
             int firstLength,
             ref char second,
             int secondLength
-        ) {
+        )
+        {
             Debug.Assert(firstLength >= 0);
             Debug.Assert(secondLength >= 0);
 
@@ -100,7 +103,8 @@ namespace System
                             != Unsafe.ReadUnaligned<Vector<ushort>>(
                                 ref Unsafe.As<char, byte>(ref Unsafe.Add(ref second, (nint)i))
                             )
-                        ) {
+                        )
+                        {
                             break;
                         }
                         i += (nuint)Vector<ushort>.Count;
@@ -116,7 +120,8 @@ namespace System
                         != Unsafe.ReadUnaligned<nuint>(
                             ref Unsafe.As<char, byte>(ref Unsafe.Add(ref second, (nint)i))
                         )
-                    ) {
+                    )
+                    {
                         break;
                     }
                     i += (nuint)(sizeof(nuint) / sizeof(char));
@@ -133,7 +138,8 @@ namespace System
                     == Unsafe.ReadUnaligned<int>(
                         ref Unsafe.As<char, byte>(ref Unsafe.Add(ref second, (nint)i))
                     )
-                ) {
+                )
+                {
                     i += sizeof(int) / sizeof(char);
                 }
             }
@@ -185,7 +191,8 @@ namespace System
                         || value == *(pCh + 1)
                         || value == *(pCh + 2)
                         || value == *(pCh + 3)
-                    ) {
+                    )
+                    {
                         goto Found;
                     }
 
@@ -319,7 +326,8 @@ namespace System
                             (nint)Unsafe.AsPointer(ref Unsafe.Add(ref searchSpace, (nint)offset))
                             & (nint)(Vector256<byte>.Count - 1)
                         ) != 0
-                    ) {
+                    )
+                    {
                         // Not currently aligned to Vector256 (is aligned to Vector128); this can cause a problem for searches
                         // with no upper bound e.g. String.wcslen. Start with a check on Vector128 to align to Vector256,
                         // before moving to processing Vector256.
@@ -553,7 +561,8 @@ namespace System
             char value0,
             char value1,
             int length
-        ) {
+        )
+        {
             Debug.Assert(length >= 0);
 
             nuint offset = 0; // Use nuint for arithmetic to avoid unnecessary 64->32->64 truncations
@@ -805,7 +814,8 @@ namespace System
             char value1,
             char value2,
             int length
-        ) {
+        )
+        {
             Debug.Assert(length >= 0);
 
             nuint offset = 0; // Use nuint for arithmetic to avoid unnecessary 64->32->64 truncations
@@ -1079,7 +1089,8 @@ namespace System
             char value2,
             char value3,
             int length
-        ) {
+        )
+        {
             Debug.Assert(length >= 0);
 
             nuint offset = 0; // Use nuint for arithmetic to avoid unnecessary 64->32->64 truncations
@@ -1342,7 +1353,8 @@ namespace System
             char value3,
             char value4,
             int length
-        ) {
+        )
+        {
             Debug.Assert(length >= 0);
 
             nuint offset = 0; // Use nuint for arithmetic to avoid unnecessary 64->32->64 truncations
@@ -1869,7 +1881,8 @@ namespace System
         private static bool TryFindFirstMatchedLane(
             Vector128<ushort> compareResult,
             ref int matchedLane
-        ) {
+        )
+        {
             Debug.Assert(AdvSimd.Arm64.IsSupported);
 
             Vector128<byte> pairwiseSelectedLane = AdvSimd.Arm64.AddPairwise(

@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ImmutableArray<CustomModifier> refCustomModifiers,
             bool isStatic,
             ImmutableArray<PropertySymbol> explicitInterfaceImplementations
-        ) {
+        )
+        {
             _refKind = refKind;
             _type = type;
             _refCustomModifiers = refCustomModifiers;

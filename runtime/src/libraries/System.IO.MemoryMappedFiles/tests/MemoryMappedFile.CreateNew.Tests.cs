@@ -197,7 +197,8 @@ namespace System.IO.MemoryMappedFiles.Tests
                             null,
                             (IntPtr.Size == 4) ? uint.MaxValue : long.MaxValue
                         )
-                    ) {
+                    )
+                    {
                         mmf.CreateViewAccessor().Dispose();
                     }
                 }
@@ -249,7 +250,8 @@ namespace System.IO.MemoryMappedFiles.Tests
                     4096,
                     MemoryMappedFileAccess.Read
                 )
-            ) {
+            )
+            {
                 ValidateMemoryMappedFile(mmf, 4096, MemoryMappedFileAccess.Read);
             }
             using (
@@ -260,7 +262,8 @@ namespace System.IO.MemoryMappedFiles.Tests
                     MemoryMappedFileOptions.DelayAllocatePages,
                     HandleInheritability.Inheritable
                 )
-            ) {
+            )
+            {
                 ValidateMemoryMappedFile(
                     mmf,
                     4096,
@@ -330,7 +333,8 @@ namespace System.IO.MemoryMappedFiles.Tests
             MemoryMappedFileAccess access,
             MemoryMappedFileOptions options,
             HandleInheritability inheritability
-        ) {
+        )
+        {
             using (MemoryMappedFile mmf = MemoryMappedFile.CreateNew(mapName, capacity))
             {
                 ValidateMemoryMappedFile(mmf, capacity);
@@ -349,7 +353,8 @@ namespace System.IO.MemoryMappedFiles.Tests
                     options,
                     inheritability
                 )
-            ) {
+            )
+            {
                 ValidateMemoryMappedFile(mmf, capacity, access, inheritability);
             }
         }
@@ -375,7 +380,8 @@ namespace System.IO.MemoryMappedFiles.Tests
             MemoryMappedFileAccess[] accesses,
             MemoryMappedFileOptions[] options,
             HandleInheritability[] inheritabilities
-        ) {
+        )
+        {
             foreach (string tmpMapName in mapNames)
             {
                 if (tmpMapName != null && !MapNamesSupported)

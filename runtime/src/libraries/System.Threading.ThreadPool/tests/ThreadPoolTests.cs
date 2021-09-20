@@ -314,7 +314,8 @@ namespace System.Threading.ThreadPools.Tests
         public void QueueUserWorkItem_PreferLocal_InvalidArguments_Throws(
             bool preferLocal,
             bool useUnsafe
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentNullException>(
                 "callBack",
                 () =>
@@ -332,7 +333,8 @@ namespace System.Threading.ThreadPools.Tests
         public async Task QueueUserWorkItem_PreferLocal_NullValidForState(
             bool preferLocal,
             bool useUnsafe
-        ) {
+        )
+        {
             var tcs = new TaskCompletionSource<int>();
             if (useUnsafe)
             {
@@ -357,7 +359,8 @@ namespace System.Threading.ThreadPools.Tests
         public async Task QueueUserWorkItem_PreferLocal_ReferenceTypeStateObjectPassedThrough(
             bool preferLocal,
             bool useUnsafe
-        ) {
+        )
+        {
             var tcs = new TaskCompletionSource<int>();
             if (useUnsafe)
             {
@@ -378,7 +381,8 @@ namespace System.Threading.ThreadPools.Tests
         public async Task QueueUserWorkItem_PreferLocal_ValueTypeStateObjectPassedThrough(
             bool preferLocal,
             bool useUnsafe
-        ) {
+        )
+        {
             var tcs = new TaskCompletionSource<int>();
             if (useUnsafe)
             {
@@ -407,7 +411,8 @@ namespace System.Threading.ThreadPools.Tests
         public async Task QueueUserWorkItem_PreferLocal_RunsAsynchronously(
             bool preferLocal,
             bool useUnsafe
-        ) {
+        )
+        {
             await Task.Factory.StartNew(
                 () =>
                 {
@@ -445,7 +450,8 @@ namespace System.Threading.ThreadPools.Tests
         public async Task QueueUserWorkItem_PreferLocal_ExecutionContextFlowedIfSafe(
             bool preferLocal,
             bool useUnsafe
-        ) {
+        )
+        {
             var tcs = new TaskCompletionSource<int>();
             var asyncLocal = new AsyncLocal<int>() { Value = 42 };
             if (useUnsafe)
@@ -492,7 +498,8 @@ namespace System.Threading.ThreadPools.Tests
         [MemberData(nameof(OneBool))]
         public async Task UnsafeQueueUserWorkItem_IThreadPoolWorkItem_ManyIndividualItems_AllInvoked(
             bool preferLocal
-        ) {
+        )
+        {
             TaskCompletionSource[] tasks = Enumerable.Range(0, 100)
                 .Select(_ => new TaskCompletionSource())
                 .ToArray();
@@ -519,7 +526,8 @@ namespace System.Threading.ThreadPools.Tests
         [MemberData(nameof(OneBool))]
         public async Task UnsafeQueueUserWorkItem_IThreadPoolWorkItem_SameObjectReused_AllInvoked(
             bool preferLocal
-        ) {
+        )
+        {
             const int Iters = 100;
             int remaining = Iters;
             var tcs = new TaskCompletionSource();
@@ -547,7 +555,8 @@ namespace System.Threading.ThreadPools.Tests
         [MemberData(nameof(OneBool))]
         public async Task UnsafeQueueUserWorkItem_IThreadPoolWorkItem_ExecutionContextNotFlowed(
             bool preferLocal
-        ) {
+        )
+        {
             var al = new AsyncLocal<int> { Value = 42 };
             var tcs = new TaskCompletionSource();
             ThreadPool.UnsafeQueueUserWorkItem(

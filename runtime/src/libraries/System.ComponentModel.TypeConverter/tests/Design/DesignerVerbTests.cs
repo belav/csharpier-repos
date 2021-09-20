@@ -30,7 +30,8 @@ namespace System.ComponentModel.Design.Tests
             EventHandler handler,
             string expectedText,
             string expectedPropertiesText
-        ) {
+        )
+        {
             var verb = new DesignerVerb(text, handler);
             Assert.Equal(new Guid("{74D21313-2AEE-11d1-8BFB-00A0C90F26F7}"), verb.CommandID.Guid);
             Assert.Equal(0x2000, verb.CommandID.ID);
@@ -77,7 +78,8 @@ namespace System.ComponentModel.Design.Tests
             CommandID commandID,
             string expectedText,
             string expectedPropertiesText
-        ) {
+        )
+        {
             var verb = new DesignerVerb(text, handler, commandID);
             Assert.Equal(commandID, verb.CommandID);
             Assert.Empty(verb.Description);
@@ -225,10 +227,8 @@ namespace System.ComponentModel.Design.Tests
 
         private class NullPropertiesAfterConstructionDesignerVerb : DesignerVerb
         {
-            public NullPropertiesAfterConstructionDesignerVerb(
-                string text,
-                EventHandler handler
-            ) : base(text, handler) { }
+            public NullPropertiesAfterConstructionDesignerVerb(string text, EventHandler handler)
+                : base(text, handler) { }
 
             public NullPropertiesAfterConstructionDesignerVerb(
                 string text,

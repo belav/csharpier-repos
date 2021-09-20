@@ -11,7 +11,8 @@ namespace Microsoft.Extensions.DependencyModel
             string runtime,
             string runtimeSignature,
             bool isPortable
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(framework))
             {
                 throw new ArgumentException(null, nameof(framework));

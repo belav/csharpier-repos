@@ -28,7 +28,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             IEditorOptionsFactoryService editorOptionsFactoryService,
             [ImportMany] IEnumerable<IRefactorNotifyService> refactorNotifyServices,
             IThreadingContext threadingContext
-        ) {
+        )
+        {
             _editorOptionsFactoryService = editorOptionsFactoryService;
             _refactorNotifyServices = refactorNotifyServices;
             _threadingContext = threadingContext;

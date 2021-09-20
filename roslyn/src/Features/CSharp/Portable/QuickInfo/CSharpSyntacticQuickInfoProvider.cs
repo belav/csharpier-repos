@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
             Document document,
             SyntaxToken token,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (token.Kind() != SyntaxKind.CloseBraceToken)
             {
                 return null;
@@ -45,7 +46,8 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
                     out InterpolationSyntax? interpolation
                 )
                 && interpolation.CloseBraceToken == token
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -98,7 +100,8 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
             SyntaxToken openBrace,
             ref int spanStart,
             ref int spanEnd
-        ) {
+        )
+        {
             var searchListAbove = openBrace.LeadingTrivia.Reverse();
             if (TryFindFurthestNearbyComment(ref searchListAbove, out var nearbyComment))
             {
@@ -131,7 +134,8 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
                 else if (
                     !trivia.IsKind(SyntaxKind.WhitespaceTrivia)
                     && !trivia.IsKind(SyntaxKind.EndOfLineTrivia)
-                ) {
+                )
+                {
                     break;
                 }
             }

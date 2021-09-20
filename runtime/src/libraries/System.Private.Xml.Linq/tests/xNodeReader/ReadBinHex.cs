@@ -40,7 +40,8 @@ namespace CoreXml.Test.XLinq
                     int iIndex,
                     int iCount,
                     Type exceptionType
-                ) {
+                )
+                {
                     bool bPassed = false;
                     byte[] buffer = new byte[iBufferSize];
 
@@ -563,7 +564,8 @@ namespace CoreXml.Test.XLinq
                     int iIndex,
                     int iCount,
                     Type exceptionType
-                ) {
+                )
+                {
                     bool bPassed = false;
                     byte[] buffer = new byte[iBufferSize];
 

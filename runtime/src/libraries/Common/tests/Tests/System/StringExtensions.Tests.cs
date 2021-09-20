@@ -29,7 +29,8 @@ namespace Tests.System
             int startIndex,
             int length,
             string expectedResult
-        ) {
+        )
+        {
             string result = source.SubstringTrim(startIndex, length);
 
             Assert.Equal(expectedResult, result);

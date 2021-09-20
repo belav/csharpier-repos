@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal static BoundTypeOrInstanceInitializers RewriteConstructor(
             ImmutableArray<BoundInitializer> boundInitializers,
             MethodSymbol method
-        ) {
+        )
+        {
             Debug.Assert(!boundInitializers.IsDefault);
             Debug.Assert(
                 (method.MethodKind == MethodKind.Constructor)
@@ -41,7 +42,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<BoundInitializer> boundInitializers,
             SynthesizedInteractiveInitializerMethod method,
             out bool hasTrailingExpression
-        ) {
+        )
+        {
             Debug.Assert(!boundInitializers.IsDefault);
 
             var boundStatements = ArrayBuilder<BoundStatement>.GetInstance(
@@ -62,14 +64,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                     && (initializer == boundInitializers.Last())
                     && (initializer.Kind == BoundKind.GlobalStatementInitializer)
                     && method.DeclaringCompilation.IsSubmissionSyntaxTree(initializer.SyntaxTree)
-                ) {
+                )
+                {
                     lastStatement = ((BoundGlobalStatementInitializer)initializer).Statement;
                     var expression = GetTrailingScriptExpression(lastStatement);
                     if (
                         expression != null
                         && (object)expression.Type != null
                         && !expression.Type.IsVoidType()
-                    ) {
+                    )
+                    {
                         trailingExpression = expression;
                         continue;
                     }

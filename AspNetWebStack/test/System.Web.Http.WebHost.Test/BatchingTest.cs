@@ -67,7 +67,8 @@ namespace System.Web.Http.WebHost
             protected override Task<HttpResponseMessage> SendAsync(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 IsCalled = true;
                 return Task.FromResult(request.CreateResponse(HttpStatusCode.OK));
             }

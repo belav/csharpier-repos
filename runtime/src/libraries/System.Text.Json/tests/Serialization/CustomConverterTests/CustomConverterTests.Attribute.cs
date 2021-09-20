@@ -97,7 +97,8 @@ namespace System.Text.Json.Serialization.Tests
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 if (reader.TokenType != JsonTokenType.String)
                 {
                     throw new JsonException();
@@ -113,7 +114,8 @@ namespace System.Text.Json.Serialization.Tests
                 if (
                     !int.TryParse(stringValues[0], out int x)
                     || !int.TryParse(stringValues[1], out int y)
-                ) {
+                )
+                {
                     throw new JsonException();
                 }
 
@@ -127,7 +129,8 @@ namespace System.Text.Json.Serialization.Tests
                 Utf8JsonWriter writer,
                 AttributedPoint value,
                 JsonSerializerOptions options
-            ) {
+            )
+            {
                 string stringValue = $"{value.X - _offset},{value.Y - _offset}";
                 writer.WriteStringValue(stringValue);
             }

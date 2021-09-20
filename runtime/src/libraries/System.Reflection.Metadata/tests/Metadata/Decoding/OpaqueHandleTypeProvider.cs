@@ -13,7 +13,8 @@ namespace System.Reflection.Metadata.Decoding.Tests
             MetadataReader reader,
             DisassemblingGenericContext genericContext,
             EntityHandle handle
-        ) {
+        )
+        {
             return FormatToken(handle);
         }
 
@@ -21,7 +22,8 @@ namespace System.Reflection.Metadata.Decoding.Tests
             MetadataReader reader,
             TypeDefinitionHandle handle,
             byte rawTypeKind
-        ) {
+        )
+        {
             return FormatToken(handle);
         }
 
@@ -29,7 +31,8 @@ namespace System.Reflection.Metadata.Decoding.Tests
             MetadataReader reader,
             TypeReferenceHandle handle,
             byte rawTypeKind
-        ) {
+        )
+        {
             return FormatToken(handle);
         }
 

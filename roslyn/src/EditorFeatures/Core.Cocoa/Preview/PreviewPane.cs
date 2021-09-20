@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             IReadOnlyList<object> previewContent,
             bool logIdVerbatimInTelemetry,
             Guid? optionPageGuid = null
-        ) {
+        )
+        {
             _differenceViewerPreview = (DifferenceViewerPreview)previewContent[0];
             var view = ((ICocoaDifferenceViewer)_differenceViewerPreview.Viewer).VisualElement;
 
@@ -183,7 +184,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             if (
                 GenerateAttributeString(id, title, helpLink, helpLinkToolTipText)
                 is NSAttributedString attributedStringTitle
-            ) {
+            )
+            {
                 this.titleField.AttributedStringValue = attributedStringTitle;
                 // We do this separately, because the title sometimes isn't there (i.e. no diagnostics ID)
                 // and we want the preview to stretch to the top
@@ -227,7 +229,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             string title,
             Uri link,
             string linkTooltip
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(title))
                 return null;
 

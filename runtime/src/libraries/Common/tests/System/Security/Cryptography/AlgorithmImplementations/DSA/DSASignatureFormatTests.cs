@@ -77,7 +77,8 @@ namespace System.Security.Cryptography.Dsa.Tests
             KeyDescription key,
             byte[] hash,
             DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             return ((DSA)key.Key).CreateSignature(hash, signatureFormat);
         }
 
@@ -86,7 +87,8 @@ namespace System.Security.Cryptography.Dsa.Tests
             byte[] hash,
             byte[] signature,
             DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             return ((DSA)key.Key).VerifySignature(hash, signature, signatureFormat);
         }
 
@@ -95,7 +97,8 @@ namespace System.Security.Cryptography.Dsa.Tests
             byte[] data,
             HashAlgorithmName hashAlgorithm,
             DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             return ((DSA)key.Key).SignData(data, hashAlgorithm, signatureFormat);
         }
 
@@ -105,7 +108,8 @@ namespace System.Security.Cryptography.Dsa.Tests
             byte[] signature,
             HashAlgorithmName hashAlgorithm,
             DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             return ((DSA)key.Key).VerifyData(data, signature, hashAlgorithm, signatureFormat);
         }
     }
@@ -121,7 +125,8 @@ namespace System.Security.Cryptography.Dsa.Tests
             KeyDescription key,
             byte[] hash,
             DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             return ((DSA)key.Key).CreateSignature(hash, signatureFormat);
         }
 
@@ -130,7 +135,8 @@ namespace System.Security.Cryptography.Dsa.Tests
             byte[] hash,
             byte[] signature,
             DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             return ((DSA)key.Key).VerifySignature(hash, signature, signatureFormat);
         }
 
@@ -139,7 +145,8 @@ namespace System.Security.Cryptography.Dsa.Tests
             byte[] data,
             HashAlgorithmName hashAlgorithm,
             DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             int offset = 0;
             int count = 0;
 
@@ -161,7 +168,8 @@ namespace System.Security.Cryptography.Dsa.Tests
             byte[] signature,
             HashAlgorithmName hashAlgorithm,
             DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             int offset = 0;
             int count = 0;
 
@@ -259,7 +267,8 @@ namespace System.Security.Cryptography.Dsa.Tests
             KeyDescription key,
             byte[] hash,
             DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             DSA dsa = (DSA)key.Key;
             byte[] predictedMax = new byte[dsa.GetMaxSignatureSize(signatureFormat)];
 
@@ -287,7 +296,8 @@ namespace System.Security.Cryptography.Dsa.Tests
             byte[] hash,
             byte[] signature,
             DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             ReadOnlySpan<byte> readOnlyHash = hash;
             ReadOnlySpan<byte> readOnlySignature = signature;
             return ((DSA)key.Key).VerifySignature(readOnlyHash, readOnlySignature, signatureFormat);
@@ -298,7 +308,8 @@ namespace System.Security.Cryptography.Dsa.Tests
             byte[] data,
             HashAlgorithmName hashAlgorithm,
             DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             DSA dsa = (DSA)key.Key;
             byte[] predictedMax = new byte[dsa.GetMaxSignatureSize(signatureFormat)];
 
@@ -333,7 +344,8 @@ namespace System.Security.Cryptography.Dsa.Tests
             byte[] signature,
             HashAlgorithmName hashAlgorithm,
             DSASignatureFormat signatureFormat
-        ) {
+        )
+        {
             ReadOnlySpan<byte> readOnlyData = data;
             ReadOnlySpan<byte> readOnlySignature = signature;
 
@@ -413,7 +425,8 @@ namespace System.Security.Cryptography.Dsa.Tests
                         SignatureFormat,
                         out int written
                     )
-                ) {
+                )
+                {
                     return;
                 }
 

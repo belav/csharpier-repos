@@ -86,7 +86,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             SyntaxToken token,
             int splitAt,
             SyntaxKind leftType
-        ) {
+        )
+        {
             var left = CreateToken(
                 token.Content.Substring(0, splitAt),
                 leftType,

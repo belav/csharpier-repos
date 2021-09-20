@@ -275,7 +275,8 @@ namespace System.Threading
             int timeoutMilliseconds,
             bool interruptible = true,
             bool prioritize = false
-        ) {
+        )
+        {
             Debug.Assert(waitableObject != null);
             Debug.Assert(timeoutMilliseconds >= -1);
 
@@ -361,7 +362,8 @@ namespace System.Threading
             IntPtr handleToSignal,
             IntPtr handleToWaitOn,
             int timeoutMilliseconds
-        ) {
+        )
+        {
             Debug.Assert(timeoutMilliseconds >= -1);
 
             return SignalAndWait(
@@ -377,7 +379,8 @@ namespace System.Threading
             int timeoutMilliseconds,
             bool interruptible = true,
             bool prioritize = false
-        ) {
+        )
+        {
             Debug.Assert(waitableObjectToSignal != null);
             Debug.Assert(waitableObjectToWaitOn != null);
             Debug.Assert(timeoutMilliseconds >= -1);

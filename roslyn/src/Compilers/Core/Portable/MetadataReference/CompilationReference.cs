@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis
             Compilation compilation,
             ImmutableArray<string> aliases,
             bool embedInteropTypes
-        ) {
+        )
+        {
             if (compilation == null)
             {
                 throw new ArgumentNullException(nameof(compilation));
@@ -109,7 +110,8 @@ namespace Microsoft.CodeAnalysis
 
         internal sealed override MetadataReference WithPropertiesImplReturningMetadataReference(
             MetadataReferenceProperties properties
-        ) {
+        )
+        {
             if (properties.Kind == MetadataImageKind.Module)
             {
                 throw new NotSupportedException(

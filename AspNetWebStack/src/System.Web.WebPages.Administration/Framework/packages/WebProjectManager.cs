@@ -89,7 +89,8 @@ namespace System.Web.WebPages.Administration.PackageManager
         public virtual IQueryable<IPackage> GetRemotePackages(
             string searchTerms,
             bool filterPreferred
-        ) {
+        )
+        {
             var packages = GetPackages(SourceRepository, searchTerms);
             if (filterPreferred)
             {
@@ -108,7 +109,8 @@ namespace System.Web.WebPages.Administration.PackageManager
         public IEnumerable<IPackage> GetPackagesWithUpdates(
             string searchTerms,
             bool filterPreferredPackages
-        ) {
+        )
+        {
             var packagesToUpdate = GetPackages(LocalRepository, searchTerms);
             if (filterPreferredPackages)
             {
@@ -273,7 +275,8 @@ namespace System.Web.WebPages.Administration.PackageManager
             IPackage package,
             IPackageRepository localRepository,
             IPackageRepository sourceRepository
-        ) {
+        )
+        {
             var dependencies = GetPackageDependencies(package, localRepository, sourceRepository);
 
             return from p in dependencies
@@ -285,7 +288,8 @@ namespace System.Web.WebPages.Administration.PackageManager
             IPackage package,
             IPackageRepository localRepository,
             IPackageRepository sourceRepository
-        ) {
+        )
+        {
             InstallWalker walker = new InstallWalker(
                 localRepository: localRepository,
                 sourceRepository: sourceRepository,
@@ -303,14 +307,16 @@ namespace System.Web.WebPages.Administration.PackageManager
         internal static IQueryable<IPackage> GetPackages(
             IPackageRepository repository,
             string searchTerm
-        ) {
+        )
+        {
             return GetPackages(repository.GetPackages(), searchTerm);
         }
 
         internal static IQueryable<IPackage> GetPackages(
             IQueryable<IPackage> packages,
             string searchTerm
-        ) {
+        )
+        {
             if (!String.IsNullOrEmpty(searchTerm))
             {
                 searchTerm = searchTerm.Trim();

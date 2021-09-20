@@ -13,7 +13,8 @@ namespace System.Net.Sockets.Tests
         {
             using (
                 var s = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp)
-            ) {
+            )
+            {
                 Assert.False(s.SafeHandle.IsInvalid);
             }
         }

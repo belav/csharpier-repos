@@ -207,7 +207,8 @@ namespace Microsoft.Extensions.ApiDescription.Tool.Commands
             string outputDirectory,
             MethodInfo generateMethod,
             object service
-        ) {
+        )
+        {
             _reporter.WriteInformation(Resources.FormatGeneratingDocument(documentName));
 
             using var stream = new MemoryStream();
@@ -218,7 +219,8 @@ namespace Microsoft.Extensions.ApiDescription.Tool.Commands
                     bufferSize: 1024,
                     leaveOpen: true
                 )
-            ) {
+            )
+            {
                 var arguments = new object[] { documentName, writer };
                 using var resultTask = (Task)InvokeMethod(generateMethod, service, arguments);
                 if (resultTask == null)
@@ -272,7 +274,8 @@ namespace Microsoft.Extensions.ApiDescription.Tool.Commands
             string documentName,
             string projectName,
             string outputDirectory
-        ) {
+        )
+        {
             string path;
             if (string.Equals(DefaultDocumentName, documentName, StringComparison.Ordinal))
             {
@@ -312,7 +315,8 @@ namespace Microsoft.Extensions.ApiDescription.Tool.Commands
             Type type,
             Type[] parameterTypes,
             Type returnType
-        ) {
+        )
+        {
             var method = type.GetMethod(methodName, parameterTypes);
             if (method == null)
             {

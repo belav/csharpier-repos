@@ -62,7 +62,8 @@ namespace System.ComponentModel.Tests
                 ITypeDescriptorContext context,
                 CultureInfo culture,
                 object value
-            ) {
+            )
+            {
                 return new CustomType() { Value = int.Parse((string)value) };
             }
         }
@@ -91,7 +92,8 @@ namespace System.ComponentModel.Tests
             bool returnNull,
             string stringToConvert,
             int expectedValue
-        ) {
+        )
+        {
             RemoteExecutor.Invoke(
                     (innerType, innerReturnNull, innerStringToConvert, innerExpectedValue) =>
                     {

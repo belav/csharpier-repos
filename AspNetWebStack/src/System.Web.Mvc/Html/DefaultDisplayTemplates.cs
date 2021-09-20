@@ -71,7 +71,8 @@ namespace System.Web.Mvc.Html
         internal static string CollectionTemplate(
             HtmlHelper html,
             TemplateHelpers.TemplateHelperDelegate templateHelper
-        ) {
+        )
+        {
             object model = html.ViewContext.ViewData.ModelMetadata.Model;
             if (model == null)
             {
@@ -156,7 +157,8 @@ namespace System.Web.Mvc.Html
             if (
                 html.ViewContext.ViewData.TemplateInfo.FormattedModelValue
                 == html.ViewContext.ViewData.ModelMetadata.Model
-            ) {
+            )
+            {
                 html.ViewContext.ViewData.TemplateInfo.FormattedModelValue = String.Format(
                     CultureInfo.CurrentCulture,
                     "{0:0.00}",
@@ -199,7 +201,8 @@ namespace System.Web.Mvc.Html
         internal static string ObjectTemplate(
             HtmlHelper html,
             TemplateHelpers.TemplateHelperDelegate templateHelper
-        ) {
+        )
+        {
             ViewDataDictionary viewData = html.ViewContext.ViewData;
             TemplateInfo templateInfo = viewData.TemplateInfo;
             ModelMetadata modelMetadata = viewData.ModelMetadata;
@@ -227,7 +230,8 @@ namespace System.Web.Mvc.Html
                 ModelMetadata propertyMetadata in modelMetadata.Properties.Where(
                     pm => ShouldShow(pm, templateInfo)
                 )
-            ) {
+            )
+            {
                 if (!propertyMetadata.HideSurroundingHtml)
                 {
                     string label = propertyMetadata.GetDisplayName();

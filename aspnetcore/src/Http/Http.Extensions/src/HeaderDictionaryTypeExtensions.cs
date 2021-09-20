@@ -81,7 +81,8 @@ namespace Microsoft.AspNetCore.Http
             this IHeaderDictionary headers,
             string name,
             IList<T>? values
-        ) {
+        )
+        {
             if (headers == null)
             {
                 throw new ArgumentNullException(nameof(headers));
@@ -122,7 +123,8 @@ namespace Microsoft.AspNetCore.Http
             this IHeaderDictionary Headers,
             string name,
             IList<T> values
-        ) {
+        )
+        {
             if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));
@@ -156,7 +158,8 @@ namespace Microsoft.AspNetCore.Http
             this IHeaderDictionary headers,
             string name,
             DateTimeOffset? value
-        ) {
+        )
+        {
             if (headers == null)
             {
                 throw new ArgumentNullException(nameof(headers));
@@ -388,7 +391,8 @@ namespace Microsoft.AspNetCore.Http
                         if (
                             string.Equals("TryParse", methodInfo.Name, StringComparison.Ordinal)
                             && methodInfo.ReturnParameter.ParameterType.Equals(typeof(bool))
-                        ) {
+                        )
+                        {
                             var methodParams = methodInfo.GetParameters();
                             return methodParams.Length == 2
                                 && methodParams[0].ParameterType.Equals(typeof(string))
@@ -430,7 +434,8 @@ namespace Microsoft.AspNetCore.Http
                         if (
                             string.Equals("TryParseList", methodInfo.Name, StringComparison.Ordinal)
                             && methodInfo.ReturnParameter.ParameterType.Equals(typeof(Boolean))
-                        ) {
+                        )
+                        {
                             var methodParams = methodInfo.GetParameters();
                             return methodParams.Length == 2
                                 && methodParams[0].ParameterType.Equals(typeof(IList<string>))

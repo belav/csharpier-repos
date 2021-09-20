@@ -49,7 +49,8 @@ namespace System.ComponentModel.Tests
             MergablePropertyAttribute attribute,
             object other,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, attribute.Equals(other));
             if (other is MergablePropertyAttribute)
             {
@@ -69,7 +70,8 @@ namespace System.ComponentModel.Tests
         public void DefaultProperties_GetAllowMerge_ReturnsExpected(
             MergablePropertyAttribute attribute,
             bool expectedAllowMerge
-        ) {
+        )
+        {
             Assert.Equal(expectedAllowMerge, attribute.AllowMerge);
             Assert.Equal(expectedAllowMerge, attribute.IsDefaultAttribute());
         }

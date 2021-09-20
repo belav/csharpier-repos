@@ -90,7 +90,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             AggregateSymbol agg,
             AggregateType atsOuter,
             TypeArray typeArgs
-        ) {
+        )
+        {
             Debug.Assert(atsOuter == null || atsOuter.OwningAggregate == agg.Parent, "");
 
             if (typeArgs == null)
@@ -200,7 +201,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             TypeArray typeArgsCls,
             TypeArray typeArgsMeth,
             bool denormMeth
-        ) {
+        )
+        {
             Debug.Assert(typeSrc != null);
             SubstContext ctx = new SubstContext(typeArgsCls, typeArgsMeth, denormMeth);
             return ctx.IsNop ? typeSrc : SubstTypeCore(typeSrc, ctx);
@@ -346,7 +348,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             TypeArray typeArgsCls,
             TypeArray typeArgsMeth,
             bool denormMeth
-        ) {
+        )
+        {
             if (typeDst.Equals(typeSrc))
             {
                 Debug.Assert(
@@ -365,7 +368,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             TypeArray taSrc,
             TypeArray typeArgsCls,
             TypeArray typeArgsMeth
-        ) {
+        )
+        {
             // Handle the simple common cases first.
             if (taDst == taSrc || (taDst != null && taDst.Equals(taSrc)))
             {
@@ -433,7 +437,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     if (
                         !(typeDst is ParameterModifierType modDest)
                         || modDest.IsOut != ((ParameterModifierType)typeSrc).IsOut
-                    ) {
+                    )
+                    {
                         return false;
                     }
 
@@ -695,7 +700,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                             aggSrc,
                             out CType typeDst
                         )
-                    ) {
+                    )
+                    {
                         // If we have an interface or delegate type, then it can potentially be varied by its type arguments
                         // to produce an accessible type, and if that's the case, then return that.
                         // Example: IEnumerable<PrivateConcreteFoo> --> IEnumerable<PublicAbstractFoo>
@@ -731,7 +737,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         arrSrc,
                         out CType typeDst
                     )
-                ) {
+                )
+                {
                     // Similarly to the interface and delegate case, arrays are covariant in their element type and
                     // so we can potentially produce an array type that is accessible.
                     // Example: PrivateConcreteFoo[] --> PublicAbstractFoo[]
@@ -755,7 +762,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             AggregateSymbol context,
             AggregateType typeSrc,
             out CType typeDst
-        ) {
+        )
+        {
             Debug.Assert(typeSrc != null);
             Debug.Assert(typeSrc.IsInterfaceType || typeSrc.IsDelegateType);
 
@@ -818,7 +826,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             AggregateSymbol context,
             ArrayType typeSrc,
             out CType typeDst
-        ) {
+        )
+        {
             Debug.Assert(typeSrc != null);
 
             // We are here because we have an array type with an inaccessible element type. If possible,
@@ -843,7 +852,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         internal static bool InternalsVisibleTo(
             Assembly assemblyThatDefinesAttribute,
             Assembly assemblyToCheck
-        ) {
+        )
+        {
             RuntimeBinder.EnsureLockIsTaken();
             (Assembly, Assembly) key = (assemblyThatDefinesAttribute, assemblyToCheck);
             if (!s_internalsVisibleToCache.TryGetValue(key, out bool result))
@@ -863,7 +873,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                                 new AssemblyName(ivta.AssemblyName),
                                 assyName
                             )
-                        ) {
+                        )
+                        {
                             result = true;
                             break;
                         }

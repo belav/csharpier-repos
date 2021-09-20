@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public BoundDiscardExpression FailInference(
             Binder binder,
             BindingDiagnosticBag? diagnosticsOpt
-        ) {
+        )
+        {
             if (diagnosticsOpt?.DiagnosticBag != null)
             {
                 Binder.Error(diagnosticsOpt, ErrorCode.ERR_DiscardTypeInferenceFailed, this.Syntax);

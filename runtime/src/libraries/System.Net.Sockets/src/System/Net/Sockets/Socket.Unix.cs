@@ -37,7 +37,8 @@ namespace System.Net.Sockets
             int receiveSize,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException(SR.net_sockets_accept_receive_apm_notsupported);
         }
 
@@ -50,7 +51,8 @@ namespace System.Net.Sockets
             out byte[] buffer,
             out int bytesTransferred,
             IAsyncResult asyncResult
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException(SR.net_sockets_accept_receive_apm_notsupported);
         }
 
@@ -73,7 +75,8 @@ namespace System.Net.Sockets
             if (
                 _handle.ExposedHandleOrUntrackedConfiguration
                 && (isMultiEndpoint || _handle.LastConnectFailed)
-            ) {
+            )
+            {
                 ThrowMultiConnectNotSupported();
             }
 
@@ -91,7 +94,8 @@ namespace System.Net.Sockets
             out bool blocking,
             out bool isListening,
             out bool isSocket
-        ) {
+        )
+        {
             if (Interop.Sys.FStat(handle, out Interop.Sys.FileStatus stat) == -1)
             {
                 throw new SocketException((int)SocketError.NotSocket);
@@ -242,7 +246,8 @@ namespace System.Net.Sockets
             bool unused,
             string propertyName,
             out SafeSocketHandle? handle
-        ) {
+        )
+        {
             // AcceptSocket is not supported on Unix.
             if (acceptSocket != null)
             {
@@ -270,7 +275,8 @@ namespace System.Net.Sockets
             ReadOnlySpan<byte> preBuffer,
             ReadOnlySpan<byte> postBuffer,
             TransmitFileOptions flags
-        ) {
+        )
+        {
             CheckTransmitFileOptions(flags);
 
             // Open the file, if any
@@ -314,7 +320,8 @@ namespace System.Net.Sockets
             FileStream? fileStream,
             byte[]? preBuffer,
             byte[]? postBuffer
-        ) {
+        )
+        {
             SocketError errorCode = SocketError.Success;
             using (fileStream)
             {
@@ -366,7 +373,8 @@ namespace System.Net.Sockets
             TransmitFileOptions flags,
             AsyncCallback? callback,
             object? state
-        ) {
+        )
+        {
             CheckTransmitFileOptions(flags);
 
             // Open the file, if any

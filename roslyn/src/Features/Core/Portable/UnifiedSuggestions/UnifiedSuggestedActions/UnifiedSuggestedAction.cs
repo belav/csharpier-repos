@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
             Workspace workspace,
             CodeAction codeAction,
             CodeActionPriority codeActionPriority
-        ) {
+        )
+        {
             Workspace = workspace;
             OriginalCodeAction = codeAction;
             CodeActionPriority = codeActionPriority;

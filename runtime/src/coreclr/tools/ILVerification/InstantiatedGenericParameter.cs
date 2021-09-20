@@ -34,7 +34,8 @@ namespace Internal.TypeSystem
         internal static Instantiation CreateGenericMethodInstantiation(
             Instantiation typeInstantiation,
             Instantiation methodInstantiation
-        ) {
+        )
+        {
             if (methodInstantiation.Length == 0)
                 return methodInstantiation;
 

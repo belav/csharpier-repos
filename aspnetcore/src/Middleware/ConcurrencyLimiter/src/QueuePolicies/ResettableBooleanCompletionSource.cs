@@ -56,7 +56,8 @@ namespace Microsoft.AspNetCore.ConcurrencyLimiter
             object? state,
             short token,
             ValueTaskSourceOnCompletedFlags flags
-        ) {
+        )
+        {
             _valueTaskSource.OnCompleted(continuation, state, token, flags);
         }
 

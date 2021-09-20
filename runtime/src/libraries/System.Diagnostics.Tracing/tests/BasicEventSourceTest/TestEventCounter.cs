@@ -220,7 +220,8 @@ namespace BasicEventSourceTests
                                     100,
                                     100
                                 )
-                            ) {
+                            )
+                            {
                                 listener.EnableTimer(logger, .1); /* Poll every .1 s */
                                 // logs at 0 seconds because of EnableTimer command
                                 Sleep(100);
@@ -446,7 +447,8 @@ namespace BasicEventSourceTests
             float standardDeviation,
             float min,
             float max
-        ) {
+        )
+        {
             ValidateEventCounter(
                 counterName,
                 count,
@@ -478,7 +480,8 @@ namespace BasicEventSourceTests
             float min,
             float max,
             IDictionary<string, object> payloadContent
-        ) {
+        )
+        {
             Assert.Equal(counterName, (string)payloadContent["Name"]);
             Assert.Equal(count, (int)payloadContent["Count"]);
             if (count != 0)

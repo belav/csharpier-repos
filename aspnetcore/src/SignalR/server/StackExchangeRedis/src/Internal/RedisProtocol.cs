@@ -41,7 +41,8 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal
             string methodName,
             object?[] args,
             IReadOnlyList<string>? excludedConnectionIds
-        ) {
+        )
+        {
             // Written as a MessagePack 'arr' containing at least these items:
             // * A MessagePack 'arr' of 'str's representing the excluded ids
             // * [The output of WriteSerializedHubMessage, which is an 'arr']
@@ -225,7 +226,8 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal
             ref MessagePackReader reader,
             int expectedLength,
             string messageType
-        ) {
+        )
+        {
             var length = reader.ReadArrayHeader();
 
             if (length < expectedLength)

@@ -466,7 +466,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration
             IQueryable<TElement> query,
             DbContext context,
             string testMethodName
-        ) {
+        )
+        {
             var seed = ProceduralQueryExpressionGenerator.Seed ?? new Random().Next();
             var random = new Random(seed);
             var depth = 2;

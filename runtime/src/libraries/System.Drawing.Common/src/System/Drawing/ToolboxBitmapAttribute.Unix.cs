@@ -123,7 +123,8 @@ namespace System.Drawing
                     System.IO.Stream? s = t.Assembly.GetManifestResourceStream(
                         t.Namespace + "." + imageName
                     )
-                ) {
+                )
+                {
                     if (s == null)
                     {
                         return null;

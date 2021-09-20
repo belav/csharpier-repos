@@ -37,7 +37,8 @@ namespace EventPipeTests
             string SourceName,
             string EventName,
             IEnumerable<KeyValuePair<string, string>> Arguments
-        ) {
+        )
+        {
             WriteEvent(3, SourceName, EventName, Arguments);
         }
     }

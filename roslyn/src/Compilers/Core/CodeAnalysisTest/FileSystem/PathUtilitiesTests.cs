@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.FileSystem
         private void TestGetDirectoryNameAndCompareToDotnet(
             string expectedDirectoryName,
             string fullPath
-        ) {
+        )
+        {
             var roslynName = PathUtilities.TestAccessor.GetDirectoryName(
                 fullPath,
                 isUnixLike: false
@@ -564,7 +565,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.FileSystem
             string expected,
             string path1,
             string path2
-        ) {
+        )
+        {
             Assert.Equal(expected, PathUtilities.CombinePaths(path1, path2));
         }
     }

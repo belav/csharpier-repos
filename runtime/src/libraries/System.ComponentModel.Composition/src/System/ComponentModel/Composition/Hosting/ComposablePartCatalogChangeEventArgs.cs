@@ -42,7 +42,8 @@ namespace System.ComponentModel.Composition.Hosting
             IEnumerable<ComposablePartDefinition> addedDefinitions,
             IEnumerable<ComposablePartDefinition> removedDefinitions,
             AtomicComposition? atomicComposition
-        ) {
+        )
+        {
             Requires.NotNull(addedDefinitions, nameof(addedDefinitions));
             Requires.NotNull(removedDefinitions, nameof(removedDefinitions));
 

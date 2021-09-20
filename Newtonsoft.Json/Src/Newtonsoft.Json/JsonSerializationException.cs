@@ -120,7 +120,8 @@ namespace Newtonsoft.Json
             JsonReader reader,
             string message,
             Exception? ex
-        ) {
+        )
+        {
             return Create(reader as IJsonLineInfo, reader.Path, message, ex);
         }
 
@@ -129,7 +130,8 @@ namespace Newtonsoft.Json
             string path,
             string message,
             Exception? ex
-        ) {
+        )
+        {
             message = JsonPosition.FormatMessage(lineInfo, path, message);
 
             int lineNumber;

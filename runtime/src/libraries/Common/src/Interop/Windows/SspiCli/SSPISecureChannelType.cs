@@ -29,7 +29,8 @@ namespace System.Net
             Interop.SspiCli.CredentialUse usage,
             ref SafeSspiAuthDataHandle authdata,
             out SafeFreeCredentials outCredential
-        ) {
+        )
+        {
             return SafeFreeCredentials.AcquireCredentialsHandle(
                 moduleName,
                 usage,
@@ -42,7 +43,8 @@ namespace System.Net
             string moduleName,
             Interop.SspiCli.CredentialUse usage,
             out SafeFreeCredentials outCredential
-        ) {
+        )
+        {
             return SafeFreeCredentials.AcquireDefaultCredential(
                 moduleName,
                 usage,
@@ -55,7 +57,8 @@ namespace System.Net
             Interop.SspiCli.CredentialUse usage,
             Interop.SspiCli.SCHANNEL_CRED* authdata,
             out SafeFreeCredentials outCredential
-        ) {
+        )
+        {
             return SafeFreeCredentials.AcquireCredentialsHandle(
                 moduleName,
                 usage,
@@ -69,7 +72,8 @@ namespace System.Net
             Interop.SspiCli.CredentialUse usage,
             Interop.SspiCli.SCH_CREDENTIALS* authdata,
             out SafeFreeCredentials outCredential
-        ) {
+        )
+        {
             return SafeFreeCredentials.AcquireCredentialsHandle(
                 moduleName,
                 usage,
@@ -86,7 +90,8 @@ namespace System.Net
             Interop.SspiCli.Endianness endianness,
             ref SecurityBuffer outputBuffer,
             ref Interop.SspiCli.ContextFlags outFlags
-        ) {
+        )
+        {
             return SafeDeleteContext.AcceptSecurityContext(
                 ref credential,
                 ref context,
@@ -107,7 +112,8 @@ namespace System.Net
             InputSecurityBuffers inputBuffers,
             ref SecurityBuffer outputBuffer,
             ref Interop.SspiCli.ContextFlags outFlags
-        ) {
+        )
+        {
             return SafeDeleteContext.InitializeSecurityContext(
                 ref credential,
                 ref context,
@@ -124,7 +130,8 @@ namespace System.Net
             SafeDeleteContext context,
             ref Interop.SspiCli.SecBufferDesc inputOutput,
             uint sequenceNumber
-        ) {
+        )
+        {
             try
             {
                 bool ignore = false;
@@ -147,7 +154,8 @@ namespace System.Net
             SafeDeleteContext context,
             ref Interop.SspiCli.SecBufferDesc inputOutput,
             uint sequenceNumber
-        ) {
+        )
+        {
             try
             {
                 bool ignore = false;
@@ -170,7 +178,8 @@ namespace System.Net
             SafeDeleteContext context,
             ref Interop.SspiCli.SecBufferDesc inputOutput,
             uint sequenceNumber
-        ) {
+        )
+        {
             throw NotImplemented.ByDesignWithMessage(SR.net_MethodNotImplementedException);
         }
 
@@ -178,7 +187,8 @@ namespace System.Net
             SafeDeleteContext context,
             ref Interop.SspiCli.SecBufferDesc inputOutput,
             uint sequenceNumber
-        ) {
+        )
+        {
             throw NotImplemented.ByDesignWithMessage(SR.net_MethodNotImplementedException);
         }
 
@@ -186,7 +196,8 @@ namespace System.Net
             SafeDeleteContext phContext,
             Interop.SspiCli.ContextAttribute attribute,
             out SafeFreeContextBufferChannelBinding refHandle
-        ) {
+        )
+        {
             refHandle = SafeFreeContextBufferChannelBinding.CreateEmptyHandle();
 
             // Bindings is on the stack, so there's no need for a fixed block.
@@ -205,7 +216,8 @@ namespace System.Net
             Span<byte> buffer,
             Type? handleType,
             out SafeHandle? refHandle
-        ) {
+        )
+        {
             refHandle = null;
             if (handleType != null)
             {
@@ -239,21 +251,24 @@ namespace System.Net
         public int QuerySecurityContextToken(
             SafeDeleteContext phContext,
             out SecurityContextTokenHandle phToken
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
 
         public int CompleteAuthToken(
             ref SafeDeleteSslContext? refContext,
             in SecurityBuffer inputBuffer
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
 
         public int ApplyControlToken(
             ref SafeDeleteContext? refContext,
             in SecurityBuffer inputBuffer
-        ) {
+        )
+        {
             return SafeDeleteContext.ApplyControlToken(ref refContext, in inputBuffer);
         }
     }

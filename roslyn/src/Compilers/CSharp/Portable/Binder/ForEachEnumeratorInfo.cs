@@ -59,7 +59,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Conversion currentConversion,
             Conversion enumeratorConversion,
             BinderFlags location
-        ) {
+        )
+        {
             Debug.Assert(
                 (object)collectionType != null,
                 $"Field '{nameof(collectionType)}' cannot be null"

@@ -94,7 +94,8 @@ namespace System.Buffers
             ReadOnlySpan<char> format,
             out StandardFormat standardFormat,
             bool throws = false
-        ) {
+        )
+        {
             standardFormat = default;
 
             if (format.Length == 0)

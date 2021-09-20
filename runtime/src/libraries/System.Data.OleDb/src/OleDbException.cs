@@ -73,7 +73,8 @@ namespace System.Data.OleDb
             UnsafeNativeMethods.IErrorInfo errorInfo,
             OleDbHResult errorCode,
             Exception? inner
-        ) {
+        )
+        {
             OleDbErrorCollection errors = new OleDbErrorCollection(errorInfo);
             string? message = null;
             string? source = null;
@@ -154,7 +155,8 @@ namespace System.Data.OleDb
                 CultureInfo culture,
                 object value,
                 Type destinationType
-            ) {
+            )
+            {
                 if (destinationType == null)
                 {
                     throw ADP.ArgumentNull("destinationType");

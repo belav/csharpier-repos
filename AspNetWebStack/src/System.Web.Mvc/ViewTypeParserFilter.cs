@@ -71,7 +71,8 @@ namespace System.Web.Mvc
                 if (
                     inheritsAttribute != null
                     && inheritsAttribute.IndexOfAny(new[] { '<', '(' }) > 0
-                ) {
+                )
+                {
                     attributes["inherits"] = baseType.FullName;
                     _inherits = inheritsAttribute;
                 }
@@ -105,7 +106,8 @@ namespace System.Web.Mvc
         public override bool AllowVirtualReference(
             string referenceVirtualPath,
             VirtualReferenceType referenceType
-        ) {
+        )
+        {
             return true;
         }
 

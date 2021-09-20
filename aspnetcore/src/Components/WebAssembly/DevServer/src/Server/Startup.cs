@@ -52,7 +52,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.DevServer.Server
         private static void EnableConfiguredPathbase(
             IApplicationBuilder app,
             IConfiguration configuration
-        ) {
+        )
+        {
             var pathBase = configuration.GetValue<string>("pathbase");
             if (!string.IsNullOrEmpty(pathBase))
             {

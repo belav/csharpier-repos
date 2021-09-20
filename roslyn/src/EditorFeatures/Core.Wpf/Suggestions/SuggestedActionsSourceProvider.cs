@@ -72,7 +72,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
             [ImportMany]
                 IEnumerable<Lazy<IImageMonikerService, OrderableMetadata>> imageMonikerServices,
             [ImportMany] IEnumerable<Lazy<ISuggestedActionCallback>> actionCallbacks
-        ) {
+        )
+        {
             _threadingContext = threadingContext;
             _codeRefactoringService = codeRefactoringService;
             _diagnosticService = diagnosticService;
@@ -89,7 +90,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
         public ISuggestedActionsSource? CreateSuggestedActionsSource(
             ITextView textView,
             ITextBuffer textBuffer
-        ) {
+        )
+        {
             Contract.ThrowIfNull(textView);
             Contract.ThrowIfNull(textBuffer);
 

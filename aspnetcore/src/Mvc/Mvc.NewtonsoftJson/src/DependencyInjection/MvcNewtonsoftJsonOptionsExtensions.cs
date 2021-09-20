@@ -27,7 +27,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static MvcNewtonsoftJsonOptions UseCamelCasing(
             this MvcNewtonsoftJsonOptions options,
             bool processDictionaryKeys
-        ) {
+        )
+        {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -75,7 +76,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns><see cref="MvcNewtonsoftJsonOptions"/> with member casing settings.</returns>
         public static MvcNewtonsoftJsonOptions UseMemberCasing(
             this MvcNewtonsoftJsonOptions options
-        ) {
+        )
+        {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));

@@ -26,7 +26,8 @@ namespace IntelHardwareIntrinsicTest
                         new double[2] { 1, -5 },
                         new double[2]
                     )
-                ) {
+                )
+                {
                     var vf = Unsafe.Read<Vector128<double>>(doubleTable.inArrayPtr);
                     Sse2.StoreLow((double*)(doubleTable.outArrayPtr), vf);
 
@@ -37,7 +38,8 @@ namespace IntelHardwareIntrinsicTest
                                     == BitConverter.DoubleToInt64Bits(y[0])
                                 && BitConverter.DoubleToInt64Bits(y[1]) == 0
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("Sse2 StoreLow failed on double:");
                         foreach (var item in doubleTable.outArray)
                         {

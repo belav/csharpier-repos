@@ -39,7 +39,8 @@ namespace System.Web.Http.WebHost
             HttpContextBase contextBase,
             HttpRequestBase requestBase,
             HttpRequestMessage request
-        ) {
+        )
+        {
             Contract.Assert(contextBase != null);
             Contract.Assert(requestBase != null);
             Contract.Assert(request != null);
@@ -78,7 +79,8 @@ namespace System.Web.Http.WebHost
                         _requestBase.ClientCertificate != null
                         && _requestBase.ClientCertificate.Certificate != null
                         && _requestBase.ClientCertificate.Certificate.Length > 0
-                    ) {
+                    )
+                    {
                         value = new X509Certificate2(_requestBase.ClientCertificate.Certificate);
                     }
                     else

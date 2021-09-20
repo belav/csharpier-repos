@@ -29,7 +29,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
         internal ResponseStreamAsyncResult(
             ResponseBody responseStream,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _responseStream = responseStream;
             _tcs = new TaskCompletionSource<object?>();
 
@@ -214,7 +215,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             object[] objectsToPin,
             ref int pinIndex,
             ArraySegment<byte> segment
-        ) {
+        )
+        {
             objectsToPin[pinIndex] = segment.Array!;
             pinIndex++;
             chunks[chunkIndex].DataChunkType =
@@ -293,14 +295,16 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             ResponseStreamAsyncResult asyncResult,
             uint errorCode,
             uint numBytes
-        ) {
+        )
+        {
             var logger = asyncResult._responseStream.RequestContext.Logger;
             try
             {
                 if (
                     errorCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS
                     && errorCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_HANDLE_EOF
-                ) {
+                )
+                {
                     if (asyncResult._cancellationToken.IsCancellationRequested)
                     {
                         Log.WriteCancelled(logger, errorCode);
@@ -349,7 +353,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             uint errorCode,
             uint numBytes,
             NativeOverlapped* nativeOverlapped
-        ) {
+        )
+        {
             var asyncResult =
                 (ResponseStreamAsyncResult)ThreadPoolBoundHandle.GetNativeOverlappedState(
                     nativeOverlapped

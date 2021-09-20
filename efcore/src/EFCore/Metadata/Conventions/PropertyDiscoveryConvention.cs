@@ -37,7 +37,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessEntityTypeAdded(
             IConventionEntityTypeBuilder entityTypeBuilder,
             IConventionContext<IConventionEntityTypeBuilder> context
-        ) {
+        )
+        {
             Process(entityTypeBuilder);
         }
 
@@ -53,11 +54,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionEntityType? newBaseType,
             IConventionEntityType? oldBaseType,
             IConventionContext<IConventionEntityType> context
-        ) {
+        )
+        {
             if (
                 (newBaseType == null || oldBaseType != null)
                 && entityTypeBuilder.Metadata.BaseType == newBaseType
-            ) {
+            )
+            {
                 Process(entityTypeBuilder);
             }
         }

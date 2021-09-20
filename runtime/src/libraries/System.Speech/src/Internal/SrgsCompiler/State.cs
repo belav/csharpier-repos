@@ -48,7 +48,8 @@ namespace System.Speech.Internal.SrgsCompiler
             float[] pWeights,
             ref uint iArcOffset,
             ref int iOffset
-        ) {
+        )
+        {
             // The arcs must be sorted before being written to disk.
             List<Arc> outArcs = _outArcs.ToList();
             outArcs.Sort();
@@ -301,7 +302,8 @@ namespace System.Speech.Internal.SrgsCompiler
                         if (
                             fRuleReachedEndState
                             || ((arc.RuleRef == null) && (arc.WordId == 0) && arc.WordId == 0)
-                        ) {
+                        )
+                        {
                             if (arc.End != null)
                             {
                                 arc.End.CheckLeftRecursion(out fReachedEndState);

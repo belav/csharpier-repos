@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
             FormatterState formatterState,
             DiagnosticDescriptor descriptor,
             OptionSet options
-        ) {
+        )
+        {
             var tree = context.Tree;
             var cancellationToken = context.CancellationToken;
 
@@ -57,7 +58,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
                                     new TextSpan(change.Span.Start + offset, change.NewText.Length)
                                 )
                                 .ContentEquals(SourceText.From(change.NewText))
-                        ) {
+                        )
+                        {
                             change = new TextChange(new TextSpan(change.Span.Start, offset), "");
                         }
                         else
@@ -70,7 +72,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
                                         new TextSpan(change.Span.Start, change.NewText.Length)
                                     )
                                     .ContentEquals(SourceText.From(change.NewText))
-                            ) {
+                            )
+                            {
                                 change = new TextChange(
                                     new TextSpan(change.Span.Start + change.NewText.Length, offset),
                                     ""

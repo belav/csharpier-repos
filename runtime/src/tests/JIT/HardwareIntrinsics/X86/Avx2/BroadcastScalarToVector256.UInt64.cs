@@ -138,7 +138,8 @@ namespace JIT.HardwareIntrinsics.X86
                     (alignment != 32 && alignment != 16)
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -197,7 +198,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             public void RunStructFldScenario(
                 SimpleUnaryOpTest__BroadcastScalarToVector256UInt64 testClass
-            ) {
+            )
+            {
                 var result = Avx2.BroadcastScalarToVector256(_fld1);
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
@@ -206,7 +208,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             public void RunStructFldScenario_Load(
                 SimpleUnaryOpTest__BroadcastScalarToVector256UInt64 testClass
-            ) {
+            )
+            {
                 fixed (Vector128<UInt64>* pFld1 = &_fld1)
                 {
                     var result = Avx2.BroadcastScalarToVector256(
@@ -531,7 +534,8 @@ namespace JIT.HardwareIntrinsics.X86
             Vector128<UInt64> op1,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             UInt64[] inArray1 = new UInt64[Op1ElementCount];
             UInt64[] outArray = new UInt64[RetElementCount];
 
@@ -568,7 +572,8 @@ namespace JIT.HardwareIntrinsics.X86
             UInt64[] firstOp,
             UInt64[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (firstOp[0] != result[0])

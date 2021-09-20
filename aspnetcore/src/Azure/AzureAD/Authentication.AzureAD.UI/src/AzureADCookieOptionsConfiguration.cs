@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Authentication.AzureAD.UI
         public AzureADCookieOptionsConfiguration(
             IOptions<AzureADSchemeOptions> schemeOptions,
             IOptionsMonitor<AzureADOptions> AzureADOptions
-        ) {
+        )
+        {
             _schemeOptions = schemeOptions;
             _AzureADOptions = AzureADOptions;
         }

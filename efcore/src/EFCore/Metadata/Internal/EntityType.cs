@@ -118,7 +118,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     type.Assembly.GetName().Name,
                     StringComparison.Ordinal
                 )
-            ) {
+            )
+            {
                 throw new ArgumentException(CoreStrings.AddingProxyTypeAsEntityType(type.FullName));
             }
 
@@ -149,7 +150,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     type.Assembly.GetName().Name,
                     StringComparison.Ordinal
                 )
-            ) {
+            )
+            {
                 throw new ArgumentException(CoreStrings.AddingProxyTypeAsEntityType(type.FullName));
             }
 
@@ -288,7 +290,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual EntityType? SetBaseType(
             EntityType? newBaseType,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             EnsureMutable();
             Check.DebugAssert(IsInModel, "The entity type has been removed from the model");
 
@@ -601,7 +604,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual Key? SetPrimaryKey(
             IReadOnlyList<Property>? properties,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             EnsureMutable();
             Check.DebugAssert(IsInModel, "The entity type has been removed from the model");
 
@@ -758,7 +762,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual Key? AddKey(
             IReadOnlyList<Property> properties,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             Check.NotEmpty(properties, nameof(properties));
             Check.HasNoNulls(properties, nameof(properties));
             EnsureMutable();
@@ -1014,7 +1019,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             EntityType principalEntityType,
             ConfigurationSource? componentConfigurationSource,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             Check.NotEmpty(properties, nameof(properties));
             Check.HasNoNulls(properties, nameof(properties));
             Check.NotNull(principalKey, nameof(principalKey));
@@ -1150,7 +1156,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public virtual IEnumerable<ForeignKey> FindForeignKeys(
             IReadOnlyList<IReadOnlyProperty> properties
-        ) {
+        )
+        {
             Check.HasNoNulls(properties, nameof(properties));
             Check.NotEmpty(properties, nameof(properties));
 
@@ -1184,7 +1191,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             IReadOnlyList<IReadOnlyProperty> properties,
             IReadOnlyKey principalKey,
             IReadOnlyEntityType principalEntityType
-        ) {
+        )
+        {
             Check.HasNoNulls(properties, nameof(properties));
             Check.NotEmpty(properties, nameof(properties));
             Check.NotNull(principalKey, nameof(principalKey));
@@ -1272,7 +1280,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public virtual IEnumerable<ForeignKey> FindDeclaredForeignKeys(
             IReadOnlyList<IReadOnlyProperty> properties
-        ) {
+        )
+        {
             Check.NotEmpty(properties, nameof(properties));
 
             return _foreignKeys.Count == 0
@@ -1292,7 +1301,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             IReadOnlyList<IReadOnlyProperty> properties,
             IReadOnlyKey principalKey,
             IReadOnlyEntityType principalEntityType
-        ) {
+        )
+        {
             Check.NotEmpty(properties, nameof(properties));
             Check.NotNull(principalKey, nameof(principalKey));
             Check.NotNull(principalEntityType, nameof(principalEntityType));
@@ -1310,7 +1320,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                         principalKey.Properties
                     )
                     && fk.PrincipalEntityType == principalEntityType
-                ) {
+                )
+                {
                     return fk;
                 }
             }
@@ -1396,7 +1407,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             IReadOnlyList<IReadOnlyProperty> properties,
             IReadOnlyKey principalKey,
             IReadOnlyEntityType principalEntityType
-        ) {
+        )
+        {
             Check.NotEmpty(properties, nameof(properties));
 
             var foreignKey = FindDeclaredForeignKey(properties, principalKey, principalEntityType);
@@ -1521,7 +1533,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             string name,
             ForeignKey foreignKey,
             bool pointsToPrincipal
-        ) {
+        )
+        {
             Check.NotEmpty(name, nameof(name));
             Check.NotNull(foreignKey, nameof(foreignKey));
 
@@ -1538,7 +1551,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             MemberInfo navigationMember,
             ForeignKey foreignKey,
             bool pointsToPrincipal
-        ) {
+        )
+        {
             Check.NotNull(navigationMember, nameof(navigationMember));
             Check.NotNull(foreignKey, nameof(foreignKey));
 
@@ -1553,7 +1567,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             MemberIdentity navigationMember,
             ForeignKey foreignKey,
             bool pointsToPrincipal
-        ) {
+        )
+        {
             EnsureMutable();
 
             var name = navigationMember.Name!;
@@ -1770,7 +1785,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             bool collection,
             bool onDependent,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             Check.NotEmpty(name, nameof(name));
             Check.NotNull(targetEntityType, nameof(targetEntityType));
             EnsureMutable();
@@ -1844,7 +1860,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             string name,
             MemberInfo memberInfo,
             bool throwOnNameMismatch = true
-        ) {
+        )
+        {
             if (name != memberInfo.GetSimpleMemberName())
             {
                 if (memberInfo != FindIndexerPropertyInfo())
@@ -2123,7 +2140,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual Index? AddIndex(
             IReadOnlyList<Property> properties,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             Check.NotEmpty(properties, nameof(properties));
             Check.HasNoNulls(properties, nameof(properties));
             EnsureMutable();
@@ -2160,7 +2178,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             IReadOnlyList<Property> properties,
             string name,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             Check.NotEmpty(properties, nameof(properties));
             Check.HasNoNulls(properties, nameof(properties));
             Check.NotEmpty(name, nameof(name));
@@ -2470,7 +2489,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Type propertyType,
             ConfigurationSource? typeConfigurationSource,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             Check.NotNull(name, nameof(name));
             Check.NotNull(propertyType, nameof(propertyType));
 
@@ -2532,7 +2552,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             MemberInfo? memberInfo,
             ConfigurationSource? typeConfigurationSource,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             Check.NotNull(name, nameof(name));
             Check.NotNull(propertyType, nameof(propertyType));
             Check.DebugAssert(IsInModel, "The entity type has been removed from the model");
@@ -2583,7 +2604,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 memberInfo != null
                 && propertyType != memberInfo.GetMemberType()
                 && memberInfo != FindIndexerPropertyInfo()
-            ) {
+            )
+            {
                 if (typeConfigurationSource != null)
                 {
                     throw new InvalidOperationException(
@@ -3029,7 +3051,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             MemberInfo memberInfo,
             // ReSharper disable once MethodOverloadWithOptionalParameter
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             Check.NotNull(memberInfo, nameof(memberInfo));
             EnsureMutable();
 
@@ -3099,7 +3122,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public virtual IEnumerable<ServiceProperty> FindDerivedServiceProperties(
             string propertyName
-        ) {
+        )
+        {
             Check.NotNull(propertyName, nameof(propertyName));
 
             return _directlyDerivedTypes.Count == 0
@@ -3251,7 +3275,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public virtual IEnumerable<IDictionary<string, object?>> GetSeedData(
             bool providerValues = false
-        ) {
+        )
+        {
             if (_data == null || _data.Count == 0)
             {
                 return Enumerable.Empty<IDictionary<string, object?>>();
@@ -3279,7 +3304,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                             providerValues
                             && propertyBase is IReadOnlyProperty property
                             && !valueConverters.TryGetValue(propertyBase.Name, out valueConverter)
-                        ) {
+                        )
+                        {
                             valueConverter = property.GetTypeMapping().Converter;
                             valueConverters[propertyBase.Name] = valueConverter;
                         }
@@ -3330,7 +3356,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                                 memberInfo.GetSimpleMemberName(),
                                 out var propertyBase
                             )
-                        ) {
+                        )
+                        {
                             continue;
                         }
 
@@ -3338,7 +3365,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                         if (
                             providerValues
                             && !valueConverters.TryGetValue(propertyBase.Name, out valueConverter)
-                        ) {
+                        )
+                        {
                             if (propertyBase is IReadOnlyProperty property)
                             {
                                 valueConverter = property.GetTypeMapping().Converter;
@@ -3410,7 +3438,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual ChangeTrackingStrategy? SetChangeTrackingStrategy(
             ChangeTrackingStrategy? changeTrackingStrategy,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             EnsureMutable();
 
             if (changeTrackingStrategy != null)
@@ -3450,14 +3479,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             IReadOnlyEntityType entityType,
             ChangeTrackingStrategy value,
             bool requireFullNotifications
-        ) {
+        )
+        {
             if (requireFullNotifications)
             {
                 if (
                     value != ChangeTrackingStrategy.ChangingAndChangedNotifications
                     && value
                         != ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues
-                ) {
+                )
+                {
                     return CoreStrings.FullChangeTrackingRequired(
                         entityType.DisplayName(),
                         value,
@@ -3473,7 +3504,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 if (
                     value != ChangeTrackingStrategy.Snapshot
                     && !typeof(INotifyPropertyChanged).IsAssignableFrom(entityType.ClrType)
-                ) {
+                )
+                {
                     return CoreStrings.ChangeTrackingInterfaceMissing(
                         entityType.DisplayName(),
                         value,
@@ -3487,7 +3519,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                         || value
                             == ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues
                     ) && !typeof(INotifyPropertyChanging).IsAssignableFrom(entityType.ClrType)
-                ) {
+                )
+                {
                     return CoreStrings.ChangeTrackingInterfaceMissing(
                         entityType.DisplayName(),
                         value,
@@ -3517,7 +3550,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual LambdaExpression? SetQueryFilter(
             LambdaExpression? queryFilter,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             var errorMessage = CheckQueryFilter(queryFilter);
             if (errorMessage != null)
             {
@@ -3546,7 +3580,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     || queryFilter.Parameters[0].Type != ClrType
                     || queryFilter.ReturnType != typeof(bool)
                 )
-            ) {
+            )
+            {
                 return CoreStrings.BadFilterExpression(queryFilter, DisplayName(), ClrType);
             }
 
@@ -3597,7 +3632,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual Property? SetDiscriminatorProperty(
             Property? property,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             CheckDiscriminatorProperty(property);
 
             if (
@@ -3610,7 +3646,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                         )
                     )
                 )
-            ) {
+            )
+            {
                 ((IMutableEntityType)this).RemoveDiscriminatorValue();
                 if (BaseType == null)
                 {
@@ -3761,7 +3798,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual InstantiationBinding? SetConstructorBinding(
             InstantiationBinding? constructorBinding,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             EnsureMutable();
 
             _constructorBinding = constructorBinding;
@@ -3815,7 +3853,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual InstantiationBinding? SetServiceOnlyConstructorBinding(
             InstantiationBinding? constructorBinding,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             EnsureMutable();
 
             _serviceOnlyConstructorBinding = constructorBinding;
@@ -5687,7 +5726,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 List<RelationshipSnapshot>? relationships,
                 List<InternalSkipNavigationBuilder>? skipNavigations,
                 List<InternalServicePropertyBuilder>? serviceProperties
-            ) {
+            )
+            {
                 EntityType = entityType;
                 Properties = properties ?? new PropertiesSnapshot(null, null, null, null);
                 if (indexes != null)

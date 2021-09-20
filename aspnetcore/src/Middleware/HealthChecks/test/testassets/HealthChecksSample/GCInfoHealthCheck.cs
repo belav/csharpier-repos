@@ -22,7 +22,8 @@ namespace HealthChecksSample
             HealthStatus? failureStatus = null,
             IEnumerable<string> tags = null,
             long? thresholdInBytes = null
-        ) {
+        )
+        {
             // Register a check of type GCInfo
             builder.AddCheck<GCInfoHealthCheck>(name, failureStatus ?? HealthStatus.Degraded, tags);
 
@@ -54,7 +55,8 @@ namespace HealthChecksSample
         public Task<HealthCheckResult> CheckHealthAsync(
             HealthCheckContext context,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             var options = _options.Get(context.Registration.Name);
 
             // This example will report degraded status if the application is using

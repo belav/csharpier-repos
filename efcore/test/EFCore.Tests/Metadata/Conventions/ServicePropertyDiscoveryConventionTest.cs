@@ -133,7 +133,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         private static void ValidateServiceProperty<TProperty, TService>(
             IEntityType entityType,
             string propertyName
-        ) {
+        )
+        {
             var serviceProperty = entityType!.FindServiceProperty(propertyName);
             var binding = serviceProperty!.ParameterBinding;
 
@@ -383,7 +384,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 ILazyLoader? aLazyLoader,
                 ILazyLoader? aLazyLoader2,
                 Action<object, string>? lazyLoader
-            ) {
+            )
+            {
                 Id = id;
                 Context = context;
                 Context2 = context2;
@@ -430,16 +432,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 ILazyLoader? aLazyLoader,
                 ILazyLoader? aLazyLoader2,
                 Action<object, string>? lazyLoader
-            ) : base(
-                id,
-                context,
-                context2,
-                entityType,
-                entityType2,
-                aLazyLoader,
-                aLazyLoader2,
-                lazyLoader
-            ) { }
+            )
+                : base(
+                    id,
+                    context,
+                    context2,
+                    entityType,
+                    entityType2,
+                    aLazyLoader,
+                    aLazyLoader2,
+                    lazyLoader
+                ) { }
         }
 
         protected class PublicUnmappedBaseSub : PublicUnmappedBaseSuper
@@ -455,16 +458,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 ILazyLoader? aLazyLoader,
                 ILazyLoader? aLazyLoader2,
                 Action<object, string>? lazyLoader
-            ) : base(
-                id,
-                context,
-                context2,
-                entityType,
-                entityType2,
-                aLazyLoader,
-                aLazyLoader2,
-                lazyLoader
-            ) { }
+            )
+                : base(
+                    id,
+                    context,
+                    context2,
+                    entityType,
+                    entityType2,
+                    aLazyLoader,
+                    aLazyLoader2,
+                    lazyLoader
+                ) { }
         }
 
         protected class PublicMappedBase

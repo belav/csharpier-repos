@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.Syntax
             int endOfLineKind,
             out bool nextTokenIsSeparator,
             out bool nextSeparatorBelongsToNode
-        ) {
+        )
+        {
             // remove preceding separator if any, except for the case where
             // the following separator immediately touches the item in the list
             // and is followed by a newline.

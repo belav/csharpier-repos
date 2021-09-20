@@ -38,7 +38,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
             int optionCount,
             string[] optionNames,
             object[] optionValues
-        ) {
+        )
+        {
             var baseDirectory = Path.GetDirectoryName(pszOutputFileName);
             var parsedArguments = ParseCommandLineArguments(
                 baseDirectory,
@@ -92,7 +93,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
             string baseDirectory,
             string[] optionNames,
             object[] optionValues
-        ) {
+        )
+        {
             Contract.ThrowIfFalse(optionNames.Length == optionValues.Length);
 
             var arguments = new List<string>();
@@ -110,7 +112,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
                             new[] { '|' },
                             StringSplitOptions.RemoveEmptyEntries
                         )
-                    ) {
+                    )
+                    {
                         arguments.Add(string.Format("/r:\"{0}\"", reference));
                     }
                 }

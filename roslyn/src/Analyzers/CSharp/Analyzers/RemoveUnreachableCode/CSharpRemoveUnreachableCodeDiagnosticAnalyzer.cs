@@ -91,7 +91,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnreachableCode
             SyntaxNode root,
             TextSpan sourceSpan,
             bool fadeOutCode
-        ) {
+        )
+        {
             var node = root.FindNode(sourceSpan);
 
             // Note: this approach works as the language only supports the concept of
@@ -101,7 +102,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnreachableCode
             if (
                 firstUnreachableStatement == null
                 || firstUnreachableStatement.SpanStart != sourceSpan.Start
-            ) {
+            )
+            {
                 return;
             }
 

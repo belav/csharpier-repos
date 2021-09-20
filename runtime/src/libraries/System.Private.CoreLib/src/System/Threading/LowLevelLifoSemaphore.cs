@@ -26,7 +26,8 @@ namespace System.Threading
             int maximumSignalCount,
             int spinCount,
             Action onWait
-        ) {
+        )
+        {
             Debug.Assert(initialSignalCount >= 0);
             Debug.Assert(initialSignalCount <= maximumSignalCount);
             Debug.Assert(maximumSignalCount > 0);

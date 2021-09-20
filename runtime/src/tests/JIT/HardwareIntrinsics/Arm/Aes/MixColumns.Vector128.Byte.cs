@@ -129,7 +129,8 @@ namespace JIT.HardwareIntrinsics.Arm
                     (alignment != 16 && alignment != 8)
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -192,7 +193,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario_Load(
                 AesUnaryOpTest__MixColumns_Vector128_Byte testClass
-            ) {
+            )
+            {
                 fixed (Vector128<Byte>* pFld = &_fld)
                 {
                     var result = Aes.MixColumns(AdvSimd.LoadVector128((Byte*)(pFld)));

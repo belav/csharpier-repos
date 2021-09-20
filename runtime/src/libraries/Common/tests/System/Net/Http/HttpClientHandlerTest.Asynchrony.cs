@@ -28,7 +28,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task ResponseHeadersRead_SynchronizationContextNotUsedByHandler(
             bool responseHeadersRead,
             LoopbackServer.ContentMode contentMode
-        ) {
+        )
+        {
             await Task.Run(
                 async delegate // escape xunit's sync ctx
                 {
@@ -57,7 +58,8 @@ namespace System.Net.Http.Functional.Tests
                                                 Stream respStream = resp.Content.ReadAsStreamAsync()
                                                     .GetAwaiter()
                                                     .GetResult()
-                                            ) {
+                                            )
+                                            {
                                                 byte[] buffer = new byte[0x1000];
                                                 while (
                                                     respStream.ReadAsync(buffer, 0, buffer.Length)

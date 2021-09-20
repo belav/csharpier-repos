@@ -2577,7 +2577,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         protected override void SetBaseType(
             IMutableEntityType entityType,
             IMutableEntityType baseEntityType
-        ) {
+        )
+        {
             base.SetBaseType(entityType, baseEntityType);
 
             baseEntityType.SetDiscriminatorProperty(
@@ -2702,7 +2703,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
         protected virtual ModelBuilder CreateModelBuilderWithoutConvention<T>(
             bool sensitiveDataLoggingEnabled = false
-        ) {
+        )
+        {
             var conventionSet = TestHelpers.CreateConventionalConventionSet(
                 CreateModelLogger(sensitiveDataLoggingEnabled),
                 CreateValidationLogger(sensitiveDataLoggingEnabled)

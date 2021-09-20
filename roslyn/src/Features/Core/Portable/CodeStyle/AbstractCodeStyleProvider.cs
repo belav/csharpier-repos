@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
             EnforceOnBuild enforceOnBuild,
             LocalizableString title,
             LocalizableString message
-        ) {
+        )
+        {
             _option = option;
             _language = language;
             _descriptorId = descriptorId;
@@ -62,7 +63,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         /// </summary>
         protected static ReportDiagnostic GetOptionSeverity(
             CodeStyleOption2<TOptionKind> optionValue
-        ) {
+        )
+        {
             var severity = optionValue.Notification.Severity;
             return severity == ReportDiagnostic.Default
               ? severity.WithDefaultSeverity(DiagnosticSeverity.Hidden)
@@ -77,7 +79,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         protected DiagnosticDescriptor CreateDescriptorWithId(
             LocalizableString title,
             LocalizableString message
-        ) {
+        )
+        {
             return new DiagnosticDescriptor(
                 _descriptorId,
                 title,

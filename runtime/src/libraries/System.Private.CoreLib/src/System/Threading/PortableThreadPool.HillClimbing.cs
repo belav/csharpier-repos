@@ -179,7 +179,8 @@ namespace System.Threading
                 int currentThreadCount,
                 double sampleDurationSeconds,
                 int numCompletions
-            ) {
+            )
+            {
                 //
                 // If someone changed the thread count without telling us, update our records accordingly.
                 //
@@ -222,7 +223,8 @@ namespace System.Threading
                 if (
                     _totalSamples > 0
                     && ((currentThreadCount - 1.0) / numCompletions) >= _maxSampleError
-                ) {
+                )
+                {
                     // not accurate enough yet.  Let's accumulate the data so far, and tell the ThreadPool
                     // to collect a little more.
                     _accumulatedSampleDurationSeconds = sampleDurationSeconds;
@@ -524,7 +526,8 @@ namespace System.Threading
                 int newThreadCount,
                 double throughput,
                 StateOrTransition stateOrTransition
-            ) {
+            )
+            {
                 // Use the _log array as a circular array for log entries
                 int index = (_logStart + _logSize) % LogCapacity;
 

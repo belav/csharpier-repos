@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Navigation
             ImmutableArray<TaggedText> displayTaggedParts,
             Document document,
             TextSpan sourceSpan
-        ) {
+        )
+        {
             Glyph = glyph;
             DisplayTaggedParts = displayTaggedParts;
             Document = document;

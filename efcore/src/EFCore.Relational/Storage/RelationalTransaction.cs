@@ -48,7 +48,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> logger,
             bool transactionOwned,
             ISqlGenerationHelper sqlGenerationHelper
-        ) {
+        )
+        {
             Check.NotNull(connection, nameof(connection));
             Check.NotNull(transaction, nameof(transaction));
             Check.NotNull(logger, nameof(logger));
@@ -331,7 +332,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         public virtual async Task CreateSavepointAsync(
             string name,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var startTime = DateTimeOffset.UtcNow;
             var stopwatch = Stopwatch.StartNew();
 
@@ -435,7 +437,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         public virtual async Task RollbackToSavepointAsync(
             string name,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var startTime = DateTimeOffset.UtcNow;
             var stopwatch = Stopwatch.StartNew();
 
@@ -539,7 +542,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         public virtual async Task ReleaseSavepointAsync(
             string name,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             var startTime = DateTimeOffset.UtcNow;
             var stopwatch = Stopwatch.StartNew();
 
@@ -665,7 +669,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// </summary>
         protected virtual async Task ClearTransactionAsync(
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             Check.DebugAssert(
                 Connection.CurrentTransaction == null || Connection.CurrentTransaction == this,
                 "Connection.CurrentTransaction is unexpected instance"

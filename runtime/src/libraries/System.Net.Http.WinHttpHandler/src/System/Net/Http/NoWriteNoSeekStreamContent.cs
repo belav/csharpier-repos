@@ -37,7 +37,8 @@ namespace System.Net.Http
             Stream stream,
             TransportContext? context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(stream != null);
 
             if (_contentConsumed)

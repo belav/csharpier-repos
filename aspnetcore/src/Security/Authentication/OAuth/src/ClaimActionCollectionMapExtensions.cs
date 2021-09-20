@@ -24,7 +24,8 @@ namespace Microsoft.AspNetCore.Authentication
             this ClaimActionCollection collection,
             string claimType,
             string jsonKey
-        ) {
+        )
+        {
             if (collection == null)
             {
                 throw new ArgumentNullException(nameof(collection));
@@ -46,7 +47,8 @@ namespace Microsoft.AspNetCore.Authentication
             string claimType,
             string jsonKey,
             string valueType
-        ) {
+        )
+        {
             if (collection == null)
             {
                 throw new ArgumentNullException(nameof(collection));
@@ -68,7 +70,8 @@ namespace Microsoft.AspNetCore.Authentication
             string claimType,
             string jsonKey,
             string subKey
-        ) {
+        )
+        {
             if (collection == null)
             {
                 throw new ArgumentNullException(nameof(collection));
@@ -92,7 +95,8 @@ namespace Microsoft.AspNetCore.Authentication
             string jsonKey,
             string subKey,
             string valueType
-        ) {
+        )
+        {
             if (collection == null)
             {
                 throw new ArgumentNullException(nameof(collection));
@@ -112,7 +116,8 @@ namespace Microsoft.AspNetCore.Authentication
             this ClaimActionCollection collection,
             string claimType,
             Func<JsonElement, string?> resolver
-        ) {
+        )
+        {
             if (collection == null)
             {
                 throw new ArgumentNullException(nameof(collection));
@@ -134,7 +139,8 @@ namespace Microsoft.AspNetCore.Authentication
             string claimType,
             string valueType,
             Func<JsonElement, string?> resolver
-        ) {
+        )
+        {
             if (collection == null)
             {
                 throw new ArgumentNullException(nameof(collection));
@@ -166,7 +172,8 @@ namespace Microsoft.AspNetCore.Authentication
         public static void MapAllExcept(
             this ClaimActionCollection collection,
             params string[] exclusions
-        ) {
+        )
+        {
             if (collection == null)
             {
                 throw new ArgumentNullException(nameof(collection));
@@ -199,7 +206,8 @@ namespace Microsoft.AspNetCore.Authentication
         public static void DeleteClaims(
             this ClaimActionCollection collection,
             params string[] claimTypes
-        ) {
+        )
+        {
             if (collection == null)
             {
                 throw new ArgumentNullException(nameof(collection));

@@ -30,7 +30,8 @@ namespace CSharpSyntaxGenerator
             TextWriter writer,
             Tree tree,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _writer = writer;
             _tree = tree;
             _nodeMap = tree.Types.OfType<Node>().ToDictionary(n => n.Name);
@@ -258,7 +259,8 @@ namespace CSharpSyntaxGenerator
                 return true;
             if (
                 derivedTypeName != null && _parentMap.TryGetValue(derivedTypeName, out var baseType)
-            ) {
+            )
+            {
                 return IsDerivedType(typeName, baseType);
             }
             return false;

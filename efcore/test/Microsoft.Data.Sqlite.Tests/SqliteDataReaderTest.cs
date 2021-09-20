@@ -1005,7 +1005,8 @@ namespace Microsoft.Data.Sqlite
                         "SELECT $minValue - 1;",
                         new SqliteParameter("$minValue", minValue)
                     )
-                ) {
+                )
+                {
                     reader.Read();
 
                     Assert.Throws<OverflowException>(() => reader.GetFieldValue<T>(0));
@@ -1800,7 +1801,8 @@ namespace Microsoft.Data.Sqlite
                     var reader = connection.ExecuteReader(
                         "SELECT LastName, ID, Code, ID+1 AS IncID FROM Person;"
                     )
-                ) {
+                )
+                {
                     var schema = reader.GetSchemaTable();
                     Assert.True(schema.Columns.Contains("ColumnName"));
                     Assert.True(schema.Columns.Contains("ColumnOrdinal"));
@@ -1973,7 +1975,8 @@ namespace Microsoft.Data.Sqlite
                     var reader = connection.ExecuteReader(
                         "SELECT * FROM pragma_table_info('sqlite_master');"
                     )
-                ) {
+                )
+                {
                     var schemaTable = reader.GetSchemaTable();
                     Assert.Equal(6, schemaTable.Rows.Count);
                     Assert.Equal("cid", schemaTable.Rows[0][SchemaTableColumn.ColumnName]);

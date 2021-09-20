@@ -103,7 +103,8 @@ namespace Microsoft.Extensions.DependencyInjection
             Type expectedServiceType,
             Type expectedImplementationType,
             ServiceLifetime lifeCycle
-        ) {
+        )
+        {
             // Arrange
             var collection = new ServiceCollection();
 
@@ -199,7 +200,8 @@ namespace Microsoft.Extensions.DependencyInjection
             Type serviceType,
             Type implementationType,
             ServiceLifetime lifeCycle
-        ) {
+        )
+        {
             // Arrange
             var collection = new ServiceCollection();
 
@@ -352,7 +354,8 @@ namespace Microsoft.Extensions.DependencyInjection
             Type expectedServiceType,
             Type expectedImplementationType,
             ServiceLifetime expectedLifetime
-        ) {
+        )
+        {
             // Arrange
             var collection = new ServiceCollection();
 
@@ -376,7 +379,8 @@ namespace Microsoft.Extensions.DependencyInjection
             Type expectedImplementationType,
             ServiceLifetime expectedLifetime
 #pragma warning restore xUnit1026
-        ) {
+        )
+        {
             // Arrange
             var collection = new ServiceCollection
             {
@@ -475,7 +479,8 @@ namespace Microsoft.Extensions.DependencyInjection
             Type expectedServiceType,
             Type expectedImplementationType,
             ServiceLifetime expectedLifetime
-        ) {
+        )
+        {
             // Arrange
             var collection = new ServiceCollection();
 
@@ -496,7 +501,8 @@ namespace Microsoft.Extensions.DependencyInjection
             Type expectedServiceType,
             Type expectedImplementationType,
             ServiceLifetime expectedLifetime
-        ) {
+        )
+        {
             // Arrange
             var collection = new ServiceCollection();
             collection.TryAddEnumerable(descriptor);
@@ -561,7 +567,8 @@ namespace Microsoft.Extensions.DependencyInjection
             ServiceDescriptor descriptor,
             Type serviceType,
             Type implementationType
-        ) {
+        )
+        {
             // Arrange
             var collection = new ServiceCollection();
 

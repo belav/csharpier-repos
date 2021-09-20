@@ -155,7 +155,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task IncorrectTopLevelElement_ReturnsExpectedError(
             string acceptHeader,
             string inputXml
-        ) {
+        )
+        {
             // Arrange
             var expected =
                 "<Error><MVC-Empty>An error occurred while deserializing input data.</MVC-Empty></Error>";

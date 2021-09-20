@@ -47,7 +47,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
             object? state,
             short token,
             ValueTaskSourceOnCompletedFlags flags
-        ) {
+        )
+        {
             _core.OnCompleted(continuation, state, token, flags);
         }
     }

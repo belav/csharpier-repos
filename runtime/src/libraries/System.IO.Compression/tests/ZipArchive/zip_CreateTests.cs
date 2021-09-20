@@ -94,7 +94,8 @@ namespace System.IO.Compression.Tests
             string folder,
             bool useSpansForWriting,
             bool writeInChunks
-        ) {
+        )
+        {
             using (var s = new MemoryStream())
             {
                 var testStream = new WrappedStream(s, false, true, true, null);

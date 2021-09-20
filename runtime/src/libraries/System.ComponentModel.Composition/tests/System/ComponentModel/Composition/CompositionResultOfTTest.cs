@@ -447,7 +447,8 @@ namespace System.ComponentModel.Composition
 
         private CompositionResult<T> CreateCompositionResult<T>(
             params CompositionErrorId[] errorIds
-        ) {
+        )
+        {
             return new CompositionResult<T>(
                 errorIds.Select(
                     id =>
@@ -474,7 +475,8 @@ namespace System.ComponentModel.Composition
 
         private CompositionResult<T> CreateCompositionResult<T>(
             IEnumerable<CompositionError> errors
-        ) {
+        )
+        {
             return new CompositionResult<T>(errors);
         }
 
@@ -486,7 +488,8 @@ namespace System.ComponentModel.Composition
         private CompositionResult<T> CreateCompositionResult<T>(
             T value,
             IEnumerable<CompositionError> errors
-        ) {
+        )
+        {
             return new CompositionResult<T>(value, errors);
         }
     }

@@ -359,7 +359,8 @@ namespace System.DirectoryServices.AccountManagement
             PrincipalContext context,
             IdentityType identityType,
             string identityValue
-        ) {
+        )
+        {
             return FindByIdentityWithType(context, typeof(Principal), identityType, identityValue);
         }
 
@@ -433,7 +434,8 @@ namespace System.DirectoryServices.AccountManagement
             if (
                 context.ContextType == ContextType.Machine
                 || _ctx.ContextType == ContextType.Machine
-            ) {
+            )
+            {
                 throw new InvalidOperationException(SR.SaveToNotSupportedAgainstMachineStore);
             }
 
@@ -671,7 +673,8 @@ namespace System.DirectoryServices.AccountManagement
             PrincipalContext context,
             IdentityType identityType,
             string identityValue
-        ) {
+        )
+        {
             // Make sure we're not disposed or deleted.
             CheckDisposedOrDeleted();
 
@@ -720,7 +723,8 @@ namespace System.DirectoryServices.AccountManagement
                 if (
                     (this.UnderlyingSearchObject != null)
                     && (this.UnderlyingSearchObject is IDisposable)
-                ) {
+                )
+                {
                     GlobalDebug.WriteLineIf(
                         GlobalDebug.Info,
                         "Principal",
@@ -843,7 +847,8 @@ namespace System.DirectoryServices.AccountManagement
             object value,
             Type objectType,
             MatchType mt
-        ) {
+        )
+        {
             if (null == attribute)
                 throw new ArgumentException(SR.NullArguments);
 
@@ -1041,7 +1046,8 @@ namespace System.DirectoryServices.AccountManagement
             PrincipalContext context,
             Type principalType,
             string identityValue
-        ) {
+        )
+        {
             if (context == null)
                 throw new ArgumentNullException(nameof(context));
 
@@ -1063,7 +1069,8 @@ namespace System.DirectoryServices.AccountManagement
             Type principalType,
             IdentityType identityType,
             string identityValue
-        ) {
+        )
+        {
             if (context == null)
                 throw new ArgumentNullException(nameof(context));
 
@@ -1092,7 +1099,8 @@ namespace System.DirectoryServices.AccountManagement
             Nullable<IdentityType> identityType,
             string identityValue,
             DateTime refDate
-        ) {
+        )
+        {
             // Ask the store to find a Principal based on this IdentityReference info.
             Principal p = context.QueryCtx.FindPrincipalByIdentRef(
                 principalType,

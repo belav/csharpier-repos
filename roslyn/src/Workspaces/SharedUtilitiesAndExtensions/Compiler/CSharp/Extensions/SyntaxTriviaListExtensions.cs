@@ -57,7 +57,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
         private static ImmutableArray<ImmutableArray<SyntaxTrivia>> GetLeadingBlankLines(
             SyntaxTriviaList triviaList
-        ) {
+        )
+        {
             using var result = TemporaryArray<ImmutableArray<SyntaxTrivia>>.Empty;
             using var currentLine = TemporaryArray<SyntaxTrivia>.Empty;
             foreach (var trivia in triviaList)
@@ -95,7 +96,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this SyntaxTriviaList triviaList,
             int start,
             int end
-        ) {
+        )
+        {
             while (start <= end)
             {
                 yield return triviaList[start++];

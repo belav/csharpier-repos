@@ -227,7 +227,8 @@ namespace System
             CallingConventions callConvention,
             Type[] types,
             ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             if (types == null)
                 throw new ArgumentNullException(nameof(types));
             for (int i = 0; i < types.Length; i++)
@@ -396,7 +397,8 @@ namespace System
             CallingConventions callConvention,
             Type[] types,
             ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             if (name == null)
                 throw new ArgumentNullException(nameof(name));
             if (types == null)
@@ -468,7 +470,8 @@ namespace System
             CallingConventions callConvention,
             Type[] types,
             ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             if (name == null)
                 throw new ArgumentNullException(nameof(name));
             if (genericParameterCount < 0)
@@ -589,7 +592,8 @@ namespace System
             Type? returnType,
             Type[] types,
             ParameterModifier[]? modifiers
-        ) {
+        )
+        {
             if (name == null)
                 throw new ArgumentNullException(nameof(name));
             if (types == null)

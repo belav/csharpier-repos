@@ -36,7 +36,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IApplicationBuilder UseSession(
             this IApplicationBuilder app,
             SessionOptions options
-        ) {
+        )
+        {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));

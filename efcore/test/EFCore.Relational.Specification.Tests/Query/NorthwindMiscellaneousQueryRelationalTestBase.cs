@@ -63,7 +63,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         public override Task Using_static_string_Equals_with_StringComparison_throws_informative_error(
             bool async
-        ) {
+        )
+        {
             return AssertTranslationFailedWithDetails(
                 () =>
                     base.Using_static_string_Equals_with_StringComparison_throws_informative_error(
@@ -75,7 +76,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         public override Task Using_string_Equals_with_StringComparison_throws_informative_error(
             bool async
-        ) {
+        )
+        {
             return AssertTranslationFailedWithDetails(
                 () =>
                     base.Using_string_Equals_with_StringComparison_throws_informative_error(async),

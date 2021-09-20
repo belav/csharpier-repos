@@ -64,14 +64,15 @@ namespace System.Security.AccessControl
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
             AccessControlType type
-        ) : this(
-            new NTAccount(identity),
-            (int)(object)rights,
-            false,
-            inheritanceFlags,
-            propagationFlags,
-            type
-        ) { }
+        )
+            : this(
+                new NTAccount(identity),
+                (int)(object)rights,
+                false,
+                inheritanceFlags,
+                propagationFlags,
+                type
+            ) { }
 
         //
         // Internal constructor to be called by public constructors
@@ -129,14 +130,15 @@ namespace System.Security.AccessControl
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
             AuditFlags flags
-        ) : this(
-            new NTAccount(identity),
-            (int)(object)rights,
-            false,
-            inheritanceFlags,
-            propagationFlags,
-            flags
-        ) { }
+        )
+            : this(
+                new NTAccount(identity),
+                (int)(object)rights,
+                false,
+                inheritanceFlags,
+                propagationFlags,
+                flags
+            ) { }
 
         internal AuditRule(
             IdentityReference identity,
@@ -179,14 +181,15 @@ namespace System.Security.AccessControl
             AccessControlSections includeSections,
             ExceptionFromErrorCode? exceptionFromErrorCode,
             object? exceptionContext
-        ) : base(
-            isContainer,
-            resourceType,
-            name,
-            includeSections,
-            exceptionFromErrorCode,
-            exceptionContext
-        ) { }
+        )
+            : base(
+                isContainer,
+                resourceType,
+                name,
+                includeSections,
+                exceptionFromErrorCode,
+                exceptionContext
+            ) { }
 
         protected ObjectSecurity(
             bool isContainer,
@@ -202,14 +205,15 @@ namespace System.Security.AccessControl
             AccessControlSections includeSections,
             ExceptionFromErrorCode? exceptionFromErrorCode,
             object? exceptionContext
-        ) : base(
-            isContainer,
-            resourceType,
-            safeHandle,
-            includeSections,
-            exceptionFromErrorCode,
-            exceptionContext
-        ) { }
+        )
+            : base(
+                isContainer,
+                resourceType,
+                safeHandle,
+                includeSections,
+                exceptionFromErrorCode,
+                exceptionContext
+            ) { }
 
         #endregion
         #region Factories
@@ -221,7 +225,8 @@ namespace System.Security.AccessControl
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
             AccessControlType type
-        ) {
+        )
+        {
             return new AccessRule<T>(
                 identityReference,
                 accessMask,
@@ -239,7 +244,8 @@ namespace System.Security.AccessControl
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
             AuditFlags flags
-        ) {
+        )
+        {
             return new AuditRule<T>(
                 identityReference,
                 accessMask,

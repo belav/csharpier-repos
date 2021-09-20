@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             SemanticModel semanticModel,
             IAnonymousTypeDisplayService anonymousTypeDisplayService,
             INamedTypeSymbol delegateType
-        ) {
+        )
+        {
             var invokeMethod = delegateType.DelegateInvokeMethod;
             if (invokeMethod == null)
             {
@@ -45,7 +46,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             IMethodSymbol invokeMethod,
             SemanticModel semanticModel,
             int position
-        ) {
+        )
+        {
             var result = new List<SymbolDisplayPart>();
 
             result.AddRange(
@@ -60,7 +62,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             IMethodSymbol invokeMethod,
             SemanticModel semanticModel,
             int position
-        ) {
+        )
+        {
             const string TargetName = "target";
 
             var parts = new List<SymbolDisplayPart>();

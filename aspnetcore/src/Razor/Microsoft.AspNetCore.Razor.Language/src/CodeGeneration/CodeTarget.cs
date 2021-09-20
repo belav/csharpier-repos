@@ -10,7 +10,8 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
         public static CodeTarget CreateDefault(
             RazorCodeDocument codeDocument,
             RazorCodeGenerationOptions options
-        ) {
+        )
+        {
             if (codeDocument == null)
             {
                 throw new ArgumentNullException(nameof(codeDocument));
@@ -28,7 +29,8 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
             RazorCodeDocument codeDocument,
             RazorCodeGenerationOptions options,
             Action<CodeTargetBuilder> configure
-        ) {
+        )
+        {
             if (codeDocument == null)
             {
                 throw new ArgumentNullException(nameof(codeDocument));
@@ -62,7 +64,8 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
             RazorCodeDocument codeDocument,
             RazorCodeGenerationOptions options,
             Action<CodeTargetBuilder> configure
-        ) {
+        )
+        {
             if (codeDocument == null)
             {
                 throw new ArgumentNullException(nameof(codeDocument));

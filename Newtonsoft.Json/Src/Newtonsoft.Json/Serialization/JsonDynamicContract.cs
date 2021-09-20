@@ -77,7 +77,8 @@ namespace Newtonsoft.Json.Serialization
 
         private static CallSite<Func<CallSite, object, object?, object>> CreateCallSiteSetter(
             string name
-        ) {
+        )
+        {
             SetMemberBinder binder = (SetMemberBinder)DynamicUtils.BinderWrapper.SetMember(
                 name,
                 typeof(DynamicUtils)
@@ -103,7 +104,8 @@ namespace Newtonsoft.Json.Serialization
             IDynamicMetaObjectProvider dynamicProvider,
             string name,
             out object? value
-        ) {
+        )
+        {
             ValidationUtils.ArgumentNotNull(dynamicProvider, nameof(dynamicProvider));
 
             CallSite<Func<CallSite, object, object>> callSite = _callSiteGetters.Get(name);
@@ -126,7 +128,8 @@ namespace Newtonsoft.Json.Serialization
             IDynamicMetaObjectProvider dynamicProvider,
             string name,
             object? value
-        ) {
+        )
+        {
             ValidationUtils.ArgumentNotNull(dynamicProvider, nameof(dynamicProvider));
 
             CallSite<Func<CallSite, object, object?, object>> callSite = _callSiteSetters.Get(name);

@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
     {
         public GlobalAuthorizationFilterUseMvcTest(
             MvcTestFixture<SecurityWebSite.StartupWithGlobalDenyAnonymousFilterWithUseMvc> fixture
-        ) {
+        )
+        {
             Factory =
                 fixture.Factories.FirstOrDefault()
                 ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);

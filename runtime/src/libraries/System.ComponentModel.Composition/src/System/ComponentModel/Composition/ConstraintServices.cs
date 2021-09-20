@@ -38,7 +38,8 @@ namespace System.ComponentModel.Composition
             string? requiredTypeIdentity,
             IEnumerable<KeyValuePair<string, Type>> requiredMetadata,
             CreationPolicy requiredCreationPolicy
-        ) {
+        )
+        {
             ParameterExpression parameter = Expression.Parameter(
                 typeof(ExportDefinition),
                 "exportDefinition"
@@ -86,7 +87,8 @@ namespace System.ComponentModel.Composition
         private static Expression CreateContractConstraintBody(
             string contractName,
             ParameterExpression parameter
-        ) {
+        )
+        {
             if (parameter == null)
             {
                 throw new ArgumentNullException(nameof(parameter));
@@ -105,7 +107,8 @@ namespace System.ComponentModel.Composition
         private static Expression? CreateMetadataConstraintBody(
             IEnumerable<KeyValuePair<string, Type>> requiredMetadata,
             ParameterExpression parameter
-        ) {
+        )
+        {
             if (requiredMetadata == null)
             {
                 throw new ArgumentNullException(nameof(requiredMetadata));
@@ -145,7 +148,8 @@ namespace System.ComponentModel.Composition
         private static Expression CreateCreationPolicyContraint(
             CreationPolicy policy,
             ParameterExpression parameter
-        ) {
+        )
+        {
             if (policy == CreationPolicy.Any)
             {
                 throw new Exception(SR.Diagnostic_InternalExceptionMessage);
@@ -187,7 +191,8 @@ namespace System.ComponentModel.Composition
         private static Expression CreateTypeIdentityContraint(
             string requiredTypeIdentity,
             ParameterExpression parameter
-        ) {
+        )
+        {
             if (requiredTypeIdentity == null)
             {
                 throw new ArgumentNullException(requiredTypeIdentity);
@@ -218,7 +223,8 @@ namespace System.ComponentModel.Composition
         private static Expression CreateMetadataContainsKeyExpression(
             ParameterExpression parameter,
             string constantKey
-        ) {
+        )
+        {
             if (parameter == null)
             {
                 throw new ArgumentException(nameof(parameter));
@@ -244,7 +250,8 @@ namespace System.ComponentModel.Composition
             ParameterExpression parameter,
             string constantKey,
             Type constantType
-        ) {
+        )
+        {
             if (parameter == null)
             {
                 throw new ArgumentException(nameof(parameter));
@@ -279,7 +286,8 @@ namespace System.ComponentModel.Composition
             ParameterExpression parameter,
             object constantValue,
             string metadataName
-        ) {
+        )
+        {
             if (parameter == null)
             {
                 throw new ArgumentException(nameof(parameter));
@@ -308,7 +316,8 @@ namespace System.ComponentModel.Composition
         public static Expression<Func<ExportDefinition, bool>> CreatePartCreatorConstraint(
             Expression<Func<ExportDefinition, bool>> baseConstraint,
             ImportDefinition productImportDefinition
-        ) {
+        )
+        {
             ParameterExpression exportDefinitionParameter = baseConstraint.Parameters[0];
 
             // exportDefinition.Metadata

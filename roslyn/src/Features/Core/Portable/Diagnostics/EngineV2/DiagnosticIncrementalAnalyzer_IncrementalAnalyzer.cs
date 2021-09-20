@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             TextDocument document,
             AnalysisKind kind,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 if (!AnalysisEnabled(document))
@@ -162,7 +163,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             bool semanticsChanged,
             InvocationReasons reasons,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Perf optimization. check whether we want to analyze this project or not.
             if (!FullAnalysisEnabled(project, forceAnalyzerRun: false))
             {
@@ -182,7 +184,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             Project project,
             bool forceAnalyzerRun,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 var stateSets = GetStateSetsForFullSolutionAnalysis(
@@ -275,7 +278,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
         private async Task TextDocumentOpenAsync(
             TextDocument document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (
                 Logger.LogBlock(
                     FunctionId.Diagnostics_DocumentOpen,
@@ -283,7 +287,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     document,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 var stateSets = _stateManager.GetStateSets(document.Project);
 
                 // let other component knows about this event
@@ -304,7 +309,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
         private async Task TextDocumentCloseAsync(
             TextDocument document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (
                 Logger.LogBlock(
                     FunctionId.Diagnostics_DocumentClose,
@@ -312,7 +318,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     document,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 var stateSets = _stateManager.GetStateSets(document.Project);
 
                 // let other components knows about this event
@@ -341,7 +348,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
         private Task TextDocumentResetAsync(
             TextDocument document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (
                 Logger.LogBlock(
                     FunctionId.Diagnostics_DocumentReset,
@@ -349,7 +357,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     document,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 var stateSets = _stateManager.GetStateSets(document.Project);
 
                 // let other components knows about this event
@@ -369,12 +378,14 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             TextDocument document,
             IEnumerable<StateSet> stateSets,
             bool documentHadDiagnostics
-        ) {
+        )
+        {
             // if there was no diagnostic reported for this document OR Full solution analysis is enabled, nothing to clean up
             if (
                 !documentHadDiagnostics
                 || FullAnalysisEnabled(document.Project, forceAnalyzerRun: false)
-            ) {
+            )
+            {
                 // this is Perf to reduce raising events unnecessarily.
                 return;
             }
@@ -401,7 +412,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     documentId,
                     CancellationToken.None
                 )
-            ) {
+            )
+            {
                 var stateSets = _stateManager.GetStateSets(documentId.ProjectId);
 
                 // let other components knows about this event
@@ -422,7 +434,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
         private void RaiseDiagnosticsRemovedForDocument(
             DocumentId documentId,
             IEnumerable<StateSet> stateSets
-        ) {
+        )
+        {
             // remove all diagnostics for the document
             AnalyzerService.RaiseBulkDiagnosticsUpdated(
                 raiseEvents =>
@@ -465,7 +478,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     projectId,
                     CancellationToken.None
                 )
-            ) {
+            )
+            {
                 var stateSets = _stateManager.GetStateSets(projectId);
 
                 // let other components knows about this event
@@ -511,7 +525,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             if (
                 document.Services.GetService<DocumentPropertiesService>()?.DiagnosticsLspClientName
                 != null
-            ) {
+            )
+            {
                 // This is a generated Razor document, and they want diagnostics, so let's report it
                 return true;
             }
@@ -527,14 +542,16 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
         private IEnumerable<StateSet> GetStateSetsForFullSolutionAnalysis(
             IEnumerable<StateSet> stateSets,
             Project project
-        ) {
+        )
+        {
             // If full analysis is off, remove state that is created from build.
             // this will make sure diagnostics from build (converted from build to live) will never be cleared
             // until next build.
             if (
                 SolutionCrawlerOptions.GetBackgroundAnalysisScope(project)
                 != BackgroundAnalysisScope.FullSolution
-            ) {
+            )
+            {
                 stateSets = stateSets.Where(s => !s.FromBuild(project.Id));
             }
 
@@ -543,7 +560,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 project.Solution.Workspace.Options.GetOption(
                     InternalDiagnosticsOptions.ProcessHiddenDiagnostics
                 )
-            ) {
+            )
+            {
                 return stateSets;
             }
 
@@ -562,7 +580,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             DiagnosticAnalyzer analyzer,
             Project project,
             AnalyzerConfigOptionsResult? analyzerConfigOptions
-        ) {
+        )
+        {
             // PERF: Don't query descriptors for compiler analyzer or file content load analyzer, always execute them.
             if (analyzer == FileContentLoadAnalyzer.Instance || analyzer.IsCompilerAnalyzer())
             {
@@ -602,7 +621,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             Project project,
             IEnumerable<StateSet> stateSets,
             ImmutableDictionary<DiagnosticAnalyzer, DiagnosticAnalysisResult> result
-        ) {
+        )
+        {
             RaiseProjectDiagnosticsIfNeeded(
                 project,
                 stateSets,
@@ -616,7 +636,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             IEnumerable<StateSet> stateSets,
             ImmutableDictionary<DiagnosticAnalyzer, DiagnosticAnalysisResult> oldResult,
             ImmutableDictionary<DiagnosticAnalyzer, DiagnosticAnalysisResult> newResult
-        ) {
+        )
+        {
             if (oldResult.Count == 0 && newResult.Count == 0)
             {
                 // there is nothing to update
@@ -729,7 +750,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             AnalysisKind kind,
             ImmutableArray<DiagnosticData> oldItems,
             ImmutableArray<DiagnosticData> newItems
-        ) {
+        )
+        {
             RaiseDocumentDiagnosticsIfNeeded(
                 document,
                 stateSet,
@@ -748,7 +770,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             DiagnosticAnalysisResult oldResult,
             DiagnosticAnalysisResult newResult,
             Action<DiagnosticsUpdatedArgs> raiseEvents
-        ) {
+        )
+        {
             // if our old result is from build and we don't have actual data, don't try micro-optimize and always refresh diagnostics.
             // most of time, we don't actually load or hold the old data in memory from persistent storage due to perf reasons.
             //
@@ -781,7 +804,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             ImmutableArray<DiagnosticData> newItems,
             Action<DiagnosticsUpdatedArgs> raiseEvents,
             bool forceUpdate
-        ) {
+        )
+        {
             if (!forceUpdate && oldItems.IsEmpty && newItems.IsEmpty)
             {
                 // there is nothing to update
@@ -797,7 +821,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             DiagnosticAnalysisResult oldAnalysisResult,
             DiagnosticAnalysisResult newAnalysisResult,
             Action<DiagnosticsUpdatedArgs> raiseEvents
-        ) {
+        )
+        {
             RoslynDebug.Assert(newAnalysisResult.DocumentIds != null);
 
             foreach (var documentId in newAnalysisResult.DocumentIds)
@@ -862,7 +887,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             IEnumerable<DocumentId> documentIds,
             bool handleActiveFile,
             Action<DiagnosticsUpdatedArgs> raiseEvents
-        ) {
+        )
+        {
             foreach (var documentId in documentIds)
             {
                 RaiseDiagnosticsRemoved(

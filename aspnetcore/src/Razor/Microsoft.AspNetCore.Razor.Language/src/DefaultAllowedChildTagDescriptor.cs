@@ -9,7 +9,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             string name,
             string displayName,
             RazorDiagnostic[] diagnostics
-        ) {
+        )
+        {
             Name = name;
             DisplayName = displayName;
             Diagnostics = diagnostics;

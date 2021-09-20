@@ -746,7 +746,8 @@ namespace System.Reflection.Tests
             string name,
             BindingFlags bindingAttributes,
             string[] expectedNames
-        ) {
+        )
+        {
             if (bindingAttributes == DefaultBindingFlags)
             {
                 string[] memberNames1 = TypeExtensions.GetMember(type, name)
@@ -2298,7 +2299,8 @@ namespace System.Reflection.Tests
             BindingFlags bindingAttributes,
             Type returnType,
             Type[] types
-        ) {
+        )
+        {
             if (returnType == null)
             {
                 if (bindingAttributes == DefaultBindingFlags)
@@ -3179,7 +3181,8 @@ namespace System.Reflection.Tests
             NumberStyles style,
             IFormatProvider provider,
             out int result
-        ) {
+        )
+        {
             throw null;
         }
         public TypeCode GetTypeCode()

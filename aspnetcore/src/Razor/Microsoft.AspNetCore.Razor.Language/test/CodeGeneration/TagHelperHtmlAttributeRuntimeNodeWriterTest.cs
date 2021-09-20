@@ -121,7 +121,8 @@ AddHtmlAttributeValue("" "", 27, false, 28, 6, false);
         private DocumentIntermediateNode Lower(
             RazorCodeDocument codeDocument,
             RazorProjectEngine projectEngine
-        ) {
+        )
+        {
             for (var i = 0; i < projectEngine.Phases.Count; i++)
             {
                 var phase = projectEngine.Phases[i];

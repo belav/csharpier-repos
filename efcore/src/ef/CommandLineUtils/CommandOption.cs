@@ -20,7 +20,8 @@ namespace Microsoft.DotNet.Cli.CommandLine
                     new[] { ' ', '|' },
                     StringSplitOptions.RemoveEmptyEntries
                 )
-            ) {
+            )
+            {
                 if (part.StartsWith("--", StringComparison.Ordinal))
                 {
                     LongName = part.Substring(2);
@@ -42,14 +43,16 @@ namespace Microsoft.DotNet.Cli.CommandLine
                 else if (
                     part.StartsWith("<", StringComparison.Ordinal)
                     && part.EndsWith(">", StringComparison.Ordinal)
-                ) {
+                )
+                {
                     ValueName = part.Substring(1, part.Length - 2);
                 }
                 else if (
                     optionType == CommandOptionType.MultipleValue
                     && part.StartsWith("<", StringComparison.Ordinal)
                     && part.EndsWith(">...", StringComparison.Ordinal)
-                ) {
+                )
+                {
                     ValueName = part.Substring(1, part.Length - 5);
                 }
                 else
@@ -65,7 +68,8 @@ namespace Microsoft.DotNet.Cli.CommandLine
                 string.IsNullOrEmpty(LongName)
                 && string.IsNullOrEmpty(ShortName)
                 && string.IsNullOrEmpty(SymbolName)
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     Resources.InvalidTemplatePattern(template),
                     nameof(template)

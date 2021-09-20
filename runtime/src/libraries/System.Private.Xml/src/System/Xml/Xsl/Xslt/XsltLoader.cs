@@ -499,7 +499,8 @@ namespace System.Xml.Xsl.Xslt
                             }
                             else if (
                                 _input.IsNs(_atoms.UrnMsxsl) && _input.IsKeyword(_atoms.Script)
-                            ) {
+                            )
+                            {
                                 LoadMsScript(ctxInfo.nsList);
                             }
                             else
@@ -673,7 +674,8 @@ namespace System.Xml.Xsl.Xslt
                     if (
                         _compiler.ExitForwardsCompatible(_input.ForwardCompatibility)
                         && method != null
-                    ) {
+                    )
+                    {
                         if (currentPrec == output.MethodPrec && !output.Method!.Equals(method))
                         {
                             ReportWarning( /*[XT1560]*/
@@ -720,7 +722,8 @@ namespace System.Xml.Xsl.Xslt
                     if (
                         currentPrec == output.DocTypePublicPrec
                         && settings.DocTypePublic != _input.Value
-                    ) {
+                    )
+                    {
                         ReportWarning( /*[XT1560]*/
                             SR.Xslt_AttributeRedefinition,
                             "doctype-public"
@@ -738,7 +741,8 @@ namespace System.Xml.Xsl.Xslt
                     if (
                         currentPrec == output.DocTypeSystemPrec
                         && settings.DocTypeSystem != _input.Value
-                    ) {
+                    )
+                    {
                         ReportWarning( /*[XT1560]*/
                             SR.Xslt_AttributeRedefinition,
                             "doctype-system"
@@ -839,7 +843,8 @@ namespace System.Xml.Xsl.Xslt
                     if (
                         currentPrec == output.OmitXmlDeclarationPrec
                         && settings.OmitXmlDeclaration != omitXmlDeclaration
-                    ) {
+                    )
+                    {
                         ReportWarning( /*[XT1560]*/
                             SR.Xslt_AttributeRedefinition,
                             "omit-xml-declaration"
@@ -912,7 +917,8 @@ namespace System.Xml.Xsl.Xslt
             if (
                 settings.OutputMethod == XmlOutputMethod.Html
                 && output.IndentPrec == Output.NeverDeclaredPrec
-            ) {
+            )
+            {
                 settings.Indent = true;
             }
             if (output.MediaTypePrec == Output.NeverDeclaredPrec)
@@ -1241,7 +1247,8 @@ namespace System.Xml.Xsl.Xslt
                     resultPrefix,
                     _curStylesheet!.ImportPrecedence
                 )
-            ) {
+            )
+            {
                 // Namespace alias redefinition
                 _input.MoveToElement();
                 ReportWarning( /*[XT0810]*/
@@ -1868,13 +1875,15 @@ namespace System.Xml.Xsl.Xslt
                             else if (
                                 flags == InstructionFlags.AllowSort
                                 && _input.IsXsltKeyword(_atoms.Sort)
-                            ) {
+                            )
+                            {
                                 AddInstruction(content, XslSort(sortNumber++));
                             }
                             else if (
                                 flags == InstructionFlags.AllowFallback
                                 && _input.IsXsltKeyword(_atoms.Fallback)
-                            ) {
+                            )
+                            {
                                 XslFallback();
                             }
                             else
@@ -2731,7 +2740,8 @@ namespace System.Xml.Xsl.Xslt
 
             if (
                 select == null /*&& content.Count == 0*/
-            ) {
+            )
+            {
                 select = ".";
             }
 
@@ -3455,7 +3465,8 @@ namespace System.Xml.Xsl.Xslt
             out string localName,
             out string namespaceName,
             out string prefix
-        ) {
+        )
+        {
             if (qname == null)
             {
                 // That means stylesheet is incorrect
@@ -3507,7 +3518,8 @@ namespace System.Xml.Xsl.Xslt
                         out namespaceName,
                         out prefix
                     )
-                ) {
+                )
+                {
                     result = f.QName(localName, namespaceName, prefix);
                 }
             }
@@ -3583,7 +3595,8 @@ namespace System.Xml.Xsl.Xslt
                             out localName,
                             (IErrorHelper)this
                         )
-                    ) {
+                    )
+                    {
                         namespaceName = _compiler.CreatePhantomNamespace();
                     }
                     else if (prefix == null || prefix.Length == 0)
@@ -3800,7 +3813,8 @@ namespace System.Xml.Xsl.Xslt
                 }
                 else if (
                     value == "preserve" || value == "strict" && !defVal || value == "lax" && !defVal
-                ) {
+                )
+                {
                     ReportError( /*[???]*/
                         SR.Xslt_SchemaAttributeValue,
                         attributeName,
@@ -3955,7 +3969,8 @@ namespace System.Xml.Xsl.Xslt
                             || // Namespace declaration
                             tmp.NsUri == parentList.NsUri // Extension or excluded namespace
                         )
-                    ) {
+                    )
+                    {
                         duplicate = true;
                         break;
                     }

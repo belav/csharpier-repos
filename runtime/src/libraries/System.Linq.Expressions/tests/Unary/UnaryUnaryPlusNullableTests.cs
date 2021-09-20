@@ -138,7 +138,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyArithmeticUnaryPlusNullableShort(
             short? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
                 Expression.UnaryPlus(Expression.Constant(value, typeof(short?))),
                 Enumerable.Empty<ParameterExpression>()
@@ -150,7 +151,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyArithmeticUnaryPlusNullableUShort(
             ushort? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
                 Expression.UnaryPlus(Expression.Constant(value, typeof(ushort?))),
                 Enumerable.Empty<ParameterExpression>()
@@ -192,7 +194,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyArithmeticUnaryPlusNullableULong(
             ulong? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
                 Expression.UnaryPlus(Expression.Constant(value, typeof(ulong?))),
                 Enumerable.Empty<ParameterExpression>()
@@ -204,7 +207,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyArithmeticUnaryPlusNullableFloat(
             float? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<float?>> e = Expression.Lambda<Func<float?>>(
                 Expression.UnaryPlus(Expression.Constant(value, typeof(float?))),
                 Enumerable.Empty<ParameterExpression>()
@@ -216,7 +220,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyArithmeticUnaryPlusNullableDouble(
             double? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
                 Expression.UnaryPlus(Expression.Constant(value, typeof(double?))),
                 Enumerable.Empty<ParameterExpression>()
@@ -228,7 +233,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyArithmeticUnaryPlusNullableDecimal(
             decimal? value,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
                 Expression.UnaryPlus(Expression.Constant(value, typeof(decimal?))),
                 Enumerable.Empty<ParameterExpression>()

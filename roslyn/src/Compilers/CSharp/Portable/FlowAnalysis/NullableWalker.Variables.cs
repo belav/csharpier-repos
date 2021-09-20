@@ -53,7 +53,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Symbol? symbol,
                 ImmutableArray<KeyValuePair<VariableIdentifier, int>> variableSlot,
                 ImmutableDictionary<Symbol, TypeWithAnnotations> variableTypes
-            ) {
+            )
+            {
                 Id = id;
                 Container = container;
                 Symbol = symbol;
@@ -346,7 +347,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             internal void GetMembers(
                 ArrayBuilder<(VariableIdentifier, int)> builder,
                 int containingSlot
-            ) {
+            )
+            {
                 (int id, int index) = DeconstructSlot(containingSlot);
                 var variables = GetVariablesForId(id)!;
                 var variableBySlot = variables._variableBySlot;
@@ -379,7 +381,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         if (
                             symbol.ContainingSymbol is MethodSymbol method
                             && GetVariablesForMethodScope(method) is { } variables
-                        ) {
+                        )
+                        {
                             return variables;
                         }
                         break;

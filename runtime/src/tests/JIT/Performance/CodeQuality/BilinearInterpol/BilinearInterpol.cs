@@ -65,7 +65,8 @@ public class BilinearTest
         double minXB,
         double maxXB,
         double weightB
-    ) {
+    )
+    {
         double[] z = new double[outputVectorSize];
 
         var weightA = 1.0 - weightB;
@@ -126,7 +127,8 @@ public class BilinearTest
         double minXB,
         double maxXB,
         double weightB
-    ) {
+    )
+    {
         double[] z = new double[outputVectorSize];
 
         var vWeightB = new Vector<double>(weightB);
@@ -220,7 +222,8 @@ public class BilinearTest
         double minXB,
         double maxXB,
         double weightB
-    ) {
+    )
+    {
         double[] z = new double[outputVectorSize];
 
         fixed (
@@ -228,7 +231,8 @@ public class BilinearTest
                 pA = &A[0],
                 pB = &B[0],
                 pZ = &z[0]
-        ) {
+        )
+        {
             Vector256<double> vWeightB = Vector256.Create(weightB);
             Vector256<double> vWeightA = Vector256.Create(1 - weightB);
 

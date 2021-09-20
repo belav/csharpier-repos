@@ -14,7 +14,8 @@ namespace Binding
             string project = null,
             string package = null,
             string[] args = null
-        ) {
+        )
+        {
             return region switch
             {
                 "GetValueFromOptionArgument" => GetValueSample.GetValueFromOptionArgument(),

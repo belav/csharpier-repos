@@ -108,7 +108,8 @@ namespace Microsoft.CodeAnalysis.BraceCompletion
         public BraceCompletionResult(
             ImmutableArray<TextChange> textChanges,
             LinePosition caretLocation
-        ) {
+        )
+        {
             CaretLocation = caretLocation;
             TextChanges = textChanges;
         }
@@ -129,7 +130,8 @@ namespace Microsoft.CodeAnalysis.BraceCompletion
             int openingPoint,
             int closingPoint,
             int caretLocation
-        ) {
+        )
+        {
             Document = document;
             OpeningPoint = openingPoint;
             ClosingPoint = closingPoint;

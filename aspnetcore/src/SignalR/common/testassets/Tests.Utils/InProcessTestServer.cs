@@ -54,7 +54,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         public static async Task<InProcessTestServer<TStartup>> StartServer(
             ILoggerFactory loggerFactory,
             IDisposable disposable = null
-        ) {
+        )
+        {
             var server = new InProcessTestServer<TStartup>(loggerFactory, disposable);
             await server.StartServerInner();
             return server;
@@ -157,7 +158,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                             new[] { Environment.NewLine },
                             StringSplitOptions.None
                         )
-                    ) {
+                    )
+                    {
                         builder.AppendLine($"| {line}");
                     }
                 }

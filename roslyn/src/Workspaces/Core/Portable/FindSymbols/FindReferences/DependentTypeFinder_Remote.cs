@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             bool transitive,
             DependentTypesKind kind,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (
                 SerializableSymbolAndProjectId.TryCreate(
                     type,
@@ -31,7 +32,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     cancellationToken,
                     out var serializedType
                 )
-            ) {
+            )
+            {
                 var client = await RemoteHostClient.TryGetClientAsync(
                         solution.Workspace,
                         cancellationToken
@@ -88,7 +90,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             bool transitive,
             DependentTypesKind kind,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var functionId = kind switch
             {
                 DependentTypesKind.DerivedClasses
@@ -139,7 +142,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             Solution solution,
             ImmutableArray<SerializableSymbolAndProjectId> values,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<INamedTypeSymbol>.GetInstance(out var builder);
 
             foreach (var item in values)

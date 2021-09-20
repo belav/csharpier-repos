@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
             SourceText text,
             int position,
             int virtualSpaces = 0
-        ) {
+        )
+        {
             Contract.ThrowIfNull(tree);
             Contract.ThrowIfFalse(position >= 0 && position <= tree.Length);
             Contract.ThrowIfFalse(virtualSpaces >= 0);

@@ -12,11 +12,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests.Account.Manage
     {
         private readonly IHtmlFormElement _setPasswordForm;
 
-        public SetPassword(
-            HttpClient client,
-            IHtmlDocument setPassword,
-            DefaultUIContext context
-        ) : base(client, setPassword, context)
+        public SetPassword(HttpClient client, IHtmlDocument setPassword, DefaultUIContext context)
+            : base(client, setPassword, context)
         {
             _setPasswordForm = HtmlAssert.HasForm("#set-password-form", setPassword);
         }

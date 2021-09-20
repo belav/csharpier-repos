@@ -30,7 +30,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
                     },
                     LoggerFactory
                 )
-            ) {
+            )
+            {
                 await testServer.HttpClient.GetStringAsync("/");
             }
 

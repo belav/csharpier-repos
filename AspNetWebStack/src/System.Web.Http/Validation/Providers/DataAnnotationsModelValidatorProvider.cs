@@ -59,7 +59,8 @@ namespace System.Web.Http.Validation.Providers
             ModelMetadata metadata,
             IEnumerable<ModelValidatorProvider> validatorProviders,
             IEnumerable<Attribute> attributes
-        ) {
+        )
+        {
             List<ModelValidator> results = new List<ModelValidator>();
 
             // Produce a validator for each validation attribute we find
@@ -105,7 +106,8 @@ namespace System.Web.Http.Validation.Providers
         public void RegisterAdapterFactory(
             Type attributeType,
             DataAnnotationsModelValidationFactory factory
-        ) {
+        )
+        {
             ValidateAttributeType(attributeType);
             ValidateAttributeFactory(factory);
 
@@ -136,7 +138,8 @@ namespace System.Web.Http.Validation.Providers
         private static ConstructorInfo GetAttributeAdapterConstructor(
             Type attributeType,
             Type adapterType
-        ) {
+        )
+        {
             ConstructorInfo constructor = adapterType.GetConstructor(
                 new[] { typeof(IEnumerable<ModelValidatorProvider>), attributeType }
             );
@@ -227,7 +230,8 @@ namespace System.Web.Http.Validation.Providers
         public void RegisterValidatableObjectAdapterFactory(
             Type modelType,
             DataAnnotationsValidatableObjectAdapterFactory factory
-        ) {
+        )
+        {
             ValidateValidatableModelType(modelType);
             ValidateValidatableFactory(factory);
 
@@ -256,7 +260,8 @@ namespace System.Web.Http.Validation.Providers
         /// </summary>
         public void RegisterDefaultValidatableObjectAdapterFactory(
             DataAnnotationsValidatableObjectAdapterFactory factory
-        ) {
+        )
+        {
             ValidateValidatableFactory(factory);
 
             DefaultValidatableFactory = factory;
@@ -319,7 +324,8 @@ namespace System.Web.Http.Validation.Providers
 
         private static void ValidateValidatableFactory(
             DataAnnotationsValidatableObjectAdapterFactory factory
-        ) {
+        )
+        {
             if (factory == null)
             {
                 throw Error.ArgumentNull("factory");

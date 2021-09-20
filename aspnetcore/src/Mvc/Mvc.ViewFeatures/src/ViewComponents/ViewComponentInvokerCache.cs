@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
 
         public ViewComponentInvokerCache(
             IViewComponentDescriptorCollectionProvider collectionProvider
-        ) {
+        )
+        {
             _collectionProvider = collectionProvider;
         }
 
@@ -40,7 +41,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
 
         internal ObjectMethodExecutor GetViewComponentMethodExecutor(
             ViewComponentContext viewComponentContext
-        ) {
+        )
+        {
             var cache = CurrentCache;
             var viewComponentDescriptor = viewComponentContext.ViewComponentDescriptor;
 

@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis
             int attributeIndex,
             DeclarativeSecurityAction action,
             int totalSourceAttributes
-        ) {
+        )
+        {
             Debug.Assert(attributeIndex >= 0 && attributeIndex < totalSourceAttributes);
             Debug.Assert(action != 0);
 
@@ -52,7 +53,8 @@ namespace Microsoft.CodeAnalysis
             int attributeIndex,
             string resolvedFilePath,
             int totalSourceAttributes
-        ) {
+        )
+        {
             Debug.Assert(attributeIndex >= 0 && attributeIndex < totalSourceAttributes);
             Debug.Assert(resolvedFilePath != null);
 

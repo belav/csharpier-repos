@@ -17,7 +17,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests
         public static void VerifyAssetStorage<T>(
             IEnumerable<KeyValuePair<Checksum, T>> items,
             SolutionAssetCache storage
-        ) {
+        )
+        {
             foreach (var kv in items)
             {
                 if (kv.Value is ChecksumCollection)

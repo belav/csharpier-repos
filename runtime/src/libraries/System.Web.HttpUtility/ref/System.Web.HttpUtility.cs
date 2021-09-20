@@ -42,13 +42,15 @@ namespace System.Web
         }
         public static System.Collections.Specialized.NameValueCollection ParseQueryString(
             string query
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Collections.Specialized.NameValueCollection ParseQueryString(
             string query,
             System.Text.Encoding encoding
-        ) {
+        )
+        {
             throw null;
         }
         [return: System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute("bytes")]
@@ -57,7 +59,8 @@ namespace System.Web
             int offset,
             int count,
             System.Text.Encoding e
-        ) {
+        )
+        {
             throw null;
         }
         [return: System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute("bytes")]

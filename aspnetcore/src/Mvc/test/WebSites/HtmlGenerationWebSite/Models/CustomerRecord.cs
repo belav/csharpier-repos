@@ -14,7 +14,8 @@ namespace HtmlGenerationWebSite.Models
         string PhoneNumber,
         [DataType(DataType.EmailAddress)] string Email,
         string Key
-    ) {
+    )
+    {
         [Required]
         public string Address { get; set; }
     }

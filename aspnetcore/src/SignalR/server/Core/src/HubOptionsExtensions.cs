@@ -54,7 +54,8 @@ namespace Microsoft.AspNetCore.SignalR
             this HubOptions options,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
                 Type filterType
-        ) {
+        )
+        {
             _ = options ?? throw new ArgumentNullException(nameof(options));
             _ = filterType ?? throw new ArgumentNullException(nameof(filterType));
 

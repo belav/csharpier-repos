@@ -320,7 +320,8 @@ namespace System.Speech.Recognition
             Grammar grammar,
             string precedingText,
             string subsequentText
-        ) {
+        )
+        {
             if (precedingText == null)
             {
                 precedingText = string.Empty;
@@ -417,7 +418,8 @@ namespace System.Speech.Recognition
         internal RecognitionResult EmulateRecognize(
             RecognizedWordUnit[] wordUnits,
             CompareOptions compareOptions
-        ) {
+        )
+        {
             // In Sapi 5.1 the only option is case-sensitive search with extendedWordFormat checking.
             // We still let you use the default EmulateRecognize although the behavior is slightly different.
             // Disable additional flags even with SAPI 5.3 until final EmulateRecognition design completed.
@@ -447,7 +449,8 @@ namespace System.Speech.Recognition
         internal void EmulateRecognizeAsync(
             RecognizedWordUnit[] wordUnits,
             CompareOptions compareOptions
-        ) {
+        )
+        {
             // In Sapi 5.1 the only option is case-sensitive search with extendedWordFormat checking.
             // We still let you use the default EmulateRecognize although the behavior is slightly different.
             // Disable additional flags even with SAPI 5.3 until final EmulateRecognition design completed.
@@ -490,7 +493,8 @@ namespace System.Speech.Recognition
         internal void RequestRecognizerUpdate(
             object userToken,
             TimeSpan audioPositionAheadToRaiseUpdate
-        ) {
+        )
+        {
             if (audioPositionAheadToRaiseUpdate < TimeSpan.Zero)
             {
                 throw new NotSupportedException(SR.Get(SRID.NegativeTimesNotSupported));
@@ -531,7 +535,8 @@ namespace System.Speech.Recognition
                 if (
                     !_supportsSapi53
                     && (SAPIErrorCodes)e.ErrorCode == SAPIErrorCodes.SPERR_NOT_FOUND
-                ) {
+                )
+                {
                     throw new PlatformNotSupportedException(SR.Get(SRID.RecognitionNotSupported));
                 }
                 throw ExceptionFromSapiCreateRecognizerError(e);
@@ -636,7 +641,8 @@ namespace System.Speech.Recognition
                     !ThreadPool.QueueUserWorkItem(
                         new WaitCallback(RecognizeAsyncWaitForGrammarsToLoad)
                     )
-                ) {
+                )
+                {
                     throw new OperationCanceledException(SR.Get(SRID.OperationAborted));
                 }
             }
@@ -674,7 +680,8 @@ namespace System.Speech.Recognition
             EventHandler<RecognizeCompletedEventArgs> eventHandler = delegate(
                 object sender,
                 RecognizeCompletedEventArgs eventArgs
-            ) {
+            )
+            {
                 result = eventArgs.Result;
                 completed = true;
             };
@@ -942,7 +949,8 @@ namespace System.Speech.Recognition
             {
                 if (
                     e is COMException || e is InvalidOperationException || e is KeyNotFoundException
-                ) {
+                )
+                {
                     return SapiRecognizer.GetPropertyString(settingName);
                 }
                 throw;
@@ -1121,7 +1129,8 @@ namespace System.Speech.Recognition
                     if (
                         sapiState == SPRECOSTATE.SPRST_ACTIVE
                         || sapiState == SPRECOSTATE.SPRST_ACTIVE_ALWAYS
-                    ) {
+                    )
+                    {
                         return RecognizerState.Listening;
                     }
                     else
@@ -1556,7 +1565,8 @@ namespace System.Speech.Recognition
             bool enabled,
             float weight,
             int priority
-        ) {
+        )
+        {
             Uri baseUri = grammar.BaseUri;
 
             if (_supportsSapi53 && baseUri == null && grammar.Uri != null)
@@ -1598,7 +1608,8 @@ namespace System.Speech.Recognition
             bool enabled,
             float weight,
             int priority
-        ) {
+        )
+        {
             try
             {
                 if (Grammar.IsDictationGrammar(uri))
@@ -1653,7 +1664,8 @@ namespace System.Speech.Recognition
             ref string pbstrMIMEType,
             ref short pfModified,
             ref string pbstrRedirectUrl
-        ) {
+        )
+        {
             try
             {
                 // Look for the OnInitParameters
@@ -1737,7 +1749,8 @@ namespace System.Speech.Recognition
             Uri resourcePath,
             out string mimeType,
             out Uri redirectUrl
-        ) {
+        )
+        {
             redirectUrl = null;
             mimeType = null;
             return null;
@@ -1759,7 +1772,8 @@ namespace System.Speech.Recognition
             bool enabled,
             float weight,
             int priority
-        ) {
+        )
+        {
             byte[] data = grammar.CfgData;
 
             // Pin the array:
@@ -1857,7 +1871,8 @@ namespace System.Speech.Recognition
             bool enabled,
             float weight,
             int priority
-        ) {
+        )
+        {
             if (!enabled)
             {
                 // SetGrammarState is ENABLED by default so only call if changed.
@@ -2069,13 +2084,15 @@ namespace System.Speech.Recognition
             SpeechEmulationCompareFlags flag,
             bool useReco2,
             RecognizedWordUnit[] wordUnits
-        ) {
+        )
+        {
             RecognitionResult result = null;
             bool completed = false;
             EventHandler<EmulateRecognizeCompletedEventArgs> eventHandler = delegate(
                 object sender,
                 EmulateRecognizeCompletedEventArgs eventArgs
-            ) {
+            )
+            {
                 result = eventArgs.Result;
                 completed = true;
             };
@@ -2108,7 +2125,8 @@ namespace System.Speech.Recognition
             SpeechEmulationCompareFlags flag,
             bool useReco2,
             RecognizedWordUnit[] wordUnits
-        ) {
+        )
+        {
             lock (SapiRecognizer) // Lock to protect _isRecognizing and _haveInputSource
             {
                 if (_isRecognizing)
@@ -2216,7 +2234,8 @@ namespace System.Speech.Recognition
             if (
                 errorCode == SAPIErrorCodes.SPERR_NOT_TOPLEVEL_RULE
                 || errorCode == SAPIErrorCodes.SP_NO_RULES_TO_ACTIVATE
-            ) {
+            )
+            {
                 if (uri == null)
                 {
                     if (string.IsNullOrEmpty(ruleName))
@@ -2628,7 +2647,8 @@ namespace System.Speech.Recognition
                             && result.GrammarId == 0
                         )
                     ) && enabled
-                ) {
+                )
+                {
                     if (speechEvent.EventId == SPEVENTENUM.SPEI_RECOGNITION)
                     {
                         // Remember the last result so we can fire it again in the RecognitionCompleted event.
@@ -2654,7 +2674,8 @@ namespace System.Speech.Recognition
                         if (
                             result.GrammarId != 0
                             || !(_babbleTimeoutReached || isRecognizeCancelled)
-                        ) {
+                        )
+                        {
                             // Fire the rejected recognition on the recognizer.
                             FireSpeechRecognitionRejectedEvent(result);
                         }
@@ -2768,7 +2789,8 @@ namespace System.Speech.Recognition
                         (SPENDSRSTREAMFLAGS)speechEvent.WParam
                         & SPENDSRSTREAMFLAGS.SPESF_STREAM_RELEASED
                     ) == SPENDSRSTREAMFLAGS.SPESF_STREAM_RELEASED
-                ) {
+                )
+                {
                     isStreamReleased = true;
                     _haveInputSource = false;
                 }
@@ -2919,7 +2941,8 @@ namespace System.Speech.Recognition
                                     waveFormatPtr
                                 )
                             ) != null
-                        ) {
+                        )
+                        {
                             hasWaveFormat = true;
                         }
                     }
@@ -2982,7 +3005,8 @@ namespace System.Speech.Recognition
         // Convert the .NET CompareOptions into the SAPI SpeechEmulationCompareFlags.
         private static SpeechEmulationCompareFlags ConvertCompareOptions(
             CompareOptions compareOptions
-        ) {
+        )
+        {
             CompareOptions handledOptions =
                 CompareOptions.IgnoreCase
                 | CompareOptions.OrdinalIgnoreCase
@@ -2993,7 +3017,8 @@ namespace System.Speech.Recognition
             if (
                 (compareOptions & CompareOptions.IgnoreCase) != 0
                 || (compareOptions & CompareOptions.OrdinalIgnoreCase) != 0
-            ) {
+            )
+            {
                 flags |= SpeechEmulationCompareFlags.SECFIgnoreCase;
             }
             if ((compareOptions & CompareOptions.IgnoreKanaType) != 0)
@@ -3304,7 +3329,8 @@ namespace System.Speech.Recognition
             TimeSpan audioPosition,
             Exception exception,
             bool isRecognizeCancelled
-        ) {
+        )
+        {
             // In the synchronous case, fire the private event
             EventHandler<RecognizeCompletedEventArgs> recognizeCompletedHandler =
                 RecognizeCompletedSync;
@@ -3341,7 +3367,8 @@ namespace System.Speech.Recognition
             RecognitionResult result,
             Exception exception,
             bool isRecognizeCancelled
-        ) {
+        )
+        {
             EventHandler<EmulateRecognizeCompletedEventArgs> emulateRecognizeCompletedHandler;
             lock (SapiRecognizer)
             {
@@ -3507,7 +3534,8 @@ namespace System.Speech.Recognition
                 ref string pbstrMIMEType,
                 ref short pfModified,
                 ref string pbstrRedirectUrl
-            ) {
+            )
+            {
                 return ((ISpGrammarResourceLoader)Recognizer).LoadResource(
                     bstrResourceUri,
                     fAlwaysReload,
@@ -3525,7 +3553,8 @@ namespace System.Speech.Recognition
                 Uri resourcePath,
                 out string mimeType,
                 out Uri redirectUrl
-            ) {
+            )
+            {
                 return ((ISpGrammarResourceLoader)Recognizer).GetLocalCopy(
                     resourcePath,
                     out mimeType,
@@ -3561,7 +3590,8 @@ namespace System.Speech.Recognition
             bool enabled,
             float weight,
             int priority
-        ) {
+        )
+        {
             _grammarId = grammarId;
             _sapiGrammar = sapiGrammar;
             _grammarEnabled = enabled;

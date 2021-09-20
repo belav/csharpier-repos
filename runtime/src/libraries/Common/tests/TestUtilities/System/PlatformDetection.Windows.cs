@@ -309,7 +309,8 @@ namespace System
                                 "System.EntryPointNotFoundException",
                                 StringComparison.Ordinal
                             )
-                    ) {
+                    )
+                    {
                         // API doesn't exist, likely pre Win8
                         s_isInAppContainer = 0;
                     }

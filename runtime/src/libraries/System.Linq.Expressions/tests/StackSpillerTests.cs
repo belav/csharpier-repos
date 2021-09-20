@@ -2372,7 +2372,8 @@ namespace System.Linq.Expressions.Tests
             Func<Expression, Expression, Expression> factory,
             Expression arg1,
             Expression arg2
-        ) {
+        )
+        {
             Test(args => factory(args[0], args[1]), new[] { arg1, arg2 }, false);
             Test(args => factory(args[0], args[1]), new[] { arg1, arg2 }, true);
         }
@@ -2382,7 +2383,8 @@ namespace System.Linq.Expressions.Tests
             Expression arg1,
             Expression arg2,
             Expression arg3
-        ) {
+        )
+        {
             Test(args => factory(args[0], args[1], args[2]), new[] { arg1, arg2, arg3 }, false);
             Test(args => factory(args[0], args[1], args[2]), new[] { arg1, arg2, arg3 }, true);
         }
@@ -2391,7 +2393,8 @@ namespace System.Linq.Expressions.Tests
             Func<Expression[], Expression> factory,
             Expression[] args,
             bool useInterpreter
-        ) {
+        )
+        {
             object expected = Eval(factory(args), useInterpreter);
 
             for (var i = 0; i < args.Length; i++)

@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ExplicitInterfaceSpecifierSyntax? interfaceSpecifierSyntaxOpt,
             SyntaxToken nameTokenSyntax,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             _location = nameTokenSyntax.GetLocation();
 
             this.containingType = containingType;
@@ -79,7 +80,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void ForceComplete(
             SourceLocation? locationOpt,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             _state.DefaultForceComplete(this, cancellationToken);
         }
 
@@ -180,7 +182,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     OneOrMany.Create(this.AttributeDeclarationSyntaxList),
                     ref _lazyCustomAttributesBag
                 )
-            ) {
+            )
+            {
                 DeclaringCompilation.SymbolDeclaredEvent(this);
                 var wasCompletedThisThread = _state.NotePartComplete(CompletionPart.Attributes);
                 Debug.Assert(wasCompletedThisThread);
@@ -232,7 +235,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             if (
                 attributesBag == null || !attributesBag.IsEarlyDecodedWellKnownAttributeDataComputed
-            ) {
+            )
+            {
                 attributesBag = this.GetAttributesBag();
             }
 
@@ -246,7 +250,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 AttributeSyntax,
                 AttributeLocation
             > arguments
-        ) {
+        )
+        {
             CSharpAttributeData? boundAttribute;
             ObsoleteAttributeData? obsoleteData;
 
@@ -256,7 +261,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     out boundAttribute,
                     out obsoleteData
                 )
-            ) {
+            )
+            {
                 if (obsoleteData != null)
                 {
                     arguments.GetOrCreateData<CommonEventEarlyWellKnownAttributeData>().ObsoleteAttributeData =
@@ -286,7 +292,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (
                     lazyCustomAttributesBag != null
                     && lazyCustomAttributesBag.IsEarlyDecodedWellKnownAttributeDataComputed
-                ) {
+                )
+                {
                     var data =
                         (CommonEventEarlyWellKnownAttributeData)lazyCustomAttributesBag.EarlyDecodedWellKnownAttributeData;
                     return data != null ? data.ObsoleteAttributeData : null;
@@ -302,7 +309,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 CSharpAttributeData,
                 AttributeLocation
             > arguments
-        ) {
+        )
+        {
             var attribute = arguments.Attribute;
             Debug.Assert(!attribute.HasErrors);
             Debug.Assert(arguments.SymbolPart == AttributeLocation.None);
@@ -326,13 +334,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     this,
                     AttributeDescription.ExcludeFromCodeCoverageAttribute
                 )
-            ) {
+            )
+            {
                 arguments.GetOrCreateData<CommonEventWellKnownAttributeData>().HasExcludeFromCodeCoverageAttribute =
                     true;
             }
             else if (
                 attribute.IsTargetAttribute(this, AttributeDescription.SkipLocalsInitAttribute)
-            ) {
+            )
+            {
                 CSharpAttributeData.DecodeSkipLocalsInitAttribute<CommonEventWellKnownAttributeData>(
                     DeclaringCompilation,
                     ref arguments
@@ -343,7 +353,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void AddSynthesizedAttributes(
             PEModuleBuilder moduleBuilder,
             ref ArrayBuilder<SynthesizedAttributeData>? attributes
-        ) {
+        )
+        {
             base.AddSynthesizedAttributes(moduleBuilder, ref attributes);
 
             var compilation = this.DeclaringCompilation;
@@ -475,7 +486,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Location location,
             BindingDiagnosticBag diagnostics,
             bool isExplicitInterfaceImplementation
-        ) {
+        )
+        {
             var info = ModifierUtils.CheckAccessibility(
                 _modifiers,
                 this,
@@ -494,7 +506,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Location location,
             BindingDiagnosticBag diagnostics,
             out bool modifierErrors
-        ) {
+        )
+        {
             bool isInterface = this.ContainingType.IsInterface;
             var defaultAccess =
                 isInterface && !explicitInterfaceImplementation
@@ -600,7 +613,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     || (IsAbstract && !isExplicitInterfaceImplementationInInterface)
                     || IsOverride
                 )
-            ) {
+            )
+            {
                 diagnostics.Add(ErrorCode.ERR_VirtualPrivate, location, this);
             }
             else if (IsStatic && (IsOverride || IsVirtual || IsAbstract))
@@ -627,7 +641,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 IsSealed
                 && !IsOverride
                 && !(isExplicitInterfaceImplementationInInterface && IsAbstract)
-            ) {
+            )
+            {
                 // '{0}' cannot be sealed because it is not an override
                 diagnostics.Add(ErrorCode.ERR_SealedNonOverride, location, this);
             }
@@ -670,7 +685,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 ContainingType.IsSealed
                 && this.DeclaredAccessibility.HasProtected()
                 && !this.IsOverride
-            ) {
+            )
+            {
                 diagnostics.Add(
                     AccessCheck.GetProtectedMemberInSealedTypeError(ContainingType),
                     location,
@@ -688,7 +704,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             else if (
                 !this.IsNoMoreVisibleThan(this.Type, ref useSiteInfo)
                 && (CSharpSyntaxNode as EventDeclarationSyntax)?.ExplicitInterfaceSpecifier == null
-            ) {
+            )
+            {
                 // Dev10 reports different errors for field-like events (ERR_BadVisFieldType) and custom events (ERR_BadVisPropertyType).
                 // Both seem odd, so add a new one.
 
@@ -706,7 +723,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     ContainingType.TypeKind == TypeKind.Class
                     || ContainingType.TypeKind == TypeKind.Submission
                 )
-            ) {
+            )
+            {
                 // '{0}' is abstract but it is contained in non-abstract type '{1}'
                 diagnostics.Add(
                     ErrorCode.ERR_AbstractInConcreteClass,
@@ -728,7 +746,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             CultureInfo? preferredCulture = null,
             bool expandIncludes = false,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             ref var lazyDocComment = ref expandIncludes
                 ? ref _lazyExpandedDocComment
                 : ref _lazyDocComment;
@@ -743,7 +762,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             EventSymbol eventWithCustomModifiers,
             ref TypeWithAnnotations type,
             AssemblySymbol containingAssembly
-        ) {
+        )
+        {
             RoslynDebug.Assert((object)eventWithCustomModifiers != null);
 
             TypeSymbol overriddenEventType = eventWithCustomModifiers.Type;
@@ -758,7 +778,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
                         | TypeCompareKind.IgnoreDynamic
                 )
-            ) {
+            )
+            {
                 type = type.WithTypeAndModifiers(
                     CustomModifierUtils.CopyTypeCustomModifiers(
                         overriddenEventType,
@@ -839,7 +860,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             bool sawImplicitImplementation = false;
             foreach (
                 NamedTypeSymbol @interface in this.containingType.InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics.Keys
-            ) {
+            )
+            {
                 foreach (Symbol interfaceMember in @interface.GetMembers(this.Name))
                 {
                     if (
@@ -887,7 +909,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Binder binder,
             TypeSyntax typeSyntax,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             // NOTE: no point in reporting unsafe errors in the return type - anything unsafe will either
             // fail to be a delegate or will be (invalidly) passed as a type argument.
             // Prevent constraint checking.
@@ -902,7 +925,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void AfterAddingTypeMembersChecks(
             ConversionsBase conversions,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var compilation = DeclaringCompilation;
             var location = this.Locations[0];
 
@@ -921,7 +945,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (
                 compilation.ShouldEmitNullableAttributes(this)
                 && TypeWithAnnotations.NeedsNullableAttribute()
-            ) {
+            )
+            {
                 compilation.EnsureNullableAttributeExists(
                     diagnostics,
                     location,

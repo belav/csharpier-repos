@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
             EnabledDiagnosticOptions enabledDiagnostics,
             IProgressTracker progressTracker,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // add one item for the 'format' action we'll do last
             if (enabledDiagnostics.FormatDocument)
             {
@@ -90,7 +91,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
             Document document,
             OrganizeUsingsSet organizeUsingsSet,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (organizeUsingsSet.IsRemoveUnusedImportEnabled)
             {
                 var removeUsingsService =
@@ -102,7 +104,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
                             FunctionId.CodeCleanup_RemoveUnusedImports,
                             cancellationToken
                         )
-                    ) {
+                    )
+                    {
                         document = await removeUsingsService.RemoveUnnecessaryImportsAsync(
                                 document,
                                 cancellationToken
@@ -129,7 +132,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
             ImmutableArray<DiagnosticSet> enabledDiagnosticSets,
             IProgressTracker progressTracker,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Add a progress item for each enabled option we're going to fixup.
             progressTracker.AddItems(enabledDiagnosticSets.Length);
 
@@ -158,7 +162,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
             ImmutableArray<string> diagnosticIds,
             IProgressTracker progressTracker,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             foreach (var diagnosticId in diagnosticIds)
             {
                 using (
@@ -167,7 +172,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
                         diagnosticId,
                         cancellationToken
                     )
-                ) {
+                )
+                {
                     document = await _codeFixService.ApplyCodeFixesForSpecificDiagnosticIdAsync(
                             document,
                             diagnosticId,

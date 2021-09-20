@@ -42,7 +42,8 @@ namespace AutoMapper.Configuration.Conventions
             Type destType,
             Type destMemberType,
             string nameToSearch
-        ) {
+        )
+        {
             MemberInfo memberInfo = null;
             foreach (var namedMapper in NamedMappers)
             {
@@ -69,7 +70,8 @@ namespace AutoMapper.Configuration.Conventions
             Type destType,
             Type destMemberType,
             string nameToSearch
-        ) {
+        )
+        {
             MemberInfo member;
             foreach (
                 var possibleSourceName in TypeDetails.PossibleNames(
@@ -77,7 +79,8 @@ namespace AutoMapper.Configuration.Conventions
                     DestinationPrefixes,
                     DestinationPostfixes
                 )
-            ) {
+            )
+            {
                 if ((member = sourceTypeDetails.GetMember(possibleSourceName)) != null)
                 {
                     return member;
@@ -101,7 +104,8 @@ namespace AutoMapper.Configuration.Conventions
             Type destType,
             Type destMemberType,
             string nameToSearch
-        ) {
+        )
+        {
             var possibleSourceNames = PossibleNames(nameToSearch);
             var possibleDestNames = sourceTypeDetails.ReadAccessors.Select(
                     mi => new { mi, possibles = PossibleNames(mi.Name) }
@@ -118,7 +122,8 @@ namespace AutoMapper.Configuration.Conventions
                                 string.Compare(name, sourceName, StringComparison.OrdinalIgnoreCase)
                                 == 0
                         )
-                    ) {
+                    )
+                    {
                         return destName.mi;
                     }
                 }

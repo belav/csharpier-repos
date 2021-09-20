@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Completion
             ImmutableDictionary<string, string> properties = null,
             ImmutableArray<string> tags = default,
             string inlineDescription = null
-        ) {
+        )
+        {
             var roslynGlyph = glyph.HasValue
                 ? FSharpGlyphHelpers.ConvertTo(glyph.Value)
                 : (Glyph?)null;

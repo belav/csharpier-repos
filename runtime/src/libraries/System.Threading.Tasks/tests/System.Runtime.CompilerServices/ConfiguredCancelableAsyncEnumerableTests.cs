@@ -58,7 +58,8 @@ namespace System.Runtime.CompilerServices.Tests
         [InlineData(true)]
         public void ConfigureAwait_AwaitMoveNextAsync_FlagsSetAppropriately(
             bool continueOnCapturedContext
-        ) {
+        )
+        {
             TrackFlagsAsyncEnumerable enumerable;
             CancellationToken token = new CancellationTokenSource().Token;
 
@@ -127,7 +128,8 @@ namespace System.Runtime.CompilerServices.Tests
         [InlineData(true)]
         public void ConfigureAwait_AwaitDisposeAsync_FlagsSetAppropriately(
             bool continueOnCapturedContext
-        ) {
+        )
+        {
             var enumerable = new TrackFlagsAsyncEnumerable() { Flags = 0 };
             enumerable.ConfigureAwait(continueOnCapturedContext)
                 .GetAsyncEnumerator()
@@ -217,7 +219,8 @@ namespace System.Runtime.CompilerServices.Tests
 
             public IAsyncEnumerator<int> GetAsyncEnumerator(
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 CancellationToken = cancellationToken;
                 return new Enumerator(this);
             }
@@ -264,7 +267,8 @@ namespace System.Runtime.CompilerServices.Tests
 
             public IAsyncEnumerator<T> GetAsyncEnumerator(
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 _enumerator = _enumerable.GetEnumerator();
                 return this;
             }

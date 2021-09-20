@@ -94,7 +94,8 @@ public class RuntimeConfigParserTask : Task
     private void ConvertDictionaryToBlob(
         IReadOnlyDictionary<string, string> properties,
         BlobBuilder builder
-    ) {
+    )
+    {
         int count = properties.Count;
 
         builder.WriteCompressedInteger(count);
@@ -108,7 +109,8 @@ public class RuntimeConfigParserTask : Task
     private void CheckDuplicateProperties(
         IReadOnlyDictionary<string, string> properties,
         ITaskItem[] keys
-    ) {
+    )
+    {
         foreach (var key in keys)
         {
             if (properties.ContainsKey(key.ItemSpec))
@@ -148,7 +150,8 @@ public class StringConverter : JsonConverter<string>
         ref Utf8JsonReader reader,
         Type typeToConvert,
         JsonSerializerOptions options
-    ) {
+    )
+    {
         switch (reader.TokenType)
         {
             case JsonTokenType.Number:

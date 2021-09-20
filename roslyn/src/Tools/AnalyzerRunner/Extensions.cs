@@ -13,7 +13,8 @@ namespace AnalyzerRunner
         internal static void Add(
             this AnalyzerTelemetryInfo analyzerTelemetryInfo,
             AnalyzerTelemetryInfo addendum
-        ) {
+        )
+        {
             analyzerTelemetryInfo.CodeBlockActionsCount += addendum.CodeBlockActionsCount;
             analyzerTelemetryInfo.CodeBlockEndActionsCount += addendum.CodeBlockEndActionsCount;
             analyzerTelemetryInfo.CodeBlockStartActionsCount += addendum.CodeBlockStartActionsCount;

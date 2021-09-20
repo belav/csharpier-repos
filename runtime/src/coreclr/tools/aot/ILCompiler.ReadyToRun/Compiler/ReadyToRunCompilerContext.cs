@@ -12,10 +12,8 @@ namespace ILCompiler
 {
     partial class CompilerTypeSystemContext
     {
-        public CompilerTypeSystemContext(
-            TargetDetails details,
-            SharedGenericsMode genericsMode
-        ) : base(details)
+        public CompilerTypeSystemContext(TargetDetails details, SharedGenericsMode genericsMode)
+            : base(details)
         {
             _genericsMode = genericsMode;
         }
@@ -131,7 +129,8 @@ namespace ILCompiler
         /// </summary>
         protected override RuntimeInterfacesAlgorithm GetRuntimeInterfacesAlgorithmForNonPointerArrayType(
             ArrayType type
-        ) {
+        )
+        {
             return BaseTypeRuntimeInterfacesAlgorithm.Instance;
         }
     }
@@ -149,7 +148,8 @@ namespace ILCompiler
             FieldLayoutAlgorithm vectorFallbackAlgorithm,
             string similarVector,
             bool vectorAbiIsStable = true
-        ) {
+        )
+        {
             _fallbackAlgorithm = fallbackAlgorithm;
             _vectorFallbackAlgorithm = vectorFallbackAlgorithm;
             _similarVectorName = similarVector;
@@ -181,7 +181,8 @@ namespace ILCompiler
         public override ComputedInstanceFieldLayout ComputeInstanceLayout(
             DefType type,
             InstanceLayoutKind layoutKind
-        ) {
+        )
+        {
             DefType similarSpecifiedVector = GetSimilarVector(type);
             if (similarSpecifiedVector == null)
             {
@@ -242,13 +243,15 @@ namespace ILCompiler
         public override ComputedStaticFieldLayout ComputeStaticFieldLayout(
             DefType type,
             StaticLayoutKind layoutKind
-        ) {
+        )
+        {
             return _fallbackAlgorithm.ComputeStaticFieldLayout(type, layoutKind);
         }
 
         public override ValueTypeShapeCharacteristics ComputeValueTypeShapeCharacteristics(
             DefType type
-        ) {
+        )
+        {
             if (type.Context.Target.Architecture == TargetArchitecture.ARM64)
             {
                 return type.InstanceFieldSize.AsInt switch

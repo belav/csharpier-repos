@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis
             bool getSymbol,
             IEnumerable<SyntaxNode>? executableCodeBlocks,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var declaredSymbol = GetDeclaredSymbol(model, node, getSymbol, cancellationToken);
             return GetDeclarationInfo(node, declaredSymbol, executableCodeBlocks);
         }
@@ -27,7 +28,8 @@ namespace Microsoft.CodeAnalysis
             SyntaxNode node,
             ISymbol? declaredSymbol,
             IEnumerable<SyntaxNode>? executableCodeBlocks
-        ) {
+        )
+        {
             var codeBlocks =
                 executableCodeBlocks?.Where(c => c != null).AsImmutableOrEmpty()
                 ?? ImmutableArray<SyntaxNode>.Empty;
@@ -39,7 +41,8 @@ namespace Microsoft.CodeAnalysis
             SyntaxNode node,
             bool getSymbol,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return GetDeclarationInfo(
                 model,
                 node,
@@ -55,7 +58,8 @@ namespace Microsoft.CodeAnalysis
             bool getSymbol,
             SyntaxNode executableCodeBlock,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return GetDeclarationInfo(
                 model,
                 node,
@@ -71,7 +75,8 @@ namespace Microsoft.CodeAnalysis
             bool getSymbol,
             CancellationToken cancellationToken,
             params SyntaxNode[] executableCodeBlocks
-        ) {
+        )
+        {
             return GetDeclarationInfo(
                 model,
                 node,
@@ -86,7 +91,8 @@ namespace Microsoft.CodeAnalysis
             SyntaxNode node,
             bool getSymbol,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!getSymbol)
             {
                 return null;
@@ -100,7 +106,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 declaredSymbol is INamespaceSymbol namespaceSymbol
                 && namespaceSymbol.ConstituentNamespaces.Length > 1
-            ) {
+            )
+            {
                 var assemblyToScope = model.Compilation.Assembly;
                 var assemblyScopedNamespaceSymbol =
                     namespaceSymbol.ConstituentNamespaces.FirstOrDefault(

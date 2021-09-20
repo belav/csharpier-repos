@@ -344,7 +344,8 @@ namespace Microsoft.CodeAnalysis.Shared.Collections
                         if (
                             right != null
                             && GetEnd(right.MaxEndNode.Value, in introspector) >= start
-                        ) {
+                        )
+                        {
                             candidates.Push((right, firstTime: true));
                         }
                     }

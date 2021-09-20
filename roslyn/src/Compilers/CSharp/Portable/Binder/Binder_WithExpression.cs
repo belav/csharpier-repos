@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private BoundExpression BindWithExpression(
             WithExpressionSyntax syntax,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var receiver = BindRValueWithoutTargetType(syntax.Expression, diagnostics);
             var receiverType = receiver.Type;
 

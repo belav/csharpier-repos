@@ -55,7 +55,8 @@ namespace System.Numerics
                     uint* b = _bits,
                         v = value._bits,
                         t = temp._bits
-                ) {
+                )
+                {
                     if (_length < value._length)
                     {
                         Multiply(v, value._length, b, _length, t, _length + value._length);
@@ -80,7 +81,8 @@ namespace System.Numerics
                 fixed (
                     uint* b = _bits,
                         t = temp._bits
-                ) {
+                )
+                {
                     Square(b, _length, t, _length + _length);
                 }
 
@@ -107,7 +109,8 @@ namespace System.Numerics
                     fixed (
                         uint* b = _bits,
                             m = modulus
-                    ) {
+                    )
+                    {
                         Divide(b, _length, m, modulus.Length, null, 0);
                     }
 
@@ -125,7 +128,8 @@ namespace System.Numerics
                     fixed (
                         uint* b = _bits,
                             m = modulus._bits
-                    ) {
+                    )
+                    {
                         Divide(b, _length, m, modulus._length, null, 0);
                     }
 

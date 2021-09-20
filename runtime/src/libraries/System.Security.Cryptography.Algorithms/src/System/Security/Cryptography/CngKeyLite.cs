@@ -34,7 +34,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> keyBlob,
             bool encrypted = false,
             ReadOnlySpan<char> password = default
-        ) {
+        )
+        {
             SafeNCryptKeyHandle keyHandle;
             ErrorCode errorCode;
 
@@ -105,7 +106,8 @@ namespace System.Security.Cryptography
             string blobType,
             byte[] keyBlob,
             string curveName
-        ) {
+        )
+        {
             SafeNCryptKeyHandle keyHandle;
 
             keyHandle = ECCng.ImportKeyBlob(
@@ -183,7 +185,8 @@ namespace System.Security.Cryptography
             string blobType,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             if (destination.IsEmpty)
             {
                 bytesWritten = 0;
@@ -245,7 +248,8 @@ namespace System.Security.Cryptography
             SafeNCryptKeyHandle keyHandle,
             ReadOnlySpan<char> password,
             int kdfCount
-        ) {
+        )
+        {
             bool ret = ExportPkcs8KeyBlob(
                 true,
                 keyHandle,
@@ -266,7 +270,8 @@ namespace System.Security.Cryptography
             int kdfCount,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             return ExportPkcs8KeyBlob(
                 false,
                 keyHandle,
@@ -290,7 +295,8 @@ namespace System.Security.Cryptography
             Span<byte> destination,
             out int bytesWritten,
             out byte[]? allocated
-        ) {
+        )
+        {
             using (SafeUnicodeStringHandle stringHandle = new SafeUnicodeStringHandle(password))
             {
                 fixed (byte* oidPtr = s_pkcs12TripleDesOidBytes)
@@ -438,7 +444,8 @@ namespace System.Security.Cryptography
         internal static SafeNCryptKeyHandle GenerateNewExportableKey(
             string algorithm,
             string curveName
-        ) {
+        )
+        {
             // Despite the function being create "persisted" key, since we pass a null name it's
             // actually ephemeral.
             SafeNCryptKeyHandle keyHandle;
@@ -474,7 +481,8 @@ namespace System.Security.Cryptography
         internal static SafeNCryptKeyHandle GenerateNewExportableKey(
             string algorithm,
             ref ECCurve explicitCurve
-        ) {
+        )
+        {
             // Despite the function being create "persisted" key, since we pass a null name it's
             // actually ephemeral.
             SafeNCryptKeyHandle keyHandle;
@@ -608,7 +616,8 @@ namespace System.Security.Cryptography
             SafeNCryptHandle ncryptHandle,
             string propertyName,
             CngPropertyOptions options
-        ) {
+        )
+        {
             Debug.Assert(!ncryptHandle.IsInvalid);
             unsafe
             {
@@ -656,7 +665,8 @@ namespace System.Security.Cryptography
             SafeNCryptHandle ncryptHandle,
             string propertyName,
             CngPropertyOptions options
-        ) {
+        )
+        {
             Debug.Assert(!ncryptHandle.IsInvalid);
             byte[]? value = GetProperty(ncryptHandle, propertyName, options);
             if (value == null)
@@ -703,7 +713,8 @@ namespace System.Security.Cryptography
             SafeNCryptHandle ncryptHandle,
             string propertyName,
             byte[] value
-        ) {
+        )
+        {
             Debug.Assert(!ncryptHandle.IsInvalid);
             unsafe
             {

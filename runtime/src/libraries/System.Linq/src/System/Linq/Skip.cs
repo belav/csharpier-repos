@@ -11,7 +11,8 @@ namespace System.Linq
         public static IEnumerable<TSource> Skip<TSource>(
             this IEnumerable<TSource> source,
             int count
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -39,7 +40,8 @@ namespace System.Linq
         public static IEnumerable<TSource> SkipWhile<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, bool> predicate
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -56,7 +58,8 @@ namespace System.Linq
         private static IEnumerable<TSource> SkipWhileIterator<TSource>(
             IEnumerable<TSource> source,
             Func<TSource, bool> predicate
-        ) {
+        )
+        {
             using (IEnumerator<TSource> e = source.GetEnumerator())
             {
                 while (e.MoveNext())
@@ -79,7 +82,8 @@ namespace System.Linq
         public static IEnumerable<TSource> SkipWhile<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, int, bool> predicate
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -96,7 +100,8 @@ namespace System.Linq
         private static IEnumerable<TSource> SkipWhileIterator<TSource>(
             IEnumerable<TSource> source,
             Func<TSource, int, bool> predicate
-        ) {
+        )
+        {
             using (IEnumerator<TSource> e = source.GetEnumerator())
             {
                 int index = -1;
@@ -125,7 +130,8 @@ namespace System.Linq
         public static IEnumerable<TSource> SkipLast<TSource>(
             this IEnumerable<TSource> source,
             int count
-        ) {
+        )
+        {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);

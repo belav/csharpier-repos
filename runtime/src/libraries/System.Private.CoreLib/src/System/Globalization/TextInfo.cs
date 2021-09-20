@@ -151,7 +151,8 @@ namespace System.Globalization
             if (
                 GlobalizationMode.Invariant
                 || (UnicodeUtility.IsAsciiCodePoint(c) && IsAsciiCasingSameAsInvariant)
-            ) {
+            )
+            {
                 return ToLowerAsciiInvariant(c);
             }
 
@@ -415,7 +416,8 @@ namespace System.Globalization
                                 (toUpper)
                                     ? Utf16Utility.UInt32ContainsAnyLowercaseAsciiChar(tempValue)
                                     : Utf16Utility.UInt32ContainsAnyUppercaseAsciiChar(tempValue)
-                            ) {
+                            )
+                            {
                                 goto AsciiMustChangeCase;
                             }
 
@@ -435,7 +437,8 @@ namespace System.Globalization
                             (toUpper)
                                 ? ((tempValue - 'a') <= (uint)('z' - 'a'))
                                 : ((tempValue - 'A') <= (uint)('Z' - 'A'))
-                        ) {
+                        )
+                        {
                             goto AsciiMustChangeCase;
                         }
                     }
@@ -549,7 +552,8 @@ namespace System.Globalization
         internal static void ToLowerAsciiInvariant(
             ReadOnlySpan<char> source,
             Span<char> destination
-        ) {
+        )
+        {
             Debug.Assert(destination.Length >= source.Length);
 
             for (int i = 0; i < source.Length; i++)
@@ -607,7 +611,8 @@ namespace System.Globalization
         internal static void ToUpperAsciiInvariant(
             ReadOnlySpan<char> source,
             Span<char> destination
-        ) {
+        )
+        {
             Debug.Assert(destination.Length >= source.Length);
 
             for (int i = 0; i < source.Length; i++)
@@ -636,7 +641,8 @@ namespace System.Globalization
             if (
                 GlobalizationMode.Invariant
                 || (UnicodeUtility.IsAsciiCodePoint(c) && IsAsciiCasingSameAsInvariant)
-            ) {
+            )
+            {
                 return ToUpperAsciiInvariant(c);
             }
 
@@ -772,7 +778,8 @@ namespace System.Globalization
                         && i < str.Length - 1
                         && (str[i] == 'i' || str[i] == 'I')
                         && (str[i + 1] == 'j' || str[i + 1] == 'J')
-                    ) {
+                    )
+                    {
                         result.Append("IJ");
                         i += 2;
                     }
@@ -871,7 +878,8 @@ namespace System.Globalization
             ref string input,
             int inputIndex,
             int charLen
-        ) {
+        )
+        {
             Debug.Assert(
                 charLen == 1 || charLen == 2,
                 "[TextInfo.AddNonLetter] CharUnicodeInfo.InternalGetUnicodeCategory returned an unexpected charLen!"
@@ -894,7 +902,8 @@ namespace System.Globalization
             ref string input,
             int inputIndex,
             int charLen
-        ) {
+        )
+        {
             Debug.Assert(
                 charLen == 1 || charLen == 2,
                 "[TextInfo.AddTitlecaseLetter] CharUnicodeInfo.InternalGetUnicodeCategory returned an unexpected charLen!"
@@ -955,7 +964,8 @@ namespace System.Globalization
             char* dstBuffer,
             int dstBufferCapacity,
             bool bToUpper
-        ) {
+        )
+        {
             if (GlobalizationMode.UseNls)
             {
                 NlsChangeCase(src, srcLen, dstBuffer, dstBufferCapacity, bToUpper);

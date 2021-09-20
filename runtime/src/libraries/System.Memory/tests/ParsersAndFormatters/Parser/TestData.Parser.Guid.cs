@@ -14,7 +14,8 @@ namespace System.Buffers.Text.Tests
             {
                 foreach (
                     ParserTestData<Guid> testData in GuidFormatterTestData.ToParserTheoryDataCollection()
-                ) {
+                )
+                {
                     yield return testData;
                 }
 
@@ -81,7 +82,8 @@ namespace System.Buffers.Text.Tests
                         int truncationPoint = 0;
                         truncationPoint < goodText.Length;
                         truncationPoint++
-                    ) {
+                    )
+                    {
                         string truncatedText = goodText.Substring(0, truncationPoint);
                         yield return new ParserTestData<Guid>(
                             truncatedText,

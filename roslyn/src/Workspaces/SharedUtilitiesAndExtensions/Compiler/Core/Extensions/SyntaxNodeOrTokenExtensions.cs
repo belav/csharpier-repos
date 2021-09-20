@@ -12,7 +12,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
     {
         public static IEnumerable<SyntaxNodeOrToken> DepthFirstTraversal(
             this SyntaxNodeOrToken node
-        ) {
+        )
+        {
             var stack = new Stack<SyntaxNodeOrToken>();
             stack.Push(node);
 

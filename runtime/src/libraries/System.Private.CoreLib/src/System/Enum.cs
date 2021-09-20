@@ -521,7 +521,8 @@ namespace System
             bool ignoreCase,
             bool throwOnFailure,
             out object? result
-        ) {
+        )
+        {
             if (value == null)
             {
                 if (throwOnFailure)
@@ -541,7 +542,8 @@ namespace System
             bool ignoreCase,
             bool throwOnFailure,
             out object? result
-        ) {
+        )
+        {
             // Validation on the enum type itself.  Failures here are considered non-parsing failures
             // and thus always throw rather than returning false.
             RuntimeType rt = ValidateRuntimeType(enumType);
@@ -889,7 +891,8 @@ namespace System
             bool throwOnFailure,
             TypeCode type,
             out int result
-        ) {
+        )
+        {
             Debug.Assert(
                 enumType.GetEnumUnderlyingType() == typeof(sbyte)
                     || enumType.GetEnumUnderlyingType() == typeof(short)
@@ -925,7 +928,8 @@ namespace System
             }
             else if (
                 TryParseByName(enumType, value, ignoreCase, throwOnFailure, out ulong ulongResult)
-            ) {
+            )
+            {
                 result = (int)ulongResult;
                 Debug.Assert(result >= minInclusive && result <= maxInclusive);
                 return true;
@@ -944,7 +948,8 @@ namespace System
             bool throwOnFailure,
             TypeCode type,
             out uint result
-        ) {
+        )
+        {
             Debug.Assert(
                 enumType.GetEnumUnderlyingType() == typeof(byte)
                     || enumType.GetEnumUnderlyingType() == typeof(ushort)
@@ -980,7 +985,8 @@ namespace System
             }
             else if (
                 TryParseByName(enumType, value, ignoreCase, throwOnFailure, out ulong ulongResult)
-            ) {
+            )
+            {
                 result = (uint)ulongResult;
                 Debug.Assert(result <= maxInclusive);
                 return true;
@@ -997,7 +1003,8 @@ namespace System
             bool ignoreCase,
             bool throwOnFailure,
             out long result
-        ) {
+        )
+        {
             Debug.Assert(enumType.GetEnumUnderlyingType() == typeof(long));
 
             Number.ParsingStatus status = default;
@@ -1024,7 +1031,8 @@ namespace System
             }
             else if (
                 TryParseByName(enumType, value, ignoreCase, throwOnFailure, out ulong ulongResult)
-            ) {
+            )
+            {
                 result = (long)ulongResult;
                 return true;
             }
@@ -1040,7 +1048,8 @@ namespace System
             bool ignoreCase,
             bool throwOnFailure,
             out ulong result
-        ) {
+        )
+        {
             Debug.Assert(enumType.GetEnumUnderlyingType() == typeof(ulong));
 
             Number.ParsingStatus status = default;
@@ -1081,7 +1090,8 @@ namespace System
             bool ignoreCase,
             bool throwOnFailure,
             [NotNullWhen(true)] out object? result
-        ) {
+        )
+        {
             Debug.Assert(
                 enumType.GetEnumUnderlyingType() != typeof(sbyte)
                     && enumType.GetEnumUnderlyingType() != typeof(byte)
@@ -1141,7 +1151,8 @@ namespace System
             bool ignoreCase,
             bool throwOnFailure,
             out ulong result
-        ) {
+        )
+        {
             // Find the field. Let's assume that these are always static classes because the class is an enum.
             EnumInfo enumInfo = GetEnumInfo(enumType);
             string[] enumNames = enumInfo.Names;

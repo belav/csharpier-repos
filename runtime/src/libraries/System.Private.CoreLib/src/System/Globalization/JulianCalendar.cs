@@ -358,7 +358,8 @@ namespace System.Globalization
             int second,
             int millisecond,
             int era
-        ) {
+        )
+        {
             CheckYearEraRange(year, era);
             CheckMonthRange(month);
             CheckDayRange(year, month, day);

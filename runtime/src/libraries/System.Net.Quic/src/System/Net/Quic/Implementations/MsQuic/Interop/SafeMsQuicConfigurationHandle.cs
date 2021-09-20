@@ -28,7 +28,8 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
         // TODO: consider moving the static code from here to keep all the handle classes small and simple.
         public static unsafe SafeMsQuicConfigurationHandle Create(
             QuicClientConnectionOptions options
-        ) {
+        )
+        {
             // TODO: lots of ClientAuthenticationOptions are not yet supported by MsQuic.
             return Create(
                 options,
@@ -56,7 +57,8 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
             QUIC_CREDENTIAL_FLAGS flags,
             X509Certificate? certificate,
             List<SslApplicationProtocol>? alpnProtocols
-        ) {
+        )
+        {
             // TODO: some of these checks should be done by the QuicOptions type.
             if (alpnProtocols == null || alpnProtocols.Count == 0)
             {

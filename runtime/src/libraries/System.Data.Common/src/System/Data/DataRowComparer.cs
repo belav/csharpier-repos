@@ -32,7 +32,8 @@ namespace System.Data
                 || ReferenceEquals(a, DBNull.Value)
                 || b is null
                 || ReferenceEquals(b, DBNull.Value)
-            ) {
+            )
+            {
                 // (null, non-null) or (null, DBNull.Value) or vice versa
                 return false;
             }
@@ -51,7 +52,8 @@ namespace System.Data
                 || ReferenceEquals(a, DBNull.Value)
                 || b is null
                 || ReferenceEquals(b, DBNull.Value)
-            ) {
+            )
+            {
                 // (null, non-null) or (null, DBNull.Value) or vice versa
                 return false;
             }
@@ -161,7 +163,8 @@ namespace System.Data
             if (
                 leftRow.RowState == DataRowState.Deleted
                 || rightRow.RowState == DataRowState.Deleted
-            ) {
+            )
+            {
                 throw DataSetUtil.InvalidOperation(SR.DataSetLinq_CannotCompareDeletedRow);
             }
 

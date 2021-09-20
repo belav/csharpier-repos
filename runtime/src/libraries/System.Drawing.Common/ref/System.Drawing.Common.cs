@@ -33,13 +33,15 @@ namespace System.Drawing
         public System.Drawing.Bitmap Clone(
             System.Drawing.Rectangle rect,
             System.Drawing.Imaging.PixelFormat format
-        ) {
+        )
+        {
             throw null;
         }
         public System.Drawing.Bitmap Clone(
             System.Drawing.RectangleF rect,
             System.Drawing.Imaging.PixelFormat format
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Drawing.Bitmap FromHicon(System.IntPtr hicon)
@@ -79,7 +81,8 @@ namespace System.Drawing
             System.Drawing.Rectangle rect,
             System.Drawing.Imaging.ImageLockMode flags,
             System.Drawing.Imaging.PixelFormat format
-        ) {
+        )
+        {
             throw null;
         }
         public System.Drawing.Imaging.BitmapData LockBits(
@@ -87,7 +90,8 @@ namespace System.Drawing
             System.Drawing.Imaging.ImageLockMode flags,
             System.Drawing.Imaging.PixelFormat format,
             System.Drawing.Imaging.BitmapData bitmapData
-        ) {
+        )
+        {
             throw null;
         }
         public void MakeTransparent() { }
@@ -708,13 +712,15 @@ namespace System.Drawing
         public System.Drawing.BufferedGraphics Allocate(
             System.Drawing.Graphics targetGraphics,
             System.Drawing.Rectangle targetRectangle
-        ) {
+        )
+        {
             throw null;
         }
         public System.Drawing.BufferedGraphics Allocate(
             System.IntPtr targetDC,
             System.Drawing.Rectangle targetRectangle
-        ) {
+        )
+        {
             throw null;
         }
         public void Dispose() { }
@@ -747,7 +753,8 @@ namespace System.Drawing
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -757,13 +764,15 @@ namespace System.Drawing
         public static bool operator ==(
             System.Drawing.CharacterRange cr1,
             System.Drawing.CharacterRange cr2
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Drawing.CharacterRange cr1,
             System.Drawing.CharacterRange cr2
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -977,7 +986,8 @@ namespace System.Drawing
         public void Dispose() { }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         ~Font() { }
@@ -1034,20 +1044,23 @@ namespace System.Drawing
         public override bool CanConvertFrom(
             System.ComponentModel.ITypeDescriptorContext? context,
             System.Type? sourceType
-        ) {
+        )
+        {
             throw null;
         }
         public override bool CanConvertTo(
             System.ComponentModel.ITypeDescriptorContext? context,
             System.Type? destinationType
-        ) {
+        )
+        {
             throw null;
         }
         public override object? ConvertFrom(
             System.ComponentModel.ITypeDescriptorContext? context,
             System.Globalization.CultureInfo? culture,
             object value
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertTo(
@@ -1055,30 +1068,35 @@ namespace System.Drawing
             System.Globalization.CultureInfo? culture,
             object? value,
             System.Type destinationType
-        ) {
+        )
+        {
             throw null;
         }
         public override object CreateInstance(
             System.ComponentModel.ITypeDescriptorContext? context,
             System.Collections.IDictionary propertyValues
-        ) {
+        )
+        {
             throw null;
         }
         public override bool GetCreateInstanceSupported(
             System.ComponentModel.ITypeDescriptorContext? context
-        ) {
+        )
+        {
             throw null;
         }
         public override System.ComponentModel.PropertyDescriptorCollection GetProperties(
             System.ComponentModel.ITypeDescriptorContext? context,
             object? value,
             System.Attribute[]? attributes
-        ) {
+        )
+        {
             throw null;
         }
         public override bool GetPropertiesSupported(
             System.ComponentModel.ITypeDescriptorContext context
-        ) {
+        )
+        {
             throw null;
         }
         public sealed partial class FontNameConverter
@@ -1089,29 +1107,34 @@ namespace System.Drawing
             public override bool CanConvertFrom(
                 System.ComponentModel.ITypeDescriptorContext? context,
                 System.Type? sourceType
-            ) {
+            )
+            {
                 throw null;
             }
             public override object ConvertFrom(
                 System.ComponentModel.ITypeDescriptorContext? context,
                 System.Globalization.CultureInfo? culture,
                 object value
-            ) {
+            )
+            {
                 throw null;
             }
             public override System.ComponentModel.TypeConverter.StandardValuesCollection GetStandardValues(
                 System.ComponentModel.ITypeDescriptorContext? context
-            ) {
+            )
+            {
                 throw null;
             }
             public override bool GetStandardValuesExclusive(
                 System.ComponentModel.ITypeDescriptorContext? context
-            ) {
+            )
+            {
                 throw null;
             }
             public override bool GetStandardValuesSupported(
                 System.ComponentModel.ITypeDescriptorContext? context
-            ) {
+            )
+            {
                 throw null;
             }
             void System.IDisposable.Dispose() { }
@@ -1121,7 +1144,8 @@ namespace System.Drawing
             public FontUnitConverter() : base(default(System.Type)) { }
             public override System.ComponentModel.TypeConverter.StandardValuesCollection GetStandardValues(
                 System.ComponentModel.ITypeDescriptorContext? context
-            ) {
+            )
+            {
                 throw null;
             }
         }
@@ -1154,7 +1178,8 @@ namespace System.Drawing
         public void Dispose() { }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         ~FontFamily() { }
@@ -1309,14 +1334,16 @@ namespace System.Drawing
             System.Drawing.Rectangle dstrect,
             System.Drawing.Rectangle srcrect,
             System.Drawing.GraphicsUnit unit
-        ) {
+        )
+        {
             throw null;
         }
         public System.Drawing.Drawing2D.GraphicsContainer BeginContainer(
             System.Drawing.RectangleF dstrect,
             System.Drawing.RectangleF srcrect,
             System.Drawing.GraphicsUnit unit
-        ) {
+        )
+        {
             throw null;
         }
         public void Clear(System.Drawing.Color color) { }
@@ -2233,7 +2260,8 @@ namespace System.Drawing
             System.Drawing.Font font,
             System.Drawing.RectangleF layoutRect,
             System.Drawing.StringFormat? stringFormat
-        ) {
+        )
+        {
             throw null;
         }
         public System.Drawing.SizeF MeasureString(string? text, System.Drawing.Font font)
@@ -2245,14 +2273,16 @@ namespace System.Drawing
             System.Drawing.Font font,
             System.Drawing.PointF origin,
             System.Drawing.StringFormat? stringFormat
-        ) {
+        )
+        {
             throw null;
         }
         public System.Drawing.SizeF MeasureString(
             string? text,
             System.Drawing.Font font,
             System.Drawing.SizeF layoutArea
-        ) {
+        )
+        {
             throw null;
         }
         public System.Drawing.SizeF MeasureString(
@@ -2260,7 +2290,8 @@ namespace System.Drawing
             System.Drawing.Font font,
             System.Drawing.SizeF layoutArea,
             System.Drawing.StringFormat? stringFormat
-        ) {
+        )
+        {
             throw null;
         }
         public System.Drawing.SizeF MeasureString(
@@ -2270,7 +2301,8 @@ namespace System.Drawing
             System.Drawing.StringFormat? stringFormat,
             out int charactersFitted,
             out int linesFilled
-        ) {
+        )
+        {
             throw null;
         }
         public System.Drawing.SizeF MeasureString(string? text, System.Drawing.Font font, int width)
@@ -2282,7 +2314,8 @@ namespace System.Drawing
             System.Drawing.Font font,
             int width,
             System.Drawing.StringFormat? format
-        ) {
+        )
+        {
             throw null;
         }
         public void MultiplyTransform(System.Drawing.Drawing2D.Matrix matrix) { }
@@ -2448,20 +2481,23 @@ namespace System.Drawing
         public override bool CanConvertFrom(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Type sourceType
-        ) {
+        )
+        {
             throw null;
         }
         public override bool CanConvertTo(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Type destinationType
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertFrom(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Globalization.CultureInfo culture,
             object value
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertTo(
@@ -2469,7 +2505,8 @@ namespace System.Drawing
             System.Globalization.CultureInfo culture,
             object value,
             System.Type destinationType
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -2580,7 +2617,8 @@ namespace System.Drawing
         public static System.Drawing.Image FromFile(
             string filename,
             bool useEmbeddedColorManagement
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Drawing.Bitmap FromHbitmap(System.IntPtr hbitmap)
@@ -2590,7 +2628,8 @@ namespace System.Drawing
         public static System.Drawing.Bitmap FromHbitmap(
             System.IntPtr hbitmap,
             System.IntPtr hpalette
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Drawing.Image FromStream(System.IO.Stream stream)
@@ -2600,14 +2639,16 @@ namespace System.Drawing
         public static System.Drawing.Image FromStream(
             System.IO.Stream stream,
             bool useEmbeddedColorManagement
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Drawing.Image FromStream(
             System.IO.Stream stream,
             bool useEmbeddedColorManagement,
             bool validateImageData
-        ) {
+        )
+        {
             throw null;
         }
         public System.Drawing.RectangleF GetBounds(ref System.Drawing.GraphicsUnit pageUnit)
@@ -2616,7 +2657,8 @@ namespace System.Drawing
         }
         public System.Drawing.Imaging.EncoderParameters? GetEncoderParameterList(
             System.Guid encoder
-        ) {
+        )
+        {
             throw null;
         }
         public int GetFrameCount(System.Drawing.Imaging.FrameDimension dimension)
@@ -2636,7 +2678,8 @@ namespace System.Drawing
             int thumbHeight,
             System.Drawing.Image.GetThumbnailImageAbort? callback,
             System.IntPtr callbackData
-        ) {
+        )
+        {
             throw null;
         }
         public static bool IsAlphaPixelFormat(System.Drawing.Imaging.PixelFormat pixfmt)
@@ -2674,7 +2717,8 @@ namespace System.Drawing
         public int SelectActiveFrame(
             System.Drawing.Imaging.FrameDimension dimension,
             int frameIndex
-        ) {
+        )
+        {
             throw null;
         }
         public void SetPropertyItem(System.Drawing.Imaging.PropertyItem propitem) { }
@@ -2693,7 +2737,8 @@ namespace System.Drawing
         ) { }
         public static bool CanAnimate(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] System.Drawing.Image? image
-        ) {
+        )
+        {
             throw null;
         }
         public static void StopAnimate(
@@ -2709,20 +2754,23 @@ namespace System.Drawing
         public override bool CanConvertFrom(
             System.ComponentModel.ITypeDescriptorContext? context,
             System.Type? sourceType
-        ) {
+        )
+        {
             throw null;
         }
         public override bool CanConvertTo(
             System.ComponentModel.ITypeDescriptorContext? context,
             System.Type? destinationType
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertFrom(
             System.ComponentModel.ITypeDescriptorContext? context,
             System.Globalization.CultureInfo? culture,
             object value
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertTo(
@@ -2730,19 +2778,22 @@ namespace System.Drawing
             System.Globalization.CultureInfo? culture,
             object? value,
             System.Type destinationType
-        ) {
+        )
+        {
             throw null;
         }
         public override System.ComponentModel.PropertyDescriptorCollection GetProperties(
             System.ComponentModel.ITypeDescriptorContext? context,
             object? value,
             System.Attribute[]? attributes
-        ) {
+        )
+        {
             throw null;
         }
         public override bool GetPropertiesSupported(
             System.ComponentModel.ITypeDescriptorContext? context
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -2752,20 +2803,23 @@ namespace System.Drawing
         public override bool CanConvertFrom(
             System.ComponentModel.ITypeDescriptorContext? context,
             System.Type? sourceType
-        ) {
+        )
+        {
             throw null;
         }
         public override bool CanConvertTo(
             System.ComponentModel.ITypeDescriptorContext? context,
             System.Type? destinationType
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertFrom(
             System.ComponentModel.ITypeDescriptorContext? context,
             System.Globalization.CultureInfo? culture,
             object value
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertTo(
@@ -2773,17 +2827,20 @@ namespace System.Drawing
             System.Globalization.CultureInfo? culture,
             object? value,
             System.Type destinationType
-        ) {
+        )
+        {
             throw null;
         }
         public override System.ComponentModel.TypeConverter.StandardValuesCollection GetStandardValues(
             System.ComponentModel.ITypeDescriptorContext? context
-        ) {
+        )
+        {
             throw null;
         }
         public override bool GetStandardValuesSupported(
             System.ComponentModel.ITypeDescriptorContext? context
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -3598,7 +3655,8 @@ namespace System.Drawing
             float width,
             float height,
             System.Drawing.Graphics? g
-        ) {
+        )
+        {
             throw null;
         }
         public void MakeEmpty() { }
@@ -4201,7 +4259,8 @@ namespace System.Drawing
         public ToolboxBitmapAttribute(System.Type t, string name) { }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? value
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -4232,7 +4291,8 @@ namespace System.Drawing
             System.Type t,
             string? imageName,
             bool large
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -4402,7 +4462,8 @@ namespace System.Drawing.Drawing2D
         public void GetStrokeCaps(
             out System.Drawing.Drawing2D.LineCap startCap,
             out System.Drawing.Drawing2D.LineCap endCap
-        ) {
+        )
+        {
             throw null;
         }
         public void SetStrokeCaps(
@@ -4631,7 +4692,8 @@ namespace System.Drawing.Drawing2D
         public System.Drawing.RectangleF GetBounds(
             System.Drawing.Drawing2D.Matrix? matrix,
             System.Drawing.Pen? pen
-        ) {
+        )
+        {
             throw null;
         }
         public System.Drawing.PointF GetLastPoint()
@@ -4646,7 +4708,8 @@ namespace System.Drawing.Drawing2D
             System.Drawing.Point pt,
             System.Drawing.Pen pen,
             System.Drawing.Graphics? graphics
-        ) {
+        )
+        {
             throw null;
         }
         public bool IsOutlineVisible(System.Drawing.PointF point, System.Drawing.Pen pen)
@@ -4657,7 +4720,8 @@ namespace System.Drawing.Drawing2D
             System.Drawing.PointF pt,
             System.Drawing.Pen pen,
             System.Drawing.Graphics? graphics
-        ) {
+        )
+        {
             throw null;
         }
         public bool IsOutlineVisible(int x, int y, System.Drawing.Pen pen)
@@ -4669,7 +4733,8 @@ namespace System.Drawing.Drawing2D
             int y,
             System.Drawing.Pen pen,
             System.Drawing.Graphics? graphics
-        ) {
+        )
+        {
             throw null;
         }
         public bool IsOutlineVisible(float x, float y, System.Drawing.Pen pen)
@@ -4681,7 +4746,8 @@ namespace System.Drawing.Drawing2D
             float y,
             System.Drawing.Pen pen,
             System.Drawing.Graphics? graphics
-        ) {
+        )
+        {
             throw null;
         }
         public bool IsVisible(System.Drawing.Point point)
@@ -4764,7 +4830,8 @@ namespace System.Drawing.Drawing2D
             ref byte[] types,
             int startIndex,
             int endIndex
-        ) {
+        )
+        {
             throw null;
         }
         public void Dispose() { }
@@ -5084,7 +5151,8 @@ namespace System.Drawing.Drawing2D
         public void Dispose() { }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         ~Matrix() { }
@@ -5982,7 +6050,8 @@ namespace System.Drawing.Imaging
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? o
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -6238,7 +6307,8 @@ namespace System.Drawing.Imaging
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? o
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -6471,18 +6541,21 @@ namespace System.Drawing.Imaging
         }
         public static System.Drawing.Imaging.MetafileHeader GetMetafileHeader(
             System.IntPtr henhmetafile
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Drawing.Imaging.MetafileHeader GetMetafileHeader(
             System.IntPtr hmetafile,
             System.Drawing.Imaging.WmfPlaceableFileHeader wmfHeader
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Drawing.Imaging.MetafileHeader GetMetafileHeader(
             System.IO.Stream stream
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Drawing.Imaging.MetafileHeader GetMetafileHeader(string fileName)
@@ -6794,7 +6867,8 @@ namespace System.Drawing.Printing
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -6804,13 +6878,15 @@ namespace System.Drawing.Printing
         public static bool operator ==(
             System.Drawing.Printing.Margins? m1,
             System.Drawing.Printing.Margins? m2
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Drawing.Printing.Margins? m1,
             System.Drawing.Printing.Margins? m2
-        ) {
+        )
+        {
             throw null;
         }
         public override string ToString()
@@ -6824,20 +6900,23 @@ namespace System.Drawing.Printing
         public override bool CanConvertFrom(
             System.ComponentModel.ITypeDescriptorContext? context,
             System.Type? sourceType
-        ) {
+        )
+        {
             throw null;
         }
         public override bool CanConvertTo(
             System.ComponentModel.ITypeDescriptorContext? context,
             System.Type? destinationType
-        ) {
+        )
+        {
             throw null;
         }
         public override object? ConvertFrom(
             System.ComponentModel.ITypeDescriptorContext? context,
             System.Globalization.CultureInfo? culture,
             object value
-        ) {
+        )
+        {
             throw null;
         }
         public override object ConvertTo(
@@ -6845,18 +6924,21 @@ namespace System.Drawing.Printing
             System.Globalization.CultureInfo? culture,
             object? value,
             System.Type destinationType
-        ) {
+        )
+        {
             throw null;
         }
         public override object CreateInstance(
             System.ComponentModel.ITypeDescriptorContext? context,
             System.Collections.IDictionary propertyValues
-        ) {
+        )
+        {
             throw null;
         }
         public override bool GetCreateInstanceSupported(
             System.ComponentModel.ITypeDescriptorContext? context
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -7157,7 +7239,8 @@ namespace System.Drawing.Printing
         public override System.Drawing.Graphics OnStartPage(
             System.Drawing.Printing.PrintDocument document,
             System.Drawing.Printing.PrintPageEventArgs e
-        ) {
+        )
+        {
             throw null;
         }
         public override void OnStartPrint(
@@ -7189,7 +7272,8 @@ namespace System.Drawing.Printing
         public virtual System.Drawing.Graphics? OnStartPage(
             System.Drawing.Printing.PrintDocument document,
             System.Drawing.Printing.PrintPageEventArgs e
-        ) {
+        )
+        {
             throw null;
         }
         public virtual void OnStartPrint(
@@ -7426,13 +7510,15 @@ namespace System.Drawing.Printing
         }
         public System.Drawing.Graphics CreateMeasurementGraphics(
             System.Drawing.Printing.PageSettings pageSettings
-        ) {
+        )
+        {
             throw null;
         }
         public System.Drawing.Graphics CreateMeasurementGraphics(
             System.Drawing.Printing.PageSettings pageSettings,
             bool honorOriginAtMargins
-        ) {
+        )
+        {
             throw null;
         }
         public System.IntPtr GetHdevmode()
@@ -7652,42 +7738,48 @@ namespace System.Drawing.Printing
             double value,
             System.Drawing.Printing.PrinterUnit fromUnit,
             System.Drawing.Printing.PrinterUnit toUnit
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Drawing.Point Convert(
             System.Drawing.Point value,
             System.Drawing.Printing.PrinterUnit fromUnit,
             System.Drawing.Printing.PrinterUnit toUnit
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Drawing.Printing.Margins Convert(
             System.Drawing.Printing.Margins value,
             System.Drawing.Printing.PrinterUnit fromUnit,
             System.Drawing.Printing.PrinterUnit toUnit
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Drawing.Rectangle Convert(
             System.Drawing.Rectangle value,
             System.Drawing.Printing.PrinterUnit fromUnit,
             System.Drawing.Printing.PrinterUnit toUnit
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Drawing.Size Convert(
             System.Drawing.Size value,
             System.Drawing.Printing.PrinterUnit fromUnit,
             System.Drawing.Printing.PrinterUnit toUnit
-        ) {
+        )
+        {
             throw null;
         }
         public static int Convert(
             int value,
             System.Drawing.Printing.PrinterUnit fromUnit,
             System.Drawing.Printing.PrinterUnit toUnit
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -7773,7 +7865,8 @@ namespace System.Drawing.Printing
         public override System.Drawing.Graphics OnStartPage(
             System.Drawing.Printing.PrintDocument document,
             System.Drawing.Printing.PrintPageEventArgs e
-        ) {
+        )
+        {
             throw null;
         }
         public override void OnStartPrint(

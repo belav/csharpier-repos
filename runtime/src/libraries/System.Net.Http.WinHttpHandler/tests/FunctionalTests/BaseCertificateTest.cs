@@ -47,7 +47,8 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
             X509Certificate2 certificate,
             X509Chain chain,
             SslPolicyErrors sslPolicyErrors
-        ) {
+        )
+        {
             _validationCallbackHistory.WasCalled = true;
             _validationCallbackHistory.CertificateSubject = certificate.Subject;
             foreach (var element in chain.ChainElements)

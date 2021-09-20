@@ -68,7 +68,8 @@ namespace System.Reflection.Emit
             Type[][]? parameterTypeOptionalCustomModifiers,
             ModuleBuilder mod,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TypeBuilder type
-        ) {
+        )
+        {
             if (name == null)
                 throw new ArgumentNullException(nameof(name));
 
@@ -496,7 +497,8 @@ namespace System.Reflection.Emit
             Binder? binder,
             object?[]? parameters,
             CultureInfo? culture
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.NotSupported_DynamicModule);
         }
 
@@ -669,7 +671,8 @@ namespace System.Reflection.Emit
                     i = m_containingType.m_lastTokenizedMethod + 1;
                     i < m_containingType.m_listMethods.Count;
                     ++i
-                ) {
+                )
+                {
                     currentMethod = m_containingType.m_listMethods[i];
                     currentToken = currentMethod.GetTokenNoLock();
 
@@ -737,7 +740,8 @@ namespace System.Reflection.Emit
             Type[]? parameterTypes,
             Type[][]? parameterTypeRequiredCustomModifiers,
             Type[][]? parameterTypeOptionalCustomModifiers
-        ) {
+        )
+        {
             // We should throw InvalidOperation_MethodBuilderBaked here if the method signature has been baked.
             // But we cannot because that would be a breaking change from V2.
             if (m_token != 0)
@@ -775,7 +779,8 @@ namespace System.Reflection.Emit
             int position,
             ParameterAttributes attributes,
             string? strParamName
-        ) {
+        )
+        {
             if (position < 0)
                 throw new ArgumentOutOfRangeException(SR.ArgumentOutOfRange_ParamSequence);
 
@@ -826,7 +831,8 @@ namespace System.Reflection.Emit
                 || (m_dwMethodImplFlags & MethodImplAttributes.Unmanaged) != 0
                 || (m_iAttributes & MethodAttributes.PinvokeImpl) != 0
                 || m_isDllImport
-            ) {
+            )
+            {
                 // cannot attach method body if methodimpl is marked not marked as managed IL
                 //
                 throw new InvalidOperationException(SR.InvalidOperation_ShouldNotHaveMethodBody);
@@ -1008,7 +1014,8 @@ namespace System.Reflection.Emit
             int slot,
             int startOffset,
             int endOffset
-        ) {
+        )
+        {
             // make sure that arrays are large enough to hold addition info
             EnsureCapacity();
             m_iStartOffset[m_iLocalSymCount] = startOffset;
@@ -1083,7 +1090,8 @@ namespace System.Reflection.Emit
             int handlerEndOffset,
             int kind,
             int exceptionTypeToken
-        ) {
+        )
+        {
             Debug.Assert(tryStartOffset >= 0);
             Debug.Assert(tryEndOffset >= 0);
             Debug.Assert(filterOffset >= 0);

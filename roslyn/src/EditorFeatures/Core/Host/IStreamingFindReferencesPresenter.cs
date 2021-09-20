@@ -72,7 +72,8 @@ namespace Microsoft.CodeAnalysis.Editor.Host
             string title,
             ImmutableArray<DefinitionItem> items,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Can only navigate or present items on UI thread.
             await threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
@@ -96,7 +97,8 @@ namespace Microsoft.CodeAnalysis.Editor.Host
                         activateTab: true,
                         cancellationToken
                     )
-                ) {
+                )
+                {
                     return true;
                 }
             }

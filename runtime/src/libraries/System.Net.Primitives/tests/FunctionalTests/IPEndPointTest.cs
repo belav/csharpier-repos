@@ -192,7 +192,8 @@ namespace System.Net.Primitives.Functional.Tests
             IPAddress address,
             int size,
             IPAddress expectedAddress
-        ) {
+        )
+        {
             var endPoint = new IPEndPoint(address, 500);
             var socketAddress = new SocketAddress(address.AddressFamily, size);
 
@@ -234,7 +235,8 @@ namespace System.Net.Primitives.Functional.Tests
         public static void Create_InvalidAddressFamily_ThrowsArgumentException(
             IPEndPoint endPoint,
             SocketAddress socketAddress
-        ) {
+        )
+        {
             AssertExtensions.Throws<ArgumentException>(
                 "socketAddress",
                 () => endPoint.Create(socketAddress)
@@ -281,7 +283,8 @@ namespace System.Net.Primitives.Functional.Tests
             IPEndPoint endPoint,
             object obj,
             bool expected
-        ) {
+        )
+        {
             Assert.Equal(expected, endPoint.Equals(obj));
             if (obj is IPEndPoint)
             {

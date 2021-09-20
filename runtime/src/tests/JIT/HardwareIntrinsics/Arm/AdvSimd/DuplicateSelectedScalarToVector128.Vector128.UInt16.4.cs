@@ -129,7 +129,8 @@ namespace JIT.HardwareIntrinsics.Arm
                     (alignment != 16 && alignment != 8)
                     || (alignment * 2) < sizeOfinArray
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -188,7 +189,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario(
                 ImmUnaryOpTest__DuplicateSelectedScalarToVector128_Vector128_UInt16_4 testClass
-            ) {
+            )
+            {
                 var result = AdvSimd.DuplicateSelectedScalarToVector128(_fld, 4);
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
@@ -197,7 +199,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario_Load(
                 ImmUnaryOpTest__DuplicateSelectedScalarToVector128_Vector128_UInt16_4 testClass
-            ) {
+            )
+            {
                 fixed (Vector128<UInt16>* pFld = &_fld)
                 {
                     var result = AdvSimd.DuplicateSelectedScalarToVector128(
@@ -498,7 +501,8 @@ namespace JIT.HardwareIntrinsics.Arm
             Vector128<UInt16> firstOp,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             UInt16[] inArray = new UInt16[Op1ElementCount];
             UInt16[] outArray = new UInt16[RetElementCount];
 
@@ -516,7 +520,8 @@ namespace JIT.HardwareIntrinsics.Arm
             void* firstOp,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             UInt16[] inArray = new UInt16[Op1ElementCount];
             UInt16[] outArray = new UInt16[RetElementCount];
 
@@ -538,7 +543,8 @@ namespace JIT.HardwareIntrinsics.Arm
             UInt16[] firstOp,
             UInt16[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             for (var i = 0; i < RetElementCount; i++)

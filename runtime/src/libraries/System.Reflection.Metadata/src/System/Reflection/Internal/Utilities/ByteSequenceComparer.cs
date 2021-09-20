@@ -45,7 +45,8 @@ namespace System.Reflection.Internal
             byte[] right,
             int rightStart,
             int length
-        ) {
+        )
+        {
             if (left == null || right == null)
             {
                 return ReferenceEquals(left, right);
@@ -117,7 +118,8 @@ namespace System.Reflection.Internal
         bool IEqualityComparer<ImmutableArray<byte>>.Equals(
             ImmutableArray<byte> x,
             ImmutableArray<byte> y
-        ) {
+        )
+        {
             return Equals(x, y);
         }
 

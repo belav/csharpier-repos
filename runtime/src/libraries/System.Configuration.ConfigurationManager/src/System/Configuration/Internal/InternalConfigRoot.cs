@@ -248,7 +248,8 @@ namespace System.Configuration.Internal
             string[] parts,
             out int nextIndex,
             out BaseConfigurationRecord currentRecord
-        ) {
+        )
+        {
             currentRecord = RootConfigRecord;
             nextIndex = 0;
             for (; nextIndex < parts.Length; nextIndex++)
@@ -313,7 +314,8 @@ namespace System.Configuration.Internal
             BaseConfigurationRecord configRecord,
             string configKey,
             bool forceEvaluation
-        ) {
+        )
+        {
             string[] parts = ConfigPathUtility.GetParts(configRecord.ConfigPath);
 
             try

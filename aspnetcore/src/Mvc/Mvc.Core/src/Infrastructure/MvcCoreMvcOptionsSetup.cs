@@ -38,7 +38,8 @@ namespace Microsoft.AspNetCore.Mvc
             IHttpRequestStreamReaderFactory readerFactory,
             ILoggerFactory loggerFactory,
             IOptions<JsonOptions> jsonOptions
-        ) {
+        )
+        {
             if (readerFactory == null)
             {
                 throw new ArgumentNullException(nameof(readerFactory));
@@ -141,7 +142,8 @@ namespace Microsoft.AspNetCore.Mvc
 
         internal static void ConfigureAdditionalModelMetadataDetailsProviders(
             IList<IMetadataDetailsProvider> modelMetadataDetailsProviders
-        ) {
+        )
+        {
             // Don't bind the Type class by default as it's expensive. A user can override this behavior
             // by altering the collection of providers.
             modelMetadataDetailsProviders.Add(new ExcludeBindingMetadataProvider(typeof(Type)));

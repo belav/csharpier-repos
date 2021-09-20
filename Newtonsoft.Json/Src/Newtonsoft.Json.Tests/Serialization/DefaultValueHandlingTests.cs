@@ -81,7 +81,8 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             public DefaultValueWithConstructor(
                 [JsonProperty(PropertyName = "myText")] string text = DefaultText
-            ) {
+            )
+            {
                 Text = text;
             }
         }

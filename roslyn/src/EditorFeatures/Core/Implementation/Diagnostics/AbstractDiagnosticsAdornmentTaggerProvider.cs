@@ -23,12 +23,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Diagnostics
             IDiagnosticService diagnosticService,
             IForegroundNotificationService notificationService,
             IAsynchronousOperationListenerProvider listenerProvider
-        ) : base(
-            threadingContext,
-            diagnosticService,
-            notificationService,
-            listenerProvider.GetListener(FeatureAttribute.ErrorSquiggles)
-        ) { }
+        )
+            : base(
+                threadingContext,
+                diagnosticService,
+                notificationService,
+                listenerProvider.GetListener(FeatureAttribute.ErrorSquiggles)
+            ) { }
 
         protected internal sealed override bool IsEnabled => true;
 
@@ -37,7 +38,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Diagnostics
             bool isLiveUpdate,
             SnapshotSpan span,
             DiagnosticData data
-        ) {
+        )
+        {
             var errorTag = CreateTag(workspace, data);
             if (errorTag == null)
             {
@@ -63,7 +65,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Diagnostics
                 workspace is object
                 && diagnostic.HelpLink is { } helpLink
                 && Uri.TryCreate(helpLink, UriKind.Absolute, out var helpLinkUri)
-            ) {
+            )
+            {
                 navigationAction = new QuickInfoHyperLink(workspace, helpLinkUri).NavigationAction;
                 tooltip = helpLink;
             }
@@ -95,7 +98,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Diagnostics
             SnapshotSpan span,
             int minimumLength,
             int maximumLength
-        ) {
+        )
+        {
             var snapshot = span.Snapshot;
 
             // new length

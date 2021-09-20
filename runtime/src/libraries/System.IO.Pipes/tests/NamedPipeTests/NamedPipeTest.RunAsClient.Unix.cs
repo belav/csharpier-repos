@@ -48,7 +48,8 @@ namespace System.IO.Pipes.Tests
                     pipeName,
                     pairIDString
                 )
-            ) {
+            )
+            {
                 // Connect as the unpriveleged user, but RunAsClient as the superuser
                 outbound.WaitForConnection();
                 Assert.NotEqual(-1, seteuid(0));

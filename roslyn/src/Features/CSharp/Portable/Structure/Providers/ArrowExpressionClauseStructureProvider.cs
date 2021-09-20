@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
             ref TemporaryArray<BlockSpan> spans,
             BlockStructureOptionProvider optionProvider,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var previousToken = node.ArrowToken.GetPreviousToken();
             spans.Add(
                 new BlockSpan(

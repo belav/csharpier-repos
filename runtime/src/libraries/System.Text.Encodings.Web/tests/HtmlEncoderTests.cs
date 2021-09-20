@@ -131,7 +131,8 @@ namespace System.Text.Encodings.Web.Tests
         public void HtmlEncode_AllRangesAllowed_StillEncodesForbiddenChars_Simple(
             string input,
             string expected
-        ) {
+        )
+        {
             // Arrange
             HtmlEncoder encoder = HtmlEncoder.Create(UnicodeRanges.All);
 

@@ -14,14 +14,16 @@ namespace Microsoft.JSInterop
             string? argsJson,
             JSCallResultType resultType,
             long targetInstanceId
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
         protected internal override void EndInvokeDotNet(
             DotNetInvocationInfo invocationInfo,
             in DotNetInvocationResult invocationResult
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
     }

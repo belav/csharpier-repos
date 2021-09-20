@@ -79,7 +79,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             Solution? newSolution,
             double zoomLevel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             // Note: The order in which previews are added to the below list is significant.
@@ -106,7 +107,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                             onlyGetDocumentsWithTextChanges: true,
                             ignoreUnchangeableDocuments
                         )
-                    ) {
+                    )
+                    {
                         cancellationToken.ThrowIfCancellationRequested();
                         previewItems.Add(
                             new SolutionPreviewItem(
@@ -402,7 +404,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                 foreach (
                     var projectChanges in solutionChanges.GetProjectChanges()
                         .Where(ProjectReferencesChanged)
-                ) {
+                )
+                {
                     cancellationToken.ThrowIfCancellationRequested();
                     previewItems.Add(
                         new SolutionPreviewItem(
@@ -466,7 +469,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             TextDocument document,
             double zoomLevel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // IProjectionBufferFactoryService is a Visual Studio API which is not documented as free-threaded
             await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
@@ -536,7 +540,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             Document document,
             double zoomLevel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return CreateAddedTextDocumentPreviewViewAsync(
                 document,
                 zoomLevel,
@@ -550,7 +555,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             TextDocument document,
             double zoomLevel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return CreateAddedTextDocumentPreviewViewAsync(
                 document,
                 zoomLevel,
@@ -563,7 +569,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             TextDocument document,
             double zoomLevel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return CreateAddedTextDocumentPreviewViewAsync(
                 document,
                 zoomLevel,
@@ -583,7 +590,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             TextDocument document,
             double zoomLevel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // IProjectionBufferFactoryService is a Visual Studio API which is not documented as free-threaded
             await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
@@ -663,7 +671,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             Document document,
             double zoomLevel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return CreateRemovedTextDocumentPreviewViewAsync(
                 document,
                 zoomLevel,
@@ -677,7 +686,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             TextDocument document,
             double zoomLevel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return CreateRemovedTextDocumentPreviewViewAsync(
                 document,
                 zoomLevel,
@@ -690,7 +700,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             TextDocument document,
             double zoomLevel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return CreateRemovedTextDocumentPreviewViewAsync(
                 document,
                 zoomLevel,
@@ -716,7 +727,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             Document newDocument,
             double zoomLevel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // CreateNewBufferAsync must be called from the main thread
             await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
@@ -843,7 +855,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             TextDocument newDocument,
             double zoomLevel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(
                 oldDocument.Kind == TextDocumentKind.AdditionalDocument
                     || oldDocument.Kind == TextDocumentKind.AnalyzerConfigDocument
@@ -916,7 +929,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             TextDocument newDocument,
             double zoomLevel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return CreateChangedAdditionalOrAnalyzerConfigDocumentPreviewViewAsync(
                 oldDocument,
                 newDocument,
@@ -930,7 +944,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             TextDocument newDocument,
             double zoomLevel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return CreateChangedAdditionalOrAnalyzerConfigDocumentPreviewViewAsync(
                 oldDocument,
                 newDocument,
@@ -949,7 +964,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             PreviewWorkspace rightWorkspace,
             double zoomLevel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (!(originalSpans.Any() && changedSpans.Any()))
             {
                 // Both line spans must be non-empty. Otherwise, below projection buffer factory API call will throw.
@@ -1003,7 +1019,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             IEnumerable<Span> conflictSpans,
             IEnumerable<Span> warningSpans,
             IEnumerable<Span> suppressDiagnosticsSpans
-        ) {
+        )
+        {
             // Attach the spans to the buffer.
             newBuffer.Properties.AddProperty(
                 PredefinedPreviewTaggerKeys.ConflictSpansKey,
@@ -1025,7 +1042,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
         private async ValueTask<ITextBuffer> CreateNewBufferAsync(
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
             var contentTypeService =
@@ -1041,7 +1059,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
         private async ValueTask<ITextBuffer> CreateNewPlainTextBufferAsync(
             TextDocument document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // ITextBufferFactoryService is a Visual Studio API which is not documented as free-threaded
             await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
@@ -1068,7 +1087,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             IProjectionBuffer changedBuffer,
             double zoomLevel,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // IWpfDifferenceViewerFactoryService is a Visual Studio API which is not documented as free-threaded
             await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
@@ -1128,7 +1148,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             ITextSnapshot textSnapshot,
             NormalizedSpanCollection allSpans,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             var result = new List<LineSpan>();
@@ -1178,7 +1199,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                 if (
                     nextLineSpan.Start >= lastLineSpan.Start
                     && nextLineSpan.Start <= (lastLineSpan.End + 1)
-                ) {
+                )
+                {
                     nextLineSpan = LineSpan.FromBounds(lastLineSpan.Start, nextLineSpan.End);
                     lineSpans.RemoveAt(lineSpans.Count - 1);
                 }
@@ -1191,7 +1213,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             TextDocument oldDocument,
             TextDocument newDocument,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
 
             // Get the text that's actually in the editor.
@@ -1220,7 +1243,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
         private static NormalizedSpanCollection GetOriginalSpans(
             IHierarchicalDifferenceCollection diffResult,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             var lineSpans = new List<Span>();
 
@@ -1237,7 +1261,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
         private static NormalizedSpanCollection GetChangedSpans(
             IHierarchicalDifferenceCollection diffResult,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             var lineSpans = new List<Span>();
 

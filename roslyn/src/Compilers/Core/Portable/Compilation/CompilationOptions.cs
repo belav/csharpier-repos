@@ -292,7 +292,8 @@ namespace Microsoft.CodeAnalysis
             StrongNameProvider? strongNameProvider,
             MetadataImportOptions metadataImportOptions,
             bool referencesSupersedeLowerVersions
-        ) {
+        )
+        {
             this.OutputKind = outputKind;
             this.ModuleName = moduleName;
             this.MainTypeName = mainTypeName;
@@ -388,7 +389,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public CompilationOptions WithSpecificDiagnosticOptions(
             ImmutableDictionary<string, ReportDiagnostic>? value
-        ) {
+        )
+        {
             return CommonWithSpecificDiagnosticOptions(value);
         }
 
@@ -397,7 +399,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public CompilationOptions WithSpecificDiagnosticOptions(
             IEnumerable<KeyValuePair<string, ReportDiagnostic>> value
-        ) {
+        )
+        {
             return CommonWithSpecificDiagnosticOptions(value);
         }
 
@@ -591,7 +594,8 @@ namespace Microsoft.CodeAnalysis
         internal void ValidateOptions(
             ArrayBuilder<Diagnostic> builder,
             CommonMessageProvider messageProvider
-        ) {
+        )
+        {
             if (!CryptoPublicKey.IsEmpty)
             {
                 if (CryptoKeyFile != null)

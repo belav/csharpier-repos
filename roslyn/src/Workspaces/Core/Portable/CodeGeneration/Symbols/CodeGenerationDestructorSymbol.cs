@@ -13,19 +13,20 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         public CodeGenerationDestructorSymbol(
             INamedTypeSymbol containingType,
             ImmutableArray<AttributeData> attributes
-        ) : base(
-            containingType,
-            attributes,
-            Accessibility.NotApplicable,
-            default,
-            returnType: null,
-            refKind: RefKind.None,
-            explicitInterfaceImplementations: default,
-            name: string.Empty,
-            typeParameters: ImmutableArray<ITypeParameterSymbol>.Empty,
-            parameters: ImmutableArray<IParameterSymbol>.Empty,
-            returnTypeAttributes: ImmutableArray<AttributeData>.Empty
-        ) { }
+        )
+            : base(
+                containingType,
+                attributes,
+                Accessibility.NotApplicable,
+                default,
+                returnType: null,
+                refKind: RefKind.None,
+                explicitInterfaceImplementations: default,
+                name: string.Empty,
+                typeParameters: ImmutableArray<ITypeParameterSymbol>.Empty,
+                parameters: ImmutableArray<IParameterSymbol>.Empty,
+                returnTypeAttributes: ImmutableArray<AttributeData>.Empty
+            ) { }
 
         public override MethodKind MethodKind => MethodKind.Destructor;
 

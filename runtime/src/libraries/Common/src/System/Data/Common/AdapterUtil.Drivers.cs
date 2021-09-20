@@ -12,7 +12,8 @@ namespace System.Data.Common
             object? state,
             int dueTime,
             int period
-        ) {
+        )
+        {
             // Don't capture the current ExecutionContext and its AsyncLocals onto
             // a global timer causing them to live forever
             bool restoreFlow = false;

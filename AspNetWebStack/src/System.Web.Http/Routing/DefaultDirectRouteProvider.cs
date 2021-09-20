@@ -36,7 +36,8 @@ namespace System.Web.Http.Routing
             HttpControllerDescriptor controllerDescriptor,
             IReadOnlyList<HttpActionDescriptor> actionDescriptors,
             IInlineConstraintResolver constraintResolver
-        ) {
+        )
+        {
             List<RouteEntry> entries = new List<RouteEntry>();
 
             List<HttpActionDescriptor> actionsWithoutRoutes = new List<HttpActionDescriptor>();
@@ -97,7 +98,8 @@ namespace System.Web.Http.Routing
         /// </remarks>
         protected virtual IReadOnlyList<IDirectRouteFactory> GetControllerRouteFactories(
             HttpControllerDescriptor controllerDescriptor
-        ) {
+        )
+        {
             Collection<IDirectRouteFactory> newFactories =
                 controllerDescriptor.GetCustomAttributes<IDirectRouteFactory>(inherit: false);
 
@@ -131,7 +133,8 @@ namespace System.Web.Http.Routing
         /// </remarks>
         protected virtual IReadOnlyList<IDirectRouteFactory> GetActionRouteFactories(
             HttpActionDescriptor actionDescriptor
-        ) {
+        )
+        {
             // Ignore the Route attributes from inherited actions.
             ReflectedHttpActionDescriptor reflectedActionDescriptor =
                 actionDescriptor as ReflectedHttpActionDescriptor;
@@ -140,7 +143,8 @@ namespace System.Web.Http.Routing
                 && reflectedActionDescriptor.MethodInfo != null
                 && reflectedActionDescriptor.MethodInfo.DeclaringType
                     != actionDescriptor.ControllerDescriptor.ControllerType
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -180,7 +184,8 @@ namespace System.Web.Http.Routing
             IReadOnlyList<HttpActionDescriptor> actionDescriptors,
             IReadOnlyList<IDirectRouteFactory> factories,
             IInlineConstraintResolver constraintResolver
-        ) {
+        )
+        {
             return CreateRouteEntries(
                 GetRoutePrefix(controllerDescriptor),
                 factories,
@@ -202,7 +207,8 @@ namespace System.Web.Http.Routing
             HttpActionDescriptor actionDescriptor,
             IReadOnlyList<IDirectRouteFactory> factories,
             IInlineConstraintResolver constraintResolver
-        ) {
+        )
+        {
             return CreateRouteEntries(
                 GetRoutePrefix(actionDescriptor.ControllerDescriptor),
                 factories,
@@ -274,7 +280,8 @@ namespace System.Web.Http.Routing
             IReadOnlyCollection<HttpActionDescriptor> actions,
             IInlineConstraintResolver constraintResolver,
             bool targetIsAction
-        ) {
+        )
+        {
             List<RouteEntry> entries = new List<RouteEntry>();
             foreach (IDirectRouteFactory factory in factories)
             {
@@ -297,7 +304,8 @@ namespace System.Web.Http.Routing
             IReadOnlyCollection<HttpActionDescriptor> actions,
             IInlineConstraintResolver constraintResolver,
             bool targetIsAction
-        ) {
+        )
+        {
             Contract.Assert(factory != null);
 
             DirectRouteFactoryContext context = new DirectRouteFactoryContext(

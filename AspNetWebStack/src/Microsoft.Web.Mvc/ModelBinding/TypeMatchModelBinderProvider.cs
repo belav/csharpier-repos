@@ -12,7 +12,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
         public override IExtensibleModelBinder GetBinder(
             ControllerContext controllerContext,
             ExtensibleModelBindingContext bindingContext
-        ) {
+        )
+        {
             return (TypeMatchModelBinder.GetCompatibleValueProviderResult(bindingContext) != null)
               ? new TypeMatchModelBinder()
               : null /* no match */

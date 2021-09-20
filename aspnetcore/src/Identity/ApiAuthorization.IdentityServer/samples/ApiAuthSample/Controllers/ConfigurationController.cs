@@ -9,7 +9,8 @@ namespace ApiAuthSample.Controllers
 
         public ConfigurationController(
             IClientRequestParametersProvider clientRequestParametersProvider
-        ) {
+        )
+        {
             _clientRequestParametersProvider = clientRequestParametersProvider;
         }
 

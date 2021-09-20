@@ -39,7 +39,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             string displayColumn,
             string sortColumn,
             bool sortDescending
-        ) {
+        )
+        {
             var attribute = new DisplayColumnAttribute(displayColumn, sortColumn, sortDescending);
             Assert.Equal(displayColumn, attribute.DisplayColumn);
             Assert.Equal(sortColumn, attribute.SortColumn);

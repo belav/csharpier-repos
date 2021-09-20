@@ -138,7 +138,8 @@ namespace Microsoft.CodeAnalysis
         public static ImmutableArray<TResult> SelectAsArray<TItem, TResult>(
             this ImmutableArray<TItem> items,
             Func<TItem, TResult> map
-        ) {
+        )
+        {
             return ImmutableArray.CreateRange(items, map);
         }
 
@@ -156,7 +157,8 @@ namespace Microsoft.CodeAnalysis
             this ImmutableArray<TItem> items,
             Func<TItem, TArg, TResult> map,
             TArg arg
-        ) {
+        )
+        {
             return ImmutableArray.CreateRange(items, map, arg);
         }
 
@@ -174,7 +176,8 @@ namespace Microsoft.CodeAnalysis
             this ImmutableArray<TItem> items,
             Func<TItem, int, TArg, TResult> map,
             TArg arg
-        ) {
+        )
+        {
             switch (items.Length)
             {
                 case 0:
@@ -225,7 +228,8 @@ namespace Microsoft.CodeAnalysis
             this ImmutableArray<TItem> array,
             Func<TItem, bool> predicate,
             Func<TItem, TResult> selector
-        ) {
+        )
+        {
             if (array.Length == 0)
             {
                 return ImmutableArray<TResult>.Empty;
@@ -250,7 +254,8 @@ namespace Microsoft.CodeAnalysis
             this ImmutableArray<TItem> array,
             Func<TItem, CancellationToken, ValueTask<TResult>> selector,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var builder = ArrayBuilder<TResult>.GetInstance(array.Length);
 
             foreach (var item in array)
@@ -269,7 +274,8 @@ namespace Microsoft.CodeAnalysis
             this ImmutableArray<T1> self,
             ImmutableArray<T2> other,
             Func<T1, T2, TResult> map
-        ) {
+        )
+        {
             Debug.Assert(self.Length == other.Length);
             switch (self.Length)
             {
@@ -313,7 +319,8 @@ namespace Microsoft.CodeAnalysis
             ImmutableArray<T2> other,
             TArg arg,
             Func<T1, T2, int, TArg, TResult> map
-        ) {
+        )
+        {
             Debug.Assert(self.Length == other.Length);
             if (self.IsEmpty)
             {
@@ -354,7 +361,8 @@ namespace Microsoft.CodeAnalysis
             Func<T, bool>? predicateWithoutArg,
             Func<T, TArg, bool>? predicateWithArg,
             TArg arg
-        ) {
+        )
+        {
             Debug.Assert(!array.IsDefault);
             Debug.Assert(predicateWithArg != null ^ predicateWithoutArg != null);
 
@@ -371,7 +379,8 @@ namespace Microsoft.CodeAnalysis
                     (predicateWithoutArg != null)
                         ? predicateWithoutArg(a)
                         : predicateWithArg!(a, arg)
-                ) {
+                )
+                {
                     none = false;
                     if (all)
                     {
@@ -429,7 +438,8 @@ namespace Microsoft.CodeAnalysis
             this ImmutableArray<T> array,
             Func<T, TArg, bool> predicate,
             TArg arg
-        ) {
+        )
+        {
             int n = array.Length;
             for (int i = 0; i < n; i++)
             {
@@ -448,7 +458,8 @@ namespace Microsoft.CodeAnalysis
             this ImmutableArray<T> array,
             Func<T, TArg, bool> predicate,
             TArg arg
-        ) {
+        )
+        {
             int n = array.Length;
             for (int i = 0; i < n; i++)
             {
@@ -466,7 +477,8 @@ namespace Microsoft.CodeAnalysis
         public static async Task<bool> AnyAsync<T>(
             this ImmutableArray<T> array,
             Func<T, Task<bool>> predicateAsync
-        ) {
+        )
+        {
             int n = array.Length;
             for (int i = 0; i < n; i++)
             {
@@ -485,7 +497,8 @@ namespace Microsoft.CodeAnalysis
             this ImmutableArray<T> array,
             Func<T, TArg, Task<bool>> predicateAsync,
             TArg arg
-        ) {
+        )
+        {
             int n = array.Length;
             for (int i = 0; i < n; i++)
             {
@@ -503,7 +516,8 @@ namespace Microsoft.CodeAnalysis
         public static async ValueTask<T?> FirstOrDefaultAsync<T>(
             this ImmutableArray<T> array,
             Func<T, Task<bool>> predicateAsync
-        ) {
+        )
+        {
             int n = array.Length;
             for (int i = 0; i < n; i++)
             {
@@ -541,7 +555,8 @@ namespace Microsoft.CodeAnalysis
             this ImmutableArray<T> array1,
             ImmutableArray<T> array2,
             IEqualityComparer<T> comparer
-        ) {
+        )
+        {
             if (array1.IsDefault)
             {
                 return array2.IsDefault;
@@ -593,7 +608,8 @@ namespace Microsoft.CodeAnalysis
         public static ImmutableArray<T> Distinct<T>(
             this ImmutableArray<T> array,
             IEqualityComparer<T>? comparer = null
-        ) {
+        )
+        {
             Debug.Assert(!array.IsDefault);
 
             if (array.Length < 2)
@@ -677,7 +693,8 @@ namespace Microsoft.CodeAnalysis
         internal static ImmutableArray<T> Concat<T>(
             this ImmutableArray<T> first,
             ImmutableArray<T> second
-        ) {
+        )
+        {
             return first.AddRange(second);
         }
 
@@ -685,7 +702,8 @@ namespace Microsoft.CodeAnalysis
             this ImmutableArray<T> first,
             ImmutableArray<T> second,
             ImmutableArray<T> third
-        ) {
+        )
+        {
             var builder = ArrayBuilder<T>.GetInstance(first.Length + second.Length + third.Length);
             builder.AddRange(first);
             builder.AddRange(second);
@@ -698,7 +716,8 @@ namespace Microsoft.CodeAnalysis
             ImmutableArray<T> second,
             ImmutableArray<T> third,
             ImmutableArray<T> fourth
-        ) {
+        )
+        {
             var builder = ArrayBuilder<T>.GetInstance(
                 first.Length + second.Length + third.Length + fourth.Length
             );
@@ -717,7 +736,8 @@ namespace Microsoft.CodeAnalysis
         internal static bool HasDuplicates<T>(
             this ImmutableArray<T> array,
             IEqualityComparer<T> comparer
-        ) {
+        )
+        {
             switch (array.Length)
             {
                 case 0:
@@ -776,7 +796,8 @@ namespace Microsoft.CodeAnalysis
 
         internal static ImmutableArray<T> DangerousCreateFromUnderlyingArray<T>(
             [MaybeNull] ref T[] array
-        ) {
+        )
+        {
             var proxy = new ImmutableArrayProxy<T> { MutableArray = array };
             array = null!;
             return Unsafe.As<ImmutableArrayProxy<T>, ImmutableArray<T>>(ref proxy);
@@ -838,7 +859,8 @@ namespace Microsoft.CodeAnalysis
             ImmutableArray<TElement> array2,
             TArg arg,
             Func<TElement, TElement, TArg, bool> predicate
-        ) {
+        )
+        {
             // The framework implementation of SequenceEqual forces a NullRef for default array1 and 2, so we
             // maintain the same behavior in this extension
             if (array1.IsDefault)

@@ -38,7 +38,8 @@ namespace Microsoft.VisualBasic.Tests
             double Factor,
             double expected,
             int relativePrecision
-        ) {
+        )
+        {
             Assert.Equal(
                 expected,
                 Financial.DDB(Cost, Salvage, Life, Period, Factor),
@@ -64,7 +65,8 @@ namespace Microsoft.VisualBasic.Tests
             double Life,
             double Period,
             double Factor
-        ) {
+        )
+        {
             Assert.Throws<ArgumentException>(
                 () => Financial.DDB(Cost, Salvage, Life, Period, Factor)
             );
@@ -87,7 +89,8 @@ namespace Microsoft.VisualBasic.Tests
             DueDate Due,
             double expected,
             int relativePrecision
-        ) {
+        )
+        {
             Assert.Equal(
                 expected,
                 Financial.FV(Rate, NPer, Pmt, PV, Due),
@@ -105,7 +108,8 @@ namespace Microsoft.VisualBasic.Tests
             DueDate Due,
             double expected,
             int relativePrecision
-        ) {
+        )
+        {
             Assert.Equal(
                 expected,
                 Financial.FV(Rate, NPer, Pmt, PV, Due),
@@ -138,7 +142,8 @@ namespace Microsoft.VisualBasic.Tests
             DueDate Due,
             double expected,
             int relativePrecision
-        ) {
+        )
+        {
             Assert.Equal(
                 expected,
                 Financial.IPmt(Rate, Per, NPer, PV, FV, Due),
@@ -168,7 +173,8 @@ namespace Microsoft.VisualBasic.Tests
             double PV,
             double FV,
             DueDate Due
-        ) {
+        )
+        {
             Assert.Throws<ArgumentException>(() => Financial.IPmt(Rate, Per, NPer, PV, FV, Due));
         }
 
@@ -232,7 +238,8 @@ namespace Microsoft.VisualBasic.Tests
             double ReinvestRate,
             double expected,
             int relativePrecision
-        ) {
+        )
+        {
             Assert.Equal(
                 expected,
                 Financial.MIRR(ref ValueArray, FinanceRate, ReinvestRate),
@@ -267,7 +274,8 @@ namespace Microsoft.VisualBasic.Tests
             DueDate Due,
             double expected,
             int relativePrecision
-        ) {
+        )
+        {
             Assert.Equal(
                 expected,
                 Financial.NPer(Rate, Pmt, PV, FV, Due),
@@ -369,7 +377,8 @@ namespace Microsoft.VisualBasic.Tests
             DueDate Due,
             double expected,
             int relativePrecision
-        ) {
+        )
+        {
             Assert.Equal(
                 expected,
                 Financial.Pmt(Rate, NPer, PV, FV, Due),
@@ -401,7 +410,8 @@ namespace Microsoft.VisualBasic.Tests
             DueDate Due,
             double expected,
             int relativePrecision
-        ) {
+        )
+        {
             Assert.Equal(
                 expected,
                 Financial.PPmt(Rate, Per, NPer, PV, FV, Due),
@@ -438,7 +448,8 @@ namespace Microsoft.VisualBasic.Tests
             DueDate Due,
             double expected,
             int relativePrecision
-        ) {
+        )
+        {
             Assert.Equal(
                 expected,
                 Financial.PV(Rate, NPer, Pmt, FV, Due),
@@ -469,7 +480,8 @@ namespace Microsoft.VisualBasic.Tests
             double Guess,
             double expected,
             int relativePrecision
-        ) {
+        )
+        {
             Assert.Equal(
                 expected,
                 Financial.Rate(NPer, Pmt, PV, FV, Due, Guess),
@@ -510,7 +522,8 @@ namespace Microsoft.VisualBasic.Tests
             double Life,
             double expected,
             int relativePrecision
-        ) {
+        )
+        {
             Assert.Equal(
                 expected,
                 Financial.SLN(Cost, Salvage, Life),
@@ -532,7 +545,8 @@ namespace Microsoft.VisualBasic.Tests
             double Period,
             double expected,
             int relativePrecision
-        ) {
+        )
+        {
             Assert.Equal(
                 expected,
                 Financial.SYD(Cost, Salvage, Life, Period),
@@ -549,7 +563,8 @@ namespace Microsoft.VisualBasic.Tests
             double Period,
             double expected,
             int relativePrecision
-        ) {
+        )
+        {
             Assert.Equal(
                 expected,
                 Financial.SYD(Cost, Salvage, Life, Period),

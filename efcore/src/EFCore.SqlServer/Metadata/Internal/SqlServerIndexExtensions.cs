@@ -26,14 +26,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             IReadOnlyIndex duplicateIndex,
             in StoreObjectIdentifier storeObject,
             bool shouldThrow
-        ) {
+        )
+        {
             if (index.GetIncludeProperties() != duplicateIndex.GetIncludeProperties())
             {
                 if (
                     index.GetIncludeProperties() == null
                     || duplicateIndex.GetIncludeProperties() == null
                     || !SameColumnNames(index, duplicateIndex, storeObject)
-                ) {
+                )
+                {
                     if (shouldThrow)
                     {
                         throw new InvalidOperationException(

@@ -10,7 +10,8 @@ namespace System.CommandLine.Parsing
             this CommandResult commandResult,
             IValueDescriptor valueDescriptor,
             out object? value
-        ) {
+        )
+        {
             var arguments = commandResult.Command.Arguments;
 
             for (var i = 0; i < arguments.Count; i++)
@@ -39,7 +40,8 @@ namespace System.CommandLine.Parsing
             this CommandResult commandResult,
             IValueDescriptor valueDescriptor,
             out object? value
-        ) {
+        )
+        {
             var options = commandResult.Command.Options;
 
             for (var i = 0; i < options.Count; i++)
@@ -53,7 +55,8 @@ namespace System.CommandLine.Parsing
                     if (
                         optionResult?.ConvertIfNeeded(valueDescriptor.ValueType)
                         is SuccessfulArgumentConversionResult successful
-                    ) {
+                    )
+                    {
                         value = successful.Value;
                         return true;
                     }

@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.Tools.Formatters
             ILogger logger,
             List<FormattedFile> formattedFiles,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var formattedDocuments = FormatFiles(
                 solution,
                 formattableDocuments,
@@ -79,7 +80,8 @@ namespace Microsoft.CodeAnalysis.Tools.Formatters
             FormatOptions formatOptions,
             ILogger logger,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var formattedDocuments =
                 ImmutableArray.CreateBuilder<(Document, Task<(SourceText originalText, SourceText? formattedText)>)>(
                     formattableDocuments.Length
@@ -138,7 +140,8 @@ namespace Microsoft.CodeAnalysis.Tools.Formatters
             FormatOptions formatOptions,
             ILogger logger,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var originalSourceText = await document.GetTextAsync(cancellationToken)
                 .ConfigureAwait(false);
             var formattedSourceText = await FormatFileAsync(
@@ -169,7 +172,8 @@ namespace Microsoft.CodeAnalysis.Tools.Formatters
             ILogger logger,
             List<FormattedFile> formattedFiles,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var formattedSolution = solution;
 
             for (var index = 0; index < formattedDocuments.Length; index++)
@@ -218,7 +222,8 @@ namespace Microsoft.CodeAnalysis.Tools.Formatters
             SourceText formattedText,
             bool changesAreErrors,
             ILogger logger
-        ) {
+        )
+        {
             var fileChanges = ImmutableArray.CreateBuilder<FileChange>();
             var changes = formattedText.GetTextChanges(originalText);
 
@@ -278,7 +283,8 @@ namespace Microsoft.CodeAnalysis.Tools.Formatters
             Document a,
             Document b,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (a == b)
             {
                 return true;

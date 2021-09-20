@@ -152,7 +152,8 @@ namespace System.Net.Http
                 (OperatingSystem.IsLinux() && !OperatingSystem.IsAndroid())
                 || OperatingSystem.IsWindows()
                 || OperatingSystem.IsMacOS()
-            ) {
+            )
+            {
                 settings._quicImplementationProvider = _quicImplementationProvider;
             }
 
@@ -182,7 +183,8 @@ namespace System.Net.Http
                         envVar.Equals("false", StringComparison.OrdinalIgnoreCase)
                         || envVar.Equals("0")
                     )
-                ) {
+                )
+                {
                     // Disallow HTTP/2 protocol.
                     return false;
                 }
@@ -202,7 +204,8 @@ namespace System.Net.Http
                 // First check for the AppContext switch, giving it priority over the environment variable.
                 if (
                     AppContext.TryGetSwitch(Http3DraftSupportAppCtxSettingName, out bool allowHttp3)
-                ) {
+                )
+                {
                     return allowHttp3;
                 }
 
@@ -216,7 +219,8 @@ namespace System.Net.Http
                         envVar.Equals("false", StringComparison.OrdinalIgnoreCase)
                         || envVar.Equals("0")
                     )
-                ) {
+                )
+                {
                     // Disallow HTTP/3 protocol for HTTP endpoints.
                     return false;
                 }

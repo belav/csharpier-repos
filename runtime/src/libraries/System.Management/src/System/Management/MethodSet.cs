@@ -91,7 +91,8 @@ namespace System.Management
                                 methodName != null
                                 && status >= 0
                                 && status != (int)tag_WBEMSTATUS.WBEM_S_NO_MORE_DATA
-                            ) {
+                            )
+                            {
                                 methodName = null;
                                 inParameters = null;
                                 outParameters = null;
@@ -282,7 +283,8 @@ namespace System.Management
                                 tempMethodName != null
                                 && status >= 0
                                 && status != (int)tag_WBEMSTATUS.WBEM_S_NO_MORE_DATA
-                            ) {
+                            )
+                            {
                                 tempMethodName = null;
                                 status = parent.wbemObject.NextMethod_(
                                     0,
@@ -441,7 +443,8 @@ namespace System.Management
             string methodName,
             ManagementBaseObject inParameters,
             ManagementBaseObject outParameters
-        ) {
+        )
+        {
             IWbemClassObjectFreeThreaded wbemIn = null,
                 wbemOut = null;
 

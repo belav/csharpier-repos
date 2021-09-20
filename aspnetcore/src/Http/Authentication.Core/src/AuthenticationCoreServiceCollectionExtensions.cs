@@ -40,7 +40,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddAuthenticationCore(
             this IServiceCollection services,
             Action<AuthenticationOptions> configureOptions
-        ) {
+        )
+        {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));

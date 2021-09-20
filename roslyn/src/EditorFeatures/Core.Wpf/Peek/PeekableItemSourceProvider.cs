@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
             IPeekableItemFactory peekableItemFactory,
             IPeekResultFactory peekResultFactory,
             IWaitIndicator waitIndicator
-        ) {
+        )
+        {
             _peekableItemFactory = peekableItemFactory;
             _peekResultFactory = peekResultFactory;
             _waitIndicator = waitIndicator;

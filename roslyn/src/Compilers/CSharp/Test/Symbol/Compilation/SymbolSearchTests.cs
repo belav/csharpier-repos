@@ -562,7 +562,8 @@ enum Enum
             bool includeType,
             bool includeMember,
             int count
-        ) {
+        )
+        {
             Test(compilation, name, includeNamespace, includeType, includeMember, count);
             Test(compilation, n => n == name, includeNamespace, includeType, includeMember, count);
         }
@@ -574,7 +575,8 @@ enum Enum
             bool includeType,
             bool includeMember,
             int count
-        ) {
+        )
+        {
             SymbolFilter filter = ComputeFilter(includeNamespace, includeType, includeMember);
 
             Assert.Equal(count > 0, compilation.ContainsSymbolsWithName(name, filter));
@@ -588,7 +590,8 @@ enum Enum
             bool includeType,
             bool includeMember,
             int count
-        ) {
+        )
+        {
             SymbolFilter filter = ComputeFilter(includeNamespace, includeType, includeMember);
 
             Assert.Equal(count > 0, compilation.ContainsSymbolsWithName(predicate, filter));
@@ -599,7 +602,8 @@ enum Enum
             bool includeNamespace,
             bool includeType,
             bool includeMember
-        ) {
+        )
+        {
             var filter = SymbolFilter.None;
             filter = includeNamespace ? (filter | SymbolFilter.Namespace) : filter;
             filter = includeType ? (filter | SymbolFilter.Type) : filter;

@@ -67,7 +67,8 @@ namespace CoreXml.Test.XLinq
                                 DtdProcessing = DtdProcessing.Ignore
                             }
                         )
-                    ) {
+                    )
+                    {
                         // create reader from Xlinq
                         XContainer c = GetContainer(fileName, t);
                         using (XmlReader r2 = c.CreateReader())
@@ -96,7 +97,8 @@ namespace CoreXml.Test.XLinq
                                 DtdProcessing = DtdProcessing.Ignore
                             }
                         )
-                    ) {
+                    )
+                    {
                         XContainer doc = GetContainer(fileName, t);
                         doc.AddAnnotation(so);
                         using (XmlReader r2 = doc.CreateReader())
@@ -128,7 +130,8 @@ namespace CoreXml.Test.XLinq
                                     NamespaceHandling = NamespaceHandling.OmitDuplicates
                                 }
                             )
-                        ) {
+                        )
+                        {
                             toClean.Save(w);
                         }
                         ms.Position = 0;
@@ -142,7 +145,8 @@ namespace CoreXml.Test.XLinq
                                     DtdProcessing = DtdProcessing.Ignore
                                 }
                             )
-                        ) {
+                        )
+                        {
                             XContainer doc = GetContainer(fileName, t);
                             doc.AddAnnotation(so);
                             using (XmlReader r2 = doc.CreateReader())
@@ -490,7 +494,8 @@ namespace CoreXml.Test.XLinq
                                 SaveOptions.None,
                                 SaveOptions.OmitDuplicateNamespaces
                             }
-                        ) {
+                        )
+                        {
                             clone[i].AddAnnotation(so);
                             compareDelegate(original[i].CreateReader(), clone[i].CreateReader(ro));
                             clone[i].RemoveAnnotations(typeof(object));
@@ -503,7 +508,8 @@ namespace CoreXml.Test.XLinq
                                 SaveOptions.None,
                                 SaveOptions.OmitDuplicateNamespaces
                             }
-                        ) {
+                        )
+                        {
                             foreach (XNode anc in clone[i].Ancestors())
                             {
                                 anc.AddAnnotation(so);

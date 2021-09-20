@@ -10,14 +10,16 @@ namespace System.Configuration.Internal
         Configuration IInternalConfigConfigurationFactory.Create(
             Type typeConfigHost,
             params object[] hostInitConfigurationParams
-        ) {
+        )
+        {
             return new Configuration(null, typeConfigHost, hostInitConfigurationParams);
         }
 
         string IInternalConfigConfigurationFactory.NormalizeLocationSubPath(
             string subPath,
             IConfigErrorInfo errorInfo
-        ) {
+        )
+        {
             return BaseConfigurationRecord.NormalizeLocationSubPath(subPath, errorInfo);
         }
     }

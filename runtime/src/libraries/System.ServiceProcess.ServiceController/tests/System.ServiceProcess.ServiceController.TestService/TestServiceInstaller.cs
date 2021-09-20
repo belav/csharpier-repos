@@ -76,7 +76,8 @@ namespace System.ServiceProcess.Tests
                         Interop.Advapi32.ServiceControllerOptions.SC_MANAGER_ALL
                     )
                 )
-            ) {
+            )
+            {
                 if (serviceManagerHandle.IsInvalid)
                     throw new InvalidOperationException("Cannot open Service Control Manager");
 
@@ -99,7 +100,8 @@ namespace System.ServiceProcess.Tests
                             password
                         )
                     )
-                ) {
+                )
+                {
                     if (serviceHandle.IsInvalid)
                         throw new Win32Exception("Cannot create service");
 
@@ -205,7 +207,8 @@ namespace System.ServiceProcess.Tests
                         Interop.Advapi32.ServiceControllerOptions.SC_MANAGER_ALL
                     )
                 )
-            ) {
+            )
+            {
                 if (serviceManagerHandle.IsInvalid)
                     throw new Win32Exception("Could not open SCM");
 
@@ -217,7 +220,8 @@ namespace System.ServiceProcess.Tests
                             Interop.Advapi32.ServiceOptions.STANDARD_RIGHTS_DELETE
                         )
                     )
-                ) {
+                )
+                {
                     if (serviceHandle.IsInvalid)
                         throw new Win32Exception($"Could not find service '{ServiceName}'");
 

@@ -207,12 +207,14 @@ namespace System.IO.Ports.Tests
             int offset,
             int count,
             Type expectedException
-        ) {
+        )
+        {
             using (
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 int bufferLength = null == buffer ? 0 : buffer.Length;
 
                 Debug.WriteLine(
@@ -240,7 +242,8 @@ namespace System.IO.Ports.Tests
             )
             using (
                 var com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName)
-            ) {
+            )
+            {
                 var rndGen = new Random(-55);
                 var bytesToWrite = new byte[numberOfBytesToRead];
 
@@ -283,7 +286,8 @@ namespace System.IO.Ports.Tests
             byte[] rcvBuffer,
             int offset,
             int count
-        ) {
+        )
+        {
             var buffer = new byte[bytesToWrite.Length];
             int totalBytesRead;
             int bytesToRead;
@@ -312,7 +316,8 @@ namespace System.IO.Ports.Tests
                 if (
                     (bytesToRead > bytesRead && count != bytesRead)
                     || (bytesToRead <= bytesRead && bytesRead != bytesToRead)
-                ) {
+                )
+                {
                     // If we have not read all of the characters that we should have
                     Fail(
                         "ERROR!!!: Read did not return all of the characters that were in SerialPort buffer"

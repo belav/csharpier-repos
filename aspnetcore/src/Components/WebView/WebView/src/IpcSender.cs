@@ -68,7 +68,8 @@ namespace Microsoft.AspNetCore.Components.WebView
             string argsJson,
             JSCallResultType resultType,
             long targetInstanceId
-        ) {
+        )
+        {
             DispatchMessageWithErrorHandling(
                 IpcCommon.Serialize(
                     IpcCommon.OutgoingMessageType.BeginInvokeJS,

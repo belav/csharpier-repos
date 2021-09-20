@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis
             OptionSet options,
             Diagnostic diagnostic,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // The span to format is the full line(s) containing the diagnostic
             var text = await syntaxTree.GetTextAsync(cancellationToken).ConfigureAwait(false);
             var diagnosticSpan = diagnostic.Location.SourceSpan;

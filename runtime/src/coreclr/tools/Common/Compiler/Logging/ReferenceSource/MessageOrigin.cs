@@ -45,7 +45,8 @@ namespace Mono.Linker
             if (
                 MemberDefinition is MethodDefinition method
                 && method.DebugInformation.HasSequencePoints
-            ) {
+            )
+            {
                 var offset = ILOffset ?? 0;
                 SequencePoint correspondingSequencePoint =
                     method.DebugInformation.SequencePoints.Where(s => s.Offset <= offset)?.Last();

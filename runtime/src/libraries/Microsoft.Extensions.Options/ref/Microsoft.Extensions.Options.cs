@@ -10,7 +10,8 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddOptions(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Options.OptionsBuilder<TOptions> AddOptions<TOptions>(
@@ -36,7 +37,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static Microsoft.Extensions.DependencyInjection.IServiceCollection ConfigureOptions(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services,
             object configureInstance
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.DependencyInjection.IServiceCollection ConfigureOptions(
@@ -45,7 +47,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
             )]
                 System.Type configureType
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.DependencyInjection.IServiceCollection ConfigureOptions<
@@ -53,9 +56,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
             )]
                 TConfigureOptions
-        >(
-            this Microsoft.Extensions.DependencyInjection.IServiceCollection services
-        ) where TConfigureOptions : class
+        >(this Microsoft.Extensions.DependencyInjection.IServiceCollection services)
+            where TConfigureOptions : class
         {
             throw null;
         }
@@ -417,7 +419,8 @@ namespace Microsoft.Extensions.Options
         }
         public virtual Microsoft.Extensions.Options.OptionsBuilder<TOptions> Configure(
             System.Action<TOptions> configureOptions
-        ) {
+        )
+        {
             throw null;
         }
         public virtual Microsoft.Extensions.Options.OptionsBuilder<TOptions> Configure<TDep>(
@@ -465,19 +468,19 @@ namespace Microsoft.Extensions.Options
             TDep3,
             TDep4,
             TDep5
-        >(
-            System.Action<TOptions, TDep1, TDep2, TDep3, TDep4, TDep5> configureOptions
-        ) where TDep1 : class
-          where TDep2 : class
-          where TDep3 : class
-          where TDep4 : class
-          where TDep5 : class
+        >(System.Action<TOptions, TDep1, TDep2, TDep3, TDep4, TDep5> configureOptions)
+            where TDep1 : class
+            where TDep2 : class
+            where TDep3 : class
+            where TDep4 : class
+            where TDep5 : class
         {
             throw null;
         }
         public virtual Microsoft.Extensions.Options.OptionsBuilder<TOptions> PostConfigure(
             System.Action<TOptions> configureOptions
-        ) {
+        )
+        {
             throw null;
         }
         public virtual Microsoft.Extensions.Options.OptionsBuilder<TOptions> PostConfigure<TDep>(
@@ -525,47 +528,52 @@ namespace Microsoft.Extensions.Options
             TDep3,
             TDep4,
             TDep5
-        >(
-            System.Action<TOptions, TDep1, TDep2, TDep3, TDep4, TDep5> configureOptions
-        ) where TDep1 : class
-          where TDep2 : class
-          where TDep3 : class
-          where TDep4 : class
-          where TDep5 : class
+        >(System.Action<TOptions, TDep1, TDep2, TDep3, TDep4, TDep5> configureOptions)
+            where TDep1 : class
+            where TDep2 : class
+            where TDep3 : class
+            where TDep4 : class
+            where TDep5 : class
         {
             throw null;
         }
         public virtual Microsoft.Extensions.Options.OptionsBuilder<TOptions> Validate(
             System.Func<TOptions, bool> validation
-        ) {
+        )
+        {
             throw null;
         }
         public virtual Microsoft.Extensions.Options.OptionsBuilder<TOptions> Validate(
             System.Func<TOptions, bool> validation,
             string failureMessage
-        ) {
+        )
+        {
             throw null;
         }
         public virtual Microsoft.Extensions.Options.OptionsBuilder<TOptions> Validate<TDep>(
             System.Func<TOptions, TDep, bool> validation
-        ) {
+        )
+        {
             throw null;
         }
         public virtual Microsoft.Extensions.Options.OptionsBuilder<TOptions> Validate<TDep>(
             System.Func<TOptions, TDep, bool> validation,
             string failureMessage
-        ) {
+        )
+        {
             throw null;
         }
         public virtual Microsoft.Extensions.Options.OptionsBuilder<TOptions> Validate<TDep1, TDep2>(
             System.Func<TOptions, TDep1, TDep2, bool> validation
-        ) {
+        )
+        {
             throw null;
         }
         public virtual Microsoft.Extensions.Options.OptionsBuilder<TOptions> Validate<TDep1, TDep2>(
             System.Func<TOptions, TDep1, TDep2, bool> validation,
             string failureMessage
-        ) {
+        )
+        {
             throw null;
         }
         public virtual Microsoft.Extensions.Options.OptionsBuilder<TOptions> Validate<
@@ -598,10 +606,8 @@ namespace Microsoft.Extensions.Options
             TDep2,
             TDep3,
             TDep4
-        >(
-            System.Func<TOptions, TDep1, TDep2, TDep3, TDep4, bool> validation,
-            string failureMessage
-        ) {
+        >(System.Func<TOptions, TDep1, TDep2, TDep3, TDep4, bool> validation, string failureMessage)
+        {
             throw null;
         }
         public virtual Microsoft.Extensions.Options.OptionsBuilder<TOptions> Validate<
@@ -623,7 +629,8 @@ namespace Microsoft.Extensions.Options
         >(
             System.Func<TOptions, TDep1, TDep2, TDep3, TDep4, TDep5, bool> validation,
             string failureMessage
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -703,7 +710,8 @@ namespace Microsoft.Extensions.Options
         >(
             this Microsoft.Extensions.Options.IOptionsMonitor<TOptions> monitor,
             System.Action<TOptions> listener
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1002,7 +1010,8 @@ namespace Microsoft.Extensions.Options
         }
         public static Microsoft.Extensions.Options.ValidateOptionsResult Fail(
             System.Collections.Generic.IEnumerable<string> failures
-        ) {
+        )
+        {
             throw null;
         }
         public static Microsoft.Extensions.Options.ValidateOptionsResult Fail(string failureMessage)
@@ -1033,7 +1042,8 @@ namespace Microsoft.Extensions.Options
         public Microsoft.Extensions.Options.ValidateOptionsResult Validate(
             string name,
             TOptions options
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1065,7 +1075,8 @@ namespace Microsoft.Extensions.Options
         public Microsoft.Extensions.Options.ValidateOptionsResult Validate(
             string name,
             TOptions options
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1102,7 +1113,8 @@ namespace Microsoft.Extensions.Options
         public Microsoft.Extensions.Options.ValidateOptionsResult Validate(
             string name,
             TOptions options
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1144,7 +1156,8 @@ namespace Microsoft.Extensions.Options
         public Microsoft.Extensions.Options.ValidateOptionsResult Validate(
             string name,
             TOptions options
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1191,7 +1204,8 @@ namespace Microsoft.Extensions.Options
         public Microsoft.Extensions.Options.ValidateOptionsResult Validate(
             string name,
             TOptions options
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1243,7 +1257,8 @@ namespace Microsoft.Extensions.Options
         public Microsoft.Extensions.Options.ValidateOptionsResult Validate(
             string name,
             TOptions options
-        ) {
+        )
+        {
             throw null;
         }
     }

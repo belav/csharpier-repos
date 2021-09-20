@@ -106,7 +106,8 @@ namespace Internal.TypeSystem
             int index,
             ParameterMetadataAttributes attributes,
             MarshalAsDescriptor marshalAsDescriptor
-        ) {
+        )
+        {
             Index = index;
             _attributes = attributes;
             MarshalAsDescriptor = marshalAsDescriptor;

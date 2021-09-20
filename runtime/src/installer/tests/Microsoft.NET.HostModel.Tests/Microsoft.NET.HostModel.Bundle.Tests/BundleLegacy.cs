@@ -46,7 +46,8 @@ namespace Microsoft.NET.HostModel.Tests
         private static TestProjectFixture CreatePublishedFixture(
             string netCoreAppFramework,
             string mnaVersion
-        ) {
+        )
+        {
             var repoDirectories = new RepoDirectoriesProvider(
                 microsoftNETCoreAppVersion: mnaVersion
             );

@@ -30,7 +30,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
         public static HttpResponseMessage CreateResponse(
             HttpStatusCode statusCode,
             HttpContent payload
-        ) {
+        )
+        {
             return new HttpResponseMessage(statusCode) { Content = payload };
         }
 
@@ -82,7 +83,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
             HttpTransportType? transportTypes = null,
             string connectionToken = "connection-token",
             int negotiateVersion = 0
-        ) {
+        )
+        {
             var availableTransports = new List<object>();
 
             transportTypes = transportTypes ?? HttpTransports.All;

@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ConstantValue constantValue,
             TypeSymbol? type,
             BoundLiteral? oldNodeOpt = null
-        ) {
+        )
+        {
             Debug.Assert(constantValue != null);
 
             if (constantValue.IsDecimal)
@@ -85,7 +86,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         curMethod.MethodKind != MethodKind.SharedConstructor
                         || curMethod.ContainingType.SpecialType != SpecialType.System_Decimal
                     ) && !_inExpressionLambda
-                ) {
+                )
+                {
                     Symbol? useField = null;
 
                     if (value == decimal.Zero)
@@ -110,7 +112,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (
                         useField is
                         { HasUseSiteError: false, ContainingType: { HasUseSiteError: false } }
-                    ) {
+                    )
+                    {
                         var fieldSymbol = (FieldSymbol)useField;
                         return new BoundFieldAccess(syntax, null, fieldSymbol, constantValue);
                     }

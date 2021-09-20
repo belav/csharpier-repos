@@ -11,7 +11,8 @@ namespace System.Text.Json.Serialization.Converters
             ref Utf8JsonReader reader,
             Type typeToConvert,
             JsonSerializerOptions options
-        ) {
+        )
+        {
             string? str = reader.GetString();
             if (string.IsNullOrEmpty(str) || str.Length > 1)
             {
@@ -39,7 +40,8 @@ namespace System.Text.Json.Serialization.Converters
             char value,
             JsonSerializerOptions options,
             ref WriteStack state
-        ) {
+        )
+        {
             writer.WritePropertyName(
 #if BUILDING_INBOX_LIBRARY
                 MemoryMarshal.CreateSpan(ref value, 1)

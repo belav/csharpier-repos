@@ -688,7 +688,8 @@ namespace System.Reflection.Emit
             else if (
                 opcode.StackBehaviourPush == StackBehaviour.Push1
                 || opcode.StackBehaviourPush == StackBehaviour.Pushi
-            ) {
+            )
+            {
                 cur_stack++;
                 is_load = true;
                 if (cur_stack > max_stack)
@@ -858,7 +859,8 @@ namespace System.Reflection.Emit
             OpCode opcode,
             MethodInfo methodInfo,
             Type[]? optionalParameterTypes
-        ) {
+        )
+        {
             if (methodInfo == null)
                 throw new ArgumentNullException(nameof(methodInfo));
             short value = opcode.Value;
@@ -887,7 +889,8 @@ namespace System.Reflection.Emit
             CallingConvention unmanagedCallConv,
             Type? returnType,
             Type[]? parameterTypes
-        ) {
+        )
+        {
             // GetMethodSigHelper expects a ModuleBuilder or null, and module might be
             // a normal module when using dynamic methods.
             SignatureHelper helper = SignatureHelper.GetMethodSigHelper(
@@ -906,7 +909,8 @@ namespace System.Reflection.Emit
             Type returnType,
             Type[]? parameterTypes,
             Type[]? optionalParameterTypes
-        ) {
+        )
+        {
             if (optionalParameterTypes != null)
                 throw new NotImplementedException();
 
@@ -1004,7 +1008,8 @@ namespace System.Reflection.Emit
             int startColumn,
             int endLine,
             int endColumn
-        ) {
+        )
+        {
             if (currentSequence == null || currentSequence.Document != document)
             {
                 if (sequencePointLists == null)
@@ -1052,7 +1057,8 @@ namespace System.Reflection.Emit
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
             )]
                 Type excType
-        ) {
+        )
+        {
             if (excType == null)
                 throw new ArgumentNullException(nameof(excType));
             if (!((excType == typeof(Exception)) || excType.IsSubclassOf(typeof(Exception))))

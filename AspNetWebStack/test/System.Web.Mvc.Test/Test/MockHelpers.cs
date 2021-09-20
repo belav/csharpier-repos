@@ -11,7 +11,8 @@ namespace System.Web.Mvc.Test
     {
         public static ISetup<HttpContextBase> ExpectMvcVersionResponseHeader(
             this Mock<HttpContextBase> mock
-        ) {
+        )
+        {
             Version mvcVersion = VersionTestHelper.GetVersionFromAssembly(
                 "System.Web.Mvc",
                 typeof(Controller)

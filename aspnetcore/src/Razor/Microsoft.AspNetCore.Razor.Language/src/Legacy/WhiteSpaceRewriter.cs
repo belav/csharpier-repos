@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 if (
                     child is CSharpCodeBlockSyntax codeBlock
                     && TryRewriteWhitespace(codeBlock, out var rewritten, out var whitespaceLiteral)
-                ) {
+                )
+                {
                     // Replace the existing code block with the whitespace literal
                     // followed by the rewritten code block (with the code whitespace removed).
                     node = node.ReplaceNode(
@@ -42,7 +43,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             CSharpCodeBlockSyntax codeBlock,
             out CSharpCodeBlockSyntax rewritten,
             out SyntaxNode whitespaceLiteral
-        ) {
+        )
+        {
             // Rewrite any whitespace represented as code at the start of a line preceding an expression block.
             // We want it to be rendered as Markup.
 
@@ -60,7 +62,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                     children[1] is CSharpExplicitExpressionSyntax
                     || children[1] is CSharpImplicitExpressionSyntax
                 )
-            ) {
+            )
+            {
                 var containsNonWhitespace = literal.DescendantNodes()
                     .Where(n => n.IsToken)
                     .Cast<SyntaxToken>()

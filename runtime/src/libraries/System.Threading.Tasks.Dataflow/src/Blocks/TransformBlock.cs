@@ -98,7 +98,8 @@ namespace System.Threading.Tasks.Dataflow
             Func<TInput, TOutput>? transformSync,
             Func<TInput, Task<TOutput>>? transformAsync,
             ExecutionDataflowBlockOptions dataflowBlockOptions
-        ) {
+        )
+        {
             if (transformSync == null && transformAsync == null)
                 throw new ArgumentNullException("transform");
             if (dataflowBlockOptions == null)
@@ -136,7 +137,8 @@ namespace System.Threading.Tasks.Dataflow
             // However, a developer can override this with EnsureOrdered == false.
             if (
                 dataflowBlockOptions.SupportsParallelExecution && dataflowBlockOptions.EnsureOrdered
-            ) {
+            )
+            {
                 _reorderingBuffer = new ReorderingBuffer<TOutput>(
                     this,
                     (owningSource, message) =>
@@ -232,7 +234,8 @@ namespace System.Threading.Tasks.Dataflow
         private void ProcessMessage(
             Func<TInput, TOutput> transform,
             KeyValuePair<TInput, long> messageWithId
-        ) {
+        )
+        {
             // Process the input message to get the output message
             TOutput? outputItem = default(TOutput);
             bool itemIsValid = false;
@@ -289,7 +292,8 @@ namespace System.Threading.Tasks.Dataflow
         private void ProcessMessageWithTask(
             Func<TInput, Task<TOutput>> transform,
             KeyValuePair<TInput, long> messageWithId
-        ) {
+        )
+        {
             Debug.Assert(transform != null, "Function to invoke is required.");
 
             // Run the transform function to get the task that represents the operation's completion
@@ -354,7 +358,8 @@ namespace System.Threading.Tasks.Dataflow
         private void AsyncCompleteProcessMessageWithTask(
             Task<TOutput> completed,
             KeyValuePair<TInput, long> messageWithId
-        ) {
+        )
+        {
             Debug.Assert(completed != null, "Completed task is required.");
             Debug.Assert(completed.IsCompleted, "Task must be completed to be here.");
 
@@ -486,7 +491,8 @@ namespace System.Threading.Tasks.Dataflow
             TInput messageValue,
             ISourceBlock<TInput>? source,
             bool consumeToAccept
-        ) {
+        )
+        {
             return _target.OfferMessage(messageHeader, messageValue, source, consumeToAccept);
         }
 
@@ -495,7 +501,8 @@ namespace System.Threading.Tasks.Dataflow
             DataflowMessageHeader messageHeader,
             ITargetBlock<TOutput> target,
             out bool messageConsumed
-        ) {
+        )
+        {
             return _source.ConsumeMessage(messageHeader, target, out messageConsumed);
         }
 
@@ -503,7 +510,8 @@ namespace System.Threading.Tasks.Dataflow
         bool ISourceBlock<TOutput>.ReserveMessage(
             DataflowMessageHeader messageHeader,
             ITargetBlock<TOutput> target
-        ) {
+        )
+        {
             return _source.ReserveMessage(messageHeader, target);
         }
 
@@ -511,7 +519,8 @@ namespace System.Threading.Tasks.Dataflow
         void ISourceBlock<TOutput>.ReleaseReservation(
             DataflowMessageHeader messageHeader,
             ITargetBlock<TOutput> target
-        ) {
+        )
+        {
             _source.ReleaseReservation(messageHeader, target);
         }
 

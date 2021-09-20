@@ -61,7 +61,8 @@ namespace System.Security.Cryptography.Pkcs
         internal static CmsSignature? ResolveAndVerifyKeyType(
             string signatureAlgorithmOid,
             AsymmetricAlgorithm? key
-        ) {
+        )
+        {
             if (s_lookup.TryGetValue(signatureAlgorithmOid, out CmsSignature? processor))
             {
                 if (key != null && !processor.VerifyKeyType(key))
@@ -87,7 +88,8 @@ namespace System.Security.Cryptography.Pkcs
             bool silent,
             out string? oid,
             out ReadOnlyMemory<byte> signatureValue
-        ) {
+        )
+        {
             CmsSignature? processor = ResolveAndVerifyKeyType(certificate.GetKeyAlgorithm(), key);
 
             if (processor == null)
@@ -114,7 +116,8 @@ namespace System.Security.Cryptography.Pkcs
         private static bool DsaDerToIeee(
             ReadOnlyMemory<byte> derSignature,
             Span<byte> ieeeSignature
-        ) {
+        )
+        {
             int fieldSize = ieeeSignature.Length / 2;
 
             Debug.Assert(

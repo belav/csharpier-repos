@@ -60,7 +60,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     out InvocationExpressionSyntax invocation
                 )
                 && invocation.Expression == simpleName
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -71,7 +72,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     out ElementAccessExpressionSyntax elementAccess
                 )
                 && elementAccess.Expression == simpleName
-            ) {
+            )
+            {
                 return false;
             }
 

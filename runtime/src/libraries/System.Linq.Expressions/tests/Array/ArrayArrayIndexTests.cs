@@ -811,7 +811,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionStructWithStringAndStructArrayArrayIndexTest(
             bool useInterpreter
-        ) {
+        )
+        {
             // null arrays
             CheckExceptionStructWithStringAndStructArrayArrayIndex(null, -1, useInterpreter);
             CheckExceptionStructWithStringAndStructArrayArrayIndex(null, 0, useInterpreter);
@@ -1197,7 +1198,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void CheckGenericStructWithStringAndFieldArrayArrayIndexTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckGenericArrayArrayIndexTestHelper<Scs>(useInterpreter);
         }
 
@@ -1205,7 +1207,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionGenericStructWithStringAndFieldArrayArrayIndexTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckExceptionGenericArrayArrayIndexTestHelper<Scs>(useInterpreter);
         }
 
@@ -1213,7 +1216,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void CheckGenericCustomWithClassRestrictionArrayArrayIndexTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckGenericWithClassRestrictionArrayArrayIndexTestHelper<C>(useInterpreter);
         }
 
@@ -1221,7 +1225,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionGenericCustomWithClassRestrictionArrayArrayIndexTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckExceptionGenericWithClassRestrictionArrayArrayIndexTestHelper<C>(useInterpreter);
         }
 
@@ -1229,7 +1234,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void CheckGenericObjectWithClassRestrictionArrayArrayIndexTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckGenericWithClassRestrictionArrayArrayIndexTestHelper<object>(useInterpreter);
         }
 
@@ -1237,7 +1243,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionGenericObjectWithClassRestrictionArrayArrayIndexTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckExceptionGenericWithClassRestrictionArrayArrayIndexTestHelper<object>(
                 useInterpreter
             );
@@ -1247,7 +1254,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void CheckGenericCustomWithClassAndNewRestrictionArrayArrayIndexTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckGenericWithClassAndNewRestrictionArrayArrayIndexTestHelper<C>(useInterpreter);
         }
 
@@ -1255,7 +1263,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionGenericCustomWithClassAndNewRestrictionArrayArrayIndexTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckExceptionGenericWithClassAndNewRestrictionArrayArrayIndexTestHelper<C>(
                 useInterpreter
             );
@@ -1265,7 +1274,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void CheckGenericObjectWithClassAndNewRestrictionArrayArrayIndexTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckGenericWithClassAndNewRestrictionArrayArrayIndexTestHelper<object>(useInterpreter);
         }
 
@@ -1273,7 +1283,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionGenericObjectWithClassAndNewRestrictionArrayArrayIndexTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckExceptionGenericWithClassAndNewRestrictionArrayArrayIndexTestHelper<object>(
                 useInterpreter
             );
@@ -1283,7 +1294,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void CheckGenericCustomWithSubClassRestrictionArrayArrayIndexTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckGenericWithSubClassRestrictionArrayArrayIndexTestHelper<C>(useInterpreter);
         }
 
@@ -1291,7 +1303,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionGenericCustomWithSubClassRestrictionArrayArrayIndexTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckExceptionGenericWithSubClassRestrictionArrayArrayIndexTestHelper<C>(
                 useInterpreter
             );
@@ -1301,7 +1314,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void CheckGenericCustomWithSubClassAndNewRestrictionArrayArrayIndexTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckGenericWithSubClassAndNewRestrictionArrayArrayIndexTestHelper<C>(useInterpreter);
         }
 
@@ -1309,7 +1323,8 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionGenericCustomWithSubClassAndNewRestrictionArrayArrayIndexTest(
             bool useInterpreter
-        ) {
+        )
+        {
             CheckExceptionGenericWithSubClassAndNewRestrictionArrayArrayIndexTestHelper<C>(
                 useInterpreter
             );
@@ -2460,7 +2475,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckIEquatableArrayArrayIndex(
             IEquatable<C>[][] array,
             bool useInterpeter
-        ) {
+        )
+        {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
             {
@@ -2473,7 +2489,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckIEquatable2ArrayArrayIndex(
             IEquatable<D>[][] array,
             bool useInterpeter
-        ) {
+        )
+        {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
             {
@@ -2552,7 +2569,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckStructWithStringAndStructArrayArrayIndex(
             Scs[][] array,
             bool useInterpeter
-        ) {
+        )
+        {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
             {
@@ -2580,7 +2598,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckStructWithTwoFieldsArrayArrayIndex(
             Sp[][] array,
             bool useInterpeter
-        ) {
+        )
+        {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
             {
@@ -2652,7 +2671,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckGenericWithCustomArrayArrayIndex<T>(
             T[][] array,
             bool useInterpeter
-        ) {
+        )
+        {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
             {
@@ -2757,7 +2777,8 @@ namespace System.Linq.Expressions.Tests
             bool[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<bool[]>> e = Expression.Lambda<Func<bool[]>>(
                 Expression.ArrayIndex(
                     Expression.Constant(array, typeof(bool[][])),
@@ -2773,7 +2794,8 @@ namespace System.Linq.Expressions.Tests
             byte[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<byte[]>> e = Expression.Lambda<Func<byte[]>>(
                 Expression.ArrayIndex(
                     Expression.Constant(array, typeof(byte[][])),
@@ -2789,7 +2811,8 @@ namespace System.Linq.Expressions.Tests
             C[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<C[]>> e = Expression.Lambda<Func<C[]>>(
                 Expression.ArrayIndex(
                     Expression.Constant(array, typeof(C[][])),
@@ -2805,7 +2828,8 @@ namespace System.Linq.Expressions.Tests
             char[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<char[]>> e = Expression.Lambda<Func<char[]>>(
                 Expression.ArrayIndex(
                     Expression.Constant(array, typeof(char[][])),
@@ -2821,7 +2845,8 @@ namespace System.Linq.Expressions.Tests
             D[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<D[]>> e = Expression.Lambda<Func<D[]>>(
                 Expression.ArrayIndex(
                     Expression.Constant(array, typeof(D[][])),
@@ -2837,7 +2862,8 @@ namespace System.Linq.Expressions.Tests
             decimal[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<decimal[]>> e = Expression.Lambda<Func<decimal[]>>(
                 Expression.ArrayIndex(
                     Expression.Constant(array, typeof(decimal[][])),
@@ -2853,7 +2879,8 @@ namespace System.Linq.Expressions.Tests
             Delegate[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<Delegate[]>> e = Expression.Lambda<Func<Delegate[]>>(
                 Expression.ArrayIndex(
                     Expression.Constant(array, typeof(Delegate[][])),
@@ -2869,7 +2896,8 @@ namespace System.Linq.Expressions.Tests
             double[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<double[]>> e = Expression.Lambda<Func<double[]>>(
                 Expression.ArrayIndex(
                     Expression.Constant(array, typeof(double[][])),
@@ -2885,7 +2913,8 @@ namespace System.Linq.Expressions.Tests
             E[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<E[]>> e = Expression.Lambda<Func<E[]>>(
                 Expression.ArrayIndex(
                     Expression.Constant(array, typeof(E[][])),
@@ -2901,7 +2930,8 @@ namespace System.Linq.Expressions.Tests
             El[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<El[]>> e = Expression.Lambda<Func<El[]>>(
                 Expression.ArrayIndex(
                     Expression.Constant(array, typeof(El[][])),
@@ -2917,7 +2947,8 @@ namespace System.Linq.Expressions.Tests
             float[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<float[]>> e = Expression.Lambda<Func<float[]>>(
                 Expression.ArrayIndex(
                     Expression.Constant(array, typeof(float[][])),
@@ -2933,7 +2964,8 @@ namespace System.Linq.Expressions.Tests
             Func<object>[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<Func<object>[]>> e = Expression.Lambda<Func<Func<object>[]>>(
                 Expression.ArrayIndex(
                     Expression.Constant(array, typeof(Func<object>[][])),
@@ -2949,7 +2981,8 @@ namespace System.Linq.Expressions.Tests
             I[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<I[]>> e = Expression.Lambda<Func<I[]>>(
                 Expression.ArrayIndex(
                     Expression.Constant(array, typeof(I[][])),
@@ -2965,7 +2998,8 @@ namespace System.Linq.Expressions.Tests
             IEquatable<C>[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<IEquatable<C>[]>> e = Expression.Lambda<Func<IEquatable<C>[]>>(
                 Expression.ArrayIndex(
                     Expression.Constant(array, typeof(IEquatable<C>[][])),
@@ -2981,7 +3015,8 @@ namespace System.Linq.Expressions.Tests
             IEquatable<D>[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<IEquatable<D>[]>> e = Expression.Lambda<Func<IEquatable<D>[]>>(
                 Expression.ArrayIndex(
                     Expression.Constant(array, typeof(IEquatable<D>[][])),
@@ -2997,7 +3032,8 @@ namespace System.Linq.Expressions.Tests
             int[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<int[]>> e = Expression.Lambda<Func<int[]>>(
                 Expression.ArrayIndex(
                     Expression.Constant(array, typeof(int[][])),
@@ -3013,7 +3049,8 @@ namespace System.Linq.Expressions.Tests
             long[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<long[]>> e = Expression.Lambda<Func<long[]>>(
                 Expression.ArrayIndex(
                     Expression.Constant(array, typeof(long[][])),
@@ -3029,7 +3066,8 @@ namespace System.Linq.Expressions.Tests
             object[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<object[]>> e = Expression.Lambda<Func<object[]>>(
                 Expression.ArrayIndex(
                     Expression.Constant(array, typeof(object[][])),
@@ -3045,7 +3083,8 @@ namespace System.Linq.Expressions.Tests
             S[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<S[]>> e = Expression.Lambda<Func<S[]>>(
                 Expression.ArrayIndex(
                     Expression.Constant(array, typeof(S[][])),
@@ -3061,7 +3100,8 @@ namespace System.Linq.Expressions.Tests
             sbyte[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<sbyte[]>> e = Expression.Lambda<Func<sbyte[]>>(
                 Expression.ArrayIndex(
                     Expression.Constant(array, typeof(sbyte[][])),
@@ -3077,7 +3117,8 @@ namespace System.Linq.Expressions.Tests
             Sc[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<Sc[]>> e = Expression.Lambda<Func<Sc[]>>(
                 Expression.ArrayIndex(
                     Expression.Constant(array, typeof(Sc[][])),
@@ -3093,7 +3134,8 @@ namespace System.Linq.Expressions.Tests
             Scs[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<Scs[]>> e = Expression.Lambda<Func<Scs[]>>(
                 Expression.ArrayIndex(
                     Expression.Constant(array, typeof(Scs[][])),
@@ -3109,7 +3151,8 @@ namespace System.Linq.Expressions.Tests
             short[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<short[]>> e = Expression.Lambda<Func<short[]>>(
                 Expression.ArrayIndex(
                     Expression.Constant(array, typeof(short[][])),
@@ -3125,7 +3168,8 @@ namespace System.Linq.Expressions.Tests
             Sp[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<Sp[]>> e = Expression.Lambda<Func<Sp[]>>(
                 Expression.ArrayIndex(
                     Expression.Constant(array, typeof(Sp[][])),
@@ -3141,7 +3185,8 @@ namespace System.Linq.Expressions.Tests
             Ss[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<Ss[]>> e = Expression.Lambda<Func<Ss[]>>(
                 Expression.ArrayIndex(
                     Expression.Constant(array, typeof(Ss[][])),
@@ -3157,7 +3202,8 @@ namespace System.Linq.Expressions.Tests
             string[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<string[]>> e = Expression.Lambda<Func<string[]>>(
                 Expression.ArrayIndex(
                     Expression.Constant(array, typeof(string[][])),
@@ -3173,7 +3219,8 @@ namespace System.Linq.Expressions.Tests
             uint[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<uint[]>> e = Expression.Lambda<Func<uint[]>>(
                 Expression.ArrayIndex(
                     Expression.Constant(array, typeof(uint[][])),
@@ -3189,7 +3236,8 @@ namespace System.Linq.Expressions.Tests
             ulong[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<ulong[]>> e = Expression.Lambda<Func<ulong[]>>(
                 Expression.ArrayIndex(
                     Expression.Constant(array, typeof(ulong[][])),
@@ -3205,7 +3253,8 @@ namespace System.Linq.Expressions.Tests
             ushort[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<ushort[]>> e = Expression.Lambda<Func<ushort[]>>(
                 Expression.ArrayIndex(
                     Expression.Constant(array, typeof(ushort[][])),
@@ -3221,7 +3270,8 @@ namespace System.Linq.Expressions.Tests
             T[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<T[]>> e = Expression.Lambda<Func<T[]>>(
                 Expression.ArrayIndex(
                     Expression.Constant(array, typeof(T[][])),
@@ -3237,7 +3287,8 @@ namespace System.Linq.Expressions.Tests
             T[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             Expression<Func<T[]>> e = Expression.Lambda<Func<T[]>>(
                 Expression.ArrayIndex(
                     Expression.Constant(array, typeof(T[][])),
@@ -3325,7 +3376,8 @@ namespace System.Linq.Expressions.Tests
             bool[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
                     () => CheckBoolArrayArrayIndexExpression(array, index, useInterpreter)
@@ -3340,7 +3392,8 @@ namespace System.Linq.Expressions.Tests
             byte[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
                     () => CheckByteArrayArrayIndexExpression(array, index, useInterpreter)
@@ -3355,7 +3408,8 @@ namespace System.Linq.Expressions.Tests
             C[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
                     () => CheckCustomArrayArrayIndexExpression(array, index, useInterpreter)
@@ -3370,7 +3424,8 @@ namespace System.Linq.Expressions.Tests
             char[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
                     () => CheckCharArrayArrayIndexExpression(array, index, useInterpreter)
@@ -3385,7 +3440,8 @@ namespace System.Linq.Expressions.Tests
             D[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
                     () => CheckCustom2ArrayArrayIndexExpression(array, index, useInterpreter)
@@ -3400,7 +3456,8 @@ namespace System.Linq.Expressions.Tests
             decimal[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
                     () => CheckDecimalArrayArrayIndexExpression(array, index, useInterpreter)
@@ -3415,7 +3472,8 @@ namespace System.Linq.Expressions.Tests
             Delegate[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
                     () => CheckDelegateArrayArrayIndexExpression(array, index, useInterpreter)
@@ -3430,7 +3488,8 @@ namespace System.Linq.Expressions.Tests
             double[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
                     () => CheckDoubleArrayArrayIndexExpression(array, index, useInterpreter)
@@ -3445,7 +3504,8 @@ namespace System.Linq.Expressions.Tests
             E[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
                     () => CheckEnumArrayArrayIndexExpression(array, index, useInterpreter)
@@ -3460,7 +3520,8 @@ namespace System.Linq.Expressions.Tests
             El[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
                     () => CheckEnumLongArrayArrayIndexExpression(array, index, useInterpreter)
@@ -3475,7 +3536,8 @@ namespace System.Linq.Expressions.Tests
             float[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
                     () => CheckFloatArrayArrayIndexExpression(array, index, useInterpreter)
@@ -3490,7 +3552,8 @@ namespace System.Linq.Expressions.Tests
             Func<object>[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
                     () => CheckFuncArrayArrayIndexExpression(array, index, useInterpreter)
@@ -3505,7 +3568,8 @@ namespace System.Linq.Expressions.Tests
             I[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
                     () => CheckInterfaceArrayArrayIndexExpression(array, index, useInterpreter)
@@ -3520,7 +3584,8 @@ namespace System.Linq.Expressions.Tests
             IEquatable<C>[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
                     () => CheckIEquatableArrayArrayIndexExpression(array, index, useInterpreter)
@@ -3535,7 +3600,8 @@ namespace System.Linq.Expressions.Tests
             IEquatable<D>[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
                     () => CheckIEquatable2ArrayArrayIndexExpression(array, index, useInterpreter)
@@ -3550,7 +3616,8 @@ namespace System.Linq.Expressions.Tests
             int[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
                     () => CheckIntArrayArrayIndexExpression(array, index, useInterpreter)
@@ -3565,7 +3632,8 @@ namespace System.Linq.Expressions.Tests
             long[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
                     () => CheckLongArrayArrayIndexExpression(array, index, useInterpreter)
@@ -3580,7 +3648,8 @@ namespace System.Linq.Expressions.Tests
             object[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
                     () => CheckObjectArrayArrayIndexExpression(array, index, useInterpreter)
@@ -3595,7 +3664,8 @@ namespace System.Linq.Expressions.Tests
             S[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
                     () => CheckStructArrayArrayIndexExpression(array, index, useInterpreter)
@@ -3610,7 +3680,8 @@ namespace System.Linq.Expressions.Tests
             sbyte[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
                     () => CheckSByteArrayArrayIndexExpression(array, index, useInterpreter)
@@ -3625,7 +3696,8 @@ namespace System.Linq.Expressions.Tests
             Sc[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
                     () =>
@@ -3642,7 +3714,8 @@ namespace System.Linq.Expressions.Tests
             Scs[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
                     () =>
@@ -3667,7 +3740,8 @@ namespace System.Linq.Expressions.Tests
             short[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
                     () => CheckShortArrayArrayIndexExpression(array, index, useInterpreter)
@@ -3682,7 +3756,8 @@ namespace System.Linq.Expressions.Tests
             Sp[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
                     () =>
@@ -3707,7 +3782,8 @@ namespace System.Linq.Expressions.Tests
             Ss[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
                     () =>
@@ -3724,7 +3800,8 @@ namespace System.Linq.Expressions.Tests
             string[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
                     () => CheckStringArrayArrayIndexExpression(array, index, useInterpreter)
@@ -3739,7 +3816,8 @@ namespace System.Linq.Expressions.Tests
             uint[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
                     () => CheckUIntArrayArrayIndexExpression(array, index, useInterpreter)
@@ -3754,7 +3832,8 @@ namespace System.Linq.Expressions.Tests
             ulong[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
                     () => CheckULongArrayArrayIndexExpression(array, index, useInterpreter)
@@ -3769,7 +3848,8 @@ namespace System.Linq.Expressions.Tests
             ushort[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
                     () => CheckUShortArrayArrayIndexExpression(array, index, useInterpreter)
@@ -3784,7 +3864,8 @@ namespace System.Linq.Expressions.Tests
             T[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
                     () =>
@@ -3809,7 +3890,8 @@ namespace System.Linq.Expressions.Tests
             T[][] array,
             int index,
             bool useInterpreter
-        ) {
+        )
+        {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
                     () => CheckArrayArrayIndexExpression(array, index, useInterpreter)

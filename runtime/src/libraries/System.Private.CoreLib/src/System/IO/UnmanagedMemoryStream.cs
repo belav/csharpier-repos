@@ -163,7 +163,8 @@ namespace System.IO
             long length,
             long capacity,
             FileAccess access
-        ) {
+        )
+        {
             Initialize(pointer, length, capacity, access);
         }
 
@@ -176,7 +177,8 @@ namespace System.IO
             long length,
             long capacity,
             FileAccess access
-        ) {
+        )
+        {
             if (pointer == null)
                 throw new ArgumentNullException(nameof(pointer));
             if (length < 0 || capacity < 0)
@@ -475,7 +477,8 @@ namespace System.IO
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ValidateBufferArguments(buffer, offset, count);
 
             if (cancellationToken.IsCancellationRequested)
@@ -502,7 +505,8 @@ namespace System.IO
         public override ValueTask<int> ReadAsync(
             Memory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (cancellationToken.IsCancellationRequested)
             {
                 return ValueTask.FromCanceled<int>(cancellationToken);
@@ -776,7 +780,8 @@ namespace System.IO
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             ValidateBufferArguments(buffer, offset, count);
 
             if (cancellationToken.IsCancellationRequested)
@@ -802,7 +807,8 @@ namespace System.IO
         public override ValueTask WriteAsync(
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             if (cancellationToken.IsCancellationRequested)
             {
                 return ValueTask.FromCanceled(cancellationToken);

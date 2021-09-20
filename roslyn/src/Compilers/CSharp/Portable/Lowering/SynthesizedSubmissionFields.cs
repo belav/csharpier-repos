@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public SynthesizedSubmissionFields(
             CSharpCompilation compilation,
             NamedTypeSymbol submissionClass
-        ) {
+        )
+        {
             Debug.Assert(compilation != null);
             Debug.Assert(submissionClass.IsSubmissionClass);
 
@@ -68,7 +69,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 (object)hostObjectTypeSymbol != null
                 && hostObjectTypeSymbol.Kind != SymbolKind.ErrorType
-            ) {
+            )
+            {
                 return _hostObjectField = new SynthesizedFieldSymbol(
                     _declaringSubmissionClass,
                     hostObjectTypeSymbol,
@@ -98,7 +100,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     previousSubmissionType,
                     out previousSubmissionField
                 )
-            ) {
+            )
+            {
                 // TODO: generate better name?
                 previousSubmissionField = new SynthesizedFieldSymbol(
                     _declaringSubmissionClass,

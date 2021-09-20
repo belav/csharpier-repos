@@ -17,12 +17,8 @@ namespace Microsoft.Test.ModuleCore
         //Constructor
         public TestSkippedException(string message) : this(message, false, true, null) { }
 
-        public TestSkippedException(
-            string message,
-            object actual,
-            object expected,
-            Exception inner
-        ) : base(TestResult.Skipped, message, actual, expected, inner) { }
+        public TestSkippedException(string message, object actual, object expected, Exception inner)
+            : base(TestResult.Skipped, message, actual, expected, inner) { }
     }
 
     ////////////////////////////////////////////////////////////////
@@ -34,12 +30,8 @@ namespace Microsoft.Test.ModuleCore
         //Constructor
         public TestFailedException(string message) : this(message, false, true, null) { }
 
-        public TestFailedException(
-            string message,
-            object actual,
-            object expected,
-            Exception inner
-        ) : base(TestResult.Failed, message, actual, expected, inner) { }
+        public TestFailedException(string message, object actual, object expected, Exception inner)
+            : base(TestResult.Failed, message, actual, expected, inner) { }
     }
 
     ////////////////////////////////////////////////////////////////
@@ -51,12 +43,8 @@ namespace Microsoft.Test.ModuleCore
         //Constructor
         public TestWarningException(string message) : this(message, false, true, null) { }
 
-        public TestWarningException(
-            string message,
-            object actual,
-            object expected,
-            Exception inner
-        ) : base(TestResult.Warning, message, actual, expected, inner) { }
+        public TestWarningException(string message, object actual, object expected, Exception inner)
+            : base(TestResult.Warning, message, actual, expected, inner) { }
     }
 
     ////////////////////////////////////////////////////////////////

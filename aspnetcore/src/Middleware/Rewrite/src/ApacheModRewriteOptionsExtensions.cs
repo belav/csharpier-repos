@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.Rewrite
             this RewriteOptions options,
             IFileProvider fileProvider,
             string filePath
-        ) {
+        )
+        {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -49,7 +50,8 @@ namespace Microsoft.AspNetCore.Rewrite
         public static RewriteOptions AddApacheModRewrite(
             this RewriteOptions options,
             TextReader reader
-        ) {
+        )
+        {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));

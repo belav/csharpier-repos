@@ -166,7 +166,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static string GetLocationString(
             CSharpCompilation compilation,
             Symbol unwrappedSymbol
-        ) {
+        )
+        {
             Debug.Assert((object)unwrappedSymbol == UnwrapSymbol(unwrappedSymbol));
 
             ImmutableArray<SyntaxReference> syntaxReferences =

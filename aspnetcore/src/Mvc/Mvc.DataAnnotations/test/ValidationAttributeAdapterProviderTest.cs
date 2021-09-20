@@ -40,7 +40,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         public void AdapterFactory_RegistersAdapters_ForDataAnnotationAttributes(
             ValidationAttribute attribute,
             Type expectedAdapterType
-        ) {
+        )
+        {
             // Arrange and Act
             var adapter = _validationAttributeAdapterProvider.GetAttributeAdapter(
                 attribute,
@@ -70,7 +71,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         public void AdapterFactory_RegistersAdapters_ForDataTypeAttributes(
             ValidationAttribute attribute,
             string expectedRuleName
-        ) {
+        )
+        {
             // Arrange & Act
             var adapter = _validationAttributeAdapterProvider.GetAttributeAdapter(
                 attribute,

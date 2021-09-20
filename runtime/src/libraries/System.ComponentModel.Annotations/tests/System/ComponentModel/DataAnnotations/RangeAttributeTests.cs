@@ -273,7 +273,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             Type type,
             string min,
             string max
-        ) {
+        )
+        {
             using (new ThreadCultureChange("en-US"))
             {
                 Assert.True(new RangeAttribute(type, min, max).IsValid(null));
@@ -293,7 +294,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             Type type,
             string min,
             string max
-        ) {
+        )
+        {
             using (new ThreadCultureChange("en-US"))
             {
                 Assert.True(
@@ -325,7 +327,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             Type type,
             string min,
             string max
-        ) {
+        )
+        {
             using (new ThreadCultureChange("en-US"))
             {
                 var range = new RangeAttribute(type, min, max);
@@ -348,7 +351,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             Type type,
             string min,
             string max
-        ) {
+        )
+        {
             using (new ThreadCultureChange("en-US"))
             {
                 var range = new RangeAttribute(type, min, max);
@@ -372,7 +376,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             string min,
             string max,
             string value
-        ) {
+        )
+        {
             using (new ThreadCultureChange("en-US"))
             {
                 Assert.True(new RangeAttribute(type, min, max).IsValid(value));
@@ -396,7 +401,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             string min,
             string max,
             string value
-        ) {
+        )
+        {
             using (new ThreadCultureChange("en-US"))
             {
                 Assert.True(
@@ -428,7 +434,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             string min,
             string max,
             string value
-        ) {
+        )
+        {
             using (new ThreadCultureChange("en-US"))
             {
                 Assert.True(
@@ -457,7 +464,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             string min,
             string max,
             string value
-        ) {
+        )
+        {
             using (new ThreadCultureChange("en-US"))
             {
                 Assert.True(
@@ -492,7 +500,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             string min,
             string max,
             object value
-        ) {
+        )
+        {
             using (new ThreadCultureChange("en-US"))
             {
                 Assert.True(new RangeAttribute(type, min, max).IsValid(value));
@@ -513,7 +522,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             string min,
             string max,
             object value
-        ) {
+        )
+        {
             using (new ThreadCultureChange("en-US"))
             {
                 Assert.True(
@@ -546,7 +556,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             string min,
             string max,
             object value
-        ) {
+        )
+        {
             using (new ThreadCultureChange("en-US"))
             {
                 Assert.True(
@@ -575,7 +586,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             string min,
             string max,
             object value
-        ) {
+        )
+        {
             using (new ThreadCultureChange("en-US"))
             {
                 Assert.True(
@@ -610,7 +622,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             string min,
             string max,
             object value
-        ) {
+        )
+        {
             using (new ThreadCultureChange("en-US"))
             {
                 var range = new RangeAttribute(type, min, max);
@@ -631,7 +644,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             string min,
             string max,
             object value
-        ) {
+        )
+        {
             using (new ThreadCultureChange("en-US"))
             {
                 var range = new RangeAttribute(type, min, max)
@@ -662,7 +676,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             string min,
             string max,
             object value
-        ) {
+        )
+        {
             using (new ThreadCultureChange("en-US"))
             {
                 var range = new RangeAttribute(type, min, max)
@@ -691,7 +706,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             string min,
             string max,
             object value
-        ) {
+        )
+        {
             using (new ThreadCultureChange("en-US"))
             {
                 var range = new RangeAttribute(type, min, max)
@@ -724,7 +740,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             string min,
             string max,
             string value
-        ) {
+        )
+        {
             using (new ThreadCultureChange("en-US"))
             {
                 Assert.False(new RangeAttribute(type, min, max).IsValid(value));
@@ -748,7 +765,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             string min,
             string max,
             string value
-        ) {
+        )
+        {
             using (new ThreadCultureChange("en-US"))
             {
                 Assert.False(
@@ -780,7 +798,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             string min,
             string max,
             string value
-        ) {
+        )
+        {
             using (new ThreadCultureChange("en-US"))
             {
                 Assert.False(
@@ -809,7 +828,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             string min,
             string max,
             string value
-        ) {
+        )
+        {
             using (new ThreadCultureChange("en-US"))
             {
                 Assert.False(
@@ -844,7 +864,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             string min,
             string max,
             string value
-        ) {
+        )
+        {
             using (new ThreadCultureChange("en-US"))
             {
                 var range = new RangeAttribute(type, min, max);
@@ -865,7 +886,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             string min,
             string max,
             string value
-        ) {
+        )
+        {
             using (new ThreadCultureChange("en-US"))
             {
                 var range = new RangeAttribute(type, min, max)
@@ -893,7 +915,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             string min,
             string max,
             string value
-        ) {
+        )
+        {
             using (new ThreadCultureChange("en-US"))
             {
                 var range = new RangeAttribute(type, min, max)
@@ -921,7 +944,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             string min,
             string max,
             string value
-        ) {
+        )
+        {
             using (new ThreadCultureChange("en-US"))
             {
                 var range = new RangeAttribute(type, min, max)
@@ -954,7 +978,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             string min,
             string max,
             string value
-        ) {
+        )
+        {
             using (new ThreadCultureChange("en-US"))
             {
                 var range = new RangeAttribute(type, min, max);
@@ -975,7 +1000,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             string min,
             string max,
             string value
-        ) {
+        )
+        {
             using (new ThreadCultureChange("en-US"))
             {
                 var range = new RangeAttribute(type, min, max)
@@ -1003,7 +1029,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             string min,
             string max,
             string value
-        ) {
+        )
+        {
             using (new ThreadCultureChange("en-US"))
             {
                 var range = new RangeAttribute(type, min, max)
@@ -1031,7 +1058,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             string min,
             string max,
             string value
-        ) {
+        )
+        {
             using (new ThreadCultureChange("en-US"))
             {
                 var range = new RangeAttribute(type, min, max)
@@ -1060,7 +1088,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             Type type,
             string minimum,
             string maximum
-        ) {
+        )
+        {
             var attribute = new RangeAttribute(type, minimum, maximum);
             AssertExtensions.Throws<ArgumentException, Exception>(
                 () => attribute.Validate("abc", new ValidationContext(new object()))
@@ -1147,7 +1176,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         public static void Validate_MinimumOrMaximumNull_ThrowsInvalidOperationException(
             string minimum,
             string maximum
-        ) {
+        )
+        {
             RangeAttribute attribute = new RangeAttribute(typeof(int), minimum, maximum);
             Assert.Throws<InvalidOperationException>(
                 () => attribute.Validate("Any", new ValidationContext(new object()))
@@ -1163,7 +1193,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             Type type,
             string minimum,
             string maximum
-        ) {
+        )
+        {
             RangeAttribute attribute = new RangeAttribute(type, minimum, maximum);
             AssertExtensions.Throws<ArgumentException, Exception>(
                 () => attribute.Validate("Any", new ValidationContext(new object()))
@@ -1177,7 +1208,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             Type type,
             string minimum,
             string maximum
-        ) {
+        )
+        {
             RangeAttribute attribute = new RangeAttribute(type, minimum, maximum);
             Assert.Throws<FormatException>(
                 () => attribute.Validate("Any", new ValidationContext(new object()))
@@ -1191,7 +1223,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             int minimum,
             int maximum,
             object value
-        ) {
+        )
+        {
             RangeAttribute attribute = new RangeAttribute(minimum, maximum);
             Assert.Throws<OverflowException>(
                 () => attribute.Validate(value, new ValidationContext(new object()))
@@ -1206,7 +1239,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             double minimum,
             double maximum,
             object value
-        ) {
+        )
+        {
             RangeAttribute attribute = new RangeAttribute(minimum, maximum);
             Assert.Throws<OverflowException>(
                 () => attribute.Validate(value, new ValidationContext(new object()))

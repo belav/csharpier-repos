@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         internal void TestOverloadResolutionWithDiff(
             string source,
             MetadataReference[] additionalRefs = null
-        ) {
+        )
+        {
             // The mechanism of this test is: we build the bound tree for the code passed in and then extract
             // from it the nodes that describe the method symbols. We then compare the description of
             // the symbols given to the comment that follows the call.

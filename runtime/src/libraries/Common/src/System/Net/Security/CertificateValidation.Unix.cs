@@ -17,7 +17,8 @@ namespace System.Net.Security
             X509Certificate2 remoteCertificate,
             bool checkCertName,
             string? hostName
-        ) {
+        )
+        {
             SslPolicyErrors errors = chain.Build(remoteCertificate)
                 ? SslPolicyErrors.None
                 : SslPolicyErrors.RemoteCertificateChainErrors;

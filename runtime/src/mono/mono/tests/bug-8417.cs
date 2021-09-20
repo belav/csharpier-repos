@@ -15,7 +15,8 @@ namespace Example
             out int exitCode,
             out string stdout,
             bool capture_stderr = false
-        ) {
+        )
+        {
             var sb = new StringBuilder();
             var stdout_done = new System.Threading.ManualResetEvent(false);
             var stderr_done = new System.Threading.ManualResetEvent(false);

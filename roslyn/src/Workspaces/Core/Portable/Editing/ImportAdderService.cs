@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.Editing
             Strategy strategy,
             OptionSet? options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             options ??= await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
 
             var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
@@ -106,7 +107,8 @@ namespace Microsoft.CodeAnalysis.Editing
             SyntaxNode container,
             SemanticModel model,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var _ = PooledHashSet<INamespaceSymbol>.GetInstance(out var conflicts);
             AddPotentiallyConflictingImports(
                 model,
@@ -135,7 +137,8 @@ namespace Microsoft.CodeAnalysis.Editing
         private static SyntaxNode GenerateNamespaceImportDeclaration(
             INamespaceSymbol namespaceSymbol,
             SyntaxGenerator generator
-        ) {
+        )
+        {
             // We add Simplifier.Annotation so that the import can be removed if it turns out to be unnecessary.
             // This can happen for a number of reasons (we replace the type with var, inbuilt type, alias, etc.)
             return generator.NamespaceImportDeclaration(
@@ -152,7 +155,8 @@ namespace Microsoft.CodeAnalysis.Editing
             bool placeSystemNamespaceFirst,
             bool allowInHiddenRegions,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var _1 = ArrayBuilder<SyntaxNode>.GetInstance(out var importsToAdd);
             using var _2 = ArrayBuilder<SyntaxNode>.GetInstance(out var nodesToSimplify);
 
@@ -235,7 +239,8 @@ namespace Microsoft.CodeAnalysis.Editing
             bool placeSystemNamespaceFirst,
             bool allowInHiddenRegions,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using var _ = PooledDictionary<INamespaceSymbol, SyntaxNode>.GetInstance(
                 out var importToSyntax
             );
@@ -264,7 +269,8 @@ namespace Microsoft.CodeAnalysis.Editing
                     foreach (
                         var namedType in SymbolAnnotation.GetSymbols(annotation, model.Compilation)
                             .OfType<INamedTypeSymbol>()
-                    ) {
+                    )
+                    {
                         cancellationToken.ThrowIfCancellationRequested();
                         if (
                             namedType.OriginalDefinition.IsSpecialType()
@@ -361,7 +367,8 @@ namespace Microsoft.CodeAnalysis.Editing
             INamespaceSymbol symbol,
             SemanticModel model,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var containedNamespace = model.GetEnclosingNamespace(node.SpanStart, cancellationToken);
 
             while (containedNamespace != null)

@@ -184,7 +184,8 @@ namespace System.Web.WebPages.Administration.Test
             string desc = null,
             bool requiresLicense = false,
             IEnumerable<PackageDependency> dependencies = null
-        ) {
+        )
+        {
             Mock<IPackage> package = new Mock<IPackage>();
             package.SetupGet(c => c.Id).Returns(id);
             package.SetupGet(c => c.Version).Returns(SemanticVersion.Parse(version));

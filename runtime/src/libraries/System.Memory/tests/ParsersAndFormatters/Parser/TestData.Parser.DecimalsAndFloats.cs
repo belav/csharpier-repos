@@ -28,7 +28,8 @@ namespace System.Buffers.Text.Tests
                         {
                             ftd
                         }.ToParserTheoryDataCollection()
-                    ) {
+                    )
+                    {
                         yield return testData;
                     }
                 }
@@ -38,7 +39,8 @@ namespace System.Buffers.Text.Tests
                         DecimalFormats,
                         decimal.TryParse
                     )
-                ) {
+                )
+                {
                     yield return testData;
                 }
 
@@ -72,7 +74,8 @@ namespace System.Buffers.Text.Tests
                         FloatingPointFormats,
                         double.TryParse
                     )
-                ) {
+                )
+                {
                     yield return testData;
                 }
 
@@ -109,7 +112,8 @@ namespace System.Buffers.Text.Tests
                         FloatingPointFormats,
                         float.TryParse
                     )
-                ) {
+                )
+                {
                     yield return testData;
                 }
 
@@ -140,7 +144,8 @@ namespace System.Buffers.Text.Tests
         private static IEnumerable<ParserTestData<T>> GenerateNumberBasedParserTestData<T>(
             IEnumerable<SupportedFormat> formats,
             TryParseDelegate<T> tryParse
-        ) {
+        )
+        {
             foreach (char formatSymbol in formats.Select(f => f.Symbol))
             {
                 foreach (
@@ -164,7 +169,8 @@ namespace System.Buffers.Text.Tests
                                 (formatSymbol == 'E' || formatSymbol == 'e')
                                 && text.IndexOf("E", StringComparison.InvariantCultureIgnoreCase)
                                     == -1
-                            ) {
+                            )
+                            {
                                 result = default;
                                 return false;
                             }
@@ -174,7 +180,8 @@ namespace System.Buffers.Text.Tests
                             }
                         }
                     )
-                ) {
+                )
+                {
                     yield return testData;
                 }
             }

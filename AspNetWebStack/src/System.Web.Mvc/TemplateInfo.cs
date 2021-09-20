@@ -52,7 +52,8 @@ namespace System.Web.Mvc
             if (
                 partialFieldName != null
                 && partialFieldName.StartsWith("[", StringComparison.Ordinal)
-            ) {
+            )
+            {
                 // See Codeplex #544 - the partialFieldName might represent an indexer access, in which case combining
                 // with a 'dot' would be invalid.
                 return HtmlFieldPrefix + partialFieldName;

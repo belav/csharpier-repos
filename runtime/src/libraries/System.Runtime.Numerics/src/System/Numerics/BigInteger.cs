@@ -266,7 +266,8 @@ namespace System.Numerics
             ReadOnlySpan<byte> value,
             bool isUnsigned = false,
             bool isBigEndian = false
-        ) {
+        )
+        {
             int byteCount = value.Length;
 
             bool isNegative;
@@ -369,7 +370,8 @@ namespace System.Numerics
                         curDword = 0;
                         curDword < dwordCount - (unalignedBytes == 0 ? 0 : 1);
                         curDword++
-                    ) {
+                    )
+                    {
                         for (int byteInDword = 0; byteInDword < 4; byteInDword++)
                         {
                             byte curByteValue = value[curByte];
@@ -387,7 +389,8 @@ namespace System.Numerics
                         curDword = 0;
                         curDword < dwordCount - (unalignedBytes == 0 ? 0 : 1);
                         curDword++
-                    ) {
+                    )
+                    {
                         for (int byteInDword = 0; byteInDword < 4; byteInDword++)
                         {
                             byte curByteValue = value[curByte];
@@ -421,7 +424,8 @@ namespace System.Numerics
                             curByte = byteCountMinus1;
                             curByte >= byteCount - unalignedBytes;
                             curByte--
-                        ) {
+                        )
+                        {
                             byte curByteValue = value[curByte];
                             val[curDword] = (val[curDword] << 8) | curByteValue;
                         }
@@ -618,12 +622,14 @@ namespace System.Numerics
             {
                 if (
                     value[0] == 1 /* abs(-1) */
-                ) {
+                )
+                {
                     this = s_bnMinusOneInt;
                 }
                 else if (
                     value[0] == kuMaskHighBit /* abs(Int32.MinValue) */
-                ) {
+                )
+                {
                     this = s_bnMinInt;
                 }
                 else
@@ -754,7 +760,8 @@ namespace System.Numerics
             NumberStyles style,
             IFormatProvider? provider,
             out BigInteger result
-        ) {
+        )
+        {
             return BigNumber.TryParseBigInteger(
                 value,
                 style,
@@ -767,7 +774,8 @@ namespace System.Numerics
             ReadOnlySpan<char> value,
             NumberStyles style = NumberStyles.Integer,
             IFormatProvider? provider = null
-        ) {
+        )
+        {
             return BigNumber.ParseBigInteger(value, style, NumberFormatInfo.GetInstance(provider));
         }
 
@@ -786,7 +794,8 @@ namespace System.Numerics
             NumberStyles style,
             IFormatProvider? provider,
             out BigInteger result
-        ) {
+        )
+        {
             return BigNumber.TryParseBigInteger(
                 value,
                 style,
@@ -834,7 +843,8 @@ namespace System.Numerics
             BigInteger dividend,
             BigInteger divisor,
             out BigInteger remainder
-        ) {
+        )
+        {
             dividend.AssertValid();
             divisor.AssertValid();
 
@@ -1345,7 +1355,8 @@ namespace System.Numerics
             out int bytesWritten,
             bool isUnsigned = false,
             bool isBigEndian = false
-        ) {
+        )
+        {
             bytesWritten = 0;
             if (
                 TryGetBytes(
@@ -1355,7 +1366,8 @@ namespace System.Numerics
                     isBigEndian,
                     ref bytesWritten
                 ) == null
-            ) {
+            )
+            {
                 bytesWritten = 0;
                 return false;
             }
@@ -1367,7 +1379,8 @@ namespace System.Numerics
             out int bytesWritten,
             bool isUnsigned = false,
             bool isBigEndian = false
-        ) {
+        )
+        {
             bytesWritten = 0;
             return TryGetBytes(
                     GetBytesMode.Span,
@@ -1428,7 +1441,8 @@ namespace System.Numerics
             bool isUnsigned,
             bool isBigEndian,
             ref int bytesWritten
-        ) {
+        )
+        {
             Debug.Assert(
                 mode == GetBytesMode.AllocateArray
                     || mode == GetBytesMode.Count
@@ -1726,7 +1740,8 @@ namespace System.Numerics
             out int charsWritten,
             ReadOnlySpan<char> format = default,
             IFormatProvider? provider = null
-        ) {
+        )
+        {
             return BigNumber.TryFormatBigInteger(
                 this,
                 format,
@@ -1741,7 +1756,8 @@ namespace System.Numerics
             int leftSign,
             uint[]? rightBits,
             int rightSign
-        ) {
+        )
+        {
             bool trivialLeft = leftBits == null;
             bool trivialRight = rightBits == null;
 
@@ -1793,7 +1809,8 @@ namespace System.Numerics
             int leftSign,
             uint[]? rightBits,
             int rightSign
-        ) {
+        )
+        {
             bool trivialLeft = leftBits == null;
             bool trivialRight = rightBits == null;
 

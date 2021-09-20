@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Workspaces
             ITextBufferCloneService textBufferCloneService,
             ITextBufferFactoryService textBufferFactoryService,
             IContentTypeRegistryService contentTypeRegistryService
-        ) {
+        )
+        {
             _textBufferCloneService = textBufferCloneService;
             _textBufferFactory = textBufferFactoryService;
             _unknownContentType = contentTypeRegistryService.UnknownContentType;
@@ -48,7 +49,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Workspaces
             Stream stream,
             Encoding? defaultEncoding,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             // this API is for a case where user wants us to figure out encoding from the given stream.
             // if defaultEncoding is given, we will use it if we couldn't figure out encoding used in the stream ourselves.
             RoslynDebug.Assert(stream != null);
@@ -84,7 +86,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Workspaces
             TextReader reader,
             Encoding? encoding,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             // this API is for a case where user just wants to create a source text with explicit encoding.
             var buffer = CreateTextBuffer(reader);
 
@@ -99,7 +102,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Workspaces
             Stream stream,
             Encoding encoding,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             cancellationToken.ThrowIfCancellationRequested();
             stream.Seek(0, SeekOrigin.Begin);
 

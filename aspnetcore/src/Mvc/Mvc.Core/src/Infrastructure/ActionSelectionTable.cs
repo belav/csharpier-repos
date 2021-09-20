@@ -43,7 +43,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             string[] routeKeys,
             Dictionary<string[], List<TItem>> ordinalEntries,
             Dictionary<string[], List<TItem>> ordinalIgnoreCaseEntries
-        ) {
+        )
+        {
             Version = version;
             RouteKeys = routeKeys;
             OrdinalEntries = ordinalEntries;
@@ -60,7 +61,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
         public static ActionSelectionTable<ActionDescriptor> Create(
             ActionDescriptorCollection actions
-        ) {
+        )
+        {
             return CreateCore<ActionDescriptor>(
                 // We need to store the version so the cache can be invalidated if the actions change.
                 version: actions.Version,
@@ -106,7 +108,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             IEnumerable<T> items,
             Func<T, IEnumerable<string>?> getRouteKeys,
             Func<T, string, string> getRouteValue
-        ) {
+        )
+        {
             // We need to build two maps for all of the route values.
             var ordinalEntries = new Dictionary<string[], List<T>>(StringArrayComparer.Ordinal);
             var ordinalIgnoreCaseEntries = new Dictionary<string[], List<T>>(
@@ -189,7 +192,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             if (
                 OrdinalEntries.TryGetValue(routeValues, out var matches)
                 || OrdinalIgnoreCaseEntries.TryGetValue(routeValues, out matches)
-            ) {
+            )
+            {
                 Debug.Assert(matches != null);
                 Debug.Assert(matches.Count >= 0);
                 return matches;

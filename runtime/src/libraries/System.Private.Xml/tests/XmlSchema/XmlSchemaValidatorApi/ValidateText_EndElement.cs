@@ -545,7 +545,8 @@ namespace System.Xml.Tests
         [InlineData("ignore")]
         public void TestForIdentityConstraints_Valid_InvalidDuplicateKey_InvalidKeyRefMissing_InvalidIdentitiConstraintIsSet(
             string constrType
-        ) {
+        )
+        {
             XmlSchemaValidator val;
             XmlSchemaInfo info = new XmlSchemaInfo();
             string[] keys = new string[] {  };
@@ -696,7 +697,8 @@ namespace System.Xml.Tests
         [InlineData("second")] //(BUG #307549)
         public void TestXmlSchemaInfoValuesAfterUnionValidation_Without_With_ValidationEndElementOverload(
             string overload
-        ) {
+        )
+        {
             XmlSchemaValidator val = CreateValidator(XSDFILE_VALIDATE_END_ELEMENT);
             XmlSchemaInfo info = new XmlSchemaInfo();
 

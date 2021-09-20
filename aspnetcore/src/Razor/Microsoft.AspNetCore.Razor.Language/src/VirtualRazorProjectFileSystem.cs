@@ -138,7 +138,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                             path.Length - directoryLength,
                             StringComparison.OrdinalIgnoreCase
                         ) == 0
-                    ) {
+                    )
+                    {
                         return file.ProjectItem;
                     }
                 }
@@ -162,7 +163,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 DirectoryNode directory,
                 string path,
                 bool createIfNotExists = false
-            ) {
+            )
+            {
                 Debug.Assert(!string.IsNullOrEmpty(path));
                 if (path[path.Length - 1] != '/')
                 {
@@ -172,7 +174,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 int index;
                 while (
                     (index = path.IndexOf('/', directory.Path.Length)) != -1 && index != path.Length
-                ) {
+                )
+                {
                     var subDirectory = FindSubDirectory(directory, path);
 
                     if (subDirectory == null)
@@ -198,7 +201,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             private static DirectoryNode FindSubDirectory(
                 DirectoryNode parentDirectory,
                 string path
-            ) {
+            )
+            {
                 for (var i = 0; i < parentDirectory.Directories.Count; i++)
                 {
                     // ParentDirectory.Path -> /Views/Home/
@@ -220,7 +224,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                             directoryPath.Length - startIndex,
                             StringComparison.OrdinalIgnoreCase
                         ) == 0
-                    ) {
+                    )
+                    {
                         return currentDirectory;
                     }
                 }

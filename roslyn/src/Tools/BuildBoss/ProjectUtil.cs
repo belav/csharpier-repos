@@ -127,7 +127,8 @@ namespace BuildBoss
                             referenceOutputAssemblyValue.Trim().ToLower(),
                             out var isRealReference
                         ) && !isRealReference
-                    ) {
+                    )
+                    {
                         continue;
                     }
                 }
@@ -152,7 +153,8 @@ namespace BuildBoss
             var list = new List<PackageReference>();
             foreach (
                 var packageRef in Document.XPathSelectElements("//mb:PackageReference", Manager)
-            ) {
+            )
+            {
                 list.Add(GetPackageReference(packageRef));
             }
 

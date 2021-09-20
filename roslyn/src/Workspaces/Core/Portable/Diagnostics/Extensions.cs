@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             this IEnumerable<DiagnosticData> diagnostics,
             Project project,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var result = ArrayBuilder<Diagnostic>.GetInstance();
             foreach (var diagnostic in diagnostics)
             {
@@ -59,7 +60,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             this IReadOnlyCollection<DiagnosticDataLocation> locations,
             Project project,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (locations.Count == 0)
             {
                 return SpecializedCollections.EmptyList<Location>();
@@ -80,7 +82,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             this DiagnosticDataLocation? dataLocation,
             Project project,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (dataLocation?.DocumentId == null)
             {
                 return Location.None;
@@ -108,7 +111,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public static Location ConvertLocation(
             this DiagnosticDataLocation dataLocation,
             SyntacticDocument? document = null
-        ) {
+        )
+        {
             if (dataLocation?.DocumentId == null)
             {
                 return Location.None;
@@ -173,7 +177,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             SkippedHostAnalyzersInfo skippedAnalyzersInfo,
             bool includeSuppressedDiagnostics,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             SyntaxTree? treeToAnalyze = null;
             AdditionalText? additionalFileToAnalyze = null;
             if (documentAnalysisScope != null)
@@ -229,7 +234,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                                         treeToAnalyze,
                                         out diagnosticsByAnalyzerMap
                                     )
-                                ) {
+                                )
+                                {
                                     AddAnalyzerDiagnosticsToResult(
                                         analyzer,
                                         diagnosticsByAnalyzerMap,
@@ -249,7 +255,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                                     additionalFileToAnalyze!,
                                     out diagnosticsByAnalyzerMap
                                 )
-                            ) {
+                            )
+                            {
                                 AddAnalyzerDiagnosticsToResult(
                                     analyzer,
                                     diagnosticsByAnalyzerMap,
@@ -271,7 +278,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                                     treeToAnalyze!,
                                     out diagnosticsByAnalyzerMap
                                 )
-                            ) {
+                            )
+                            {
                                 AddAnalyzerDiagnosticsToResult(
                                     analyzer,
                                     diagnosticsByAnalyzerMap,
@@ -295,7 +303,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 {
                     foreach (
                         var (tree, diagnosticsByAnalyzerMap) in analysisResult.SyntaxDiagnostics
-                    ) {
+                    )
+                    {
                         AddAnalyzerDiagnosticsToResult(
                             analyzer,
                             diagnosticsByAnalyzerMap,
@@ -312,7 +321,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
                     foreach (
                         var (tree, diagnosticsByAnalyzerMap) in analysisResult.SemanticDiagnostics
-                    ) {
+                    )
+                    {
                         AddAnalyzerDiagnosticsToResult(
                             analyzer,
                             diagnosticsByAnalyzerMap,
@@ -332,7 +342,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                             file,
                             diagnosticsByAnalyzerMap
                         ) in analysisResult.AdditionalFileDiagnostics
-                    ) {
+                    )
+                    {
                         var additionalDocumentId = project.GetDocumentForFile(file);
                         var kind =
                             additionalDocumentId != null
@@ -370,7 +381,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 if (
                     !additionalPragmaSuppressionDiagnostics.IsEmpty
                     && analyzer is IPragmaSuppressionsAnalyzer
-                ) {
+                )
+                {
                     if (documentAnalysisScope != null)
                     {
                         if (treeToAnalyze != null)
@@ -397,7 +409,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                             var group in additionalPragmaSuppressionDiagnostics.GroupBy(
                                 d => d.Location.SourceTree!
                             )
-                        ) {
+                        )
+                        {
                             AddDiagnosticsToResult(
                                 group.AsImmutable(),
                                 ref result,
@@ -434,7 +447,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 AnalysisKind kind,
                 ImmutableArray<string> diagnosticIdsToFilter,
                 bool includeSuppressedDiagnostics
-            ) {
+            )
+            {
                 if (diagnosticsByAnalyzer.TryGetValue(analyzer, out var diagnostics))
                 {
                     AddDiagnosticsToResult(
@@ -461,7 +475,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 AnalysisKind kind,
                 ImmutableArray<string> diagnosticIdsToFilter,
                 bool includeSuppressedDiagnostics
-            ) {
+            )
+            {
                 if (diagnostics.IsEmpty)
                 {
                     return;
@@ -518,12 +533,14 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             ImmutableArray<string> diagnosticIdsToFilter,
             bool includeSuppressedDiagnostics,
             TextSpan? filterSpan = null
-        ) {
+        )
+        {
             if (
                 diagnosticIdsToFilter.IsEmpty
                 && includeSuppressedDiagnostics
                 && !filterSpan.HasValue
-            ) {
+            )
+            {
                 return diagnostics;
             }
 
@@ -542,7 +559,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Project project,
             DiagnosticAnalyzerInfoCache analyzerInfoCache,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var result = await GetAnalysisResultAsync(
                     compilationWithAnalyzers,
                     documentAnalysisScope,
@@ -564,7 +582,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             CompilationWithAnalyzers compilationWithAnalyzers,
             DocumentAnalysisScope? documentAnalysisScope,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (documentAnalysisScope == null)
             {
                 return await compilationWithAnalyzers.GetAnalysisResultAsync(cancellationToken)
@@ -625,7 +644,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Project project,
             DiagnosticAnalyzerInfoCache analyzerInfoCache,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var analyzers = documentAnalysisScope?.Analyzers ?? compilationWithAnalyzers.Analyzers;
             var suppressionAnalyzer = analyzers.OfType<IPragmaSuppressionsAnalyzer>()
                 .FirstOrDefault();
@@ -693,7 +713,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 Document document,
                 TextSpan? span,
                 Action<Diagnostic> reportDiagnostic
-            ) {
+            )
+            {
                 var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken)
                     .ConfigureAwait(false);
                 await suppressionAnalyzer.AnalyzeAsync(

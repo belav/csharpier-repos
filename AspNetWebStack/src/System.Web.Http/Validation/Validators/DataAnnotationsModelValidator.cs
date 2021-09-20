@@ -48,7 +48,8 @@ namespace System.Web.Http.Validation.Validators
         public override IEnumerable<ModelValidationResult> Validate(
             ModelMetadata metadata,
             object container
-        ) {
+        )
+        {
             string memberName;
             if (_useLegacyValidationMemberName)
             {
@@ -113,7 +114,8 @@ namespace System.Web.Http.Validation.Validators
                 if (
                     bool.TryParse(useLegacyMemberNameArray[0], out useLegacyMemberName)
                     && useLegacyMemberName
-                ) {
+                )
+                {
                     return true;
                 }
             }

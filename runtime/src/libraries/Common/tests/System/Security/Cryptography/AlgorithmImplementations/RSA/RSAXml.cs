@@ -1441,7 +1441,8 @@ zM=
             string expectedDQ,
             string expectedInverseQ,
             string alternateD = null
-        ) {
+        )
+        {
             IEnumerator<XElement> iter;
 
             using (RSA rsa = RSAFactory.Create(keyParameters))
@@ -1468,7 +1469,8 @@ zM=
         private static IEnumerator<XElement> VerifyRootAndGetChildren(
             RSA rsa,
             bool includePrivateParameters
-        ) {
+        )
+        {
             XDocument doc = XDocument.Parse(rsa.ToXmlString(includePrivateParameters));
             XElement root = doc.Root;
 
@@ -1488,7 +1490,8 @@ zM=
             string localName,
             string expectedValue,
             string alternateValue = null
-        ) {
+        )
+        {
             Assert.True(iter.MoveNext(), $"Move to {localName}");
 
             XElement cur = iter.Current;
@@ -1503,7 +1506,8 @@ zM=
             if (
                 alternateValue == null
                 || !string.Equals(alternateValue, cur.Value, StringComparison.Ordinal)
-            ) {
+            )
+            {
                 Assert.Equal(expectedValue, cur.Value);
             }
         }

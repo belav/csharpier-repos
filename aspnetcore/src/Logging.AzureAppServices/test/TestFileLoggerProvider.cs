@@ -17,23 +17,25 @@ namespace Microsoft.Extensions.Logging.AzureAppServices.Test
             string fileName = "LogFile.",
             int maxFileSize = 32_000,
             int maxRetainedFiles = 100
-        ) : base(
-            new OptionsWrapperMonitor<AzureFileLoggerOptions>(
-                new AzureFileLoggerOptions()
-                {
-                    LogDirectory = path,
-                    FileName = fileName,
-                    FileSizeLimit = maxFileSize,
-                    RetainedFileCountLimit = maxRetainedFiles,
-                    IsEnabled = true
-                }
-            )
-        ) { }
+        )
+            : base(
+                new OptionsWrapperMonitor<AzureFileLoggerOptions>(
+                    new AzureFileLoggerOptions()
+                    {
+                        LogDirectory = path,
+                        FileName = fileName,
+                        FileSizeLimit = maxFileSize,
+                        RetainedFileCountLimit = maxRetainedFiles,
+                        IsEnabled = true
+                    }
+                )
+            ) { }
 
         protected override Task IntervalAsync(
             TimeSpan interval,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return IntervalControl.IntervalAsync();
         }
     }

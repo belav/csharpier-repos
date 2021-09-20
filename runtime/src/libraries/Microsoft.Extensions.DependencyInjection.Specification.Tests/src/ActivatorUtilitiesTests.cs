@@ -24,7 +24,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             IServiceProvider provider,
             Type type,
             object[] args
-        ) {
+        )
+        {
             return ActivatorUtilities.CreateInstance(provider, type, args);
         }
 
@@ -32,7 +33,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             IServiceProvider provider,
             Type type,
             object[] args
-        ) {
+        )
+        {
             var factory = ActivatorUtilities.CreateFactory(
                 type,
                 args.Select(a => a.GetType()).ToArray()
@@ -44,7 +46,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             CreateInstanceFunc func,
             IServiceProvider provider,
             params object[] args
-        ) {
+        )
+        {
             return (T)func(provider, typeof(T), args);
         }
 
@@ -61,7 +64,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
         [MemberData(nameof(CreateInstanceFuncs))]
         public void TypeActivatorEnablesYouToCreateAnyTypeWithServicesEvenWhenNotInIocContainer(
             CreateInstanceFunc createFunc
-        ) {
+        )
+        {
             // Arrange
             var serviceCollection = new TestServiceCollection().AddTransient<
                 IFakeService,
@@ -78,7 +82,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
         [MemberData(nameof(CreateInstanceFuncs))]
         public void TypeActivatorAcceptsAnyNumberOfAdditionalConstructorParametersToProvide(
             CreateInstanceFunc createFunc
-        ) {
+        )
+        {
             // Arrange
             var serviceCollection = new TestServiceCollection().AddTransient<
                 IFakeService,
@@ -134,7 +139,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
         [MemberData(nameof(CreateInstanceFuncs))]
         public void TypeActivatorWorksWithCtorWithOptionalArgs_WithStructDefaults(
             CreateInstanceFunc createFunc
-        ) {
+        )
+        {
             // Arrange
             var provider = new TestServiceCollection();
             var serviceProvider = CreateServiceProvider(provider);
@@ -160,7 +166,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
         [MemberData(nameof(CreateInstanceFuncs))]
         public void TypeActivatorCanDisambiguateConstructorsWithUniqueArguments(
             CreateInstanceFunc createFunc
-        ) {
+        )
+        {
             // Arrange
             var serviceCollection = new TestServiceCollection().AddTransient<
                 IFakeService,
@@ -248,7 +255,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
         [MemberData(nameof(CreateInstanceFuncs))]
         public void TypeActivatorRethrowsOriginalExceptionFromConstructor(
             CreateInstanceFunc createFunc
-        ) {
+        )
+        {
             // Act
             var ex1 = Assert.Throws<Exception>(
                 () => CreateInstance<ClassWithThrowingEmptyCtor>(createFunc, provider: null)
@@ -273,7 +281,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
         [InlineData(typeof(int))]
         public void TypeActivatorCreateFactoryDoesNotAllowForAmbiguousConstructorMatches(
             Type paramType
-        ) {
+        )
+        {
             // Arrange
             var type = typeof(ClassWithAmbiguousCtors);
             var expectedMessage =
@@ -295,7 +304,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
         public void TypeActivatorCreateInstanceUsesFirstMathchedConstructor(
             object value,
             string ctor
-        ) {
+        )
+        {
             // Arrange
             var serviceCollection = new TestServiceCollection();
             serviceCollection.AddSingleton<IFakeService, FakeService>();
@@ -349,7 +359,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
         [MemberData(nameof(CreateInstanceFuncs))]
         public void TypeActivatorThrowsWhenMarkedCtorDoesntAcceptArguments(
             CreateInstanceFunc createFunc
-        ) {
+        )
+        {
             // Act
             var exception = Assert.Throws<InvalidOperationException>(
                 () =>
@@ -471,7 +482,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
         [MemberData(nameof(CreateInstanceFuncs))]
         public void UnRegisteredServiceAsConstructorParameterThrowsException(
             CreateInstanceFunc createFunc
-        ) {
+        )
+        {
             var serviceCollection =
                 new TestServiceCollection().AddSingleton<CreationCountFakeService>();
             var serviceProvider = CreateServiceProvider(serviceCollection);

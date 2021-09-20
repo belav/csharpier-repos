@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Analyzers
         public OptionsAnalysis(
             IMethodSymbol configureServicesMethod,
             ImmutableArray<OptionsItem> options
-        ) {
+        )
+        {
             ConfigureServicesMethod = configureServicesMethod;
             Options = options;
         }

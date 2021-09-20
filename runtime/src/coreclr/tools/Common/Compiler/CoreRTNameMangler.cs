@@ -471,7 +471,8 @@ namespace ILCompiler
 
         private Utf8String GetPrefixMangledSignatureName(
             IPrefixMangledSignature prefixMangledSignature
-        ) {
+        )
+        {
             Utf8StringBuilder sb = new Utf8StringBuilder();
             sb.Append(EnterNameScopeSequence)
                 .Append(prefixMangledSignature.Prefix)

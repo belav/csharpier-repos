@@ -16,7 +16,8 @@ namespace AuthSamples.FunctionalTests
 
         public CustomAuthorizationFailureResponseTests(
             WebApplicationFactory<CustomAuthorizationFailureResponse.Startup> fixture
-        ) {
+        )
+        {
             Client = fixture.CreateClient();
         }
 

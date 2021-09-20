@@ -69,7 +69,8 @@ namespace JitBench
             string outputDir,
             bool useExistingSetup,
             ITestOutputHelper output
-        ) {
+        )
+        {
             if (!useExistingSetup)
             {
                 using (var setupSection = new IndentedTestOutputHelper("Setup " + Name, output))
@@ -115,7 +116,8 @@ namespace JitBench
             string arguments,
             ITestOutputHelper output,
             string workingDirectory = null
-        ) {
+        )
+        {
             int exitCode = await new ProcessRunner("git", arguments).WithLog(output)
                 .WithWorkingDirectory(workingDirectory)
                 .Run();
@@ -128,7 +130,8 @@ namespace JitBench
             DotNetInstallation dotNetInstall,
             string outputDir,
             ITestOutputHelper output
-        ) {
+        )
+        {
             string tfm = DotNetSetup.GetTargetFrameworkMonikerForFrameworkVersion(
                 dotNetInstall.FrameworkVersion
             );
@@ -162,7 +165,8 @@ namespace JitBench
             DotNetInstallation dotNetInstall,
             string outputDir,
             ITestOutputHelper output
-        ) {
+        )
+        {
             string tfm = DotNetSetup.GetTargetFrameworkMonikerForFrameworkVersion(
                 dotNetInstall.FrameworkVersion
             );
@@ -213,7 +217,8 @@ namespace JitBench
             string stdout,
             string stderr,
             ITestOutputHelper output
-        ) {
+        )
+        {
             IterationResult result = base.RecordIterationMetrics(
                 scenarioIteration,
                 stdout,
@@ -298,7 +303,8 @@ namespace JitBench
             Metric originalMetric,
             out Metric newMetric,
             out string newScenarioModelName
-        ) {
+        )
+        {
             if (originalMetric.Equals(StartupMetric))
             {
                 newScenarioModelName = "Startup";
@@ -331,7 +337,8 @@ namespace JitBench
             DotNetInstallation dotNetInstall,
             string outputDir,
             string tfm
-        ) {
+        )
+        {
             string dir = Path.Combine(
                 GetWebAppSrcDirectory(outputDir),
                 "bin",

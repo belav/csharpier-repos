@@ -130,7 +130,8 @@ namespace System.Text.Unicode
                             <= value.LastCodePoint /* inclusive */
                         ;
                         i++
-                    ) {
+                    )
+                    {
                         dict.Add(i, bidiClass);
                     }
                 }
@@ -174,7 +175,8 @@ namespace System.Text.Unicode
                                 <= value.LastCodePoint /* inclusive */
                             ;
                             i++
-                        ) {
+                        )
+                        {
                             dict.Add(i, baseName + i.ToString("X4", CultureInfo.InvariantCulture));
                         }
                     }
@@ -203,7 +205,8 @@ namespace System.Text.Unicode
                     Resources.GraphemeBreakProperty,
                     Resources.EmojiData
                 }
-            ) {
+            )
+            {
                 using Stream stream = Resources.OpenResource(resourceName);
                 using StreamReader reader = new StreamReader(stream);
 
@@ -217,14 +220,16 @@ namespace System.Text.Unicode
                                 value.PropName,
                                 out GraphemeClusterBreakProperty property
                             )
-                        ) {
+                        )
+                        {
                             for (
                                 int i = value.FirstCodePoint;
                                 i
                                     <= value.LastCodePoint /* inclusive */
                                 ;
                                 i++
-                            ) {
+                            )
+                            {
                                 dict.Add(i, property);
                             }
                         }
@@ -259,7 +264,8 @@ namespace System.Text.Unicode
                             <= value.LastCodePoint /* inclusive */
                         ;
                         i++
-                    ) {
+                    )
+                    {
                         dict.TryGetValue(
                             i,
                             out CodePointFlags flagsForThisCodePoint /* could be default(T) */
@@ -320,7 +326,8 @@ namespace System.Text.Unicode
                             <= nextEntry.CodePoint /* inclusive */
                         ;
                         i++
-                    ) {
+                    )
+                    {
                         dict.Add(i, new UnicodeDataFileEntry(i, baseName, entry.GeneralCategory));
                     }
                 }

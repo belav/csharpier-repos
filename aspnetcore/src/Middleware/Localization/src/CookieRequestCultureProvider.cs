@@ -30,7 +30,8 @@ namespace Microsoft.AspNetCore.Localization
         /// <inheritdoc />
         public override Task<ProviderCultureResult?> DetermineProviderCultureResult(
             HttpContext httpContext
-        ) {
+        )
+        {
             if (httpContext == null)
             {
                 throw new ArgumentNullException(nameof(httpContext));
@@ -93,7 +94,8 @@ namespace Microsoft.AspNetCore.Localization
             if (
                 !potentialCultureName.StartsWith(_culturePrefix, StringComparison.Ordinal)
                 || !potentialUICultureName.StartsWith(_uiCulturePrefix, StringComparison.Ordinal)
-            ) {
+            )
+            {
                 return null;
             }
 

@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 Node<TExtension, TMetadata> node,
                 List<Lazy<TExtension, TMetadata>> result,
                 HashSet<Node<TExtension, TMetadata>> seenNodes
-            ) {
+            )
+            {
                 if (seenNodes.Add(node))
                 {
                     foreach (var before in node.ExtensionsBeforeMeSet)

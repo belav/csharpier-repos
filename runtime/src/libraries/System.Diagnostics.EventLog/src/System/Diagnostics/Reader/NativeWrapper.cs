@@ -51,7 +51,8 @@ namespace System.Diagnostics.Eventing.Reader
             string path,
             string query,
             int flags
-        ) {
+        )
+        {
             EventLogHandle handle = UnsafeNativeMethods.EvtQuery(session, path, query, flags);
             int win32Error = Marshal.GetLastWin32Error();
             if (handle.IsInvalid)
@@ -65,7 +66,8 @@ namespace System.Diagnostics.Eventing.Reader
             EventLogHandle bookmark,
             int timeout,
             UnsafeNativeMethods.EvtSeekFlags flags
-        ) {
+        )
+        {
             bool status = UnsafeNativeMethods.EvtSeek(
                 resultSet,
                 position,
@@ -85,7 +87,8 @@ namespace System.Diagnostics.Eventing.Reader
             int timeout,
             int flags,
             ref int returned
-        ) {
+        )
+        {
             bool status = UnsafeNativeMethods.EvtNext(
                 queryHandle,
                 eventSize,
@@ -124,7 +127,8 @@ namespace System.Diagnostics.Eventing.Reader
             string logFilePath,
             int locale,
             int flags
-        ) {
+        )
+        {
             // ignore locale and pass 0 instead: that way, the thread locale will be retrieved in the API layer
             // and the "strict rendering" flag will NOT be set.  Otherwise, the fall back logic is broken and the descriptions
             // are not returned if the exact locale is not present on the server.
@@ -155,7 +159,8 @@ namespace System.Diagnostics.Eventing.Reader
         public static EventLogHandle EvtOpenEventMetadataEnum(
             EventLogHandle ProviderMetadata,
             int flags
-        ) {
+        )
+        {
             EventLogHandle emEnumHandle = UnsafeNativeMethods.EvtOpenEventMetadataEnum(
                 ProviderMetadata,
                 flags
@@ -170,7 +175,8 @@ namespace System.Diagnostics.Eventing.Reader
         public static EventLogHandle EvtNextEventMetadata(
             EventLogHandle eventMetadataEnum,
             int flags
-        ) {
+        )
+        {
             EventLogHandle emHandle = UnsafeNativeMethods.EvtNextEventMetadata(
                 eventMetadataEnum,
                 flags
@@ -209,7 +215,8 @@ namespace System.Diagnostics.Eventing.Reader
             EventLogHandle session,
             string channelPath,
             int flags
-        ) {
+        )
+        {
             EventLogHandle handle = UnsafeNativeMethods.EvtOpenChannelConfig(
                 session,
                 channelPath,
@@ -244,7 +251,8 @@ namespace System.Diagnostics.Eventing.Reader
             string query,
             string targetFilePath,
             int flags
-        ) {
+        )
+        {
             bool status;
             status = UnsafeNativeMethods.EvtExportLog(
                 session,
@@ -263,7 +271,8 @@ namespace System.Diagnostics.Eventing.Reader
             string logFilePath,
             int locale,
             int flags
-        ) {
+        )
+        {
             bool status;
             status = UnsafeNativeMethods.EvtArchiveExportedLog(session, logFilePath, locale, flags);
             int win32Error = Marshal.GetLastWin32Error();
@@ -276,7 +285,8 @@ namespace System.Diagnostics.Eventing.Reader
             string channelPath,
             string targetFilePath,
             int flags
-        ) {
+        )
+        {
             bool status;
             status = UnsafeNativeMethods.EvtClearLog(session, channelPath, targetFilePath, flags);
             int win32Error = Marshal.GetLastWin32Error();
@@ -288,7 +298,8 @@ namespace System.Diagnostics.Eventing.Reader
             int valuePathsCount,
             string[] valuePaths,
             UnsafeNativeMethods.EvtRenderContextFlags flags
-        ) {
+        )
+        {
             EventLogHandle renderContextHandleValues = UnsafeNativeMethods.EvtCreateRenderContext(
                 valuePathsCount,
                 valuePaths,
@@ -305,7 +316,8 @@ namespace System.Diagnostics.Eventing.Reader
             EventLogHandle eventHandle,
             UnsafeNativeMethods.EvtRenderFlags flags,
             StringBuilder buffer
-        ) {
+        )
+        {
             int buffUsed;
             int propCount;
             bool status = UnsafeNativeMethods.EvtRender(
@@ -348,7 +360,8 @@ namespace System.Diagnostics.Eventing.Reader
             ref UnsafeNativeMethods.EvtRpcLogin login,
             int timeout,
             int flags
-        ) {
+        )
+        {
             EventLogHandle handle = UnsafeNativeMethods.EvtOpenSession(
                 loginClass,
                 ref login,
@@ -381,7 +394,8 @@ namespace System.Diagnostics.Eventing.Reader
         public static object EvtGetEventInfo(
             EventLogHandle handle,
             UnsafeNativeMethods.EvtEventPropertyId enumType
-        ) {
+        )
+        {
             IntPtr buffer = IntPtr.Zero;
             int bufferNeeded;
 
@@ -428,7 +442,8 @@ namespace System.Diagnostics.Eventing.Reader
         public static object EvtGetQueryInfo(
             EventLogHandle handle,
             UnsafeNativeMethods.EvtQueryPropertyId enumType
-        ) {
+        )
+        {
             IntPtr buffer = IntPtr.Zero;
             int bufferNeeded = 0;
             try
@@ -473,7 +488,8 @@ namespace System.Diagnostics.Eventing.Reader
         public static object EvtGetPublisherMetadataProperty(
             EventLogHandle pmHandle,
             UnsafeNativeMethods.EvtPublisherMetadataPropertyId thePropertyId
-        ) {
+        )
+        {
             IntPtr buffer = IntPtr.Zero;
             int bufferNeeded;
 
@@ -521,7 +537,8 @@ namespace System.Diagnostics.Eventing.Reader
         internal static EventLogHandle EvtGetPublisherMetadataPropertyHandle(
             EventLogHandle pmHandle,
             UnsafeNativeMethods.EvtPublisherMetadataPropertyId thePropertyId
-        ) {
+        )
+        {
             IntPtr buffer = IntPtr.Zero;
             try
             {
@@ -597,7 +614,8 @@ namespace System.Diagnostics.Eventing.Reader
                 && error != UnsafeNativeMethods.ERROR_EVT_UNRESOLVED_VALUE_INSERT
                 && error != UnsafeNativeMethods.ERROR_EVT_UNRESOLVED_PARAMETER_INSERT
                 && error != UnsafeNativeMethods.ERROR_EVT_MAX_INSERTS_REACHED
-            ) {
+            )
+            {
                 switch (error)
                 {
                     case UnsafeNativeMethods.ERROR_EVT_MESSAGE_NOT_FOUND:
@@ -630,7 +648,8 @@ namespace System.Diagnostics.Eventing.Reader
                 && error != UnsafeNativeMethods.ERROR_EVT_UNRESOLVED_VALUE_INSERT
                 && error != UnsafeNativeMethods.ERROR_EVT_UNRESOLVED_PARAMETER_INSERT
                 && error != UnsafeNativeMethods.ERROR_EVT_MAX_INSERTS_REACHED
-            ) {
+            )
+            {
                 switch (error)
                 {
                     case UnsafeNativeMethods.ERROR_EVT_MESSAGE_NOT_FOUND:
@@ -653,7 +672,8 @@ namespace System.Diagnostics.Eventing.Reader
             EventLogHandle objArrayHandle,
             int index,
             int thePropertyId
-        ) {
+        )
+        {
             IntPtr buffer = IntPtr.Zero;
             int bufferNeeded;
 
@@ -704,7 +724,8 @@ namespace System.Diagnostics.Eventing.Reader
         public static object EvtGetEventMetadataProperty(
             EventLogHandle handle,
             UnsafeNativeMethods.EvtEventMetadataPropertyId enumType
-        ) {
+        )
+        {
             IntPtr buffer = IntPtr.Zero;
             int bufferNeeded;
 
@@ -752,7 +773,8 @@ namespace System.Diagnostics.Eventing.Reader
         public static object EvtGetChannelConfigProperty(
             EventLogHandle handle,
             UnsafeNativeMethods.EvtChannelConfigPropertyId enumType
-        ) {
+        )
+        {
             IntPtr buffer = IntPtr.Zero;
             int bufferNeeded;
 
@@ -808,7 +830,8 @@ namespace System.Diagnostics.Eventing.Reader
             EventLogHandle handle,
             UnsafeNativeMethods.EvtChannelConfigPropertyId enumType,
             object val
-        ) {
+        )
+        {
             UnsafeNativeMethods.EvtVariant varVal = default;
 
             CoTaskMemSafeHandle taskMem = new CoTaskMemSafeHandle();
@@ -993,7 +1016,8 @@ namespace System.Diagnostics.Eventing.Reader
         public static object EvtGetLogInfo(
             EventLogHandle handle,
             UnsafeNativeMethods.EvtLogPropertyId enumType
-        ) {
+        )
+        {
             IntPtr buffer = IntPtr.Zero;
             int bufferNeeded;
 
@@ -1042,7 +1066,8 @@ namespace System.Diagnostics.Eventing.Reader
             UnsafeNativeMethods.EvtRenderFlags flag,
             SystemProperties systemProperties,
             int SYSTEM_PROPERTY_COUNT
-        ) {
+        )
+        {
             IntPtr buffer = IntPtr.Zero;
             IntPtr pointer = IntPtr.Zero;
             int bufferNeeded;
@@ -1220,7 +1245,8 @@ namespace System.Diagnostics.Eventing.Reader
         public static IList<object> EvtRenderBufferWithContextUserOrValues(
             EventLogHandle contextHandle,
             EventLogHandle eventHandle
-        ) {
+        )
+        {
             IntPtr buffer = IntPtr.Zero;
             IntPtr pointer = IntPtr.Zero;
             int bufferNeeded;
@@ -1286,7 +1312,8 @@ namespace System.Diagnostics.Eventing.Reader
             EventLogHandle pmHandle,
             EventLogHandle eventHandle,
             UnsafeNativeMethods.EvtFormatMessageFlags flag
-        ) {
+        )
+        {
             int bufferNeeded;
             StringBuilder sb = new StringBuilder(null);
 
@@ -1359,7 +1386,8 @@ namespace System.Diagnostics.Eventing.Reader
             EventLogHandle pmHandle,
             EventLogHandle eventHandle,
             UnsafeNativeMethods.EvtFormatMessageFlags flag
-        ) {
+        )
+        {
             IntPtr buffer = IntPtr.Zero;
             int bufferNeeded;
 
@@ -1498,7 +1526,8 @@ namespace System.Diagnostics.Eventing.Reader
             EventLogHandle handle,
             EventLogHandle eventHandle,
             string[] values
-        ) {
+        )
+        {
             int bufferNeeded;
 
             UnsafeNativeMethods.EvtStringVariant[] stringVariants =
@@ -1770,7 +1799,8 @@ namespace System.Diagnostics.Eventing.Reader
         public static object ConvertToObject(
             UnsafeNativeMethods.EvtVariant val,
             UnsafeNativeMethods.EvtVariantType desiredType
-        ) {
+        )
+        {
             if (val.Type == (int)UnsafeNativeMethods.EvtVariantType.EvtVarTypeNull)
                 return null;
             if (val.Type != (int)desiredType)

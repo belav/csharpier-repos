@@ -25,12 +25,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
         public async Task ServerAcceptsRequestWithHeaderTotalSizeWithinLimit(
             int headerCount,
             int extraLimit
-        ) {
+        )
+        {
             var headers = MakeHeaders(headerCount);
 
             await using (
                 var server = CreateServer(maxRequestHeadersTotalSize: headers.Length + extraLimit)
-            ) {
+            )
+            {
                 using (var connection = server.CreateConnection())
                 {
                     await connection.Send($"GET / HTTP/1.1\r\n{headers}\r\n");
@@ -61,7 +63,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
         public async Task ServerAcceptsRequestWithHeaderCountWithinLimit(
             int headerCount,
             int maxHeaderCount
-        ) {
+        )
+        {
             var headers = MakeHeaders(headerCount);
 
             await using (var server = CreateServer(maxRequestHeaderCount: maxHeaderCount))
@@ -115,7 +118,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
         public async Task ServerRejectsRequestWithHeaderCountOverLimit(
             int headerCount,
             int maxHeaderCount
-        ) {
+        )
+        {
             var headers = MakeHeaders(headerCount);
 
             await using (var server = CreateServer(maxRequestHeaderCount: maxHeaderCount))
@@ -152,7 +156,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
         private TestServer CreateServer(
             int? maxRequestHeaderCount = null,
             int? maxRequestHeadersTotalSize = null
-        ) {
+        )
+        {
             var options = new KestrelServerOptions { AddServerHeader = false };
 
             if (maxRequestHeaderCount.HasValue)

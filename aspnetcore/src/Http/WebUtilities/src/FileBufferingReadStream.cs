@@ -60,13 +60,14 @@ namespace Microsoft.AspNetCore.WebUtilities
             int memoryThreshold,
             long? bufferLimit,
             Func<string> tempFileDirectoryAccessor
-        ) : this(
-            inner,
-            memoryThreshold,
-            bufferLimit,
-            tempFileDirectoryAccessor,
-            ArrayPool<byte>.Shared
-        ) { }
+        )
+            : this(
+                inner,
+                memoryThreshold,
+                bufferLimit,
+                tempFileDirectoryAccessor,
+                ArrayPool<byte>.Shared
+            ) { }
 
         /// <summary>
         /// Initializes a new instance of <see cref="FileBufferingReadStream" />.
@@ -82,7 +83,8 @@ namespace Microsoft.AspNetCore.WebUtilities
             long? bufferLimit,
             Func<string> tempFileDirectoryAccessor,
             ArrayPool<byte> bytePool
-        ) {
+        )
+        {
             if (inner == null)
             {
                 throw new ArgumentNullException(nameof(inner));
@@ -139,7 +141,8 @@ namespace Microsoft.AspNetCore.WebUtilities
             long? bufferLimit,
             string tempFileDirectory,
             ArrayPool<byte> bytePool
-        ) {
+        )
+        {
             if (inner == null)
             {
                 throw new ArgumentNullException(nameof(inner));
@@ -231,7 +234,8 @@ namespace Microsoft.AspNetCore.WebUtilities
             }
             else if (
                 !_completelyBuffered && origin == SeekOrigin.Current && offset + Position > Length
-            ) {
+            )
+            {
                 // Can't seek past the end of the buffer until we've finished consuming the inner stream
                 throw new NotSupportedException("The content has not been fully buffered yet.");
             }
@@ -344,7 +348,8 @@ namespace Microsoft.AspNetCore.WebUtilities
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return ReadAsync(buffer.AsMemory(offset, count), cancellationToken).AsTask();
         }
 
@@ -357,7 +362,8 @@ namespace Microsoft.AspNetCore.WebUtilities
         public override async ValueTask<int> ReadAsync(
             Memory<byte> buffer,
             CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             ThrowIfDisposed();
 
             if (_buffer.Position < _buffer.Length || _completelyBuffered)
@@ -438,7 +444,8 @@ namespace Microsoft.AspNetCore.WebUtilities
             int offset,
             int count,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw new NotSupportedException();
         }
 
@@ -459,7 +466,8 @@ namespace Microsoft.AspNetCore.WebUtilities
             Stream destination,
             int bufferSize,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Set a minimum buffer size of 4K since the base Stream implementation has weird behavior when the stream is
             // seekable *and* the length is 0 (it passes in a buffer size of 1).
             // See https://github.com/dotnet/runtime/blob/222415c56c9ea73530444768c0e68413eb374f5d/src/libraries/System.Private.CoreLib/src/System/IO/Stream.cs#L164-L184

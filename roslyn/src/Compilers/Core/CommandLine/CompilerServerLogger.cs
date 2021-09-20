@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.CommandLine
             this ICompilerServerLogger logger,
             string format,
             params object?[] arguments
-        ) {
+        )
+        {
             if (logger.IsLogging)
             {
                 logger.Log(string.Format(format, arguments));
@@ -51,7 +52,8 @@ namespace Microsoft.CodeAnalysis.CommandLine
             this ICompilerServerLogger logger,
             string format,
             params object?[] arguments
-        ) {
+        )
+        {
             if (logger.IsLogging)
             {
                 logger.Log($"Error: {format}", arguments);
@@ -65,7 +67,8 @@ namespace Microsoft.CodeAnalysis.CommandLine
             this ICompilerServerLogger logger,
             Exception exception,
             string reason
-        ) {
+        )
+        {
             if (!logger.IsLogging)
             {
                 return;
@@ -131,7 +134,8 @@ namespace Microsoft.CodeAnalysis.CommandLine
                 if (
                     Environment.GetEnvironmentVariable(EnvironmentVariableName)
                     is string loggingFileName
-                ) {
+                )
+                {
                     // If the environment variable contains the path of a currently existing directory,
                     // then use a process-specific name for the log file and put it in that directory.
                     // Otherwise, assume that the environment variable specifies the name of the log file.

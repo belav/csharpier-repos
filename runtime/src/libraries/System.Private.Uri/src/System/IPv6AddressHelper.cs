@@ -14,7 +14,8 @@ namespace System
             int start,
             ref bool isLoopback,
             ref string? scopeId
-        ) {
+        )
+        {
             Span<ushort> numbers = stackalloc ushort[NumberOfLabels];
             numbers.Clear();
             Parse(str, numbers, start, ref scopeId);
@@ -168,7 +169,8 @@ namespace System
             int start,
             ref int end,
             bool validateStrictAddress
-        ) {
+        )
+        {
             int sequenceCount = 0;
             int sequenceLength = 0;
             bool haveCompressor = false;
@@ -276,7 +278,8 @@ namespace System
                                     false,
                                     false
                                 )
-                            ) {
+                            )
+                            {
                                 return false;
                             }
                             // ipv4 address takes 2 slots in ipv6 address, one was just counted meeting the '.'
@@ -315,7 +318,8 @@ namespace System
                         ? (sequenceCount < expectedSequenceCount)
                         : (sequenceCount == expectedSequenceCount)
                 )
-            ) {
+            )
+            {
                 if (i == end + 1)
                 {
                     // ']' was found

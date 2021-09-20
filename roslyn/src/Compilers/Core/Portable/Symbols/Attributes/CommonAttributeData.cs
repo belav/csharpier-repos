@@ -88,7 +88,8 @@ namespace Microsoft.CodeAnalysis
             INamedTypeSymbolInternal attributeType,
             int attributeArgCount,
             AttributeDescription description
-        ) {
+        )
+        {
             if (attributeType.ContainingSymbol?.Kind != SymbolKind.Namespace)
             {
                 return false;
@@ -120,7 +121,8 @@ namespace Microsoft.CodeAnalysis
                 INamespaceSymbolInternal container,
                 string namespaceName,
                 StringComparison options
-            ) {
+            )
+            {
                 int index = namespaceName.Length;
                 bool expectDot = false;
 
@@ -151,7 +153,8 @@ namespace Microsoft.CodeAnalysis
                     if (
                         index < 0
                         || string.Compare(namespaceName, index, name, 0, nameLength, options) != 0
-                    ) {
+                    )
+                    {
                         return false;
                     }
 
@@ -191,7 +194,8 @@ namespace Microsoft.CodeAnalysis
             string name,
             SpecialType specialType,
             T? defaultValue = default
-        ) {
+        )
+        {
             return DecodeNamedArgument<T>(CommonNamedArguments, name, specialType, defaultValue);
         }
 
@@ -200,7 +204,8 @@ namespace Microsoft.CodeAnalysis
             string name,
             SpecialType specialType,
             T? defaultValue = default
-        ) {
+        )
+        {
             int index = IndexOfNamedArgument(namedArguments, name);
             return index >= 0
               ? namedArguments[index].Value.DecodeValue<T>(specialType)
@@ -210,7 +215,8 @@ namespace Microsoft.CodeAnalysis
         private static int IndexOfNamedArgument(
             ImmutableArray<KeyValuePair<string, TypedConstant>> namedArguments,
             string name
-        ) {
+        )
+        {
             // For user defined attributes VB allows duplicate named arguments and uses the last value.
             // Dev11 reports an error for pseudo-custom attributes when emitting metadata. We don't.
             for (int i = namedArguments.Length - 1; i >= 0; i--)
@@ -341,14 +347,16 @@ namespace Microsoft.CodeAnalysis
                     diagnosticId is null
                     && name == ObsoleteAttributeData.DiagnosticIdPropertyName
                     && IsStringProperty(ObsoleteAttributeData.DiagnosticIdPropertyName)
-                ) {
+                )
+                {
                     diagnosticId = value.ValueInternal as string;
                 }
                 else if (
                     urlFormat is null
                     && name == ObsoleteAttributeData.UrlFormatPropertyName
                     && IsStringProperty(ObsoleteAttributeData.UrlFormatPropertyName)
-                ) {
+                )
+                {
                     urlFormat = value.ValueInternal as string;
                 }
 
@@ -430,9 +438,10 @@ namespace Microsoft.CodeAnalysis
                 TAttributeLocation
             > arguments,
             CommonMessageProvider messageProvider
-        ) where T : CommonMethodWellKnownAttributeData, new()
-          where TAttributeSyntaxNode : SyntaxNode
-          where TAttributeData : AttributeData
+        )
+            where T : CommonMethodWellKnownAttributeData, new()
+            where TAttributeSyntaxNode : SyntaxNode
+            where TAttributeData : AttributeData
         {
             Debug.Assert(arguments.AttributeSyntaxOpt is object);
 
@@ -444,7 +453,8 @@ namespace Microsoft.CodeAnalysis
                 if (
                     attribute.AttributeConstructor.Parameters[0].Type.SpecialType
                     == SpecialType.System_Int16
-                ) {
+                )
+                {
                     options = (MethodImplOptions)attribute.CommonConstructorArguments[
                         0
                     ].DecodeValue<short>(SpecialType.System_Int16);
@@ -520,9 +530,10 @@ namespace Microsoft.CodeAnalysis
             CharSet defaultCharSet,
             int defaultAutoLayoutSize,
             CommonMessageProvider messageProvider
-        ) where TTypeWellKnownAttributeData : CommonTypeWellKnownAttributeData, new()
-          where TAttributeSyntaxNode : SyntaxNode
-          where TAttributeData : AttributeData
+        )
+            where TTypeWellKnownAttributeData : CommonTypeWellKnownAttributeData, new()
+            where TAttributeSyntaxNode : SyntaxNode
+            where TAttributeData : AttributeData
         {
             Debug.Assert(arguments.AttributeSyntaxOpt is object);
 
@@ -654,7 +665,8 @@ namespace Microsoft.CodeAnalysis
         internal static AttributeUsageInfo DecodeAttributeUsageAttribute(
             TypedConstant positionalArg,
             ImmutableArray<KeyValuePair<string, TypedConstant>> namedArgs
-        ) {
+        )
+        {
             // BREAKING CHANGE (C#):
             //   If the well known attribute class System.AttributeUsage is overridden in source,
             //   we will use the overriding AttributeUsage type for attribute usage validation,

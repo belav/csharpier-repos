@@ -142,7 +142,8 @@ namespace Newtonsoft.Json.Converters
             Type objectType,
             object? existingValue,
             JsonSerializer serializer
-        ) {
+        )
+        {
             switch (reader.TokenType)
             {
                 case JsonToken.StartObject:
@@ -207,7 +208,8 @@ namespace Newtonsoft.Json.Converters
                                 PatternName,
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             pattern = (string?)reader.Value;
                         }
                         else if (
@@ -216,7 +218,8 @@ namespace Newtonsoft.Json.Converters
                                 OptionsName,
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        ) {
+                        )
+                        {
                             options = serializer.Deserialize<RegexOptions>(reader);
                         }
                         else

@@ -39,7 +39,8 @@ namespace System.Composition.Hosting.Core
             bool isShared,
             Func<IEnumerable<CompositionDependency>> dependencies,
             Func<IEnumerable<CompositionDependency>, ExportDescriptor> getDescriptor
-        ) {
+        )
+        {
             _contract = contract;
             _origin = origin;
             _isShared = isShared;

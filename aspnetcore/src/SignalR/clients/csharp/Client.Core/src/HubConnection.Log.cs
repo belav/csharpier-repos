@@ -661,7 +661,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
                 ILogger logger,
                 string target,
                 int count
-            ) {
+            )
+            {
                 _preparingNonBlockingInvocation(logger, target, count, null);
             }
 
@@ -671,7 +672,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
                 string target,
                 string returnType,
                 int count
-            ) {
+            )
+            {
                 _preparingBlockingInvocation(logger, invocationId, target, returnType, count, null);
             }
 
@@ -681,7 +683,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
                 string target,
                 string returnType,
                 int count
-            ) {
+            )
+            {
                 _preparingStreamingInvocation(
                     logger,
                     invocationId,
@@ -703,7 +706,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
                 string returnType,
                 string methodName,
                 object?[] args
-            ) {
+            )
+            {
                 if (logger.IsEnabled(LogLevel.Trace))
                 {
                     var argsList =
@@ -768,7 +772,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
                 ILogger logger,
                 string invocationId,
                 Exception exception
-            ) {
+            )
+            {
                 _failedToSendInvocation(logger, invocationId, exception);
             }
 
@@ -777,7 +782,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
                 string? invocationId,
                 string methodName,
                 object?[] args
-            ) {
+            )
+            {
                 if (logger.IsEnabled(LogLevel.Trace))
                 {
                     var argsList =
@@ -890,7 +896,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
                 ILogger logger,
                 string methodName,
                 Exception exception
-            ) {
+            )
+            {
                 _errorInvokingClientSideMethod(logger, methodName, exception);
             }
 
@@ -1007,7 +1014,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
                 string? memberName,
                 string? filePath,
                 int lineNumber
-            ) {
+            )
+            {
                 _waitingOnConnectionLock(logger, memberName, filePath, lineNumber, null);
             }
 
@@ -1016,7 +1024,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
                 string? memberName,
                 string? filePath,
                 int lineNumber
-            ) {
+            )
+            {
                 _releasingConnectionLock(logger, memberName, filePath, lineNumber, null);
             }
 
@@ -1030,7 +1039,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
                 string? invocationId,
                 string target,
                 Exception exception
-            ) {
+            )
+            {
                 _argumentBindingFailure(logger, invocationId, target, exception);
             }
 
@@ -1069,7 +1079,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
                 HubConnectionState expectedState,
                 HubConnectionState newState,
                 HubConnectionState actualState
-            ) {
+            )
+            {
                 _stateTransitionFailed(logger, expectedState, newState, actualState, null);
             }
 
@@ -1087,7 +1098,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
                 ILogger logger,
                 long reconnectAttempts,
                 TimeSpan elapsedTime
-            ) {
+            )
+            {
                 _reconnected(logger, reconnectAttempts, elapsedTime, null);
             }
 
@@ -1095,7 +1107,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
                 ILogger logger,
                 long reconnectAttempts,
                 TimeSpan elapsedTime
-            ) {
+            )
+            {
                 _reconnectAttemptsExhausted(logger, reconnectAttempts, elapsedTime, null);
             }
 
@@ -1103,7 +1116,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
                 ILogger logger,
                 long reconnectAttempts,
                 TimeSpan retryDelay
-            ) {
+            )
+            {
                 _awaitingReconnectRetryDelay(logger, reconnectAttempts, retryDelay, null);
             }
 
@@ -1146,7 +1160,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
                 ILogger logger,
                 HubConnectionState expectedState,
                 HubConnectionState newState
-            ) {
+            )
+            {
                 _attemptingStateTransition(logger, expectedState, newState, null);
             }
 
@@ -1159,7 +1174,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
                 ILogger logger,
                 TimeSpan handshakeTimeout,
                 Exception exception
-            ) {
+            )
+            {
                 _errorHandshakeTimedOut(logger, handshakeTimeout.TotalSeconds, exception);
             }
 

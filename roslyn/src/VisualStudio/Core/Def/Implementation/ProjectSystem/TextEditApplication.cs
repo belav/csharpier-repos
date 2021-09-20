@@ -24,7 +24,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             ImmutableArray<TextChange> textChanges,
             ITextBuffer buffer,
             EditOptions options
-        ) {
+        )
+        {
             var oldSnapshot = buffer.CurrentSnapshot;
             var oldText = oldSnapshot.AsText();
 
@@ -37,7 +38,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             ITextSnapshot oldSnapshot,
             SourceText oldText,
             EditOptions options
-        ) {
+        )
+        {
             using var edit = buffer.CreateEdit(
                 options,
                 reiteratedVersionNumber: null,

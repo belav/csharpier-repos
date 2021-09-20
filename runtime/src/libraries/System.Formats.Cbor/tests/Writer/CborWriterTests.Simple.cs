@@ -40,7 +40,8 @@ namespace System.Formats.Cbor.Tests
         public static void WriteSingle_SingleValue_HappyPath(
             float input,
             string hexExpectedEncoding
-        ) {
+        )
+        {
             byte[] expectedEncoding = hexExpectedEncoding.HexToByteArray();
             var writer = new CborWriter();
             writer.WriteSingle(input);
@@ -55,7 +56,8 @@ namespace System.Formats.Cbor.Tests
             float input,
             string hexExpectedEncoding,
             CborConformanceMode mode
-        ) {
+        )
+        {
             byte[] expectedEncoding = hexExpectedEncoding.HexToByteArray();
             var writer = new CborWriter(mode);
             writer.WriteSingle(input);
@@ -71,7 +73,8 @@ namespace System.Formats.Cbor.Tests
         public static void WriteSingle_Ctap2Conformance_ShouldPreservePrecision(
             float input,
             string hexExpectedEncoding
-        ) {
+        )
+        {
             byte[] expectedEncoding = hexExpectedEncoding.HexToByteArray();
             var writer = new CborWriter(CborConformanceMode.Ctap2Canonical);
             writer.WriteSingle(input);
@@ -89,7 +92,8 @@ namespace System.Formats.Cbor.Tests
         public static void WriteDouble_SingleValue_HappyPath(
             double input,
             string hexExpectedEncoding
-        ) {
+        )
+        {
             byte[] expectedEncoding = hexExpectedEncoding.HexToByteArray();
             var writer = new CborWriter();
             writer.WriteDouble(input);
@@ -107,7 +111,8 @@ namespace System.Formats.Cbor.Tests
             double input,
             string hexExpectedEncoding,
             CborConformanceMode mode
-        ) {
+        )
+        {
             byte[] expectedEncoding = hexExpectedEncoding.HexToByteArray();
             var writer = new CborWriter(mode);
             writer.WriteDouble(input);
@@ -125,7 +130,8 @@ namespace System.Formats.Cbor.Tests
         public static void WriteDouble_Ctap2Conformance_ShouldPreservePrecision(
             double input,
             string hexExpectedEncoding
-        ) {
+        )
+        {
             byte[] expectedEncoding = hexExpectedEncoding.HexToByteArray();
             var writer = new CborWriter(CborConformanceMode.Ctap2Canonical);
             writer.WriteDouble(input);
@@ -147,7 +153,8 @@ namespace System.Formats.Cbor.Tests
         public static void WriteBoolean_SingleValue_HappyPath(
             bool input,
             string hexExpectedEncoding
-        ) {
+        )
+        {
             byte[] expectedEncoding = hexExpectedEncoding.HexToByteArray();
             var writer = new CborWriter();
             writer.WriteBoolean(input);
@@ -165,7 +172,8 @@ namespace System.Formats.Cbor.Tests
         public static void WriteSimpleValue_SingleValue_HappyPath(
             CborSimpleValue input,
             string hexExpectedEncoding
-        ) {
+        )
+        {
             byte[] expectedEncoding = hexExpectedEncoding.HexToByteArray();
             var writer = new CborWriter();
             writer.WriteSimpleValue(input);
@@ -178,7 +186,8 @@ namespace System.Formats.Cbor.Tests
         public static void WriteSimpleValue_InvalidValue_LaxConformance_ShouldSucceed(
             CborSimpleValue input,
             string hexExpectedEncoding
-        ) {
+        )
+        {
             byte[] expectedEncoding = hexExpectedEncoding.HexToByteArray();
             var writer = new CborWriter(CborConformanceMode.Lax);
             writer.WriteSimpleValue(input);
@@ -195,7 +204,8 @@ namespace System.Formats.Cbor.Tests
         public static void WriteSimpleValue_InvalidValue_UnsupportedConformance_ShouldThrowArgumentOutOfRangeException(
             CborConformanceMode conformanceMode,
             CborSimpleValue input
-        ) {
+        )
+        {
             var writer = new CborWriter(conformanceMode);
             Assert.Throws<ArgumentOutOfRangeException>(() => writer.WriteSimpleValue(input));
         }

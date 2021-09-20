@@ -88,7 +88,8 @@ namespace System.ServiceProcess
         private ServiceController(
             string machineName,
             Interop.Advapi32.ENUM_SERVICE_STATUS_PROCESS status
-        ) {
+        )
+        {
             if (!CheckMachineName(machineName))
                 throw new ArgumentException(SR.Format(SR.BadMachineName, machineName));
 
@@ -373,7 +374,8 @@ namespace System.ServiceProcess
                                         );
                                     foreach (
                                         Interop.Advapi32.ENUM_SERVICE_STATUS_PROCESS groupMember in loadGroup
-                                    ) {
+                                    )
+                                    {
                                         if (!dependencyHash.ContainsKey(groupMember.serviceName!))
                                             dependencyHash.Add(
                                                 groupMember.serviceName!,
@@ -631,7 +633,8 @@ namespace System.ServiceProcess
         private unsafe string? GetServiceKeyName(
             SafeServiceHandle? SCMHandle,
             string serviceDisplayName
-        ) {
+        )
+        {
             var builder = new ValueStringBuilder(stackalloc char[256]);
             int bufLen;
             while (true)
@@ -674,7 +677,8 @@ namespace System.ServiceProcess
         private unsafe string? GetServiceDisplayName(
             SafeServiceHandle? scmHandle,
             string serviceName
-        ) {
+        )
+        {
             var builder = new ValueStringBuilder(4096);
             int bufLen;
             while (true)
@@ -716,7 +720,8 @@ namespace System.ServiceProcess
         private static SafeServiceHandle GetDataBaseHandleWithAccess(
             string machineName,
             int serviceControlManagerAccess
-        ) {
+        )
+        {
             SafeServiceHandle? databaseHandle;
             if (machineName.Equals(DefaultMachineName) || machineName.Length == 0)
             {
@@ -834,7 +839,8 @@ namespace System.ServiceProcess
         private static Interop.Advapi32.ENUM_SERVICE_STATUS_PROCESS[] GetServicesInGroup(
             string machineName,
             string group
-        ) {
+        )
+        {
             return GetServices(
                 machineName,
                 Interop.Advapi32.ServiceTypeOptions.SERVICE_TYPE_WIN32,
@@ -868,7 +874,8 @@ namespace System.ServiceProcess
             int serviceType,
             string? group,
             Func<Interop.Advapi32.ENUM_SERVICE_STATUS_PROCESS, T> selector
-        ) {
+        )
+        {
             int resumeHandle = 0;
 
             T[] services;

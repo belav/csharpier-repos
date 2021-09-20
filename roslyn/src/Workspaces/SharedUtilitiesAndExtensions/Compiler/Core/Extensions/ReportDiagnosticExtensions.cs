@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// </exception>
         public static DiagnosticSeverity? ToDiagnosticSeverity(
             this ReportDiagnostic reportDiagnostic
-        ) {
+        )
+        {
             switch (reportDiagnostic)
             {
                 case ReportDiagnostic.Error:
@@ -62,7 +63,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public static ReportDiagnostic WithDefaultSeverity(
             this ReportDiagnostic reportDiagnostic,
             DiagnosticSeverity defaultSeverity
-        ) {
+        )
+        {
             if (reportDiagnostic != ReportDiagnostic.Default)
             {
                 return reportDiagnostic;
@@ -87,7 +89,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public static NotificationOption2 ToNotificationOption(
             this ReportDiagnostic reportDiagnostic,
             DiagnosticSeverity defaultSeverity
-        ) {
+        )
+        {
             switch (reportDiagnostic.WithDefaultSeverity(defaultSeverity))
             {
                 case ReportDiagnostic.Error:

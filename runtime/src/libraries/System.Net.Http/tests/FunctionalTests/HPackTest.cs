@@ -34,7 +34,8 @@ namespace System.Net.Http.Functional.Tests
             string headerName,
             string expectedValue,
             byte[] expectedEncoding
-        ) {
+        )
+        {
             await Http2LoopbackServer.CreateClientAndServerAsync(
                 async uri =>
                 {

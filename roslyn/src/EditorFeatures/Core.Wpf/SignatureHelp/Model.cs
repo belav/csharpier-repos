@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
             string argumentName,
             int? selectedParameter,
             bool userSelected
-        ) {
+        )
+        {
             Contract.ThrowIfNull(selectedItem);
             Contract.ThrowIfFalse(items.Count != 0, "Must have at least one item.");
             Contract.ThrowIfFalse(

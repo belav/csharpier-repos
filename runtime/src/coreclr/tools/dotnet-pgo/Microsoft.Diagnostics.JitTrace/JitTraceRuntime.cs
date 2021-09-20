@@ -36,7 +36,8 @@ namespace Microsoft.Diagnostics.JitTrace
             FileInfo fileName,
             out int successfulPrepares,
             out int failedPrepares
-        ) {
+        )
+        {
             using (StreamReader sr = new StreamReader(fileName.FullName))
             {
                 Prepare(sr, out successfulPrepares, out failedPrepares);
@@ -52,7 +53,8 @@ namespace Microsoft.Diagnostics.JitTrace
             string input,
             string separator,
             char[] seperatorCharArray
-        ) {
+        )
+        {
             string[] returnValue = input.Split(seperatorCharArray);
             for (int i = 0; i < returnValue.Length; i++)
             {
@@ -72,7 +74,8 @@ namespace Microsoft.Diagnostics.JitTrace
             string jittraceString,
             out int successfulPrepares,
             out int failedPrepares
-        ) {
+        )
+        {
             MemoryStream strStream = new MemoryStream();
             using (
                 var writer = new StreamWriter(
@@ -81,7 +84,8 @@ namespace Microsoft.Diagnostics.JitTrace
                     bufferSize: -1,
                     leaveOpen: true
                 )
-            ) {
+            )
+            {
                 writer.Write(jittraceString);
             }
 
@@ -100,7 +104,8 @@ namespace Microsoft.Diagnostics.JitTrace
             StreamReader jittraceStream,
             out int successfulPrepares,
             out int failedPrepares
-        ) {
+        )
+        {
             const string outerCsvEscapeChar = "~";
             const string innerCsvEscapeChar = ":";
             char[] outerCsvEscapeCharArray = new char[] { '~' };

@@ -198,7 +198,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             object oldValue,
             ref object newValue,
             out object token
-        ) {
+        )
+        {
             if (newValue == oldValue && newValue != null)
             {
                 token = null;
@@ -293,7 +294,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             object givenValue,
             object storedValue,
             object token
-        ) {
+        )
+        {
             var entry = token as Entry;
             if (entry == null)
                 return;
@@ -489,7 +491,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
                             otherTarget == null
                             || otherTarget == otherEntry.Key
                             || entriesByValue.ContainsKey(otherTarget)
-                        ) {
+                        )
+                        {
                             continue;
                         }
                         AddValueCore(thisEntry, otherValue.Type, otherTarget, false);

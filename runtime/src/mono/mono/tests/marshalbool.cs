@@ -971,7 +971,8 @@ public class marshalbool
         bool bI1CustMarsh,
         bool bU1CustMarsh,
         bool bVBCustMarsh
-    ) {
+    )
+    {
         bool* ptestVal;
         switch (arg)
         {
@@ -1015,7 +1016,8 @@ public class marshalbool
         out bool bI1CustMarsh,
         out bool bU1CustMarsh,
         out bool bVBCustMarsh
-    ) {
+    )
+    {
         bDefaultMarsh = bBoolCustMarsh = bI1CustMarsh = bU1CustMarsh = bVBCustMarsh = false;
         switch (arg)
         {
@@ -1065,7 +1067,8 @@ public class marshalbool
         ref bool bI1CustMarsh,
         ref bool bU1CustMarsh,
         ref bool bVBCustMarsh
-    ) {
+    )
+    {
         switch (arg)
         {
             case 1:

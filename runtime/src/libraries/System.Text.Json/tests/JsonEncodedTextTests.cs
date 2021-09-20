@@ -543,7 +543,8 @@ namespace System.Text.Json.Tests
                 char* buffer,
                 int bufferLength,
                 out int numberOfCharactersWritten
-            ) {
+            )
+            {
                 return Default.TryEncodeUnicodeScalar(
                     unicodeScalar,
                     buffer,

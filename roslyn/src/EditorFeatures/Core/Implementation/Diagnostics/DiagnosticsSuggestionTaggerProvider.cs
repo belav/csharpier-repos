@@ -57,7 +57,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Diagnostics
         protected override SnapshotSpan AdjustSnapshotSpan(
             SnapshotSpan snapshotSpan,
             int minimumLength
-        ) {
+        )
+        {
             // We always want suggestion tags to be two characters long.
             return AdjustSnapshotSpan(snapshotSpan, minimumLength: 2, maximumLength: 2);
         }

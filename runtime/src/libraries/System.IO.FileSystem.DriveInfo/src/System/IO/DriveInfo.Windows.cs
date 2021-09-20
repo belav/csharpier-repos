@@ -45,7 +45,8 @@ namespace System.IO
                             fileSystemName,
                             Interop.Kernel32.MAX_PATH + 1
                         )
-                    ) {
+                    )
+                    {
                         throw Error.GetExceptionForLastWin32DriveError(Name);
                     }
                 }
@@ -185,7 +186,8 @@ namespace System.IO
                             null,
                             0
                         )
-                    ) {
+                    )
+                    {
                         throw Error.GetExceptionForLastWin32DriveError(Name);
                     }
                 }

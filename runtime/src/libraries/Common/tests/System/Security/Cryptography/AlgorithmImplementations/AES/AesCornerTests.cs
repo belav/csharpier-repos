@@ -119,7 +119,8 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
             ICryptoTransform transform,
             Stream input,
             int count
-        ) {
+        )
+        {
             byte[] buffer = new byte[count];
             int numRead = input.Read(buffer, 0, count);
             Assert.Equal(count, numRead);

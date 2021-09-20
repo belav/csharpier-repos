@@ -79,7 +79,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
             string? clientName,
             JsonRpc jsonRpc,
             LogHubLspLogger? logger
-        ) {
+        )
+        {
             _languageClient = languageClient;
             _requestDispatcher = requestDispatcher;
             _workspace = workspace;
@@ -126,7 +127,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
             VSShell.IAsyncServiceProvider? asyncServiceProvider,
             string? clientName,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var jsonMessageFormatter = new JsonMessageFormatter();
             VSExtensionUtilities.AddVSExtensionConverters(jsonMessageFormatter.JsonSerializer);
 
@@ -163,7 +165,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
             string? clientName,
             JsonRpc jsonRpc,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (asyncServiceProvider == null)
                 return null;
 
@@ -214,7 +217,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
         public Task<InitializeResult> InitializeAsync(
             InitializeParams initializeParams,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 _logger?.TraceStart("Initialize");
@@ -326,7 +330,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
         public Task<DiagnosticReport[]?> GetDocumentPullDiagnosticsAsync(
             DocumentDiagnosticsParams diagnosticsParams,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(
                 _clientCapabilities,
                 $"{nameof(InitializeAsync)} has not been called."
@@ -352,7 +357,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
         public Task<WorkspaceDiagnosticReport[]?> GetWorkspacePullDiagnosticsAsync(
             WorkspaceDocumentDiagnosticsParams diagnosticsParams,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(
                 _clientCapabilities,
                 $"{nameof(InitializeAsync)} has not been called."
@@ -378,7 +384,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
         public Task<LSP.Location[]> GetTextDocumentDefinitionAsync(
             TextDocumentPositionParams textDocumentPositionParams,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(
                 _clientCapabilities,
                 $"{nameof(InitializeAsync)} has not been called."
@@ -404,7 +411,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
         public Task<WorkspaceEdit> GetTextDocumentRenameAsync(
             RenameParams renameParams,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(
                 _clientCapabilities,
                 $"{nameof(InitializeAsync)} has not been called."
@@ -427,7 +435,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
         public Task<VSReferenceItem[]?> GetTextDocumentReferencesAsync(
             ReferenceParams referencesParams,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(
                 _clientCapabilities,
                 $"{nameof(InitializeAsync)} has not been called."
@@ -450,7 +459,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
         public Task<VSCodeAction[]> GetTextDocumentCodeActionsAsync(
             CodeActionParams codeActionParams,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(
                 _clientCapabilities,
                 $"{nameof(InitializeAsync)} has not been called."
@@ -473,7 +483,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
         public Task<VSCodeAction> ResolveCodeActionAsync(
             VSCodeAction vsCodeAction,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(
                 _clientCapabilities,
                 $"{nameof(InitializeAsync)} has not been called."
@@ -496,7 +507,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
         public async Task<SumType<CompletionList, CompletionItem[]>> GetTextDocumentCompletionAsync(
             CompletionParams completionParams,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(
                 _clientCapabilities,
                 $"{nameof(InitializeAsync)} has not been called."
@@ -521,7 +533,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
         public Task<CompletionItem> ResolveCompletionItemAsync(
             CompletionItem completionItem,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(
                 _clientCapabilities,
                 $"{nameof(InitializeAsync)} has not been called."
@@ -544,7 +557,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
         public Task<FoldingRange[]> GetTextDocumentFoldingRangeAsync(
             FoldingRangeParams textDocumentFoldingRangeParams,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(
                 _clientCapabilities,
                 $"{nameof(InitializeAsync)} has not been called."
@@ -567,7 +581,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
         public Task<DocumentHighlight[]> GetTextDocumentDocumentHighlightsAsync(
             TextDocumentPositionParams textDocumentPositionParams,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(
                 _clientCapabilities,
                 $"{nameof(InitializeAsync)} has not been called."
@@ -593,7 +608,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
         public Task<Hover?> GetTextDocumentDocumentHoverAsync(
             TextDocumentPositionParams textDocumentPositionParams,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(
                 _clientCapabilities,
                 $"{nameof(InitializeAsync)} has not been called."
@@ -616,7 +632,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
         public Task<object[]> GetTextDocumentDocumentSymbolsAsync(
             DocumentSymbolParams documentSymbolParams,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(
                 _clientCapabilities,
                 $"{nameof(InitializeAsync)} has not been called."
@@ -639,7 +656,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
         public Task<TextEdit[]> GetTextDocumentFormattingAsync(
             DocumentFormattingParams documentFormattingParams,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(
                 _clientCapabilities,
                 $"{nameof(InitializeAsync)} has not been called."
@@ -662,7 +680,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
         public Task<TextEdit[]> GetTextDocumentFormattingOnTypeAsync(
             DocumentOnTypeFormattingParams documentOnTypeFormattingParams,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(
                 _clientCapabilities,
                 $"{nameof(InitializeAsync)} has not been called."
@@ -688,7 +707,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
         public Task<LSP.Location[]> GetTextDocumentImplementationsAsync(
             TextDocumentPositionParams textDocumentPositionParams,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(
                 _clientCapabilities,
                 $"{nameof(InitializeAsync)} has not been called."
@@ -714,7 +734,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
         public Task<TextEdit[]> GetTextDocumentRangeFormattingAsync(
             DocumentRangeFormattingParams documentRangeFormattingParams,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(
                 _clientCapabilities,
                 $"{nameof(InitializeAsync)} has not been called."
@@ -740,7 +761,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
         public Task<SignatureHelp?> GetTextDocumentSignatureHelpAsync(
             TextDocumentPositionParams textDocumentPositionParams,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(
                 _clientCapabilities,
                 $"{nameof(InitializeAsync)} has not been called."
@@ -766,7 +788,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
         public Task<object> ExecuteWorkspaceCommandAsync(
             ExecuteCommandParams executeCommandParams,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(
                 _clientCapabilities,
                 $"{nameof(InitializeAsync)} has not been called."
@@ -786,7 +809,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
         public Task<SymbolInformation[]?> GetWorkspaceSymbolsAsync(
             WorkspaceSymbolParams workspaceSymbolParams,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(
                 _clientCapabilities,
                 $"{nameof(InitializeAsync)} has not been called."
@@ -812,7 +836,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
         public Task<ActiveProjectContexts?> GetProjectContextsAsync(
             GetTextDocumentWithContextParams textDocumentWithContextParams,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(
                 _clientCapabilities,
                 $"{nameof(InitializeAsync)} has not been called."
@@ -838,7 +863,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
         public Task<SemanticTokens> GetTextDocumentSemanticTokensAsync(
             SemanticTokensParams semanticTokensParams,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(
                 _clientCapabilities,
                 $"{nameof(InitializeAsync)} has not been called."
@@ -863,7 +889,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
         > GetTextDocumentSemanticTokensEditsAsync(
             SemanticTokensEditsParams semanticTokensEditsParams,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(
                 _clientCapabilities,
                 $"{nameof(InitializeAsync)} has not been called."
@@ -890,7 +917,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
         public Task<SemanticTokens> GetTextDocumentSemanticTokensRangeAsync(
             SemanticTokensRangeParams semanticTokensRangeParams,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(
                 _clientCapabilities,
                 $"{nameof(InitializeAsync)} has not been called."
@@ -916,7 +944,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
         public Task<DocumentOnAutoInsertResponseItem?> GetDocumentOnAutoInsertAsync(
             DocumentOnAutoInsertParams autoInsertParams,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(
                 _clientCapabilities,
                 $"{nameof(InitializeAsync)} has not been called."
@@ -942,7 +971,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
         public Task<DocumentOnTypeRenameResponseItem?> GetTypeRenameAsync(
             DocumentOnTypeRenameParams renameParams,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(
                 _clientCapabilities,
                 $"{nameof(InitializeAsync)} has not been called."
@@ -968,7 +998,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
         public Task<object> HandleDocumentDidChangeAsync(
             DidChangeTextDocumentParams didChangeParams,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(
                 _clientCapabilities,
                 $"{nameof(InitializeAsync)} has not been called."
@@ -991,7 +1022,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
         public Task<object?> HandleDocumentDidOpenAsync(
             DidOpenTextDocumentParams didOpenParams,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(
                 _clientCapabilities,
                 $"{nameof(InitializeAsync)} has not been called."
@@ -1014,7 +1046,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
         public Task<object?> HandleDocumentDidCloseAsync(
             DidCloseTextDocumentParams didCloseParams,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Contract.ThrowIfNull(
                 _clientCapabilities,
                 $"{nameof(InitializeAsync)} has not been called."
@@ -1036,7 +1069,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
         private void DiagnosticService_DiagnosticsUpdated(
             Solution? solution,
             DocumentId? documentId
-        ) {
+        )
+        {
             // LSP doesn't support diagnostics without a document. So if we get project level diagnostics without a document, ignore them.
             if (documentId != null && solution != null)
             {
@@ -1143,7 +1177,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
             IDiagnosticService? diagnosticService,
             ImmutableArray<DocumentId> documentIds,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             if (diagnosticService == null)
                 return;
 
@@ -1175,7 +1210,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
             IDiagnosticService diagnosticService,
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Retrieve all diagnostics for the current document grouped by their actual file uri.
             var fileUriToDiagnostics = await GetDiagnosticsAsync(
                     diagnosticService,
@@ -1264,7 +1300,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
         private async Task SendDiagnosticsNotificationAsync(
             Uri uri,
             ImmutableArray<LSP.Diagnostic> diagnostics
-        ) {
+        )
+        {
             var publishDiagnosticsParams = new PublishDiagnosticParams
             {
                 Diagnostics = diagnostics.ToArray(),
@@ -1281,7 +1318,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
             IDiagnosticService diagnosticService,
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var option = document.IsRazorDocument()
                 ? InternalDiagnosticsOptions.RazorDiagnosticMode
                 : InternalDiagnosticsOptions.NormalDiagnosticMode;
@@ -1336,7 +1374,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
         private LSP.Diagnostic ConvertToLspDiagnostic(
             DiagnosticData diagnosticData,
             SourceText text
-        ) {
+        )
+        {
             Contract.ThrowIfNull(diagnosticData.DataLocation);
 
             var diagnostic = new LSP.Diagnostic
@@ -1384,7 +1423,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
         private static LSP.Range GetDiagnosticRange(
             DiagnosticDataLocation diagnosticDataLocation,
             SourceText text
-        ) {
+        )
+        {
             var linePositionSpan = DiagnosticData.GetLinePositionSpan(
                 diagnosticDataLocation,
                 text,
@@ -1430,11 +1470,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
             internal ImmutableArray<LSP.Diagnostic> GetDiagnosticsForUriAndDocument(
                 DocumentId documentId,
                 Uri uri
-            ) {
+            )
+            {
                 if (
                     _server._publishedFileToDiagnostics.TryGetValue(uri, out var dict)
                     && dict.TryGetValue(documentId, out var diagnostics)
-                ) {
+                )
+                {
                     return diagnostics;
                 }
 

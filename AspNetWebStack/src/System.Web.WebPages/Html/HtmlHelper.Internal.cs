@@ -30,7 +30,8 @@ namespace System.Web.WebPages.Html
             object value,
             Type destinationType,
             CultureInfo culture
-        ) {
+        )
+        {
             if (value == null || destinationType.IsInstanceOfType(value))
             {
                 return value;
@@ -89,7 +90,8 @@ namespace System.Web.WebPages.Html
             object value,
             Type destinationType,
             CultureInfo culture
-        ) {
+        )
+        {
             if (value == null || destinationType.IsInstanceOfType(value))
             {
                 return value;

@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             IImmutableSet<Document>? documents,
             FindReferencesSearchOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var op = symbol.GetPredefinedOperator();
             return FindDocumentsAsync(project, documents, op, cancellationToken);
         }
@@ -32,7 +33,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             SemanticModel semanticModel,
             FindReferencesSearchOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
             var op = symbol.GetPredefinedOperator();
 
@@ -49,7 +51,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             ISyntaxFactsService syntaxFacts,
             PredefinedOperator op,
             SyntaxToken token
-        ) {
+        )
+        {
             return syntaxFacts.TryGetPredefinedOperator(token, out var actualOperator)
                 && actualOperator == op;
         }

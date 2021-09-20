@@ -25,7 +25,8 @@ namespace System.DirectoryServices.Protocols.Tests
             string distinguishedName,
             string attributeName,
             string value
-        ) {
+        )
+        {
             var request = new CompareRequest(distinguishedName, attributeName, value);
             Assert.Equal(attributeName, request.Assertion.Name);
             Assert.Equal(new string[] { value }, request.Assertion.GetValues(typeof(string)));
@@ -42,7 +43,8 @@ namespace System.DirectoryServices.Protocols.Tests
             string distinguishedName,
             string attributeName,
             byte[] value
-        ) {
+        )
+        {
             var request = new CompareRequest(distinguishedName, attributeName, value);
             Assert.Equal(attributeName, request.Assertion.Name);
             Assert.Equal(new byte[][] { value }, request.Assertion.GetValues(typeof(byte[])));

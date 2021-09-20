@@ -183,7 +183,8 @@ namespace System.Text.Tests
                 BoundedMemory<char> mem = BoundedMemory.Allocate<char>(
                     5 * Vector<byte>.Count / sizeof(char)
                 )
-            ) {
+            )
+            {
                 Span<char> chars = mem.Span;
 
                 for (int i = 0; i < chars.Length; i++)
@@ -434,7 +435,8 @@ namespace System.Text.Tests
 
             fixed (char* pUtf16 = &MemoryMarshal.GetReference(utf16))fixed (
                 byte* pAscii = &MemoryMarshal.GetReference(ascii)
-            ) {
+            )
+            {
                 // Conversions between UIntPtr <-> int are not checked by default.
                 return checked(
                     (int)_fnNarrowUtf16ToAscii.Delegate(pUtf16, pAscii, (UIntPtr)utf16.Length)
@@ -448,7 +450,8 @@ namespace System.Text.Tests
 
             fixed (byte* pAscii = &MemoryMarshal.GetReference(ascii))fixed (
                 char* pUtf16 = &MemoryMarshal.GetReference(utf16)
-            ) {
+            )
+            {
                 // Conversions between UIntPtr <-> int are not checked by default.
                 return checked(
                     (int)_fnWidenAsciiToUtf16.Delegate(pAscii, pUtf16, (UIntPtr)ascii.Length)

@@ -282,7 +282,8 @@ namespace System.Tests
                 ValueTupleTestDriver<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> other,
                 bool expectEqual,
                 bool expectStructuallyEqual
-            ) {
+            )
+            {
                 if (expectEqual)
                 {
                     Assert.True(valueTuple.Equals(other.valueTuple));
@@ -355,7 +356,8 @@ namespace System.Tests
                 ValueTupleTestDriver<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> other,
                 int expectedResult,
                 int expectedStructuralResult
-            ) {
+            )
+            {
                 Assert.Equal(expectedResult, ((IComparable)valueTuple).CompareTo(other.valueTuple));
                 Assert.Equal(
                     expectedStructuralResult,
@@ -2831,16 +2833,8 @@ namespace System.Tests
             T6,
             T7,
             TRest
-        >(
-            T1 item1,
-            T2 item2,
-            T3 item3,
-            T4 item4,
-            T5 item5,
-            T6 item6,
-            T7 item7,
-            TRest rest
-        ) where TRest : struct
+        >(T1 item1, T2 item2, T3 item3, T4 item4, T5 item5, T6 item6, T7 item7, TRest rest)
+            where TRest : struct
         {
             return new ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>(
                 item1,

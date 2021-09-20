@@ -12,13 +12,15 @@ namespace System.Net.Http
         public static void ProcessReceivedCookies(
             HttpResponseMessage response,
             CookieContainer cookieContainer
-        ) {
+        )
+        {
             if (
                 response.Headers.TryGetValues(
                     KnownHeaders.SetCookie.Descriptor,
                     out IEnumerable<string>? values
                 )
-            ) {
+            )
+            {
                 // The header values are always a string[]
                 var valuesArray = (string[])values;
                 Debug.Assert(valuesArray.Length > 0, "No values for header??");

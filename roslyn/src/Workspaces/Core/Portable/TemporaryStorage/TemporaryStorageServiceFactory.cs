@@ -222,7 +222,8 @@ namespace Microsoft.CodeAnalysis.Host
                     long size,
                     SourceHashAlgorithm checksumAlgorithm,
                     Encoding? encoding
-                ) {
+                )
+                {
                     _service = service;
                     _checksumAlgorithm = checksumAlgorithm;
                     _encoding = encoding;
@@ -273,7 +274,8 @@ namespace Microsoft.CodeAnalysis.Host
                             FunctionId.TemporaryStorageServiceFactory_ReadText,
                             cancellationToken
                         )
-                    ) {
+                    )
+                    {
                         using var stream = _memoryMappedInfo.CreateReadableStream();
                         using var reader = CreateTextReaderFromTemporaryStorage(
                             (ISupportDirectMemoryAccess)stream,
@@ -321,7 +323,8 @@ namespace Microsoft.CodeAnalysis.Host
                             FunctionId.TemporaryStorageServiceFactory_WriteText,
                             cancellationToken
                         )
-                    ) {
+                    )
+                    {
                         _checksumAlgorithm = text.ChecksumAlgorithm;
                         _encoding = text.Encoding;
 
@@ -340,7 +343,8 @@ namespace Microsoft.CodeAnalysis.Host
                 public Task WriteTextAsync(
                     SourceText text,
                     CancellationToken cancellationToken = default
-                ) {
+                )
+                {
                     // See commentary in ReadTextAsync for why this is implemented this way.
                     return Task.Factory.StartNew(
                         () => WriteText(text, cancellationToken),
@@ -353,7 +357,8 @@ namespace Microsoft.CodeAnalysis.Host
                 private static unsafe TextReader CreateTextReaderFromTemporaryStorage(
                     ISupportDirectMemoryAccess accessor,
                     int streamLength
-                ) {
+                )
+                {
                     var src = (char*)accessor.GetPointer();
 
                     // BOM: Unicode, little endian
@@ -382,7 +387,8 @@ namespace Microsoft.CodeAnalysis.Host
                     string storageName,
                     long offset,
                     long size
-                ) {
+                )
+                {
                     _service = service;
                     _memoryMappedInfo = new MemoryMappedInfo(storageName, offset, size);
                 }
@@ -414,7 +420,8 @@ namespace Microsoft.CodeAnalysis.Host
                             FunctionId.TemporaryStorageServiceFactory_ReadStream,
                             cancellationToken
                         )
-                    ) {
+                    )
+                    {
                         cancellationToken.ThrowIfCancellationRequested();
 
                         return _memoryMappedInfo.CreateReadableStream();
@@ -435,7 +442,8 @@ namespace Microsoft.CodeAnalysis.Host
                 public void WriteStream(
                     Stream stream,
                     CancellationToken cancellationToken = default
-                ) {
+                )
+                {
                     // The Wait() here will not actually block, since with useAsync: false, the
                     // entire operation will already be done when WaitStreamMaybeAsync completes.
                     WriteStreamMaybeAsync(
@@ -461,7 +469,8 @@ namespace Microsoft.CodeAnalysis.Host
                     Stream stream,
                     bool useAsync,
                     CancellationToken cancellationToken
-                ) {
+                )
+                {
                     if (_memoryMappedInfo != null)
                     {
                         throw new InvalidOperationException(
@@ -474,7 +483,8 @@ namespace Microsoft.CodeAnalysis.Host
                             FunctionId.TemporaryStorageServiceFactory_WriteStream,
                             cancellationToken
                         )
-                    ) {
+                    )
+                    {
                         var size = stream.Length;
                         _memoryMappedInfo = _service.CreateTemporaryStorage(size);
                         using var viewStream = _memoryMappedInfo.CreateWritableStream();

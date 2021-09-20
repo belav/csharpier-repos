@@ -86,7 +86,8 @@ namespace System.Xml.Xsl.Runtime
             XPathNodeType rootType,
             IXmlNamespaceResolver nsResolver,
             XmlNameTable nameTable
-        ) {
+        )
+        {
             // Build XPathDocument
             // If rootType != XPathNodeType.Root, then build an XQuery fragment
             _doc = new XPathDocument(nameTable);
@@ -153,7 +154,8 @@ namespace System.Xml.Xsl.Runtime
             XPathNodeType rootType,
             IXmlNamespaceResolver nsResolver,
             XmlNameTable nameTable
-        ) {
+        )
+        {
             if (rootType == XPathNodeType.Attribute || rootType == XPathNodeType.Namespace)
                 throw new XslTransformException(SR.XmlIl_TopLevelAttrNmsp, string.Empty);
 

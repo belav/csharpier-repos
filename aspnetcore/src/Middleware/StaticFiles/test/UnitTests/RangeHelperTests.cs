@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.Internal
         public void NormalizeRange_ReturnsNullWhenRangeStartEqualsOrGreaterThanLength(
             long start,
             long end
-        ) {
+        )
+        {
             // Arrange & Act
             var normalizedRange = RangeHelper.NormalizeRange(
                 new RangeItemHeaderValue(start, end),
@@ -45,7 +46,8 @@ namespace Microsoft.AspNetCore.Internal
             long? end,
             long? normalizedStart,
             long? normalizedEnd
-        ) {
+        )
+        {
             // Arrange & Act
             var normalizedRange = RangeHelper.NormalizeRange(
                 new RangeItemHeaderValue(start, end),

@@ -19,10 +19,8 @@ namespace System.Security.Cryptography.Pkcs
         public SignedCms(ContentInfo contentInfo)
             : this(SubjectIdentifierType.IssuerAndSerialNumber, contentInfo, false) { }
 
-        public SignedCms(
-            SubjectIdentifierType signerIdentifierType,
-            ContentInfo contentInfo
-        ) : this(signerIdentifierType, contentInfo, false) { }
+        public SignedCms(SubjectIdentifierType signerIdentifierType, ContentInfo contentInfo)
+            : this(signerIdentifierType, contentInfo, false) { }
 
         public SignedCms(ContentInfo contentInfo, bool detached)
             : this(SubjectIdentifierType.IssuerAndSerialNumber, contentInfo, detached) { }

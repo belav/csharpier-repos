@@ -226,7 +226,8 @@ namespace System.Net.NetworkInformation.Tests
             IPEndPoint localEP,
             IPEndPoint remoteEP,
             TcpState state
-        ) {
+        )
+        {
             Assert.Equal(localEP, tcpConnectionInformation.LocalEndPoint);
             Assert.Equal(remoteEP, tcpConnectionInformation.RemoteEndPoint);
             Assert.Equal(state, tcpConnectionInformation.State);

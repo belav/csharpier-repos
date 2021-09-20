@@ -68,7 +68,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             bool hasCurrent,
             object oldValue,
             ref object newValue
-        ) {
+        )
+        {
             if (newValue == null && IsCollection)
                 base.RemoveCollectionItems(cursor, references, oldValue);
             else

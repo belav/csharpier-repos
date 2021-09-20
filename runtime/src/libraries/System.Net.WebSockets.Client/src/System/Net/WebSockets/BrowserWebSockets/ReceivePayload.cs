@@ -29,7 +29,8 @@ namespace System.Net.WebSockets
         public bool BufferPayload(
             ArraySegment<byte> arraySegment,
             out WebSocketReceiveResult receiveResult
-        ) {
+        )
+        {
             int bytesTransferred = Math.Min(
                 _dataMessageReceived.Length - _unconsumedDataOffset,
                 arraySegment.Count

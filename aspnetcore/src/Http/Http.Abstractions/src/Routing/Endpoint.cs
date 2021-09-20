@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.Http
             RequestDelegate? requestDelegate,
             EndpointMetadataCollection? metadata,
             string? displayName
-        ) {
+        )
+        {
             // All are allowed to be null
             RequestDelegate = requestDelegate;
             Metadata = metadata ?? EndpointMetadataCollection.Empty;

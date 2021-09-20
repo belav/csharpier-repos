@@ -19,7 +19,8 @@ namespace Internal.Cryptography
             string oid,
             OidGroup oidGroup,
             bool fallBackToAllGroups
-        ) {
+        )
+        {
             if (s_extraOidToFriendlyName.TryGetValue(oid, out string? friendlyName))
             {
                 return friendlyName;
@@ -32,7 +33,8 @@ namespace Internal.Cryptography
             string friendlyName,
             OidGroup oidGroup,
             bool fallBackToAllGroups
-        ) {
+        )
+        {
             if (s_extraFriendlyNameToOid.TryGetValue(friendlyName, out string? oid))
             {
                 return oid;
@@ -74,7 +76,8 @@ namespace Internal.Cryptography
 
         private static Dictionary<string, string> InvertWithDefaultComparer(
             Dictionary<string, string> source
-        ) {
+        )
+        {
             var result = new Dictionary<string, string>(source.Count);
             foreach (KeyValuePair<string, string> item in source)
             {

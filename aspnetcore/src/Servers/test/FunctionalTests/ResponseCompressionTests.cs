@@ -93,7 +93,8 @@ namespace ServerComparison.FunctionalTests
             Func<HttpClient, ILogger, Task> scenario,
             bool hostCompression,
             [CallerMemberName] string testName = null
-        ) {
+        )
+        {
             testName =
                 $"{testName}_{variant.Server}_{variant.Tfm}_{variant.Architecture}_{variant.ApplicationType}";
             using (
@@ -102,7 +103,8 @@ namespace ServerComparison.FunctionalTests
                     variant.Server == ServerType.Nginx ? LogLevel.Trace : LogLevel.Debug, // https://github.com/aspnet/ServerTests/issues/144
                     testName
                 )
-            ) {
+            )
+            {
                 var logger = loggerFactory.CreateLogger("ResponseCompression");
 
                 var deploymentParameters = new DeploymentParameters(variant)
@@ -147,7 +149,8 @@ namespace ServerComparison.FunctionalTests
                         deploymentParameters,
                         loggerFactory
                     )
-                ) {
+                )
+                {
                     var deploymentResult = await deployer.DeployAsync();
                     var httpClientHandler = new HttpClientHandler()
                     {
@@ -221,7 +224,8 @@ namespace ServerComparison.FunctionalTests
             HttpClient client,
             string url,
             ILogger logger
-        ) {
+        )
+        {
             // Manage the compression manually because HttpClient removes the Content-Encoding header when decompressing.
             logger.LogInformation($"Testing /{url}");
             var request = new HttpRequestMessage(HttpMethod.Get, url);

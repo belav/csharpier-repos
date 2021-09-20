@@ -13,12 +13,8 @@ namespace System.Xml
         private readonly string? _systemId;
         private readonly string _name;
 
-        internal XmlNotation(
-            string name,
-            string? publicId,
-            string? systemId,
-            XmlDocument doc
-        ) : base(doc)
+        internal XmlNotation(string name, string? publicId, string? systemId, XmlDocument doc)
+            : base(doc)
         {
             _name = doc.NameTable.Add(name);
             _publicId = publicId;

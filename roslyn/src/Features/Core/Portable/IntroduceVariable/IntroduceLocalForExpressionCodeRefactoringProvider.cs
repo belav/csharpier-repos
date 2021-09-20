@@ -71,7 +71,8 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
 
         protected async Task<TExpressionStatementSyntax> GetExpressionStatementAsync(
             CodeRefactoringContext context
-        ) {
+        )
+        {
             var expressionStatement =
                 await context.TryGetRelevantNodeAsync<TExpressionStatementSyntax>()
                     .ConfigureAwait(false);
@@ -84,7 +85,8 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
             Document document,
             TExpressionStatementSyntax expressionStatement,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
             var generator = SyntaxGenerator.GetGenerator(document);
@@ -121,7 +123,8 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
             Document document,
             TExpressionSyntax expression,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
 

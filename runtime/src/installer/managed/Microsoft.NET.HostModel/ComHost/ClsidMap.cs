@@ -48,7 +48,8 @@ namespace Microsoft.NET.HostModel.ComHost
                     TypeIsPublic(metadataReader, definition)
                     && TypeIsClass(metadataReader, definition)
                     && IsComVisible(metadataReader, definition, isAssemblyComVisible)
-                ) {
+                )
+                {
                     Guid guid = GetTypeGuid(metadataReader, definition);
                     string guidString = GetTypeGuid(metadataReader, definition).ToString("B");
 
@@ -107,7 +108,8 @@ namespace Microsoft.NET.HostModel.ComHost
                     if (
                         HasTypeName(metadataReader, baseClass, "System", "ValueType")
                         || HasTypeName(metadataReader, baseClass, "System", "Enum")
-                    ) {
+                    )
+                    {
                         return false;
                     }
                 }
@@ -143,7 +145,8 @@ namespace Microsoft.NET.HostModel.ComHost
             TypeReference type,
             string ns,
             string name
-        ) {
+        )
+        {
             return metadataReader.StringComparer.Equals(type.Namespace, ns)
                 && metadataReader.StringComparer.Equals(type.Name, name);
         }
@@ -186,7 +189,8 @@ namespace Microsoft.NET.HostModel.ComHost
             MetadataReader metadataReader,
             TypeDefinition definition,
             bool assemblyComVisible
-        ) {
+        )
+        {
             // We need to ensure that all parent scopes of the given type are not explicitly non-ComVisible.
             bool? IsComVisibleCore(TypeDefinition typeDefinition)
             {
@@ -221,7 +225,8 @@ namespace Microsoft.NET.HostModel.ComHost
         private static CustomAttributeHandle GetComVisibleAttribute(
             MetadataReader reader,
             CustomAttributeHandleCollection customAttributes
-        ) {
+        )
+        {
             foreach (CustomAttributeHandle attr in customAttributes)
             {
                 CustomAttribute attribute = reader.GetCustomAttribute(attr);
@@ -232,7 +237,8 @@ namespace Microsoft.NET.HostModel.ComHost
                         "System.Runtime.InteropServices",
                         "ComVisibleAttribute"
                     )
-                ) {
+                )
+                {
                     return attr;
                 }
             }
@@ -253,7 +259,8 @@ namespace Microsoft.NET.HostModel.ComHost
                         "System.Runtime.InteropServices",
                         "GuidAttribute"
                     )
-                ) {
+                )
+                {
                     CustomAttributeValue<KnownType> data = attribute.DecodeValue(
                         new TypeResolver()
                     );
@@ -275,7 +282,8 @@ namespace Microsoft.NET.HostModel.ComHost
                         "System.Runtime.InteropServices",
                         "ProgIdAttribute"
                     )
-                ) {
+                )
+                {
                     CustomAttributeValue<KnownType> data = attribute.DecodeValue(
                         new TypeResolver()
                     );
@@ -290,7 +298,8 @@ namespace Microsoft.NET.HostModel.ComHost
             CustomAttribute attribute,
             string targetNamespace,
             string targetName
-        ) {
+        )
+        {
             StringHandle namespaceMaybe;
             StringHandle nameMaybe;
             switch (attribute.Constructor.Kind)
@@ -363,7 +372,8 @@ namespace Microsoft.NET.HostModel.ComHost
                 MetadataReader reader,
                 TypeDefinitionHandle handle,
                 byte rawTypeKind
-            ) {
+            )
+            {
                 return KnownType.Unknown;
             }
 
@@ -371,7 +381,8 @@ namespace Microsoft.NET.HostModel.ComHost
                 MetadataReader reader,
                 TypeReferenceHandle handle,
                 byte rawTypeKind
-            ) {
+            )
+            {
                 return KnownType.Unknown;
             }
 

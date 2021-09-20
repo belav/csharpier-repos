@@ -31,7 +31,8 @@ namespace System.Data
             byte[] buffer,
             int bufferOffset,
             int length
-        ) {
+        )
+        {
             AssertNotNull(reader);
             return reader.GetBytes(
                 reader.GetOrdinal(name),
@@ -55,7 +56,8 @@ namespace System.Data
             char[] buffer,
             int bufferOffset,
             int length
-        ) {
+        )
+        {
             AssertNotNull(reader);
             return reader.GetChars(
                 reader.GetOrdinal(name),
@@ -113,7 +115,8 @@ namespace System.Data
             this DbDataReader reader,
             string name,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             AssertNotNull(reader);
             return reader.GetFieldValueAsync<T>(reader.GetOrdinal(name), cancellationToken);
         }
@@ -196,7 +199,8 @@ namespace System.Data
             this DbDataReader reader,
             string name,
             CancellationToken cancellationToken = default(CancellationToken)
-        ) {
+        )
+        {
             AssertNotNull(reader);
             return reader.IsDBNullAsync(reader.GetOrdinal(name), cancellationToken);
         }

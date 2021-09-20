@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.Navigation
                 ISymbol symbol,
                 Location location,
                 ImmutableArray<TaggedText>? displayTaggedParts
-            ) {
+            )
+            {
                 _solution = solution;
                 _symbol = symbol;
                 _location = location;

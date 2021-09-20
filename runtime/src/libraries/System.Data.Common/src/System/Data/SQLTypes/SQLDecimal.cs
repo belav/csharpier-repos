@@ -629,7 +629,8 @@ namespace System.Data.SqlTypes
             int data2,
             int data3,
             int data4
-        ) {
+        )
+        {
             CheckValidPrecScale(bPrecision, bScale);
             _bPrec = bPrecision;
             _bScale = bScale;
@@ -792,7 +793,8 @@ namespace System.Data.SqlTypes
             byte bPrec,
             byte bScale,
             bool fPositive
-        ) {
+        )
+        {
             CheckValidPrecScale(bPrec, bScale);
             Debug.Assert(rglData.Length >= 4);
 
@@ -2535,7 +2537,8 @@ namespace System.Data.SqlTypes
             int ciulS, // In    | # of digits in S
             Span<uint> rgulD, // Out    | Destination number
             out int ciulD // Out    | # of digits in D
-        ) {
+        )
+        {
             ciulD = ciulS;
 
             Debug.Assert(rgulS.Length >= ciulS, "rgulS.Length >= ciulS", "Invalid array length");
@@ -2550,7 +2553,8 @@ namespace System.Data.SqlTypes
             Span<uint> rgulD, // Out    | Number
             out int ciulD, // Out    | # of digits in D
             uint iulN // In    | ULONG to set
-        ) {
+        )
+        {
             ciulD = 1;
             rgulD[0] = iulN;
         }
@@ -2559,7 +2563,8 @@ namespace System.Data.SqlTypes
         private static void MpNormalize(
             ReadOnlySpan<uint> rgulU, // In   | Number
             ref int ciulU // InOut| # of digits
-        ) {
+        )
+        {
             while (ciulU > 1 && rgulU[ciulU - 1] == 0)
                 ciulU--;
         }
@@ -2571,7 +2576,8 @@ namespace System.Data.SqlTypes
             Span<uint> piulD, // InOut| D
             ref int ciulD, // InOut| # of digits in D
             uint iulX // In    | X
-        ) {
+        )
+        {
             Debug.Assert(iulX > s_uiZero);
             uint ulCarry = 0;
             int iData;
@@ -2602,7 +2608,8 @@ namespace System.Data.SqlTypes
             ref int ciulU, // InOut| # of digits in U
             uint iulD, // In    | D
             out uint iulR // Out    | R
-        ) {
+        )
+        {
             Debug.Assert(rgulU.Length == s_cNumeMax);
 
             uint ulCarry = 0;
@@ -2666,7 +2673,8 @@ namespace System.Data.SqlTypes
             out int ciulQ, // Out    | # of digits in Q
             Span<uint> rgulR, // Out    | R
             out int ciulR // Out    | # of digits in R
-        ) {
+        )
+        {
             Debug.Assert(ciulU > 0, "ciulU > 0", "In method MpDiv");
             Debug.Assert(ciulD > 0, "ciulD > 0", "In method MpDiv");
             Debug.Assert(rgulU.Length == s_cNumeMax);
@@ -2781,7 +2789,8 @@ namespace System.Data.SqlTypes
                             iulRindex - ciulD;
                         iulDindex < ciulD;
                         iulDindex++, iulRwork++
-                    ) {
+                    )
+                    {
                         ulong ulTemp2 = rgulD[iulDindex];
                         dwlMulAccum += QH * ulTemp2;
                         dwlAccum += (ulong)rgulR[iulRwork] - LO(dwlMulAccum);
@@ -2804,7 +2813,8 @@ namespace System.Data.SqlTypes
                             ulCarry = 0, iulDindex = 0, iulRwork = iulRindex - ciulD;
                             iulDindex < ciulD;
                             iulDindex++, iulRwork++
-                        ) {
+                        )
+                        {
                             dwlAccum = rgulD[iulDindex] + (ulong)rgulR[iulRwork] + ulCarry;
                             ulCarry = HI(dwlAccum);
                             rgulR[iulRwork] = LO(dwlAccum);

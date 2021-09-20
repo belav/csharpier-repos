@@ -20,7 +20,8 @@ namespace System.Collections.Generic
 
         private unsafe RandomizedStringEqualityComparer(
             IEqualityComparer<string?> underlyingComparer
-        ) {
+        )
+        {
             _underlyingComparer = underlyingComparer;
 
             fixed (MarvinSeed* seed = &_seed)
@@ -32,7 +33,8 @@ namespace System.Collections.Generic
         internal static RandomizedStringEqualityComparer Create(
             IEqualityComparer<string?> underlyingComparer,
             bool ignoreCase
-        ) {
+        )
+        {
             if (!ignoreCase)
             {
                 return new OrdinalComparer(underlyingComparer);

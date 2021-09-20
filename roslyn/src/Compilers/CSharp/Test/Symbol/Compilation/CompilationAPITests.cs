@@ -2761,7 +2761,8 @@ class C { }",
 
             protected override PortableExecutableReference WithPropertiesImpl(
                 MetadataReferenceProperties properties
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }
@@ -2817,7 +2818,8 @@ class C { }",
             {
                 using (
                     var mdModule = ModuleMetadata.CreateFromMetadata((IntPtr)ptr, h.MetadataSize)
-                ) {
+                )
+                {
                     var c = CSharpCompilation.Create(
                         "Goo",
                         references: new[]
@@ -3678,7 +3680,8 @@ public class C { public static FrameworkName Goo() { return null; }}";
 
         private static ImmutableArray<CodeAnalysis.NullableAnnotation> GetAnonymousTypeNullableAnnotations(
             ITypeSymbol type
-        ) {
+        )
+        {
             return type.GetMembers()
                 .OfType<IPropertySymbol>()
                 .SelectAsArray(

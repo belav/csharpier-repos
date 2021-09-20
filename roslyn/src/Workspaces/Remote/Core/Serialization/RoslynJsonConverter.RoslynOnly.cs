@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.Remote
             protected override TodoCommentDescriptor ReadValue(
                 JsonReader reader,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 Contract.ThrowIfFalse(reader.TokenType == JsonToken.StartObject);
 
                 // all integer is long
@@ -57,7 +58,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 JsonWriter writer,
                 TodoCommentDescriptor descriptor,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 writer.WriteStartObject();
 
                 writer.WritePropertyName("text");
@@ -91,7 +93,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 JsonWriter writer,
                 TodoComment todoComment,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 writer.WriteStartObject();
 
                 writer.WritePropertyName(nameof(TodoComment.Descriptor));
@@ -126,7 +129,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 JsonWriter writer,
                 HighlightSpan source,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 writer.WriteStartObject();
 
                 writer.WritePropertyName(nameof(HighlightSpan.TextSpan));
@@ -158,7 +162,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 JsonWriter writer,
                 TaggedText source,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 writer.WriteStartObject();
 
                 writer.WritePropertyName(nameof(TaggedText.Tag));
@@ -176,7 +181,8 @@ namespace Microsoft.CodeAnalysis.Remote
             protected override AnalyzerPerformanceInfo ReadValue(
                 JsonReader reader,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 Contract.ThrowIfFalse(reader.TokenType == JsonToken.StartObject);
 
                 var analyzerid = ReadProperty<string>(reader);
@@ -193,7 +199,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 JsonWriter writer,
                 AnalyzerPerformanceInfo info,
                 JsonSerializer serializer
-            ) {
+            )
+            {
                 writer.WriteStartObject();
 
                 writer.WritePropertyName(nameof(AnalyzerPerformanceInfo.AnalyzerId));

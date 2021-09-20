@@ -30,7 +30,8 @@ namespace System.Formats.Cbor.Tests
             ulong tag,
             object value,
             string hexExpectedEncoding
-        ) {
+        )
+        {
             byte[] expectedEncoding = hexExpectedEncoding.HexToByteArray();
             var writer = new CborWriter();
             writer.WriteTag((CborTag)tag);
@@ -60,7 +61,8 @@ namespace System.Formats.Cbor.Tests
             ulong[] tags,
             object value,
             string hexExpectedEncoding
-        ) {
+        )
+        {
             byte[] expectedEncoding = hexExpectedEncoding.HexToByteArray();
             var writer = new CborWriter();
             foreach (ulong tag in tags)
@@ -109,7 +111,8 @@ namespace System.Formats.Cbor.Tests
         public static void WriteDateTimeOffset_SingleValue_HappyPath(
             string valueString,
             string expectedHexEncoding
-        ) {
+        )
+        {
             DateTimeOffset value = DateTimeOffset.Parse(valueString);
             var writer = new CborWriter();
             writer.WriteDateTimeOffset(value);
@@ -127,7 +130,8 @@ namespace System.Formats.Cbor.Tests
         public static void WriteUnixTimeSeconds_Long_SingleValue_HappyPath(
             long value,
             string expectedHexEncoding
-        ) {
+        )
+        {
             var writer = new CborWriter();
             writer.WriteUnixTimeSeconds(value);
 
@@ -146,7 +150,8 @@ namespace System.Formats.Cbor.Tests
         public static void WriteUnixTimeSeconds_Double_SingleValue_HappyPath(
             double value,
             string expectedHexEncoding
-        ) {
+        )
+        {
             var writer = new CborWriter();
             writer.WriteUnixTimeSeconds(value);
 
@@ -160,7 +165,8 @@ namespace System.Formats.Cbor.Tests
         [InlineData(double.NegativeInfinity)]
         public static void WriteUnixTimeSeconds_Double_InvalidInput_ShouldThrowArgumentException(
             double value
-        ) {
+        )
+        {
             var writer = new CborWriter();
             Assert.Throws<ArgumentException>(() => writer.WriteUnixTimeSeconds(value));
         }
@@ -180,7 +186,8 @@ namespace System.Formats.Cbor.Tests
         public static void WriteInteger_SingleValue_HappyPath(
             string valueString,
             string expectedHexEncoding
-        ) {
+        )
+        {
             BigInteger value = BigInteger.Parse(valueString);
 
             var writer = new CborWriter();
@@ -204,7 +211,8 @@ namespace System.Formats.Cbor.Tests
         public static void WriteDecimal_SingleValue_HappyPath(
             string stringValue,
             string expectedHexEncoding
-        ) {
+        )
+        {
             decimal value = decimal.Parse(stringValue, Globalization.CultureInfo.InvariantCulture);
             var writer = new CborWriter();
             writer.WriteDecimal(value);
@@ -217,7 +225,8 @@ namespace System.Formats.Cbor.Tests
         public static void WriteTaggedValue_UnsupportedConformance_ShouldThrowInvalidOperationException(
             CborConformanceMode mode,
             object value
-        ) {
+        )
+        {
             var writer = new CborWriter(mode);
             Assert.Throws<InvalidOperationException>(() => Helpers.WriteValue(writer, value));
             Assert.Equal(0, writer.BytesWritten);
@@ -233,7 +242,8 @@ namespace System.Formats.Cbor.Tests
         public static void WriteTaggedValue_SupportedConformance_ShouldSucceed(
             CborConformanceMode mode,
             object value
-        ) {
+        )
+        {
             var writer = new CborWriter(mode);
             Helpers.WriteValue(writer, value);
         }

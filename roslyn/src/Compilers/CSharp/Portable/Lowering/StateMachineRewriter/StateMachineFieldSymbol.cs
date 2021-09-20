@@ -35,14 +35,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             string name,
             bool isPublic,
             bool isThis
-        ) : this(
-            stateMachineType,
-            type,
-            name,
-            new LocalSlotDebugInfo(SynthesizedLocalKind.LoweringTemp, LocalDebugId.None),
-            slotIndex: -1,
-            isPublic: isPublic
-        ) {
+        )
+            : this(
+                stateMachineType,
+                type,
+                name,
+                new LocalSlotDebugInfo(SynthesizedLocalKind.LoweringTemp, LocalDebugId.None),
+                slotIndex: -1,
+                isPublic: isPublic
+            )
+        {
             _isThis = isThis;
         }
 
@@ -53,14 +55,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             SynthesizedLocalKind synthesizedKind,
             int slotIndex,
             bool isPublic
-        ) : this(
-            stateMachineType,
-            type,
-            name,
-            new LocalSlotDebugInfo(synthesizedKind, LocalDebugId.None),
-            slotIndex,
-            isPublic: isPublic
-        ) { }
+        )
+            : this(
+                stateMachineType,
+                type,
+                name,
+                new LocalSlotDebugInfo(synthesizedKind, LocalDebugId.None),
+                slotIndex,
+                isPublic: isPublic
+            ) { }
 
         public StateMachineFieldSymbol(
             NamedTypeSymbol stateMachineType,
@@ -69,14 +72,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             LocalSlotDebugInfo slotDebugInfo,
             int slotIndex,
             bool isPublic
-        ) : this(
-            stateMachineType,
-            TypeWithAnnotations.Create(type),
-            name,
-            slotDebugInfo,
-            slotIndex,
-            isPublic
-        ) { }
+        )
+            : this(
+                stateMachineType,
+                TypeWithAnnotations.Create(type),
+                name,
+                slotDebugInfo,
+                slotIndex,
+                isPublic
+            ) { }
 
         public StateMachineFieldSymbol(
             NamedTypeSymbol stateMachineType,

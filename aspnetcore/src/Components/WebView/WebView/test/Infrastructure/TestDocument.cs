@@ -53,7 +53,8 @@ namespace Microsoft.AspNetCore.Components.WebView.Document
             RenderBatch batch,
             int componentId,
             ArrayBuilderSegment<RenderTreeEdit> edits
-        ) {
+        )
+        {
             if (!_componentsById.TryGetValue(componentId, out var component))
             {
                 component = new ComponentNode(componentId);
@@ -72,7 +73,8 @@ namespace Microsoft.AspNetCore.Components.WebView.Document
             ContainerNode parent,
             int childIndex,
             ArrayBuilderSegment<RenderTreeEdit> edits
-        ) {
+        )
+        {
             var currentDepth = 0;
             var childIndexAtCurrentDepth = childIndex;
             var permutations = new List<PermutationListEntry>();
@@ -224,7 +226,8 @@ namespace Microsoft.AspNetCore.Components.WebView.Document
             ArraySegment<RenderTreeFrame> frames,
             RenderTreeFrame frame,
             int frameIndex
-        ) {
+        )
+        {
             switch (frame.FrameType)
             {
                 case RenderTreeFrameType.Element:
@@ -312,7 +315,8 @@ namespace Microsoft.AspNetCore.Components.WebView.Document
             ArraySegment<RenderTreeFrame> frames,
             int startIndex,
             int endIndexExcl
-        ) {
+        )
+        {
             var origChildIndex = childIndex;
             for (var index = startIndex; index < endIndexExcl; index++)
             {
@@ -341,7 +345,8 @@ namespace Microsoft.AspNetCore.Components.WebView.Document
             ArraySegment<RenderTreeFrame> frames,
             RenderTreeFrame frame,
             int frameIndex
-        ) {
+        )
+        {
             // Note: we don't handle SVG here
             var newElement = new ElementNode(frame.ElementName);
 
@@ -385,7 +390,8 @@ namespace Microsoft.AspNetCore.Components.WebView.Document
             RenderBatch batch,
             ElementNode elementNode,
             RenderTreeFrame attributeFrame
-        ) {
+        )
+        {
             var attributeName = attributeFrame.AttributeName;
             var eventHandlerId = attributeFrame.AttributeEventHandlerId;
 
@@ -418,7 +424,8 @@ namespace Microsoft.AspNetCore.Components.WebView.Document
             ElementNode element,
             string attributeName,
             RenderTreeFrame attributeFrame
-        ) {
+        )
+        {
             switch (attributeName)
             {
                 case "value":

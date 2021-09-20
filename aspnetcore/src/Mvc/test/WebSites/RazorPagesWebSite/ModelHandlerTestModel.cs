@@ -41,7 +41,8 @@ namespace RazorPagesWebSite
             int id = 10,
             Guid guid = default(Guid),
             DateTime dateTime = default(DateTime)
-        ) {
+        )
+        {
             return Content($"id: {id}, guid: {guid}, boolean: {boolean}, dateTime: {dateTime}");
         }
 

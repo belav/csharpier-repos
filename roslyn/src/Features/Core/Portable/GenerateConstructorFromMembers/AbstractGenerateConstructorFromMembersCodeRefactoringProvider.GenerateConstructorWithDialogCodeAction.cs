@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
                 INamedTypeSymbol containingType,
                 ImmutableArray<ISymbol> viableMembers,
                 ImmutableArray<PickMembersOption> pickMembersOptions
-            ) {
+            )
+            {
                 _service = service;
                 _document = document;
                 _textSpan = textSpan;
@@ -66,7 +67,8 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
             protected override async Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(
                 object options,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var result = (PickMembersResult)options;
                 if (result.IsCanceled)
                 {
@@ -159,7 +161,8 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
 
             protected override async Task<Solution?> GetChangedSolutionAsync(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var solution = await base.GetChangedSolutionAsync(cancellationToken)
                     .ConfigureAwait(false);
 

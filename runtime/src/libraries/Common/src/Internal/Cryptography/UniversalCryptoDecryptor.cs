@@ -25,7 +25,8 @@ namespace Internal.Cryptography
         protected override int UncheckedTransformBlock(
             ReadOnlySpan<byte> inputBuffer,
             Span<byte> outputBuffer
-        ) {
+        )
+        {
             //
             // If we're decrypting, it's possible to be called with the last blocks of the data, and then
             // have TransformFinalBlock called with an empty array. Since we don't know if this is the case,
@@ -79,7 +80,8 @@ namespace Internal.Cryptography
         protected override unsafe int UncheckedTransformFinalBlock(
             ReadOnlySpan<byte> inputBuffer,
             Span<byte> outputBuffer
-        ) {
+        )
+        {
             // We can't complete decryption on a partial block
             if (inputBuffer.Length % PaddingSizeBytes != 0)
                 throw new CryptographicException(SR.Cryptography_PartialBlock);
@@ -151,7 +153,8 @@ namespace Internal.Cryptography
             byte[] inputBuffer,
             int inputOffset,
             int inputCount
-        ) {
+        )
+        {
             if (DepaddingRequired)
             {
                 byte[] rented = CryptoPool.Rent(inputCount + InputBlockSize);

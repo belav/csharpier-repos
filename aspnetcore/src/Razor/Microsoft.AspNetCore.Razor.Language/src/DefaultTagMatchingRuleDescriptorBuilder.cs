@@ -114,7 +114,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                     if (
                         char.IsWhiteSpace(character)
                         || HtmlConventions.InvalidNonWhitespaceHtmlCharacters.Contains(character)
-                    ) {
+                    )
+                    {
                         var diagnostic =
                             RazorDiagnosticFactory.CreateTagHelper_InvalidTargetedTagName(
                                 TagName,
@@ -144,7 +145,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                             || HtmlConventions.InvalidNonWhitespaceHtmlCharacters.Contains(
                                 character
                             )
-                        ) {
+                        )
+                        {
                             var diagnostic =
                                 RazorDiagnosticFactory.CreateTagHelper_InvalidTargetedParentTagName(
                                     ParentTag,

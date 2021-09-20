@@ -51,7 +51,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SourceLocation nameLocation,
             ImmutableArray<SingleNamespaceOrTypeDeclaration> children,
             ImmutableArray<Diagnostic> diagnostics
-        ) {
+        )
+        {
             // By far the most common case is "no usings and no extern aliases", so optimize for
             // that to minimize space. The other cases are not frequent enough to warrant their own
             // custom types.

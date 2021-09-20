@@ -16,7 +16,8 @@ namespace System.Security.Cryptography
             ReadOnlyMemory<byte> xBytes,
             in AlgorithmIdentifierAsn algId,
             out DSAParameters ret
-        ) {
+        )
+        {
             if (!algId.Parameters.HasValue)
             {
                 throw new CryptographicException(SR.Cryptography_Der_Invalid_Encoding);
@@ -66,7 +67,8 @@ namespace System.Security.Cryptography
             ReadOnlyMemory<byte> yBytes,
             in AlgorithmIdentifierAsn algId,
             out DSAParameters ret
-        ) {
+        )
+        {
             BigInteger y;
 
             try
@@ -104,7 +106,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> source,
             out int bytesRead,
             out DSAParameters key
-        ) {
+        )
+        {
             KeyFormatHelper.ReadSubjectPublicKeyInfo<DSAParameters>(
                 s_validOids,
                 source,
@@ -117,7 +120,8 @@ namespace System.Security.Cryptography
         internal static ReadOnlyMemory<byte> ReadSubjectPublicKeyInfo(
             ReadOnlyMemory<byte> source,
             out int bytesRead
-        ) {
+        )
+        {
             return KeyFormatHelper.ReadSubjectPublicKeyInfo(s_validOids, source, out bytesRead);
         }
 
@@ -125,7 +129,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> source,
             out int bytesRead,
             out DSAParameters key
-        ) {
+        )
+        {
             KeyFormatHelper.ReadPkcs8<DSAParameters>(
                 s_validOids,
                 source,
@@ -140,7 +145,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<char> password,
             out int bytesRead,
             out DSAParameters key
-        ) {
+        )
+        {
             KeyFormatHelper.ReadEncryptedPkcs8<DSAParameters>(
                 s_validOids,
                 source,
@@ -156,7 +162,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> passwordBytes,
             out int bytesRead,
             out DSAParameters key
-        ) {
+        )
+        {
             KeyFormatHelper.ReadEncryptedPkcs8<DSAParameters>(
                 s_validOids,
                 source,

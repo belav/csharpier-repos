@@ -41,7 +41,8 @@ namespace Moq
                 !expression.Type.IsValueType
                 && !type.IsValueType
                 && type.IsAssignableFrom(expression.Type)
-            ) {
+            )
+            {
                 // if source and target types are reference types and assignment-compatible,
                 // no conversion is necessary:
                 return expression;
@@ -145,7 +146,8 @@ namespace Moq
         internal static Stack<InvocationShape> Split(
             this LambdaExpression expression,
             bool allowNonOverridableLastProperty = false
-        ) {
+        )
+        {
             Debug.Assert(expression != null);
 
             var parts = new Stack<InvocationShape>();
@@ -186,7 +188,8 @@ namespace Moq
                 ,
                 bool assignment = false,
                 bool allowNonOverridableLastProperty = false
-            ) {
+            )
+            {
                 const string ParameterName = "...";
 
                 switch (e.NodeType)
@@ -230,7 +233,8 @@ namespace Moq
                         {
                             foreach (
                                 var typeArgument in methodCallExpression.Method.GetGenericArguments()
-                            ) {
+                            )
+                            {
                                 if (typeArgument.IsOrContainsTypeMatcher())
                                 {
                                     // This is a (somewhat roundabout) way of ensuring that the type matchers used
@@ -524,7 +528,8 @@ namespace Moq
 
         public static Expression<Action<TMock>> AssignItIsAny<TMock, T>(
             this Expression<Func<TMock, T>> expression
-        ) {
+        )
+        {
             Debug.Assert(expression != null);
             Debug.Assert(expression.Body is MemberExpression || expression.Body is IndexExpression);
 

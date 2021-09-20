@@ -172,7 +172,8 @@ namespace AutoMapper.Configuration
                 var ignoredPropertyName in globalIgnores.Where(
                     p => GetDestinationMemberConfiguration(p) == null
                 )
-            ) {
+            )
+            {
                 var ignoredProperty = typeMap.DestinationSetters.SingleOrDefault(
                     p => p.Name == ignoredPropertyName
                 );
@@ -239,7 +240,8 @@ namespace AutoMapper.Configuration
             Stack<Member> chain = null;
             foreach (
                 var includedMember in typeMap.IncludedMembers.Where(i => i.IsMemberPath(out chain))
-            ) {
+            )
+            {
                 var memberPath = new MemberPath(chain);
                 var newSource = Parameter(typeMap.DestinationType, "source");
                 var customExpression = Lambda(newSource, newSource);
@@ -253,7 +255,8 @@ namespace AutoMapper.Configuration
                 var propertyMap in typeMap.PropertyMaps.Where(
                     p => p.SourceMembers.Length > 1 && !p.SourceMembers.Any(s => s is MethodInfo)
                 )
-            ) {
+            )
+            {
                 var memberPath = new MemberPath(propertyMap.SourceMembers);
                 var customExpression = propertyMap.DestinationMember.Lambda();
                 ReverseSourceMembers(memberPath, customExpression);
@@ -283,7 +286,8 @@ namespace AutoMapper.Configuration
         protected void ForSourceMemberCore(
             string sourceMemberName,
             Action<ISourceMemberConfigurationExpression> memberOptions
-        ) {
+        )
+        {
             var memberInfo = SourceType.GetFieldOrProperty(sourceMemberName);
 
             ForSourceMemberCore(memberInfo, memberOptions);
@@ -292,7 +296,8 @@ namespace AutoMapper.Configuration
         protected void ForSourceMemberCore(
             MemberInfo memberInfo,
             Action<ISourceMemberConfigurationExpression> memberOptions
-        ) {
+        )
+        {
             var srcConfig = new SourceMappingExpression(memberInfo);
 
             memberOptions(srcConfig);
@@ -379,7 +384,8 @@ namespace AutoMapper.Configuration
 
         public TMappingExpression BeforeMap(
             Action<TSource, TDestination, ResolutionContext> beforeFunction
-        ) {
+        )
+        {
             TypeMapActions.Add(
                 tm =>
                 {
@@ -433,7 +439,8 @@ namespace AutoMapper.Configuration
 
         public TMappingExpression AfterMap(
             Action<TSource, TDestination, ResolutionContext> afterFunction
-        ) {
+        )
+        {
             TypeMapActions.Add(
                 tm =>
                 {
@@ -503,7 +510,8 @@ namespace AutoMapper.Configuration
         public TMappingExpression ForSourceMember(
             string sourceMemberName,
             Action<ISourceMemberConfigurationExpression> memberOptions
-        ) {
+        )
+        {
             ForSourceMemberCore(sourceMemberName, memberOptions);
 
             return this as TMappingExpression;
@@ -524,7 +532,8 @@ namespace AutoMapper.Configuration
 
         public TMappingExpression ConstructUsing(
             Func<TSource, ResolutionContext, TDestination> ctor
-        ) {
+        )
+        {
             TypeMapActions.Add(
                 tm =>
                 {
@@ -556,7 +565,8 @@ namespace AutoMapper.Configuration
 
         public void ConvertUsing(
             Func<TSource, TDestination, ResolutionContext, TDestination> mappingFunction
-        ) {
+        )
+        {
             TypeMapActions.Add(
                 tm =>
                 {
@@ -582,7 +592,8 @@ namespace AutoMapper.Configuration
         public TMappingExpression ForCtorParam(
             string ctorParamName,
             Action<ICtorParamConfigurationExpression<TSource>> paramOptions
-        ) {
+        )
+        {
             var ctorParamExpression = new CtorParamConfigurationExpression<TSource, TDestination>(
                 ctorParamName,
                 SourceType

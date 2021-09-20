@@ -30,7 +30,8 @@ namespace System.Runtime.Serialization
             XmlObjectSerializerReadContext? context,
             XmlDictionaryString[]? memberNames,
             XmlDictionaryString[]? memberNamespaces
-        ) {
+        )
+        {
             return _reflectionReader.ReflectionReadClass(
                 xmlReader,
                 context,
@@ -51,7 +52,8 @@ namespace System.Runtime.Serialization
             XmlDictionaryString itemName,
             XmlDictionaryString itemNamespace,
             CollectionDataContract collectionContract
-        ) {
+        )
+        {
             return _reflectionReader.ReflectionReadCollection(
                 xmlReader,
                 context,
@@ -68,7 +70,8 @@ namespace System.Runtime.Serialization
             XmlDictionaryString itemName,
             XmlDictionaryString itemNs,
             CollectionDataContract collectionContract
-        ) {
+        )
+        {
             _reflectionReader.ReflectionReadGetOnlyCollection(
                 xmlReader,
                 context,
@@ -88,7 +91,8 @@ namespace System.Runtime.Serialization
             XmlDictionaryString[]? memberNamespaces,
             ClassDataContract classContract,
             ref object obj
-        ) {
+        )
+        {
             Debug.Assert(memberNamespaces != null);
 
             int memberCount = classContract.MemberNames!.Length;
@@ -163,13 +167,15 @@ namespace System.Runtime.Serialization
 
         protected override string GetCollectionContractItemName(
             CollectionDataContract collectionContract
-        ) {
+        )
+        {
             return collectionContract.ItemName;
         }
 
         protected override string GetCollectionContractNamespace(
             CollectionDataContract collectionContract
-        ) {
+        )
+        {
             return collectionContract.StableName.Namespace;
         }
 
@@ -177,7 +183,8 @@ namespace System.Runtime.Serialization
             XmlReaderDelegator xmlReader,
             XmlObjectSerializerReadContext context,
             CollectionDataContract collectionContract
-        ) {
+        )
+        {
             Debug.Assert(
                 collectionContract.Kind == CollectionKind.Dictionary
                     || collectionContract.Kind == CollectionKind.GenericDictionary

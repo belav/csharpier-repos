@@ -112,7 +112,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
         public void CallDelegateOnApplicationContext_MultipleEntryPoints(
             int callCount,
             bool callUnmanaged
-        ) {
+        )
+        {
             var appProject = sharedState.ApplicationFixture.TestProject;
             string[] baseArgs =
             {
@@ -278,7 +279,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             string methodName,
             int functionPointerCallCount,
             int returnValue
-        ) {
+        )
+        {
             return assertion.ExecuteFunctionPointer(methodName, functionPointerCallCount)
                 .And.HaveStdOutContaining(
                     $"{methodName} delegate result: 0x{returnValue.ToString("x")}"
@@ -289,7 +291,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             this CommandResultAssertions assertion,
             string methodName,
             int functionPointerCallCount
-        ) {
+        )
+        {
             var constraint = assertion.ExecuteFunctionPointer(methodName, functionPointerCallCount);
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
@@ -311,7 +314,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             this CommandResultAssertions assertion,
             string methodName,
             int functionPointerCallCount
-        ) {
+        )
+        {
             return assertion.HaveStdOutContaining(
                 $"Called {methodName}(0xdeadbeef, 42) - function pointer call count: {functionPointerCallCount}"
             );

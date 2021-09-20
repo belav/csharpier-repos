@@ -12,7 +12,8 @@ namespace System.CodeDom
         public CodeAttachEventStatement(
             CodeEventReferenceExpression eventRef,
             CodeExpression listener
-        ) {
+        )
+        {
             _eventRef = eventRef;
             Listener = listener;
         }

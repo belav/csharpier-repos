@@ -25,7 +25,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
         /// </summary>
         public InMemoryShapedQueryCompilingExpressionVisitorFactory(
             ShapedQueryCompilingExpressionVisitorDependencies dependencies
-        ) {
+        )
+        {
             _dependencies = dependencies;
         }
 
@@ -37,7 +38,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
         /// </summary>
         public virtual ShapedQueryCompilingExpressionVisitor Create(
             QueryCompilationContext queryCompilationContext
-        ) {
+        )
+        {
             Check.NotNull(queryCompilationContext, nameof(queryCompilationContext));
 
             return new InMemoryShapedQueryCompilingExpressionVisitor(

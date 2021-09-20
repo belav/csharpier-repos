@@ -21,7 +21,8 @@ namespace CoreXml.Test.XLinq
                 private string SaveXElementUsingXmlWriter(
                     XElement elem,
                     NamespaceHandling nsHandling
-                ) {
+                )
+                {
                     StringWriter sw = new StringWriter();
                     using (
                         XmlWriter w = XmlWriter.Create(
@@ -32,7 +33,8 @@ namespace CoreXml.Test.XLinq
                                 OmitXmlDeclaration = true
                             }
                         )
-                    ) {
+                    )
+                    {
                         elem.WriteTo(w);
                     }
                     sw.Dispose();
@@ -218,7 +220,8 @@ namespace CoreXml.Test.XLinq
                                 OmitXmlDeclaration = true
                             }
                         )
-                    ) {
+                    )
+                    {
                         // prepare writer
                         w.WriteStartDocument();
                         w.WriteStartElement("p1", "root", "nsp");
@@ -250,7 +253,8 @@ namespace CoreXml.Test.XLinq
                                 OmitXmlDeclaration = true
                             }
                         )
-                    ) {
+                    )
+                    {
                         // prepare writer
                         w.WriteStartDocument();
                         w.WriteStartElement("", "root", "nsp");
@@ -286,7 +290,8 @@ namespace CoreXml.Test.XLinq
                                 OmitXmlDeclaration = true
                             }
                         )
-                    ) {
+                    )
+                    {
                         // prepare writer
                         w.WriteStartDocument();
                         w.WriteStartElement("p1", "root", "nsp");
@@ -322,7 +327,8 @@ namespace CoreXml.Test.XLinq
                                 OmitXmlDeclaration = true
                             }
                         )
-                    ) {
+                    )
+                    {
                         // prepare writer
                         w.WriteStartDocument();
                         w.WriteStartElement("p1", "root", "nsp");

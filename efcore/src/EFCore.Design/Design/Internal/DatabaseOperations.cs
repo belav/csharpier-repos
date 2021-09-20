@@ -40,7 +40,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             string? rootNamespace,
             string? language,
             string[]? args
-        ) {
+        )
+        {
             Check.NotNull(reporter, nameof(reporter));
             Check.NotNull(startupAssembly, nameof(startupAssembly));
             Check.NotNull(projectDir, nameof(projectDir));
@@ -80,7 +81,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             bool useDatabaseNames,
             bool suppressOnConfiguring,
             bool noPluralize
-        ) {
+        )
+        {
             Check.NotEmpty(provider, nameof(provider));
             Check.NotEmpty(connectionString, nameof(connectionString));
             Check.NotNull(schemas, nameof(schemas));

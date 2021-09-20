@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             FixAllState fixAllState,
             ImmutableArray<FixAllScope> supportedScopes,
             Diagnostic firstDiagnostic
-        ) {
+        )
+        {
             Provider = provider;
             TextSpan = span;
             Fixes = fixes.NullToEmpty();

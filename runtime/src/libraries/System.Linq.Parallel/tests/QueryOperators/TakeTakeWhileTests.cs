@@ -91,7 +91,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int take
-        ) {
+        )
+        {
             Take(labeled, count, take);
         }
 
@@ -126,7 +127,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int take
-        ) {
+        )
+        {
             ParallelQuery<int> query = labeled.Item;
             int seen = 0;
             Assert.All(query.Take(take).ToList(), x => Assert.Equal(seen++, x));
@@ -146,7 +148,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int take
-        ) {
+        )
+        {
             Take_NotPipelined(labeled, count, take);
         }
 
@@ -168,7 +171,8 @@ namespace System.Linq.Parallel.Tests
                 object[] results in Sources.Ranges(
                     counts.DefaultIfEmpty(Sources.OuterLoopCount / 4)
                 )
-            ) {
+            )
+            {
                 yield return new[] { results[0], results[1], new[] { 0 } };
                 yield return new[]
                 {
@@ -234,7 +238,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int take
-        ) {
+        )
+        {
             TakeWhile(labeled, count, take);
         }
 
@@ -272,7 +277,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int take
-        ) {
+        )
+        {
             ParallelQuery<int> query = labeled.Item;
             int seen = 0;
             Assert.All(query.TakeWhile(x => x < take).ToList(), x => Assert.Equal(seen++, x));
@@ -292,7 +298,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int take
-        ) {
+        )
+        {
             TakeWhile_NotPipelined(labeled, count, take);
         }
 
@@ -330,7 +337,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int take
-        ) {
+        )
+        {
             ParallelQuery<int> query = labeled.Item;
             int seen = 0;
             foreach (int i in query.TakeWhile((x, index) => index < take))
@@ -353,7 +361,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int take
-        ) {
+        )
+        {
             TakeWhile_Indexed(labeled, count, take);
         }
 
@@ -391,7 +400,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int take
-        ) {
+        )
+        {
             ParallelQuery<int> query = labeled.Item;
             int seen = 0;
             Assert.All(
@@ -414,7 +424,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int take
-        ) {
+        )
+        {
             TakeWhile_Indexed_NotPipelined(labeled, count, take);
         }
 
@@ -446,7 +457,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int take
-        ) {
+        )
+        {
             _ = take;
             ParallelQuery<int> query = labeled.Item;
             int seen = 0;
@@ -467,7 +479,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int take
-        ) {
+        )
+        {
             TakeWhile_AllTrue(labeled, count, take);
         }
 
@@ -477,7 +490,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int[] take
-        ) {
+        )
+        {
             _ = count;
             ParallelQuery<int> query = labeled.Item;
             int seen = 0;
@@ -498,7 +512,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int[] take
-        ) {
+        )
+        {
             TakeWhile_SomeTrue(labeled, count, take);
         }
 
@@ -508,7 +523,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int[] take
-        ) {
+        )
+        {
             _ = count;
             ParallelQuery<int> query = labeled.Item;
             int seen = 0;
@@ -529,7 +545,8 @@ namespace System.Linq.Parallel.Tests
             Labeled<ParallelQuery<int>> labeled,
             int count,
             int[] take
-        ) {
+        )
+        {
             TakeWhile_SomeFalse(labeled, count, take);
         }
 

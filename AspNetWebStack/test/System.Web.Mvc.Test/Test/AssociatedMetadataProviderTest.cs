@@ -449,7 +449,8 @@ namespace System.Web.Mvc.Test
                 Func<object> modelAccessor,
                 Type modelType,
                 string propertyName
-            ) {
+            )
+            {
                 CreateMetadataLog.Add(
                     new CreateMetadataParams
                     {

@@ -58,7 +58,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             BoundStatement src,
             bool debugFriendly,
             out HashSet<LocalSymbol> stackLocals
-        ) {
+        )
+        {
             //TODO: run other optimizing passes here.
             //      stack scheduler must be the last one.
 
@@ -125,7 +126,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         private static void RemoveIntersectingLocals(
             Dictionary<LocalSymbol, LocalDefUseInfo> info,
             ArrayBuilder<LocalDefUseInfo> dummies
-        ) {
+        )
+        {
             // Add dummy definitions.
             // Although we do not schedule dummies we intend to guarantee that no
             // local definition span intersects with definition spans of a dummy
@@ -426,7 +428,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             Dictionary<LocalSymbol, LocalDefUseInfo> locals,
             ArrayBuilder<ValueTuple<BoundExpression, ExprContext>> evalStack,
             bool debugFriendly
-        ) {
+        )
+        {
             _locals = locals;
             _evalStack = evalStack;
             _debugFriendly = debugFriendly;
@@ -440,7 +443,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             BoundNode node,
             Dictionary<LocalSymbol, LocalDefUseInfo> locals,
             bool debugFriendly
-        ) {
+        )
+        {
             var evalStack = ArrayBuilder<ValueTuple<BoundExpression, ExprContext>>.GetInstance();
             var analyzer = new StackOptimizerPass1(locals, evalStack, debugFriendly);
             var rewritten = analyzer.Visit(node);
@@ -526,7 +530,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         private BoundExpression VisitExpressionCoreWithStackGuard(
             BoundExpression node,
             ExprContext context
-        ) {
+        )
+        {
             Debug.Assert(_recursionDepth == 1);
 
             try
@@ -774,7 +779,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                 value != null
                 && value.Kind == BoundKind.Local
                 && ((BoundLocal)value).LocalSymbol == local
-            ) {
+            )
+            {
                 var sideeffects = node.SideEffects;
                 var lastSideeffect = sideeffects.LastOrDefault();
 
@@ -787,7 +793,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                         if (
                             IsIndirectOrInstanceFieldAssignment(assignment)
                             && assignment.Right.Kind == BoundKind.Sequence
-                        ) {
+                        )
+                        {
                             // and no other side-effects should use the variable
                             var localUsedWalker = new LocalUsedWalker(local, _recursionDepth);
                             for (int i = 0; i < sideeffects.Length - 1; i++)
@@ -1008,7 +1015,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                 if (
                     localSymbol.RefKind == RefKind.RefReadOnly
                     && (_context == ExprContext.Address || _context == ExprContext.Value)
-                ) {
+                )
+                {
                     ShouldNotSchedule(localSymbol);
                 }
 
@@ -1020,7 +1028,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                     && assignmentLocal.Type.IsPointerOrFunctionPointer()
                     && right.Kind == BoundKind.Conversion
                     && ((BoundConversion)right).ConversionKind.IsPointerConversion()
-                ) {
+                )
+                {
                     ShouldNotSchedule(localSymbol);
                 }
 
@@ -1225,7 +1234,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             ImmutableArray<BoundExpression> arguments,
             ImmutableArray<ParameterSymbol> parameters,
             ImmutableArray<RefKind> argRefKindsOpt
-        ) {
+        )
+        {
             Debug.Assert(!arguments.IsDefault);
             Debug.Assert(!parameters.IsDefault);
             // If this is a varargs method then there will be one additional argument for the __arglist().
@@ -1253,7 +1263,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             ref ArrayBuilder<BoundExpression> rewrittenArguments,
             int i,
             RefKind argRefKind
-        ) {
+        )
+        {
             ExprContext context =
                 (argRefKind == RefKind.None) ? ExprContext.Value : ExprContext.Address;
 
@@ -1364,7 +1375,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                             || _context == ExprContext.Address
                             || CodeGenerator.FieldLoadMustUseRef(receiver)
                         )
-                    ) {
+                    )
+                    {
                         receiver = VisitExpression(receiver, ExprContext.Address);
                     }
                     else
@@ -1660,7 +1672,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
 
         public override BoundNode VisitComplexConditionalReceiver(
             BoundComplexConditionalReceiver node
-        ) {
+        )
+        {
             EnsureOnlyEvalStack();
 
             var origStack = StackDepth();
@@ -1688,7 +1701,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             if (
                 node.OperatorKind.IsChecked()
                 && node.OperatorKind.Operator() == UnaryOperatorKind.UnaryMinus
-            ) {
+            )
+            {
                 var origStack = StackDepth();
                 PushEvalStack(
                     new BoundDefaultExpression(node.Syntax, node.Operand.Type),
@@ -1808,7 +1822,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
 
         public override BoundNode VisitConvertedStackAllocExpression(
             BoundConvertedStackAllocExpression node
-        ) {
+        )
+        {
             // CLI spec section 3.47 requires that the stack be empty when localloc occurs.
             EnsureOnlyEvalStack();
             return base.VisitConvertedStackAllocExpression(node);
@@ -2110,7 +2125,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         public static BoundStatement Rewrite(
             BoundStatement src,
             Dictionary<LocalSymbol, LocalDefUseInfo> info
-        ) {
+        )
+        {
             var scheduler = new StackOptimizerPass2(info);
             return (BoundStatement)scheduler.Visit(src);
         }
@@ -2313,7 +2329,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                     if (
                         _info.TryGetValue(sourceLocal, out locInfo)
                         && IsLastAccess(locInfo, _nodeCounter)
-                    ) {
+                    )
+                    {
                         exceptionSource = null;
                     }
                 }
@@ -2377,7 +2394,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         internal override LocalSymbol WithSynthesizedLocalKindAndSyntax(
             SynthesizedLocalKind kind,
             SyntaxNode syntax
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -2415,7 +2433,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             SyntaxNode node,
             LocalSymbol inProgress,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -2426,7 +2445,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
 
         internal override ImmutableBindingDiagnostic<AssemblySymbol> GetConstantValueDiagnostics(
             BoundExpression boundInitValue
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 

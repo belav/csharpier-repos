@@ -155,7 +155,8 @@ namespace Microsoft.CodeAnalysis
         public static bool TryParseDisplayName(
             string displayName,
             [NotNullWhen(true)] out AssemblyIdentity? identity
-        ) {
+        )
+        {
             if (displayName == null)
             {
                 throw new ArgumentNullException(nameof(displayName));
@@ -185,7 +186,8 @@ namespace Microsoft.CodeAnalysis
             string displayName,
             [NotNullWhen(true)] out AssemblyIdentity? identity,
             out AssemblyIdentityParts parts
-        ) {
+        )
+        {
             // see ndp\clr\src\Binder\TextualIdentityParser.cpp, ndp\clr\src\Binder\StringLexer.cpp
 
             identity = null;
@@ -275,7 +277,8 @@ namespace Microsoft.CodeAnalysis
                 else if (
                     string.Equals(propertyName, "Culture", StringComparison.OrdinalIgnoreCase)
                     || string.Equals(propertyName, "Language", StringComparison.OrdinalIgnoreCase)
-                ) {
+                )
+                {
                     if ((seen & AssemblyIdentityParts.Culture) != 0)
                     {
                         return false;
@@ -299,7 +302,8 @@ namespace Microsoft.CodeAnalysis
                 }
                 else if (
                     string.Equals(propertyName, "PublicKey", StringComparison.OrdinalIgnoreCase)
-                ) {
+                )
+                {
                     if ((seen & AssemblyIdentityParts.PublicKey) != 0)
                     {
                         return false;
@@ -331,7 +335,8 @@ namespace Microsoft.CodeAnalysis
                         "PublicKeyToken",
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     if ((seen & AssemblyIdentityParts.PublicKeyToken) != 0)
                     {
                         return false;
@@ -355,7 +360,8 @@ namespace Microsoft.CodeAnalysis
                 }
                 else if (
                     string.Equals(propertyName, "Retargetable", StringComparison.OrdinalIgnoreCase)
-                ) {
+                )
+                {
                     if ((seen & AssemblyIdentityParts.Retargetability) != 0)
                     {
                         return false;
@@ -385,7 +391,8 @@ namespace Microsoft.CodeAnalysis
                 }
                 else if (
                     string.Equals(propertyName, "ContentType", StringComparison.OrdinalIgnoreCase)
-                ) {
+                )
+                {
                     if ((seen & AssemblyIdentityParts.ContentType) != 0)
                     {
                         return false;
@@ -404,7 +411,8 @@ namespace Microsoft.CodeAnalysis
                             "WindowsRuntime",
                             StringComparison.OrdinalIgnoreCase
                         )
-                    ) {
+                    )
+                    {
                         contentType = AssemblyContentType.WindowsRuntime;
                     }
                     else
@@ -443,7 +451,8 @@ namespace Microsoft.CodeAnalysis
                 hasPublicKey
                 && hasPublicKeyToken
                 && !identity.PublicKeyToken.SequenceEqual(publicKeyToken)
-            ) {
+            )
+            {
                 identity = null;
                 return false;
             }
@@ -456,7 +465,8 @@ namespace Microsoft.CodeAnalysis
             string displayName,
             ref int position,
             [NotNullWhen(true)] out string? value
-        ) {
+        )
+        {
             Debug.Assert(displayName.IndexOf('\0') == -1);
 
             int i = position;
@@ -612,7 +622,8 @@ namespace Microsoft.CodeAnalysis
             string str,
             out ulong result,
             out AssemblyIdentityParts parts
-        ) {
+        )
+        {
             Debug.Assert(str.Length > 0);
             Debug.Assert(str.IndexOf('\0') < 0);
 
@@ -697,7 +708,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 string.Equals(value, "null", StringComparison.OrdinalIgnoreCase)
                 || string.Equals(value, "neutral", StringComparison.OrdinalIgnoreCase)
-            ) {
+            )
+            {
                 token = ImmutableArray<byte>.Empty;
                 return true;
             }
@@ -824,7 +836,8 @@ namespace Microsoft.CodeAnalysis
             int start,
             int end,
             [NotNullWhen(true)] out string? value
-        ) {
+        )
+        {
             var sb = PooledStringBuilder.GetInstance();
 
             int i = start;

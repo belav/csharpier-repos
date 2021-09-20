@@ -32,7 +32,8 @@ namespace Microsoft.Extensions.DependencyInjection
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
                 Type instanceType,
             params object[] parameters
-        ) {
+        )
+        {
             int bestLength = -1;
             bool seenPreferred = false;
 
@@ -98,7 +99,8 @@ namespace Microsoft.Extensions.DependencyInjection
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
                 Type instanceType,
             Type[] argumentTypes
-        ) {
+        )
+        {
             FindApplicableConstructor(
                 instanceType,
                 argumentTypes,
@@ -168,7 +170,8 @@ namespace Microsoft.Extensions.DependencyInjection
             IServiceProvider provider,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
                 Type type
-        ) {
+        )
+        {
             return provider.GetService(type) ?? CreateInstance(provider, type);
         }
 
@@ -183,7 +186,8 @@ namespace Microsoft.Extensions.DependencyInjection
             Type type,
             Type requiredBy,
             bool isDefaultParameterRequired
-        ) {
+        )
+        {
             object? service = sp.GetService(type);
             if (service == null && !isDefaultParameterRequired)
             {
@@ -199,7 +203,8 @@ namespace Microsoft.Extensions.DependencyInjection
             int?[] parameterMap,
             Expression serviceProvider,
             Expression factoryArgumentArray
-        ) {
+        )
+        {
             ParameterInfo[]? constructorParameters = constructor.GetParameters();
             var constructorArguments = new Expression[constructorParameters.Length];
 
@@ -260,7 +265,8 @@ namespace Microsoft.Extensions.DependencyInjection
             Type[] argumentTypes,
             out ConstructorInfo matchingConstructor,
             out int?[] matchingParameterMap
-        ) {
+        )
+        {
             ConstructorInfo? constructorInfo = null;
             int?[]? parameterMap = null;
 
@@ -277,7 +283,8 @@ namespace Microsoft.Extensions.DependencyInjection
                     ref constructorInfo,
                     ref parameterMap
                 )
-            ) {
+            )
+            {
                 string? message =
                     $"A suitable constructor for type '{instanceType}' could not be located. Ensure the type is concrete and all parameters of a public constructor are either registered as services or passed as arguments. Also ensure no extraneous arguments are provided.";
                 throw new InvalidOperationException(message);
@@ -294,7 +301,8 @@ namespace Microsoft.Extensions.DependencyInjection
             Type[] argumentTypes,
             [NotNullWhen(true)] ref ConstructorInfo? matchingConstructor,
             [NotNullWhen(true)] ref int?[]? parameterMap
-        ) {
+        )
+        {
             foreach (ConstructorInfo? constructor in instanceType.GetConstructors())
             {
                 if (
@@ -303,7 +311,8 @@ namespace Microsoft.Extensions.DependencyInjection
                         argumentTypes,
                         out int?[] tempParameterMap
                     )
-                ) {
+                )
+                {
                     if (matchingConstructor != null)
                     {
                         throw new InvalidOperationException(
@@ -332,7 +341,8 @@ namespace Microsoft.Extensions.DependencyInjection
             Type[] argumentTypes,
             [NotNullWhen(true)] ref ConstructorInfo? matchingConstructor,
             [NotNullWhen(true)] ref int?[]? parameterMap
-        ) {
+        )
+        {
             bool seenPreferred = false;
             foreach (ConstructorInfo? constructor in instanceType.GetConstructors())
             {
@@ -349,7 +359,8 @@ namespace Microsoft.Extensions.DependencyInjection
                             argumentTypes,
                             out int?[] tempParameterMap
                         )
-                    ) {
+                    )
+                    {
                         ThrowMarkedCtorDoesNotTakeAllProvidedArguments();
                     }
 
@@ -374,7 +385,8 @@ namespace Microsoft.Extensions.DependencyInjection
             ParameterInfo[] constructorParameters,
             Type[] argumentTypes,
             out int?[] parameterMap
-        ) {
+        )
+        {
             parameterMap = new int?[constructorParameters.Length];
 
             for (int i = 0; i < argumentTypes.Length; i++)
@@ -433,11 +445,13 @@ namespace Microsoft.Extensions.DependencyInjection
                         int applyIndex = applyIndexStart;
                         givenMatched == false && applyIndex != _parameters.Length;
                         ++applyIndex
-                    ) {
+                    )
+                    {
                         if (
                             _parameterValues[applyIndex] == null
                             && _parameters[applyIndex].ParameterType.IsAssignableFrom(givenType)
-                        ) {
+                        )
+                        {
                             givenMatched = true;
                             _parameterValues[applyIndex] = givenParameters[givenIndex];
                             if (applyIndexStart == applyIndex)
@@ -473,7 +487,8 @@ namespace Microsoft.Extensions.DependencyInjection
                                     _parameters[index],
                                     out object? defaultValue
                                 )
-                            ) {
+                            )
+                            {
                                 throw new InvalidOperationException(
                                     $"Unable to resolve service for type '{_parameters[index].ParameterType}' while attempting to activate '{_constructor.DeclaringType}'."
                                 );

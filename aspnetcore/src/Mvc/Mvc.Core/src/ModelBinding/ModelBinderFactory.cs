@@ -38,7 +38,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             IModelMetadataProvider metadataProvider,
             IOptions<MvcOptions> options,
             IServiceProvider serviceProvider
-        ) {
+        )
+        {
             _metadataProvider = metadataProvider;
             _providers = options.Value.ModelBinderProviders.ToArray();
             _serviceProvider = serviceProvider;
@@ -97,7 +98,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         private IModelBinder CreateBinderCoreCached(
             DefaultModelBinderProviderContext providerContext,
             object? token
-        ) {
+        )
+        {
             if (TryGetCachedBinder(providerContext.Metadata, token, out var binder))
             {
                 return binder;
@@ -118,7 +120,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         private IModelBinder? CreateBinderCoreUncached(
             DefaultModelBinderProviderContext providerContext,
             object? token
-        ) {
+        )
+        {
             if (!providerContext.Metadata.IsBindingAllowed)
             {
                 return NoOpBinder.Instance;
@@ -202,7 +205,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             ModelMetadata metadata,
             object? cacheToken,
             [NotNullWhen(true)] out IModelBinder? binder
-        ) {
+        )
+        {
             Debug.Assert(metadata != null);
 
             if (cacheToken == null)
@@ -221,7 +225,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             public DefaultModelBinderProviderContext(
                 ModelBinderFactory factory,
                 ModelBinderFactoryContext factoryContext
-            ) {
+            )
+            {
                 _factory = factory;
                 Metadata = factoryContext.Metadata;
                 BindingInfo bindingInfo;
@@ -245,7 +250,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                 DefaultModelBinderProviderContext parent,
                 ModelMetadata metadata,
                 BindingInfo bindingInfo
-            ) {
+            )
+            {
                 Metadata = metadata;
 
                 _factory = parent._factory;
@@ -275,7 +281,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             public override IModelBinder CreateBinder(
                 ModelMetadata metadata,
                 BindingInfo bindingInfo
-            ) {
+            )
+            {
                 if (metadata == null)
                 {
                     throw new ArgumentNullException(nameof(metadata));

@@ -235,7 +235,8 @@ namespace System.Xml.Xsl.XsltOld
         private void CheckAttributeSets_RecurceInContainer(
             Hashtable markTable,
             ContainerAction container
-        ) {
+        )
+        {
             if (container.containedActions == null)
             {
                 return;
@@ -274,7 +275,8 @@ namespace System.Xml.Xsl.XsltOld
                     || exist.zeroDigit != formatinfo.zeroDigit
                     || exist.digit != formatinfo.digit
                     || exist.patternSeparator != formatinfo.patternSeparator
-                ) {
+                )
+                {
                     throw XsltException.Create(SR.Xslt_DupDecimalFormat, name.ToString());
                 }
             }

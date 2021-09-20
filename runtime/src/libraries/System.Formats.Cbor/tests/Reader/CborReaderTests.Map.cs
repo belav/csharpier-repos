@@ -28,7 +28,8 @@ namespace System.Formats.Cbor.Tests
         public static void ReadMap_SimpleValues_HappyPath(
             object[] expectedValues,
             string hexEncoding
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
             Helpers.VerifyMap(reader, expectedValues);
@@ -55,7 +56,8 @@ namespace System.Formats.Cbor.Tests
         public static void ReadMap_NestedValues_HappyPath(
             object[] expectedValues,
             string hexEncoding
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
             Helpers.VerifyMap(reader, expectedValues);
@@ -84,7 +86,8 @@ namespace System.Formats.Cbor.Tests
         public static void ReadMap_NestedListValues_HappyPath(
             object expectedValue,
             string hexEncoding
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
             Helpers.VerifyValue(reader, expectedValue);
@@ -105,7 +108,8 @@ namespace System.Formats.Cbor.Tests
         public static void ReadMap_IndefiniteLength_SimpleValues_HappyPath(
             object[] expectedValues,
             string hexEncoding
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
             Helpers.VerifyMap(reader, expectedValues, expectDefiniteLengthCollections: false);
@@ -118,7 +122,8 @@ namespace System.Formats.Cbor.Tests
         public static void ReadMap_IndefiniteLength_SupportedConformanceMode_ShouldSucceed(
             CborConformanceMode mode,
             string hexEncoding
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding, mode);
             int? length = reader.ReadStartMap();
@@ -131,7 +136,8 @@ namespace System.Formats.Cbor.Tests
         public static void ReadMap_IndefiniteLength_UnSupportedConformanceMode_ShouldThrowCborContentException(
             CborConformanceMode mode,
             string hexEncoding
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding, mode);
             Assert.Throws<CborContentException>(() => reader.ReadStartMap());
@@ -150,7 +156,8 @@ namespace System.Formats.Cbor.Tests
         public static void ReadMap_NonCanonicalLengths_SupportedConformanceMode_ShouldSucceed(
             CborConformanceMode mode,
             string hexEncoding
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding, mode);
             int? length = reader.ReadStartMap();
@@ -171,7 +178,8 @@ namespace System.Formats.Cbor.Tests
         public static void ReadMap_NonCanonicalLengths_UnSupportedConformanceMode_ShouldThrowCborContentException(
             CborConformanceMode mode,
             string hexEncoding
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding, mode);
             Assert.Throws<CborContentException>(() => reader.ReadStartMap());
@@ -262,7 +270,8 @@ namespace System.Formats.Cbor.Tests
             CborConformanceMode mode,
             object expectedValue,
             string hexEncoding
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding, mode);
             Helpers.VerifyValue(reader, expectedValue);
@@ -345,7 +354,8 @@ namespace System.Formats.Cbor.Tests
             CborConformanceMode mode,
             object expectedValue,
             string hexEncoding
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding, mode);
             Helpers.VerifyValue(reader, expectedValue);
@@ -356,7 +366,8 @@ namespace System.Formats.Cbor.Tests
         public static void ReadMap_DuplicateKeys_LaxConformance_ShouldSucceed(
             object[] values,
             string hexEncoding
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding, CborConformanceMode.Lax);
             Helpers.VerifyMap(reader, values);
@@ -393,7 +404,8 @@ namespace System.Formats.Cbor.Tests
             CborConformanceMode mode,
             object dupeKey,
             string hexEncoding
-        ) {
+        )
+        {
             var reader = new CborReader(hexEncoding.HexToByteArray(), mode);
             reader.ReadStartMap();
             Helpers.VerifyValue(reader, dupeKey);
@@ -426,7 +438,8 @@ namespace System.Formats.Cbor.Tests
             CborConformanceMode mode,
             object[] keySequence,
             string hexEncoding
-        ) {
+        )
+        {
             var reader = new CborReader(hexEncoding.HexToByteArray(), mode);
             reader.ReadStartMap();
             foreach (object key in keySequence)
@@ -463,7 +476,8 @@ namespace System.Formats.Cbor.Tests
             CborConformanceMode mode,
             object[] keySequence,
             string hexEncoding
-        ) {
+        )
+        {
             var reader = new CborReader(hexEncoding.HexToByteArray(), mode);
             reader.ReadStartMap();
             foreach (object key in keySequence.SkipLast(1))
@@ -492,7 +506,8 @@ namespace System.Formats.Cbor.Tests
         public static void ReadMap_DefiniteLengthExceeded_ShouldThrowInvalidOperationException(
             string hexEncoding,
             int expectedLength
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
 
@@ -516,7 +531,8 @@ namespace System.Formats.Cbor.Tests
         public static void ReadMap_DefiniteLengthExceeded_WithNestedData_ShouldThrowInvalidOperationException(
             string hexEncoding,
             int expectedLength
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
 
@@ -546,7 +562,8 @@ namespace System.Formats.Cbor.Tests
         public static void ReadEndMap_DefiniteLengthNotMet_ShouldThrowInvalidOperationException(
             string hexEncoding,
             int expectedLength
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
 
@@ -570,7 +587,8 @@ namespace System.Formats.Cbor.Tests
         public static void ReadEndMap_DefiniteLengthNotMet_WithNestedData_ShouldThrowInvalidOperationException(
             string hexEncoding,
             int expectedLength
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
 
@@ -600,7 +618,8 @@ namespace System.Formats.Cbor.Tests
         public static void ReadEndMap_ImbalancedCall_ShouldThrowInvalidOperationException(
             string hexEncoding,
             int depth
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
             for (int i = 0; i < depth; i++)
@@ -620,7 +639,8 @@ namespace System.Formats.Cbor.Tests
             string hexEncoding,
             int expectedLength,
             int actualLength
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
 
@@ -645,7 +665,8 @@ namespace System.Formats.Cbor.Tests
         public static void ReadMap_IndefiniteLength_MissingBreakByte_ShouldThrowCborContentException(
             string hexEncoding,
             int length
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
             reader.ReadStartMap();
@@ -665,7 +686,8 @@ namespace System.Formats.Cbor.Tests
         public static void ReadMap_IndefiniteLength_PrematureEndArrayCall_ShouldThrowInvalidOperationException(
             string hexEncoding,
             int length
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
             reader.ReadStartMap();
@@ -689,7 +711,8 @@ namespace System.Formats.Cbor.Tests
         public static void ReadMap_IndefiniteLength_OddKeyValuePairs_ShouldThrowCborContentException(
             string hexEncoding,
             int length
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
             reader.ReadStartMap();
@@ -713,7 +736,8 @@ namespace System.Formats.Cbor.Tests
             string hexEncoding,
             int expectedLength,
             int actualLength
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
 
@@ -757,7 +781,8 @@ namespace System.Formats.Cbor.Tests
         [InlineData("fb3ff199999999999a")] // 1.1
         public static void ReadStartMap_InvalidType_ShouldThrowInvalidOperationException(
             string hexEncoding
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
 
@@ -777,7 +802,8 @@ namespace System.Formats.Cbor.Tests
         [InlineData("bb00000000000000")]
         public static void ReadStartMap_InvalidData_ShouldThrowCborContentException(
             string hexEncoding
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
 
@@ -792,7 +818,8 @@ namespace System.Formats.Cbor.Tests
         [InlineData("bbffffffffffffffff")] // ulong.MaxValue
         public static void ReadStartMap_BufferTooSmall_ShouldThrowCborContentException(
             string hexEncoding
-        ) {
+        )
+        {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
 

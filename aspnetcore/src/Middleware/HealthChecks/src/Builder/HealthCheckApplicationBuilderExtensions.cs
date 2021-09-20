@@ -35,7 +35,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IApplicationBuilder UseHealthChecks(
             this IApplicationBuilder app,
             PathString path
-        ) {
+        )
+        {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));
@@ -64,7 +65,8 @@ namespace Microsoft.AspNetCore.Builder
             this IApplicationBuilder app,
             PathString path,
             HealthCheckOptions options
-        ) {
+        )
+        {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));
@@ -102,7 +104,8 @@ namespace Microsoft.AspNetCore.Builder
             this IApplicationBuilder app,
             PathString path,
             int port
-        ) {
+        )
+        {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));
@@ -135,7 +138,8 @@ namespace Microsoft.AspNetCore.Builder
             this IApplicationBuilder app,
             PathString path,
             string port
-        ) {
+        )
+        {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));
@@ -177,7 +181,8 @@ namespace Microsoft.AspNetCore.Builder
             PathString path,
             int port,
             HealthCheckOptions options
-        ) {
+        )
+        {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));
@@ -214,7 +219,8 @@ namespace Microsoft.AspNetCore.Builder
             PathString path,
             string port,
             HealthCheckOptions options
-        ) {
+        )
+        {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));
@@ -249,7 +255,8 @@ namespace Microsoft.AspNetCore.Builder
             PathString path,
             int? port,
             object[] args
-        ) {
+        )
+        {
             if (app.ApplicationServices.GetService(typeof(HealthCheckService)) == null)
             {
                 throw new InvalidOperationException(

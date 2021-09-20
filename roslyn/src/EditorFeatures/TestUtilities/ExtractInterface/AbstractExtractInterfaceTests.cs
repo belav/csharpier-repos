@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ExtractInterface
             string expectedTypeParameterSuffix = null,
             string expectedUpdatedOriginalDocumentCode = null,
             string expectedInterfaceCode = null
-        ) {
+        )
+        {
             await TestExtractInterfaceCommandAsync(
                 markup,
                 LanguageNames.CSharp,
@@ -41,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ExtractInterface
         public static async Task TestExtractInterfaceCodeActionCSharpAsync(
             string markup,
             string expectedMarkup
-        ) {
+        )
+        {
             await TestExtractInterfaceCodeActionAsync(markup, LanguageNames.CSharp, expectedMarkup);
         }
 
@@ -55,7 +57,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ExtractInterface
             string expectedUpdatedOriginalDocumentCode = null,
             string expectedInterfaceCode = null,
             string rootNamespace = null
-        ) {
+        )
+        {
             await TestExtractInterfaceCommandAsync(
                 markup,
                 LanguageNames.VisualBasic,
@@ -76,7 +79,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ExtractInterface
         public static async Task TestExtractInterfaceCodeActionVisualBasicAsync(
             string markup,
             string expectedMarkup
-        ) {
+        )
+        {
             await TestExtractInterfaceCodeActionAsync(
                 markup,
                 LanguageNames.VisualBasic,
@@ -95,7 +99,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ExtractInterface
             string expectedUpdatedOriginalDocumentCode = null,
             string expectedInterfaceCode = null,
             CompilationOptions compilationOptions = null
-        ) {
+        )
+        {
             using var testState = ExtractInterfaceTestState.Create(
                 markup,
                 languageName,
@@ -178,7 +183,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ExtractInterface
             string languageName,
             string expectedMarkup,
             CompilationOptions compilationOptions = null
-        ) {
+        )
+        {
             using var testState = ExtractInterfaceTestState.Create(
                 markup,
                 languageName,

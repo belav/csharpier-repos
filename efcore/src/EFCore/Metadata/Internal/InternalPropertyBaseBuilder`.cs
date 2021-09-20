@@ -35,7 +35,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual InternalPropertyBaseBuilder<TPropertyBase>? HasField(
             string? fieldName,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             if (CanSetField(fieldName, configurationSource))
             {
                 Metadata.SetField(fieldName, configurationSource);
@@ -90,7 +91,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual InternalPropertyBaseBuilder<TPropertyBase>? HasField(
             FieldInfo? fieldInfo,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             if (CanSetField(fieldInfo, configurationSource))
             {
                 Metadata.SetFieldInfo(fieldInfo, configurationSource);
@@ -134,7 +136,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual InternalPropertyBaseBuilder<TPropertyBase>? UsePropertyAccessMode(
             PropertyAccessMode? propertyAccessMode,
             ConfigurationSource configurationSource
-        ) {
+        )
+        {
             if (CanSetPropertyAccessMode(propertyAccessMode, configurationSource))
             {
                 Metadata.SetPropertyAccessMode(propertyAccessMode, configurationSource);

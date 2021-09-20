@@ -53,7 +53,8 @@ namespace Internal.Cryptography.Pal
                         || _forceRefresh
                         || elapsed >= s_assumeInvalidInterval
                         || (info.Exists && info.LastWriteTimeUtc != _loadLastWrite)
-                    ) {
+                    )
+                    {
                         SafeX509StackHandle newColl = Interop.Crypto.NewX509Stack();
                         Interop.Crypto.CheckValidOpenSslHandle(newColl);
 

@@ -97,7 +97,8 @@ namespace Microsoft.EntityFrameworkCore.Update
 
         protected virtual void AppendInsertOperation_appends_insert_and_select_and_where_if_store_generated_columns_exist_verification(
             StringBuilder stringBuilder
-        ) {
+        )
+        {
             Assert.Equal(
                 "INSERT INTO "
                     + SchemaPrefix
@@ -201,7 +202,8 @@ namespace Microsoft.EntityFrameworkCore.Update
 
         protected virtual void AppendInsertOperation_appends_insert_and_select_store_generated_columns_but_no_identity_verification(
             StringBuilder stringBuilder
-        ) {
+        )
+        {
             Assert.Equal(
                 "INSERT INTO "
                     + SchemaPrefix
@@ -269,7 +271,8 @@ namespace Microsoft.EntityFrameworkCore.Update
 
         protected virtual void AppendInsertOperation_appends_insert_and_select_for_only_identity_verification(
             StringBuilder stringBuilder
-        ) {
+        )
+        {
             Assert.Equal(
                 "INSERT INTO "
                     + SchemaPrefix
@@ -331,7 +334,8 @@ namespace Microsoft.EntityFrameworkCore.Update
 
         protected virtual void AppendInsertOperation_appends_insert_and_select_for_all_store_generated_columns_verification(
             StringBuilder stringBuilder
-        ) {
+        )
+        {
             Assert.Equal(
                 "INSERT INTO "
                     + SchemaPrefix
@@ -385,7 +389,8 @@ namespace Microsoft.EntityFrameworkCore.Update
 
         protected virtual void AppendInsertOperation_appends_insert_and_select_for_only_single_identity_columns_verification(
             StringBuilder stringBuilder
-        ) {
+        )
+        {
             Assert.Equal(
                 "INSERT INTO "
                     + SchemaPrefix
@@ -435,7 +440,8 @@ namespace Microsoft.EntityFrameworkCore.Update
 
         protected virtual void AppendUpdateOperation_appends_update_and_select_if_store_generated_columns_exist_verification(
             StringBuilder stringBuilder
-        ) {
+        )
+        {
             Assert.Equal(
                 "UPDATE "
                     + SchemaPrefix
@@ -595,7 +601,8 @@ namespace Microsoft.EntityFrameworkCore.Update
 
         protected virtual void AppendUpdateOperation_appends_select_for_computed_property_verification(
             StringBuilder stringBuilder
-        ) {
+        )
+        {
             Assert.Equal(
                 "UPDATE "
                     + SchemaPrefix
@@ -706,7 +713,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             bool identityKey = true,
             bool isComputed = true,
             bool defaultsOnly = false
-        ) {
+        )
+        {
             var model = GetDuckType().Model.FinalizeModel();
             var stateManager = TestHelpers.CreateContextServices(model)
                 .GetRequiredService<IStateManager>();
@@ -794,7 +802,8 @@ namespace Microsoft.EntityFrameworkCore.Update
         protected ModificationCommand CreateUpdateCommand(
             bool isComputed = true,
             bool concurrencyToken = true
-        ) {
+        )
+        {
             var model = GetDuckType().Model.FinalizeModel();
             var stateManager = TestHelpers.CreateContextServices(model)
                 .GetRequiredService<IStateManager>();

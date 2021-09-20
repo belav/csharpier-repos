@@ -230,7 +230,8 @@ namespace System.Resources.Extensions.Tests
                     typeof(TypeForwardedFromAttribute),
                     false
                 )
-            ) {
+            )
+            {
                 return ((TypeForwardedFromAttribute)first).AssemblyFullName;
             }
 
@@ -345,7 +346,8 @@ namespace System.Resources.Extensions.Tests
                 Type serializedType,
                 out string assemblyName,
                 out string typeName
-            ) {
+            )
+            {
                 typeName = null;
                 // Apply type-forwarded from here, so that we mimic what would happen in ResXWriter which runs in VS on desktop
                 string assemblyQualifiedTypeName = GetSerializationTypeName(serializedType);
@@ -371,7 +373,8 @@ namespace System.Resources.Extensions.Tests
                             serializedType.FullName,
                             StringComparison.InvariantCulture
                         )
-                    ) {
+                    )
+                    {
                         typeName = newTypeName;
                     }
                     return;

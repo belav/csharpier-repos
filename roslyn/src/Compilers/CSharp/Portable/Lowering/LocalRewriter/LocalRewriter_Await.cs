@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundAwaitableInfo awaitableInfo,
             TypeSymbol type,
             bool used
-        ) {
+        )
+        {
             return RewriteAwaitExpression(
                 new BoundAwaitExpression(syntax, rewrittenExpression, awaitableInfo, type)
                 {

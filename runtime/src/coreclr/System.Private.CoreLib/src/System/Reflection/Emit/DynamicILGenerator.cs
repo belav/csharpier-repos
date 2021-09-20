@@ -84,7 +84,8 @@ namespace System.Reflection.Emit
                     opcode.Equals(OpCodes.Ldtoken)
                     || opcode.Equals(OpCodes.Ldftn)
                     || opcode.Equals(OpCodes.Ldvirtftn)
-                ) {
+                )
+                {
                     throw new ArgumentException(SR.Argument_InvalidOpCodeOnDynamicMethod);
                 }
                 token = GetTokenFor(dynMeth);
@@ -96,7 +97,8 @@ namespace System.Reflection.Emit
             if (
                 opcode.StackBehaviourPush == StackBehaviour.Varpush
                 && meth.ReturnType != typeof(void)
-            ) {
+            )
+            {
                 stackchange++;
             }
             if (opcode.StackBehaviourPop == StackBehaviour.Varpop)
@@ -112,7 +114,8 @@ namespace System.Reflection.Emit
                     || opcode.Equals(OpCodes.Ldtoken)
                     || opcode.Equals(OpCodes.Ldftn)
                 )
-            ) {
+            )
+            {
                 stackchange--;
             }
 
@@ -206,7 +209,8 @@ namespace System.Reflection.Emit
             Type? returnType,
             Type[]? parameterTypes,
             Type[]? optionalParameterTypes
-        ) {
+        )
+        {
             int stackchange = 0;
             SignatureHelper sig;
             if (optionalParameterTypes != null)
@@ -250,7 +254,8 @@ namespace System.Reflection.Emit
             CallingConvention unmanagedCallConv,
             Type? returnType,
             Type[]? parameterTypes
-        ) {
+        )
+        {
             int stackchange = 0;
             int cParams = 0;
             int i;
@@ -288,7 +293,8 @@ namespace System.Reflection.Emit
             OpCode opcode,
             MethodInfo methodInfo,
             Type[]? optionalParameterTypes
-        ) {
+        )
+        {
             if (methodInfo == null)
                 throw new ArgumentNullException(nameof(methodInfo));
 
@@ -450,7 +456,8 @@ namespace System.Reflection.Emit
             int startColumn,
             int endLine,
             int endColumn
-        ) {
+        )
+        {
             throw new NotSupportedException(SR.InvalidOperation_NotAllowedInDynamicMethod);
         }
 
@@ -530,7 +537,8 @@ namespace System.Reflection.Emit
             Type[][]? requiredCustomModifiers,
             Type[][]? optionalCustomModifiers,
             Type[]? optionalParameterTypes
-        ) {
+        )
+        {
             SignatureHelper sig = SignatureHelper.GetMethodSigHelper(
                 null,
                 call,
@@ -845,7 +853,8 @@ namespace System.Reflection.Emit
             out IntPtr typeHandle,
             out IntPtr methodHandle,
             out IntPtr fieldHandle
-        ) {
+        )
+        {
             typeHandle = default;
             methodHandle = default;
             fieldHandle = default;

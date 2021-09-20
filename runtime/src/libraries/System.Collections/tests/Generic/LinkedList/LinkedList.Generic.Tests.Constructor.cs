@@ -235,7 +235,8 @@ namespace System.Collections.Tests
             LinkedList<T> expectedList,
             LinkedListNode<T> expectedPrevious,
             LinkedListNode<T> expectedNext
-        ) {
+        )
+        {
             Assert.Equal(expectedValue, node.Value); //"Err_548ajoid Node Value"
             Assert.Equal(expectedList, node.List); //"Err_0821279 Node List"
 
@@ -252,7 +253,8 @@ namespace System.Collections.Tests
             LinkedList<T> expectedList,
             bool expectedPreviousNull,
             bool expectedNextNull
-        ) {
+        )
+        {
             Assert.Equal(expectedValue, node.Value); //"Err_548ajoid Expected Node Value"
             Assert.Equal(expectedList, node.List); //"Err_0821279 Expected Node List"
 

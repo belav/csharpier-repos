@@ -132,7 +132,8 @@ namespace System.Numerics.Tests
             BigInteger bigInt,
             long expectedResult,
             uint epsilon = 0
-        ) {
+        )
+        {
             long actualBitLength = GetBitLength(bigInt);
 
             // Log is imprecise on large inputs

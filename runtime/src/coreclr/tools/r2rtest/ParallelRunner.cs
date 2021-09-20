@@ -71,7 +71,8 @@ public sealed class ParallelRunner
             int processCount,
             int progressIndex,
             int failureCount
-        ) {
+        )
+        {
             Debug.Assert(_processRunner == null);
             Console.WriteLine(
                 $"{processIndex} / {processCount} ({(progressIndex * 100 / processCount)}%, {failureCount} failed): "
@@ -113,7 +114,8 @@ public sealed class ParallelRunner
         IEnumerable<ProcessInfo> processesToRun,
         int degreeOfParallelism = 0,
         bool measurePerf = false
-    ) {
+    )
+    {
         if (degreeOfParallelism == 0)
         {
             degreeOfParallelism = Environment.ProcessorCount;
@@ -158,7 +160,8 @@ public sealed class ParallelRunner
                 int batchStartIndex = 0;
                 batchStartIndex < processCount;
                 batchStartIndex += etwCollectionBatching
-            ) {
+            )
+            {
                 int batchEndIndex = Math.Min(batchStartIndex + etwCollectionBatching, processCount);
                 BuildEtwProcesses(
                     startIndex: batchStartIndex,
@@ -174,7 +177,8 @@ public sealed class ParallelRunner
                     int processIndex = batchStartIndex;
                     processIndex < batchEndIndex;
                     processIndex++
-                ) {
+                )
+                {
                     if (!processList[processIndex].Succeeded)
                     {
                         failureCount++;
@@ -204,7 +208,8 @@ public sealed class ParallelRunner
         List<ProcessInfo> processList,
         int degreeOfParallelism,
         bool measurePerf
-    ) {
+    )
+    {
         using (TraceEventSession traceEventSession = new TraceEventSession("ReadyToRunTestSession"))
         {
             traceEventSession.EnableProvider(
@@ -229,7 +234,8 @@ public sealed class ParallelRunner
                     startIndex,
                     endIndex
                 )
-            ) {
+            )
+            {
                 Task.Run(
                     () =>
                     {
@@ -288,7 +294,8 @@ public sealed class ParallelRunner
                         processInfo.Parameters.LogPath,
                         append: true
                     )
-                ) {
+                )
+                {
                     if (processInfo.JittedMethods != null)
                     {
                         processLogWriter.WriteLine(
@@ -299,7 +306,8 @@ public sealed class ParallelRunner
                                 string,
                                 HashSet<string>
                             > jittedMethodsPerModule in processInfo.JittedMethods
-                        ) {
+                        )
+                        {
                             foreach (string method in jittedMethodsPerModule.Value)
                             {
                                 processLogWriter.WriteLine(
@@ -325,7 +333,8 @@ public sealed class ParallelRunner
         List<ProcessInfo> processList,
         ReadyToRunJittedMethods jittedMethods,
         int degreeOfParallelism
-    ) {
+    )
+    {
         using (AutoResetEvent processExitEvent = new AutoResetEvent(initialState: false))
         {
             ProcessSlot[] processSlots = new ProcessSlot[degreeOfParallelism];

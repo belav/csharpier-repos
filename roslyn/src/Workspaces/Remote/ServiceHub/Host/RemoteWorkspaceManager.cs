@@ -104,7 +104,8 @@ namespace Microsoft.CodeAnalysis.Remote
             ServiceBrokerClient client,
             PinnedSolutionInfo solutionInfo,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var assetSource = new SolutionAssetSource(client);
             var workspace = GetWorkspace();
             var assetProvider = workspace.CreateAssetProvider(

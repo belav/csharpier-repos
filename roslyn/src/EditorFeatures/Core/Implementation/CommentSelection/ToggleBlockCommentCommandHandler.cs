@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
             TextSpan linesContainingSelections,
             CommentSelectionInfo commentInfo,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var allText = snapshot.AsText();
             var commentedSpans = ArrayBuilder<TextSpan>.GetInstance();
 
@@ -55,7 +56,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
                         caseSensitive: true
                     )
                 ) >= 0
-            ) {
+            )
+            {
                 // Retrieve the first closing marker located after the open index.
                 var closeIdx = allText.IndexOf(
                     commentInfo.BlockCommentEndString,

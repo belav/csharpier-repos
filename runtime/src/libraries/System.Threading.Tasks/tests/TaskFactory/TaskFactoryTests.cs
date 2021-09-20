@@ -586,7 +586,8 @@ namespace System.Threading.Tasks.Tests
             TaskCreationOptions tcoDefault,
             CancellationToken tokenDefault,
             TaskContinuationOptions continuationDefault
-        ) {
+        )
+        {
             TaskScheduler myTM = TaskScheduler.Default;
             TaskCreationOptions myTCO = TaskCreationOptions.LongRunning;
             TaskScheduler tmObserved = null;
@@ -764,7 +765,8 @@ namespace System.Threading.Tasks.Tests
             TaskCreationOptions tcoDefault,
             CancellationToken tokenDefault,
             TaskContinuationOptions continuationDefault
-        ) {
+        )
+        {
             TaskScheduler myTM = TaskScheduler.Default;
             TaskCreationOptions myTCO = TaskCreationOptions.LongRunning;
             TaskScheduler tmObserved = null;
@@ -907,7 +909,8 @@ namespace System.Threading.Tasks.Tests
                 int length,
                 AsyncCallback cb,
                 object o
-            ) {
+            )
+            {
                 myAsyncResult mar = new myAsyncResult(cb, o);
 
                 // Allow for exception throwing to test our handling of that.
@@ -972,7 +975,8 @@ namespace System.Threading.Tasks.Tests
                 int offset,
                 AsyncCallback cb,
                 object o
-            ) {
+            )
+            {
                 myAsyncResult mar = new myAsyncResult(cb, o);
 
                 // Allow for exception throwing to test our handling of that.

@@ -307,7 +307,8 @@ class C
         private static int[] ApplySemanticTokensEdits(
             int[]? originalTokens,
             LSP.SemanticTokensEdits edits
-        ) {
+        )
+        {
             var data = originalTokens.ToList();
             if (edits.Edits != null)
             {

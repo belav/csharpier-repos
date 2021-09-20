@@ -20,16 +20,19 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Utilities
             in SyntaxToken previousToken,
             in SyntaxToken currentToken,
             in NextGetAdjustNewLinesOperation nextOperation
-        ) {
+        )
+        {
             // case: insert blank line in empty method body.
             if (
                 previousToken.Kind() == SyntaxKind.OpenBraceToken
                 && currentToken.Kind() == SyntaxKind.CloseBraceToken
-            ) {
+            )
+            {
                 if (
                     currentToken.Parent.Kind() == SyntaxKind.Block
                     && currentToken.Parent.Parent.Kind() == SyntaxKind.MethodDeclaration
-                ) {
+                )
+                {
                     return FormattingOperations.CreateAdjustNewLinesOperation(
                         2,
                         AdjustNewLinesOption.ForceLines

@@ -73,7 +73,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Https.Internal
             ConnectionDelegate next,
             HttpsConnectionAdapterOptions options,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -152,7 +153,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Https.Internal
             object httpsOptionsCallbackState,
             TimeSpan handshakeTimeout,
             ILoggerFactory loggerFactory
-        ) {
+        )
+        {
             _next = next;
             _handshakeTimeout = handshakeTimeout;
             _logger = loggerFactory.CreateLogger<HttpsConnectionMiddleware>();
@@ -360,7 +362,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Https.Internal
             SslStream sslStream,
             Core.Internal.TlsConnectionFeature feature,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             Debug.Assert(_options != null, "Middleware must be created with options.");
 
             // Adapt to the SslStream signature
@@ -405,7 +408,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Https.Internal
         internal static void ConfigureAlpn(
             SslServerAuthenticationOptions serverOptions,
             HttpProtocols httpProtocols
-        ) {
+        )
+        {
             serverOptions.ApplicationProtocols = new List<SslApplicationProtocol>();
 
             // This is order sensitive
@@ -428,7 +432,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Https.Internal
             X509Certificate? certificate,
             X509Chain? chain,
             SslPolicyErrors sslPolicyErrors
-        ) {
+        )
+        {
             if (certificate == null)
             {
                 return clientCertificateMode != ClientCertificateMode.RequireCertificate;
@@ -464,7 +469,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Https.Internal
             X509Certificate? certificate,
             X509Chain? chain,
             SslPolicyErrors sslPolicyErrors
-        ) {
+        )
+        {
             Debug.Assert(_options != null, "Middleware must be created with options.");
 
             return RemoteCertificateValidationCallback(
@@ -479,7 +485,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Https.Internal
         private SslDuplexPipe CreateSslDuplexPipe(
             IDuplexPipe transport,
             MemoryPool<byte> memoryPool
-        ) {
+        )
+        {
             StreamPipeReaderOptions inputPipeOptions = new StreamPipeReaderOptions(
                 pool: memoryPool,
                 bufferSize: memoryPool.GetMinimumSegmentSize(),
@@ -503,7 +510,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Https.Internal
             SslClientHelloInfo clientHelloInfo,
             object? state,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var (middleware, context, feature) =
                 (ValueTuple<
                     HttpsConnectionMiddleware,
@@ -555,7 +563,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Https.Internal
         internal static HttpProtocols ValidateAndNormalizeHttpProtocols(
             HttpProtocols httpProtocols,
             ILogger<HttpsConnectionMiddleware> logger
-        ) {
+        )
+        {
             // This configuration will always fail per-request, preemptively fail it here. See HttpConnection.SelectProtocol().
             if (httpProtocols == HttpProtocols.Http2)
             {
@@ -571,7 +580,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Https.Internal
             else if (
                 httpProtocols == HttpProtocols.Http1AndHttp2
                 && _isWindowsVersionIncompatibleWithHttp2
-            ) {
+            )
+            {
                 logger.Http2DefaultCiphersInsufficient();
                 return HttpProtocols.Http1;
             }
@@ -592,7 +602,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Https.Internal
                         Environment.OSVersion.Version < new Version(10, 0)
                         && !enableHttp2OnWindows81
                     )
-                ) {
+                )
+                {
                     return true;
                 }
             }
@@ -694,7 +705,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Https.Internal
             this ILogger<HttpsConnectionMiddleware> logger,
             X509Certificate2 certificate,
             StoreLocation storeLocation
-        ) {
+        )
+        {
             var storeLocationString =
                 storeLocation == StoreLocation.LocalMachine
                     ? nameof(StoreLocation.LocalMachine)
@@ -712,7 +724,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Https.Internal
             this ILogger<HttpsConnectionMiddleware> logger,
             StoreLocation storeLocation,
             Exception exception
-        ) {
+        )
+        {
             var storeLocationString =
                 storeLocation == StoreLocation.LocalMachine
                     ? nameof(StoreLocation.LocalMachine)

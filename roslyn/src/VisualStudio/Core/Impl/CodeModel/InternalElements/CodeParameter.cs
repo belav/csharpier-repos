@@ -28,7 +28,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             CodeModelState state,
             AbstractCodeMember parent,
             string name
-        ) {
+        )
+        {
             var element = new CodeParameter(state, parent, name);
             return (EnvDTE.CodeParameter)ComAggregate.CreateAggregatedObject(element);
         }
@@ -51,7 +52,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
         private void UpdateNodeAndReacquireParentNodeKey<T>(
             Action<SyntaxNode, T> parameterUpdater,
             T value
-        ) {
+        )
+        {
             void updater(SyntaxNode n, T v)
             {
                 var parentNode = _parentHandle.Value.LookupNode();

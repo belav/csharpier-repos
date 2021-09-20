@@ -486,7 +486,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         public async Task HEADERS_Received_CONNECTMethod_WithSchemeOrPath_Reset(
             string headerName,
             string value
-        ) {
+        )
+        {
             await InitializeConnectionAsync(_noopApplication);
 
             // :path and :scheme are not allowed, :authority is optional

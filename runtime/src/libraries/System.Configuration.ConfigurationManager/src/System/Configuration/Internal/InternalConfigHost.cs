@@ -22,7 +22,8 @@ namespace System.Configuration.Internal
             out string locationConfigPath,
             IInternalConfigRoot configRoot,
             params object[] hostInitConfigurationParams
-        ) {
+        )
+        {
             configPath = null;
             locationConfigPath = null;
         }
@@ -53,7 +54,8 @@ namespace System.Configuration.Internal
         string IInternalConfigHost.GetStreamNameForConfigSource(
             string streamName,
             string configSource
-        ) {
+        )
+        {
             return StaticGetStreamNameForConfigSource(streamName, configSource);
         }
 
@@ -76,7 +78,8 @@ namespace System.Configuration.Internal
             string streamName,
             string templateStreamName,
             ref object writeContext
-        ) {
+        )
+        {
             return StaticOpenStreamForWrite(streamName, templateStreamName, ref writeContext);
         }
 
@@ -85,7 +88,8 @@ namespace System.Configuration.Internal
             string templateStreamName,
             ref object writeContext,
             bool assertPermissions
-        ) {
+        )
+        {
             return StaticOpenStreamForWrite(streamName, templateStreamName, ref writeContext);
         }
 
@@ -93,7 +97,8 @@ namespace System.Configuration.Internal
             string streamName,
             bool success,
             object writeContext
-        ) {
+        )
+        {
             StaticWriteCompleted(streamName, success, writeContext);
         }
 
@@ -102,7 +107,8 @@ namespace System.Configuration.Internal
             bool success,
             object writeContext,
             bool assertPermissions
-        ) {
+        )
+        {
             StaticWriteCompleted(streamName, success, writeContext);
         }
 
@@ -121,7 +127,8 @@ namespace System.Configuration.Internal
         object IInternalConfigHost.StartMonitoringStreamForChanges(
             string streamName,
             StreamChangeCallback callback
-        ) {
+        )
+        {
             throw ExceptionUtil.UnexpectedError(
                 "IInternalConfigHost.StartMonitoringStreamForChanges"
             );
@@ -130,7 +137,8 @@ namespace System.Configuration.Internal
         void IInternalConfigHost.StopMonitoringStreamForChanges(
             string streamName,
             StreamChangeCallback callback
-        ) {
+        )
+        {
             throw ExceptionUtil.UnexpectedError(
                 "IInternalConfigHost.StopMonitoringStreamForChanges"
             );
@@ -144,7 +152,8 @@ namespace System.Configuration.Internal
             string configPath,
             ConfigurationAllowDefinition allowDefinition,
             ConfigurationAllowExeDefinition allowExeDefinition
-        ) {
+        )
+        {
             return true;
         }
 
@@ -165,7 +174,8 @@ namespace System.Configuration.Internal
         string IInternalConfigHost.GetConfigPathFromLocationSubPath(
             string configPath,
             string locationSubPath
-        ) {
+        )
+        {
             throw ExceptionUtil.UnexpectedError(
                 "IInternalConfigHost.GetConfigPathFromLocationSubPath"
             );
@@ -196,7 +206,8 @@ namespace System.Configuration.Internal
         object IInternalConfigHost.CreateConfigurationContext(
             string configPath,
             string locationSubPath
-        ) {
+        )
+        {
             throw ExceptionUtil.UnexpectedError("IInternalConfigHost.CreateConfigurationContext");
         }
 
@@ -204,7 +215,8 @@ namespace System.Configuration.Internal
             string encryptedXml,
             ProtectedConfigurationProvider protectionProvider,
             ProtectedConfigurationSection protectedConfigSection
-        ) {
+        )
+        {
             return ProtectedConfigurationSection.DecryptSection(encryptedXml, protectionProvider);
         }
 
@@ -212,7 +224,8 @@ namespace System.Configuration.Internal
             string clearTextXml,
             ProtectedConfigurationProvider protectionProvider,
             ProtectedConfigurationSection protectedConfigSection
-        ) {
+        )
+        {
             return ProtectedConfigurationSection.EncryptSection(clearTextXml, protectionProvider);
         }
 
@@ -231,7 +244,8 @@ namespace System.Configuration.Internal
         internal static string StaticGetStreamNameForConfigSource(
             string streamName,
             string configSource
-        ) {
+        )
+        {
             // RemoteWebConfigurationHost also redirects GetStreamNameForConfigSource to this
             // method, and that means streamName is referring to a path that's on the remote
             // machine.
@@ -284,7 +298,8 @@ namespace System.Configuration.Internal
             string streamName,
             string templateStreamName,
             ref object writeContext
-        ) {
+        )
+        {
             if (string.IsNullOrEmpty(streamName))
                 throw new ConfigurationErrorsException(SR.Config_no_stream_to_write);
 
@@ -348,7 +363,8 @@ namespace System.Configuration.Internal
             string streamName,
             bool success,
             object writeContext
-        ) {
+        )
+        {
             ((WriteFileContext)writeContext).Complete(streamName, success);
         }
 
@@ -373,7 +389,8 @@ namespace System.Configuration.Internal
             IInternalConfigRecord configRecord,
             out PermissionSet permissionSet,
             out bool isHostReady
-        ) {
+        )
+        {
             permissionSet = new PermissionSet(null);
             isHostReady = true;
         }

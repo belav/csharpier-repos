@@ -68,13 +68,15 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
             Document document,
             SyntaxNode node,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             using (
                 Logger.LogBlock(
                     FunctionId.Refactoring_GenerateMember_GenerateVariable,
                     cancellationToken
                 )
-            ) {
+            )
+            {
                 var semanticDocument = await SemanticDocument.CreateAsync(
                         document,
                         cancellationToken
@@ -148,7 +150,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
             ArrayBuilder<CodeAction> result,
             SemanticDocument document,
             State state
-        ) {
+        )
+        {
             if (state.IsInOutContext)
             {
                 return;
@@ -188,7 +191,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
             ArrayBuilder<CodeAction> result,
             SemanticDocument document,
             State state
-        ) {
+        )
+        {
             result.Add(
                 new GenerateVariableCodeAction(
                     document,
@@ -205,7 +209,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
             ArrayBuilder<CodeAction> result,
             SemanticDocument document,
             State state
-        ) {
+        )
+        {
             if (state.TypeToGenerateIn.TypeKind != TypeKind.Interface)
             {
                 if (state.IsConstant)
@@ -256,7 +261,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
             ArrayBuilder<CodeAction> result,
             SemanticDocument document,
             State state
-        ) {
+        )
+        {
             result.Add(
                 new GenerateVariableCodeAction(
                     document,
@@ -273,7 +279,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
             ArrayBuilder<CodeAction> result,
             Document document,
             State state
-        ) {
+        )
+        {
             if (state.CanGenerateLocal())
             {
                 result.Add(new GenerateLocalCodeAction((TService)this, document, state));
@@ -284,7 +291,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
             ArrayBuilder<CodeAction> result,
             Document document,
             State state
-        ) {
+        )
+        {
             if (state.CanGenerateParameter())
             {
                 result.Add(

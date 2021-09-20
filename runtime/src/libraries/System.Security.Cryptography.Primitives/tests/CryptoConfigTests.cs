@@ -72,7 +72,8 @@ namespace System.Security.Cryptography.CryptoConfigTests
                             Type.EmptyTypes
                         )
                         .Invoke(null, null)
-                ) {
+                )
+                {
                     byte[] input = { 1, 2, 3, 4, 5 };
                     byte[] equivHash = equivalent.ComputeHash(input);
                     byte[] createdHash = created.ComputeHash(input);

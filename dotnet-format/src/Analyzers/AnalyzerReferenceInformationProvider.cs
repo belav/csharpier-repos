@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
             Solution solution,
             FormatOptions formatOptions,
             ILogger logger
-        ) {
+        )
+        {
             return solution.Projects.ToImmutableDictionary(
                 project => project.Id,
                 GetAnalyzersAndFixers
@@ -107,7 +108,8 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
                         Path.Combine(AssemblyFolderPath, "cs"),
                         Path.Combine(AssemblyFolderPath, "vb")
                     }
-                ) {
+                )
+                {
                     try
                     {
                         // Search for assembly based on assembly name and culture within the analyzer folder.

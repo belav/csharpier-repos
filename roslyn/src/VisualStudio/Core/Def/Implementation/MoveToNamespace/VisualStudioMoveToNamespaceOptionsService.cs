@@ -35,7 +35,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.MoveToNamespace
         )]
         internal VisualStudioMoveToNamespaceOptionsService(
             Func<MoveToNamespaceDialogViewModel, bool?> showDialog
-        ) {
+        )
+        {
             _showDialog = showDialog;
         }
 
@@ -43,7 +44,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.MoveToNamespace
             string defaultNamespace,
             ImmutableArray<string> availableNamespaces,
             ISyntaxFacts syntaxFactsService
-        ) {
+        )
+        {
             var viewModel = new MoveToNamespaceDialogViewModel(
                 defaultNamespace,
                 availableNamespaces,

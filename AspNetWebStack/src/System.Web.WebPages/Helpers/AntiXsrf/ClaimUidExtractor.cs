@@ -22,7 +22,8 @@ namespace System.Web.Helpers.AntiXsrf
         internal ClaimUidExtractor(
             IAntiForgeryConfig config,
             ClaimsIdentityConverter claimsIdentityConverter
-        ) {
+        )
+        {
             _config = config;
             _claimsIdentityConverter = claimsIdentityConverter;
         }
@@ -33,7 +34,8 @@ namespace System.Web.Helpers.AntiXsrf
                 identity == null
                 || !identity.IsAuthenticated
                 || _config.SuppressIdentityHeuristicChecks
-            ) {
+            )
+            {
                 // Skip anonymous users
                 // Skip when claims-based checks are disabled
                 return null;
@@ -57,7 +59,8 @@ namespace System.Web.Helpers.AntiXsrf
         internal static string[] GetUniqueIdentifierParameters(
             ClaimsIdentity claimsIdentity,
             string uniqueClaimTypeIdentifier
-        ) {
+        )
+        {
             var claims = claimsIdentity.GetClaims();
 
             // The application developer might not want to use our default behavior
@@ -116,7 +119,8 @@ namespace System.Web.Helpers.AntiXsrf
                 || String.IsNullOrEmpty(nameIdentifierClaim.Value)
                 || identityProviderClaim == null
                 || String.IsNullOrEmpty(identityProviderClaim.Value)
-            ) {
+            )
+            {
                 throw new InvalidOperationException(
                     WebPageResources.ClaimUidExtractor_DefaultClaimsNotPresent
                 );

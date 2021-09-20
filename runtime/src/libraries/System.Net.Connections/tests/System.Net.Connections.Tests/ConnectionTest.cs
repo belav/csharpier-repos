@@ -145,7 +145,8 @@ namespace System.Net.Connections.Tests
         public async Task FromStream_CloseMethod_Flushed(
             ConnectionCloseMethod method,
             bool shouldFlush
-        ) {
+        )
+        {
             bool streamFlushed = false;
 
             var stream = new MockStream
@@ -170,7 +171,8 @@ namespace System.Net.Connections.Tests
         public async Task FromPipe_CloseMethod_Flushed(
             ConnectionCloseMethod method,
             bool shouldFlush
-        ) {
+        )
+        {
             bool pipeFlushed = false;
 
             var pipe = new MockPipe

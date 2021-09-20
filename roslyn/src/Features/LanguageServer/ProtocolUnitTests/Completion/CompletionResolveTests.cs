@@ -231,7 +231,8 @@ class B : A
             TestLspServer testLspServer,
             LSP.CompletionItem completionItem,
             LSP.ClientCapabilities clientCapabilities = null
-        ) {
+        )
+        {
             return await testLspServer.ExecuteRequestAsync<LSP.CompletionItem, LSP.CompletionItem>(
                 LSP.Methods.TextDocumentCompletionResolveName,
                 completionItem,
@@ -246,7 +247,8 @@ class B : A
             ClassifiedTextElement description,
             string detail,
             string documentation
-        ) {
+        )
+        {
             completionItem.Detail = detail;
             if (documentation != null)
             {
@@ -272,7 +274,8 @@ class B : A
         private static async Task<LSP.CompletionList> RunGetCompletionsAsync(
             TestLspServer testLspServer,
             LSP.CompletionParams completionParams
-        ) {
+        )
+        {
             var clientCapabilities = new LSP.VSClientCapabilities
             {
                 SupportsVisualStudioExtensions = true
@@ -291,7 +294,8 @@ class B : A
 
         private static LSP.VSCompletionItem ConvertToClientCompletionItem(
             LSP.CompletionItem serverCompletionItem
-        ) {
+        )
+        {
             var serializedItem = JsonConvert.SerializeObject(serverCompletionItem);
             var clientCompletionItem = JsonConvert.DeserializeObject<LSP.VSCompletionItem>(
                 serializedItem
@@ -317,7 +321,8 @@ class B : A
                 CodeAnalysis.Completion.CompletionItem item,
                 char? commitCharacter = null,
                 CancellationToken cancellationToken = default
-            ) {
+            )
+            {
                 var textChange = new TextChange(
                     span: new TextSpan(start: 77, length: 9),
                     newText: @"public override void M()

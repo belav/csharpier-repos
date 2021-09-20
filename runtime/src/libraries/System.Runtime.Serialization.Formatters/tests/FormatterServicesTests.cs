@@ -180,7 +180,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
         )]
         public void GetUninitializedObject_ByRefLikeType_NetCore_ThrowsNotSupportedException(
             Type type
-        ) {
+        )
+        {
             Assert.Throws<NotSupportedException>(
                 () => FormatterServices.GetUninitializedObject(type)
             );
@@ -197,7 +198,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
         )]
         public void GetUninitializedObject_ByRefLikeType_NonNetfx_ThrowsNotSupportedException(
             Type type
-        ) {
+        )
+        {
             Assert.Throws<NotSupportedException>(
                 () => FormatterServices.GetUninitializedObject(type)
             );

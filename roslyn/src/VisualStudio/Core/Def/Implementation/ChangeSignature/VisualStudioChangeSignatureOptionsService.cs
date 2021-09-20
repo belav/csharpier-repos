@@ -39,7 +39,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
             int positionForTypeBinding,
             ISymbol symbol,
             ParameterConfiguration parameters
-        ) {
+        )
+        {
             this.AssertIsForeground();
 
             var viewModel = new ChangeSignatureDialogViewModel(

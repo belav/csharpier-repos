@@ -26,16 +26,18 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxTreeSemanticModel? parentSemanticModelOpt = null,
             ImmutableDictionary<Symbol, Symbol>? parentRemappedSymbolsOpt = null,
             int speculatedPosition = 0
-        ) : base(
-            syntax,
-            attributeType,
-            new ExecutableCodeBinder(syntax, rootBinder.ContainingMember(), rootBinder),
-            containingSemanticModelOpt,
-            parentSemanticModelOpt,
-            snapshotManagerOpt: null,
-            parentRemappedSymbolsOpt: parentRemappedSymbolsOpt,
-            speculatedPosition
-        ) {
+        )
+            : base(
+                syntax,
+                attributeType,
+                new ExecutableCodeBinder(syntax, rootBinder.ContainingMember(), rootBinder),
+                containingSemanticModelOpt,
+                parentSemanticModelOpt,
+                snapshotManagerOpt: null,
+                parentRemappedSymbolsOpt: parentRemappedSymbolsOpt,
+                speculatedPosition
+            )
+        {
             Debug.Assert(syntax != null);
             _aliasOpt = aliasOpt;
         }
@@ -50,7 +52,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             AliasSymbol aliasOpt,
             Binder rootBinder,
             ImmutableDictionary<Symbol, Symbol> parentRemappedSymbolsOpt
-        ) {
+        )
+        {
             return new AttributeSemanticModel(
                 syntax,
                 attributeType,
@@ -72,7 +75,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Binder rootBinder,
             ImmutableDictionary<Symbol, Symbol> parentRemappedSymbolsOpt,
             int position
-        ) {
+        )
+        {
             Debug.Assert(parentSemanticModel != null);
             Debug.Assert(rootBinder != null);
             Debug.Assert(rootBinder.IsSemanticModelBinder);
@@ -121,7 +125,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Binder binder,
             CSharpSyntaxNode node,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             if (node.Kind() == SyntaxKind.Attribute)
             {
                 var attribute = (AttributeSyntax)node;
@@ -144,7 +149,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool createSnapshots,
             out NullableWalker.SnapshotManager? snapshotManager,
             ref ImmutableDictionary<Symbol, Symbol>? remappedSymbols
-        ) {
+        )
+        {
             return NullableWalker.AnalyzeAndRewrite(
                 Compilation,
                 symbol: null,
@@ -163,7 +169,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Binder binder,
             DiagnosticBag diagnostics,
             bool createSnapshots
-        ) {
+        )
+        {
             NullableWalker.AnalyzeWithoutRewrite(
                 Compilation,
                 symbol: null,
@@ -182,7 +189,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal static bool IsNullableAnalysisEnabledIn(
             CSharpCompilation compilation,
             AttributeSyntax syntax
-        ) {
+        )
+        {
             return compilation.IsNullableAnalysisEnabledIn(syntax);
         }
 
@@ -191,7 +199,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             int position,
             ConstructorInitializerSyntax constructorInitializer,
             out SemanticModel? speculativeModel
-        ) {
+        )
+        {
             speculativeModel = null;
             return false;
         }
@@ -201,7 +210,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             int position,
             PrimaryConstructorBaseTypeSyntax constructorInitializer,
             out SemanticModel? speculativeModel
-        ) {
+        )
+        {
             speculativeModel = null;
             return false;
         }
@@ -211,7 +221,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             int position,
             EqualsValueClauseSyntax initializer,
             out SemanticModel? speculativeModel
-        ) {
+        )
+        {
             speculativeModel = null;
             return false;
         }
@@ -221,7 +232,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             int position,
             ArrowExpressionClauseSyntax expressionBody,
             out SemanticModel? speculativeModel
-        ) {
+        )
+        {
             speculativeModel = null;
             return false;
         }
@@ -231,7 +243,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             int position,
             StatementSyntax statement,
             out SemanticModel? speculativeModel
-        ) {
+        )
+        {
             speculativeModel = null;
             return false;
         }
@@ -241,7 +254,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             int position,
             BaseMethodDeclarationSyntax method,
             out SemanticModel? speculativeModel
-        ) {
+        )
+        {
             speculativeModel = null;
             return false;
         }
@@ -251,7 +265,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             int position,
             AccessorDeclarationSyntax accessor,
             out SemanticModel? speculativeModel
-        ) {
+        )
+        {
             speculativeModel = null;
             return false;
         }

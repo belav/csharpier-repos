@@ -37,7 +37,8 @@ namespace System.Web.Mvc
             HttpVerbs match,
             List<string> verbList,
             string entryText
-        ) {
+        )
+        {
             if ((verbs & match) != 0)
             {
                 verbList.Add(entryText);
@@ -62,7 +63,8 @@ namespace System.Web.Mvc
         public override bool IsValidForRequest(
             ControllerContext controllerContext,
             MethodInfo methodInfo
-        ) {
+        )
+        {
             if (controllerContext == null)
             {
                 throw new ArgumentNullException("controllerContext");

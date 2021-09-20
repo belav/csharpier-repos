@@ -428,7 +428,8 @@ namespace System.Net.Http.Tests
             int startIndex,
             int expectedLength,
             ViaHeaderValue expectedResult
-        ) {
+        )
+        {
             object result = null;
             Assert.Equal(
                 expectedLength,

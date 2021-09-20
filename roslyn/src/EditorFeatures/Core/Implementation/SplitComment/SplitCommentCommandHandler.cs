@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.SplitComment
         public SplitCommentCommandHandler(
             ITextUndoHistoryRegistry undoHistoryRegistry,
             IEditorOperationsFactoryService editorOperationsFactoryService
-        ) {
+        )
+        {
             _undoHistoryRegistry = undoHistoryRegistry;
             _editorOperationsFactoryService = editorOperationsFactoryService;
         }
@@ -92,7 +93,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.SplitComment
                     allowCancellation: true,
                     EditorFeaturesResources.Split_comment
                 )
-            ) {
+            )
+            {
                 var cancellationToken = context.OperationContext.UserCancellationToken;
                 var result = SplitCommentAsync(
                         textView,
@@ -121,7 +123,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.SplitComment
         private static bool LineProbablyContainsComment(
             ISplitCommentService service,
             SnapshotPoint position
-        ) {
+        )
+        {
             var commentStart = service.CommentStart;
             var line = position.GetContainingLine();
 
@@ -141,7 +144,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.SplitComment
             string commentStart,
             ITextSnapshotLine line,
             int position
-        ) {
+        )
+        {
             if (position + commentStart.Length > line.End)
                 return false;
 
@@ -160,7 +164,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.SplitComment
             Document document,
             SnapshotSpan selectionSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var options = await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
             var enabled = options.GetOption(SplitCommentOptions.Enabled);
             if (!enabled)
@@ -206,7 +211,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.SplitComment
         private static bool IsFollowedByComment(
             SnapshotPoint point,
             ISplitCommentService splitCommentService
-        ) {
+        )
+        {
             var line = point.GetContainingLine();
 
             // skip past following whitespace.
@@ -222,7 +228,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.SplitComment
             ITextSnapshotLine triviaLine,
             SyntaxTrivia trivia,
             int position
-        ) {
+        )
+        {
             // We're inside a comment.  Instead of inserting just a newline here, insert
             // 1. a newline
             // 2. spaces up to the indentation of the current comment
@@ -253,7 +260,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.SplitComment
             ITextSnapshot snapshot,
             SyntaxTrivia trivia,
             int position
-        ) {
+        )
+        {
             // Consume as many of the comment start character as we can.  That way if someone has something like
             // `//// $$Goo` then hitting enter will respect that the next line should start with `////`.
 
@@ -272,7 +280,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.SplitComment
             ITextSnapshotLine triviaLine,
             string commentPrefix,
             int position
-        ) {
+        )
+        {
             var startIndex = trivia.SpanStart + commentPrefix.Length;
             var endIndex = startIndex;
 

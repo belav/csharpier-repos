@@ -2997,7 +2997,8 @@ class B<T> : A<T>, I where T : class
             string expectedTypeArg,
             string expectedOutput,
             bool useCompilationReference
-        ) {
+        )
+        {
             var source0 =
                 $@"public struct S<T>
 {{
@@ -3123,7 +3124,8 @@ class B<T> : A<T>, I
             string baseTypeArg,
             string expectedTypeArg,
             bool useCompilationReference
-        ) {
+        )
+        {
             var source0 =
                 $@"public struct S<T>
 {{
@@ -3174,7 +3176,8 @@ public interface I
             string interfaceMemberName,
             string expectedOutput,
             string expectedImplementingMember
-        ) {
+        )
+        {
             var comp = CreateCompilation(source0);
             var ref0 = AsReference(comp, useCompilationReference);
 

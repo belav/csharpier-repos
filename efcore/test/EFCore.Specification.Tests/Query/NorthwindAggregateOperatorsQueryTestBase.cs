@@ -1064,7 +1064,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Multiple_collection_navigation_with_FirstOrDefault_chained_projecting_scalar(
             bool async
-        ) {
+        )
+        {
             return AssertQueryScalar(
                 async,
                 ss =>
@@ -1407,7 +1408,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Contains_with_local_non_primitive_list_inline_closure_mix(
             bool async
-        ) {
+        )
+        {
             var id = "ALFKI";
 
             await AssertQuery(
@@ -1517,7 +1519,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Contains_with_local_collection_complex_predicate_not_matching_ins1(
             bool async
-        ) {
+        )
+        {
             string[] ids = { "ABCDE", "ALFKI" };
 
             return AssertQuery(
@@ -1537,7 +1540,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Contains_with_local_collection_complex_predicate_not_matching_ins2(
             bool async
-        ) {
+        )
+        {
             string[] ids = { "ABCDE", "ALFKI" };
 
             return AssertQuery(
@@ -1678,7 +1682,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Average_with_non_matching_types_in_projection_doesnt_produce_second_explicit_cast(
             bool async
-        ) {
+        )
+        {
             return AssertAverage(
                 async,
                 ss =>
@@ -1693,7 +1698,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Max_with_non_matching_types_in_projection_introduces_explicit_cast(
             bool async
-        ) {
+        )
+        {
             return AssertMax(
                 async,
                 ss =>
@@ -1708,7 +1714,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Min_with_non_matching_types_in_projection_introduces_explicit_cast(
             bool async
-        ) {
+        )
+        {
             return AssertMin(
                 async,
                 ss =>
@@ -1754,7 +1761,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task List_Contains_over_entityType_should_rewrite_to_identity_equality(
             bool async
-        ) {
+        )
+        {
             var someOrder = new Order { OrderID = 10248 };
 
             return AssertQuery(
@@ -1898,7 +1906,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Contains_over_entityType_with_null_should_rewrite_to_identity_equality_subquery(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -1913,7 +1922,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Contains_over_scalar_with_null_should_rewrite_to_identity_equality_subquery(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -1932,7 +1942,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Contains_over_entityType_with_null_should_rewrite_to_identity_equality_subquery_negated(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -1952,7 +1963,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Contains_over_entityType_with_null_should_rewrite_to_identity_equality_subquery_complex(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -1976,7 +1988,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Contains_over_nullable_scalar_with_null_in_subquery_translated_correctly(
             bool async
-        ) {
+        )
+        {
             return AssertQueryScalar(
                 async,
                 ss =>
@@ -1995,7 +2008,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Contains_over_non_nullable_scalar_with_null_in_subquery_simplifies_to_false(
             bool async
-        ) {
+        )
+        {
             return AssertQueryScalar(
                 async,
                 ss =>
@@ -2279,7 +2293,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Collection_LastOrDefault_member_access_in_projection_translated(
             bool async
-        ) {
+        )
+        {
             return AssertQuery(
                 async,
                 ss =>
@@ -2334,7 +2349,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Average_with_unmapped_property_access_throws_meaningful_exception(
             bool async
-        ) {
+        )
+        {
             return AssertTranslationFailedWithDetails(
                 () => AssertAverage(async, ss => ss.Set<Order>(), selector: c => c.ShipVia),
                 CoreStrings.QueryUnableToTranslateMember(nameof(Order.ShipVia), nameof(Order))

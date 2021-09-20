@@ -102,7 +102,8 @@ namespace System.Net
             int arg3,
             string? arg4,
             string? arg5
-        ) {
+        )
+        {
             if (IsEnabled())
             {
                 if (arg4 == null)

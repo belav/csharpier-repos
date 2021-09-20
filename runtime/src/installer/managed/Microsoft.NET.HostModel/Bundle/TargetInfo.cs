@@ -50,7 +50,8 @@ namespace Microsoft.NET.HostModel.Bundle
             else if (
                 FrameworkVersion.Major == 3
                 && (FrameworkVersion.Minor == 0 || FrameworkVersion.Minor == 1)
-            ) {
+            )
+            {
                 BundleMajorVersion = 1u;
                 DefaultOptions = BundleOptions.BundleAllContent;
             }

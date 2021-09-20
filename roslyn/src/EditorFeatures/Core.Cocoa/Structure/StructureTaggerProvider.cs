@@ -27,13 +27,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Structure
             IEditorOptionsFactoryService editorOptionsFactoryService,
             IProjectionBufferFactoryService projectionBufferFactoryService,
             IAsynchronousOperationListenerProvider listenerProvider
-        ) : base(
-            threadingContext,
-            notificationService,
-            editorOptionsFactoryService,
-            projectionBufferFactoryService,
-            listenerProvider
-        ) { }
+        )
+            : base(
+                threadingContext,
+                notificationService,
+                editorOptionsFactoryService,
+                projectionBufferFactoryService,
+                listenerProvider
+            ) { }
 
         internal override object? GetCollapsedHintForm(StructureTag structureTag)
         {

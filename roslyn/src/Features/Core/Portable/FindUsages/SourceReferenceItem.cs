@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.FindUsages
             SymbolUsageInfo symbolUsageInfo,
             ImmutableDictionary<string, string> additionalProperties,
             bool isWrittenTo
-        ) {
+        )
+        {
             Definition = definition;
             SourceSpan = sourceSpan;
             SymbolUsageInfo = symbolUsageInfo;
@@ -66,24 +67,26 @@ namespace Microsoft.CodeAnalysis.FindUsages
             DefinitionItem definition,
             DocumentSpan sourceSpan,
             SymbolUsageInfo symbolUsageInfo
-        ) : this(
-            definition,
-            sourceSpan,
-            symbolUsageInfo,
-            additionalProperties: ImmutableDictionary<string, string>.Empty
-        ) { }
+        )
+            : this(
+                definition,
+                sourceSpan,
+                symbolUsageInfo,
+                additionalProperties: ImmutableDictionary<string, string>.Empty
+            ) { }
 
         internal SourceReferenceItem(
             DefinitionItem definition,
             DocumentSpan sourceSpan,
             SymbolUsageInfo symbolUsageInfo,
             ImmutableDictionary<string, string> additionalProperties
-        ) : this(
-            definition,
-            sourceSpan,
-            symbolUsageInfo,
-            additionalProperties,
-            isWrittenTo: symbolUsageInfo.IsWrittenTo()
-        ) { }
+        )
+            : this(
+                definition,
+                sourceSpan,
+                symbolUsageInfo,
+                additionalProperties,
+                isWrittenTo: symbolUsageInfo.IsWrittenTo()
+            ) { }
     }
 }

@@ -48,7 +48,8 @@ namespace Castle.Components.DictionaryAdapter
             object storedValue,
             PropertyDescriptor property,
             bool ifExists
-        ) {
+        )
+        {
             var propertyType = property.PropertyType;
 
             if (storedValue == null || !storedValue.GetType().IsInstanceOfType(propertyType))
@@ -62,7 +63,8 @@ namespace Castle.Components.DictionaryAdapter
                         || genericDef == typeof(ICollection<>)
                         || genericDef == typeof(List<>)
                         || genericDef == typeof(IEnumerable<>)
-                    ) {
+                    )
+                    {
                         var paramType = propertyType.GetGenericArguments()[0];
                         var converter = TypeDescriptor.GetConverter(paramType);
 
@@ -95,7 +97,8 @@ namespace Castle.Components.DictionaryAdapter
             string key,
             ref object value,
             PropertyDescriptor property
-        ) {
+        )
+        {
             var enumerable = value as IEnumerable;
             if (enumerable != null)
             {
@@ -142,7 +145,8 @@ namespace Castle.Components.DictionaryAdapter
                 string list,
                 char separator,
                 IDictionary dictionary
-            ) {
+            )
+            {
                 this.key = key;
                 this.separator = separator;
                 this.dictionary = dictionary;

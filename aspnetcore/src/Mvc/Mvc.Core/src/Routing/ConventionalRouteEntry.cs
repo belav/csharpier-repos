@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             RouteValueDictionary? dataTokens,
             int order,
             List<Action<EndpointBuilder>> conventions
-        ) {
+        )
+        {
             RouteName = routeName;
             DataTokens = dataTokens;
             Order = order;

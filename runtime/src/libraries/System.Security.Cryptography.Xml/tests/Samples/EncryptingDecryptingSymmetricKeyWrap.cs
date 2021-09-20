@@ -28,7 +28,8 @@ namespace System.Security.Cryptography.Xml.Tests
             SymmetricAlgorithm key,
             string keyName,
             SymmetricAlgorithmFactory innerKeyFactory
-        ) {
+        )
+        {
             var elementToEncrypt = (XmlElement)doc.GetElementsByTagName(elementName)[0];
 
             using (SymmetricAlgorithm innerKey = innerKeyFactory.Create())
@@ -96,7 +97,8 @@ namespace System.Security.Cryptography.Xml.Tests
         public void SymmetricKeyWrapEncryptionRoundtrip(
             SymmetricAlgorithmFactory keyFactory,
             SymmetricAlgorithmFactory innerKeyFactory
-        ) {
+        )
+        {
             const string testString = "some text node";
             const string exampleXmlRootElement = "example";
             const string exampleXml =

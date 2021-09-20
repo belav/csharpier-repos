@@ -440,7 +440,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.GearsOfWarModel
             IReadOnlyList<LocustLeader> locustLeaders,
             IReadOnlyList<Faction> factions,
             IReadOnlyList<LocustHighCommand> locustHighCommands
-        ) {
+        )
+        {
             squadMissions[0].Mission = missions[0];
             squadMissions[0].MissionId = missions[0].Id;
             squadMissions[0].Squad = squads[0];
@@ -577,7 +578,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.GearsOfWarModel
         public static void WireUp2(
             IReadOnlyList<LocustLeader> locustLeaders,
             IReadOnlyList<Faction> factions
-        ) {
+        )
+        {
             ((LocustHorde)factions[0]).Leaders = new List<LocustLeader>
             {
                 locustLeaders[0],

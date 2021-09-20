@@ -18,9 +18,7 @@ namespace System
         public TimeZoneNotFoundException(string? message, Exception? innerException)
             : base(message, innerException) { }
 
-        protected TimeZoneNotFoundException(
-            SerializationInfo info,
-            StreamingContext context
-        ) : base(info, context) { }
+        protected TimeZoneNotFoundException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

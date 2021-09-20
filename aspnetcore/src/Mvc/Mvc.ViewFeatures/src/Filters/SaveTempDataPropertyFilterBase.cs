@@ -86,7 +86,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
         public static IReadOnlyList<LifecycleProperty> GetTempDataProperties(
             TempDataSerializer tempDataSerializer,
             Type type
-        ) {
+        )
+        {
             List<LifecycleProperty> results = null;
             var errorMessages = new List<string>();
 
@@ -99,7 +100,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
                 if (
                     tempDataAttribute != null
                     && ValidateProperty(tempDataSerializer, errorMessages, propertyHelper.Property)
-                ) {
+                )
+                {
                     if (results == null)
                     {
                         results = new List<LifecycleProperty>();
@@ -129,7 +131,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
             TempDataSerializer tempDataSerializer,
             List<string> errorMessages,
             PropertyInfo property
-        ) {
+        )
+        {
             if (
                 !(
                     property.SetMethod != null
@@ -137,7 +140,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
                     && property.GetMethod != null
                     && property.GetMethod.IsPublic
                 )
-            ) {
+            )
+            {
                 errorMessages.Add(
                     Resources.FormatTempDataProperties_PublicGetterSetter(
                         property.DeclaringType.FullName,

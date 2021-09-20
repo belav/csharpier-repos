@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.Antiforgery
             string? cookieToken,
             string formFieldName,
             string? headerName
-        ) {
+        )
+        {
             if (formFieldName == null)
             {
                 throw new ArgumentNullException(nameof(formFieldName));

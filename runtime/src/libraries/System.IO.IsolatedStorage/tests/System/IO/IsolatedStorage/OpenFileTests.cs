@@ -135,7 +135,8 @@ namespace System.IO.IsolatedStorage
                         FileAccess.ReadWrite,
                         FileShare.ReadWrite
                     )
-                ) {
+                )
+                {
                     Assert.True(isf.FileExists(file), "file exists");
                     using (
                         isf.OpenFile(file, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite)
@@ -149,7 +150,8 @@ namespace System.IO.IsolatedStorage
                         FileAccess.ReadWrite,
                         FileShare.None
                     )
-                ) {
+                )
+                {
                     Assert.True(isf.FileExists(file), "file exists");
                     Assert.Throws<IsolatedStorageException>(
                         () => isf.OpenFile(file, FileMode.Open, FileAccess.ReadWrite)

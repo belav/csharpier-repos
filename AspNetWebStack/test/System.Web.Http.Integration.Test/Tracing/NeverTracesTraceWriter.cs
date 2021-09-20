@@ -22,7 +22,8 @@ namespace System.Web.Http.Tracing
             string category,
             TraceLevel level,
             Action<TraceRecord> traceAction
-        ) {
+        )
+        {
             DidReceiveTraceRequests = true;
         }
 

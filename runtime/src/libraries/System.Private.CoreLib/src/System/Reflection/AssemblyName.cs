@@ -255,7 +255,8 @@ namespace System.Reflection
         public static bool ReferenceMatchesDefinition(
             AssemblyName? reference,
             AssemblyName? definition
-        ) {
+        )
+        {
             if (object.ReferenceEquals(reference, definition))
                 return true;
 
@@ -315,7 +316,8 @@ namespace System.Reflection
             char force1,
             char force2,
             char rsvd
-        ) {
+        )
+        {
             int i = start;
             int prevInputPos = start;
             byte* bytes =
@@ -396,7 +398,8 @@ namespace System.Reflection
                             i + 2 < end
                             && HexConverter.IsHexChar(pStr[i + 1])
                             && HexConverter.IsHexChar(pStr[i + 2])
-                        ) {
+                        )
+                        {
                             // leave it escaped
                             dest[destPos++] = '%';
                             dest[destPos++] = pStr[i + 1];
@@ -416,7 +419,8 @@ namespace System.Reflection
                             ch != rsvd
                             && (isUriString ? !IsReservedUnreservedOrHash(ch) : !IsUnreserved(ch))
                         )
-                    ) {
+                    )
+                    {
                         dest = EnsureDestinationSize(
                             pStr,
                             dest,
@@ -461,11 +465,13 @@ namespace System.Reflection
             short minReallocateChars,
             ref int destPos,
             int prevInputPos
-        ) {
+        )
+        {
             if (
                 dest is null
                 || dest.Length < destPos + (currentInputPos - prevInputPos) + charsToAdd
-            ) {
+            )
+            {
                 // allocating or reallocating array by ensuring enough space based on maxCharsToAdd.
                 char[] newresult = new char[
                     destPos + (currentInputPos - prevInputPos) + minReallocateChars

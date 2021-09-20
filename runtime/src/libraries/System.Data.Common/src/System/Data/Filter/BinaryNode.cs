@@ -16,12 +16,8 @@ namespace System.Data
         internal ExpressionNode _left;
         internal ExpressionNode _right;
 
-        internal BinaryNode(
-            DataTable? table,
-            int op,
-            ExpressionNode left,
-            ExpressionNode right
-        ) : base(table)
+        internal BinaryNode(DataTable? table, int op, ExpressionNode left, ExpressionNode right)
+            : base(table)
         {
             _op = op;
             _left = left;
@@ -143,7 +139,8 @@ namespace System.Data
             DataRow? row,
             DataRowVersion version,
             int[]? recordNos
-        ) {
+        )
+        {
             if (recordNos == null)
             {
                 return expr.Eval(row, version);
@@ -165,7 +162,8 @@ namespace System.Data
             StorageType resultType,
             int op,
             CompareInfo? comparer
-        ) {
+        )
+        {
             int result = 0;
             try
             {
@@ -283,7 +281,8 @@ namespace System.Data
                                             || (vLeft.GetType() == typeof(bool))
                                         )
                                     )
-                                ) {
+                                )
+                                {
                                     return SqlConvert.ConvertToSqlBoolean(vLeft)
                                         .CompareTo(SqlConvert.ConvertToSqlBoolean(vRight));
                                 }
@@ -332,7 +331,8 @@ namespace System.Data
             DataRow? row,
             DataRowVersion version,
             int[]? recordNos
-        ) {
+        )
+        {
             object vLeft;
             object vRight;
             StorageType resultType;
@@ -351,7 +351,8 @@ namespace System.Data
                 && op != Operators.In
                 && op != Operators.Is
                 && op != Operators.IsNot
-            ) {
+            )
+            {
                 vLeft = BinaryNode.Eval(left, row, version, recordNos);
                 vRight = BinaryNode.Eval(right, row, version, recordNos);
                 Type typeofLeft = vLeft.GetType();
@@ -1342,7 +1343,8 @@ namespace System.Data
                         if (
                             (vLeft == DBNull.Value)
                             || (left.IsSqlColumn && DataStorage.IsObjectSqlNull(vLeft))
-                        ) {
+                        )
+                        {
                             return true;
                         }
                         return false;
@@ -1352,7 +1354,8 @@ namespace System.Data
                         if (
                             (vLeft == DBNull.Value)
                             || (left.IsSqlColumn && DataStorage.IsObjectSqlNull(vLeft))
-                        ) {
+                        )
+                        {
                             return false;
                         }
                         return true;
@@ -1824,7 +1827,8 @@ namespace System.Data
             bool lc,
             bool rc,
             int op
-        ) {
+        )
+        {
             if (
                 (left == StorageType.Guid)
                 && (right == StorageType.Guid)
@@ -1945,7 +1949,8 @@ namespace System.Data
             bool lc,
             bool rc,
             int op
-        ) {
+        )
+        {
             int leftPrecedence = (int)GetPrecedence(left);
             if (leftPrecedence == (int)DataTypePrecedence.Error)
             {
@@ -1995,7 +2000,8 @@ namespace System.Data
                     leftPrecedence > (int)DataTypePrecedence.SqlDouble
                     && rightPrecedence < (int)DataTypePrecedence.TimeSpan
                 )
-            ) {
+            )
+            {
                 return StorageType.Empty;
             }
 
@@ -2004,7 +2010,8 @@ namespace System.Data
                     leftPrecedence < (int)DataTypePrecedence.TimeSpan
                     && rightPrecedence > (int)DataTypePrecedence.SqlDouble
                 )
-            ) {
+            )
+            {
                 return StorageType.Empty;
             }
 
@@ -2041,7 +2048,8 @@ namespace System.Data
                     result != StorageType.String
                     && result != StorageType.Char
                     && result != StorageType.SqlString
-                ) {
+                )
+                {
                     if (!IsNumericSql(left))
                         return StorageType.Empty;
                     if (!IsNumericSql(right))
@@ -2138,12 +2146,8 @@ namespace System.Data
         private int _kind;
         private string? _pattern;
 
-        internal LikeNode(
-            DataTable? table,
-            int op,
-            ExpressionNode left,
-            ExpressionNode right
-        ) : base(table, op, left, right) { }
+        internal LikeNode(DataTable? table, int op, ExpressionNode left, ExpressionNode right)
+            : base(table, op, left, right) { }
 
         internal override object Eval(DataRow? row, DataRowVersion version)
         {

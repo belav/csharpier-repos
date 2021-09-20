@@ -15,7 +15,8 @@ namespace JitBench
             string intermediateOutputDir,
             bool useExistingSetup,
             ITestOutputHelper output
-        ) {
+        )
+        {
             using (var setupSection = new IndentedTestOutputHelper("Setup " + Name, output))
             {
                 SetupCscBinDir(
@@ -40,7 +41,8 @@ namespace JitBench
             string intermediateOutputDir,
             bool useExistingSetup,
             ITestOutputHelper output
-        ) {
+        )
+        {
             // copy the SDK version of csc into a private directory so we can safely retarget it
             string cscBinaryDirPath = Path.Combine(sdkDirPath, "Roslyn", "bincore");
             string localCscDir = Path.Combine(intermediateOutputDir, "csc");

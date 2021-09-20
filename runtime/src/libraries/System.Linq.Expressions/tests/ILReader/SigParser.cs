@@ -872,7 +872,8 @@ namespace System.Linq.Expressions.Tests
             out sig_index pEncoded,
             out sig_index_type pIndexTypeOut,
             out sig_index pIndexOut
-        ) {
+        )
+        {
             pIndexTypeOut = 0;
             pIndexOut = 0;
 

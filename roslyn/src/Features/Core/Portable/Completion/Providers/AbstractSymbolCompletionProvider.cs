@@ -80,7 +80,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             SemanticModel semanticModel,
             int position,
             Dictionary<ITypeSymbol, bool> typeConvertibilityCache
-        ) {
+        )
+        {
             // When searching for identifiers of type C, exclude the symbol for the `C` type itself.
             if (symbol.Kind == SymbolKind.NamedType)
             {
@@ -135,7 +136,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             Dictionary<ISymbol, List<ProjectId>>? invalidProjectMap,
             List<ProjectId>? totalProjects,
             TelemetryCounter telemetryCounter
-        ) {
+        )
+        {
             // We might get symbol w/o name but CanBeReferencedByName is still set to true,
             // need to filter them out.
             // https://github.com/dotnet/roslyn/issues/47690
@@ -209,7 +211,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             ImmutableArray<(ISymbol symbol, bool preselect)> symbolList,
             Dictionary<ITypeSymbol, bool> typeConvertibilityCache,
             out int index
-        ) {
+        )
+        {
             for (index = 0; index < symbolList.Length; ++index)
             {
                 var symbol = symbolList[index];
@@ -241,7 +244,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             TSyntaxContext context,
             Dictionary<ISymbol, List<ProjectId>>? invalidProjectMap,
             List<ProjectId>? totalProjects
-        ) {
+        )
+        {
             Contract.ThrowIfNull(symbols);
 
             SupportedPlatformData? supportedPlatformData = null;
@@ -281,7 +285,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             ImmutableArray<(ISymbol symbol, bool preselect)> symbols,
             TSyntaxContext context,
             SupportedPlatformData? supportedPlatformData
-        ) {
+        )
+        {
             var preselect = symbols.Any(t => t.preselect);
             return SymbolCompletionItem.CreateWithSymbolId(
                 displayText: displayText,
@@ -305,7 +310,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             ISymbol symbol,
             string displayText,
             TSyntaxContext context
-        ) {
+        )
+        {
             return
                 (displayText == symbol.Name)
                 || (displayText.Length > 0 && displayText[0] == '@')
@@ -360,7 +366,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                                 document.Project.Solution.Workspace
                             )
                     )
-                ) {
+                )
+                {
                     var syntaxContext = await GetOrCreateContextAsync(
                             document,
                             position,
@@ -395,7 +402,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             OptionSet options,
             TelemetryCounter telemetryCounter,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var relatedDocumentIds = document.GetLinkedDocumentIds();
             options = CompletionUtilities.GetUpdatedRecommendationOptions(
                 options,
@@ -458,7 +466,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 
         private static Dictionary<(ISymbol symbol, bool preselect), TSyntaxContext> UnionSymbols(
             ImmutableArray<(DocumentId documentId, TSyntaxContext syntaxContext, ImmutableArray<(ISymbol symbol, bool preselect)> symbols)> linkedContextSymbolLists
-        ) {
+        )
+        {
             // To correctly map symbols back to their SyntaxContext, we do care about assembly identity.
             var result = new Dictionary<(ISymbol symbol, bool preselect), TSyntaxContext>(
                 CompletionLinkedFilesSymbolEquivalenceComparer.Instance
@@ -472,7 +481,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 foreach (
                     var symbol in symbols.GroupBy(s => new { s.symbol.Name, s.symbol.Kind })
                         .Select(g => g.First())
-                ) {
+                )
+                {
                     if (!result.ContainsKey(symbol))
                         result.Add(symbol, syntaxContext);
                 }
@@ -490,7 +500,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             OptionSet options,
             IEnumerable<DocumentId> relatedDocuments,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var solution = document.Project.Solution;
 
             using var _1 = ArrayBuilder<
@@ -551,7 +562,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             TSyntaxContext syntaxContext,
             OptionSet options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var syntaxFacts = syntaxContext.GetLanguageService<ISyntaxFactsService>();
             return syntaxFacts.IsInInactiveRegion(
                 syntaxContext.SyntaxTree,
@@ -573,7 +585,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             Document document,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var workspace = document.Project.Solution.Workspace;
             var semanticModel = await document.ReuseExistingSpeculativeModelAsync(
                     position,
@@ -594,7 +607,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             Document document,
             int position,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             lock (s_cachedDocuments)
             {
                 var (cachedPosition, cachedLazyContext) = s_cachedDocuments.GetValue(
@@ -633,7 +647,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         private static Dictionary<ISymbol, List<ProjectId>> FindSymbolsMissingInLinkedContexts(
             Dictionary<(ISymbol symbol, bool preselect), TSyntaxContext> symbolToContext,
             ImmutableArray<(DocumentId documentId, TSyntaxContext syntaxContext, ImmutableArray<(ISymbol symbol, bool preselect)> symbols)> linkedContextSymbolLists
-        ) {
+        )
+        {
             var missingSymbols = new Dictionary<ISymbol, List<ProjectId>>(
                 LinkedFilesSymbolEquivalenceComparer.Instance
             );

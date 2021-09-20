@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             ISymbolInternal entity,
             Cci.ITypeReference type,
             Cci.IMetadataExpression value
-        ) {
+        )
+        {
             // entity must be one of INamedEntity or IFieldDefinition or IPropertyDefinition
             _entity = entity;
             _type = type;

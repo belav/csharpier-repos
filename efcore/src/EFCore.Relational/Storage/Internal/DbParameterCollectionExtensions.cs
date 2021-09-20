@@ -70,7 +70,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.Internal
             int size,
             byte precision,
             byte scale
-        ) {
+        )
+        {
             var builder = new StringBuilder();
 
             var clrType = value?.GetType();
@@ -178,7 +179,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.Internal
                             isNullProperty != null
                             && isNullProperty.GetValue(parameterValue) is bool isNull
                             && isNull
-                        ) {
+                        )
+                        {
                             builder.Append("''");
                         }
                         else

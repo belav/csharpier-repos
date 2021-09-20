@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.InlineHints
             Document document,
             TextSpan textSpan,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var options = await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
 
             var displayAllOverride = options.GetOption(InlineHintsOptions.DisplayAllOverride);
@@ -76,7 +77,8 @@ namespace Microsoft.CodeAnalysis.InlineHints
 
             foreach (
                 var node in root.DescendantNodes(textSpan, n => n.Span.IntersectsWith(textSpan))
-            ) {
+            )
+            {
                 cancellationToken.ThrowIfCancellationRequested();
                 AddAllParameterNameHintLocations(semanticModel, node, buffer, cancellationToken);
 
@@ -114,7 +116,8 @@ namespace Microsoft.CodeAnalysis.InlineHints
                             objectCreationParameters,
                             otherParameters
                         )
-                    ) {
+                    )
+                    {
                         result.Add(
                             new InlineHint(
                                 new TextSpan(position, 0),
@@ -134,7 +137,8 @@ namespace Microsoft.CodeAnalysis.InlineHints
 
         private static bool ParametersDifferOnlyBySuffix(
             ArrayBuilder<(int position, IParameterSymbol? parameter, HintKind kind)> parameterHints
-        ) {
+        )
+        {
             // Only relevant if we have two or more parameters.
             if (parameterHints.Count <= 1)
                 return false;
@@ -144,7 +148,8 @@ namespace Microsoft.CodeAnalysis.InlineHints
 
             static bool ParametersDifferOnlyByAlphaSuffix(
                 ArrayBuilder<(int position, IParameterSymbol? parameter, HintKind kind)> parameterHints
-            ) {
+            )
+            {
                 if (!HasAlphaSuffix(parameterHints[0].parameter, out var firstPrefix))
                     return false;
 
@@ -162,7 +167,8 @@ namespace Microsoft.CodeAnalysis.InlineHints
 
             static bool ParametersDifferOnlyByNumericSuffix(
                 ArrayBuilder<(int position, IParameterSymbol? parameter, HintKind kind)> parameterHints
-            ) {
+            )
+            {
                 if (!HasNumericSuffix(parameterHints[0].parameter, out var firstPrefix))
                     return false;
 
@@ -197,7 +203,8 @@ namespace Microsoft.CodeAnalysis.InlineHints
             static bool HasNumericSuffix(
                 IParameterSymbol? parameter,
                 out ReadOnlyMemory<char> prefix
-            ) {
+            )
+            {
                 var name = parameter?.Name;
 
                 // Has to end with 0-9.  only handles single-digit numeric suffix for now for simplicity
@@ -256,7 +263,8 @@ namespace Microsoft.CodeAnalysis.InlineHints
             if (
                 TryGetSuffix("Enable", methodName, out _)
                 || TryGetSuffix("Disable", methodName, out _)
-            ) {
+            )
+            {
                 return parameter.Type.SpecialType == SpecialType.System_Boolean;
             }
 
@@ -264,7 +272,8 @@ namespace Microsoft.CodeAnalysis.InlineHints
             if (
                 TryGetSuffix("Set", methodName, out var suffix)
                 || TryGetSuffix("From", methodName, out suffix)
-            ) {
+            )
+            {
                 return SuffixMatchesParameterName(suffix, parameter.Name);
             }
 
@@ -274,12 +283,14 @@ namespace Microsoft.CodeAnalysis.InlineHints
                 string prefix,
                 string nameValue,
                 out ReadOnlyMemory<char> suffix
-            ) {
+            )
+            {
                 if (
                     nameValue.Length > prefix.Length
                     && nameValue.StartsWith(prefix)
                     && char.IsUpper(nameValue[prefix.Length])
-                ) {
+                )
+                {
                     suffix = nameValue.AsMemory()[prefix.Length..];
                     return true;
                 }
@@ -291,7 +302,8 @@ namespace Microsoft.CodeAnalysis.InlineHints
             static bool SuffixMatchesParameterName(
                 ReadOnlyMemory<char> suffix,
                 string parameterName
-            ) {
+            )
+            {
                 // Method's name will be something like 'FromResult', so 'suffix' will be 'Result' and parameterName
                 // will be 'result'.  So we check if the first letters differ on case and the rest of the method
                 // matches.

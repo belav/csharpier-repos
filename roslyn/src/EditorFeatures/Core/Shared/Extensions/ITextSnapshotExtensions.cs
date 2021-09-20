@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             TextSpan span,
             IEnumerable<AbstractFormattingRule>? rules,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var document = snapshot.GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {
@@ -85,7 +86,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
         public static async Task<Document?> GetFullyLoadedOpenDocumentInCurrentContextWithChangesAsync(
             this ITextSnapshot snapshot,
             IUIThreadOperationContext operationContext
-        ) {
+        )
+        {
             // just get a document from whatever we have
             var document = snapshot.TextBuffer.AsTextContainer().GetOpenDocumentInCurrentContext();
             if (document == null)
@@ -100,7 +102,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                     allowCancellation: true,
                     EditorFeaturesResources.Waiting_for_background_work_to_finish
                 )
-            ) {
+            )
+            {
                 var service =
                     document.Project.Solution.Workspace.Services.GetService<IWorkspaceStatusService>();
                 if (service != null)
@@ -124,7 +127,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             this ITextSnapshot snapshot,
             IUIThreadOperationContext operationContext,
             IThreadingContext threadingContext
-        ) {
+        )
+        {
             // make sure this is only called from UI thread
             threadingContext.ThrowIfNotOnUIThread();
 

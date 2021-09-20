@@ -201,7 +201,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             if (
                 string.Compare(extension, ".zip", StringComparison.OrdinalIgnoreCase) == 0
                 || string.Compare(extension, ".vspx", StringComparison.OrdinalIgnoreCase) == 0
-            ) {
+            )
+            {
                 string unzipedEtlFile;
                 if (inputFileName.EndsWith(".etl.zip", StringComparison.OrdinalIgnoreCase))
                 {
@@ -266,7 +267,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             if (
                 (commandLineOptions.InputFileToDump == null)
                 || (!commandLineOptions.InputFileToDump.Exists)
-            ) {
+            )
+            {
                 PrintUsage(commandLineOptions, "Valid input file must be specified");
                 return -8;
             }
@@ -299,7 +301,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     FileMode.Create,
                     FileAccess.Write
                 )
-            ) {
+            )
+            {
                 JsonWriterOptions options = new JsonWriterOptions();
                 options.Indented = true;
                 options.SkipValidation = false;
@@ -482,7 +485,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 if (
                     (commandLineOptions.FileType.Value != PgoFileType.jittrace)
                     && (commandLineOptions.FileType != PgoFileType.mibc)
-                ) {
+                )
+                {
                     PrintUsage(
                         commandLineOptions,
                         $"Invalid output pgo type {commandLineOptions.FileType} specified."
@@ -516,7 +520,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             string etlFileName = commandLineOptions.TraceFile.FullName;
             foreach (
                 string nettraceExtension in new string[] { ".netperf", ".netperf.zip", ".nettrace" }
-            ) {
+            )
+            {
                 if (commandLineOptions.TraceFile.FullName.EndsWith(nettraceExtension))
                 {
                     etlFileName =
@@ -561,7 +566,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 if (
                     (!commandLineOptions.Pid.HasValue && commandLineOptions.ProcessName == null)
                     && traceLog.Processes.Count != 1
-                ) {
+                )
+                {
                     PrintError("Trace file contains multiple processes to distinguish between");
                     PrintOutput(
                         "Either a pid or process name from the following list must be specified"
@@ -596,7 +602,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                                 commandLineOptions.ProcessName,
                                 StringComparison.OrdinalIgnoreCase
                             ) == 0
-                        ) {
+                        )
+                        {
                             matchingProcesses.Add(proc);
                         }
                     }
@@ -667,7 +674,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     HashSet<int> examinedClrInstanceIds = new HashSet<int>();
                     foreach (
                         var assemblyLoadTrace in p.EventsInProcess.ByEventType<AssemblyLoadUnloadTraceData>()
-                    ) {
+                    )
+                    {
                         if (examinedClrInstanceIds.Add(assemblyLoadTrace.ClrInstanceID))
                         {
                             if (
@@ -810,7 +818,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 {
                     foreach (
                         var e in p.EventsInProcess.ByEventType<MethodJittingStartedTraceData>()
-                    ) {
+                    )
+                    {
                         int parenIndex = e.MethodSignature.IndexOf('(');
                         string retArg = e.MethodSignature.Substring(0, parenIndex);
                         string paramsArgs = e.MethodSignature.Substring(parenIndex);
@@ -910,7 +919,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     }
                     foreach (
                         var e in p.EventsInProcess.ByEventType<MethodLoadUnloadVerboseTraceData>()
-                    ) {
+                    )
+                    {
                         if (e.ClrInstanceID != clrInstanceId.Value)
                         {
                             continue;
@@ -956,7 +966,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                                     FileAccess.Read,
                                     FileShare.Read
                                 )
-                            ) {
+                            )
+                            {
                                 var r2rCheckPEReader =
                                     new System.Reflection.PortableExecutable.PEReader(
                                         fstream,
@@ -981,7 +992,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                                     MethodDesc,
                                     R2RSigProviderContext
                                 >(sigProvider)
-                            ) {
+                            )
+                            {
                                 foreach (var runtimeFunction in methodEntry.Value.RuntimeFunctions)
                                 {
                                     codeLocations.Add(
@@ -1132,7 +1144,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
 
                 foreach (
                     var e in p.EventsInProcess.ByEventType<JitInstrumentationDataVerboseTraceData>()
-                ) {
+                )
+                {
                     AddToInstrumentationData(e.ClrInstanceID, e.MethodID, e.MethodFlags, e.Data);
                 }
                 foreach (var e in p.EventsInProcess.ByEventType<JitInstrumentationDataTraceData>())
@@ -1146,7 +1159,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     long methodID,
                     int methodFlags,
                     byte[] data
-                ) {
+                )
+                {
                     if (eventClrInstanceId != clrInstanceId.Value)
                     {
                         return;
@@ -1169,7 +1183,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                                 method,
                                 out MethodChunks perMethodChunks
                             )
-                        ) {
+                        )
+                        {
                             perMethodChunks = new MethodChunks();
                             instrumentationDataByMethod.Add(method, perMethodChunks);
                         }
@@ -1231,7 +1246,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                                 methodData.Method,
                                 out MethodChunks chunks
                             )
-                        ) {
+                        )
+                        {
                             int size = 0;
                             foreach (byte[] arr in chunks.InstrumentationData)
                             {
@@ -1301,7 +1317,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             FileInfo outputFileName,
             IEnumerable<ProcessedMethodData> methodsToAttemptToPrepare,
             jittraceoptions jittraceOptions
-        ) {
+        )
+        {
             PrintMessage($"JitTrace options {jittraceOptions}");
 
             List<string> methodsToPrepare = new List<string>();

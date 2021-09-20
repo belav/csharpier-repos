@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private UnboundLambda AnalyzeAnonymousFunction(
             AnonymousFunctionExpressionSyntax syntax,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             Debug.Assert(syntax != null);
             Debug.Assert(syntax.IsAnonymousFunction());
 
@@ -212,7 +213,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             static ImmutableArray<bool> computeDiscards(
                 SeparatedSyntaxList<ParameterSyntax> parameters,
                 int underscoresCount
-            ) {
+            )
+            {
                 if (underscoresCount <= 1)
                 {
                     return default;
@@ -232,7 +234,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private void CheckParenthesizedLambdaParameters(
             SeparatedSyntaxList<ParameterSyntax> parameterSyntaxList,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             if (parameterSyntaxList.Count > 0)
             {
                 var hasTypes = parameterSyntaxList[0].Type != null;
@@ -261,7 +264,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private UnboundLambda BindAnonymousFunction(
             AnonymousFunctionExpressionSyntax syntax,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             Debug.Assert(syntax != null);
             Debug.Assert(syntax.IsAnonymousFunction());
 

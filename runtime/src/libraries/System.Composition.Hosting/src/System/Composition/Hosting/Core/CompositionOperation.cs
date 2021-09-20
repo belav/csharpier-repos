@@ -31,7 +31,8 @@ namespace System.Composition.Hosting.Core
         public static object Run(
             LifetimeContext outermostLifetimeContext,
             CompositeActivator compositionRootActivator
-        ) {
+        )
+        {
             if (outermostLifetimeContext == null)
             {
                 throw new ArgumentNullException(nameof(outermostLifetimeContext));

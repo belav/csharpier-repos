@@ -89,19 +89,21 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             IEnumerable<string> diagnosticIds,
             DiagnosticProvider fixAllDiagnosticProvider,
             CancellationToken cancellationToken
-        ) : this(
-            new FixAllState(
-                null,
-                document,
-                codeFixProvider,
-                scope,
-                codeActionEquivalenceKey,
-                diagnosticIds,
-                fixAllDiagnosticProvider
-            ),
-            new ProgressTracker(),
-            cancellationToken
-        ) {
+        )
+            : this(
+                new FixAllState(
+                    null,
+                    document,
+                    codeFixProvider,
+                    scope,
+                    codeActionEquivalenceKey,
+                    diagnosticIds,
+                    fixAllDiagnosticProvider
+                ),
+                new ProgressTracker(),
+                cancellationToken
+            )
+        {
             if (document == null)
             {
                 throw new ArgumentNullException(nameof(document));
@@ -129,19 +131,21 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             IEnumerable<string> diagnosticIds,
             DiagnosticProvider fixAllDiagnosticProvider,
             CancellationToken cancellationToken
-        ) : this(
-            new FixAllState(
-                null,
-                project,
-                codeFixProvider,
-                scope,
-                codeActionEquivalenceKey,
-                diagnosticIds,
-                fixAllDiagnosticProvider
-            ),
-            new ProgressTracker(),
-            cancellationToken
-        ) {
+        )
+            : this(
+                new FixAllState(
+                    null,
+                    project,
+                    codeFixProvider,
+                    scope,
+                    codeActionEquivalenceKey,
+                    diagnosticIds,
+                    fixAllDiagnosticProvider
+                ),
+                new ProgressTracker(),
+                cancellationToken
+            )
+        {
             if (project == null)
             {
                 throw new ArgumentNullException(nameof(project));
@@ -152,7 +156,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             FixAllState state,
             IProgressTracker progressTracker,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             State = state;
             this.ProgressTracker = progressTracker;
             this.CancellationToken = cancellationToken;
@@ -184,7 +189,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         private static async Task<ImmutableArray<Diagnostic>> GetFilteredDiagnosticsAsync(
             Task<IEnumerable<Diagnostic>> getDiagnosticsTask,
             ImmutableHashSet<string> diagnosticIds
-        ) {
+        )
+        {
             if (getDiagnosticsTask != null)
             {
                 var diagnostics = await getDiagnosticsTask.ConfigureAwait(false);
@@ -233,7 +239,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         private async Task<ImmutableArray<Diagnostic>> GetProjectDiagnosticsAsync(
             Project project,
             bool includeAllDocumentDiagnostics
-        ) {
+        )
+        {
             Contract.ThrowIfNull(project);
 
             if (this.Project.Language != project.Language)

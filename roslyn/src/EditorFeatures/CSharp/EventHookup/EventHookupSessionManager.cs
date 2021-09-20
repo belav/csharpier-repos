@@ -55,7 +55,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
                 && caretPoint.HasValue
                 && analyzedSession.TrackingSpan.GetSpan(CurrentSession.TextView.TextSnapshot)
                     .Contains(caretPoint.Value)
-            ) {
+            )
+            {
                 // Create a tooltip presenter that stays alive, even when the user types, without tracking the mouse.
                 _toolTipPresenter = this._toolTipService.CreatePresenter(
                     analyzedSession.TextView,
@@ -109,7 +110,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
             ITextBuffer subjectBuffer,
             IAsynchronousOperationListener asyncListener,
             Mutex testSessionHookupMutex
-        ) {
+        )
+        {
             CurrentSession = new EventHookupSession(
                 this,
                 eventHookupCommandHandler,
@@ -183,7 +185,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
             if (
                 snapshotSpan.Snapshot != caretPoint.Value.Snapshot
                 || !snapshotSpan.Contains(caretPoint.Value)
-            ) {
+            )
+            {
                 CancelAndDismissExistingSessions();
             }
         }

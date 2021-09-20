@@ -37,7 +37,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal
             IEnumerable<IPattern> excludePatterns,
             DirectoryInfoBase directoryInfo,
             StringComparison comparison
-        ) {
+        )
+        {
             _root = directoryInfo;
             _files = new List<FilePatternMatch>();
             _comparisonType = comparison;
@@ -194,7 +195,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal
         private bool MatchPatternContexts<TFileInfoBase>(
             TFileInfoBase fileinfo,
             Func<IPatternContext, TFileInfoBase, bool> test
-        ) {
+        )
+        {
             return MatchPatternContexts(
                 fileinfo,
                 (ctx, file) =>
@@ -214,7 +216,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal
         private PatternTestResult MatchPatternContexts<TFileInfoBase>(
             TFileInfoBase fileinfo,
             Func<IPatternContext, TFileInfoBase, PatternTestResult> test
-        ) {
+        )
+        {
             PatternTestResult result = PatternTestResult.Failed;
 
             // If the given file/directory matches any including pattern, continues to next step.

@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             INamedTypeSymbol delegateType,
             out int? selectedItem,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             selectedItem = null;
             var invokeMethod = delegateType.DelegateInvokeMethod;
             if (invokeMethod == null)
@@ -44,7 +45,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                 && !expressionSymbol.ContainingType.OriginalDefinition.Equals(
                     within.OriginalDefinition
                 )
-            ) {
+            )
+            {
                 return null;
             }
 
@@ -67,7 +69,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             IFunctionPointerTypeSymbol functionPointerType,
             out int? selectedItem,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return GetDelegateOrFunctionPointerInvokeItems(
                 invocationExpression,
                 functionPointerType.Signature,
@@ -87,7 +90,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             IDocumentationCommentFormattingService documentationCommentFormattingService,
             out int? selectedItem,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var position = invocationExpression.SpanStart;
             var item = CreateItem(
                 invokeMethod,
@@ -122,7 +126,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             IMethodSymbol invokeMethod,
             SemanticModel semanticModel,
             int position
-        ) {
+        )
+        {
             var displayParts = new List<SymbolDisplayPart>();
             displayParts.AddRange(
                 invokeMethod.ReturnType.ToMinimalDisplayParts(semanticModel, position)
@@ -152,7 +157,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             int position,
             IDocumentationCommentFormattingService formattingService,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var result = new List<SignatureHelpSymbolParameter>();
 
             foreach (var parameter in invokeMethod.Parameters)

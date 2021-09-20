@@ -25,7 +25,8 @@ class T
         int i7,
         int i8,
         string s9
-    ) {
+    )
+    {
         Console.WriteLine(s9);
     }
 }

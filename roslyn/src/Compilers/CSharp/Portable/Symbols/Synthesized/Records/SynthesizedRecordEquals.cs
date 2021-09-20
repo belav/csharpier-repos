@@ -27,20 +27,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             PropertySymbol equalityContract,
             int memberOffset,
             BindingDiagnosticBag diagnostics
-        ) : base(
-            containingType,
-            WellKnownMemberNames.ObjectEquals,
-            hasBody: true,
-            memberOffset,
-            diagnostics
-        ) {
+        )
+            : base(
+                containingType,
+                WellKnownMemberNames.ObjectEquals,
+                hasBody: true,
+                memberOffset,
+                diagnostics
+            )
+        {
             _equalityContract = equalityContract;
         }
 
         protected override DeclarationModifiers MakeDeclarationModifiers(
             DeclarationModifiers allowedModifiers,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             DeclarationModifiers result =
                 DeclarationModifiers.Public
                 | (
@@ -54,7 +57,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         protected override (TypeWithAnnotations ReturnType, ImmutableArray<ParameterSymbol> Parameters, bool IsVararg, ImmutableArray<TypeParameterConstraintClause> DeclaredConstraintsForOverrideOrImplementation) MakeParametersAndBindReturnType(
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var compilation = DeclaringCompilation;
             var location = ReturnTypeLocation;
             return (
@@ -87,7 +91,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void GenerateMethodBody(
             TypeCompilationState compilationState,
             BindingDiagnosticBag diagnostics
-        ) {
+        )
+        {
             var F = new SyntheticBoundNodeFactory(
                 this,
                 ContainingType.GetNonNullSyntaxNode(),
@@ -118,7 +123,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             DeclaringCompilation.GetWellKnownType(WellKnownType.System_Type),
                             TypeCompareKind.AllIgnoreOptions
                         )
-                    ) {
+                    )
+                    {
                         // There is a signature mismatch, an error was reported elsewhere
                         F.CloseMethod(F.ThrowNull());
                         return;
@@ -163,7 +169,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             TypeCompareKind.AllIgnoreOptions
                         )
                         || baseEquals.ReturnType.SpecialType != SpecialType.System_Boolean
-                    ) {
+                    )
+                    {
                         // There was a problem with overriding of base equals, an error was reported elsewhere
                         F.CloseMethod(F.ThrowNull());
                         return;

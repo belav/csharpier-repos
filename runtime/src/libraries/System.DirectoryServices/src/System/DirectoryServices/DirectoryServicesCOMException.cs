@@ -21,10 +21,8 @@ namespace System.DirectoryServices
         public DirectoryServicesCOMException(string? message, Exception? inner)
             : base(message, inner) { }
 
-        protected DirectoryServicesCOMException(
-            SerializationInfo info,
-            StreamingContext context
-        ) : base(info, context) { }
+        protected DirectoryServicesCOMException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
 
         internal DirectoryServicesCOMException(
             string? extendedMessage,
@@ -43,7 +41,8 @@ namespace System.DirectoryServices
         public override void GetObjectData(
             SerializationInfo serializationInfo,
             StreamingContext streamingContext
-        ) {
+        )
+        {
             base.GetObjectData(serializationInfo, streamingContext);
         }
     }

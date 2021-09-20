@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             FindReferencesSearchOptions options,
             FindReferencesCascadeDirection cascadeDirection,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return symbol.AssociatedSymbol != null
               ? Task.FromResult(ImmutableArray.Create((symbol.AssociatedSymbol, cascadeDirection)))
               : SpecializedTasks.EmptyImmutableArray<(ISymbol symbol, FindReferencesCascadeDirection cascadeDirection)>();
@@ -34,7 +35,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             IImmutableSet<Document>? documents,
             FindReferencesSearchOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return FindDocumentsAsync(
                 project,
                 documents,
@@ -50,7 +52,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             SemanticModel semanticModel,
             FindReferencesSearchOptions options,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             return FindReferencesInDocumentUsingSymbolNameAsync(
                 symbol,
                 document,

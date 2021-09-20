@@ -10,7 +10,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         protected override ValidationResult IsValid(
             object value,
             ValidationContext validationContext
-        ) {
+        )
+        {
             var valueString = value as string;
             if (string.IsNullOrEmpty(valueString))
             {

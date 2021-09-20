@@ -69,7 +69,8 @@ namespace System.Web.Http.Controllers
         private static T[] SelectAvailable<T>(
             List<FilterInfo> filters,
             FilterScope overrideFiltersBeforeScope
-        ) {
+        )
+        {
             // Determine which filters are available for this filter type, given the current overrides in place.
             // A filter should be processed if:
             //  1. It implements the appropriate interface for this filter type.

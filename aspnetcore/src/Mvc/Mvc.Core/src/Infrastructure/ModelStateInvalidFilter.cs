@@ -34,7 +34,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             if (
                 !_apiBehaviorOptions.SuppressModelStateInvalidFilter
                 && _apiBehaviorOptions.InvalidModelStateResponseFactory == null
-            ) {
+            )
+            {
                 throw new ArgumentException(
                     Resources.FormatPropertyOfTypeCannotBeNull(
                         typeof(ApiBehaviorOptions),

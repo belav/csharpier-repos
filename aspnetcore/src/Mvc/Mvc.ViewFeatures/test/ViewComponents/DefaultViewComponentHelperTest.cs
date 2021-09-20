@@ -203,7 +203,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
 
             private static ApplicationPartManager GetApplicationPartManager(
                 IEnumerable<TypeInfo> types
-            ) {
+            )
+            {
                 var manager = new ApplicationPartManager();
                 manager.ApplicationParts.Add(new TestApplicationPart(types));
                 manager.FeatureProviders.Add(new TestFeatureProvider());
@@ -215,11 +216,13 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
                 public void PopulateFeature(
                     IEnumerable<ApplicationPart> parts,
                     ViewComponentFeature feature
-                ) {
+                )
+                {
                     foreach (
                         var type in parts.OfType<IApplicationPartTypeProvider>()
                             .SelectMany(p => p.Types)
-                    ) {
+                    )
+                    {
                         feature.ViewComponents.Add(type);
                     }
                 }

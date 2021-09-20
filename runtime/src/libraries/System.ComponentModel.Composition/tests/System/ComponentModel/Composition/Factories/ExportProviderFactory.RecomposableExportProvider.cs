@@ -103,7 +103,8 @@ namespace System.ComponentModel.Composition.Factories
             protected override IEnumerable<Export> GetExportsCore(
                 ImportDefinition importDefinition,
                 AtomicComposition context
-            ) {
+            )
+            {
                 IEnumerable<Export> contextExports;
 
                 if (context == null || !context.TryGetValue(this, out contextExports))

@@ -722,7 +722,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
         [InlineData((TransferFormat)42)] // Unexpected value
         public async Task LongPollingTransportThrowsForInvalidTransferFormat(
             TransferFormat transferFormat
-        ) {
+        )
+        {
             var mockHttpHandler = new Mock<HttpMessageHandler>();
             mockHttpHandler.Protected()
                 .Setup<Task<HttpResponseMessage>>(

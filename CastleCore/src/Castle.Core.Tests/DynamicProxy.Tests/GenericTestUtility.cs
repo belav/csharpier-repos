@@ -24,7 +24,8 @@ namespace Castle.DynamicProxy.Tests
             MethodInfo method,
             Type returnType,
             params Type[] parameterTypes
-        ) {
+        )
+        {
             Assert.IsFalse(method.ContainsGenericParameters);
             Assert.AreEqual(returnType, method.ReturnType);
 

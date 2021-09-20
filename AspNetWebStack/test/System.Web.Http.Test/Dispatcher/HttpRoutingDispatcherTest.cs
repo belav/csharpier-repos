@@ -224,7 +224,8 @@ namespace System.Web.Http.Dispatcher
             HttpConfiguration config,
             string requestUri,
             HttpMessageHandler routeHandler
-        ) {
+        )
+        {
             var route = config.Routes.CreateRoute(
                 "api/{controller}/{id}",
                 defaults: new Dictionary<string, object> { { "id", RouteParameter.Optional } },
@@ -244,7 +245,8 @@ namespace System.Web.Http.Dispatcher
             protected override Task<HttpResponseMessage> SendAsync(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 return Task.FromResult(request.CreateResponse(HttpStatusCode.OK));
             }
         }
@@ -264,7 +266,8 @@ namespace System.Web.Http.Dispatcher
             protected override Task<HttpResponseMessage> SendAsync(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 Request = request;
                 CancellationToken = cancellationToken;
                 return Task.FromResult(_response);

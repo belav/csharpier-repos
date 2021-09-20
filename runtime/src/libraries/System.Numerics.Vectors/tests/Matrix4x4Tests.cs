@@ -268,7 +268,8 @@ namespace System.Numerics.Tests
             float roll,
             Vector3 expectedTranslation,
             Vector3 expectedScales
-        ) {
+        )
+        {
             Quaternion expectedRotation = Quaternion.CreateFromYawPitchRoll(
                 MathHelper.ToRadians(yaw),
                 MathHelper.ToRadians(pitch),
@@ -2206,7 +2207,8 @@ namespace System.Numerics.Tests
             Vector3 placeDirection,
             Vector3 cameraUpVector,
             Matrix4x4 expectedRotation
-        ) {
+        )
+        {
             Vector3 cameraPosition = new Vector3(3.0f, 4.0f, 5.0f);
             Vector3 objectPosition = cameraPosition + placeDirection * 10.0f;
             Matrix4x4 expected = expectedRotation * Matrix4x4.CreateTranslation(objectPosition);
@@ -2440,7 +2442,8 @@ namespace System.Numerics.Tests
             Vector3 placeDirection,
             Vector3 rotateAxis,
             Matrix4x4 expectedRotation
-        ) {
+        )
+        {
             Vector3 cameraPosition = new Vector3(3.0f, 4.0f, 5.0f);
             Vector3 objectPosition = cameraPosition + placeDirection * 10.0f;
             Matrix4x4 expected = expectedRotation * Matrix4x4.CreateTranslation(objectPosition);

@@ -53,7 +53,8 @@ namespace System.Reflection.Emit.Tests
         public void GetILGenerator_NoMethodBody_ThrowsInvalidOperationException(
             TypeAttributes typeAttributes,
             MethodAttributes methodAttributes
-        ) {
+        )
+        {
             TypeBuilder type = Helpers.DynamicType(typeAttributes);
             MethodBuilder method = type.DefineMethod("TestMethod", methodAttributes);
 

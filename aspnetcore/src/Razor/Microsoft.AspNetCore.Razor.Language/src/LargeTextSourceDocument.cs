@@ -25,7 +25,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             int chunkMaxLength,
             Encoding encoding,
             RazorSourceDocumentProperties properties
-        ) {
+        )
+        {
             if (reader == null)
             {
                 throw new ArgumentNullException(nameof(reader));
@@ -76,7 +77,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             char[] destination,
             int destinationIndex,
             int count
-        ) {
+        )
+        {
             if (destination == null)
             {
                 throw new ArgumentNullException(nameof(destination));
@@ -96,7 +98,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 count < 0
                 || count > Length - sourceIndex
                 || count > destination.Length - destinationIndex
-            ) {
+            )
+            {
                 throw new ArgumentOutOfRangeException(nameof(count));
             }
 
@@ -157,7 +160,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             int chunkMaxLength,
             out int length,
             out List<char[]> chunks
-        ) {
+        )
+        {
             length = 0;
             chunks = new List<char[]>();
 

@@ -27,7 +27,8 @@ namespace System.Linq.Expressions
         public static Expression? UnwrapTypeConversion(
             this Expression? expression,
             out Type? convertedType
-        ) {
+        )
+        {
             convertedType = null;
             while (
                 expression is UnaryExpression unaryExpression
@@ -36,7 +37,8 @@ namespace System.Linq.Expressions
                     || unaryExpression.NodeType == ExpressionType.ConvertChecked
                     || unaryExpression.NodeType == ExpressionType.TypeAs
                 )
-            ) {
+            )
+            {
                 expression = unaryExpression.Operand;
                 if (
                     unaryExpression.Type != typeof(object) // Ignore object conversion
@@ -58,7 +60,8 @@ namespace System.Linq.Expressions
                     expression.NodeType == ExpressionType.Convert
                     || expression.NodeType == ExpressionType.ConvertChecked
                 )
-            ) {
+            )
+            {
                 return RemoveConvert(unaryExpression.Operand);
             }
 

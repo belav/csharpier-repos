@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             string assemblyName = null,
             IEnumerable<MetadataReference> references = null,
             Verification verify = Verification.Passes
-        ) {
+        )
+        {
             if (references == null)
             {
                 references = new[] { TestBase.MscorlibRef };
@@ -34,7 +35,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             string source,
             string assemblyName,
             IEnumerable<MetadataReference> references
-        ) {
+        )
+        {
             if (assemblyName == null)
             {
                 assemblyName = TestBase.GetUniqueName();
@@ -58,7 +60,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 MethodData methodData,
                 IReadOnlyDictionary<int, string> markers,
                 bool areLocalsZeroed
-            ) {
+            )
+            {
                 throw new NotImplementedException();
             }
         }

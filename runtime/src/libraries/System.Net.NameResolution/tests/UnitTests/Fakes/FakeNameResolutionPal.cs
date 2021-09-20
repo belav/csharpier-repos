@@ -26,7 +26,8 @@ namespace System.Net
             out string[] aliases,
             out IPAddress[] addresses,
             out int nativeErrorCode
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -40,7 +41,8 @@ namespace System.Net
             IPAddress address,
             out SocketError errorCode,
             out int nativeErrorCode
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 
@@ -49,7 +51,8 @@ namespace System.Net
             bool justAddresses,
             AddressFamily addressFamily,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 

@@ -153,7 +153,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void SortedDictionary_Generic_DictionaryIsProperlySortedAccordingToComparer(
             int setLength
-        ) {
+        )
+        {
             SortedDictionary<TKey, TValue> set =
                 (SortedDictionary<TKey, TValue>)GenericIDictionaryFactory(setLength);
             List<KeyValuePair<TKey, TValue>> expected = set.ToList();

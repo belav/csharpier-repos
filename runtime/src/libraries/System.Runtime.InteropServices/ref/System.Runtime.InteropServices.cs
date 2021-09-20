@@ -205,7 +205,8 @@ namespace System.Runtime.InteropServices
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(System.Runtime.InteropServices.ArrayWithOffset obj)
@@ -227,13 +228,15 @@ namespace System.Runtime.InteropServices
         public static bool operator ==(
             System.Runtime.InteropServices.ArrayWithOffset a,
             System.Runtime.InteropServices.ArrayWithOffset b
-        ) {
+        )
+        {
             throw null;
         }
         public static bool operator !=(
             System.Runtime.InteropServices.ArrayWithOffset a,
             System.Runtime.InteropServices.ArrayWithOffset b
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -327,7 +330,8 @@ namespace System.Runtime.InteropServices
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? o
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(CLong other)
@@ -542,7 +546,8 @@ namespace System.Runtime.InteropServices
             System.Guid iid,
             int dispid,
             System.Delegate d
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -631,7 +636,8 @@ namespace System.Runtime.InteropServices
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? o
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(CULong other)
@@ -851,7 +857,8 @@ namespace System.Runtime.InteropServices
         }
         public static explicit operator System.IntPtr(
             System.Runtime.InteropServices.HandleRef value
-        ) {
+        )
+        {
             throw null;
         }
         public static System.IntPtr ToIntPtr(System.Runtime.InteropServices.HandleRef value)
@@ -1155,13 +1162,15 @@ namespace System.Runtime.InteropServices
             object o,
             System.Type T,
             System.Runtime.InteropServices.CustomQueryInterfaceMode mode
-        ) {
+        )
+        {
             throw null;
         }
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public static System.IntPtr GetComInterfaceForObject<T, TInterface>(
             [System.Diagnostics.CodeAnalysis.DisallowNullAttribute] T o
-        ) {
+        )
+        {
             throw null;
         }
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
@@ -1175,7 +1184,8 @@ namespace System.Runtime.InteropServices
         public static System.Delegate GetDelegateForFunctionPointer(
             System.IntPtr ptr,
             System.Type t
-        ) {
+        )
+        {
             throw null;
         }
         public static TDelegate GetDelegateForFunctionPointer<TDelegate>(System.IntPtr ptr)
@@ -1286,7 +1296,8 @@ namespace System.Runtime.InteropServices
         public static object?[] GetObjectsForNativeVariants(
             System.IntPtr aSrcNativeVariant,
             int cVars
-        ) {
+        )
+        {
             throw null;
         }
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
@@ -1315,7 +1326,8 @@ namespace System.Runtime.InteropServices
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public static string GetTypeInfoName(
             System.Runtime.InteropServices.ComTypes.ITypeInfo typeInfo
-        ) {
+        )
+        {
             throw null;
         }
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
@@ -1394,7 +1406,8 @@ namespace System.Runtime.InteropServices
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
             )]
                 System.Type structureType
-        ) {
+        )
+        {
             throw null;
         }
         public static T? PtrToStructure<
@@ -1414,7 +1427,8 @@ namespace System.Runtime.InteropServices
             System.IntPtr pUnk,
             ref System.Guid iid,
             out System.IntPtr ppv
-        ) {
+        )
+        {
             throw null;
         }
         public static byte ReadByte(System.IntPtr ptr)
@@ -1733,7 +1747,8 @@ namespace System.Runtime.InteropServices
             string libraryName,
             System.Reflection.Assembly assembly,
             System.Runtime.InteropServices.DllImportSearchPath? searchPath
-        ) {
+        )
+        {
             throw null;
         }
         public static void SetDllImportResolver(
@@ -1744,7 +1759,8 @@ namespace System.Runtime.InteropServices
             System.IntPtr handle,
             string name,
             out System.IntPtr address
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryLoad(string libraryPath, out System.IntPtr handle)
@@ -1756,7 +1772,8 @@ namespace System.Runtime.InteropServices
             System.Reflection.Assembly assembly,
             System.Runtime.InteropServices.DllImportSearchPath? searchPath,
             out System.IntPtr handle
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1770,7 +1787,8 @@ namespace System.Runtime.InteropServices
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? o
-        ) {
+        )
+        {
             throw null;
         }
         public bool Equals(NFloat other)
@@ -2229,7 +2247,8 @@ namespace System.Runtime.InteropServices
         public System.IntPtr GetOrCreateComInterfaceForObject(
             object instance,
             CreateComInterfaceFlags flags
-        ) {
+        )
+        {
             throw null;
         }
         protected unsafe abstract ComInterfaceEntry* ComputeVtables(
@@ -2240,7 +2259,8 @@ namespace System.Runtime.InteropServices
         public object GetOrCreateObjectForComInstance(
             System.IntPtr externalComObject,
             CreateObjectFlags flags
-        ) {
+        )
+        {
             throw null;
         }
         protected abstract object? CreateObject(
@@ -2251,7 +2271,8 @@ namespace System.Runtime.InteropServices
             System.IntPtr externalComObject,
             CreateObjectFlags flags,
             object wrapper
-        ) {
+        )
+        {
             throw null;
         }
         public object GetOrRegisterObjectForComInstance(
@@ -2259,7 +2280,8 @@ namespace System.Runtime.InteropServices
             CreateObjectFlags flags,
             object wrapper,
             System.IntPtr inner
-        ) {
+        )
+        {
             throw null;
         }
         protected abstract void ReleaseObjects(System.Collections.IEnumerable objects);
@@ -2269,7 +2291,8 @@ namespace System.Runtime.InteropServices
             out System.IntPtr fpQueryInterface,
             out System.IntPtr fpAddRef,
             out System.IntPtr fpRelease
-        ) {
+        )
+        {
             throw null;
         }
     }

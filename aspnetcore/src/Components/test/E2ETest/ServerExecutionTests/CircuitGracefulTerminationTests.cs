@@ -180,7 +180,8 @@ namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests
             if (
                 (Extensions.Logging.LogLevel.Debug, "CircuitTerminatedGracefully")
                 == (wc.LogLevel, wc.EventId.Name)
-            ) {
+            )
+            {
                 GracefulDisconnectCompletionSource.TrySetResult(null);
             }
             Messages.Add((wc.LogLevel, wc.EventId.Name));

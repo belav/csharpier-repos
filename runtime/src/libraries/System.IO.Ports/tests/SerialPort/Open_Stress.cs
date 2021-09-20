@@ -22,7 +22,8 @@ namespace System.IO.Ports.Tests
                     SerialPort com = new SerialPort(
                         TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                     )
-                ) {
+                )
+                {
                     Debug.WriteLine("Open and Close port while the port is receiving data");
 
                     workerTask.Start();
@@ -55,7 +56,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 byte[] xmitBytes = new byte[16];
 
                 for (int i = 0; i < xmitBytes.Length; ++i)
@@ -80,7 +82,8 @@ namespace System.IO.Ports.Tests
                     SerialPort com = new SerialPort(
                         TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                     )
-                ) {
+                )
+                {
                     Debug.WriteLine(
                         "Open and Close port while the port is recieving data and the RTS pin is changing states"
                     );
@@ -126,7 +129,8 @@ namespace System.IO.Ports.Tests
                     SerialPort com = new SerialPort(
                         TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                     )
-                ) {
+                )
+                {
                     byte[] xmitBytes = new byte[16];
 
                     for (int i = 0; i < xmitBytes.Length; ++i)

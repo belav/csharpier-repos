@@ -24,7 +24,8 @@ namespace Microsoft.EntityFrameworkCore
                 var context = new BooFooContext(
                     new DbContextOptionsBuilder().UseInMemoryDatabase(nameof(BooFooContext)).Options
                 )
-            ) {
+            )
+            {
                 context.Add(new Foo());
                 context.SaveChanges();
             }
@@ -34,7 +35,8 @@ namespace Microsoft.EntityFrameworkCore
                     new DbContextOptionsBuilder().UseInMemoryDatabase(nameof(BooFooContext))
                         .EnableSensitiveDataLogging().Options
                 )
-            ) {
+            )
+            {
                 Assert.Empty(context.Foos.ToList());
             }
         }
@@ -46,7 +48,8 @@ namespace Microsoft.EntityFrameworkCore
                 var context = new BooFooContext(
                     new DbContextOptionsBuilder().UseInMemoryDatabase(nameof(BooFooContext)).Options
                 )
-            ) {
+            )
+            {
                 context.Add(new Foo());
                 context.SaveChanges();
             }
@@ -71,7 +74,8 @@ namespace Microsoft.EntityFrameworkCore
                     new DbContextOptionsBuilder().EnableServiceProviderCaching(false)
                         .UseInMemoryDatabase(nameof(BooFooContext), _databaseRoot).Options
                 )
-            ) {
+            )
+            {
                 context.Add(new Foo());
                 context.SaveChanges();
             }
@@ -82,7 +86,8 @@ namespace Microsoft.EntityFrameworkCore
                         .UseInMemoryDatabase(nameof(BooFooContext), _databaseRoot)
                         .EnableSensitiveDataLogging().Options
                 )
-            ) {
+            )
+            {
                 Assert.Equal(1, context.Foos.Count());
             }
         }
@@ -130,7 +135,8 @@ namespace Microsoft.EntityFrameworkCore
                     new DbContextOptionsBuilder().EnableServiceProviderCaching(false)
                         .UseInMemoryDatabase(nameof(BooFooContext), _databaseRoot).Options
                 )
-            ) {
+            )
+            {
                 context.Add(new Boo());
                 context.SaveChanges();
             }

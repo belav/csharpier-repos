@@ -81,7 +81,8 @@ namespace System.IO.Pipes.Tests
 
         protected (NamedPipeServerStream Server, NamedPipeClientStream Client) GetClientAndServer(
             StreamPair streams
-        ) {
+        )
+        {
             if (streams.Stream1 is NamedPipeServerStream)
             {
                 Assert.IsType<NamedPipeClientStream>(streams.Stream2);
@@ -125,7 +126,8 @@ namespace System.IO.Pipes.Tests
                         true,
                         serverBase.SafePipeHandle
                     )
-                ) {
+                )
+                {
                     if (OperatingSystem.IsWindows())
                     {
                         Assert.Equal(1, ((NamedPipeClientStream)readable).NumberOfServerInstances);
@@ -146,7 +148,8 @@ namespace System.IO.Pipes.Tests
                         true,
                         ((NamedPipeServerStream)readable).SafePipeHandle
                     )
-                ) {
+                )
+                {
                     int receivedLength = server.Read(received1, 0, msg1.Length);
                     Assert.Equal(msg1.Length, receivedLength);
                     Assert.Equal(msg1, received1);
@@ -173,7 +176,8 @@ namespace System.IO.Pipes.Tests
                         true,
                         ((NamedPipeClientStream)readable).SafePipeHandle
                     )
-                ) {
+                )
+                {
                     if (OperatingSystem.IsWindows())
                     {
                         Assert.Equal(1, client.NumberOfServerInstances);
@@ -194,7 +198,8 @@ namespace System.IO.Pipes.Tests
                         true,
                         ((NamedPipeClientStream)writeable).SafePipeHandle
                     )
-                ) {
+                )
+                {
                     Task clientTask = client.WriteAsync(msg1, 0, msg1.Length);
                     int receivedLength = readable.Read(received1, 0, msg1.Length);
                     Assert.Equal(msg1.Length, receivedLength);

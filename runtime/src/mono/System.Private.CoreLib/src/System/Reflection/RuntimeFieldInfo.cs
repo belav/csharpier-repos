@@ -108,7 +108,8 @@ namespace System.Reflection
             BindingFlags invokeAttr,
             Binder? binder,
             CultureInfo? culture
-        ) {
+        )
+        {
             bool domainInitialized = false;
             RuntimeFieldHandle.SetValue(
                 this,
@@ -257,7 +258,8 @@ namespace System.Reflection
             BindingFlags invokeAttr,
             Binder? binder,
             CultureInfo? culture
-        ) {
+        )
+        {
             if (!IsStatic)
             {
                 if (obj == null)

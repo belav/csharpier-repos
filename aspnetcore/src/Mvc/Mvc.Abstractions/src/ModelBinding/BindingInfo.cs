@@ -170,7 +170,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
 
             foreach (
                 var configureEmptyBodyBehavior in attributes.OfType<IConfigureEmptyBodyBehavior>()
-            ) {
+            )
+            {
                 isBindingInfoPresent = true;
                 bindingInfo.EmptyBodyBehavior = configureEmptyBodyBehavior.EmptyBodyBehavior;
                 break;
@@ -188,7 +189,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         public static BindingInfo? GetBindingInfo(
             IEnumerable<object> attributes,
             ModelMetadata modelMetadata
-        ) {
+        )
+        {
             if (attributes == null)
             {
                 throw new ArgumentNullException(nameof(attributes));

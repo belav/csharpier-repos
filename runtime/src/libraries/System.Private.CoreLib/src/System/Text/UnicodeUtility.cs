@@ -28,7 +28,8 @@ namespace System.Text
         public static uint GetScalarFromUtf16SurrogatePair(
             uint highSurrogateCodePoint,
             uint lowSurrogateCodePoint
-        ) {
+        )
+        {
             UnicodeDebug.AssertIsHighSurrogateCodePoint(highSurrogateCodePoint);
             UnicodeDebug.AssertIsLowSurrogateCodePoint(lowSurrogateCodePoint);
 
@@ -62,7 +63,8 @@ namespace System.Text
             uint value,
             out char highSurrogateCodePoint,
             out char lowSurrogateCodePoint
-        ) {
+        )
+        {
             UnicodeDebug.AssertIsValidSupplementaryPlaneScalar(value);
 
             // This calculation comes from the Unicode specification, Table 3-5.

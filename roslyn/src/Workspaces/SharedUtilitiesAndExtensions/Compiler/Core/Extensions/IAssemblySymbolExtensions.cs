@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static bool ContainsNamespaceName(
             this List<IAssemblySymbol> assemblies,
             string namespaceName
-        ) {
+        )
+        {
             // PERF: Expansion of "assemblies.Any(a => a.NamespaceNames.Contains(namespaceName))"
             // to avoid allocating a lambda.
             foreach (var a in assemblies)
@@ -31,7 +32,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this List<IAssemblySymbol> assemblies,
             string typeName,
             bool tryWithAttributeSuffix = false
-        ) {
+        )
+        {
             if (!tryWithAttributeSuffix)
             {
                 // PERF: Expansion of "assemblies.Any(a => a.TypeNames.Contains(typeName))"
@@ -63,7 +65,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static bool IsSameAssemblyOrHasFriendAccessTo(
             this IAssemblySymbol assembly,
             IAssemblySymbol toAssembly
-        ) {
+        )
+        {
             return Equals(assembly, toAssembly)
                 || (assembly.IsInteractive && toAssembly.IsInteractive)
                 || toAssembly.GivesAccessTo(assembly);

@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
         ITypeSymbol ITypeSymbol.WithNullableAnnotation(
             CodeAnalysis.NullableAnnotation nullableAnnotation
-        ) {
+        )
+        {
             if (NullableAnnotation == nullableAnnotation)
             {
                 return this;
@@ -54,7 +55,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
         protected bool Equals(
             TypeSymbol otherType,
             CodeAnalysis.SymbolEqualityComparer equalityComparer
-        ) {
+        )
+        {
             if (otherType is null)
             {
                 return false;
@@ -77,7 +79,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
                     )
                 )
                 && !(UnderlyingTypeSymbol.IsValueType && !UnderlyingTypeSymbol.IsNullableType())
-            ) {
+            )
+            {
                 return false;
             }
 
@@ -139,14 +142,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
         string ITypeSymbol.ToDisplayString(
             CodeAnalysis.NullableFlowState topLevelNullability,
             SymbolDisplayFormat format
-        ) {
+        )
+        {
             return SymbolDisplay.ToDisplayString(this, topLevelNullability, format);
         }
 
         ImmutableArray<SymbolDisplayPart> ITypeSymbol.ToDisplayParts(
             CodeAnalysis.NullableFlowState topLevelNullability,
             SymbolDisplayFormat format
-        ) {
+        )
+        {
             return SymbolDisplay.ToDisplayParts(this, topLevelNullability, format);
         }
 
@@ -155,7 +160,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
             CodeAnalysis.NullableFlowState topLevelNullability,
             int position,
             SymbolDisplayFormat format
-        ) {
+        )
+        {
             return SymbolDisplay.ToMinimalDisplayString(
                 this,
                 topLevelNullability,
@@ -170,7 +176,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
             CodeAnalysis.NullableFlowState topLevelNullability,
             int position,
             SymbolDisplayFormat format
-        ) {
+        )
+        {
             return SymbolDisplay.ToMinimalDisplayParts(
                 this,
                 topLevelNullability,

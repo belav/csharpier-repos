@@ -113,7 +113,8 @@ namespace Microsoft.AspNetCore.Rewrite.Logging
         public static void RewriteMiddlewareRequestContinueResults(
             this ILogger logger,
             string currentUrl
-        ) {
+        )
+        {
             _requestContinueResults(logger, currentUrl, null);
         }
 
@@ -121,14 +122,16 @@ namespace Microsoft.AspNetCore.Rewrite.Logging
             this ILogger logger,
             string location,
             int statusCode
-        ) {
+        )
+        {
             _requestResponseComplete(logger, location, statusCode, null);
         }
 
         public static void RewriteMiddlewareRequestStopRules(
             this ILogger logger,
             string rewrittenUrl
-        ) {
+        )
+        {
             _requestStopRules(logger, rewrittenUrl, null);
         }
 

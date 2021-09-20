@@ -99,7 +99,8 @@ namespace System.Net
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? comparand
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -253,7 +254,8 @@ namespace System.Net
             string host,
             int port,
             string authenticationType
-        ) {
+        )
+        {
             throw null;
         }
         public System.Net.NetworkCredential? GetCredential(System.Uri uriPrefix, string authType)
@@ -295,7 +297,8 @@ namespace System.Net
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? comparand
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -469,7 +472,8 @@ namespace System.Net
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? comparand
-        ) {
+        )
+        {
             throw null;
         }
         public byte[] GetAddressBytes()
@@ -536,14 +540,16 @@ namespace System.Net
             System.ReadOnlySpan<char> ipSpan,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Net.IPAddress? address
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? ipString,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Net.IPAddress? address
-        ) {
+        )
+        {
             throw null;
         }
         public bool TryWriteBytes(System.Span<byte> destination, out int bytesWritten)
@@ -577,7 +583,8 @@ namespace System.Net
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? comparand
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -604,14 +611,16 @@ namespace System.Net
             System.ReadOnlySpan<char> s,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Net.IPEndPoint? result
-        ) {
+        )
+        {
             throw null;
         }
         public static bool TryParse(
             string s,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Net.IPEndPoint? result
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -663,13 +672,15 @@ namespace System.Net
             string? host,
             int port,
             string? authenticationType
-        ) {
+        )
+        {
             throw null;
         }
         public System.Net.NetworkCredential GetCredential(
             System.Uri? uri,
             string? authenticationType
-        ) {
+        )
+        {
             throw null;
         }
     }

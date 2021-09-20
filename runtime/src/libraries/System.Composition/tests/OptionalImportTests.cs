@@ -27,7 +27,8 @@ namespace System.Composition.UnitTests
             public HasOptionalConstructorParameter(
                 [Import(AllowDefault = true)] Missing missing,
                 Supplied supplied
-            ) {
+            )
+            {
                 Missing = missing;
                 Supplied = supplied;
             }

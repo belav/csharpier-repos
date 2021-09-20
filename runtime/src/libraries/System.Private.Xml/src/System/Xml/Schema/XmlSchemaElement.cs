@@ -213,7 +213,8 @@ namespace System.Xml.Schema
             XmlResolver? resolver,
             XmlSchemaSet schemaSet,
             ValidationEventHandler valEventHandler
-        ) {
+        )
+        {
             if (schemaSet != null)
             {
                 XmlReaderSettings readerSettings = new XmlReaderSettings();

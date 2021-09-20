@@ -192,7 +192,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             string content,
             SyntaxKind kind,
             RazorDiagnostic[] errors
-        ) {
+        )
+        {
             return SyntaxFactory.Token(kind, content, errors);
         }
 

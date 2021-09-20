@@ -50,7 +50,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
             int member1,
             string member2,
             string member4
-        ) {
+        )
+        {
             Member1 = member1;
             Member2 = member2;
             Member3 = "This is a nonserialized value";

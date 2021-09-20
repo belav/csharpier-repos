@@ -115,7 +115,8 @@ namespace System.Data.SqlTypes
             int index,
             int count,
             bool fUnicode
-        ) {
+        )
+        {
             m_lcid = lcid;
             ValidateSqlCompareOptions(compareOptions);
             m_flag = compareOptions;
@@ -150,12 +151,8 @@ namespace System.Data.SqlTypes
         /// <summary>
         /// Initializes a new instance of the <see cref='System.Data.SqlTypes.SqlString'/> class.
         /// </summary>
-        public SqlString(
-            int lcid,
-            SqlCompareOptions compareOptions,
-            byte[] data,
-            bool fUnicode
-        ) : this(lcid, compareOptions, data, 0, data.Length, fUnicode) { }
+        public SqlString(int lcid, SqlCompareOptions compareOptions, byte[] data, bool fUnicode)
+            : this(lcid, compareOptions, data, 0, data.Length, fUnicode) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.Data.SqlTypes.SqlString'/> class.
@@ -211,7 +208,8 @@ namespace System.Data.SqlTypes
             SqlCompareOptions compareOptions,
             string? data,
             CompareInfo? cmpInfo
-        ) {
+        )
+        {
             m_lcid = lcid;
             ValidateSqlCompareOptions(compareOptions);
             m_flag = compareOptions;
@@ -708,7 +706,8 @@ namespace System.Data.SqlTypes
 
         public static CompareOptions CompareOptionsFromSqlCompareOptions(
             SqlCompareOptions compareOptions
-        ) {
+        )
+        {
             CompareOptions options = CompareOptions.None;
 
             ValidateSqlCompareOptions(compareOptions);

@@ -19,7 +19,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             System.Linq.Expressions.ExpressionType operation,
             System.Type? context,
             System.Collections.Generic.IEnumerable<Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo>? argumentInfo
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -29,7 +30,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags flags,
             System.Type type,
             System.Type? context
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -39,7 +41,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags flags,
             System.Type? context,
             System.Collections.Generic.IEnumerable<Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo>? argumentInfo
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -50,7 +53,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             string name,
             System.Type? context,
             System.Collections.Generic.IEnumerable<Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo>? argumentInfo
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -60,7 +64,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags flags,
             System.Type? context,
             System.Collections.Generic.IEnumerable<Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo>? argumentInfo
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -70,7 +75,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags flags,
             System.Type? context,
             System.Collections.Generic.IEnumerable<Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo>? argumentInfo
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -82,7 +88,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             System.Collections.Generic.IEnumerable<System.Type>? typeArguments,
             System.Type? context,
             System.Collections.Generic.IEnumerable<Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo>? argumentInfo
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -92,7 +99,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags flags,
             string name,
             System.Type? context
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -102,7 +110,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags flags,
             System.Type? context,
             System.Collections.Generic.IEnumerable<Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo>? argumentInfo
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -113,7 +122,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             string name,
             System.Type? context,
             System.Collections.Generic.IEnumerable<Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo>? argumentInfo
-        ) {
+        )
+        {
             throw null;
         }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -124,7 +134,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             System.Linq.Expressions.ExpressionType operation,
             System.Type? context,
             System.Collections.Generic.IEnumerable<Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo>? argumentInfo
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -137,7 +148,8 @@ namespace Microsoft.CSharp.RuntimeBinder
         public static Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo Create(
             Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags flags,
             string? name
-        ) {
+        )
+        {
             throw null;
         }
     }

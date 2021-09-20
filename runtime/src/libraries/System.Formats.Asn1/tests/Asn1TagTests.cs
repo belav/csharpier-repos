@@ -187,7 +187,8 @@ namespace System.Formats.Asn1.Tests
             int tagValue,
             bool constructed,
             string expectedHex
-        ) {
+        )
+        {
             Asn1Tag tag = new Asn1Tag(tagClass, tagValue, constructed);
             Span<byte> buf = stackalloc byte[10];
 
@@ -233,7 +234,8 @@ namespace System.Formats.Asn1.Tests
             int tagValue,
             bool constructed,
             string inputHex
-        ) {
+        )
+        {
             Asn1Tag expectedTag = new Asn1Tag(tagClass, tagValue, constructed);
             byte[] input = inputHex.HexToByteArray();
             byte[] padded = input;

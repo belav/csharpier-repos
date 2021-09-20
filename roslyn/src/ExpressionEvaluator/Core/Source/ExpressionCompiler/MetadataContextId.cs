@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         internal static MetadataContextId GetContextId(
             Guid moduleVersionId,
             MakeAssemblyReferencesKind kind
-        ) {
+        )
+        {
             return kind switch
             {
                 MakeAssemblyReferencesKind.AllAssemblies => default,

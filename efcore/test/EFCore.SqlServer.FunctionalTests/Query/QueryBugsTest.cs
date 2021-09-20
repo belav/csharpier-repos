@@ -3365,7 +3365,8 @@ WHERE ([t].[Name] <> N'Bar') OR [t].[Name] IS NULL"
                     List<Post11923> posts1,
                     CustomCollection11923 posts2,
                     HashSet<Post11923> posts3
-                ) {
+                )
+                {
                     Posts1 = posts1;
                     Posts2 = posts2;
                     Posts3 = posts3;
@@ -4855,7 +4856,8 @@ WHERE [c].[Name] = N'Leeds'"
         [InlineData(true)]
         public virtual async Task Nested_queries_does_not_cause_concurrency_exception_sync(
             bool tracking
-        ) {
+        )
+        {
             var contextFactory = await InitializeAsync<MyContext15518>(seed: c => c.Seed());
 
             using (var context = contextFactory.CreateContext())
@@ -5477,7 +5479,8 @@ WHERE [t].[Nombre] LIKE '%lla%'"
                 foreach (
                     var property in modelBuilder.Model.GetEntityTypes()
                         .SelectMany(e => e.GetProperties().Where(p => p.ClrType == typeof(string)))
-                ) {
+                )
+                {
                     property.SetIsUnicode(false);
                 }
             }
@@ -6678,7 +6681,8 @@ WHERE (
                     string name,
                     int? customerMembershipId,
                     string customerMembershipName
-                ) {
+                )
+                {
                     Assert.Equal(id, actual.Id);
                     Assert.Equal(name, actual.Name);
                     Assert.Equal(customerMembershipId, actual.CustomerMembershipId);
@@ -7647,7 +7651,8 @@ WHERE [b].[Id] = 1"
                 foreach (
                     var fk in modelBuilder.Model.GetEntityTypes()
                         .SelectMany(e => e.GetForeignKeys())
-                ) {
+                )
+                {
                     fk.DeleteBehavior = DeleteBehavior.NoAction;
                 }
             }
@@ -7907,7 +7912,8 @@ WHERE (([e].[Name] <> N'Foo') OR [e].[Name] IS NULL) AND ([e].[TenantId] = @__ef
         public virtual async Task Select_enumerable_navigation_backed_by_collection(
             bool async,
             bool split
-        ) {
+        )
+        {
             var contextFactory = await InitializeAsync<MyContext21803>(seed: c => c.Seed());
 
             using (var context = contextFactory.CreateContext())
@@ -9713,14 +9719,16 @@ WHERE JSON_VALUE([b].[JObject], '$.Author') = N'Maumar'"
                     MethodInfo method,
                     IReadOnlyList<SqlExpression> arguments,
                     IDiagnosticsLogger<DbLoggerCategory.Query> logger
-                ) {
+                )
+                {
                     if (
                         method.IsGenericMethod
                         && method.DeclaringType == typeof(Newtonsoft.Json.Linq.Extensions)
                         && method.Name == "Value"
                         && arguments.Count == 1
                         && arguments[0] is SqlFunctionExpression sqlFunctionExpression
-                    ) {
+                    )
+                    {
                         return _sqlExpressionFactory.Function(
                             sqlFunctionExpression.Name,
                             sqlFunctionExpression.Arguments,
@@ -9753,7 +9761,8 @@ WHERE JSON_VALUE([b].[JObject], '$.Author') = N'Maumar'"
                     MethodInfo method,
                     IReadOnlyList<SqlExpression> arguments,
                     IDiagnosticsLogger<DbLoggerCategory.Query> logger
-                ) {
+                )
+                {
                     if (Equals(_indexerMethod, method))
                     {
                         return _sqlExpressionFactory.Function(
@@ -10774,7 +10783,8 @@ ORDER BY [t].[Id]"
 
         protected DbContextOptionsBuilder ClearQuerySplittingBehavior(
             DbContextOptionsBuilder optionsBuilder
-        ) {
+        )
+        {
             var extension = optionsBuilder.Options.FindExtension<SqlServerOptionsExtension>();
             if (extension == null)
             {

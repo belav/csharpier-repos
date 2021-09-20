@@ -28,7 +28,8 @@ namespace Microsoft.NET.HostModel.ComHost
             string assemblyVersion,
             string clsidMapPath,
             string comManifestPath
-        ) {
+        )
+        {
             XNamespace ns = "urn:schemas-microsoft-com:asm.v1";
 
             XElement manifest = new XElement(

@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 UserDefinedConversionResult conversionResult,
                 MethodSymbol? conversionMethod,
                 ImmutableArray<Conversion> nestedConversions
-            ) {
+            )
+            {
                 _conversionMethod = conversionMethod;
                 _conversionResult = conversionResult;
                 _nestedConversionsOpt = nestedConversions;
@@ -71,13 +72,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             internal DeconstructionUncommonData(
                 DeconstructMethodInfo deconstructMethodInfoOpt,
                 ImmutableArray<Conversion> nestedConversions
-            ) : base(
-                isExtensionMethod: false,
-                isArrayIndex: false,
-                conversionResult: default,
-                conversionMethod: null,
-                nestedConversions
-            ) {
+            )
+                : base(
+                    isExtensionMethod: false,
+                    isArrayIndex: false,
+                    conversionResult: default,
+                    conversionMethod: null,
+                    nestedConversions
+                )
+            {
                 Debug.Assert(!nestedConversions.IsDefaultOrEmpty);
                 DeconstructMethodInfo = deconstructMethodInfoOpt;
             }
@@ -116,7 +119,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ConversionKind kind,
             MethodSymbol conversionMethod,
             bool isExtensionMethod
-        ) {
+        )
+        {
             this._kind = kind;
             _uncommonData = new UncommonData(
                 isExtensionMethod: isExtensionMethod,
@@ -143,7 +147,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ConversionKind kind,
             DeconstructMethodInfo deconstructMethodInfo,
             ImmutableArray<Conversion> nestedConversions
-        ) {
+        )
+        {
             Debug.Assert(kind == ConversionKind.Deconstruction);
 
             this._kind = kind;
@@ -335,7 +340,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal static Conversion MakeNullableConversion(
             ConversionKind kind,
             Conversion nestedConversion
-        ) {
+        )
+        {
             Debug.Assert(
                 kind == ConversionKind.ImplicitNullable || kind == ConversionKind.ExplicitNullable
             );
@@ -376,7 +382,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal static Conversion MakeConditionalExpression(
             ImmutableArray<Conversion> innerConversions
-        ) {
+        )
+        {
             return new Conversion(ConversionKind.ConditionalExpression, innerConversions);
         }
 
@@ -427,7 +434,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (
                         uncommonData is DeconstructionUncommonData deconstruction
                         && deconstruction.DeconstructMethodInfo.Invocation is BoundCall call
-                    ) {
+                    )
+                    {
                         return call.Method;
                     }
                 }
@@ -1075,7 +1083,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression invocation,
             BoundDeconstructValuePlaceholder inputPlaceholder,
             ImmutableArray<BoundDeconstructValuePlaceholder> outputPlaceholders
-        ) {
+        )
+        {
             (Invocation, InputPlaceholder, OutputPlaceholders) = (
                 invocation,
                 inputPlaceholder,

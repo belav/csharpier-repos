@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis
         public static new async Task<SemanticDocument> CreateAsync(
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             var model = await document.GetSemanticModelAsync(cancellationToken)

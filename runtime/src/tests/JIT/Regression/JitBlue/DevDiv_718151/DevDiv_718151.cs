@@ -36,7 +36,8 @@ class DevDiv_714266
         int a9,
         int a10,
         Struct16bytes s
-    ) {
+    )
+    {
         Console.WriteLine(s.a);
         return s.a;
     }

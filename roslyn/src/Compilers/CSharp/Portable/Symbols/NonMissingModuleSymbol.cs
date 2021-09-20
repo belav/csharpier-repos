@@ -74,7 +74,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override bool GetUnificationUseSiteDiagnostic(
             ref DiagnosticInfo result,
             TypeSymbol dependentType
-        ) {
+        )
+        {
             AssertReferencesInitialized();
 
             var ownerModule = this;
@@ -163,7 +164,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override void SetReferences(
             ModuleReferences<AssemblySymbol> moduleReferences,
             SourceAssemblySymbol originatingSourceAssemblyDebugOnly = null
-        ) {
+        )
+        {
             Debug.Assert(moduleReferences != null);
 
             AssertReferencesUninitialized();
@@ -196,7 +198,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// <remarks></remarks>
         internal sealed override NamedTypeSymbol LookupTopLevelMetadataType(
             ref MetadataTypeName emittedName
-        ) {
+        )
+        {
             NamedTypeSymbol result;
             NamespaceSymbol scope = this.GlobalNamespace.LookupNestedNamespace(
                 emittedName.NamespaceSegments

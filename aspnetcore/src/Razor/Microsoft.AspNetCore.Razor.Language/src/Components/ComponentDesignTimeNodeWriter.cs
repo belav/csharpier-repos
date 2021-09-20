@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public override void WriteMarkupBlock(
             CodeRenderingContext context,
             MarkupBlockIntermediateNode node
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -36,7 +37,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public override void WriteMarkupElement(
             CodeRenderingContext context,
             MarkupElementIntermediateNode node
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -53,7 +55,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public override void WriteUsingDirective(
             CodeRenderingContext context,
             UsingDirectiveIntermediateNode node
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -81,7 +84,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public override void WriteCSharpExpression(
             CodeRenderingContext context,
             CSharpExpressionIntermediateNode node
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -99,7 +103,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             CodeRenderingContext context,
             CSharpExpressionIntermediateNode node,
             string type = null
-        ) {
+        )
+        {
             if (node.Children.Count == 0)
             {
                 return;
@@ -165,7 +170,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public override void WriteCSharpCode(
             CodeRenderingContext context,
             CSharpCodeIntermediateNode node
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -233,7 +239,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public override void WriteHtmlAttribute(
             CodeRenderingContext context,
             HtmlAttributeIntermediateNode node
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -257,7 +264,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public override void WriteHtmlAttributeValue(
             CodeRenderingContext context,
             HtmlAttributeValueIntermediateNode node
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -273,7 +281,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public override void WriteCSharpExpressionAttributeValue(
             CodeRenderingContext context,
             CSharpExpressionAttributeValueIntermediateNode node
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -308,7 +317,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public override void WriteHtmlContent(
             CodeRenderingContext context,
             HtmlContentIntermediateNode node
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -344,7 +354,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         protected override void BeginWriteAttribute(
             CodeRenderingContext context,
             IntermediateNode expression
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -371,7 +382,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public override void WriteComponent(
             CodeRenderingContext context,
             ComponentIntermediateNode node
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -552,7 +564,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         private void WriteTypeInferenceMethodParameterInnards(
             CodeRenderingContext context,
             TypeInferenceMethodParameter parameter
-        ) {
+        )
+        {
             switch (parameter.Source)
             {
                 case ComponentAttributeIntermediateNode attribute:
@@ -592,7 +605,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public override void WriteComponentAttribute(
             CodeRenderingContext context,
             ComponentAttributeIntermediateNode node
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -619,7 +633,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             CodeRenderingContext context,
             ComponentAttributeIntermediateNode node,
             bool canTypeCheck
-        ) {
+        )
+        {
             // We limit component attributes to simple cases. However there is still a lot of complexity
             // to handle here, since there are a few different cases for how an attribute might be structured.
             //
@@ -659,7 +674,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 if (
                     (node.BoundAttribute?.IsDelegateProperty() ?? false)
                     || (node.BoundAttribute?.IsChildContentProperty() ?? false)
-                ) {
+                )
+                {
                     // We always surround the expression with the delegate constructor. This makes type
                     // inference inside lambdas, and method group conversion do the right thing.
                     if (canTypeCheck)
@@ -771,7 +787,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public override void WriteComponentChildContent(
             CodeRenderingContext context,
             ComponentChildContentIntermediateNode node
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -800,7 +817,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         private void WriteComponentChildContentInnards(
             CodeRenderingContext context,
             ComponentChildContentIntermediateNode node
-        ) {
+        )
+        {
             // Writes something like:
             //
             // ((__builder73) => { ... })
@@ -821,7 +839,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public override void WriteComponentTypeArgument(
             CodeRenderingContext context,
             ComponentTypeArgumentIntermediateNode node
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -850,7 +869,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
 
             IReadOnlyList<IntermediateToken> GetCSharpTokens(
                 ComponentTypeArgumentIntermediateNode arg
-            ) {
+            )
+            {
                 // We generally expect all children to be CSharp, this is here just in case.
                 return arg.FindDescendantNodes<IntermediateToken>()
                     .Where(t => t.IsCSharp)
@@ -861,7 +881,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public override void WriteTemplate(
             CodeRenderingContext context,
             TemplateIntermediateNode node
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -947,7 +968,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             CodeRenderingContext context,
             SplatIntermediateNode node,
             bool canTypeCheck
-        ) {
+        )
+        {
             var tokens = GetCSharpTokens(node);
 
             if (canTypeCheck)
@@ -973,7 +995,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public override void WriteReferenceCapture(
             CodeRenderingContext context,
             ReferenceCaptureIntermediateNode node
-        ) {
+        )
+        {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -994,7 +1017,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             CodeRenderingContext context,
             ReferenceCaptureIntermediateNode node,
             bool shouldTypeCheck
-        ) {
+        )
+        {
             // We specialize this code based on whether or not we can type check. When we're calling into
             // a type-inferenced component, we can't do the type check. See the comments in WriteTypeInferenceMethod.
             if (shouldTypeCheck)

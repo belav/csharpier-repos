@@ -46,7 +46,8 @@ namespace System.ConfigurationTests
                       ? UriSectionConfiguration_NetFX
                       : UriSectionConfiguration_Core
                 )
-            ) {
+            )
+            {
                 var config = ConfigurationManager.OpenExeConfiguration(temp.ExePath);
                 UriSection uriSection = (UriSection)config.GetSection("uri");
                 Assert.Equal(UriIdnScope.All, uriSection.Idn.Enabled);
@@ -63,7 +64,8 @@ namespace System.ConfigurationTests
                       ? UriSectionConfiguration_NetFX
                       : UriSectionConfiguration_Core
                 )
-            ) {
+            )
+            {
                 var config = ConfigurationManager.OpenExeConfiguration(temp.ExePath);
                 UriSection uriSection = (UriSection)config.GetSection("uri");
                 Assert.Equal(1, uriSection.SchemeSettings.Count);

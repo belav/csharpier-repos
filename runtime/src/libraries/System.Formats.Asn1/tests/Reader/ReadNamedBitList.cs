@@ -116,7 +116,8 @@ namespace System.Formats.Asn1.Tests.Reader
             Type enumType,
             long enumValue,
             string inputHex
-        ) {
+        )
+        {
             byte[] inputBytes = inputHex.HexToByteArray();
 
             AsnReader reader = new AsnReader(inputBytes, ruleSet);
@@ -149,7 +150,8 @@ namespace System.Formats.Asn1.Tests.Reader
             Type enumType,
             ulong enumValue,
             string inputHex
-        ) {
+        )
+        {
             byte[] inputBytes = inputHex.HexToByteArray();
 
             AsnReader reader = new AsnReader(inputBytes, ruleSet);
@@ -352,7 +354,8 @@ namespace System.Formats.Asn1.Tests.Reader
             string inputHex,
             TagClass tagClass,
             int tagValue
-        ) {
+        )
+        {
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
 

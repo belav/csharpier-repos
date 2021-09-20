@@ -23,12 +23,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
         private readonly Solution _newSolution;
         private readonly Glyph _glyph;
 
-        public TopLevelChange(
-            string name,
-            Glyph glyph,
-            Solution newSolution,
-            PreviewEngine engine
-        ) : base(engine)
+        public TopLevelChange(string name, Glyph glyph, Solution newSolution, PreviewEngine engine)
+            : base(engine)
         {
             _name = name;
             _glyph = glyph;
@@ -79,7 +75,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
             Solution solution,
             IEnumerable<FileChange> fileChanges,
             bool applyingChanges
-        ) {
+        )
+        {
             foreach (var fileChange in fileChanges)
             {
                 var oldTextDocument = fileChange.GetOldDocument();
@@ -141,7 +138,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
                 SourceText updateDocumentTextOpt,
                 __PREVIEWCHANGESITEMCHECKSTATE checkState,
                 TextDocumentKind changedDocumentKind
-            ) {
+            )
+            {
                 Debug.Assert(oldDocument != null || updatedDocumentIdOpt != null);
                 Debug.Assert((updatedDocumentIdOpt != null) == (updateDocumentTextOpt != null));
 
@@ -152,7 +150,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
                     if (
                         applyingChanges
                         && checkState == __PREVIEWCHANGESITEMCHECKSTATE.PCCS_Unchecked
-                    ) {
+                    )
+                    {
                         switch (changedDocumentKind)
                         {
                             case TextDocumentKind.Document:
@@ -181,7 +180,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
                     if (
                         applyingChanges
                         && checkState == __PREVIEWCHANGESITEMCHECKSTATE.PCCS_Unchecked
-                    ) {
+                    )
+                    {
                         var oldText = oldDocument.GetTextAsync().Result.ToString();
 
                         switch (changedDocumentKind)
@@ -238,7 +238,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
         private Solution ApplyReferenceChanges(
             Solution solution,
             IEnumerable<ReferenceChange> referenceChanges
-        ) {
+        )
+        {
             foreach (var referenceChange in referenceChanges)
             {
                 if (referenceChange.IsAddedReference)

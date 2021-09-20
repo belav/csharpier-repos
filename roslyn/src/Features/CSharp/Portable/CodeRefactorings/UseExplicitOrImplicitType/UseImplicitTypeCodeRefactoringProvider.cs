@@ -67,7 +67,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.UseImplicitType
             SyntaxEditor editor,
             TypeSyntax type,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             UseImplicitTypeCodeFixProvider.ReplaceTypeWithVar(editor, type);
             return Task.CompletedTask;
         }

@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
         public static (ImmutableArray<byte> PEImage, ImmutableArray<byte> PdbImage) EmitToArrays(
             this Compilation compilation,
             EmitOptions options
-        ) {
+        )
+        {
             var pdbStream = new MemoryStream();
             var peImage = compilation.EmitToArray(options, pdbStream: pdbStream);
             return (peImage, pdbStream.ToImmutable());
@@ -70,7 +71,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 && pdbImage[1] == 'S'
                 && pdbImage[2] == 'J'
                 && pdbImage[3] == 'B'
-            ) {
+            )
+            {
                 var hr = symBinder.GetReaderFromPdbStream(
                     metadataImportProvider,
                     pdbStreamCom,

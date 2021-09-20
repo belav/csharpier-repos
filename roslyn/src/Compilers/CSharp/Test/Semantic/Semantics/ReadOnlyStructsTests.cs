@@ -1476,7 +1476,8 @@ public struct S1
                 bool returnsByRef,
                 bool returnsByRefReadonly,
                 bool isReadOnly
-            ) {
+            )
+            {
                 Assert.Equal(returnsByRef, property.ReturnsByRef);
                 Assert.Equal(returnsByRefReadonly, property.ReturnsByRefReadonly);
 

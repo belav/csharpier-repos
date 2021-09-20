@@ -21,7 +21,8 @@ namespace System.IO.Packaging.Tests
             string existingFileName,
             [CallerMemberName] string memberName = null,
             [CallerLineNumber] int lineNumber = 0
-        ) {
+        )
+        {
             FileInfo existingDoc = new FileInfo(existingFileName);
             byte[] content = File.ReadAllBytes(existingDoc.FullName);
             FileInfo newFile = new FileInfo(
@@ -35,7 +36,8 @@ namespace System.IO.Packaging.Tests
             string extension,
             [CallerMemberName] string memberName = null,
             [CallerLineNumber] int lineNumber = 0
-        ) {
+        )
+        {
             return new FileInfo($"{GetTestFilePath(null, memberName, lineNumber)}.{extension}");
         }
 
@@ -50,7 +52,8 @@ namespace System.IO.Packaging.Tests
                     FileMode.OpenOrCreate,
                     FileAccess.ReadWrite
                 )
-            ) {
+            )
+            {
                 //first part
                 PackagePart packagePart = package.CreatePart(
                     PackUriHelper.CreatePartUri(new Uri("MyFile1.xml", UriKind.Relative)),
@@ -315,7 +318,8 @@ namespace System.IO.Packaging.Tests
                     FileMode.Create,
                     FileAccess.ReadWrite
                 )
-            ) {
+            )
+            {
                 Assert.Throws<XmlException>(
                     () =>
                     {
@@ -371,7 +375,8 @@ namespace System.IO.Packaging.Tests
                     FileMode.Create,
                     FileAccess.ReadWrite
                 )
-            ) {
+            )
+            {
                 PackagePart packagePartDocument = package.CreatePart(
                     partUriDocument,
                     Mime_MediaTypeNames_Text_Xml
@@ -1126,7 +1131,8 @@ namespace System.IO.Packaging.Tests
                     FileMode.Open,
                     FileAccess.Read
                 )
-            ) {
+            )
+            {
                 PackageRelationship docPackageRelationship = package.GetRelationshipsByType(
                         DocumentRelationshipType
                     )
@@ -1146,7 +1152,8 @@ namespace System.IO.Packaging.Tests
                             FileMode.OpenOrCreate,
                             FileAccess.Read
                         )
-                    ) {
+                    )
+                    {
                         var len = partStream.Length;
                         Assert.Equal(2142, len);
                     }
@@ -1852,7 +1859,8 @@ namespace System.IO.Packaging.Tests
                             FileMode.Open,
                             FileAccess.ReadWrite
                         )
-                    ) {
+                    )
+                    {
                         xdMain.Save(partStream);
                     }
                 }
@@ -2365,7 +2373,8 @@ namespace System.IO.Packaging.Tests
                     FileMode.Create,
                     FileAccess.ReadWrite
                 )
-            ) {
+            )
+            {
                 PackagePart packagePartDocument = package.CreatePart(
                     partUriDocument,
                     Mime_MediaTypeNames_Text_Xml
@@ -2463,7 +2472,8 @@ namespace System.IO.Packaging.Tests
 
             using (
                 Package package = Package.Open(fiGuidName.FullName, FileMode.Open, FileAccess.Read)
-            ) {
+            )
+            {
                 Assert.Throws<IOException>(
                     () =>
                         package.CreatePart(
@@ -2484,7 +2494,8 @@ namespace System.IO.Packaging.Tests
 
             using (
                 Package package = Package.Open(fiGuidName.FullName, FileMode.Open, FileAccess.Read)
-            ) {
+            )
+            {
                 var partCount = package.GetParts().Count();
                 Assert.Equal(10, partCount);
             }
@@ -2874,7 +2885,8 @@ namespace System.IO.Packaging.Tests
                 }
                 using (
                     var partStream = mainDocumentPart.GetStream(FileMode.Open, FileAccess.ReadWrite)
-                ) {
+                )
+                {
                     xdMain.Save(partStream);
                 }
             }
@@ -2987,7 +2999,8 @@ namespace System.IO.Packaging.Tests
                     FileMode.OpenOrCreate,
                     FileAccess.ReadWrite
                 )
-            ) {
+            )
+            {
                 PackageRelationship docPackageRelationship = package.GetRelationshipsByType(
                         DocumentRelationshipType
                     )
@@ -3007,7 +3020,8 @@ namespace System.IO.Packaging.Tests
                     {
                         using (
                             Stream partStream = mainPart.GetStream(FileMode.Create, FileAccess.Read)
-                        ) {
+                        )
+                        {
                             XDocument xd = XDocument.Load(partStream);
                             Assert.Equal(0, xd.DescendantNodes().Count());
                         }
@@ -3023,7 +3037,8 @@ namespace System.IO.Packaging.Tests
                                 FileMode.Create,
                                 FileAccess.ReadWrite
                             )
-                        ) {
+                        )
+                        {
                             XDocument xd = XDocument.Load(partStream);
                             Assert.Equal(0, xd.DescendantNodes().Count());
                         }
@@ -3054,7 +3069,8 @@ namespace System.IO.Packaging.Tests
                     FileMode.OpenOrCreate,
                     FileAccess.ReadWrite
                 )
-            ) {
+            )
+            {
                 PackageRelationship docPackageRelationship = package.GetRelationshipsByType(
                         DocumentRelationshipType
                     )
@@ -3071,7 +3087,8 @@ namespace System.IO.Packaging.Tests
 
                 using (
                     Stream partStream = mainPart.GetStream(FileMode.OpenOrCreate, FileAccess.Read)
-                ) {
+                )
+                {
                     XDocument xd = XDocument.Load(partStream);
                     Assert.Equal(13, xd.DescendantNodes().Count());
                 }
@@ -3101,7 +3118,8 @@ namespace System.IO.Packaging.Tests
                     FileMode.OpenOrCreate,
                     FileAccess.ReadWrite
                 )
-            ) {
+            )
+            {
                 PackageRelationship docPackageRelationship = package.GetRelationshipsByType(
                         DocumentRelationshipType
                     )
@@ -3121,7 +3139,8 @@ namespace System.IO.Packaging.Tests
                         FileMode.OpenOrCreate,
                         FileAccess.ReadWrite
                     )
-                ) {
+                )
+                {
                     XDocument xd = XDocument.Load(partStream);
                     Assert.Equal(13, xd.DescendantNodes().Count());
                 }
@@ -3151,7 +3170,8 @@ namespace System.IO.Packaging.Tests
                     FileMode.OpenOrCreate,
                     FileAccess.ReadWrite
                 )
-            ) {
+            )
+            {
                 PackageRelationship docPackageRelationship = package.GetRelationshipsByType(
                         DocumentRelationshipType
                     )
@@ -3195,7 +3215,8 @@ namespace System.IO.Packaging.Tests
                     FileMode.OpenOrCreate,
                     FileAccess.ReadWrite
                 )
-            ) {
+            )
+            {
                 PackageRelationship docPackageRelationship = package.GetRelationshipsByType(
                         DocumentRelationshipType
                     )
@@ -3280,7 +3301,8 @@ namespace System.IO.Packaging.Tests
                     FileMode.Open,
                     FileAccess.ReadWrite
                 )
-            ) {
+            )
+            {
                 PackageRelationship docPackageRelationship = package.GetRelationshipsByType(
                         DocumentRelationshipType
                     )
@@ -3296,7 +3318,8 @@ namespace System.IO.Packaging.Tests
 
                 using (
                     Stream partStream = mainPart.GetStream(FileMode.OpenOrCreate, FileAccess.Read)
-                ) {
+                )
+                {
                     XDocument xd = XDocument.Load(partStream);
                     Assert.Equal(13, xd.DescendantNodes().Count());
                 }
@@ -3317,7 +3340,8 @@ namespace System.IO.Packaging.Tests
                                 FileMode.OpenOrCreate,
                                 FileAccess.Read
                             )
-                        ) {
+                        )
+                        {
                             XDocument xd = XDocument.Load(partStream);
                             Assert.Equal(0, xd.DescendantNodes().Count());
                         }
@@ -3341,7 +3365,8 @@ namespace System.IO.Packaging.Tests
                     FileMode.Open,
                     FileAccess.ReadWrite
                 )
-            ) {
+            )
+            {
                 PackageRelationship docPackageRelationship = package.GetRelationshipsByType(
                         DocumentRelationshipType
                     )
@@ -3411,7 +3436,8 @@ namespace System.IO.Packaging.Tests
                     FileMode.Open,
                     FileAccess.Read
                 )
-            ) {
+            )
+            {
                 PackageRelationship docPackageRelationship = package.GetRelationshipsByType(
                         DocumentRelationshipType
                     )
@@ -3427,7 +3453,8 @@ namespace System.IO.Packaging.Tests
 
                 using (
                     Stream partStream = mainPart.GetStream(FileMode.OpenOrCreate, FileAccess.Read)
-                ) {
+                )
+                {
                     XDocument xd = XDocument.Load(partStream);
                     Assert.Equal(13, xd.DescendantNodes().Count());
                 }
@@ -3479,7 +3506,8 @@ namespace System.IO.Packaging.Tests
                     FileMode.Open,
                     FileAccess.Read
                 )
-            ) {
+            )
+            {
                 PackageRelationship docPackageRelationship = package.GetRelationshipsByType(
                         DocumentRelationshipType
                     )
@@ -3541,7 +3569,8 @@ namespace System.IO.Packaging.Tests
                     FileMode.Open,
                     FileAccess.Read
                 )
-            ) {
+            )
+            {
                 PackageRelationship docPackageRelationship = package.GetRelationshipsByType(
                         DocumentRelationshipType
                     )
@@ -3585,7 +3614,8 @@ namespace System.IO.Packaging.Tests
                     FileMode.Open,
                     FileAccess.Read
                 )
-            ) {
+            )
+            {
                 PackageRelationship docPackageRelationship = package.GetRelationshipsByType(
                         DocumentRelationshipType
                     )
@@ -3633,7 +3663,8 @@ namespace System.IO.Packaging.Tests
                     FileMode.Open,
                     FileAccess.Read
                 )
-            ) {
+            )
+            {
                 PackageRelationship docPackageRelationship = package.GetRelationshipsByType(
                         DocumentRelationshipType
                     )
@@ -3677,7 +3708,8 @@ namespace System.IO.Packaging.Tests
                     FileMode.Open,
                     FileAccess.Read
                 )
-            ) {
+            )
+            {
                 PackageRelationship docPackageRelationship = package.GetRelationshipsByType(
                         DocumentRelationshipType
                     )
@@ -3711,7 +3743,8 @@ namespace System.IO.Packaging.Tests
                     FileMode.CreateNew,
                     FileAccess.ReadWrite
                 )
-            ) {
+            )
+            {
                 Uri uri = PackUriHelper.CreatePartUri(new Uri("dummy.xml", UriKind.Relative));
 
                 // Add a part to the Package
@@ -3737,7 +3770,8 @@ namespace System.IO.Packaging.Tests
                         FileMode.OpenOrCreate,
                         FileAccess.ReadWrite
                     )
-                ) {
+                )
+                {
                     XDocument xd = XDocument.Load(partStream);
                     Assert.Equal(2, xd.DescendantNodes().Count());
                 }
@@ -3755,7 +3789,8 @@ namespace System.IO.Packaging.Tests
                     FileMode.CreateNew,
                     FileAccess.ReadWrite
                 )
-            ) {
+            )
+            {
                 Uri uri = PackUriHelper.CreatePartUri(new Uri("dummy.xml", UriKind.Relative));
 
                 // Add a part to the Package
@@ -3796,7 +3831,8 @@ namespace System.IO.Packaging.Tests
                     FileMode.CreateNew,
                     FileAccess.ReadWrite
                 )
-            ) {
+            )
+            {
                 Uri uri = PackUriHelper.CreatePartUri(new Uri("dummy.xml", UriKind.Relative));
 
                 // Add a part to the Package
@@ -3836,7 +3872,8 @@ namespace System.IO.Packaging.Tests
                     FileMode.CreateNew,
                     FileAccess.ReadWrite
                 )
-            ) {
+            )
+            {
                 Uri uri = PackUriHelper.CreatePartUri(new Uri("dummy.xml", UriKind.Relative));
 
                 // Add a part to the Package
@@ -3862,7 +3899,8 @@ namespace System.IO.Packaging.Tests
                         FileMode.Open,
                         FileAccess.ReadWrite
                     )
-                ) {
+                )
+                {
                     XDocument xd = XDocument.Load(partStream);
                     Assert.Equal(2, xd.DescendantNodes().Count());
                 }
@@ -3880,7 +3918,8 @@ namespace System.IO.Packaging.Tests
                     FileMode.CreateNew,
                     FileAccess.ReadWrite
                 )
-            ) {
+            )
+            {
                 Uri uri = PackUriHelper.CreatePartUri(new Uri("dummy.xml", UriKind.Relative));
 
                 // Add a part to the Package
@@ -3909,7 +3948,8 @@ namespace System.IO.Packaging.Tests
                                 FileMode.Create,
                                 FileAccess.Read
                             )
-                        ) {
+                        )
+                        {
                             XDocument xd = XDocument.Load(partStream);
                             Assert.Equal(0, xd.DescendantNodes().Count());
                         }
@@ -3929,7 +3969,8 @@ namespace System.IO.Packaging.Tests
                     FileMode.CreateNew,
                     FileAccess.ReadWrite
                 )
-            ) {
+            )
+            {
                 Uri uri = PackUriHelper.CreatePartUri(new Uri("dummy.xml", UriKind.Relative));
 
                 // Add a part to the Package
@@ -3955,7 +3996,8 @@ namespace System.IO.Packaging.Tests
                         FileMode.Open,
                         FileAccess.ReadWrite
                     )
-                ) {
+                )
+                {
                     XDocument xd = XDocument.Load(partStream);
                     Assert.Equal(2, xd.DescendantNodes().Count());
                 }
@@ -4025,7 +4067,8 @@ namespace System.IO.Packaging.Tests
                     FileMode.Create,
                     FileAccess.ReadWrite
                 )
-            ) {
+            )
+            {
                 Uri uri = PackUriHelper.CreatePartUri(new Uri("dummy.xml", UriKind.Relative));
 
                 // Add a part to the Package
@@ -4051,7 +4094,8 @@ namespace System.IO.Packaging.Tests
                         FileMode.OpenOrCreate,
                         FileAccess.Read | FileAccess.Write
                     )
-                ) {
+                )
+                {
                     XDocument xd = XDocument.Load(partStream);
                     Assert.Equal(2, xd.DescendantNodes().Count());
                 }
@@ -4069,7 +4113,8 @@ namespace System.IO.Packaging.Tests
                     FileMode.Create,
                     FileAccess.ReadWrite
                 )
-            ) {
+            )
+            {
                 Uri uri = PackUriHelper.CreatePartUri(new Uri("dummy.xml", UriKind.Relative));
 
                 // Add a part to the Package
@@ -4095,7 +4140,8 @@ namespace System.IO.Packaging.Tests
                         FileMode.OpenOrCreate,
                         FileAccess.ReadWrite
                     )
-                ) {
+                )
+                {
                     XDocument xd = XDocument.Load(partStream);
                     Assert.Equal(2, xd.DescendantNodes().Count());
                 }
@@ -4113,7 +4159,8 @@ namespace System.IO.Packaging.Tests
                     FileMode.Create,
                     FileAccess.ReadWrite
                 )
-            ) {
+            )
+            {
                 Uri uri = PackUriHelper.CreatePartUri(new Uri("dummy.xml", UriKind.Relative));
 
                 // Add a part to the Package
@@ -4139,7 +4186,8 @@ namespace System.IO.Packaging.Tests
                         FileMode.OpenOrCreate,
                         FileAccess.Read
                     )
-                ) {
+                )
+                {
                     XDocument xd = XDocument.Load(partStream);
                     Assert.Equal(2, xd.DescendantNodes().Count());
                 }
@@ -4157,7 +4205,8 @@ namespace System.IO.Packaging.Tests
                     FileMode.Create,
                     FileAccess.ReadWrite
                 )
-            ) {
+            )
+            {
                 Uri uri = PackUriHelper.CreatePartUri(new Uri("dummy.xml", UriKind.Relative));
 
                 // Add a part to the Package
@@ -4183,7 +4232,8 @@ namespace System.IO.Packaging.Tests
                         FileMode.Open,
                         FileAccess.Read | FileAccess.Write
                     )
-                ) {
+                )
+                {
                     XDocument xd = XDocument.Load(partStream);
                     Assert.Equal(2, xd.DescendantNodes().Count());
                 }
@@ -4201,7 +4251,8 @@ namespace System.IO.Packaging.Tests
                     FileMode.Create,
                     FileAccess.ReadWrite
                 )
-            ) {
+            )
+            {
                 Uri uri = PackUriHelper.CreatePartUri(new Uri("dummy.xml", UriKind.Relative));
 
                 // Add a part to the Package
@@ -4227,7 +4278,8 @@ namespace System.IO.Packaging.Tests
                         FileMode.Open,
                         FileAccess.ReadWrite
                     )
-                ) {
+                )
+                {
                     XDocument xd = XDocument.Load(partStream);
                     Assert.Equal(2, xd.DescendantNodes().Count());
                 }
@@ -4245,7 +4297,8 @@ namespace System.IO.Packaging.Tests
                     FileMode.Create,
                     FileAccess.ReadWrite
                 )
-            ) {
+            )
+            {
                 Uri uri = PackUriHelper.CreatePartUri(new Uri("dummy.xml", UriKind.Relative));
 
                 // Add a part to the Package
@@ -4260,7 +4313,8 @@ namespace System.IO.Packaging.Tests
                         FileMode.Open,
                         FileAccess.Write
                     )
-                ) {
+                )
+                {
                     AssertExtensions.Throws<ArgumentException>(
                         null,
                         () =>
@@ -4286,7 +4340,8 @@ namespace System.IO.Packaging.Tests
                     FileMode.Create,
                     FileAccess.ReadWrite
                 )
-            ) {
+            )
+            {
                 Uri uri = PackUriHelper.CreatePartUri(new Uri("dummy.xml", UriKind.Relative));
 
                 // Add a part to the Package
@@ -4320,7 +4375,8 @@ namespace System.IO.Packaging.Tests
                     FileMode.Create,
                     FileAccess.ReadWrite
                 )
-            ) {
+            )
+            {
                 Uri uri = PackUriHelper.CreatePartUri(new Uri("dummy.xml", UriKind.Relative));
 
                 // Add a part to the Package
@@ -4335,7 +4391,8 @@ namespace System.IO.Packaging.Tests
                         FileMode.Open,
                         FileAccess.Read
                     )
-                ) {
+                )
+                {
                     // just created the part, so nothing in it.
                     // but can't write, as expected.
                     Assert.Equal(0, partStream.Length);
@@ -4354,7 +4411,8 @@ namespace System.IO.Packaging.Tests
                     FileMode.Create,
                     FileAccess.ReadWrite
                 )
-            ) {
+            )
+            {
                 Uri uri = PackUriHelper.CreatePartUri(new Uri("dummy.xml", UriKind.Relative));
 
                 // Add a part to the Package
@@ -4394,7 +4452,8 @@ namespace System.IO.Packaging.Tests
                     FileMode.Create,
                     FileAccess.ReadWrite
                 )
-            ) {
+            )
+            {
                 Uri uri = PackUriHelper.CreatePartUri(new Uri("dummy.xml", UriKind.Relative));
 
                 // Add a part to the Package
@@ -4472,7 +4531,8 @@ namespace System.IO.Packaging.Tests
                     FileMode.OpenOrCreate,
                     FileAccess.ReadWrite
                 )
-            ) {
+            )
+            {
                 package.PackageProperties.Subject = "Subject";
                 package.PackageProperties.Creator = "Creator";
 
@@ -4581,7 +4641,8 @@ namespace System.IO.Packaging.Tests
                                     part.GetStream(),
                                     Encoding.ASCII
                                 )
-                            ) {
+                            )
+                            {
                                 // just write the filename as content
                                 writer.Write(fileName);
                             }
@@ -4600,7 +4661,8 @@ namespace System.IO.Packaging.Tests
                             using (Stream partStream = part.GetStream())
                             using (
                                 StreamReader reader = new StreamReader(partStream, Encoding.ASCII)
-                            ) {
+                            )
+                            {
                                 Assert.Equal(fileName.Length, partStream.Length);
                                 Assert.Equal(fileName, reader.ReadToEnd());
                             }
@@ -4630,7 +4692,8 @@ namespace System.IO.Packaging.Tests
                                 part.GetStream(FileMode.Create),
                                 Encoding.ASCII
                             )
-                        ) {
+                        )
+                        {
                             // just write the filename as content
                             writer.Write(fileName);
                         }
@@ -4743,7 +4806,8 @@ namespace System.IO.Packaging.Tests
                         FileMode.Create,
                         PlatformDetection.IsNetFramework ? FileAccess.ReadWrite : FileAccess.Write
                     )
-                ) {
+                )
+                {
                     PackagePart part = package.CreatePart(
                         partUri,
                         System.Net.Mime.MediaTypeNames.Application.Octet,
@@ -4975,7 +5039,8 @@ namespace System.IO.Packaging.Tests
             this StringBuilder sb,
             string format,
             params object[] args
-        ) {
+        )
+        {
             for (int i = 0; i < args.Length; i++)
             {
                 if (args[i] == null)
@@ -4994,7 +5059,8 @@ namespace System.IO.Packaging.Tests
             Uri partUri,
             string contentType,
             CompressionOption compressionOption
-        ) {
+        )
+        {
             throw new NotImplementedException();
         }
 

@@ -51,7 +51,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                             && conversion.Operand.Type != null
                             && conversion.Operand.Type.IsValueType
                             && conversion.OperatorMethod == null
-                        ) {
+                        )
+                        {
                             Report(operationContext, conversion.Syntax);
                         }
                     }
@@ -65,7 +66,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                             invocation.Instance != null
                             && invocation.Instance.Type.IsValueType
                             && invocation.TargetMethod.ContainingType.IsReferenceType
-                        ) {
+                        )
+                        {
                             Report(operationContext, invocation.Instance.Syntax);
                         }
                     }

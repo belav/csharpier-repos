@@ -482,7 +482,8 @@ namespace System.Globalization
         private int GetWeekOfYearOfMinSupportedDateTime(
             int firstDayOfWeek,
             int minimumDaysInFirstWeek
-        ) {
+        )
+        {
             int dayOfYear = GetDayOfYear(MinSupportedDateTime) - 1; // Make the day of year to be 0-based, so that 1/1 is day 0.
             int dayOfWeekOfFirstOfYear = (int)GetDayOfWeek(MinSupportedDateTime) - dayOfYear % 7;
 
@@ -524,7 +525,8 @@ namespace System.Globalization
             DateTime time,
             CalendarWeekRule rule,
             DayOfWeek firstDayOfWeek
-        ) {
+        )
+        {
             if (firstDayOfWeek < DayOfWeek.Sunday || firstDayOfWeek > DayOfWeek.Saturday)
             {
                 throw new ArgumentOutOfRangeException(
@@ -651,7 +653,8 @@ namespace System.Globalization
             int minute,
             int second,
             int millisecond
-        ) {
+        )
+        {
             return ToDateTime(year, month, day, hour, minute, second, millisecond, CurrentEra);
         }
 
@@ -680,7 +683,8 @@ namespace System.Globalization
             int millisecond,
             int era,
             out DateTime result
-        ) {
+        )
+        {
             result = DateTime.MinValue;
             try
             {

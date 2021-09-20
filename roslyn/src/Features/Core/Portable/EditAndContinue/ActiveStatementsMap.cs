@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         public ActiveStatementsMap(
             IReadOnlyDictionary<DocumentId, ImmutableArray<ActiveStatement>> documentMap,
             IReadOnlyDictionary<ManagedInstructionId, ActiveStatement> instructionMap
-        ) {
+        )
+        {
             DocumentMap = documentMap;
             InstructionMap = instructionMap;
         }

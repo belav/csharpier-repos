@@ -14,7 +14,8 @@ namespace System.Net.Security
     {
         public static SslClientAuthenticationOptions ShallowClone(
             this SslClientAuthenticationOptions options
-        ) {
+        )
+        {
             var clone = new SslClientAuthenticationOptions()
             {
                 AllowRenegotiation = options.AllowRenegotiation,
@@ -38,7 +39,8 @@ namespace System.Net.Security
                 PropertyInfo pi in typeof(SslClientAuthenticationOptions).GetProperties(
                     BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly
                 )
-            ) {
+            )
+            {
                 object? origValue = pi.GetValue(options);
                 object? cloneValue = pi.GetValue(clone);
 

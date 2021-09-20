@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextStructureNavigation
                 ITextStructureNavigator naturalLanguageNavigator,
                 AbstractTextStructureNavigatorProvider provider,
                 IWaitIndicator waitIndicator
-            ) {
+            )
+            {
                 Contract.ThrowIfNull(subjectBuffer);
                 Contract.ThrowIfNull(naturalLanguageNavigator);
                 Contract.ThrowIfNull(provider);
@@ -51,7 +52,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextStructureNavigation
                         FunctionId.TextStructureNavigator_GetExtentOfWord,
                         CancellationToken.None
                     )
-                ) {
+                )
+                {
                     var result = default(TextExtent);
                     _waitIndicator.Wait(
                         title: EditorFeaturesResources.Text_Navigation,
@@ -73,7 +75,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextStructureNavigation
             private TextExtent GetExtentOfWordWorker(
                 SnapshotPoint position,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var textLength = position.Snapshot.Length;
                 if (textLength == 0)
                 {
@@ -107,7 +110,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextStructureNavigation
                         if (
                             trivia.Span.Start == position
                             && _provider.ShouldSelectEntireTriviaFromStart(trivia)
-                        ) {
+                        )
+                        {
                             // We want to select the entire comment
                             return new TextExtent(
                                 trivia.Span.ToSnapshotSpan(position.Snapshot),
@@ -128,7 +132,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextStructureNavigation
                         token.Span.Length > 0
                         && token.Span.Contains(position)
                         && !_provider.IsWithinNaturalLanguage(token, position)
-                    ) {
+                    )
+                    {
                         // Cursor position is in our domain - handle it.
                         return _provider.GetExtentOfWordFromToken(token, position);
                     }
@@ -145,7 +150,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextStructureNavigation
                         FunctionId.TextStructureNavigator_GetSpanOfEnclosing,
                         CancellationToken.None
                     )
-                ) {
+                )
+                {
                     var span = default(SnapshotSpan);
                     var result = _waitIndicator.Wait(
                         title: EditorFeaturesResources.Text_Navigation,
@@ -167,7 +173,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextStructureNavigation
             private static SnapshotSpan GetSpanOfEnclosingWorker(
                 SnapshotSpan activeSpan,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // Find node that covers the entire span.
                 var node = FindLeafNode(activeSpan, cancellationToken);
                 if (node != null && activeSpan.Length == node.Value.Span.Length)
@@ -188,7 +195,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextStructureNavigation
                         FunctionId.TextStructureNavigator_GetSpanOfFirstChild,
                         CancellationToken.None
                     )
-                ) {
+                )
+                {
                     var span = default(SnapshotSpan);
                     var result = _waitIndicator.Wait(
                         title: EditorFeaturesResources.Text_Navigation,
@@ -210,7 +218,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextStructureNavigation
             private static SnapshotSpan GetSpanOfFirstChildWorker(
                 SnapshotSpan activeSpan,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // Find node that covers the entire span.
                 var node = FindLeafNode(activeSpan, cancellationToken);
                 if (node != null)
@@ -235,7 +244,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextStructureNavigation
                         FunctionId.TextStructureNavigator_GetSpanOfNextSibling,
                         CancellationToken.None
                     )
-                ) {
+                )
+                {
                     var span = default(SnapshotSpan);
                     var result = _waitIndicator.Wait(
                         title: EditorFeaturesResources.Text_Navigation,
@@ -257,7 +267,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextStructureNavigation
             private static SnapshotSpan GetSpanOfNextSiblingWorker(
                 SnapshotSpan activeSpan,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // Find node that covers the entire span.
                 var node = FindLeafNode(activeSpan, cancellationToken);
                 if (node != null)
@@ -297,7 +308,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextStructureNavigation
                         FunctionId.TextStructureNavigator_GetSpanOfPreviousSibling,
                         CancellationToken.None
                     )
-                ) {
+                )
+                {
                     var span = default(SnapshotSpan);
                     var result = _waitIndicator.Wait(
                         title: EditorFeaturesResources.Text_Navigation,
@@ -319,7 +331,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextStructureNavigation
             private static SnapshotSpan GetSpanOfPreviousSiblingWorker(
                 SnapshotSpan activeSpan,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // Find node that covers the entire span.
                 var node = FindLeafNode(activeSpan, cancellationToken);
                 if (node != null)
@@ -370,7 +383,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextStructureNavigation
             private static SyntaxNodeOrToken? FindLeafNode(
                 SnapshotSpan span,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 if (!TryFindLeafToken(span.Start, out var token, cancellationToken))
                 {
                     return null;
@@ -392,7 +406,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextStructureNavigation
                 SnapshotPoint point,
                 out SyntaxToken token,
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var syntaxTree = GetDocument(point).GetSyntaxTreeSynchronously(cancellationToken);
                 if (syntaxTree != null)
                 {

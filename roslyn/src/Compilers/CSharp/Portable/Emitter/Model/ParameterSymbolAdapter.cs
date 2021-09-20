@@ -199,7 +199,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (
                 AdaptedParameterSymbol.IsDefinition
                 && AdaptedParameterSymbol.ContainingModule == moduleBeingBuilt.SourceModule
-            ) {
+            )
+            {
                 return this;
             }
 

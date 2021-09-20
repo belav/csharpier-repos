@@ -177,7 +177,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             Action<XmlWriter> action,
             WriteState entryState,
             WriteState exitState
-        ) {
+        )
+        {
             try
             {
                 if (IsInChild)
@@ -317,7 +318,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             Action<XmlWriter> action,
             bool worksIfClosed = false,
             WriteState? resetTo = null
-        ) {
+        )
+        {
             try
             {
                 if (!worksIfClosed)

@@ -47,7 +47,8 @@ public abstract class CXmlBase
         string strLocalName,
         XmlNodeType NodeType,
         string strNamespace
-    ) {
+    )
+    {
         pstrPrefix = strPrefix;
         pstrName = strName;
         pstrLocalName = strLocalName;
@@ -55,12 +56,8 @@ public abstract class CXmlBase
         pstrNamespace = strNamespace;
     }
 
-    public CXmlBase(
-        string strPrefix,
-        string strName,
-        XmlNodeType NodeType,
-        string strNamespace
-    ) : this(strPrefix, strName, strName, NodeType, strNamespace) { }
+    public CXmlBase(string strPrefix, string strName, XmlNodeType NodeType, string strNamespace)
+        : this(strPrefix, strName, strName, NodeType, strNamespace) { }
 
     public CXmlBase(string strPrefix, string strName, XmlNodeType NodeType)
         : this(strPrefix, strName, strName, NodeType, "") { }
@@ -185,7 +182,8 @@ public class CXmlAttribute : CXmlBase
             rXmlReader.LocalName,
             rXmlReader.NodeType,
             rXmlReader.NamespaceURI
-        ) {
+        )
+    {
         if (rXmlReader.IsDefault)
             peFlags |= NodeFlags.DefaultAttribute;
     }
@@ -305,7 +303,8 @@ public class CXmlNode : CXmlBase
             rXmlReader.LocalName,
             rXmlReader.NodeType,
             rXmlReader.NamespaceURI
-        ) {
+        )
+    {
         peFlags |= CXmlCache._eDefaultFlags;
 
         if (NodeType == XmlNodeType.Whitespace || NodeType == XmlNodeType.SignificantWhitespace)
@@ -350,7 +349,8 @@ public class CXmlNode : CXmlBase
                     rAttribute = _rFirstAttribute;
                     rAttribute != null;
                     rAttribute = rAttribute.NextAttribute
-                ) {
+                )
+                {
                     if (rAttribute.Name == "PUBLIC")
                     {
                         DocTypePublic = rAttribute.Value;
@@ -407,7 +407,8 @@ public class CXmlNode : CXmlBase
                     rAttribute = _rFirstAttribute;
                     rAttribute != null;
                     rAttribute = rAttribute.NextAttribute
-                ) {
+                )
+                {
                     rAttribute.Write(rXmlWriter);
                 }
 
@@ -488,7 +489,8 @@ public class CXmlNode : CXmlBase
                     rAttribute = _rFirstAttribute;
                     rAttribute != null;
                     rAttribute = rAttribute.NextAttribute
-                ) {
+                )
+                {
                     rAttribute.WriteXml(rTW);
                 }
 
@@ -586,7 +588,8 @@ public class CXmlNode : CXmlBase
                 rChild = (CXmlNode)this.prFirstChildNode;
                 rChild != null;
                 rChild = (CXmlNode)rChild.prNextNode
-            ) {
+            )
+            {
                 strValue = strValue + rChild.Value;
             }
 
@@ -675,7 +678,8 @@ public class CXmlNode : CXmlBase
             rAttribute = _rFirstAttribute;
             rAttribute != null;
             rAttribute = rAttribute.NextAttribute
-        ) {
+        )
+        {
             if (rAttribute.Name == str)
                 break;
         }
@@ -825,7 +829,8 @@ public class CXmlCache
                 rNode = prDocumentRootNode.prFirstChildNode;
                 rNode != null;
                 rNode = rNode.prNextNode
-            ) {
+            )
+            {
                 rNode.Write(rXmlTextWriter);
             }
             rXmlTextWriter.Dispose();
@@ -979,7 +984,8 @@ public class CXmlCache
             if (
                 prXmlReader.NodeType == XmlNodeType.EndElement
                 || prXmlReader.NodeType == XmlNodeType.EndEntity
-            ) {
+            )
+            {
                 DebugTrace("NodeType == EndElement or EndEntity");
                 return;
             }

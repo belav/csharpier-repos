@@ -859,7 +859,8 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
                 Command destination,
                 List<KeyValuePair<string, string>> destMember,
                 ResolutionContext context
-            ) {
+            )
+            {
                 return source.Details.Select(
                         d => new KeyValuePair<string, string>(d.ToString(), d.ToString())
                     )

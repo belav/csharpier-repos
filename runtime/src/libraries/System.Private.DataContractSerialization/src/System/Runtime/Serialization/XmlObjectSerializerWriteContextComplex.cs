@@ -46,7 +46,8 @@ namespace System.Runtime.Serialization
         internal override bool WriteClrTypeInfo(
             XmlWriterDelegator xmlWriter,
             DataContract dataContract
-        ) {
+        )
+        {
             return false;
         }
 
@@ -55,7 +56,8 @@ namespace System.Runtime.Serialization
             Type dataContractType,
             string? clrTypeName,
             string? clrAssemblyName
-        ) {
+        )
+        {
             return false;
         }
 
@@ -88,7 +90,8 @@ namespace System.Runtime.Serialization
             string? value,
             XmlDictionaryString name,
             XmlDictionaryString? ns
-        ) {
+        )
+        {
             if (value == null)
                 WriteNull(
                     xmlWriter,
@@ -130,7 +133,8 @@ namespace System.Runtime.Serialization
             byte[] value,
             XmlDictionaryString name,
             XmlDictionaryString ns
-        ) {
+        )
+        {
             if (value == null)
                 WriteNull(
                     xmlWriter,
@@ -172,7 +176,8 @@ namespace System.Runtime.Serialization
             Uri value,
             XmlDictionaryString name,
             XmlDictionaryString ns
-        ) {
+        )
+        {
             if (value == null)
                 WriteNull(
                     xmlWriter,
@@ -214,7 +219,8 @@ namespace System.Runtime.Serialization
             XmlQualifiedName? value,
             XmlDictionaryString name,
             XmlDictionaryString? ns
-        ) {
+        )
+        {
             if (value == null)
                 WriteNull(
                     xmlWriter,
@@ -249,7 +255,8 @@ namespace System.Runtime.Serialization
             bool writeXsiType,
             int declaredTypeID,
             RuntimeTypeHandle declaredTypeHandle
-        ) {
+        )
+        {
             if (_serializationSurrogateProvider == null)
             {
                 base.InternalSerialize(
@@ -278,7 +285,8 @@ namespace System.Runtime.Serialization
             XmlWriterDelegator xmlWriter,
             object obj,
             bool canContainCyclicReference
-        ) {
+        )
+        {
             if (preserveObjectReferences && !this.IsGetOnlyCollection)
             {
                 bool isNew = true;
@@ -314,7 +322,8 @@ namespace System.Runtime.Serialization
             XmlWriterDelegator xmlWriter,
             object obj,
             bool canContainCyclicReference
-        ) {
+        )
+        {
             if (preserveObjectReferences && !this.IsGetOnlyCollection)
                 return;
             base.OnEndHandleReference(xmlWriter, obj, canContainCyclicReference);
@@ -323,7 +332,8 @@ namespace System.Runtime.Serialization
         internal override void CheckIfTypeSerializable(
             Type memberType,
             bool isMemberTypeSerializable
-        ) {
+        )
+        {
             if (_serializationSurrogateProvider != null)
             {
                 while (memberType.IsArray)
@@ -382,7 +392,8 @@ namespace System.Runtime.Serialization
             bool writeXsiType,
             int declaredTypeID,
             RuntimeTypeHandle declaredTypeHandle
-        ) {
+        )
+        {
             RuntimeTypeHandle objTypeHandle = isDeclaredType
                 ? declaredTypeHandle
                 : obj.GetType().TypeHandle;

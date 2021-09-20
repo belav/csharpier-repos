@@ -38,7 +38,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com1 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 Debug.WriteLine("Verifying default Handshake");
@@ -156,7 +157,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 VerifyExceptionAtOpen(com, handshake, throwAt, expectedException);
 
                 if (com.IsOpen)
@@ -171,7 +173,8 @@ namespace System.IO.Ports.Tests
             int handshake,
             ThrowAt throwAt,
             Type expectedException
-        ) {
+        )
+        {
             int origHandshake = (int)com.Handshake;
 
             SerialPortProperties serPortProp = new SerialPortProperties();
@@ -271,7 +274,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com1 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 serPortProp.SetAllPropertiesToOpenDefaults();
@@ -297,7 +301,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com1 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 serPortProp.SetAllPropertiesToOpenDefaults();
@@ -323,7 +328,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 int origWriteTimeout = com1.WriteTimeout;
                 int origReadTimeout = com1.ReadTimeout;
 
@@ -371,7 +377,8 @@ namespace System.IO.Ports.Tests
                     if (
                         Handshake.RequestToSend == com1.Handshake
                         || Handshake.RequestToSendXOnXOff == com1.Handshake
-                    ) {
+                    )
+                    {
                         Fail(
                             "Err_15397lkjh!!! TimeoutException NOT thrown when CtsHolding={0} with Handshake={1}",
                             com1.CtsHolding,
@@ -384,7 +391,8 @@ namespace System.IO.Ports.Tests
                     if (
                         Handshake.RequestToSend != com1.Handshake
                         && Handshake.RequestToSendXOnXOff != com1.Handshake
-                    ) {
+                    )
+                    {
                         Fail(
                             "Err_1341pawh!!! TimeoutException thrown when CtsHolding={0} with Handshake={1}",
                             com1.CtsHolding,
@@ -474,7 +482,8 @@ namespace System.IO.Ports.Tests
                     if (
                         Handshake.RequestToSend == com1.Handshake
                         || Handshake.RequestToSendXOnXOff == com1.Handshake
-                    ) {
+                    )
+                    {
                         Fail(
                             "Err_1253aasyo!!! TimeoutException NOT thrown after XOff and XOn char sent when CtsHolding={0} with Handshake={1}",
                             com1.CtsHolding,
@@ -487,7 +496,8 @@ namespace System.IO.Ports.Tests
                     if (
                         Handshake.RequestToSend != com1.Handshake
                         && Handshake.RequestToSendXOnXOff != com1.Handshake
-                    ) {
+                    )
+                    {
                         Fail(
                             "Err_51390awi!!! TimeoutException thrown after XOff and XOn char sent when CtsHolding={0} with Handshake={1}",
                             com1.CtsHolding,
@@ -517,7 +527,8 @@ namespace System.IO.Ports.Tests
                     if (
                         Handshake.XOnXOff == com1.Handshake
                         || Handshake.RequestToSendXOnXOff == com1.Handshake
-                    ) {
+                    )
+                    {
                         Fail(
                             "Err_2457awez!!! TimeoutException NOT thrown after RTSEnable set to false then true when CtsHolding={0} with Handshake={1}",
                             com1.CtsHolding,
@@ -530,7 +541,8 @@ namespace System.IO.Ports.Tests
                     if (
                         Handshake.XOnXOff != com1.Handshake
                         && Handshake.RequestToSendXOnXOff != com1.Handshake
-                    ) {
+                    )
+                    {
                         Fail(
                             "Err_3240aw4er!!! TimeoutException thrown RTSEnable set to false then true when CtsHolding={0} with Handshake={1}",
                             com1.CtsHolding,
@@ -652,7 +664,8 @@ namespace System.IO.Ports.Tests
                     if (
                         Handshake.XOnXOff == com1.Handshake
                         || Handshake.RequestToSendXOnXOff == com1.Handshake
-                    ) {
+                    )
+                    {
                         Fail(
                             "Err_1349znpq!!! TimeoutException NOT thrown after XOff char sent and CtsHolding={0} with Handshake={1}",
                             com1.CtsHolding,
@@ -665,7 +678,8 @@ namespace System.IO.Ports.Tests
                     if (
                         Handshake.XOnXOff != com1.Handshake
                         && Handshake.RequestToSendXOnXOff != com1.Handshake
-                    ) {
+                    )
+                    {
                         Fail(
                             "Err_2507pqzhn!!! TimeoutException thrown after XOff char sent and CtsHolding={0} with Handshake={1}",
                             com1.CtsHolding,

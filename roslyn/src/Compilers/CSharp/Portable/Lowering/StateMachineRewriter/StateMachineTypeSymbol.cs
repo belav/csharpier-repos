@@ -25,10 +25,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeCompilationState compilationState,
             MethodSymbol kickoffMethod,
             int kickoffMethodOrdinal
-        ) : base(
-            MakeName(slotAllocatorOpt, compilationState, kickoffMethod, kickoffMethodOrdinal),
-            kickoffMethod
-        ) {
+        )
+            : base(
+                MakeName(slotAllocatorOpt, compilationState, kickoffMethod, kickoffMethodOrdinal),
+                kickoffMethod
+            )
+        {
             Debug.Assert(kickoffMethod != null);
             this.KickoffMethod = kickoffMethod;
         }
@@ -38,7 +40,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeCompilationState compilationState,
             MethodSymbol kickoffMethod,
             int kickoffMethodOrdinal
-        ) {
+        )
+        {
             return slotAllocatorOpt?.PreviousStateMachineTypeName
                 ?? GeneratedNames.MakeStateMachineTypeName(
                     kickoffMethod.Name,
@@ -103,7 +106,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             kickoffType,
                             AttributeDescription.DebuggerStepThroughAttribute
                         )
-                    ) {
+                    )
+                    {
                         if (builder == null)
                         {
                             builder = ArrayBuilder<CSharpAttributeData>.GetInstance(2); // only 2 different attributes are inherited at the moment

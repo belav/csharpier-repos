@@ -138,7 +138,8 @@ namespace JIT.HardwareIntrinsics.X86
                     (alignment != 32 && alignment != 16)
                     || (alignment * 2) < sizeOfinArray1
                     || (alignment * 2) < sizeOfoutArray
-                ) {
+                )
+                {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -519,7 +520,8 @@ namespace JIT.HardwareIntrinsics.X86
             Vector256<Double> op1,
             void* result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             Double[] inArray1 = new Double[Op1ElementCount];
             Double[] outArray = new Double[RetElementCount];
 
@@ -556,7 +558,8 @@ namespace JIT.HardwareIntrinsics.X86
             Double[] firstOp,
             Double[] result,
             [CallerMemberName] string method = ""
-        ) {
+        )
+        {
             bool succeeded = true;
 
             if (
@@ -564,7 +567,8 @@ namespace JIT.HardwareIntrinsics.X86
                 != BitConverter.DoubleToInt64Bits(
                     (firstOp[0] > 0) ? Math.Floor(firstOp[0]) : Math.Ceiling(firstOp[0])
                 )
-            ) {
+            )
+            {
                 succeeded = false;
             }
             else
@@ -576,7 +580,8 @@ namespace JIT.HardwareIntrinsics.X86
                         != BitConverter.DoubleToInt64Bits(
                             (firstOp[i] > 0) ? Math.Floor(firstOp[i]) : Math.Ceiling(firstOp[i])
                         )
-                    ) {
+                    )
+                    {
                         succeeded = false;
                         break;
                     }

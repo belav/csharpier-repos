@@ -1406,7 +1406,8 @@ namespace System.Text.RegularExpressions.Tests
             RegexOptions options,
             object errorObj,
             int offset
-        ) {
+        )
+        {
             RegexParseError? error = (RegexParseError?)errorObj;
 
             // Parse the main tree and if parsing fails check if the supplied error matches.
@@ -1442,7 +1443,8 @@ namespace System.Text.RegularExpressions.Tests
             RegexOptions options,
             RegexParseError? error,
             int offset
-        ) {
+        )
+        {
             if (error != null)
             {
                 Throws(error.Value, offset, () => new Regex(pattern, options));

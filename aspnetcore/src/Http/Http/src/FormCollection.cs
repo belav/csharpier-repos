@@ -42,7 +42,8 @@ namespace Microsoft.AspNetCore.Http
         public FormCollection(
             Dictionary<string, StringValues>? fields,
             IFormFileCollection? files = null
-        ) {
+        )
+        {
             // can be null
             Store = fields;
             _files = files;

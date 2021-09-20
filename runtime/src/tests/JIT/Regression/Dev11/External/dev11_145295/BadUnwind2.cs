@@ -86,7 +86,8 @@ namespace Test
             string caption,
             int calloutIndex,
             Func<int, int> runTarget
-        ) {
+        )
+        {
             Console.WriteLine("\r\nRUNNING_SCENARIO: `{0}' ({1})", caption, calloutIndex);
 
             try

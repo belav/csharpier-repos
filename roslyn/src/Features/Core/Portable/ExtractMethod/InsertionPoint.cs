@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             SemanticDocument document,
             SyntaxNode node,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             var root = document.Root;
             var annotation = new SyntaxAnnotation();
             var newRoot = root.AddAnnotations(

@@ -281,7 +281,8 @@ namespace Microsoft.CodeAnalysis.Razor.Workspaces
         public void RequiredAttributeParser_ParsesRequiredAttributesAndLogsDiagnosticsCorrectly(
             string requiredAttributes,
             IEnumerable<Action<RequiredAttributeDescriptorBuilder>> configureBuilders
-        ) {
+        )
+        {
             // Arrange
             var tagHelperBuilder = new DefaultTagHelperDescriptorBuilder(
                 TagHelperConventions.DefaultKind,
@@ -562,7 +563,8 @@ namespace Microsoft.CodeAnalysis.Razor.Workspaces
         public void RequiredAttributeParser_ParsesRequiredAttributesCorrectly(
             string requiredAttributes,
             IEnumerable<Action<RequiredAttributeDescriptorBuilder>> configureBuilders
-        ) {
+        )
+        {
             // Arrange
             var tagHelperBuilder = new DefaultTagHelperDescriptorBuilder(
                 TagHelperConventions.DefaultKind,
@@ -693,7 +695,8 @@ namespace Microsoft.CodeAnalysis.Razor.Workspaces
         public void CreateDescriptor_IsEnumIsSetCorrectly(
             Type tagHelperType,
             TagHelperDescriptor expectedDescriptor
-        ) {
+        )
+        {
             // Arrange
             var factory = new DefaultTagHelperDescriptorFactory(
                 Compilation,
@@ -766,7 +769,8 @@ namespace Microsoft.CodeAnalysis.Razor.Workspaces
         public void CreateDescriptor_CreatesDesignTimeDescriptorsWithRequiredParent(
             Type tagHelperType,
             TagHelperDescriptor expectedDescriptor
-        ) {
+        )
+        {
             // Arrange
             var factory = new DefaultTagHelperDescriptorFactory(
                 Compilation,
@@ -838,7 +842,8 @@ namespace Microsoft.CodeAnalysis.Razor.Workspaces
         public void CreateDescriptor_CreatesDescriptorsWithAllowedChildren(
             Type tagHelperType,
             TagHelperDescriptor expectedDescriptor
-        ) {
+        )
+        {
             // Arrange
             var factory = new DefaultTagHelperDescriptorFactory(
                 Compilation,
@@ -918,7 +923,8 @@ namespace Microsoft.CodeAnalysis.Razor.Workspaces
         public void CreateDescriptor_CreatesDesignTimeDescriptorsWithTagStructure(
             Type tagHelperType,
             TagHelperDescriptor expectedDescriptor
-        ) {
+        )
+        {
             // Arrange
             var factory = new DefaultTagHelperDescriptorFactory(
                 Compilation,
@@ -1129,7 +1135,8 @@ namespace Microsoft.CodeAnalysis.Razor.Workspaces
             Type tagHelperType,
             bool designTime,
             TagHelperDescriptor expectedDescriptor
-        ) {
+        )
+        {
             // Arrange
             var factory = new DefaultTagHelperDescriptorFactory(
                 Compilation,
@@ -1397,7 +1404,8 @@ namespace Microsoft.CodeAnalysis.Razor.Workspaces
         public void CreateDescriptor_ReturnsExpectedDescriptors(
             Type tagHelperType,
             TagHelperDescriptor expectedDescriptor
-        ) {
+        )
+        {
             // Arrange
             var factory = new DefaultTagHelperDescriptorFactory(
                 Compilation,
@@ -1454,7 +1462,8 @@ namespace Microsoft.CodeAnalysis.Razor.Workspaces
             Type tagHelperType,
             string expectedTagName,
             string expectedAttributeName
-        ) {
+        )
+        {
             // Arrange
             var factory = new DefaultTagHelperDescriptorFactory(
                 Compilation,
@@ -1920,7 +1929,8 @@ namespace Microsoft.CodeAnalysis.Razor.Workspaces
         public void CreateDescriptor_CreatesErrorOnInvalidNames(
             string name,
             string[] expectedErrorMessages
-        ) {
+        )
+        {
             // Arrange
             name = name.Replace("\n", "\\n").Replace("\r", "\\r").Replace("\"", "\\\"");
             var text =
@@ -2102,7 +2112,8 @@ namespace Microsoft.CodeAnalysis.Razor.Workspaces
         public void CreateDescriptor_DoesNotAllowDataDashAttributes(
             Type type,
             IEnumerable<BoundAttributeDescriptor> expectedAttributeDescriptors
-        ) {
+        )
+        {
             // Arrange
             var factory = new DefaultTagHelperDescriptorFactory(
                 Compilation,
@@ -2127,7 +2138,8 @@ namespace Microsoft.CodeAnalysis.Razor.Workspaces
                 var attribute in descriptor.BoundAttributes.Where(
                     a => a.Name.StartsWith("data-", StringComparison.OrdinalIgnoreCase)
                 )
-            ) {
+            )
+            {
                 var diagnostic = Assert.Single(attribute.Diagnostics);
                 Assert.Equal(id, diagnostic.Id);
             }
@@ -2246,7 +2258,8 @@ namespace Microsoft.CodeAnalysis.Razor.Workspaces
         public void CreateDescriptor_WithInvalidAttributeName_HasErrors(
             string name,
             string[] expectedErrorMessages
-        ) {
+        )
+        {
             // Arrange
             name = name.Replace("\n", "\\n").Replace("\r", "\\r").Replace("\"", "\\\"");
             var text =
@@ -2304,7 +2317,8 @@ namespace Microsoft.CodeAnalysis.Razor.Workspaces
         public void CreateDescriptor_WithInvalidAttributePrefix_HasErrors(
             string prefix,
             string[] expectedErrorMessages
-        ) {
+        )
+        {
             // Arrange
             prefix = prefix.Replace("\n", "\\n").Replace("\r", "\\r").Replace("\"", "\\\"");
             var text =
@@ -2359,7 +2373,8 @@ namespace Microsoft.CodeAnalysis.Razor.Workspaces
         public void CreateDescriptor_WithInvalidAllowedChildren_HasErrors(
             string name,
             string[] expectedErrorMessages
-        ) {
+        )
+        {
             // Arrange
             name = name.Replace("\n", "\\n").Replace("\r", "\\r").Replace("\"", "\\\"");
             var text =
@@ -2410,7 +2425,8 @@ namespace Microsoft.CodeAnalysis.Razor.Workspaces
         public void CreateDescriptor_WithInvalidParentTag_HasErrors(
             string name,
             string[] expectedErrorMessages
-        ) {
+        )
+        {
             // Arrange
             name = name.Replace("\n", "\\n").Replace("\r", "\\r").Replace("\"", "\\\"");
             var text =
@@ -2919,7 +2935,8 @@ namespace Microsoft.CodeAnalysis.Razor.Workspaces
             Type tagHelperType,
             IEnumerable<BoundAttributeDescriptor> expectedAttributeDescriptors,
             IEnumerable<RazorDiagnostic> expectedDiagnostics
-        ) {
+        )
+        {
             // Arrange
             var factory = new DefaultTagHelperDescriptorFactory(
                 Compilation,
@@ -3008,7 +3025,8 @@ namespace Microsoft.CodeAnalysis.Razor.Workspaces
         public void CreateDescriptor_CreatesDescriptorsWithOutputElementHint(
             Type tagHelperType,
             TagHelperDescriptor expectedDescriptor
-        ) {
+        )
+        {
             // Arrange
             var factory = new DefaultTagHelperDescriptorFactory(
                 Compilation,
@@ -3148,7 +3166,8 @@ namespace Microsoft.CodeAnalysis.Razor.Workspaces
             Func<string, string, string> onNameError,
             string whitespaceErrorString,
             Func<string, string> onDataError
-        ) {
+        )
+        {
             // name, expectedErrorMessages
             var data = new TheoryData<string, string[]>
             {
@@ -3279,7 +3298,8 @@ namespace Microsoft.CodeAnalysis.Razor.Workspaces
             string assemblyName,
             IEnumerable<Action<BoundAttributeDescriptorBuilder>> attributes = null,
             IEnumerable<Action<TagMatchingRuleDescriptorBuilder>> ruleBuilders = null
-        ) {
+        )
+        {
             var builder = TagHelperDescriptorBuilder.Create(typeName, assemblyName);
             builder.TypeName(typeName);
 
@@ -3319,7 +3339,8 @@ namespace Microsoft.CodeAnalysis.Razor.Workspaces
         private static BoundAttributeDescriptor CreateAttributeFor(
             Type tagHelperType,
             Action<BoundAttributeDescriptorBuilder> configure
-        ) {
+        )
+        {
             var tagHelperBuilder = new DefaultTagHelperDescriptorBuilder(
                 TagHelperConventions.DefaultKind,
                 tagHelperType.Name,

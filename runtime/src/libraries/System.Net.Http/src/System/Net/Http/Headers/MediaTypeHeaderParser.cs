@@ -33,7 +33,8 @@ namespace System.Net.Http.Headers
             int startIndex,
             object? storeValue,
             out object? parsedValue
-        ) {
+        )
+        {
             int resultLength = MediaTypeHeaderValue.GetMediaTypeLength(
                 value,
                 startIndex,

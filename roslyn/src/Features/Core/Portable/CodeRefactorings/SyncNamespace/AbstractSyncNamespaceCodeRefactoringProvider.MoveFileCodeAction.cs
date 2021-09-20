@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.SyncNamespace
 
             protected override async Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 var id = _state.Document.Id;
                 var solution = _state.Document.Project.Solution;
                 var document = solution.GetDocument(id);
@@ -111,7 +112,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.SyncNamespace
                 FolderInfo currentFolderInfo,
                 ImmutableArray<string> parts,
                 ImmutableArray<string> currentFolder
-            ) {
+            )
+            {
                 if (parts.IsEmpty)
                 {
                     return ImmutableArray.Create(currentFolder);
@@ -157,7 +159,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.SyncNamespace
                                 PathUtilities.Comparer
                             )
                     )
-                ) {
+                )
+                {
                     builder.Add(defaultPathBasedOnCurrentFolder);
                 }
 
@@ -211,7 +214,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.SyncNamespace
                             handledFolders.Add(
                                 string.Join(PathUtilities.DirectorySeparatorStr, folders)
                             )
-                        ) {
+                        )
+                        {
                             rootFolderInfo.AddFolder(folders);
                         }
                     }

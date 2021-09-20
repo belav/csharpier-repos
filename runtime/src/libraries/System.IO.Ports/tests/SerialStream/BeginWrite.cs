@@ -261,7 +261,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 CallbackHandler callbackHandler = new CallbackHandler();
 
                 Debug.WriteLine("Verifying BeginWrite with a callback specified");
@@ -307,7 +308,8 @@ namespace System.IO.Ports.Tests
                 int elapsedTime = 0;
                 while (
                     !callbackWriteAsyncResult.IsCompleted && elapsedTime < MAX_WAIT_WRITE_COMPLETE
-                ) {
+                )
+                {
                     Thread.Sleep(10);
                     elapsedTime += 10;
                 }
@@ -339,7 +341,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 CallbackHandler callbackHandler = new CallbackHandler();
 
                 Debug.WriteLine("Verifying BeginWrite with a callback and state specified");
@@ -376,7 +379,8 @@ namespace System.IO.Ports.Tests
                 int elapsedTime = 0;
                 while (
                     !callbackWriteAsyncResult.IsCompleted && elapsedTime < MAX_WAIT_WRITE_COMPLETE
-                ) {
+                )
+                {
                     Thread.Sleep(10);
                     elapsedTime += 10;
                 }
@@ -403,7 +407,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com1 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 Debug.WriteLine(
                     "Verifying BeginWrite throws InvalidOperationException while in a Break"
                 );
@@ -424,12 +429,14 @@ namespace System.IO.Ports.Tests
             int offset,
             int count,
             Type expectedException
-        ) {
+        )
+        {
             using (
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 int bufferLength = null == buffer ? 0 : buffer.Length;
 
                 Debug.WriteLine(
@@ -469,7 +476,8 @@ namespace System.IO.Ports.Tests
             int count,
             Encoding encoding,
             int numWrites
-        ) {
+        )
+        {
             using (
                 SerialPort com1 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
@@ -479,7 +487,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 Random rndGen = new Random(-55);
 
                 Debug.WriteLine(
@@ -512,7 +521,8 @@ namespace System.IO.Ports.Tests
             SerialPort com1,
             SerialPort com2,
             int numWrites
-        ) {
+        )
+        {
             int index = 0;
             CallbackHandler callbackHandler = new CallbackHandler();
 

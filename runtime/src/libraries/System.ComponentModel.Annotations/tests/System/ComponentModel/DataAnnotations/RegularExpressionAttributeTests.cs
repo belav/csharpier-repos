@@ -120,7 +120,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         [InlineData(-2)]
         public static void Validate_InvalidMatchTimeoutInMilliseconds_ThrowsArgumentOutOfRangeException(
             int timeout
-        ) {
+        )
+        {
             RegularExpressionAttribute attribute = new RegularExpressionAttribute("[^a]+\\.[^z]+")
             {
                 MatchTimeoutInMilliseconds = timeout

@@ -88,14 +88,16 @@ namespace System.Runtime.Serialization
         public override object? ReadObject(
             System.Xml.XmlDictionaryReader reader,
             bool verifyObjectName
-        ) {
+        )
+        {
             throw null;
         }
         public object? ReadObject(
             System.Xml.XmlDictionaryReader reader,
             bool verifyObjectName,
             System.Runtime.Serialization.DataContractResolver? dataContractResolver
-        ) {
+        )
+        {
             throw null;
         }
         public override object? ReadObject(System.Xml.XmlReader reader)
@@ -129,7 +131,8 @@ namespace System.Runtime.Serialization
     {
         public static System.Runtime.Serialization.ISerializationSurrogateProvider? GetSerializationSurrogateProvider(
             this System.Runtime.Serialization.DataContractSerializer serializer
-        ) {
+        )
+        {
             throw null;
         }
         public static void SetSerializationSurrogateProvider(
@@ -260,14 +263,16 @@ namespace System.Runtime.Serialization
             System.Reflection.MemberInfo[] pathToMember,
             System.Text.StringBuilder? rootElementXpath,
             out System.Xml.XmlNamespaceManager namespaces
-        ) {
+        )
+        {
             throw null;
         }
         public static string CreateFromDataContractSerializer(
             System.Type type,
             System.Reflection.MemberInfo[] pathToMember,
             out System.Xml.XmlNamespaceManager namespaces
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -286,7 +291,8 @@ namespace System.Runtime.Serialization
         }
         public bool CanExport(
             System.Collections.Generic.ICollection<System.Reflection.Assembly> assemblies
-        ) {
+        )
+        {
             throw null;
         }
         public bool CanExport(System.Collections.Generic.ICollection<System.Type> types)
@@ -416,7 +422,8 @@ namespace System.Xml
         }
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
-        ) {
+        )
+        {
             throw null;
         }
         public override int GetHashCode()
@@ -460,21 +467,24 @@ namespace System.Xml
             int key,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Xml.XmlDictionaryString? result
-        ) {
+        )
+        {
             throw null;
         }
         public bool TryLookup(
             string value,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Xml.XmlDictionaryString? result
-        ) {
+        )
+        {
             throw null;
         }
         public bool TryLookup(
             System.Xml.XmlDictionaryString value,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Xml.XmlDictionaryString? result
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -503,21 +513,24 @@ namespace System.Xml
             int key,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Xml.XmlDictionaryString? result
-        ) {
+        )
+        {
             throw null;
         }
         public virtual bool TryLookup(
             string value,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Xml.XmlDictionaryString? result
-        ) {
+        )
+        {
             throw null;
         }
         public virtual bool TryLookup(
             System.Xml.XmlDictionaryString value,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Xml.XmlDictionaryString? result
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -538,7 +551,8 @@ namespace System.Xml
             int count,
             System.Xml.IXmlDictionary? dictionary,
             System.Xml.XmlDictionaryReaderQuotas quotas
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.XmlDictionaryReader CreateBinaryReader(
@@ -548,7 +562,8 @@ namespace System.Xml
             System.Xml.IXmlDictionary? dictionary,
             System.Xml.XmlDictionaryReaderQuotas quotas,
             System.Xml.XmlBinaryReaderSession? session
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.XmlDictionaryReader CreateBinaryReader(
@@ -559,7 +574,8 @@ namespace System.Xml
             System.Xml.XmlDictionaryReaderQuotas quotas,
             System.Xml.XmlBinaryReaderSession? session,
             System.Xml.OnXmlDictionaryReaderClose? onClose
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.XmlDictionaryReader CreateBinaryReader(
@@ -567,20 +583,23 @@ namespace System.Xml
             int offset,
             int count,
             System.Xml.XmlDictionaryReaderQuotas quotas
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.XmlDictionaryReader CreateBinaryReader(
             byte[] buffer,
             System.Xml.XmlDictionaryReaderQuotas quotas
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.XmlDictionaryReader CreateBinaryReader(
             System.IO.Stream stream,
             System.Xml.IXmlDictionary? dictionary,
             System.Xml.XmlDictionaryReaderQuotas quotas
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.XmlDictionaryReader CreateBinaryReader(
@@ -588,7 +607,8 @@ namespace System.Xml
             System.Xml.IXmlDictionary? dictionary,
             System.Xml.XmlDictionaryReaderQuotas quotas,
             System.Xml.XmlBinaryReaderSession? session
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.XmlDictionaryReader CreateBinaryReader(
@@ -597,18 +617,21 @@ namespace System.Xml
             System.Xml.XmlDictionaryReaderQuotas quotas,
             System.Xml.XmlBinaryReaderSession? session,
             System.Xml.OnXmlDictionaryReaderClose? onClose
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.XmlDictionaryReader CreateBinaryReader(
             System.IO.Stream stream,
             System.Xml.XmlDictionaryReaderQuotas quotas
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.XmlDictionaryReader CreateDictionaryReader(
             System.Xml.XmlReader reader
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.XmlDictionaryReader CreateMtomReader(
@@ -617,7 +640,8 @@ namespace System.Xml
             int count,
             System.Text.Encoding encoding,
             System.Xml.XmlDictionaryReaderQuotas quotas
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.XmlDictionaryReader CreateMtomReader(
@@ -627,7 +651,8 @@ namespace System.Xml
             System.Text.Encoding[] encodings,
             string? contentType,
             System.Xml.XmlDictionaryReaderQuotas quotas
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.XmlDictionaryReader CreateMtomReader(
@@ -639,7 +664,8 @@ namespace System.Xml
             System.Xml.XmlDictionaryReaderQuotas quotas,
             int maxBufferSize,
             System.Xml.OnXmlDictionaryReaderClose? onClose
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.XmlDictionaryReader CreateMtomReader(
@@ -648,14 +674,16 @@ namespace System.Xml
             int count,
             System.Text.Encoding[] encodings,
             System.Xml.XmlDictionaryReaderQuotas quotas
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.XmlDictionaryReader CreateMtomReader(
             System.IO.Stream stream,
             System.Text.Encoding encoding,
             System.Xml.XmlDictionaryReaderQuotas quotas
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.XmlDictionaryReader CreateMtomReader(
@@ -663,7 +691,8 @@ namespace System.Xml
             System.Text.Encoding[] encodings,
             string? contentType,
             System.Xml.XmlDictionaryReaderQuotas quotas
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.XmlDictionaryReader CreateMtomReader(
@@ -673,14 +702,16 @@ namespace System.Xml
             System.Xml.XmlDictionaryReaderQuotas quotas,
             int maxBufferSize,
             System.Xml.OnXmlDictionaryReaderClose? onClose
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.XmlDictionaryReader CreateMtomReader(
             System.IO.Stream stream,
             System.Text.Encoding[] encodings,
             System.Xml.XmlDictionaryReaderQuotas quotas
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.XmlDictionaryReader CreateTextReader(
@@ -690,7 +721,8 @@ namespace System.Xml
             System.Text.Encoding? encoding,
             System.Xml.XmlDictionaryReaderQuotas quotas,
             System.Xml.OnXmlDictionaryReaderClose? onClose
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.XmlDictionaryReader CreateTextReader(
@@ -698,13 +730,15 @@ namespace System.Xml
             int offset,
             int count,
             System.Xml.XmlDictionaryReaderQuotas quotas
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.XmlDictionaryReader CreateTextReader(
             byte[] buffer,
             System.Xml.XmlDictionaryReaderQuotas quotas
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.XmlDictionaryReader CreateTextReader(
@@ -712,20 +746,23 @@ namespace System.Xml
             System.Text.Encoding? encoding,
             System.Xml.XmlDictionaryReaderQuotas quotas,
             System.Xml.OnXmlDictionaryReaderClose? onClose
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.XmlDictionaryReader CreateTextReader(
             System.IO.Stream stream,
             System.Xml.XmlDictionaryReaderQuotas quotas
-        ) {
+        )
+        {
             throw null;
         }
         public virtual void EndCanonicalization() { }
         public virtual string? GetAttribute(
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString namespaceUri
-        ) {
+        )
+        {
             throw null;
         }
         public virtual void GetNonAtomizedNames(out string localName, out string namespaceUri)
@@ -739,7 +776,8 @@ namespace System.Xml
         public virtual int IndexOfLocalName(
             System.Xml.XmlDictionaryString[] localNames,
             System.Xml.XmlDictionaryString namespaceUri
-        ) {
+        )
+        {
             throw null;
         }
         public virtual bool IsLocalName(string localName)
@@ -760,13 +798,15 @@ namespace System.Xml
         }
         public virtual bool IsStartArray(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] out System.Type? type
-        ) {
+        )
+        {
             throw null;
         }
         public virtual bool IsStartElement(
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString namespaceUri
-        ) {
+        )
+        {
             throw null;
         }
         protected bool IsTextNode(System.Xml.XmlNodeType nodeType)
@@ -786,7 +826,8 @@ namespace System.Xml
             bool[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             throw null;
         }
         public virtual int ReadArray(
@@ -795,7 +836,8 @@ namespace System.Xml
             System.DateTime[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             throw null;
         }
         public virtual int ReadArray(
@@ -804,7 +846,8 @@ namespace System.Xml
             decimal[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             throw null;
         }
         public virtual int ReadArray(
@@ -813,7 +856,8 @@ namespace System.Xml
             double[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             throw null;
         }
         public virtual int ReadArray(
@@ -822,7 +866,8 @@ namespace System.Xml
             System.Guid[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             throw null;
         }
         public virtual int ReadArray(
@@ -831,7 +876,8 @@ namespace System.Xml
             short[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             throw null;
         }
         public virtual int ReadArray(
@@ -840,7 +886,8 @@ namespace System.Xml
             int[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             throw null;
         }
         public virtual int ReadArray(
@@ -849,7 +896,8 @@ namespace System.Xml
             long[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             throw null;
         }
         public virtual int ReadArray(
@@ -858,7 +906,8 @@ namespace System.Xml
             float[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             throw null;
         }
         public virtual int ReadArray(
@@ -867,7 +916,8 @@ namespace System.Xml
             System.TimeSpan[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             throw null;
         }
         public virtual int ReadArray(
@@ -876,7 +926,8 @@ namespace System.Xml
             bool[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             throw null;
         }
         public virtual int ReadArray(
@@ -885,7 +936,8 @@ namespace System.Xml
             System.DateTime[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             throw null;
         }
         public virtual int ReadArray(
@@ -894,7 +946,8 @@ namespace System.Xml
             decimal[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             throw null;
         }
         public virtual int ReadArray(
@@ -903,7 +956,8 @@ namespace System.Xml
             double[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             throw null;
         }
         public virtual int ReadArray(
@@ -912,7 +966,8 @@ namespace System.Xml
             System.Guid[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             throw null;
         }
         public virtual int ReadArray(
@@ -921,7 +976,8 @@ namespace System.Xml
             short[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             throw null;
         }
         public virtual int ReadArray(
@@ -930,7 +986,8 @@ namespace System.Xml
             int[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             throw null;
         }
         public virtual int ReadArray(
@@ -939,7 +996,8 @@ namespace System.Xml
             long[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             throw null;
         }
         public virtual int ReadArray(
@@ -948,7 +1006,8 @@ namespace System.Xml
             float[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             throw null;
         }
         public virtual int ReadArray(
@@ -957,7 +1016,8 @@ namespace System.Xml
             System.TimeSpan[] array,
             int offset,
             int count
-        ) {
+        )
+        {
             throw null;
         }
         public virtual bool[] ReadBooleanArray(string localName, string namespaceUri)
@@ -967,13 +1027,15 @@ namespace System.Xml
         public virtual bool[] ReadBooleanArray(
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString namespaceUri
-        ) {
+        )
+        {
             throw null;
         }
         public override object ReadContentAs(
             System.Type type,
             System.Xml.IXmlNamespaceResolver? namespaceResolver
-        ) {
+        )
+        {
             throw null;
         }
         public virtual byte[] ReadContentAsBase64()
@@ -1007,7 +1069,8 @@ namespace System.Xml
         public virtual void ReadContentAsQualifiedName(
             out string localName,
             out string namespaceUri
-        ) {
+        )
+        {
             throw null;
         }
         public override string ReadContentAsString()
@@ -1025,7 +1088,8 @@ namespace System.Xml
         public virtual string ReadContentAsString(
             System.Xml.XmlDictionaryString[] strings,
             out int index
-        ) {
+        )
+        {
             throw null;
         }
         public virtual System.TimeSpan ReadContentAsTimeSpan()
@@ -1043,7 +1107,8 @@ namespace System.Xml
         public virtual System.DateTime[] ReadDateTimeArray(
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString namespaceUri
-        ) {
+        )
+        {
             throw null;
         }
         public virtual decimal[] ReadDecimalArray(string localName, string namespaceUri)
@@ -1053,7 +1118,8 @@ namespace System.Xml
         public virtual decimal[] ReadDecimalArray(
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString namespaceUri
-        ) {
+        )
+        {
             throw null;
         }
         public virtual double[] ReadDoubleArray(string localName, string namespaceUri)
@@ -1063,7 +1129,8 @@ namespace System.Xml
         public virtual double[] ReadDoubleArray(
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString namespaceUri
-        ) {
+        )
+        {
             throw null;
         }
         public virtual byte[] ReadElementContentAsBase64()
@@ -1132,7 +1199,8 @@ namespace System.Xml
         public virtual System.Guid[] ReadGuidArray(
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString namespaceUri
-        ) {
+        )
+        {
             throw null;
         }
         public virtual short[] ReadInt16Array(string localName, string namespaceUri)
@@ -1142,7 +1210,8 @@ namespace System.Xml
         public virtual short[] ReadInt16Array(
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString namespaceUri
-        ) {
+        )
+        {
             throw null;
         }
         public virtual int[] ReadInt32Array(string localName, string namespaceUri)
@@ -1152,7 +1221,8 @@ namespace System.Xml
         public virtual int[] ReadInt32Array(
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString namespaceUri
-        ) {
+        )
+        {
             throw null;
         }
         public virtual long[] ReadInt64Array(string localName, string namespaceUri)
@@ -1162,7 +1232,8 @@ namespace System.Xml
         public virtual long[] ReadInt64Array(
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString namespaceUri
-        ) {
+        )
+        {
             throw null;
         }
         public virtual float[] ReadSingleArray(string localName, string namespaceUri)
@@ -1172,7 +1243,8 @@ namespace System.Xml
         public virtual float[] ReadSingleArray(
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString namespaceUri
-        ) {
+        )
+        {
             throw null;
         }
         public virtual void ReadStartElement(
@@ -1194,7 +1266,8 @@ namespace System.Xml
         public virtual System.TimeSpan[] ReadTimeSpanArray(
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString namespaceUri
-        ) {
+        )
+        {
             throw null;
         }
         public virtual int ReadValueAsBase64(byte[] buffer, int offset, int count)
@@ -1217,19 +1290,22 @@ namespace System.Xml
         public virtual bool TryGetLocalNameAsDictionaryString(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Xml.XmlDictionaryString? localName
-        ) {
+        )
+        {
             throw null;
         }
         public virtual bool TryGetNamespaceUriAsDictionaryString(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Xml.XmlDictionaryString? namespaceUri
-        ) {
+        )
+        {
             throw null;
         }
         public virtual bool TryGetValueAsDictionaryString(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Xml.XmlDictionaryString? value
-        ) {
+        )
+        {
             throw null;
         }
     }
@@ -1323,14 +1399,16 @@ namespace System.Xml
         public static System.Xml.XmlDictionaryWriter CreateBinaryWriter(
             System.IO.Stream stream,
             System.Xml.IXmlDictionary? dictionary
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.XmlDictionaryWriter CreateBinaryWriter(
             System.IO.Stream stream,
             System.Xml.IXmlDictionary? dictionary,
             System.Xml.XmlBinaryWriterSession? session
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.XmlDictionaryWriter CreateBinaryWriter(
@@ -1338,12 +1416,14 @@ namespace System.Xml
             System.Xml.IXmlDictionary? dictionary,
             System.Xml.XmlBinaryWriterSession? session,
             bool ownsStream
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.XmlDictionaryWriter CreateDictionaryWriter(
             System.Xml.XmlWriter writer
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.XmlDictionaryWriter CreateMtomWriter(
@@ -1351,7 +1431,8 @@ namespace System.Xml
             System.Text.Encoding encoding,
             int maxSizeInBytes,
             string startInfo
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.XmlDictionaryWriter CreateMtomWriter(
@@ -1363,7 +1444,8 @@ namespace System.Xml
             string? startUri,
             bool writeMessageHeaders,
             bool ownsStream
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.XmlDictionaryWriter CreateTextWriter(System.IO.Stream stream)
@@ -1373,14 +1455,16 @@ namespace System.Xml
         public static System.Xml.XmlDictionaryWriter CreateTextWriter(
             System.IO.Stream stream,
             System.Text.Encoding encoding
-        ) {
+        )
+        {
             throw null;
         }
         public static System.Xml.XmlDictionaryWriter CreateTextWriter(
             System.IO.Stream stream,
             System.Text.Encoding encoding,
             bool ownsStream
-        ) {
+        )
+        {
             throw null;
         }
         public virtual void EndCanonicalization() { }
@@ -1564,7 +1648,8 @@ namespace System.Xml
             byte[] buffer,
             int index,
             int count
-        ) {
+        )
+        {
             throw null;
         }
         public void WriteElementString(

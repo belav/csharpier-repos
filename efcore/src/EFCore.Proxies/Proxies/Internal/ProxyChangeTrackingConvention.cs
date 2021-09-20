@@ -36,7 +36,8 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
         public virtual void ProcessModelInitialized(
             IConventionModelBuilder modelBuilder,
             IConventionContext<IConventionModelBuilder> context
-        ) {
+        )
+        {
             if (_options?.UseChangeTrackingProxies == true)
             {
                 modelBuilder.HasChangeTrackingStrategy(

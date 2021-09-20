@@ -136,7 +136,8 @@ namespace Castle.DynamicProxy.Contributors
             MetaMethod method,
             ClassEmitter @class,
             OverrideMethodDelegate overrideMethod
-        ) {
+        )
+        {
             {
                 var generator = GetMethodGenerator(method, @class, overrideMethod);
                 if (generator == null)

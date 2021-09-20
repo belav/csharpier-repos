@@ -128,7 +128,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
             TDiagnosticsParams diagnosticsParams,
             RequestContext context,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             context.TraceInformation($"{this.GetType()} started getting diagnostics");
 
             // The progress object we will stream reports to.
@@ -222,7 +223,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
         private static Dictionary<Document, DiagnosticParams> GetDocumentToPreviousDiagnosticParams(
             RequestContext context,
             DiagnosticParams[] previousResults
-        ) {
+        )
+        {
             Contract.ThrowIfNull(context.Solution);
 
             var result = new Dictionary<Document, DiagnosticParams>();
@@ -244,7 +246,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
             BufferedProgress<TReport> progress,
             Document document,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             // Being asked about this document for the first time.  Or being asked again and we have different
             // diagnostics.  Compute and report the current diagnostics info for this document.
 
@@ -285,7 +288,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
             RequestContext context,
             DiagnosticParams[] previousResults,
             BufferedProgress<TReport> progress
-        ) {
+        )
+        {
             Contract.ThrowIfNull(context.Solution);
 
             foreach (var previousResult in previousResults)
@@ -315,7 +319,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
         private bool DiagnosticsAreUnchanged(
             Dictionary<Document, DiagnosticParams> documentToPreviousDiagnosticParams,
             Document document
-        ) {
+        )
+        {
             lock (_gate)
             {
                 var workspace = document.Project.Solution.Workspace;
@@ -356,7 +361,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
             Document document,
             SourceText text,
             DiagnosticData diagnosticData
-        ) {
+        )
+        {
             Contract.ThrowIfNull(
                 diagnosticData.Message,
                 $"Got a document diagnostic that did not have a {nameof(diagnosticData.Message)}"
@@ -418,7 +424,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
         protected static DiagnosticTag[] ConvertTags(
             DiagnosticData diagnosticData,
             bool potentialDuplicate
-        ) {
+        )
+        {
             using var _ = ArrayBuilder<DiagnosticTag>.GetInstance(out var result);
 
             if (diagnosticData.Severity == DiagnosticSeverity.Hidden)

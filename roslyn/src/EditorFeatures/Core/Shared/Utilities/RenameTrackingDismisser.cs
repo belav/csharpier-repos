@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
         internal static void DismissRenameTracking(
             Workspace workspace,
             IEnumerable<DocumentId> documentIds
-        ) {
+        )
+        {
             foreach (var docId in documentIds)
             {
                 DismissRenameTracking(workspace, docId);

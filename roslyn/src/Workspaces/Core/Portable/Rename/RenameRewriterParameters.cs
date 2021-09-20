@@ -53,7 +53,8 @@ namespace Microsoft.CodeAnalysis.Rename
             RenameOptionSet optionSet,
             AnnotationTable<RenameAnnotation> renameAnnotations,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             this.RenamedSymbolDeclarationAnnotation = renamedSymbolDeclarationAnnotation;
             this.Document = document;
             this.SemanticModel = semanticModel;

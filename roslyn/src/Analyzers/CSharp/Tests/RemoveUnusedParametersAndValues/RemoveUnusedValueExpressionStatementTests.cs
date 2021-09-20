@@ -120,7 +120,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         public async Task ExpressionStatement_NonConstantPrimitiveTypeValue(
             string optionName,
             string fix
-        ) {
+        )
+        {
             await TestInRegularAndScriptAsync(
                 @"class C
 {
@@ -481,7 +482,8 @@ class C
             string fix1,
             string fix2,
             string fix3
-        ) {
+        )
+        {
             await TestInRegularAndScriptAsync(
                 @"class C
 {

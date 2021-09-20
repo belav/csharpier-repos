@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
         /// <param name="clientRequestParametersProvider">The <see cref="IClientRequestParametersProvider"/>.</param>
         public ClientParametersTagHelper(
             IClientRequestParametersProvider clientRequestParametersProvider
-        ) {
+        )
+        {
             _clientRequestParametersProvider = clientRequestParametersProvider;
         }
 

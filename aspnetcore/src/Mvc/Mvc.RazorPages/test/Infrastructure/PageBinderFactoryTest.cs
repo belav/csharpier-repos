@@ -402,7 +402,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         [InlineData("gET")]
         public async Task ModelBinderFactory_BindsPropertyWithoutSupportsGet_WhenRequestIsGet(
             string method
-        ) {
+        )
+        {
             // Arrange
             var type = typeof(PageModelWithSupportsGetProperty).GetTypeInfo();
 
@@ -855,7 +856,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         private static CompiledPageActionDescriptor GetActionDescriptorWithHandlerMethod(
             Type type,
             string method
-        ) {
+        )
+        {
             var handlerMethodInfo = type.GetMethod(method);
             var parameterInfo = handlerMethodInfo.GetParameters()[0];
 
@@ -912,7 +914,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                     Mock.Of<IObjectModelValidator>(),
                     _optionsAccessor,
                     NullLoggerFactory.Instance
-                ) {
+                )
+            {
                 _args = args;
             }
 
@@ -927,7 +930,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 ModelMetadata metadata,
                 object value,
                 object container
-            ) {
+            )
+            {
                 Descriptors.Add(parameter);
 
                 if (_args.TryGetValue(parameter.Name, out var result))

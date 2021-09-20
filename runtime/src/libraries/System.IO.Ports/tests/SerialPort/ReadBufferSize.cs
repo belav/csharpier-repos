@@ -25,7 +25,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com1 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 Debug.WriteLine("Verifying default ReadBufferSize before Open");
@@ -175,7 +176,8 @@ namespace System.IO.Ports.Tests
             int newReadBufferSize,
             Type expectedExceptionBeforeOpen,
             Type expectedExceptionAfterOpen
-        ) {
+        )
+        {
             VerifyException(
                 newReadBufferSize,
                 expectedExceptionBeforeOpen,
@@ -189,7 +191,8 @@ namespace System.IO.Ports.Tests
             Type expectedExceptionBeforeOpen,
             Type expectedExceptionAfterOpen,
             bool throwAtOpen
-        ) {
+        )
+        {
             VerifyExceptionBeforeOpen(newReadBufferSize, expectedExceptionBeforeOpen, throwAtOpen);
             VerifyExceptionAfterOpen(newReadBufferSize, expectedExceptionAfterOpen);
         }
@@ -198,12 +201,14 @@ namespace System.IO.Ports.Tests
             int newReadBufferSize,
             Type expectedException,
             bool throwAtOpen
-        ) {
+        )
+        {
             using (
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 try
                 {
                     com.ReadBufferSize = newReadBufferSize;
@@ -245,7 +250,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
                 )
-            ) {
+            )
+            {
                 int originalReadBufferSize = com.ReadBufferSize;
 
                 com.Open();
@@ -300,7 +306,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 byte[] xmitBytes = new byte[newReadBufferSize];
                 byte[] rcvBytes;
                 SerialPortProperties serPortProp = new SerialPortProperties();
@@ -383,7 +390,8 @@ namespace System.IO.Ports.Tests
                 SerialPort com2 = new SerialPort(
                     TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
                 )
-            ) {
+            )
+            {
                 int readBufferSize = com1.ReadBufferSize;
                 byte[] xmitBytes = new byte[1024];
                 SerialPortProperties serPortProp = new SerialPortProperties();

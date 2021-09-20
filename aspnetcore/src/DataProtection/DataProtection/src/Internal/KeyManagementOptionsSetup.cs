@@ -28,7 +28,8 @@ namespace Microsoft.AspNetCore.DataProtection.Internal
         public KeyManagementOptionsSetup(
             ILoggerFactory loggerFactory,
             IRegistryPolicyResolver? registryPolicyResolver
-        ) {
+        )
+        {
             _loggerFactory = loggerFactory;
             _registryPolicyResolver = registryPolicyResolver;
         }

@@ -21,7 +21,8 @@ namespace Microsoft.Extensions.Options
             string optionsName,
             Type optionsType,
             IEnumerable<string> failureMessages
-        ) {
+        )
+        {
             Failures = failureMessages ?? new List<string>();
             OptionsType = optionsType ?? throw new ArgumentNullException(nameof(optionsType));
             OptionsName = optionsName ?? throw new ArgumentNullException(nameof(optionsName));

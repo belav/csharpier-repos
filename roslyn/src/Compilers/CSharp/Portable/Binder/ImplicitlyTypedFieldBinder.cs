@@ -21,10 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         private readonly ConsList<FieldSymbol> _fieldsBeingBound;
 
-        public ImplicitlyTypedFieldBinder(
-            Binder next,
-            ConsList<FieldSymbol> fieldsBeingBound
-        ) : base(next, next.Flags)
+        public ImplicitlyTypedFieldBinder(Binder next, ConsList<FieldSymbol> fieldsBeingBound)
+            : base(next, next.Flags)
         {
             _fieldsBeingBound = fieldsBeingBound;
         }

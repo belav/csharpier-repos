@@ -18,19 +18,21 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ObjectBrowser
             IServiceProvider serviceProvider,
             IComponentModel componentModel,
             VisualStudioWorkspace workspace
-        ) : base(
-            LanguageNames.CSharp,
-            Guids.CSharpLibraryId,
-            serviceProvider,
-            componentModel,
-            workspace
-        ) { }
+        )
+            : base(
+                LanguageNames.CSharp,
+                Guids.CSharpLibraryId,
+                serviceProvider,
+                componentModel,
+                workspace
+            ) { }
 
         internal override AbstractDescriptionBuilder CreateDescriptionBuilder(
             IVsObjectBrowserDescription3 description,
             ObjectListItem listItem,
             Project project
-        ) {
+        )
+        {
             return new DescriptionBuilder(description, this, listItem, project);
         }
 

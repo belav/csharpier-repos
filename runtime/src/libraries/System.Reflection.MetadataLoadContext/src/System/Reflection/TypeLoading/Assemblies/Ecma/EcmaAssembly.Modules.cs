@@ -73,7 +73,8 @@ namespace System.Reflection.TypeLoading.Ecma
         protected sealed override IEnumerable<AssemblyFileInfo> GetAssemblyFileInfosFromManifest(
             bool includeManifestModule,
             bool includeResourceModules
-        ) {
+        )
+        {
             MetadataReader reader = Reader;
             if (includeManifestModule)
             {

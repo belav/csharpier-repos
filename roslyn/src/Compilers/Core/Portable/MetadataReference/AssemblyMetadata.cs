@@ -440,7 +440,8 @@ namespace Microsoft.CodeAnalysis
                 if (
                     !module.IsLinkedModule
                     && module.MetadataReader.MetadataKind != MetadataKind.WindowsMetadata
-                ) {
+                )
+                {
                     return false;
                 }
             }
@@ -471,7 +472,8 @@ namespace Microsoft.CodeAnalysis
             bool embedInteropTypes = false,
             string? filePath = null,
             string? display = null
-        ) {
+        )
+        {
             return new MetadataImageReference(
                 this,
                 new MetadataReferenceProperties(

@@ -30,7 +30,8 @@ namespace Microsoft.AspNetCore.CookiePolicy
             RequestDelegate next,
             IOptions<CookiePolicyOptions> options,
             ILoggerFactory factory
-        ) {
+        )
+        {
             Options = options.Value;
             _next = next ?? throw new ArgumentNullException(nameof(next));
             _logger = factory.CreateLogger<CookiePolicyMiddleware>();

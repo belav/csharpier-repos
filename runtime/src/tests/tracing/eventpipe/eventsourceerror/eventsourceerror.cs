@@ -95,7 +95,8 @@ namespace Tracing.Tests.EventSourceError
                     || traceEvent.ProviderName == "Microsoft-Windows-DotNETRuntime"
                     || traceEvent.ProviderName == "Microsoft-Windows-DotNETRuntimeRundown"
                     || traceEvent.ProviderName == "Microsoft-DotNETCore-EventPipe"
-                ) {
+                )
+                {
                     return;
                 }
 
@@ -108,7 +109,8 @@ namespace Tracing.Tests.EventSourceError
                         "ERROR: Exception in Command Processing for EventSource IllegalTypesEventSource",
                         StringComparison.OrdinalIgnoreCase
                     )
-                ) {
+                )
+                {
                     sawEvent = true;
                 }
                 else

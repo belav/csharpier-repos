@@ -76,7 +76,8 @@ namespace System.Security.Cryptography.X509Certificates
             byte[] rawData,
             string? password,
             X509KeyStorageFlags keyStorageFlags
-        ) {
+        )
+        {
             if (rawData == null || rawData.Length == 0)
                 throw new ArgumentException(SR.Arg_EmptyOrNullArray, nameof(rawData));
 
@@ -93,7 +94,8 @@ namespace System.Security.Cryptography.X509Certificates
             byte[] rawData,
             SecureString? password,
             X509KeyStorageFlags keyStorageFlags
-        ) {
+        )
+        {
             if (rawData == null || rawData.Length == 0)
                 throw new ArgumentException(SR.Arg_EmptyOrNullArray, nameof(rawData));
 
@@ -109,7 +111,8 @@ namespace System.Security.Cryptography.X509Certificates
             ReadOnlySpan<byte> rawData,
             ReadOnlySpan<char> password,
             X509KeyStorageFlags keyStorageFlags
-        ) {
+        )
+        {
             if (rawData.IsEmpty)
                 throw new ArgumentException(SR.Arg_EmptyOrNullArray, nameof(rawData));
 
@@ -146,7 +149,8 @@ namespace System.Security.Cryptography.X509Certificates
             string fileName,
             string? password,
             X509KeyStorageFlags keyStorageFlags
-        ) {
+        )
+        {
             if (fileName == null)
                 throw new ArgumentNullException(nameof(fileName));
 
@@ -162,7 +166,8 @@ namespace System.Security.Cryptography.X509Certificates
             string fileName,
             ReadOnlySpan<char> password,
             X509KeyStorageFlags keyStorageFlags
-        ) {
+        )
+        {
             if (fileName == null)
                 throw new ArgumentNullException(nameof(fileName));
 
@@ -364,7 +369,8 @@ namespace System.Security.Cryptography.X509Certificates
         private static byte[] GetCertHash(
             HashAlgorithmName hashAlgorithm,
             ICertificatePalCore certPal
-        ) {
+        )
+        {
             using (IncrementalHash hasher = IncrementalHash.CreateHash(hashAlgorithm))
             {
                 hasher.AppendData(certPal.RawData);
@@ -376,7 +382,8 @@ namespace System.Security.Cryptography.X509Certificates
             HashAlgorithmName hashAlgorithm,
             Span<byte> destination,
             out int bytesWritten
-        ) {
+        )
+        {
             ThrowIfInvalid();
 
             using (IncrementalHash hasher = IncrementalHash.CreateHash(hashAlgorithm))
@@ -402,7 +409,8 @@ namespace System.Security.Cryptography.X509Certificates
         internal static string GetCertHashString(
             HashAlgorithmName hashAlgorithm,
             ICertificatePalCore certPal
-        ) {
+        )
+        {
             return GetCertHash(hashAlgorithm, certPal).ToHexStringUpper();
         }
 
@@ -594,7 +602,8 @@ namespace System.Security.Cryptography.X509Certificates
             byte[] rawData,
             string? password,
             X509KeyStorageFlags keyStorageFlags
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException(SR.NotSupported_ImmutableX509Certificate);
         }
 
@@ -603,7 +612,8 @@ namespace System.Security.Cryptography.X509Certificates
             byte[] rawData,
             SecureString? password,
             X509KeyStorageFlags keyStorageFlags
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException(SR.NotSupported_ImmutableX509Certificate);
         }
 
@@ -616,7 +626,8 @@ namespace System.Security.Cryptography.X509Certificates
             string fileName,
             string? password,
             X509KeyStorageFlags keyStorageFlags
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException(SR.NotSupported_ImmutableX509Certificate);
         }
 
@@ -625,7 +636,8 @@ namespace System.Security.Cryptography.X509Certificates
             string fileName,
             SecureString? password,
             X509KeyStorageFlags keyStorageFlags
-        ) {
+        )
+        {
             throw new PlatformNotSupportedException(SR.NotSupported_ImmutableX509Certificate);
         }
 

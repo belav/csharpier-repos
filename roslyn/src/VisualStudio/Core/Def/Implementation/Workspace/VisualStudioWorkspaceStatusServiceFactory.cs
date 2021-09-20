@@ -36,7 +36,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             SVsServiceProvider serviceProvider,
             IThreadingContext threadingContext,
             IAsynchronousOperationListenerProvider listenerProvider
-        ) {
+        )
+        {
             _serviceProvider = (IAsyncServiceProvider2)serviceProvider;
             _threadingContext = threadingContext;
 
@@ -56,7 +57,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     !experimentationService.IsExperimentEnabled(
                         WellKnownExperimentNames.PartialLoadMode
                     )
-                ) {
+                )
+                {
                     // don't enable partial load mode for ones that are not in experiment yet
                     return new WorkspaceStatusService();
                 }
@@ -97,7 +99,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 IAsyncServiceProvider2 serviceProvider,
                 IThreadingContext threadingContext,
                 IAsynchronousOperationListener listener
-            ) {
+            )
+            {
                 _serviceProvider = serviceProvider;
                 _threadingContext = threadingContext;
 
@@ -165,7 +168,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                         KeyValueLogMessage.NoProperty,
                         cancellationToken
                     )
-                ) {
+                )
+                {
                     var status = await GetProgressStageStatusAsync(cancellationToken)
                         .ConfigureAwait(false);
                     if (status == null)
@@ -207,7 +211,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
             private async ValueTask<IVsOperationProgressStageStatusForSolutionLoad?> GetProgressStageStatusAsync(
                 CancellationToken cancellationToken
-            ) {
+            )
+            {
                 // Workaround for lack of fast path in JoinAsync; avoid calling when already completed
                 // https://github.com/microsoft/vs-threading/pull/696
                 if (_progressStageStatus.Task.IsCompleted)

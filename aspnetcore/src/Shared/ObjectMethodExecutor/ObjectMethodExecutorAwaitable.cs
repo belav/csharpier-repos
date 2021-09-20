@@ -47,7 +47,8 @@ namespace Microsoft.Extensions.Internal
             Func<object, object> getResultMethod,
             Action<object, Action> onCompletedMethod,
             Action<object, Action> unsafeOnCompletedMethod
-        ) {
+        )
+        {
             _customAwaitable = customAwaitable;
             _getAwaiterMethod = getAwaiterMethod;
             _isCompletedMethod = isCompletedMethod;
@@ -82,7 +83,8 @@ namespace Microsoft.Extensions.Internal
                 Func<object, object> getResultMethod,
                 Action<object, Action> onCompletedMethod,
                 Action<object, Action> unsafeOnCompletedMethod
-            ) {
+            )
+            {
                 _customAwaiter = customAwaiter;
                 _isCompletedMethod = isCompletedMethod;
                 _getResultMethod = getResultMethod;

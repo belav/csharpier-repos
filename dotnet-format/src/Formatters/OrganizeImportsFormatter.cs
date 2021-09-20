@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Tools.Formatters
             FormatOptions formatOptions,
             ILogger logger,
             CancellationToken cancellationToken
-        ) {
+        )
+        {
             try
             {
                 // Only run formatter if the user has specifically configured one of the driving properties.
@@ -41,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Tools.Formatters
                         "dotnet_separate_import_directive_groups",
                         out _
                     )
-                ) {
+                )
+                {
                     return sourceText;
                 }
 

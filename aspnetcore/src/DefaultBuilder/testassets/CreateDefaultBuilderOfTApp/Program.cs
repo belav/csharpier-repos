@@ -39,7 +39,8 @@ namespace CreateDefaultBuilderOfTApp
                                                 "KestrelEndPointSettingName"
                                             ]
                                         )
-                                    ) {
+                                    )
+                                    {
                                         responseMessage = "Default Kestrel configuration not read.";
                                     }
                                 }
@@ -66,7 +67,8 @@ namespace CreateDefaultBuilderOfTApp
                                         hosts,
                                         StringComparison.Ordinal
                                     )
-                                ) {
+                                )
+                                {
                                     responseMessage = "AllowedHosts not loaded into Options.";
                                 }
 
@@ -92,7 +94,8 @@ namespace CreateDefaultBuilderOfTApp
                     context.HostingEnvironment.ContentRootPath,
                     StringComparison.Ordinal
                 )
-            ) {
+            )
+            {
                 return $"ContentRootPath incorrect. Expected: {contentRoot} Actual: {context.HostingEnvironment.ContentRootPath}";
             }
 
@@ -103,7 +106,8 @@ namespace CreateDefaultBuilderOfTApp
                     context.Configuration["settingsKey"],
                     StringComparison.Ordinal
                 )
-            ) {
+            )
+            {
                 return $"appsettings.json not loaded into Configuration.";
             }
 
@@ -114,7 +118,8 @@ namespace CreateDefaultBuilderOfTApp
                     context.Configuration["devSettingsKey"],
                     StringComparison.Ordinal
                 )
-            ) {
+            )
+            {
                 return $"appsettings.{context.HostingEnvironment.EnvironmentName}.json not loaded into Configuration.";
             }
 
@@ -127,7 +132,8 @@ namespace CreateDefaultBuilderOfTApp
                     context.Configuration["envKey"],
                     StringComparison.Ordinal
                 )
-            ) {
+            )
+            {
                 return $"Environment variables not loaded into Configuration.";
             }
 
@@ -138,7 +144,8 @@ namespace CreateDefaultBuilderOfTApp
                     context.Configuration["cliKey"],
                     StringComparison.Ordinal
                 )
-            ) {
+            )
+            {
                 return $"Command line arguments not loaded into Configuration.";
             }
 

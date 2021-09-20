@@ -135,7 +135,8 @@ namespace System.Reflection.Emit.Tests
             MethodAttributes attributes,
             Type[] parameterTypes,
             CallingConventions callingConvention
-        ) {
+        )
+        {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Class | TypeAttributes.Public);
 
             FieldBuilder fieldBuilderA = type.DefineField(
@@ -186,7 +187,8 @@ namespace System.Reflection.Emit.Tests
             MethodAttributes attributes,
             Type[] parameterTypes,
             CallingConventions callingConvention
-        ) {
+        )
+        {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Class | TypeAttributes.Public);
             ConstructorBuilder constructor = type.DefineConstructor(
                 attributes,
@@ -300,7 +302,8 @@ namespace System.Reflection.Emit.Tests
         [InlineData(CallingConventions.ExplicitThis | CallingConventions.HasThis)]
         public void DefineConstructor_HasThisCallingConventionsForStaticMethod_ThrowsTypeLoadExceptionOnCreation(
             CallingConventions conventions
-        ) {
+        )
+        {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
             ConstructorBuilder constructor = type.DefineConstructor(
                 MethodAttributes.Static,

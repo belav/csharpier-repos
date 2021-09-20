@@ -451,7 +451,8 @@ namespace CodeGenerator
                 int count,
                 out ulong mask,
                 out ulong comp
-            ) {
+            )
+            {
                 mask = 0;
                 comp = 0;
                 for (var scan = 0; scan < count; scan++)
@@ -501,7 +502,8 @@ namespace CodeGenerator
                 int count,
                 string type,
                 string suffix
-            ) {
+            )
+            {
                 GetMaskAndComp(name, offset, count, out var mask, out var comp);
 
                 return $"0x{comp:x}{suffix}";

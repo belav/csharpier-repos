@@ -16,7 +16,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
         protected override AbstractOptionPageControl CreateOptionPage(
             IServiceProvider serviceProvider,
             OptionStore optionStore
-        ) {
+        )
+        {
             return new InternalOptionsControl(nameof(InternalSolutionCrawlerOptions), optionStore);
         }
     }

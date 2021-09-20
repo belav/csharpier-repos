@@ -27,7 +27,8 @@ namespace IntelHardwareIntrinsicTest
                         new float[8] { 22, -1, -50, 0, 22, -1, -50, 0 },
                         new float[8]
                     )
-                ) {
+                )
+                {
                     var vf1 = Unsafe.Read<Vector256<float>>(floatTable.inArray1Ptr);
                     var vf2 = Unsafe.Read<Vector256<float>>(floatTable.inArray2Ptr);
 
@@ -47,7 +48,8 @@ namespace IntelHardwareIntrinsicTest
                                 && (z[6] == x[6])
                                 && (z[7] == x[7])
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("0Avx Blend failed on float:");
                         foreach (var item in floatTable.outArray)
                         {
@@ -73,7 +75,8 @@ namespace IntelHardwareIntrinsicTest
                                 && (z[6] == x[6])
                                 && (z[7] == x[7])
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("Avx Blend failed on float:");
                         foreach (var item in floatTable.outArray)
                         {
@@ -99,7 +102,8 @@ namespace IntelHardwareIntrinsicTest
                                 && (z[6] == x[6])
                                 && (z[7] == x[7])
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("Avx Blend failed on float:");
                         foreach (var item in floatTable.outArray)
                         {
@@ -125,7 +129,8 @@ namespace IntelHardwareIntrinsicTest
                                 && (z[6] == y[6])
                                 && (z[7] == x[7])
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("Avx Blend failed on float:");
                         foreach (var item in floatTable.outArray)
                         {
@@ -156,7 +161,8 @@ namespace IntelHardwareIntrinsicTest
                                 && (z[6] == x[6])
                                 && (z[7] == x[7])
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("Avx Blend failed on float:");
                         foreach (var item in floatTable.outArray)
                         {
@@ -173,7 +179,8 @@ namespace IntelHardwareIntrinsicTest
                         new double[4] { 22, -1, -50, 0 },
                         new double[4]
                     )
-                ) {
+                )
+                {
                     var vf1 = Unsafe.Read<Vector256<double>>(doubleTable.inArray1Ptr);
                     var vf2 = Unsafe.Read<Vector256<double>>(doubleTable.inArray2Ptr);
 
@@ -186,7 +193,8 @@ namespace IntelHardwareIntrinsicTest
                             (x, y, z) =>
                                 (z[0] == x[0]) && (z[1] == x[1]) && (z[2] == x[2]) && (z[3] == x[3])
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("Avx Blend failed on double:");
                         foreach (var item in doubleTable.outArray)
                         {
@@ -205,7 +213,8 @@ namespace IntelHardwareIntrinsicTest
                             (x, y, z) =>
                                 (z[0] == y[0]) && (z[1] == x[1]) && (z[2] == x[2]) && (z[3] == x[3])
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("Avx Blend failed on double:");
                         foreach (var item in doubleTable.outArray)
                         {
@@ -224,7 +233,8 @@ namespace IntelHardwareIntrinsicTest
                             (x, y, z) =>
                                 (z[0] == x[0]) && (z[1] == y[1]) && (z[2] == x[2]) && (z[3] == x[3])
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("Avx Blend failed on double:");
                         foreach (var item in doubleTable.outArray)
                         {
@@ -243,7 +253,8 @@ namespace IntelHardwareIntrinsicTest
                             (x, y, z) =>
                                 (z[0] == y[0]) && (z[1] == y[1]) && (z[2] == x[2]) && (z[3] == x[3])
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("Avx Blend failed on double:");
                         foreach (var item in doubleTable.outArray)
                         {
@@ -267,7 +278,8 @@ namespace IntelHardwareIntrinsicTest
                             (x, y, z) =>
                                 (z[0] == x[0]) && (z[1] == x[1]) && (z[2] == x[2]) && (z[3] == x[3])
                         )
-                    ) {
+                    )
+                    {
                         Console.WriteLine("Avx Blend failed on double:");
                         foreach (var item in doubleTable.outArray)
                         {

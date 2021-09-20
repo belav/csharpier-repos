@@ -69,7 +69,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                     );
                     if (
                         type.Type.TryAsDynamicIfNoPia(this.ContainingType, out TypeSymbol asDynamic)
-                    ) {
+                    )
+                    {
                         type = TypeWithAnnotations.Create(asDynamic);
                     }
                     Interlocked.CompareExchange(
@@ -230,7 +231,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
         internal override IEnumerable<CSharpAttributeData> GetCustomAttributesToEmit(
             PEModuleBuilder moduleBuilder
-        ) {
+        )
+        {
             return this.RetargetingTranslator.RetargetAttributes(
                 _underlyingProperty.GetCustomAttributesToEmit(moduleBuilder)
             );

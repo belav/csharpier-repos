@@ -137,7 +137,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X
         public void MvcViewDocumentClassifierPass_UsesRelativePathToGenerateTypeName(
             string relativePath,
             string expected
-        ) {
+        )
+        {
             // Arrange
             var properties = new RazorSourceDocumentProperties(
                 filePath: "ignored",
@@ -236,7 +237,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X
         private static DocumentIntermediateNode CreateIRDocument(
             RazorProjectEngine engine,
             RazorCodeDocument codeDocument
-        ) {
+        )
+        {
             for (var i = 0; i < engine.Phases.Count; i++)
             {
                 var phase = engine.Phases[i];
@@ -266,7 +268,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X
 
             public override void VisitNamespaceDeclaration(
                 NamespaceDeclarationIntermediateNode node
-            ) {
+            )
+            {
                 Namespace = node;
                 base.VisitNamespaceDeclaration(node);
             }
